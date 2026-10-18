@@ -1,0 +1,1118 @@
+{
+ "id": "rickets",
+ "name": "Rickets",
+ "fullName": "Nutritional rickets (Vitamin D and calcium deficiency of growing bone)",
+ "system": "paediatrics",
+ "kbRef": "vitamin_d_dependent_rickets_type_2",
+ "oneLine": "Soft growing bones that bend: bowed legs, beaded ribs and wide wrists, put right with vitamin D and calcium",
+ "estMinutes": 60,
+ "review": {
+  "status": "ai_drafted"
+ },
+ "version": 1,
+ "skills": {
+  "skill.reasoning.rickets.basics": {
+   "id": "skill.reasoning.rickets.basics",
+   "kind": "reasoning",
+   "system": "paediatrics",
+   "title": "What rickets is",
+   "oneLine": "Growing bone left soft for want of calcium and phosphate",
+   "why": "Rickets is a disease of growth plates, not of adult bone, which is why bow legs appear in toddlers and never in grown men. The student who holds this can predict every sign from first principles instead of memorising a list.",
+   "teach": [
+    {
+     "heading": "Bone left unmineralised while it grows",
+     "body": "Rickets is defective mineralisation of growing bone, most often from lack of vitamin D or dietary calcium. Poor gut absorption of calcium and phosphate leaves new cartilage and osteoid unhardened, so the growth plates widen and the soft bones bend under the child's weight."
+    },
+    {
+     "heading": "Why toddlers show it first",
+     "body": "The fastest growing plates suffer first: the wrists, knees and rib ends in infancy. Falling calcium drives the parathyroid glands to strip bone and waste phosphate in urine, which deepens the softening. This loop explains why deformity, poor growth and low blood minerals travel together."
+    },
+    {
+     "heading": "Three families of rickets",
+     "points": [
+      "Nutritional: too little vitamin D or calcium from feed and sunlight, the common form that yields to replacement.",
+      "Inherited resistance or wasting: receptor defects and phosphate-wasting disorders that persist despite ordinary replacement.",
+      "Renal and chronic disease: kidney, liver or gut illness that disturbs mineral handling and needs its own treatment."
+     ]
+    }
+   ],
+   "pitfalls": [
+    "Calling any bent leg rickets without asking about feed, sunlight and weight bearing.",
+    "Treating bone as static, so the growth plate widening on the film reads as normal.",
+    "Assuming sunshine alone protects, while the indoor-kept infant proves otherwise."
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What tissue does rickets damage, and why does that pick toddlers?",
+     "a": "The growing growth plate and new osteoid; toddlers grow fastest there, so unmineralised cartilage widens and bends under weight.",
+     "accept": [
+      "growth plate",
+      "osteoid",
+      "fastest growth"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "Why do calcium and phosphate both run low in nutritional rickets?",
+     "a": "Vitamin lack cuts gut absorption of both minerals, and the resulting secondary parathyroid rise wastes phosphate in urine while stripping bone.",
+     "accept": [
+      "absorption",
+      "parathyroid",
+      "phosphate"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "A child takes adequate vitamin D and calcium yet the rickets persists. What families do you consider?",
+     "a": "Inherited receptor or phosphate-wasting forms, or renal, liver or gut disease disturbing mineral handling.",
+     "accept": [
+      "inherited",
+      "phosphate-wasting",
+      "renal"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "nutritional_rickets: pathophysiology"
+    },
+    {
+     "source": "Nelson Textbook of Pediatrics",
+     "locator": "Rickets: definition and classification"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.rickets.findings": {
+   "id": "skill.reasoning.rickets.findings",
+   "kind": "reasoning",
+   "system": "paediatrics",
+   "title": "The rachitic picture",
+   "oneLine": "Wide wrists, beaded ribs, bossed head, bowed legs, slow milestones",
+   "why": "No single sign owns rickets, but the full set in one small child is unmistakable. The student who surveys head to legs in a fixed order finds the picture in two minutes and never mistakes a normal toddler curve for disease.",
+   "teach": [
+    {
+     "heading": "Survey from head to legs",
+     "body": "Start at the head: frontal bossing, a soft skull that dents like a table tennis ball, and late closure of the front fontanelle. Move to the chest: beading where rib meets cartilage, a horizontal groove pulled by the diaphragm, and a pigeon or funnel chest. End at the limbs: widened wrists and ankles, bowed legs or knock knees once walking, and a pot belly from weak muscles."
+    },
+    {
+     "heading": "What the limbs and spine add",
+     "points": [
+      "Measure the gap between the knees with ankles together for bow legs, and between the ankles with knees together for knock knees.",
+      "Feel for bone pain on gentle squeeze of the legs, and watch for a limp or refusal to walk.",
+      "Look for spinal curves and fractures after trivial falls, which mark bone too soft for its load."
+     ]
+    },
+    {
+     "heading": "Beyond the bones",
+     "body": "Delayed sitting, standing and walking with floppy muscles and slow height gain often travel with the bones. Fits, hand spasms or tingling betray low calcium needing urgent care. Whole scalp hair loss with severe early disease hints at receptor resistance rather than diet alone."
+    }
+   ],
+   "pitfalls": [
+    "Calling physiological toddler bowing rickets without checking wrists, ribs and blood markers.",
+    "Examining legs only, so the bossing, rosary and wrist widening that clinch the picture go unseen.",
+    "Missing delayed dentition and poor height gain, the growth story behind the bone story."
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "Name four skeletal signs of rickets from head to legs.",
+     "a": "Frontal bossing with craniotabes, rachitic rosary of the ribs, widened wrists and ankles, and bow legs or knock knees.",
+     "accept": [
+      "bossing",
+      "rosary",
+      "wide wrists",
+      "bow legs"
+     ],
+     "minMatch": 3
+    },
+    {
+     "level": 2,
+     "q": "How do you separate physiological bowing from rachitic bowing at the bedside?",
+     "a": "Physiological bowing is mild, symmetric in a thriving infant with normal wrists, ribs and milestones; rachitic bowing comes with widened growth plates, rosary, bossing, bone pain or slow growth.",
+     "accept": [
+      "normal wrists",
+      "rosary",
+      "slow growth"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "Which non-bone features complete the rachitic picture?",
+     "a": "Delayed motor milestones with hypotonia, growth faltering, late dentition, and hypocalcaemic fits or tetany in severe cases.",
+     "accept": [
+      "delayed milestones",
+      "hypotonia",
+      "fits"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "nutritional_rickets: clinicalPearls"
+    },
+    {
+     "source": "Nelson Textbook of Pediatrics",
+     "locator": "Rickets: clinical features"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.rickets.summary": {
+   "id": "skill.reasoning.rickets.summary",
+   "kind": "reasoning",
+   "system": "paediatrics",
+   "title": "The clinical summary",
+   "oneLine": "Tempo, survey, classifiers: the sentence that carries the case",
+   "why": "A summary that names tempo, the head-to-leg survey and the classifying results lets the listener reach nutritional rickets before the student says it. Without this shape the findings stay a list and the diagnosis sounds guessed.",
+   "teach": [
+    {
+     "heading": "The sentence in order",
+     "body": "State age with feeding and sunlight, then the tempo: bending noticed since a named age beside the milestones. Add the survey in one breath: head, ribs, wrists, legs, growth and teeth. Close with the classifiers: low calcium and phosphate with raised alkaline phosphatase, and what the film showed."
+    },
+    {
+     "heading": "What must never be missing",
+     "points": [
+      "Tempo: when bending began against first steps, since this separates nutritional from birth deformity.",
+      "Cause clue: breastfeeding length, milk intake and hours outdoors, which name the deficiency source.",
+      "Classifiers: fits or their absence, family pattern, and the blood and film pair that decide the rickets family."
+     ]
+    },
+    {
+     "heading": "A worked example",
+     "body": "A 2-year-old girl, breastfed a year without supplements and kept indoors, with bilateral bow legs since first steps, wide wrists, a rachitic rosary and frontal bossing. No fits, no fracture, no family pattern. Blood shows low calcium and phosphate with raised alkaline phosphatase, films show active changes. In summary: nutritional rickets of infancy with classic active signs."
+    }
+   ],
+   "pitfalls": [
+    "Listing bone signs without tempo, so inherited and nutritional disease read the same.",
+    "Omitting feeding and sunlight, which removes the cause from the summary.",
+    "Ending without the blood and film classifiers, leaving the diagnosis unsupported."
+   ],
+   "probes": [
+    {
+     "level": 2,
+     "q": "What three parts must a rickets summary carry in order?",
+     "a": "Tempo of bending against milestones with feeding clues, the head-to-leg survey, and the classifying blood and film results.",
+     "accept": [
+      "tempo",
+      "survey",
+      "classifying results"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "nutritional_rickets: clinicalPearls"
+    },
+    {
+     "source": "Nelson Textbook of Pediatrics",
+     "locator": "Rickets: clinical evaluation"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.rickets.differential": {
+   "id": "skill.reasoning.rickets.differential",
+   "kind": "reasoning",
+   "system": "paediatrics",
+   "title": "Telling rickets apart",
+   "oneLine": "Six lookalikes, each with the one feature that rules it out",
+   "why": "Bow legs and wide growth plates appear in several diseases whose treatments differ completely. The student who tests each mimic against one distinguishing feature avoids treating receptor resistance or kidney disease with diet advice.",
+   "teach": [
+    {
+     "heading": "The mimic table",
+     "table": {
+      "cols": [
+       "Condition",
+       "Distinguishing feature"
+      ],
+      "rows": [
+       [
+        "Phosphate-wasting rickets",
+        "Very low phosphate with normal calcium, and no healing on ordinary replacement"
+       ],
+       [
+        "Vitamin D dependent rickets",
+        "Needs genetic or enzyme defects considered; type with receptor defect shows very high active vitamin with hair loss"
+       ],
+       [
+        "Kidney bone disease",
+        "Known kidney illness with deranged renal function behind the bone changes"
+       ],
+       [
+        "Hypophosphatasia",
+        "Low alkaline phosphatase, the mirror image of rickets where the enzyme runs high"
+       ],
+       [
+        "Scurvy",
+        "Bleeding gums, tender pseudo paralysis and skin bleeds beside bone changes"
+       ],
+       [
+        "Blount disease and normal bowing",
+        "Shin bowing with a normal blood panel and normal wrists and ribs"
+       ]
+      ]
+     }
+    },
+    {
+     "heading": "How to reason at the bedside",
+     "body": "Ask three questions in order. Is the blood panel rachitic at all, which removes Blount and normal bowing. Is vitamin D low with raised parathyroid, which keeps nutritional disease. Does healing follow adequate replacement, which exposes inherited, renal and phosphate-wasting forms."
+    }
+   ],
+   "pitfalls": [
+    "Treating every bow leg as nutritional without checking phosphate, renal function and response.",
+    "Reading very high active vitamin D as adequacy, when with normal storage vitamin it marks receptor resistance.",
+    "Forgetting scurvy, where bleeding and tenderness sit beside bone changes and vitamin C is the cure."
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "Which single blood result points away from nutritional rickets toward hypophosphatasia?",
+     "a": "A low alkaline phosphatase, opposite to the raised enzyme of active rickets.",
+     "accept": [
+      "low alkaline phosphatase"
+     ],
+     "minMatch": 1
+    },
+    {
+     "level": 2,
+     "q": "Rickets persists despite adequate vitamin D and calcium. What do you suspect?",
+     "a": "Phosphate-wasting, dependent or renal forms, and I would check renal function, phosphate handling and family pattern with specialist input.",
+     "accept": [
+      "phosphate-wasting",
+      "renal",
+      "specialist"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "How does receptor resistance declare itself in blood and hair?",
+     "a": "Normal storage vitamin D with markedly raised active vitamin D that cannot act, plus total scalp hair loss marking severe resistant disease.",
+     "accept": [
+      "raised active vitamin",
+      "normal storage",
+      "hair loss"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "nutritional_rickets: additionalDifferentials"
+    },
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "vitamin_d_dependent_rickets_type_2: additionalDifferentials"
+    },
+    {
+     "source": "Nelson Textbook of Pediatrics",
+     "locator": "Rickets: differential diagnosis"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.investigation.rickets.workup": {
+   "id": "skill.investigation.rickets.workup",
+   "kind": "investigation",
+   "system": "paediatrics",
+   "title": "Confirming rickets and grading it",
+   "oneLine": "Blood panel first, wrist film next, resistance pattern never missed",
+   "why": "The blood panel names the rickets family and the wrist film shows whether disease is active or healing. Ordered blindly the tests confuse; ordered in this sequence they answer one question each.",
+   "teach": [
+    {
+     "heading": "The blood pattern of nutritional disease",
+     "body": "Send calcium, phosphate and alkaline phosphatase together: calcium low or low normal, phosphate low, and alkaline phosphatase raised from busy bone. Add storage vitamin D, which runs low, and parathyroid hormone, which runs high from secondary overdrive. Renal function and urine mineral studies exclude kidney disease behind the bones."
+    },
+    {
+     "heading": "When the pattern points elsewhere",
+     "body": "Normal storage vitamin with markedly raised active vitamin means the hormone cannot act, the receptor resistance pattern needing gene study and specialist care. Low phosphate with normal calcium and no healing on replacement means phosphate wasting. A low alkaline phosphatase contradicts rickets and suggests hypophosphatasia instead."
+    },
+    {
+     "heading": "Films and follow up",
+     "body": "Film the wrist or knee, the fastest growing plates: cupping, fraying and splaying of the metaphysis with a widened growth plate mark active disease, and a fresh dense line at the metaphysis marks healing. Recheck blood markers for recovery and repeat the film to confirm healing before declaring cure."
+    }
+   ],
+   "pitfalls": [
+    "Ordering active vitamin levels first line, when storage vitamin with calcium, phosphate and alkaline phosphatase answers first.",
+    "Filming the whole skeleton instead of the wrist or knee where early changes live.",
+    "Missing urine and renal studies, so kidney disease hides behind a nutritional label."
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What is the classic blood quartet of nutritional rickets?",
+     "a": "Low or low normal calcium, low phosphate, raised alkaline phosphatase, and raised parathyroid hormone with low storage vitamin D.",
+     "accept": [
+      "low calcium",
+      "low phosphate",
+      "raised alkaline phosphatase",
+      "parathyroid"
+     ],
+     "minMatch": 3
+    },
+    {
+     "level": 2,
+     "q": "Which film sites and signs confirm active rickets?",
+     "a": "Wrist or knee films showing metaphyseal cupping, fraying and splaying with a widened growth plate.",
+     "accept": [
+      "wrist",
+      "cupping",
+      "fraying",
+      "widened growth plate"
+     ],
+     "minMatch": 3
+    },
+    {
+     "level": 3,
+     "q": "Storage vitamin is normal but active vitamin is markedly raised. What does this mean?",
+     "a": "Receptor resistance: abundant hormone that cannot signal, pointing to an inherited receptor defect needing gene study.",
+     "accept": [
+      "receptor resistance",
+      "cannot signal",
+      "gene study"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "nutritional_rickets: additionalInvestigations"
+    },
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "vitamin_d_dependent_rickets_type_2: additionalInvestigations"
+    },
+    {
+     "source": "Nelson Textbook of Pediatrics",
+     "locator": "Rickets: laboratory and imaging evaluation"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.rickets.diagnosis": {
+   "id": "skill.reasoning.rickets.diagnosis",
+   "kind": "reasoning",
+   "system": "paediatrics",
+   "title": "Diagnosis, red flags and response",
+   "oneLine": "Name it, grade its danger, and know when no healing means rethink",
+   "why": "Diagnosis is a contract: the label commits to treatment and the red flags commit to urgency. The student who also names what treatment failure would mean has a plan for the child who does not heal.",
+   "teach": [
+    {
+     "heading": "Putting the label together",
+     "body": "Nutritional rickets is a clinical, blood and film diagnosis together: bending or widened growth plates in a growing child, low calcium and phosphate with raised alkaline phosphatase and low storage vitamin, and active metaphyseal changes. Each pillar alone is suggestive; together they are diagnostic."
+    },
+    {
+     "heading": "Red flags that need urgent care",
+     "points": [
+      "Fits, tetany or throat spasm from low calcium need immediate calcium correction under observation.",
+      "Fracture, severe deformity or failure to thrive need protected handling and early orthopaedic input.",
+      "Total hair loss with severe infantile disease warns of resistant receptor disease needing specialist referral."
+     ]
+    },
+    {
+     "heading": "When healing fails",
+     "body": "Blood markers recover within weeks and films heal over months on adequate replacement. No response means the label was wrong or the family was missed: recheck adherence, diet and sunlight, then investigate phosphate wasting, dependent forms and renal disease with specialist help."
+    }
+   ],
+   "pitfalls": [
+    "Labelling rickets from bow legs alone without the blood and film pillars.",
+    "Sending a fitting child home on syrups instead of correcting calcium urgently.",
+    "Repeating the same replacement when no healing exposes an inherited or renal cause."
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What three pillars make the diagnosis of nutritional rickets?",
+     "a": "The clinical picture of bending with widened plates, the rachitic blood pattern, and active metaphyseal changes on film.",
+     "accept": [
+      "clinical picture",
+      "blood pattern",
+      "metaphyseal changes"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "Which presentations need urgent rather than routine care?",
+     "a": "Hypocalcaemic fits, tetany or throat spasm, fractures, and severe deformity with failure to thrive.",
+     "accept": [
+      "fits",
+      "tetany",
+      "fractures"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "Adequate replacement brings no healing. What is your next step?",
+     "a": "Verify adherence, diet and sunlight, then evaluate for phosphate wasting, dependent and renal forms with specialist referral.",
+     "accept": [
+      "adherence",
+      "phosphate wasting",
+      "specialist referral"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "nutritional_rickets: redFlags"
+    },
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "nutritional_rickets: prognosis"
+    },
+    {
+     "source": "Nelson Textbook of Pediatrics",
+     "locator": "Rickets: diagnosis and complications"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.treatment.rickets.care": {
+   "id": "skill.treatment.rickets.care",
+   "kind": "treatment",
+   "system": "paediatrics",
+   "title": "Managing nutritional rickets",
+   "oneLine": "Replace vitamin with calcium beside it, protect the emergency, prevent the next case",
+   "why": "Replacement heals most children fully, yet the same syrup fails the resistant child and the fitting child needs calcium before anything else. The plan must match the child: routine replacement, urgent correction, or specialist referral.",
+   "body": "Restore bone hardening with vitamin D alongside adequate calcium, correct symptomatic low calcium urgently, counsel the family on diet and sunlight, and track healing in blood and films with referral for resistant or deformed cases.",
+   "teach": [
+    {
+     "heading": "Routine replacement",
+     "body": "Give vitamin D as cholecalciferol or ergocalciferol to restore mineralisation, with dietary or supplemental calcium beside it since lack of either sustains disease. Advise milk and calcium foods, daily outdoor play with safe sun exposure, and continued breastfeeding with timely weaning."
+    },
+    {
+     "heading": "Emergencies and resistant disease",
+     "body": "Correct fits, tetany or throat spasm with calcium urgently under observation before routine replacement continues. Suspected receptor resistance, phosphate wasting or renal disease goes to the paediatric and genetics specialists, where active vitamin forms with high calcium or even parenteral calcium are chosen."
+    },
+    {
+     "heading": "Follow up and prevention",
+     "body": "Recheck calcium, phosphate, alkaline phosphatase, parathyroid and storage vitamin levels, and repeat the wrist film to confirm healing before stopping. Protect bones from injury while soft, refer residual deformity to orthopaedics, and put at-risk breastfed infants on routine vitamin supplements through immunisation and anganwadi contacts."
+    }
+   ],
+   "keyPoints": [
+    "Vitamin D with calcium is the core pair; either alone can leave disease active.",
+    "Symptomatic low calcium is corrected urgently with calcium under observation, not with routine syrups.",
+    "Resistant, phosphate-wasting and renal patterns need specialist care with active vitamin forms or parenteral calcium.",
+    "Healing is proved by blood recovery and a healing film, not by straighter looking legs alone.",
+    "Prevention runs through routine infant supplements, diet, sunlight and growth monitoring contacts."
+   ],
+   "pitfalls": [
+    "Replacing vitamin without calcium, so healing stalls for want of mineral.",
+    "Treating fits with routine doses instead of urgent calcium correction.",
+    "Continuing ordinary replacement in resistant disease instead of referring for specialist regimens."
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What two replacements form the core of nutritional rickets treatment?",
+     "a": "Vitamin D as cholecalciferol or ergocalciferol, together with adequate dietary or supplemental calcium.",
+     "accept": [
+      "vitamin D",
+      "cholecalciferol",
+      "calcium"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "A rachitic infant arrives fitting. What comes first?",
+     "a": "Urgent calcium correction under observation for symptomatic hypocalcaemia, with routine replacement following after.",
+     "accept": [
+      "urgent calcium",
+      "hypocalcaemia",
+      "observation"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "When do you refer rather than continue replacement yourself?",
+     "a": "Suspected receptor resistance or phosphate wasting, renal disease, no healing despite adequate therapy, or residual deformity needing orthopaedics.",
+     "accept": [
+      "resistance",
+      "renal",
+      "no healing"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "dosingNote": "This module teaches management at the level of drug CLASS and principle. Specific agents, doses, schedules and durations must be taken from your current national or institutional guideline, such as the Indian Academy of Pediatrics guidance, and the treating paediatrician's prescription at the time of treatment. CliniX does not prescribe.",
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "nutritional_rickets: management"
+    },
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "vitamin_d_dependent_rickets_type_2: management"
+    },
+    {
+     "source": "Nelson Textbook of Pediatrics",
+     "locator": "Rickets: treatment and prevention"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  }
+ },
+ "chapters": [
+  {
+   "id": "basics",
+   "title": "Basics",
+   "skills": [
+    "skill.reasoning.rickets.basics"
+   ]
+  },
+  {
+   "id": "approach",
+   "title": "Approach to the child",
+   "skills": [
+    "skill.approach.hygiene",
+    "skill.approach.introduce",
+    "skill.approach.paed.rapport",
+    "skill.approach.paed.consent_assent"
+   ]
+  },
+  {
+   "id": "particulars",
+   "title": "Patient particulars",
+   "skills": [
+    "skill.particulars.demographics"
+   ]
+  },
+  {
+   "id": "history",
+   "title": "History of presenting illness",
+   "skills": [
+    "skill.hx.chief_complaints",
+    "skill.hx.paed.presenting_complaint",
+    "skill.hx.rickets.illness"
+   ]
+  },
+  {
+   "id": "past_personal_drug_family",
+   "title": "Past, personal, drug and family history",
+   "skills": [
+    "skill.hx.paed.diet_infant",
+    "skill.hx.paed.diet_calorie_protein",
+    "skill.hx.paed.family_pedigree",
+    "skill.hx.rickets.risk"
+   ]
+  },
+  {
+   "id": "general_exam",
+   "title": "General examination",
+   "skills": [
+    "skill.gen.paed.appearance",
+    "skill.gen.paed.vitals",
+    "skill.exam.paed.weight",
+    "skill.exam.paed.length_height"
+   ]
+  },
+  {
+   "id": "systemic_exam",
+   "title": "Skeletal and growth examination",
+   "skills": [
+    "skill.exam.paed.body_proportions",
+    "skill.exam.paed.cns.gait_movement",
+    "skill.exam.paed.cns.motor_tone_power",
+    "skill.exam.paed.gi.oral_upper"
+   ]
+  },
+  {
+   "id": "disease_findings",
+   "title": "Putting the rachitic picture together",
+   "skills": [
+    "skill.reasoning.rickets.findings"
+   ]
+  },
+  {
+   "id": "summary",
+   "title": "Clinical summary",
+   "skills": [
+    "skill.reasoning.rickets.summary"
+   ]
+  },
+  {
+   "id": "differential",
+   "title": "Differential diagnosis",
+   "skills": [
+    "skill.reasoning.rickets.differential"
+   ]
+  },
+  {
+   "id": "investigations",
+   "title": "Investigations",
+   "skills": [
+    "skill.investigation.rickets.workup",
+    "skill.ix.paed.xray_rickets",
+    "skill.annex.paed.normal_biochemical_values"
+   ]
+  },
+  {
+   "id": "diagnosis",
+   "title": "Diagnosis and severity",
+   "skills": [
+    "skill.reasoning.rickets.diagnosis"
+   ]
+  },
+  {
+   "id": "treatment",
+   "title": "Treatment",
+   "skills": [
+    "skill.treatment.rickets.care"
+   ]
+  },
+  {
+   "id": "case",
+   "title": "Case presentation",
+   "skills": [
+    "skill.present.case",
+    "skill.present.rickets.case"
+   ]
+  }
+ ],
+ "osce": {
+  "stations": [
+   {
+    "id": "osce.rickets.skeletal_exam",
+    "title": "Examine growth and the skeleton",
+    "task": "This 2-year-old girl has had bow legs since she began walking, with wide wrists noticed at home. Examine her growth and skeleton and present your findings.",
+    "seconds": 360,
+    "skills": [
+     "skill.approach.hygiene",
+     "skill.approach.introduce",
+     "skill.approach.paed.rapport",
+     "skill.exam.paed.weight",
+     "skill.exam.paed.length_height",
+     "skill.exam.paed.body_proportions",
+     "skill.exam.paed.cns.gait_movement",
+     "skill.exam.paed.cns.motor_tone_power"
+    ],
+    "examinerQuestions": [
+     "You found widened wrists with bow legs. Why does this combination point to rickets rather than normal toddler bowing?",
+     "Measure the inter-knee gap the way you would record it, and state what else you looked for above the legs.",
+     "Name two findings that would make you suspect an inherited rather than nutritional cause."
+    ]
+   },
+   {
+    "id": "osce.rickets.history_counsel",
+    "title": "Take a rickets history and counsel the mother",
+    "task": "This mother reports her toddler's legs are bending outward and the child walks less. Take a focused history in six minutes and counsel her on feed, sunlight and follow up.",
+    "seconds": 360,
+    "skills": [
+     "skill.approach.introduce",
+     "skill.approach.paed.consent_assent",
+     "skill.hx.chief_complaints",
+     "skill.hx.paed.presenting_complaint",
+     "skill.hx.rickets.illness",
+     "skill.hx.rickets.risk"
+    ],
+    "examinerQuestions": [
+     "Which two dates fix the tempo of this illness, and why does weight bearing matter?",
+     "The mother asks whether massage oil will straighten the legs. How do you answer and what do you advise instead?",
+     "What healing markers will you check at review, and what will you do if there is no healing?"
+    ]
+   }
+  ]
+ },
+ "viva": {
+  "skills": [
+   "skill.reasoning.rickets.basics",
+   "skill.reasoning.rickets.findings",
+   "skill.reasoning.rickets.differential",
+   "skill.investigation.rickets.workup",
+   "skill.ix.paed.xray_rickets",
+   "skill.reasoning.rickets.diagnosis",
+   "skill.treatment.rickets.care",
+   "skill.present.rickets.case"
+  ]
+ },
+ "cases": [
+  {
+   "id": "case.rickets.classic",
+   "title": "Bow legs since first steps",
+   "opening": "Meena brings her 2-year-old daughter Diya to the paediatric OPD of the district hospital. The child's legs have bowed outward since she began walking, her wrists look wide, and she cries when her legs are pressed. Introduce yourself to the mother and take a history.",
+   "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+   "review": {
+    "status": "ai_drafted"
+   },
+   "patient": {
+    "name": "Diya Yadav",
+    "age": 2,
+    "sex": "female",
+    "occupation": "Home-kept toddler",
+    "residence": "Village near the district town, lives with parents and grandparents"
+   },
+   "initialVitals": {
+    "bpSystolic": 90,
+    "bpDiastolic": 60,
+    "hr": 100,
+    "rr": 28,
+    "spo2": 98,
+    "temp": 37.4,
+    "gcs": 15
+   },
+   "history": {
+    "presenting": {
+     "key": true,
+     "cues": [
+      "what brings you here today",
+      "what is the problem with the child",
+      "why have you come to hospital",
+      "tell me about her illness",
+      "how can i help you today",
+      "what is troubling the child"
+     ],
+     "reply": "Doctor, Diya's legs have been bending outward since she learnt to walk, and now she cries when I press her legs. Her wrists also look thick.",
+     "skillId": "skill.hx.chief_complaints"
+    },
+    "leg_bending_course": {
+     "key": true,
+     "cues": [
+      "when did the legs start bending",
+      "how did the bending progress",
+      "legs curving outward since when",
+      "gap between the knees noticed",
+      "bow legs first seen",
+      "bending one side or both sides"
+     ],
+     "reply": "Both legs together, noticed a few months after her first steps. The gap between her knees keeps widening, and neighbours say it is just bow legs.",
+     "skillId": "skill.hx.rickets.illness"
+    },
+    "walking_milestones": {
+     "key": true,
+     "cues": [
+      "age of first independent steps",
+      "when did she start walking",
+      "sitting and standing ages",
+      "refusal to walk or stand",
+      "walking less than before",
+      "motor milestones delayed"
+     ],
+     "reply": "She sat at eight months and walked at fourteen months. These days she walks less, sits down sooner, and asks to be carried.",
+     "skillId": "skill.hx.rickets.illness"
+    },
+    "bone_pain_limp": {
+     "key": true,
+     "cues": [
+      "crying when legs are pressed",
+      "leg pain at night",
+      "tenderness on handling the limbs",
+      "limping after play",
+      "night waking with leg pain",
+      "pain while walking"
+     ],
+     "reply": "Yes, she cries when her legs are squeezed while dressing, and some nights she wakes crying and holds her shins. No single injury before this.",
+     "skillId": "skill.hx.rickets.illness"
+    },
+    "wrist_rib_notice": {
+     "key": true,
+     "cues": [
+      "thickening at the wrists noticed",
+      "wide wrists while dressing",
+      "beading along the ribs felt",
+      "large forehead or head size",
+      "chest shape changed",
+      "rosary beads on the chest"
+     ],
+     "reply": "Her wrists feel broad when I put on her bangles, and I feel small beads along both sides of her chest. Her forehead looks large.",
+     "skillId": "skill.hx.rickets.illness"
+    },
+    "fits_spasms_alarm": {
+     "key": true,
+     "cues": [
+      "fits or seizures ever happened",
+      "twitching around the mouth seen",
+      "hands clawing into spasms",
+      "tetany or carpopedal spasm history",
+      "abnormal jerky movements",
+      "loss of consciousness with jerks"
+     ],
+     "reply": "No fits and no jerks. Her hands never claw up, and she never went blank or stiff.",
+     "skillId": "skill.hx.rickets.illness"
+    },
+    "feeding_milk_weaning": {
+     "key": true,
+     "cues": [
+      "months of exclusive breastfeeding",
+      "age at which weaning started",
+      "daily milk intake now",
+      "what foods does she eat daily",
+      "calcium foods like ragi or milk",
+      "weaning foods given"
+     ],
+     "reply": "Only my milk for a full year, no drops given. Now she eats roti, dal and rice with us, and half a glass of milk morning and evening. No ragi.",
+     "skillId": "skill.hx.rickets.risk"
+    },
+    "sunlight_outdoor_hours": {
+     "key": true,
+     "cues": [
+      "hours spent outdoors daily",
+      "playing in sunlight each day",
+      "kept indoors or swaddled",
+      "clothes covering most of the body",
+      "sun exposure of the child",
+      "time in open courtyard"
+     ],
+     "reply": "She stays inside most of the day while I work in the courtyard kitchen. Barely an hour outside, and always fully covered against the sun.",
+     "skillId": "skill.hx.rickets.risk"
+    },
+    "birth_growth_chart": {
+     "key": true,
+     "cues": [
+      "birth weight of the child",
+      "born early or preterm",
+      "twin birth history",
+      "anganwadi growth curve since birth",
+      "weight gain slowing down",
+      "height gain compared to peers"
+     ],
+     "reply": "Born at full term in the government hospital, birth weight noted as normal. The anganwadi card shows her weight and height lines flattening this past year.",
+     "skillId": "skill.hx.rickets.risk"
+    },
+    "past_drugs_illness": {
+     "key": true,
+     "cues": [
+      "long term fits medicines taken",
+      "medicines taken for months",
+      "repeated loose motions illness",
+      "kidney or liver illness before",
+      "fracture after trivial fall",
+      "admitted to hospital before"
+     ],
+     "reply": "No long medicines and no fits medicines. Usual colds only, no long loose motions, no jaundice. No fracture so far, and never admitted.",
+     "skillId": "skill.hx.rickets.risk"
+    },
+    "immunisation_record": {
+     "key": true,
+     "cues": [
+      "vaccines received till date",
+      "immunisation card complete",
+      "vitamin drops ever given",
+      "government injections received",
+      "missed vaccine doses",
+      "vitamin A doses received"
+     ],
+     "reply": "All government injections up to her age are marked on the card. She got vitamin A drops twice at the anganwadi, but never any bone vitamin drops.",
+     "skillId": "skill.hx.paed.immunisation"
+    },
+    "family_stature_pattern": {
+     "key": true,
+     "cues": [
+      "bow legs in parents or siblings",
+      "short stature running in family",
+      "bow legs or short height shared with blood relatives",
+      "siblings walking late",
+      "bone disease in the family",
+      "hair loss in the family"
+     ],
+     "reply": "Nobody at home has bow legs or very short height. My husband and I are not related, her elder brother walked on time, and nobody loses hair.",
+     "skillId": "skill.hx.paed.family_pedigree"
+    },
+    "home_income_setting": {
+     "key": true,
+     "cues": [
+      "who cooks and feeds the child",
+      "family income and occupation",
+      "distance to nearest health centre",
+      "tap or borewell water supply for the house",
+      "cooking fuel used at home",
+      "persons living in the house"
+     ],
+     "reply": "My mother-in-law cooks on the chulha while I help in the fields. Money is tight but food is regular. The sub-centre is two lanes away, the hospital a bus ride.",
+     "skillId": "skill.hx.paed.socioeconomic"
+    },
+    "appetite_growth_gain": {
+     "key": true,
+     "cues": [
+      "appetite compared to siblings",
+      "eating less than before",
+      "weight clothes fitting",
+      "belly looking swollen or pot bellied",
+      "growth slower than brother",
+      "food refusal or picky eating"
+     ],
+     "reply": "She eats small meals and tires quickly, though her belly looks big beside her thin arms. Her frocks from last year still fit her length-wise."
+    },
+    "teeth_dentition": {
+     "key": true,
+     "cues": [
+      "age of first tooth eruption",
+      "number of teeth present now",
+      "delayed dentition noticed",
+      "dental decay or caries seen",
+      "teething complaints",
+      "teeth coming late"
+     ],
+     "reply": "Her first tooth came near her first birthday, and she still has fewer teeth than her cousin of the same age. No decay that I can see."
+    }
+   },
+   "exam": {
+    "skill.gen.paed.appearance": {
+     "abnormal": true,
+     "finding": "Alert 2-year-old girl, sitting comfortably but rising slowly. Frontal bossing with a wide open front fontanelle, pot belly with thin limbs, and bilateral bow legs obvious on standing."
+    },
+    "skill.gen.paed.vitals": {
+     "abnormal": false,
+     "finding": "Temperature 37.4 C. Heart rate 100 regular. Respiratory rate 28. SpO2 98 percent on room air. Blood pressure 90/60 with a paediatric cuff."
+    },
+    "skill.exam.paed.weight": {
+     "abnormal": true,
+     "finding": "Weight 10 kg, below the expected curve on the anganwadi card with flattening over the past year. Mid-upper arm within the lean band."
+    },
+    "skill.exam.paed.length_height": {
+     "abnormal": true,
+     "finding": "Length 80 cm, short for age with slowed gain. Upper to lower segment ratio preserved for age, pointing to generalised slowing rather than disproportion alone."
+    },
+    "skill.exam.paed.body_proportions": {
+     "abnormal": true,
+     "finding": "Wrists and ankles visibly widened on both sides. Rachitic rosary beading along both costal margins with a Harrison groove. Inter-knee gap of several finger breadths with ankles together, no tibia bowing on one side only."
+    },
+    "skill.exam.paed.cns.gait_movement": {
+     "abnormal": true,
+     "finding": "Waddling gait with a broad base, walks short distances then sits. No frank weakness of one limb, no abnormal movements."
+    },
+    "skill.exam.paed.cns.motor_tone_power": {
+     "abnormal": true,
+     "finding": "Generalised mild hypotonia with thin muscle bulk. Power reduced proximally from disuse and pain rather than a nerve pattern. No focal deficit."
+    },
+    "skill.exam.paed.gi.oral_upper": {
+     "abnormal": true,
+     "finding": "Delayed dentition with few erupted teeth for age. No enamel pits of note, no gum bleeding or swelling. Palate and tongue normal."
+    },
+    "skill.gen.paed.pallor": {
+     "abnormal": false,
+     "finding": "No severe pallor of the conjunctiva, tongue or palms. Mild paleness only, consistent with a mixed deficient diet."
+    }
+   },
+   "essentialInvestigations": [
+    "blood_minerals",
+    "vitamin_d_storage",
+    "parathyroid",
+    "wrist_film",
+    "renal_function"
+   ],
+   "investigations": {
+    "blood_minerals": {
+     "label": "Serum calcium, phosphate and alkaline phosphatase",
+     "result": "Calcium low normal, phosphate low, alkaline phosphatase markedly raised.",
+     "note": "The core trio: busy bone raises the enzyme while minerals run short.",
+     "indicated": true
+    },
+    "vitamin_d_storage": {
+     "label": "25-hydroxyvitamin D level",
+     "result": "Low, in the deficient band.",
+     "note": "Low storage vitamin confirms the nutritional source in this child.",
+     "indicated": true
+    },
+    "parathyroid": {
+     "label": "Parathyroid hormone",
+     "result": "Raised, showing secondary overdrive.",
+     "note": "The expected response to low calcium, completing the pattern.",
+     "indicated": true
+    },
+    "renal_function": {
+     "label": "Renal function with urine routine",
+     "result": "Creatinine and electrolytes within limits. Urine shows no protein or excess minerals.",
+     "note": "Normal function keeps kidney bone disease off this case.",
+     "indicated": true
+    },
+    "wrist_film": {
+     "label": "Wrist radiograph, both sides",
+     "result": "Metaphyseal cupping, fraying and splaying with a widened growth plate. No fracture line.",
+     "note": "Active changes at the fastest growing plate; the film to repeat for healing.",
+     "indicated": true
+    },
+    "blood_counts": {
+     "label": "Full blood count",
+     "result": "Mild low haemoglobin for age. Counts otherwise unremarkable.",
+     "note": "Baseline before treatment; the mixed diet often leaves anaemia beside rickets.",
+     "indicated": true
+    },
+    "active_vitamin_d": {
+     "label": "1,25-dihydroxyvitamin D level",
+     "result": "Not sent.",
+     "note": "Reserved for atypical or resistant cases; storage vitamin answers first here.",
+     "indicated": false
+    }
+   },
+   "differentialModel": {
+    "answer": "Nutritional rickets from vitamin D and calcium lack, first presentation with classic active signs. Consider vitamin D dependent and phosphate-wasting rickets, kidney bone disease, scurvy, and Blount disease with normal bowing as mimics.",
+    "accept": [
+     "Nutritional rickets",
+     "Vitamin D-dependent rickets",
+     "Hypophosphataemic rickets",
+     "Chronic kidney disease",
+     "Scurvy",
+     "Blount disease"
+    ],
+    "minMatch": 2
+   },
+   "diagnosis": {
+    "answer": "Nutritional rickets with active skeletal signs, low calcium and phosphate with raised alkaline phosphatase and low storage vitamin D, and a healing plan with blood and film markers.",
+    "accept": [
+     "Nutritional rickets",
+     "Rickets",
+     "Vitamin D deficiency"
+    ],
+    "minMatch": 1
+   },
+   "managementModel": {
+    "answer": "Confirm the workup, replace vitamin D with calcium beside it, counsel on milk foods and daily outdoor play, correct any fits with calcium urgently, track alkaline phosphatase and the wrist film to healing, refer resistant or deformed cases, and prevent the next case through supplements at immunisation and anganwadi contacts.",
+    "accept": [
+     "vitamin d",
+     "cholecalciferol",
+     "calcium",
+     "sunlight",
+     "milk",
+     "alkaline phosphatase",
+     "wrist film",
+     "refer",
+     "orthopaedic",
+     "monitor",
+     "supplements",
+     "immunisation"
+    ],
+    "minMatch": 3
+   },
+   "teachingPoints": [
+    "The tempo tells the diagnosis: bending that begins after first steps in a breastfed indoor-kept toddler is nutritional rickets until the blood says otherwise.",
+    "Wrists and ribs decide what legs suggest. Bow legs alone could be normal; bow legs with widened wrists, rosary and bossing cannot.",
+    "The blood quartet classifies: low calcium and phosphate with raised alkaline phosphatase and low storage vitamin means nutritional, while normal storage with very high active vitamin means resistance.",
+    "Fits change everything. A rachitic child who seizes needs urgent calcium under observation, not routine syrups.",
+    "Healing is proved, not assumed: blood markers recover first and the wrist film must show its healing line before treatment stops.",
+    "No healing on adequate replacement reframes the case toward phosphate wasting, dependent or renal forms with specialist referral."
+   ]
+  }
+ ]
+}

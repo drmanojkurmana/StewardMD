@@ -1,0 +1,1155 @@
+{
+ "_comment": "Paediatrics SAM pathway. Same architecture as pneumonia: shared paediatric skills carry the examination, three fragment history/presentation skills carry the SAM-specific asking, and seven disease skills carry phenotypes, WHO grading and ten-step management.",
+ "id": "severe-acute-malnutrition",
+ "name": "Protein energy malnutrition",
+ "fullName": "Severe acute malnutrition",
+ "subtitle": "Assessment and WHO management of SAM",
+ "system": "paediatrics",
+ "kbRef": "severe_malnutrition_sam_long_case",
+ "oneLine": "Severe wasting or nutritional oedema in a young child, and the staged rescue that saves them",
+ "estMinutes": 60,
+ "review": {
+  "status": "ai_drafted"
+ },
+ "version": 1,
+ "chapters": [
+  {
+   "id": "basics",
+   "title": "Basics",
+   "blurb": "What severe acute malnutrition is, and why normal rules fail",
+   "skills": [
+    "skill.reasoning.sam.basics"
+   ]
+  },
+  {
+   "id": "approach",
+   "title": "Approach to the child",
+   "blurb": "Warm hands, mother on your side, consent before touching",
+   "skills": [
+    "skill.approach.hygiene",
+    "skill.approach.introduce",
+    "skill.approach.paed.rapport",
+    "skill.approach.paed.consent_assent"
+   ]
+  },
+  {
+   "id": "particulars",
+   "title": "Patient particulars",
+   "blurb": "Age in months and the growth trail behind the child",
+   "skills": [
+    "skill.particulars.demographics",
+    "skill.hx.severe.particulars"
+   ],
+   "emphasis": {
+    "skill.particulars.demographics": {
+     "expect": "Age in completed months carries the criteria: the 6 to 59 month window uses MUAC and weight-for-height, while infants under 6 months need different standards. Note the referral source, since an anganwadi growth-referred child arrives earlier than a self-presented one."
+    }
+   }
+  },
+  {
+   "id": "history",
+   "title": "History of presenting illness",
+   "blurb": "Swelling, appetite and silent infection",
+   "skills": [
+    "skill.hx.chief_complaints",
+    "skill.hx.paed.presenting_complaint",
+    "skill.hx.severe.illness"
+   ],
+   "emphasis": {
+    "skill.hx.chief_complaints": {
+     "expect": "Expect two complaints together: swelling noticed over days to weeks plus thinning over months. A mother who reports only one has usually missed the other, so ask for both explicitly."
+    },
+    "skill.hx.paed.presenting_complaint": {
+     "expect": "Expect the oedema-onset detail and the exact intake of the last two days, including breastfeeding and any therapeutic food offered. Eagerness versus refusal at feeds is the triage answer."
+    }
+   }
+  },
+  {
+   "id": "past_personal_drug_family",
+   "title": "Past, personal, drug and family history",
+   "blurb": "The feeding, vaccine and household gaps that explain the child",
+   "skills": [
+    "skill.hx.paed.diet_calorie_protein",
+    "skill.hx.paed.immunisation",
+    "skill.hx.paed.socioeconomic",
+    "skill.hx.paed.birth_natal_neonatal"
+   ],
+   "emphasis": {
+    "skill.hx.paed.diet_calorie_protein": {
+     "expect": "Expect a large calorie and protein gap: thin diluted feeds, early animal milk, little oil, and shared take-home rations. Quantify in katoris before judging, since thin looks can hide thinner intake."
+    },
+    "skill.hx.paed.immunisation": {
+     "expect": "Expect missed visits, especially measles, which both follows and worsens malnutrition. An absent card is itself a finding about access."
+    },
+    "skill.hx.paed.socioeconomic": {
+     "expect": "Expect daily-wage work, a crowded household, well water, and sibling deaths. These predict whether frequent feeding and weekly review can actually happen after discharge."
+    },
+    "skill.hx.paed.birth_natal_neonatal": {
+     "expect": "Expect low birth weight, preterm or twin birth behind the curve. Such children start growth from behind and reach SAM on smaller insults than their peers."
+    }
+   }
+  },
+  {
+   "id": "general_exam",
+   "title": "General examination",
+   "blurb": "Apathy, cold, pallor and oedema before a single instrument",
+   "skills": [
+    "skill.gen.paed.appearance",
+    "skill.gen.paed.vitals",
+    "skill.gen.paed.edema",
+    "skill.gen.paed.pallor",
+    "skill.gen.paed.hydration"
+   ],
+   "emphasis": {
+    "skill.gen.paed.appearance": {
+     "expect": "Expect an apathetic child with a moon face over wasted limbs, sparse hair and weak cry. Apathy here is a complication marker, not temperament."
+    },
+    "skill.gen.paed.vitals": {
+     "expect": "Expect low temperature rather than fever, with fast pulse and breathing. Hypothermia without fever in SAM signals danger, not a mild illness."
+    },
+    "skill.gen.paed.edema": {
+     "expect": "Expect bilateral pitting oedema climbing from feet to legs, hands and face. Any bilateral nutritional oedema already means SAM; grade its extent since spread marks severity."
+    },
+    "skill.gen.paed.pallor": {
+     "expect": "Expect severe pallor including palmar creases from combined iron, protein and micronutrient deficiency, often with cardiac strain on exertion."
+    },
+    "skill.gen.paed.hydration": {
+     "expect": "Distrust eyes and tears here: fat loss fakes dehydration and oedema fakes hydration. Judge by alertness, pulse, urine output and response to cautious fluids."
+    }
+   }
+  },
+  {
+   "id": "systemic_exam",
+   "title": "Anthropometry and the SAM examination",
+   "blurb": "Tape, scale and length, then skin, hair and liver",
+   "skills": [
+    "skill.exam.paed.weight",
+    "skill.exam.paed.length_height",
+    "skill.exam.paed.muac",
+    "skill.exam.paed.skin_lesions",
+    "skill.exam.paed.gi.inspection"
+   ],
+   "emphasis": {
+    "skill.exam.paed.weight": {
+     "expect": "Weigh, then discount: oedema inflates the number, so always state the IAP grade with K and pair it with MUAC before calling severity."
+    },
+    "skill.exam.paed.length_height": {
+     "expect": "Expect concurrent stunting: a low length for age alongside low weight for length means acute-on-chronic failure with a longer recovery road."
+    },
+    "skill.exam.paed.muac": {
+     "expect": "Expect the red zone below 12.5 cm in the 1 to 5 year window. MUAC is the one number oedema cannot inflate, so it outranks the scale in kwashiorkor."
+    },
+    "skill.exam.paed.skin_lesions": {
+     "expect": "Expect flaky-paint patches over buttocks and thighs with dry cracked skin at pressure areas, plus sparse straight hair with pale bands that plucks easily."
+    },
+    "skill.exam.paed.gi.inspection": {
+     "expect": "Expect a protuberant abdomen with wasted wall muscles and a soft fatty liver edge, without ascitic wave. True ascites with veins points away from pure SAM."
+    }
+   }
+  },
+  {
+   "id": "disease_findings",
+   "title": "Putting the SAM picture together",
+   "blurb": "Oedema plus wasting plus apathy, read against what the scale hides",
+   "skills": [
+    "skill.reasoning.sam.findings"
+   ]
+  },
+  {
+   "id": "summary",
+   "title": "Clinical summary",
+   "blurb": "Age, phenotype, grade, appetite, complications: in that order",
+   "skills": [
+    "skill.reasoning.sam.summary"
+   ]
+  },
+  {
+   "id": "differential",
+   "title": "Differential diagnosis",
+   "blurb": "What else wastes, what else swells, and what hides underneath",
+   "skills": [
+    "skill.reasoning.sam.differential"
+   ]
+  },
+  {
+   "id": "investigations",
+   "title": "Investigations",
+   "blurb": "Tape and appetite first, sugar and infection screen next",
+   "skills": [
+    "skill.investigation.sam.workup"
+   ]
+  },
+  {
+   "id": "diagnosis",
+   "title": "Diagnosis and grading",
+   "blurb": "WHO thresholds, the IAP grade, and the complicated label",
+   "skills": [
+    "skill.reasoning.sam.diagnosis"
+   ]
+  },
+  {
+   "id": "treatment",
+   "title": "Treatment",
+   "blurb": "Stabilise first with cautious feeds, then catch up and follow up",
+   "skills": [
+    "skill.treatment.sam.care"
+   ]
+  },
+  {
+   "id": "case",
+   "title": "Case presentation",
+   "blurb": "Present this child to your consultant",
+   "skills": [
+    "skill.present.case",
+    "skill.present.severe.case"
+   ]
+  }
+ ],
+ "osce": {
+  "stations": [
+   {
+    "id": "osce.sam.nutritional_assessment",
+    "title": "Assess the nutritional status of this child",
+    "task": "This 22-month-old girl has swollen feet and poor weight gain. Assess her nutritional status with anthropometry and oedema examination, and state whether she meets SAM criteria.",
+    "seconds": 480,
+    "skills": [
+     "skill.approach.hygiene",
+     "skill.approach.introduce",
+     "skill.approach.paed.rapport",
+     "skill.exam.paed.weight",
+     "skill.exam.paed.length_height",
+     "skill.exam.paed.muac",
+     "skill.gen.paed.edema"
+    ],
+    "examinerQuestions": [
+     "Her MUAC is 11.0 cm with bilateral pedal oedema. Does she meet SAM criteria, and by which criterion?",
+     "Her weight suggests grade 2 but her MUAC is in the red zone. Which do you trust, and why?",
+     "You found oedema to the knees with poor appetite. Complicated or uncomplicated, and what does that decide?"
+    ]
+   },
+   {
+    "id": "osce.sam.history_triage",
+    "title": "Take a SAM history and triage",
+    "task": "This mother reports her 2-year-old has swelling and refuses feeds. Take a focused SAM history in seven minutes and state your admission decision.",
+    "seconds": 420,
+    "skills": [
+     "skill.approach.introduce",
+     "skill.approach.paed.consent_assent",
+     "skill.hx.chief_complaints",
+     "skill.hx.paed.presenting_complaint",
+     "skill.hx.severe.illness",
+     "skill.hx.paed.diet_calorie_protein"
+    ],
+    "examinerQuestions": [
+     "She failed the appetite test but looks alert. Admit or manage at home, and why?",
+     "She has no fever but you suspect infection. What do you ask and examine next?",
+     "Name two household findings that change your discharge plan."
+    ]
+   }
+  ]
+ },
+ "viva": {
+  "skills": [
+   "skill.reasoning.sam.basics",
+   "skill.reasoning.sam.findings",
+   "skill.reasoning.sam.differential",
+   "skill.investigation.sam.workup",
+   "skill.reasoning.sam.diagnosis",
+   "skill.treatment.sam.care",
+   "skill.gen.paed.edema"
+  ]
+ },
+ "skills": {
+  "skill.reasoning.sam.basics": {
+   "id": "skill.reasoning.sam.basics",
+   "kind": "reasoning",
+   "system": "paediatrics",
+   "title": "What severe acute malnutrition is",
+   "oneLine": "Wasting or oedema past a threshold, in a body running on emergency settings",
+   "why": "SAM is a physiological state, not just thinness: the body downregulates metabolism, retains sodium, and loses potassium, immunity and temperature control. Naming that state correctly is what stops a student treating oedema as fluid overload or feeding aggressively on day one.",
+   "teach": [
+    {
+     "heading": "Protein energy malnutrition and its severe end",
+     "body": "Protein energy malnutrition is the spectrum of undernutrition from deficient energy, protein and micronutrients. Severe acute malnutrition is its dangerous end in young children: severe wasting, bilateral pitting oedema of nutritional origin, or both.\n\nThe Indian Academy of Pediatrics grades the spectrum by weight for age: above 80 percent of expected is normal, 71 to 80 percent grade 1, 61 to 70 percent grade 2, 51 to 60 percent grade 3, and below 50 percent grade 4, with the letter K postfixed when oedema is present."
+    },
+    {
+     "heading": "Three phenotypes, one danger",
+     "body": "Marasmus is severe wasting without oedema: a wizened, alert-looking child with loose skin folds over the buttocks and thighs where fat has vanished. Kwashiorkor is oedema with a moon face, sparse straightened hair, and flaky-paint skin, often with an enlarged fatty liver.\n\nMarasmic kwashiorkor combines both: weight below 60 percent of expected with oedema present. The phenotype describes the presentation, not the prognosis: all three can kill through the same complications."
+    },
+    {
+     "heading": "Reductive adaptation: why normal rules fail",
+     "body": "Prolonged deprivation forces reductive adaptation: metabolic rate falls, the sodium potassium pump falters so sodium is retained inside cells while potassium and magnesium are depleted, and the heart, liver, immunity and temperature control all run impaired.\n\nThis is why standard treatment harms: usual intravenous fluids overload a sodium-loaded heart, rapid feeding precipitates refeeding collapse, and iron given early feeds unchecked infection. Every SAM rule that looks overcautious follows from this single physiology."
+    },
+    {
+     "heading": "Complicated versus uncomplicated: the branch that matters",
+     "body": "Uncomplicated SAM means good appetite with no oedema beyond the feet and no sign of infection: such children can rehabilitate at home with ready-to-use therapeutic food and weekly review. Complicated SAM means poor appetite, extensive oedema, or any danger sign such as infection, dehydration, hypothermia or hypoglycaemia.\n\nComplicated disease needs inpatient stabilisation first. Appetite is the bedside test that sorts the two, which is why the history skill keeps returning to what the child ate yesterday."
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What are the three phenotypes of severe malnutrition?",
+     "a": "Marasmus with wasting and no oedema, kwashiorkor with oedema, and marasmic kwashiorkor with both.",
+     "accept": [
+      "marasmus",
+      "kwashiorkor",
+      "oedema",
+      "wasting"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "Why is rapid feeding dangerous in SAM?",
+     "a": "Reductive adaptation leaves the child intolerant of metabolic load, so aggressive feeding precipitates refeeding syndrome with cardiac failure.",
+     "accept": [
+      "refeeding",
+      "adaptation",
+      "cardiac",
+      "overload"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "What single finding moves a SAM child from community care to admission?",
+     "a": "Poor appetite, or equivalently extensive oedema or any danger sign, marking complicated disease.",
+     "accept": [
+      "appetite",
+      "complicated",
+      "admission"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "severe_malnutrition_sam_long_case: Kwashiorkor marasmus marasmic-kwashiorkor"
+    },
+    {
+     "source": "Nelson Textbook of Pediatrics",
+     "locator": "Protein energy malnutrition: definitions and phenotypes"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.sam.findings": {
+   "id": "skill.reasoning.sam.findings",
+   "kind": "reasoning",
+   "system": "paediatrics",
+   "title": "Putting the SAM picture together",
+   "oneLine": "Oedema plus wasting plus apathy, read against what the scale hides",
+   "why": "No single SAM sign is specific on its own: oedema mimics renal and cardiac disease, thinness mimics constitutional leanness, and apathy mimics many illnesses. The picture becomes diagnostic only when anthropometry, oedema, hair, skin, appetite and alertness are read together.",
+   "teach": [
+    {
+     "heading": "Read the scale with suspicion",
+     "body": "Weigh first, then distrust the number. Oedema adds kilograms of water that hide wasting, so a child can read grade 2 by weight for age while being severely wasted underneath. Always pair the weight with MUAC and an oedema check before grading.\n\nA Shakir tape in the red zone, below 12.5 cm, marks severe undernutrition in the 1 to 5 year window regardless of what the scale suggests. Length or height completes the set by separating acute wasting from chronic stunting."
+    },
+    {
+     "heading": "Oedema, hair, skin and liver",
+     "body": "Press firmly over the shin bone for five seconds: a pit that remains is the finding. Feet only is early, legs and hands is spreading, and face with ascites is advanced, and any bilateral pitting oedema of nutritional origin already means SAM.\n\nAdd the kwashiorkor flags: sparse, straight, easily plucked hair with pale bands; flaky-paint patches over pressure areas; a moon face that looks plump above a wasted body; and a soft enlarged liver edge from fatty change."
+    },
+    {
+     "heading": "Behaviour, temperature and sugar: the quiet killers",
+     "body": "Watch alertness before touching the child. Apathy, weak cry and refusal to play mark a depleted child even at normal temperature, and lethargy with cold hands marks one sliding toward shock or hypoglycaemia.\n\nFeel for hypothermia and test blood sugar early in every case, because both kill silently and both reverse quickly when caught. Sunken eyes and absent tears mislead in SAM, since fat loss mimics dehydration and oedema mimics hydration: judge fluids by alertness, pulse, urine and response to cautious intake instead."
+    },
+    {
+     "heading": "What is absent matters too",
+     "body": "Note the absence of frothy urine and morning facial swelling that would favour nephrotic syndrome, the absence of breathlessness with raised venous pressure that would favour cardiac oedema, and a normal developmental trajectory that argues against chronic systemic disease.\n\nNote immunisation gaps, especially measles, and any current cough, ear discharge or skin sores: in SAM these are not incidental findings but the complications that decide admission and antibiotics."
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "How do you test for nutritional oedema at the bedside?",
+     "a": "Press firmly over the shin for five seconds and look for a remaining pit, checking feet, legs, hands and face in order.",
+     "accept": [
+      "press",
+      "pit",
+      "shin",
+      "seconds"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "Why can the weighing scale mislead in kwashiorkor?",
+     "a": "Oedema fluid adds weight that masks the underlying wasting, so weight for age underreads severity.",
+     "accept": [
+      "fluid",
+      "masks",
+      "wasting",
+      "weight"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "A SAM child has sunken eyes but pedal oedema. How do you judge hydration?",
+     "a": "Neither sign is trusted alone; judge by alertness, pulse, urine output and response to cautious fluids, since fat loss fakes dehydration and oedema fakes hydration.",
+     "accept": [
+      "alertness",
+      "urine",
+      "response",
+      "pulse"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "severe_malnutrition_sam_long_case: MUAC WHZ oedema appetite-test"
+    },
+    {
+     "source": "Indian Academy of Pediatrics",
+     "locator": "Protein energy malnutrition: clinical features and grading"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.sam.summary": {
+   "id": "skill.reasoning.sam.summary",
+   "kind": "reasoning",
+   "system": "paediatrics",
+   "title": "The clinical summary",
+   "oneLine": "Age, phenotype, grade, appetite, complications: in that order",
+   "why": "A SAM summary has a fixed job: to carry the admission decision in one breath. Age sets the criteria, phenotype and grade set severity, appetite sets complicated or not, and complications set urgency, so any order that buries appetite fails the listener.",
+   "teach": [
+    {
+     "heading": "The five-beat structure",
+     "body": "State age in months with the relevant background: birth weight, feeding gaps and immunisation status in one clause. Then the phenotype in abstract terms: severe wasting, bilateral oedema with its extent, or both.\n\nThen the grade: MUAC zone or weight-for-height band with the IAP grade, then appetite kept or lost with the complicated label, then complications found. Severity travels inside the summary, never after it."
+    },
+    {
+     "heading": "A worked example",
+     "body": "This 22-month-old girl, low birth weight with diluted animal milk feeds from four months and no measles vaccine, has marasmic kwashiorkor: bilateral pedal oedema with a MUAC in the red zone below 12.5 cm, sparse hair and flaky skin, with failed appetite, making this complicated SAM.\n\nShe is hypothermic with a cough but no fever, suggesting occult infection. For this I propose inpatient stabilisation with warming, cautious starter feeds, empirical antibiotics, blood sugar and infection screening, and micronutrients without iron."
+    }
+   ],
+   "probes": [
+    {
+     "level": 2,
+     "q": "What must a SAM summary contain that a chronic-illness summary usually does not?",
+     "a": "Appetite status with the complicated or uncomplicated label, because it decides admission.",
+     "accept": [
+      "appetite",
+      "complicated",
+      "admission"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "rubric": [
+    {
+     "id": "phenotype",
+     "text": "States wasting versus oedema phenotype with grade"
+    },
+    {
+     "id": "appetite",
+     "text": "States appetite with the complicated label"
+    },
+    {
+     "id": "complications",
+     "text": "Names complications and the stabilisation plan"
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "severe_malnutrition_sam_long_case: F75 F100 RUTF rehabilitation"
+    },
+    {
+     "source": "Nelson Textbook of Pediatrics",
+     "locator": "Protein energy malnutrition: clinical assessment"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.sam.differential": {
+   "id": "skill.reasoning.sam.differential",
+   "kind": "reasoning",
+   "system": "paediatrics",
+   "title": "Differential diagnosis",
+   "oneLine": "What else wastes, what else swells, and what hides underneath",
+   "why": "SAM is often the visible end of another disease: tuberculosis, HIV, coeliac disease or chronic diarrhoea can all present as failure to gain, and nephrotic or cardiac disease can present as swelling. Treating the feeds while missing the driver guarantees relapse.",
+   "teach": [
+    {
+     "heading": "Other causes of wasting",
+     "body": "Pulmonary tuberculosis favours prolonged cough, evening fever, weight loss despite reasonable intake, and a household contact; in India it must be sought in every SAM child who fails to gain on adequate feeding. HIV infection favours recurrent bacterial infections, oral thrush, persistent diarrhoea and parental risk.\n\nCoeliac disease favours chronic bulky stools with wasting after cereals begin; cystic fibrosis and chronic diarrhoeal disease behave similarly. An underlying malignancy or chronic systemic illness is favoured by pallor, lymphadenopathy or organomegaly out of proportion to the nutrition story."
+    },
+    {
+     "heading": "Other causes of swelling",
+     "body": "Nephrotic syndrome favours morning facial swelling with frothy urine and heavy proteinuria with normal appetite for feeds, the photographic negative of kwashiorkor. Cardiac failure adds breathlessness, raised venous pressure and an enlarged tender liver; hepatic failure adds jaundice and a coagulopathy.\n\nAcute kidney injury with falling urine output swells for a different reason and needs fluid restriction rather than feeds. The discriminating questions are urine character, breathing effort, and whether swelling followed thinning or arrived in a previously well-nourished child."
+    },
+    {
+     "heading": "Complications wearing the mask of the disease",
+     "body": "Pneumonia in SAM may show only fast breathing and cough without fever; acute gastroenteritis with some dehydration compounds the wasting and confuses the fluid plan. Severe anaemia presents with pallor, easy fatigue and cardiac strain, and needs transfusion handled with extreme caution against overload.\n\nHypoglycaemia and hypothermia present as lethargy and cold hands and are complications, not differentials, but listing them in the differential section of the case sheet is how they get missed. Name them as actions: test sugar, warm the child, then continue reasoning."
+    }
+   ],
+   "probes": [
+    {
+     "level": 2,
+     "q": "Name three diseases that can hide underneath SAM wasting.",
+     "a": "Tuberculosis, HIV infection, and coeliac or other chronic malabsorptive disease.",
+     "accept": [
+      "tuberculosis",
+      "hiv",
+      "coeliac",
+      "malabsorption"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "How do you separate kwashiorkor oedema from nephrotic oedema at the bedside?",
+     "a": "Kwashiorkor pairs oedema with wasting, hair and skin change and poor intake; nephrotic syndrome pairs morning facial swelling with frothy urine and heavy proteinuria in a child who was eating.",
+     "accept": [
+      "frothy",
+      "proteinuria",
+      "hair",
+      "intake"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "rubric": [
+    {
+     "id": "breadth",
+     "text": "Spans infective, malabsorptive, renal, cardiac and hepatic causes"
+    },
+    {
+     "id": "tbhiv",
+     "text": "Explicitly seeks tuberculosis and HIV"
+    },
+    {
+     "id": "driver",
+     "text": "Names the underlying driver when feeding alone fails"
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "severe_malnutrition_sam_long_case: Refeeding TB HIV traps"
+    },
+    {
+     "source": "Nelson Textbook of Pediatrics",
+     "locator": "Protein energy malnutrition: differential diagnosis"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.investigation.sam.workup": {
+   "id": "skill.investigation.sam.workup",
+   "kind": "investigation",
+   "system": "paediatrics",
+   "title": "Confirming and grading the illness",
+   "oneLine": "Tape and appetite first, sugar and infection screen next, the rest by indication",
+   "why": "Investigations in SAM answer three questions in order: does this meet SAM criteria, are the silent killers present, and what is driving it. Blood results never delay warming, sugar correction or the first cautious feed.",
+   "teach": [
+    {
+     "heading": "Confirm: tape, scale and appetite",
+     "body": "Confirm SAM with MUAC, weight-for-height and a bilateral oedema check, recording which criterion is met. A Shakir tape reading below 12.5 cm marks severe undernutrition in the 1 to 5 year window; any bilateral pitting oedema of nutritional origin confirms SAM on its own.\n\nRun the appetite test with ready-to-use therapeutic food under observation: eager finishing passes toward community care, refusal or force-feeding fails toward admission. Document the result exactly, since it is the admission criterion."
+    },
+    {
+     "heading": "Grade the silent killers",
+     "body": "Test blood glucose at presentation and whenever lethargy appears, because hypoglycaemia is common, silent and immediately reversible. Check electrolytes including potassium, magnesium and phosphate, which run depleted despite oedema and guide safe refeeding.\n\nMeasure haemoglobin and assess anaemia, record temperature trend for hypothermia, and assess hydration by alertness, pulse and urine rather than eyes and tears, which mislead in both directions in SAM."
+    },
+    {
+     "heading": "Find the driver and the hidden infection",
+     "body": "Screen for infection as routine: blood counts, urine examination and culture, chest radiograph where cough or fast breathing exists, and malaria testing in endemic seasons. Test for HIV where prevalence or parental risk warrants it, and evaluate for tuberculosis with contact history, Mantoux and chest imaging when cough, fever or failure to gain persists.\n\nExamine stool where diarrhoea persists and consider coeliac evaluation where wasting follows cereal introduction with bulky stools. Arrange ophthalmic review for xerophthalmia signs where vitamin A deficiency is suspected, and never let the workup queue delay feeds, warming or antibiotics."
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What three bedside steps confirm SAM?",
+     "a": "MUAC with the Shakir tape, weight for height, and a bilateral oedema check, plus the appetite test.",
+     "accept": [
+      "muac",
+      "weight",
+      "oedema",
+      "appetite"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "Which blood tests guide safe refeeding?",
+     "a": "Glucose first, then potassium, magnesium and phosphate, with haemoglobin for anaemia.",
+     "accept": [
+      "glucose",
+      "potassium",
+      "magnesium",
+      "phosphate"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "The child is lethargic with cold hands and no fever. What do you test before anything else?",
+     "a": "Blood glucose for hypoglycaemia, alongside warming, since both kill silently and reverse fast.",
+     "accept": [
+      "glucose",
+      "hypoglycaemia",
+      "warming"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "severe_malnutrition_sam_long_case: MUAC WHZ oedema appetite-test"
+    },
+    {
+     "source": "WHO",
+     "locator": "Guideline for the prevention and management of wasting and nutritional oedema: assessment"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.sam.diagnosis": {
+   "id": "skill.reasoning.sam.diagnosis",
+   "kind": "reasoning",
+   "system": "paediatrics",
+   "title": "Diagnosis and grading",
+   "oneLine": "WHO thresholds, the IAP grade, and the complicated label that drives admission",
+   "why": "A diagnosis of malnutrition without thresholds is an opinion, and an opinion does not admit a child. The WHO criteria decide SAM, the IAP grade records depth, and the complicated label decides the bed the child sleeps in tonight.",
+   "teach": [
+    {
+     "heading": "WHO criteria for SAM",
+     "body": "In children 6 to 59 months, SAM is bilateral pitting oedema of nutritional origin, or severe wasting by weight-for-height well below the reference median, or a very low MUAC. Meeting any one criterion is enough; oedema alone qualifies regardless of weight.\n\nModerate wasting sits between the severe threshold and two standard deviations below the median and follows a different, community-based track. Do not downgrade a child with oedema into the moderate band on weight grounds."
+    },
+    {
+     "heading": "Grade it the Indian way too",
+     "body": "Record the IAP grade by weight for age alongside the WHO label: above 80 percent normal, 71 to 80 percent grade 1, 61 to 70 percent grade 2, 51 to 60 percent grade 3, below 50 percent grade 4, with K postfixed for oedema. Indian case sheets, examiners and nutrition rehabilitation records all speak this language.\n\nNote stunting separately by height for age: a child can be both wasted and stunted, meaning acute-on-chronic undernutrition with a longer road to recovery and a deeper household cause."
+    },
+    {
+     "heading": "Complicated or not, then the full statement",
+     "body": "Label complicated SAM with poor appetite, extensive oedema beyond the feet, or any danger sign: infection, dehydration, hypothermia, hypoglycaemia, severe anaemia or poor alertness. Uncomplicated SAM keeps good appetite with only pedal oedema and no danger signs.\n\nA complete statement reads: severe acute malnutrition, marasmic kwashiorkor phenotype, IAP grade 3K, complicated by hypothermia and suspected pneumonia. Every clause earns a line of the plan."
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What single finding alone confirms SAM in a young child?",
+     "a": "Bilateral pitting oedema of nutritional origin.",
+     "accept": [
+      "bilateral",
+      "oedema",
+      "pitting"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "What makes SAM complicated rather than uncomplicated?",
+     "a": "Poor appetite, oedema beyond the feet, or any danger sign such as infection, dehydration, hypothermia or hypoglycaemia.",
+     "accept": [
+      "appetite",
+      "danger",
+      "oedema",
+      "infection"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "Why record both the WHO label and the IAP grade?",
+     "a": "The WHO label decides SAM and admission; the IAP grade records depth in the language Indian records and examiners use.",
+     "accept": [
+      "depth",
+      "grade",
+      "records",
+      "admission"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "rubric": [
+    {
+     "id": "criteria",
+     "text": "States the WHO criterion met"
+    },
+    {
+     "id": "grade",
+     "text": "Records the IAP grade with K where oedema exists"
+    },
+    {
+     "id": "complicated",
+     "text": "Labels complicated or uncomplicated with reasons"
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "severe_malnutrition_sam_long_case: MUAC WHZ oedema appetite-test"
+    },
+    {
+     "source": "Indian Academy of Pediatrics",
+     "locator": "Protein energy malnutrition: classification and grading"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.treatment.sam.care": {
+   "id": "skill.treatment.sam.care",
+   "kind": "treatment",
+   "system": "paediatrics",
+   "title": "Managing SAM the WHO way",
+   "oneLine": "Stabilise first with cautious feeds, then catch up, stimulate and follow up",
+   "why": "Most SAM deaths come from missed hypoglycaemia, missed hypothermia, untreated infection, fluid overload and overrapid feeding, not from lack of food. The WHO ten-step sequence exists to kill those five risks in order before catch-up growth begins.",
+   "teach": [
+    {
+     "heading": "First hours: sugar, warmth, fluids, infection",
+     "body": "Treat or prevent hypoglycaemia with immediate small feeds and retest sugar with any lethargy. Treat or prevent hypothermia with kangaroo care, warm clothing and bedding, and night feeds, since cold nights undo day progress.\n\nCorrect dehydration cautiously with a low-sodium oral solution, since standard fluids and intravenous rushes overload the sodium-loaded heart; reserve intravenous fluids for shock with small reassessed aliquots. Start empirical broad-spectrum antibiotics at admission, because infection is common and often presents without fever."
+    },
+    {
+     "heading": "Electrolytes, micronutrients and the iron rule",
+     "body": "Correct potassium, magnesium and phosphate depletion alongside feeds, since refeeding without them precipitates collapse. Give zinc, multivitamins and vitamin A by the guideline schedule, and treat xerophthalmia or measles-associated deficiency where found.\n\nWithhold iron until appetite returns and weight gain begins in rehabilitation: early iron feeds free radicals and unchecked infection in the stabilisation phase. This single timing rule is among the most examined facts in the topic."
+    },
+    {
+     "heading": "Feed in two phases",
+     "body": "Begin stabilisation with small frequent starter feeds of low-protein therapeutic milk, advancing only as appetite, alertness and oedema allow. Watch through the transition for refeeding warning signs: fast breathing, increasing oedema, liver enlargement or new lethargy mean feeds outran the body.\n\nMove to rehabilitation with catch-up feed or ready-to-use therapeutic food once appetite returns and complications settle, adding playful stimulation and maternal involvement from the start. Children who pass appetite with no complications can take the therapeutic food path at home with weekly review instead."
+    },
+    {
+     "heading": "Indian context, discharge and follow-up",
+     "body": "Link every discharge to the anganwadi for growth monitoring and take-home ration, and to the nutrition rehabilitation centre where one serves the district, with immunisation catch-up including measles and deworming completed before leaving the programme. Counsel frequent energy-dense feeding, handwashing, safe water and continued breastfeeding.\n\nRefer urgently with danger signs, failure to gain on adequate feeds, suspected tuberculosis or HIV, or oedema that will not resolve: these need a medical college or district paediatric unit. Follow weights weekly until recovery criteria hold, since relapse clusters in the first months after discharge."
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What are the first-hour priorities in complicated SAM?",
+     "a": "Correct hypoglycaemia, prevent hypothermia, cautious rehydration, and empirical antibiotics for occult infection.",
+     "accept": [
+      "hypoglycaemia",
+      "hypothermia",
+      "rehydration",
+      "antibiotics"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "When is iron started in SAM, and why not earlier?",
+     "a": "Only in rehabilitation once appetite and weight gain return, because early iron worsens infection and oxidative injury.",
+     "accept": [
+      "rehabilitation",
+      "appetite",
+      "infection",
+      "gain"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "Feeds are increased and the child develops fast breathing with enlarging liver. What happened?",
+     "a": "Refeeding overload with cardiac strain: feeds outran the adapted body, so feeds are held back and fluid and cardiac status reassessed.",
+     "accept": [
+      "refeeding",
+      "overload",
+      "cardiac",
+      "feeds"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "severe_malnutrition_sam_long_case: F75 F100 RUTF rehabilitation"
+    },
+    {
+     "source": "WHO",
+     "locator": "Guideline for the prevention and management of wasting and nutritional oedema: inpatient management"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   },
+   "dosingNote": "This module teaches management at the level of drug class, feed type and principle. Specific agents, feed volumes, schedules and durations must be taken from your current WHO or national guideline and the treating paediatrician's prescription at the time of treatment. CliniX does not prescribe."
+  }
+ },
+ "cases": [
+  {
+   "id": "case.sam.aarohi",
+   "initialVitals": {
+    "hr": 132,
+    "bpSystolic": 84,
+    "bpDiastolic": 52,
+    "rr": 40,
+    "spo2": 95,
+    "temp": 35.4,
+    "gcs": 15
+   },
+   "title": "A 22-month-old girl with swollen feet who has stopped eating",
+   "opening": "Sunita has carried her 22-month-old daughter Aarohi to the paediatric outpatient room. The child's feet are puffy, her hair looks pale and thin, and she lies quietly against her mother's shoulder. Introduce yourself and take a history from the mother.",
+   "fallback": "I do not understand, doctor. Can you ask that in a simpler way?",
+   "patient": {
+    "name": "Aarohi Pawar",
+    "age": 22,
+    "sex": "female",
+    "occupation": "Toddler, not yet in anganwadi preschool",
+    "residence": "Rural, farming household near Nashik, Maharashtra"
+   },
+   "history": {
+    "presenting": {
+     "cues": [
+      "what brings you here today",
+      "what is the problem with the child",
+      "why have you brought her",
+      "tell me about her illness",
+      "how can i help your daughter",
+      "what is troubling her"
+     ],
+     "reply": "Doctor, her feet have been swollen for fifteen days, and for the last one week she refuses to eat anything. She has become very thin in her arms and legs.",
+     "key": true,
+     "skillId": "skill.hx.chief_complaints"
+    },
+    "onset_timecourse": {
+     "cues": [
+      "when did the swelling begin",
+      "how long has she been ill",
+      "was the onset sudden or slow",
+      "since when is she unwell",
+      "how many days of swelling"
+     ],
+     "reply": "The puffiness started about fifteen days ago in the feet. The thinning I noticed over two months, but she has been small since she stopped breastfeeding.",
+     "key": true
+    },
+    "feet_swelling_onset": {
+     "cues": [
+      "where did the swelling start",
+      "did the swelling spread upwards",
+      "is the swelling on both feet",
+      "does the swelling pit on pressing",
+      "swelling of the face and hands"
+     ],
+     "reply": "It began on the top of both feet together. Now both legs up to the knees look puffy, and her face looks full in the morning. When I press the leg with my thumb, a dent stays for some time.",
+     "key": true
+    },
+    "appetite_feed_refusal": {
+     "cues": [
+      "how is her appetite these days",
+      "does she finish her meals",
+      "has she stopped eating",
+      "will she take the nutrition packet",
+      "how eagerly does she eat"
+     ],
+     "reply": "Earlier she ate a little dal and roti. For one week she pushes the plate away and cries. Even milk she takes only two or three sips. The anganwadi sister gave a peanut packet last month and she ate half of it, but now she refuses that also.",
+     "key": true,
+     "skillId": "skill.hx.severe.illness"
+    },
+    "thinning_weight_loss": {
+     "cues": [
+      "has she lost weight recently",
+      "are her clothes loose on her",
+      "thinning of the arms and legs",
+      "loss of fat from the buttocks",
+      "how does her growth compare"
+     ],
+     "reply": "Her frocks have become loose around the waist. Her arms feel like sticks and the hips look saggy with loose skin. At the anganwadi they said her weight is not increasing since three months.",
+     "key": true
+    },
+    "loose_stools_diarrhoea": {
+     "cues": [
+      "how often does she pass loose stools",
+      "any blood or mucus in the stool",
+      "how many days of diarrhoea",
+      "recurrent episodes of loose motions",
+      "vomiting along with diarrhoea"
+     ],
+     "reply": "She passes watery stools three to four times a day for the last five days, without blood. She had similar loose motions twice in the last three months, each time for many days.",
+     "key": true
+    },
+    "fever_episodes_silent": {
+     "cues": [
+      "has she had fever recently",
+      "any high temperature with shivering",
+      "fever that comes in the evening",
+      "did you check her temperature at home"
+     ],
+     "reply": "She feels cold to touch, not hot. She never had high fever in this illness, only a warm forehead two weeks ago for one day. Mostly she just lies quietly.",
+     "key": true
+    },
+    "cough_fast_breathing": {
+     "cues": [
+      "does she cough",
+      "is she breathing fast",
+      "any noisy breathing or chest indrawing",
+      "cold and cough episodes",
+      "difficulty in breathing"
+     ],
+     "reply": "She has a dry cough for four days and breathes faster than usual, but there is no sound from the chest. She had a similar cold two months ago which settled on its own.",
+     "key": true
+    },
+    "tb_contact_household": {
+     "cues": [
+      "anyone with tuberculosis at home",
+      "chronic cough in the family",
+      "has anyone taken tb medicines",
+      "contact with a tb patient",
+      "weight loss with night sweats at home"
+     ],
+     "reply": "Her uncle who lives with us coughs for many weeks and was told to get his sputum tested, but he has not gone. Nobody is taking TB medicines at home.",
+     "key": true
+    },
+    "measles_rash_immunisation": {
+     "cues": [
+      "was she vaccinated on schedule",
+      "did she get the measles vaccine",
+      "any rash with fever in past months",
+      "is her immunisation card available",
+      "missed any scheduled vaccines"
+     ],
+     "reply": "She got the birth vaccines and two more visits, but we missed the last two visits because of harvest season. She never had measles rash. The card is at home, I did not bring it.",
+     "key": true,
+     "skillId": "skill.hx.paed.immunisation"
+    },
+    "birth_weight_breastfeeding": {
+     "cues": [
+      "what was her birth weight",
+      "was she born early or on time",
+      "for how many months did you breastfeed",
+      "when did you stop breastfeeding",
+      "twin birth or single birth"
+     ],
+     "reply": "She was born at home in the eighth month, small, about two kilograms the nurse said. I breastfed her fully for three months, then started cow milk because my milk felt less. Breastfeeding stopped fully at one year.",
+     "key": true
+    },
+    "diet_recall_katori": {
+     "cues": [
+      "what did she eat yesterday",
+      "describe her meals in a full day",
+      "how many katoris does she eat",
+      "does she drink animal milk",
+      "what oil and dal go in her food"
+     ],
+     "reply": "Yesterday she took half a katori of thin dal water in the morning and two spoons of rice at noon, then nothing. She drinks one glass of diluted cow milk twice a day. We add very little oil because oil gives her loose motions.",
+     "key": true,
+     "skillId": "skill.hx.paed.diet_calorie_protein"
+    },
+    "development_play_milestones": {
+     "cues": [
+      "is she playing normally",
+      "has she become less active",
+      "does she speak words clearly",
+      "can she walk without support",
+      "is she dull or irritable"
+     ],
+     "reply": "She used to walk and say a few words. For two weeks she does not want to play, just lies down. She cries weakly when disturbed. Her walking and talking were normal before this.",
+     "key": true
+    },
+    "family_income_anganwadi": {
+     "cues": [
+      "what work does the family do",
+      "how many members in the house",
+      "do you get anganwadi take-home ration",
+      "any death of a child in the family",
+      "piped tap or borewell as the household water supply"
+     ],
+     "reply": "My husband works as a daily farm labourer and I also go for harvest work. We are six members in two rooms. We get the take-home packets sometimes, but my older child eats them too. We drink well water. My first baby died of diarrhoea at one year.",
+     "key": true,
+     "skillId": "skill.hx.paed.socioeconomic"
+    },
+    "urine_swelling_clarify": {
+     "cues": [
+      "is her urine frothy",
+      "how much urine does she pass",
+      "swelling worse in the morning on the face",
+      "any burning while passing urine",
+      "colour of her urine"
+     ],
+     "reply": "Her urine looks normal yellow, not frothy, and she passes a good amount. The face looks full in the morning but the feet stay swollen all day. No complaint of burning.",
+     "key": true
+    },
+    "past_admissions_treatment": {
+     "cues": [
+      "was she admitted to hospital before",
+      "any previous swelling illness",
+      "treatment taken for this swelling",
+      "any blood transfusion earlier"
+     ],
+     "reply": "She was never admitted. A private doctor gave a tonic syrup and some powder for weight gain one month ago, but it did not help. No blood was ever given.",
+     "key": true
+    },
+    "medicines_given_home": {
+     "cues": [
+      "what medicines have you given her",
+      "any antibiotics or tonics at home",
+      "did you give ORS for the diarrhoea",
+      "any steroids or swelling medicines"
+     ],
+     "reply": "Only the tonic syrup from the private doctor and salt-sugar water twice during the loose motions. No antibiotics, no swelling medicines.",
+     "key": true
+    }
+   },
+   "exam": {
+    "skill.gen.paed.appearance": {
+     "finding": "Apathetic, lying quietly on the mother's lap with weak cry on handling. Moon face over a wasted body, sparse pale hair, miserable but consolable.",
+     "abnormal": true
+    },
+    "skill.gen.paed.vitals": {
+     "finding": "Axillary temperature 35.4 C. Pulse 132 per minute, low volume. Respiratory rate 40 per minute. Blood pressure 84/52. SpO2 95 percent on air.",
+     "abnormal": true
+    },
+    "skill.gen.paed.edema": {
+     "finding": "Bilateral pitting oedema: feet and legs to the knees, hands puffy, face full. Pits for several seconds after five seconds of firm pressure over the shin.",
+     "abnormal": true
+    },
+    "skill.gen.paed.pallor": {
+     "finding": "Severe pallor of conjunctiva, tongue and palms including the palmar creases.",
+     "abnormal": true
+    },
+    "skill.gen.paed.hydration": {
+     "finding": "Alertness reduced with weak cry, sunken eyes with absent tears, dry mouth. Skin pinch goes back slowly. Passed urine twice today.",
+     "abnormal": true
+    },
+    "skill.exam.paed.weight": {
+     "finding": "Weight 7.2 kg at 22 months, about 60 percent of expected, with oedema present so the true tissue weight is lower. IAP grade 3 with K.",
+     "abnormal": true
+    },
+    "skill.exam.paed.length_height": {
+     "finding": "Length 78 cm, below the expected 85 cm at two years, with a low weight for length: wasted and also stunted, meaning acute on chronic undernutrition.",
+     "abnormal": true
+    },
+    "skill.exam.paed.muac": {
+     "finding": "MUAC 11.0 cm, in the red zone below 12.5 cm, measured midway between shoulder and elbow with the arm hanging.",
+     "abnormal": true
+    },
+    "skill.exam.paed.skin_lesions": {
+     "finding": "Flaky-paint patches over the buttocks and behind the thighs, dry cracked skin over pressure areas, sparse straight easily plucked hair with pale bands.",
+     "abnormal": true
+    },
+    "skill.exam.paed.gi.inspection": {
+     "finding": "Protuberant abdomen with visible wasting of abdominal wall muscles, soft liver edge 3 cm below the costal margin, no ascitic fluid wave, no dilated veins.",
+     "abnormal": true
+    }
+   },
+   "essentialInvestigations": [
+    "appetite_test",
+    "glucose",
+    "fbc",
+    "electrolytes",
+    "cxr"
+   ],
+   "investigations": {
+    "appetite_test": {
+     "label": "Observed appetite test with therapeutic food",
+     "indicated": true,
+     "result": "Offered ready-to-use therapeutic food under observation: takes two small bites then turns away and refuses further, needing to be coaxed for every bite.",
+     "note": "A failed appetite test in SAM means complicated disease and admission, regardless of how the child looks."
+    },
+    "glucose": {
+     "label": "Bedside blood glucose",
+     "indicated": true,
+     "result": "42 mg/dL at presentation, repeated after the first feed.",
+     "note": "Hypoglycaemia is silent and common in SAM; a low reading explains the apathy and needs immediate feeds, not more tests."
+    },
+    "fbc": {
+     "label": "Full blood count",
+     "indicated": true,
+     "result": "Haemoglobin 6.8 g/dL with microcytic indices. Total leucocyte count 14,200 per mm3 with neutrophilia.",
+     "note": "Severe anaemia with a raised count fits chronic undernutrition with occult infection, and transfusion here needs extreme caution against overload."
+    },
+    "electrolytes": {
+     "label": "Serum electrolytes including magnesium and phosphate",
+     "indicated": true,
+     "result": "Potassium 3.0 mmol/L, magnesium and phosphate low-normal. Sodium 132 mmol/L.",
+     "note": "Depleted potassium with oedema is the reductive-adaptation pattern, and guides safe correction alongside feeds."
+    },
+    "urine_routine": {
+     "label": "Urine routine and culture",
+     "indicated": true,
+     "result": "No protein, no excess pus cells. Culture sent.",
+     "note": "Absence of proteinuria argues against nephrotic syndrome as the cause of this swelling."
+    },
+    "cxr": {
+     "label": "Chest radiograph",
+     "indicated": true,
+     "result": "Patchy opacities in the right mid zone with hyperinflation, no effusion, no cavitation.",
+     "note": "Supports occult pneumonia behind the cough and fast breathing in a child who never mounted fever."
+    },
+    "mantoux": {
+     "label": "Mantoux test with chest follow-up",
+     "indicated": true,
+     "result": "Induration awaited at 48 to 72 hours; sputum induction planned with the uncle screened in parallel.",
+     "note": "Indicated by the household contact and failure to thrive; a negative malnourished Mantoux never excludes tuberculosis."
+    },
+    "hiv_test": {
+     "label": "HIV antibody test",
+     "indicated": false,
+     "result": "Not sent at this visit.",
+     "note": "Not indicated as a reflex screen here: no parental risk disclosed, no thrush or recurrent severe infections. It stays counselled and offered, not forced."
+    },
+    "liver_biopsy": {
+     "label": "Liver biopsy",
+     "indicated": false,
+     "result": "Not done.",
+     "note": "Not indicated: the enlarged liver in kwashiorkor is fatty change that reverses with feeding, and biopsy adds risk without changing the plan."
+    }
+   },
+   "differentialModel": {
+    "answer": "Severe acute malnutrition, marasmic kwashiorkor phenotype, complicated by hypothermia, hypoglycaemia and suspected pneumonia. Consider pulmonary tuberculosis, HIV infection, nephrotic syndrome and coeliac disease.",
+    "accept": [
+     "Severe acute malnutrition",
+     "Kwashiorkor",
+     "Marasmus",
+     "Pulmonary tuberculosis",
+     "HIV infection",
+     "Nephrotic syndrome",
+     "Coeliac disease",
+     "Acute gastroenteritis"
+    ],
+    "minMatch": 3
+   },
+   "diagnosis": {
+    "answer": "Severe acute malnutrition, marasmic kwashiorkor phenotype, IAP grade 3K, complicated by hypothermia, hypoglycaemia and pneumonia.",
+    "accept": [
+     "Severe acute malnutrition",
+     "Protein energy malnutrition",
+     "Kwashiorkor"
+    ],
+    "minMatch": 1
+   },
+   "managementModel": {
+    "answer": "Inpatient stabilisation: warming with kangaroo care, immediate small starter feeds with glucose monitoring, cautious low-sodium rehydration, empirical antibiotics for occult pneumonia, micronutrients without iron, then catch-up feeding, play stimulation, anganwadi follow-up and immunisation catch-up.",
+    "accept": [
+     "stabilisation",
+     "warming",
+     "starter feeds",
+     "glucose",
+     "rehydration",
+     "antibiotics",
+     "micronutrients",
+     "follow-up"
+    ],
+    "minMatch": 3
+   },
+   "teachingPoints": [
+    "Appetite failed, so this is complicated SAM: the refusal of therapeutic food admits her more surely than any number.",
+    "Hypothermia with no fever is the classic SAM trap: cold hands and apathy here meant low sugar and occult infection, not a mild illness.",
+    "Oedema hid the wasting on the scale: 7.2 kg reads grade 3 but the MUAC of 11.0 cm and loose buttock skin tell the truer, more severe story.",
+    "No frothy urine with good urine volume argues against nephrotic syndrome without needing a single extra test to invoke it.",
+    "The uncle's chronic cough keeps tuberculosis on the list even while pneumonia is treated: failure to gain on adequate feeds will reopen that question.",
+    "Iron waits for rehabilitation: giving it during stabilisation would feed infection and oxidative injury in a child already fighting both."
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  }
+ ]
+}

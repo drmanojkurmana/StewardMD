@@ -1,0 +1,968 @@
+{
+  "_comment": "Gynaecology disease: ovarian tumours taught as adnexal mass assessment. Same architecture as uterine-fibroid: almost every finding is an emphasis overlay on a shared core/obgyn skill. Ovarian tumour's own contribution is the vague persistent symptom triad, uterus versus ovary separation at the bedside, CA-125 with RMI triage, FIGO surgical staging, and cytoreduction plus platinum chemotherapy through a gynaecological oncology team.",
+  "id": "ovarian-tumour",
+  "name": "Ovarian tumour",
+  "fullName": "Ovarian tumour (benign and malignant adnexal mass)",
+  "system": "gynaecology",
+  "subtitle": "Adnexal mass assessment",
+  "kbRef": "ovarian_cancer",
+  "oneLine": "A persistent vague abdomen with an adnexal mass, and the triage between benign cyst and malignancy",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "blurb": "What an ovarian tumour is, and what it is not",
+      "id": "basics",
+      "skills": [
+        "skill.ovarian.basics"
+      ],
+      "title": "Basics"
+    },
+    {
+      "blurb": "Before a single question",
+      "id": "approach",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ],
+      "title": "Approach to the patient"
+    },
+    {
+      "blurb": "Menopausal status sets the prior before a symptom is mentioned",
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected ovarian tumour, menopausal status carries the weight: a pelvic mass with bloating in a postmenopausal woman is malignant until proved otherwise, while the same mass in a young woman is far more likely benign, functional or inflammatory. Nulliparity and a family history of ovarian or breast cancer raise the prior further."
+        }
+      },
+      "id": "particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "title": "Patient particulars"
+    },
+    {
+      "blurb": "Vague persistent symptoms in her words, plus bleeding and pain",
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical presentation reads in months, not days: bloating, early satiety and urinary urgency persisting for weeks to months in a woman over fifty. That persistent vague tempo should raise suspicion rather than reassure, since there is no early warning symptom that announces an ovarian cancer."
+        },
+        "skill.hx.obg.gynae_symptoms": {
+          "expect": "Expect the pain questions to come back dull and diffuse rather than acute: pelvic or abdominal discomfort with bowel change fits malignancy, while sudden severe unilateral pain with vomiting points to torsion or rupture of a cyst instead. Always ask about bloating, early satiety and urinary urgency directly, since she will rarely volunteer them as complaints."
+        },
+        "skill.hx.obg.menstrual_history": {
+          "expect": "Expect a postmenopausal history in the classic case: age at menopause, any bleeding since, and hormone treatment after it. In a young woman, quantify the cycle and ask about dysmenorrhoea and endometriosis, which point toward endometrioma, and never forget the pregnancy test, since ectopic pregnancy mimics a ruptured cyst."
+        }
+      },
+      "id": "history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.menstrual_history",
+        "skill.hx.obg.gynae_symptoms"
+      ],
+      "title": "History of presenting illness"
+    },
+    {
+      "blurb": "The background that decides benign or malignant, and operable or refer",
+      "emphasis": {
+        "skill.hx.obg.gynae_background": {
+          "expect": "Fertility wishes and contraceptive history matter here for risk, not just for planning: combined pills protect, prolonged ovulatory years add risk, and a nulliparous woman carries a higher prior. Note cervical screening and exclude pregnancy in every woman of reproductive age before imaging or surgery, since ectopic pregnancy is a leading mimic."
+        }
+      },
+      "id": "past_personal_drug_family",
+      "skills": [
+        "skill.hx.obg.gynae_background",
+        "skill.hx.ovarian.risk"
+      ],
+      "title": "Past, personal, drug and family history"
+    },
+    {
+      "blurb": "A woman who looks well until she does not, and the ascites that stages her",
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for a woman who reports months of bloating yet looks surprisingly well early on, which is exactly why the disease is missed. Weight loss, cachexia and pallor mark advanced disease, and breathlessness with a distended abdomen means ascites or pleural spread, not anxiety."
+        },
+        "skill.gen.edema": {
+          "expect": "Bilateral oedema with ascites and a pelvic mass fits advanced intra abdominal malignancy with venous and lymphatic obstruction. Unilateral leg swelling should make you look for deep vein thrombosis, which malignancy provokes."
+        },
+        "skill.gen.vitals": {
+          "expect": "Expect normal vitals in early disease: this is a slow malignant process, not an acute illness. Tachycardia with hypotension means rupture, torsion or sepsis rather than simple tumour, and tachypnoea with low saturation points to pleural effusion from spread beyond the abdomen."
+        }
+      },
+      "id": "general_exam",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ],
+      "title": "General examination"
+    },
+    {
+      "blurb": "A mass that moves separately from the uterus, with fluid around it",
+      "emphasis": {
+        "skill.exam.obg.bimanual": {
+          "expect": "Expect the mirror image of fibroid: the uterus is normal sized and moves independently of the mass, with a groove felt between them. Judge whether the mass is cystic or solid, mobile or fixed, unilateral or bilateral, and whether the pouch of Douglas is free or nodular, since fixity and nodularity mark spread beyond the ovary."
+        },
+        "skill.exam.obg.gynae_abdominal": {
+          "expect": "Expect a complex lower abdominal mass, often cystic with solid areas, whose lower border may be reachable unlike a uterine lump. Test for ascites with shifting dullness in every case, since fluid with a pelvic mass in a postmenopausal woman is highly suggestive of malignancy. Look at the umbilicus and feel for nodes, which mark disseminated disease."
+        },
+        "skill.exam.obg.speculum_insert": {
+          "expect": "Expect a straightforward speculum examination, done gently because she may have ascites and abdominal tenderness. The procedure itself is unchanged, but this is your only look at the cervix, which must be declared healthy or suspicious before the mass is attributed to the ovary."
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "expect": "Expect a healthy cervix in most ovarian tumour patients, with no discharge to explain the mass. Bleeding after the menopause, a suspicious growth, or foul discharge each point away from the ovary toward cervical or endometrial pathology and must not be missed while concentrating on the adnexa."
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "expect": "Expect a normal vulva in most patients. Oedema of the vulva with gross ascites reflects raised intra abdominal pressure and venous obstruction rather than a separate vulval disease."
+        }
+      },
+      "id": "systemic_exam",
+      "skills": [
+        "skill.exam.obg.gynae_abdominal",
+        "skill.exam.obg.vulval_inspect",
+        "skill.exam.obg.speculum_insert",
+        "skill.exam.obg.speculum_inspect",
+        "skill.exam.obg.bimanual"
+      ],
+      "title": "Pelvic examination"
+    },
+    {
+      "blurb": "Vague symptoms, a separate mass, fluid, and a marker that triages",
+      "id": "disease_findings",
+      "skills": [
+        "skill.ovarian.signs"
+      ],
+      "title": "Putting the ovarian tumour picture together"
+    },
+    {
+      "blurb": "Three sentences that contain the case and its urgency",
+      "id": "summary",
+      "skills": [
+        "skill.ovarian.summary"
+      ],
+      "title": "Clinical summary"
+    },
+    {
+      "blurb": "What else fills the adnexa or the pouch of Douglas",
+      "id": "differential",
+      "skills": [
+        "skill.ovarian.differential"
+      ],
+      "title": "Differential diagnosis"
+    },
+    {
+      "blurb": "Image the mass, read the marker, score the risk, stage the disease",
+      "id": "investigations",
+      "skills": [
+        "skill.ix.ovarian.workup"
+      ],
+      "title": "Investigations"
+    },
+    {
+      "blurb": "RMI band, FIGO stage, and the statement that carries the referral",
+      "id": "diagnosis",
+      "skills": [
+        "skill.ovarian.diagnosis"
+      ],
+      "title": "Diagnosis and staging"
+    },
+    {
+      "blurb": "Cytoreduction plus platinum chemotherapy through an oncology team",
+      "id": "treatment",
+      "skills": [
+        "skill.tx.ovarian"
+      ],
+      "title": "Treatment"
+    },
+    {
+      "blurb": "Present this patient to your consultant",
+      "id": "case",
+      "skills": [
+        "skill.present.ovarian.case"
+      ],
+      "title": "Case presentation"
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "examinerQuestions": [
+          "You feel a cystic lump in the right fornix. How do you prove at the bedside that it arises from the ovary and not the uterus?",
+          "There is shifting dullness with the mass. What does the fluid tell you about benign versus malignant, and what is your next step after this examination?",
+          "The pouch of Douglas feels nodular and the mass is fixed. How does that change your urgency and your referral?"
+        ],
+        "id": "osce.ovarian.pelvic_exam",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.obg.intimate_consent",
+          "skill.exam.obg.gynae_abdominal",
+          "skill.exam.obg.vulval_inspect",
+          "skill.exam.obg.speculum_insert",
+          "skill.exam.obg.speculum_inspect",
+          "skill.exam.obg.bimanual",
+          "skill.approach.obg.pelvic_close"
+        ],
+        "task": "This 58 year old postmenopausal woman has bloating and a pelvic lump. Examine her abdomen and pelvis, including speculum and bimanual examination, and present your findings.",
+        "title": "Examine the pelvis in suspected ovarian tumour"
+      },
+      {
+        "examinerQuestions": [
+          "State her RMI band from what you found, and show how each of the three components contributed.",
+          "She asks to be operated at the local hospital next week. What do you tell her, and where should she go instead?",
+          "Which single history answer would make you think of torsion or ectopic rather than malignancy, whatever her CA-125 shows?"
+        ],
+        "id": "osce.ovarian.history_triage",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.obg.menstrual_history",
+          "skill.hx.obg.gynae_symptoms",
+          "skill.hx.ovarian.risk"
+        ],
+        "task": "This 58 year old postmenopausal woman has had bloating for four months. Take a focused history in seven minutes and be ready to state her malignancy risk band and referral.",
+        "title": "Take a history and triage the risk"
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.ovarian.basics",
+      "skill.exam.obg.bimanual",
+      "skill.ovarian.signs",
+      "skill.ovarian.summary",
+      "skill.ovarian.differential",
+      "skill.ix.ovarian.workup",
+      "skill.ovarian.diagnosis",
+      "skill.annex.ovarian.rmi_figo",
+      "skill.tx.ovarian"
+    ]
+  },
+  "skills": {
+    "skill.ovarian.basics": {
+      "id": "skill.ovarian.basics",
+      "kind": "reasoning",
+      "system": "gynaecology",
+      "title": "What an ovarian tumour is",
+      "oneLine": "Epithelial tumours dominate after the menopause, germ cell and stromal tumours in the young",
+      "why": "Ovarian tumour is defined by cell of origin plus behaviour, not by the lump alone. Getting that definition exact is what stops every cyst being feared as cancer and every vague bloating being dismissed as bowel trouble, and it decides which markers to order in whom.",
+      "teach": [
+        {
+          "heading": "What an ovarian tumour is",
+          "body": "An ovarian tumour is any neoplasm of the ovary, benign, borderline or malignant, arising from surface epithelium, germ cells or sex cord stroma. Most malignant cases are epithelial, and high grade serous carcinoma is the commonest and most aggressive of them.\n\nHigh grade serous cancer is now believed to start frequently as tubal intraepithelial carcinoma in the fimbria, then exfoliate across the peritoneal cavity to seed omentum, bowel serosa and diaphragm. That spread pattern explains why ascites and omental cake dominate the late picture."
+        },
+        {
+          "heading": "The tumours of the young",
+          "body": "Germ cell tumours matter in girls and young women: dysgerminoma, yolk sac tumour and mature teratoma. They can release AFP, hCG or LDH and produce hormonal effects, so age appropriate markers are part of the first workup, not an afterthought.\n\nSex cord stromal tumours such as granulosa cell tumour are rarer and can secrete oestrogen or inhibin, presenting with abnormal bleeding or precocious changes. Hormonal activity in an ovarian mass always points to these families."
+        },
+        {
+          "heading": "Why it presents late and what should trigger referral",
+          "body": "There is no reliable early symptom and no screening test, so the majority present with advanced intra abdominal disease. Symptoms are frequently vague and persistent: bloating, early satiety, pelvic discomfort and urinary urgency in a woman over fifty.\n\nA pelvic mass with ascites and a raised CA-125 in a postmenopausal woman is highly suggestive and warrants specialist referral without delay. That triad is the closest thing this disease has to an early warning."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the commonest and most aggressive ovarian malignancy, and where is it now thought to start?",
+          "a": "Most ovarian tumours are epithelial in origin, and high grade serous carcinoma, now thought to start largely in the fimbrial end of the fallopian tube, is the commonest and most aggressive subtype.",
+          "accept": ["epithelial", "serous", "fallopian", "aggressive"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A 19 year old has an ovarian mass with hormonal effects. Which tumour families top your list?",
+          "a": "Germ cell tumours such as dysgerminoma and yolk sac tumour, and sex cord stromal tumours such as granulosa cell tumour, which can secrete AFP, hCG or inhibin and cause hormonal effects.",
+          "accept": ["germ", "stromal", "hormonal", "markers"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does ovarian cancer usually present late despite months of symptoms?",
+          "a": "Because there is no reliable early symptom and no screening test, so disease spreads silently across the peritoneum and most women present with advanced intra abdominal disease.",
+          "accept": ["screening", "peritoneum", "advanced", "silently"],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "ovarian_cancer: clinicalPearls"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Ovarian cancer (histology and origin)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ovarian.signs": {
+      "id": "skill.ovarian.signs",
+      "kind": "reasoning",
+      "system": "gynaecology",
+      "title": "The ovarian tumour picture",
+      "oneLine": "Persistent vague symptoms, a mass separate from the uterus, fluid, and spread beyond the pelvis",
+      "why": "Ovarian tumour is the cleanest example in gynaecology of persistence as a red flag: vague symptoms lasting months in a woman over fifty outweigh any single dramatic finding. That one rule separates the bloating that needs a scan from the pain that needs a theatre.",
+      "teach": [
+        {
+          "heading": "Bloating that persists is the presentation",
+          "body": "The symptoms are vague, persistent and easy to dismiss: abdominal bloating, early satiety, pelvic or abdominal discomfort and urinary urgency. They last weeks to months, which is exactly why they are misread as bowel trouble.\n\nA high index of suspicion is needed particularly in women over fifty. New persistent bloating in this age group is an ovarian symptom until proved otherwise."
+        },
+        {
+          "heading": "What the abdomen and the body add up to",
+          "body": "The abdomen shows distension with shifting dullness when ascites is present, and a complex lower abdominal mass that is often cystic with solid areas. Bilateral solid masses point toward metastatic Krukenberg disease rather than a primary ovarian tumour.\n\nGeneral signs mark the stage: weight loss and cachexia, pallor, leg oedema from venous obstruction, breathlessness from ascites or pleural effusion, and change in bowel habit toward obstruction. Each of these moves the FIGO stage upward."
+        },
+        {
+          "heading": "Benign or malignant: bedside forks",
+          "table": {
+            "cols": ["Feature", "Favours benign", "Favours malignant"],
+            "rows": [
+              ["Age and tempo", "Young, acute torsion pain", "Postmenopausal, months of bloating"],
+              ["Mass", "Unilateral, cystic, mobile", "Bilateral, solid areas, fixed"],
+              ["Uterus", "Normal, moves independently", "Normal, moves independently"],
+              ["Fluid and spread", "No ascites, free fornices", "Ascites, nodular pouch, nodes"]
+            ]
+          }
+        },
+        {
+          "heading": "The acute exceptions",
+          "body": "Acute unilateral pain with vomiting and a tender adnexal mass means torsion or rupture until proved otherwise, whatever the CA-125 shows. That is a surgical emergency for detorsion, not a staging workup.\n\nIn pregnancy the same rule holds: a ruptured corpus luteum or ectopic pregnancy mimics a ruptured cyst, so a pregnancy test comes before any marker is interpreted."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the classic symptom group of ovarian cancer?",
+          "a": "Persistent bloating, early satiety, pelvic or abdominal discomfort and urinary urgency, lasting weeks to months rather than days.",
+          "accept": ["bloating", "satiety", "urgency", "persistent"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A pelvic mass could be uterine or ovarian. What is the single fastest bedside test?",
+          "a": "Check whether the uterus moves independently of the mass with a groove between them. An ovarian mass moves separately from the uterus; a uterine mass moves with the cervix.",
+          "accept": ["independently", "groove", "cervix", "separately"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "List the red flags that mark advanced or urgent ovarian disease.",
+          "a": "Rapidly accumulating ascites with breathlessness, bowel obstruction, marked weight loss with cachexia, pleural effusion, and a complex solid cystic mass with markedly raised CA-125 in a postmenopausal woman.",
+          "accept": ["ascites", "obstruction", "cachexia", "effusion"],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "ovarian_cancer: clinicalPearls"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Ovarian cancer (clinical features)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ovarian.summary": {
+      "id": "skill.ovarian.summary",
+      "kind": "reasoning",
+      "system": "gynaecology",
+      "title": "The clinical summary",
+      "oneLine": "Problem representation for a persistent adnexal mass with its malignancy band",
+      "why": "The summary for a suspected ovarian malignancy has a different shape from a benign one: menopausal status and the RMI band belong in the same sentence as the mass, because together they determine whether she is managed locally or by an oncology team, and how fast.",
+      "teach": [
+        {
+          "heading": "Order of the summary",
+          "body": "State the patient with the facts that change the plan: age, menopausal status and parity, then the tempo, which is months of persistent vague symptoms.\n\nThen the syndrome in abstract terms: a complex adnexal mass separate from a normal sized uterus, with or without ascites, in a stated RMI band."
+        },
+        {
+          "heading": "A worked example",
+          "body": "A worked example: a 58 year old postmenopausal woman with four months of bloating, early satiety and urinary frequency, a firm irregular right adnexal mass of about 10 cm moving separately from a normal sized uterus, with ascites and a nodular pouch of Douglas. CA-125 is markedly raised with a high RMI. This is probable ovarian malignancy with peritoneal spread.\n\nNote what each clause is doing: menopausal status sets the prior, separate mobility fixes the ovary as origin, ascites with nodularity fixes spread, and the RMI band fixes urgency."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What element belongs in an ovarian summary that would not appear in most medical summaries?",
+          "a": "Menopausal status and the RMI band, because age sets the prior and the score decides routine versus urgent referral.",
+          "accept": ["menopausal", "rmi", "referral", "prior"],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why do fixity and ascites matter so much in an ovarian summary?",
+          "a": "It separates a benign cyst needing planned local care from a probable malignancy needing a gynaecological oncology team, and it carries the ascites and fixity that decide operability.",
+          "accept": ["benign", "oncology", "ascites", "fixity"],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "patient",
+          "text": "States the patient with age, menopausal status and tempo of symptoms"
+        },
+        {
+          "id": "anatomy",
+          "text": "States uterus versus ovary separation, fixity, ascites and pouch of Douglas"
+        },
+        {
+          "id": "triage",
+          "text": "States CA-125 with RMI band and the referral it demands"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "Presenting the case"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "ovarian_cancer: clinicalPearls"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ovarian.differential": {
+      "id": "skill.ovarian.differential",
+      "kind": "reasoning",
+      "system": "gynaecology",
+      "title": "Differential diagnosis",
+      "oneLine": "What else fills the adnexa, bleeds, bursts or fills the abdomen with fluid",
+      "why": "Most adnexal masses in young women are exactly what they look like, but the ones that are not are dangerous to miss: ectopic pregnancy, torsion, tuberculosis and Krukenberg disease each demand a different team. The differential does not stop once the scan says complex cyst.",
+      "teach": [
+        {
+          "heading": "How to work through it",
+          "body": "For an adnexal mass with or without ascites, work through benign ovarian, functional, uterine, pregnancy related, infective, metastatic and malignant causes before settling on ovarian cancer.\n\nThe commonest trap is attributing all the fluid to malignancy: tuberculous peritonitis mimics advanced ovarian cancer closely in India, with ascites, weight loss and even a raised CA-125, and needs fluid analysis rather than assumption."
+        },
+        {
+          "heading": "The key mimics",
+          "points": [
+            "Functional cyst: follicular or corpus luteum cyst in a young woman, often painful then resolving within two cycles; repeat scan separates it from a true neoplasm.",
+            "Benign neoplasm: serous or mucinous cystadenoma, dermoid with its Rokitansky nodule, and endometrioma with ground glass contents; unilateral, cystic and mobile favours benign.",
+            "Pedunculated fibroid: firm, moves with the cervix, no groove between mass and uterus; the bedside test that undoes most confusion.",
+            "Ectopic pregnancy: amenorrhoea with pain and bleeding, tender fornix, positive pregnancy test; the physiological and urgent mimic that must be excluded first.",
+            "Tubo ovarian abscess: fever with a tender fixed mass and discharge, often with an intrauterine device or recent infection; inflammatory markers and tenderness mark it.",
+            "Krukenberg tumour: bilateral solid masses with a gastric or colonic primary, sometimes with bleeding or virilisation from active stroma; endoscopy finds what the scan cannot."
+          ]
+        },
+        {
+          "heading": "Bedside forks in the road",
+          "body": "A fixed tender mass with fever and discharge favours abscess over malignancy, though the two can coexist and malignancy is never excluded on fever alone.\n\nAscites with weight loss, bowel change or a gastric history points toward disseminated or metastatic disease and urgent oncology referral, while an acute tender swelling with vomiting points to torsion and theatre."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name five differentials for a complex adnexal mass.",
+          "a": "Functional cyst, benign cystadenoma, dermoid and endometrioma, pedunculated fibroid, ectopic pregnancy, tubo ovarian abscess, and Krukenberg metastasis from a gastrointestinal primary.",
+          "accept": ["functional", "dermoid", "fibroid", "ectopic", "abscess", "krukenberg"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What features should make you suspect Krukenberg tumour rather than primary ovarian cancer?",
+          "a": "Bilateral solid masses, weight loss with dyspepsia or bowel bleeding, and signet ring histology, which demand endoscopy of stomach and bowel before any ovarian surgery is planned.",
+          "accept": ["bilateral", "gastrointestinal", "endoscopy", "signet"],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Offers a differential spanning benign, functional, pregnancy, infective, metastatic and malignant causes"
+        },
+        {
+          "id": "mimics",
+          "text": "Distinguishes fibroid and ectopic at the bedside before the scan"
+        },
+        {
+          "id": "safety",
+          "text": "States when to suspect Krukenberg disease and tuberculous peritonitis, and when the pregnancy test comes first"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "ovarian_cancer: additionalDifferentials"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Ovarian cancer (differential diagnosis)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.ovarian.workup": {
+      "id": "skill.ix.ovarian.workup",
+      "kind": "investigation",
+      "system": "gynaecology",
+      "title": "Confirming, triaging and staging the disease",
+      "oneLine": "Pregnancy test always, ultrasound first, markers by age, CT to stage, histology to prove",
+      "why": "Investigations in ovarian tumour serve four separate jobs: excluding pregnancy, characterising the mass, triaging with a scored risk, and staging for operability. Ordered in that sequence they prevent the two classic errors: operating on an ectopic and operating on a malignancy without an oncology team.",
+      "teach": [
+        {
+          "heading": "Pregnancy test and fitness bloods",
+          "body": "Group investigations by what they answer: is she pregnant, what does the mass look like, what do the markers say, how far has it spread, and what is it on histology.\n\nA urine pregnancy test comes first in every woman of reproductive age, since ectopic pregnancy mimics a ruptured cyst and no marker is interpretable without it. Full blood count, renal and liver function and albumin set fitness for surgery and chemotherapy."
+        },
+        {
+          "heading": "Ultrasound first, and patterns that diagnose",
+          "body": "Transvaginal with transabdominal pelvic ultrasound with colour Doppler is first-line imaging: it characterises the mass as cystic, solid or complex, notes bilaterality, ascites and Doppler flow, and feeds the ultrasound score of the RMI.\n\nClassic patterns diagnose without further imaging: a Rokitansky nodule marks a dermoid, ground glass contents mark an endometrioma, and thin walled unilocular cysts in a young woman usually resolve and deserve a repeat scan, not an operation."
+        },
+        {
+          "heading": "Markers by age, CT to stage, histology to prove",
+          "body": "CA-125 is read with menopausal status, never alone: it can be normal in early or non serous tumours and raised in endometriosis, infection and tuberculosis, so a normal value never excludes malignancy and a raised one never proves it.\n\nIn a young woman add AFP, beta hCG and LDH with inhibin for germ cell and stromal tumours. Contrast CT of chest, abdomen and pelvis maps spread and operability, histology from the surgical specimen or image guided biopsy proves the diagnosis, and BRCA with mismatch repair testing guides maintenance treatment and family screening."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the first-line imaging for a suspected ovarian tumour?",
+          "a": "Transvaginal with transabdominal pelvic ultrasound with Doppler, as the first-line imaging for an adnexal mass.",
+          "accept": ["ultrasound", "transvaginal", "doppler", "first-line"],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Which markers do you order, and how does her age change the list?",
+          "a": "CA-125 with menopausal status for the RMI, plus AFP, hCG and LDH with inhibin in a young woman for germ cell and stromal tumours.",
+          "accept": ["125", "rmi", "germ", "inhibin"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "The RMI is high. What completes staging and proves the diagnosis?",
+          "a": "Contrast CT of chest, abdomen and pelvis to map spread and operability, histology from surgery or image guided biopsy where surgery is not upfront, and BRCA with mismatch repair testing for her family.",
+          "accept": ["contrast", "histology", "biopsy", "brca"],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "ovarian_cancer: additionalInvestigations"
+        },
+        {
+          "source": "NICE guideline: Suspected cancer (recognition and referral)",
+          "locator": "Ovarian cancer symptoms and CA-125"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ovarian.diagnosis": {
+      "id": "skill.ovarian.diagnosis",
+      "kind": "reasoning",
+      "system": "gynaecology",
+      "title": "Diagnosis, RMI triage and FIGO staging",
+      "oneLine": "RMI band for triage, FIGO stage for extent, one statement for the referral",
+      "why": "A diagnosis of ovarian tumour without an RMI band does not say where she should be seen, and without a FIGO impression it does not say what surgery she faces. Band plus stage is what turns a label into a referral.",
+      "teach": [
+        {
+          "heading": "RMI band and what it demands",
+          "body": "The RMI multiplies three things: an ultrasound score from solid areas, bilaterality, multilocularity, ascites and metastases, a menopausal score, and the absolute CA-125 value. A value at or above 200 marks high risk and urgent gynaecological oncology referral.\n\nBelow that threshold, premenopausal and postmenopausal pathways differ, but any complex mass with ascites or a markedly raised marker in a postmenopausal woman is referred urgently whatever the arithmetic says."
+        },
+        {
+          "heading": "FIGO stages and the diagnostic statement",
+          "body": "Staging of ovary, tube and peritoneal cancer is surgical, set at midline laparotomy with washings and biopsies: Stage I is confined to ovary or tube including capsule breach and positive washings, and stage II is spread within the pelvis to uterus or other pelvic tissues.\n\nStage III is spread beyond the pelvis or to retroperitoneal nodes, from microscopic deposits through bulky peritoneal disease. Stage IV is distant: positive pleural cytology, or parenchymal liver and spleen disease.\n\nA complete diagnostic statement names the disease, the menopausal status, the mass with its laterality and character, the CA-125 with the RMI band, and the FIGO impression with red flags."
+        },
+        {
+          "heading": "Red flags",
+          "points": [
+            "Rapidly accumulating ascites with breathlessness or abdominal distension.",
+            "Bowel obstruction from peritoneal or omental disease.",
+            "Marked weight loss and cachexia suggesting advanced malignancy.",
+            "Pleural effusion indicating spread beyond the abdomen.",
+            "A complex solid cystic pelvic mass with markedly elevated CA-125 in a postmenopausal woman."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How is the Risk of Malignancy Index calculated?",
+          "a": "Ultrasound score multiplied by menopausal status multiplied by the CA-125 value, with 200 as the threshold between low and high risk.",
+          "accept": ["ultrasound", "menopausal", "125", "200"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What do the four FIGO stages of ovarian cancer describe?",
+          "a": "Stage I confined to ovary or tube, stage II spread within the pelvis, stage III spread beyond the pelvis or to retroperitoneal nodes, stage IV distant spread including pleural cytology and liver or spleen parenchyma.",
+          "accept": ["confined", "pelvis", "retroperitoneal", "distant"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "List the red flags that escalate an ovarian diagnosis to urgent.",
+          "a": "Rapidly accumulating ascites with breathlessness, bowel obstruction, marked weight loss with cachexia, pleural effusion, and a complex solid cystic mass with markedly raised CA-125 in a postmenopausal woman.",
+          "accept": ["ascites", "obstruction", "cachexia", "effusion"],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "rmi",
+          "text": "States the three RMI components and the band with its referral"
+        },
+        {
+          "id": "redflags",
+          "text": "Screens for ascites with breathlessness, obstruction, cachexia and effusion"
+        },
+        {
+          "id": "statement",
+          "text": "Gives a complete diagnostic statement with menopause, mass, CA-125, RMI band and FIGO impression"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "ovarian_cancer: clinicalPearls"
+        },
+        {
+          "source": "RCOG Green-top Guideline: Ovarian cysts in postmenopausal women",
+          "locator": "RMI triage and referral criteria"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.ovarian": {
+      "id": "skill.tx.ovarian",
+      "kind": "treatment",
+      "system": "gynaecology",
+      "title": "Managing ovarian tumour",
+      "oneLine": "Oncology referral, cytoreduction with platinum chemotherapy, genetics and palliation",
+      "why": "Management of ovarian tumour is centralised by design: the first decision is who operates, not what operation. Getting that referral wrong in either direction, cutting into a curable cancer locally or sending every simple cyst to a cancer centre, has real cost.",
+      "dosingNote": "This module teaches management at the level of drug class and principle, with regimens named but never dosed from the cited sources. Specific agents, regimens and doses must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "teach": [
+        {
+          "heading": "Refer first, never operate on suspicion locally",
+          "body": "A suspicious mass is referred to a gynaecological oncology multidisciplinary team before any intervention. Operating locally risks rupturing or morcellating an undiagnosed malignancy and spreading disease that was still curable.\n\nAt a district hospital the job is triage, not surgery: ultrasound with CA-125 and the RMI band, fitness workup, clot and anaemia correction, and a referral letter that states menopausal status, mass character, ascites and the RMI value."
+        },
+        {
+          "heading": "Surgery and systemic treatment",
+          "body": "Maximal cytoreductive surgery aims to remove all visible tumour, performed upfront or as interval debulking after neoadjuvant chemotherapy where disease is extensive or fitness is poor. Completeness of cytoreduction is the strongest prognostic factor.\n\nPlatinum based chemotherapy, typically carboplatin with paclitaxel, is the backbone of systemic treatment. PARP inhibitor maintenance follows for BRCA mutated or homologous recombination deficient disease, with bevacizumab in selected cases."
+        },
+        {
+          "heading": "Monitoring, genetics and supportive care",
+          "body": "Serial CA-125 alongside cross sectional imaging monitors response and detects relapse. Genetic testing for BRCA and mismatch repair mutations guides maintenance treatment, with cascade family testing and risk reducing salpingo oophorectomy for carriers.\n\nSymptomatic ascites is managed with paracentesis and early palliative and supportive care runs alongside active treatment in advanced disease, not after it fails."
+        },
+        {
+          "heading": "Indian context and referral thresholds",
+          "body": "Refer disease beyond local facilities to a tertiary cancer centre with a gynaecological oncology team, and use government insurance support such as Ayushman Bharat where the family is eligible, since complete treatment spans surgery, chemotherapy and follow up.\n\nA young woman with a probable benign cyst is managed conservatively with repeat imaging where safe, while any postmenopausal complex mass with ascites travels urgently regardless of distance: delay for local workup that adds nothing costs the chance of complete cytoreduction."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A postmenopausal woman has a complex mass with ascites and a high RMI. What is your first management step?",
+          "a": "Urgent referral to a gynaecological oncology multidisciplinary team before any operation, since outcome depends on complete cytoreduction by a specialist team.",
+          "accept": ["oncology", "multidisciplinary", "referral", "cytoreduction"],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What is the backbone of curative intent treatment?",
+          "a": "Maximal cytoreductive surgery to remove all visible tumour, upfront or as interval debulking after neoadjuvant chemotherapy, with platinum based chemotherapy built on carboplatin with paclitaxel.",
+          "accept": ["cytoreductive", "interval", "neoadjuvant", "platinum"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What follows surgery and chemotherapy, and how is symptomatic ascites managed?",
+          "a": "PARP inhibitor maintenance for BRCA mutated or homologous recombination deficient disease with bevacizumab in selected cases, serial CA-125 with imaging for response, and paracentesis with early palliative care for symptomatic ascites.",
+          "accept": ["parp", "brca", "bevacizumab", "paracentesis"],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "ovarian_cancer: management"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Ovarian cancer (surgery and chemotherapy)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.ovarian.rmi_figo": {
+      "id": "skill.annex.ovarian.rmi_figo",
+      "kind": "annexure",
+      "system": "gynaecology",
+      "title": "RMI and FIGO reference",
+      "oneLine": "RMI arithmetic and FIGO stages on one reference card",
+      "why": "RMI arithmetic and FIGO stages are looked up, not memorised, but they must be looked up exactly: a wrong multiplier sends a curable cancer to a routine queue. This card keeps the numbers that triage her in one place.",
+      "teach": [
+        {
+          "heading": "RMI components",
+          "table": {
+            "cols": ["Component", "Score", "Notes"],
+            "rows": [
+              ["Ultrasound features", "0, 1 or 3", "Solid areas, bilaterality, multilocularity, ascites, metastases"],
+              ["Menopausal status", "1 or 3", "Premenopausal lower, postmenopausal higher"],
+              ["CA-125", "Absolute value", "In the same units the laboratory reports"],
+              ["RMI total", "Product of the three", "200 or above is high risk"]
+            ]
+          }
+        },
+        {
+          "heading": "FIGO stages in brief",
+          "body": "FIGO stages for ovary, tube and peritoneum in brief: stage I disease confined to ovary or tube, with IA one side and capsule intact, IB both sides intact, and IC any breach by spill, surface tumour or positive washings.\n\nStage II spreads within the pelvis to uterus or other pelvic tissues. Stage III spreads beyond the pelvis or to retroperitoneal nodes, from microscopic deposits through bulky peritoneal disease. Stage IV is distant: positive pleural cytology, or parenchymal liver and spleen and extra abdominal disease."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "State the RMI formula and its action threshold.",
+          "a": "Ultrasound score times menopausal score times CA-125, with 200 as the high risk threshold for urgent oncology referral.",
+          "accept": ["ultrasound", "menopausal", "125", "200"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What separates FIGO IC1, IC2 and IC3?",
+          "a": "Stage IC1 is surgical spill, IC2 is capsule ruptured before surgery or tumour on the surface, and IC3 is malignant cells in ascites or washings.",
+          "accept": ["spill", "ruptured", "surface", "washings"],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "ovarian_cancer: additionalInvestigations"
+        },
+        {
+          "source": "RCOG Green-top Guideline: Ovarian cysts in postmenopausal women",
+          "locator": "RMI triage and referral criteria"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.ovarian.kamala",
+      "title": "A homemaker with four months of bloating and a distended abdomen",
+      "opening": "Kamala Bhosale, 58, a homemaker from a village near Nashik, sits in the gynaecology outpatient room with her daughter. Her abdomen looks distended. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Kamala Bhosale",
+        "age": 58,
+        "sex": "female",
+        "occupation": "Homemaker",
+        "residence": "Rural, lives with her daughter-in-law and son near Nashik"
+      },
+      "initialVitals": {
+        "bpSystolic": 130,
+        "bpDiastolic": 80,
+        "hr": 88,
+        "rr": 20,
+        "spo2": 97,
+        "temp": 37,
+        "gcs": 15
+      },
+      "history": {
+        "presenting": {
+          "cues": ["what brings you", "what is the problem", "why have you come", "complaint", "tell me about", "how can i help", "what is troubling"],
+          "key": true,
+          "reply": "Doctor, for four months my stomach keeps swelling with gas, I cannot eat, and I have lost weight. Something feels hard low on the right side.",
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "symptom_onset_tempo": {
+          "cues": ["when did it start", "how long now", "since when", "gradual or sudden", "getting worse"],
+          "key": true,
+          "reply": "It started gradually four months ago with gas and fullness, and has become steadily worse. The swelling and weight loss came in the last two months."
+        },
+        "bloating_meal_tolerance": {
+          "cues": ["bloating after food", "stomach swells up", "feel full quickly", "early satiety", "cannot finish meals", "belching and gas"],
+          "key": true,
+          "reply": "My stomach swells up after even a little food, and I feel full after two or three bites. I keep passing gas but it gives no relief."
+        },
+        "urinary_bowel_pressure": {
+          "cues": ["passing urine often", "urinary urgency", "constipation now", "bowels changed", "incomplete emptying"],
+          "key": true,
+          "reply": "I pass urine very often, even at night, and I feel constipated though the motions pass. There is no burning."
+        },
+        "weight_appetite_change": {
+          "cues": ["weight loss", "clothes loosening", "appetite reduced", "food tastes bad", "weakness growing"],
+          "key": true,
+          "reply": "I have lost about 6 kg in two months though I eat little. Food tastes flat and I tire walking to the temple."
+        },
+        "pelvic_pain_character": {
+          "cues": ["pain low down", "aching on one side", "sudden severe pain", "pain with vomiting", "pain all the time"],
+          "key": true,
+          "reply": "There is a dull ache on the right side low down most days. It never came suddenly and I never vomited with it."
+        },
+        "vaginal_bleed_after_menopause": {
+          "cues": ["bleeding after menopause", "spotting now", "white discharge", "foul smell", "bleeding after relations"],
+          "key": true,
+          "reply": "No bleeding at all since my periods stopped, and no discharge or smell. Relations ended years ago after my husband passed."
+        },
+        "menopause_hormone_background": {
+          "cues": ["when did periods stop", "age at menopause", "hormones after menopause", "bleeding after menopause", "hot flushes"],
+          "key": true,
+          "reply": "My periods stopped at 50, eight years ago. I never bled after that and took no hormones. The flushes settled long back."
+        },
+        "obstetric_parity_detail": {
+          "cues": ["how many children", "pregnancies you had", "deliveries normal or operation", "miscarriage before", "breastfed your babies"],
+          "key": true,
+          "reply": "I have two children, both normal deliveries, now aged 32 and 29. I breastfed both for over a year. No miscarriage."
+        },
+        "contraceptive_use_history": {
+          "cues": ["contraceptive pills", "family planning pills", "mala d", "hormone tablets", "operation for family", "sterilisation"],
+          "reply": "I never took any pills for family planning. I had a sterilisation operation after my second child, and took nothing after my periods stopped."
+        },
+        "cancer_family_record": {
+          "cues": ["cancer in the family", "anyone with tumour", "breast cancer at home", "family history of cancer", "relatives with operation for cancer"],
+          "reply": "Nobody in our family has had cancer that I know. My mother died of old age and my sisters are well."
+        },
+        "pelvic_surgery_before": {
+          "cues": ["operation on uterus", "operation on ovary", "cyst removed before", "admitted to hospital", "blood given before"],
+          "reply": "Only the sterilisation operation years ago. I was never admitted otherwise and never needed blood."
+        },
+        "tuberculosis_contact_check": {
+          "cues": ["tb at home", "anyone coughing blood", "contact with tb patient", "night sweats", "evening fever"],
+          "reply": "Nobody at home has TB. I get no evening fever, only this swelling and loss of appetite."
+        },
+        "chronic_illness_review": {
+          "cues": ["diabetes or pressure", "sugar problem", "thyroid problem", "tuberculosis before", "jaundice before", "other long illness", "kidney trouble"],
+          "reply": "No diabetes, no high blood pressure, no thyroid problem. I never had TB and no jaundice."
+        },
+        "current_medicine_intake": {
+          "cues": ["which medicines now", "tablets you take", "regular medication", "painkillers often", "tonics or ayurvedic"],
+          "key": true,
+          "reply": "I take no regular tablets. Sometimes I take a painkiller from the shop when the ache is more, but not daily."
+        },
+        "personal_diet_habits": {
+          "cues": ["what work do you do", "vegetarian or nonvegetarian", "tobacco or mishri", "alcohol use", "income at home"],
+          "reply": "I am a homemaker and eat vegetarian food at home. I use no tobacco and no alcohol. My son works as a driver."
+        },
+        "lump_noticed_growth": {
+          "cues": ["lump in the stomach", "swelling low down", "something hard inside", "stomach growing bigger", "clothes feel tight"],
+          "key": true,
+          "reply": "For two months my stomach keeps growing though I eat less. My clothes feel tight and my daughter says something hard can be felt on the right side low down."
+        }
+      },
+      "exam": {
+        "skill.exam.obg.bimanual": {
+          "abnormal": true,
+          "finding": "Uterus normal postmenopausal size, mobile, moving independently of the mass. Right fornix holds a firm irregular mass of about 10 cm, separate from the uterus with a groove between. Left fornix full. Pouch of Douglas nodular."
+        },
+        "skill.exam.obg.gynae_abdominal": {
+          "abnormal": true,
+          "finding": "Abdomen distended with shifting dullness from ascites. Firm irregular mass of about 10 cm in the right iliac fossa reaching the hypogastrium, lower border felt, moving transversely with no movement transmitted to the cervix. Umbilicus flat, no palpable nodes."
+        },
+        "skill.exam.obg.speculum_insert": {
+          "abnormal": false,
+          "finding": "Speculum passed gently without difficulty; some discomfort from the distended abdomen but no obstruction."
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "abnormal": false,
+          "finding": "Cervix atrophic and healthy, no growth, no bleeding, no foul discharge. No blood in the vault."
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "abnormal": false,
+          "finding": "Vulva normal, no lesions. Mild fullness from the raised intra abdominal pressure."
+        },
+        "skill.gen.appearance": {
+          "abnormal": true,
+          "finding": "Thin and tired looking with mild pallor, in no acute distress. Abdomen visibly distended. No breathlessness at rest."
+        },
+        "skill.gen.edema": {
+          "abnormal": true,
+          "finding": "Mild bilateral ankle oedema that pits. No unilateral swelling."
+        },
+        "skill.gen.vitals": {
+          "abnormal": false,
+          "finding": "Pulse 88 regular. Blood pressure 130/80. Respiratory rate 20. SpO2 97 percent on room air. Afebrile."
+        }
+      },
+      "investigations": {
+        "usg": {
+          "label": "Pelvic ultrasound with Doppler",
+          "result": "Right complex solid cystic adnexal mass of 10 cm with internal flow. Uterus normal postmenopausal size, endometrium thin. Moderate ascites. Left ovary not seen separately.",
+          "note": "First-line imaging: it characterises the mass and feeds the ultrasound score of the RMI.",
+          "indicated": true
+        },
+        "ca125": {
+          "label": "Serum CA-125",
+          "result": "CA-125 markedly raised at 320 U/mL. Germ cell markers normal for age.",
+          "note": "Read with menopausal status for the RMI: a markedly raised value with a complex mass postmenopause is highly suggestive.",
+          "indicated": true
+        },
+        "cect": {
+          "label": "Contrast CT of chest, abdomen and pelvis",
+          "result": "Right complex solid cystic adnexal mass of 10 cm with ascites and omental thickening. No liver parenchymal lesion. Chest clear, no effusion.",
+          "note": "Maps spread and operability for the oncology team: omentum, nodes, liver parenchyma and chest decide upfront versus interval surgery.",
+          "indicated": true
+        },
+        "fbc": {
+          "label": "Full blood count with renal and liver function",
+          "result": "Haemoglobin 10 g/dL. Mild anaemia of chronic disease. Renal and liver function normal, albumin low normal.",
+          "note": "Sets fitness for surgery and chemotherapy and corrects what is correctable before referral.",
+          "indicated": true
+        },
+        "ascitic_fluid": {
+          "label": "Ascitic fluid cytology",
+          "result": "Exudative fluid with malignant cells on cytology. Adenosine deaminase low, favouring malignancy over tuberculosis.",
+          "note": "Confirms peritoneal spread and separates malignancy from tuberculous peritonitis, which mimics it closely.",
+          "indicated": true
+        },
+        "rmi": {
+          "label": "Risk of Malignancy Index",
+          "result": "RMI in the high risk band, well above 200, from a complex bilateral pattern with ascites in a postmenopausal woman with markedly raised CA-125.",
+          "note": "The triage score: ultrasound features with menopausal status and CA-125 decide routine versus urgent oncology referral.",
+          "indicated": true
+        }
+      },
+      "essentialInvestigations": ["usg", "ca125", "cect"],
+      "differentialModel": {
+        "answer": "Probable ovarian cancer. Consider pedunculated fibroid uterus, endometrioma, dermoid cyst, functional ovarian cyst, ruptured ectopic pregnancy, tubo-ovarian abscess with pelvic inflammatory disease, and krukenberg tumour from a gastrointestinal primary.",
+        "accept": ["fibroid uterus", "endometrioma", "krukenberg tumour", "dermoid cyst", "ectopic pregnancy", "tubo-ovarian abscess", "functional ovarian cyst", "pelvic inflammatory disease"],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Probable ovarian cancer (carcinoma of the ovary): postmenopausal complex right ovarian mass with ascites, nodular pouch and high RMI, FIGO stage III impression, documented as ovarian tumour for the oncology referral.",
+        "accept": ["ovarian cancer", "carcinoma of the ovary", "ovarian tumour", "ovarian mass"]
+      },
+      "managementModel": {
+        "answer": "Urgent refer to a gynaecological oncology team for staging laparotomy with maximal cytoreduction and platinum chemotherapy with carboplatin and paclitaxel; track CA-125 response; drain symptomatic ascites by paracentesis; test BRCA with genetic counselling and family cascade.",
+        "accept": ["refer", "oncology", "cytoreduction", "carboplatin", "paclitaxel", "ca 125", "paracentesis", "ascites", "genetic"],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The tempo alone should raise suspicion before a single test: four months of persistent bloating with early satiety and weight loss in a postmenopausal woman is malignancy until proved otherwise.",
+        "A uterus that moves independently of the mass is the bedside proof of ovarian origin. A uterine mass moves with the cervix; an ovarian mass moves separately, often with a palpable groove between.",
+        "Ascites with a complex mass and a markedly raised CA-125 postmenopause completes the classic triad. A normal CA-125 would never exclude malignancy, but this raised one fixes urgency.",
+        "A nodular pouch of Douglas with omental thickening marks peritoneal spread and sets the FIGO impression at stage III, which is why she needs an oncology team and not a local operation.",
+        "Tuberculous peritonitis mimics this picture closely in India, so ascitic fluid analysis belongs in the workup rather than assumption from the scan alone.",
+        "No bleeding after the menopause with a healthy atrophic cervix argues against cervical or endometrial pathology without needing further tests to invoke it.",
+        "Genetic testing matters beyond her: a BRCA finding changes her maintenance treatment and sends her daughters and sisters for cascade screening with risk reducing options."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

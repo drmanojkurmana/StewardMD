@@ -1,0 +1,1173 @@
+{
+  "id": "obstructive-jaundice",
+  "name": "Obstructive jaundice",
+  "fullName": "Obstructive jaundice (surgical jaundice)",
+  "system": "surgery",
+  "subtitle": "Surgical jaundice work-up",
+  "kbRef": "progressive_familial_intrahepatic_cholestasis_type_3",
+  "oneLine": "Blocked bile flow turned yellow, and the bedside search for the level and the cause",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What surgical jaundice is, and why its yellow behaves differently",
+      "skills": [
+        "skill.reasoning.obstructive.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age and background set the odds before a symptom is mentioned",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected surgical jaundice, age and background carry real weight: a painless progressive yellow in an older patient favours a growth, while a middle-aged woman with a stone-forming background favours calculous obstruction. Note residence and access to endoscopy too, since the nearest ERCP centre may be hours away and that changes the referral plan."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Painful and intermittent or painless and progressive",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obstructive.jaundice",
+        "skill.hx.surg.pain"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A surgical jaundice story reads in weeks for a growth and in months of attacks for a stone: six weeks of painless deepening yellow with itching against repeated attacks of colic with yellow that fades between them. Record the tempo first, since it splits the differential before anything else is known."
+        },
+        "skill.hx.surg.pain": {
+          "expect": "Expect either no pain at all, which is the classic warning of a pancreatic or periampullary growth, or colicky right upper abdominal pain radiating to the right shoulder or through to the back with each jaundice attack, which belongs to a stone. A dull constant ache late in a painless jaundice marks advancing growth, not a new stone."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The background that names stones, warns of growth, or stops surgery",
+      "skills": [
+        "skill.hx.obstructive.risk"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Yellow in daylight, scratch marks, and the wasting that stages the case",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.surg.survey",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for deep icterus of sclerae, skin and palate examined in daylight, scratch marks across chest and back from bile salt itch, and pallor alongside. Cachexia with temporal wasting in a painless progressive jaundice stages the case toward malignancy at first glance."
+        },
+        "skill.gen.vitals": {
+          "expect": "Fever with tachycardia alongside jaundice marks infection behind the block and makes the case urgent, while hypotension with confusion marks the severe suppurative form. A stable, afebrile patient with deep jaundice points instead toward an uncomplicated malignant block."
+        },
+        "skill.gen.surg.survey": {
+          "expect": "Survey build, nourishment and hydration as fitness evidence: recent wasting with loose clothes and pedal oedema from hypoalbuminaemia argue advanced disease, while a well-nourished patient with isolated yellow keeps resection on the table."
+        },
+        "skill.gen.edema": {
+          "expect": "Pedal oedema here usually reflects hypoalbuminaemia from prolonged obstruction and poor intake or malignant cachexia rather than cardiac failure. Read it with the weight story, not in isolation."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Abdominal examination",
+      "blurb": "The gallbladder question, the liver edge, and the stigmata of spread",
+      "skills": [
+        "skill.exam.surg.lump_inspection_palpation",
+        "skill.exam.surg.cholecystitis_signs",
+        "skill.exam.surg.courvoisier_sign",
+        "skill.exam.surg.malignancy_stigmata",
+        "skill.exam.surg.axillary_nodes"
+      ],
+      "emphasis": {
+        "skill.exam.surg.lump_inspection_palpation": {
+          "expect": "Inspect the right hypochondrium for a globular fullness below the costal margin, then palpate for a smooth, rounded, non-tender gallbladder that moves with respiration, and for a firm liver edge below it. A hard, irregular mass instead suggests gallbladder cancer rather than simple distension."
+        },
+        "skill.exam.surg.cholecystitis_signs": {
+          "expect": "Test specifically for the opposite finding: tenderness that arrests inspiration on right upper quadrant palpation with fever belongs to acute cholecystitis, not to malignant obstruction. Its presence redirects the case toward inflammation rather than growth."
+        },
+        "skill.exam.surg.courvoisier_sign": {
+          "expect": "In this patient the law is the examination: a palpable, distended, non-tender gallbladder with deepening painless jaundice argues for a periampullary or pancreatic growth, while an impalpable gallbladder with colicky intermittent jaundice argues for a stone."
+        },
+        "skill.exam.surg.malignancy_stigmata": {
+          "expect": "Hunt deliberately for cachexia, a hard nodular liver, ascites and wasting, since each finding upstages a painless progressive jaundice and moves the plan from stone clearance to cancer staging."
+        },
+        "skill.exam.surg.axillary_nodes": {
+          "expect": "Examine the left supraclavicular fossa deliberately for a hard, discrete node, since its presence in a malignant-pattern jaundice settles disseminated disease at the bedside and spares the patient a futile laparotomy."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the jaundice picture together",
+      "blurb": "One blocked duct explains the yellow, and the body names the blocker",
+      "skills": [
+        "skill.reasoning.obstructive.signs",
+        "skill.annexure.obstructive.triads"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Six sentences that contain the case",
+      "skills": [
+        "skill.present.obstructive.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Stone, growth or stricture, and what must not reach theatre",
+      "skills": [
+        "skill.reasoning.obstructive.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Bloods show the pattern, scans find the block, drainage never waits for sepsis",
+      "skills": [
+        "skill.investigation.obstructive.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis",
+      "blurb": "Level, likely cause, and urgency in one statement",
+      "skills": [
+        "skill.reasoning.obstructive.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Drain infection urgently, clear stones, stage growths",
+      "skills": [
+        "skill.treatment.obstructive.management"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.obstructive.abdomen_exam",
+        "title": "Examine the jaundiced abdomen",
+        "task": "This 58-year-old man has had painless, deepening jaundice for six weeks with itching. Examine his abdomen and present your findings.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.exam.surg.lump_inspection_palpation",
+          "skill.exam.surg.cholecystitis_signs",
+          "skill.exam.surg.courvoisier_sign",
+          "skill.exam.surg.malignancy_stigmata"
+        ],
+        "examinerQuestions": [
+          "You found a palpable, non-tender gallbladder with deepening painless jaundice. State the law and what it argues for.",
+          "What would tenderness arresting inspiration suggest instead, and how would your plan change?",
+          "Name two bedside findings that would upstage this case toward disseminated disease."
+        ]
+      },
+      {
+        "id": "osce.obstructive.history_urgency",
+        "title": "Take a jaundice history and grade urgency",
+        "task": "This 45-year-old woman has had intermittent jaundice with upper abdominal pain for four months. Take a focused history in six minutes and be ready to state the likely cause and urgency.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.obstructive.jaundice",
+          "skill.hx.obstructive.risk",
+          "skill.hx.surg.pain"
+        ],
+        "examinerQuestions": [
+          "Her jaundice fades between attacks of colic with shivering. Name the pattern and the most likely cause.",
+          "What three features would make this an emergency for same-day drainage?",
+          "She had a cholecystectomy two years ago. How does that change your differential?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.reasoning.obstructive.basics",
+      "skill.hx.obstructive.jaundice",
+      "skill.exam.surg.courvoisier_sign",
+      "skill.reasoning.obstructive.signs",
+      "skill.reasoning.obstructive.differential",
+      "skill.investigation.obstructive.workup",
+      "skill.reasoning.obstructive.diagnosis",
+      "skill.treatment.obstructive.management"
+    ]
+  },
+  "skills": {
+    "skill.reasoning.obstructive.basics": {
+      "id": "skill.reasoning.obstructive.basics",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "What surgical jaundice is",
+      "oneLine": "Blocked bile flow below the liver, and why its jaundice behaves differently",
+      "why": "Surgical jaundice is jaundice from a blockage in the bile path after bile has already been conjugated, so the yellow behaves differently from liver cell failure: the urine turns dark, the stool turns pale, the skin itches, and the gallbladder may swell behind the block. Holding that mechanism is what makes every later question and sign fall into place.",
+      "body": "Obstructive jaundice is yellow discolouration of skin, sclerae and mucosae from conjugated bilirubin held back in blood by a blockage between the liver hilum and the duodenum, while the liver cells themselves keep working.",
+      "keyPoints": [
+        "In surgical practice three groups present this way: jaundice from a growth, jaundice from a stone in the duct system, and jaundice from other causes such as pancreatitis, pseudocyst, stricture or liver disease.",
+        "Because the block sits after conjugation, bilirubin spills into urine which turns dark like tea, while little reaches the gut so the stool turns pale like clay and fat passes undigested, leaving bulky, foul motions.",
+        "Bile salts held back in blood cause itching, often worst on the palms and soles and at night, and scratch marks may be visible before the yellow is obvious, so always examine the skin in daylight.",
+        "The gallbladder behind a new malignant block distends and becomes palpable, while behind a stone it usually cannot, because earlier inflammation has left it scarred and fibrotic.",
+        "A growth at the head of the pancreas gives classically painless, steadily deepening jaundice, whereas a stone gives painful, intermittent jaundice with colic, and a growth at the ampulla itself may ease briefly when tumour tissue sloughs.",
+        "Inherited bile disorders of the ABCB4 spectrum can mimic a large duct blockage with raised GGT cholestasis, gallstones and duct injury, and mistaking them for a surgical block leads to operations that cannot help."
+      ],
+      "pitfalls": [
+        "Calling every yellow patient obstructed without checking the urine and stool story, which is what places the block below the liver.",
+        "Expecting pain in malignant obstruction. The classic pancreatic head growth is painless until late, and waiting for pain delays the diagnosis.",
+        "Forgetting that itching can precede visible jaundice by days, so a patient who itches without yellow still deserves the same work-up.",
+        "Assuming all raised GGT cholestasis is surgical. Low-phospholipid bile disease injures ducts from within and needs medical and genetic management, not a knife."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What happens to the urine and the stool in obstructive jaundice, and why?",
+          "a": "The urine turns dark because conjugated bilirubin spills into blood and then urine, while the stool turns pale like clay because little bile reaches the gut.",
+          "accept": [
+            "dark",
+            "urine",
+            "pale",
+            "clay",
+            "bile"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why does the skin itch in obstructive jaundice?",
+          "a": "Bile salts held back in the blood deposit in the skin and cause itching, often worst on the palms and soles and at night.",
+          "accept": [
+            "bile salts",
+            "blood",
+            "itch",
+            "palms",
+            "night"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How does the classic course of a pancreatic head growth differ from a duct stone?",
+          "a": "A pancreatic head growth gives painless, steadily deepening jaundice with anorexia and weight loss, while a stone gives painful, intermittent jaundice that follows attacks of colic and fades between them.",
+          "accept": [
+            "painless",
+            "progressive",
+            "painful",
+            "intermittent",
+            "colic"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "progressive_familial_intrahepatic_cholestasis_type_3: pathophysiology"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gallbladder_disease: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Obstructive jaundice: causes and mechanism"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.obstructive.signs": {
+      "id": "skill.reasoning.obstructive.signs",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Putting the obstructive jaundice picture together",
+      "oneLine": "One blocked duct, and why the gallbladder, the skin and the glands tell the cause",
+      "why": "A blocked bile duct announces itself twice: once in the yellow, the itch and the pale stool, and once in the cause written on the body, a palpable gallbladder for growth, fever with rigors for infected stone, wasting and a hard node for advanced cancer. Reading those two layers together is what turns a list of signs into a provisional cause and an urgency.",
+      "body": "Conjugated bilirubin held back in blood stains tissue, while the cause of the block writes its own signs on the gallbladder, the skin, the liver and the lymph nodes. Every local sign follows from those two facts.",
+      "keyPoints": [
+        "Jaundice itself: examine sclerae, skin, nail beds, underside of the tongue and soft palate in daylight, since artificial light hides early yellow, and grade whether it is lemon yellow or deep greenish with chronicity.",
+        "Skin: scratch marks across chest, back and limbs from bile salt itch, and palpate for a thickened, fibrotic feel in longstanding obstruction; pallor alongside suggests blood loss or chronic disease.",
+        "Gallbladder: a smooth, rounded, non-tender swelling below the right costal margin that moves with respiration in a jaundiced patient argues for a malignant, smoothly obstructing lesion, since a stone-bearing gallbladder is usually scarred and cannot distend.",
+        "Liver: a firm, enlarged liver with a sharp edge suggests downstream block with back pressure or secondaries, while a tender liver with fever points to infection behind the block.",
+        "Malignant stigmata: cachexia, a hard left supraclavicular node, ascites, and a hard nodular liver edge all upstage the case at the bedside and redirect the plan toward staging rather than simple stone clearance.",
+        "Fever pattern: intermittent fever with rigors riding on pain and jaundice marks infection in an obstructed duct and makes the case urgent, while a persistently raised temperature with tenderness over the gallbladder point belongs to acute cholecystitis rather than simple obstruction."
+      ],
+      "pitfalls": [
+        "Examining for jaundice under ward tube lights and missing early yellow that daylight would have shown.",
+        "Feeling a palpable gallbladder and still booking the case as a stone. A distended, non-tender gallbladder with jaundice is malignant until proved otherwise.",
+        "Skipping the left supraclavicular fossa in a painless progressive jaundice and missing the node that settles the staging question.",
+        "Confusing the tenderness of acute cholecystitis with the non-tender distension of malignant obstruction, which point in opposite directions."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the single most telling abdominal sign in a jaundiced patient, and what does it mean?",
+          "a": "A palpable, smooth, non-tender gallbladder, which argues for a malignant smoothly obstructing lesion rather than a stone, since a stone-bearing gallbladder is usually fibrotic and cannot distend.",
+          "accept": [
+            "palpable",
+            "gallbladder",
+            "malignant",
+            "fibrotic",
+            "stone"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Pain, jaundice and fever with rigors appear together in attacks. Name the pattern and its meaning.",
+          "a": "Charcot triad, marking infection behind a blocked duct, usually a stone, and calling for admission with antibiotics and planned biliary drainage.",
+          "accept": [
+            "Charcot",
+            "infection",
+            "stone",
+            "drainage",
+            "admission"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why can a growth at the ampulla give intermittent rather than progressive jaundice?",
+          "a": "Part of the tumour can slough, briefly reopening the passage so the yellow fades, before growth closes it again. The course mimics a stone, so the rest of the picture must still decide.",
+          "accept": [
+            "slough",
+            "tumour",
+            "reopening",
+            "stone",
+            "course"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gallbladder_disease: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Obstructive jaundice: physical signs"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Jaundice and palpable gallbladder"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.obstructive.differential": {
+      "id": "skill.reasoning.obstructive.differential",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Differential diagnosis of surgical jaundice",
+      "oneLine": "Stone, growth or stricture, and the medical mimics that must not reach theatre",
+      "why": "Most surgical jaundice is a stone or a growth, but the list around them decides the operation: a benign stricture needs reconstruction, sclerosing disease needs endoscopy and surveillance, and inherited or medical cholestasis needs no operation at all. A differential that cannot name what lies outside surgery sends the wrong patient to theatre.",
+      "body": "For a conjugated jaundice with dark urine, pale stools and itching, work through calculous, malignant, benign stricturing and medical causes in that order.",
+      "keyPoints": [
+        "Choledocholithiasis: favoured by colicky attacks before and with the jaundice, an intermittent course, fever with rigors in attacks, and a non-palpable gallbladder; longstanding duct stones also explain recurrent cholangitis.",
+        "Acute cholangitis as the infected face of obstruction: Charcot triad of pain, jaundice and spiking fever with chills, with confusion, hypotension and shock marking the severe suppurative form that needs emergency drainage.",
+        "Carcinoma of the pancreatic head: favoured by painless, steadily deepening jaundice in an older patient with anorexia and weight loss and a palpable non-tender gallbladder; pain passing through to the back that eases on sitting forward belongs here too.",
+        "Periampullary and ampullary growths: behave like pancreatic cancer but may bleed, may ease briefly on sloughing, and remain the most curable of the malignant blocks when caught early.",
+        "Cholangiocarcinoma and gallbladder cancer: favoured by progressive obstruction with weight loss, often with a background of gallstones or sclerosing disease; gallbladder cancer may present as a hard mass at the fundus rather than simple distension.",
+        "Benign strictures: prior cholecystectomy or bile duct injury, Mirizzi compression from a stone impacted in the neck of the gallbladder, choledochal cyst with its pain, jaundice and palpable swelling, and chronic pancreatitis with calcification and steatorrhoea.",
+        "Sclerosing cholangitis: favoured by inflammatory bowel disease, a beaded duct on cholangiography, and a relapsing course; it carries a real risk of bile duct cancer and needs surveillance, not a single stone operation.",
+        "Medical mimics to exclude before surgery: acute viral hepatitis with its prodrome and marked transaminase rise, and inherited ABCB4 bile disease with raised GGT cholestasis, cholesterol stones and duct injury that mimics obstruction on imaging."
+      ],
+      "pitfalls": [
+        "Booking a benign post-cholecystectomy stricture for stone surgery without cholangiography, when it needs reconstruction at a specialist centre.",
+        "Missing gallbladder cancer behind what looks like simple cholecystitis with jaundice, especially where gallstones are endemic.",
+        "Treating inherited or sclerosing cholestasis with repeated stone procedures instead of medical management, surveillance and family testing.",
+        "Discharging an improving cholangitis without clearing the duct, which guarantees the next attack will be worse."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name the malignant causes of obstructive jaundice in order from the duodenum upward.",
+          "a": "Ampullary and periampullary growths, carcinoma of the pancreatic head, distal bile duct cholangiocarcinoma, gallbladder cancer, and porta hepatis nodal secondaries compressing the duct.",
+          "accept": [
+            "ampullary",
+            "pancreatic",
+            "cholangiocarcinoma",
+            "gallbladder",
+            "secondaries"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "A young patient has ulcerative colitis and relapsing jaundice with itching. What do you suspect and what shows it?",
+          "a": "Sclerosing cholangitis, shown by cholangiography with multifocal strictures and beading, with a standing risk of bile duct cancer that needs surveillance.",
+          "accept": [
+            "sclerosing",
+            "cholangitis",
+            "beading",
+            "cholangiography",
+            "surveillance"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Spans calculous, malignant, stricturing and medical causes"
+        },
+        {
+          "id": "courvoisier",
+          "text": "Uses the gallbladder state to split stone from growth"
+        },
+        {
+          "id": "mimics",
+          "text": "Names at least one medical mimic that must not reach theatre"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "progressive_familial_intrahepatic_cholestasis_type_3: additionalDifferentials"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gallbladder_disease: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Obstructive jaundice: differential diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.investigation.obstructive.workup": {
+      "id": "skill.investigation.obstructive.workup",
+      "kind": "investigation",
+      "system": "surgery",
+      "title": "Investigating the blocked bile duct",
+      "oneLine": "Bloods show the pattern, ultrasound finds the block, cholangiography names it",
+      "why": "Investigations in obstruction answer three questions in order: is this truly a blocked duct, where does the block sit, and what is it made of. Running them in that order stops a student ordering an invasive cholangiogram before a painless ultrasound has even confirmed that the ducts are dilated.",
+      "body": "Group investigations by what they answer: confirm the cholestatic pattern, show the dilated ducts, define the level and cause, stage the disease, and check fitness for the procedure.",
+      "keyPoints": [
+        "CONFIRM THE PATTERN: liver function tests showing a cholestatic picture with raised conjugated bilirubin and raised alkaline phosphatase and GGT out of proportion to the transaminases; a raised GGT with stones and duct injury should also raise the thought of ABCB4 bile disease.",
+        "FULL BLOOD COUNT, renal function, glucose, and a clotting profile: prolonged prothrombin time from vitamin K malabsorption is common and must be corrected before any needling or operation.",
+        "FIRST LINE IMAGING: abdominal ultrasound, painless and repeatable, which confirms dilated intrahepatic and common ducts, shows gallbladder stones and wall change, and can spot a head of pancreas mass; it is the procedure of choice for gallstones with very high accuracy.",
+        "DEFINE THE LEVEL AND CAUSE: magnetic resonance cholangiopancreatography maps stones and strictures without invasion and is the first choice for suspected duct stones; endoscopic retrograde cholangiopancreatography both shows and treats, clearing duct stones through the papilla, but can seed infection and pancreatitis so it is never purely diagnostic.",
+        "WHEN ENDOSCOPY CANNOT REACH: percutaneous transhepatic cholangiography through a fine needle outlines obstructions above the block, with bile taken for culture at the same sitting; bleeding, bile leak and sepsis are its three major complications, so clotting must be normal first.",
+        "STAGE THE GROWTH: contrast computed tomography of the abdomen for a pancreatic or bile duct mass with vascular involvement, nodes and liver secondaries, with tissue diagnosis where resection or chemotherapy turns on it.",
+        "BILE AND BLOOD CULTURES: blood cultures in any fever with rigors, and bile for culture whenever the duct is needled or drained, so later sepsis meets the right antibiotic.",
+        "CHECK FITNESS: chest film and electrocardiogram in older patients, since the endpoint is anaesthesia and a major resection or prolonged endoscopy. The single most important principle: fever with rigors and jaundice is infected obstruction until proved otherwise, and drainage must not wait for the full staging set."
+      ],
+      "pitfalls": [
+        "Ordering an invasive cholangiogram before an ultrasound has confirmed dilated ducts.",
+        "Reading a normal ultrasound as excluding a duct stone. Small stones and ampullary lesions hide easily, and MRCP stays indicated when the story is strong.",
+        "Needling the liver for cholangiography with uncorrected clotting. Vitamin K correction comes first.",
+        "Letting staging scans delay drainage in a patient with Charcot features. Sepsis does not wait for a CT slot."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the first imaging test in suspected obstructive jaundice, and what do you look for?",
+          "a": "Abdominal ultrasound, looking for dilated intrahepatic and common bile ducts, gallbladder stones and wall change, and any mass at the head of the pancreas.",
+          "accept": [
+            "ultrasound",
+            "dilated",
+            "ducts",
+            "gallbladder",
+            "stones"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "How do you choose between MRCP and ERCP for a suspected duct stone?",
+          "a": "MRCP first to map stones and strictures without invasion, since its accuracy rivals ERCP for showing duct stones. ERCP follows when treatment is intended, clearing stones through the papilla, accepting its risks of infection and pancreatitis.",
+          "accept": [
+            "MRCP",
+            "map",
+            "ERCP",
+            "treat",
+            "stones"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "A jaundiced patient needs liver needling for cholangiography. What blood test must be checked and corrected first?",
+          "a": "The prothrombin time, prolonged by vitamin K malabsorption in obstruction, corrected toward normal with vitamin K injection before any needling or operation.",
+          "accept": [
+            "prothrombin",
+            "vitamin K",
+            "corrected",
+            "needling",
+            "clotting"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "progressive_familial_intrahepatic_cholestasis_type_3: additionalInvestigations"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gallbladder_disease: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Obstructive jaundice: investigations"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.obstructive.diagnosis": {
+      "id": "skill.reasoning.obstructive.diagnosis",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Diagnosis: level, cause and urgency",
+      "oneLine": "Name the level, name the likely cause, and grade the infection",
+      "why": "A diagnosis of obstructive jaundice that stops at yellow says nothing about what happens next. The complete statement names the level of the block, the likely cause with the evidence for it, and whether infection rides with it, because those three phrases decide between a routine scan, an urgent drainage, and a cancer staging pathway.",
+      "body": "Build the diagnosis in three clauses: the level of obstruction, the likely cause with its supporting evidence, and the urgency set by infection and fitness.",
+      "keyPoints": [
+        "LEVEL: intrahepatic versus extrahepatic from the story and scans; dilated ducts on ultrasound with a cholestatic blood picture place the block outside the liver, while a non-dilated tree with raised GGT cholestasis and stones should raise inherited ABCB4 bile disease instead.",
+        "CAUSE: stone versus growth from tempo, pain, fever pattern and the gallbladder state, stated with the evidence, such as painless progressive jaundice with a palpable non-tender gallbladder favouring a periampullary growth.",
+        "INFECTION: Charcot triad of pain, jaundice and spiking fever with chills marks cholangitis, and confusion with hypotension and shock marks its severe suppurative form, which is an emergency for antibiotics and drainage rather than a diagnostic puzzle.",
+        "MALIGNANT STAGING CLUES: a hard supraclavicular node, ascites, a nodular liver edge and cachexia upstage the disease at the bedside and move the plan from clearance to staging and tissue diagnosis.",
+        "TISSUE PROOF: imaging suggests but histology proves, so a suspected growth needs biopsy or cytology before chemotherapy or a major resection, while a straightforward stone needs none.",
+        "A complete statement reads: painless progressive extrahepatic biliary obstruction with a positive Courvoisier sign, likely a periampullary growth, without cholangitis, fit for staging and hepatobiliary referral."
+      ],
+      "pitfalls": [
+        "Stating the diagnosis as jaundice without a level or cause, which leaves no plan behind it.",
+        "Calling cholangitis by jaundice alone. Without pain and fever with rigors it is obstruction, not infection, and the urgency differs completely.",
+        "Treating a scan report as the diagnosis in a suspected growth without tissue proof before definitive therapy.",
+        "Missing the inherited mimic: operating on ABCB4 bile disease as if it were a simple duct stone helps nothing and harms the patient."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What three clauses belong in a complete obstructive jaundice diagnosis?",
+          "a": "The level of the block, the likely cause with its supporting evidence, and the urgency set by infection and fitness for procedure.",
+          "accept": [
+            "level",
+            "cause",
+            "evidence",
+            "urgency",
+            "infection"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What turns obstruction into cholangitis in your diagnostic statement?",
+          "a": "Pain with jaundice and spiking fever with chills, the Charcot triad, with confusion, hypotension and shock marking the severe suppurative form.",
+          "accept": [
+            "Charcot",
+            "fever",
+            "chills",
+            "confusion",
+            "hypotension"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Ultrasound shows dilated ducts and the GGT is markedly raised with recurrent stones in a young adult. What else belongs in the diagnosis?",
+          "a": "A possible inherited ABCB4 bile disorder of the low-phospholipid stone spectrum, needing family history, genetic testing and medical management rather than another stone operation alone.",
+          "accept": [
+            "ABCB4",
+            "inherited",
+            "genetic",
+            "low-phospholipid",
+            "family"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "level",
+          "text": "States the level of obstruction with evidence"
+        },
+        {
+          "id": "cause",
+          "text": "Names a likely cause with supporting discriminators"
+        },
+        {
+          "id": "urgency",
+          "text": "Grades infection and states fitness with the next step"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "progressive_familial_intrahepatic_cholestasis_type_3: redFlags"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gallbladder_disease: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Obstructive jaundice: diagnosis and assessment"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.treatment.obstructive.management": {
+      "id": "skill.treatment.obstructive.management",
+      "kind": "treatment",
+      "system": "surgery",
+      "title": "Managing biliary obstruction",
+      "oneLine": "Drain infection urgently, clear stones endoscopically or surgically, stage growths for resection or palliation",
+      "why": "Obstruction kills through infection first and cancer second, so the plan is ordered by urgency: resuscitate and correct clotting, drain an infected duct without delay, clear stones by the least invasive route that works, and stage growths for cure where possible and relief where not. supportive care for itch, nutrition and clotting runs alongside every arm.",
+      "body": "Resuscitate, correct coagulopathy and cover infection first then relieve the block by the route its cause demands, and finally stage, refer and support.",
+      "keyPoints": [
+        "RESUSCITATE AND CORRECT: intravenous fluids, broad cover antibiotics where infection is suspected, and vitamin K to correct the prolonged prothrombin time of malabsorption before any needling, endoscopy or operation.",
+        "INFECTED OBSTRUCTION FIRST: acute cholangitis needs admission, prompt antibiotics and biliary drainage timed to severity, usually endoscopic, since antibiotics alone cannot sterilise a duct under pressure; confusion with shock means emergency drainage.",
+        "DUCT STONES: endoscopic clearance through the papilla is preferred where available, with laparoscopic cholecystectomy to remove the stone-forming gallbladder; open duct exploration with T-tube drainage remains the fallback where endoscopy is absent or fails.",
+        "GALLBLADDER DISEASE: laparoscopic cholecystectomy is definitive for symptomatic stones and its complications, while asymptomatic silent stones are left alone since most never cause trouble.",
+        "RESECTABLE GROWTH: a periampullary or pancreatic head growth without spread is referred promptly to a hepatobiliary centre for curative resection with curative intent, since delay closes the operability window.",
+        "UNRESECTABLE GROWTH: relief of itching, cholangitis and malabsorption by endoscopic stenting or surgical biliary bypass, with oncology referral for chemotherapy where appropriate; the aim is a comfortable, drain-free life at home.",
+        "CHOLESTATIC SUPPORT: bile acid therapy where an ABCB4-related or residual-function component exists, antipruritic measures from bile acid sequestrants to referral options for uncontrolled itch, and fat-soluble vitamin replacement with nutritional support in prolonged cholestasis.",
+        "INDIAN CONTEXT: fever with rigors and jaundice is an emergency at any hour and must travel the same day to a centre with endoscopy and surgery; definitive resections and stenting belong at government medical college or PM-JAY empanelled hepatobiliary units, with district hospitals stabilising, correcting clotting and referring rather than attempting duct surgery without support."
+      ],
+      "pitfalls": [
+        "Giving antibiotics for cholangitis without arranging drainage. A blocked, infected duct under pressure does not clear on drugs alone.",
+        "Attempting duct surgery at a centre without endoscopy, blood bank and critical care backup when referral would have been safer.",
+        "Chasing a cure in disseminated malignant obstruction instead of securing biliary drainage and symptom relief first.",
+        "Forgetting itch, vitamins and nutrition while pursuing the block. The patient lives with all of them every day of the work-up."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A patient has pain, jaundice and fever with rigors. What two treatments must run together?",
+          "a": "Prompt broad cover antibiotics with urgent biliary drainage, usually endoscopic, since antibiotics alone cannot clear an infected duct under pressure.",
+          "accept": [
+            "antibiotics",
+            "drainage",
+            "endoscopic",
+            "pressure",
+            "urgent"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How does management differ between a duct stone and a resectable periampullary growth?",
+          "a": "A duct stone is cleared endoscopically with later cholecystectomy, while a resectable growth is referred promptly to a hepatobiliary centre for curative resection before the window closes.",
+          "accept": [
+            "endoscopic",
+            "cholecystectomy",
+            "resection",
+            "hepatobiliary",
+            "referral"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "The growth is unresectable with liver secondaries. What becomes the aim of treatment?",
+          "a": "Palliation: endoscopic stenting or surgical biliary bypass to relieve jaundice, itching and infection risk, with oncology referral, aiming for comfort at home rather than cure.",
+          "accept": [
+            "palliation",
+            "stenting",
+            "bypass",
+            "oncology",
+            "comfort"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "progressive_familial_intrahepatic_cholestasis_type_3: management"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "CHOLANGITIS: recommendations"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gallbladder_disease: management"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Obstructive jaundice: treatment"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of drug CLASS and principle. Specific agents, routes, combinations and durations must be taken from your current national or institutional guideline and local resistance data at the time of prescribing. CliniX does not prescribe."
+    },
+    "skill.annexure.obstructive.triads": {
+      "id": "skill.annexure.obstructive.triads",
+      "kind": "annexure",
+      "system": "surgery",
+      "title": "Triads, laws and exceptions at a glance",
+      "oneLine": "Charcot, Reynolds and Courvoisier with the exceptions examiners love",
+      "why": "Three eponyms carry most of the bedside reasoning in surgical jaundice, and examiners probe exactly where each one breaks: the fever that completes Charcot, the confusion and shock that escalate to Reynolds, and the four exceptions that suspend Courvoisier. One reference card holding all three with their failure modes answers those questions before they are asked.",
+      "body": "Charcot triad marks infected obstruction, Reynolds pentad marks its severe suppurative form, and Courvoisier law reads the gallbladder; the exceptions to the law are as examinable as the law itself.",
+      "keyPoints": [
+        "CHARCOT TRIAD: biliary pain with jaundice and spiking fever with chills, present together in attacks, marking acute cholangitis behind a block, usually a stone, and calling for admission with antibiotics and planned drainage.",
+        "REYNOLDS PENTAD: Charcot triad plus confusion and hypotension with shock, marking suppurative cholangitis in a completely obstructed duct under pressure, which is an emergency for resuscitation, antibiotics and immediate drainage.",
+        "COURVOISIER LAW: a palpably enlarged, non-tender gallbladder with jaundice argues for a malignant, smoothly obstructing lesion rather than a stone, because a stone-bearing gallbladder is usually scarred by earlier inflammation and cannot distend.",
+        "EXCEPTIONS TO THE LAW: double impaction with one stone in the cystic duct and another in the common duct, oriental cholangiohepatitis with intrahepatic stones, a pancreatic calculus blocking the ampulla, and a mucocele from a cystic duct stone, each of which can distend the gallbladder despite stones.",
+        "A very hard gallbladder swelling instead suggests cancer of the gallbladder itself, a liver secondary, or rarely a primary liver tumour, rather than simple distension behind a block.",
+        "VITAMIN K RULE: prolonged prothrombin time from fat malabsorption must be corrected toward normal before liver needling, endoscopy with a cut, or operation."
+      ],
+      "pitfalls": [
+        "Quoting Charcot for jaundice with fever alone. Without the pain of obstruction it is not the triad.",
+        "Forgetting that Reynolds adds exactly two features, confusion and shock, to Charcot, and that both demand emergency action.",
+        "Reciting Courvoisier without its exceptions when the examiner asks for them; the double stone impaction is the commonest trap.",
+        "Needling or cutting with uncorrected clotting despite knowing the vitamin K rule."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "State Charcot triad and what it marks.",
+          "a": "Biliary pain with jaundice and spiking fever with chills, marking acute cholangitis behind a blocked duct, usually a stone.",
+          "accept": [
+            "pain",
+            "jaundice",
+            "fever",
+            "cholangitis",
+            "stone"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What does Reynolds pentad add to Charcot triad?",
+          "a": "Confusion and hypotension with shock, marking severe suppurative cholangitis in a completely obstructed duct under pressure.",
+          "accept": [
+            "confusion",
+            "hypotension",
+            "shock",
+            "suppurative",
+            "pressure"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Name two exceptions to Courvoisier law.",
+          "a": "Double impaction with stones in both the cystic and common ducts, oriental cholangiohepatitis, a pancreatic calculus blocking the ampulla, or a mucocele from a cystic duct stone.",
+          "accept": [
+            "double impaction",
+            "oriental",
+            "pancreatic calculus",
+            "mucocele",
+            "ampulla"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gallbladder_disease: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Courvoisier law and acute cholangitis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.obstructive.sitaram",
+      "initialVitals": {
+        "hr": 88,
+        "bpSystolic": 128,
+        "bpDiastolic": 80,
+        "rr": 18,
+        "spo2": 98,
+        "temp": 37.1,
+        "gcs": 15
+      },
+      "title": "A farmer with six weeks of painless yellow eyes",
+      "opening": "Sitaram Pawar, 58, sits in the surgical outpatient room with distinctly yellow eyes, scratching his forearm as he waits. His son says the yellow has deepened every week for over a month. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Sitaram Pawar",
+        "age": 58,
+        "sex": "male",
+        "occupation": "Farmer, grows onion and sugarcane",
+        "residence": "Rural, lives with his wife, two sons and mother"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "what is the problem today",
+            "why have you come to hospital",
+            "tell me about your illness",
+            "how can i help you today",
+            "what is troubling you most"
+          ],
+          "reply": "Doctor, my eyes and skin have turned yellow since one and half months, and the colour keeps getting darker. I itch all over, especially at night.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "yellow_course": {
+          "cues": [
+            "when did the yellow colour first appear",
+            "how long have you been yellow",
+            "has the jaundice deepened steadily",
+            "did the yellow colour ever fade",
+            "was the onset sudden or gradual"
+          ],
+          "reply": "It started slowly about six weeks ago in the eyes, then spread to the whole body. It has only deepened since, never faded, not even for a day.",
+          "key": true
+        },
+        "belly_pain": {
+          "cues": [
+            "do you have pain in the abdomen",
+            "any pain in the right upper abdomen",
+            "does the pain go to the shoulder",
+            "is the jaundice painful or painless",
+            "character of the abdominal pain"
+          ],
+          "reply": "No, doctor, there is no real pain. Only a heavy feeling sometimes in the upper abdomen after food. The yellow came without any pain at all.",
+          "key": true
+        },
+        "skin_itch": {
+          "cues": [
+            "do you feel itching of the skin",
+            "itching on the palms and soles",
+            "worse itching at night",
+            "have you scratched until bleeding",
+            "any rash with the itching"
+          ],
+          "reply": "Yes, severe itching, worst on the palms and at night. I scratch in my sleep. There is no rash, only marks from my own nails.",
+          "key": true
+        },
+        "urine_stool_change": {
+          "cues": [
+            "what colour is your urine",
+            "has the urine turned dark",
+            "what colour is your stool",
+            "have the motions turned pale or clay coloured",
+            "any bulky foul smelling motions"
+          ],
+          "reply": "Urine is dark yellow like strong tea since the beginning. Motions have become pale, almost white like clay, and they float and smell very bad.",
+          "key": true
+        },
+        "appetite_weight_fall": {
+          "cues": [
+            "how is your appetite these days",
+            "have you lost weight recently",
+            "are your clothes looser than before",
+            "any dislike for fatty food",
+            "loss of appetite with jaundice"
+          ],
+          "reply": "I feel full after two bites and fatty food makes me uneasy. My dhoti needs an extra fold now. I must have lost a lot of weight in these six weeks.",
+          "key": true
+        },
+        "fever_shivering": {
+          "cues": [
+            "have you had fever with the jaundice",
+            "any shivering or shaking chills",
+            "fever with rigors alongside yellow colour",
+            "did any attack need admission",
+            "temperature during the attacks"
+          ],
+          "reply": "No fever at all, doctor, not even for a day. No shivering, no shaking chills. I have not needed admission before today.",
+          "key": true
+        },
+        "nausea_vomit": {
+          "cues": [
+            "do you feel nausea after food",
+            "any vomiting after fatty meals",
+            "vomiting relieving the heaviness",
+            "how often do you vomit"
+          ],
+          "reply": "I feel nauseated after meals but I rarely vomit. Vomiting does not relieve the heaviness."
+        },
+        "bowel_motion": {
+          "cues": [
+            "change in your bowel habit lately",
+            "constipation or diarrhoea recently",
+            "how often do you pass motion",
+            "blood or mucus in the stool"
+          ],
+          "reply": "Motions come every two to three days now, pale and sticky. No blood, no black colour."
+        },
+        "earlier_gallstone_attack": {
+          "cues": [
+            "earlier attacks of upper abdominal pain",
+            "previous pain after fatty food",
+            "were you ever told of gallstones",
+            "past treatment for gallbladder pain",
+            "flatulent dyspepsia in the past"
+          ],
+          "reply": "Never, doctor. I never had this kind of pain before, never anyone told me of stones. This yellow is the first trouble.",
+          "key": true
+        },
+        "other_illness": {
+          "cues": [
+            "do you have diabetes or blood pressure",
+            "any heart or kidney disease",
+            "past jaundice or liver disease",
+            "tuberculosis in the past",
+            "previous operations on the abdomen"
+          ],
+          "reply": "No sugar, no pressure. No yellow before this, no liver trouble. No operation ever. I take no regular tablets.",
+          "key": true
+        },
+        "medicine_intake": {
+          "cues": [
+            "what medicines do you take daily",
+            "any tablets for fits or tuberculosis",
+            "herbal or ayurvedic preparations regularly",
+            "recent new drug before the yellow",
+            "injections of vitamin or iron"
+          ],
+          "reply": "Only the itching tablets the chemist gave last week. No TB medicines, no fits tablets, nothing herbal."
+        },
+        "drink_smoke_habit": {
+          "cues": [
+            "do you drink alcohol regularly",
+            "how much country liquor in a week",
+            "do you smoke bidis or cigarettes",
+            "tobacco chewing habit"
+          ],
+          "reply": "I drink a little country liquor at weddings only, maybe twice a year. I do not smoke, but I chew tobacco sometimes."
+        },
+        "work_food_habit": {
+          "cues": [
+            "what work do you do daily",
+            "what food do you eat at home",
+            "vegetarian or mixed diet",
+            "exposure to chemicals or pesticides"
+          ],
+          "reply": "I farm onion and sugarcane and spray pesticide with a cloth on my face. We eat bhakri, dal and vegetables at home, simple food."
+        },
+        "home_family": {
+          "cues": [
+            "anyone in the family with gallstones",
+            "family members with jaundice or liver trouble",
+            "is anyone else yellow at home",
+            "young gallstone surgery in the family"
+          ],
+          "reply": "Nobody at home is yellow. No gallstone operation in the family. My mother is old but healthy."
+        },
+        "patient_stay": {
+          "cues": [
+            "where do you live and with whom",
+            "how far is the nearest big hospital",
+            "who looks after you at home",
+            "can you travel for scans and treatment"
+          ],
+          "reply": "We live in our village, about sixty kilometres from the district hospital. My sons will bring me wherever you refer."
+        },
+        "illness_before": {
+          "cues": [
+            "back pain passing through to the back",
+            "new diabetes detected recently",
+            "itching before the yellow appeared",
+            "black tarry motions recently"
+          ],
+          "reply": "No back pain. No sugar found ever. The itching started a few days before my wife noticed the yellow in my eyes."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Deeply jaundiced with greenish yellow sclerae and skin, scratch marks across the chest, back and forearms. Thin built with temporal wasting, otherwise alert and sitting comfortably.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Temperature 37.1 C. Pulse 88 regular. Blood pressure 128/80. Respiratory rate 18. SpO2 98 percent on room air.",
+          "abnormal": false
+        },
+        "skill.gen.surg.survey": {
+          "finding": "Thin, undernourished build with loose skin folds and mild bilateral ankle oedema. No lymphoedema, no clubbing, no cyanosis.",
+          "abnormal": true
+        },
+        "skill.gen.edema": {
+          "finding": "Mild pitting pedal oedema to the mid shin on both sides, with no raised jugular venous pressure.",
+          "abnormal": true
+        },
+        "skill.exam.surg.lump_inspection_palpation": {
+          "finding": "Right hypochondrium shows a smooth globular fullness below the costal margin. A smooth, rounded, non-tender swelling is palpable below the right ninth costal cartilage, continuous above with the liver, moving freely with respiration. Liver edge firm, palpable two finger breadths below the costal margin.",
+          "abnormal": true
+        },
+        "skill.exam.surg.cholecystitis_signs": {
+          "finding": "No tenderness on right upper quadrant palpation and no inspiratory arrest. No guarding or rigidity over the gallbladder point.",
+          "abnormal": false
+        },
+        "skill.exam.surg.courvoisier_sign": {
+          "finding": "Positive: a distended, palpable, non-tender gallbladder in the presence of deepening painless jaundice, with no fever at any stage.",
+          "abnormal": true
+        },
+        "skill.exam.surg.malignancy_stigmata": {
+          "finding": "Cachexia with temporal wasting present. No ascites, no dilated abdominal veins, liver edge firm but smooth. No palpable pelvic deposits on rectal examination.",
+          "abnormal": true
+        },
+        "skill.exam.surg.axillary_nodes": {
+          "finding": "Left supraclavicular fossa empty, no hard node felt. Axillae clear. No generalised lymphadenopathy.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "usg",
+        "lft",
+        "mrcp"
+      ],
+      "investigations": {
+        "usg": {
+          "label": "Abdominal ultrasound",
+          "indicated": true,
+          "result": "Intrahepatic ducts dilated. Common bile duct dilated to the lower end with an abrupt cut-off. Gallbladder distended with thin walls and no stones. No liver secondaries seen.",
+          "note": "Confirms an extrahepatic block with a distended, stone-free gallbladder, exactly the pattern a malignant distal block produces."
+        },
+        "lft": {
+          "label": "Liver function tests",
+          "indicated": true,
+          "result": "Total bilirubin 12.4 mg/dL with direct fraction 9.6. Alkaline phosphatase 640 IU/L and GGT 380 IU/L, markedly raised. Transaminases mildly raised with ALT 96 and AST 84.",
+          "note": "A cholestatic pattern with conjugated bilirubin dominating, which places the block below the liver rather than in its cells."
+        },
+        "cbc": {
+          "label": "Full blood count",
+          "indicated": true,
+          "result": "Haemoglobin 11.2 g/dL with normocytic indices. Total leucocyte count 7800 per mm3 with normal differential. Platelets adequate.",
+          "note": "Mild anaemia of chronic disease without leucocytosis, fitting an afebrile malignant block rather than acute infection."
+        },
+        "ptinr": {
+          "label": "Prothrombin time and INR",
+          "indicated": true,
+          "result": "Prothrombin time prolonged with INR 1.6, corrected toward normal after vitamin K injection.",
+          "note": "Expected from fat malabsorption in prolonged obstruction, and it must be corrected before any needling or operation."
+        },
+        "mrcp": {
+          "label": "Magnetic resonance cholangiopancreatography",
+          "indicated": true,
+          "result": "Dilated biliary tree to the lower common duct with a short, smooth stricture at the periampullary region and upstream dilatation of both ducts. No stones. Pancreatic duct mildly dilated.",
+          "note": "Maps the level and the likely cause without invasion: a smooth distal stricture favouring a periampullary growth over stones."
+        },
+        "cect": {
+          "label": "Contrast CT abdomen",
+          "indicated": true,
+          "result": "Small enhancing mass at the periampullary region with no vascular encasement and no liver secondaries. A few subcentimetre periportal nodes. Chest and pelvis clear.",
+          "note": "Stages the growth as localised and potentially resectable, which is what sends this patient to a hepatobiliary centre."
+        },
+        "biopsy": {
+          "label": "Endoscopic biopsy",
+          "indicated": true,
+          "result": "Side-viewing endoscopy with biopsy of the ampullary mass shows adenocarcinoma. Bile aspirated at the same sitting sent for culture.",
+          "note": "Tissue proof before definitive therapy, with bile culture so any later sepsis meets the right antibiotic."
+        }
+      },
+      "differentialModel": {
+        "answer": "Malignant extrahepatic biliary obstruction, most likely a periampullary carcinoma. Consider carcinoma of the pancreatic head, cholangiocarcinoma of the distal duct, gallbladder carcinoma, choledocholithiasis with Mirizzi compression, and ascending cholangitis if fever appears.",
+        "accept": [
+          "Periampullary carcinoma",
+          "Carcinoma of the pancreas",
+          "Cholangiocarcinoma",
+          "Gallbladder carcinoma",
+          "Choledocholithiasis",
+          "Ascending cholangitis",
+          "Cholelithiasis",
+          "Chronic pancreatitis"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Obstructive jaundice from a malignant extrahepatic block, most likely a periampullary carcinoma, with a positive Courvoisier sign and no cholangitis.",
+        "accept": [
+          "Obstructive jaundice",
+          "surgical jaundice",
+          "Periampullary carcinoma"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Correct clotting with vitamin K, stage with contrast imaging and biopsy, refer urgently to a hepatobiliary centre for curative resection, relieve itching and support nutrition meanwhile, and keep antibiotics with emergency biliary drainage ready if fever with rigors appears.",
+        "accept": [
+          "vitamin K",
+          "staging",
+          "hepatobiliary",
+          "resection",
+          "referral",
+          "pruritus",
+          "nutrition",
+          "drainage"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "Painless and progressive over six weeks with a palpable non-tender gallbladder is malignant until proved otherwise. The tempo plus Courvoisier sign names the cause before any scan.",
+        "No fever at any stage keeps cholangitis out and the pathway elective. Had rigors appeared, drainage would have jumped ahead of staging.",
+        "Dark urine with clay stools and itching is the obstruction signature. It places the block below the liver on history alone.",
+        "An impalpable gallbladder would have argued for a stone, but here the distended, stone-free gallbladder on ultrasound seals the malignant reading.",
+        "The supraclavicular fossae were deliberately examined and empty. A hard node there would have upstaged the case at the bedside.",
+        "Clotting was checked and corrected before any needling. Prolonged obstruction always disturbs vitamin K absorption.",
+        "Tissue proof precedes definitive therapy. Imaging suggests a periampullary growth, but only biopsy proves it."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

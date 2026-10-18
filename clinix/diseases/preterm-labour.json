@@ -1,0 +1,1020 @@
+{
+  "_comment": "Preterm labour and PPROM. Same architecture as pneumonia and pre-eclampsia: shared core and obgyn skills carry the examination and the routines, fragment skills carry the preterm history and presentation, and this file owns only disease reasoning, investigation, treatment and PPROM skills. Subtitle: tocolysis, steroids, neuroprotection.",
+  "id": "preterm-labour",
+  "name": "Preterm labour and PPROM",
+  "fullName": "Preterm labour and preterm prelabour rupture of membranes",
+  "subtitle": "Tocolysis, steroids, neuroprotection",
+  "system": "obstetrics",
+  "kbRef": "preterm_labour",
+  "oneLine": "Regular contractions with cervical change before 37 weeks, and the race for steroids, transfer and safe delivery",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What early labour is, and why the week matters more than the pain",
+      "skills": [
+        "skill.preterm.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age, parity and dates set the risk before a symptom is mentioned",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected early labour, parity with the weeks of previous births carries the most weight: a prior spontaneous birth before term, and especially one in the early third trimester, raises the risk more than any other single fact. Unbooked status and referral from a primary centre matter too, because steroids, transfer and newborn care must all be arranged at once."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Pains, leaking, bleeding and discharge: four separate stories",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.booking_lmp",
+        "skill.hx.preterm.symptoms"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect pains of hours, not days or weeks: regular tightening coming every few minutes, each lasting most of a minute. A gush of fluid down below, with or without pains, is the second opening story and must be asked about even when she only complains of pain."
+        },
+        "skill.hx.obg.booking_lmp": {
+          "expect": "Dates decide everything here, so confirm them twice: the last period, an early scan if one exists, and fundal height against both. At 31 weeks the plan is steroids and transfer; near term it is delivery, and a wrong date picks the wrong plan."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The risk road she travelled to reach this day",
+      "skills": [
+        "skill.hx.obg.medical_family_drug",
+        "skill.hx.obg.previous_pregnancies",
+        "skill.hx.preterm.risk"
+      ],
+      "emphasis": {
+        "skill.hx.obg.previous_pregnancies": {
+          "expect": "Record every previous birth with its week and its outcome: a birth at 32 weeks with a surviving baby tells you both the risk and that this mother knows the newborn unit already. A second trimester loss or a stitch on the cervix points to cervical weakness rather than contractions as the driver."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Fever, pulse and pressure before the abdomen",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for an uncomfortable woman timing her own pains, and for fever with a fast pulse that suggests infected membranes. Pallor matters because anaemia is common and worsens outcomes, not because it diagnoses labour."
+        },
+        "skill.gen.vitals": {
+          "expect": "Expect normal pressure with a pulse quickened by pain, and note temperature carefully: fever with uterine tenderness and foul fluid is chorioamnionitis until proven otherwise, and it forbids tocolysis. Hypotension with a hard tender uterus and bleeding points to abruption instead."
+        },
+        "skill.gen.edema": {
+          "expect": "Ankle swelling alone means little in the third trimester. Facial puffiness with raised pressure belongs to pre-eclampsia, a different road that must be excluded, not to early labour."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Obstetric examination",
+      "blurb": "Uterus, fetus, membranes and cervix, in that order",
+      "skills": [
+        "skill.exam.obg.preg_prep_inspect",
+        "skill.exam.obg.fundal_height",
+        "skill.exam.obg.leopold",
+        "skill.exam.obg.fetal_heart",
+        "skill.exam.obg.speculum_insert",
+        "skill.exam.obg.speculum_inspect"
+      ],
+      "emphasis": {
+        "skill.exam.obg.preg_prep_inspect": {
+          "expect": "Watch the uterus through a pain: it hardens all over during a contraction and softens fully between, which is what separates true labour from a tender irritable uterus that never relaxes. Guarding with constant tenderness and no relaxation points to abruption or infection, not labour."
+        },
+        "skill.exam.obg.fundal_height": {
+          "expect": "Measure against the dates: a fundus matching 30 weeks at stated 31 weeks fits, while a much smaller or larger uterus raises growth restriction, wrong dates, or excess fluid, each of which changes the plan."
+        },
+        "skill.exam.obg.leopold": {
+          "expect": "Confirm lie and presentation, because malpresentation is commoner in early labour and decides the route of delivery. Note engagement and estimated size: a small early baby presenting by the breech is a different delivery conversation."
+        },
+        "skill.exam.obg.fetal_heart": {
+          "expect": "Count during and after a contraction. A rate that stays within the normal range with quick recovery reassures; persistent fast rate with maternal fever suggests infected membranes, and slowing with poor recovery demands urgent delivery, not tocolysis."
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "expect": "Look for fluid pooling in the posterior fornix, note its colour and smell, and watch whether more escapes on coughing. Green staining warns the neonatal team; foul smell with fever warns you. No digital vaginal examination when membranes are ruptured and labour is preterm, because fingers carry infection upward."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the early labour picture together",
+      "blurb": "Contractions plus cervical change: neither alone is enough",
+      "skills": [
+        "skill.preterm.findings"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Three sentences that contain mother, week and clock",
+      "skills": [
+        "skill.preterm.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "What else tightens, leaks or bleeds before term",
+      "skills": [
+        "skill.preterm.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Confirm it, date it, and find the infection before it finds the baby",
+      "skills": [
+        "skill.ix.preterm.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and staging",
+      "blurb": "Threatened or established, membranes intact or ruptured, infected or not",
+      "skills": [
+        "skill.preterm.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Steroids for the lungs, time for the steroids, protection for the brain",
+      "skills": [
+        "skill.tx.preterm",
+        "skill.approach.obg.team_leader"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this mother to your consultant",
+      "skills": [
+        "skill.present.preterm.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.preterm.assess",
+        "title": "Assess the mother and fetus in threatened early labour",
+        "task": "This 26-year-old woman is 31 weeks pregnant with regular painful contractions. Examine her and the fetus, and state what you will do next.",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.gen.vitals",
+          "skill.exam.obg.preg_prep_inspect",
+          "skill.exam.obg.fundal_height",
+          "skill.exam.obg.leopold",
+          "skill.exam.obg.fetal_heart"
+        ],
+        "examinerQuestions": [
+          "Are these contractions true labour? Defend your answer from what you found.",
+          "Her membranes are ruptured. Why will you not do a digital vaginal examination?",
+          "Name the three clock-driven treatments this mother needs before delivery, and what each buys."
+        ]
+      },
+      {
+        "id": "osce.preterm.history",
+        "title": "Take a history in leaking and pains before term",
+        "task": "This 26-year-old woman at 31 weeks reports fluid leaking down below with pains. Take a focused history in six minutes and state her risk factors.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.obg.booking_lmp",
+          "skill.hx.preterm.symptoms",
+          "skill.hx.preterm.risk"
+        ],
+        "examinerQuestions": [
+          "What in her story tells leaking apart from urine, and what tells labour apart from Braxton Hicks?",
+          "Which two risk factors in her background predict this event most strongly?",
+          "What single finding in the history would forbid tocolysis outright?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.preterm.basics",
+      "skill.hx.preterm.risk",
+      "skill.preterm.findings",
+      "skill.preterm.differential",
+      "skill.ix.preterm.workup",
+      "skill.preterm.diagnosis",
+      "skill.tx.preterm",
+      "skill.exam.obg.fetal_heart"
+    ]
+  },
+  "skills": {
+    "skill.preterm.basics": {
+      "id": "skill.preterm.basics",
+      "kind": "reasoning",
+      "system": "obstetrics",
+      "title": "What preterm labour is, and why the week matters",
+      "oneLine": "Labour before 37 full weeks, and the main driver of newborn death and disability",
+      "why": "Early birth is the single largest cause of newborn illness and death, through lungs that cannot breathe, brains that bleed, and guts that necrose. Everything you do in this pathway exists to buy the baby another week inside, or, failing that, to arrive at birth with lungs, brain and transfer already protected.",
+      "body": "Preterm labour is regular uterine contractions with progressive cervical effacement and dilatation, occurring before 37 completed weeks of gestation. It is a syndrome with several roads leading to it, not one disease, and the outcome turns almost entirely on the week at which birth happens.",
+      "keyPoints": [
+        "The definition needs all three parts: regular contractions, cervical change, and gestation under 37 full weeks. Contractions without cervical change are threatened labour; cervical shortening without contractions is cervical weakness; neither alone is the diagnosis.",
+        "Each extra week inside at early gestations improves survival and reduces disability substantially. That is why the whole pathway is a race: steroids need time to work, and transfer needs time to happen.",
+        "The recognised roads are infection and inflammation, bleeding behind the membranes, overstretching from twins or excess fluid, cervical weakness, and maternal or fetal stress. Most cases never get a single proven cause, but the history should still name the likeliest road.",
+        "The strongest predictors are a previous spontaneous early birth and a short cervix on transvaginal scan. Both are found by asking and measuring, not by waiting for pains.",
+        "Preterm prelabour rupture of membranes, leaking before pains start, travels with early labour and shares its treatments, but adds infection risk and forbids digital examination. The two are taught together because they present together."
+      ],
+      "pitfalls": [
+        "Calling any preterm pain labour without demonstrating cervical change, which commits a woman to steroids, admission and transfer she may not need.",
+        "Reassuring irregular pains as Braxton Hicks without examining the cervix, which delays the one treatment that cannot wait.",
+        "Quoting the week from a late scan or a fundal guess instead of reliable dates, which picks the wrong side of every threshold."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Define preterm labour in full.",
+          "a": "Regular uterine contractions with progressive cervical effacement and dilatation before 37 completed weeks of gestation.",
+          "accept": ["regular contractions", "cervical change", "37 weeks"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does the exact week matter more here than in term labour?",
+          "a": "Because survival and disability improve with each extra week inside, and steroids, neuroprotection, transfer and delivery thresholds all turn on gestation.",
+          "accept": ["survival", "steroids", "transfer", "gestation"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Name four distinct pathways that can trigger early labour.",
+          "a": "Infection and inflammation, bleeding behind the membranes, overstretching from twins or excess fluid, and cervical weakness, with maternal or fetal stress as a further trigger.",
+          "accept": ["infection", "bleeding", "overstretching", "cervical weakness", "twins"],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "preterm_labour: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Preterm labour"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.preterm.findings": {
+      "id": "skill.preterm.findings",
+      "kind": "reasoning",
+      "system": "obstetrics",
+      "title": "Putting the early labour picture together",
+      "oneLine": "Regular pains plus an opening cervix, with membranes and infection checked alongside",
+      "why": "The diagnosis is made at the bedside, not in the laboratory: pains that harden the whole uterus at regular intervals, plus a cervix that is shortening and opening. Reading the membranes and the infection signs in the same sitting decides whether you buy time or deliver.",
+      "body": "Confirm regular painful contractions with a cervix that effaces and dilates, and in the same examination settle membranes, bleeding, infection and the fetus.",
+      "keyPoints": [
+        "True labour hardens the whole uterus: the fundus becomes uniformly hard during a pain and softens fully between pains. A uterus that stays tense and tender between pains is abruption or infection, not labour.",
+        "The cervix tells the truth the pains only suggest: progressive effacement and dilatation with regular contractions is established labour, while a long closed cervix with irregular pains is threatened labour that may still settle.",
+        "Pooling of fluid in the posterior fornix on speculum examination, with more escaping on coughing, confirms ruptured membranes. Green staining implicates the fetus; foul smell with fever implicates infection.",
+        "Fever, uterine tenderness, maternal fast pulse and foul fluid together mean infected membranes, and a hard tender uterus with bleeding and a distressed fetus means abruption. Both forbid tocolysis and mean delivery.",
+        "The fetus is examined as the second patient throughout: lie and presentation, estimated size, liquor, and heart rate during and after contractions. Malpresentation and growth restriction are commoner before term and change the route of delivery."
+      ],
+      "pitfalls": [
+        "Diagnosing labour from pains alone without assessing the cervix, in either direction: overtreating threatened pains or missing established labour.",
+        "Doing a digital vaginal examination when membranes are ruptured, which carries infection upward without adding information the speculum cannot give.",
+        "Examining the mother fully and the fetus barely, in the one situation with two patients."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What bedside finding separates a contraction of true labour from a tense tender uterus of abruption?",
+          "a": "In true labour the whole uterus hardens during the pain and softens fully between pains, while in abruption the uterus stays tense and tender with no relaxation between.",
+          "accept": ["softens between", "relaxes", "tense", "tender", "abruption"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Contractions are regular but the cervix is long and closed. What is this, and what does it change?",
+          "a": "Threatened rather than established labour: observe, exclude infection and abruption, consider steroids by gestation, but tocolysis and transfer decisions wait on cervical change.",
+          "accept": ["threatened", "steroids", "cervical change", "observe"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is a digital vaginal examination avoided when membranes are ruptured before term?",
+          "a": "Because fingers carry vaginal organisms upward through the open cervix and shorten the infection-free latency period, while a sterile speculum examination gives the needed information about pooling, colour and the cervix.",
+          "accept": ["infection", "speculum", "pooling", "latency"],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "preterm_labour: redFlags"
+        },
+        {
+          "source": "NICE",
+          "locator": "Preterm labour and birth"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.preterm.summary": {
+      "id": "skill.preterm.summary",
+      "kind": "reasoning",
+      "system": "obstetrics",
+      "title": "Summarising the early labour case",
+      "oneLine": "Mother, week, labour stage, membranes, infection, fetus, and the clock",
+      "why": "A consultant judges the plan from the summary alone, and in early labour the plan is entirely about time: has the steroid clock started, is transfer arranged, is delivery indicated. A summary that omits the week or the infection screen cannot be acted on.",
+      "body": "Summarise in three sentences: who she is with parity and gestation, what stage of labour with membranes and infection status, and what the fetus shows with what must happen next.",
+      "keyPoints": [
+        "Name gravidity, parity with the weeks of previous births, exact gestation with how it was dated, and booking and referral status. A prior early birth and reliable dates are the two facts the listener uses first.",
+        "Stage the labour: threatened or established, contractions with frequency and duration, cervical dilatation and effacement, membranes intact or ruptured with fluid colour, and infection present or excluded with the evidence.",
+        "Report the fetus in one breath: lie, presentation, estimated size against dates, liquor, and heart pattern with the contraction response. Then close with the clock: steroids given or due, tocolysis purpose, transfer arranged or awaited, and delivery route if indicated."
+      ],
+      "pitfalls": [
+        "Summarising pains without the week, leaving the listener unable to judge any threshold.",
+        "Reporting the mother and forgetting the fetus, or reporting the fetus and forgetting infection.",
+        "Closing with a diagnosis instead of a time-bound plan, when the plan is what the summary exists to carry."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Dictate a one breath summary for a second gravida at 31 weeks with established labour and intact membranes.",
+          "a": "A 26-year-old second gravida at 31 weeks by early scan with a prior birth at 32 weeks, in established preterm labour with intact membranes and no infection, fetus cephalic with a reassuring heart pattern, for steroids, tocolysis and in-utero transfer.",
+          "accept": ["31 weeks", "established", "membranes", "steroids", "transfer"],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What three infection facts must every early labour summary carry?",
+          "a": "Temperature and pulse, uterine tenderness with fluid smell and colour, and the urine and swab status, because infection forbids tocolysis and mandates delivery.",
+          "accept": ["temperature", "tenderness", "fluid", "urine", "swabs"],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "preterm_labour: management"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Preterm labour"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.preterm.differential": {
+      "id": "skill.preterm.differential",
+      "kind": "reasoning",
+      "system": "obstetrics",
+      "title": "What else tightens, leaks or bleeds before term",
+      "oneLine": "Braxton Hicks, urine infection, abruption and PPROM: each takes a different road",
+      "why": "Three of the mimics need delivery and one needs reassurance, so the differential is not an academic list but a fork in the road. Tocolysing an abruption or infected membranes harms; admitting Braxton Hicks wastes the steroid and transfer machinery on a woman who needs rest and review.",
+      "body": "Separate true labour from Braxton Hicks tightening, urine infection, abruption, ruptured membranes without labour, and surgical causes of pain, using regularity, the cervix, fever, bleeding and the fetal picture.",
+      "keyPoints": [
+        "Braxton Hicks tightening is irregular, painless or mildly aching, eases with rest and hydration, and leaves the cervix long and closed. Regular painful contractions with cervical change is the opposite in every element.",
+        "Urine infection and pyelonephritis provoke uterine irritability with burning, frequency, fever and loin pain, but the cervix stays unchanged. The urine shows pus cells and culture confirms, and treating the infection settles the uterus.",
+        "Abruption gives constant pain with a hard tender uterus that never relaxes, bleeding that may be concealed, and often a distressed fetus. The cervix may be unchanged, and tocolysis here is dangerous.",
+        "Ruptured membranes without labour gives painless leaking with pooling on speculum but no regular contractions. The question then is latency and infection, not tocolysis for contractions that do not exist.",
+        "Round ligament ache, constipation and appendicitis cause pain without uterine hardening or cervical change. Appendicitis before term still presents with fever, localised tenderness and a sick patient, and pregnancy does not exempt her from a surgical cause."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How do Braxton Hicks contractions differ from true labour in three features?",
+          "a": "Irregular rather than regular intervals, easing with rest rather than mounting, and a cervix that stays long and closed rather than effacing and dilating.",
+          "accept": ["irregular", "rest", "cervix", "closed", "effacing"],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Pain, bleeding and a uterus that never relaxes: what is this, and why is tocolysis wrong?",
+          "a": "Placental abruption: the placenta has partly separated, the uterus stays tense and tender, and stopping contractions does nothing for a separating placenta while delaying the delivery mother and fetus need.",
+          "accept": ["abruption", "separated", "tense", "delivery"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Leaking is confirmed but there are no contractions and no fever. What is the diagnosis and the immediate question?",
+          "a": "Preterm prelabour rupture of membranes without labour: the diagnosis is made on pooling, and the immediate question is infection screening and latency management, not tocolysis.",
+          "accept": ["rupture of membranes", "pooling", "infection", "latency"],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "preterm_labour: additionalDifferentials"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Preterm labour"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.preterm.workup": {
+      "id": "skill.ix.preterm.workup",
+      "kind": "investigation",
+      "system": "obstetrics",
+      "title": "Confirming early labour and finding infection",
+      "oneLine": "Cervix, membranes, contractions, infection and the fetus: each test answers one question",
+      "why": "No single test diagnoses early labour, and treatment cannot wait for the full set. Cervical length and fibronectin sort threatened from established disease, the speculum settles membranes without seeding infection, and the infection screen protects the tocolysis decision from its one absolute contraindication.",
+      "body": "Order tests to answer five questions in order: is the cervix short, are membranes ruptured, are contractions with fetal compromise, is there infection, and how is the fetus growing.",
+      "keyPoints": [
+        "Transvaginal cervical length sorts risk: a short cervix with regular contractions supports the diagnosis and the transfer decision, while a long cervix with irregular pains argues for observation. A length under 25 mm in the mid trimester is the commonly used short threshold.",
+        "Fetal fibronectin from cervicovaginal secretions predicts imminent birth: a negative test in threatened labour strongly argues against delivery within days and supports discharge with review, while a positive test supports steroids and transfer.",
+        "Cardiotocography with tocography records contraction frequency and duration alongside fetal heart behaviour. Three or more contractions in ten minutes with cervical change is labour; the trace also catches the non-reassuring fetus that needs delivery, not tocolysis.",
+        "Sterile speculum examination looks for pooling, watches for escape on coughing, and takes swabs: ferning of dried fluid and an alkaline nitrazine change support ruptured membranes, and swabs chase group B streptococcus and genital infection.",
+        "Infection screen runs alongside everything: urine routine and culture, high vaginal swabs, full blood count with C reactive protein, and group B streptococcus status for labour prophylaxis. Ultrasound checks presentation, growth against dates, and fluid volume, which falls after rupture."
+      ],
+      "pitfalls": [
+        "Doing a digital vaginal examination to assess the cervix when membranes are ruptured, trading a number for an ascending infection.",
+        "Waiting for fibronectin or culture results before giving the first steroid dose, which wastes the one window that matters.",
+        "Ordering tests without dating the pregnancy first, so growth and thresholds are read against the wrong week."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What does a negative fetal fibronectin mean in threatened early labour?",
+          "a": "That delivery within the next week or so is unlikely, which supports observation or discharge with review rather than admission, steroids and transfer.",
+          "accept": ["unlikely", "delivery", "discharge", "review"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How is ruptured membranes confirmed without a digital examination?",
+          "a": "By sterile speculum examination showing pooling in the posterior fornix with more escaping on coughing, supported by ferning of dried fluid and an alkaline change on nitrazine testing.",
+          "accept": ["speculum", "pooling", "ferning", "nitrazine"],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Which infection tests must be sent, and which one changes labour management directly?",
+          "a": "Urine routine and culture, high vaginal swabs, blood count with C reactive protein and group B streptococcus status; proven infection forbids tocolysis and mandates delivery with antibiotics.",
+          "accept": ["urine", "swabs", "streptococcus", "forbids tocolysis", "delivery"],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "preterm_labour: additionalInvestigations"
+        },
+        {
+          "source": "NICE",
+          "locator": "Preterm labour and birth"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.preterm.diagnosis": {
+      "id": "skill.preterm.diagnosis",
+      "kind": "reasoning",
+      "system": "obstetrics",
+      "title": "Diagnosis and staging of early labour",
+      "oneLine": "Threatened or established, membranes intact or ruptured, infected or not",
+      "why": "The label stages the clock: established labour with ruptured membranes and no infection gets steroids, tocolysis and transfer, while infection or abruption gets delivery. Writing all three axes into the diagnosis stops the plan from being written for the wrong patient.",
+      "body": "Diagnose on regular contractions with cervical change before 37 weeks, then stage on three axes: threatened or established, membranes intact or ruptured, and infection present or excluded.",
+      "keyPoints": [
+        "Established preterm labour needs regular painful contractions with progressive effacement and dilatation before 37 completed weeks. Regular contractions with a long closed cervix is threatened labour: admit or observe, exclude mimics, and let the cervix declare itself on review.",
+        "Membrane status is the second axis: intact membranes with labour is preterm labour, while leaking before labour is preterm prelabour rupture of membranes, confirmed on speculum pooling with or without ferning and nitrazine change.",
+        "Infection is the third axis and the one that reverses the plan. Clinical chorioamnionitis is maternal fever with two or more of uterine tenderness, foul or purulent fluid, maternal pulse over 100, and fetal heart over 160, and it mandates delivery with antibiotics.",
+        "Abruption and non-reassuring fetal status are diagnosed alongside, not after: constant pain with a tense tender uterus and bleeding, or a heart pattern that does not recover, both end the buying-time strategy immediately.",
+        "The final diagnosis names the week, the stage, the membranes and infection in one line, because each element pulls a different lever: steroids and transfer for early established labour, latency care for rupture without labour, delivery for infection or abruption."
+      ],
+      "pitfalls": [
+        "Writing preterm labour without stating membrane status, so rupture is discovered by the next doctor.",
+        "Treating fever as incidental instead of scoring chorioamnionitis criteria, which keeps tocolysis running into infection.",
+        "Dating the diagnosis from an unreliable late scan, which misplaces every threshold the staging depends on."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What three elements make the diagnosis of established preterm labour?",
+          "a": "Regular painful contractions, progressive cervical effacement and dilatation, and gestation before 37 completed weeks.",
+          "accept": ["contractions", "cervical", "37 weeks"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How is clinical chorioamnionitis recognised at the bedside?",
+          "a": "Maternal fever with two or more of uterine tenderness, foul or purulent fluid, maternal pulse over 100 and fetal heart over 160, and it mandates delivery with antibiotics rather than tocolysis.",
+          "accept": ["fever", "tenderness", "foul", "delivery", "antibiotics"],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Contractions are regular, membranes ruptured, trace reassuring, no fever. What is the full diagnosis and what does it permit?",
+          "a": "Established preterm labour with preterm prelabour rupture of membranes without infection: it permits steroids, brief tocolysis for steroid cover and transfer, latency antibiotics and in-utero transfer.",
+          "accept": ["rupture of membranes", "steroids", "tocolysis", "transfer", "antibiotics"],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "preterm_labour: redFlags"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Preterm prelabour rupture of membranes"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.preterm": {
+      "id": "skill.tx.preterm",
+      "kind": "treatment",
+      "system": "obstetrics",
+      "title": "Managing early labour: steroids, time, and brain protection",
+      "oneLine": "Steroids for the lungs, tocolysis to buy their working time, magnesium for the brain",
+      "why": "Nothing here stops labour for long, and that was never the goal. Tocolysis buys about two days: time for steroids to mature the lungs and time to move mother and baby to newborn care. Missing the steroid window or delivering a very early baby without brain protection causes harm no later treatment can undo.",
+      "body": "Give antenatal corticosteroids for fetal lung maturation, use brief tocolysis to complete the steroid course and enable transfer, add magnesium for brain protection at early gestations, treat infection and cover group B streptococcus, and move mother and baby together to newborn care.",
+      "keyPoints": [
+        "Antenatal corticosteroids are the single most effective intervention: a single course when early birth threatens accelerates lung maturation and reduces breathing difficulty, brain bleeding and bowel injury. Give the first dose without waiting for confirmatory tests, because the benefit needs time that waiting wastes.",
+        "Tocolysis with a calcium channel blocker or an oxytocin receptor antagonist delays birth briefly, for up to about 48 hours, to complete steroids and allow in-utero transfer. It is a bridge, not a cure, and it is forbidden with infection, abruption, non-reassuring fetal status, or advanced labour.",
+        "Magnesium sulfate before anticipated very early birth protects the fetal brain and reduces cerebral palsy. It is given as a loading infusion followed by maintenance until birth or a defined stop, with reflexes, breathing and urine watched for toxicity.",
+        "Antibiotics have two jobs: treating proven urine or genital infection, and intrapartum prophylaxis against group B streptococcus when status is positive or unknown with risk factors. In ruptured membranes, latency antibiotics under protocol prolong the infection-free interval.",
+        "In-utero transfer to a unit with a newborn intensive or special care nursery improves survival more than any drug given after birth. Move the mother before birth whenever the fetus is stable, with the neonatal team warned, rather than transferring a sick early baby afterwards.",
+        "Vaginal birth remains preferred unless an obstetric indication demands otherwise; caesarean is not done for prematurity alone. Counsel parents honestly about survival and disability by week, involve the neonatal team early, and plan progesterone or cervical measures for the next pregnancy where indicated."
+      ],
+      "pitfalls": [
+        "Starting tocolysis before excluding infection and abruption, the two conditions where delaying delivery harms both patients.",
+        "Giving repeated steroid courses on every scare instead of one well timed course, which trades uncertain benefit for growth and metabolic cost.",
+        "Delivering a very early baby in a unit without newborn care when transfer was possible, which is a system failure, not bad luck.",
+        "Forgetting group B streptococcus prophylaxis in a rushed early labour, the cheapest protection on this list."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the purpose of tocolysis in early labour, and what is it not?",
+          "a": "To delay birth briefly, for up to about 48 hours, so steroids can act and transfer can happen; it is not a cure that stops labour or a reason to keep a mother who needs delivery.",
+          "accept": ["48 hours", "steroids", "transfer", "delay"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Name three absolute bars to tocolysis.",
+          "a": "Infection of the membranes, placental abruption with bleeding, and a non-reassuring fetal status, with advanced labour beyond rescue as a further bar.",
+          "accept": ["infection", "abruption", "fetal", "advanced labour"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is the mother moved before birth rather than the baby moved after?",
+          "a": "Because birth in a unit with newborn intensive care improves survival more than any postnatal drug, and a stable fetus travels inside the mother far more safely than a sick early baby travels in an ambulance.",
+          "accept": ["newborn intensive", "survival", "stable", "in-utero"],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "preterm_labour: management"
+        },
+        {
+          "source": "WHO",
+          "locator": "Preterm birth outcomes"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of drug class and principle. Specific agents, doses, routes and regimens must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe."
+    },
+    "skill.preterm.pprom": {
+      "id": "skill.preterm.pprom",
+      "kind": "reasoning",
+      "system": "obstetrics",
+      "title": "Ruptured membranes before term: latency and delivery",
+      "oneLine": "Confirm the leak, watch for infection, and deliver for the right reason at the right week",
+      "why": "Once membranes rupture, the womb is open to ascending infection, and every digital examination shortens the safe interval. The whole game becomes latency: keeping mother and baby infection-free long enough for steroids to work, while recognising the moment infection or fetal jeopardy ends the waiting.",
+      "body": "Confirm rupture on sterile speculum examination, manage expectantly with steroids and latency antibiotics while mother and fetus stay well, and deliver for infection, abruption, non-reassuring status, or reaching a gestation where the risks of waiting exceed the risks of birth.",
+      "keyPoints": [
+        "Confirmation rests on the story of a gush with steady dampness plus pooling on sterile speculum examination, supported by ferning and nitrazine change. Ultrasound showing reduced fluid supports but never replaces the speculum finding, and digital examination is avoided.",
+        "Expectant care means admission with temperature, pulse and fetal monitoring, steroids for the lungs, latency antibiotics under protocol, and group B streptococcus prophylaxis in labour. Corticosteroids keep their value after rupture, and tocolysis is used only briefly for steroid cover, not for prolonged waiting.",
+        "Delivery is indicated for clinical infection, abruption, a non-reassuring trace, cord prolapse, or advanced labour, whatever the week. Without these, timing weighs gestation: at very early weeks waiting gains the most, while near term the balance tips to delivery.",
+        "Counselling covers what leaking means for the baby: prematurity, infection, cord events and reduced fluid with limb and lung effects on long latency. The neonatal team joins early, and the mother is told exactly which symptoms should bring her running: fever, foul fluid, reduced movements, bleeding or regular pains.",
+        "After birth, the placenta and membranes are examined and the baby watched for early infection even when mother stayed afebrile. For the next pregnancy, a history of early rupture earns cervical length surveillance and prevention where indicated."
+      ],
+      "pitfalls": [
+        "Confirming rupture with repeated digital examinations, which seed the infection the whole plan is trying to avoid.",
+        "Prolonging latency with tocolysis after infection has declared itself, keeping an infected baby inside.",
+        "Sending a ruptured mother home without a clear return plan, so infection declares itself far from care."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How is preterm rupture confirmed, and what examination is avoided?",
+          "a": "By a gush story with pooling on sterile speculum examination, supported by ferning and nitrazine change; digital vaginal examination is avoided because it carries infection upward.",
+          "accept": ["pooling", "speculum", "ferning", "digital"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What does expectant care after rupture consist of?",
+          "a": "Admission with infection surveillance, corticosteroids, latency antibiotics under protocol, group B streptococcus prophylaxis in labour, fetal monitoring and in-utero transfer planning.",
+          "accept": ["steroids", "antibiotics", "monitoring", "transfer"],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Name four indications to abandon waiting and deliver.",
+          "a": "Clinical infection of the membranes, placental abruption, a non-reassuring fetal trace, and cord prolapse or advanced labour, whatever the gestation.",
+          "accept": ["infection", "abruption", "non-reassuring", "cord prolapse"],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "preterm_labour: management"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Preterm prelabour rupture of membranes"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.preterm.meena",
+      "title": "A second gravida at 31 weeks with pains and leaking",
+      "opening": "Meena Rathod, 26, a second gravida at 31 weeks from a village in Marathwada, has been referred by the primary centre with regular pains in the belly for four hours and fluid leaking down below for two hours. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Meena Rathod",
+        "age": 26,
+        "sex": "female",
+        "occupation": "Agricultural labourer, works in the family cotton field",
+        "residence": "Rural, village in Marathwada, lives with husband, mother-in-law and first child"
+      },
+      "initialVitals": {
+        "hr": 104,
+        "bpSystolic": 110,
+        "bpDiastolic": 70,
+        "rr": 24,
+        "spo2": 98,
+        "temp": 37,
+        "gcs": 15
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brought you to the hospital today",
+            "what trouble made you come here today",
+            "why did the sister send you here"
+          ],
+          "reply": "Doctor, since morning I have pains in the belly coming again and again, and since two hours water is leaking down below and soaking my clothes.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "contraction_timing": {
+          "cues": [
+            "how often do the pains come",
+            "how long does each pain stay",
+            "are the pains getting closer together"
+          ],
+          "reply": "The pains come every five to eight minutes and each stays for most of a minute. They started four hours ago and are getting stronger, not less.",
+          "key": true,
+          "skillId": "skill.hx.preterm.symptoms"
+        },
+        "fluid_leak": {
+          "cues": [
+            "is water leaking down below",
+            "when did you first notice the leaking",
+            "does the cloth get soaked without passing urine"
+          ],
+          "reply": "Two hours ago there was a sudden gush while I was sweeping, and since then the cloth keeps getting wet on its own. It is clear and does not smell bad.",
+          "key": true,
+          "skillId": "skill.hx.preterm.symptoms"
+        },
+        "vaginal_bleed": {
+          "cues": [
+            "any blood passed down below",
+            "any red bleeding with the pains",
+            "did you notice a mucus show first"
+          ],
+          "reply": "No bleeding at all, doctor. Only the watery leaking, no blood and no mucus plug that I saw."
+        },
+        "discharge_change": {
+          "cues": [
+            "any foul smell in the discharge down below",
+            "has the white discharge increased or changed colour"
+          ],
+          "reply": "The usual white discharge is there as in all months, but it does not smell foul and its colour has not changed."
+        },
+        "fetal_kicks": {
+          "cues": [
+            "how are the baby movements today",
+            "are the kicks fewer than yesterday",
+            "count the baby kicks since morning"
+          ],
+          "reply": "The baby is moving as before, doctor. The kicks are neither fewer nor weaker since the pains came on.",
+          "key": true
+        },
+        "urine_burning": {
+          "cues": [
+            "burning while passing urine",
+            "how often do you pass urine since yesterday",
+            "any difficulty holding the urine"
+          ],
+          "reply": "There is slight burning while passing urine since two days, but no difficulty holding it and no pain in the back."
+        },
+        "fever_rigors": {
+          "cues": [
+            "fever with chills in the last two days",
+            "any shivering with the fever",
+            "did you take any tablet for the fever"
+          ],
+          "reply": "No fever and no shivering. I took no tablet for fever because there was none."
+        },
+        "lmp_dates": {
+          "cues": [
+            "when was your last monthly period",
+            "how many months over are you now",
+            "what delivery date did the sister give you"
+          ],
+          "reply": "My last period came in the middle of March, so I am seven months over. The sister wrote the delivery date as mid December and an early sonography also said the same.",
+          "key": true,
+          "skillId": "skill.hx.obg.booking_lmp"
+        },
+        "anc_visits": {
+          "cues": [
+            "where did you show for check ups in this pregnancy",
+            "how many check ups have you had till now",
+            "was your pressure or blood tested at the visits"
+          ],
+          "reply": "I showed at the primary centre four times. Pressure was normal each time and blood was tested twice. No inner scan of the mouth of the womb was ever done."
+        },
+        "prior_preterm": {
+          "cues": [
+            "was your first baby born before time",
+            "at how many weeks was your first baby born",
+            "did your waters break early last time"
+          ],
+          "reply": "My first baby came at 32 weeks after pains like these, and stayed in the newborn nursery for three weeks. He is three years old now and well. No stitch was put last time.",
+          "key": true,
+          "skillId": "skill.hx.preterm.risk"
+        },
+        "medical_background": {
+          "cues": [
+            "any thyroid heart or pressure problem known from before",
+            "which tablets do you take every day",
+            "any allergy to penicillin injections"
+          ],
+          "reply": "I have no thyroid, heart or pressure problem. I take only the iron and calcium tablets from the centre, and no injection has ever given me a reaction."
+        },
+        "tobacco_mishri": {
+          "cues": [
+            "do you use mishri or tobacco for the teeth",
+            "does your husband smoke bidis in the room",
+            "any gutka or tobacco chewing through the day"
+          ],
+          "reply": "I clean my teeth with mishri powder every morning since childhood. My husband smokes bidis outside the house, never in the room."
+        },
+        "daily_work": {
+          "cues": [
+            "describe your daily work in the house and fields",
+            "do you lift heavy loads or stand for long hours",
+            "how many hours of rest do you get in the afternoon"
+          ],
+          "reply": "I work in the cotton field till noon and do all the house work. I carry water pots and grain bundles daily, and rest barely an hour in the afternoon."
+        },
+        "diet_iron": {
+          "cues": [
+            "how many times do you eat in a day",
+            "do you take the iron tablets from the centre",
+            "any milk eggs or green leaves in the meals"
+          ],
+          "reply": "We eat twice a day, mostly bhakri and dal. I take the iron tablets but they make me feel sick, so I miss many days. Milk and eggs come rarely."
+        },
+        "birth_plan": {
+          "cues": [
+            "who will stay with you for this delivery",
+            "how will you reach the hospital if pains rise at night",
+            "money and transport arranged for referral to the city"
+          ],
+          "reply": "My mother-in-law is with me now. The ambulance number is with my husband, who works in the town. We have little money kept aside, and the sister said a bigger hospital may be needed for the baby."
+        },
+        "family_twins": {
+          "cues": [
+            "twins seen in your family or your husband family",
+            "any treatment taken to conceive this baby",
+            "did any sister or aunt deliver before time"
+          ],
+          "reply": "No twins on either side, and this pregnancy came on its own. My younger sister also delivered her baby a month early."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Anxious young woman, uncomfortable with pains coming every few minutes. Alert and oriented, no feverish flush, no pallor of note.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 104 regular, quickened with pain. Blood pressure 110/70. Respiratory rate 24. SpO2 98 percent on room air. Temperature 37 C.",
+          "abnormal": true
+        },
+        "skill.gen.edema": {
+          "finding": "Mild pitting oedema of both ankles only. No puffiness of the face or hands.",
+          "abnormal": false
+        },
+        "skill.exam.obg.preg_prep_inspect": {
+          "finding": "Uterus hardens all over during a pain and softens fully between pains. No constant tenderness between contractions and no guarding.",
+          "abnormal": true
+        },
+        "skill.exam.obg.fundal_height": {
+          "finding": "Fundal height 30 cm, matching about 30 weeks and close to the stated 31 weeks by dates. No excess fluid suggested on palpation.",
+          "abnormal": false
+        },
+        "skill.exam.obg.leopold": {
+          "finding": "Longitudinal lie, cephalic presentation, head mobile above the brim. Estimated fetal size small, matching early gestation. Liquor feels reduced.",
+          "abnormal": false
+        },
+        "skill.exam.obg.fetal_heart": {
+          "finding": "Fetal heart rate 140 per minute between contractions, regular, with quick recovery after each pain. No slowing heard on brief auscultation; continuous monitoring planned.",
+          "abnormal": false
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "finding": "Clear fluid pooling in the posterior fornix with more escaping on coughing. Fluid neither green stained nor foul smelling. Cervix 2 cm dilated with membranes absent at the os. No active bleeding and no cord seen.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "cervical_length",
+        "fibronectin",
+        "ctg",
+        "urine",
+        "usg"
+      ],
+      "investigations": {
+        "cervical_length": {
+          "label": "Transvaginal cervical length",
+          "indicated": true,
+          "result": "Cervical length 20 mm with funneling at the inner os.",
+          "note": "A short open cervix with regular contractions supports established labour and the transfer decision; a long closed cervix would have argued for observation."
+        },
+        "fibronectin": {
+          "label": "Fetal fibronectin",
+          "indicated": true,
+          "result": "Positive from cervicovaginal secretions.",
+          "note": "Supports that birth threatens within days rather than weeks, so steroids and transfer are not wasted here."
+        },
+        "ctg": {
+          "label": "Cardiotocography with tocography",
+          "indicated": true,
+          "result": "Three contractions in ten minutes, each lasting about 40 seconds. Baseline fetal heart 140 with a reactive trace and no decelerations during monitoring.",
+          "note": "Confirms regular contractions with a currently reassuring fetus: the buying-time strategy holds while this trace stays so."
+        },
+        "urine": {
+          "label": "Urine routine and culture",
+          "indicated": true,
+          "result": "Albumin nil. Plenty of pus cells seen. Culture sent and report awaited.",
+          "note": "Pus cells with burning fit a urine infection that may be provoking the uterus; treating it is part of treating the labour."
+        },
+        "hvs": {
+          "label": "High vaginal swab",
+          "indicated": true,
+          "result": "Swab taken at speculum examination. Direct smear shows no clue cells. Culture awaited.",
+          "note": "Sent before antibiotics alter it; the result guides continuing or stopping cover later."
+        },
+        "gbs": {
+          "label": "Group B streptococcus status",
+          "indicated": true,
+          "result": "Status unknown; no prior screening on record.",
+          "note": "With unknown status and early ruptured membranes, prophylaxis in labour follows protocol rather than waiting for a swab that will not return in time."
+        },
+        "usg": {
+          "label": "Obstetric ultrasound",
+          "indicated": true,
+          "result": "Single live fetus, cephalic, growth matching 30 to 31 weeks. Liquor reduced after the leak. Placenta upper segment with no collection behind it.",
+          "note": "Dates confirmed, abruption excluded, presentation cephalic: nothing here bars the buying-time plan."
+        },
+        "fbc": {
+          "label": "Full blood count",
+          "indicated": true,
+          "result": "Haemoglobin 10 g per dL. Total leucocyte count raised with neutrophils predominant. Platelets adequate.",
+          "note": "Anaemia to correct and a leucocytosis to watch: rising counts with fever would end the waiting strategy."
+        }
+      },
+      "differentialModel": {
+        "answer": "Established preterm labour with preterm prelabour rupture of membranes at 31 weeks. Consider threatened labour without rupture, chorioamnionitis, Braxton Hicks tightening, urine infection provoking contractions, abruption with concealed bleeding, a surgical abdomen such as appendicitis, and bacterial vaginosis in the background.",
+        "accept": [
+          "Preterm labour",
+          "Preterm prelabour rupture of membranes",
+          "Chorioamnionitis",
+          "Braxton Hicks contractions",
+          "Urinary tract infection",
+          "Antepartum haemorrhage",
+          "Acute appendicitis",
+          "Bacterial vaginosis"
+        ],
+        "minMatch": 3
+      },
+      "diagnosis": {
+        "answer": "Established preterm labour with preterm prelabour rupture of membranes at 31 weeks gestation, without clinical infection.",
+        "accept": [
+          "Preterm labour",
+          "Preterm prelabour rupture of membranes",
+          "PTL"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Antenatal corticosteroids at once, brief tocolysis to complete the steroid course and allow transfer, magnesium for brain protection, antibiotics for the urine infection with group B streptococcus prophylaxis in labour, in-utero transfer to a unit with newborn care, and continuous fetal and infection monitoring with delivery planned at the first sign of infection or fetal jeopardy.",
+        "accept": [
+          "antenatal corticosteroids",
+          "tocolysis for steroid cover and transfer",
+          "magnesium neuroprotection",
+          "antibiotics for infection and prophylaxis",
+          "in-utero transfer to newborn care",
+          "fetal monitoring and delivery planning"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The tempo and the pairing make the diagnosis: four hours of mounting regular pains with two hours of steady leaking at 31 weeks is established labour with ruptured membranes, not threatened pains.",
+        "A prior birth at 32 weeks was the warning written years ago: one spontaneous early birth is the strongest predictor, and this mother should have had cervical surveillance from the mid trimester.",
+        "The uterus softens fully between pains with no tenderness, fever or foul fluid: infection and abruption are excluded for now, which is the only reason buying time is permitted.",
+        "Pooling on speculum with no digital examination is the model answer: confirmation without carrying infection upward, with colour and smell read in the same look.",
+        "Fibronectin positive with a 20 mm funneling cervix and three contractions in ten minutes all point the same way, so steroids and transfer proceed together, not in sequence.",
+        "Burning with pus cells means the urine infection is treated as part of the labour, not as an incidental finding, while rising counts with fever would end the waiting.",
+        "The transfer is of the mother before birth, not the baby after: a stable fetus inside travels more safely than a sick early baby in an ambulance, and the neonatal team is warned now."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

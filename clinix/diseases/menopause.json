@@ -1,0 +1,1201 @@
+{
+  "_comment": "Gynaecology disease. Same architecture as pneumonia and uterine-fibroid: almost every finding is an emphasis overlay on a shared core/obgyn skill. Menopause's own contribution is the retrospective 12-month definition with STRAW+10 staging, the HRT decision (uterus present or absent, clot and cancer risk, route), and long-term bone, heart and genital health.",
+  "chapters": [
+    {
+      "blurb": "When the ovaries retire, and how to name each stage",
+      "id": "basics",
+      "skills": [
+        "skill.menopause.basics"
+      ],
+      "title": "Basics"
+    },
+    {
+      "blurb": "Before a single question",
+      "id": "approach",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ],
+      "title": "Approach to the patient"
+    },
+    {
+      "blurb": "Age sets the prior before a symptom is mentioned",
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected menopause, age carries more weight than in almost any other gynaecology case: flushes with cycle change at 45 to 55 fit the transition, the same story under 40 points to premature ovarian insufficiency, and occupation and residence matter because shift work, farming heat and crowded homes all worsen how flushes and broken sleep are felt."
+        }
+      },
+      "id": "particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "title": "Patient particulars"
+    },
+    {
+      "blurb": "Cycles, heat, dryness and leaks in her words",
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical presentation reads in months to years, not days: periods growing irregular over a few years, then heat waves with sweating, broken sleep and vaginal dryness. That slow tempo alone should move you away from thyroid storm, phaeochromocytoma or an acute infection before anything else is known."
+        },
+        "skill.hx.menopause.symptoms": {
+          "expect": "Expect the cycle story first: intervals shortening then lengthening, flow varying, then months with no bleeding. Then flushes counted per day with night waking, then the private symptoms she will not volunteer: dryness, pain during relations, urgency and leaks."
+        },
+        "skill.hx.obg.menstrual_history": {
+          "expect": "Expect a closing reproductive history rather than menorrhagia: age at menarche, lifetime pattern, date of the last period counted in months, and any bleeding after a year without periods. Postmenopausal bleeding breaks the transition story and must be chased, never filed under menopause."
+        }
+      },
+      "id": "history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.menstrual_history",
+        "skill.hx.menopause.symptoms"
+      ],
+      "title": "History of presenting illness"
+    },
+    {
+      "blurb": "The background that decides whether hormones are safe",
+      "emphasis": {
+        "skill.hx.menopause.risk": {
+          "expect": "Expect this chapter to do the heavy lifting for treatment safety: clots, breast or womb cancer, stroke, heart disease, liver disease and undiagnosed bleeding each close the HRT door, while smoking, surgical menopause and enzyme inducing drugs reshape the options that remain."
+        },
+        "skill.hx.obg.gynae_background": {
+          "expect": "Contraceptive need still matters in perimenopause since HRT does not prevent pregnancy, and fertility wishes are usually complete but must be confirmed rather than assumed. Note cervical screening and mammography dates, since both feed the baseline before hormones."
+        }
+      },
+      "id": "past_personal_drug_family",
+      "skills": [
+        "skill.hx.obg.gynae_background",
+        "skill.hx.menopause.risk"
+      ],
+      "title": "Past, personal, drug and family history"
+    },
+    {
+      "blurb": "Weight, pressure and pallor before the pelvis",
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for a woman of middle age who looks her stated age, often flushed or sweating during the visit, with no acute distress. Weight gain around the waist is common at this stage and sets up the BMI that later guides the HRT route."
+        },
+        "skill.gen.edema": {
+          "expect": "Oedema is not a feature of the transition itself. Ankle swelling with breathlessness should make you look for cardiac, renal or drug causes, or for calcium channel blockers started for new hypertension, rather than attributing it to menopause."
+        },
+        "skill.gen.vitals": {
+          "expect": "Expect blood pressure and weight to carry the visit: measure both, compute BMI, and repeat a high reading before labelling hypertension. A BMI above 30 pushes the HRT choice toward the transdermal route, and untreated hypertension must be controlled before systemic hormones start."
+        }
+      },
+      "id": "general_exam",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ],
+      "title": "General examination"
+    },
+    {
+      "blurb": "Atrophy you can see, and a cervix that must look healthy",
+      "emphasis": {
+        "skill.exam.obg.bimanual": {
+          "expect": "Expect a small, firm, mobile atrophic uterus with free fornices and no adnexal mass. An enlarged uterus, a palpable ovary after the menopause, or any cervical motion tenderness breaks the atrophy picture and needs imaging rather than reassurance."
+        },
+        "skill.exam.obg.breast_exam": {
+          "expect": "Expect a normal examination, and treat it as the HRT baseline: breasts and axillae examined and documented before hormones start, with any lump, discharge or skin change worked up first. Note the date of her last mammogram alongside."
+        },
+        "skill.exam.obg.gynae_abdominal": {
+          "expect": "Expect a soft abdomen with no palpable pelvic mass. Any firm midline mass arising from the pelvis at this age is not menopause and needs the fibroid and ovarian tumour workup, whatever the flushes suggest."
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "expect": "Expect pale, thin vaginal walls with loss of folds, sometimes with a scant clear discharge, and a small pale cervix with a closed os. Any bleeding, contact bleeding, or an unhealthy looking cervix needs sampling and referral rather than oestrogen cream."
+        },
+        "skill.exam.obg.speculum_insert": {
+          "expect": "Expect insertion to need extra gentleness with atrophy: a narrow dry vagina admits the smallest warmed speculum with lubricant, and forcing a large one causes pain and bleeding that ruins the rest of the examination."
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "expect": "Expect sparse pubic hair, pale thin labia with loss of fat, and sometimes excoriation from itching. Fused labia, white plaques that do not wipe off, or ulcers point to lichen sclerosus or malignancy, not simple atrophy."
+        }
+      },
+      "id": "systemic_exam",
+      "skills": [
+        "skill.exam.obg.gynae_abdominal",
+        "skill.exam.obg.vulval_inspect",
+        "skill.exam.obg.speculum_insert",
+        "skill.exam.obg.speculum_inspect",
+        "skill.exam.obg.bimanual",
+        "skill.exam.obg.breast_exam"
+      ],
+      "title": "Breast and pelvic examination"
+    },
+    {
+      "blurb": "Falling oestrogen explains everything you found",
+      "id": "disease_findings",
+      "skills": [
+        "skill.menopause.signs"
+      ],
+      "title": "Putting the menopause picture together"
+    },
+    {
+      "blurb": "Three sentences that contain the case",
+      "id": "summary",
+      "skills": [
+        "skill.menopause.summary"
+      ],
+      "title": "Clinical summary"
+    },
+    {
+      "blurb": "What else stops periods or causes flushes, and what bleeding must never be missed",
+      "id": "differential",
+      "skills": [
+        "skill.menopause.differential"
+      ],
+      "title": "Differential diagnosis"
+    },
+    {
+      "blurb": "Stage it clinically, test only what changes the plan",
+      "id": "investigations",
+      "skills": [
+        "skill.ix.menopause.workup"
+      ],
+      "title": "Investigations"
+    },
+    {
+      "blurb": "Twelve months, STRAW+10, and the mimics excluded",
+      "id": "diagnosis",
+      "skills": [
+        "skill.menopause.diagnosis"
+      ],
+      "title": "Diagnosis and staging"
+    },
+    {
+      "blurb": "Hormones for those they suit, and health for everyone",
+      "id": "treatment",
+      "skills": [
+        "skill.tx.menopause"
+      ],
+      "title": "Treatment"
+    },
+    {
+      "blurb": "Present this patient to your consultant",
+      "id": "case",
+      "skills": [
+        "skill.present.menopause.case"
+      ],
+      "title": "Case presentation"
+    }
+  ],
+  "estMinutes": 60,
+  "fullName": "Menopause and postmenopausal health",
+  "id": "menopause",
+  "kbRef": "menopause_and_postmenopausal_hormone_thera",
+  "name": "Menopause",
+  "oneLine": "The end of ovarian function, and the choice between hormones and other ways to stay well",
+  "review": {
+    "status": "ai_drafted"
+  },
+  "subtitle": "Symptoms, HRT and long-term health",
+  "system": "gynaecology",
+  "version": 1,
+  "osce": {
+    "stations": [
+      {
+        "examinerQuestions": [
+          "Count her flushes and night waking from what you found. Which answers point to the late transition rather than the early one?",
+          "She is 52 with 14 months of no periods. Why do you still ask for a pregnancy test, and when would you skip it?",
+          "She asks whether hormones will protect her heart. What do you tell her, and what do you offer instead for long term health?"
+        ],
+        "id": "osce.menopause.history_counsel",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.obg.menstrual_history",
+          "skill.hx.menopause.symptoms",
+          "skill.hx.menopause.risk"
+        ],
+        "task": "This 52 year old woman has had heat waves with sweating and disturbed sleep for a year. Take a focused history in seven minutes and be ready to say whether hormones suit her.",
+        "title": "Take a history and judge HRT safety"
+      },
+      {
+        "examinerQuestions": [
+          "You see a pale thin vagina with loss of folds and a small pale cervix. How do you separate simple atrophy from lichen sclerosus or malignancy?",
+          "The uterus feels small and mobile with free fornices. What would an enlarged uterus or a palpable ovary at this age mean?",
+          "There is no bleeding and the cervix looks healthy. Why do you still need cervical screening and a mammogram date before starting hormones?"
+        ],
+        "id": "osce.menopause.pelvic_exam",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.obg.intimate_consent",
+          "skill.exam.obg.gynae_abdominal",
+          "skill.exam.obg.vulval_inspect",
+          "skill.exam.obg.speculum_insert",
+          "skill.exam.obg.speculum_inspect",
+          "skill.exam.obg.bimanual",
+          "skill.approach.obg.pelvic_close"
+        ],
+        "task": "This 52 year old woman has vaginal dryness with pain during relations a year after her periods stopped. Examine her abdomen and pelvis, including speculum and bimanual examination, and present your findings.",
+        "title": "Examine the pelvis after the menopause"
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.menopause.basics",
+      "skill.exam.obg.bimanual",
+      "skill.menopause.signs",
+      "skill.menopause.summary",
+      "skill.menopause.differential",
+      "skill.ix.menopause.workup",
+      "skill.menopause.diagnosis",
+      "skill.tx.menopause"
+    ]
+  },
+  "skills": {
+    "skill.menopause.basics": {
+      "id": "skill.menopause.basics",
+      "kind": "reasoning",
+      "oneLine": "Permanent stoppage of periods from lost ovarian function, staged by cycle history",
+      "probes": [
+        {
+          "a": "Permanent stoppage of periods from loss of ovarian follicle function, diagnosed looking back after 12 months with no periods and no other cause.",
+          "accept": [
+            "permanent",
+            "follicle",
+            "months",
+            "periods"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Define menopause."
+        },
+        {
+          "a": "Perimenopause starts 2 to 8 years before the final period with a mean of about 4 years, and smoking brings it forward by roughly 2 years.",
+          "accept": [
+            "years",
+            "mean",
+            "smoking",
+            "forward"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How long is the transition, and what shifts it earlier?"
+        },
+        {
+          "a": "Early transition needs a persistent 7 day or greater difference between consecutive cycles, while late transition needs 60 days or more without bleeding, with FSH above 25 units per litre typical of the late stage.",
+          "accept": [
+            "persistent",
+            "consecutive",
+            "amenorrhoea",
+            "transition"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "How does STRAW+10 separate early from late transition?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "menopause_and_postmenopausal_hormone_thera: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Menopause: physiology and staging of reproductive ageing",
+          "source": "Berek and Novak's Gynecology"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "Menopause is the permanent stoppage of periods because the ovaries run out of follicles. It is diagnosed looking back: 12 months with no periods and no other cause. The average age is about 51.\n\nPerimenopause is the transition before it, when fertility falls and cycles turn irregular. It usually starts 2 to 8 years before the final period, lasting about 4 years on average, and smoking brings it forward by roughly 2 years.",
+          "heading": "What menopause and perimenopause are"
+        },
+        {
+          "body": "In the transition the hormones swing irregularly rather than settling: FSH climbs before LH because inhibin and oestrogen feedback are lost, and oestradiol falls while oestrone is partly kept through conversion of adrenal androgens elsewhere in the body.\n\nOnce menopause is established the pattern steadies to high FSH with low oestradiol. That contrast matters: a single hormone value in a woman who still bleeds is unreliable because levels swing so widely.",
+          "heading": "What the hormones do"
+        },
+        {
+          "body": "The STRAW+10 system stages reproductive ageing mainly from the cycle story. A persistent difference of 7 days or more between consecutive cycle lengths marks the early transition, and 60 days or more without bleeding marks the late transition.\n\nBlood markers are only supportive. A random FSH above 25 units per litre is typical of the late transition, but cycle history remains the principal criterion.",
+          "heading": "Staging by the cycle, not the blood test"
+        }
+      ],
+      "title": "What menopause is",
+      "why": "Everything in this pathway hangs on two counts: months without bleeding and years of cycle change. Getting the retrospective definition and the STRAW+10 cut points exact is what stops irregular bleeding, thyroid disease and pregnancy all being labelled menopause."
+    },
+    "skill.menopause.signs": {
+      "id": "skill.menopause.signs",
+      "kind": "reasoning",
+      "oneLine": "Cycle change plus flushes plus atrophy, with normal pressure, breasts and smear",
+      "probes": [
+        {
+          "a": "Months of cycle change ending in 12 months without periods, hot flushes with night sweats, vaginal dryness with dyspareunia, and a pale atrophic vagina with a small mobile uterus.",
+          "accept": [
+            "months",
+            "flushes",
+            "dryness",
+            "atrophic",
+            "uterus"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "What findings make up the menopause picture?"
+        },
+        {
+          "a": "A high BP that stays high, a breast lump or discharge, an unhealthy cervix or any postmenopausal bleeding, and an enlarged uterus or palpable ovary all break the picture and need their own workup.",
+          "accept": [
+            "pressure",
+            "lump",
+            "bleeding",
+            "ovary"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Which findings break the menopause picture?"
+        },
+        {
+          "a": "Flushes, night sweats, irregular bleeding and dryness are strongly attributable, broken sleep moderately so, while low mood, poor memory, leakage and low desire are not clearly caused by ovarian ageing.",
+          "accept": [
+            "attributable",
+            "sleep",
+            "mood",
+            "memory"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Which of her complaints does the transition truly explain?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "menopause_and_postmenopausal_hormone_thera: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Menopause transition: clinical manifestations",
+          "source": "Berek and Novak's Gynecology"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "The history runs in order: cycles shortening then lengthening over years, then flushes with sweating by day and night, then broken sleep, then dryness with pain during relations and urinary urgency with leaks. About 6 in 10 women report flushes in the 2 years before the final period.\n\nThe examination is mostly normal with atrophy where oestrogen has gone: pale thin vulva and vagina, a small pale cervix, and a small firm mobile uterus with free fornices. Blood pressure, breasts and cervix must be documented as normal, not skipped.",
+          "heading": "The history in order, the atrophy on examination"
+        },
+        {
+          "body": "Flushes, night sweats, irregular bleeding and vaginal dryness are strongly tied to the transition, and disturbed sleep has moderate support. Low mood, poor memory, leakage and low desire are not clearly caused by ovarian ageing alone.\n\nThat split decides the workup: the first group is managed as menopause, the second group is investigated in its own right even while the transition is treated.",
+          "heading": "What the transition explains and what it does not"
+        },
+        {
+          "body": "The picture breaks with any of these: periods that never reach 12 months of absence, any bleeding after they did, an enlarged uterus or a palpable ovary, an unhealthy cervix, a breast lump or discharge, or pressure that stays high on repeat.\n\nEach break points somewhere specific: bleeding to the endometrium, a mass to fibroid or ovary, a lump to the breast clinic, and high pressure to its own management before hormones are considered.",
+          "heading": "Findings that break the picture"
+        }
+      ],
+      "title": "The menopause picture",
+      "why": "Menopause has no single confirmatory sign at the bedside, so the diagnosis is a pattern: slow cycle change, flushes, atrophy, and normal vitals, breasts and cervix. Holding that pattern whole is what lets you spot the one finding that does not belong."
+    },
+    "skill.menopause.summary": {
+      "id": "skill.menopause.summary",
+      "kind": "reasoning",
+      "oneLine": "Age, months without bleeding, symptom burden, risk and baseline in three sentences",
+      "probes": [
+        {
+          "a": "Age with months since the last period, the flush burden with night waking and genital symptoms, bleeding stated as present or absent, and the HRT safety background with baseline tests.",
+          "accept": [
+            "months",
+            "flush",
+            "bleeding",
+            "safety",
+            "baseline"
+          ],
+          "level": 2,
+          "minMatch": 3,
+          "q": "What must a menopause summary contain?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "order",
+          "text": "States age and months without bleeding, then symptom burden, then risk and baseline"
+        },
+        {
+          "id": "numbers",
+          "text": "Counts months, flushes per day, BP, BMI and endometrial thickness"
+        },
+        {
+          "id": "safety",
+          "text": "Names clot, cancer and bleeding status so the plan clearly follows"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "menopause_and_postmenopausal_hormone_thera: management",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Presenting the gynaecology case",
+          "source": "Berek and Novak's Gynecology"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "State the woman with the counts that stage her: age, occupation, and months since the last period, then the cycle story in one line. Months without bleeding come first because they carry the diagnosis.\n\nThen the burden in measured terms: flushes per day with night waking, sleep and mood in brief, genital dryness with pain during relations, urinary urgency with leaks, and joint aches. End the history with postmenopausal bleeding stated as present or absent.",
+          "heading": "Order of the summary"
+        },
+        {
+          "body": "A worked example: a 52 year old school cook with 14 months without periods presents with 2 years of cycle irregularity, 6 to 8 flushes a day with night waking, vaginal dryness with pain during relations, and urgency with occasional leaks. She reports no bleeding since the periods stopped.\n\nHer pressure is 138 over 86 with a BMI of 27, breasts are normal, the vulva and vagina show atrophy, the cervix looks healthy, and the uterus is small and mobile with free fornices. She has no clot, cancer, liver disease or bleeding history, and her smear, mammogram and sugars are current.",
+          "heading": "A worked example"
+        }
+      ],
+      "title": "Clinical summary",
+      "why": "A menopause summary is judged on whether the listener can stage the transition and judge HRT safety without asking again. Months without bleeding, flush burden, bleeding status and risk background are the load bearing facts."
+    },
+    "skill.ix.menopause.workup": {
+      "id": "skill.ix.menopause.workup",
+      "kind": "investigation",
+      "oneLine": "Clinical staging first, tests only for safety, baseline and red flags",
+      "probes": [
+        {
+          "a": "No tests are needed at 45 or over with typical symptoms; FSH is reserved for age 40 to 45 with cycle change, suspected ovarian insufficiency under 40, or assessment after hysterectomy.",
+          "accept": [
+            "tests",
+            "typical",
+            "hysterectomy",
+            "insufficiency"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "A 52 year old has flushes with 14 months of no periods. Which blood test do you order?"
+        },
+        {
+          "a": "Pregnancy test in perimenopause, TSH for thyroid mimics, and transvaginal ultrasound with endometrial sampling for abnormal or postmenopausal bleeding.",
+          "accept": [
+            "pregnancy",
+            "thyroid",
+            "ultrasound",
+            "sampling"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Which three tests exclude the dangerous mimics?"
+        },
+        {
+          "a": "Blood pressure with BMI, sugars, lipids, cervical screening, mammography, bone density with fracture risk, and vitamin D where deficiency is common.",
+          "accept": [
+            "pressure",
+            "lipids",
+            "mammography",
+            "density"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "What baseline do you record before starting HRT?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "menopause_and_postmenopausal_hormone_thera: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "NICE NG23: diagnosis and baseline assessment",
+          "source": "NICE guideline: Menopause"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "At 45 or over with typical symptoms the diagnosis is clinical and no test is needed: neither FSH, oestradiol, AMH nor ovarian volume adds anything. A single FSH in a woman who still bleeds misleads because levels swing so widely.\n\nReserve FSH for narrower questions: age 40 to 45 with symptoms and cycle change, suspected ovarian insufficiency under 40 confirmed on two raised samples weeks apart, or staging after hysterectomy when there is no bleeding story to follow.",
+          "heading": "When no test is the right test"
+        },
+        {
+          "body": "Order a pregnancy test whenever periods have only recently become irregular, since unintended conception in the forties is common enough to matter. Order TSH when flushes come with weight change, tremor, palpitations or marked cycle disruption.\n\nOrder transvaginal ultrasound when bleeding is heavy, irregular or postmenopausal, and sample the endometrium when the lining looks thickened or bleeding persists. Imaging maps fibroids and polyps; only histology excludes hyperplasia and cancer.",
+          "heading": "Tests that exclude the mimics"
+        },
+        {
+          "body": "Before hormones, record blood pressure with BMI, fasting sugars, lipids, cervical screening status and mammography. These set the safety baseline and catch the diabetes, hypertension and breast disease that are common at this age.\n\nAssess bone density with 10 year fracture risk where available, and vitamin D where deficiency is widespread. A level of 50 nanomoles per litre or more counts as sufficient for bone maintenance.",
+          "heading": "Baseline before hormones"
+        },
+        {
+          "heading": "Which test, when",
+          "table": {
+            "cols": [
+              "Situation",
+              "First test",
+              "What it answers"
+            ],
+            "rows": [
+              [
+                "Typical symptoms at 45 or over",
+                "None",
+                "Diagnosis is clinical"
+              ],
+              [
+                "Irregular cycles under 50",
+                "Urine pregnancy test",
+                "Excludes conception"
+              ],
+              [
+                "Flushes with tremor or weight change",
+                "TSH",
+                "Excludes thyroid disease"
+              ],
+              [
+                "Heavy or postmenopausal bleeding",
+                "Ultrasound then biopsy",
+                "Excludes hyperplasia and cancer"
+              ]
+            ]
+          }
+        }
+      ],
+      "title": "Investigations in menopause",
+      "why": "Most menopause testing in outpatient practice is unnecessary, while the few tests that matter are the ones that catch pregnancy, thyroid disease and endometrial cancer. Knowing which group each test belongs to keeps the workup short and safe."
+    },
+    "skill.menopause.diagnosis": {
+      "id": "skill.menopause.diagnosis",
+      "kind": "reasoning",
+      "oneLine": "Twelve months without periods, staged by STRAW+10, mimics excluded",
+      "probes": [
+        {
+          "a": "Twelve months without periods with no other cause at an average age of about 51, staged by cycle history with FSH above 25 units per litre typical only of the late transition.",
+          "accept": [
+            "months",
+            "average",
+            "cycle",
+            "transition"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "State the diagnostic rule in one line."
+        },
+        {
+          "a": "Under 40 with raised FSH on two samples is premature ovarian insufficiency, not early natural menopause, and needs its own cause sought with hormones replaced until the usual menopausal age.",
+          "accept": [
+            "samples",
+            "insufficiency",
+            "replaced",
+            "menopausal"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "She is 34 with 8 months of no periods and a high FSH. Is this menopause?"
+        },
+        {
+          "a": "Pregnancy, thyroid disease, hyperplasia and cancer are excluded by test and sampling, since each can present with amenorrhoea, flushes or bleeding that mimics the transition.",
+          "accept": [
+            "pregnancy",
+            "thyroid",
+            "hyperplasia",
+            "sampling"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "What must be excluded before you call it menopause?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "rule",
+          "text": "States the 12 month rule with the average age before any staging"
+        },
+        {
+          "id": "stage",
+          "text": "Stages by cycle history with biomarkers only as support"
+        },
+        {
+          "id": "exclude",
+          "text": "Names pregnancy, thyroid and endometrial disease as excluded, not assumed"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "menopause_and_postmenopausal_hormone_thera: valueTables diagnostic",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "NICE NG23: diagnosing perimenopause and menopause",
+          "source": "NICE guideline: Menopause"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "The diagnosis is retrospective: 12 months without periods and no other cause, at an average age of about 51. Perimenopause is the years of cycle change before it, and postmenopause is everything after.\n\nStage by the cycle story using STRAW+10: a persistent 7 day or greater difference between consecutive cycles marks early transition, and 60 days or more without bleeding marks late transition. Markers such as FSH, AMH and follicle counts only support the staging.",
+          "heading": "The rule and the staging"
+        },
+        {
+          "body": "Stopping under 40 is premature ovarian insufficiency until proved otherwise: symptoms with absent or infrequent periods and raised FSH on two samples taken weeks apart. Never diagnose it on a single test.\n\nStopping at 40 to 44 is early menopause. Both groups carry longer term bone and heart consequences than menopause at the usual age, so they are offered hormones until at least the natural menopausal age unless hormones are forbidden.",
+          "heading": "Young stopping is a different disease"
+        },
+        {
+          "body": "A complete diagnostic statement names the stage, the count, and what was excluded. For example: menopause with troublesome vasomotor symptoms, 14 months without periods, with pregnancy, thyroid disease and endometrial disease excluded.\n\nRecord the baseline that supports the plan alongside: blood pressure with BMI, cervical screening, mammography, and bone density where done. The diagnosis without the safety baseline is only half the job.",
+          "heading": "A complete diagnostic statement"
+        }
+      ],
+      "title": "Diagnosis and staging",
+      "why": "Menopause is one of the few diagnoses made by counting months rather than by a test, so the count must be exact and the mimics actively excluded. A staged diagnosis with the exclusions stated is what makes the HRT decision defensible."
+    },
+    "skill.menopause.differential": {
+      "id": "skill.menopause.differential",
+      "kind": "reasoning",
+      "oneLine": "Pregnancy, thyroid, panic and womb disease before settling on the transition",
+      "probes": [
+        {
+          "a": "Pregnancy, premature ovarian insufficiency, thyroid disease, anxiety with panic disorder, and endometrial hyperplasia with carcinoma, polyps and fibroids.",
+          "accept": [
+            "pregnancy",
+            "insufficiency",
+            "thyroid",
+            "panic",
+            "hyperplasia"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "Name six differentials of cycle change with flushes or bleeding."
+        },
+        {
+          "a": "Pregnancy is excluded with a urine test because conception in the forties is common, and thyroid disease with TSH because flushing with tremor, weight change and palpitations points to the gland.",
+          "accept": [
+            "urine",
+            "conception",
+            "tremor",
+            "gland"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How do you separate the two commonest medical mimics?"
+        },
+        {
+          "a": "Any bleeding after 12 months without periods needs ultrasound with endometrial sampling, since hyperplasia and carcinoma bleed exactly like a supposed late period.",
+          "accept": [
+            "months",
+            "ultrasound",
+            "sampling",
+            "carcinoma"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "She bleeds 14 months after her last period. What now?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Covers pregnancy, ovarian, thyroid, panic and womb causes without prompt"
+        },
+        {
+          "id": "test",
+          "text": "Pairs each mimic with the single test that separates it"
+        },
+        {
+          "id": "bleed",
+          "text": "Never attributes postmenopausal bleeding to the transition"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "menopause_and_postmenopausal_hormone_thera: valueTables ddx",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Abnormal bleeding in midlife: differential diagnosis",
+          "source": "Berek and Novak's Gynecology"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "Work through four groups before settling on the transition. First, other reasons periods stop: pregnancy, premature ovarian insufficiency under 40, thyroid disease and medicines.\n\nSecond, other reasons for heat and sweats: hyperthyroidism, anxiety with panic disorder, medicines, and flushing from alcohol or spicy food. The commonest trap is calling every midlife flush menopause without a cycle story behind it.",
+          "heading": "Why periods stop, why flushes come"
+        },
+        {
+          "heading": "The key mimics",
+          "points": [
+            "Pregnancy: amenorrhoea in the forties with nausea or breast tenderness; excluded with a urine pregnancy test before any other step.",
+            "Premature ovarian insufficiency: stopping under 40 with raised FSH on two samples; needs a cause sought and hormones until the usual menopausal age.",
+            "Thyroid disease: flushing with tremor, palpitations and weight change; separated with TSH.",
+            "Anxiety with panic disorder: sweating episodes with fear and palpitations; separated by history, not hormones.",
+            "Endometrial hyperplasia and carcinoma: bleeding after the menopause; separated only by sampling the lining.",
+            "Fibroids and polyps: heavy or irregular bleeding with a structural lesion; mapped on saline enhanced ultrasound."
+          ]
+        },
+        {
+          "body": "Postmenopausal bleeding has its own rule that overrides everything else in this chapter: any bleeding after 12 months without periods is investigated for endometrial disease first.\n\nTransvaginal ultrasound with endometrial sampling is the path, arranged urgently where the pathway allows. Hormones are never started to cover bleeding that has not been explained.",
+          "heading": "Bleeding after menopause is never the transition"
+        }
+      ],
+      "title": "Differential diagnosis",
+      "why": "The transition shares its two cardinal features with dangerous mimics: amenorrhoea with pregnancy and ovarian failure, flushes with thyroid and panic, bleeding with cancer. A fixed differential worked in groups stops the commonest error, which is attributing everything to menopause."
+    },
+    "skill.tx.menopause": {
+      "dosingNote": "This module teaches management at the level of drug class and principle, with durations and device specifications quoted from the cited sources. Specific agents, regimens and doses must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "id": "skill.tx.menopause",
+      "kind": "treatment",
+      "oneLine": "Combined or single hormones by uterus status, plus bone, heart and genital care",
+      "probes": [
+        {
+          "a": "Systemic oestrogen with a progestogen when the uterus is present, oestrogen alone after hysterectomy, started under 60 or within 10 years of menopause and reviewed every year.",
+          "accept": [
+            "oestrogen",
+            "progestogen",
+            "hysterectomy",
+            "reviewed"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "She has flushes and an intact uterus. What hormones do you offer?"
+        },
+        {
+          "a": "Transdermal oestradiol is preferred with raised clot risk including a BMI above 30, since oral oestrogen raises clot and stroke risk while the patch carries lower risk.",
+          "accept": [
+            "transdermal",
+            "clot",
+            "oral",
+            "stroke"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Her BMI is 34 with a family history of clots. Which route, and why?"
+        },
+        {
+          "a": "Low dose vaginal oestrogen for genital symptoms needs no progestogen and can continue long term, while gabapentin, clonidine, SSRIs and neurokinin blockers serve when systemic hormones are forbidden.",
+          "accept": [
+            "vaginal",
+            "progestogen",
+            "gabapentin",
+            "forbidden"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Hormones are forbidden by a past clot. How do you treat her flushes and dryness?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "menopause_and_postmenopausal_hormone_thera: valueTables treatment",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "NICE NG23: HRT for vasomotor symptoms",
+          "source": "NICE guideline: Menopause"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "Offer systemic hormones for troublesome flushes and night sweats: oestrogen is the most effective treatment, cutting symptoms by roughly 65 to 90 percent in trials. Benefit and risk are most favourable when started under 60 or within 10 years of the final period.\n\nThere is no fixed stop date. Agree the likely duration at the start, use the lowest dose that controls symptoms, and review every year whether hormones are still needed.",
+          "heading": "Hormones for flushes, timed right"
+        },
+        {
+          "body": "With a uterus present, always pair systemic oestrogen with a progestogen: unopposed oestrogen markedly raises endometrial cancer risk. The cited starting points are estradiol 0.5 mg by mouth daily or conjugated oestrogen 0.3 mg daily, with micronized progesterone 100 mg nightly continuously or 200 mg nightly in sequence, or medroxyprogesterone 2.5 mg continuously, or a 52 mg levonorgestrel intrauterine system.\n\nAfter total hysterectomy give oestrogen alone. Sequential combined treatment suits women still bleeding; continuous combined treatment after menopause gives no monthly bleed and lowers endometrial cancer risk.",
+          "heading": "Combined with a uterus, single without"
+        },
+        {
+          "body": "Choose the route by clot risk. Oral oestrogen raises clot and stroke risk, while transdermal oestradiol through patch, gel or spray carries lower clot and gallbladder risk. Prefer transdermal with raised clot risk, including a BMI above 30.\n\nThe cited patch range is 0.014 to 0.375 mg per day. Stop systemic hormones at once for a coronary event or stroke, and never offer hormones to prevent heart disease or dementia.",
+          "heading": "Tablets or patch by clot risk"
+        },
+        {
+          "body": "Treat genital dryness, burning, pain during relations and recurrent urinary symptoms with low dose vaginal oestrogen: tablet, ring or cream. Absorption is minimal, no progestogen is needed, and it can continue long term with review, including alongside systemic hormones.\n\nMoisturisers and lubricants can be used alone or added. Withholding vaginal oestrogen because of warnings meant for systemic hormones is a common and avoidable error.",
+          "heading": "Vaginal oestrogen for genital symptoms"
+        },
+        {
+          "body": "When systemic hormones are forbidden or declined, options include SSRIs or SNRIs, gabapentin 300 mg up to three times daily, clonidine, and neurokinin receptor blockers. The cited blocker needs liver tests at baseline and every 3 months for 9 months.\n\nTibolone and raloxifene are further non systemic options discussed in standard texts: tibolone for flushes with bone protection, raloxifene for osteoporosis with breast protection. Doses for these come from your current formulary, not from memory.",
+          "heading": "When hormones are forbidden"
+        },
+        {
+          "body": "Protect bone and heart in every woman: weight bearing exercise, calcium with vitamin D, smoking cessation, and control of pressure, sugar and lipids. Oestrogen with or without progestogen raises spine density by about 4 to 6 percent and hip density by about 2 to 3 percent, with roughly a third fewer hip fractures.\n\nIn Indian practice arrange DEXA at the medical college where available, keep cervical and breast screening current, use the PHC for pressure, sugar and BMI follow up, and refer under the usual cashless schemes for fractures, uncontrolled comorbidity or postmenopausal bleeding needing sampling.",
+          "heading": "Bone, heart and follow up for everyone"
+        }
+      ],
+      "title": "Treatment of menopause",
+      "why": "HRT is the most effective treatment for flushes and a safe one when matched to uterus status, clot risk and timing, and harmful when given to the wrong woman by the wrong route. The uterus, the veins and the clock decide everything, so they are checked before anything is prescribed."
+    }
+  },
+  "cases": [
+    {
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "history": {
+        "bladder_urgency_leaks": {
+          "cues": [
+            "burning while passing urine",
+            "urine leak on coughing",
+            "urgency to pass urine",
+            "repeated urinary infection",
+            "getting up at night to urinate"
+          ],
+          "key": true,
+          "reply": "I rush to pass urine many times a day, and sometimes a little leaks when I cough. Twice this year I had burning and needed medicine from the PHC for urine infection."
+        },
+        "bleeding_alarm_check": {
+          "cues": [
+            "bleeding after periods stopped",
+            "spotting after menopause",
+            "any bleeding since last period",
+            "blood stained discharge"
+          ],
+          "key": true,
+          "reply": "No, doctor, not a single spot since the periods stopped more than a year ago. I would have come running if I had seen blood."
+        },
+        "bone_fracture_falls": {
+          "cues": [
+            "broken a bone with a small fall",
+            "loss of height",
+            "back pain with stooping",
+            "fracture of wrist or hip"
+          ],
+          "reply": "No fracture so far, but my knees and finger joints ache in the morning. My mother bent forward a lot in her old age, which frightens me."
+        },
+        "cancer_family_screen": {
+          "cues": [
+            "breast cancer in the family",
+            "anyone with cancer at home",
+            "lump in the breast",
+            "last mammography",
+            "cervical screening test"
+          ],
+          "reply": "Nobody at home has had breast or womb cancer. I have never had a mammogram, but the nurse did a vinegar test on my cervix two years ago and said it was normal."
+        },
+        "clot_risk_background": {
+          "cues": [
+            "clot in the leg or lungs",
+            "leg swelling with pain",
+            "stroke in the family",
+            "heart attack at home",
+            "migraine with visual changes"
+          ],
+          "reply": "No clots, no leg swelling, no stroke. My father died of a heart attack at 70. I get headaches sometimes but never with loss of sight."
+        },
+        "cycle_pattern_change": {
+          "cues": [
+            "how have periods changed",
+            "gap between periods",
+            "skipped periods",
+            "flow heavier or lighter",
+            "days of bleeding now"
+          ],
+          "key": true,
+          "reply": "For two years the gap kept changing, sometimes 20 days, sometimes two months, and the flow became light. Then they stopped fully 14 months ago."
+        },
+        "drugs_current_use": {
+          "cues": [
+            "tablets you take daily",
+            "blood pressure tablets",
+            "thyroid tablets",
+            "hormone tablets",
+            "calcium or vitamin tablets"
+          ],
+          "key": true,
+          "reply": "Only calcium tablets from the PHC, which I take when I remember. No pressure tablets, no thyroid tablets, no hormones."
+        },
+        "heart_sugar_pressure": {
+          "cues": [
+            "blood pressure problem",
+            "diabetes or sugar",
+            "cholesterol test",
+            "chest pain on walking",
+            "known heart disease"
+          ],
+          "reply": "The PHC nurse said my pressure was borderline last month. No sugar problem, no chest pain. My weight has gone up around the waist."
+        },
+        "joint_ache_pains": {
+          "cues": [
+            "joint pains in the morning",
+            "knee pain climbing stairs",
+            "backache with household work",
+            "stiffness of fingers"
+          ],
+          "reply": "Both knees pain when I climb the school stairs, and my fingers feel stiff till I start cooking. By afternoon it eases."
+        },
+        "mood_memory_strain": {
+          "cues": [
+            "feeling low or weepy",
+            "anger over small things",
+            "forgetting recent events",
+            "interest in relations with husband"
+          ],
+          "reply": "I cry easily and get angry over small things, which is not like me. I forget where I kept the keys. Relations with my husband have reduced because of the dryness and my tiredness."
+        },
+        "night_sweat_sleep": {
+          "cues": [
+            "waking up sweating at night",
+            "changing clothes at night",
+            "broken sleep",
+            "difficulty falling asleep",
+            "tired in the morning"
+          ],
+          "key": true,
+          "reply": "Two or three nights a week I wake up drenched and must change my nightdress. Then sleep does not return, and I feel heavy headed the whole next day."
+        },
+        "obstetric_past_record": {
+          "cues": [
+            "how many children",
+            "normal deliveries or operation",
+            "miscarriage in the past",
+            "age at first child",
+            "sterilisation operation"
+          ],
+          "key": true,
+          "reply": "I have three children, all normal deliveries at the government hospital, now aged 28, 25 and 22. I had my tubes tied after the third. No miscarriage."
+        },
+        "onset_tempo": {
+          "cues": [
+            "when did it start",
+            "how long",
+            "since when",
+            "gradual or sudden",
+            "first symptom noticed"
+          ],
+          "key": true,
+          "reply": "It started gradually about two years ago with the periods going irregular, and the heat waves joined about a year ago. It has slowly become worse."
+        },
+        "past_medical_other": {
+          "cues": [
+            "thyroid problem",
+            "tuberculosis in the past",
+            "jaundice or liver problem",
+            "kidney problem",
+            "fits or epilepsy"
+          ],
+          "reply": "No thyroid problem, no TB, no jaundice. I had typhoid ten years ago and recovered fully."
+        },
+        "personal_daily_routine": {
+          "cues": [
+            "work you do daily",
+            "diet vegetarian or mixed",
+            "tobacco or mishri use",
+            "alcohol use",
+            "sleeping hours"
+          ],
+          "reply": "I cook midday meals at the village school and eat a vegetarian diet at home. I never used tobacco or alcohol. I sleep about six broken hours."
+        },
+        "presenting": {
+          "cues": [
+            "what brings you today",
+            "main problem",
+            "what troubles you most",
+            "reason for visit"
+          ],
+          "key": true,
+          "reply": "For the last year I get sudden waves of heat with heavy sweating, many times a day, and my periods have been fully stopped for over a year. The dryness and the broken sleep trouble me most."
+        },
+        "tobacco_alcohol_habits": {
+          "cues": [
+            "smoking beedis or cigarettes",
+            "chewing tobacco or gutka",
+            "husband smokes at home",
+            "cooking on chulha smoke",
+            "alcohol taken weekly"
+          ],
+          "reply": "I have never smoked or chewed tobacco. My husband smokes beedis outside the house. I cook on gas now, though we used a chulha for many years."
+        },
+        "vaginal_dryness_intimacy": {
+          "cues": [
+            "dryness in private parts",
+            "itching in private parts",
+            "pain during relations",
+            "burning after relations",
+            "white discharge with itching"
+          ],
+          "key": true,
+          "reply": "There is dryness and itching down below, and relations with my husband have become painful, so we avoid it. There is no foul discharge."
+        },
+        "vasomotor_episodes": {
+          "cues": [
+            "sudden waves of heat",
+            "hot flushes with sweating",
+            "flushing of face and neck",
+            "how many times a day",
+            "sweating at work"
+          ],
+          "key": true,
+          "reply": "Six to eight times a day a wave of heat rises to my face and neck with heavy sweating for a few minutes. At school the children notice my red face."
+        }
+      },
+      "id": "case.menopause.meena",
+      "initialVitals": {
+        "bpDiastolic": 86,
+        "bpSystolic": 138,
+        "gcs": 15,
+        "hr": 84,
+        "rr": 18,
+        "spo2": 98,
+        "temp": 37
+      },
+      "opening": "Meena Deshmukh, 52, a school cook from a village near Nashik, sits fanning herself with the edge of her saree in the gynaecology outpatient room. She looks tired but smiles. Introduce yourself and take a history.",
+      "patient": {
+        "age": 52,
+        "name": "Meena Deshmukh",
+        "occupation": "Midday meal cook at the village school",
+        "residence": "A village near Nashik, Maharashtra",
+        "sex": "female"
+      },
+      "title": "A school cook with a year of heat waves after her periods stopped",
+      "diagnosis": {
+        "accept": [
+          "menopause",
+          "climacteric",
+          "postmenopause"
+        ],
+        "answer": "Menopause with troublesome vasomotor and genitourinary symptoms, 14 months after the final period, with pregnancy, thyroid disease and endometrial disease excluded."
+      },
+      "differentialModel": {
+        "accept": [
+          "pregnancy",
+          "hyperthyroidism",
+          "panic disorder",
+          "endometrial hyperplasia",
+          "carcinoma of the endometrium",
+          "endometrial polyp",
+          "fibroid",
+          "premature ovarian insufficiency"
+        ],
+        "answer": "Menopause with troublesome vasomotor symptoms. Consider pregnancy, thyroid disease, panic disorder, and endometrial hyperplasia or carcinoma with polyps.",
+        "minMatch": 2
+      },
+      "essentialInvestigations": [
+        "upt",
+        "tsh",
+        "usg_pelvis"
+      ],
+      "exam": {
+        "skill.exam.obg.bimanual": {
+          "abnormal": false,
+          "finding": "Uterus small, firm and mobile. Both fornices free, no adnexal mass, no cervical motion tenderness."
+        },
+        "skill.exam.obg.breast_exam": {
+          "abnormal": false,
+          "finding": "No lump, no discharge, no skin change in either breast. Axillae clear. Never had a mammogram."
+        },
+        "skill.exam.obg.gynae_abdominal": {
+          "abnormal": false,
+          "finding": "Abdomen soft with no palpable pelvic mass and no tenderness. No organ enlargement."
+        },
+        "skill.exam.obg.speculum_insert": {
+          "abnormal": false,
+          "finding": "Smallest warmed speculum passed gently with lubricant. Dryness made entry tight but possible without injury."
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "abnormal": true,
+          "finding": "Pale thin vaginal walls with loss of folds and scant clear discharge. Cervix small, pale and healthy with a closed os. No bleeding."
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "abnormal": true,
+          "finding": "Sparse pubic hair with pale thin labia and loss of fat. No ulcers and no white plaques."
+        },
+        "skill.gen.appearance": {
+          "abnormal": false,
+          "finding": "Alert and looks her stated age, flushed across the face and chest with light sweating. Weight gain around the waist. No pallor and no distress."
+        },
+        "skill.gen.edema": {
+          "abnormal": false,
+          "finding": "No ankle oedema."
+        },
+        "skill.gen.vitals": {
+          "abnormal": true,
+          "finding": "Blood pressure 138 over 86, pulse 84 regular, no fever. Pressure needs a repeat reading before labelling hypertension. BMI 27."
+        }
+      },
+      "investigations": {
+        "cervical_screen": {
+          "indicated": true,
+          "label": "Cervical screening (VIA or Pap)",
+          "note": "Screening must be current before hormones: an unhealthy cervix changes everything.",
+          "result": "VIA done today is negative. Last Pap 2 years ago was normal."
+        },
+        "dexa": {
+          "indicated": true,
+          "label": "Bone densitometry with fracture risk",
+          "note": "Decides calcium, vitamin D and antiresorptive need at the medical college bone clinic.",
+          "result": "Bone density in the low bone mass range at the spine, no fracture. Ten year risk moderate."
+        },
+        "lipids": {
+          "indicated": true,
+          "label": "Fasting lipid profile",
+          "note": "Part of the heart risk baseline at this age, alongside pressure and sugar.",
+          "result": "Total cholesterol mildly raised, other fractions normal."
+        },
+        "mammogram": {
+          "indicated": true,
+          "label": "Bilateral mammography",
+          "note": "Breast baseline before HRT: any lump or discharge would stop the hormone plan.",
+          "result": "Normal study with no lump or suspicious calcification."
+        },
+        "sugars": {
+          "indicated": true,
+          "label": "Fasting glucose with HbA1c",
+          "note": "Diabetes is common at this age and changes heart risk, though it does not forbid HRT.",
+          "result": "Fasting glucose and HbA1c within normal limits."
+        },
+        "tsh": {
+          "indicated": true,
+          "label": "Thyroid stimulating hormone",
+          "note": "Excludes the thyroid mimic of flushes and cycle change in one test.",
+          "result": "TSH normal."
+        },
+        "upt": {
+          "indicated": true,
+          "label": "Urine pregnancy test",
+          "note": "Mandatory with recent cycle irregularity: conception in the forties is common enough to matter.",
+          "result": "Negative."
+        },
+        "usg_pelvis": {
+          "indicated": true,
+          "label": "Transvaginal pelvic ultrasound",
+          "note": "Confirms an atrophic uterus with a thin lining and excludes fibroids, polyps and ovarian masses.",
+          "result": "Uterus small and atrophic with an endometrial thickness of 3 mm. Ovaries small with no mass and no fluid."
+        },
+        "vitd": {
+          "indicated": true,
+          "label": "Serum vitamin D",
+          "note": "Deficiency is widespread and correctable, and it underpins any bone plan.",
+          "result": "Insufficient, needing supplementation with calcium."
+        }
+      },
+      "managementModel": {
+        "accept": [
+          "oestrogen",
+          "progestogen",
+          "transdermal",
+          "vaginal",
+          "calcium",
+          "exercise",
+          "mammography",
+          "review"
+        ],
+        "answer": "Combined systemic oestrogen with progestogen by the transdermal route with yearly review, plus vaginal oestrogen for dryness, calcium with vitamin D and weight bearing exercise, and continued breast and cervical screening.",
+        "minMatch": 3
+      },
+      "review": {
+        "status": "ai_drafted"
+      },
+      "teachingPoints": [
+        "Menopause is counted, not tested: 14 months without periods at 52 with a typical symptom train is a clinical diagnosis, and FSH would add nothing.",
+        "Flushes with night waking, genital dryness with dyspareunia, and urgency with leaks form one oestrogen deficiency syndrome, while her low mood and forgetfulness need their own assessment.",
+        "No postmenopausal bleeding, a healthy cervix, a thin 3 mm lining and a negative pregnancy test and TSH close the dangerous mimics in this case.",
+        "With an intact uterus and no clot, cancer, liver disease or bleeding history, combined HRT suits her, and a BMI of 27 with borderline pressure favours the transdermal route with pressure follow up.",
+        "Vaginal oestrogen treats the dryness and dyspareunia that systemic hormones alone may leave behind, needs no progestogen, and can continue long term.",
+        "Bone and heart care run alongside hormones: calcium with vitamin D, weight bearing exercise, smoking avoidance, sugars and lipids controlled, and a yearly review with red flags explained."
+      ]
+    }
+  ]
+}

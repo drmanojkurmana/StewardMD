@@ -1,0 +1,1196 @@
+{
+ "_comment": "Peritonitis with perforated peptic ulcer: the acute abdomen prototype. Almost every bedside finding is an emphasis overlay on shared surgery/core skills; the disease owns the mechanism (one spill, one picture), the three stages, sealed versus free perforation, and source control with Graham patch.",
+ "id": "peritonitis-perforation",
+ "name": "Peritonitis and perforated peptic ulcer",
+ "fullName": "Generalised peritonitis due to perforated peptic ulcer",
+ "system": "surgery",
+ "kbRef": "acute_peritonitis_damage_control_and_compartment_syndrome",
+ "oneLine": "Sudden upper abdominal catastrophe, and the hours that decide survival",
+ "estMinutes": 60,
+ "review": {
+  "status": "ai_drafted"
+ },
+ "version": 1,
+ "chapters": [
+  {
+   "id": "basics",
+   "title": "Basics",
+   "blurb": "What secondary peritonitis is, and why the perforated ulcer is its prototype",
+   "skills": [
+    "skill.reasoning.peritonitis.basics"
+   ]
+  },
+  {
+   "id": "approach",
+   "title": "Approach to the patient",
+   "blurb": "Be gentle first: this abdomen punishes rough hands",
+   "skills": [
+    "skill.approach.hygiene",
+    "skill.approach.introduce",
+    "skill.approach.consent",
+    "skill.approach.position"
+   ]
+  },
+  {
+   "id": "particulars",
+   "title": "Patient particulars",
+   "blurb": "Middle aged men with neglected ulcer pain carry the highest risk",
+   "skills": [
+    "skill.particulars.demographics"
+   ],
+   "emphasis": {
+    "skill.particulars.demographics": {
+     "expect": "Perforation of peptic ulcer clusters in middle aged men, often daily wage earners with irregular meals, spicy food, bidi smoking and self taken painkillers. A neglected ulcer past in a low income patient who never sought care for hunger pains is the classic background, so age, occupation, residence and habits carry real diagnostic weight here."
+    }
+   }
+  },
+  {
+   "id": "history",
+   "title": "History of presenting illness",
+   "blurb": "Sudden, stabbing, and then spreading: the tempo tells the story",
+   "skills": [
+    "skill.hx.chief_complaints",
+    "skill.hx.surg.acute_abdomen",
+    "skill.hx.surg.chronic_dyspepsia_ulcer"
+   ],
+   "emphasis": {
+    "skill.hx.chief_complaints": {
+     "expect": "Expect a sudden stabbing upper abdominal pain, often after a meal, that the patient timestamps to the hour. Ask where it started with one finger, how it spread all over, and whether movement, cough or breathing worsen it."
+    },
+    "skill.hx.surg.acute_abdomen": {
+     "expect": "Expect the classic perforation tempo: abrupt epigastric onset, spread across the whole abdomen within hours, pain referred to the right shoulder from diaphragmatic irritation, and later pain in the right iliac fossa as contents track down the right gutter."
+    },
+    "skill.hx.surg.chronic_dyspepsia_ulcer": {
+     "expect": "Expect a neglected ulcer past behind the catastrophe: rhythmic hunger pains eased by food or antacids over months, previous vomiting of blood or black stools, and regular painkiller tablets. Its absence does not exclude perforation, since a first ulcer can perforate without warning."
+    }
+   }
+  },
+  {
+   "id": "past_personal_drug_family",
+   "title": "Past, personal, drug and family history",
+   "blurb": "The ulcer past and the habits that broke it open",
+   "skills": [
+    "skill.hx.peritonitis.risk"
+   ]
+  },
+  {
+   "id": "general_exam",
+   "title": "General examination",
+   "blurb": "Stillness, fast pulse and dry tongue before the abdomen is touched",
+   "skills": [
+    "skill.gen.surg.survey",
+    "skill.gen.appearance",
+    "skill.gen.vitals",
+    "skill.gen.surg.surgical_shock"
+   ],
+   "emphasis": {
+    "skill.gen.surg.survey": {
+     "expect": "Expect a quiet motionless patient lying with hips flexed, with anxious facies and cold sweat in late cases. Stillness is the survey finding here, the opposite of the tossing of colic."
+    },
+    "skill.gen.appearance": {
+     "expect": "Look for dehydration early: sunken eyes, dry tongue, drawn cheeks. Toxaemia shows as a dry brown tongue with a fast pulse, and pallor suggests chronic blood loss from the same ulcer disease."
+    },
+    "skill.gen.vitals": {
+     "expect": "Expect a pulse that starts normal and quickens as peritonitis spreads, with falling pressure and rising respiratory rate. Temperature rises late, never early, so a normal temperature in the first hours excludes nothing."
+    },
+    "skill.gen.surg.surgical_shock": {
+     "expect": "Expect tachycardia, thready pulse, cold periphery and falling urine output as third spacing and sepsis take hold. Waiting for a dramatic pressure drop means waiting for decompensated shock."
+    }
+   }
+  },
+  {
+   "id": "systemic_exam",
+   "title": "Abdominal examination",
+   "blurb": "Board like rigidity, lost liver dullness and a silent abdomen",
+   "skills": [
+    "skill.exam.surg.peritonitis_signs",
+    "skill.exam.surg.perforation_peritonitis",
+    "skill.exam.surg.tenderness_rebound",
+    "skill.exam.surg.appendicitis_signs",
+    "skill.exam.surg.bowel_obstruction"
+   ],
+   "emphasis": {
+    "skill.exam.surg.peritonitis_signs": {
+     "expect": "Expect generalised board like rigidity with rebound tenderness everywhere, thoracic breathing with no abdominal movement, and a silent abdomen. Elicit rebound and percussion tenderness gently; rough handling adds nothing and costs the patient's trust."
+    },
+    "skill.exam.surg.perforation_peritonitis": {
+     "expect": "Expect obliteration of liver dullness on percussion down the right mid axillary line, exquisite tenderness of the pelvic peritoneum on rectal examination, and complete absence of bowel sounds. Together with rigidity this is the bedside diagnosis."
+    },
+    "skill.exam.surg.tenderness_rebound": {
+     "expect": "Expect release tenderness in all quadrants rather than one spot. Tenderness that has spread to the left iliac fossa, or to the right fossa from an epigastric start, marks spreading peritonitis and demands immediate surgical review."
+    },
+    "skill.exam.surg.appendicitis_signs": {
+     "expect": "Know these signs to avoid the classic trap: tracked gastric contents make the right iliac fossa tender in perforation. The epigastric origin of the pain and generalised rigidity, not a migrating pain with localised fossa signs, separate the two."
+    },
+    "skill.exam.surg.bowel_obstruction": {
+     "expect": "Use this examination as the contrast: obstruction is noisy with visible peristalsis and colicky restlessness, while perforation peritonitis is silent with stillness. A silent abdomen with rigidity is never obstruction without strangulation."
+    }
+   }
+  },
+  {
+   "id": "disease_findings",
+   "title": "Putting the perforation picture together",
+   "blurb": "One spill explains the still patient and the board abdomen",
+   "skills": [
+    "skill.reasoning.peritonitis.signs"
+   ]
+  },
+  {
+   "id": "summary",
+   "title": "Clinical summary",
+   "blurb": "Tempo, proofs and plan inside a minute",
+   "skills": [
+    "skill.present.peritonitis.summary"
+   ]
+  },
+  {
+   "id": "differential",
+   "title": "Differential diagnosis",
+   "blurb": "Mimics above and below the diaphragm, killed before theatre",
+   "skills": [
+    "skill.reasoning.peritonitis.differential"
+   ]
+  },
+  {
+   "id": "investigations",
+   "title": "Investigations",
+   "blurb": "One erect film proves it; nothing waits for a report",
+   "skills": [
+    "skill.investigation.peritonitis.workup"
+   ]
+  },
+  {
+   "id": "diagnosis",
+   "title": "Diagnosis and risk grading",
+   "blurb": "Name it fully, grade the physiology, know when it sealed",
+   "skills": [
+    "skill.reasoning.peritonitis.diagnosis",
+    "skill.annex.peritonitis.stages"
+   ]
+  },
+  {
+   "id": "treatment",
+   "title": "Treatment",
+   "blurb": "Resuscitate, wash out, patch the hole, watch the belly",
+   "skills": [
+    "skill.treatment.peritonitis.management"
+   ]
+  },
+  {
+   "id": "case",
+   "title": "Case presentation",
+   "blurb": "Present this patient to your consultant",
+   "skills": [
+    "skill.present.case"
+   ]
+  }
+ ],
+ "osce": {
+  "stations": [
+   {
+    "id": "osce.peritonitis.abdomen_exam",
+    "title": "Examine the acute abdomen",
+    "task": "This 48 year old man has had sudden severe upper abdominal pain for six hours. Examine his abdomen and present your findings.",
+    "seconds": 480,
+    "skills": [
+     "skill.approach.hygiene",
+     "skill.approach.introduce",
+     "skill.approach.consent",
+     "skill.exam.surg.peritonitis_signs",
+     "skill.exam.surg.perforation_peritonitis",
+     "skill.exam.surg.tenderness_rebound",
+     "skill.exam.surg.bowel_obstruction"
+    ],
+    "examinerQuestions": [
+     "You found board like rigidity with absent bowel sounds. Why is this peritonitis and not intestinal colic?",
+     "Liver dullness is obliterated on percussion. What does this signify, and does its absence exclude perforation?",
+     "His pain has eased since arrival but the abdomen is still rigid. Can he be sent home?"
+    ]
+   },
+   {
+    "id": "osce.peritonitis.history",
+    "title": "Take a perforation history and assess risk",
+    "task": "This 48 year old man has sudden upper abdominal pain. Take a focused history in six minutes and be ready to state what caused it and what happens next.",
+    "seconds": 360,
+    "skills": [
+     "skill.approach.introduce",
+     "skill.approach.consent",
+     "skill.hx.chief_complaints",
+     "skill.hx.surg.acute_abdomen",
+     "skill.hx.peritonitis.risk"
+    ],
+    "examinerQuestions": [
+     "What three facts in his story point to a chronic duodenal ulcer behind this perforation?",
+     "His pain started in the epigastrium and is now also in the right iliac fossa. Explain the route.",
+     "Name the single investigation you would order first, and what resuscitation starts alongside it."
+    ]
+   }
+  ]
+ },
+ "viva": {
+  "skills": [
+   "skill.reasoning.peritonitis.basics",
+   "skill.exam.surg.peritonitis_signs",
+   "skill.exam.surg.perforation_peritonitis",
+   "skill.reasoning.peritonitis.signs",
+   "skill.reasoning.peritonitis.differential",
+   "skill.investigation.peritonitis.workup",
+   "skill.reasoning.peritonitis.diagnosis",
+   "skill.treatment.peritonitis.management"
+  ]
+ },
+ "skills": {
+  "skill.reasoning.peritonitis.basics": {
+   "id": "skill.reasoning.peritonitis.basics",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "What peritonitis from a perforated ulcer is",
+   "oneLine": "A hole in the gut wall turns a contained leak into a whole abdomen emergency",
+   "why": "Peritonitis is not one disease but one response of the peritoneum to very different insults. Knowing which insult you face decides whether the answer is an operation tonight or antibiotics alone, and mixing them up kills.",
+   "teach": [
+    {
+     "heading": "Secondary peritonitis and its prototype",
+     "body": "Secondary peritonitis means infection or chemical irritation of the peritoneal cavity from a leaking viscus. Its commonest surgical prototype in an adult Indian ward is a perforated peptic ulcer, usually anterior duodenal, spilling acidic gastric contents into the free peritoneal cavity.\n\nThe leak starts as chemical peritonitis from acid and enzymes, and bacterial infection follows within hours. That two phase course explains why the patient looks shocked before he looks septic, and why early operation matters more than the choice of antibiotic."
+    },
+    {
+     "heading": "Primary, secondary and tertiary: three different answers",
+     "table": {
+      "cols": [
+       "Type",
+       "Source of insult",
+       "Usual answer"
+      ],
+      "rows": [
+       [
+        "Secondary",
+        "Perforated viscus, anastomotic leak, trauma",
+        "Resuscitation plus source control, usually operation"
+       ],
+       [
+        "Primary",
+        "Bacterial seeding without a hole, as in cirrhosis with ascites",
+        "Antibiotics and paracentesis, not laparotomy"
+       ],
+       [
+        "Tertiary",
+        "Persistent infection after treatment, often in intensive care",
+        "Support, cultures, search for an undrained focus"
+       ]
+      ]
+     }
+    },
+    {
+     "heading": "Why the duodenum perforates first",
+     "body": "Chronic duodenal ulceration erodes the wall from inside until only a thin layer holds. A sudden rise in pressure, straining or a heavy meal, or continued painkiller use, breaks that last layer, and the hole is usually small but the spill is highly irritant.\n\nPosterior ulcers bleed into the pancreas instead of perforating freely, which is why a past of vomiting blood and a present perforation can belong to the same patient with two different ulcers, or even two faces of one disease."
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What does secondary peritonitis mean, and what is its commonest adult prototype here?",
+     "a": "Peritoneal contamination from a leaking viscus, most typically a perforated peptic ulcer spilling gastric contents.",
+     "accept": [
+      "leaking",
+      "viscus",
+      "perforated",
+      "ulcer",
+      "gastric"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "Why does a perforated ulcer patient look shocked before he looks septic?",
+     "a": "The first phase is chemical peritonitis from acid and enzymes, and bacterial infection follows hours later.",
+     "accept": [
+      "chemical",
+      "acid",
+      "bacterial",
+      "hours"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "A cirrhotic patient with ascites develops peritonitis with no free gas. Does he need a laparotomy?",
+     "a": "No. That picture fits primary peritonitis from bacterial seeding, treated with antibiotics and paracentesis, and laparotomy would add harm without a hole to close.",
+     "accept": [
+      "primary",
+      "antibiotics",
+      "paracentesis",
+      "no hole"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "acute_peritonitis_damage_control_and_compartment_syndrome: pathophysiology"
+    },
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "gastric_neoplasms_peptic_ulcer_and_gastrectomy: pathophysiology"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "Peritonitis"
+    },
+    {
+     "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+     "locator": "The acute abdomen"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.peritonitis.signs": {
+   "id": "skill.reasoning.peritonitis.signs",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "The perforation picture",
+   "oneLine": "One spill explains the still patient, the board abdomen and the silent gut",
+   "why": "Perforation is the cleanest example in abdominal examination of one mechanism generating a coherent set of signs. Acid on the parietal peritoneum explains the posture, the rigidity, the percussion finding and the silence together, so the signs are read as one picture, not a list.",
+   "teach": [
+    {
+     "heading": "Stillness, rigidity and silence belong together",
+     "body": "The patient lies perfectly still, often with hips flexed, and resists any movement, cough or deep breath, because every jolt drags the inflamed parietal peritoneum. This stillness alone separates peritonitis from colic, where the patient tosses and rolls.\n\nThe abdominal wall is rigid like a board from reflex spasm, tender everywhere with rebound, and bowel sounds vanish into a silent abdomen as generalised ileus sets in. One irritant explains all three, which is why finding one should send you hunting for the other two."
+    },
+    {
+     "heading": "Loss of liver dullness means free gas",
+     "body": "Gas escaping with the spill rises under the diaphragm and replaces the normal dull note over the liver with resonance when percussed down the right mid axillary line. This is the bedside proof of a perforated hollow viscus.\n\nAbsence of the sign does not exclude perforation, since a small leak may release too little gas to detect. But when present with board like rigidity, the diagnosis is made at the bedside, before any film."
+    },
+    {
+     "heading": "The three stages, and the trap in the middle",
+     "points": [
+      "Stage of peritoneal irritation, the first few hours: sudden stabbing upper abdominal pain, stillness, board like rigidity, a normal pulse.",
+      "Stage of reaction or illusion of recovery: pain eases as exudate dilutes the acid, and the patient feels better while peritonitis spreads.",
+      "Stage of diffuse peritonitis: distension, rising pulse, falling pressure, silent abdomen, dehydration and toxaemia.",
+      "Never discharge or delay on the second stage. Improvement of pain with a still rigid abdomen is the most dangerous moment in this disease."
+     ]
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "How does the posture of peritonitis differ from colic at first glance?",
+     "a": "Peritonitis lies perfectly still and resists movement, while colic tosses, rolls and seeks comfort.",
+     "accept": [
+      "still",
+      "colic",
+      "tosses",
+      "movement"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "Percussion down the right mid axillary line is resonant over the liver area. What does this mean?",
+     "a": "Free gas under the diaphragm, pneumoperitoneum from a perforated hollow viscus.",
+     "accept": [
+      "free gas",
+      "pneumoperitoneum",
+      "perforated",
+      "diaphragm"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "Pain eases markedly six hours after a sudden onset, but the abdomen stays rigid. What has happened?",
+     "a": "The stage of reaction: exudate has diluted the acid so pain lessens while peritonitis spreads, and it must never be mistaken for recovery.",
+     "accept": [
+      "reaction",
+      "diluted",
+      "spreads",
+      "recovery"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "acute_peritonitis_damage_control_and_compartment_syndrome: clinicalPearls"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "Perforated peptic ulcer"
+    },
+    {
+     "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+     "locator": "Peritonitis and pneumoperitoneum"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.peritonitis.differential": {
+   "id": "skill.reasoning.peritonitis.differential",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "What else looks like a perforation",
+   "oneLine": "Sudden upper abdominal pain has mimics above and below the diaphragm",
+   "why": "Operating for a perforation that is really a heart attack or pancreatitis harms twice: the real disease goes untreated and a laparotomy is added. The differential is worked through before the abdomen is opened, never after.",
+   "teach": [
+    {
+     "heading": "Below the diaphragm: the surgical mimics",
+     "body": "Acute cholecystitis stays under the right ribs with fever and a tender palpable gallbladder, and the rigidity never becomes board like all over. Acute pancreatitis gives agonising upper abdominal pain with vomiting and shock but the abdomen stays relatively soft for the degree of pain.\n\nAcute appendicitis can mimic perforation when gastric contents track down the right gutter to the right iliac fossa, but asking where the pain started exposes the epigastrium as the origin. Ruptured ectopic and leaking aneurysm mimic with collapse and pallor rather than rigidity."
+    },
+    {
+     "heading": "Above the diaphragm and behind it",
+     "points": [
+      "Inferior myocardial infarction refers pain to the epigastrium with sweating and breathlessness; an ECG is mandatory before calling it surgical.",
+      "Basal pneumonia and diaphragmatic pleurisy refer pain to the upper abdomen with fever and hurried breathing; the chest must be examined in every acute abdomen.",
+      "Ureteric and biliary colic are intermittent and the patient moves, while perforation pain is constant and the patient freezes.",
+      "In children consider primary peritonitis and mesenteric adenitis; in young women always consider ectopic gestation and salpingitis."
+     ]
+    },
+    {
+     "heading": "How to kill a mimic at the bedside",
+     "body": "Three questions remove most mimics: where did the pain start, does the patient lie still or toss, and is the rigidity local or board like all over. A soft abdomen despite severe pain points away from perforation.\n\nTwo tests finish the job: liver dullness by percussion for free gas, and an ECG plus chest examination for the thoracic mimics. Only then is the diagnosis of perforation secure enough to plan an operation."
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "Name three surgical mimics of perforated peptic ulcer below the diaphragm.",
+     "a": "Acute cholecystitis, acute pancreatitis, and acute appendicitis with tracked contents in the right iliac fossa.",
+     "accept": [
+      "cholecystitis",
+      "pancreatitis",
+      "appendicitis"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "Why is an ECG mandatory in sudden severe epigastric pain?",
+     "a": "Inferior myocardial infarction refers pain to the epigastrium and operating on it would be catastrophic.",
+     "accept": [
+      "infarction",
+      "myocardial",
+      "epigastrium",
+      "ECG"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "Right iliac fossa tenderness appears hours after epigastric pain. Perforation or appendicitis?",
+     "a": "Perforation until proven otherwise: gastric contents gravitate down the right paracolic gutter, so the origin in the epigastrium is the discriminating fact.",
+     "accept": [
+      "perforation",
+      "gutter",
+      "epigastrium",
+      "origin"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "acute_peritonitis_damage_control_and_compartment_syndrome: additionalDifferentials"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "Acute abdomen"
+    },
+    {
+     "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+     "locator": "The acute abdomen"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.investigation.peritonitis.workup": {
+   "id": "skill.investigation.peritonitis.workup",
+   "kind": "investigation",
+   "system": "surgery",
+   "title": "Confirming perforation without delaying the operation",
+   "oneLine": "One erect film proves it, bloods prepare for theatre, and nothing waits for a report",
+   "why": "Investigations in suspected perforation serve two jobs: confirm the hole and prepare the patient for operation. Understanding which test does which stops a student waiting for a CT report while a treatable peritonitis spreads.",
+   "teach": [
+    {
+     "heading": "The film that proves the hole",
+     "body": "Erect chest radiograph showing free gas under the diaphragm is the confirmatory test, and it is available in most Indian emergency departments day and night. Take it sitting or erect so the gas rises where it can be seen.\n\nWhere the film is equivocal, a small volume of air passed through the Ryle tube with a repeat sitting film can reveal the leak. Contrast CT is reserved for doubt, for suspected sealed perforation, or for finding an alternative cause."
+    },
+    {
+     "heading": "Bloods that prepare for theatre, not that make the diagnosis",
+     "points": [
+      "Full blood count: leucocytosis supports an acute inflammatory process and anaemia warns of chronic blood loss.",
+      "Urea, creatinine and electrolytes: dehydration and third spacing distort them, and the anaesthetist needs them before theatre.",
+      "Serum amylase and an ECG: raised amylase favours pancreatitis and an infarct pattern forbids laparotomy, so both exclude mimics.",
+      "Blood grouping and cross matching early, since an operation is likely and blood may be needed."
+     ]
+    },
+    {
+     "heading": "What not to do",
+     "body": "Never order a barium study in a suspected acute perforation; contrast in the free peritoneal cavity worsens chemical peritonitis. Never delay resuscitation or surgical review for a scan in a patient with board like rigidity and free gas already shown.\n\nUltrasound may show free fluid but cannot reliably show the hole, so a negative ultrasound never overrules the clinical picture. Paracentesis showing gut contents confirms perforation but is rarely needed when the film already speaks."
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What single investigation confirms a perforated viscus in most emergency departments?",
+     "a": "Erect chest radiograph showing free gas under the diaphragm.",
+     "accept": [
+      "erect",
+      "free gas",
+      "diaphragm",
+      "radiograph"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "Why are serum amylase and an ECG part of the perforation workup?",
+     "a": "They exclude the two great mimics: pancreatitis and inferior myocardial infarction.",
+     "accept": [
+      "pancreatitis",
+      "infarction",
+      "mimics",
+      "amylase"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "The erect film is normal but the abdomen is board like. What next?",
+     "a": "Do not exclude perforation: a small leak releases too little gas to see. Resuscitate, keep nil by mouth with a Ryle tube, and get a contrast CT or urgent surgical review rather than waiting.",
+     "accept": [
+      "small leak",
+      "resuscitate",
+      "CT",
+      "surgical review"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "acute_peritonitis_damage_control_and_compartment_syndrome: additionalInvestigations"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "Perforated peptic ulcer"
+    },
+    {
+     "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+     "locator": "Peritonitis and pneumoperitoneum"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.peritonitis.diagnosis": {
+   "id": "skill.reasoning.peritonitis.diagnosis",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "Naming the diagnosis and grading the risk",
+   "oneLine": "Peritonitis, due to what, for how long, and how sick the patient is with it",
+   "why": "A diagnosis of peritonitis alone decides nothing. The cause, the duration of the leak and the physiologic state of the patient together decide whether this is a straightforward closure or a damage control case, and that grading happens at the bedside, not in theatre.",
+   "teach": [
+    {
+     "heading": "A complete diagnostic statement",
+     "body": "Name the syndrome, the cause, the duration and the state: generalised peritonitis due to perforated anterior duodenal ulcer of about eight hours with early septic physiology. Each clause carries a decision.\n\nDuration matters because a leak beyond a day brings established sepsis, oedematous tissues and a far sicker patient. State the hours since the sudden onset explicitly, since vague phrases like late presentation hide the single most prognostic fact."
+    },
+    {
+     "heading": "Grading how sick: shock, response and the triad",
+     "body": "Grade the physiology: pulse, pressure, urine output and mental state, and whether they improve with fluids. Shock on arrival, little urine, and no response to a fluid challenge mark the high risk patient.\n\nWatch for the lethal triad of hypothermia, acidosis and coagulopathy, since its presence turns a definitive repair into a damage control case. Rising intra abdominal pressure with failing organs means compartment syndrome, which needs decompression, not more fluid."
+    },
+    {
+     "heading": "When the hole may have sealed",
+     "points": [
+      "A few perforations seal spontaneously with omentum: pain settles, rigidity localises, the patient improves and contrast study shows no ongoing leak.",
+      "Sealed perforation is managed conservatively with close observation, nil by mouth, antibiotics and later ulcer treatment.",
+      "The decision to watch is made by a senior surgeon with facilities for immediate operation if the patient worsens.",
+      "Any deterioration, spreading tenderness, rising pulse or increasing distension, ends the trial and the patient goes to theatre."
+     ]
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What four clauses belong in a complete perforation diagnosis?",
+     "a": "The syndrome, the cause, the duration in hours, and the physiologic state of the patient.",
+     "accept": [
+      "syndrome",
+      "cause",
+      "duration",
+      "physiologic"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "What is the lethal triad and what does it change?",
+     "a": "Hypothermia, acidosis and coagulopathy; it changes a definitive repair into an abbreviated damage control operation.",
+     "accept": [
+      "hypothermia",
+      "acidosis",
+      "coagulopathy",
+      "damage control"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "When is it acceptable not to operate a proven perforation?",
+     "a": "When it has sealed: improving patient, localising signs, no ongoing leak on contrast study, under senior observation with theatre ready.",
+     "accept": [
+      "sealed",
+      "localising",
+      "observation",
+      "contrast"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "acute_peritonitis_damage_control_and_compartment_syndrome: clinicalPearls"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "Perforated peptic ulcer"
+    },
+    {
+     "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+     "locator": "Rigidity and rebound tenderness"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.annex.peritonitis.stages": {
+   "id": "skill.annex.peritonitis.stages",
+   "kind": "annexure",
+   "system": "surgery",
+   "title": "Stages of perforation and pressure thresholds",
+   "oneLine": "Three clinical stages and two pressure numbers for the ward and the viva",
+   "why": "Two small tables carry the facts examiners ask for most: the stage the patient is in, and the pressure at which the abdomen itself becomes the disease. Kept in one place, they are recalled in seconds at the bedside.",
+   "teach": [
+    {
+     "heading": "The three stages of a perforation",
+     "table": {
+      "cols": [
+       "Stage",
+       "Timing",
+       "Bedside picture"
+      ],
+      "rows": [
+       [
+        "Irritation",
+        "First few hours",
+        "Sudden stabbing pain, stillness, board rigidity, normal pulse"
+       ],
+       [
+        "Reaction",
+        "Next few hours",
+        "Pain eases, patient feels better, rigidity persists"
+       ],
+       [
+        "Diffuse peritonitis",
+        "Beyond about a day",
+        "Distension, fast pulse, low pressure, silent abdomen"
+       ]
+      ]
+     }
+    },
+    {
+     "heading": "Pressure thresholds that change management",
+     "body": "Intra abdominal hypertension is a sustained pressure of 12 mmHg or more, measured through the bladder catheter. Abdominal compartment syndrome is pressure above 20 mmHg with new organ failure, and it needs urgent decompression.\n\nThese numbers come from critical care measurement, not from bedside guessing. Suspect them when a distended abdomen accompanies falling urine output, rising ventilatory pressure and a tense belly after resuscitation."
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What are the three clinical stages of a perforation?",
+     "a": "Irritation, reaction with illusory improvement, then diffuse peritonitis.",
+     "accept": [
+      "irritation",
+      "reaction",
+      "diffuse"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "At what pressures do hypertension and compartment syndrome begin?",
+     "a": "Sustained 12 mmHg or more is intra abdominal hypertension; above 20 mmHg with organ failure is compartment syndrome.",
+     "accept": [
+      "12",
+      "20",
+      "hypertension",
+      "compartment"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "acute_peritonitis_damage_control_and_compartment_syndrome: clinicalPearls"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "Peritonitis"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.treatment.peritonitis.management": {
+   "id": "skill.treatment.peritonitis.management",
+   "kind": "treatment",
+   "system": "surgery",
+   "title": "Managing perforation peritonitis",
+   "oneLine": "Resuscitate, decompress, cover with antibiotics, close the hole, and watch the belly",
+   "why": "Perforation kills through shock and spreading infection, not through the hole itself. The hole is closed in minutes in theatre, but the patient is saved in the hours before and after by fluids, decompression, antibiotics and monitoring, and getting that order wrong wastes the operation.",
+   "teach": [
+    {
+     "heading": "Resuscitation first, alongside diagnosis",
+     "body": "Start large bore intravenous fluids at once for the tachycardia, low pressure and poor urine output of third spacing and developing shock. Keep the patient nil by mouth and pass a Ryle tube on free drainage to decompress the stomach and reduce further spill.\n\nGive broad spectrum antibiotics early by the institutional protocol to cover gut organisms, and place a urinary catheter to measure output hourly. Correct physiology before theatre: warm the patient, correct fluids and electrolytes, and arrange blood, since a cold acidotic coagulopathic patient tolerates operation badly."
+    },
+    {
+     "heading": "The operation: wash out and patch the hole",
+     "body": "The standard emergency operation is laparotomy with peritoneal washout and omental patch closure of the perforation, the Graham patch, which plugs the hole with living omentum rather than pulling friable edges together.\n\nWhere the patient carries the lethal triad of hypothermia, acidosis and coagulopathy, abbreviate to damage control: control the leak and contamination quickly, leave the abdomen open under temporary negative pressure closure, restore physiology in intensive care, and return for definitive closure later."
+    },
+    {
+     "heading": "After theatre and the Indian ward reality",
+     "points": [
+      "Continue fluids, antibiotics, stomach decompression and hourly urine measurement until bowel function returns.",
+      "Watch bladder pressure where the belly stays tense with falling urine and difficult ventilation, since compartment syndrome needs relook, not more fluid.",
+      "Start ulcer healing treatment and test for H pylori after recovery, with counselling to stop painkillers, bidis and alcohol.",
+      "At a centre without surgical facility, resuscitate, pass the Ryle tube, start antibiotics and refer urgently to a hospital with theatre; emergency laparotomy care is covered under government schemes such as Ayushman Bharat for eligible families."
+     ]
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What are the first four steps on suspecting perforation, before theatre?",
+     "a": "Intravenous fluids, nil by mouth with Ryle tube decompression, broad spectrum antibiotics, and a urinary catheter for hourly output.",
+     "accept": [
+      "fluids",
+      "Ryle",
+      "antibiotics",
+      "urine"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "What is the standard emergency operation for a perforated duodenal ulcer?",
+     "a": "Laparotomy with peritoneal washout and Graham omental patch closure of the perforation.",
+     "accept": [
+      "laparotomy",
+      "washout",
+      "omental",
+      "Graham"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "When should the surgeon abbreviate to damage control instead of definitive repair?",
+     "a": "In the lethal triad of hypothermia, acidosis and coagulopathy: control contamination fast, temporary abdominal closure, restore physiology, then return.",
+     "accept": [
+      "triad",
+      "contamination",
+      "temporary",
+      "physiology"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "acute_peritonitis_damage_control_and_compartment_syndrome: clinicalPearls"
+    },
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "gastric_neoplasms_peptic_ulcer_and_gastrectomy: clinicalPearls"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "Perforated peptic ulcer"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   },
+   "dosingNote": "This module teaches management at the level of drug CLASS and principle. Specific agents, routes, combinations and durations must be taken from your current national or institutional guideline and local resistance data at the time of prescribing. CliniX does not prescribe."
+  }
+ },
+ "cases": [
+  {
+   "id": "case.peritonitis.suresh",
+   "initialVitals": {
+    "hr": 118,
+    "bpSystolic": 100,
+    "bpDiastolic": 64,
+    "rr": 28,
+    "spo2": 94,
+    "temp": 38.4,
+    "gcs": 15
+   },
+   "title": "A mason with a sudden stabbing pain after lunch",
+   "opening": "Suresh Pal, 48, a mason, was carried into the casualty by his brother. He lies perfectly still on the stretcher, knees drawn up, and whispers that any movement makes the pain worse. Introduce yourself and take a history.",
+   "fallback": "I cannot say much, doctor, the pain is too much. Please ask slowly.",
+   "patient": {
+    "name": "Suresh Pal",
+    "age": 48,
+    "sex": "male",
+    "occupation": "Daily wage mason at building sites",
+    "residence": "A rented room near the site with his brother, family in the village"
+   },
+   "history": {
+    "presenting": {
+     "cues": [
+      "what brings you here",
+      "what is the problem today",
+      "why have you come here",
+      "tell me what happened",
+      "how can I help you",
+      "what is troubling you most"
+     ],
+     "reply": "Doctor, after lunch today I got a sudden stabbing pain high up in the belly. It was so sharp I had to sit down at once, and now it has spread all over.",
+     "key": true,
+     "skillId": "skill.hx.chief_complaints"
+    },
+    "onset_tempo": {
+     "cues": [
+      "when did the pain start",
+      "how did the pain begin",
+      "sudden or gradual onset",
+      "what were you doing when it started",
+      "how many hours ago"
+     ],
+     "reply": "It started all of a sudden, about six hours ago, just after I finished lunch at the site. There was no warning, one moment I was fine and the next I was doubled up.",
+     "key": true
+    },
+    "pain_epigastric_site": {
+     "cues": [
+      "where exactly is the pain",
+      "show me with one finger where it started",
+      "where did the pain start first",
+      "upper abdomen pain location",
+      "pain in the epigastrium"
+     ],
+     "reply": "It started here, high up in the middle just below the ribs. Now the whole belly hurts, but this is where it began. I can still point to that first spot.",
+     "key": true
+    },
+    "pain_shoulder_spread": {
+     "cues": [
+      "does the pain move anywhere",
+      "pain going to the shoulder",
+      "where does the pain spread",
+      "radiation of the pain",
+      "pain in the right lower side now"
+     ],
+     "reply": "Yes, there is a pain up in my right shoulder too. And a few hours back a new pain started low down on the right side of the belly, though the upper pain came first.",
+     "key": true
+    },
+    "pain_stillness_relief": {
+     "cues": [
+      "what makes the pain better",
+      "what makes the pain worse",
+      "does lying still help the pain",
+      "does movement worsen the pain",
+      "does coughing or breathing deepen the pain"
+     ],
+     "reply": "Lying perfectly still is the only relief. If I move, cough or take a deep breath it becomes much worse. Pressing the belly is unbearable.",
+     "key": true
+    },
+    "vomiting_regurgitation": {
+     "cues": [
+      "any vomiting since the pain",
+      "what did you vomit",
+      "how many times vomited",
+      "nausea with the pain",
+      "quiet regurgitation of mouthfuls"
+     ],
+     "reply": "I vomited once, a small mouthful soon after the pain started. Since then only nausea, no repeated vomiting.",
+     "key": true
+    },
+    "bowel_flatus_stop": {
+     "cues": [
+      "have you passed motion today",
+      "have you passed gas since the pain",
+      "absolute constipation of stool and wind",
+      "bowels moving normally",
+      "any loose stools"
+     ],
+     "reply": "No motion and no gas have passed since the pain began six hours ago. Before today my bowels were regular.",
+     "key": true
+    },
+    "fever_course": {
+     "cues": [
+      "any fever with this pain",
+      "feeling cold with shivering",
+      "temperature rising",
+      "fever before the pain started",
+      "chills and rigors today"
+     ],
+     "reply": "No fever before today. I feel hot and sweaty now but there was no fever in the days before this pain.",
+     "key": true
+    },
+    "ulcer_hunger_past": {
+     "cues": [
+      "hunger pain in the past months",
+      "burning pain relieved by food",
+      "night pain waking you up",
+      "antacid tablets relieved the pain",
+      "episodes of upper belly pain before"
+     ],
+     "reply": "For the last two years I get a burning hunger pain high up that wakes me at night. Eating food or a soda tablet from the chemist settles it. It comes in episodes lasting some weeks.",
+     "key": true,
+     "skillId": "skill.hx.peritonitis.risk"
+    },
+    "nsaid_painkiller_use": {
+     "cues": [
+      "painkiller tablets for body ache",
+      "tablets taken for joint or back pain",
+      "how often do you take painkillers",
+      "medicines taken without prescription",
+      "tablets taken on an empty stomach"
+     ],
+     "reply": "For my backache from lifting bricks I take painkiller tablets almost daily, bought from the chemist, usually without eating first. Nobody told me they harm the stomach.",
+     "key": true
+    },
+    "tobacco_smoking_drink": {
+     "cues": [
+      "do you smoke bidis",
+      "tobacco chewing habit",
+      "alcohol drinking habit",
+      "how many bidis per day",
+      "country liquor or beer use"
+     ],
+     "reply": "I smoke about ten bidis a day for fifteen years. I drink country liquor two or three times a week. Meals at the site are irregular, often very spicy.",
+     "key": true
+    },
+    "bleed_melaena_past": {
+     "cues": [
+      "vomiting of blood ever",
+      "black tarry stools in the past",
+      "blood in the motion before",
+      "previous ulcer bleeding episode",
+      "treatment taken for ulcer before"
+     ],
+     "reply": "One year ago I vomited blood once and passed black stools for two days. A doctor gave tablets for ulcer but I stopped them once the pain settled.",
+     "key": true
+    },
+    "comorbidity_sugar_pressure": {
+     "cues": [
+      "diabetes or sugar illness",
+      "blood pressure problems",
+      "heart or kidney disease",
+      "asthma or breathing illness",
+      "any long standing illness"
+     ],
+     "reply": "No diabetes, no pressure problem, no heart trouble that I know. I have never been admitted to hospital before.",
+     "key": true
+    },
+    "previous_operation_scar": {
+     "cues": [
+      "any operation done before",
+      "abdominal surgery in the past",
+      "previous hospital admission",
+      "appendix or hernia operation",
+      "any scar on the belly"
+     ],
+     "reply": "No operation ever. This is my first time in a big hospital.",
+     "key": true
+    },
+    "current_medication_today": {
+     "cues": [
+      "medicines you take daily",
+      "tablets taken this morning",
+      "steroid tablets ever",
+      "blood thinner tablets",
+      "what treatment taken today"
+     ],
+     "reply": "Only the painkiller tablets for my back and the soda tablets for the hunger pain. Today after the pain started I took nothing.",
+     "key": true
+    },
+    "meals_appetite_loss": {
+     "cues": [
+      "appetite over recent weeks",
+      "weight loss noticed",
+      "food intake lately",
+      "vomiting after meals before",
+      "early fullness with food"
+     ],
+     "reply": "My appetite was normal till today and my clothes fit the same. No weight loss, no vomiting after meals before this.",
+     "key": true
+    },
+    "family_home_support": {
+     "cues": [
+      "who lives with you",
+      "family members at home",
+      "anyone to look after you",
+      "contact of a relative",
+      "household earning members"
+     ],
+     "reply": "My brother lives with me here. My wife and two children are in the village. My brother will stay with me in hospital."
+    }
+   },
+   "exam": {
+    "skill.gen.surg.survey": {
+     "finding": "Lies motionless and supine with hips flexed, resists any movement or cough. Anxious facies with cold sweat on the forehead.",
+     "abnormal": true
+    },
+    "skill.gen.appearance": {
+     "finding": "Dehydrated look with sunken eyes and dry coated tongue. No pallor of note, no jaundice.",
+     "abnormal": true
+    },
+    "skill.gen.vitals": {
+     "finding": "Pulse 118 per minute, thready. Blood pressure 100/64. Respiratory rate 28, thoracic. Temperature 38.4 C. SpO2 94 percent on air.",
+     "abnormal": true
+    },
+    "skill.gen.surg.surgical_shock": {
+     "finding": "Tachycardia with narrow pulse pressure, cool hands and feet, delayed capillary refill. Urine output scanty since catheterisation.",
+     "abnormal": true
+    },
+    "skill.exam.surg.peritonitis_signs": {
+     "finding": "Abdomen flat with no respiratory movement. Board like rigidity in all quadrants with generalised rebound tenderness. Bowel sounds absent on two minutes of auscultation.",
+     "abnormal": true
+    },
+    "skill.exam.surg.perforation_peritonitis": {
+     "finding": "Liver dullness obliterated: resonance on percussion down the right mid axillary line. Rectal examination shows exquisite tenderness anteriorly in the rectovesical pouch.",
+     "abnormal": true
+    },
+    "skill.exam.surg.tenderness_rebound": {
+     "finding": "Release tenderness present in every quadrant, maximal in the epigastrium. Tenderness has spread to the right iliac fossa though the pain began above.",
+     "abnormal": true
+    },
+    "skill.exam.surg.bowel_obstruction": {
+     "finding": "No distension yet, no visible peristalsis, no hernial swelling at any orifice. Abdomen silent rather than noisy.",
+     "abnormal": false
+    },
+    "skill.exam.surg.appendicitis_signs": {
+     "finding": "No localised McBurney point rigidity; the whole wall is rigid rather than one spot. Pain began in the epigastrium, not around the umbilicus.",
+     "abnormal": false
+    }
+   },
+   "essentialInvestigations": [
+    "erect_cxr",
+    "blood_counts",
+    "renal_function"
+   ],
+   "investigations": {
+    "erect_cxr": {
+     "label": "Erect chest radiograph",
+     "indicated": true,
+     "result": "Free gas under the right diaphragm with a clear crescent. Lung fields normal, no infiltrate. Heart size normal.",
+     "note": "This is the confirmatory test: free gas with this story means a perforated viscus until proven otherwise."
+    },
+    "blood_counts": {
+     "label": "Full blood count",
+     "indicated": true,
+     "result": "Haemoglobin 12.8 g/dL. Total leucocyte count 14,200 per mm3 with neutrophilia.",
+     "note": "Leucocytosis fits an acute peritoneal insult; the haemoglobin shows no major chronic blood loss today."
+    },
+    "renal_function": {
+     "label": "Urea, creatinine and electrolytes",
+     "indicated": true,
+     "result": "Urea 52 mg/dL, creatinine 1.1 mg/dL, sodium 134 mmol/L, potassium 4.0 mmol/L.",
+     "note": "Needed for resuscitation and for theatre: third spacing and vomiting distort these fast, and the anaesthetist will ask for them."
+    },
+    "serum_amylase": {
+     "label": "Serum amylase",
+     "indicated": true,
+     "result": "Mildly raised at twice the upper limit, far below the range of acute pancreatitis.",
+     "note": "Sent to exclude pancreatitis, the great soft abdomen mimic. A modest rise occurs in perforation itself and must not mislead."
+    },
+    "ecg_heart": {
+     "label": "Electrocardiogram",
+     "indicated": true,
+     "result": "Sinus tachycardia at 118. No ST change, no infarct pattern.",
+     "note": "Mandatory before calling epigastric pain surgical: an inferior infarct would forbid laparotomy."
+    },
+    "usg_abdomen": {
+     "label": "Bedside abdominal ultrasound",
+     "indicated": false,
+     "result": "Moderate free fluid with internal echoes in the hepatorenal pouch. No gallbladder wall thickening, no stone seen.",
+     "note": "Free fluid supports peritonitis but never shows the hole; a normal scan would not overrule this clinical picture."
+    },
+    "barium_study": {
+     "label": "Barium meal study",
+     "indicated": false,
+     "result": "Not done.",
+     "note": "Absolutely contraindicated with suspected acute perforation: barium in the free peritoneal cavity worsens chemical peritonitis."
+    }
+   },
+   "differentialModel": {
+    "answer": "Generalised peritonitis due to perforated peptic ulcer. Consider acute cholecystitis, acute pancreatitis, acute appendicitis with tracked contents, intestinal obstruction, and basal pneumonia or myocardial infarction as mimics.",
+    "accept": [
+     "peritonitis",
+     "perforated peptic ulcer",
+     "peptic perforation",
+     "acute appendicitis",
+     "acute cholecystitis",
+     "acute pancreatitis",
+     "intestinal obstruction",
+     "pneumonia",
+     "ectopic pregnancy",
+     "sepsis"
+    ],
+    "minMatch": 2
+   },
+   "diagnosis": {
+    "answer": "Generalised peritonitis due to perforated anterior duodenal ulcer, about six hours old, with early hypovolaemic and septic physiology.",
+    "accept": [
+     "peritonitis",
+     "perforated peptic ulcer",
+     "peptic perforation",
+     "duodenal ulcer perforation",
+     "gastroduodenal perforation",
+     "acute intestinal perforation"
+    ],
+    "minMatch": 1
+   },
+   "managementModel": {
+    "answer": "Upright resuscitation with intravenous fluids, nil by mouth with Ryle tube drainage, broad spectrum antibiotics, hourly urine monitoring, erect film already done, and urgent laparotomy with washout and Graham omental patch closure.",
+    "accept": [
+     "resuscitation",
+     "intravenous fluids",
+     "nil by mouth",
+     "Ryle tube",
+     "antibiotics",
+     "urine output",
+     "laparotomy",
+     "washout",
+     "omental patch",
+     "Graham patch"
+    ],
+    "minMatch": 3
+   },
+   "teachingPoints": [
+    "The tempo makes the diagnosis before any test: sudden stabbing epigastric pain timestamped to the hour, in a man with a two year ulcer past, is perforation until proven otherwise.",
+    "Stillness is the first sign. He lies motionless with flexed hips while colic tosses; that contrast should be read from the doorway.",
+    "Right iliac fossa pain arriving hours after an epigastric start is tracked gastric content down the right gutter, not appendicitis. The origin, not the latest site, names the disease.",
+    "Loss of liver dullness with board like rigidity is bedside proof of free gas. Its absence would not exclude perforation, but its presence here ends the debate.",
+    "Easing pain with a still rigid abdomen is the stage of reaction, not recovery. The patient feels better while peritonitis spreads.",
+    "The ECG and amylase are not extras: they exclude the two mimics that forbid or redirect surgery, infarction and pancreatitis.",
+    "Barium is forbidden in suspected perforation, and no scan waits out resuscitation. Fluids, Ryle tube, antibiotics and urine monitoring start alongside diagnosis, not after it."
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  }
+ ]
+}

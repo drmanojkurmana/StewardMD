@@ -1,0 +1,1057 @@
+{
+  "_comment": "Surgery pathway for acute appendicitis, same architecture as pneumonia and breast-lump: shared skills carry the manoeuvres, emphasis carries what to expect, and the six owned skills add obstruction as the mechanism, migration as the history, and Alvarado as the decision.",
+  "id": "acute-appendicitis",
+  "name": "Acute appendicitis",
+  "fullName": "Acute appendicitis",
+  "system": "surgery",
+  "subtitle": "Alvarado score and appendicectomy",
+  "kbRef": "acute_appendicitis_and_appendiceal_neoplasms",
+  "oneLine": "The migrating right iliac fossa pain of a blocked appendix, scored by Alvarado and settled by appendicectomy",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "A blocked blind tube under rising pressure, and its two speeds",
+      "skills": [
+        "skill.reasoning.appendicitis.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question, while he guards his right side",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age, sex and residence frame the mimics before pain is described",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Age frames everything: children bring mesenteric adenitis and worms, young adults bring Meckel diverticulitis, women of reproductive age bring the gynaecological third, and the elderly bring a lax wall with little guarding. Record who gives the history, since a doubled up patient often leaves the timeline to a relative."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Migration in hours, and the order of pain, vomiting and fever",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.surg.acute_abdomen",
+        "skill.hx.surg.pain"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect three complaints in a fixed order: pain near the navel shifting to the right iliac fossa over hours, anorexia with nausea, and vomiting that follows the pain. Fever arriving a day later completes Murphy syndrome, and that order stated plainly is already half the diagnosis."
+        },
+        "skill.hx.surg.acute_abdomen": {
+          "expect": "Pin down onset curve, migration and the pain vomiting sequence. Pain first around the navel then localising to the right iliac fossa fits the appendix; vomiting first fits gastroenteritis; sudden maximum pain with a rigid wall from the first hour fits a perforated ulcer instead."
+        },
+        "skill.hx.surg.pain": {
+          "expect": "Expect dull visceral midline pain becoming sharp somatic pain the patient can point to with one finger. Worsening on coughing, walking and jolting marks parietal involvement, while relief on lying still and worsening on rolling about separate peritonism from colic."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "Previous attacks, purgatives, periods and masking drugs",
+      "skills": [
+        "skill.hx.acute.appendicitis_risk"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "A still patient, a rising pulse, and fever that arrives late",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.surg.survey"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for the still patient: lying motionless with knees drawn up, reluctant to cough or laugh, guarding the right iliac fossa with a hand. Tossing about would favour colic instead, and a pinched anxious face with a moist tongue fits early appendicitis rather than late dehydration."
+        },
+        "skill.gen.vitals": {
+          "expect": "Expect a rising pulse as the most honest guide to spread, low grade fever arriving after the pain rather than with it, and normal blood pressure until late. A pulse that keeps climbing while pain seems to ease warns of perforation with spreading peritonitis, not recovery."
+        },
+        "skill.gen.surg.survey": {
+          "expect": "Survey for what changes handling: pallor with faintness in a young woman raises ruptured ectopic gestation above the appendix, dehydration with sunken eyes grades a late presenter, and steroid use recorded here explains a softer abdomen than the history deserves."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Abdominal examination",
+      "blurb": "McBurney point, Rovsing sign, stretch tests and the rectal check",
+      "skills": [
+        "skill.exam.surg.tenderness_rebound",
+        "skill.exam.surg.peritonitis_signs",
+        "skill.exam.surg.appendicitis_signs",
+        "skill.exam.surg.dre_surgical"
+      ],
+      "emphasis": {
+        "skill.exam.surg.tenderness_rebound": {
+          "expect": "Expect exquisite point tenderness at the McBurney point with guarding confined to the right iliac fossa and a gentle release sign. Guarding that spreads across the midline or turns board like means containment has failed."
+        },
+        "skill.exam.surg.peritonitis_signs": {
+          "expect": "Expect a cough that stabs the right iliac fossa, percussion tenderness localised there, and bowel sounds present but sluggish over the fossa. Generalised percussion tenderness with a silent abdomen would reframe the case as spreading peritonitis."
+        },
+        "skill.exam.surg.appendicitis_signs": {
+          "expect": "Expect a positive Rovsing sign with hyperaesthesia in the Sherren triangle in the normally placed appendix. A positive psoas stretch points retrocaecal, a positive obturator points pelvic, and both negatives with a classic migration still leave appendicitis on top."
+        },
+        "skill.exam.surg.dre_surgical": {
+          "expect": "Expect a normal examination in uncomplicated appendicitis, which is itself informative. Tenderness in the rectovesical or rectouterine pouch exposes a pelvic appendix or abscess that the abdominal hand cannot reach, so the check is never skipped when anterior signs are thin."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the appendicitis picture together",
+      "blurb": "Migration plus peritonism plus sequence, and what position changes",
+      "skills": [
+        "skill.reasoning.appendicitis.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Tempo in hours, migration, peritonism and the Alvarado band",
+      "skills": [
+        "skill.present.acute.appendicitis"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Nodes, Meckel, cysts, stones and gallbladder, framed by age and sex",
+      "skills": [
+        "skill.reasoning.appendicitis.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Bloods grade it, ultrasound sees it, CT arbitrates the doubtful",
+      "skills": [
+        "skill.investigation.appendicitis.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and risk band",
+      "blurb": "MANTRELS scored to a disposition, with the variants stated",
+      "skills": [
+        "skill.reasoning.appendicitis.diagnosis",
+        "skill.annex.surg.alvarado_score"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Resuscitate, remove early or contain the mass, and refer what you cannot hold",
+      "skills": [
+        "skill.treatment.appendicitis.management"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.appendicitis.exam",
+        "title": "Examine the acute abdomen",
+        "task": "This 22-year-old man has had pain shifting to the right iliac fossa for a day, with vomiting after the pain and fever since this morning. Examine his abdomen and present your findings.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.surg.tenderness_rebound",
+          "skill.exam.surg.peritonitis_signs",
+          "skill.exam.surg.appendicitis_signs"
+        ],
+        "examinerQuestions": [
+          "You found localised tenderness with a positive Rovsing sign but no generalised rigidity. What does that combination place him at: uncomplicated appendicitis, mass or spreading peritonitis?",
+          "Both stretch tests are negative. Does that exclude a retrocaecal or pelvic appendix, and what single examination would still expose a pelvic collection?",
+          "His pain eased briefly an hour ago while his pulse climbed. What has likely happened, and how does your plan change?"
+        ]
+      },
+      {
+        "id": "osce.appendicitis.history",
+        "title": "Take a history and score the probability",
+        "task": "This 22-year-old man has right lower abdominal pain since yesterday. Take a focused history in six minutes and be ready to state his Alvarado band.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.surg.acute_abdomen",
+          "skill.hx.surg.pain",
+          "skill.hx.acute.appendicitis_risk"
+        ],
+        "examinerQuestions": [
+          "Score him on the Alvarado scale from what you found, naming each component you counted.",
+          "He vomited twice before any pain began. How does that single fact reorder your differential?",
+          "Name two background facts that would send this same presentation toward the gynaecology team rather than theatre."
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.reasoning.appendicitis.basics",
+      "skill.hx.acute.appendicitis_risk",
+      "skill.exam.surg.appendicitis_signs",
+      "skill.reasoning.appendicitis.signs",
+      "skill.reasoning.appendicitis.differential",
+      "skill.investigation.appendicitis.workup",
+      "skill.reasoning.appendicitis.diagnosis",
+      "skill.treatment.appendicitis.management"
+    ]
+  },
+  "skills": {
+    "skill.reasoning.appendicitis.basics": {
+      "id": "skill.reasoning.appendicitis.basics",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "What acute appendicitis is",
+      "oneLine": "Obstruction of a blind tube, rising pressure, ischaemia, and a wall that gives way",
+      "why": "Appendicitis is a pressure story before it is an infection story: a blocked lumen raises pressure, pressure strangles the wall blood supply, and dead wall leaks or bursts. Holding that sequence explains why an obstructed appendix runs faster, why pain relief after perforation is a trap, and why operating early is safer than watching.",
+      "teach": [
+        {
+          "heading": "A blind tube that blocks and bursts",
+          "body": "The appendix is a narrow blind pouch off the caecum, so anything that plugs its mouth traps mucus inside under rising pressure. The usual plugs are a hardened faecolith, swollen lymphoid tissue, roundworms in children, or a stricture from an old attack.\n\nRising pressure first blocks venous return from the wall, bacteria then invade through the damaged mucosa, and the wall infarcts from the inside out. Gangrene and perforation follow, spilling infected contents into the peritoneal cavity."
+        },
+        {
+          "heading": "Two speeds of the same disease",
+          "body": "The non obstructive variety progresses slowly over a day or more, with dull aching pain the patient can still walk around with. The obstructive variety runs fast: sudden severe colicky pain, early vomiting with fever, and gangrene and perforation arriving within hours.\n\nNo age is exempt, but the disease is rare before two years of age, climbs through childhood and adolescence, and peaks between 20 and 30 years before falling again."
+        },
+        {
+          "heading": "Why it is always a surgical emergency",
+          "points": [
+            "Perforation does not end the illness, it spreads it: localised guarding gives way to generalised rigidity, a silent abdomen and a rising pulse.",
+            "Brief relief of pain after perforation is the most dangerous moment in the illness, since it looks like recovery while peritonitis is spreading.",
+            "Children perforate early because a short omentum cannot wall off the leak, so a child is operated on sooner rather than observed longer.",
+            "Elderly patients gangrene faster because a narrowed appendicular artery tolerates pressure poorly, and their thin abdominal wall shows little rigidity to warn you."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What starts acute appendicitis: infection from outside, or obstruction from inside?",
+          "a": "Obstruction from inside: a faecolith, lymphoid tissue, worms or a stricture blocks the lumen, pressure rises, the wall loses its blood supply, and bacterial invasion follows.",
+          "accept": [
+            "obstruction",
+            "faecolith",
+            "pressure",
+            "blood supply"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How does obstructive appendicitis differ in tempo from the non obstructive variety?",
+          "a": "Obstructive appendicitis starts suddenly with severe colicky pain and runs fast toward gangrene and perforation, while the non obstructive variety builds gradually with dull aching pain over a day or more.",
+          "accept": [
+            "suddenly",
+            "colicky",
+            "gangrene",
+            "perforation",
+            "gradually"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Pain eases suddenly on the second day of suspected appendicitis. Why is this alarming rather than reassuring?",
+          "a": "Sudden relief can mean the gangrenous appendix has perforated, releasing the distension pressure, while infected contents spill out and spreading peritonitis with rigidity and a rising pulse follows close behind.",
+          "accept": [
+            "perforated",
+            "perforation",
+            "peritonitis",
+            "rigidity",
+            "pulse"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_appendicitis_and_appendiceal_neoplasms: pathophysiology"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Acute appendicitis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.appendicitis.signs": {
+      "id": "skill.reasoning.appendicitis.signs",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "The appendicitis picture",
+      "oneLine": "Migration from navel to right iliac fossa, Murphy syndrome order, and what position changes",
+      "why": "Appendicitis announces itself twice: first as vague midline visceral pain from a stretched tube, then as sharp localised somatic pain where the inflamed tip touches the parietal peritoneum. That migration, in that order, is the single most discriminating detail in the whole acute abdomen.",
+      "teach": [
+        {
+          "heading": "Migration: the pain moves because the pathology moves",
+          "body": "Early distension stimulates visceral fibres of the midgut, so the pain is dull, poorly localised and felt around the navel whatever side the appendix lies on. Once inflammation reaches the parietal peritoneum over the appendix, somatic fibres take over and the pain sharpens and settles in the right iliac fossa.\n\nThat shift from navel to right iliac fossa is characteristic of appendicitis and is the history to ask for by name when the patient does not volunteer it."
+        },
+        {
+          "heading": "Murphy syndrome: pain, then vomiting, then fever",
+          "body": "The sequence is fixed: pain comes first, nausea and vomiting follow the pain, and fever comes last. Vomiting that precedes the pain points to gastroenteritis instead, and fever as the opening event points elsewhere too.\n\nConstipation is the usual bowel pattern, since an inflamed appendix irritates rather than empties the bowel. Diarrhoea instead suggests a pelvic appendix irritating the rectum, or an appendicular abscess already formed."
+        },
+        {
+          "heading": "Position changes the signs, not the disease",
+          "points": [
+            "A retrocaecal appendix hides behind the caecum: little anterior tenderness, more flank ache, pain on stretching the psoas, and sometimes blood in the urine from ureteric irritation.",
+            "A pelvic appendix irritates bladder and rectum: strangury, frequency, tenesmus and mucus per rectum, with tenderness felt on rectal examination rather than on the abdominal wall.",
+            "In pregnancy the growing uterus lifts the caecum, so tenderness rides upward toward the flank and can mimic cholecystitis; a careful migration history with a Rovsing sign still guides correctly.",
+            "In the elderly, a lax wall shows little rigidity and the picture can resemble obstruction with distension, vomiting and constipation, which an enema would only worsen."
+          ]
+        },
+        {
+          "heading": "The lump and the perforation",
+          "body": "By two or three days the omentum and small bowel loops wall off the inflammation into a tender fixed lump in the right iliac fossa, with sluggish bowel sounds over it. A new lump in this setting is the body containing the leak, not a tumour.\n\nIf containment fails, pain spreads across the whole abdomen, vomiting returns, the pulse climbs while the temperature may fall, the wall turns board like and silent, and tenderness reaches the left iliac fossa."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Describe the classic migration of appendicitis pain.",
+          "a": "Pain starts diffusely around the navel as dull visceral pain, then shifts and localises to the right iliac fossa as sharp somatic pain once the parietal peritoneum is involved.",
+          "accept": [
+            "navel",
+            "right iliac fossa",
+            "visceral",
+            "somatic",
+            "parietal peritoneum"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "State the Murphy syndrome sequence and what the reverse order means.",
+          "a": "Pain first, then vomiting, then fever. Vomiting before the pain points to gastroenteritis rather than a surgical cause such as appendicitis.",
+          "accept": [
+            "pain first",
+            "vomiting",
+            "fever",
+            "gastroenteritis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A pregnant patient has right flank pain and fever. Why might this still be appendicitis, and what history rescues the diagnosis?",
+          "a": "The enlarging uterus displaces the caecum upward so tenderness rides toward the flank and mimics cholecystitis. A history of pain starting around the navel with a Rovsing sign still points to appendicitis.",
+          "accept": [
+            "uterus",
+            "displaces",
+            "navel",
+            "Rovsing",
+            "cholecystitis"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_appendicitis_and_appendiceal_neoplasms: clinicalPearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Examination of an acute abdomen"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.appendicitis.differential": {
+      "id": "skill.reasoning.appendicitis.differential",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Differential diagnosis",
+      "oneLine": "Age and sex frame the list: nodes in children, cysts in women, stones and gallbladder in adults",
+      "why": "Several common conditions occupy the same right iliac fossa and the same first hours, and operating on all of them as appendicitis fills wards with negative appendicectomies and missed ectopics. A differential framed by age and sex, tested by one discriminating question each, is what keeps the knife for the right patient.",
+      "teach": [
+        {
+          "heading": "Children and young adults: nodes and Meckel",
+          "body": "Non specific mesenteric adenitis is the great childhood mimic: recent sore throat or cold, generalised tender nodes, shifting pain that never quite localises, and a child who still wants to play between spasms. It settles without surgery, which is exactly why it must be named.\n\nMeckel diverticulitis in the young can be clinically indistinguishable from appendicitis, and painless rectal bleeding in a child points to the Meckel rather than the appendix."
+        },
+        {
+          "heading": "Women: the gynaecological third that must never be missed",
+          "body": "A ruptured ectopic gestation gives lower abdominal pain with a missed period, faintness and pallor, tender fornices and severe pain on moving the cervix. Only the right fornix is tender in appendicitis, so a vaginal examination that finds all fornices tender has already changed the diagnosis.\n\nA ruptured follicular cyst strikes mid cycle with appendicitis like pain, a twisted ovarian cyst adds sudden severe pain with vomiting, and acute salpingitis gives bilateral lower pain with discharge starting around a period. Shifting the point of maximum tenderness by rolling the patient to the left favours a uterine source over the appendix."
+        },
+        {
+          "heading": "Adults: gallbladder, stone, ulcer and bowel",
+          "points": [
+            "Ureteric colic comes in waves from loin to groin with strangury and visible blood in the urine; a retrocaecal appendix irritating the ureter can also put blood in the urine, so the migration history decides.",
+            "Acute cholecystitis follows fatty food with right hypochondrial pain toward the shoulder tip and an inspiratory arrest on palpation; in late pregnancy a high appendix can occupy the same territory.",
+            "Perforated peptic ulcer starts suddenly at maximum severity with board like rigidity from the first hour and lost liver dullness, while appendicitis builds to rigidity over hours.",
+            "Crohn ileitis and ileocaecal tuberculosis are chronic counterparts with diarrhoea, weight loss and a lump that refuses to resolve; a lump that will not settle should raise Crohn disease, tuberculosis, actinomycosis and, rarely, carcinoma.",
+            "Gastroenteritis vomits first and localises never, with diarrhoea and contacts ill at home; pain after vomiting is the expected order there, the reverse of appendicitis."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three gynaecological mimics of appendicitis in a young woman.",
+          "a": "Ruptured ectopic gestation, ruptured follicular cyst, twisted ovarian cyst, and acute salpingitis with bilateral pain and discharge.",
+          "accept": [
+            "ectopic",
+            "follicular cyst",
+            "twisted ovarian",
+            "salpingitis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How do you separate ureteric colic from a retrocaecal appendicitis when both put blood in the urine?",
+          "a": "Ureteric colic radiates in waves from loin to groin with strangury, while appendicitis begins around the navel and migrates to the right iliac fossa with anorexia and a Rovsing sign.",
+          "accept": [
+            "loin to groin",
+            "strangury",
+            "navel",
+            "migrates",
+            "Rovsing"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "The appendicular lump has not resolved with conservative care. What four conditions enter the list?",
+          "a": "Crohn disease, ileocaecal tuberculosis, actinomycosis, and rarely carcinoma of the caecum or appendix.",
+          "accept": [
+            "Crohn",
+            "tuberculosis",
+            "actinomycosis",
+            "carcinoma"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_appendicitis_and_appendiceal_neoplasms: additionalDifferentials"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Acute appendicitis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.investigation.appendicitis.workup": {
+      "id": "skill.investigation.appendicitis.workup",
+      "kind": "investigation",
+      "system": "surgery",
+      "title": "Confirming appendicitis without delaying the operation",
+      "oneLine": "Bloods grade it, ultrasound finds it first, CT settles the equivocal, histology closes the file",
+      "why": "No test result should hold up a patient with spreading peritonitis, yet operating on every tender right iliac fossa fills theatres with normal appendices. The workup is ordered by what each test adds: bloods grade the inflammation, ultrasound sees the tube, CT arbitrates the doubtful, and histology catches the tumour nobody suspected.",
+      "teach": [
+        {
+          "heading": "Blood and urine: grade the inflammation, exclude the neighbours",
+          "body": "A full blood count with a raised leucocyte count and neutrophil shift supports acute inflammation and feeds the Alvarado score directly. C reactive protein above 6 mg per litre is considered significant for appendicitis and tracks with gangrene and perforation.\n\nRoutine urine examination is mandatory in every acute abdomen: blood and pus cells can appear simply because an inflamed appendix lies against the ureter, and this does not by itself mean urinary infection. Frank haematuria with loin to groin colic instead favours a ureteric stone."
+        },
+        {
+          "heading": "Ultrasound first, CT for the equivocal",
+          "body": "Graded compression ultrasound is the first imaging test: a blind ending non compressible tube wider than 6 mm with wall thickening, confirmed in two planes. It also diagnoses the mimics, ectopic gestation, ovarian cysts and mesenteric nodes, in the same sitting, and it is the first line in children and pregnant women.\n\nContrast enhanced CT is reserved for the equivocal adult, the obese patient and excessive bowel gas: an enlarged appendix with wall thickening and surrounding fat stranding. It is accurate but costly and irradiating, so where scanners are distant the Alvarado band with observation decides instead."
+        },
+        {
+          "heading": "What the plain film can and cannot do",
+          "points": [
+            "An erect abdominal film is a poor test for appendicitis itself and is not ordered to confirm it.",
+            "Gas under the diaphragm on an erect film means a perforated viscus somewhere, which reframes the whole case toward ulcer perforation rather than appendicitis.",
+            "Multiple fluid levels with distended loops mean obstruction, the picture an elderly appendix case can mimic in its second stage.",
+            "Every resected appendix goes for routine histopathology, since occult tumours including carcinoid and mucocoele are caught only under the microscope.",
+            "Where doubt persists despite workup, particularly in young women, diagnostic laparoscopy both inspects the pelvis and proceeds to appendicectomy in the same sitting."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the first imaging test in a child with suspected appendicitis, and what does it look for?",
+          "a": "Graded compression ultrasound, looking for a blind ending non compressible appendix wider than 6 mm with wall thickening.",
+          "accept": [
+            "ultrasound",
+            "non compressible",
+            "6 mm",
+            "wall thickening"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Blood and pus cells appear in the urine of a patient with right iliac fossa pain. Does this prove urinary infection?",
+          "a": "No. An inflamed appendix lying against the ureter can put blood and pus cells in the urine without any urinary tract disease, so the finding must be read with the pain migration and the rest of the picture.",
+          "accept": [
+            "appendix",
+            "ureter",
+            "urine",
+            "infection"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "The Alvarado score is equivocal and the ultrasound is obscured by bowel gas in an adult. What next, and why not a plain film?",
+          "a": "Contrast enhanced CT, looking for an enlarged appendix with wall thickening and fat stranding. A plain erect film cannot confirm appendicitis; it only reframes toward perforation with gas under the diaphragm or toward obstruction with fluid levels.",
+          "accept": [
+            "CT",
+            "fat stranding",
+            "gas under the diaphragm",
+            "fluid levels"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_appendicitis_and_appendiceal_neoplasms: additionalInvestigations"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Examination of an acute abdomen"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.appendicitis.diagnosis": {
+      "id": "skill.reasoning.appendicitis.diagnosis",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Diagnosis and risk band: the Alvarado score",
+      "oneLine": "Migration, anorexia, nausea, tenderness, rebound, fever, leucocytes and shift, scored to a band",
+      "why": "A diagnosis of appendicitis alone does not say whether this patient goes home, waits under observation, or goes to theatre tonight. The Alvarado score converts bedside facts you already hold into a band that decides exactly that, and it protects fertility in young women and bowels in children by keeping the knife for high probability cases.",
+      "teach": [
+        {
+          "heading": "MANTRELS: eight features, one score out of ten",
+          "body": "Three symptoms: migration of pain to the right iliac fossa, anorexia, and nausea with vomiting. Three signs: tenderness in the right iliac fossa, rebound tenderness, and elevated temperature. Two laboratory markers: leucocytosis and a shift to the left in the neutrophils.\n\nTenderness and leucocytosis carry double weight, since localised peritonism and a rising white count are the two facts most tied to an inflamed appendix. Everything else counts singly toward the total of ten."
+        },
+        {
+          "heading": "Three bands, three dispositions",
+          "body": "A low score favours discharge with explicit return advice, since appendicitis is unlikely but a grumbling appendix can return. An intermediate score means active observation with re examination in a few hours, never a discharge into uncertainty.\n\nA score of seven or more makes appendicitis probable enough to warrant surgical intervention, with imaging only where doubt genuinely remains. The score guides judgement; in reproductive age women a pelvic ultrasound still excludes the gynaecological third first."
+        },
+        {
+          "heading": "A complete diagnostic statement",
+          "points": [
+            "Name the disease, the state and the position where known: uncomplicated acute appendicitis, or complicated by mass, abscess or generalised peritonitis.",
+            "State the Alvarado band beside the diagnosis, since the band is what justifies theatre, observation or discharge.",
+            "Record the variants that change handling: retrocaecal, pelvic, pregnancy with upward displacement, childhood and old age.",
+            "Close the file with histopathology of every resected appendix, since carcinoid over 2 cm or involving the base mandates an oncologic right hemicolectomy."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the eight MANTRELS features of the Alvarado score.",
+          "a": "Migration of pain, anorexia, nausea with vomiting, tenderness in the right iliac fossa, rebound tenderness, elevated temperature, leucocytosis, and a neutrophil shift to the left.",
+          "accept": [
+            "migration",
+            "anorexia",
+            "nausea",
+            "tenderness",
+            "rebound",
+            "temperature",
+            "leucocytosis",
+            "shift"
+          ],
+          "minMatch": 4
+        },
+        {
+          "level": 2,
+          "q": "Which two components carry double weight, and why?",
+          "a": "Tenderness in the right iliac fossa and leucocytosis carry two points each, because localised peritonism and a rising white cell count are the two findings most tied to an inflamed appendix.",
+          "accept": [
+            "tenderness",
+            "leucocytosis",
+            "two points",
+            "peritonism"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A young woman scores in the high band. Do you proceed straight to theatre?",
+          "a": "Not before a pelvic ultrasound excludes ectopic gestation, a ruptured cyst and salpingitis, since the gynaecological mimics share the right iliac fossa and the score alone cannot separate them.",
+          "accept": [
+            "ultrasound",
+            "ectopic",
+            "cyst",
+            "salpingitis"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_appendicitis_and_appendiceal_neoplasms: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Acute appendicitis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.treatment.appendicitis.management": {
+      "id": "skill.treatment.appendicitis.management",
+      "kind": "treatment",
+      "system": "surgery",
+      "title": "Managing acute appendicitis",
+      "oneLine": "Resuscitate, stratify by mass and peritonitis, remove early or contain and return",
+      "why": "Appendicitis kills in two ways: perforation spreading peritonitis while decisions drift, and a difficult operation on a walled off mass that injures bowel for no gain. Resuscitation with a clear fork, early removal for the uncomplicated and contained, and deliberate conservatism for the mass, avoids both.",
+      "teach": [
+        {
+          "heading": "Resuscitate every patient the same way first",
+          "body": "Keep the patient nil by mouth, replace fluids intravenously, and give analgesia without delay since pain relief never masks the peritoneal signs that matter. Start empirical antibiotics to cover enteric organisms according to local policy, and monitor pulse, temperature, urine output and the abdominal wall for spread.\n\nNever give a purgative or an enema: stimulating obstructed bowel or a walled off appendix can precipitate perforation, and nothing is more harmful than an enema given in peritonitis."
+        },
+        {
+          "heading": "Uncomplicated appendicitis: remove it early",
+          "body": "Acute appendicitis without a mass, abscess or generalised peritonitis is treated by early appendicectomy, laparoscopic where skill and equipment allow and open through a gridiron incision where they do not. The mesoappendix carrying the appendicular artery is secured and divided, and the stump is dealt with by local custom.\n\nLaparoscopy adds diagnosis as well as treatment, which is why it serves young women best: the pelvis is inspected, a gynaecological cause is dealt with on its merits, and a normal appendix still comes out to prevent future confusion."
+        },
+        {
+          "heading": "Mass, abscess and spreading peritonitis: three different forks",
+          "points": [
+            "A tender fixed appendicular mass without generalised signs is managed conservatively with rest, fluids, antibiotics and close observation, followed by interval appendicectomy once inflammation settles.",
+            "A fluctuant appendicular abscess is drained percutaneously where image guidance exists, with appendicectomy deferred to an interval sitting.",
+            "Generalised peritonitis with board like rigidity and a silent abdomen is resuscitated aggressively and taken for emergency surgery with peritoneal washout; delay here is measured in lives.",
+            "Children are operated on early since perforation outruns observation, the elderly earn a low threshold since gangrene outruns signs, and pregnancy favours operation since perforation threatens two lives.",
+            "Refer onward what the centre cannot hold: a mass needing observation beds, an abscess needing image guided drainage, generalised peritonitis needing critical care, and small children and pregnant patients. Emergency appendicectomy is covered at public and empanelled hospitals under national insurance schemes."
+          ]
+        },
+        {
+          "heading": "After treatment: histology, wounds and warnings",
+          "body": "Every resected appendix goes for routine histopathology, since carcinoid, mucocoele and tuberculosis declare themselves only under the microscope. Watch the wound for infection, the commonest complication of an operation done through contaminated tissue.\n\nDischarge with explicit return advice: worsening pain, distension, vomiting or fever means spreading collection or obstruction and earns immediate review. A lump that refuses to resolve earns a fresh workup for Crohn disease, tuberculosis, actinomycosis and rarely carcinoma."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What resuscitation does every suspected appendicitis receive before any decision?",
+          "a": "Nil by mouth, intravenous fluids, timely analgesia, empirical antibiotics per local policy, and monitoring of pulse, temperature, urine output and the abdominal wall.",
+          "accept": [
+            "nil by mouth",
+            "fluids",
+            "analgesia",
+            "antibiotics",
+            "monitoring"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A tender fixed mass occupies the right iliac fossa on day three, with no generalised rigidity. Operate now or contain?",
+          "a": "Contain: rest, fluids, antibiotics and close observation, with interval appendicectomy later, since immediate surgery on a walled off mass risks bowel injury for no gain.",
+          "accept": [
+            "conservative",
+            "observation",
+            "interval appendicectomy",
+            "bowel injury"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is laparoscopy particularly valuable in a young woman with right iliac fossa pain?",
+          "a": "It inspects the pelvis and diagnoses gynaecological causes such as ectopic gestation or a twisted cyst directly, treats what it finds on merit, and still removes a normal appendix to prevent future confusion.",
+          "accept": [
+            "pelvis",
+            "gynaecological",
+            "ectopic",
+            "appendix"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_appendicitis_and_appendiceal_neoplasms: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Acute appendicitis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of modality and principle: resuscitation, when to remove, when to contain, and when to refer. Specific agents, routes and durations come from your current national or institutional guideline at the time of treatment. CliniX does not prescribe."
+    }
+  },
+  "cases": [
+    {
+      "id": "case.appendicitis.sunil",
+      "initialVitals": {
+        "hr": 104,
+        "bpSystolic": 118,
+        "bpDiastolic": 76,
+        "rr": 20,
+        "spo2": 98,
+        "temp": 38.3,
+        "gcs": 15
+      },
+      "title": "A young shop helper with pain that moved to the right side",
+      "opening": "Sunil Jadhav, 22, sits hunched on the casualty trolley with his right hand pressed over his lower abdomen. He winces when the trolley jerks. Introduce yourself and take a history.",
+      "fallback": "I do not understand, doctor. Please ask me in a simpler way.",
+      "patient": {
+        "name": "Sunil Jadhav",
+        "age": 22,
+        "sex": "male",
+        "occupation": "Helper in a cloth shop, lifts bundles through the day",
+        "residence": "Rented room with three coworkers on the outskirts of Nashik"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "what is the main problem",
+            "why have you come to hospital",
+            "tell me everything from the very beginning"
+          ],
+          "reply": "Doctor, since yesterday morning I have pain in the stomach. It started near the navel and now it has settled on the right side below. I feel no hunger and I vomited once after the pain started.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "pain_onset_timing": {
+          "cues": [
+            "when did this pain begin",
+            "what time did the pain start",
+            "how did the pain begin suddenly or slowly",
+            "were you woken up by the pain"
+          ],
+          "reply": "It began yesterday around eight in the morning, dull and vague at first. It did not wake me; I was already awake for work. By evening it had become sharp and I had to come home early.",
+          "key": true,
+          "skillId": "skill.hx.surg.acute_abdomen"
+        },
+        "pain_migration_path": {
+          "cues": [
+            "where did the pain start first",
+            "has the pain shifted its place",
+            "did the pain move from the centre",
+            "point with one finger where it began"
+          ],
+          "reply": "First it was all around the navel, I could not point to one spot. After four to five hours it moved to the right side below, and now I can point to it with one finger. It has stayed there since.",
+          "key": true,
+          "skillId": "skill.hx.surg.pain"
+        },
+        "pain_character_severity": {
+          "cues": [
+            "describe the nature of the pain",
+            "dull ache or sharp stabbing",
+            "colicky waves or constant burn",
+            "how severe is the pain out of ten"
+          ],
+          "reply": "In the beginning it was a dull ache, now it is a constant sharp pain, about seven out of ten. It does not come in waves. Pressing the spot makes it much worse.",
+          "key": true
+        },
+        "aggravating_factors": {
+          "cues": [
+            "what makes the pain worse",
+            "coughing walking or jolting effect",
+            "does movement aggravate the pain",
+            "does pressing the belly worsen it"
+          ],
+          "reply": "Walking, coughing and the auto ride here made it worse. I am lying still because any shaking increases it. Vomiting did not relieve it.",
+          "key": true
+        },
+        "appetite_loss": {
+          "cues": [
+            "how is your appetite",
+            "any loss of desire to eat",
+            "when did you last feel hungry",
+            "loss of appetite since when"
+          ],
+          "reply": "I have eaten nothing since yesterday afternoon. Even the smell of food puts me off. My roommate forced tea on me in the morning and I refused.",
+          "key": true
+        },
+        "nausea_vomiting_sequence": {
+          "cues": [
+            "any nausea or vomiting",
+            "did pain come before vomiting",
+            "how many times did you vomit",
+            "what did the vomitus look like"
+          ],
+          "reply": "The pain came first. I felt nauseous by afternoon and vomited once in the evening, mostly watery with some food. I have not vomited after that, only nausea remains.",
+          "key": true
+        },
+        "fever_timeline": {
+          "cues": [
+            "any fever with this illness",
+            "when did the fever appear",
+            "chills or shivering with fever",
+            "what is the fever pattern so far"
+          ],
+          "reply": "There was no fever yesterday when the pain started. Fever came only this morning with mild shivering. I did not take my temperature at home.",
+          "key": true
+        },
+        "bowel_habit_change": {
+          "cues": [
+            "how are your bowels moving",
+            "any constipation since the pain",
+            "passage of flatus normally",
+            "diarrhoea or mucus per rectum"
+          ],
+          "reply": "I have not passed stools since yesterday morning and I am passing gas less than usual. There is no diarrhoea and no blood or mucus.",
+          "key": true
+        },
+        "urinary_symptoms": {
+          "cues": [
+            "burning during micturition",
+            "frequency of passing urine",
+            "pain radiating to the groin",
+            "blood noticed in the urine"
+          ],
+          "reply": "Urine is normal in colour with no burning and no increased frequency. There is no pain going toward the groin and no blood that I have seen.",
+          "key": true
+        },
+        "previous_similar_episodes": {
+          "cues": [
+            "similar pain in the past",
+            "earlier attacks of right side pain",
+            "what diagnosis was given before",
+            "purgative taken before this pain"
+          ],
+          "reply": "Two months back I had a milder pain on the same side for half a day and it settled on its own. I took no purgative this time; I only took one painkiller tablet last night.",
+          "key": true,
+          "skillId": "skill.hx.acute.appendicitis_risk"
+        },
+        "diet_background": {
+          "cues": [
+            "describe your daily diet",
+            "vegetables and fruit intake",
+            "meat at every meal",
+            "hostel mess food habits"
+          ],
+          "reply": "We eat mess food twice a day, mostly rice, dal and chapati with little vegetable. Meat about once a week. I drink little water through the day at the shop.",
+          "key": true,
+          "skillId": "skill.hx.acute.appendicitis_risk"
+        },
+        "medication_use": {
+          "cues": [
+            "tablets taken for this pain",
+            "painkillers or antibiotics already taken",
+            "steroids or regular medicines",
+            "home remedies tried so far"
+          ],
+          "reply": "Only one painkiller tablet last night, nothing else. I take no regular medicines, no steroids, and I tried no home remedy except lying down.",
+          "key": true
+        },
+        "past_surgical_background": {
+          "cues": [
+            "previous operations on the abdomen",
+            "tuberculosis in the past",
+            "jaundice or diabetes history",
+            "blood pressure or asthma complaints"
+          ],
+          "reply": "I have had no operation before. No tuberculosis, no jaundice, no diabetes. Nobody told me I have blood pressure problems.",
+          "key": true
+        },
+        "personal_habits": {
+          "cues": [
+            "smoking beedis or cigarettes",
+            "alcohol drinking pattern",
+            "tobacco chewing habit",
+            "sleep and work hours daily"
+          ],
+          "reply": "I do not smoke and I do not drink. No tobacco chewing. I work from nine to eight with one weekly holiday and sleep about seven hours.",
+          "key": true
+        },
+        "treatment_so_far": {
+          "cues": [
+            "injections or drips already given",
+            "ultrasound done elsewhere",
+            "what did the previous doctor say",
+            "details of the referral slip"
+          ],
+          "reply": "No, doctor, you are the first doctor I am seeing. No injection, no scan and no referral slip. My roommate brought me directly here.",
+          "key": true
+        },
+        "pain_relief_measures": {
+          "cues": [
+            "what gives relief from pain",
+            "lying still versus rolling about",
+            "vomiting relieving the pain",
+            "sitting forward helping the pain"
+          ],
+          "reply": "Only lying perfectly still helps a little. Rolling or walking makes it worse. The painkiller reduced it for two hours and then it returned the same.",
+          "key": true
+        },
+        "family_background": {
+          "cues": [
+            "anyone else ill at home",
+            "family history of similar pain",
+            "tuberculosis in the household",
+            "who lives with you now"
+          ],
+          "reply": "Nobody else is ill. My parents and sister live in our village near Sinnar. No one in the family had such pain or tuberculosis.",
+          "key": false
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Alert young man lying still on his back with knees drawn up, reluctant to move, cough or laugh. Face pinched with discomfort, tongue moist, no pallor, icterus or dehydration of the eyes.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Temperature 38.3 C. Pulse 104 per minute, regular, normal volume. Blood pressure 118/76. Respiratory rate 20 per minute, thoracic. SpO2 98 percent on room air.",
+          "abnormal": true
+        },
+        "skill.exam.surg.tenderness_rebound": {
+          "finding": "Exquisite point tenderness at the McBurney point with involuntary guarding localised to the right iliac fossa. Release tenderness positive over the same area. No board like rigidity beyond the right iliac fossa.",
+          "abnormal": true
+        },
+        "skill.exam.surg.peritonitis_signs": {
+          "finding": "Cough provokes sharp pain in the right iliac fossa. Light percussion tender over the right iliac fossa only. Bowel sounds present but sluggish over the right iliac fossa, active elsewhere. No generalised silence.",
+          "abnormal": true
+        },
+        "skill.exam.surg.appendicitis_signs": {
+          "finding": "Rovsing sign positive with referred pain in the right iliac fossa on left sided pressure. Cutaneous hyperaesthesia over the Sherren triangle. Psoas and obturator stretch tests negative, favouring a normally placed appendix.",
+          "abnormal": true
+        },
+        "skill.exam.surg.dre_surgical": {
+          "finding": "Normal anal tone with consent and chaperone. No tenderness in the rectovesical pouch, no boggy mass, no blood or mucus on the glove. Rectum not ballooned.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "cbc",
+        "crp",
+        "urine_routine",
+        "usg_rlq"
+      ],
+      "investigations": {
+        "cbc": {
+          "label": "Complete blood count",
+          "indicated": true,
+          "result": "Haemoglobin 13.8 g per dL. Total leucocyte count 14,200 per cubic mm with 84 percent neutrophils and no band forms.",
+          "note": "Leucocytosis with neutrophilia supports acute inflammation and scores two Alvarado points; the absent shift keeps the total at nine rather than ten."
+        },
+        "crp": {
+          "label": "C reactive protein",
+          "indicated": true,
+          "result": "28 mg per litre, well above the 6 mg per litre level considered significant for appendicitis.",
+          "note": "A raised value grades the inflammation toward gangrene risk and argues against watchful waiting at home."
+        },
+        "urine_routine": {
+          "label": "Routine urine examination",
+          "indicated": true,
+          "result": "3 to 5 pus cells per high power field, no red cells seen. Culture sent, growth awaited.",
+          "note": "A few pus cells reflect an inflamed appendix lying near the ureter and do not by themselves prove urinary infection; loin to groin colic with frank haematuria would have meant a stone instead."
+        },
+        "usg_rlq": {
+          "label": "Graded compression ultrasound of the right iliac fossa",
+          "indicated": true,
+          "result": "Non compressible blind ending tubular structure 7.8 mm in diameter with wall thickening and minimal free fluid. No appendicolith. No ureteric calculus, no enlarged mesenteric nodes.",
+          "note": "This confirms the clinical diagnosis at the bedside without radiation, and it has already excluded the stone and the nodes in the same sitting."
+        },
+        "erect_axr": {
+          "label": "Erect abdominal radiograph",
+          "indicated": false,
+          "result": "Not ordered.",
+          "note": "A plain film cannot confirm appendicitis. It is reserved for suspected perforation with gas under the diaphragm or obstruction with fluid levels, neither of which this picture shows."
+        },
+        "cect_abdomen": {
+          "label": "Contrast enhanced CT of the abdomen",
+          "indicated": false,
+          "result": "Not performed.",
+          "note": "Kept in reserve for an equivocal score, an obscured ultrasound, or an obese patient with excess bowel gas. With an Alvarado nine and a confirmatory ultrasound, scanning him would add cost and radiation without changing the plan."
+        }
+      },
+      "differentialModel": {
+        "answer": "Acute appendicitis of a normally placed appendix. Consider mesenteric adenitis, Meckel diverticulitis, a ureteric stone, acute cholecystitis, Crohn ileitis and acute gastroenteritis.",
+        "accept": [
+          "Acute appendicitis",
+          "Mesenteric adenitis",
+          "Meckel diverticulitis",
+          "Renal calculi",
+          "Acute cholecystitis",
+          "Crohn disease",
+          "Acute gastroenteritis",
+          "Ectopic pregnancy",
+          "Pelvic inflammatory disease",
+          "Ovarian torsion"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Acute appendicitis, uncomplicated, Alvarado score 9, high probability band.",
+        "accept": [
+          "Acute appendicitis",
+          "appendicitis"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Nil by mouth with intravenous fluids, timely analgesia, empirical antibiotics per local policy, early appendicectomy after consent and fitness assessment, routine histopathology of the specimen, and explicit return advice.",
+        "accept": [
+          "fluids",
+          "antibiotic",
+          "analgesia",
+          "surgery",
+          "monitor",
+          "reassess",
+          "review"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The migration path carries the diagnosis before any test: navel first, right iliac fossa later, in that order, over hours.",
+        "Pain before vomiting with anorexia between them is the surgical sequence; vomiting first would have meant gastroenteritis.",
+        "Fever arriving a day after the pain fits Murphy syndrome and matches his 38.3 C this morning, not an early feature missed yesterday.",
+        "A positive Rovsing sign with Sherren hyperaesthesia localises the appendix better than tenderness alone, and negative stretch tests favour a normally placed organ.",
+        "Leucocytosis with a 7.8 mm non compressible appendix and an Alvarado nine leaves no role for CT: scanning him would cost radiation without changing the plan.",
+        "A few pus cells in the urine reflect ureteric proximity, not infection; frank haematuria with loin to groin waves would have meant a stone.",
+        "One painkiller tablet has not masked his signs, but habitual analgesics or steroids would have, which is why the drug history is taken before trusting a soft abdomen."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1321 @@
+{
+  "_comment": "Obstetrics pathway. Same architecture as pneumonia and pre-eclampsia: shared core/obgyn skills carry the examination, two fragment history skills and one fragment presentation skill carry the anaemia-specific history, and this file owns the iron-deficiency mechanism (dilution versus true anaemia, ferritin as the anchor), severity grading, and route-of-iron as the management decision.",
+  "chapters": [
+    {
+      "blurb": "What anaemia in pregnancy is, and why dilution is not the whole story",
+      "id": "basics",
+      "skills": [
+        "skill.anaemia.basics"
+      ],
+      "title": "Basics"
+    },
+    {
+      "blurb": "Before a single question",
+      "id": "approach",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ],
+      "title": "Approach to the patient"
+    },
+    {
+      "blurb": "Age, parity and gestation set the iron debt before a symptom is mentioned",
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected anaemia, age with parity and gestation carry real weight: a teenage mother, a multigravida with short gaps, and a gestation already in the third trimester all mean stores were never refilled and little time is left to refill them. Booking status matters as much as biology, since an unbooked mother has had no tablets and no haemoglobin checks."
+        }
+      },
+      "id": "particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "title": "Patient particulars"
+    },
+    {
+      "blurb": "Tiredness with a shape, and the craving that gives it away",
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical presentation reads as falling capacity over weeks: fatigue for two months, breathlessness on climbing stairs for one month, palpitations for two weeks. That tempo of slow decline separates anaemia from an acute illness before anything else is known."
+        },
+        "skill.hx.obg.booking_lmp": {
+          "expect": "Expect uncertain dates in an unbooked mother, which makes every growth assessment harder. Ask when she first felt the baby move and when she first attended any health centre, since those two answers often date the pregnancy better than her bleeding history."
+        }
+      },
+      "id": "history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.booking_lmp",
+        "skill.hx.anaemia.symptoms"
+      ],
+      "title": "History of presenting illness"
+    },
+    {
+      "blurb": "The diet, gaps and worms that decide the cause and the cure",
+      "emphasis": {
+        "skill.hx.obg.medical_family_drug": {
+          "expect": "Ask about tuberculosis, kidney disease and repeated infections in the same breath as drugs: chronic illness keeps anaemia from responding to iron, and phenytoin-type drugs with folate antagonists change which vitamin she is missing."
+        },
+        "skill.hx.obg.previous_pregnancies": {
+          "expect": "Expect short gaps and heavy past bleeding. A gap under two years means her stores never refilled, and a past postpartum bleed or heavy periods before this pregnancy point to loss, not just poor intake, as the driver."
+        }
+      },
+      "id": "past_personal_drug_family",
+      "skills": [
+        "skill.hx.obg.medical_family_drug",
+        "skill.hx.obg.previous_pregnancies",
+        "skill.hx.anaemia.risk"
+      ],
+      "title": "Past, personal, drug and family history"
+    },
+    {
+      "blurb": "Pallor graded at four sites, and the pulse that outranks it",
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for pallor at the conjunctiva, tongue, palms and nail beds together, with koilonychia, cheilosis and brittle hair where deficiency has lasted months. A systolic flow murmur and tachycardia with a wide pulse pressure reflect compensation, not primary heart disease."
+        },
+        "skill.gen.vitals": {
+          "expect": "Expect a fast pulse with normal or low pressure in uncomplicated anaemia. Fever points to malaria or another infection as a contributor, and a raised respiratory rate with crepitations at the bases in severe anaemia warns of cardiac decompensation, which changes the plan on its own."
+        },
+        "skill.gen.edema": {
+          "expect": "Pedal oedema in severe anaemia reflects hypoproteinaemia and cardiac strain rather than pre-eclampsia, but facial puffiness with hypertension belongs to hypertensive disease instead. The distribution with the pressure reading decides which one you are looking at."
+        },
+        "skill.gen.cyanosis": {
+          "expect": "Cyanosis is not a feature of anaemia. If present it points to a coexisting cardiac or respiratory problem, which matters because a cyanosed anaemic mother has two reasons to desaturate, not one."
+        }
+      },
+      "id": "general_exam",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema",
+        "skill.gen.cyanosis"
+      ],
+      "title": "General examination"
+    },
+    {
+      "blurb": "Two patients examined, and what chronic anaemia has cost the fetus",
+      "emphasis": {
+        "skill.exam.obg.preg_prep_inspect": {
+          "expect": "Expect a uterus that may measure small for the stated gestation where chronic anaemia has restricted growth. Inspect for pallor of the vulva with the abdomen, and note bleeding, leaking or itching that suggests an ongoing loss or infection alongside the anaemia."
+        },
+        "skill.exam.obg.fundal_height": {
+          "expect": "Expect a fundal height that can lag behind the dates by weeks in chronic anaemia with growth restriction. A tape measurement that matches the dates is genuinely reassuring here, since it means the fetus has been spared so far."
+        },
+        "skill.exam.obg.leopold": {
+          "expect": "Lie and presentation are usually unaffected by anaemia itself, which is exactly why a transverse lie or breech found now would be an independent problem. Confirm the uterus is relaxed with no tenderness, so abruption is not hiding behind the anaemia."
+        },
+        "skill.exam.obg.fetal_heart": {
+          "expect": "Expect a normal fetal heart where the mother is compensated, but listen with extra care: reduced movements with a non-reassuring trace in a severely anaemic mother is uteroplacental insufficiency, the fetal half of her disease, and it changes urgency on its own."
+        }
+      },
+      "id": "systemic_exam",
+      "skills": [
+        "skill.exam.obg.preg_prep_inspect",
+        "skill.exam.obg.fundal_height",
+        "skill.exam.obg.leopold",
+        "skill.exam.obg.fetal_heart"
+      ],
+      "title": "Obstetric abdominal examination"
+    },
+    {
+      "blurb": "Empty stores conduct to empty blood; that one fact explains everything you found",
+      "id": "disease_findings",
+      "skills": [
+        "skill.anaemia.findings"
+      ],
+      "title": "Putting the anaemia picture together"
+    },
+    {
+      "blurb": "Three sentences that contain the mother, the grade and the fetus",
+      "id": "summary",
+      "skills": [
+        "skill.anaemia.summary"
+      ],
+      "title": "Clinical summary"
+    },
+    {
+      "blurb": "What else looks like this, and what a normal ferritin is telling you",
+      "id": "differential",
+      "skills": [
+        "skill.anaemia.differential"
+      ],
+      "title": "Differential diagnosis"
+    },
+    {
+      "blurb": "Prove the iron is missing, grade it, and look for what stole it",
+      "id": "investigations",
+      "skills": [
+        "skill.ix.anaemia.workup"
+      ],
+      "title": "Investigations"
+    },
+    {
+      "blurb": "Grade first, because the grade chooses the route of iron",
+      "id": "diagnosis",
+      "skills": [
+        "skill.anaemia.diagnosis",
+        "skill.annex.anaemia.grading"
+      ],
+      "title": "Diagnosis and severity"
+    },
+    {
+      "blurb": "Iron by the route her severity allows, plus everything that is not iron",
+      "id": "treatment",
+      "skills": [
+        "skill.tx.anaemia"
+      ],
+      "title": "Treatment"
+    },
+    {
+      "blurb": "Present this mother to your consultant",
+      "id": "case",
+      "skills": [
+        "skill.present.anaemia.case"
+      ],
+      "title": "Case presentation"
+    }
+  ],
+  "estMinutes": 60,
+  "fullName": "Iron deficiency anaemia in pregnancy",
+  "id": "anaemia-in-pregnancy",
+  "kbRef": "iron_deficiency_anemia",
+  "name": "Anaemia in pregnancy",
+  "oneLine": "Iron deficiency anaemia and its management",
+  "osce": {
+    "stations": [
+      {
+        "examinerQuestions": [
+          "You found conjunctival pallor with koilonychia. Why do the nails change in iron deficiency, and what does it tell you about duration?",
+          "Her pressure is normal and the swelling is only in the feet. How do you separate this oedema from pre-eclampsia at the bedside?",
+          "Her fundal height lags three weeks behind her dates. What does chronic anaemia cost the fetus, and what do you do about it?"
+        ],
+        "id": "osce.anaemia.exam",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.gen.appearance",
+          "skill.gen.vitals",
+          "skill.gen.edema",
+          "skill.exam.obg.preg_prep_inspect",
+          "skill.exam.obg.fundal_height"
+        ],
+        "task": "This 26-year-old woman is 32 weeks pregnant and tires easily. Examine her for anaemia and assess its severity.",
+        "title": "Examine a pregnant woman for anaemia"
+      },
+      {
+        "examinerQuestions": [
+          "She collects iron tablets but her haemoglobin keeps falling. What three questions expose the real reason?",
+          "Her ferritin is normal but she has hookworm ova in the stool. Does normal ferritin exclude iron deficiency here?",
+          "She is 38 weeks with a haemoglobin of 6.5. Tablets or transfusion, and where should she deliver?"
+        ],
+        "id": "osce.anaemia.history",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.obg.booking_lmp",
+          "skill.hx.anaemia.symptoms",
+          "skill.hx.anaemia.risk"
+        ],
+        "task": "This 24-year-old woman is 30 weeks pregnant with fatigue and cravings for clay. Take a focused history in six minutes and counsel her on iron tablets.",
+        "title": "Take a history and counsel on iron"
+      }
+    ]
+  },
+  "review": {
+    "status": "ai_drafted"
+  },
+  "system": "obstetrics",
+  "version": 1,
+  "viva": {
+    "skills": [
+      "skill.anaemia.basics",
+      "skill.hx.anaemia.symptoms",
+      "skill.anaemia.findings",
+      "skill.anaemia.differential",
+      "skill.ix.anaemia.workup",
+      "skill.anaemia.diagnosis",
+      "skill.tx.anaemia",
+      "skill.annex.anaemia.grading"
+    ]
+  },
+  "skills": {
+    "skill.anaemia.basics": {
+      "body": "Anaemia in pregnancy is a haemoglobin below 11 g/dL at a time when the demand for iron is higher than at any other point in her life. Some fall is dilution, because plasma volume rises faster than red cell mass, but dilution never explains pallor with symptoms or a ferritin that has run dry.",
+      "id": "skill.anaemia.basics",
+      "keyPoints": [
+        "A haemoglobin below 11 g/dL defines anaemia in pregnancy. The same woman outside pregnancy would be called anaemic only below 12, so pregnancy has its own cut-off and it must be used.",
+        "Plasma volume rises more than red cell mass, so a small fall in haemoglobin is physiological. This dilution is real but limited: it never causes koilonychia, pica or breathlessness at rest.",
+        "Demand rises for three reasons at once: the fetus and placenta being built, the expanded maternal red cell mass, and the blood loss of delivery that must be afforded. Iron deficiency is therefore a debt taken on purpose, and it must be repaid before labour.",
+        "Iron deficiency is the commonest cause, but it is not the only one. Folate and B12 deficiency, malaria, hookworm, bleeding and chronic disease all cause anaemia in pregnancy, and each needs its own treatment alongside iron.",
+        "Anaemia is often silent until late because slow progression plus compensation hide it, especially in the young. By the time fatigue limits daily work, stores have usually been empty for months.",
+        "The cost falls on two patients: the mother tires, tolerates blood loss poorly and can fail cardiologically when severe, while the fetus faces preterm birth and low birth weight with a higher risk of dying in the newborn period."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "Low haemoglobin at a time of rising demand, with dilution as only half the story",
+      "pitfalls": [
+        "Calling every low haemoglobin in pregnancy physiological dilution, which misses true deficiency that tablets would have cured.",
+        "Treating the number without asking what stole the iron, so worms or bleeding undo every tablet given.",
+        "Reassuring a tired mother that fatigue is normal in pregnancy without checking pallor and haemoglobin, which delays the diagnosis by months."
+      ],
+      "probes": [
+        {
+          "a": "A haemoglobin below 11 g/dL defines anaemia in pregnancy, using the pregnancy cut-off rather than the non-pregnant one.",
+          "accept": [
+            "below 11",
+            "pregnancy"
+          ],
+          "level": 1,
+          "minMatch": 1,
+          "q": "What haemoglobin defines anaemia in pregnancy?"
+        },
+        {
+          "a": "Plasma volume rises faster than red cell mass so some fall is dilution, but dilution never explains symptoms, nail changes, pica or an empty ferritin, which all mean true deficiency.",
+          "accept": [
+            "plasma volume",
+            "dilution",
+            "ferritin",
+            "deficiency"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How do you separate physiological dilution from true anaemia?"
+        },
+        {
+          "a": "The fetus and placenta, the expanded maternal red cell mass, and the blood loss of delivery together raise demand beyond diet, which is why pregnancy empties stores that were only just adequate before.",
+          "accept": [
+            "fetus",
+            "placenta",
+            "red cell mass",
+            "delivery"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why does pregnancy itself create iron deficiency?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "iron_deficiency_anemia: pathophysiology",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Anaemia in pregnancy",
+          "source": "WHO"
+        }
+      ],
+      "system": "obstetrics",
+      "title": "What anaemia in pregnancy is",
+      "why": "Anaemia in pregnancy is defined by a pregnancy-specific number, not by how tired the mother looks, and getting that definition exact is what stops dilution being used as an excuse for deficiency. The definition also carries the reason pregnancy causes it: demand outruns supply at exactly the moment reserves are needed for delivery."
+    },
+    "skill.anaemia.differential": {
+      "body": "For a low haemoglobin in pregnancy, work through nutritional, infective, inherited and chronic-disease causes. Iron deficiency leads the list, but the ones that change treatment, B12 with folate, thalassaemia trait, sickle disease and malaria, must each be actively excluded.",
+      "id": "skill.anaemia.differential",
+      "keyPoints": [
+        "Iron deficiency: favoured by poor diet with tea at meals, short pregnancy gaps, worms, and bleeding. Microcytic hypochromic cells with a low ferritin confirm it, and it is the only microcytic anaemia that refills with iron.",
+        "Megaloblastic anaemia from folate or B12 deficiency: favoured by a vegetarian diet with no milk, very frequent pregnancies, and drugs that block folate. Macrocytes with hypersegmented neutrophils point here, and iron alone will not move it.",
+        "Thalassaemia trait: favoured by lifelong mild anaemia with no response to past iron, and a family or community background where it runs. Red cells are small but uniform with a normal or high ferritin, and the smear shows target cells rather than pencil cells.",
+        "Sickle cell disease: favoured by a known diagnosis, painful crises, jaundice and a family history. It brings its own obstetric dangers of crisis, infection and growth restriction, and needs specialist care, not just tablets.",
+        "Anaemia of chronic disease: favoured by tuberculosis, kidney disease or repeated infections. Ferritin stays normal or high while serum iron and saturation fall, which is the mirror image of iron deficiency.",
+        "Malaria and hookworm: favoured by fever with shivering or barefoot field work with a never-given deworming tablet. Both are curable causes, and missing them means iron is poured into a leaking vessel.",
+        "Physiological dilution: favoured by a small haemoglobin dip in the mid trimester of an otherwise well mother with a full ferritin and no symptoms. It is a diagnosis of exclusion after iron deficiency has been ruled out, never the first assumption."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "What else lowers haemoglobin, and what a normal ferritin is telling you",
+      "pitfalls": [
+        "Giving iron for months to thalassaemia trait, where the ferritin was full all along and the cells stay small whatever is given.",
+        "Missing B12 deficiency because the MCV looked normal, when combined iron and B12 deficiency averages the cell size back to normal.",
+        "Treating a normal ferritin during fever or infection as proof stores are full, when inflammation raises ferritin and hides coexisting deficiency."
+      ],
+      "probes": [
+        {
+          "a": "Megaloblastic anaemia from folate or B12 deficiency, thalassaemia trait, sickle cell disease, anaemia of chronic disease, malaria, hookworm infestation, and physiological dilution after deficiency is excluded.",
+          "accept": [
+            "megaloblastic",
+            "thalassaemia",
+            "sickle",
+            "chronic disease",
+            "malaria",
+            "hookworm"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Name four differentials for anaemia in pregnancy beyond iron deficiency."
+        },
+        {
+          "a": "Repeat the ferritin with the inflammation in mind, check saturation and the smear, and treat the worms regardless, because ferritin rises during infection and a normal value then cannot exclude coexisting iron deficiency.",
+          "accept": [
+            "inflammation",
+            "saturation",
+            "smear",
+            "worms"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Her ferritin is normal but she has fever with hookworm ova in the stool. What now?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Offers a differential spanning nutritional, infective, inherited and chronic-disease causes"
+        },
+        {
+          "id": "separators",
+          "text": "States the test that separates each mimic from iron deficiency"
+        },
+        {
+          "id": "ferritin",
+          "text": "Interprets ferritin correctly during inflammation"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "iron_deficiency_anemia: additionalDifferentials",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Anaemia in pregnancy",
+          "source": "Williams Obstetrics"
+        }
+      ],
+      "system": "obstetrics",
+      "teach": [
+        {
+          "body": "Iron deficiency gives small pale cells with an empty ferritin and a wide spread of cell sizes. Thalassaemia trait gives small cells that are uniform in size with a full ferritin. Megaloblastic anaemia gives large cells with hypersegmented neutrophils. Three cell pictures, three different treatments.",
+          "heading": "Three cell pictures, three treatments"
+        },
+        {
+          "body": "Ferritin below 30 marks empty stores, but fever and infection raise it severalfold. A normal ferritin during illness cannot exclude deficiency, so read it with the saturation, the smear and the clinical story, never alone.",
+          "heading": "Ferritin during fever needs company"
+        },
+        {
+          "heading": "Separating the three small-and-large cell anaemias",
+          "table": {
+            "cols": [
+              "Feature",
+              "Iron deficiency",
+              "Thalassaemia trait",
+              "Megaloblastic"
+            ],
+            "rows": [
+              [
+                "Red cell size",
+                "Small",
+                "Small",
+                "Large"
+              ],
+              [
+                "Size spread",
+                "Wide",
+                "Uniform",
+                "Wide"
+              ],
+              [
+                "Ferritin stores",
+                "Empty",
+                "Full",
+                "Full"
+              ],
+              [
+                "Smear clue",
+                "Pencil cells",
+                "Target cells",
+                "Large neutrophils"
+              ]
+            ]
+          }
+        }
+      ],
+      "title": "Differential diagnosis",
+      "why": "Most anaemia in pregnancy is exactly what it looks like, but the cases that are not are expensive to miss: thalassaemia trait punished with endless iron, B12 deficiency missed behind a normal MCV, and malaria feeding on every tablet. The differential does not stop once iron is started."
+    },
+    "skill.anaemia.findings": {
+      "body": "Empty iron stores write the same signature on skin, nails, mouth, pulse and fetus. Pallor at four sites grades the depth, the pulse shows the compensation, and the nails with the mouth show how long it has lasted.",
+      "id": "skill.anaemia.findings",
+      "keyPoints": [
+        "Pallor: read it at the conjunctiva, tongue, palms and nail beds together, not one site alone. Conjunctival pallor with pale palms in pregnancy reliably means the haemoglobin is down, and its depth tracks severity better than any single symptom.",
+        "Pulse and heart: expect tachycardia with a systolic flow murmur at the base and a wide pulse pressure. These are compensation, not valve disease, and they vanish as the haemoglobin recovers, which is how you confirm what they were.",
+        "Nails and mouth: spoon-shaped nails with longitudinal ridging, cracks at the mouth corners with a smooth sore tongue, and brittle hair all mark deficiency lasting months. They are the most specific bedside clues to iron as the cause.",
+        "Oedema and lungs: ankle swelling in severe anaemia reflects low protein with cardiac strain, and basal crepitations with breathlessness at rest warn of decompensation. Either finding moves her from tablets to supervised care.",
+        "Abdomen and fetus: the uterus may measure small for the dates where chronic anaemia has restricted growth, with reduced liquor as a late sign. A fundal height matching the dates is genuinely reassuring, since it means the fetus has been spared so far.",
+        "Pressure and urine: blood pressure stays normal or low in uncomplicated anaemia, and urine stays protein-free. Hypertension with proteinuria belongs to hypertensive disease instead, and the two can coexist, so both must be checked, not assumed."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "One mechanism, empty stores, and why everything points the same way",
+      "pitfalls": [
+        "Reading pallor at one site only, when a single pale conjunctiva in an anxious mother misleads and four sites together do not.",
+        "Calling a systolic murmur in a pale pregnant woman heart disease, when a flow murmur of anaemia disappears with treatment.",
+        "Examining only the mother and never taping the fundus, so growth restriction from months of anaemia is discovered only at delivery."
+      ],
+      "probes": [
+        {
+          "a": "Pallor at the conjunctiva, tongue, palms and nail beds together, with the depth tracking severity better than symptoms do.",
+          "accept": [
+            "conjunctiva",
+            "tongue",
+            "palms",
+            "nail beds"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Where do you look for pallor, and why four sites?"
+        },
+        {
+          "a": "Tachycardia with a systolic flow murmur and a wide pulse pressure, which are compensation for thin blood and vanish as the haemoglobin recovers.",
+          "accept": [
+            "tachycardia",
+            "flow murmur",
+            "compensation"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What does the pulse and heart tell you in anaemia?"
+        },
+        {
+          "a": "Spoon-shaped nails with mouth cracks and a sore tongue mark months of deficiency, oedema with basal crepitations warns of decompensation, and a lagging fundus means the fetus has already paid, each changing urgency on its own.",
+          "accept": [
+            "spoon-shaped",
+            "decompensation",
+            "lagging fundus"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Which findings change urgency on their own?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "iron_deficiency_anemia: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Anaemia in pregnancy",
+          "source": "Williams Obstetrics"
+        }
+      ],
+      "system": "obstetrics",
+      "title": "The anaemia picture",
+      "why": "Anaemia is the clearest example in obstetric examination of a single deficiency generating a coherent set of findings. Empty stores pale the skin, reshape the nails, quicken the pulse and slow the fetus, all in the same direction, which is why a complete examination grades severity without waiting for the laboratory."
+    },
+    "skill.anaemia.summary": {
+      "body": "State the mother with the risks that matter, the tempo with the grade, the cause in abstract terms, and the fetus with the plan, in that order.",
+      "id": "skill.anaemia.summary",
+      "keyPoints": [
+        "Name the mother with the relevant risks: age, parity with gaps, gestation, booking status and diet. A multigravida with a short gap already explains the debt before the numbers are read.",
+        "State the tempo with the grade: chronic over weeks to months, with the haemoglobin and its severity band. Tempo separates chronic deficiency from an acute bleed, and the grade decides the route of iron.",
+        "State the cause in abstract terms: iron deficiency from poor intake with tea at meals and untreated worms, with anaemia of chronic disease or thalassaemia trait where the tests point there.",
+        "Include the fetus in the same summary: fundal height against dates with liquor and movements. Growth restriction is part of the diagnosis here, not an afterthought.",
+        "A worked example: A 26-year-old G3P2 at 32 weeks with a 16-month gap presents with two months of fatigue, breathlessness on effort and pica. Examination shows conjunctival with palmar pallor, spoon-shaped nails, a pulse of 104 and a fundus measuring 29 weeks. This is iron deficiency anaemia of pregnancy, moderate at 7.2 g per dL, with early growth restriction."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "Problem representation for a chronic deficiency measured in months",
+      "pitfalls": [
+        "Omitting the severity grade from the summary, so the listener cannot tell whether she needs tablets or transfusion.",
+        "Describing the tempo as acute out of habit, when the whole illness is months old and the stores emptied long ago.",
+        "Leaving out the fetus, when growth is the second patient the summary exists to protect."
+      ],
+      "probes": [
+        {
+          "a": "The severity grade with the route of iron it implies, because it directly determines the immediate plan.",
+          "accept": [
+            "grade",
+            "route",
+            "plan"
+          ],
+          "level": 2,
+          "minMatch": 1,
+          "q": "What element belongs in an anaemia summary that decides the plan?"
+        },
+        {
+          "a": "It is what distinguishes a chronic deficiency needing months of refilling from an acute bleed needing urgent replacement, and it is often the single most discriminating detail in the whole history.",
+          "accept": [
+            "chronic",
+            "acute",
+            "discriminating"
+          ],
+          "level": 3,
+          "minMatch": 1,
+          "q": "Why does tempo matter so much in an anaemia summary?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "mother",
+          "text": "States the mother with relevant risks and gaps"
+        },
+        {
+          "id": "grade",
+          "text": "States the tempo with the severity grade"
+        },
+        {
+          "id": "fetus",
+          "text": "Includes fetal growth and the plan it implies"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "iron_deficiency_anemia: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Anaemia in pregnancy",
+          "source": "Williams Obstetrics"
+        }
+      ],
+      "system": "obstetrics",
+      "title": "The clinical summary",
+      "why": "The summary for a chronic deficiency has a different shape from an acute illness: the tempo is months, and the grade with the fetus belongs in the same sentence as the syndrome, because together they choose the route of iron and the place of delivery."
+    },
+    "skill.annex.anaemia.grading": {
+      "id": "skill.annex.anaemia.grading",
+      "kind": "annexure",
+      "media": [],
+      "oneLine": "Grades, preparations and response marks in one place",
+      "probes": [
+        {
+          "a": "Mild is 10 to 10.9, moderate is 7 to 9.9, severe is below 7, and very severe is below 4, all in grams per decilitre.",
+          "accept": [
+            "10 to 10.9",
+            "7 to 9.9",
+            "below 7",
+            "below 4"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "State the four severity bands."
+        },
+        {
+          "a": "Ferrous sulphate and fumarate carry 65 mg per tablet and gluconate carries 34 mg, so the salt on the strip must be converted to elemental iron before doses are compared.",
+          "accept": [
+            "65 mg",
+            "34 mg",
+            "elemental iron"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why must the salt be converted to elemental iron?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "iron_deficiency_anemia: Treatment of iron deficiency anaemia",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Iron deficiency anaemia in pregnancy",
+          "source": "FOGSI"
+        }
+      ],
+      "system": "obstetrics",
+      "teach": [
+        {
+          "body": "Mild anaemia runs from 10 to 10.9 grams per decilitre and is managed with oral iron at the antenatal clinic. Moderate anaemia runs from 7 to 9.9 and needs closer follow-up with parenteral iron where tablets fail or time is short.",
+          "heading": "Mild and moderate bands"
+        },
+        {
+          "body": "Severe anaemia is anything below 7 grams per decilitre and very severe is below 4. Both need hospital assessment, a transfusion decision, and delivery where blood with an operating theatre is available.",
+          "heading": "Severe and very severe bands"
+        },
+        {
+          "heading": "Elemental iron in common preparations",
+          "table": {
+            "cols": [
+              "Preparation",
+              "Tablet",
+              "Elemental iron"
+            ],
+            "rows": [
+              [
+                "Ferrous sulphate",
+                "325 mg",
+                "65 mg"
+              ],
+              [
+                "Ferrous fumarate",
+                "325 mg",
+                "65 mg"
+              ],
+              [
+                "Ferrous gluconate",
+                "300 mg",
+                "34 mg"
+              ],
+              [
+                "Iron sucrose IV",
+                "Per mL",
+                "20 mg"
+              ]
+            ]
+          }
+        }
+      ],
+      "title": "Grading, preparations and response marks",
+      "why": "Grades, tablet strengths and response marks are numbers a student must recall exactly under pressure. Kept in one annexure, they are looked up rather than memorised, and every number here is quoted from a cited source."
+    },
+    "skill.anaemia.diagnosis": {
+      "body": "Anaemia in pregnancy is diagnosed below 11 g per dL, then graded into bands that choose the route of iron. The total maps to a plan that guides, but does not replace, judgement about transfusion and referral.",
+      "id": "skill.anaemia.diagnosis",
+      "keyPoints": [
+        "A haemoglobin below 11 g per dL in pregnancy makes the diagnosis. Confirm it on a venous sample where the strip or fingerprick result would change the plan, since field devices read low when hands are cold or the drop is squeezed.",
+        "MILD runs from 10 to 10.9 g per dL and is managed with oral iron at the antenatal clinic with diet counsel and a repeat haemoglobin date.",
+        "MODERATE runs from 7 to 9.9 g per dL and needs closer follow-up: regular oral iron where she tolerates and time allows, parenteral iron where tablets fail, intolerance strikes, or the third trimester leaves too little time.",
+        "SEVERE is anything below 7 g per dL and VERY SEVERE below 4. Both need hospital assessment, a transfusion decision on symptoms with gestation, and delivery planned where blood with an operating theatre is available.",
+        "These bands guide judgement, they do not replace it: a moderate grade near term with falling movements, or with bleeding, may need what a severe grade needs, while a mild grade with hookworm needs deworming more than it needs panic.",
+        "A complete diagnostic statement names the cause, the grade, the gestation and the fetal effect: iron deficiency anaemia of pregnancy, moderate at 7.2 g per dL, at 32 weeks with early growth restriction."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "Four bands that decide the route of iron and the place of delivery",
+      "pitfalls": [
+        "Treating the bands as the whole decision rather than one input alongside gestation, symptoms, bleeding and fetal status.",
+        "Calling moderate anaemia mild because she looks well, when compensation hides severity in the young until very late.",
+        "Stating the diagnosis without a grade, leaving the reader unable to judge whether she needs tablets or blood."
+      ],
+      "probes": [
+        {
+          "a": "Mild is 10 to 10.9, moderate is 7 to 9.9, severe is below 7, and very severe is below 4, all in grams per decilitre.",
+          "accept": [
+            "10 to 10.9",
+            "7 to 9.9",
+            "below 7",
+            "below 4"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "State the four severity bands with numbers."
+        },
+        {
+          "a": "Because compensation hides severity in the young, so a moderate grade near term with falling movements or bleeding may need hospital care with transfusion considered, exactly as a severe grade would.",
+          "accept": [
+            "compensation",
+            "near term",
+            "transfusion"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "She is moderate at 8.1 near term with falling movements. Why might she need what a severe grade needs?"
+        },
+        {
+          "a": "Iron deficiency anaemia of pregnancy with the grade and number, the gestation, the cause where found, and the fetal effect, since each element changes the plan.",
+          "accept": [
+            "grade",
+            "gestation",
+            "cause",
+            "fetal"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "What makes a diagnostic statement complete?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "bands",
+          "text": "States all four severity bands correctly"
+        },
+        {
+          "id": "plan",
+          "text": "Links the grade to the route of iron and referral"
+        },
+        {
+          "id": "judgement",
+          "text": "Recognises the grade as a guide, not a replacement for judgement"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "iron_deficiency_anemia: severityClassification",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Iron deficiency anaemia in pregnancy",
+          "source": "FOGSI"
+        }
+      ],
+      "system": "obstetrics",
+      "title": "Diagnosis and severity",
+      "why": "A diagnosis of anaemia without a grade does not say whether she goes home with tablets or to hospital for blood. Grading is built from a number already in hand within minutes of seeing her, and it is the single tool that most directly changes the plan."
+    },
+    "skill.ix.anaemia.workup": {
+      "body": "Group investigations by what they answer: confirm the fall, characterise the cells, prove the stores are empty, find what stole the iron, and check the fetus.",
+      "id": "skill.ix.anaemia.workup",
+      "keyPoints": [
+        "CONFIRM: haemoglobin with a full blood count on a venous sample where the result changes the plan. Field devices are for screening; a grade that admits or transfuses deserves the laboratory.",
+        "CHARACTERISE: red cell indices with the smear. Small cells below 80 fL with a wide size spread and pencil cells on the film mean iron deficiency; large cells with hypersegmented neutrophils mean folate or B12 instead; small uniform cells with target cells mean thalassaemia trait.",
+        "PROVE STORES: serum ferritin with transferrin saturation. Ferritin below 30 marks empty stores with high sensitivity and specificity, and saturation below 15 to 20 percent means the marrow is already starved of iron. Read ferritin with the clinical story during fever, since inflammation raises it.",
+        "FIND THE THIEF: stool for ova with a malaria smear or rapid test where fever or exposure suggests it, B12 with folate where cells are large or iron alone has failed before, and urine routine to exclude infection with proteinuria. Each positive result adds a treatment, not just a label.",
+        "CHECK THE FETUS: ultrasound for growth with liquor where anaemia is chronic or severe, since restriction changes surveillance and the delivery plan. A growth scan is part of the anaemia workup here, not a separate referral.",
+        "FOLLOW THE RESPONSE: reticulocytes at about one week with haemoglobin at two weeks. A rise of about 1 g per dL by day 14 means replacement is working; no rise means missed tablets, ongoing loss or poor absorption, not stronger tablets on reflex."
+      ],
+      "kind": "investigation",
+      "media": [],
+      "oneLine": "The film characterises, the ferritin proves, and nothing delays the first tablet",
+      "pitfalls": [
+        "Waiting for ferritin before starting iron in a clearly deficient mother, when tablets cost little and delay costs growth.",
+        "Reading a normal ferritin during fever as full stores, when inflammation raises ferritin and hides coexisting deficiency.",
+        "Ordering a growth scan never, so the fetus that anaemia has already restricted is discovered only at delivery."
+      ],
+      "probes": [
+        {
+          "a": "Small cells below 80 with a wide spread and pencil cells mean iron deficiency, large cells with hypersegmented neutrophils mean folate or B12 deficiency, and small uniform cells with target cells mean thalassaemia trait.",
+          "accept": [
+            "below 80",
+            "pencil cells",
+            "hypersegmented",
+            "target cells"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What do the indices with the smear tell you?"
+        },
+        {
+          "a": "Serum ferritin with transferrin saturation. Ferritin below 30 marks empty stores, and saturation below 15 to 20 percent means the marrow is already starved.",
+          "accept": [
+            "ferritin",
+            "below 30",
+            "saturation",
+            "15 to 20"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Which two results prove the stores are empty?"
+        },
+        {
+          "a": "Reticulocytes at about one week with haemoglobin at two weeks, expecting a rise of about 1 g per dL by day 14. No rise means missed tablets, ongoing loss or poor absorption, investigated before anything is escalated.",
+          "accept": [
+            "one week",
+            "two weeks",
+            "1 g",
+            "tablets",
+            "loss"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "How do you follow the response, and what does failure mean?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "iron_deficiency_anemia: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Anaemia in pregnancy",
+          "source": "Williams Obstetrics"
+        }
+      ],
+      "system": "obstetrics",
+      "title": "Confirming, grading and finding the cause",
+      "why": "Investigations in anaemia serve three separate jobs, confirming the fall, proving the stores are empty, and finding what stole the iron, and understanding which test does which stops a student waiting for a ferritin result before starting tablets in a clearly deficient mother."
+    },
+    "skill.tx.anaemia": {
+      "body": "Replace iron by the route her severity allows, treat the cause alongside, reserve blood for the few who earn it, and plan delivery where blood is available.",
+      "dosingNote": "This module teaches management at the level of drug class and principle. Specific agents, routes and regimens must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "id": "skill.tx.anaemia",
+      "keyPoints": [
+        "Start oral iron as first line once deficiency is confirmed: 65 mg of elemental iron, one 325 mg ferrous sulphate tablet, every other day. Larger or more frequent doses absorb poorly and bring constipation that stops the course.",
+        "Take each dose 30 minutes before meals with vitamin C, 500 mg or orange juice, and keep tea, calcium and antacids away from the dose. This counsel matters as much as the prescription, since absorption decides the outcome.",
+        "Continue for at least 6 months after the haemoglobin normalises to refill stores and prevent early recurrence. Stopping at normal is the commonest reason anaemia returns in the next pregnancy.",
+        "Review at about 2 weeks: reticulocytes at one week with a haemoglobin rise of about 1 g per dL by day 14 means success. No rise means missed tablets, ongoing bleeding or poor absorption, investigated before anything is escalated.",
+        "Use intravenous iron where oral iron is not tolerated or has failed, absorption is impaired, or time is short near term: an initial cumulative dose of 1000 mg is usually enough, with ferric carboxymaltose or iron sucrose as the preparations. Stop oral iron at least 24 hours before parenteral iron and restart it 4 to 5 days after.",
+        "Reserve red cell transfusion for severe symptomatic anaemia or haemodynamic compromise. Transfusion is rescue, not refilling, and it never replaces finding the cause.",
+        "Treat the cause with the iron: deworming after the first three months where worms are common, malaria treatment where proven, diet change with tea moved away from meals, and folate with B12 where deficiency or drugs point there. Iron plus the cause cured beats iron alone.",
+        "Plan the pregnancy around the anaemia: antenatal iron with a repeat haemoglobin date, delivery where blood with an operating theatre is available for moderate and severe grades, active management of the third stage since she cannot afford to bleed, and referral upward for severe grades, failure signs, or no response."
+      ],
+      "kind": "treatment",
+      "media": [],
+      "oneLine": "Tablets first, infusion where they fail, blood only for rescue",
+      "pitfalls": [
+        "Prescribing iron without counsel on tea and timing, so tablets are swallowed faithfully with the very meal that blocks them.",
+        "Escalating to infusion reflexively at two weeks without first asking about missed tablets, ongoing loss or absorption.",
+        "Transfusing moderate anaemia to a number while the worms that caused it stay untreated and the next pregnancy starts empty again."
+      ],
+      "probes": [
+        {
+          "a": "65 mg of elemental iron every other day, taken 30 minutes before meals with vitamin C, keeping tea, calcium and antacids away from the dose, and continued for at least 6 months after the haemoglobin normalises.",
+          "accept": [
+            "65 mg",
+            "every other day",
+            "vitamin C",
+            "tea",
+            "6 months"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "State the oral iron regimen with its counsel and duration."
+        },
+        {
+          "a": "Where oral iron is not tolerated or has failed, absorption is impaired, or time is short near term, using an initial cumulative dose of 1000 mg, with oral iron stopped 24 hours before and restarted 4 to 5 days after.",
+          "accept": [
+            "not tolerated",
+            "failed",
+            "1000 mg",
+            "24 hours",
+            "4 to 5 days"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "When is intravenous iron used, and how is it arranged around oral iron?"
+        },
+        {
+          "a": "No rise means missed tablets, ongoing bleeding or poor absorption, investigated with adherence, stool, malaria and B12 checks before any escalation, since stronger iron never fixes an untaken tablet or an untreated worm.",
+          "accept": [
+            "tablets",
+            "bleeding",
+            "absorption",
+            "stool",
+            "worm"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "No haemoglobin rise at two weeks. What is your first step, before escalating?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "iron_deficiency_anemia: management",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Daily iron supplementation in pregnancy",
+          "source": "WHO"
+        }
+      ],
+      "system": "obstetrics",
+      "title": "Managing anaemia in pregnancy",
+      "why": "The route of iron and the place of delivery both follow directly from severity, and getting either wrong in either direction, tablets where blood was needed or transfusion where tablets would have done, has real cost. The counsel, deworming and delivery plan around the iron are as much a part of the answer as the iron itself."
+    }
+  },
+  "cases": [
+    {
+      "diagnosis": {
+        "accept": [
+          "Iron deficiency anaemia",
+          "iron deficiency",
+          "microcytic anaemia",
+          "ida"
+        ],
+        "answer": "Iron deficiency anaemia of pregnancy, moderate at 7.2 g per dL, at 32 weeks gestation in a multigravida with hookworm infestation.",
+        "minMatch": 1
+      },
+      "differentialModel": {
+        "accept": [
+          "Iron deficiency anaemia",
+          "Megaloblastic anaemia",
+          "Anaemia of chronic disease",
+          "Thalassaemia trait",
+          "Hookworm infestation",
+          "Sickle cell disease",
+          "Malaria"
+        ],
+        "answer": "Iron deficiency anaemia of pregnancy from poor intake with tea at meals, a short pregnancy gap and hookworm loss. Consider megaloblastic anaemia, anaemia of chronic disease, thalassaemia trait, sickle cell disease and malaria.",
+        "minMatch": 2
+      },
+      "essentialInvestigations": [
+        "fbc",
+        "smear",
+        "ferritin",
+        "stool",
+        "usg"
+      ],
+      "exam": {
+        "skill.exam.obg.fetal_heart": {
+          "abnormal": false,
+          "finding": "Fetal heart rate 142 per minute, regular. Liquor clinically adequate. No decelerations on brief auscultation; kick counts advised with a repeat growth scan planned."
+        },
+        "skill.exam.obg.fundal_height": {
+          "abnormal": true,
+          "finding": "Fundal height 29 cm by tape at 32 weeks by dates, lagging about 3 weeks. Symphysis-fundal height 29 cm, consistent with early growth restriction."
+        },
+        "skill.exam.obg.leopold": {
+          "abnormal": false,
+          "finding": "Longitudinal lie, cephalic presentation, head mobile above the brim. Uterus relaxed with no tenderness, no bleeding and no leaking."
+        },
+        "skill.exam.obg.preg_prep_inspect": {
+          "abnormal": true,
+          "finding": "Uterus small for the stated 32 weeks. Vulval pallor present. No bleeding per vaginam, no leaking, no itching. Bare feet with soil-stained soles."
+        },
+        "skill.gen.appearance": {
+          "abnormal": true,
+          "finding": "Tired-looking young woman, pale conjunctiva with pale tongue and palms. Spoon-shaped nails with ridging, cracks at the mouth corners. Alert, no breathlessness at rest."
+        },
+        "skill.gen.cyanosis": {
+          "abnormal": false,
+          "finding": "No central or peripheral cyanosis. Lungs clear on auscultation."
+        },
+        "skill.gen.edema": {
+          "abnormal": true,
+          "finding": "Mild pitting pedal oedema to the ankle only, face and hands spared. Blood pressure normal, urine protein-free, so hypertensive disease is not the explanation."
+        },
+        "skill.gen.vitals": {
+          "abnormal": true,
+          "finding": "Pulse 104 regular with a soft systolic murmur at the base. Blood pressure 100/64. Respiratory rate 20. SpO2 98 percent on room air. Temperature 36.8 C."
+        }
+      },
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "history": {
+        "antenatal_visits_record": {
+          "cues": [
+            "antenatal checkup",
+            "anc visits",
+            "booked or unbooked",
+            "checkup during pregnancy",
+            "visits to the health centre"
+          ],
+          "reply": "I registered at the health centre in the fifth month and went twice. They gave me iron tablets and checked my blood once, saying it was low."
+        },
+        "bleeding_piles_gums": {
+          "cues": [
+            "bleeding from anywhere",
+            "piles bleeding",
+            "bleeding gums",
+            "nose bleed",
+            "spotting from below"
+          ],
+          "reply": "No bleeding from below and no nose bleeds. My gums bleed a little when I brush, and I have piles that bleed a few drops at times."
+        },
+        "breathlessness_on_exertion": {
+          "cues": [
+            "breathless on climbing",
+            "short of breath on effort",
+            "difficulty walking uphill",
+            "breathing hard on work"
+          ],
+          "key": true,
+          "reply": "Yes, for one month I get breathless climbing the stairs to our room, and my heart pounds after small work like sweeping.",
+          "skillId": "skill.hx.anaemia.symptoms"
+        },
+        "deworming_tablets": {
+          "cues": [
+            "deworming tablet",
+            "worm tablet",
+            "albendazole",
+            "medicine for worms"
+          ],
+          "reply": "No, nobody gave me any worm tablet in this pregnancy. I walk barefoot in the fields every day.",
+          "skillId": "skill.hx.anaemia.risk"
+        },
+        "diet_tea_meals": {
+          "cues": [
+            "what do you eat",
+            "daily diet",
+            "vegetarian or nonvegetarian",
+            "tea with meals",
+            "meat or eggs"
+          ],
+          "reply": "We eat roti, dal and rice. We are vegetarian and never eat meat or eggs. I drink two cups of tea with breakfast and lunch.",
+          "skillId": "skill.hx.anaemia.risk"
+        },
+        "family_blood_disorders": {
+          "cues": [
+            "family history of blood disease",
+            "thalassaemia in family",
+            "sickle in family",
+            "anyone needing blood transfusions"
+          ],
+          "reply": "Nobody in the family has blood disease or needs transfusions. My sisters had normal pregnancies."
+        },
+        "fatigue_daily_work": {
+          "cues": [
+            "tired through the day",
+            "fatigue",
+            "weakness",
+            "capacity for work",
+            "tired doing housework"
+          ],
+          "key": true,
+          "reply": "For two months I feel tired the whole day. Earlier I managed the house and the field, now even cooking needs rests in between.",
+          "skillId": "skill.hx.anaemia.symptoms"
+        },
+        "fetal_movements_count": {
+          "cues": [
+            "baby movements",
+            "fetal movements",
+            "baby moving as before",
+            "kick counts"
+          ],
+          "key": true,
+          "reply": "The baby moves daily, about as before. No fall in movements, doctor."
+        },
+        "fever_malaria_history": {
+          "cues": [
+            "fever with shivering",
+            "malaria",
+            "tested for malaria",
+            "fever in this pregnancy"
+          ],
+          "reply": "I had two days of fever with shivering last month, but it settled on its own. Nobody tested me for malaria."
+        },
+        "home_work_support": {
+          "cues": [
+            "your work",
+            "occupation",
+            "who helps at home",
+            "financial difficulty",
+            "support at home"
+          ],
+          "reply": "I work in our small field and manage the house. My husband is a farm labourer and my mother-in-law helps with the children."
+        },
+        "ifa_tablets_anc": {
+          "cues": [
+            "iron tablets",
+            "ifa tablets",
+            "taking the tablets",
+            "tablets from the health centre",
+            "why stopped tablets"
+          ],
+          "reply": "They gave me a strip of red tablets, but they make me nauseous with a burning stomach, so I take one or two in a week. Most of the strip is still lying at home."
+        },
+        "legs_restlessness_night": {
+          "cues": [
+            "restless legs at night",
+            "creeping in the legs",
+            "urge to move legs",
+            "night cramps in legs"
+          ],
+          "reply": "Yes, at night my legs feel creepy and I must keep moving them, or I cannot sleep.",
+          "skillId": "skill.hx.anaemia.symptoms"
+        },
+        "nails_hair_tongue": {
+          "cues": [
+            "nail changes",
+            "spoon shaped nails curving upwards",
+            "hair fall",
+            "sore tongue",
+            "cracks at mouth"
+          ],
+          "reply": "My nails have become thin and bend upwards, and my hair falls a lot. The corners of my mouth crack again and again.",
+          "skillId": "skill.hx.anaemia.symptoms"
+        },
+        "onset_course": {
+          "cues": [
+            "when did it start",
+            "how long ago",
+            "sudden or gradual",
+            "since when",
+            "progress over weeks"
+          ],
+          "key": true,
+          "reply": "It came on slowly over two months, getting a little worse each week. There was no single day it started."
+        },
+        "palpitations_giddiness": {
+          "cues": [
+            "heart pounding",
+            "palpitations",
+            "giddy on standing",
+            "fainting",
+            "blackouts"
+          ],
+          "key": true,
+          "reply": "My heart hammers after small effort and I feel giddy when I stand up fast. I have not actually fainted.",
+          "skillId": "skill.hx.anaemia.symptoms"
+        },
+        "past_medical_illness": {
+          "cues": [
+            "tuberculosis",
+            "kidney disease",
+            "thyroid",
+            "diabetes",
+            "past illness",
+            "long illness"
+          ],
+          "reply": "No tuberculosis, no kidney or thyroid trouble, no diabetes. I am otherwise healthy."
+        },
+        "pica_food_craving": {
+          "cues": [
+            "craving clay or chalk",
+            "eating mud",
+            "pica",
+            "raw rice craving",
+            "ice craving"
+          ],
+          "key": true,
+          "reply": "Yes, doctor, I like eating a little clay from the field bund. I feel ashamed telling this, but the craving is strong.",
+          "skillId": "skill.hx.anaemia.symptoms"
+        },
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help",
+            "what is troubling"
+          ],
+          "key": true,
+          "reply": "Doctor, for two months I feel tired all day with breathlessness on small work, and the sister said my blood is low, so she sent me here.",
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "previous_pregnancy_loss": {
+          "cues": [
+            "previous pregnancy",
+            "earlier delivery",
+            "gap after last delivery",
+            "bleeding after delivery",
+            "weight of last baby"
+          ],
+          "key": true,
+          "reply": "This is my third pregnancy. Both earlier were normal deliveries, the last one 16 months ago. I bled a fair amount after the second, and that baby was small, about 2 kg.",
+          "skillId": "skill.hx.obg.previous_pregnancies"
+        },
+        "swelling_feet_face": {
+          "cues": [
+            "swelling of feet",
+            "swollen face",
+            "oedema",
+            "edema",
+            "puffiness of face"
+          ],
+          "reply": "My feet swell a little by evening but it goes down by morning. My face is not swollen and my rings fit as before."
+        },
+        "urine_burning_output": {
+          "cues": [
+            "burning while passing urine",
+            "urine output",
+            "protein in urine",
+            "urine test"
+          ],
+          "reply": "No burning and no change in urine. At the centre they dipped my urine once and said it was normal."
+        }
+      },
+      "id": "case.anaemia.lakshmi",
+      "initialVitals": {
+        "bpDiastolic": 64,
+        "bpSystolic": 100,
+        "gcs": 15,
+        "hr": 104,
+        "rr": 20,
+        "spo2": 98,
+        "temp": 36.8
+      },
+      "investigations": {
+        "b12folate": {
+          "indicated": true,
+          "label": "Vitamin B12 and folate",
+          "note": "Normal here, which keeps the picture purely iron deficient. Raised MCV or hypersegmented neutrophils would have forced this test to the front.",
+          "result": "B12 and red cell folate within normal limits. No hypersegmented neutrophils on the smear."
+        },
+        "fbc": {
+          "indicated": true,
+          "label": "Full blood count with indices",
+          "note": "This confirms the fall and characterises the cells. Small cells with a wide spread already point to iron before ferritin is seen.",
+          "result": "Haemoglobin 7.2 g per dL. MCV 68 fL with raised RDW. Total leucocyte and platelet counts normal."
+        },
+        "ferritin": {
+          "indicated": true,
+          "label": "Serum ferritin",
+          "note": "This proves the stores are empty. Below 30 is diagnostic, and at this level no inflammation caveat is needed.",
+          "result": "Ferritin 11 micrograms per L. Markedly low, diagnostic of depleted iron stores."
+        },
+        "malaria": {
+          "indicated": true,
+          "label": "Malaria smear and rapid test",
+          "note": "Fever with shivering last month earns this test. A positive result would add treatment, not replace iron.",
+          "result": "Smear and rapid test negative for malaria parasites at present."
+        },
+        "smear": {
+          "indicated": true,
+          "label": "Peripheral smear",
+          "note": "The film separates the three microcytic stories. Pencil cells with anisocytosis mean iron; target cells would have meant trait.",
+          "result": "Microcytic hypochromic red cells with anisopoikilocytosis and pencil cells. No target cells, no blasts, no haemolysis."
+        },
+        "stool": {
+          "indicated": true,
+          "label": "Stool for ova and parasites",
+          "note": "Barefoot field work with no deworming earns this test. The thief found here is treated alongside the iron.",
+          "result": "Hookworm ova seen. No blood, no pus cells."
+        },
+        "tsat": {
+          "indicated": true,
+          "label": "Iron studies with transferrin saturation",
+          "note": "Saturation below 15 to 20 percent means the marrow is already starved. It corroborates ferritin where inflammation muddies the picture.",
+          "result": "Serum iron low with high TIBC. Transferrin saturation 9 percent, confirming iron-restricted erythropoiesis."
+        },
+        "urine": {
+          "indicated": true,
+          "label": "Urine routine and dipstick",
+          "note": "Protein-free urine with normal pressure keeps hypertensive disease out of the picture, which oedema alone could otherwise suggest.",
+          "result": "No albumin, no sugar, no pus cells. Dipstick protein negative."
+        },
+        "usg": {
+          "indicated": true,
+          "label": "Obstetric ultrasound for growth",
+          "note": "A lagging fundus earns this scan. Growth restriction changes surveillance and the delivery plan, not just the tablets.",
+          "result": "Single live fetus, cephalic, biometry 29 weeks against 32 by dates. Liquor adequate. Estimated weight near the 10th centile."
+        }
+      },
+      "managementModel": {
+        "accept": [
+          "iron",
+          "vitamin C",
+          "tea",
+          "deworming",
+          "diet",
+          "follow-up",
+          "haemoglobin",
+          "transfusion",
+          "delivery",
+          "referral"
+        ],
+        "answer": "Oral iron every other day with vitamin C counsel and tea moved away from meals, deworming after the first trimester, diet counsel, repeat haemoglobin at two weeks with growth surveillance, delivery where blood is available, and transfusion only for rescue with referral upward if she worsens.",
+        "minMatch": 3
+      },
+      "opening": "Lakshmi Pawar, 26, a G3P2 at 32 weeks from a farming village in Maharashtra, has been sent by the health centre with tiredness, breathlessness on small work and a haemoglobin of 7.2. Introduce yourself and take a history.",
+      "patient": {
+        "age": 26,
+        "name": "Lakshmi Pawar",
+        "occupation": "Farm worker on the family smallholding, manages the house",
+        "residence": "Rural, farming village in Maharashtra, lives with husband, two children and mother-in-law",
+        "sex": "female"
+      },
+      "teachingPoints": [
+        "The tempo alone should move you toward chronic deficiency before a single test is run: two months of falling capacity, not the days of an acute bleed or the weeks of tuberculosis.",
+        "Pica with spoon-shaped nails is doing double duty: it names iron as the cause and dates the deficiency to months, which is why tablets alone without deworming and diet change would fail her.",
+        "A 16-month gap after a bleed with a 2 kg baby explains the debt better than any laboratory value: her stores never refilled, and this fetus is already paying with restricted growth.",
+        "Ferritin of 11 needs no inflammation caveat and settles the cause, but the smear with pencil cells and the saturation of 9 percent each independently exclude trait and chronic disease without needing further tests to invoke them.",
+        "Hookworm ova in bare feet that never got dewormed are the treatable half of her anaemia. Iron without deworming is poured into a leaking vessel.",
+        "Mild ankle oedema with normal pressure and protein-free urine is anaemia with low protein, not pre-eclampsia. The face with the pressure reading decides, not the feet alone.",
+        "Moderate grade at 32 weeks with growth restriction means oral iron with a two-week haemoglobin date, deworming, growth surveillance and delivery where blood is available. Transfusion is rescue here, not the plan."
+      ],
+      "title": "A multigravida at 32 weeks with two months of tiredness",
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1264 @@
+{
+  "_comment": "Gynaecology tier-1 disease. Same architecture as pneumonia and fibroid: almost every finding is an emphasis overlay on a shared core/obgyn skill. PID's own contribution is the ascending-infection mechanism, the motion-tenderness examination, the syndromic discharge table, and the low treatment threshold with partner care.",
+  "id": "pelvic-inflammatory-disease",
+  "name": "Vaginal discharge and pelvic inflammatory disease",
+  "fullName": "Vaginal discharge and pelvic inflammatory disease (PID)",
+  "system": "gynaecology",
+  "subtitle": "Syndromic management",
+  "kbRef": "pelvic_inflammatory_disease_and_vaginitis",
+  "oneLine": "Ascending infection of the upper genital tract, and the discharge that warns of it",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What pelvic infection is, and why discharge is never just discharge",
+      "skills": [
+        "skill.pid.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question, and before an intimate examination",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age, pregnancy possibility and setting set the prior before symptoms",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected pelvic infection, reproductive age and sexual activity carry the weight: a young sexually active woman with new or multiple partners starts at a far higher prior than a postmenopausal woman with discharge. Always record marital context sensitively and the pregnancy possibility alongside age, because both change every step that follows."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Pain, discharge, fever and bleeding, asked in that order",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.gynae_symptoms",
+        "skill.hx.obg.menstrual_history",
+        "skill.hx.pelvic.risk_factors"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical presentation reads in days: lower abdominal pain for several days, vaginal discharge noticed over the same period, fever, and deep pain during intercourse. That acute tempo with discharge moves you toward ascending infection before anything else is known."
+        },
+        "skill.hx.obg.gynae_symptoms": {
+          "expect": "Expect bilateral lower abdominal pain rather than a focal iliac fossa pain, discharge described by colour, odour and amount, dyspareunia that is deep rather than superficial, and bleeding between periods or after intercourse from an inflamed cervix."
+        },
+        "skill.hx.obg.menstrual_history": {
+          "expect": "Fix the last menstrual period first, because the pregnancy possibility decides the urgency of a pregnancy test. Then ask about bleeding between periods and prolonged periods, both common with endometritis and cervicitis, and distinguish them from her usual pattern."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The background that decides partners, prevention and recurrence",
+      "skills": [
+        "skill.hx.obg.gynae_background"
+      ],
+      "emphasis": {
+        "skill.hx.obg.gynae_background": {
+          "expect": "Contraception history matters twice here: condoms protect while an intrauterine device fitted recently raises the question of ascending infection, and current infection is a reason not to fit one. Past discharge or pelvic infection with untreated partners predicts recurrence, and smoking, douching and bacterial vaginosis complete the background."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Fever and tenderness first, the rest to exclude mimics",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for a woman holding her lower abdomen, uncomfortable sitting upright, with fever but usually without the toxic look of generalised peritonitis. Guarding that goes beyond the suprapubic area, rigidity, or a frankly rigid abdomen points away from uncomplicated pelvic infection toward a surgical cause."
+        },
+        "skill.gen.vitals": {
+          "expect": "Expect low grade fever with tachycardia in proportion to it. High fever with tachycardia and hypotension suggests a tubo-ovarian abscess, ruptured abscess or sepsis rather than simple salpingitis, and changes the plan to urgent admission on its own."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Pelvic examination",
+      "blurb": "Motion tenderness: the sign that maps infection to the upper tract",
+      "skills": [
+        "skill.exam.obg.gynae_abdominal",
+        "skill.exam.obg.vulval_inspect",
+        "skill.exam.obg.speculum_insert",
+        "skill.exam.obg.speculum_inspect",
+        "skill.exam.obg.bimanual"
+      ],
+      "emphasis": {
+        "skill.exam.obg.gynae_abdominal": {
+          "expect": "Expect bilateral suprapubic tenderness without the localised guarding of appendicitis. Right upper quadrant tenderness in the same patient raises perihepatitis around the liver capsule, which is easily missed if the abdomen above the pelvis is never palpated."
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "expect": "Note discharge at the introitus, vulval erythema or excoriation from irritant discharge, and ulcers, warts or vesicles that would point to a coexisting ulcerative infection rather than PID alone."
+        },
+        "skill.exam.obg.speculum_insert": {
+          "expect": "Consent with a chaperone is part of the manoeuvre here, not a formality before it. A frightened patient guards her pelvic floor, which makes the rest of the examination falsely tender, so unhurried explanation is what makes the findings reliable."
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "expect": "Expect mucopurulent discharge seen coming from the cervical os, with a friable cervix that bleeds on touch. This is the single finding that ties the discharge to the cervix rather than the vagina, and it should be documented exactly as seen before any bimanual examination disturbs it."
+        },
+        "skill.exam.obg.bimanual": {
+          "expect": "Expect cervical motion tenderness with uterine and adnexal tenderness, often bilateral. A tender lateral mass with fever suggests a tubo-ovarian abscess. Absence of motion tenderness in a convincing story does not exclude the diagnosis, but its presence maps the infection to the upper tract."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the pelvic infection picture together",
+      "blurb": "Ascending infection explains the pain above and the discharge below",
+      "skills": [
+        "skill.pid.signs",
+        "skill.annex.pid.discharge_table"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Three sentences that contain the case and its severity",
+      "skills": [
+        "skill.pid.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Ectopic first, appendix and ovary next, the vagina itself last",
+      "skills": [
+        "skill.pid.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Pregnancy test first, the organism second, the abscess third",
+      "skills": [
+        "skill.ix.pid.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and severity",
+      "blurb": "Clinical criteria with a deliberately low threshold",
+      "skills": [
+        "skill.pid.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Broad cover early, partners always, admission when severe",
+      "skills": [
+        "skill.tx.pid"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.pelvic.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.pid.pelvic_exam",
+        "title": "Perform a pelvic examination for suspected PID",
+        "task": "This 26-year-old woman has lower abdominal pain with vaginal discharge and fever. Perform a focused pelvic examination with consent and present your findings.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.obg.intimate_consent",
+          "skill.exam.obg.gynae_abdominal",
+          "skill.exam.obg.vulval_inspect",
+          "skill.exam.obg.speculum_insert",
+          "skill.exam.obg.speculum_inspect",
+          "skill.exam.obg.bimanual",
+          "skill.approach.obg.pelvic_close"
+        ],
+        "examinerQuestions": [
+          "You found cervical motion tenderness with mucopus at the os. Why does this map the infection to the upper tract?",
+          "What would a tender lateral mass with high fever add to your diagnosis and plan?",
+          "Which single bedside test must precede any conclusion about ectopic gestation in this patient?"
+        ]
+      },
+      {
+        "id": "osce.pid.history",
+        "title": "Take a history and assess risk in vaginal discharge",
+        "task": "This 24-year-old woman complains of vaginal discharge with lower abdominal pain. Take a focused history in seven minutes and be ready to state your syndromic assessment.",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.obg.gynae_symptoms",
+          "skill.hx.pelvic.risk_factors"
+        ],
+        "examinerQuestions": [
+          "How do you distinguish discharge of cervical origin from discharge of vaginal origin in the history?",
+          "Name three risk factors you asked about and how each shifts your management, not just your diagnosis.",
+          "Her pregnancy test is positive. How does your differential change?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.pid.basics",
+      "skill.exam.obg.bimanual",
+      "skill.pid.signs",
+      "skill.pid.differential",
+      "skill.annex.pid.discharge_table",
+      "skill.ix.pid.workup",
+      "skill.pid.diagnosis",
+      "skill.tx.pid"
+    ]
+  },
+  "skills": {
+    "skill.pid.basics": {
+      "id": "skill.pid.basics",
+      "kind": "reasoning",
+      "system": "gynaecology",
+      "title": "What pelvic inflammatory disease is",
+      "oneLine": "Ascending polymicrobial infection of the upper genital tract",
+      "why": "Discharge is the visible tip of an infection that may already have climbed past the cervix. Understanding the ascending route is what stops a student treating the discharge in the vagina while scarring proceeds silently in the tubes.",
+      "teach": [
+        {
+          "heading": "The definition in one line",
+          "body": "Pelvic inflammatory disease is infection and inflammation of the upper female genital tract: endometritis, salpingitis, oophoritis, tubo-ovarian abscess and pelvic peritonitis, in any combination.\n\nIt is usually polymicrobial and ascending. Sexually transmitted organisms breach the endocervical barrier first, and vaginal aerobes and anaerobes follow, so the lower tract discharge and the upper tract damage are one process, not two diseases."
+        },
+        {
+          "heading": "How infection climbs",
+          "body": "Organisms pass from the vagina through the endocervix into the endometrial cavity, then along the fallopian tubes to the ovaries and pelvic peritoneum. Inflammation strips tubal cilia and lays down scarring and adhesions.\n\nThat scarring is the whole long term story: tubal-factor infertility, ectopic gestation and chronic pelvic pain, each more likely with every repeat episode. Spread to the liver capsule causes perihepatitis with right upper quadrant pain."
+        },
+        {
+          "heading": "Vaginitis, vaginosis and the syndromic approach",
+          "body": "Lower tract discharge has three common patterns: bacterial vaginosis from lactobacillus loss with anaerobic overgrowth, candidiasis from yeast proliferation, and trichomoniasis as a true sexually transmitted flagellate infection.\n\nWhere laboratory testing is unavailable, treatment is syndromic: manage the pattern of discharge and pain, cover the likely organisms together, and test or refer where the picture is severe or unclear. The syndrome treated promptly matters more than the organism named late."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which structures does pelvic inflammatory disease cover?",
+          "a": "The endometrium, fallopian tubes, ovaries with tubo-ovarian abscess, and the pelvic peritoneum.",
+          "accept": [
+            "endometrium",
+            "fallopian tubes",
+            "ovaries",
+            "peritoneum"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why is pelvic infection usually described as polymicrobial and ascending?",
+          "a": "Sexually transmitted organisms breach the cervical barrier first and vaginal aerobes and anaerobes follow upward, so lower tract discharge and upper tract damage form one ascending process.",
+          "accept": [
+            "ascending",
+            "cervical barrier",
+            "anaerobes"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What does syndromic management mean in vaginal discharge, and when is it used?",
+          "a": "Treating the clinical pattern of discharge and pain with cover for the likely organisms together, used where microscopy, culture or nucleic acid testing is unavailable or would delay care.",
+          "accept": [
+            "clinical pattern",
+            "likely organisms",
+            "unavailable"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pelvic_inflammatory_disease: pathophysiology"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Pelvic inflammatory disease (pathogenesis)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.pid.signs": {
+      "id": "skill.pid.signs",
+      "kind": "reasoning",
+      "system": "gynaecology",
+      "title": "The pelvic infection picture",
+      "oneLine": "One ascending route, and why pain sits above while discharge shows below",
+      "why": "The symptoms look scattered, pain low in the abdomen, discharge at the vulva, fever all over, bleeding between periods, until they are read as one infection at different heights of the same tract. That single-route reading is what keeps ectopic gestation and appendicitis in view while confirming PID.",
+      "teach": [
+        {
+          "heading": "The symptoms in order",
+          "points": [
+            "Bilateral lower abdominal pain over days, the commonest presenting symptom, usually dull with superimposed sharp exacerbations.",
+            "Abnormal vaginal discharge, often increased, yellow-green and malodorous when cervicitis dominates.",
+            "Fever, often low grade, with malaise; high fever points toward abscess or spreading sepsis.",
+            "Deep dyspareunia from the inflamed uterus and adnexa being moved during intercourse.",
+            "Intermenstrual or postcoital bleeding from the inflamed endometrium and friable cervix."
+          ]
+        },
+        {
+          "heading": "The signs that confirm the route",
+          "points": [
+            "Lower abdominal tenderness, typically bilateral and suprapubic, without the fixed localised guarding of a surgical abdomen.",
+            "Mucopurulent discharge seen coming from the cervical os, with a friable cervix that bleeds on touch.",
+            "Cervical motion tenderness with uterine and adnexal tenderness on bimanual examination, the bedside core of the diagnosis.",
+            "A tender lateral adnexal mass with fever, which upgrades the diagnosis to tubo-ovarian abscess.",
+            "Right upper quadrant tenderness with otherwise typical findings, which raises perihepatitis around the liver capsule."
+          ]
+        },
+        {
+          "heading": "What absence does and does not mean",
+          "body": "Fever may be absent and inflammatory markers may be normal in genuine pelvic infection, so neither excludes it. Likewise, a convincing story without motion tenderness still deserves treatment where the threshold is met.\n\nWhat should worry you instead is the toxic patient: high fever with rigidity, hypotension or a rapidly enlarging tender mass. That is abscess, rupture or sepsis, not simple salpingitis, and it needs urgent admission."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three symptoms and two signs of pelvic inflammatory disease.",
+          "a": "Lower abdominal pain, abnormal discharge and fever with deep dyspareunia, plus cervical motion tenderness and mucopurulent discharge from the cervical os.",
+          "accept": [
+            "abdominal pain",
+            "discharge",
+            "motion tenderness"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does cervical motion tenderness point to the upper rather than the lower tract?",
+          "a": "Moving the cervix tugs the uterus and inflamed adnexa, so pain on that movement means the inflammation has already climbed past the cervix into the uterus and tubes.",
+          "accept": [
+            "uterus",
+            "tubes",
+            "past the cervix"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A PID patient has new right upper quadrant pain. What is happening, and what must you still exclude?",
+          "a": "Perihepatitis with inflammation of the liver capsule spreading from the pelvis, which must still be distinguished from gallbladder and other surgical causes of upper abdominal pain.",
+          "accept": [
+            "perihepatitis",
+            "liver capsule",
+            "gallbladder"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pelvic_inflammatory_disease: clinicalPearls"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Pelvic inflammatory disease (clinical presentation)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.pid.discharge_table": {
+      "id": "skill.annex.pid.discharge_table",
+      "kind": "annexure",
+      "system": "gynaecology",
+      "title": "Discharge patterns compared",
+      "oneLine": "The bedside table that sorts physiological, vaginosis, candida, trich and cervicitis",
+      "why": "Four different conditions produce white or yellow discharge, and the wrong label means the wrong treatment with the tubes paying the price. One remembered table, discharge against pH, odour and microscopy, sorts them at the bedside before any laboratory result.",
+      "teach": [
+        {
+          "heading": "How to read this table",
+          "body": "Match her discharge against three bedside facts: the vaginal pH, the amine odour on potassium hydroxide, and what the microscope shows. No single column decides alone.\n\nPhysiological discharge and candidiasis keep an acidic pH, while bacterial vaginosis and trichomoniasis raise it above 4.5. Only cervicitis shows pus coming from the os itself."
+        },
+        {
+          "heading": "Discharge patterns compared",
+          "table": {
+            "cols": [
+              "Cause",
+              "Discharge",
+              "Bedside clues",
+              "Microscopy"
+            ],
+            "rows": [
+              [
+                "Physiological",
+                "Clear or white, non offensive",
+                "Acidic pH, no odour",
+                "Lactobacilli, no clue cells"
+              ],
+              [
+                "Bacterial vaginosis",
+                "Thin grey-white, fishy",
+                "pH above 4.5, fishy whiff",
+                "Clue cells, few lactobacilli"
+              ],
+              [
+                "Candidiasis",
+                "Thick curdy white, itchy",
+                "Acidic pH, vulval redness",
+                "Yeasts and pseudohyphae"
+              ],
+              [
+                "Trichomoniasis",
+                "Frothy yellow-green, sore",
+                "pH above 4.5, red cervix",
+                "Motile flagellates"
+              ],
+              [
+                "Cervicitis with PID",
+                "Yellow mucopus from the os",
+                "Friable cervix, bleeds on touch",
+                "Pus cells, test for chlamydia"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What the table cannot tell you",
+          "body": "Mixed infection is common, so a classic candida picture does not exclude coexisting cervicitis where pain and motion tenderness are present. Treat the whole patient, not the winning row.\n\nNormal pH never rules out pelvic infection above: cervicitis and salpingitis coexist with a normal vaginal pH, because the vagina is not where that inflammation sits."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which two discharge conditions raise the vaginal pH above 4.5?",
+          "a": "Bacterial vaginosis and trichomoniasis, unlike candidiasis and physiological discharge which keep an acidic pH.",
+          "accept": [
+            "bacterial vaginosis",
+            "trichomoniasis",
+            "acidic"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What are clue cells, and what do they signify?",
+          "a": "Vaginal epithelial cells studded with adherent bacteria, the hallmark microscopic finding of bacterial vaginosis.",
+          "accept": [
+            "epithelial cells",
+            "adherent bacteria",
+            "bacterial vaginosis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Her wet mount shows yeasts and her pH is normal, but she has motion tenderness. How do you use this table?",
+          "a": "Treat the candidiasis the table identifies and separately treat the upper tract infection the tenderness maps, since mixed infection is common and a vaginal finding never excludes PID above.",
+          "accept": [
+            "candidiasis",
+            "upper tract",
+            "mixed infection"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "bacterial_vaginosis: clinicalPearls"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Vaginitis and vaginosis (diagnosis)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.pid.summary": {
+      "id": "skill.pid.summary",
+      "kind": "reasoning",
+      "system": "gynaecology",
+      "title": "The clinical summary",
+      "oneLine": "Problem representation for an ascending infection with a pregnancy test attached",
+      "why": "The summary for pelvic infection has a different shape from a chronic gynaecology case: the tempo is days, the pregnancy test belongs in the same sentence as the syndrome, and severity decides admission in the next hour.",
+      "teach": [
+        {
+          "heading": "The four parts in order",
+          "points": [
+            "Name the patient with the risk facts that matter: reproductive age, sexual activity context, contraception including any intrauterine device, and past infection.",
+            "State the tempo: acute over days, with pain, discharge, fever, dyspareunia or intermenstrual bleeding as present.",
+            "State the syndrome in abstract terms with the examination core: lower abdominal tenderness with cervical motion tenderness and discharge from the os.",
+            "Attach the pregnancy test result and the severity: abscess, sepsis features, or suitability for outpatient care with review."
+          ]
+        },
+        {
+          "heading": "A worked example",
+          "body": "A 26-year-old sexually active woman presents with five days of bilateral lower abdominal pain, yellow vaginal discharge, fever and deep dyspareunia. Examination shows a temperature of 38.4 C with suprapubic tenderness, mucopurulent discharge from the cervical os, and cervical motion tenderness with right adnexal tenderness and no mass.\n\nUrine pregnancy test is negative. This is acute pelvic inflammatory disease of moderate severity without abscess, suitable for outpatient treatment with early review and partner care."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What element belongs in a PID summary that would not usually appear in a fibroid summary?",
+          "a": "The pregnancy test result with the severity grade, because both change the immediate plan toward admission or outpatient care.",
+          "accept": [
+            "pregnancy test",
+            "severity",
+            "admission"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does tempo matter so much in a pelvic pain summary?",
+          "a": "Days point to ascending infection needing urgent antibiotics, while months point to endometriosis or chronic pain, so tempo alone reorders the whole differential.",
+          "accept": [
+            "days",
+            "urgent",
+            "differential"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "risk",
+          "text": "States the patient with relevant risk and pregnancy context"
+        },
+        {
+          "id": "tempo",
+          "text": "States the tempo as acute over days"
+        },
+        {
+          "id": "severity",
+          "text": "Includes the pregnancy test result and a severity grade"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "Clinical reasoning"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pelvic_inflammatory_disease: clinicalPearls"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.pid.differential": {
+      "id": "skill.pid.differential",
+      "kind": "reasoning",
+      "system": "gynaecology",
+      "title": "Differential diagnosis",
+      "oneLine": "Ectopic first because it kills, the rest because they operate",
+      "why": "Most pelvic pain with discharge is exactly what it looks like, but the mimics that are not PID either kill quickly or need an operation. The differential does not stop once antibiotics are started, and the pregnancy test is what keeps the deadliest mimic in view.",
+      "teach": [
+        {
+          "heading": "The rule-outs that cannot wait",
+          "points": [
+            "Ectopic gestation: favoured by amenorrhoea or irregular bleeding, syncope or shoulder tip pain, and a positive pregnancy test with lateralised tenderness. Exclude with a urine pregnancy test in every case before anything else.",
+            "Acute appendicitis: favoured by pain migrating to the right iliac fossa with localised guarding, anorexia and vomiting, without discharge or motion tenderness.",
+            "Ovarian cyst accident with rupture, haemorrhage or torsion: favoured by sudden severe unilateral pain with vomiting and a lateralised tender mass, often without fever or discharge.",
+            "Ruptured tubo-ovarian abscess with peritonitis: favoured by a known mass with sudden worsening, rigidity and systemic sepsis rather than simple salpingitis pain."
+          ]
+        },
+        {
+          "heading": "The mimics that change the clinic, not the night",
+          "points": [
+            "Endometriosis: favoured by cyclical pain tied to menses, chronic dyspareunia and infertility over months, without fever or purulent discharge.",
+            "Urinary tract infection: favoured by burning on passing urine with frequency and suprapubic discomfort, without discharge or adnexal tenderness.",
+            "Bacterial vaginosis, candidiasis and trichomoniasis alone: discharge without upper tract tenderness, fever or motion tenderness; they coexist with PID rather than excluding it.",
+            "Gallbladder disease against perihepatitis: right upper quadrant pain needs Murphy assessment and ultrasound where the pelvic picture is absent."
+          ]
+        },
+        {
+          "heading": "How to close the differential at the bedside",
+          "body": "The pregnancy test splits the list first: positive means ectopic until proven otherwise. Then laterality and guarding split surgical from medical causes, and motion tenderness with discharge from the os rebuilds PID.\n\nWhere the picture stays mixed, pelvic ultrasound is the arbiter: free fluid with an empty uterus, a torted ovary, or a complex adnexal mass each decide what the hands could not."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name four differentials for lower abdominal pain with discharge and fever.",
+          "a": "Ectopic gestation, acute appendicitis, ovarian cyst accident with torsion or rupture, and endometriosis with urinary infection as medical mimics.",
+          "accept": [
+            "ectopic",
+            "appendicitis",
+            "ovarian",
+            "endometriosis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How do you separate a tubo-ovarian abscess from simple salpingitis, and why does it matter?",
+          "a": "A tender lateral adnexal mass with high fever marks abscess, and it matters because abscess needs admission with drainage considered rather than outpatient antibiotics alone.",
+          "accept": [
+            "adnexal mass",
+            "fever",
+            "admission"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Offers a differential spanning pregnancy, surgical, ovarian and infective causes"
+        },
+        {
+          "id": "ectopic",
+          "text": "Puts ectopic gestation first with the pregnancy test as the splitter"
+        },
+        {
+          "id": "abscess",
+          "text": "Separates tubo-ovarian abscess from simple salpingitis with the plan each needs"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pelvic_inflammatory_disease: additionalDifferentials"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Pelvic inflammatory disease (differential diagnosis)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.pid.workup": {
+      "id": "skill.ix.pid.workup",
+      "kind": "investigation",
+      "system": "gynaecology",
+      "title": "Confirming the infection and finding the abscess",
+      "oneLine": "Pregnancy test first, the organism second, the abscess third",
+      "why": "Investigations in pelvic infection serve three separate jobs, excluding the pregnancy that kills, identifying the organisms that guide partners and prevention, and finding the abscess that changes admission. Knowing which test does which stops a student waiting for a culture before starting treatment.",
+      "teach": [
+        {
+          "heading": "Exclude pregnancy first, always",
+          "body": "A urine pregnancy test comes before every other investigation, because a positive test rebuilds the whole differential around ectopic gestation. No pelvic pain pathway proceeds without it.\n\nSerum testing follows where the urine test is equivocal or the clinical suspicion of pregnancy remains despite a negative result."
+        },
+        {
+          "heading": "Identify the organisms",
+          "points": [
+            "Endocervical or vaginal nucleic acid amplification testing for chlamydia and gonorrhoea is the most sensitive method where available.",
+            "Saline wet mount with potassium hydroxide whiff test and vaginal pH measurement sorts bacterial vaginosis, candidiasis and trichomoniasis at the bedside.",
+            "Microscopy and culture of genital tract samples supports the diagnosis and guides therapy where nucleic acid testing is unavailable.",
+            "Full blood count with inflammatory markers grades the systemic response, though normal values never exclude pelvic infection.",
+            "Screen for coexisting sexually transmitted infections including HIV and syphilis where risk or protocol indicates."
+          ]
+        },
+        {
+          "heading": "Find the abscess and the complication",
+          "body": "Transvaginal pelvic ultrasound excludes a tubo-ovarian abscess or pelvic collection where a mass is felt, fever is high, or response is poor. It is the arbiter when hands disagree.\n\nLaparoscopy is reserved for an uncertain diagnosis or failure to respond, where direct visualisation with sampling settles what tests could not. The single most important principle: start empirical treatment on clinical grounds and never let the wait for results postpone it."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the first investigation in any suspected PID case, and why?",
+          "a": "A urine pregnancy test, because a positive result rebuilds the differential around ectopic gestation before anything else proceeds.",
+          "accept": [
+            "pregnancy test",
+            "ectopic"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which bedside tests sort bacterial vaginosis from candidiasis and trichomoniasis?",
+          "a": "Vaginal pH measurement with a potassium hydroxide whiff test and saline wet mount microscopy for clue cells, yeasts and motile flagellates.",
+          "accept": [
+            "vaginal pH",
+            "whiff",
+            "wet mount"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "She has been on antibiotics for three days with no improvement and a tender lateral mass. What next?",
+          "a": "Pelvic ultrasound to exclude a tubo-ovarian abscess or collection, with laparoscopy considered where the diagnosis stays uncertain or response continues to fail.",
+          "accept": [
+            "ultrasound",
+            "abscess",
+            "laparoscopy"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pelvic_inflammatory_disease: additionalInvestigations"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Pelvic inflammatory disease (diagnosis)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.pid.diagnosis": {
+      "id": "skill.pid.diagnosis",
+      "kind": "reasoning",
+      "system": "gynaecology",
+      "title": "Diagnosis and severity",
+      "oneLine": "Minimum clinical criteria with a deliberately low threshold",
+      "why": "No single test confirms pelvic infection, the diagnosis is clinical, and waiting for certainty scars tubes. Minimum criteria with a low treatment threshold are the whole diagnostic strategy, and severity decides admission, not the organism name.",
+      "teach": [
+        {
+          "heading": "The minimum clinical criteria",
+          "body": "Pelvic or lower abdominal pain with no other cause found, plus one of three examination findings: cervical motion tenderness, uterine tenderness, or adnexal tenderness. That combination is enough to start treatment.\n\nAdditional findings strengthen the diagnosis where present: fever, mucopurulent discharge from the os, abundant white cells on microscopy, raised inflammatory markers, and documented chlamydial or gonococcal infection. None of them is required."
+        },
+        {
+          "heading": "The low threshold and what it costs",
+          "body": "Because sequelae are serious and the diagnosis is imprecise, empirical treatment starts on a low threshold in at-risk women. Overtreating a mimic for a few days costs little; undertreating genuine salpingitis costs tubes.\n\nA complete diagnostic statement names the illness, its extent where known, and its severity: acute pelvic inflammatory disease of moderate severity without abscess, with the pregnancy test stated alongside."
+        },
+        {
+          "heading": "Severity and who gets admitted",
+          "points": [
+            "Tubo-ovarian abscess or a tender adnexal mass with high fever needs admission with drainage considered.",
+            "Pregnancy, severe illness with vomiting or inability to tolerate oral treatment, and failure of outpatient treatment all need admission for intravenous therapy.",
+            "Peritonitis, suspected ruptured abscess with sepsis, or haemodynamic instability needs urgent inpatient care.",
+            "Severe right upper quadrant pain needs assessment for perihepatitis and exclusion of a surgical alternative.",
+            "Everyone else, mild to moderate disease tolerating oral treatment, can be managed as an outpatient with early review and a clear path back."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the minimum clinical criteria to start treatment for PID?",
+          "a": "Pelvic or lower abdominal pain with no other cause, plus cervical motion tenderness, uterine tenderness or adnexal tenderness.",
+          "accept": [
+            "abdominal pain",
+            "motion tenderness",
+            "adnexal"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why is the treatment threshold deliberately low in suspected PID?",
+          "a": "Because the diagnosis is imprecise while the sequelae of tubal damage, infertility and ectopic gestation are serious, so delay scars tubes.",
+          "accept": [
+            "imprecise",
+            "tubal damage",
+            "infertility"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which patients with PID must be admitted rather than treated as outpatients?",
+          "a": "Tubo-ovarian abscess, pregnancy, severe illness or vomiting preventing oral treatment, failure of outpatient therapy, and peritonitis or sepsis.",
+          "accept": [
+            "abscess",
+            "pregnancy",
+            "sepsis"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "criteria",
+          "text": "States the minimum clinical criteria correctly"
+        },
+        {
+          "id": "threshold",
+          "text": "Justifies the low treatment threshold from sequelae"
+        },
+        {
+          "id": "admission",
+          "text": "Lists abscess, pregnancy, intolerance of oral therapy and sepsis as admission reasons"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pelvic_inflammatory_disease: redFlags"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Pelvic inflammatory disease (diagnosis and severity)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.pid": {
+      "id": "skill.tx.pid",
+      "kind": "treatment",
+      "system": "gynaecology",
+      "title": "Managing pelvic infection and discharge",
+      "oneLine": "Broad cover early, partners always, and counselling that prevents the next episode",
+      "why": "Tubes scar while prescriptions are debated, so empirical cover starts on clinical grounds, broad enough for gonococcus, chlamydia and anaerobes together. The antibiotic cures this episode; partner treatment with counselling is what prevents the next one.",
+      "teach": [
+        {
+          "heading": "Start empirical cover without delay",
+          "body": "Start empirical broad spectrum antibiotics covering gonococcus, chlamydia and anaerobes together, typically ceftriaxone with doxycycline and metronidazole. The cited outpatient regimen pairs single dose intramuscular ceftriaxone 500 mg with oral doxycycline and metronidazole for fourteen days.\n\nWithholding treatment while awaiting confirmation lets tubal damage progress, so a low threshold in at-risk women is the strategy, not a shortcut. Admit for intravenous therapy with drainage considered where there is abscess, pregnancy, severe illness or failure of oral treatment."
+        },
+        {
+          "heading": "Support, rest and the device question",
+          "body": "Provide analgesia and advise rest, then reassess response early: consider removal of an intrauterine device where there is no improvement, and move to laparoscopy where the diagnosis stays uncertain or response continues to fail.\n\nExclude ectopic gestation throughout, and screen for coexisting sexually transmitted infections including HIV, offering contraception and safer sex counselling at the same visit."
+        },
+        {
+          "heading": "Partners, abstinence and the long view",
+          "body": "Notify, evaluate and treat sexual partners and advise abstinence until treatment is completed, since an untreated partner guarantees reinfection. This is done through the hospital STI clinic with confidentiality, and care in government hospitals is free.\n\nCounsel on the long term risks of tubal infertility, ectopic gestation and chronic pelvic pain, arrange follow-up, and close with prevention: condoms, timely care for discharge, and treatment of bacterial vaginosis before uterine procedures."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which three organisms must empirical PID cover include?",
+          "a": "Gonococcus, chlamydia and anaerobes together, typically with ceftriaxone, doxycycline and metronidazole.",
+          "accept": [
+            "gonococcus",
+            "chlamydia",
+            "anaerobes"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why must sexual partners be treated even when they have no symptoms?",
+          "a": "Because an untreated partner guarantees reinfection and each repeat episode further raises tubal infertility and ectopic risk, so partner care with abstinence breaks the cycle.",
+          "accept": [
+            "reinfection",
+            "infertility",
+            "abstinence"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "She is not improving and has an intrauterine device in place. What do you reconsider?",
+          "a": "Admission for intravenous therapy with a tubo-ovarian abscess excluded on ultrasound, removal of the device considered, and laparoscopy where the diagnosis stays uncertain.",
+          "accept": [
+            "intravenous",
+            "abscess",
+            "removal"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pelvic_inflammatory_disease: management"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Pelvic inflammatory disease (treatment)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of drug CLASSES and principle, with the cited outpatient regimen quoted from the knowledge base. Specific agents, routes and durations must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe."
+    }
+  },
+  "cases": [
+    {
+      "id": "case.pid.meera",
+      "initialVitals": {
+        "hr": 106,
+        "bpSystolic": 110,
+        "bpDiastolic": 68,
+        "rr": 20,
+        "spo2": 98,
+        "temp": 38.4,
+        "gcs": 15
+      },
+      "title": "A young woman with five days of pain and discharge",
+      "opening": "Meera Jadhav, 26, has come to the gynaecology outpatient clinic with lower abdominal pain and vaginal discharge for five days. She is febrile and holding her lower abdomen. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Meera Jadhav",
+        "age": 26,
+        "sex": "female",
+        "occupation": "Homemaker, two young children",
+        "residence": "Urban, rented rooms in Pune with her husband, children and mother-in-law"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "what is the main problem",
+            "tell me about your complaints",
+            "why have you come to the clinic"
+          ],
+          "reply": "Doctor, for five days I have pain in my lower abdomen with a yellow discharge from below, and fever since two days.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "onset_course": {
+          "cues": [
+            "when did the pain begin",
+            "how did this illness start",
+            "was the onset sudden or gradual",
+            "how have things changed over the last five days"
+          ],
+          "reply": "It started gradually five days ago with the discharge. The pain came the next day and has been increasing since, and the fever joined two days back.",
+          "key": true
+        },
+        "discharge_character": {
+          "cues": [
+            "describe the vaginal discharge",
+            "what colour is the discharge",
+            "any foul smell from the discharge",
+            "how much discharge do you have"
+          ],
+          "reply": "It is yellow and smells bad, enough to stain my clothes. I have to wear two pads a day for it, which never happened before.",
+          "key": true,
+          "skillId": "skill.hx.obg.gynae_symptoms"
+        },
+        "lower_abdominal_pain": {
+          "cues": [
+            "where exactly is the abdominal pain",
+            "pain in the lower abdomen",
+            "is the pain on both sides",
+            "what makes the abdominal pain worse"
+          ],
+          "reply": "It is low down on both sides, a dull ache all the time. Walking and any jolting make it worse, and lying still makes it a little better.",
+          "key": true
+        },
+        "dyspareunia": {
+          "cues": [
+            "pain during sexual intercourse",
+            "deep pain with relations",
+            "any bleeding after intercourse",
+            "painful marital relations recently"
+          ],
+          "reply": "The last two times there was deep pain inside, and last time there was slight spotting after. We have avoided it since the pain started.",
+          "key": true
+        },
+        "intermenstrual_bleeding": {
+          "cues": [
+            "bleeding between your periods",
+            "spotting between menstrual periods",
+            "periods heavier than usual",
+            "when was your last period"
+          ],
+          "reply": "My last period was 12 days ago and was normal. But for three days now there is spotting in between, which is new for me.",
+          "key": true,
+          "skillId": "skill.hx.obg.menstrual_history"
+        },
+        "fever_rigors": {
+          "cues": [
+            "fever since when",
+            "how high is the fever",
+            "chills with the fever",
+            "shivering or rigors with fever"
+          ],
+          "reply": "Fever started two days ago, worse in the evenings. I had shivering once the first evening. Paracetamol brings it down for a few hours.",
+          "key": true
+        },
+        "urinary_bowel_symptoms": {
+          "cues": [
+            "burning while passing urine",
+            "frequency of passing urine",
+            "any loose motions or constipation",
+            "pain while passing stool"
+          ],
+          "reply": "There is slight burning while passing urine but I go as often as usual. My bowels are normal and there is no pain while passing stool."
+        },
+        "right_upper_abdomen": {
+          "cues": [
+            "pain in the right upper abdomen",
+            "pain below the right ribs",
+            "pain on deep breathing on the right side",
+            "shoulder pain on the right side"
+          ],
+          "reply": "No, there is no pain up there below the ribs, and no shoulder pain. Only the lower abdomen hurts."
+        },
+        "pregnancy_possibility": {
+          "cues": [
+            "could you be pregnant now",
+            "any chance of pregnancy this month",
+            "missed period or delayed period",
+            "urine pregnancy test done"
+          ],
+          "reply": "My periods come every month without delay, and the last one was 12 days ago. I have not done a pregnancy test.",
+          "key": true,
+          "skillId": "skill.hx.obg.gynae_background"
+        },
+        "contraception_iucd": {
+          "cues": [
+            "what contraception are you using",
+            "copper T inserted",
+            "when was the intrauterine device fitted",
+            "threads of the copper device felt"
+          ],
+          "reply": "I have a Copper T put eight months ago at the municipal hospital. I never went back for a check, and I have never felt for the threads.",
+          "skillId": "skill.hx.pelvic.risk_factors"
+        },
+        "partner_history": {
+          "cues": [
+            "tell me about your husband",
+            "husband staying at home",
+            "husband working out of town",
+            "any other sexual partner"
+          ],
+          "reply": "I have been married four years and my husband is a truck driver, away for weeks at a time. I have no other partner.",
+          "key": true,
+          "skillId": "skill.hx.pelvic.risk_factors"
+        },
+        "partner_symptoms": {
+          "cues": [
+            "discharge in your partner",
+            "burning in your partner while passing urine",
+            "partner treated for infection",
+            "partner has other complaints"
+          ],
+          "reply": "Last month he mentioned burning while passing urine. He took some medicine from the chemist shop and said he is fine now. He was never tested."
+        },
+        "past_pid_treatment": {
+          "cues": [
+            "similar discharge or pain before",
+            "treated for pelvic infection earlier",
+            "white discharge in the past",
+            "previous sexually transmitted infection"
+          ],
+          "reply": "One year ago I had a similar white discharge with pain low down. I took tablets for one week and it settled. My husband took nothing that time.",
+          "skillId": "skill.hx.pelvic.risk_factors"
+        },
+        "recent_procedure": {
+          "cues": [
+            "recent delivery or abortion",
+            "uterine procedure in recent months",
+            "curettage done recently",
+            "vaginal douching practised"
+          ],
+          "reply": "No delivery, abortion or any procedure since my youngest was born three years ago. I do not wash inside, only outside.",
+          "skillId": "skill.hx.pelvic.risk_factors"
+        },
+        "menstrual_background": {
+          "cues": [
+            "age at first period",
+            "usual length of periods",
+            "painful periods since teenage",
+            "cycle length regularity"
+          ],
+          "reply": "My periods started at thirteen. They come every 28 to 30 days and last four days, with mild pain only on the first day.",
+          "skillId": "skill.hx.obg.menstrual_history"
+        },
+        "obstetric_history": {
+          "cues": [
+            "how many children do you have",
+            "any miscarriage or abortion",
+            "mode of previous deliveries",
+            "last childbirth when"
+          ],
+          "reply": "I have two children, both normal deliveries, the younger three years old. I have never had a miscarriage or abortion."
+        },
+        "medications_allergy": {
+          "cues": [
+            "tablets you are taking now",
+            "allergy to any medicine",
+            "penicillin allergy present",
+            "tetracycline taken before"
+          ],
+          "reply": "Only paracetamol for the fever since two days. I have no allergy to any medicine that I know of."
+        },
+        "personal_background": {
+          "cues": [
+            "smoking or tobacco habit",
+            "alcohol use at home",
+            "sanitary protection during periods",
+            "who knows about this illness"
+          ],
+          "reply": "I do not use tobacco and there is no alcohol at home. I use sanitary pads during periods. My mother-in-law has come with me today and my husband knows on the phone.",
+          "skillId": "skill.hx.obg.gynae_background"
+        },
+        "family_support": {
+          "cues": [
+            "family members at home",
+            "support at home for rest",
+            "children care arranged",
+            "family coming to the clinic with you"
+          ],
+          "reply": "We live with my mother-in-law, who will look after the children while I rest. My husband returns in two days and will come to the clinic then."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Alert but uncomfortable, holding her lower abdomen. Flushed with fever, no pallor of note, no distress at rest.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Temperature 38.4 C. Pulse 106 regular. Blood pressure 110/68. Respiratory rate 20. SpO2 98 percent on air.",
+          "abnormal": true
+        },
+        "skill.exam.obg.gynae_abdominal": {
+          "finding": "Bilateral suprapubic tenderness without guarding or rigidity. No right upper quadrant tenderness. No palpable mass. Bowel sounds normal.",
+          "abnormal": true
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "finding": "Yellow discharge pooled at the introitus with mild vulval erythema. No ulcers, vesicles or warts.",
+          "abnormal": true
+        },
+        "skill.exam.obg.speculum_insert": {
+          "finding": "Speculum passed with consent and a chaperone present. Mild discomfort but the procedure completed fully.",
+          "abnormal": false
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "finding": "Mucopurulent yellow discharge seen coming from the cervical os. Cervix friable and bleeds lightly on touch. Vaginal walls otherwise healthy.",
+          "abnormal": true
+        },
+        "skill.exam.obg.bimanual": {
+          "finding": "Cervical motion tenderness present. Uterus anteverted, normal size, tender on movement. Right fornix tender without a definite mass. Left fornix full but no mass. Pouch of Douglas not bulging.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "pregtest",
+        "wetmount",
+        "naat",
+        "usg_pelvis",
+        "fbc_crp"
+      ],
+      "investigations": {
+        "pregtest": {
+          "label": "Urine pregnancy test",
+          "indicated": true,
+          "result": "Negative.",
+          "note": "Done first: a positive result would rebuild the whole case around ectopic gestation."
+        },
+        "wetmount": {
+          "label": "Saline mount, KOH whiff and pH",
+          "indicated": true,
+          "result": "pH 5.0 with a fishy amine odour on potassium hydroxide. Pus cells plentiful. No clue cells, yeasts or trichomonads seen.",
+          "note": "Bedside sorting: raised pH with pus points up the tract, while no clue cells or yeasts argues against vaginosis or thrush alone."
+        },
+        "naat": {
+          "label": "Nucleic acid testing for chlamydia and gonorrhoea",
+          "indicated": true,
+          "result": "Endocervical swab sent. Chlamydia detected, gonorrhoea not detected. Result next day.",
+          "note": "Confirms the organism and guides partner therapy, but treatment started on clinical grounds without waiting for it."
+        },
+        "usg_pelvis": {
+          "label": "Transvaginal pelvic ultrasound",
+          "indicated": true,
+          "result": "Uterus normal size. Tubes not dilated. No adnexal mass or collection. Trace fluid in the pouch of Douglas.",
+          "note": "Its job here is to exclude the abscess that would force admission, which it does."
+        },
+        "fbc_crp": {
+          "label": "Full blood count and CRP",
+          "indicated": true,
+          "result": "Haemoglobin 11.2 g per dL. Total leucocyte count 12,400 with neutrophils. CRP 48 mg per L.",
+          "note": "Grades the systemic response. Normal values would never have excluded the diagnosis."
+        },
+        "endocx": {
+          "label": "Endocervical culture",
+          "indicated": true,
+          "result": "Sent before the first antibiotic dose. Growth awaited.",
+          "note": "Worth sending where the laboratory exists, but sending it must never delay the first dose."
+        },
+        "sti_screen": {
+          "label": "HIV and syphilis screen",
+          "indicated": true,
+          "result": "Serum sent with consent and counselling. Result awaited.",
+          "note": "Offered to every patient with pelvic infection under the clinic protocol, not only where risk is volunteered."
+        },
+        "ca125": {
+          "label": "CA-125 tumour marker",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "Not indicated: this is a five-day febrile illness with purulent discharge and motion tenderness, not a chronic pelvic mass. Ordering it from reflex on adnexal fullness wastes money and worries her needlessly."
+        }
+      },
+      "differentialModel": {
+        "answer": "Acute pelvic inflammatory disease with chlamydial cervicitis. Consider ectopic gestation, acute appendicitis, ovarian torsion, endometriosis and bacterial vaginosis.",
+        "accept": [
+          "pelvic inflammatory disease",
+          "pid",
+          "ectopic pregnancy",
+          "acute appendicitis",
+          "ovarian torsion",
+          "endometriosis",
+          "bacterial vaginosis",
+          "urinary tract infection"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Acute pelvic inflammatory disease of moderate severity without abscess, chlamydia positive, pregnancy test negative.",
+        "accept": [
+          "pelvic inflammatory disease",
+          "pid",
+          "acute pelvic inflammatory disease"
+        ]
+      },
+      "managementModel": {
+        "answer": "Outpatient empirical antibiotics covering gonococcus, chlamydia and anaerobes with analgesia, review within a few days with a clear path back, partner notification and treatment with abstinence until completed, STI screening, and counselling on tubal risks with follow-up.",
+        "accept": [
+          "antibiotic",
+          "ceftriaxone",
+          "doxycycline",
+          "partner treatment",
+          "abstinence",
+          "follow-up",
+          "review",
+          "analgesia"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The tempo alone should move you toward ascending infection before a single test: five days of discharge then pain then fever, not the months of endometriosis or the sudden collapse of torsion.",
+        "Motion tenderness with pus at the os maps the infection above the cervix. Both findings together are the bedside core; neither alone carries the same weight.",
+        "The Copper T history matters but does not change the first step: treat the infection now, and revisit the device only if she fails to improve.",
+        "Her untreated partner last year is why she is back: partner treatment with abstinence is the intervention that breaks the cycle, not an optional extra.",
+        "A negative pregnancy test is doing real work here, excluding ectopic gestation without which no PID diagnosis is safe.",
+        "Normal ultrasound excludes the abscess that would force admission, which is exactly what makes outpatient care with early review defensible.",
+        "CA-125 has no place in a febrile purulent illness: ordering tumour markers from reflex on adnexal fullness is how money is wasted and patients frightened."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

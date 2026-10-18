@@ -1,0 +1,1009 @@
+{
+  "_comment": "Surgery pathway: breast lump and carcinoma breast (triple assessment). Same architecture as thyroid swelling: shared core and surgery skills carry the examination method, this file adds breast-specific reasoning and overlays.",
+  "id": "breast-lump",
+  "name": "Breast lump",
+  "fullName": "Breast lump and carcinoma breast",
+  "system": "surgery",
+  "kbRef": "breast_cancer_staging_subtypes_and_surgical_management",
+  "subtitle": "Triple assessment",
+  "oneLine": "A painless lump in the breast worked up by triple assessment, and the decision of which lumps to watch, sample or refer",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What a breast lump is, and why age and tempo organise everything",
+      "skills": [
+        "skill.reasoning.breast.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age, parity and lactation set the prior probability before the lump is described",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In breast disease, age, parity and lactation carry unusual weight. A mobile lump in a teenager who is still growing points toward fibroadenoma, while a painless lump in a nulliparous woman above forty with an affected sister starts as carcinoma until triple assessment says otherwise."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Tempo in weeks, pain, discharge and nipple change",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.surg.lump",
+        "skill.hx.surg.breast"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A breast history reads in weeks to months: a painless lump noticed by chance while washing and growing steadily since. The absence of pain is the warning, not the reassurance, and delay of weeks before reporting is the rule rather than the exception."
+        },
+        "skill.hx.surg.lump": {
+          "expect": "Expect a solitary painless lump, often in the upper outer quadrant, with steady growth and no fluctuation with the menstrual cycle. A lump that swells and shrinks with the cycle points away from carcinoma."
+        },
+        "skill.hx.surg.breast": {
+          "expect": "Press on discharge and nipple change: spontaneous bloody flow from a single duct suggests papilloma or carcinoma, greenish flow from several ducts suggests benign change, and recent retraction of the nipple toward the lump is malignant until proven otherwise."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The reproductive and family arithmetic behind the lump",
+      "skills": [
+        "skill.hx.breast.risk"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "A well woman with a local disease, until spread is proven",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Most breast lump patients look entirely well, which is exactly why early cancer is missed. Weight loss, pallor or bony tenderness belong to advanced disease, so their absence never reassures."
+        },
+        "skill.gen.vitals": {
+          "expect": "Vitals are usually normal and serve as a baseline for anaesthesia and systemic treatment. Fever with a red tender breast belongs to lactational mastitis, not to uncomplicated carcinoma."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Breast examination",
+      "blurb": "Flat of the hand, five features of the lump, both axillae",
+      "skills": [
+        "skill.exam.surg.breast_inspection",
+        "skill.exam.surg.breast_lump_palpation",
+        "skill.exam.surg.breast_mobility_fixity",
+        "skill.exam.surg.nipple_discharge",
+        "skill.exam.surg.axillary_nodes"
+      ],
+      "emphasis": {
+        "skill.exam.surg.breast_inspection": {
+          "expect": "Compare nipple levels with arms down, arms raised and bending forward. A nipple drawn toward the lump, dimpling that appears only on raising the arms, and peau d orange brought out by pinching are the inspection findings that stage this disease."
+        },
+        "skill.exam.surg.breast_lump_palpation": {
+          "expect": "Expect a stony hard uneven lump with a ragged margin in carcinoma against the smooth firm slipping mouse of fibroadenoma. Palpate with the flat of the fingers: what the fingertips alone feel is usually normal lobulation."
+        },
+        "skill.exam.surg.breast_mobility_fixity": {
+          "expect": "Test tethering by moving the lump sideways and watching for dimpling at the extremes, then fixity by trying to move it independent of skin and by the hip press test for muscle. Tethering stages, fixity seals the diagnosis."
+        },
+        "skill.exam.surg.nipple_discharge": {
+          "expect": "Press each segment in turn and note single versus multiple ducts. A bloody single duct discharge earns a search for papilloma or carcinoma beside the areola; no discharge is the common and unhelpful normal."
+        },
+        "skill.exam.surg.axillary_nodes": {
+          "expect": "Hard discrete enlarging nodes change the stage and halve the prognosis, so feel every axillary group plus both supraclavicular fossae. Nodes that are merely tender and soft belong to infection, not to cancer."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the breast picture together",
+      "blurb": "Hard, fixed and tethered against smooth, firm and mobile",
+      "skills": [
+        "skill.reasoning.breast.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Patient, tempo, lump, nodes and the next test",
+      "skills": [
+        "skill.present.breast.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Every benign mimic and the test that settles each one",
+      "skills": [
+        "skill.reasoning.breast.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Triple assessment first, staging only after proof",
+      "skills": [
+        "skill.investigation.breast.workup",
+        "skill.ix.surg.triple_assessment"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and staging",
+      "blurb": "Four clauses and the TNM behind them",
+      "skills": [
+        "skill.reasoning.breast.diagnosis",
+        "skill.annex.surg.tnm_breast"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Sample first, conserve when safe, match drugs to receptors",
+      "skills": [
+        "skill.treatment.breast.management"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.breast.exam",
+        "title": "Examine the breast lump",
+        "task": "This 46-year-old woman has a painless lump in her right breast noticed two months ago. Examine her breasts and axillae and present your findings.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.surg.breast_inspection",
+          "skill.exam.surg.breast_lump_palpation",
+          "skill.exam.surg.breast_mobility_fixity",
+          "skill.exam.surg.axillary_nodes"
+        ],
+        "examinerQuestions": [
+          "You found dimpling at the extremes of movement. Is this tethering or fixity, and what structure explains it?",
+          "How does the feel of this lump differ from a fibroadenoma, and which single manoeuvre shows it best?",
+          "Her axillary nodes are firm and mobile. How does this change the stage and the next investigation?"
+        ]
+      },
+      {
+        "id": "osce.breast.history",
+        "title": "Take a breast history and assess risk",
+        "task": "This 46-year-old woman has a painless breast lump. Take a focused history in six minutes and be ready to state what worries you most.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.surg.lump",
+          "skill.hx.surg.breast",
+          "skill.hx.breast.risk"
+        ],
+        "examinerQuestions": [
+          "Which three facts in her story most raise the suspicion of carcinoma?",
+          "She reports bloody discharge from one duct. What does this localise, and what would you do next?",
+          "Name two background risk factors you asked about and what each changes in her management."
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.reasoning.breast.basics",
+      "skill.hx.breast.risk",
+      "skill.exam.surg.breast_lump_palpation",
+      "skill.reasoning.breast.signs",
+      "skill.reasoning.breast.differential",
+      "skill.investigation.breast.workup",
+      "skill.reasoning.breast.diagnosis",
+      "skill.treatment.breast.management"
+    ]
+  },
+  "skills": {
+    "skill.reasoning.breast.basics": {
+      "a": "test",
+      "id": "skill.reasoning.breast.basics",
+      "kind": "reasoning",
+      "oneLine": "A lump is the commonest breast presentation, and age plus tempo organise everything after",
+      "probes": [
+        {
+          "a": "A lump, breast pain and nipple discharge are the three usual complaints. Carcinoma is typically a painless lump in a woman above forty, while a highly mobile lump in a woman below thirty five points toward fibroadenoma.",
+          "accept": [
+            "lump",
+            "pain",
+            "discharge",
+            "painless",
+            "fibroadenoma",
+            "carcinoma"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Name the three usual breast complaints and the classic age pattern of fibroadenoma versus carcinoma."
+        },
+        {
+          "a": "Cyclical pain that rises before menstruation and bilateral nodularity favour benign hormonal change. A painless, steadily enlarging lump with skin or nipple change favours carcinoma, whatever the age.",
+          "accept": [
+            "cyclical",
+            "menstruation",
+            "nodularity",
+            "painless",
+            "retraction",
+            "tethering"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How do you separate cyclical benign breast pain from a lump that should worry you?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "breast_cancer_staging_subtypes_and_surgical_management: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The breast: symptoms and age incidence of breast disease",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Most women who reach a surgical clinic come with one of three complaints: a lump, pain, or discharge from the nipple. The lump dominates. It is usually found by accident while washing, and on average several weeks pass before the woman reports it, so never treat delay as reassurance.\n\nEnquiry starts with age. Fibroadenoma gathers in women below thirty five. Carcinoma gathers above forty, but youth never excludes it, and a painless lump at any age deserves the full workup.",
+          "heading": "Three complaints, and why age never excludes cancer"
+        },
+        {
+          "body": "Much benign disease is best understood as an exaggeration of normal development and cyclical change under monthly hormones, rather than a true tumour. Bilateral nodularity and pain that swells before menstruation and settles after it belong to this group, and symptoms that fluctuate with the cycle argue strongly against carcinoma.\n\nCarcinoma behaves the opposite way. It starts painless, grows steadily without shrinking, and never follows the menstrual rhythm. Nulliparity and the absence of breastfeeding raise its background likelihood, while prolonged lactation and early first childbirth lower it.",
+          "heading": "Hormonal change fluctuates, cancer marches on"
+        }
+      ],
+      "title": "What a breast lump is",
+      "why": "The first decision in breast disease is benign versus malignant, and it is made from story and feel long before any scan. Age, tempo and pain already sort most lumps into the right camp, so a student who masters these three never wastes the workup."
+    },
+    "skill.reasoning.breast.signs": {
+      "id": "skill.reasoning.breast.signs",
+      "kind": "reasoning",
+      "oneLine": "Hard, fixed and tethered points to cancer; smooth, firm and freely mobile points away from it",
+      "probes": [
+        {
+          "a": "Tethering is dimpling of skin that appears only at the extremes of lump movement, from shortening of fibrous strands. Fixity is continuous infiltration where the lump cannot move independent of the skin at all and the skin cannot be pinched up.",
+          "accept": [
+            "tethering",
+            "dimpling",
+            "fixity",
+            "infiltration",
+            "pinched"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What is the difference between a lump tethered to skin and one fixed to skin?"
+        },
+        {
+          "a": "Peau d orange is oedema of the skin with pitting, caused by cancer cells blocking the small lymph channels, while the hair follicles stay anchored and deepen. It is tested by trying to pinch up a wide area of skin over the tumour.",
+          "accept": [
+            "oedema",
+            "lymphatic",
+            "blockage",
+            "follicles",
+            "pinch"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What causes peau d orange, and how do you bring it out on examination?"
+        },
+        {
+          "a": "A fibroadenoma is firm, smooth, sharply defined and so mobile within the breast that it slips from the fingers, the breast mouse. A carcinoma is stony hard, irregular, fixed within the breast substance, often with skin or nipple change and hard axillary nodes.",
+          "accept": [
+            "fibroadenoma",
+            "mobile",
+            "breast mouse",
+            "stony",
+            "irregular",
+            "fixed"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Contrast the feel of a fibroadenoma with the feel of a carcinoma."
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "benign_breast_disorders_fibroadenoma_and_abscess: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The breast: physical signs of benign and malignant lumps",
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Feel the lump against the chest wall with the flat of the fingers, not the fingertips. Fingertips find every lobule and confuse you; the flat of the hand feels only what is truly harder than its surroundings, which is exactly how a carcinoma declares itself.\n\nJudge five things in order. Consistency first: benign is firm and rubbery, malignant is stony hard. Then surface, margin, mobility within the breast, and fixity to skin, muscle and chest wall. One hard irregular fixed lump outweighs a page of soft findings.",
+          "heading": "Feel with the flat of the hand, judge five things"
+        },
+        {
+          "body": "A fibroadenoma is the textbook benign lump. It is smooth, firm, sharply outlined, free of skin and muscle, and so mobile inside the breast that students call it the breast mouse because it escapes the fingers. Nodes stay impalpable.\n\nA carcinoma is its photographic negative. The surface is uneven, the edge ragged, and the mass is gripped by the breast tissue so it will not slide. Move it sideways and watch the skin: dimpling at the extremes means tethering through shortened fibrous strands, while no independent movement at all means fixity by direct invasion.",
+          "heading": "Breast mouse versus the gripped mass"
+        },
+        {
+          "body": "The skin tells the stage. Dimpling and puckering come first, then recent retraction of the nipple toward the lump, then the orange peel pitting of blocked lymph channels, and late fungation through invaded skin. A lump behind the nipple fixes it whether benign or malignant, so test retraction by gentle pressure from both sides.\n\nExamine the axilla and both supraclavicular fossae in every case. Hard, discrete, enlarging nodes change the stage and the prognosis, and their absence never excludes cancer. Always image and sample the opposite breast as well.",
+          "heading": "Skin, nipple and nodes complete the picture"
+        }
+      ],
+      "title": "The breast lump picture",
+      "why": "Benign and malignant breast lumps differ in feel, not in size, and the distinction is made by the fingers before the needle. A student who can separate tethering from fixity and a mouse from a mass already knows which lumps can wait and which must be sampled this week."
+    },
+    "skill.reasoning.breast.differential": {
+      "id": "skill.reasoning.breast.differential",
+      "kind": "reasoning",
+      "oneLine": "Cyst, fibroadenoma, phyllodes, papilloma, mastitis and necrosis all mimic cancer until triple assessment rules it out",
+      "probes": [
+        {
+          "a": "A cyst is smooth, round and fluctuant, and aspiration that yields clear fluid with no residual lump and no rapid refill settles it. Blood stained fluid, a residual mass, or rapid refilling after two aspirations needs excision and histology.",
+          "accept": [
+            "fluctuant",
+            "aspiration",
+            "blood",
+            "residual",
+            "refill",
+            "excision"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "When does a breast cyst need excision rather than reassurance after aspiration?"
+        },
+        {
+          "a": "Phyllodes tumours are giant fibroadenoma like growths, usually after forty, with tense thin skin and prominent veins but no fixation. Duct papilloma gives spontaneous bloody discharge from a single duct, often with a small subareolar swelling that expresses blood on pressure.",
+          "accept": [
+            "phyllodes",
+            "giant",
+            "papilloma",
+            "bloody",
+            "single duct",
+            "subareolar"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How do phyllodes tumour and duct papilloma each present?"
+        },
+        {
+          "a": "Paget disease is unilateral, seen near menopause, does not itch, forms no vesicles, destroys the nipple, and usually hides a lump beneath it. Eczema is often bilateral, seen in lactation, itches, forms vesicles, leaves the nipple intact, and has no underlying lump.",
+          "accept": [
+            "unilateral",
+            "bilateral",
+            "itch",
+            "vesicles",
+            "nipple",
+            "lump"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "How do you separate Paget disease of the nipple from eczema?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "breast_cancer_staging_subtypes_and_surgical_management: additionalDifferentials",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The breast: differential diagnosis of breast lumps",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Start with the cyst, the great mimicker of a solid lump. A tense cyst can feel stony hard and fool the fingers, so test fluctuation with the lump steadied from the sides. Aspiration decides: clear fluid, no leftover lump and no quick refill means a simple cyst, while blood stained fluid, a residual mass or rapid return demands excision.\n\nNext comes fibroadenoma, the mobile mouse of young women, and its large cousin the phyllodes tumour after forty: huge, bosselated, with stretched shiny skin and big veins, yet strikingly free of deeper fixation until very late.",
+          "heading": "Cyst, fibroadenoma and phyllodes"
+        },
+        {
+          "body": "Bloody discharge from a single duct points to a duct papilloma, a small growth in a major duct that may be felt as a soft swelling just beside the areola and that bleeds when pressed. Greenish or serous discharge from several ducts belongs instead to duct ectasia and benign hormonal change.\n\nA hard irregular lump after a blow to the breast may be fat necrosis, not cancer. It fixes to skin and feels identical to carcinoma, but the history of injury, skin bruising and impalpable nodes, with mammography, separate them. Only histology is final.",
+          "heading": "Discharge localises the duct, trauma explains the hard lump"
+        },
+        {
+          "body": "Acute lactational mastitis announces itself with throbbing pain, red hot tender swelling and fever, usually in a first time nursing mother. Treat it as infection, but watch it closely: inflammation that does not resolve with antibiotics needs a biopsy, because inflammatory carcinoma copies mastitis almost exactly.\n\nA weeping red destruction of the nipple near menopause is Paget disease until proven otherwise. Unilateral, non itching, without vesicles, and often with a lump behind it: that cluster separates it from bilateral itching eczema of lactation, which keeps the nipple intact.",
+          "heading": "When inflammation is cancer in disguise"
+        }
+      ],
+      "title": "Differential diagnosis of the breast lump",
+      "why": "Almost every benign breast condition can copy one feature of cancer, so the differential is an exercise in refusing to be fooled by a single sign. Knowing which test settles each mimic is what keeps a young woman with a cyst out of the operating theatre and gets the Paget patient into it."
+    },
+    "skill.investigation.breast.workup": {
+      "id": "skill.investigation.breast.workup",
+      "kind": "investigation",
+      "oneLine": "Clinical examination, imaging and core needle biopsy must agree; staging follows only when cancer is proven",
+      "probes": [
+        {
+          "a": "Clinical breast examination, breast imaging, and needle pathology. All three must agree before definitive treatment, and any discordance means more sampling, not an operation.",
+          "accept": [
+            "clinical",
+            "imaging",
+            "pathology",
+            "biopsy",
+            "agree",
+            "discordance"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What are the three arms of triple assessment, and what do you do when they disagree?"
+        },
+        {
+          "a": "Ultrasound first in younger women with dense glandular breasts, mammography added with age as fat replaces glandular tissue. Mammography shows fine calcification and distortion of malignancy and the smooth dense outline of fibroadenoma, but a normal mammogram never overrules a suspicious lump.",
+          "accept": [
+            "ultrasound",
+            "mammography",
+            "dense",
+            "calcification",
+            "fibroadenoma",
+            "palpable"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How do you choose between ultrasound and mammography, and what is the limit of a normal mammogram?"
+        },
+        {
+          "a": "Chest radiograph for lung deposits, skeletal survey or bone scan for bony pain or advanced disease, liver assessment where spread is suspected, with raised alkaline phosphatase as a crude marker. Bone deposits upstage the patient to stage four.",
+          "accept": [
+            "chest",
+            "bone scan",
+            "liver",
+            "alkaline phosphatase",
+            "stage"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "A woman has proven breast cancer with new back pain. How do you look for distant spread?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "breast_cancer_staging_subtypes_and_surgical_management: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The breast: investigation of breast lumps and triple assessment",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "No single test diagnoses a breast lump. Triple assessment binds three independent arms: careful clinical examination, imaging, and needle pathology. Cancer is declared only when all three point the same way. If the lump feels malignant but the needle says benign, the needle was probably in the wrong place, so repeat the sampling rather than booking surgery.\n\nThis discipline protects both sides. It keeps benign disease out of the operating theatre and stops a surgeon committing a woman to mastectomy on suspicion alone.",
+          "heading": "Three arms must agree before any operation"
+        },
+        {
+          "body": "Ultrasound leads in younger women, where dense glandular tissue hides masses from X-rays and where it cleanly separates a fluid cyst from a solid lump. Mammography takes over as fat replaces glandular tissue: fine clustered calcification with distortion signals malignancy, while a smooth dense sharply outlined mass signals fibroadenoma.\n\nOne rule overrules the films. A normal mammogram in a woman with a suspicious palpable lump never excludes cancer. The lump, not the film, decides the next step, which is tissue.",
+          "heading": "Sound in the young, X-ray with age, tissue always"
+        },
+        {
+          "body": "Core needle biopsy is the workhorse. It gives grade and type plus the receptor profile that drives all later treatment: oestrogen and progesterone receptors, HER2, and proliferation rate. Fine needle sampling is faster but gives cells without architecture, so core biopsy settles the equivocal cases.\n\nOnce cancer is proven, look for spread before planning surgery. Examine liver and bones, image the chest, scan painful or high risk skeletons, and check liver enzymes as a crude flag. Finding distant deposits moves the patient straight to stage four and changes the whole plan from cure to control.",
+          "heading": "Core biopsy profiles the tumour, staging maps the war"
+        }
+      ],
+      "title": "Investigating the breast lump",
+      "why": "Breast diagnosis fails in exactly two ways: operating on suspicion without tissue, and trusting a normal image over a suspicious lump. Triple assessment exists to make both errors structurally impossible, which is why every examiner asks how its arms fit together."
+    },
+    "skill.reasoning.breast.diagnosis": {
+      "id": "skill.reasoning.breast.diagnosis",
+      "kind": "reasoning",
+      "oneLine": "Name the lump, grade the nodes, state the stage, and add the receptors that decide systemic treatment",
+      "probes": [
+        {
+          "a": "Tumour size and local extent, nodal burden from mobile axillary nodes to fixed and supraclavicular disease, and absent or present distant spread. Together they place the patient in stage one to four, from confined to disseminated disease.",
+          "accept": [
+            "tumour",
+            "nodes",
+            "metastasis",
+            "stage",
+            "supraclavicular"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What do the three letters of TNM each describe in breast cancer?"
+        },
+        {
+          "a": "Luminal A and B are hormone receptor positive and respond to endocrine treatment, HER2 enriched disease responds to anti HER2 antibodies with chemotherapy, and triple negative disease lacks all three targets and relies on chemotherapy.",
+          "accept": [
+            "luminal",
+            "hormone",
+            "HER2",
+            "triple negative",
+            "endocrine",
+            "chemotherapy"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Name the four molecular subtypes and what each means for drug treatment."
+        },
+        {
+          "a": "Axillary nodal status is the single strongest prognostic fact: cure is likely while nodes are clear and falls sharply once they are involved. Youth, inner quadrant site, inflammatory presentation and distant deposits all worsen the outlook.",
+          "accept": [
+            "nodes",
+            "axillary",
+            "prognosis",
+            "inflammatory",
+            "metastasis"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Which single finding drives prognosis most, and what else darkens it?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "breast_cancer_staging_subtypes_and_surgical_management: pathophysiology",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Carcinoma of the breast: staging and prognostic factors",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "A complete breast diagnosis has four clauses. Name the disease and its type, describe the lump and the nodes as examined, state the clinical stage, and append the receptor profile. Anything shorter leaves the treating team guessing.\n\nFor example: a forty six year old woman with a stony hard lump in the upper outer quadrant, tethered skin, recent nipple retraction and a mobile axillary node has carcinoma of the breast with nodal disease, locally advanced, awaiting core biopsy for grade and receptors. Every clause earns its place.",
+          "heading": "Four clauses, no shortcuts"
+        },
+        {
+          "body": "Staging runs on tumour, nodes and spread. Tumour covers size and local invasion into skin, muscle and chest wall. Nodes run from impalpable, through mobile axillary, to fixed axillary and supraclavicular disease. Spread means distant deposits in bone, lung, liver or the opposite breast.\n\nThe groups follow. Disease confined to the breast is early, nodal or locally fixed disease is intermediate, and any distant deposit is stage four whatever the lump looks like. Nodal examination therefore stages the patient at the bedside, which is why it is never skipped.",
+          "heading": "Tumour, nodes and spread make the stage"
+        },
+        {
+          "body": "Microscopy divides what the fingers cannot. Most cancers arise from ductal lining and a smaller share from lobules, which lose a cell adhesion protein and spread in single file to unusual sites. Grading and receptor testing then sort treatment.\n\nHormone sensitive tumours answer to endocrine treatment, HER2 driven tumours answer to antibody treatment with chemotherapy, and triple negative tumours, lacking all three targets, lean on chemotherapy alone. Prognosis tracks nodes first: clear nodes promise much, involved nodes warn, and distant spread reframes the goal from cure to control.",
+          "heading": "Receptors decide the drugs, nodes decide the future"
+        }
+      ],
+      "title": "Diagnosis and staging of breast cancer",
+      "why": "A breast diagnosis that stops at the word carcinoma is unfinished: the surgeon needs the stage and the oncologist needs the receptors before either can act. Stating all four clauses in one breath is the habit that separates a case presentation from a case report."
+    },
+    "skill.treatment.breast.management": {
+      "dosingNote": "This module teaches management at the level of modality and principle: which lumps are watched, which are sampled, and which go to the operating theatre or the cancer team. Specific agents, schedules and durations come from your current national or institutional guideline at the time of treatment. CliniX does not prescribe.",
+      "id": "skill.treatment.breast.management",
+      "kind": "treatment",
+      "oneLine": "Sample first, conserve the breast when safe, clear the axilla by stages, and match drugs to receptors",
+      "probes": [
+        {
+          "a": "Breast conserving surgery with radiotherapy gives survival equal to total mastectomy. Mastectomy is reserved for large, multicentric or recurrent disease, failed conservation, or patient choice, with reconstruction discussed where available.",
+          "accept": [
+            "conserving",
+            "radiotherapy",
+            "mastectomy",
+            "multicentric",
+            "reconstruction"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "When is the breast conserved and when is it removed?"
+        },
+        {
+          "a": "Dual tracer sentinel node biopsy stages the axilla with low morbidity, and completion clearance can be omitted with one or two positive sentinel nodes where breast conservation with radiotherapy follows. Fixed or bulky nodal disease still needs formal clearance.",
+          "accept": [
+            "sentinel",
+            "tracer",
+            "clearance",
+            "positive",
+            "radiotherapy"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How is the axilla staged, and when can completion clearance be omitted?"
+        },
+        {
+          "a": "HER2 positive disease needs antibody treatment with chemotherapy, hormone sensitive disease needs endocrine treatment with tamoxifen before menopause and aromatase blockade after it, and triple negative disease leans on chemotherapy. Inflammatory and lactational cancers are never incised as abscesses.",
+          "accept": [
+            "HER2",
+            "antibody",
+            "tamoxifen",
+            "aromatase",
+            "endocrine",
+            "chemotherapy"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "How do receptors change systemic treatment, and what is the trap in lactational disease?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "breast_cancer_staging_subtypes_and_surgical_management: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Carcinoma of the breast: surgical and adjuvant treatment",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Tissue first, knife second. No breast is removed or irradiated on clinical suspicion alone; core biopsy with grade and receptors precedes every definitive plan. Benign triple assessment with concordant arms is watched or excised for symptoms, while discordance is resampled, never assumed.\n\nSmall fibroadenomas with benign sampling can be observed with interval review, since many stay static and some regress. Excision is offered for large, growing or symptomatic lesions, diagnostic uncertainty, or a mother who cannot live with the doubt.",
+          "heading": "Biopsy before surgery, observation before excision"
+        },
+        {
+          "body": "For proven cancer, conservation with radiotherapy matches mastectomy for survival, so the smaller operation is the default where margins can be cleared and radiotherapy given. Mastectomy remains for large or multicentric tumours, failed conservation, recurrence, and patient choice, with reconstruction offered where the service exists.\n\nThe axilla is staged, not emptied by routine. Dual tracer sentinel sampling maps it with little morbidity, and limited sentinel positivity after conservation with radiotherapy needs no completion clearance. Bulky or fixed nodes still go for formal dissection, accepting the oedematous arm as its price.",
+          "heading": "Conserve the breast, stage the axilla"
+        },
+        {
+          "body": "Drugs follow receptors. HER2 driven cancer receives antibody treatment alongside chemotherapy, hormone sensitive cancer receives endocrine treatment, with tamoxifen before menopause and aromatase blockade after it, and triple negative disease is carried by chemotherapy. Radiotherapy completes conservation and guards high risk chests.\n\nIn Indian practice, examination, ultrasound and needle sampling reach the district hospital, while mammography, receptor testing and cancer teams sit at the medical college. Refer without delay for hard fixed lumps, skin or nipple change, nodes, bloody single duct discharge, or any lactational inflammation that ignores antibiotics. Never incise an inflammatory carcinoma as an abscess.",
+          "heading": "Receptors choose the drugs, referral moves the patient"
+        }
+      ],
+      "title": "Managing the breast lump and breast cancer",
+      "why": "Breast treatment is a sequence, not a single operation: sample, stage, conserve where safe, clear the axilla by evidence, and let receptors choose the drugs. Getting the order right cures the curable and spares the benign, which is the whole art of the breast clinic."
+    }
+  },
+  "cases": [
+    {
+      "diagnosis": {
+        "accept": [
+          "Carcinoma of the breast",
+          "Breast cancer",
+          "Invasive ductal carcinoma",
+          "Scirrhous carcinoma"
+        ],
+        "answer": "Carcinoma of the right breast, upper outer quadrant, with mobile axillary nodal disease: locally advanced invasive ductal carcinoma on core biopsy.",
+        "minMatch": 1
+      },
+      "differentialModel": {
+        "accept": [
+          "Carcinoma of the breast",
+          "Fibroadenoma",
+          "Breast cyst",
+          "Fibrocystic disease",
+          "Phyllodes tumour",
+          "Breast abscess",
+          "Fat necrosis"
+        ],
+        "answer": "Malignant lump first, with fibroadenoma, cyst, fibrocystic change, phyllodes tumour, chronic abscess and fat necrosis as the benign mimics to exclude by triple assessment.",
+        "minMatch": 2
+      },
+      "essentialInvestigations": [
+        "mammogram",
+        "breast_usg",
+        "core_biopsy"
+      ],
+      "exam": {
+        "skill.exam.surg.axillary_nodes": {
+          "abnormal": true,
+          "finding": "Two firm discrete mobile nodes palpable in the right central axillary group, largest about 2 cm. Left axilla and both supraclavicular fossae clear."
+        },
+        "skill.exam.surg.breast_inspection": {
+          "abnormal": true,
+          "finding": "Right nipple drawn up toward the upper outer quadrant compared with the left. Faint dimpling of the skin over the lump, more obvious with arms raised overhead. No ulceration, no orange peel change, no visible veins."
+        },
+        "skill.exam.surg.breast_lump_palpation": {
+          "abnormal": true,
+          "finding": "Single stony hard lump in the upper outer quadrant of the right breast, about 3 cm across, surface uneven, margin irregular. Lump does not slip from the fingers and is gripped within the breast substance."
+        },
+        "skill.exam.surg.breast_mobility_fixity": {
+          "abnormal": true,
+          "finding": "Moving the lump sideways produces dimpling of the overlying skin at the extremes of movement, which is tethering. The lump moves freely with the breast over the pectoralis on the hip press test, so no muscle fixity."
+        },
+        "skill.exam.surg.nipple_discharge": {
+          "abnormal": false,
+          "finding": "No discharge expressed on gentle segmental pressure of any quadrant. No blood, serum, pus or milk. Nipple everts partly on gentle lateral pressure."
+        },
+        "skill.gen.appearance": {
+          "abnormal": false,
+          "finding": "Middle aged woman, looks her stated age, calm and cooperative. No pallor, no weight loss evident, no distress at rest."
+        },
+        "skill.gen.vitals": {
+          "abnormal": false,
+          "finding": "Pulse 84 regular, blood pressure 128 by 78, respiratory rate 16, saturation 98 percent on room air, temperature 36.7 C. All within normal limits."
+        }
+      },
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "history": {
+        "arm_heaviness": {
+          "cues": [
+            "is your arm swollen",
+            "any swelling of the arm",
+            "heaviness in the arm",
+            "does your arm feel heavy"
+          ],
+          "key": true,
+          "reply": "No, my arm is normal. There is no swelling or heaviness on either side."
+        },
+        "back_hip_ache": {
+          "cues": [
+            "any back pain",
+            "pain in the back or hips",
+            "aching bones",
+            "pain in the shoulder or hip joints"
+          ],
+          "key": true,
+          "reply": "No, I have no back pain or joint pains. I can do all my housework as before."
+        },
+        "earlier_lumps": {
+          "cues": [
+            "any similar lump before",
+            "previous breast problems",
+            "earlier swelling in the breast",
+            "have you had this kind of trouble before"
+          ],
+          "key": true,
+          "reply": "No, I never had any breast lump or discharge before this. Both breasts were always normal."
+        },
+        "home_context": {
+          "cues": [
+            "who lives with you",
+            "tell me about your family at home",
+            "do you work outside the house",
+            "how did you reach the hospital today"
+          ],
+          "key": true,
+          "reply": "I live with my husband and our two sons in our village near Nashik. I manage the house and help on our small farm. My elder son brought me here by bus today."
+        },
+        "hormone_meds": {
+          "cues": [
+            "any hormonal tablets",
+            "do you take contraceptive pills",
+            "any regular medicines you take",
+            "tablets for any other illness"
+          ],
+          "key": true,
+          "reply": "No, I take no hormonal tablets and no regular medicines. I had my tubes tied after my second son and take nothing since."
+        },
+        "hurt_before": {
+          "cues": [
+            "any injury to the breast",
+            "did you hurt yourself there",
+            "a blow or knock on the chest",
+            "trauma to that side"
+          ],
+          "key": true,
+          "reply": "No, there was no injury or knock. I only noticed it while bathing one day."
+        },
+        "kin_history": {
+          "cues": [
+            "anyone in the family with breast disease",
+            "did your mother or sisters have this",
+            "family history of cancer",
+            "relatives with similar lumps"
+          ],
+          "key": true,
+          "reply": "My mother had no such problem. But my elder sister had a breast operation for cancer five years ago in Nashik city."
+        },
+        "lump_noticed": {
+          "cues": [
+            "when did you notice the lump",
+            "how did you first find the swelling",
+            "how long has the lump been there",
+            "tell me about the lump you found"
+          ],
+          "key": true,
+          "skillId": "skill.hx.chief_complaints",
+          "reply": "Doctor, about two months ago I felt a small hard button in my right breast while bathing. It has grown slowly since then and now feels like a small lemon."
+        },
+        "lump_pain": {
+          "cues": [
+            "is the lump painful",
+            "does the swelling hurt to touch",
+            "any pain in the lump",
+            "is it tender when you press it"
+          ],
+          "key": true,
+          "reply": "No, it does not pain at all. That is why I ignored it at first. It is just hard and keeps growing."
+        },
+        "lump_tempo": {
+          "cues": [
+            "how fast is it growing",
+            "has the size changed since you noticed it",
+            "is it growing quickly or slowly",
+            "has it shrunk at any time"
+          ],
+          "key": true,
+          "reply": "It has only grown, never shrunk. From a small seed it is now this big in two months. It does not change with my monthly cycle."
+        },
+        "monthly_link": {
+          "cues": [
+            "does it change with your periods",
+            "any link with the menstrual cycle",
+            "is it worse before your monthly bleeding",
+            "relation to menopause or periods"
+          ],
+          "key": true,
+          "reply": "No, there is no link with my periods. My bleeding stopped two years ago and the lump behaves the same every day."
+        },
+        "nipple_flow": {
+          "cues": [
+            "any discharge from the nipple",
+            "fluid leaking from the breast",
+            "bleeding from the nipple",
+            "staining of your blouse"
+          ],
+          "key": true,
+          "reply": "No, there is no discharge or bleeding from the nipple. My blouse stays clean."
+        },
+        "nipple_shape": {
+          "cues": [
+            "any pulling in of the nipple",
+            "change in the shape of the nipple",
+            "is the nipple drawn inside",
+            "recent retraction of the nipple"
+          ],
+          "key": true,
+          "reply": "Yes, in the last few weeks the right nipple looks pulled up compared to the left. It was always normal before."
+        },
+        "nursing_fever": {
+          "cues": [
+            "any fever with breast pain",
+            "redness or warmth over the breast",
+            "throbbing pain with fever",
+            "did the breast become red and hot"
+          ],
+          "key": true,
+          "reply": "No fever, no redness, no warmth. The skin looks normal except for a small dip over the lump when I raise my arms."
+        },
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "what is the problem you came with",
+            "why have you come to the hospital",
+            "tell me what is troubling you",
+            "how can I help you today"
+          ],
+          "key": true,
+          "reply": "Doctor, I have a hard painless lump in my right breast since two months. It is growing, and now my nipple looks pulled. My sister had breast cancer, so I am frightened.",
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "skin_surface": {
+          "cues": [
+            "any change in the skin over the lump",
+            "dimpling or puckering of the skin",
+            "orange peel change on the breast",
+            "any ulcer or wound on the breast"
+          ],
+          "key": true,
+          "reply": "There is a small dip in the skin over the lump which shows when I lift my arms. There is no wound, no redness, no orange peel roughness."
+        },
+        "weight_state": {
+          "cues": [
+            "any loss of weight",
+            "has your appetite fallen",
+            "are your clothes looser than before",
+            "unexplained weight change recently"
+          ],
+          "key": true,
+          "reply": "My weight is steady and I eat normally. I have not become thin."
+        }
+      },
+      "id": "case.breast.sunita",
+      "initialVitals": {
+        "bpDiastolic": 78,
+        "bpSystolic": 128,
+        "gcs": 15,
+        "hr": 84,
+        "rr": 16,
+        "spo2": 98,
+        "temp": 36.7
+      },
+      "investigations": {
+        "bone_scan": {
+          "indicated": true,
+          "label": "Whole body bone scan",
+          "note": "Ordered for staging given nodal disease; a clear scan keeps curative surgery on the table.",
+          "result": "No abnormal tracer uptake in the axial or appendicular skeleton. No skeletal metastasis."
+        },
+        "breast_usg": {
+          "indicated": true,
+          "label": "Targeted breast and axillary ultrasound",
+          "note": "Confirms a solid lesion and maps the axilla for impalpable nodes before surgery.",
+          "result": "Solid hypoechoic mass 3.1 cm in the right upper outer quadrant with irregular margins and internal vascularity. Two enlarged right axillary nodes with thickened cortex."
+        },
+        "cbc_lft": {
+          "indicated": true,
+          "label": "Blood counts, liver and kidney function",
+          "note": "Baseline fitness for anaesthesia and systemic treatment, plus a crude flag for liver spread.",
+          "result": "Haemoglobin 12.1 g per dL, counts normal. Bilirubin, transaminases and alkaline phosphatase within normal limits. Creatinine normal."
+        },
+        "chest_xray": {
+          "indicated": true,
+          "label": "Chest radiograph",
+          "note": "The simplest routine screen for lung deposits in every early breast cancer.",
+          "result": "Clear lung fields. No nodules, no effusion, no bony abnormality."
+        },
+        "core_biopsy": {
+          "indicated": true,
+          "label": "Ultrasound guided core needle biopsy",
+          "note": "The deciding arm of triple assessment: type, grade and receptors that choose surgery and drugs.",
+          "result": "Invasive ductal carcinoma, Nottingham grade 2. Oestrogen receptor positive, progesterone receptor positive, HER2 negative. Margins not applicable on a needle core."
+        },
+        "mammogram": {
+          "indicated": true,
+          "label": "Bilateral digital mammography",
+          "note": "Images both breasts because a small share of women carry unsuspected disease on the other side.",
+          "result": "Spiculated high density mass in the right upper outer quadrant with fine clustered microcalcification. Left breast shows only benign scattered calcification."
+        }
+      },
+      "managementModel": {
+        "accept": [
+          "triple assessment",
+          "core needle biopsy",
+          "staging",
+          "breast conserving surgery",
+          "mastectomy",
+          "sentinel node biopsy",
+          "radiotherapy",
+          "endocrine treatment",
+          "referral to the cancer team"
+        ],
+        "answer": "Complete triple assessment, stage with chest imaging and bone scan, discuss breast conservation with radiotherapy versus mastectomy at the cancer team, stage the axilla by sentinel sampling, and start receptor matched endocrine treatment with chemotherapy as indicated.",
+        "minMatch": 3
+      },
+      "opening": "Sunita Patil, 46, sits in the surgical outpatient room with her son waiting outside. She keeps her gaze lowered and her hand over the right side of her blouse. Introduce yourself and take a history.",
+      "patient": {
+        "age": 46,
+        "name": "Sunita Patil",
+        "occupation": "Homemaker, helps on the family farm",
+        "residence": "Village near Nashik, Maharashtra, lives with husband and two sons",
+        "sex": "female"
+      },
+      "teachingPoints": [
+        "Tempo plus painlessness does the first half of the diagnosis: two months of steady painless growth with new nipple pull is carcinoma until triple assessment says otherwise.",
+        "Tethering is dimpling at the extremes of movement while fixity is no independent movement at all; this patient shows tethering with a mobile breast over muscle, which still stages but does not yet fix.",
+        "A normal mammogram never overrules a suspicious lump, and discordance between the three arms of triple assessment means resampling, not surgery.",
+        "Sister with breast cancer plus absent breastfeeding concentrates background risk and should prompt family counselling alongside the patient's own treatment."
+      ],
+      "title": "A painless lump that pulls the nipple",
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

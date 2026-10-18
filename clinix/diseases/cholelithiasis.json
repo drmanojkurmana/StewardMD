@@ -1,0 +1,1135 @@
+{
+  "_comment": "Surgery pathway: gallstones from colic to cholecystectomy. Same architecture as breast lump: shared core and surgery skills carry method, this file adds biliary reasoning and overlays. History risk and presentation summary live in the shared fragment and are referenced by id.",
+  "id": "cholelithiasis",
+  "name": "Gallstones and cholecystitis",
+  "fullName": "Cholelithiasis with acute cholecystitis",
+  "system": "surgery",
+  "kbRef": "cholecystitis_critical_view_and_biliary_injury",
+  "subtitle": "Biliary colic to cholecystectomy",
+  "oneLine": "Recurrent fatty food pain that turns unrelenting with fever, and the decision of when the gallbladder must come out",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What stones are made of, whose bile makes them, and why silence is left alone",
+      "skills": [
+        "skill.reasoning.cholelithiasis.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age, sex and parity set the prior probability before the pain is described",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In biliary disease, age, sex and parity carry unusual weight. A multiparous woman above forty from eastern India starts as stones until proven otherwise, while the same pain in a young man needs far more convincing before it is believed."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Steady pain with scapular radiation, fatty food link, and the order of pain, vomiting and fever",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.surg.acute_abdomen",
+        "skill.hx.surg.pain"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A biliary history reads as attacks: recurrent evening episodes of severe steady right upper abdominal pain over months or years, each lasting hours, with the current attack unrelenting beyond a day. That episodic past behind an unrelenting present is the signature."
+        },
+        "skill.hx.surg.acute_abdomen": {
+          "expect": "Press the order of the triad: pain first, vomiting next, fever last. Fever before pain belongs elsewhere, and a pain free interval between true waves argues against an inflamed gallbladder. Ask what fatty food does, and whether vomiting brings any relief at all."
+        },
+        "skill.hx.surg.pain": {
+          "expect": "Expect a steady ache or fullness, not a gripping wave: right hypochondrium or epigastrium radiating to the inferior angle of the right scapula or the shoulder, worse after fried food, eased by stillness and pressure, aggravated by jolting and deep breathing."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The weight, parity, family, blood and bowel arithmetic behind the stones",
+      "skills": [
+        "skill.hx.cholelithias.risk"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "A febrile patient with a localising abdomen, and the tinge that changes everything",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for a febrile patient lying still, reluctant to move or breathe deeply because jolting worsens the pain. Examine the sclera in daylight for even a faint yellow tinge: frank jaundice points down the duct, while its absence keeps the disease in the gallbladder."
+        },
+        "skill.gen.vitals": {
+          "expect": "Expect moderate fever with tachycardia; a high swinging fever with chills belongs to cholangitis. Hypotension with confusion is Reynolds territory and changes the night, not just the plan."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Abdominal examination",
+      "blurb": "Murphy at the ninth cartilage, Boas behind, and the gallbladder that should not be felt",
+      "skills": [
+        "skill.exam.surg.cholecystitis_signs",
+        "skill.exam.surg.courvoisier_sign",
+        "skill.exam.surg.peritonitis_signs"
+      ],
+      "emphasis": {
+        "skill.exam.surg.cholecystitis_signs": {
+          "expect": "Expect a positive Murphy sign with guarding confined to the right hypochondrium and a tender Boas area behind. Compare with the left side as control: inspiratory arrest on the right alone is what counts."
+        },
+        "skill.exam.surg.courvoisier_sign": {
+          "expect": "In this disease the gallbladder is usually impalpable from old fibrosis; feeling it means mucocele or empyema when tender, or malignancy when hard and non tender with deepening jaundice. A palpable gallbladder here is never normal."
+        },
+        "skill.exam.surg.peritonitis_signs": {
+          "expect": "Guarding stays localised over the gallbladder in uncomplicated cholecystitis. Board like rigidity of the whole abdomen with absent bowel sounds means perforation with biliary peritonitis, a different emergency that needs resuscitation and theatre, not more antibiotics."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the biliary picture together",
+      "blurb": "Tempo, fever, jaundice and the hand sort one organ into three urgencies",
+      "skills": [
+        "skill.reasoning.cholelithiasis.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Patient, tempo, syndrome, severity and the next step",
+      "skills": [
+        "skill.present.cholelithias.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Every neighbour that claims the right hypochondrium, and the cancer trap",
+      "skills": [
+        "skill.reasoning.cholelithiasis.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Ultrasound confirms, bloods grade, MRCP maps, ERCP treats",
+      "skills": [
+        "skill.investigation.cholelithiasis.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and grading",
+      "blurb": "Tokyo certainty and grade, with the duct position stated",
+      "skills": [
+        "skill.reasoning.cholelithiasis.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Relieve now, bridge with antibiotics, remove early, drain when surgery cannot happen",
+      "skills": [
+        "skill.treatment.cholelithiasis.management",
+        "skill.annexure.cholelithiasis.safety"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.cholelithiasis.exam",
+        "title": "Examine the right upper abdomen",
+        "task": "This 45-year-old woman has had unrelenting right upper abdominal pain with fever for two days. Examine her abdomen for gallbladder disease and present your findings.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.surg.cholecystitis_signs",
+          "skill.exam.surg.courvoisier_sign",
+          "skill.exam.surg.tenderness_rebound"
+        ],
+        "examinerQuestions": [
+          "Demonstrate Murphy sign and explain why the breath arrests.",
+          "You feel a tender globular swelling below the liver edge. What does this mean, and how does a hard non tender swelling differ?",
+          "Her sclera is faintly yellow. Does this change your diagnosis, and what single test settles the duct question?"
+        ]
+      },
+      {
+        "id": "osce.cholelithiasis.history",
+        "title": "Take a biliary history and assess background risk",
+        "task": "This 45-year-old woman has recurrent right upper abdominal pain after fried food. Take a focused history in six minutes and be ready to state what worries you most.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.surg.acute_abdomen",
+          "skill.hx.cholelithias.risk"
+        ],
+        "examinerQuestions": [
+          "Is this story colic or cholecystitis, and which single feature decides it?",
+          "Name three background risks you asked about and what each changes in her management.",
+          "Which two features in her story would make you suspect a common duct stone rather than gallbladder stones alone?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.reasoning.cholelithiasis.basics",
+      "skill.hx.cholelithias.risk",
+      "skill.exam.surg.cholecystitis_signs",
+      "skill.reasoning.cholelithiasis.signs",
+      "skill.reasoning.cholelithiasis.differential",
+      "skill.investigation.cholelithiasis.workup",
+      "skill.reasoning.cholelithiasis.diagnosis",
+      "skill.treatment.cholelithiasis.management"
+    ]
+  },
+  "skills": {
+    "skill.reasoning.cholelithiasis.basics": {
+      "id": "skill.reasoning.cholelithiasis.basics",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "What gallstones are",
+      "oneLine": "Cholesterol and pigment stones, who carries them, and why most silent stones are left alone",
+      "why": "Everything in biliary surgery flows from three facts: what the stone is made of, whose bile makes it, and how rarely a silent stone misbehaves. A student who holds these three never orders a scan for reassurance alone and never advises surgery for an incidental finding.",
+      "teach": [
+        {
+          "heading": "Two kinds of stone",
+          "body": "Most stones in Indian and Western practice are cholesterol stones, carrying more than half their weight as cholesterol. Pigment stones carry little cholesterol and are mostly calcium bilirubinate, in black and brown varieties.\n\nCholesterol stones need three faults together: bile supersaturated with cholesterol, crystals that nucleate too fast, and a gallbladder that empties poorly and lets sludge sit. Black pigment stones follow chronic haemolysis, cirrhosis and ileal disease, while brown ones follow chronic biliary infection."
+        },
+        {
+          "heading": "Colic is a misnomer for a steady pain",
+          "body": "Biliary colic is the most specific symptom of stones, yet the word colic misleads. It is a steady, severe ache or fullness in the epigastrium or right hypochondrium, not a pain that comes in waves, radiating to between the shoulder blades, the right scapula or the shoulder.\n\nIt lasts from half an hour to five hours, often starts after fatty food, and vomiting when it comes is bilious but brings no relief. Pain that truly grips and releases in waves with pain free gaps belongs to the ureter or the bowel, not the gallbladder."
+        },
+        {
+          "heading": "Most stones never cause trouble",
+          "body": "Between sixty and eighty in every hundred silent stones stay silent over twenty five years. New symptoms appear at roughly two to four in a hundred each year, and complications at roughly one to three in a thousand, so routine removal of stones that cause nothing is not warranted.\n\nThis natural history is the whole reason the pathway splits: reassure and advise the asymptomatic, list the colicky for planned surgery, and operate early once inflammation or a blocked duct declares itself."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the two main kinds of gallstone, and which three faults make cholesterol stones?",
+          "a": "Cholesterol stones and pigment stones of black and brown varieties. Cholesterol stones need bile supersaturated with cholesterol, fast crystal nucleation, and a gallbladder that empties poorly.",
+          "accept": [
+            "cholesterol",
+            "pigment",
+            "supersaturat",
+            "nucleation",
+            "stasis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Describe the classic biliary colic pain in terms of character, radiation and duration.",
+          "a": "A steady severe ache or fullness in the epigastrium or right hypochondrium, radiating to the interscapular area, right scapula or shoulder, lasting half an hour to five hours.",
+          "accept": [
+            "steady",
+            "epigastrium",
+            "scapula",
+            "shoulder",
+            "half an hour"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "An ultrasound done for another reason shows silent gallstones. Why do you not advise surgery?",
+          "a": "Most silent stones stay silent, with new symptoms in only a few per hundred per year and complications in about one to three per thousand, so prophylactic cholecystectomy is not warranted.",
+          "accept": [
+            "silent",
+            "per year",
+            "prophylactic",
+            "not warranted"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gallbladder_disease: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Gallstone disease: pathology and natural history"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.cholelithiasis.signs": {
+      "id": "skill.reasoning.cholelithiasis.signs",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "The biliary picture: colic, cholecystitis and cholangitis",
+      "oneLine": "One organ, three stories, told apart by tempo, fever, jaundice and the hand",
+      "why": "Colic, cholecystitis and cholangitis share one organ but demand three different urgencies: wait, operate this week, or drain tonight. Tempo, fever and jaundice sort them at the bedside long before any scan, and mixing them up is how a duct sepsis spends the night on fluids alone.",
+      "teach": [
+        {
+          "heading": "Colic passes, cholecystitis stays",
+          "body": "Colic is an evening of severe steady pain that settles within hours and leaves no fever and no tenderness behind. Cholecystitis is pain that refuses to settle: unrelenting right hypochondrial pain with vomiting, then fever, then a tender guarded right upper abdomen.\n\nRemember the order. Pain comes first, vomiting follows, and fever comes last of all. Fever before pain belongs to something else, and a pain free interval between waves argues against an inflamed gallbladder entirely."
+        },
+        {
+          "heading": "Murphy, Boas and the tender point",
+          "body": "Tenderness sits just below the tip of the ninth costal cartilage at the outer edge of the right rectus, the gallbladder point. With the fingers held there, ask for a slow deep breath: in cholecystitis the descending gallbladder strikes the fingers and the breath stops with a catch, which is Murphy sign.\n\nCheck the other side as a control, and feel behind for hyperaesthesia between the ninth and eleventh ribs posteriorly, the Boas sign. In most uncomplicated cases the gallbladder itself is not palpable; a tender palpable swelling means mucocele or empyema."
+        },
+        {
+          "heading": "When the duct blocks: Charcot, Reynolds and Courvoisier",
+          "body": "A stone in the common duct announces itself with biliary colic followed by jaundice after each attack, then intermittent fever with chills. Pain with jaundice and spiking fever together is Charcot triad, and it means cholangitis until proven otherwise.\n\nAdd shock with confusion to the triad and you have Reynolds pentad: suppurative cholangitis under pressure, which needs emergency duct drainage, not another day of antibiotics. A palpable non tender gallbladder with deepening jaundice is the opposite story, Courvoisier law, pointing to malignant obstruction rather than stones.",
+          "table": {
+            "cols": [
+              "Feature",
+              "Colic",
+              "Cholecystitis",
+              "Cholangitis"
+            ],
+            "rows": [
+              [
+                "Pain",
+                "Hours, then settles",
+                "Days, unrelenting",
+                "Colicky with each attack"
+              ],
+              [
+                "Fever",
+                "None",
+                "Moderate, after pain",
+                "Spiking with chills"
+              ],
+              [
+                "Jaundice",
+                "None or fleeting",
+                "Slight tinge at most",
+                "Deepens after attacks"
+              ],
+              [
+                "Bedside sign",
+                "Tenderness passes",
+                "Murphy positive",
+                "Charcot triad"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How do you separate biliary colic from acute cholecystitis on story alone?",
+          "a": "Colic settles within hours with no fever and no lasting tenderness, while cholecystitis is unrelenting pain over days with vomiting then fever and a tender guarded right upper abdomen.",
+          "accept": [
+            "settles",
+            "unrelenting",
+            "fever",
+            "tenderness",
+            "Murphy"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Describe how you elicit Murphy sign and what counts as positive.",
+          "a": "Fingers below the right costal margin at the lateral rectus border, steady pressure, slow deep breath in; a sudden arrest of inspiration with a wince as the gallbladder meets the fingers, absent on the left side.",
+          "accept": [
+            "costal margin",
+            "deep breath",
+            "arrest",
+            "wince",
+            "control"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What turns Charcot triad into Reynolds pentad, and what does it demand?",
+          "a": "Added shock with confusion means suppurative cholangitis under pressure and demands emergency biliary drainage, usually ERCP, not antibiotics alone.",
+          "accept": [
+            "shock",
+            "confusion",
+            "drainage",
+            "ERCP"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cholecystitis_critical_view_and_biliary_injury: clinicalPearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Gallbladder: Murphy sign and Courvoisier law"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.cholelithiasis.differential": {
+      "id": "skill.reasoning.cholelithiasis.differential",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "What else looks like biliary pain",
+      "oneLine": "Ulcer, pancreas, appendix, liver and chest mimics, and the cancer that must never be missed",
+      "why": "Right upper abdominal pain is claimed by half the abdomen: ulcer, pancreas, kidney, appendix, liver, and even the chest below the diaphragm. A differential that is never written down is how a perforated ulcer is massaged as colic and how a gallbladder cancer is reassured as gastritis.",
+      "teach": [
+        {
+          "heading": "What else lives in the right upper abdomen",
+          "body": "Work through neighbours in order: peptic ulcer with its hunger pain and antacid relief, pancreatitis with boring epigastric pain through to the back and raised amylase, retrocaecal appendicitis with pain that began around the umbilicus, viral hepatitis with diffuse tenderness and no Murphy sign, and renal colic looping from loin to groin.\n\nTwo extra abdominal mimics earn a chest listen in every case: basal pneumonia and myocardial ischaemia both refer to the right hypochondrium, and both have been opened as cholecystitis. Fever with fast breathing and nasal flaring points up, not in.",
+          "points": [
+            "Peptic ulcer or perforation: epigastric hunger pain, antacid relief, board like rigidity and free gas under the diaphragm if perforated, unlike the soft intervals of colic.",
+            "Acute pancreatitis: boring pain through to the back, persistent vomiting, raised serum amylase, and Grey Turner or Cullen discolouration in severe disease.",
+            "Choledocholithiasis and cholangitis: colic with jaundice after each attack and intermittent fever, Charcot triad when infected and Reynolds pentad when severe.",
+            "Carcinoma of the gallbladder or pancreatic head: elderly patient, weight loss, hard or distended gallbladder, Courvoisier pattern jaundice that deepens without easing.",
+            "Basal pneumonia and cardiac ischaemia: right hypochondrial pain with fever and breathlessness or with exertional chest tightness, settled by examining the chest and recording the heart tracing."
+          ]
+        },
+        {
+          "heading": "The two traps",
+          "body": "The first trap is calling every fatty food pain gastritis and prescribing antacids for months. Recurrent postprandial attacks with scapular radiation deserve an ultrasound early, not a third course of antacids.\n\nThe second trap is missing gallbladder cancer, which is common in northern and eastern India. An elderly patient with weight loss, a hard palpable gallbladder, or irregular wall thickening on imaging must be staged for malignancy, not booked for routine surgery."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name four differentials for right hypochondrial pain with fever and one bedside discriminator for each.",
+          "a": "Cholecystitis with a positive Murphy sign, cholangitis with Charcot triad, pancreatitis with pain through to the back and raised amylase, hepatitis with diffuse tenderness and no Murphy sign, and basal pneumonia with chest signs.",
+          "accept": [
+            "Murphy",
+            "Charcot",
+            "amylase",
+            "hepatitis",
+            "pneumonia"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "An elderly patient has painless deepening jaundice with a palpable gallbladder. What is your leading diagnosis and why not stones?",
+          "a": "Malignant obstruction, usually carcinoma of the pancreatic head or bile duct, by Courvoisier law: a chronically inflamed stone gallbladder fibroses and cannot distend, while a growth obstructing a healthy duct lets it swell.",
+          "accept": [
+            "malignan",
+            "Courvoisier",
+            "fibros",
+            "distend"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cholecystitis_critical_view_and_biliary_injury: additionalDifferentials"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Acute abdomen: differential diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.investigation.cholelithiasis.workup": {
+      "id": "skill.investigation.cholelithiasis.workup",
+      "kind": "investigation",
+      "system": "surgery",
+      "title": "Working up the biliary patient",
+      "oneLine": "Ultrasound to confirm, bloods to grade, MRCP to map the duct, ERCP to treat",
+      "why": "Each biliary test answers a different question, so ordering the full panel for every pain wastes money and delays the one test that matters. Ultrasound confirms the stones, bloods grade the illness, MRCP maps a suspected duct stone, and ERCP is treatment wearing the clothes of a test.",
+      "teach": [
+        {
+          "heading": "Ultrasound first, always",
+          "body": "Abdominal ultrasound is the routine first test, highly accurate for stones, spotting them down to about a millimetre and a half by their acoustic shadow. Report stones, wall thickening beyond four millimetres, pericholecystic fluid, a sonographic Murphy sign, and the calibre of the common duct.\n\nSludge shifts with posture and casts no shadow, which separates it from stones, though it can herald them. A non visualised gallbladder on scintigraphy means the cystic duct is obstructed, the most specific test where doubt remains after ultrasound."
+        },
+        {
+          "heading": "Bloods grade, MRCP maps, ERCP treats",
+          "body": "Bloods grade the illness: leucocytosis and C reactive protein for inflammation, bilirubin with alkaline phosphatase for cholestasis, amylase or lipase where the pancreas is in question, and cultures before antibiotics in suspected cholangitis. Raised liver tests alone never prove a duct stone.\n\nFor a suspected duct stone, MRCP is the first map, matching ERCP for detection without its risks. ERCP with sphincterotomy is reserved for treatment: stone extraction, stenting, or emergency drainage in cholangitis. In northern and eastern India, watch every scan for irregular wall thickening or a mass, the face of gallbladder cancer."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the ultrasound features of acute cholecystitis?",
+          "a": "Gallstones with acoustic shadowing, wall thickening beyond four millimetres, pericholecystic fluid, and a sonographic Murphy sign, with common duct dilatation if a duct stone coexists.",
+          "accept": [
+            "stones",
+            "shadowing",
+            "four millimetres",
+            "pericholecystic",
+            "Murphy"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Liver tests are raised in a patient with gallstones. Does this prove a common duct stone, and what settles it?",
+          "a": "No, raised tests alone never prove a duct stone. Stratify risk with the tests plus duct calibre on ultrasound, then MRCP for intermediate risk and ERCP or intraoperative imaging for high risk.",
+          "accept": [
+            "never prove",
+            "MRCP",
+            "ERCP",
+            "calibre",
+            "risk"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "When is ERCP the right test, and when is it the wrong one?",
+          "a": "Right when intervention is needed: cholangitis needing drainage, or a high risk duct stone needing extraction or stenting. Wrong as a purely diagnostic map when MRCP could answer, given its risks of pancreatitis and sepsis.",
+          "accept": [
+            "therapeutic",
+            "drainage",
+            "MRCP",
+            "pancreatitis"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cholecystitis_critical_view_and_biliary_injury: additionalInvestigations"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Gallstones: investigations"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.cholelithiasis.diagnosis": {
+      "id": "skill.reasoning.cholelithiasis.diagnosis",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Diagnosing and grading: Tokyo in threes",
+      "oneLine": "Local signs plus systemic signs plus imaging, then a grade that sets the clock",
+      "why": "Saying cholecystitis without saying suspected or definite, and without a grade, leaves theListener unable to judge whether this patient needs tablets, this week theatre, or tonight drainage. The Tokyo framework turns bedside findings into those two words and that clock.",
+      "teach": [
+        {
+          "heading": "Tokyo says it in threes",
+          "body": "Definite cholecystitis needs one item from each of three groups: local signs such as Murphy sign, right upper quadrant pain, mass or tenderness; systemic signs such as fever, raised C reactive protein or raised white cells; and imaging findings of cholecystitis. One local plus one systemic without imaging is suspected disease.\n\nDefinite cholangitis follows the same rhythm: inflammation shown by fever above thirty eight or rigors, low or high white cells, or raised C reactive protein; cholestasis shown by bilirubin of two or more or liver enzymes above one and a half times normal; and imaging showing dilatation or a stone, stricture or stent. One from each group is definite, while inflammation plus either of the others is suspected."
+        },
+        {
+          "heading": "The grade sets the clock",
+          "body": "Grade one is mild disease with no severity marker. Grade two means a white count above eighteen thousand, a palpable tender mass, symptoms beyond seventy two hours, or gangrene, abscess or emphysematous change. Grade three means any organ dysfunction: pressor need, confusion, poor oxygenation, creatinine above two, clotting failure, or platelets below one lakh.\n\nCholangitis grades similarly, with severe disease showing organ dysfunction and moderate disease showing any two of a high or low white count, fever of thirty nine or more, age above seventy five, bilirubin of five or more, or low albumin. Mild cholangitis may settle on antibiotics with drainage only if unimproved within a day; moderate needs early drainage; severe needs organ support with urgent drainage once stable.",
+          "table": {
+            "cols": [
+              "Grade",
+              "Cholecystitis marker",
+              "What it triggers"
+            ],
+            "rows": [
+              [
+                "One, mild",
+                "No severity marker",
+                "Early cholecystectomy"
+              ],
+              [
+                "Two, moderate",
+                "High white cells, mass, late",
+                "Early surgery, drain if unfit"
+              ],
+              [
+                "Three, severe",
+                "Any organ dysfunction",
+                "Support, drainage, delayed surgery"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "A complete diagnostic statement",
+          "body": "State the certainty, the entity, the grade and the duct position in one sentence. For example: definite acute calculous cholecystitis, grade one, with no evidence of a common duct stone.\n\nWhere a duct stone is possible, add the risk band from liver tests and duct calibre and the planned map, usually MRCP. A diagnosis that omits certainty, grade and duct status is unfinished, however confident it sounds."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What three groups make definite acute cholecystitis by Tokyo, and what makes it merely suspected?",
+          "a": "Local signs, systemic signs and imaging together are definite; one local plus one systemic without imaging is suspected.",
+          "accept": [
+            "local",
+            "systemic",
+            "imaging",
+            "suspected",
+            "definite"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Name three markers that lift cholecystitis from grade one to grade two.",
+          "a": "White cells above eighteen thousand, a palpable tender mass, symptoms beyond seventy two hours, or marked local inflammation such as gangrene or abscess.",
+          "accept": [
+            "eighteen thousand",
+            "mass",
+            "seventy two hours",
+            "gangrene"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A cholangitis patient has a bilirubin of six with fever of thirty nine at age seventy eight. What grade and what plan?",
+          "a": "At least moderate grade, meeting three markers, so early biliary drainage with antibiotics, usually ERCP, not antibiotics alone.",
+          "accept": [
+            "moderate",
+            "drainage",
+            "ERCP",
+            "antibiotics"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute-cholecystitis-cholangitis: Diagnosis (Tokyo Guidelines 2018)"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Acute cholecystitis: diagnosis and severity assessment"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.treatment.cholelithiasis.management": {
+      "id": "skill.treatment.cholelithiasis.management",
+      "kind": "treatment",
+      "system": "surgery",
+      "title": "Managing stones: relieve, cover, remove",
+      "oneLine": "Analgesia now, antibiotics as a bridge, early cholecystectomy, drainage when surgery cannot happen",
+      "why": "Gallstone treatment fails in two directions: the colic that is reassured without a surgical plan and returns as sepsis, and the cholecystitis that is pickled in antibiotics for weeks until the window for safe early surgery closes. Relief, cover and remove in that order keeps both errors out.",
+      "teach": [
+        {
+          "heading": "Relieve the attack",
+          "body": "Treat the pain first: diclofenac seventy five milligrams intramuscularly is effective first line analgesia for biliary colic and may reduce progression to cholecystitis, with morphine at zero point one milligram per kilogram titrated in two to four milligram intravenous increments for pain an anti inflammatory cannot control. Metoclopramide ten milligrams controls the vomiting that accompanies the attack.\n\nResuscitate with fluids where sepsis or dehydration shows, keep the patient nil orally during the acute attack, and advise a low fat diet while awaiting surgery. Avoid anti inflammatories in renal impairment and peptic ulcer disease."
+        },
+        {
+          "heading": "Antibiotics bridge to surgery, they are not the treatment",
+          "body": "Definitive treatment of cholecystitis is cholecystectomy, with antibiotics covering the wait or the milder cases managed without operation.\n\nCommunity acquired mild to moderate disease is covered by ceftriaxone two grams intravenously once daily with metronidazole five hundred milligrams intravenously every eight hours.\n\nSevere, healthcare associated, or high resistance settings need piperacillin tazobactam four point five grams intravenously every six hours, or meropenem one gram every eight hours.\n\nAdd vancomycin at fifteen milligrams per kilogram every twelve hours for enterococcus in grade three disease. Stop antibiotics after uncomplicated cholecystectomy; continue four to seven days after source control for gangrenous, perforated or cholangitic disease, and de escalate on cultures."
+        },
+        {
+          "heading": "Operate early, drain when you cannot",
+          "body": "Offer early laparoscopic cholecystectomy within seven days of admission and ten days of symptom onset wherever expertise allows, including patients above eighty, Child Pugh A and B cirrhosis, and pregnancy.\n\nIf the window is missed, wait beyond six weeks rather than operating into maturing inflammation.\n\nPatients unfit for surgery need gallbladder drainage, usually percutaneous cholecystostomy. Difficult anatomy at operation calls for subtotal cholecystectomy or conversion rather than a duct injury.\n\nCholangitis is drained by grade with ERCP within forty eight hours, and gallstone cholangitis earns a cholecystectomy in the same admission. Where ERCP is unavailable, stabilise and refer early; inpatient surgical care at empanelled hospitals is covered under government insurance schemes."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the first line analgesia for biliary colic, and what do you use when it fails?",
+          "a": "Diclofenac seventy five milligrams intramuscularly first line, with morphine titrated intravenously for severe pain, plus metoclopramide ten milligrams for vomiting.",
+          "accept": [
+            "diclofenac",
+            "morphine",
+            "metoclopramide",
+            "titrated"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What antibiotic cover bridges mild to moderate community acquired cholecystitis to surgery?",
+          "a": "Ceftriaxone two grams intravenously once daily with metronidazole five hundred milligrams every eight hours, de escalated on cultures and stopped after uncomplicated cholecystectomy.",
+          "accept": [
+            "ceftriaxone",
+            "metronidazole",
+            "de escalate",
+            "stopped"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A grade one cholecystitis presents on day two of pain at a centre with laparoscopic expertise. Operate now or cool and wait?",
+          "a": "Operate now, within seven days of admission and ten days of symptoms; early surgery reduces complications and stay, while cooling and waiting past the window means delaying beyond six weeks.",
+          "accept": [
+            "early",
+            "seven days",
+            "ten days",
+            "six weeks"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "biliary_colic: management regimen"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "CHOLECYSTITIS: empiric regimen"
+        },
+        {
+          "source": "NICE Clinical Guideline CG188",
+          "locator": "Gallstone disease: management"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module quotes doses only as stated in the cited StewardMD KB regimens, with the agent choice set by the current national or institutional guideline and local resistance data at the time of treatment. CliniX does not prescribe."
+    },
+    "skill.annexure.cholelithiasis.safety": {
+      "id": "skill.annexure.cholelithiasis.safety",
+      "kind": "annexure",
+      "system": "surgery",
+      "title": "Operating safely: the critical view and duct injury",
+      "oneLine": "Three criteria before any clip, and what each Strasberg injury means",
+      "why": "The common bile duct is injured when it is mistaken for the cystic duct, and that mistake happens in a hurry, in inflammation, or in anatomy that was never displayed. The critical view is the pause that prevents it, and every surgeon must know what to do when prevention has already failed.",
+      "teach": [
+        {
+          "heading": "Three criteria before any clip",
+          "body": "Strasberg critical view of safety needs all three: the hepatocystic triangle cleared of fat, the lower third of the gallbladder lifted off the cystic plate, and only two structures seen entering the gallbladder. Clip and divide nothing until all three are shown.\n\nWhere inflammation hides the anatomy, use intraoperative cholangiography or laparoscopic ultrasound, convert to open surgery, or do a subtotal cholecystectomy. A difficult gallbladder removed in part beats an easy duct divided in whole."
+        },
+        {
+          "heading": "When it goes wrong",
+          "body": "Minor leaks from the cystic stump are type A and usually settle with drainage and endoscopic stenting. A lateral laceration of the main duct is type D, and a complete transection with loss of continuity is type E, both needing hepatobiliary referral and usually hepaticojejunostomy.\n\nSuspect injury from bilious drain output, jaundice or sepsis after cholecystectomy, confirm with MRCP, and refer early rather than re operating blindly. Document the view achieved, or the reason it could not be, in every operation note."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name the three criteria of the critical view of safety.",
+          "a": "The hepatocystic triangle cleared of fat, the lower third of the gallbladder off the cystic plate, and only two structures seen entering the gallbladder.",
+          "accept": [
+            "triangle",
+            "cystic plate",
+            "two structures"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What is the difference between a Strasberg type A and type E injury in management?",
+          "a": "Type A is a minor cystic stump leak managed with drainage and endoscopic stenting, while type E is complete transection of the main duct needing hepatobiliary referral and usually hepaticojejunostomy.",
+          "accept": [
+            "stump leak",
+            "stenting",
+            "transection",
+            "hepaticojejunostomy"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cholecystitis_critical_view_and_biliary_injury: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Laparoscopic cholecystectomy: bile duct injury"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.cholelithiasis.meena",
+      "initialVitals": {
+        "hr": 102,
+        "bpSystolic": 128,
+        "bpDiastolic": 82,
+        "rr": 20,
+        "spo2": 98,
+        "temp": 38.6,
+        "gcs": 15
+      },
+      "title": "A homemaker whose evening pain refused to settle",
+      "opening": "Meena Devi, 45, sits hunched on the emergency trolley, holding her right upper abdomen. Her husband stands beside her with a plastic folder of old prescriptions. Introduce yourself and take a history.",
+      "fallback": "I do not understand, doctor. Please ask me again in a simple way.",
+      "patient": {
+        "name": "Meena Devi",
+        "age": 45,
+        "sex": "female",
+        "occupation": "Homemaker, cooks for a joint family",
+        "residence": "Semi urban, lives with husband, three children and mother in law near Varanasi"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you here",
+            "what is the problem today",
+            "why have you come to hospital",
+            "tell me about your complaint",
+            "how can i help you",
+            "what is troubling you most"
+          ],
+          "reply": "Doctor, for two days I have a severe pain in the right side of my upper stomach that is not settling, with fever and vomiting.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "onset_timing": {
+          "cues": [
+            "when did this attack start",
+            "how long has this pain lasted",
+            "did it wake you at night",
+            "sudden or gradual onset",
+            "since when are you unwell"
+          ],
+          "reply": "This attack started two days ago in the evening after dinner and has stayed continuously since. Earlier attacks always settled by morning.",
+          "key": true,
+          "skillId": "skill.hx.surg.acute_abdomen"
+        },
+        "pain_location": {
+          "cues": [
+            "where exactly is the pain",
+            "show me with one finger",
+            "point to the painful spot",
+            "which side of the stomach",
+            "below the ribs on which side"
+          ],
+          "reply": "Here, doctor, just below the right ribs. It stays in this one place and does not move around the stomach.",
+          "key": true,
+          "skillId": "skill.hx.surg.pain"
+        },
+        "pain_radiation": {
+          "cues": [
+            "does the pain travel anywhere",
+            "pain going to the back",
+            "pain in the shoulder blade",
+            "radiation to the right shoulder",
+            "does it spread to the back"
+          ],
+          "reply": "Yes, it goes through to my back below the right shoulder blade. When it is severe I feel it up in the shoulder too.",
+          "key": true,
+          "skillId": "skill.hx.surg.pain"
+        },
+        "pain_nature": {
+          "cues": [
+            "describe the character of pain",
+            "steady ache or waves of pain",
+            "cramping or continuous pain",
+            "does the pain come and go",
+            "is there any pain free interval"
+          ],
+          "reply": "It is a continuous heavy ache, not waves. There is no gap without pain since it started two days ago.",
+          "key": true,
+          "skillId": "skill.hx.surg.pain"
+        },
+        "pain_duration": {
+          "cues": [
+            "how long does each attack last",
+            "hours or days of pain",
+            "how long did earlier attacks continue",
+            "what is different this time",
+            "has any attack lasted this long before"
+          ],
+          "reply": "Earlier attacks lasted three to four hours and settled on their own. No attack has ever lasted two full days like this one.",
+          "key": true
+        },
+        "food_link": {
+          "cues": [
+            "relation to fried food",
+            "worse after fatty meals",
+            "does eating trigger the pain",
+            "paratha or puri effect",
+            "pain after dinner"
+          ],
+          "reply": "Yes, fried food always brings it. This attack came after puri sabzi at night. Even tea with milk feels heavy during an attack.",
+          "key": true
+        },
+        "nausea_vomiting": {
+          "cues": [
+            "any nausea or vomiting",
+            "what does the vomitus look like",
+            "bilious green vomiting",
+            "did vomiting relieve the pain",
+            "how many times did you vomit"
+          ],
+          "reply": "I vomited three times, bitter green fluid. The pain did not reduce at all after vomiting.",
+          "key": true
+        },
+        "fever_profile": {
+          "cues": [
+            "do you have fever",
+            "fever with chills or rigors",
+            "which came first pain or fever",
+            "how high is the temperature",
+            "sweating with fever"
+          ],
+          "reply": "Fever came yesterday, a day after the pain started. No shivering fits, just a steady fever with body ache.",
+          "key": true
+        },
+        "jaundice_watch": {
+          "cues": [
+            "yellow colour of eyes",
+            "yellowing of urine or skin",
+            "anyone said you look yellow",
+            "itching over the body",
+            "pale clay coloured stools"
+          ],
+          "reply": "No, my eyes are not yellow and my urine is the usual colour. Nobody at home said I look yellow.",
+          "key": true
+        },
+        "urine_stool_watch": {
+          "cues": [
+            "burning during urination",
+            "frequency of urination",
+            "colour of your urine",
+            "blood in urine or stool",
+            "constipation during this attack"
+          ],
+          "reply": "Urine is normal with no burning. I have not passed stool since yesterday but I am passing gas.",
+          "key": true
+        },
+        "bowel_habit": {
+          "cues": [
+            "your usual bowel pattern",
+            "constipation or loose motions",
+            "bleeding per rectum",
+            "recent change in motions",
+            "piles or fissure trouble"
+          ],
+          "reply": "Usually I pass motion once daily without trouble. No bleeding, no piles.",
+          "key": false
+        },
+        "prior_biliary": {
+          "cues": [
+            "similar attacks in the past",
+            "earlier ultrasound reports",
+            "stones found on any scan",
+            "previous hospital admission for pain",
+            "gallbladder treatment taken before"
+          ],
+          "reply": "For two years I have had the same evening pain again and again. One year ago a scan at the district hospital showed stones in the gallbladder, but I took only painkillers.",
+          "key": true,
+          "skillId": "skill.hx.cholelithias.risk"
+        },
+        "weight_appetite": {
+          "cues": [
+            "loss of appetite recently",
+            "unintentional weight loss",
+            "clothes becoming loose",
+            "eating normally between attacks",
+            "taste changes or early fullness"
+          ],
+          "reply": "Between attacks I eat normally. In the last two days I have eaten almost nothing because of the pain, but my weight was steady before this.",
+          "key": true
+        },
+        "comorbidity_check": {
+          "cues": [
+            "diabetes or blood pressure",
+            "thyroid or heart disease",
+            "previous operations",
+            "blood transfusions given",
+            "asthma or tuberculosis history"
+          ],
+          "reply": "I have sugar for which I take one tablet daily. No blood pressure problem, no operation, no transfusions.",
+          "key": true
+        },
+        "medicine_intake": {
+          "cues": [
+            "which tablets do you take",
+            "painkillers used in attacks",
+            "antacids or gas medicines",
+            "contraceptive pills or hormones",
+            "antibiotics started recently"
+          ],
+          "reply": "Only metformin for sugar and dicyclomine during attacks. No hormones, no antibiotics yet.",
+          "key": true
+        },
+        "diet_pattern": {
+          "cues": [
+            "your daily cooking medium",
+            "mustard oil or ghee use",
+            "skipping breakfast habit",
+            "vegetarian or non vegetarian diet",
+            "water intake through the day"
+          ],
+          "reply": "We cook in mustard oil with tadka daily, and I often skip breakfast while packing tiffins. Mostly vegetarian food.",
+          "key": false
+        },
+        "family_thread": {
+          "cues": [
+            "gallstones in the family",
+            "mother or sister operated",
+            "gallbladder removal in relatives",
+            "family history of jaundice",
+            "anyone at home with similar pain"
+          ],
+          "reply": "My elder sister had her gallbladder removed by operation five years ago for the same kind of pain.",
+          "key": true,
+          "skillId": "skill.hx.cholelithias.risk"
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Febrile and uncomfortable, lying still with knees drawn up, reluctant to move or take a deep breath. Sclera examined in daylight show no yellow tinge.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Temperature 38.6 C. Pulse 102 per minute regular. Blood pressure 128/82. Respiratory rate 20 per minute. SpO2 98 percent on room air.",
+          "abnormal": true
+        },
+        "skill.exam.surg.cholecystitis_signs": {
+          "finding": "Positive Murphy sign: sudden arrest of inspiration with a wince as the descending gallbladder meets the fingers below the right costal margin. Absent on the left side. Tender hyperaesthetic patch behind between the lower ribs on the right.",
+          "abnormal": true
+        },
+        "skill.exam.surg.courvoisier_sign": {
+          "finding": "Gallbladder not palpable. No globular swelling below the liver edge. Liver edge smooth and non tender.",
+          "abnormal": false
+        },
+        "skill.exam.surg.peritonitis_signs": {
+          "finding": "Guarding localised to the right hypochondrium with rebound tenderness there. Rest of the abdomen soft with no board like rigidity. Bowel sounds present.",
+          "abnormal": true
+        },
+        "skill.exam.surg.tenderness_rebound": {
+          "finding": "Maximum tenderness at the gallbladder point below the ninth costal cartilage at the outer rectus border. No shifting tenderness to the left iliac fossa.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "usg",
+        "cbc",
+        "lft"
+      ],
+      "investigations": {
+        "usg": {
+          "label": "Abdominal ultrasound",
+          "indicated": true,
+          "result": "Multiple mobile gallstones with acoustic shadowing. Wall thickened with a thin rim of pericholecystic fluid. Sonographic Murphy positive. Common duct normal in calibre with no stone seen.",
+          "note": "This confirms stones with all three imaging features of cholecystitis and no duct dilatation, so no MRCP is needed today."
+        },
+        "cbc": {
+          "label": "Complete blood count",
+          "indicated": true,
+          "result": "Raised total leucocyte count with neutrophil predominance. Haemoglobin and platelets within normal limits.",
+          "note": "A neutrophil leucocytosis fits acute bacterial inflammation over simple colic and feeds the Tokyo systemic criterion."
+        },
+        "lft": {
+          "label": "Liver function tests",
+          "indicated": true,
+          "result": "Bilirubin and alkaline phosphatase within normal limits. Transaminases mildly raised.",
+          "note": "Normal bilirubin with no duct dilatation keeps the disease in the gallbladder; raised tests alone would have meant mapping the duct."
+        },
+        "crp": {
+          "label": "C reactive protein",
+          "indicated": true,
+          "result": "Raised above normal.",
+          "note": "Supports the systemic arm of Tokyo; a normal value would not have excluded cholecystitis with this story and scan."
+        },
+        "amylase": {
+          "label": "Serum amylase and lipase",
+          "indicated": true,
+          "result": "Within normal limits.",
+          "note": "Sent because epigastric pain through to the back overlaps with pancreatitis; normal values close that door."
+        },
+        "mrcp": {
+          "label": "Magnetic resonance cholangiopancreatography",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Not indicated: no jaundice, normal bilirubin and a normal calibre duct. Reserve it for suspected duct stones, not for every gallbladder."
+        },
+        "erect_cxr": {
+          "label": "Erect chest radiograph",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Not indicated: the pain is localised with a positive Murphy sign and there are no chest symptoms. Ordered only if basal pneumonia enters the differential."
+        }
+      },
+      "differentialModel": {
+        "answer": "Acute calculous cholecystitis on background cholelithiasis. Consider biliary colic, a common duct stone with cholangitis, acute pancreatitis, peptic ulcer disease, gallbladder cancer, and viral hepatitis.",
+        "accept": [
+          "acute cholecystitis",
+          "biliary colic",
+          "choledocholithiasis",
+          "ascending cholangitis",
+          "acute pancreatitis",
+          "peptic ulcer disease",
+          "carcinoma of the gallbladder",
+          "acute viral hepatitis"
+        ],
+        "minMatch": 3
+      },
+      "diagnosis": {
+        "answer": "Acute calculous cholecystitis with cholelithiasis, Tokyo definite, grade one, with no evidence of a common duct stone.",
+        "accept": [
+          "acute cholecystitis",
+          "cholecystitis",
+          "cholelithiasis",
+          "gallstones"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Analgesia with an anti inflammatory and an antiemetic, fluids, antibiotics bridging to surgery, an early laparoscopic cholecystectomy within the week, low fat diet counselling with sugar control, and referral onwards if duct drainage is ever needed.",
+        "accept": [
+          "analgesia",
+          "antibiotic",
+          "cholecystectomy",
+          "laparoscopic",
+          "ultrasound",
+          "fluids",
+          "low fat",
+          "referral"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The tempo decides: years of evening attacks that settled, then one attack unrelenting beyond a day with fever arriving after pain, moves colic to cholecystitis without a single test.",
+        "A positive Murphy sign with a left sided control is the bedside diagnosis here; the scan then confirms and grades rather than discovering.",
+        "No jaundice with normal bilirubin and a normal calibre duct keeps the disease in the gallbladder, which is why MRCP is correctly withheld.",
+        "Her diabetes, multiparity, family history and eastern Indian residence all raised the prior probability long before this attack, and belong in the summary.",
+        "Grade one disease within two days of pain at a centre with laparoscopic expertise means early cholecystectomy, not weeks of antibiotics followed by interval surgery."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

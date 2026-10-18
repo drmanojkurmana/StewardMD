@@ -1,0 +1,1162 @@
+{
+  "_comment": "Paediatric anaemia pathway: iron deficiency as the common mimic, beta thalassaemia major as the disease that must not be missed. Shared paediatric and core skills carry the examination; this file adds the anaemia reasoning, workup, diagnosis and treatment skills. History and presentation skills live in the shared fragment shared-anaemia-thalassaemia-child.json and are merged into the pack by the lead.",
+  "id": "anaemia-thalassaemia-child",
+  "name": "Anaemia and thalassaemia in children",
+  "fullName": "Anaemia and thalassaemia in children (Iron deficiency and beta thalassaemia major)",
+  "subtitle": "Approach to anaemia",
+  "system": "paediatrics",
+  "kbRef": "beta_thalassemia",
+  "oneLine": "Why a child looks pale, and how a family story with a big spleen points to thalassaemia",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "Low haemoglobin for age, and why small red cells narrow the field fast",
+      "skills": [
+        "skill.reasoning.athal.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the child",
+      "blurb": "The child, the parent, and permission before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.paed.rapport",
+        "skill.approach.paed.consent_assent"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age, informant and community set the probability before a symptom is mentioned",
+      "skills": [
+        "skill.particulars.demographics",
+        "skill.hx.anaemia.particulars"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In a pale child, age and community carry unusual weight: pallor presenting in the second half of infancy in a family from a carrier community should raise thalassaemia early, while pallor in a toddler on prolonged bottle milk feeds points first to iron lack. Record who gives the history, usually the mother, and any consanguinity directly."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Pallor noticed by the mother, feeds, pica, worms, jaundice and transfusions",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.paed.presenting_complaint",
+        "skill.hx.anaemia.illness"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect the complaint in the mother's words: the child looks pale, tires in play, or eats mud or chalk. Pallor noticed on the face or palms over weeks, with poor weight gain alongside, is the typical opening for both iron deficiency and thalassaemia."
+        },
+        "skill.hx.paed.presenting_complaint": {
+          "expect": "Fix the sequence: when the paleness was first noticed, what feeds the child takes with how much milk, whether earth or chalk is eaten, whether worms have been passed, and whether blood or iron tonics have already been given elsewhere."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "Diet, immunisation, past transfusions and the family pedigree",
+      "skills": [
+        "skill.hx.paed.diet_calorie_protein",
+        "skill.hx.paed.immunisation",
+        "skill.hx.paed.family_pedigree",
+        "skill.hx.anaemia.background"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Pallor where it shows first, growth that has stalled, and vitals that warn",
+      "skills": [
+        "skill.gen.paed.appearance",
+        "skill.gen.paed.vitals",
+        "skill.gen.paed.pallor",
+        "skill.exam.paed.weight"
+      ],
+      "emphasis": {
+        "skill.gen.paed.appearance": {
+          "expect": "Look for frontal bossing of the skull and prominence of the upper jaw in a chronically under-transfused child, with a pot belly from liver and spleen enlargement. An alert but tired toddler who lags in play fits chronic anaemia rather than acute illness."
+        },
+        "skill.gen.paed.vitals": {
+          "expect": "Expect a fast pulse and fast breathing with a wide pulse pressure in severe chronic anaemia, with a soft flow murmur to match. Fever at presentation more often marks intercurrent infection than the anaemia itself."
+        },
+        "skill.gen.paed.pallor": {
+          "expect": "Read pallor at the lower palpebral conjunctiva, the dorsum of the tongue, and the nail beds; loss of colour from the palmar and plantar creases marks severe pallor. Add spooning of the nails and cracks at the mouth angles when iron lack is in question."
+        },
+        "skill.exam.paed.weight": {
+          "expect": "Plot weight and height and read the trend, not one point: faltering growth with anaemia favours a chronic cause such as thalassaemia, while preserved growth with pallor keeps nutritional iron lack higher on the list."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Systemic examination",
+      "blurb": "The belly holds the signs: liver, spleen, and a heart working overtime",
+      "skills": [
+        "skill.exam.paed.gi.inspection",
+        "skill.exam.paed.gi.liver",
+        "skill.exam.paed.gi.spleen",
+        "skill.exam.paed.cvs.auscultation"
+      ],
+      "emphasis": {
+        "skill.exam.paed.gi.inspection": {
+          "expect": "Expect a uniformly full belly with visible veins when liver and spleen are both enlarged. Bossing of the skull and maxillary overgrowth are read from the head and face before the hands move to the belly."
+        },
+        "skill.exam.paed.gi.liver": {
+          "expect": "Expect a firm, smooth liver edge several centimetres below the ribs in thalassaemia major from extramedullary blood making and congestion. A tender liver with fever points instead to intercurrent infection or hepatitis."
+        },
+        "skill.exam.paed.gi.spleen": {
+          "expect": "Expect a firm spleen, often large, that grows with under-transfusion and shrinks after transfusion. A rapidly enlarging spleen with falling counts means hypersplenism and rising transfusion need, which changes the plan towards referral."
+        },
+        "skill.exam.paed.cvs.auscultation": {
+          "expect": "Expect a soft systolic flow murmur at the base from thin blood moving fast, with a venous hum at the neck. A loud murmur with thrill, or signs of heart failure, needs its own cardiac explanation rather than being filed under anaemia."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the anaemia picture together",
+      "blurb": "Ineffective blood making explains every finding you elicited",
+      "skills": [
+        "skill.reasoning.athal.findings"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Three sentences that contain the child",
+      "skills": [
+        "skill.reasoning.athal.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Iron lack first, trait and major next, and the haemolytic mimics after",
+      "skills": [
+        "skill.reasoning.athal.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Count and size, film and iron, then the haemoglobin pattern that decides",
+      "skills": [
+        "skill.investigation.athal.workup",
+        "skill.annex.paed.normal_biochemical_values"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and severity",
+      "blurb": "Name the form, grade the burden, and know when to refer",
+      "skills": [
+        "skill.reasoning.athal.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Transfusion to sustain growth, chelation to prevent overload, family counsel always",
+      "skills": [
+        "skill.treatment.athal.care"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this child to your consultant",
+      "skills": [
+        "skill.present.case",
+        "skill.present.anaemia.child"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.athal.abdomen_exam",
+        "title": "Examine the anaemic child",
+        "task": "This 3-year-old boy is pale with a swollen belly. Examine him for pallor and abdominal organ enlargement, and present your findings.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.paed.rapport",
+          "skill.gen.paed.pallor",
+          "skill.exam.paed.weight",
+          "skill.exam.paed.gi.inspection",
+          "skill.exam.paed.gi.liver",
+          "skill.exam.paed.gi.spleen",
+          "skill.exam.paed.cvs.auscultation"
+        ],
+        "examinerQuestions": [
+          "Show where you read pallor in this child, and grade what you found.",
+          "Describe the liver and spleen you felt: size, surface, edge and tenderness.",
+          "You hear a soft systolic murmur. Is it part of the anaemia, and what would make you think otherwise?"
+        ]
+      },
+      {
+        "id": "osce.athal.history_counsel",
+        "title": "Take a history and counsel the family",
+        "task": "The mother of a 2-year-old girl says her daughter looks pale and eats mud. Take a focused history in six minutes and be ready to explain your plan to the mother.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.paed.consent_assent",
+          "skill.hx.chief_complaints",
+          "skill.hx.paed.presenting_complaint",
+          "skill.hx.anaemia.illness",
+          "skill.hx.anaemia.background"
+        ],
+        "examinerQuestions": [
+          "Take me through the feeds, pica and worm history you would draw out of this mother.",
+          "Which two laboratory results would separate iron deficiency from thalassaemia here?",
+          "The mother asks whether her next child will have the same illness. What do you tell her?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.reasoning.athal.basics",
+      "skill.reasoning.athal.findings",
+      "skill.reasoning.athal.differential",
+      "skill.investigation.athal.workup",
+      "skill.reasoning.athal.diagnosis",
+      "skill.treatment.athal.care",
+      "skill.gen.paed.pallor",
+      "skill.exam.paed.gi.spleen"
+    ]
+  },
+  "skills": {
+    "skill.reasoning.athal.basics": {
+      "id": "skill.reasoning.athal.basics",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "What anaemia means in a child",
+      "oneLine": "Low haemoglobin for age, and why small red cells narrow the field fast",
+      "why": "Anaemia in children is defined against age, not against adult numbers, and the red cell size on a routine count already separates the common nutritional cause from the inherited one. Holding these two facts lets the student order one sensible panel instead of a battery.",
+      "teach": [
+        {
+          "heading": "Low haemoglobin for the age",
+          "body": "Anaemia means haemoglobin below the cutoff for the age: under 11 g per dL from 6 months to 6 years, and under 12 g per dL from 6 to 14 years. Haemoglobin carries oxygen, so a low value shows as pallor of the face and palms, tiredness in play, poor appetite and, over months, faltering growth and learning."
+        },
+        {
+          "heading": "Small cells point one way, other sizes another",
+          "body": "Microcytic hypochromic cells, low MCV with low MCH, mean either too little iron to build haem or too few globin chains to build haemoglobin. A Mentzer index below 13, MCV divided by red cell count, favours thalassaemia trait over iron lack. Normal or large cells with a low count point instead to combined deficiency, blood loss with recovery, haemolysis, marrow failure or chronic disease."
+        },
+        {
+          "heading": "Thalassaemia is an inherited globin defect",
+          "body": "In beta thalassaemia the beta globin chains are reduced or absent, so unpaired alpha chains collect inside red cell precursors and destroy them in the marrow, while the cells that escape survive poorly in the blood. The child typically pales in the second half of the first year as protective fetal haemoglobin falls. Inheritance is autosomal recessive, so carrier parents face the same risk in every pregnancy and siblings need screening."
+        },
+        {
+          "heading": "Size patterns at a glance",
+          "table": {
+            "cols": ["Pattern", "Common cause", "Next test"],
+            "rows": [
+              ["Small cells, low ferritin", "Iron deficiency", "Diet, worm and blood loss history"],
+              ["Small cells, normal or high ferritin", "Thalassaemia trait or major", "Haemoglobin pattern by HPLC"],
+              ["Normal cells with jaundice", "Haemolysis", "Reticulocyte count and film"],
+              ["Large cells with sore tongue", "Folate or B12 lack", "Diet history and levels"]
+            ]
+          }
+        }
+      ],
+      "pitfalls": [
+        "Calling a child anaemic against adult cutoffs, so borderline values in toddlers are misread.",
+        "Giving iron to every microcytic child without iron studies, which feeds nothing in thalassaemia and delays its diagnosis.",
+        "Reading MCV alone without the red cell count, losing the Mentzer clue that separates trait from iron lack."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What haemoglobin cutoffs define anaemia in young and older children?",
+          "a": "Under 11 g per dL from 6 months to 6 years, and under 12 g per dL from 6 to 14 years.",
+          "accept": ["11", "12", "cutoff"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "MCV is low. How does the Mentzer index help, and what value favours trait?",
+          "a": "The Mentzer index, MCV divided by red cell count, below 13 favours thalassaemia trait over iron deficiency.",
+          "accept": ["mentzer", "13", "trait"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does beta thalassaemia major declare itself in the second half of infancy?",
+          "a": "Protective fetal haemoglobin falls over the first year, unmasking the missing beta chains, so pallor, poor growth and organ enlargement follow.",
+          "accept": ["fetal haemoglobin", "beta chains", "first year"],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "beta_thalassemia: clinicalPearls"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "iron_deficiency_and_microcytic_anaemias: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Anaemia: definition and classification"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.athal.findings": {
+      "id": "skill.reasoning.athal.findings",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "The thalassaemia picture and its mimic",
+      "oneLine": "One mechanism, marrow working overtime, and why iron lack looks different",
+      "why": "Chronic ineffective blood making builds a body-wide picture, bossed skull, big liver and spleen, stalled growth, that iron deficiency never builds. Reading that picture at the bedside saves the child from months of useless iron tonics.",
+      "teach": [
+        {
+          "heading": "What chronic under-transfusion builds",
+          "body": "Untreated or under-transfused disease drives the marrow to expand: frontal bossing of the skull with overgrowth of the upper jaw, thinning hair-on-end bone, and a pot belly from liver and spleen enlargement. Growth falters and puberty lags because chronic anaemia and iron toxicity together slow the body. Transfusion shrinks the spleen and restrains this expansion, which is why the picture marks inadequate treatment."
+        },
+        {
+          "heading": "Iron deficiency looks different",
+          "body": "Iron lack shows pallor with easy tiredness, irritability and poor play, craving for earth, chalk or raw rice, and spoon shaped nails with cracks at the mouth angles. Growth is usually preserved early, the spleen is not enlarged, and the story holds prolonged bottle milk feeds, poor meat and green intake, or worms. A big firm spleen argues against pure iron lack."
+        },
+        {
+          "heading": "Yellow eyes and dark urine change the family",
+          "body": "Haemolysis adds yellow eyes, dark urine and later gallstone colic to pallor. Episodic jaundice after fava beans, infection or oxidant drugs suggests G6PD lack; sudden pallor with jaundice and a positive family story suggests immune haemolysis. Pallor with fever, bleeding and bone pain instead warns of marrow failure or leukaemia and needs urgent referral rather than iron."
+        }
+      ],
+      "pitfalls": [
+        "Treating bossing and maxillary overgrowth as rickets, missing the marrow expansion behind them.",
+        "Accepting months of iron tonics without response instead of asking why the anaemia will not correct.",
+        "Filing yellow eyes under hepatitis without checking the urine colour, reticulocytes and family history."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three bedside features of chronic under-transfused thalassaemia major.",
+          "a": "Frontal bossing with maxillary overgrowth, firm liver and spleen enlargement, and faltering growth with delayed puberty.",
+          "accept": ["bossing", "spleen", "growth"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A pale toddler eats mud and has spoon shaped nails but no organ enlargement. What does this favour?",
+          "a": "Iron deficiency: pica with koilonychia and no spleen enlargement fits nutritional iron lack, not thalassaemia major.",
+          "accept": ["iron deficiency", "pica", "koilonychia"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does adequate transfusion shrink the spleen and restrain bone change?",
+          "a": "Transfused red cells suppress the child's own ineffective erythropoiesis, so marrow expansion and extramedullary blood making recede.",
+          "accept": ["ineffective erythropoiesis", "marrow expansion", "extramedullary"],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "beta_thalassemia: clinicalPearls"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "beta_thalassemia: pathophysiology"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Anaemia: clinical features in children"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.athal.summary": {
+      "id": "skill.reasoning.athal.summary",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "The clinical summary",
+      "oneLine": "Age, tempo, syndrome and family in three sentences",
+      "why": "A paediatric summary carries the informant, the growth story and the family risk alongside the syndrome, because in inherited anaemia the next sibling is the second patient. A summary that omits consanguinity or past transfusions leaves the plan hanging.",
+      "teach": [
+        {
+          "heading": "Four elements in order",
+          "body": "Name the child with age and informant, state the tempo of pallor with feeds and growth, name the syndrome in abstract terms with the key positives, and close with severity and family risk. Relevant negatives, no jaundice, no bleeding, no prior transfusion, do real work ruling out mimics."
+        },
+        {
+          "heading": "A worked example",
+          "body": "This 3-year-old boy, reported by his mother, has pallor noticed since 8 months of age with poor weight gain, frontal bossing and a firm spleen of 4 cm, without jaundice or bleeding. Blood shows severe microcytic anaemia with a thalassaemic film and a major haemoglobin pattern. In summary this is beta thalassaemia major in a transfusion-naive child of carrier parents, needing transfusion planning, iron surveillance and family screening."
+        }
+      ],
+      "pitfalls": [
+        "Omitting the informant and reliability, so the listener cannot weigh a vague pallor story.",
+        "Describing pallor without tempo, feeds and growth, which are what separate chronic inherited from nutritional causes.",
+        "Closing without the family risk and the plan for siblings, the two things the consultant will ask first."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What element belongs in a thalassaemia summary that a fever summary would not carry?",
+          "a": "The family risk: consanguinity, carrier status of parents, and the screening plan for siblings and future pregnancies.",
+          "accept": ["family risk", "consanguinity", "siblings"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why do relevant negatives earn their place in an anaemia summary?",
+          "a": "No jaundice, no bleeding and no prior transfusion each close off a whole mimic family, haemolytic, marrow failure and treated disease.",
+          "accept": ["jaundice", "bleeding", "transfusion"],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "child",
+          "text": "States the child with age, informant, tempo and growth"
+        },
+        {
+          "id": "syndrome",
+          "text": "Names the syndrome with key positives and relevant negatives"
+        },
+        {
+          "id": "family",
+          "text": "Includes family risk and the plan for siblings"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "beta_thalassemia: prognosis"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Anaemia: approach to the pale child"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.athal.differential": {
+      "id": "skill.reasoning.athal.differential",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Differential diagnosis",
+      "oneLine": "Iron lack first, trait and major next, and the haemolytic mimics after",
+      "why": "Most pale toddlers are iron deficient, but the one with thalassaemia major pays for every month of missed diagnosis with marrow expansion and iron loading. The differential is a short ordered list with one test separating each neighbour.",
+      "teach": [
+        {
+          "heading": "Iron deficiency against thalassaemia",
+          "body": "Iron lack brings pica, spoon nails and a milk-heavy diet with no organ enlargement, and ferritin below 15 proves it. Thalassaemia trait brings milder anaemia with many small cells, a Mentzer index below 13 and a normal ferritin, while major brings severe anaemia with bossing, organ enlargement and near absent HbA. Iron studies plus the haemoglobin pattern separate all three without a marrow test."
+        },
+        {
+          "heading": "The haemolytic mimics",
+          "body": "Sickle cell disease adds bone pain crises, hand foot swelling in infancy and Howell Jolly bodies to the film, common where malaria belts overlap carrier zones. G6PD lack and immune haemolysis declare with episodic jaundice and dark urine rather than steady pallor from infancy. Anaemia of chronic disease follows infection, inflammation or renal disease and never shows the thalassaemic film or pattern."
+        },
+        {
+          "heading": "When pallor warns of the marrow",
+          "body": "Pallor with persistent fever, bleeding, bone pain or very high white cells warns of leukaemia or marrow failure and needs same-week referral to a paediatric centre, not iron. Rapidly enlarging spleen with falling counts means hypersplenism. New heart failure, arrhythmia or fainting in a transfused child warns of iron cardiomyopathy and needs urgent cardiac review."
+        },
+        {
+          "heading": "Telling the three microcytic cousins apart",
+          "table": {
+            "cols": ["Feature", "Iron deficiency", "Thalassaemia trait", "Thalassaemia major"],
+            "rows": [
+              ["Story", "Milk feeds, pica, worms", "Mild pallor, family carrier", "Pale since infancy, poor growth"],
+              ["Spleen", "Not enlarged", "Absent or small", "Firm and often large"],
+              ["Mentzer index", "Above 13", "Below 13", "Below 13"],
+              ["Ferritin", "Low", "Normal", "Normal to high"],
+              ["Hb pattern", "Normal", "Raised HbA2", "Little or no HbA, high HbF"]
+            ]
+          }
+        }
+      ],
+      "pitfalls": [
+        "Treating trait as iron deficiency for months because both are microcytic, missing the normal ferritin that already separates them.",
+        "Forgetting sickle disease in a child from a tribal belt, where bone pain is filed under growing pains.",
+        "Reassuring a pale child with fever and bleeding as viral illness without a blood count."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three differentials for microcytic anaemia in a toddler.",
+          "a": "Iron deficiency anaemia, thalassaemia trait and thalassaemia major, with sickle cell disease where the region fits.",
+          "accept": ["iron deficiency anaemia", "thalassaemia trait", "thalassaemia major"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Ferritin is normal with small cells and a Mentzer index below 13. What does this favour?",
+          "a": "Thalassaemia trait: microcytosis with preserved iron stores and a low Mentzer index points to globin defect, confirmed by raised HbA2 on HPLC.",
+          "accept": ["thalassaemia trait", "mentzer", "HbA2"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Pallor with fever, gum bleeding and bone pain in a 4-year-old. What is your next step?",
+          "a": "Urgent full blood count with film and same-week referral for suspected leukaemia or marrow failure, not empiric iron.",
+          "accept": ["leukaemia", "marrow failure", "referral"],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Offers a differential spanning nutritional, inherited and marrow causes"
+        },
+        {
+          "id": "separation",
+          "text": "States the test that separates iron lack from trait and major"
+        },
+        {
+          "id": "alarm",
+          "text": "Names the red flags that force urgent referral"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "beta_thalassemia: additionalDifferentials"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "iron_deficiency_and_microcytic_anaemias: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Anaemia: differential diagnosis in children"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.investigation.athal.workup": {
+      "id": "skill.investigation.athal.workup",
+      "kind": "investigation",
+      "system": "paediatrics",
+      "title": "Confirming thalassaemia and grading the burden",
+      "oneLine": "Count and size, film and iron, then the haemoglobin pattern that decides",
+      "why": "One ordered panel answers three questions in sequence: how severe, whether iron lack explains it, and which globin defect remains. Ordered blindly the tests confuse and the marrow is sampled for no reason; ordered this way each result earns the next.",
+      "teach": [
+        {
+          "heading": "Count and size first",
+          "body": "Send a full blood count with red cell indices and a reticulocyte count: severe microcytic anaemia with many small cells and a high reticulocyte count fits thalassaemia major, while a low reticulocyte count with normal or large cells warns of marrow failure instead. Work out the Mentzer index from the same count: below 13 favours trait over iron lack."
+        },
+        {
+          "heading": "Film and iron studies next",
+          "body": "Read the peripheral film for marked variation in size and shape with target cells and nucleated red cells, the thalassaemic signature, against pencil cells and low platelets that favour iron lack. Send iron studies with ferritin: frankly low ferritin proves iron deficiency, while normal or raised ferritin with small cells points to globin defect. Check a stool test for worms and a urine test where indicated, since both shape treatment."
+        },
+        {
+          "heading": "The haemoglobin pattern decides",
+          "body": "Order haemoglobin HPLC or electrophoresis with quantification of HbA, HbA2 and HbF: little or no HbA with very high HbF marks major, raised HbA2 with mild anaemia marks trait. Confirm with beta globin gene study where available and screen parents and siblings as carriers. Once transfused, track iron burden with serial ferritin plus cardiac and liver MRI, and never start with marrow aspiration when the pattern already answers."
+        }
+      ],
+      "pitfalls": [
+        "Sampling marrow before the haemoglobin pattern, putting the child through a painful test that adds nothing.",
+        "Reading a normal ferritin during infection as proof of adequate iron, so true iron lack hides behind inflammation.",
+        "Stopping at trait on HPLC in a severely anaemic child instead of asking what second cause deepens it."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What three results make the thalassaemia major pattern on first workup?",
+          "a": "Severe microcytic anaemia with target cells and nucleated red cells on film, and little or no HbA with very high HbF on HPLC.",
+          "accept": ["microcytic", "target cells", "HbF"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Ferritin is low with small cells and a milk-heavy diet. What is the diagnosis and the next step?",
+          "a": "Iron deficiency anaemia: correct the diet, deworm, give iron by the haematology guidance and recheck haemoglobin for response.",
+          "accept": ["iron deficiency anaemia", "deworm", "recheck haemoglobin"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A transfused child shows rising ferritin. How do you track and act on iron burden?",
+          "a": "Follow serial ferritin with cardiac and liver MRI for tissue iron, adjust chelation with haematology, and survey heart, liver and endocrine function.",
+          "accept": ["ferritin", "MRI", "chelation"],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "sequence",
+          "text": "Orders count, film and iron before the haemoglobin pattern"
+        },
+        {
+          "id": "pattern",
+          "text": "Interprets HbA, HbA2 and HbF to name trait or major"
+        },
+        {
+          "id": "burden",
+          "text": "Plans ferritin and MRI surveillance for iron burden"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "beta_thalassemia: additionalInvestigations"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "iron_deficiency_and_microcytic_anaemias: clinicalPearls"
+        },
+        {
+          "source": "Indian Academy of Pediatrics",
+          "locator": "Anaemia: laboratory workup in children"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.athal.diagnosis": {
+      "id": "skill.reasoning.athal.diagnosis",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Diagnosis and severity: naming the form",
+      "oneLine": "Trait, intermedia or major, and the burden that decides referral",
+      "why": "Trait needs counsel alone while major needs lifelong transfusion, so the name given to the family is itself the treatment decision. Grading the burden alongside, growth, spleen pace, heart and hormones, decides what the district hospital holds and what the medical college takes.",
+      "teach": [
+        {
+          "heading": "Three forms, three plans",
+          "body": "Trait means one faulty gene with mild microcytic anaemia and raised HbA2: counsel and screen the family, no transfusion. Intermedia means moderate anaemia needing only occasional transfusion with close growth watch. Major means little or no HbA with very high HbF and severe anaemia from infancy: regular transfusion with chelation under haematology, without which marrow expansion and iron damage progress."
+        },
+        {
+          "heading": "Grading the burden",
+          "body": "Grade severity by haemoglobin trend with transfusion need, growth chart direction, spleen pace and hypersplenism, and iron burden by ferritin with cardiac and liver MRI. Add endocrine survey: thyroid, glucose and puberty staging, since iron injures glands silently. A complete statement names the form, the pattern, the burden and the family screening done."
+        },
+        {
+          "heading": "Referral thresholds",
+          "body": "Refer to the medical college paediatric haematology unit at diagnosis of major for the transfusion plan, with urgent referral for heart failure or arrhythmia, rapidly enlarging spleen with falling counts, or pallor with fever and bleeding suggesting marrow disease. Day to day transfusion can then run at the district day-care unit with shared records, and every pregnancy in the family gets antenatal screening counsel."
+        }
+      ],
+      "pitfalls": [
+        "Labelling trait as major on one HPLC without the clinical picture, alarming a family that needs counsel only.",
+        "Stating major without grading iron burden, so chelation starts years late.",
+        "Keeping a failing heart or hypersplenism at the district unit instead of referring the same week."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How do trait, intermedia and major differ in plan?",
+          "a": "Trait needs counsel and family screening only; intermedia needs occasional transfusion with growth watch; major needs regular transfusion with chelation under haematology.",
+          "accept": ["counsel", "occasional transfusion", "regular transfusion"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What goes into grading burden besides haemoglobin?",
+          "a": "Growth direction, spleen pace with hypersplenism, ferritin with cardiac and liver MRI, and thyroid, glucose and puberty survey.",
+          "accept": ["growth", "ferritin", "MRI"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which findings force urgent referral from the district unit?",
+          "a": "Heart failure or arrhythmia from iron cardiomyopathy, rapidly enlarging spleen with falling counts, or pallor with fever and bleeding warning of marrow disease.",
+          "accept": ["heart failure", "hypersplenism", "marrow disease"],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "form",
+          "text": "Names trait, intermedia or major with its pattern and plan"
+        },
+        {
+          "id": "burden",
+          "text": "Grades growth, spleen, iron and endocrine burden"
+        },
+        {
+          "id": "referral",
+          "text": "States what stays local and what goes to haematology now"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "beta_thalassemia: redFlags"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "beta_thalassemia: prognosis"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Thalassaemia: diagnosis and severity"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.treatment.athal.care": {
+      "id": "skill.treatment.athal.care",
+      "kind": "treatment",
+      "system": "paediatrics",
+      "title": "Managing thalassaemia and iron lack",
+      "oneLine": "Transfuse to sustain growth, chelate to prevent overload, counsel every family",
+      "why": "Regular transfusion with honest chelation lets a thalassaemic child grow into adulthood, while missed chelation trades childhood pallor for adult heart failure. Iron lack alongside is corrected by diet, deworming and iron by guidance, never by transfusion except in collapse.",
+      "teach": [
+        {
+          "heading": "Transfusion that sustains growth",
+          "body": "Transfusion-dependent disease needs regular red cell transfusion to correct anaemia, support growth and suppress ineffective blood making, planned with paediatric haematology and run through safe screened blood at the day-care unit. The schedule, thresholds and targets come from the treating haematologist and current guidance, not from memory.\n\nIron deficiency anaemia is treated with diet correction, deworming and oral iron by guidance with haemoglobin recheck, since response itself confirms the cause."
+        },
+        {
+          "heading": "Chelation that prevents overload",
+          "body": "Repeated transfusion inevitably loads iron, so chelation with deferoxamine, deferasirox or deferiprone is essential, chosen and monitored by haematology against ferritin with cardiac and liver MRI. Survey the heart, liver, thyroid, glucose and puberty at intervals because iron injures each silently. Under-transfusion and delayed chelation are the two errors that allow bone deformity and organ damage to progress."
+        },
+        {
+          "heading": "Spleen, vaccines and the cure question",
+          "body": "Give folic acid support and consider splenectomy only for hypersplenism or steeply rising transfusion need, with pre-splenectomy vaccination and post-splenectomy antibiotic prophylaxis. Keep immunisation, including pneumococcal vaccine, current throughout. Allogeneic stem cell transplantation cures selected patients with a matched donor, and newer gene-based options are emerging, so every family hears what exists without false promise."
+        },
+        {
+          "heading": "Family, follow up and the Indian setting",
+          "body": "Counsel carrier parents on recessive risk in every pregnancy with antenatal screening offered, screen siblings and the extended family, and link the family to parent support groups and available state support schemes through the medical social worker. Follow up tracks haemoglobin, growth, ferritin, heart, liver and hormones with haematology, cardiology and endocrinology input, with shared records between the district unit and the medical college."
+        }
+      ],
+      "pitfalls": [
+        "Starting iron in a thalassaemic child without studies, adding load to an already loading body.",
+        "Delaying chelation until the heart declares itself, when ferritin and MRI warned years earlier.",
+        "Repeating transfusions without growth, hormone and cardiac survey, so complications surface late."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the two pillars of thalassaemia major treatment?",
+          "a": "Regular red cell transfusion to sustain growth with chelation to prevent transfusional iron overload.",
+          "accept": ["transfusion", "chelation", "iron overload"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "When is splenectomy considered, and what must surround it?",
+          "a": "For hypersplenism or steeply rising transfusion need, with pre-splenectomy vaccination and post-splenectomy antibiotic prophylaxis.",
+          "accept": ["hypersplenism", "vaccination", "prophylaxis"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A transfused 12-year-old has poor growth and no puberty. What do you survey?",
+          "a": "Chronic anaemia control with ferritin and MRI burden, thyroid and glucose, puberty staging with gonadal axis, and cardiac and liver review with haematology and endocrinology.",
+          "accept": ["ferritin", "thyroid", "puberty"],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "beta_thalassemia: management"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "beta_thalassemia: pitfalls"
+        },
+        {
+          "source": "Indian Academy of Pediatrics",
+          "locator": "Thalassaemia: transfusion and chelation guidance"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of drug CLASS and principle. Specific agents, schedules, thresholds and durations must be taken from the treating paediatric haematologist and your current national or institutional guideline at the time of treatment. CliniX does not prescribe."
+    }
+  },
+  "cases": [
+    {
+      "id": "case.athal.kabir",
+      "initialVitals": {
+        "hr": 118,
+        "bpSystolic": 88,
+        "bpDiastolic": 56,
+        "rr": 32,
+        "spo2": 96,
+        "temp": 37.4,
+        "gcs": 15
+      },
+      "title": "A pale toddler with a pot belly",
+      "opening": "Meena brings her 3-year-old son Kabir to the paediatric OPD of the district hospital. He looks pale, his belly looks swollen, and he tires quickly in play. Introduce yourself to the mother and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Kabir Solanki",
+        "age": 3,
+        "sex": "male",
+        "occupation": "Anganwadi-going child",
+        "residence": "Small town, lives with parents and grandmother"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "what is the main problem",
+            "why have you brought him",
+            "tell me the main complaint",
+            "how can I help your child",
+            "what is troubling him"
+          ],
+          "reply": "Doctor, Kabir looks very pale for many months now, and his stomach keeps swelling. He gets tired fast and does not play like other children.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "onset_noticed": {
+          "cues": [
+            "when did you first notice the paleness",
+            "since when is he pale",
+            "how many months of paleness",
+            "sudden or gradual onset of pallor",
+            "at what age did it start"
+          ],
+          "reply": "He was a fair, active baby till about 8 months. After that the paleness crept in slowly and has only deepened since. It was never sudden.",
+          "key": true
+        },
+        "pallor_progress": {
+          "cues": [
+            "has the paleness increased over time",
+            "is the pallor getting worse",
+            "colour of eyes and palms",
+            "do his nails look white",
+            "progression of the paleness"
+          ],
+          "reply": "Yes, it keeps increasing. His eyes, tongue and palms all look white now. Earlier only the face looked pale.",
+          "key": true
+        },
+        "appetite_play_growth": {
+          "cues": [
+            "how is his appetite",
+            "does he play actively",
+            "weight gain over months",
+            "is he growing well",
+            "tires during play",
+            "growth and activity level"
+          ],
+          "reply": "He eats little and tires in minutes. His clothes from last year still fit him, and the anganwadi worker says his weight is not rising.",
+          "key": true
+        },
+        "milk_bottle_feeds": {
+          "cues": [
+            "how much milk does he drink",
+            "bottle feeding history",
+            "what does he eat in a day",
+            "meat eggs and green vegetables",
+            "daily diet recall"
+          ],
+          "reply": "He takes the bottle almost all day, three to four big bottles of diluted milk, and eats very little roti or dal. No eggs or meat in our house.",
+          "key": true
+        },
+        "pica_craving": {
+          "cues": [
+            "does he eat mud or chalk",
+            "craving for earth or clay",
+            "eats raw rice or soil",
+            "pica history",
+            "unusual eating habit"
+          ],
+          "reply": "No, he does not eat mud or chalk. He only wants milk and sometimes sucks on the bottle cap.",
+          "key": true
+        },
+        "worms_stool": {
+          "cues": [
+            "has he passed worms",
+            "worms in the stool",
+            "deworming medicine given",
+            "black or bloody stools",
+            "bleeding from motions"
+          ],
+          "reply": "No worms that I have seen, and no black or bloody motions. He got deworming syrup once at the anganwadi last year."
+        },
+        "bleeding_bruises": {
+          "cues": [
+            "bleeding from gums or nose",
+            "unusual bruises on the body",
+            "red spots under the skin",
+            "prolonged bleeding after cuts",
+            "any bleeding episodes"
+          ],
+          "reply": "No bleeding from anywhere, no bruises or red spots. Small cuts stop as usual.",
+          "key": true
+        },
+        "jaundice_eyes": {
+          "cues": [
+            "yellow colour of eyes",
+            "has he turned yellow",
+            "jaundice episodes",
+            "yellow urine passed",
+            "dark coloured urine"
+          ],
+          "reply": "His eyes look pale, not yellow. The urine is the usual colour, not dark.",
+          "key": true
+        },
+        "belly_swelling": {
+          "cues": [
+            "when did the belly swell",
+            "swelling of the stomach",
+            "pot belly since when",
+            "does the belly pain",
+            "abdominal distension noticed"
+          ],
+          "reply": "The stomach has been growing for about a year. It does not pain him, but his shirts ride up over it.",
+          "key": true
+        },
+        "breathless_play": {
+          "cues": [
+            "breathless during play",
+            "breathing fast on running",
+            "short of breath on exertion",
+            "does he pant quickly",
+            "difficulty breathing while playing"
+          ],
+          "reply": "Yes, after running a little he breathes fast and sits down. At rest he breathes normally."
+        },
+        "fever_repeated": {
+          "cues": [
+            "repeated fever episodes",
+            "frequent fevers",
+            "fever with chills",
+            "how often does he get fever",
+            "prolonged fever history"
+          ],
+          "reply": "He gets fever with cold every month or so, and it settles with syrup in two or three days. No long fevers."
+        },
+        "leg_pain_bones": {
+          "cues": [
+            "pain in legs or bones",
+            "bone pain crises",
+            "swelling of hands and feet",
+            "joint pains",
+            "limb pain episodes"
+          ],
+          "reply": "No, he never complains of leg or bone pain, and his hands and feet never swell."
+        },
+        "transfusions_before": {
+          "cues": [
+            "blood transfusion given before",
+            "has he received blood",
+            "admitted for transfusion",
+            "how many bottles of blood",
+            "past hospital admissions"
+          ],
+          "reply": "Never. No doctor has given him blood so far, and he has never stayed in hospital overnight.",
+          "key": true
+        },
+        "iron_medicines_given": {
+          "cues": [
+            "iron tonic given",
+            "what medicines is he taking",
+            "blood syrup prescribed",
+            "currently on any drugs",
+            "tonics from other doctors"
+          ],
+          "reply": "A private doctor gave a red iron syrup for two months, but the paleness did not improve at all, so we stopped it.",
+          "key": true
+        },
+        "birth_cry_weight": {
+          "cues": [
+            "was he born at full term",
+            "birth weight of the child",
+            "cried immediately after birth",
+            "hospital or home delivery",
+            "problems after birth"
+          ],
+          "reply": "Full term, normal delivery in the government hospital, cried at once. Birth weight was normal, about two and three quarter kilos."
+        },
+        "parents_consanguinity": {
+          "cues": [
+            "are the parents related by blood",
+            "parents born into related families",
+            "blood relation between the parents",
+            "relation between husband and wife",
+            "same community background of both parents"
+          ],
+          "reply": "Yes, my husband is my uncle's son. In our community such marriages are common.",
+          "key": true
+        },
+        "family_same_pallor": {
+          "cues": [
+            "anyone else pale in the family",
+            "similar illness in siblings",
+            "family history of anaemia",
+            "blood disease in relatives",
+            "siblings with transfusions"
+          ],
+          "reply": "My elder daughter is fine, but my brother's son gets blood every month at the medical college. They say he has the same blood problem.",
+          "key": true
+        },
+        "immunisation_vaccines": {
+          "cues": [
+            "vaccination card complete",
+            "immunisation up to date",
+            "which vaccines has he received",
+            "missed any injections",
+            "vitamin A doses given"
+          ],
+          "reply": "All injections till now are done, the anganwadi sister ticks the card every visit. Vitamin drops were given twice."
+        }
+      },
+      "exam": {
+        "skill.gen.paed.appearance": {
+          "finding": "Alert but tired toddler with frontal bossing of the skull and prominence of the upper jaw. Pot belly with visible abdominal veins. No distress at rest.",
+          "abnormal": true
+        },
+        "skill.gen.paed.vitals": {
+          "finding": "Pulse 118 regular with wide pulse pressure. Respiratory rate 32. Blood pressure 88/56. Temperature 37.4 C. SpO2 96 percent on room air.",
+          "abnormal": true
+        },
+        "skill.gen.paed.pallor": {
+          "finding": "Severe pallor of the lower palpebral conjunctiva, dorsum of tongue, nail beds and palmar creases. Mild spooning of the nails. No jaundice.",
+          "abnormal": true
+        },
+        "skill.exam.paed.weight": {
+          "finding": "Weight 11 kg and height 88 cm, both below the third centile, with a flat growth curve over the last year on the anganwadi card.",
+          "abnormal": true
+        },
+        "skill.exam.paed.gi.inspection": {
+          "finding": "Uniformly full belly with stretched skin and visible veins. No scar, no dilated chest veins, umbilicus central.",
+          "abnormal": true
+        },
+        "skill.exam.paed.gi.liver": {
+          "finding": "Liver firm, smooth and non-tender, 4 cm below the right costal margin in the midclavicular line. Span 9 cm. No bruit.",
+          "abnormal": true
+        },
+        "skill.exam.paed.gi.spleen": {
+          "finding": "Spleen firm and non-tender, 5 cm below the left costal margin towards the right iliac fossa, with a palpable notch. Moves with respiration.",
+          "abnormal": true
+        },
+        "skill.exam.paed.cvs.auscultation": {
+          "finding": "Soft systolic flow murmur at the left sternal edge with a venous hum at the neck. Normal heart sounds, no thrill, no added sounds in the lungs.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "fbc",
+        "blood_film",
+        "ferritin_iron",
+        "hplc"
+      ],
+      "investigations": {
+        "fbc": {
+          "label": "Full blood count with red cell indices",
+          "indicated": true,
+          "result": "Haemoglobin 6.8 g per dL. MCV 66 fL, MCH 20 pg. Red cell count high for the anaemia. Total leucocyte and platelet counts normal. Reticulocyte count raised at 6 percent.",
+          "note": "Severe microcytic anaemia with many small cells and a Mentzer index below 13: this is the thalassaemic pattern, not iron lack, and it earns the haemoglobin pattern next."
+        },
+        "blood_film": {
+          "label": "Peripheral blood film",
+          "indicated": true,
+          "result": "Marked variation in size and shape with target cells and nucleated red cells. No blasts. No sickle forms.",
+          "note": "Target cells with nucleated red cells and no blasts point to thalassaemia and close off leukaemia without a marrow test."
+        },
+        "ferritin_iron": {
+          "label": "Iron studies and serum ferritin",
+          "indicated": true,
+          "result": "Serum ferritin normal. Serum iron normal with normal binding capacity.",
+          "note": "Normal stores with small cells exclude iron deficiency as the driver, so iron tonics have nothing to correct here."
+        },
+        "hplc": {
+          "label": "Haemoglobin HPLC with quantification",
+          "indicated": true,
+          "result": "HbA 4 percent, HbA2 3 percent, HbF 93 percent. Normal HbA1c pattern absent.",
+          "note": "Near absent HbA with very high HbF is the major pattern: this single result names the disease and the lifelong plan."
+        },
+        "stool_test": {
+          "label": "Stool test for ova and occult blood",
+          "indicated": true,
+          "result": "No ova seen. Occult blood negative.",
+          "note": "Routine in a pale child on milk feeds, though the thalassaemic picture already explains this anaemia."
+        },
+        "gene_study": {
+          "label": "Beta globin gene study of child and parents",
+          "indicated": true,
+          "result": "Homozygous beta zero mutation in the child. Both parents carry one faulty gene.",
+          "note": "Confirms the inheritance for counselling and proves the carrier state in both parents for future pregnancies."
+        },
+        "marrow": {
+          "label": "Bone marrow aspiration",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Not indicated: the count, film, ferritin and HPLC already name major disease, and marrow adds pain without an answer. Reserve it for suspected marrow failure or leukaemia."
+        },
+        "b12_folate": {
+          "label": "Vitamin B12 and folate levels",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "Not indicated first line: the cells are small, not large, with no sore tongue or tingling. Revisit only if a second deficiency is suspected."
+        }
+      },
+      "differentialModel": {
+        "answer": "Beta thalassaemia major. Consider iron deficiency anaemia, beta thalassaemia trait, beta thalassaemia intermedia, and sickle cell disease.",
+        "accept": [
+          "thalassaemia major",
+          "beta thalassaemia",
+          "iron deficiency anaemia",
+          "iron deficiency",
+          "microcytic anaemia",
+          "beta thalassaemia trait",
+          "thalassaemia trait",
+          "beta thalassaemia intermedia",
+          "sickle cell disease",
+          "sickle cell anaemia"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Beta thalassaemia major, transfusion-naive, with growth faltering and hypersplenism-free iron burden at presentation.",
+        "accept": [
+          "thalassaemia major",
+          "beta thalassaemia",
+          "thalassemia"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Refer to paediatric haematology for a regular transfusion plan with chelation, folic acid support, immunisation review, growth and ferritin with MRI surveillance, and counselling with carrier and antenatal screening for the family.",
+        "accept": [
+          "transfusion",
+          "chelation",
+          "haematology",
+          "folic acid",
+          "ferritin",
+          "counselling",
+          "screening",
+          "referral"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "Pallor from 8 months with poor growth, bossing and a big spleen is thalassaemia until the HPLC says otherwise: the tempo and the family do half the diagnosis.",
+        "Two months of iron with no response is a result, not a failure: non-response to iron is an indication to test, not to repeat the tonic.",
+        "Consanguinity plus an affected cousin makes this autosomal recessive inheritance visible in one pedigree, and every future pregnancy needs antenatal counsel.",
+        "Normal ferritin with small cells excludes iron lack as the driver: this is the single result that stops useless iron.",
+        "Near absent HbA with very high HbF names major disease and its lifelong plan in one line, with no marrow test needed.",
+        "A firm 5 cm spleen that shrinks after transfusion is expected; a rapidly enlarging spleen with falling counts would instead mean hypersplenism and referral.",
+        "The flow murmur and wide pulse pressure belong to thin fast-moving blood, not to heart disease, but new failure or arrhythmia in a transfused child is iron cardiomyopathy until proven otherwise."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

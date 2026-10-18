@@ -1,0 +1,1190 @@
+{
+  "id": "neonatal-sepsis",
+  "name": "Neonatal sepsis",
+  "fullName": "Neonatal sepsis: early and late onset",
+  "system": "paediatrics",
+  "kbRef": "neonatal_sepsis_jaundice_metabolic",
+  "oneLine": "Systemic infection in the first 28 days of life, and the race between soft signs and shock",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What neonatal sepsis is, and why timing splits it in two",
+      "skills": [
+        "skill.reasoning.nsepsis.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the baby and mother",
+      "blurb": "Before a single question, with a newborn in the room",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.paed.rapport",
+        "skill.approach.paed.consent_assent"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Baby particulars",
+      "blurb": "Day of life, gestation, and weight set every probability before a symptom is mentioned",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In a neonate the particulars are the diagnosis half-written: day of life places the illness as early or late onset, gestation and birth weight set the vulnerability, and current weight against birth weight shows whether feeding has already failed. Take these before the history, not after."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of the illness",
+      "blurb": "Behaviour change in the words of the mother, anchored to time",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.paed.presenting_complaint",
+        "skill.hx.neonatal.sepsis_course"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "The complaint comes from the mother, not the patient, so record it in her words with the day of life of onset: poor feeding for two days, fever since yesterday, increased sleepiness. The behaviour change is the complaint."
+        },
+        "skill.hx.paed.presenting_complaint": {
+          "expect": "Anchor every change to when the baby was last completely well. A well interval of days before deterioration points to late onset disease, while illness from birth points to a perinatal cause."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Maternal, birth, and background history",
+      "blurb": "The risk ladder that decides how hard a soft sign is worked up",
+      "skills": [
+        "skill.hx.paed.neo.maternal_perinatal",
+        "skill.hx.paed.immunisation",
+        "skill.hx.neonatal.sepsis_risks"
+      ],
+      "emphasis": {
+        "skill.hx.paed.neo.maternal_perinatal": {
+          "expect": "Press for the membrane rupture interval, maternal fever, liquor colour and smell, and the length of labour. These four answers carry the early onset risk between them."
+        },
+        "skill.hx.paed.immunisation": {
+          "expect": "Check birth vaccines given and the plan for the next visit. A baby with no record at all may have had no supervised contact since birth, which itself raises concern about unnoticed deterioration."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Activity, temperature, colour, and perfusion before any system",
+      "skills": [
+        "skill.gen.paed.appearance",
+        "skill.gen.paed.vitals",
+        "skill.gen.paed.icterus",
+        "skill.gen.paed.pallor",
+        "skill.gen.paed.hydration"
+      ],
+      "emphasis": {
+        "skill.gen.paed.appearance": {
+          "expect": "Look for the lethargic baby who must be woken, moves only when stimulated, or lies floppy. A shrill or weak cry, blank staring, and mottled grey skin each escalate urgency on their own."
+        },
+        "skill.gen.paed.vitals": {
+          "expect": "Expect fever in a term baby or hypothermia with cold limbs in a preterm one, fast breathing, and a fast pulse. Count the respiratory rate in a calm baby: 60 or more per minute is a danger sign, not a variation."
+        },
+        "skill.gen.paed.icterus": {
+          "expect": "Jaundice with systemic features belongs to the sepsis picture, while jaundice alone in a vigorous feeding baby points elsewhere. Note the day of appearance and the colour of stools and urine."
+        },
+        "skill.gen.paed.hydration": {
+          "expect": "Poor feeding dries a neonate quickly. Sunken eyes and fontanelle, dry mucosae, loss of skin turgor, and few wet nappies mark dehydration that needs correcting alongside the infection."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Systemic examination of the neonate",
+      "blurb": "Portals first, then breathing, belly, head, and tone",
+      "skills": [
+        "skill.exam.paed.neo.skin_cord_variations",
+        "skill.exam.paed.neo.chest_respiratory_cvs",
+        "skill.exam.paed.neo.abdomen_genitalia_spine",
+        "skill.exam.paed.neo.head_skull_trauma",
+        "skill.exam.paed.neo.primitive_reflexes"
+      ],
+      "emphasis": {
+        "skill.exam.paed.neo.skin_cord_variations": {
+          "expect": "Examine the stump and the skin around it for redness spreading beyond the base, swelling, foul smell, or discharge. This is the commonest visible portal in late onset disease, and its presence focuses source care."
+        },
+        "skill.exam.paed.neo.chest_respiratory_cvs": {
+          "expect": "Look for grunting, indrawing, and apnoea, and feel perfusion with capillary refill, pulse volume, and warmth of limbs. Poor perfusion with a weak fast pulse is shock until proved otherwise."
+        },
+        "skill.exam.paed.neo.abdomen_genitalia_spine": {
+          "expect": "Feel for distension, tenderness, and liver or spleen enlargement, and ask about blood in the stools. A tense tender abdomen with bloody stools in a preterm baby points towards gut involvement."
+        },
+        "skill.exam.paed.neo.head_skull_trauma": {
+          "expect": "Feel the anterior fontanelle in a calm upright baby. A bulging fontanelle with convulsions or abnormal tone raises meningitis and demands fluid examination where safe."
+        },
+        "skill.exam.paed.neo.primitive_reflexes": {
+          "expect": "Test tone and the Moro response for symmetry and vigour. A baby who is diffusely hypotonic with weak reflexes is encephalopathic, whether from sepsis, meningitis, or asphyxia, and the cause must be separated quickly."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the sepsis picture together",
+      "blurb": "Soft signs first, portals and shock when it advances",
+      "skills": [
+        "skill.reasoning.nsepsis.findings"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Day of life, gestation, risk, syndrome, and severity in one breath",
+      "skills": [
+        "skill.reasoning.nsepsis.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Meningitis, pneumonia, urine infection, and the mimics that reverse in minutes",
+      "skills": [
+        "skill.reasoning.nsepsis.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Culture first, screen alongside, and nothing delays the first dose",
+      "skills": [
+        "skill.investigation.nsepsis.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and severity",
+      "blurb": "Proven, probable, or clinical, with shock and meningitis stated",
+      "skills": [
+        "skill.reasoning.nsepsis.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Prompt empiric cover after cultures, support, referral, and prevention",
+      "skills": [
+        "skill.treatment.nsepsis.care"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this baby to your consultant",
+      "skills": [
+        "skill.present.case",
+        "skill.present.neonatal.sepsis_case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.nsepsis.neonatal_assessment",
+        "title": "Examine the sick neonate",
+        "task": "This 6-day-old baby has had poor feeding and fever for two days. Examine the baby for sepsis and present your findings with your next step.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.paed.rapport",
+          "skill.gen.paed.appearance",
+          "skill.gen.paed.vitals",
+          "skill.exam.paed.neo.skin_cord_variations",
+          "skill.exam.paed.neo.chest_respiratory_cvs",
+          "skill.exam.paed.neo.primitive_reflexes"
+        ],
+        "examinerQuestions": [
+          "You found umbilical redness with discharge and poor perfusion. What is the likely portal, and how does it change management?",
+          "The baby is lethargic with a bulging fontanelle. What procedure does this demand, and what precautions come first?",
+          "Which single bedside test do you run before anything else in a dull neonate, and why?"
+        ]
+      },
+      {
+        "id": "osce.nsepsis.history_plan",
+        "title": "Take a sepsis history and plan",
+        "task": "This mother reports her 6-day-old baby feeds poorly and feels hot. Take a focused history in seven minutes and state your working diagnosis with the first three orders.",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.paed.consent_assent",
+          "skill.hx.chief_complaints",
+          "skill.hx.paed.presenting_complaint",
+          "skill.hx.neonatal.sepsis_course",
+          "skill.hx.neonatal.sepsis_risks"
+        ],
+        "examinerQuestions": [
+          "Her story suggests late onset sepsis. Which two risk answers would most raise your certainty?",
+          "Blood culture is drawn. What starts now, and what is reviewed at 48 hours?",
+          "She asks whether the baby can stay with her at the peripheral centre. What decides referral, and what do you tell her?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.reasoning.nsepsis.basics",
+      "skill.reasoning.nsepsis.findings",
+      "skill.reasoning.nsepsis.differential",
+      "skill.investigation.nsepsis.workup",
+      "skill.reasoning.nsepsis.diagnosis",
+      "skill.treatment.nsepsis.care",
+      "skill.annexure.nsepsis.danger_signs"
+    ]
+  },
+  "skills": {
+    "skill.reasoning.nsepsis.basics": {
+      "id": "skill.reasoning.nsepsis.basics",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "What neonatal sepsis is: early and late onset",
+      "oneLine": "Bloodstream infection in the first 28 days, split by timing into early and late onset",
+      "why": "The single most useful fact about neonatal sepsis is its timing, because timing names the source and the likely organisms. Illness in the first three days points up the birth canal to the mother; illness after a well interval points to the nursery, the ward, or the home. Students who memorise organism lists without this split cannot use them at the bedside.",
+      "teach": [
+        {
+          "heading": "Sepsis in the first 28 days of life",
+          "body": "Neonatal sepsis is a clinical syndrome of systemic infection in an infant under 28 days of age, with or without a positive blood culture. Early onset disease presents within the first 72 hours of birth, and late onset disease presents from day 3 to day 28.\n\nThe early neonatal period covers the first 7 days and the late neonatal period covers day 7 to day 28. Early onset sepsis sits almost entirely inside the first period, while late onset sepsis spans both, which is why the 72-hour line matters more than the 7-day one."
+        },
+        {
+          "heading": "Why the newborn is an easy target",
+          "body": "The newborn brings three weaknesses together: an immature immune response that localises infection poorly, thin skin and gut barriers that let organisms cross, and frequent breaches of those barriers through resuscitation, heel pricks, intravenous lines, and ventilatory support.\n\nPrematurity and low birth weight below 2500 g multiply all three weaknesses at once. This is why a preterm baby needs a far smaller clinical trigger for a full sepsis workup than a well term baby does."
+        },
+        {
+          "heading": "Two routes, two organism families",
+          "body": "Early onset disease ascends from the maternal genital tract before or during birth, so its organisms are maternal flora: Group B Streptococcus and Escherichia coli above all, with Listeria an important rarer cause. Ruptured membranes, maternal fever, and a difficult labour are the history that predicts them.\n\nLate onset disease is acquired after birth from caregivers, equipment, or the home, so its organisms are hospital and community flora: Staphylococcus aureus, coagulase-negative staphylococci in babies with lines, and Gram-negative organisms such as Klebsiella in nursery outbreaks. An infected umbilical stump, a line site, or a sick contact is the history that predicts these."
+        },
+        {
+          "heading": "Early versus late onset at a glance",
+          "table": {
+            "cols": [
+              "Feature",
+              "Early onset",
+              "Late onset"
+            ],
+            "rows": [
+              [
+                "Timing",
+                "Within 72 hours of birth",
+                "Day 3 to day 28, after a well interval"
+              ],
+              [
+                "Source",
+                "Birth canal, ascending infection",
+                "Nursery, ward, or home environment"
+              ],
+              [
+                "Typical organisms",
+                "Group B Streptococcus, E. coli",
+                "Staphylococci, Klebsiella and other hospital flora"
+              ],
+              [
+                "Usual presentation",
+                "Respiratory distress, shock, asphyxia-like picture",
+                "Poor feeding, lethargy, fever, focal portal"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Define early and late onset neonatal sepsis by timing.",
+          "a": "Early onset presents within the first 72 hours of birth; late onset presents from day 3 to day 28.",
+          "accept": [
+            "72 hours",
+            "day 3",
+            "28 days"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Name the two leading organisms of early onset sepsis and where they come from.",
+          "a": "Group B Streptococcus and E. coli, ascending from the maternal genital tract before or during birth.",
+          "accept": [
+            "Group B Streptococcus",
+            "E. coli",
+            "maternal"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A preterm baby on intravenous fluids develops poor feeding on day 9. Early or late onset, and which organisms do you expect?",
+          "a": "Late onset disease acquired after birth, so staphylococci including coagulase-negative strains with a line in place, and Gram-negative hospital flora such as Klebsiella.",
+          "accept": [
+            "late onset",
+            "staphylococci",
+            "Klebsiella"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "neonatal_sepsis_jaundice_metabolic: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Neonatal sepsis: definitions and epidemiology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.nsepsis.findings": {
+      "id": "skill.reasoning.nsepsis.findings",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "The sepsis picture in a neonate",
+      "oneLine": "Subtle behaviour change first, focal portals and shock when it advances",
+      "why": "Neonatal sepsis kills when it is mistaken for a well baby having a quiet day. The early signs are all soft: a feed refused, a baby harder to wake, a cry slightly changed. Knowing the full ladder from soft signs to shock is what lets you act on the soft end, where treatment still changes the outcome.",
+      "teach": [
+        {
+          "heading": "Soft signs come first and matter most",
+          "body": "The earliest features are behavioural: poor feeding with weak sucking, less activity with longer sleep, harder to wake for feeds, and a changed cry. Temperature instability follows in either direction, with fever in a term baby and hypothermia with cold hands and feet in a preterm or very small infant.\n\nThese signs are individually nonspecific, which is exactly why they must be taken together. A baby showing two or three of them at once, with a risk factor in the background, is worked up for sepsis rather than watched."
+        },
+        {
+          "heading": "Systemic signs as the illness declares itself",
+          "body": "Respiratory signs include fast breathing, chest indrawing, grunting, and apnoea, and they can dominate the picture so completely that early onset sepsis is first mistaken for respiratory distress or asphyxia. Neurological signs include a weak or high-pitched cry, blank staring, poor tone, jerky movements, convulsions, and a bulging fontanelle.\n\nAbdominal signs include vomiting, distension, feed intolerance, and blood in the stools. Jaundice appearing with systemic features, rather than alone in a well baby, belongs to the sepsis picture too."
+        },
+        {
+          "heading": "Portals, skin, and the face of severe disease",
+          "body": "Examine every portal: umbilical stump with redness spreading to the surrounding skin, swelling, foul smell, or discharge; skin with pustules, abscesses, or cellulitis; eyes, ears, and mouth for discharge or thrush; and line or prick sites in a nursery baby.\n\nSevere disease shows poor perfusion with delayed capillary refill, mottled or grey skin, a fast weak pulse with low volume, low blood pressure, scanty urine, bleeding from sites, spots that do not fade on pressure, and sclerema with hard cold skin. Any one of these moves the baby to resuscitation and referral without waiting for culture results."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name four soft early signs of neonatal sepsis.",
+          "a": "Poor feeding, reduced activity with harder waking, temperature instability with fever or hypothermia, and a changed cry.",
+          "accept": [
+            "poor feeding",
+            "reduced activity",
+            "temperature",
+            "cry"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A 2-day-old baby is grunting with chest indrawing. Why is sepsis on the list alongside respiratory causes?",
+          "a": "Respiratory signs can dominate early onset sepsis so completely that it mimics respiratory distress or asphyxia, and the two need separating by risk factors, course, and cultures rather than by breathing pattern alone.",
+          "accept": [
+            "early onset",
+            "asphyxia",
+            "cultures"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Which findings mark severe disease needing resuscitation rather than workup alone?",
+          "a": "Poor perfusion with mottled grey skin, shock with a weak pulse and scanty urine, bleeding or non-fading spots, and sclerema.",
+          "accept": [
+            "perfusion",
+            "shock",
+            "bleeding",
+            "sclerema"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "neonatal_sepsis_jaundice_metabolic: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Neonatal sepsis: clinical manifestations"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.nsepsis.summary": {
+      "id": "skill.reasoning.nsepsis.summary",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Summarising the septic neonate",
+      "oneLine": "Day of life, gestation, risk, syndrome, and severity in one breath",
+      "why": "The neonatal summary has a different skeleton from an adult one, and examiners listen for it: day of life and gestation first, because they set every normal value and every probability that follows. A summary that opens with symptoms before stating the baby is 6 days old and born at term has already lost its frame.",
+      "teach": [
+        {
+          "heading": "The skeleton of a neonatal summary",
+          "body": "State the baby with the facts that frame everything: day of life, sex, gestation, birth weight and current weight, and the informant. Then the background that changes probability: antenatal risks, membrane rupture interval, place and mode of birth, cry and resuscitation, feeding, and procedures.\n\nThen the illness in abstract terms with its tempo: a late onset febrile illness with poor feeding and lethargy over two days, with a portal named. Close with severity and the plan direction: with or without shock, and worked up as proven, probable, or clinical sepsis."
+        },
+        {
+          "heading": "A worked example",
+          "body": "A 6-day-old term male baby, birth weight 2.5 kg, brought by the mother with two days of poor feeding, increased sleepiness, and fever, on a background of a home birth with an ornamental application to the cord stump. Examination shows a lethargic febrile baby with umbilical redness spreading to the surrounding skin with discharge, delayed capillary refill, and no convulsions or respiratory distress.\n\nThis is late onset neonatal sepsis with omphalitis as the portal, without shock, and the baby needs admission with blood cultures, a sepsis screen, empiric antibiotics, and supportive care with close monitoring."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What belongs in the opening line of a neonatal sepsis summary?",
+          "a": "Day of life, sex, gestation with birth weight, the informant, and the syndrome with its onset type.",
+          "accept": [
+            "day of life",
+            "gestation",
+            "birth weight",
+            "onset"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why do gestation and day of life come before symptoms in the summary?",
+          "a": "They set every normal value and every pre-test probability that follows, so the same symptom means different things at different gestations and ages.",
+          "accept": [
+            "normal value",
+            "probability",
+            "gestation"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "neonatal_sepsis_jaundice_metabolic: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Neonatal sepsis: clinical approach"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.nsepsis.differential": {
+      "id": "skill.reasoning.nsepsis.differential",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "What else looks like neonatal sepsis",
+      "oneLine": "Meningitis, pneumonia, urine infection, and the non-infective mimics, tested one by one",
+      "why": "Almost every sick neonate looks septic at first glance, which makes the differential a test of discipline rather than memory. Meningitis changes the drug plan and the need for lumbar puncture; birth asphyxia changes it to supportive brain care; hypoglycaemia is reversed in minutes. Each alternative must be actively excluded, not merely listed.",
+      "teach": [
+        {
+          "heading": "Infective differentials that share the picture",
+          "body": "Bacterial meningitis overlaps completely with sepsis without localising signs, and is distinguished by convulsions, a bulging fontanelle, abnormal tone, and cerebrospinal fluid examination.\n\nAssume meningitis is present until the fluid says otherwise whenever a septic neonate convulses or looks encephalopathic.\n\nNeonatal pneumonia shares respiratory signs and is favoured by predominant grunting, indrawing, and a chest radiograph with infiltrates. Urinary tract infection shares fever with poor feeding and is tested by urine microscopy and culture, especially where no portal is visible.\n\nLocalised infections such as omphalitis, skin pustules, or conjunctivitis can be the portal of the sepsis itself rather than an alternative, and the distinction is whether systemic features are present."
+        },
+        {
+          "heading": "Non-infective mimics that must not be missed",
+          "body": "Birth asphyxia mimics early onset sepsis closely, with poor activity, weak cry, and respiratory difficulty, but its story starts at birth with delayed cry and resuscitation, without a well interval. Respiratory distress syndrome of the newborn and transient tachypnoea of the newborn both present with early breathing difficulty in a preterm or term baby respectively, timed from birth rather than after days of wellness.\n\nHypoglycaemia copies lethargy, poor feeding, jitteriness, and convulsions exactly, and a bedside glucose test settles it in a minute, so it is tested before anything else. Inborn errors of metabolism are favoured by parental consanguinity, previous unexplained newborn deaths, vomiting with an unusual odour, and a stormy course that ignores antibiotics. Necrotising enterocolitis is favoured by abdominal distension with blood in the stools in a preterm baby."
+        },
+        {
+          "heading": "How to close the differential at the bedside",
+          "body": "Work the list in three passes. First, test what kills fastest or reverses fastest: glucose, perfusion and shock, apnoea with airway, and convulsions. Second, separate meningitis from sepsis without meningitis, because that decision sets the lumbar puncture and the duration of treatment.\n\nThird, place the illness on its timeline: from birth without a well interval argues for asphyxia, respiratory distress, or early onset sepsis, while deterioration after days of wellness argues for late onset sepsis or a postnatal mimic. State the leading diagnosis with its onset type, then name the two alternatives you excluded and the single test that excluded each."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "A septic-looking neonate convulses. What does that add, and what test does it demand?",
+          "a": "It raises bacterial meningitis, which overlaps sepsis completely, and demands cerebrospinal fluid examination by lumbar puncture where safe.",
+          "accept": [
+            "meningitis",
+            "cerebrospinal fluid",
+            "lumbar puncture"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How do you separate birth asphyxia from early onset sepsis?",
+          "a": "Asphyxia starts at birth with delayed cry and resuscitation and no well interval, while early onset sepsis follows ascending infection with maternal risk factors; glucose, perfusion, cultures, and course separate them.",
+          "accept": [
+            "delayed cry",
+            "no well interval",
+            "maternal risk factors"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "neonatal_sepsis_jaundice_metabolic: additionalDifferentials"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Neonatal sepsis: differential diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.investigation.nsepsis.workup": {
+      "id": "skill.investigation.nsepsis.workup",
+      "kind": "investigation",
+      "system": "paediatrics",
+      "title": "Working up suspected neonatal sepsis",
+      "oneLine": "Culture first, screen alongside, and never let the laboratory delay treatment",
+      "why": "The workup of neonatal sepsis serves three jobs at once: prove the organism, grade the severity, and exclude the mimics that need a different plan. Students go wrong in two opposite directions, waiting for reports before starting antibiotics in a sick baby, or sending no cultures at all so the diagnosis can never be confirmed or narrowed.",
+      "teach": [
+        {
+          "heading": "Prove it: cultures before the first dose",
+          "body": "Blood culture is the gold standard and is drawn before the first antibiotic dose, with enough volume from a clean venepuncture and full labelling. A positive culture with a matching course proves sepsis and later guides narrowing of antibiotics.\n\nCultures take a day or more to declare, so they never gate the first dose. In a baby who looks unwell, the dose goes in promptly and the culture result revises the plan when it arrives, rather than initiating it."
+        },
+        {
+          "heading": "Screen alongside: blood, urine, and fluid",
+          "body": "Group the screen by what each test answers. The blood count with total leucocyte count, absolute neutrophil count, and the immature to total neutrophil ratio flags an abnormal response in either direction, and C-reactive protein with procalcitonin where available rises with bacterial infection.\n\nUrine microscopy and culture test for a urinary source, especially where fever and poor feeding stand alone. Cerebrospinal fluid examination by lumbar puncture tests for meningitis whenever the baby convulses, looks encephalopathic, or has a bulging fontanelle, and in late onset sepsis where meningitis commonly coexists.\n\nNormal newborn fluid holds up to 10 cells with protein up to 120 mg per dL and glucose about two thirds of blood glucose, against under 5 cells and protein under 40 mg per dL in older children."
+        },
+        {
+          "heading": "Grade it and exclude the mimics",
+          "body": "A bedside glucose test comes first in every dull or convulsing baby, because hypoglycaemia mimics sepsis exactly and reverses in minutes. Chest radiograph tests for pneumonia where respiratory signs dominate, and serum bilirubin is checked where jaundice accompanies the systemic picture.\n\nTrack response with daily weight, feed volumes taken, temperature stability, activity, perfusion, urine output, and repeat counts with C-reactive protein. These bedside measures steer care more than repeated broad panels once treatment starts. Review cultures daily: a positive result narrows cover, and a negative result with clinical recovery lets antibiotics stop rather than continue by habit."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "When is the blood culture drawn in suspected neonatal sepsis, and why?",
+          "a": "Before the first antibiotic dose, because it is the gold standard that proves sepsis and guides narrowing, but it must never delay that dose in an unwell baby.",
+          "accept": [
+            "before the first",
+            "gold standard",
+            "never delay"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A septic neonate convulses on day 6. Which investigation does this demand, and what newborn values count as normal?",
+          "a": "Lumbar puncture for cerebrospinal fluid examination, with up to 10 cells, protein up to 120 mg per dL, and glucose about two thirds of blood glucose counting as normal in the newborn.",
+          "accept": [
+            "lumbar puncture",
+            "10 cells",
+            "120"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Blood culture is negative at 48 hours but the baby fed poorly with fever and a raised screen. Stop or continue?",
+          "a": "Treat as probable clinical sepsis: continue a planned course with bedside monitoring rather than stopping on one negative culture, and stop rather than prolong by habit once the baby recovers with repeated negative results.",
+          "accept": [
+            "probable",
+            "clinical sepsis",
+            "monitoring"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "neonatal_sepsis_jaundice_metabolic: additionalInvestigations"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Neonatal sepsis: evaluation and laboratory studies"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.nsepsis.diagnosis": {
+      "id": "skill.reasoning.nsepsis.diagnosis",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Diagnosis, certainty, and severity",
+      "oneLine": "Proven, probable, or clinical sepsis, with shock and meningitis stated, not implied",
+      "why": "A diagnosis of neonatal sepsis is incomplete without two qualifiers: how certain you are, and how sick the baby is. Certainty decides duration and narrowing of antibiotics; severity decides resuscitation and referral level. Students who write sepsis alone leave both decisions to whoever reads the notes next.",
+      "teach": [
+        {
+          "heading": "Three levels of certainty",
+          "body": "Proven sepsis means a positive blood or cerebrospinal fluid culture with a matching clinical course. Probable sepsis means a negative culture with a positive screen and a convincing course, which is common because prior antibiotics, small volumes, and fastidious organisms all lower culture yield.\n\nClinical sepsis means the course and risk factors convince while the screen stays equivocal, and it is a working diagnosis that justifies starting treatment, not a label that justifies prolonging it. Revisit certainty daily as cultures declare and the baby either recovers or does not."
+        },
+        {
+          "heading": "Severity and spread, stated plainly",
+          "body": "State shock separately from sepsis: poor perfusion, weak pulse, low pressure, mottled grey skin, and scanty urine mark septic shock and trigger resuscitation with referral to a higher centre. State meningitis separately too, because it extends treatment duration and follow-up.\n\nName the portal where one exists, since omphalitis, skin infection, or pneumonia as the source focuses source care alongside systemic treatment. A complete diagnostic statement therefore names the syndrome, its onset type, its certainty, its spread, and its severity."
+        },
+        {
+          "heading": "A worked diagnostic statement",
+          "body": "Late onset neonatal sepsis, probable, with omphalitis as the portal, without shock and without meningitis, in a 6-day-old term baby. Each phrase does work: late onset sets the organism family, probable sets the need to review cultures, the portal sets local cord care, and without shock sets the level of care.\n\nContrast with the severe end: early onset neonatal sepsis, proven on blood culture, with septic shock and meningitis, in a preterm low birth weight baby. That statement carries resuscitation, meningitic cover, intensive monitoring, and urgent referral in a single line."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Blood culture is negative but the screen is positive with a convincing course. What is the diagnosis?",
+          "a": "Probable neonatal sepsis, a working diagnosis that justifies treatment while cultures are awaited and reviewed.",
+          "accept": [
+            "probable",
+            "working diagnosis",
+            "cultures"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What five elements belong in a complete neonatal sepsis diagnostic statement?",
+          "a": "The syndrome with onset type, the level of certainty, the portal or spread including meningitis, the severity including shock, and the baby described by day of life and gestation.",
+          "accept": [
+            "onset",
+            "certainty",
+            "meningitis",
+            "shock"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "neonatal_sepsis_jaundice_metabolic: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Neonatal sepsis: diagnosis and classification"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.treatment.nsepsis.care": {
+      "id": "skill.treatment.nsepsis.care",
+      "kind": "treatment",
+      "system": "paediatrics",
+      "title": "Managing neonatal sepsis",
+      "oneLine": "Prompt empiric antibiotics after cultures, supportive care alongside, and referral without delay",
+      "why": "Neonatal sepsis punishes both directions of error: waiting for reports before the first dose lets a treatable illness become shock, while continuing broad antibiotics by habit breeds resistance and toxicity. The plan is therefore built around one prompt decision, one review point, and supportive care that runs from the first hour.",
+      "teach": [
+        {
+          "heading": "The first hour: cultures, cover, and support",
+          "body": "Draw blood cultures first, then start empiric antibiotics promptly in any baby with suspected sepsis, choosing cover for the likely organisms by onset type and local patterns. Early onset disease is covered for maternal flora with ampicillin plus an aminoglycoside such as gentamicin, while late onset or hospital-acquired disease needs cover set by nursery patterns and the national approach to the sick young infant.\n\nWhere meningitis is suspected or proved, cover must reach the meninges at meningitic strength, which changes both the agents and the duration. The specific agents, routes, and durations in your ward follow the current guideline and the treating paediatrician, not memory."
+        },
+        {
+          "heading": "Supportive care that runs alongside",
+          "body": "Keep the baby warm with skin-to-skin care or a warmer, give oxygen where saturation is low or distress is present, correct low glucose and maintain fluids, and continue feeding with expressed breast milk where the baby tolerates it. Monitor temperature, activity, perfusion, breathing, urine output, weight, and feed volumes, because these bedside measures show response before any laboratory value moves.\n\nNurse the baby with strict hand hygiene, minimal handling clustered together, and clean cord and skin care. Review at 48 hours with culture results: narrow cover on a positive culture, and stop rather than prolong antibiotics by habit when the course, screen, and recovery argue against bacterial sepsis."
+        },
+        {
+          "heading": "Referral, counselling, and prevention",
+          "body": "Refer urgently to a special newborn care unit or neonatal intensive care where shock, apnoea, convulsions, inability to feed, or no improvement demand a higher level of care than the peripheral centre can give. Counsel the mother on what to watch during and after treatment: feeding, alertness, breathing, fever, and the cord.\n\nPrevent the next case with clean delivery and resuscitation practices, dry cord care with nothing applied, early and exclusive breastfeeding, birth vaccines as per the national schedule, and hand hygiene taught to every caregiver before discharge from the postnatal ward."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is drawn before the first antibiotic dose, and what empiric cover starts early onset disease?",
+          "a": "Blood cultures are drawn first, then ampicillin plus an aminoglycoside such as gentamicin covers maternal flora, without delaying the dose for any report.",
+          "accept": [
+            "blood cultures",
+            "ampicillin",
+            "gentamicin"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is reviewed at 48 hours, and what changes?",
+          "a": "Culture results with the clinical course: narrow cover on a positive culture, and stop rather than prolong antibiotics when recovery argues against bacterial sepsis.",
+          "accept": [
+            "culture",
+            "narrow",
+            "stop"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which babies are referred to a higher centre, and what do you tell the mother?",
+          "a": "Shock, apnoea, convulsions, inability to feed, or no improvement need special newborn or intensive care; counsel on feeding, alertness, breathing, fever, and the cord during and after treatment.",
+          "accept": [
+            "shock",
+            "referral",
+            "counsel"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "neonatal_sepsis_jaundice_metabolic: clinicalPearls"
+        },
+        {
+          "source": "WHO",
+          "locator": "Management of possible serious bacterial infection in young infants"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Neonatal sepsis: treatment and supportive care"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of drug class and principle. Specific agents, routes, combinations and durations must be taken from your current national or institutional guideline and the treating paediatrician's prescription at the time of treatment. CliniX does not prescribe."
+    },
+    "skill.annexure.nsepsis.danger_signs": {
+      "id": "skill.annexure.nsepsis.danger_signs",
+      "kind": "annexure",
+      "system": "paediatrics",
+      "title": "Young infant danger signs and the sepsis screen",
+      "oneLine": "The bedside reference: which signs trigger urgent action and which tests form the screen",
+      "why": "In a busy postnatal ward the decision to escalate must take seconds, not a textbook chapter. This reference puts the danger signs that trigger urgent action and the components of the sepsis screen on one page, so the student recognises the trigger and orders the screen as a single reflex.",
+      "teach": [
+        {
+          "heading": "Danger signs in the young infant",
+          "table": {
+            "cols": [
+              "Sign",
+              "What you see",
+              "Action"
+            ],
+            "rows": [
+              [
+                "Not feeding",
+                "Unable to suck or refusing all feeds",
+                "Urgent assessment and admission"
+              ],
+              [
+                "Convulsions",
+                "Jerky movements or fits by history or now",
+                "Urgent assessment and admission"
+              ],
+              [
+                "Fast breathing",
+                "60 or more breaths per minute in a calm baby",
+                "Urgent assessment and admission"
+              ],
+              [
+                "Chest indrawing",
+                "Lower chest wall pulling in with breaths",
+                "Urgent assessment and admission"
+              ],
+              [
+                "Fever or low temperature",
+                "38 C or more, or below normal with cold limbs",
+                "Urgent assessment and admission"
+              ],
+              [
+                "Less movement",
+                "Only moving when stimulated, or floppy",
+                "Urgent assessment and admission"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Components of the neonatal sepsis screen",
+          "body": "The screen combines several small tests, no one of which decides alone. Blood count with total leucocyte count, absolute neutrophil count, and the immature to total neutrophil ratio flags an abnormal response in either direction, and C-reactive protein with procalcitonin where available rises with bacterial infection.\n\nMicro erythrocyte sedimentation rate, gastric aspirate cytology in early onset disease, and urine microscopy complete the commonly used panel. Two or more abnormal components with a convincing course support probable sepsis while cultures are awaited, and a fully negative screen with clinical recovery supports stopping antibiotics rather than continuing them by habit."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three danger signs in the young infant that trigger urgent assessment.",
+          "a": "Not feeding, convulsions, and fast breathing at 60 or more per minute, with chest indrawing and temperature change as further triggers.",
+          "accept": [
+            "not feeding",
+            "convulsions",
+            "fast breathing"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What components form the neonatal sepsis screen, and how is it used?",
+          "a": "Blood counts with neutrophil ratios, C-reactive protein with procalcitonin, micro sedimentation rate, gastric aspirate, and urine microscopy; two or more abnormal parts with a convincing course support probable sepsis.",
+          "accept": [
+            "neutrophil",
+            "C-reactive protein",
+            "urine"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "neonatal_sepsis_jaundice_metabolic: additionalInvestigations"
+        },
+        {
+          "source": "WHO",
+          "locator": "IMNCI chart booklet: danger signs in the young infant"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.nsepsis.aarav",
+      "initialVitals": {
+        "hr": 166,
+        "bpSystolic": 68,
+        "bpDiastolic": 40,
+        "rr": 64,
+        "spo2": 92,
+        "temp": 38,
+        "gcs": 15
+      },
+      "title": "A 6-day-old baby who stopped feeding well",
+      "opening": "Meena, 24, has brought her 6-day-old son Aarav to the paediatric outpatient room. The baby lies quietly in her lap, less active than a week-old baby should be. Greet the mother, introduce yourself, and take a history from her.",
+      "fallback": "I do not understand, doctor. Can you ask that in a simpler way?",
+      "patient": {
+        "name": "Aarav",
+        "age": 6,
+        "sex": "male",
+        "occupation": "Newborn infant, 6 days old",
+        "residence": "Rural, farming household in Maharashtra, lives with parents and grandmother"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "what is the problem with the baby",
+            "why have you brought the baby",
+            "tell me about the baby's illness",
+            "what is troubling the baby"
+          ],
+          "reply": "Doctor, for two days he is not feeding properly, he only sleeps, and since yesterday his body feels hot.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "onset_feeding_decline": {
+          "cues": [
+            "when did the feeding become poor",
+            "how is the feeding now",
+            "refusing to feed since when",
+            "not taking feeds properly",
+            "sucks weakly at the breast"
+          ],
+          "reply": "He fed well for the first four days. Since two days he sucks weakly, leaves the breast quickly, and falls asleep without finishing.",
+          "key": true,
+          "skillId": "skill.hx.paed.presenting_complaint"
+        },
+        "fever_touch_course": {
+          "cues": [
+            "fever since when",
+            "how did you notice the fever",
+            "baby feels hot to touch",
+            "cold hands and feet",
+            "how high is the fever"
+          ],
+          "reply": "Since yesterday his forehead and body feel hot. His hands and feet feel a little cold and look slightly dark. We have not measured it with a thermometer.",
+          "key": true
+        },
+        "alertness_cry_change": {
+          "cues": [
+            "less active than before",
+            "sleeping more than usual",
+            "harder to wake for feeds",
+            "cry has become weak",
+            "cry sounds different"
+          ],
+          "reply": "Yes, he sleeps all the time now. Earlier he would cry loudly for feeds, now I have to wake him and his cry is weak.",
+          "key": true
+        },
+        "breathing_fast_grunt": {
+          "cues": [
+            "breathing faster than normal",
+            "difficulty in breathing",
+            "grunting sound while breathing",
+            "pauses in breathing",
+            "chest going in with breaths"
+          ],
+          "reply": "His breathing looks fast to me since yesterday. There is no loud grunting sound, and I have not seen him stop breathing.",
+          "key": true
+        },
+        "vomiting_belly_swelling": {
+          "cues": [
+            "vomiting after feeds",
+            "belly looks swollen",
+            "abdomen distended",
+            "green vomiting"
+          ],
+          "reply": "He brings up a little milk after feeds, only once or twice. His belly looks slightly swollen to me but he passes gas.",
+          "key": true
+        },
+        "stools_diaper_loose": {
+          "cues": [
+            "loose stools in the nappy",
+            "blood in the stools",
+            "how many stools per day",
+            "stools watery or bloody"
+          ],
+          "reply": "He passes yellow seedy stools three to four times a day, same as before. There is no blood in them.",
+          "key": true
+        },
+        "urine_wet_nappies": {
+          "cues": [
+            "passing urine normally",
+            "how many wet nappies",
+            "urine output reduced",
+            "crying without tears"
+          ],
+          "reply": "He wets fewer nappies since yesterday, about four in the whole day. Before that it was more.",
+          "key": true
+        },
+        "cord_stump_discharge": {
+          "cues": [
+            "umbilical cord stump redness",
+            "discharge from the navel",
+            "smell from the cord stump",
+            "swelling around the cord",
+            "what was applied to the cord"
+          ],
+          "reply": "The cord fell yesterday. Since then the navel looks red around it and there is yellow sticky discharge with a bad smell. My mother-in-law had applied turmeric paste on the stump.",
+          "key": true
+        },
+        "maternal_fever_labour": {
+          "cues": [
+            "fever before delivery",
+            "waters broke how long before",
+            "liquor colour and smell",
+            "how long was the labour",
+            "foul smelling discharge before birth"
+          ],
+          "reply": "I had no fever before delivery. The waters broke about six hours before he was born, the water was clear, and labour lasted about ten hours.",
+          "key": true,
+          "skillId": "skill.hx.neonatal.sepsis_risks"
+        },
+        "birth_place_cord_cut": {
+          "cues": [
+            "where was the baby born",
+            "who conducted the delivery",
+            "how was the cord cut",
+            "delivery at home or hospital"
+          ],
+          "reply": "He was born at home, the dai conducted it. The cord was cut with a new blade from the shop.",
+          "key": true
+        },
+        "birth_cry_weight": {
+          "cues": [
+            "cried at birth or delayed cry",
+            "birth weight of the baby",
+            "needed help to breathe at birth",
+            "admitted after birth"
+          ],
+          "reply": "He cried soon after birth and did not need any help to breathe. His weight was 2.5 kg. He stayed with me, no admission.",
+          "key": true
+        },
+        "feeding_since_birth": {
+          "cues": [
+            "first breastfeed timing",
+            "top feeds given since birth",
+            "animal milk or formula given",
+            "how often are you feeding"
+          ],
+          "reply": "He took the breast within an hour of birth. I feed only breast milk, every two hours. No outside milk or water given.",
+          "key": true
+        },
+        "passage_birth_stool_urine": {
+          "cues": [
+            "passed stool after birth",
+            "passed urine after birth",
+            "meconium passed on day one"
+          ],
+          "reply": "He passed the first black stool on the first day and urine also came normally from the first day itself.",
+          "key": true
+        },
+        "birth_vaccines_given": {
+          "cues": [
+            "vaccines given at birth",
+            "injection given after birth",
+            "BCG or polio drops given"
+          ],
+          "reply": "No injection or drops have been given yet. The ASHA worker said she will take us to the centre for it.",
+          "key": true
+        },
+        "sibling_past_loss": {
+          "cues": [
+            "how many other children",
+            "any previous baby loss",
+            "newborn death in the family"
+          ],
+          "reply": "This is my first baby. There has been no baby loss in our family.",
+          "key": true
+        },
+        "home_medicines_ghutti": {
+          "cues": [
+            "medicines given at home",
+            "ghutti or gripe water given",
+            "home remedies for the baby"
+          ],
+          "reply": "We gave only a little ghutti on the third day, nothing else. No medicines from any shop.",
+          "key": true
+        },
+        "family_dwelling_contact": {
+          "cues": [
+            "who lives at home with you",
+            "anyone ill at home recently",
+            "cooking smoke inside the house"
+          ],
+          "reply": "My husband, my mother-in-law, and I. Nobody at home has fever or cough. We cook on the chulha in a separate shed outside."
+        }
+      },
+      "exam": {
+        "skill.gen.paed.appearance": {
+          "finding": "Lethargic newborn, lying quietly with eyes closed, woken only with repeated stimulation. Moves limbs weakly when handled. Skin mottled over the trunk with cool hands and feet.",
+          "abnormal": true
+        },
+        "skill.gen.paed.vitals": {
+          "finding": "Temperature 38 C. Heart rate 166 per minute. Respiratory rate 64 per minute, counted calm. SpO2 92 percent on room air. Blood pressure 68/40. Capillary refill 3 seconds.",
+          "abnormal": true
+        },
+        "skill.gen.paed.pallor": {
+          "finding": "No pallor of the conjunctivae, tongue, or palms.",
+          "abnormal": false
+        },
+        "skill.gen.paed.icterus": {
+          "finding": "No yellow colour of the eyes, face, or trunk.",
+          "abnormal": false
+        },
+        "skill.gen.paed.hydration": {
+          "finding": "Mucosae slightly dry, skin turgor reduced, anterior fontanelle just palpable. About four wet nappies in the last day. Some dehydration with the poor intake.",
+          "abnormal": true
+        },
+        "skill.gen.paed.cyanosis": {
+          "finding": "No central cyanosis of the tongue. Feet cool with mild peripheral duskiness that fades on warming.",
+          "abnormal": true
+        },
+        "skill.exam.paed.weight": {
+          "finding": "Weighs less than the recorded birth weight of 2.5 kg, with loose skin folds. Length and head circumference appropriate for a term baby.",
+          "abnormal": true
+        },
+        "skill.exam.paed.neo.skin_cord_variations": {
+          "finding": "Umbilical stump fallen with erythema spreading about 2 cm around the base, swelling, yellow discharge, and foul smell. A few small pustules over the neck folds. No sclerema.",
+          "abnormal": true
+        },
+        "skill.exam.paed.neo.chest_respiratory_cvs": {
+          "finding": "Tachypnoea with mild subcostal indrawing, no grunt at present. Air entry equal on both sides with conducted sounds only. Heart sounds normal, femoral pulses felt, no murmur.",
+          "abnormal": true
+        },
+        "skill.exam.paed.neo.abdomen_genitalia_spine": {
+          "finding": "Abdomen soft with mild distension, bowel sounds present. Liver just palpable, spleen not felt. No tenderness on gentle palpation. Genitalia and spine normal.",
+          "abnormal": true
+        },
+        "skill.exam.paed.neo.head_skull_trauma": {
+          "finding": "Anterior fontanelle level and soft, sutures normally opposed. No caput, no cephalhaematoma. No dysmorphic features.",
+          "abnormal": false
+        },
+        "skill.exam.paed.neo.primitive_reflexes": {
+          "finding": "Generalised hypotonia with a weak incomplete Moro response, weak suck, and weak grasp. No asymmetry. No convulsions observed.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "bloodcx",
+        "cbc_crp",
+        "glucose",
+        "urine"
+      ],
+      "investigations": {
+        "bloodcx": {
+          "label": "Blood culture",
+          "indicated": true,
+          "result": "Drawn from a clean venepuncture before the first antibiotic dose. No growth at 48 hours.",
+          "note": "The gold standard, but it never gates the first dose. A negative result at 48 hours with this course means probable sepsis, not no sepsis."
+        },
+        "cbc_crp": {
+          "label": "Complete blood count with C-reactive protein",
+          "indicated": true,
+          "result": "Total leucocyte count 20000 per mm3 with 68 percent neutrophils and a raised immature fraction. C-reactive protein 24 mg per L, raised. Platelets within normal limits.",
+          "note": "A high count with left shift plus a raised C-reactive protein supports bacterial infection, though neither alone proves it."
+        },
+        "glucose": {
+          "label": "Bedside blood glucose",
+          "indicated": true,
+          "result": "45 mg per dL, within normal limits for age.",
+          "note": "Normal, which excludes the hypoglycaemia that copies lethargy and poor feeding exactly. This test comes first in every dull baby."
+        },
+        "urine": {
+          "label": "Urine routine and culture",
+          "indicated": true,
+          "result": "10 to 12 pus cells per high power field with no red cells. Culture sent, report pending.",
+          "note": "Pyuria with this picture keeps a urinary source in mind, though the cord portal already explains the bacteraemia risk."
+        },
+        "lpcsf": {
+          "label": "Lumbar puncture with cerebrospinal fluid study",
+          "indicated": true,
+          "result": "Clear fluid: 8 cells per mm3, protein 90 mg per dL, glucose about two thirds of blood glucose. No organisms on Gram stain.",
+          "note": "Within newborn limits, which argues against meningitis in a baby with no convulsions and a level fontanelle. Had he convulsed, this test would have been urgent rather than routine."
+        },
+        "cxr": {
+          "label": "Chest radiograph",
+          "indicated": true,
+          "result": "No infiltrate or consolidation. Normal cardiac shadow and no air trapping.",
+          "note": "Normal, which argues against neonatal pneumonia as the focus despite the tachypnoea. The fast breathing here reflects systemic infection, not lung disease."
+        }
+      },
+      "differentialModel": {
+        "answer": "Late onset neonatal sepsis with omphalitis as the portal. Consider bacterial meningitis, neonatal pneumonia, a urinary tract infection, hypoglycaemia, and early respiratory causes such as respiratory distress syndrome of the newborn or transient tachypnoea of the newborn.",
+        "accept": [
+          "Neonatal sepsis",
+          "Bacterial meningitis",
+          "Neonatal pneumonia",
+          "Urinary tract infection",
+          "Omphalitis",
+          "Hypoglycaemia",
+          "Respiratory distress syndrome of the newborn",
+          "Transient tachypnoea of the newborn"
+        ],
+        "minMatch": 3
+      },
+      "diagnosis": {
+        "answer": "Late onset neonatal sepsis with omphalitis, probable, without shock and without meningitis.",
+        "accept": [
+          "Neonatal sepsis",
+          "Septicaemia",
+          "Sepsis"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Admit with the mother, keep warm, draw blood cultures before antibiotics and start prompt empiric antibiotics, give oxygen for the low saturation, correct fluids and glucose, continue expressed breast milk with intake monitoring, review cultures and the screen at 48 hours, and refer to a special newborn care unit if shock, apnoea, or no improvement appear.",
+        "accept": [
+          "antibiotic",
+          "blood culture",
+          "supportive",
+          "feeding",
+          "monitor",
+          "referral",
+          "review"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The tempo tells the onset type: four well days followed by deterioration means late onset disease from the home environment, not the birth canal, and the infected cord stump names the portal.",
+        "Soft signs together make the diagnosis: poor feeding plus lethargy plus fever in a 6-day-old is sepsis until the workup says otherwise, even before any focal sign appears.",
+        "Normal cerebrospinal fluid with no convulsions and a level fontanelle argues against meningitis, which is why the fluid is examined rather than assumed.",
+        "A negative blood culture at 48 hours does not undo the diagnosis when the course, screen, and portal all agree: this is probable sepsis, and antibiotics continue to a planned review.",
+        "Bedside glucose comes first in every dull baby because hypoglycaemia copies this picture exactly and reverses in minutes.",
+        "The cord practices caused this illness: an unclean home birth plus an application to the stump. Discharge counselling on dry cord care and danger signs prevents the next admission."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

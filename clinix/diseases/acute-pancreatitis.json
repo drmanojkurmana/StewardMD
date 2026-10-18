@@ -1,0 +1,1174 @@
+{
+  "_comment": "Acute pancreatitis for surgery. Same architecture as peritonitis-perforation: shared surgery skills carry the examination with disease emphasis, own skills are reasoning, investigation, treatment and annexure only. History risk and presentation skills live in the shared fragment and merge into the surgery pack.",
+  "id": "acute-pancreatitis",
+  "name": "Acute pancreatitis",
+  "fullName": "Acute pancreatitis",
+  "system": "surgery",
+  "subtitle": "Severity and supportive care",
+  "kbRef": "acute_pancreatitis_and_pancreaticoduodenectomy",
+  "oneLine": "Sudden autodigestion of the pancreas, graded by organ failure and managed by support, not surgery",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What acute pancreatitis is, and why support is the treatment",
+      "skills": [
+        "skill.reasoning.pancreatitis.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age, sex and habits set the cause before a symptom is mentioned",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Gallstone pancreatitis clusters in middle aged women, alcohol related disease in men who drink regularly. Note age above 40 with no clear cause, which raises a pancreatic tumour, and record occupation and residence for referral planning."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Agonising epigastric pain that pierces to the back",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.surg.acute_abdomen",
+        "skill.hx.surg.pain"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect a single severe attack of constant epigastric pain, timestamped to hours, with vomiting that follows the pain rather than preceding it. That order, pain first and vomiting after, is shared with appendicitis and biliary colic, so what follows must separate them."
+        },
+        "skill.hx.surg.acute_abdomen": {
+          "expect": "Expect pain in the epigastrium, constant rather than colicky, radiating through to the back or left loin, worse lying flat and eased by sitting forward. Colic that comes in waves with restful gaps points to stone or bowel instead."
+        },
+        "skill.hx.surg.pain": {
+          "expect": "Score this pain at the top of the abdominal range: severe and agonising, comparable only to perforation and torsion. Ask about relief on sitting up, aggravation by food or alcohol, and associated nausea, sweating and breathlessness from diaphragmatic splinting."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The cause questions that prevent the next attack",
+      "skills": [
+        "skill.hx.acute.pancreatitis_risk"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Shock and toxaemia outrank the abdomen in the first hour",
+      "skills": [
+        "skill.gen.surg.survey",
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.surg.surgical_shock"
+      ],
+      "emphasis": {
+        "skill.gen.surg.survey": {
+          "expect": "Expect a restless patient who prefers sitting forward to lying flat, with anxious facies and cold sweat in severe disease. Blueness of the face is uncommon but, when present with shock, points to haemorrhagic pancreatitis."
+        },
+        "skill.gen.appearance": {
+          "expect": "Look for dehydration early: sunken eyes, dry tongue and drawn cheeks. Jaundice may follow biliary obstruction, and pallor with tachycardia suggests third spacing or bleeding rather than simple vomiting losses."
+        },
+        "skill.gen.vitals": {
+          "expect": "Expect a quickened pulse from the start, with low pressure and fast shallow breathing as shock and diaphragmatic splinting develop. Fever is usually modest on day one, unlike cholecystitis or cholangitis where it leads the picture."
+        },
+        "skill.gen.surg.surgical_shock": {
+          "expect": "Expect tachycardia, thready pulse and falling urine output from massive third spacing into the retroperitoneum, even without visible fluid loss. This is hypovolaemic shock from sequestration, and it is the commonest killer in the first 48 hours."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Abdominal examination",
+      "blurb": "Tenderness without guard, the opposite of perforation",
+      "skills": [
+        "skill.exam.surg.tenderness_rebound",
+        "skill.exam.surg.peritonitis_signs",
+        "skill.exam.surg.bowel_obstruction",
+        "skill.exam.surg.courvoisier_sign"
+      ],
+      "emphasis": {
+        "skill.exam.surg.tenderness_rebound": {
+          "expect": "Expect marked epigastric tenderness just above the umbilicus with muscle guard conspicuously absent early on. Rebound is usually absent; its appearance late suggests a complication rather than the uncomplicated disease."
+        },
+        "skill.exam.surg.peritonitis_signs": {
+          "expect": "Use this examination as the contrast: perforation gives board-like rigidity of the whole wall, pancreatitis gives a soft wall over a very tender epigastrium. Late rigidity means you must reconsider, usually for spreading collections or a missed perforation."
+        },
+        "skill.exam.surg.bowel_obstruction": {
+          "expect": "Use this as the second contrast: obstruction is noisy with visible peristalsis and colicky restlessness, pancreatitis is quiet with a still patient and absent peristalsis from ileus. Shifting dullness from free fluid can occur in both."
+        },
+        "skill.exam.surg.courvoisier_sign": {
+          "expect": "A palpable gallbladder with jaundice in this age group usually means malignant obstruction, which matters when the cause is unclear in a patient above 40. In gallstone pancreatitis the gallbladder is more often tender and thick walled than smoothly enlarged."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the pancreatitis picture together",
+      "blurb": "Autodigestion explains the pain, the shock and the stains",
+      "skills": [
+        "skill.reasoning.pancreatitis.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Tempo, cause clues and severity in three sentences",
+      "skills": [
+        "skill.present.acute.pancreatitis"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Perforation, cholecystitis and the infarct that mimics them all",
+      "skills": [
+        "skill.reasoning.pancreatitis.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Lipase confirms, ultrasound finds the cause, CT waits its turn",
+      "skills": [
+        "skill.investigation.pancreatitis.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and severity",
+      "blurb": "Two of three to diagnose, Atlanta to grade",
+      "skills": [
+        "skill.reasoning.pancreatitis.diagnosis",
+        "skill.annex.pancreatitis.atlanta"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Fluids, feeding and patience, surgery only for the cause and the complications",
+      "skills": [
+        "skill.treatment.pancreatitis.management"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.pancreatitis.abdomen_exam",
+        "title": "Examine the acute abdomen",
+        "task": "This 42-year-old woman has severe epigastric pain radiating to the back for one day with vomiting. Examine her abdomen and present your findings.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.surg.tenderness_rebound",
+          "skill.exam.surg.peritonitis_signs",
+          "skill.exam.surg.bowel_obstruction"
+        ],
+        "examinerQuestions": [
+          "You found epigastric tenderness with a soft abdominal wall. Why does this favour pancreatitis over perforation?",
+          "What would the appearance of generalised rigidity and rebound now suggest?",
+          "Name two late skin signs of haemorrhagic pancreatitis and where each appears."
+        ]
+      },
+      {
+        "id": "osce.pancreatitis.history",
+        "title": "Take a history and grade severity",
+        "task": "This 42-year-old woman has severe upper abdominal pain for one day. Take a focused history in six minutes and be ready to state her severity grade.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.surg.acute_abdomen",
+          "skill.hx.acute.pancreatitis_risk"
+        ],
+        "examinerQuestions": [
+          "Which two cause questions matter most here, and what operation follows a yes to the first?",
+          "Her pulse is 112 and systolic pressure is 100. What severity marker is this, and where does she belong?",
+          "Lipase is four times the upper limit with typical pain but a normal CT. Does she have pancreatitis?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.reasoning.pancreatitis.basics",
+      "skill.exam.surg.tenderness_rebound",
+      "skill.reasoning.pancreatitis.signs",
+      "skill.reasoning.pancreatitis.differential",
+      "skill.investigation.pancreatitis.workup",
+      "skill.reasoning.pancreatitis.diagnosis",
+      "skill.treatment.pancreatitis.management"
+    ]
+  },
+  "skills": {
+    "skill.reasoning.pancreatitis.basics": {
+      "id": "skill.reasoning.pancreatitis.basics",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "What acute pancreatitis is",
+      "oneLine": "Sudden autodigestion of the gland, and why support outranks surgery",
+      "why": "Pancreatitis kills by shock, organ failure and infected necrosis, none of which a knife fixes in the first days. Knowing that the disease is chemical before it is bacterial is what stops an early operation that can only harm.",
+      "teach": [
+        {
+          "heading": "The gland digests itself",
+          "body": "Trypsinogen activates inside the acinar cell instead of in the duodenum, and the gland autodigests its own parenchyma with fat necrosis around it. Microvascular thrombosis follows, and patches of the gland infarct into necrosis.\n\nThat sequence explains the whole illness: leaked enzymes drive pain and vomiting, third spacing into the retroperitoneum drives shock, and dead tissue later seeds infection. Early disease is sterile inflammation, which is why antibiotics change nothing at the start."
+        },
+        {
+          "heading": "Gallstones and alcohol dominate, but the list is long",
+          "body": "Gallstones account for roughly 40 to 70 percent of attacks and alcohol for roughly 25 to 35 percent. A migrating stone transiently blocks the ampulla, while chronic heavy drinking sensitises the gland to injury.\n\nBeyond these two, think triglycerides above 1000 mg per dL, drugs, trauma, recent ERCP, scorpion sting, and a tumour above the age of 40. Idiopathic cases need a repeat ultrasound, MRCP or endoscopic ultrasound before the label sticks."
+        },
+        {
+          "heading": "Severity is organ failure, not pain",
+          "body": "The revised Atlanta classification grades by what fails, not by how much it hurts. Mild disease has no organ failure and no complications, moderately severe has transient failure within 48 hours or local complications, and severe means persistent failure beyond 48 hours.\n\nMost attacks are mild and settle with support. A small fraction develop necrosis, and a fraction of those develop infection of the necrosis, which is the phase where intervention is finally discussed, preferably after 4 weeks of walling off."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What goes wrong inside the gland at the start of acute pancreatitis?",
+          "a": "Trypsinogen activates inside the acinar cell and the gland autodigests its own parenchyma with fat necrosis.",
+          "accept": [
+            "autodigest",
+            "trypsinogen",
+            "fat necrosis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Name the two commonest causes with their rough shares.",
+          "a": "Gallstones, roughly 40 to 70 percent, and alcohol, roughly 25 to 35 percent.",
+          "accept": [
+            "gallstones",
+            "alcohol",
+            "70",
+            "35"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why do antibiotics not help in the first days?",
+          "a": "Early disease is sterile chemical inflammation from autodigestion, not bacterial infection. Infection arrives later, and only in a minority, when necrosis becomes secondarily infected.",
+          "accept": [
+            "sterile",
+            "chemical",
+            "necrosis"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_pancreatitis_and_pancreaticoduodenectomy: pathophysiology"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_pancreatitis_and_pancreaticoduodenectomy: clinical pearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Acute pancreatitis"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "The acute abdomen"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.pancreatitis.signs": {
+      "id": "skill.reasoning.pancreatitis.signs",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "The pancreatitis picture",
+      "oneLine": "Agonising pain with a soft wall, shock without bleeding, stains that come late",
+      "why": "The bedside diagnosis rests on one paradox: the most severe upper abdominal pain with the least guarding. A student who waits for rigidity, or who mistakes tachycardia for pain alone, misses both the diagnosis and the shock that kills.",
+      "teach": [
+        {
+          "heading": "Pain first, vomiting after, sitting forward for relief",
+          "body": "Pain is epigastric, constant and agonising, piercing through to the back or left loin, and the worst of all abdominal pains alongside perforation. It worsens lying flat and eases sitting up and leaning forward, a posture patients adopt through the night.\n\nVomiting is profuse and follows the pain rather than preceding it. Bowels are quiet from ileus, not arrested with colic, and fever on day one is modest, unlike the high fever of cholecystitis or cholangitis."
+        },
+        {
+          "heading": "A tender epigastrium under a soft wall",
+          "body": "Tenderness is obvious just above the umbilicus, yet muscle guard is conspicuously absent early, which is the single finding that separates this from perforation at the bedside. Tenderness at the left costovertebral angle reflects tail inflammation behind.\n\nLate rigidity means a complication or a wrong diagnosis, not the natural course. Fullness of the epigastrium, shifting dullness from exudate, and absent bowel sounds from ileus complete the abdominal picture."
+        },
+        {
+          "heading": "Shock, breath and the late stains",
+          "body": "Pulse quickens from the start while pressure falls as plasma pours into the retroperitoneum. Breathing is fast and shallow from diaphragmatic splinting, and basal atelectasis or a small left effusion is common.\n\nBluish discolouration of the flank and around the umbilicus appear late in haemorrhagic disease with extensive destruction, as blood tracks along tissue planes. Jaundice follows biliary obstruction, and a calcium below 7 mg per 100 ml signals severe fat saponification."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What single bedside finding separates early pancreatitis from perforation?",
+          "a": "Marked epigastric tenderness with a soft abdominal wall and no guarding, where perforation gives board-like rigidity.",
+          "accept": [
+            "soft",
+            "guarding",
+            "rigidity"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A patient sits forward all night despite the pain. What does that posture suggest?",
+          "a": "Acute pancreatitis. The pain eases sitting up and leaning forward and worsens lying flat.",
+          "accept": [
+            "pancreatitis",
+            "sitting",
+            "forward"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Where do the late flank and umbilical stains appear, and what do they mean?",
+          "a": "Bluish discolouration of the left flank and around the umbilicus, from haemorrhagic fluid tracking along the abdominal wall in severe haemorrhagic pancreatitis.",
+          "accept": [
+            "flank",
+            "umbilicus",
+            "haemorrhagic"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_pancreatitis_and_pancreaticoduodenectomy: clinical pearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Acute pancreatitis (clinical features)"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "The acute abdomen"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.pancreatitis.differential": {
+      "id": "skill.reasoning.pancreatitis.differential",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Differential diagnosis",
+      "oneLine": "Perforation, gallbladder, infarct and ischaemia against one pain",
+      "why": "Several catastrophes share the epigastrium, and each demands the opposite move: perforation needs an operation, cholecystitis needs antibiotics and a delayed gallbladder removal, an infarct needs the cardiac unit. The differential is a routing decision, not an essay.",
+      "teach": [
+        {
+          "heading": "The surgical mimics above and below",
+          "body": "Perforated peptic ulcer strikes suddenly like a knife, with board-like rigidity from the start, absent liver dullness from free gas, and pain tracking down the right paracolic gutter. Pancreatitis builds over hours with a soft wall.\n\nAcute cholecystitis sits under the right costal margin with fever leading, a positive Murphy sign and a thick walled gallbladder on ultrasound. Biliary colic is colicky with pain free gaps, cholangitis adds jaundice with rigors, and obstruction brings colic with distension and noisy bowel."
+        },
+        {
+          "heading": "The medical mimics that must not reach theatre",
+          "body": "Inferior myocardial infarction can present as epigastric pain with vomiting and sweating, so an ECG belongs in the workup of every doubtful upper abdomen, especially with risk factors. Acute mesenteric ischaemia gives pain out of proportion to tenderness in an elderly vasculopath.\n\nA dissecting aneurysm tears through to the back with unequal pulses and shock, while diabetic crisis and uraemia can both mimic an acute abdomen with vomiting and distension. Blood sugar, urea and an ECG cost little and avert a catastrophic wrong operation."
+        },
+        {
+          "heading": "Cancer behind the attack",
+          "body": "Painless progressive jaundice with a palpable gallbladder in an older patient points to pancreatic head cancer rather than stones, and weight loss with a new attack above 40 should prompt a search for a tumour.\n\nChronic pancreatitis gives repeated milder episodes with steatorrhoea and calcification rather than one fulminant illness. Recurrent idiopathic attacks deserve MRCP or endoscopic ultrasound, not another symptomatic admission."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three surgical differentials of suspected acute pancreatitis.",
+          "a": "Perforated peptic ulcer, acute cholecystitis and intestinal obstruction, with biliary colic and cholangitis close behind.",
+          "accept": [
+            "perforation",
+            "cholecystitis",
+            "obstruction"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does every doubtful epigastric pain get an ECG?",
+          "a": "Because inferior myocardial infarction can present with epigastric pain, vomiting and sweating that mimic an acute abdomen.",
+          "accept": [
+            "infarction",
+            "epigastric",
+            "mimic"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A 65-year-old loses weight and then develops pancreatitis with no stones and no alcohol. What next?",
+          "a": "Suspect a pancreatic tumour and image the gland with contrast CT or MRCP with endoscopic ultrasound, rather than labelling it idiopathic.",
+          "accept": [
+            "tumour",
+            "malignan",
+            "cancer"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Spans perforation, biliary, vascular, cardiac and neoplastic causes"
+        },
+        {
+          "id": "contrast",
+          "text": "States the bedside contrast with perforation and cholecystitis"
+        },
+        {
+          "id": "safety",
+          "text": "Names the ECG and the tumour search where indicated"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_pancreatitis_and_pancreaticoduodenectomy: additional differentials"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Acute pancreatitis (differential diagnosis)"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "The acute abdomen"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.investigation.pancreatitis.workup": {
+      "id": "skill.investigation.pancreatitis.workup",
+      "kind": "investigation",
+      "system": "surgery",
+      "title": "Confirming pancreatitis and finding the cause",
+      "oneLine": "Lipase confirms, ultrasound finds the stones, CT waits for failure to improve",
+      "why": "Two cheap tests, lipase and an ultrasound, answer the two questions that matter: is this pancreatitis, and are stones the cause. A CT on day one answers neither better and only delays fluids, so knowing when not to scan is the skill.",
+      "teach": [
+        {
+          "heading": "Enzymes confirm, lipase first",
+          "body": "Lipase above 3 times the upper limit of normal confirms the diagnosis with typical pain, and is preferred over amylase. Amylase rises within hours, peaks within 24 to 48 hours and falls fast, so a late sample can be falsely reassuring.\n\nNormal amylase runs 80 to 150 Somogyi units, 400 units suggests acute pancreatitis, and the highest levels reach 1000 to 2000 units. Urinary diastase rises from a normal 10 to 30 units to 500 units or more, and glycosuria may appear transiently."
+        },
+        {
+          "heading": "Grade the patient, not the picture",
+          "body": "Full blood count, urea, creatinine, electrolytes, calcium, liver function, triglycerides, glucose, CRP and a blood gas where indicated map organ failure rather than confirming pain. A falling calcium means fat saponification, and a level below 7 mg per 100 ml marks severe disease.\n\nUrea and haematocrit track third spacing and resuscitation: a rising urea despite fluids warns of a severe course. An ECG excludes the inferior infarct that mimics this pain, and erect films look for free gas that would reroute the patient to theatre."
+        },
+        {
+          "heading": "Ultrasound now, CT only on indication",
+          "body": "Transabdominal ultrasound in every patient looks for gallstones and sludge, repeated if the first scan is inconclusive, with the bile duct diameter and liver enzymes guiding suspicion of a retained stone.\n\nDo not scan for severity at admission. Reserve contrast CT for diagnostic doubt or failure to improve after 48 to 72 hours, when necrosis declares itself. Early CT misses evolving necrosis, while gas in the duodenum and a cut-off colon are soft plain film clues at best."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which enzyme is preferred to confirm acute pancreatitis, and at what threshold?",
+          "a": "Lipase, above 3 times the upper limit of normal.",
+          "accept": [
+            "lipase",
+            "3 times"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why can a normal amylase on day four not exclude pancreatitis?",
+          "a": "Amylase peaks within 24 to 48 hours and falls fast, so a late sample misses the window.",
+          "accept": [
+            "peaks",
+            "48 hours",
+            "late"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "When is contrast CT indicated in acute pancreatitis?",
+          "a": "For diagnostic uncertainty or failure to improve after 48 to 72 hours, not for routine severity grading at admission.",
+          "accept": [
+            "48",
+            "72 hours",
+            "uncertainty"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_pancreatitis_and_pancreaticoduodenectomy: additional investigations"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_pancreatitis_and_pancreaticoduodenectomy: clinical pearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Acute pancreatitis (investigations)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.pancreatitis.diagnosis": {
+      "id": "skill.reasoning.pancreatitis.diagnosis",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Diagnosis and severity: two of three, then Atlanta",
+      "oneLine": "Typical pain plus lipase or imaging, graded by organ failure past 48 hours",
+      "why": "The diagnosis is clinical plus one test, not a scan score, and the grade decides monitored bed, ICU and referral. A student who grades by pain keeps a shocked patient on the open ward; one who grades by failure acts in time.",
+      "teach": [
+        {
+          "heading": "Two of three makes the diagnosis",
+          "body": "Typical constant epigastric pain radiating to the back, lipase or amylase above 3 times the upper limit, and characteristic imaging: any two confirm acute pancreatitis. Lipase is preferred, and with classic pain plus enzymes no CT is needed at all.\n\nA complete diagnostic statement names the cause where known, for example acute gallstone pancreatitis, because the cause owns the prevention. Pain plus enzymes plus stones on ultrasound is already a complete diagnosis."
+        },
+        {
+          "heading": "Atlanta grades by failure, with a 48 hour cut",
+          "body": "Mild means no organ failure and no local or systemic complications. Moderately severe means transient failure resolving within 48 hours, local complications, or exacerbation of co-morbid disease.\n\nSevere means persistent organ failure beyond 48 hours: shock with systolic pressure below 90, oxygen pressure below 60, creatinine above 2 mg per dL after fluids, or a Marshall score of 2 or more. Stay vigilant for the first 48 hours even in apparently mild disease."
+        },
+        {
+          "heading": "Who earns a monitored bed",
+          "body": "SIRS, a high or rising urea or haematocrit, obesity, older age, comorbidity, altered sensorium, pleural effusions or infiltrates all warn of a severe course. Admit such patients to a monitored bed or ICU from the start.\n\nScores and early imaging predict poorly on their own, so the grade is a living one: reassess volume, oxygen need, urine output and bloods repeatedly over 24 to 48 hours, aiming for a falling urea and a patient who stays ahead of failure."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "State the two of three rule for diagnosing acute pancreatitis.",
+          "a": "Typical epigastric pain radiating to the back, lipase or amylase above 3 times normal, or characteristic imaging: any two.",
+          "accept": [
+            "pain",
+            "3 times",
+            "imaging"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What single time cut separates moderately severe from severe disease?",
+          "a": "Persistent organ failure beyond 48 hours defines severe disease; transient failure resolving within 48 hours is moderately severe.",
+          "accept": [
+            "48 hours",
+            "persistent",
+            "transient"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Name three bedside warnings of a severe course at admission.",
+          "a": "SIRS, rising urea or haematocrit, obesity, older age, altered sensorium, effusions or infiltrates.",
+          "accept": [
+            "SIRS",
+            "urea",
+            "obesity"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "criteria",
+          "text": "States the two of three rule with the enzyme threshold"
+        },
+        {
+          "id": "grade",
+          "text": "Grades by Atlanta with the 48 hour cut"
+        },
+        {
+          "id": "disposition",
+          "text": "Links the grade to a monitored bed or ICU"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_pancreatitis_and_pancreaticoduodenectomy: clinical pearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Acute pancreatitis (diagnosis and assessment)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.pancreatitis.atlanta": {
+      "id": "skill.annex.pancreatitis.atlanta",
+      "kind": "annexure",
+      "system": "surgery",
+      "title": "Revised Atlanta classification at a glance",
+      "oneLine": "Three grades and four collections on one reference card",
+      "why": "Grades and collections have exact names, and using them exactly is what lets a referral letter, a CT report and a viva answer all mean the same thing. This card is looked up, not memorised, until the names stick.",
+      "teach": [
+        {
+          "heading": "The three grades",
+          "table": {
+            "cols": [
+              "Grade",
+              "Organ failure",
+              "Course"
+            ],
+            "rows": [
+              [
+                "Mild",
+                "None",
+                "Settles with support, no complications"
+              ],
+              [
+                "Moderately severe",
+                "Transient, within 48 hours",
+                "Local complications or flare of co-morbidity"
+              ],
+              [
+                "Severe",
+                "Persistent beyond 48 hours",
+                "Monitored bed or ICU, may need intervention"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "The four collections",
+          "body": "Collections are named by content and wall, and the name decides timing. Acute peripancreatic fluid collections and acute necrotic collections appear before 4 weeks without a defined wall.\n\nPseudocysts and walled-off necrosis appear after about 4 weeks with a mature wall, and only walled-off necrosis contains solid dead tissue. Intervention waits for walling off wherever the patient stays stable."
+        },
+        {
+          "heading": "Organ failure cutoffs",
+          "table": {
+            "cols": [
+              "System",
+              "Failure defined as"
+            ],
+            "rows": [
+              [
+                "Cardiovascular",
+                "Systolic pressure below 90 mmHg"
+              ],
+              [
+                "Respiratory",
+                "Arterial oxygen below 60 mmHg"
+              ],
+              [
+                "Renal",
+                "Creatinine above 2 mg per dL after fluids"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What defines severe pancreatitis under Atlanta?",
+          "a": "Persistent organ failure beyond 48 hours.",
+          "accept": [
+            "persistent",
+            "48 hours",
+            "failure"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How does walled-off necrosis differ from a pseudocyst?",
+          "a": "Walled-off necrosis contains solid necrotic tissue within a mature wall after about 4 weeks; a pseudocyst holds fluid only.",
+          "accept": [
+            "necrotic",
+            "wall",
+            "4 weeks"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does the collection name change the operation date?",
+          "a": "Drainage or necrosectomy waits for a mature wall, preferably 4 weeks, so intervention is safer and often avoidable.",
+          "accept": [
+            "wall",
+            "4 weeks",
+            "delay"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_pancreatitis_and_pancreaticoduodenectomy: clinical pearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Acute pancreatitis (classification)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.treatment.pancreatitis.management": {
+      "id": "skill.treatment.pancreatitis.management",
+      "kind": "treatment",
+      "system": "surgery",
+      "title": "Managing acute pancreatitis",
+      "oneLine": "Moderate fluids, early feeding, no routine antibiotics, stone surgery before discharge",
+      "why": "Deaths come from under-resuscitation in the first day, from starvation by prolonged fasting, and from infected necrosis treated too late or drained too early. Each arm of support has a window, and the plan is mostly about respecting all three.",
+      "teach": [
+        {
+          "heading": "Fluids: Ringer lactate, moderate and watched",
+          "body": "Resuscitate with Ringer lactate rather than normal saline, at a moderate goal-directed rate of 1.5 mL per kg per hour, with a 10 mL per kg bolus first only if hypovolaemic. Aggressive large volume regimes cause overload without better outcomes.\n\nReassess within 6 hours and repeatedly over 24 to 48 hours against pulse, pressure, urine output, urea and haematocrit, aiming for a falling urea. Go slower with cardiac or renal disease and in older patients, watching lungs and bladder pressure."
+        },
+        {
+          "heading": "Pain, sickness and feeding",
+          "body": "Give adequate analgesia, using opioids such as morphine 0.1 mg per kg titrated in 2 to 4 mg increments when simple measures fail, with an antiemetic such as metoclopramide 10 mg to control vomiting.\n\nStart oral feeding within 24 to 48 hours as tolerated in mild disease, beginning with low fat solids rather than stepwise clear fluids. Where oral intake fails in severe disease, feed enterally by the nasogastric route, which matches nasojejunal results, and reserve parenteral nutrition for enteral failure."
+        },
+        {
+          "heading": "Antibiotics only for infection, drainage only when walled",
+          "body": "Give no prophylactic antibiotics, even in severe or necrotising disease. Treat proven infections, and suspect infected necrosis on deterioration or gas in the collection, typically after 10 to 14 days, using penetrating agents such as meropenem 1 g intravenously every 8 hours, without routine antifungals or needle aspiration.\n\nDelay drainage or necrosectomy preferably to 4 weeks for walling off, preferring endoscopic or percutaneous step-up over open surgery, with a pancreatic multidisciplinary team for unstable infected necrosis."
+        },
+        {
+          "heading": "Stones, referral and recurrence in Indian practice",
+          "body": "With cholangitis, do ERCP within 24 hours; without it, confirm a suspected duct stone by MRCP or endoscopic ultrasound first. In mild gallstone pancreatitis, remove the gallbladder on the same admission before discharge. High risk ERCP cases get rectal indomethacin 100 mg before or just after the procedure.\n\nLipase, ultrasound and basic labs are available at most district hospitals, so start support locally and refer early to a medical college HPB unit for necrosis, organ failure or need for ERCP. Counsel alcohol abstinence at every admission and recheck fasting triglycerides about a month after discharge."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which fluid, and at what rate, starts resuscitation?",
+          "a": "Ringer lactate at 1.5 mL per kg per hour, with a 10 mL per kg bolus first only if hypovolaemic.",
+          "accept": [
+            "Ringer",
+            "1.5",
+            "bolus"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "When do you feed, and by which route if the patient cannot eat?",
+          "a": "Oral low fat feeding within 24 to 48 hours; enteral feeding, nasogastric acceptable, if oral intake fails.",
+          "accept": [
+            "48 hours",
+            "enteral",
+            "nasogastric"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Infected necrosis is suspected on day 12 in a stable patient. Operate now?",
+          "a": "No. Start penetrating antibiotics and delay drainage or necrosectomy preferably to 4 weeks for walling off, using endoscopic or percutaneous step-up first.",
+          "accept": [
+            "antibiotics",
+            "4 weeks",
+            "step-up"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_pancreatitis_and_pancreaticoduodenectomy: clinical pearls"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute-pancreatitis: fluids and analgesia (first 24 to 48 hours)"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pancreatitis: recommendations (goal-directed fluids, analgesia, nutrition)"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Acute pancreatitis (treatment)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of principle with quoted resuscitation rates. Specific agents, combinations and durations must be taken from your current national or institutional guideline and local resistance data at the time of prescribing. CliniX does not prescribe."
+    }
+  },
+  "cases": [
+    {
+      "id": "case.pancreatitis.sunita",
+      "title": "A homemaker with one day of pain piercing to the back",
+      "opening": "Sunita Patil, 42, sits forward on the trolley holding her upper abdomen. She has vomited twice in the waiting area. Introduce yourself and take a history.",
+      "fallback": "I do not understand, doctor. Please ask in a simpler way.",
+      "patient": {
+        "name": "Sunita Patil",
+        "age": 42,
+        "sex": "female",
+        "occupation": "Homemaker, cooks for a family of five",
+        "residence": "A chawl room with her husband and two children"
+      },
+      "initialVitals": {
+        "hr": 112,
+        "bpSystolic": 100,
+        "bpDiastolic": 70,
+        "rr": 24,
+        "spo2": 94,
+        "temp": 38.4,
+        "gcs": 15
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "what is the main problem",
+            "why have you come to hospital",
+            "tell me your main complaint",
+            "how can I help you today"
+          ],
+          "reply": "Doctor, since yesterday morning I have a terrible pain in the upper stomach and I have vomited many times.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "onset_tempo": {
+          "cues": [
+            "when did the pain begin",
+            "how did it start suddenly or gradually",
+            "what were you doing when it started",
+            "how many hours of pain now",
+            "has it been constant since onset"
+          ],
+          "reply": "It started suddenly yesterday around eight, just after breakfast. It has stayed constant since, not coming and going.",
+          "key": true
+        },
+        "pain_site_character": {
+          "cues": [
+            "where exactly is the pain",
+            "point to the pain with one finger",
+            "how severe is the pain out of ten",
+            "is the pain constant or colicky",
+            "what does the pain feel like"
+          ],
+          "reply": "Here in the centre, just below the ribs. It is constant and boring, nine out of ten, the worst pain of my life.",
+          "key": true,
+          "skillId": "skill.hx.surg.pain"
+        },
+        "back_radiation_pierce": {
+          "cues": [
+            "does the pain go through to the back",
+            "any pain in the back or loin",
+            "does the pain pierce backwards",
+            "pain between the shoulder blades"
+          ],
+          "reply": "Yes, it pierces straight through to my back, more on the left side near the waist.",
+          "key": true
+        },
+        "posture_relief_sitting": {
+          "cues": [
+            "what makes the pain better",
+            "does sitting up help the pain",
+            "is lying flat worse for you",
+            "which position gives you relief"
+          ],
+          "reply": "Sitting and leaning forward eases it a little. Lying flat makes it worse, so I sat up the whole night.",
+          "key": true
+        },
+        "vomiting_after_pain": {
+          "cues": [
+            "when did vomiting start in relation to pain",
+            "how many times have you vomited",
+            "what colour is the vomitus",
+            "does vomiting relieve your pain"
+          ],
+          "reply": "Vomiting started about two hours after the pain, six or seven times, yellow and bitter. It gives no relief.",
+          "key": true
+        },
+        "bowel_flatus_normal": {
+          "cues": [
+            "are you passing gas normally",
+            "when was your last motion",
+            "any constipation or diarrhoea today",
+            "is your abdomen swollen or distended"
+          ],
+          "reply": "I am passing gas normally and went to the toilet yesterday morning. The stomach is not swollen.",
+          "key": true
+        },
+        "fever_temperature_course": {
+          "cues": [
+            "did you develop fever after the pain",
+            "how high did the temperature go",
+            "any chills with rigors",
+            "was there fever before the pain"
+          ],
+          "reply": "Mild fever came last night, after the pain had started. No shivering fits like in malaria.",
+          "key": true
+        },
+        "jaundice_yellow_urine": {
+          "cues": [
+            "have your eyes turned yellow",
+            "is your urine dark yellow",
+            "any itching of the skin",
+            "pale or clay coloured stools"
+          ],
+          "reply": "No yellow eyes and no itching. Urine looks a little dark because I drank very little water.",
+          "key": true
+        },
+        "past_biliary_colic": {
+          "cues": [
+            "previous attacks of right sided pain",
+            "pain after fried or fatty food before",
+            "known gallbladder stones on scan",
+            "earlier jaundice that passed off"
+          ],
+          "reply": "Three or four times in two years I had pain on the right side after fried food. A scan last year showed stones and the doctor advised operation, but I postponed it.",
+          "key": true,
+          "skillId": "skill.hx.surg.acute_abdomen"
+        },
+        "alcohol_country_liquor": {
+          "cues": [
+            "do you consume alcohol regularly",
+            "any country liquor or beer habit",
+            "how often do you drink alcohol"
+          ],
+          "reply": "No, doctor, I have never touched alcohol in my life.",
+          "key": true
+        },
+        "tobacco_smoking_habit": {
+          "cues": [
+            "do you smoke bidis or cigarettes",
+            "any tobacco chewing habit at all"
+          ],
+          "reply": "No smoking and no tobacco of any kind.",
+          "key": true
+        },
+        "drug_tablets_intake": {
+          "cues": [
+            "which tablets do you take daily",
+            "any new medicine started recently",
+            "tablets for fits or thyroid disease"
+          ],
+          "reply": "I take no regular tablets. Only two paracetamol yesterday for the pain.",
+          "key": true
+        },
+        "comorbidity_sugar_pressure": {
+          "cues": [
+            "do you have diabetes or sugar",
+            "blood pressure on regular treatment",
+            "any heart or kidney disease"
+          ],
+          "reply": "Sugar was borderline six months ago, controlled with diet, no tablets. No pressure, heart or kidney problem.",
+          "key": true
+        },
+        "previous_surgery_scar": {
+          "cues": [
+            "any previous operation on the abdomen",
+            "tubectomy or caesarean in the past"
+          ],
+          "reply": "Only a tubectomy ten years ago. No other operation.",
+          "key": true
+        },
+        "meals_appetite_weight": {
+          "cues": [
+            "how is your appetite since yesterday",
+            "any weight loss over recent months",
+            "what is your usual diet at home"
+          ],
+          "reply": "No appetite at all since the pain began. Before this my weight was steady, we eat simple vegetarian food.",
+          "key": true
+        },
+        "family_home_support": {
+          "cues": [
+            "who is with you at home",
+            "who will look after you in hospital",
+            "anyone at home with gallstones"
+          ],
+          "reply": "My husband is with me now and the children are with my sister. My mother had her gallbladder removed years ago.",
+          "key": true
+        }
+      },
+      "exam": {
+        "skill.gen.surg.survey": {
+          "finding": "Restless, sitting forward on the trolley and guarding the upper abdomen with both hands. Anxious facies, no cold sweat yet.",
+          "abnormal": true
+        },
+        "skill.gen.appearance": {
+          "finding": "Dehydrated: dry tongue, sunken eyes, drawn cheeks. No pallor, no jaundice, no cyanosis, no pedal oedema.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Temperature 38.4 C. Pulse 112 per minute, regular. Blood pressure 100/70. Respiratory rate 24, shallow. SpO2 94 percent on room air.",
+          "abnormal": true
+        },
+        "skill.gen.surg.surgical_shock": {
+          "finding": "Tachycardia with borderline hypotension and reduced urine output from third spacing. Peripheries still warm, capillary refill under 3 seconds.",
+          "abnormal": true
+        },
+        "skill.exam.surg.tenderness_rebound": {
+          "finding": "Marked tenderness just above the umbilicus. Abdominal wall soft, no guarding, no rebound tenderness.",
+          "abnormal": true
+        },
+        "skill.exam.surg.peritonitis_signs": {
+          "finding": "No generalised rigidity. Liver dullness preserved in the right midaxillary line. Bowel sounds sluggish but present.",
+          "abnormal": false
+        },
+        "skill.exam.surg.bowel_obstruction": {
+          "finding": "Abdomen flat, no visible peristalsis, no distension. Hernial orifices free. No shifting dullness at this stage.",
+          "abnormal": false
+        },
+        "skill.exam.surg.courvoisier_sign": {
+          "finding": "Gallbladder not palpable. No palpable abdominal lump. Tenderness in the right hypochondrium without inspiratory arrest.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "lipase_amylase",
+        "usg_abdomen",
+        "renal_function"
+      ],
+      "investigations": {
+        "lipase_amylase": {
+          "label": "Serum lipase and amylase",
+          "indicated": true,
+          "result": "Lipase 1240 U/L, amylase 980 U/L, both well above 3 times the upper limit.",
+          "note": "Confirms the diagnosis with typical pain. No CT needed to make the call."
+        },
+        "liver_function": {
+          "label": "Liver function tests",
+          "indicated": true,
+          "result": "Bilirubin 3.1 mg/dL, ALT 190, AST 160, ALP 260, albumin 3.8 g/dL.",
+          "note": "Cholestatic picture fits a biliary cause without frank cholangitis, which would add fever with rigors."
+        },
+        "blood_counts": {
+          "label": "Full blood count",
+          "indicated": true,
+          "result": "Haemoglobin 12.6 g/dL. Total leucocyte count 14,200 with 84 percent neutrophils.",
+          "note": "Neutrophil leucocytosis fits acute inflammation and helps grade how unwell she is."
+        },
+        "renal_function": {
+          "label": "Urea, creatinine and electrolytes",
+          "indicated": true,
+          "result": "Urea 44 mg/dL, creatinine 1.1 mg/dL, sodium 134, potassium 3.9.",
+          "note": "Urea at the upper edge tracks third spacing. A rising urea despite fluids would warn of a severe course."
+        },
+        "serum_calcium": {
+          "label": "Serum calcium",
+          "indicated": true,
+          "result": "7.6 mg/dL, low normal.",
+          "note": "Falling calcium means fat saponification. Below 7 mg per 100 ml marks severe disease, so repeat it."
+        },
+        "triglycerides": {
+          "label": "Fasting triglycerides",
+          "indicated": true,
+          "result": "210 mg/dL.",
+          "note": "Well below 1000 mg per dL, so hypertriglyceridaemia is not the cause here."
+        },
+        "serum_crp": {
+          "label": "C-reactive protein",
+          "indicated": true,
+          "result": "148 mg/L.",
+          "note": "High inflammatory burden supporting admission to a monitored bed rather than the open ward."
+        },
+        "usg_abdomen": {
+          "label": "Transabdominal ultrasound",
+          "indicated": true,
+          "result": "Multiple gallbladder stones, wall 4 mm, common bile duct 5 mm, bulky pancreas, no pericholecystic fluid.",
+          "note": "Answers the cause question at the bedside: stones, without the thick wall and sonographic Murphy of cholecystitis."
+        },
+        "cect_abdomen": {
+          "label": "Contrast CT of the abdomen",
+          "indicated": true,
+          "result": "Done on day 4 for persistent tachycardia: bulky pancreas with peripancreatic stranding and a small fluid collection, no necrosis, no free gas.",
+          "note": "Correctly delayed past 48 hours. No necrosis yet, and no perforation to explain away."
+        },
+        "chest_xray": {
+          "label": "Chest radiograph and ECG",
+          "indicated": true,
+          "result": "Left basal haze with a small effusion, no consolidation. ECG normal sinus rhythm, no infarct.",
+          "note": "Basal atelectasis is expected from splinting. The ECG excludes the infarct that mimics this pain."
+        }
+      },
+      "differentialModel": {
+        "answer": "Acute gallstone pancreatitis. Consider perforated peptic ulcer, acute cholecystitis, ascending cholangitis, intestinal obstruction and an inferior infarct.",
+        "accept": [
+          "Acute cholecystitis",
+          "Biliary colic",
+          "Ascending cholangitis",
+          "Choledocholithiasis",
+          "Perforated peptic ulcer",
+          "Intestinal obstruction",
+          "Mesenteric ischaemia",
+          "ST elevation myocardial infarction",
+          "Carcinoma of the pancreas",
+          "Aortic dissection"
+        ],
+        "minMatch": 3
+      },
+      "diagnosis": {
+        "answer": "Acute gallstone pancreatitis, moderately severe by the revised Atlanta classification, with a peripancreatic fluid collection.",
+        "accept": [
+          "Acute pancreatitis",
+          "Gallstone pancreatitis"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Ringer lactate resuscitation with reassessment, oxygen, analgesia, early low fat feeding, no prophylactic antibiotics, monitored bed, and cholecystectomy on the same admission once settled.",
+        "accept": [
+          "fluids",
+          "analgesia",
+          "enteral nutrition",
+          "cholecystectomy",
+          "high dependency",
+          "review",
+          "education"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "Pain first with vomiting after, constant and piercing to the back with relief on sitting forward, is the tempo of pancreatitis, not colic and not perforation.",
+        "A soft wall under marked epigastric tenderness is the bedside diagnosis. Rigidity would mean perforation or a late complication, not this disease.",
+        "Stones on ultrasound plus enzymes above 3 times normal is already a complete diagnosis. The CT correctly waited until day 4 and excluded necrosis and free gas.",
+        "Urea at the upper edge with tachycardia and borderline pressure is early third space shock, which is why she earns a monitored bed despite a soft abdomen.",
+        "No antibiotics: early disease is sterile autodigestion. Antibiotics await proven infection or suspected infected necrosis after the second week.",
+        "The postponed cholecystectomy caused this admission. Mild gallstone pancreatitis needs the gallbladder out before discharge, or the next attack follows."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

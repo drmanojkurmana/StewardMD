@@ -1,0 +1,1228 @@
+{
+  "_comment": "Varicose veins. Same architecture as pneumonia: shared surgery and core skills carry the examination, the disease adds reflux mapping as its mechanism, CEAP as its severity anchor, and fitness-for-intervention as its management decision. Subtitle names the two eponymous tests.",
+  "id": "varicose-veins",
+  "name": "Varicose veins",
+  "fullName": "Varicose veins: assessment and management",
+  "subtitle": "Trendelenburg and Perthes tests",
+  "system": "surgery",
+  "kbRef": "varicose_veins",
+  "oneLine": "Leaking leg valves mapped by hand and duplex, from compression and habits to ablation",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What a varicose vein is, which system it runs in, and whether anything drives it",
+      "skills": [
+        "skill.reasoning.varicose.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age, sex and work set the odds before the leg is exposed",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected varicose veins, middle age, female sex with pregnancies behind her, and a job done standing all day carry real weight. Note the occupation precisely: conductors, police and traffic staff, nurses, hawkers and farm workers bring the classic story, and a loaded bowel habit or a pelvic lump in the same history changes the whole workup."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Evenings, not mornings, and relief on lying down",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.surg.varicose_veins"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical presentation reads in years with an evening rhythm: heaviness and aching for years, worst at day end after standing, gone by morning. Bursting pain on walking, sudden hot cord pain, or bleeding episodes break that rhythm and each points away from simple primary disease."
+        },
+        "skill.hx.surg.varicose_veins": {
+          "expect": "Expect aching heaviness with evening ankle swelling, night cramps and itching over the lower leg. Press for the three complications the skill lists: burst bleeding, red tender cords, and skin sores, and for the deep thrombosis history that decides whether surface surgery is even allowed."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The risk factors that decide primary against secondary",
+      "skills": [
+        "skill.hx.varicose.riskfactors"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "A well patient, and the abdomen that must not be skipped",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Expect a generally well patient with a chronic complaint, not an acutely unwell one. Build, gait and footwear still matter: obesity loads the veins, and a tiptoe gait held for years can shorten the Achilles tendon above a chronic ulcer."
+        },
+        "skill.gen.vitals": {
+          "expect": "Vitals are usually normal and that normality is a finding: it places the case on a routine list. Fever with a hot red leg means superimposed thrombophlebitis or cellulitis, not simple varices, and hypotension with bleeding means the ruptured varix is the emergency."
+        },
+        "skill.gen.edema": {
+          "expect": "Expect pitting ankle oedema that gathers through the day and largely clears overnight. Non-pitting swelling with thick toes points to lymphoedema instead, and whole-limb swelling with a tense calf points to deep venous disease."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Examination of the veins",
+      "blurb": "Standing inspection, two named tests, and the pulses that clear compression",
+      "skills": [
+        "skill.exam.surg.varicose_inspection_palpation",
+        "skill.exam.surg.trendelenburg_tourniquet",
+        "skill.exam.surg.perthes_deep_vein_patency",
+        "skill.exam.surg.arterial_pulses_lower",
+        "skill.exam.surg.regional_nodes"
+      ],
+      "emphasis": {
+        "skill.exam.surg.varicose_inspection_palpation": {
+          "expect": "Expect tortuous great saphenous trunks on the inner leg and thigh, or small saphenous trunks up the back of the calf, with a saphena varix coughing expansively at the groin and fascial pits over medial perforators. Grade the gaiter skin as you go: pigmentation, eczema, woody thickening, white patches, healed scar or open ulcer."
+        },
+        "skill.exam.surg.trendelenburg_tourniquet": {
+          "expect": "Expect a double answer in the classic case: slow filling from below while the junction is held proves the perforator leak, and a rush from above on release proves the saphenofemoral leak. One without the other still localises treatment, so observe the two phases separately and report them separately."
+        },
+        "skill.exam.surg.perthes_deep_vein_patency": {
+          "expect": "Expect the varicosities to empty as the patient walks with the surface trunk occluded, with no calf pain. That emptying is the single result that clears the leg for ablation or stripping, and bursting pain with further distension forbids it outright."
+        },
+        "skill.exam.surg.arterial_pulses_lower": {
+          "expect": "Pulses must be documented because compression and ulcer care depend on arterial supply. Palpable dorsalis pedis and posterior tibial pulses with no claudication story clear the way for stockings; absent pulses or claudication demand an arterial index before anything is wrapped."
+        },
+        "skill.exam.surg.regional_nodes": {
+          "expect": "Inguinal nodes are usually impalpable in simple varices. Enlarged tender nodes mean an infected ulcer, and enlarged hard nodes with a long-standing odd-edged ulcer raise the question of malignant change and need tissue diagnosis."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the venous picture together",
+      "blurb": "One pressure explains the ache, the tests and the skin",
+      "skills": [
+        "skill.reasoning.varicose.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "System, tests and grade in five lines",
+      "skills": [
+        "skill.present.varicose.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "What else swells or ulcerates the leg, and what forbids your plan",
+      "skills": [
+        "skill.reasoning.varicose.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Duplex draws the map, the index opens the gate",
+      "skills": [
+        "skill.investigation.varicose.workup",
+        "skill.ix.surg.abpi"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and severity",
+      "blurb": "CEAP, and the fitness statement that actually drives care",
+      "skills": [
+        "skill.reasoning.varicose.diagnosis",
+        "skill.annex.surg.ceap_classification"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Habits and stockings first, ablation for the trunk, surgery where ablation cannot reach",
+      "skills": [
+        "skill.treatment.varicose.management"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.varicose.leg_exam",
+        "title": "Examine the varicose leg",
+        "task": "This 44 year old woman constable has had left leg varicose veins for six years with evening heaviness. Examine her lower limbs and present your findings with the system involved.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.surg.varicose_inspection_palpation",
+          "skill.exam.surg.trendelenburg_tourniquet",
+          "skill.exam.surg.perthes_deep_vein_patency"
+        ],
+        "examinerQuestions": [
+          "Your thumb control is held and the veins still fill from below. Where is the leak, and what operation must include it?",
+          "On walking with the tourniquet on, her calf bursts with pain and the veins distend further. What has this proved, and what is now forbidden?",
+          "You see a saphena varix at the groin. How do you separate it from a femoral hernia without any instrument?"
+        ]
+      },
+      {
+        "id": "osce.varicose.history",
+        "title": "Take a venous history and triage",
+        "task": "This 52 year old bus conductor has prominent leg veins and ankle swelling toward evenings. Take a focused history in six minutes and be ready to say whether this looks primary and what test comes first.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.surg.varicose_veins",
+          "skill.hx.varicose.riskfactors"
+        ],
+        "examinerQuestions": [
+          "Which four facts in his story would make you suspect secondary disease, and what would you examine next?",
+          "He reports a white painful swollen leg after a long journey five years ago. How does that change your plan?",
+          "Name the single investigation that maps treatment and the bedside index needed before compression."
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.reasoning.varicose.basics",
+      "skill.exam.surg.varicose_inspection_palpation",
+      "skill.exam.surg.trendelenburg_tourniquet",
+      "skill.exam.surg.perthes_deep_vein_patency",
+      "skill.reasoning.varicose.differential",
+      "skill.investigation.varicose.workup",
+      "skill.reasoning.varicose.diagnosis",
+      "skill.treatment.varicose.management"
+    ]
+  },
+  "skills": {
+    "skill.reasoning.varicose.basics": {
+      "id": "skill.reasoning.varicose.basics",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "What varicose veins are",
+      "oneLine": "Dilated surface veins from leaking valves, in one of two saphenous systems, primary or secondary",
+      "why": "The word varicose describes a shape, but the disease is a pressure: blood falling back down the leg through valves that no longer close. Until you can say which valves leak, in which system, and whether anything higher up is driving the pressure, you cannot choose between a stocking, a needle and an operation.",
+      "teach": [
+        {
+          "heading": "A varicose vein is a failed valve, not just a big vein",
+          "body": "A vein is called varicose when it is dilated and tortuous. In the leg this happens because valves in the surface system, or at the junctions where surface meets deep, stop closing and let blood fall back down the leg. The pooled column raises surface pressure, and the raised pressure stretches the vein wall further, so leak and dilatation feed each other.\n\nThat is why the symptoms follow posture: standing fills the column and the leg aches, while lying down drains it and the ache lifts. Any pain that ignores posture is unlikely to be venous at all."
+        },
+        {
+          "heading": "Two systems compared",
+          "table": {
+            "cols": [
+              "System",
+              "Course",
+              "Junction"
+            ],
+            "rows": [
+              [
+                "Great saphenous",
+                "From in front of the medial malleolus, up the inner leg and thigh, to the groin",
+                "Saphenofemoral junction near the groin"
+              ],
+              [
+                "Small saphenous",
+                "From behind the outer ankle bone, up the back of the calf, to behind the knee",
+                "Saphenopopliteal junction in the popliteal fossa"
+              ],
+              [
+                "Perforators",
+                "Short links through the deep fascia, mainly on the inner calf and thigh",
+                "Join surface trunks to the deep veins"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Primary disease and secondary disease behave differently",
+          "body": "In primary disease no outside cause is found: the surface valves or the vein wall itself are at fault, often with a family pattern, and often brought out by standing work, weight or pregnancy. Most clinic cases are of this kind.\n\nSecondary disease has a driver: deep valves wrecked by an old thrombosis, outflow blocked by pregnancy or a pelvic or abdominal lump, or rarely a congenital shortcut pouring arterial flow into the veins. Find the driver before touching the surface veins, because removing them can remove the only way home the blood has."
+        },
+        {
+          "heading": "Who gets it",
+          "points": [
+            "Middle-aged adults most often, and women more often than men, with pregnancy a common trigger.",
+            "Workers who stand all day: conductors, police and traffic staff, nurses, hawkers and farm labourers.",
+            "Anyone with a mother or sisters affected, which points to inherited wall or valve weakness.",
+            "The obese, in whom raised abdominal pressure loads the leg veins.",
+            "Anyone with a past deep vein thrombosis, whose damaged deep valves breed secondary varicosities."
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Treating the visible vein as the disease and the tests as decoration, when the junction and the deep veins decide the treatment.",
+        "Calling every tortuous leg vein primary without asking after thrombosis, pregnancy, pills and the abdomen.",
+        "Promising that removing surface veins cures heaviness that never varied with posture."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What makes a leg vein varicose, in one mechanism?",
+          "a": "Incompetent valves let blood reflux down the leg, and the resulting venous hypertension dilates the superficial vein until it is tortuous.",
+          "accept": [
+            "valves",
+            "reflux",
+            "hypertension",
+            "dilates"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How does the course of small saphenous varicosity differ from great saphenous varicosity?",
+          "a": "Great saphenous varicosity runs up the inner leg and thigh to the groin, while small saphenous varicosity runs up the back of the calf from behind the outer ankle to behind the knee.",
+          "accept": [
+            "inner",
+            "groin",
+            "back of the calf",
+            "behind the knee"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why must secondary varicosities be excluded before surface surgery is offered?",
+          "a": "When deep veins are blocked or a higher obstruction drives the pressure, the surface varicosities carry essential return flow, and removing them risks severe congestion and ulceration.",
+          "accept": [
+            "blocked",
+            "obstruction",
+            "essential",
+            "congestion"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "varicose_veins: pathophysiology"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Varicose veins: definition and aetiology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.varicose.signs": {
+      "id": "skill.reasoning.varicose.signs",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "The varicose picture",
+      "oneLine": "Evening heaviness, a standing examination, two named tests, and skin that keeps score",
+      "why": "Every finding in chronic venous disease is one story told twice: high surface pressure first stretches the vein, then injures the skin it feeds. A student who reads symptoms, tests and skin as chapters of that single story will localise the leak and grade the disease at the bedside; one who memorises them separately will mix up the tests and miss the ulcer that is coming.",
+      "teach": [
+        {
+          "heading": "The evening leg",
+          "body": "The classic story is an aching heaviness of the whole leg or the lower leg, worst toward the end of the day, worse after long standing, and relieved by lying down. Night cramps, ankle swelling that gathers through the day, and itching over the lower leg complete it.\n\nTwo pains warn of something else: a bursting pain on walking points to deep venous blockage, and sudden severe pain with a hot red cord points to superficial thrombophlebitis. Neither belongs to simple primary disease."
+        },
+        {
+          "heading": "Read the leg standing",
+          "body": "Veins collapse flat, so the leg must be examined standing with groin-to-toe exposure. Trace which trunk is diseased, look for a groin bulge that coughs expansively, feel for pits in the deep fascia where perforators leak, and study the gaiter skin above the ankle for pigmentation, eczema, thickening or ulcer.\n\nA saphena varix that fills on coughing means the saphenofemoral valve has failed. Fascial pits mark the perforators that are pumping deep pressure outward, and each one is a site the treatment must close."
+        },
+        {
+          "heading": "Bedside tests and what each answers",
+          "table": {
+            "cols": [
+              "Test",
+              "How it reads",
+              "What it means"
+            ],
+            "rows": [
+              [
+                "Cough impulse at the groin",
+                "Expansile thrust felt over the saphenous opening",
+                "Saphenofemoral valve incompetence"
+              ],
+              [
+                "Trendelenburg, pressure released",
+                "Veins fill in a rush from above",
+                "Saphenofemoral reflux confirmed"
+              ],
+              [
+                "Trendelenburg, pressure held",
+                "Veins fill slowly from below despite control",
+                "Incompetent perforators below the control"
+              ],
+              [
+                "Perthes walking test",
+                "Veins empty and the calf stays comfortable",
+                "Deep veins open, surface work is safe"
+              ],
+              [
+                "Perthes walking test",
+                "Veins distend further with bursting calf pain",
+                "Deep blockage, surface surgery forbidden"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Skin changes are the clock",
+          "body": "Long pressure leaks red cells and fluid into the gaiter skin: first brown pigmentation, then eczema, then a woody thickening of skin and fat with white starved patches, and finally a shallow ulcer above the inner ankle that follows trivial injury or nothing at all.\n\nBleeding from a surface varix can be alarming but is controlled by lying flat with the leg raised and firm direct pressure, never by a tourniquet round the limb. A non-healing or odd-edged ulcer with enlarged groin nodes needs biopsy, since long-standing venous ulcers can rarely turn malignant."
+        }
+      ],
+      "pitfalls": [
+        "Examining the leg on the couch and declaring the veins mild, when standing would have shown the full disease.",
+        "Confusing a saphena varix with a femoral hernia: the varix vanishes on lying down and coughs expansively.",
+        "Applying compression or booking ablation without checking pulses and the arterial index first."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What single feature of the ache most strongly suggests venous disease?",
+          "a": "It worsens with dependent standing through the day and is relieved by lying down with the leg raised.",
+          "accept": [
+            "standing",
+            "worse",
+            "lying down",
+            "relieved"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "With thumb control held at the groin, the veins still fill from below on standing. What does this prove?",
+          "a": "Incompetent perforating veins below the control are filling the surface system from the deep veins despite saphenofemoral occlusion.",
+          "accept": [
+            "perforating",
+            "below",
+            "deep veins",
+            "filling"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does a normal Perthes test clear the leg for surface surgery, from first principles?",
+          "a": "Emptying of the varicosities during calf exercise with the surface trunk occluded proves the deep veins are open and the calf pump clears them, so the deep system can take over all return flow.",
+          "accept": [
+            "emptying",
+            "deep veins",
+            "open",
+            "calf pump"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "varicose_veins: clinicalPearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Varicose veins: symptoms and bedside tests"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.varicose.differential": {
+      "id": "skill.reasoning.varicose.differential",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "What else swells, stains or ulcerates the leg",
+      "oneLine": "Deep disease, lymphoedema, arterial disease and malformations beside simple varices",
+      "why": "Most tortuous leg veins are exactly what they look like, but the ones that are not carry the danger: a blocked deep system that forbids surgery, an ischaemic leg that forbids compression, and a lymphoedematous leg that needs a wholly different service. The differential exists to protect the treatment, not to decorate the diagnosis.",
+      "teach": [
+        {
+          "heading": "First separate primary from secondary",
+          "body": "Before naming mimics, decide whether the varicosities are primary or driven. Sudden onset, one-sided whole-limb swelling, a past white painful leg, a pelvic lump, or bursting pain on walking all argue that deep thrombosis or outflow obstruction is driving the picture, and duplex of the deep system comes before any surface plan.\n\nPrimary disease, by contrast, builds over years, favours both legs or at least the standing worker symmetrically, eases overnight, and shows a clean abdomen with open deep veins on testing."
+        },
+        {
+          "heading": "Look-alikes compared",
+          "table": {
+            "cols": [
+              "Condition",
+              "Favours it",
+              "Tells it apart"
+            ],
+            "rows": [
+              [
+                "Deep venous insufficiency after thrombosis",
+                "Whole-leg swelling, bursting pain, woody skin, past white leg",
+                "Perthes worsens, duplex shows deep damage"
+              ],
+              [
+                "Lymphoedema, including filarial disease",
+                "Non-pitting swelling, thick toes, no venous reflux pattern",
+                "Stemmer sign, normal duplex, midline foot involved"
+              ],
+              [
+                "Superficial thrombophlebitis",
+                "Hot red tender cord along a known varix",
+                "Localised, vein feels firm, usually afebrile course"
+              ],
+              [
+                "Arterial disease with ulceration",
+                "Claudication, pale pulseless foot, ulcer on toes or shin",
+                "Low ankle-brachial index, compression forbidden"
+              ],
+              [
+                "Cellulitis of the leg",
+                "Acute hot spreading redness with fever",
+                "Hours to days, not years; veins may be normal"
+              ],
+              [
+                "Congenital malformation with fistula",
+                "Young patient, limb overgrowth, thrill and bruit",
+                "Continuous murmur on auscultation over the veins"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Traps in our clinics",
+          "points": [
+            "Filarial lymphoedema is common in endemic districts: a big non-pitting leg is not venous until duplex says the veins leak.",
+            "A pelvic fibroid, ovarian cyst or cervical growth in a middle-aged woman can present as new one-sided varicosities: examine the abdomen in every new case.",
+            "Eczema over varicosities gets potent steroid creams from many hands: ask what has already been applied before judging the skin.",
+            "An ulcer above the middle third of the leg, or one that is deep, punched or foul in a new way, is not a venous ulcer until other causes are excluded."
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Labelling a post-thrombotic leg as primary varices and booking ablation into a blocked deep system.",
+        "Putting compression on an ischaemic leg because the ulcer was assumed venous without an arterial index.",
+        "Missing a pelvic cause in a woman because the examination stopped at the groin."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three conditions that mimic varicose veins with swelling or ulceration.",
+          "a": "Deep venous insufficiency after thrombosis, lymphoedema, and arterial disease, with superficial thrombophlebitis and cellulitis as acute mimics.",
+          "accept": [
+            "deep venous",
+            "lymphoedema",
+            "arterial",
+            "thrombophlebitis",
+            "cellulitis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How do you separate lymphoedema from venous oedema at the bedside?",
+          "a": "Lymphoedema is non-pitting with thickened toes and a positive Stemmer sign and involves the dorsum of the foot, while venous oedema pits, gathers through the day, and spares the toes with reflux demonstrable on duplex.",
+          "accept": [
+            "non-pitting",
+            "stemmer",
+            "pits",
+            "duplex"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A 58 year old woman has new one-sided varicosities with whole-leg swelling. What must you exclude and how?",
+          "a": "Secondary obstruction from a pelvic or abdominal cause such as a fibroid, ovarian cyst or nodal mass, by abdominal and pelvic examination with duplex of the deep system before any surface treatment.",
+          "accept": [
+            "pelvic",
+            "abdominal",
+            "duplex",
+            "obstruction"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "varicose_veins: additionalDifferentials"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Varicose veins: differential diagnosis of leg swelling"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.investigation.varicose.workup": {
+      "id": "skill.investigation.varicose.workup",
+      "kind": "investigation",
+      "system": "surgery",
+      "title": "Mapping the reflux before treating it",
+      "oneLine": "Duplex maps the leak, the arterial index clears compression, and the grade is recorded",
+      "why": "The hand localises the leak but cannot see it: it cannot tell a junction leak from a perforator leak with certainty, and it cannot see the deep veins at all. Duplex draws the map the intervention follows, and the arterial index is the gate before compression, so ordering them is not thoroughness but safety.",
+      "teach": [
+        {
+          "heading": "Duplex maps, the hand only suggests",
+          "body": "Duplex ultrasound traces reflux down the great and small saphenous trunks, marks the failed junctions, finds the incompetent perforators, and checks that the deep veins are open and their valves work. The old tourniquet tests taught generations where to look, but the map for ablation or surgery is drawn by duplex, not by thumb pressure.\n\nOrder it standing or with provocation, and ask the reporter for exactly what the intervention needs: which junctions reflux, how far down each trunk the reflux runs, which perforators leak, and whether the deep system is patent."
+        },
+        {
+          "heading": "The arterial index before any compression",
+          "body": "Measure the ankle-brachial index before a compression stocking or bandage goes on any leg, and always before treating an ulcer. A significantly low index means arterial disease shares the leg, and compression then risks starving the skin it was meant to heal.\n\nWhere duplex or Doppler measurement is unavailable, palpable pulses with no claudication history offer a rough bedside screen, but they do not replace the index where compression or intervention is planned. Refer for measurement rather than guessing."
+        },
+        {
+          "heading": "Document and look upstream",
+          "points": [
+            "Record the CEAP clinical class and photograph the leg, so progress and recurrence are judged against a baseline.",
+            "Examine the abdomen and pelvis whenever onset is sudden, one-sided, or late in life, and arrange pelvic imaging where a lump is felt.",
+            "Take a formal deep thrombosis history with every duplex request: an old white leg changes what the scan must answer.",
+            "Send routine fitness blood tests only when intervention is planned, not as a substitute for the map.",
+            "Red flags that jump the queue: burst bleeding, a hot tender cord tracking toward the groin, a rapidly spreading ulcer, or a cold pale foot."
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Booking ablation on clinical tests alone, then finding deep disease or a missed perforator when the veins return.",
+        "Compressing an ulcerated leg without an arterial index, and converting venous disease into ischaemic loss.",
+        "Ordering venography or cross-sectional imaging routinely when duplex already answers every needed question."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What four facts must the duplex report give before intervention?",
+          "a": "Which junctions reflux, how far down each trunk reflux runs, which perforators are incompetent, and whether the deep veins are patent with working valves.",
+          "accept": [
+            "junctions",
+            "perforators",
+            "deep veins",
+            "patent"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why is the ankle-brachial index mandatory before compression?",
+          "a": "A low index reveals coexisting arterial disease, and compressing an ischaemic leg risks skin necrosis and ulceration instead of healing.",
+          "accept": [
+            "arterial",
+            "low index",
+            "compression",
+            "necrosis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Duplex is unavailable at your centre and the leg needs compression for an ulcer. What do you do?",
+          "a": "Check pulses and claudication history as a rough screen, apply only light compression if the foot is warm with palpable pulses, and refer early to a centre with Doppler measurement and duplex mapping.",
+          "accept": [
+            "pulses",
+            "claudication",
+            "refer",
+            "doppler"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "varicose_veins: additionalInvestigations"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Varicose veins: duplex assessment and the arterial index"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.varicose.diagnosis": {
+      "id": "skill.reasoning.varicose.diagnosis",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Naming the disease and grading it",
+      "oneLine": "Primary or secondary, the system, the CEAP class, and fitness for intervention",
+      "why": "Saying varicose veins names a shape, not a plan. The surgeon needs to know whether the disease is primary or driven, which trunk and junction leak, how far the skin has travelled toward ulceration, and whether the deep veins will carry the leg after surface work, and all of that belongs in one diagnostic sentence.",
+      "teach": [
+        {
+          "heading": "Name four things in one sentence",
+          "body": "A complete diagnosis states primary or secondary disease, the trunk and junction involved, the CEAP clinical class, and the current state: uncomplicated, with skin changes, with healed ulcer, or with active ulcer. Each part changes management, so a diagnosis missing any part is unfinished.\n\nFitness for intervention is part of the statement, not an afterthought: deep veins shown open by history, Perthes and duplex, and arterial supply checked, so the leg is declared fit for ablation or surgery in the same breath."
+        },
+        {
+          "heading": "What the CEAP classes mean tonight",
+          "table": {
+            "cols": [
+              "Class",
+              "Meaning",
+              "Action"
+            ],
+            "rows": [
+              [
+                "C2",
+                "Varicose trunks without swelling or skin change",
+                "Stockings and habits, ablation if symptomatic"
+              ],
+              [
+                "C3",
+                "Venous swelling of the ankle and leg",
+                "Compression becomes central, map the reflux"
+              ],
+              [
+                "C4",
+                "Pigmentation, eczema or woody thickening",
+                "Treat skin, close the leak, watch closely"
+              ],
+              [
+                "C5",
+                "Healed ulcer held closed by care",
+                "Lifelong maintenance compression"
+              ],
+              [
+                "C6",
+                "Open ulcer in the gaiter zone",
+                "Multilayer compression with wound care, urgent reflux plan"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "A worked statement",
+          "body": "Primary varicose veins of the left great saphenous system with saphenofemoral and Cockett perforator incompetence, CEAP C4a with pigmentation and eczema, deep veins patent, arterial supply adequate, fit for duplex-mapped ablation.\n\nContrast the secondary form: secondary varicosities of the right leg following documented deep vein thrombosis, deep system damaged, surface veins acting as collaterals, not for ablation, for compression and vascular follow up. The two sentences look alike and prescribe opposites."
+        }
+      ],
+      "pitfalls": [
+        "Stopping at varicose veins without saying primary or secondary, leaving the most dangerous question unanswered.",
+        "Quoting a CEAP class without the skin findings that earned it, so nobody can verify the grade.",
+        "Declaring fitness for ablation on clinical tests alone, before duplex has confirmed open deep veins."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What four parts belong in a complete varicose vein diagnosis?",
+          "a": "Whether disease is primary or secondary, which trunk and junction are involved, the CEAP clinical class, and the current state with fitness for intervention.",
+          "accept": [
+            "primary",
+            "trunk",
+            "ceap",
+            "fitness"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What separates CEAP C4 disease from C6 disease, and why does it matter?",
+          "a": "C4 is skin change without an open ulcer while C6 is an active gaiter ulcer, and C6 needs multilayer compression with wound care plus an urgent reflux plan rather than routine ablation booking.",
+          "accept": [
+            "skin change",
+            "active ulcer",
+            "compression",
+            "wound care"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Duplex shows a damaged deep system with surface collaterals. State the diagnosis and the consequence.",
+          "a": "Secondary varicosities with deep venous damage acting as collaterals, which forbids surface ablation and commits the leg to compression with vascular follow up.",
+          "accept": [
+            "secondary",
+            "collaterals",
+            "forbids",
+            "compression"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "cause",
+          "text": "States primary or secondary with the evidence for it"
+        },
+        {
+          "id": "grade",
+          "text": "Gives the CEAP class with the findings that earn it"
+        },
+        {
+          "id": "fitness",
+          "text": "Declares fitness for intervention with deep and arterial checks"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "varicose_veins: prognosis"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Chronic venous disorders: CEAP classification and diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.treatment.varicose.management": {
+      "id": "skill.treatment.varicose.management",
+      "kind": "treatment",
+      "system": "surgery",
+      "title": "Managing varicose veins",
+      "oneLine": "Compression and habits first, ablation for truncal reflux, surgery where ablation cannot reach",
+      "why": "Varicose veins return whenever the leak is left open and the habits unchanged, so treatment is a ladder, not a single procedure: habits and compression settle symptoms and protect skin, closing the reflux stops the pressure, and surveillance keeps the gain. Starting on the wrong rung means an ulcer that heals and returns, or veins stripped that should have been ablated.",
+      "teach": [
+        {
+          "heading": "Conservative care first, and always alongside",
+          "body": "Offer graduated compression stockings, regular leg elevation, walking and calf exercise, and weight reduction first, especially where intervention is declined or unsafe. Compression eases heaviness and swelling, protects eczematous skin, and is the base on which ulcers heal.\n\nCheck the arterial index before any compression goes on. Teach bleeding safety early: lie flat, raise the leg, press firmly on the bleeding point, and seek care, with no tourniquet round the limb at any stage."
+        },
+        {
+          "heading": "Close the reflux: ablation first",
+          "body": "Map every leak with duplex first. For reflux in the great or small saphenous trunk, endovenous thermal ablation by laser or radiofrequency is the first-line closure, with ultrasound-guided foam sclerotherapy and open flush ligation with stripping as alternatives where ablation is unavailable or unsuitable.\n\nTreat incompetent perforators feeding skin change or ulceration as part of the same plan, since leaving them open is how ulcers return. Secondary disease with a damaged deep system is not for surface closure at all."
+        },
+        {
+          "heading": "Skin, ulcer and bleeding",
+          "body": "Treat venous eczema with emollients and topical corticosteroids alongside compression, and treat gaiter ulceration with multilayer compression and wound care rather than bed rest alone. Most venous ulcers heal under good compression once the arterial supply is confirmed.\n\nRefer urgently for burst bleeding that will not settle, a hot tender cord tracking toward the groin, rapidly spreading skin change, or an ulcer that looks atypical or refuses to heal, since long-standing ulcers need assessment for deeper causes."
+        },
+        {
+          "heading": "Referral and follow up in our setting",
+          "points": [
+            "Refer to vascular services for symptomatic trunks, progressive skin change, healed or active ulcer, bleeding varices, or superficial thrombophlebitis near the junction.",
+            "Where ablation is unavailable or unaffordable, well-done stripping with perforator attention at a government surgical unit remains sound care: say so plainly.",
+            "Keep compression going after any procedure and review for recurrence, which is commonest where deep disease coexists or stockings are abandoned.",
+            "Counsel standing workers on sitting breaks, elevation, weight and exercise: the job that made the veins will unmake the repair.",
+            "Safety-net every patient on bleeding control and ulcer warning signs before they leave the clinic."
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Ablating or stripping without duplex mapping, and leaving the feeding perforator or a second trunk behind.",
+        "Compressing without an arterial index, or advising stockings a patient cannot afford without naming the cheaper alternative.",
+        "Discharging a healed ulcer without maintenance compression and surveillance, and meeting the same ulcer next year."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the first-line closure for great saphenous trunk reflux?",
+          "a": "Endovenous thermal ablation by laser or radiofrequency after duplex mapping, with foam sclerotherapy or open ligation with stripping as alternatives.",
+          "accept": [
+            "thermal ablation",
+            "laser",
+            "duplex",
+            "sclerotherapy"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A varix bursts at home and bleeds heavily. What should the family do?",
+          "a": "Lie the patient flat, raise the leg above heart level, press firmly on the bleeding point, and seek urgent care, with no tourniquet round the limb.",
+          "accept": [
+            "raise",
+            "press",
+            "tourniquet",
+            "urgent"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does a venous ulcer need compression even after the reflux is closed?",
+          "a": "Residual venous hypertension and coexisting deep disease keep driving recurrence, so maintenance compression with surveillance holds the healing that the procedure started.",
+          "accept": [
+            "hypertension",
+            "recurrence",
+            "compression",
+            "surveillance"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "varicose_veins: management"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Varicose veins: conservative and operative treatment"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of modality and principle: compression, elevation and habits first, ablation for truncal reflux, sclerotherapy or surgery as alternatives, and compression-based ulcer care. Specific agents, strengths and durations come from your current national or institutional guideline at the time of treatment. CliniX does not prescribe."
+    }
+  },
+  "cases": [
+    {
+      "id": "case.varicose.sunita",
+      "initialVitals": {
+        "hr": 84,
+        "bpSystolic": 124,
+        "bpDiastolic": 80,
+        "rr": 16,
+        "spo2": 99,
+        "temp": 36.8,
+        "gcs": 15
+      },
+      "title": "A constable with six years of evening heaviness in the left leg",
+      "opening": "Sunita Pawar, 44, has come to the surgical outpatient clinic after her traffic duty shift. She stands through most answers and keeps shifting her weight off her left leg. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Sunita Pawar",
+        "age": 44,
+        "sex": "female",
+        "occupation": "Traffic police constable, on point duty through the day",
+        "residence": "Urban, lives with her husband and two children in Pune"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "tell me about the trouble in your leg",
+            "what is the main problem today"
+          ],
+          "reply": "Doctor, the veins of my left leg have become thick and twisted over six years, and the leg feels heavy every evening after duty.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "onset_course": {
+          "cues": [
+            "when did the veins first appear",
+            "how has the swelling progressed over the years",
+            "has the condition worsened with time"
+          ],
+          "reply": "Small blue lines showed behind my calf about six years back. They grew thicker year by year, and in the last two years the whole inner side of the leg bulges by evening.",
+          "key": true
+        },
+        "aching_pain": {
+          "cues": [
+            "describe the aching in your leg",
+            "where exactly do you feel the leg pain",
+            "does the pain worsen toward evening"
+          ],
+          "reply": "It is a dull aching all over the left leg, worst in the calf and lower leg toward evening. Lying down with the leg on a pillow takes it away by morning.",
+          "key": true,
+          "skillId": "skill.hx.surg.varicose_veins"
+        },
+        "heaviness_tiredness": {
+          "cues": [
+            "do your legs feel heavy after duty",
+            "tell me about tiredness in the legs",
+            "does walking bring any relief"
+          ],
+          "reply": "Both legs feel tired after duty, the left much more. Short slow walks help a little, but standing still at the junction is the worst.",
+          "key": true,
+          "skillId": "skill.hx.surg.varicose_veins"
+        },
+        "ankle_swelling_evening": {
+          "cues": [
+            "does your ankle swell toward evening",
+            "is the swelling gone by next morning",
+            "have you noticed pitting near the ankle"
+          ],
+          "reply": "My left ankle swells by evening and my shoe feels tight. By morning the swelling is nearly gone. Pressing near the ankle leaves a small pit in the evening.",
+          "key": true
+        },
+        "night_cramps": {
+          "cues": [
+            "do you get cramps in the leg at night",
+            "does cramping disturb your sleep",
+            "where do the night cramps strike"
+          ],
+          "reply": "Yes, cramps grip my left calf two or three nights a week and wake me. Getting up and walking a little settles them.",
+          "key": true
+        },
+        "skin_itch_pigment": {
+          "cues": [
+            "is there itching over the lower leg",
+            "have you noticed darkening of the ankle skin",
+            "any eczema above the ankle bone"
+          ],
+          "reply": "The skin above my inner ankle itches a lot, and it has turned dark brown there. Scratching has made some dry scaly patches.",
+          "key": true
+        },
+        "venous_ulcer_past": {
+          "cues": [
+            "have you ever had a sore near the ankle",
+            "did any ankle wound take long to heal",
+            "has the skin ever broken open"
+          ],
+          "reply": "No open sore so far, doctor. Once a scratch near the ankle took nearly a month to dry up, which worried me.",
+          "key": true
+        },
+        "bleed_burst": {
+          "cues": [
+            "has a vein ever burst and bled",
+            "did you ever have sudden bleeding from the leg",
+            "how would you manage a burst vein at home"
+          ],
+          "reply": "No bleeding so far. Nobody has told me what to do if a vein bursts, I only know I should come to hospital quickly.",
+          "key": true
+        },
+        "cord_lump_phlebitis": {
+          "cues": [
+            "any painful red cord along the veins",
+            "have the veins ever turned hot and tender",
+            "did any lump appear along the varicose vein"
+          ],
+          "reply": "No, the veins have never turned red or hot. They ache but they are never tender to touch.",
+          "key": true
+        },
+        "dvt_white_leg": {
+          "cues": [
+            "has a whole leg ever swollen painfully",
+            "any white swollen leg after delivery",
+            "were you ever treated for a deep vein clot"
+          ],
+          "reply": "Never, doctor. Neither leg has ever swollen up fully, and I have never taken treatment for a clot.",
+          "key": true,
+          "skillId": "skill.hx.varicose.riskfactors"
+        },
+        "standing_occupation": {
+          "cues": [
+            "how many hours do you stand on duty",
+            "describe your daily work posture",
+            "do you get sitting breaks during duty"
+          ],
+          "reply": "I stand at the junction nearly eight hours with short breaks for food. Sitting anywhere on duty is not possible on most days.",
+          "key": true,
+          "skillId": "skill.hx.varicose.riskfactors"
+        },
+        "family_veins": {
+          "cues": [
+            "does anyone in your family have similar veins",
+            "did your mother suffer from leg ulcers",
+            "any varicose veins among your sisters"
+          ],
+          "reply": "My mother has the same twisted veins in both legs, and one elder sister is getting them now. My mother never had an ulcer.",
+          "key": true,
+          "skillId": "skill.hx.varicose.riskfactors"
+        },
+        "pregnancy_worsening": {
+          "cues": [
+            "did the veins worsen during pregnancy",
+            "how many pregnancies have you carried",
+            "did your legs swell in pregnancy"
+          ],
+          "reply": "I have two children. The veins first showed in my second pregnancy and grew worse after it. My legs swelled in both pregnancies but settled after delivery.",
+          "key": true,
+          "skillId": "skill.hx.varicose.riskfactors"
+        },
+        "contraceptive_hormone": {
+          "cues": [
+            "have you taken hormonal contraceptive pills",
+            "for how long did you use birth control pills",
+            "any hormone treatment after childbirth"
+          ],
+          "reply": "No, I never took hormonal pills. We used other family planning methods.",
+          "key": true
+        },
+        "constipation_straining": {
+          "cues": [
+            "do you suffer from constipation",
+            "do you strain for long at stool",
+            "any piles or bleeding per rectum"
+          ],
+          "reply": "My motions are mostly regular. No piles and no bleeding when I pass stool.",
+          "key": true
+        },
+        "abdomen_pelvic_lump": {
+          "cues": [
+            "have you noticed any abdominal swelling",
+            "any lump felt in the lower abdomen",
+            "any recent loss of weight or appetite"
+          ],
+          "reply": "No swelling in the stomach, and my weight and appetite are steady. My monthly periods are regular.",
+          "key": true
+        },
+        "previous_vein_treatment": {
+          "cues": [
+            "any injection treatment for these veins",
+            "have you undergone vein surgery before",
+            "do you wear compression stockings daily"
+          ],
+          "reply": "No injections and no operation. A chemist once sold me stockings but they felt too tight and hot, so I stopped wearing them.",
+          "key": true
+        },
+        "arterial_heart_history": {
+          "cues": [
+            "any pain in the calves on walking",
+            "do you suffer from blood pressure or sugar",
+            "any known heart disease in the past"
+          ],
+          "reply": "No pain that stops me walking, and no sugar or pressure problems. I have never had heart trouble.",
+          "key": true
+        },
+        "drug_allergy_history": {
+          "cues": [
+            "which medicines do you take regularly",
+            "any allergy to any drug or injection",
+            "do you take painkillers for the leg ache"
+          ],
+          "reply": "I take no regular medicines, only an occasional painkiller after very heavy days. I have no drug allergy that I know.",
+          "key": true
+        },
+        "tobacco_smoking": {
+          "cues": [
+            "do you use tobacco in any form",
+            "have you ever smoked beedis or cigarettes",
+            "does anyone smoke inside your house"
+          ],
+          "reply": "I have never smoked or chewed tobacco, and nobody smokes at home."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Middle-aged woman, well built, standing with weight shifted to the right leg. No pallor, no distress at rest. Wearing duty boots that leave a deep sock mark above the left ankle.",
+          "abnormal": false
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 84 regular. Blood pressure 124/80. Respiratory rate 16. Afebrile. No postural symptoms.",
+          "abnormal": false
+        },
+        "skill.gen.edema": {
+          "finding": "Pitting oedema over the left medial malleolus in the evening clinic, no oedema on the right. Toes slim, dorsum of the foot spared.",
+          "abnormal": true
+        },
+        "skill.exam.surg.varicose_inspection_palpation": {
+          "finding": "Standing: tortuous dilated great saphenous trunk from the medial ankle up the inner calf and thigh to the groin on the left. Saphena varix at the groin with an expansile cough impulse. A palpable fascial pit over a medial calf perforator. Brown pigmentation with dry eczema above the medial malleolus, no open ulcer. Right leg shows only a few reticular veins.",
+          "abnormal": true
+        },
+        "skill.exam.surg.trendelenburg_tourniquet": {
+          "finding": "Leg raised and emptied, thumb held at the saphenofemoral junction. On standing the lower veins fill slowly from below despite control; on release a column of blood rushes down from above. Both saphenofemoral and perforator incompetence present.",
+          "abnormal": true
+        },
+        "skill.exam.surg.perthes_deep_vein_patency": {
+          "finding": "With a thigh tourniquet occluding the surface trunk, brisk walking for five minutes empties the varicosities and the calf stays comfortable with no bursting pain. Deep veins patent.",
+          "abnormal": false
+        },
+        "skill.exam.surg.arterial_pulses_lower": {
+          "finding": "Dorsalis pedis and posterior tibial pulses palpable on both feet. No claudication history. Foot warm with normal capillary return.",
+          "abnormal": false
+        },
+        "skill.exam.surg.regional_nodes": {
+          "finding": "No palpable inguinal lymph nodes on either side. No groin hernia. Abdomen soft with no palpable lump.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "duplex_venous",
+        "abpi",
+        "bloods_fitness"
+      ],
+      "investigations": {
+        "duplex_venous": {
+          "label": "Duplex ultrasound of both lower limbs",
+          "indicated": true,
+          "result": "Left great saphenous reflux from the saphenofemoral junction to below the knee with an incompetent Cockett perforator. Deep femoral, popliteal and calf veins patent with competent valves. Right leg shows competent junctions with no truncal reflux.",
+          "note": "This is the map the intervention follows: it confirms the hand findings, grades the leak, and proves the deep system is open."
+        },
+        "abpi": {
+          "label": "Ankle-brachial pressure index",
+          "indicated": true,
+          "result": "ABPI 1.02 on the left and 1.04 on the right with audible triphasic signals. No significant arterial disease.",
+          "note": "A normal index clears compression and any ulcer care that follows; without it no stocking or bandage should be advised."
+        },
+        "bloods_fitness": {
+          "label": "Fitness blood tests",
+          "indicated": true,
+          "result": "Haemoglobin 12.4 g per dL. Fasting sugar 96 mg per dL. Urine routine normal. Fit for a day-care procedure.",
+          "note": "Sent because ablation is planned, not to diagnose the veins. An anaemia or sugar finding here would only change fitness, not the diagnosis."
+        },
+        "venogram": {
+          "label": "Ascending venography",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Not indicated: duplex already maps the reflux and the deep patency. Venography is reserved for deep reconstructions, not for routine varicose planning."
+        },
+        "ct_abdomen": {
+          "label": "CT of the abdomen and pelvis",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Not indicated: the abdomen is soft with no lump, onset was gradual over years, and duplex shows primary-pattern disease. Imaging the pelvis is for sudden or one-sided secondary presentations."
+        },
+        "d_dimer": {
+          "label": "D-dimer",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Not indicated: there is no acute whole-leg swelling or calf pain to suggest acute deep vein thrombosis. A number here would only confuse a chronic picture."
+        }
+      },
+      "differentialModel": {
+        "answer": "Primary varicose veins of the left great saphenous system. Consider deep vein thrombosis with post-thrombotic change, lymphoedema, superficial thrombophlebitis, a venous ulcer diathesis, and peripheral arterial disease sharing the leg.",
+        "accept": [
+          "Primary varicose veins",
+          "Deep vein thrombosis",
+          "Post-thrombotic syndrome",
+          "Lymphoedema",
+          "Superficial thrombophlebitis",
+          "Venous ulcer",
+          "Peripheral arterial disease"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Primary varicose veins of the left great saphenous system with saphenofemoral and Cockett perforator incompetence, CEAP C4a, deep veins patent, fit for ablation.",
+        "accept": [
+          "Primary varicose veins",
+          "Varicose veins",
+          "Chronic venous insufficiency",
+          "Superficial venous insufficiency"
+        ],
+        "minMatch": 2
+      },
+      "managementModel": {
+        "answer": "Graduated compression with leg elevation, exercise and weight advice, duplex-mapped endovenous thermal ablation of the great saphenous trunk with perforator care, emollients for the eczema, bleeding safety-netting, and vascular review with maintenance compression.",
+        "accept": [
+          "graduated compression",
+          "leg elevation",
+          "endovenous ablation",
+          "duplex mapping",
+          "vascular referral",
+          "maintenance compression"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The evening rhythm makes the diagnosis before the leg is exposed: heaviness gathering through standing hours and gone by morning is venous hypertension speaking.",
+        "Two phases of one test give two sites: filling from below with the junction held marks the perforators, and the rush from above on release marks the saphenofemoral valve.",
+        "A normal Perthes with emptying veins is the permission slip for surface work: it proves the deep system can carry the leg alone.",
+        "Pigmentation with eczema above the medial malleolus is CEAP C4a, the last station before ulceration, which is why this case cannot wait on stockings alone.",
+        "The abdomen and the deep history are part of every first visit: a soft abdomen with no lump and no past white leg is what lets you call this primary.",
+        "Pulses and the arterial index come before compression, not after: a normal ABPI here is what makes the stocking safe.",
+        "Her abandoned stockings are a lesson in adherence: compression only works when it is worn, so fit, counsel and follow up rather than merely prescribe."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

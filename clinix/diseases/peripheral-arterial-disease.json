@@ -1,0 +1,1213 @@
+{
+  "_comment": "Peripheral arterial disease and gangrene: chronic lower-limb ischaemia from atherosclerosis, Buerger disease and embolism, plus the diabetic foot. Examination overlays shared surgery skills; the disease owns only reasoning, investigation, treatment and annexure skills.",
+  "id": "peripheral-arterial-disease",
+  "name": "Peripheral arterial disease and gangrene",
+  "fullName": "Chronic lower-limb ischaemia with gangrene and the diabetic foot",
+  "system": "surgery",
+  "subtitle": "Ischaemic limb and diabetic foot",
+  "kbRef": "peripheral_arterial_disease_and_acute_limb_ischemia",
+  "oneLine": "The leg that hurts on walking, aches at night, and loses its toes: claudication to gangrene",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "blurb": "What chronic limb ischaemia is, and the four causes that cover most Indian cases",
+      "id": "basics",
+      "skills": [
+        "skill.reasoning.pad.basics"
+      ],
+      "title": "Basics"
+    },
+    {
+      "blurb": "Before a single question",
+      "id": "approach",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ],
+      "title": "Approach to the patient"
+    },
+    {
+      "blurb": "Age, sex and work set the prior probability before the leg is uncovered",
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In a suspected ischaemic limb, age and sex point at the cause before the leg is uncovered. Atherosclerotic disease favours men past middle age; Buerger disease favours young men between 20 and 40 who smoke beedis; Raynaud-type disease favours young women and the upper limb; diabetic disease favours middle age with barefoot trauma. Occupation matters: farm and manual labour means heavy smoking years, barefoot walking, and late presentation."
+        }
+      },
+      "id": "particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "title": "Patient particulars"
+    },
+    {
+      "blurb": "Distance, then night pain, then tissue loss: the story always runs forward in time",
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A chronic arterial history reads in months to years, not days: calf pain on walking for two years, shrinking distance, then night pain, then a black toe over weeks. Sudden agonising pain down the leg with a cold pale foot breaks that tempo and means embolus until proved otherwise."
+        },
+        "skill.hx.surg.foot": {
+          "expect": "Ask where foot pain sits and what starts it. Pain over the arch on walking that eases with rest is arterial; burning of the sole at night with lost feeling is neuropathic; both coexist in the diabetic foot, so ask for each separately."
+        },
+        "skill.hx.surg.pvd_claudication_restpain": {
+          "expect": "Pin down the claudication distance in the patient's own landmarks, the site by arterial level (foot means tibial vessels, calf means femoropopliteal, thigh means superficial femoral, buttock means aortoiliac), and whether rest pain wakes him and eases on hanging the leg down."
+        },
+        "skill.hx.surg.ulcer": {
+          "expect": "For every toe or foot sore ask how it started (often trivial trauma such as nail paring), how long it has refused to heal, whether it is painful or painless, and what discharge it produces. A painless sore on a pulseless foot is ischaemia with neuropathy, not a simple injury."
+        }
+      },
+      "id": "history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.surg.pvd_claudication_restpain",
+        "skill.hx.surg.ulcer",
+        "skill.hx.surg.foot"
+      ],
+      "title": "History of presenting illness"
+    },
+    {
+      "blurb": "The exposures that must stop or the limb will be lost whatever else is done",
+      "id": "past_personal_drug_family",
+      "skills": [
+        "skill.hx.peripheral.risk"
+      ],
+      "title": "Past, personal, drug and family history"
+    },
+    {
+      "blurb": "Usually a stable patient; the general examination hunts for the same disease elsewhere",
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "The chronic claudicant usually looks well and walks in, sometimes limping. A pale sweating patient with a cold mottled leg and severe pain is not chronic disease: that is acute limb ischaemia and the clock is running."
+        },
+        "skill.gen.surg.survey": {
+          "expect": "Survey for generalised atherosclerosis: nicotine-stained fingers, xanthelasma, raised blood pressure, irregular pulse, carotid bruit, and wasting of the affected calf from months of disuse."
+        },
+        "skill.gen.vitals": {
+          "expect": "Record blood pressure in both arms, since subclavian or brachiocephalic disease makes one arm read low, and feel the rhythm, since atrial fibrillation is the commonest source of a leg embolus. Fever with a red swollen foot means infection on top of ischaemia, not uncomplicated claudication."
+        }
+      },
+      "id": "general_exam",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.surg.survey"
+      ],
+      "title": "General examination"
+    },
+    {
+      "blurb": "Colour, pulses, Buerger angle, then the sore itself, read proximal to distal",
+      "emphasis": {
+        "skill.exam.surg.arterial_pulses_lower": {
+          "expect": "Map every pulse from femoral to dorsalis pedis on both sides and name the level where the pulse disappears: femoral present with popliteal absent means superficial femoral occlusion; all pulses present with foot pain means small-vessel Buerger disease. Compare with the same artery on the other side, and never mistake your own finger pulse for the patient's."
+        },
+        "skill.exam.surg.buerger_postural_test": {
+          "expect": "Expect pallor on elevation with a vascular angle under 30 degrees in severe ischaemia, then slow return of pink over 20 to 30 seconds and dependent rubor on hanging the leg down. A normal limb stays pink to 90 degrees and refills within seconds."
+        },
+        "skill.exam.surg.diabetic_foot": {
+          "expect": "In the diabetic foot separate the three contributors: pulses for ischaemia, touch and vibration sense for neuropathy, and callus, deformity and footwear for pressure. A painless punched-out ulcer under callus on a warm well-perfused foot is neuropathic; the same ulcer on a cold pulseless foot is neuroischaemic and far more dangerous."
+        },
+        "skill.exam.surg.pvd_inspection": {
+          "expect": "Expect thin shiny skin with lost hair, brittle ridged nails, guttered dorsal veins, and pallor that becomes rubor on dependency. Note the exact extent and colour of any blackened area, since that sets the level of occlusion and the likely amputation line."
+        },
+        "skill.exam.surg.regional_nodes": {
+          "expect": "Feel the groin nodes whenever there is a foot sore or gangrene. Enlarged tender nodes mean secondary infection that needs cover alongside revascularisation; hard fixed nodes with a long-standing ulcer raise the question of malignant change."
+        },
+        "skill.exam.surg.ulcer_inspect": {
+          "expect": "Read an ischaemic ulcer by its base and edge: a pale dry base with a punched-out edge over the toes, malleoli or heel, with surrounding shiny hairless skin, is arterial. A black mummified toe with a sharp line of demarcation is dry gangrene; a swollen foul discharging foot with blebs is wet gangrene and an emergency."
+        },
+        "skill.exam.surg.ulcer_palpate": {
+          "expect": "Feel for temperature change up the leg to find where warmth ends, test capillary return on the pulp of the toe, and feel the artery above the sore: a firm tender cord suggests recent thrombosis, while a soft pulseless vessel with a higher embolus suggests the pulse is lost from above."
+        }
+      },
+      "id": "systemic_exam",
+      "skills": [
+        "skill.exam.surg.pvd_inspection",
+        "skill.exam.surg.arterial_pulses_lower",
+        "skill.exam.surg.buerger_postural_test",
+        "skill.exam.surg.ulcer_inspect",
+        "skill.exam.surg.ulcer_palpate",
+        "skill.exam.surg.diabetic_foot",
+        "skill.exam.surg.regional_nodes"
+      ],
+      "title": "Lower-limb vascular examination"
+    },
+    {
+      "blurb": "One blocked pipe explains the pale foot, the absent pulses and the dying toe together",
+      "id": "disease_findings",
+      "skills": [
+        "skill.reasoning.pad.signs"
+      ],
+      "title": "Putting the ischaemic picture together"
+    },
+    {
+      "blurb": "Three sentences that contain the level, the stage and the urgency",
+      "id": "summary",
+      "skills": [
+        "skill.reasoning.pad.summary"
+      ],
+      "title": "Clinical summary"
+    },
+    {
+      "blurb": "The young smoker, the sudden embolus, the pale painful leg that is not arterial at all",
+      "id": "differential",
+      "skills": [
+        "skill.reasoning.pad.differential"
+      ],
+      "title": "Differential diagnosis"
+    },
+    {
+      "blurb": "Prove the level with pressure and pictures, and never let a scan delay heparin in the pale leg",
+      "id": "investigations",
+      "skills": [
+        "skill.ix.surg.abpi",
+        "skill.investigation.pad.workup"
+      ],
+      "title": "Investigations"
+    },
+    {
+      "blurb": "Fontaine and Rutherford stages, and the line between a limb to save and a toe already lost",
+      "id": "diagnosis",
+      "skills": [
+        "skill.reasoning.pad.diagnosis",
+        "skill.annex.surg.fontaine_rutherford",
+        "skill.annex.surg.wagner_diabetic_foot"
+      ],
+      "title": "Diagnosis and staging"
+    },
+    {
+      "blurb": "Risk control and walking for the claudicant, the knife and the catheter for the threatened limb",
+      "id": "treatment",
+      "skills": [
+        "skill.treatment.pad.management"
+      ],
+      "title": "Treatment"
+    },
+    {
+      "blurb": "Present this patient to your consultant",
+      "id": "case",
+      "skills": [
+        "skill.present.peripheral.padcase"
+      ],
+      "title": "Case presentation"
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "examinerQuestions": [
+          "Your Buerger angle is 20 degrees with a 25 second capillary return and dependent rubor. Grade the severity and state what each finding proves.",
+          "The femoral pulse is full but nothing is felt below it on either side. Name the likely level of occlusion and your next bedside test.",
+          "The great toe is black and dry with a sharp line, but the forefoot is hot, red and swollen with blebs. Which part is an emergency and what do you do first?"
+        ],
+        "id": "osce.pad.limb_exam",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.exam.surg.pvd_inspection",
+          "skill.exam.surg.arterial_pulses_lower",
+          "skill.exam.surg.buerger_postural_test",
+          "skill.exam.surg.ulcer_inspect",
+          "skill.exam.surg.diabetic_foot",
+          "skill.exam.surg.regional_nodes"
+        ],
+        "task": "This 62 year old diabetic man has calf pain on walking and a black great toe. Examine the arterial supply of both lower limbs and present your findings with the level of disease.",
+        "title": "Examine the ischaemic lower limb"
+      },
+      {
+        "examinerQuestions": [
+          "His story runs over two years with shrinking distance, night pain relieved by hanging the foot down, and now a painless black toe. What stage is this and why can it not wait for a routine list?",
+          "He smokes beedis, his sugar is uncontrolled, and he walks barefoot. Name the three changes you insist on today and the one operation this toe still needs.",
+          "At 2 am a different patient arrives with a suddenly pale, cold, intensely painful leg of three hours. How does your first hour differ from the chronic case?"
+        ],
+        "id": "osce.pad.history",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.surg.pvd_claudication_restpain",
+          "skill.hx.surg.ulcer",
+          "skill.ix.surg.abpi",
+          "skill.annex.surg.fontaine_rutherford"
+        ],
+        "task": "This 58 year old beedi smoker has had leg pain on walking for a year and now pain at night. Take a focused history in six minutes and be ready to stage his disease and state the urgency.",
+        "title": "Take the claudication history and stage it"
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.reasoning.pad.basics",
+      "skill.exam.surg.arterial_pulses_lower",
+      "skill.exam.surg.buerger_postural_test",
+      "skill.reasoning.pad.signs",
+      "skill.reasoning.pad.differential",
+      "skill.investigation.pad.workup",
+      "skill.reasoning.pad.diagnosis",
+      "skill.treatment.pad.management"
+    ]
+  },
+  "skills": {
+    "skill.reasoning.pad.basics": {
+      "id": "skill.reasoning.pad.basics",
+      "kind": "reasoning",
+      "oneLine": "Chronic arterial narrowing starves muscle on effort and skin at rest; sudden block kills fast",
+      "probes": [
+        {
+          "a": "Atherosclerotic plaque in the intima and media narrows the lumen, so flow reserve fails on exercise first (claudication) and basal flow fails later (rest pain and gangrene).",
+          "accept": [
+            "plaque",
+            "intima",
+            "narrows",
+            "flow reserve",
+            "claudication",
+            "rest pain"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "How does a plaque in the wall become pain on walking and later a black toe?"
+        },
+        {
+          "a": "Atherosclerosis is gradual in older patients, Buerger disease is segmental small-vessel disease in young smokers, embolus is sudden and unilateral from the heart, and diabetic gangrene is usually moist from infection.",
+          "accept": [
+            "gradual",
+            "segmental",
+            "sudden",
+            "unilateral",
+            "moist",
+            "infection"
+          ],
+          "level": 2,
+          "minMatch": 3,
+          "q": "How do you separate atherosclerosis, Buerger disease, embolus and diabetic gangrene by tempo alone?"
+        },
+        {
+          "a": "Dry gangrene is mummified and results from gradual occlusion; wet gangrene is swollen with blebs and results from sudden block or added infection; gas gangrene shows crepitus from gas within muscle.",
+          "accept": [
+            "mummified",
+            "gradual",
+            "blebs",
+            "infection",
+            "crepitus",
+            "gas"
+          ],
+          "level": 3,
+          "minMatch": 3,
+          "q": "A black toe, a swollen foul foot with blebs, and a crackling limb: what is each?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "peripheral_arterial_disease_and_acute_limb_ischemia: pathophysiology",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Chronic lower limb ischaemia",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Plaque settles in the inner and middle coats of the artery and narrows the channel, so pressure and flow beyond it fall. At rest the narrowed pipe still suffices, but walking muscle needs many times more blood, and the shortfall is felt as cramp: intermittent claudication that eases within minutes of standing still.\n\nWhen narrowing progresses, even resting needs go unmet. Nerves starve first and cry out as rest pain, then skin breaks down and toes die. Claudication, rest pain and gangrene are one disease at three depths, not three diseases.",
+          "heading": "A pipe problem at three depths"
+        },
+        {
+          "body": "Atherosclerosis is the commonest cause: gradual, in older patients, often bilateral in the end, favouring large vessels. Buerger disease is different: segmental inflammation and clotting of small and medium arteries in young smoking men, starting in tibial and foot vessels, with neighbouring veins and nerves involved and migratory superficial phlebitis as its signature.\n\nEmbolus is sudden and mostly unilateral, with severe pain shooting down the artery from a heart source. Diabetic gangrene needs three factors together: atherosclerotic narrowing, nerve damage that removes protection, and sugar-rich tissue where trivial injury turns infective.",
+          "heading": "Four causes cover most cases"
+        },
+        {
+          "body": "Dry gangrene follows gradual occlusion: the part dries, shrivels, hardens and darkens from broken-down blood pigment, with a line forming against living tissue. Wet gangrene follows sudden blockage or infection laid on inflammation: the part swells, blisters and putrefies instead of mummifying.\n\nGas gangrene is wet gangrene with gas inside muscle, felt as crepitus, and it announces itself with pain, swelling, fever and toxaemia within hours to days of a dirty wound. Crepitus in a limb is never watched: it is opened and treated as an emergency.",
+          "heading": "Dry, wet and gas: three gangrenes"
+        }
+      ],
+      "title": "What chronic limb ischaemia is",
+      "why": "Every question about the ischaemic limb reduces to two facts: which pipe is blocked at what level, and whether the blockage came on over years, minutes, or through infected sugar-rich tissue."
+    },
+    "skill.reasoning.pad.signs": {
+      "id": "skill.reasoning.pad.signs",
+      "kind": "reasoning",
+      "oneLine": "Pale hairless skin, pulses lost at one level, Buerger angle under 30 degrees, dying toes",
+      "probes": [
+        {
+          "a": "Thin shiny hairless skin, brittle ridged nails, guttered dorsal veins, pallor on elevation with a vascular angle under 30 degrees, slow capillary return with dependent rubor, and pulses disappearing below the level of occlusion.",
+          "accept": [
+            "hairless",
+            "guttered",
+            "vascular angle",
+            "capillary return",
+            "rubor",
+            "pulses"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "List the bedside findings that together spell chronic limb ischaemia."
+        },
+        {
+          "a": "Femoral present with popliteal absent points to the superficial femoral artery; all leg pulses absent with a normal femoral points higher, to the iliac; all pulses present with foot claudication points to small tibial vessels as in Buerger disease.",
+          "accept": [
+            "superficial femoral",
+            "iliac",
+            "tibial",
+            "Buerger",
+            "level"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How does the pattern of lost pulses name the level of occlusion?"
+        },
+        {
+          "a": "No: rest pain with a painless black toe means the nerves are already dying along with the skin, which marks critical ischaemia needing urgent revascularisation rather than reassurance.",
+          "accept": [
+            "nerves dying",
+            "critical",
+            "urgent",
+            "revascularisation"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "The patient says the black toe itself does not hurt, so nothing urgent is needed. Is he right?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "peripheral_arterial_disease_and_acute_limb_ischemia: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The ischaemic leg: physical signs",
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Start with colour and cover: pallor or dusky mottling, skin gone thin and shiny with hair lost over the foot and lower leg, nails thickened and ridged, and dorsal foot veins lying flat and empty even with the leg horizontal. These trophic changes take months to form, so they date the disease as chronic whatever the patient claims.\n\nThen feel temperature with the back of the fingers from groin to toes and mark where warmth ends. Colour deceives, because a purple congested foot can still be ice cold: feel, do not look, for the level.",
+          "heading": "Skin, hair, nails and veins date the disease"
+        },
+        {
+          "body": "Map pulses from femoral to dorsalis pedis on both sides and write down where each disappears, since the level of loss is the level of disease. A femoral pulse that vanishes after a walk to claudication and returns with rest unmasks early occlusion that resting fingers miss.\n\nThen run the postural test in good light: raise the legs, watch for cadaveric pallor of the soles, and note the angle where it appears. An angle under 30 degrees means severe ischaemia. Lower the legs and time the return of pink: 20 to 30 seconds with purple-red rubor confirms what the angle already said.",
+          "heading": "Pulses name the level, the angle grades it"
+        },
+        {
+          "body": "Read the dead tissue last, because it only confirms the pipe problem above it. A dry mummified toe with a sharp line is chronic occlusion given time; a swollen foul foot with blebs is wet gangrene needing urgency; skip lesions and black patches above the line warn that the disease extends higher than the toe suggests.\n\nFeel the calf compartments and the limb above the line for tenderness, oedema and crepitus. Tenderness along the vessel means fresh clot, oedema means inflammation or venous involvement, and crepitus means gas: each changes tonight's plan, not next week's.",
+          "heading": "The dead tissue only confirms the pipe"
+        }
+      ],
+      "title": "The ischaemic limb picture",
+      "why": "No single sign proves limb ischaemia, but skin changes plus a pulse lost at one level plus a low vascular angle prove it together, and the combination also grades severity without waiting for a scan."
+    },
+    "skill.reasoning.pad.differential": {
+      "id": "skill.reasoning.pad.differential",
+      "kind": "reasoning",
+      "oneLine": "Buerger, embolus, Raynaud, diabetic and venous disease: tempo, age, pulses and pain decide",
+      "probes": [
+        {
+          "a": "Neurogenic claudication from lumbar canal stenosis eases on sitting or bending forward rather than on merely standing still, affects both legs with numbness, and leaves all pulses normal.",
+          "accept": [
+            "sitting",
+            "bending forward",
+            "pulses normal",
+            "numbness"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "His calves ache on walking but pulses are full and sitting relieves him. What else is this?"
+        },
+        {
+          "a": "Deep vein thrombosis gives a swollen painful leg with warm skin and present pulses; acute limb ischaemia gives a pale cold pulseless leg with severe pain, so swelling with pulses means venous and pallor without pulses means arterial.",
+          "accept": [
+            "swollen",
+            "pulses present",
+            "pale",
+            "pulseless",
+            "venous",
+            "arterial"
+          ],
+          "level": 2,
+          "minMatch": 3,
+          "q": "How do you tell a swollen painful leg of thrombosis from an acutely ischaemic leg in one minute?"
+        },
+        {
+          "a": "Buerger disease by youth, smoking, foot claudication with normal large vessels and phlebitis; Raynaud by young women, finger attacks of white then blue with normal pulses; embolus by sudden unilateral loss with a heart source.",
+          "accept": [
+            "youth",
+            "smoking",
+            "white then blue",
+            "normal pulses",
+            "sudden",
+            "heart source"
+          ],
+          "level": 3,
+          "minMatch": 3,
+          "q": "Separate Buerger disease, Raynaud phenomenon and embolus at the bedside."
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "peripheral_arterial_disease_and_acute_limb_ischemia: additionalDifferentials",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Differential diagnosis of limb pain and gangrene",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "First divide by tempo. Pain that builds over years with shrinking distance is atherosclerosis; foot claudication in a young smoking man with normal femoral pulses is Buerger disease; agony over minutes in a cold pale pulseless leg is embolus, usually from atrial fibrillation, and the heart must be examined for its source.\n\nThen divide by age and habit. Atherosclerotic gangrene starts past middle age; Buerger strikes men between 20 and 40 who smoke; diabetic gangrene follows years of sugar with trivial trauma; Raynaud troubles young women with finger attacks while all pulses stay normal.",
+          "heading": "Tempo, age and habit divide first"
+        },
+        {
+          "body": "Neurogenic claudication from a narrow lumbar canal mimics arterial pain but behaves differently: it follows posture, not effort, easing when the patient sits or bends forward, and it leaves every pulse full. Venous claudication is bursting tightness that rest eases only slowly, over a limb with varicose veins and oedema.\n\nDiabetic neuropathy gives burning soles with lost feeling on a warm well-perfused foot, the opposite of the cold pulseless foot of ischaemia. Both meet in the neuroischaemic foot, so test pulses and sensation separately instead of choosing one cause.",
+          "heading": "The mimics that keep pulses"
+        },
+        {
+          "body": "A swollen leg is usually venous until proved otherwise: thrombosis swells, warms and hurts with pulses intact, while arterial occlusion pales, cools and silences pulses. Cellulitis reddens and heats with fever but keeps pulses; osteomyelitis under a long-standing ulcer needs probing to bone and an X-ray, not another course of dressings.\n\nWet gangrene with blebs and foul discharge means infection driving the emergency, while dry mummified tissue with a line means chronicity given time. Malignant change in a years-old ulcer is rare but real: a hard fixed edge with groin nodes needs biopsy, not optimism.",
+          "heading": "Swollen, infected and malignant lookalikes"
+        }
+      ],
+      "title": "Differential diagnosis of the ischaemic limb",
+      "why": "Most leg pain is exactly what it looks like, but the exceptions operate tonight: embolus needs heparin and embolectomy within hours, wet gangrene needs debridement, and spinal claudication must never receive an arterial bypass."
+    },
+    "skill.reasoning.pad.summary": {
+      "id": "skill.reasoning.pad.summary",
+      "kind": "reasoning",
+      "oneLine": "Patient with risks, tempo in years, level by pulses, stage with urgency, in that order",
+      "probes": [
+        {
+          "a": "The severity stage, Fontaine or Rutherford, because it alone decides whether the patient walks out with tablets and exercise or is referred urgently for revascularisation.",
+          "accept": [
+            "stage",
+            "Fontaine",
+            "Rutherford",
+            "revascularisation",
+            "urgency"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What element belongs in an ischaemic limb summary that a hernia summary never needs?"
+        },
+        {
+          "a": "Tempo distinguishes gradual atherosclerosis from sudden embolus, and the embolus case needs heparin and embolectomy within hours, so the wrong tempo sends the patient down the wrong emergency pathway.",
+          "accept": [
+            "gradual",
+            "sudden",
+            "embolus",
+            "heparin",
+            "hours"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why does the summary state tempo before findings?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "Clinical reasoning",
+          "source": "Macleod's Clinical Examination"
+        },
+        {
+          "locator": "peripheral_arterial_disease_and_acute_limb_ischemia: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Name the patient with the risks that matter: age, beedi years, diabetes with control, hypertension and heart disease. Then state the tempo as chronic over years or sudden over hours, since that single word separates atherosclerosis from embolus.\n\nState the syndrome in abstract terms: chronic exertional calf pain progressing to rest pain with tissue loss, with pulses lost below a named level. A worked core runs: a 62 year old diabetic beedi smoker with two years of calf claudication, now rest pain and a painless black great toe.",
+          "heading": "Risks, tempo, syndrome"
+        },
+        {
+          "body": "Add the measurements that prove the level: femoral present, popliteal weak, tibials and dorsalis pedis absent, vascular angle under 30 degrees, ABPI under 0.5. Measurements before adjectives, always: severe means nothing, under 0.5 means something.\n\nClose with stage and urgency in the same sentence: Fontaine stage IV chronic limb threatening ischaemia with dry gangrene of the right great toe, for urgent vascular referral. A summary without a stage leaves the listener unable to judge whether this patient can wait.",
+          "heading": "Measurements, stage, urgency"
+        }
+      ],
+      "title": "The clinical summary",
+      "why": "The summary of an ischaemic limb has a different shape from a lump summary: tempo decides the cause, the pulse level decides the operation, and the stage decides the urgency, so all three belong in the same breath."
+    },
+    "skill.investigation.pad.workup": {
+      "id": "skill.investigation.pad.workup",
+      "kind": "investigation",
+      "oneLine": "ABPI proves it, duplex and CTA map it, bloods and heart explain it",
+      "probes": [
+        {
+          "a": "An ABPI under 0.9 confirms peripheral arterial disease, under 0.5 means severe disease, and an ankle pressure under 50 mmHg marks critical limb threatening ischaemia.",
+          "accept": [
+            "0.9",
+            "0.5",
+            "50",
+            "severe",
+            "critical"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "What three numbers on a Doppler report prove PAD and grade it?"
+        },
+        {
+          "a": "Duplex maps flow and waveform at each level non-invasively, while CTA shows the whole runoff from aorta to foot for planning, so duplex screens and CTA plans the intervention.",
+          "accept": [
+            "duplex",
+            "waveform",
+            "CTA",
+            "runoff",
+            "planning"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why order both duplex and CTA rather than one arterial picture?"
+        },
+        {
+          "a": "Give heparin and arrange embolectomy first, since muscle and nerve die within hours; imaging follows the moment the limb is safe, never before.",
+          "accept": [
+            "heparin",
+            "embolectomy",
+            "hours",
+            "after"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "A pale pulseless leg of three hours needs a CTA. What do you do before the scan?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "peripheral_arterial_disease_and_acute_limb_ischemia: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Arterial imaging: duplex, CTA and angiography",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Measure pressure before ordering pictures. The ankle brachial index divides ankle systolic pressure by the higher arm pressure: under 0.9 confirms disease, under 0.5 means severe disease, and an ankle pressure under 50 mmHg marks critical limb threatening ischaemia. In diabetics with calcified incompressible vessels the ankle reading lies, so toe pressures tell the truth instead.\n\nDuplex ultrasound with waveform analysis then maps where flow turns abnormal level by level. It is non-invasive and repeatable, which makes it the right first picture for claudication and for follow-up after any procedure.",
+          "heading": "Pressure first, pictures next"
+        },
+        {
+          "body": "Computed tomography angiography of the aorta and both legs shows the whole runoff in one study: the site of block, its length, and the collaterals beyond it. That is the picture the vascular surgeon plans from, so order it whenever revascularisation is on the table.\n\nCatheter angiography stays reserved for the leg that will be treated through the same catheter, since it can open what it finds. A plain X-ray still earns its place: arterial wall calcification, gas in soft tissue, bone involvement under an ulcer, and a cervical rib for upper-limb symptoms.",
+          "heading": "CTA plans, catheter treats"
+        },
+        {
+          "body": "Blood and urine explain the cause and clear the treatment: fasting sugar and urine sugar for undiagnosed diabetes, lipids for atherosclerosis, renal function before contrast, and a full blood count where infection or wet gangrene is suspected. Glucose tolerance testing catches the diabetic whose fasting sugar still looks innocent.\n\nExamine the heart on paper too: an electrocardiogram and echocardiogram hunt the embolic source, since atrial fibrillation explains today's leg and threatens tomorrow's brain. In the suddenly pale leg none of this waits: heparin goes in and the embolectomy is arranged while blood is drawn, because nerve and muscle die within hours.",
+          "heading": "Bloods explain, the heart confesses, speed saves"
+        }
+      ],
+      "title": "Investigating the ischaemic limb",
+      "why": "Investigations in limb ischaemia answer three separate questions, how bad, where exactly, and what caused it, and confusing the order costs either an unnecessary catheter or a dead leg."
+    },
+    "skill.reasoning.pad.diagnosis": {
+      "id": "skill.reasoning.pad.diagnosis",
+      "kind": "reasoning",
+      "oneLine": "Name the cause, the level and the Fontaine or Rutherford stage, and mark acute danger",
+      "probes": [
+        {
+          "a": "Fontaine I is asymptomatic, II is claudication, III is rest pain, and IV is ulceration or gangrene; Rutherford grades the same ladder from 0 to 6 with tissue loss at the top.",
+          "accept": [
+            "asymptomatic",
+            "claudication",
+            "rest pain",
+            "ulceration",
+            "gangrene"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "Walk through the Fontaine stages in one sentence each."
+        },
+        {
+          "a": "Paraesthesia and paralysis mean nerves are dying and the limb is immediately threatened, needing emergency revascularisation; pain and pallor alone without nerve signs allow urgent rather than instant action.",
+          "accept": [
+            "nerves dying",
+            "immediately threatened",
+            "emergency",
+            "revascularisation"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Which two of the six Ps change tonight into this hour?"
+        },
+        {
+          "a": "Chronic limb threatening ischaemia with rest pain over weeks, ankle pressure under 50 mmHg, Fontaine stage IV with dry gangrene of the great toe, for urgent revascularisation with the toe already lost.",
+          "accept": [
+            "chronic",
+            "rest pain",
+            "Fontaine",
+            "gangrene",
+            "urgent"
+          ],
+          "level": 3,
+          "minMatch": 3,
+          "q": "Give the complete diagnostic statement for a diabetic with rest pain and a black toe."
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "peripheral_arterial_disease_and_acute_limb_ischemia: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Classification of chronic limb ischaemia",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "A complete diagnosis names three things: the cause, the level and the stage. Cause first: atherosclerotic disease, Buerger disease, embolus, or diabetic neuroischaemia, chosen by age, habit and tempo. Level next: aortoiliac, femoropopliteal or tibial, read from pulses and imaging.\n\nStage last, in Fontaine or Rutherford terms. Fontaine runs from silent disease through claudication and rest pain to ulceration and gangrene; Rutherford grades the same climb in finer steps. The stage is not decoration: it decides exercise against operation.",
+          "heading": "Cause, level, stage"
+        },
+        {
+          "body": "Acute limb ischaemia is diagnosed by the six Ps: pain, pallor, coldness, pulselessness, paraesthesia and paralysis. The first four announce the block; the last two grade the danger. Paraesthesia with weakness means nerves are dying and the limb is immediately threatened, for emergency revascularisation without delay.\n\nChronic threatening ischaemia is quieter but just as limb ending: rest pain over weeks, non-healing sores, gangrene, and pressures under 0.5 on the index or under 50 mmHg at the ankle. Call it chronic limb threatening ischaemia and refer urgently, since waiting converts a salvageable foot into an amputation.",
+          "heading": "Acute danger wears six Ps"
+        },
+        {
+          "body": "Write the statement the way the vascular unit expects it: peripheral arterial disease, femoropopliteal level, Fontaine stage IV with dry gangrene of the right great toe, in a 62 year old diabetic beedi smoker. Cause, level, stage, tissue loss and risks in one line.\n\nAdd what is already lost and what is at stake: the toe is dead and will need removal, the foot is salvageable if inflow returns, and the other leg with its weak pulses needs the same workup before it follows. A diagnosis that only names the toe has missed the patient.",
+          "heading": "State what is lost and what is at stake"
+        }
+      ],
+      "title": "Diagnosis and staging",
+      "why": "A diagnosis of ischaemia without a stage cannot be acted on, since claudication is walked off under supervision while rest pain with gangrene is referred urgently, and mixing the two harms both patients."
+    },
+    "skill.annexure.pad.gangrene_table": {
+      "id": "skill.annexure.pad.gangrene_table",
+      "kind": "annexure",
+      "oneLine": "Dry mummifies, wet putrefies, gas crackles: bedside separation in one table",
+      "probes": [
+        {
+          "a": "Dry gangrene is dry, shrivelled, hard and mummified with a line of demarcation; wet gangrene is swollen, bleb-covered and foul with poor demarcation.",
+          "accept": [
+            "mummified",
+            "demarcation",
+            "blebs",
+            "foul",
+            "swollen"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "Contrast dry and wet gangrene in two lines."
+        },
+        {
+          "a": "Crepitus from gas within muscle, with pain, swelling, fever and toxaemia within hours to days of a wound, means gas gangrene and emergency surgery.",
+          "accept": [
+            "crepitus",
+            "gas",
+            "toxaemia",
+            "emergency"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What single finding converts gangrene into gas gangrene, and what follows?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "peripheral_arterial_disease_and_acute_limb_ischemia: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Gangrene: clinical types and signs",
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Dry gangrene is chronic ischaemia given time: gradual occlusion lets tissue dry, shrivel, harden and darken while a line of demarcation forms against living skin. Sensation, temperature, pulsation and function are all lost in the dead part, and the border may turn hyperaesthetic before it declares itself.\n\nWet gangrene is ischaemia without time: sudden blockage, or infection laid on inflamed tissue, leaves the part swollen, bleb-covered and foul instead of mummified. Diabetic gangrene is usually wet, because sugar-rich tissue infects readily, unless atherosclerosis dominates and dries it.",
+          "heading": "Dry mummifies, wet putrefies"
+        },
+        {
+          "heading": "The three gangrenes at a glance",
+          "table": {
+            "cols": [
+              "Feature",
+              "Dry gangrene",
+              "Wet gangrene",
+              "Gas gangrene"
+            ],
+            "rows": [
+              [
+                "Onset",
+                "Gradual occlusion",
+                "Sudden block or infection",
+                "Dirty wound, hours to days"
+              ],
+              [
+                "Look and feel",
+                "Dry, hard, shrivelled",
+                "Swollen, blebs, foul discharge",
+                "Swollen with discoloured muscle"
+              ],
+              [
+                "Signature sign",
+                "Line of demarcation",
+                "Poor demarcation, skip lesions",
+                "Crepitus from gas in muscle"
+              ],
+              [
+                "Usual setting",
+                "Atherosclerosis",
+                "Embolus, diabetic foot",
+                "Clostridial wound infection"
+              ]
+            ]
+          }
+        },
+        {
+          "body": "Gas gangrene declares itself fast: pain in the wound, swelling, fever, vomiting and toxaemia, with the sulphurous smell and brick-red to black muscle found at operation. Subcutaneous crackling is the bedside proof, and it is never merely observed.\n\nPregangrene deserves its own mention: tissue whose supply is so precarious that it will soon fail, shown by pallor, coldness and pain before death is visible. Recognising pregangrene is what saves the foot that is not yet black.",
+          "heading": "Gas crackles, pregangrene warns"
+        }
+      ],
+      "title": "Gangrene: bedside separation table",
+      "why": "The type of gangrene decides the urgency: dry gangrene can be staged and planned, wet gangrene is debrided without delay, and gas gangrene with crepitus is operated on the moment it is recognised."
+    },
+    "skill.treatment.pad.management": {
+      "dosingNote": "This module teaches management at the level of modality and principle: who walks under supervision, who is referred for angioplasty or bypass, and whose leg is an emergency tonight. Specific agents, routes and durations come from your current national or institutional guideline at the time of treatment. CliniX does not prescribe.",
+      "id": "skill.treatment.pad.management",
+      "kind": "treatment",
+      "oneLine": "Stop smoking, control sugar, protect the foot, open the pipe, remove only what is dead",
+      "probes": [
+        {
+          "a": "Stop smoking completely, control diabetes, blood pressure and lipids, start a supervised walking programme, protect the feet, and begin antiplatelet and statin cover under the current guideline.",
+          "accept": [
+            "stop smoking",
+            "diabetes",
+            "walking",
+            "feet",
+            "antiplatelet",
+            "statin"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "What is the first prescription for every claudicant, before any procedure?"
+        },
+        {
+          "a": "Immediate intravenous heparin to stop the clot extending, then emergency restoration of flow by embolectomy, with fasciotomy of the calf compartments if reperfusion swelling threatens muscle.",
+          "accept": [
+            "heparin",
+            "embolectomy",
+            "fasciotomy",
+            "emergency"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "A leg has been pale and pulseless for three hours. What happens in the first hour?"
+        },
+        {
+          "a": "Match antibiotics to severity with deep tissue culture rather than swabs, from narrow oral cover for mild infection to broader intravenous cover for limb-threatening infection with MRSA cover where risk factors exist, alongside debridement and revascularisation.",
+          "accept": [
+            "severity",
+            "deep tissue culture",
+            "intravenous",
+            "debridement",
+            "revascularisation"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "How do you choose antibiotics for an infected diabetic foot without over-treating every wound?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "peripheral_arterial_disease_and_acute_limb_ischemia: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "DIABETIC_FOOT: stewardship framework",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Management of chronic limb ischaemia and the diabetic foot",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Every patient gets risk treatment first, whatever the stage. Complete stoppage of beedis and cigarettes, tight sugar control, blood pressure and lipid control, and antiplatelet with statin cover under the current guideline: these decide whether any pipe stays open after it is fixed.\n\nClaudication without rest pain or tissue loss is managed conservatively at first: a supervised walking programme that pushes through the pain to grow collaterals, careful foot care with proper footwear, and review of distance. Early Buerger disease with vasospasm is where stopping smoking helps most, before fixed organic change sets in.",
+          "heading": "Risk control and walking come first"
+        },
+        {
+          "body": "Rest pain, non-healing ulcers and gangrene need the pipe opened: angioplasty with stenting for suitable short lesions, bypass with vein graft for long occlusions, and endarterectomy where plaque is localised. The choice follows the CTA runoff and the patient's fitness, and belongs to the vascular unit, which is why referral must be urgent, not routine.\n\nAmputation removes only what is dead and at the lowest viable level, judged by warmth, bleeding, pulses and Doppler pressures rather than by the black line alone. A toe or forefoot amputation that heals beats a high amputation that was never needed, but a high amputation that heals beats a low one that rots.",
+          "heading": "Open the pipe, remove only the dead"
+        },
+        {
+          "body": "The suddenly pale pulseless leg is an emergency measured in hours: intravenous heparin at once to stop propagation, then emergency embolectomy to restore flow, often with a Fogarty catheter. Swelling after flow returns can kill muscle inside tight fascia, so four-compartment calf fasciotomy follows whenever reperfusion threatens compartment pressure.\n\nThe infected diabetic foot is managed by severity, not by habit: clinically uninfected ulcers get no antibiotics, mild infection gets narrow oral cover, and deep or limb-threatening infection gets broader intravenous cover with MRSA cover where risk factors exist, always with deep tissue culture before starting and debridement beside drugs. Offloading, sugar control and revascularisation heal what antibiotics alone cannot.",
+          "heading": "Two emergencies, two different clocks"
+        },
+        {
+          "body": "In Indian practice, counsel plainly about cost and travel: revascularisation needs a vascular unit, usually in a medical college or city hospital, so refer early while the foot is still salvageable. Ask the unit social worker about cover under the state insurance scheme before the family borrows at interest.\n\nAt home the rules are barefoot never, nail paring by straight cuts only, daily foot inspection with a mirror for the sole, and cushioned footwear. Review every claudicant for distance, every foot for new sores, and every graft with duplex: the disease is generalised, and today's toe is tomorrow's other leg.",
+          "heading": "Refer early, protect the foot at home"
+        }
+      ],
+      "title": "Managing the ischaemic limb and diabetic foot",
+      "why": "Management fails when stages are confused: the claudicant needs walking and risk control rather than a bypass, the threatened limb needs urgent revascularisation rather than reassurance, and the pale pulseless leg needs heparin within the hour."
+    }
+  },
+  "cases": [
+    {
+      "diagnosis": {
+        "accept": [
+          "Peripheral arterial disease",
+          "Chronic limb ischaemia",
+          "Dry gangrene",
+          "Diabetic foot ulcer"
+        ],
+        "answer": "Peripheral arterial disease with dry gangrene of the right great toe, Fontaine stage IV chronic limb threatening ischaemia, in a diabetic beedi smoker.",
+        "minMatch": 2
+      },
+      "differentialModel": {
+        "accept": [
+          "Buerger disease",
+          "Acute limb ischaemia",
+          "Diabetic foot ulcer",
+          "Deep vein thrombosis",
+          "Cellulitis",
+          "Osteomyelitis",
+          "Peripheral neuropathy",
+          "Lumbar canal stenosis",
+          "Raynaud phenomenon",
+          "Wet gangrene"
+        ],
+        "answer": "Peripheral arterial disease with dry gangrene of the right great toe. Consider Buerger disease, acute limb ischaemia, an infected diabetic foot ulcer with wet gangrene, deep vein thrombosis, cellulitis, osteomyelitis under the sore, diabetic peripheral neuropathy, neurogenic claudication from lumbar canal stenosis, and Raynaud phenomenon.",
+        "minMatch": 2
+      },
+      "essentialInvestigations": [
+        "abpi_doppler",
+        "duplex_arterial",
+        "sugar_control",
+        "ecg_heart"
+      ],
+      "exam": {
+        "skill.exam.surg.arterial_pulses_lower": {
+          "abnormal": true,
+          "finding": "Right femoral present and normal. Right popliteal weak compared with the left. Right posterior tibial and dorsalis pedis absent; left posterior tibial weak, left dorsalis pedis present but thin. No expansile swelling along any artery."
+        },
+        "skill.exam.surg.buerger_postural_test": {
+          "abnormal": true,
+          "finding": "On raising both legs the right sole turns cadaveric pale within a minute at about 20 degrees, with dorsal veins empty and guttered. On hanging the legs down, pink returns only after about 25 seconds, followed by deep purple-red rubor of the right foot. Left leg pales mildly at 45 degrees with quicker return."
+        },
+        "skill.exam.surg.diabetic_foot": {
+          "abnormal": true,
+          "finding": "Callus over both heels and the ball of the right foot. Touch and vibration sense reduced in both feet to the midfoot. Right great toe black and dry; remaining toes cool with intact skin. Patient walks barefoot indoors and wears loose rubber chappals outside."
+        },
+        "skill.exam.surg.pvd_inspection": {
+          "abnormal": true,
+          "finding": "Right leg pale below the knee with thin shiny hairless skin over the foot and lower third of the leg. Nails thickened with transverse ridges. Dorsal foot veins flat and empty with the leg horizontal. Right great toe black, dry and shrivelled to the base with a sharp line of demarcation; no discharge, no blebs, no crepitus. Left foot cool with mild hair loss, no tissue loss."
+        },
+        "skill.exam.surg.regional_nodes": {
+          "abnormal": false,
+          "finding": "No inguinal or femoral nodes felt on either side. No groin scar, no leg wound apart from the toe."
+        },
+        "skill.exam.surg.ulcer_inspect": {
+          "abnormal": true,
+          "finding": "The right great toe is mummified black to its base with a dry wrinkled surface and a clear line where dead meets living skin. No surrounding redness, no swelling of the forefoot, no foul smell. A small punched-out dry sore with a pale base sits over the head of the fifth metatarsal."
+        },
+        "skill.exam.surg.ulcer_palpate": {
+          "abnormal": true,
+          "finding": "The black toe is hard and cold with no feeling in it. Warmth of the leg ends halfway down the shin; below that the skin is cold. Capillary return on the pulps of the other toes is slow. No tenderness along the vessels, no oedema, no crepitus anywhere."
+        },
+        "skill.gen.appearance": {
+          "abnormal": false,
+          "finding": "A thin 62 year old man, alert and comfortable at rest, walking with a careful short-stepped gait to spare the right foot. No distress, no pallor of the conjunctiva, nicotine staining of the right fingers."
+        },
+        "skill.gen.surg.survey": {
+          "abnormal": true,
+          "finding": "Right calf visibly thinner than the left from months of favouring the leg. Blood pressure high on repeat reading. Radial pulses regular. No carotid bruit heard. Chest clear, no leg oedema."
+        },
+        "skill.gen.vitals": {
+          "abnormal": false,
+          "finding": "Pulse 86 regular. Blood pressure 138/84 in the right arm, 132/80 in the left. Respiratory rate 18. SpO2 97 percent on room air. Temperature 37 C. Random sugar high on the ward glucometer."
+        }
+      },
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "history": {
+        "barefoot_nailcare_habit": {
+          "cues": [
+            "do you walk barefoot at home",
+            "what footwear do you use outside",
+            "how do you cut your toenails"
+          ],
+          "reply": "At home I am always barefoot, doctor. Outside I wear rubber chappals. I cut the nails with a blade, and once the blade slipped and cut the side of this same toe. That small cut never healed properly.",
+          "skillId": "skill.hx.peripheral.risk"
+        },
+        "beedi_smoking_dose_years": {
+          "cues": [
+            "how many beedis do you smoke daily",
+            "since what age do you smoke beedis",
+            "have you tried stopping smoking"
+          ],
+          "reply": "One bundle every day, doctor, since I was eighteen. That is more than forty years now. I tried stopping twice but the craving brings me back within a week.",
+          "skillId": "skill.hx.peripheral.risk"
+        },
+        "calf_pain_relief_rest": {
+          "cues": [
+            "does standing still relieve the calf pain",
+            "how soon does the pain go on resting",
+            "do you have to stop and rest while walking"
+          ],
+          "reply": "If I stand still the grip loosens within three or four minutes. Then I can walk again, but a shorter distance than before. I have to stop three or four times on the way to the bus stand now.",
+          "skillId": "skill.hx.surg.pvd_claudication_restpain"
+        },
+        "claudication_distance_shrink": {
+          "cues": [
+            "how far can you walk before the pain starts",
+            "has your walking distance reduced over time",
+            "what distance brings on the calf grip"
+          ],
+          "reply": "Two years back I could walk to the far field and back. Now after a short walk, less than half that road, the right calf grips like a cramp and I must stop. The distance shrinks every few months.",
+          "skillId": "skill.hx.surg.pvd_claudication_restpain"
+        },
+        "family_amputation_history": {
+          "cues": [
+            "did anyone in your family lose a toe or leg",
+            "any amputation for diabetes in the family",
+            "family history of early heart attack or stroke"
+          ],
+          "reply": "My elder brother lost two toes to sugar five years back, doctor. My father died of a heart attack at sixty. No one else lost a leg.",
+          "skillId": "skill.hx.peripheral.risk"
+        },
+        "farm_walking_occupation": {
+          "cues": [
+            "what work do you do every day",
+            "how far do you walk for work",
+            "tell me about your farm labour"
+          ],
+          "reply": "I am a sugarcane cutter, doctor. In season I walk behind the cart the whole day. This year I cannot keep up with the gang, so the contractor gives me half days and half pay.",
+          "skillId": "skill.particulars.demographics"
+        },
+        "food_drink_habits": {
+          "cues": [
+            "do you drink alcohol regularly",
+            "tell me about your daily food",
+            "do you chew tobacco as well"
+          ],
+          "reply": "Food is jowar roti and dal, twice a day. I drink arrack at festivals only, not daily. No chewing tobacco, only beedis.",
+          "skillId": "skill.hx.peripheral.risk"
+        },
+        "foot_paleness_coldness_change": {
+          "cues": [
+            "does your foot turn pale or blue",
+            "is one foot colder than the other",
+            "what happens to foot colour on hanging down"
+          ],
+          "reply": "The right foot is always colder, doctor. When I lift it in bed it looks white like wax. When I sit with it hanging down it turns dark red. My wife noticed this before I did.",
+          "skillId": "skill.hx.surg.pvd_claudication_restpain"
+        },
+        "foot_sore_slow_healing": {
+          "cues": [
+            "any sore on the foot that refuses to heal",
+            "how long has the foot wound been there",
+            "does the sore discharge anything"
+          ],
+          "reply": "There is a small sore on the outer edge of the foot for two months. It neither heals nor grows. It hardly pains. Sometimes a little watery fluid comes, but no thick pus and no bad smell.",
+          "skillId": "skill.hx.surg.ulcer"
+        },
+        "leg_pain_first_noticed": {
+          "cues": [
+            "when did the leg pain first start",
+            "how did the calf pain begin",
+            "since when do you get pain on walking"
+          ],
+          "reply": "Two years back, doctor. First only a tight cramp in the right calf when I hurried to the field. It would go if I stood still. I thought it was age and weakness, so I never showed anyone.",
+          "skillId": "skill.hx.surg.pvd_claudication_restpain"
+        },
+        "night_toe_pain_hanging": {
+          "cues": [
+            "does toe pain wake you at night",
+            "does hanging the foot down relieve night pain",
+            "tell me about pain at rest in bed"
+          ],
+          "reply": "For three months now the toes burn at night and wake me up. If I sit up and hang the leg down over the cot, the burning cools in some minutes. My wife says I sleep half the night sitting now.",
+          "skillId": "skill.hx.surg.pvd_claudication_restpain"
+        },
+        "other_leg_same_pain": {
+          "cues": [
+            "does the other leg pain on walking",
+            "is the left leg also affected",
+            "any pain in the opposite calf"
+          ],
+          "reply": "The left leg also grips if I walk far, doctor, but much later than the right, and it has no black toe and no night pain. Both feet feel less than before.",
+          "skillId": "skill.hx.surg.pvd_claudication_restpain"
+        },
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "what is your main problem today",
+            "tell me why you have come to hospital"
+          ],
+          "key": true,
+          "reply": "Doctor, for two years my right calf grips when I walk, and now my big toe has turned black. For three months the toes burn at night unless I hang the leg down.",
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "pressure_heart_illness": {
+          "cues": [
+            "do you have high blood pressure",
+            "any heart attack or chest pain before",
+            "any stroke or prolonged weakness before"
+          ],
+          "reply": "Pressure was found high two years back at a camp. I take one tablet but not daily. No heart attack, no stroke. Sometimes the chest feels tight when I climb, but it passes.",
+          "skillId": "skill.hx.peripheral.risk"
+        },
+        "sudden_white_painful_leg_alarm": {
+          "cues": [
+            "was there ever sudden severe pain with a white leg",
+            "any sudden cold pale leg episode",
+            "did the blackening happen overnight"
+          ],
+          "reply": "No, doctor, nothing sudden. The toe darkened slowly over three weeks, first the tip, then the whole toe. The pain of walking came over years, not in one day.",
+          "skillId": "skill.hx.surg.pvd_claudication_restpain"
+        },
+        "sugar_diabetes_control": {
+          "cues": [
+            "since when do you have diabetes",
+            "what tablets do you take for sugar",
+            "what was your last sugar reading"
+          ],
+          "reply": "Sugar found eight years back, doctor. I take two tablets in the morning, but some days I forget. Last month the camp machine showed high fasting sugar. My urine also shows sugar sometimes.",
+          "skillId": "skill.hx.peripheral.risk"
+        },
+        "tablets_taken_daily": {
+          "cues": [
+            "which tablets do you take daily",
+            "do you miss your tablet doses",
+            "any blood thinner or cholesterol tablet"
+          ],
+          "reply": "One white tablet for pressure and two for sugar, when I remember. No blood thinner, no cholesterol tablet. For the toe I applied turmeric at home and took two painkillers from the shop.",
+          "skillId": "skill.hx.peripheral.risk"
+        },
+        "toe_blackening_spread": {
+          "cues": [
+            "when did the toe turn black",
+            "how did the blackening spread",
+            "is the black toe painful"
+          ],
+          "reply": "Three weeks back the tip of the big toe went dark. Slowly the darkness crept down to the base. Strangely the black part itself does not pain; the burning is in the other toes at night.",
+          "skillId": "skill.hx.surg.ulcer"
+        }
+      },
+      "id": "case.pad.shivappa",
+      "initialVitals": {
+        "bpDiastolic": 84,
+        "bpSystolic": 138,
+        "gcs": 15,
+        "hr": 86,
+        "rr": 18,
+        "spo2": 97,
+        "temp": 37
+      },
+      "investigations": {
+        "abpi_doppler": {
+          "indicated": true,
+          "label": "Ankle brachial pressure index with handheld Doppler",
+          "note": "The bedside proof of disease and its grade: under 0.9 confirms PAD, under 0.5 with tissue loss marks critical ischaemia needing urgent referral.",
+          "result": "Right ABPI under 0.5 with a monophasic tibial waveform; ankle systolic pressure under 50 mmHg. Left ABPI under 0.9 with biphasic waveforms. Brachial pressures near equal in both arms."
+        },
+        "cta_runoff": {
+          "indicated": true,
+          "label": "CT angiography of the aorta and lower limbs",
+          "note": "The planning picture for the vascular unit: length of block and collaterals decide angioplasty against bypass. Ordered once referral is accepted, with hydration for renal protection.",
+          "result": "Long occlusion of the right superficial femoral artery with reformation at the knee through collaterals; diseased tibial vessels with a patent posterior tibial into the foot. Left femoropopliteal atheroma without complete block."
+        },
+        "duplex_arterial": {
+          "indicated": true,
+          "label": "Arterial duplex of both lower limbs",
+          "note": "Maps the level of disease non-invasively and follows the limb after any procedure. First picture before any catheter study.",
+          "result": "Right superficial femoral artery occluded along its length with collateral flow at the adductor hiatus; monophasic damped waveforms in all right tibial vessels. Left vessels patent with biphasic waveforms and mild wall disease."
+        },
+        "ecg_heart": {
+          "indicated": true,
+          "label": "Electrocardiogram",
+          "note": "Hunts atrial fibrillation and silent ischaemia: the heart explains embolic risk and sets fitness for any vascular procedure.",
+          "result": "Normal sinus rhythm at 86 per minute, no acute ischaemic changes, left ventricular hypertrophy by voltage."
+        },
+        "lipid_kidney": {
+          "indicated": true,
+          "label": "Fasting lipids with renal function",
+          "note": "Lipids complete the risk picture for statin cover; creatinine must be known before contrast imaging.",
+          "result": "Total cholesterol and triglycerides raised; serum creatinine within normal limits, fit for contrast with hydration."
+        },
+        "sugar_control": {
+          "indicated": true,
+          "label": "Fasting sugar with urine routine",
+          "note": "Uncontrolled sugar drives both atherosclerosis and non-healing: control is part of limb salvage, not a separate illness.",
+          "result": "Fasting sugar high with sugar present in urine; no ketones, no pus cells. Pattern of poorly controlled diabetes on irregular tablets."
+        },
+        "xray_foot": {
+          "indicated": true,
+          "label": "Plain X-ray of the right foot",
+          "note": "Excludes gas in soft tissue and bone involvement under the sore, and shows calcified tibial vessels that warn the ankle pressure may mislead.",
+          "result": "No gas shadows, no bone destruction under the metatarsal sore. Dense calcification of the tibial arteries. No fracture."
+        }
+      },
+      "managementModel": {
+        "accept": [
+          "urgent referral",
+          "revascularisation",
+          "smoking cessation",
+          "antiplatelet",
+          "statin",
+          "toe amputation",
+          "foot care",
+          "follow-up"
+        ],
+        "answer": "Urgent referral to a vascular unit for revascularisation by angioplasty or bypass guided by the runoff, complete smoking cessation, sugar, pressure and lipid control with antiplatelet and statin cover, removal of the dead toe with foot care and cushioned footwear, and duplex follow-up of both legs.",
+        "minMatch": 3
+      },
+      "opening": "Shivappa Gowda, 62, a sugarcane cutter, has been sent from a camp with a black great toe. He walks in slowly, sparing his right foot, with his son carrying a bundle of old prescriptions. Introduce yourself and take a history.",
+      "patient": {
+        "age": 62,
+        "name": "Shivappa Gowda",
+        "occupation": "Sugarcane cutter, daily wage farm labour",
+        "residence": "Rural, lives with his wife and son",
+        "sex": "male"
+      },
+      "review": {
+        "status": "ai_drafted"
+      },
+      "teachingPoints": [
+        "Tempo is the diagnosis: two years of shrinking claudication distance with night pain relieved by dependency means chronic atherosclerosis, while a leg that turns pale and pulseless within hours means embolus and a different emergency.",
+        "Rest pain with a painless black toe is not reassuring: dead nerves feel nothing, and tissue loss with pressures under 0.5 marks Fontaine stage IV disease needing urgent revascularisation, not routine review.",
+        "The level is read from pulses, not from the toe: femoral present with popliteal weak and tibials absent places the block in the superficial femoral artery, which the duplex then confirms.",
+        "A vascular angle near 20 degrees with slow return and rubor grades severity at the bedside without any machine, and an ABPI under 0.5 with an ankle pressure under 50 mmHg says the same on paper.",
+        "Diabetes contributes three ways here: atherosclerotic narrowing, numb feet that invite barefoot injury, and sugar-rich tissue where a blade cut festers for two months, so sugar control is limb treatment, not background detail.",
+        "The other leg with weak pulses and late claudication is next in line: it needs the same risk control and duplex follow-up now, before it grows its own black toe."
+      ],
+      "title": "A sugarcane cutter with calf pain and a black toe"
+    }
+  ]
+}

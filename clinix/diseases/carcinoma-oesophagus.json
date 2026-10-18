@@ -1,0 +1,1119 @@
+{
+ "_comment": "Surgery pathway for progressive dysphagia from carcinoma of the oesophagus. Shared history, examination and annexure skills are referenced from the core and surgery packs; the fragment skill.hx.oesophagus.risk merges from shared-carcinoma-oesophagus.json. The disease owns only reasoning, investigation and treatment skills.",
+ "id": "carcinoma-oesophagus",
+ "name": "Carcinoma oesophagus",
+ "fullName": "Carcinoma of the oesophagus",
+ "system": "surgery",
+ "kbRef": "gastroesophageal_reflux_disease",
+ "oneLine": "Progressive dysphagia in an older adult, and the race to prove it and stage it",
+ "estMinutes": 60,
+ "review": {
+  "status": "ai_drafted"
+ },
+ "version": 1,
+ "chapters": [
+  {
+   "id": "basics",
+   "title": "Basics",
+   "blurb": "What carcinoma of the gullet is, and why it presents late",
+   "skills": [
+    "skill.carcinoma.basics"
+   ]
+  },
+  {
+   "id": "approach",
+   "title": "Approach to the patient",
+   "blurb": "Before a single question",
+   "skills": [
+    "skill.approach.hygiene",
+    "skill.approach.introduce",
+    "skill.approach.consent",
+    "skill.approach.position"
+   ]
+  },
+  {
+   "id": "particulars",
+   "title": "Patient particulars",
+   "blurb": "Age, sex and habits set the risk before a symptom is mentioned",
+   "skills": [
+    "skill.particulars.demographics"
+   ],
+   "emphasis": {
+    "skill.particulars.demographics": {
+     "expect": "In suspected gullet cancer, age past middle life and male sex carry real weight, as does a life of bidi smoking, tobacco chewing or daily alcohol. A 60 year old man with those habits starts with a far higher pre test probability than a young woman with the same complaint."
+    }
+   }
+  },
+  {
+   "id": "history",
+   "title": "History of presenting illness",
+   "blurb": "Months, not years, and solids before liquids",
+   "skills": [
+    "skill.hx.chief_complaints",
+    "skill.hx.surg.dysphagia"
+   ],
+   "emphasis": {
+    "skill.hx.chief_complaints": {
+     "expect": "A typical presentation reads in months: catching on solids for four months, semisolids for one month, with steady weight loss throughout. That tempo alone should move you toward a malignant ring before anything else is known."
+    },
+    "skill.hx.surg.dysphagia": {
+     "expect": "Expect solids first and liquids later, felt low behind the breastbone, with bland regurgitation sometimes streaked with blood. Dysphagia for solids and liquids together from the start, over years, points away from cancer toward a motility disorder."
+    }
+   }
+  },
+  {
+   "id": "past_personal_drug_family",
+   "title": "Past, personal, drug and family history",
+   "blurb": "The exposures and old gullet disease behind this cancer",
+   "skills": [
+    "skill.hx.oesophagus.risk"
+   ]
+  },
+  {
+   "id": "general_exam",
+   "title": "General examination",
+   "blurb": "A wasted patient, and the deficiency signs that point upward",
+   "skills": [
+    "skill.gen.appearance",
+    "skill.gen.vitals",
+    "skill.gen.edema",
+    "skill.gen.surg.survey"
+   ],
+   "emphasis": {
+    "skill.gen.appearance": {
+     "expect": "Look for cachexia with loose clothes and temporal wasting, pallor of chronic blood loss, and the smooth tongue with spoon nails of iron deficiency that marks the Plummer-Vinson background."
+    },
+    "skill.gen.edema": {
+     "expect": "Dependent oedema here reflects hypoproteinaemia from months of poor intake, not cardiac failure; check albumin rather than reaching for diuretics."
+    }
+   }
+  },
+  {
+   "id": "systemic_exam",
+   "title": "Examination in dysphagia",
+   "blurb": "The neck, the node, and the abdomen that stages the case",
+   "skills": [
+    "skill.exam.surg.dysphagia"
+   ],
+   "emphasis": {
+    "skill.exam.surg.dysphagia": {
+     "expect": "In suspected cancer, feel the left supraclavicular fossa first: a hard node there settles distant spread at the bedside. Then test laryngeal crepitus, look for a pouch that gurgles, and palpate the epigastrium and liver for the growth reaching down and seeding across."
+    }
+   }
+  },
+  {
+   "id": "disease_findings",
+   "title": "Putting the carcinoma picture together",
+   "blurb": "One tightening ring explains everything you found",
+   "skills": [
+    "skill.carcinoma.signs",
+    "skill.annex.surg.dysphagia_score"
+   ]
+  },
+  {
+   "id": "summary",
+   "title": "Clinical summary",
+   "blurb": "Three sentences that contain the case and its stage",
+   "skills": [
+    "skill.carcinoma.summary"
+   ]
+  },
+  {
+   "id": "differential",
+   "title": "Differential diagnosis",
+   "blurb": "What else narrows the gullet, and the tempo that separates them",
+   "skills": [
+    "skill.carcinoma.differential"
+   ]
+  },
+  {
+   "id": "investigations",
+   "title": "Investigations",
+   "blurb": "Prove it with tissue, map it with imaging, never test motility first",
+   "skills": [
+    "skill.ix.surg.dysphagia_workup",
+    "skill.ix.carcinoma.workup"
+   ],
+   "emphasis": {
+    "skill.ix.surg.dysphagia_workup": {
+     "expect": "Use this sequence strictly in suspected cancer: endoscopy with biopsy first, barium patterns only as supporting detail, and manometry never until a mechanical cancer is excluded. A blind scope into an unrecognised pouch perforates it."
+    }
+   }
+  },
+  {
+   "id": "diagnosis",
+   "title": "Diagnosis and staging",
+   "blurb": "Histology, thirds, spread, and fitness in one statement",
+   "skills": [
+    "skill.carcinoma.diagnosis"
+   ]
+  },
+  {
+   "id": "treatment",
+   "title": "Treatment",
+   "blurb": "A team decision: cure where possible, swallowing always",
+   "skills": [
+    "skill.tx.carcinoma"
+   ]
+  },
+  {
+   "id": "case",
+   "title": "Case presentation",
+   "blurb": "Present this patient to your consultant",
+   "skills": [
+    "skill.present.case"
+   ]
+  }
+ ],
+ "osce": {
+  "stations": [
+   {
+    "id": "osce.carcinoma.neck_exam",
+    "title": "Examine the neck and abdomen in dysphagia",
+    "task": "This 63-year-old man has had progressive difficulty swallowing for four months with weight loss. Examine his neck and abdomen for the cause and its spread, and present your findings.",
+    "seconds": 480,
+    "skills": [
+     "skill.approach.hygiene",
+     "skill.approach.introduce",
+     "skill.approach.consent",
+     "skill.approach.position",
+     "skill.exam.surg.dysphagia",
+     "skill.gen.appearance"
+    ],
+    "examinerQuestions": [
+     "You found a hard left supraclavicular node. Name the sign and state what it means for the intent of treatment.",
+     "Laryngeal crepitus is absent on rocking the thyroid cartilage. What does that suggest?",
+     "How would a gurgling compressible swelling in the lower neck change your next step before endoscopy?"
+    ]
+   },
+   {
+    "id": "osce.carcinoma.history",
+    "title": "Take a dysphagia history and grade the risk",
+    "task": "This 58-year-old woman has had difficulty swallowing for three months. Take a focused history in six minutes and be ready to state the likely cause and what you will arrange next.",
+    "seconds": 360,
+    "skills": [
+     "skill.approach.introduce",
+     "skill.approach.consent",
+     "skill.hx.chief_complaints",
+     "skill.hx.surg.dysphagia",
+     "skill.hx.oesophagus.risk"
+    ],
+    "examinerQuestions": [
+     "Her dysphagia affects solids and liquids equally from the start over three years. How does that change your leading diagnosis?",
+     "Name three exposures you asked about and why each matters for gullet cancer.",
+     "She reports heartburn for a decade controlled with antacids. What change at the junction does that raise, and which cancer follows it?"
+    ]
+   }
+  ]
+ },
+ "viva": {
+  "skills": [
+   "skill.carcinoma.basics",
+   "skill.hx.surg.dysphagia",
+   "skill.exam.surg.dysphagia",
+   "skill.carcinoma.signs",
+   "skill.carcinoma.differential",
+   "skill.ix.carcinoma.workup",
+   "skill.carcinoma.diagnosis",
+   "skill.tx.carcinoma"
+  ]
+ },
+ "skills": {
+  "skill.carcinoma.basics": {
+   "id": "skill.carcinoma.basics",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "What carcinoma of the oesophagus is",
+   "oneLine": "A malignant stricture of the gullet that declares itself late, with two distinct tumour types",
+   "why": "Dysphagia from cancer means the lumen is already more than half closed, so every week of delay matters. Knowing the two tumour types and their typical sites tells you what biopsy to expect, what spread to look for, and why cure is possible only in the minority caught early.",
+   "body": "Carcinoma of the oesophagus is a malignant narrowing of the gullet, usually in an older adult, that first shows as difficulty swallowing solids and then progresses to semisolids and liquids over weeks to a few months.",
+   "keyPoints": [
+    "Two biologically different cancers share the organ: squamous cell carcinoma, favouring the upper and mid gullet, and adenocarcinoma, almost always in the lower gullet and at the junction with the stomach.",
+    "Squamous cancer dominates worldwide and in India, where tobacco, alcohol, chewed areca nut and very hot drinks drive risk; adenocarcinoma follows years of reflux with Barrett change and is rising where reflux is common.",
+    "Symptoms appear only once the growth rings most of the circumference, so patients typically present when they struggle with semisolids, not at the first catch on solids.",
+    "Men past middle age form the majority; a short history of months in an older patient points to cancer, while a story over years points to a benign cause.",
+    "Spread runs early to lymph nodes and then to liver, lung and bone; hoarseness, cough after swallowing and bone pain are late features, not early ones."
+   ],
+   "pitfalls": [
+    "Calling any dysphagia in an older smoker reflux without arranging endoscopy, which is how resectable cancers become incurable ones.",
+    "Assuming liquids first rules out cancer; a tight malignant ring can trap a hurried liquid bolus too.",
+    "Trusting a normal barium study over a convincing history; a negative contrast study never overrules progressive dysphagia."
+   ],
+   "media": [],
+   "probes": [
+    {
+     "level": 1,
+     "q": "Name the two main cancers of the oesophagus and their typical sites.",
+     "a": "Squamous cell carcinoma of the upper and mid oesophagus, and adenocarcinoma of the lower oesophagus and gastro-oesophageal junction.",
+     "accept": [
+      "squamous",
+      "adenocarcinoma",
+      "upper",
+      "mid",
+      "lower",
+      "junction"
+     ],
+     "minMatch": 3
+    },
+    {
+     "level": 2,
+     "q": "Why does carcinoma of the oesophagus usually present late?",
+     "a": "Swallowing only becomes difficult once the growth involves most of the circumference, so by the time solids stick the disease is already advanced and often spread to nodes.",
+     "accept": [
+      "circumference",
+      "late",
+      "solids",
+      "advanced",
+      "nodes"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "A 65 year old man reports catching on solids for five months. What single feature of that history most raises concern for cancer?",
+     "a": "Steadily progressive dysphagia over months in an older adult, starting with solids and moving toward semisolids, which is the classic tempo of a malignant stricture.",
+     "accept": [
+      "progressive",
+      "months",
+      "solids",
+      "older",
+      "malignant"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "rubric": [],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "upper_gastrointestinal_tract_cancers: clinicalPearls"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "Carcinoma of the oesophagus"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.carcinoma.signs": {
+   "id": "skill.carcinoma.signs",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "The carcinoma oesophagus picture",
+   "oneLine": "One mechanism, a steadily tightening ring, and the local plus distant signs it produces",
+   "why": "A malignant ring explains the whole case in one line: food stops, weight falls, and the growth reaches things it should never touch. Reading every finding back to that ring stops you chasing each symptom as a separate disease.",
+   "body": "A growing ring of tumour narrows the lumen, ulcerates and bleeds, and invades or seeds beyond the wall. Every local and distant sign follows from that.",
+   "keyPoints": [
+    "Swallow: dysphagia that starts with solids and marches to semisolids and then liquids over weeks to months, without remission; temporary easing after a piece of growth sloughs does not mean recovery.",
+    "Regurgitation: bland, alkaline fluid mixed with saliva, sometimes streaked with blood, unlike the sour acid reflux of uncomplicated reflux disease.",
+    "Nutrition: steady weight loss with anaemia; the patient changes diet texture to cope and arrives eating semisolids or liquids only.",
+    "Neck: a hard left supraclavicular node, the Troisier sign, means distant spread; loss of laryngeal crepitus suggests post cricoid invasion.",
+    "Voice and chest: hoarseness from recurrent laryngeal nerve involvement, coughing just after swallowing or recurrent chest infection from aspiration or a fistula into the airway.",
+    "Abdomen: a hard epigastric mass where a lower growth reaches the stomach, nodular liver from metastases, or ascites in disseminated disease."
+   ],
+   "pitfalls": [
+    "Mistaking temporary relief after sloughing for improvement and missing the still advancing ring underneath.",
+    "Calling blood streaked regurgitation simple acidity and treating it with antacids while the growth advances.",
+    "Examining the throat and chest but never feeling the left supraclavicular fossa, the one sign that settles staging at the bedside."
+   ],
+   "media": [],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What is the classic sequence of dysphagia in carcinoma of the oesophagus?",
+     "a": "Difficulty starts with solids, progresses to semisolids and then liquids, steadily worsening over weeks to months without remission.",
+     "accept": [
+      "solids",
+      "semisolids",
+      "liquids",
+      "progressive",
+      "months"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "How does malignant regurgitation differ from reflux regurgitation?",
+     "a": "Malignant regurgitation is bland and alkaline with saliva, sometimes streaked with blood, while reflux regurgitation is sour and acid with heartburn.",
+     "accept": [
+      "alkaline",
+      "saliva",
+      "blood",
+      "sour",
+      "acid"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "Explain how one malignant ring produces hoarseness, cough after meals, and a left neck node.",
+     "a": "The ring invades the recurrent laryngeal nerve causing hoarseness, erodes into the airway causing cough and aspiration, and seeds lymphatics up to the left supraclavicular node via the thoracic duct.",
+     "accept": [
+      "recurrent laryngeal",
+      "airway",
+      "aspiration",
+      "supraclavicular",
+      "thoracic duct"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "rubric": [],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "dysphagia: clinicalPearls"
+    },
+    {
+     "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+     "locator": "Dysphagia"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.carcinoma.summary": {
+   "id": "skill.carcinoma.summary",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "The clinical summary",
+   "oneLine": "Problem representation for a progressive dysphagia measured in months, with the stage in the same sentence",
+   "why": "A dysphagia summary must carry the tempo, the texture sequence and the stage together, because those three decide whether the patient goes for curative surgery or palliation. A summary that omits what the hands found is just a history read aloud.",
+   "body": "State the patient with the exposures that matter, the tempo and texture sequence, the syndrome in abstract terms, and the bedside stage, in that order.",
+   "keyPoints": [
+    "Name the patient with the relevant exposures: age, sex, tobacco and alcohol habits, and predisposing disease.",
+    "State the tempo and sequence: progressive over weeks to months, solids to semisolids to liquids, with weight loss quantified.",
+    "State the syndrome in abstract terms: progressive mechanical dysphagia with regurgitation and anaemia, and examination findings of cachexia with or without a hard supraclavicular node.",
+    "Include the bedside stage in the same summary: localised or with clinical evidence of distant spread, since it frames the plan.",
+    "A worked example: A 62 year old bidi smoker presents with four months of progressive dysphagia, solids to semisolids, with 8 kg weight loss and blood streaked regurgitation. Examination shows cachexia, pallor and a hard left supraclavicular node. This is carcinoma of the mid oesophagus with clinical distant spread."
+   ],
+   "pitfalls": [
+    "Summarising the history without the examination, leaving the listener unable to stage the case.",
+    "Describing dysphagia without the texture sequence, which is the single most discriminating detail.",
+    "Omitting weight loss and exposures, so the summary fits a benign motility disorder just as well."
+   ],
+   "media": [],
+   "probes": [
+    {
+     "level": 2,
+     "q": "What element belongs in a carcinoma dysphagia summary that a benign history summary would lack?",
+     "a": "The texture sequence from solids to liquids, the quantified weight loss, and the bedside stage including nodes and nutritional state.",
+     "accept": [
+      "sequence",
+      "solids",
+      "weight loss",
+      "stage",
+      "node"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "Why does tempo decide the summary more than any single symptom in dysphagia?",
+     "a": "Months of steady progression signals a malignant ring while years of fluctuation signals a benign process, so tempo alone often separates cancer from its mimics.",
+     "accept": [
+      "months",
+      "progression",
+      "malignant",
+      "benign",
+      "fluctuation"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "rubric": [
+    {
+     "id": "exposure",
+     "text": "States the patient with relevant exposures"
+    },
+    {
+     "id": "sequence",
+     "text": "States the solids to liquids sequence with tempo"
+    },
+    {
+     "id": "stage",
+     "text": "Includes a bedside stage with nodes and nutrition"
+    }
+   ],
+   "sources": [
+    {
+     "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+     "locator": "Dysphagia"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.carcinoma.differential": {
+   "id": "skill.carcinoma.differential",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "Differential diagnosis",
+   "oneLine": "What else narrows or stills the gullet, and the tempo question that separates them",
+   "why": "Benign mimics outnumber cancers in the clinic, and each has a treatment of its own, from dilatation to myotomy. The differential protects two patients at once: the cancer mistaken for spasm, and the achalasia mistaken for cancer and sent for a resection it never needed.",
+   "body": "For progressive dysphagia with weight loss, work through malignant, benign stricturing, motility, pouch and extrinsic causes, using tempo and the solids liquids order as the first split.",
+   "keyPoints": [
+    "Achalasia: dysphagia for solids and liquids together from the start, over years, with bland regurgitation hours after meals and sometimes chest infection; the cardia never relaxes.",
+    "Benign peptic stricture: long reflux history with heartburn, slow narrowing over years, smoother course than cancer.",
+    "Corrosive stricture: a definite alkali or acid swallow years before, with a long quiet interval.",
+    "Pharyngeal pouch: elderly patient, gurgling in the neck, regurgitation of undigested food soon after swallowing, sometimes with a compressible neck swelling.",
+    "Plummer-Vinson pattern: middle aged woman with iron deficiency, smooth tongue, spoon nails and upper webs.",
+    "Diffuse spasm: chest pain with episodic dysphagia that comes and goes, often with stress, not steady progression.",
+    "Reflux disease and hiatus hernia: heartburn led, dysphagia intermittent and mild, no steady march of textures.",
+    "Extrinsic pressure: goitre, mediastinal nodes or an aortic aneurysm compressing from outside with an otherwise normal lining.",
+    "Carcinoma of the gastric cardia from below: behaves like lower oesophageal cancer and needs the same endoscopy with biopsy."
+   ],
+   "pitfalls": [
+    "Calling achalasia cancer on the barium film alone without biopsy, or calling cancer achalasia on manometry done before endoscopy.",
+    "Forgetting the pharyngeal pouch and passing an endoscope blindly into it.",
+    "Treating a benign stricture with repeated dilatation for years without ever biopsying the ring."
+   ],
+   "media": [],
+   "probes": [
+    {
+     "level": 2,
+     "q": "Name four differentials for progressive dysphagia with weight loss in an older adult.",
+     "a": "Achalasia, benign peptic or corrosive stricture, pharyngeal pouch, Plummer-Vinson webs, diffuse spasm, and extrinsic compression such as goitre.",
+     "accept": [
+      "achalasia",
+      "stricture",
+      "pouch",
+      "plummer",
+      "spasm",
+      "goitre"
+     ],
+     "minMatch": 3
+    },
+    {
+     "level": 3,
+     "q": "Contrast the dysphagia of carcinoma with that of achalasia on tempo and texture order.",
+     "a": "Carcinoma progresses over months from solids to liquids without remission, while achalasia runs over years with solids and liquids affected together from the start and frequent fluctuation.",
+     "accept": [
+      "months",
+      "solids",
+      "liquids",
+      "years",
+      "together",
+      "fluctuation"
+     ],
+     "minMatch": 3
+    }
+   ],
+   "rubric": [
+    {
+     "id": "breadth",
+     "text": "Offers a differential spanning malignant, stricturing, motility, pouch and extrinsic causes"
+    },
+    {
+     "id": "tempo",
+     "text": "Uses tempo and texture order to separate cancer from benign mimics"
+    },
+    {
+     "id": "safety",
+     "text": "States the biopsy first rule before motility testing or dilatation"
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "diseases_of_esophagus: clinicalPearls"
+    },
+    {
+     "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+     "locator": "Dysphagia"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.ix.carcinoma.workup": {
+   "id": "skill.ix.carcinoma.workup",
+   "kind": "investigation",
+   "system": "surgery",
+   "title": "Confirming carcinoma and staging it",
+   "oneLine": "Endoscopy with biopsy first, then imaging for spread and fitness for treatment",
+   "why": "Only tissue proves cancer and only staging decides treatment, so the order matters: prove it, map it, then judge fitness. A scan before biopsy still leaves you without a diagnosis, and manometry before endoscopy risks calling a cancer a motility disorder.",
+   "body": "Group investigations by what they answer: prove the cancer, map its extent, and judge whether the patient can withstand the planned treatment.",
+   "keyPoints": [
+    "PROVE: upper gastrointestinal endoscopy with multiple biopsies from the growth is the first and mandatory test for progressive dysphagia; brush cytology through the scope can support the diagnosis when biopsies are superficial.",
+    "MAP THE LUMEN: barium swallow shows the pattern, an irregular shouldered narrowing with little dilatation above in cancer, against the smooth long narrowing of benign stricture and the tapered beak of achalasia; it never replaces biopsy.",
+    "MAP SPREAD: contrast CT of chest and abdomen for nodes and liver or lung deposits; endoscopic ultrasound for wall depth and regional nodes where available; PET CT where it changes the plan.",
+    "BASELINE: full blood count and albumin for anaemia and nutrition, renal and liver panels before contrast and chemotherapy, and ECG with chest assessment for operative fitness.",
+    "STAGE AT THE TABLE: diagnostic laparoscopy for junctional growths to catch peritoneal spread before a planned resection.",
+    "The single most important principle: never start a cancer pathway on a barium picture alone, and never order motility testing until endoscopy with biopsy has excluded a mechanical cancer."
+   ],
+   "pitfalls": [
+    "Reassuring the patient on a smooth looking barium study while the biopsy is still pending.",
+    "Ordering manometry first and labelling a pseudoachalasia cardia cancer as primary achalasia.",
+    "Sending the patient for a major resection workup without checking albumin, weight loss and effort tolerance."
+   ],
+   "media": [],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What is the mandatory first test for progressive dysphagia in an older adult, and what must it include?",
+     "a": "Upper gastrointestinal endoscopy with multiple biopsies from any growth, since only tissue proves carcinoma.",
+     "accept": [
+      "endoscopy",
+      "biopsies",
+      "tissue",
+      "growth"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "Contrast the barium picture of carcinoma with that of achalasia.",
+     "a": "Carcinoma shows an irregular shouldered narrowing with little dilatation above, while achalasia shows huge dilatation tapering to a smooth beak at the cardia.",
+     "accept": [
+      "irregular",
+      "shouldered",
+      "dilatation",
+      "beak",
+      "smooth"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "Endoscopy confirms a lower third growth. What staging steps follow before deciding on surgery?",
+     "a": "Contrast CT of chest and abdomen for distant spread, endoscopic ultrasound for depth and nodes, PET CT where available, baseline bloods and fitness assessment, and laparoscopy for junctional tumours.",
+     "accept": [
+      "contrast ct",
+      "ultrasound",
+      "nodes",
+      "fitness",
+      "laparoscopy"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "rubric": [],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "upper_gastrointestinal_tract_cancers: Diagnosing and staging upper GI cancers"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "Carcinoma of the oesophagus"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.carcinoma.diagnosis": {
+   "id": "skill.carcinoma.diagnosis",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "Diagnosis and staging",
+   "oneLine": "Histology names it, extent stages it, and fitness decides what the stage is worth",
+   "why": "A diagnosis of cancer without a stage is a label without a plan: the same growth is curable when localised and palliative when disseminated. Stating histology, site, extent and fitness in one statement is what turns the case into a treatment decision.",
+   "body": "Build the diagnostic statement from four parts: histology from biopsy, site in the gullet, extent of spread, and the patient's fitness for major treatment.",
+   "keyPoints": [
+    "Histology: squamous cell carcinoma above and in the middle third, adenocarcinoma in the lower third and at the junction; grade and depth come from the biopsy and endoscopic ultrasound.",
+    "Site: upper, mid or lower third, measured from the teeth at endoscopy, since site decides the operation and the radiation fields.",
+    "Extent: localised to the wall, regional nodes, or distant spread to liver, lung, bone or the left supraclavicular node; distant spread makes the intent palliative.",
+    "Fitness: age, weight loss, albumin, cardiac and lung reserve, and the ability to tolerate combined treatment; an unfit patient with localised disease may still need palliation.",
+    "A complete statement: squamous carcinoma of the mid oesophagus with regional nodes and no distant spread in a fit patient, for combined treatment; or the same growth with liver deposits, for palliation."
+   ],
+   "pitfalls": [
+    "Stating cancer without histology, leaving chemotherapy and radiation choices ungrounded.",
+    "Calling nodes on CT proof of spread without tissue, or ignoring a hard supraclavicular node at the bedside.",
+    "Staging the tumour without staging the patient, then offering a fit patient plan to someone who cannot survive it."
+   ],
+   "media": [],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What four parts make a complete diagnostic statement in carcinoma oesophagus?",
+     "a": "Histology from biopsy, site in thirds of the gullet, extent of spread including nodes and distant deposits, and fitness for treatment.",
+     "accept": [
+      "histology",
+      "site",
+      "spread",
+      "fitness",
+      "nodes"
+     ],
+     "minMatch": 3
+    },
+    {
+     "level": 2,
+     "q": "A mid gullet squamous cancer has liver deposits on CT. What is the intent of treatment?",
+     "a": "Palliative, since distant spread cannot be cured by resection; treatment aims at swallowing, nutrition and comfort.",
+     "accept": [
+      "palliative",
+      "distant",
+      "swallowing",
+      "comfort"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "Why does site in thirds matter as much as histology in this cancer?",
+     "a": "Site decides resectability, the choice of operation and conduit, and the radiation fields, so two identical biopsies at different levels get different plans.",
+     "accept": [
+      "resectability",
+      "operation",
+      "radiation",
+      "levels",
+      "plan"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "rubric": [
+    {
+     "id": "parts",
+     "text": "States histology, site, extent and fitness"
+    },
+    {
+     "id": "intent",
+     "text": "Links the stage to curative or palliative intent"
+    },
+    {
+     "id": "fitness",
+     "text": "Judges the patient alongside the tumour"
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "upper_gastrointestinal_tract_cancers: Diagnosing and staging upper GI cancers"
+    },
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "diseases_of_esophagus: clinicalPearls"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "Carcinoma of the oesophagus"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.tx.carcinoma": {
+   "id": "skill.tx.carcinoma",
+   "kind": "treatment",
+   "system": "surgery",
+   "title": "Managing carcinoma oesophagus",
+   "oneLine": "Multidisciplinary staging first, then cure where possible and swallowing always",
+   "why": "No single doctor cures this cancer: the surgeon, oncologist, radiologist, dietitian and palliative team each own part of the outcome. The plan follows the stage, but nutrition and the ability to swallow run through every stage, curative or not.",
+   "body": "Decide the intent from staging in a multidisciplinary team, treat for cure where the disease is localised and the patient fit, palliate swallowing and nutrition where it is not, and support every patient through referral.",
+   "keyPoints": [
+    "Team and referral: every confirmed case goes to a specialist upper gastrointestinal multidisciplinary team at a centre equipped for oesophageal surgery; refer early from the district hospital rather than after a futile local attempt.",
+    "Curative: localised disease in a fit patient is treated with combined chemotherapy and radiation followed by oesophagectomy, or definitive combined treatment where surgery is declined or unfit; the exact drugs, doses and fields come from the treating oncology protocol.",
+    "Early mucosal disease: endoscopic resection where staging shows disease confined to the mucosa with clear nodes.",
+    "Palliative swallowing: self expanding metal stenting for obstruction, palliative radiation, dilatation, and feeding access such as a nasogastric tube or gastrostomy where stenting is unsuitable; the choice follows the level and length of the block.",
+    "Supportive: dietitian led nutrition with texture modification and supplements, anaemia correction, chest physiotherapy against aspiration, tobacco and alcohol cessation, and honest counselling about what treatment can and cannot achieve.",
+    "Indian context: seek cashless cancer care routes at empanelled government centres, arrange rail concessions and attendant stay where the family travels far, and link the family to the district palliative and home care network on discharge."
+   ],
+   "pitfalls": [
+    "Attempting curative surgery outside a specialist centre without staging and team discussion.",
+    "Leaving the patient unable to swallow while waiting for a curative slot; palliation of dysphagia cannot wait.",
+    "Prescribing chemotherapy doses from memory instead of the current oncology protocol at the treating centre.",
+    "Discharging without a feeding plan and a named palliative contact, so the family returns only in crisis."
+   ],
+   "media": [],
+   "probes": [
+    {
+     "level": 1,
+     "q": "Where should a confirmed carcinoma oesophagus be managed, and why?",
+     "a": "At a specialist upper gastrointestinal multidisciplinary centre, since staging, combined treatment and oesophagectomy need the full team and high volume setup.",
+     "accept": [
+      "multidisciplinary",
+      "specialist",
+      "staging",
+      "oesophagectomy",
+      "team"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "Localised mid gullet cancer in a fit patient: what is the broad curative approach?",
+     "a": "Combined chemotherapy and radiation followed by oesophagectomy, with the exact agents and doses set by the treating oncology protocol.",
+     "accept": [
+      "chemotherapy",
+      "radiation",
+      "oesophagectomy",
+      "protocol",
+      "combined"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "The growth is unresectable with complete obstruction at presentation. What takes priority this week?",
+     "a": "Restoring swallowing and nutrition urgently with stenting or a feeding route alongside palliative radiation planning, rather than waiting for a curative slot.",
+     "accept": [
+      "swallowing",
+      "stenting",
+      "feeding",
+      "nutrition",
+      "palliative"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "rubric": [],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "upper_gastrointestinal_tract_cancers: Treating oesophageal and gastric cancer"
+    },
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "gastroesophageal_reflux_disease: management"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "Carcinoma of the oesophagus"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   },
+   "dosingNote": "This module teaches management at the level of modality and principle. Specific drugs, doses, radiation fields and stent choices must come from the treating oncology protocol and current national guidance at the time of treatment. CliniX does not prescribe."
+  }
+ },
+ "cases": [
+  {
+   "id": "case.carcinoma.raghunath",
+   "initialVitals": {
+    "hr": 96,
+    "bpSystolic": 108,
+    "bpDiastolic": 70,
+    "rr": 20,
+    "spo2": 96,
+    "temp": 37.1,
+    "gcs": 15
+   },
+   "title": "A farm worker who can no longer swallow dal roti",
+   "opening": "Raghunath Shinde, 63, sits in the surgery outpatient room with his wife. He has lost visible weight since the last harvest season. He says food gets stuck in his chest. Introduce yourself and take a history.",
+   "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+   "patient": {
+    "name": "Raghunath Shinde",
+    "age": 63,
+    "sex": "male",
+    "occupation": "Agricultural labourer, sugarcane cutting in season",
+    "residence": "Rural, lives with his wife and married son"
+   },
+   "history": {
+    "presenting": {
+     "cues": [
+      "what brings you here today",
+      "what is the main problem",
+      "why have you come to hospital",
+      "tell me your complaints in order",
+      "how can I help you today"
+     ],
+     "reply": "Doctor, for four months food gets stuck in my chest when I swallow. First it was only roti, now even soft khichdi sticks.",
+     "key": true,
+     "skillId": "skill.hx.chief_complaints"
+    },
+    "onset_course": {
+     "cues": [
+      "when did the swallowing trouble begin",
+      "how long has this been going on",
+      "did it start suddenly or slowly",
+      "has it worsened month by month",
+      "describe the course since onset"
+     ],
+     "reply": "It began slowly about four months ago and has only worsened, never better in between. Each month I manage less.",
+     "key": true
+    },
+    "solids_liquids_order": {
+     "cues": [
+      "solids or liquids first",
+      "which food sticks the most",
+      "progression from solids to liquids",
+      "do thin fluids also catch while swallowing",
+      "sequence of food textures over recent months"
+     ],
+     "reply": "Roti stuck first, then rice, and now I live on thin dal and tea. Water still goes down, but if I hurry it also catches.",
+     "key": true,
+     "skillId": "skill.hx.surg.dysphagia"
+    },
+    "arrest_level": {
+     "cues": [
+      "where does the food feel stuck",
+      "point to where it stops",
+      "pain behind the breastbone on swallowing",
+      "lower chest or throat block",
+      "food halting in the chest"
+     ],
+     "reply": "Low in the chest, behind the lower breastbone. Sometimes it feels higher in the neck, but the block is deep.",
+     "key": true
+    },
+    "regurgitation_pattern": {
+     "cues": [
+      "does food come back up",
+      "vomiting after meals",
+      "foul smelling fluid from the mouth",
+      "blood streaks in the vomit",
+      "regurgitation of bland fluid"
+     ],
+     "reply": "Yes, tasteless fluid mixed with saliva comes back, sometimes with red streaks in it. It is not sour like acidity.",
+     "key": true
+    },
+    "painful_swallow": {
+     "cues": [
+      "pain on swallowing food",
+      "burning behind the sternum",
+      "odynophagia with each bite",
+      "chest tightness while eating",
+      "retrosternal discomfort after food"
+     ],
+     "reply": "A dull heaviness sits behind the lower breastbone at meals. True sharp pain, no, but eating is no longer pleasant.",
+     "key": true
+    },
+    "cough_voice_events": {
+     "cues": [
+      "coughing fits during meals",
+      "choking while drinking water",
+      "change in your voice lately",
+      "hoarseness over recent weeks",
+      "chest infection after food goes wrong way"
+     ],
+     "reply": "I cough at night after lying down, and my wife says my voice has turned hoarse in the last month. Twice food went the wrong way and I had fever with cough.",
+     "key": true
+    },
+    "weight_appetite_change": {
+     "cues": [
+      "how much weight lost",
+      "clothes looser than before",
+      "appetite over recent months",
+      "quantify the weight loss",
+      "eating less due to swallowing"
+     ],
+     "reply": "I have lost about 8 kg in four months. My dhoti now needs an extra fold. I still feel hungry, but I eat less because swallowing is slow.",
+     "key": true
+    },
+    "tobacco_bidi_use": {
+     "cues": [
+      "how many bidis per day",
+      "years of bidi smoking",
+      "tobacco chewing habit",
+      "gutka or mawa use",
+      "smoking history in detail"
+     ],
+     "reply": "I smoke about a bundle of bidis a day for thirty years, and I chew tobacco with lime while working in the fields.",
+     "key": true,
+     "skillId": "skill.hx.oesophagus.risk"
+    },
+    "alcohol_toddy_use": {
+     "cues": [
+      "daily alcohol consumption",
+      "country liquor every evening",
+      "toddy habit after work",
+      "quantity of liquor each week",
+      "years of regular alcohol use"
+     ],
+     "reply": "Country liquor every evening after work, for more than twenty years. On festival days it is more.",
+     "key": true
+    },
+    "reflux_heartburn_past": {
+     "cues": [
+      "long standing heartburn",
+      "acidity for many years",
+      "sour fluid rising at night",
+      "antacid tablets regularly",
+      "previous reflux symptoms"
+     ],
+     "reply": "For years I had burning after late meals, controlled with soda and antacid tablets from the chemist. That burning has oddly lessened this year.",
+     "key": true
+    },
+    "corrosive_lye_history": {
+     "cues": [
+      "swallowed acid or alkali ever",
+      "corrosive ingestion in the past",
+      "caustic chemical swallow",
+      "childhood lye accident",
+      "previous gullet burn injury"
+     ],
+     "reply": "No, never anything like that. No burns of the throat ever.",
+     "key": true
+    },
+    "comorbidity_diabetes": {
+     "cues": [
+      "diabetes or blood pressure",
+      "sugar illness treatment",
+      "heart disease history",
+      "tuberculosis in the past",
+      "other long standing illness"
+     ],
+     "reply": "No sugar, no pressure, no TB. I was never admitted to hospital before this.",
+     "key": true
+    },
+    "prior_endoscopy_care": {
+     "cues": [
+      "previous scope test of the food pipe",
+      "earlier barium swallow test",
+      "dilatation of the food pipe",
+      "past treatment for swallowing",
+      "hospital visits for this trouble"
+     ],
+     "reply": "Once the PHC doctor gave me acidity syrup two months ago, nothing else. No tube test, no X-ray with white liquid.",
+     "key": true
+    },
+    "family_cancer_history": {
+     "cues": [
+      "cancer in the family",
+      "father or brother with gullet cancer",
+      "family history of stomach cancer",
+      "relatives with similar trouble",
+      "hereditary cancer in household"
+     ],
+     "reply": "My elder brother died of throat trouble where he also could not swallow, at about my age. No one else.",
+     "key": true
+    },
+    "work_dust_exposure": {
+     "cues": [
+      "sugarcane dust exposure",
+      "field work conditions",
+      "piping hot beverages every day",
+      "scalding hot food intake",
+      "daily diet of fruit and vegetables"
+     ],
+     "reply": "Cane dust in season, and I drink my tea piping hot, straight from the flame, several times a day. Vegetables only when the crop pays.",
+     "key": true
+    },
+    "medications_antacid": {
+     "cues": [
+      "tablets taken regularly now",
+      "current medication list",
+      "painkillers used often",
+      "antacid use before meals",
+      "any diabetes or pressure tablets"
+     ],
+     "reply": "Only antacid tablets and soda, no regular medicines, no painkillers.",
+     "key": true
+    }
+   },
+   "exam": {
+    "skill.gen.appearance": {
+     "finding": "Cachectic with temporal wasting and loose clothing. Pale conjunctivae. Smooth pale tongue with loss of papillae.",
+     "abnormal": true
+    },
+    "skill.gen.vitals": {
+     "finding": "Pulse 96 regular. Blood pressure 108/70. Respiratory rate 20. SpO2 96 percent on room air. Afebrile at 37.1 C. Weight 48 kg.",
+     "abnormal": true
+    },
+    "skill.gen.surg.survey": {
+     "finding": "Emaciated surgical patient with dry skin and reduced turgor from poor intake. No lymphoedema of limbs. Moves slowly, tires on walking to the couch.",
+     "abnormal": true
+    },
+    "skill.gen.edema": {
+     "finding": "Mild pitting oedema over both ankles, worse by evening. No sacral oedema.",
+     "abnormal": true
+    },
+    "skill.exam.surg.dysphagia": {
+     "finding": "Mouth shows angular cracks at the lips and spoon shaped nails. No pouch swelling in the neck. Laryngeal crepitus present. A hard non tender node 2 cm in the left supraclavicular fossa. Epigastrium soft without a mass. Liver edge palpable 3 cm, firm and nodular.",
+     "abnormal": true
+    }
+   },
+   "essentialInvestigations": [
+    "ogd_biopsy",
+    "barium_swallow",
+    "cect",
+    "fbc"
+   ],
+   "investigations": {
+    "ogd_biopsy": {
+     "label": "Upper GI endoscopy with biopsy",
+     "indicated": true,
+     "result": "Ulcerated growth 30 to 36 cm from the incisors in the mid oesophagus, lumen narrowed, scope passes with difficulty. Six biopsies taken. Histology: moderately differentiated squamous cell carcinoma.",
+     "note": "The test that proves the cancer. Nothing else in this case outranks tissue."
+    },
+    "barium_swallow": {
+     "label": "Barium swallow",
+     "indicated": true,
+     "result": "Irregular shouldered narrowing of the mid oesophagus over 6 cm with mucosal destruction and minimal dilatation above. No smooth beak, no pouch filling.",
+     "note": "Supports the malignant pattern against stricture or achalasia, but it is detail after the biopsy, not a substitute for it."
+    },
+    "cect": {
+     "label": "Contrast CT chest and abdomen",
+     "indicated": true,
+     "result": "Mid oesophageal wall thickening with enlarged paraoesophageal and coeliac nodes. Two hypodense lesions in the right lobe of liver. No lung deposits. Left supraclavicular node confirmed.",
+     "note": "Maps distant spread: liver deposits and a distant node make the intent palliative."
+    },
+    "fbc": {
+     "label": "Blood count and albumin",
+     "indicated": true,
+     "result": "Haemoglobin 9.2 g/dL microcytic. Albumin 2.8 g/dL. Total leucocyte count normal.",
+     "note": "Chronic blood loss with poor intake. Correct anaemia and nutrition alongside the cancer plan, not after it."
+    },
+    "manometry_first": {
+     "label": "Oesophageal manometry before endoscopy",
+     "indicated": false,
+     "result": "Not done.",
+     "note": "Not indicated: motility testing before excluding a mechanical cancer risks labelling this a spasm and delays the biopsy by weeks."
+    },
+    "antacid_trial": {
+     "label": "Empirical acid suppression without endoscopy",
+     "indicated": false,
+     "result": "Not advised.",
+     "note": "Not indicated: four months of progressive dysphagia with weight loss is an alarm presentation, and masking it with antacids already cost this patient two months."
+    }
+   },
+   "differentialModel": {
+    "answer": "Carcinoma of the mid oesophagus, squamous type. Consider achalasia, a benign peptic or corrosive stricture, a pharyngeal pouch, Plummer-Vinson webs, and diffuse oesophageal spasm.",
+    "accept": [
+     "carcinoma of the oesophagus",
+     "achalasia",
+     "peptic stricture",
+     "pharyngeal pouch",
+     "plummer-vinson syndrome",
+     "diffuse oesophageal spasm",
+     "corrosive stricture"
+    ],
+    "minMatch": 2
+   },
+   "diagnosis": {
+    "answer": "Squamous cell carcinoma of the mid oesophagus with clinical distant spread to liver and left supraclavicular node, for palliation.",
+    "accept": [
+     "carcinoma of the oesophagus",
+     "oesophageal cancer",
+     "oesophageal squamous cell carcinoma"
+    ],
+    "minMatch": 1
+   },
+   "managementModel": {
+    "answer": "Urgent referral to a specialist upper GI multidisciplinary team, confirm staging with endoscopic ultrasound and PET CT where available, restore swallowing with a metal stent, arrange feeding and nutrition support, correct anaemia, plan palliative radiation, stop tobacco and alcohol, and link to home based palliative care.",
+    "accept": [
+     "referral",
+     "multidisciplinary",
+     "staging",
+     "stent",
+     "swallowing",
+     "nutrition",
+     "palliative",
+     "endoscopy"
+    ],
+    "minMatch": 3
+   },
+   "teachingPoints": [
+    "The tempo alone should move you toward cancer before a single test: four months of steady solids to semisolids progression, not the years of achalasia or the spells of spasm.",
+    "Blood streaked bland regurgitation is not acidity. Treating it with antacids without endoscopy cost this patient two months.",
+    "The left supraclavicular node settles the stage at the bedside. Feeling that fossa is the highest yield minute of the examination.",
+    "Hoarseness with night cough means the growth has reached the nerve and the airway; ask about both in every dysphagia history.",
+    "Manometry before biopsy is the classic trap here. Tissue first, motility only when the lining is proven innocent.",
+    "Liver deposits make the intent palliative, and palliation starts with swallowing: a stent and a feeding plan this week, not after the oncology queue.",
+    "Smooth tongue with spoon nails and a brother dead of the same trouble complete the picture: chronic deficiency background plus shared household exposures."
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  }
+ ]
+}

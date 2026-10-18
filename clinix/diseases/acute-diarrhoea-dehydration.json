@@ -1,0 +1,1326 @@
+{
+  "_comment": "Paediatrics pathway for acute diarrhoea and dehydration. Almost every finding is an emphasis overlay on a shared paediatrics or core skill. This disease owns only the dehydration grading logic, the WHO Plan A, B and C decision, ORS and zinc teaching, and the dysentery red flag set.",
+  "id": "acute-diarrhoea-dehydration",
+  "name": "Acute Diarrhoea and Dehydration",
+  "fullName": "Acute watery diarrhoea and dehydration in children, assessment and ORS plans",
+  "system": "paediatrics",
+  "kbRef": "acute_infectious_diarrheal_diseases_and",
+  "oneLine": "Loose motions in a child, graded by dehydration and managed by WHO plan",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What acute diarrhoea is, and the three patterns that decide everything after",
+      "skills": [
+        "skill.diarrhoea.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the child",
+      "blurb": "Rapport with the mother before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.paed.rapport",
+        "skill.approach.paed.consent_assent",
+        "skill.approach.paed.positioning"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age, weight and feeding set the risk before a stool is described",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In diarrhoea, age in months and weight carry the whole risk: infants under two years, low birth weight babies and malnourished children dehydrate faster and tolerate less loss. Record feeding alongside age, since exclusive breastfeeding protects while over diluted top milk predisposes."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Stools, vomiting, urine and thirst, asked in that order",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.paed.presenting_complaint",
+        "skill.hx.acute.stool",
+        "skill.hx.paed.diet_infant",
+        "skill.hx.paed.immunisation"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect the complaint in the mother's words: loose motions since a stated day, with a count per 24 hours. Pin the number early, since everything about severity hangs on frequency and duration."
+        },
+        "skill.hx.paed.presenting_complaint": {
+          "expect": "Expect onset over hours to days with vomiting often leading. Ask which came first, how many stools, and whether urine has fallen, since decreased urine is the earliest dehydration signal the mother can report."
+        },
+        "skill.hx.paed.diet_infant": {
+          "expect": "Ask what milk, how mixed and how often, and whether anything was stopped because of this illness. Over diluted top milk is a remediable cause, and continued feeding during diarrhoea is part of the treatment, not a separate topic."
+        },
+        "skill.hx.paed.immunisation": {
+          "expect": "Record rotavirus immunisation and the rest of the schedule. An incomplete schedule belongs in the discharge plan, not as an afterthought."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "Water, contacts, drugs and past episodes that change the cause and the recurrence",
+      "skills": [
+        "skill.hx.acute.risk",
+        "skill.hx.paed.socioeconomic"
+      ],
+      "emphasis": {
+        "skill.hx.paed.socioeconomic": {
+          "expect": "Ask drinking water source, storage, boiling, toilet and handwashing directly. Unsafe water and absent handwashing explain recurrence, and fixing them before discharge is treatment, not advice."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Hydration signs outrank everything else on the body",
+      "skills": [
+        "skill.gen.paed.appearance",
+        "skill.gen.paed.vitals",
+        "skill.gen.paed.hydration",
+        "skill.exam.paed.weight",
+        "skill.exam.paed.muac"
+      ],
+      "emphasis": {
+        "skill.gen.paed.appearance": {
+          "expect": "Look for the sick dehydrated child: restless and irritable with some loss, lethargic or floppy with severe loss. Irritability here is a hydration sign, not temperament, and lethargy is an emergency."
+        },
+        "skill.gen.paed.vitals": {
+          "expect": "Expect a fast pulse and fast breathing with some dehydration, with blood pressure maintained until late. A feeble rapid pulse with cold clammy limbs and unrecordable pressure means shock, not some dehydration, and changes the plan to intravenous fluids at once."
+        },
+        "skill.gen.paed.hydration": {
+          "expect": "Grade by counting signs, not by impression: sunken eyes, absent tears, dry tongue, eager thirst or inability to drink, and a slow skin pinch. Two or more signs in a column put the child in that column."
+        },
+        "skill.exam.paed.weight": {
+          "expect": "Weigh now and compare with a recent weight where one exists: loss under 5 percent fits no dehydration, 5 to 10 percent fits some, above 10 percent fits severe. Without a prior weight, grade by signs, not by guess."
+        },
+        "skill.exam.paed.muac": {
+          "expect": "Measure the mid upper arm circumference in every child with diarrhoea, since malnutrition worsens both risk and course and changes feeding advice at discharge."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Abdominal examination",
+      "blurb": "A soft abdomen with a story told by hydration, not by the belly",
+      "skills": [
+        "skill.exam.paed.gi.inspection",
+        "skill.exam.paed.gi.palpation_percussion",
+        "skill.exam.paed.gi.oral_upper"
+      ],
+      "emphasis": {
+        "skill.exam.paed.gi.inspection": {
+          "expect": "Expect a flat or mildly distended abdomen without visible peristalsis. Marked distension with absent stool and bilious vomiting points away from simple gastroenteritis toward obstruction."
+        },
+        "skill.exam.paed.gi.palpation_percussion": {
+          "expect": "Expect a soft abdomen with mild diffuse tenderness and hyperactive bowel sounds. Guarding, rigidity or localised right lower tenderness needs explaining beyond gastroenteritis, including surgical causes."
+        },
+        "skill.exam.paed.gi.oral_upper": {
+          "expect": "Read the tongue and lips as hydration signs: moist, dry, or dry and parched. Note thrush or ulcers that would explain poor intake on top of the diarrhoea."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the dehydration picture together",
+      "blurb": "Count signs into a grade, and the grade picks the plan",
+      "skills": [
+        "skill.diarrhoea.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Age, feeds, stools, grade and plan in three sentences",
+      "skills": [
+        "skill.diarrhoea.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Watery, inflammatory, penetrating and not infection at all",
+      "skills": [
+        "skill.diarrhoea.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Most watery diarrhoea needs none, dysentery needs culture",
+      "skills": [
+        "skill.ix.diarrhoea.workup",
+        "skill.annex.paed.normal_biochemical_values"
+      ],
+      "emphasis": {
+        "skill.annex.paed.normal_biochemical_values": {
+          "expect": "Use the reference values to read sodium, potassium, bicarbonate and glucose in the dehydrated child: low sodium with excess free water intake, low potassium with prolonged loss, and low glucose in the malnourished or very young child."
+        }
+      }
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and dehydration grade",
+      "blurb": "Name the syndrome, state the grade, pick the plan",
+      "skills": [
+        "skill.diarrhoea.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "ORS by plan, zinc for all, antibiotics almost never",
+      "skills": [
+        "skill.tx.diarrhoea"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this child to your consultant",
+      "skills": [
+        "skill.present.case",
+        "skill.present.acute.diarrhoea"
+      ],
+      "emphasis": {
+        "skill.present.case": {
+          "expect": "Present age in months, feeding, stool frequency and character, then the counted dehydration signs with the grade they earn, then the WHO plan with fluid, volume and time frame, then what was not given and why."
+        }
+      }
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.diarrhoea.dehydration_exam",
+        "title": "Assess dehydration in this child",
+        "task": "This 18 month old boy has had loose motions for three days. Assess his hydration status and present your grade with reasons.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.paed.rapport",
+          "skill.approach.paed.consent_assent",
+          "skill.gen.paed.hydration",
+          "skill.gen.paed.vitals",
+          "skill.exam.paed.weight",
+          "skill.diarrhoea.signs"
+        ],
+        "examinerQuestions": [
+          "Which signs put this child in some rather than severe dehydration, and which single sign would move him across?",
+          "Why is the skin pinch unreliable in a marasmic child, and what do you use instead?",
+          "State the WHO plan for this grade with fluid, volume and time frame."
+        ]
+      },
+      {
+        "id": "osce.diarrhoea.counselling",
+        "title": "Counsel the mother on ORS, zinc and red flags",
+        "task": "This mother is taking home a child with no dehydration after an episode of watery diarrhoea. Counsel her on home fluids, ORS preparation, zinc, feeding and when to return.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.paed.rapport",
+          "skill.approach.paed.consent_assent",
+          "skill.hx.paed.diet_infant",
+          "skill.tx.diarrhoea"
+        ],
+        "examinerQuestions": [
+          "How much ORS do you advise after each loose stool for a child under two years?",
+          "What zinc dose and duration do you advise, and why does it matter?",
+          "Name three red flags that should bring this child back at once."
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.diarrhoea.basics",
+      "skill.diarrhoea.signs",
+      "skill.diarrhoea.differential",
+      "skill.ix.diarrhoea.workup",
+      "skill.diarrhoea.diagnosis",
+      "skill.tx.diarrhoea",
+      "skill.gen.paed.hydration"
+    ]
+  },
+  "skills": {
+    "skill.diarrhoea.basics": {
+      "id": "skill.diarrhoea.basics",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "What acute diarrhoea is",
+      "oneLine": "Three or more loose stools a day, and three patterns that decide the workup",
+      "why": "Diarrhoea is defined by count and character, not by parental worry alone, and the first job is to place the illness in one of three mechanistic patterns. That placement decides whether stool tests have any role and whether antibiotics can even be discussed.",
+      "teach": [
+        {
+          "heading": "Define it by count and time",
+          "body": "Diarrhoea is the passage of three or more loose or watery stools, conforming to the shape of the container, within 24 hours. Illness under two weeks is acute and usually infectious; beyond that the differential shifts to persistent and chronic causes.\n\nIn children the same definition holds, and persistent diarrhoea beyond 14 days needs a different workup from the acute episode."
+        },
+        {
+          "heading": "Three patterns, three workups",
+          "table": {
+            "cols": [
+              "Pattern",
+              "Site and mechanism",
+              "Stool clue"
+            ],
+            "rows": [
+              [
+                "Noninflammatory watery",
+                "Proximal small bowel, enterotoxin",
+                "Watery, no blood, no faecal leucocytes"
+              ],
+              [
+                "Inflammatory or dysentery",
+                "Colon or distal bowel, invasion or cytotoxin",
+                "Blood or mucus, faecal leucocytes high"
+              ],
+              [
+                "Penetrating or enteric fever",
+                "Distal bowel with spread beyond gut",
+                "Fever prominent, stools may be few"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why children dehydrate faster",
+          "body": "Children carry more body water per kilogram and turn it over faster, so the same stool loss is a larger fraction of their reserve. Vomiting on top removes intake at the moment loss peaks.\n\nThat is why grading dehydration, not naming the organism, is the urgent decision in every paediatric case."
+        }
+      ],
+      "pitfalls": [
+        "Calling any loose stool diarrhoea without establishing three or more in 24 hours.",
+        "Treating watery and bloody diarrhoea as one disease with one workup.",
+        "Chasing the organism before grading dehydration in a child."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How is diarrhoea defined?",
+          "a": "Three or more loose or watery stools, conforming to the shape of the container, within 24 hours.",
+          "accept": [
+            "three or more",
+            "watery",
+            "24 hours"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What separates inflammatory from noninflammatory diarrhoea?",
+          "a": "Inflammatory disease shows blood or mucus with faecal leucocytes and high lactoferrin; watery disease shows neither.",
+          "accept": [
+            "blood",
+            "leucocytes",
+            "lactoferrin"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why is dehydration the urgent decision rather than the organism?",
+          "a": "Children hold more water per kilogram and lose it faster, so fluid loss threatens before any organism result could return.",
+          "accept": [
+            "dehydration",
+            "fluid",
+            "faster"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_infectious_diarrheal_diseases_and: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Acute gastroenteritis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.diarrhoea.signs": {
+      "id": "skill.diarrhoea.signs",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Grading dehydration",
+      "oneLine": "Count signs into no, some or severe, and let the column pick the plan",
+      "why": "Dehydration grade is the whole management decision in disguise: no dehydration goes home on Plan A, some dehydration stays for Plan B, severe dehydration needs Plan C fluids at once. A grade stated without counted signs is a guess, and guesses admit the wrong children.",
+      "teach": [
+        {
+          "heading": "The grading table",
+          "table": {
+            "cols": [
+              "Sign",
+              "No dehydration",
+              "Some dehydration",
+              "Severe dehydration"
+            ],
+            "rows": [
+              [
+                "General condition",
+                "Alert and active",
+                "Restless and irritable",
+                "Lethargic or floppy"
+              ],
+              [
+                "Weight loss",
+                "Under 5 percent",
+                "5 to 10 percent",
+                "Above 10 percent"
+              ],
+              [
+                "Eyes and tears",
+                "Normal, tears present",
+                "Sunken, tears reduced",
+                "Deeply sunken, no tears"
+              ],
+              [
+                "Mouth and thirst",
+                "Moist, drinks normally",
+                "Dry, drinks eagerly",
+                "Parched, unable to drink"
+              ],
+              [
+                "Urine",
+                "Normal output",
+                "Decreased",
+                "Not passed for hours"
+              ],
+              [
+                "Skin pinch",
+                "Goes back at once",
+                "Goes back slowly",
+                "Goes back very slowly"
+              ],
+              [
+                "Pulse and limbs",
+                "Normal, warm",
+                "Fast, warm",
+                "Feeble, cold and clammy"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "How to count",
+          "body": "Two or more signs in a column place the child in that column. One stray sign never promotes a grade on its own; look again and recount.\n\nWhere columns disagree, the worse signs win for safety, and the child is reassessed rather than argued over."
+        },
+        {
+          "heading": "When the signs mislead",
+          "body": "The skin pinch means little in marasmus, kwashiorkor or obesity, so grade those children by the other signs. Sunken eyes are harder to read in a chronically malnourished child.\n\nFever alone never grades dehydration, and tears cannot be read in a child who is not crying."
+        }
+      ],
+      "pitfalls": [
+        "Grading by impression instead of counting two or more signs in a column.",
+        "Trusting the skin pinch in a marasmic or obese child.",
+        "Calling lethargy some dehydration when it belongs to severe."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name four signs you count when grading dehydration.",
+          "a": "General condition, eyes and tears, mouth and thirst, urine output, skin pinch, and pulse with limb warmth.",
+          "accept": [
+            "eyes",
+            "tears",
+            "thirst",
+            "urine",
+            "pinch",
+            "pulse"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "A child is restless, has sunken eyes, drinks eagerly and a slow pinch. What grade?",
+          "a": "Some dehydration: four signs in that column, so WHO Plan B.",
+          "accept": [
+            "some dehydration",
+            "plan b"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why do you distrust the pinch in marasmus?",
+          "a": "Lost subcutaneous fat makes the skin return slowly at baseline, so the sign is present without dehydration; grade by the other signs instead.",
+          "accept": [
+            "fat",
+            "baseline",
+            "other signs"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "condition",
+          "text": "States general condition as alert, restless or lethargic"
+        },
+        {
+          "id": "eyes",
+          "text": "Reports eyes, tears and mouth moisture"
+        },
+        {
+          "id": "thirst",
+          "text": "Tests thirst by offering fluid"
+        },
+        {
+          "id": "pinch",
+          "text": "Performs the skin pinch and times the recoil"
+        },
+        {
+          "id": "grade",
+          "text": "Counts signs into a stated grade"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_infectious_diarrheal_diseases_and: severityClassification"
+        },
+        {
+          "source": "WHO",
+          "locator": "The Treatment of Diarrhoea: A manual for physicians and other senior health workers"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.diarrhoea.summary": {
+      "id": "skill.diarrhoea.summary",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "The clinical summary",
+      "oneLine": "Age, feeds, stools, grade and plan in three sentences",
+      "why": "A dehydration summary that omits the grade or the plan leaves the listener unable to judge urgency. Stating feeds and immunisation alongside forces prevention into every case, not just the complicated ones.",
+      "teach": [
+        {
+          "heading": "Build it in order",
+          "points": [
+            "Age in months with feeding and nutritional state.",
+            "Tempo and stools: days, count per day, character, blood or mucus, vomiting and urine.",
+            "Counted dehydration signs with the grade they earn.",
+            "WHO plan with fluid, volume and time frame, plus zinc and feeding."
+          ]
+        },
+        {
+          "heading": "A worked example",
+          "body": "An 18 month old boy on mixed feeds with three days of watery stools, six per day, with vomiting and decreased urine. Restless with sunken eyes, dry tongue, eager drinking and a slow pinch: some dehydration. For Plan B with ORS, continued feeds and zinc.\n\nEvery element earns its place: remove one and the plan becomes unjustified."
+        }
+      ],
+      "pitfalls": [
+        "Stating some dehydration without the counted signs behind it.",
+        "Omitting feeding, so the plan never addresses the remediable cause.",
+        "Ending without a plan, leaving urgency unstated."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What must a dehydration summary contain that a generic summary need not?",
+          "a": "The counted signs with the grade, and the WHO plan with fluid, volume and time frame.",
+          "accept": [
+            "grade",
+            "plan",
+            "signs"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why do feeds appear in the first sentence?",
+          "a": "Feeding sets risk and is part of treatment, so it belongs with age before the stools are described.",
+          "accept": [
+            "feeding",
+            "risk",
+            "treatment"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "patient",
+          "text": "States age with feeding and nutritional state"
+        },
+        {
+          "id": "tempo",
+          "text": "States days, frequency, character and urine"
+        },
+        {
+          "id": "grade",
+          "text": "States the grade with its counted signs"
+        },
+        {
+          "id": "plan",
+          "text": "States the WHO plan with fluid and time frame"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_infectious_diarrheal_diseases_and: severityClassification"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Acute gastroenteritis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.diarrhoea.differential": {
+      "id": "skill.diarrhoea.differential",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Differential diagnosis",
+      "oneLine": "Watery, inflammatory, penetrating and not infection at all",
+      "why": "Most childhood diarrhoea is viral and watery, but the cases that are not are dangerous to miss: dysentery needing culture, intussusception needing a surgeon, and infections outside the gut that present with loose motions. The differential does not close once ORS is started.",
+      "teach": [
+        {
+          "heading": "First split: watery or bloody",
+          "body": "Watery diarrhoea without blood points to enterotoxin organisms, rotavirus and norovirus, and food poisoning by incubation: vomiting within hours of a meal means preformed toxin, cramps with diarrhoea overnight means perfringens type illness, and watery diarrhoea beyond 16 hours means cholera type or enterotoxigenic organisms.\n\nBloody or mucoid stools mean dysentery: Shigella, Salmonella, Campylobacter, enterohaemorrhagic organisms, Yersinia and amoebiasis, with bloody stools but no faecal leucocytes raising Shiga toxin producers in particular."
+        },
+        {
+          "heading": "Fever that outgrows the gut",
+          "body": "Prolonged fever with few stools suggests a penetrating illness such as enteric fever rather than simple gastroenteritis. Diarrhoea in an immunocompromised child can be life threatening with persistent infection and spread beyond the gut.\n\nRecent antibiotics point to antibiotic associated colitis including Clostridioides difficile, and hospital onset diarrhoea should be worked up for C. difficile first."
+        },
+        {
+          "heading": "Not infection at all",
+          "points": [
+            "Intussusception: colicky pain with redcurrant jelly stools and a drawing up of the legs, a surgical emergency.",
+            "Acute appendicitis and intestinal obstruction can both present with vomiting and loose motions in children.",
+            "Infections outside the gut: pneumonia, otitis media and urinary infection all cause diarrhoea or vomiting in infants.",
+            "Inflammatory bowel disease can open with an acute diarrhoeal illness, sometimes after a traveller type episode.",
+            "Malaria must be considered where fever and diarrhoea travel together in an endemic season."
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Missing dysentery because blood was never asked about directly.",
+        "Missing intussusception by calling colicky pain with bloody stools gastroenteritis.",
+        "Treating diarrhoea with fever outside the gut as gastroenteritis without examining ears, chest and urine."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name three differentials for bloody diarrhoea with fever in a child.",
+          "a": "Shigella, Salmonella, Campylobacter, enterohaemorrhagic organisms, Yersinia and amoebiasis.",
+          "accept": [
+            "shigella",
+            "salmonella",
+            "campylobacter",
+            "amoebiasis",
+            "yersinia"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Bloody stools but the smear shows no faecal leucocytes. What is the specific worry?",
+          "a": "Shiga toxin producing enterohaemorrhagic organisms with risk of haemolytic uraemic syndrome; avoid antibiotics and antimotility drugs.",
+          "accept": [
+            "shiga",
+            "haemolytic uraemic",
+            "hus"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A toddler has colicky pain, vomiting and redcurrant jelly stools. What must you exclude?",
+          "a": "Intussusception, a surgical emergency, not gastroenteritis.",
+          "accept": [
+            "intussusception",
+            "surgical"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "split",
+          "text": "Splits watery from bloody diarrhoea first"
+        },
+        {
+          "id": "agents",
+          "text": "Names organisms for each pattern"
+        },
+        {
+          "id": "surgical",
+          "text": "Considers intussusception and appendicitis"
+        },
+        {
+          "id": "outside",
+          "text": "Considers infection outside the gut"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_infectious_diarrheal_diseases_and: additionalDifferentials"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Acute gastroenteritis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.diarrhoea.workup": {
+      "id": "skill.ix.diarrhoea.workup",
+      "kind": "investigation",
+      "system": "paediatrics",
+      "title": "Investigating diarrhoea",
+      "oneLine": "Most watery diarrhoea needs none, dysentery needs culture",
+      "why": "Uncomplicated watery diarrhoea with no or some dehydration is managed by grade alone, and blanket stool testing wastes money while changing nothing. Targeted testing earns its place only where the result changes antibiotics, fluids or public health action.",
+      "teach": [
+        {
+          "heading": "When no stool test is needed",
+          "body": "Acute watery diarrhoea without fever, blood or mucus needs no stool test: rehydrate by grade, give zinc, continue feeds and review. A normal result would not change the plan, and waiting for one must never delay fluids.\n\nHospital onset diarrhoea is the exception that tests for C. difficile first rather than sending broad cultures."
+        },
+        {
+          "heading": "When to test the stool",
+          "points": [
+            "Gross blood or mucus with fever: stool smear for leucocytes and lactoferrin to confirm inflammation, then culture for Salmonella, Shigella and Campylobacter.",
+            "Suspected cholera outbreak or rice water stools: selective culture plus rapid tests where available.",
+            "Visibly bloody stools: Shiga toxin testing for enterohaemorrhagic organisms before any antibiotic is considered.",
+            "Antibiotic associated or prolonged diarrhoea: C. difficile toxin testing.",
+            "Suspected parasites: antigen or PCR for Giardia, Cryptosporidium and Entamoeba rather than repeated microscopy."
+          ]
+        },
+        {
+          "heading": "Blood tests that grade, not diagnose",
+          "body": "Electrolytes and glucose matter in some and severe dehydration: low sodium, low potassium and low glucose each change fluids or feeding. Blood gas shows the metabolic acidosis of severe loss.\n\nBlood culture is for suspected enteric fever or sepsis, not for routine gastroenteritis, and a multiplex panel that reports several organisms needs clinical reading, not blind treatment."
+        }
+      ],
+      "pitfalls": [
+        "Sending broad stool cultures in uncomplicated watery diarrhoea where nothing will change.",
+        "Trusting the leucocyte smear alone when lactoferrin is the more sensitive marker.",
+        "Starting antibiotics for a multiplex panel that names several organisms without clinical correlation."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which stool test confirms inflammation?",
+          "a": "Faecal leucocyte smear, with faecal lactoferrin as the more sensitive marker.",
+          "accept": [
+            "leucocyte",
+            "lactoferrin"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A child has watery diarrhoea, no fever, no blood. What stool tests do you send?",
+          "a": "None routinely: rehydrate by grade, give zinc, continue feeds and review.",
+          "accept": [
+            "none",
+            "rehydrate",
+            "zinc"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Visibly bloody stools: what test before antibiotics, and why?",
+          "a": "Shiga toxin testing for enterohaemorrhagic organisms, since antibiotics and antimotility drugs raise the risk of haemolytic uraemic syndrome there.",
+          "accept": [
+            "shiga",
+            "haemolytic uraemic",
+            "antibiotics"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_infectious_diarrheal_diseases_and: additionalInvestigations"
+        },
+        {
+          "source": "WHO",
+          "locator": "The Treatment of Diarrhoea: A manual for physicians and other senior health workers"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.diarrhoea.diagnosis": {
+      "id": "skill.diarrhoea.diagnosis",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Diagnosis and dehydration grade",
+      "oneLine": "Name the syndrome, state the grade, pick the plan",
+      "why": "A diagnosis of gastroenteritis without a grade leaves the plan undecided, and a grade without a plan leaves the child untreated. The complete statement binds syndrome, grade and plan in one line so the next clinician can act without re examining.",
+      "teach": [
+        {
+          "heading": "The complete statement",
+          "points": [
+            "Syndrome: acute watery diarrhoea or dysentery, with the likely pattern.",
+            "Grade: no, some or severe dehydration with the counted signs.",
+            "Plan: WHO A, B or C with fluid, volume and time frame.",
+            "Modifiers: nutritional state, comorbidity and red flags present."
+          ]
+        },
+        {
+          "heading": "Grades map to plans",
+          "body": "No dehydration goes home on Plan A with home fluids and ORS after each stool. Some dehydration stays for Plan B with measured ORS over four hours and reassessment. Severe dehydration is resuscitated on Plan C with intravenous fluids at once, then ORS as the child improves.\n\nThe plan is chosen by the worst counted signs, never by the stool count alone."
+        }
+      ],
+      "pitfalls": [
+        "Diagnosing gastroenteritis without stating a dehydration grade.",
+        "Choosing the plan from stool frequency instead of counted signs.",
+        "Missing severe dehydration by reading lethargy as irritability."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the three parts of a complete diarrhoea diagnosis?",
+          "a": "The syndrome, the dehydration grade with counted signs, and the WHO plan.",
+          "accept": [
+            "syndrome",
+            "grade",
+            "plan"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which grade maps to which WHO plan?",
+          "a": "No dehydration to Plan A, some dehydration to Plan B, severe dehydration to Plan C.",
+          "accept": [
+            "plan a",
+            "plan b",
+            "plan c"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "syndrome",
+          "text": "Names watery diarrhoea or dysentery with pattern"
+        },
+        {
+          "id": "grade",
+          "text": "States the grade with counted signs"
+        },
+        {
+          "id": "plan",
+          "text": "Links the grade to the matching WHO plan"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_infectious_diarrheal_diseases_and: severityClassification"
+        },
+        {
+          "source": "WHO",
+          "locator": "The Treatment of Diarrhoea: A manual for physicians and other senior health workers"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.diarrhoea": {
+      "id": "skill.tx.diarrhoea",
+      "kind": "treatment",
+      "system": "paediatrics",
+      "title": "Managing diarrhoea and dehydration",
+      "oneLine": "ORS by plan, zinc for all, antibiotics almost never",
+      "why": "Fluids save the life today while zinc shortens the illness and prevents the next one, and both work only when matched to the dehydration grade. Antibiotics change the course only in narrow dysenteric illness, and given blindly they prolong shedding or risk haemolytic uraemic syndrome.",
+      "teach": [
+        {
+          "heading": "Plan A: no dehydration",
+          "body": "Continue feeding as usual with breastfeeding, and give ORS after each loose stool: 50 to 100 ml under two years, 100 to 200 ml from two to ten years, and as much as wanted above ten years. Where the weight is known, 10 ml per kg per stool is the measured equivalent.\n\nCounsel home fluids, ORS preparation with safe water, and red flags for return, since most of these children are managed at home."
+        },
+        {
+          "heading": "Plan B: some dehydration",
+          "body": "Continue feeds and give 75 ml per kg of ORS in the first four hours, then reassess: no dehydration moves to Plan A, still some repeats Plan B, and worse moves to Plan C.\n\nVomiting alone rarely defeats Plan B: give small frequent sips and continue, switching only if the child cannot retain fluids."
+        },
+        {
+          "heading": "Plan C: severe dehydration",
+          "body": "Start intravenous fluids at once with Ringer lactate with dextrose: under one year 30 ml per kg in the first hour then 70 ml per kg over five hours, from one to five years 30 ml per kg in half an hour then 70 ml per kg over two and a half hours. Give ORS as soon as the child can drink, and reassess continuously.\n\nReferral thresholds: shock, inability to drink, persistent vomiting despite trial feeds, and severe malnutrition alongside dehydration all need a higher centre."
+        },
+        {
+          "heading": "ORS and zinc for every child",
+          "table": {
+            "cols": [
+              "Component",
+              "Amount per litre",
+              "Use"
+            ],
+            "rows": [
+              [
+                "Sodium",
+                "75 mmol",
+                "Replaces stool losses"
+              ],
+              [
+                "Potassium",
+                "20 mmol",
+                "Replaces stool losses"
+              ],
+              [
+                "Chloride",
+                "65 mmol",
+                "Balances the solution"
+              ],
+              [
+                "Citrate",
+                "10 mmol",
+                "Corrects acidosis"
+              ],
+              [
+                "Glucose",
+                "75 mmol",
+                "Drives sodium and water uptake"
+              ],
+              [
+                "Osmolarity",
+                "245 total",
+                "Low osmolarity formula"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Zinc and feeding",
+          "body": "Give zinc to all children with diarrhoea: 10 mg per day under six months and 20 mg per day above six months, once daily for 14 days, where 5 ml of syrup carries 20 mg. Zinc shortens the episode and reduces recurrence.\n\nNever stop feeds: continue breastfeeding and usual diet through the illness, and add an extra meal daily for two weeks of recovery. A sachet once mixed is used within 24 hours, and sachets come as one litre or 200 ml packs."
+        },
+        {
+          "heading": "Antibiotics: narrow rules",
+          "body": "No routine antibiotics for watery diarrhoea. Reserve empirical cover, such as azithromycin, for febrile inflammatory or dysenteric illness and for traveller type diarrhoea where cover is indicated.\n\nSuspected Shiga toxin producers get no antibiotics and no antimotility drugs because of haemolytic uraemic syndrome risk. Nosocomial or antibiotic associated diarrhoea is treated for C. difficile with withdrawal of the precipitating drug, and antimotility agents have no place in young children with dysentery."
+        },
+        {
+          "heading": "Prevention before discharge",
+          "points": [
+            "Safe water, boiling, storage, handwashing and toilet use fixed at home.",
+            "Rotavirus immunisation completed with the rest of the schedule.",
+            "Red flags explained: blood in stool, persistent vomiting, no urine for hours, lethargy, inability to drink.",
+            "Follow up arranged, with weight and feeding reviewed."
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Giving antibiotics for watery diarrhoea where fluids and zinc are the treatment.",
+        "Stopping feeds or breast milk during the illness, which worsens nutrition without helping stools.",
+        "Using antimotility drugs in dysentery or suspected Shiga toxin illness.",
+        "Discharging without fixing water, sanitation or feeding, so the child returns next month."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What volume of ORS does Plan B give, and over what time?",
+          "a": "75 ml per kg of ORS in the first four hours, then reassess.",
+          "accept": [
+            "75",
+            "four hours",
+            "reassess"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What zinc dose do you give a one year old with diarrhoea?",
+          "a": "20 mg once daily for 14 days.",
+          "accept": [
+            "20",
+            "14 days"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Bloody diarrhoea is suspected to be Shiga toxin producing. What do you withhold?",
+          "a": "Antibiotics and antimotility drugs, because of the risk of haemolytic uraemic syndrome.",
+          "accept": [
+            "withhold",
+            "haemolytic uraemic",
+            "antibiotics"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "plan",
+          "text": "Selects the WHO plan matching the grade"
+        },
+        {
+          "id": "volume",
+          "text": "States the correct fluid volume and time frame"
+        },
+        {
+          "id": "zinc",
+          "text": "Prescribes zinc by age band for 14 days"
+        },
+        {
+          "id": "antibiotics",
+          "text": "Withholds routine antibiotics with reasons"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_infectious_diarrheal_diseases_and: management"
+        },
+        {
+          "source": "WHO",
+          "locator": "The Treatment of Diarrhoea: A manual for physicians and other senior health workers"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of plan and principle, with volumes and doses quoted from the cited WHO and knowledge base sources for examination study. Exact fluids, doses and referral decisions must follow your current institutional or national guideline at the time of prescribing. CliniX does not prescribe."
+    }
+  },
+  "cases": [
+    {
+      "id": "case.diarrhoea.arjun",
+      "title": "An 18 month old with three days of watery motions",
+      "opening": "Meena brings her 18 month old son Arjun to the paediatric outpatient room. He has had watery loose motions for three days and is passing very little urine. Talk to the mother and examine the child.",
+      "fallback": "I do not understand, doctor. Can you ask in a simpler way?",
+      "initialVitals": {
+        "hr": 128,
+        "bpSystolic": 82,
+        "bpDiastolic": 54,
+        "rr": 38,
+        "spo2": 96,
+        "temp": 38.1,
+        "gcs": 15
+      },
+      "patient": {
+        "name": "Arjun Pawar",
+        "age": 18,
+        "sex": "male",
+        "occupation": "Toddler, home-kept, not yet in anganwadi preschool",
+        "residence": "Village near the district town, lives with parents, grandmother and an elder sister"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "what is wrong with the child",
+            "tell me the main complaint of the child",
+            "why have you brought your son today"
+          ],
+          "reply": "Doctor, my son has had loose motions since three days, many times a day, and now he is passing very little urine.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "loose_onset": {
+          "cues": [
+            "when did the loose motions start",
+            "how many days of loose motions",
+            "was the onset sudden or gradual"
+          ],
+          "reply": "Three days ago, quite suddenly. He was completely well before that.",
+          "key": true
+        },
+        "stool_count": {
+          "cues": [
+            "how many stools in a day",
+            "how many times motion passed in 24 hours",
+            "has the stool frequency increased"
+          ],
+          "reply": "About six to seven watery stools a day. Earlier it was two to three.",
+          "key": true
+        },
+        "stool_look": {
+          "cues": [
+            "what do the stools look like",
+            "are the stools watery or formed",
+            "what is the colour of the loose motions"
+          ],
+          "reply": "Completely watery, yellowish, with no shape to it. It soaks into the cloth.",
+          "key": true
+        },
+        "blood_mucus": {
+          "cues": [
+            "any blood seen in the stool",
+            "is there mucus in the motions",
+            "any red colour or jelly in the stool"
+          ],
+          "reply": "No blood, no mucus. Only water, doctor.",
+          "key": true
+        },
+        "vomit_status": {
+          "cues": [
+            "is the child vomiting",
+            "how many episodes of vomiting in a day",
+            "did vomiting come before the loose motions"
+          ],
+          "reply": "Yes, vomiting two to three times a day since yesterday. The motions started first, vomiting came later.",
+          "key": true
+        },
+        "urine_flow": {
+          "cues": [
+            "how is the urine output",
+            "how many times passed urine today",
+            "when did the child last pass urine"
+          ],
+          "reply": "Much less than usual. Only twice today, dark yellow. Yesterday it was still normal.",
+          "key": true
+        },
+        "thirst_status": {
+          "cues": [
+            "is the child more thirsty than usual",
+            "does the child demand fluids often",
+            "can the child swallow fluids normally"
+          ],
+          "reply": "He keeps asking for water and drinks eagerly. He can still swallow.",
+          "key": true
+        },
+        "fever_status": {
+          "cues": [
+            "does the child have fever",
+            "how high is the fever",
+            "since when is the fever present"
+          ],
+          "reply": "Mild fever since yesterday. We did not measure it at home.",
+          "key": true
+        },
+        "belly_pain": {
+          "cues": [
+            "does the stomach pain occur",
+            "is there crying with stomach pain",
+            "does the child draw up the legs in pain"
+          ],
+          "reply": "He cries and clutches his stomach before passing motions. No continuous severe pain, and he does not draw up his legs.",
+          "key": true
+        },
+        "milk_feeds": {
+          "cues": [
+            "what milk does the child take",
+            "is breastfeeding continued during this illness",
+            "how is the top milk mixed"
+          ],
+          "reply": "He breastfeeds plus cow milk diluted half with water, three times a day. We have continued both.",
+          "key": true,
+          "skillId": "skill.hx.paed.diet_infant"
+        },
+        "vaccine_record": {
+          "cues": [
+            "which vaccines has the child received",
+            "were rotavirus drops given",
+            "is the immunisation complete for age"
+          ],
+          "reply": "Vaccines till nine months are done. The rotavirus drops were missed, we could not go that week.",
+          "key": true,
+          "skillId": "skill.hx.paed.immunisation"
+        },
+        "home_contacts": {
+          "cues": [
+            "anyone else with loose motions at home",
+            "any contact with diarrhoea outside the house",
+            "any neighbour with similar illness"
+          ],
+          "reply": "His cousin who plays with him had motions last week. Nobody else at home is ill.",
+          "key": true
+        },
+        "water_source": {
+          "cues": [
+            "how is the household supply stored",
+            "is the supply boiled before use",
+            "what toilet facility is available at home"
+          ],
+          "reply": "Well water kept in an open vessel, not boiled. The toilet is a shared outdoor one.",
+          "key": true
+        },
+        "past_loose": {
+          "cues": [
+            "similar loose motions at an earlier time",
+            "any admission for diarrhoea before this",
+            "how was the child growing before this illness"
+          ],
+          "reply": "Once at one year of age, managed at home. He was growing steadily, weight 10 kg last month.",
+          "key": true
+        },
+        "medicines_given": {
+          "cues": [
+            "what medicines were given for this illness",
+            "was any antibiotic syrup started",
+            "was any ORS given at home"
+          ],
+          "reply": "Only paracetamol syrup for the fever. No antibiotic. We tried ORS twice but he spat most of it out."
+        },
+        "birth_detail": {
+          "cues": [
+            "what was the birth weight of the child",
+            "was the delivery conducted at hospital",
+            "any problem soon after birth"
+          ],
+          "reply": "Born at the primary health centre, weight 2.6 kg, cried at once, no nursery stay needed."
+        },
+        "home_family": {
+          "cues": [
+            "who stays at home with the child",
+            "any other young children in the house",
+            "does the mother work outside the home"
+          ],
+          "reply": "My husband, my mother in law, myself and his elder sister aged five. I stay at home."
+        }
+      },
+      "exam": {
+        "skill.gen.paed.appearance": {
+          "finding": "Restless and irritable, crying without tears. Alert, moves all limbs, not floppy.",
+          "abnormal": true
+        },
+        "skill.gen.paed.vitals": {
+          "finding": "Temperature 38.1 C. Respiratory rate 38 per minute. Pulse 128 per minute, regular, normal volume. Blood pressure 82/54. SpO2 96 percent on room air.",
+          "abnormal": true
+        },
+        "skill.gen.paed.hydration": {
+          "finding": "Eyes sunken, tears absent on crying, tongue dry, drinks eagerly from the cup, abdominal skin pinch returns slowly in about two seconds.",
+          "abnormal": true
+        },
+        "skill.exam.paed.weight": {
+          "finding": "Weight 9.2 kg, down from 10 kg last month. Length normal for age.",
+          "abnormal": true
+        },
+        "skill.exam.paed.muac": {
+          "finding": "Mid upper arm circumference 13.6 cm. No swelling of the feet.",
+          "abnormal": false
+        },
+        "skill.exam.paed.gi.inspection": {
+          "finding": "Abdomen flat, no distension, no visible peristalsis, umbilicus normal.",
+          "abnormal": false
+        },
+        "skill.exam.paed.gi.palpation_percussion": {
+          "finding": "Soft abdomen with mild diffuse tenderness, no guarding or rigidity, bowel sounds hyperactive, liver and spleen not palpable.",
+          "abnormal": true
+        },
+        "skill.exam.paed.gi.oral_upper": {
+          "finding": "Lips and tongue dry, no thrush, no ulcers, tonsils not enlarged.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "electrolytes"
+      ],
+      "investigations": {
+        "electrolytes": {
+          "label": "Serum electrolytes and glucose",
+          "indicated": true,
+          "result": "Sodium 132 mmol per litre, potassium 3.4 mmol per litre, glucose 78 mg per dL.",
+          "note": "Mild dilutional low sodium fits watery loss with hypotonic intake; it feeds into the fluid choice rather than changing the plan."
+        },
+        "abg": {
+          "label": "Arterial blood gas",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Reserved for severe dehydration with deep sighing breaths or shock; this child has neither."
+        },
+        "stool_culture": {
+          "label": "Stool culture",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "Watery diarrhoea without blood, high fever or an outbreak: a culture would change neither fluids, zinc nor feeds."
+        },
+        "stool_shiga": {
+          "label": "Shiga toxin test",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "No blood or mucus, so no trigger for Shiga testing; reconsider the moment blood appears."
+        },
+        "blood_culture": {
+          "label": "Blood culture",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "No prolonged fever or toxicity to suggest enteric fever or sepsis."
+        },
+        "rotavirus_antigen": {
+          "label": "Stool rotavirus antigen",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "The result would not change rehydration, zinc or feeding, so it is not indicated."
+        }
+      },
+      "differentialModel": {
+        "answer": "Acute watery diarrhoea with some dehydration. Consider enteric fever, amoebiasis, intussusception, urinary infection, otitis media and inflammatory bowel disease.",
+        "accept": [
+          "Acute gastroenteritis",
+          "Enteric fever",
+          "Amoebiasis",
+          "Intussusception",
+          "Urinary tract infection",
+          "Otitis media",
+          "Inflammatory bowel disease",
+          "Acute appendicitis",
+          "Abdominal tuberculosis"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Acute gastroenteritis with some dehydration, for WHO Plan B.",
+        "accept": [
+          "Acute gastroenteritis",
+          "gastroenteritis",
+          "food poisoning"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "ORS 75 ml per kg over four hours with reassessment, continued breastfeeding and feeds, zinc 20 mg daily for 14 days, no antibiotics, counselling on red flags with follow up.",
+        "accept": [
+          "ors",
+          "zinc",
+          "fluids",
+          "feeding",
+          "reassess",
+          "referral",
+          "hygiene",
+          "follow-up"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "Frequency and urine told the story before any test: six watery stools with falling urine is some dehydration until counted otherwise.",
+        "Four counted signs earned the grade: restless, sunken eyes without tears, dry tongue with eager drinking, and a slow pinch.",
+        "Blood never appeared, so culture and antibiotics stayed off the table: watery diarrhoea without an inflammatory pattern needs neither.",
+        "Weight loss from 10 to 9.2 kg fits the 5 to 10 percent band for some dehydration.",
+        "Diluted cow milk and missed rotavirus drops were the remediable causes addressed at discharge.",
+        "Zinc 20 mg for 14 days with continued feeds treats beyond the fluids.",
+        "Reassessment at four hours with red flags closes the loop: blood, no urine, lethargy or inability to drink bring him back."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

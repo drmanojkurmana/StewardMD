@@ -1,0 +1,1200 @@
+{
+  "_comment": "Obstetrics pathway. Same architecture as pneumonia and pre-eclampsia: shared core and obgyn skills carry the examination and history method, and this file adds the disease mechanism (a placenta in the lower segment that shears as the segment stretches), the no-vaginal-examination rule, and timed caesarean as the delivery decision.",
+  "id": "placenta-praevia",
+  "name": "Placenta praevia",
+  "fullName": "Placenta praevia",
+  "subtitle": "Painless antepartum haemorrhage",
+  "system": "obstetrics",
+  "kbRef": "placenta_praevia",
+  "oneLine": "Painless bleeding from a low placenta after mid pregnancy, and the decision of when to deliver",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "blurb": "What placenta praevia is, and where low lying placenta sits beside it",
+      "id": "basics",
+      "skills": [
+        "skill.placenta.basics"
+      ],
+      "title": "Basics"
+    },
+    {
+      "blurb": "Before a single question",
+      "id": "approach",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ],
+      "title": "Approach to the patient"
+    },
+    {
+      "blurb": "Age and parity set the risk before a symptom is mentioned",
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected praevia, parity, age and booking status carry real weight: a multiparous woman in her late twenties or older with a previous section starts at higher risk, and an unbooked woman from a primary centre may arrive with no prior scan to compare against."
+        }
+      },
+      "id": "particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "title": "Patient particulars"
+    },
+    {
+      "blurb": "Painless or painful, fresh or dark, first or repeated",
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical presentation reads in episodes, not months: sudden painless bright red bleeding at 30 to 34 weeks, settling with rest, then recurring more heavily. That episodic painless tempo should move you towards praevia before anything else is known."
+        },
+        "skill.hx.obg.booking_lmp": {
+          "expect": "Dates decide steroids and delivery timing: confirm the gestation from the last menstrual period and an early scan, because the diagnosis only applies after the mid trimester and every management decision turns on how preterm she is."
+        }
+      },
+      "id": "history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.booking_lmp",
+        "skill.hx.placenta.bleeding"
+      ],
+      "title": "History of presenting illness"
+    },
+    {
+      "blurb": "The scar count and the blood group that change the plan",
+      "emphasis": {
+        "skill.hx.obg.medical_family_drug": {
+          "expect": "Ask directly about hypertension, diabetes and kidney disease, and about tobacco use, since smoking favours low implantation. Record the blood group early: rhesus status decides anti-D after every bleed."
+        },
+        "skill.hx.obg.previous_pregnancies": {
+          "expect": "A previous caesarean section is the single most important fact here: record how many sections, and whether this placenta lies over the scar. A previous bleed from a low placenta is the next strongest predictor of recurrence."
+        }
+      },
+      "id": "past_personal_drug_family",
+      "skills": [
+        "skill.hx.obg.medical_family_drug",
+        "skill.hx.obg.previous_pregnancies",
+        "skill.hx.placenta.risk"
+      ],
+      "title": "Past, personal, drug and family history"
+    },
+    {
+      "blurb": "Pallor and pulse first, and the pressure that stays normal",
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for pallor that outlasts the bleed, and for restlessness or air hunger that warns of volume loss. A woman who looks well between episodes is still a praevia until proven otherwise."
+        },
+        "skill.gen.vitals": {
+          "expect": "Pulse and pressure grade the loss: tachycardia with a narrowing pulse pressure precedes frank hypotension, and a normal pressure never rules out major bleeding. Count the respiratory rate and watch urine output alongside."
+        },
+        "skill.gen.edema": {
+          "expect": "Not a feature of praevia. Marked oedema with hypertension should make you think of pre-eclampsia as a coexisting problem, which also changes the delivery decision."
+        },
+        "skill.gen.cyanosis": {
+          "expect": "Not a feature of uncomplicated praevia. Central cyanosis or breathlessness with crackles should make you think of pulmonary oedema or severe anaemia with cardiac strain rather than the bleed itself."
+        }
+      },
+      "id": "general_exam",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema",
+        "skill.gen.cyanosis"
+      ],
+      "title": "General examination"
+    },
+    {
+      "blurb": "Mother and fetus examined together, and never per vaginam",
+      "emphasis": {
+        "skill.exam.obg.preg_prep_inspect": {
+          "expect": "Inspect for pallor, for fresh bleeding or clots at the vulva without any digital examination, and for a uterus that looks large or small for the dates. Consent and a chaperone apply exactly as in any antenatal examination."
+        },
+        "skill.exam.obg.fundal_height": {
+          "expect": "A fundal height matching the dates is the usual finding; lagging growth suggests coexisting placental insufficiency. Measure with an empty bladder so a full one does not lift the fundus."
+        },
+        "skill.exam.obg.leopold": {
+          "expect": "Confirm lie and presentation: a high floating head, breech or transverse lie is expected when the placenta occupies the lower segment. Feel for uterine tone throughout: a soft relaxed uterus fits praevia, while a tense tender one means abruption, not labour."
+        },
+        "skill.exam.obg.fetal_heart": {
+          "expect": "Listen for rate and rhythm over the fetal back. A non-reassuring pattern moves the delivery decision forward at once, so this is never a formality, and continuous monitoring follows where available."
+        }
+      },
+      "id": "systemic_exam",
+      "skills": [
+        "skill.exam.obg.preg_prep_inspect",
+        "skill.exam.obg.fundal_height",
+        "skill.exam.obg.leopold",
+        "skill.exam.obg.fetal_heart"
+      ],
+      "title": "Obstetric abdominal examination"
+    },
+    {
+      "blurb": "One low placenta, and why everything follows from where it sits",
+      "id": "disease_findings",
+      "skills": [
+        "skill.placenta.findings",
+        "skill.annex.placenta.grades"
+      ],
+      "title": "Putting the praevia picture together"
+    },
+    {
+      "blurb": "Three sentences that contain the mother, the bleed and the placenta",
+      "id": "summary",
+      "skills": [
+        "skill.placenta.summary"
+      ],
+      "title": "Clinical summary"
+    },
+    {
+      "blurb": "What else bleeds in late pregnancy, and what each one demands",
+      "id": "differential",
+      "skills": [
+        "skill.placenta.differential"
+      ],
+      "title": "Differential diagnosis"
+    },
+    {
+      "blurb": "Position the placenta, ready the blood, watch the fetus",
+      "id": "investigations",
+      "skills": [
+        "skill.ix.placenta.workup"
+      ],
+      "title": "Investigations"
+    },
+    {
+      "blurb": "Criteria, severity, accreta risk, and the statement that drives delivery",
+      "id": "diagnosis",
+      "skills": [
+        "skill.placenta.diagnosis"
+      ],
+      "title": "Diagnosis and severity"
+    },
+    {
+      "blurb": "Rest the pelvis, ready the blood, steroids where preterm, caesarean to deliver",
+      "id": "treatment",
+      "skills": [
+        "skill.tx.placenta"
+      ],
+      "title": "Treatment"
+    },
+    {
+      "blurb": "Present this mother to your consultant",
+      "id": "case",
+      "skills": [
+        "skill.present.placenta.case"
+      ],
+      "title": "Case presentation"
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "examinerQuestions": [
+          "Show how you would examine her abdomen without any vaginal examination, and tell me what a single finger examination could cost her.",
+          "Her uterus is soft with a floating breech and a reactive trace. What is the diagnosis and what two arrangements do you make tonight?",
+          "She asks whether she can travel home and return next week. What do you tell her, and what referral would you arrange from a primary centre?"
+        ],
+        "id": "osce.placenta.examine",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.gen.vitals",
+          "skill.exam.obg.preg_prep_inspect",
+          "skill.exam.obg.fundal_height",
+          "skill.exam.obg.leopold",
+          "skill.exam.obg.fetal_heart"
+        ],
+        "task": "This 27 year old woman is 32 weeks pregnant with painless vaginal bleeding this morning. She is stable. Examine her abdomen, assess the fetus, and present your findings with a plan. Do not perform any vaginal examination.",
+        "title": "Examine suspected placenta praevia"
+      },
+      {
+        "examinerQuestions": [
+          "Which two facts from her history already mark her as high risk before you examined her?",
+          "She reports the bleed started after intercourse and this is the second episode in ten days. What do these details mean for the diagnosis?",
+          "She is rhesus negative and asks whether she needs any injection after this bleed. What do you tell her?"
+        ],
+        "id": "osce.placenta.history",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.obg.booking_lmp",
+          "skill.hx.placenta.bleeding",
+          "skill.hx.placenta.risk"
+        ],
+        "task": "This 27 year old woman is 32 weeks pregnant in her third pregnancy with painless bleeding. Take a focused history in six minutes and be ready to grade her risk.",
+        "title": "Take a history and grade the risk"
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.placenta.basics",
+      "skill.hx.placenta.risk",
+      "skill.placenta.findings",
+      "skill.placenta.differential",
+      "skill.ix.placenta.workup",
+      "skill.placenta.diagnosis",
+      "skill.tx.placenta",
+      "skill.exam.obg.leopold"
+    ]
+  },
+  "skills": {
+    "skill.placenta.basics": {
+      "id": "skill.placenta.basics",
+      "kind": "reasoning",
+      "oneLine": "A placenta implanted over or near the internal os after the middle of pregnancy",
+      "probes": [
+        {
+          "a": "Placental tissue lying over or reaching close to the internal cervical os, recognised after the mid trimester, with praevia kept for tissue that covers the os and low lying placenta for an edge near the os but clear of it.",
+          "accept": [
+            "internal os",
+            "mid trimester",
+            "covers",
+            "low lying",
+            "edge"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "Define placenta praevia and low lying placenta."
+        },
+        {
+          "a": "Because the lower segment is still unformed in the mid trimester, so a placenta that looks low then usually ends up clear of the os as the segment grows, and only third trimester imaging tells which ones persist.",
+          "accept": [
+            "unformed",
+            "grows",
+            "persist",
+            "third trimester",
+            "rechecked"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why is a low placenta at the anomaly scan not a diagnosis?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "placenta_praevia: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Placenta previa",
+          "source": "Williams Obstetrics"
+        }
+      ],
+      "system": "obstetrics",
+      "teach": [
+        {
+          "body": "Placenta praevia means placental tissue implanted in the lower uterine segment so that it lies over or close to the internal cervical os, recognised after the middle of pregnancy.\n\nModern use keeps praevia for a placenta that covers the os and calls it a low lying placenta when the edge lies near the os, within about two centimetres, without covering it.",
+          "heading": "What praevia means"
+        },
+        {
+          "body": "In complete praevia the placenta covers the os entirely, in partial praevia it covers part of it, and in a marginal placenta the edge just reaches the os. A low lying placenta stops short of the os but close enough to matter for bleeding and for delivery.\n\nThese patterns are described on transvaginal scan, which judges the edge to os distance more reliably than the transabdominal route.",
+          "heading": "The patterns you will be shown"
+        },
+        {
+          "body": "A low placenta seen at the mid trimester scan usually appears to move upward as the lower segment forms and lengthens, so most such placentas are clear of the os by the third trimester.\n\nReimaging in the third trimester is therefore routine: never assume an early low placenta has persisted, and never assume it has resolved without looking again.",
+          "heading": "Why early low placentas usually resolve"
+        }
+      ],
+      "title": "What placenta praevia is",
+      "why": "Praevia is defined by where the placenta sits, not by how much it bleeds. Getting that definition exact is what stops every late bleed being called praevia and every low placenta at mid trimester being treated as permanent."
+    },
+    "skill.placenta.findings": {
+      "id": "skill.placenta.findings",
+      "kind": "reasoning",
+      "oneLine": "Painless fresh bleeding with a soft uterus and a fetus that sits high",
+      "probes": [
+        {
+          "a": "Painless bright red vaginal bleeding in the second half of pregnancy, often unprovoked or after intercourse, with a soft non tender uterus and a high or malpresenting fetal part.",
+          "accept": [
+            "painless",
+            "bright red",
+            "second half",
+            "soft",
+            "malpresenting"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "Describe the classic presentation of placenta praevia."
+        },
+        {
+          "a": "Because the placenta is implanted in the lower segment rather than the fundus, so as that segment stretches and the cervix starts to efface, the inelastic placenta shears off its anchoring villi and opens maternal venous sinuses without any uterine pain.",
+          "accept": [
+            "lower segment",
+            "stretches",
+            "shears",
+            "sinuses",
+            "without pain"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why is the bleeding painless even though placenta is being torn?"
+        },
+        {
+          "a": "Because the lower segment contracts poorly after birth, so the placental bed keeps bleeding, and sudden heavy loss can compromise both the maternal volume and the blood reaching the fetus.",
+          "accept": [
+            "contracts poorly",
+            "keeps bleeding",
+            "maternal volume",
+            "fetus"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why does praevia threaten haemorrhage after delivery as well as before it?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "placenta_praevia: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Placenta praevia and placenta accreta",
+          "source": "RCOG"
+        }
+      ],
+      "system": "obstetrics",
+      "teach": [
+        {
+          "body": "The classic story is painless bright red vaginal bleeding in the second half of pregnancy, often starting without warning or after intercourse. Bleeds tend to recur, and later episodes are often heavier than the first.\n\nBetween bleeds the woman usually feels well, which is deceptive: a settled patient with a normal pulse can bleed torrentially from the next small separation.",
+          "heading": "The bleed"
+        },
+        {
+          "body": "The uterus feels soft and relaxed without tenderness, which is the bedside opposite of abruption. The fetal part often sits high or lies transverse or breech, because the placenta occupies the lower segment where the head would otherwise engage.\n\nVaginal examination is avoided until praevia is excluded, so these abdominal findings carry the examination: soft uterus, high presenting part, and bleeding seen but never explored digitally.",
+          "heading": "The uterus and the fetus"
+        },
+        {
+          "body": "The placenta is anchored in the lower segment instead of the well vascularised fundus. As that segment forms and stretches in the third trimester, and as the cervix begins to efface, the stiff placenta cannot follow the movement, its villi tear from the decidua, and maternal sinuses open and bleed.\n\nAfter delivery the same lower segment contracts weakly, so the placental bed oozes on. Repeated or heavy loss threatens the maternal circulating volume and, through reduced perfusion, the fetus as well.",
+          "heading": "Why position explains everything"
+        }
+      ],
+      "title": "The placenta praevia picture",
+      "why": "Praevia is the cleanest example in obstetrics of position generating the whole clinical picture. One fact, a placenta in the lower segment, explains the painless bleed, the soft uterus, the high presenting part, and the postpartum ooze together."
+    },
+    "skill.placenta.summary": {
+      "id": "skill.placenta.summary",
+      "kind": "reasoning",
+      "oneLine": "Mother, gestation, bleed and placenta in three sentences",
+      "probes": [
+        {
+          "a": "The gestation, because it decides steroids, observation and delivery timing, and the placental position with stability, because they decide the route and the urgency.",
+          "accept": [
+            "gestation",
+            "steroids",
+            "position",
+            "urgency"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What two elements must a praevia summary carry that a pneumonia summary does not?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "mother",
+          "text": "States the mother with parity, scar count and gestation"
+        },
+        {
+          "id": "bleed",
+          "text": "States the bleeding tempo with stability and fetal status"
+        },
+        {
+          "id": "placenta",
+          "text": "States the placental position and the plan it drives"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "placenta_praevia: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Placenta previa",
+          "source": "Williams Obstetrics"
+        }
+      ],
+      "system": "obstetrics",
+      "teach": [
+        {
+          "body": "State the mother with the risk that matters, the gestation, the bleeding story in abstract terms, and the placental position with stability and fetal status, in that order.\n\nThe plan follows from the last clause, so a summary that ends before position and stability leaves the listener unable to decide anything.",
+          "heading": "The shape of the summary"
+        },
+        {
+          "body": "Name the mother with parity and scar count: age, gravidity, previous sections, booking status. State the gestation and the tempo: 32 weeks with two painless bleeds in ten days.\n\nState the syndrome in abstract terms: recurrent painless bright red antepartum bleeding with a soft non tender uterus and a high presenting part. Then add position, stability and fetus: complete anterior praevia over a previous scar, haemodynamically stable, fetus live and well grown.",
+          "heading": "What goes in each sentence"
+        },
+        {
+          "body": "A 27 year old G3 with one previous caesarean at 32 weeks presents with two episodes of painless bright red bleeding in ten days. Examination shows pallor with stable vitals, a soft non tender uterus with a floating breech, and no vaginal examination was performed.\n\nTransvaginal scan shows a complete anterior placenta praevia covering the os over the previous scar. This is major placenta praevia with accreta risk, needing inpatient care, steroids, transfusion readiness and planned caesarean at a centre with blood and newborn facilities.",
+          "heading": "A worked example"
+        }
+      ],
+      "title": "The clinical summary",
+      "why": "The summary for praevia has a different shape from a medical one: gestation, placental position and stability belong in the same sentence as the bleed, because the plan that follows is a delivery decision with blood on standby, not a prescription."
+    },
+    "skill.placenta.differential": {
+      "id": "skill.placenta.differential",
+      "kind": "reasoning",
+      "oneLine": "Painful versus painless, uterine versus local, maternal versus fetal blood",
+      "probes": [
+        {
+          "a": "Placental abruption, vasa praevia, local cervical or vaginal causes, the bloody show of labour, and uterine rupture in a scarred uterus.",
+          "accept": [
+            "abruption",
+            "vasa",
+            "local",
+            "show",
+            "rupture"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Name four differentials for vaginal bleeding in late pregnancy."
+        },
+        {
+          "a": "Abruption brings pain with a tense tender uterus and often fetal distress, while praevia is painless with a soft relaxed uterus, so the hand on the abdomen separates them before any scan.",
+          "accept": [
+            "tense",
+            "tender",
+            "soft",
+            "separates",
+            "before scan"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "How do you separate abruption from praevia at the bedside?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Offers a differential spanning placental, fetal vessel, local and labour causes"
+        },
+        {
+          "id": "discriminator",
+          "text": "Uses pain and uterine tone as the bedside discriminator"
+        },
+        {
+          "id": "safety",
+          "text": "Names vasa praevia and rupture as the must not miss emergencies"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "placenta_praevia: additionalDifferentials",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Antepartum haemorrhage",
+          "source": "Williams Obstetrics"
+        }
+      ],
+      "system": "obstetrics",
+      "teach": [
+        {
+          "body": "For painless bright red bleeding in the second half of pregnancy, work through placental, fetal vessel, local and labour causes, and let pain with uterine tone sort them.\n\nThe must not miss conditions are abrupt separation with a compromised fetus, ruptured fetal vessels, and a scarred uterus giving way, because each needs a different emergency response.",
+          "heading": "How to sort late pregnancy bleeding"
+        },
+        {
+          "heading": "Causes side by side",
+          "table": {
+            "cols": [
+              "Cause",
+              "Pain",
+              "Uterus and bleed",
+              "Clue"
+            ],
+            "rows": [
+              [
+                "Placenta praevia",
+                "None",
+                "Soft, relaxed; bright red, recurrent",
+                "Low placenta on scan; high presenting part"
+              ],
+              [
+                "Placental abruption",
+                "Present, often severe",
+                "Tense, tender; dark, may be concealed",
+                "Hypertension history; fetal distress"
+              ],
+              [
+                "Vasa praevia",
+                "None",
+                "Soft; bleeding at membrane rupture",
+                "Fetal bradycardia; vessels over os on Doppler"
+              ],
+              [
+                "Local causes",
+                "None",
+                "Soft; light spotting",
+                "Lesion seen on speculum; cervicitis, polyp, carcinoma"
+              ],
+              [
+                "Bloody show",
+                "Labour pains",
+                "Soft between contractions; mucoid streak",
+                "Cervix effacing in labour"
+              ],
+              [
+                "Uterine rupture",
+                "Sudden severe pain",
+                "Loss of contractions; shock out of proportion",
+                "Scarred uterus; recession of presenting part"
+              ]
+            ]
+          }
+        },
+        {
+          "body": "Abruption is premature separation of a normally sited placenta: painful dark bleeding with a firm tender uterus, where concealed loss can far exceed what is seen and the fetus can deteriorate fast. Hypertension and trauma favour it.\n\nVasa praevia bleeds fetal blood at membrane rupture, so even modest loss threatens the baby, shown by sudden bradycardia. Local causes such as ectropion, cervicitis, a polyp or carcinoma bleed lightly and are seen on speculum, never by digital examination.",
+          "heading": "The details that decide"
+        }
+      ],
+      "title": "Differential diagnosis",
+      "why": "Most late bleeds are what they look like, but the ones that are not kill differently: abruption kills through concealed loss and coagulopathy, vasa praevia kills the fetus with millilitres, and rupture kills through a scar. The differential assigns each bleed its emergency."
+    },
+    "skill.ix.placenta.workup": {
+      "id": "skill.ix.placenta.workup",
+      "kind": "investigation",
+      "oneLine": "Scan the position, ready the blood, watch the fetus",
+      "probes": [
+        {
+          "a": "Transvaginal scan for the placental edge to os distance, transabdominal screen with presentation, accreta surveillance with MRI where uncertain, full blood count with group and crossmatch, coagulation where bleeding is heavy, cardiotocography, and Kleihauer testing in rhesus negative women.",
+          "accept": [
+            "transvaginal",
+            "crossmatch",
+            "coagulation",
+            "cardiotocography",
+            "kleihauer"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "List the core investigations in suspected placenta praevia."
+        },
+        {
+          "a": "No. Resuscitation, transfusion readiness and referral proceed on clinical grounds at once, because the bloods grade the loss but never gate its treatment.",
+          "accept": [
+            "no",
+            "clinical grounds",
+            "grade",
+            "never gate"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "A woman is bleeding heavily but the laboratory is an hour away. Do you wait for bloods before acting?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "placenta_praevia: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Placenta praevia and placenta accreta",
+          "source": "RCOG"
+        }
+      ],
+      "system": "obstetrics",
+      "teach": [
+        {
+          "body": "Group investigations by what they answer: where the placenta is, whether blood is ready, and how the fetus is.\n\nThe scan positions the placenta, the blood bank prepares for its bleeding, and the trace watches the fetus, and none of the three waits for the others in an emergency.",
+          "heading": "Three questions, three sets of tests"
+        },
+        {
+          "body": "CONFIRM POSITION: transvaginal ultrasound to localise the placenta and measure the edge to internal os distance, the definitive study and safe in praevia. Transabdominal scanning screens position and presentation first but can misjudge the os, especially posteriorly.\n\nHUNT ACCRETA: where an anterior praevia overlies a caesarean scar, examine the scar interface on ultrasound for accreta spectrum, with magnetic resonance imaging where the picture is uncertain.",
+          "heading": "See the placenta"
+        },
+        {
+          "body": "READY THE BLOOD: full blood count for haemoglobin and platelets, blood group with antibody screen, and crossmatch or group and save held ready. Add coagulation studies where bleeding is heavy or recurrent.\n\nWATCH THE FETUS: cardiotocography or fetal heart auscultation for immediate wellbeing. In rhesus negative women add a Kleihauer test to size the feto maternal bleed and set the anti-D dose.\n\nThe single most important principle: never let the wait for a scan report or a laboratory value delay resuscitation, transfusion or referral. Tests position the placenta and grade the loss, they do not gate the rescue.",
+          "heading": "Ready the blood, watch the fetus"
+        }
+      ],
+      "title": "Confirming and grading the illness",
+      "why": "Investigations in praevia serve three separate jobs, positioning the placenta, preparing blood, and watching the fetus, and understanding which test does which stops a student waiting for a haemoglobin value before transfusing a woman in shock."
+    },
+    "skill.placenta.diagnosis": {
+      "id": "skill.placenta.diagnosis",
+      "kind": "reasoning",
+      "oneLine": "Position on scan plus stability, stated in one delivery-driving sentence",
+      "probes": [
+        {
+          "a": "A placenta covering the internal os is praevia and an edge lying near the os without covering it is low lying, both diagnosed on transvaginal scan after the mid trimester.",
+          "accept": [
+            "covering",
+            "low lying",
+            "transvaginal",
+            "mid trimester"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "State the diagnostic criteria for placenta praevia."
+        },
+        {
+          "a": "Continuing heavy bleeding, haemodynamic instability, falling haemoglobin with coagulopathy, non reassuring fetal trace, labour with praevia, and any accreta features over a previous scar.",
+          "accept": [
+            "instability",
+            "coagulopathy",
+            "non reassuring",
+            "labour",
+            "accreta"
+          ],
+          "level": 2,
+          "minMatch": 3,
+          "q": "Name four features that escalate a praevia to an emergency."
+        },
+        {
+          "a": "No. An anterior praevia over a previous scar is accreta until proven otherwise, needing specialist imaging and delivery planning at a centre ready for major haemorrhage, not reassurance.",
+          "accept": [
+            "no",
+            "accreta",
+            "specialist",
+            "major haemorrhage"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "A stable woman has an anterior praevia over one previous section. Is she routine and safe to keep locally?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "criteria",
+          "text": "States the scan criteria for praevia and low lying placenta"
+        },
+        {
+          "id": "severe",
+          "text": "Lists the features that escalate care"
+        },
+        {
+          "id": "statement",
+          "text": "Frames a complete diagnostic statement with gestation, position and fetal status"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "placenta_praevia: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Placenta previa",
+          "source": "Williams Obstetrics"
+        }
+      ],
+      "system": "obstetrics",
+      "teach": [
+        {
+          "body": "The diagnosis needs a placenta covering the internal os, or lying close to it, on transvaginal scan after the mid trimester, together with compatible bleeding or an incidental scan finding.\n\nA mid trimester low placenta alone is not the diagnosis: only third trimester reimaging tells which ones persist to matter.",
+          "heading": "The criteria"
+        },
+        {
+          "body": "SEVERITY is graded by bleeding and stability, not by centimetres: continuing or heavy loss, tachycardia with hypotension, a falling haemoglobin, evolving coagulopathy, and a non reassuring fetal trace each escalate care on their own.\n\nACCRETA RISK rides with position: an anterior praevia over a previous caesarean scar markedly raises the chance of morbid adherence and must be actively sought on scan, with magnetic resonance imaging where uncertain.\n\nLABOUR WITH PRAEVIA is itself an escalation: painful contractions over a low placenta shear more villi and can convert a stable case into an emergency.",
+          "heading": "Severity, accreta risk and labour"
+        },
+        {
+          "body": "A complete diagnostic statement names the pattern, the gestation, the parity with scars, the stability and the fetal status: major anterior placenta praevia at 32 weeks in a G3 with one previous section, haemodynamically stable, fetus live, for example.\n\nThat sentence is the delivery decision in words: who stays under observation, who is referred tonight, and who goes to theatre.",
+          "heading": "The statement that drives delivery"
+        }
+      ],
+      "title": "Diagnosis and severity",
+      "why": "A diagnosis of praevia without a position, a stability and a scar relation does not say whether she rests, is referred, or is delivered tonight. The severity and accreta flags are the tools that convert a scan picture into that decision."
+    },
+    "skill.tx.placenta": {
+      "dosingNote": "This module teaches management at the level of drug class and principle. Specific agents, routes, combinations and durations must be taken from your current national or institutional guideline and local blood bank practice at the time of prescribing. CliniX does not prescribe.",
+      "id": "skill.tx.placenta",
+      "kind": "treatment",
+      "oneLine": "Rest the pelvis, ready the blood, steroids where preterm, caesarean to deliver",
+      "probes": [
+        {
+          "a": "Pelvic rest with no digital vaginal examination, planned caesarean for a placenta covering or lying close to the os, corticosteroids where preterm delivery is anticipated, anti-D for rhesus negative women, resuscitation with transfusion, and inpatient observation at a unit with blood and newborn care.",
+          "accept": [
+            "pelvic rest",
+            "caesarean",
+            "corticosteroids",
+            "anti-D",
+            "transfusion"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "State the principles of managing placenta praevia."
+        },
+        {
+          "a": "Because examination fingers can separate more villi and provoke torrential bleeding, while transvaginal ultrasound with its controlled probe positions the placenta safely and more accurately.",
+          "accept": [
+            "provoke",
+            "torrential",
+            "ultrasound",
+            "safely"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why is digital vaginal examination forbidden but transvaginal scan allowed?"
+        },
+        {
+          "a": "Resuscitate with blood, deliver by emergency caesarean without delay for gestation, and manage the haemorrhage with transfusion support, because life threatening bleeding overrules prematurity.",
+          "accept": [
+            "resuscitate",
+            "emergency caesarean",
+            "without delay",
+            "transfusion"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Bleeding becomes life threatening at 32 weeks with an unstable mother. What is the plan?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "placenta_praevia: management",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Placenta praevia and placenta accreta",
+          "source": "RCOG"
+        }
+      ],
+      "system": "obstetrics",
+      "teach": [
+        {
+          "body": "AVOID PROVOCATION: no digital vaginal examination until praevia is excluded, with pelvic rest advised, meaning no intercourse and no strenuous activity that could shear more villi.\n\nOBSERVE OR ADMIT by bleeding: a first light bleed that settles with a stable mother and a reassuring fetus may be watched closely with a clear return plan, while recurrent or heavy bleeding earns inpatient observation where blood and theatre are at hand.",
+          "heading": "Do not provoke, watch by bleeding"
+        },
+        {
+          "body": "DELIVERY is by planned caesarean for a placenta covering or lying close to the internal os, timed in the late preterm to early term window according to symptoms, with senior obstetric and anaesthetic cover and major haemorrhage preparation.\n\nACCRETA PREPARATION where an anterior praevia overlies a scar: deliver at a specialist centre with crossmatched blood, massive transfusion readiness and multidisciplinary support, since forced placental separation can bleed torrentially.\n\nEMERGENCY caesarean with haemorrhage management where bleeding becomes life threatening, whatever the gestation.",
+          "heading": "How and when to deliver"
+        },
+        {
+          "body": "CORTICOSTEROIDS for fetal lung maturity where preterm delivery is anticipated. They mature the fetal lungs; they do not treat the bleed.\n\nANTI-D immunoglobulin prophylaxis for rhesus negative women after every bleed and at delivery, sized by Kleihauer testing.\n\nRESUSCITATION with crystalloids and blood transfusion for acute antepartum haemorrhage, keeping group and save or crossmatch current throughout the admission.",
+          "heading": "Steroids, anti-D and transfusion"
+        },
+        {
+          "body": "DELIVER WHERE BLOOD IS: care belongs in a unit with transfusion and neonatal support, escalating early to a higher centre where accreta is suspected or bleeding recurs.\n\nIN INDIAN PRACTICE: stabilise and refer early from a primary centre to a first referral unit or district hospital with blood, operating and newborn facilities, using free referral transport and cashless mother child care under public programmes. Never keep major praevia waiting for daylight or a senior who is hours away.\n\nAFTER DELIVERY: watch the lower segment bed for atonic ooze, since poor contraction is expected, and keep postpartum vigilance for anaemia and delayed bleeding.",
+          "heading": "Referral thresholds and after delivery"
+        }
+      ],
+      "title": "Managing placenta praevia",
+      "why": "The management of praevia is a balancing act between gaining fetal maturity and surviving the next bleed: every week gained helps the fetal lungs but risks a torrential separation. Getting the order right, rest, readiness, steroids, then a timed caesarean, is what keeps both alive."
+    },
+    "skill.annex.placenta.grades": {
+      "id": "skill.annex.placenta.grades",
+      "kind": "annexure",
+      "oneLine": "Complete, partial, marginal and low lying, with the migration rule",
+      "probes": [
+        {
+          "a": "Complete praevia covers the os entirely, partial covers part of it, marginal reaches the edge, and low lying stops near but clear; all need caesarean planning except a low lying edge that clears on reimaging.",
+          "accept": [
+            "complete",
+            "partial",
+            "marginal",
+            "low lying",
+            "reimaging"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "Name the four patterns of low placental position."
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "placenta_praevia: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Placenta previa",
+          "source": "Williams Obstetrics"
+        }
+      ],
+      "system": "obstetrics",
+      "teach": [
+        {
+          "heading": "Patterns of low placental position",
+          "table": {
+            "cols": [
+              "Pattern",
+              "Relation to the os",
+              "Delivery implication"
+            ],
+            "rows": [
+              [
+                "Complete praevia",
+                "Covers the os entirely",
+                "Planned caesarean; highest bleed and accreta concern"
+              ],
+              [
+                "Partial praevia",
+                "Covers part of the os",
+                "Planned caesarean"
+              ],
+              [
+                "Marginal praevia",
+                "Edge just reaches the os",
+                "Planned caesarean in practice; bleeds with effacement"
+              ],
+              [
+                "Low lying placenta",
+                "Edge near the os but clear",
+                "May deliver vaginally if the edge clears on reimaging"
+              ]
+            ]
+          }
+        },
+        {
+          "body": "A low placenta reported at the mid trimester scan migrates upward in most women as the lower segment grows, so the grade assigned then is provisional.\n\nConfirm the final grade on third trimester transvaginal imaging before fixing the delivery plan, and counsel the woman that early restriction and worry usually prove unnecessary.",
+          "heading": "The migration rule"
+        }
+      ],
+      "title": "Grades of placenta praevia",
+      "why": "The grade names the exact relation of the placental edge to the os, and that relation is what the delivery route turns on. A reference that keeps the four patterns with their implications stops complete praevia being granted a trial of labour."
+    }
+  },
+  "cases": [
+    {
+      "diagnosis": {
+        "accept": [
+          "Placenta praevia",
+          "Major placenta praevia"
+        ],
+        "answer": "Major anterior placenta praevia at 32 weeks in a G3 with one previous caesarean, with suspected accreta over the scar.",
+        "minMatch": 1
+      },
+      "differentialModel": {
+        "accept": [
+          "abruptio placentae",
+          "Vasa praevia",
+          "Placenta accreta spectrum",
+          "Uterine rupture",
+          "Carcinoma of the cervix",
+          "Antepartum haemorrhage"
+        ],
+        "answer": "Major placenta praevia with accreta risk. Consider abruptio placentae, vasa praevia, uterine rupture given the scar, and local cervical causes."
+      },
+      "essentialInvestigations": [
+        "usg",
+        "cbc",
+        "blood_group",
+        "ctg"
+      ],
+      "exam": {
+        "skill.exam.obg.fetal_heart": {
+          "abnormal": false,
+          "finding": "Fetal heart 140 per minute, regular, heard over the left upper quadrant. Reactive trace on cardiotocography with no decelerations during monitoring."
+        },
+        "skill.exam.obg.fundal_height": {
+          "abnormal": false,
+          "finding": "Fundal height 32 cm by tape, matching the dates. Symphysis-fundal height 32 cm with an empty bladder."
+        },
+        "skill.exam.obg.leopold": {
+          "abnormal": true,
+          "finding": "Longitudinal lie with breech presentation. Head palpable high in the fundus, not engaged. Uterus soft and relaxed throughout with no tenderness and no contractions."
+        },
+        "skill.exam.obg.preg_prep_inspect": {
+          "abnormal": true,
+          "finding": "Fresh bleeding with small clots seen at the vulva, no active pooling at the time of examination. Uterus corresponds to 32 weeks. No vaginal examination performed, since praevia is not yet excluded."
+        },
+        "skill.gen.appearance": {
+          "abnormal": true,
+          "finding": "Alert young woman with marked pallor of the conjunctiva and tongue. No jaundice, no breathlessness at rest, no altered consciousness."
+        },
+        "skill.gen.cyanosis": {
+          "abnormal": false,
+          "finding": "No central or peripheral cyanosis. Lungs clear on auscultation."
+        },
+        "skill.gen.edema": {
+          "abnormal": false,
+          "finding": "No pitting oedema of the feet and no puffiness of the face or hands. Blood pressure normal, so no hypertensive disorder is suggested."
+        },
+        "skill.gen.vitals": {
+          "abnormal": true,
+          "finding": "Pulse 104 per minute, regular, with normal volume. Blood pressure 108/68. Respiratory rate 20. SpO2 98 percent on room air. Temperature 36.8 C. Mild tachycardia with anaemia after recent blood loss."
+        }
+      },
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "history": {
+        "anc_visits": {
+          "cues": [
+            "antenatal checkup",
+            "anc visits attended",
+            "booked for pregnancy care",
+            "where registered for checkup"
+          ],
+          "reply": "I am registered at the village health centre and went twice. They gave iron tablets and one tetanus injection. My haemoglobin was 9 at that time."
+        },
+        "baby_kicks": {
+          "cues": [
+            "baby movements today",
+            "fetal movements felt",
+            "baby kicking normally",
+            "kick count reduced"
+          ],
+          "key": true,
+          "reply": "The baby is moving well, doctor. Even after the bleeding the kicks feel the same as before."
+        },
+        "bleed_amount": {
+          "cues": [
+            "how much blood lost",
+            "number of pads soaked",
+            "clots in the bleeding",
+            "felt faint or dizzy"
+          ],
+          "key": true,
+          "reply": "This morning I soaked two cloths fully and passed two small clots. My clothes were stained. I felt a little dizzy on standing but I did not faint."
+        },
+        "daily_work": {
+          "cues": [
+            "daily work at home",
+            "household and farm work",
+            "rest advised now",
+            "occupation and rest"
+          ],
+          "reply": "I am a housewife and help in our small field. The sister has now told me complete bed rest, and my mother-in-law is managing the house."
+        },
+        "dates_lmp": {
+          "cues": [
+            "last menstrual period",
+            "first day of last period",
+            "month of pregnancy now",
+            "due date for delivery"
+          ],
+          "key": true,
+          "reply": "My last period started in the first week of March, so the sister says I am in the eighth month and the delivery date is in mid December."
+        },
+        "earlier_bleeds": {
+          "cues": [
+            "bleeding episodes before",
+            "previous bleed this pregnancy",
+            "first bleed timing",
+            "recurrent bleeding"
+          ],
+          "key": true,
+          "reply": "Yes, ten days ago there was a lighter bleed in the evening, only staining my clothes. It stopped overnight with rest, so we did not come to hospital."
+        },
+        "family_history": {
+          "cues": [
+            "family members illness",
+            "mother or sister pregnancy problems",
+            "anyone else at home ill"
+          ],
+          "reply": "Nobody in the family has the same problem. My mother had normal deliveries at home."
+        },
+        "food_weight": {
+          "cues": [
+            "food eaten daily",
+            "weight gain in pregnancy",
+            "swelling of face"
+          ],
+          "reply": "I eat the usual dal roti and vegetables. My weight is rising normally and my face is not swollen."
+        },
+        "local_discharge": {
+          "cues": [
+            "vaginal discharge colour",
+            "foul smelling discharge",
+            "itching in private parts"
+          ],
+          "reply": "No foul discharge and no itching. There was no discharge before the bleeding started."
+        },
+        "medicines_taken": {
+          "cues": [
+            "medicines taken now",
+            "tablets from health centre",
+            "iron and calcium tablets",
+            "any injection taken"
+          ],
+          "key": true,
+          "reply": "Only the iron and calcium tablets from the centre, which I take most days. No injection after the first bleed, and no pressure tablets."
+        },
+        "onset_course": {
+          "cues": [
+            "when bleeding started",
+            "how the bleeding began",
+            "sudden onset bleed",
+            "bleeding since morning"
+          ],
+          "reply": "It started suddenly this morning when I woke up. There was no pain and no warning, only blood on waking."
+        },
+        "operation_details": {
+          "cues": [
+            "caesarean operation details",
+            "previous operation scar",
+            "type of anaesthesia before",
+            "wound healing after section"
+          ],
+          "reply": "The operation was three years ago because the baby was breech. They gave a spinal injection, the wound healed well, and I needed no blood."
+        },
+        "pain_check": {
+          "cues": [
+            "pain with bleeding",
+            "abdominal pain present",
+            "tightening of uterus",
+            "back pain with bleed"
+          ],
+          "key": true,
+          "reply": "No pain at all, doctor. The abdomen is completely soft and there is no tightening or back pain."
+        },
+        "past_pregnancies": {
+          "cues": [
+            "previous pregnancies outcome",
+            "earlier deliveries detail",
+            "abortion or miscarriage history",
+            "living children number"
+          ],
+          "key": true,
+          "reply": "This is my third pregnancy. My first baby, a boy, was born by operation three years ago. The second pregnancy aborted on its own at two months, one and a half years ago."
+        },
+        "presenting": {
+          "cues": [
+            "what brings you here",
+            "what is the problem today",
+            "why referred here",
+            "complaint in your words"
+          ],
+          "key": true,
+          "reply": "Doctor, since this morning I am bleeding from below without any pain. Ten days ago also there was a lighter bleed. The sister at the centre saw a low placenta on the scan and sent me here.",
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "provoke_rest": {
+          "cues": [
+            "intercourse before bleed",
+            "straining before bleeding",
+            "rest after bleeding started",
+            "what provoked bleeding"
+          ],
+          "reply": "We had relations two days before the first bleed. This morning it started on its own while resting. Lying down seems to slow it a little."
+        },
+        "risk_background": {
+          "cues": [
+            "age and number of pregnancies",
+            "twin pregnancy this time",
+            "treatment for conception",
+            "smoking in pregnancy"
+          ],
+          "reply": "I am 27 and this is my third pregnancy. It is a single baby conceived naturally. I never use tobacco, though my husband smokes beedis outside the house."
+        },
+        "tobacco_smoke": {
+          "cues": [
+            "tobacco use at home",
+            "smoking inside house",
+            "alcohol use"
+          ],
+          "reply": "I do not use tobacco in any form and I do not drink. My husband smokes outside, never inside."
+        },
+        "urine_complaints": {
+          "cues": [
+            "burning during urination",
+            "passing urine normally",
+            "reduced urine amount"
+          ],
+          "reply": "I am passing urine normally with no burning and no reduction."
+        },
+        "watery_leak": {
+          "cues": [
+            "watery leaking per vaginam",
+            "membranes ruptured",
+            "leaking fluid with bleed"
+          ],
+          "reply": "No watery leaking, only blood. My clothes are stained red, not wet with clear fluid."
+        }
+      },
+      "id": "case.placenta.rekha",
+      "initialVitals": {
+        "bpDiastolic": 68,
+        "bpSystolic": 108,
+        "gcs": 15,
+        "hr": 104,
+        "rr": 20,
+        "spo2": 98,
+        "temp": 36.8
+      },
+      "investigations": {
+        "blood_group": {
+          "indicated": true,
+          "label": "Blood group, antibody screen and crossmatch",
+          "note": "Rhesus negative status makes anti-D prophylaxis mandatory after every bleed; crossmatched units stay reserved throughout admission.",
+          "result": "Group B Rh-negative. Antibody screen negative. Two units crossmatched and reserved."
+        },
+        "cbc": {
+          "indicated": true,
+          "label": "Full blood count",
+          "note": "Haemoglobin grades the loss so far and sets the transfusion threshold; platelets warn of consumption where bleeding is heavy.",
+          "result": "Haemoglobin 8.4 g/dL with microcytic picture. Platelet count normal. White cell count within normal limits."
+        },
+        "ctg": {
+          "indicated": true,
+          "label": "Cardiotocography",
+          "note": "Immediate fetal wellbeing alongside the growth picture; a non-reassuring trace moves delivery forward whatever the gestation.",
+          "result": "Reactive trace with baseline 140 and normal variability. No prolonged decelerations during the monitoring period."
+        },
+        "kleihauer": {
+          "indicated": true,
+          "label": "Kleihauer test",
+          "note": "In a rhesus negative woman this sizes the feto-maternal bleed and sets the anti-D dose after the episode.",
+          "result": "Positive with a small feto-maternal bleed estimated. Anti-D immunoglobulin administered after the bleed."
+        },
+        "usg": {
+          "indicated": true,
+          "label": "Transvaginal ultrasound: placental localisation",
+          "note": "This positions the placenta and measures the edge to os distance; an anterior placenta over the scar needs accreta surveillance.",
+          "result": "Single live fetus in breech presentation, growth at the 30th centile with normal liquor. Complete anterior placenta praevia covering the internal os, its lower edge over the previous caesarean scar with loss of the clear zone, suspicious of accreta."
+        }
+      },
+      "managementModel": {
+        "accept": [
+          "pelvic rest",
+          "no vaginal examination",
+          "transfusion",
+          "corticosteroids",
+          "anti-D",
+          "caesarean delivery",
+          "referral",
+          "surveillance"
+        ],
+        "answer": "Pelvic rest with no vaginal examination, correct anaemia with transfusion readiness, corticosteroids for the fetal lungs, anti-D cover, urgent referral to a district unit with blood and newborn care, and planned caesarean with accreta preparation.",
+        "minMatch": 3
+      },
+      "opening": "Rekha Yadav, 27, a G3 with one previous caesarean at 32 weeks from a village in Madhya Pradesh, has been referred by the ASHA with a second episode of painless vaginal bleeding. She is stable. Introduce yourself and take a history.",
+      "patient": {
+        "age": 27,
+        "name": "Rekha Yadav",
+        "occupation": "Housewife, helps in the family field",
+        "residence": "Rural, village in Madhya Pradesh, lives with husband, son and mother-in-law",
+        "sex": "female"
+      },
+      "teachingPoints": [
+        "The tempo alone should move you: two painless bright red bleeds in ten days at 32 weeks is praevia until proven otherwise, and recurrence with heavier loss is the classic course.",
+        "Painless with a soft relaxed uterus is the bedside opposite of abruption. The hand on the abdomen separates the two commonest causes before any scan.",
+        "A high floating part, here a breech, is not incidental: the placenta occupies the lower segment where the head would otherwise engage.",
+        "One previous section plus an anterior placenta over the scar means accreta until proven otherwise, which is why this mother travels to a centre with blood and surgical support.",
+        "Rhesus negative status makes every bleed a two-drug episode: resuscitation for the mother and anti-D sized by Kleihauer for future pregnancies.",
+        "No vaginal examination was performed, and the presentation must say so: that avoidance is a marked safety decision, not an omission.",
+        "From a primary centre this mother is resuscitated, given steroids and referred, not kept: blood, an operating theatre and newborn care must be where she delivers, with postpartum vigilance for the poorly contracting lower segment."
+      ],
+      "title": "A G3 with a previous section and recurrent painless bleeding"
+    }
+  ]
+}

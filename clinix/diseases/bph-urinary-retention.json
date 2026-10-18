@@ -1,0 +1,1245 @@
+{
+  "_comment": "Surgery pathway for benign prostatic hyperplasia with urinary retention. Shared examination, history, approach and annexure skills are referenced, never redefined; disease-owned skills are reasoning, investigation and treatment only. History risk-factor and presentation skills live in the shared fragment and are merged into the pack by the lead.",
+  "id": "bph-urinary-retention",
+  "name": "Benign prostatic hyperplasia",
+  "fullName": "Benign prostatic hyperplasia with lower urinary tract symptoms",
+  "subtitle": "Lower urinary tract symptoms",
+  "system": "surgery",
+  "kbRef": "benign_prostatic_hyperplasia",
+  "oneLine": "Slow prostatic obstruction in the older man, and the retention it ends in",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What prostatic enlargement is, and what it is not",
+      "skills": [
+        "skill.bph.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age sets the probability before a symptom is mentioned",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Prostatic enlargement is a disease of men over 50, rare below that age. A slow urinary story in a 68 year old carries a different weight from the same story at 30, where stricture or stone leads. Record residence and travel too: a man who holds urine for hours on buses without toilets arrives with a fuller bladder and a worse story."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Years of weak stream ending in hours of inability",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.surg.urinary_symptoms"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical presentation reads in years, then hours: weak stream and night frequency for three years, then no urine since last night with lower abdominal pain. That two-scale tempo alone names acute on chronic retention before anything is examined."
+        },
+        "skill.hx.surg.urinary_symptoms": {
+          "expect": "Expect the full voiding set: hesitancy, a stream that falls without force, straining that worsens rather than improves flow, a bladder that never feels empty, and dribbling after. With it expect the storage set: night frequency first, then day frequency, urgency with urge leakage. Ask specifically about terminal red urine, burning with fever, and which new tablet preceded the stoppage."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "Why it blocked now and what treatment is safe",
+      "skills": [
+        "skill.hx.bph.riskfactors"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "The price late disease charges the whole body",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for a restless man pressing his lower abdomen in acute retention, or a cheerful one who does not know his bladder reaches near the navel. Note pallor of chronic disease, a dry coated tongue with drowsiness suggesting uraemia, and diabetic clues that also explain bladder numbness."
+        },
+        "skill.gen.vitals": {
+          "expect": "Expect a raised blood pressure in a man with back-pressure kidneys, and fever with a fast pulse when infected retention has supervened. Count the pulse and pressure yourself: an older man on new bladder medicines falls easily, and the first prescription must be judged against these numbers."
+        },
+        "skill.gen.edema": {
+          "expect": "Ankle swelling that fades by morning in a retained man points to fluid retention from failing kidneys or to cardiac disease that also fills the bladder overnight. Press, time it, and pit it: non-pitting swelling is not this story."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Abdominal, genital and rectal examination",
+      "blurb": "Dome above, kidneys behind, prostate below",
+      "skills": [
+        "skill.exam.surg.kidney_palpation",
+        "skill.exam.surg.distended_bladder",
+        "skill.exam.surg.dre_surgical",
+        "skill.exam.surg.prostate_dre"
+      ],
+      "emphasis": {
+        "skill.exam.surg.kidney_palpation": {
+          "expect": "Expect ballotable kidneys with tenderness at the renal angles in back-pressure disease, rather than the impalpable kidneys of health. A tender full kidney with a raised urea is obstruction speaking from above."
+        },
+        "skill.exam.surg.distended_bladder": {
+          "expect": "Expect a smooth symmetrical midline dome arising from behind the pubic bone, dull with a convex upper border: tense and tender in this acute presentation, soft and painless in the chronic cases you will also meet. Confirm it vanishes after catheterisation."
+        },
+        "skill.exam.surg.dre_surgical": {
+          "expect": "Expect normal anal tone and smooth rectal walls with no blood on the glove in uncomplicated enlargement; the finger then turns anterior to read the prostate separately. Any rectal mass, stricture discharge, or blood changes the whole investigation line."
+        },
+        "skill.exam.surg.prostate_dre": {
+          "expect": "Expect a symmetrically enlarged firm rubbery gland with a smooth surface, a preserved central groove, and freely mobile rectal lining, non-tender. A stony nodule, a lost groove, asymmetry, or tethered lining in this same examination is cancer until proven otherwise, even when the rest feels benign."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the retention picture together",
+      "blurb": "One obstruction read in three places",
+      "skills": [
+        "skill.bph.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Three sentences that contain the case",
+      "skills": [
+        "skill.present.bph.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "What else blocks, irritates or bleeds",
+      "skills": [
+        "skill.bph.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Urine and kidneys first, the marker only after counselling",
+      "skills": [
+        "skill.ix.bph.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis, retention triage and severity",
+      "blurb": "Name it, grade it, and draw the referral line",
+      "skills": [
+        "skill.bph.retention",
+        "skill.bph.diagnosis",
+        "skill.annex.surg.ipss_prostate"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Advice and watching, tablets by class, operation for the failing",
+      "skills": [
+        "skill.tx.bph.management"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.bph.examination",
+        "title": "Examine the abdomen and prostate",
+        "task": "This 68-year-old man has been unable to pass urine since last night. Examine his abdomen, loins and prostate and present your findings.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.exam.surg.kidney_palpation",
+          "skill.exam.surg.distended_bladder",
+          "skill.exam.surg.dre_surgical",
+          "skill.exam.surg.prostate_dre"
+        ],
+        "examinerQuestions": [
+          "You found a dull midline dome you cannot get below. Why is that finding dull, and what single bedside check confirms what it is?",
+          "Your prostate feel is smooth and symmetrical with a preserved groove. What two finger findings would force you to suspect cancer instead?",
+          "His urea is raised with creatinine at the upper limit. What does that change in your plan tonight?"
+        ]
+      },
+      {
+        "id": "osce.bph.history",
+        "title": "Take a urinary history and grade the burden",
+        "task": "This 68-year-old man reports years of weak stream and night-time frequency. Take a focused history in six minutes and be ready to grade his symptom burden.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.surg.urinary_symptoms",
+          "skill.hx.bph.riskfactors",
+          "skill.annex.surg.ipss_prostate"
+        ],
+        "examinerQuestions": [
+          "Score his burden from what you found, and state which answers carried the most weight.",
+          "Which medicine in his story most likely precipitated last night's retention, and by what mechanism?",
+          "Name two findings in the history that would make you refer him the same day."
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.bph.basics",
+      "skill.exam.surg.prostate_dre",
+      "skill.bph.signs",
+      "skill.bph.retention",
+      "skill.bph.differential",
+      "skill.ix.bph.workup",
+      "skill.bph.diagnosis",
+      "skill.tx.bph.management"
+    ]
+  },
+  "skills": {
+    "skill.bph.basics": {
+      "id": "skill.bph.basics",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "What benign prostatic hyperplasia is",
+      "oneLine": "Slow enlargement of the inner prostate squeezing the passage, in men over 50",
+      "why": "BPH is common, slow and benign, yet it produces the commonest surgical cause of retention in men. Holding its mechanism clearly, a static squeeze plus a muscular grip plus a tired bladder wall, lets every symptom and every treatment choice fall into place.",
+      "media": [],
+      "teach": [
+        {
+          "heading": "A disease of age and hormones",
+          "body": "Benign prostatic hyperplasia is a non-cancerous overgrowth of gland and muscle around the urinary passage, almost never seen below 50 and troubling men most between 50 and 70. Growth is driven by years of male hormone action on the prostate, and the inner tissue presses the outer rim into a firm false capsule that the finger feels as smooth enlargement.\n\nIt is slow hyperplasia of the inner gland, not cancer, and it starts in the zone around the passage while cancer usually starts in the outer zone. That geography is why early enlargement obstructs first while early cancer spreads silently first."
+        },
+        {
+          "heading": "Two grips on the passage",
+          "body": "The enlarged gland narrows the passage mechanically, which is the static grip, and extra muscle tone in the gland and bladder neck grips it further, which is the dynamic grip. This dual grip is why one drug relaxes the muscle within weeks while another must shrink the gland over months.\n\nDownstream the bladder wall thickens to push harder, then tires: the pouch behind the gland holds residual urine, the wall forms pockets, and in late disease pressure climbs back to the kidneys. Size alone misleads throughout, since a small hidden lobe can block badly while a large gland may barely trouble its owner."
+        },
+        {
+          "heading": "Median lobe versus lateral lobes",
+          "points": [
+            "A median lobe, felt poorly or not at all, gives mainly irritative symptoms: night frequency and urgency.",
+            "Lateral lobe enlargement gives mainly obstructive symptoms: hesitancy, slow stream and terminal dribbling.",
+            "Straining can press the median lobe onto the outlet and worsen the block, so a poor stream that straining fails to improve points to the prostate."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "At what age does BPH become common, and where in the gland does it start?",
+          "a": "Almost never below 50, usually presenting between 50 and 70; it starts in the inner tissue around the urinary passage, compressing the outer gland into a false capsule.",
+          "accept": [
+            "50",
+            "inner",
+            "passage",
+            "capsule"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Explain the static and dynamic components of obstruction in BPH.",
+          "a": "The static component is mechanical narrowing by the enlarged gland; the dynamic component is extra smooth muscle tone in the gland and bladder neck. Muscle relaxants ease the dynamic grip quickly, while shrinkers act on the static bulk over months.",
+          "accept": [
+            "static",
+            "dynamic",
+            "muscle tone",
+            "months"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why can a prostate that feels normal still cause severe obstruction?",
+          "a": "An enlarged median lobe cannot be felt per rectum but projects into the bladder outlet, giving mainly irritative symptoms; cystoscopy, not the finger, detects it.",
+          "accept": [
+            "median lobe",
+            "rectum",
+            "cystoscopy",
+            "irritative"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "pitfalls": [
+        "Equating gland size with symptom severity when deciding treatment.",
+        "Calling every prostate symptom cancer, or every prostate swelling benign, without examining for nodules and the groove.",
+        "Forgetting the bladder wall story: thickening, residual urine and back pressure are the disease, not the grams."
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "benign_prostatic_hyperplasia: pathophysiology"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "The prostate and seminal vesicles"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.bph.retention": {
+      "id": "skill.bph.retention",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Urinary retention: recognising acute, chronic and acute on chronic",
+      "oneLine": "Painful sudden blockage over a silent chronic build-up, and why the painless one harms more",
+      "why": "Acute retention is the emergency the patient begs to be relieved of; chronic retention is the painless dome the patient cheerfully ignores while pressure climbs to the kidneys. Telling them apart at the bedside decides whether the next step is urgent relief, planned relief with protection of the kidneys, or both.",
+      "media": [],
+      "teach": [
+        {
+          "heading": "Acute retention",
+          "body": "Acute retention is a sudden inability to pass urine with severe lower abdominal pain and a desperate urge to void. A pure first attack in a previously normal bladder is rare, seen after anaesthesia, injury or operation; in most men an unnoticed chronic build-up precedes it, so the event is really acute on chronic, often triggered by a cold remedy, alcohol, constipation, a loaded rectum, or enforced bed rest.\n\nOn examination the bladder forms a tense tender midline dome rising from behind the pubic bone, dull to percussion, and pressure on it sharpens the urge. The prostate cannot be judged while the bladder is full, so relief comes first and assessment after."
+        },
+        {
+          "heading": "Chronic retention",
+          "body": "Chronic retention is a gradual painless accumulation from never emptying fully, and the man may reach the clinic for dribbling, overflow leakage, night frequency or uraemic symptoms rather than for passing no urine. The dome may reach the navel yet stay soft and non-tender, and pressing it does not wake the urge, which is the bedside contrast with acute retention.\n\nInfection turns chronic retention painful and febrile, which is then called acute on chronic. Never confuse retention with no urine formation: in retention the kidneys work and the bladder fills, while in anuria the bladder stays empty and collapsed."
+        },
+        {
+          "heading": "Red flags that escalate the case",
+          "points": [
+            "Any acute retention: an emergency needing same-day catheter relief.",
+            "Fever with a tender prostate or infected retained urine: retention with infection needs urgent drainage and assessment.",
+            "Vomiting, drowsiness, headache or ankle swelling with retention: possible uraemia from back pressure, so check kidney function and the upper tracts.",
+            "Visible blood, recurrent infection, stones, or a hard nodular gland: look beyond BPH to growth, stone or stricture."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Contrast acute and chronic retention at the bedside.",
+          "a": "Acute retention is sudden and painful, with a tense tender suprapubic dome where pressure sharpens the urge; chronic retention is gradual and painless, the dome may reach the navel yet stays soft, and pressure does not wake the urge.",
+          "accept": [
+            "painful",
+            "tender",
+            "painless",
+            "urge"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A man passes small amounts frequently and wets himself at night, yet his bladder reaches near the navel. Explain.",
+          "a": "This is chronic retention with overflow leakage: the bladder never empties, so urine spills over continuously. It is easily mistaken for simple urge leakage, and the palpable dome is the clue.",
+          "accept": [
+            "overflow",
+            "never empties",
+            "dome",
+            "urge"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How do you separate retention from anuria at the bedside?",
+          "a": "In retention the kidneys form urine normally and the bladder is full and distended; in anuria the kidneys fail to excrete and the bladder is empty and collapsed. Percussion and catheterisation settle it.",
+          "accept": [
+            "full",
+            "empty",
+            "kidneys",
+            "percussion"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "pitfalls": [
+        "Calling overflow leakage simple incontinence and missing the silent dome behind it.",
+        "Trying to judge prostate size while the bladder is still full, when the dome pushes everything backwards.",
+        "Reassuring a painless chronic retention as harmless because the patient looks cheerful."
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "benign_prostatic_hyperplasia: redFlags"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "The prostate and seminal vesicles: retention of urine"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.bph.signs": {
+      "id": "skill.bph.signs",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Putting the retention picture together",
+      "oneLine": "Dome above, kidneys behind, prostate below: one obstruction read in three places",
+      "why": "The findings of prostatic obstruction are spread across three stations that students examine separately and forget to connect. A suprapubic dome means little until the kidneys and the prostate are read with it, and the trio together separates a simple enlarged gland from back-pressure disease.",
+      "media": [],
+      "teach": [
+        {
+          "heading": "The dome",
+          "body": "A full bladder is the commonest midline mass below the navel: smooth, symmetrical, arising from behind the pubic bone so the finger cannot get below it, dull to percussion with the dullness convex upward. Tenderness marks the acute painful form; a soft painless dome marks the chronic form the patient may not know he carries.\n\nMap it by palpating downward from resonant bowel, never upward from the bone, and confirm it disappears after catheterisation. Forgetting the bladder before any needle tap of the lower abdomen is the classic catastrophe this examination exists to prevent."
+        },
+        {
+          "heading": "The kidneys and the general survey",
+          "body": "Palpate both loins for enlargement and tenderness, since back pressure shows first as a tender full kidney and later as silent dilatation of the upper tracts. Read the general survey for the price of late disease: a dry coated tongue with drowsiness, pallor of chronic disease, puffy face or ankle swelling, and raised blood pressure in a man who never had hypertension.\n\nExamine the penis, testes and perineum in the same sitting: a tight foreskin, meatal narrowing, urethral thickening or discharge, and perineal swelling or fistula each move the diagnosis away from the prostate alone."
+        },
+        {
+          "heading": "The prostate feel",
+          "body": "With the bladder empty, the benign gland feels symmetrically enlarged, firm and rubbery, smooth with small rounded bosses, the central groove preserved and the rectal lining moving freely over it. The finger may not reach the top of a large gland, and a lone median lobe may escape the finger entirely, so a normal feel never rules out obstruction.\n\nA stony hard nodule, loss of the groove, asymmetry, or lining tethered to the gland points to cancer, even inside an otherwise benign-feeling gland. Tenderness with heat points to infection, where vigorous massage is forbidden because it can seed bacteria into the blood."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the bedside marks of a distended bladder?",
+          "a": "A smooth symmetrical midline dome arising from behind the pubic bone so the finger cannot get below it, dull to percussion with the dullness convex upward, tender in acute retention and painless in chronic retention.",
+          "accept": [
+            "midline",
+            "cannot get below",
+            "dull",
+            "tender"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What general and loin findings suggest back-pressure disease rather than simple enlargement?",
+          "a": "Tender or ballotable kidneys, a dry coated tongue with drowsiness, pallor, ankle swelling and newly raised blood pressure point to back pressure with uraemia rather than uncomplicated enlargement.",
+          "accept": [
+            "kidneys",
+            "drowsiness",
+            "swelling",
+            "blood pressure"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How does the benign prostate feel, and what single finding most strongly points to cancer?",
+          "a": "The benign gland is symmetrically enlarged, firm and rubbery, smooth, with a preserved central groove and freely mobile rectal lining. A stony hard nodule with a lost groove and tethered lining points most strongly to cancer.",
+          "accept": [
+            "symmetrically",
+            "groove",
+            "nodule",
+            "tethered"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "pitfalls": [
+        "Palpating upward from the pubic bone and missing a dome that reaches the navel.",
+        "Declaring the prostate normal by finger when a median lobe is doing all the blocking.",
+        "Examining the prostate while the bladder is still full and misjudging its size."
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "benign_prostatic_hyperplasia: clinicalPearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "History and examination of the urinary tract"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.bph.differential": {
+      "id": "skill.bph.differential",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "What else blocks, irritates or bleeds in the older man",
+      "oneLine": "Cancer, stricture, nerve disease and bladder disease all wear the same urinary mask",
+      "why": "Most slow-stream older men do have prostatic enlargement, but the ones who do not carry cancer, stricture or nerve disease that punishes late diagnosis. The differential is not an academic list; it is the set of traps that turns a routine prostate clinic into a missed cancer or a needless operation.",
+      "media": [],
+      "teach": [
+        {
+          "heading": "Lookalikes and their tells",
+          "table": {
+            "cols": [
+              "Condition",
+              "Favours it",
+              "Against it"
+            ],
+            "rows": [
+              [
+                "Carcinoma of the prostate",
+                "Short rapidly worsening course, weight loss, back pain, hard nodular gland with lost groove",
+                "Smooth symmetrical gland with preserved groove"
+              ],
+              [
+                "Urethral stricture",
+                "Younger man, old discharge or instruments, stream that improves with straining",
+                "Stream that straining worsens, smooth prostatic enlargement"
+              ],
+              [
+                "Bladder neck contracture",
+                "Previous prostate operation or instrumentation, poor stream persisting after surgery",
+                "No prior instrumentation, large smooth gland"
+              ],
+              [
+                "Neurogenic bladder",
+                "Sugar disease, Parkinson disease, stroke, spinal disease, numb perineum",
+                "Normal nerves, palpable obstruction with intact sensation"
+              ],
+              [
+                "Overactive bladder",
+                "Urgency and frequency with small voids and no residual urine",
+                "Large residual, weak stream, palpable dome"
+              ],
+              [
+                "Urinary infection or prostatitis",
+                "Burning, fever, tender prostate, pus cells in urine",
+                "No burning, sterile urine, smooth non-tender gland"
+              ],
+              [
+                "Bladder stone or tumour",
+                "Visible blood, sudden stoppage eased by posture change, weight loss",
+                "No blood, no stoppage, clear imaging"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Cancer hiding inside BPH",
+          "body": "Cancer and BPH share age, frequency, weak stream and retention, and cancer can grow inside an already enlarged gland. Suspect it when the course is short and rapidly worsening, when weight and appetite fall, when back pain or sciatica appears, or when the finger finds even one hard nodule or a lost groove.\n\nA raised or rising marker after counselling, blood in the urine, or retention that keeps returning all demand exclusion of malignancy rather than another course of tablets. In India, tuberculosis of the urinary tract stays on the list when sterile pus persists in acid urine."
+        },
+        {
+          "heading": "Do not forget the non-prostate causes",
+          "body": "Sugar disease fills the bladder with sugar-driven urine and numbs its nerves; heart failure and evening water tablets fill it overnight; constipation and a loaded rectum press on the outlet. Medicines for cold, allergy, mood and gut spasm all tighten or weaken the system at once.\n\nNight-time frequency deserves its own arithmetic: a bladder diary over three days separates true outlet obstruction from extra night-time urine production. Blaming the prostate for all lower urinary symptoms without testing urine, checking sugar and reviewing drugs is the commonest error in this clinic."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name four non-prostatic causes of lower urinary tract symptoms in an older man.",
+          "a": "Urethral stricture, neurogenic bladder from sugar disease or spinal disease, overactive bladder, urinary infection or prostatitis, and bladder stone or tumour.",
+          "accept": [
+            "stricture",
+            "neurogenic",
+            "overactive",
+            "infection",
+            "stone"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "How do you separate a stricture from prostatic enlargement by history alone?",
+          "a": "A stricture follows old discharge, injury or instruments, affects younger men, and the stream improves with straining; prostatic obstruction affects older men and straining worsens the stream.",
+          "accept": [
+            "discharge",
+            "straining",
+            "younger",
+            "older"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "When should cancer be suspected inside a benign-feeling prostate?",
+          "a": "With a short rapidly worsening course, weight loss, back pain or sciatica, a raised or rising marker, recurrent retention or visible blood, or even one hard nodule or lost groove on careful re-examination.",
+          "accept": [
+            "rapidly",
+            "weight loss",
+            "nodule",
+            "groove"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "pitfalls": [
+        "Stopping the differential at BPH because the age and stream fit.",
+        "Accepting visible blood as infection without excluding growth or stone.",
+        "Missing nerve disease because the prostate felt enlarged and nobody tested sensation."
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "benign_prostatic_hyperplasia: additionalDifferentials"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "The prostate and seminal vesicles"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.bph.workup": {
+      "id": "skill.ix.bph.workup",
+      "kind": "investigation",
+      "system": "surgery",
+      "title": "Confirming obstruction, grading damage, excluding cancer",
+      "oneLine": "Urine and kidneys first, the marker only after counselling, the stream as numbers",
+      "why": "Investigations in prostatic disease answer three separate questions: is there infection or blood, have the kidneys suffered, and is this cancer. Tests sent in the wrong order, a marker drawn during retention or an operation booked without a residual volume, waste the very answers treatment depends on.",
+      "media": [],
+      "teach": [
+        {
+          "heading": "Every man gets these",
+          "body": "Urine testing comes first: routine examination with microscopy and culture excludes infection, blood and sugar, and a properly collected mid-stream sample is the specimen that counts. Kidney function follows in every retained or obstructed man, since a raised urea with a climbing creatinine is the earliest warning of back pressure, and anaemia and sugar complete the fitness picture.\n\nThe prostate marker is measured only after counselling, because enlargement itself raises it mildly while a high or rising value demands cancer evaluation. Never draw it during infection or retention or soon after instrumentation, and remember that gland-shrinking drugs roughly halve it after months of use, so double the measured value when watching for cancer in treated men."
+        },
+        {
+          "heading": "Measure the blockage",
+          "body": "Post-void residual volume by bedside bladder scan tells how much the bladder keeps back after its best void, and uroflowmetry draws the stream as a flattened prolonged curve with a reduced peak. Together they turn a weak stream into numbers that can be followed through treatment.\n\nUltrasound of the kidneys and bladder maps gland size, bladder wall thickening with pockets, stones and clots, and, crucially, whether the upper tracts are dilated. A three-day bladder diary separates outlet obstruction from extra night-time urine production when storage symptoms dominate."
+        },
+        {
+          "heading": "Reserve these for questions",
+          "points": [
+            "Pressure-flow studies when the picture is mixed: small voided volumes, good flow with symptoms, previous failed treatment, or extremes of age.",
+            "Cystoscopy to exclude a pocket, stone or growth, especially before an operation not done through the bladder.",
+            "Transrectal imaging and needle sampling when the marker is high or the gland feels hard and irregular.",
+            "Plain and contrast imaging of the urinary tract when stones, tuberculosis or upper tract disease is suspected."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which two bedside tests turn a weak stream into followable numbers?",
+          "a": "Post-void residual volume by bladder scan and uroflowmetry with its flattened prolonged curve and reduced peak flow.",
+          "accept": [
+            "residual",
+            "uroflowmetry",
+            "peak flow",
+            "bladder scan"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "When should the prostate marker not be drawn, and why?",
+          "a": "Not during urinary infection, retention, or soon after instrumentation, because each raises it independently; and only after counselling, because even benign enlargement raises it mildly.",
+          "accept": [
+            "infection",
+            "retention",
+            "counselling",
+            "instrumentation"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A treated man on a gland-shrinking drug has a marker reading that looks reassuring. What is the catch?",
+          "a": "The drug roughly halves the marker after months of use, so double the measured value when watching for cancer, or a real rise will hide inside the normal range.",
+          "accept": [
+            "halves",
+            "double",
+            "cancer",
+            "months"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "pitfalls": [
+        "Drawing the marker during retention or infection and then chasing a meaningless rise.",
+        "Booking an operation without a residual volume, a flow study and an upper tract scan.",
+        "Forgetting the urine culture in a man with residual urine and repeated burning."
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "benign_prostatic_hyperplasia: additionalInvestigations"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "The prostate and seminal vesicles"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.bph.diagnosis": {
+      "id": "skill.bph.diagnosis",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Naming the disease, grading it, and setting the threshold",
+      "oneLine": "A statement with the burden, the residual, the kidneys and the referral line",
+      "why": "A diagnosis of prostatic enlargement alone decides nothing: the same gland needs watching, tablets or an operation depending on the burden score, the residual urine and what the kidneys show. The diagnostic statement must carry all three, plus the line at which this patient leaves primary care.",
+      "media": [],
+      "teach": [
+        {
+          "heading": "The diagnostic statement",
+          "body": "A complete diagnosis names the obstruction, its type and its toll: benign prostatic enlargement with chronic retention and early back-pressure change, or acute on chronic retention with infection. Add the symptom grade, the residual volume, the kidney numbers, and whether the upper tracts are dilated, since each changes the urgency.\n\nThe shared symptom score annexure grades the burden from mild through moderate to severe with its bother question; record it at the first visit and repeat it to judge every later treatment. A large symptom score with a small gland still needs treatment, and a large gland with no symptoms still needs watching."
+        },
+        {
+          "heading": "Referral thresholds",
+          "body": "Refer the same day for acute retention, infected retention with fever, visible blood with clots, or vomiting and drowsiness suggesting uraemia. Refer onward to urology for a hard or nodular gland, a raised or rising marker, recurrent infection, stones, or any dilatation of the upper tracts.\n\nFrom a primary clinic without a scanner, the referral note should carry the story in numbers: years of symptoms, the bother score, the urine result, the kidney numbers, whether the bladder was palpable, and what the prostate felt like. A man who fails a trial without catheter, or who retains again within weeks, has declared himself surgical."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What four facts belong in a complete BPH diagnostic statement?",
+          "a": "The obstruction with its retention type, the symptom grade, the residual volume with kidney numbers, and whether the upper tracts are dilated.",
+          "accept": [
+            "retention",
+            "grade",
+            "residual",
+            "upper tracts"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "A large gland with no symptoms meets a small gland with severe symptoms. Which needs treatment?",
+          "a": "Treatment follows the burden and the damage, not the grams: the small gland with severe symptoms needs treatment, while the large silent gland needs watching with a symptom score, urine, kidneys and residual.",
+          "accept": [
+            "burden",
+            "symptoms",
+            "watching",
+            "residual"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which findings send the patient to urology rather than continued primary care?",
+          "a": "A hard or nodular gland, a raised or rising marker, recurrent infection, stones, dilated upper tracts, or a failed trial without catheter with early re-retention.",
+          "accept": [
+            "nodular",
+            "marker",
+            "stones",
+            "trial without catheter"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "pitfalls": [
+        "Stating prostatic enlargement without a grade, a residual or the kidney numbers.",
+        "Treating grams instead of burden: operating on size alone or ignoring severe symptoms in a small gland.",
+        "Keeping a re-retaining man in primary care after he has failed a catheter-free trial."
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "benign_prostatic_hyperplasia: management"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "The prostate and seminal vesicles: assessment and referral"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.bph.management": {
+      "id": "skill.tx.bph.management",
+      "kind": "treatment",
+      "system": "surgery",
+      "title": "Managing prostatic obstruction from watch to operation",
+      "oneLine": "Advice and watching for the mild, tablets by class for the bothersome, operation for the failing",
+      "why": "Most men with mild symptoms need advice and watching, not tablets; the wrong tablet in the wrong bladder causes retention; and the right operation at the right time protects the kidneys for years. Management is a ladder, and knowing which rung the patient stands on matters more than knowing any single drug name.",
+      "media": [],
+      "teach": [
+        {
+          "heading": "Watchful waiting and the advice that works",
+          "body": "Mild, barely bothersome symptoms with a low bother score are managed without drugs: explain the slow course, cut evening fluids, tea, coffee and alcohol, practise double voiding with unhurried bladder training, and treat constipation. Review with a repeated symptom score, urine test, kidney numbers and residual volume.\n\nSafety-net every watched man: seek care for inability to pass urine, fever with burning, visible blood, or vomiting with swelling of the feet. Watching is active surveillance with a return plan, not discharge."
+        },
+        {
+          "heading": "Drug classes and their place",
+          "body": "Bothersome moderate to severe symptoms start with an alpha-blocker, which relaxes the gland muscle and bladder neck for relief within weeks; warn of dizziness on standing, falls in the elderly, ejaculatory changes, and the floppy-iris warning before any cataract operation.\n\nAn enlarged gland gains a second drug that shrinks it over months and lowers the future risk of retention and operation, and the two are combined when symptoms are marked and progression likely.\n\nStorage symptoms that persist gain a bladder-calming drug only when the residual is small, since relaxing a poorly emptying bladder invites retention. Erection difficulty alongside urinary symptoms can be treated with a daily vessel-relaxing tablet, never combined with nitrate heart medicines. Review every new prescription in 4 to 12 weeks for benefit and side effects."
+        },
+        {
+          "heading": "Retention, referral and the operation",
+          "body": "Acute retention is relieved by urethral catheterisation, suprapubic if the urethra fails or is unsafe, recording the drained volume and checking kidney function and salts. Start a muscle-relaxing tablet and continue it for at least 3 days before a trial without catheter; men who pass the trial stay at higher risk and need urology follow-up with continued treatment.\n\nThe operation is indicated for retention that recurs or will not clear, back pressure with dilated upper tracts or failing kidneys, repeated infection, bladder stones, repeated visible bleeding from the gland, or symptoms uncontrolled by drugs.\n\nResection through the passage remains the reference operation, with laser removal, vaporisation, small-gland incision, open removal for very large glands, and newer lift and steam techniques chosen by gland size, bleeding risk and the need to preserve ejaculation.\n\nIn Indian practice, stabilise and catheterise at the primary centre, treat infection first, and refer to the district urologist with the full story; prolonged catheter time without a trial plan breeds infection and stricture. Watch for large-volume diuresis after relieving chronic retention, with fluid and salt monitoring."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What advice and follow-up does watchful waiting involve?",
+          "a": "Cut evening fluids, tea, coffee and alcohol, practise double voiding with bladder training, treat constipation, and review with a repeated symptom score, urine test, kidney numbers and residual volume, with safety-net advice on retention, fever, blood and swelling.",
+          "accept": [
+            "evening fluids",
+            "double voiding",
+            "symptom score",
+            "safety-net"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why check the residual urine before adding a bladder-calming drug?",
+          "a": "Because relaxing the bladder when it already empties poorly can precipitate complete retention; bladder-calming drugs are avoided when the residual is large.",
+          "accept": [
+            "retention",
+            "residual",
+            "avoided"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Name four absolute indications for operation in BPH.",
+          "a": "Refractory or recurrent retention, back pressure with upper tract dilatation or failing kidneys, recurrent urinary infection, bladder stones, and recurrent visible bleeding from the prostate.",
+          "accept": [
+            "retention",
+            "upper tract",
+            "infection",
+            "stones",
+            "bleeding"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "pitfalls": [
+        "Starting tablets for mild barely bothersome symptoms that needed only advice and watching.",
+        "Adding a bladder-calming drug without checking the residual urine first.",
+        "Leaving a catheter in for weeks with no trial plan and no referral while infection and stricture brew."
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "benign_prostatic_hyperplasia: management"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "The prostate and seminal vesicles: treatment"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of drug CLASS and principle. Specific agents, routes, combinations and durations must be taken from your current national or institutional guideline and local resistance data at the time of prescribing. CliniX does not prescribe."
+    }
+  },
+  "cases": [
+    {
+      "id": "case.bph.shankar",
+      "title": "A retired teacher who cannot pass urine since last night",
+      "opening": "Shankar Patil, 68, has been brought to the casualty by his son. He has not passed urine since last night and keeps pressing his lower abdomen. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "initialVitals": {
+        "hr": 88,
+        "bpSystolic": 150,
+        "bpDiastolic": 90,
+        "rr": 18,
+        "spo2": 96,
+        "temp": 37,
+        "gcs": 15
+      },
+      "patient": {
+        "name": "Shankar Patil",
+        "age": 68,
+        "sex": "male",
+        "occupation": "Retired schoolteacher",
+        "residence": "Village near Satara, lives with his wife and son"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "tell me the main problem today",
+            "what is troubling you the most",
+            "can you pass urine at all",
+            "what happened last night with urine",
+            "unable to pass urine"
+          ],
+          "reply": "Doctor, since last night I cannot pass urine at all, and there is a heavy pain below my stomach.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "onset_prior_course": {
+          "cues": [
+            "since when have you had urinary difficulty",
+            "how long has the weak stream troubled you",
+            "was the urine flow normal before this",
+            "how many years weak stream",
+            "was flow normal earlier",
+            "weak stream for years",
+            "flow stopped last night"
+          ],
+          "reply": "The flow has been weak for about three years, slowly getting worse. Last night it stopped fully after I took a cold tablet in the evening.",
+          "key": true
+        },
+        "voiding_strain_stream": {
+          "cues": [
+            "do you wait for the urine stream to start",
+            "does straining improve your urine flow",
+            "describe the force of your urine stream",
+            "do you wait for stream to start",
+            "does straining stop the stream",
+            "does stream fall straight down"
+          ],
+          "reply": "I wait a long time before it starts, the stream falls straight down without force, and straining makes it stop rather than flow.",
+          "key": true,
+          "skillId": "skill.hx.surg.urinary_symptoms"
+        },
+        "storage_night_frequency": {
+          "cues": [
+            "how many times do you wake to pass urine",
+            "do you pass urine more often at night",
+            "do you get a sudden urge that is hard to hold",
+            "how many times wake at night for urine",
+            "must you rush when urge comes",
+            "do drops escape before toilet",
+            "wake at night for urine",
+            "night times for urine",
+            "how many times do you go at night",
+            "do you wake at night"
+          ],
+          "reply": "I wake three times every night, and by day I go every two hours. Once the urge comes I must rush, and a few drops escape before I reach the toilet.",
+          "key": true,
+          "skillId": "skill.hx.surg.urinary_symptoms"
+        },
+        "emptying_dribble_after": {
+          "cues": [
+            "do you feel the bladder is still full after passing urine",
+            "do you dribble urine after finishing",
+            "how long does passing urine take you",
+            "does bladder feel empty after",
+            "do you dribble after finishing",
+            "are underclothes wet after"
+          ],
+          "reply": "It never feels empty, and my underclothes stay wet with dribbling after I finish. Each visit to the toilet takes several minutes.",
+          "key": true,
+          "skillId": "skill.hx.surg.urinary_symptoms"
+        },
+        "retention_pain_episode": {
+          "cues": [
+            "when did you last pass urine normally",
+            "is there pain above the pubic bone",
+            "does pressing the lower abdomen increase the urge",
+            "when did urine stop fully",
+            "is there pain above pubic bone",
+            "does pressing abdomen increase urge",
+            "last passed urine at ten",
+            "when did urine stop"
+          ],
+          "reply": "Nothing has passed since ten in the night, and the lower abdomen aches and feels tight. Pressing it makes the urge stronger but no urine comes.",
+          "key": true
+        },
+        "overflow_wet_nights": {
+          "cues": [
+            "do you leak urine without realising it",
+            "are your clothes wet in the morning",
+            "does urine flow on its own continuously",
+            "are pyjamas damp by morning",
+            "do you leak without realising"
+          ],
+          "reply": "For some months my pyjamas are damp by morning though I feel no flow. I thought it was just old age.",
+          "key": true
+        },
+        "haematuria_blood_seen": {
+          "cues": [
+            "have you noticed blood in your urine",
+            "what colour is your urine stream",
+            "did you pass any clots while urinating",
+            "is there blood in your urine",
+            "was urine red at end"
+          ],
+          "reply": "Twice last month the urine looked red at the end, but there were no clots and no pain. It cleared on its own.",
+          "key": true,
+          "skillId": "skill.hx.surg.urinary_symptoms"
+        },
+        "burning_fever_episodes": {
+          "cues": [
+            "does passing urine burn or pain you",
+            "have you had fever with shivering recently",
+            "did you take antibiotics for urine infection",
+            "does urination burn",
+            "any fever with shivering",
+            "what did urine reports show",
+            "burning on passing urine"
+          ],
+          "reply": "Burning comes and goes, and twice this year I had fever with shivering for which the village doctor gave tablets. The reports always showed pus cells.",
+          "key": true,
+          "skillId": "skill.hx.bph.riskfactors"
+        },
+        "backpressure_loin_pain": {
+          "cues": [
+            "do you have pain in the loins or flanks",
+            "have you noticed swelling of the feet or face",
+            "do you vomit or feel unusually tired",
+            "any pain in loins",
+            "do slippers feel tight evening"
+          ],
+          "reply": "A dull ache sits in both loins for some weeks. My slippers feel tight by evening, but I have not vomited.",
+          "key": true
+        },
+        "evening_tea_fluid_habit": {
+          "cues": [
+            "evening tea coffee and fluid intake with night time passage of urine",
+            "what time is the final glass of water before sleep",
+            "do you drink alcohol in the evenings",
+            "evening cups of tea and night time frequency of urine",
+            "glasses of water taken at bedtime with night waking to pass urine"
+          ],
+          "reply": "Two cups of strong tea after dinner and a glass of water at bedtime. I take a small peg of liquor on festival days only.",
+          "key": true,
+          "skillId": "skill.hx.bph.riskfactors"
+        },
+        "cold_remedy_before_block": {
+          "cues": [
+            "did you take any cold or cough medicine yesterday",
+            "do you use allergy or sleep tablets regularly",
+            "which new tablet preceded the stoppage of urine",
+            "which cold tablet yesterday evening",
+            "any new tablet before stoppage",
+            "cold tablet yesterday evening",
+            "new tablet before stoppage",
+            "any cold medicine"
+          ],
+          "reply": "Yesterday evening I took the cold capsule from the chemist for a running nose. By midnight the urge came but nothing passed.",
+          "key": true,
+          "skillId": "skill.hx.bph.riskfactors"
+        },
+        "past_discharge_instrument": {
+          "cues": [
+            "did you ever have discharge from the urinary passage",
+            "have you had any tube or camera test through the passage",
+            "was there any injury to the urinary passage",
+            "any discharge from passage ever",
+            "any tube or camera test before"
+          ],
+          "reply": "Never any discharge or injury, and no tube or camera test was ever done. Only now a tube may be needed, the doctor said.",
+          "key": true,
+          "skillId": "skill.hx.bph.riskfactors"
+        },
+        "sugar_pressure_comorbidity": {
+          "cues": [
+            "do you have sugar disease or high blood pressure",
+            "are you taking water tablets for pressure",
+            "have you had stroke weakness or fits",
+            "how long sugar and pressure",
+            "any water tablet for pressure",
+            "tablets for sugar and pressure",
+            "what tablets do you take daily",
+            "what tablets do you take"
+          ],
+          "reply": "Sugar for six years and pressure for four. I take one sugar tablet and one pressure tablet every morning, no water tablet. No stroke or fits.",
+          "key": true,
+          "skillId": "skill.hx.bph.riskfactors"
+        },
+        "erectile_personal_change": {
+          "cues": [
+            "has your erectile function changed in recent years",
+            "did you notice changes in climax or discharge",
+            "is passing motion hard with straining",
+            "any change in erections",
+            "is motion hard with straining"
+          ],
+          "reply": "Erections have weakened over two years, and motion is hard most days with much straining. I have not discussed this with any doctor before.",
+          "key": true,
+          "skillId": "skill.hx.bph.riskfactors"
+        },
+        "tobacco_smoking_years": {
+          "cues": [
+            "do you smoke beedis or cigarettes daily",
+            "do you chew tobacco or gutkha",
+            "since when have you used tobacco",
+            "how many beedis daily",
+            "since when smoking beedis",
+            "do you smoke beedis daily",
+            "chew tobacco or gutkha",
+            "do you smoke beedis"
+          ],
+          "reply": "Beedis, about ten a day since I was twenty five. No chewing.",
+          "key": true
+        },
+        "field_travel_work_life": {
+          "cues": [
+            "what work did you do before retirement",
+            "do you travel long distances without toilets",
+            "how do you manage the urge during travel",
+            "do you hold urine for hours",
+            "what was your work before retirement"
+          ],
+          "reply": "I taught in the village school for thirty years. On bus journeys I avoid drinking water because toilets are dirty, and I hold urine for hours.",
+          "key": true
+        },
+        "family_prostate_history": {
+          "cues": [
+            "did your father or brothers have prostate trouble",
+            "was there prostate cancer in your family",
+            "at what age did their trouble start",
+            "any prostate operation in brother",
+            "any prostate cancer in family"
+          ],
+          "reply": "My elder brother had a prostate operation at seventy and is well. No cancer in the family that I know.",
+          "key": true,
+          "skillId": "skill.hx.bph.riskfactors"
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Anxious elderly man, restless, pressing his suprapubic area. Mild pallor, moist tongue, no jaundice.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 88 regular. Blood pressure 150/90. Respiratory rate 18. SpO2 96 percent on room air. Afebrile.",
+          "abnormal": true
+        },
+        "skill.gen.edema": {
+          "finding": "Mild pitting oedema over both ankles, fading by morning. No facial puffiness.",
+          "abnormal": true
+        },
+        "skill.exam.surg.kidney_palpation": {
+          "finding": "Both kidneys ballotable with mild tenderness at the renal angles. No gross mass felt.",
+          "abnormal": true
+        },
+        "skill.exam.surg.distended_bladder": {
+          "finding": "Globular tense tender midline swelling rising midway to the navel. Cannot get below it. Dull to percussion with a convex upper border.",
+          "abnormal": true
+        },
+        "skill.exam.surg.dre_surgical": {
+          "finding": "Normal anal tone, smooth rectal walls, no mass. No blood or mucus on the glove. Prostate assessed separately.",
+          "abnormal": false
+        },
+        "skill.exam.surg.prostate_dre": {
+          "finding": "Symmetrically enlarged firm rubbery prostate with a smooth surface. Central groove preserved. Rectal lining moves freely. Non-tender. Upper border just reachable.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "usg_kub",
+        "urine_routine",
+        "renal_function",
+        "psa_counselled"
+      ],
+      "investigations": {
+        "usg_kub": {
+          "label": "Ultrasound of kidneys, bladder and prostate",
+          "indicated": true,
+          "result": "Prostate 45 g with median lobe projection. Bladder wall thickened with 280 mL residual urine. No upper tract dilatation. No stone.",
+          "note": "Confirms enlargement with a significant residual and, importantly, still normal upper tracts, so relief now can prevent back-pressure damage."
+        },
+        "urine_routine": {
+          "label": "Urine routine and microscopy",
+          "indicated": true,
+          "result": "Acidic urine with 10 to 12 pus cells per high power field, 2 to 3 red cells, trace protein, no sugar.",
+          "note": "Infection behind residual urine needs a culture before antibiotics; sterile pus in acid urine would instead raise tuberculosis."
+        },
+        "renal_function": {
+          "label": "Blood urea and creatinine",
+          "indicated": true,
+          "result": "Urea 48 mg/dL. Creatinine 1.4 mg/dL, at the upper limit of normal. Sodium and potassium normal.",
+          "note": "A raised urea with creatinine at the upper limit in a retained man warns of back pressure; trend both after relief."
+        },
+        "psa_counselled": {
+          "label": "Counselled serum prostate marker",
+          "indicated": true,
+          "result": "Mildly raised, in keeping with gland volume. Counselled before testing, drawn when free of infection.",
+          "note": "Enlargement itself raises the marker mildly; a high or rising value needs cancer evaluation, and gland-shrinking drugs halve it."
+        },
+        "urine_culture": {
+          "label": "Urine culture and sensitivity",
+          "indicated": true,
+          "result": "Sent before antibiotics. Growth awaited at 48 hours.",
+          "note": "Residual urine breeds infection, so culture before treating; never let it delay catheter relief."
+        },
+        "sugar_hba1c": {
+          "label": "Fasting sugar and HbA1c",
+          "indicated": true,
+          "result": "Fasting sugar mildly raised; HbA1c awaited.",
+          "note": "Sugar disease worsens infection and numbs the bladder, so control is part of the urinary plan."
+        },
+        "uroflow": {
+          "label": "Uroflowmetry",
+          "indicated": true,
+          "result": "Deferred until after the trial without catheter.",
+          "note": "Flow numbers are meaningful only on a relief-assisted void; book it with the catheter-free trial."
+        },
+        "ecg": {
+          "label": "Electrocardiogram",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Not needed tonight; it joins the fitness workup only if an operation is booked."
+        },
+        "cystoscopy": {
+          "label": "Cystoscopy",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Not indicated now: no visible clots, no suspected pocket or growth. Revisit if bleeding recurs or stones are suspected."
+        }
+      },
+      "differentialModel": {
+        "answer": "Benign prostatic enlargement with acute on chronic urinary retention. Consider carcinoma of the prostate, urethral stricture, urinary infection with prostatitis, bladder stone, and a neurogenic bladder from sugar disease.",
+        "accept": [
+          "Benign prostatic hyperplasia",
+          "Carcinoma of the prostate",
+          "Urethral stricture",
+          "Urinary tract infection",
+          "Prostatitis",
+          "Bladder stone",
+          "Neurogenic bladder",
+          "Overactive bladder"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Benign prostatic hyperplasia with acute on chronic urinary retention and early back-pressure change.",
+        "accept": [
+          "Benign prostatic hyperplasia",
+          "BPH",
+          "Chronic urinary retention",
+          "Acute urinary retention"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Relieve with urethral catheterisation and record the drained volume, correct fluids and treat the urinary infection by culture, start an alpha-blocker with a planned trial without catheter, and refer to urology for symptom grading, marker review, discussion of resection, and arranged follow-up.",
+        "accept": [
+          "catheterisation",
+          "drained volume",
+          "culture",
+          "alpha-blocker",
+          "trial without catheter",
+          "urology",
+          "resection",
+          "follow-up"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The tempo tells the type: three years of weak stream ending in hours of painful inability is acute on chronic retention, not a first-night problem.",
+        "A cold capsule the previous evening is the classic trigger: always ask which new medicine preceded the stoppage.",
+        "Overflow dampness for months means the bladder never emptied; the palpable dome, not the leakage story, is the diagnosis.",
+        "A smooth symmetrical gland with a preserved groove favours BPH, but terminal red urine twice still needs growth and stone excluded.",
+        "Urea 48 with creatinine at the upper limit is the kidney asking for relief; trend both after catheterisation and scan the upper tracts.",
+        "Relief comes before assessment: the prostate cannot be judged while the bladder is full, and a trial without catheter needs muscle-relaxant cover and a urology follow-up."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

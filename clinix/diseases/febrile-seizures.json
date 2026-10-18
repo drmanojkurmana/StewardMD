@@ -1,0 +1,1134 @@
+{
+  "_comment": "Paediatric pathway for febrile seizures and first-seizure assessment. Same architecture as pneumonia: shared history, examination and approach skills carry the manoeuvres; this file adds the fit-fever pattern (simple against complex), the restraint workup, and the family counselling plan. New history and presentation skills live in the shared fragment shared-febrile-seizures.json and are merged by the lead.",
+  "id": "febrile-seizures",
+  "name": "Febrile seizures",
+  "fullName": "Febrile seizures and epilepsy in children",
+  "system": "paediatrics",
+  "subtitle": "First seizure approach",
+  "kbRef": "febrile_seizure",
+  "oneLine": "A fit with fever in a young child, and the job of proving it is simple",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "blurb": "What a febrile seizure is, and what it is not",
+      "id": "basics",
+      "skills": [
+        "skill.febrile.basics"
+      ],
+      "title": "Basics"
+    },
+    {
+      "blurb": "Before a single question",
+      "id": "approach",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.paed.rapport",
+        "skill.approach.paed.consent_assent"
+      ],
+      "title": "Approach to the child"
+    },
+    {
+      "blurb": "Age sets the pre-test probability before a symptom is mentioned",
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Age is the whole of particulars here: 18 months sits at the peak of febrile seizures, while the same fit at 7 years or 3 months would be a different disease. Note residence and referral distance too, since a rural family needs clearer red-flag advice and a nearer review."
+        }
+      },
+      "id": "particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "title": "Patient particulars"
+    },
+    {
+      "blurb": "Fever hours, fit minutes, recovery hour",
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A fit history reads as one event with a clock: fever for hours, fit for minutes, recovery within the hour. Get that skeleton before any detail, and pin who timed the fit."
+        },
+        "skill.hx.paed.presenting_complaint": {
+          "expect": "Expect the mother's story to start mid-fit. Rewind her to the fever first, then walk forward through the shaking, the sleep after, and the child you see now."
+        }
+      },
+      "id": "history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.paed.presenting_complaint",
+        "skill.hx.febrile.seizure_story"
+      ],
+      "title": "History of the fit"
+    },
+    {
+      "blurb": "Development, vaccines, and the family tendency",
+      "emphasis": {
+        "skill.hx.paed.development": {
+          "expect": "Normal milestones are part of the simple definition. Any delay or regression breaks it and moves the child towards neurology review."
+        },
+        "skill.hx.paed.immunisation": {
+          "expect": "See the card. Incomplete protection lowers the bar for lumbar puncture, and a febrile fit is never a reason to withhold future vaccines."
+        }
+      },
+      "id": "past_personal_drug_family",
+      "skills": [
+        "skill.hx.paed.development",
+        "skill.hx.paed.immunisation",
+        "skill.hx.febrile.risks"
+      ],
+      "title": "Background history"
+    },
+    {
+      "blurb": "A recovered child, and the fever that remains",
+      "emphasis": {
+        "skill.gen.paed.appearance": {
+          "expect": "Expect a recovered, playful child between events. Drowsiness past the hour, irritability, or a toxic look breaks the simple picture."
+        },
+        "skill.gen.paed.vitals": {
+          "expect": "Fever at presentation is expected; what matters is the trend back to playful. Tachycardia with fever alone is not a red flag, but hypotension or desaturation is never part of a simple fit."
+        },
+        "skill.gen.paed.lymph_nodes": {
+          "expect": "Shotty cervical nodes with a red throat name the fever. Large, matted, or generalised nodes point elsewhere."
+        }
+      },
+      "id": "general_exam",
+      "skills": [
+        "skill.gen.paed.appearance",
+        "skill.gen.paed.vitals",
+        "skill.gen.paed.lymph_nodes"
+      ],
+      "title": "General examination"
+    },
+    {
+      "blurb": "Meninges, sensorium, and the criteria checklist",
+      "emphasis": {
+        "skill.exam.paed.cns.meningeal": {
+          "expect": "A supple neck in a playful toddler after a simple fit closes the meningitis question clinically. In an infant under a year, a supple neck does not close it."
+        },
+        "skill.exam.paed.cns.higher_mental_gcs": {
+          "expect": "Full alertness appropriate for age is the expected finding. Anything less than baseline an hour on is abnormal and reopens the workup."
+        },
+        "skill.exam.paed.cns.motor_tone_power": {
+          "expect": "Check for Todd paresis: a new one-sided weakness after the fit makes it complex even if everything else was simple."
+        },
+        "skill.exam.paed.cns.febrile_seizure": {
+          "expect": "Run the criteria as a checklist: generalised, minutes, single, recovered. One miss makes it complex."
+        }
+      },
+      "id": "systemic_exam",
+      "skills": [
+        "skill.exam.paed.cns.meningeal",
+        "skill.exam.paed.cns.higher_mental_gcs",
+        "skill.exam.paed.cns.motor_tone_power",
+        "skill.exam.paed.cns.febrile_seizure"
+      ],
+      "title": "Neurological examination"
+    },
+    {
+      "blurb": "One story, one clock, one recovery",
+      "id": "disease_findings",
+      "skills": [
+        "skill.febrile.picture"
+      ],
+      "title": "Putting the simple picture together"
+    },
+    {
+      "blurb": "Three sentences that contain the case",
+      "id": "summary",
+      "skills": [
+        "skill.febrile.summary"
+      ],
+      "title": "Clinical summary"
+    },
+    {
+      "blurb": "Brain infection first, the rest by exclusion",
+      "id": "differential",
+      "skills": [
+        "skill.febrile.differential"
+      ],
+      "title": "Differential diagnosis"
+    },
+    {
+      "blurb": "Find the fever, tap the selected few, image almost none",
+      "emphasis": {
+        "skill.annex.paed.csf_analysis": {
+          "expect": "Normal CSF for age is the expected result when a tap is done to exclude infection. Know the pyogenic, tuberculous, and viral patterns so an abnormal tap is recognised at once."
+        }
+      },
+      "id": "investigations",
+      "skills": [
+        "skill.investigation.febrile.workup",
+        "skill.annex.paed.csf_analysis"
+      ],
+      "title": "Investigations"
+    },
+    {
+      "blurb": "Simple, complex, or something else entirely",
+      "id": "diagnosis",
+      "skills": [
+        "skill.febrile.diagnosis"
+      ],
+      "title": "Diagnosis"
+    },
+    {
+      "blurb": "Airway, comfort, counselling, and referral",
+      "emphasis": {
+        "skill.tx.paed.anticonvulsants": {
+          "expect": "If the fit is still going at 5 minutes, stop calling it a febrile seizure and run this status ladder. The febrile care skill covers the brief fit; this one covers the fit that will not stop."
+        }
+      },
+      "id": "treatment",
+      "skills": [
+        "skill.treatment.febrile.care",
+        "skill.tx.paed.anticonvulsants"
+      ],
+      "title": "Treatment"
+    },
+    {
+      "blurb": "Present this child to your consultant",
+      "id": "case",
+      "skills": [
+        "skill.present.case",
+        "skill.present.febrile.case"
+      ],
+      "title": "Case presentation"
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "examinerQuestions": [
+          "You found a supple neck and a fully alert child. Does that exclude meningitis here, and would your answer change at 8 months of age?",
+          "Count the simple criteria from what you found. Which single finding would have made this complex?",
+          "The mother asks for a scan to be safe. How do you explain why none is needed?"
+        ],
+        "id": "osce.febrile.recovery_exam",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.paed.consent_assent",
+          "skill.gen.paed.vitals",
+          "skill.exam.paed.cns.meningeal",
+          "skill.exam.paed.cns.higher_mental_gcs",
+          "skill.exam.paed.cns.febrile_seizure"
+        ],
+        "task": "This 20-month-old boy had a generalised fit with fever this morning and is now awake and playful. Assess his recovery and exclude central nervous system infection.",
+        "title": "Assess the child after a fit with fever"
+      },
+      {
+        "examinerQuestions": [
+          "Was this fit simple or complex? Defend your answer from the story alone.",
+          "What will you tell the mother about the chance of another fit and the risk of epilepsy?",
+          "She asks for a daily medicine to prevent the next fit. What is your answer, and why?"
+        ],
+        "id": "osce.febrile.fit_history",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.paed.consent_assent",
+          "skill.hx.chief_complaints",
+          "skill.hx.paed.presenting_complaint",
+          "skill.hx.febrile.seizure_story",
+          "skill.hx.febrile.risks"
+        ],
+        "task": "This mother reports her 18-month-old daughter shook all over with fever last night. Take a focused history in six minutes and be ready to counsel her on recurrence and first aid.",
+        "title": "Take the fit history and counsel the mother"
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.febrile.basics",
+      "skill.exam.paed.cns.febrile_seizure",
+      "skill.febrile.picture",
+      "skill.febrile.differential",
+      "skill.investigation.febrile.workup",
+      "skill.febrile.diagnosis",
+      "skill.treatment.febrile.care",
+      "skill.annex.paed.csf_analysis"
+    ]
+  },
+  "skills": {
+    "skill.febrile.basics": {
+      "body": "A febrile seizure is a seizure that comes with fever in a child between about 6 months and 5 years, with no infection of the brain and no earlier seizure without fever.",
+      "id": "skill.febrile.basics",
+      "keyPoints": [
+        "Four clauses make the definition: age in the window, fever present at the time, no meningitis or encephalitis, and no history of afebrile seizures. Miss one and the label is wrong.",
+        "Simple fits are generalised, last under 15 minutes, and happen once in the day. Focal, prolonged, or repeated within 24 hours means complex.",
+        "The developing brain seizes more easily with fever, helped by fever chemicals and family tendency, and most children outgrow the tendency as the brain matures.",
+        "Diagnosis is clinical. The main task after seeing the fit is to find the fever and to exclude brain infection, not to prove the seizure on a machine.",
+        "Most fits are brief and stop on their own. The outlook is excellent, with normal development in the great majority."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "A fit with fever in a young child, without brain infection and without prior epilepsy",
+      "pitfalls": [
+        "Calling any fit with fever febrile without checking age and prior afebrile seizures.",
+        "Treating a focal or prolonged fit as simple because the child looks well now.",
+        "Ordering the workup before taking the witness account, which is what actually classifies the fit."
+      ],
+      "probes": [
+        {
+          "a": "Age between 6 months and 5 years, fever at the time, no brain infection, and no prior seizure without fever.",
+          "accept": [
+            "6 months",
+            "fever",
+            "brain infection",
+            "without fever"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What four conditions must hold before a fit is called a febrile seizure?"
+        },
+        {
+          "a": "Simple fits are generalised, last under 15 minutes, and do not recur within 24 hours.",
+          "accept": [
+            "generalised",
+            "15 minutes",
+            "24 hours"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What separates a simple febrile seizure from a complex one?"
+        },
+        {
+          "a": "The age is outside the 6 months to 5 years window, so the fit needs a full epilepsy and brain infection workup instead.",
+          "accept": [
+            "outside",
+            "window",
+            "epilepsy"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "A 7-year-old has a first fit with fever. Why is febrile seizure the wrong label?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "febrile_seizure: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Febrile seizures: definition and classification",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Age between about 6 months and 5 years. Fever present when the fit happens. No infection of the brain or its coverings. No earlier fit without fever. Each clause excludes a different mimic: age excludes neonatal fits, fever excludes afebrile epilepsy, no brain infection excludes meningitis, and no prior afebrile fit excludes epilepsy with a coincidental fever.",
+          "heading": "The four clauses of the definition"
+        },
+        {
+          "heading": "Simple against complex",
+          "points": [
+            "Generalised stiffening and jerking of the whole body, not one side.",
+            "Under 15 minutes by the clock.",
+            "Once only within 24 hours.",
+            "Full recovery with no focal weakness after.",
+            "Anything else, focal, prolonged, repeated, or followed by weakness, is complex."
+          ]
+        },
+        {
+          "body": "The young brain is more excitable, fever chemicals lower the threshold further, and family clustering shows the tendency is inherited. As the brain matures the tendency fades, which is why most children outgrow it and development stays normal.",
+          "heading": "Why fever provokes fits at this age"
+        }
+      ],
+      "title": "What a febrile seizure is",
+      "why": "The definition does the first half of the work: age window, fever present, no central infection, no prior afebrile seizure. A fit that fails any clause is a different disease with a different plan."
+    },
+    "skill.febrile.picture": {
+      "body": "A well child between 6 months and 5 years has a single generalised fit of minutes with fever, wakes up fully within the hour, and shows a clear fever focus with no meningeal signs and no focal deficit.",
+      "id": "skill.febrile.picture",
+      "keyPoints": [
+        "Tempo: fever first, fit within about a day, single episode, brief. That order rules out fits that precede fever or cluster through the day.",
+        "The fit: generalised stiffening and jerking, minutes by the clock, no focal onset, no repeat within 24 hours.",
+        "The child after: brief sleepiness then back to baseline within the hour, playful, feeding, no weakness on one side.",
+        "The examination: fever present, an ordinary focus such as a red throat or runny nose, neck supple, fontanelle flat where still open, no focal neurology.",
+        "The pattern that breaks it: age outside the window, focal features, past 15 minutes, repeat fits, slow recovery, meningeal signs, or a toxic, drowsy child."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "One story, one clock, one recovery: the pattern that needs no test",
+      "pitfalls": [
+        "Letting a well appearance now erase a focal onset the witness described.",
+        "Calling recovery complete while the child is still drowsy and unfed.",
+        "Missing the fever focus, which leaves the meningitis question open."
+      ],
+      "probes": [
+        {
+          "a": "A single generalised fit of minutes with fever, full recovery within the hour, a clear fever focus, and no meningeal signs or focal deficit.",
+          "accept": [
+            "generalised",
+            "recovery",
+            "fever focus",
+            "meningeal"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What does the complete simple picture look like at the bedside?"
+        },
+        {
+          "a": "Complex, because a focal onset makes it complex even when the recovery looks perfect.",
+          "accept": [
+            "complex",
+            "focal",
+            "onset"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "The child is playful an hour later but the eyes turned to one side at the start. Simple or complex?"
+        },
+        {
+          "a": "It explains the fever without invoking brain infection, so meningitis becomes far less likely.",
+          "accept": [
+            "explains",
+            "meningitis",
+            "likely"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why does a visible fever focus matter to the diagnosis?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "febrile_seizure: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Febrile seizures: simple versus complex",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Fever, then one generalised fit of minutes, then full waking within the hour, all in a child of the right age with a visible fever focus. When every link holds, the picture is complete and further tests add nothing.",
+          "heading": "The bedside sequence"
+        },
+        {
+          "heading": "Red flags that break the picture",
+          "table": {
+            "cols": [
+              "Red flag",
+              "What it means"
+            ],
+            "rows": [
+              [
+                "Meningeal signs or bulging fontanelle",
+                "Treat as brain infection until proven otherwise"
+              ],
+              [
+                "Focal fit or focal weakness after",
+                "Complex fit, needs neurology input and imaging"
+              ],
+              [
+                "Fit past 15 minutes or repeated in the day",
+                "Complex fit, observe and work up"
+              ],
+              [
+                "Slow recovery beyond the hour",
+                "Reconsider infection or a metabolic cause"
+              ],
+              [
+                "Age outside 6 months to 5 years",
+                "Not a febrile seizure by definition"
+              ]
+            ]
+          }
+        }
+      ],
+      "title": "Putting the simple febrile fit together",
+      "why": "A simple febrile seizure is recognised, not investigated, into being. The student who holds the whole pattern can close the case at the bedside, while the student holding single signs orders tests that cannot change the answer."
+    },
+    "skill.febrile.summary": {
+      "body": "Three sentences carry it: the child and the fit-fever sequence, the criteria with the relevant negatives, and the diagnosis with the home plan.",
+      "id": "skill.febrile.summary",
+      "keyPoints": [
+        "Sentence one: age, development, fever focus, and the single fit with its clock time.",
+        "Sentence two: simple criteria counted aloud, plus no fit without fever, no meningeal signs, no deficit, alert now.",
+        "Sentence three: simple febrile seizure, with reassurance, first-aid teaching, comfort measures, safety net, and review.",
+        "A worked summary: This 18-month-old developmentally normal boy had a single generalised fit of about 3 minutes with fever from a viral throat infection, recovering fully within the hour. There was no prior afebrile fit, no meningeal signs, and no focal deficit. This is a simple febrile seizure, and the plan is reassurance with first-aid teaching and safety-net advice."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "Age and tempo, criteria and negatives, plan in one breath",
+      "pitfalls": [
+        "Summarising without the clock time.",
+        "Listing tests before the story, which buries the clinical diagnosis.",
+        "Ending without the home plan."
+      ],
+      "probes": [
+        {
+          "a": "The child and the fit-fever sequence, the criteria with the negatives, and the diagnosis with the plan.",
+          "accept": [
+            "sequence",
+            "negatives",
+            "plan"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What do the three sentences of the summary carry?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "febrile_seizure: prognosis",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Febrile seizures: counselling and follow-up",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Child and sequence first, criteria and negatives second, diagnosis and plan third. Nothing else belongs: tests not done are mentioned only to say why they were not needed.",
+          "heading": "The three-sentence frame"
+        },
+        {
+          "body": "No prior fit without fever, neck supple, no focal weakness, alert and feeding now. Each negative closes one mimic, and saying them is what proves meningitis and complex fits were considered.",
+          "heading": "Saying the negatives aloud"
+        }
+      ],
+      "title": "Summarising the febrile fit in three sentences",
+      "why": "A summary forces the criteria count and the negatives into the open. A student who cannot say the minutes and the recovery has not finished the case."
+    },
+    "skill.febrile.differential": {
+      "body": "Every fit with fever is meningitis or encephalitis until the examination says otherwise, then epilepsy with a coincidental fever, then rigors, metabolic upset, breath-holding, and structural brain disease.",
+      "id": "skill.febrile.differential",
+      "keyPoints": [
+        "Meningitis and encephalitis: neck stiffness, altered consciousness, bulging fontanelle, or a toxic, unwell child. Young and incompletely immunised infants may show little, which is why the threshold for lumbar puncture stays low in them.",
+        "Epilepsy with coincidental fever: any prior afebrile seizure changes everything. Ask until certain, because one such fit reframes the child as epilepsy and the plan as neurology referral.",
+        "Rigors and shivering: a shaking chill with high fever can look like a fit to a frightened parent. Consciousness is preserved throughout a rigor, while a generalised fit takes awareness away.",
+        "Metabolic mimics: low glucose or low sodium can both provoke fits with fever. Check glucose in any child slow to recover, and electrolytes where dehydration or an atypical course suggests them.",
+        "Breath-holding spells: crying, then blue and limp, usually triggered by upset or pain in a toddler. There is no fever at the time, which separates them cleanly.",
+        "Structural causes: a first focal fit, persistent deficit, or fits outside the age window should raise a bleed, tumour, or malformation, and earn imaging."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "Brain infection first, epilepsy with fever next, the rest by exclusion",
+      "pitfalls": [
+        "Assuming fever excludes meningitis in a young infant.",
+        "Calling recurrent fits febrile without asking about afebrile ones.",
+        "Labelling a breath-holding spell epilepsy because nobody asked about fever at the time."
+      ],
+      "probes": [
+        {
+          "a": "Meningitis or encephalitis, by neck stiffness, consciousness, fontanelle, and the general state of the child.",
+          "accept": [
+            "meningitis",
+            "neck",
+            "consciousness"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What must be excluded first in any fit with fever, and how?"
+        },
+        {
+          "a": "Awareness is preserved through a rigor and lost in a generalised fit, and the child is alert once the chill passes.",
+          "accept": [
+            "awareness",
+            "preserved",
+            "lost"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "How do you separate a rigor from a fit from the story alone?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "febrile_seizure: additionalDifferentials",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Seizures in childhood: differential diagnosis",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Brain infection first because it kills fastest, epilepsy next because it changes the label, then rigors, metabolic causes, breath-holding, and structural disease. The order is by danger and by how often each fools the unwary, not alphabetically.",
+          "heading": "Ruling out in order"
+        },
+        {
+          "heading": "Fit against rigor at the bedside",
+          "table": {
+            "cols": [
+              "Feature",
+              "Fit",
+              "Rigor"
+            ],
+            "rows": [
+              [
+                "Awareness",
+                "Lost during the event",
+                "Preserved throughout"
+              ],
+              [
+                "Movements",
+                "Rhythmic jerking with stiffness",
+                "Shivering tremor of a chill"
+              ],
+              [
+                "Afterwards",
+                "Sleepy, then recovers",
+                "Alert once the chill passes"
+              ],
+              [
+                "Fever pattern",
+                "Fit rides on the fever",
+                "Shaking comes with rising fever"
+              ]
+            ]
+          }
+        }
+      ],
+      "title": "What else a fit with fever can be",
+      "why": "Fever does not exclude meningitis, and a fit does not prove epilepsy. The differential is a safety list ordered by what kills, and brain infection sits at the top until the neck, the fontanelle, and the sensorium clear it."
+    },
+    "skill.investigation.febrile.workup": {
+      "body": "Assess the fever focus first, check glucose in the drowsy or slow to recover, tap the spinal fluid where brain infection is suspected or the infant is very young, and reserve EEG and imaging for complex, focal, or atypical fits.",
+      "id": "skill.investigation.febrile.workup",
+      "keyPoints": [
+        "Fever workup comes first: ears, throat, chest, urine, and rash. Naming the illness explains the fever and usually ends the investigation there.",
+        "Blood glucose in any child drowsy or slow to recover. Low sugar both mimics and complicates, and the test takes a minute.",
+        "Lumbar puncture where meningeal signs exist, in infants under about a year, in the incompletely immunised, or where the picture is atypical. Prior antibiotics can mask meningitis, so a treated child is tapped more readily.",
+        "Electrolytes only where indicated: dehydration, vomiting with fluid loss, or an atypical course. Not routine.",
+        "No routine blood counts, imaging, or EEG after a simple fit in a well child. EEG and scans belong to complex, focal, recurrent, or developmentally abnormal cases and to children with an abnormal examination."
+      ],
+      "kind": "investigation",
+      "media": [],
+      "oneLine": "Find the fever, check glucose, tap selected cases, image almost none",
+      "pitfalls": [
+        "Blanket bloods and a scan for every first fit.",
+        "Skipping glucose in the child slow to wake.",
+        "Deferring lumbar puncture in a small infant because the neck is supple."
+      ],
+      "probes": [
+        {
+          "a": "Finding the fever focus and checking blood glucose where recovery is slow.",
+          "accept": [
+            "fever focus",
+            "glucose"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Which two bedside steps belong to every fit-with-fever workup?"
+        },
+        {
+          "a": "Meningeal signs, a very young or incompletely immunised infant, or an atypical picture.",
+          "accept": [
+            "meningeal",
+            "immunised",
+            "atypical"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "When is lumbar puncture indicated?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "febrile_seizure: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Febrile seizures: evaluation and lumbar puncture indications",
+          "source": "IAP Guidelines on Febrile Seizures"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Order the fever hunt and a glucose where recovery lags. Withhold routine bloods, scans, and EEG in the well child after a simple fit. The restraint is the teaching: a normal scan never made a simple fit simpler.",
+          "heading": "What to order and what to withhold"
+        },
+        {
+          "body": "Meningeal signs, a bulging fontanelle, altered consciousness, age under about a year with a first fit, incomplete immunisation, or an atypical story. In these children the tap excludes the killer, and delay costs more than the procedure.",
+          "heading": "When the needle goes in"
+        }
+      ],
+      "title": "Investigating the fit with fever",
+      "why": "Most tests after a simple fit comfort the doctor, not the child. The workup earns its keep only where it finds the fever, catches a metabolic cause, or proves the brain is infected."
+    },
+    "skill.febrile.diagnosis": {
+      "body": "A generalised fit under 15 minutes, once in 24 hours, with fever in a normal child of the right age who recovers within the hour is simple; any focal, prolonged, repeated, or poorly recovered fit is complex; anything failing the definition is something else.",
+      "id": "skill.febrile.diagnosis",
+      "keyPoints": [
+        "Commit to simple only when every clause holds: right age, fever, generalised, brief, single, full recovery, normal development, no afebrile fits.",
+        "One complex feature makes the whole fit complex. Complex earns neurology input, EEG, and imaging where focal, plus closer follow-up.",
+        "Fits outside 6 months to 5 years, fits without fever in the history, and fits with persistent deficit are not febrile seizures at all.",
+        "Document the fork explicitly: which criteria were met, which negatives were checked, and why the mimics were set aside."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "Count the criteria, name the mimic, or commit to simple",
+      "pitfalls": [
+        "Leaving the diagnosis as febrile seizure without saying simple or complex.",
+        "Calling repeated fits in a day simple because each was brief.",
+        "Missing the old afebrile fit that reframes everything."
+      ],
+      "probes": [
+        {
+          "a": "Complex febrile seizure, because duration past 15 minutes alone makes it complex.",
+          "accept": [
+            "complex",
+            "15 minutes",
+            "duration"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "A fit lasted 20 minutes but was generalised and single. What is the diagnosis?"
+        },
+        {
+          "a": "Age outside the window, a prior fit without fever, or persistent neurological deficit.",
+          "accept": [
+            "outside",
+            "without fever",
+            "deficit"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "What in the history would stop you calling it a febrile seizure at all?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "febrile_seizure: redFlags",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Febrile seizures: evaluation",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Simple when all clauses hold. Complex when one clause of type, time, or recurrence fails but fever and age fit. Another disease when age, afebrile history, or examination breaks the definition. Name the exit in the notes, not just the fit.",
+          "heading": "The three exits"
+        },
+        {
+          "heading": "What complex changes",
+          "points": [
+            "Neurology referral rather than routine review.",
+            "EEG and imaging where focal or atypical, not blanket.",
+            "Closer follow-up for recurrence and later epilepsy risk.",
+            "Parents counselled that the outlook is still good but the watch is closer."
+          ]
+        }
+      ],
+      "title": "Diagnosing simple, complex, and not-a-febrile-seizure",
+      "why": "The diagnosis is a fork with three exits: simple, complex, or another disease entirely. Each exit carries its own workup and follow-up, so a vague middle label strands the child."
+    },
+    "skill.treatment.febrile.care": {
+      "body": "Protect the airway with positioning during the fit, give rescue benzodiazepine only for a prolonged or ongoing seizure, treat the febrile illness with an antipyretic for comfort, exclude brain infection, counsel the family, and refer complex or atypical cases to paediatric neurology.",
+      "dosingNote": "CliniX does not prescribe. No drug doses are quoted in this skill because the cited sources give the management sequence without paediatric doses; the treating team's own protocol and the current hospital formulary decide any rescue medicine given.",
+      "id": "skill.treatment.febrile.care",
+      "keyPoints": [
+        "During the fit: lay the child on the side, clear only visible obstruction from the mouth, time the fit, give oxygen where available, and check glucose. Nothing goes into the mouth of a fitting child.",
+        "Rescue benzodiazepine is for the prolonged or ongoing fit, as in status epilepticus, with airway support. A brief fit that has already stopped needs observation, not rescue medicine.",
+        "Treat the fever for comfort with paracetamol or ibuprofen, and treat the illness behind it. Antipyretics do not prevent recurrence, and families should hear that plainly.",
+        "No daily anticonvulsant for simple fits. Continuous prophylaxis is not recommended; the harms outweigh a recurrence that is itself brief and benign.",
+        "Counsel every family: fits look worse than they are, recurrence affects about a third, later epilepsy risk after simple fits is small, and first aid with red flags is the discharge prescription.",
+        "Refer to paediatric neurology for complex, atypical, recurrent, or developmentally abnormal cases. In a primary care or rural post, stabilise, exclude infection, and refer up where red flags exist."
+      ],
+      "kind": "treatment",
+      "media": [],
+      "oneLine": "Protect the airway, treat the fever for comfort, counsel, and refer the complex",
+      "pitfalls": [
+        "Giving rescue medicine after a brief fit that already stopped.",
+        "Promising that antipyretics prevent the next fit.",
+        "Starting a daily anticonvulsant for a simple fit."
+      ],
+      "probes": [
+        {
+          "a": "Side positioning with airway protection, timing the fit, oxygen where available, and a glucose check.",
+          "accept": [
+            "positioning",
+            "airway",
+            "glucose"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What are the first steps when a child is fitting with fever?"
+        },
+        {
+          "a": "Only for a prolonged or ongoing seizure, with airway support, as in status epilepticus.",
+          "accept": [
+            "prolonged",
+            "ongoing",
+            "airway"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "When is rescue benzodiazepine given?"
+        },
+        {
+          "a": "Antipyretics give comfort but do not prevent recurrence, and daily anticonvulsants are not recommended for simple fits.",
+          "accept": [
+            "comfort",
+            "prevent",
+            "daily"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "What should the family hear about antipyretics and daily medicines?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "febrile_seizure: management",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Convulsions: emergency management in children",
+          "source": "WHO Emergency Triage Assessment and Treatment"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Side position, timed fit, airway watched, glucose checked, oxygen where available. A fit of a few minutes that stops on its own needs no rescue drug, only a calm clock and a clear airway.",
+          "heading": "The minutes of the fit"
+        },
+        {
+          "heading": "The discharge conversation",
+          "points": [
+            "What happened and why it looks frightening but is usually brief.",
+            "First aid for the next fit: side position, timing, nothing in the mouth, when to rush.",
+            "Antipyretic for comfort, not for prevention.",
+            "Red flags: prolonged fit, repeat fits, drowsiness, rash, neck stiffness.",
+            "Review with the vaccine card, and no daily fit medicine for simple fits."
+          ]
+        }
+      ],
+      "title": "Managing the febrile fit and the family",
+      "why": "The fit usually ends before any drug could work, so management is mostly what happens around the fit: safe positioning, the fever treated for comfort, the killer excluded, the parents equipped, and the complex child referred."
+    }
+  },
+  "cases": [
+    {
+      "diagnosis": {
+        "accept": [
+          "Simple febrile seizure",
+          "simple febrile convulsion",
+          "Febrile seizure"
+        ],
+        "answer": "Simple febrile seizure: a single generalised fit of about 3 minutes with fever in an 18-month-old with normal development, full recovery within the hour, a viral fever focus, and no meningeal signs.",
+        "minMatch": 1
+      },
+      "differentialModel": {
+        "accept": [
+          "Bacterial meningitis",
+          "Viral encephalitis",
+          "Seizure disorder",
+          "Breath-holding spell",
+          "Hypoglycaemia",
+          "Complex febrile seizure"
+        ],
+        "answer": "A first single generalised fit with fever in a developmentally normal 18-month-old with a viral upper respiratory focus and full recovery. Meningitis and encephalitis are the first exclusions, then epilepsy with coincidental fever, with rigors, metabolic upset, breath-holding, and a complex fit itself in the list.",
+        "minMatch": 2
+      },
+      "essentialInvestigations": [
+        "glucose",
+        "urine_routine"
+      ],
+      "exam": {
+        "skill.exam.paed.cns.febrile_seizure": {
+          "abnormal": true,
+          "finding": "Single generalised fit of about 3 minutes with fever, full recovery within the hour, right age with normal development. Meets simple febrile seizure criteria; no focal, prolonged, or repeated features."
+        },
+        "skill.exam.paed.cns.higher_mental_gcs": {
+          "abnormal": false,
+          "finding": "Alert, tracks the mother with the eyes, babbles, reaches for the torch. Paediatric Glasgow 15 of 15 with age appropriate response."
+        },
+        "skill.exam.paed.cns.meningeal": {
+          "abnormal": false,
+          "finding": "Neck supple with full passive flexion, Kernig and Brudzinski absent, no photophobia. No meningeal irritation."
+        },
+        "skill.exam.paed.cns.motor_tone_power": {
+          "abnormal": false,
+          "finding": "Normal bulk and tone in all limbs, moves all four limbs equally against gravity, no asymmetry to suggest Todd paresis. Plantars flexor."
+        },
+        "skill.exam.paed.gi.oral_upper": {
+          "abnormal": true,
+          "finding": "Throat congested with clear nasal discharge, no ear discharge, no tugging. A viral upper respiratory focus for the fever."
+        },
+        "skill.gen.paed.appearance": {
+          "abnormal": false,
+          "finding": "Awake, alert and playful toddler sitting on the mother's lap. No respiratory distress, feeds eagerly. Post-febrile but not toxic."
+        },
+        "skill.gen.paed.lymph_nodes": {
+          "abnormal": false,
+          "finding": "Small shotty jugular and submandibular nodes, soft and mobile. No large, matted, or generalised nodes."
+        },
+        "skill.gen.paed.vitals": {
+          "abnormal": true,
+          "finding": "Temperature 38.6 C axillary with warm peripheries, heart rate 128 per minute, respiratory rate 30 per minute, SpO2 98 percent on air, blood pressure 86 over 54. Fever present but perfusion and saturation normal."
+        }
+      },
+      "fallback": "I do not understand, doctor. My son shook all over with fever, that is all I know. Can you ask in a simpler way?",
+      "history": {
+        "birth_development": {
+          "cues": [
+            "how was the pregnancy and birth",
+            "birth weight and cry at birth",
+            "sitting walking and speaking milestones",
+            "any delay in milestones"
+          ],
+          "key": true,
+          "reply": "Full term normal delivery in the government hospital, cried at once, weight two and a half kilos. Sat at 7 months, walked at 13 months, speaks a few words with meaning. No delay."
+        },
+        "danger_review": {
+          "cues": [
+            "any neck stiffness noticed",
+            "any continuous vomiting",
+            "any rash with the fever",
+            "any long unconsciousness"
+          ],
+          "key": true,
+          "reply": "No stiff neck, vomited once last evening, no rash anywhere. He never became fully unconscious, only sleepy after the fit."
+        },
+        "drugs_given": {
+          "cues": [
+            "what medicine did you give for the fever",
+            "any syrup given for fever",
+            "any antibiotic started outside",
+            "any medicine for fits"
+          ],
+          "key": true,
+          "reply": "I gave paracetamol syrup twice for the fever. No antibiotic, no fit medicine. In casualty they gave one fever syrup and watched him."
+        },
+        "family_fits": {
+          "cues": [
+            "any fits in the family",
+            "did parents have fits with fever as children",
+            "anyone with epilepsy at home"
+          ],
+          "key": true,
+          "reply": "My husband had fits with fever as a small child, my mother-in-law says. Nobody has regular fits or takes fit medicine."
+        },
+        "feeding_diet": {
+          "cues": [
+            "what does the child eat in a day",
+            "milk and family foods daily",
+            "appetite since the fever began"
+          ],
+          "key": true,
+          "reply": "Breastfed till one year, now buffalo milk twice, dal roti mashed, khichdi, banana. Eating less since the fever but drinking milk."
+        },
+        "fever_illness": {
+          "cues": [
+            "tell me about the fever",
+            "how high was the fever",
+            "any cold cough or runny nose",
+            "any ear pain or tugging",
+            "any loose stools or vomiting"
+          ],
+          "key": true,
+          "reply": "Fever since yesterday afternoon, high to touch, with cold, runny nose and cough for two days. No ear pulling, no vomiting, no loose motions. Throat looked red, my elder daughter has the same cold."
+        },
+        "home_care": {
+          "cues": [
+            "who looks after the child at home",
+            "how many people live in the house",
+            "water and toilet at home"
+          ],
+          "key": true,
+          "reply": "I look after him, my mother-in-law helps. Five people in two rooms. Tap water, shared toilet in the lane."
+        },
+        "immunisation_record": {
+          "cues": [
+            "which vaccines has the child received",
+            "is the vaccination card available",
+            "any vaccine in the last few days",
+            "any missed vaccine doses"
+          ],
+          "key": true,
+          "reply": "All vaccines taken on time from the anganwadi, card is at home. No vaccine in the last month. Measles vaccine was given at 9 months."
+        },
+        "past_fits": {
+          "cues": [
+            "any fit before this episode",
+            "any shaking without fever ever",
+            "any fits in the past"
+          ],
+          "key": true,
+          "reply": "Never before. This is the first time he shook like this, and he never had any fit without fever."
+        },
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "what is the problem with your child",
+            "why have you come to hospital",
+            "tell me what happened",
+            "any complaint today"
+          ],
+          "key": true,
+          "reply": "Doctor, my son Ishaan shook all over yesterday evening with high fever. It lasted a few minutes and then he slept. He is awake now but I am frightened it will come back.",
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "recovery_after": {
+          "cues": [
+            "how was the child after the fit",
+            "is the child back to normal now",
+            "how long did he sleep after",
+            "is he feeding and playing now"
+          ],
+          "key": true,
+          "reply": "He slept about half an hour, then woke up crying and asked for milk. Since morning he is playing and eating like before. No weakness of hands or legs."
+        },
+        "seizure_event": {
+          "cues": [
+            "what happened during the fit",
+            "describe the shaking episode",
+            "how long did the shaking last",
+            "was the whole body shaking",
+            "did the fit happen again"
+          ],
+          "key": true,
+          "reply": "He was hot with fever since afternoon. In the evening his whole body went stiff and then shook all over, eyes rolled up, for about 3 minutes by the wall clock. It happened only once. He passed urine during it and then slept for half an hour.",
+          "skillId": "skill.hx.febrile.seizure_story"
+        },
+        "urine_symptoms": {
+          "cues": [
+            "any burning while passing urine",
+            "how often is the child passing urine",
+            "any foul smelling urine",
+            "any crying while passing urine"
+          ],
+          "key": true,
+          "reply": "Passes urine normally, no crying, no burning, no bad smell. About six wet nappies a day."
+        }
+      },
+      "id": "case.febrile.ishaan",
+      "initialVitals": {
+        "bpDiastolic": 54,
+        "bpSystolic": 86,
+        "gcs": 15,
+        "hr": 128,
+        "rr": 30,
+        "spo2": 98,
+        "temp": 38.6
+      },
+      "investigations": {
+        "cbc": {
+          "indicated": false,
+          "label": "Complete blood count",
+          "note": "Routine blood counts do not change care in a well child with a clear viral focus.",
+          "result": "Not ordered."
+        },
+        "ct_head": {
+          "indicated": false,
+          "label": "CT head",
+          "note": "No focal features, no trauma, no persistent deficit; imaging would add radiation without answers.",
+          "result": "Not ordered."
+        },
+        "eeg": {
+          "indicated": false,
+          "label": "Electroencephalogram",
+          "note": "Not indicated after a simple fit with normal examination and development.",
+          "result": "Not ordered."
+        },
+        "electrolytes": {
+          "indicated": false,
+          "label": "Serum electrolytes",
+          "note": "Reserved for dehydration, fluid loss, or an atypical course; none here.",
+          "result": "Not ordered."
+        },
+        "glucose": {
+          "indicated": true,
+          "label": "Bedside capillary glucose",
+          "note": "Low sugar mimics fits and must be excluded in any slow recovery; here it is normal.",
+          "result": "Normal, well above the low range."
+        },
+        "lumbar_puncture": {
+          "indicated": false,
+          "label": "Lumbar puncture with CSF study",
+          "note": "No meningeal signs, fully immunised, clear viral focus, and older than a year. It would be done at once with any red flag, in a small infant, or with incomplete vaccines.",
+          "result": "Not performed."
+        },
+        "urine_routine": {
+          "indicated": true,
+          "label": "Urine routine and microscopy",
+          "note": "A silent urine infection is a common fever focus at this age and must be looked for.",
+          "result": "Clear urine, no pus cells, no protein."
+        }
+      },
+      "managementModel": {
+        "accept": [
+          "monitor",
+          "red flag",
+          "counselling",
+          "antipyretic for comfort",
+          "no daily anticonvulsant",
+          "recovery position and first aid for the next fit",
+          "benzodiazepine",
+          "reassurance",
+          "recurrence",
+          "immunisation"
+        ],
+        "answer": "Reassure and counsel with first-aid teaching for the next fit, manage the airway by positioning if one occurs, check glucose, give an antipyretic for comfort while treating the viral illness, arrange monitoring with red-flag advice and review with the vaccine card, and start no daily anticonvulsant and no rescue drug now that the fit has stopped.",
+        "minMatch": 3
+      },
+      "opening": "Meena brings her 18-month-old son Ishaan to the paediatric casualty of the district hospital. Last evening he burned with fever, shook all over for a few minutes, then slept. He is awake now. Introduce yourself to the mother and take a history.",
+      "patient": {
+        "age": 18,
+        "name": "Ishaan Verma",
+        "occupation": "Toddler, at home with mother",
+        "residence": "Urban resettlement colony, lives with parents and elder sister",
+        "sex": "male"
+      },
+      "review": {
+        "status": "ai_drafted"
+      },
+      "teachingPoints": [
+        "The clock makes the diagnosis: one generalised fit of minutes with fever and full recovery inside the hour is simple, and no machine improves on that story.",
+        "Meningitis is excluded clinically here by a supple neck, full alertness, a clear viral focus, and complete immunisation; in a small infant the same story would earn a lumbar puncture.",
+        "Restraint is the management: no routine bloods, no scan, no EEG, and no daily fit medicine for a simple fit in a well child.",
+        "The discharge prescription is words: first aid, timing the next fit, red flags, and the plain truth that antipyretics comfort but do not prevent.",
+        "About a third of these children fit again with a later fever, and the family that knows what to do fears it less.",
+        "Vaccines continue on schedule after a febrile fit; a fit with fever is not a reason to withhold the next dose."
+      ],
+      "title": "A fit with fever in a toddler"
+    }
+  ]
+}

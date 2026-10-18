@@ -1,0 +1,1098 @@
+{
+  "_comment": "Obstetrics pathway. Same architecture as pneumonia and pre-eclampsia: shared core and obgyn skills carry the examination and history method, and this file adds the disease mechanism (the poles of the fetus felt at the wrong ends), the ECV anchor, and mode of delivery as the management decision.",
+  "id": "breech-presentation",
+  "name": "Breech presentation",
+  "fullName": "Breech presentation",
+  "subtitle": "Diagnosis, ECV and mode of delivery",
+  "system": "obstetrics",
+  "kbRef": "breech_presentation_and_malpositions",
+  "oneLine": "The buttocks or feet come first, and the choice between turning the baby and choosing the route of birth",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What breech presentation is, its types, and why most early breeches need nothing",
+      "skills": [
+        "skill.breech.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Parity and gestation set the options before the abdomen is touched",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected breech, parity and gestation carry the real weight: a multigravida with previous vaginal births is a different ECV and delivery prospect from a primigravida, and nothing is offered on presentation alone before 36 weeks. Note whether she is booked with a prior scan or has come unbooked, because an unbooked mother may arrive with no reliable gestation to time ECV against."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Most breeches have no symptoms; the story is how it was found",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.booking_lmp"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect a short story measured in visits, not symptoms: told bottom-down at the health centre, referred for a scan, or pains started with the baby still high. Reduced movements, draining liquor or bleeding change urgency at once, but their absence is the usual picture and never reassurance on its own."
+        },
+        "skill.hx.obg.booking_lmp": {
+          "expect": "Dates decide everything here: confirm the gestation from the last menstrual period and an early scan, because ECV is offered at 36 to 37 weeks and the delivery decision turns on whether she is preterm, early term or term."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The background that kept the baby breech, and the uterus it must come through",
+      "skills": [
+        "skill.hx.obg.medical_family_drug",
+        "skill.hx.obg.previous_pregnancies",
+        "skill.hx.breech.risk"
+      ],
+      "emphasis": {
+        "skill.hx.obg.medical_family_drug": {
+          "expect": "Ask directly about diabetes, thyroid disease and hypertension, about iron and calcium she is already taking, and about her blood group, since Rh negativity needs anti-D cover arranged around ECV."
+        },
+        "skill.hx.obg.previous_pregnancies": {
+          "expect": "Record every previous birth with its gestation, presentation and route: a previous vaginal birth favours both ECV success and a vaginal breech birth, while a previous caesarean or a previous breech changes both offers. A previous premature birth or stillbirth is never a footnote here."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "A well mother, and the vitals that confirm she still is one",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Expect a comfortable mother with no distress, since an uncomplicated term breech has no general signs of its own. Pallor, breathlessness, leaking liquor soaking her clothes, or visible distress mean something else is happening alongside the malpresentation."
+        },
+        "skill.gen.vitals": {
+          "expect": "Expect normal vitals: a term breech does not raise pulse, pressure or temperature. Hypertension with proteinuria, fever with tachycardia, or hypotension with bleeding each point to a coexisting hypertensive, infective or haemorrhagic problem that outranks the presentation."
+        },
+        "skill.gen.edema": {
+          "expect": "Some ankle swelling is common in late pregnancy and means little on its own. Sudden puffiness of the face and hands with a pressure rise belongs to pre-eclampsia, not to breech, and must be worked up in parallel."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Obstetric abdominal examination",
+      "blurb": "The hands find the head where the fundus is",
+      "skills": [
+        "skill.exam.obg.preg_prep_inspect",
+        "skill.exam.obg.fundal_height",
+        "skill.exam.obg.leopold",
+        "skill.exam.obg.fetal_heart"
+      ],
+      "emphasis": {
+        "skill.exam.obg.preg_prep_inspect": {
+          "expect": "Inspect for a uterus large or small for the dates, for pallor, and for liquor staining her clothes. Consent and a chaperone apply exactly as in any antenatal examination, and the abdomen is examined between contractions where labour has begun."
+        },
+        "skill.exam.obg.fundal_height": {
+          "expect": "A fundal height matching the dates supports a term normally grown fetus, which is part of ECV suitability. A height lagging the dates suggests growth restriction, and a height far beyond the dates should make you feel for a second fetus or extra liquor, both of which keep babies breech."
+        },
+        "skill.exam.obg.leopold": {
+          "expect": "This is the manoeuvre the whole diagnosis rests on: a hard, round, ballotable head in the fundus with a soft, broad, non-ballotable breech over the inlet, felt in that order. Note the type, frank, complete or footling, engagement, and liquor volume, because each changes the ECV offer."
+        },
+        "skill.exam.obg.fetal_heart": {
+          "expect": "Expect the heart best heard above the umbilicus, often toward one flank, since the chest lies high. A rate that is persistently fast, slow or irregular moves assessment of fetal wellbeing ahead of any ECV discussion."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the breech picture together",
+      "blurb": "One baby, two poles, and why everything points the same way",
+      "skills": [
+        "skill.breech.findings"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Three sentences that contain the mother, the type and the plan",
+      "skills": [
+        "skill.breech.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "What else presents first, and which breech is which",
+      "skills": [
+        "skill.breech.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "The scan confirms it, the trace watches the baby, the bloods prepare the route",
+      "skills": [
+        "skill.ix.breech.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and ECV suitability",
+      "blurb": "Type, gestation, and whether turning may be attempted",
+      "skills": [
+        "skill.breech.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Turn the baby where suitable, choose the birth route where not",
+      "skills": [
+        "skill.tx.breech",
+        "skill.approach.obg.cs_setup",
+        "skill.approach.obg.cs_info",
+        "skill.approach.obg.cs_decision"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this mother to your consultant",
+      "skills": [
+        "skill.present.breech.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.breech.abdominal_exam",
+        "title": "Examine the abdomen and diagnose the presentation",
+        "task": "This 26-year-old woman is 37 weeks pregnant. Her antenatal card says the baby is bottom-down. Examine her abdomen to confirm lie and presentation and present your findings with a plan.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.exam.obg.preg_prep_inspect",
+          "skill.exam.obg.fundal_height",
+          "skill.exam.obg.leopold",
+          "skill.exam.obg.fetal_heart"
+        ],
+        "examinerQuestions": [
+          "You found a hard ballotable mass in the fundus and a soft mass over the inlet. What is the presentation and type, and what single manoeuvre was decisive?",
+          "Where did you hear the fetal heart, and why is that position expected here?",
+          "She asks whether the baby can be turned. What scan findings do you need before answering, and where will she deliver?"
+        ]
+      },
+      {
+        "id": "osce.breech.counsel_ecv",
+        "title": "Counsel for ECV and mode of delivery",
+        "task": "This 26-year-old woman is 37 weeks pregnant with a frank breech confirmed on scan, normal liquor and an upper segment placenta. Counsel her about external cephalic version and delivery options in six minutes.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.obg.booking_lmp",
+          "skill.hx.breech.risk",
+          "skill.tx.breech"
+        ],
+        "examinerQuestions": [
+          "What did you tell her about the success rate of ECV and what stops the attempt?",
+          "Name two facts from her history that already marked her suitable before you counselled her.",
+          "She declines ECV. What are her delivery options, and what referral would you arrange from a primary centre?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.breech.basics",
+      "skill.hx.breech.risk",
+      "skill.breech.findings",
+      "skill.breech.differential",
+      "skill.ix.breech.workup",
+      "skill.breech.diagnosis",
+      "skill.tx.breech",
+      "skill.exam.obg.leopold"
+    ]
+  },
+  "skills": {
+    "skill.breech.basics": {
+      "id": "skill.breech.basics",
+      "kind": "reasoning",
+      "system": "obstetrics",
+      "title": "What breech presentation is",
+      "oneLine": "The buttocks or feet come first, and most early breeches turn on their own",
+      "why": "Presentation decides the whole birth plan: whether ECV may be offered, whether labour may be allowed, and which theatre must be ready. Fixing the definitions first is what stops a transverse lie being called a breech and a 30-week breech being managed as if it were term.",
+      "body": "Breech presentation means the fetal buttocks or lower limbs lie over the maternal pelvic inlet instead of the head, in a longitudinal lie. It is common in mid pregnancy and usually corrects itself as the heavier head settles into the roomier fundus.",
+      "keyPoints": [
+        "LIE is the relation of the fetal long axis to the mother's: longitudinal, transverse or oblique. PRESENTATION is the part over the inlet: cephalic, breech or shoulder. ATTITUDE is the posture of flexion or extension. Breech is a longitudinal lie with the buttocks or feet presenting.",
+        "FRANK breech, hips flexed with knees straight so the feet lie near the face, is the commonest type at term, about two thirds of breeches, and the most favourable for a vaginal birth. COMPLETE breech has both hips and knees flexed with the feet tucked beside the buttocks. FOOTLING breech has one or both feet sitting below the buttocks, so a foot can slip through the cervix first.",
+        "About one pregnancy in five is breech at 28 weeks, but more than nine in ten of these turn head-down on their own by 36 weeks. A breech found before 36 weeks is therefore usually watched, not acted on, and ECV is offered at 36 to 37 weeks.",
+        "Breech persists when something keeps the head out of the pelvis: preterm birth before turning happens, more than one fetus, extra liquor, a low placenta, or an unusually shaped uterus or a fibroid crowding the cavity.",
+        "A bottom-first baby faces three characteristic dangers: the cord slipping past a poorly fitting presenting part, the head being held up after the body is born, and injury from hurried handling. Everything in this pathway, ECV timing and the delivery decision, exists to stay ahead of these three."
+      ],
+      "pitfalls": [
+        "Calling any non-cephalic lie a breech, when a transverse lie with shoulder presentation is a different condition with a different management.",
+        "Acting on a breech found at 30 weeks as if it were a term breech, when most will still turn on their own.",
+        "Assuming a footling breech can be managed like a frank one, when its cord risk is far higher."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Define breech presentation and name its three types.",
+          "a": "Breech presentation is a longitudinal lie with the buttocks or feet over the pelvic inlet instead of the head. The three types are frank breech with extended knees, complete breech with flexed hips and knees, and footling breech with one or both feet below the buttocks.",
+          "accept": [
+            "longitudinal",
+            "buttocks",
+            "frank",
+            "complete breech",
+            "footling"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "A breech is found at 30 weeks. Does this mother need ECV counselling now?",
+          "a": "No. About one in five pregnancies is breech at 28 weeks and more than nine in ten turn on their own by 36 weeks, so this breech is watched and ECV is offered at 36 to 37 weeks if it persists.",
+          "accept": [
+            "turn on their own",
+            "36 weeks",
+            "watched",
+            "36 to 37 weeks"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is frank breech the most favourable type for a vaginal birth?",
+          "a": "Because the flexed hips with extended knees make a compact presenting part that fills the pelvis and cervix evenly, splinting the cord above, while a footling breech leaves a gap through which the cord or a foot slips first.",
+          "accept": [
+            "compact",
+            "fills the pelvis",
+            "cord",
+            "footling"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "breech_presentation_and_malpositions: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Breech presentation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.breech.findings": {
+      "id": "skill.breech.findings",
+      "kind": "reasoning",
+      "system": "obstetrics",
+      "title": "The breech picture",
+      "oneLine": "A hard head where the fundus is, a soft bottom where the pelvis is",
+      "why": "Breech is a clinical diagnosis made with the hands before any scan: the two poles of the fetus feel different, and confusing them means counselling the wrong mother for the wrong birth. Knowing exactly what each pole feels like is what makes the scan a confirmation rather than a surprise.",
+      "body": "The diagnosis is made on the abdomen with the hands and confirmed with an ultrasound scan. Each pole of the fetus feels different, and the heart is heard in a different place from a head-down baby.",
+      "keyPoints": [
+        "FUNDUS: the fundus holds a hard, round, smooth mass that moves freely between the hands and dips with a tap, the head. It ballottes, which the breech end never does, and that single difference settles most confusion at the bedside.",
+        "PELVIS: over the inlet sits a soft, broad, irregular mass that moves with the trunk and does not ballot, the buttocks. In a footling breech a small part may be felt slipping beside it, and a foot felt through the cervix in labour needs no second opinion.",
+        "HEART: the fetal heart is heard best above the umbilicus, often toward one flank, because the chest lies high. A heart heard below the umbilicus argues for a head-down baby and should make you re-examine.",
+        "CONFIRM: an ultrasound scan confirms the type of breech and adds what hands cannot feel, liquor volume, placental site, estimated weight, head attitude, and any anomaly. The scan also rules out the mimics the hands cannot separate.",
+        "LABOUR: in labour the examining finger meets a soft bottom with the cleft and the sacrum, sometimes with feet or a knee, instead of the hard smooth dome of a head with sutures. Meconium on the glove and a cord felt beside the parts each change urgency at once."
+      ],
+      "pitfalls": [
+        "Calling the hard ballotable mass in the fundus the breech, when ballottement marks the head and decides the diagnosis.",
+        "Missing a footling breech until the membranes rupture, when the cord risk becomes immediate.",
+        "Repeating vaginal examinations after rupture of membranes out of curiosity, adding infection risk while the cord sits exposed."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Contrast the fundal and pelvic findings in a frank breech.",
+          "a": "The fundus holds a hard round ballotable head, while the inlet holds a soft broad irregular breech that moves with the trunk and does not ballot.",
+          "accept": [
+            "hard",
+            "ballotable",
+            "soft",
+            "does not ballot"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Where is the fetal heart heard in a breech, and why?",
+          "a": "Above the umbilicus, often toward one flank, because the fetal chest lies high in the uterus when the buttocks present.",
+          "accept": [
+            "above the umbilicus",
+            "flank",
+            "chest lies high"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "On vaginal examination in labour, how do you tell a buttock from a head?",
+          "a": "The buttock is soft with the cleft and the sacrum palpable, sometimes with feet, while the head is a hard smooth dome with sutures and fontanelles.",
+          "accept": [
+            "soft",
+            "sacrum",
+            "sutures",
+            "fontanelles"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "breech_presentation_and_malpositions: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Breech presentation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.breech.summary": {
+      "id": "skill.breech.summary",
+      "kind": "reasoning",
+      "system": "obstetrics",
+      "title": "The clinical summary",
+      "oneLine": "Mother, gestation, type of breech and suitability for turning in three sentences",
+      "why": "The summary for a breech has a different shape from a medical one: the type of breech and the ECV offer belong in the same sentence as the diagnosis, because the plan that follows is a birth decision, not a prescription.",
+      "body": "State the mother with the parity that matters, the gestation, the type of breech with confirmation, and the ECV and delivery position, in that order.",
+      "keyPoints": [
+        "Name the mother with the relevant background: age, parity, booking status, and the factor that matters, such as a previous vaginal birth or a uterine scar.",
+        "State the gestation and the type: 37 weeks with a frank breech confirmed on scan. Gestation times ECV and type sets the cord risk, so neither is ever left out.",
+        "State the ECV position in the same summary: suitable for ECV with no contraindication, or unsuitable with the reason, such as a low placenta or ruptured membranes.",
+        "Include fetal status alongside: liquor, estimated weight, placental site and the heart trace, since each is a condition on the plan.",
+        "A worked example: A 26-year-old booked second gravida at 37 weeks, with a previous full-term vaginal birth, presents with a frank breech confirmed on ultrasound, normal liquor, an upper segment placenta and a reassuring trace. This is a term frank breech suitable for ECV counselling and delivery planning."
+      ],
+      "pitfalls": [
+        "Omitting the type of breech from the summary, leaving the listener unable to judge cord risk or the ECV offer.",
+        "Describing findings without stating ECV suitability, so the plan could be anything from turning to theatre.",
+        "Leaving out liquor, weight and placental site, which are conditions on every ECV and delivery decision."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What elements must a breech summary carry that a pneumonia summary does not?",
+          "a": "The type of breech, the gestation with ECV suitability, and the fetal conditions of liquor, weight and placental site, because they decide the birth route.",
+          "accept": [
+            "type of breech",
+            "ECV",
+            "gestation",
+            "placental site"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "mother",
+          "text": "States the mother with relevant parity and background"
+        },
+        {
+          "id": "type",
+          "text": "States the type of breech with gestation"
+        },
+        {
+          "id": "plan",
+          "text": "Includes ECV suitability with fetal conditions"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "breech_presentation_and_malpositions: clinicalPearls"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Management of breech presentation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.breech.differential": {
+      "id": "skill.breech.differential",
+      "kind": "reasoning",
+      "system": "obstetrics",
+      "title": "Differential diagnosis",
+      "oneLine": "Which breech is which, and what else presents first",
+      "why": "Most bottom-first findings are exactly what they feel like, but the ones that are not change everything: a transverse lie cannot deliver vaginally at all, and a footling breech carries a cord risk a frank breech does not. The differential separates types from mimics before any birth plan is made.",
+      "body": "For a suspected breech, separate the three breech types from each other, then from the other malpresentations that put something other than a well-flexed head over the inlet.",
+      "keyPoints": [
+        "COMPLETE breech: both hips and knees flexed with feet tucked beside the buttocks. It fills the pelvis nearly as well as frank breech but is less common at term, and the distinction is made by feeling feet alongside the bottom.",
+        "FOOTLING breech: one or both feet sitting below the buttocks. Favoured by a small or preterm fetus with room to slip, and the highest risk of cord prolapse because the lower segment fills poorly. Never managed as a frank breech.",
+        "TRANSVERSE lie with shoulder presentation: the fundus is empty with the head in one flank and the breech in the other, and no pole sits over the inlet. The lie is not longitudinal at all, so this is not a breech and ECV has a different place.",
+        "OBLIQUE lie: an unstable lie between longitudinal and transverse that may convert with contractions or revert after. It needs reassessment rather than a label, since the presenting part is not yet fixed.",
+        "FACE and BROW presentation: the head presents but extended, so the examining finger meets the chin, mouth and nose, or the broad brow with no suture lines converging, instead of the hard dome with sutures of a flexed head.",
+        "COMPOUND presentation: a head or breech with a hand or arm slipped alongside. A small hand beside a head in early labour may withdraw as descent proceeds, but it needs watching, not pulling.",
+        "CEPHALIC presentation as the main alternative: a hard ballotable head low over the inlet with the heart below the umbilicus. Where the picture fits this, the breech diagnosis is simply wrong and should be said so."
+      ],
+      "pitfalls": [
+        "Calling an oblique or transverse lie a breech because something unfamiliar is felt low, when the fundus is empty and no pole is over the inlet.",
+        "Treating a footling breech as a frank one through the whole labour because the type was never stated.",
+        "Pulling on a compound hand or a prolapsed foot, when traction injures and patience or theatre delivers."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How do you separate frank, complete and footling breech at the bedside?",
+          "a": "Frank breech has extended knees with feet near the face, complete breech has feet tucked beside the buttocks, and footling breech has one or both feet below the buttocks.",
+          "accept": [
+            "extended knees",
+            "tucked",
+            "below the buttocks"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How does a transverse lie differ from a breech on abdominal examination?",
+          "a": "In a transverse lie the fundus is empty with the head in one flank, and no pole sits over the inlet, while in breech the lie is longitudinal with the head in the fundus and the buttocks over the inlet.",
+          "accept": [
+            "fundus is empty",
+            "head in one flank",
+            "longitudinal"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A finger in labour meets a broad flat bony surface with no sutures. What is it, and what does it change?",
+          "a": "A brow presentation: the head is extended, not flexed. A persistent brow at term does not deliver vaginally and needs caesarean assessment, unlike a frank breech which may.",
+          "accept": [
+            "brow",
+            "extended",
+            "caesarean"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Separates breech types from transverse, face, brow and compound presentations"
+        },
+        {
+          "id": "footling",
+          "text": "Identifies footling breech as the highest cord risk"
+        },
+        {
+          "id": "transverse",
+          "text": "Recognises transverse lie as a different condition, not a breech"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "breech_presentation_and_malpositions: additionalDifferentials"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Malpresentations"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.breech.workup": {
+      "id": "skill.ix.breech.workup",
+      "kind": "investigation",
+      "system": "obstetrics",
+      "title": "Confirming the breech and grading the options",
+      "oneLine": "The scan confirms it, the trace watches the baby, the bloods prepare the route",
+      "why": "Investigations in breech serve three separate jobs, confirming the type, checking the baby is fit for turning or labour, and preparing for theatre if either is needed, and understanding which test does which stops a student booking theatre on palpation alone or attempting ECV over an unseen low placenta.",
+      "body": "Group investigations by what they answer: confirm the presentation, check the conditions for ECV, watch the fetus, and prepare the mother for either birth route.",
+      "keyPoints": [
+        "CONFIRM: obstetric ultrasound for lie, presentation and type of breech, with estimated weight, liquor volume, placental site, head attitude and any anomaly. The placental site alone can cancel an ECV, which is why turning is never attempted on palpation alone.",
+        "CHECK CONDITIONS: clinical assessment of the pelvis and the antenatal record for scars, fibroids and anaemia. A contracted pelvis or a scarred uterus changes both the ECV offer and the delivery route.",
+        "WATCH THE FETUS: cardiotocography before and after any ECV attempt, and continuous monitoring in labour. A non-reassuring trace stops the turning and starts delivery planning.",
+        "PREPARE THE ROUTE: haemoglobin and blood group with save, since theatre and transfusion must be ready wherever a breech delivers. Urine albumin as a routine baseline, because hypertension alongside breech is managed in parallel, not ignored.",
+        "NOT ROUTINE: X-ray pelvimetry or routine CT for every breech. Clinical assessment with a confirmatory scan decides the route in most cases, and imaging that changes nothing adds radiation and delay."
+      ],
+      "pitfalls": [
+        "Attempting ECV on palpation alone without a scan, turning over an unseen low placenta.",
+        "Booking theatre or promising vaginal birth before liquor, weight and placental site are known.",
+        "Treating a reassuring trace as permission to ignore a falling haemoglobin or an ungrouped mother."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What must the confirmatory scan report in a breech?",
+          "a": "Lie, presentation and type of breech, with estimated weight, liquor volume, placental site, head attitude and any anomaly.",
+          "accept": [
+            "type of breech",
+            "liquor",
+            "placental site",
+            "estimated weight"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why is cardiotocography run around an ECV attempt?",
+          "a": "To confirm the baby is well before turning begins and to detect distress after, since a non-reassuring trace stops the procedure and starts delivery planning.",
+          "accept": [
+            "before",
+            "after",
+            "non-reassuring",
+            "stops"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "breech_presentation_and_malpositions: additionalInvestigations"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Management of breech presentation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.breech.diagnosis": {
+      "id": "skill.breech.diagnosis",
+      "kind": "reasoning",
+      "system": "obstetrics",
+      "title": "Diagnosis and ECV suitability",
+      "oneLine": "Type, gestation and whether turning may be attempted",
+      "why": "A diagnosis of breech without a type, a gestation and an ECV verdict does not say what happens next: counsel turning, plan theatre, or watch and rescan. The suitability statement is the tool that converts findings into that decision.",
+      "body": "The diagnosis needs a breech confirmed on scan with its type stated, at a gestation where it matters, and the statement is incomplete without the ECV verdict.",
+      "keyPoints": [
+        "CRITERION ONE: breech presentation confirmed on ultrasound at or near term, with the type stated, frank, complete or footling. A breech on palpation alone is a working diagnosis until the scan confirms it.",
+        "CRITERION TWO: a gestation where persistence matters, from about 36 weeks. Earlier breeches usually turn on their own and are watched with a rescan, not labelled.",
+        "ECV OFFER: external cephalic version is offered at 36 to 37 weeks for suitable frank or complete breeches, turning the baby to head-down by steady pressure through the abdominal wall. About half of attempts succeed, and a failed attempt harms nothing that was not already planned.",
+        "SUITABLE means: singleton term breech, normal liquor, placenta clear of the lower segment, membranes intact, no scar or anomaly barring it, and a reassuring trace. Each condition is checked, not assumed.",
+        "UNSUITABLE means: conditions where the uterus should not be pressed or vaginal birth is unsafe, such as a low placenta, ruptured membranes with a high presenting part, bleeding, a scarred uterus judged unsuitable, or fetal compromise. Each is judged by the obstetrician, not by protocol alone.",
+        "A complete diagnostic statement names the type, the gestation, the parity, the ECV verdict and the fetal conditions: frank breech at 37 weeks in a second gravida, suitable for ECV, with normal liquor and an upper segment placenta, for example."
+      ],
+      "pitfalls": [
+        "Labelling a 32-week breech as the diagnosis and counselling delivery, when watching with a rescan is the management.",
+        "Offering ECV without checking the placental site, pressing over a low placenta.",
+        "Stating the diagnosis without an ECV verdict, leaving the reader unable to judge what happens next."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "State when ECV is offered and its approximate success rate.",
+          "a": "ECV is offered at 36 to 37 weeks for suitable frank or complete breeches, and about half of attempts succeed in turning the baby head-down.",
+          "accept": [
+            "36 to 37 weeks",
+            "half",
+            "succeed"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Name four conditions that make a breech suitable for ECV.",
+          "a": "Singleton term breech with normal liquor, placenta clear of the lower segment, intact membranes, and a reassuring trace.",
+          "accept": [
+            "normal liquor",
+            "placenta clear",
+            "intact membranes",
+            "reassuring trace"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "A 37-week mother with a frank breech has a low placenta on scan. ECV or not, and why?",
+          "a": "Not suitable. Pressing on the uterus over a low placenta risks bleeding, so the ECV is withheld and the delivery plan moves to caesarean assessment instead.",
+          "accept": [
+            "not suitable",
+            "bleeding",
+            "withheld",
+            "caesarean"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "criteria",
+          "text": "States scan confirmation with type and meaningful gestation"
+        },
+        {
+          "id": "suitability",
+          "text": "Judges ECV suitability with conditions checked"
+        },
+        {
+          "id": "statement",
+          "text": "Frames a complete diagnostic statement with ECV verdict"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "breech_presentation_and_malpositions: clinicalPearls"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Management of breech presentation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.breech": {
+      "id": "skill.tx.breech",
+      "kind": "treatment",
+      "system": "obstetrics",
+      "title": "ECV and mode of delivery",
+      "oneLine": "Turn the baby where suitable, choose the birth route where not",
+      "why": "Breech management is a fork, not a ladder: a suitable breech is offered turning first, and only the birth route decision follows, while an unsuitable one goes straight to route planning. Getting the order wrong means delivering babies that could have turned and turning babies that should never have been pressed.",
+      "body": "Offer ECV where suitable with consent and monitoring, and plan the birth route for every breech, turned or not, in a unit ready for either outcome.",
+      "keyPoints": [
+        "ECV TECHNIQUE: steady guided pressure through the abdominal wall, usually with the uterus relaxed, turning the baby forward or back to head-down. The bladder is empty, consent is taken, the trace runs before and after, and the attempt stops for pain, bleeding or distress.",
+        "ECV SAFETY: about half of attempts succeed. An Rh-negative mother has anti-D cover arranged, and theatre and blood are available, since rare complications need immediate delivery. A failed attempt returns her to route planning, not to blame.",
+        "PLANNED CAESAREAN: the commoner choice and the default where skilled vaginal breech attendance is unavailable. It is planned for footling breech, for preterm breech where the head outgrows the body, for a hyperextended head, and where the pelvis is contracted or the mother prefers it after counselling.",
+        "PLANNED VAGINAL BREECH BIRTH: only in selected frank or complete breeches with an adequate pelvis, a normally grown baby, a flexed head, continuous monitoring, an experienced attendant, and theatre ready. Progress that stalls, or any distress, converts to theatre without debate.",
+        "IN LABOUR: do not pull on the baby. Extended arms are freed by rotating the trunk through half a circle under the pubic arch, the Lovset manoeuvre, and the aftercoming head is delivered flexed with jaw traction, the Mauriceau-Smellie-Veit manoeuvre. A prolapsed cord or a trapped head is an emergency call, not a manoeuvre.",
+        "CORD PROLAPSE DRILL: with ruptured membranes and a high presenting part, a hand lifts the presenting part off the cord, the mother goes knee-chest or head-down, handling of the cord is minimal, and delivery is expedited, usually by emergency caesarean unless birth is imminent.",
+        "IN INDIAN PRACTICE: refer in time to a first referral unit or district hospital with blood, operating and newborn facilities, using free ambulance transport and cashless mother-child schemes where available. Never let a term breech labour at a centre with no theatre for want of transport planning."
+      ],
+      "pitfalls": [
+        "Pulling on the breech in labour, which extends the arms and deflexes the head, manufacturing the very entrapment that kills.",
+        "Attempting ECV without consent, trace, blood group or theatre cover, turning a safe offer into an unguarded gamble.",
+        "Keeping a term breech labouring at a primary centre with no theatre, instead of referring before labour.",
+        "Promising a vaginal birth where no attendant skilled in breech manoeuvres is present."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "State the principles of managing a term breech.",
+          "a": "Offer ECV where suitable with consent and monitoring, then plan the birth route for every breech in a unit with theatre, blood and newborn care ready.",
+          "accept": [
+            "ECV",
+            "consent",
+            "monitoring",
+            "birth route",
+            "theatre"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "When is planned caesarean the default for a breech?",
+          "a": "For footling breech, preterm breech, a hyperextended head, a contracted pelvis, or wherever no attendant skilled in vaginal breech birth is present.",
+          "accept": [
+            "footling",
+            "preterm",
+            "hyperextended",
+            "contracted pelvis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Membranes rupture with a footling breech and the cord is felt beside the foot. What do you do?",
+          "a": "Lift the presenting part off the cord with a hand, place the mother knee-chest or head-down, handle the cord minimally, and expedite delivery, usually by emergency caesarean.",
+          "accept": [
+            "lift",
+            "knee-chest",
+            "minimally",
+            "emergency caesarean"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "breech_presentation_and_malpositions: clinicalPearls"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Management of breech presentation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of method and principle. Specific drugs, doses, routes and regimens must be taken from your current national or institutional guideline at the time of care. CliniX does not prescribe."
+    }
+  },
+  "cases": [
+    {
+      "id": "case.breech.meena",
+      "title": "A second gravida at 37 weeks told the baby is bottom-down",
+      "opening": "Meena Patil, 26, a second gravida at 37 weeks from a village in western Maharashtra, has been referred by the primary health centre because the baby is bottom-down on examination. There are no labour pains and the waters have not broken. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Meena Patil",
+        "age": 26,
+        "sex": "female",
+        "occupation": "Housewife, helps in the family sugarcane field",
+        "residence": "Rural, village in western Maharashtra, lives with husband and mother-in-law"
+      },
+      "initialVitals": {
+        "hr": 88,
+        "bpSystolic": 118,
+        "bpDiastolic": 74,
+        "rr": 18,
+        "spo2": 98,
+        "temp": 36.8,
+        "gcs": 15
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help",
+            "what is troubling"
+          ],
+          "reply": "Doctor, at the health centre the sister felt my belly and said the baby is bottom-down. She gave this paper and asked me to come here. I have no pain.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "breech_found": {
+          "cues": [
+            "when was it first found",
+            "who found the breech",
+            "told bottom-down",
+            "how was it found",
+            "first told breech"
+          ],
+          "reply": "Two weeks ago the sister said the head is up. Yesterday the doctor at the centre felt again and said it is still bottom-down, so she sent me here.",
+          "key": true
+        },
+        "pregnancy_dates": {
+          "cues": [
+            "last period",
+            "lmp",
+            "months pregnant",
+            "weeks pregnant",
+            "due date",
+            "delivery date",
+            "edd"
+          ],
+          "reply": "My last period started in the first week of February, so the sister says I am in the ninth month and the delivery date is mid November.",
+          "key": true,
+          "skillId": "skill.hx.obg.booking_lmp"
+        },
+        "fetal_movements": {
+          "cues": [
+            "baby movements",
+            "fetal movements",
+            "baby moving",
+            "kick count",
+            "movements reduced"
+          ],
+          "reply": "The baby moves well, doctor. Many kicks every day, same as before. Nothing has reduced.",
+          "key": true
+        },
+        "labour_pains": {
+          "cues": [
+            "labour pains",
+            "pains started",
+            "contractions",
+            "tightening of the womb",
+            "pain coming and going"
+          ],
+          "reply": "No pains at all. My belly has not become tight even once.",
+          "key": true
+        },
+        "water_leak": {
+          "cues": [
+            "waters broke",
+            "water leaking",
+            "leaking fluid",
+            "liquor draining",
+            "wetness down below"
+          ],
+          "reply": "No water has leaked. My clothes stay dry.",
+          "key": true
+        },
+        "vaginal_bleeding": {
+          "cues": [
+            "bleeding per vaginam",
+            "blood loss down below",
+            "spotting",
+            "bleeding in pregnancy",
+            "any bleed"
+          ],
+          "reply": "No bleeding at any time in this pregnancy.",
+          "key": true
+        },
+        "belly_pain": {
+          "cues": [
+            "pain in the abdomen",
+            "abdominal pain",
+            "stomach pain",
+            "continuous belly pain",
+            "pain that stays"
+          ],
+          "reply": "No stomach pain, doctor. Only the usual heaviness when I walk far.",
+          "key": true
+        },
+        "previous_births": {
+          "cues": [
+            "previous pregnancy",
+            "earlier delivery",
+            "first delivery",
+            "children",
+            "how was the last born",
+            "normal or operation last time"
+          ],
+          "reply": "My first baby was born normally three years ago, a boy, in the government hospital. He cried at once and is healthy.",
+          "key": true,
+          "skillId": "skill.hx.obg.previous_pregnancies"
+        },
+        "medical_history": {
+          "cues": [
+            "diabetes",
+            "sugar problem",
+            "blood pressure problem",
+            "thyroid problem",
+            "fits in the past",
+            "kidney problem"
+          ],
+          "reply": "No sugar problem, no pressure problem, no fits. My urine and blood tests at the centre were normal.",
+          "key": true,
+          "skillId": "skill.hx.obg.medical_family_drug"
+        },
+        "regular_medicines": {
+          "cues": [
+            "medicine daily",
+            "tablets daily",
+            "iron tablets",
+            "calcium tablets",
+            "taking any tablets",
+            "blood group tablets"
+          ],
+          "reply": "Only the iron and calcium tablets from the centre, which I take every day. No other tablets.",
+          "key": true
+        },
+        "antenatal_visits": {
+          "cues": [
+            "antenatal checkup",
+            "anc visits",
+            "booked",
+            "checkup during pregnancy",
+            "scan done"
+          ],
+          "reply": "I went four times to the health centre. One scan was done in the fifth month, they said one baby and everything normal.",
+          "key": true
+        },
+        "tobacco_habit": {
+          "cues": [
+            "tobacco",
+            "mishri",
+            "gutka",
+            "smoking",
+            "alcohol",
+            "drink"
+          ],
+          "reply": "I clean my teeth with mishri powder in the morning. No smoking, no drink.",
+          "key": true
+        },
+        "family_history": {
+          "cues": [
+            "family",
+            "mother",
+            "sister",
+            "anyone else breech",
+            "twins in the family"
+          ],
+          "reply": "My younger sister also had a bottom-down baby, but hers turned on its own before delivery.",
+          "key": true
+        },
+        "twin_history": {
+          "cues": [
+            "twin pregnancy",
+            "more than one baby",
+            "extra water",
+            "too much water",
+            "big belly"
+          ],
+          "reply": "No, they said there is only one baby, and the water is normal.",
+          "key": true,
+          "skillId": "skill.hx.breech.risk"
+        },
+        "delivery_wishes": {
+          "cues": [
+            "normal delivery wish",
+            "want operation",
+            "fear of operation",
+            "what do you want",
+            "wishes for delivery"
+          ],
+          "reply": "I want a normal delivery like last time, but I am afraid because the baby is reversed. I will do what you advise, doctor."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Comfortable young woman, no distress, no pallor, no pedal swelling of sudden onset. Walks without difficulty.",
+          "abnormal": false
+        },
+        "skill.gen.vitals": {
+          "finding": "Blood pressure 118/74, repeated after rest at 116/72. Pulse 88 regular. Respiratory rate 18. SpO2 98 percent on room air. Temperature 36.8 C.",
+          "abnormal": false
+        },
+        "skill.gen.edema": {
+          "finding": "Mild ankle swelling that pits slightly and disappears overnight. No puffiness of the face or hands.",
+          "abnormal": false
+        },
+        "skill.exam.obg.preg_prep_inspect": {
+          "finding": "Uterus term size, ovoid, relaxed. No scars on the abdomen. No liquor staining. Consent taken with a female attendant present.",
+          "abnormal": false
+        },
+        "skill.exam.obg.fundal_height": {
+          "finding": "Fundal height 37 weeks by tape, matching the dates. Symphysis-fundal height 37 cm. Single fetus clinically.",
+          "abnormal": false
+        },
+        "skill.exam.obg.leopold": {
+          "finding": "Longitudinal lie. Fundus holds a hard, round, smooth ballotable mass, the head. Pelvic grip holds a soft, broad, irregular non-ballotable mass moving with the trunk, the breech, presenting but high above the brim. Liquor clinically adequate. Frank breech impression.",
+          "abnormal": true
+        },
+        "skill.exam.obg.fetal_heart": {
+          "finding": "Fetal heart heard best above the umbilicus toward the left flank, 142 per minute, regular. No decelerations on brief auscultation.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "usg",
+        "ctg",
+        "bloods"
+      ],
+      "investigations": {
+        "usg": {
+          "label": "Obstetric ultrasound",
+          "indicated": true,
+          "result": "Single live fetus, frank breech with extended knees. Liquor adequate. Placenta anterior, clear of the internal os. Estimated weight appropriate for 37 weeks. Head flexed, no anomaly seen.",
+          "note": "This confirms the type and the ECV conditions in one sitting: frank breech, normal liquor, placenta clear, head flexed."
+        },
+        "ctg": {
+          "label": "Cardiotocography",
+          "indicated": true,
+          "result": "Reactive trace with a baseline of 140. No decelerations during the monitoring period.",
+          "note": "Wellbeing before any ECV discussion; the trace runs again after any attempt."
+        },
+        "bloods": {
+          "label": "Haemoglobin with blood group and save",
+          "indicated": true,
+          "result": "Haemoglobin 11.4 g/dL. Blood group B positive. Serum saved for crossmatch.",
+          "note": "B positive needs no anti-D; the grouping matters because theatre and transfusion stay ready for every breech."
+        },
+        "urine": {
+          "label": "Urine albumin dipstick",
+          "indicated": true,
+          "result": "No albumin on bedside dipstick.",
+          "note": "Routine baseline: hypertension alongside breech is managed in parallel, and here it is absent."
+        },
+        "xray_pelvis": {
+          "label": "X-ray pelvimetry",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Not indicated: clinical assessment with a confirmatory scan decides the route here, and imaging that changes nothing adds radiation and delay."
+        }
+      },
+      "differentialModel": {
+        "answer": "Frank breech at term. Consider complete breech, footling breech, transverse lie with shoulder presentation, face or brow presentation, and compound presentation.",
+        "accept": [
+          "complete breech",
+          "footling breech",
+          "transverse lie",
+          "face presentation",
+          "brow presentation",
+          "compound presentation",
+          "oblique lie"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Frank breech presentation at 37 weeks gestation in a second gravida, suitable for ECV, with normal liquor and an upper segment placenta.",
+        "accept": [
+          "breech presentation",
+          "frank breech"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Counsel for external cephalic version with consent and monitoring before and after, arrange anti-D cover only if Rh-negative, and plan the birth route in a unit with theatre, blood and newborn care: vaginal breech birth only under strict selection, otherwise planned caesarean, with referral in time from a primary centre.",
+        "accept": [
+          "external cephalic version",
+          "consent",
+          "monitoring",
+          "caesarean section",
+          "referral",
+          "ultrasound"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The tempo here is visits, not symptoms: a breech found at 35 weeks and still present at 37 is the ECV window, not an emergency and not a reason to wait longer.",
+        "Ballottement decided the diagnosis before any scan: the hard mass in the fundus dips and rebounds, which a breech never does.",
+        "The heart above the umbilicus fits the same baby: the chest lies high when the buttocks present, so this finding confirms rather than confuses.",
+        "Her previous normal delivery favours both ECV success and any vaginal birth, which is why the previous-birth history is never a footnote.",
+        "Normal liquor with a placenta clear of the os is what makes her suitable for ECV; either finding reversed would cancel the offer.",
+        "B positive blood group removes anti-D from this plan, but grouping with save stays essential because every breech delivers where theatre is ready.",
+        "Mishri use is recorded without breaking rapport: it is a tobacco habit asked about routinely, and counselling follows the delivery plan, not a lecture."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1363 @@
+{
+  "_comment": "Gynaecology disease. Same architecture as uterine-fibroid: almost every finding is an emphasis overlay on a shared core/obgyn skill. AUB's own contribution is the FIGO language (System 1: frequency, regularity, duration, volume; chronic versus acute), PALM-COEIN as the nine-category diagnostic map, histology thresholds as the safety anchor, and the levonorgestrel system as first-line medical care with anaemia correction running alongside everything.",
+  "id": "abnormal-uterine-bleeding",
+  "name": "Abnormal uterine bleeding",
+  "fullName": "Abnormal uterine bleeding (PALM-COEIN)",
+  "system": "gynaecology",
+  "subtitle": "PALM-COEIN approach",
+  "kbRef": "abnormal_uterine_bleeding_and_palm_coein_classification",
+  "oneLine": "Bleeding outside normal menstruation, mapped with PALM-COEIN and managed by category",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "blurb": "What abnormal uterine bleeding is, and the FIGO words that describe it",
+      "id": "basics",
+      "skills": [
+        "skill.aub.basics"
+      ],
+      "title": "Basics"
+    },
+    {
+      "blurb": "Before a single question",
+      "id": "approach",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ],
+      "title": "Approach to the patient"
+    },
+    {
+      "blurb": "Age and parity set the prior before bleeding is described",
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In abnormal bleeding, age carries more weight than in most gynaecology: adolescence points to anovulation or a bleeding disorder, the reproductive years to structural lesions, and perimenopause to anovulation with hyperplasia risk. Parity and contraceptive status frame the options from the first minute."
+        }
+      },
+      "id": "particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "title": "Patient particulars"
+    },
+    {
+      "blurb": "Regular or not, how long, how much, and what falls outside the period",
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical presentation reads in months, not days: heavy periods for a year, slowly worsening, with clots and flooding. That chronic tempo alone should move you away from miscarriage or an acute abdomen before anything else is known."
+        },
+        "skill.hx.obg.gynae_symptoms": {
+          "expect": "Expect a dull aching pain on the first days rather than severe dysmenorrhoea, with a dragging heaviness low down. Ask specifically about urinary frequency from bulk, and about discharge, fever and deep pain that would point to infection rather than bleeding."
+        },
+        "skill.hx.obg.menstrual_history": {
+          "expect": "Expect regular cycles that are heavy and prolonged: seven to eight days with clots, flooding through clothes, night changes and days off work. Ask after the four FIGO dimensions in turn, and specifically about bleeding between periods and bleeding after intercourse, since either one changes the category entirely."
+        }
+      },
+      "id": "history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.menstrual_history",
+        "skill.hx.obg.gynae_symptoms"
+      ],
+      "title": "History of presenting illness"
+    },
+    {
+      "blurb": "The background that decides scan, biopsy or clotting test",
+      "emphasis": {
+        "skill.hx.obg.gynae_background": {
+          "expect": "Contraceptive history matters twice here: a copper device can explain the bleeding by itself, and sterilisation with completed family opens definitive options. Ask about cervical screening too, since postcoital bleeding with an unscreened cervix needs direct visualisation whatever the ultrasound shows."
+        }
+      },
+      "id": "past_personal_drug_family",
+      "skills": [
+        "skill.hx.obg.gynae_background",
+        "skill.hx.abnormal.risk"
+      ],
+      "title": "Past, personal, drug and family history"
+    },
+    {
+      "blurb": "A chronically anaemic patient, and the vitals that grade it",
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for a pale, tired woman who is otherwise in no distress: conjunctival and palmar pallor with sometimes pica or breathlessness on exertion. Acute collapse with pallor and hypotension is a different story, acute severe bleeding needing resuscitation, not this chronic picture."
+        },
+        "skill.gen.edema": {
+          "expect": "Not a typical finding in abnormal bleeding. Bilateral oedema with breathlessness should make you reconsider cardiac, renal or thyroid disease as a contributor, rather than attributing everything to blood loss."
+        },
+        "skill.gen.vitals": {
+          "expect": "Expect normal vitals in chronic bleeding: the body has had months to compensate. Tachycardia, a postural fall in pressure, or breathlessness at rest mark severe anaemia that changes the timing of everything, and hypotension with active heavy bleeding is a resuscitation trigger on its own."
+        }
+      },
+      "id": "general_exam",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ],
+      "title": "General examination"
+    },
+    {
+      "blurb": "A bulky uterus that moves with the cervix, and a cervix that must be seen",
+      "emphasis": {
+        "skill.exam.obg.bimanual": {
+          "expect": "Expect a bulky uterus of about 10 week size, firm and regular, mobile and moving with the cervix, with free fornices and no cervical motion tenderness. Fixity, nodularity with tenderness, or an adnexal mass each move the category away from a simple fibroid bleed."
+        },
+        "skill.exam.obg.gynae_abdominal": {
+          "expect": "Expect a firm midline hypogastric mass just above the pubic symphysis whose lower border cannot be felt, moving side to side with movement transmitted to the cervix. A mass reaching higher suggests larger or multiple lesions that change the surgical route."
+        },
+        "skill.exam.obg.speculum_insert": {
+          "expect": "Pass the speculum gently: the vault may hold blood or clots, and a polyp may present at the os. Rough handling in active bleeding obscures exactly what you came to see."
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "expect": "Expect blood in the vault coming through a healthy looking cervix, with no polyp, erosion or foul discharge. A visible polyp, a suspicious cervix, or purulent discharge each reassign the case on the spot."
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "expect": "Inspect for pallor of the introitus, active bleeding, clots, or lesions of the vulva and perineum. Pallor here corroborates the chronic blood loss before a single blood result is back."
+        }
+      },
+      "id": "systemic_exam",
+      "skills": [
+        "skill.exam.obg.gynae_abdominal",
+        "skill.exam.obg.vulval_inspect",
+        "skill.exam.obg.speculum_insert",
+        "skill.exam.obg.speculum_inspect",
+        "skill.exam.obg.bimanual"
+      ],
+      "title": "Pelvic examination"
+    },
+    {
+      "blurb": "Heavy regular bleeding with anaemia maps to a cavity lesion",
+      "id": "disease_findings",
+      "skills": [
+        "skill.aub.signs"
+      ],
+      "title": "Putting the abnormal bleeding picture together"
+    },
+    {
+      "blurb": "Three sentences that contain the case",
+      "id": "summary",
+      "skills": [
+        "skill.aub.summary"
+      ],
+      "title": "Clinical summary"
+    },
+    {
+      "blurb": "Nine categories, and what must never be missed",
+      "id": "differential",
+      "skills": [
+        "skill.aub.differential"
+      ],
+      "title": "Differential diagnosis"
+    },
+    {
+      "blurb": "Bloods for anaemia, pregnancy test always, ultrasound first, histology to exclude",
+      "id": "investigations",
+      "skills": [
+        "skill.ix.aub.workup"
+      ],
+      "title": "Investigations"
+    },
+    {
+      "blurb": "PALM-COEIN notation, and the statement that carries the plan",
+      "id": "diagnosis",
+      "skills": [
+        "skill.aub.diagnosis",
+        "skill.annex.aub.palmcoe"
+      ],
+      "title": "Diagnosis and classification"
+    },
+    {
+      "blurb": "Stop acute loss, control chronic loss, correct anaemia, remove or preserve by wishes",
+      "id": "treatment",
+      "skills": [
+        "skill.tx.aub"
+      ],
+      "title": "Treatment"
+    },
+    {
+      "blurb": "Present this patient to your consultant",
+      "id": "case",
+      "skills": [
+        "skill.present.abnormal.case"
+      ],
+      "title": "Case presentation"
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "examinerQuestions": [
+          "Quantify her bleeding in FIGO terms from what you found, and state which answers point to an ovulatory rather than a structural cause.",
+          "She is 42 and her family is complete. How does that change the options you will offer her?",
+          "Her haemoglobin is low and she is booked for surgery. What must happen before the operation, and why does operating on uncorrected anaemia matter?"
+        ],
+        "id": "osce.aub.history",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.obg.menstrual_history",
+          "skill.hx.obg.gynae_symptoms",
+          "skill.hx.abnormal.risk"
+        ],
+        "task": "This 42 year old woman has had heavy periods for a year. Take a focused history in seven minutes and be ready to name the FIGO bleeding pattern.",
+        "title": "Take a history and name the pattern"
+      },
+      {
+        "examinerQuestions": [
+          "You found a bulky uterus that moves with the cervix. Why does that movement test separate a uterine from an ovarian mass?",
+          "The vault holds blood and the cervix looks healthy. What does that combination tell you, and what would a visible polyp change?",
+          "Her bleeding has lasted a year and she is 42. What histology step does her age demand, and why can the scan not replace it?"
+        ],
+        "id": "osce.aub.pelvic_exam",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.obg.intimate_consent",
+          "skill.exam.obg.gynae_abdominal",
+          "skill.exam.obg.vulval_inspect",
+          "skill.exam.obg.speculum_insert",
+          "skill.exam.obg.speculum_inspect",
+          "skill.exam.obg.bimanual",
+          "skill.approach.obg.pelvic_close"
+        ],
+        "task": "This 42 year old woman has heavy periods and a pelvic heaviness. Examine her abdomen and pelvis, including speculum and bimanual examination, and present your findings.",
+        "title": "Examine the pelvis in abnormal bleeding"
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.aub.basics",
+      "skill.exam.obg.bimanual",
+      "skill.aub.signs",
+      "skill.aub.summary",
+      "skill.aub.differential",
+      "skill.ix.aub.workup",
+      "skill.aub.diagnosis",
+      "skill.tx.aub"
+    ]
+  },
+  "skills": {
+    "skill.aub.basics": {
+      "id": "skill.aub.basics",
+      "kind": "reasoning",
+      "oneLine": "Bleeding outside normal menstruation, described in four FIGO dimensions",
+      "probes": [
+        {
+          "a": "Frequency, regularity, duration and volume of menstrual bleeding, plus any intermenstrual bleeding.",
+          "accept": [
+            "frequency",
+            "regularity",
+            "duration",
+            "volume",
+            "intermenstrual"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What four dimensions describe any menstrual bleeding?"
+        },
+        {
+          "a": "Chronic bleeding is present in most of the last six months, while acute bleeding is a single episode severe enough to need urgent care, whatever the background pattern.",
+          "accept": [
+            "six months",
+            "chronic",
+            "acute",
+            "urgent"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How does FIGO separate chronic from acute abnormal bleeding?"
+        },
+        {
+          "a": "Because menorrhagia and dysfunctional bleeding each lumped several different diseases under one word, so two patients with the same label needed opposite treatment.",
+          "accept": [
+            "lumped",
+            "opposite",
+            "dysfunctional",
+            "menorrhagia"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why did FIGO retire words like menorrhagia and dysfunctional bleeding?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "abnormal_uterine_bleeding_and_palm_coein_classification: pathophysiology",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Abnormal uterine bleeding: terminology and assessment",
+          "source": "NICE guideline: Heavy menstrual bleeding"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "Abnormal uterine bleeding is any bleeding from the uterine cavity that falls outside normal menstruation in timing, regularity, duration or volume, plus any bleeding between periods or after intercourse.\n\nNormal menstruation depends on orderly progesterone withdrawal, spiral vessel constriction and uniform shedding. When that control fails, through a lesion, missing ovulation, a clotting defect or disordered local signals, bleeding turns heavy, prolonged or unpredictable.",
+          "heading": "What abnormal bleeding is"
+        },
+        {
+          "heading": "The four dimensions and normal limits",
+          "table": {
+            "cols": [
+              "Dimension",
+              "Normal",
+              "Abnormal"
+            ],
+            "rows": [
+              [
+                "Frequency",
+                "Every 24 to 38 days",
+                "More often or more seldom"
+              ],
+              [
+                "Regularity",
+                "Cycle to cycle variation small",
+                "Unpredictable variation"
+              ],
+              [
+                "Duration",
+                "Up to 8 days",
+                "Longer than 8 days"
+              ],
+              [
+                "Volume",
+                "Manageable loss",
+                "Clots, flooding, nights disturbed"
+              ]
+            ]
+          }
+        },
+        {
+          "body": "Chronic abnormal bleeding has been present in most of the previous six months: the common outpatient story of a year of heavy periods.\n\nAcute abnormal bleeding is an episode severe enough to need urgent intervention, regardless of any background pattern. The two words triage differently: chronic bleeding is worked up in clinic, acute bleeding is resuscitated first.",
+          "heading": "Chronic versus acute"
+        },
+        {
+          "body": "Older words such as menorrhagia described how much without saying why, and dysfunctional bleeding grouped anovulation, clotting defects and endometrial causes under one label.\n\nFIGO retired them because the label then chose the wrong treatment: a cavity polyp needs removal while anovulation needs medical control, and one word must never cover both.",
+          "heading": "Why the old words were retired"
+        }
+      ],
+      "title": "What abnormal uterine bleeding is",
+      "why": "Abnormal bleeding is defined by measurable dimensions of the cycle, not by a vague heavy. Getting that definition exact is what stops every heavy period being called the same disease and lets the pattern point to the category."
+    },
+    "skill.aub.signs": {
+      "id": "skill.aub.signs",
+      "kind": "reasoning",
+      "oneLine": "The pattern names the category: regular and heavy, irregular, between periods, after sex",
+      "probes": [
+        {
+          "a": "Regular heavy prolonged bleeding with clots and flooding, iron deficiency anaemia, and a bulky uterus that moves with the cervix.",
+          "accept": [
+            "regular",
+            "heavy",
+            "anaemia",
+            "bulky"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What is the classic picture of structural abnormal bleeding?"
+        },
+        {
+          "a": "Bleeding between periods points to a cavity lesion such as a polyp or hyperplasia, while bleeding after intercourse points to the cervix and needs direct visualisation.",
+          "accept": [
+            "between periods",
+            "polyp",
+            "after intercourse",
+            "cervix"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How do intermenstrual and postcoital bleeding differ in what they mean?"
+        },
+        {
+          "a": "Postmenopausal bleeding, a rapidly enlarging uterus, an unscreened cervix with postcoital bleeding, and haemodynamic instability with active loss.",
+          "accept": [
+            "postmenopausal",
+            "rapidly",
+            "unscreened",
+            "instability"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "List the red flags that change abnormal bleeding from routine to urgent."
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "abnormal_uterine_bleeding_and_palm_coein_classification: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Abnormal uterine bleeding (clinical features)",
+          "source": "Berek and Novak's Gynecology"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "Heavy regular prolonged bleeding with clots and flooding is the structural and endometrial pattern: fibroids distorting the cavity, adenomyosis, or disordered local control of clotting and vessel tone.\n\nChronic loss produces iron deficiency anaemia, often the real morbidity: tiredness, breathlessness on exertion, pallor and sometimes pica. Grade the anaemia, not just the bleeding.",
+          "heading": "Heavy and regular"
+        },
+        {
+          "body": "Irregular unpredictable bleeding is the ovulatory pattern: cycles without ovulation leave oestrogen unopposed, and shedding turns erratic. Thyroid disease, polycystic ovary syndrome and perimenopause all present this way.\n\nBleeding between periods points inside the cavity: polyps, hyperplasia and carcinoma. Bleeding after intercourse points to the cervix: ectropion, polyps, or a lesion that must be seen, not scanned.",
+          "heading": "Irregular, between periods, after intercourse"
+        },
+        {
+          "heading": "Patterns and their categories",
+          "table": {
+            "cols": [
+              "Pattern",
+              "Points to",
+              "First thought"
+            ],
+            "rows": [
+              [
+                "Regular, heavy, prolonged",
+                "Cavity or wall lesion",
+                "Fibroid, adenomyosis"
+              ],
+              [
+                "Irregular, unpredictable",
+                "No ovulation",
+                "PCOS, thyroid, perimenopause"
+              ],
+              [
+                "Between periods",
+                "Focal cavity lesion",
+                "Polyp, hyperplasia"
+              ],
+              [
+                "After intercourse",
+                "Cervical lesion",
+                "See the cervix"
+              ]
+            ]
+          }
+        },
+        {
+          "body": "The abdomen shows a firm midline mass where a fibroid is large enough, and the bimanual examination shows a bulky uterus that moves with the cervix while the fornices stay free.\n\nPallor is the commonest general sign. Normal vitals fit chronic loss; tachycardia with postural symptoms marks severe anaemia, and hypotension with active bleeding is resuscitation, not clinic.",
+          "heading": "What your hands add up to"
+        }
+      ],
+      "title": "The abnormal bleeding picture",
+      "why": "Abnormal bleeding is the cleanest example in gynaecology of pattern pointing to mechanism. Regular heavy loss implicates the cavity, irregular loss implicates ovulation, bleeding between periods implicates a focal lesion, and bleeding after sex implicates the cervix."
+    },
+    "skill.aub.differential": {
+      "id": "skill.aub.differential",
+      "kind": "reasoning",
+      "oneLine": "Nine FIGO categories, and the three traps that must never be missed",
+      "probes": [
+        {
+          "a": "Polyp, adenomyosis, leiomyoma, malignancy and hyperplasia, coagulopathy, ovulatory dysfunction, endometrial, iatrogenic, and not otherwise classified.",
+          "accept": [
+            "polyp",
+            "adenomyosis",
+            "leiomyoma",
+            "malignancy",
+            "coagulopathy",
+            "ovulatory",
+            "endometrial",
+            "iatrogenic"
+          ],
+          "level": 2,
+          "minMatch": 3,
+          "q": "Name the nine PALM-COEIN categories."
+        },
+        {
+          "a": "Pregnancy, cervical cancer with postcoital bleeding, and endometrial cancer behind a known fibroid, each missed by attributing all bleeding to the obvious lesion.",
+          "accept": [
+            "pregnancy",
+            "cervical",
+            "endometrial",
+            "fibroid"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "What three diagnoses must never be missed in abnormal bleeding?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Offers a differential spanning structural, non-structural and pregnancy causes"
+        },
+        {
+          "id": "mimics",
+          "text": "Distinguishes polyp, adenomyosis and fibroid at the bedside"
+        },
+        {
+          "id": "safety",
+          "text": "States when to exclude pregnancy, cervical disease and endometrial pathology"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "abnormal_uterine_bleeding_and_palm_coein_classification: additionalDifferentials",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Abnormal uterine bleeding (differential diagnosis)",
+          "source": "Berek and Novak's Gynecology"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "For abnormal bleeding, work through the nine FIGO categories before settling on one: four structural lesions you can see, and five non-structural causes you must ask and test for.\n\nThe commonest trap is attributing all the bleeding to a known fibroid and missing coexistent hyperplasia or carcinoma, which can bleed identically. More than one category can apply to the same woman.",
+          "heading": "How to work through it"
+        },
+        {
+          "heading": "The structural four",
+          "points": [
+            "Polyp: intermenstrual bleeding with a normal sized uterus; hysteroscopy sees what ultrasound suggests.",
+            "Adenomyosis: symmetrically bulky, tender uterus with severe dysmenorrhoea; often coexists with fibroid.",
+            "Leiomyoma: submucosal lesions bleed out of proportion to size; subserosal lesions press rather than bleed.",
+            "Malignancy and hyperplasia: postmenopausal bleeding, obesity, chronic anovulation; needs histology, never assumption."
+          ]
+        },
+        {
+          "heading": "The non-structural five",
+          "points": [
+            "Coagulopathy: heavy bleeding since menarche, bruising, nosebleeds, bleeding after delivery; test von Willebrand factor where the screen is positive.",
+            "Ovulatory dysfunction: irregular unpredictable cycles from PCOS, thyroid disease or perimenopause.",
+            "Endometrial: regular heavy bleeding with no lesion and normal ovulation, from disordered local control.",
+            "Iatrogenic: anticoagulants, hormones, and the copper device, each a diagnosis made by the drug history.",
+            "Not classified: rare fistulae and malformations, the honest label when nothing above fits."
+          ]
+        },
+        {
+          "body": "A soft, bulky, tender uterus with severe dysmenorrhoea favours adenomyosis, while a firm nodular uterus favours fibroid, though the two frequently coexist.\n\nA positive pregnancy test ends the classification and starts different care. Postcoital bleeding with an unscreened cervix needs direct visualisation whatever the scan shows, and postmenopausal bleeding needs histology whatever the scan shows.",
+          "heading": "Bedside forks in the road"
+        }
+      ],
+      "title": "Differential diagnosis",
+      "why": "Most abnormal bleeding is exactly what it looks like, but the cases that are not are dangerous to miss: pregnancy, cervical disease, and endometrial cancer hiding behind a known fibroid. The differential does not stop once the scan names a lesion."
+    },
+    "skill.aub.summary": {
+      "id": "skill.aub.summary",
+      "kind": "reasoning",
+      "oneLine": "Problem representation for chronic bleeding quantified in FIGO terms",
+      "probes": [
+        {
+          "a": "The FIGO pattern and the anaemia grade, because the pattern chooses the category and anaemia decides the timing of treatment.",
+          "accept": [
+            "figo",
+            "pattern",
+            "anaemia",
+            "timing"
+          ],
+          "level": 2,
+          "minMatch": 1,
+          "q": "What element belongs in a bleeding summary that would not appear in most medical summaries?"
+        },
+        {
+          "a": "It separates a chronic benign process needing planned care from acute severe loss needing resuscitation, and it carries the fertility context that decides preservation or definitive care.",
+          "accept": [
+            "chronic",
+            "acute",
+            "resuscitation",
+            "fertility"
+          ],
+          "level": 3,
+          "minMatch": 1,
+          "q": "Why do tempo and fertility wishes matter so much in a bleeding summary?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "patient",
+          "text": "States the patient with age, parity, menopausal status and fertility wishes"
+        },
+        {
+          "id": "tempo",
+          "text": "States the tempo as chronic with bleeding quantified in FIGO terms"
+        },
+        {
+          "id": "anatomy",
+          "text": "States the uterine findings and the anaemia grade"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "Presenting the case",
+          "source": "Macleod's Clinical Examination"
+        },
+        {
+          "locator": "abnormal_uterine_bleeding_and_palm_coein_classification: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "State the patient with the facts that change the plan: age, parity, menopausal status and whether she wants more children, then the tempo, which is months.\n\nThen the syndrome in abstract terms with the FIGO pattern: chronic heavy regular menstrual bleeding with iron deficiency anaemia and a bulky uterus.",
+          "heading": "Order of the summary"
+        },
+        {
+          "body": "A worked example: a 42 year old woman with two children and completed family presents with a year of regular heavy periods lasting seven to eight days with clots and flooding, tiredness and exertional breathlessness, and a firm bulky uterus of 10 week size that moves with the cervix. Haemoglobin is low with iron deficiency. This is chronic abnormal uterine bleeding, FIGO category leiomyoma, with moderate anaemia.\n\nNote what each clause is doing: fertility wishes frame the options, FIGO terms quantify the symptom, weeks size and mobility fix the anatomy, and the anaemia grade fixes fitness for treatment.",
+          "heading": "A worked example"
+        }
+      ],
+      "title": "The clinical summary",
+      "why": "The summary for chronic abnormal bleeding has a different shape from an acute one: the FIGO pattern and fertility wishes belong in the same sentence as the syndrome, because together they determine whether treatment is medical or surgical and whether the uterus stays or goes."
+    },
+    "skill.aub.diagnosis": {
+      "id": "skill.aub.diagnosis",
+      "kind": "reasoning",
+      "oneLine": "Assign each applicable letter, and state the disease with its evidence",
+      "probes": [
+        {
+          "a": "Submucosal versus other leiomyoma, so a small cavity lesion explains severe bleeding that a large outer lesion never would.",
+          "accept": [
+            "submucosal",
+            "bleed",
+            "cavity",
+            "leiomyoma"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What does the leiomyoma subclassification describe?"
+        },
+        {
+          "a": "Postmenopausal bleeding, rapid uterine enlargement, severe anaemia needing transfusion, acute severe pain from torsion or degeneration, and haemodynamic instability with active loss.",
+          "accept": [
+            "postmenopausal",
+            "rapid",
+            "anaemia",
+            "torsion",
+            "instability"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "List the red flags that change abnormal bleeding from routine to urgent."
+        },
+        {
+          "a": "Where the lesion sits relative to the cavity, because a submucosal fibroid and a polyp are removed through the cervix while outer disease needs an abdominal route, and because a normal cavity with regular heavy loss is managed medically.",
+          "accept": [
+            "cavity",
+            "cervix",
+            "route",
+            "medically"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "A scan shows a 4 cm lesion. What single anatomical fact decides the route of treatment?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "category",
+          "text": "Assigns the PALM-COEIN category with the evidence for each letter"
+        },
+        {
+          "id": "redflags",
+          "text": "Screens for malignancy, severe anaemia and acute instability"
+        },
+        {
+          "id": "statement",
+          "text": "Gives a complete diagnostic statement with pattern, anatomy, anaemia and fertility context"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "abnormal_uterine_bleeding_and_palm_coein_classification: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Abnormal uterine bleeding (FIGO classification)",
+          "source": "Berek and Novak's Gynecology"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "PALM-COEIN notation assigns every applicable letter with its evidence: AUB-P for a polyp seen on hysteroscopy, AUB-L with submucosal or other subclass for fibroids by site, AUB-A for adenomyosis on imaging, AUB-M for hyperplasia or malignancy on histology.\n\nThe non-structural letters are assigned the same way: AUB-C with a positive clotting screen, AUB-O with proven anovulation, AUB-E when ovulation is normal and the cavity is empty, AUB-I naming the drug or device. Write AUB-L with AUB-O together when both are proven, rather than forcing one.",
+          "heading": "Assigning the letters"
+        },
+        {
+          "body": "A complete diagnostic statement names the tempo, the FIGO pattern, the category with its anatomical detail, the anaemia grade, and the fertility context.\n\nA worked example: chronic abnormal uterine bleeding with regular heavy prolonged periods, FIGO category leiomyoma with a 4 cm submucosal lesion, with moderate iron deficiency anaemia, in a woman of 42 with completed family.",
+          "heading": "The diagnostic statement"
+        },
+        {
+          "heading": "Red flags",
+          "points": [
+            "Postmenopausal bleeding, which needs histology whatever the scan shows.",
+            "Rapidly enlarging uterus, or any growth after the menopause, suggesting sarcoma.",
+            "Severe symptomatic anaemia from heavy bleeding, potentially needing transfusion.",
+            "Acute severe pain from torsion of a pedunculated lesion or degeneration.",
+            "Haemodynamic instability with active heavy bleeding, which is resuscitation before classification."
+          ]
+        }
+      ],
+      "title": "Diagnosis, PALM-COEIN letters and red flags",
+      "why": "A diagnosis of abnormal bleeding without a PALM-COEIN category does not say which treatment route fits, and without red flags it does not say whether she can wait. Category plus red flags is what turns a symptom into a plan."
+    },
+    "skill.ix.aub.workup": {
+      "id": "skill.ix.aub.workup",
+      "kind": "investigation",
+      "oneLine": "Bloods for anaemia, pregnancy test always, ultrasound first, histology to exclude",
+      "probes": [
+        {
+          "a": "Transvaginal with or without transabdominal ultrasound, as the first-line imaging in abnormal bleeding.",
+          "accept": [
+            "ultrasound",
+            "transvaginal",
+            "first-line"
+          ],
+          "level": 1,
+          "minMatch": 1,
+          "q": "What is the first-line imaging in abnormal uterine bleeding?"
+        },
+        {
+          "a": "At 42 with a year of heavy bleeding she needs endometrial sampling, because histology is the only exclusion that counts after this age.",
+          "accept": [
+            "sampling",
+            "histology",
+            "42",
+            "exclusion"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "She is 42 with a year of heavy bleeding. Does she need endometrial sampling?"
+        },
+        {
+          "a": "Correct the anaemia first and confirm the cavity lesion, because operating on severe anaemia without blood in hand risks a transfusion emergency, and an unmapped cavity risks the wrong route of surgery.",
+          "accept": [
+            "anaemia",
+            "transfusion",
+            "cavity",
+            "blood"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "She is severely anaemic and booked for surgery next week. What must happen first?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "abnormal_uterine_bleeding_and_palm_coein_classification: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Heavy menstrual bleeding: assessment and management",
+          "source": "NICE guideline: Heavy menstrual bleeding"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "Group investigations by what they answer: is she pregnant, how anaemic is she, is ovulation normal, and is there a lesion.\n\nFull blood count with ferritin grades the anaemia that decides fitness for any procedure. A urine pregnancy test is mandatory in every woman of reproductive age before imaging or intervention. Thyroid function explains irregular loss and is cheap to check.",
+          "heading": "Bloods and the pregnancy test"
+        },
+        {
+          "body": "Transvaginal with or without transabdominal ultrasound is first-line imaging: it measures the endometrium, finds polyps and fibroids, separates cavity from outer lesions, and checks the ovaries.\n\nSaline infusion sonography delineates focal cavity lesions the plain scan leaves doubtful. Hysteroscopy confirms polyps and submucosal fibroids and treats suitable ones in the same sitting.",
+          "heading": "Ultrasound first, cavity studies for the doubtful"
+        },
+        {
+          "body": "Endometrial sampling is needed from the age of 45 with abnormal bleeding, earlier with obesity, chronic anovulation, or bleeding that does not settle with treatment, and always for postmenopausal bleeding.\n\nPelvic MRI maps multiple or large lesions and separates adenomyosis from fibroid where the route of surgery depends on it. Clotting studies follow a positive bleeding screen; testing everyone is wasteful, missing von Willebrand disease in a teenager is worse.",
+          "heading": "Histology to exclude, MRI to map"
+        }
+      ],
+      "title": "Confirming, grading and mapping the disease",
+      "why": "Investigations in abnormal bleeding serve four separate jobs: excluding pregnancy, grading the anaemia that decides fitness for treatment, finding the lesion, and excluding hyperplasia and cancer. Knowing which test does which stops a student waiting for histology before correcting anaemia, or trusting a scan where only histology counts."
+    },
+    "skill.annex.aub.palmcoe": {
+      "id": "skill.annex.aub.palmcoe",
+      "kind": "annexure",
+      "oneLine": "The nine categories and normal cycle limits on one reference card",
+      "probes": [
+        {
+          "a": "Polyp, adenomyosis, leiomyoma subclassed by site, and malignancy with hyperplasia are the structural four.",
+          "accept": [
+            "polyp",
+            "adenomyosis",
+            "leiomyoma",
+            "malignancy"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Which four PALM-COEIN letters are structural?"
+        },
+        {
+          "a": "Coagulopathy, ovulatory dysfunction, endometrial, iatrogenic, and not otherwise classified are the non-structural five.",
+          "accept": [
+            "coagulopathy",
+            "ovulatory",
+            "endometrial",
+            "iatrogenic"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Which five letters are non-structural?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "abnormal_uterine_bleeding_and_palm_coein_classification: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Abnormal uterine bleeding (FIGO PALM-COEIN classification)",
+          "source": "Berek and Novak's Gynecology"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "heading": "PALM: the structural four",
+          "table": {
+            "cols": [
+              "Letter",
+              "Cause",
+              "How it is proven"
+            ],
+            "rows": [
+              [
+                "P",
+                "Polyp",
+                "Hysteroscopy"
+              ],
+              [
+                "A",
+                "Adenomyosis",
+                "Imaging, tender bulky uterus"
+              ],
+              [
+                "L",
+                "Leiomyoma, submucosal or other",
+                "Ultrasound by site"
+              ],
+              [
+                "M",
+                "Malignancy and hyperplasia",
+                "Histology only"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "COEIN: the non-structural five",
+          "table": {
+            "cols": [
+              "Letter",
+              "Cause",
+              "How it is proven"
+            ],
+            "rows": [
+              [
+                "C",
+                "Coagulopathy",
+                "Bleeding screen, clotting tests"
+              ],
+              [
+                "O",
+                "Ovulatory dysfunction",
+                "Irregular cycles, hormones"
+              ],
+              [
+                "E",
+                "Endometrial",
+                "Normal cavity, normal ovulation"
+              ],
+              [
+                "I",
+                "Iatrogenic",
+                "Drug and device history"
+              ],
+              [
+                "N",
+                "Not otherwise classified",
+                "Nothing above fits"
+              ]
+            ]
+          }
+        },
+        {
+          "body": "Frequency every 24 to 38 days, duration up to 8 days, and volume that needs no night changes and no days off work.\n\nChronic bleeding fills most of the last six months. Acute bleeding needs urgent care whatever the background. Sampling from 45 years, earlier with risk factors, always after the menopause.",
+          "heading": "Limits worth memorising"
+        }
+      ],
+      "title": "PALM-COEIN reference card",
+      "why": "Nine categories are too many to carry in working memory without a card. This reference puts each letter next to the test that proves it, so the clinic question is always which test comes next."
+    },
+    "skill.tx.aub": {
+      "dosingNote": "This module teaches management at the level of drug class and principle, with device specifications and schedules quoted from the cited sources. Specific agents, regimens and doses must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "id": "skill.tx.aub",
+      "kind": "treatment",
+      "oneLine": "Stop acute loss, control chronic loss medically, operate by category and wishes",
+      "probes": [
+        {
+          "a": "Resuscitate with fluids and blood, give an antifibrinolytic, and move early to tamponade, curettage, embolisation or hysterectomy when bleeding does not settle.",
+          "accept": [
+            "resuscitate",
+            "blood",
+            "antifibrinolytic",
+            "tamponade",
+            "hysterectomy"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "How do you manage acute severe abnormal bleeding?"
+        },
+        {
+          "a": "The 52 mg levonorgestrel intrauterine system first-line, tranexamic acid during bleeding days, NSAIDs, combined hormonal contraception, or ormeloxifene on its twice weekly then weekly schedule.",
+          "accept": [
+            "levonorgestrel",
+            "tranexamic",
+            "hormonal",
+            "ormeloxifene"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What medical options control chronic heavy bleeding?"
+        },
+        {
+          "a": "Hysteroscopic removal for cavity lesions, ablation or embolisation with completed family, myomectomy to preserve fertility, and hysterectomy as definitive care.",
+          "accept": [
+            "hysteroscopic",
+            "ablation",
+            "embolisation",
+            "myomectomy",
+            "hysterectomy"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "When bleeding needs a procedure, how do you choose which one?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "abnormal_uterine_bleeding_and_palm_coein_classification: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Heavy menstrual bleeding: assessment and management",
+          "source": "NICE guideline: Heavy menstrual bleeding"
+        },
+        {
+          "locator": "Abnormal uterine bleeding (good clinical practice recommendations)",
+          "source": "FOGSI"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "Acute severe bleeding is resuscitated before it is classified: large bore access, fluids, blood and an antifibrinolytic, with the uterus examined and pregnancy excluded in parallel.\n\nWhen bleeding does not settle, move early to tamponade, curettage, embolisation or hysterectomy by parity and stability. Waiting for histology while she bleeds is the error this block exists to prevent.",
+          "heading": "When bleeding is acute"
+        },
+        {
+          "body": "The 52 mg levonorgestrel intrauterine system is the most effective first-line medical therapy for heavy bleeding where the cavity allows it. Tranexamic acid taken during bleeding days only reduces loss by forty to fifty percent, in total oral doses of two to four grams a day in divided doses.\n\nNSAIDs and combined hormonal contraception suit ovulatory heavy loss. Ormeloxifene, widely used in India, is given as 60 mg twice a week for the first 12 weeks and then 60 mg a week. Gonadotrophin releasing hormone analogues shrink fibroids and buy time before surgery, particularly for 3 to 6 months to reduce loss while anaemia is corrected. Iron corrects the deficiency alongside, not afterwards.",
+          "heading": "Medical control"
+        },
+        {
+          "body": "Polyps and submucosal fibroids are removed hysteroscopically, through the cervix with no abdominal wound. Endometrial ablation suits heavy bleeding with completed family where the cavity is normal.\n\nUterine artery embolisation preserves the uterus where facilities allow. Myomectomy preserves fertility and follows site. Hysterectomy is definitive when family is complete, disease is extensive, or hyperplasia with atypia carries its forty percent concurrent cancer risk.",
+          "heading": "Procedures by category and wishes"
+        },
+        {
+          "body": "Correct anaemia with oral or parenteral iron at the primary centre well before any operation date, arrange blood in hand, and switch a copper device for a medical method where it drives the loss.\n\nRefer disease beyond local facilities to a centre with hysteroscopy, interventional radiology or advanced laparoscopy. A young woman wanting fertility is referred for uterus preserving care rather than managed on tablets until severe anaemia forces an emergency admission.",
+          "heading": "Indian context and referral thresholds"
+        }
+      ],
+      "title": "Managing abnormal uterine bleeding",
+      "why": "Management follows the category, not the symptom: cavity lesions are removed, ovulatory causes are controlled medically, coagulopathy is treated systemically, and anaemia is corrected in every pathway. Getting that match wrong, ablating an unbiopsied cavity or drifting for years on tablets while she becomes transfusion dependent, has real cost."
+    }
+  },
+  "cases": [
+    {
+      "diagnosis": {
+        "accept": [
+          "abnormal uterine bleeding",
+          "Dysfunctional uterine bleeding",
+          "Fibroid uterus"
+        ],
+        "answer": "Chronic abnormal uterine bleeding, FIGO category leiomyoma with a 4 cm submucosal lesion, with moderate iron deficiency anaemia."
+      },
+      "differentialModel": {
+        "accept": [
+          "Endometrial polyp",
+          "Adenomyosis",
+          "Fibroid uterus",
+          "Endometrial hyperplasia",
+          "Uterine sarcoma",
+          "malignancy",
+          "Von Willebrand disease",
+          "Polycystic ovarian syndrome",
+          "Hypothyroidism",
+          "Pregnancy"
+        ],
+        "answer": "Chronic abnormal uterine bleeding from a submucosal fibroid with moderate iron deficiency anaemia. Consider endometrial polyp, adenomyosis, endometrial hyperplasia or carcinoma, a bleeding disorder, and anovulatory causes.",
+        "minMatch": 3
+      },
+      "essentialInvestigations": [
+        "fbc",
+        "upt",
+        "usg"
+      ],
+      "exam": {
+        "skill.exam.obg.bimanual": {
+          "abnormal": true,
+          "finding": "Uterus bulky at about 10 week size, firm and regular, mobile, moving with the cervix. No cervical motion tenderness. Both fornices free, no adnexal mass felt."
+        },
+        "skill.exam.obg.gynae_abdominal": {
+          "abnormal": true,
+          "finding": "Firm midline hypogastric mass just above the pubic symphysis, about 10 week size, lower border not felt. Moves side to side with movement transmitted to the cervix. Bladder empty."
+        },
+        "skill.exam.obg.speculum_insert": {
+          "abnormal": false,
+          "finding": "Speculum passed gently without difficulty; some altered blood in the vault, no active spurting."
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "abnormal": false,
+          "finding": "Cervix healthy, no erosion, no polyp seen, no foul discharge. Altered blood present in the vault from the uterine cavity."
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "abnormal": false,
+          "finding": "Vulva normal, no lesions. Pallor of the introitus noted."
+        },
+        "skill.gen.appearance": {
+          "abnormal": true,
+          "finding": "Pale and tired looking but in no distress. Conjunctival and palmar pallor present. No breathlessness at rest."
+        },
+        "skill.gen.edema": {
+          "abnormal": false,
+          "finding": "No pedal oedema."
+        },
+        "skill.gen.vitals": {
+          "abnormal": false,
+          "finding": "Pulse 96 regular. Blood pressure 108/68. Respiratory rate 18. SpO2 98 percent on room air. Afebrile."
+        }
+      },
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "history": {
+        "bleed_tendency": {
+          "cues": [
+            "nosebleeds often",
+            "bleeding gums",
+            "bruise easily",
+            "bleed after tooth removal",
+            "bleeding after delivery"
+          ],
+          "key": true,
+          "reply": "No, my nose never bleeds and my gums are fine. Cuts stop bleeding normally, and I did not bleed heavily after either delivery."
+        },
+        "bleeding_pattern": {
+          "cues": [
+            "how heavy are",
+            "how many pads",
+            "pads per day",
+            "how long do they last",
+            "days of bleeding"
+          ],
+          "key": true,
+          "reply": "They last seven to eight days now, and the first three days are very heavy. I use six to eight cloth pads a day and have to change at night."
+        },
+        "clots_flooding": {
+          "cues": [
+            "pass clots",
+            "flooding through",
+            "staining clothes",
+            "gushing bleed",
+            "leak through"
+          ],
+          "key": true,
+          "reply": "Yes, there are clots, some as big as a lemon seed. Twice the bleeding has flooded through my clothes at work in the fields."
+        },
+        "contraception": {
+          "cues": [
+            "family planning",
+            "copper t",
+            "intrauterine device",
+            "sterilisation operation",
+            "operation for family"
+          ],
+          "reply": "My husband had a sterilisation operation after our second child, so we use nothing now."
+        },
+        "discharge": {
+          "cues": [
+            "white discharge",
+            "foul smell",
+            "itching down below",
+            "vaginal discharge"
+          ],
+          "reply": "There is no white discharge, no bad smell and no itching."
+        },
+        "drugs": {
+          "cues": [
+            "taking any medicine",
+            "tablets every day",
+            "hormone tablets",
+            "blood thinning medicine",
+            "using any drugs"
+          ],
+          "key": true,
+          "reply": "Only iron tablets from the PHC, which I take when I remember. No hormones and no blood thinners."
+        },
+        "dysmenorrhoea": {
+          "cues": [
+            "pain with periods",
+            "period pain",
+            "cramps low down",
+            "dysmenorrhoea"
+          ],
+          "reply": "There is a dull aching pain on the first two days, and a heavy dragging feeling low down. It is worse than when I was young but I can still work through it."
+        },
+        "family": {
+          "cues": [
+            "mother or sister",
+            "illness in the family",
+            "runs in the family",
+            "cancer in the family"
+          ],
+          "reply": "My mother stopped bleeding at 48 with no trouble. My elder sister has heavy periods too, and tablets from her doctor helped her."
+        },
+        "fatigue": {
+          "cues": [
+            "tired all the time",
+            "feeling weak",
+            "breathless climbing",
+            "eating mud",
+            "craving raw rice"
+          ],
+          "key": true,
+          "reply": "I feel tired all the time and breathless climbing the slope to our field. Sometimes I feel like eating raw rice."
+        },
+        "intermenstrual": {
+          "cues": [
+            "bleeding between periods",
+            "spotting between",
+            "bleeding after sex",
+            "bleed after intercourse",
+            "irregular spotting"
+          ],
+          "key": true,
+          "reply": "No bleeding between periods and no bleeding after relations with my husband."
+        },
+        "obstetric": {
+          "cues": [
+            "how many children",
+            "number of pregnancies",
+            "normal deliveries",
+            "any miscarriage",
+            "abortion before"
+          ],
+          "key": true,
+          "reply": "I have two children, both normal deliveries, now aged 14 and 11. I had one miscarriage in the third month between them. My periods returned normally after each."
+        },
+        "onset": {
+          "cues": [
+            "when did it start",
+            "how long",
+            "since when",
+            "gradual or sudden",
+            "first noticed"
+          ],
+          "key": true,
+          "reply": "It started gradually about a year ago with slightly heavier periods, and has become much worse in the last six months."
+        },
+        "past_medical": {
+          "cues": [
+            "diabetes",
+            "blood pressure problem",
+            "thyroid disease",
+            "tuberculosis before",
+            "jaundice before",
+            "kidney trouble"
+          ],
+          "reply": "No diabetes, no high blood pressure, no thyroid problem. I had no TB and no jaundice."
+        },
+        "pelvic_pressure": {
+          "cues": [
+            "heaviness low down",
+            "dragging feeling",
+            "pressure in the pelvis",
+            "weight in the lower abdomen"
+          ],
+          "key": true,
+          "reply": "For about six months I feel a heaviness low down, as if something is sitting there. My neighbour said my stomach looks bigger."
+        },
+        "personal": {
+          "cues": [
+            "kind of work",
+            "work in the fields",
+            "vegetarian diet",
+            "tobacco habit",
+            "alcohol habit"
+          ],
+          "reply": "I work as a farm labourer and eat a vegetarian diet at home. I use no tobacco and never drink alcohol."
+        },
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "your complaint",
+            "tell me about",
+            "how can i help",
+            "what is troubling"
+          ],
+          "key": true,
+          "reply": "Doctor, for one year my monthly bleeding has become very heavy with clots, and I feel a heaviness low in my stomach.",
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "regularity": {
+          "cues": [
+            "regular periods",
+            "cycle length",
+            "gap between periods",
+            "predictable dates",
+            "come on time"
+          ],
+          "key": true,
+          "reply": "They come regularly, every 28 to 30 days, almost on the expected date. It is the amount, not the timing, that troubles me."
+        },
+        "thyroid": {
+          "cues": [
+            "weight change",
+            "feeling very cold",
+            "swelling in the neck",
+            "hair falling",
+            "thyroid swelling"
+          ],
+          "reply": "My weight is steady and I have no swelling in the neck. I feel the cold like everyone else in winter."
+        },
+        "urinary": {
+          "cues": [
+            "passing urine often",
+            "urine frequency",
+            "waking to pass urine",
+            "leaking urine",
+            "burning while passing urine"
+          ],
+          "key": true,
+          "reply": "I pass urine very often, even two or three times at night. There is no burning and no leaking."
+        }
+      },
+      "id": "case.aub.meena",
+      "initialVitals": {
+        "bpDiastolic": 68,
+        "bpSystolic": 108,
+        "gcs": 15,
+        "hr": 96,
+        "rr": 18,
+        "spo2": 98,
+        "temp": 37
+      },
+      "investigations": {
+        "biopsy": {
+          "indicated": true,
+          "label": "Endometrial sampling",
+          "note": "Appropriate at 42 with a year of heavy bleeding: histology is the only way to exclude coexistent hyperplasia.",
+          "result": "Proliferative endometrium, no hyperplasia or malignancy."
+        },
+        "fbc": {
+          "indicated": true,
+          "label": "Full blood count with iron studies",
+          "note": "Grades the anaemia that decides fitness for any procedure and sets the iron replacement.",
+          "result": "Haemoglobin 8 g/dL. Microcytic hypochromic picture. Ferritin low, fitting iron deficiency from chronic loss."
+        },
+        "mri": {
+          "indicated": false,
+          "label": "Pelvic MRI",
+          "note": "Not indicated first-line: ultrasound already shows the cavity lesion and there is no suspicion of adenomyosis or sarcoma.",
+          "result": "Not done."
+        },
+        "sis": {
+          "indicated": true,
+          "label": "Saline infusion sonography",
+          "note": "Worth doing where available to delineate the submucosal lesion that decides hysteroscopic resectability.",
+          "result": "Submucosal lesion confirmed, bulging into the cavity."
+        },
+        "tsh": {
+          "indicated": true,
+          "label": "Thyroid function",
+          "note": "Explains irregular loss when abnormal; a normal result keeps the focus on the structural lesion.",
+          "result": "TSH within the normal range."
+        },
+        "upt": {
+          "indicated": true,
+          "label": "Urine pregnancy test",
+          "note": "Mandatory before any imaging or intervention in a woman of reproductive age with abnormal bleeding.",
+          "result": "Negative."
+        },
+        "usg": {
+          "indicated": true,
+          "label": "Pelvic ultrasound",
+          "note": "First-line imaging: it confirms the lesion, measures it, and shows whether the cavity is distorted.",
+          "result": "Uterus bulky at 10 week size. A 4 cm submucosal lesion distorting the cavity. Ovaries normal, no free fluid."
+        },
+        "vwf": {
+          "indicated": false,
+          "label": "Von Willebrand factor assay",
+          "note": "Not indicated: the bleeding screen is negative and periods were normal until a year ago. Reserved for a positive screen.",
+          "result": "Not done."
+        }
+      },
+      "managementModel": {
+        "accept": [
+          "iron",
+          "tranexamic acid during menstruation",
+          "levonorgestrel intrauterine system",
+          "endometrial sampling",
+          "pelvic ultrasound",
+          "refer to gynaecology",
+          "myomectomy",
+          "hysterectomy"
+        ],
+        "answer": "Correct the iron deficiency anaemia with iron and arrange blood cover, control bleeding with tranexamic acid while starting the levonorgestrel system, confirm the cavity lesion on ultrasound with histology, and refer for hysteroscopic removal since family is complete.",
+        "minMatch": 3
+      },
+      "opening": "Meena Deshmukh, 42, a farm labourer from a village near Nashik, sits in the gynaecology outpatient room with her daughter. She looks pale and tired. Introduce yourself and take a history.",
+      "patient": {
+        "age": 42,
+        "name": "Meena Deshmukh",
+        "occupation": "Farm labourer",
+        "residence": "Rural, lives with her husband, two children and mother-in-law",
+        "sex": "female"
+      },
+      "review": {
+        "status": "ai_drafted"
+      },
+      "teachingPoints": [
+        "The tempo alone should move you toward a chronic structural process before a single test: a year of heavy regular periods, not the weeks of a miscarriage or the days of an acute abdomen.",
+        "Regular timing with heavy prolonged flow implicates the cavity, not ovulation: her 28 to 30 day predictability is what keeps fibroid above PCOS and thyroid disease.",
+        "A negative bleeding screen matters as much as a positive one: no bruising, nosebleeds or delivery bleeding argues against coagulopathy without needing a single clotting test to invoke it.",
+        "No intermenstrual or postcoital bleeding with a healthy cervix argues against cervical pathology, and a negative pregnancy test excludes the physiological differential.",
+        "The anaemia is the real morbidity here: haemoglobin 8 with pica and exertional breathlessness must be corrected with iron and blood in hand before any operation is dated.",
+        "A submucosal site explains severity out of proportion to size: a 4 cm cavity lesion bleeds more than a far larger outer one, which is why the site belongs in the diagnosis.",
+        "Sterilisation in the husband plus completed family opens definitive hysteroscopic options, while the same lesion in a young nulliparous woman would point to medical control: fertility wishes choose the route."
+      ],
+      "title": "A farm labourer with a year of heavy regular periods"
+    }
+  ]
+}

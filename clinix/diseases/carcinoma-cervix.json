@@ -1,0 +1,1297 @@
+{
+  "id": "carcinoma-cervix",
+  "name": "Carcinoma cervix",
+  "fullName": "Carcinoma of the cervix",
+  "system": "gynaecology",
+  "subtitle": "Screening, staging and treatment",
+  "kbRef": "cervical_cancer",
+  "oneLine": "Contact bleeding with a friable cervical growth, staged by FIGO and treated by stage",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What invasive disease is, and what screening can catch before it",
+      "skills": [
+        "skill.carcinoma.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question, and before an intimate examination",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age, parity and screening past set the prior before she speaks",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected cervix cancer, age in the forties and beyond, high parity and never having been screened carry real weight: most Indian cancers present in multiparous women who never had a cervical test, so record screening past alongside age and parity."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Bleeding that follows contact, and the discharge that follows it",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.menstrual_history",
+        "skill.hx.obg.gynae_symptoms"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect bleeding after intercourse for months, often with spotting between periods and a blood-stained foul discharge. Quantify pads, clots and months, and ask the contact question directly: many women will not volunteer it."
+        },
+        "skill.hx.obg.menstrual_history": {
+          "expect": "Expect intermenstrual spotting over a previously regular pattern, or any bleeding after the menopause, which is never normal. Map frequency, regularity, duration and volume before attributing loss to the cervix."
+        },
+        "skill.hx.obg.gynae_symptoms": {
+          "expect": "Expect pelvic or leg pain, leg swelling, urinary change or weight loss as markers of spread beyond the cervix. A foul discharge with a friable cervix favours tumour over infection, but swabs still belong in the workup."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "Exposure, immunity and screening past that decide the prior",
+      "skills": [
+        "skill.hx.obg.gynae_background",
+        "skill.hx.carcinoma.risk"
+      ],
+      "emphasis": {
+        "skill.hx.obg.gynae_background": {
+          "expect": "Run contraception, screening, sexual history and smoking through this background chapter, then let the carcinoma risk skill weigh them: early first intercourse, more partners, high parity, tobacco and low immunity raise the prior, while regular screening lowers it."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Anaemia first, then the obstructive signs of late disease",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for pallor and weight loss from months of bleeding and advanced disease; she is often anaemic rather than acutely ill. Lymph nodes, especially supraclavicular, and leg swelling from lymphatic block belong in the same inspection."
+        },
+        "skill.gen.vitals": {
+          "expect": "Vitals are often stable, which misleads: tachycardia and postural symptoms mark the anaemia, while blood pressure and saturation add little. Record them, then move to what matters, haemoglobin and creatinine."
+        },
+        "skill.gen.edema": {
+          "expect": "Unilateral leg oedema with sidewall disease means lymphatic and venous block, not cardiac failure. Bilateral oedema with pallor more often reflects severe anaemia with low protein."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Pelvic examination",
+      "blurb": "The growth, each parametrium, and the sidewall",
+      "skills": [
+        "skill.exam.obg.gynae_abdominal",
+        "skill.exam.obg.vulval_inspect",
+        "skill.exam.obg.speculum_insert",
+        "skill.exam.obg.speculum_inspect",
+        "skill.exam.obg.bimanual"
+      ],
+      "emphasis": {
+        "skill.exam.obg.gynae_abdominal": {
+          "expect": "The abdomen is often normal in operable disease; a palpable hypogastric mass, ascites or a palpable kidney suggests spread beyond the pelvis. Always ballot the kidneys and feel for supraclavicular nodes."
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "expect": "Look for excoriation from chronic discharge and for lower vaginal or vulval spread, which upstages the disease. Note hygiene and anaemia at the introitus."
+        },
+        "skill.exam.obg.speculum_insert": {
+          "expect": "Pass the speculum gently: a friable growth bleeds when touched, and rough handling ruins the view and distresses her. Have biopsy and swab equipment ready before you start."
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "expect": "Expect a friable growth on the cervix that bleeds on touch, or an ulcer replacing the cervix. Note size, quadrants involved, vaginal extent and discharge; a healthy cervix with bleeding redirects you to the cavity."
+        },
+        "skill.exam.obg.bimanual": {
+          "expect": "Feel the cervix for bulk and hardness, then each parametrium for thickening short of, or reaching, the sidewall. State vaginal extent, uterine mobility and fornices on each side: free parametria keep her operable, sidewall fixation does not."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the carcinoma cervix picture together",
+      "blurb": "One syndrome from contact bleeding to obstruction",
+      "skills": [
+        "skill.carcinoma.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Prior, bleeding, growth, parametria, stage and fitness",
+      "skills": [
+        "skill.carcinoma.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Benign mimics, other cancers, and the pregnancy to exclude",
+      "skills": [
+        "skill.carcinoma.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Prove it, map it, and check she can take treatment",
+      "skills": [
+        "skill.ix.carcinoma.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and staging",
+      "blurb": "FIGO bands, and the line that chooses treatment",
+      "skills": [
+        "skill.carcinoma.diagnosis",
+        "skill.annex.carcinoma.figo"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Surgery or chemoradiation by stage, with referral around it",
+      "skills": [
+        "skill.tx.carcinoma"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.carcinoma.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.carcinoma.pelvic_exam",
+        "title": "Examine this woman with postcoital bleeding",
+        "task": "This 48-year-old woman has had bleeding after intercourse for six months. Perform a chaperoned pelvic examination and present your findings with a provisional stage.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.obg.intimate_consent",
+          "skill.exam.obg.gynae_abdominal",
+          "skill.exam.obg.vulval_inspect",
+          "skill.exam.obg.speculum_insert",
+          "skill.exam.obg.speculum_inspect",
+          "skill.exam.obg.bimanual",
+          "skill.approach.obg.pelvic_close"
+        ],
+        "examinerQuestions": [
+          "You found a friable growth that bleeds on touch. What is your next step, and what must you avoid?",
+          "How do your bimanual findings separate operable from inoperable disease?",
+          "Name two findings that would move her from surgery to chemoradiation."
+        ]
+      },
+      {
+        "id": "osce.carcinoma.history_counsel",
+        "title": "Take a bleeding history and counsel on next steps",
+        "task": "This 45-year-old woman reports spotting after intercourse. Take a focused history in seven minutes and counsel her on examination, biopsy and referral.",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.obg.menstrual_history",
+          "skill.hx.obg.gynae_symptoms",
+          "skill.hx.carcinoma.risk"
+        ],
+        "examinerQuestions": [
+          "What single question is most specific for cervical disease here, and why do women often not volunteer it?",
+          "She was never screened. How does that change your prior and your counselling?",
+          "What will you tell her about the biopsy, and where will you refer her?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.carcinoma.basics",
+      "skill.carcinoma.signs",
+      "skill.carcinoma.differential",
+      "skill.ix.carcinoma.workup",
+      "skill.carcinoma.diagnosis",
+      "skill.annex.carcinoma.figo",
+      "skill.tx.carcinoma"
+    ]
+  },
+  "skills": {
+    "skill.carcinoma.basics": {
+      "id": "skill.carcinoma.basics",
+      "kind": "reasoning",
+      "system": "gynaecology",
+      "title": "What carcinoma of the cervix is",
+      "oneLine": "Persistent HPV infection of the transformation zone, progressing over years to invasion",
+      "why": "Invasive disease and a positive screening test are different things, managed in different places by different means. Fixing that boundary first stops a preinvasive lesion being feared as cancer and stops a visible growth being watched as if it were one.",
+      "teach": [
+        {
+          "heading": "Invasive disease, not a positive smear",
+          "body": "Carcinoma of the cervix means malignant cells have crossed the basement membrane of the cervical lining into the stroma beneath. Before that line is crossed the disease is preinvasive, called cervical intraepithelial neoplasia, and local treatment alone cures it.\n\nA Pap smear or HPV test can only suggest disease; only tissue under the microscope, from a punch biopsy or a cone, proves invasion and names the subtype."
+        },
+        {
+          "heading": "HPV drives almost every case",
+          "points": [
+            "High-risk human papillomavirus, above all types 16 and 18, underlies the great majority of cases.",
+            "Its E6 and E7 proteins switch off the p53 and retinoblastoma brakes on the cell cycle, letting genetic damage accumulate.",
+            "Most infections clear within a year or two; cancer follows only persistent infection, moving through preinvasive stages over years.",
+            "The starting point is the transformation zone, where the columnar lining of the canal meets the squamous lining outside."
+          ]
+        },
+        {
+          "heading": "Two histological types",
+          "table": {
+            "cols": [
+              "Type",
+              "Arises from",
+              "Bedside note"
+            ],
+            "rows": [
+              [
+                "Squamous cell carcinoma",
+                "Outer cervix near the transformation zone",
+                "Commonest; often visible and friable"
+              ],
+              [
+                "Adenocarcinoma",
+                "Higher in the endocervical canal",
+                "May hide from cytology; suspect when smears and symptoms disagree"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Prevention moves the stage",
+          "body": "Disease caught by screening is preinvasive or microscopic; disease that bleeds is usually visible and needs more. Organised cytology and HPV testing, with vaccination, have shifted whole populations toward earlier stages.\n\nThe nonavalent vaccine covers types 6, 11, 16, 18, 31, 33, 45, 52 and 58, given into the deltoid at 0, 2 and 6 months, to girls and women from 9 to 45 years, and to boys and men 9 to 26 years where the programme covers them."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What separates invasive carcinoma from cervical intraepithelial neoplasia?",
+          "a": "Invasion across the basement membrane into the stroma.",
+          "accept": [
+            "basement membrane",
+            "stroma",
+            "invasion"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which HPV types cause most cases, and what must happen after infection for cancer to follow?",
+          "a": "Types 16 and 18; the infection must persist for years and progress through preinvasive stages.",
+          "accept": [
+            "16",
+            "18",
+            "persist",
+            "preinvasive"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Smears are repeatedly normal but postcoital bleeding continues. Why do you still suspect adenocarcinoma?",
+          "a": "It arises higher in the endocervical canal, above the reach of routine sampling, so cytology can miss it while symptoms persist.",
+          "accept": [
+            "endocervical",
+            "sampling",
+            "higher"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cervical_cancer: pathophysiology"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Carcinoma of the cervix: aetiology and histology"
+        },
+        {
+          "source": "WHO guideline: Human papillomavirus vaccines",
+          "locator": "HPV vaccination"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.carcinoma.signs": {
+      "id": "skill.carcinoma.signs",
+      "kind": "reasoning",
+      "system": "gynaecology",
+      "title": "The carcinoma cervix picture",
+      "oneLine": "Contact bleeding with a friable growth, plus parametrial and obstructive signs of spread",
+      "why": "Bleeding pattern, growth and parametrial signs form one syndrome, and the late signs are all obstructive. Reading them as one picture stages the patient at the bedside before any scan, which is what an examiner rewards.",
+      "teach": [
+        {
+          "heading": "Bleeding that follows contact",
+          "body": "Bleeding after intercourse is the classic early symptom: a friable tumour surface oozes when touched, long before it bleeds on its own.\n\nSpotting between periods, heavier periods, and any bleeding after the menopause carry the same message, and a blood-stained discharge with a foul smell means the growth has outgrown its blood supply."
+        },
+        {
+          "heading": "What the hands find",
+          "body": "On speculum the cervix shows a growth that bleeds when the swab touches it, or an ulcer where the cervix should be; a barrel-shaped enlargement suggests disease growing inside the canal.\n\nOn bimanual examination a firm bulky cervix with thickening of one or both parametria tells you the disease has left the cervix; fixation to the pelvic sidewall, a short nodular vagina, or spread felt through the rectum sets its upper limit."
+        },
+        {
+          "heading": "Late disease is obstructive",
+          "points": [
+            "Pelvic or leg pain with leg swelling points to sidewall disease pressing on nerves, veins and lymphatics.",
+            "Less urine, loin pain or a rising creatinine means a ureter is blocked, often silently.",
+            "Leakage of urine or stool through the vagina means a fistula into the bladder or rectum.",
+            "Weight loss, fatigue and pallor mark chronic blood loss and advanced disease."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the classic early symptom of carcinoma of the cervix?",
+          "a": "Bleeding after intercourse, from a friable tumour surface.",
+          "accept": [
+            "after intercourse",
+            "postcoital",
+            "friable"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "How does a malignant growth feel different from cervicitis on examination?",
+          "a": "A hard friable growth that bleeds on touch with a firm bulky cervix and parametrial thickening, against a tender inflamed cervix without a hard mass.",
+          "accept": [
+            "friable",
+            "bleeds on touch",
+            "parametrial",
+            "hard"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why do you check creatinine in advanced disease even when she passes urine?",
+          "a": "A ureter can be blocked silently by parametrial disease, with hydronephrosis and renal impairment before symptoms appear.",
+          "accept": [
+            "ureter",
+            "hydronephrosis",
+            "renal"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cervical_cancer: clinicalPearls"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cervical_cancer: redFlags"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Carcinoma of the cervix: symptoms and signs"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.carcinoma.summary": {
+      "id": "skill.carcinoma.summary",
+      "kind": "reasoning",
+      "system": "gynaecology",
+      "title": "The clinical summary",
+      "oneLine": "Prior, bleeding, growth, parametria, stage and fitness in one breath",
+      "why": "A cervix cancer summary must let the listener stage the disease without asking a follow up. Prior, contact bleeding, growth, parametrial status on each side, stage and fitness all belong in it, because each one changes the next step.",
+      "teach": [
+        {
+          "heading": "Four beats in one breath",
+          "body": "Name the woman with what raises her prior: age, parity, never screened. Then the tempo and the syndrome in plain terms: months of postcoital bleeding with a friable cervical growth.\n\nThen the extent: parametria free or involved, vaginal and nodal spread, and fitness: anaemia and creatinine. End with the stage, because the stage is the plan."
+        },
+        {
+          "heading": "A worked example",
+          "body": "A 48-year-old multiparous woman, never screened, with six months of postcoital bleeding and foul discharge. Speculum shows a 3 cm friable growth bleeding on touch; the left parametrium is thickened halfway to the sidewall, the right is free. Biopsy shows squamous cell carcinoma: carcinoma of the cervix, FIGO stage IIB, with moderate iron deficiency anaemia."
+        },
+        {
+          "heading": "What examiners penalise",
+          "points": [
+            "Describing bleeding without saying whether it follows intercourse.",
+            "Reporting a growth without parametrial status on each side.",
+            "Staging without a biopsy: no histology, no stage.",
+            "Omitting haemoglobin and creatinine, which decide fitness and timing."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What element belongs in a cervix cancer summary that a fibroid summary would not need?",
+          "a": "Parametrial status on each side with the resulting stage, because it decides operability.",
+          "accept": [
+            "parametrial",
+            "stage",
+            "operab"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why do anaemia and creatinine belong in the same sentence as the stage?",
+          "a": "They decide fitness for surgery or chemoradiation and the timing of either, so a summary without them cannot plan treatment.",
+          "accept": [
+            "fitness",
+            "timing",
+            "treatment"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "prior",
+          "text": "States the woman with risk and screening past"
+        },
+        {
+          "id": "extent",
+          "text": "States growth and parametrial status on each side"
+        },
+        {
+          "id": "stage",
+          "text": "Closes with stage, anaemia and renal status"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "Clinical reasoning"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cervical_cancer: clinicalPearls"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.carcinoma.differential": {
+      "id": "skill.carcinoma.differential",
+      "kind": "reasoning",
+      "system": "gynaecology",
+      "title": "Differential diagnosis",
+      "oneLine": "Benign cervical mimics, uterine and vault cancers, and the pregnancy that must be excluded",
+      "why": "Several benign cervical lesions bleed on touch exactly like cancer, and an older woman can carry a uterine cancer behind a normal-looking cervix. The differential protects both errors: calling benign disease malignant, and missing a second malignancy.",
+      "teach": [
+        {
+          "heading": "Sort by the cervix first",
+          "body": "When bleeding comes with a cervical lesion, the cervix itself decides the list: a hard friable growth that bleeds on touch is cancer until biopsy says otherwise, while a soft polyp, a red velvety ectropion, or a tender inflamed cervix points to benign disease.\n\nWhen the cervix looks healthy, look past it: to the uterine cavity in older women, to the vault, to pregnancy, or to infection."
+        },
+        {
+          "heading": "The list to work through",
+          "points": [
+            "Cervical intraepithelial neoplasia: screen-detected, no visible growth; the reason screening exists, not a bedside mimic.",
+            "Cervical polyp or ectropion: bleeds on touch like cancer, but soft, often pedunculated, with a mobile uterus and free parametria.",
+            "Cervicitis, including genital tuberculosis in India: discharge with a tender cervix and no hard growth; swabs and biopsy settle it.",
+            "Endometrial carcinoma: older woman, postmenopausal bleeding, bulky uterus, normal cervix; sample the cavity.",
+            "Vaginal carcinoma: growth in the vault or wall with a spared cervix; biopsy maps it.",
+            "Fibroid, pelvic infection, abortion or ectopic pregnancy: uterine or adnexal findings with a healthy cervix; a pregnancy test is mandatory in reproductive age."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name four differentials for postcoital bleeding with a cervical lesion.",
+          "a": "Cervical polyp or ectropion, cervicitis, preinvasive disease, and endometrial or vaginal carcinoma alongside the cervix itself.",
+          "accept": [
+            "polyp",
+            "ectropion",
+            "cervicitis",
+            "preinvasive",
+            "endometrial",
+            "vaginal"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "The cervix looks healthy in a 60-year-old with postmenopausal bleeding. What next, and why?",
+          "a": "Sample the uterine cavity, because endometrial carcinoma presents this way with a normal cervix.",
+          "accept": [
+            "cavity",
+            "endometrial",
+            "sample"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Spans benign cervical, malignant cervical, uterine and pregnancy causes"
+        },
+        {
+          "id": "pregnancy",
+          "text": "Excludes pregnancy in reproductive age"
+        },
+        {
+          "id": "biopsy",
+          "text": "Biopsies any growth rather than judging it by eye"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cervical_cancer: additionalDifferentials"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Abnormal vaginal bleeding: causes"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.carcinoma.workup": {
+      "id": "skill.ix.carcinoma.workup",
+      "kind": "investigation",
+      "system": "gynaecology",
+      "title": "Confirming and staging the disease",
+      "oneLine": "Biopsy proves it, MRI maps it, nodal imaging and renal function complete the stage",
+      "why": "Cytology cannot rule out invasion and examination alone underestimates spread, so the workup has three separate jobs: prove, map and check fitness. Knowing which test does which stops a student repeating a smear while a visible growth waits for biopsy.",
+      "teach": [
+        {
+          "heading": "Tissue first, and never cytology alone",
+          "body": "Biopsy every visible lesion: a punch from the junction of normal and abnormal tissue, or a colposcopically directed biopsy where the lesion is small. Never take it from the necrotic centre, which gives dead tissue and no diagnosis.\n\nHistopathology names the subtype and the depth of invasion; a cone with endocervical curettage answers microinvasion and margins. Cytology alone never proves or excludes invasive disease."
+        },
+        {
+          "heading": "Test, question, timing",
+          "table": {
+            "cols": [
+              "Test",
+              "What it answers",
+              "When"
+            ],
+            "rows": [
+              [
+                "Punch or directed biopsy",
+                "Proves invasion; names subtype",
+                "Every visible lesion"
+              ],
+              [
+                "MRI of the pelvis",
+                "Size, parametrial and vaginal spread",
+                "Staging in every case"
+              ],
+              [
+                "CT or PET-CT",
+                "Nodes and distant spread",
+                "Visible disease and above"
+              ],
+              [
+                "Examination under anaesthesia",
+                "Fixity, with bladder or bowel check",
+                "Doubt about operability"
+              ],
+              [
+                "Cystoscopy, proctoscopy",
+                "Bladder or rectal invasion",
+                "Invasion suspected"
+              ],
+              [
+                "Blood count, renal function",
+                "Anaemia, silent obstruction",
+                "Baseline in all"
+              ],
+              [
+                "Pregnancy test",
+                "Excludes gestation",
+                "Reproductive age"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What not to do",
+          "points": [
+            "Do not repeat a smear while a friable growth waits for biopsy.",
+            "Do not call disease operable without imaging the parametria and nodes.",
+            "Do not start treatment without haemoglobin and creatinine: both change the plan.",
+            "Do not forget the chest and upper abdomen when advanced disease is suspected."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What proves invasive cervical cancer, and what cannot?",
+          "a": "Histopathology of a biopsy or cone proves it; cytology alone can neither prove nor exclude invasion.",
+          "accept": [
+            "biopsy",
+            "histopathology",
+            "cytology"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Where on the lesion do you take the punch, and where not?",
+          "a": "At the junction of normal and abnormal tissue; never from the necrotic centre.",
+          "accept": [
+            "junction",
+            "necrotic",
+            "centre"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "MRI shows parametrial spread but no sidewall fixation and nodes are clear. What does that change?",
+          "a": "It moves her out of the operable group toward chemoradiation, since parametrial involvement rules out straightforward surgery.",
+          "accept": [
+            "parametrial",
+            "chemoradiation",
+            "surgery"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cervical_cancer: additionalInvestigations"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Carcinoma of the cervix: investigations"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.carcinoma.diagnosis": {
+      "id": "skill.carcinoma.diagnosis",
+      "kind": "reasoning",
+      "system": "gynaecology",
+      "title": "Diagnosis and FIGO staging",
+      "oneLine": "Clinical staging completed by imaging and nodes, in four bands that choose treatment",
+      "why": "The stage, not the size alone, chooses between surgery and chemoradiation, so a diagnosis without a stage cannot plan anything. Four bands carry the whole logic; the substages are detail hung on them.",
+      "teach": [
+        {
+          "heading": "Staging is clinical, imaging completes it",
+          "body": "Stage comes from examination under good conditions plus imaging: tumour size, vaginal and parametrial extent, hydronephrosis, and nodes. Nodes found on imaging or pathology upstage the disease whatever the tumour size.\n\nSize cutoffs do the fine work: invasion under 3 mm, then 3 to 5 mm, then visible disease under 2 cm, 2 to 4 cm, and above 4 cm."
+        },
+        {
+          "heading": "The four bands",
+          "points": [
+            "Stage I: confined to the cervix, microscopic or visible; the operable group with selected early disease.",
+            "Stage II: beyond the cervix but short of the sidewall and the lower third of the vagina; upper vaginal disease without parametrial spread stays at the operable edge.",
+            "Stage III: lower third of the vagina, pelvic sidewall, hydronephrosis or a non-functioning kidney, or pelvic and para-aortic nodes.",
+            "Stage IV: bladder or rectal mucosa involved, or spread beyond the true pelvis and distant organs."
+          ]
+        },
+        {
+          "heading": "The one-line diagnosis",
+          "body": "Name histology, stage and fitness together: squamous cell carcinoma of the cervix, FIGO stage IIB, with moderate anaemia and normal creatinine.\n\nMicroinvasion, nodal status and hydronephrosis each move the line, so state each explicitly rather than hiding them inside the stage."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What single finding moves disease to stage IIIB?",
+          "a": "Extension to the pelvic sidewall, or hydronephrosis with a non-functioning kidney.",
+          "accept": [
+            "sidewall",
+            "hydronephrosis",
+            "kidney"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Nodes are positive on imaging but the tumour is small and confined. What stage?",
+          "a": "Stage IIIC: nodal involvement upstages the disease whatever the tumour size and extent.",
+          "accept": [
+            "IIIC",
+            "nodes",
+            "upstage"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is hydronephrosis a staging finding and not just a complication?",
+          "a": "It marks parametrial disease deep enough to trap a ureter, which behaves like sidewall disease and needs the same treatment.",
+          "accept": [
+            "parametrial",
+            "ureter",
+            "sidewall"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cervical_cancer: clinicalPearls"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Carcinoma of the cervix: FIGO staging"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.carcinoma.figo": {
+      "id": "skill.annex.carcinoma.figo",
+      "kind": "annexure",
+      "system": "gynaecology",
+      "title": "FIGO staging grid for carcinoma cervix",
+      "oneLine": "Stage, extent and size cutoffs on one grid",
+      "why": "Staging questions are asked from this grid, and treatment flows from it, so a student who can place any finding on the grid can answer both the viva and the bedside.",
+      "teach": [
+        {
+          "heading": "The staging grid",
+          "table": {
+            "cols": [
+              "Stage",
+              "Extent",
+              "Size rule"
+            ],
+            "rows": [
+              [
+                "IA1",
+                "Microscopic, not seen clinically",
+                "Invasion under 3 mm"
+              ],
+              [
+                "IA2",
+                "Microscopic, not seen clinically",
+                "3 mm to under 5 mm"
+              ],
+              [
+                "IB1",
+                "Visible, confined to cervix",
+                "5 mm to under 2 cm"
+              ],
+              [
+                "IB2",
+                "Visible, confined to cervix",
+                "2 cm to under 4 cm"
+              ],
+              [
+                "IB3",
+                "Visible, confined to cervix",
+                "4 cm and above"
+              ],
+              [
+                "IIA1",
+                "Upper two thirds of vagina, no parametria",
+                "Under 4 cm"
+              ],
+              [
+                "IIA2",
+                "Upper two thirds of vagina, no parametria",
+                "4 cm and above"
+              ],
+              [
+                "IIB",
+                "Parametria involved, short of sidewall",
+                "Any size"
+              ],
+              [
+                "IIIA",
+                "Lower third of vagina, no sidewall",
+                "Any size"
+              ],
+              [
+                "IIIB",
+                "Sidewall, or blocked ureter",
+                "Any size"
+              ],
+              [
+                "IIIC1",
+                "Pelvic nodes involved",
+                "Any size or extent"
+              ],
+              [
+                "IIIC2",
+                "Para-aortic nodes involved",
+                "Any size or extent"
+              ],
+              [
+                "IVA",
+                "Bladder or rectal mucosa involved",
+                "Adjacent spread"
+              ],
+              [
+                "IVB",
+                "Distant organs",
+                "Distant spread"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "How to use this grid",
+          "body": "Read extent first, size second: a 3 cm growth confined to the cervix is IB2, while any parametrial involvement makes it at least IIB whatever the size.\n\nNodes and hydronephrosis override size entirely: positive nodes mean IIIC and a blocked ureter means IIIB, even with a small primary."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A visible 3 cm growth is confined to the cervix. What stage?",
+          "a": "Stage IB2: visible, confined, 2 cm to under 4 cm.",
+          "accept": [
+            "IB2",
+            "confined"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "The growth is small but pelvic nodes are positive. What stage, and why?",
+          "a": "Stage IIIC1: nodal involvement upstages the disease whatever the tumour size.",
+          "accept": [
+            "IIIC",
+            "nodes"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cervical_cancer: clinicalPearls"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Carcinoma of the cervix: FIGO staging"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.carcinoma": {
+      "id": "skill.tx.carcinoma",
+      "kind": "treatment",
+      "system": "gynaecology",
+      "title": "Managing carcinoma of the cervix",
+      "oneLine": "Stage chooses surgery or chemoradiation, with referral, support and prevention around it",
+      "why": "Treatment fails when stage and modality are mismatched: an operable cancer sent for radiation alone, or parametrial disease opened. The stage-wise map below keeps each patient on the right road, and the referral around it keeps her moving.",
+      "teach": [
+        {
+          "heading": "Treatment follows stage, and starts with referral",
+          "body": "Plan every case with a gynae oncology team: staging, histology review and fitness are settled together before any cut or beam. In India that means early referral from the district hospital to the medical college or regional cancer centre, with the biopsy, MRI and renal results in hand.\n\nPublic insurance supports treatment costs where she is eligible, so confirm eligibility early rather than after borrowed money runs out."
+        },
+        {
+          "heading": "The stage-wise map",
+          "points": [
+            "Microinvasion without vessel spread: cone biopsy or simple hysterectomy where family is complete.",
+            "Visible disease confined to the cervix and upper vaginal edge: radical hysterectomy with pelvic node dissection; fertility-sparing trachelectomy in carefully selected young women.",
+            "Parametrial disease and beyond: concurrent chemoradiation with external beam and cisplatin-based chemotherapy, then a brachytherapy boost.",
+            "Distant or recurrent disease: platinum-based systemic chemotherapy with bevacizumab, adding a checkpoint inhibitor such as pembrolizumab where eligible.",
+            "Symptoms in parallel: iron and blood for anaemia, stent or nephrostomy for a blocked ureter, pain relief, and palliative care for advanced disease."
+          ]
+        },
+        {
+          "heading": "After treatment",
+          "body": "Follow every treated woman for recurrence: new bleeding or discharge, leg swelling, loin pain and rising creatinine each demand urgent review, not reassurance.\n\nClose with support and prevention: psychosexual and menopause care, vault smears where advised, and HPV vaccination and screening counselled for daughters and sisters."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the two curative roads, and which stage takes which?",
+          "a": "Surgery for disease confined to the cervix and its operable edge; concurrent chemoradiation for parametrial disease and beyond.",
+          "accept": [
+            "surgery",
+            "chemoradiation",
+            "parametrial"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does a blocked ureter change treatment rather than just adding a stent?",
+          "a": "It marks stage IIIB disease needing chemoradiation; the stent protects the kidney while the cancer treatment does the curing.",
+          "accept": [
+            "IIIB",
+            "chemoradiation",
+            "kidney"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A young woman with early disease wants children. What option preserves that chance?",
+          "a": "Fertility-sparing trachelectomy with node assessment in carefully selected early disease, through a gynae oncology unit.",
+          "accept": [
+            "trachelectomy",
+            "fertility",
+            "selected"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cervical_cancer: management"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Carcinoma of the cervix: treatment"
+        },
+        {
+          "source": "NICE guideline: Suspected cancer recognition and referral",
+          "locator": "Gynaecological cancers: referral"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of modality and principle. Specific agents, routes, combinations and schedules must be taken from your current national or institutional guideline and local protocols at the time of prescribing. CliniX does not prescribe."
+    }
+  },
+  "cases": [
+    {
+      "id": "case.carcinoma.sunita",
+      "title": "A farm worker with six months of bleeding after intercourse",
+      "opening": "Sunita Pawar, 48, has been sent from the rural health centre with vaginal bleeding. She sits quietly with her daughter, a cloth bag of old prescriptions in her lap. Introduce yourself and take a history.",
+      "fallback": "I do not understand, doctor. Can you ask that in a simpler way?",
+      "patient": {
+        "name": "Sunita Pawar",
+        "age": 48,
+        "sex": "female",
+        "occupation": "Farm labourer, works in cotton fields",
+        "residence": "Rural, lives with her husband, four children and mother-in-law"
+      },
+      "initialVitals": {
+        "hr": 102,
+        "bpSystolic": 110,
+        "bpDiastolic": 70,
+        "rr": 20,
+        "spo2": 97,
+        "temp": 37.8,
+        "gcs": 15
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "what is the problem you came with",
+            "tell me what is troubling you",
+            "why have you come to the hospital",
+            "how can I help you today"
+          ],
+          "reply": "Doctor, for six months I bleed after relations with my husband, and now there is a bad smelling discharge daily.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "onset_tempo": {
+          "cues": [
+            "when did the bleeding first start",
+            "how many months has this lasted",
+            "did it begin suddenly or slowly",
+            "has it worsened over time",
+            "tell me how it began"
+          ],
+          "reply": "It started about six months ago, a little spotting first, and now it comes every time, with more discharge."
+        },
+        "contact_bleeding": {
+          "cues": [
+            "bleeding after intercourse",
+            "bleeding after relations",
+            "do you bleed when you meet your husband",
+            "spotting after contact",
+            "blood after physical relations"
+          ],
+          "reply": "Yes, almost every time after relations there is fresh blood, not much, but it always comes. This never happened before.",
+          "key": true
+        },
+        "intermenstrual_spotting": {
+          "cues": [
+            "spotting between your periods",
+            "bleeding in between periods",
+            "any staining of clothes mid cycle",
+            "blood loss apart from period days",
+            "do you spot mid month"
+          ],
+          "reply": "Yes, between periods also I see stains for two or three days. My periods themselves still come each month."
+        },
+        "discharge_nature": {
+          "cues": [
+            "tell me about the white discharge",
+            "is the discharge foul smelling",
+            "blood stained discharge daily",
+            "colour and smell of the discharge",
+            "do you need a cloth daily for discharge"
+          ],
+          "reply": "It is yellowish, sometimes mixed with blood, and smells bad. I have to keep a cloth every day.",
+          "key": true
+        },
+        "pelvic_pain_profile": {
+          "cues": [
+            "pain in the lower abdomen",
+            "dull ache low down",
+            "backache since this started",
+            "pain during relations",
+            "leg pain or swelling on one side"
+          ],
+          "reply": "There is a dull ache low down and in the back for two months. Relations have become painful now. No leg swelling."
+        },
+        "bladder_bowel_changes": {
+          "cues": [
+            "burning while passing urine",
+            "passing urine often at night",
+            "leakage of urine without control",
+            "difficulty passing stool",
+            "blood in urine or stool"
+          ],
+          "reply": "I pass urine more often, but no burning and no leakage. Motions are normal, no blood."
+        },
+        "weight_appetite_loss": {
+          "cues": [
+            "loss of weight recently",
+            "how is your appetite",
+            "feeling tired or breathless on work",
+            "do you feel dizzy while working",
+            "craving for clay or raw rice"
+          ],
+          "reply": "I feel tired and breathless climbing to the field, and chutneys taste flat. Weight is a little less. No craving for mud."
+        },
+        "menstrual_background": {
+          "cues": [
+            "age when periods first came",
+            "are your periods regular",
+            "how many days does bleeding last",
+            "how many pads per day",
+            "when did menopause happen if at all"
+          ],
+          "reply": "Periods started at thirteen, always regular, four days, two to three pads a day. Menopause has not come."
+        },
+        "obstetric_past": {
+          "cues": [
+            "how many children do you have",
+            "age at first delivery",
+            "any miscarriage or operation during delivery",
+            "where did you deliver",
+            "any heavy bleeding after delivery"
+          ],
+          "reply": "I married at seventeen and have four children, all normal deliveries at home. First child at eighteen. No operation, no big bleeding after."
+        },
+        "contraception_used": {
+          "cues": [
+            "what family planning method do you use",
+            "have you used copper T",
+            "has your husband had sterilisation",
+            "any hormone pills taken",
+            "when did you stop contraception"
+          ],
+          "reply": "My husband had the sterilisation operation after our fourth child, twelve years ago. I never used pills or Copper T."
+        },
+        "screening_vaccine_record": {
+          "cues": [
+            "have you had a Pap smear test",
+            "vinegar test of the mouth of the womb",
+            "any cervical test before this",
+            "HPV vaccine injection taken",
+            "were you ever told of an abnormal test"
+          ],
+          "reply": "Never, doctor. No test of the womb was ever done, and no injection for this. This is the first examination.",
+          "key": true
+        },
+        "tobacco_exposure": {
+          "cues": [
+            "do you chew tobacco or mishri",
+            "smoking bidis at home",
+            "tobacco use in the family",
+            "does your husband smoke inside",
+            "years of tobacco chewing"
+          ],
+          "reply": "I do not chew or smoke, but my husband smokes bidis at home for many years."
+        },
+        "medicines_allergy": {
+          "cues": [
+            "which medicines do you take daily",
+            "allergy to any injection or tablet",
+            "treatment for sugar or pressure",
+            "any blood thinning tablets",
+            "thyroid tablets taken"
+          ],
+          "reply": "Only iron tablets from the health centre for two months. No allergy, no sugar or pressure treatment."
+        },
+        "family_support": {
+          "cues": [
+            "any cancer in the family",
+            "who will come with you for treatment",
+            "can you stay in the city for treatment",
+            "what work do you do daily",
+            "who looks after the house if admitted"
+          ],
+          "reply": "No cancer in the family. My eldest daughter will come with me. I work in the fields; my sister-in-law will manage the house."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "abnormal": true,
+          "finding": "Thin built, pale conjunctiva and tongue, tired but in no distress. No breathlessness at rest. No palpable neck nodes."
+        },
+        "skill.gen.vitals": {
+          "abnormal": true,
+          "finding": "Pulse 102 regular, low volume. Blood pressure 110/70. Respiratory rate 20. SpO2 97 percent on room air. Afebrile. Postural drop not checked."
+        },
+        "skill.gen.edema": {
+          "abnormal": false,
+          "finding": "No pedal oedema. No leg swelling on either side."
+        },
+        "skill.exam.obg.gynae_abdominal": {
+          "abnormal": false,
+          "finding": "Abdomen soft, no palpable mass, no ascites. Uterus not felt abdominally. Kidneys not ballotable. No inguinal nodes."
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "abnormal": false,
+          "finding": "Vulva normal, no growth. Staining of the introitus with altered blood. No excoriation."
+        },
+        "skill.exam.obg.speculum_insert": {
+          "abnormal": false,
+          "finding": "Speculum passed gently; slight contact oozing as the cervix came into view. Vault holds foul altered blood."
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "abnormal": true,
+          "finding": "A 3 cm friable cauliflower growth on the anterior lip of the cervix, bleeding on touch. Posterior lip also eroded. Upper vagina free. Foul blood-stained discharge in the vault."
+        },
+        "skill.exam.obg.bimanual": {
+          "abnormal": true,
+          "finding": "Cervix bulky, firm and barrel shaped, bleeds on examination. Uterus anteverted, normal size, mobile. Left parametrium thickened halfway to the sidewall; right parametrium free. Fornices: left full, right free. No adnexal mass."
+        }
+      },
+      "essentialInvestigations": [
+        "biopsy",
+        "fbc",
+        "mri_pelvis"
+      ],
+      "investigations": {
+        "biopsy": {
+          "label": "Punch biopsy of the cervical growth",
+          "indicated": true,
+          "result": "Moderately differentiated squamous cell carcinoma with stromal invasion.",
+          "note": "Mandatory and diagnostic: only histology proves invasion and names the subtype."
+        },
+        "fbc": {
+          "label": "Full blood count with iron studies",
+          "indicated": true,
+          "result": "Haemoglobin 9.2 g/dL. Microcytic hypochromic picture. Ferritin low, fitting iron deficiency from chronic loss.",
+          "note": "Grades the anaemia that decides fitness for surgery or chemoradiation and sets replacement."
+        },
+        "upt": {
+          "label": "Urine pregnancy test",
+          "indicated": true,
+          "result": "Negative.",
+          "note": "Mandatory with abnormal bleeding in a menstruating woman before imaging or referral."
+        },
+        "mri_pelvis": {
+          "label": "MRI of the pelvis",
+          "indicated": true,
+          "result": "3 cm cervical mass with left parametrial stranding short of the sidewall. Upper vagina free. No hydronephrosis.",
+          "note": "Maps size, parametrial and vaginal extent that decide operability."
+        },
+        "ct_abdomen": {
+          "label": "Contrast CT of abdomen and chest",
+          "indicated": true,
+          "result": "No enlarged pelvic or para-aortic nodes. No distant lesions. Kidneys excrete normally.",
+          "note": "Completes nodal and distant staging once parametrial disease is found."
+        },
+        "renal_function": {
+          "label": "Renal function tests",
+          "indicated": true,
+          "result": "Creatinine within the normal range. Urine output normal.",
+          "note": "Silent ureteric block is common with parametrial disease; a normal result keeps curative options open."
+        },
+        "chest_xray": {
+          "label": "Chest radiograph",
+          "indicated": false,
+          "result": "Not done; CT chest already covers the lungs.",
+          "note": "Not needed separately once cross-sectional chest imaging is done."
+        }
+      },
+      "differentialModel": {
+        "answer": "Squamous cell carcinoma of the cervix with left parametrial disease. Consider preinvasive disease, a benign cervical lesion, endometrial or vault cancer, fibroid, pelvic infection, and pregnancy-related bleeding.",
+        "accept": [
+          "Fibroid uterus",
+          "Endometrial hyperplasia",
+          "Endometrial polyp",
+          "Pelvic inflammatory disease",
+          "Ovarian tumour",
+          "Uterine sarcoma",
+          "Abortion",
+          "Endometriosis"
+        ],
+        "minMatch": 3
+      },
+      "diagnosis": {
+        "answer": "Squamous cell carcinoma of the cervix, FIGO stage IIB with left parametrial involvement short of the sidewall, and moderate iron deficiency anaemia.",
+        "accept": [
+          "Carcinoma of the cervix",
+          "cervical cancer"
+        ]
+      },
+      "managementModel": {
+        "answer": "Refer urgently to gynae oncology, complete nodal imaging with anaemia and renal workup, start concurrent chemoradiation for stage IIB disease, and counsel on treatment with follow up.",
+        "accept": [
+          "urgent referral to a gynae oncology unit",
+          "contrast imaging of pelvis and abdomen for spread",
+          "correction of anaemia with iron and blood cover",
+          "assessment of kidneys for silent obstruction",
+          "concurrent chemoradiation through an oncology centre",
+          "counselling on treatment and planned follow up"
+        ]
+      },
+      "teachingPoints": [
+        "Contact bleeding is the most specific symptom: six months of bleeding after intercourse with a friable growth is cervix cancer until biopsy says otherwise.",
+        "Never-screened multiparity is the classic Indian background: four home deliveries and no cervical test set a high prior before a hand is laid on her.",
+        "Parametrial status on each side is the examination: left involved halfway, right free, which is what makes this stage IIB and inoperable.",
+        "Biopsy proves, MRI maps: punch histology names squamous carcinoma while MRI confirms parametrial disease short of the sidewall with no hydronephrosis.",
+        "Fitness travels with stage: haemoglobin 9.2 and a normal creatinine decide that curative chemoradiation can proceed after anaemia correction.",
+        "Referral is treatment: a district diagnosis with biopsy and MRI in hand, sent early to gynae oncology, is what keeps a curable stage curable."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

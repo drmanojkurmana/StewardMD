@@ -1,0 +1,1045 @@
+{
+ "_comment": "Abruptio placentae pathway. Same architecture as pneumonia and pre-eclampsia: shared core and obgyn skills carry the examination and history manoeuvres, chapter emphasis carries what differs in this disease, and the seven own skills (reasoning, investigation, treatment) carry the abruption picture, workup and management.",
+ "id": "abruptio-placentae",
+ "name": "Abruptio placentae",
+ "fullName": "Abruptio placentae (premature separation of the placenta)",
+ "subtitle": "Painful antepartum haemorrhage",
+ "system": "obstetrics",
+ "kbRef": "placental_abruption",
+ "oneLine": "Painful separation of a normally sited placenta, and the race between resuscitation and delivery",
+ "estMinutes": 60,
+ "review": {
+  "status": "ai_drafted"
+ },
+ "version": 1,
+ "chapters": [
+  {
+   "blurb": "What abruptio placentae is, and where it sits in antepartum bleeding",
+   "id": "basics",
+   "skills": [
+    "skill.abruptio.basics"
+   ],
+   "title": "Basics"
+  },
+  {
+   "blurb": "Before a single question",
+   "id": "approach",
+   "skills": [
+    "skill.approach.hygiene",
+    "skill.approach.introduce",
+    "skill.approach.consent",
+    "skill.approach.position"
+   ],
+   "title": "Approach to the patient"
+  },
+  {
+   "blurb": "Age and parity set the risk before a symptom is mentioned",
+   "emphasis": {
+    "skill.particulars.demographics": {
+     "expect": "In suspected abruption, note age, parity and booking status first. An unbooked multigravida arriving from a primary centre with no prior pressure record and no early scan is the commonest setting, and missing dates make every later decision about viability and delivery harder."
+    }
+   },
+   "id": "particulars",
+   "skills": [
+    "skill.particulars.demographics"
+   ],
+   "title": "Patient particulars"
+  },
+  {
+   "blurb": "Minutes, not days, and the pain that separates it from praevia",
+   "emphasis": {
+    "skill.hx.chief_complaints": {
+     "expect": "A typical presentation reads in minutes to hours: sudden severe constant abdominal pain with vaginal bleeding at 28 to 36 weeks, often with reduced fetal movements. That abrupt painful tempo in late pregnancy should move you towards abruption before anything else is known."
+    },
+    "skill.hx.obg.booking_lmp": {
+     "expect": "Dates decide viability, steroid benefit and the delivery decision, so confirm gestation from the last menstrual period and any early scan. Also confirm pressure readings through this pregnancy, because hypertension alongside the bleed completes the picture."
+    }
+   },
+   "id": "history",
+   "skills": [
+    "skill.hx.chief_complaints",
+    "skill.hx.obg.booking_lmp",
+    "skill.hx.abruptio.bleed_pain"
+   ],
+   "title": "History of presenting illness"
+  },
+  {
+   "blurb": "The background that raises the risk, and the drugs she is already on",
+   "emphasis": {
+    "skill.hx.obg.medical_family_drug": {
+     "expect": "Ask directly about raised pressure before and during this pregnancy, kidney disease, diabetes and clotting disorders, and about aspirin or blood thinners she may be taking. Tobacco in every form, including chewing tobacco, belongs in this history."
+    },
+    "skill.hx.obg.previous_pregnancies": {
+     "expect": "A previous abruption, stillbirth, preterm birth or growth restricted baby is the strongest warning of recurrence. Record each pregnancy in order with its outcome, gestation and mode of delivery, and note any caesarean scar, which changes the differential towards rupture."
+    }
+   },
+   "id": "past_personal_drug_family",
+   "skills": [
+    "skill.hx.obg.medical_family_drug",
+    "skill.hx.obg.previous_pregnancies",
+    "skill.hx.abruptio.risk"
+   ],
+   "title": "Past, personal, drug and family history"
+  },
+  {
+   "blurb": "Pallor and perfusion first, because the pads understate the loss",
+   "emphasis": {
+    "skill.gen.appearance": {
+     "expect": "Look for pallor, cold clammy hands, restlessness or drowsiness, and delayed capillary refill. She may look deceptively well while a concealed clot grows, so pallor with anxiety or air hunger matters more than the blood seen so far."
+    },
+    "skill.gen.vitals": {
+     "expect": "Pulse, pressure, breathing rate and urine output are the true measure of loss here. A rising pulse with a narrowing pulse pressure, falling urine output and postural symptoms mean shock even if the pad count looks modest. Repeat them; one set never rules shock out."
+    },
+    "skill.gen.edema": {
+     "expect": "Oedema is not a feature of abruption itself. Sudden puffiness of face and hands with raised pressure alongside the bleed points to pre-eclampsia as the underlying cause, which raises both the risk and the urgency."
+    }
+   },
+   "id": "general_exam",
+   "skills": [
+    "skill.gen.appearance",
+    "skill.gen.vitals",
+    "skill.gen.edema"
+   ],
+   "title": "General examination"
+  },
+  {
+   "blurb": "The tender hypertonic uterus and the fetus it is failing",
+   "emphasis": {
+    "skill.exam.obg.preg_prep_inspect": {
+     "expect": "Inspect for visible bleeding, its colour and estimated amount, and for a uterus that looks tense and high. Never perform a digital vaginal examination until placenta praevia has been excluded by scan, since a finger through a praevia can provoke torrential bleeding."
+    },
+    "skill.exam.obg.fundal_height": {
+     "expect": "Expect a fundal height larger than the dates when blood is trapped behind the placenta, with a tense tender feel that makes fetal parts hard to define. Mark the height and girth now, because a rising fundus on repeat measurement is ongoing concealed loss."
+    },
+    "skill.exam.obg.leopold": {
+     "expect": "Leopold's grips are limited by guarding and tenderness; note the constant hardness between supposed contractions. Malpresentation is commoner with praevia than with abruption, so a cephalic fetus with a tender rigid uterus favours abruption."
+    },
+    "skill.exam.obg.fetal_heart": {
+     "expect": "Expect fetal distress, persistent bradycardia, recurrent decelerations on the trace, or an absent heart with a dead fetus in a large separation. The fetal heart is the earliest warning of a failing placenta and decides delivery more than any maternal sign."
+    }
+   },
+   "id": "systemic_exam",
+   "skills": [
+    "skill.exam.obg.preg_prep_inspect",
+    "skill.exam.obg.fundal_height",
+    "skill.exam.obg.leopold",
+    "skill.exam.obg.fetal_heart"
+   ],
+   "title": "Obstetric abdominal examination"
+  },
+  {
+   "blurb": "Pain, blood and a failing placenta read as one picture",
+   "id": "disease_findings",
+   "skills": [
+    "skill.abruptio.findings"
+   ],
+   "title": "Putting the abruption picture together"
+  },
+  {
+   "blurb": "One paragraph that carries the diagnosis",
+   "id": "summary",
+   "skills": [
+    "skill.abruptio.summary"
+   ],
+   "title": "Clinical summary"
+  },
+  {
+   "blurb": "Painless praevia, ruptured scar and labour pains",
+   "id": "differential",
+   "skills": [
+    "skill.abruptio.differential"
+   ],
+   "title": "Differential diagnosis"
+  },
+  {
+   "blurb": "Trace the fetus, count the blood, test the clotting",
+   "id": "investigations",
+   "skills": [
+    "skill.ix.abruptio.workup"
+   ],
+   "title": "Investigations"
+  },
+  {
+   "blurb": "A clinical diagnosis graded by mother and fetus",
+   "id": "diagnosis",
+   "skills": [
+    "skill.abruptio.diagnosis"
+   ],
+   "title": "Diagnosis and severity"
+  },
+  {
+   "blurb": "Resuscitate, deliver, correct clotting, prevent the next bleed",
+   "id": "treatment",
+   "skills": [
+    "skill.tx.abruptio",
+    "skill.approach.obg.team_leader"
+   ],
+   "title": "Treatment"
+  },
+  {
+   "blurb": "Two minutes, in a fixed order, ending with a plan",
+   "emphasis": {
+    "skill.present.case": {
+     "expect": "Present an abruption case as one line of problem representation (parity, gestation, painful bleeding with a tender uterus), then maternal status and fetal status as the two halves of severity, then the decision the case demands: resuscitate and deliver, or watch with steroids. End with anti-D, PPH anticipation and recurrence counselling."
+    }
+   },
+   "id": "case",
+   "skills": [
+    "skill.present.case"
+   ],
+   "title": "Case presentation"
+  }
+ ],
+ "osce": {
+  "stations": [
+   {
+    "examinerQuestions": [
+     "Show me how you would examine this abdomen without doing anything that could worsen a praevia, and tell me what you expect to feel if this is an abruption.",
+     "Her fundus measures larger than her dates, the uterus is tense and tender throughout, and the fetal heart is 100 with decelerations. What is the diagnosis and the single most urgent next step?",
+     "Her pulse is rising while the visible bleeding stays modest. What does that mismatch mean, and which two bedside measures would you repeat right now?"
+    ],
+    "id": "osce.abruptio.assess",
+    "seconds": 480,
+    "skills": [
+     "skill.approach.hygiene",
+     "skill.approach.introduce",
+     "skill.approach.consent",
+     "skill.approach.position",
+     "skill.gen.vitals",
+     "skill.gen.appearance",
+     "skill.exam.obg.fundal_height",
+     "skill.exam.obg.leopold",
+     "skill.exam.obg.fetal_heart"
+    ],
+    "task": "This 27-year-old woman is 33 weeks pregnant with sudden severe abdominal pain and dark vaginal bleeding for two hours. Assess her for abruptio placentae and present your findings with a plan.",
+    "title": "Assess suspected abruption"
+   },
+   {
+    "examinerQuestions": [
+     "Which two facts from her booking history already marked her as high risk before she bled?",
+     "She mentions a fall from a cot three days ago that she laughed off. Why does that matter now, and what else would you ask about it?",
+     "She is Rh-negative. What blood test quantifies the fetomaternal bleed, what prophylaxis follows it, and where would you refer her from a primary centre tonight?"
+    ],
+    "id": "osce.abruptio.history",
+    "seconds": 360,
+    "skills": [
+     "skill.approach.introduce",
+     "skill.approach.consent",
+     "skill.hx.chief_complaints",
+     "skill.hx.obg.booking_lmp",
+     "skill.hx.abruptio.bleed_pain",
+     "skill.hx.abruptio.risk"
+    ],
+    "task": "This 27-year-old woman is 33 weeks pregnant in her third pregnancy with painful vaginal bleeding. Take a focused history for abruptio placentae in six minutes and be ready to grade her risk.",
+    "title": "Take a history and grade the risk"
+   }
+  ]
+ },
+ "viva": {
+  "skills": [
+   "skill.abruptio.basics",
+   "skill.hx.abruptio.risk",
+   "skill.abruptio.findings",
+   "skill.abruptio.differential",
+   "skill.ix.abruptio.workup",
+   "skill.abruptio.diagnosis",
+   "skill.tx.abruptio",
+   "skill.exam.obg.fetal_heart"
+  ]
+ },
+ "skills": {
+  "skill.abruptio.basics": {
+   "body": "Abruptio placentae is premature separation of a normally sited placenta before birth, usually after 20 weeks of gestation. The placenta is in the right place but comes away too early, which is the mirror image of praevia, where a wrongly sited placenta bleeds.",
+   "id": "skill.abruptio.basics",
+   "keyPoints": [
+    "Bleeding is revealed when blood escapes per vaginam, concealed when it stays trapped behind the placenta, and mixed when both happen. Concealed loss can be large while the pads show little, so visible blood never measures the true haemorrhage.",
+    "It starts with rupture of a maternal decidual vessel. Blood collects behind the placenta as a retroplacental clot, splits more of it from the wall, and shrinks the area left for exchange between mother and baby.",
+    "The separated area cannot exchange gases, so the fetus can deteriorate or die quickly even while the mother still looks stable. Fetal distress is often the first sign of a large separation.",
+    "Damaged placenta and decidua release thromboplastins into the maternal blood and can trigger disseminated intravascular coagulation, especially with large abruptions or fetal demise. Blood leaking into the womb muscle, the Couvelaire uterus, leaves it boggy and slow to contract after birth.",
+    "Small abruptions with a stable mother and a reassuring fetus may do well with close watching. Large abruptions threaten both lives and are a leading cause of perinatal mortality and antepartum stillbirth, with a higher recurrence risk in future pregnancies."
+   ],
+   "kind": "reasoning",
+   "media": [],
+   "oneLine": "Premature separation of a normally sited placenta: revealed, concealed or mixed",
+   "pitfalls": [
+    "Calling every antepartum bleed an abruption, when painless bleeding from a soft womb is praevia until proven otherwise.",
+    "Assuming a normally sited placenta on an old scan rules abruption out, when position and separation are different questions.",
+    "Expecting every abruption to kill the fetus, when a small stable separation remote from term can do well under observation."
+   ],
+   "probes": [
+    {
+     "a": "Premature separation of a normally sited placenta before birth, with revealed bleeding that escapes vaginally, concealed bleeding trapped behind the placenta, or a mixture of the two.",
+     "accept": [
+      "separation",
+      "normally sited",
+      "revealed",
+      "concealed",
+      "mixed"
+     ],
+     "level": 1,
+     "minMatch": 3,
+     "q": "Define abruptio placentae and name its three bleeding types."
+    },
+    {
+     "a": "Because the separated placenta cannot support gas exchange, so fetal hypoxia and distress progress rapidly while maternal shock from concealed loss is still developing.",
+     "accept": [
+      "exchange",
+      "hypoxia",
+      "concealed",
+      "distress"
+     ],
+     "level": 2,
+     "minMatch": 2,
+     "q": "Why can the fetus die while the mother still looks well?"
+    },
+    {
+     "a": "Thromboplastins released from the disrupted placenta and decidua enter the maternal circulation and trigger consumptive coagulopathy, worse with large abruptions and fetal demise.",
+     "accept": [
+      "thromboplastin",
+      "consumptive",
+      "coagulopathy",
+      "demise"
+     ],
+     "level": 3,
+     "minMatch": 2,
+     "q": "Why does a large abruption cause disseminated intravascular coagulation?"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   },
+   "rubric": [],
+   "sources": [
+    {
+     "locator": "placental_abruption: clinicalPearls",
+     "source": "StewardMD Clinical KB"
+    },
+    {
+     "locator": "Abruptio placentae",
+     "source": "Williams Obstetrics"
+    }
+   ],
+   "system": "obstetrics",
+   "title": "What abruptio placentae is",
+   "why": "Abruption and praevia both present as bleeding in late pregnancy and diverge completely in management: one needs urgent delivery thinking, the other needs hands off until scanned. Fixing the definition first, a normally sited placenta separating too early, is what stops the two being confused."
+  },
+  "skill.abruptio.findings": {
+   "body": "The abruption picture has three strands read together: painful bleeding, a tender hypertonic uterus, and a failing placenta. No single strand diagnoses it, but the three together are hard to mistake, and the mismatch between modest visible blood and a shocked mother is itself a finding.",
+   "id": "skill.abruptio.findings",
+   "keyPoints": [
+    "Bleeding is typically dark and painful, starting suddenly with constant severe abdominal pain. The pain never fully eases, because blood keeps irritating the womb from behind the placenta.",
+    "The uterus feels tense, tender and woody, and it does not relax fully between tightenings. Tenderness may be diffuse or localised over the clot, and palpation is difficult because she guards.",
+    "Fundal height often exceeds the dates, and fetal parts become hard to define, as trapped blood distends the womb. A rising fundus or girth on repeat measurement means ongoing concealed loss.",
+    "The fetus shows distress early: reduced movements by history, then a non reassuring trace with decelerations, bradycardia, or an absent heart when separation is extensive. Fetal status grades severity as much as maternal status does.",
+    "The mother shows loss out of proportion to the pads: tachycardia, narrow pulse pressure, tachypnoea, restlessness, cold peripheries and falling urine output. Shock with modest visible bleeding is concealed haemorrhage until proven otherwise.",
+    "Clotting failure declares itself as oozing from venepuncture sites, haematuria, or a clot that forms then dissolves. Falling fibrinogen with abnormal clotting alongside a large abruption or fetal demise means disseminated intravascular coagulation is evolving.",
+    "Raised pressure, proteinuria or sudden swelling alongside the bleed point to pre-eclampsia as the underlying cause. The two diseases share the same injured vessels, and each makes the other more dangerous."
+   ],
+   "kind": "reasoning",
+   "media": [],
+   "oneLine": "Painful dark bleeding with a tender hypertonic uterus and a distressed fetus",
+   "pitfalls": [
+    "Waiting for heavy visible bleeding before acting, when a rigid tender uterus with shock already declares a concealed abruption.",
+    "Mistaking the constant pain and hardness for normal labour, which eases between contractions while abruption never lets the womb soften.",
+    "Reading a reassuring first trace as lasting safety, when a separating placenta can deteriorate within minutes and needs continuous monitoring."
+   ],
+   "probes": [
+    {
+     "a": "Sudden constant severe abdominal pain with dark vaginal bleeding, a tense tender hypertonic uterus, a fundus large for dates, fetal distress or absent heart, and maternal shock out of proportion to visible loss.",
+     "accept": [
+      "constant pain",
+      "tender",
+      "hypertonic",
+      "distress",
+      "shock"
+     ],
+     "level": 1,
+     "minMatch": 3,
+     "q": "Describe the clinical picture of a major abruption."
+    },
+    {
+     "a": "Because bleeding can stay trapped behind the placenta as a concealed clot while the pads show little, so pulse, pressure, urine output and a rising fundus measure the true loss.",
+     "accept": [
+      "concealed",
+      "trapped",
+      "pulse",
+      "urine",
+      "fundus"
+     ],
+     "level": 2,
+     "minMatch": 2,
+     "q": "Why do you trust the vitals more than the pads in suspected abruption?"
+    },
+    {
+     "a": "Oozing from needle sites, blood in the urine, or a clot that breaks down, with falling fibrinogen and abnormal clotting, especially with a large separation or fetal demise.",
+     "accept": [
+      "oozing",
+      "fibrinogen",
+      "clotting",
+      "demise"
+     ],
+     "level": 3,
+     "minMatch": 2,
+     "q": "What bedside clues warn that coagulopathy is evolving?"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   },
+   "rubric": [],
+   "sources": [
+    {
+     "locator": "placental_abruption: redFlags",
+     "source": "StewardMD Clinical KB"
+    },
+    {
+     "locator": "Green-top Guideline 63: Antepartum haemorrhage",
+     "source": "RCOG"
+    }
+   ],
+   "system": "obstetrics",
+   "title": "The abruption picture",
+   "why": "An abruption kills by being underestimated: the pads look modest, the scan looks normal, and the mother compensates until she collapses. Reading pain, uterine tone and fetal status as one connected picture is what makes the diagnosis before the collapse, not after."
+  },
+  "skill.abruptio.summary": {
+   "body": "A good abruption summary is one paragraph that carries the diagnosis and the decision. State who she is, the gestation, the bleeding type and amount, the uterine findings, then maternal and fetal status, and finish with severity and the plan the case demands.",
+   "id": "skill.abruptio.summary",
+   "keyPoints": [
+    "Open with parity, gestation and the tempo: a 27 year old third gravida at 33 weeks with two hours of sudden painful bleeding. The listener should suspect abruption before you say it.",
+    "State the bleed as revealed, concealed or mixed with an honest estimate, then the pain and uterine findings: constant pain with a tense tender uterus and a fundus larger than dates.",
+    "Give maternal status next: pulse, pressure, pallor, urine output and clotting signs, stated plainly as stable or shocked. Never let reassuring pads soften a shocked set of vitals.",
+    "Give fetal status as its own sentence: movements, lie, heart pattern or absent heart. The fetal half of the summary decides delivery as much as the maternal half.",
+    "Close with severity and intent: major concealed abruption with a live distressed fetus for emergency delivery, or a small revealed abruption with both stable for close observation. End with anti-D need, PPH anticipation and recurrence counselling."
+   ],
+   "kind": "reasoning",
+   "media": [],
+   "oneLine": "One paragraph that carries the diagnosis and the decision",
+   "pitfalls": [
+    "Summarising findings without stating maternal and fetal status, which leaves the listener with facts and no severity.",
+    "Hiding the Rh status and the delivery decision at the end of a long list instead of stating them where they change care.",
+    "Presenting the scan result before the clinical picture, when the diagnosis is clinical and the scan only excludes praevia."
+   ],
+   "probes": [
+    {
+     "a": "Parity and gestation with tempo, revealed or concealed bleeding with amount, constant pain with uterine tone and fundal size, maternal pulse pressure urine and clotting status, fetal movements and heart pattern, then severity and the delivery decision.",
+     "accept": [
+      "tempo",
+      "concealed",
+      "tone",
+      "maternal",
+      "fetal",
+      "decision"
+     ],
+     "level": 1,
+     "minMatch": 3,
+     "q": "What must an abruption summary contain, in order?"
+    },
+    {
+     "a": "Because the scan is insensitive and a normal scan never excludes abruption, while pain with a tender hypertonic uterus and fetal distress already make the diagnosis at the bedside.",
+     "accept": [
+      "insensitive",
+      "excludes",
+      "bedside",
+      "distress"
+     ],
+     "level": 2,
+     "minMatch": 2,
+     "q": "Why should the summary lead with the clinical picture, not the scan?"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   },
+   "rubric": [],
+   "sources": [
+    {
+     "locator": "placental_abruption: clinicalPearls",
+     "source": "StewardMD Clinical KB"
+    },
+    {
+     "locator": "Abruptio placentae",
+     "source": "Williams Obstetrics"
+    }
+   ],
+   "system": "obstetrics",
+   "title": "The clinical summary",
+   "why": "Examiners and consultants decide from the summary, not from the recitation. A summary that orders the facts as maternal status then fetal status then decision mirrors exactly how the management choice is made, so the plan sounds inevitable rather than guessed."
+  },
+  "skill.abruptio.differential": {
+   "body": "Every painful late pregnancy bleed is abruption until the alternatives are excluded, and every painless one is praevia until proven otherwise. The bedside discriminators are pain, uterine tone and tenderness, the fetal lie, and whether there is a scar or labour in progress.",
+   "id": "skill.abruptio.differential",
+   "keyPoints": [
+    "Placenta praevia: painless bright red bleeding, often recurrent and unprovoked, with a soft relaxed non tender uterus. Malpresentation and a high presenting part are common, and the scan shows placental tissue at or over the internal os.",
+    "Uterine rupture: acute scar pain in a scarred uterus in labour, often with cessation of previously good contractions, recession of the presenting part, loss of station and profound fetal distress. Bleeding may be modest while the catastrophe is intraperitoneal.",
+    "Preterm labour: painful regular contractions with show but a uterus that softens fully between pains, no constant tenderness, and no coagulopathy. Augmenting such a labour by mistake drives an unrecognised abruption onwards.",
+    "Vasa praevia: painless bleeding starting exactly as the membranes rupture, with sudden fetal bradycardia or a sinusoidal trace. The blood lost is fetal, so even a small amount threatens the baby, and the Apt test confirms fetal origin.",
+    "Local genital causes: cervical polyp, ectropion or carcinoma give painless spotting with a soft non tender uterus and normal fetal signs. A careful speculum examination finds the source once praevia is excluded and bleeding is minor.",
+    "Concealed abruption against a surgical abdomen: constant uterine pain and tenderness with fetal distress and falling vitals favour abruption even with no visible blood, while a non obstetric acute abdomen leaves the uterus soft with normal fetal signs."
+   ],
+   "kind": "reasoning",
+   "media": [],
+   "oneLine": "Painless praevia, ruptured scar and labour pains against abruption",
+   "pitfalls": [
+    "Doing a digital vaginal examination before praevia is excluded by scan, which can turn a stable praevia into a catastrophe.",
+    "Calling it preterm labour and augmenting contractions, when oxytocics on an abruption worsen the separation.",
+    "Forgetting vasa praevia when bleeding starts as the membranes rupture with sudden fetal bradycardia, where the blood lost is the baby's."
+   ],
+   "probes": [
+    {
+     "a": "Abruption gives constant pain with a tense tender hypertonic uterus and dark bleeding, praevia gives painless bright red bleeding with a soft relaxed uterus, and rupture gives acute scar pain in a scarred labouring uterus with recession of the presenting part and loss of contractions.",
+     "accept": [
+      "constant pain",
+      "hypertonic",
+      "painless",
+      "soft",
+      "scar",
+      "recession"
+     ],
+     "level": 1,
+     "minMatch": 3,
+     "q": "Contrast abruptio placentae, placenta praevia and uterine rupture."
+    },
+    {
+     "a": "Because a finger through an undiagnosed praevia can provoke torrential haemorrhage, so the rule is scan first to localise the placenta and no digital examination until praevia is excluded.",
+     "accept": [
+      "torrential",
+      "scan",
+      "localise",
+      "excluded"
+     ],
+     "level": 2,
+     "minMatch": 2,
+     "q": "Why is vaginal examination forbidden before the scan in antepartum bleeding?"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   },
+   "rubric": [],
+   "sources": [
+    {
+     "locator": "placental_abruption: additionalDifferentials",
+     "source": "StewardMD Clinical KB"
+    },
+    {
+     "locator": "Green-top Guideline 63: Antepartum haemorrhage",
+     "source": "RCOG"
+    }
+   ],
+   "system": "obstetrics",
+   "title": "Differential diagnosis",
+   "why": "The wrong diagnosis here actively harms: augmenting a mistaken preterm labour drives an abruption on, and a finger in an unexcluded praevia opens a flood. A differential built on pain, tone and scar keeps both errors from happening."
+  },
+  "skill.ix.abruptio.workup": {
+   "body": "Investigations in suspected abruption answer three questions at once: is the fetus compensating, how much has she really lost, and is her clotting failing? Order them together on arrival, because abruption deteriorates faster than sequential testing.",
+   "id": "skill.ix.abruptio.workup",
+   "keyPoints": [
+    "Run continuous cardiotocography from the start. It detects fetal compromise and uterine hypertonicity together: decelerations with a trace that never settles between contractions is the abruption signature.",
+    "Send a full blood count with serial haemoglobin. A falling haemoglobin on repeat sampling tracks ongoing loss better than any single value, and the platelet trend warns of consumption before frank coagulopathy.",
+    "Send a coagulation screen including fibrinogen. Falling fibrinogen with abnormal clotting identifies disseminated intravascular coagulation early, when blood products can still stay ahead of it.",
+    "Group and crossmatch on arrival and keep blood ready. A shocked mother with a concealed abruption can need transfusion within minutes, and waiting for the crossmatch then is waiting too long.",
+    "Scan the abdomen to localise the placenta and exclude praevia, assess liquor and fetal viability, and look for a retroplacental collection. Remember throughout that a normal scan does not exclude abruption.",
+    "Do a Kleihauer test in Rh-negative women to quantify fetomaternal haemorrhage and guide extra anti-D. No digital vaginal examination until the scan has excluded praevia."
+   ],
+   "kind": "investigation",
+   "media": [],
+   "oneLine": "Trace the fetus, count the blood, test the clotting, exclude praevia",
+   "pitfalls": [
+    "Running the haemoglobin once and filing it, when only serial values show whether the concealed loss is continuing.",
+    "Ordering the scan before the trace and the bloods, which delays the two results that actually change the next hour.",
+    "Omitting fibrinogen from the clotting screen, which is the earliest marker of consumption and the trigger for cryoprecipitate and fibrinogen replacement."
+   ],
+   "probes": [
+    {
+     "a": "Continuous cardiotocography for fetal compromise and hypertonus, full blood count with serial haemoglobin, coagulation screen including fibrinogen, group and crossmatch, ultrasound to exclude praevia, and Kleihauer in Rh-negative women.",
+     "accept": [
+      "cardiotocography",
+      "haemoglobin",
+      "fibrinogen",
+      "crossmatch",
+      "praevia",
+      "Kleihauer"
+     ],
+     "level": 1,
+     "minMatch": 3,
+     "q": "What is the initial investigation set in suspected abruption?"
+    },
+    {
+     "a": "Because it measures how much fetal blood entered her circulation, which decides the extra anti-D dose beyond the routine prophylaxis, and it confirms the size of a fetomaternal bleed that the pads never show.",
+     "accept": [
+      "fetal blood",
+      "anti-D",
+      "dose",
+      "quantify"
+     ],
+     "level": 2,
+     "minMatch": 2,
+     "q": "Why does an Rh-negative woman with abruption need a Kleihauer test?"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   },
+   "rubric": [],
+   "sources": [
+    {
+     "locator": "placental_abruption: additionalInvestigations",
+     "source": "StewardMD Clinical KB"
+    },
+    {
+     "locator": "Green-top Guideline 63: Antepartum haemorrhage",
+     "source": "RCOG"
+    }
+   ],
+   "system": "obstetrics",
+   "title": "Confirming and grading the illness",
+   "why": "Each test here protects a different life: the trace watches the fetus, the counts watch the mother, the clotting watches both, and the scan keeps your fingers out of a praevia. Ordered together at arrival, they turn an anxious guess into a graded emergency with a plan."
+  },
+  "skill.abruptio.diagnosis": {
+   "body": "Abruption is a clinical diagnosis made at the bedside from painful bleeding with a tender hypertonic uterus and fetal compromise. Investigations support and grade it, but none of them overrules the clinical picture, and waiting for proof while mother or fetus deteriorates is the cardinal error.",
+   "id": "skill.abruptio.diagnosis",
+   "keyPoints": [
+    "Diagnose on the triad: sudden painful vaginal bleeding, a tense tender uterus that never fully relaxes, and fetal distress or demise. With all three present, manage as abruption even before a single result returns.",
+    "Classify the bleed as revealed, concealed or mixed, because concealed loss explains shock with modest pads and commits you to measuring loss by vitals, urine and fundal size rather than by inspection.",
+    "Grade severity by mother and fetus together: maternal shock, falling fibrinogen with abnormal clotting, a rigid exquisitely tender uterus with frequent contractions, and a non reassuring or absent fetal heart each push towards major and towards emergency delivery.",
+    "Use ultrasound mainly to exclude praevia and confirm the fetus, not to confirm abruption. A visible retroplacental clot supports the diagnosis, but the scan is insensitive and a normal scan never excludes it.",
+    "Confirm after delivery from the placenta: an adherent retroplacental clot with a crater on the maternal surface, and a bruised boggy Couvelaire uterus at caesarean. The postnatal placenta closes the diagnostic loop.",
+    "Record gestation, Rh status, estimated loss, maternal vitals with urine output, clotting results and the fetal trace as one severity set. That set, repeated, is what tells you whether she is holding or slipping."
+   ],
+   "kind": "reasoning",
+   "media": [],
+   "oneLine": "Clinical diagnosis graded by maternal shock, clotting and fetal status",
+   "pitfalls": [
+    "Being falsely reassured by a normal scan, which is insensitive for abruption and excludes nothing.",
+    "Grading by pads alone and missing a major concealed abruption that the pulse, pressure and fundus already declare.",
+    "Delaying delivery for confirmatory tests while the trace deteriorates, when fetal distress is itself the confirmation that matters."
+   ],
+   "probes": [
+    {
+     "a": "Sudden painful bleeding with a tense tender hypertonic uterus and fetal distress or demise, graded by maternal shock, falling fibrinogen with abnormal clotting, and the fetal heart pattern.",
+     "accept": [
+      "painful",
+      "hypertonic",
+      "distress",
+      "shock",
+      "fibrinogen"
+     ],
+     "level": 1,
+     "minMatch": 3,
+     "q": "How is abruptio placentae diagnosed and graded?"
+    },
+    {
+     "a": "Because bleeding trapped behind the placenta never reaches the pads, so vitals, urine output, clotting and a rising fundus measure the true loss while the pads show only a fraction.",
+     "accept": [
+      "trapped",
+      "vitals",
+      "urine",
+      "clotting",
+      "fundus"
+     ],
+     "level": 2,
+     "minMatch": 2,
+     "q": "Why do concealed abruptions need a different measure of severity?"
+    },
+    {
+     "a": "A visible retroplacental clot supports it, but the scan is insensitive, so a normal scan with a convincing clinical picture still means abruption, and the scan's real job is excluding praevia.",
+     "accept": [
+      "clot",
+      "insensitive",
+      "excludes",
+      "praevia"
+     ],
+     "level": 3,
+     "minMatch": 2,
+     "q": "What does ultrasound add, and what can it never do?"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   },
+   "rubric": [],
+   "sources": [
+    {
+     "locator": "placental_abruption: clinicalPearls",
+     "source": "StewardMD Clinical KB"
+    },
+    {
+     "locator": "Abruptio placentae",
+     "source": "Williams Obstetrics"
+    }
+   ],
+   "system": "obstetrics",
+   "title": "Diagnosis and severity",
+   "why": "There is no blood test that says abruption, and the scan misses it more often than it finds it. Owning the diagnosis as a clinical one, graded by how the mother compensates and how the fetus tolerates, is what lets you act on the picture instead of waiting for a result that may never come."
+  },
+  "skill.tx.abruptio": {
+   "body": "Treat abruption as two resuscitations running together: the mother with fluids, blood and clotting factors, and the fetus with oxygen and urgent delivery. Stabilise, correct coagulopathy, deliver by the fastest safe route, then prevent the postpartum bleed that a Couvelaire uterus threatens.",
+   "dosingNote": "This module teaches management at the level of drug class and principle, quoting only the anti-D regimen as stated in the cited RCOG guidance. All agents, doses, routes and regimens must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+   "id": "skill.tx.abruptio",
+   "keyPoints": [
+    "RESUSCITATE the mother first: two wide bore intravenous lines, warmed fluids, oxygen, continuous vitals with strict urine output, and blood transfusion for significant haemorrhage without waiting for laboratory permission. Call the obstetric emergency team early and keep her nil by mouth.",
+    "MONITOR both continuously: cardiotocography for fetal distress and uterine hypertonus, with repeat haemoglobin and coagulation including fibrinogen. A worsening trace or falling fibrinogen changes the plan before the mother looks worse.",
+    "CORRECT coagulopathy with blood products: fresh frozen plasma, cryoprecipitate and fibrinogen with platelets for disseminated intravascular coagulation, guided by the clotting screen. Replace early rather than chasing numbers after bleeding accelerates.",
+    "DELIVER urgently, usually by caesarean, when there is fetal compromise or maternal instability. A live distressed fetus or a shocked coagulopathic mother is delivered without delay for gestation; a small stable abruption remote from term may instead be watched with corticosteroids for fetal lungs.",
+    "GIVE antenatal corticosteroids when preterm delivery is anticipated in a stable patient. They mature the fetal lungs for the early birth that may follow; they do not treat the abruption itself.",
+    "GIVE anti-D immunoglobulin to every Rh-negative woman: 250 IU before 20 weeks and 500 IU after 20 weeks within 72 hours as the cited RCOG guidance states, with the Kleihauer test guiding extra doses after larger bleeds.",
+    "ANTICIPATE postpartum haemorrhage: a Couvelaire uterus contracts poorly, so manage the third stage actively with uterotonics and be ready to escalate to tamponade, vessel ligation or hysterectomy. Treat underlying hypertension, counsel on recurrence, and from a primary centre stabilise and refer early to a unit with blood, theatre and newborn care, using free ambulance transport and cashless mother child schemes where available."
+   ],
+   "kind": "treatment",
+   "media": [],
+   "oneLine": "Resuscitate with blood, correct clotting, deliver without delay, prevent PPH",
+   "pitfalls": [
+    "Undertransfusing while waiting for the haemoglobin report, when shock with a concealed clot already mandates blood.",
+    "Delaying delivery for fetal maturity while the trace deteriorates, trading a viable distressed baby for steroids that need a stable patient.",
+    "Closing the case at delivery and missing the atonic postpartum bleed, the falling fibrinogen, or the Rh-negative mother who still needs anti-D.",
+    "Keeping a shocked coagulopathic mother at a primary centre for want of transport planning instead of resuscitating and referring at once."
+   ],
+   "probes": [
+    {
+     "a": "Maternal resuscitation with fluids and blood, continuous monitoring of both patients, correction of coagulopathy with plasma cryoprecipitate fibrinogen and platelets, urgent usually caesarean delivery for fetal distress or maternal instability, steroids if stable and preterm, anti-D if Rh-negative, and active prevention of postpartum haemorrhage.",
+     "accept": [
+      "resuscitation",
+      "coagulopathy",
+      "delivery",
+      "steroids",
+      "anti-D",
+      "haemorrhage"
+     ],
+     "level": 1,
+     "minMatch": 3,
+     "q": "State the principles of managing abruptio placentae."
+    },
+    {
+     "a": "Because the separated placenta cannot recover and fetal gas exchange only worsens, so a distressed fetus needs out by the fastest safe route while a small stable preterm separation can gain lung maturity under close watch.",
+     "accept": [
+      "separation",
+      "exchange",
+      "fastest",
+      "stable",
+      "maturity"
+     ],
+     "level": 2,
+     "minMatch": 2,
+     "q": "Why does fetal distress force delivery while a small stable abruption may be watched?"
+    },
+    {
+     "a": "Resuscitate with blood and correct clotting first, deliver by caesarean without delay for gestation, anticipate an atonic bleed from the Couvelaire uterus with uterotonics, and refer only after stabilising to a centre with blood theatre and newborn care.",
+     "accept": [
+      "resuscitate",
+      "caesarean",
+      "Couvelaire",
+      "uterotonics",
+      "refer"
+     ],
+     "level": 3,
+     "minMatch": 2,
+     "q": "A 33 week mother is shocked with a rigid tender uterus, oozing venepunctures and a flat fetal trace. What is the plan?"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   },
+   "rubric": [],
+   "sources": [
+    {
+     "locator": "placental_abruption: management",
+     "source": "StewardMD Clinical KB"
+    },
+    {
+     "locator": "Green-top Guideline 63: Antepartum haemorrhage",
+     "source": "RCOG"
+    }
+   ],
+   "system": "obstetrics",
+   "title": "Managing abruptio placentae",
+   "why": "Abruption management is a race the mother and fetus run together: every minute of uncorrected shock deepens the coagulopathy, and every minute of unrelieved separation deepens fetal hypoxia. Getting the order right, resuscitate while preparing delivery, is what brings both out alive."
+  }
+ },
+ "cases": [
+  {
+   "diagnosis": {
+    "accept": [
+     "abruptio placentae",
+     "placental abruption",
+     "abruption",
+     "premature separation of placenta"
+    ],
+    "answer": "Major concealed abruptio placentae at 33 weeks with maternal shock, evolving coagulopathy and fetal distress.",
+    "minMatch": 1
+   },
+   "differentialModel": {
+    "accept": [
+     "abruptio placentae",
+     "placental abruption",
+     "placenta praevia",
+     "placenta previa",
+     "uterine rupture",
+     "ruptured uterus",
+     "preterm labour",
+     "preterm labor",
+     "vasa praevia",
+     "vasa previa",
+     "antepartum haemorrhage"
+    ],
+    "answer": "Major concealed abruptio placentae at 33 weeks. Consider placenta praevia, uterine rupture, preterm labour and vasa praevia.",
+    "minMatch": 2
+   },
+   "essentialInvestigations": [
+    "ctg",
+    "cbc",
+    "clotting",
+    "crossmatch",
+    "usg"
+   ],
+   "exam": {
+    "skill.exam.obg.fetal_heart": {
+     "abnormal": true,
+     "finding": "Fetal heart 100 per minute with reduced variability and recurrent late decelerations on continuous monitoring. The uterus stays hypertonic between contractions."
+    },
+    "skill.exam.obg.fundal_height": {
+     "abnormal": true,
+     "finding": "Symphysis fundal height 35 cm at 33 weeks, uterus tense and tender throughout. Fetal parts difficult to define through the guarding."
+    },
+    "skill.exam.obg.leopold": {
+     "abnormal": true,
+     "finding": "Longitudinal lie, cephalic presentation, head not engaged. Grips limited by tenderness; the uterus feels woody hard and never fully relaxes."
+    },
+    "skill.exam.obg.preg_prep_inspect": {
+     "abnormal": true,
+     "finding": "Dark vaginal bleeding with clots, about two pads soaked. Abdomen tense and uniformly enlarged. No vaginal examination performed before the scan."
+    },
+    "skill.gen.appearance": {
+     "abnormal": true,
+     "finding": "Pale, anxious and restless, with cold clammy hands and delayed capillary refill. Guarding the abdomen and reluctant to let it be touched."
+    },
+    "skill.gen.edema": {
+     "abnormal": true,
+     "finding": "Pitting oedema over both shins with puffiness of the face noted this past week. No calf asymmetry or tenderness."
+    },
+    "skill.gen.vitals": {
+     "abnormal": true,
+     "finding": "Pulse 112 per minute, thready. Blood pressure 98 over 62. Breathing 24 per minute. Urine 20 mL in the last hour. Afebrile."
+    }
+   },
+   "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+   "history": {
+    "baby_movements": {
+     "cues": [
+      "when did you last feel normal baby movements",
+      "are the baby movements reduced today",
+      "has the baby stopped moving",
+      "how many times did the baby kick today"
+     ],
+     "reply": "Till yesterday the baby moved well. Since the pain started, almost no movement at all."
+    },
+    "bleed_amount": {
+     "cues": [
+      "how many pads have soaked through",
+      "how much blood has come out",
+      "did you pass any clots",
+      "how often are you changing the cloth"
+     ],
+     "reply": "Two cloths soaked in two hours, dark red blood with one big clot. It is still coming but not flooding."
+    },
+    "bleed_onset": {
+     "cues": [
+      "when did the bleeding start",
+      "what were you doing when bleeding began",
+      "was the start of bleeding sudden",
+      "did the bleeding begin with pain"
+     ],
+     "reply": "About two hours ago, suddenly, while I was sweeping the house. The pain and the bleeding started together."
+    },
+    "checkup_scans": {
+     "cues": [
+      "where did you have antenatal checkups",
+      "how many checkups have you had",
+      "what did the last scan show",
+      "where is the placenta on the scan"
+     ],
+     "reply": "Three checkups at the primary health centre. The scan at five months said the placenta is up and the baby is fine."
+    },
+    "earlier_bleed": {
+     "cues": [
+      "any bleeding earlier in this pregnancy",
+      "did you bleed in the first months",
+      "any spotting before today",
+      "was there any previous admission for bleeding"
+     ],
+     "reply": "No bleeding at all before today. This is the first time."
+    },
+    "fall_trauma": {
+     "cues": [
+      "did you have any fall recently",
+      "any blow or injury to the abdomen",
+      "were you in any road accident",
+      "did anyone hit your stomach"
+     ],
+     "reply": "Three days ago I slipped getting down from the cot and landed on my side. I laughed it off as nothing."
+    },
+    "family_history": {
+     "cues": [
+      "is there anyone to donate blood",
+      "who has come with you today",
+      "how will you reach the district hospital",
+      "does your family agree to an operation if needed"
+     ],
+     "reply": "My husband and mother-in-law are here. My brother can give blood. We will go wherever you send us, doctor."
+    },
+    "illness_history": {
+     "cues": [
+      "any illness before this pregnancy",
+      "do you have diabetes or thyroid disease",
+      "any kidney disease or fits before",
+      "any known clotting or bleeding problem"
+     ],
+     "reply": "No sugar, no thyroid, no fits. No bleeding problems in the family that I know."
+    },
+    "pain_abdomen": {
+     "cues": [
+      "describe the pain in your abdomen",
+      "is the pain constant or coming and going",
+      "does your womb feel hard all the time",
+      "does the pain ease between tightenings"
+     ],
+     "reply": "Constant severe pain all over the belly, and the womb feels hard like a stone all the time. It never softens."
+    },
+    "past_pregnancies": {
+     "cues": [
+      "tell me about your previous pregnancies",
+      "how many children do you have living",
+      "was there any stillbirth or abortion before",
+      "how was your first child delivered"
+     ],
+     "reply": "First a normal delivery, a boy, six years old. Then one abortion at three months, two years ago."
+    },
+    "presenting": {
+     "cues": [
+      "what brings you to hospital",
+      "what is the main problem today",
+      "why were you referred here",
+      "tell me what happened today"
+     ],
+     "key": true,
+     "reply": "Doctor, since this morning I have severe stomach pain that never stops, with bleeding, and my baby has almost stopped moving.",
+     "skillId": "skill.hx.chief_complaints"
+    },
+    "pressure_swelling": {
+     "cues": [
+      "was your blood pressure high in this pregnancy",
+      "any swelling of face or feet",
+      "any headache or flashing lights",
+      "were you given tablets for pressure"
+     ],
+     "reply": "Pressure was high at the last two visits. Feet swell by evening. No tablets were started."
+    },
+    "tablets_tobacco": {
+     "cues": [
+      "what tablets are you taking now",
+      "do you use tobacco in any form",
+      "does anyone smoke beedis at home",
+      "did you take any painkillers today"
+     ],
+     "reply": "Only iron tablets from the centre, which I take when I remember. No tobacco, and nobody smokes inside the house."
+    },
+    "water_leak": {
+     "cues": [
+      "has any watery fluid leaked down below",
+      "did your waters break",
+      "are your clothes wet with fluid",
+      "any leaking apart from blood"
+     ],
+     "reply": "No watery leaking, only the dark bleeding."
+    },
+    "womb_tightening": {
+     "cues": [
+      "is the womb tightening at intervals",
+      "how often do the tightenings come",
+      "does the womb relax fully between pains",
+      "are these labour pains"
+     ],
+     "reply": "It keeps tightening every few minutes but it never becomes soft in between. This is not like my first delivery pains."
+    }
+   },
+   "id": "case.abruptio.rekha",
+   "initialVitals": {
+    "bpDiastolic": 62,
+    "bpSystolic": 98,
+    "gcs": 15,
+    "hr": 112,
+    "rr": 24,
+    "spo2": 96,
+    "temp": 37
+   },
+   "investigations": {
+    "cbc": {
+     "label": "Complete blood count",
+     "note": "Anaemia with falling platelets in a bleeding mother means consumption has begun; repeat the counts, do not file one set.",
+     "result": "Haemoglobin 8 g per dL. Platelets 90 x 10 to the 9 per L and falling on repeat. Total leucocyte count within normal limits."
+    },
+    "clotting": {
+     "label": "Coagulation screen with fibrinogen",
+     "note": "Falling fibrinogen with abnormal clotting is disseminated intravascular coagulation evolving; replace early with plasma, cryoprecipitate and fibrinogen.",
+     "result": "Prothrombin time prolonged, activated partial thromboplastin time prolonged, fibrinogen low, D-dimer raised."
+    },
+    "crossmatch": {
+     "label": "Group and crossmatch",
+     "note": "Blood must be ready before it is needed; a concealed abruption can demand transfusion within minutes.",
+     "result": "B negative. Four units grouped and crossmatched on arrival; two units transfused during resuscitation."
+    },
+    "ctg": {
+     "label": "Continuous cardiotocography",
+     "note": "The trace is doing double duty: it proves fetal compromise and uterine hypertonus together, and either one alone would already demand action.",
+     "result": "Baseline 100 per minute with reduced variability and recurrent late decelerations. Contractions every 90 seconds with poor relaxation between them."
+    },
+    "kleihauer": {
+     "label": "Kleihauer test",
+     "note": "The test sizes the fetal bleed into her circulation so the anti-D dose covers it.",
+     "result": "Positive with significant fetomaternal haemorrhage quantified; extra anti-D arranged beyond routine prophylaxis."
+    },
+    "usg": {
+     "label": "Obstetric ultrasound",
+     "note": "The scan excludes praevia and supports abruption with the clot; had it been normal, the clinical picture would still rule.",
+     "result": "Single live fetus, cephalic, liquor adequate. Placenta anterior upper segment, normally sited, praevia excluded. Heterogeneous retroplacental collection seen."
+    }
+   },
+   "managementModel": {
+    "accept": [
+     "resuscitate",
+     "transfusion",
+     "delivery",
+     "caesarean",
+     "coagulopathy",
+     "anti-d",
+     "monitor",
+     "uterotonics",
+     "haemorrhage",
+     "blood"
+    ],
+    "answer": "Resuscitate with oxygen, fluids and blood transfusion, monitor continuously with cardiotocography and repeat clotting, correct coagulopathy with plasma and fibrinogen, deliver urgently by caesarean for fetal distress and maternal instability, give anti-D guided by Kleihauer, and anticipate postpartum haemorrhage with uterotonics.",
+    "minMatch": 3
+   },
+   "opening": "Rekha, 27, a third gravida at 33 weeks, has been referred from the primary health centre with two hours of severe constant abdominal pain, dark vaginal bleeding and reduced fetal movements. Introduce yourself and take a history.",
+   "patient": {
+    "age": 27,
+    "name": "Rekha",
+    "occupation": "Agricultural labourer, works on sugarcane fields",
+    "residence": "Rural, village in western Maharashtra, lives with husband, mother-in-law and one son",
+    "sex": "female"
+   },
+   "review": {
+    "status": "ai_drafted"
+   },
+   "teachingPoints": [
+    "The tempo alone should move you: two hours of constant pain with dark bleeding at 33 weeks is abruption until proven otherwise, and the reduced movements say the placenta is already failing.",
+    "Shock with modest pads is the signature of concealed loss: a thready pulse of 112 with a soft pressure and 20 mL of urine in an hour measures the true bleed the cloths never showed.",
+    "A uterus that never relaxes is not labour. Labour softens between pains; hypertonus from separation does not, and oxytocics would drive it onwards.",
+    "The trace decides delivery more than any maternal sign: recurrent late decelerations with poor relaxation mean a fetus that needs out now.",
+    "Falling platelets with low fibrinogen mean consumption has begun; replace with plasma, cryoprecipitate and fibrinogen early rather than chasing numbers later.",
+    "Rh-negative status changes the blood bank plan twice: crossmatched B negative blood for her, and a Kleihauer guided extra anti-D dose for the fetal bleed.",
+    "From a primary centre this mother is resuscitated and referred, not kept: blood, theatre and newborn care must be where she delivers, and the Couvelaire uterus means the third stage stays actively managed."
+   ],
+   "title": "A third gravida at 33 weeks with painful bleeding and a tender uterus"
+  }
+ ]
+}

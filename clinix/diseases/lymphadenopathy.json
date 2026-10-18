@@ -1,0 +1,1253 @@
+{
+ "_comment": "Surgery pathway for lymph node enlargement. Shared examination and history skills are referenced from the core and surgery packs plus the lead-merged lymphadenopathy fragment; the disease owns only reasoning, investigation, treatment and annexure skills.",
+ "id": "lymphadenopathy",
+ "name": "Lymph node enlargement",
+ "fullName": "Lymph node enlargement: examination of the lymphatic system",
+ "system": "surgery",
+ "kbRef": "congenital_neck_masses_and_cervical_lymphadenopathy",
+ "oneLine": "A swelling at a known node site is a node until proven otherwise, and the fingers must say which disease it is",
+ "estMinutes": 60,
+ "review": {
+  "status": "ai_drafted"
+ },
+ "version": 1,
+ "chapters": [
+  {
+   "id": "basics",
+   "title": "Basics",
+   "blurb": "What an enlarged node is, and localised versus generalised disease",
+   "skills": [
+    "skill.reasoning.lymphadenopathy.basics"
+   ]
+  },
+  {
+   "id": "approach",
+   "title": "Approach to the patient",
+   "blurb": "Before a single question",
+   "skills": [
+    "skill.approach.hygiene",
+    "skill.approach.introduce",
+    "skill.approach.consent",
+    "skill.approach.position"
+   ]
+  },
+  {
+   "id": "particulars",
+   "title": "Patient particulars",
+   "blurb": "Age sets the odds before the neck is touched",
+   "skills": [
+    "skill.particulars.demographics"
+   ],
+   "emphasis": {
+    "skill.particulars.demographics": {
+     "expect": "In node enlargement, age carries unusual weight: tuberculous nodes and syphilis belong to the young, primary lymphomas gather in young adults, and a hard painless neck node in an older adult is a secondary deposit until proven otherwise. Occupation and residence matter as much: barefoot labour, hostel crowding and a filarial district each push a different cause forward."
+    }
+   }
+  },
+  {
+   "id": "history",
+   "title": "History of presenting illness",
+   "blurb": "Duration, pain, fever with a shape, and the primary focus",
+   "skills": [
+    "skill.hx.chief_complaints",
+    "skill.hx.surg.lump",
+    "skill.hx.surg.lymphedema_lymphadenopathy",
+    "skill.hx.lymphadenopa.node_story"
+   ],
+   "emphasis": {
+    "skill.hx.chief_complaints": {
+     "expect": "Expect the complaint stated as a swelling with a duration: days of painful swelling points to acute adenitis, while months of painless growth with evening fever and weight loss points to tuberculosis or malignancy. Record which group the patient noticed first."
+    },
+    "skill.hx.surg.lump": {
+     "expect": "Apply the lump discipline to the node: number, duration, pain, rate of growth, skin changes, sinus or scar, and above all which group enlarged first and whether others followed."
+    },
+    "skill.hx.surg.lymphedema_lymphadenopathy": {
+     "expect": "Where limb swelling accompanies nodes, separate primary from secondary lymphoedema and ask after filarial residence and recurrent febrile attacks, since elephantiasis and nodal disease share causes and territory."
+    }
+   }
+  },
+  {
+   "id": "past_personal_drug_family",
+   "title": "Past, personal, drug and family history",
+   "blurb": "The contacts and exposures that rename the node",
+   "skills": [
+    "skill.hx.lymphadenopa.risk_factors"
+   ]
+  },
+  {
+   "id": "general_exam",
+   "title": "General examination",
+   "blurb": "Build, nourishment, fever and the hidden generalised case",
+   "skills": [
+    "skill.gen.appearance",
+    "skill.gen.vitals",
+    "skill.gen.surg.survey",
+    "skill.gen.surg.surgical_fever"
+   ],
+   "emphasis": {
+    "skill.gen.appearance": {
+     "expect": "Look for malnutrition, cachexia, anaemia and weight loss, which mark tuberculous and malignant nodal disease, and for the toxic look of acute adenitis with fever."
+    },
+    "skill.gen.vitals": {
+     "expect": "Record temperature with its pattern: evening rise favours tuberculosis, periodic fever favours filariasis, and prolonged intermittent bouts favour lymphoma. Tachycardia and tachypnoea mark the toxic or pressured patient."
+    },
+    "skill.gen.surg.survey": {
+     "expect": "Survey the whole patient for pressure effects of deep nodes: facial puffiness, venous engorgement, limb oedema, and the skin stigmata of syphilis or sarcoid."
+    },
+    "skill.gen.surg.surgical_fever": {
+     "expect": "Place any fever on the surgical timeline: days of high fever with a hot node means acute adenitis, while weeks of evening fever means tuberculosis until proven otherwise."
+    }
+   }
+  },
+  {
+   "id": "systemic_exam",
+   "title": "Lymph node examination",
+   "blurb": "Groups in order, then what the fingers say",
+   "skills": [
+    "skill.exam.surg.lymph_node_groups",
+    "skill.exam.surg.cervical_nodes",
+    "skill.exam.surg.regional_nodes",
+    "skill.exam.surg.axillary_nodes"
+   ],
+   "emphasis": {
+    "skill.exam.surg.lymph_node_groups": {
+     "expect": "Examine every peripheral group in order so a generalised case cannot hide: neck from below upward, then axillae, then groins, then the odd groups at the elbow and behind the knee. Finding a second group converts a local problem into a systemic one."
+    },
+    "skill.exam.surg.cervical_nodes": {
+     "expect": "In the neck, map the exact group: submental, submandibular, jugular chain, posterior triangle and supraclavicular. A left supraclavicular node looks below the clavicle, to breast, chest and abdomen including the testes, and must never be dismissed as local."
+    },
+    "skill.exam.surg.regional_nodes": {
+     "expect": "For the presenting group, record number, size, consistency, matting, fixity and skin, and then examine the drainage area for the primary focus, which confirms septic adenitis when found."
+    },
+    "skill.exam.surg.axillary_nodes": {
+     "expect": "Feel the axillae and groins in every neck case: additional groups mean generalised disease such as tuberculosis, lymphoma, leukaemia or sarcoid, and change every investigation that follows."
+    }
+   }
+  },
+  {
+   "id": "disease_findings",
+   "title": "Putting the nodal picture together",
+   "blurb": "Consistency, matting and fixity name the disease",
+   "skills": [
+    "skill.reasoning.lymphadenopathy.signs"
+   ]
+  },
+  {
+   "id": "summary",
+   "title": "Clinical summary",
+   "blurb": "Four sentences that contain the case",
+   "skills": [
+    "skill.present.lymphadenopa.summary"
+   ]
+  },
+  {
+   "id": "differential",
+   "title": "Differential diagnosis",
+   "blurb": "Inflammatory, neoplastic, leukaemic and the mimics",
+   "skills": [
+    "skill.reasoning.lymphadenopathy.differential"
+   ]
+  },
+  {
+   "id": "investigations",
+   "title": "Investigations",
+   "blurb": "Bloods, sampling, molecular test and the chest film",
+   "skills": [
+    "skill.investigation.lymphadenopathy.workup"
+   ]
+  },
+  {
+   "id": "diagnosis",
+   "title": "Diagnosis and staging",
+   "blurb": "Name the disease, stage it, and state what confirms it",
+   "skills": [
+    "skill.reasoning.lymphadenopathy.diagnosis"
+   ]
+  },
+  {
+   "id": "treatment",
+   "title": "Treatment",
+   "blurb": "Treat the cause, aspirate cold pus, refer cancer early",
+   "skills": [
+    "skill.treatment.lymphadenopathy.management"
+   ]
+  },
+  {
+   "id": "case",
+   "title": "Case presentation",
+   "blurb": "Present this patient to your consultant",
+   "skills": [
+    "skill.present.case"
+   ]
+  }
+ ],
+ "osce": {
+  "stations": [
+   {
+    "id": "osce.lymphadenopathy.neck_exam",
+    "title": "Examine the cervical lymph nodes",
+    "task": "This 19-year-old student has had a right-sided neck swelling for two months. Examine his cervical lymph nodes and present your findings.",
+    "seconds": 480,
+    "skills": [
+     "skill.approach.hygiene",
+     "skill.approach.introduce",
+     "skill.approach.consent",
+     "skill.approach.position",
+     "skill.exam.surg.cervical_nodes",
+     "skill.exam.surg.lymph_node_groups",
+     "skill.exam.surg.regional_nodes"
+    ],
+    "examinerQuestions": [
+     "You found matted nodes with a fluctuant area. What stage of tuberculous lymphadenitis is this, and what would you do next?",
+     "How would your examination differ if these nodes were stony hard and fixed to the skin?",
+     "Which other groups and organs must you examine before finishing, and why?"
+    ]
+   },
+   {
+    "id": "osce.lymphadenopathy.history",
+    "title": "Take a lymphadenopathy history and stratify risk",
+    "task": "This 45-year-old tobacco chewer has had a painless left neck lump for six weeks. Take a focused history in six minutes and state your leading diagnosis with reasons.",
+    "seconds": 360,
+    "skills": [
+     "skill.approach.introduce",
+     "skill.approach.consent",
+     "skill.hx.chief_complaints",
+     "skill.hx.surg.lump",
+     "skill.hx.lymphadenopa.node_story",
+     "skill.hx.lymphadenopa.risk_factors"
+    ],
+    "examinerQuestions": [
+     "Why does his age and tobacco habit change the meaning of a painless hard node?",
+     "Which single investigation would you order first, and which biopsy would you refuse at this stage?",
+     "What would evening fever, night sweats and weight loss add to your assessment?"
+    ]
+   }
+  ]
+ },
+ "viva": {
+  "skills": [
+   "skill.reasoning.lymphadenopathy.basics",
+   "skill.exam.surg.cervical_nodes",
+   "skill.reasoning.lymphadenopathy.signs",
+   "skill.reasoning.lymphadenopathy.differential",
+   "skill.investigation.lymphadenopathy.workup",
+   "skill.reasoning.lymphadenopathy.diagnosis",
+   "skill.treatment.lymphadenopathy.management"
+  ]
+ },
+ "skills": {
+  "skill.reasoning.lymphadenopathy.basics": {
+   "id": "skill.reasoning.lymphadenopathy.basics",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "What an enlarged lymph node is",
+   "oneLine": "A node enlarges by infection, tumour deposit or its own tumour, and territory tells you where to look",
+   "why": "Students list causes alphabetically and then cannot use them. Grouping by mechanism first, and by drainage territory second, turns a hundred names into two questions: what process is this, and where did it come from.",
+   "teach": [
+    {
+     "heading": "Three mechanisms, nothing more",
+     "body": "A node enlarges for one of three reasons. Infection and its products reach it through the lymphatics, tumour cells lodge in its sinuses from a primary in its territory, or the node tissue itself turns malignant as lymphoma or leukaemia.\n\nNormal nodes are not palpable. Any palpable node is therefore already abnormal, and the task is to place it in one of these three mechanisms before naming a disease."
+    },
+    {
+     "heading": "Territory decides the search",
+     "table": {
+      "cols": [
+       "Nodes",
+       "Territory that drains into them",
+       "What a deposit implies"
+      ],
+      "rows": [
+       [
+        "Cervical",
+        "Head, face, mouth, pharynx and neck",
+        "Primary above the clavicle: mouth, throat, thyroid, skin"
+       ],
+       [
+        "Left supraclavicular",
+        "Left upper limb, left chest and breast, abdominal viscera, both testes",
+        "Primary below the clavicle: stomach, lung, breast, testis"
+       ],
+       [
+        "Axillary",
+        "Upper limb and trunk from clavicle to umbilicus, including breast",
+        "Breast, arm, trunk skin, melanoma territory"
+       ],
+       [
+        "Inguinal",
+        "Lower limb, lower abdominal wall below the umbilicus, perineum and external genitalia",
+        "Foot, leg, penile, vulval or anal primary; venereal bubo"
+       ]
+      ]
+     }
+    },
+    {
+     "heading": "Localised or generalised",
+     "points": [
+      "One group only means look in its territory for a primary focus or tumour: septic adenitis, primary chancre, or a deposit from a nearby cancer.",
+      "Many groups mean systemic disease: tuberculosis, secondary syphilis, mononucleosis, sarcoidosis, brucellosis, lymphoma or leukaemia.",
+      "A swelling at a known node site is a node unless outstanding findings prove otherwise, so multiple swellings in node territory are nodes first."
+     ]
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "Name the three mechanisms by which a lymph node enlarges.",
+     "a": "Infection reaching the node, tumour cells lodging from a primary in its territory, and malignant change of the node tissue itself.",
+     "accept": [
+      "infection",
+      "tumour cells",
+      "malignant change"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "A 60 year old man has a hard left supraclavicular node. Where do you search for the primary?",
+     "a": "Below the clavicle: stomach, lung, breast, abdominal viscera and both testes drain to the left supraclavicular node.",
+     "accept": [
+      "supraclavicular",
+      "stomach",
+      "abdomen",
+      "testes"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "Why does finding a second group of nodes change the whole plan?",
+     "a": "Because a second group converts localised disease into generalised or systemic disease, which needs systemic investigation rather than a local operation.",
+     "accept": [
+      "generalised",
+      "systemic",
+      "second group",
+      "investigation"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "congenital_neck_masses_and_cervical_lymphadenopathy: pathophysiology"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "The lymph nodes: lymphatic drainage territories"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.lymphadenopathy.signs": {
+   "id": "skill.reasoning.lymphadenopathy.signs",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "What the fingers say: the nodal picture",
+   "oneLine": "Consistency, matting, fixity and skin name the disease at the bedside",
+   "why": "Four findings read together name most nodal disease without a test: how hard the node is, whether nodes stick together, whether they stick to surroundings, and what the skin is doing. Each combination belongs to a different disease.",
+   "teach": [
+    {
+     "heading": "Consistency is the first word",
+     "body": "Roll the nodes under the pads of three fingers with light pressure. Soft and fluctuant means pus, whether acute suppuration or cold abscess. Elastic and rubbery means Hodgkin disease. Firm, discrete and shotty means syphilis. Stony hard means secondary carcinoma.\n\nVariable consistency, soft and firm and hard in places according to the rate of growth, means lymphosarcoma. Normal nodes are not felt at all, so anything palpable has already declared itself."
+    },
+    {
+     "heading": "Matting, fixity and skin",
+     "body": "Matting, nodes adherent to one another through periadenitis, is most characteristic of tuberculosis, and also occurs in acute adenitis and metastatic carcinoma. Fixity to skin, fascia, muscle, vessel or nerve marks malignancy that has spread beyond the capsule.\n\nRead the skin: hot red brawny oedema means acute adenitis, cold normal skin means tuberculosis until the abscess nears bursting, tense shining skin with dilated veins means rapidly growing sarcoma, and fixity with fungation means neglected secondary carcinoma."
+    },
+    {
+     "heading": "Combinations that diagnose",
+     "table": {
+      "cols": [
+       "Finding set",
+       "Disease it names",
+       "Next confirmatory step"
+      ],
+      "rows": [
+       [
+        "Hot, tender, red skin, fluctuant centre",
+        "Acute suppurative adenitis",
+        "Find the septic focus; blood counts; drainage if pointing"
+       ],
+       [
+        "Painless, matted, cold skin, sinus or scar",
+        "Tuberculous lymphadenitis",
+        "Needle sampling with molecular test; chest film"
+       ],
+       [
+        "Discrete, rubbery, afebrile young adult",
+        "Hodgkin disease",
+        "Excision biopsy; stage above and below the diaphragm"
+       ],
+       [
+        "Stony hard, fixed, older adult",
+        "Secondary carcinoma",
+        "Needle sampling; hunt the primary in the territory"
+       ]
+      ]
+     }
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What consistency belongs to Hodgkin disease, syphilis and secondary carcinoma?",
+     "a": "Elastic and rubbery in Hodgkin disease, firm discrete and shotty in syphilis, and stony hard in secondary carcinoma.",
+     "accept": [
+      "rubbery",
+      "shotty",
+      "stony hard",
+      "consistency"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "What is matting, and which disease owns it?",
+     "a": "Matting is adherence of neighbouring nodes through periadenitis, most characteristic of tuberculous lymphadenitis.",
+     "accept": [
+      "matting",
+      "periadenitis",
+      "tuberculous",
+      "adherent"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "A node is fixed to the skin with fungation. What has happened, and what does it mean for surgery?",
+     "a": "Neglected secondary carcinoma has grown beyond the capsule into surrounding structures, which puts it beyond straightforward surgical scope.",
+     "accept": [
+      "secondary carcinoma",
+      "beyond the capsule",
+      "fixed",
+      "surgery"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "congenital_neck_masses_and_cervical_lymphadenopathy: clinicalPearls"
+    },
+    {
+     "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+     "locator": "The lymph nodes: palpation of consistency and fixity"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.lymphadenopathy.differential": {
+   "id": "skill.reasoning.lymphadenopathy.differential",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "Causes of node enlargement",
+   "oneLine": "Inflammatory, neoplastic, leukaemic, autoimmune, and the mimics at node sites",
+   "why": "A complete cause list protects against the two classic misses: calling tuberculosis chronic sepsis, and calling a deposit reactive hyperplasia. The list is short enough to carry in the head and complete enough to cover the bedside.",
+   "teach": [
+    {
+     "heading": "Inflammatory causes",
+     "body": "Acute lymphadenitis follows a septic focus and is hot, tender and brief. Chronic non-specific adenitis follows repeated minor sepsis, such as oral sepsis for the neck and cracked bare feet for the groin, and is hard to separate from early tuberculosis.\n\nGranulomatous adenitis has bacterial members led by tuberculosis and syphilis, viral members including venereal bubo, cat scratch disease and mononucleosis, parasitic members led by filariasis, fungal members, and sarcoidosis of still debated cause."
+    },
+    {
+     "heading": "Neoplastic, leukaemic and autoimmune causes",
+     "body": "Primary malignant lymphoma covers Hodgkin disease and the non Hodgkin group; benign primary tumours of nodes barely exist. Secondary deposits reach nodes by permeation or embolism from carcinoma, melanoma and rarely sarcoma of the territory.\n\nLymphatic leukaemia gives generalised nodes with splenic enlargement and a blood film full of lymphocytes. Autoimmune causes include Still disease, lupus, polyarteritis and scleroderma."
+    },
+    {
+     "heading": "Generalised disease and mimics",
+     "table": {
+      "cols": [
+       "Setting",
+       "Causes to name",
+       "Bedside clue"
+      ],
+      "rows": [
+       [
+        "Generalised nodes",
+        "Tuberculosis, secondary syphilis, mononucleosis, sarcoidosis, brucellosis, toxoplasmosis, Hodgkin disease, lymphosarcoma, leukaemia",
+        "A second group found on routine survey"
+       ],
+       [
+        "Midline neck swelling",
+        "Thyroglossal cyst, submental dermoid, thyroid isthmus swelling",
+        "Moves on tongue protrusion or swallowing"
+       ],
+       [
+        "Upper neck under the jaw muscle",
+        "Branchial cyst, cold abscess, carotid body tumour",
+        "Position and pulsation decide"
+       ],
+       [
+        "Lower posterior triangle",
+        "Cystic hygroma in a child, supraclavicular nodes in an adult",
+        "Brilliant transillumination means hygroma"
+       ]
+      ]
+     }
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "Name four causes of generalised lymph node enlargement.",
+     "a": "Tuberculosis, secondary syphilis, infectious mononucleosis, sarcoidosis, lymphoma and lymphatic leukaemia.",
+     "accept": [
+      "tuberculosis",
+      "syphilis",
+      "mononucleosis",
+      "lymphoma",
+      "leukaemia"
+     ],
+     "minMatch": 3
+    },
+    {
+     "level": 2,
+     "q": "How do you separate chronic non-specific adenitis from early tuberculous adenitis clinically?",
+     "a": "Often you cannot at first: both are moderately enlarged, slightly tender and elastic. A preceding acute episode and a septic focus favour chronic sepsis; matting, cold abscess and sinus favour tuberculosis, confirmed by sampling.",
+     "accept": [
+      "septic focus",
+      "matting",
+      "cold abscess",
+      "sampling"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "A midline neck swelling moves on tongue protrusion. Why is this not a node?",
+     "a": "Because movement on tongue protrusion marks a thyroglossal tract remnant, while nodes do not move with the tongue.",
+     "accept": [
+      "thyroglossal",
+      "tongue protrusion",
+      "not a node"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "congenital_neck_masses_and_cervical_lymphadenopathy: additionalDifferentials"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "The lymph nodes: causes of enlargement"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.investigation.lymphadenopathy.workup": {
+   "id": "skill.investigation.lymphadenopathy.workup",
+   "kind": "investigation",
+   "system": "surgery",
+   "title": "Investigating node enlargement",
+   "oneLine": "Bloods grade it, sampling names it, the chest film looks deeper",
+   "why": "No finger can see caseation or Reed Sternberg cells, so every nodal diagnosis ends in the laboratory. The order matters: cheap bloods first, needle sampling before any knife, and the chest film in every cervical case.",
+   "teach": [
+    {
+     "heading": "Bloods and pus",
+     "body": "Routine blood examination comes first: polymorph leucocytosis means acute adenitis, lymphocytosis favours tuberculosis or leukaemia, eosinophilia favours filariasis, and a raised ESR marks tuberculosis and malignancy. Night blood shows microfilaria while the patient sleeps.\n\nExamine pus from any abscess or bubo: acid fast bacilli mean cold abscess, and serology covers syphilis and venereal bubo. These are bedside cheap tests that must precede any operation."
+    },
+    {
+     "heading": "Sampling: needle before knife",
+     "body": "Ultrasound maps the nodes and aims the needle; fine needle sampling with molecular testing names tuberculosis, including drug sensitivity, without an operation. Excision of a whole node for histology remains the court of appeal where the needle leaves doubt.\n\nNever start with open incisional biopsy of an undiagnosed adult neck mass: it seeds tumour and spoils cure. Sampling by needle first is the rule that protects the patient with metastatic carcinoma."
+    },
+    {
+     "heading": "Look deeper in every case",
+     "points": [
+      "Take a chest film in every cervical case: it shows mediastinal nodes, pulmonary tuberculosis and bronchial carcinoma behind the neck swelling.",
+      "Test for HIV where nodes are generalised, prolonged or unexplained, since it reshapes both differential and drug choices.",
+      "Search the drainage territory for the primary: mouth, scalp, limbs, genitalia and breast examination complete the workup.",
+      "Refer tissue for histology with caseation, granuloma, Reed Sternberg or metastatic pattern reported, since treatment follows the microscope."
+     ]
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What do polymorph leucocytosis, lymphocytosis and eosinophilia each favour in nodal disease?",
+     "a": "Polymorphs favour acute lymphadenitis, lymphocytosis favours tuberculosis or leukaemia, and eosinophilia favours filariasis.",
+     "accept": [
+      "acute lymphadenitis",
+      "tuberculosis",
+      "filariasis",
+      "blood"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "Why is open incisional biopsy forbidden as the first step in an adult neck mass?",
+     "a": "Because it can seed tumour through tissue planes and compromise cure in metastatic carcinoma, so needle sampling comes first.",
+     "accept": [
+      "seed tumour",
+      "needle sampling",
+      "metastatic",
+      "first"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "A young adult has matted cervical nodes. List your investigation order with reasons.",
+     "a": "Blood counts with ESR, neck ultrasound with needle sampling and molecular testing, chest film for mediastinal nodes or pulmonary tuberculosis, HIV test, and excision biopsy only if the needle leaves doubt.",
+     "accept": [
+      "ultrasound",
+      "needle sampling",
+      "molecular",
+      "chest film",
+      "excision biopsy"
+     ],
+     "minMatch": 3
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "congenital_neck_masses_and_cervical_lymphadenopathy: additionalInvestigations"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "The lymph nodes: special investigations and biopsy"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.lymphadenopathy.diagnosis": {
+   "id": "skill.reasoning.lymphadenopathy.diagnosis",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "Diagnosis and staging of nodal disease",
+   "oneLine": "Name the disease, stage its spread, and state what confirms it",
+   "why": "A diagnosis of enlarged nodes is not a diagnosis at all. The statement must name the disease, place it in its stage or spread, and record the test that proved it, because treatment follows all three.",
+   "teach": [
+    {
+     "heading": "Tuberculous stages and Hodgkin spread",
+     "body": "Tuberculous adenitis runs three clinical stages: simple enlargement without matting, then matting through periadenitis, then softening with cold abscess that bursts into ulcer or unhealing sinus. Each stage is a bedside diagnosis awaiting sampling.\n\nHodgkin disease spreads through contiguous groups: one region, then two or more on one side of the diaphragm, then both sides with or without spleen, then disseminated extranodal disease. Each stage carries absence or presence of fever, major weight loss and bone pain."
+    },
+    {
+     "heading": "Hodgkin against the rest",
+     "body": "Hodgkin nodes are elastic and rubbery, discrete and moveable, slow to mat or soften, with pain after alcohol as a peculiar clue and spleen commonly enlarged. Non Hodgkin nodes mat early with necrotic areas, spread to distant groups early, and involve marrow and spleen outside the neck.\n\nSecondary carcinoma is stony hard and fixed with skin involvement; melanoma nodes grow faster and show black pigment when cut; leukaemia shows generalised nodes with a lymphocyte packed blood film. The microscope has the last word in every one of these."
+    },
+    {
+     "heading": "A complete diagnostic statement",
+     "points": [
+      "Name the disease with side, group and stage: tuberculous adenitis of right deep cervical nodes with cold abscess; Hodgkin disease stage two with fever.",
+      "Record spread: other groups, liver, spleen, mediastinum and any pressure effect on airway, gullet or veins.",
+      "Record proof: needle cytology, molecular test, histology with granuloma or Reed Sternberg cells, or blood film.",
+      "State what remains open: drug sensitivity awaited, primary still sought, staging imaging pending."
+     ]
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "Describe the three clinical stages of tuberculous lymphadenitis.",
+     "a": "Simple enlargement without matting, then matting through periadenitis, then softening with cold abscess bursting into ulcer or sinus.",
+     "accept": [
+      "matting",
+      "periadenitis",
+      "cold abscess",
+      "sinus"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "How does Hodgkin spread differ from non Hodgkin spread?",
+     "a": "Hodgkin spreads through contiguous node groups and stays discrete, while non Hodgkin skips to distant groups early with extranodal marrow and spleen involvement.",
+     "accept": [
+      "contiguous",
+      "discrete",
+      "distant",
+      "extranodal"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "What makes a diagnostic statement complete in nodal disease?",
+     "a": "The named disease with side, group and stage, the recorded spread to other groups and organs, the proving test, and what remains open.",
+     "accept": [
+      "stage",
+      "spread",
+      "proving test",
+      "named disease"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "congenital_neck_masses_and_cervical_lymphadenopathy: clinicalPearls"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "The lymph nodes: Hodgkin staging and pathology"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.treatment.lymphadenopathy.management": {
+   "id": "skill.treatment.lymphadenopathy.management",
+   "kind": "treatment",
+   "system": "surgery",
+   "title": "Treating node enlargement",
+   "oneLine": "Treat the cause, aspirate cold pus, refer cancer early, notify tuberculosis",
+   "why": "Nodes are never treated for themselves; the cause is treated and the node follows. Knowing which cases need drugs, which need the needle, and which need urgent referral is the whole of management.",
+   "dosingNote": "This module teaches management at the level of drug class and principle. Specific agents, weight bands and durations must be taken from the current national tuberculosis programme guidance and institutional oncology protocols at the time of prescribing. CliniX does not prescribe.",
+   "teach": [
+    {
+     "heading": "Inflammatory disease: focus and drugs",
+     "body": "Acute adenitis is treated by treating the septic focus with antimicrobials, with drainage only when suppuration points and fluctuates. Chronic septic adenitis needs the focus removed: bad teeth, scalp sepsis or cracked-foot infection eradicated.\n\nTuberculous adenitis is a medical disease treated with multidrug antitubercular treatment under the national programme, with notification, adherence support and drug sensitivity testing. Cold abscess is aspirated with a wide needle, never incised, since incision leaves the unhealing sinus the disease is known for."
+    },
+    {
+     "heading": "Malignant disease: refer, do not delay",
+     "body": "Lymphoma is referred to oncology for stage guided chemotherapy with radiotherapy where indicated; surgery is limited to sampling and staging, since the disease is systemic from the start. Splenic and marrow assessment belong to staging, not to the surgeon alone.\n\nSecondary carcinoma is referred with its primary: the neck is sampled by needle, the primary is hunted in the territory, and head neck surgery with node clearance follows the cancer plan. An adult lateral neck mass is metastatic carcinoma until proven otherwise, so referral is urgent, not routine."
+    },
+    {
+     "heading": "Programme, follow up and red flags",
+     "points": [
+      "Notify every tuberculosis case to the national programme and arrange household contact tracing, since nodes mark infectious risk at home.",
+      "Use free programme molecular testing before treatment where available, and test for HIV in generalised or unexplained disease.",
+      "Follow nodes to resolution: persistence, growth or new groups during treatment mean resistance, wrong diagnosis or second pathology.",
+      "Refer urgently for stridor, dysphagia, facial swelling, rapid fixation, fungation, or B symptoms with generalised nodes."
+     ]
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "How do you manage a tuberculous cold abscess: incise or aspirate, and why?",
+     "a": "Aspirate with a wide needle and never incise, because incision leaves a persistent tubercular sinus.",
+     "accept": [
+      "aspirate",
+      "never incise",
+      "sinus",
+      "needle"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "What programme steps accompany antitubercular treatment for nodal disease?",
+     "a": "Notification to the national programme, molecular testing with drug sensitivity, adherence support, and household contact tracing.",
+     "accept": [
+      "notification",
+      "molecular",
+      "adherence",
+      "contact tracing"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "A 55 year old has a stony hard fixed neck node. What is your management in order?",
+     "a": "Treat as metastatic carcinoma until proven otherwise: needle sampling first, hunt the primary in the territory, and urgent referral to head neck oncology without any incisional biopsy.",
+     "accept": [
+      "metastatic carcinoma",
+      "needle sampling",
+      "hunt the primary",
+      "urgent referral"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "congenital_neck_masses_and_cervical_lymphadenopathy: clinicalPearls"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "The lymph nodes: treatment of tuberculous adenitis and malignant nodes"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.annexure.lymphadenopathy.levels_staging": {
+   "id": "skill.annexure.lymphadenopathy.levels_staging",
+   "kind": "annexure",
+   "system": "surgery",
+   "title": "Cervical node levels and lymphoma staging",
+   "oneLine": "Seven levels in the neck and four stages across the diaphragm",
+   "why": "Surgeons, radiologists and oncologists all speak in levels and stages. Knowing which level a node occupies, and which stage a lymphoma has reached, lets the student follow every report and referral letter.",
+   "teach": [
+    {
+     "heading": "Cervical node levels",
+     "table": {
+      "cols": [
+       "Level",
+       "Territory",
+       "Bedside landmark"
+      ],
+      "rows": [
+       [
+        "I",
+        "Submental and submandibular",
+        "Under chin and jaw"
+       ],
+       [
+        "II",
+        "Upper jugular",
+        "Angle of jaw to hyoid"
+       ],
+       [
+        "III",
+        "Middle jugular",
+        "Hyoid to cricoid"
+       ],
+       [
+        "IV",
+        "Lower jugular",
+        "Cricoid to clavicle"
+       ],
+       [
+        "V",
+        "Posterior triangle",
+        "Behind the sternomastoid"
+       ],
+       [
+        "VI",
+        "Anterior compartment",
+        "Around the windpipe"
+       ],
+       [
+        "VII",
+        "Upper mediastinal",
+        "Above the sternal notch, deep"
+       ]
+      ]
+     }
+    },
+    {
+     "heading": "Hodgkin stages across the diaphragm",
+     "table": {
+      "cols": [
+       "Stage",
+       "Spread",
+       "Suffix"
+      ],
+      "rows": [
+       [
+        "One",
+        "Single node region or single extranodal site",
+        "A no systemic symptoms, B with fever, major weight loss or bone pain"
+       ],
+       [
+        "Two",
+        "Two or more regions on the same side of the diaphragm",
+        "A or B as above"
+       ],
+       [
+        "Three",
+        "Regions on both sides of the diaphragm, with or without spleen",
+        "S marks splenic involvement"
+       ],
+       [
+        "Four",
+        "Disseminated extranodal foci with or without nodal disease",
+        "Marrow, liver and lung sought"
+       ]
+      ]
+     }
+    },
+    {
+     "heading": "Using the annexure",
+     "points": [
+      "Record every neck node with its level: level two nodes suggest throat primaries, level four and supraclavicular nodes look below the clavicle.",
+      "Stage every lymphoma at diagnosis and restage after treatment, since stage and B symptoms drive oncology decisions.",
+      "Radical neck clearance removes levels one to five with vein, muscle and nerve where the cancer plan requires it."
+     ]
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "Which level holds nodes behind the sternomastoid, and which holds the upper jugular chain?",
+     "a": "Level five holds the posterior triangle behind the sternomastoid, and level two holds the upper jugular chain.",
+     "accept": [
+      "level five",
+      "posterior triangle",
+      "level two",
+      "jugular"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "What separates stage two from stage three Hodgkin disease?",
+     "a": "The diaphragm: stage two stays on one side of it, stage three involves regions on both sides.",
+     "accept": [
+      "diaphragm",
+      "one side",
+      "both sides",
+      "stage"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "congenital_neck_masses_and_cervical_lymphadenopathy: clinicalPearls"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "The neck: cervical lymph node levels and staging"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  }
+ },
+ "cases": [
+  {
+   "id": "case.lymphadenopathy.ravi",
+   "initialVitals": {
+    "hr": 88,
+    "bpSystolic": 110,
+    "bpDiastolic": 70,
+    "rr": 16,
+    "spo2": 98,
+    "temp": 37.8,
+    "gcs": 15
+   },
+   "title": "A student with two months of painless neck swelling",
+   "opening": "Ravi Shinde, 19, has come to the surgery outpatient clinic with his mother. A painless swelling fills the right side of his neck. Introduce yourself and take a history.",
+   "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+   "patient": {
+    "name": "Ravi Shinde",
+    "age": 19,
+    "sex": "male",
+    "occupation": "Second year commerce student, hostel resident",
+    "residence": "College hostel on the city outskirts, shares a small room with three others"
+   },
+   "history": {
+    "presenting": {
+     "cues": [
+      "what brings you",
+      "what is the problem",
+      "why have you come",
+      "what is your complaint today",
+      "tell me about",
+      "how can i help",
+      "what is troubling"
+     ],
+     "reply": "Doctor, I have this swelling on the right side of my neck since two months. It keeps growing slowly and I get fever in the evenings.",
+     "key": true,
+     "skillId": "skill.hx.chief_complaints"
+    },
+    "onset_course": {
+     "cues": [
+      "when did it start",
+      "how long ago",
+      "since when",
+      "sudden or gradual",
+      "how did it begin"
+     ],
+     "reply": "It began two months ago as a small painless seed under the skin. It has grown steadily since, and two more lumps joined it last month.",
+     "key": true
+    },
+    "node_pain": {
+     "cues": [
+      "is the swelling painful",
+      "pain in the swelling",
+      "painful or painless",
+      "does it hurt to touch"
+     ],
+     "reply": "No, doctor, it is not painful at all. Even pressing it does not hurt. That is why I ignored it at first.",
+     "key": true
+    },
+    "fever_pattern": {
+     "cues": [
+      "evening fever",
+      "fever in the evening",
+      "rise of temperature",
+      "fever pattern",
+      "do you get fever"
+     ],
+     "reply": "Yes, I feel feverish every evening with a tired heavy feeling. By morning it settles on its own. This has gone on for weeks.",
+     "key": true
+    },
+    "night_sweats_weight": {
+     "cues": [
+      "night sweats",
+      "sweating at night",
+      "losing weight",
+      "weight loss",
+      "appetite over weeks"
+     ],
+     "reply": "My vest is damp with sweat some mornings, my appetite has fallen, and my trousers feel loose. My mother says I have lost around three kilos.",
+     "key": true
+    },
+    "throat_scalp_focus": {
+     "cues": [
+      "sore throat",
+      "throat pain",
+      "tooth pain",
+      "scalp sore",
+      "boil or cut near the swelling",
+      "mouth ulcers"
+     ],
+     "reply": "No sore throat, no tooth pain, no scalp sores. There was no cut or boil before this swelling came. The skin over it looks normal.",
+     "key": true
+    },
+    "past_tb_illness": {
+     "cues": [
+      "tuberculosis before",
+      "tb treatment before",
+      "past tb",
+      "cough for weeks before",
+      "previous swelling like this"
+     ],
+     "reply": "I never had tuberculosis and never took treatment for it. I never had a swelling like this before.",
+     "key": true
+    },
+    "household_contact": {
+     "cues": [
+      "anyone at home with tb",
+      "tb at home",
+      "roommate cough",
+      "hostel cough",
+      "contact with tuberculosis"
+     ],
+     "reply": "Yes, my roommate in the hostel has been coughing for months and is now taking medicines for tuberculosis. We share the same small room.",
+     "key": true
+    },
+    "family_tb": {
+     "cues": [
+      "family tuberculosis",
+      "tb in the family",
+      "anyone in family with chronic cough",
+      "hereditary illness"
+     ],
+     "reply": "My uncle had tuberculosis of the lungs two years ago and finished his full course. Nobody else at home is ill now."
+    },
+    "crowded_hostel": {
+     "cues": [
+      "where do you live",
+      "hostel rooms",
+      "crowded room",
+      "how many share the room",
+      "ventilation at home"
+     ],
+     "reply": "I live in a college hostel, four of us in one small room with one window. We study and sleep crowded together.",
+     "key": true
+    },
+    "tobacco_alcohol": {
+     "cues": [
+      "do you smoke",
+      "tobacco chewing",
+      "gutkha or khaini",
+      "drink alcohol",
+      "smoking habit"
+     ],
+     "reply": "No, doctor, I do not smoke or chew tobacco, and I do not drink."
+    },
+    "pet_scratch_exposure": {
+     "cues": [
+      "cat scratch",
+      "pet animals",
+      "thorn prick",
+      "animal contact",
+      "barefoot walking"
+     ],
+     "reply": "We keep no pets. I wear slippers to college and have had no thorn prick or animal scratch."
+    },
+    "sexual_history": {
+     "cues": [
+      "sexual exposure",
+      "multiple partners",
+      "genital sore",
+      "discharge per urethra"
+     ],
+     "reply": "No, doctor, I have had no such exposure and no sores anywhere else."
+    },
+    "drug_history": {
+     "cues": [
+      "regular medicines",
+      "drugs for fits",
+      "taking any tablets",
+      "recent vaccination",
+      "taking steroids"
+     ],
+     "reply": "I take no regular medicines, nothing for fits, no steroids. I only took paracetamol for the fever some evenings.",
+     "key": true,
+     "skillId": "skill.hx.surg.surgical_fever"
+    },
+    "pressure_symptoms": {
+     "cues": [
+      "difficulty breathing",
+      "trouble swallowing",
+      "change in voice",
+      "face puffiness",
+      "noisy breathing"
+     ],
+     "reply": "No difficulty in breathing or swallowing, my voice is the same, and my face looks normal. The swelling only bothers me by its size."
+    },
+    "other_groups_noticed": {
+     "cues": [
+      "swelling elsewhere",
+      "armpit swelling",
+      "groin swelling",
+      "other lumps in the body",
+      "swelling on the other side"
+     ],
+     "reply": "Only this right side of the neck, doctor. I checked my armpits and groin myself and found nothing there."
+    },
+    "prior_treatment": {
+     "cues": [
+      "treatment taken so far",
+      "antibiotics taken",
+      "injection or operation for this",
+      "aspiration done before"
+     ],
+     "reply": "A local doctor gave me ten days of antibiotic capsules last month. The swelling did not shrink at all, so he sent me here.",
+     "key": true
+    }
+   },
+   "exam": {
+    "skill.gen.appearance": {
+     "finding": "Thin built young man, tired looking, no distress at rest. No pallor of consequence, no jaundice.",
+     "abnormal": true
+    },
+    "skill.gen.vitals": {
+     "finding": "Temperature 37.8 C in the evening clinic. Pulse 88 regular. Blood pressure 110/70. Respiratory rate 16. SpO2 98 percent on room air.",
+     "abnormal": true
+    },
+    "skill.gen.surg.survey": {
+     "finding": "No facial puffiness or venous engorgement. No limb oedema. Skin shows no syphilis stigmata and no fungating mass.",
+     "abnormal": false
+    },
+    "skill.gen.surg.surgical_fever": {
+     "finding": "Low grade evening fever pattern with weeks of night sweats and weight loss, favouring tuberculosis over acute sepsis.",
+     "abnormal": true
+    },
+    "skill.exam.surg.cervical_nodes": {
+     "finding": "Multiple right deep cervical nodes, levels two and three, largest 3 cm, firm, matted, non tender, mobile over deeper planes. One area fluctuant with thinned skin and a small healing sinus with scanty discharge.",
+     "abnormal": true
+    },
+    "skill.exam.surg.lymph_node_groups": {
+     "finding": "Left neck, both axillae, both groins, epitrochlear and popliteal groups free. No generalised enlargement.",
+     "abnormal": false
+    },
+    "skill.exam.surg.regional_nodes": {
+     "finding": "Mouth, teeth, tonsils, scalp and ear all clean with no septic focus. Thyroid normal. No pressure signs on tongue movement or voice.",
+     "abnormal": false
+    }
+   },
+   "essentialInvestigations": [
+    "cbc_esr",
+    "usg_neck",
+    "fnac_node",
+    "cbnaat",
+    "cxr"
+   ],
+   "investigations": {
+    "cbc_esr": {
+     "label": "Blood counts with ESR",
+     "indicated": true,
+     "result": "Haemoglobin 11.8 g per dL. Total leucocyte count normal with relative lymphocytosis. ESR raised.",
+     "note": "Lymphocytosis with a raised ESR fits tuberculosis or leukaemia rather than acute bacterial adenitis, and the film shows no blasts."
+    },
+    "usg_neck": {
+     "label": "Neck ultrasound",
+     "indicated": true,
+     "result": "Multiple matted right jugular nodes with hypoechoic centres and early necrosis. No thyroid lesion. No vascular encasement.",
+     "note": "Mapping aims the needle at the most necrotic node and records fixity, which decides sampling against surgery."
+    },
+    "fnac_node": {
+     "label": "Ultrasound guided FNAC of node",
+     "indicated": true,
+     "result": "Epithelioid granulomas with Langhans giant cells and caseous necrosis. No malignant cells. Acid fast bacilli seen.",
+     "note": "Granuloma with caseation is the tissue diagnosis of tuberculosis; the needle gives it without any incision on the neck."
+    },
+    "cbnaat": {
+     "label": "Molecular test on aspirate",
+     "indicated": true,
+     "result": "Mycobacterium tuberculosis detected with rifampicin sensitivity preserved.",
+     "note": "Programme molecular testing confirms tuberculosis and its drug sensitivity together, which sets the regimen under national guidance."
+    },
+    "cxr": {
+     "label": "Chest radiograph",
+     "indicated": true,
+     "result": "No parenchymal lesion. No mediastinal widening. No calcified nodes.",
+     "note": "Mandatory in every cervical case to look deeper, and here it keeps the disease nodal rather than pulmonary."
+    },
+    "hiv_test": {
+     "label": "HIV test with counselling",
+     "indicated": true,
+     "result": "Non reactive.",
+     "note": "Appropriate in prolonged generalised or unexplained nodes; here it excludes the main modifier before long treatment."
+    },
+    "incision_biopsy": {
+     "label": "Open incisional biopsy",
+     "indicated": false,
+     "result": "Not done.",
+     "note": "Refused at this stage: needle sampling with molecular confirmation already diagnoses him, and an open cut on an undiagnosed neck mass risks seeding and sinus."
+    }
+   },
+   "differentialModel": {
+    "answer": "Tuberculous lymphadenitis with cold abscess. Consider acute lymphadenitis, Hodgkin lymphoma, non Hodgkin lymphoma, and metastatic carcinoma of unknown primary.",
+    "accept": [
+     "tuberculous lymphadenitis",
+     "scrofula",
+     "acute lymphadenitis",
+     "hodgkin lymphoma",
+     "non hodgkin lymphoma",
+     "metastatic carcinoma of unknown primary"
+    ],
+    "minMatch": 2
+   },
+   "diagnosis": {
+    "answer": "Tuberculous lymphadenitis of right deep cervical nodes with cold abscess and healing sinus, rifampicin sensitive.",
+    "accept": [
+     "tuberculous lymphadenitis",
+     "scrofula",
+     "tb lymphadenitis"
+    ],
+    "minMatch": 1
+   },
+   "managementModel": {
+    "answer": "Notify under the national tuberculosis programme with household contact tracing, multidrug antitubercular treatment per current guidance with adherence support, wide needle aspiration of the cold abscess without incision, and follow up of nodes with referral if they persist, grow or spread.",
+    "accept": [
+     "antitubercular treatment",
+     "notification",
+     "contact tracing",
+     "aspiration",
+     "adherence",
+     "follow-up",
+     "referral"
+    ],
+    "minMatch": 3
+   },
+   "teachingPoints": [
+    "Tempo plus painlessness does the first half of the diagnosis: two months of painless growth with evening fever and weight loss is tuberculosis until sampling says otherwise.",
+    "Matting with a cold fluctuant area and a healing sinus is the bedside triad of tuberculous adenitis in its third stage; hot red skin would have meant acute adenitis instead.",
+    "No septic focus in the mouth, teeth, tonsils or scalp removes chronic septic adenitis from the table without any test.",
+    "The roommate with pulmonary tuberculosis and four students to a room explain this case better than any rare cause, which is why contact history is asked in every node.",
+    "Ten days of antibiotics changed nothing because antitubercular drugs, not ordinary antibiotics, treat this disease; failure to shrink on antibiotics is itself a clue.",
+    "Needle sampling with molecular testing diagnoses and stages drug sensitivity together, while an open cut would only add a sinus.",
+    "A normal chest film keeps the disease nodal, and a non reactive HIV test removes the main modifier before months of treatment."
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  }
+ ]
+}
