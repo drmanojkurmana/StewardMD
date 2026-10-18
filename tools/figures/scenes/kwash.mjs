@@ -36,11 +36,11 @@ function modelOf(S, level, drug) {
   const micro = drug === 3 || drug === 4 ? 1 : 0;
   const Waste = cl(b.waste - 0.34 * refeed - 0.08 * antiInf - 0.05 * micro);
   const Alb = cl(b.alb + 0.26 * refeed + 0.1 * antiInf + 0.06 * micro);
-  const Oed = cl(b.oed - 0.28 * refeed - 0.06 * antiInf - 0.04 * micro + (drug === 0 ? 0 : 0));
+  const Oed = cl(b.oed - 0.28 * refeed - 0.06 * antiInf - 0.04 * micro);
   const Fat = cl(b.fat - 0.34 * refeed - 0.05 * micro);
   const ImmLoss = cl(b.immLoss - 0.14 * refeed - 0.24 * antiInf - 0.26 * micro);
   const Inf = cl(0.12 + 0.78 * ImmLoss - 0.34 * antiInf - 0.08 * micro);
-  const Adapt = cl(b.adapt + 0.12 * refeed + 0.06 * micro);
+  const Adapt = cl(b.adapt + 0.12 * refeed + 0.3 * micro);
   const Belly = cl(b.belly - 0.3 * refeed);
   const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
   const words = [
@@ -62,17 +62,15 @@ const TESTS = [
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
 <rect class="kw-node kw-n1" x="40" y="84" width="190" height="76" rx="12"/>
-<rect class="kw-node kw-n2" x="40" y="184" width="190" height="86" rx="12"/>
-<rect class="kw-node kw-n3" x="40" y="294" width="190" height="86" rx="12"/>
-<rect class="kw-node kw-n4" x="730" y="84" width="190" height="86" rx="12"/>
-<rect class="kw-node kw-n5" x="730" y="184" width="190" height="86" rx="12"/>
-<rect class="kw-node kw-n6" x="730" y="294" width="190" height="86" rx="12"/>
-<rect class="kw-node kw-n7" x="270" y="394" width="170" height="36" rx="10"/>
-<rect class="kw-node kw-n8" x="520" y="394" width="170" height="36" rx="10"/>
+<rect class="kw-node kw-n2" x="40" y="184" width="190" height="190" rx="12"/>
+<rect class="kw-node kw-n7" x="270" y="394" width="420" height="36" rx="10"/>
 <path class="kw-arrow" d="M440 406 C 470 392, 490 392, 520 406"/>
 <path class="kw-arrow" d="M520 424 C 490 438, 470 438, 440 424"/>
 <polygon class="kw-head" points="520,406 508,402 510,414"/>
 <polygon class="kw-head" points="440,424 452,428 450,416"/>
+<path id="feedLine" class="kw-feed" d="M135 152 C 240 152, 340 140, 468 140" opacity="0"/>
+<path id="leakLine" class="kw-leak" d="M825 252 L825 317" opacity="0"/>
+<g id="liverSlot"></g>
 <g id="intakeIn"></g>
 <g id="muscleIn"></g>
 <g id="fatIn"></g>
@@ -90,18 +88,16 @@ buildScene({
   id: "malnutrition-kwashiorkor-marasmus", fig: "Fig 1", title: "Protein-energy malnutrition: marasmus and kwashiorkor", W, H, body,
   label: "An animated child figure with food intake, muscle and fat stores, liver, blood albumin, tissue oedema, immunity and infection. Marasmus shows severe wasting with albumin relatively preserved and no oedema. Kwashiorkor shows low albumin, oedema, fatty liver, belly swelling, hair and skin change with less wasting. The mixed form shows both. Gauges show wasting, albumin, oedema, fatty liver, immunity and infection. Treatment choices include careful refeeding, treating infection and micronutrients.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "kwash.page.js"), "utf8"), modelOf, MD, tests: TESTS,
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "kwash.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
   withoutLabel: "Without treatment", withLabel: "With combined care",
   extraCss: `
 .kw-node{stroke:var(--anatomy-mid);stroke-width:1}
 .kw-n1{fill:color-mix(in srgb,var(--c-b) 22%,var(--anatomy-paper))}
 .kw-n2{fill:color-mix(in srgb,var(--c-rbc) 20%,var(--anatomy-paper))}
-.kw-n3{fill:color-mix(in srgb,var(--c-plt) 24%,var(--anatomy-paper))}
-.kw-n4{fill:color-mix(in srgb,var(--c-eos) 22%,var(--anatomy-paper))}
-.kw-n5{fill:color-mix(in srgb,var(--c-lymph) 20%,var(--anatomy-paper))}
-.kw-n6{fill:color-mix(in srgb,var(--c-fl) 22%,var(--anatomy-paper))}
-.kw-n7{fill:color-mix(in srgb,var(--c-good) 20%,var(--anatomy-paper))}
-.kw-n8{fill:color-mix(in srgb,var(--c-bad) 18%,var(--anatomy-paper))}
+.kw-n7{fill:color-mix(in srgb,var(--c-good) 14%,var(--anatomy-paper))}
+.kw-cap{fill:var(--anatomy-strong);font-size:12px}
+.kw-feed{fill:none;stroke:var(--c-b);stroke-width:3;stroke-linecap:round;stroke-dasharray:6 5}
+.kw-leak{fill:none;stroke:var(--c-fl);stroke-width:3;stroke-linecap:round;stroke-dasharray:5 4}
 .kw-arrow{fill:none;stroke:var(--anatomy-mid);stroke-width:1.6}
 .kw-head{fill:var(--anatomy-mid)}
 .kw-skin{fill:color-mix(in srgb,var(--c-donor) 55%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-donor) 60%,#000);stroke-width:1}
@@ -115,13 +111,12 @@ buildScene({
 .kw-food{fill:var(--c-b)}
 .kw-fibre{fill:color-mix(in srgb,var(--c-rbc) 55%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 55%,#000);stroke-width:.7}
 .kw-adip{fill:color-mix(in srgb,var(--c-plt) 65%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-plt) 55%,#000);stroke-width:.8}
-.kw-liver{fill:color-mix(in srgb,var(--c-eos) 55%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-eos) 55%,#000);stroke-width:1}
 .kw-fatdrop{fill:#f5d76a;stroke:#a8842a;stroke-width:.6}
+.kw-fatglow{fill:#f5d76a;stroke:none}
 .kw-vessel{fill:color-mix(in srgb,var(--c-rbc) 16%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 45%,#000);stroke-width:.8}
-.kw-alb{fill:var(--c-lymph);stroke:color-mix(in srgb,var(--c-lymph) 55%,#000);stroke-width:.5}
 .kw-tis{fill:color-mix(in srgb,var(--c-fl) 18%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:.8}
 .kw-paths{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 55%,#000);stroke-width:.6}
-.p-food{fill:var(--c-b)}.p-alb{fill:var(--c-lymph)}.p-oedp{fill:var(--c-fl)}.p-path{fill:var(--c-bad)}
+.p-food{fill:var(--c-b)}.p-alb{fill:var(--c-lymph)}.p-oedp{fill:var(--c-fl)}.p-path{fill:var(--c-bad)}.p-abx{fill:var(--c-good)}.p-mic{fill:#ffd97a}
 .dr-g-fill.g-waste{fill:var(--c-rbc)}.dr-g-fill.g-alb{fill:var(--c-lymph)}.dr-g-fill.g-oedg{fill:var(--c-fl)}.dr-g-fill.g-fatg{fill:var(--c-plt)}.dr-g-fill.g-imm{fill:var(--c-good)}.dr-g-fill.g-inf{fill:var(--c-bad)}
 `,
   sourcesLis: [

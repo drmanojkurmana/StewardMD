@@ -16,16 +16,16 @@ const MD = {
   drugLabel: "Treatment",
   settings: [
     { label: "no treatment" },
-    { label: "antibiotic" },
     { label: "steroid" },
     { label: "antiviral" },
+    { label: "antibiotic" },
   ],
   status: "Meningitis type: {level} · {drug} ·",
-  drugNames: ["no treatment", "antibiotic", "steroid", "antiviral"],
+  drugNames: ["no treatment", "steroid", "antiviral", "antibiotic"],
 };
 function modelOf(S, level, drug) {
   const cl = (v) => Math.max(0, Math.min(1, v));
-  const abx = drug === 1 ? 1 : 0, ster = drug === 2 ? 1 : 0, anti = drug === 3 ? 1 : 0;
+  const ster = drug === 1 ? 1 : 0, anti = drug === 2 ? 1 : 0, abx = drug === 3 ? 1 : 0;
   const orgBase = [0.95, 0.55, 0.8][level];
   const infBase = [0.95, 0.5, 0.82][level];
   const protBase = [0.95, 0.42, 1][level];
@@ -57,17 +57,17 @@ const TESTS = [
   [0, 0, "CSF cloudy · protein high · glucose low · pressure high"],
   [1, 0, "CSF clear · protein raised · glucose normal · pressure normal"],
   [2, 0, "CSF hazy · protein high · glucose low · pressure high"],
-  [0, 1, "CSF hazy · protein raised · glucose reduced · pressure raised"],
-  [1, 3, "CSF clear · protein normal · glucose normal · pressure normal"],
+  [0, 3, "CSF hazy · protein raised · glucose reduced · pressure raised"],
+  [1, 2, "CSF clear · protein normal · glucose normal · pressure normal"],
 ];
 
 /* ---------------- static layout ----------------
- * Brain centre (420,250). Skull rx190 ry140: x 230-610, y 110-390.
- * Meningeal rings inside it; CSF ring between arachnoid and pia.
- * Left entry vessel y 228-262, x 30-232. Right insets x 685-932:
- * CSF sample y 58-226, neck sign y 240-420. Gauges panel y 448-590.
- * Pill centres are placed in empty margins (see mening.page.js):
- * top y 78, left x 105, bottom-left (150,350), bottom (420,420),
+ * Real brain art at (420,252) w215 inside meningeal rings. Skull rx190 ry140:
+ * x 230-610, y 110-390. Meningeal rings inside it; CSF orbit rx159 ry116.
+ * Left entry vessel y 228-262, x 30-244, meeting the dura edge. Right insets
+ * x 685-932: CSF sample y 58-226, neck sign y 240-420. Gauges panel y 448-590.
+ * Stage caption at (30,432); pill centres in empty margins (see mening.page.js):
+ * top y 78, left x 105, bottom-left (150,350), pressure pill (648,398),
  * inset pills at (808,210) and (808,405) inside inset margins. */
 const CX = 420, CY = 250;
 const body = `
@@ -79,6 +79,7 @@ const body = `
 <text class="sc-zone" x="700" y="264">NECK SIGN</text>
 <g id="entry"></g>
 <g id="skull"></g>
+<g id="brainSlot"></g>
 <g id="csftube"></g>
 <g id="neck"></g>
 <g id="parts"></g>
@@ -89,8 +90,8 @@ buildScene({
   id: "meningitis", fig: "Fig 1", title: "Meningitis: infection and inflammation of the meninges", W, H, body,
   label: "An animated cross section of the brain and its meninges. Organisms reach the meninges from the blood and enter the cerebrospinal fluid in the subarachnoid space. The fluid becomes inflamed: white cells gather, protein leaks in, and in bacterial and tuberculous disease glucose falls and the fluid turns cloudy, while viral disease stays clearer with lymphocytes and normal glucose. Swelling and inflamed fluid raise the pressure inside the skull and irritate the meninges, which makes the neck stiff. A cerebrospinal fluid sample tube and a neck sign inset show the same picture. Gauges show organisms, inflammation, protein, glucose fall, pressure and stiffness. Treatment choices are an antibiotic, a steroid and an antiviral.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.",
-  scene: { CX, CY, W, H }, pageJs: readFileSync(join(HERE, "mening.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With antiviral",
+  scene: { CX, CY, W, H }, pageJs: readFileSync(join(HERE, "mening.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With antibiotic",
   sourcesLis: [
     "<strong>How meningitis develops.</strong> Organisms reach the meninges, usually through the blood, and multiply in the cerebrospinal fluid (CSF) of the subarachnoid space, which has little local defence. Inflammation follows: the blood to CSF barrier leaks protein, white cells enter, and bacteria and white cells use glucose so CSF glucose falls in bacterial and tuberculous disease. Bacterial CSF is typically cloudy with many neutrophils, high protein and low glucose; viral CSF is typically clear with lymphocytes, mildly raised protein and normal glucose; tuberculous CSF is in between and more chronic, with lymphocytes, high protein and low glucose. Inflamed meninges and raised intracranial pressure cause headache and neck stiffness from meningeal irritation. This is standard teaching in medicine, neurology and microbiology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> An antibiotic kills susceptible bacteria, an antiviral acts on viral infection, and a steroid dampens inflammation and pressure without killing the organism. These are teaching toggles only and do not cover urgent assessment, organism specific choices, resistance, or adjunctive care.",
@@ -112,7 +113,9 @@ buildScene({
 .mening-fluid{stroke:none}
 .mening-head{fill:color-mix(in srgb,var(--c-endo) 22%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-endo) 50%,#000);stroke-width:1.2}
 .mening-block{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-linecap:round}
-.p-org{--cc:var(--c-bac)}.p-med{--cc:var(--c-cyt)}.p-treat{--cc:#38d1ff}
+.mening-glow{fill:var(--c-cyt2);stroke:none}
+.mening-cap{fill:var(--anatomy-strong)}
+.p-org{--cc:var(--c-bac)}.p-med{--cc:var(--c-cyt)}.p-treat{--cc:#38d1ff}.p-ster{--cc:#9fe8c9}.p-prot{--cc:#e9b84a}
 .dr-g-fill.g-prot{fill:#e9b84a}.dr-g-fill.g-glu{fill:#f08a4b}.dr-g-fill.g-icp{fill:var(--c-bad)}.dr-g-fill.g-stiff{fill:var(--c-cyt)}
 `,
 });

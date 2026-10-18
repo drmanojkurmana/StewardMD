@@ -36,14 +36,14 @@ function modelOf(S, level, drug) {
   const Hd = cl(0.55 * B + 0.5 * ICP);
   const Perf = cl(1 - 0.75 * Is - 0.2 * ICP);
   const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
-  const words = [secure ? "secured" : "open", w(V, 0.25, 0.6, ["absent", "developing", "severe"]), w(Is, 0.25, 0.55, ["none", "developing", "established"]), w(Hy, 0.3, 0.65, ["normal", "enlarging", "dilated"])];
+  const words = [secure ? "secured" : "open", w(V, 0.3, 0.65, ["absent", "developing", "severe"]), w(Is, 0.25, 0.55, ["none", "developing", "established"]), w(Hy, 0.3, 0.65, ["normal", "enlarging", "dilated"])];
   return { secure, nimo, drain, B, V, Hy, R, Is, ICP, Hd, Perf, words, readout: "aneurysm " + words[0] + " · vasospasm " + words[1] + " · ischaemia " + words[2] + " · ventricles " + words[3] };
 }
 const TESTS = [
   [0, 0, "aneurysm open · vasospasm absent · ischaemia none · ventricles normal"],
   [1, 0, "aneurysm open · vasospasm severe · ischaemia established · ventricles enlarging"],
   [2, 0, "aneurysm open · vasospasm developing · ischaemia developing · ventricles dilated"],
-  [2, 4, "aneurysm secured · vasospasm developing · ischaemia none · ventricles normal"],
+  [2, 4, "aneurysm secured · vasospasm absent · ischaemia none · ventricles normal"],
 ];
 
 /* ---------------- static layout ---------------- */
@@ -52,8 +52,8 @@ const body = `
 <rect class="sc-tissue" x="624" y="44" width="322" height="396" rx="18"/>
 <text class="sc-zone" x="34" y="68">BRAIN AND CSF SPACES</text>
 <text class="sc-zone" x="644" y="68">CIRCLE OF WILLIS, ZOOM</text>
-<ellipse class="sah-csf" cx="315" cy="245" rx="250" ry="135"/>
-<ellipse class="sah-brain" cx="315" cy="245" rx="218" ry="112"/>
+<ellipse class="sah-csf" cx="315" cy="245" rx="250" ry="150"/>
+<g id="brainSlot"></g>
 <g id="isch"></g><g id="vent"></g><g id="artL"></g><g id="bloodL"></g><g id="aneurL"></g>
 <g id="drainG"></g><g id="burst"></g>
 <g id="willis"></g><g id="aneurR"></g><g id="bloodR"></g><g id="secureG"></g>
@@ -61,10 +61,10 @@ const body = `
 
 buildScene({
   id: "subarachnoid-haemorrhage", fig: "Fig 1", title: "Subarachnoid haemorrhage: aneurysm rupture and its complications", W, H, body,
-  label: "An animated brain in section beside a magnified circle of Willis. A berry aneurysm at an arterial branching point ruptures and blood spreads through the subarachnoid space around the brain. The bleed causes a thunderclap headache and raised pressure inside the skull. Days later blood around cerebral arteries provokes vasospasm and delayed cerebral ischaemia with focal neurologic deficits. Blood blocking cerebrospinal fluid flow and absorption causes hydrocephalus with enlarging ventricles, and an unsecured aneurysm can rerupture. Gauges show blood load, headache, intracranial pressure, vasospasm, ischaemia and ventricle size. Treatment choices are securing the aneurysm by clipping or endovascular coiling, nimodipine, and cerebrospinal fluid drainage.",
+  label: "An animated brain beside a magnified circle of Willis. A berry aneurysm at an arterial branching point ruptures and blood spreads through the subarachnoid space around the brain. The bleed causes a thunderclap headache and raised pressure inside the skull. Days later blood around cerebral arteries provokes vasospasm and delayed cerebral ischaemia with focal neurologic deficits. Blood blocking cerebrospinal fluid flow and absorption causes hydrocephalus with enlarging ventricles, and an unsecured aneurysm can rerupture. Gauges show blood load, headache, intracranial pressure, vasospasm, ischaemia and ventricle size. Treatment choices are securing the aneurysm by clipping or endovascular coiling, nimodipine, and cerebrospinal fluid drainage.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond those named as treatment classes are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "sah.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "sah.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With secure, nimodipine and drainage",
   sourcesLis: [
     "<strong>How a subarachnoid haemorrhage develops.</strong> Most spontaneous bleeds follow rupture of a berry (saccular) aneurysm at a branching point of the circle of Willis, for example on the anterior communicating, posterior communicating, middle cerebral or basilar artery. Blood under arterial pressure floods the subarachnoid space, giving a sudden thunderclap headache, vomiting, collapse and raised intracranial pressure. Early dangers are rerupture of the unsecured aneurysm and hydrocephalus when blood blocks cerebrospinal fluid circulation and absorption. Over the following days, classically from day 4 to about day 10 and sometimes into the next two weeks, blood breakdown products around cerebral arteries provoke vasospasm; narrowed arteries can cause delayed cerebral ischemia and focal neurologic deficits, including motor weakness, which may progress to infarction. Severity is graded clinically (for example the World Federation of Neurosurgical Societies grade, based on the Glasgow Coma Scale score and focal deficits) and by the amount of blood on imaging. This is standard teaching in medicine and neurology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Investigation and treatment ideas shown.</strong> The aneurysm is located with CT angiography or catheter angiography. Securing it early, either with a surgical clip across its neck or with endovascular coiling techniques through the artery, prevents rerupture; neither removes blood already in the subarachnoid space. Nimodipine is given to improve outcome after aneurysmal bleeding and lessen delayed ischaemia; it does not seal the aneurysm. Hydrocephalus is relieved by draining cerebrospinal fluid, shown here as an external drain. These are teaching toggles only, and major accompanying care such as blood pressure control, reversal of coagulopathy and critical care is not shown.",
@@ -72,7 +72,6 @@ buildScene({
   simplified: "Non-aneurysmal causes, aneurysm formation and growth, sentinel leaks, seizures, hyponatraemia and other systemic complications, transcranial Doppler monitoring, induced hypertension and other vasospasm rescue techniques, permanent shunting, drug choice and all doses and targets are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
   extraCss: `
 .sah-csf{fill:color-mix(in srgb,var(--c-fl) 22%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-fl) 55%,#000);stroke-width:1}
-.sah-brain{fill:color-mix(in srgb,var(--c-endo) 34%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-endo) 55%,#000);stroke-width:1}
 .sah-vent{fill:var(--c-fl);stroke:color-mix(in srgb,var(--c-fl) 55%,#000);stroke-width:.8}
 .sah-bloodring{fill:var(--c-bad)}
 .sah-ringstroke{fill:none;stroke:var(--c-bad)}
@@ -85,9 +84,12 @@ buildScene({
 .sah-seal{fill:var(--anatomy-strong)}
 .sah-drain{fill:none;stroke:var(--c-fl);stroke-width:2.4;stroke-linecap:round}
 .sah-bag{fill:color-mix(in srgb,var(--c-fl) 35%,var(--anatomy-paper));stroke:var(--c-fl);stroke-width:1}
+.sah-bagfill{transform-box:fill-box;transform-origin:50% 100%}
 .sah-burst{fill:none;stroke:var(--c-neut);stroke-width:2;stroke-linecap:round}
 .sah-block{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.6}
+.sah-cap{fill:var(--anatomy-strong);font-size:13px}
 .p-blood{--cc:var(--c-bad)}
+.p-nimo{--cc:var(--c-cyt2)}
 .dr-g-fill.g-pain{fill:var(--c-neut)}
 .dr-g-fill.g-isch{fill:#8a5fc4}
 `,
