@@ -259,18 +259,23 @@
     }
   }
 
-  function creditHtml(c, deck) {
-    var w = W(), src = (deck && deck.source) || {};
-    var ds = src.dataset || "Owner-supplied practicals sheet (Instruments)";
-    var nt = src.note || "Licence unconfirmed; confirm or replace before public release.";
-    return '<p class="tok-instr-credit">' + esc(w.credit) + ": " + esc(ds) + ". " + esc(nt) + "</p>";
+  function creditHtml(c) {
+    var w = W(), cr = c && c.credit, line;
+    if (cr && typeof cr === "object") {
+      line = cr.generated ? String(cr.generated)
+        : [cr.title, cr.author && ("by " + cr.author), cr.licence].filter(Boolean).join(", ");
+      if (cr.url && !cr.generated) line += " (" + String(cr.url).replace(/^https?:\/\//, "").split("/")[0] + ")";
+    } else {
+      line = "temporary placeholder image, to be replaced before release";
+    }
+    return '<p class="tok-instr-credit">' + esc(w.credit) + ": " + esc(line) + "</p>";
   }
 
   /* ================= Atlas Views ================= */
   function renderCard(c, deck) {
     var grp = groupLabel(deck, c.group);
     return '<button type="button" class="tok-instr-card" data-act="tin-open" data-id="' + esc(c.id) + '">' +
-      '<div class="tok-instr-card-img-wrap"><img src="' + esc(I.imgUrl("media/" + c.img)) + '" alt="' + esc(c.name.en + ", instrument photograph") + '" width="' + c.w + '" height="' + c.h + '" loading="lazy"></div>' +
+      '<div class="tok-instr-card-img-wrap"><img src="' + esc(I.imgUrl("media/" + c.img)) + '" class="tok-instr-card-img" alt="' + esc(c.name.en + ", instrument photograph") + '" width="' + c.w + '" height="' + c.h + '" loading="lazy"></div>' +
       '<div class="tok-instr-card-body">' +
       '<span class="tok-instr-card-group">' + esc(grp) + "</span>" +
       '<h3 class="tok-instr-card-title">' + esc(c.name.en) + "</h3>" +

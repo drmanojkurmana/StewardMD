@@ -118,7 +118,7 @@ try {
 
   // Assert detail sections in order
   ok(await ev(`var b = document.querySelector('.tok-instr-detail-body'); return !!(b.querySelector('.tok-instr-detail-title') && b.querySelector('.tok-instr-group-chip') && b.querySelectorAll('.tok-instr-section').length >= 2 && b.querySelector('.tok-instr-draft') && b.querySelector('.tok-instr-credit') && b.querySelector('.sp-maik'));`) === true, "detail contains title, group, recognise, uses, draft mark, honest credit, and Ask MaiK");
-  ok(await ev(`return /unconfirmed/i.test(document.querySelector('.tok-instr-credit').textContent);`) === true, "credit line honestly states licence unconfirmed");
+  ok(await ev(`var c = document.querySelector('.tok-instr-credit').textContent; return /Sarindam7/.test(c) && /CC BY-SA/.test(c) && c.length < 160;`) === true, "credit line names the Commons author and licence, briefly");
 
   // Zoom bar controls in detail
   ok(await until(`return !!document.querySelector('[data-act="tin-zoom"]') && !!document.querySelector('[data-act="tin-fit"]');`), "detail view has zoom and fit controls");
