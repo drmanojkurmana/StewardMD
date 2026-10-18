@@ -22,7 +22,7 @@ function initPanel() {
   pill(ox, "Tinnitus", 858, 124, 880, 70, "Ringing in the ear (tinnitus) is a classic early feature of salicylate poisoning.");
   pill(ox, "Uncoupled mitochondria", 385, 322, 340, 428, "Salicylate uncouples oxidative phosphorylation: energy escapes as heat instead of being stored, and metabolic acid accumulates.");
   pill(ox, "Acid raises entry", 520, 330, 565, 428, "When tissues and blood are more acid, more salicylate is non-ionised and crosses into tissues and brain, worsening toxicity.");
-  pill(ox, "Kidney trapping", 770, 300, 790, 428, "In alkaline urine salicylate stays ionised, is trapped in urine and excreted. Urinary alkalinisation uses this.");
+  pill(ox, "Kidney trapping", 770, 300, 700, 410, "In alkaline urine salicylate stays ionised, is trapped in urine and excreted. Urinary alkalinisation uses this.");
 }
 const sm = { Sal: 0.4, Resp: 0.4, Acid: 0.3, Heat: 0.3, Brain: 0.3, chr: 0, alk: 0, dial: 0 };
 const acc = { sal: 0, co2: 0, acid: 0, heat: 0 };

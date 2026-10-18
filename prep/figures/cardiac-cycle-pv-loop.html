@@ -8,7 +8,7 @@
   --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
   --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
   --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
-  --anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
 }
 .iso[data-theme="light"]{
@@ -199,6 +199,9 @@ body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px
 .bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
 .bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
 @media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
 body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
 body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
 .t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
@@ -277,11 +280,12 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 .cy-sv{stroke:var(--anatomy-strong);stroke-width:1.4}
 .cy-svhead{fill:var(--anatomy-strong)}
 .cy-badge{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}
-.cy-badge-t{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none}
+.cy-badge-t{fill:var(--anatomy-strong);font:600 12px system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;pointer-events:none}
+.dr-fig text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 .cy-arc{fill:none;stroke:var(--c-neut);stroke-width:1.4;stroke-linecap:round}
 .cy-ph{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
 .cy-ph-on{fill:color-mix(in srgb,var(--c-good) 42%,var(--anatomy-card));stroke:var(--c-good)}
-.cy-ph-t{fill:var(--anatomy-text);font:8px var(--anatomy-mono);pointer-events:none}
+.cy-ph-t{fill:var(--anatomy-text);font:8px system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;pointer-events:none}
 .cy-ph-t-on{fill:var(--anatomy-strong);font-weight:700}
 .dr-g-fill.g-pre{fill:var(--c-fl)}.dr-g-fill.g-sq{fill:var(--c-neut)}
 </style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">The cardiac cycle and the pressure-volume loop</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>ejection · stroke volume normal · peak pressure normal</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated left heart and left ventricular pressure-volume loop. The phase slider steps through atrial systole, isovolumetric contraction, ejection, isovolumetric relaxation and filling. The mitral and aortic valves open and close, the first and second heart sounds light up as the valves shut, blood flows in during filling and out during ejection, and a moving point traces the loop on the right. Treatment choices raise preload, raise afterload or add an inotrope, and the loop widens, narrows or shifts to show the change in stroke volume and pressure."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
@@ -474,8 +478,8 @@ function initPanel() {
   pill(o, "Aorta", 390, 129, 398, 84, "Aorta: the great artery leaving the heart. During ejection it receives the stroke volume and carries it to the body.");
   pill(o, "Heart sounds", 332, 300, 386, 282, "Heart sounds: S1 as the mitral valve shuts at the start of contraction, and S2 as the aortic valve shuts at the start of relaxation. The badges light up in those phases.");
   pill(o, "Blood ejected", 735, 228, 730, 88, "Ejection across the top of the loop: the aortic valve is open, volume falls and pressure first rises, then falls as ejection slows.");
-  pill(o, "Pressure falls", 683, 278, 538, 252, "Isovolumetric relaxation down the left side: both valves are shut, so volume stays fixed while pressure falls after the aortic valve closes.");
-  pill(o, "Volume fixed", 758, 278, 872, 240, "Isovolumetric contraction up the right side: both valves are shut, so volume stays fixed while pressure climbs after the mitral valve closes.");
+  pill(o, "Pressure falls", 683, 278, 600, 368, "Isovolumetric relaxation down the left side: both valves are shut, so volume stays fixed while pressure falls after the aortic valve closes.");
+  pill(o, "Volume fixed", 758, 278, 884, 180, "Isovolumetric contraction up the right side: both valves are shut, so volume stays fixed while pressure climbs after the mitral valve closes.");
   pill(o, "Filling flow", 720, 312, 735, 400, "Filling along the bottom of the loop: the mitral valve is open, volume rises at low pressure, and atrial systole gives the last top-up.");
   const names = ["Atrial systole", "Iso contraction", "Ejection", "Iso relaxation", "Filling"];
   names.forEach((n, i) => { const x = 30 + i * 89; const r = mk("rect", { class: "cy-ph", x: x, y: 404, width: 84, height: 26, rx: 8 }, o); const tx = mk("text", { class: "cy-ph-t", x: x + 42, y: 420, "text-anchor": "middle" }, o); tx.textContent = n; phBoxes.push(r); phTexts.push(tx); });
@@ -520,7 +524,7 @@ function step(dt, m) {
   s1Arc.setAttribute("opacity", s1on ? (0.4 + 0.6 * Math.sin(s * 3.14)).toFixed(2) : "0");
   s2Arc.setAttribute("opacity", s2on ? (0.4 + 0.6 * Math.sin(s * 3.14)).toFixed(2) : "0");
   /* pressure-volume loop and the moving point */
-  const EDVx = 600 + sm.EDV * 260, ESVx = 600 + sm.ESV * 260, lowY = 312, peakY = 340 - sm.peak * 230, openY = 340 - sm.peak * 0.8 * 230, endY = openY + 12;
+  const EDVx = 580 + sm.EDV * 300, ESVx = 580 + sm.ESV * 300, lowY = 312, peakY = 340 - sm.peak * 230, openY = 340 - sm.peak * 0.8 * 230, endY = openY + 12;
   pvPath.setAttribute("d", "M" + f1(EDVx) + " " + lowY + "L" + f1(EDVx) + " " + f1(openY) + "C" + f1(EDVx - 6) + " " + f1(peakY) + " " + f1(ESVx + 34) + " " + f1(peakY) + " " + f1(ESVx) + " " + f1(endY) + "L" + f1(ESVx) + " " + lowY + "Q" + f1((EDVx + ESVx) / 2) + " 324 " + f1(EDVx) + " " + lowY + "Z");
   svLine.setAttribute("d", "M" + f1(ESVx) + " 332H" + f1(EDVx));
   svHL.setAttribute("d", "M" + f1(ESVx) + " 332l9 -4v8Z"); svHR.setAttribute("d", "M" + f1(EDVx) + " 332l-9 -4v8Z");

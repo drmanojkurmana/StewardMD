@@ -284,6 +284,7 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 .sl-char{fill:#2b2b2b;stroke:#111;stroke-width:.6}
 .sl-alk{fill:#7fc4a8;stroke:#3a7a63;stroke-width:.7}
 .p-sal{--cc:#e8d36a}.p-co2{--cc:#7fc4e8}.p-acid{--cc:#e5484d}.p-heatp{--cc:#f08a4b}
+.dr-fig text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 .dr-g-fill.g-sal{fill:#e8d36a}.dr-g-fill.g-resp{fill:#7fc4e8}.dr-g-fill.g-acid{fill:var(--c-bad)}.dr-g-fill.g-heat{fill:#f08a4b}.dr-g-fill.g-brain{fill:var(--c-cyt)}
 </style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Salicylate poisoning: breathing, acid and heat</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>salicylate raised · breathing fast · metabolic acid raised · body heat warm · tissue entry raised</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated scene of salicylate poisoning. Salicylate from the gut enters the blood, stimulates the respiratory centre so breathing speeds up and carbon dioxide is blown off, and uncouples mitochondria so heat and metabolic acid rise. Acid in the tissues lets more salicylate enter the brain, and ringing in the ear is shown at the ear. Treatments are activated charcoal in the gut, urinary alkalinisation at the kidney, and dialysis clearing the blood. Gauges show salicylate, breathing, metabolic acid, body heat and tissue entry."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
 <rect class="sc-tissue" x="14" y="44" width="932" height="396" rx="18"/>
@@ -464,7 +465,7 @@ function initPanel() {
   pill(ox, "Tinnitus", 858, 124, 880, 70, "Ringing in the ear (tinnitus) is a classic early feature of salicylate poisoning.");
   pill(ox, "Uncoupled mitochondria", 385, 322, 340, 428, "Salicylate uncouples oxidative phosphorylation: energy escapes as heat instead of being stored, and metabolic acid accumulates.");
   pill(ox, "Acid raises entry", 520, 330, 565, 428, "When tissues and blood are more acid, more salicylate is non-ionised and crosses into tissues and brain, worsening toxicity.");
-  pill(ox, "Kidney trapping", 770, 300, 790, 428, "In alkaline urine salicylate stays ionised, is trapped in urine and excreted. Urinary alkalinisation uses this.");
+  pill(ox, "Kidney trapping", 770, 300, 700, 410, "In alkaline urine salicylate stays ionised, is trapped in urine and excreted. Urinary alkalinisation uses this.");
 }
 const sm = { Sal: 0.4, Resp: 0.4, Acid: 0.3, Heat: 0.3, Brain: 0.3, chr: 0, alk: 0, dial: 0 };
 const acc = { sal: 0, co2: 0, acid: 0, heat: 0 };

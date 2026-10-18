@@ -92,11 +92,12 @@ buildScene({
 .cy-sv{stroke:var(--anatomy-strong);stroke-width:1.4}
 .cy-svhead{fill:var(--anatomy-strong)}
 .cy-badge{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}
-.cy-badge-t{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none}
+.cy-badge-t{fill:var(--anatomy-strong);font:600 12px system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;pointer-events:none}
+.dr-fig text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 .cy-arc{fill:none;stroke:var(--c-neut);stroke-width:1.4;stroke-linecap:round}
 .cy-ph{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
 .cy-ph-on{fill:color-mix(in srgb,var(--c-good) 42%,var(--anatomy-card));stroke:var(--c-good)}
-.cy-ph-t{fill:var(--anatomy-text);font:8px var(--anatomy-mono);pointer-events:none}
+.cy-ph-t{fill:var(--anatomy-text);font:8px system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;pointer-events:none}
 .cy-ph-t-on{fill:var(--anatomy-strong);font-weight:700}
 .dr-g-fill.g-pre{fill:var(--c-fl)}.dr-g-fill.g-sq{fill:var(--c-neut)}
 `,
