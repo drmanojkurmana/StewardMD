@@ -155,10 +155,22 @@ async function shellAudit(tag) {
     ok(allVis === true, tag + ": all tiles visible without scrolling");
   }
   const overlap2 = await ev(`return (function () {
-    var els = Array.from(document.querySelectorAll('${CBL} .cbl-priority > *, ${CBL} .cbl-secgrid > *, ${CBL} .cbl-tab, ${CBL} .cbl-endbtn')).filter(function (el) { var cs = getComputedStyle(el); var r = el.getBoundingClientRect(); return cs.display !== "none" && cs.visibility !== "hidden" && r.width > 0 && r.height > 0; });
+    // The rect a user can actually touch: the element's box clipped by every scrolling or overflow-hidden ancestor.
+    function clipped(el) {
+      var r = el.getBoundingClientRect(), L = r.left, T = r.top, R = r.right, B = r.bottom;
+      for (var p = el.parentElement; p && p !== document.documentElement; p = p.parentElement) {
+        var ps = getComputedStyle(p);
+        if (/(auto|scroll|hidden|clip)/.test(ps.overflowX + ps.overflowY)) {
+          var pr = p.getBoundingClientRect();
+          L = Math.max(L, pr.left); T = Math.max(T, pr.top); R = Math.min(R, pr.right); B = Math.min(B, pr.bottom);
+        }
+      }
+      return R - L > 0 && B - T > 0 ? { left: L, top: T, right: R, bottom: B } : null;
+    }
+    var els = Array.from(document.querySelectorAll('${CBL} .cbl-priority > *, ${CBL} .cbl-secgrid > *, ${CBL} .cbl-tab, ${CBL} .cbl-endbtn')).filter(function (el) { var cs = getComputedStyle(el); return cs.display !== "none" && cs.visibility !== "hidden" && clipped(el) !== null; });
     var bad = [];
     for (var i = 0; i < els.length; i++) for (var j = i + 1; j < els.length; j++) {
-      var a = els[i].getBoundingClientRect(), b = els[j].getBoundingClientRect();
+      var a = clipped(els[i]), b = clipped(els[j]);
       if (a.left < b.right - 1 && b.left < a.right - 1 && a.top < b.bottom - 1 && b.top < a.bottom - 1) bad.push((els[i].getAttribute("data-kind") || els[i].textContent.trim().slice(0, 8)) + "/" + (els[j].getAttribute("data-kind") || els[j].textContent.trim().slice(0, 8)));
     }
     return bad;
