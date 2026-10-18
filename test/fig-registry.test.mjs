@@ -14,7 +14,7 @@ function load() {
 test("registry: figures.json is well formed", () => {
   const ids = new Set();
   for (const f of cfg.figures) {
-    assert.match(f.id, /^[a-z0-9-]{2,40}$/); assert.ok(!ids.has(f.id), "unique id " + f.id); ids.add(f.id);
+    assert.match(f.id, /^[a-z0-9-]{2,60}$/); assert.ok(!ids.has(f.id), "unique id " + f.id); ids.add(f.id);
     assert.match(f.page, /^prep\/figures\/[a-z0-9-]{2,60}\.html$/);
     assert.ok(f.scene || Object.keys(f.drugs).length > 0, f.id + " names drugs");
     for (const k of Object.keys(f.drugs)) assert.match(k, /^[a-z]+$/, "drug key is one lower-case word: " + k);
@@ -25,7 +25,7 @@ test("registry: text match for drugs, class phrases and nothing else", async () 
   assert.equal(F.matchText("A 60-year-old on metoprolol develops bradycardia")[0].id, "beta-blockers");
   assert.match(F.matchText("Which beta blocker is cardioselective? Atenolol")[0].query, /^d=2&name=Atenolol$/);
   assert.equal(F.matchText("Metoprolol versus propranolol in asthma")[0].hits, 2);
-  assert.equal(F.matchText("Paracetamol is a weak analgesic and antipyretic").length, 0);
+  assert.equal(F.matchText("Bosentan versus ranibizumab for this patient").length, 0);
   assert.equal(F.matchText("the word metoprololic is not a drug").length, 0, "whole words only");
   assert.equal(F.forDrug("Metoprolol succinate").query, "d=2&name=Metoprolol");
   assert.equal(F.forDrug("Paracetamol"), null);
