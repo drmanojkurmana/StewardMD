@@ -1192,3 +1192,8 @@ body:not(.dark) #cblRoot .cbl-btn.cbl-primary {
  #cblRoot .cbl-tabpad{max-width:920px;margin:0 auto;width:100%}
  #cblRoot .cbl-refcard .cbl-star{width:44px;height:44px;min-width:44px;padding:0;display:inline-flex;align-items:center;justify-content:center}
 }
+
+/* With the Watch chip in the header the Sound label would be clipped on a phone: keep the icon only. */
+@media (max-width: 480px) {
+  #cblRoot .cbl-status:has(.cbl-watchchip) [data-act="audio"] span { display: none; }
+}
