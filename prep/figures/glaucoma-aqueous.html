@@ -8,7 +8,7 @@
   --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
   --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
   --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
-  --anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
 }
 .iso[data-theme="light"]{
@@ -199,6 +199,9 @@ body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px
 .bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
 .bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
 @media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
 body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
 body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
 .t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
@@ -279,14 +282,20 @@ body[data-theme="light"] .gl-iris{stroke:#7a4498}
 .gl-laser{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-dasharray:5 3;stroke-linecap:round}
 .gl-hole{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.4}
 .p-aq{--cc:var(--c-fl)}
+.gl-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
+.gl-halo{fill:none;stroke:var(--c-bad);stroke-width:2}
+.gl-fold{fill:none;stroke:var(--c-mac);stroke-width:1.2;stroke-linecap:round;opacity:.85}
+.gl-fibre{fill:none;stroke:var(--c-plt);stroke-width:1;opacity:.8}
+.gl-wide{fill:none;stroke:var(--c-good);stroke-linecap:round}
+.gl-block{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1}
 .dr-g-fill.g-aq{fill:var(--c-fl)}.dr-g-fill.g-angle{fill:var(--c-good)}.dr-g-fill.g-cup{fill:var(--c-bad)}
 </style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Glaucoma: aqueous flow, pressure and the optic nerve</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>pressure normal · outflow open · optic nerve healthy</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated eye showing aqueous humour made by the ciliary body, flowing through the pupil into the front chamber and draining through the trabecular meshwork. When the angle between iris and cornea closes, drainage fails and pressure rises, cupping the optic disc. An enlarged optic disc and an enlarged angle view are shown. Gauges show production, angle, outflow, pressure, cupping and vision. Treatments reduce production, increase outflow, or use laser to bypass a blocked pupil."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
 <rect class="sc-tissue" x="14" y="44" width="560" height="396" rx="18"/>
 <rect class="sc-tissue" x="584" y="44" width="362" height="194" rx="18"/>
 <rect class="sc-tissue" x="584" y="246" width="362" height="194" rx="18"/>
 <text class="sc-zone" x="34" y="68">EYE: AQUEOUS FLOW</text>
-<text class="sc-zone" x="604" y="68">OPTIC DISC, ENLARGED</text>
-<text class="sc-zone" x="604" y="270">ANGLE, ENLARGED</text>
+<text class="sc-zone" x="604" y="68">ANGLE, ENLARGED</text>
+<text class="sc-zone" x="604" y="270">OPTIC DISC, ENLARGED</text>
 <g id="eye"></g>
 <g id="flow"></g>
 <g id="disc"></g>
@@ -313,9 +322,9 @@ const modelOf = function modelOf(S, level, drug) {
   if (laser && level === 1) angle = 0.9;
   if (laser && level === 2) angle = 0.85;
   const prod = reduce ? 0.32 : 0.75;
-  const outflow = cl(angle * (incOut ? 1.25 : 0.9) + (incOut ? 0.12 : 0));
+  const outflow = cl(angle * (incOut ? 1.35 : 0.9) + (incOut ? 0.18 : 0));
   const iop = cl(0.12 + prod * (1.05 - outflow));
-  const cup = cl(0.05 + 0.85 * iop * iop + (level === 2 ? 0.12 : level === 1 ? 0.08 : 0));
+  const cup = cl(0.05 + 0.85 * iop * iop + (level === 2 ? 0.12 : level === 1 ? 0.09 : 0));
   const vision = cl(1 - cup * 0.95);
   const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
   const words = [w(iop, 0.3, 0.55, ["normal", "raised", "high"]), w(outflow, 0.3, 0.65, ["blocked", "reduced", "open"]), w(cup, 0.25, 0.5, ["healthy", "cupping", "severe cupping"])];
@@ -414,15 +423,19 @@ function run(scn) {
   start();
 }
 
-/* Glaucoma scene: ciliary body, aqueous flow through the pupil, trabecular drainage,
- * iris angle, raised pressure and optic disc cupping, with an enlarged disc and angle view. */
+/* Glaucoma scene: ciliary body makes aqueous, flow through the pupil, trabecular
+ * drainage at the angle, raised pressure and optic disc cupping. Close views read
+ * cause over effect: the angle (top right), then the disc damage (bottom right). */
 const L = { eye: $("eye"), flow: $("flow"), disc: $("disc"), angled: $("angled"), over: $("over"), panel: $("panel") };
 const sm = { prod: 0.75, angle: 0.95, outflow: 0.85, iop: 0.27, cup: 0.11, vision: 0.9, laser: 0, reduce: 0, incOut: 0 };
 const gg = {};
-let irisT = null, irisB = null, cilT = null, cilB = null, cupC = null, cupM = null, beam = null, hole = null, angIris = null, angGap = null, trabT = null, trabB = null, halo = null;
-const acc = { aq: 0 };
+let irisT = null, irisB = null, cilT = null, cilB = null, cupC = null, cupM = null, beam = null, hole = null, holeX = 242;
+let angIris = null, angGap = null, trabT = null, trabB = null, trabA = null, canalE = null, canalA = null;
+let canalGlowE = null, canalGlowA = null, trabGlowA = null, halo = null, discHalo = null, vesA = null, vesB = null;
+let capEl = null, capKey = "";
+const acc = { aq: 0, by: 0 };
 
-function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0, u: 0 }; }); }
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0, u: 0, s: 0 }; }); }
 const free = (pl) => pl.find((p) => !p.on);
 function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
 function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
@@ -430,14 +443,37 @@ function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
 const trackTop = track([[305, 166], [276, 186], [261, 214], [255, 242], [236, 214], [223, 186], [221, 162], [210, 148]]);
 const trackBot = track([[305, 318], [276, 298], [261, 270], [255, 242], [236, 270], [223, 298], [221, 322], [210, 336]]);
 const aq = pool(34, () => mk("circle", { class: "sc-p p-aq", r: 2.6 }, L.flow));
+const byp = pool(10, () => mk("circle", { class: "sc-p p-aq", r: 2.4 }, L.flow));
+const SLOTS = [[288, 170], [300, 172], [312, 170], [324, 168], [288, 314], [300, 312], [312, 314], [324, 316]];
+const blockers = pool(8, () => mk("rect", { class: "gl-block", x: -4.5, y: -2.2, width: 9, height: 4.4, rx: 2.2 }, L.flow));
+
+function capText(d) {
+  if (level === 0) {
+    if (d === 1) return "Drops curb fluid making. Less fluid is made, pressure stays normal.";
+    if (d === 2) return "Outflow drops hold the drain wide open. Pressure stays normal.";
+    if (d === 3) return "Laser makes a hole in the iris. The open angle needs no help.";
+    return "Angle open. Fluid drains freely and pressure stays normal.";
+  }
+  if (level === 1) {
+    if (d === 1) return "Drops curb fluid making. Less fluid, so pressure eases.";
+    if (d === 2) return "Outflow drops widen the drain. More fluid leaves the eye.";
+    if (d === 3) return "Laser hole lets fluid past. The iris falls back and the drain opens.";
+    return "No treatment. The drain is narrowing and pressure is climbing.";
+  }
+  if (d === 1) return "Drops curb fluid making, but the shut angle still blocks outflow.";
+  if (d === 2) return "Outflow drops help the drain, but the shut angle limits them.";
+  if (d === 3) return "Laser hole bypasses the block. The iris falls back, fluid drains.";
+  return "No treatment. The angle is shut and pressure threatens sight.";
+}
 
 function init() {
   /* ---- main eye, facing left ---- */
   halo = mk("circle", { cx: 365, cy: 242, r: 150, fill: "none", stroke: "var(--c-bad)", "stroke-width": 2, opacity: 0 }, L.eye);
   mk("circle", { class: "gl-sclera", cx: 365, cy: 242, r: 140 }, L.eye);
   mk("circle", { class: "gl-vitreous", cx: 365, cy: 242, r: 132 }, L.eye);
-  /* optic nerve trunk and disc at the back of the eye */
+  /* optic nerve trunk with fibre lines, and the disc at the back of the eye */
   mk("path", { class: "gl-nerve", d: "M492 222 L560 228 L560 256 L492 262 Z" }, L.eye);
+  mk("path", { class: "gl-fibre", d: "M494 230 L558 234 M494 242 L558 242 M494 254 L558 250" }, L.eye);
   mk("ellipse", { class: "gl-disc", cx: 494, cy: 242, rx: 9, ry: 24 }, L.eye);
   cupM = mk("ellipse", { class: "gl-cup", cx: 494, cy: 242, rx: 3, ry: 8 }, L.eye);
   /* cornea bulging at the front, and the front chamber behind it */
@@ -446,55 +482,50 @@ function init() {
   /* lens behind the pupil */
   mk("ellipse", { class: "gl-lens", cx: 284, cy: 242, rx: 27, ry: 60 }, L.eye);
   mk("ellipse", { cx: 276, cy: 224, rx: 8, ry: 22, fill: "#fff", opacity: 0.28 }, L.eye);
-  /* ciliary body behind the iris root, top and bottom */
+  /* ciliary body with folded secreting processes behind the iris root */
   cilT = cell(L.eye, { cls: "ciliary", r: 19, nuc: 0.34, seed: 3, wob: 0.16, x: 302, y: 148 });
   cilB = cell(L.eye, { cls: "ciliary", r: 19, nuc: 0.34, seed: 7, wob: 0.16, x: 302, y: 336 });
+  mk("path", { class: "gl-fold", d: "M290 158 L296 170 M302 160 L302 174 M314 158 L308 170" }, L.eye);
+  mk("path", { class: "gl-fold", d: "M290 326 L296 314 M302 324 L302 310 M314 326 L308 314" }, L.eye);
   /* trabecular meshwork and canal at the angle, top and bottom */
   trabT = mk("path", { class: "gl-trab", d: "M216 148 L238 164 M212 156 L234 170" }, L.eye);
   trabB = mk("path", { class: "gl-trab", d: "M216 336 L238 320 M212 328 L234 314" }, L.eye);
-  mk("path", { class: "gl-canal", d: "M204 138 C214 142 222 146 228 150 M204 346 C214 342 222 338 228 334" }, L.eye);
+  canalGlowE = mk("path", { class: "gl-wide", d: "M204 138 C214 142 222 146 228 150 M204 346 C214 342 222 338 228 334", "stroke-width": 9, opacity: 0 }, L.eye);
+  canalE = mk("path", { class: "gl-canal", d: "M204 138 C214 142 222 146 228 150 M204 346 C214 342 222 338 228 334" }, L.eye);
   /* iris leaves, redrawn each step as the angle changes */
   irisT = mk("path", { class: "gl-iris", d: "M240 160 L260 200" }, L.eye);
   irisB = mk("path", { class: "gl-iris", d: "M240 324 L260 284" }, L.eye);
   hole = mk("circle", { class: "gl-hole", cx: 246, cy: 178, r: 4.5, opacity: 0 }, L.eye);
   beam = mk("path", { class: "gl-laser", d: "M170 92 L246 178", opacity: 0 }, L.flow);
 
-  /* ---- enlarged optic disc ---- */
-  mk("circle", { class: "gl-disc", cx: 765, cy: 150, r: 58 }, L.disc);
-  mk("path", { class: "gl-vessel", d: "M765 150 C740 128 724 118 706 112 M765 150 C790 128 806 118 824 112" }, L.disc);
-  mk("path", { class: "gl-vessel ven", d: "M765 150 C742 174 728 184 710 192 M765 150 C788 174 802 184 820 192" }, L.disc);
-  cupC = mk("circle", { class: "gl-cup", cx: 765, cy: 150, r: 14 }, L.disc);
+  /* ---- enlarged drainage angle: the cause, top right ---- */
+  mk("path", { class: "gl-chamber", d: "M624 102 L892 102 L892 202 L660 202 C640 170 628 136 624 102 Z" }, L.angled);
+  mk("path", { class: "gl-cornea", d: "M624 102 L892 102" }, L.angled);
+  trabGlowA = mk("path", { class: "gl-wide", d: "M806 102 L884 102 M812 110 L878 110", "stroke-width": 7, opacity: 0 }, L.angled);
+  trabA = mk("path", { class: "gl-trab", d: "M806 102 L884 102 M812 110 L878 110" }, L.angled);
+  canalGlowA = mk("path", { class: "gl-wide", d: "M812 92 C840 88 868 88 886 92", "stroke-width": 9, opacity: 0 }, L.angled);
+  canalA = mk("path", { class: "gl-canal", d: "M812 92 C840 88 868 88 886 92" }, L.angled);
+  angGap = mk("path", { d: "M824 110 L846 130 L806 130 Z", fill: "var(--c-fl)", opacity: 0.35 }, L.angled);
+  angIris = mk("path", { class: "gl-iris", d: "M648 182 L838 128" }, L.angled);
 
-  /* ---- enlarged angle view ---- */
-  mk("path", { class: "gl-chamber", d: "M624 292 L892 292 L892 392 L660 392 C640 360 628 326 624 292 Z" }, L.angled);
-  mk("path", { class: "gl-cornea", d: "M624 292 L892 292" }, L.angled);
-  mk("path", { class: "gl-trab", d: "M806 292 L884 292 M812 300 L878 300" }, L.angled);
-  mk("path", { class: "gl-canal", d: "M812 282 C840 278 868 278 886 282" }, L.angled);
-  angGap = mk("path", { d: "M838 300 L852 344 L820 344 Z", fill: "var(--c-fl)", opacity: 0.35 }, L.angled);
-  angIris = mk("path", { class: "gl-iris", d: "M648 372 L838 318" }, L.angled);
-  const at = mk("text", { class: "sc-lab", x: 632, y: 408 }, L.angled); at.textContent = "iris";
-  const bt = mk("text", { class: "sc-lab", x: 800, y: 408 }, L.angled); bt.textContent = "drainage angle";
+  /* ---- enlarged optic disc: the effect, bottom right ---- */
+  discHalo = mk("circle", { cx: 765, cy: 340, r: 66, fill: "none", stroke: "var(--c-bad)", "stroke-width": 2, opacity: 0 }, L.disc);
+  mk("circle", { class: "gl-disc", cx: 765, cy: 340, r: 58 }, L.disc);
+  vesA = mk("path", { class: "gl-vessel", d: "M765 340 C740 318 724 308 706 302 M765 340 C790 318 806 308 824 302" }, L.disc);
+  vesB = mk("path", { class: "gl-vessel ven", d: "M765 340 C742 364 728 374 710 382 M765 340 C788 364 802 374 820 382" }, L.disc);
+  cupC = mk("circle", { class: "gl-cup", cx: 765, cy: 340, r: 14 }, L.disc);
 
-  /* ---- label pills: positions checked so pills do not overlap each other ---- */
+  /* ---- label pills: eight short labels, pills kept clear of each other ---- */
   const o = L.over;
-  pill(o, "Cornea", 202, 196, 90, 88, "The clear front window of the eye. Aqueous humour sits just behind it in the anterior chamber.");
-  pill(o, "Ciliary body", 302, 140, 365, 88, "The ciliary body makes aqueous humour and releases it into the posterior chamber behind the iris.");
-  pill(o, "Trabecular meshwork", 224, 156, 500, 88, "The sieve at the drainage angle. Aqueous passes through it into the canal of Schlemm and out of the eye.");
-  pill(o, "Iris", 244, 182, 90, 150, "The coloured diaphragm. Its root can block the drainage angle, and in acute closure it bows forward.");
-  pill(o, "Pupil", 254, 242, 90, 242, "The opening in the iris. Aqueous made behind the iris must flow through the pupil to reach the front chamber.");
-  pill(o, "Lens", 284, 242, 90, 330, "The lens sits behind the pupil. A forward or swollen lens can push the iris forward and crowd the angle.");
-  pill(o, "Vitreous", 380, 292, 350, 408, "The gel filling the back of the eye. It plays no part in aqueous drainage.");
-  pill(o, "Optic nerve", 520, 242, 470, 408, "Retinal ganglion cell axons leave here at the optic disc. Raised pressure damages them and enlarges the cup.");
-  pill(o, "Optic disc", 748, 118, 700, 88, "Enlarged view of the optic disc, where nerve fibres leave the eye. Its central pale cup grows as fibres are lost.");
-  pill(o, "Cup", 765, 150, 855, 88, "The pale central cup of the disc. Cupping means the cup enlarges and the rim thins as nerve fibres die.");
-  pill(o, "Iris root", 800, 330, 695, 282, "Enlarged drainage angle: the iris root approaching the trabecular meshwork. When they touch, aqueous cannot drain.");
-  pill(o, "Canal of Schlemm", 850, 284, 860, 282, "The canal that collects aqueous after the trabecular meshwork and carries it to veins outside the eye.");
-  const p1 = pill(o, "Less aqueous made", 302, 154, 150, 408, "Aqueous suppressant treatment: the ciliary body makes less fluid, so less pressure builds up.");
-  p1.setAttribute("id", "tx-prod");
-  const p2 = pill(o, "More outflow", 224, 156, 150, 408, "Outflow treatment: drainage through the trabecular meshwork or the uveoscleral route is increased.");
-  p2.setAttribute("id", "tx-out");
-  const p3 = pill(o, "Laser iridotomy", 246, 178, 150, 408, "Laser peripheral iridotomy makes a small hole in the peripheral iris, bypassing a blocked pupil so the iris falls back and the angle reopens.");
-  p3.setAttribute("id", "tx-laser");
+  pill(o, "Ciliary body", 302, 140, 430, 88, "Makes the clear fluid of the eye. Drops that curb fluid making act here.");
+  pill(o, "Pupil", 254, 242, 90, 242, "Fluid made behind the iris flows through the pupil to the front chamber.");
+  pill(o, "Iris", 250, 191, 90, 150, "The coloured sheet. Its root can block the drain. A swollen lens can push it shut.");
+  pill(o, "Drain", 222, 160, 150, 88, "The meshwork and canal where fluid leaves the eye. Outflow drops widen this path.");
+  pill(o, "Optic nerve", 530, 242, 510, 404, "Carries sight signals to the brain. High pressure injures it where it leaves the eye.");
+  pill(o, "Angle", 852, 118, 905, 160, "Close view of the drain. When the iris meets the meshwork, fluid cannot leave.");
+  pill(o, "Optic disc", 720, 330, 640, 300, "Close view where nerve fibres leave the eye. The pale centre is the cup.");
+  pill(o, "Cup", 765, 340, 880, 300, "The pale cup grows as pressure kills nerve fibres.");
+  capEl = mk("text", { class: "gl-cap", x: 30, y: 432 }, o); capEl.textContent = capText(0);
 
   /* ---- gauges ---- */
   const P = L.panel;
@@ -514,26 +545,40 @@ function step(dt, m) {
   const bow = (1 - sm.angle) * 20, rootX = 240 - (1 - sm.angle) * 16;
   irisT.setAttribute("d", "M" + f1(rootX) + " 160 Q" + f1((rootX + 260) / 2 - bow) + " 182 260 200");
   irisB.setAttribute("d", "M" + f1(rootX) + " 324 Q" + f1((rootX + 260) / 2 - bow) + " 302 260 284");
-  const hx = rootX + 6 - bow * 0.4;
-  hole.setAttribute("cx", f1(hx)); hole.setAttribute("cy", "178"); hole.setAttribute("opacity", sm.laser.toFixed(2));
-  beam.setAttribute("d", "M170 92 L" + f1(hx) + " 178"); beam.setAttribute("opacity", (sm.laser * (0.55 + 0.35 * Math.sin(tm / 160))).toFixed(2));
+  holeX = rootX + 6 - bow * 0.4;
+  hole.setAttribute("cx", f1(holeX)); hole.setAttribute("cy", "178"); hole.setAttribute("opacity", sm.laser.toFixed(2));
+  beam.setAttribute("d", "M170 92 L" + f1(holeX) + " 178"); beam.setAttribute("opacity", (sm.laser * (0.55 + 0.35 * Math.sin(tm / 160))).toFixed(2));
   trabT.style.opacity = (0.35 + 0.65 * sm.outflow).toFixed(2); trabB.style.opacity = (0.35 + 0.65 * sm.outflow).toFixed(2);
+  trabA.style.opacity = (0.35 + 0.65 * sm.outflow).toFixed(2);
+  canalE.style.opacity = (0.45 + 0.55 * sm.outflow).toFixed(2); canalA.style.opacity = (0.45 + 0.55 * sm.outflow).toFixed(2);
+  canalGlowE.style.opacity = (sm.incOut * 0.85).toFixed(2); canalGlowA.style.opacity = (sm.incOut * 0.85).toFixed(2);
+  trabGlowA.style.opacity = (sm.incOut * 0.85).toFixed(2);
 
   /* ciliary body pulses as it makes aqueous; quieter when production is reduced */
   const pulse = 1 + 0.07 * sm.prod * Math.sin(tm / 320);
   place(cilT, 302, 148, 0, pulse); place(cilB, 302, 336, 0, pulse);
   cilT.style.opacity = (0.45 + 0.55 * sm.prod).toFixed(2); cilB.style.opacity = (0.45 + 0.55 * sm.prod).toFixed(2);
 
-  /* pressure halo around the globe and optic cup growth */
+  /* pressure halos around the globe and the disc, optic cup growth, vessels fading */
   halo.setAttribute("r", f1(148 + sm.iop * 7)); halo.setAttribute("opacity", (sm.iop * 0.5).toFixed(2));
+  discHalo.setAttribute("r", f1(64 + sm.iop * 6)); discHalo.setAttribute("opacity", (sm.iop * 0.45).toFixed(2));
   cupC.setAttribute("r", f1(10 + sm.cup * 36));
   cupM.setAttribute("rx", f1(2 + sm.cup * 5)); cupM.setAttribute("ry", f1(6 + sm.cup * 15));
+  vesA.style.opacity = (1 - 0.5 * sm.cup).toFixed(2); vesB.style.opacity = (1 - 0.5 * sm.cup).toFixed(2);
 
   /* enlarged angle: iris root meets the meshwork as the angle closes */
-  const ax = 838 + (1 - sm.angle) * 34, ay = 318 - (1 - sm.angle) * 20;
-  angIris.setAttribute("d", "M648 372 Q740 356 " + f1(ax) + " " + f1(ay));
+  const ax = 838 + (1 - sm.angle) * 34, ay = 128 - (1 - sm.angle) * 20;
+  angIris.setAttribute("d", "M648 182 Q740 166 " + f1(ax) + " " + f1(ay));
   angGap.setAttribute("opacity", (sm.angle * 0.4).toFixed(2));
-  angGap.setAttribute("d", "M" + f1(ax - 14) + " 300 L" + f1(ax + 8) + " " + f1(ay + 22) + " L" + f1(ax - 26) + " " + f1(ay + 22) + " Z");
+  angGap.setAttribute("d", "M" + f1(ax - 14) + " 110 L" + f1(ax + 8) + " " + f1(ay + 22) + " L" + f1(ax - 26) + " " + f1(ay + 22) + " Z");
+
+  /* blocker caps dock on the ciliary tips when production is curbed */
+  blockers.forEach((b, i) => {
+    const s = SLOTS[i], wob = 1 - b.s;
+    b.s = lerp(b.s, sm.reduce, Math.min(1, dt * 2.5));
+    place(b.e, s[0] + Math.sin(tm / 520 + i * 0.9) * 16 * wob, s[1] + Math.cos(tm / 640 + i * 1.3) * 10 * wob, Math.sin(tm / 700 + i) * 15, 1);
+    b.e.setAttribute("opacity", b.s.toFixed(2));
+  });
 
   /* aqueous particles: ciliary body, through the pupil, to the drainage angle */
   acc.aq += dt * (2 + sm.prod * 9);
@@ -548,10 +593,16 @@ function step(dt, m) {
     if (p.u >= limit) kill(p);
   });
 
-  /* treatment pills, only the active one shows */
-  $("tx-prod").style.opacity = sm.reduce.toFixed(2);
-  $("tx-out").style.opacity = sm.incOut.toFixed(2);
-  $("tx-laser").style.opacity = sm.laser.toFixed(2);
+  /* bypass stream through the laser hole to the drain */
+  acc.by += dt * sm.laser * 12;
+  while (acc.by >= 1) { acc.by--; const p = free(byp); if (p) { const sx = holeX + rnd(-2, 2), sy = 178 + rnd(-3, 3), dx = 216 - sx, dy = 156 - sy, dd = Math.hypot(dx, dy) || 1; emit(p, sx, sy, dx / dd * 95, dy / dd * 95, 0); } }
+  byp.forEach((p) => {
+    if (!p.on) return;
+    p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    p.e.setAttribute("opacity", clamp(1 - p.t / 1.1).toFixed(2));
+    if (p.t > 1.1 || Math.hypot(216 - p.x, 156 - p.y) < 7) kill(p);
+  });
 
   gg.prod.set(sm.prod, wordOf(sm.prod, 0.45, 0.65, ["low", "normal", "normal"]));
   gg.angle.set(sm.angle, wordOf(sm.angle, 0.3, 0.65, ["closed", "narrow", "open"]));
@@ -559,6 +610,10 @@ function step(dt, m) {
   gg.iop.set(sm.iop, wordOf(sm.iop, 0.3, 0.55, ["normal", "raised", "high"]));
   gg.cup.set(sm.cup, wordOf(sm.cup, 0.25, 0.5, ["healthy", "cupping", "severe"]));
   gg.vis.set(sm.vision, wordOf(sm.vision, 0.45, 0.75, ["poor", "reduced", "good"]));
+
+  /* caption follows drug and level */
+  const key = drug + "x" + level;
+  if (key !== capKey) { capKey = key; const t = capText(drug); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 run({ init, step });
 </script></body></html>

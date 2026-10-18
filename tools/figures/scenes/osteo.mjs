@@ -38,28 +38,30 @@ function modelOf(S, level, drug) {
   const dens = cl(0.92 - 0.58 * a + gain);
   const fx = cl(1.08 - dens - (drug === 3 ? 0.04 : 0));
   const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
-  const words = [w(R, 0.3, 0.6, ["balanced", "raised", "high"]), w(F, 0.35, 0.6, ["low", "steady", "active"]), w(dens, 0.45, 0.7, ["thin", "reduced", "preserved"]), w(fx, 0.3, 0.6, ["low", "raised", "high"])];
+  const words = [w(R, 0.3, 0.6, ["balanced", "raised", "high"]), w(F, 0.35, 0.6, ["low", "steady", "active"]), w(dens, 0.45, 0.7, ["thin", "reduced", "preserved"]), w(fx, 0.3, 0.65, ["low", "raised", "high"])];
   return { a, oes, rankl, opg, R, F, dens, fx, words, readout: "resorption " + words[0] + " · formation " + words[1] + " · bone density " + words[2] + " · fracture risk " + words[3] };
 }
 const TESTS = [
   [0, 0, "resorption balanced · formation steady · bone density preserved · fracture risk low"],
   [2, 0, "resorption high · formation low · bone density thin · fracture risk high"],
-  [2, 1, "resorption balanced · formation low · bone density reduced · fracture risk high"],
+  [2, 1, "resorption balanced · formation low · bone density reduced · fracture risk raised"],
   [2, 3, "resorption high · formation active · bone density reduced · fracture risk raised"],
 ];
 
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<text class="sc-zone" x="34" y="68">TRABECULAR BONE AND ITS SIGNALS</text>
-<rect class="os-bone" id="bone" x="60" y="150" width="480" height="230" rx="16"/>
+<path id="oesTrack" class="os-track" d="M132 158 C185 150 220 136 262 128"/>
+<path id="caVessel" class="os-cavessel" d="M196 340 L248 306"/>
+<g id="ovSlot"></g>
+<g id="gutSlot"></g>
+<g id="jointSlot"></g>
+<rect class="os-bone" id="bone" x="245" y="105" width="355" height="275" rx="16"/>
 <g id="trab"></g>
+<rect class="os-glow" id="glow" x="245" y="105" width="355" height="275" rx="16"/>
+<g id="coat"></g>
 <g id="pits"></g>
 <g id="cells"></g>
-<rect class="os-box" x="565" y="118" width="365" height="172" rx="14"/>
-<text class="sc-zone sc-dim" x="585" y="278">SIGNALLING</text>
-<rect class="os-box" x="565" y="305" width="365" height="125" rx="14"/>
-<text class="sc-zone sc-dim" x="585" y="330">FRAGILITY</text>
 <g id="signal"></g>
 <g id="fracture"></g>
 <g id="parts"></g>
@@ -68,25 +70,30 @@ const body = `
 
 buildScene({
   id: "osteoporosis-bone-remodelling", fig: "Fig 1", title: "Osteoporosis: the bone remodelling cycle out of balance", W, H, body,
-  label: "An animated cut surface of trabecular bone with a signalling panel and a fragility panel. Osteoclasts resorb bone and osteoblasts form new bone. Osteoblast lineage cells make RANKL, which drives osteoclast formation, and osteoprotegerin, which blocks RANKL. Oestrogen restrains resorption, so oestrogen loss tips the balance toward bone loss. Trabeculae thin, bone density falls and fracture risk rises. Treatment choices include a bisphosphonate, calcium and vitamin D, and an anabolic agent. Gauges show resorption, formation, RANKL, osteoprotegerin, density and fracture risk.",
+  label: "An animated story from gut to knee. The ovary makes oestrogen that restrains bone removal, and the gut absorbs calcium for bone mineral. In the bone middle, osteoclasts dissolve bone while osteoblasts rebuild it, steered by RANKL which grows osteoclasts and OPG which soaks RANKL up. When removal wins, struts thin and the knee joint can crack with little trauma. Each treatment acts on the drawing: bisphosphonate coats bone and quiets osteoclasts, calcium and vitamin D boost mineral flow from the gut, and anabolic agent wakes osteoblasts to grow new bone.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "osteo.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "osteo.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With anabolic agent",
   extraCss: `
-body{--c-bone2:#e9dcba;--c-cort:#b8934f;--c-obl:#d9a441;--c-ocl:#c96a7a;--c-oes:#2f9f8a;--c-opg:#3a86b8;--c-rankl:#e07a2f}
-body[data-theme="light"]{--c-bone2:#efe3c2;--c-cort:#9a7a38;--c-obl:#b9821e;--c-ocl:#b44a5e;--c-oes:#177a66;--c-opg:#2f6fa3;--c-rankl:#c25e14}
+body{--c-bone2:#e9dcba;--c-cort:#b8934f;--c-obl:#d9a441;--c-ocl:#c96a7a;--c-oes:#2f9f8a;--c-opg:#3a86b8;--c-rankl:#e07a2f;--c-bis:#7fa8c9;--c-ana:#3ddc97}
+body[data-theme="light"]{--c-bone2:#efe3c2;--c-cort:#9a7a38;--c-obl:#b9821e;--c-ocl:#b44a5e;--c-oes:#177a66;--c-opg:#2f6fa3;--c-rankl:#c25e14;--c-bis:#4a7ba3;--c-ana:#0f9f76}
 .os-bone{fill:var(--c-bone2);stroke:var(--c-cort);stroke-width:5}
-.os-box{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
-.os-trab{stroke:var(--c-cort);stroke-linecap:round}
-.os-ocyte{fill:var(--c-cort);opacity:.55}
-.os-pit{fill:var(--c-tis)}
-.os-arrow{fill:none;stroke:var(--anatomy-mid);stroke-width:1.4;stroke-linecap:round}
-.os-inhib{fill:none;stroke:var(--c-oes);stroke-width:1.6;stroke-linecap:round}
-.os-oes{fill:var(--c-oes);stroke:color-mix(in srgb,var(--c-oes) 55%,#000);stroke-width:.9}
+.os-glow{fill:var(--c-ana);stroke:none;opacity:0}
+.os-trab{fill:none;stroke:var(--c-cort);stroke-linecap:round}
+.os-new{stroke:var(--c-good)}
+.os-ocyte{fill:var(--c-cort);stroke:none;opacity:.55}
+.os-pit{fill:var(--c-tis);stroke:none}
+.os-coat{fill:#9fc3d8;stroke:color-mix(in srgb,#9fc3d8 55%,#000);stroke-width:.6}
+.os-bis{fill:var(--c-bis);stroke:color-mix(in srgb,var(--c-bis) 55%,#000);stroke-width:.6}
+.os-ana{fill:var(--c-ana);stroke:color-mix(in srgb,var(--c-ana) 55%,#000);stroke-width:.6}
+.os-track{fill:none;stroke:var(--c-oes);stroke-width:1.6;stroke-dasharray:5 4;opacity:.6}
+.os-cavessel{fill:none;stroke:var(--c-obl);stroke-width:5;stroke-linecap:round;opacity:.4}
+.os-rankl{fill:none;stroke:var(--c-rankl);stroke-width:2;stroke-linecap:round}
 .os-crack{fill:none;stroke:var(--c-bad);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.os-fbone{fill:var(--c-bone2);stroke:var(--c-cort);stroke-width:1.2}
+.os-fxglow{fill:var(--c-bad);stroke:none}
+.os-okglow{fill:var(--c-good);stroke:none}
 .cl-obl{--cc:var(--c-obl)}.cl-ocl{--cc:var(--c-ocl)}.cl-opg{--cc:var(--c-opg)}
-.p-rankl{--cc:var(--c-rankl)}.p-opg{--cc:var(--c-opg)}.p-chip{--cc:var(--c-cort)}.p-matrix{--cc:var(--c-obl)}.p-tx{--cc:var(--c-oes)}
+.p-rankl{--cc:var(--c-rankl)}.p-opg{--cc:var(--c-opg)}.p-chip{--cc:var(--c-cort)}.p-matrix{--cc:var(--c-obl)}.p-bis{--cc:var(--c-bis)}.p-ana{--cc:var(--c-ana)}.p-oes{--cc:var(--c-oes)}
 .dr-g-fill.g-res{fill:var(--c-ocl)}.dr-g-fill.g-form{fill:var(--c-obl)}.dr-g-fill.g-rankl{fill:var(--c-rankl)}.dr-g-fill.g-opg{fill:var(--c-opg)}.dr-g-fill.g-dens{fill:var(--c-good)}.dr-g-fill.g-fx{fill:var(--c-bad)}
 `,
   sourcesLis: [

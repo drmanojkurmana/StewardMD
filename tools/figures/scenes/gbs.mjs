@@ -1,6 +1,6 @@
 /* Guillain-Barre syndrome as an animated, working scene (original drawing; Anima styling, Anatomy page shell).
  *   node tools/figures/scenes/gbs.mjs [--print-model]
- * Static layout here; antibodies, complement, myelin, conduction and gauges move in gbs.page.js. Qualitative: no doses, no numbers. */
+ * Static layout here; antibodies, complement, myelin, conduction, devices and gauges move in gbs.page.js. Qualitative: no doses, no numbers. */
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -11,16 +11,16 @@ const W = 960, H = 610;
 
 /* ---------------- model ---------------- */
 const MD = {
-  level: { label: "Phase of the illness", a: [0.5, 1, 0.22], names: ["onset", "plateau", "recovery"], ticks: ["onset", "plateau", "recovery"], start: 0 },
+  level: { label: "Phase of the illness", a: [0.5, 1, 0.22], names: ["onset", "plateau", "recovery"], ticks: ["onset", "plateau", "recovery"], start: 1 },
   drugLabel: "Treatment",
   settings: [
     { label: "no treatment" },
+    { label: "ventilatory support only" },
     { label: "IVIG (intravenous immunoglobulin)" },
     { label: "plasma exchange" },
-    { label: "ventilatory support only" },
   ],
   status: "Phase: {level} · {drug} ·",
-  drugNames: ["no treatment", "IVIG", "plasma exchange", "ventilatory support"],
+  drugNames: ["no treatment", "ventilatory support", "IVIG", "plasma exchange"],
 };
 function modelOf(S, level, drug) {
   const PH = [
@@ -30,9 +30,9 @@ function modelOf(S, level, drug) {
   ];
   const TF = [
     { imm: 0, vent: 0 },
+    { imm: 0, vent: 1 },
     { imm: 0.55, vent: 0 },
     { imm: 0.68, vent: 0 },
-    { imm: 0, vent: 1 },
   ];
   const cl = (v) => Math.max(0, Math.min(1, v));
   const ph = PH[level], tf = TF[drug];
@@ -52,25 +52,23 @@ function modelOf(S, level, drug) {
     w(breathing, 0.38, 0.68, ["failing", "strained", "supported"]),
     w(conduction, 0.34, 0.66, ["blocked", "slowed", "preserved"]),
   ];
-  return { atk, axonal, myelinLoss, conduction, weakness, autonomic, breathRisk, breathing, csfProtein, recovery, imm: tf.imm, vent: tf.vent, words, readout: "weakness " + words[0] + " · breathing " + words[1] + " · conduction " + words[2] };
+  return { atk, axonal, myelinLoss, conduction, weakness, autonomic, breathRisk, breathing, csfProtein, recovery, imm: tf.imm, vent: tf.vent, rx: drug, words, readout: "weakness " + words[0] + " · breathing " + words[1] + " · conduction " + words[2] };
 }
 const TESTS = [
   [1, 0, "weakness severe · breathing failing · conduction blocked"],
-  [1, 1, "weakness moderate · breathing strained · conduction slowed"],
-  [1, 3, "weakness severe · breathing supported · conduction blocked"],
-  [2, 2, "weakness mild · breathing supported · conduction preserved"],
+  [1, 2, "weakness moderate · breathing strained · conduction slowed"],
+  [1, 1, "weakness severe · breathing supported · conduction blocked"],
+  [2, 3, "weakness mild · breathing supported · conduction preserved"],
 ];
 
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<path class="gbs-arr" d="M152 135C200 135 250 135 292 135"/>
-<path class="gbs-arr" d="M340 162C360 205 380 235 400 262"/>
-<path class="gbs-arr" d="M356 150C430 190 500 215 548 238"/>
-<text class="sc-zone" x="34" y="232">PERIPHERAL NERVE</text>
-<text class="sc-zone sc-dim" x="34" y="425">MUSCLE, HEART AND LUNGS</text>
+<path class="gbs-arr" d="M160 135C195 135 230 135 272 135"/>
+<path class="gbs-arr" d="M352 160C375 195 395 225 410 252"/>
 <g id="nodes"></g>
 <g id="nerve"></g>
+<g id="heartSlot"></g><g id="lungLSlot"></g><g id="lungRSlot"></g><g id="muscleSlot"></g>
 <g id="parts"></g>
 <g id="cells"></g>
 <g id="over"></g>
@@ -87,26 +85,27 @@ const extraCss = `
 .gbs-comp{fill:#ff5e8a;stroke:color-mix(in srgb,#ff5e8a 50%,#000);stroke-width:.5}
 .gbs-frag{fill:#5ec1a0;stroke:color-mix(in srgb,#5ec1a0 50%,#000);stroke-width:.5}
 .gbs-sig{fill:#ffd24a;stroke:color-mix(in srgb,#ffd24a 50%,#000);stroke-width:.5}
-.gbs-muscle{fill:#d96a7a;stroke:color-mix(in srgb,#d96a7a 55%,#000);stroke-width:1}
-.gbs-musline{fill:none;stroke:color-mix(in srgb,#d96a7a 45%,#000);stroke-width:1;opacity:.7}
-.gbs-lung{fill:#7ab8ff;stroke:color-mix(in srgb,#7ab8ff 55%,#000);stroke-width:1;opacity:.9}
-.gbs-heart{fill:#e5484d;stroke:color-mix(in srgb,#e5484d 55%,#000);stroke-width:.8}
-.gbs-tube{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}
-.gbs-csf{fill:color-mix(in srgb,#ffd24a 22%,var(--anatomy-paper))}
-.gbs-prot{fill:#ffd24a;stroke:color-mix(in srgb,#ffd24a 50%,#000);stroke-width:.4}
-.gbs-celldot{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}
-.gbs-vent{fill:none;stroke:var(--c-fl);stroke-width:2;stroke-linecap:round}
-.gbs-ventbox{fill:var(--anatomy-card);stroke:var(--c-fl);stroke-width:1.4}
-.p-gab{--cc:var(--c-ab)}
+.gbs-block{fill:#8fe388;stroke:color-mix(in srgb,#8fe388 50%,#000);stroke-width:.8}
+.gbs-trap{fill:var(--c-ab);stroke:color-mix(in srgb,var(--c-ab) 50%,#000);stroke-width:.5}
+.gbs-vessel{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 42%,var(--anatomy-paper));stroke-width:9;stroke-linecap:round;opacity:.75}
+.gbs-devbox{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}
+.gbs-devline{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.gbs-ivliq{fill:color-mix(in srgb,var(--c-fl) 55%,var(--anatomy-paper));stroke:none}
+.gbs-screen{fill:color-mix(in srgb,var(--c-fl) 25%,var(--anatomy-card));stroke:var(--anatomy-mid);stroke-width:1}
+.gbs-filter{fill:color-mix(in srgb,var(--c-ab) 18%,var(--anatomy-card));stroke:var(--c-ab);stroke-width:1.2}
+.gbs-folds{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.gbs-pump{fill:none;stroke:var(--c-ab);stroke-width:2.4;stroke-linecap:round}
+.gbs-cap{fill:var(--anatomy-strong);font-size:12px}
+.p-drip{--cc:var(--c-fl)}.p-air{--cc:#9fd8ff}.p-clean{--cc:#cfe6ff}
 .dr-g-fill.g-atk{fill:#ff5e8a}.dr-g-fill.g-myl{fill:#5ec1a0}.dr-g-fill.g-cond{fill:var(--c-good)}.dr-g-fill.g-weak{fill:var(--c-bad)}.dr-g-fill.g-bre{fill:var(--c-fl)}
 `;
 
 buildScene({
   id: "guillain-barre-syndrome", fig: "Fig 1", title: "Guillain-Barre syndrome: mimicry, demyelination and recovery", W, H, body, extraCss,
-  label: "An animated peripheral nerve in Guillain-Barre syndrome. After an infection, molecular mimicry drives antibodies and complement that bind myelin, nodes and axons. Macrophages strip myelin, conduction slows or blocks, and flaccid ascending weakness with areflexia follows, with sensory and autonomic involvement and, when severe, respiratory failure. Gauges show attack, myelin loss, conduction, weakness and breathing. The phase slider moves from onset to plateau to recovery, and treatments are IVIG, plasma exchange and ventilatory support.",
+  label: "An animated peripheral nerve in Guillain-Barre syndrome, read left to right. After a germ infection, mistaken antibodies with complement attack myelin and nodes, a macrophage strips myelin, signals block and muscles weaken toward the lungs. Treatment devices appear top right: an IVIG drip that caps antibodies, a plasma exchange filter that traps them, or a ventilator that breathes for the patient. Gauges show attack, myelin loss, conduction, weakness and breathing. The phase slider moves from onset to plateau to recovery.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, laboratory values or numbers are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "gbs.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "gbs.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With plasma exchange",
   sourcesLis: [
     "<strong>How Guillain-Barre syndrome develops.</strong> Guillain-Barre syndrome is an acute immune polyradiculoneuropathy and one of the acute flaccid neuropathies. It usually follows an infection. Molecular mimicry is central: microbial sugars can resemble gangliosides on peripheral nerve axons and myelin, so antibodies made against the microbe cross react with nerve. Antibody binding at nodes of Ranvier, paranodal proteins such as NF155 (neurofascin 155), myelin and axolemma activates complement. Complement and antibody recruit a macrophage that strips myelin in the demyelinating form, giving a demyelinating neuropathy with slowed conduction and conduction block. In the acute motor axonal neuropathy form (AMAN) and the acute motor and sensory axonal neuropathy form (AMSAN), attack at nodes and axons causes axonal degeneration, which recovers slowly. Early disease can look mild, then weakness ascends from the legs, reflexes are lost (areflexia), and sensory symptoms, autonomic instability and, when severe, diaphragmatic weakness with respiratory failure can follow. This is standard teaching in neurology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Spinal fluid and nerve tests.</strong> Cerebrospinal fluid classically shows albuminocytological dissociation: raised protein with little or no pleocytosis, meaning few white cells, though protein can be normal early. Nerve conduction studies can show demyelinating slowing and block, or reduced motor and sensory amplitudes when axonal loss dominates. The level of protein and the conduction pattern help classify the neuropathy but do not by themselves set treatment.",

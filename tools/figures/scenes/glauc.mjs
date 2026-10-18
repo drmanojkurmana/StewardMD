@@ -29,9 +29,9 @@ function modelOf(S, level, drug) {
   if (laser && level === 1) angle = 0.9;
   if (laser && level === 2) angle = 0.85;
   const prod = reduce ? 0.32 : 0.75;
-  const outflow = cl(angle * (incOut ? 1.25 : 0.9) + (incOut ? 0.12 : 0));
+  const outflow = cl(angle * (incOut ? 1.35 : 0.9) + (incOut ? 0.18 : 0));
   const iop = cl(0.12 + prod * (1.05 - outflow));
-  const cup = cl(0.05 + 0.85 * iop * iop + (level === 2 ? 0.12 : level === 1 ? 0.08 : 0));
+  const cup = cl(0.05 + 0.85 * iop * iop + (level === 2 ? 0.12 : level === 1 ? 0.09 : 0));
   const vision = cl(1 - cup * 0.95);
   const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
   const words = [w(iop, 0.3, 0.55, ["normal", "raised", "high"]), w(outflow, 0.3, 0.65, ["blocked", "reduced", "open"]), w(cup, 0.25, 0.5, ["healthy", "cupping", "severe cupping"])];
@@ -40,8 +40,8 @@ function modelOf(S, level, drug) {
 const TESTS = [
   [0, 0, "pressure normal · outflow open · optic nerve healthy"],
   [2, 0, "pressure high · outflow blocked · optic nerve severe cupping"],
-  [2, 2, "pressure high · outflow blocked · optic nerve severe cupping"],
-  [2, 3, "pressure raised · outflow open · optic nerve cupping"],
+  [2, 2, "pressure high · outflow reduced · optic nerve severe cupping"],
+  [1, 3, "pressure raised · outflow open · optic nerve healthy"],
 ];
 
 /* ---------------- static layout ---------------- */
@@ -50,8 +50,8 @@ const body = `
 <rect class="sc-tissue" x="584" y="44" width="362" height="194" rx="18"/>
 <rect class="sc-tissue" x="584" y="246" width="362" height="194" rx="18"/>
 <text class="sc-zone" x="34" y="68">EYE: AQUEOUS FLOW</text>
-<text class="sc-zone" x="604" y="68">OPTIC DISC, ENLARGED</text>
-<text class="sc-zone" x="604" y="270">ANGLE, ENLARGED</text>
+<text class="sc-zone" x="604" y="68">ANGLE, ENLARGED</text>
+<text class="sc-zone" x="604" y="270">OPTIC DISC, ENLARGED</text>
 <g id="eye"></g>
 <g id="flow"></g>
 <g id="disc"></g>
@@ -90,6 +90,12 @@ body[data-theme="light"] .gl-iris{stroke:#7a4498}
 .gl-laser{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-dasharray:5 3;stroke-linecap:round}
 .gl-hole{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.4}
 .p-aq{--cc:var(--c-fl)}
+.gl-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
+.gl-halo{fill:none;stroke:var(--c-bad);stroke-width:2}
+.gl-fold{fill:none;stroke:var(--c-mac);stroke-width:1.2;stroke-linecap:round;opacity:.85}
+.gl-fibre{fill:none;stroke:var(--c-plt);stroke-width:1;opacity:.8}
+.gl-wide{fill:none;stroke:var(--c-good);stroke-linecap:round}
+.gl-block{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1}
 .dr-g-fill.g-aq{fill:var(--c-fl)}.dr-g-fill.g-angle{fill:var(--c-good)}.dr-g-fill.g-cup{fill:var(--c-bad)}
 `,
 });
