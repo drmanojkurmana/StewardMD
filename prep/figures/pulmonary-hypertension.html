@@ -1,0 +1,556 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Pulmonary hypertension: pressure overload of the right ventricle</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="dark"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
+body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
+.t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
+.t-ven .tb-body{fill:color-mix(in srgb,var(--d-ven) 62%,var(--anatomy-paper))}.t-ven .tb-edge{stroke:var(--d-ven)}
+.t-dia .tb-body{fill:color-mix(in srgb,var(--d-dia) 55%,var(--anatomy-paper))}.t-dia .tb-edge{stroke:var(--d-dia)}
+.t-out .tb-body{fill:color-mix(in srgb,var(--d-ure) 40%,color-mix(in srgb,var(--d-dia) 40%,var(--anatomy-paper)))}
+.tb-shine{opacity:.5}
+.dr-lab-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}.dr-lab-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.dr-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.dr-pt{fill:var(--anatomy-strong);font:650 13px var(--anatomy-mono)}.dr-ps{fill:var(--anatomy-muted);font:11px var(--anatomy-mono)}.dr-pt2{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.dr-dband{fill:color-mix(in srgb,var(--d-dia) 13%,var(--anatomy-paper))}
+.dr-lumen{fill:color-mix(in srgb,var(--d-art) 15%,var(--anatomy-paper))}
+.dr-wall{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}.dr-pore{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.dr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4}.dr-beam-c{fill:none;stroke:var(--anatomy-hi);stroke-width:1.2}
+.dr-g-tr{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint)}.dr-g-fill{opacity:.95}
+#g-urea{fill:var(--d-ure)}#g-pot{fill:var(--d-pot)}#g-flu{fill:var(--d-wat)}
+.dr-g-v{fill:var(--anatomy-strong);font:600 10px var(--anatomy-mono);pointer-events:none}
+.dr-scr{fill:#0b1511;stroke:var(--anatomy-hi);stroke-width:.02}.dr-scr-bar{fill:#14261e}.dr-scr-fill{fill:var(--d-dia)}.dr-scr-led{fill:#555}
+.dr-vent{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.8}
+.p-rbc{fill:var(--d-rbc);stroke:color-mix(in srgb,var(--d-rbc) 50%,#000);stroke-width:.6}.p-rbc-c{fill:color-mix(in srgb,var(--d-rbc) 55%,#000);opacity:.55}
+.p-alb{fill:var(--d-alb);stroke:var(--anatomy-mid);stroke-width:.7}
+.p-ure{fill:var(--d-ure)}.p-pot{fill:var(--d-pot)}.p-bic{fill:var(--d-bic)}.p-wat{fill:var(--d-wat);opacity:.9}
+.p-rot-disc{fill:var(--anatomy-top);stroke:var(--anatomy-hi);stroke-width:1}.p-rot-hub{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}.p-roll{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:1}
+.p-plunger{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}.p-pad{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}
+.p-level{fill:color-mix(in srgb,var(--d-ven) 55%,var(--anatomy-paper));opacity:.9}.p-bubble{fill:none;stroke:var(--anatomy-hi);stroke-width:.8}
+.dr-fig .hot.dr-lab:hover .dr-lab-r{stroke:var(--anatomy-lit)}
+
+.t-sal .tb-body{fill:color-mix(in srgb,var(--d-bic) 45%,var(--anatomy-paper))}.t-sal .tb-edge{stroke:var(--d-bic)}
+.p-sal{fill:#fff;stroke:var(--d-bic);stroke-width:.8}
+.dr-jwin{fill:var(--anatomy-shade-1);stroke:var(--anatomy-hi);stroke-width:.02}.dr-jfill.dr-j-fresh{fill:var(--d-dia)}.dr-jfill.dr-j-used{fill:var(--d-ure)}.dr-jfill{opacity:.85}
+.dr-bez{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}.dr-face{fill:var(--anatomy-card)}.dr-ok{fill:none;stroke:#3ddc97;stroke-width:2.2;opacity:.8}
+.dr-tick{stroke:var(--anatomy-mid);stroke-width:.8}.dr-needle{stroke:var(--d-art);stroke-width:1.6;stroke-linecap:round}.dr-hub{fill:var(--anatomy-strong)}
+.dr-dl{fill:var(--anatomy-text);font:600 9.5px var(--anatomy-mono);pointer-events:none}
+.dr-dial:hover .dr-bez{stroke:var(--anatomy-lit)}
+
+.c-skin .iso-fill,.c-skin .iso-top{fill:var(--c-skin)}.c-gown .iso-fill,.c-gown .iso-top{fill:var(--c-gown)}.c-blanket .iso-fill,.c-blanket .iso-top{fill:var(--c-blanket)}
+.c-chair .iso-fill,.c-chair .iso-top{fill:var(--c-chair)}.c-chair2 .iso-fill,.c-chair2 .iso-top{fill:var(--c-chair2)}.c-vein .iso-fill,.c-vein .iso-top{fill:var(--c-vein)}
+.c-mach .iso-fill,.c-mach .iso-top{fill:var(--c-mach)}.c-mach2 .iso-fill,.c-mach2 .iso-top{fill:var(--c-mach2)}.c-door .iso-fill,.c-door .iso-top{fill:var(--c-door)}
+.c-skin .iso-shade,.c-gown .iso-shade,.c-blanket .iso-shade,.c-chair .iso-shade,.c-chair2 .iso-shade,.c-vein .iso-shade,.c-mach .iso-shade,.c-mach2 .iso-shade,.c-door .iso-shade{opacity:.45}
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
+
+.ph-artwall{fill:color-mix(in srgb,var(--c-sm) 42%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-sm) 60%,#000);stroke-width:1}
+.ph-lumen{fill:color-mix(in srgb,var(--c-rbc) 13%,var(--anatomy-paper))}
+.ph-out{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 42%,var(--anatomy-paper));stroke-width:26;stroke-linecap:round;opacity:.55}
+.ph-wall{fill:color-mix(in srgb,var(--c-bad) 34%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-bad) 66%,#000);stroke-width:1.3}
+.ph-shade{fill:#000;opacity:.12}
+.ph-ch{fill:color-mix(in srgb,var(--c-rbc) 50%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 66%,#000);stroke-width:1}
+.ph-pres{fill:none;stroke:var(--c-bad);stroke-width:2.4;stroke-linecap:round}
+.ph-alv{fill:color-mix(in srgb,var(--c-fl) 34%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-fl) 62%,#000);stroke-width:1.1}
+.ph-cap{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.ph-node{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}
+.ph-node-t{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono);pointer-events:none}
+.ph-cause{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}
+.ph-arrow{fill:none;stroke:var(--anatomy-mid);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ph-head{fill:var(--anatomy-mid)}
+.ph-jet{fill:var(--c-rbc)}
+.ph-icon{fill:color-mix(in srgb,var(--c-bad) 42%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-bad) 62%,#000);stroke-width:1.1}
+.p-oxy{--cc:var(--c-fl)}.p-con{--cc:var(--c-cyt)}
+.dr-g-fill.g-pap{fill:var(--c-bad)}.dr-g-fill.g-ren{fill:var(--c-fl)}
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Pulmonary hypertension: pressure overload of the right ventricle</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>pulmonary pressure raised · right ventricle thick and strained · congestion some</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated right ventricle ejecting into a pulmonary artery whose wall has remodelled and narrowed. Endothelial dysfunction and vasoconstriction, left heart disease, lung disease with hypoxic vasoconstriction and old clot all raise vascular resistance, so pulmonary arterial systolic pressure climbs. The right ventricle hypertrophies, then dilates and fails, with raised jugular venous pressure, oedema, renal congestion, low cardiac output, dyspnea and poor exercise tolerance. Systemic pressure holds until output falls. Gauges show pulmonary pressure, vascular resistance, ventricular strain, cardiac output, congestion and dyspnea. Treatment choices are oxygen with a diuretic, a pulmonary vasodilator concept and treating the cause, as a diagnostic assessment and stage guide only."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+<rect class="sc-tissue" x="14" y="44" width="546" height="396" rx="18"/>
+<rect class="sc-tissue" x="574" y="44" width="372" height="396" rx="18"/>
+<text class="sc-zone" x="34" y="68">RIGHT VENTRICLE AND PULMONARY ARTERY</text>
+<text class="sc-zone" x="594" y="68">WHY IT HAPPENS, WHAT FOLLOWS</text>
+<text class="sc-zone sc-dim" x="34" y="382">CAUSES THAT RAISE RESISTANCE</text>
+<g id="art"></g><g id="rv"></g><g id="lung"></g><g id="causes"></g><g id="parts"></g><g id="chain"></g><g id="icons"></g><g id="over"></g><g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or values are shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Severity of the pulmonary hypertension</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="moderate"><span class="dr-ticks"><i>mild</i><i>moderate</i><i>severe</i></span></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">oxygen and diuretic</option><option value="2">pulmonary vasodilator (concept)</option><option value="3">treat the cause</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul><li><strong>How pulmonary hypertension develops.</strong> Pressure in the pulmonary artery rises when the small pulmonary vessels narrow and stiffen. Endothelial dysfunction tips the balance toward vasoconstriction and growth of the vascular muscle layer, so the wall remodels and resistance climbs. The same pressure rise follows left heart disease (pressure passed back from the left side), lung disease with low oxygen (hypoxic pulmonary vasoconstriction), and chronic thromboembolic disease (old clot that never cleared). This is standard teaching in medicine and cardiology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>What the pressure does, and treatment ideas shown.</strong> The right ventricle faces a pressure overload: its wall hypertrophies to cope, then the chamber dilates, cardiac output can no longer rise on exercise, and right heart failure follows with raised jugular venous pressure, oedema and renal congestion from venous back pressure and low output. Oxygen relieves hypoxic vasoconstriction and a diuretic unloads congestion; a pulmonary vasodilator concept lowers vascular resistance (with a systemic pressure cost if it is not selective); treating the cause (the left heart, the lung disease, or the clot) helps most before remodelling is fixed. These are teaching toggles only.</li></ul>
+<p><strong>What was simplified.</strong> Classification into groups, measured pressures and resistance values, right heart catheter assessment, vasoreactivity testing, specific pulmonary vasodilator drug classes, anticoagulation and surgical choices, transplant, and all doses and targets are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Severity of the pulmonary hypertension","a":[0.3,0.65,1],"names":["mild","moderate","severe"],"ticks":["mild","moderate","severe"],"start":1},"settings":[{"label":"no treatment"},{"label":"oxygen and diuretic"},{"label":"pulmonary vasodilator (concept)"},{"label":"treat the cause"}],"drugNames":["no treatment","oxygen and diuretic","pulmonary vasodilator","cause treated"],"status":"Pulmonary hypertension: {level} · {drug} ·"}};
+const modelOf = function modelOf(S, level, drug) {
+  const cl = (v) => Math.max(0, Math.min(1, v));
+  const a = S.level.a[level];
+  const oxy = drug === 1 ? 1 : 0, vaso = drug === 2 ? 1 : 0, cause = drug === 3 ? 1 : 0;
+  const CUT = { oxy: 0.10, vaso: 0.30 };
+  const pvr = cl(0.14 + 0.82 * a - oxy * CUT.oxy - vaso * CUT.vaso - cause * (0.36 - 0.14 * a));
+  const pap = cl(0.10 + 0.88 * pvr);
+  const hyp = cl(0.10 + 0.84 * a * (cause ? 0.72 : 1));
+  const dil = cl(a * a * 1.05 - cause * 0.18 - vaso * 0.10);
+  const strain = cl(0.5 * hyp + 0.6 * dil + 0.2 * pap - 0.1);
+  const output = cl(0.94 - 0.52 * dil - 0.18 * strain + vaso * 0.08 + cause * 0.12);
+  const cong = cl(0.06 + 0.95 * dil * dil + 0.35 * Math.max(0, strain - 0.5) - oxy * 0.62 - cause * 0.20 - vaso * 0.06);
+  const dys = cl(0.08 + 0.45 * pap + 0.45 * cong + 0.25 * (1 - output) - oxy * 0.08 - cause * 0.10);
+  const sys = cl(0.90 - 0.28 * (1 - output) - vaso * 0.16);
+  const renal = cl(cong * 0.7 + (1 - output) * 0.5);
+  const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
+  const words = [w(pap, 0.40, 0.72, ["near normal", "raised", "very high"]), w(dil, 0.30, 0.65, ["thickened", "thick and strained", "dilated and failing"]), w(cong, 0.28, 0.62, ["none", "some", "marked"])];
+  return { a, oxy, vaso, cause, pvr, pap, hyp, dil, strain, output, cong, dys, sys, renal, words, readout: "pulmonary pressure " + words[0] + " · right ventricle " + words[1] + " · congestion " + words[2] };
+};
+/* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); if (parent) parent.appendChild(el); return el; };
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const lerp = (a, b, t) => a + (b - a) * t;
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const f1 = (v) => (+v).toFixed(1);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const S = SC.S;
+let level = S.level.start, drug = 0, playing = !reduce.matches, visible = true, last = 0, frame = 0, tm = 0, M = null, SCN = null;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), l0 = q.get("l");
+  if (d0 > 0 && d0 < S.settings.length) { drug = d0; drugBox.value = String(d0); }
+  if (l0 !== null && l0 !== "" && +l0 >= 0 && +l0 < S.level.a.length) { level = +l0; levelBox.value = String(level); } }
+levelBox.setAttribute("aria-valuetext", S.level.names[level]);
+
+/* a smooth closed blob path (Catmull-Rom through points), centred on 0,0 */
+function blobD(r, seed, wob, n) {
+  n = n || 9; wob = wob === undefined ? 0.1 : wob; const pts = [];
+  for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, k = 1 + wob * Math.sin(t * 3 + seed * 1.7) + wob * 0.6 * Math.cos(t * 2 + seed * 2.3); pts.push([r * k * Math.cos(t), r * k * Math.sin(t)]); }
+  let d = "M" + f1(pts[0][0]) + " " + f1(pts[0][1]);
+  for (let i = 0; i < n; i++) { const p0 = pts[(i + n - 1) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " + f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]); }
+  return d + "Z";
+}
+/* a lit, shaded cell: body, shade ring, highlight, optional nucleus. cls colours it (CSS: .cl-<cls> .cl-b) */
+function cell(parent, o) {
+  const g = mk("g", { class: "cl cl-" + o.cls }, parent), r = o.r, seed = o.seed || Math.random() * 9;
+  mk("path", { class: "cl-b", d: blobD(r, seed, o.wob === undefined ? 0.09 : o.wob, o.n) }, g);
+  mk("path", { class: "cl-s", d: blobD(r * 0.86, seed, o.wob === undefined ? 0.09 : o.wob, o.n), transform: "translate(" + f1(r * 0.04) + " " + f1(r * 0.05) + ")" }, g);
+  mk("path", { class: "cl-h", d: blobD(r * 0.62, seed + 1, 0.05, 7), transform: "translate(" + f1(-r * 0.14) + " " + f1(-r * 0.16) + ")" }, g);
+  if (o.nuc) mk("path", { class: "cl-n" + (o.nucCls ? " " + o.nucCls : ""), d: blobD(r * o.nuc, seed + 2, 0.12, 7), transform: "translate(" + f1(r * 0.05) + " " + f1(r * 0.02) + ")" }, g);
+  if (o.x !== undefined) g.setAttribute("transform", "translate(" + f1(o.x) + " " + f1(o.y) + ")");
+  return g;
+}
+const place = (g, x, y, rot, sc) => g.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ")" + (rot ? " rotate(" + f1(rot) + ")" : "") + (sc && sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : ""));
+/* label pill with a leader; hover/focus shows `text` in the info line */
+function pill(parent, text, x, y, tx, ty, infoText) {
+  const lw = text.length * 6.2 + 14, g = mk("g", { class: "hot dr-lab", tabindex: "0", "data-info": infoText || text }, parent);
+  mk("path", { class: "dr-leader", d: "M" + f1(x) + " " + f1(y) + "L" + f1(tx) + " " + f1(ty + 8) }, g);
+  mk("circle", { class: "dr-dot", cx: f1(x), cy: f1(y), r: 1.6 }, g);
+  mk("rect", { class: "dr-lab-r", x: f1(tx - lw / 2), y: f1(ty - 8), width: f1(lw), height: 17, rx: 8.5 }, g);
+  const t = mk("text", { class: "dr-lab-t", x: f1(tx), y: f1(ty + 4), "text-anchor": "middle" }, g); t.textContent = text; return g;
+}
+/* a vertical gauge (track + fill); set(v) moves it; the value word sits under it */
+function gauge(parent, x, y, h, w, cls, name, infoText) {
+  const g = mk("g", { class: "hot", tabindex: "0", "data-info": infoText || name }, parent);
+  mk("rect", { class: "dr-g-tr", x: x - w / 2, y, width: w, height: h, rx: w / 2 }, g);
+  const fill = mk("rect", { class: "dr-g-fill " + cls, x: x - w / 2, y: y + h, width: w, height: 0, rx: w / 2 }, g);
+  const t1 = mk("text", { class: "dr-pt2", x, y: y + h + 15, "text-anchor": "middle" }, g); t1.textContent = name;
+  const t2 = mk("text", { class: "dr-g-v", x, y: y + h + 28, "text-anchor": "middle" }, g);
+  return { set(v, word) { const hh = clamp(v) * h; fill.setAttribute("y", f1(y + h - hh)); fill.setAttribute("height", f1(hh)); if (word !== undefined && t2.textContent !== word) t2.textContent = word; } };
+}
+/* a path through points, with length table; at(u) gives {x,y,a} */
+function track(pts) { const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const len = cum[cum.length - 1];
+  return { len, at(u) { const d = clamp(u) * len; let i = 1; while (i < cum.length - 1 && cum[i] < d) i++; const f = (d - cum[i - 1]) / Math.max(0.001, cum[i] - cum[i - 1]); const a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) * 57.2958 }; } };
+}
+const wordOf = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+  if (SCN && SCN.onModel) SCN.onModel(M);
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now; tm += dt * 1000; SCN.step(dt, M); frame = requestAnimationFrame(tick); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
+function run(scn) {
+  SCN = scn;
+  levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  pauseBtn.addEventListener("click", () => setPlaying(!playing));
+  document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+  reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+  scn.init(); publish();
+  const idle = info.textContent;
+  svg.querySelectorAll(".hot").forEach((el) => { const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); }, off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+    el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+  if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+  for (let i = 0; i < 90; i++) scn.step(0.05, M);
+  start();
+}
+
+/* Pulmonary hypertension scene: a pressure loaded right ventricle, a remodelled pulmonary artery, the lungs, causes, the consequence chain, body signs and the gauges. */
+const L = { art: $("art"), rv: $("rv"), lung: $("lung"), causes: $("causes"), parts: $("parts"), chain: $("chain"), icons: $("icons"), over: $("over"), panel: $("panel") };
+const VC = [140, 288];
+/* ---- artery wall, lumen and outflow ---- */
+mk("path", { class: "ph-out", d: "M140 218L182 180L214 170" }, L.art);
+mk("rect", { class: "ph-artwall", x: 210, y: 110, width: 330, height: 120, rx: 10 }, L.art);
+const lumenEl = mk("rect", { class: "ph-lumen", id: "phlumen", x: 210, y: 147, width: 330, height: 46, rx: 8 }, L.art);
+const aTrack = track([[140, 212], [168, 180], [230, 170], [535, 170]]);
+/* ---- right ventricle ---- */
+const wallEl = mk("ellipse", { class: "ph-wall", cx: VC[0], cy: VC[1] }, L.rv);
+const shadeEl = mk("ellipse", { class: "ph-shade", cx: VC[0] + 5, cy: VC[1] + 6 }, L.rv);
+const chEl = mk("ellipse", { class: "ph-ch", cx: VC[0], cy: VC[1] }, L.rv);
+const parr = [118, 140, 162].map((x) => mk("path", { class: "ph-pres" }, L.rv));
+/* ---- wall cells: endothelium on the lumen, smooth muscle in the wall ---- */
+const endoT = [], endoB = [], muscT = [], muscB = [];
+for (let i = 0; i < 13; i++) { const x = 228 + i * 25; endoT.push({ g: cell(L.art, { cls: "endo", r: 9, nuc: 0.3, seed: i + 1, wob: 0.06, n: 8 }), x }); endoB.push({ g: cell(L.art, { cls: "endo", r: 9, nuc: 0.3, seed: i + 30, wob: 0.06, n: 8 }), x }); }
+for (let i = 0; i < 9; i++) { const x = 235 + i * 35; muscT.push({ g: cell(L.art, { cls: "sm", r: 9, nuc: 0.35, seed: i + 50, wob: 0.1, n: 8 }), x }); muscB.push({ g: cell(L.art, { cls: "sm", r: 9, nuc: 0.35, seed: i + 70, wob: 0.1, n: 8 }), x }); }
+/* ---- old clot sitting in the artery (chronic thromboembolic disease) ---- */
+const clotCells = [];
+for (let i = 0; i < 5; i++) clotCells.push({ g: cell(L.art, { cls: "plt", r: 5 + (i % 3), seed: i + 90, wob: 0.15, n: 7 }), dx: -14 + i * 7, dy: (i % 2) * -5 });
+/* ---- lungs: alveoli with a capillary blush ---- */
+const ALV = [[340, 280, 22], [400, 308, 26], [458, 282, 24], [492, 322, 20]];
+ALV.forEach(([x, y, r]) => { mk("circle", { class: "ph-alv", cx: x, cy: y, r: r }, L.lung); mk("circle", { class: "ph-alv", cx: x - r * 0.3, cy: y - r * 0.25, r: r * 0.45 }, L.lung); });
+/* ---- causes strip ---- */
+const CAUSES = [
+  { x: 88, t: "Left heart", tip: "Left heart disease: pressure from a failing or stiff left side, or a tight mitral valve, is passed back into the pulmonary veins and artery." },
+  { x: 222, t: "Lung disease", tip: "Lung disease: damaged lungs lose small vessels and leave the remaining blood short of oxygen." },
+  { x: 356, t: "Low oxygen", tip: "Low oxygen in the air sacs makes nearby pulmonary vessels tighten: hypoxic pulmonary vasoconstriction. Helpful in one spot, harmful when the whole lung is short of oxygen." },
+  { x: 490, t: "Old clot", tip: "Chronic thromboembolic disease: old clot that never cleared scars the artery open only in part, so resistance stays high." },
+];
+const causeEls = CAUSES.map((c) => { const g = mk("g", { class: "hot", tabindex: "0", "data-info": c.tip }, L.causes);
+  mk("rect", { class: "ph-cause", x: c.x - 61, y: 392, width: 122, height: 34, rx: 10 }, g);
+  const t = mk("text", { class: "ph-node-t", x: c.x, y: 413, "text-anchor": "middle" }, g); t.textContent = c.t; return g; });
+/* ---- consequence chain ---- */
+const NODES = {
+  a: { x: 760, y: 118, t: "Wall remodels, vessels tighten", tip: "Endothelial dysfunction: less relaxing signal, more tightening and growth signal. Vascular smooth muscle thickens and the lumen narrows.", k: "pvr" },
+  b: { x: 760, y: 183, t: "Pulmonary pressure rises", tip: "Pulmonary arterial systolic pressure climbs as resistance rises. The right ventricle must make that pressure with every beat.", k: "pap" },
+  c: { x: 760, y: 248, t: "Right ventricle overloads", tip: "Pressure overload: the right ventricular wall hypertrophies to cope, then the chamber dilates, the muscle strains and output stops rising on exercise.", k: "strain" },
+  d: { x: 760, y: 313, t: "Right heart failure", tip: "Right heart failure: venous pressure rises (raised JVP), fluid leaves the vessels (oedema), the kidney congests, and cardiac output and systemic pressure fall late.", k: "cong" },
+};
+const nodeEls = {};
+Object.keys(NODES).forEach((key) => { const n = NODES[key], g = mk("g", { class: "hot", tabindex: "0", "data-info": n.tip }, L.chain);
+  mk("rect", { class: "ph-node", x: n.x - 150, y: n.y - 18, width: 300, height: 36, rx: 12 }, g);
+  const t = mk("text", { class: "ph-node-t", x: n.x, y: n.y + 4, "text-anchor": "middle" }, g); t.textContent = n.t; nodeEls[key] = g; });
+const ARROWS = { ab: { pts: [[760, 136], [760, 165]], k: "pap" }, bc: { pts: [[760, 201], [760, 230]], k: "strain" }, cd: { pts: [[760, 266], [760, 295]], k: "cong" } };
+const arrows = {};
+Object.keys(ARROWS).forEach((id) => { const a2 = ARROWS[id], d = a2.pts.map((p, i) => (i ? "L" : "M") + p[0] + " " + p[1]).join(""), tr = track(a2.pts);
+  mk("path", { class: "ph-arrow", d }, L.chain);
+  const p2 = a2.pts[a2.pts.length - 1]; mk("path", { class: "ph-head", d: "M0 0L-8 -4.5L-8 4.5Z", transform: "translate(" + p2[0] + " " + p2[1] + ") rotate(90)" }, L.chain);
+  const dots = Array.from({ length: 2 }, (_, i) => ({ c: mk("circle", { class: "ph-jet", r: 2.3 }, L.parts), u: i / 2 }));
+  arrows[id] = { tr, dots, k: a2.k }; });
+/* ---- body signs ---- */
+function iconGroup(tip) { const g = mk("g", { class: "hot", tabindex: "0", "data-info": tip }, L.icons); return g; }
+const dysG = iconGroup("Dyspnea and poor exercise tolerance: output cannot rise on effort and congested lungs stiffen, so breathlessness comes first on effort, then at rest.");
+mk("path", { class: "ph-icon", d: "M642 362q-14 4-15 20q0 14 12 15q6-16 3-35zM658 362q14 4 15 20q0 14-12 15q-6-16-3-35z" }, dysG);
+mk("path", { class: "ph-icon", d: "M650 356v16" }, dysG);
+const jvpG = iconGroup("Raised jugular venous pressure (JVP): the failing right ventricle passes pressure back into the neck veins, a key part of the diagnostic assessment.");
+mk("circle", { class: "ph-icon", cx: 730, cy: 368, r: 13 }, jvpG);
+mk("path", { class: "ph-icon", d: "M730 381v14M724 388q6 5 12 0" }, jvpG);
+const oedG = iconGroup("Oedema: raised venous pressure pushes fluid into the tissues, first at the ankles. A diuretic unloads this congestion.");
+mk("path", { class: "ph-icon", d: "M804 358h12v24h-12zM804 382q-6 10 2 13q14 3 20-2q4-4-2-7l-8-4" }, oedG);
+const renG = iconGroup("Kidney: venous congestion and low cardiac output together reduce renal perfusion, so fluid is held on to and congestion worsens.");
+mk("path", { class: "ph-icon", d: "M885 360q14 2 13 16q-1 15-14 17q-12 1-13-12q0-8 5-10q-5-2-3-7q2-5 12-4z" }, renG);
+[[650, "Dyspnea"], [730, "Raised JVP"], [810, "Oedema"], [885, "Kidney"]].forEach(([x, s]) => { const t = mk("text", { class: "ph-cap", x: x, y: 418, "text-anchor": "middle" }, L.icons); t.textContent = s; });
+/* ---- particle pools ---- */
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0 }; }); }
+const rbcP = pool(16, () => { const g = mk("g", { class: "cl cl-rbc" }, L.parts); mk("ellipse", { class: "cl-b", rx: 8, ry: 4.8 }, g); mk("ellipse", { class: "cl-s", rx: 3, ry: 1.5 }, g); return g; });
+rbcP.forEach((p) => { p.on = true; p.x = rnd(215, 535); p.y = rnd(-0.8, 0.8); p.vx = rnd(0.85, 1.15); p.e.setAttribute("opacity", "1"); });
+const oxyP = pool(12, () => mk("circle", { class: "sc-p p-oxy", r: 2.2 }, L.parts));
+const conP = pool(14, () => mk("path", { class: "sc-p p-con", d: "M0 -3L3 0L0 3L-3 0Z" }, L.parts));
+const jetP = Array.from({ length: 12 }, (_, i) => ({ e: mk("circle", { class: "ph-jet", r: 2.4, opacity: 0 }, L.parts), u: i / 12, off: rnd(-4, 4) }));
+const freeP = (pl) => pl.find((p) => !p.on);
+function emitP(p, x, y, vx, vy) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.e.setAttribute("opacity", "1"); }
+function killP(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
+/* ---- labels and gauges ---- */
+pill(L.over, "Thick wall", 300, 124, 200, 98, "The artery wall thickens: smooth muscle grows and the wall remodels around a narrower lumen.");
+pill(L.over, "Pulmonary artery", 375, 146, 375, 98, "Pulmonary artery: it carries blood from the right ventricle to the lungs. Its systolic pressure is what rises in pulmonary hypertension.");
+pill(L.over, "Right ventricle", 172, 318, 265, 350, "Right ventricle: the thin walled chamber built for low pressure. Under pressure overload it hypertrophies, then dilates and fails.");
+pill(L.over, "Narrowed lumen", 425, 172, 280, 250, "The narrowed lumen: remodelling plus vasoconstriction shrink the passage, so vascular resistance and pressure rise.");
+pill(L.over, "Smooth muscle", 300, 216, 270, 322, "Vascular smooth muscle in the artery wall. It tightens (vasoconstriction) and, over time, thickens the wall.");
+pill(L.over, "Lungs", 458, 282, 520, 255, "Lungs: the air sacs. Lung disease and low oxygen here are a major cause of raised pulmonary pressure.");
+const oxyPill = pill(L.over, "Oxygen + diuretic", 448, 262, 120, 125, "Oxygen eases hypoxic vasoconstriction in the lungs; a diuretic removes congestive fluid and lowers venous pressure. Neither reverses fixed remodelling.");
+oxyPill.setAttribute("id", "oxy-pill"); oxyPill.style.opacity = "0";
+const vasoPill = pill(L.over, "Vasodilator", 375, 198, 430, 365, "Pulmonary vasodilator concept: relaxing the pulmonary vessels lowers resistance and pressure. If it also relaxes systemic vessels, systemic pressure can fall.");
+vasoPill.setAttribute("id", "vaso-pill"); vasoPill.style.opacity = "0";
+const causePill = pill(L.over, "Treat cause", 490, 392, 275, 280, "Treat the cause: the left heart, the lung disease and low oxygen, or the old clot. Works best before vascular remodelling becomes fixed.");
+causePill.setAttribute("id", "cause-pill"); causePill.style.opacity = "0";
+const gg = {};
+{ const P = L.panel, y0 = 478, h = 52, xs = [130, 270, 410, 550, 690, 830];
+  mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: SC.W - 48, height: 142, rx: 14 }, P);
+  const t = mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P); t.textContent = "The patient";
+  [["pap", "Pressure", "g-pap", "Pulmonary arterial pressure: the systolic load the right ventricle must generate. It rises with vascular resistance."], ["pvr", "Resistance", "g-cyt", "Pulmonary vascular resistance: remodelling and vasoconstriction of the small pulmonary vessels raise it."], ["strain", "RV strain", "g-neu", "Right ventricular strain: hypertrophy first, then dilatation as the pressure loaded ventricle gives way."], ["out", "Output", "g-good", "Cardiac output: held at rest for a long stage, it cannot rise on exercise and falls when the ventricle fails."], ["cong", "Congestion", "g-fl", "Venous congestion: raised JVP, oedema and renal congestion from back pressure. A diuretic unloads it."], ["dys", "Dyspnea", "g-bad", "Dyspnea: breathlessness on exercise first, then at rest, from low output reserve and congested lungs."]]
+    .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i], y0 + 2, h, 18, cls, name, tip); }); }
+/* ---- animation ---- */
+const sm = { pvr: 0.6, pap: 0.6, hyp: 0.6, dil: 0.4, strain: 0.5, output: 0.6, cong: 0.3, dys: 0.5, sys: 0.7, renal: 0.3, oxy: 0, vaso: 0, cause: 0 };
+const acc = { oxy: 0, con: 0 };
+let beat = 0;
+function init() {}
+function step(dt, m) {
+  const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.45);
+  sm.pvr = lerp(sm.pvr, m.pvr, k1); sm.pap = lerp(sm.pap, m.pap, k1); sm.dil = lerp(sm.dil, m.dil, k1); sm.output = lerp(sm.output, m.output, k1); sm.cong = lerp(sm.cong, m.cong, k1); sm.sys = lerp(sm.sys, m.sys, k1); sm.oxy = lerp(sm.oxy, m.oxy, k1); sm.vaso = lerp(sm.vaso, m.vaso, k1); sm.cause = lerp(sm.cause, m.cause, k1);
+  sm.hyp = lerp(sm.hyp, m.hyp, k2); sm.strain = lerp(sm.strain, m.strain, k2); sm.dys = lerp(sm.dys, m.dys, k2); sm.renal = lerp(sm.renal, m.renal, k2);
+  /* lumen narrows with resistance; wall cells swell with remodelling */
+  const lh = 46 - 28 * sm.pvr, topY = 170 - lh / 2, botY = 170 + lh / 2;
+  lumenEl.setAttribute("y", f1(topY)); lumenEl.setAttribute("height", f1(lh));
+  endoT.forEach((e, i) => place(e.g, e.x, topY + 3 + Math.sin(tm / 800 + i) * 0.7, 0, 1));
+  endoB.forEach((e, i) => place(e.g, e.x, botY - 3 + Math.sin(tm / 800 + i + 2) * 0.7, 0, 1));
+  const ms = 0.8 + 0.55 * sm.pvr;
+  muscT.forEach((e) => place(e.g, e.x, 128, 0, ms)); muscB.forEach((e) => place(e.g, e.x, 212, 0, ms));
+  clotCells.forEach((c) => place(c.g, 482 + c.dx, botY - 5 + c.dy, 0, clamp(m.a * 1.1)));
+  /* heartbeat: cavity shrinks as it ejects; hypertrophy thickens the wall, failure dilates the cavity */
+  beat += dt * (0.85 + 0.3 * sm.pap); const ph = beat % 1, cph = Math.pow(Math.max(0, Math.sin(ph * 6.2832 * 0.5 + 0.2)), 1.2) * (ph < 0.5 ? 1 : 0);
+  const ef = 0.08 + 0.24 * sm.output, rx0 = 36 + 18 * sm.dil, ry0 = 44 + 14 * sm.dil, tw = 9 + 13 * sm.hyp;
+  const rx = rx0 * (1 - ef * cph), ry = ry0 * (1 - ef * cph);
+  chEl.setAttribute("rx", f1(rx)); chEl.setAttribute("ry", f1(ry));
+  wallEl.setAttribute("rx", f1(rx + tw * (1 + 0.25 * cph))); wallEl.setAttribute("ry", f1(ry + tw * (1 + 0.25 * cph)));
+  shadeEl.setAttribute("rx", f1(rx + tw)); shadeEl.setAttribute("ry", f1(ry + tw));
+  parr.forEach((p, i) => { const x = [118, 140, 162][i], len = (22 + 48 * sm.pap) * (0.85 + 0.15 * Math.sin(tm / 300 + i));
+    p.setAttribute("d", "M" + x + " 332L" + x + " " + f1(332 - len) + "M" + (x - 4) + " " + f1(340 - len) + "L" + x + " " + f1(332 - len) + "L" + (x + 4) + " " + f1(340 - len)); p.setAttribute("opacity", (0.15 + 0.8 * sm.pap).toFixed(2)); });
+  /* red cells traverse the narrowed lumen; the jet out of the ventricle speeds with pressure */
+  const vf = 34 + 58 * sm.output;
+  rbcP.forEach((p) => { p.x += p.vx * vf * dt * (p.x > 300 && p.x < 480 ? 1 + 0.7 * sm.pvr : 1); if (p.x > 542) { p.x = 212; p.y = rnd(-0.8, 0.8); } place(p.e, p.x, 170 + p.y * Math.max(4, lh / 2 - 7), Math.sin(tm / 500 + p.x) * 8, 1); });
+  jetP.forEach((p) => { p.u = (p.u + dt * (0.25 + 0.6 * sm.pap)) % 1; const q = aTrack.at(p.u); p.e.setAttribute("cx", f1(q.x + p.off * (1 - 0.5 * sm.pvr))); p.e.setAttribute("cy", f1(q.y)); p.e.setAttribute("opacity", clamp(0.15 + 0.8 * sm.output).toFixed(2)); });
+  /* oxygen drifting in the air sacs; constrictor signals hugging the wall */
+  acc.oxy += dt * (2 + 7 * sm.oxy + 3 * (1 - sm.pvr)); while (acc.oxy >= 1) { acc.oxy--; const p = freeP(oxyP); if (p) emitP(p, rnd(322, 508), rnd(258, 344), rnd(-5, 5), rnd(-7, -2)); }
+  oxyP.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.x = clamp(p.x, 318, 512); p.y = clamp(p.y, 252, 348); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.t > 3.4) killP(p); });
+  acc.con += dt * sm.pvr * 7; while (acc.con >= 1) { acc.con--; const p = freeP(conP); if (p) emitP(p, rnd(225, 525), Math.random() < 0.5 ? topY - rnd(6, 16) : botY + rnd(6, 16), rnd(-4, 4), rnd(-3, 3)); }
+  conP.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(tm / 6) + ")"); p.e.setAttribute("opacity", clamp(1 - p.t / 1.8).toFixed(2)); if (p.t > 1.8) killP(p); });
+  /* chain glow, flowing dots, causes and body signs */
+  const act = { pvr: sm.pvr, pap: sm.pap, strain: sm.strain, cong: sm.cong };
+  Object.keys(NODES).forEach((key) => { nodeEls[key].style.filter = "drop-shadow(0 0 " + (act[NODES[key].k] * 7).toFixed(1) + "px var(--c-cyt))"; });
+  Object.keys(arrows).forEach((id) => { const ar = arrows[id], v = act[ar.k]; ar.dots.forEach((d) => { d.u = (d.u + dt * (0.1 + 0.45 * v)) % 1; const q = ar.tr.at(d.u); d.c.setAttribute("cx", f1(q.x)); d.c.setAttribute("cy", f1(q.y)); d.c.style.opacity = clamp(v * 1.3).toFixed(2); }); });
+  causeEls.forEach((g) => { g.style.opacity = (1 - 0.35 * sm.cause).toFixed(2); });
+  dysG.style.opacity = (0.25 + 0.75 * sm.dys).toFixed(2); jvpG.style.opacity = (0.25 + 0.75 * sm.cong).toFixed(2);
+  oedG.style.opacity = (0.25 + 0.75 * sm.cong).toFixed(2); renG.style.opacity = (0.25 + 0.75 * sm.renal).toFixed(2);
+  oxyPill.style.opacity = sm.oxy.toFixed(2); vasoPill.style.opacity = sm.vaso.toFixed(2); causePill.style.opacity = sm.cause.toFixed(2);
+  /* gauges */
+  gg.pap.set(sm.pap, wordOf(sm.pap, 0.40, 0.72, ["near normal", "raised", "very high"])); gg.pvr.set(sm.pvr, wordOf(sm.pvr, 0.35, 0.65, ["low", "raised", "high"]));
+  gg.strain.set(sm.strain, wordOf(sm.strain, 0.35, 0.65, ["mild", "strained", "failing"])); gg.out.set(sm.output, wordOf(sm.output, 0.38, 0.66, ["low", "reduced", "held"]));
+  gg.cong.set(sm.cong, wordOf(sm.cong, 0.28, 0.62, ["none", "some", "marked"])); gg.dys.set(sm.dys, wordOf(sm.dys, 0.3, 0.6, ["none", "on effort", "at rest"]));
+}
+run({ init, step });
+</script></body></html>
