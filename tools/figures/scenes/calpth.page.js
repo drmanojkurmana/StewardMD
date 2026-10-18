@@ -1,47 +1,89 @@
-/* Calcium and parathyroid hormone homeostasis scene:
- * Parathyroid CaSR sensing, PTH endocrine drive, bone resorption, renal calcium conservation,
- * proximal tubule vitamin D activation, intestinal absorption, neuromuscular excitability,
- * and conceptual therapies. */
-const L = {
-  tracks: $("tracks"),
-  organs: $("organs"),
-  nmj: $("nmj"),
+/* Calcium and parathyroid hormone scene: gland sensing, PTH drive, bone resorption,
+ * renal calcium saving with vitamin D switch on, gut uptake, muscle tone, and a
+ * visible action for every treatment (gut top up, kidney flush, bone coat,
+ * sensor blocker sitting on its receptor, adenoma removal). */
+const layers = {
   parts: $("particles"),
-  labels: $("labels"),
   over: $("over"),
   panel: $("panel"),
+  vBone: $("vBone"),
+  vKid: $("vKid"),
+  vVitD: $("vVitD"),
+  vBCa: $("vBCa"),
+  vGCa: $("vGCa"),
+  vFb: $("vFb"),
+  vCaM: $("vCaM"),
+  vCaK: $("vCaK"),
 };
+let thyO = null, kidO = null, gutO = null, capEl = null, capDrug = -1;
+let trPTHbone = null, trPTHkid = null, trVitD = null, trVitG = null, trBoneCa = null;
+let trGutCa = null, trFb = null, trCaM = null, trCaK = null, trPoolBone = null, trPoolGland = null;
+const CASR = [199, 172], BONF = [730, 150], POOL = [480, 250];
 
-const sm = {
-  pth: 0.5,
-  ca: 0.5,
-  po4: 0.5,
-  vitD: 0.5,
-  bone: 0.5,
-  gut: 0.5,
-  dCalVit: 0,
-  dFluids: 0,
-  dBisp: 0,
-  dCmim: 0,
-  dPtx: 0,
-};
+/* fixed landmarks (thyroid art is procedural, so its ports are fixed; bone is a fixed panel) */
+const GTOP = [177, 102], GL = [113, 160], GFB = [188, 172];
+const BONL = [718, 138], BONC = [730, 168];
+const POOLR = [552, 252], POOLR2 = [552, 258], POOLL = [408, 244], POOLT = [480, 202], POOLB = [435, 275];
 
-const acc = {
-  pth: 0,
-  ca: 0,
-  po4: 0,
-  vitd: 0,
-  txCalVit: 0,
-  txFluids: 0,
-  txBisp: 0,
-  txCmim: 0,
-};
+function nearest(ports, hint) {
+  let best = null, bd = 1e9;
+  for (const k in ports) {
+    const p = ports[k];
+    const d = Math.hypot(p[0] - hint[0], p[1] - hint[1]);
+    if (d < bd) { bd = d; best = p; }
+  }
+  return best ? [best[0], best[1]] : hint.slice();
+}
+function setVessel(el, pts) {
+  el.setAttribute("d", "M" + f1(pts[0][0]) + " " + f1(pts[0][1]) + " C" + f1(pts[1][0]) + " " + f1(pts[1][1]) +
+    " " + f1(pts[2][0]) + " " + f1(pts[2][1]) + " " + f1(pts[3][0]) + " " + f1(pts[3][1]));
+}
+function initOrgans() {
+  thyO = organ($("thySlot"), "thyroid", 150, 160, 170, {});
+  kidO = organ($("kidSlot"), "kidney", 150, 335, 150, {});
+  gutO = organ($("gutSlot"), "intestine", 800, 335, 180, {});
+  const KP = kidO.ports, GP = gutO.ports;
+  const kTop = nearest(KP, [150, 262]), kIn = nearest(KP, [212, 318]), kR = nearest(KP, [228, 352]);
+  const guL = nearest(GP, [712, 348]);
+  const pBone = [GTOP, [320, 88], [560, 92], BONL];
+  const pKid = [GL, [105, 200], [112, 235], kTop];
+  const pVitD = [kR, [400, 382], [600, 382], guL];
+  const pVitG = [kTop, [120, 220], [150, 185], GFB];
+  const pBCa = [BONC, [650, 210], [560, 240], POOLR];
+  const pGCa = [guL, [640, 295], [565, 265], POOLR2];
+  const pFb = [POOLL, [320, 215], [240, 190], GFB];
+  const pCaK = [POOLB, [340, 292], [255, 308], kIn];
+  setVessel(layers.vBone, pBone);
+  setVessel(layers.vKid, pKid);
+  setVessel(layers.vVitD, pVitD);
+  setVessel(layers.vBCa, pBCa);
+  setVessel(layers.vGCa, pGCa);
+  setVessel(layers.vFb, pFb);
+  setVessel(layers.vCaK, pCaK);
+  layers.vCaM.setAttribute("d", "M" + f1(POOLT[0]) + " " + f1(POOLT[1]) + " L480 142");
+  trPTHbone = track(pBone); trPTHkid = track(pKid); trVitD = track(pVitD); trVitG = track(pVitG);
+  trBoneCa = track(pBCa); trGutCa = track(pGCa); trFb = track(pFb);
+  trCaM = track([POOLT, [480, 142]]); trCaK = track(pCaK);
+  trPoolBone = track([POOLR, [560, 240], [650, 210], BONC]);
+  trPoolGland = track([POOLL, [320, 215], [240, 190], GFB]);
+}
 
+/* caption per treatment, plain words */
+function capText(d) {
+  if (d === 1) return "Calcium with active vitamin D tops up gut uptake. Blood calcium climbs back.";
+  if (d === 2) return "Saline flush helps the kidney wash extra calcium out in urine. Stones slow.";
+  if (d === 3) return "Bisphosphonate coats bone and quiets the bone eating cells. Less calcium leaves bone.";
+  if (d === 4) return "Calcimimetic sits on the gland sensor. The gland releases less PTH.";
+  if (d === 5) return "Surgery removes the overactive gland tissue. PTH falls and calcium settles.";
+  return "No treatment. Gland signals move calcium between bone, kidney and gut.";
+}
+
+/* ---- particle pools (every pool item carries its element as p.e) ---- */
 function pool(n, build) {
   return Array.from({ length: n }, () => {
     const e = build();
     e.setAttribute("opacity", "0");
-    return { e, on: false, u: 0, k: 0, x: 0, y: 0 };
+    return { e, on: false, u: 0, k: 0, x: 0, y: 0, vx: 0, vy: 0, t: 0, life: 0 };
   });
 }
 const free = (pl) => pl.find((p) => !p.on);
@@ -49,46 +91,25 @@ function emit(p, k) {
   p.on = true;
   p.u = 0;
   p.k = k || 0;
+  p.t = 0;
+  p.life = 0;
   p.e.setAttribute("opacity", "1");
 }
 function kill(p) {
   p.on = false;
   p.e.setAttribute("opacity", "0");
 }
+const plPTH = pool(16, () => mk("polygon", { class: "p-pth", points: "0,-3.2 3.2,0 0,3.2 -3.2,0" }, layers.parts));
+const plCa = pool(26, () => mk("circle", { class: "p-ca", r: 2.5 }, layers.parts));
+const plPO4 = pool(12, () => mk("circle", { class: "p-po4", r: 2.2 }, layers.parts));
+const plVitD = pool(12, () => mk("polygon", { class: "p-vitd", points: "-2.6,-2.6 2.6,-2.6 2.6,2.6 -2.6,2.6" }, layers.parts));
+const plTxCal = pool(8, () => mk("rect", { class: "p-tx-cal", x: -4, y: -2, width: 8, height: 4, rx: 2 }, layers.parts));
+const plTxFl = pool(10, () => mk("circle", { class: "p-tx-fl", r: 2.6 }, layers.parts));
+const plTxBisp = pool(8, () => mk("polygon", { class: "p-tx-bisp", points: "0,-3.5 3.5,0 0,3.5 -3.5,0" }, layers.parts));
+const plTxCmim = pool(8, () => mk("circle", { class: "p-tx-cmim", r: 2.4 }, layers.parts));
 
-/* Track coordinates matching anatomical layout */
-const tracks = {
-  pth_bone: track([[165, 140], [290, 112], [520, 102], [745, 126]]),
-  pth_kid: track([[155, 175], [150, 235], [165, 295]]),
-  kid_gut: track([[215, 345], [380, 360], [580, 360], [735, 345]]),
-  kid_pth: track([[185, 295], [205, 235], [190, 185]]),
-  bone_ca: track([[745, 155], [660, 205], [560, 235], [480, 250]]),
-  gut_ca: track([[735, 330], [650, 300], [560, 265], [480, 255]]),
-  ca_pth: track([[430, 240], [330, 210], [230, 180], [185, 160]]),
-  ca_nm: track([[480, 225], [480, 175], [480, 140]]),
-  ca_kid: track([[420, 260], [310, 290], [225, 315], [195, 335]]),
-  gut_tx: track([[630, 370], [680, 360], [735, 345]]),
-  kid_tx: track([[280, 270], [250, 290], [215, 310]]),
-  bone_tx: track([[680, 115], [710, 125], [740, 135]]),
-  pt_tx: track([[182, 220], [182, 195], [195, 175]]),
-};
-
-/* Particles */
-const plPTH = pool(18, () => mk("polygon", { class: "p-pth", points: "0,-3.2 3.2,0 0,3.2 -3.2,0" }, L.parts));
-const plCa = pool(28, () => mk("circle", { class: "p-ca", r: 2.5 }, L.parts));
-const plPO4 = pool(14, () => mk("circle", { class: "p-po4", r: 2.2 }, L.parts));
-const plVitD = pool(14, () => mk("polygon", { class: "p-vitd", points: "-2.6,-2.6 2.6,-2.6 2.6,2.6 -2.6,2.6" }, L.parts));
-const plTxCal = pool(8, () => {
-  const g = mk("g", {}, L.parts);
-  mk("rect", { class: "p-tx-cal", x: -4, y: -2, width: 8, height: 4, rx: 2 }, g);
-  return g;
-});
-const plTxFl = pool(8, () => mk("circle", { class: "p-tx-fl", r: 2.6 }, L.parts));
-const plTxBisp = pool(8, () => mk("polygon", { class: "p-tx-bisp", points: "0,-3.5 3.5,0 0,3.5 -3.5,0" }, L.parts));
-const plTxCmim = pool(8, () => mk("circle", { class: "p-tx-cmim", r: 2.4 }, L.parts));
-
-/* DOM elements */
-const ptGlands = $("pt-glands");
+/* dynamic anatomy refs */
+const ptGlands = ["pt-gland-a", "pt-gland-b", "pt-gland-c"].map((id) => $(id));
 const ptAdenoma = $("pt-adenoma");
 const ptAdenomaGlow = $("pt-adenoma-glow");
 const ptScars = $("pt-scars");
@@ -98,98 +119,65 @@ const boneLacuna = $("bone-lacuna");
 const osteoclast = $("osteoclast");
 const bispCoat = $("bisp-coat");
 const kidneyStone = $("kidney-stone");
-const stoneBadge = $("stone-badge");
 const gutPumps = $("gut-pumps");
 const nmMuscle = $("nm-muscle-wrap");
 const nmSparks = $("nm-sparks");
 const nmBadge = $("nm-badge");
+const glandWash = $("glandWash"), boneWash = $("boneWash"), kidWash = $("kidWash");
+const gutWash = $("gutWash"), bloodWash = $("bloodWash");
 
-/* Treatment pills */
-let calvitPill, fluidsPill, bispPill, cmimPill, ptxPill;
+const sm = { pth: 0.5, ca: 0.5, po4: 0.5, vitD: 0.5, bone: 0.5, gut: 0.5, dCalVit: 0, dFluids: 0, dBisp: 0, dCmim: 0, dPtx: 0 };
+const acc = { pth: 0, ca: 0, po4: 0, vitd: 0, txCalVit: 0, txFluids: 0, txBisp: 0, txCmim: 0 };
 
 const gg = {};
 function initPanel() {
-  const P = L.panel, y0 = 478, h = 52, w = 18;
+  const P = layers.panel, y0 = 478, h = 52, w = 18;
   const xs = [100, 252, 404, 556, 708, 860];
   mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: 912, height: 142, rx: 14 }, P);
-  mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P).textContent = "Endocrine and organ balance";
-
+  mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P).textContent = "Hormone, calcium and organs";
   const defs = [
-    ["pth", "Parathyroid hormone", "g-eos", "PTH released by parathyroid chief cells. Drives bone resorption, renal calcium conservation, and activation of vitamin D."],
-    ["ca", "Serum calcium", "g-fl", "Extracellular ionized calcium. Tightly maintained; low triggers tetany and cramps, high causes weakness, stones and confusion."],
-    ["po4", "Serum phosphate", "g-cyt", "Extracellular phosphate. PTH promotes renal phosphate excretion; calcitriol increases intestinal phosphate absorption."],
-    ["vitD", "Active vitamin D", "g-neu", "Calcitriol (1,25-dihydroxyvitamin D), synthesized in renal proximal tubules via 1-alpha-hydroxylase under PTH control. Drives gut calcium uptake."],
-    ["bone", "Bone resorption", "g-bad", "Osteoclasts actively dissolving bone matrix. Liberates calcium and phosphate into blood; inhibited by bisphosphonates."],
-    ["gut", "Gut absorption", "g-good", "Fraction of dietary calcium transported across intestinal enterocytes into blood, dependent on active vitamin D."],
+    ["pth", "Parathyroid hormone", "g-eos", "PTH from the glands. Raises calcium by acting on bone, kidney and vitamin D."],
+    ["ca", "Serum calcium", "g-fl", "Calcium in blood. Low brings cramps and spasms, high brings weakness and stones."],
+    ["po4", "Serum phosphate", "g-cyt", "Phosphate in blood. PTH wastes it in urine while the gut absorbs more."],
+    ["vitD", "Active vitamin D", "g-neu", "Switched on in the kidney under PTH control. Tells the gut to absorb calcium."],
+    ["bone", "Bone resorption", "g-bad", "Bone eating cells dissolving mineral. Releases calcium into blood."],
+    ["gut", "Gut absorption", "g-good", "Calcium taken up from food in the gut, driven by active vitamin D."],
   ];
-
   defs.forEach(([id, name, cls, tip], i) => {
     gg[id] = gauge(P, xs[i], y0 + 2, h, w, cls, name, tip);
   });
-}
-
-function initLabels() {
-  const o = L.over;
-  const P = (t, x, y, tx, ty, info) => pill(o, t, x, y, tx, ty, info);
-
-  P("Parathyroid glands", 130, 140, 135, 68,
-    "Four parathyroid glands on the posterior thyroid. Chief cells monitor extracellular ionized calcium via calcium-sensing receptors (CaSR) and release parathyroid hormone (PTH) when calcium drops.");
-
-  P("PTH release", 280, 115, 280, 75,
-    "Parathyroid hormone (PTH): acts rapidly on the kidney to reabsorb calcium and excrete phosphate, stimulates 1-alpha-hydroxylase to activate vitamin D, and drives osteoclast bone resorption.");
-
-  P("Neuromuscular state", 480, 115, 480, 68,
-    "Neuromuscular responsiveness: hypocalcaemia lowers the threshold of sodium channels, causing spontaneous firing, tetany, cramps, and paresthesias. Hypercalcaemia raises the threshold, causing weakness and fatigue.");
-
-  P("Bone resorption", 760, 145, 810, 68,
-    "Bone mineral reservoir: osteoblasts signal osteoclasts via RANKL to resorb mineralized bone, liberating calcium and phosphate into the circulation. PTH accelerates this resorption.");
-
-  P("Negative feedback", 198, 168, 275, 145,
-    "Negative feedback: calcium binding to parathyroid CaSRs activates G-protein signaling that suppresses PTH secretion. Calcitriol also binds nuclear VDRs to repress PTH synthesis.");
-
-  P("Extracellular calcium", 480, 255, 480, 255,
-    "Ionized extracellular calcium: essential for cardiac and neuromuscular action potentials, excitation-contraction coupling, and clotting. Maintained in a narrow physiological range.");
-
-  P("Active vitamin D", 390, 350, 390, 380,
-    "Active vitamin D (calcitriol, 1,25-dihydroxyvitamin D): steroid hormone that up-regulates intestinal calcium and phosphate absorption and suppresses parathyroid hormone transcription.");
-
-  P("Kidneys", 150, 350, 150, 416,
-    "Kidneys: under PTH drive, distal tubules reclaim filtered calcium while proximal tubules waste phosphate and hydroxylate 25-hydroxyvitamin D into active 1,25-dihydroxyvitamin D (calcitriol).");
-
-  P("Small intestine", 800, 350, 800, 416,
-    "Intestinal enterocytes: absorb dietary calcium and phosphate through active channels (TRPV6) and calbindin, heavily dependent on stimulation by active vitamin D.");
-
-  /* Dynamic treatment pills */
-  calvitPill = P("Calcium and calcitriol", 740, 340, 620, 380,
-    "Oral calcium and active calcitriol: replenishes circulating calcium and bypasses impaired renal 1-alpha-hydroxylation to restore gut calcium absorption.");
-
-  fluidsPill = P("Intravenous saline", 210, 310, 270, 280,
-    "Intravenous isotonic saline: expands intravascular volume and induces renal calciuresis, promoting urinary calcium clearance in hypercalcaemia.");
-
-  bispPill = P("Bisphosphonate", 745, 135, 680, 120,
-    "Bisphosphonates: adhere avidly to bone hydroxyapatite crystals and inhibit osteoclast bone resorption, halting calcium release from the skeletal reservoir.");
-
-  cmimPill = P("Calcimimetic", 195, 170, 182, 225,
-    "Calcimimetics (such as cinacalcet): allosterically activate parathyroid calcium-sensing receptors, deceiving the gland into suppressing PTH secretion.");
-
-  ptxPill = P("Parathyroidectomy", 182, 170, 182, 225,
-    "Surgical parathyroidectomy: excision of an overactive parathyroid adenoma or hyperplastic glands, removing the source of autonomous PTH secretion.");
-
-  [calvitPill, fluidsPill, bispPill, cmimPill, ptxPill].forEach((p) => {
-    p.style.opacity = "0";
-    p.style.pointerEvents = "none";
-  });
+  const ox = layers.over;
+  const Q = (t, x, y, tx, ty, info) => pill(ox, t, x, y, tx, ty, info);
+  Q("Glands", 140, 150, 150, 66,
+    "Parathyroid glands on the thyroid. They sense calcium and release PTH when it falls.");
+  const pd = trPTHbone.at(0.3);
+  Q("PTH", pd.x, pd.y, 430, 66,
+    "Parathyroid hormone travelling to bone and kidney. Raises calcium, wastes phosphate.");
+  Q("Muscle", 540, 115, 620, 66,
+    "Muscle and nerve tone follows calcium. Low brings cramp, high brings weakness.");
+  Q("Bone", 790, 140, 810, 66,
+    "Bone mineral store. PTH wakes bone eating cells that release calcium into blood.");
+  Q("Blood calcium", POOL[0], POOL[1], 480, 308,
+    "Blood calcium pool. Bone, gut and kidney all add or remove calcium here.");
+  const kL = nearest(kidO.ports, [80, 335]);
+  Q("Kidney", kL[0], kL[1], 58, 292,
+    "Kidney. Saves calcium, wastes phosphate, and switches on vitamin D under PTH.");
+  const gL = nearest(gutO.ports, [712, 348]);
+  Q("Gut", gL[0], gL[1], 862, 252,
+    "Gut. Absorbs calcium from food when active vitamin D tells it to.");
+  capEl = mk("text", { class: "cp-cap", x: 30, y: 428 }, ox);
+  capEl.textContent = capText(0);
 }
 
 function init() {
+  initOrgans();
   initPanel();
-  initLabels();
 }
 
-function move(pl, tr, sp, getTr) {
+function move(pl, getTr, sp) {
   pl.forEach((p) => {
     if (!p.on) return;
-    const T = getTr ? getTr(p) : tr;
+    const T = getTr(p);
     p.u += (sp / T.len) * 0.05;
     if (p.u >= 1) {
       kill(p);
@@ -206,95 +194,84 @@ function step(dt, m) {
     sm[n] = lerp(sm[n], m[n], k);
   });
 
-  /* Parathyroid gland display */
+  /* glands: failure scars, adenoma growth, sensor glow, surgery ring */
   const isHypo = m.words[1] === "low" && m.words[0] === "low";
   const adenomaActivity = Math.max(0, (sm.pth - 0.55) / 0.45);
   ptScars.setAttribute("opacity", isHypo ? (1 - sm.pth * 1.5).toFixed(2) : "0");
-  ptGlands.setAttribute("opacity", isHypo ? "0.3" : "1");
-
-  const adScale = 1 + adenomaActivity * 1.6 + (adenomaActivity > 0.1 ? 0.08 * Math.sin(tm / 250) : 0);
-  ptAdenoma.setAttribute("transform", "translate(182 170) scale(" + adScale.toFixed(3) + ")");
-  ptAdenomaGlow.setAttribute("opacity", (adenomaActivity * 0.85).toFixed(2));
-
-  ptCasr.setAttribute("stroke-opacity", clamp(0.2 + 0.8 * sm.ca).toFixed(2));
+  const quiet = 1 - 0.45 * Math.max(sm.dCmim, sm.dPtx);
+  ptGlands.forEach((g) => g.setAttribute("opacity", (isHypo ? 0.3 : quiet).toFixed(2)));
+  const adScale = (1 + adenomaActivity * 1.6 + (adenomaActivity > 0.1 ? 0.08 * Math.sin(tm / 250) : 0)) * (1 - 0.75 * sm.dPtx);
+  ptAdenoma.setAttribute("transform", "translate(174 180) scale(" + Math.max(0.2, adScale).toFixed(3) + ")");
+  ptAdenomaGlow.setAttribute("opacity", (adenomaActivity * (1 - sm.dPtx) * 0.85).toFixed(2));
+  ptCasr.setAttribute("stroke-opacity", clamp(0.2 + 0.8 * sm.ca + 0.3 * sm.dCmim, 0, 1).toFixed(2));
   ptPtxRing.setAttribute("opacity", sm.dPtx.toFixed(2));
+  glandWash.setAttribute("opacity", clamp(0.05 + 0.4 * sm.dCmim + 0.4 * sm.dPtx, 0, 0.85).toFixed(2));
 
-  /* Bone and osteoclast */
+  /* bone: osteoclast shrinks and stills as bisphosphonate coats the surface */
   const ocWobble = sm.bone * 0.12 * Math.sin(tm / 180);
   osteoclast.setAttribute("transform", "translate(" + (742 + ocWobble * 15).toFixed(1) + " 145) scale(" + (0.8 + 0.4 * sm.bone).toFixed(2) + ")");
   boneLacuna.setAttribute("stroke-width", (1.5 + 2.5 * sm.bone).toFixed(1));
   bispCoat.setAttribute("opacity", sm.dBisp.toFixed(2));
+  boneWash.setAttribute("opacity", (0.05 + 0.5 * sm.dBisp).toFixed(2));
 
-  /* Kidney and stones */
+  /* kidney stone follows calcium; flush wash shows saline at work */
   const stoneOp = Math.max(0, (sm.ca - 0.68) * 3.2);
   kidneyStone.setAttribute("opacity", stoneOp.toFixed(2));
-  stoneBadge.setAttribute("opacity", stoneOp.toFixed(2));
+  kidWash.setAttribute("opacity", (0.05 + 0.45 * sm.dFluids).toFixed(2));
 
-  /* Gut transport */
+  /* gut pumps and washes: replacement visibly tops up uptake */
   gutPumps.setAttribute("opacity", (0.2 + 0.8 * sm.gut).toFixed(2));
+  gutWash.setAttribute("opacity", (0.06 + 0.5 * sm.dCalVit).toFixed(2));
+  bloodWash.setAttribute("opacity", (0.05 + 0.4 * sm.dCalVit).toFixed(2));
 
-  /* Neuromuscular excitability */
+  /* muscle tone follows calcium */
   if (sm.ca < 0.35) {
     const tremor = Math.sin(tm / 40) * 2.2 * (0.35 - sm.ca) * 6;
     nmMuscle.setAttribute("transform", "translate(" + (488 + tremor).toFixed(1) + " 92)");
     nmSparks.setAttribute("opacity", (0.5 + 0.5 * Math.sin(tm / 70)).toFixed(2));
-    if (nmBadge.textContent !== "tetany and cramps") {
-      nmBadge.textContent = "tetany and cramps";
-      nmBadge.setAttribute("class", "nm-badge nm-badge-bad");
+    if (nmBadge.textContent !== "cramp and spasm") {
+      nmBadge.textContent = "cramp and spasm";
+      nmBadge.setAttribute("class", "cp-badge cp-badge-bad");
     }
   } else if (sm.ca > 0.7) {
     nmMuscle.setAttribute("transform", "translate(488 92)");
     nmSparks.setAttribute("opacity", "0");
-    if (nmBadge.textContent !== "weakness and fatigue") {
-      nmBadge.textContent = "weakness and fatigue";
-      nmBadge.setAttribute("class", "nm-badge nm-badge-warn");
+    if (nmBadge.textContent !== "weak and tired") {
+      nmBadge.textContent = "weak and tired";
+      nmBadge.setAttribute("class", "cp-badge cp-badge-warn");
     }
   } else {
     nmMuscle.setAttribute("transform", "translate(488 92)");
     nmSparks.setAttribute("opacity", "0");
-    if (nmBadge.textContent !== "stable neuromuscular tone") {
-      nmBadge.textContent = "stable neuromuscular tone";
-      nmBadge.setAttribute("class", "nm-badge nm-badge-ok");
+    if (nmBadge.textContent !== "stable muscle tone") {
+      nmBadge.textContent = "stable muscle tone";
+      nmBadge.setAttribute("class", "cp-badge cp-badge-ok");
     }
   }
 
-  /* Treatment overlay pills */
-  calvitPill.style.opacity = sm.dCalVit.toFixed(2);
-  fluidsPill.style.opacity = sm.dFluids.toFixed(2);
-  bispPill.style.opacity = sm.dBisp.toFixed(2);
-  cmimPill.style.opacity = sm.dCmim.toFixed(2);
-  ptxPill.style.opacity = sm.dPtx.toFixed(2);
-
-  [calvitPill, fluidsPill, bispPill, cmimPill, ptxPill].forEach((p) => {
-    p.style.pointerEvents = parseFloat(p.style.opacity) > 0.3 ? "auto" : "none";
-  });
-
-  /* Particle emissions */
+  /* hormone and ion emissions, all model driven */
   acc.pth += dt * sm.pth * 4.2;
   while (acc.pth >= 1) {
     acc.pth--;
     const p = free(plPTH);
-    if (p) emit(p, Math.random() < 0.65 ? 0 : 1);
+    if (p) emit(p, Math.random() < 0.6 ? 0 : 1);
   }
-
   acc.vitd += dt * sm.vitD * 3.8;
   while (acc.vitd >= 1) {
     acc.vitd--;
     const p = free(plVitD);
     if (p) emit(p, Math.random() < 0.8 ? 0 : 1);
   }
-
   acc.ca += dt * (sm.bone * 2.5 + sm.gut * 2.8 + sm.ca * 2.0);
   while (acc.ca >= 1) {
     acc.ca--;
     const p = free(plCa);
     if (p) {
       const r = Math.random();
-      const k = r < 0.3 ? 0 : r < 0.6 ? 1 : r < 0.75 ? 2 : r < 0.9 ? 3 : 4;
-      emit(p, k);
+      const kk = r < 0.3 ? 0 : r < 0.6 ? 1 : r < 0.75 ? 2 : r < 0.9 ? 3 : 4;
+      emit(p, kk);
     }
   }
-
   acc.po4 += dt * (sm.bone * 1.5 + sm.gut * 1.5);
   while (acc.po4 >= 1) {
     acc.po4--;
@@ -302,59 +279,99 @@ function step(dt, m) {
     if (p) emit(p, Math.random() < 0.5 ? 0 : 1);
   }
 
-  /* Treatment particle emissions */
-  acc.txCalVit += dt * sm.dCalVit * 2.0;
+  /* treatment actions, each animated at its target */
+  acc.txCalVit += dt * sm.dCalVit * 2.4;
   while (acc.txCalVit >= 1) {
     acc.txCalVit--;
     const p = free(plTxCal);
     if (p) emit(p);
   }
-
-  acc.txFluids += dt * sm.dFluids * 2.5;
+  acc.txFluids += dt * sm.dFluids * 3.0;
   while (acc.txFluids >= 1) {
     acc.txFluids--;
     const p = free(plTxFl);
     if (p) emit(p);
   }
-
   acc.txBisp += dt * sm.dBisp * 1.8;
   while (acc.txBisp >= 1) {
     acc.txBisp--;
     const p = free(plTxBisp);
-    if (p) emit(p);
+    if (p) { emit(p); p.t = 0; }
   }
-
   acc.txCmim += dt * sm.dCmim * 2.0;
   while (acc.txCmim >= 1) {
     acc.txCmim--;
     const p = free(plTxCmim);
-    if (p) emit(p);
+    if (p) { emit(p); p.t = 0; }
   }
 
-  /* Particle movements */
-  move(plPTH, null, 48, (p) => (p.k === 0 ? tracks.pth_bone : tracks.pth_kid));
-  move(plVitD, null, 45, (p) => (p.k === 0 ? tracks.kid_gut : tracks.kid_pth));
-  move(plCa, null, 55, (p) => {
-    if (p.k === 0) return tracks.bone_ca;
-    if (p.k === 1) return tracks.gut_ca;
-    if (p.k === 2) return tracks.ca_pth;
-    if (p.k === 3) return tracks.ca_nm;
-    return tracks.ca_kid;
+  move(plPTH, (p) => (p.k === 0 ? trPTHbone : trPTHkid), 48);
+  move(plVitD, (p) => (p.k === 0 ? trVitD : trVitG), 45);
+  move(plCa, (p) => {
+    if (p.k === 0) return trBoneCa;
+    if (p.k === 1) return trGutCa;
+    if (p.k === 2) return trFb;
+    if (p.k === 3) return trCaM;
+    return trCaK;
+  }, 55);
+  move(plPO4, (p) => (p.k === 0 ? trBoneCa : trGutCa), 48);
+  move(plTxCal, () => trGutCa, 40);
+
+  /* saline flush: carried to the kidney, then washed down and out */
+  plTxFl.forEach((p) => {
+    if (!p.on) return;
+    if (p.u < 1) {
+      p.u += (45 / trCaK.len) * 0.05;
+      if (p.u >= 1) { p.u = 1; p.t = 0; const q = trCaK.at(1); p.x = q.x; p.y = q.y; }
+      else { const q = trCaK.at(p.u); p.x = q.x; p.y = q.y; }
+      p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    } else {
+      p.t += dt;
+      p.y += 170 * dt;
+      p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+      p.e.setAttribute("opacity", clamp(1 - p.t / 2.2).toFixed(2));
+      if (p.t > 2.2) kill(p);
+    }
   });
-  move(plPO4, null, 48, (p) => (p.k === 0 ? tracks.bone_ca : tracks.gut_ca));
 
-  move(plTxCal, tracks.gut_tx, 40);
-  move(plTxFl, tracks.kid_tx, 45);
-  move(plTxBisp, tracks.bone_tx, 38);
-  move(plTxCmim, tracks.pt_tx, 40);
+  /* bisphosphonate: travels to bone, sits on the surface, then fades */
+  plTxBisp.forEach((p) => {
+    if (!p.on) return;
+    if (p.u < 1) {
+      p.u += (38 / trPoolBone.len) * 0.05;
+      if (p.u >= 1) { p.t = 5; p.x = BONF[0] + rnd(-14, 14); p.y = BONF[1] + rnd(-22, 22); }
+      else { const q = trPoolBone.at(p.u); p.x = q.x; p.y = q.y; }
+      p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    } else {
+      p.t -= dt;
+      p.e.setAttribute("opacity", clamp(p.t / 5).toFixed(2));
+      if (p.t <= 0) kill(p);
+    }
+  });
 
-  /* Gauges */
+  /* calcimimetic: travels to the gland, sits on the sensor, then fades */
+  plTxCmim.forEach((p) => {
+    if (!p.on) return;
+    if (p.u < 1) {
+      p.u += (40 / trPoolGland.len) * 0.05;
+      if (p.u >= 1) { p.t = 5; p.x = CASR[0] + rnd(-4, 4); p.y = CASR[1] + rnd(-5, 5); }
+      else { const q = trPoolGland.at(p.u); p.x = q.x; p.y = q.y; }
+      p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    } else {
+      p.t -= dt;
+      p.e.setAttribute("opacity", clamp(p.t / 5).toFixed(2));
+      if (p.t <= 0) kill(p);
+    }
+  });
+
+  /* gauges */
   gg.pth.set(sm.pth, wordOf(sm.pth, 0.3, 0.7, ["low", "normal", "high"]));
   gg.ca.set(sm.ca, wordOf(sm.ca, 0.35, 0.7, ["low", "normal", "high"]));
   gg.po4.set(sm.po4, wordOf(sm.po4, 0.35, 0.65, ["low", "normal", "high"]));
   gg.vitD.set(sm.vitD, wordOf(sm.vitD, 0.3, 0.7, ["low", "normal", "high"]));
   gg.bone.set(sm.bone, wordOf(sm.bone, 0.35, 0.7, ["quiescent", "balanced", "high"]));
   gg.gut.set(sm.gut, wordOf(sm.gut, 0.35, 0.7, ["poor", "adequate", "high"]));
+  if (drug !== capDrug) { capDrug = drug; const t = capText(drug); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 
 run({ init, step });

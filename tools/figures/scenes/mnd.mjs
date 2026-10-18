@@ -27,6 +27,7 @@ function modelOf(S, level, drug) {
   const ril = drug === 1 ? 1 : 0, sup = drug === 2 ? 1 : 0, vent = drug === 3 ? 1 : 0;
   const cl = (v) => Math.max(0, Math.min(1, v));
   const D = cl(a * (ril ? 0.82 : 1));                                   // motor neuron death, slowed a little by the riluzole concept
+  const Drive = cl((0.25 + 0.75 * a) * (ril ? 0.35 : 1));               // excitotoxic glutamate drive, calmed by the riluzole concept
   const Agg = cl(0.12 + 0.82 * a * (ril ? 0.78 : 1));                   // TDP-43 protein aggregate burden
   const UMN = cl(0.08 + 0.88 * D);                                      // upper motor neuron loss
   const LMN = cl(0.05 + 0.85 * D);                                      // lower motor neuron loss
@@ -39,23 +40,26 @@ function modelOf(S, level, drug) {
   const Func = cl(1 - 0.55 * Wast - 0.35 * Bulb - 0.25 * (1 - Breath) + sup * 0.38 + vent * 0.12);
   const Neur = cl(1 - D);                                               // surviving motor neurons
   const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
-  const words = [w(Neur, 0.35, 0.7, ["few left", "reduced", "many left"]), w(Wast, 0.3, 0.62, ["preserved", "wasting", "severe wasting"]), w(Breath, 0.4, 0.68, ["failing", "strained", "supported"])];
-  return { a, ril, sup, vent, D, Agg, UMN, LMN, Wast, Spast, Fasc, Bulb, Resp, Breath, Func, Neur, words, readout: "motor neurons " + words[0] + " · muscle " + words[1] + " · breathing " + words[2] };
+  const words = [w(Neur, 0.35, 0.7, ["few left", "reduced", "many left"]), w(Wast, 0.3, 0.62, ["preserved", "wasting", "severe wasting"]), w(Breath, 0.4, 0.68, ["failing", "strained", "supported"]), w(Drive, 0.35, 0.65, ["calm", "busy", "intense"]), w(Func, 0.35, 0.7, ["a struggle", "limited", "steady"])];
+  return { a, ril, sup, vent, D, Drive, Agg, UMN, LMN, Wast, Spast, Fasc, Bulb, Resp, Breath, Func, Neur, words, readout: "motor neurons " + words[0] + " · muscle " + words[1] + " · breathing " + words[2] + " · nerve drive " + words[3] + " · daily tasks " + words[4] };
 }
 const TESTS = [
-  [0, 0, "motor neurons many left · muscle preserved · breathing supported"],
-  [1, 0, "motor neurons reduced · muscle wasting · breathing strained"],
-  [2, 0, "motor neurons few left · muscle severe wasting · breathing failing"],
-  [2, 3, "motor neurons few left · muscle severe wasting · breathing supported"],
+  [2, 0, "motor neurons few left · muscle severe wasting · breathing failing · nerve drive intense · daily tasks a struggle"],
+  [2, 3, "motor neurons few left · muscle severe wasting · breathing supported · nerve drive intense · daily tasks a struggle"],
+  [1, 0, "motor neurons reduced · muscle wasting · breathing strained · nerve drive intense · daily tasks limited"],
+  [1, 1, "motor neurons reduced · muscle wasting · breathing strained · nerve drive calm · daily tasks limited"],
+  [1, 2, "motor neurons reduced · muscle wasting · breathing strained · nerve drive intense · daily tasks steady"],
 ];
 
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
 <rect class="mn-box" x="560" y="55" width="370" height="80" rx="14"/>
-<text class="sc-zone" x="34" y="68">MOTOR CORTEX</text>
-<text class="sc-zone" x="580" y="74">WHY NEURONS DIE</text>
+<text class="sc-zone" x="580" y="74">WHY NERVE CELLS DIE</text>
 <g id="tracts"></g>
+<g id="brainSlot"></g>
+<g id="lungSlot"></g>
+<g id="eyeSlot"></g>
 <g id="organs"></g>
 <g id="cells"></g>
 <g id="parts"></g>
@@ -64,9 +68,9 @@ const body = `
 
 buildScene({
   id: "motor-neuron-disease", fig: "Fig 1", title: "Motor neuron disease: upper and lower motor neurons lost", W, H, body,
-  label: "An animated motor pathway. An upper motor neuron in the motor cortex sends its axon down the corticospinal tract to a lower motor neuron in the spinal cord, which drives limb muscle. A bulbar motor neuron drives the tongue for speech and swallowing, and a further lower motor neuron drives the diaphragm. As the disease advances both upper and lower motor neurons die, so muscle wastes and fasciculates while movement becomes spastic and stiff. Sensation and eye movements are spared. Gauges show surviving motor neurons, wasting, fasciculations, spasticity, bulbar signs and breathing. Treatment choices show the riluzole concept, multidisciplinary support and ventilatory support.",
+  label: "An animated motor pathway. An upper motor neuron in the motor cortex sends orders down the cord to lower motor neurons, which drive limb muscle, the tongue for speech and swallowing, and the diaphragm that fills the lungs. As the disease advances both upper and lower motor neurons die, so muscle wastes and twitches while movement stiffens, speech slurs and breathing fails. Sight and feeling are spared. A slider sets the stage, and treatment choices show the riluzole concept, multidisciplinary support and ventilatory support.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "mnd.page.js"), "utf8"), modelOf, MD, tests: TESTS,
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "mnd.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
   withoutLabel: "Without treatment", withLabel: "With ventilatory support",
   sourcesLis: [
     "<strong>How motor neuron disease develops.</strong> In amyotrophic lateral sclerosis, the commonest adult form, upper motor neurons in the motor cortex and lower motor neurons in the brainstem and spinal cord die together, so brisk reflexes and spasticity sit beside wasting, weakness and fasciculations. Most cases are sporadic, with no family history. A minority are inherited: mutant genes include an expanded intronic repeat in C9orf72, where short repeats are expanded many times over, and changes in genes for proteins such as the survival and RNA handling proteins. Inside dying neurons, TDP-43, a protein that normally lives in the nucleus, clumps in the cytoplasm as aggregates, and this protein pathology is a hallmark of the disease group. Excitotoxic drive, faulty RNA handling, and failure of protein clearing are among the mechanisms proposed, because no single cause explains every case. Other patterns in the group include primary lateral sclerosis, where upper motor neurons dominate, and childhood spinal muscular atrophy, where loss of the survival motor neuron protein weakens lower motor neurons early in onset. This is standard teaching in neurology texts and was not checked against a linked source here, so it is flagged for review.",
@@ -76,9 +80,7 @@ buildScene({
   simplified: "The separate named patterns and genes beyond the examples named, the debate about where the disease begins, spread from cell to cell, cognitive and behavioural change in part of the group, investigations, eligibility rules for support, and all doses and targets are left out. Counts and speeds are illustrative, and the figure does not say how any person should be treated.",
   extraCss: `
 .mn-box{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
-.mn-cortex{fill:color-mix(in srgb,var(--c-mac) 22%,var(--c-tis));stroke:color-mix(in srgb,var(--c-mac) 55%,#000);stroke-width:1}
 .mn-cord{fill:color-mix(in srgb,var(--c-endo) 20%,var(--c-tis));stroke:color-mix(in srgb,var(--c-endo) 55%,#000);stroke-width:1}
-.mn-stem{fill:color-mix(in srgb,var(--c-endo) 32%,var(--c-tis));stroke:color-mix(in srgb,var(--c-endo) 55%,#000);stroke-width:1}
 .mn-tract{fill:none;stroke:var(--c-mac);stroke-width:3;stroke-linecap:round;opacity:.75}
 .mn-axon{fill:none;stroke:var(--c-lymph);stroke-width:2.4;stroke-linecap:round;opacity:.8}
 .mn-sens{fill:none;stroke:var(--c-good);stroke-width:2;stroke-dasharray:5 4;stroke-linecap:round;opacity:.8}
@@ -86,18 +88,23 @@ buildScene({
 .mn-fibre{stroke:color-mix(in srgb,var(--c-rbc) 65%,#fff);stroke-width:2;opacity:.55;fill:none}
 .mn-tongue{fill:color-mix(in srgb,var(--c-rbc) 45%,var(--c-tis));stroke:color-mix(in srgb,var(--c-rbc) 60%,#000);stroke-width:1}
 .mn-diaph{fill:color-mix(in srgb,var(--c-fl) 30%,var(--c-tis));stroke:var(--c-fl);stroke-width:1.4}
-.mn-spared{fill:var(--anatomy-card);stroke:var(--c-good);stroke-width:1.2}
-.mn-eye{fill:var(--anatomy-paper);stroke:var(--anatomy-strong);stroke-width:1.4}
-.mn-iris{fill:var(--c-lymph)}
 .mn-check{fill:none;stroke:var(--c-good);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .mn-dna{fill:none;stroke:var(--c-cyt);stroke-width:2;stroke-linecap:round}
 .mn-dna2{fill:none;stroke:var(--c-cyt2);stroke-width:2;stroke-linecap:round}
 .mn-rung{stroke:var(--anatomy-mid);stroke-width:1}
 .mn-mask{fill:none;stroke:var(--c-fl);stroke-width:2;stroke-linecap:round}
+.mn-flow{fill:none;stroke:var(--c-fl);stroke-width:2;stroke-dasharray:5 4;stroke-linecap:round}
+.mn-halo{fill:color-mix(in srgb,var(--c-good) 30%,transparent);stroke:var(--c-good);stroke-width:2}
+.mn-help{fill:var(--c-good);stroke:color-mix(in srgb,var(--c-good) 50%,#000);stroke-width:.6}
+.mn-shield{fill:none;stroke:var(--c-good);stroke-width:2.5;stroke-linecap:round}
+.mn-glow{fill:#ff9a3d;stroke:none}
+.mn-bglow{fill:var(--c-fl);stroke:none}
+.mn-cap{fill:var(--anatomy-strong);font-size:12px}
+.mn-capb{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}
+.mn-capb2{fill:var(--c-good);stroke:none}
 .cl-umn{--cc:var(--c-mac)}.cl-lmn{--cc:var(--c-lymph)}.cl-bulb{--cc:var(--c-eos)}.cl-sens{--cc:var(--c-good)}
 .p-sig{--cc:#ffd24a}.p-agg{--cc:var(--c-cyt)}.p-glu{--cc:#ff9a3d}.p-air{--cc:var(--c-fl)}
 .mn-spark{stroke:#ffd24a;stroke-width:1.6;stroke-linecap:round;fill:none}
-.mn-help{fill:var(--c-good);stroke:color-mix(in srgb,var(--c-good) 50%,#000);stroke-width:.6}
-.dr-g-fill.g-neur{fill:var(--c-good)}.dr-g-fill.g-wast{fill:var(--c-bad)}.dr-g-fill.g-fasc{fill:var(--c-neut)}.dr-g-fill.g-spast{fill:var(--c-mac)}.dr-g-fill.g-bulb{fill:var(--c-eos)}
+.dr-g-fill.g-neur{fill:var(--c-good)}.dr-g-fill.g-wast{fill:var(--c-bad)}.dr-g-fill.g-fasc{fill:var(--c-neut)}.dr-g-fill.g-spast{fill:var(--c-mac)}.dr-g-fill.g-bulb{fill:var(--c-eos)}.dr-g-fill.g-daily{fill:var(--c-fl)}
 `,
 });

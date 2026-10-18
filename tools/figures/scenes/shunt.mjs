@@ -25,12 +25,19 @@ const MD = {
   drugNames: ["no treatment", "defect closed", "prostaglandin keeping duct open"],
 };
 function modelOf(S, level, drug) {
+  const TAB = {
+    defect: ["ASD", "VSD", "PDA", "VSD", "VSD"],
+    shunt: [0.45, 0.65, 0.7, -0.7, -0.75],
+    Qp: [0.66, 0.8, 0.84, 0.36, 0.3],
+    Qs: [0.82, 0.8, 0.78, 0.62, 0.6],
+    PAP: [0.3, 0.5, 0.55, 0.95, 0.3],
+  };
   const cl = (v) => Math.max(0, Math.min(1, v));
-  const defect = ["ASD", "VSD", "PDA", "VSD", "VSD"][level];
-  let shunt = [0.45, 0.65, 0.7, -0.7, -0.75][level];
-  let Qp = [0.66, 0.8, 0.84, 0.36, 0.3][level];
-  let Qs = [0.82, 0.8, 0.78, 0.62, 0.6][level];
-  let PAP = [0.3, 0.5, 0.55, 0.95, 0.3][level];
+  const defect = TAB.defect[level];
+  let shunt = TAB.shunt[level];
+  let Qp = TAB.Qp[level];
+  let Qs = TAB.Qs[level];
+  let PAP = TAB.PAP[level];
   let obstruct = level === 4 ? 0.85 : 0;
   let ductOpen = level === 2 ? 0.9 : 0;
   let closed = 0;
@@ -62,69 +69,66 @@ function modelOf(S, level, drug) {
   return { defect, level, shunt, mag, Qp: cl(Qp), Qs: cl(Qs), PAP: cl(PAP), obstruct, ductOpen, closed, cyan: cl(cyan), satArt: cl(satArt), satR: cl(satR), satPA: cl(satPA), satL: cl(satL), rvLoad: cl(rvLoad), words, readout: "shunt " + words[0] + " · pulmonary flow " + words[1] + " · saturation " + words[2] };
 }
 const TESTS = [
-  [0, 0, "shunt left to right · pulmonary flow normal · saturation normal"],
   [1, 0, "shunt left to right · pulmonary flow high · saturation normal"],
+  [1, 1, "shunt none · pulmonary flow normal · saturation normal"],
   [3, 0, "shunt right to left · pulmonary flow low · saturation low"],
   [4, 2, "shunt right to left · pulmonary flow normal · saturation reduced"],
 ];
 
-/* ---------------- static layout ---------------- */
+/* ---------------- static layout ----------------
+ * Organ art is placed by shunt.page.js into the slots below; vessels are
+ * redrawn there from the organ ports so blood meets real anatomy. */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<text class="sc-zone" x="34" y="68">CIRCULATION</text>
-<g id="vessels"></g>
-<g id="lungs">
-  <g class="hot" tabindex="0" data-info="Lungs: blood picks up oxygen here. Extra left to right shunt flow overloads the lungs; too little flow leaves blood poorly oxygenated.">
-    <ellipse class="sh-lung" cx="390" cy="108" rx="64" ry="34"/><ellipse class="sh-lung" cx="570" cy="108" rx="64" ry="34"/>
-    <text class="sc-lab" x="390" y="112" text-anchor="middle">LUNG</text><text class="sc-lab" x="570" y="112" text-anchor="middle">LUNG</text>
-  </g>
+<g id="vessels">
+  <path id="vPA" class="sh-vessel sh-pa" d="M490 260L430 190L340 130"/>
+  <path id="vPAb" class="sh-vessel sh-pa" d="M490 260L560 190L620 130"/>
+  <path id="vPV" class="sh-vessel sh-oxy" d="M340 130L400 190L470 260"/>
+  <path id="vPVb" class="sh-vessel sh-oxy" d="M620 130L560 190L470 260"/>
+  <path id="vAo" class="sh-vessel sh-oxy" d="M490 200L500 140L520 64L600 62L700 62L700 380L580 413"/>
+  <path id="vVein" class="sh-vessel sh-deoxy" d="M380 413L300 395L300 300L480 330"/>
+  <path id="vDuct" class="sh-duct" d="M520 140L520 64"/>
+  <path id="vASD" class="sh-shunt" d="M445 260L515 260"/>
+  <path id="vVSD" class="sh-shunt" d="M445 320L515 320"/>
 </g>
-<g id="heart">
-  <rect class="sh-outer" x="340" y="190" width="280" height="200" rx="22"/>
-  <rect class="sh-septum" x="468" y="202" width="24" height="184"/>
-  <rect class="sh-septum" x="352" y="290" width="256" height="8"/>
-  <g class="hot" tabindex="0" data-info="Left atrium: receives oxygen rich blood from the lungs. In a right to left shunt its blood mixes with oxygen poor blood and saturation falls."><rect id="chLA" class="sh-ch" x="352" y="202" width="116" height="88" rx="12"/><text class="sh-chlab" x="415" y="222" text-anchor="middle">Left atrium</text><text id="satLA" class="sh-sat" x="415" y="238" text-anchor="middle">oxygen rich</text></g>
-  <g class="hot" tabindex="0" data-info="Right atrium: receives oxygen poor blood from the body. An atrial septal defect lets oxygen rich blood cross into it from the left."><rect id="chRA" class="sh-ch" x="492" y="202" width="116" height="88" rx="12"/><text class="sh-chlab" x="540" y="222" text-anchor="middle">Right atrium</text><text id="satRA" class="sh-sat" x="540" y="238" text-anchor="middle">oxygen poor</text></g>
-  <g class="hot" tabindex="0" data-info="Left ventricle: pumps oxygen rich blood into the aorta to the body. A ventricular septal defect connects it to the right ventricle."><rect id="chLV" class="sh-ch" x="352" y="298" width="116" height="88" rx="12"/><text class="sh-chlab" x="415" y="318" text-anchor="middle">Left ventricle</text><text id="satLV" class="sh-sat" x="415" y="334" text-anchor="middle">oxygen rich</text></g>
-  <g class="hot" tabindex="0" data-info="Right ventricle: pumps oxygen poor blood to the lungs. It thickens when pulmonary pressure is high or its outlet is narrowed, as in tetralogy."><rect id="chRV" class="sh-ch" x="492" y="298" width="116" height="88" rx="12"/><text class="sh-chlab" x="540" y="318" text-anchor="middle">Right ventricle</text><text id="satRV" class="sh-sat" x="540" y="334" text-anchor="middle">oxygen poor</text></g>
-  <g id="defASD"><rect class="sh-hole" x="468" y="255" width="24" height="22" rx="6"/></g>
-  <g id="defVSD"><rect class="sh-hole" x="468" y="351" width="24" height="22" rx="6"/></g>
+<g class="hot" tabindex="0" data-info="Body: uses oxygen from aorta blood and sends used blood back to the heart. Blue means blue blood is reaching the body.">
+  <rect id="bodyRect" class="sh-body" x="380" y="398" width="200" height="30" rx="15"/>
 </g>
-<g id="bodybox">
-  <g class="hot" tabindex="0" data-info="Body tissues: use oxygen and return oxygen poor blood to the right atrium. Blue colour here means cyanosis from a right to left shunt.">
-    <rect id="bodyRect" class="sh-body" x="350" y="398" width="280" height="30" rx="15"/><text class="sh-chlab" x="490" y="412" text-anchor="middle">BODY</text>
-  </g>
-</g>
-<g id="flow"></g><g id="shuntflow"></g><g id="marks"></g><g id="over"></g><g id="panel"></g>`;
+<g id="lungSlot"></g>
+<g id="heartSlot"></g>
+<g id="flow"></g><g id="marks"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "congenital-heart-shunts", fig: "Fig 1", title: "Congenital heart shunts: holes, duct and reversed flow", W, H, body,
-  label: "An animated heart with four chambers, lungs above and the body below. An atrial septal defect, ventricular septal defect or patent ductus arteriosus lets blood shunt left to right and overload the lungs. Raised pulmonary pressure can reverse the shunt in Eisenmenger physiology, and tetralogy of Fallot shunts right to left past a narrowed pulmonary outlet, causing cyanosis. Chamber colours show oxygen saturation and arrows show flow. Treatments shown are closing the defect and prostaglandin to keep the duct open.",
+  label: "An animated heart with lungs above and the body below. An atrial septal defect, ventricular septal defect or patent ductus arteriosus lets blood shunt left to right and overload the lungs. Raised lung pressure can reverse the shunt in Eisenmenger physiology, and tetralogy of Fallot shunts right to left past a narrowed lung outlet, causing blue colour. Vessel colours show oxygen level and moving dots show flow. Treatments shown are closing the defect and prostaglandin to keep the duct open.",
   caption: "Schematic, not to scale. Speeds, colours and gauge levels are qualitative and illustrative; no doses, sizes or numbers are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "shunt.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "shunt.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With defect closed",
   sourcesLis: [
-    "<strong>Left to right shunts.</strong> In an atrial septal defect, ventricular septal defect and patent ductus arteriosus, higher pressure on the left side drives oxygen rich blood back into the right heart or pulmonary artery. Pulmonary blood flow rises, the lungs and left heart are volume loaded, and over time pulmonary vascular pressure can rise. This is standard teaching in paediatrics and cardiology texts and was not checked against a linked source here, so it is flagged for review.",
-    "<strong>Reversal and tetralogy.</strong> In Eisenmenger physiology pulmonary vascular resistance exceeds systemic resistance, the shunt reverses to right to left, and oxygen poor blood reaches the body, causing cyanosis. Closing the defect then removes a pressure relief route and can harm. In tetralogy of Fallot a ventricular septal defect with a narrowed right ventricular outlet drives a right to left shunt and reduced pulmonary flow; a duct kept open by prostaglandin can add pulmonary flow as a temporary teaching concept. Definitive care is specialist and surgical, and this figure does not describe any patient care.",
+    "<strong>Left to right shunts.</strong> In an atrial septal defect, ventricular septal defect and patent ductus arteriosus, higher pressure on the left side drives oxygen rich blood back into the right heart or lung artery. Lung blood flow rises, the lungs and left heart are volume loaded, and over time lung vessel pressure can rise. This is standard teaching in paediatrics and cardiology texts and was not checked against a linked source here, so it is flagged for review.",
+    "<strong>Reversal and tetralogy.</strong> In Eisenmenger physiology lung vessel resistance exceeds body resistance, the shunt reverses to right to left, and oxygen poor blood reaches the body, causing blue colour. Closing the defect then removes a pressure relief route and can harm. In tetralogy of Fallot a ventricular septal defect with a narrowed right ventricular outlet drives a right to left shunt and reduced lung flow; a duct kept open by prostaglandin can add lung flow as a temporary teaching concept. Definitive care is specialist and surgical, and this figure does not describe any patient care.",
     "<strong>Treatment ideas shown.</strong> Closing the defect for a simple left to right shunt, and prostaglandin only as the concept of keeping the ductus arteriosus open. No drug name beyond the class, dose or timing is shown.",
   ],
-  simplified: "Defect size and location, pressure measurements, pulmonary vascular resistance testing, associated lesions, endocarditis, heart failure staging, surgical and catheter techniques, prostaglandin indications in detail, and all doses are left out. Colours, counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
+  simplified: "Defect size and location, pressure measurements, lung vessel resistance testing, associated lesions, endocarditis, heart failure staging, surgical and catheter techniques, prostaglandin indications in detail, and all doses are left out. Colours, counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
   extraCss: `
-.sh-outer{fill:color-mix(in srgb,var(--c-rbc) 16%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.4}
-.sh-septum{fill:color-mix(in srgb,var(--c-rbc) 34%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 55%,#000);stroke-width:.8}
-.sh-ch{stroke:color-mix(in srgb,var(--anatomy-strong) 35%,#000);stroke-width:1}
-.sh-chlab{fill:var(--anatomy-strong);font:600 10.5px system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;pointer-events:none}
-.sh-sat{fill:var(--anatomy-text);font:9px system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;pointer-events:none;opacity:.85}
-.dr-fig text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-.sh-lung{fill:color-mix(in srgb,var(--c-fl) 30%,var(--anatomy-paper));stroke:var(--c-fl);stroke-width:1.3}
-.sh-body{fill:#8fb8dd;stroke:var(--anatomy-mid);stroke-width:1.2}
-.sh-hole{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.4;stroke-dasharray:3 2}
 .sh-vessel{fill:none;stroke-linecap:round;stroke-linejoin:round}
-.sh-duct{fill:none;stroke:#e8a13a;stroke-width:7;stroke-linecap:round}
+.sh-oxy{stroke:var(--c-rbc);stroke-width:8}
+.sh-deoxy{stroke:var(--c-cyt2);stroke-width:7}
+.sh-pa{stroke:var(--c-cyt2);stroke-width:8}
+.sh-duct{fill:none;stroke:#e8a13a;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+.sh-shunt{fill:none;stroke:var(--c-cyt);stroke-width:5;stroke-linecap:round;stroke-dasharray:7 5}
+.sh-body{fill:#8fb8dd;stroke:var(--anatomy-mid);stroke-width:1.2}
+.sh-cap{fill:var(--anatomy-strong);font-size:12px}
+.sh-glow-patch{fill:var(--c-good)}
+.sh-glow-pge{fill:#f2b84a}
+.sh-strain{fill:var(--c-bad)}
+.sh-lunghalo{fill:var(--c-fl)}
+.sh-patch{fill:none;stroke:var(--c-good);stroke-width:9;stroke-linecap:round}
+.sh-clamp{fill:none;stroke:var(--c-good);stroke-width:5;stroke-linecap:round}
 .sh-sten{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.6}
-.sh-x{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.6}.sh-xx{fill:none;stroke:var(--c-bad);stroke-width:2.2;stroke-linecap:round}
-.sh-note{fill:var(--c-bad);font:600 10px system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;pointer-events:none}
 .p-blood{stroke:color-mix(in srgb,#000 25%,transparent);stroke-width:.5}
+.p-close{--cc:var(--c-good)}
+.p-pge{--cc:#f2b84a}
 .dr-g-fill.g-pulm{fill:var(--c-fl)}.dr-g-fill.g-press{fill:var(--c-neut)}
 `,
 });
