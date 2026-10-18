@@ -1,0 +1,1188 @@
+{
+  "_comment": "Gynaecology disease pathway: infertility. Same architecture as pneumonia and uterine fibroid: almost every finding is an emphasis overlay on a shared core/obgyn skill. Infertility's own contribution is the couple as the unit of evaluation (duration of trying frames everything), the three-limb workup (semen, ovulation with reserve, tubes with cavity), and age-gated management from timing advice to assisted techniques. History and presentation skills live in the shared fragment shared-infertility.json and are referenced here by id.",
+  "id": "infertility",
+  "name": "Infertility",
+  "fullName": "Infertility: couple evaluation and first-line treatment",
+  "system": "gynaecology",
+  "kbRef": "infertility_and_contraception",
+  "oneLine": "A year of trying without conception, and the couple evaluated as one patient",
+  "subtitle": "Couple evaluation and first-line treatment",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What infertility is, and why the couple is the patient",
+      "skills": [
+        "skill.infertility.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the couple",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Two ages set the pre-test probability before a symptom is mentioned",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected infertility, record both partners with ages, occupation and any separation for work. Her age dominates prognosis, with evaluation starting after 6 months of trying when she is over 35 and at once when she is over 40, so age is never a formality here."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of the trying",
+      "blurb": "Duration, frequency and timing, plus her cycles and his past",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.menstrual_history",
+        "skill.hx.obg.gynae_symptoms",
+        "skill.hx.infertility.trying"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical presentation reads in months to years, not days: two years of regular unprotected intercourse without conception. That chronic tempo alone should move you away from acute gynaecology before anything else is known."
+        },
+        "skill.hx.obg.menstrual_history": {
+          "expect": "Expect the cycle pattern to carry the ovulation answer: regular monthly flow with premenstrual symptoms usually means ovulation, while long irregular gaps point to anovulation, most often polycystic ovary syndrome. Quantify interval, duration and flow in exact terms."
+        },
+        "skill.hx.obg.gynae_symptoms": {
+          "expect": "Expect the pain and discharge questions to hunt tubal and endometriotic disease: cyclical pelvic pain with dysmenorrhoea fits endometriosis, while past discharge with lower abdominal pain fits pelvic inflammatory disease with tubal scarring. Always ask about painful intercourse, which is volunteered only when asked."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The background that explains half of all couples",
+      "skills": [
+        "skill.hx.obg.gynae_background",
+        "skill.hx.infertility.risk"
+      ],
+      "emphasis": {
+        "skill.hx.obg.gynae_background": {
+          "expect": "Contraceptive past, cervical screening, sexual history and smoking all sit in this shared skill, but here the load bearing items are when contraception stopped, any past conception with its outcome, and his smoking and alcohol alongside hers, since male and combined factors explain about half of couples."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Weight, hair, milk and thyroid before the pelvis",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for the endocrine signature before anything else: body mass index at either extreme, hirsutism and acne, galactorrhoea on breast expression, and thyroid enlargement or scar. An infertile woman often looks otherwise well, so these are the signs that do the work."
+        },
+        "skill.gen.vitals": {
+          "expect": "Expect normal vitals in uncomplicated infertility: this is a chronic outpatient condition, not an acute illness. Hypertension, tachycardia or fever here point to a separate problem, such as thyroid disease or intercurrent infection, rather than to the infertility itself."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Pelvic examination",
+      "blurb": "A uterus that explains, and fornices that must be free",
+      "skills": [
+        "skill.exam.obg.gynae_abdominal",
+        "skill.exam.obg.vulval_inspect",
+        "skill.exam.obg.speculum_insert",
+        "skill.exam.obg.speculum_inspect",
+        "skill.exam.obg.bimanual"
+      ],
+      "emphasis": {
+        "skill.exam.obg.gynae_abdominal": {
+          "expect": "Expect a usually normal abdomen in infertility, examined with an empty bladder. A palpable pelvic mass changes the axis at once: a firm uterine lump points to fibroid distorting the cavity, while a fixed tender mass points to endometriosis or chronic pelvic inflammatory disease."
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "expect": "Expect a normal vulva in most infertile women. Discharge, excoriation or tenderness here keeps infective and tubal disease on the list, and clitoromegaly, though rare, points to severe androgen excess worth pursuing."
+        },
+        "skill.exam.obg.speculum_insert": {
+          "expect": "Expect a straightforward speculum examination: the procedure itself is unchanged, but gentleness and a chaperone matter because this couple is often anxious. Note discharge in the vault while inserting, since it is the visible end of the tubal risk you asked about."
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "expect": "Expect a healthy cervix in most infertile women. The job here is exclusion: a suspicious cervix, postcoital bleeding or foul discharge each point away from simple anovulation toward cervical pathology or infection, and must not be missed while concentrating on conception."
+        },
+        "skill.exam.obg.bimanual": {
+          "expect": "Expect a normal mobile uterus with free fornices in anovulatory infertility: the examination excludes rather than confirms. A fixed retroverted uterus with nodularity, cervical motion tenderness, or a lateral adnexal mass each point to endometriosis, pelvic inflammatory disease or tubal disease instead."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the infertility picture together",
+      "blurb": "Four factors and three tests; that one frame explains every couple",
+      "skills": [
+        "skill.infertility.causes",
+        "skill.infertility.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Three sentences that contain the couple",
+      "skills": [
+        "skill.infertility.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Which factor, on which side, and what proves it",
+      "skills": [
+        "skill.infertility.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Semen, ovulation with reserve, tubes with cavity, and nothing routine beyond them",
+      "skills": [
+        "skill.ix.infertility.workup",
+        "skill.annex.infertility.semen"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and timing",
+      "blurb": "Name the factor and the side, and say why now",
+      "skills": [
+        "skill.infertility.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Habits first, induction for anovulation, surgery for anatomy, referral where simpler fails",
+      "skills": [
+        "skill.tx.infertility"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this couple to your consultant",
+      "skills": [
+        "skill.present.infertility.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.infertility.history",
+        "title": "Take a history from the infertile couple",
+        "task": "This couple have been trying for a baby for two years without success. She is 29 and he is 33. Take a focused history in seven minutes and be ready to say which factor you suspect and what you will order first.",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.obg.menstrual_history",
+          "skill.hx.obg.gynae_symptoms",
+          "skill.hx.infertility.trying",
+          "skill.hx.infertility.risk"
+        ],
+        "examinerQuestions": [
+          "State the duration of trying and the cycle pattern, and say which factor each points to.",
+          "His history is often skipped. Name three questions you asked him and what each excludes.",
+          "Name the three limbs of the first-line workup and the single test you would order first in this couple."
+        ]
+      },
+      {
+        "id": "osce.infertility.pelvic_exam",
+        "title": "Examine the pelvis in suspected infertility",
+        "task": "This 29 year old woman has not conceived after two years of trying. Examine her abdomen and pelvis, including speculum and bimanual examination, and present your findings.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.obg.intimate_consent",
+          "skill.exam.obg.gynae_abdominal",
+          "skill.exam.obg.vulval_inspect",
+          "skill.exam.obg.speculum_insert",
+          "skill.exam.obg.speculum_inspect",
+          "skill.exam.obg.bimanual",
+          "skill.approach.obg.pelvic_close"
+        ],
+        "examinerQuestions": [
+          "Her uterus is normal sized and mobile with free fornices. What does that exclude, and what does it leave on the list?",
+          "You noted hirsutism and acne with irregular cycles. How does that change what you order next?",
+          "When would you skip further local workup and refer this couple directly for assisted techniques?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.infertility.basics",
+      "skill.infertility.causes",
+      "skill.infertility.signs",
+      "skill.infertility.summary",
+      "skill.infertility.differential",
+      "skill.ix.infertility.workup",
+      "skill.annex.infertility.semen",
+      "skill.infertility.diagnosis",
+      "skill.tx.infertility"
+    ]
+  },
+  "skills": {
+    "skill.infertility.basics": {
+      "id": "skill.infertility.basics",
+      "kind": "reasoning",
+      "system": "gynaecology",
+      "title": "What infertility is",
+      "oneLine": "A year of trying without conception, and the couple as one patient",
+      "why": "Infertility is defined by duration of regular unprotected intercourse, not by a test result. Getting that definition exact is what stops an anxious couple of three months being medicalised and a 39 year old waiting another year before evaluation starts.",
+      "teach": [
+        {
+          "heading": "The definition and the numbers",
+          "body": "Infertility means failure to conceive after 12 months of regular unprotected intercourse, and it affects roughly 17.5 percent of couples at some point. About 85 percent of couples conceive within 12 months and 95 percent within 24 months.\n\nPrimary infertility means no conception ever; secondary means at least one prior pregnancy, whatever its outcome. The distinction matters because a past conception proves the machinery once worked."
+        },
+        {
+          "heading": "The couple is the patient",
+          "body": "Female-only factors explain roughly 30 to 40 percent of cases, male-only about 40 to 50 percent, combined factors 20 to 30 percent, and no cause is found in up to about 30 percent. A complete workup of both partners is therefore recommended, never of one alone.\n\nTreating only one partner is the classic error: male, female and combined causes are all common, and unexplained infertility remains a real category after full evaluation."
+        },
+        {
+          "heading": "Age sets the urgency",
+          "body": "Fecundability falls steeply with her age: down about 14 percent by 34 to 35, about half by 40 to 41, and further after 42, mostly from chromosomal errors in ageing oocytes. No comparable fall occurs in men under 50.\n\nEvaluation therefore starts after 12 months of trying, after only 6 months when she is over 35, and at once when she is over 40. Age at presentation is a triage decision, not small talk."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Define infertility, and distinguish primary from secondary.",
+          "a": "Failure to conceive after 12 months of regular unprotected intercourse; primary means no conception ever, secondary follows at least one prior pregnancy.",
+          "accept": ["12 months", "primary", "secondary", "prior pregnancy"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why must both partners always be evaluated?",
+          "a": "Female-only factors cause 30 to 40 percent, male-only 40 to 50 percent, combined 20 to 30 percent, so evaluating one partner alone misses about half of couples.",
+          "accept": ["male", "female", "combined", "both partners"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "She is 37 and they have tried for 7 months. Evaluate now or reassure?",
+          "a": "Evaluate now: over 35 means starting after 6 months of trying, because fecundability is already falling through oocyte chromosomal errors.",
+          "accept": ["6 months", "35", "oocyte", "chromosomal"],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "infertility_and_contraception: clinicalPearls"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Female infertility (definition and epidemiology)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.infertility.causes": {
+      "id": "skill.infertility.causes",
+      "kind": "reasoning",
+      "system": "gynaecology",
+      "title": "Why couples fail to conceive",
+      "oneLine": "Ovulation, tubes, cavity and sperm: four gates and every couple passes all four",
+      "why": "Conception needs an oocyte released, tubes open to meet sperm, a receptive cavity, and functioning sperm. Naming which gate failed is the whole diagnosis, and it is also what chooses between tablets, surgery and assisted techniques.",
+      "teach": [
+        {
+          "heading": "Her three gates",
+          "points": [
+            "Ovulatory failure is the commonest female cause, led by polycystic ovary syndrome, then diminished reserve and premature insufficiency, hypothalamic shutdown from low weight or heavy exercise, and thyroid or prolactin disturbance.",
+            "Tubal damage blocks meeting: pelvic inflammatory disease, endometriosis, prior pelvic surgery and salpingitis isthmica nodosum, with hydrosalpinx as the severe end that also poisons implantation.",
+            "Uterine factors block settling: fibroids distorting the cavity, congenital mullerian anomalies and intrauterine scarring from curettage or infection.",
+            "Age threads through all three: older oocytes carry more chromosomal errors, and endometriosis is present in about a quarter to a half of infertile women."
+          ]
+        },
+        {
+          "heading": "His gate",
+          "body": "Male causes divide into obstruction, failure of production and failure of delivery. Obstruction follows vasectomy, infection or congenital absence of the vas; production fails in hypogonadotropic hypogonadism, thyroid and prolactin disease, morbid obesity and with drugs such as exogenous testosterone; delivery fails with erectile and ejaculatory dysfunction.\n\nPrimary testicular and genetic defects sit underneath: Klinefelter syndrome and Y chromosome microdeletions in severe oligospermia and azoospermia. No single abnormal semen value alone predicts infertility; risk rises with several abnormal together."
+        },
+        {
+          "heading": "Combined and unexplained",
+          "body": "A fifth to nearly a third of couples carry both a male and a female factor, which is why the workup runs in parallel rather than in sequence. Finding one cause never stops the search for the second.\n\nUp to about 30 percent remain unexplained after full evaluation: ovulation documented, tubes open, cavity normal and semen normal. Unexplained is a diagnosis of completed workup, not of skipped tests, and it has its own management ladder."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the four gates to conception.",
+          "a": "Ovulation of a competent oocyte, patent fallopian tubes, a receptive uterus, and adequate sperm delivery and function.",
+          "accept": ["ovulation", "tubes", "uterus", "sperm"],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What is the commonest cause of anovulatory infertility?",
+          "a": "Polycystic ovary syndrome, the most common cause of anovulatory infertility.",
+          "accept": ["polycystic", "anovulatory"],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Her workup is normal but his semen shows severe oligospermia. What sits underneath, and what do you order?",
+          "a": "Primary testicular or genetic defects such as Klinefelter syndrome or Y chromosome microdeletions; order karyotype with Y microdeletion testing with endocrine evaluation.",
+          "accept": ["klinefelter", "microdeletion", "karyotype"],
+          "minMatch": 2
+        },
+        {
+          "level": 4,
+          "q": "Why does finding one cause never stop an infertility workup?",
+          "a": "Combined male and female factors affect a fifth to nearly a third of couples, so a second factor commonly hides behind the first, and only parallel evaluation finds both.",
+          "accept": ["combined", "parallel", "second factor"],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "infertility_and_contraception: pathophysiology"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Female infertility (aetiology and risk factors)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.infertility.signs": {
+      "id": "skill.infertility.signs",
+      "kind": "reasoning",
+      "system": "gynaecology",
+      "title": "The infertility picture",
+      "oneLine": "Often a normal examination, and the few signs that name the factor",
+      "why": "Infertility is the rare gynaecological presentation where a normal examination is itself informative: it excludes tubal, endometriotic and cavity disease and leaves anovulation standing. Knowing which signs to hunt, and what a normal pelvis means, is what makes the bedside examination decisive rather than decorative.",
+      "teach": [
+        {
+          "heading": "What you see in her",
+          "body": "The general examination carries the endocrine diagnosis: raised body mass index with hirsutism and acne points to polycystic ovary syndrome, galactorrhoea on expression points to hyperprolactinaemia, and thyroid enlargement or tremor points to thyroid disease. Low weight with athletic build points the other way, to hypothalamic shutdown.\n\nVitals are usually normal; abnormal vitals point to a separate disease, not to the infertility. Pallor is uncommon here, unlike in bleeding disorders, and its presence should redirect the history."
+        },
+        {
+          "heading": "What your hands add up to",
+          "body": "The abdomen is usually normal; a firm pelvic mass means fibroid, a fixed tender mass means endometriosis or chronic pelvic inflammatory disease. The bimanual examination in anovulatory infertility is typically reassuring: normal mobile uterus with free fornices.\n\nEach abnormal finding renames the case: fixed retroversion with nodularity means endometriosis, cervical motion tenderness means pelvic inflammatory disease, and a lateral adnexal mass means tubal or ovarian disease rather than anovulation."
+        },
+        {
+          "heading": "What you find in him",
+          "points": [
+            "Small firm testes with absent vas on palpation mean obstructive azoospermia, including congenital bilateral absence of the vas.",
+            "A varicocele, testicular atrophy after mumps orchitis, or gynaecomastia with eunuchoid proportions each name a male cause at the bedside.",
+            "Normal male examination with normal secondary sexual characters never excludes male factor: only semen analysis does that.",
+            "Erectile difficulty or hypospadias found on examination explains failure of delivery rather than failure of production."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What does a normal mobile uterus with free fornices tell you in an infertile woman?",
+          "a": "It argues against tubal disease, endometriosis and cavity distortion, leaving anovulation or male factor standing.",
+          "accept": ["tubal", "endometriosis", "anovulation", "male factor"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "She has hirsutism, acne and a raised body mass index with irregular cycles. What is the bedside diagnosis?",
+          "a": "Polycystic ovary syndrome with anovulation, the commonest anovulatory cause.",
+          "accept": ["polycystic", "anovulation"],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "His examination is completely normal. Does that exclude male factor?",
+          "a": "No: only a normal semen analysis excludes male factor, since production and function defects commonly hide behind a normal examination.",
+          "accept": ["semen analysis", "normal examination", "male factor"],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "infertility_and_contraception: pathophysiology"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Female infertility (physical examination)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.infertility.summary": {
+      "id": "skill.infertility.summary",
+      "kind": "reasoning",
+      "system": "gynaecology",
+      "title": "The clinical summary",
+      "oneLine": "Problem representation for a couple measured in months of trying",
+      "why": "The summary for infertility has a different shape from a single-patient one: it reports two people, duration of trying with coital frequency, and her age with the evaluation threshold, because together they decide whether this couple waits, is worked up, or is referred now.",
+      "teach": [
+        {
+          "heading": "Order of the summary",
+          "body": "State both partners with ages and duration of regular unprotected intercourse with coital frequency, then primary or secondary with any past conception. Then her cycle pattern and the examination signature in abstract terms.\n\nThen the workup limbs completed and the factor named with its side: anovulatory, tubal, uterine, male, combined or unexplained. Tempo here is months of trying, not days of illness."
+        },
+        {
+          "heading": "A worked example",
+          "body": "A worked example: a 29 year old woman and her 33 year old husband present with two years of primary infertility despite regular intercourse. She has oligomenorrhoea with hirsutism and acne, a raised body mass index, and a normal mobile uterus with free fornices; his examination is normal.\n\nNote what each clause is doing: duration proves the definition is met, cycles with hair and weight name anovulation, the normal pelvis excludes tubal disease, and his normality is provisional until semen analysis confirms it."
+        }
+      ],
+      "rubric": [
+        {
+          "id": "couple",
+          "text": "States both partners with ages, duration of trying and coital frequency"
+        },
+        {
+          "id": "tempo",
+          "text": "States the tempo as months to years of trying, with primary or secondary named"
+        },
+        {
+          "id": "factor",
+          "text": "States the examination signature and the suspected factor with its side"
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What element belongs in an infertility summary that would not appear in most medical summaries?",
+          "a": "Both partners with ages, duration of regular unprotected intercourse with coital frequency, and the suspected factor with its side.",
+          "accept": ["both partners", "duration", "frequency", "factor"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why do her age and the duration of trying belong in the first sentence?",
+          "a": "Because age sets the evaluation threshold and duration proves the definition is met, and together they decide whether the couple is reassured, worked up or referred at once.",
+          "accept": ["threshold", "definition", "referred", "worked up"],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "Presenting the case"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "infertility_and_contraception: clinicalPearls"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.infertility.differential": {
+      "id": "skill.infertility.differential",
+      "kind": "reasoning",
+      "system": "gynaecology",
+      "title": "Differential diagnosis",
+      "oneLine": "Which factor, on which side, and the single test that proves each",
+      "why": "An infertility differential is organised by factor and side, not by disease list: each candidate must name whose gate failed and which test would prove it. A list without those two columns cannot choose the next test, which is the only job a differential has.",
+      "teach": [
+        {
+          "heading": "Anovulatory causes",
+          "points": [
+            "Polycystic ovary syndrome: the commonest anovulatory cause, with hyperandrogenism and polycystic ovaries; proved by testosterone with ultrasound.",
+            "Diminished ovarian reserve and premature ovarian insufficiency: age related or early follicle loss; proved by day 2 to 3 follicle stimulating hormone with estradiol, anti mullerian hormone and antral follicle count.",
+            "Hypothalamic amenorrhoea: low weight or heavy exercise; proved by low gonadotropins with low estradiol.",
+            "Hyperprolactinaemia and thyroid disease: anovulation with endocrine features; proved by prolactin and thyroid stimulating hormone."
+          ]
+        },
+        {
+          "heading": "Tubal, uterine and male causes",
+          "points": [
+            "Tubal disease and hydrosalpinx: prior pelvic infection or surgery; proved by hysterosalpingogram, remembering its positive result predicts occlusion poorly while a negative result reassures well.",
+            "Endometriosis: cyclical pain with dysmenorrhoea in a quarter to a half of infertile women; suggested clinically and confirmed at laparoscopy.",
+            "Uterine cavity lesions: fibroids distorting the cavity, polyps and intrauterine adhesions; proved by saline sonography or hysteroscopy.",
+            "Male obstructive against nonobstructive azoospermia: absent vas and normal hormones against small testes with raised gonadotropins; separated by examination, hormones and genetics."
+          ]
+        },
+        {
+          "heading": "How to use the list",
+          "body": "Work the list by factor, not by preference: document ovulation, examine semen, image tubes with cavity, and whatever remains unexplained earns the name only after all four gates are tested.\n\nIn India, keep genital tuberculosis in mind with tubal disease: past tuberculosis treatment or a suggestive history changes the pre-test probability of tubal factor before the dye study is even booked."
+        }
+      ],
+      "rubric": [
+        {
+          "id": "factors",
+          "text": "Spans anovulatory, tubal, uterine and male factors"
+        },
+        {
+          "id": "test",
+          "text": "Names the proving test for each candidate"
+        },
+        {
+          "id": "tb",
+          "text": "Considers genital tuberculosis in tubal disease in the Indian context"
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name one differential from each factor with its proving test.",
+          "a": "Polycystic ovary syndrome proved by testosterone with ultrasound; tubal disease proved by hysterosalpingogram; cavity lesions proved by hysteroscopy; male factor proved by semen analysis.",
+          "accept": ["polycystic", "hysterosalpingogram", "hysteroscopy", "semen"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "The hysterosalpingogram reports blocked tubes. Do you accept it?",
+          "a": "Not on its own: the positive predictive value for tubal occlusion is low even though the negative value is high, so confirm with repeat or laparoscopic assessment before acting.",
+          "accept": ["positive", "low", "confirm", "negative"],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "infertility_and_contraception: additionalDifferentials"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Female infertility (differential diagnosis)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.infertility.workup": {
+      "id": "skill.ix.infertility.workup",
+      "kind": "investigation",
+      "system": "gynaecology",
+      "title": "Confirming the factor in both partners",
+      "oneLine": "Semen, ovulation with reserve, tubes with cavity, and nothing routine beyond them",
+      "why": "The infertility workup has exactly three limbs, run in parallel on both partners: his semen, her ovulation with reserve, and her tubes with cavity. Understanding which test answers which gate stops the common drift of repeating one partner's tests while the other is never tested.",
+      "teach": [
+        {
+          "heading": "His limb first",
+          "body": "Semen analysis after 2 to 7 days of abstinence is the first and often the only male test: count, motility, morphology, volume and pH. No single abnormal value alone predicts infertility; risk rises with several abnormal together.\n\nAzoospermia or severe oligospermia needs endocrine with genetic evaluation: karyotype with Y chromosome microdeletion testing, and cystic fibrosis gene testing with absent vas. Recurrent loss adds a sperm DNA fragmentation assay."
+        },
+        {
+          "heading": "Her ovulation and reserve",
+          "body": "Document ovulation with urinary luteinising hormone kits or serum progesterone about 7 days after ovulation. Grade reserve with day 2 to 3 follicle stimulating hormone with estradiol, anti mullerian hormone and antral follicle count on ultrasound.\n\nIrregular menses add thyroid stimulating hormone, prolactin and testosterone. Transvaginal with abdominal ultrasound maps fibroids, polyps and polycystic pattern while counting antral follicles for reserve."
+        },
+        {
+          "heading": "Tubes, cavity and what not to order",
+          "body": "Hysterosalpingogram or saline infusion sonography assesses tubal patency with intrauterine pathology in one sitting. Hysteroscopy with laparoscopy follows where the dye study or scan raises cavity or tubal disease.\n\nDo not order routinely: sperm antibody testing, scrotal ultrasound, diagnostic laparoscopy without indication, postcoital testing, endometrial biopsy, thrombophilia or immunological panels, or routine karyotype. Preconception carrier screening follows ethnicity and family history, not routine."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the three limbs of the first-line infertility workup.",
+          "a": "Semen analysis, ovulation with ovarian reserve testing, and tubal with uterine assessment.",
+          "accept": ["semen", "ovulation", "reserve", "tubal"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How is semen collected for analysis, and what does one abnormal value mean?",
+          "a": "After 2 to 7 days of abstinence; no single abnormal parameter alone predicts infertility, and risk rises with several abnormal together.",
+          "accept": ["abstinence", "single", "several"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "The couple asks for every test available, including sperm antibodies and thrombophilia panels. What do you refuse, and why?",
+          "a": "Sperm antibody testing, scrotal ultrasound, routine laparoscopy, postcoital testing, endometrial biopsy, thrombophilia and immunological testing and routine karyotype are not indicated in the initial workup.",
+          "accept": ["antibody", "thrombophilia", "laparoscopy", "karyotype"],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "infertility_and_contraception: additionalInvestigations"
+        },
+        {
+          "source": "NICE guideline: Fertility problems",
+          "locator": "Initial investigation of fertility problems"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.infertility.semen": {
+      "id": "skill.annex.infertility.semen",
+      "kind": "annexure",
+      "system": "gynaecology",
+      "title": "Semen analysis: collection and reference limits",
+      "oneLine": "Two to seven days abstinence, and the limits that mark abnormal",
+      "why": "Semen analysis is the single test that removes half the differential, but only when collected correctly and read against stated limits. Misread reference values are how normal men get treated and abnormal men get reassured, so the numbers behind the reading belong at the bedside.",
+      "teach": [
+        {
+          "heading": "Collection rules",
+          "points": [
+            "Collect after 2 to 7 days of abstinence; shorter abstinence lowers count and longer raises dead sperm, both misleading.",
+            "Deliver the complete sample to the laboratory promptly without condom collection or lubricants that kill sperm.",
+            "Repeat an abnormal sample after a full spermatogenic cycle before labelling male factor, since single samples vary widely.",
+            "Record recent fever, medicines and heat exposure with the sample, since all three transiently depress production."
+          ]
+        },
+        {
+          "heading": "Reference limits",
+          "table": {
+            "cols": ["Parameter", "Abnormal below", "Action"],
+            "rows": [
+              ["Concentration", "15 million per mL", "Repeat, then endocrine review"],
+              ["Total motility", "40 percent", "Repeat with strict collection"],
+              ["Normal morphology", "4 percent", "Confirm on repeat sample"],
+              ["Severe oligospermia", "5 million per mL", "Karyotype with Y microdeletion testing"]
+            ]
+          }
+        },
+        {
+          "heading": "Reading the result",
+          "body": "No single abnormal parameter alone predicts infertility; risk rises with several abnormal together. Treat the pattern, not one low value in isolation.\n\nAzoospermia means no sperm at all and needs full endocrine with genetic evaluation. Volume with pH and fructose patterns then separate obstruction from failure of production."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "State the collection rule and the three main reference limits.",
+          "a": "After 2 to 7 days of abstinence; concentration below 15 million per mL, motility below 40 percent and normal morphology below 4 percent are abnormal.",
+          "accept": ["abstinence", "15 million", "40 percent", "4 percent"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "One sample shows low motility with everything else normal. Male factor?",
+          "a": "Not on one value: no single abnormal parameter alone predicts infertility, so repeat the sample with correct collection before deciding.",
+          "accept": ["single", "repeat", "collection"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Count is very low on repeat testing. What threshold changes your next step, and to what?",
+          "a": "Severe oligospermia below 5 million per mL needs karyotype with Y chromosome microdeletion testing and endocrine evaluation.",
+          "accept": ["5 million", "karyotype", "microdeletion"],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "infertility_and_contraception: additionalInvestigations"
+        },
+        {
+          "source": "NICE guideline: Fertility problems",
+          "locator": "Semen analysis and male investigation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.infertility.diagnosis": {
+      "id": "skill.infertility.diagnosis",
+      "kind": "reasoning",
+      "system": "gynaecology",
+      "title": "Diagnosis, factors and red flags",
+      "oneLine": "Name the factor and the side, and say why this couple cannot wait",
+      "why": "A diagnosis of infertility without a named factor does not say what to treat, and without red flags it does not say how fast to move. Factor plus urgency is what turns a label into a plan, especially where her age is already closing the window.",
+      "teach": [
+        {
+          "heading": "The diagnostic statement",
+          "body": "A complete diagnostic statement names the duration with primary or secondary, the factor with its side, and her age with the threshold it triggers.\n\nA worked example: primary infertility of two years from anovulation due to polycystic ovary syndrome in a 29 year old woman with a normal partner workup, for ovulation induction with lifestyle optimisation."
+        },
+        {
+          "heading": "Red flags",
+          "points": [
+            "Female partner over 40: evaluate at once rather than waiting out any duration.",
+            "Azoospermia or severe oligospermia: needs genetic with endocrine evaluation, not empirical treatment.",
+            "Recurrent pregnancy loss: consider sperm DNA fragmentation assay with genetic counselling.",
+            "Fixed pelvic mass, severe cyclical pain or postcoital bleeding: suspect endometriosis, fibroid or cervical disease needing its own workup.",
+            "Galactorrhoea with headache and visual change, or thyroid storm features: pituitary and thyroid disease needing urgent medical care first."
+          ]
+        },
+        {
+          "heading": "When the answer is unexplained",
+          "body": "Unexplained infertility is diagnosed only after all four gates test normal: documented ovulation, normal semen, open tubes and a normal cavity. It is a diagnosis of completed workup, and it carries its own ladder from expectant care with timed intercourse to intrauterine insemination and then in vitro fertilisation.\n\nState what was tested before using the word unexplained: the label reassures only when the workup behind it was complete."
+        }
+      ],
+      "rubric": [
+        {
+          "id": "factor",
+          "text": "Names the factor with its side and the duration with primary or secondary"
+        },
+        {
+          "id": "redflags",
+          "text": "Screens for age over 40, severe male factor, loss and pelvic red flags"
+        },
+        {
+          "id": "statement",
+          "text": "Gives a complete diagnostic statement that carries the plan"
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What three facts make a complete infertility diagnosis?",
+          "a": "Duration with primary or secondary, the factor with its side, and her age with the evaluation threshold.",
+          "accept": ["duration", "factor", "age", "threshold"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "When may you call infertility unexplained?",
+          "a": "Only after documented ovulation, normal semen, open tubes and a normal cavity, never before the workup is complete.",
+          "accept": ["ovulation", "semen", "tubes", "cavity"],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "List the red flags that move a couple from routine to urgent.",
+          "a": "Her age over 40, azoospermia or severe oligospermia, recurrent loss, a fixed mass or severe cyclical pain, and pituitary or thyroid emergency features.",
+          "accept": ["over 40", "azoospermia", "recurrent", "mass"],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "infertility_and_contraception: redFlags"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Female infertility (diagnosis and evaluation)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.infertility": {
+      "id": "skill.tx.infertility",
+      "kind": "treatment",
+      "system": "gynaecology",
+      "title": "Managing infertility",
+      "oneLine": "Habits first, induction for anovulation, surgery for anatomy, referral where simpler fails",
+      "why": "Treatment follows the factor, not the impatience: modifiable habits cost nothing and help every later step work, ovulation induction only helps anovulation, surgery only helps anatomy, and assisted techniques wait for simpler measures to fail or for age to forbid waiting. Getting that order wrong spends the couple's money and her fertile years together.",
+      "dosingNote": "This module teaches management at the level of drug class and principle, with regimens quoted only from the cited sources. Specific agents, regimens and doses must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "teach": [
+        {
+          "heading": "Start with both partners",
+          "body": "Optimise what costs nothing first in both partners: stop smoking and chewing tobacco, correct weight toward normal, limit alcohol, and fix intercourse to every 1 to 2 days through the fertile window. Counsel that fecundability and treatment success both fall with her age and with smoking and obesity.\n\nCorrect treatable endocrine disease alongside: thyroid replacement for hypothyroidism and dopamine agonists for hyperprolactinaemia restore ovulation without any fertility drug. Screen for anaemia, rubella immunity and chronic disease before conception is attempted."
+        },
+        {
+          "heading": "Ovulation induction for anovulation",
+          "body": "Anovulation from polycystic ovary syndrome is induced with anti oestrogens such as clomifene or aromatase inhibitors such as letrozole, with follicular monitoring for response and for multiple pregnancy risk. Insulin sensitisers help where metabolic syndrome dominates but induce ovulation less reliably alone.\n\nGonadotropins follow where oral induction fails, with strict monitoring because hyperstimulation with multiple pregnancy is the price of unmonitored use. Hypothalamic causes need weight restoration with lifestyle change first, not drugs first."
+        },
+        {
+          "heading": "Surgery for anatomy, techniques for failure",
+          "body": "Address anatomy surgically: salpingectomy for hydrosalpinx improves later implantation outcomes, hysteroscopic removal for cavity distorting fibroids, polyps and adhesions, and varicocele with obstruction repair on his side with surgical sperm retrieval where needed.\n\nOffer assisted techniques where simpler measures fail or age forbids waiting: intrauterine insemination for unexplained and mild male factor, in vitro fertilisation with intracytoplasmic sperm injection for tubal disease and severe male factor. Multiple pregnancy is the main hazard; careful monitoring with appropriate triggering keeps hyperstimulation low."
+        },
+        {
+          "heading": "Indian context and referral thresholds",
+          "body": "Manage the first two rungs at the district hospital: counselling with timed intercourse, basic semen analysis, ovulation documentation and treatable endocrine correction. Treat genital tuberculosis fully before any fertility procedure, and never instrument an active pelvic infection.\n\nRefer to a fertility centre for gonadotropin induction, operative tubal and cavity surgery, and all assisted techniques; refer at once with her age over 40, severe male factor, or recurrent loss needing genetic counselling. Counsel cost, realistic success by age, and the psychological strain frankly before referral."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the first prescription for every infertile couple, whatever the factor?",
+          "a": "Optimise modifiable factors in both partners: stop smoking, correct weight, limit alcohol and time intercourse to the fertile window.",
+          "accept": ["smoking", "weight", "alcohol", "fertile window"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "She has anovulation from polycystic ovary syndrome. What induces ovulation, and what follows failure?",
+          "a": "Anti oestrogens such as clomifene or aromatase inhibitors such as letrozole with monitoring; gonadotropins follow where oral induction fails.",
+          "accept": ["clomifene", "letrozole", "monitoring", "gonadotropins"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "The dye study shows bilateral hydrosalpinges and she is planned for fertilisation in vitro. What surgery, and why before the technique?",
+          "a": "Salpingectomy of the hydrosalpinges, because removing them improves subsequent implantation outcomes.",
+          "accept": ["salpingectomy", "hydrosalpinges", "implantation"],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "infertility_and_contraception: management"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Female infertility (ovulation induction and assisted techniques)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.infertility.meera",
+      "title": "A teacher with two years of trying and cycles that never come on time",
+      "opening": "Meera Patil, 29, a schoolteacher, has come with her husband Ramesh, 33, a bus mechanic. She looks worried and he does most of the greeting. Introduce yourself to both of them and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "initialVitals": {
+        "hr": 78,
+        "bpSystolic": 110,
+        "bpDiastolic": 70,
+        "rr": 16,
+        "spo2": 98,
+        "temp": 36.8,
+        "gcs": 15
+      },
+      "patient": {
+        "name": "Meera Patil",
+        "age": 29,
+        "sex": "female",
+        "occupation": "Schoolteacher",
+        "residence": "Small town, lives with husband and in-laws"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "what is the problem that brings you",
+            "why have you come to the clinic",
+            "tell me your main complaint"
+          ],
+          "reply": "Doctor, we have been trying for a baby for two years. I have not conceived even once, and everyone at home keeps asking.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "trying_span": {
+          "cues": [
+            "how long have you been trying for a baby",
+            "trying for a baby for how long",
+            "how many years of trying without success",
+            "not conceived for how long"
+          ],
+          "reply": "Two full years, doctor. We never used anything to prevent pregnancy in this time.",
+          "key": true,
+          "skillId": "skill.hx.infertility.trying"
+        },
+        "coital_timing": {
+          "cues": [
+            "how often do you have intercourse",
+            "intercourse how many times in a week",
+            "do you time intercourse to the fertile days",
+            "staying apart for work for months"
+          ],
+          "reply": "We meet two or three times a week, doctor. We never counted fertile days. My husband works in the town nearby and comes home every weekend.",
+          "key": true,
+          "skillId": "skill.hx.infertility.trying"
+        },
+        "menstrual_pattern": {
+          "cues": [
+            "tell me about your periods",
+            "are your periods regular every month",
+            "how many days between one period and the next",
+            "bleeding lasts how many days"
+          ],
+          "reply": "My periods were regular till my school days, doctor. For the last three years they come once in two or three months, and bleed for two days only.",
+          "key": true,
+          "skillId": "skill.hx.obg.menstrual_history"
+        },
+        "weight_hair": {
+          "cues": [
+            "weight gain in the last few years",
+            "excess hair growth on the face",
+            "pimples over the face and back",
+            "hair fall from the scalp"
+          ],
+          "reply": "I have put on nearly ten kilos in three years. Hair grows on my upper lip and chin, and pimples never leave my face.",
+          "key": true
+        },
+        "milk_flow": {
+          "cues": [
+            "milk leaking from the breasts",
+            "white fluid from the nipples",
+            "breast leaking on pressing"
+          ],
+          "reply": "No, doctor, no milk or fluid has ever come from my breasts.",
+          "key": true
+        },
+        "pelvic_pain": {
+          "cues": [
+            "pain in the lower abdomen",
+            "severe pain during periods",
+            "pain during intercourse",
+            "dull pelvic ache most days"
+          ],
+          "reply": "I get only mild cramps on the first day of bleeding. Intercourse is not painful.",
+          "key": true,
+          "skillId": "skill.hx.obg.gynae_symptoms"
+        },
+        "vaginal_flow": {
+          "cues": [
+            "white discharge per vagina",
+            "foul smelling vaginal discharge",
+            "itching with white discharge"
+          ],
+          "reply": "There is slight white discharge before periods, with no smell and no itching.",
+          "key": true
+        },
+        "contraception_past": {
+          "cues": [
+            "used pills or copper t to delay pregnancy",
+            "contraception used at any time",
+            "when was the copper t removed"
+          ],
+          "reply": "We never used anything, doctor. We wanted a child from the first year itself.",
+          "key": true
+        },
+        "pregnancy_past": {
+          "cues": [
+            "conceived even once before",
+            "any pregnancy in the past years",
+            "miscarriage or abortion at any time",
+            "any living children"
+          ],
+          "reply": "No, doctor. I have never conceived, not even once.",
+          "key": true,
+          "skillId": "skill.hx.infertility.trying"
+        },
+        "partner_past": {
+          "cues": [
+            "mumps with swelling of the testes in childhood",
+            "operation for hernia or undescended testes",
+            "injury or swelling of the testes",
+            "difficulty in getting an erection"
+          ],
+          "reply": "Ramesh: I had mumps as a boy but it never came down there. No operation, no injury, and everything works normally.",
+          "key": true,
+          "skillId": "skill.hx.infertility.risk"
+        },
+        "tobacco_habit": {
+          "cues": [
+            "chewing tobacco or gutka",
+            "smoking cigarettes or bidis",
+            "tobacco in any form daily"
+          ],
+          "reply": "Neither of us uses tobacco, doctor. My husband does not even smoke.",
+          "key": true
+        },
+        "alcohol_habit": {
+          "cues": [
+            "drinking alcohol regularly",
+            "beer or whisky at parties",
+            "how often do you drink alcohol"
+          ],
+          "reply": "We both never drink, doctor.",
+          "key": true
+        },
+        "drug_intake": {
+          "cues": [
+            "taking any regular tablets",
+            "tablets for thyroid fits or pressure",
+            "protein powders or gym medicines"
+          ],
+          "reply": "I take no tablets at all. My husband takes nothing except occasional painkillers for headaches.",
+          "key": true,
+          "skillId": "skill.hx.infertility.risk"
+        },
+        "thyroid_past": {
+          "cues": [
+            "swelling in the front of the neck",
+            "thyroid disease in the past",
+            "tremor of the hands with sweating"
+          ],
+          "reply": "No neck swelling, no thyroid tablets. My hands do not shake.",
+          "key": true
+        },
+        "tb_past": {
+          "cues": [
+            "tuberculosis treatment taken in the past",
+            "cough with evening fever for weeks",
+            "close contact with a tb patient"
+          ],
+          "reply": "Nobody at home has TB, and I never took TB medicines.",
+          "key": true
+        },
+        "family_kin": {
+          "cues": [
+            "difficulty in conceiving running in the family",
+            "early menopause in mother or sisters",
+            "diabetes or thyroid running in the family"
+          ],
+          "reply": "My mother had four children easily. My younger sister conceived within a year. Nobody in the family had thyroid or sugar.",
+          "key": true
+        },
+        "work_life": {
+          "cues": [
+            "what work do you do",
+            "exposure to heat or chemicals at work",
+            "night shifts with disturbed sleep"
+          ],
+          "reply": "I am a schoolteacher. My husband is a bus mechanic. He works near hot engines all day, in a shed with poor ventilation.",
+          "key": true
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Overweight young woman, body mass index 29. Facial hirsutism with upper lip hair, moderate acne over face and back, acanthosis around the neck. No pallor, no visible thyroid swelling.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 78 regular. Blood pressure 110/70. Respiratory rate 16. Afebrile. SpO2 98 percent on room air.",
+          "abnormal": false
+        },
+        "skill.exam.obg.breast_exam": {
+          "finding": "Breasts symmetric, no lump. No galactorrhoea on gentle expression.",
+          "abnormal": false
+        },
+        "skill.exam.obg.gynae_abdominal": {
+          "finding": "Abdomen soft, no palpable pelvic mass. No tenderness. Bladder empty.",
+          "abnormal": false
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "finding": "Vulva normal. Coarse hair extending to the inner thighs. No discharge, no lesions.",
+          "abnormal": true
+        },
+        "skill.exam.obg.speculum_insert": {
+          "finding": "Speculum inserted gently with consent and a chaperone. Mild discomfort only.",
+          "abnormal": false
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "finding": "Cervix healthy, nulliparous os. Scanty clear discharge in the vault. No contact bleeding.",
+          "abnormal": false
+        },
+        "skill.exam.obg.bimanual": {
+          "finding": "Uterus normal size, anteverted, mobile, firm. Fornices free, no nodularity. No cervical motion tenderness. No adnexal mass.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "upt",
+        "semen",
+        "usg_pelvis",
+        "progesterone_day21",
+        "thyroid_prolactin",
+        "hsg"
+      ],
+      "investigations": {
+        "upt": {
+          "label": "Urine pregnancy test",
+          "indicated": true,
+          "result": "Negative.",
+          "note": "Mandatory before any dye study or induction: excludes pregnancy in every woman of reproductive age."
+        },
+        "semen": {
+          "label": "Seminogram of the husband",
+          "indicated": true,
+          "result": "Volume, count, motility and morphology within normal reference limits on a correctly collected sample after three days of abstinence.",
+          "note": "A normal semen analysis removes male factor in one step, which is why his limb is tested first rather than last."
+        },
+        "usg_pelvis": {
+          "label": "Transvaginal with transabdominal pelvic ultrasound",
+          "indicated": true,
+          "result": "Bilateral polycystic ovarian pattern with multiple small peripheral follicles and increased stromal volume. No fibroid, no polyp, no adnexal mass.",
+          "note": "Maps cavity-adjacent disease while counting antral follicles for reserve. Here it confirms the anovulatory pattern the cycles already suggested."
+        },
+        "progesterone_day21": {
+          "label": "Mid luteal serum progesterone",
+          "indicated": true,
+          "result": "Low, in the anovulatory range.",
+          "note": "Documents anovulation directly. A timed sample or urinary luteinising hormone kits are the proof, not the cycle story alone."
+        },
+        "thyroid_prolactin": {
+          "label": "Thyroid stimulating hormone with prolactin",
+          "indicated": true,
+          "result": "Both within normal limits.",
+          "note": "Irregular menses earn these two tests. Normal values keep polycystic ovary syndrome standing without a second endocrine disease."
+        },
+        "hsg": {
+          "label": "Hysterosalpingogram",
+          "indicated": true,
+          "result": "Both tubes patent with free spill. Uterine cavity normal, no filling defect.",
+          "note": "Tubes with cavity in one sitting. A negative result reassures well, while a positive block would need confirmation before acting."
+        },
+        "laparoscopy": {
+          "label": "Diagnostic laparoscopy with dye",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Not indicated as a first step here: no pelvic pain, no endometriosis signs, free fornices and a reassuring dye study. It stays on the list only where tubal or endometriotic disease is suspected."
+        },
+        "karyotype": {
+          "label": "Karyotype of either partner",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Not indicated routinely. It belongs to severe male factor, recurrent loss or premature ovarian failure, none of which apply here."
+        }
+      },
+      "differentialModel": {
+        "answer": "Anovulatory infertility from polycystic ovary syndrome. Consider tubal factor disease, endometriosis, male factor, unexplained infertility, thyroid disease with hyperprolactinaemia, and fibroid distorting the cavity.",
+        "accept": [
+          "Polycystic ovarian syndrome",
+          "Tubal factor infertility",
+          "Endometriosis",
+          "Male infertility",
+          "Unexplained infertility",
+          "Hypothyroidism",
+          "Hyperprolactinaemia",
+          "Fibroid uterus"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Primary anovulatory infertility from polycystic ovary syndrome in a 29 year old woman, partner workup normal.",
+        "accept": [
+          "Anovulatory infertility",
+          "anovulation",
+          "Polycystic ovarian syndrome",
+          "pcos"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Counsel both partners with timed intercourse, correct weight with diet and activity, induce ovulation with monitoring, and review for referral where simpler measures fail.",
+        "accept": [
+          "counselling",
+          "education",
+          "Optimise weight with diet and activity before ovulation drugs",
+          "Start ovulation induction with monitoring for response",
+          "Arrange timed intercourse through the fertile window"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "Duration proves the definition before a single test: two years of regular unprotected intercourse is infertility whatever the cycles look like, and her age of 29 still allows the full first-line ladder.",
+        "Oligomenorrhoea with hirsutism, acne and weight gain is the anovulatory signature of polycystic ovary syndrome; the low mid luteal progesterone documents it and the scan confirms the pattern.",
+        "A normal mobile uterus with free fornices excludes tubal, endometriotic and cavity disease at the bedside, which is why the dye study here reassures rather than surprises.",
+        "His normal seminogram removes male factor in one step; without it the same case would be combined until proved otherwise, and no examination finding can substitute for it.",
+        "Normal thyroid with prolactin keeps a single diagnosis standing; a second endocrine disease would have renamed the management rather than just adding a tablet.",
+        "Treatment follows the factor: weight correction with timed intercourse first, ovulation induction with monitoring next, and referral where simpler measures fail, never the reverse order.",
+        "His engine shed heat exposure is counselled but does not change the plan while his semen is normal; modifiable habits are corrected in both partners whatever the results."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1271 @@
+{
+  "_comment": "Antenatal booking pathway: the normal first visit done properly, so every later deviation has something to deviate from. Shared examination and history skills are referenced, never redefined; disease-specific teaching lives in skill.antenatal.* and the fragment shared-antenatal-care.json.",
+  "id": "antenatal-care",
+  "name": "Antenatal care",
+  "fullName": "Normal pregnancy and antenatal care",
+  "subtitle": "Booking visit, dating, antenatal assessment",
+  "system": "obstetrics",
+  "kbRef": "diagnosis_pregnancy_antenatal_care_schedule",
+  "oneLine": "The booking visit done properly: certain dates, a risk group, and a plan to birth",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What antenatal care is, and why booking early changes everything",
+      "skills": [
+        "skill.antenatal.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the woman",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age, parity and booking status set the risk before a symptom is mentioned",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In a booking visit, age at the extremes, parity with the outcome of each previous pregnancy, gestation at booking, and whether she was referred by the community health worker all carry weight. A young unbooked primigravida late in pregnancy and a booked multigravida at 12 weeks are different risk stories before anything is asked."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of the present pregnancy",
+      "blurb": "Dates first, then ordinary symptoms, then danger symptoms",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.booking_lmp",
+        "skill.hx.antenatal.symptoms"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "At booking the presenting story is often simply that she missed her periods and tested positive. Record how the pregnancy was confirmed and what brought her today, then let the dates and the two symptom groups carry the history."
+        },
+        "skill.hx.obg.booking_lmp": {
+          "expect": "Expect to reconstruct dates from several clues at once: the first day of the last bleed, cycle regularity, the date of the home test and how late she was, quickening where relevant, and an early scan. State plainly when the dates are uncertain."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The background markers that move her out of routine care",
+      "skills": [
+        "skill.hx.obg.previous_pregnancies",
+        "skill.hx.obg.medical_family_drug",
+        "skill.hx.antenatal.risk"
+      ],
+      "emphasis": {
+        "skill.hx.obg.previous_pregnancies": {
+          "expect": "Every previous pregnancy needs its outcome, gestation and birth weight, not just a count of children. A previous stillbirth, preterm birth, heavy bleed or caesarean section changes surveillance and the place of birth even when this pregnancy feels entirely normal."
+        },
+        "skill.hx.obg.medical_family_drug": {
+          "expect": "Name the diseases that change antenatal care rather than asking one vague question: pressure, sugar, thyroid, heart, kidney, tuberculosis, epilepsy and blood disorders, with transfusions, allergies and every current tablet including supplements."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Weight, pressure, pallor and urine: the four trends of every visit",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for pallor of the conjunctiva and tongue first: anaemia is the commonest abnormal finding at an Indian booking visit. Note build and nourishment, and any breathlessness or palpitations that suggest the anaemia is already symptomatic."
+        },
+        "skill.gen.vitals": {
+          "expect": "Measure blood pressure seated with the arm at heart level using the correct cuff, and repeat a raised reading after rest. Record weight and compare with later visits rather than reading it once. Pulse, respiratory rate and temperature complete the baseline every later visit is judged against."
+        },
+        "skill.gen.edema": {
+          "expect": "Mild ankle swelling late in the day can be physiological, but facial puffiness, hand swelling or pitting oedema with raised pressure points toward pre-eclampsia. Grade it, distribute it, and always read it together with the pressure and the urine."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Obstetric abdominal examination",
+      "blurb": "A uterus that matches the dates, and a fetal heart where expected",
+      "skills": [
+        "skill.exam.obg.preg_prep_inspect",
+        "skill.exam.obg.fundal_height",
+        "skill.exam.obg.leopold",
+        "skill.exam.obg.fetal_heart"
+      ],
+      "emphasis": {
+        "skill.exam.obg.preg_prep_inspect": {
+          "expect": "At booking the abdomen is often flat with striae or linea nigra as the only signs. Inspect for scars of previous surgery, which change the delivery plan, and for herniae or masses that the growing uterus will soon hide."
+        },
+        "skill.exam.obg.fundal_height": {
+          "expect": "At 12 weeks the fundus is just palpable above the pubis; through the middle months the centimetres track the weeks within a small margin. A uterus that does not match the dates is never accepted silently: wrong dates, twins, liquor volume and growth restriction are worked through with a scan."
+        },
+        "skill.exam.obg.leopold": {
+          "expect": "In early pregnancy the fetal parts are too small for reliable grips, and lie and presentation cannot be assigned. Say so plainly rather than inventing findings. The grips earn their place from the middle of pregnancy onward."
+        },
+        "skill.exam.obg.fetal_heart": {
+          "expect": "By Doppler the heart is heard from the late first trimester, faster than the maternal pulse, which must be counted alongside to avoid mistaking one for the other. Document the rate and the method; a heart not heard where expected is rechecked with scan, not dismissed as wrong dates alone."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the normal picture together",
+      "blurb": "Certain dates, a matching uterus, a well mother and a live fetus",
+      "skills": [
+        "skill.antenatal.findings"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Three sentences that contain the case",
+      "skills": [
+        "skill.antenatal.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "What else booking must exclude",
+      "skills": [
+        "skill.antenatal.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Confirm it, date it, and screen what she cannot feel",
+      "skills": [
+        "skill.ix.antenatal.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis, dates and risk group",
+      "blurb": "Three statements that carry the rest of care",
+      "skills": [
+        "skill.antenatal.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Visits, supplements, immunisation, counselling and the birth plan",
+      "skills": [
+        "skill.tx.antenatal",
+        "skill.annex.antenatal.schedule"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this booking visit to your consultant",
+      "skills": [
+        "skill.presentation.antenatal.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.antenatal.booking",
+        "title": "Take a booking history and fix the dates",
+        "task": "This 26-year-old woman has missed two periods and tested positive at home. Take a booking history in eight minutes, fix her dates, and state her risk group.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.obg.booking_lmp",
+          "skill.hx.antenatal.symptoms",
+          "skill.gen.vitals"
+        ],
+        "examinerQuestions": [
+          "State her gestation and expected date with the evidence for each, and say whether the dates are certain.",
+          "Which two facts from her background already decide her risk group before you examine her?",
+          "Name the danger symptoms you asked about and what you told her to do if any of them appears."
+        ]
+      },
+      {
+        "id": "osce.antenatal.examination",
+        "title": "Examine the pregnant abdomen",
+        "task": "This woman is 12 weeks pregnant by certain dates. Examine her abdomen obstetrically and present your findings with the plan.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.position",
+          "skill.exam.obg.preg_prep_inspect",
+          "skill.exam.obg.fundal_height",
+          "skill.exam.obg.leopold",
+          "skill.exam.obg.fetal_heart"
+        ],
+        "examinerQuestions": [
+          "Where do you expect the fundus at 12 weeks, and what would a larger uterus make you consider?",
+          "How do you prove the rate you hear is fetal and not maternal?",
+          "Her pressure is normal, urine is clean and the uterus matches the dates. What three things happen before she leaves?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.antenatal.basics",
+      "skill.hx.antenatal.risk",
+      "skill.antenatal.findings",
+      "skill.antenatal.differential",
+      "skill.ix.antenatal.workup",
+      "skill.antenatal.diagnosis",
+      "skill.tx.antenatal",
+      "skill.exam.obg.fundal_height"
+    ]
+  },
+  "skills": {
+    "skill.antenatal.basics": {
+      "id": "skill.antenatal.basics",
+      "kind": "reasoning",
+      "system": "obstetrics",
+      "title": "What antenatal care is",
+      "oneLine": "Planned care from booking to birth that keeps mother and fetus well and sorts risk early",
+      "why": "Most pregnancies end well, but the complications that kill mothers and babies announce themselves weeks before they strike. Antenatal care exists to meet the woman early, fix her dates, find the few pregnancies that need specialist care, and keep the rest on a watched routine path to a planned birth.",
+      "teach": [
+        {
+          "heading": "What antenatal care is for",
+          "body": "Antenatal care is planned, repeated contact between a pregnant woman and a trained provider from the first visit to birth. Its four jobs are to confirm the pregnancy and fix the dates, to sort low risk from high risk, to prevent and treat the common problems of pregnancy, and to plan the birth well before labour starts."
+        },
+        {
+          "heading": "The booking visit in one pass",
+          "points": [
+            "Register her early, within the first 12 weeks: history with dates and risk markers, examination with weight and blood pressure, urine testing, blood grouping, haemoglobin and infection screening.",
+            "Fix the expected date of delivery from the last period and confirm it with an early scan where one is available.",
+            "Start supplements and immunisation, counsel on food, rest, danger symptoms and birth preparedness, and give her the written record she carries to every visit.",
+            "Decide the risk group before she leaves: routine follow up at a primary centre, or shared and specialist care with a named referral hospital."
+          ]
+        },
+        {
+          "heading": "Low risk is a working label, not a promise",
+          "body": "A woman labelled low risk at booking stays low risk only while every visit keeps finding nothing new. Blood pressure, urine protein, fundal growth, fetal movements and haemoglobin are rechecked because pre-eclampsia, growth restriction and anaemia all develop after a normal booking. The label is reviewed at every contact, never once."
+        }
+      ],
+      "pitfalls": [
+        "Treating booking as paperwork and leaving without a risk group and a birth plan.",
+        "Fixing dates from memory alone when an early scan could confirm them.",
+        "Calling a woman low risk once and never reviewing the label again."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the four jobs of antenatal care?",
+          "a": "Confirm the pregnancy and fix the dates, sort low risk from high risk, prevent and treat the common problems of pregnancy, and plan the birth before labour starts.",
+          "accept": [
+            "fix the dates",
+            "sort low risk from high risk",
+            "prevent and treat",
+            "plan the birth"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "When should booking happen, and what must be decided before she leaves?",
+          "a": "Within the first 12 weeks, and her risk group with where she will be followed and where she will deliver.",
+          "accept": [
+            "first 12 weeks",
+            "risk group",
+            "where she will deliver",
+            "referral"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is low risk reviewed at every visit rather than fixed at booking?",
+          "a": "Because pre-eclampsia, growth restriction and anaemia develop after a normal booking, so each visit rechecks pressure, urine, growth, movements and haemoglobin.",
+          "accept": [
+            "develop after a normal booking",
+            "rechecks pressure",
+            "urine",
+            "growth",
+            "haemoglobin"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "diagnosis_pregnancy_antenatal_care_schedule: Visits tests vaccines"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Prenatal care: goals and booking visit"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.antenatal.findings": {
+      "id": "skill.antenatal.findings",
+      "kind": "reasoning",
+      "system": "obstetrics",
+      "title": "Putting the normal antenatal picture together",
+      "oneLine": "Certain dates, a uterus that matches them, a well mother and a live fetus",
+      "why": "Normal is a positive finding in antenatal care, not the absence of disease. Stating exactly what makes this pregnancy normal, dates certain, growth matching, mother well, fetus alive, is what lets the next provider trust the record and spot the first deviation from it.",
+      "teach": [
+        {
+          "heading": "Dates you can trust",
+          "body": "Certain dates rest on three legs: a reliable first day of the last period with regular cycles, an expected date worked out as that date plus 9 months plus 7 days, and an early scan that agrees within days. When all three agree, growth, preterm labour and post-term management all have a firm base. When they disagree, the record must say so."
+        },
+        {
+          "heading": "The uterus should match the dates",
+          "body": "From about 12 weeks the uterus rises out of the pelvis, and from the middle of pregnancy the distance from pubis to fundus in centimetres tracks the weeks of gestation within a small margin. A uterus that matches the dates supports normal growth and normal liquor. One that is larger or smaller than the dates demands an explanation, never silent acceptance."
+        },
+        {
+          "heading": "Mother well and fetus well",
+          "points": [
+            "Mother well: normal blood pressure and weight trend, no pallor or oedema beyond the mild ankle swelling of late pregnancy, clean urine without protein or sugar, and no risk marker in her background.",
+            "Fetus well: fetal heart heard where expected for the gestation, movements felt and regular once quickening has passed, and liquor that is neither scanty nor excessive on palpation.",
+            "Booked and counselled: supplements started, immunisation on schedule, danger symptoms explained, and the birth plan written down with a named hospital."
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Calling dates certain from the period alone without scan confirmation.",
+        "Accepting a uterus that does not match the dates without working out why.",
+        "Recording a normal examination without stating the fetal heart and movements."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What three findings make the dates certain?",
+          "a": "A reliable first day of the last period with regular cycles, an expected date worked out from it, and an early scan that agrees.",
+          "accept": [
+            "last period",
+            "regular cycles",
+            "expected date",
+            "early scan"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What does a uterus larger than the dates suggest, before any scan?",
+          "a": "Wrong dates, multiple pregnancy, excess liquor, a large baby, a molar pregnancy early on, or a pelvic mass such as a fibroid alongside the pregnancy.",
+          "accept": [
+            "wrong dates",
+            "multiple pregnancy",
+            "excess liquor",
+            "molar pregnancy",
+            "fibroid"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why must the record state the fetal heart and movements at a normal visit?",
+          "a": "Because the next provider can only spot the first deviation if the last normal state was written down, and a blank record reads as an examination never done.",
+          "accept": [
+            "first deviation",
+            "last normal state",
+            "never done"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "diagnosis_pregnancy_antenatal_care_schedule: Dating scan and EDD"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Prenatal care: fundal height and fetal assessment"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.antenatal.summary": {
+      "id": "skill.antenatal.summary",
+      "kind": "reasoning",
+      "system": "obstetrics",
+      "title": "The antenatal clinical summary",
+      "oneLine": "Mother, dates, risk, two-patient findings and the plan in three sentences",
+      "why": "The summary is what the next provider reads when there is no time to read the whole record. In antenatal care it must carry the dates, the risk group and the plan, because those three decide what happens at the next visit and where the birth happens.",
+      "teach": [
+        {
+          "heading": "The summary sentence",
+          "points": [
+            "Name the mother with the facts that carry risk: age, parity, gestation with how the dates were fixed, and booking status.",
+            "State the tempo and course: how the pregnancy has gone so far, in one clause.",
+            "State the two-patient findings in abstract terms: maternal vitals and urine, uterine size against dates, fetal heart and movements.",
+            "Close with the risk group and the plan: low or high risk, visit rhythm, and the named place of birth."
+          ]
+        },
+        {
+          "heading": "A worked example",
+          "body": "A 26-year-old booked primigravida at 12 weeks by certain dates and a confirmatory scan presents for her booking visit after an uneventful first trimester with ordinary nausea. Blood pressure and urine are normal, the uterus matches the dates, and the fetal heart is heard. This is a normal intrauterine pregnancy, low risk, for routine follow up with supplements, immunisation and a planned hospital birth."
+        }
+      ],
+      "pitfalls": [
+        "Summarising without the gestation, so nothing later can be judged against it.",
+        "Omitting how the dates were fixed, so certain and uncertain dates read alike.",
+        "Ending at the findings with no risk group and no plan."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What four elements must an antenatal summary carry?",
+          "a": "The mother with parity and gestation, the course so far, the two-patient findings, and the risk group with the plan.",
+          "accept": [
+            "parity",
+            "gestation",
+            "two-patient findings",
+            "risk group",
+            "plan"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why does the summary state how the dates were fixed?",
+          "a": "Because growth assessment and preterm or post-term decisions later all rest on the dates, and certain dates carry a different weight from reconstructed ones.",
+          "accept": [
+            "growth assessment",
+            "preterm",
+            "post-term",
+            "certain dates"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "diagnosis_pregnancy_antenatal_care_schedule: Dating scan and EDD"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Prenatal care: clinical examination"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.antenatal.differential": {
+      "id": "skill.antenatal.differential",
+      "kind": "reasoning",
+      "system": "obstetrics",
+      "title": "What must be excluded at booking",
+      "oneLine": "Bleeding, pain and a uterus that does not fit the dates each have a short list",
+      "why": "A booking visit that only confirms pregnancy misses the conditions that threaten it. Bleeding with pain in early pregnancy, a uterus larger or smaller than the dates, and vomiting or burning urination each open a short differential, and working through it at booking is what catches ectopic pregnancy, molar disease and twins while they are still manageable.",
+      "teach": [
+        {
+          "heading": "Bleeding or pain in early pregnancy",
+          "body": "Threatened abortion bleeds with a closed cervix and a live fetus, and most such pregnancies continue. Ectopic pregnancy bleeds with pain, faintness or shoulder tip pain and an empty uterus, and it can kill, so pain with bleeding or syncope is referred the same day. Heavy bleeding with passage of tissue suggests incomplete abortion and needs urgent evacuation and assessment."
+        },
+        {
+          "heading": "When the uterus does not match the dates",
+          "table": {
+            "cols": [
+              "Finding",
+              "First thought",
+              "What settles it"
+            ],
+            "rows": [
+              [
+                "Uterus larger than dates",
+                "Wrong dates, twins, excess liquor, molar disease, fibroid",
+                "Dating history plus early scan"
+              ],
+              [
+                "Uterus smaller than dates",
+                "Wrong dates, scanty liquor, growth restriction",
+                "Dating history plus growth scan"
+              ],
+              [
+                "No fetal heart where expected",
+                "Wrong dates, missed abortion, ectopic",
+                "Repeat assessment with scan"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "The medical mimics",
+          "points": [
+            "Urinary infection is common and often silent in pregnancy and can trigger preterm labour, so urine testing belongs to every booking and a burning complaint is cultured, not dismissed.",
+            "Ordinary nausea keeps fluids down; persistent vomiting with dehydration, weight loss and ketones is hyperemesis and needs fluids and admission.",
+            "Tiredness with pallor is anaemia until proved otherwise, and breathlessness with palpitations in an anaemic mother is fetal and maternal risk together."
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Calling early bleeding a threatened abortion without excluding ectopic pregnancy.",
+        "Accepting a size-date mismatch as wrong dates without a scan.",
+        "Dismissing burning urination or persistent vomiting as ordinary pregnancy."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Bleeding with pain and faintness at eight weeks: what must be excluded first?",
+          "a": "Ectopic pregnancy, because it can rupture and kill, so she is referred the same day for scan and assessment.",
+          "accept": [
+            "ectopic pregnancy",
+            "rupture",
+            "same day"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Uterus larger than dates with heavy vomiting and bleeding: what enters the differential?",
+          "a": "Molar pregnancy alongside wrong dates and twins, settled by scan with hormone testing and referral to a higher centre.",
+          "accept": [
+            "molar pregnancy",
+            "twins",
+            "wrong dates",
+            "scan"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is a silent urinary infection treated in pregnancy when it would be watched outside it?",
+          "a": "Because bacteriuria in pregnancy ascends readily to the kidney and is linked with preterm labour, so it is sought by testing and treated, not left to declare itself.",
+          "accept": [
+            "ascends",
+            "preterm labour",
+            "sought by testing",
+            "treated"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "diagnosis_pregnancy_antenatal_care_schedule: Signs symptoms hormones"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Early pregnancy loss and ectopic pregnancy"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.antenatal.workup": {
+      "id": "skill.ix.antenatal.workup",
+      "kind": "investigation",
+      "system": "obstetrics",
+      "title": "Tests that answer booking questions",
+      "oneLine": "Confirm it, date it, group her, and screen what she cannot feel",
+      "why": "Most of what threatens a pregnancy is silent at booking: anaemia, an unfavourable blood group, sugar, infection and thyroid disease all hide behind a well woman. Grouping tests by the question each answers stops the list becoming a ritual panel and tells the student what to do when any one of them comes back abnormal.",
+      "teach": [
+        {
+          "heading": "Confirm and date",
+          "body": "Urine pregnancy testing confirms the pregnancy; a blood hormone test with repeat levels settles doubt when the urine test and the dates disagree. Dating ultrasound in the first trimester fixes gestation from the crown rump length and overrules uncertain menstrual dates. Later scans check the neck fold and the anomaly survey at their appointed weeks, then growth and liquor."
+        },
+        {
+          "heading": "Blood tests every mother needs",
+          "points": [
+            "Haemoglobin at booking and every trimester, with ferritin where anaemia is found, because plasma expansion dilutes the blood and hookworm, malaria and diet drain it.",
+            "Blood group with rhesus status and antibody screening, so a rhesus negative mother is recognised before sensitisation, not after.",
+            "Sugar testing for overt and gestational diabetes at the recommended weeks, earlier where risk markers exist.",
+            "HIV, hepatitis B and syphilis screening once, because treatment and newborn protection depend on knowing before birth.",
+            "Thyroid testing where policy or symptoms direct it, since both over and under activity alter fetal and maternal outcome."
+          ]
+        },
+        {
+          "heading": "Urine and infection screening",
+          "body": "Urine protein and sugar are checked at every visit: protein with raised pressure defines pre-eclampsia, and sugar points to diabetes. A urine culture at booking finds the silent bacteriuria that ascends to the kidney and provokes preterm labour. Vaginal swabs and malaria or stool testing follow symptoms and local epidemiology, not routine."
+        }
+      ],
+      "pitfalls": [
+        "Ordering the panel without knowing which question each test answers.",
+        "Repeating a dating scan late in pregnancy to fix dates the first scan already fixed.",
+        "Ignoring a positive urine culture because she has no burning.",
+        "Missing rhesus negativity until after birth, when prevention is too late."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which test fixes the dates when the menstrual history is uncertain?",
+          "a": "A first trimester dating ultrasound, measuring the crown rump length, which overrules uncertain menstrual dates.",
+          "accept": [
+            "dating ultrasound",
+            "crown rump length",
+            "first trimester",
+            "overrules"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why is a urine culture sent at booking even with no symptoms?",
+          "a": "To find silent bacteriuria, which ascends to the kidney and is linked with preterm labour, so it can be treated before it declares itself.",
+          "accept": [
+            "silent bacteriuria",
+            "ascends",
+            "preterm labour",
+            "treated"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A rhesus negative mother books at 12 weeks with no antibodies. What does this change?",
+          "a": "She needs antibody surveillance through pregnancy and prophylaxis at the recommended points including after birth, so sensitisation never gets its chance.",
+          "accept": [
+            "antibody surveillance",
+            "prophylaxis",
+            "after birth",
+            "sensitisation"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "diagnosis_pregnancy_antenatal_care_schedule: Visits tests vaccines"
+        },
+        {
+          "source": "NICE Antenatal care guideline",
+          "locator": "Routine antenatal screening schedule"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.antenatal.diagnosis": {
+      "id": "skill.antenatal.diagnosis",
+      "kind": "reasoning",
+      "system": "obstetrics",
+      "title": "Diagnosis, dates and risk group",
+      "oneLine": "A viable intrauterine pregnancy, a gestation in weeks, and a risk label with a destination",
+      "why": "The booking diagnosis is three statements, not one: what the pregnancy is, how far along it is, and which care path it takes. A diagnosis that confirms pregnancy but leaves gestation vague and risk unstated has answered nothing the rest of care depends on.",
+      "teach": [
+        {
+          "heading": "Three statements",
+          "points": [
+            "What it is: a viable intrauterine pregnancy, confirmed by test with fetal heart or scan according to gestation, with ectopic and non-viable states excluded where bleeding or pain raised them.",
+            "How far along: gestation in completed weeks with the expected date, stating whether the dates are certain or reconstructed.",
+            "Which path: low risk for routine primary care follow up, or high risk for shared and specialist care with a named referral hospital."
+          ]
+        },
+        {
+          "heading": "When the scan overrules the dates",
+          "body": "Menstrual dates stand when cycles were regular, the date is remembered with confidence, and the early scan agrees within days. The scan overrules when cycles were irregular, the date is guessed, or the measurements differ beyond the accepted margin. Whatever wins, the record states which source the gestation rests on, so nobody re-dates the pregnancy at every later visit."
+        },
+        {
+          "heading": "High risk earns a destination",
+          "body": "Previous stillbirth or preterm birth, previous caesarean or heavy bleed, multiple pregnancy, medical disease, anaemia unresponsive to treatment, and late booking with no records all move her out of routine care. The diagnosis then names the referral hospital and the next appointment, because a risk label without a destination changes nothing."
+        }
+      ],
+      "pitfalls": [
+        "Confirming the pregnancy without fixing the gestation.",
+        "Re-dating at every visit instead of fixing dates once at booking.",
+        "Labelling high risk without naming the referral hospital and the next review."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What three statements make a complete booking diagnosis?",
+          "a": "A viable intrauterine pregnancy, the gestation in weeks with the expected date, and the risk group with where she will be followed.",
+          "accept": [
+            "viable intrauterine pregnancy",
+            "gestation",
+            "expected date",
+            "risk group"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "When does the scan overrule the menstrual dates?",
+          "a": "When cycles were irregular, the date is uncertain, or the measurements differ beyond the accepted margin; then the gestation rests on the scan and the record says so.",
+          "accept": [
+            "irregular",
+            "uncertain",
+            "differ",
+            "rests on the scan"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "diagnosis_pregnancy_antenatal_care_schedule: Dating scan and EDD"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Prenatal care: gestational age assessment"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.antenatal": {
+      "id": "skill.tx.antenatal",
+      "kind": "treatment",
+      "system": "obstetrics",
+      "title": "Routine antenatal management",
+      "oneLine": "Visits, supplements, immunisation, counselling and referral, not rescue",
+      "why": "Antenatal management is prevention delivered on schedule, not treatment delivered in crisis. The visit rhythm, the daily supplements, the immunisation and the birth plan each prevent a different disaster, and a mother lost to follow up loses all of them together, which is why tracking defaulters is part of the treatment.",
+      "teach": [
+        {
+          "heading": "The visit rhythm",
+          "body": "Book within the first 12 weeks then keep contact through the pregnancy: monthly until the middle of the third trimester, fortnightly as term approaches, and weekly near the end, with extra visits for high risk.\n\nThe national programme guarantees a minimum of four visits with dated content at each, and the monthly specialist clinic day covers mothers who need consultant review. Every visit repeats weight, blood pressure, urine testing, fundal growth and fetal heart with movements."
+        },
+        {
+          "heading": "Supplements and immunisation",
+          "points": [
+            "Daily oral iron with folic acid through pregnancy and into the postnatal months, as quoted in the cited anaemia guidance at 60 mg elemental iron with 400 micrograms folic acid daily, taken with vitamin C rich food and away from tea.",
+            "Calcium supplementation where dietary intake is low, and deworming with malaria prophylaxis where local policy directs it.",
+            "Tetanus toxoid containing immunisation as per the national schedule, with the full course for unprotected mothers and a booster where prior immunisation is documented.",
+            "Treat what screening finds: silent bacteriuria, anaemia unresponsive to oral iron, thyroid disease, diabetes and infections, each by its own protocol with referral where severity demands it."
+          ]
+        },
+        {
+          "heading": "Counselling and birth preparedness",
+          "points": [
+            "Food, rest, tobacco and alcohol: an extra balanced meal, eight hours of rest with daytime naps where possible, and no tobacco or alcohol, with the family counselled alongside her.",
+            "Danger symptoms in her own words: bleeding, leaking, headache with visual change, swelling of the face, fits, fever, burning urination, persistent vomiting and reduced movements, with instruction to attend the same day.",
+            "A written birth plan: the named hospital, transport arranged, blood donor identified for high risk, cashless scheme enrolment completed, and the newborn plan including immediate skin contact and feeding."
+          ]
+        },
+        {
+          "heading": "When to refer",
+          "body": "Refer to the first referral unit or higher centre for bleeding, pain with faintness, pressure with protein, fits, absent movements, leaking before term, anaemia unresponsive to treatment, twins, breech near term, and any previous scar with complications. In a resource limited setting, referral thresholds stay low: an uncertain date with a worrying finding travels, it never waits."
+        }
+      ],
+      "pitfalls": [
+        "Counting four visits as enough for a high risk mother.",
+        "Starting supplements without explaining how to take them and what dark stools mean.",
+        "Counselling the woman alone while the family that decides transport and money hears nothing.",
+        "Holding a worrying finding at a primary centre instead of referring early."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is checked at every antenatal visit without exception?",
+          "a": "Weight, blood pressure, urine protein and sugar, fundal growth against the dates, and fetal heart with movements.",
+          "accept": [
+            "blood pressure",
+            "urine protein",
+            "fundal growth",
+            "fetal heart",
+            "movements"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What daily supplements does routine antenatal care include, and how is iron best taken?",
+          "a": "Daily oral iron with folic acid through pregnancy and beyond, taken with vitamin C rich food and away from tea, with calcium where dietary intake is low.",
+          "accept": [
+            "oral iron",
+            "folic acid",
+            "vitamin C",
+            "away from tea",
+            "calcium"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Name four findings that mandate referral to a higher centre.",
+          "a": "Bleeding with pain, pressure with protein, absent fetal movements, and leaking before term, with twins, breech near term and unresponsive anaemia alongside them.",
+          "accept": [
+            "bleeding",
+            "pressure with protein",
+            "absent fetal movements",
+            "leaking before term",
+            "twins"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "anaemia_pregnancy_iron_transfusion_thresholds: Oral iron 60 mg daily"
+        },
+        {
+          "source": "WHO recommendations on antenatal care",
+          "locator": "Routine contacts, nutrition and counselling"
+        },
+        {
+          "source": "National Health Mission",
+          "locator": "Antenatal visit schedule and birth preparedness"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of drug class and schedule. Supplement strengths, immunisation intervals and treatment regimens must be taken from the current national programme and institutional guideline at the time of prescribing. CliniX does not prescribe."
+    },
+    "skill.annex.antenatal.schedule": {
+      "id": "skill.annex.antenatal.schedule",
+      "kind": "annexure",
+      "system": "obstetrics",
+      "title": "Antenatal schedule and growth rules",
+      "oneLine": "When to see her, what to do, and the numbers that judge growth",
+      "why": "A busy clinic runs on a schedule the student can recite and rules of thumb that never need a calculator. This annexure puts the visit rhythm, the growth checks and the danger list on one page so nothing dated is missed and no deviation passes unremarked.",
+      "teach": [
+        {
+          "heading": "Visit schedule at a glance",
+          "table": {
+            "cols": [
+              "Contact",
+              "When",
+              "Dated content"
+            ],
+            "rows": [
+              [
+                "Booking",
+                "Within first 12 weeks",
+                "Dates, risk group, full bloods, urine, supplements"
+              ],
+              [
+                "Second quarter",
+                "Mid pregnancy visits",
+                "Anomaly survey, sugar testing, growth tracking"
+              ],
+              [
+                "Third quarter",
+                "Late pregnancy visits",
+                "Growth, liquor, presentation, birth plan"
+              ],
+              [
+                "Near term",
+                "Final weeks",
+                "Weekly review, fitness for birth, referral checks"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Growth rules of thumb",
+          "points": [
+            "Uterus palpable abdominally from about 12 weeks; quickening felt around the middle of pregnancy, earlier where she has been pregnant before.",
+            "Fundal height in centimetres tracks weeks of gestation through the middle months within a small margin; a gap beyond that margin earns a scan.",
+            "Fetal heart heard by Doppler from the late first trimester and by fetal stethoscope from the middle of pregnancy.",
+            "Weight gain, blood pressure, urine protein and haemoglobin are trended, never read once: the change across visits is the finding."
+          ]
+        },
+        {
+          "heading": "Same-day danger list",
+          "points": [
+            "Bleeding, leaking of fluid, absent movements, severe headache with visual change, fits, fever with burning urination, persistent vomiting, and pressure with protein all attend the same day.",
+            "Preterm pain, excess vomiting with dehydration, and pallor with breathlessness travel to a higher centre without delay."
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Reading fundal height once instead of trending it across visits.",
+        "Accepting a size-date gap as wrong dates without scanning.",
+        "Forgetting the danger list when counselling a well mother."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "When should booking happen and what dated content belongs to it?",
+          "a": "Within the first 12 weeks, with dates fixed, the risk group decided, full bloods and urine done, and supplements started.",
+          "accept": [
+            "first 12 weeks",
+            "dates fixed",
+            "risk group",
+            "supplements"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How is fundal height read, and when does a gap earn a scan?",
+          "a": "In centimetres tracking weeks of gestation through the middle months, with a gap beyond the small accepted margin earning a growth scan.",
+          "accept": [
+            "centimetres",
+            "weeks of gestation",
+            "margin",
+            "growth scan"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "diagnosis_pregnancy_antenatal_care_schedule: Visits tests vaccines"
+        },
+        {
+          "source": "NICE Antenatal care guideline",
+          "locator": "Routine antenatal schedule and growth surveillance"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.antenatal.meena",
+      "initialVitals": {
+        "hr": 82,
+        "bpSystolic": 110,
+        "bpDiastolic": 70,
+        "rr": 16,
+        "spo2": 98,
+        "temp": 36.8,
+        "gcs": 15
+      },
+      "title": "A young woman with two missed periods at her first antenatal visit",
+      "opening": "Meena Patil, 26, has come to the antenatal clinic with her mother-in-law, sent by the village health worker with a home pregnancy test that shows two lines. She carries no records. Introduce yourself and take her booking history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Meena Patil",
+        "age": 26,
+        "sex": "female",
+        "occupation": "Homemaker, helps on the family farm at harvest",
+        "residence": "Rural, lives with her husband and mother-in-law"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "what is the problem today",
+            "why have you come to the clinic",
+            "tell me what brings you",
+            "how can I help you today"
+          ],
+          "reply": "Doctor, I missed my periods twice and the test at home shows I am pregnant. The health worker asked me to register here.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "onset_timing": {
+          "cues": [
+            "when did you miss your period",
+            "how many weeks pregnant are you",
+            "since when have you known",
+            "when did you first suspect"
+          ],
+          "reply": "My last bleed started about twelve weeks ago, in the week after the village fair. I suspected only when the second period did not come.",
+          "key": true
+        },
+        "dating_recall": {
+          "cues": [
+            "first day of your last period",
+            "date of your last menstrual bleed",
+            "were your cycles regular before",
+            "how long was your cycle"
+          ],
+          "reply": "The first day was a Monday, I remember because of the fair. My cycles come every 28 to 30 days and were regular before this.",
+          "key": true,
+          "skillId": "skill.hx.obg.booking_lmp"
+        },
+        "test_clue_details": {
+          "cues": [
+            "date of the home pregnancy test",
+            "how late was the period then",
+            "festival near the last period",
+            "which month of pregnancy do you believe"
+          ],
+          "reply": "I did the home test ten days after the missed date and it showed two lines at once. I believe I am running the third month now.",
+          "key": true
+        },
+        "nausea_appetite_now": {
+          "cues": [
+            "morning sickness and vomiting",
+            "what time of day is the nausea",
+            "keeping fluids down",
+            "appetite and weight change",
+            "unusual food craving"
+          ],
+          "reply": "I feel sick most mornings and vomited twice last week, but I keep water and food down and pass urine as usual. My appetite is less but my weight feels the same. I crave raw tamarind these days.",
+          "key": true,
+          "skillId": "skill.hx.antenatal.symptoms"
+        },
+        "quickening_movement_now": {
+          "cues": [
+            "first felt the baby move",
+            "fetal movements regular",
+            "is the baby moving well",
+            "flutter in the abdomen"
+          ],
+          "reply": "Not yet, doctor. The sister at the anganwadi said first movements come around the middle months, so I am waiting for them.",
+          "key": true
+        },
+        "bleeding_spotting_now": {
+          "cues": [
+            "any bleeding per vagina",
+            "spotting or blood stained discharge",
+            "passage of clots or tissue",
+            "pain with the bleeding"
+          ],
+          "reply": "No bleeding at all, no spotting, no clots and no pain in the lower abdomen.",
+          "key": true
+        },
+        "fluid_leak_discharge": {
+          "cues": [
+            "leaking of fluid per vagina",
+            "increased vaginal discharge",
+            "foul smelling discharge",
+            "itching with discharge"
+          ],
+          "reply": "Only the usual white discharge, a little more than before, with no smell, no itching and no leaking of watery fluid.",
+          "key": true
+        },
+        "headache_vision_swelling": {
+          "cues": [
+            "severe headache with visual blurring",
+            "swelling of the face or hands",
+            "fits or loss of consciousness",
+            "seeing spots or flashes"
+          ],
+          "reply": "No headache, no blurring, no swelling of the face or hands, and no fits. My rings still fit as before.",
+          "key": true
+        },
+        "urine_fever_burning": {
+          "cues": [
+            "burning while passing urine",
+            "frequency of passing urine at night",
+            "fever with chills",
+            "reduced urine output"
+          ],
+          "reply": "I pass urine a little more often, but with no burning and no fever. The colour is normal and the amount is as usual.",
+          "key": true
+        },
+        "past_pregnancy_history": {
+          "cues": [
+            "previous pregnancy outcome",
+            "any abortion or stillbirth before",
+            "preterm birth in the past",
+            "previous caesarean or instrumental delivery"
+          ],
+          "reply": "This is my first pregnancy, doctor. I have never had an abortion, a stillbirth or any delivery before.",
+          "key": true,
+          "skillId": "skill.hx.obg.previous_pregnancies"
+        },
+        "medical_illness_history": {
+          "cues": [
+            "high blood pressure before pregnancy",
+            "diabetes or thyroid disease",
+            "heart disease or asthma",
+            "tuberculosis treatment in the past",
+            "blood transfusion ever needed"
+          ],
+          "reply": "I have no pressure, sugar, thyroid, heart or fits problem. No tuberculosis, no jaundice, and I have never needed a blood transfusion.",
+          "key": true,
+          "skillId": "skill.hx.obg.medical_family_drug"
+        },
+        "medicines_supplements_now": {
+          "cues": [
+            "tablets you are taking now",
+            "iron folic acid tablets started",
+            "any other regular medicine",
+            "allergy to any medicine"
+          ],
+          "reply": "I take no regular tablets yet and have no allergy to any medicine. The health worker gave me four iron tablets to start after this visit.",
+          "key": true
+        },
+        "family_twin_history": {
+          "cues": [
+            "twins in the family",
+            "diabetes in the family",
+            "high blood pressure in parents",
+            "any hereditary illness at home"
+          ],
+          "reply": "No twins on either side. My mother has sugar since last year and my father has pressure, both take tablets. No sickle cell or thalassaemia at home.",
+          "key": true
+        },
+        "food_work_rest": {
+          "cues": [
+            "what do you eat in a day",
+            "tobacco or alcohol use",
+            "hours of work and rest",
+            "who helps at home"
+          ],
+          "reply": "We eat rice, dal and vegetables twice a day with milk when there is extra. I chew no tobacco and drink no alcohol. I rest in the afternoon and my mother-in-law helps with the heavy work.",
+          "key": false
+        },
+        "td_immunisation_status": {
+          "cues": [
+            "tetanus injection in this pregnancy",
+            "immunisation card seen",
+            "vaccination during a previous pregnancy",
+            "protection against lockjaw"
+          ],
+          "reply": "I have taken no injection in this pregnancy yet. I was vaccinated as a child but carry no card for it.",
+          "key": true
+        },
+        "birth_plan_place": {
+          "cues": [
+            "where will you deliver",
+            "transport arranged for labour",
+            "money and scheme enrolment",
+            "who will accompany you"
+          ],
+          "reply": "We plan the government hospital in town, about an hour by auto. My husband will bring me. We have not yet enrolled for the cashless scheme.",
+          "key": true
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Alert young woman, well nourished, mild pallor of the conjunctiva. No breathlessness, no jaundice, no lymphadenopathy.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 82 regular. Blood pressure 110/70 seated, arm at heart level, correct cuff. Respiratory rate 16. Temperature 36.8 C. SpO2 98 percent on room air. Weight 52 kg.",
+          "abnormal": false
+        },
+        "skill.gen.edema": {
+          "finding": "No facial puffiness, no hand oedema, no pitting oedema of the feet.",
+          "abnormal": false
+        },
+        "skill.exam.obg.preg_prep_inspect": {
+          "finding": "Abdomen flat with linea nigra to the umbilicus. No surgical scars, no hernia, no visible mass. Vulva healthy, no discharge seen.",
+          "abnormal": false
+        },
+        "skill.exam.obg.fundal_height": {
+          "finding": "Uterus just palpable above the pubic symphysis, matching 12 weeks gestation. No mass felt separately from the uterus.",
+          "abnormal": false
+        },
+        "skill.exam.obg.leopold": {
+          "finding": "Fetal parts too small for reliable grips at this gestation. Lie and presentation not assignable. No comment on engagement.",
+          "abnormal": false
+        },
+        "skill.exam.obg.fetal_heart": {
+          "finding": "Fetal heart heard by Doppler at 148 per minute, counted against a maternal pulse of 82. Movements not yet felt, as expected at 12 weeks.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "dating_usg",
+        "hb",
+        "bloodgroup",
+        "urine_routine",
+        "infection_screen"
+      ],
+      "investigations": {
+        "upt": {
+          "label": "Urine pregnancy test",
+          "indicated": true,
+          "result": "Positive, confirming the home test.",
+          "note": "Confirms the pregnancy; the dates and the scan do the rest of the work."
+        },
+        "dating_usg": {
+          "label": "Dating ultrasound",
+          "indicated": true,
+          "result": "Single live intrauterine gestation, crown rump length matching 12 weeks and 2 days. No adnexal mass, no free fluid.",
+          "note": "Confirms an intrauterine viable pregnancy and fixes the dates, overruling nothing here because the periods agreed."
+        },
+        "hb": {
+          "label": "Haemoglobin",
+          "indicated": true,
+          "result": "Haemoglobin 10.2 g/dL. Red cells microcytic hypochromic on smear.",
+          "note": "Mild anaemia at booking, the commonest correctable finding. Start oral iron with folic acid, counsel on diet and recheck next visit."
+        },
+        "bloodgroup": {
+          "label": "Blood group and rhesus",
+          "indicated": true,
+          "result": "B positive. Antibody screen negative.",
+          "note": "Rhesus positive with no antibodies: no prophylaxis pathway needed, and the group is on record for any later bleed."
+        },
+        "urine_routine": {
+          "label": "Urine routine and culture",
+          "indicated": true,
+          "result": "Protein nil, sugar nil. Culture shows no significant growth.",
+          "note": "Clean urine at booking sets the baseline that later protein or sugar will be judged against."
+        },
+        "infection_screen": {
+          "label": "HIV, hepatitis B and syphilis screening",
+          "indicated": true,
+          "result": "All non-reactive.",
+          "note": "One-time screening with counselling; a negative panel at booking needs no repeat without new exposure."
+        }
+      },
+      "differentialModel": {
+        "answer": "Normal intrauterine pregnancy at 12 weeks, low risk. Threatened abortion, ectopic pregnancy, multiple pregnancy, molar pregnancy, urinary tract infection and iron deficiency anaemia were considered and set aside or addressed.",
+        "accept": [
+          "threatened abortion",
+          "ectopic pregnancy",
+          "multiple pregnancy",
+          "molar pregnancy",
+          "urinary tract infection",
+          "iron deficiency anaemia"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Normal intrauterine pregnancy at 12 weeks gestation, low risk, with mild anaemia.",
+        "accept": [
+          "pregnancy",
+          "intrauterine pregnancy",
+          "normal pregnancy"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Register with a written record, daily iron with folic acid and diet counsel for the anaemia, tetanus immunisation as per schedule, counsel on danger symptoms with same-day instruction, arrange routine visits with growth and pressure tracking, and plan a hospital birth.",
+        "accept": [
+          "iron",
+          "folic acid",
+          "tetanus",
+          "danger symptoms",
+          "routine visits",
+          "hospital birth",
+          "birth plan"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "Certain dates are the foundation: regular cycles, a remembered first day and a scan that agrees within days, so growth and term decisions later rest on rock, not memory.",
+        "Ordinary symptoms and danger symptoms are asked as two separate sets; her nausea keeps fluids down with normal urine, which keeps it ordinary, while every danger answer here is negative.",
+        "Mild pallor with 10.2 g/dL is the visit finding that changes management: daily iron with folic acid, diet counsel and a recheck, not reassurance alone.",
+        "A uterus matching 12 weeks with a Doppler heart of 148 against a maternal 82 is the normal examination; lie and presentation are rightly left unassigned at this gestation.",
+        "Clean urine and a negative infection panel at booking are baselines, not rituals: later protein, sugar or growth changes are judged against exactly these.",
+        "Low risk is a working label reviewed at every visit, and the birth plan with a named hospital is written now, not when labour starts."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

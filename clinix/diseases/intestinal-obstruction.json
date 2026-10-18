@@ -1,0 +1,1177 @@
+{
+  "_comment": "Surgery pathway for intestinal obstruction. Same architecture as pneumonia: almost every finding is an emphasis overlay on a shared core/surgery skill. This disease's own contribution is the mechanical versus adynamic split, the small versus large bowel patterns, strangulation as the operating decision, and the Gastrografin-judged conservative trial for adhesive obstruction.",
+  "id": "intestinal-obstruction",
+  "name": "Intestinal obstruction",
+  "fullName": "Acute intestinal obstruction",
+  "subtitle": "Small and large bowel",
+  "system": "surgery",
+  "kbRef": "intestinal_obstruction_and_colonic_volvulus",
+  "oneLine": "Colicky pain, vomiting, distension and absolute constipation: where the block is and whether the bowel is dying",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "Blocked lumen or stopped bowel, and why strangulation outranks both",
+      "skills": [
+        "skill.reasoning.intestinal.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age and previous surgery set the cause before a symptom is mentioned",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Age writes the shortlist: worms and intussusception in children, adhesions in the previously operated young adult, and sigmoid volvulus, growth or gallstone ileus in the elderly. Record every previous abdominal operation with its date, since one laparotomy years ago is enough for adhesions."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Colic, vomit, distend, stop: in that order",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.surg.acute_abdomen",
+        "skill.hx.surg.groin_hernia"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect the four cardinal symptoms in sequence over hours to days: central colicky pain first, vomiting close behind it, progressive distension, and finally absolute constipation with arrest of flatus. One motion passed at the very start does not exclude obstruction."
+        },
+        "skill.hx.surg.acute_abdomen": {
+          "expect": "Pin down the colic: sudden gripping pain that comes and goes, eased by pressure, with vomiting that turns bilious then faeculent. Constant burning pain replacing colic, with the patient lying still instead of tossing, means strangulation or perforation."
+        },
+        "skill.hx.surg.groin_hernia": {
+          "expect": "Always ask about a groin or umbilical swelling and whether it has recently become painful, tense or irreducible. A strangulated hernia is the commonest curable cause of obstruction and the commonest one missed by never asking."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The cause is usually in the past: operations, hernias, TB, tumours and slowing drugs",
+      "skills": [
+        "skill.hx.intestinal.risk"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Dehydration and the earliest drift towards shock outrank the abdomen at first glance",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.surg.surgical_shock"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for the abdominal facies and the facies of dehydration: anxious look, sunken eyes, drawn cheeks and a dry tongue. Colic makes the patient restless and tossing; stillness with a pinched face suggests peritonism instead."
+        },
+        "skill.gen.vitals": {
+          "expect": "Expect a normal pulse early with falling volume and rising rate as dehydration advances. Fever is late and favours strangulation or established peritonitis; tachycardia with oliguria is early shock even with a normal blood pressure."
+        },
+        "skill.gen.surg.surgical_shock": {
+          "expect": "Read shock before hypotension: tachycardia, tachypnoea, cool periphery, delayed capillary refill and falling urine output. Strangulation with third-spacing into dead bowel can empty the circulation while the blood pressure still looks acceptable."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Abdominal examination",
+      "blurb": "Distension pattern, visible peristalsis, the noisy abdomen, then groins and rectum",
+      "skills": [
+        "skill.exam.surg.bowel_obstruction",
+        "skill.exam.surg.peritonitis_signs",
+        "skill.exam.surg.hernia_inspection",
+        "skill.exam.surg.hernia_palpation",
+        "skill.exam.surg.dre_surgical"
+      ],
+      "emphasis": {
+        "skill.exam.surg.bowel_obstruction": {
+          "expect": "Expect central distension with visible ladder-pattern peristalsis and metallic tinkling bowel sounds in small bowel obstruction, peripheral gross distension in large bowel obstruction, and almost immediate distension in sigmoid volvulus."
+        },
+        "skill.exam.surg.peritonitis_signs": {
+          "expect": "Simple obstruction has no guarding, rigidity or rebound. Their appearance, starting localised over the dying segment, is strangulation until proven otherwise, and with generalised guarding the rebound test is unnecessary."
+        },
+        "skill.exam.surg.hernia_palpation": {
+          "expect": "Examine every hernial orifice in every suspected obstruction without exception. A tense, tender, irreducible groin swelling with overlying redness is a strangulated hernia and goes to theatre once resuscitated."
+        },
+        "skill.exam.surg.dre_surgical": {
+          "expect": "Expect an empty, ballooned rectum in established obstruction. Blood and mucus suggest ischaemia or intussusception, a mass suggests growth, and a tender bulge suggests a pelvic collection."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the obstruction picture together",
+      "blurb": "Four symptoms make it obstruction; constant pain with tenderness makes it strangulation",
+      "skills": [
+        "skill.reasoning.intestinal.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Tempo, level, cause and strangulation in four sentences",
+      "skills": [
+        "skill.present.intestinal.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Ileus needs no operation, ischaemia cannot wait for one, perforation needs another",
+      "skills": [
+        "skill.reasoning.intestinal.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Film the pattern, scan the point, challenge the adhesion, watch the lactate",
+      "skills": [
+        "skill.investigation.intestinal.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and strangulation",
+      "blurb": "Level, cause, completeness and strangulation: all four, every time",
+      "skills": [
+        "skill.reasoning.intestinal.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Resuscitate and decompress everyone; operate the strangulated and the failed",
+      "skills": [
+        "skill.treatment.intestinal.management"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.intestinal.abdominal_exam",
+        "title": "Examine the acute abdomen in suspected obstruction",
+        "task": "This 58-year-old man has two days of colicky pain, vomiting and distension with no stool or flatus for a day. Examine his abdomen for obstruction and its cause, and present your findings.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.exam.surg.bowel_obstruction",
+          "skill.exam.surg.peritonitis_signs",
+          "skill.exam.surg.hernia_inspection",
+          "skill.exam.surg.hernia_palpation"
+        ],
+        "examinerQuestions": [
+          "You found central distension with visible peristalsis and increased bowel sounds but no tenderness. Small or large bowel obstruction, and why?",
+          "What finding on this examination would convert your plan from conservative care to urgent operation?",
+          "You found no hernia and an empty rectum. What does each negative contribute to your diagnosis?"
+        ]
+      },
+      {
+        "id": "osce.intestinal.history",
+        "title": "Take a history and judge strangulation risk",
+        "task": "This 70-year-old woman has one day of griping pain, repeated vomiting and a swelling belly. Take a focused history in six minutes and state whether strangulation is present.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.surg.acute_abdomen",
+          "skill.hx.intestinal.risk"
+        ],
+        "examinerQuestions": [
+          "Her pain has turned constant with new tenderness. What does that change mean?",
+          "Which two facts in her past history would most change your suspected cause?",
+          "Name three bedside or laboratory markers you would check next for strangulation."
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.reasoning.intestinal.basics",
+      "skill.reasoning.intestinal.aetiology",
+      "skill.exam.surg.bowel_obstruction",
+      "skill.reasoning.intestinal.signs",
+      "skill.reasoning.intestinal.differential",
+      "skill.investigation.intestinal.workup",
+      "skill.reasoning.intestinal.diagnosis",
+      "skill.treatment.intestinal.management"
+    ]
+  },
+  "skills": {
+    "skill.reasoning.intestinal.basics": {
+      "id": "skill.reasoning.intestinal.basics",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "What intestinal obstruction is",
+      "oneLine": "A blocked lumen with proximal build-up, or a bowel that has stopped moving",
+      "why": "Obstruction is not one disease but a state of the bowel, and the first job is to sort mechanical blockage from a bowel that has simply stopped moving. That single split decides whether the answer is to relieve a block or to support a sick gut back into motion, so everything else hangs on getting it right.",
+      "teach": [
+        {
+          "heading": "Mechanical versus adynamic",
+          "body": "In mechanical or dynamic obstruction a physical block stops passage while peristalsis keeps working against it, so pain is colicky and bowel sounds are increased. In adynamic obstruction there is no block: paralytic ileus and acute colonic pseudo-obstruction leave the whole bowel dilated and quiet, with a silent abdomen and no discrete transition point on imaging.\n\nClosed-loop obstruction traps a segment between two blocked points, as in volvulus, so pressure rises fast and strangulation follows early. Strangulation means the blood supply is compromised as well as the lumen, and it turns an obstruction into dead bowel within hours."
+        },
+        {
+          "heading": "Small bowel behaves differently from large",
+          "table": {
+            "cols": [
+              "Feature",
+              "Small bowel obstruction",
+              "Large bowel obstruction"
+            ],
+            "rows": [
+              [
+                "Pain",
+                "Central, colicky, early and severe",
+                "Colicky but milder, often hypogastric"
+              ],
+              [
+                "Vomiting",
+                "Early, frequent, profuse, becomes faeculent",
+                "Late or absent until very late"
+              ],
+              [
+                "Distension",
+                "Central, moderate, gradual",
+                "Peripheral and often gross"
+              ],
+              [
+                "Constipation",
+                "Absolute but after distal bowel empties",
+                "Absolute and prominent from the start"
+              ],
+              [
+                "Commonest causes",
+                "Adhesions, hernia, growth, gallstone",
+                "Growth, volvulus, stricture"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why strangulation matters most",
+          "body": "Luminal blockage first causes proximal fluid accumulation, distension and raised wall tension. When pressure exceeds venous pressure the wall becomes ischaemic, bacteria cross into the blood, and gangrene with perforation follows.\n\nClosed-loop obstruction and strangulation declare themselves with constant rather than colicky pain, localised tenderness with guarding, fever, leucocytosis and lactic acidosis. These are the findings that convert watchful waiting into an urgent operation."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the difference between dynamic and adynamic intestinal obstruction?",
+          "a": "Dynamic obstruction has a physical block with active peristalsis against it, giving colicky pain and increased bowel sounds. Adynamic obstruction has no block: the bowel is dilated but quiet, as in paralytic ileus.",
+          "accept": [
+            "physical block",
+            "peristalsis",
+            "colicky",
+            "no block",
+            "quiet",
+            "ileus"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why is closed-loop obstruction more dangerous than a simple block?",
+          "a": "The segment is blocked at both ends so pressure rises rapidly, the blood supply is compromised early, and strangulation with gangrene follows within hours.",
+          "accept": [
+            "both ends",
+            "pressure",
+            "blood supply",
+            "strangulation",
+            "gangrene"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A patient has gross peripheral distension with almost no vomiting. Small or large bowel, and why?",
+          "a": "Large bowel obstruction. The competent ileocaecal valve traps gas in the colon giving peripheral distension, while vomiting stays late because the small bowel can still decompress backwards only slowly.",
+          "accept": [
+            "large bowel",
+            "peripheral",
+            "late vomiting",
+            "ileocaecal"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "intestinal_obstruction_and_colonic_volvulus: pathophysiology"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Intestinal obstruction: classification"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.intestinal.aetiology": {
+      "id": "skill.reasoning.intestinal.aetiology",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Causes of obstruction by mechanism, site and age",
+      "oneLine": "Outside the wall, in the wall, or in the lumen, and different culprits at each age",
+      "why": "Causes of obstruction are a long list until they are grouped, and grouping is what lets a student predict the cause from the patient in front of them. Adhesions dominate in the operated abdomen, hernia in the unexamined groin, growth and volvulus in the elderly, and worms and intussusception in children.",
+      "teach": [
+        {
+          "heading": "Three places for a block to sit",
+          "table": {
+            "cols": [
+              "Site",
+              "Examples",
+              "Typical setting"
+            ],
+            "rows": [
+              [
+                "Outside the wall",
+                "Adhesions, bands, hernia, volvulus",
+                "Previous surgery; unreduced groin swelling; elderly constipation"
+              ],
+              [
+                "In the wall",
+                "Growth, TB stricture, Crohn stricture, intussusception",
+                "Weight loss and bleeding; treated TB; young adult diarrhoea; child"
+              ],
+              [
+                "In the lumen",
+                "Gallstone ileus, faecolith, round worms, meconium",
+                "Older woman with gallstones; gross constipation; child with worms"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Age writes the shortlist",
+          "body": "In the newborn think atresia, meconium ileus and Hirschsprung disease. In infants think midgut volvulus and intussusception. In children think round worm impaction and appendicular bands.\n\nIn young adults adhesions after appendix surgery and Crohn strictures lead. In the elderly sigmoid volvulus, obstructing colorectal growth, diverticular stricture and gallstone ileus dominate. Sex matters too: volvulus and intussusception favour men, gallstone ileus favours older women."
+        },
+        {
+          "heading": "The big three to know cold",
+          "points": [
+            "Adhesions cause about three quarters of small bowel obstructions. One previous laparotomy is enough, and the interval can be years.",
+            "Strangulated external hernia is the commonest curable cause and the commonest cause of a missed diagnosis, because the groin was never examined.",
+            "Sigmoid volvulus needs a redundant sigmoid on a narrow base plus chronic constipation. It twists into a closed loop, distends immediately, and recurs unless resected.",
+            "Gallstone ileus is mechanical obstruction from a large stone impacted at the terminal ileum after passing through a cholecystoenteric fistula, not a true ileus."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the commonest cause of small bowel obstruction, and what history reveals it?",
+          "a": "Postoperative adhesions, revealed by any previous abdominal or pelvic operation.",
+          "accept": [
+            "adhesions",
+            "previous surgery",
+            "laparotomy",
+            "operation"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "An elderly constipated man has sudden gross distension. What mechanism do you suspect?",
+          "a": "Sigmoid volvulus: a redundant sigmoid loop twisting on its narrow base into a closed-loop large bowel obstruction.",
+          "accept": [
+            "sigmoid volvulus",
+            "closed loop",
+            "redundant",
+            "twist"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "intestinal_obstruction_and_colonic_volvulus: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Intestinal obstruction: aetiology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.intestinal.signs": {
+      "id": "skill.reasoning.intestinal.signs",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "The obstruction picture",
+      "oneLine": "Four cardinal symptoms, a noisy abdomen, and the findings that mean strangulation",
+      "why": "Four symptoms make the diagnosis of obstruction, and one group of findings changes it into an emergency. Colicky pain with vomiting, distension and absolute constipation is the syndrome. Constant pain with tenderness, guarding and systemic upset is strangulation, and recognising it at the bedside is what saves bowel.",
+      "teach": [
+        {
+          "heading": "The four cardinal symptoms in order",
+          "body": "Pain comes first: intermittent, griping colic that comes suddenly and goes suddenly, eased by pressure, with the patient restless and tossing. In high small bowel obstruction vomiting follows almost with the pain, repeated and bilious, later becoming faeculent. Distension builds gradually and is central in small bowel and peripheral in large bowel obstruction.\n\nAbsolute constipation, the arrest of both stool and flatus, completes the picture. One motion passed at the very start does not exclude obstruction, since distal bowel below the block can still empty once."
+        },
+        {
+          "heading": "What the hands and ears add",
+          "points": [
+            "Visible peristalsis in a ladder pattern across a centrally distended abdomen is small bowel obstruction made visible. Watch patiently for it.",
+            "A noisy abdomen with metallic tinkles and borborygmi means obstruction with working peristalsis. A silent abdomen means peritonitis or ileus instead.",
+            "Simple obstruction has no tenderness, guarding or rigidity. Their appearance means the parietal peritoneum is now involved: strangulation or perforation.",
+            "Always finish at the hernial orifices and the rectum. A tense irreducible groin swelling is the cause, and an empty ballooned rectum supports obstruction while blood and mucus suggest intussusception or ischaemia."
+          ]
+        },
+        {
+          "heading": "Strangulation: the findings that change everything",
+          "body": "Colicky pain turning constant and burning is the earliest warning that blood supply is failing. Rebound tenderness on sudden release of the hand carries the same message, and with generalised guarding the test is unnecessary.\n\nSystemic signs follow: fever where there was none, tachycardia with falling urine output, dehydration with sunken eyes and a dry tongue, and later hypotension and shock. Raised lactate with a base deficit on blood gas analysis confirms tissue ischaemia when the clinical picture is doubtful."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the four cardinal symptoms of intestinal obstruction.",
+          "a": "Colicky abdominal pain, vomiting, distension and absolute constipation with arrest of flatus.",
+          "accept": [
+            "colicky pain",
+            "vomiting",
+            "distension",
+            "constipation",
+            "flatus"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "How do you distinguish simple obstruction from strangulation at the bedside?",
+          "a": "Simple obstruction has colicky pain without tenderness and a noisy abdomen. Strangulation brings constant pain, localised tenderness with guarding or rebound, fever, tachycardia and later shock.",
+          "accept": [
+            "constant pain",
+            "tenderness",
+            "guarding",
+            "rebound",
+            "fever",
+            "tachycardia"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why must every suspected obstruction have the groins and rectum examined?",
+          "a": "Because a strangulated hernia is a common curable cause that is missed when the groins are skipped, and rectal examination finds the empty rectum of obstruction, a mass, blood or the redcurrant jelly of intussusception.",
+          "accept": [
+            "hernia",
+            "groins",
+            "rectum",
+            "empty",
+            "blood",
+            "mass"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "intestinal_obstruction_and_colonic_volvulus: clinicalPearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "The acute abdomen: intestinal obstruction"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.intestinal.differential": {
+      "id": "skill.reasoning.intestinal.differential",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Differential diagnosis",
+      "oneLine": "What else distends, silences, or infarcts the bowel without a simple block",
+      "why": "Several conditions copy obstruction closely enough to mistreat: ileus is managed without operation, mesenteric ischaemia dies if operation is delayed, and perforation needs a different operation. Sorting them at the bedside, before imaging, is the core reasoning skill of the acute abdomen.",
+      "teach": [
+        {
+          "heading": "No block: ileus and pseudo-obstruction",
+          "body": "Paralytic ileus gives generalised distension with a silent abdomen and no colic, usually after surgery, peritonitis, electrolyte disturbance or drugs. Imaging shows uniformly dilated bowel with no discrete transition point.\n\nAcute colonic pseudo-obstruction dilates the colon massively, often after trauma, surgery or severe illness, again with no mechanical block. Both are diagnoses of exclusion confirmed by imaging, and both are harmed by an operation meant for a block that is not there."
+        },
+        {
+          "heading": "Vascular and perforated catastrophes",
+          "body": "Acute mesenteric ischaemia presents with severe constant pain that exceeds the physical findings, often with atrial fibrillation or recent hypotension, blood and putrid stool, and a rapidly rising lactate. Pain out of proportion to tenderness is its signature.\n\nPerforated peptic or typhoid ulcer gives sudden constant burning pain with board-like rigidity and a silent abdomen, free gas under the diaphragm on erect film, and obliterated liver dullness. Here rigidity is early and generalised, while in strangulating obstruction it starts localised over the dying segment."
+        },
+        {
+          "heading": "Colics, inflammation and the extra-abdominal mimics",
+          "points": [
+            "Biliary and ureteric colic are intermittent and griping but without distension or absolute constipation, and pressure relieves colic while it worsens inflammation.",
+            "Acute pancreatitis gives agonising constant upper abdominal pain with vomiting but early distension is absent, and Grey Turner or Cullen discolouration marks severe disease.",
+            "In children intussusception mimics obstruction with colic and vomiting but adds blood and mucus per rectum with a sausage-shaped lump.",
+            "Always exclude extra-abdominal causes of a rigid-seeming abdomen: basal pneumonia and pleurisy, uremia, diabetic crisis, sickle crisis and porphyria."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How does paralytic ileus differ from mechanical obstruction clinically?",
+          "a": "Ileus has generalised distension with a silent abdomen and no colicky pain, while mechanical obstruction has colicky pain with a noisy abdomen and visible peristalsis.",
+          "accept": [
+            "silent",
+            "no colic",
+            "noisy",
+            "colicky",
+            "peristalsis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the signature of acute mesenteric ischaemia, and why is it urgent?",
+          "a": "Severe constant pain that exceeds the physical findings, with bloodstained stool and rising lactate. Bowel dies quickly without revascularisation, so delay is fatal.",
+          "accept": [
+            "pain out of proportion",
+            "constant",
+            "lactate",
+            "blood",
+            "revascularisation"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "intestinal_obstruction_and_colonic_volvulus: additionalDifferentials"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "The acute abdomen: differential diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.investigation.intestinal.workup": {
+      "id": "skill.investigation.intestinal.workup",
+      "kind": "investigation",
+      "system": "surgery",
+      "title": "Investigating suspected obstruction",
+      "oneLine": "Plain film first, CT for the transition point, Gastrografin for the adhesive gamble",
+      "why": "Investigations in obstruction answer three questions in order: is there obstruction, where is the transition point, and is the bowel ischaemic. Each test owns one question, and ordering them that way stops a student waiting for a CT while strangulation declares itself.",
+      "teach": [
+        {
+          "heading": "Plain radiograph: confirm the pattern",
+          "body": "Supine and erect abdominal films come first, especially where CT is not at hand. Multiple air-fluid levels with dilated small bowel loops and a paucity of colonic gas mean small bowel obstruction. A hugely dilated loop rising from the pelvis like a coffee bean pointing to the right upper quadrant means sigmoid volvulus.\n\nFree gas under the diaphragm on the erect film means perforation, not simple obstruction. A stone shadow near the terminal ileum with dilated proximal bowel clinches gallstone ileus."
+        },
+        {
+          "heading": "CT: find the point and judge the bowel",
+          "body": "Contrast CT of the abdomen with intravenous and water-soluble oral contrast is the triage test: it shows the transition point between dilated and collapsed bowel, names the cause, and detects ischaemia, closed-loop patterns and free fluid.\n\nThe twisted mesentery of sigmoid volvulus appears as a whirl, and caecal volvulus as a comma-shaped loop in the left upper quadrant. Rising lactate with a base deficit on venous blood gas, leucocytosis and electrolyte disturbance grade ischaemia and dehydration alongside the images."
+        },
+        {
+          "heading": "Gastrografin challenge and the supporting tests",
+          "points": [
+            "In adhesive small bowel obstruction without ischaemia, water-soluble contrast given through the nasogastric tube predicts resolution: films at about 8 and 24 hours showing contrast reaching the colon favour conservative success, which occurs in about four fifths of cases.",
+            "Bloods on arrival: full blood count, urea and electrolytes, and serial lactate with venous blood gas. Correct potassium and chloride losses from vomiting before theatre.",
+            "Routine urine examination is mandatory in every acute abdomen to exclude a urinary cause masquerading as obstruction.",
+            "Barium enema is contraindicated in the acute phase. Contrast enema and colonoscopy have defined roles only once the acute episode settles or for large bowel assessment electively."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What does the erect abdominal film show in small bowel obstruction?",
+          "a": "Multiple air-fluid levels in dilated small bowel loops with little or no gas in the colon.",
+          "accept": [
+            "air-fluid levels",
+            "dilated",
+            "no colonic gas",
+            "small bowel"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What three questions does contrast CT answer in obstruction?",
+          "a": "Whether obstruction is present, where the transition point and cause are, and whether there is ischaemia, closed-loop or perforation.",
+          "accept": [
+            "transition point",
+            "cause",
+            "ischaemia",
+            "closed-loop",
+            "perforation"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What is the Gastrografin challenge, and what does contrast in the colon at 24 hours mean?",
+          "a": "Water-soluble contrast given via the nasogastric tube in adhesive obstruction without ischaemia. Contrast reaching the colon predicts that conservative management will succeed.",
+          "accept": [
+            "water-soluble",
+            "colon",
+            "conservative",
+            "adhesive",
+            "resolve"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "intestinal_obstruction_and_colonic_volvulus: additionalInvestigations"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Intestinal obstruction: investigations"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.intestinal.diagnosis": {
+      "id": "skill.reasoning.intestinal.diagnosis",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Diagnosis: level, cause, completeness and strangulation",
+      "oneLine": "A complete statement names all four, because the operation depends on each",
+      "why": "A diagnosis of intestinal obstruction alone does not tell anyone what to do. Small or large bowel changes the likely cause, the cause changes the operation, and strangulation changes the timing from routine to immediate. The diagnostic statement is the handover to the operating decision.",
+      "teach": [
+        {
+          "heading": "Level first: small or large",
+          "body": "Small bowel obstruction gives central distension with early profuse vomiting and colic, confirmed by dilated valvulae conniventes loops with colonic paucity on film. Large bowel obstruction gives peripheral, often gross distension with late vomiting and dominant constipation.\n\nSigmoid volvulus declares itself with immediate gross distension and the coffee-bean loop from the pelvis. Caecal volvulus gives a comma-shaped loop in the left upper quadrant from a mobile caecal mesentery."
+        },
+        {
+          "heading": "Strangulated or not: the criteria",
+          "points": [
+            "Clinical: constant rather than colicky pain, localised tenderness with guarding or rebound, fever and tachycardia where simple obstruction has none.",
+            "Laboratory: leucocytosis, rising serum lactate and a base deficit on blood gas analysis marking transmural ischaemia.",
+            "Imaging: closed-loop pattern, bowel wall thickening with poor enhancement, mesenteric oedema and free fluid on contrast CT.",
+            "Any one strong marker earns urgent operation. Waiting for all of them means waiting for dead bowel."
+          ]
+        },
+        {
+          "heading": "Writing the diagnostic statement",
+          "body": "Name the level, the likely cause with its evidence, completeness, and strangulation status: small bowel obstruction, likely adhesive after previous laparotomy, partial, no strangulation. Or: large bowel obstruction from sigmoid volvulus with peritonism, suggesting gangrene.\n\nCompleteness matters because partial obstruction may still pass flatus and may resolve conservatively, while complete obstruction with a competent valve distends relentlessly. Where imaging cannot settle the cause, the statement says so and laparotomy itself becomes both diagnosis and treatment."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What four elements belong in a complete obstruction diagnosis?",
+          "a": "The level (small or large bowel), the likely cause, whether it is complete or partial, and whether strangulation is present.",
+          "accept": [
+            "level",
+            "cause",
+            "complete",
+            "strangulation"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Which laboratory markers suggest strangulation?",
+          "a": "Leucocytosis, rising serum lactate and a base deficit on venous blood gas, reflecting bowel wall ischaemia.",
+          "accept": [
+            "leucocytosis",
+            "lactate",
+            "base deficit",
+            "ischaemia"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "intestinal_obstruction_and_colonic_volvulus: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Intestinal obstruction: clinical features"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.treatment.intestinal.management": {
+      "id": "skill.treatment.intestinal.management",
+      "kind": "treatment",
+      "system": "surgery",
+      "title": "Managing intestinal obstruction",
+      "oneLine": "Resuscitate and decompress every patient, operate the strangulated and the failed",
+      "why": "Every obstructed patient needs the same first hour: fluids, electrolytes, nasogastric decompression and surgical review. After that the paths split: adhesive obstruction without ischaemia often resolves, while strangulation, closed-loop, ischaemia and perforation need theatre without delay. Knowing which path the patient is on is the whole of management.",
+      "teach": [
+        {
+          "heading": "The first hour: drip and suck",
+          "body": "Keep the patient nil by mouth, pass a nasogastric tube for decompression, and resuscitate with intravenous crystalloids with correction of potassium and chloride lost in vomitus. Monitor pulse, blood pressure, urine output and electrolytes, and review the abdomen serially for the first signs of strangulation.\n\nGive opioid analgesia titrated to pain and an antiemetic that does not stimulate peristalsis, since prokinetics are avoided in mechanical obstruction. Every suspected obstruction gets early surgical review at first contact, with referral upward from primary to district hospital without waiting for imaging."
+        },
+        {
+          "heading": "Adhesive obstruction: the conservative trial",
+          "body": "Adhesive small bowel obstruction without ischaemia earns a trial of conservative care: continued decompression with fluid and electrolyte support plus a water-soluble contrast challenge, judged on films at about 8 and 24 hours. About four fifths resolve this way.\n\nAbandon the trial the moment strangulation appears, or when pain, distension, drainage volumes or lactate worsen instead of settling. Failed resolution, closed-loop patterns and recurrent episodes are themselves indications for operation with adhesiolysis."
+        },
+        {
+          "heading": "When theatre cannot wait",
+          "points": [
+            "Strangulation, closed-loop obstruction, bowel ischaemia and perforation need urgent laparotomy after resuscitation: release the cause, inspect all the bowel, and resect dead segments with primary repair or stoma as the contamination dictates.",
+            "Strangulated hernia is operated as soon as resuscitation allows. Never attempt forceful taxis on a tender irreducible hernia with obstruction.",
+            "Sigmoid volvulus without peritonitis or gangrene is decompressed first by rigid or flexible sigmoidoscopy with a flatus tube, with mucosal viability checked at the time. Peritonitis, failed decompression or gangrene means emergency resection, commonly Hartmann procedure.",
+            "Fit patients need elective sigmoid resection after successful decompression because recurrence is the rule. Unfit patients need a documented recurrence plan with the family."
+          ]
+        },
+        {
+          "heading": "After the crisis and the Indian context",
+          "body": "Postoperative care continues fluids, electrolytes, early mobilisation, chest physiotherapy and thromboprophylaxis, with the nasogastric tube removed once drainage falls and bowel function returns. Histopathology of any resected segment and colonoscopic clearance after large bowel obstruction exclude the growth that volvulus can hide.\n\nCounsel the family in plain language about why operation was or was not needed, what recurrence signs to watch for, and where to go first. Use public insurance and referral pathways for definitive resection where cost would otherwise delay it, and never let inability to pay postpone resuscitation or strangulation surgery."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the three elements of initial management of every obstruction?",
+          "a": "Nil by mouth with nasogastric decompression, intravenous fluid and electrolyte resuscitation, and early surgical review.",
+          "accept": [
+            "nasogastric",
+            "fluids",
+            "electrolytes",
+            "nil by mouth",
+            "surgical review"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "When do you abandon conservative care in adhesive obstruction?",
+          "a": "At any sign of strangulation or ischaemia, or when pain, distension, aspirate volumes or lactate worsen rather than settle, or when contrast fails to progress.",
+          "accept": [
+            "strangulation",
+            "ischaemia",
+            "worsen",
+            "lactate",
+            "fail"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How is sigmoid volvulus managed without peritonitis, and what follows success?",
+          "a": "Endoscopic decompression by rigid or flexible sigmoidoscopy with a flatus tube, checking mucosal viability. After success, fit patients are offered elective sigmoid resection because recurrence is common.",
+          "accept": [
+            "sigmoidoscopy",
+            "flatus tube",
+            "resection",
+            "recurrence",
+            "elective"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "intestinal_obstruction_and_colonic_volvulus: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Intestinal obstruction: treatment"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of drug CLASS and principle. Specific agents, routes, combinations and durations must be taken from your current national or institutional guideline and local resistance data at the time of prescribing. CliniX does not prescribe."
+    }
+  },
+  "cases": [
+    {
+      "id": "case.intestinal.ramesh",
+      "initialVitals": {
+        "hr": 104,
+        "bpSystolic": 106,
+        "bpDiastolic": 68,
+        "rr": 22,
+        "spo2": 97,
+        "temp": 37.9,
+        "gcs": 15
+      },
+      "title": "A farmer with two days of griping pain and a swelling belly",
+      "opening": "Suresh Patil, 58, a sugarcane farmer, has come to the casualty with his wife. He is restless, holding the centre of his belly, and says he has not passed stool or wind since yesterday. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Suresh Patil",
+        "age": 58,
+        "sex": "male",
+        "occupation": "Sugarcane farmer",
+        "residence": "Rural, lives with his wife and two sons"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help",
+            "what is troubling"
+          ],
+          "reply": "Doctor, since two days I have gripping pain all over the middle of my belly, repeated vomiting, and my stomach keeps swelling up. Since yesterday neither stool nor wind is passing.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "onset_tempo": {
+          "cues": [
+            "when did it start",
+            "how long ago",
+            "onset",
+            "since when",
+            "sudden or gradual"
+          ],
+          "reply": "It started two days ago in the morning with pain that comes and goes. The vomiting and swelling joined within a few hours, and since yesterday morning nothing is passing at all.",
+          "key": true
+        },
+        "pain_character": {
+          "cues": [
+            "describe the pain",
+            "colicky pain",
+            "griping pain",
+            "comes and goes",
+            "where is the pain",
+            "what makes the pain better",
+            "restless with pain"
+          ],
+          "reply": "It grips the whole centre of my belly, comes in waves, then leaves me free for a few minutes. I cannot lie still when a wave comes. Pressing the belly with my hand gives a little relief.",
+          "key": true,
+          "skillId": "skill.hx.surg.acute_abdomen"
+        },
+        "vomiting_character": {
+          "cues": [
+            "vomiting",
+            "how many times vomited",
+            "what comes out in vomit",
+            "colour of vomit",
+            "faeculent vomit",
+            "bilious"
+          ],
+          "reply": "I have vomited many times, first food, then yellow bitter fluid. This morning it smelt foul, almost like stool. Vomiting eases the pain only for a short while.",
+          "key": true,
+          "skillId": "skill.hx.surg.acute_abdomen"
+        },
+        "distension_course": {
+          "cues": [
+            "swelling of belly",
+            "distension",
+            "belly getting bigger",
+            "tightness of clothes",
+            "visible movements in belly"
+          ],
+          "reply": "My belly has been swelling steadily since yesterday. My dhoti feels tight now. My wife says she can see ripples moving across the middle of my stomach.",
+          "key": true
+        },
+        "bowel_motion": {
+          "cues": [
+            "stool passage",
+            "have you passed stool",
+            "bowel movement",
+            "last motion",
+            "constipation",
+            "diarrhoea"
+          ],
+          "reply": "No stool since yesterday morning. Before this my motions were regular, once a day, no blood, no mucus, no recent change.",
+          "key": true
+        },
+        "flatus_passage": {
+          "cues": [
+            "passing wind",
+            "flatus",
+            "gas passage",
+            "wind from below"
+          ],
+          "reply": "No wind either since yesterday. Usually wind passes freely, so this complete stoppage is new for me.",
+          "key": true
+        },
+        "previous_operation": {
+          "cues": [
+            "previous surgery",
+            "operation before",
+            "appendix operation",
+            "abdominal surgery",
+            "scar on belly",
+            "laparotomy before"
+          ],
+          "reply": "Yes, twelve years ago my appendix burst and I was operated at the district hospital. There is a long scar down the middle of my belly from that time.",
+          "key": true,
+          "skillId": "skill.hx.intestinal.risk"
+        },
+        "hernia_swelling": {
+          "cues": [
+            "swelling in groin",
+            "hernia",
+            "lump in groin",
+            "scrotal swelling",
+            "reducible swelling"
+          ],
+          "reply": "No, I have never had any swelling in the groin or scrotum, and nothing comes down when I cough or lift weight.",
+          "key": true,
+          "skillId": "skill.hx.intestinal.risk"
+        },
+        "weight_appetite": {
+          "cues": [
+            "weight loss",
+            "appetite",
+            "losing weight",
+            "blood in stool",
+            "mucus in stool",
+            "eating"
+          ],
+          "reply": "My weight is steady and I eat normally when well. No blood or mucus in the stool, and no thinning of motion. I have only stopped eating since this pain started.",
+          "key": true
+        },
+        "tuberculosis_treatment": {
+          "cues": [
+            "tb treatment",
+            "tuberculosis",
+            "dots treatment",
+            "cough for weeks",
+            "evening fever",
+            "night sweats"
+          ],
+          "reply": "I have never taken TB treatment. No long cough, no evening fever, no night sweats in the family.",
+          "key": true
+        },
+        "medications": {
+          "cues": [
+            "medicine",
+            "medication",
+            "tablets you take",
+            "painkillers",
+            "regular drugs",
+            "laxatives"
+          ],
+          "reply": "I take no regular tablets, only occasional painkillers for backache after field work. I do not use laxatives.",
+          "key": true,
+          "skillId": "skill.hx.intestinal.risk"
+        },
+        "comorbidity": {
+          "cues": [
+            "diabetes",
+            "blood pressure",
+            "hypertension",
+            "heart disease",
+            "past illness",
+            "other illness",
+            "kidney disease"
+          ],
+          "reply": "No diabetes, no blood pressure problem, no heart or kidney trouble. Apart from the appendix operation I have never been admitted.",
+          "key": true
+        },
+        "prior_similar_episodes": {
+          "cues": [
+            "similar pain before",
+            "attacks before",
+            "pain settled on its own",
+            "hospitalised for pain before",
+            "recurrent distension"
+          ],
+          "reply": "Never before. In these twelve years since the operation my stomach has never behaved like this.",
+          "key": true
+        },
+        "urinary_symptoms": {
+          "cues": [
+            "urine passage",
+            "burning urination",
+            "frequency of urine",
+            "how much urine",
+            "dark urine"
+          ],
+          "reply": "Urine is passing but the quantity looks less since yesterday, and it is dark yellow. No burning, no blood.",
+          "key": true
+        },
+        "diet_bowel_habit": {
+          "cues": [
+            "usual diet",
+            "fibre intake",
+            "fluid intake",
+            "usual bowel habit",
+            "laxative dependence"
+          ],
+          "reply": "I eat jowar bhakri with vegetables and dal, and drink water from our well through the day. Motions have always been daily without any laxative.",
+          "key": false
+        },
+        "family_history": {
+          "cues": [
+            "family",
+            "anyone else sick",
+            "bowel cancer in family",
+            "hereditary"
+          ],
+          "reply": "Nobody at home has this trouble, and there is no bowel cancer in the family.",
+          "key": false
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Restless and uncomfortable, tossing with each wave of colic. Anxious look with sunken eyes and a dry tongue. No jaundice, no pallor, no oedema.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Temperature 37.9 C. Pulse 104 regular, low volume. Blood pressure 106/68. Respiratory rate 22. SpO2 97 percent on room air. Urine output reduced over the last day.",
+          "abnormal": true
+        },
+        "skill.gen.surg.surgical_shock": {
+          "finding": "Early volume depletion: tachycardia with dry mucosa, delayed capillary refill and oliguria, but no hypotension and no cold clammy periphery yet. Responds to the fluid challenge, with no established shock.",
+          "abnormal": true
+        },
+        "skill.exam.surg.bowel_obstruction": {
+          "finding": "Midline laparotomy scar. Central distension with visible peristalsis moving across the middle of the abdomen in a ladder pattern. Diffusely tympanitic. Loud high-pitched bowel sounds with metallic tinkles. No palpable lump.",
+          "abnormal": true
+        },
+        "skill.exam.surg.peritonitis_signs": {
+          "finding": "Abdomen soft between colicky waves. No localised tenderness, no guarding, no rigidity, no rebound tenderness. Abdominal wall moves with respiration.",
+          "abnormal": false
+        },
+        "skill.exam.surg.hernia_inspection": {
+          "finding": "No visible swelling at the inguinal, femoral or umbilical regions on standing and coughing. The old scar is healthy with no bulge.",
+          "abnormal": false
+        },
+        "skill.exam.surg.hernia_palpation": {
+          "finding": "No cough impulse at either deep ring. No palpable hernia. Testes normal. Femoral regions clear.",
+          "abnormal": false
+        },
+        "skill.exam.surg.dre_surgical": {
+          "finding": "Rectum empty and ballooned, no stool, no mass, no blood or mucus staining on the glove. Prostate normal for age. No pelvic tenderness.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "xray_erect",
+        "blood_counts",
+        "urea_electrolytes",
+        "serum_lactate",
+        "ct_contrast"
+      ],
+      "investigations": {
+        "xray_erect": {
+          "label": "Erect and supine abdominal radiograph",
+          "indicated": true,
+          "result": "Multiple air-fluid levels on the erect film with dilated jejunal and ileal loops. Paucity of gas in the colon and rectum. No free gas under the diaphragm.",
+          "note": "The first film that confirms mechanical small bowel obstruction at a centre without CT, and the film that excludes perforation at the same time."
+        },
+        "blood_counts": {
+          "label": "Full blood count",
+          "indicated": true,
+          "result": "Haemoglobin 14.1 g/dL. Total leucocyte count 11,200 per mm3 with 76 percent neutrophils. No leucocytosis of strangulation range.",
+          "note": "Mild neutrophilia fits obstruction without established ischaemia. A sharply rising count with fever would push towards strangulation."
+        },
+        "urea_electrolytes": {
+          "label": "Urea and electrolytes",
+          "indicated": true,
+          "result": "Urea 52 mg/dL. Creatinine 1.1 mg/dL. Sodium 134 mmol/L. Potassium 3.4 mmol/L. Chloride low normal. Pattern of prerenal change with vomitus losses.",
+          "note": "Guides the fluid and potassium replacement that must precede any decision about theatre, and sets the baseline for serial review."
+        },
+        "serum_lactate": {
+          "label": "Venous blood gas with lactate",
+          "indicated": true,
+          "result": "Lactate 1.6 mmol/L. No base deficit. pH normal.",
+          "note": "A normal lactate with no base deficit argues against transmural ischaemia right now. It must be repeated, since strangulation can declare itself hours later."
+        },
+        "ct_contrast": {
+          "label": "Contrast CT abdomen and pelvis",
+          "indicated": true,
+          "result": "Dilated small bowel to the distal ileum with a transition point and collapsed colon beyond. No closed-loop pattern, no wall thickening with poor enhancement, no free fluid. Appendix absent postoperatively.",
+          "note": "Names the level and the likely adhesive cause, and, more importantly, shows no ischaemia or closed loop, which is what permits a conservative trial."
+        },
+        "contrast_enema": {
+          "label": "Barium enema",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Contraindicated in acute obstruction: it adds nothing to the small bowel question, risks impaction above the block, and would be dangerous if strangulation with perforation followed."
+        }
+      },
+      "differentialModel": {
+        "answer": "Adhesive small bowel obstruction after previous laparotomy. Consider paralytic ileus, acute mesenteric ischaemia, hollow viscus perforation with peritonitis, and sigmoid volvulus if the picture were large bowel.",
+        "accept": [
+          "small bowel obstruction",
+          "adhesive small bowel obstruction",
+          "intestinal obstruction",
+          "paralytic ileus",
+          "mesenteric ischaemia",
+          "acute intestinal perforation",
+          "sigmoid volvulus",
+          "intussusception"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Small bowel obstruction, likely adhesive after open appendicectomy, complete, with no strangulation at present.",
+        "accept": [
+          "small bowel obstruction",
+          "adhesive small bowel obstruction",
+          "intestinal obstruction"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Nil by mouth with nasogastric decompression, intravenous fluids with potassium correction, analgesia and antiemetics, surgical review with serial abdominal and lactate monitoring, a water-soluble contrast challenge, and laparotomy with adhesiolysis if strangulation appears or the obstruction fails to resolve.",
+        "accept": [
+          "nasogastric decompression",
+          "intravenous fluids",
+          "electrolyte correction",
+          "nil by mouth",
+          "surgical review",
+          "serial monitoring",
+          "contrast challenge",
+          "laparotomy",
+          "adhesiolysis",
+          "analgesia"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The sequence makes the diagnosis before any film: colic first, vomiting close behind, progressive central distension, then absolute arrest of stool and flatus over two days.",
+        "Twelve years do not exonerate the old laparotomy. Adhesions cause about three quarters of small bowel obstructions, and a single open operation is enough.",
+        "A noisy abdomen with visible ladder-pattern peristalsis and no tenderness is simple obstruction. Constant pain with guarding or rebound would rewrite the plan to urgent operation.",
+        "Normal lactate with no base deficit permits a conservative trial but never ends vigilance: strangulation can declare itself hours later, so the abdomen and the lactate are reviewed serially.",
+        "The groins and rectum were examined and were negative. Those negatives exclude a strangulated hernia and support obstruction with an empty rectum, and they must be documented, not assumed.",
+        "No barium enema in acute obstruction. The contrast study that helps here is the water-soluble challenge through the nasogastric tube, judged on films at about 8 and 24 hours."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

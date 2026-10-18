@@ -1,0 +1,1157 @@
+{
+  "_comment": "Surgery pathway for head injury: GCS trend plus ATLS primary survey. Shared surgery skills carry the examination (GCS with pupils, skull base signs, log roll); this file adds the reasoning spine (primary vs secondary injury, concussion vs contusion vs compression, extradural vs subdural), the CT-led workup, GCS severity grading, and the prevent secondary injury management plan.",
+  "id": "head-injury",
+  "name": "Head injury",
+  "fullName": "Traumatic brain injury following head trauma",
+  "system": "surgery",
+  "subtitle": "GCS and Advanced Trauma Life Support",
+  "kbRef": "traumatic_brain_injury",
+  "oneLine": "A blow to the head, a score that must keep moving the right way, and the bleed that must not be missed",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What a head injury is, and why the damage continues after the blow",
+      "skills": [
+        "skill.reasoning.headinjury.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Airway, spine and score before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position",
+        "skill.reasoning.headinjury.primary_survey"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age, vehicle and habit set the lesion before a symptom is mentioned",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In head injury, age and mechanism carry the diagnosis before anything else is known. Young men on two wheelers without helmets bring extradural bleeds; elderly patients who fell at home bring subdural bleeds, often on blood thinners; construction workers bring falls from height with spine injury alongside. Record the vehicle, the helmet or seatbelt, and alcohol in the particulars themselves."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Minutes, a lucid interval, and what the patient cannot remember",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.surg.head_injury"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A head injury history reads in minutes and hours, not days: the exact time of the blow, consciousness at the scene, any lucid interval with normal talk, then the direction of change. That timeline alone separates a simple concussion from an expanding haematoma before anything else is known."
+        },
+        "skill.hx.surg.head_injury": {
+          "expect": "Expect the eye witness to matter more than the patient, because the patient is often amnesic for the event. Ask specifically for a lucid interval, for vomiting that will not stop, for fits, and for bleeding or watery discharge from the nose or ears, since each points to a different layer of injury."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The tablets and habits that turn a knock into a bleed",
+      "skills": [
+        "skill.hx.head.riskfactors"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Drowsiness, vitals going the wrong way, and shock that is never from the head alone",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.surg.surgical_shock"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for the posture of cerebral irritation: curled on the side, resenting interference, which is a favourable sign, versus lying flaccid with a relaxed jaw, which is grave. Note restlessness, pallor from scalp bleeding, and vomitus or blood about the face that threatens the airway."
+        },
+        "skill.gen.vitals": {
+          "expect": "Expect the vitals to tell the stage: rapid thready pulse with shallow breathing in concussion, then slow bounding pulse with rising pressure and slow deep breathing as compression sets in. A rapid pulse in a deeply unconscious patient heralds impending death, and hypertension with a slow pulse is the late Cushing response to critically raised pressure."
+        },
+        "skill.gen.surg.surgical_shock": {
+          "expect": "Hypotension in a head injury is never blamed on the brain alone. A low pressure means bleeding elsewhere until proved otherwise: scalp, chest, abdomen, pelvis or long bones. Search the whole body for the missing blood while the head is being assessed."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Neurological examination in head injury",
+      "blurb": "Score it, look at the pupils, read the base of the skull, protect the neck",
+      "skills": [
+        "skill.exam.surg.gcs_pupils",
+        "skill.exam.surg.skull_base_fracture",
+        "skill.exam.surg.spine_logroll"
+      ],
+      "emphasis": {
+        "skill.exam.surg.gcs_pupils": {
+          "expect": "In this patient the score is the monitor: record eye, verbal and motor components separately and repeat them, because a fall of two or more points means an expanding lesion until proved otherwise. Watch the pupils alongside, since a pupil that was equal and reactive and becomes fixed and dilated on one side marks uncal herniation needing urgent decompression."
+        },
+        "skill.exam.surg.skull_base_fracture": {
+          "expect": "Expect the base of skull signs to declare a compound fracture: bleeding or watery leak from the nose or ear, periorbital bruising confined within the orbital margins appearing after a day, and Battle sign behind the mastoid after three to four days. Any of these raises the meningitis risk and forbids blind passage of a nasogastric tube."
+        },
+        "skill.exam.surg.spine_logroll": {
+          "expect": "Every head injury is a neck injury until cleared, especially after road accidents and falls from height. Keep the collar on, log roll with the team to inspect the spine and feel for a step, and examine the limbs for weakness and the perineum for tone before the collar comes off."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the head injury picture together",
+      "blurb": "Concussion recovers, contusion bruises, compression kills: know which clock you are on",
+      "skills": [
+        "skill.reasoning.headinjury.mechanisms"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Mechanism, lesion and severity in three sentences",
+      "skills": [
+        "skill.present.head.injury_summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "What else causes unconsciousness after a fall, and what injury hides beside it",
+      "skills": [
+        "skill.reasoning.headinjury.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Scan the head, clear the neck, and never tap the spine under pressure",
+      "skills": [
+        "skill.investigation.headinjury.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and severity",
+      "blurb": "Name the lesion, grade it on the GCS, and state which way it is moving",
+      "skills": [
+        "skill.reasoning.headinjury.diagnosis",
+        "skill.annex.surg.gcs"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Protect the brain from the second injury, remove the clot in time, refer the rest",
+      "skills": [
+        "skill.treatment.headinjury.management"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.headinjury.neuro_exam",
+        "title": "Examine the head injured patient",
+        "task": "This 31-year-old man skidded off his scooter three hours ago, talked normally afterwards, and is now drowsy. Assess his conscious level and examine him for a skull fracture.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.surg.gcs_pupils",
+          "skill.exam.surg.skull_base_fracture",
+          "skill.exam.surg.spine_logroll"
+        ],
+        "examinerQuestions": [
+          "His score was 15 on arrival and is 13 now with a dilated pupil on the side of the blow. What does that trend mean, and what must happen next?",
+          "You found bleeding from the ear with clear watery fluid. What does that tell you about the fracture, and what two things does it forbid?",
+          "Why is the neck examined in every head injury, and what must stay in place until it is cleared?"
+        ]
+      },
+      {
+        "id": "osce.headinjury.history_triage",
+        "title": "Take a head injury history and triage",
+        "task": "The attender of a 68-year-old man who fell at home and takes warfarin wants to take him back because he is talking normally. Take a focused history in seven minutes and decide: scan, admit or send home?",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.surg.head_injury",
+          "skill.hx.head.riskfactors",
+          "skill.reasoning.headinjury.primary_survey"
+        ],
+        "examinerQuestions": [
+          "He never lost consciousness and his examination is normal. Why does the warfarin still force a scan?",
+          "What is a lucid interval, and which bleed does it classically warn of?",
+          "Name three red flags in the history that would upgrade this patient to urgent neurosurgical referral."
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.reasoning.headinjury.basics",
+      "skill.reasoning.headinjury.primary_survey",
+      "skill.reasoning.headinjury.mechanisms",
+      "skill.reasoning.headinjury.differential",
+      "skill.investigation.headinjury.workup",
+      "skill.reasoning.headinjury.diagnosis",
+      "skill.treatment.headinjury.management",
+      "skill.annex.headinjury.extra_vs_subdural"
+    ]
+  },
+  "skills": {
+    "skill.reasoning.headinjury.basics": {
+      "id": "skill.reasoning.headinjury.basics",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "What a head injury is",
+      "oneLine": "An outside blow that alters brain function, then a second injury you can still prevent",
+      "why": "The blow itself cannot be undone, but most of the dying happens afterwards from hypoxia, hypotension and swelling inside a rigid skull. Holding that split decides everything: resuscitation matters as much as the operation, and a normal first examination never ends the story.",
+      "teach": [
+        {
+          "heading": "A blow that alters brain function",
+          "body": "A traumatic brain injury is an externally caused alteration in brain function, marked by loss or decrease of consciousness, amnesia around the event, a neurological deficit, or an altered mental state at the moment of injury. Any one of these after a blow counts, even when the scalp looks untouched.\n\nRoad accidents dominate in the young, especially men on two wheelers, while falls lead in older adults. Most treated injuries are mild, which is exactly why the few that deteriorate get missed."
+        },
+        {
+          "heading": "Two injuries, not one",
+          "body": "The primary injury is the mechanical damage at impact: torn vessels, bruised tissue, stretched nerve fibres. Nothing reverses it. The secondary injury builds over hours to days from hypoxia, hypotension, oedema, haematoma expansion, seizures and disturbed autoregulation, and every one of these is treatable.\n\nThis is why airway, breathing and blood pressure are brain treatment, not general care. Letting oxygen or pressure sag while waiting for a scan allows damage the scan will later only record."
+        },
+        {
+          "heading": "A rigid box with three contents",
+          "body": "Brain, blood and cerebrospinal fluid share a fixed skull, so when blood or oedema expands, pressure rises and displaces fluid until compensation fails. After that point, small extra volumes cause steep pressure rises, perfusion of the brain falls, and tissue is squeezed across folds and openings.\n\nThat squeeze is herniation: the inner temporal lobe presses the oculomotor nerve, then the midbrain, and finally the medulla through the foramen magnum. Pupil, consciousness and breathing fail in that order, which is the order you watch."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What four findings define a traumatic brain injury at the moment of impact?",
+          "a": "Loss or decrease of consciousness, retrograde or post traumatic amnesia, a neurological deficit, or an altered mental state at the moment of injury.",
+          "accept": [
+            "consciousness",
+            "amnesia",
+            "deficit",
+            "mental state"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why are oxygen and blood pressure brain treatment after a head injury?",
+          "a": "Because secondary injury from hypoxia and hypotension independently worsens outcome, so maintaining oxygenation and perfusion prevents damage the primary blow only started.",
+          "accept": [
+            "hypoxia",
+            "hypotension",
+            "oxygenation",
+            "perfusion",
+            "secondary"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does a small extra bleed kill after compensation fails?",
+          "a": "The skull is rigid, so once displaceable fluid is exhausted, small volume increases cause steep pressure rises that cut cerebral perfusion and drive herniation through the tentorial opening and foramen magnum.",
+          "accept": [
+            "rigid",
+            "pressure",
+            "perfusion",
+            "herniation"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "traumatic_brain_injury: pathophysiology"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Head injury"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.headinjury.primary_survey": {
+      "id": "skill.reasoning.headinjury.primary_survey",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "The ATLS primary survey in head injury",
+      "oneLine": "Airway with spine control, breathing, circulation, disability, exposure, then repeat",
+      "why": "A head injured patient dies from the airway, the chest or the belly before the brain gets its turn. The primary survey forces those killers to be found in order, and repeating it catches the deterioration that a single examination always misses.",
+      "teach": [
+        {
+          "heading": "Airway with the neck held still",
+          "body": "Open the airway with manual in line stabilisation of the neck, never with extension or rotation, because head and neck injuries travel together. Clear blood and vomitus, turn the face aside in the vomiting patient, and protect the airway early when consciousness is depressed.\n\nScore the coma scale before giving sedation or paralysis, since drugs erase the very trend you need. A gurgling airway or a falling score is the indication, not a number on a monitor."
+        },
+        {
+          "heading": "Breathing and circulation are brain resuscitation",
+          "body": "Give oxygen and ventilate to keep saturation up without hyperventilating routinely, and look at the chest for rib fractures, surgical emphysema, haemothorax and pneumothorax. Hypoxia deepens secondary injury with every minute it lasts.\n\nControl scalp bleeding with direct pressure, since scalp vessels cannot contract and seldom stop on their own. Treat hypotension as extracranial bleeding and search the chest, abdomen, pelvis and limbs, because the brain injury itself does not drop the pressure."
+        },
+        {
+          "heading": "Disability, exposure, then repeat everything",
+          "body": "Record the coma score with its components, check both pupils for size and reaction, look for lateralising weakness, and keep the patient exposed enough to find every wound. A trend in the score matters more than any single reading.\n\nRepeat the whole survey at fixed intervals, because deepening unconsciousness is the most valuable sign of cerebral compression and the trigger for operation. Draw the baseline now or you will never prove the change later."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Recite the primary survey order for trauma.",
+          "a": "Airway with cervical spine stabilisation, breathing, circulation with haemorrhage control, disability, and exposure.",
+          "accept": [
+            "airway",
+            "spine",
+            "breathing",
+            "circulation",
+            "disability",
+            "exposure"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "A head injured patient has a pressure of 80 over 50. What does that mean and what do you do?",
+          "a": "It means extracranial bleeding until proved otherwise, since brain injury alone does not cause hypotension, so search the scalp, chest, abdomen, pelvis and limbs for the source while resuscitating.",
+          "accept": [
+            "extracranial",
+            "bleeding",
+            "hypotension",
+            "resuscitating"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why score the coma scale before sedation?",
+          "a": "Sedation and paralysis erase the examination, and only a pre sedation score gives a true baseline whose trend can later reveal deterioration and compression.",
+          "accept": [
+            "sedation",
+            "baseline",
+            "trend",
+            "deterioration"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "advanced_trauma_life_support_primary_survey: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Early management of severe trauma"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.headinjury.mechanisms": {
+      "id": "skill.reasoning.headinjury.mechanisms",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Concussion, contusion and compression",
+      "oneLine": "One recovers, one bruises, one kills: read the clock and the pupils",
+      "why": "These three words are three different clocks. Concussion resets by itself, contusion smoulders into confusion, and compression counts down to herniation. Naming the right clock tells you whether to observe, scan, or open the skull.",
+      "teach": [
+        {
+          "heading": "Concussion: switched off, then switched on",
+          "body": "Concussion is a temporary physiological paralysis of function without structural damage. The patient loses consciousness briefly, then recovers completely and perfectly. The pulse is rapid and thready, breathing is quick and shallow, temperature stays subnormal, and muscles go flaccid.\n\nA deep or prolonged stupor is already more than pure concussion. Vomiting once can mark recovery from concussion, but vomiting that persists points to rising pressure instead."
+        },
+        {
+          "heading": "Contusion: bruised brain, prolonged storm",
+          "body": "Contusion tears white fibres and spills petechial haemorrhages through the tissue. Unconsciousness lasts longer, recovery is imperfect, and the patient wakes into confusion, irritability and defective memory that can persist as a post contusional personality change.\n\nEarly the pulse is rapid and small with shallow breathing; as compression supervenes it turns slow and bounding. Decerebrate posturing and unequal pupils at this stage mean the midbrain is already under pressure."
+        },
+        {
+          "heading": "Compression: the countdown with a lucid middle",
+          "body": "Compression follows bleeding or oedema, and its signature is deterioration: a patient conscious or irritable for a while slides into profound unconsciousness. The pulse slows and bounds, breathing turns slow and deep then stertorous, the face flushes, and the cheeks flap with each breath.\n\nThe pupils stage the countdown. First the pupil on the injured side constricts from nerve irritation, then it dilates as the nerve fails while the other constricts, and finally both fix wide. Bilateral fixed pupils are a grave sign."
+        },
+        {
+          "heading": "Which vessel, which bleed",
+          "body": "A torn middle meningeal artery under a temporal fracture strips the dura fast and gives the classic extradural story: brief concussion, a lucid interval of normal behaviour, then rapid compression with a blown pupil on the same side. A boggy swelling over the temple in a conscious patient still earns admission and a full day of watching.\n\nTorn bridging veins bleed slower and give the subdural story, about six times commoner, often after a front or back blow in an old man, with little or no lucid interval. Late in either bleed, pressure on the opposite midbrain crus can paralyse the same side as the lesion, so the side of weakness can mislead."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How do concussion, contusion and compression differ in recovery?",
+          "a": "Concussion recovers completely and perfectly after brief unconsciousness, contusion recovers imperfectly with confusion and personality change, and compression deteriorates into deepening unconsciousness without treatment.",
+          "accept": [
+            "concussion",
+            "contusion",
+            "compression",
+            "unconsciousness"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Describe the three pupillary stages of cerebral compression.",
+          "a": "First the pupil on the injured side constricts from oculomotor irritation, then it dilates from nerve paralysis while the other side constricts, and finally both pupils dilate and fix, which is grave.",
+          "accept": [
+            "constricts",
+            "dilates",
+            "fixed",
+            "oculomotor"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A conscious man with a temple blow and a boggy swelling is drinking tea and asking to leave. Your orders?",
+          "a": "Admit and observe for at least 24 hours with repeated scoring, because a temporal fracture can tear the middle meningeal artery and the lucid interval can end in rapid extradural compression and death.",
+          "accept": [
+            "admit",
+            "observe",
+            "lucid interval",
+            "extradural",
+            "middle meningeal"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "traumatic_brain_injury_hematomas_and_icp: clinicalPearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Head injuries"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.headinjury.differential": {
+      "id": "skill.reasoning.headinjury.differential",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "What else looks like a head injury",
+      "oneLine": "The fall may be the effect, not the cause; prove the blow came first",
+      "why": "An unconscious patient with a scalp wound did not necessarily suffer a head injury first. Drink, a fit, a stroke, or low sugar can drop a person and add a head injury on top, and treating only the wound misses the disease that caused the fall.",
+      "teach": [
+        {
+          "heading": "Ask what dropped the patient",
+          "body": "Decide whether unconsciousness is the result of the head injury or whether something else dropped the patient first: alcohol, a fit, apoplexy, uraemia, diabetic coma, or opium poisoning, with the head injury sustained in the fall. Ask about drinking, addiction, earlier fits, and known diabetes, hypertension and kidney disease.\n\nCheck the capillary glucose at the bedside in every unconscious patient. Hypoglycaemia mimics a head injury perfectly and reverses in minutes, while a stroke with a fall leaves a focal deficit the trauma alone cannot explain."
+        },
+        {
+          "heading": "The bleeds that mimic other diseases",
+          "body": "A chronic subdural haematoma grows silently for weeks and can present like a transient ischaemic attack with brief weakness or aphasia, or like dementia in an old man with no remembered trauma. An evolving contusion with surrounding oedema can even resemble a tumour or abscess on imaging.\n\nA fit that starts in the thumb or hand and marches up the limb is Jacksonian epilepsy from cortical irritation, pointing at the irritated cortex. Bilateral fits suggest bleeding from the superior longitudinal sinus instead."
+        },
+        {
+          "heading": "The injuries that hide beside the head",
+          "body": "Neck stiffness with fever points to blood in the subarachnoid space irritating the meninges, while the same stiffness without fever points to a fracture dislocation of the cervical spine. Never confuse either with decerebrate rigidity from midbrain damage.\n\nA non traumatic subarachnoid haemorrhage from a ruptured aneurysm can collapse a patient who then strikes the head, and a carotid or vertebral dissection after trauma can declare itself later as a focal deficit. The history of headache before the fall is the clue."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name four non traumatic causes of unconsciousness that can precede a fall.",
+          "a": "Hypoglycaemia, alcohol or drug intoxication, a post ictal state after a seizure, and stroke or aneurysmal subarachnoid haemorrhage.",
+          "accept": [
+            "hypoglycaemia",
+            "intoxication",
+            "seizure",
+            "stroke",
+            "subarachnoid"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How do you separate meningeal irritation from a cervical spine injury at the bedside?",
+          "a": "Neck stiffness with fever suggests subarachnoid blood irritating the meninges, while stiffness without fever suggests fracture dislocation of the cervical spine.",
+          "accept": [
+            "fever",
+            "subarachnoid",
+            "cervical",
+            "fracture"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "An old man is forgetful and unsteady three weeks after a forgotten knock on a door. What tops your list?",
+          "a": "Chronic subdural haematoma, which grows silently and mimics dementia or transient ischaemic attacks, and needs imaging even without a clear history of trauma.",
+          "accept": [
+            "chronic subdural",
+            "dementia",
+            "imaging",
+            "trauma"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "traumatic_brain_injury: additionalDifferentials"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Head injury"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.investigation.headinjury.workup": {
+      "id": "skill.investigation.headinjury.workup",
+      "kind": "investigation",
+      "system": "surgery",
+      "title": "Investigating a head injury",
+      "oneLine": "CT first, neck alongside, bloods for clotting and sugar, repeat when it worsens",
+      "why": "The examination stages the patient but only imaging names the lesion, and a single early scan never rules out a bleed that is still growing. Ordering the right test at the right time, and repeating it when the score falls, is what catches the expanding haematoma in time.",
+      "teach": [
+        {
+          "heading": "CT head first, and what it answers",
+          "body": "Non contrast CT of the head is the first line test: it shows haemorrhage, contusion, oedema and skull fracture in minutes. A lens shaped biconvex clot that does not cross suture lines is extradural until proved otherwise, while a crescent that crosses sutures is subdural.\n\nCT also finds traumatic subarachnoid blood, pneumocephalus, and midline shift that marks mass effect. Do not let the scan delay resuscitation: the airway and the pressure come first, and an unstable patient is resuscitated on the way to the scanner."
+        },
+        {
+          "heading": "The neck, the sugar and the clotting",
+          "body": "Image the cervical spine alongside the head whenever the mechanism is dangerous or the neck cannot be examined, since concurrent neck injury is common and easily missed in an unconscious patient. Keep the collar on until the spine is cleared.\n\nSend blood grouping with cross matching, check glucose and coagulation, and review every anticoagulant for reversal. Diabetes must be known before contrast or operation, and a prolonged clotting profile changes a small bleed into a surgical one."
+        },
+        {
+          "heading": "What the older tests still teach, and what never to do",
+          "body": "Skull radiographs have a narrow role: a fracture line crossing the middle meningeal groove supports an extradural bleed, and tangential views show the depth of a depressed fracture. But films never exclude an intracranial bleed, so a normal film never overrules a worrying examination.\n\nNever perform lumbar puncture in suspected cerebral compression, because draining fluid risks driving the medulla into the foramen magnum as a pressure cone. Repeat the CT, not the tap, when the score falls or bleeding may be progressing."
+        },
+        {
+          "heading": "Beyond CT when questions remain",
+          "body": "Magnetic resonance imaging sees what CT misses: microbleeds, axonal shearing injury and contusions, detecting abnormalities in about a quarter of mild injuries with a normal CT. It is the test for a patient whose symptoms outlast a clean scan.\n\nIn severe injury, invasive pressure monitoring through a ventricular catheter guides therapy in neurocritical care. Validated symptom inventories then track recovery and select patients for neurorehabilitation when complaints persist."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the first line scan in head injury, and what four things does it show?",
+          "a": "Non contrast CT of the head, showing haemorrhage, contusion, oedema and skull fracture.",
+          "accept": [
+            "CT",
+            "haemorrhage",
+            "contusion",
+            "oedema",
+            "fracture"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How do extradural and subdural clots differ on CT?",
+          "a": "Extradural is a lens shaped biconvex mass that does not cross suture lines, while subdural is a crescentic mass that crosses suture lines.",
+          "accept": [
+            "biconvex",
+            "suture",
+            "crescentic",
+            "extradural",
+            "subdural"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is lumbar puncture forbidden in cerebral compression?",
+          "a": "Draining cerebrospinal fluid risks impaction of the medulla into the foramen magnum as a pressure cone, which is fatal.",
+          "accept": [
+            "foramen magnum",
+            "pressure cone",
+            "medulla",
+            "fatal"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "concussion_and_other_traumatic_brain: additionalInvestigations"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Head injury"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.headinjury.diagnosis": {
+      "id": "skill.reasoning.headinjury.diagnosis",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Naming the lesion and grading severity",
+      "oneLine": "Lesion plus GCS band plus direction of travel",
+      "why": "Head injury is not one diagnosis but a lesion with a grade and a direction. The grade decides where the patient is nursed, the direction decides whether the skull is opened, and both must be stated every time or the next doctor inherits a number without a meaning.",
+      "teach": [
+        {
+          "heading": "Grade on the coma scale",
+          "body": "Severity is graded on the Glasgow Coma Scale: 13 to 15 is mild, 9 to 12 is moderate, and 3 to 8 is severe, on a scale that runs from 3 to 15. The individual eye, verbal and motor components carry more information than the total, which should only describe groups.\n\nRecord the score as its components with the trend, for example E3 V4 M6 falling from 15. A mild injury with an abnormal scan is termed complicated and carries a higher risk of a poor outcome."
+        },
+        {
+          "heading": "Grade on time as well as score",
+          "body": "Post traumatic amnesia, the gap between the blow and the return of continuous memory, grades severity alongside the score. Less than an hour is slight, one to 24 hours is moderate, one to seven days is severe, and more than a week is almost fatal.\n\nRetrograde amnesia for events before the injury is less reliable for grading. Duration of unconsciousness and amnesia predict outcome well in moderate to severe injury, but poorly in mild injury, where the symptom burden predicts recovery instead."
+        },
+        {
+          "heading": "Write the diagnosis in full",
+          "body": "A complete diagnosis names the mechanism, the lesion, the severity and the state: a moderate head injury with a right extradural haematoma with mass effect, deteriorating. Each word earns its place by changing management.\n\nState the red flags that force escalation alongside: a fall of two or more points, an unequal or fixed pupil, the Cushing response of hypertension with a slow pulse, a new deficit, or a fit. Any one of these moves the patient to urgent scanning and neurosurgical referral."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the GCS bands for mild, moderate and severe head injury?",
+          "a": "Mild is 13 to 15, moderate is 9 to 12, and severe is 3 to 8, on a scale running from 3 to 15.",
+          "accept": [
+            "13",
+            "15",
+            "9",
+            "12",
+            "3",
+            "8"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "How does post traumatic amnesia grade severity?",
+          "a": "Under an hour is slight, one to 24 hours moderate, one to seven days severe, and over a week almost fatal.",
+          "accept": [
+            "amnesia",
+            "hour",
+            "24 hours",
+            "seven days",
+            "fatal"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Compose the full diagnosis for a deteriorating extradural bleed.",
+          "a": "Moderate head injury with a right extradural haematoma with mass effect, deteriorating, naming mechanism, lesion, severity and direction of travel.",
+          "accept": [
+            "extradural",
+            "moderate",
+            "mass effect",
+            "deteriorating"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "concussion_and_other_traumatic_brain: severityClassification"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Head injury"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.treatment.headinjury.management": {
+      "id": "skill.treatment.headinjury.management",
+      "kind": "treatment",
+      "system": "surgery",
+      "title": "Managing a head injury",
+      "oneLine": "Stop the second injury, remove the clot in time, refer what you cannot operate",
+      "why": "Nobody operates on bruised brain, but everybody protects it. Outcome is decided by oxygen, pressure, and the speed of evacuating a clot that compresses, not by any drug. Knowing what to do, what to remove, and what to refer is the whole of management.",
+      "teach": [
+        {
+          "heading": "Prevent the second injury first",
+          "body": "Maintain oxygenation and blood pressure and never allow hypoxia or hypotension, since both independently worsen outcome. Nurse with the head of the bed raised, avoid anything that obstructs venous return from the head, and control fever, seizures and hypercarbia, each of which raises intracranial pressure.\n\nGive sedation and analgesia so that pain and fighting the ventilator do not spike the pressure. Osmotherapy with hypertonic saline or mannitol draws water out of swollen brain as a bridge while the definitive plan is arranged."
+        },
+        {
+          "heading": "Remove the clot that compresses",
+          "body": "Refer urgently for neurosurgical evacuation of extradural and subdural haematomas that cause mass effect, since timely removal before herniation saves life and function. Small collections without compression are watched with repeated scoring and repeat imaging, not opened.\n\nPlace burr holes where the neurology points: the side of the fracture, the side of the temple swelling, and the side of the first dilated pupil together localise a middle meningeal bleed. Deepening unconsciousness on observation is the indication, not the clock."
+        },
+        {
+          "heading": "Reverse, prevent fits, watch, rehabilitate",
+          "body": "Reverse anticoagulation at once in any bleeding head injury and correct coagulopathy, because a corrected clotting profile stops a small bleed becoming a surgical one. Consider early seizure prophylaxis after severe injury to prevent fits in the first days.\n\nMonitor pressure invasively in selected severe injuries within neurocritical care, repeat imaging whenever the score falls, and arrange multidisciplinary neurorehabilitation for survivors. In India, stabilise at the district hospital, move by ambulance to a centre with CT and neurosurgery, and use helmet and seatbelt counselling plus the 108 service as prevention."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the two physiological insults you must never allow after a head injury?",
+          "a": "Hypoxia and hypotension, because both independently worsen outcome by deepening secondary brain injury.",
+          "accept": [
+            "hypoxia",
+            "hypotension",
+            "secondary",
+            "outcome"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which haematomas go to the neurosurgeon, and which stay under observation?",
+          "a": "Extradural and subdural collections causing mass effect are evacuated before herniation, while small collections without compression are watched with repeated scoring and repeat imaging.",
+          "accept": [
+            "mass effect",
+            "evacuated",
+            "herniation",
+            "observation",
+            "repeat imaging"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A district hospital has no CT and no neurosurgeon. What is the correct plan?",
+          "a": "Protect the airway with the neck held, keep up oxygen and pressure, reverse anticoagulation, and transfer by ambulance to a centre with CT and neurosurgery while scoring repeatedly on the way.",
+          "accept": [
+            "airway",
+            "oxygen",
+            "transfer",
+            "CT",
+            "neurosurgery"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "traumatic_brain_injury: management"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Head injury"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of modality and principle: resuscitation, when to evacuate, when to observe, and when to refer. Specific agents, routes and durations come from your current national or institutional guideline at the time of treatment. CliniX does not prescribe."
+    },
+    "skill.annex.headinjury.extra_vs_subdural": {
+      "id": "skill.annex.headinjury.extra_vs_subdural",
+      "kind": "annexure",
+      "system": "surgery",
+      "title": "Extradural versus subdural haemorrhage",
+      "oneLine": "Six differences that tell the two surgical bleeds apart",
+      "why": "Both bleeds compress, but they come from different vessels at different speeds with different warnings. The distinction decides how urgently the skull is opened and where the burr hole goes, so it must be recallable at the bedside without a book.",
+      "teach": [
+        {
+          "heading": "The six bedside differences",
+          "table": {
+            "cols": [
+              "Feature",
+              "Extradural",
+              "Subdural"
+            ],
+            "rows": [
+              [
+                "Vessel",
+                "Middle meningeal artery under a temporal fracture",
+                "Bridging veins between cortex and dura"
+              ],
+              [
+                "Frequency",
+                "The rarer bleed",
+                "About six times commoner"
+              ],
+              [
+                "Onset",
+                "Signs appear later as dura strips slowly",
+                "Blood collects faster with less compensation"
+              ],
+              [
+                "Lucid interval",
+                "Classic: concussion, normal talk, then coma",
+                "Short or absent"
+              ],
+              [
+                "Paralysis",
+                "Face then arm then leg, opposite side",
+                "Same sequence but earlier; late same side lesion possible"
+              ],
+              [
+                "Skull film",
+                "Fracture line across the arterial groove",
+                "Usually no telling fracture"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Using the table at the bedside",
+          "body": "A lucid interval with a temple fracture and a blown pupil on the same side is extradural until the scan says otherwise, and it runs the faster race against herniation once compression starts. An old man with a front or back blow and compression signs is subdural until proved otherwise.\n\nMidline shift on imaging confirms mass effect in either bleed, but half of subdural bleeds are bilateral with no shift. Absence of shift therefore never excludes a subdural collection."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Contrast the lucid interval in extradural and subdural bleeding.",
+          "a": "Extradural shows the classic lucid interval of concussion then normal behaviour then coma as blood strips the dura, while subdural accumulates faster with a short or absent lucid interval.",
+          "accept": [
+            "lucid interval",
+            "concussion",
+            "coma",
+            "absent"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Weakness appears on the same side as the clot. How is that possible?",
+          "a": "Rising pressure can drive the opposite midbrain crus against the tentorial edge, the Kernohan notch, paralysing the same side as the lesion, so the side of weakness can mislead late in the course.",
+          "accept": [
+            "midbrain",
+            "tentorial",
+            "Kernohan",
+            "mislead"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "traumatic_brain_injury_hematomas_and_icp: clinicalPearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Head injuries"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.headinjury.ramesh",
+      "initialVitals": {
+        "hr": 62,
+        "bpSystolic": 148,
+        "bpDiastolic": 92,
+        "rr": 14,
+        "spo2": 97,
+        "temp": 37.1,
+        "gcs": 13
+      },
+      "title": "A delivery rider who talked after the crash and then grew drowsy",
+      "opening": "Ramesh Kale, 31, lies drowsy on the casualty trolley with a blood stained bandage over his right temple. His brother stands beside him holding a cracked helmet. Ramesh opens his eyes when you call his name. Introduce yourself and take a history.",
+      "fallback": "I do not understand, doctor. Please ask me in a simpler way.",
+      "patient": {
+        "name": "Ramesh Kale",
+        "age": 31,
+        "sex": "male",
+        "occupation": "Food delivery rider on a two wheeler, ten to twelve hours on the road daily",
+        "residence": "One room tenement with his brother in the outskirts of Pune"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "what is the main problem",
+            "why have you come to hospital",
+            "tell me everything from the very beginning"
+          ],
+          "reply": "Doctor, I fell from my scooter this afternoon around two o clock. I talked normally after the fall, but for the last one hour my head is bursting and I vomited twice. My brother brought me here.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "accident_mechanism_detail": {
+          "cues": [
+            "how did the accident happen",
+            "describe the exact mechanism of injury",
+            "were you wearing a helmet at the time",
+            "what speed were you riding at"
+          ],
+          "reply": "A car cut across me near the circle and I braked hard on the wet road. The scooter skidded and I fell on my right side, hitting my head on the divider. The helmet was hanging on the handle, not on my head. I was riding slowly, maybe thirty.",
+          "key": true,
+          "skillId": "skill.hx.surg.head_injury"
+        },
+        "consciousness_at_scene": {
+          "cues": [
+            "did you lose consciousness at the scene",
+            "were you unconscious immediately after the fall",
+            "how long were you unaware after the accident",
+            "did anyone see you lying senseless"
+          ],
+          "reply": "My brother says I lay still for about five minutes and did not answer. Then I sat up, recognised him, and asked for water. I do not remember those five minutes myself.",
+          "key": true,
+          "skillId": "skill.hx.surg.head_injury"
+        },
+        "lucid_interval_deterioration": {
+          "cues": [
+            "were you normal for some time after the injury",
+            "did you talk normally before becoming drowsy",
+            "when did the drowsiness begin after the lucid period",
+            "has his response been worsening since arrival"
+          ],
+          "reply": "For nearly two hours I was completely normal. I even called my owner and told him about the scooter. Then the headache grew severe, I vomited, and now I feel very sleepy. My brother says I answer slowly.",
+          "key": true,
+          "skillId": "skill.hx.surg.head_injury"
+        },
+        "headache_vomiting_course": {
+          "cues": [
+            "describe the headache since the accident",
+            "how many times have you vomited",
+            "is the vomiting persistent or projectile",
+            "has the headache been worsening steadily"
+          ],
+          "reply": "The headache started dull on the right side and is now bursting all over. I vomited twice, forcefully, without nausea before it. Each time the headache eased for a few minutes and then returned worse.",
+          "key": true,
+          "skillId": "skill.hx.surg.head_injury"
+        },
+        "ear_nose_bleed_leak": {
+          "cues": [
+            "any bleeding from the ear after the injury",
+            "any watery discharge from the nose or ears",
+            "blood or clear fluid leaking from the ear",
+            "bleeding from the nose since the fall"
+          ],
+          "reply": "Blood came from my right ear just after the fall and stained my shirt. My brother says some clear watery fluid also trickled later. There is no bleeding from the nose and nothing from the left ear.",
+          "key": true,
+          "skillId": "skill.hx.surg.head_injury"
+        },
+        "fits_after_injury": {
+          "cues": [
+            "any fits or seizures after the injury",
+            "did his hands or legs shake uncontrollably",
+            "abnormal jerky movements witnessed by anyone",
+            "frothing from the mouth with a fit"
+          ],
+          "reply": "No fits at all, doctor. Nobody saw any shaking or jerking of my hands or legs, and there was no frothing. I have never had fits in my life.",
+          "skillId": "skill.hx.surg.head_injury"
+        },
+        "memory_gap_amnesia": {
+          "cues": [
+            "what do you remember of the accident",
+            "any loss of memory for the events",
+            "can you recall the moments before the fall",
+            "since when is your memory continuous"
+          ],
+          "reply": "I remember leaving the restaurant with the order. After that there is a blank until I was sitting on the pavement with my brother shouting my name. Everything before the fall is clear.",
+          "skillId": "skill.hx.surg.head_injury"
+        },
+        "neck_limb_other_injury": {
+          "cues": [
+            "any pain in the neck after the fall",
+            "weakness or numbness in the limbs",
+            "any other injuries besides the head",
+            "pain in the chest abdomen or limbs"
+          ],
+          "reply": "My neck aches on the right side but I can move all four limbs fully and there is no numbness. There are grazes on my right elbow and knee. No chest pain, no belly pain, no vomiting of blood.",
+          "skillId": "skill.hx.surg.head_injury"
+        },
+        "alcohol_sedative_intake": {
+          "cues": [
+            "had you consumed alcohol before riding",
+            "do you consume alcohol regularly",
+            "any sleeping tablets or sedatives taken today",
+            "smell of alcohol or drink history"
+          ],
+          "reply": "I never drink, doctor, and I took no tablets today. I was on duty and fully alert. You can ask my brother, he was behind me in another scooter.",
+          "key": true,
+          "skillId": "skill.hx.head.riskfactors"
+        },
+        "blood_thinner_medication": {
+          "cues": [
+            "any blood thinning tablets taken daily",
+            "tablets like aspirin warfarin or clopidogrel",
+            "when was the last dose of your regular tablets",
+            "any medicines that increase bleeding"
+          ],
+          "reply": "I take no daily tablets at all, neither for blood thinning nor for anything else. I have no prescription with me because there is none.",
+          "key": true,
+          "skillId": "skill.hx.head.riskfactors"
+        },
+        "past_fits_comorbidity": {
+          "cues": [
+            "any fits in the past before this accident",
+            "known diabetes blood pressure or kidney disease",
+            "previous stroke like weakness ever",
+            "any long standing illness under treatment"
+          ],
+          "reply": "I have no sugar, no pressure, no fits and no kidney trouble. I have never been admitted to hospital and I take no treatment for anything.",
+          "skillId": "skill.hx.head.riskfactors"
+        },
+        "previous_head_injury_care": {
+          "cues": [
+            "any earlier head injury in the past",
+            "previous admission for an accident",
+            "earlier operations on the head",
+            "treated for a head wound before"
+          ],
+          "reply": "This is my first accident and my first visit to a big hospital. I have never injured my head before and never had an operation.",
+          "skillId": "skill.hx.head.riskfactors"
+        },
+        "family_fits_disorders": {
+          "cues": [
+            "fits or epilepsy running in the family",
+            "diabetes or pressure in your parents",
+            "anyone at home with similar illness",
+            "family history of bleeding disorders"
+          ],
+          "reply": "My father has high blood pressure and takes one tablet. Nobody in our family has fits, and there is no bleeding disease that I know of.",
+          "skillId": "skill.hx.head.riskfactors"
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Drowsy young man lying still with eyes closed, opening eyes to voice. Answers slowly but correctly when roused, then drifts back. Blood stained discharge at the right ear, vomitus stains on the shirt, no pallor of the conjunctiva.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Temperature 37.1 C. Pulse 62 per minute, regular, good volume. Blood pressure 148/92. Respiratory rate 14 per minute, deep and regular. SpO2 97 percent on room air.",
+          "abnormal": true
+        },
+        "skill.gen.surg.surgical_shock": {
+          "finding": "No shock. Hands warm, capillary refill under 2 seconds, neck veins flat, urine being formed. The pressure is high rather than low, so this is compression physiology, not blood loss.",
+          "abnormal": false
+        },
+        "skill.exam.surg.gcs_pupils": {
+          "finding": "Eye 3 opening to voice, verbal 4 confused conversation, motor 6 obeying commands, total 13, down from 15 recorded on arrival. Right pupil 5 mm and sluggish to light, left pupil 3 mm and brisk. No asymmetry of limb movement yet.",
+          "abnormal": true
+        },
+        "skill.exam.surg.skull_base_fracture": {
+          "finding": "Boggy tender haematoma over the right temple with a 4 cm laceration oozing dark blood. Right ear canal holds blood mixed with clear watery fluid. No periorbital bruising yet and no mastoid bruising.",
+          "abnormal": true
+        },
+        "skill.exam.surg.spine_logroll": {
+          "finding": "Cervical collar in place. Log rolled as a unit with the team: no step deformity and no midline tenderness of the spine. Moves all four limbs to command, anal tone intact, no priapism.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "ct_head",
+        "blood_glucose",
+        "coag_profile",
+        "ct_cspine"
+      ],
+      "investigations": {
+        "ct_head": {
+          "label": "Non contrast CT of the head",
+          "indicated": true,
+          "result": "Right temporal biconvex hyperdense lens that does not cross suture lines, with a fracture line across the middle meningeal groove and 6 mm midline shift. No contusion, no subarachnoid blood.",
+          "note": "This is the extradural clot with mass effect that the lucid interval and the blown pupil promised. It needs urgent neurosurgical evacuation, not observation."
+        },
+        "blood_glucose": {
+          "label": "Capillary and venous blood glucose",
+          "indicated": true,
+          "result": "118 mg per dL, within normal limits.",
+          "note": "A normal sugar at presentation excludes the commonest reversible mimic of head injury before the scan is even read."
+        },
+        "coag_profile": {
+          "label": "Coagulation profile with platelet count",
+          "indicated": true,
+          "result": "Prothrombin time, activated partial thromboplastin time and platelets all within normal limits. No anticoagulant effect detected.",
+          "note": "Normal clotting with no blood thinner history means this bleed came from the torn vessel alone, and no reversal is needed before theatre."
+        },
+        "ct_cspine": {
+          "label": "CT of the cervical spine",
+          "indicated": true,
+          "result": "No fracture, no subluxation, no prevertebral swelling. Alignment maintained from skull base to first thoracic vertebra.",
+          "note": "A clear spine lets the collar come off after the head is dealt with. Never skip this in a road accident with neck pain."
+        },
+        "cbc_group": {
+          "label": "Complete blood count with grouping and cross matching",
+          "indicated": true,
+          "result": "Haemoglobin 14.1 g per dL, leucocytes within normal limits, platelets adequate. Group B positive, two units cross matched and kept ready.",
+          "note": "Blood is kept ready for theatre rather than given now, since his pressure is high and there is no extracranial bleeding."
+        },
+        "skull_xray": {
+          "label": "Skull radiograph",
+          "indicated": false,
+          "result": "Not ordered.",
+          "note": "Plain films cannot show the clot and never overrule the examination. The CT has already shown the fracture line and the lens, so a film would only delay theatre."
+        },
+        "mri_brain": {
+          "label": "Magnetic resonance imaging of the brain",
+          "indicated": false,
+          "result": "Not performed in the emergency setting.",
+          "note": "Kept for later if recovery stalls despite a clean postoperative course, to look for axonal injury. It has no role while a compressing clot waits."
+        }
+      },
+      "differentialModel": {
+        "answer": "Right extradural haematoma with mass effect in a moderate head injury. Consider acute subdural haematoma, cerebral contusion, concussion alone, skull fracture, traumatic subarachnoid haemorrhage, ischaemic stroke with a fall, hypoglycaemia, alcohol intoxication and a post ictal state.",
+        "accept": [
+          "Extradural haematoma",
+          "Acute subdural haematoma",
+          "Cerebral contusion",
+          "Concussion",
+          "Skull fracture",
+          "Traumatic subarachnoid haemorrhage",
+          "Ischaemic stroke",
+          "Hypoglycaemia",
+          "Alcohol intoxication",
+          "Seizure disorder"
+        ],
+        "minMatch": 3
+      },
+      "diagnosis": {
+        "answer": "Moderate head injury with a right extradural haematoma with mass effect, deteriorating.",
+        "accept": [
+          "Head injury",
+          "Extradural haematoma",
+          "extradural haemorrhage",
+          "traumatic brain injury"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Protect the airway with the neck held, keep up oxygen and blood pressure, urgent CT head already done, immediate neurosurgical referral for evacuation of the extradural clot, repeated coma scoring with repeat imaging if he worsens, and neurorehabilitation with helmet counselling after surgery.",
+        "accept": [
+          "airway",
+          "oxygen",
+          "urgent CT head",
+          "neurosurgical referral",
+          "monitor",
+          "reassess",
+          "rehabilitation"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The lucid interval carries the diagnosis before any test: five minutes out, two hours normal, then bursting headache with vomiting and drowsiness means an extradural bleed until the scan says otherwise.",
+        "A fall of two points with a blown pupil on the side of the blow is deterioration, not observation material: it triggers urgent scanning and neurosurgical referral the same hour.",
+        "Ear bleeding with clear watery fluid declares a base of skull fracture, which raises meningitis risk and forbids blind nasogastric tubes.",
+        "Hypertension with a slow pulse here is compression physiology, the opposite of shock: hypotension would have meant bleeding elsewhere and a different search.",
+        "A normal CT never ends the story when the mechanism is dangerous, and a normal skull film never overrules a worrying examination.",
+        "No helmet, no scan at the first hospital, no neurosurgeon: the Indian road injury chain breaks at all three, and counselling plus the 108 ambulance are part of the prescription."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

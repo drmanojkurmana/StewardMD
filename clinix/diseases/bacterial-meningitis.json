@@ -1,0 +1,1248 @@
+{
+  "_comment": "Paediatric bacterial (pyogenic) meningitis: fever with neck stiffness and a changed sensorium in a child, proved by the CSF. Almost every bedside finding is an emphasis overlay on a shared paediatric skill; the disease owns only the mechanism (purulent subarachnoid infection), the CSF profiles, and the treat-at-once plan.",
+  "id": "bacterial-meningitis",
+  "name": "Bacterial meningitis",
+  "fullName": "Acute bacterial (pyogenic) meningitis in children",
+  "system": "paediatrics",
+  "subtitle": "CSF interpretation and treatment",
+  "kbRef": "chronic_and_recurrent_meningitis",
+  "oneLine": "Fever with neck stiffness and a changed sensorium in a child, and the CSF that proves it",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "Pus in the subarachnoid space, and why a child can die of it within hours",
+      "skills": [
+        "skill.meningitis.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the sick child",
+      "blurb": "Settle the child and the parent before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.paed.rapport",
+        "skill.approach.paed.consent_assent"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age in months, immunisation and crowding set the odds before a symptom is mentioned",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Record age in months for infants and years for older children, immunisation exactly as the card shows, and who shares the sleeping room. An unimmunised crowded infant starts with a far higher pre-test probability than a fully immunised only child, and that changes how urgently you act on the same fever."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Hours to a few days, with fever plus a sign the meninges are involved",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.paed.presenting_complaint",
+        "skill.hx.bacterial.risk_factors"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical story reads in hours to a few days: fever for two days, vomiting and headache for one day, then drowsiness or a seizure. That short fuse separates bacterial meningitis from tuberculous meningitis, which builds over weeks, before any test is done."
+        },
+        "skill.hx.paed.presenting_complaint": {
+          "expect": "In an infant expect poor feeding, a high-pitched cry and a bulging fontanelle rather than a clear story of headache. In an older child ask directly about neck pain on bending forward and pain on looking at light, which parents often report as the child hiding from the lamp."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The gaps in protection and the contacts who need prophylaxis",
+      "skills": [
+        "skill.hx.paed.immunisation",
+        "skill.hx.paed.socioeconomic",
+        "skill.hx.paed.family_pedigree"
+      ],
+      "emphasis": {
+        "skill.hx.paed.immunisation": {
+          "expect": "Missing Hib or pneumococcal doses is the single most actionable risk factor in this disease, and it also flags siblings who need catch-up doses. Record each dose from the card, and ask specifically about any meningococcal vaccine, which is not on the routine schedule."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "A toxic child, and the circulation that can collapse while you examine",
+      "skills": [
+        "skill.gen.paed.appearance",
+        "skill.gen.paed.vitals",
+        "skill.gen.paed.pallor",
+        "skill.gen.paed.hydration"
+      ],
+      "emphasis": {
+        "skill.gen.paed.appearance": {
+          "expect": "Look for a toxic, lethargic child who is irritable when handled and then lapses back into drowsiness. That paradoxical irritability, crying more when comforted because handling stretches inflamed meninges, is more informative than any single vital sign in an infant."
+        },
+        "skill.gen.paed.vitals": {
+          "expect": "Expect high fever with tachycardia and fast breathing. Cold hands, delayed capillary refill or low blood pressure mean shock and outrank every meningeal sign, while a slow pulse with rising blood pressure and irregular breathing is a late warning of raised intracranial pressure."
+        },
+        "skill.gen.paed.hydration": {
+          "expect": "Vomiting and poor intake dehydrate quickly, yet sodium can fall from inappropriate antidiuretic hormone release, so assess hydration on repeated examination rather than once, and review fluids rather than fixing them on admission habit."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Neurological examination",
+      "blurb": "Neck rigidity, Kernig and Brudzinski, graded against consciousness",
+      "skills": [
+        "skill.exam.paed.cns.meningeal",
+        "skill.exam.paed.cns.higher_mental_gcs",
+        "skill.exam.paed.cns.cranial_nerves_bulbar",
+        "skill.exam.paed.cns.motor_tone_power"
+      ],
+      "emphasis": {
+        "skill.exam.paed.cns.meningeal": {
+          "expect": "Expect frank neck rigidity with positive Kernig and Brudzinski signs in an older child. In an infant under about a year these signs are often absent, so a flat assessment there never excludes meningitis, and the fontanelle and behaviour carry the examination instead."
+        },
+        "skill.exam.paed.cns.higher_mental_gcs": {
+          "expect": "Score consciousness on an age-appropriate scale at presentation and repeat it. A falling score is the single most urgent change in this disease and should trigger airway protection, senior help and reconsideration of raised pressure before anything else."
+        },
+        "skill.exam.paed.cns.cranial_nerves_bulbar": {
+          "expect": "Record pupils, eye movements and facial symmetry as a baseline even when normal. A new palsy appearing during admission points to raised pressure, a developing effusion or tuberculous disease rather than simple bacterial meningitis running its course."
+        },
+        "skill.exam.paed.cns.motor_tone_power": {
+          "expect": "Tone and power are usually normal at first. New asymmetry or a focal deficit means a complication such as an abscess, infarction or effusion, and that child needs imaging before any further lumbar puncture is considered."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the meningitis picture together",
+      "blurb": "Fever plus meningeal irritation plus a changed sensorium, in hours",
+      "skills": [
+        "skill.meningitis.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Three sentences that carry the urgency",
+      "skills": [
+        "skill.meningitis.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Tuberculous, viral, malarial and septic mimics, and how the CSF sorts them",
+      "skills": [
+        "skill.meningitis.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Blood cultures, then the tap, and never a scan before the first dose",
+      "skills": [
+        "skill.ix.meningitis.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and severity",
+      "blurb": "The CSF pattern that names it and the signs that grade it",
+      "skills": [
+        "skill.meningitis.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Antibiotics at once by age and likely organism, plus everything around them",
+      "skills": [
+        "skill.tx.meningitis"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this child to your consultant",
+      "skills": [
+        "skill.present.case",
+        "skill.present.bacterial.meningitis_case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.meningitis.meningeal_exam",
+        "title": "Examine a child with suspected meningitis",
+        "task": "This 4-year-old boy has had fever and vomiting for two days and is now drowsy. Examine for meningeal irritation and assess his level of consciousness.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.paed.rapport",
+          "skill.approach.paed.consent_assent",
+          "skill.exam.paed.cns.meningeal",
+          "skill.exam.paed.cns.higher_mental_gcs"
+        ],
+        "examinerQuestions": [
+          "Demonstrate Kernig sign and state exactly what counts as positive.",
+          "The fontanelle is flat and the neck moves freely in a 6-month-old with fever and poor feeding. Does that exclude meningitis, and what do you do next?",
+          "His consciousness score has fallen since admission. Name your next three actions in order.",
+          "Which finding on this examination would make you image the head before any lumbar puncture?"
+        ]
+      },
+      {
+        "id": "osce.meningitis.csf_counsel",
+        "title": "Interpret the CSF and plan treatment",
+        "task": "The tap on this 4-year-old shows turbid fluid with neutrophil predominance, raised protein and low glucose. Interpret the report for the examiner, state your immediate plan, and counsel the mother.",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.paed.consent_assent",
+          "skill.annex.paed.csf_analysis",
+          "skill.ix.meningitis.workup",
+          "skill.meningitis.diagnosis"
+        ],
+        "examinerQuestions": [
+          "Read this CSF report aloud and say which pattern it fits and why.",
+          "CSF glucose is low but you have no blood glucose. What is missing and why does it matter?",
+          "The sample is bloodstained. How do you decide whether the white cells are real?",
+          "Who else in this household needs preventive steps, and what do you advise?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.meningitis.basics",
+      "skill.exam.paed.cns.meningeal",
+      "skill.meningitis.signs",
+      "skill.meningitis.differential",
+      "skill.annex.paed.csf_analysis",
+      "skill.ix.meningitis.workup",
+      "skill.meningitis.diagnosis",
+      "skill.tx.meningitis"
+    ]
+  },
+  "skills": {
+    "skill.meningitis.basics": {
+      "id": "skill.meningitis.basics",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "What acute bacterial meningitis is",
+      "oneLine": "Bacteria multiplying in the subarachnoid space, with pus where only clear fluid should be",
+      "why": "Meningitis is defined by infected meninges and an inflammatory CSF, not by fever and headache alone. Getting that definition exact is what stops every febrile seizure and every viral fever with a stiff neck being labelled meningitis, and what forces the lumbar puncture that proves it.",
+      "body": "Acute bacterial meningitis is infection of the pia and arachnoid with bacteria multiplying in the subarachnoid space, producing a purulent CSF. In children the illness moves in hours, and delay in treatment is measured in death and permanent handicap.",
+      "keyPoints": [
+        "The diagnosis needs an acute febrile illness with meningeal irritation or a changed sensorium PLUS an inflammatory CSF. Symptoms alone give a working diagnosis; the tap, with cells, protein and glucose, confirms it.",
+        "Children under five carry the highest burden because their immunity is immature and their contact is close. Neonates face Group B streptococcus and gut gram negative organisms, while older infants and children face pneumococcus, meningococcus and, where unimmunised, Haemophilus influenzae type b.",
+        "Bacteria reach the meninges through the bloodstream from the nasopharynx, or directly from adjacent infection such as otitis media, sinusitis or pneumonia, or through a skull fracture or neurosurgical wound.",
+        "The illness is an emergency because pus under pressure injures the brain within hours: death, deafness, seizures and learning disability follow delayed treatment, which is why antibiotics start on suspicion and never wait for culture.",
+        "Distinguish acute bacterial meningitis from tuberculous meningitis, which builds over weeks with cranial nerve palsies, and from viral meningoencephalitis, in which the child is usually less toxic and the CSF glucose stays normal."
+      ],
+      "pitfalls": [
+        "Calling every febrile seizure meningitis, or dismissing meningitis because the child once had a febrile seizure.",
+        "Waiting for the full triad of fever, neck stiffness and altered consciousness before acting, when most children present with only part of it.",
+        "Treating meningitis as one organism rather than an age-dependent list that starts with the immunisation card.",
+        "Assuming a viral cause because the onset looked flu-like, and losing the window for antibiotics."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What two things does the diagnosis of acute bacterial meningitis require?",
+          "a": "An acute febrile illness with meningeal irritation or changed sensorium, together with an inflammatory CSF showing cells, raised protein and low glucose.",
+          "accept": [
+            "febrile",
+            "meningeal",
+            "sensorium",
+            "inflammatory",
+            "cells",
+            "glucose"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Which organisms top the list in a neonate versus a 4-year-old?",
+          "a": "Neonates face Group B streptococcus and gut gram negative organisms; a 4-year-old faces pneumococcus, meningococcus and Haemophilus influenzae type b if unimmunised.",
+          "accept": [
+            "group b",
+            "gram negative",
+            "pneumococcus",
+            "meningococcus",
+            "haemophilus"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Why must antibiotics start before culture results in suspected bacterial meningitis?",
+          "a": "Because bacteria under pressure injure the brain within hours, so each hour of delay raises the risk of death, deafness and lasting disability far more than an early empirical dose risks harm.",
+          "accept": [
+            "hours",
+            "delay",
+            "death",
+            "deafness",
+            "disability"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "chronic_and_recurrent_meningitis: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Bacterial meningitis (definition and aetiology)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.meningitis.signs": {
+      "id": "skill.meningitis.signs",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "The meningitis picture",
+      "oneLine": "Fever plus meningeal irritation plus a changed sensorium, in hours not weeks",
+      "why": "The meningitis picture is the clearest example in paediatrics of several modest signs adding up to an emergency no single one can carry. Fever alone is common, a seizure alone may be febrile, but fever with neck stiffness, vomiting and drowsiness together over a day or two means the meninges until the tap says otherwise.",
+      "body": "Inflamed meninges hurt when stretched and raise pressure inside the skull. Every local sign follows from stretch, and every systemic sign follows from pressure and toxaemia.",
+      "keyPoints": [
+        "The classic triad of fever, neck stiffness and altered consciousness is often incomplete in children, so do not wait for all three. Two of fever, headache or neck pain, vomiting and a changed behaviour or sensorium over hours to days is enough to act.",
+        "Neck rigidity with positive Kernig and Brudzinski signs marks meningeal stretch in the older child. Test them gently and never force movement against strong resistance.",
+        "Infants often lack all of these: expect fever or sometimes low temperature, poor feeding, vomiting, a tense bulging fontanelle, paradoxical irritability with a high-pitched cry, and seizures. Absent neck signs in this age group exclude nothing.",
+        "A petechial or purpuric rash that does not fade on pressure points to meningococcal disease with septicaemia, which can collapse into shock within hours. Check perfusion, pulse volume and blood pressure the moment such a rash is seen.",
+        "Seizures occur in a substantial share of children with bacterial meningitis and do not by themselves prove epilepsy; prolonged, focal or repeated seizures, or seizures with a slow return to alertness, strengthen the case for meningitis rather than a simple febrile seizure.",
+        "Signs of raised pressure, persistent vomiting, deteriorating consciousness, unequal pupils or abnormal posturing, mean the tap must wait for imaging and senior help, because displacing pressurised brain through the foramen is fatal."
+      ],
+      "pitfalls": [
+        "Excluding meningitis because the neck moves freely in an infant, in whom meningeal signs are usually absent.",
+        "Mistaking paradoxical irritability for a well child who dislikes examination, and missing the meningitis behind it.",
+        "Calling a purpuric rash viral and losing the hour in which meningococcaemia is still treatable.",
+        "Attributing drowsiness to fever alone without scoring consciousness and repeating the score."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three bedside findings that together suggest bacterial meningitis in a 4-year-old.",
+          "a": "Fever with neck stiffness, a positive Kernig or Brudzinski sign, and altered consciousness or behaviour change over hours to days.",
+          "accept": [
+            "fever",
+            "neck stiffness",
+            "kernig",
+            "brudzinski",
+            "consciousness"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How does meningitis present differently in a 6-month-old compared with a 4-year-old?",
+          "a": "The infant shows poor feeding, vomiting, a bulging fontanelle, paradoxical irritability and seizures, often with no neck stiffness at all, while the older child shows headache, neck pain, photophobia and frank Kernig signs.",
+          "accept": [
+            "feeding",
+            "fontanelle",
+            "irritability",
+            "neck stiffness",
+            "photophobia"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does a non-fading purpuric rash change the urgency more than any meningeal sign?",
+          "a": "It signals meningococcal septicaemia with endotoxin mediated shock, which can kill in hours and needs immediate resuscitation and antibiotics alongside the meningitis plan.",
+          "accept": [
+            "meningococcal",
+            "septicaemia",
+            "shock",
+            "resuscitation",
+            "antibiotics"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "chronic_and_recurrent_meningitis: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Bacterial meningitis (clinical manifestations)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.meningitis.summary": {
+      "id": "skill.meningitis.summary",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "The clinical summary",
+      "oneLine": "Problem representation for an illness measured in hours, ending in a plan",
+      "why": "The summary for meningitis has a different shape from a chronic disease summary: the tempo is hours to days, consciousness belongs in the same sentence as the syndrome, and the plan starts with the next hour, because the listener must feel the urgency without being told to hurry.",
+      "body": "State the child with the protection that matters, the tempo, the syndrome in abstract terms, the consciousness and severity, and the immediate plan, in that order.",
+      "keyPoints": [
+        "Name the child with age and immunisation: a 4-year-old boy, immunisation incomplete, previously well.",
+        "State the tempo: acute, over hours to a couple of days. This alone separates bacterial meningitis from tuberculous disease.",
+        "State the syndrome in abstract terms: acute febrile encephalopathy with meningeal irritation, naming neck stiffness, Kernig positivity and the rash.",
+        "Include consciousness and circulation in the same summary, since they determine the next hour: drowsy with a recorded score, perfusion as found.",
+        "Quote the CSF pattern briefly and close with the plan: empirical antibiotics already started, cultures sent, contacts to be traced.",
+        "A worked example: A 4-year-old boy with incomplete immunisation presents with two days of fever, vomiting and neck pain with increasing drowsiness. Examination shows fever, neck rigidity with positive Kernig sign and a non-fading petechial rash, with a consciousness score of 12. CSF shows neutrophil predominance with raised protein and low glucose. This is acute bacterial meningitis with septicaemia, and he needs immediate antibiotics, resuscitation and contact prophylaxis for the household."
+      ],
+      "pitfalls": [
+        "Omitting immunisation from the opening, so the listener cannot judge the likely organism.",
+        "Describing the tempo as gradual out of habit, when the whole illness is two days old.",
+        "Leaving out consciousness and perfusion, which are doing more work than any meningeal sign.",
+        "Ending on the diagnosis without the next-hour plan."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What element belongs in a meningitis summary that would not usually appear in a chronic disease summary?",
+          "a": "Consciousness with its score and circulatory state, because they determine the immediate resuscitation plan.",
+          "accept": [
+            "consciousness",
+            "score",
+            "circulation",
+            "resuscitation"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why does tempo matter so much in a meningitis summary?",
+          "a": "It separates an hours-old emergency needing immediate antibiotics from a weeks-long process like tuberculous meningitis, and it is often the single most discriminating detail in the whole history.",
+          "accept": [
+            "hours",
+            "emergency",
+            "antibiotics",
+            "tuberculous",
+            "weeks"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "child",
+          "text": "States age with immunisation status"
+        },
+        {
+          "id": "tempo",
+          "text": "States the tempo as acute, in hours to days"
+        },
+        {
+          "id": "severity",
+          "text": "Includes consciousness and circulation with the plan for the next hour"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "chronic_and_recurrent_meningitis: clinicalPearls"
+        },
+        {
+          "source": "Indian Academy of Pediatrics",
+          "locator": "Case presentation in paediatric CNS infection"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.meningitis.differential": {
+      "id": "skill.meningitis.differential",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Differential diagnosis",
+      "oneLine": "What else causes fever with fits or a stiff neck, and how the CSF sorts them",
+      "why": "Most febrile seizures are exactly what they look like, but the ones that are meningitis kill when sent home. The differential does not stop once antibiotics are started, because tuberculous disease and malaria need different treatment running alongside.",
+      "body": "For fever with meningeal signs, seizures or a changed sensorium, work through bacterial, tuberculous, viral, malarial and septic causes, and let tempo plus the CSF decide.",
+      "keyPoints": [
+        "Tuberculous meningitis: favoured by illness over weeks, weight loss, a household TB contact, cranial nerve palsies and a CSF with lymphocytes, very high protein, very low glucose and a cobweb clot on standing. In India this must always be actively considered.",
+        "Viral meningoencephalitis: favoured by a less toxic child, prominent altered behaviour or seizures with minimal meningeal signs, and a CSF with lymphocytes but normal glucose and only mildly raised protein.",
+        "Febrile seizure: favoured by a brief generalised seizure with fever in a rapidly recovering child and no meningeal signs. Meningitis must still be excluded first in young infants and in any child slow to wake.",
+        "Cerebral malaria: favoured in endemic areas and seasons by fever with coma or repeated seizures and parasites on test, and it can itself produce neck stiffness, so test rather than assume.",
+        "Sepsis without meningitis: favoured by a toxic child with a clear alternative focus and no meningeal signs, but only the tap can truly separate it from meningitis early on.",
+        "Brain abscess: favoured by prolonged fever, a focal deficit, and an ear or sinus source, with imaging showing a ring lesion rather than diffuse meningeal inflammation.",
+        "Otitis media, sinusitis and pneumonia are more often the source of the meningitis than alternatives to it, and finding one should raise rather than lower suspicion."
+      ],
+      "pitfalls": [
+        "Sending home a febrile seizure without excluding meningitis in a young or drowsy infant.",
+        "Missing tuberculous meningitis because the early days looked acute, and losing the treatable window.",
+        "Forgetting malaria testing in an endemic season because the neck was stiff.",
+        "Treating a non-improving meningitis with broader antibiotics without asking about tuberculosis, abscess or a persistent focus."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name three differentials for fever with seizures or a stiff neck in a child, besides bacterial meningitis.",
+          "a": "Tuberculous meningitis, viral meningoencephalitis, febrile seizure, cerebral malaria, sepsis and brain abscess.",
+          "accept": [
+            "tuberculous",
+            "viral",
+            "febrile seizure",
+            "malaria",
+            "sepsis",
+            "abscess"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A 3-year-old has fever, neck stiffness and a normal CSF glucose with lymphocytes. What does that favour and what next?",
+          "a": "It favours viral meningoencephalitis over bacterial disease, but tuberculous meningitis must still be considered on tempo and contact, so observe closely, test for tuberculosis and malaria, and do not narrow the differential to one test.",
+          "accept": [
+            "viral",
+            "tuberculous",
+            "tempo",
+            "contact",
+            "observe"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Offers a differential spanning bacterial, tuberculous, viral, malarial and septic causes"
+        },
+        {
+          "id": "tb",
+          "text": "Explicitly considers tuberculous meningitis with tempo and contact"
+        },
+        {
+          "id": "age",
+          "text": "Considers febrile seizure and its limits in the young or drowsy child"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "chronic_and_recurrent_meningitis: additionalDifferentials"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Bacterial meningitis (differential diagnosis)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.meningitis.workup": {
+      "id": "skill.ix.meningitis.workup",
+      "kind": "investigation",
+      "system": "paediatrics",
+      "title": "Confirming meningitis and reading the tap",
+      "oneLine": "Blood cultures first, the tap as soon as safe, and nothing that delays the first dose",
+      "why": "Investigations in meningitis serve three separate jobs, proving the organism, reading the CSF pattern, and ruling out pressure that makes the tap dangerous, and understanding which test does which stops a student waiting for a culture before starting treatment in a drowsy child.",
+      "body": "Group investigations by what they answer: prove the organism, read the inflammation, and check safety before the needle goes in.",
+      "keyPoints": [
+        "PROVE: two blood cultures drawn before the first antibiotic dose wherever possible, since blood often grows the organism even when prior antibiotics sterilise the CSF. Drawing them must never delay that first dose by more than minutes.",
+        "READ: lumbar puncture with opening pressure, cell count with differential, protein, glucose with a simultaneous blood glucose, Gram stain and culture. Save an extra tube for tuberculosis, cryptococcal antigen or viral studies where the picture is unclear.",
+        "The bacterial pattern is neutrophil predominance with raised protein and glucose below two thirds of blood glucose. A negative Gram stain never excludes bacterial meningitis.",
+        "A bloodstained tap is still readable: allow about one white cell for every 500 red cells and about 1 mg per dL of protein for every 1000 red cells before calling the remainder real.",
+        "Normal CSF in a child is fewer than 5 white cells, protein 10 to 40 mg per dL, and glucose about two thirds of blood glucose, with higher protein allowed in the newborn. Judge every tap against these, not against adult ranges.",
+        "SAFETY: image the head before the tap when there are signs of raised pressure, a focal deficit, deteriorating consciousness or papilloedema. If imaging is needed, the order is cultures, antibiotics and stabilisation first, then the scan, then the tap.",
+        "SUPPORT: full blood count, blood glucose, sodium, and a malaria test in endemic areas or seasons, plus HIV testing where risk factors exist or the illness is unexplained."
+      ],
+      "pitfalls": [
+        "Delaying the first antibiotic dose for the tap or the scan in a child who is already drowsy or shocked.",
+        "Reading CSF glucose without the simultaneous blood glucose beside it.",
+        "Discarding a bloodstained sample as uninterpretable instead of applying the correction.",
+        "Tapping through suspected raised pressure without imaging, risking herniation.",
+        "Stopping at a negative culture after prior antibiotics instead of trusting the cell profile and Gram stain."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What must every lumbar puncture sample be tested for, at a minimum?",
+          "a": "Opening pressure, cell count with differential, protein, glucose with simultaneous blood glucose, Gram stain and culture, with an extra tube saved.",
+          "accept": [
+            "pressure",
+            "cells",
+            "protein",
+            "glucose",
+            "gram stain",
+            "culture"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "A tap returns bloodstained fluid with 1200 red cells and 4 white cells. Is there pleocytosis?",
+          "a": "Probably not, since about one white cell per 500 red cells is expected from blood alone, so 4 white cells against 1200 red cells is within the correction and the tap should be interpreted with caution.",
+          "accept": [
+            "500",
+            "correction",
+            "blood",
+            "caution"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A drowsy child needs a scan before the tap. What is the exact order of the next steps?",
+          "a": "Blood cultures, first antibiotics and stabilisation first, then the scan, then the tap if safe, because neither imaging nor the tap may delay treatment.",
+          "accept": [
+            "cultures",
+            "antibiotics",
+            "scan",
+            "tap",
+            "delay"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "chronic_and_recurrent_meningitis: additionalInvestigations"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Bacterial meningitis (diagnosis and CSF examination)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.meningitis.diagnosis": {
+      "id": "skill.meningitis.diagnosis",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Diagnosis and severity",
+      "oneLine": "The CSF pattern that names it and the bedside signs that grade it",
+      "why": "A diagnosis of meningitis does not say how close the child is to dying. The CSF names the cause while consciousness, circulation and the rash grade the danger, and both halves must appear in the same statement or the plan that follows is blind.",
+      "body": "Diagnose from tempo plus signs plus the CSF pattern together, then grade severity from consciousness, circulation and complications, since each changes the next hour.",
+      "keyPoints": [
+        "Acute bacterial meningitis is an illness of hours to days with meningeal signs or changed sensorium plus a neutrophilic CSF with raised protein and glucose below two thirds of blood glucose.",
+        "A lymphocytic CSF with very high protein, very low glucose and a cobweb clot on standing favours tuberculous meningitis, especially with a contact or a course over weeks, and treatment for it must not wait for culture.",
+        "A lymphocytic CSF with normal glucose and mildly raised protein favours viral disease, but only after bacterial and tuberculous causes have been weighed on tempo and toxicity.",
+        "Grade severity at the bedside: depth of unconsciousness, shock or a spreading purpuric rash, prolonged or focal seizures, and age under infancy all mark a child who needs intensive monitoring and senior help.",
+        "Name complications as part of the diagnosis: shock, seizures, raised pressure with hydrocephalus, subdural effusion in infants, cranial nerve palsies, and hearing loss, which needs an audiology check before or soon after discharge.",
+        "A complete diagnostic statement names the illness, the likely organism group by age and CSF, any focus such as otitis, and the severity: acute bacterial meningitis with septicaemia in a drowsy child."
+      ],
+      "pitfalls": [
+        "Stating meningitis without a severity grade, leaving the reader unable to judge the urgency.",
+        "Calling a lymphocytic low-glucose CSF viral and missing tuberculous disease.",
+        "Ignoring a normal early tap in a convincing clinical picture instead of treating and re-evaluating.",
+        "Forgetting hearing assessment, the commonest lasting handicap, in the discharge plan."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What CSF pattern defines acute bacterial meningitis?",
+          "a": "Neutrophil predominance with raised protein and glucose below two thirds of simultaneous blood glucose.",
+          "accept": [
+            "neutrophil",
+            "protein",
+            "glucose",
+            "two thirds",
+            "blood glucose"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What CSF pattern favours tuberculous over bacterial meningitis?",
+          "a": "Lymphocyte predominance with very high protein, very low glucose and a cobweb clot on standing.",
+          "accept": [
+            "lymphocyte",
+            "protein",
+            "glucose",
+            "cobweb"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "A child with meningitis is drowsy with a spreading purpuric rash and cold hands. What does that add to the diagnosis?",
+          "a": "It adds septicaemia with shock to the meningitis, which is the severity grade that demands immediate resuscitation alongside antibiotics and intensive monitoring.",
+          "accept": [
+            "septicaemia",
+            "shock",
+            "resuscitation",
+            "antibiotics",
+            "monitoring"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "pattern",
+          "text": "States the CSF pattern with cells, protein and glucose against blood glucose"
+        },
+        {
+          "id": "grade",
+          "text": "Grades severity from consciousness, circulation or complications"
+        },
+        {
+          "id": "tb",
+          "text": "Recognises the tuberculous pattern and its urgency"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "chronic_and_recurrent_meningitis: Definition and CSF clues in chronic meningitis"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Bacterial meningitis (diagnosis and prognosis)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.meningitis": {
+      "id": "skill.tx.meningitis",
+      "kind": "treatment",
+      "system": "paediatrics",
+      "title": "Managing bacterial meningitis",
+      "oneLine": "Antibiotics at once by age and likely organism, support around them, and protection for the contacts",
+      "why": "The first dose and the breadth of cover both follow from age and severity, and getting either wrong in either direction, undertreating a shocked child or overtreating a viral illness for weeks, has real cost. The resuscitation, monitoring and contact protection around the antibiotic are as much a part of the answer as the antibiotic itself.",
+      "body": "Give the first antibiotic dose at once on suspicion, choose cover for the likely organisms by age, resuscitate and monitor alongside, then narrow on results and protect the household.",
+      "keyPoints": [
+        "Give the first dose immediately once meningitis is suspected, after drawing blood cultures where that takes only minutes. Neither the tap, the scan nor any culture result may delay it.",
+        "Choose empirical cover for the likely organisms by age: a third generation cephalosporin backbone active against pneumococcus, meningococcus and Haemophilus, with added cover for resistant pneumococcus where surveillance suggests it, and Listeria cover in neonates and young infants. The exact agents follow the current national or institutional guideline and local resistance data, not memory.",
+        "Add an adjunctive corticosteroid as the current guideline advises for the likely organism, with the first dose given with or just before the antibiotics, and stop it if a non-bacterial cause is confirmed.",
+        "Narrow cover once Gram stain and culture identify the organism, and set duration by the guideline and the clinical response, using the shortest course that achieves resolution rather than a fixed long course from habit.",
+        "Resuscitate alongside: secure the airway as consciousness falls, correct shock with fluids, control seizures and fever, watch glucose and sodium closely, and feed as soon as safe.",
+        "Review progress daily and reconsider when improvement stalls: the wrong organism or resistance, a complication such as effusion, empyema or hydrocephalus, or an alternative diagnosis such as tuberculous meningitis or abscess, rather than reflexively broadening antibiotics.",
+        "Before discharge arrange a hearing check, since sensorineural deafness is the commonest lasting harm and early aids or implantation depend on early detection, with developmental follow-up for infants.",
+        "Protect the household: chemoprophylaxis for close contacts of meningococcal and Hib disease as national guidance directs, notification to the district surveillance unit, catch-up vaccination for siblings, and advice on when to return at once."
+      ],
+      "pitfalls": [
+        "Waiting for the tap or scan before the first dose in a drowsy or shocked child.",
+        "Choosing cover without Listeria in mind for a neonate, or without resistant pneumococcus in mind where it circulates.",
+        "Continuing broad cover unchanged for weeks instead of narrowing on culture.",
+        "Discharging without a hearing check or contact prophylaxis, the two commonest omissions.",
+        "Missing raised pressure or shock while focusing only on the antibiotic choice."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What must happen before the first antibiotic dose, and what must never delay it?",
+          "a": "Blood cultures should be drawn first where that takes only minutes, but the tap, the scan and all culture results must never delay the first dose.",
+          "accept": [
+            "cultures",
+            "tap",
+            "scan",
+            "delay",
+            "first dose"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "A neonate and a 4-year-old both need empirical cover. How do the regimens differ in principle?",
+          "a": "The neonate needs additional Listeria and gram negative cover beyond the cephalosporin backbone, while the older child is covered for pneumococcus, meningococcus and Haemophilus, with the exact agents set by the current guideline.",
+          "accept": [
+            "listeria",
+            "gram negative",
+            "pneumococcus",
+            "meningococcus",
+            "guideline"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "A child on treatment is no better after several days. What is your first step before changing antibiotics?",
+          "a": "Reconsider the cause and look for a reason: resistance, a complication such as effusion or hydrocephalus, or an alternative such as tuberculous meningitis or abscess, rather than reflexively broadening cover.",
+          "accept": [
+            "reconsider",
+            "complication",
+            "effusion",
+            "tuberculous",
+            "abscess"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "chronic_and_recurrent_meningitis: management"
+        },
+        {
+          "source": "Indian Academy of Pediatrics",
+          "locator": "Acute bacterial meningitis (empirical therapy and prophylaxis)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of drug CLASS and principle. Specific agents, routes, combinations and durations must be taken from your current national or institutional guideline and local resistance data at the time of prescribing. CliniX does not prescribe."
+    },
+    "skill.annex.meningitis.csf_profiles": {
+      "id": "skill.annex.meningitis.csf_profiles",
+      "kind": "annexure",
+      "system": "paediatrics",
+      "title": "CSF profiles that separate the causes",
+      "oneLine": "Normal, bacterial, tuberculous and viral patterns side by side",
+      "why": "Sorting meningitis at the bedside is a pattern task, and patterns live in comparison. A student who has seen the four profiles in one table reads the next tap correctly, while one who memorised each separately hesitates on every borderline report.",
+      "teach": [
+        {
+          "heading": "The four profiles side by side",
+          "table": {
+            "cols": [
+              "Profile",
+              "Cells",
+              "Chemistry",
+              "Bedside clue"
+            ],
+            "rows": [
+              [
+                "Normal child",
+                "Fewer than 5 white cells, all lymphocytes",
+                "Protein 10 to 40 mg per dL, glucose about two thirds of blood glucose",
+                "Clear fluid; newborn protein may reach 120"
+              ],
+              [
+                "Bacterial",
+                "Neutrophils predominant, often markedly raised",
+                "Protein raised, glucose below two thirds of blood glucose",
+                "Turbid or frankly purulent fluid"
+              ],
+              [
+                "Tuberculous",
+                "Lymphocytes predominant",
+                "Protein very high, glucose very low",
+                "Cobweb clot on standing; illness over weeks"
+              ],
+              [
+                "Viral",
+                "Lymphocytes predominant, modest rise",
+                "Protein mildly raised, glucose normal",
+                "Child usually less toxic than the fever suggests"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "How to use the table without misreading it",
+          "body": "Read every tap against age-adjusted normals first, since newborn protein runs higher than older children. Always pair glucose with simultaneous blood glucose, since only the ratio shows true hypoglycorrhachia.\n\nCorrect a bloodstained tap before judging it, allowing about one white cell per 500 red cells and 1 mg per dL of protein per 1000 red cells. Treat early partially treated meningitis as bacterial until proven otherwise, since antibiotics sterilise cultures faster than they normalise cells."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "State the normal CSF cell count, protein and glucose for a child beyond the newborn period.",
+          "a": "Fewer than 5 white cells, protein 10 to 40 mg per dL, and glucose about two thirds of simultaneous blood glucose.",
+          "accept": [
+            "5",
+            "10 to 40",
+            "two thirds",
+            "blood glucose"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which single row of the table favours tuberculous meningitis, and why?",
+          "a": "Lymphocyte predominance with very high protein, very low glucose and a cobweb clot, especially with illness over weeks and a TB contact.",
+          "accept": [
+            "lymphocyte",
+            "protein",
+            "glucose",
+            "cobweb",
+            "weeks"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "normals",
+          "text": "Quotes age-adjusted normal CSF ranges"
+        },
+        {
+          "id": "patterns",
+          "text": "Matches each abnormal profile to its cause"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "chronic_and_recurrent_meningitis: Definition and CSF clues in chronic meningitis"
+        },
+        {
+          "source": "WHO",
+          "locator": "Pocket Book of Hospital Care for Children (meningitis and CSF examination)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.meningitis.aarav",
+      "initialVitals": {
+        "hr": 136,
+        "bpSystolic": 84,
+        "bpDiastolic": 52,
+        "rr": 34,
+        "spo2": 94,
+        "temp": 39.5,
+        "gcs": 12
+      },
+      "title": "A 4-year-old with two days of fever who will not wake up properly",
+      "opening": "Aarav Sharma, 4 years old, has been brought to the casualty by his mother and uncle. He is febrile, whimpering when touched, and drifts back to sleep between examinations. His mother says he had a red rash on his legs this morning. Introduce yourself to her and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Aarav Sharma",
+        "age": 4,
+        "sex": "male",
+        "occupation": "Anganwadi-going child",
+        "residence": "Urban, one-room house with parents and grandmother"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings the child today",
+            "main problem with the child",
+            "tell me what happened to him",
+            "why did you bring him to hospital"
+          ],
+          "reply": "Doctor, since two days he has high fever and vomiting, and since this morning he is very sleepy and not recognising us properly.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "onset_tempo": {
+          "cues": [
+            "when did the illness start",
+            "how many days of fever",
+            "was he well before this",
+            "sudden or gradual onset"
+          ],
+          "reply": "He was completely well three days ago and going to the anganwadi. The fever started suddenly two days back in the evening.",
+          "key": true
+        },
+        "fever_pattern": {
+          "cues": [
+            "how high is the fever",
+            "fever with chills and shivering",
+            "does the fever touch normal",
+            "what brings the fever down"
+          ],
+          "reply": "It has stayed high both days, around 103 to 104, coming down only a little with paracetamol syrup and then rising again.",
+          "key": true
+        },
+        "headache_site": {
+          "cues": [
+            "does his head ache",
+            "where is the headache",
+            "does he hold his head and cry",
+            "head pain on bending forward"
+          ],
+          "reply": "Yes, he keeps holding his forehead and crying, and he cries more when he sits up or bends his neck forward.",
+          "key": true
+        },
+        "vomiting_pattern": {
+          "cues": [
+            "how many times has he vomited",
+            "forceful or projectile vomiting",
+            "vomiting without nausea",
+            "what comes out on vomiting"
+          ],
+          "reply": "He has vomited four or five times since yesterday, quite forcefully, even though his stomach was empty.",
+          "key": true
+        },
+        "neck_pain_stiffness": {
+          "cues": [
+            "pain on moving the neck",
+            "stiff neck on bending forward",
+            "does he resist neck movement",
+            "neck pain when touched"
+          ],
+          "reply": "Yes, since yesterday he cries when I try to lift his head, and he keeps his neck stiff and tilted back.",
+          "key": true
+        },
+        "light_aversion": {
+          "cues": [
+            "bothered by bright light",
+            "turns away from the lamp",
+            "squinting in daylight",
+            "photophobia or light sensitivity"
+          ],
+          "reply": "Yes, he turns his face away from the light and wants the room dark.",
+          "key": true
+        },
+        "sensorium_level": {
+          "cues": [
+            "is he fully awake",
+            "responding to your voice",
+            "drowsy or unconscious",
+            "recognising the parents"
+          ],
+          "reply": "He opens his eyes when I call loudly but does not recognise us properly, and goes back to sleep at once. This started this morning.",
+          "key": true
+        },
+        "seizure_events": {
+          "cues": [
+            "any fits or convulsions",
+            "jerky movements of the limbs",
+            "uprolling of the eyes",
+            "seizure with stiffening and jerking"
+          ],
+          "reply": "No fits so far, doctor. He has never had a fit before either.",
+          "key": true
+        },
+        "rash_marks": {
+          "cues": [
+            "tell me about the red spots",
+            "rash on the legs and trunk",
+            "do the spots fade on pressing",
+            "spots that do not blanch"
+          ],
+          "reply": "Small red spots came on his legs this morning and are spreading to his tummy. They do not fade even when I press them with a glass.",
+          "key": true
+        },
+        "appetite_feeding": {
+          "cues": [
+            "is he eating and drinking",
+            "poor feeding since the fever",
+            "how much milk and water",
+            "passing urine normally"
+          ],
+          "reply": "He is refusing all food since yesterday and taking only a few sips of water. He has passed very little urine today.",
+          "key": true
+        },
+        "preceding_ear_cold": {
+          "cues": [
+            "ear discharge in recent days",
+            "runny nose or cold before the fever",
+            "ear pain reported by the child",
+            "cough before this illness"
+          ],
+          "reply": "He had a cold with runny nose last week, and he kept pulling at his right ear two days before the fever started.",
+          "key": true
+        },
+        "immunisation_record": {
+          "cues": [
+            "show me the immunisation card",
+            "which vaccines has he received",
+            "pentavalent and pneumococcal doses",
+            "missed any scheduled vaccine"
+          ],
+          "reply": "I have the card here. He got the birth doses and two sets after that, but we missed the later visits when we shifted house. I do not think he got the pneumonia vaccines.",
+          "key": true,
+          "skillId": "skill.hx.bacterial.risk_factors"
+        },
+        "tb_contact_history": {
+          "cues": [
+            "anyone at home with prolonged cough",
+            "tuberculosis in the family",
+            "weight loss in a household member",
+            "treatment for tb at home"
+          ],
+          "reply": "No, nobody at home has long cough or TB treatment. Nobody has lost weight either.",
+          "key": true
+        },
+        "birth_growth_history": {
+          "cues": [
+            "birth weight of the child",
+            "normal delivery or hospital birth",
+            "growing normally until now",
+            "developmental milestones on time"
+          ],
+          "reply": "He was born in the hospital at full term, about two and a half kilos, and was growing and speaking normally until this illness.",
+          "key": true
+        },
+        "diet_household_food": {
+          "cues": [
+            "what does he eat daily",
+            "how many share one room",
+            "who sleeps in the same room",
+            "anyone else ill at home"
+          ],
+          "reply": "He eats dal roti and milk like us. Five of us sleep in one room. Nobody else is ill right now.",
+          "key": true
+        },
+        "drug_allergy_history": {
+          "cues": [
+            "medicines given before coming here",
+            "any antibiotic already started",
+            "paracetamol syrup doses",
+            "allergy to any medicine"
+          ],
+          "reply": "Only paracetamol syrup at home, nothing else. He has no known medicine allergy.",
+          "key": true
+        },
+        "family_crowding": {
+          "cues": [
+            "siblings and their health",
+            "do the siblings go to school",
+            "history of meningitis in the area",
+            "neighbours with similar fever"
+          ],
+          "reply": "He has one younger sister, 18 months old, who is well. Nobody nearby has this kind of illness.",
+          "key": true
+        }
+      },
+      "exam": {
+        "skill.gen.paed.appearance": {
+          "finding": "Toxic and lethargic, lying still with neck extended. Whimpers when handled and lapses back into drowsiness. No dysmorphism.",
+          "abnormal": true
+        },
+        "skill.gen.paed.vitals": {
+          "finding": "Temperature 39.5 C. Pulse 136 regular with low volume. Blood pressure 84/52. Respiratory rate 34. SpO2 94 percent on room air. Capillary refill 3 seconds with cold hands and feet.",
+          "abnormal": true
+        },
+        "skill.gen.paed.pallor": {
+          "finding": "No significant pallor.",
+          "abnormal": false
+        },
+        "skill.exam.paed.skin_lesions": {
+          "finding": "Generalised petechial and purpuric spots over the legs and lower trunk that do not fade on pressure. No eschar, no jaundice.",
+          "abnormal": true
+        },
+        "skill.exam.paed.cns.meningeal": {
+          "finding": "Marked neck rigidity. Kernig sign positive. Brudzinski neck sign positive. Anterior fontanelle closed.",
+          "abnormal": true
+        },
+        "skill.exam.paed.cns.higher_mental_gcs": {
+          "finding": "Drowsy. Eye opening to voice, confused words, localises pain. Score 12. No papilloedema on fundoscopy.",
+          "abnormal": true
+        },
+        "skill.exam.paed.cns.cranial_nerves_bulbar": {
+          "finding": "Pupils equal and reactive to light. Eye movements full. No facial asymmetry. No cranial nerve palsy at present.",
+          "abnormal": false
+        },
+        "skill.exam.paed.cns.motor_tone_power": {
+          "finding": "Moves all four limbs to pain. Tone and power grossly normal. No focal deficit. Plantars flexor.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "csf",
+        "bloodcx",
+        "fbc",
+        "paired_glucose"
+      ],
+      "investigations": {
+        "csf": {
+          "label": "Lumbar puncture with CSF analysis",
+          "indicated": true,
+          "result": "Opening pressure raised. Turbid fluid. White cells 850 per mm3 with 84 percent neutrophils. Protein 170 mg per dL. CSF glucose 26 mg per dL against simultaneous blood glucose 118 mg per dL. Gram stain shows gram negative diplococci. Culture pending.",
+          "note": "This is the bacterial pattern the teaching predicts: neutrophils, raised protein and glucose far below two thirds of blood glucose. Start treatment on this, not on the culture."
+        },
+        "bloodcx": {
+          "label": "Blood cultures, two sets",
+          "indicated": true,
+          "result": "Drawn before the first antibiotic dose. No growth yet at 24 hours.",
+          "note": "Worth sending in every toxic child, but drawing them must never delay the first dose by more than minutes."
+        },
+        "fbc": {
+          "label": "Full blood count",
+          "indicated": true,
+          "result": "Haemoglobin 11.2 g per dL. Total leucocyte count 18,400 per mm3 with 78 percent neutrophils. Platelets adequate.",
+          "note": "A neutrophil leucocytosis fits an acute bacterial process and helps grade how ill he is."
+        },
+        "paired_glucose": {
+          "label": "Simultaneous blood glucose",
+          "indicated": true,
+          "result": "Blood glucose 118 mg per dL drawn alongside the tap, against CSF glucose 26 mg per dL.",
+          "note": "Without this number the low CSF glucose means nothing. The ratio here is frankly bacterial."
+        },
+        "malaria_test": {
+          "label": "Rapid malaria test and smear",
+          "indicated": true,
+          "result": "Negative for falciparum and vivax on both rapid test and smear.",
+          "note": "Indicated in an endemic setting with fever and coma: cerebral malaria can stiffen the neck too, so test rather than assume."
+        },
+        "ct_head": {
+          "label": "CT head before the tap",
+          "indicated": false,
+          "result": "Not done. No focal deficit, no papilloedema, and the tap proceeded safely after assessment.",
+          "note": "Not indicated here: imaging before the tap is for raised-pressure signs, focal deficits or a falling score, and ordering it routinely would only have delayed the antibiotics he needed."
+        }
+      },
+      "differentialModel": {
+        "answer": "Acute bacterial meningitis with septicaemia. Consider tuberculous meningitis, viral meningoencephalitis, cerebral malaria, sepsis without meningitis, and brain abscess.",
+        "accept": [
+          "bacterial meningitis",
+          "pyogenic meningitis",
+          "tuberculous meningitis",
+          "viral meningitis",
+          "encephalitis",
+          "cerebral malaria",
+          "sepsis",
+          "brain abscess",
+          "febrile seizure",
+          "malaria"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Acute bacterial (pyogenic) meningitis with meningococcal septicaemia, moderately severe with a consciousness score of 12 and early shock.",
+        "accept": [
+          "bacterial meningitis",
+          "pyogenic meningitis",
+          "meningitis"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Resuscitate for early shock with fluids and oxygen, draw blood cultures, give the first empirical antibiotics at once without waiting for the tap or scan, perform the tap where safe, monitor consciousness and sodium, trace household contacts for prophylaxis and notify surveillance, arrange a hearing check before discharge, and catch up the missed vaccines including the sister.",
+        "accept": [
+          "resuscitation",
+          "fluids",
+          "blood cultures",
+          "antibiotics",
+          "first dose",
+          "lumbar puncture",
+          "monitoring",
+          "prophylaxis",
+          "hearing",
+          "vaccine"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The tempo alone should move you towards an acute bacterial process before a single test: two days, not the weeks of tuberculous disease or the minutes of a simple febrile seizure.",
+        "A non-fading petechial rash with cold hands and low-volume pulse is septicaemia with early shock, which outranks every meningeal sign and needs fluids alongside the antibiotics.",
+        "The CSF proves it in one line: neutrophils with raised protein and glucose far below two thirds of blood glucose is bacterial until proven otherwise.",
+        "A negative blood culture after prior antibiotics means nothing; here cultures were drawn first, and the cell profile carries the diagnosis regardless.",
+        "No papilloedema, no focal deficit and a stable airway meant the tap could proceed without a scan, and skipping the scan is what kept the first dose early.",
+        "Incomplete immunisation and a recent ear tug give both the cause and the prevention: catch-up vaccines for him and his sister, and prophylaxis advice for the crowded household.",
+        "Normal tone, full eye movements and reactive pupils are relevant negatives: they argue against an abscess or established raised pressure at presentation, and they form the baseline for detecting deterioration."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

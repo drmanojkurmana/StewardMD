@@ -1,0 +1,1195 @@
+{
+ "id": "birth-asphyxia",
+ "name": "Birth asphyxia",
+ "fullName": "Birth asphyxia and neonatal resuscitation (Apgar, NRP steps and hypoxic-ischaemic encephalopathy)",
+ "system": "paediatrics",
+ "kbRef": "neonatal_resuscitation_nrp_stabilization",
+ "oneLine": "The baby who does not breathe at birth: Apgar scoring, NRP resuscitation steps and care of HIE",
+ "estMinutes": 60,
+ "review": {
+  "status": "ai_drafted"
+ },
+ "version": 1,
+ "chapters": [
+  {
+   "id": "basics",
+   "title": "Basics",
+   "skills": [
+    "skill.reasoning.birthasphyxia.basics",
+    "skill.reasoning.birthasphyxia.anticipation"
+   ]
+  },
+  {
+   "id": "approach",
+   "title": "Approach to the newborn",
+   "skills": [
+    "skill.approach.hygiene",
+    "skill.approach.introduce",
+    "skill.approach.paed.rapport",
+    "skill.approach.paed.consent_assent"
+   ]
+  },
+  {
+   "id": "particulars",
+   "title": "Patient particulars",
+   "skills": [
+    "skill.particulars.demographics"
+   ]
+  },
+  {
+   "id": "history",
+   "title": "History of presenting illness",
+   "skills": [
+    "skill.hx.chief_complaints",
+    "skill.hx.paed.presenting_complaint",
+    "skill.hx.birth.asphyxia_illness"
+   ]
+  },
+  {
+   "id": "past_personal_drug_family",
+   "title": "Past, personal, drug and family history",
+   "skills": [
+    "skill.hx.paed.birth_antenatal",
+    "skill.hx.paed.family_pedigree",
+    "skill.hx.birth.asphyxia_risks"
+   ]
+  },
+  {
+   "id": "general_exam",
+   "title": "General examination",
+   "skills": [
+    "skill.gen.paed.appearance",
+    "skill.gen.paed.vitals",
+    "skill.gen.paed.cyanosis",
+    "skill.exam.paed.weight"
+   ]
+  },
+  {
+   "id": "systemic_exam",
+   "title": "Neonatal examination",
+   "skills": [
+    "skill.exam.paed.neo.head_skull_trauma",
+    "skill.exam.paed.neo.chest_respiratory_cvs",
+    "skill.exam.paed.neo.primitive_reflexes",
+    "skill.exam.paed.neo.skin_cord_variations"
+   ]
+  },
+  {
+   "id": "disease_findings",
+   "title": "Putting the asphyxia picture together",
+   "skills": [
+    "skill.reasoning.birthasphyxia.findings"
+   ]
+  },
+  {
+   "id": "summary",
+   "title": "Clinical summary",
+   "skills": [
+    "skill.reasoning.birthasphyxia.summary"
+   ]
+  },
+  {
+   "id": "differential",
+   "title": "Differential diagnosis",
+   "skills": [
+    "skill.reasoning.birthasphyxia.differential"
+   ]
+  },
+  {
+   "id": "investigations",
+   "title": "Investigations",
+   "skills": [
+    "skill.investigation.birthasphyxia.workup",
+    "skill.annex.paed.normal_biochemical_values"
+   ]
+  },
+  {
+   "id": "diagnosis",
+   "title": "Diagnosis and grading",
+   "skills": [
+    "skill.reasoning.birthasphyxia.diagnosis"
+   ]
+  },
+  {
+   "id": "treatment",
+   "title": "Treatment",
+   "skills": [
+    "skill.treatment.birthasphyxia.care"
+   ]
+  },
+  {
+   "id": "case",
+   "title": "Case presentation",
+   "skills": [
+    "skill.present.case",
+    "skill.present.birth.asphyxia_case"
+   ]
+  }
+ ],
+ "osce": {
+  "stations": [
+   {
+    "id": "osce.birthasphyxia.nrp_bagmask",
+    "title": "Resuscitate the non-vigorous newborn",
+    "task": "This term baby is born limp and silent through thick meconium-stained liquor, with a heart rate below 100. Demonstrate the first minutes of resuscitation on the manikin and state your decisions aloud.",
+    "seconds": 480,
+    "skills": [
+     "skill.approach.hygiene",
+     "skill.approach.paed.neo.resuscitation_initial",
+     "skill.approach.paed.neo.bag_mask_ventilation",
+     "skill.approach.paed.neo.chest_compression_circulation",
+     "skill.annex.paed.neo.apgar_score",
+     "skill.treatment.birthasphyxia.care"
+    ],
+    "examinerQuestions": [
+     "You dry and position but the baby stays limp with a slow heart rate. What is your very next step, and how do you know your breaths are effective?",
+     "Ventilation is effective yet the heart rate stays below 60. What do you start, at what rhythm, and what drug route do you prepare?",
+     "When do you stop resuscitation efforts in the labour room, and what do you tell the mother in the first hour?"
+    ]
+   },
+   {
+    "id": "osce.birthasphyxia.perinatal_history",
+    "title": "Take the perinatal history and counsel the mother",
+    "task": "This mother delivered 8 hours ago at the primary health centre; her baby cried late after bag and mask breaths and is now sleepy with a poor suck. Take a focused perinatal history in six minutes and counsel her on what happens next.",
+    "seconds": 360,
+    "skills": [
+     "skill.approach.introduce",
+     "skill.approach.paed.consent_assent",
+     "skill.hx.chief_complaints",
+     "skill.hx.paed.presenting_complaint",
+     "skill.hx.birth.asphyxia_illness",
+     "skill.hx.birth.asphyxia_risks"
+    ],
+    "examinerQuestions": [
+     "Which three facts fix the severity of the insult, and where do you confirm each?",
+     "The mother asks whether the delayed cry means permanent brain damage. How do you answer honestly today?",
+     "Name two findings that would make you treat for sepsis alongside asphyxia, and what you would start."
+    ]
+   }
+  ]
+ },
+ "viva": {
+  "skills": [
+   "skill.reasoning.birthasphyxia.basics",
+   "skill.reasoning.birthasphyxia.anticipation",
+   "skill.reasoning.birthasphyxia.findings",
+   "skill.reasoning.birthasphyxia.differential",
+   "skill.investigation.birthasphyxia.workup",
+   "skill.reasoning.birthasphyxia.diagnosis",
+   "skill.treatment.birthasphyxia.care",
+   "skill.present.birth.asphyxia_case"
+  ]
+ },
+ "skills": {
+  "skill.reasoning.birthasphyxia.basics": {
+   "id": "skill.reasoning.birthasphyxia.basics",
+   "kind": "reasoning",
+   "system": "paediatrics",
+   "title": "What birth asphyxia is",
+   "oneLine": "Failed establishment of breathing at birth, with acid blood and energy failure in brain and organs",
+   "why": "The minutes without oxygenated blood injure the brain first and the other organs next. Naming asphyxia as a failed transition rather than a single score is what commits you to resuscitate first and grade later, which is the entire logic of the labour room.",
+   "teach": [
+    {
+     "heading": "A failed transition, not a number",
+     "body": "Birth asphyxia is failure to establish normal breathing at birth, with falling oxygen, rising carbon dioxide and acid blood that injures brain, heart, kidneys, gut and clotting in roughly that order of sensitivity. A low Apgar score flags the need for help; the cord gases and the evolving brain picture make the diagnosis.\n\nMost affected babies are term infants after an intrapartum insult, and most respond to drying, warmth and ventilation alone when it starts at once."
+    },
+    {
+     "heading": "Three links in one chain",
+     "points": [
+      "The insult: interrupted gas exchange before or during birth, through cord compression, prolonged labour, placental separation or a difficult extraction.",
+      "The chemistry: oxygen lack with poor perfusion produces metabolic acidosis, which depresses breathing drive, tone and reflexes.",
+      "The spread: brain first with encephalopathy and fits, then heart, kidneys, gut and platelets, so urine output and bleeding matter from day one."
+     ]
+    },
+    {
+     "heading": "Why the clock starts at birth",
+     "body": "The injury unfolds in two waves: primary energy failure during the insult, then a secondary wave over hours to days as injured cells break down. The gap between the waves is the reason early resuscitation plus urgent referral for cooling changes the outcome.\n\nThis is also why the story never ends in the labour room: the baby who looks worst on day one may still be evolving, and grading waits on the course."
+    }
+   ],
+   "pitfalls": [
+    "Calling a low Apgar alone asphyxia without gases or an evolving picture, so a drugged or preterm baby is mislabelled.",
+    "Treating the score instead of the baby, adjusting nothing while waiting for the next minute's number.",
+    "Discharging the pinked-up baby without watching for the secondary wave of drowsiness, poor suck and fits."
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What three things define birth asphyxia?",
+     "a": "Failure to establish normal breathing at birth, with acid blood from poor gas exchange and evolving injury to brain and organs.",
+     "accept": [
+      "breathing",
+      "acid",
+      "brain"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "Why does a low Apgar score alone not make the diagnosis?",
+     "a": "The score flags the need for help at that minute, while the diagnosis needs the insult story, acid cord gases and an evolving encephalopathy.",
+     "accept": [
+      "cord gases",
+      "encephalopathy",
+      "insult"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "Why do organs beyond the brain suffer, and which do you watch first?",
+     "a": "Shared oxygen lack and poor perfusion injure heart, kidneys, gut and clotting, so urine output, perfusion and bleeding are watched from day one.",
+     "accept": [
+      "perfusion",
+      "urine",
+      "bleeding"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "neonatal_resuscitation_nrp_stabilization: pathophysiology"
+    },
+    {
+     "source": "Nelson Textbook of Pediatrics",
+     "locator": "Birth asphyxia: definition and pathophysiology"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.birthasphyxia.anticipation": {
+   "id": "skill.reasoning.birthasphyxia.anticipation",
+   "kind": "reasoning",
+   "system": "paediatrics",
+   "title": "Anticipating the asphyxiated baby",
+   "oneLine": "Four questions, a ready team and a warm corner before every risky birth",
+   "why": "Almost every bad resuscitation was predictable and almost every good one was prepared. Four questions asked before birth assemble the right people, the right equipment and a warm surface, which is cheaper than any rescue attempted on a cold, unready table.",
+   "teach": [
+    {
+     "heading": "Risks that warn before labour",
+     "points": [
+      "No antenatal care, maternal anaemia, hypertension, diabetes or infection, which thin the baby's reserve for weeks.",
+      "Post-term gestation, twins, growth restriction and reduced movements, which mark a placenta already failing.",
+      "A previous stillbirth or neonatal death, which upgrades every later birth to attended and equipped."
+     ]
+    },
+    {
+     "heading": "Four questions before every birth",
+     "body": "Ask the gestational age, whether the fluid is clear, how many babies are expected, and whether any additional risk factor is present. One no among term, crying and good tone sends the baby to the radiant warmer instead of the mother's chest.\n\nA high-risk answer summons a second trained pair of hands, because one person cannot ventilate, assess and fetch equipment at once."
+    },
+    {
+     "heading": "A warm corner, ready and checked",
+     "body": "A clean, dry, warm surface under a radiant warmer with suction, bag and masks in two sizes, oxygen, a clock, a stethoscope and an oximeter probe covers nearly every resuscitation. Check the bag against your own hand before the birth, not after.\n\nWhen the baby needs no resuscitation, delay cord clamping for about a minute and place the baby skin to skin; when resuscitation is needed, the cord is cut and the baby moves to the warmer at once."
+    }
+   ],
+   "pitfalls": [
+    "Attending a meconium-stained post-term birth alone, then discovering mid-crisis that the suction is blocked.",
+    "Warming the room but never the surface, so a dried baby still loses heat to a cold table.",
+    "Delaying the cord on a baby who needs ventilation, trading placental transfusion for the first breath."
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What four questions do you ask before every birth?",
+     "a": "The gestational age, whether the fluid is clear, how many babies are expected, and whether any additional risk factor is present.",
+     "accept": [
+      "gestational age",
+      "fluid",
+      "babies",
+      "risk"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "What must be ready before a high-risk birth?",
+     "a": "A warm surface under a radiant warmer, checked suction, bag and masks in two sizes, oxygen, a clock, a stethoscope, an oximeter, and a second trained pair of hands.",
+     "accept": [
+      "warmer",
+      "bag and masks",
+      "oximeter",
+      "second hands"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "When do you delay cord clamping and when do you cut at once?",
+     "a": "Delay for about a minute with skin-to-skin contact when the baby needs no resuscitation; cut and move to the warmer at once when ventilation is needed.",
+     "accept": [
+      "minute",
+      "skin-to-skin",
+      "warmer",
+      "ventilation"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "neonatal_resuscitation_nrp_stabilization: clinical pearls"
+    },
+    {
+     "source": "Indian Academy of Pediatrics",
+     "locator": "Neonatal resuscitation guidance: preparation and initial steps"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.birthasphyxia.findings": {
+   "id": "skill.reasoning.birthasphyxia.findings",
+   "kind": "reasoning",
+   "system": "paediatrics",
+   "title": "Reading the asphyxiated newborn",
+   "oneLine": "Vigorous or not at birth, Apgar pattern, then the evolving encephalopathy",
+   "why": "The baby's story is read at three sittings: vigour at birth decides resuscitation, the Apgar pair records the response, and the encephalopathy over the first day grades the injury. Mixing the three up is how a vigorous baby gets ventilated and a sick one gets observed.",
+   "teach": [
+    {
+     "heading": "Vigorous or not, in three answers",
+     "body": "Is the baby term, breathing or crying, and in good tone. Three yes answers mean routine care with the mother; any no moves the baby to the warmer for drying, positioning and assessment.\n\nThrough meconium the same rule holds with one change: a vigorous baby stays with the mother, while a non-vigorous baby goes to the warmer for help without routine tracheal suction."
+    },
+    {
+     "heading": "What the Apgar pair actually says",
+     "points": [
+      "Five signs at 1 and 5 minutes: heart rate, breathing effort, tone, reflex response and colour, each scored 0 to 2.",
+      "A score below 4 needs immediate resuscitation; scores are repeated till two successive scores of 7 or more.",
+      "The pattern matters more than one number: a rising pair means resuscitation is winning, a flat low pair means escalation."
+     ]
+    },
+    {
+     "heading": "The encephalopathy evolves, so watch it",
+     "body": "After resuscitation the brain declares itself over hours: jitteriness and a high-pitched cry, then lethargy with a weak suck, then fits, and in the worst cases coma with floppy tone and failing reflexes. Grade the worst stage reached, not the first hour.\n\nOrgan signs travel with the brain: poor perfusion, scanty urine, bleeding spots and feed intolerance mark the same insult in other beds."
+    },
+    {
+     "heading": "Three grades of encephalopathy",
+     "table": {
+      "cols": [
+       "Stage",
+       "Alertness, tone and reflexes",
+       "Fits",
+       "Course"
+      ],
+      "rows": [
+       [
+        "Mild",
+        "Jittery and hyperalert, tone normal or brisk, reflexes strong",
+        "None",
+        "Usually recovers fully with supportive care"
+       ],
+       [
+        "Moderate",
+        "Lethargic, hypotonic, reflexes weak",
+        "Common, often subtle",
+        "Variable; disability possible, cooling helps eligible babies"
+       ],
+       [
+        "Severe",
+        "Comatose, flaccid, reflexes absent",
+        "Refractory or prolonged",
+        "High risk of death and lasting disability"
+       ]
+      ]
+     }
+    }
+   ],
+   "pitfalls": [
+    "Ventilating a vigorous meconium baby by protocol instead of placing it with the mother under watch.",
+    "Reading one Apgar number as the diagnosis while the cord gas and the day's course go unchecked.",
+    "Grading encephalopathy on the first hour and missing the fits that arrive overnight."
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What three answers decide warmer versus mother?",
+     "a": "Whether the baby is term, breathing or crying, and in good tone; any no means initial steps under the warmer.",
+     "accept": [
+      "term",
+      "breathing",
+      "tone"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "How do you read an Apgar pair of 3 at 1 minute and 6 at 5 minutes?",
+     "a": "Severe depression at birth responding to resuscitation, still needing close watch since help was needed past 5 minutes.",
+     "accept": [
+      "resuscitation",
+      "5 minutes",
+      "watch"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "How do moderate and severe encephalopathy differ at the bedside?",
+     "a": "Moderate is lethargic and hypotonic with weak reflexes and common fits; severe is comatose and flaccid with absent reflexes and refractory fits.",
+     "accept": [
+      "hypotonic",
+      "flaccid",
+      "refractory"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "perinatal_hie: clinical pearls"
+    },
+    {
+     "source": "Nelson Textbook of Pediatrics",
+     "locator": "Hypoxic-ischaemic encephalopathy: staging and course"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.birthasphyxia.summary": {
+   "id": "skill.reasoning.birthasphyxia.summary",
+   "kind": "reasoning",
+   "system": "paediatrics",
+   "title": "Summarising the asphyxiated newborn",
+   "oneLine": "Gestation, insult, resuscitation, current brain and organs, grade",
+   "why": "A summary that strings every fact in examination order forces the listener to wait a minute for the point. Leading with gestation, insult and resuscitation delivers the grade in the first breath, which is the only order an examiner trusts.",
+   "teach": [
+    {
+     "heading": "The one-breath opener",
+     "body": "This term 2.7 kg boy, born through thick meconium after a prolonged second stage, was limp and silent, cried after bag and mask breaths, and scored 3 at 1 minute and 6 at 5 minutes. Gestation, weight, insult, response: the listener can already grade.\n\nAdd today's state in one line: now 8 hours old, lethargic with a weak suck and one brief fit."
+    },
+    {
+     "heading": "Then the supporting facts",
+     "body": "Resuscitation in order with proof it worked, the Apgar pair, cord gas acidosis, and the current neuro picture: alertness, tone, reflexes, cry and fits. Then the organs: saturation, temperature, glucose, urine passed, bleeding and feeds.\n\nState the relevant negatives: no prolonged rupture with fever, no foul liquor, no maternal drug near delivery, no anomaly."
+    },
+    {
+     "heading": "Close with grade and meaning",
+     "body": "In summary this is birth asphyxia with moderate encephalopathy after an intrapartum insult, responding to resuscitation. Name what is still open: sepsis not yet excluded, cooling decision pending, and the brain picture still evolving.\n\nNever close a day-one summary as final; state what tonight's review must recheck."
+    }
+   ],
+   "pitfalls": [
+    "Opening with weight and feeds while the insult waits till the third sentence.",
+    "Listing resuscitation without saying whether the chest rose and the rate climbed.",
+    "Grading mild on a first-hour look and missing the overnight deterioration."
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What belongs in the opening sentence of the summary?",
+     "a": "Gestation, birth weight, the insult in brief, the resuscitation given, and the Apgar pair.",
+     "accept": [
+      "gestation",
+      "insult",
+      "resuscitation",
+      "Apgar"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "Which negatives must the summary carry?",
+     "a": "No prolonged rupture with fever, no foul liquor, no maternal drug near delivery, and no anomaly or dysmorphism.",
+     "accept": [
+      "rupture",
+      "liquor",
+      "drug",
+      "anomaly"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "newborn_resuscitation_care_long_case: clinical pearls"
+    },
+    {
+     "source": "Nelson Textbook of Pediatrics",
+     "locator": "Neonatal case summary: perinatal cases"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.birthasphyxia.differential": {
+   "id": "skill.reasoning.birthasphyxia.differential",
+   "kind": "reasoning",
+   "system": "paediatrics",
+   "title": "What else a flat newborn can be",
+   "oneLine": "Aspiration, preterm lung, sepsis and metabolic mimics weighed against asphyxia",
+   "why": "Asphyxia is a story plus gases plus an evolving brain, and every limb of that tripod has a mimic. A differential that tests each mimic against bedside facts stops antibiotics being forgotten in a true asphyxia and stops cooling being offered to a septic baby.",
+   "teach": [
+    {
+     "heading": "The respiratory mimics",
+     "body": "Meconium aspiration follows thick staining with a non-vigorous birth and leaves fast breathing with a noisy, distended chest and streaky films. Preterm lung disease needs prematurity itself, and transient fast breathing of the newborn follows a quick section birth and settles within hours.\n\nMatch the mimic to its setting: wrong setting, wrong diagnosis."
+    },
+    {
+     "heading": "The non-respiratory mimics",
+     "body": "Early-onset sepsis shares every sign of asphyxia and rides with prolonged rupture, maternal fever and foul liquor, so blood culture with antibiotics stays in the plan until excluded. Low glucose, low calcium and birth injury each copy fits or floppiness and each is checked at the bedside.\n\nNever assume one cause: an asphyxiated baby can also be septic, and the sicker baby carries both labels till cultures return."
+    },
+    {
+     "heading": "Weighing the table",
+     "table": {
+      "cols": [
+       "Condition",
+       "Favours",
+       "Against"
+      ],
+      "rows": [
+       [
+        "Meconium aspiration",
+        "Thick staining, non-vigorous birth, distressed noisy chest",
+        "Clear liquor, vigorous cry at once"
+       ],
+       [
+        "Preterm lung disease",
+        "Prematurity, grunting with retractions",
+        "Term gestation, mature cry"
+       ],
+       [
+        "Transient fast breathing",
+        "Quick section birth, settles within hours",
+        "Prolonged labour, acid gases, fits"
+       ],
+       [
+        "Early-onset sepsis",
+        "Rupture with fever, foul liquor, shock",
+        "Intact membranes, afebrile labour, clean course"
+       ],
+       [
+        "Low glucose or calcium",
+        "Jitteriness settling with correction",
+        "Normal bedside values, persistent encephalopathy"
+       ],
+       [
+        "Birth injury or bleed",
+        "Instrumental birth, swelling, anaemia",
+        "Atraumatic birth, stable haematocrit"
+       ]
+      ]
+     }
+    }
+   ],
+   "pitfalls": [
+    "Calling every distressed term baby asphyxia while meconium aspiration goes unnamed.",
+    "Excluding sepsis because the labour story fits asphyxia so neatly.",
+    "Chasing rare metabolic disease before checking bedside glucose."
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "Which two histories force sepsis into the differential?",
+     "a": "Prolonged rupture of membranes with maternal fever, and foul-smelling liquor.",
+     "accept": [
+      "rupture",
+      "fever",
+      "liquor"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "How does transient fast breathing differ from asphyxia?",
+     "a": "It follows a quick section birth without an insult story, settles within hours, and shows no acid gases, fits or evolving encephalopathy.",
+     "accept": [
+      "section",
+      "settles",
+      "gases"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "Why can one baby carry both asphyxia and sepsis labels?",
+     "a": "The signs overlap completely and the risks coexist, so antibiotics run until cultures exclude sepsis even when asphyxia is certain.",
+     "accept": [
+      "overlap",
+      "cultures",
+      "antibiotics"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "perinatal_hie: additional differentials"
+    },
+    {
+     "source": "Nelson Textbook of Pediatrics",
+     "locator": "Neonatal encephalopathy: differential diagnosis"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.investigation.birthasphyxia.workup": {
+   "id": "skill.investigation.birthasphyxia.workup",
+   "kind": "investigation",
+   "system": "paediatrics",
+   "title": "Workup of the asphyxiated newborn",
+   "oneLine": "Gases first, bedside now, brain and organs over the week",
+   "why": "Treatment starts before any result returns, so each test must earn its place by grading severity, excluding a mimic or guiding a decision. Ordered gases, bedside glucose, cultures, films and brain monitoring in that sequence, the workup never delays ventilation for a report.",
+   "teach": [
+    {
+     "heading": "Gases that prove the insult",
+     "body": "Cord arterial gas with acidosis and a base deficit is the footprint of the insult, taken before the baby compensates. An early postnatal gas shows whether acidosis is clearing with effective breathing or deepening despite it.\n\nNo gas, no grade: without acidosis the label stays suspected and mimics lead."
+    },
+    {
+     "heading": "Bedside tests tonight",
+     "body": "Bedside glucose with electrolytes, since low sugar copies and worsens encephalopathy. Blood counts with C-reactive protein and a blood culture before antibiotics, because sepsis is the mimic that kills while you watch. A chest film for aspiration, air leak or preterm lung patterns.\n\nPulse oximetry on the right hand guides oxygen, and axillary temperature guards against both cold stress and fever, which worsens injury."
+    },
+    {
+     "heading": "Brain and organs over the week",
+     "body": "Continuous observation for fits with EEG or amplitude-integrated monitoring, since most newborn fits are subtle and missed without it. Brain imaging within the first week defines the injury pattern and informs prognosis, while renal, liver and clotting screens track the multi-organ spread.\n\nRepeat what evolves: gases, glucose, counts and the neuro picture, and exclude infection and metabolic causes before calling the injury purely hypoxic."
+    }
+   ],
+   "pitfalls": [
+    "Waiting for the cord gas report before starting ventilation.",
+    "Drawing cultures after antibiotics and then reading a sterile result as no sepsis.",
+    "Skipping glucose because the labour story is so convincing."
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "Which single test best supports a perinatal hypoxic insult?",
+     "a": "Umbilical cord arterial blood gas showing metabolic acidosis with a base deficit.",
+     "accept": [
+      "cord",
+      "acidosis",
+      "base deficit"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "Why do cultures come before antibiotics?",
+     "a": "Because sepsis mimics asphyxia exactly, and antibiotics sterilise the only proof; the culture must be drawn first.",
+     "accept": [
+      "sepsis",
+      "sterilise",
+      "first"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "What defines the brain injury pattern and when?",
+     "a": "Brain imaging within the first week with continuous EEG monitoring for subtle fits, tracking pattern, extent and prognosis.",
+     "accept": [
+      "imaging",
+      "week",
+      "EEG"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "perinatal_hie: additional investigations"
+    },
+    {
+     "source": "Nelson Textbook of Pediatrics",
+     "locator": "Hypoxic-ischaemic encephalopathy: investigations"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.birthasphyxia.diagnosis": {
+   "id": "skill.reasoning.birthasphyxia.diagnosis",
+   "kind": "reasoning",
+   "system": "paediatrics",
+   "title": "Diagnosing and grading birth asphyxia",
+   "oneLine": "Insult plus resuscitation plus acidosis plus evolving brain equals the diagnosis",
+   "why": "No single test owns this diagnosis, which is why students both overcall it on a low Apgar and miss it in a pinked-up baby. Four limbs together, insult, resuscitation, acidosis and an evolving encephalopathy, make the diagnosis firm and the grade honest.",
+   "teach": [
+    {
+     "heading": "Four limbs of the diagnosis",
+     "body": "A perinatal insult story with need for resuscitation, acid cord or early gases, and an encephalopathy that evolves over hours. All four present means birth asphyxia with hypoxic-ischaemic encephalopathy; fewer means suspected, and the missing limb is the next test.\n\nDocument each limb separately so the next doctor sees what is proven and what is pending."
+    },
+    {
+     "heading": "Grading decides the referral",
+     "body": "Mild encephalopathy recovers with supportive care and watchful follow up. Moderate or severe encephalopathy in a term or near-term baby within hours of birth triggers urgent referral for therapeutic cooling, which slows the secondary injury wave.\n\nGrade the worst stage reached over the first day, not the kindest hour, because cooling decisions forgive earliness and punish delay."
+    },
+    {
+     "heading": "When the label does not fit",
+     "points": [
+      "No insult story and no acidosis: look to sepsis, metabolic disease, stroke or malformation instead.",
+      "Fits without any perinatal marker: check glucose, calcium, sodium and infection before invoking asphyxia.",
+      "Preterm baby with pure distress: prematurity and its lung disease lead, asphyxia follows only with proof."
+     ]
+    }
+   ],
+   "pitfalls": [
+    "Diagnosing on Apgar alone without gases or a course.",
+    "Grading once at admission and never revisiting after the night's fits.",
+    "Offering cooling to a baby whose picture is really sepsis or bleeding."
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What four limbs make the diagnosis firm?",
+     "a": "A perinatal insult story, need for resuscitation, acid cord or early gases, and an evolving encephalopathy.",
+     "accept": [
+      "insult",
+      "resuscitation",
+      "gases",
+      "encephalopathy"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "Which babies trigger urgent cooling referral?",
+     "a": "Term or near-term babies with moderate or severe encephalopathy, within the first hours of birth.",
+     "accept": [
+      "moderate",
+      "severe",
+      "hours"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "Acid gases with no encephalopathy: diagnosis or not?",
+     "a": "Not yet: the insult is proven but the brain injury is not, so the baby is watched as suspected with mimics still open.",
+     "accept": [
+      "watched",
+      "suspected",
+      "mimics"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "perinatal_hie: clinical pearls"
+    },
+    {
+     "source": "Nelson Textbook of Pediatrics",
+     "locator": "Birth asphyxia: diagnosis and grading"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.treatment.birthasphyxia.care": {
+   "id": "skill.treatment.birthasphyxia.care",
+   "kind": "treatment",
+   "system": "paediatrics",
+   "title": "Resuscitation and aftercare in birth asphyxia",
+   "oneLine": "Ventilation first, circulation next, then warmth, sugar, sepsis cover and cooling referral",
+   "why": "Most asphyxiated babies are saved by ventilation alone, and nearly all the rest by ventilation plus compressions; drugs are the rare tail, not the dog. Fixing that order in muscle memory is what makes a lone nurse with a bag succeed where a crowd with drugs fails.",
+   "dosingNote": "This module teaches resuscitation and supportive care at the level of sequence and principle. Drug choices, doses, cooling criteria and referral thresholds must follow your current national or institutional guideline, such as Indian Academy of Pediatrics guidance, and the treating neonatologist's prescription at the time of treatment. CliniX does not prescribe.",
+   "teach": [
+    {
+     "heading": "Ventilation first, everything else after",
+     "body": "Dry, warm, position and clear the airway, suctioning only visible obstruction. Start positive-pressure breaths when the baby is apnoeic or gasping, or the heart rate is below 100, at forty to sixty breaths a minute, and correct the mask, head position, suction, jaw lift and pressure in order till the chest rises.\n\nEffective breaths show themselves: bilateral air entry, chest movement, a climbing heart rate and returning spontaneous breaths."
+    },
+    {
+     "heading": "Circulation and drugs, in their place",
+     "body": "When the heart rate stays below 60 after half a minute of effective ventilation with oxygen, add chest compressions at three compressions to each breath by the two-thumb method, and prepare umbilical venous access for adrenaline with a saline flush, repeated per the algorithm.\n\nGive volume only with signs of blood loss or shock, skip routine bicarbonate, and never let drug preparation pause effective breaths."
+    },
+    {
+     "heading": "After breathing returns",
+     "body": "Keep the baby warm under the warmer or skin to skin, postponing the bath, and titrate oxygen against right-hand pre-ductal saturation so pink does not become excess. Check glucose and correct it, start early breastfeeding with support, and watch urine, perfusion and bleeding as the organs declare themselves.\n\nDraw blood culture and start antibiotics where sepsis cannot be excluded, since asphyxia and infection share every sign."
+    },
+    {
+     "heading": "Cooling, counsel and follow up",
+     "body": "Refer term and near-term babies with moderate or severe encephalopathy urgently for therapeutic cooling within the first hours of life, with safe transport, warmth without overheating, oxygen and glucose maintained on the way.\n\nCounsel the mother in plain words on danger signs, book neurodevelopmental follow up for tone, fits, hearing and vision, and use the free referral transport and newborn care entitlements so cost never delays the shift."
+    }
+   ],
+   "pitfalls": [
+    "Suctioning every baby by routine and delaying the first breath.",
+    "Starting compressions before ventilation is effective, squeezing a heart that only needed air.",
+    "Cooling in the district unit by switching off warmers instead of referring for controlled cooling with monitoring."
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What starts resuscitation, and when do breaths begin?",
+     "a": "Drying, warmth, positioning and clearing obstruction, then positive-pressure breaths when apnoeic or gasping or the heart rate is below 100.",
+     "accept": [
+      "drying",
+      "breaths",
+      "100"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "When do compressions start, and at what rhythm?",
+     "a": "When the heart rate stays below 60 after half a minute of effective ventilation with oxygen, at three compressions to each breath.",
+     "accept": [
+      "60",
+      "three",
+      "breath"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "The baby breathes but stays dull with a weak suck. What now?",
+     "a": "Warmth, titrated oxygen, glucose check, feeds support, cultures with antibiotics until sepsis is excluded, and urgent cooling referral if encephalopathy is moderate or severe.",
+     "accept": [
+      "glucose",
+      "antibiotics",
+      "cooling"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "neonatal_resuscitation_nrp_stabilization: clinical pearls"
+    },
+    {
+     "source": "Indian Academy of Pediatrics",
+     "locator": "Neonatal resuscitation guidance: ventilation, circulation and aftercare"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  }
+ },
+ "cases": [
+  {
+   "id": "case.birthasphyxia.sncu_boy",
+   "title": "A baby who cried late after a long labour",
+   "opening": "Sunita, 24, sits beside the warmer in the district hospital newborn unit with her 8-hour-old baby boy. Born this morning at the primary health centre through thick green waters after a long labour, he lay blue and limp till bag and mask breaths brought a weak cry, and now he is too sleepy to suck. Introduce yourself to the mother and take a history.",
+   "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+   "review": {
+    "status": "ai_drafted"
+   },
+   "patient": {
+    "name": "Baby of Sunita (Aarav)",
+    "age": 0,
+    "sex": "male",
+    "occupation": "Newborn, 8 hours old",
+    "residence": "Village 25 km away, lives with parents and elder daughter"
+   },
+   "initialVitals": {
+    "hr": 132,
+    "bpSystolic": 64,
+    "bpDiastolic": 40,
+    "rr": 66,
+    "spo2": 89,
+    "temp": 36.1,
+    "gcs": 13
+   },
+   "history": {
+    "presenting": {
+     "key": true,
+     "cues": [
+      "what brings you here today",
+      "what is the problem with the baby",
+      "why have you come to hospital",
+      "tell me about the baby's illness",
+      "how can i help you today",
+      "what is troubling the baby"
+     ],
+     "reply": "Doctor, my baby boy was born this morning at the health centre. He cried very late, only after they gave him breaths with a mask, and now he is too sleepy to suck.",
+     "skillId": "skill.hx.chief_complaints"
+    },
+    "labour_prolongation_course": {
+     "key": true,
+     "cues": [
+      "when did the labour pains begin",
+      "how long did the labour last",
+      "pushing lasted how many hours",
+      "labour continued through the night",
+      "delivery took a long time",
+      "who conducted the delivery"
+     ],
+     "reply": "Pains began yesterday evening and the birth happened this morning. Pushing went on for nearly three hours. The nurse sister conducted it and called the doctor at the end. It was a normal birth, no instruments.",
+     "skillId": "skill.hx.birth.asphyxia_illness"
+    },
+    "liquor_meconium_staining": {
+     "key": true,
+     "cues": [
+      "colour of the waters when they broke",
+      "was the liquor green or yellow",
+      "meconium seen in the waters",
+      "waters smelling foul",
+      "fluid stained dark green",
+      "leaking waters colour"
+     ],
+     "reply": "The waters broke early in the morning and were thick green, like pea soup, and smelling bad. The sister said the baby had passed stool inside.",
+     "skillId": "skill.hx.birth.asphyxia_illness"
+    },
+    "first_cry_respiratory_effort": {
+     "key": true,
+     "cues": [
+      "did the baby cry at once",
+      "how many minutes before the first cry",
+      "baby blue or limp at birth",
+      "first breath came late",
+      "colour and tone at birth",
+      "silent without crying at birth"
+     ],
+     "reply": "He was born blue and loose-limbed, totally silent. The first weak cry came only after mask breaths, maybe three to four minutes after birth.",
+     "skillId": "skill.hx.birth.asphyxia_illness"
+    },
+    "resuscitation_bagmask_oxygen": {
+     "cues": [
+      "what help was given after birth",
+      "bag and mask breaths given",
+      "oxygen given to the baby",
+      "chest pressing done",
+      "any injection through the cord",
+      "how the baby pinked up"
+     ],
+     "reply": "They dried him under a heater, held the mask and gave breaths, then oxygen. No chest pressing and no injection. After that he cried weakly and started breathing on his own.",
+     "skillId": "skill.hx.birth.asphyxia_illness"
+    },
+    "apgar_minute_scores": {
+     "cues": [
+      "apgar score at one minute",
+      "apgar score at five minutes",
+      "score recorded after birth",
+      "what numbers did the sister write",
+      "condition at one and five minutes",
+      "marks given at birth"
+     ],
+     "reply": "The slip says 3 at one minute and 6 at five minutes. Even after five minutes he needed oxygen, so they sent us here.",
+     "skillId": "skill.hx.birth.asphyxia_illness"
+    },
+    "antenatal_checkup_record": {
+     "cues": [
+      "how many checkups in pregnancy",
+      "tetanus injections taken",
+      "iron tablets eaten regularly",
+      "scans done in pregnancy",
+      "blood pressure in pregnancy",
+      "sugar tested in pregnancy"
+     ],
+     "reply": "I went three times to the centre, took two tetanus injections, and ate iron tablets but not daily. One scan was done and said normal. Sugar was never tested.",
+     "skillId": "skill.hx.birth.asphyxia_risks"
+    },
+    "membranes_rupture_fever": {
+     "key": true,
+     "cues": [
+      "when did the waters break",
+      "hours between waters and birth",
+      "fever during the labour",
+      "shivering while in labour",
+      "foul smelling discharge",
+      "antibiotic given before delivery"
+     ],
+     "reply": "The waters broke about fourteen hours before the birth. I had no fever. After the green waters the sister gave one antibiotic injection before delivery.",
+     "skillId": "skill.hx.birth.asphyxia_risks"
+    },
+    "gestation_birthweight_status": {
+     "cues": [
+      "due date of delivery",
+      "full nine months completed",
+      "born early or late",
+      "baby's birth weight",
+      "weight normal or low",
+      "dates crossed overdue"
+     ],
+     "reply": "My date was crossed by five days; full nine months were over. The sister weighed him at once: 2.7 kg, and said the weight is fine.",
+     "skillId": "skill.hx.birth.asphyxia_risks"
+    },
+    "breastfeed_urine_stool_passage": {
+     "cues": [
+      "breastfeeding started when",
+      "how does the baby suck",
+      "urine passed after birth",
+      "stool passed after birth",
+      "first feed timing",
+      "suck strong or weak"
+     ],
+     "reply": "They put him to the breast after two hours but he sucks weakly and falls asleep. He passed urine once. No stool yet.",
+     "skillId": "skill.hx.birth.asphyxia_illness"
+    },
+    "seizure_lethargy_poor_suck": {
+     "key": true,
+     "cues": [
+      "fits or jerky movements seen",
+      "abnormal movements of arms",
+      "baby stiff or unusually floppy",
+      "sleepy beyond normal sleeping",
+      "cry weak or high pitched",
+      "suck poor since birth"
+     ],
+     "reply": "He is sleepy all the time with a weak cry. At about six hours both arms jerked rhythmically for less than a minute. His limbs feel loose to me.",
+     "skillId": "skill.hx.birth.asphyxia_illness"
+    },
+    "sibling_neonatal_loss_history": {
+     "cues": [
+      "previous children and their health",
+      "any earlier baby loss",
+      "stillbirth in the past",
+      "neonatal death in the family",
+      "children alive and well",
+      "marriage within the family"
+     ],
+     "reply": "This is my second child. My daughter is three years old and healthy. I never had a miscarriage or a loss. Ours is not a family marriage.",
+     "skillId": "skill.hx.birth.asphyxia_risks"
+    },
+    "referral_transport_distance": {
+     "cues": [
+      "how did you reach this hospital",
+      "who referred the baby here",
+      "ambulance arranged for shifting",
+      "distance from your home",
+      "time taken to shift",
+      "referral slip given"
+     ],
+     "reply": "The sister wrote a slip and called the free ambulance. Our village is 25 km away; we reached in about an hour. The slip has the birth scores written on it.",
+     "skillId": "skill.hx.birth.asphyxia_risks"
+    },
+    "danger_sign_counsel_recall": {
+     "cues": [
+      "what did the sister tell you to watch",
+      "danger signs explained to you",
+      "when to return quickly",
+      "counselled about fits at home",
+      "advice given on feeding",
+      "follow up date given"
+     ],
+     "reply": "She said to watch his breathing, any fits, cold hands and feet, and poor suck, and to come back at once if any of these appear. They said the doctor will see him again tomorrow morning.",
+     "skillId": "skill.hx.birth.asphyxia_risks"
+    }
+   },
+   "exam": {
+    "skill.gen.paed.appearance": {
+     "abnormal": true,
+     "finding": "Lethargic newborn, hypotonic with a weak cry. Opens eyes to handling but drifts back to sleep. No dysmorphism."
+    },
+    "skill.gen.paed.vitals": {
+     "abnormal": true,
+     "finding": "Heart rate 132, respiratory rate 66, saturation 89 percent in air, axillary temperature 36.1. Blood pressure 64 over 40."
+    },
+    "skill.gen.paed.cyanosis": {
+     "abnormal": true,
+     "finding": "Perioral duskiness at rest that deepens on crying and fades with oxygen. Peripheries cool with a capillary refill of 3 seconds."
+    },
+    "skill.exam.paed.weight": {
+     "abnormal": false,
+     "finding": "Birth weight 2.7 kg, term gestation, weight appropriate for dates. Length and head circumference normal."
+    },
+    "skill.exam.paed.neo.head_skull_trauma": {
+     "abnormal": false,
+     "finding": "Moulding with a small caput, no cephalhaematoma, sutures overriding mildly. Anterior fontanelle level, no impressed fracture."
+    },
+    "skill.exam.paed.neo.chest_respiratory_cvs": {
+     "abnormal": true,
+     "finding": "Grunting with subcostal and intercostal retractions, bilateral air entry with coarse transmitted sounds, no murmur. Apex beat normal."
+    },
+    "skill.exam.paed.neo.primitive_reflexes": {
+     "abnormal": true,
+     "finding": "Moro incomplete and asymmetric, suck and rooting weak, palmar grasp present but feeble."
+    }
+   },
+   "essentialInvestigations": [
+    "cord_blood_gas",
+    "blood_glucose_electrolytes",
+    "sepsis_screen",
+    "chest_film",
+    "eeg_monitor"
+   ],
+   "investigations": {
+    "cord_blood_gas": {
+     "label": "Umbilical cord arterial blood gas",
+     "result": "pH 7.04 with a large base deficit: severe metabolic acidosis.",
+     "note": "Drawn at birth before compensation; the footprint of the insult.",
+     "indicated": true
+    },
+    "blood_glucose_electrolytes": {
+     "label": "Bedside glucose with electrolytes",
+     "result": "Glucose 36 mg per dL, sodium and potassium normal.",
+     "note": "Low sugar copies fits and worsens injury; corrected at once.",
+     "indicated": true
+    },
+    "sepsis_screen": {
+     "label": "Blood counts, C-reactive protein and blood culture",
+     "result": "Leucocytosis with raised C-reactive protein; blood culture awaited.",
+     "note": "Sepsis shares every sign, so antibiotics run till the culture returns.",
+     "indicated": true
+    },
+    "chest_film": {
+     "label": "Chest radiograph",
+     "result": "Streaky perihilar markings with mild hyperinflation; no lobar consolidation, no air leak.",
+     "note": "Aspiration pattern; repeat the film if distress worsens.",
+     "indicated": true
+    },
+    "eeg_monitor": {
+     "label": "Amplitude-integrated EEG monitoring",
+     "result": "Discontinuous background with one brief electrographic fit.",
+     "note": "Most newborn fits are subtle; monitoring catches what eyes miss.",
+     "indicated": true
+    },
+    "organ_screen": {
+     "label": "Renal, liver and clotting screen",
+     "result": "Creatinine and transaminases raised; platelets low-normal.",
+     "note": "Multi-organ spread of the same insult; fluids and bleeding watched.",
+     "indicated": true
+    }
+   },
+   "differentialModel": {
+    "answer": "Birth asphyxia with moderate encephalopathy after prolonged labour with thick meconium and resuscitation. Consider meconium aspiration for the distressed chest, early-onset sepsis with meningitis till cultures return, transient fast breathing lower down the list, and low glucose as a co-trap already corrected.",
+    "accept": [
+     "Birth asphyxia",
+     "Meconium aspiration syndrome",
+     "Respiratory distress syndrome of the newborn",
+     "Transient tachypnoea of the newborn",
+     "Neonatal sepsis",
+     "Bacterial meningitis"
+    ],
+    "minMatch": 2
+   },
+   "diagnosis": {
+    "answer": "Birth asphyxia with moderate hypoxic-ischaemic encephalopathy: an insult story with resuscitation, acid cord gas, and an evolving encephalopathy with a brief fit.",
+    "accept": [
+     "Birth asphyxia",
+     "Hypoxic-ischaemic encephalopathy",
+     "HIE"
+    ],
+    "minMatch": 1
+   },
+   "managementModel": {
+    "answer": "Dry and warm with effective ventilation first, compressions only if the rate stays low, oxygen titrated on the right-hand probe, cord gas with glucose and cultures, antibiotics till sepsis is excluded, urgent cooling referral, breastfeeding support with counselling, and booked neurodevelopmental follow up.",
+    "accept": [
+     "drying",
+     "warmth",
+     "ventilation",
+     "chest compressions",
+     "oxygen",
+     "cord gas",
+     "glucose",
+     "antibiotics",
+     "cooling referral",
+     "breastfeeding",
+     "follow up",
+     "counselling"
+    ],
+    "minMatch": 3
+   },
+   "teachingPoints": [
+    "The minutes decide: a limp silent baby needs breaths, not discussion, and the Apgar pair records whether they worked.",
+    "Thick meconium with a prolonged second stage is the classic peripheral-centre setup for asphyxia; read it before the birth, not after.",
+    "Sepsis and sugar travel with asphyxia; culture with antibiotics and bedside glucose belong to the same plan.",
+    "Grade the worst stage over the first day; moderate or severe encephalopathy in a term baby means cooling referral within hours.",
+    "Warmth, titrated oxygen and early breastfeeding are treatment, not nursing extras.",
+    "Counsel tonight and follow up for years: tone, fits, hearing, vision and development."
+   ]
+  }
+ ]
+}

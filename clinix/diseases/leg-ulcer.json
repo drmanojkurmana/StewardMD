@@ -1,0 +1,1364 @@
+{
+  "_comment": "Surgery pathway for leg ulcer examination: venous, arterial, neuropathic and malignant ulcers. Shared ulcer, vascular and foot skills are referenced from the core and surgery packs; disease risk-factor history and the ulcer case presentation live in the shared fragment and are merged by the lead.",
+  "id": "leg-ulcer",
+  "name": "Leg ulcer",
+  "fullName": "Ulcer examination: venous, arterial, neuropathic and malignant ulcers",
+  "system": "surgery",
+  "kbRef": "venous_leg_ulcer",
+  "oneLine": "The chronic leg sore, and which of the four families it belongs to",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "blurb": "What a leg ulcer is, and the families it falls into",
+      "id": "basics",
+      "skills": [
+        "skill.legulcer.basics"
+      ],
+      "title": "Basics"
+    },
+    {
+      "blurb": "Before a single question",
+      "id": "approach",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ],
+      "title": "Approach to the patient"
+    },
+    {
+      "blurb": "Age, sex and standing work set the odds before the ulcer is seen",
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Venous ulcers gather in middle aged and older adults, more often women, and in people who stand still for a living such as farm labourers, vendors, traffic police and factory workers. Note age, occupation, and years of standing work before anything else."
+        }
+      },
+      "id": "particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "title": "Patient particulars"
+    },
+    {
+      "blurb": "Months of oozing, the pain that separates families, and the veins behind it",
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect a sore above the ankle open for months, with oozing and staining of clothes. Record duration in months, what started it, and whether it ever fully closed."
+        },
+        "skill.hx.surg.pvd_claudication_restpain": {
+          "expect": "Ask walking distance to calf pain and night pain relieved by hanging the leg down. Claudication or rest pain in an ulcer patient means the leg is mixed or arterial, and compression plans must change."
+        },
+        "skill.hx.surg.ulcer": {
+          "expect": "Expect a painless or mildly painful gaiter sore starting from a knock, scratch or blister that never closed. Severe pain, pain on elevation, or a punched out sore on toes points away from venous disease."
+        },
+        "skill.hx.surg.varicose_veins": {
+          "expect": "Ask about visible rope like veins, evening heaviness and swelling, itching and eczema, and any past clot with weeks of leg swelling. Absence of varicosities never excludes venous ulceration from deep valve damage."
+        }
+      },
+      "id": "history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.surg.ulcer",
+        "skill.hx.surg.varicose_veins",
+        "skill.hx.surg.pvd_claudication_restpain"
+      ],
+      "title": "History of presenting illness"
+    },
+    {
+      "blurb": "Sugar, tobacco, clots, drugs, family and footwear",
+      "id": "past_personal_drug_family",
+      "skills": [
+        "skill.hx.leg.risk",
+        "skill.hx.surg.foot"
+      ],
+      "title": "Past, personal, drug and family history"
+    },
+    {
+      "blurb": "Nutrition, anaemia and swelling around the wound",
+      "emphasis": {
+        "skill.gen.edema": {
+          "expect": "Expect pitting ankle swelling that worsens through the day and eases overnight, typical of venous hypertension. Bilateral swelling with breathlessness or raised neck veins points instead to cardiac or renal causes."
+        },
+        "skill.gen.surg.survey": {
+          "expect": "Note build, pallor suggesting anaemia that slows healing, and gait. A patient who guards the leg or cannot bear weight needs the foot and joints examined before the ulcer."
+        },
+        "skill.gen.vitals": {
+          "expect": "Fever with spreading redness means active infection needing urgent care. A normal temperature in a chronic painless ulcer is the rule, not reassurance, since ischaemia and malignancy are both afebrile."
+        }
+      },
+      "id": "general_exam",
+      "skills": [
+        "skill.gen.surg.survey",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ],
+      "title": "General examination"
+    },
+    {
+      "blurb": "Edge, floor, pulses, veins and sensation in one pass",
+      "emphasis": {
+        "skill.exam.surg.arterial_pulses_lower": {
+          "expect": "Feel femoral, popliteal, posterior tibial and dorsalis pedis pulses on both sides. Absent foot pulses with a cool pale foot convert a venous looking ulcer into a mixed or arterial problem."
+        },
+        "skill.exam.surg.buerger_postural_test": {
+          "expect": "Raise the leg and watch for pallor, then hang it down and watch for delayed dusky redness. Marked pallor on elevation with dependent rubor confirms significant arterial insufficiency."
+        },
+        "skill.exam.surg.diabetic_foot": {
+          "expect": "Test touch and vibration sense, look for callus, deformity and dry fissured skin, and check pulses in the same pass. A painless plantar ulcer with callus and bounding pulses is neuropathic, not venous."
+        },
+        "skill.exam.surg.regional_nodes": {
+          "expect": "Feel the inguinal nodes. Enlarged tender nodes suggest active infection; hard fixed nodes near a chronic ulcer raise the question of malignant spread and need urgent referral."
+        },
+        "skill.exam.surg.trendelenburg_tourniquet": {
+          "expect": "Use the tests to locate saphenofemoral and perforator incompetence feeding the ulcer area. Mark incompetent perforators on the skin, since they guide definitive vein treatment."
+        },
+        "skill.exam.surg.ulcer_inspect": {
+          "expect": "Expect a shallow sore above the inner ankle with a sloping edge, pale granulation and serous oozing, surrounded by brown pigmentation and eczema. A raised everted edge, heaped nodules or exposed tendon breaks the venous picture."
+        },
+        "skill.exam.surg.ulcer_palpate": {
+          "expect": "Expect a base fixed to deep tissues but not penetrating fascia, with mild tenderness and a firm but not stony edge. Stony induration of the edge is the hallmark of malignancy and needs biopsy, not stronger dressings."
+        }
+      },
+      "id": "systemic_exam",
+      "skills": [
+        "skill.exam.surg.ulcer_inspect",
+        "skill.exam.surg.ulcer_palpate",
+        "skill.exam.surg.arterial_pulses_lower",
+        "skill.exam.surg.buerger_postural_test",
+        "skill.exam.surg.trendelenburg_tourniquet",
+        "skill.exam.surg.diabetic_foot",
+        "skill.exam.surg.regional_nodes"
+      ],
+      "title": "Examination of the leg ulcer"
+    },
+    {
+      "blurb": "The venous picture and the table that rules out the rest",
+      "id": "disease_findings",
+      "skills": [
+        "skill.legulcer.venous",
+        "skill.legulcer.contrasts"
+      ],
+      "title": "Putting the venous picture together"
+    },
+    {
+      "blurb": "Risks, tempo, ulcer, vessels and nerves in one statement",
+      "id": "summary",
+      "skills": [
+        "skill.legulcer.summary"
+      ],
+      "title": "Clinical summary"
+    },
+    {
+      "blurb": "Mixed, malignant and inflammatory ulcers that mimic venous disease",
+      "id": "differential",
+      "skills": [
+        "skill.legulcer.differential"
+      ],
+      "title": "Differential diagnosis"
+    },
+    {
+      "blurb": "Arteries first, veins mapped, infection cultured, cancer excluded",
+      "id": "investigations",
+      "skills": [
+        "skill.ix.legulcer.workup",
+        "skill.ix.surg.abpi"
+      ],
+      "title": "Investigations"
+    },
+    {
+      "blurb": "Name the ulcer, exclude arterial disease, state the red flags",
+      "id": "diagnosis",
+      "skills": [
+        "skill.legulcer.diagnosis"
+      ],
+      "title": "Diagnosis"
+    },
+    {
+      "blurb": "Compression after arterial exclusion, and everything around it",
+      "id": "treatment",
+      "skills": [
+        "skill.tx.legulcer"
+      ],
+      "title": "Treatment"
+    },
+    {
+      "blurb": "Present this patient to your consultant",
+      "id": "case",
+      "skills": [
+        "skill.present.leg.ulcercase"
+      ],
+      "title": "Case presentation"
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "examinerQuestions": [
+          "Describe this ulcer using site, size, edge, floor, discharge and surrounding skin.",
+          "Feel the pulses and interpret the ankle brachial index. Is compression safe today?",
+          "Name two findings that would force you to biopsy this ulcer."
+        ],
+        "id": "osce.legulcer.exam",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.exam.surg.ulcer_inspect",
+          "skill.exam.surg.ulcer_palpate",
+          "skill.exam.surg.arterial_pulses_lower",
+          "skill.exam.surg.regional_nodes"
+        ],
+        "task": "This 54 year old woman has had an oozing sore above her inner ankle for eight months. Examine the ulcer and the circulation of the leg, then present your findings.",
+        "title": "Examine the leg ulcer"
+      },
+      {
+        "examinerQuestions": [
+          "Summarise the venous risk factors you found in this patient.",
+          "Her pulses are weak and she reports calf pain on walking. How does your plan change?",
+          "What will you tell her about compression hosiery after the ulcer heals?"
+        ],
+        "id": "osce.legulcer.history",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.surg.ulcer",
+          "skill.hx.surg.varicose_veins",
+          "skill.hx.leg.risk",
+          "skill.ix.surg.abpi"
+        ],
+        "task": "This 60 year old man has a recurrent sore above his ankle. Take a focused history in six minutes and be ready to state whether compression is safe.",
+        "title": "Take a history and judge compression safety"
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.legulcer.basics",
+      "skill.legulcer.venous",
+      "skill.legulcer.contrasts",
+      "skill.legulcer.differential",
+      "skill.ix.legulcer.workup",
+      "skill.legulcer.diagnosis",
+      "skill.tx.legulcer"
+    ]
+  },
+  "skills": {
+    "skill.legulcer.basics": {
+      "id": "skill.legulcer.basics",
+      "kind": "reasoning",
+      "oneLine": "A break in the skin that will not heal, classified by behaviour and by cause",
+      "pitfalls": [
+        "Calling every lower leg ulcer venous without checking pulses and sensation.",
+        "Treating the wound while ignoring the circulation, the nerves and the sugar that decide healing.",
+        "Biopsying late: a chronic ulcer that changes character needs tissue diagnosis, not another dressing."
+      ],
+      "probes": [
+        {
+          "a": "A break in the skin of the leg or foot that fails to heal within the expected time, usually because of venous hypertension, arterial ischaemia, neuropathy, infection, or malignant change.",
+          "accept": [
+            "break in the skin",
+            "fails to heal",
+            "venous",
+            "ischaemia",
+            "neuropathy"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What is a chronic leg ulcer, in one sentence?"
+        },
+        {
+          "a": "Spreading ulcers with inflamed surrounds and foul slough need urgent control of infection, healing ulcers with pink granulation and a blue epithelial margin need protection, and callous ulcers with pale tissue and induration need the underlying cause found.",
+          "accept": [
+            "spreading",
+            "infection",
+            "healing",
+            "granulation",
+            "callous",
+            "induration"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How does the clinical behaviour of an ulcer change what you do?"
+        },
+        {
+          "a": "Venous ulcers sit in the gaiter area with sloping edges and never penetrate deep fascia, arterial ulcers are punched out over pressure points with poor pulses, neuropathic ulcers are painless over weight bearing skin with callus, and malignant ulcers show raised everted edges with induration.",
+          "accept": [
+            "gaiter",
+            "punched out",
+            "pulses",
+            "callus",
+            "everted",
+            "induration"
+          ],
+          "level": 3,
+          "minMatch": 3,
+          "q": "Contrast the four great ulcer families in one pass each."
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "venous_leg_ulcer: pathophysiology",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Leg ulcer (classification)",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "An ulcer is a break in an epithelial surface that shows no tendency to heal. On the leg, healing fails because the tissue is starved of blood, drowned in venous pressure, deprived of protective sensation, or replaced by tumour.\n\nName the cause and you name the treatment. Dressings alone heal none of these without the circulation, the pressure, the sensation or the histology being addressed.",
+          "heading": "An ulcer is a failure of healing, not a diagnosis"
+        },
+        {
+          "body": "Clinically, an ulcer is spreading, healing, or callous. A spreading ulcer has an inflamed ragged surround, foul slough, pain and tender nodes. A healing ulcer shows pink granulation, a sloping reddish edge and a bluish line of advancing epithelium.\n\nA callous ulcer shows pale unhealthy tissue, a firm indurated base and edge, and scanty discharge. It is going nowhere until its cause is found, so chronicity itself is a finding that demands explanation.",
+          "heading": "Spreading, healing or callous"
+        },
+        {
+          "body": "By cause, ulcers are traumatic, venous, arterial, neurogenic, nutritional, specific, or malignant. Venous ulcers follow sustained venous hypertension in the gaiter skin. Arterial ulcers follow atherosclerotic or inflammatory occlusion of leg vessels.\n\nNeurogenic ulcers follow repeated unnoticed trauma to insensitive skin. Specific ulcers include tuberculous and syphilitic forms, and malignant ulcers include squamous carcinoma arising in a chronic wound, the Marjolin ulcer.",
+          "heading": "Seven causes cover almost every case"
+        }
+      ],
+      "title": "What a leg ulcer is",
+      "why": "Students who learn ulcers as a list of names cannot tell one from another at the bedside. The classification by behaviour and by cause turns every ulcer into a solvable problem: the edge, the floor, the site and the pain each point at a mechanism, and the mechanism dictates the treatment."
+    },
+    "skill.legulcer.contrasts": {
+      "id": "skill.legulcer.contrasts",
+      "kind": "reasoning",
+      "oneLine": "Site, edge, pain, pulses and sensation separate the four families",
+      "pitfalls": [
+        "Compressing a leg without feeling the pulses and checking the ankle brachial index first.",
+        "Calling a painless plantar ulcer with callus venous and bandaging it instead of offloading it.",
+        "Reassuring a patient about a long standing ulcer whose edge has recently heaped up without taking a biopsy."
+      ],
+      "probes": [
+        {
+          "a": "Venous ulcers are shallow with sloping edges and pigmented eczematous surrounds, arterial ulcers are punched out with pale necrotic bases and poor pulses, and neuropathic ulcers are painless with callus rims over pressure points.",
+          "accept": [
+            "sloping",
+            "punched out",
+            "pulses",
+            "callus",
+            "painless"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Give one bedside contrast for each of the three vascular ulcer types."
+        },
+        {
+          "a": "A venous ulcer sits in the gaiter area and never penetrates deep fascia, an arterial ulcer favours toes, heels and bony points and exposes deep structures, and a neuropathic ulcer sits under weight bearing skin such as metatarsal heads and the heel.",
+          "accept": [
+            "gaiter",
+            "toes",
+            "heel",
+            "weight bearing",
+            "metatarsal"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How does site alone narrow the diagnosis?"
+        },
+        {
+          "a": "A chronic ulcer or scar that develops heaped up nodules, rolled or everted margins, bleeding, new severe pain or failure to heal despite correct treatment needs multiple deep biopsies from margin and base to exclude squamous carcinoma.",
+          "accept": [
+            "nodules",
+            "everted",
+            "biopsy",
+            "margin",
+            "carcinoma"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "When does a chronic ulcer stop being a wound problem and become a cancer question?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "venous_leg_ulcer: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Leg ulcer (differential diagnosis)",
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Five bedside facts separate almost every leg ulcer: site, edge, pain, pulses and sensation. A shallow ulcer above the inner ankle with a sloping edge, moderate pain, palpable pulses and intact sensation is venous until proved otherwise.\n\nA punched out ulcer on toes or pressure points with severe pain, absent pulses and cool pale skin is arterial. A painless ulcer under callus on weight bearing skin with bounding pulses is neuropathic.",
+          "heading": "Five facts name the family"
+        },
+        {
+          "table": {
+            "cols": [
+              "Feature",
+              "Venous",
+              "Arterial",
+              "Neuropathic"
+            ],
+            "rows": [
+              [
+                "Site",
+                "Gaiter area, inner ankle",
+                "Toes, heel, bony points",
+                "Plantar pressure points"
+              ],
+              [
+                "Edge and floor",
+                "Sloping, granulating",
+                "Punched out, necrotic",
+                "Punched out, callus rim"
+              ],
+              [
+                "Pain",
+                "Moderate, eases with time",
+                "Severe, worse on elevation",
+                "Painless"
+              ],
+              [
+                "Pulses and skin",
+                "Present, pigmented eczema",
+                "Absent, pale and cool",
+                "Present, warm and dry"
+              ]
+            ]
+          },
+          "heading": "The comparison at a glance"
+        },
+        {
+          "body": "Malignant change hides inside chronicity. A long standing venous ulcer or burn scar that develops heaped nodules, rolled or everted margins, exuberant bleeding tissue, new severe pain or refusal to heal needs multiple deep biopsies from margin and base.\n\nA Martorell ulcer is the painful exception in hypertensive older patients: a necrotic patch on the outer calf with severe disproportionate pain and palpable pulses. Suspect it when the pain exceeds every finding.",
+          "heading": "The malignant and hypertensive exceptions"
+        }
+      ],
+      "title": "Telling venous, arterial, neuropathic and malignant ulcers apart",
+      "why": "Four different diseases share one word, ulcer, and each punishes the treatment of the others: compression starves an arterial leg, offloading never heals venous hypertension, and dressings feed a carcinoma. Five bedside facts assign the family before a single test is ordered."
+    },
+    "skill.legulcer.summary": {
+      "id": "skill.legulcer.summary",
+      "kind": "reasoning",
+      "oneLine": "Patient, tempo, ulcer in abstract terms, circulation and nerves, diagnosis with safety",
+      "pitfalls": [
+        "Ending on the ulcer description without stating the diagnosis or the plan.",
+        "Omitting the pulse and sensation status, so the listener cannot judge compression safety.",
+        "Forgetting the relevant negatives: no everted edge, no rest pain, no spreading redness."
+      ],
+      "probes": [
+        {
+          "a": "The patient with venous risk factors, the tempo in months, the ulcer in abstract terms with site and edge, the arterial and nerve status, and the provisional diagnosis with red flags and the plan.",
+          "accept": [
+            "tempo",
+            "ulcer",
+            "arterial",
+            "nerve",
+            "diagnosis",
+            "plan"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What belongs in a leg ulcer summary that a general lump summary lacks?"
+        },
+        {
+          "a": "Pulses and the ankle brachial index, because compression bandaging, the mainstay of venous healing, is unsafe until arterial disease is excluded.",
+          "accept": [
+            "pulses",
+            "ankle brachial",
+            "compression",
+            "unsafe"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Which single examination fact changes the management, and why?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "venous_leg_ulcer: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Examination of an ulcer: case summary",
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "State the patient with the risks that matter: age, standing work, varicose veins, an old clot, diabetes, tobacco. State the tempo: months of a non healing sore, which separates chronic ulceration from days of acute infection.\n\nState the ulcer in abstract terms: a shallow oozing sore in the gaiter area with a sloping edge and eczematous surround. Then give the circulation and nerve status in the same sentence.",
+          "heading": "Risks, tempo, ulcer, vessels, nerves"
+        },
+        {
+          "body": "A worked example: a 54 year old woman who stands all day presents with eight months of a painless oozing sore above the inner ankle. Examination shows a shallow sloping ulcer with pale granulation, pigmented eczematous surroundings, palpable foot pulses and intact sensation.\n\nThis is a venous leg ulcer with chronic venous insufficiency, with no malignant edges, no rest pain and no spreading infection, pending duplex mapping and the ankle brachial index before compression.",
+          "heading": "A worked example"
+        }
+      ],
+      "title": "The clinical summary",
+      "why": "A summary that lists the wound but omits the vessels and nerves leaves the listener unable to judge the one decision that matters: whether this leg can be compressed. The circulation and nerve status belong inside the summary, not after it."
+    },
+    "skill.legulcer.venous": {
+      "id": "skill.legulcer.venous",
+      "kind": "reasoning",
+      "oneLine": "Gaiter ulcer, sloping edge, venous skin changes, and why compression heals it",
+      "pitfalls": [
+        "Calling an ulcer venous from its site alone without examining pulses and sensation.",
+        "Applying full compression to a leg with unassessed arterial disease.",
+        "Ignoring the surrounding eczema and oedema, which are part of the disease and part of the treatment."
+      ],
+      "probes": [
+        {
+          "a": "A shallow ulcer in the gaiter area above the inner ankle with a sloping edge, granulating base, moderate pain, pigmented eczematous surrounding skin, and palpable pulses.",
+          "accept": [
+            "gaiter",
+            "sloping",
+            "pigmentation",
+            "eczema",
+            "pulses"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Describe the textbook venous ulcer in one sentence."
+        },
+        {
+          "a": "Failed valves in superficial, perforator or deep veins let high pressure reach the ankle skin on standing, causing capillary leak, inflammation, fibrosis and fragile skin that breaks with minor trauma and heals poorly.",
+          "accept": [
+            "valves",
+            "pressure",
+            "standing",
+            "inflammation",
+            "fibrosis",
+            "trauma"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How does a faulty valve become an ulcer above the ankle?"
+        },
+        {
+          "a": "Graduated compression reverses the venous hypertension that caused the ulcer, which is why it is the mainstay of healing once arterial disease is excluded, and why long term hosiery, elevation and exercise prevent recurrence.",
+          "accept": [
+            "compression",
+            "hypertension",
+            "arterial",
+            "hosiery",
+            "recurrence"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why is compression the treatment rather than just a dressing?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "venous_leg_ulcer: pathophysiology",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Venous ulcer (clinical features)",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "The venous ulcer is the commonest chronic leg ulcer and the most recognisable. It lies in the gaiter area, usually above the inner ankle, is shallow with a sloping edge and a granulating oozing base, and is moderately painful at first, becoming painless as it turns chronic.\n\nThe surrounding skin tells the story before the ulcer does: brown pigmentation, eczema, thickened woody skin, pale scars of healed ulcers, and ankle swelling that pits by evening.",
+          "heading": "The recognisable picture"
+        },
+        {
+          "body": "Failed valves in the superficial, perforator or deep veins, often after a thrombosis destroyed them, let the full standing venous pressure strike the ankle skin with every step. Capillaries leak protein, white cells gather and release destructive enzymes, and the skin fibroses into a fragile woody sheet.\n\nMinor trauma then breaks skin that cannot heal. This is why the ulcer sits where the pressure is highest, and why dressings without pressure control always fail.",
+          "heading": "One mechanism from valve to wound"
+        },
+        {
+          "body": "Graduated compression squeezes the leg hardest at the ankle and lighter above, pushing venous blood upward and reversing the hypertension that caused the wound. It is the mainstay of healing, but only after the ankle brachial index has excluded arterial disease.\n\nHealing is slow and recurrence is common, so long term hosiery, leg elevation, calf muscle exercise and correction of reflux are not aftercare but part of the cure.",
+          "heading": "Why pressure cures pressure"
+        }
+      ],
+      "title": "The venous ulcer picture",
+      "why": "The venous ulcer rewards pattern recognition more than any other leg ulcer: one look at the site, the edge and the surrounding skin should raise it first. Understanding the valve to pressure to fibrosis chain also explains why compression heals and dressings alone do not."
+    },
+    "skill.legulcer.differential": {
+      "id": "skill.legulcer.differential",
+      "kind": "reasoning",
+      "oneLine": "Mixed, malignant, infective and inflammatory ulcers that mimic the big three",
+      "pitfalls": [
+        "Assuming a venous ulcer cannot also be arterial: mixed ulcers are common in older patients.",
+        "Treating pyoderma gangrenosum with repeated debridement, which extends it.",
+        "Missing tuberculosis or malignancy in a non healing ulcer because the first label was never revisited."
+      ],
+      "probes": [
+        {
+          "a": "Mixed arteriovenous ulcer, Marjolin carcinoma in a chronic wound, Martorell hypertensive ulcer, neuropathic or diabetic foot ulcer, pyoderma gangrenosum, vasculitic ulcer, and infective ulcers including tuberculosis.",
+          "accept": [
+            "mixed",
+            "marjolin",
+            "martorell",
+            "neuropathic",
+            "pyoderma",
+            "vasculitic",
+            "tuberculosis"
+          ],
+          "level": 2,
+          "minMatch": 3,
+          "q": "Name five differentials for a chronic leg ulcer beyond a pure venous ulcer."
+        },
+        {
+          "a": "Reassess pulses and the ankle brachial index, look for calf claudication and rest pain, and treat it as mixed: restore or protect perfusion first, since compression at venous pressures can starve an arterial leg.",
+          "accept": [
+            "pulses",
+            "ankle brachial",
+            "claudication",
+            "perfusion",
+            "compression"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "A venous looking ulcer fails to heal and the foot is cool with poor pulses. What now?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "venous_leg_ulcer: additionalDifferentials",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Leg ulcer (differential diagnosis)",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Start from the venous picture and ask what does not fit. Cool pale skin with poor pulses means a mixed arteriovenous ulcer, common in older patients, where compression at full strength can starve the leg. Rest pain and claudication confirm the arterial share.\n\nA painless plantar ulcer with callus and bounding pulses is neuropathic, usually diabetic. Test sensation and sugar rather than debating the wound edge.",
+          "heading": "What does not fit the venous picture"
+        },
+        {
+          "body": "A chronic ulcer or scar that heaps up, bleeds, smells foul, grows painful or refuses to heal is a Marjolin carcinoma until biopsy says otherwise. A necrotic outer calf patch with severe disproportionate pain in a hypertensive older patient is a Martorell ulcer.\n\nRapid purple undermined edges suggest pyoderma gangrenosum, which worsens with debridement. Thin blue undermined edges with nodes elsewhere suggest tuberculosis. Each of these is a diagnosis the first label must never block.",
+          "heading": "Malignant, hypertensive, inflammatory and specific mimics"
+        }
+      ],
+      "title": "Differential diagnosis",
+      "why": "Most leg ulcers are venous, but the ones that are not punish a missed diagnosis severely: compression injures an arterial leg, surgery spreads pyoderma, and dressings feed a carcinoma. The differential exists to catch the minority that the first impression misses."
+    },
+    "skill.legulcer.diagnosis": {
+      "id": "skill.legulcer.diagnosis",
+      "kind": "reasoning",
+      "oneLine": "Name the ulcer, grade the veins, exclude arterial disease, and state red flags",
+      "pitfalls": [
+        "Diagnosing a venous ulcer without documenting pulses and the ankle brachial index.",
+        "Forgetting that a mixed ulcer needs both diseases named, not one.",
+        "Discharging a chronic ulcer without a plan for biopsy if it fails to heal on schedule."
+      ],
+      "probes": [
+        {
+          "a": "The ulcer family, the site and behaviour, the state of the veins, confirmation that arterial disease is excluded, and any red flags such as malignant edges, spreading infection or severe ischaemic pain.",
+          "accept": [
+            "family",
+            "veins",
+            "arterial",
+            "excluded",
+            "red flags"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What must a complete leg ulcer diagnosis contain?"
+        },
+        {
+          "a": "Rolled or everted edges with heaped tissue, exuberant bleeding granulation, new severe pain, foul smell, rapid enlargement, spreading redness with fever, and sudden worsening of pain suggesting ischaemia or infection.",
+          "accept": [
+            "everted",
+            "bleeding",
+            "pain",
+            "redness",
+            "fever",
+            "enlargement"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "List the red flags that change urgency in a leg ulcer."
+        },
+        {
+          "a": "Mixed arteriovenous ulceration, where venous hypertension and arterial ischaemia coexist, so compression must be modified and perfusion protected or restored alongside venous care.",
+          "accept": [
+            "mixed",
+            "arteriovenous",
+            "ischaemia",
+            "compression",
+            "perfusion"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "An older patient has gaiter ulceration with pigmentation but also claudication and poor pulses. What is the diagnosis?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "venous_leg_ulcer: redFlags",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Venous ulcer (diagnosis)",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "A complete diagnosis names the ulcer family, the site and behaviour, and the state of the vessels and nerves behind it. Example: a chronic venous ulcer of the left gaiter area with chronic venous insufficiency, arterial disease excluded, sensation intact.\n\nWhere both diseases coexist, name both: a mixed arteriovenous ulcer. A single label on a mixed leg guarantees half the treatment is wrong.",
+          "heading": "Name the ulcer and what stands behind it"
+        },
+        {
+          "body": "Red flags change urgency on the day. Rolled or everted edges, heaped nodules, bleeding tissue, new severe pain or refusal to heal suggest malignant change and need urgent biopsy. Spreading redness with fever suggests cellulitis or sepsis.\n\nSudden severe pain with a pale cool foot suggests acute ischaemia, and rapid enlargement with foul smell suggests aggressive infection. Each of these bypasses routine dressing schedules.",
+          "heading": "Red flags that change the day"
+        }
+      ],
+      "title": "Diagnosis and red flags",
+      "why": "A diagnosis of ulcer alone authorises nothing: it does not say whether the leg may be compressed, whether vessels need imaging, or whether cancer must be excluded. The complete statement answers all three, so the plan follows without guessing."
+    },
+    "skill.annex.legulcer.compare": {
+      "id": "skill.annex.legulcer.compare",
+      "kind": "annexure",
+      "oneLine": "Reference table of ulcer families by site, edge, pain, pulses and sensation",
+      "probes": [
+        {
+          "a": "Venous: gaiter, sloping, moderate pain, pulses present. Arterial: toes and pressure points, punched out, severe pain, pulses absent. Neuropathic: plantar, callus rim, painless, pulses present with lost sensation.",
+          "accept": [
+            "gaiter",
+            "punched out",
+            "callus",
+            "pulses",
+            "sensation"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Recite the site and pulse status of the three vascular ulcer types from memory."
+        },
+        {
+          "a": "Marjolin: raised everted edge with induration in a chronic wound or scar. Martorell: necrotic outer calf patch with severe pain and palpable pulses in a hypertensive patient.",
+          "accept": [
+            "everted",
+            "induration",
+            "martorell",
+            "hypertensive",
+            "pulses"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How do the malignant and hypertensive ulcers read in the same table?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "venous_leg_ulcer: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Leg ulcer (classification of ulcers)",
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "table": {
+            "cols": [
+              "Family",
+              "Typical site",
+              "Edge and base",
+              "Pain, pulses, sensation"
+            ],
+            "rows": [
+              [
+                "Venous",
+                "Gaiter, inner ankle",
+                "Sloping, granulating",
+                "Moderate, pulses present"
+              ],
+              [
+                "Arterial",
+                "Toes, heel, bony points",
+                "Punched out, necrotic",
+                "Severe, pulses absent"
+              ],
+              [
+                "Neuropathic",
+                "Plantar pressure points",
+                "Callus rim, deep",
+                "Painless, pulses present"
+              ],
+              [
+                "Marjolin",
+                "Old ulcer or burn scar",
+                "Raised, everted, hard",
+                "Painless until late"
+              ],
+              [
+                "Martorell",
+                "Outer and back of calf",
+                "Necrotic patch to fascia",
+                "Severe, pulses present"
+              ]
+            ]
+          },
+          "heading": "Five families at a glance"
+        },
+        {
+          "body": "Use this table at the bedside, not from memory alone. Read across the row of the ulcer in front of you: if the site, edge, pain, pulses and sensation all sit in one row, the family is settled.\n\nIf facts fall across two rows, suspect a mixed ulcer and investigate both vessels. A table that forces this check is worth more than a confident first glance.",
+          "heading": "How to use the table"
+        }
+      ],
+      "title": "Annexure: ulcer families compared",
+      "why": "At the bedside nobody carries a textbook, but everybody can carry one table. Five rows by four columns settle most leg ulcers in under a minute and flag the mixed case that needs both vessels studied."
+    },
+    "skill.ix.legulcer.workup": {
+      "id": "skill.ix.legulcer.workup",
+      "kind": "investigation",
+      "oneLine": "Exclude arterial disease, map the veins, culture infection, biopsy the suspicious",
+      "pitfalls": [
+        "Ordering a duplex before the pulses and the ankle brachial index are recorded.",
+        "Swabbing every ulcer and treating colonisation as infection.",
+        "Watching a non healing ulcer for months without a biopsy."
+      ],
+      "probes": [
+        {
+          "a": "The ankle brachial index to exclude arterial disease and make compression safe, venous duplex to map reflux and obstruction, wound culture where infection is clinically present, and biopsy of atypical or non healing ulcers.",
+          "accept": [
+            "ankle brachial",
+            "duplex",
+            "reflux",
+            "culture",
+            "biopsy"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What are the four core investigations in a leg ulcer?"
+        },
+        {
+          "a": "Ulcer size tracing, photographs, pain scores and healing at each dressing visit, with duplex mapping and repeat arterial assessment where healing stalls, so failure is noticed in weeks not months.",
+          "accept": [
+            "tracing",
+            "photographs",
+            "healing",
+            "duplex",
+            "stalls"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How do you follow a venous ulcer on compression?"
+        },
+        {
+          "a": "Multiple deep biopsies from the margin and base, because malignant change in a chronic wound can be focal and a superficial sample misses it.",
+          "accept": [
+            "multiple",
+            "deep",
+            "margin",
+            "base",
+            "focal"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "A chronic ulcer edge has heaped up. What biopsy, and why that technique?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "venous_leg_ulcer: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Venous ulcer (investigations)",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Investigations answer four questions in order. First, is the artery safe: palpate every pulse and record the ankle brachial index before any compression is applied. An ischaemic leg bandaged like a venous one deteriorates quickly.\n\nSecond, where is the venous fault: duplex ultrasound maps reflux and obstruction in superficial, perforator and deep systems, which also plans treatment of the underlying reflux.",
+          "heading": "Arteries first, veins mapped"
+        },
+        {
+          "body": "Third, is it infected: take a wound swab or tissue culture only where clinical infection is present, such as spreading redness, increasing pain, foul pus or fever. Colonisation without clinical signs needs cleaning, not antibiotics.\n\nFourth, is it malignant: biopsy atypical ulcers and any ulcer that fails to heal despite correct treatment. Add sugar testing and haemoglobin where healing factors are unknown, since anaemia and diabetes both slow repair.",
+          "heading": "Infection, malignancy and healing factors"
+        }
+      ],
+      "title": "Investigating the leg ulcer",
+      "why": "Tests in a leg ulcer are ordered by danger, not by habit: arterial exclusion first because compression can injure, vein mapping second because it plans the cure, and biopsy before months of dressings bury a carcinoma. Each test must change a decision."
+    },
+    "skill.tx.legulcer": {
+      "id": "skill.tx.legulcer",
+      "kind": "treatment",
+      "oneLine": "Compression after arterial exclusion, wound care, reflux correction, lifelong prevention",
+      "pitfalls": [
+        "Starting compression without excluding arterial disease.",
+        "Prescribing antibiotics for colonisation instead of reserving them for clinical infection.",
+        "Stopping hosiery and follow up once the ulcer closes, which invites recurrence within months."
+      ],
+      "probes": [
+        {
+          "a": "Graduated multilayer compression after excluding arterial disease, wound cleansing with debridement and simple dressings, treatment of superficial reflux, eczema care, elevation and exercise, and lifelong hosiery to prevent recurrence.",
+          "accept": [
+            "compression",
+            "arterial",
+            "dressings",
+            "reflux",
+            "hosiery",
+            "elevation"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "Outline the management of a venous leg ulcer in order."
+        },
+        {
+          "a": "Restore or protect perfusion first through vascular referral for revascularisation, modify compression, control pain and infection, and never apply full venous compression to an ischaemic leg.",
+          "accept": [
+            "perfusion",
+            "revascularisation",
+            "compression",
+            "ischaemic",
+            "referral"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How does management change when the ulcer is mixed or arterial?"
+        },
+        {
+          "a": "Offload pressure with casting or therapeutic footwear, debride callus, control sugar, treat infection by culture, assess perfusion for revascularisation, and follow up in a multidisciplinary foot service.",
+          "accept": [
+            "offload",
+            "debride",
+            "sugar",
+            "culture",
+            "perfusion",
+            "foot"
+          ],
+          "level": 3,
+          "minMatch": 3,
+          "q": "A diabetic patient has a plantar ulcer with callus. What is the plan?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "venous_leg_ulcer: management",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Venous ulcer (treatment)",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Compression is the mainstay, but safety comes first. Exclude significant arterial disease with pulse examination and the ankle brachial index, then apply graduated multilayer bandaging or hosiery that presses hardest at the ankle.\n\nAdd wound care alongside: cleanse the wound, remove slough, use simple non adherent dressings, and manage exudate. These dressings protect healing; they do not replace pressure control.",
+          "heading": "Compress safely, dress simply"
+        },
+        {
+          "body": "Treat the veins behind the ulcer. Correct superficial reflux by endovenous ablation or surgery where duplex shows it, which speeds healing and cuts recurrence. Manage surrounding eczema with emollients and topical steroids, and reserve systemic antibiotics for clinical infection, not colonisation.\n\nRaise the leg above heart level when resting, keep the calf pump active with walking and ankle exercises, and correct anaemia, poor sugar control and poor nutrition that hold back healing.",
+          "heading": "Treat the cause around the wound"
+        },
+        {
+          "body": "Arterial and mixed ulcers need perfusion restored or protected first, through prompt vascular referral for revascularisation, with modified or withheld compression. Neuropathic ulcers need pressure offloaded with casting or therapeutic footwear, callus debrided, and sugar controlled.\n\nMalignant change needs wide excision with node assessment, not dressings. In India, arrange district hospital dressing support, medical college vascular referral, and foot care education with protective footwear, since recurrence follows poverty of follow up as surely as poverty of blood.",
+          "heading": "Other families and lasting prevention"
+        },
+        {
+          "body": "Prevention is lifelong because recurrence is the rule. Continue compression hosiery after healing, keep weight healthy, walk daily, inspect feet, and return early with any skin break in the gaiter area.\n\nReview healing at each visit with size tracing. Biopsy any ulcer that fails to progress despite correct compression, and keep vascular and tissue viability review within reach for every non healing case.",
+          "heading": "Follow up until healed, and after"
+        }
+      ],
+      "dosingNote": "This module teaches management at the level of drug class and principle, such as systemic antibiotics for clinical infection and topical steroids for venous eczema. Specific agents, strengths, routes and durations must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "title": "Treating the leg ulcer",
+      "why": "Venous ulcers heal with pressure, arterial ulcers heal with blood flow, neuropathic ulcers heal with offloading, and cancers heal with excision. One shared dressing trolley cannot serve four mechanisms, so treatment starts by naming the family and protecting the leg from the wrong cure."
+    }
+  },
+  "cases": [
+    {
+      "fallback": "I do not understand, doctor. Please ask in simple words.",
+      "id": "case.legulcer.meena",
+      "initialVitals": {
+        "bpDiastolic": 84,
+        "bpSystolic": 138,
+        "gcs": 15,
+        "hr": 88,
+        "rr": 18,
+        "spo2": 98,
+        "temp": 37.1
+      },
+      "opening": "Meena Pawar, 54, sits in the surgical outpatient room with her left ankle wrapped in a stained cloth bandage. She sells vegetables in the market and stands all day. She says the sore above her ankle has been oozing for months. Introduce yourself and take a history.",
+      "patient": {
+        "age": 54,
+        "name": "Meena Pawar",
+        "occupation": "Vegetable vendor in the municipal market, standing ten to twelve hours daily",
+        "residence": "Urban chawl with her husband and two daughters",
+        "sex": "female"
+      },
+      "title": "A vendor with eight months of oozing above the ankle",
+      "history": {
+        "ankle_swelling_day": {
+          "cues": [
+            "does the ankle swell",
+            "swelling by evening",
+            "feet swell in the evening",
+            "ankle puffy after work"
+          ],
+          "key": true,
+          "reply": "Yes, both ankles swell by evening after the market, the left more. In the morning the swelling is less."
+        },
+        "family_vein_trouble": {
+          "cues": [
+            "anyone in the family with veins",
+            "family with leg sores",
+            "mother had varicose",
+            "father had swelling of legs"
+          ],
+          "reply": "My mother had big blue veins on her legs and her ankles used to swell. No sores like mine."
+        },
+        "fever_red_spread": {
+          "cues": [
+            "any fever with the sore",
+            "redness spreading up the leg",
+            "leg hot to touch",
+            "burning fever since the sore"
+          ],
+          "key": true,
+          "reply": "No fever, doctor. The leg is not hot. Only the skin near the sore itches."
+        },
+        "foot_numb_burn": {
+          "cues": [
+            "numbness in the feet",
+            "burning in the soles",
+            "pins and needles in feet",
+            "do your chappals slip off unnoticed"
+          ],
+          "key": true,
+          "reply": "No numbness or burning. I feel everything, even the bandage hurting the skin."
+        },
+        "footwear_barefoot_use": {
+          "cues": [
+            "what footwear do you use",
+            "do you walk barefoot",
+            "chappal or shoes daily",
+            "feet in water during work"
+          ],
+          "reply": "I wear rubber chappals. In the rains my feet stay wet in the market the whole day."
+        },
+        "knock_injury_start": {
+          "cues": [
+            "how did the sore begin",
+            "any injury before the sore",
+            "knock or scratch before",
+            "insect bite before the wound"
+          ],
+          "key": true,
+          "reply": "Eight months ago I hit my ankle on a wooden crate in the market. The skin broke and a small sore formed. It never closed after that."
+        },
+        "medicine_ointment_applied": {
+          "cues": [
+            "what medicines are you taking",
+            "any tablets for the sore",
+            "what ointment applied",
+            "powders or oils on the wound"
+          ],
+          "key": true,
+          "reply": "Only pain tablets sometimes. On the wound I applied turmeric powder and once a red ointment from the chemist. Nothing closed it."
+        },
+        "night_foot_pain": {
+          "cues": [
+            "pain in the foot at night",
+            "leg pain when lying down",
+            "hang the leg down for relief",
+            "burning pain disturbing sleep"
+          ],
+          "key": true,
+          "reply": "No night pain. I sleep well. The sore only aches a little when I stand long."
+        },
+        "old_clot_swelling": {
+          "cues": [
+            "leg swollen for weeks before",
+            "clot in the leg before",
+            "long swelling after delivery",
+            "hospital stay with leg swelling"
+          ],
+          "key": true,
+          "reply": "Twelve years ago, after my younger daughter was born, my left leg swelled up to the knee for many weeks. The doctor said a vein was blocked. It settled slowly."
+        },
+        "presenting": {
+          "cues": [
+            "what brings you today",
+            "what is the problem",
+            "tell me about the sore",
+            "how can I help you"
+          ],
+          "key": true,
+          "reply": "Doctor, for eight months there is a sore above my left ankle. It keeps oozing watery fluid and stains my clothes. It pains a little but I still go to the market.",
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "past_sore_same_leg": {
+          "cues": [
+            "sore on this leg before",
+            "earlier ulcer on the leg",
+            "wound here healed before",
+            "same place broke open earlier"
+          ],
+          "key": true,
+          "reply": "Three years ago a small sore came at the same place and closed in two months with bandage from the dispensary. This time it never closed."
+        },
+        "sugar_illness_known": {
+          "cues": [
+            "do you have sugar illness",
+            "diabetes tablets or insulin",
+            "sugar tested anytime",
+            "wounds heal slowly elsewhere"
+          ],
+          "key": true,
+          "reply": "No sugar illness. Last year the camp tested my blood and said sugar is normal. Small cuts on my hands heal normally."
+        },
+        "tobacco_bidi_chew": {
+          "cues": [
+            "do you smoke bidis",
+            "chewing tobacco habit",
+            "tobacco with lime",
+            "drink alcohol regularly"
+          ],
+          "key": true,
+          "reply": "No smoking, no tobacco, no drink. Only tea, four cups a day."
+        },
+        "ulcer_begin_account": {
+          "cues": [
+            "when did the sore appear",
+            "how many months of the wound",
+            "since when is the ankle open",
+            "duration of this sore"
+          ],
+          "key": true,
+          "reply": "Eight months now. It started small after the crate injury and slowly grew to this size."
+        },
+        "ulcer_ooze_smell": {
+          "cues": [
+            "watery discharge from the sore",
+            "pus or bad smell",
+            "fluid staining the bandage",
+            "bleeding from the sore"
+          ],
+          "key": true,
+          "reply": "Thin watery fluid soaks the cloth daily. No thick pus, no bad smell. Once it bled a little when the cloth stuck."
+        },
+        "ulcer_pain_feel": {
+          "cues": [
+            "is the sore painful",
+            "describe the pain of the ulcer",
+            "does standing worsen the ache",
+            "pain when the leg is raised"
+          ],
+          "key": true,
+          "reply": "It aches dully when I stand long in the market. At home with the leg up, the ache settles. It never had sharp severe pain."
+        },
+        "weight_appetite_loss": {
+          "cues": [
+            "losing weight recently",
+            "appetite over recent months",
+            "clothes looser than before",
+            "tiredness or pallor noticed"
+          ],
+          "reply": "My weight is the same and I eat normally. I feel tired by evening but that is the market work."
+        },
+        "work_long_hours": {
+          "cues": [
+            "hours standing in the market",
+            "nature of your daily work",
+            "sitting or standing all day",
+            "rest during the working day"
+          ],
+          "reply": "I stand behind the vegetable cart from morning to night, ten to twelve hours, with one short break for food."
+        },
+        "walk_calf_pain": {
+          "cues": [
+            "calf pain on walking",
+            "how far can you walk",
+            "leg pain relieved by rest",
+            "cramp in the calf while walking"
+          ],
+          "key": true,
+          "reply": "I walk to the market, about half an hour, with no calf pain or stopping. Only the ankle sore troubles me.",
+          "skillId": "skill.hx.surg.pvd_claudication_restpain"
+        },
+        "vein_cords_seen": {
+          "cues": [
+            "blue rope like veins on legs",
+            "visible varicose veins",
+            "veins bulging on standing",
+            "heaviness after standing long"
+          ],
+          "key": true,
+          "reply": "Yes, for many years there are blue bulging veins on both legs, worse on the left. By evening my legs feel heavy and the skin near the ankle itches.",
+          "skillId": "skill.hx.surg.varicose_veins"
+        }
+      },
+      "exam": {
+        "skill.exam.surg.arterial_pulses_lower": {
+          "abnormal": false,
+          "finding": "Femoral, popliteal, posterior tibial and dorsalis pedis pulses palpable on both sides, equal and normal volume. No bruit over the femoral vessels."
+        },
+        "skill.exam.surg.buerger_postural_test": {
+          "abnormal": false,
+          "finding": "No marked pallor on elevation to 45 degrees. On dependency the foot pinks up within seconds with no dusky delay."
+        },
+        "skill.exam.surg.diabetic_foot": {
+          "abnormal": false,
+          "finding": "Touch and vibration sense intact over both feet. No callus, no deformity, no dry fissuring. Foot warm with palpable pulses."
+        },
+        "skill.exam.surg.regional_nodes": {
+          "abnormal": false,
+          "finding": "Left inguinal nodes not enlarged. No tenderness, no fixation."
+        },
+        "skill.exam.surg.trendelenburg_tourniquet": {
+          "abnormal": true,
+          "finding": "Rapid filling of the great saphenous trunk from above on standing, controlled by a tourniquet below the saphenofemoral junction but not by mid thigh compression, suggesting saphenofemoral incompetence with an incompetent perforator above the ankle."
+        },
+        "skill.exam.surg.ulcer_inspect": {
+          "abnormal": true,
+          "finding": "Single shallow ulcer, about 5 cm by 4 cm, on the medial left gaiter just above the malleolus. Sloping edge, pale pink granulation tissue on the floor, thin serous discharge. Surrounding skin shows brown pigmentation, dry eczema, and a healed pale scar of the old ulcer nearby. No everted edge, no heaped nodules, no exposed tendon."
+        },
+        "skill.exam.surg.ulcer_palpate": {
+          "abnormal": true,
+          "finding": "Mildly tender margin, base fixed to subcutaneous tissue but mobile over deep fascia. Edge firm but without stony induration. Surrounding skin thickened and woody to the pinch."
+        },
+        "skill.gen.edema": {
+          "abnormal": true,
+          "finding": "Pitting oedema over both ankles, left more than right, fading by morning. No sacral oedema."
+        },
+        "skill.gen.surg.survey": {
+          "abnormal": true,
+          "finding": "Middle aged woman of average build, mild pallor, walking with a slight limp favouring the left leg. No jaundice, no lymphadenopathy elsewhere."
+        },
+        "skill.gen.vitals": {
+          "abnormal": false,
+          "finding": "Temperature 37.1 C. Pulse 88 regular. Blood pressure 138/84. Respiratory rate 18. SpO2 98 percent on room air."
+        }
+      },
+      "essentialInvestigations": [
+        "duplex",
+        "abpi",
+        "fbc",
+        "sugar"
+      ],
+      "investigations": {
+        "abpi": {
+          "indicated": true,
+          "label": "Ankle brachial index",
+          "note": "The safety gate for compression. A normal study here is what makes bandaging permissible.",
+          "result": "Posterior tibial and dorsalis pedis pressures equal brachial pressure on both sides, index about 1.0. No significant arterial disease."
+        },
+        "biopsy": {
+          "indicated": false,
+          "label": "Edge biopsy",
+          "note": "Not indicated today: the edge is sloping with no heaped tissue, bleeding nodules or induration. It becomes mandatory if the ulcer refuses to heal despite correct compression.",
+          "result": "Not taken."
+        },
+        "duplex": {
+          "indicated": true,
+          "label": "Venous duplex ultrasound",
+          "note": "Maps the reflux feeding the ulcer and plans definitive vein treatment after healing.",
+          "result": "Great saphenous reflux from an incompetent saphenofemoral junction with an incompetent perforator above the left ankle. Deep veins patent with old post thrombotic wall changes on the left."
+        },
+        "fbc": {
+          "indicated": true,
+          "label": "Full blood count",
+          "note": "Anaemia slows healing and is correctable, so it is looked for rather than assumed absent.",
+          "result": "Haemoglobin 10.6 g/dL with microcytic indices. Total leucocyte count within normal limits."
+        },
+        "sugar": {
+          "indicated": true,
+          "label": "Fasting glucose and glycated haemoglobin",
+          "note": "Diabetes must be excluded on paper, not by history alone, since it changes healing and infection risk.",
+          "result": "Fasting glucose 96 mg/dL. Glycated haemoglobin 5.6 percent. No diabetes."
+        },
+        "woundcx": {
+          "indicated": false,
+          "label": "Wound swab culture",
+          "note": "Not indicated: there is no spreading redness, increasing pain, pus or fever, and colonisation of an open ulcer without clinical infection needs cleaning, not antibiotics.",
+          "result": "Not sent."
+        }
+      },
+      "differentialModel": {
+        "accept": [
+          "venous leg ulcer",
+          "venous ulcer",
+          "arterial ulcer",
+          "neuropathic ulcer",
+          "marjolin ulcer",
+          "pyoderma gangrenosum",
+          "cellulitis"
+        ],
+        "answer": "Venous leg ulcer of the left gaiter area with chronic venous insufficiency. Consider mixed arteriovenous ulceration, a neuropathic ulcer, Marjolin carcinoma in a chronic wound, and pyoderma gangrenosum.",
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "accept": [
+          "venous leg ulcer",
+          "venous ulcer",
+          "chronic venous insufficiency"
+        ],
+        "answer": "Chronic venous ulcer of the left gaiter area with chronic venous insufficiency, arterial disease excluded, sensation intact.",
+        "minMatch": 1
+      },
+      "managementModel": {
+        "accept": [
+          "compression",
+          "ankle brachial",
+          "dressings",
+          "duplex",
+          "hosiery",
+          "elevation",
+          "follow-up"
+        ],
+        "answer": "Confirm arterial safety with the ankle brachial index, then graduated multilayer compression with simple wound dressings, duplex mapping with later correction of superficial reflux, eczema care, leg elevation and calf exercise, correction of anaemia, and lifelong hosiery with follow-up tracing of healing.",
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The tempo and the trigger tell the story: a crate injury eight months ago on skin already damaged by years of venous hypertension, in a woman with varicose veins, an old pregnancy clot, and a standing job.",
+        "Five bedside facts settle the family: gaiter site, sloping edge, moderate aching pain, palpable pulses, intact sensation. No single one of them is enough alone.",
+        "The old deep vein thrombosis explains venous hypertension without florid varicosities being the whole story, and the duplex confirms both reflux and post thrombotic deep changes.",
+        "Pulses, the postural test and the ankle brachial index are documented before compression, not after. This is the safety habit the station examines.",
+        "The normal sugar, the mild anaemia, and the withheld swab each teach restraint: exclude diabetes on paper, correct anaemia, and culture only clinical infection.",
+        "No everted edge, no rest pain, no spreading redness: these negatives exclude malignancy, ischaemia and acute infection without a single extra test.",
+        "Healing needs months of compression plus hosiery for life, reflux correction, and anaemia treatment, with biopsy reserved for failure to progress."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

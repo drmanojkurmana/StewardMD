@@ -1,0 +1,1240 @@
+{
+  "_comment": "Surgery pathway for haemorrhoids, fissure and fistula-in-ano. Shared examination and history live in the core and surgery packs plus a small anorectal fragment; this file owns only disease reasoning, investigation and treatment skills.",
+  "estMinutes": 60,
+  "fullName": "Haemorrhoids, fissure and fistula in ano",
+  "id": "anorectal-conditions",
+  "kbRef": "anorectal_disorders_hemorrhoids_and_fistula",
+  "name": "Haemorrhoids, fissure and fistula in ano",
+  "oneLine": "Per rectal examination: painless bleeding piles, cutting fissure pain, and the discharging fistula track",
+  "review": {
+    "status": "ai_drafted"
+  },
+  "subtitle": "Per rectal examination",
+  "system": "surgery",
+  "version": 1,
+  "chapters": [
+    {
+      "blurb": "Three anal canal diseases and the rule that separates them",
+      "id": "basics",
+      "skills": [
+        "skill.anorectal.basics"
+      ],
+      "title": "Basics"
+    },
+    {
+      "blurb": "Before a single question",
+      "id": "approach",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ],
+      "title": "Approach to the patient"
+    },
+    {
+      "blurb": "Age, habit and pressure set the odds before a symptom is mentioned",
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Piles and fissure cluster in constipated adults of working age and in pregnancy, prolapse at the extremes of life, and fistula after a drained abscess. In an older adult with new bleeding, age itself raises the cancer odds before anything else is known."
+        }
+      },
+      "id": "particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "title": "Patient particulars"
+    },
+    {
+      "blurb": "Bleeding pattern, pain timing, prolapse behaviour and discharge",
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect complaints in this order: bleeding with its pattern, pain with its timing against stool, something coming out with its reducibility, and discharge with its cycle. A splash in the pan, a cutting pain after stool, a lump needing a finger, or pus that comes and goes each points before examination begins."
+        },
+        "skill.hx.surg.rectal_bleeding_pain": {
+          "expect": "In this pathway listen for painless splash bleeding for piles, cutting post defecation pain with a streak for fissure, cyclical discharge for fistula, and continuous throbbing for abscess, with any altered habit or mucus moving the case towards cancer exclusion."
+        }
+      },
+      "id": "history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.surg.rectal_bleeding_pain"
+      ],
+      "title": "History of presenting illness"
+    },
+    {
+      "blurb": "The soil that grew the disease and the mimics that must be excluded",
+      "id": "past_personal_drug_family",
+      "skills": [
+        "skill.hx.anorectal.riskfactors"
+      ],
+      "title": "Past, personal, drug and family history"
+    },
+    {
+      "blurb": "A well patient with a local disease, until anaemia or sepsis says otherwise",
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Most piles and fissure patients look well, which is exactly why pallor from chronic blood loss and fever with tachycardia from anorectal sepsis must be actively sought rather than assumed absent."
+        },
+        "skill.gen.vitals": {
+          "expect": "Vitals are usually normal here, so fever, tachycardia or hypotension points to an abscess or spreading sepsis, and pallor with a soft systolic murmur points to chronic piles anaemia."
+        },
+        "skill.gen.surg.survey": {
+          "expect": "Survey for wasting and pallor that betray a malignant or chronic inflammatory background behind supposedly simple bleeding, and for fever that upgrades a track to an abscess."
+        }
+      },
+      "id": "general_exam",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.surg.survey"
+      ],
+      "title": "General examination"
+    },
+    {
+      "blurb": "Inspect first, palpate second, finger last, scope to finish",
+      "emphasis": {
+        "skill.exam.surg.perianal_inspection": {
+          "expect": "Expect prolapsing cushions at 3, 7 and 11 o clock with radial folds, a posterior midline sentinel tag over a fissure, a bluish thrombosed pile, or an external fistula opening read against the transverse anal line; ask the patient to strain if prolapse is described but not seen."
+        },
+        "skill.exam.surg.dre_surgical": {
+          "expect": "Expect spasm with excruciating tenderness in fissure, where examination may be deferred, a dimpled internal fistula opening usually posterior midline, and no palpable pile since uncomplicated piles cannot be felt; always read the glove for blood, pus or mucus."
+        },
+        "skill.exam.surg.proctoscopy": {
+          "expect": "Expect engorged cushions bulging into the scope on withdrawal at the primary stations in piles, and use the same view to spot the inner opening of a fistula or an ulcerating growth that the finger suspected."
+        }
+      },
+      "id": "systemic_exam",
+      "skills": [
+        "skill.exam.surg.perianal_inspection",
+        "skill.exam.surg.dre_surgical",
+        "skill.exam.surg.proctoscopy"
+      ],
+      "title": "Perianal and rectal examination"
+    },
+    {
+      "blurb": "Four questions read the whole perianal picture",
+      "id": "disease_findings",
+      "skills": [
+        "skill.anorectal.signs",
+        "skill.annex.surg.haemorrhoid_grading"
+      ],
+      "title": "Putting the anorectal picture together"
+    },
+    {
+      "blurb": "Soil, pattern, examination in order, condition with degree",
+      "id": "summary",
+      "skills": [
+        "skill.anorectal.summary",
+        "skill.present.anorectal.summary"
+      ],
+      "title": "Clinical summary"
+    },
+    {
+      "blurb": "The benign list and the cancer that must be excluded from it",
+      "id": "differential",
+      "skills": [
+        "skill.anorectal.differential",
+        "skill.annex.surg.goodsall_rule"
+      ],
+      "title": "Differential diagnosis"
+    },
+    {
+      "blurb": "Scope every lesion and exclude cancer above it",
+      "id": "investigations",
+      "skills": [
+        "skill.ix.anorectal.workup"
+      ],
+      "title": "Investigations"
+    },
+    {
+      "blurb": "Condition with degree, type and site, closed by negatives",
+      "id": "diagnosis",
+      "skills": [
+        "skill.anorectal.diagnosis"
+      ],
+      "title": "Diagnosis"
+    },
+    {
+      "blurb": "Habit care for all, grade matched procedures, mapped fistula surgery",
+      "id": "treatment",
+      "skills": [
+        "skill.tx.anorectal"
+      ],
+      "title": "Treatment"
+    },
+    {
+      "blurb": "Present this patient to your consultant",
+      "id": "case",
+      "skills": [
+        "skill.present.case"
+      ],
+      "title": "Case presentation"
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "examinerQuestions": [
+          "You found prolapsing cushions with radial folds at three stations. Why does that pattern mean piles and not complete prolapse?",
+          "Your finger felt nothing but the scope showed engorged cushions. Why can uncomplicated piles not be felt?",
+          "What on the withdrawn glove would send this patient for sigmoidoscopy today?"
+        ],
+        "id": "osce.anorectal.rectal_exam",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.exam.surg.perianal_inspection",
+          "skill.exam.surg.dre_surgical",
+          "skill.exam.surg.proctoscopy"
+        ],
+        "task": "This 42 year old man has painless bleeding per rectum with something coming out on defecation for eight months. Examine his perianal region and rectum and present your findings.",
+        "title": "Examine the rectal case"
+      },
+      {
+        "examinerQuestions": [
+          "What in his bleeding pattern separates piles from fissure and from a rectal growth?",
+          "Name three background factors your history excluded, and how each changes management.",
+          "What single answer would make you abandon the piles pathway and examine for cancer today?"
+        ],
+        "id": "osce.anorectal.history",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.surg.rectal_bleeding_pain",
+          "skill.hx.anorectal.riskfactors"
+        ],
+        "task": "This 42 year old man has bleeding per rectum for eight months. Take a focused history in six minutes and be ready to grade his disease.",
+        "title": "Take a history and grade the disease"
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.anorectal.basics",
+      "skill.hx.surg.rectal_bleeding_pain",
+      "skill.exam.surg.dre_surgical",
+      "skill.anorectal.signs",
+      "skill.anorectal.differential",
+      "skill.ix.anorectal.workup",
+      "skill.anorectal.diagnosis",
+      "skill.tx.anorectal"
+    ]
+  },
+  "skills": {
+    "skill.anorectal.basics": {
+      "body": "Haemorrhoids, fissure and fistula-in-ano are three different diseases of the anal canal that share one examination and are constantly confused with each other and with rectal cancer. Uncomplicated internal piles bleed without pain, fissure hurts with a streak of blood, and fistula discharges pus between bouts of pain.",
+      "id": "skill.anorectal.basics",
+      "keyPoints": [
+        "Internal haemorrhoids are sliding vascular anal cushions above the Hilton line, so they are covered with mucous membrane and are painless; external haemorrhoids lie below the line, are covered with skin, and hurt when thrombosed or strangulated.",
+        "Anal fissure is a longitudinal ulcer of the anal canal, usually posterior midline, kept open by sphincter spasm; its triad is cutting pain during and after defecation with a bright streak of blood on the stool.",
+        "Fistula-in-ano is a granulation-lined track from the anal canal to the perianal skin, usually the healed remnant of a cryptoglandular abscess; its signature is intermittent perianal discharge that soils clothing, with pain that builds while the track is closed and eases when it drains.",
+        "The Hilton line rule organises all of this: disease confined above the line is painless, disease below it or spreading beyond the rectal wall is painful, which is why piles bleed silently while a fissure or an abscess hurts.",
+        "These three are diagnoses of inspection and the finger, but every one of them can hide or mimic carcinoma of the rectum or anal canal, so altered bowel habit, weight loss, a palpable mass or persistent mucus changes the pathway to cancer exclusion."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "Three anal canal diseases, one examination: painless bleeding piles, painful streaking fissure, discharging fistula",
+      "pitfalls": [
+        "Calling every perianal symptom piles without inspecting, which delays fissure, fistula and cancer diagnoses.",
+        "Expecting internal piles to be felt by the finger: uncomplicated piles cannot be felt and need the proctoscope.",
+        "Forgetting that painless bleeding in an older adult with altered bowel habit is cancer until proved otherwise."
+      ],
+      "probes": [
+        {
+          "a": "Internal haemorrhoids lie above the Hilton line under mucous membrane and are painless, while external haemorrhoids lie below the line under skin and are painful when thrombosed.",
+          "accept": [
+            "hilton",
+            "mucous",
+            "skin",
+            "painless",
+            "painful"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "How does the Hilton line separate internal from external haemorrhoids?"
+        },
+        {
+          "a": "Cutting pain during and after defecation with a bright streak of blood on hard stool, usually from a posterior midline ulcer with sphincter spasm.",
+          "accept": [
+            "cutting",
+            "defecation",
+            "streak",
+            "posterior",
+            "spasm"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Give the textbook picture of an anal fissure in one sentence."
+        },
+        {
+          "a": "A granulation-lined track from a cryptoglandular abscess that burst or was drained, giving intermittent discharge with pain that eases when pus escapes, so the history must include the original abscess.",
+          "accept": [
+            "granulation",
+            "abscess",
+            "discharge",
+            "burst",
+            "drained"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why does the history of a fistula always reach back to an abscess?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "anorectal_disorders_hemorrhoids_and_fistula: pathophysiology and clinical pearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The anus and anal canal: benign and malignant disease",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "The anal cushions are normal vascular tissue that everyone has. When their supports degenerate they engorge and slide down, and that sliding tissue is an internal haemorrhoid. Because internal piles sit above the Hilton line they carry mucous membrane, not skin, and have no somatic pain fibres, so they bleed painlessly. External piles sit below the line under skin with full sensation, so they are silent until they thrombose, and then they hurt.",
+          "heading": "Piles are sliding cushions"
+        },
+        {
+          "body": "A fissure is a tear, not a swelling. Hard stool splits the anal lining, usually at the posterior midline, and the exposed sphincter goes into spasm that strangles the wound shut so it cannot heal. That is why the pain outlasts the stool by minutes or hours and why the streak of blood is small and bright: the lesion is tiny, distal, and exquisitely sensitive.",
+          "heading": "Fissure is a tear with spasm"
+        },
+        {
+          "body": "A fistula is an abscess with a memory. Infection starts in the anal glands between the sphincters, forms a perianal or ischiorectal abscess, and when the pus finds the skin it leaves a lined track behind. The external opening may close and reopen for months, each cycle repeating the same story: swelling and throbbing pain, then a gush of discharge, then relief. No other anal condition behaves in cycles like this.",
+          "heading": "Fistula is an abscess that left a track"
+        }
+      ],
+      "title": "What piles, fissure and fistula are",
+      "why": "Three diseases share one small piece of anatomy and one examination, yet each has a signature story: painless splash bleeding, cutting pain with a streak, or cyclical discharge. Naming which story you are hearing in the first minute decides every step that follows."
+    },
+    "skill.anorectal.signs": {
+      "body": "Read every anorectal finding through four questions: is it painful or painless, where does the blood sit against the stool, what comes out and does it go back, and where is the opening against the transverse anal line. Those four answers separate piles, fissure, fistula, abscess, prolapse and cancer.",
+      "id": "skill.anorectal.signs",
+      "keyPoints": [
+        "Pain first: uncomplicated piles are absolutely painless and become painful only with infection, strangulation or thrombosis; fissure gives sharp cutting pain starting with defecation and lingering after; abscess gives continuous throbbing pain; fistula gives intermittent pain relieved by discharge; rectal cancer is painless until it spreads beyond the wall.",
+        "Bleeding next: splash of bright blood in the pan during defecation for first degree piles; blood on the surface of stool from rectum or canal; blood mixed with faeces from higher bowel; blood separate from stool when a rectal growth bleeds between motions; blood only on paper from a fissure or external pile.",
+        "Prolapse next: internal piles show three primary cushions at 3, 7 and 11 o clock with radial folds between segments, while mucosal prolapse is one single segment and complete prolapse shows concentric rings of full thickness wall; ask whether it reduces by itself, needs a finger, or stays out.",
+        "Openings and tags: a posterior midline sentinel tag marks a chronic fissure; an external fistula opening is read against the transverse anal line, with posterior or distant anterior openings tracking back to the posterior midline and near anterior openings running straight and radial.",
+        "The finger last: note tone and spasm, induration of a chronic ulcer, the dimple of a fistula internal opening usually posterior midline between the sphincters, and always look at the glove for blood, pus or mucus before finishing."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "Pain, blood pattern, prolapse behaviour and opening position: the four questions that read the anus",
+      "pitfalls": [
+        "Pushing a finger into an obvious fissure before inspecting: the spasm makes it agonising and teaches nothing inspection had not already shown.",
+        "Calling prolapsed segmented cushions a complete prolapse, or missing that concentric rings mean full thickness wall needing a different operation.",
+        "Reading an anterior near opening as posterior-type and laying open a track without mapping it, risking the sphincter."
+      ],
+      "probes": [
+        {
+          "a": "Piles bleed painlessly as a splash in the pan, fissure gives cutting pain with a streak of blood on the stool, and fistula gives intermittent pus discharge with cyclical pain relieved by drainage.",
+          "accept": [
+            "splash",
+            "streak",
+            "discharge",
+            "cutting",
+            "painless"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Contrast the bleeding or discharge of piles, fissure and fistula in one line each."
+        },
+        {
+          "a": "Prolapsed piles show separate cushions with radial folds at 3, 7 and 11 o clock, mucosal prolapse is a single segment, and complete prolapse shows concentric rings of full thickness rectal wall.",
+          "accept": [
+            "radial",
+            "concentric",
+            "segments",
+            "rings",
+            "thickness"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "On inspection of a prolapse, how do piles, mucosal prolapse and complete prolapse differ?"
+        },
+        {
+          "a": "A posterior opening, or an anterior one more than one and a half inches from the anus, curves back to the posterior midline, while an anterior opening within one and a half inches runs straight and radial to its own site, so position predicts the internal opening before a probe is passed.",
+          "accept": [
+            "posterior midline",
+            "curved",
+            "straight",
+            "radial",
+            "half"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Apply Goodsall rule to an external opening behind the transverse anal line."
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "anorectal_disorders_hemorrhoids_and_fistula: clinical pearls on Goodsall rule",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The anus and anal canal: symptoms and signs",
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Start with pain because the Hilton line makes it decisive. Everything confined above the line is painless: uncomplicated piles, early rectal cancer. Everything at or below it hurts: fissure, thrombosed pile, abscess. Then refine by timing: fissure pain starts with the stool and lingers after, abscess pain throbs continuously beside the anus, fistula pain builds and breaks with discharge, and piles hurt only when complicated by infection or strangulation.",
+          "heading": "Pain first, then its timing"
+        },
+        {
+          "body": "Blood has four addresses. Splash in the pan during the act points to internal piles. A streak on the surface points to the rectum or canal, including fissure. Blood mixed into the stool comes from higher bowel. Blood that appears alone between motions, with mucus and an urge to strain, points to an ulcerating rectal growth. Blood only on paper is the smallest lesion of all: a fissure or an external pile.",
+          "heading": "Where the blood sits"
+        },
+        {
+          "body": "When something comes out, describe it like a specimen. Separate cushions with radial folds at the 3, 7 and 11 o clock stations are primary piles, with smaller secondary piles sometimes between them. One smooth single segment is mucosal prolapse. Concentric rings all the way round are full thickness complete prolapse. Then record behaviour: slips back alone, needs a finger, or stays out, with its length, since length separates partial from complete.",
+          "heading": "Read the prolapse like a specimen"
+        }
+      ],
+      "title": "Putting the anorectal picture together",
+      "why": "Inspection alone can diagnose a tag, a sentinel pile, a fistula opening, a thrombosed pile or a carcinoma, but only if you know which of the four questions each finding answers. This skill turns a crowded perianal picture into a short list with the cancer already flagged."
+    },
+    "skill.anorectal.summary": {
+      "body": "Name the patient with the bowel habit that matters, state each complaint with its pattern, give the examination in inspection to finger order, and close with the condition, its degree or type, and the negatives that exclude cancer.",
+      "id": "skill.anorectal.summary",
+      "keyPoints": [
+        "Open with age, sex, occupation and bowel habit, since constipation and straining are the soil of piles and fissure.",
+        "State bleeding by pattern, pain by timing against defecation, prolapse by reducibility, and discharge by its cycle, each in one clause.",
+        "Report inspection, then palpation, then digital and proctoscopic findings, with clock-face positions and Goodsall reading of any opening.",
+        "Close with the diagnostic line: the condition with its degree for piles, acute or chronic for fissure, low or high for fistula, plus the negatives, such as no weight loss, no altered habit and no mass, that keep cancer off the table.",
+        "A worked example: a 42 year old lorry driver with chronic constipation reports eight months of painless bright bleeding splashing the pan and a lump that appears on defecation and needs a finger to return. Inspection shows prolapsing cushions at 3, 7 and 11 o clock with radial folds, the finger finds no mass and the glove shows fresh blood only. This is internal haemorrhoids, third degree, with no red flags for malignancy."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "Bowel habit, pattern, examination in order, condition with degree, and the cancer negatives",
+      "pitfalls": [
+        "Summarising a prolapse without saying whether it reduces alone or needs a finger, leaving the grade unsaid.",
+        "Reporting digital findings before inspection findings, burying the diagnosis inspection had already made.",
+        "Closing without the cancer negatives, so the listener cannot tell whether malignancy was considered."
+      ],
+      "probes": [
+        {
+          "a": "The bowel habit, the bleeding pattern, pain timing, prolapse reducibility, inspection findings, digital findings, and the condition with its degree plus cancer negatives.",
+          "accept": [
+            "bowel habit",
+            "reducibility",
+            "inspection",
+            "degree",
+            "negatives"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "List the elements of a complete anorectal summary."
+        },
+        {
+          "a": "It names the degree, because first degree bleeds only, second reduces alone, third needs a finger, and fourth stays out, and each degree takes a different treatment.",
+          "accept": [
+            "degree",
+            "reduces",
+            "finger",
+            "treatment"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why must the closing line of a piles summary always carry the degree?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "habit",
+          "text": "States bowel habit and relevant background"
+        },
+        {
+          "id": "pattern",
+          "text": "Describes bleeding, pain, prolapse and discharge by pattern"
+        },
+        {
+          "id": "degree",
+          "text": "Closes with condition, degree or type, and cancer negatives"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "anorectal_disorders_hemorrhoids_and_fistula: clinical pearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Case presentation in rectal disease",
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "The first sentence carries the soil: age, sex, occupation and bowel habit. A middle aged driver with years of hard stools and straining frames everything that follows, while recent normal habit in an older adult with new bleeding frames a different disease. Never open with the bleeding alone.",
+          "heading": "Open with the soil"
+        },
+        {
+          "body": "Compress each complaint to its pattern in one clause. Painless splash bleeding for months. Cutting pain starting with stool and lingering an hour. A lump that needs a finger after every motion. Pus discharge that comes and goes with throbbing pain. Four clauses, and the listener already knows which of the three diseases leads before a single finding is mentioned.",
+          "heading": "One clause per complaint"
+        }
+      ],
+      "title": "The clinical summary",
+      "why": "A rectal summary is a treatment prescription in disguise: degree decides banding against excision, acute against chronic decides ointment against sphincterotomy, low against high decides lay-open against expert referral. The summary must therefore end with degree, chronicity or height, never with a bare disease name."
+    },
+    "skill.anorectal.differential": {
+      "body": "For bleeding, pain, discharge or a lump at the anus, work through piles, fissure, fistula, abscess, prolapse, inflammatory bowel disease and carcinoma, using pain, blood pattern and the glove to shorten the list, and never close it without naming cancer.",
+      "id": "skill.anorectal.differential",
+      "keyPoints": [
+        "Carcinoma of the rectum or anal canal: favoured by altered bowel habit, spurious morning diarrhoea with blood and mucus, sense of incomplete emptying, weight loss, anaemia, a palpable ulcer with indurated or everted edge, or blood and mucus on the withdrawn finger. The commonest fatal error in this chapter is treating malignant bleeding as piles.",
+        "Anal fissure against thrombosed piles: both hurt with bleeding, but fissure pain is cutting, starts with defecation and lingers, with a visible posterior midline ulcer and sentinel tag, while a thrombosed pile is a tense bluish tender lump at the verge with sudden onset.",
+        "Fistula-in-ano against pilonidal sinus and hidradenitis: fistula openings sit near the anus and track to the canal by Goodsall reading, while pilonidal sinuses sit in the midline natal cleft over the sacrum with hairs, and hidradenitis gives multiple comedones and scars across the region.",
+        "Perianal abscess against ischiorectal abscess: a perianal abscess is a small tender cystic lump at the verge felt between finger and thumb, while an ischiorectal abscess gives excruciating throbbing pain with brawny oedema and a tense tender swelling felt per rectum on one side.",
+        "Rectal prolapse against prolapsing piles against intussusception: piles show separate cushions with radial folds, mucosal prolapse one segment, complete prolapse concentric rings, and an intussusception apex admits a finger between the mass and the anal margin, which prolapse never does.",
+        "Crohn disease and ulcerative colitis: favoured by multiple, lateral or painless fissures, recurrent fistulae, skin tags and cavitating ulcers, especially with chronic diarrhoea, and perianal disease can precede intestinal symptoms by years.",
+        "Pruritus ani, condylomata, threadworms and senile stenosis sit at the edge of the list: itching with mucous discharge points back to piles, fistula or tags, and warty lesions need inspection for condylomata, not a finger first."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "What else bleeds, hurts, discharges or prolapses here, and the cancer that must always be excluded",
+      "pitfalls": [
+        "Reassuring a patient with painless bleeding and altered habit as piles without a digital examination and sigmoidoscopy.",
+        "Missing Crohn disease because a lateral fissure or a non healing track was assumed to be simple sepsis.",
+        "Confusing complete prolapse with prolapsed piles and planning banding for a full thickness wall."
+      ],
+      "probes": [
+        {
+          "a": "Carcinoma of the rectum or anal canal, anal fissure, fistula-in-ano, perianal abscess, rectal prolapse, Crohn disease, and thrombosed external piles.",
+          "accept": [
+            "carcinoma",
+            "fissure",
+            "fistula",
+            "abscess",
+            "prolapse",
+            "crohn"
+          ],
+          "level": 2,
+          "minMatch": 3,
+          "q": "Name five differentials for painless bright bleeding per rectum in a 60 year old."
+        },
+        {
+          "a": "Altered bowel habit, spurious morning diarrhoea, mucus with blood, weight loss, anaemia, a palpable indurated ulcer, and blood and mucus on the examining finger.",
+          "accept": [
+            "altered",
+            "diarrhoea",
+            "mucus",
+            "weight loss",
+            "indurated"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Which features move rectal bleeding from piles towards carcinoma?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Spans benign, infective, inflammatory and neoplastic causes"
+        },
+        {
+          "id": "cancer",
+          "text": "Explicitly excludes carcinoma with red flags"
+        },
+        {
+          "id": "mechanism",
+          "text": "Uses pain, blood pattern and examination to separate mimics"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "anorectal_disorders_hemorrhoids_and_fistula: additional differentials",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Bleeding per anum: painful and painless causes",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Keep two lists for bleeding: painful and painless. Painful bleeding holds fissure, fistula, anal canal cancer, ruptured haematoma and ruptured abscess. Painless bleeding holds piles, polyps, diverticular disease, inflammatory bowel disease and colorectal cancer. Sorting by pain first halves the list in seconds, and then blood pattern halves it again.",
+          "heading": "Two lists for bleeding"
+        },
+        {
+          "body": "Cancer hides in this chapter wearing piles as a disguise. Any bleeding with altered habit, mucus, tenesmus, weight loss or anaemia, any ulcer with a hard base or everted edge, and any blood on the withdrawn glove earns sigmoidoscopy with biopsy and imaging of the colon. About nine in ten rectal cancers can be felt by the finger, so omitting the finger is how the disguise survives.",
+          "heading": "Cancer wears piles as a disguise"
+        }
+      ],
+      "title": "Differential diagnosis",
+      "why": "Most perianal complaints are exactly what they look like, but the ones that are not are a cancer called piles, a Crohn track called simple sepsis, or a complete prolapse called piles. The differential exists to catch the three before a wrong small operation makes them worse."
+    },
+    "skill.ix.anorectal.workup": {
+      "body": "Group investigations by what they answer: see the lesion, exclude cancer above it, map a track, and grade the blood loss. The finger and the proctoscope come first in every patient; everything else is chosen by what they suggest.",
+      "id": "skill.ix.anorectal.workup",
+      "keyPoints": [
+        "SEE THE LESION: digital rectal examination then proctoscopy in every case. The scope shows internal piles bulging at 3, 7 and 11 o clock on withdrawal, and lets the surgeon take a biopsy from a growth or ulcer and a smear from an ulcer for bacteriology.",
+        "EXCLUDE CANCER ABOVE: rigid sigmoidoscopy, which reaches well into the sigmoid, with biopsy of anything seen, supported by double contrast barium enema or colonoscopy where the origin of bleeding is doubtful, habit has altered, or polyps suggest more disease higher up. Internal piles never excuse skipping this step.",
+        "MAP THE TRACK: examination under anaesthesia with a fistula probe, with peroxide outlining the track, for high, recurrent or complex fistulae; pelvic MRI for complex, recurrent or high tracks to show the internal opening and its relation to the sphincters before an expert lays anything open.",
+        "GRADE THE LOSS: full blood count for anaemia from chronic splash bleeding, and stool testing where occult loss is suspected. Chronic piles anaemia is common and correctable, but it is a result, not a diagnosis, until the source is seen.",
+        "SUPPORTING FILMS: straight abdominal film where an annular growth threatens obstruction, chest film once rectal cancer is established to look for spread, and CT or ultrasound only for rectal cancers to judge nodal spread and neighbouring invasion, plus liver palpation for secondaries.",
+        "TRACK SCRAPINGS: pus or granulation scrapings from a fistula for bacteriology, with tuberculosis and Crohn disease testing where tracks are multiple or recurrent, since a missed keeper guarantees recurrence."
+      ],
+      "kind": "investigation",
+      "media": [],
+      "oneLine": "Scope every lesion, exclude cancer above it, map complex tracks, and grade the anaemia",
+      "pitfalls": [
+        "Diagnosing internal piles on history and omitting sigmoidoscopy, letting a higher carcinoma bleed on under the label of piles.",
+        "Ordering a colonoscopy before the finger and the proctoscope, which answer most questions at the bedside.",
+        "Laying open a high or recurrent fistula without MRI or examination under anaesthesia, and dividing sphincter nobody mapped."
+      ],
+      "probes": [
+        {
+          "a": "Digital rectal examination followed by proctoscopy, which shows internal piles bulging at 3, 7 and 11 o clock on withdrawal and allows biopsy of a growth or ulcer.",
+          "accept": [
+            "proctoscopy",
+            "piles",
+            "bulging",
+            "biopsy"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What two bedside steps confirm internal piles, and what does the scope show?"
+        },
+        {
+          "a": "Sigmoidoscopy with biopsy, supported by double contrast barium enema or colonoscopy, because internal piles and a higher carcinoma can bleed together and piles never exclude cancer.",
+          "accept": [
+            "sigmoidoscopy",
+            "biopsy",
+            "barium",
+            "colonoscopy"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "A patient has definite internal piles but also altered bowel habit. What next, and why?"
+        },
+        {
+          "a": "Pelvic MRI to show the internal opening and the track against the sphincters, with examination under anaesthesia using a probe and peroxide to outline it, so a high track is never laid open blind.",
+          "accept": [
+            "mri",
+            "anaesthesia",
+            "probe",
+            "sphincters"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "How do you map a recurrent high fistula before surgery?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "anorectal_disorders_hemorrhoids_and_fistula: additional investigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Special investigations in a rectal case",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "The finger reaches about ten centimetres and rules the distal bowel: tone, spasm, induration, the dimple of a fistula opening, a polyp slipping like a grape, a malignant ulcer with a hard base. The proctoscope then sees what the finger cannot feel: uncomplicated piles, mucosal colour, a bleeding point, the inner opening of a fistula. Together they are the whole diagnosis in most patients, and both are done before any larger instrument is booked.",
+          "heading": "Finger then scope, always"
+        },
+        {
+          "body": "A scope that stops at the rectum can miss the disease that matters. Where bleeding origin is doubtful, habit has changed, or a polyp hints at more above, the colon must be imaged: double contrast enema or colonoscopy, with biopsy of anything seen. Chest and abdominal films and CT belong to established cancer for spread and obstruction, not to benign bleeding. MRI and examination under anaesthesia belong to complex fistulae for mapping, not to simple ones.",
+          "heading": "Look above when the story points up"
+        }
+      ],
+      "title": "Investigating the rectal case",
+      "why": "Two bedside steps diagnose most anorectal disease, and two omissions cause most harm: skipping sigmoidoscopy in a piles patient with altered habit, and cutting a high fistula nobody mapped. Investigations here are chosen by suspicion, not by routine."
+    },
+    "skill.anorectal.diagnosis": {
+      "body": "A complete anorectal diagnosis names the condition, its degree or type, its site, and the excluded cancer. Piles take a degree, fissure takes acute or chronic, fistula takes low or high, and every statement carries its negatives.",
+      "id": "skill.anorectal.diagnosis",
+      "keyPoints": [
+        "Internal piles are graded by behaviour: first degree bleeds without prolapse, second prolapses with stool and reduces by itself, third needs a finger to return, fourth stays permanently out; add the clock-face stations seen.",
+        "Fissure is acute or chronic: acute is a fresh tear with oedema and spasm that often heals, chronic is an undermined ulcer reaching the pectinate line with a hypertrophied papilla above and a sentinel tag below, with exposed sphincter fibres and induration.",
+        "Fistula is low or high against the anorectal sling: low opens below the sling and can be laid open safely, high opens above it and needs expert hands; add the Goodsall reading and whether there are multiple or recurrent tracks.",
+        "Abscess is named by space: perianal, ischiorectal, pelvirectal, submucous or fissure abscess, with the side and the presence of fever and brawny change.",
+        "Prolapse is partial or complete: mucosal only against full thickness wall, with length, reducibility and the radial against concentric reading.",
+        "Every statement ends with its negatives: no altered habit, no weight loss, no mass felt, glove without mucus, sigmoidoscopy clear to its limit, because the diagnosis is only finished when cancer is excluded. Atypical fissures that are multiple, lateral or painless, and any recurrent track, are not closed until tuberculosis, Crohn disease and ulcerative colitis are excluded."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "Condition with degree, type and site, closed by the cancer negatives",
+      "pitfalls": [
+        "Writing internal haemorrhoids without a degree, which prescribes nothing since treatment follows grade.",
+        "Calling a chronic fissure acute and persisting with ointments when a sentinel tag already declares chronicity.",
+        "Closing a recurrent fistula as simple sepsis without excluding tuberculosis and inflammatory bowel disease."
+      ],
+      "probes": [
+        {
+          "a": "First degree bleeds without prolapse, second prolapses and reduces by itself, third needs manual reduction with a finger, and fourth stays permanently prolapsed outside.",
+          "accept": [
+            "bleeds",
+            "reduces",
+            "manual",
+            "permanently"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Grade internal haemorrhoids by behaviour."
+        },
+        {
+          "a": "Chronic fissure is an undermined ulcer reaching the pectinate line with induration, exposed sphincter fibres, a hypertrophied papilla above and a sentinel tag below, with persistent spasm.",
+          "accept": [
+            "undermined",
+            "pectinate",
+            "papilla",
+            "sentinel",
+            "spasm"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What marks a fissure as chronic on examination?"
+        },
+        {
+          "a": "Low opens below the anorectal sling and can be laid open without fear of incontinence, while high opens above the sling and needs expert hands with mapping, so height decides safety.",
+          "accept": [
+            "sling",
+            "below",
+            "above",
+            "incontinence",
+            "mapping"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why does low against high decide the fate of a fistula?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "grade",
+          "text": "States degree, chronicity or height, not a bare name"
+        },
+        {
+          "id": "site",
+          "text": "Localises by clock face, midline or Goodsall reading"
+        },
+        {
+          "id": "exclusion",
+          "text": "Closes with cancer and inflammatory bowel negatives"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "anorectal_disorders_hemorrhoids_and_fistula: clinical pearls on grading and Goodsall rule",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Differential diagnosis of a rectal case",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Read the pattern across the three diseases and one habit appears: the diagnosis is a name plus a modifier. Piles without a degree, fissure without acute or chronic, fistula without low or high, prolapse without partial or complete, and abscess without its space all fail the same way, by naming the family but not the member, and the member is what the operation treats.",
+          "heading": "Name plus modifier"
+        },
+        {
+          "table": {
+            "cols": [
+              "Condition",
+              "Modifier",
+              "Deciding finding",
+              "Treatment it selects"
+            ],
+            "rows": [
+              [
+                "Internal piles",
+                "Degree one to four",
+                "Bleed only, self reducing, finger reduced, permanent",
+                "Habit care and office care, or excision"
+              ],
+              [
+                "Fissure",
+                "Acute or chronic",
+                "Fresh tear, or ulcer with papilla and sentinel tag",
+                "Softening and relaxing care, or sphincterotomy"
+              ],
+              [
+                "Fistula",
+                "Low or high",
+                "Internal opening below or above the sling",
+                "Lay open, or mapped expert care"
+              ],
+              [
+                "Abscess",
+                "Space involved",
+                "Verge lump, side wall swelling, or deep pelvic signs",
+                "Urgent drainage of that space"
+              ]
+            ]
+          },
+          "heading": "One table for the whole chapter"
+        }
+      ],
+      "title": "Diagnosis: degree, type and site",
+      "why": "A bare disease name prescribes nothing in this chapter: degree decides banding against excision, chronicity decides ointment against sphincterotomy, and height decides lay-open against expert referral. The diagnostic statement is therefore a name plus its modifier, closed by the negatives that exclude cancer."
+    },
+    "skill.tx.anorectal": {
+      "body": "Treat the grade and the ground together: soften the stool and correct the habit in every patient, add office care for early piles, excision for advanced ones, sphincter care then sphincterotomy for fissure, urgent drainage for abscess, and mapped surgery for fistula, with cancer exclusion running underneath all of it.",
+      "dosingNote": "This module teaches management at the level of drug class and operative principle. Specific agents, doses, routes and durations must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "id": "skill.tx.anorectal",
+      "keyPoints": [
+        "Every piles and fissure patient gets habit care first: high fibre diet with isabgol or other bulk agents where stools stay hard, generous fluids, no prolonged sitting on the pan, no straining, and warm sitz baths for pain and hygiene. This alone heals many acute fissures and keeps early piles quiet.",
+        "Early internal piles, first and second degree, are managed without excision: habit care with office procedures that fix the cushion in place, such as banding or injection care, chosen by grade and local availability, with anaemia corrected alongside.",
+        "Advanced piles, third and fourth degree, and strangulated or gangrenous prolapse need surgical excision, with a thrombosed external pile excavated early under local care; injudicious skin removal strictures the canal, so wide excision is a last resort done by experienced hands.",
+        "Acute fissure is treated by softening and relaxing: stool softeners, fibre, sitz baths and topical sphincter relaxing agents while the tear heals. Chronic fissure with papilla and sentinel tag that refuses to heal needs lateral internal sphincterotomy, which lowers resting sphincter pressure so the ulcer can close.",
+        "Anorectal abscess is drained urgently by incision: never wait for fluctuation in an ischiorectal abscess, support with analgesia and glycaemic control, send pus for culture where tracks recur, and look for the fistula that follows once healing completes.",
+        "Fistula follows its height: a low track below the sling is laid open to heal from its base, while a high, recurrent or complex track is mapped by MRI and examination under anaesthesia and managed by expert sphincter preserving care such as a seton, never by blind lay-open.",
+        "Referral runs through the whole pathway: altered habit with bleeding, weight loss, a palpable mass, or anaemia in an older adult goes urgently to surgical outpatients for sigmoidoscopy and colon imaging; recurrent or multiple tracks go for tuberculosis and inflammatory bowel workup; and definitive piles, fissure and fistula operations are day care or short stay procedures available at government surgical units under applicable public insurance.",
+        "Atypical fissures that are multiple, lateral or painless, and any growth or ulcer with induration, are biopsied rather than treated as benign, and proximal disease is excluded by sigmoidoscopy with colon imaging before any anal operation is called complete."
+      ],
+      "kind": "treatment",
+      "media": [],
+      "oneLine": "Habit care for all, grade matched procedures, urgent drainage, mapped fistula surgery",
+      "pitfalls": [
+        "Prescribing ointments for months to a chronic fissure with a sentinel tag that already declares the need for sphincterotomy.",
+        "Waiting for fluctuation in a throbbing ischiorectal abscess while pus spreads across to the other side.",
+        "Laying open a high fistula without mapping and trading a curable track for permanent incontinence.",
+        "Excising piles without excluding a higher cancer, or banding a complete prolapse that is full thickness wall."
+      ],
+      "probes": [
+        {
+          "a": "High fibre diet with bulk agents and fluids, no straining or prolonged sitting, warm sitz baths, stool softeners, and anaemia correction, because habit is the soil of piles and fissure.",
+          "accept": [
+            "fibre",
+            "bulk",
+            "straining",
+            "sitz",
+            "anaemia"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What habit care does every piles and fissure patient receive?"
+        },
+        {
+          "a": "Incision and drainage without waiting for fluctuation, with analgesia and pus culture where tracks recur, because an ischiorectal abscess spreads while you wait.",
+          "accept": [
+            "drainage",
+            "fluctuation",
+            "incision",
+            "abscess"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "A patient has throbbing perianal pain with brawny oedema but no fluctuation. What now?"
+        },
+        {
+          "a": "A low track below the sling is laid open to heal from its base, while a high track is mapped by MRI and examination under anaesthesia and managed by expert sphincter preserving care.",
+          "accept": [
+            "laid open",
+            "high",
+            "mapped",
+            "sphincter",
+            "seton"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Contrast the operative plan for a low and a high fistula."
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "anorectal_disorders_hemorrhoids_and_fistula: clinical pearls on grading, sphincterotomy and drainage",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The anus and anal canal: treatment of haemorrhoids, fissure and fistula",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Habit care is treatment, not advice. Soft bulky stool that passes without straining removes the congestion behind piles and the trauma behind fissure. Isabgol husk with water, vegetables and fluids, a toilet routine without sitting and scrolling, and warm sitz baths twice daily form the base of every prescription in this chapter, and the patient who will not change habit will return after any operation with the same disease.",
+          "heading": "Habit care is treatment"
+        },
+        {
+          "body": "Match the procedure to the grade. Early piles stay inside or return alone, so fixing care through the scope suffices. Piles that need a finger or stay out have lost their supports and need excision. A fresh fissure tear heals once stool softens and spasm eases.\n\nA chronic ulcer with papilla and tag has declared that softening failed, and only lowering sphincter pressure by sphincterotomy lets it close. Abscess always means the knife now, and fistula means the knife mapped: lay open what is low, preserve sphincter in what is high.",
+          "heading": "Grade decides the knife"
+        }
+      ],
+      "title": "Managing piles, fissure, abscess and fistula",
+      "why": "Operations fail here for two reasons: wrong grade, or a cancer nobody excluded. Habit care plus grade matched procedures cure the benign disease, while urgent drainage saves the abscess and mapping saves the sphincter in fistula, and none of it starts until malignancy and inflammatory bowel disease are off the table."
+    }
+  },
+  "cases": [
+    {
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "id": "case.anorectal.ravi",
+      "initialVitals": {
+        "bpDiastolic": 80,
+        "bpSystolic": 124,
+        "gcs": 15,
+        "hr": 82,
+        "rr": 16,
+        "spo2": 99,
+        "temp": 36.8
+      },
+      "opening": "Ravi Shankar, 42, a lorry driver, has come to the surgical outpatient clinic with his wife. He looks well but embarrassed, and says he has been passing blood with his stools for many months. Introduce yourself and take a history.",
+      "patient": {
+        "age": 42,
+        "name": "Ravi Shankar",
+        "occupation": "Long distance lorry driver",
+        "residence": "Peri urban, lives with wife and two children",
+        "sex": "male"
+      },
+      "title": "A driver with eight months of painless bleeding and a lump that needs a finger",
+      "history": {
+        "anal_pain": {
+          "cues": [
+            "pain when you pass stool",
+            "is passing stool painful",
+            "painful",
+            "does it hurt",
+            "burning"
+          ],
+          "reply": "No pain at all, doctor. The bleeding comes and the lump comes, but nothing hurts, not even while passing stool.",
+          "key": true
+        },
+        "bleeding_detail": {
+          "cues": [
+            "describe the bleeding",
+            "what does the blood look like",
+            "blood in the pan",
+            "splash of blood",
+            "how much blood",
+            "colour of the blood"
+          ],
+          "reply": "Bright red blood, quite a lot, it splashes into the pan while I am passing stool. The stool itself looks normal, the blood sits on top and around it, never mixed inside.",
+          "key": true
+        },
+        "bowel_disease_history": {
+          "cues": [
+            "loose motions",
+            "dysentery",
+            "diarrhoea",
+            "inflammatory bowel",
+            "ulcerative colitis",
+            "crohn",
+            "tuberculosis",
+            "tb treatment"
+          ],
+          "reply": "No long loose motion illness, no TB, no treatment for TB. My bowels were always constipated type, not loose.",
+          "key": true
+        },
+        "bowel_habit": {
+          "cues": [
+            "bowel habit",
+            "how often do you pass stool",
+            "regular motions",
+            "change in habit",
+            "morning diarrhoea",
+            "incomplete emptying",
+            "tenesmus"
+          ],
+          "reply": "Once a day, always hard. No change in the habit, no loose motions in the morning, no feeling that something is left behind. Only the blood and the lump are new.",
+          "key": true
+        },
+        "comorbidity_urinary": {
+          "cues": [
+            "diabetes",
+            "blood pressure",
+            "urinary difficulty",
+            "thin stream",
+            "prostate",
+            "other illness",
+            "past surgery"
+          ],
+          "reply": "No sugar, no pressure problems. I pass urine normally, no difficulty, no thin stream. I had no operation before.",
+          "key": true
+        },
+        "constipation_strain": {
+          "cues": [
+            "constipation",
+            "stools are very hard",
+            "straining",
+            "sit a long time",
+            "strain to pass"
+          ],
+          "reply": "Yes, very hard stools since many years. I sit a long time and strain hard every morning. On driving days I sometimes skip going altogether.",
+          "key": true
+        },
+        "diet_fibre_water": {
+          "cues": [
+            "what do you eat",
+            "vegetables",
+            "fibre diet",
+            "water intake",
+            "food habits"
+          ],
+          "reply": "Mostly rice and roadside food on trips, very little vegetable. I drink little water while driving to avoid stopping. My wife gives isabgol sometimes but I forget to take it.",
+          "key": true
+        },
+        "discharge_soiling": {
+          "cues": [
+            "pus discharge",
+            "mucus",
+            "soiling of clothes",
+            "staining underclothes",
+            "leakage"
+          ],
+          "reply": "No pus, no white discharge. Only blood on the days it bleeds. My underclothes get stained with blood sometimes, never with pus or mucus.",
+          "key": true
+        },
+        "family_bowel_history": {
+          "cues": [
+            "family history",
+            "anyone in family",
+            "father mother piles",
+            "bowel cancer in family",
+            "polyps"
+          ],
+          "reply": "My father also had piles and bleeding, he was operated many years ago. No cancer in the family that I know of.",
+          "key": true
+        },
+        "itching_hygiene": {
+          "cues": [
+            "itching",
+            "pruritus",
+            "irritation around anus",
+            "discomfort"
+          ],
+          "reply": "Some itching after the motion when the lump stays out, but it settles once I push it back and wash."
+        },
+        "medications_laxatives": {
+          "cues": [
+            "medicines",
+            "tablets you take",
+            "laxatives",
+            "purgatives",
+            "ointments",
+            "creams"
+          ],
+          "reply": "No regular tablets. I took a purgative syrup twice when the constipation was very bad. No ointments or creams.",
+          "key": true
+        },
+        "occupation_posture": {
+          "cues": [
+            "your work",
+            "driving hours",
+            "sitting long",
+            "lifting weights"
+          ],
+          "reply": "I drive ten to twelve hours a day, sitting all the time, with food at odd hours. No heavy lifting."
+        },
+        "onset_course": {
+          "cues": [
+            "when did it start",
+            "how long",
+            "since when",
+            "sudden or slow",
+            "getting worse"
+          ],
+          "reply": "About eight months ago the bleeding started, small at first. The lump started coming out about five months ago, and now it comes every time and stays out unless I push it back. It is slowly getting worse.",
+          "key": true
+        },
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "tell me about your complaint",
+            "how can I help you",
+            "what is troubling you"
+          ],
+          "reply": "Doctor, for eight months blood comes when I pass stool, and for five months a lump comes out of the back passage every time. I have to push it back with my finger.",
+          "key": true
+        },
+        "prior_abscess_drainage": {
+          "cues": [
+            "swelling beside anus",
+            "abscess",
+            "burst open",
+            "drainage of pus",
+            "operation for fistula",
+            "painful boil"
+          ],
+          "reply": "No, never any boil or swelling there, never any pus, never any cut or drainage.",
+          "key": true
+        },
+        "prolapse_lump": {
+          "cues": [
+            "lump coming out",
+            "something coming out",
+            "prolapse",
+            "does it go back",
+            "push it back",
+            "reduce it"
+          ],
+          "reply": "Yes, soft lumps come out while passing stool. They do not go back on their own, I push them in with my finger, and then they stay in till the next morning.",
+          "key": true
+        },
+        "weight_appetite_loss": {
+          "cues": [
+            "weight loss",
+            "losing weight",
+            "appetite",
+            "tiredness",
+            "weakness",
+            "pale"
+          ],
+          "reply": "My appetite is normal and my weight is the same. But I do feel tired in the evenings these last two months, and my wife says I look pale.",
+          "key": true
+        }
+      },
+      "exam": {
+        "skill.exam.surg.dre_surgical": {
+          "abnormal": false,
+          "finding": "Sphincter tone normal, no spasm. No indurated ulcer, no dimple, no polyp and no mass felt in the canal or lower rectum. Mucosa smooth. Glove stained with a streak of fresh blood, no mucus and no pus."
+        },
+        "skill.exam.surg.perianal_inspection": {
+          "abnormal": true,
+          "finding": "On straining, three soft mucosal covered cushions prolapse at 3, 7 and 11 o clock with radial folds between them and a small skin tag posteriorly. No sentinel ulcer, no external opening, no bluish thrombosed lump, no concentric rings. They do not reduce spontaneously."
+        },
+        "skill.exam.surg.proctoscopy": {
+          "abnormal": true,
+          "finding": "Proctoscope passed without mass in the lumen. On slow withdrawal with straining, engorged violaceous cushions bulge into the lumen at 3, 7 and 11 o clock with fresh oozing from one cushion. No ulcer, no growth, no inner opening seen."
+        },
+        "skill.exam.surg.regional_nodes": {
+          "abnormal": false,
+          "finding": "Both groins: no palpable inguinal nodes."
+        },
+        "skill.gen.appearance": {
+          "abnormal": true,
+          "finding": "Middle aged man, looks well nourished but pale, with pale conjunctivae. No fever, no distress, lying comfortably."
+        },
+        "skill.gen.surg.survey": {
+          "abnormal": true,
+          "finding": "Pallor of conjunctivae and nail beds with no wasting, no jaundice and no pedal oedema. Abdomen soft with no palpable lump and no liver enlargement."
+        },
+        "skill.gen.vitals": {
+          "abnormal": false,
+          "finding": "Pulse 82 regular, blood pressure 124/80, respiratory rate 16, afebrile, saturation 99 percent on room air."
+        }
+      },
+      "essentialInvestigations": [
+        "fbc",
+        "proctoscopy_record",
+        "sigmoidoscopy"
+      ],
+      "investigations": {
+        "barium_enema": {
+          "indicated": false,
+          "label": "Double contrast barium enema",
+          "note": "Not indicated as a first step: bleeding pattern is classic, habit unchanged, sigmoidoscopy clear to its limit with no polyps. Reserved for doubtful origin or suspected synchronous disease higher up.",
+          "result": "Not done."
+        },
+        "colonoscopy": {
+          "indicated": false,
+          "label": "Colonoscopy",
+          "note": "Not indicated now for the same reason: no altered habit, no weight loss, no mass and a clear sigmoidoscopy. It stays on the list if bleeding persists after definitive piles care or anaemia fails to correct.",
+          "result": "Not done."
+        },
+        "fbc": {
+          "indicated": true,
+          "label": "Full blood count",
+          "note": "Chronic splash bleeding for eight months has made him anaemic, which explains the evening tiredness and pallor; correcting it runs alongside definitive piles care.",
+          "result": "Haemoglobin 10 g per dL with microcytic indices. Platelets and leucocytes normal."
+        },
+        "mri_pelvis": {
+          "indicated": false,
+          "label": "Pelvic MRI",
+          "note": "Not indicated: no track, no recurrent sepsis and no high fistula features. MRI belongs to complex or recurrent fistulae, ordered here it would only add cost.",
+          "result": "Not done."
+        },
+        "proctoscopy_record": {
+          "indicated": true,
+          "label": "Proctoscopy record",
+          "note": "The bedside scope already answered the question: primary piles at all three stations with oozing, and no ulcer or growth to explain the bleeding another way.",
+          "result": "Engorged cushions at 3, 7 and 11 o clock with fresh oozing, documented with positions for grade matched planning."
+        },
+        "sigmoidoscopy": {
+          "indicated": true,
+          "label": "Rigid sigmoidoscopy with biopsy standby",
+          "note": "Mandatory even with classic piles: it excludes a higher growth or polyp sharing the bleeding, and a clear study to its limit closes the cancer question this presentation must always close.",
+          "result": "Scope passed to its full length. Mucosa healthy throughout with no growth, ulcer or polyp. No biopsy needed."
+        }
+      },
+      "differentialModel": {
+        "accept": [
+          "haemorrhoids",
+          "anal fissure",
+          "anorectal fistula",
+          "perianal abscess",
+          "rectal prolapse",
+          "anal carcinoma",
+          "colorectal carcinoma",
+          "crohn disease"
+        ],
+        "answer": "Internal haemorrhoids, third degree. Consider anal fissure, fistula-in-ano, perianal abscess, rectal prolapse, anal carcinoma, colorectal carcinoma and Crohn disease.",
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "accept": [
+          "haemorrhoids",
+          "internal haemorrhoids",
+          "piles"
+        ],
+        "answer": "Internal haemorrhoids, third degree, with chronic blood loss anaemia."
+      },
+      "managementModel": {
+        "accept": [
+          "fibre",
+          "isabgol",
+          "sitz",
+          "anaemia",
+          "banding",
+          "excision",
+          "sigmoidoscopy",
+          "referral"
+        ],
+        "answer": "High fibre diet with isabgol and fluids, no straining, sitz baths, correct the anaemia, confirm exclusion of higher disease by sigmoidoscopy, and arrange grade matched definitive care with surgical referral, banding or excision for third degree disease.",
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "Painless splash bleeding with a lump that needs a finger is third degree piles until proved otherwise, and the radial folds between separate cushions are what separate it from complete prolapse.",
+        "Pallor with evening tiredness after months of bleeding is chronic blood loss anaemia, a result that must be corrected but never a diagnosis that replaces scoping.",
+        "A normal finger never excludes cancer above its reach, which is why sigmoidoscopy is mandatory even when piles look classic and the glove shows blood only.",
+        "No mass, no mucus on the glove, unchanged habit and steady weight are the negatives that close the cancer question here, and each one had to be asked, not assumed.",
+        "His driving hours, low fibre food and straining are the soil of the disease, so habit care with isabgol and fluids is treatment, not advice, and without it any procedure will fail.",
+        "No abscess history and no discharge keep fistula off the table, while no cutting pain keeps fissure off it: negatives do as much work as findings in this chapter."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

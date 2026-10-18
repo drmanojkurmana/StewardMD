@@ -1,0 +1,948 @@
+{
+  "_comment": "Surgery pathway: inguinal hernia (examination and repair). Same architecture as pneumonia and thyroid swelling: shared core and surgery skills carry the method, this file adds hernia-specific reasoning and overlays. History and presentation skills live in the shared fragment shared-inguinal-hernia.json.",
+  "id": "inguinal-hernia",
+  "name": "Inguinal hernia",
+  "fullName": "Inguinal hernia: examination and repair",
+  "system": "surgery",
+  "kbRef": "inguinal_hernia",
+  "oneLine": "A groin swelling with an expansile cough impulse, and the decision of who needs an operation tonight and who can wait for a planned repair",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What a hernia is, and the three exits a groin hernia can take",
+      "skills": [
+        "skill.reasoning.inguinal.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age, sex and work set the prior probability before the groin is examined",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In a groin swelling, age and sex point at the type before a finger is laid on. Indirect hernias favour the young and reach the scrotum; direct hernias favour older men with weak walls; femoral hernias favour older women and strangulate early. Heavy manual work and chronic straining complete the picture."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Tempo in years, the dragging ache, and what lying down does to the lump",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.surg.lump",
+        "skill.hx.surg.groin_hernia"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A hernia history reads in months to years, not days: a groin lump noticed long ago, growing slowly, with a dragging ache that worsens through the day. Sudden severe pain in a previously quiet lump breaks that tempo and means complication until proved otherwise."
+        },
+        "skill.hx.surg.lump": {
+          "expect": "Run the set questions for every inguinoscrotal swelling: how it started and on what strain, where it appeared first and where it travelled, its size when first seen, and whether it disappears on lying down. A lump that reached the scrotum at first sight grew into a preformed sac; one that started small and grew is acquired."
+        },
+        "skill.hx.surg.groin_hernia": {
+          "expect": "Expect a swelling that comes on standing, coughing or lifting and goes on lying flat, with an aching drag rather than sharp pain. Ask about colic, vomiting, distension and absolute constipation for obstruction, and about bladder symptoms that change with the lump for a cystocele."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The pressure factors that must be treated or the repair fails",
+      "skills": [
+        "skill.hx.inguinal.risk"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Usually a well patient; when he is not, the hernia has complicated",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "The uncomplicated hernia patient looks well and walks in. A distressed, dehydrated patient with sunken eyes and a rigid abdomen has moved into obstruction or strangulation, and the groin is no longer the only examination that matters."
+        },
+        "skill.gen.vitals": {
+          "expect": "Vitals are usually normal in an uncomplicated hernia, which is itself informative. Fever with tachycardia over a tense tender groin lump suggests strangulation with ischaemic bowel, while hypotension with distension suggests late obstruction: both change the urgency from routine list to tonight."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Groin and scrotal examination",
+      "blurb": "Standing first, then the ring tests after reduction",
+      "skills": [
+        "skill.exam.surg.hernia_inspection",
+        "skill.exam.surg.hernia_palpation",
+        "skill.exam.surg.deep_ring_occlusion",
+        "skill.exam.surg.invagination_three_finger",
+        "skill.exam.surg.scrotal_palpation",
+        "skill.exam.surg.transillumination_scrotum",
+        "skill.exam.surg.regional_nodes"
+      ],
+      "emphasis": {
+        "skill.exam.surg.hernia_inspection": {
+          "expect": "Examine standing first with the groins exposed from umbilicus to mid thigh. An indirect hernia looks pyriform with a stalk at the external ring and runs to the scrotum; a direct hernia looks spherical and barely enters it. Reddened skin over the swelling means strangulation, and a large scrotal hernia pushes the penis aside."
+        },
+        "skill.exam.surg.hernia_palpation": {
+          "expect": "Try to get above the swelling: impossible in inguinal hernia, possible in a pure scrotal lump. An enterocele feels elastic, is resonant and reduces with a gurgle; an omentocele feels doughy and granular, is dull and reduces without one. Tense tenderness with no impulse is strangulation, not a difficult reduction."
+        },
+        "skill.exam.surg.deep_ring_occlusion": {
+          "expect": "Reduce the hernia first, press the thumb over the deep ring half an inch above the mid inguinal point, and ask the standing patient to cough. Silence under the thumb with no bulge is indirect and controlled; a bulge medial to the thumb is direct and unconcerned by the occlusion."
+        },
+        "skill.exam.surg.invagination_three_finger": {
+          "expect": "After reduction, invaginate scrotal skin to the superficial ring and ask the patient to cough. An impulse on the tip of the finger travelling up, back and out is indirect; an impulse on the pulp striking straight back is direct. Zieman adds the third finger on the saphenous opening for the femoral orifice."
+        },
+        "skill.exam.surg.scrotal_palpation": {
+          "expect": "In every inguinoscrotal swelling feel the testis apart from the hernia. A testis felt separate below the lump keeps hydrocele and tumour in mind; a testis impalpable within it fits a complete hernia or a large hydrocele, and an empty scrotum with a groin lump raises undescended or ectopic testis."
+        },
+        "skill.exam.surg.transillumination_scrotum": {
+          "expect": "A hydrocele transilluminates brightly and a hernia does not, because bowel and omentum are opaque. Use the test to separate a tense complete hernia from a vaginal hydrocele when the scrotum is too full to feel through."
+        },
+        "skill.exam.surg.regional_nodes": {
+          "expect": "Feel the groin nodes in every groin lump before calling it a hernia. Firm nodes with a foot or leg sore, an anal or genital lesion, or no obvious primary shift the diagnosis to lymphadenopathy, and an irreducible femoral lump with no cause found is settled in the theatre, not the ward."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the hernia picture together",
+      "blurb": "Two classical signs, and everything else sorting contents and type",
+      "skills": [
+        "skill.reasoning.inguinal.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Side, extent, contents and complications in three sentences",
+      "skills": [
+        "skill.present.inguinal.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Femoral first, then everything else that swells in the groin and scrotum",
+      "skills": [
+        "skill.reasoning.inguinal.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "The examination is the test; scans answer the uncertain and the complicated",
+      "skills": [
+        "skill.investigation.inguinal.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and triage",
+      "blurb": "Name it completely, then decide tonight or routine list",
+      "skills": [
+        "skill.reasoning.inguinal.diagnosis",
+        "skill.annex.surg.nyhus_hernia"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Planned mesh repair for most, urgent operation for the strangulated few",
+      "skills": [
+        "skill.treatment.inguinal.management"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.inguinal.exam",
+        "title": "Examine the groin swelling",
+        "task": "This 48 year old farm labourer has had a right groin swelling for two years that descends into the scrotum. Examine his groin and scrotum and present your findings.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.surg.hernia_inspection",
+          "skill.exam.surg.hernia_palpation",
+          "skill.exam.surg.deep_ring_occlusion",
+          "skill.exam.surg.invagination_three_finger",
+          "skill.exam.surg.scrotal_palpation",
+          "skill.exam.surg.regional_nodes"
+        ],
+        "examinerQuestions": [
+          "You cannot get above the swelling and it reduces with a gurgle. What does each finding prove?",
+          "After reduction you occlude the deep ring and ask him to cough, and a bulge appears medial to your thumb. Indirect or direct, and why?",
+          "The lump is tense, tender and irreducible with no cough impulse. How does your plan change?"
+        ]
+      },
+      {
+        "id": "osce.inguinal.history",
+        "title": "Take a hernia history and triage",
+        "task": "This 60 year old man has a groin swelling and worries it may need an operation. Take a focused history in six minutes and be ready to state whether this can wait for a routine list.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.surg.lump",
+          "skill.hx.surg.groin_hernia",
+          "skill.hx.inguinal.risk"
+        ],
+        "examinerQuestions": [
+          "Which four chronic strains must you ask after before booking elective repair, and why does each threaten the repair?",
+          "He reports colicky pain, vomiting and absolute constipation with a now irreducible lump. What has happened and what do you do?",
+          "His swelling enlarges before micturition and shrinks after it, and pressure on it makes him want to pass urine. What does the sac contain?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.reasoning.inguinal.basics",
+      "skill.hx.surg.groin_hernia",
+      "skill.exam.surg.hernia_palpation",
+      "skill.reasoning.inguinal.signs",
+      "skill.reasoning.inguinal.differential",
+      "skill.investigation.inguinal.workup",
+      "skill.reasoning.inguinal.diagnosis",
+      "skill.treatment.inguinal.management"
+    ]
+  },
+  "skills": {
+    "skill.reasoning.inguinal.basics": {
+      "id": "skill.reasoning.inguinal.basics",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "What an inguinal hernia is",
+      "oneLine": "Bowel through the groin wall, by one of three exits",
+      "why": "The words direct, indirect and femoral are not labels but maps: they say where the bowel travels, whose groin it travels through, and where it is likely to get trapped. A student who knows the three exits reads every groin lump correctly; one who only knows the word hernia cannot.",
+      "teach": [
+        {
+          "heading": "A hernia is a protrusion, not a lump",
+          "body": "A hernia is the protrusion of a whole viscus or part of one through the wall that contains it. The commonest herniae are abdominal: inguinal, femoral, umbilical, incisional and epigastric. Of these the inguinal hernia is by far the commonest groin hernia in both sexes and at all ages.\n\nThe inguinal canal carries the spermatic cord in men and the round ligament in women. An indirect hernia enters through the deep ring at the side of the inferior epigastric vessels and travels the canal; a direct hernia pushes through the weak posterior wall in Hesselbach triangle, medial to those vessels."
+        },
+        {
+          "heading": "Three exits compared",
+          "table": {
+            "cols": ["Type", "Exit route", "Typical patient", "Neck and danger"],
+            "rows": [
+              ["Indirect inguinal", "Through the deep ring, along the canal, often to the scrotum", "Young patients; almost all hernias in children and women", "Narrow neck, so it can strangulate"],
+              ["Direct inguinal", "Through the posterior wall medial to the deep ring, rarely far", "Older men with weak abdominal walls", "Wide neck, so it rarely strangulates"],
+              ["Femoral", "Through the femoral canal below the inguinal ligament", "Older women, right side twice as often", "Rigid narrow canal, so it strangulates readily"]
+            ]
+          }
+        },
+        {
+          "heading": "What the sac contains",
+          "body": "Name the content and you have half the examination: an enterocele contains intestine, an epiplocele or omentocele contains omentum, and a cystocele contains bladder. The last occurs in direct or sliding hernias and declares itself when the lump swells before passing urine and shrinks after it.\n\nTwo rare traps share the same sac. In a sliding hernia the caecum, pelvic colon or bladder forms part of the sac wall itself. In Richter hernia only part of the bowel circumference is gripped, so obstruction signs stay deceptively mild while that knuckle of bowel dies."
+        },
+        {
+          "heading": "Five clinical types, one ladder of urgency",
+          "body": "A reducible hernia returns to the abdomen on lying down or with gentle taxis, though the sac stays behind. An irreducible hernia will not return but is otherwise quiet, held by adhesions or its own size. An obstructed or incarcerated hernia adds colic, vomiting, distension and absolute constipation without harming blood supply.\n\nA strangulated hernia adds arrest of blood supply to irreducibility and obstruction: tense, tender, no cough impulse, skin going red. An inflamed hernia mimics it when an appendix or Meckel diverticulum inside the sac inflames, but it is not tense and has no obstruction. Climbing this ladder is the whole triage."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Define a hernia, and name the commonest groin hernia.",
+          "a": "A hernia is protrusion of a viscus or part of one through the wall containing it, and the inguinal hernia is the commonest groin hernia in both sexes.",
+          "accept": ["protrusion", "viscus", "wall", "inguinal"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How does the exit of a direct hernia differ from an indirect one?",
+          "a": "The indirect hernia enters through the deep ring lateral to the inferior epigastric vessels and travels the canal, while the direct hernia pushes through the weak posterior wall in Hesselbach triangle medial to those vessels.",
+          "accept": ["deep ring", "epigastric", "Hesselbach", "posterior wall"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is a direct hernia less likely to strangulate than a femoral hernia?",
+          "a": "The direct hernia has a wide neck through a weak wall, so contents move freely, while the femoral hernia passes through a narrow rigid canal that grips its contents and arrests blood supply early.",
+          "accept": ["wide neck", "narrow", "rigid canal", "blood supply"],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "inguinal_hernia: pathophysiology"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Hernias: anatomy of the inguinal canal"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.inguinal.signs": {
+      "id": "skill.reasoning.inguinal.signs",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "The hernia picture",
+      "oneLine": "Two classical signs, then contents, type and complications",
+      "why": "Two signs diagnose an uncomplicated hernia, and every other manoeuvre only sorts what is inside it and which exit it took. A student who checks the two signs first never mistakes a strangulated hernia for a difficult reduction, because the signs themselves announce the emergency.",
+      "teach": [
+        {
+          "heading": "Impulse and reducibility come first",
+          "body": "The two classical signs of an uncomplicated hernia are an expansile impulse on coughing and reducibility. Coughing drives more contents into the sac so the swelling expands against the fingers; lying down or gentle taxis returns them, and the sac stays behind.\n\nAbsence of an impulse does not exclude a hernia, because adhesions can block the neck, and a large femoral lump may barely move. But loss of a previously present impulse with a tense tender lump is never a difficult reduction: it is incarceration or strangulation."
+        },
+        {
+          "heading": "Reading the contents",
+          "table": {
+            "cols": ["Content", "Feel", "Percussion", "Reduction"],
+            "rows": [
+              ["Enterocele", "Elastic", "Resonant, bowel sounds may be heard", "Gurgle; hard at first, easy at the end"],
+              ["Omentocele", "Doughy and granular", "Dull", "No gurgle; easy at first, resists at the end"],
+              ["Cystocele", "Swelling varies with bladder filling", "Dull", "Pressure brings a desire to pass urine"]
+            ]
+          }
+        },
+        {
+          "heading": "Sorting indirect from direct",
+          "body": "Three bedside facts separate them. The deep ring test, done standing after full reduction with the thumb over the ring, holds an indirect hernia back while a direct hernia bulges medial to the finger. The invagination test sends the finger up, back and out along the canal in indirect hernia and straight back in direct.\n\nZieman places three fingers at once: index on the deep ring, middle on the superficial ring, ring finger on the saphenous opening. The finger that feels the impulse names the orifice: indirect, direct or femoral. It works only with no obvious swelling or after complete reduction."
+        },
+        {
+          "heading": "Strangulation announces itself",
+          "body": "Call it strangulation when a lump is irreducible, without impulse, extremely tense and tender, with reddening skin. Obstruction follows with colic, vomiting, distension and absolute constipation, though a Richter hernia or a pure omentocele may obstruct late or never.\n\nNever force taxis on such a lump: rough handling can return dead bowel to the abdomen or rupture it. Resuscitate, keep nil by mouth, and refer for urgent exploration the same day."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the two classical signs of an uncomplicated hernia.",
+          "a": "An expansile impulse on coughing and reducibility of the swelling.",
+          "accept": ["cough impulse", "expansile", "reducibility", "reducible"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How do you tell an enterocele from an omentocele at the bedside?",
+          "a": "The enterocele is elastic and resonant, reduces with a gurgle, and may show peristalsis or bowel sounds, while the omentocele is doughy and granular, dull to percussion, and reduces without a gurgle.",
+          "accept": ["elastic", "resonant", "gurgle", "doughy", "dull"],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "What are the diagnostic features of a strangulated hernia, and what must you never do?",
+          "a": "Irreducible, no cough impulse, extremely tense and tender, often with reddened skin and obstruction features; never force reduction, because non-viable bowel may be returned to the abdomen.",
+          "accept": ["irreducible", "no cough impulse", "tense", "tender", "never force"],
+          "minMatch": 3
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "inguinal_hernia: redFlags"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "The groin hernia: physical signs"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.inguinal.differential": {
+      "id": "skill.reasoning.inguinal.differential",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Differential diagnosis",
+      "oneLine": "Femoral first, then the scrotal and groin mimics",
+      "why": "Most groin lumps are hernias, but the ones that are not carry their own emergencies: a femoral hernia strangulates sooner, a torsion kills a testis in hours, and nodes point to disease elsewhere. The differential is not an academic list but the step that stops the wrong operation.",
+      "teach": [
+        {
+          "heading": "Inguinal or femoral comes first",
+          "body": "Two landmarks settle it. An inguinal hernia lies above the inguinal ligament and medial to the pubic tubercle; a femoral hernia lies below the ligament and lateral to the tubercle, escaping through the saphenous opening. A large femoral lump can ride up over the ligament, so feel the base, not the dome.\n\nConfirm with the canal: in femoral hernia the inguinal canal is empty on invagination, and pressure over the femoral canal holds the lump back. Remember that even in women the commonest groin hernia is still inguinal, so sex biases but never decides."
+        },
+        {
+          "heading": "Scrotal swellings that are not hernia",
+          "table": {
+            "cols": ["Condition", "Key finding", "How it differs from hernia"],
+            "rows": [
+              ["Vaginal hydrocele", "Fluctuant, transilluminates, testis impalpable", "You can get above it; no cough impulse"],
+              ["Encysted cord hydrocele", "Localised cystic cord swelling", "Traction test: pulling the testis down fixes it"],
+              ["Varicocele", "Bag of worms, worse standing", "Fills from below; thrill, not expansile impulse"],
+              ["Undescended or ectopic testis", "Empty scrotum with groin lump", "Lump is the testis itself in the canal or pouch"],
+              ["Funiculitis", "Painful cord with fever and rigors", "Inflammatory, often filarial; cord tender throughout"]
+            ]
+          }
+        },
+        {
+          "heading": "Groin lumps below the ligament",
+          "body": "Enlarged nodes demand a search from umbilicus to toes, including the anal canal, urethra and vagina, for the septic focus or malignant primary. The gland of Cloquet in the femoral canal can mimic an irreducible femoral hernia exactly, and without a cause the lump is settled in the theatre.\n\nA saphena varix vanishes lying down and gives a fluid thrill rather than an expansile impulse, with varicose veins below and a tap impulse travelling up on Schwartz test. A psoas abscess points lateral to the femoral vessels with cross fluctuation and a diseased spine behind it; an aneurysm gives expansile pulsation, which no hernia ever does."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How do you separate an inguinal hernia from a femoral hernia by surface anatomy?",
+          "a": "The inguinal hernia lies above the inguinal ligament and medial to the pubic tubercle, while the femoral hernia lies below the ligament and lateral to the tubercle.",
+          "accept": ["above", "medial", "below", "lateral", "pubic tubercle"],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "How do you tell a vaginal hydrocele from a complete inguinal hernia?",
+          "a": "In hydrocele you can get above the swelling, it fluctuates and transilluminates brightly with no cough impulse, while in hernia you cannot get above it and it carries an expansile impulse.",
+          "accept": ["get above", "transilluminates", "no cough impulse", "fluctuates"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A groin lump disappears lying down and gives an impulse on coughing, but so do two non-hernia conditions. Name them and how you tell.",
+          "a": "Saphena varix and varicocele both reduce lying down with a thrill-like impulse rather than an expansile one; the varix has varicose veins and a positive Schwartz tap test, and both refill gradually from below when the ring is held.",
+          "accept": ["saphena varix", "varicocele", "thrill", "Schwartz", "from below"],
+          "minMatch": 3
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "inguinal_hernia: additionalDifferentials"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Hernias: differential diagnosis of groin swellings"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.investigation.inguinal.workup": {
+      "id": "skill.investigation.inguinal.workup",
+      "kind": "investigation",
+      "system": "surgery",
+      "title": "Confirming the hernia and grading its urgency",
+      "oneLine": "Hands first, ultrasound for doubt, bloods for the complicated",
+      "why": "A hernia is diagnosed by examination in standing and supine positions with a cough, not by a scan. Investigations exist for three narrower jobs: the lump you cannot feel, the hernia that has complicated, and the patient who must be fit for theatre.",
+      "teach": [
+        {
+          "heading": "The examination is the investigation",
+          "body": "Expose both groins from umbilicus to mid thigh, examine standing first and then supine, and test the cough impulse, reducibility and the ring before ordering anything. Ordering a scan before this sequence wastes the one test that is always available and never wrong about strangulation.\n\nGroin ultrasound earns its place when the swelling is uncertain, intermittent or clinically occult. CT or MRI with a strain view is reserved for complex, recurrent or occult hernias, and herniography is now rarely used. A scan never delays resuscitation and referral when the lump is tense and tender."
+        },
+        {
+          "heading": "The complicated hernia needs bloods, not debate",
+          "body": "When strangulation or obstruction is suspected, send baseline blood tests and lactate alongside resuscitation: a rising lactate with erythema of the skin or systemic sepsis points to ischaemic bowel inside the sac. These tests grade urgency; they do not decide it, because the tense tender irreducible lump has already decided.\n\nExamine the abdomen for distension and obstruction in the same sitting, and keep the patient nil by mouth with a nasogastric tube if vomiting. Percussion helps at the bedside too: resonance favours a strangulated enterocele over acute funiculitis, which is dull."
+        },
+        {
+          "heading": "Fitness for a planned repair",
+          "body": "Elective mesh repair needs a fit patient more than a big workup: haemoglobin, urine routine, blood sugar, an electrocardiogram past middle age, and a chest radiograph in the chronic cougher. Control the cough, the constipation and the prostatic obstruction before the date, not after the recurrence.\n\nIn Indian practice these tests and the repair itself are available at most district hospitals and government medical colleges, often as day care surgery. Book the workup with the surgical outpatient visit so a farm labourer does not lose two days of wages to two separate trips."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How is an uncomplicated inguinal hernia diagnosed?",
+          "a": "By clinical examination in standing and supine positions with cough impulse assessment and tests of reducibility, not by imaging.",
+          "accept": ["clinical examination", "standing", "supine", "cough impulse"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "When do you order groin ultrasound, and when CT or MRI?",
+          "a": "Ultrasound when the swelling is uncertain or not clinically obvious, and CT or MRI for complex, recurrent or occult hernias.",
+          "accept": ["ultrasound", "uncertain", "occult", "recurrent"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A hernia is tense, tender and irreducible with vomiting. What investigations do you send, and what must they not delay?",
+          "a": "Baseline bloods and lactate with resuscitation and abdominal assessment, and they must never delay urgent surgical referral and exploration for suspected strangulation.",
+          "accept": ["lactate", "bloods", "resuscitation", "urgent exploration"],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "inguinal_hernia: additionalInvestigations"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Hernias: investigation and preoperative assessment"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.inguinal.diagnosis": {
+      "id": "skill.reasoning.inguinal.diagnosis",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Diagnosis and triage",
+      "oneLine": "Name it completely, then decide tonight or routine list",
+      "why": "A diagnosis of hernia alone books nothing: the surgeon needs side, type, extent, contents and complications before deciding between a routine list and tonight. Triage is the diagnosis doing its real work, and it fails whenever strangulation is still on the table at midnight.",
+      "teach": [
+        {
+          "heading": "A complete diagnostic statement",
+          "body": "State side, type, extent, contents and status in one line: an uncomplicated right indirect inguinal hernia, complete to the scrotum, an enterocele, reducible with an expansile cough impulse. Each word earns its place: side directs the incision, type predicts the anatomy, extent predicts the dissection, contents predict the percussion.\n\nGrade the lump against the ladder: reducible, irreducible, obstructed, strangulated or inflamed. A statement without that grade is unfinished, because the grade alone decides the urgency."
+        },
+        {
+          "heading": "Triage: tonight or routine list",
+          "body": "Tonight means resuscitate and explore: a tense tender irreducible lump with lost impulse, with or without obstruction, and any hernia with erythema, sepsis or a rising lactate. Obstruction without strangulation signs still admits the same day under close watch, because the third feature can arrive within hours.\n\nRoutine list means a reducible hernia with impulse intact, no obstruction and controlled pressure factors. Between them sits watchful waiting for the small minimally symptomatic hernia in a patient at high operative risk, with explicit safety-net advice on the symptoms that promote waiting to tonight."
+        },
+        {
+          "heading": "What Nyhus adds to the plan",
+          "body": "The Nyhus classification in the annexure grades the defect behind the lump: a normal ring with a sac, an enlarged ring, a posterior wall defect, and the femoral and recurrent defects. Higher grades and recurrences point to mesh and to a surgeon comfortable with the posterior wall.\n\nUse it to counsel, not to impress. A young patient with a simple indirect sac hears herniotomy and a quick return to work; an older patient with a destroyed posterior wall hears mesh, a longer dissection and honest talk about recurrence and chronic groin pain."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Give a complete diagnostic statement for an uncomplicated right scrotal hernia with bowel inside.",
+          "a": "An uncomplicated right indirect inguinal hernia, complete to the scrotum, an enterocele, reducible with an expansile cough impulse.",
+          "accept": ["indirect", "complete", "enterocele", "reducible", "cough impulse"],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Which findings move a hernia from the routine list to tonight?",
+          "a": "Irreducible with no cough impulse, tense and tender, with overlying erythema, obstruction features, sepsis or a rising lactate.",
+          "accept": ["irreducible", "no cough impulse", "tense", "tender", "lactate"],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "An obstructed hernia has no strangulation signs at noon. Can it wait till morning?",
+          "a": "No. Admit the same day under close watch with resuscitation, because strangulation can supervene within hours and the cost of waiting is dead bowel.",
+          "accept": ["admit", "same day", "strangulation", "hours", "dead bowel"],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "inguinal_hernia: management"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Hernias: diagnosis and indications for surgery"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.treatment.inguinal.management": {
+      "id": "skill.treatment.inguinal.management",
+      "kind": "treatment",
+      "system": "surgery",
+      "title": "Managing inguinal hernia",
+      "oneLine": "Planned mesh repair for most, urgent operation for the strangulated few",
+      "why": "A hernia never heals itself: the defect only enlarges and the neck only tightens. Elective mesh repair is safe and durable, while emergency surgery on strangulated bowel carries far higher morbidity, so the whole of management is getting the right patient to theatre at the right time.",
+      "teach": [
+        {
+          "heading": "Elective repair is the definitive treatment",
+          "body": "Offer tension-free mesh repair for symptomatic hernias: the open Lichtenstein repair with polypropylene mesh secured to the inguinal ligament and conjoint tendon is the standard, and laparoscopic repair through the preperitoneal plane covers the whole groin floor, suiting bilateral and recurrent hernias.\n\nIn children the sac is the disease, so herniotomy, excision of the patent processus, suffices without mesh. Test the abdominal wall tone before choosing: a patient with grossly weak obliques and Malgaigne bulgings needs the stronger reconstruction, not the quicker one."
+        },
+        {
+          "heading": "Watchful waiting, honestly offered",
+          "body": "Consider waiting for a small minimally symptomatic hernia in a patient at high operative risk, never as neglect but as a reviewed decision. Waiting needs what surgery would have given: counsel on the low recurrence after mesh, and safety-net advice that a tense tender irreducible lump with vomiting means emergency, not the next review date.\n\nA truss is not treatment. Long wear stains and thins the skin over the lump and atrophies the wall beneath, making the eventual operation harder. Discourage it except as a brief bridge where surgery must wait."
+        },
+        {
+          "heading": "The strangulated hernia tonight",
+          "body": "Resuscitate, keep nil by mouth, give perioperative analgesia and antibiotics by protocol, and explore urgently: open the sac, assess the bowel, and resect what is non-viable. Gentle taxis is permitted only for a recently irreducible, non-tender lump; a tense tender strangulated hernia is never squeezed back.\n\nAddress the cause in the same admission where possible. Repair means little if the patient returns to the same chronic cough, constipation or prostatic obstruction that built the hernia, so treat each before discharge."
+        },
+        {
+          "heading": "Recovery and the Indian operating list",
+          "body": "Advise against heavy straining while the wound heals, then return to light work early and to full lifting only after the surgeon reviews the wound. Warn every patient that chronic groin pain and recurrence, though uncommon after mesh, are the two complications worth naming beforehand.\n\nElective repair is available at government medical colleges and district hospitals, commonly as day care surgery. Ask the hospital help desk about current public insurance support for the admission, and give written return advice so a labourer from a distant village knows exactly when to travel back."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the definitive treatment of a symptomatic inguinal hernia?",
+          "a": "Elective tension-free mesh repair, by open Lichtenstein or laparoscopic approach.",
+          "accept": ["mesh repair", "Lichtenstein", "laparoscopic", "elective"],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "When is watchful waiting reasonable, and what must accompany it?",
+          "a": "For a small minimally symptomatic hernia in a patient at high operative risk, with counselling and explicit safety-net advice on strangulation symptoms.",
+          "accept": ["minimally symptomatic", "high operative risk", "safety-net", "strangulation"],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A hernia is tense, tender and irreducible with vomiting. Outline management.",
+          "a": "Resuscitate, keep nil by mouth, give analgesia and antibiotics by protocol, and undertake urgent surgical exploration with resection of non-viable bowel; never force taxis on a strangulated hernia.",
+          "accept": ["resuscitate", "nil by mouth", "urgent exploration", "resection", "never force"],
+          "minMatch": 3
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "inguinal_hernia: management"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Hernias: treatment and operative repair"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of modality and principle: which hernias are repaired electively with mesh, which are watched, and which go to theatre tonight. Specific agents, routes and durations come from your current national or institutional guideline at the time of treatment. CliniX does not prescribe."
+    }
+  },
+  "cases": [
+    {
+      "id": "case.inguinal.ramesh",
+      "title": "A farm labourer with two years of groin swelling",
+      "opening": "Ramesh Patil, 48, has come to the surgical outpatient clinic with his wife. He walks in normally but keeps glancing down at a bulge in his right groin. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "initialVitals": {
+        "hr": 82,
+        "bpSystolic": 128,
+        "bpDiastolic": 82,
+        "rr": 16,
+        "spo2": 98,
+        "temp": 36.7,
+        "gcs": 15
+      },
+      "patient": {
+        "name": "Ramesh Patil",
+        "age": 48,
+        "sex": "male",
+        "occupation": "Farm labourer, carries sugarcane bundles",
+        "residence": "Rural, lives with his wife and three children"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "tell me about the swelling in your groin",
+            "what is the main problem today"
+          ],
+          "reply": "Doctor, since two years there is a swelling in my right groin. It comes down when I stand and goes away when I lie down to sleep.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "lump_onset_course": {
+          "cues": [
+            "when did the swelling first appear",
+            "how did the lump start",
+            "has the swelling grown over time"
+          ],
+          "reply": "It started small in the groin two years back, after the harvest season of lifting heavy bundles. It has grown slowly since, and now it comes down into the scrotum.",
+          "key": true,
+          "skillId": "skill.hx.surg.lump"
+        },
+        "swelling_lying_flat": {
+          "cues": [
+            "does the swelling go away on lying down",
+            "what happens to the lump when you lie flat",
+            "does the swelling disappear by itself"
+          ],
+          "reply": "Yes, as soon as I lie down at night it goes back by itself. In the morning when I stand up, it comes down again, especially if I cough.",
+          "key": true
+        },
+        "groin_drag_pain": {
+          "cues": [
+            "do you get pain in the groin",
+            "tell me about the dragging ache",
+            "does the swelling pain worsen through the day"
+          ],
+          "reply": "There is a dragging ache in the groin by evening, after a full day in the fields. It is never sharp, and rest takes it away. Long before the lump came, I had this same ache.",
+          "key": true
+        },
+        "lump_first_site": {
+          "cues": [
+            "where did the swelling appear first",
+            "did the lump start in the groin or the scrotum",
+            "which side is the swelling on"
+          ],
+          "reply": "It started in the right groin itself, above the crease, and travelled down into the scrotum over many months. The left side is completely fine.",
+          "key": true,
+          "skillId": "skill.hx.surg.groin_hernia"
+        },
+        "bowel_constipation_habit": {
+          "cues": [
+            "do you strain to pass stools",
+            "how often do your bowels move",
+            "do you suffer from constipation"
+          ],
+          "reply": "Yes, for many years I pass hard stools every two or three days and must strain a lot. I have never shown anyone for this.",
+          "key": true,
+          "skillId": "skill.hx.inguinal.risk"
+        },
+        "urinary_prostate_flow": {
+          "cues": [
+            "do you pass urine frequently at night",
+            "do you wait for the urine stream to start",
+            "any difficulty in passing urine"
+          ],
+          "reply": "I get up twice at night to pass urine, and the stream is slow to start. But the swelling does not change when I pass urine.",
+          "key": true,
+          "skillId": "skill.hx.inguinal.risk"
+        },
+        "chronic_cough_beedi": {
+          "cues": [
+            "do you have a long-standing cough",
+            "tell me about your morning cough",
+            "do you bring up sputum daily"
+          ],
+          "reply": "I cough most mornings and bring up a little white sputum. I have smoked beedis since I was twenty, about a bundle a day.",
+          "key": true,
+          "skillId": "skill.hx.inguinal.risk"
+        },
+        "farm_lifting_work": {
+          "cues": [
+            "what work do you do each day",
+            "do you lift heavy weights at work",
+            "tell me about your farm labour"
+          ],
+          "reply": "I am a farm labourer. In season I carry sugarcane bundles on my shoulder all day. There is no other work I know.",
+          "key": true
+        },
+        "tobacco_beedi_use": {
+          "cues": [
+            "how many beedis do you smoke",
+            "since when do you smoke beedis",
+            "do you chew tobacco as well"
+          ],
+          "reply": "Only beedis, about one bundle daily for nearly thirty years. No chewing tobacco, and I drink only at festivals.",
+          "key": true
+        },
+        "prior_repair_history": {
+          "cues": [
+            "have you had a hernia operation before",
+            "any earlier operation on the abdomen",
+            "were you ever operated for appendicitis"
+          ],
+          "reply": "Never, doctor. No operation of any kind, on this side or anywhere else.",
+          "key": true,
+          "skillId": "skill.hx.inguinal.risk"
+        },
+        "other_illness_check": {
+          "cues": [
+            "do you have diabetes or blood pressure",
+            "any heart or lung disease",
+            "any other illness I should know"
+          ],
+          "reply": "No sugar, no blood pressure. I have never been admitted to hospital. I take no daily tablets.",
+          "key": true
+        },
+        "daily_medicines_list": {
+          "cues": [
+            "which medicines do you take every day",
+            "are you on any blood thinner tablets",
+            "do you take steroids regularly"
+          ],
+          "reply": "Nothing daily, doctor. Only the paracetamol I took twice last month when the ache was more.",
+          "key": true
+        },
+        "hernia_family_tally": {
+          "cues": [
+            "has anyone in your family had a hernia",
+            "any groin operation in the family",
+            "does your brother have a similar swelling"
+          ],
+          "reply": "My elder brother had the same swelling and was operated in the government hospital five years back. He is fine now.",
+          "key": true
+        },
+        "redflag_bowel_block": {
+          "cues": [
+            "have you had colicky pain with vomiting",
+            "any swelling of the abdomen with constipation",
+            "has the lump ever become painful and stuck"
+          ],
+          "reply": "No, never. The lump has always gone back on lying down, and I have never vomited or had my stomach bloat up.",
+          "key": true
+        },
+        "bladder_size_change": {
+          "cues": [
+            "does the swelling enlarge before passing urine",
+            "does pressure on the lump make you want to urinate",
+            "does the swelling shrink after micturition"
+          ],
+          "reply": "No such thing, doctor. Passing urine makes no difference to the swelling at all.",
+          "key": true
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "A well built man in no distress, walking normally. No pallor, no breathlessness at rest, no guarding of the abdomen.",
+          "abnormal": false
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 82 regular. Blood pressure 128/82. Respiratory rate 16. Afebrile. SpO2 98 percent on room air.",
+          "abnormal": false
+        },
+        "skill.exam.surg.hernia_inspection": {
+          "finding": "Standing: a pyriform right inguinoscrotal swelling running from above the groin crease to the mid scrotum, expanding visibly on coughing. Skin normal, no redness, no scar. The penis is pushed to the left. Left groin flat.",
+          "abnormal": true
+        },
+        "skill.exam.surg.hernia_palpation": {
+          "finding": "Cannot get above the swelling at the root of the scrotum. Elastic in feel, non-tender, with an expansile impulse on coughing. Reduces on lying down with a gurgle; resonant to percussion over the lump.",
+          "abnormal": true
+        },
+        "skill.exam.surg.deep_ring_occlusion": {
+          "finding": "After full reduction, pressure over the right deep ring controls the hernia completely: no bulge appears on coughing while the thumb holds.",
+          "abnormal": true
+        },
+        "skill.exam.surg.invagination_three_finger": {
+          "finding": "Invagination reaches a roomy superficial ring. Cough impulse felt on the tip of the finger, travelling up, back and out along the canal. No impulse on the ring finger over the saphenous opening.",
+          "abnormal": true
+        },
+        "skill.exam.surg.scrotal_palpation": {
+          "finding": "Right testis felt separately below the reduced lump, normal in size and feel. Left testis and cord normal. No cord thickening, no varicocele.",
+          "abnormal": false
+        },
+        "skill.exam.surg.transillumination_scrotum": {
+          "finding": "The scrotal swelling does not transilluminate.",
+          "abnormal": false
+        },
+        "skill.exam.surg.regional_nodes": {
+          "finding": "No inguinal or femoral nodes felt on either side. No foot or leg sore, no genital lesion.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "usg_groin",
+        "hb",
+        "urine"
+      ],
+      "investigations": {
+        "usg_groin": {
+          "label": "Ultrasound of the right groin",
+          "indicated": true,
+          "result": "Defect in the right inguinal canal with bowel loops entering the sac on straining, reducing at rest. No free fluid, no thickened bowel wall, no collection. Left groin normal.",
+          "note": "Confirms the clinical diagnosis and the contents, and excludes a complicated sac before a planned repair."
+        },
+        "hb": {
+          "label": "Haemoglobin and full blood count",
+          "indicated": true,
+          "result": "Haemoglobin 13.8 g/dL. Total leucocyte count normal with a normal differential.",
+          "note": "Fitness baseline for elective surgery; no anaemia, no leucocytosis to suggest inflammation or strangulation."
+        },
+        "urine": {
+          "label": "Urine routine",
+          "indicated": true,
+          "result": "No albumin, no sugar, no pus cells.",
+          "note": "Routine fitness test before mesh repair; infection of urine would postpone an implant."
+        },
+        "sugar": {
+          "label": "Fasting blood sugar",
+          "indicated": true,
+          "result": "Within normal limits.",
+          "note": "Undiagnosed diabetes worsens wound healing around mesh, so it is checked even without symptoms."
+        },
+        "ecg": {
+          "label": "Electrocardiogram",
+          "indicated": true,
+          "result": "Normal sinus rhythm, no ischaemic changes.",
+          "note": "Fitness for anaesthesia nearing fifty; his beedi years make a baseline tracing worthwhile."
+        },
+        "cxr": {
+          "label": "Chest radiograph",
+          "indicated": true,
+          "result": "No active lung lesion. Mild chronic bronchitic markings.",
+          "note": "Ordered for the morning cough and beedi history, to grade the chest before anaesthesia rather than to diagnose the hernia."
+        },
+        "ct_groin": {
+          "label": "CT of the groin",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Not indicated: the hernia is clinically obvious with a clear cough impulse and reducibility, and ultrasound already mapped the sac. Reserve cross-sectional imaging for recurrent or occult hernias."
+        },
+        "doppler_scrotum": {
+          "label": "Scrotal Doppler",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Not indicated: the testis is felt separately, there is no acute pain, and nothing suggests torsion or a varicocele needing flow study."
+        }
+      },
+      "differentialModel": {
+        "answer": "Right indirect inguinal hernia, uncomplicated. Consider a direct inguinal hernia, a femoral hernia, a vaginal hydrocele, a varicocele, inguinal lymphadenopathy, a saphena varix and a lipoma of the cord.",
+        "accept": [
+          "femoral hernia",
+          "hydrocele",
+          "varicocele",
+          "inguinal lymphadenopathy",
+          "saphena varix",
+          "lipoma",
+          "undescended testis"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Uncomplicated right indirect inguinal hernia, complete to the scrotum, an enterocele, reducible with an expansile cough impulse.",
+        "accept": [
+          "inguinal hernia",
+          "indirect inguinal hernia",
+          "groin hernia",
+          "inguinoscrotal hernia"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Book elective tension-free mesh repair with fitness workup, treat the constipation, beedi cough and prostatic symptoms first, give written safety-net advice on strangulation, and counsel on lifting and review after surgery.",
+        "accept": [
+          "mesh repair",
+          "elective repair",
+          "constipation",
+          "safety-net advice",
+          "lifting",
+          "follow-up"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The tempo alone points to hernia before a finger is laid on: two years of a lump that comes on standing and goes on lying down is a mechanical story, not an infective or malignant one.",
+        "Two signs make the diagnosis: an expansile cough impulse and reducibility with a gurgle. Resonance and the gurgle together say the sac holds bowel, an enterocele.",
+        "Deep ring occlusion holding the hernia back plus an impulse on the fingertip travelling up, back and out marks this as indirect, not direct.",
+        "Normal vitals and a well patient are findings, not gaps: they place this hernia on the routine list rather than tonight, which is exactly what triage must state.",
+        "The constipation, beedi cough, nocturia with hesitancy and daily lifting are not background: each is a pressure factor that must be treated or the repair fails.",
+        "A hydrocele would let you get above it and would transilluminate; nodes would need a primary sought from umbilicus to toes. Their negatives here are doing real diagnostic work.",
+        "Ultrasound confirms and maps; it never replaces the ring tests. CT and Doppler were correctly left unordered, and restraint with tests is part of the lesson."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

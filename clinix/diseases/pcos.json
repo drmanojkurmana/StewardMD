@@ -1,0 +1,1262 @@
+{
+  "estMinutes": 60,
+  "fullName": "Polycystic ovary syndrome",
+  "id": "pcos",
+  "kbRef": "polycystic_ovary_syndrome",
+  "name": "Polycystic ovary syndrome",
+  "oneLine": "Irregular cycles and androgen excess: the Rotterdam criteria and what follows",
+  "osce": {
+    "stations": [
+      {
+        "examinerQuestions": [
+          "You found terminal hair on the chin and lower abdomen with acne but no clitoromegaly. How does that pattern argue for PCOS and against a virilising tumour?",
+          "Her bimanual examination is normal. Does that exclude PCOS, and why?",
+          "What would you look for in the groin folds and neck, and what does it signify?"
+        ],
+        "id": "osce.pcos.pelvic_exam",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.obg.intimate_consent",
+          "skill.exam.obg.gynae_abdominal",
+          "skill.exam.obg.vulval_inspect",
+          "skill.exam.obg.speculum_insert",
+          "skill.exam.obg.speculum_inspect",
+          "skill.exam.obg.bimanual",
+          "skill.approach.obg.pelvic_close"
+        ],
+        "task": "This 24-year-old woman has irregular periods since her teens and excess facial hair. Perform a chaperoned gynaecological examination including the abdomen, vulva, speculum and bimanual examination, and present your findings."
+      },
+      {
+        "examinerQuestions": [
+          "State which Rotterdam features are present in her story and which are still unproven.",
+          "Name three conditions you must exclude before diagnosing PCOS and the test that excludes each.",
+          "She asks whether losing weight will really help her periods. What do you tell her?"
+        ],
+        "id": "osce.pcos.history",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.obg.menstrual_history",
+          "skill.hx.obg.gynae_symptoms",
+          "skill.hx.pcos.risk"
+        ],
+        "task": "This 24-year-old woman has had irregular periods since her teens and is worried about facial hair. Take a focused history in seven minutes and be ready to state which Rotterdam features are present."
+      }
+    ]
+  },
+  "review": {
+    "status": "ai_drafted"
+  },
+  "subtitle": "Rotterdam criteria and management",
+  "system": "gynaecology",
+  "version": 1,
+  "viva": {
+    "skills": [
+      "skill.pcos.basics",
+      "skill.exam.obg.bimanual",
+      "skill.pcos.signs",
+      "skill.pcos.differential",
+      "skill.ix.pcos.workup",
+      "skill.pcos.diagnosis",
+      "skill.tx.pcos"
+    ]
+  },
+  "_comment": "Gynaecology pathway for polycystic ovary syndrome. Same architecture as pneumonia and uterine fibroid: shared core and obgyn skills carry the examination, PCOS contributes Rotterdam based reasoning, the metabolic picture, and symptom directed management. History risk and case presentation skills live in the shared fragment and are merged by the lead.",
+  "chapters": [
+    {
+      "blurb": "What PCOS is, and what it is not",
+      "id": "basics",
+      "skills": [
+        "skill.pcos.basics"
+      ],
+      "title": "Basics"
+    },
+    {
+      "blurb": "Before a single question",
+      "id": "approach",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ],
+      "title": "Approach to the patient"
+    },
+    {
+      "blurb": "Age and timing set the pre-test probability before a symptom is mentioned",
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected PCOS, age and timing carry real weight: onset around menarche with cycles that never settle is the classic story, and a woman in her teens or twenties with progressive oligomenorrhoea starts with a higher prior than a woman whose cycles changed suddenly in her late thirties."
+        }
+      },
+      "id": "particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "title": "Patient particulars"
+    },
+    {
+      "blurb": "Months and years, and hair where it should not be",
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical presentation reads in months and years, not days: irregular periods since the teens, gradually lengthening gaps, excess facial hair managed by threading or waxing, acne that outlasted adolescence, and slow weight gain. That chronic tempo alone should move you away from an acute pelvic problem before anything else is known."
+        },
+        "skill.hx.obg.gynae_symptoms": {
+          "expect": "Expect pelvic pain to be absent or mild and non-cyclical; significant dysmenorrhoea, deep dyspareunia or heavy regular periods point away from PCOS toward endometriosis, fibroid or adenomyosis. Ask about discharge too, since infection must be excluded on its own merits rather than assumed absent."
+        },
+        "skill.hx.obg.menstrual_history": {
+          "expect": "Expect oligomenorrhoea with intervals well beyond five weeks, long gaps of several months, or secondary amenorrhoea, often with only a few bleeds a year. Ask about any prolonged gap followed by heavy bleeding, since unopposed oestrogen leaves the endometrium unprotected, and pin down age at menarche and whether cycles were ever regular."
+        }
+      },
+      "id": "history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.menstrual_history",
+        "skill.hx.obg.gynae_symptoms"
+      ],
+      "title": "History of presenting illness"
+    },
+    {
+      "blurb": "The family, the weight curve and the drugs that mimic or mask the syndrome",
+      "emphasis": {
+        "skill.hx.obg.gynae_background": {
+          "expect": "Contraceptive history does double duty here: combined hormonal contraception regulates the bleed and treats the hair, but it also masks the natural cycle, so establish what the cycles were like before hormones were started. Sexual history, cervical screening and fertility wishes decide which treatments are even on the table."
+        }
+      },
+      "id": "past_personal_drug_family",
+      "skills": [
+        "skill.hx.obg.gynae_background",
+        "skill.hx.pcos.risk"
+      ],
+      "title": "Past, personal, drug and family history"
+    },
+    {
+      "blurb": "Hair, skin and weight before the pelvis",
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for the androgen signature on the skin: terminal hair in a male pattern distribution on the upper lip, chin, chest and lower abdomen, active acne beyond adolescence, and thinning at the crown. Look too at the neck and axillae for dark velvety acanthosis, the visible marker of insulin resistance, and note the overall build and fat distribution."
+        },
+        "skill.gen.edema": {
+          "expect": "Oedema is not a feature of PCOS. Ankle swelling with weight gain here usually means weight itself, or a separate cardiac, renal or thyroid problem, and should make you look for that cause rather than attributing it to the syndrome."
+        },
+        "skill.gen.vitals": {
+          "expect": "Expect blood pressure that is often at the upper end of normal or frankly raised, since metabolic syndrome travels with PCOS. Record height and weight and state the weight category plainly: most, though not all, women with PCOS carry excess weight, and even modest gain since adolescence worsens both ovulation and androgens."
+        }
+      },
+      "id": "general_exam",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ],
+      "title": "General examination"
+    },
+    {
+      "blurb": "Usually normal, and that normality is informative",
+      "emphasis": {
+        "skill.exam.obg.bimanual": {
+          "expect": "Expect a normal sized, mobile, non-tender uterus with no adnexal mass in most women with PCOS: enlarged polycystic ovaries are usually not reliably felt through the abdominal wall. The bimanual examination here excludes other pathology and tenderness rather than confirming PCOS, and clitoromegaly or a pelvic mass points firmly away from the syndrome."
+        },
+        "skill.exam.obg.gynae_abdominal": {
+          "expect": "Expect a soft abdomen with no palpable pelvic mass in most cases; PCOS does not produce the firm midline mass of a fibroid or the cystic fullness of a large ovarian cyst. Obesity can make palpation difficult, so say what you could and could not feel rather than overclaiming."
+        },
+        "skill.exam.obg.speculum_insert": {
+          "expect": "The speculum examination is usually unremarkable, which is itself worth stating: a healthy cervix with no abnormal discharge and no contact bleeding argues against cervical pathology and infection without needing further tests to invoke them."
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "expect": "Look at the cervix and vaginal walls for discharge, polyps and lesions, then withdraw noting any bleeding. Normal findings here narrow the field to an endocrine cause for the bleeding pattern rather than a local one."
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "expect": "Inspect for hair pattern, acne of the mons, acanthosis of the groin folds, and any clitoral enlargement. Virilisation beyond hirsutism is a red flag for an androgen secreting tumour, not a feature of PCOS."
+        }
+      },
+      "id": "systemic_exam",
+      "skills": [
+        "skill.exam.obg.gynae_abdominal",
+        "skill.exam.obg.vulval_inspect",
+        "skill.exam.obg.speculum_insert",
+        "skill.exam.obg.speculum_inspect",
+        "skill.exam.obg.bimanual"
+      ],
+      "title": "Gynaecological examination"
+    },
+    {
+      "blurb": "Anovulation written on cycles, skin and metabolism",
+      "id": "disease_findings",
+      "skills": [
+        "skill.pcos.signs"
+      ],
+      "title": "Putting the PCOS picture together"
+    },
+    {
+      "blurb": "Three sentences that contain the case",
+      "id": "summary",
+      "skills": [
+        "skill.pcos.summary"
+      ],
+      "title": "Clinical summary"
+    },
+    {
+      "blurb": "Exclusions first, then the lookalikes that share one feature",
+      "id": "differential",
+      "skills": [
+        "skill.pcos.differential"
+      ],
+      "title": "Differential diagnosis"
+    },
+    {
+      "blurb": "Exclude the mimics, confirm the androgens, see the ovaries, screen the metabolism",
+      "id": "investigations",
+      "skills": [
+        "skill.ix.pcos.workup"
+      ],
+      "title": "Investigations"
+    },
+    {
+      "blurb": "Two of three, after the exclusions, with the phenotype stated",
+      "id": "diagnosis",
+      "skills": [
+        "skill.pcos.diagnosis",
+        "skill.annex.pcos.rotterdam"
+      ],
+      "title": "Diagnosis: applying Rotterdam"
+    },
+    {
+      "blurb": "Cycles, hair, fertility and lifelong risk, matched to what she wants",
+      "id": "treatment",
+      "skills": [
+        "skill.tx.pcos"
+      ],
+      "title": "Treatment"
+    },
+    {
+      "blurb": "Present this patient to your consultant",
+      "id": "case",
+      "skills": [
+        "skill.present.pcos.case"
+      ],
+      "title": "Case presentation"
+    }
+  ],
+  "skills": {
+    "skill.pcos.basics": {
+      "id": "skill.pcos.basics",
+      "kind": "reasoning",
+      "oneLine": "A syndrome of anovulation, androgen excess and polycystic ovaries, centred on insulin resistance",
+      "probes": [
+        {
+          "a": "Oligo or anovulation, clinical or biochemical hyperandrogenism, and polycystic ovarian morphology on ultrasound, with at least two required after mimics are excluded.",
+          "accept": [
+            "anovulation",
+            "hyperandrogenism",
+            "morphology",
+            "rotterdam"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What three features make up the Rotterdam criteria?"
+        },
+        {
+          "a": "Insulin resistance is central to the syndrome and is often present regardless of body weight, though obesity worsens it.",
+          "accept": [
+            "insulin resistance",
+            "weight",
+            "obesity"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why can a lean woman still have PCOS?"
+        },
+        {
+          "a": "Without ovulation there is no cyclical progesterone, so oestrogen acts unopposed on the endometrium, raising the risk of hyperplasia and carcinoma over time.",
+          "accept": [
+            "unopposed",
+            "progesterone",
+            "hyperplasia",
+            "carcinoma"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why does chronic anovulation threaten the endometrium?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "polycystic_ovary_syndrome: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Polycystic ovary syndrome",
+          "source": "Berek and Novak's Gynecology"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "PCOS is a syndrome diagnosed when at least two of three Rotterdam features are present: oligo or anovulation, clinical or biochemical hyperandrogenism, and polycystic ovarian morphology on scan, after mimics are excluded.\n\nNo single blood test or scan makes the diagnosis on its own. Polycystic appearing ovaries occur in healthy women, and androgen levels overlap, so the criteria exist to stop one feature being overcalled.",
+          "heading": "A syndrome, not a single test"
+        },
+        {
+          "body": "Insulin resistance with compensating high insulin is central, and it is often present even in lean women, though excess weight worsens it. High insulin drives ovarian theca cells to overproduce androgens and lowers hepatic sex hormone binding globulin, raising free androgen levels.\n\nA relatively high luteinising hormone drive further promotes androgen production and disrupts follicular maturation, so multiple small follicles accumulate without a dominant one emerging, and ovulation fails.",
+          "heading": "Insulin resistance sits at the centre"
+        },
+        {
+          "heading": "Why it matters beyond periods",
+          "points": [
+            "It is the leading cause of anovulatory infertility, and many women conceive with lifestyle change alone or with ovulation induction.",
+            "Chronic anovulation means unopposed oestrogen, which raises the long term risk of endometrial hyperplasia and carcinoma, so endometrial protection is part of care.",
+            "Impaired glucose tolerance, type 2 diabetes, dyslipidaemia and cardiovascular risk travel with the syndrome and need lifelong surveillance.",
+            "Anxiety, low mood and disordered eating are commoner than in peers, and asking about them is part of the workup, not an extra."
+          ]
+        }
+      ],
+      "title": "What polycystic ovary syndrome is",
+      "why": "PCOS is defined by a pattern across cycles, androgens and morphology plus the exclusion of mimics, not by any single test. Getting that definition exact is what stops every irregular period being labelled PCOS and every polycystic appearing ovary being treated."
+    },
+    "skill.pcos.differential": {
+      "id": "skill.pcos.differential",
+      "kind": "reasoning",
+      "oneLine": "Exclusions first, then the lookalikes that share one feature",
+      "probes": [
+        {
+          "a": "Thyroid dysfunction, hyperprolactinaemia, non-classical congenital adrenal hyperplasia, Cushing syndrome, an androgen secreting tumour, and functional hypothalamic amenorrhoea.",
+          "accept": [
+            "thyroid",
+            "prolactin",
+            "adrenal",
+            "cushing",
+            "tumour",
+            "hypothalamic"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Name four conditions that must be excluded before diagnosing PCOS."
+        },
+        {
+          "a": "Question the label and refer urgently for endocrine review for an androgen secreting tumour, since rapid virilisation breaks the PCOS pattern.",
+          "accept": [
+            "virilisation",
+            "tumour",
+            "endocrine",
+            "urgent"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "A woman labelled PCOS develops rapidly progressive virilisation. What do you do?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "exclusions",
+          "text": "Names the mimics that must be excluded before Rotterdam is applied"
+        },
+        {
+          "id": "tests",
+          "text": "Pairs each mimic with the test or feature that excludes it"
+        },
+        {
+          "id": "revisit",
+          "text": "States when the label must be questioned again"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "polycystic_ovary_syndrome: additionalDifferentials",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Polycystic ovary syndrome (differential diagnosis)",
+          "source": "Berek and Novak's Gynecology"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "Rotterdam may only be applied after mimics are excluded, and diagnosing PCOS without checking thyroid function, prolactin and the other mimics is the commonest error in this disease. Order the workup so every alternative has a named test before the label is used.\n\nAlways exclude pregnancy first with a urine test: secondary amenorrhoea with a pelvic story is pregnancy until proven otherwise, and no endocrine workup starts before that result.",
+          "heading": "Exclusions before Rotterdam"
+        },
+        {
+          "heading": "Lookalikes and what separates them",
+          "table": {
+            "cols": [
+              "Condition",
+              "What favours it over PCOS"
+            ],
+            "rows": [
+              [
+                "Hypothyroidism",
+                "Weight gain with cold intolerance, dry skin and a raised TSH rather than androgen excess"
+              ],
+              [
+                "Hyperprolactinaemia",
+                "Milky nipple discharge with oligo or amenorrhoea and raised prolactin, sometimes with headache or visual field loss"
+              ],
+              [
+                "Non-classical congenital adrenal hyperplasia",
+                "Early pubarche or a strong family pattern, separated by a raised 17-hydroxyprogesterone"
+              ],
+              [
+                "Cushing syndrome",
+                "Central weight gain with broad striae, bruising and proximal weakness beyond the PCOS range"
+              ],
+              [
+                "Androgen secreting tumour",
+                "Rapid virilisation over months with voice change or clitoral enlargement and markedly raised androgens"
+              ],
+              [
+                "Functional hypothalamic amenorrhoea",
+                "Low weight, intense exercise or severe stress with low gonadotrophins and no hyperandrogenism"
+              ]
+            ]
+          }
+        },
+        {
+          "body": "An ovarian tumour presents with a palpable mass or ascites rather than cycles and hair, and endometrial hyperplasia is a consequence of untreated PCOS to look for, not an alternative diagnosis.\n\nRevisit the differential when the course breaks pattern: rapid change, treatment failure or new virilisation means the original label must be questioned, not the treatment escalated.",
+          "heading": "What else to keep in mind"
+        }
+      ],
+      "title": "Differential diagnosis",
+      "why": "Most irregular cycles with hair growth are exactly what they look like, but the ones that are not are dangerous to miss: a tumour, Cushing syndrome and non-classical adrenal hyperplasia each need a different urgency. The differential does not stop once the label is given."
+    },
+    "skill.pcos.signs": {
+      "id": "skill.pcos.signs",
+      "kind": "reasoning",
+      "oneLine": "Anovulation written on cycles, skin and metabolism",
+      "probes": [
+        {
+          "a": "Terminal hair in a male pattern distribution, acne persisting beyond adolescence, and thinning at the crown.",
+          "accept": [
+            "terminal",
+            "acne",
+            "thinning",
+            "crown"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Name three clinical features of hyperandrogenism in PCOS."
+        },
+        {
+          "a": "Dark velvety thickening of the neck, axillae or groin folds, marking insulin resistance.",
+          "accept": [
+            "velvety",
+            "insulin resistance",
+            "neck"
+          ],
+          "level": 2,
+          "minMatch": 1,
+          "q": "What does acanthosis nigricans signify in this patient?"
+        },
+        {
+          "a": "No. The pelvic examination in PCOS is usually normal and the ovaries are rarely reliably felt, so normality neither confirms nor excludes the syndrome; its value is excluding other pathology.",
+          "accept": [
+            "normal",
+            "neither",
+            "excludes",
+            "excluding"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Her bimanual examination is normal. Does that exclude PCOS?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "polycystic_ovary_syndrome: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Polycystic ovary syndrome (clinical features)",
+          "source": "Berek and Novak's Gynecology"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "Oligomenorrhoea is the commonest presentation: cycles longer than five weeks, only a handful of bleeds a year, or secondary amenorrhoea stretching over months. Onset is typically perimenarchal and the gaps lengthen slowly.\n\nAsk about any long gap followed by heavy prolonged bleeding, which signals an unprotected endometrium shedding at last. Regular monthly heavy bleeding, by contrast, points toward fibroid or adenomyosis rather than PCOS.",
+          "heading": "The menstrual story"
+        },
+        {
+          "body": "Terminal hair in a male pattern, on the upper lip, chin, chest, linea alba and thighs, with acne persisting past adolescence and thinning at the crown, is the clinical face of hyperandrogenism. Ask how she manages it, since threading, waxing and laser change what you see.\n\nNote the pattern, not just its presence: fine downy hair is not hirsutism, and sudden coarse virilisation with voice deepening or clitoral enlargement breaks the PCOS pattern and points to a tumour.",
+          "heading": "What androgens write on the skin"
+        },
+        {
+          "heading": "The metabolic signature",
+          "points": [
+            "Steady weight gain since adolescence with central distribution, often resistant to short diets.",
+            "Dark velvety thickening at the neck, axillae and groin folds: acanthosis nigricans, the bedside marker of insulin resistance.",
+            "Raised blood pressure, impaired glucose tolerance and an adverse lipid pattern cluster with the syndrome even in young women.",
+            "Snoring with daytime sleepiness, and low mood or anxiety, which are common and treatable fellow travellers."
+          ]
+        }
+      ],
+      "title": "The PCOS picture",
+      "why": "Anovulation, androgen excess and insulin resistance each write a different part of the PCOS picture, and reading them together is what separates the syndrome from a single complaint. A student who looks only at the periods misses the skin, the weight and the metabolism that complete the diagnosis."
+    },
+    "skill.ix.pcos.workup": {
+      "id": "skill.ix.pcos.workup",
+      "kind": "investigation",
+      "oneLine": "Exclude the mimics, confirm the androgens, see the ovaries, screen the metabolism",
+      "pitfalls": [
+        "Ordering the scan before the exclusions and labelling polycystic ovaries as PCOS.",
+        "Missing the metabolic screen in a young woman whose only complaint is irregular periods.",
+        "Repeating androgen assays while she is on hormonal contraception, which suppresses the axis and hides the result."
+      ],
+      "probes": [
+        {
+          "a": "Urine pregnancy test, thyroid function and prolactin, with 17-hydroxyprogesterone where adrenal hyperplasia is suspected.",
+          "accept": [
+            "pregnancy",
+            "thyroid",
+            "prolactin",
+            "hydroxyprogesterone"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Which three tests exclude the commonest mimics of PCOS?"
+        },
+        {
+          "a": "No. Morphology alone never makes the diagnosis; Rotterdam needs two of three features after exclusions, and polycystic appearing ovaries occur in healthy women.",
+          "accept": [
+            "alone",
+            "two of three",
+            "healthy",
+            "exclusions"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Her scan shows polycystic ovaries but cycles are regular and androgens normal. Is this PCOS?"
+        },
+        {
+          "a": "Impaired glucose tolerance, diabetes and dyslipidaemia are common, usually silent, and determine long term care, so metabolic screening is part of every new PCOS assessment.",
+          "accept": [
+            "glucose",
+            "lipid",
+            "silent",
+            "screening"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why screen glucose and lipids in a 24-year-old whose only complaint is irregular periods?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "polycystic_ovary_syndrome: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Polycystic ovary syndrome (investigation)",
+          "source": "Berek and Novak's Gynecology"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "Start with a urine pregnancy test in every woman with oligo or amenorrhoea, then thyroid function and prolactin: both are common, both disturb cycles, and both have their own treatment. Add 17-hydroxyprogesterone where non-classical adrenal hyperplasia is suspected, and cortisol assessment where Cushing features are present.\n\nThese are exclusion tests with a job each, not a panel for its own sake. A normal set lets Rotterdam be applied; any abnormal result redirects the diagnosis before the label is used.",
+          "heading": "Exclude first: pregnancy, thyroid, prolactin"
+        },
+        {
+          "body": "Measure total and free testosterone with sex hormone binding globulin: raised free androgen with low binding protein is the biochemical signature. A raised luteinising hormone relative to follicle stimulating hormone supports the pattern but never makes the diagnosis alone.\n\nMarkedly raised androgens beyond the range typical of PCOS, especially with rapid virilisation, break the pattern and need urgent endocrine review for a secreting tumour.",
+          "heading": "Confirm androgen excess"
+        },
+        {
+          "body": "Pelvic ultrasound looks for bilaterally enlarged ovaries with multiple small peripheral follicles around dense central stroma, and also assesses the endometrium after prolonged amenorrhoea. Transabdominal scanning in an adolescent may show less, so state the route and its limits.\n\nPolycystic morphology occurs in healthy women and is absent in some women with PCOS, so the scan is one Rotterdam feature among three, never the whole diagnosis.",
+          "heading": "See the ovaries, but never scan alone"
+        },
+        {
+          "heading": "Screen the metabolism",
+          "points": [
+            "Oral glucose tolerance testing with fasting glucose, since impaired tolerance and diabetes are common and often silent.",
+            "Fasting lipid profile: raised triglycerides with low high density lipoprotein is the typical pattern.",
+            "Blood pressure, weight trend and waist circumference at every visit, not just at diagnosis.",
+            "Liver and sleep review where obesity is marked, since fatty liver and apnoea cluster here."
+          ]
+        }
+      ],
+      "title": "Confirming the pattern and screening the risks",
+      "why": "Investigations in PCOS serve four separate jobs, excluding mimics, confirming androgen excess, seeing the ovaries, and screening metabolism, and understanding which test does which stops a student ordering a scan first and calling its result the diagnosis."
+    },
+    "skill.pcos.summary": {
+      "id": "skill.pcos.summary",
+      "kind": "reasoning",
+      "oneLine": "Problem representation for a chronic syndrome measured in years, counted in Rotterdam features",
+      "probes": [
+        {
+          "a": "The Rotterdam feature count with the exclusions checked, and the fertility wish, because both directly determine the plan.",
+          "accept": [
+            "rotterdam",
+            "exclusions",
+            "fertility"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What element belongs in a PCOS summary that would not usually appear in other summaries?"
+        },
+        {
+          "a": "Years of gradual change since menarche fit PCOS, while sudden virilisation breaks the pattern and redirects to a tumour; tempo is often the single most discriminating detail.",
+          "accept": [
+            "gradual",
+            "menarche",
+            "virilisation",
+            "tempo"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why does tempo matter so much in a PCOS summary?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "tempo",
+          "text": "States the tempo as chronic since menarche"
+        },
+        {
+          "id": "rotterdam",
+          "text": "Counts the Rotterdam features with exclusions"
+        },
+        {
+          "id": "context",
+          "text": "Includes fertility wishes and metabolic status"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "Clinical reasoning",
+          "source": "Macleod's Clinical Examination"
+        },
+        {
+          "locator": "polycystic_ovary_syndrome: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "Name her with the relevant background: age, marital and fertility context, weight category and tempo of years since menarche. Then state the syndrome in Rotterdam terms: which two or three features are present and which exclusions were checked.\n\nClose with what changes management: fertility wishes, endometrial protection status and the metabolic screen. A summary without the Rotterdam count and the fertility wish leaves the listener unable to judge either the diagnosis or the plan.",
+          "heading": "The order that contains the case"
+        },
+        {
+          "heading": "A worked example",
+          "points": [
+            "A 24-year-old married woman with progressive oligomenorrhoea since menarche, four bleeds a year, terminal facial hair and steady weight gain since adolescence.",
+            "Examination shows an overweight build, chin hirsutism, mild acne and neck acanthosis, with borderline raised blood pressure and a normal pelvic examination.",
+            "Investigations show raised total testosterone with low sex hormone binding globulin, normal thyroid function and prolactin, and polycystic ovarian morphology on scan.",
+            "This is polycystic ovary syndrome meeting two Rotterdam features, with impaired glucose tolerance on screening, seeking pregnancy within the year."
+          ]
+        }
+      ],
+      "title": "The clinical summary",
+      "why": "The summary for a chronic syndrome has a different shape from an acute one: the tempo is years, and the Rotterdam count with the fertility wish belongs in the same sentence as the syndrome, because they change what happens next."
+    },
+    "skill.annex.pcos.rotterdam": {
+      "id": "skill.annex.pcos.rotterdam",
+      "kind": "annexure",
+      "oneLine": "The three Rotterdam criteria, the two-of-three rule and the exclusions",
+      "probes": [
+        {
+          "a": "At least two of three, after thyroid disease, hyperprolactinaemia, adrenal hyperplasia, Cushing syndrome and tumour are excluded.",
+          "accept": [
+            "two",
+            "excluded",
+            "thyroid",
+            "prolactin"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "How many Rotterdam features are needed, and what must happen first?"
+        },
+        {
+          "a": "Yes if the mimics are excluded: two features suffice and a normal scan does not veto the diagnosis.",
+          "accept": [
+            "two",
+            "excluded",
+            "suffice",
+            "veto"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Her scan is normal but she has oligomenorrhoea and hirsutism. Rotterdam positive?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "polycystic_ovary_syndrome: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Polycystic ovary syndrome (diagnostic criteria)",
+          "source": "Berek and Novak's Gynecology"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "heading": "The three criteria",
+          "table": {
+            "cols": [
+              "Criterion",
+              "What counts",
+              "Notes"
+            ],
+            "rows": [
+              [
+                "Oligo or anovulation",
+                "Cycles longer than five weeks, few bleeds a year, or secondary amenorrhoea",
+                "The commonest feature; chart the history over years, not one cycle"
+              ],
+              [
+                "Hyperandrogenism",
+                "Terminal hair in a male pattern, persistent acne or crown thinning; or raised free testosterone with low binding protein",
+                "Cosmetic treatment hides clinical signs, and hormones suppress biochemistry"
+              ],
+              [
+                "Polycystic morphology",
+                "Bilaterally enlarged ovaries with multiple small peripheral follicles and dense stroma",
+                "Seen in healthy women too; never the whole diagnosis"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Applying the table",
+          "points": [
+            "Two of three features makes the diagnosis, only after named exclusions with their tests.",
+            "Record which two are present and how each mimic was excluded; that record is the diagnosis.",
+            "In adolescence demand persistent oligomenorrhoea with clear hyperandrogenism before labelling.",
+            "Reassess whenever the course breaks pattern: rapid change reopens the differential."
+          ]
+        }
+      ],
+      "title": "Rotterdam criteria at a glance",
+      "why": "Rotterdam is a counting rule with an exclusion gate, and students misapply it in both directions: scanning first and calling morphology the diagnosis, or demanding all three features and missing true cases. One table with the rule keeps both errors away."
+    },
+    "skill.pcos.diagnosis": {
+      "id": "skill.pcos.diagnosis",
+      "kind": "reasoning",
+      "oneLine": "Two of three, after the exclusions, with the phenotype and red flags stated",
+      "probes": [
+        {
+          "a": "Oligo or anovulation, clinical or biochemical hyperandrogenism, and polycystic ovarian morphology, with at least two needed after the mimics are excluded.",
+          "accept": [
+            "anovulation",
+            "hyperandrogenism",
+            "morphology",
+            "two"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "Name the three Rotterdam features and state how many are needed."
+        },
+        {
+          "a": "Yes, if thyroid, prolactin and the other mimics are excluded: two Rotterdam features suffice and normal morphology does not veto the diagnosis.",
+          "accept": [
+            "two",
+            "excluded",
+            "normal",
+            "suffice"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "She has oligomenorrhoea and hirsutism with normal ovaries on scan. Does she have PCOS?"
+        },
+        {
+          "a": "Irregular cycles, acne and multifollicular ovaries are all common in the first years after menarche, so the label needs persistent oligomenorrhoea with clear hyperandrogenism, and overdiagnosis carries years of unnecessary worry.",
+          "accept": [
+            "menarche",
+            "persistent",
+            "hyperandrogenism",
+            "overdiagnosis"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why does adolescence need extra caution?"
+        }
+      ],
+      "rubric": [
+        {
+          "id": "components",
+          "text": "States the Rotterdam features and the two-of-three rule"
+        },
+        {
+          "id": "exclusions",
+          "text": "Names the exclusions and how each was checked"
+        },
+        {
+          "id": "redflags",
+          "text": "States the red flags that overrule Rotterdam"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "polycystic_ovary_syndrome: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Polycystic ovary syndrome (diagnosis)",
+          "source": "Berek and Novak's Gynecology"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "The diagnosis needs at least two of three Rotterdam features: oligo or anovulation, clinical or biochemical hyperandrogenism, and polycystic ovarian morphology, with thyroid disease, hyperprolactinaemia, non-classical adrenal hyperplasia, Cushing syndrome and tumour excluded by named tests.",
+          "heading": "Counting to two, after the exclusions"
+        },
+        {
+          "heading": "Phenotypes and what they change",
+          "points": [
+            "Anovulation with hyperandrogenism and morphology: the full picture, with the highest metabolic risk.",
+            "Anovulation with hyperandrogenism but normal ovaries: still PCOS, with the same endometrial and fertility needs.",
+            "Hyperandrogenism with morphology but regular ovulation: milder cycles, but androgen and metabolic care still apply.",
+            "Anovulation with morphology but no androgen excess: the mildest phenotype, where exclusions matter most before the label sticks."
+          ]
+        },
+        {
+          "body": "Rapid virilisation, clitoral enlargement or markedly raised androgens need urgent endocrine review for a secreting tumour. Prolonged amenorrhoea with later heavy or irregular bleeding needs endometrial assessment for hyperplasia. Cushing features, severe hypertension or new diabetes each add their own urgent workup alongside, not after, the PCOS assessment.",
+          "heading": "Red flags that overrule Rotterdam"
+        }
+      ],
+      "title": "Diagnosis, phenotypes and red flags",
+      "why": "A diagnosis of PCOS without the Rotterdam count, the exclusions and the red flag check does not say how certain you are or what could still be missed. Counting to two after named exclusions, with the phenotype stated, is what makes the label safe to act on."
+    },
+    "skill.tx.pcos": {
+      "dosingNote": "This module teaches management at the level of drug class and principle. Specific agents, regimens and durations must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "id": "skill.tx.pcos",
+      "kind": "treatment",
+      "oneLine": "Lifestyle first, then cycles, hair, fertility and lifelong risk, matched to what she wants",
+      "pitfalls": [
+        "Treating fertility while ignoring glucose, lipids and blood pressure, which decide her long term health more than any ovulation.",
+        "Judging hirsutism treatment after weeks rather than months: hair cycles are slow and impatience abandons working treatment.",
+        "Inducing ovulation in repeated unsupervised cycles without timely referral when pregnancy does not follow.",
+        "Leaving prolonged amenorrhoea unprotected while treating only the hair or the acne."
+      ],
+      "probes": [
+        {
+          "a": "Lifestyle modification with weight management, diet and exercise, which can restore ovulation and improve the metabolic and androgenic profile.",
+          "accept": [
+            "lifestyle",
+            "weight",
+            "ovulation",
+            "metabolic"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What is first line treatment in PCOS, and why?"
+        },
+        {
+          "a": "Combined hormonal contraception to regulate cycles, protect the endometrium and treat hair and acne, with cosmetic measures alongside and an antiandrogen added where needed with contraception.",
+          "accept": [
+            "contraception",
+            "endometrium",
+            "cosmetic",
+            "antiandrogen"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "She does not want pregnancy and has oligomenorrhoea with hirsutism. What do you offer?"
+        },
+        {
+          "a": "Ovulation induction with letrozole first line or clomifene, with metformin as an adjunct, under monitoring, and timely referral to a fertility centre when induction fails or other factors coexist.",
+          "accept": [
+            "letrozole",
+            "clomifene",
+            "metformin",
+            "referral"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "She wants pregnancy and does not ovulate. What now?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "polycystic_ovary_syndrome: management",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Polycystic ovary syndrome (management)",
+          "source": "Berek and Novak's Gynecology"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "Weight management with diet and activity is first line: even modest sustained loss can restore ovulation and improve androgens, glucose and lipids. Prescribe it like a drug, with a named target, a diet plan she can afford, and follow up, not a passing remark.\n\nInvolve the family kitchen, not just the patient: food is cooked for the household, and a clinic nurse or ASHA worker who reviews the weight curve does more than any single counselling session.",
+          "heading": "Lifestyle first, and meant seriously"
+        },
+        {
+          "body": "Combined hormonal contraception regulates cycles, protects the endometrium and treats hirsutism and acne together, suiting women not seeking pregnancy. Where oestrogen is unsuitable or contraception is not wanted, cyclical progestogen gives the same endometrial protection.\n\nAny woman with prolonged amenorrhoea needs scheduled withdrawal protection rather than waiting for a bleed: unopposed oestrogen is the route to hyperplasia, and protection is not optional.",
+          "heading": "Cycles and endometrial protection"
+        },
+        {
+          "body": "Threading, waxing and laser where affordable carry no systemic effects and suit mild disease; counsel that visible change takes months, since hair cycles are slow, and photos track progress better than memory.\n\nAntiandrogen therapy such as spironolactone is added alongside reliable contraception where hair or acne dominates, never alone in a woman who could conceive, and needs months of use before judging response.",
+          "heading": "Hair, skin and how long they take"
+        },
+        {
+          "body": "Ovulation induction when pregnancy is sought starts with letrozole first line or clomifene, with metformin as an adjunct, under monitoring for response and multiple pregnancy risk; failure or other factors mean timely referral to a fertility centre rather than repeated unsupervised cycles.\n\nMetformin suits glucose intolerance alongside lifestyle, not as a shortcut around it. Screen glucose, lipids and blood pressure regularly, support mood and sleep, and run care across gynaecology, endocrinology and fertility services, stepping up to district or tertiary referral where induction or assisted conception is needed.",
+          "heading": "Fertility and the long view"
+        }
+      ],
+      "title": "Managing polycystic ovary syndrome",
+      "why": "Management is symptom directed across lifestyle, cycles, hair, fertility and lifelong metabolic risk, guided by what she wants now. Getting that match wrong in either direction, contraception for a woman trying to conceive or endless induction without metabolic care, has real cost."
+    }
+  },
+  "cases": [
+    {
+      "differentialModel": {
+        "accept": [
+          "polycystic ovarian syndrome",
+          "pcos",
+          "hypothyroidism",
+          "hyperprolactinaemia",
+          "cushing syndrome",
+          "congenital adrenal hyperplasia",
+          "androgen-secreting tumour",
+          "functional hypothalamic amenorrhoea",
+          "pregnancy",
+          "ovarian tumour"
+        ],
+        "answer": "Polycystic ovary syndrome with impaired glucose tolerance. Consider hypothyroidism, hyperprolactinaemia, non-classical congenital adrenal hyperplasia, Cushing syndrome and functional hypothalamic amenorrhoea, with pregnancy and an ovarian tumour excluded.",
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "accept": [
+          "polycystic ovarian syndrome",
+          "pcos"
+        ],
+        "answer": "Polycystic ovary syndrome meeting two Rotterdam features, oligo-anovulation with clinical hyperandrogenism, with impaired glucose tolerance.",
+        "minMatch": 1
+      },
+      "essentialInvestigations": [
+        "upt",
+        "testosterone",
+        "usg_pelvis",
+        "ogtt"
+      ],
+      "exam": {
+        "skill.exam.obg.bimanual": {
+          "abnormal": false,
+          "finding": "Uterus normal size, firm, mobile and non-tender. No adnexal mass felt on either side. No cervical motion tenderness. No clitoral enlargement."
+        },
+        "skill.exam.obg.gynae_abdominal": {
+          "abnormal": false,
+          "finding": "Abdomen soft, no palpable pelvic mass. Lower border palpable nowhere above the pubis. No tenderness, no ascites, bowel sounds normal."
+        },
+        "skill.exam.obg.speculum_insert": {
+          "abnormal": false,
+          "finding": "Speculum passed with consent and chaperone. Healthy cervix, no erosion, no polyp, no contact bleeding on insertion."
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "abnormal": false,
+          "finding": "No abnormal discharge seen. Vaginal walls healthy. No bleeding on withdrawal of the speculum."
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "abnormal": true,
+          "finding": "Female pattern hair with coarse terminal hair over the upper lip and chin region and mild acne over the mons. No clitoral enlargement, no vulval lesion, no discharge at the introitus."
+        },
+        "skill.gen.appearance": {
+          "abnormal": true,
+          "finding": "Overweight young woman, height 158 cm, weight 78 kg. Coarse terminal hair over the upper lip and chin, mild facial acne with scarring, thinning at the crown. Dark velvety thickening at the nape of the neck and axillae. No pallor, no hirsutism of trunk beyond the linea alba."
+        },
+        "skill.gen.edema": {
+          "abnormal": false,
+          "finding": "No pedal oedema."
+        },
+        "skill.gen.vitals": {
+          "abnormal": true,
+          "finding": "Pulse 88 regular. Blood pressure 128/84. Respiratory rate 18. SpO2 98 percent on room air. Afebrile. Weight category overweight with central distribution."
+        }
+      },
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "history": {
+        "acne_hairfall": {
+          "cues": [
+            "pimples on the face",
+            "acne breakouts",
+            "hair falling from the scalp",
+            "thinning of hair",
+            "bald patches on the crown"
+          ],
+          "reply": "Pimples never really left me after school, and for two years the hair on top of my head has become thin enough that my scalp shows. My threading lady says the facial hair keeps coming back faster."
+        },
+        "bleeding_heaviness": {
+          "cues": [
+            "how heavy is the bleeding",
+            "how many pads per day",
+            "clots in the bleeding",
+            "bleeding for many days",
+            "flooding with blood"
+          ],
+          "reply": "When it finally comes after a long gap, the first two days are heavy with small clots, then it settles. My regular monthly periods in school were never this heavy."
+        },
+        "cycle_pattern": {
+          "cues": [
+            "how often do you get periods",
+            "gap between periods",
+            "interval between cycles",
+            "are your cycles regular",
+            "how many periods in a year"
+          ],
+          "reply": "They come every two to three months, sometimes longer. In the last year I had only five periods. They were never properly regular since I was fifteen.",
+          "skillId": "skill.hx.obg.menstrual_history"
+        },
+        "family_history": {
+          "cues": [
+            "diabetes in the family",
+            "anyone with thyroid in the house",
+            "mother or sisters with irregular periods",
+            "family history of excess hair",
+            "difficulty conceiving in the family"
+          ],
+          "reply": "My mother has diabetes and takes tablets, and my elder sister also gets periods only once in three months. My aunt needed many years of treatment before her first child."
+        },
+        "fertility_wish": {
+          "cues": [
+            "planning a pregnancy",
+            "trying for a child",
+            "want children soon",
+            "trying to conceive without success for years",
+            "using any contraception"
+          ],
+          "reply": "I have been married two years and we want a child within the next year. We use nothing to prevent pregnancy. My mother-in-law asks every month, which is why I have come now."
+        },
+        "food_exercise": {
+          "cues": [
+            "what do you eat in a day",
+            "sugary drinks and sweets",
+            "daily walking or exercise",
+            "hours of sitting work",
+            "trying to lose weight"
+          ],
+          "reply": "Hospital duty meals, rice twice a day, tea with sugar four times, and sweets whenever there is a function. Night shifts killed my morning walk. I joined a gym twice and left both times."
+        },
+        "hair_growth": {
+          "cues": [
+            "excess hair on the face",
+            "hair on the chin and upper lip",
+            "threading and waxing often",
+            "hair on the chest and stomach",
+            "coarse dark hair growth"
+          ],
+          "reply": "Since I was seventeen I thread my upper lip and chin every ten days, and now there is hair on my chest and around my nipples too. Waxing the stomach has become routine before functions.",
+          "skillId": "skill.hx.pcos.risk"
+        },
+        "medicines_used": {
+          "cues": [
+            "tablets for periods to come",
+            "hormonal pills taken",
+            "medicines for hair or pimples",
+            "steroid creams used",
+            "tablets for fits or mind"
+          ],
+          "reply": "A local doctor gave me pills for three months to bring periods, and they came only till I took them. No fits medicines, no mind medicines, only a fairness cream from a shop for two years."
+        },
+        "missed_periods": {
+          "cues": [
+            "months without periods",
+            "missed periods for long",
+            "longest gap without bleeding",
+            "amenorrhoea for months",
+            "no periods since when"
+          ],
+          "reply": "The longest gap was seven months last year. Each time I fear pregnancy, but the home test has always been negative.",
+          "skillId": "skill.hx.obg.menstrual_history"
+        },
+        "mood_stress": {
+          "cues": [
+            "feeling low or anxious",
+            "stress about weight and marriage",
+            "sleep at night",
+            "crying spells lately",
+            "confidence about appearance"
+          ],
+          "reply": "I avoid photos and mirrors before functions, and night duty plus family questions leave me crying some nights. Sleep is broken but I do fall asleep."
+        },
+        "obstetric_past": {
+          "cues": [
+            "previous pregnancies",
+            "any miscarriage before",
+            "children at home",
+            "abortions in the past",
+            "difficulty conceiving earlier"
+          ],
+          "reply": "This is my first marriage of two years and I have never been pregnant. No miscarriage, no abortion, no children yet."
+        },
+        "onset_course": {
+          "cues": [
+            "when did this problem begin",
+            "since when are periods irregular",
+            "gradual or sudden onset",
+            "how has it changed over years",
+            "course since teenage years"
+          ],
+          "reply": "It began when I was fifteen with periods skipping two months at a time, and the gaps have only grown longer since. The facial hair and weight came slowly over the same years, nothing sudden."
+        },
+        "past_illness": {
+          "cues": [
+            "diabetes or thyroid known",
+            "blood pressure problem",
+            "tuberculosis in the past",
+            "hospital admissions before",
+            "jaundice or fits earlier"
+          ],
+          "reply": "No diabetes, no thyroid problem, no high blood pressure that I know. Never admitted to hospital. I take no daily tablets."
+        },
+        "presenting": {
+          "cues": [
+            "what brings you today",
+            "what is the problem",
+            "why have you come",
+            "tell me about your complaint",
+            "how can I help you"
+          ],
+          "reply": "Doctor, my periods come only once in two or three months, hair grows on my face like a man, and my weight keeps rising. We want a child and nothing is happening.",
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "redflag_review": {
+          "cues": [
+            "sudden increase in hair growth",
+            "voice becoming deep",
+            "enlargement noticed down below",
+            "milky discharge from breasts",
+            "severe headache with vision change"
+          ],
+          "reply": "Nothing sudden, doctor, everything came slowly over years. No milk from the breasts, no deep voice, no severe headaches, no change in vision."
+        },
+        "sleep_daytime": {
+          "cues": [
+            "snoring at night",
+            "daytime sleepiness on duty",
+            "gasping in sleep",
+            "feeling fresh in the morning",
+            "sleep apnoea symptoms"
+          ],
+          "reply": "My husband says I snore loudly most nights, and on day duty after a night shift I doze sitting itself. Mornings feel heavy."
+        },
+        "weight_gain": {
+          "cues": [
+            "weight gain over the years",
+            "clothes becoming tight",
+            "weight since school days",
+            "dieting attempts before",
+            "heaviest you have been"
+          ],
+          "reply": "In school I was thin. Since I was eighteen I have gained steadily and nothing fits from college. Short diets bring two kilos down and four back up.",
+          "skillId": "skill.hx.pcos.risk"
+        }
+      },
+      "id": "case.pcos.sneha",
+      "initialVitals": {
+        "bpDiastolic": 84,
+        "bpSystolic": 128,
+        "gcs": 15,
+        "hr": 88,
+        "rr": 18,
+        "spo2": 98,
+        "temp": 37
+      },
+      "investigations": {
+        "gonadotrophin": {
+          "label": "LH, FSH and SHBG",
+          "note": "A raised LH relative to FSH supports the PCOS pattern but never makes the diagnosis alone; the Rotterdam count with exclusions does that.",
+          "result": "Luteinising hormone raised relative to follicle stimulating hormone. Sex hormone binding globulin low."
+        },
+        "lipids": {
+          "label": "Fasting lipid profile",
+          "note": "An adverse lipid pattern in a young woman is part of the syndrome, not a separate disease, and it sets the long term follow up.",
+          "result": "Triglycerides raised with low high density lipoprotein. Total cholesterol borderline."
+        },
+        "ogtt": {
+          "label": "Oral glucose tolerance test",
+          "note": "Silent glucose intolerance is the commonest hidden finding in a new PCOS assessment and decides whether metformin has a role.",
+          "result": "Fasting glucose normal with a raised two hour value: impaired glucose tolerance. Diabetes not yet present."
+        },
+        "ohp17": {
+          "label": "17-hydroxyprogesterone",
+          "note": "Normal result closes the one mimic that clinically resembles PCOS most closely, especially with a strong family pattern.",
+          "result": "Within the reference range, making non-classical congenital adrenal hyperplasia unlikely."
+        },
+        "screen_exclude": {
+          "label": "Thyroid function and prolactin",
+          "note": "Normal results here are what allow Rotterdam to be applied at all; either abnormality would have redirected the diagnosis.",
+          "result": "Thyroid stimulating hormone normal with normal free thyroxine. Prolactin normal. No galactorrhoea on examination."
+        },
+        "testosterone": {
+          "label": "Total and free testosterone",
+          "note": "Raised free androgen with low binding protein is the biochemical signature that matches the hair and acne you already see.",
+          "result": "Total testosterone raised above the laboratory reference range with low sex hormone binding globulin, giving a raised free androgen index."
+        },
+        "upt": {
+          "label": "Urine pregnancy test",
+          "note": "Negative result first, endocrine workup second: no assessment of secondary amenorrhoea starts before this.",
+          "result": "Negative."
+        },
+        "usg_pelvis": {
+          "label": "Pelvic ultrasound",
+          "note": "Morphology is one Rotterdam feature among three: it supports the diagnosis here but could never have made it alone.",
+          "result": "Both ovaries enlarged with multiple small peripheral follicles around dense central stroma. Endometrium thin. No adnexal mass, no free fluid."
+        }
+      },
+      "opening": "Sneha Patil, 24, a staff nurse from Nashik, sits in the gynaecology outpatient room while her mother-in-law waits outside. She looks well but is clearly anxious about her irregular periods. Introduce yourself and take a history.",
+      "patient": {
+        "age": 24,
+        "name": "Sneha Patil",
+        "occupation": "Staff nurse at a private hospital",
+        "residence": "Nashik, lives with her husband and in-laws",
+        "sex": "female"
+      },
+      "review": {
+        "status": "ai_drafted"
+      },
+      "teachingPoints": [
+        "The tempo alone should move you toward an endocrine syndrome before a single test: nine years of lengthening gaps since menarche, not the weeks of pregnancy or the sudden change of a tumour.",
+        "Two Rotterdam features are present here, oligomenorrhoea with clinical hyperandrogenism, and the scan is supporting rather than deciding: a normal scan would not have vetoed the diagnosis.",
+        "Normal thyroid function, prolactin and 17-hydroxyprogesterone are doing real diagnostic work: each one closes a mimic that can look identical, which is why the label is safe to use.",
+        "Acanthosis with impaired glucose tolerance in a 24-year-old is the finding that changes her next thirty years more than the periods do, and missing it would be the costliest error in this case.",
+        "The pelvic examination is normal and that normality is informative: no mass, no tenderness, no virilisation, so the workup stays endocrine and metabolic rather than surgical.",
+        "Fertility wishes choose the treatment branch: contraception-based cycle control is off the table when pregnancy is sought, and ovulation induction with metabolic care takes its place.",
+        "Weight management prescribed with a target, an affordable diet plan and follow up is treatment, not advice: even modest sustained loss can restore ovulation here."
+      ],
+      "title": "A nurse with nine years of irregular periods",
+      "managementModel": {
+        "accept": [
+          "lifestyle",
+          "weight",
+          "letrozole",
+          "metformin",
+          "glucose",
+          "referral",
+          "pregnancy"
+        ],
+        "answer": "Structured lifestyle management with diet and activity for weight loss, ovulation induction with letrozole since pregnancy is sought, metformin as an adjunct with impaired glucose tolerance, regular glucose and lipid follow up, and timely fertility referral if conception does not follow.",
+        "minMatch": 3
+      }
+    }
+  ]
+}

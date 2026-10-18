@@ -1,0 +1,1102 @@
+{
+  "_comment": "Surgery pathway for urinary calculus (renal colic and stone management). Shared history, examination, approach and presentation skills are referenced from the core and surgery packs; disease-specific risk and presentation skills live in the shared fragment shared-renal-calculus.json and are merged by the lead.",
+  "id": "renal-calculus",
+  "name": "Urinary calculus",
+  "fullName": "Urinary calculus with ureteric colic",
+  "system": "surgery",
+  "kbRef": "uric_acid_nephrolithiasis",
+  "oneLine": "Sudden loin to groin colic from a stone in the urinary tract, and what to do about the stone",
+  "subtitle": "Renal colic and stone management",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What a stone is, and why colic belongs to the ureter alone",
+      "skills": [
+        "skill.reasoning.renal.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age, climate, and occupation set the risk before a symptom is mentioned",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Stones cluster between 30 and 50 years, affect men and women, and favour hot regions and outdoor workers whose fluid intake lags behind sweat loss. Note occupation and daily water access: a truck driver or farmer in summer carries a different pre-test probability from an office worker."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Sudden waves, a path to the groin, and blood in the urine",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.surg.pain",
+        "skill.hx.surg.urinary_symptoms"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect a sudden attack story told in hours: severe loin pain arriving out of nowhere, coming in waves with pain-free gaps, often after jolting or exertion. That tempo separates a stone from chronic backache before anything else is known."
+        },
+        "skill.hx.surg.pain": {
+          "expect": "Map the radiation deliberately: loin to groin, testis or labia, inner thigh. Ask whether the patient tosses restlessly or lies still, whether jolting worsens it, and whether pressure relieves it, since colic eases with pressure while peritonitis worsens with movement."
+        },
+        "skill.hx.surg.urinary_symptoms": {
+          "expect": "Ask about haematuria, frequency, urgency, and strangury, and where lower ureteric irritation is suspected. A history of earlier passage of grit or a stone, and what analysis showed, belongs in this chapter, not left for later."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The background that decides prevention",
+      "skills": [
+        "skill.hx.renal.risk"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "A restless but stable patient, and the fever that changes everything",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Expect a restless adult tossing for relief, sweating, sometimes pale with vomiting, but alert and haemodynamically stable. A toxic, febrile, rigoring patient is no longer simple colic: think obstructed infected kidney."
+        },
+        "skill.gen.vitals": {
+          "expect": "Expect normal temperature, pulse, and blood pressure in uncomplicated colic. Fever, tachycardia, or hypotension with a known stone is the red flag combination that moves the case to urgent drainage rather than analgesia and waiting."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Abdominal and urinary examination",
+      "blurb": "A soft abdomen, a tender renal angle, and an impalpable kidney",
+      "skills": [
+        "skill.exam.surg.tenderness_rebound",
+        "skill.exam.surg.kidney_palpation",
+        "skill.exam.surg.distended_bladder"
+      ],
+      "emphasis": {
+        "skill.exam.surg.tenderness_rebound": {
+          "expect": "Expect a soft abdomen without guarding or rigidity despite severe reported pain: that mismatch is characteristic of colic. Examine the reported pain site last, and true involuntary rigidity points away from a stone toward peritonitis or a leaking aneurysm."
+        },
+        "skill.exam.surg.kidney_palpation": {
+          "expect": "Expect renal angle tenderness on the affected side with no palpable kidney mass in uncomplicated colic. A palpable tender kidney suggests pyonephrosis or hydronephrosis, and loin oedema with pitting points to a perinephric collection."
+        },
+        "skill.exam.surg.distended_bladder": {
+          "expect": "Expect an impalpable bladder in straightforward colic. Always check before concluding, since retention coexists in older men with prostatic disease, and a full bladder is the commonest lower abdominal mass and must not be mistaken for something else."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the colic picture together",
+      "blurb": "Waves, restlessness, radiation, and a soft abdomen",
+      "skills": [
+        "skill.reasoning.renal.colic"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Three sentences that contain the case",
+      "skills": [
+        "skill.present.renal.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "The mimics by site, and the two emergencies never to miss",
+      "skills": [
+        "skill.reasoning.renal.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "CT confirms it, urine and blood grade it, analysis names it",
+      "skills": [
+        "skill.investigation.renal.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and grading",
+      "blurb": "Site, size, composition, complicated or not",
+      "skills": [
+        "skill.reasoning.renal.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "NSAID first, help it pass, dissolve uric acid, drain infection",
+      "skills": [
+        "skill.treatment.renal.management",
+        "skill.annexure.renal.stones"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.renal.exam",
+        "title": "Examine the loin and abdomen in suspected colic",
+        "task": "This 38-year-old man has sudden severe left loin pain radiating to the groin with vomiting. Examine his abdomen and loins for a urinary stone and present your findings.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.surg.tenderness_rebound",
+          "skill.exam.surg.kidney_palpation",
+          "skill.exam.surg.distended_bladder"
+        ],
+        "examinerQuestions": [
+          "Demonstrate the renal angle test and explain what tenderness there means.",
+          "His abdomen is soft despite severe pain. Why does this favour colic over peritonitis?",
+          "You feel a tender ballotable loin mass with fever. How does your plan change?"
+        ]
+      },
+      {
+        "id": "osce.renal.history",
+        "title": "Take a colic history and spot the emergency",
+        "task": "This 38-year-old woman has sudden severe right loin pain radiating downward with vomiting. Take a focused history in six minutes and be ready to state what would make this an emergency.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.surg.pain",
+          "skill.hx.surg.urinary_symptoms",
+          "skill.hx.renal.risk"
+        ],
+        "examinerQuestions": [
+          "Is this story colic or pyelonephritis, and which single feature decides it?",
+          "She mentions shivering and burning urine. What test do you order first, and what result changes the plan?",
+          "She is eight weeks pregnant. How does your choice of imaging change?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.reasoning.renal.basics",
+      "skill.reasoning.renal.colic",
+      "skill.hx.renal.risk",
+      "skill.reasoning.renal.differential",
+      "skill.investigation.renal.workup",
+      "skill.reasoning.renal.diagnosis",
+      "skill.treatment.renal.management"
+    ]
+  },
+  "skills": {
+    "skill.reasoning.renal.basics": {
+      "id": "skill.reasoning.renal.basics",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "What a urinary stone is",
+      "oneLine": "A stone in the tract, and why colic belongs to the ureter alone",
+      "why": "Students call every severe loin pain renal colic, but colic only arises where a muscular tube tries to push past an obstruction, which in the urinary tract means the ureter. Knowing what a stone is, where it forms, and which stones vanish on a plain film decides the first test you order.",
+      "teach": [
+        {
+          "heading": "Stone, pain, and colic are three different things",
+          "body": "A calculus is a solid concretion of urinary salts. Renal pain is a dull constant ache at the renal angle from distension of the capsule and pelvis, felt with the hand on the waist, thumb toward the umbilicus.\n\nColic is different: a griping pain in waves with pain-free gaps, and it develops only when the ureter obstructs and its smooth muscle goes into spasm. A severe fluctuating kidney pain without that griping character is not colic, whatever it is called at the bedside."
+        },
+        {
+          "heading": "Common stones and the odd one out",
+          "body": "Most urinary stones contain calcium, usually calcium oxalate, and show on a plain radiograph. Uric acid stones are the important exception: they are radiolucent, invisible on plain films, and seen readily on non-contrast CT as low density stones.\n\nUric acid is the end product of purine metabolism. Below a urine pH of about 5.5 its insoluble form dominates and precipitates, so a persistently acidic urine is the single most important factor. Gout, the metabolic syndrome, type 2 diabetes, obesity, high purine intake, chronic diarrhoea with volume loss, and rapid cell turnover all feed this process."
+        },
+        {
+          "heading": "What happens next depends on infection",
+          "body": "An uncomplicated stone causes pain and haematuria but the patient stays afebrile with stable vitals. Obstruction with superimposed infection is a different disease: fever, rigors, and a rising creatinine mean an obstructed infected kidney, which needs antibiotics and urgent drainage, not stronger analgesia.\n\nSome stones sit quietly for years: a staghorn calculus can grow with little pain because slow growth never stretches the capsule suddenly. Painless does not mean harmless, since silent obstruction still destroys the kidney."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why is the term renal colic a misnomer?",
+          "a": "Colic only develops when a muscular conducting tube obstructs, which in the urinary tract is the ureter, so the colic is ureteric even when the pain starts in the loin.",
+          "accept": [
+            "muscular tube",
+            "ureter",
+            "obstruction",
+            "ureteric"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A plain abdominal radiograph shows no stone but the pain persists. What stone could this still be, and what test settles it?",
+          "a": "A radiolucent uric acid stone, which is invisible on plain films. Non-contrast CT shows it as a low density stone.",
+          "accept": [
+            "radiolucent",
+            "uric acid",
+            "non-contrast CT",
+            "low density"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does gout predispose to uric acid stones?",
+          "a": "Gout brings hyperuricosuria and, with insulin resistance, an unduly acidic urine from impaired ammonium excretion, so concentrated acidic urine precipitates the insoluble form of uric acid.",
+          "accept": [
+            "hyperuricosuria",
+            "acidic urine",
+            "ammonium",
+            "insulin resistance"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "uric_acid_nephrolithiasis: pathophysiology"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Renal pain and ureteric colic"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.renal.colic": {
+      "id": "skill.reasoning.renal.colic",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "The colic picture",
+      "oneLine": "Sudden loin to groin waves, a restless patient, and what the radiation tells you",
+      "why": "Ureteric colic has one of the most recognisable pain patterns in surgery, yet it is confused with appendicitis, biliary pain, and backache every week. The radiation path follows the stone level, the patient tosses instead of lying still, and the abdomen stays soft: those three facts together are the diagnosis at the bedside.",
+      "teach": [
+        {
+          "heading": "The pain and how it behaves",
+          "body": "The attack starts suddenly in the loin and radiates down along the ureter toward the groin, the base of the penis or scrotum in men, the labia in women, and the inner upper thigh. It comes in griping waves with sudden relief between attacks, and jolting or unusual movement often sets it off.\n\nThe patient tosses on the bed trying in vain for relief. That restlessness is the bedside opposite of peritonitis, where the patient lies perfectly still. Vomiting, sweating, and a look of collapse accompany severe attacks."
+        },
+        {
+          "heading": "The radiation maps the stone level",
+          "body": "An upper ureteric stone refers pain to the testicle through shared innervation. A mid ureteric stone refers toward McBurney point on the right, mimicking appendicitis, or the left lower quadrant, mimicking diverticular pain.\n\nA stone nearing the bladder causes vesical irritability: frequency, urgency, and strangury, a painful desire to pass urine that produces little and relieves nothing. Haematuria commonly accompanies the colic."
+        },
+        {
+          "heading": "What examination should show",
+          "body": "Expect a restless afebrile adult with normal vitals and a soft abdomen without guarding or rigidity, which is what separates colic from an acute abdomen. The one local sign is tenderness at the renal angle, between the twelfth rib and the erector spinae.\n\nThe kidney itself is not palpable in an uncomplicated stone, and the bladder is impalpable unless retention coexists. Fever, marked tenderness with guarding, or a palpable tender kidney moves the case toward infection or obstruction and out of simple colic."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How does the behaviour of a colic patient differ from a peritonitis patient?",
+          "a": "The colic patient tosses restlessly on the bed seeking relief, while the peritonitis patient lies perfectly still because movement worsens the pain.",
+          "accept": [
+            "tosses",
+            "restless",
+            "lies still",
+            "movement"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Right lower quadrant pain with vomiting: how do you separate a mid ureteric stone from appendicitis?",
+          "a": "The stone pain starts in the loin and radiates downward in waves with pain-free gaps, often with haematuria and urinary frequency, and the abdomen stays soft without localised guarding.",
+          "accept": [
+            "loin",
+            "radiates",
+            "haematuria",
+            "soft abdomen",
+            "waves"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What does new frequency with strangury tell you about where the stone is?",
+          "a": "The stone has reached the lower ureter near the bladder, where it irritates the vesical mucosa and produces urgency, frequency, and painful ineffectual voiding.",
+          "accept": [
+            "lower ureter",
+            "bladder",
+            "irritability",
+            "frequency",
+            "strangury"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "uric_acid_nephrolithiasis: clinicalPearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Ureteric colic: radiation and examination"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.renal.differential": {
+      "id": "skill.reasoning.renal.differential",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "What else looks like ureteric colic",
+      "oneLine": "The mimics by site, and the two emergencies that must never be missed",
+      "why": "A mid ureteric stone copies appendicitis, an upper stone copies biliary colic, and any of them can be copied in turn by a leaking aneurysm. Working the differential by anatomical site keeps the dangerous mimics in view instead of anchoring on the first plausible stone.",
+      "teach": [
+        {
+          "heading": "Infective mimics in the urinary tract",
+          "body": "Acute pyelonephritis shares loin pain and vomiting but adds high fever with rigors, a toxic patient, and marked renal angle tenderness rather than waves with pain-free gaps. Urine shows leucocytes and nitrite, not just blood.\n\nPyonephrosis, pus under pressure behind an obstruction, presents with a tender palpable kidney, fever, and sometimes oedema of the loin skin. It is diagnosed by suspecting it: an obstructed system with infection needs drainage, and antibiotics alone will fail."
+        },
+        {
+          "heading": "Surgical mimics outside the tract",
+          "body": "Acute appendicitis gives pain that starts centrally and settles in the right iliac fossa with localised guarding and fever, without loin origin, radiation to the groin, or haematuria. On the right side a mid ureteric stone is its closest copy, and urine microscopy separates them.\n\nAcute cholecystitis stays under the right ribs with Murphy sign and often fever. A leaking abdominal aortic aneurysm in an older patient copies colic with flank pain and collapse but shows hypotension and a pulsatile mass: missing it is fatal."
+        },
+        {
+          "heading": "Pelvic and genital mimics",
+          "body": "A ruptured ectopic pregnancy in a woman of childbearing age gives lower abdominal pain with syncope, pallor, and a positive pregnancy test; always exclude pregnancy before imaging a young woman with flank pain.\n\nTesticular torsion gives sudden scrotal pain with a high tender testis and absent cremasteric reflex, while colic pain reaches the testis from above with a normal scrotum. Calcium oxalate stones, the commonest kind, are distinguished from uric acid stones by radio opacity and by stone analysis, not by pain."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name four differentials for sudden loin to groin pain and one feature that favours each over a stone.",
+          "a": "Pyelonephritis with fever and rigors, appendicitis with settled right iliac fossa guarding, a leaking aortic aneurysm with hypotension and a pulsatile mass, and ectopic pregnancy with syncope and a positive pregnancy test.",
+          "accept": [
+            "pyelonephritis",
+            "appendicitis",
+            "aneurysm",
+            "ectopic",
+            "pregnancy test"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "An older man has flank pain, a blood pressure of 88/60, and a pulsatile abdominal mass. What is the diagnosis and the next step?",
+          "a": "A leaking abdominal aortic aneurysm until proven otherwise. Resuscitate and get immediate vascular surgical help; do not waste time on a stone workup.",
+          "accept": [
+            "aneurysm",
+            "leaking",
+            "resuscitate",
+            "vascular",
+            "urgent"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "uric_acid_nephrolithiasis: additionalDifferentials"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Acute abdomen: differential diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.investigation.renal.workup": {
+      "id": "skill.investigation.renal.workup",
+      "kind": "investigation",
+      "system": "surgery",
+      "title": "Proving the stone and grading the threat",
+      "oneLine": "CT finds it, urine and blood grade it, analysis names it",
+      "why": "The wrong test sequence harms: a plain film misses the very stone you most need to dissolve, and waiting for a stone analysis before treating pain or infection delays care. Each test answers one question, confirm, grade, or name, and knowing which is which keeps the order right.",
+      "teach": [
+        {
+          "heading": "Confirm: see the stone",
+          "body": "Non-contrast CT of the kidney, ureter, and bladder is the confirmatory test: it shows the stone, its exact site and size, the degree of hydronephrosis, and the characteristically low density of a uric acid stone. Order it within a day, and at once with fever, a single kidney, or diagnostic doubt.\n\nUltrasound comes first in pregnancy and in children, with MRI second in pregnancy and low dose CT only as a last option. A plain radiograph is a poor rule-out test: uric acid stones are radiolucent and invisible on it, so a normal film never excludes a stone."
+        },
+        {
+          "heading": "Grade: urine and blood",
+          "body": "Dip the urine for blood, leucocytes, nitrite, and pH, then send microscopy and culture. Blood with sterile urine fits a stone; leucocytes with nitrite points to infection, and an infected obstructed system is the emergency. Repeated fresh urine pH that stays acidic supports a uric acid stone.\n\nBlood tests grade the threat: creatinine and electrolytes for obstruction and kidney injury, a full blood count and CRP for infection, and serum urate with a metabolic screen for diabetes. Test for pregnancy in every woman of childbearing age before CT."
+        },
+        {
+          "heading": "Name: analyse the stone",
+          "body": "Strain the urine and send any passed stone for infrared spectroscopy or diffraction analysis in every first-time former. Analysis separates uric acid from calcium oxalate, xanthine, and matrix stones, and only that answer unlocks dissolution therapy.\n\nHigh risk and recurrent formers need a 24-hour urine for volume, uric acid, pH, and citrate, guided by the analysis. Confirm passage with imaging where it is uncertain: a silent retained fragment can obstruct without pain and cost the kidney."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the confirmatory test for a ureteric stone, and what three facts must its report carry?",
+          "a": "Non-contrast CT of the kidney, ureter, and bladder, reporting the stone site, its size, and the degree of hydronephrosis.",
+          "accept": [
+            "non-contrast CT",
+            "site",
+            "size",
+            "hydronephrosis"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Urine shows blood alone versus leucocytes with nitrite. What does each mean?",
+          "a": "Blood alone with sterile urine fits an uncomplicated stone, while leucocytes with nitrite mean infection, which with obstruction is the emergency needing drainage.",
+          "accept": [
+            "sterile",
+            "infection",
+            "nitrite",
+            "obstruction",
+            "drainage"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why send a passed stone for analysis even when the patient feels cured?",
+          "a": "Analysis names the composition, which decides dissolution, diet, and drug prevention, and separates dissolvable uric acid stones from calcium and other stones that need different care.",
+          "accept": [
+            "composition",
+            "dissolution",
+            "prevention",
+            "calcium",
+            "uric acid"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "uric_acid_nephrolithiasis: additionalInvestigations"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Urinary stones: investigations and imaging"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.renal.diagnosis": {
+      "id": "skill.reasoning.renal.diagnosis",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Naming the stone and grading the case",
+      "oneLine": "Site, size, composition, and whether infection changes everything",
+      "why": "Ureteric stone is not a complete diagnosis: a 4 mm distal stone in an afebrile patient goes home, while the same stone with fever goes to theatre for drainage. A diagnostic statement that omits size, site, and the infected question leaves the plan to guesswork.",
+      "teach": [
+        {
+          "heading": "The complete statement",
+          "body": "Name the stone by site and side, give its size in millimetres, state the composition where known, and grade hydronephrosis. Then answer the two emergency questions: is there infection with the obstruction, and is there kidney injury, anuria, or a single kidney?\n\nA worked example: left lower ureteric stone, 6 mm, of uric acid composition on analysis, with mild hydronephrosis, normal creatinine, sterile urine, and no fever. That sentence already contains the plan."
+        },
+        {
+          "heading": "Size and site predict passage",
+          "body": "Most ureteric stones under 5 mm pass on their own, often within a few weeks, while larger and more proximal stones pass less often and earn earlier intervention. A distal stone is a better candidate for watchful waiting with expulsive therapy than a proximal one.\n\nLow density on CT with persistently acidic urine and a raised serum urate points toward uric acid composition even before analysis returns. Composition matters because uric acid stones can dissolve medically, which no other common stone offers."
+        },
+        {
+          "heading": "Complicated versus uncomplicated",
+          "body": "Uncomplicated means controlled pain, no fever, sterile urine, stable creatinine, and a passable stone. Complicated means infection with obstruction, intractable pain, rising creatinine, anuria, bilateral obstruction, or a single kidney.\n\nThe complicated case is graded by urgency: an obstructed infected kidney needs antibiotics and drainage within hours, while a large sterile obstructing stone needs planned removal. Over-alkalinising during treatment risks calcium phosphate stones, so the urine pH is followed, not just raised."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What four facts make a stone diagnosis complete?",
+          "a": "Site and side, size in millimetres, composition where known, and whether obstruction or infection is present.",
+          "accept": [
+            "site",
+            "size",
+            "composition",
+            "infection",
+            "obstruction"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Which stones are most likely to pass on their own, and which feature argues for earlier intervention?",
+          "a": "Small distal stones under 5 mm pass most often; larger size, proximal site, persistent obstruction, infection, or a single kidney argue for earlier intervention.",
+          "accept": [
+            "5 mm",
+            "distal",
+            "proximal",
+            "infection",
+            "single kidney"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does composition change the diagnosis, not just the treatment?",
+          "a": "A uric acid stone is radiolucent with acidic urine and can dissolve with alkalinisation, so naming it reclassifies the case from surgical to potentially medical.",
+          "accept": [
+            "radiolucent",
+            "acidic urine",
+            "dissolve",
+            "alkalinisation"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "uric_acid_nephrolithiasis: prognosis"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Ureteric stones: diagnosis and indications for intervention"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.treatment.renal.management": {
+      "id": "skill.treatment.renal.management",
+      "kind": "treatment",
+      "system": "surgery",
+      "title": "Managing renal colic and the stone",
+      "oneLine": "NSAID first, fluids and passage, dissolve what dissolves, drain what is infected",
+      "why": "Colic tempts toward opioids and antispasmodics, but NSAIDs relieve it better, antispasmodics add nothing, and opioids sedate without touching ureteric spasm. The plan runs in layers, pain now, passage over weeks, dissolution for uric acid, and drainage the same day when infection obstructs.",
+      "teach": [
+        {
+          "heading": "Pain relief in the emergency bay",
+          "body": "Give an NSAID first by any route, for example diclofenac 75 mg deep intramuscularly, since NSAIDs relieve colic better than opioids and also reduce ureteric spasm. Take care with kidney disease, heart disease, bleeding risk, dehydration, and late pregnancy.\n\nWhere NSAIDs are unsafe or insufficient, use intravenous paracetamol, and only then a titrated opioid such as morphine in small increments, avoiding pethidine. Antispasmodics such as hyoscine or drotaverine add nothing to an NSAID despite their popularity. Add an antiemetic, and admit pain that no drug controls for urgent drainage."
+        },
+        {
+          "heading": "Help the stone pass",
+          "body": "Small uncomplicated ureteric stones with controlled pain can be observed, since about three quarters of stones under 5 mm pass, taking on average a little over two weeks. Strain the urine, confirm passage with imaging where it is uncertain, and keep a regular NSAID for several days to prevent recurrent colic.\n\nOffer tamsulosin 400 micrograms once daily as medical expulsive therapy for distal ureteric stones over 5 mm up to 10 mm. Stop expulsive therapy and refer urgently if infection, refractory pain, or falling kidney function appears."
+        },
+        {
+          "heading": "Dissolve uric acid stones",
+          "body": "Alkalinise the urine with potassium citrate or sodium bicarbonate to shift urate toward its soluble form, which can dissolve existing stones without surgery. Combine this with generous fluids, and add tamsulosin where a ureteric stone also needs help passing.\n\nLower urate production with allopurinol where hyperuricosuria, gout, or high cell turnover persists. Reduce purine and animal protein intake, lose weight, and treat the insulin resistance behind the acidic urine. Follow serial urine pH, 24-hour chemistry, and analysis to confirm response."
+        },
+        {
+          "heading": "Drain infection, remove what will not pass",
+          "body": "An obstructed kidney with infection, or anuria, is a urological emergency: take blood and urine cultures, start intravenous antibiotics at once, and arrange urgent decompression by ureteric stent or nephrostomy. Send drained urine for culture, adjust antibiotics, and delay definitive stone treatment until infection clears.\n\nActive removal suits stones unlikely to pass, persistent pain or obstruction, and kidney injury including bilateral obstruction or a single kidney. Ureteroscopy clears best in one sitting, shock wave lithotripsy carries lower morbidity, and stones over 2 cm in the kidney need percutaneous nephrolithotomy. In India, arrange Janani Suraksha or state insurance cover where admission is needed, and refer early from a primary centre without a urologist."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is first-line analgesia for renal colic, and what should not be used instead?",
+          "a": "An NSAID such as diclofenac is first-line; antispasmodics add nothing and opioids are reserved for when NSAIDs and paracetamol fail or are unsafe.",
+          "accept": [
+            "NSAID",
+            "diclofenac",
+            "antispasmodics",
+            "opioids"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which stones qualify for tamsulosin expulsive therapy?",
+          "a": "Distal ureteric stones over 5 mm up to 10 mm, given daily until passage or for a limited course, stopped early for infection, refractory pain, or falling function.",
+          "accept": [
+            "distal",
+            "5 mm",
+            "10 mm",
+            "infection",
+            "tamsulosin"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Fever and rigors appear in a patient with a known obstructing stone. What changes?",
+          "a": "This is now an obstructed infected kidney: blood and urine cultures, immediate intravenous antibiotics, and urgent decompression by stent or nephrostomy, with definitive stone treatment deferred.",
+          "accept": [
+            "cultures",
+            "antibiotics",
+            "decompression",
+            "stent",
+            "nephrostomy"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "renal_colic: NSAID analgesia first-line (opioid if contraindicated)"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "uric_acid_nephrolithiasis: management"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Renal colic and urinary stones: management"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of drug CLASS and principle, with doses quoted only where the cited knowledge base states them. Specific agents and regimens must be confirmed against your current hospital or national guideline at the time of prescribing. CliniX does not prescribe."
+    },
+    "skill.annexure.renal.stones": {
+      "id": "skill.annexure.renal.stones",
+      "kind": "annexure",
+      "system": "surgery",
+      "title": "Stone types and prevention at a glance",
+      "oneLine": "Which stone, how it shows, and how to stop the next one",
+      "why": "Prevention fails when every stone gets the same generic drink more water advice. Composition, imaging behaviour, and urine chemistry each point to a specific preventive drug and diet, and this table keeps those pairings exact.",
+      "teach": [
+        {
+          "heading": "Know the stone by its behaviour",
+          "table": {
+            "cols": [
+              "Stone",
+              "Imaging and urine clue",
+              "Specific prevention"
+            ],
+            "rows": [
+              [
+                "Calcium oxalate, commonest",
+                "Radio opaque on plain film",
+                "Thiazide with fluids where hypercalciuria is proven, normal dietary calcium, low salt"
+              ],
+              [
+                "Uric acid",
+                "Radiolucent, low density on CT, acidic urine",
+                "Alkaline citrate, allopurinol for hyperuricosuria, low purine diet, weight control"
+              ],
+              [
+                "Struvite",
+                "Large, with chronic infection",
+                "Treat infection fully, remove all fragments, follow urine culture"
+              ],
+              [
+                "Cystine",
+                "Young recurrent former",
+                "Very high fluids, alkaline urine, specialist referral"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Fluids and food for every former",
+          "body": "Advise 2.5 to 3.0 litres of water daily for a urine output of 2.0 to 2.5 litres, with more in hot climates and outdoor work. Never advise a low calcium diet: 1 to 1.2 g of dietary calcium daily protects against stones, while excess salt, animal protein, sugary drinks, and excess vitamin C raise risk.\n\nHigh risk and recurrent formers earn a metabolic evaluation with 24-hour urine, guided by stone analysis. Correct volume depletion from chronic diarrhoea, and review stone passage on imaging so a silent fragment is never left to obstruct quietly."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which common stone is invisible on a plain radiograph?",
+          "a": "Uric acid stones are radiolucent and invisible on plain films, seen instead on non-contrast CT.",
+          "accept": [
+            "uric acid",
+            "radiolucent",
+            "plain",
+            "CT"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A patient asks whether to stop drinking milk to prevent stones. What do you advise?",
+          "a": "No: normal dietary calcium of 1 to 1.2 g a day protects against stones, and restricting calcium increases risk. Cut salt, animal protein, and sugary drinks instead.",
+          "accept": [
+            "normal calcium",
+            "restricting increases",
+            "salt",
+            "animal protein"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "uric_acid_nephrolithiasis: management"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Urinary stone disease: prevention of recurrence"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.renal.suresh",
+      "title": "A truck driver with waves of loin pain",
+      "opening": "Suresh Yadav, 38, has come to the surgical outpatient room doubled up with left sided pain. He cannot sit still and keeps shifting on the stool. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Suresh Yadav",
+        "age": 38,
+        "sex": "male",
+        "occupation": "Long distance truck driver on the Jaipur highway",
+        "residence": "Urban, lives with his wife and two children"
+      },
+      "initialVitals": {
+        "hr": 104,
+        "bpSystolic": 136,
+        "bpDiastolic": 84,
+        "rr": 20,
+        "spo2": 98,
+        "temp": 37.2,
+        "gcs": 15
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "tell me about",
+            "how can i help",
+            "chief complaint"
+          ],
+          "reply": "Doctor, since this morning I have sudden severe pain on my left side that comes in waves and goes down toward my groin.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "onset_timing": {
+          "cues": [
+            "when did it start",
+            "how long ago",
+            "sudden or gradual",
+            "since when",
+            "time of onset"
+          ],
+          "reply": "It started suddenly at about 6 in the morning while I was loading the truck. It was the worst within half an hour.",
+          "key": true
+        },
+        "pain_site": {
+          "cues": [
+            "where is the pain",
+            "site of the pain",
+            "show me where",
+            "point with your finger",
+            "which side"
+          ],
+          "reply": "It starts here in the left loin, just below the ribs at the back, and stays worst there.",
+          "key": true
+        },
+        "pain_spread": {
+          "cues": [
+            "radiation of pain",
+            "where does it travel",
+            "does it move down",
+            "pain in the groin",
+            "pain in the thigh",
+            "testicle pain"
+          ],
+          "reply": "Yes, it travels down from the loin across to the front and into my left groin and testicle. When the wave comes it pulls down there.",
+          "key": true,
+          "skillId": "skill.hx.surg.pain"
+        },
+        "pain_character": {
+          "cues": [
+            "colicky or constant",
+            "waves of pain",
+            "griping nature",
+            "pain free gap",
+            "does it come and go"
+          ],
+          "reply": "It comes in grips, very severe for twenty minutes, then eases for a while, then grips again. Between the waves there is a dull ache but I can breathe.",
+          "key": true
+        },
+        "restlessness": {
+          "cues": [
+            "tossing and turning with the colic pain",
+            "unable to keep still during the pain",
+            "behaviour during pain",
+            "restless or still",
+            "do you keep moving"
+          ],
+          "reply": "I cannot lie still, doctor. I keep turning and walking a few steps, nothing gives relief. Lying quietly makes it worse.",
+          "key": true
+        },
+        "aggravating_relief": {
+          "cues": [
+            "what worsens the pain",
+            "jolting or movement",
+            "what relieves it",
+            "effect of pressure",
+            "does vomiting relieve"
+          ],
+          "reply": "The truck jerks on the road made it worse this morning. Pressing my hand hard on the side gives a little relief. Vomiting did not relieve it.",
+          "key": false
+        },
+        "nausea_vomiting": {
+          "cues": [
+            "vomiting episodes",
+            "feeling of nausea",
+            "retching episodes",
+            "belching trouble"
+          ],
+          "reply": "I vomited twice, bitter watery vomit. I feel nauseated whenever a wave of pain comes.",
+          "key": false
+        },
+        "waterworks": {
+          "cues": [
+            "burning while urinating",
+            "frequency of passing urine",
+            "urgency to pass urine",
+            "strangury feeling",
+            "desire to urinate often"
+          ],
+          "reply": "Since morning I feel like passing urine again and again, but only a little comes each time and it burns at the end.",
+          "key": true,
+          "skillId": "skill.hx.surg.urinary_symptoms"
+        },
+        "blood_in_urine": {
+          "cues": [
+            "red colour urine",
+            "blood while urinating",
+            "gritty particles in urine",
+            "passage of stone",
+            "colour of urine"
+          ],
+          "reply": "The urine looked reddish this morning, and once I saw something like sand in it. I have not passed any proper stone that I noticed.",
+          "key": true
+        },
+        "fever_screen": {
+          "cues": [
+            "fever with chills",
+            "shivering episodes",
+            "rigors with fever",
+            "rise of temperature"
+          ],
+          "reply": "No fever, no shivering. I am sweating from the pain, not from fever.",
+          "key": true
+        },
+        "earlier_stone": {
+          "cues": [
+            "stone trouble earlier",
+            "previous colic attack",
+            "earlier passage of stone",
+            "urology treatment before"
+          ],
+          "reply": "Two years ago I had a similar pain on the right side for two days and it settled with injections. Nobody told me what it was and no test was done.",
+          "key": true,
+          "skillId": "skill.hx.renal.risk"
+        },
+        "metabolic_background": {
+          "cues": [
+            "joint swelling trouble",
+            "big toe pain",
+            "sugar disease diabetes",
+            "blood pressure trouble",
+            "gout attacks"
+          ],
+          "reply": "My right big toe swells painfully two or three times a year. My father had sugar disease. My own sugar was borderline last year.",
+          "key": true
+        },
+        "medicine_intake": {
+          "cues": [
+            "tablets taken regularly",
+            "water tablets use",
+            "vitamin tablets use",
+            "gout medicine use"
+          ],
+          "reply": "Nothing regular, doctor. Sometimes a painkiller for the toe. No water tablets or vitamins.",
+          "key": false
+        },
+        "diet_fluids": {
+          "cues": [
+            "water intake daily",
+            "meat eating habit",
+            "salt intake habit",
+            "beer drinking habit"
+          ],
+          "reply": "On the road I drink maybe two glasses of water the whole day and lots of tea. I eat meat most days and the food is very salty.",
+          "key": false
+        },
+        "family_thread": {
+          "cues": [
+            "family stone trouble",
+            "relatives with kidney trouble",
+            "stones running in family"
+          ],
+          "reply": "My elder brother had a stone operation three years ago in Jaipur. My father never had stones.",
+          "key": false
+        },
+        "heat_exposure": {
+          "cues": [
+            "driving long hours",
+            "working in the heat",
+            "sweating heavily at work",
+            "nature of occupation"
+          ],
+          "reply": "I drive ten to twelve hours a day in this heat and sweat a lot. There is no place to stop for water or toilets on that stretch.",
+          "key": false
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Restless adult, tossing on the couch and unable to lie still, sweating with each wave of pain. Alert, not toxic, no pallor or oedema.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Temperature 37.2 C. Pulse 104 regular. Blood pressure 136/84. Respiratory rate 20. SpO2 98 percent on room air.",
+          "abnormal": true
+        },
+        "skill.exam.surg.tenderness_rebound": {
+          "finding": "Abdomen soft throughout. Mild tenderness in the left flank without guarding, rigidity, or rebound tenderness. No palpable mass.",
+          "abnormal": true
+        },
+        "skill.exam.surg.kidney_palpation": {
+          "finding": "Marked tenderness at the left renal angle between the twelfth rib and the erector spinae. Neither kidney ballotable, no renal mass felt.",
+          "abnormal": true
+        },
+        "skill.exam.surg.distended_bladder": {
+          "finding": "No suprapubic swelling. Bladder impalpable, suprapubic area resonant on percussion.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "nct_kub",
+        "urine_dip",
+        "creatinine",
+        "serum_urate",
+        "stone_strain"
+      ],
+      "investigations": {
+        "nct_kub": {
+          "label": "Non-contrast CT kidney ureter bladder",
+          "indicated": true,
+          "result": "6 mm stone in the left lower ureter with mild left hydronephrosis. Stone of low density, in keeping with uric acid composition. No second stone.",
+          "note": "This confirms site, size, and mild obstruction in one test, and the low density already hints at a dissolvable stone."
+        },
+        "urine_dip": {
+          "label": "Urine dipstick and microscopy",
+          "indicated": true,
+          "result": "pH persistently acidic at 5.5 on repeat testing. Blood ++++, leucocytes negative, nitrite negative. Microscopy shows red cells without bacteria.",
+          "note": "Blood with sterile urine fits an uncomplicated stone; leucocytes with nitrite would have meant infection and a different plan."
+        },
+        "creatinine": {
+          "label": "Creatinine and electrolytes",
+          "indicated": true,
+          "result": "Creatinine 0.9 mg/dL. Sodium and potassium normal.",
+          "note": "Normal kidney function keeps this case uncomplicated; a rising creatinine would argue for earlier intervention."
+        },
+        "serum_urate": {
+          "label": "Serum urate and sugar screen",
+          "indicated": true,
+          "result": "Serum urate 8.4 mg/dL, raised. Fasting glucose in the impaired range.",
+          "note": "Raised urate with acidic urine supports uric acid composition and marks him for gout and diabetes care alongside stone care."
+        },
+        "stone_strain": {
+          "label": "Urine straining and stone analysis",
+          "indicated": true,
+          "result": "Straining advised with a sieve; no stone passed yet. Analysis will follow if he passes one.",
+          "note": "Analysis is what unlocks dissolution and prevention, so it is arranged now rather than after he feels better."
+        },
+        "urine_culture": {
+          "label": "Urine culture",
+          "indicated": true,
+          "result": "No growth at 48 hours.",
+          "note": "Sterile urine is what allows safe conservative care; growth with this obstruction would have meant drainage."
+        },
+        "fbc": {
+          "label": "Full blood count",
+          "indicated": true,
+          "result": "Haemoglobin 14.1 g/dL. Total leucocyte count 8,200 per mm3 with normal differential.",
+          "note": "No leucocytosis fits the afebrile picture and argues against infection."
+        },
+        "plain_xray": {
+          "label": "Plain abdominal radiograph",
+          "indicated": false,
+          "result": "No radio opaque stone seen.",
+          "note": "Not indicated as a rule-out test here: a uric acid stone is radiolucent and invisible on plain films, so a normal film never excludes it."
+        }
+      },
+      "differentialModel": {
+        "answer": "Left ureteric stone with mild hydronephrosis. Consider acute pyelonephritis, pyonephrosis, acute appendicitis on the right side pattern, ectopic pregnancy in a woman, a leaking abdominal aortic aneurysm in an older patient, and acute cholecystitis for right sided pain.",
+        "accept": [
+          "renal calculi",
+          "ureteric colic",
+          "acute pyelonephritis",
+          "pyonephrosis",
+          "hydronephrosis",
+          "acute appendicitis",
+          "abdominal aortic aneurysm",
+          "acute cholecystitis"
+        ],
+        "minMatch": 3
+      },
+      "diagnosis": {
+        "answer": "Left lower ureteric stone, 6 mm, of probable uric acid composition, with mild hydronephrosis, uncomplicated with sterile urine and normal creatinine.",
+        "accept": [
+          "renal calculi",
+          "ureteric colic",
+          "nephrolithiasis",
+          "kidney stone",
+          "uric acid nephrolithiasis",
+          "hydronephrosis"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "NSAID analgesia with diclofenac first, antiemetic and fluids, tamsulosin expulsive therapy for this distal stone, urine alkalinisation with potassium citrate to dissolve it, allopurinol for the raised urate, high fluid intake counselling, straining with analysis, review imaging to confirm passage, and urology referral if infection, refractory pain, or obstruction appear.",
+        "accept": [
+          "analgesia",
+          "nsaid",
+          "tamsulosin",
+          "alkalinisation",
+          "potassium citrate",
+          "allopurinol",
+          "fluids",
+          "stone analysis",
+          "follow up imaging",
+          "referral"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The tempo and behaviour diagnose before any scan: sudden waves with pain-free gaps in a patient who tosses about, against the stillness of peritonitis.",
+        "Radiation maps the level: loin to groin and testicle here means a lower ureteric stone with vesical irritability, which the frequency and strangury confirm.",
+        "A soft abdomen without guarding despite severe pain is the expected mismatch of colic, and renal angle tenderness is the one local sign to elicit.",
+        "Blood with sterile urine and no fever keeps this uncomplicated and suitable for conservative care; leucocytes with nitrite or fever would convert it to an emergency.",
+        "A normal plain film means nothing for a uric acid stone: radiolucent stones need CT, and the low density on CT is already a therapeutic clue toward dissolution.",
+        "Raised urate, acidic urine, gouty toe attacks, and low fluid intake on highway duty tie this stone to a treatable metabolic background, not bad luck.",
+        "Passage must be confirmed on imaging and the stone analysed: a silent retained fragment can obstruct without pain and cost the kidney."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

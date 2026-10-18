@@ -1,0 +1,1185 @@
+{
+  "_comment": "Paediatric pneumonia pathway. Same spine as the adult pneumonia exemplar: shared paediatric and core skills carry the examination, the disease file adds ARI classification and the consolidation picture, and the simulated child is classified by the WHO rules taught inside.",
+  "id": "childhood-pneumonia",
+  "name": "Pneumonia in Children",
+  "fullName": "Pneumonia in children: ARI classification and management",
+  "system": "paediatrics",
+  "kbRef": "pneumonia_long_case",
+  "oneLine": "Fever with cough and fast breathing in a young child, and the classification that decides home or hospital",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What pneumonia means in a young child, and how it differs from a cold",
+      "skills": [
+        "skill.childpneumonia.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the child",
+      "blurb": "Befriend first, examine second, count the rate while the child is calm",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.paed.rapport",
+        "skill.approach.paed.consent_assent",
+        "skill.approach.paed.positioning"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age in months sets every cutoff that follows",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Record age in months, not years: every breathing cutoff in this pathway changes with age, and a 14-month-old and a 4-year-old are classified by different numbers. Note birth weight and prematurity alongside, since a low birth weight infant with pneumonia is managed a step more cautiously throughout."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Days of fever with cough, and what the breathing looks like at home",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.paed.presenting_complaint",
+        "skill.hx.childhood.pneumonia_illness"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect fever with cough of days, plus breathing the mother describes as fast, noisy or difficult. The tempo is days, not the weeks of tuberculosis, and that single fact already sorts most children before the chest is touched."
+        },
+        "skill.hx.paed.presenting_complaint": {
+          "expect": "Take the complaint in the mother's own words and in order: which came first, how each day differed from the last, and what the child can still do. A story that begins with a cold two days back and adds fast breathing yesterday reads very differently from a cough that never cleared for a month."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The background that made this child vulnerable",
+      "skills": [
+        "skill.hx.childhood.pneumonia_risk",
+        "skill.hx.paed.immunisation"
+      ],
+      "emphasis": {
+        "skill.hx.paed.immunisation": {
+          "expect": "Check the card for BCG scar, pentavalent, pneumococcal, measles and vitamin A doses. Gaps here leave the preventable causes open, and a missed measles dose with a recent rash illness reframes the whole case."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Fever, rate and colour before the chest is touched",
+      "skills": [
+        "skill.gen.paed.appearance",
+        "skill.gen.paed.vitals",
+        "skill.gen.paed.cyanosis",
+        "skill.gen.paed.pallor"
+      ],
+      "emphasis": {
+        "skill.gen.paed.appearance": {
+          "expect": "Look for a febrile child breathing fast, with flaring nostrils or an expiratory grunt. Abnormal sleepiness or inability to drink is a danger sign that outranks every chest finding and sends the child for urgent care."
+        },
+        "skill.gen.paed.vitals": {
+          "expect": "Count the respiratory rate over a full minute with the child calm, and feel the pulse alongside. A rate above the age cutoff, with fever and a fast pulse to match, is the bedside core of this disease."
+        },
+        "skill.gen.paed.cyanosis": {
+          "expect": "Look for blue lips or tongue in a calm child, and measure saturation where a meter is at hand. Central cyanosis with fast breathing means the child needs oxygen, not only antibiotics."
+        },
+        "skill.gen.paed.pallor": {
+          "expect": "Check the palms, tongue and conjunctivae for pallor. Anaemia is common in the same children who develop pneumonia, and severe pallor changes both urgency and the workup."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Respiratory examination",
+      "blurb": "Indrawing, rate and localised consolidation signs",
+      "skills": [
+        "skill.exam.paed.resp.inspection",
+        "skill.exam.paed.resp.palpation",
+        "skill.exam.paed.resp.percussion",
+        "skill.exam.paed.resp.auscultation",
+        "skill.exam.paed.resp.distress_grunt"
+      ],
+      "emphasis": {
+        "skill.exam.paed.resp.inspection": {
+          "expect": "Watch the lower chest wall on inspiration in a calm child. Inward movement that is visible every breath is indrawing and classifies the illness on its own, while flaring nostrils and head nodding mark the work of breathing."
+        },
+        "skill.exam.paed.resp.palpation": {
+          "expect": "Feel for symmetrical expansion and for the vibration of the child's voice or cry on the chest wall. Reduced movement localised to one side points to the affected lung rather than a generalised airway problem."
+        },
+        "skill.exam.paed.resp.percussion": {
+          "expect": "Expect a dull note over the consolidated area, set against the resonant note of the normal child's chest. The dullness is localised, not the diffuse change of a wheezy illness."
+        },
+        "skill.exam.paed.resp.auscultation": {
+          "expect": "Listen for bronchial breathing and crackles localised to one area, against bilateral wheeze which points instead to reactive airways or bronchiolitis. In a small child, crying can mimic added sounds, so listen while calm."
+        },
+        "skill.exam.paed.resp.distress_grunt": {
+          "expect": "Treat an expiratory grunt as the child's own attempt to hold the airways open, and stridor heard while the child is calm as a marker of severe disease. Either one raises the urgency above what the rate alone says."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the pneumonia picture together",
+      "blurb": "Fast breathing plus indrawing plus a localised chest, in one child",
+      "skills": [
+        "skill.childpneumonia.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Age, tempo, breathing findings and classification in one passage",
+      "skills": [
+        "skill.childpneumonia.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Wheeze, bark and sudden choking: what else breathes fast",
+      "skills": [
+        "skill.childpneumonia.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Oximetry first, film where it changes the plan, cultures before antibiotics in the severe child",
+      "skills": [
+        "skill.ix.childpneumonia.workup",
+        "skill.ix.paed.cxr_pneumonia_collapse"
+      ],
+      "emphasis": {
+        "skill.ix.paed.cxr_pneumonia_collapse": {
+          "expect": "In this child the film is expected to show lobar consolidation with air bronchograms on the affected side, matching the dull, bronchial area found by hand. A normal film in a convincing clinical picture does not undo the classification."
+        }
+      }
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and severity",
+      "blurb": "The ARI classification, stated as the diagnosis",
+      "skills": [
+        "skill.childpneumonia.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Antibiotics by category, oxygen for hypoxaemia, feeds and follow-up for every child",
+      "skills": [
+        "skill.tx.childpneumonia"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this child to your consultant",
+      "skills": [
+        "skill.present.childhood.pneumonia"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.childpneumonia.resp_exam",
+        "title": "Examine the chest of a febrile preschool child",
+        "task": "This 2-year-old boy has had fever and cough for three days and his mother says he breathes fast. Examine his respiratory system including a full one-minute rate count, and present your findings with a classification.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.paed.rapport",
+          "skill.approach.paed.consent_assent",
+          "skill.approach.paed.positioning",
+          "skill.exam.paed.resp.inspection",
+          "skill.exam.paed.resp.palpation",
+          "skill.exam.paed.resp.percussion",
+          "skill.exam.paed.resp.auscultation",
+          "skill.exam.paed.resp.distress_grunt"
+        ],
+        "examinerQuestions": [
+          "What rate did you count, and is it fast for a 2-year-old? State the cutoff you used.",
+          "You found lower chest indrawing. What does that single finding do to the classification?",
+          "Name two danger signs you asked about, and what each would change in your plan."
+        ]
+      },
+      {
+        "id": "osce.childpneumonia.history_classify",
+        "title": "Take a history and classify the ARI",
+        "task": "This 3-year-old girl has cough and fever. Take a focused history from her mother in eight minutes and state the ARI classification with reasons.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.paed.consent_assent",
+          "skill.hx.chief_complaints",
+          "skill.hx.paed.presenting_complaint",
+          "skill.hx.childhood.pneumonia_illness",
+          "skill.hx.childhood.pneumonia_risk"
+        ],
+        "examinerQuestions": [
+          "Classify this illness by the ARI rules, naming the exact feature that put her there.",
+          "Which background factors in her history raise her risk, and what would you advise on each?",
+          "She has no danger signs and no indrawing but breathes fast. Home or hospital, and what must the follow-up be?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.childpneumonia.basics",
+      "skill.childpneumonia.ariclass",
+      "skill.childpneumonia.signs",
+      "skill.childpneumonia.differential",
+      "skill.ix.childpneumonia.workup",
+      "skill.childpneumonia.diagnosis",
+      "skill.tx.childpneumonia",
+      "skill.childpneumonia.summary"
+    ]
+  },
+  "skills": {
+    "skill.childpneumonia.basics": {
+      "id": "skill.childpneumonia.basics",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "What pneumonia in children is",
+      "oneLine": "Acute infection of the air sacs in a young child, beyond a cold",
+      "why": "Every cough in a child is not pneumonia, and calling every one so wastes antibiotics and misses the wheezy or tubercular child. The definition draws the line: infection of the lung tissue itself, with breathing to prove it.",
+      "body": "Pneumonia in children is an acute infection of the lung parenchyma, usually bacterial after a viral upper airway illness, showing itself as fever with cough plus fast breathing or chest indrawing in a child aged days to years.",
+      "keyPoints": [
+        "Streptococcus pneumoniae is the commonest bacterial cause. Haemophilus influenzae type b matters where immunisation is incomplete, and Staphylococcus aureus follows skin boils or measles.",
+        "Viruses cause much of the early illness, especially respiratory syncytial virus in infants, and a viral cold commonly opens the door for the bacteria that follow.",
+        "Mycoplasma causes a milder walking illness mainly in older children, with a dry cough and less impressive chest signs.",
+        "Lobar consolidation is one dense area; bronchopneumonia is patchy on both sides and favours infants, the malnourished and the very ill.",
+        "A cold stays in the nose and throat with normal breathing. Once breathing quickens or the chest indraws, the illness has moved into the lungs and the name changes with it."
+      ],
+      "pitfalls": [
+        "Calling every febrile cough pneumonia without checking the breathing rate and the chest wall.",
+        "Treating wheeze in an infant as bacterial pneumonia without considering bronchiolitis.",
+        "Forgetting tuberculosis when the cough has lasted weeks rather than days."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What two elements make a cough a pneumonia rather than a cold?",
+          "a": "Fast breathing or chest indrawing with fever, showing the infection has reached the lungs.",
+          "accept": [
+            "breathing",
+            "indrawing",
+            "fever"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which organism is the commonest bacterial cause of pneumonia in children?",
+          "a": "Streptococcus pneumoniae, the pneumococcus, with Haemophilus influenzae type b where immunisation is incomplete.",
+          "accept": [
+            "pneumococcus",
+            "streptococcus"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why does a viral cold often come just before bacterial pneumonia?",
+          "a": "The virus injures the airway lining and blocks normal clearance, so bacteria that follow can settle in the air sacs.",
+          "accept": [
+            "clearance",
+            "bacteria",
+            "lining"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_respiratory_infections_children_long_case: pathophysiology"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Pneumonia in children: aetiology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.childpneumonia.ariclass": {
+      "id": "skill.childpneumonia.ariclass",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "ARI classification and danger signs",
+      "oneLine": "Count the rate, look for indrawing, ask the five danger questions",
+      "why": "A student who cannot classify cannot decide, and the decision here is the whole treatment: home with drugs or hospital with oxygen. The classification uses only what the hands, eyes and mother already hold, so no child waits for a laboratory.",
+      "body": "Every child from 2 months to 5 years with cough or difficult breathing is sorted into three boxes: severe pneumonia, pneumonia, or no pneumonia with cough or cold. The sort rests on the counted rate, lower chest indrawing, and five danger signs.",
+      "keyPoints": [
+        "Count the rate over a full minute with the child calm and not crying. Fever and crying raise the rate, and only a calm count classifies.",
+        "Fast breathing means 60 or more breaths per minute under 2 months, 50 or more from 2 to 12 months, and 40 or more from 1 to 5 years.",
+        "Lower chest indrawing means the lower chest wall moves in on every inspiration while the child is calm. It marks severe pneumonia on its own.",
+        "The five danger signs are inability to drink or breastfeed, vomiting everything, convulsions, lethargy or unconsciousness, and stridor heard while calm. Any one of them means severe disease.",
+        "Severe pneumonia is indrawing or any danger sign, and the child is referred urgently. Pneumonia is fast breathing without indrawing or danger signs, and the child is treated at home with follow-up. Neither finding means cough or cold, managed with home fluids and watchfulness.",
+        "Wheeze with fast breathing gets a bronchodilator trial first. If the fast breathing persists after the wheeze settles, the child is classified by the rate as pneumonia."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "State the fast breathing cutoffs for the three age bands.",
+          "a": "60 or more under 2 months, 50 or more from 2 to 12 months, and 40 or more from 1 to 5 years, each counted over a full minute.",
+          "accept": [
+            "60",
+            "50",
+            "40"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A 3-year-old breathes 46 per minute with lower chest indrawing but no danger signs. Classify this child.",
+          "a": "Severe pneumonia, because lower chest indrawing marks the severe category even without a danger sign.",
+          "accept": [
+            "severe",
+            "indrawing"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why must the rate be counted over a full minute with the child calm?",
+          "a": "Crying and fever raise the rate falsely, and a short count multiplied up magnifies every error, so only a calm full minute classifies.",
+          "accept": [
+            "calm",
+            "minute",
+            "error"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "rate",
+          "text": "Counts the rate over a full calm minute against the correct age cutoff"
+        },
+        {
+          "id": "indrawing",
+          "text": "Identifies lower chest indrawing in a calm child"
+        },
+        {
+          "id": "danger",
+          "text": "Asks all five danger signs and acts on any one"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_respiratory_infections_children_long_case: clinicalPearls"
+        },
+        {
+          "source": "WHO",
+          "locator": "IMNCI chart booklet: cough or difficult breathing"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.childpneumonia.signs": {
+      "id": "skill.childpneumonia.signs",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "The pneumonia picture in a child",
+      "oneLine": "One mechanism, consolidation, plus the work of breathing around it",
+      "why": "Consolidation explains the localised signs and the work of breathing explains the urgency, and the two together are the whole bedside picture. A student who reads both never mistakes a wheezy chest for a solid one.",
+      "body": "Air sacs filled with inflammatory fluid conduct sound better than air-filled sacs and move no air locally, while the child labours to breathe around the solid patch. Every sign follows from those two facts.",
+      "keyPoints": [
+        "General: fever with a fast pulse and fast breathing. Refusal to drink, abnormal sleepiness and central cyanosis are danger markers that matter more than any chest sign.",
+        "Work of breathing: flaring nostrils, grunting on expiration, and retraction of the lower chest or spaces between the ribs. Grunting is the child holding the airways open and must never be ignored.",
+        "Percussion: a dull note localised over the solid area, against the resonant note of the normal child's chest.",
+        "Auscultation: bronchial breathing with crackles over the same localised area, and increased conduction of the voice or cry there.",
+        "Trachea stays central in uncomplicated consolidation. Shift means something else, usually fluid or a collapsed lobe from a mucus plug.",
+        "Bilateral wheeze without any dull or bronchial patch favours bronchiolitis or reactive airways over consolidation, and sends the reasoning down a different road."
+      ],
+      "pitfalls": [
+        "Counting a rate while the child screams and calling it fast breathing.",
+        "Mistaking transmitted upper airway noise for chest crackles without listening while the child is calm.",
+        "Missing the grunt and the indrawing while hunting for subtle auscultatory signs."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the single most telling chest finding of lobar consolidation?",
+          "a": "Bronchial breathing over a dull area, with increased voice conduction on the same patch.",
+          "accept": [
+            "bronchial",
+            "dull",
+            "conduction"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "The whole chest wheezes but no area is dull or bronchial. What does that favour?",
+          "a": "Generalised airway narrowing such as bronchiolitis or asthma rather than consolidation.",
+          "accept": [
+            "bronchiolitis",
+            "asthma",
+            "airway"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does the voice get louder over consolidated lung?",
+          "a": "Fluid-filled air sacs conduct sound better than air-filled ones, so the voice reaches the chest wall with less loss.",
+          "accept": [
+            "conduct",
+            "fluid",
+            "loss"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_respiratory_infections_children_long_case: pathophysiology"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Pneumonia: physical findings"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.childpneumonia.summary": {
+      "id": "skill.childpneumonia.summary",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "The clinical summary",
+      "oneLine": "Age, tempo, breathing findings and classification in one passage",
+      "why": "The summary of an acute childhood illness must carry the classification, because the classification is the plan. A summary without it describes the child but leaves the listener unable to act.",
+      "body": "State the child with the risks that matter, the tempo, the breathing findings in abstract terms, and the classification, in that order.",
+      "keyPoints": [
+        "Name the child with the relevant risks: age in months, birth weight, feeding, and immunisation gaps.",
+        "State the tempo: acute, over days. This alone separates pneumonia from weeks of tuberculosis or months of recurrent wheeze.",
+        "State the breathing findings in abstract terms: fever with cough, a counted rate above the age cutoff, lower chest indrawing present or absent, and danger signs present or absent.",
+        "State the classification plainly, since it decides the site of care: severe pneumonia or pneumonia by the ARI rules.",
+        "A worked example: A 2-year-old boy with incomplete immunisation presents with three days of fever and wet cough with breathing noticed to be fast since yesterday. The rate is 54 per minute with lower chest indrawing, no danger signs, and a dull bronchial patch at the right base. This is severe pneumonia by chest indrawing, right lower lobe."
+      ],
+      "pitfalls": [
+        "Omitting the counted rate and the indrawing, which are the classification itself.",
+        "Describing the tempo as chronic out of habit when the whole illness is days old.",
+        "Leaving out relevant negatives, such as the absence of danger signs, which are doing real work."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What element belongs in a pneumonia summary that a cold summary never needs?",
+          "a": "The ARI classification with the counted rate, because it decides home or hospital.",
+          "accept": [
+            "classification",
+            "rate"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why does tempo matter so much in the opening line?",
+          "a": "Days of illness separate acute pneumonia from weeks of tuberculosis and months of recurrent wheeze.",
+          "accept": [
+            "tuberculosis",
+            "wheeze",
+            "days"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "risks",
+          "text": "States the child with relevant risk factors"
+        },
+        {
+          "id": "breathing",
+          "text": "States the counted rate, indrawing and danger signs"
+        },
+        {
+          "id": "classification",
+          "text": "States the ARI classification and what it decides"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_respiratory_infections_children_long_case: clinicalPearls"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "Clinical reasoning"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.childpneumonia.differential": {
+      "id": "skill.childpneumonia.differential",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Differential diagnosis",
+      "oneLine": "Wheeze, bark, sudden choking and weeks of cough: what else breathes fast",
+      "why": "Most fast breathing with fever is pneumonia, but the exceptions each demand a different drug or procedure: tuberculosis needs months of specific treatment, a peanut needs a bronchoscope, and heart failure needs no antibiotic at all. The differential protects those children.",
+      "body": "For fever with cough and fast breathing in a child, work through airway, aspirated, cardiac, tubercular and complicated causes before settling.",
+      "keyPoints": [
+        "Bronchiolitis: a wheezy infant, usually under 2 years, with a runny nose first, bilateral wheeze with a long expiration, and no localised dull bronchial patch. Viruses, not bacteria, drive it.",
+        "Reactive airways and asthma: recurrent bouts with colds or triggers, a family history of allergy, and wheeze that eases with a bronchodilator. Fast breathing that normalises after the wheeze settles was never pneumonia.",
+        "Croup: a barking seal-like cough with a hoarse voice and stridor on inspiration, from the upper airway above the lungs. The chest itself may sound clear.",
+        "Foreign body: sudden choking while playing or eating in a toddler, then one-sided wheeze or reduced air entry with little or no fever at first. A groundnut in the airway does not respond to antibiotics.",
+        "Tuberculosis: cough for weeks, evening fever, night sweats, weight loss or a known contact. In India this must always be asked after, not assumed absent.",
+        "Heart failure: sweating with feeds, poor weight gain, a fast pulse out of proportion to the fever, and an enlarged liver, without the localised consolidation signs of pneumonia.",
+        "Complicated pneumonia: fever that persists beyond a week of treatment with a dull base, quiet breath sounds and a quiet voice points to fluid beside the lung, an effusion or empyema, which moves the voice the opposite way from consolidation.",
+        "Aspiration pneumonia: a neurologically impaired or poorly swallowing child with repeated lower lobe shadows, and pertussis where bouts end in vomiting or a gasp with apnoea in a young infant."
+      ],
+      "pitfalls": [
+        "Treating recurrent wheeze as repeated pneumonia and repeating antibiotics each cold.",
+        "Missing a foreign body because the choking episode was not asked about.",
+        "Treating a non-resolving shadow with more antibiotics instead of looking for fluid, tuberculosis or an inhaled object."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name four mimics of pneumonia in a young child and one feature that favours each.",
+          "a": "Bronchiolitis with wheeze in an infant, croup with a barking cough, foreign body with sudden choking, and tuberculosis with weeks of cough and weight loss.",
+          "accept": [
+            "bronchiolitis",
+            "croup",
+            "choking",
+            "tuberculosis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Fever persists ten days into treatment with a dull base and quiet breath sounds. What has likely happened?",
+          "a": "A parapneumonic effusion or empyema, where fluid damps the breath sounds and the voice instead of heightening them.",
+          "accept": [
+            "effusion",
+            "empyema",
+            "fluid"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Offers a differential spanning airway, aspirated, cardiac, tubercular and complicated causes"
+        },
+        {
+          "id": "tb",
+          "text": "Explicitly considers tuberculosis with contact and course"
+        },
+        {
+          "id": "direction",
+          "text": "Uses the direction of voice change to separate effusion from consolidation"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_respiratory_infections_children_long_case: additionalDifferentials"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_interstitial_pneumonia: additionalDifferentials"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Pneumonia: differential diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.childpneumonia.workup": {
+      "id": "skill.ix.childpneumonia.workup",
+      "kind": "investigation",
+      "system": "paediatrics",
+      "title": "Confirming and grading the illness",
+      "oneLine": "Oximetry first, film where it changes the plan, cultures before antibiotics in the severe child",
+      "why": "Investigations in childhood pneumonia answer two questions: how bad is it now, and what else could it be. Knowing which test answers which stops a severe child waiting for a film while the oxygen stays off.",
+      "body": "Group investigations by what they answer: grade now, confirm where needed, find the organism in the severe child, and look for tuberculosis or a complication where the story points there.",
+      "keyPoints": [
+        "GRADE NOW: pulse oximetry on air in every breathless child. A low saturation means oxygen whatever the rate is, and the reading is repeated after treatment begins.",
+        "CONFIRM WHERE NEEDED: chest radiograph for a dense lobar opacity with air bronchograms. Uncomplicated pneumonia classified clinically needs no film to start treatment; severe, recurrent or non-resolving illness does.",
+        "ORGANISM IN THE SEVERE CHILD: blood counts with a neutrophil leucocytosis supporting a bacterial process, and blood culture drawn before the first antibiotic dose, though drawing it must never delay that dose.",
+        "TUBERCULOSIS WHERE SUSPECTED: Mantoux test with sputum or gastric aspirate for acid-fast bacilli and nucleic acid testing where the cough has lasted weeks, with a contact, or with weight loss.",
+        "CONSIDER: an HIV test where risk factors exist or the illness or its severity is otherwise unexplained, and a blood gas where the child looks severely ill.",
+        "FIND COMPLICATIONS: ultrasound or a repeat film where persisting fever with a dull quiet base suggests fluid beside the lung, since pus there needs drainage of its own.",
+        "The single most important principle: in a child with a danger sign, start oxygen and the first antibiotic dose at once. No result is worth delaying those for."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What confirms consolidation on imaging?",
+          "a": "A dense opacity of a lobe with air bronchograms on the chest radiograph.",
+          "accept": [
+            "opacity",
+            "bronchograms",
+            "radiograph"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which bedside number decides oxygen?",
+          "a": "Pulse oximetry: a low saturation on air means oxygen whatever the rate is.",
+          "accept": [
+            "oximetry",
+            "saturation",
+            "oxygen"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A severe child arrives and cultures are not yet sent. What comes first?",
+          "a": "The first antibiotic dose, with cultures drawn before or beside it but never allowed to delay it.",
+          "accept": [
+            "first",
+            "cultures",
+            "delay"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_respiratory_infections_children_long_case: additionalInvestigations"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_interstitial_pneumonia: additionalInvestigations"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Pneumonia: laboratory and imaging evaluation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.childpneumonia.diagnosis": {
+      "id": "skill.childpneumonia.diagnosis",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Diagnosis and severity: the ARI statement",
+      "oneLine": "Name the illness, the lobe, the category, and what nearly kills",
+      "why": "A diagnosis of pneumonia alone does not say where the child sleeps tonight. The ARI category is the severity score of this disease, and writing it as part of the diagnosis forces the site of care into every statement.",
+      "body": "A complete diagnostic statement names the illness with the affected side where known, the ARI category with the exact defining feature, and any complication or danger sign alongside.",
+      "keyPoints": [
+        "Severe pneumonia means lower chest indrawing or any danger sign: inability to drink or breastfeed, vomiting everything, convulsions, lethargy or unconsciousness, or stridor while calm.",
+        "Pneumonia means fast breathing above the age cutoff with no indrawing and no danger signs. Cough or cold means neither finding.",
+        "The statement reads as one line: severe pneumonia of the right lower lobe by chest indrawing, with no danger signs; or pneumonia with fast breathing and no indrawing.",
+        "Red flags that escalate within any category: central cyanosis, grunting that persists, apnoea, severe malnutrition, and a saturation that stays low on oxygen.",
+        "Most children recover fully with timely care. Death clusters where care is delayed, the child is very young or malnourished, hypoxaemia goes uncorrected, or a danger sign is missed at the first contact.",
+        "A diagnosis of exclusion discipline applies: before closing on simple pneumonia in a severe or strange course, tuberculosis, foreign body, heart failure and fluid beside the lung must each have been considered and set aside for a reason."
+      ],
+      "pitfalls": [
+        "Stating pneumonia without the category, leaving the reader unable to judge urgency.",
+        "Counting the rate while crying and classifying on a false number.",
+        "Calling severe disease simple pneumonia because the child still smiles, and missing the indrawing that was present all along."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "State the three ARI boxes and the finding that defines each.",
+          "a": "Severe pneumonia by indrawing or any danger sign, pneumonia by fast breathing alone, and cough or cold by neither.",
+          "accept": [
+            "severe",
+            "indrawing",
+            "breathing"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Rate 52, indrawing present, drinks well, alert. Classify and place this child.",
+          "a": "Severe pneumonia by indrawing, for referral with pre-referral treatment.",
+          "accept": [
+            "severe",
+            "indrawing",
+            "referral"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What makes death from pneumonia more likely in a child?",
+          "a": "Delay in care, severe malnutrition, very young age, hypoxaemia and a missed danger sign.",
+          "accept": [
+            "malnutrition",
+            "hypoxaemia",
+            "delay"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "category",
+          "text": "States the ARI category with its defining feature"
+        },
+        {
+          "id": "place",
+          "text": "Links the category to home care or referral"
+        },
+        {
+          "id": "redflags",
+          "text": "Names the red flags that escalate urgency"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_interstitial_pneumonia: redFlags"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_respiratory_infections_children_long_case: clinicalPearls"
+        },
+        {
+          "source": "WHO",
+          "locator": "IMNCI chart booklet: classify cough or difficult breathing"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.childpneumonia": {
+      "id": "skill.tx.childpneumonia",
+      "kind": "treatment",
+      "system": "paediatrics",
+      "title": "Managing pneumonia in children",
+      "oneLine": "Antibiotics by category, oxygen for hypoxaemia, feeds and follow-up for every child",
+      "why": "The category decides everything: a cold needs no antibiotic, simple pneumonia needs oral treatment at home, and severe disease needs oxygen and referral. Getting the category wrong mistreats in both directions, and the supportive care around the drug matters as much as the drug.",
+      "body": "Treat by category: home care with oral antibiotics for pneumonia, urgent referral with pre-referral treatment for severe pneumonia, and fluids, feeds, oxygen and counselling running alongside in both.",
+      "keyPoints": [
+        "Pneumonia without danger signs is treated at home with an oral antibiotic that covers the pneumococcus, chosen from the current national or institutional guideline, with the mother taught the dose schedule from the strip itself.",
+        "Severe pneumonia is referred urgently after a first antibiotic dose, with oxygen where the saturation is low, and a written note stating the classification and what was given.",
+        "Oxygen is given for low saturation or central cyanosis and titrated to a steady normal reading, with suction of the nose and mouth where secretions block the airway.",
+        "Feeds continue through the illness: breastfeeding more often, small frequent feeds, extra fluids, and paracetamol only for comfort from fever, not as treatment.",
+        "Review home-treated children after two to three days. Worse breathing, new indrawing, inability to drink or abnormal sleepiness at any point means immediate return, and failure to improve means reclassification, not reflex repetition.",
+        "Before the child leaves care: fill immunisation gaps, counsel on keeping the child from cooking smoke, explain exclusive breastfeeding for young infants, and arrange a follow-up film only where the shadow fails to clear or recurs, to exclude tuberculosis, fluid or an inhaled object.",
+        "Prevention between illnesses is treatment too: pneumococcal, Hib, measles and pertussis vaccines on schedule, and handwashing and reduced crowding where they can be managed."
+      ],
+      "pitfalls": [
+        "Giving cough syrups or antihistamines to a small child, which do not help and can harm.",
+        "Stopping feeds because the child breathes fast, when continued feeding is part of recovery.",
+        "Repeating antibiotics for a shadow that will not clear without asking about tuberculosis, fluid or a foreign body.",
+        "Keeping a severe child for observation where no oxygen or monitoring exists instead of referring at once."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "When is a home-treated child reviewed after starting treatment?",
+          "a": "After two to three days, or sooner if any danger sign appears.",
+          "accept": [
+            "days",
+            "danger",
+            "sooner"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A severe child must travel two hours to hospital. What goes with the child?",
+          "a": "A first antibiotic dose, oxygen where available, feeding advice with fluids, and a written note explaining the classification.",
+          "accept": [
+            "antibiotic",
+            "oxygen",
+            "note"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What is reviewed before a recovered child leaves care?",
+          "a": "Immunisation gaps filled, feeding counselled, smoke exposure reduced, and the follow-up plan with danger signs understood.",
+          "accept": [
+            "immunisation",
+            "feeding",
+            "smoke"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "CAP: recommendations"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_interstitial_pneumonia: management"
+        },
+        {
+          "source": "WHO",
+          "locator": "IMNCI chart booklet: treat cough or difficult breathing"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of drug class and principle. Doses quoted anywhere here come from the cited national or guideline document so a student can check them; the treating team's own protocol and the current formulary decide what is given. CliniX does not prescribe."
+    }
+  },
+  "cases": [
+    {
+      "id": "case.childpneumonia.aarav",
+      "initialVitals": {
+        "hr": 138,
+        "bpSystolic": 88,
+        "bpDiastolic": 56,
+        "rr": 54,
+        "spo2": 91,
+        "temp": 39,
+        "gcs": 15
+      },
+      "title": "A 2-year-old with three days of fever and fast breathing",
+      "opening": "Meena brings her 2-year-old son Aarav to the primary health centre. He feels hot, coughs without pause, and his chest moves fast even as he sits quietly in her lap. Greet the mother and take a history.",
+      "fallback": "I did not understand that, doctor. Please ask me again in simple words.",
+      "patient": {
+        "name": "Aarav Pawar",
+        "age": 2,
+        "sex": "male",
+        "occupation": "Toddler, stays at home with mother",
+        "residence": "Rural, lives with parents and grandmother in two rooms"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings your child today",
+            "what is wrong with your child",
+            "tell me about your child's illness",
+            "why have you brought your child today"
+          ],
+          "reply": "Doctor, since three days he has fever and a loose cough, and since yesterday his breathing has become very fast.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "onset_tempo": {
+          "cues": [
+            "when did this illness begin",
+            "how many days has he been ill",
+            "did it start suddenly or slowly",
+            "how has each day been different"
+          ],
+          "reply": "Three days back he had fever in the evening with a little cough. The cough grew day by day, and the fast breathing started only yesterday.",
+          "key": true
+        },
+        "fever_course": {
+          "cues": [
+            "how high is the fever",
+            "does the fever touch normal between doses",
+            "has he had shivering with fever",
+            "how are you measuring the fever at home"
+          ],
+          "reply": "He burns to touch every evening and night. The paracetamol syrup brings it down for a few hours and then it climbs again. No shivering fits so far.",
+          "key": true
+        },
+        "cough_character": {
+          "cues": [
+            "is the cough dry or wet",
+            "does he vomit after bouts of cough",
+            "does the cough end in a gasp or whoop",
+            "what sound does the cough make"
+          ],
+          "reply": "It is a wet cough that comes in bursts. Twice he vomited milk after a long bout. There is no whoop-like gasp at the end.",
+          "key": true,
+          "skillId": "skill.hx.paed.presenting_complaint"
+        },
+        "fast_breathing_home": {
+          "cues": [
+            "when did you first notice fast breathing",
+            "how does his chest move while sleeping",
+            "is the breathing faster than his elder sister",
+            "count how his breathing looks to you"
+          ],
+          "reply": "Yesterday evening I saw his chest moving up and down very fast even while he slept. It is much faster than normal, I have never seen him breathe like this.",
+          "key": true
+        },
+        "noisy_grunt_breathing": {
+          "cues": [
+            "does he make noise while breathing",
+            "has he made grunting sounds while breathing out",
+            "is there whistling sound in his chest",
+            "does his nose flare while breathing in"
+          ],
+          "reply": "His nose flares and there is a small grunt each time he breathes out. No whistling sound that I can hear.",
+          "key": true
+        },
+        "feeding_refusal": {
+          "cues": [
+            "is he still breastfeeding eagerly",
+            "how much of his usual feed does he take",
+            "does he refuse his usual milk feed or turn away from feeds",
+            "can he swallow without vomiting everything"
+          ],
+          "reply": "He sucks for a minute and leaves the breast, and takes only half his usual dal khichdi. But he still swallows water and milk, he does not bring out everything.",
+          "key": true
+        },
+        "vomiting_everything": {
+          "cues": [
+            "does he vomit everything you give him",
+            "how many times has he vomited today",
+            "is the vomiting after cough or on its own",
+            "can he keep oral fluids down"
+          ],
+          "reply": "Only after the long cough bursts, doctor. He keeps sips of water and milk down otherwise.",
+          "key": true
+        },
+        "alertness_fits": {
+          "cues": [
+            "is he playful between fever spikes",
+            "is he unusually sleepy or difficult to wake",
+            "has he had any fits during this illness",
+            "does he recognise you and respond"
+          ],
+          "reply": "He is dull and clings to me, but he looks at me and cries when disturbed. No fits, and he wakes fully when I call him.",
+          "key": true
+        },
+        "birth_weight_record": {
+          "cues": [
+            "was he born early or on time",
+            "what was his birth weight",
+            "did he cry immediately after birth",
+            "how does his weight compare with his sister"
+          ],
+          "reply": "He was born at full term in the government hospital, weight a little over two kilos, the nurse said. He is thinner than his sister was at this age.",
+          "key": true
+        },
+        "immunisation_card": {
+          "cues": [
+            "may I see his immunisation card",
+            "which injections has he received so far",
+            "did he get the pneumonia injection",
+            "was the measles vaccine given at nine months"
+          ],
+          "reply": "Sister at the anganwadi gave injections three times, I have the card at home. I do not know names. No measles injection yet, they said to come next month.",
+          "key": true
+        },
+        "past_chest_episodes": {
+          "cues": [
+            "has he been admitted for breathing trouble before",
+            "does he get wheezing with every cold",
+            "has he needed an inhaler or nebuliser",
+            "ear discharge that keeps coming back"
+          ],
+          "reply": "Six months back he had cough and fast breathing and the doctor gave syrup for five days. No inhaler ever, no ear discharge.",
+          "key": true
+        },
+        "tb_contact_home": {
+          "cues": [
+            "anyone at home with a long-standing cough",
+            "is anyone taking tuberculosis treatment nearby",
+            "has he lost weight over recent weeks",
+            "evening rise of fever with night sweats"
+          ],
+          "reply": "Nobody at home coughs for long, doctor. His weight has been the same thin build for months, not a new loss. The fever here is only three days old.",
+          "key": true,
+          "skillId": "skill.hx.childhood.pneumonia_illness"
+        },
+        "cooking_smoke_rooms": {
+          "cues": [
+            "do you cook on gas or on a chulha",
+            "where does the child sit while you cook",
+            "does anyone smoke beedis inside the house",
+            "how many people sleep in one room"
+          ],
+          "reply": "We cook on a chulha outside the door and he sits beside me while I cook. His grandfather smokes beedis on the veranda, not inside. Six of us sleep in two rooms.",
+          "key": true,
+          "skillId": "skill.hx.childhood.pneumonia_risk"
+        },
+        "treatment_given": {
+          "cues": [
+            "what medicines have you given so far",
+            "show me the strip or bottle you used",
+            "has any antibiotic syrup been started already",
+            "did the ASHA sister visit yesterday"
+          ],
+          "reply": "Only paracetamol syrup from the medical shop, half spoon twice a day. The ASHA sister saw him this morning and told me to come here at once.",
+          "key": true
+        },
+        "development_play": {
+          "cues": [
+            "does he walk and speak like other children",
+            "how many words does he speak now",
+            "does he play actively when he is well",
+            "were his milestones on time"
+          ],
+          "reply": "He walks, runs and says many words, and plays all day when well. His growth was like other children, only his weight is less."
+        }
+      },
+      "exam": {
+        "skill.gen.paed.appearance": {
+          "finding": "Febrile toddler, alert but clingy, sitting upright in the mother's lap. Nasal flaring with an expiratory grunt on every breath. No stridor while calm.",
+          "abnormal": true
+        },
+        "skill.gen.paed.vitals": {
+          "finding": "Temperature 39 C. Respiratory rate 54 per minute counted over a full calm minute. Pulse 138 regular. Blood pressure 88/56.",
+          "abnormal": true
+        },
+        "skill.gen.paed.cyanosis": {
+          "finding": "No blue colour of lips or tongue while calm. Saturation 91 percent on air, rising with oxygen.",
+          "abnormal": true
+        },
+        "skill.gen.paed.pallor": {
+          "finding": "Pallor of the palms and conjunctivae. Tongue pale.",
+          "abnormal": true
+        },
+        "skill.exam.paed.weight": {
+          "finding": "Weight 10 kg at 2 years, below the expected weight for age, with thinning of the limbs and no oedema of the feet.",
+          "abnormal": true
+        },
+        "skill.exam.paed.resp.inspection": {
+          "finding": "Lower chest indrawing visible on every inspiration while calm, with intercostal retraction. Reduced movement of the right lower chest. No barrel shape, no drooping shoulder.",
+          "abnormal": true
+        },
+        "skill.exam.paed.resp.palpation": {
+          "finding": "Trachea central. Chest expansion reduced on the right side. Increased vibration of the cry felt over the right lower chest.",
+          "abnormal": true
+        },
+        "skill.exam.paed.resp.percussion": {
+          "finding": "Dull note over the right lower chest posteriorly. Resonant elsewhere on both sides.",
+          "abnormal": true
+        },
+        "skill.exam.paed.resp.auscultation": {
+          "finding": "Bronchial breathing with crackles over the right lower zone. Normal vesicular breathing elsewhere. No generalised wheeze.",
+          "abnormal": true
+        },
+        "skill.exam.paed.resp.distress_grunt": {
+          "finding": "Expiratory grunt with flaring nostrils and a rate of 54. No stridor while calm. Grunt and flaring ease after oxygen begins.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "cxr",
+        "oximetry",
+        "blood_counts",
+        "blood_culture"
+      ],
+      "investigations": {
+        "cxr": {
+          "label": "Chest radiograph",
+          "indicated": true,
+          "result": "Dense opacity of the right lower lobe with air bronchograms. No effusion, no cavitation, no hyperinflation. Heart borders normal.",
+          "note": "This confirms the dull bronchial patch found by hand. In uncomplicated illness the classification alone would have started treatment, but indrawing with hypoxaemia makes the film worthwhile."
+        },
+        "oximetry": {
+          "label": "Pulse oximetry on air",
+          "indicated": true,
+          "result": "91 percent on air, rising to a steady normal reading with low-flow oxygen. Repeated after treatment begins.",
+          "note": "The single number that ordered oxygen. Rate and indrawing classify, but saturation grades how unwell he is right now."
+        },
+        "blood_counts": {
+          "label": "Blood counts",
+          "indicated": true,
+          "result": "Haemoglobin 10 g/dL. Total leucocyte count 15,400 per mm3 with 76 percent neutrophils.",
+          "note": "A neutrophil leucocytosis supports a bacterial process, and the anaemia matches the pallor and adds to his risk."
+        },
+        "blood_culture": {
+          "label": "Blood culture",
+          "indicated": true,
+          "result": "Drawn before the first antibiotic dose. Result pending at 48 hours.",
+          "note": "Worth sending in a severe child, but drawing it must never delay the first dose or the referral."
+        },
+        "mantoux_cbnaat": {
+          "label": "Mantoux test and TB nucleic acid testing",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "Not indicated as a first step: this is a three-day acute illness with lobar consolidation, not weeks of cough with weight loss and contact. It stays on the list only if he fails to improve."
+        }
+      },
+      "differentialModel": {
+        "answer": "Severe pneumonia of the right lower lobe. Consider bronchiolitis, tuberculosis, asthma with a trigger, foreign body inhalation, and fluid beside the lung such as an empyema.",
+        "accept": [
+          "pneumonia",
+          "bronchiolitis",
+          "tuberculosis",
+          "asthma",
+          "empyema",
+          "pneumothorax",
+          "aspiration pneumonia",
+          "croup"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Community-acquired pneumonia of the right lower lobe with lower chest indrawing, severe pneumonia by the ARI rules.",
+        "accept": [
+          "community acquired pneumonia",
+          "cap",
+          "pneumonia"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Oxygen for the low saturation, a first antibiotic dose covering the pneumococcus and urgent referral to the district hospital, continued breastfeeding with small frequent feeds, review of response in two to three days, and a follow-up film only if the shadow fails to clear.",
+        "accept": [
+          "oxygen",
+          "antibiotic",
+          "referral",
+          "follow-up",
+          "chest radiograph",
+          "fluids",
+          "review"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The tempo sorts first: three days of fever with new fast breathing is acute pneumonia, not the weeks of tuberculosis or the recurrent bouts of wheeze.",
+        "Indrawing alone classifies him as severe, even though he still drinks and stays alert. Severity here is a chest wall sign, not a behaviour.",
+        "A calm full-minute count is the diagnosis. Crying would have given a false number, and a 15-second count multiplied up would have magnified it.",
+        "The grunt and the flaring nostrils are the work of breathing, and they outrank the crackles. A child can be in danger with surprisingly little to hear.",
+        "Anaemia, low weight and smoke exposure do not change the category, but they explain why this child and not his sister fell ill, and each needs its own advice before discharge.",
+        "Cultures and films must never delay oxygen and the first antibiotic dose. His saturation was 91 percent when seen, and that first hour matters more than any pending result."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

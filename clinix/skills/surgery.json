@@ -32469,6 +32469,3270 @@
       ],
       "title": "Summarising the thyroid case",
       "why": "A thyroid summary must carry tempo, function and local staging together, because the plan follows from all three at once. Omitting any one of them leaves the listener unable to judge whether this patient needs reassurance, sampling or referral."
+    },
+    "skill.hx.acute.appendicitis_risk": {
+      "id": "skill.hx.acute.appendicitis_risk",
+      "kind": "history",
+      "system": "surgery",
+      "title": "Background risks and previous episodes in suspected appendicitis",
+      "oneLine": "Previous attacks, purgatives, diet, periods, past surgery and drugs that mask the signs",
+      "why": "Appendicitis is a recurrent risk, not a first-ever event in every patient: previous similar attacks, purgative use and a missed period each redirect the whole workup. A gynaecological history omitted here is how an ectopic gestation or a twisted cyst gets opened as an appendix.",
+      "asks": [
+        {
+          "text": "Have you ever had a similar pain in the right lower abdomen before, even briefly, and what was it called at the time?"
+        },
+        {
+          "text": "Did you take any purgative, laxative or home enema for constipation just before this pain began?"
+        },
+        {
+          "text": "What do you eat on most days: meat at every meal with few vegetables, or a mixed diet with fruit and fibre?"
+        },
+        {
+          "text": "For a female patient: when was your last menstrual period, is it ever late, and could you be pregnant?"
+        },
+        {
+          "text": "Have you had any previous abdominal operation, tuberculosis, or worms passed in the stool, and what treatment did you take?"
+        },
+        {
+          "text": "Are you taking steroids, immunosuppressants or regular painkillers that could blunt fever, tenderness or guarding?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Previous attacks and purgatives change the meaning of this one",
+          "body": "Ask about earlier attacks of right lower abdominal pain by name, since recurrent brief episodes precede many acute presentations and point to a grumbling appendix rather than a first event.\n\nAsk specifically about purgatives or a home enema taken for constipation just before the pain, because stimulating a loaded obstructed appendix can precipitate the acute attack."
+        },
+        {
+          "heading": "The menstrual history is never skipped in an acute abdomen",
+          "body": "In every female patient of reproductive age, record the last menstrual period, cycle regularity and any chance of pregnancy before anything else is decided.\n\nA missed period with lower abdominal pain and faintness is a ruptured ectopic gestation until proved otherwise, and mid cycle pain with similar features can be a ruptured follicular cyst."
+        },
+        {
+          "heading": "Past surgery, tuberculosis, worms and masking drugs",
+          "points": [
+            "Previous abdominal operations raise adhesions and obstruction in the differential, while treated or untreated tuberculosis keeps ileocaecal tuberculosis on the list where it is prevalent.",
+            "In children, ask about worms passed in the stool, since roundworms can obstruct the appendicular lumen and precipitate appendicitis.",
+            "Steroids, immunosuppressants and habitual analgesics blunt fever, tenderness and guarding, so a soft examination in a patient on these drugs never excludes appendicitis.",
+            "Smoking and alcohol habits are recorded as for any surgical case, since they affect healing and anaesthetic risk rather than the diagnosis itself."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name two background questions that redirect the workup in suspected appendicitis.",
+          "a": "Ask about previous similar attacks of right lower abdominal pain and about purgative use just before this pain, and in a female patient always record the last menstrual period and any chance of pregnancy.",
+          "accept": [
+            "previous attacks",
+            "purgative",
+            "menstrual period",
+            "pregnancy"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why can a soft abdominal examination be falsely reassuring in some patients?",
+          "a": "Steroids, immunosuppressants and regular analgesics blunt fever, tenderness and guarding, so the examination underestimates the inflammation in a patient taking these drugs.",
+          "accept": [
+            "steroids",
+            "immunosuppressants",
+            "analgesics",
+            "blunt"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_appendicitis_and_appendiceal_neoplasms: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Acute appendicitis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.acute.appendicitis": {
+      "id": "skill.present.acute.appendicitis",
+      "kind": "presentation",
+      "system": "surgery",
+      "title": "Presenting the acute appendicitis case",
+      "oneLine": "Tempo in hours, migration, localised peritonism, Alvarado band and what is still missing",
+      "why": "An acute abdomen presentation fails when it reads like an elective history: the examiner needs the tempo in hours, the migration path, the exact peritoneal signs and the risk band, in that order, before the diagnosis is named.",
+      "teach": [
+        {
+          "heading": "Four sentences that contain the case",
+          "body": "Name the patient with the risks that matter: age, sex and any previous similar attack. Then state the tempo in hours: pain first around the navel, then shifting to the right iliac fossa, followed by vomiting and then fever.\n\nThen state the local findings in one breath: tenderness at the McBurney point with guarding and release tenderness, Rovsing sign, and the state of bowel sounds. End with the working diagnosis, the Alvarado band and what would change it."
+        },
+        {
+          "heading": "A worked example",
+          "body": "A 22 year old man presents with 18 hours of abdominal pain that began diffusely around the navel and shifted to the right iliac fossa six hours later, with anorexia, one episode of vomiting after the pain began, and fever since this morning.\n\nExamination shows localised tenderness at the McBurney point with guarding and release tenderness, a positive Rovsing sign and sluggish bowel sounds. This is acute appendicitis of high clinical probability pending a leucocyte count and graded compression ultrasound."
+        },
+        {
+          "heading": "Never omit these",
+          "points": [
+            "The pain vomiting fever sequence in order, since pain after vomiting points away from a surgical cause.",
+            "The migration path stated explicitly, since it is the single most discriminating detail in the history.",
+            "Relevant negatives: no missed period where relevant, no dysuria with loin pain, no previous similar attack, no purgative use.",
+            "The Alvarado band and what is still missing: blood counts, ultrasound findings, and the consent and fitness for theatre."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What elements belong in an acute appendicitis case summary?",
+          "a": "The patient with relevant risks, the tempo in hours with the migration path, the localised peritoneal findings, the working diagnosis with its Alvarado band, and what investigation or review is still missing.",
+          "accept": [
+            "tempo",
+            "migration",
+            "peritoneal",
+            "Alvarado",
+            "diagnosis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does the order of pain and vomiting belong in the first minute of the presentation?",
+          "a": "Pain before vomiting fits a surgical cause such as appendicitis, while vomiting first fits gastroenteritis, so the sequence stated early lets the listener judge the whole case before the diagnosis is named.",
+          "accept": [
+            "pain before vomiting",
+            "surgical",
+            "gastroenteritis",
+            "sequence"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_appendicitis_and_appendiceal_neoplasms: clinicalPearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Examination of an acute abdomen"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.cholelithias.risk": {
+      "id": "skill.hx.cholelithias.risk",
+      "kind": "history",
+      "system": "surgery",
+      "title": "Background risks behind gallstones",
+      "oneLine": "Age, parity, weight, family, blood and bowel history that raise the prior probability of stones",
+      "why": "Gallstones gather in particular people, so the background history sets the prior probability before the pain is even described. A multiparous woman above forty with an affected sister starts as stones until proven otherwise, while the same pain in a young man needs far more convincing.",
+      "asks": [
+        {
+          "text": "How old are you, and how many pregnancies and deliveries have you had?"
+        },
+        {
+          "text": "Has your weight changed much in the last year, through dieting, illness or surgery, and what do you weigh now for your height?"
+        },
+        {
+          "text": "Has anyone in your family had gallstones or surgery to remove the gallbladder?"
+        },
+        {
+          "text": "Have you ever been told you have anaemia that runs in the family, yellow eyes since childhood, or needed repeated blood transfusions?"
+        },
+        {
+          "text": "Have you had any operation on the intestine, long standing bowel disease, or prolonged fasting or rapid weight loss programmes?"
+        },
+        {
+          "text": "Which regular medicines and hormones do you take, including contraceptive pills, hormone treatment, and any recent course of ceftriaxone?"
+        },
+        {
+          "text": "Do you have diabetes, and what is your usual diet: fried food, long gaps between meals, or missed breakfasts?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Who carries stones",
+          "body": "Stones favour women above forty, multiparity, obesity, and a family history of stones, the bedside five Fs that examiners still expect. Rapid weight loss, prolonged fasting, oestrogen and contraceptive pills, and diabetes each add further risk through bile that is supersaturated or a gallbladder that empties poorly.\n\nAsk the bowel and blood history that juniors forget. Ileal disease or resection disturbs bile salt handling, and chronic haemolysis loads the bile with pigment, so both point toward pigment stones rather than cholesterol ones."
+        },
+        {
+          "heading": "Why the background changes the question",
+          "body": "Risk factors never diagnose on their own, but they decide how hard each later finding must work. In a high risk patient a typical fatty food attack with radiation to the scapula is nearly enough, while in a low risk patient the same story must be checked against ulcer, pancreas and heart before it is believed.\n\nRecord risks as facts with numbers where you have them: parity, weight change in kilograms, the drug with its duration. Vague phrases like high risk or obese help nobody at the bedside or in the viva."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name four background risk factors for gallstones you would ask about in every suspected case.",
+          "a": "Female sex above forty, multiparity, obesity, family history of stones, rapid weight loss, oestrogen or contraceptive pills, haemolytic anaemia, and ileal disease or resection.",
+          "accept": [
+            "forty",
+            "multipar",
+            "obes",
+            "family",
+            "weight loss",
+            "oestrogen",
+            "haemol",
+            "ileal"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why do chronic haemolysis and ileal resection point toward pigment rather than cholesterol stones?",
+          "a": "Haemolysis loads bile with unconjugated pigment that precipitates as calcium bilirubinate, while ileal disease disturbs bile salt handling; both favour black pigment stones over cholesterol ones.",
+          "accept": [
+            "pigment",
+            "bilirubinate",
+            "bile salt",
+            "cholesterol"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gallbladder_disease: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Gallstones: aetiology and risk factors"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.cholelithias.summary": {
+      "id": "skill.present.cholelithias.summary",
+      "kind": "presentation",
+      "system": "surgery",
+      "title": "Summarising the biliary case",
+      "oneLine": "Patient, tempo, biliary syndrome, severity and the next step in four sentences",
+      "why": "A biliary presentation must separate three stories that share one organ: passing colic, an inflamed gallbladder, and a blocked duct. The summary forces that separation in the open, with the tempo and the severity doing the work, so the consultant hears the plan inside the summary.",
+      "teach": [
+        {
+          "heading": "Four sentences that contain the case",
+          "body": "Name the patient with the risks that matter: age, sex, parity, weight and family history of stones. Then state the tempo: a single evening attack that settled points to colic, while days of unrelenting pain with fever points to cholecystitis.\n\nThen state the syndrome in abstract terms with the key positives and negatives: right hypochondrial pain with radiation to the scapula, a positive Murphy sign, fever, and no jaundice. End with the provisional diagnosis, the severity grade, and the next step, such as ultrasound or surgical referral."
+        },
+        {
+          "heading": "A worked example",
+          "body": "A 45 year old multiparous homemaker with recurrent fatty food related right upper abdominal pain over two years presents with two days of unrelenting right hypochondrial pain, fever and vomiting. Examination shows a positive Murphy sign with guarding and no jaundice.\n\nThis is acute calculous cholecystitis on background cholelithiasis, mild grade, and the next steps are an abdominal ultrasound with blood counts and liver tests, followed by early laparoscopic cholecystectomy."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What elements belong in a biliary case summary?",
+          "a": "The patient with relevant risks, the tempo of attacks, the syndrome in abstract terms with key positives and negatives, and the provisional diagnosis with severity and the next step.",
+          "accept": [
+            "tempo",
+            "syndrome",
+            "diagnosis",
+            "severity",
+            "next step"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cholecystitis_critical_view_and_biliary_injury: clinicalPearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "The acute abdomen: presenting the case"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.colorectal.risk": {
+      "id": "skill.hx.colorectal.risk",
+      "kind": "history",
+      "system": "surgery",
+      "title": "Risk, past, personal, drug and family history in colorectal cancer",
+      "oneLine": "Age, polyps, bowel inflammation and family syndromes that raise the prior",
+      "why": "Colorectal cancer is common after middle age, yet most patients who bleed per rectum do not have cancer. Knowing who carries higher risk before the examination lets you weight the same finding correctly: rectal bleeding with a first degree relative with bowel cancer, or with longstanding colitis, is a different case from identical bleeding with no risk at all.",
+      "asks": [
+        {
+          "text": "How old are you, and has there been unexplained tiredness, weight loss or iron deficiency anaemia? Risk rises with age, and a right sided growth can present with anaemia alone before bowel symptoms appear."
+        },
+        {
+          "text": "Have you ever had bowel polyps removed, a previous bowel cancer, or longstanding ulcerative colitis or Crohn disease of the large bowel? Adenomatous polyps are the precursor lesion, and chronic extensive colitis raises risk with duration."
+        },
+        {
+          "text": "Has anyone in your family had bowel cancer or many polyps, and at what age? Ask specifically about familial polyposis and Lynch type patterns: several affected relatives, or cancer under fifty, points toward a hereditary syndrome needing referral and family screening."
+        },
+        {
+          "text": "What regular medicines do you take, especially blood thinners, antiplatelet drugs, iron tablets or painkillers? Thinners make bleeding heavier without causing the growth, and iron may already have been started for anaemia."
+        },
+        {
+          "text": "Do you have diabetes, hypertension, heart or kidney disease, and what is your appetite, diet and weight trend? Comorbidity decides fitness for anaesthesia, bowel preparation and major resection, not the diagnosis."
+        },
+        {
+          "text": "Have you had any bowel test before: stool occult blood, sigmoidoscopy, colonoscopy or barium enema, and what did each show? A recent normal full colonoscopy lowers the prior; a never examined patient with red flags needs complete colonic evaluation."
+        }
+      ],
+      "practice": "Take past, personal, drug and family history from a simulated patient with rectal bleeding. Name the risk tier and what you would screen in the family, in under three minutes.",
+      "pitfalls": [
+        "Accepting piles as the explanation in a patient over forty without asking about polyps, colitis and family history.",
+        "Forgetting that familial polyposis is hereditary, so never asking about relatives or screening the family.",
+        "Recording blood thinners as the cause of bleeding and stopping there, instead of asking what lesion is bleeding.",
+        "Not asking about a previous colonoscopy, so a metachronous second growth is never looked for."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name four risk factors for colorectal cancer you must ask about.",
+          "a": "Increasing age, adenomatous polyps or previous colorectal cancer, longstanding extensive inflammatory bowel disease, and a family history or hereditary syndrome such as familial polyposis or Lynch syndrome.",
+          "accept": [
+            "age",
+            "polyp",
+            "colitis",
+            "inflammatory bowel",
+            "family",
+            "hereditary",
+            "polyposis",
+            "Lynch"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why does a history of villous adenoma matter more than a history of hyperplastic polyps?",
+          "a": "Most colorectal cancers arise from adenomatous polyps, and villous adenomas turn malignant about three times as often as tubular adenomas, while hyperplastic polyps are not the precursor.",
+          "accept": [
+            "adenoma",
+            "villous",
+            "precursor",
+            "threefold"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A 42 year old with rectal bleeding has two first degree relatives with bowel cancer under fifty. What does the family history change?",
+          "a": "It raises suspicion of a hereditary syndrome such as Lynch syndrome, which needs genetic counselling, tumour mismatch repair testing, and screening of the whole family, not just treatment of this patient.",
+          "accept": [
+            "hereditary",
+            "Lynch",
+            "genetic",
+            "mismatch repair",
+            "family screening"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "age_anaemia",
+          "text": "Establishes age and anaemia as the background risk"
+        },
+        {
+          "id": "polyps_colitis",
+          "text": "Asks about prior polyps, cancer and inflammatory bowel disease"
+        },
+        {
+          "id": "family",
+          "text": "Takes a three generation style family history for polyposis and Lynch patterns",
+          "critical": true
+        },
+        {
+          "id": "drugs_fitness",
+          "text": "Records thinners, comorbidity and prior bowel tests for fitness and planning"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "colorectal_cancer: risk factors and hereditary syndromes"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Carcinoma of the colon and rectum: aetiology and risk factors"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "teach": [
+        {
+          "heading": "Who carries higher risk",
+          "body": "Risk rises with age, and most cancers develop from adenomatous polyps through an adenoma to carcinoma sequence. Only a minority of adenomas progress, with risk tied to size and histology: villous adenomas turn malignant about three times as often as tubular ones.\n\nLongstanding extensive ulcerative colitis or Crohn disease of the large bowel adds risk with duration, as does a previous colorectal cancer or adenoma. These patients need surveillance of the whole colon, not reassurance from one normal test."
+        },
+        {
+          "heading": "Hereditary syndromes to ask about",
+          "points": [
+            "Familial polyposis coli is hereditary: multiple adenomas from youth, near certain progression without treatment, so ask about relatives and polyps directly.",
+            "Lynch syndrome may show few or no polyps and is easily missed; several relatives with bowel or related cancers, or cancer under fifty, is the clue.",
+            "A strong family history changes management toward genetic counselling, tumour mismatch repair testing and screening of relatives.",
+            "Record ages and relationships, not just yes or no: the pattern across generations is what names the syndrome."
+          ]
+        },
+        {
+          "heading": "What changes the plan",
+          "body": "Risk history sets three things: how urgently the whole colon must be examined, whether the family needs screening, and whether the patient is fit for the workup and operation. Blood thinners explain heavier bleeding but never explain the lesion.\n\nA never examined patient with red flag bleeding needs complete colonic evaluation whatever the risk tier, since synchronous polyps and cancers are common enough to look for every time."
+        }
+      ]
+    },
+    "skill.present.colorectal.case": {
+      "id": "skill.present.colorectal.case",
+      "kind": "presentation",
+      "system": "surgery",
+      "title": "Presenting the colorectal cancer case",
+      "oneLine": "Tempo, site, rectal findings and stage in two minutes",
+      "why": "A colorectal case fails when the site is vague, because right sided, left sided and rectal disease present, spread and operate differently. A presentation that names the site, the rectal findings in finger breadths, and the stage forces every later decision into the open.",
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "In what order should a colorectal case be presented?",
+          "a": "Problem representation with tempo and site, relevant bowel and systemic history with discriminating negatives, abdominal and rectal findings including nodes, diagnosis with stage and fitness, brief differential, then plan.",
+          "accept": [
+            "tempo",
+            "site",
+            "rectal findings",
+            "stage",
+            "differential",
+            "plan"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Why must the rectal findings include distance, circumference and fixity?",
+          "a": "Distance from the anal verge decides whether the sphincter can be saved, circumference and fixity decide resectability, and all three are needed to stage and to plan the operation.",
+          "accept": [
+            "sphincter",
+            "resectability",
+            "stage",
+            "fixity",
+            "distance"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "tempo_site",
+          "text": "Opens with tempo in months and the site of disease"
+        },
+        {
+          "id": "rectal_detail",
+          "text": "Gives distance, extent, edge character and fixity of any rectal growth"
+        },
+        {
+          "id": "negatives",
+          "text": "Includes discriminating negatives: obstruction, nodes, liver, fitness"
+        },
+        {
+          "id": "stage_plan",
+          "text": "States the stage with what is still missing, then the plan"
+        },
+        {
+          "id": "concise",
+          "text": "Keeps a focused case to about two minutes"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "colorectal_cancer: clinical presentation by tumour site"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Carcinoma of the rectum: clinical assessment and staging"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "teach": [
+        {
+          "heading": "The fixed order",
+          "body": "Open with the problem representation: age, tempo in months, and site. Then the relevant bowel history with bleeding character and habit change, then systemic features and risk. Then abdominal findings, rectal findings, and nodes, positives before discriminating negatives.\n\nClose with the diagnosis and stage, fitness for operation, a one line differential with what argues against each, and the next three steps: biopsy, staging scans, and referral to the colorectal unit."
+        },
+        {
+          "heading": "A worked example",
+          "body": "A 58 year old farmer presents with five months of bleeding per rectum with mucus, narrowing of stool and a feeling of incomplete emptying, with 6 kg weight loss and tiredness. Examination shows pallor, a soft abdomen with a loaded descending colon, and an ulcerated anterior rectal growth 4 cm from the verge involving half the circumference, mobile on the muscle, bleeding on touch, with no inguinal nodes.\n\nThis is carcinoma of the lower rectum, provisionally mobile and resectable, with iron deficiency anaemia, pending biopsy, pelvic MRI and contrast staging scans for nodes and distant spread."
+        },
+        {
+          "heading": "Never omit these",
+          "points": [
+            "The tempo in months, since weeks of bleeding and months of habit change point differently.",
+            "Bleeding character and its relation to stool: mixed with stool, coating it, or separate with mucus.",
+            "Rectal specifics: distance from the verge, clock position, circumference involved, edge and fixity, and what the glove showed.",
+            "Nodes, liver, obstruction and fitness, stated as present or explicitly absent, since each changes stage or operability."
+          ]
+        }
+      ]
+    },
+    "skill.hx.intestinal.risk": {
+      "id": "skill.hx.intestinal.risk",
+      "kind": "history",
+      "system": "surgery",
+      "title": "Past, personal, drug and family history in intestinal obstruction",
+      "oneLine": "The cause is usually in the past: operations, hernias, TB, tumours and slowing drugs",
+      "why": "The presenting symptoms say where the block is, but the past history says why it happened. Previous abdominal surgery points to adhesions, a known groin swelling points to hernia, and weight loss with altered bowel habit points to malignancy. Missing this history means missing a cause that needs its own operation.",
+      "asks": [
+        {
+          "text": "Have you ever had an operation on the abdomen or pelvis, including appendix, uterus, caesarean section or any emergency surgery, and when was it?"
+        },
+        {
+          "text": "Do you have a swelling in the groin or scrotum, or have you ever been told you have a hernia, and has it recently become painful or irreducible?"
+        },
+        {
+          "text": "Have you ever been treated for abdominal tuberculosis, Crohn disease, ulcerative colitis or diverticular disease, or had prolonged pain with diarrhoea?"
+        },
+        {
+          "text": "Have you lost weight recently, noticed blood or mucus in the stool, or had a recent change in bowel habit towards constipation?"
+        },
+        {
+          "text": "Have you had similar attacks of pain with distension before that settled on their own, as in recurrent volvulus or a passing gallstone?"
+        },
+        {
+          "text": "Which medicines do you take regularly, especially opioid painkillers, anticholinergic drugs, iron tablets or verapamil that slow the bowel?"
+        },
+        {
+          "text": "What is your usual diet and fluid intake, and do you depend on laxatives or enemas for constipation?"
+        },
+        {
+          "text": "Is there cancer of the bowel in the family, and what are your smoking, alcohol and occupation details?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Previous surgery is the commonest clue",
+          "body": "Postoperative adhesions cause about three quarters of small bowel obstructions, so any previous laparotomy, pelvic surgery or caesarean section is the single most important historical fact. Ask what operation it was and when it was done.\n\nA known hernia is the second curable cause. Ask whether a groin or umbilical swelling exists, whether it reduces on lying down, and whether it has recently become painful, tense or irreducible, which suggests strangulation rather than simple obstruction."
+        },
+        {
+          "heading": "TB, inflammation and tumour leave a trail",
+          "body": "In India always ask about treated or partly treated abdominal tuberculosis, since strictures are a common benign cause of subacute obstruction. Inflammatory bowel disease, diverticulitis and previous pelvic radiotherapy point the same way.\n\nFor large bowel obstruction in an older patient, ask about weight loss, rectal bleeding, mucus, tenesmus and a recent change towards constipation. These favour an obstructing colorectal growth over volvulus, and they change the operation from decompression to resection."
+        },
+        {
+          "heading": "Drugs, diet and recurrent attacks",
+          "points": [
+            "Opioids, anticholinergics, tricyclics, iron and verapamil slow transit and precipitate obstruction, especially in the elderly and constipated.",
+            "Chronic constipation with laxative dependence and a redundant sigmoid sets up sigmoid volvulus. Recurrent self-limiting attacks of distension suggest it.",
+            "Intermittent colicky pain that settles and returns can mark a gallstone tumbling down the ileum before final impaction, typically in an older woman with gallstone history.",
+            "Family history of bowel cancer and personal history of polyps raise the probability of a malignant stricture."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name two past-history facts that each point to a specific cause of intestinal obstruction.",
+          "a": "Previous abdominal or pelvic surgery points to adhesive obstruction, and a known groin hernia points to a strangulated hernia.",
+          "accept": [
+            "pelvic surgery",
+            "adhesive obstruction",
+            "groin hernia",
+            "strangulated hernia"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "An elderly man has large bowel obstruction. Which historical points favour carcinoma over sigmoid volvulus?",
+          "a": "Weight loss, rectal bleeding or mucus, tenesmus and a recent change in bowel habit favour an obstructing growth, while chronic constipation with previous self-limiting attacks of distension favours volvulus.",
+          "accept": [
+            "weight loss",
+            "bleeding",
+            "bowel habit",
+            "constipation",
+            "attacks"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "intestinal_obstruction_and_colonic_volvulus: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Intestinal obstruction: aetiology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.intestinal.summary": {
+      "id": "skill.present.intestinal.summary",
+      "kind": "presentation",
+      "system": "surgery",
+      "title": "Presenting the intestinal obstruction case",
+      "oneLine": "Tempo, the four cardinal symptoms, the likely level and cause, and strangulation yes or no",
+      "why": "An obstruction presentation must answer four questions in order: is it obstruction, small or large bowel, what is the likely cause, and is the bowel strangulated. A presentation that lists symptoms without committing to these four leaves the consultant unable to decide between continued conservative care and theatre.",
+      "teach": [
+        {
+          "heading": "The four-sentence structure",
+          "body": "Start with the patient and the tempo: age, sex, and hours or days of colicky pain with vomiting, distension and absolute constipation. State which of the four cardinal symptoms dominate, because vomiting dominates high small bowel obstruction while distension dominates large bowel obstruction.\n\nThen give the risk context in one line: previous surgery, hernia, TB treatment, weight loss or constipating drugs. Follow with the examination in the same order: dehydration and vitals, distension pattern and visible peristalsis, tenderness or rigidity, hernial orifices and rectal findings."
+        },
+        {
+          "heading": "Commit to level, cause and strangulation",
+          "points": [
+            "State the level: small bowel if central distension with early profuse vomiting, large bowel if peripheral distension with late vomiting and marked constipation.",
+            "State the likely cause with its evidence: adhesions after previous laparotomy, strangulated groin hernia, sigmoid volvulus in an elderly constipated patient, or growth with weight loss and bleeding.",
+            "State strangulation explicitly, present or absent, with the evidence: constant pain, tenderness with guarding, fever, tachycardia, leucocytosis or raised lactate favour it.",
+            "Close with the plan in one line: resuscitate and decompress with serial review, or resuscitate and operate, and say which."
+          ]
+        },
+        {
+          "heading": "A worked example",
+          "body": "A 58 year old man with an open appendicectomy twelve years ago presents with two days of central colicky pain, repeated bilious vomiting, progressive central distension and absolute constipation for one day. He is dehydrated with tachycardia but no fever. The abdomen is centrally distended with visible peristalsis and increased bowel sounds, there is no tenderness or rigidity, hernial orifices are clear and the rectum is empty.\n\nThis is a small bowel obstruction, most likely adhesive, with no strangulation at present. The plan is nasogastric decompression with fluid and electrolyte correction under surgical review, proceeding to operation if strangulation appears or the obstruction fails to resolve."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Which four questions must an intestinal obstruction presentation answer?",
+          "a": "Is it obstruction, is it small or large bowel, what is the likely cause, and is there strangulation.",
+          "accept": [
+            "small or large",
+            "cause",
+            "strangulation",
+            "obstruction"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why must the presentation state strangulation explicitly even when it is absent?",
+          "a": "Because strangulation is the decision point between continued conservative care and urgent operation, so the team needs to know it was looked for and what the evidence showed.",
+          "accept": [
+            "operation",
+            "decision",
+            "conservative",
+            "evidence"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "intestinal_obstruction_and_colonic_volvulus: clinicalPearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "The acute abdomen"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.varicose.riskfactors": {
+      "id": "skill.hx.varicose.riskfactors",
+      "kind": "history",
+      "system": "surgery",
+      "title": "Risk, past and family history in varicose veins",
+      "oneLine": "Occupation, family, pregnancies, hormones, bowel habit, past thrombosis and prior treatment",
+      "why": "Two patients can show identical varicosities yet need opposite operations: one has simple primary valve failure and the other has a blocked deep system or a pelvic tumour doing the obstructing. The risk and past history is what separates them, and missing it turns a routine ablation into a congested, ulcerated leg.",
+      "teach": [
+        {
+          "heading": "Risk factors decide the operation, not the diagnosis",
+          "body": "The visible veins only say that surface pressure is high. Whether that pressure comes from weak walls and leaky surface valves, from deep valves wrecked by an old thrombosis, or from a blocked outflow higher up is decided almost entirely by the story: the job, the family, the pregnancies, the bowels and any past swollen leg.\n\nAsk every one of these even when the leg looks straightforward. A patient who stands all day, whose mother and sisters have the same veins, and whose veins worsened in each pregnancy is telling you primary disease with a real chance of recurrence, and that changes consent."
+        },
+        {
+          "heading": "Questions you must never skip",
+          "points": [
+            "Occupation and hours on the feet: conductors, police, traffic staff, nurses, hawkers and farm workers who stand all day.",
+            "Family history in the mother and sisters, which points to inherited wall or valve weakness.",
+            "Obstetric history: veins appearing or worsening in pregnancy, and any white swollen leg after delivery.",
+            "Hormonal pills taken for many months, which raise the chance of deep venous thrombosis.",
+            "Constipation, straining, chronic cough and any abdominal or pelvic lump, which raise outflow pressure.",
+            "Any past painful swelling of the whole leg, long immobility, major surgery or prolonged travel.",
+            "Prior injection treatment or vein surgery, and what happened afterwards."
+          ]
+        },
+        {
+          "heading": "Secondary causes hide in the abdomen and the pelvis",
+          "body": "A pelvic fibroid, an ovarian cyst, a growth of the cervix or rectum, swollen abdominal nodes, or a uterus heavy with pregnancy can all press on the iliac veins and produce secondary varicosities. Constipation with a loaded colon does the same on a smaller scale.\n\nSo a new varicosity in an older patient, a varicosity only on one side with swelling of the whole limb, or veins that appeared suddenly all demand an abdominal and pelvic history and examination, not just a look at the leg."
+        }
+      ],
+      "asks": [
+        {
+          "text": "What work do you do, and how many hours a day do you spend standing or walking without sitting?"
+        },
+        {
+          "text": "Do your parents, brothers or sisters have similar prominent leg veins or leg ulcers?"
+        },
+        {
+          "text": "For women: in which pregnancy did the veins first appear or worsen, and did a leg ever swell up white and painful after a delivery?"
+        },
+        {
+          "text": "Have you taken hormonal contraceptive pills, and for how long?"
+        },
+        {
+          "text": "Do you suffer from constipation, and do you strain for long at stool?"
+        },
+        {
+          "text": "Have you noticed any swelling in the abdomen, and have you lost weight or appetite recently?"
+        },
+        {
+          "text": "Have you ever had a whole leg swell painfully, after surgery, childbirth, injury or a long journey?"
+        },
+        {
+          "text": "Have you had any injection treatment or operation for these veins before, and did the veins return?"
+        }
+      ],
+      "pitfalls": [
+        "Recording the veins while never asking about a past deep vein thrombosis, which is the one fact that can forbid surface surgery.",
+        "Forgetting the obstetric and pill history in a young woman, and so missing a preventable thrombotic cause.",
+        "Dismissing constipation or an abdominal lump as unrelated to the leg, when either can be the whole cause."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A bus conductor stands all day and reports heaviness that is worst in the evening and gone by morning. What two facts point to venous rather than arterial pain?",
+          "a": "Evening worsening after dependent standing and overnight relief on lying down both point to venous hypertension, while arterial claudication comes on with walking and eases with rest.",
+          "accept": [
+            "evening",
+            "standing",
+            "lying down",
+            "relief"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why must you ask about a past painfully swollen leg before planning varicose vein surgery?",
+          "a": "A past deep vein thrombosis can leave deep veins blocked or their valves destroyed, so the surface varicosities are carrying essential return flow and removing them risks severe congestion.",
+          "accept": [
+            "deep vein thrombosis",
+            "blocked",
+            "valves",
+            "destroyed"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A woman says her varicosities appeared in pregnancy and her mother has them too. What do these two facts tell you?",
+          "a": "Pregnancy raises venous pressure through the weight of the uterus and hormonal relaxation of vein walls, and a first-degree family history points to inherited valve or wall weakness, and both raise the chance of recurrence after treatment.",
+          "accept": [
+            "pregnancy",
+            "family",
+            "hormonal",
+            "recurrence"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "occupation",
+          "text": "Establishes hours of standing and straining in the daily work"
+        },
+        {
+          "id": "family_obstetric",
+          "text": "Records family history and the full obstetric and hormonal story"
+        },
+        {
+          "id": "secondary",
+          "text": "Screens for outflow obstruction and past deep vein thrombosis"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "varicose_veins: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Varicose veins: history and risk factors"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.varicose.summary": {
+      "id": "skill.present.varicose.summary",
+      "kind": "presentation",
+      "system": "surgery",
+      "title": "Presenting the varicose vein case",
+      "oneLine": "Tempo, system, tests and CEAP grade in under two minutes, ending with fitness for intervention",
+      "why": "A varicose vein presentation fails in two predictable ways: the student recites every test without saying which system is diseased, or describes the veins without ever stating whether the deep veins are open. The consultant needs the system, the junction, the perforators, the deep patency and the grade, in that order.",
+      "teach": [
+        {
+          "heading": "Five lines that contain the case",
+          "body": "Open with the patient and the tempo: age, sex, standing occupation, and years of evening heaviness and swelling. Then name the system: long or short saphenous trunk, the junction, and any perforator level.\n\nThen give the two test results that matter: Trendelenburg for the junction and perforators, and Perthes for deep patency. Then the skin grade and any ulcer, past or present. Close with your diagnosis, the CEAP class, and whether the leg is fit for ablation or surgery."
+        },
+        {
+          "heading": "A worked example",
+          "body": "A 44 year old woman constable on traffic duty presents with six years of left leg heaviness and evening ankle swelling. There are tortuous long saphenous varicosities with a saphena varix showing an expansile cough impulse, a palpable medial calf perforator defect, and pigmentation with eczema above the medial malleolus.\n\nTrendelenburg shows saphenofemoral and perforator incompetence, and Perthes shows patent deep veins. This is primary varicose veins of the left great saphenous system, CEAP C4a, fit for duplex mapping and ablation."
+        },
+        {
+          "heading": "Never omit these",
+          "points": [
+            "The deep history: past swollen leg, pregnancies, pills, constipation and abdominal symptoms.",
+            "The negatives that protect the plan: no bursting pain on walking, no whole-limb swelling, pulses present.",
+            "The arterial check: pulses and the ankle-brachial index before any compression is advised.",
+            "The secondary screen: abdomen examined, no pelvic lump, so primary disease can be stated.",
+            "The plan: duplex mapping first, then ablation or surgery, with compression and surveillance after."
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Listing Trendelenburg and Perthes steps without stating what each proved in this patient.",
+        "Presenting the veins while omitting the deep venous history, so the plan hangs on an unchecked assumption.",
+        "Ending on the diagnosis with no statement of fitness for intervention and no next test."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "In what order should a focused varicose vein case be presented?",
+          "a": "Patient with tempo, the diseased system with junction and perforators, the Trendelenburg and Perthes results, the skin grade, then the diagnosis with CEAP class and fitness for intervention.",
+          "accept": [
+            "tempo",
+            "system",
+            "perforators",
+            "perthes",
+            "ceap",
+            "fitness"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Your presentation omits the deep veins entirely. Why does the consultant stop you?",
+          "a": "Without deep patency from the history and Perthes, and without duplex confirmation, no surface vein can be safely removed, since blocked deep veins make the varicosities essential collaterals.",
+          "accept": [
+            "patency",
+            "perthes",
+            "duplex",
+            "collaterals"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "system",
+          "text": "Names the trunk, junction and perforator level"
+        },
+        {
+          "id": "tests",
+          "text": "States what Trendelenburg and Perthes each proved"
+        },
+        {
+          "id": "grade_plan",
+          "text": "Gives the CEAP grade and fitness for intervention"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "varicose_veins: clinicalPearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Varicose veins: presenting the venous case"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.acute.pancreatitis_risk": {
+      "id": "skill.hx.acute.pancreatitis_risk",
+      "kind": "history",
+      "system": "surgery",
+      "title": "Risk factors for acute pancreatitis",
+      "oneLine": "Gallstones, alcohol and triglycerides first, then drugs, trauma and recent procedures",
+      "why": "The cause decides the cure: stones need a cholecystectomy, alcohol needs abstinence counselling, and high triglycerides need lipid treatment. A pancreatitis history that never asks the cause questions leaves the recurrence unprevented.",
+      "teach": [
+        {
+          "heading": "Gallstones and alcohol explain most cases",
+          "body": "Gallstones cause roughly 40 to 70 percent of attacks and alcohol roughly 25 to 35 percent, so these two questions come first. Ask about prior biliary colic, fatty food intolerance and known gallstones, then about the quantity, frequency and type of alcohol, including country liquor, in a non-judgemental way.\n\nWhere neither is present, ask about diabetes, obesity and a high fat diet, and send a fasting lipid profile: triglycerides above 1000 mg per dL point to hypertriglyceridaemia as the likely cause."
+        },
+        {
+          "heading": "Drugs, trauma, procedures and the Indian context",
+          "body": "Ask about recent drug starts, particularly azathioprine, thiazides, sodium valproate and oestrogens, and about recent ERCP, abdominal trauma and scorpion sting, which is a recognised precipitant in parts of India.\n\nPast attacks matter: recurrent unexplained episodes raise the possibility of small stones, sludge or an anomaly. Above the age of 40 with no clear cause, keep a pancreatic tumour in mind and ask about weight loss."
+        }
+      ],
+      "asks": [
+        "Have you had this kind of pain before, or pain after fatty food suggestive of biliary colic?",
+        "Do you drink alcohol? How much, how often, and for how many years?",
+        "Are you diabetic, or have you been told your cholesterol or triglycerides are high?",
+        "What regular tablets do you take, and has any new drug been started recently?",
+        "Have you had any injury to the abdomen, a recent ERCP, or a scorpion sting?",
+        "Is there anyone in the family with gallstones or pancreatic disease?"
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the two commonest causes of acute pancreatitis.",
+          "a": "Gallstones and alcohol.",
+          "accept": [
+            "gallstones",
+            "alcohol"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "No gallstones and no alcohol. What single blood test points to the next most likely cause?",
+          "a": "Fasting triglycerides. A level above 1000 mg per dL makes hypertriglyceridaemia the likely cause.",
+          "accept": [
+            "triglycerides",
+            "1000",
+            "lipid"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does the cause change the operation you plan before discharge?",
+          "a": "Mild gallstone pancreatitis needs cholecystectomy on the same admission to prevent recurrence, while alcohol related disease needs abstinence counselling and hypertriglyceridaemia needs lipid treatment instead.",
+          "accept": [
+            "cholecystectomy",
+            "abstinence",
+            "recurrence"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_pancreatitis_and_pancreaticoduodenectomy: clinical pearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Acute pancreatitis (aetiology)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.acute.pancreatitis": {
+      "id": "skill.present.acute.pancreatitis",
+      "kind": "presentation",
+      "system": "surgery",
+      "title": "Presenting the acute pancreatitis case",
+      "oneLine": "Tempo, pain, cause clues, severity and plan in under two minutes",
+      "why": "The consultant needs the tempo, the cause and the severity grade in the first minute, because those three decide fluids, feeding and whether the gallbladder comes out on this admission. A presentation that buries them under examination detail wastes the decision window.",
+      "teach": [
+        {
+          "heading": "The one minute scheme",
+          "body": "Open with age, sex and tempo: an acute severe epigastric pain of stated hours or days, radiating to the back, with vomiting. Follow with the cause clues: prior biliary colic or known stones, alcohol use, triglycerides, drugs and trauma.\n\nThen give the severity: pulse, pressure, respiratory rate, oxygen need, urine output and creatinine, and the revised Atlanta class. Close with lipase, ultrasound and CT findings, and the plan: fluids, feeding, antibiotics only if infected, and gallbladder surgery where indicated."
+        },
+        {
+          "heading": "Say the negatives that exclude the mimics",
+          "body": "State what is absent and why it matters: no board-like rigidity or free gas against perforation, no Murphy sign or thick walled gallbladder against cholecystitis, no colicky pattern with distension against obstruction.\n\nEnd with a crisp diagnostic line, for example: acute gallstone pancreatitis, moderately severe by the revised Atlanta classification, with a plan for fluids, early feeding and same admission cholecystectomy."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What three facts open an acute pancreatitis presentation?",
+          "a": "The tempo, the pain with its radiation, and the cause clues.",
+          "accept": [
+            "tempo",
+            "pain",
+            "cause"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which severity facts must appear before the plan?",
+          "a": "Pulse, blood pressure, respiratory rate, oxygen need, urine output, creatinine and the revised Atlanta class.",
+          "accept": [
+            "pulse",
+            "pressure",
+            "Atlanta",
+            "urine"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why name the absent findings in the presentation?",
+          "a": "Because named negatives exclude the close mimics, perforation, cholecystitis and obstruction, without further tests.",
+          "accept": [
+            "mimics",
+            "perforation",
+            "cholecystitis"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_pancreatitis_and_pancreaticoduodenectomy: clinical pearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "The acute abdomen (case presentation)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.anorectal.riskfactors": {
+      "asks": [
+        {
+          "text": "What is your daily diet and water intake like? A diet poor in fibre and fluids with hard stools and prolonged straining underlies most piles and fissures."
+        },
+        {
+          "text": "Do you pass stool daily without straining, or do you sit a long time and strain hard? Ask about ignoring the urge, prolonged sitting on the pan, and chronic constipation."
+        },
+        {
+          "text": "What work do you do? Prolonged sitting or standing, heavy lifting, and long hours without moving raise venous pressure in the anal cushions."
+        },
+        {
+          "text": "Have you ever had a painful swelling beside the anus that burst on its own or needed a cut to drain pus? A previous anorectal abscess is the usual origin of a fistula-in-ano."
+        },
+        {
+          "text": "Have you had tuberculosis, ulcerative colitis, Crohn disease, or repeated bouts of dysentery or severe diarrhoea? These explain recurrent or multiple fistulae and rectal prolapse."
+        },
+        {
+          "text": "For women: how many pregnancies and deliveries, and was labour prolonged? Pressure on the rectal veins in pregnancy and pelvic floor weakness afterwards predispose to piles and prolapse."
+        },
+        {
+          "text": "Do you pass urine with difficulty, a thin stream, or dribbling? Urethral stricture or an enlarged prostate with chronic straining raises pressure on the superior rectal veins."
+        },
+        {
+          "text": "Do you use purgatives or enemas regularly to open your bowels? Increasing purgative requirement with alternating diarrhoea can mark an annular growth higher up."
+        },
+        {
+          "text": "Has anyone in your family had piles, fissure, rectal prolapse, bowel cancer, or multiple bowel polyps? Polyposis is hereditary, and patients often volunteer a family history of piles or rectal cancer."
+        }
+      ],
+      "id": "skill.hx.anorectal.riskfactors",
+      "kind": "history",
+      "probes": [
+        {
+          "a": "Chronic constipation with hard stools and prolonged straining is the commonest background, with low fibre diet, ignoring the urge, pregnancy, and any cause of raised intra-abdominal pressure such as a pelvic tumour, urethral stricture or enlarged prostate.",
+          "accept": [
+            "constipation",
+            "straining",
+            "fibre",
+            "pregnancy",
+            "pressure"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Name three background factors you must ask about in every patient with piles or fissure."
+        },
+        {
+          "a": "A previous anorectal abscess that burst spontaneously or was incised and drained, because most fistulae-in-ano begin as a cryptoglandular abscess that fails to heal completely.",
+          "accept": [
+            "abscess",
+            "burst",
+            "incised",
+            "drained"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What single past event explains most new fistulae-in-ano?"
+        },
+        {
+          "a": "Tuberculosis, Crohn disease, ulcerative colitis, lymphogranuloma inguinale and colloid carcinoma of the rectum, so recurrent or multiple tracks should trigger questions about chronic cough, weight loss, chronic diarrhoea, genital sores and bowel symptoms.",
+          "accept": [
+            "tuberculosis",
+            "crohn",
+            "colitis",
+            "carcinoma"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "A patient has recurrent multiple fistulae. Which systemic diseases must your past history exclude?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "anorectal_disorders_hemorrhoids_and_fistula: pathophysiology and clinical pearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Examination of a rectal case: past and family history",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Most anorectal disease is a habit disease before it is a surgical disease. Chronic constipation, hard stools, prolonged sitting on the pan and repeated straining congest the anal cushions and tear the anal lining. A low fibre diet with poor water intake, regularly ignoring the urge to defecate, and occupations that keep a person sitting or standing for hours all belong in the history, because correcting them is part of the treatment.",
+          "heading": "Bowel habit comes first"
+        },
+        {
+          "body": "Pressure above the anus matters as much as habit at the anus. Pregnancy presses on the superior rectal veins while progesterone relaxes vein walls. Urethral stricture, an enlarged prostate, a large pelvic tumour, and chronic cough all raise intra-abdominal pressure and congest the same veins. In a woman, ask about pregnancies and prolonged labour; in a man with piles, ask about urinary stream and straining to pass urine.",
+          "heading": "Causes of raised pressure"
+        },
+        {
+          "body": "A fistula is an abscess that never finished healing. Ask every discharging patient about a past painful perianal swelling that burst on its own or was cut open to let pus out. Where fistulae are multiple or keep recurring, widen the net: tuberculosis, Crohn disease, ulcerative colitis and colloid carcinoma of the rectum all produce tracks that refuse to heal, so ask about chronic cough, weight loss, prolonged diarrhoea and genital sores.",
+          "heading": "Past sepsis explains the track"
+        },
+        {
+          "body": "Prolapse has its own past. Repeated dysentery or severe diarrhoea with tenesmus, wasting that weakens rectal support, and chronic straining in childhood or old age all precede it. Family history is volunteered more often here than elsewhere: patients mention piles, fissure or rectal cancer in relatives, and multiple bowel polyps in the family point to hereditary polyposis.",
+          "heading": "Prolapse and family history"
+        }
+      ],
+      "title": "Risk factors and background in anorectal disease",
+      "why": "Piles, fissure and fistula recur when the ground that grew them is left untouched. Constipation, straining, pregnancy, raised abdominal pressure and a past abscess are the ground, and tuberculosis or inflammatory bowel disease is the mimicker that punishes a surgeon who never asked."
+    },
+    "skill.present.anorectal.summary": {
+      "id": "skill.present.anorectal.summary",
+      "kind": "presentation",
+      "probes": [
+        {
+          "a": "Age, sex, occupation and bowel habit, the complaints in chronological order with bleeding pattern, pain and its relation to defecation, prolapse and its reducibility, and discharge, followed by inspection findings, digital findings, proctoscopy, and a statement naming the condition with its grade or type.",
+          "accept": [
+            "bowel habit",
+            "bleeding",
+            "inspection",
+            "proctoscopy",
+            "grade"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What must a rectal case presentation contain, in order?"
+        },
+        {
+          "a": "Radial folds of mucosa over separate cushions mean prolapsed piles, while concentric rings of full thickness wall mean complete rectal prolapse, and stating which one you saw decides between banding or excision and prolapse surgery.",
+          "accept": [
+            "radial",
+            "concentric",
+            "piles",
+            "prolapse"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why must the presentation state whether prolapsing tissue showed radial or concentric folds?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "anorectal_disorders_hemorrhoids_and_fistula: clinical pearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The anus and anal canal: clinical examination",
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Open with age, sex, occupation and bowel habit, then the complaints in the order they appeared. Describe bleeding by colour, amount and relation to stool: splash in the pan, streak on the surface, or mixed with mucus. Describe pain by character and timing against defecation: cutting pain during and after stool for fissure, throbbing continuous pain for abscess, intermittent pain relieved by discharge for fistula, and no pain at all for uncomplicated piles.",
+          "heading": "Present the story in order"
+        },
+        {
+          "body": "Report examination in the order it was done: inspection first, palpation second, digital examination last. Give position and clock-face sites of piles, the midline site of a fissure with its sentinel tag, and the position of a fistula opening against the transverse anal line with its discharge.\n\nRecord whether prolapsing tissue reduced on its own, needed a finger, or stayed out. Close with the diagnostic statement: the condition, its degree or type, and the key negatives that exclude cancer and inflammatory bowel disease.",
+          "heading": "Report inspection before the finger"
+        }
+      ],
+      "title": "Presenting the anorectal case",
+      "why": "A rectal presentation fails when bleeding is reported without its pattern or a prolapse without its reducibility, because grade and type are the whole treatment decision. Inspection findings lead, the finger follows, and the closing line names the condition with its degree."
+    },
+    "skill.hx.bph.riskfactors": {
+      "id": "skill.hx.bph.riskfactors",
+      "kind": "history",
+      "system": "surgery",
+      "title": "Background history in prostatic disease: past, drugs, family and habits",
+      "oneLine": "Why it blocked now, what treatment is safe, and what the family story warns of",
+      "why": "The urinary story describes the obstruction, but the background history explains why it blocked this week and what treatment is safe. A retention that followed a cold remedy needs different counselling from one built on repeated infections, and a family history of prostate cancer changes how every future test is read.",
+      "asks": [
+        {
+          "text": "Have you had similar difficulty before, attacks of being unable to pass urine, or repeated burning or fever with urination?"
+        },
+        {
+          "text": "Have you had any discharge from the urinary passage, injury to the passage, or any tube, camera test or operation through the passage?"
+        },
+        {
+          "text": "Which tablets do you take regularly, including cold and cough remedies, allergy tablets, sleeping tablets, nerve or mood tablets, strong painkillers and water tablets? When did each start compared with the urinary trouble?"
+        },
+        {
+          "text": "Do you have sugar disease, fits, Parkinson disease, a stroke with weakness, piles with straining, or chronic constipation?"
+        },
+        {
+          "text": "How much water, tea and coffee do you take, especially in the evening and at night? How many times do you wake to pass urine?"
+        },
+        {
+          "text": "Have you noticed changes in erection or in discharge at climax, and has any prostate medicine changed this?"
+        },
+        {
+          "text": "Did your father or any brother have prostate trouble, a prostate operation, or prostate cancer, and at what age did it start?"
+        }
+      ],
+      "practice": "Take the background history from a simulated elderly man with retention, listing every medicine by purpose and by timing against the first urinary symptom.",
+      "pitfalls": [
+        "Accepting retention as pure prostatic enlargement without asking about the cold remedy started last week.",
+        "Forgetting that a bladder relaxant for urgency can worsen emptying when the residual urine is already large.",
+        "Recording prostate trouble in the family without asking whether it was cancer and at what age."
+      ],
+      "media": [],
+      "teach": [
+        {
+          "heading": "Drugs that precipitate retention",
+          "body": "Some commonly used medicines tighten the bladder outlet or weaken the bladder squeeze. Cold and cough remedies with decongestants, allergy tablets, bladder relaxants, gut spasm tablets, some nerve and mood tablets, and strong painkillers can all turn a narrow passage into a complete blockage. Ask for each medicine by its purpose, not by its chemical name, since patients rarely know the names.\n\nWater tablets taken in the evening fill the bladder overnight and unmask a weak stream as night-time frequency. Note the timing of every diuretic, and ask about recent anaesthesia, operations with a catheter, loaded bowel, and alcohol excess, all of which can trigger the first episode of retention."
+        },
+        {
+          "heading": "Past events that change the plan",
+          "table": {
+            "cols": [
+              "Past event",
+              "What it suggests",
+              "What to do next"
+            ],
+            "rows": [
+              [
+                "Earlier attacks of being unable to pass urine",
+                "An outlet that has blocked before and will block again",
+                "Plan follow-up and definitive treatment, not just relief"
+              ],
+              [
+                "Repeated burning or fever with urination",
+                "Infection behind residual urine, or stone forming in stagnant urine",
+                "Send urine for test and culture before antibiotics"
+              ],
+              [
+                "Discharge, injury or instruments through the passage",
+                "A scarred stricture rather than a large prostate",
+                "Examine the whole urethra and arrange a flow study"
+              ],
+              [
+                "Blood in the urine, even once",
+                "A bladder growth or bleeding vessels on the prostate surface",
+                "Never accept infection as the whole answer; refer onward"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Family, fluids and bowel habit",
+          "body": "A father or brother with prostate cancer, especially at a young age, raises the stakes of every raised marker and every firm or nodular gland. Evening tea, coffee and alcohol increase night-time urine, and chronic constipation with straining shares the same pelvic floor effort as voiding.\n\nSort these contributors before blaming the prostate alone. Record erectile and ejaculatory function before treatment starts, since both the disease and its medicines affect them, and a baseline lets later changes be recognised as drug effects."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name two groups of medicines that can precipitate urinary retention in a man with prostatic enlargement.",
+          "a": "Decongestant cold remedies and anticholinergic medicines such as allergy tablets, bladder relaxants and gut spasm tablets tighten the outlet or weaken bladder contraction; opioid painkillers and evening diuretics can also precipitate retention.",
+          "accept": [
+            "decongestant",
+            "anticholinergic",
+            "bladder relaxants",
+            "diuretics"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A man taking a bladder relaxant for urgency is found to have a large residual volume. What is the risk of continuing it?",
+          "a": "The relaxant weakens bladder contraction and can convert incomplete emptying into complete retention. It should be stopped or changed and the residual rechecked, with referral if emptying does not recover.",
+          "accept": [
+            "retention",
+            "residual",
+            "stopped"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why record erectile and ejaculatory function before starting treatment for prostatic enlargement?",
+          "a": "Both the disease and its medicines affect sexual function: some prostate medicines reduce libido and erection or abolish ejaculation, so a baseline lets later changes be recognised as drug effects rather than new disease.",
+          "accept": [
+            "libido",
+            "erection",
+            "ejaculation",
+            "baseline"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "benign_prostatic_hyperplasia: pitfalls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "History and examination of the urinary tract"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.bph.summary": {
+      "id": "skill.present.bph.summary",
+      "kind": "presentation",
+      "system": "surgery",
+      "title": "Summarising the urinary retention case",
+      "oneLine": "Tempo, retention type, the trio of dome, kidneys and prostate, and what is still missing",
+      "why": "A retention case is judged on structure as much as content: the listener must hear within a minute whether this is a painful acute blockage, a silent chronic build-up, or an overflow the patient never noticed, and what the kidneys have already paid. Presenting in the order collected buries exactly that.",
+      "media": [],
+      "teach": [
+        {
+          "heading": "Three sentences that contain the case",
+          "body": "Name the patient with the risks that matter: age over 50, years of slow stream symptoms, sugar disease or nerve disease, and the drugs that precipitate retention. Then state the tempo: years of progressive voiding difficulty ending in hours of painful inability, which is acute on chronic retention, or painless dribbling with a silent dome, which is chronic retention.\n\nThen state the syndrome in abstract terms with the bedside evidence: an obstructed bladder with a palpable suprapubic dome and a smooth enlarged prostate, with the kidney numbers and the urine test. End with the provisional diagnosis and what is still missing, such as the counselled marker result, the residual volume, and the upper tract scan."
+        },
+        {
+          "heading": "A worked example",
+          "body": "A 68 year old retired teacher presents with three years of weak stream and night-time frequency, now unable to pass urine for ten hours with lower abdominal pain. Examination shows a tense tender suprapubic dome dull to percussion and a symmetrically enlarged smooth firm prostate with a preserved central groove.\n\nThis is acute on chronic retention from benign prostatic enlargement, pending urine testing, kidney function, a counselled prostate marker, and an ultrasound of the prostate, residual urine and upper tracts. Immediate relief by catheter with a planned trial without catheter is the working plan."
+        },
+        {
+          "heading": "Never omit these",
+          "points": [
+            "The tempo in years for the symptoms and in hours for the retention, since it names the type.",
+            "The retention type: painful acute, painless chronic, or overflow leakage the patient mistook for age.",
+            "The prostate feel: smooth or nodular, groove present or lost, lining free or tethered.",
+            "Kidney function and upper tracts, stated as checked or as still awaited, never skipped.",
+            "What would change the plan: a raised marker, a nodular gland, infection, or stones."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What elements belong in a urinary retention case summary?",
+          "a": "The patient with relevant risks, the tempo in years and hours, the retention type, the dome and prostate findings with kidney numbers, and the provisional diagnosis with what is still awaited.",
+          "accept": [
+            "tempo",
+            "retention",
+            "prostate",
+            "diagnosis",
+            "awaited"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does the tempo need two time scales in a retention summary?",
+          "a": "Years of progressive symptoms establish the chronic obstruction while hours of inability establish the acute event; together they name acute on chronic retention and justify both immediate relief and definitive follow-up.",
+          "accept": [
+            "years",
+            "hours",
+            "acute on chronic",
+            "relief"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "benign_prostatic_hyperplasia: clinicalPearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "History and examination of the urinary tract: case summary"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.breast.risk": {
+      "id": "skill.hx.breast.risk",
+      "kind": "history",
+      "oneLine": "Reproductive history, family clustering, hormones and radiation sort background risk before the lump is judged",
+      "asks": [
+        "Ask age at first childbirth, number of children, and total months of breastfeeding, since nulliparity and absent lactation raise background risk.",
+        "Ask whether mother, sisters or daughters had breast or ovarian disease and at what age, since clustering in the family changes surveillance.",
+        "Ask about hormonal pills, postmenopausal hormones, chest wall irradiation, smoking, alcohol and chest trauma, each in plain dated language.",
+        "Ask menstrual pattern and menopausal age, and whether any lump or pain fluctuates with the monthly cycle."
+      ],
+      "probes": [
+        {
+          "a": "Nulliparity, late first childbirth, absent breastfeeding, early menarche, late menopause, a first degree relative with breast cancer, chest irradiation and prolonged combined hormone exposure all raise background risk.",
+          "accept": [
+            "nulliparity",
+            "breastfeeding",
+            "family",
+            "relative",
+            "radiation",
+            "hormones",
+            "menarche",
+            "menopause"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Which reproductive and family facts raise the background risk of breast carcinoma?"
+        },
+        {
+          "a": "Cyclical pain and fluctuation with menstruation favour benign hormonal change and argue against carcinoma, though they never excuse skipping examination and triple assessment of a discrete lump.",
+          "accept": [
+            "cyclical",
+            "menstruation",
+            "benign",
+            "fluctuation",
+            "examination"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What does a clear menstrual rhythm in the symptoms tell you, and what does it not excuse?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "breast_cancer_staging_subtypes_and_surgical_management: pathophysiology",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The breast: aetiology and risk factors of breast carcinoma",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Breast cancer feeds on lifetime hormone exposure, so the reproductive story is risk arithmetic. Early first period, late menopause, no children, a late first child, and little or no breastfeeding each add risk, while early childbearing and prolonged nursing subtract it. Take each as a dated fact, not a judgement.\n\nFamily clustering matters independently. A mother or sister with breast or ovarian disease, especially when young or bilateral, should prompt questions about the wider family and about surveillance for the patient herself.",
+          "heading": "Hormone years and family clustering"
+        },
+        {
+          "body": "Ask drugs by name and year: contraceptive pills, postmenopausal hormones, and any tablets that swell male breasts such as certain heart, ulcer and tuberculosis drugs all belong in the record. Add chest irradiation in youth, smoking, regular alcohol, and any remembered blow to the breast.\n\nClose with the cycle. Pain and swelling that rise before menstruation and melt after it mark benign hormonal change, while steady painless growth without rhythm warns of tumour. The rhythm guides suspicion but never replaces examination.",
+          "heading": "Drugs, irradiation, habits and the monthly rhythm"
+        }
+      ],
+      "title": "Risk factors in breast disease",
+      "why": "The lump is the presenting fact but the background risk decides how hard to chase it. A painless lump in a nulliparous woman with an affected sister is a different proposition from the same lump in a nursing teenager, and only the risk history tells them apart."
+    },
+    "skill.present.breast.summary": {
+      "id": "skill.present.breast.summary",
+      "kind": "presentation",
+      "oneLine": "Patient, tempo, lump in five features, skin nipple nodes, and a staged impression with the next test",
+      "probes": [
+        {
+          "a": "Age and risk context, tempo in weeks or months, the lump in site, size, consistency, margin and fixity, skin and nipple findings, nodal status, and a staged impression with the next investigation.",
+          "accept": [
+            "tempo",
+            "consistency",
+            "fixity",
+            "nodes",
+            "stage",
+            "investigation"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What are the elements of a complete breast case summary?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "breast_cancer_staging_subtypes_and_surgical_management: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The breast: clinical method and case summary",
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Open with the woman and her risk context in one line: age, parity and lactation, and any family clustering. Follow with tempo, because weeks of steady growth and years of quiet swelling tell opposite stories.\n\nThen describe the lump in fixed order: quadrant and size, consistency and surface, margin, mobility within the breast, and fixity to skin, muscle and chest wall. Add skin, nipple and discharge, then the axilla and supraclavicular fossae on both sides.",
+          "heading": "Patient, tempo, lump, nodes"
+        },
+        {
+          "body": "Close with an impression that stages, not merely names: which side and quadrant, benign or malignant character, nodal status, and the clinical stage it implies. Name the triple assessment arm that comes next and what each possible result would change.\n\nA worked close reads: this is a right sided upper outer carcinoma with mobile axillary disease, locally advanced, for core biopsy with receptor testing and staging before any surgical plan. Say what is still unknown, and offer the relevant negatives that exclude the mimics.",
+          "heading": "Stage it, state the next test, admit the gaps"
+        }
+      ],
+      "title": "Summarising the breast case",
+      "why": "A breast presentation fails when it lists findings without forcing them into a staged impression. The fixed order of patient, tempo, lump, nodes and next test guarantees the consultant hears the diagnosis, its evidence and its plan in under a minute."
+    },
+    "skill.hx.head.riskfactors": {
+      "id": "skill.hx.head.riskfactors",
+      "kind": "history",
+      "system": "surgery",
+      "title": "Risk factors and background in head injury",
+      "oneLine": "Blood thinners, alcohol, age, comorbidity and past fits that turn a blow into a bleed",
+      "why": "Two identical blows behave differently in different patients. Anticoagulation turns a minor knock into an expanding haematoma, alcohol hides the examination, and age with comorbidity decides which lesion to expect. Missing this background means misreading both the severity and the scan.",
+      "asks": [
+        {
+          "text": "Do you take any blood thinning tablets such as warfarin, acitrom, aspirin or clopidogrel, and when was the last dose taken?"
+        },
+        {
+          "text": "Do you consume alcohol regularly, and had you consumed alcohol or any sedative tablet in the hours before the injury?"
+        },
+        {
+          "text": "How old is the patient, and is there an unsteady walk, poor eyesight, or repeated falls at home?"
+        },
+        {
+          "text": "Do you suffer from high blood pressure, diabetes, kidney disease or fits, and which tablets do you take daily for these?"
+        },
+        {
+          "text": "Have you ever had a head injury, a fit, or a stroke like weakness before this accident?"
+        },
+        {
+          "text": "What is your occupation, and were you wearing a helmet or a seatbelt at the time of the accident?"
+        },
+        {
+          "text": "Is there fits, diabetes or high blood pressure running in the family?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Blood thinners turn a minor blow into a bleed",
+          "body": "A patient on warfarin or an antiplatelet tablet can grow a large intracranial haematoma from a blow that would barely bruise anyone else. Ask the exact tablet name and the timing of the last dose in every head injury, because reversal of anticoagulation and correction of clotting start from that answer.\n\nAn elderly patient who fell at home while on a blood thinner deserves a scan even when fully alert and talking. Never let a normal examination overrule the drug history in such a patient."
+        },
+        {
+          "heading": "Alcohol hides the examination",
+          "body": "Alcohol both causes the injury and confuses its assessment. A drunk patient may look drowsy from drink rather than from brain compression, and a head injury may be missed behind the smell of alcohol. Ask the quantity and timing honestly, and repeat the examination as the alcohol wears off.\n\nChronic heavy drinking also raises the risk of falls, assaults and road accidents, and of bleeding from minor trauma. Record it as a risk factor, not as a moral judgement."
+        },
+        {
+          "heading": "Age, comorbidity and past fits set the lesion",
+          "body": "A blow to the front or back of the head in an old man with signs of compression should raise suspicion of a subdural haematoma at once. Children recover faster but deteriorate faster too, and a fit after injury may localise the site of cortical irritation.\n\nHigh blood pressure, diabetes and kidney disease affect fitness for surgery and for contrast imaging, while past fits, past head injury and current tablets decide whether a fit today is new disease or old disease showing itself again."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which two drug groups must you ask about in every head injury, and why?",
+          "a": "Anticoagulant and antiplatelet tablets such as warfarin, acitrom, aspirin and clopidogrel, because they convert minor trauma into an expanding intracranial haematoma, plus alcohol and sedatives because they confound the level of consciousness.",
+          "accept": [
+            "anticoagulant",
+            "antiplatelet",
+            "warfarin",
+            "alcohol",
+            "consciousness"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "An alert elderly man on warfarin fell from bed and has only a scalp bruise. Scan or observe?",
+          "a": "Scan. Anticoagulation plus age makes even trivial trauma capable of producing an intracranial haematoma, and a normal examination does not overrule that combination.",
+          "accept": [
+            "scan",
+            "anticoagulation",
+            "haematoma",
+            "age"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does a fit after head injury matter beyond the fit itself?",
+          "a": "A fit may localise the site of cortical irritation, as in Jacksonian fits from middle meningeal bleeding, and a first fit can be the earliest sign that something more serious than simple concussion is present.",
+          "accept": [
+            "localise",
+            "cortical",
+            "concussion",
+            "Jacksonian"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "traumatic_brain_injury: pitfalls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Head injury"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.head.injury_summary": {
+      "id": "skill.present.head.injury_summary",
+      "kind": "presentation",
+      "system": "surgery",
+      "title": "Presenting a head injury case",
+      "oneLine": "Mechanism, timeline, GCS trend, localising signs and plan in two minutes",
+      "why": "A head injury presentation fails when it reads as a list of injuries rather than a story with a direction. The listener needs the mechanism, the exact timeline of consciousness, the trend of the coma score, and the one lesion that explains the signs, in that order, before any plan can be judged.",
+      "teach": [
+        {
+          "heading": "Open with mechanism and timeline, not with the scan",
+          "body": "State the age, the exact mechanism, and the time since injury first. Then give the consciousness timeline in one breath: conscious or not at the scene, any lucid interval, and the direction of change since arrival. This single timeline carries more weight than any other sentence in the presentation.\n\nName the helmet, seatbelt, alcohol and anticoagulant status early, because each changes what the scan is allowed to mean. A scan read without the timeline is only a picture."
+        },
+        {
+          "heading": "Make the GCS trend the spine of the examination",
+          "body": "Present the coma score as a trend with its components, not as one number: what it was on arrival, what it is now, and which component moved. A fall of two or more points is deterioration until proved otherwise and must be said out loud.\n\nFollow with the pupils, the scalp and base of skull signs, and the focal deficit in that order. End the examination with the spine and the rest of the body, to show that associated injuries were actively sought."
+        },
+        {
+          "heading": "Commit to a lesion, a severity and a next step",
+          "body": "Close with one diagnosis that names the mechanism, the lesion and the severity, for example a moderate head injury with a right extradural haematoma under observation. Then state the two findings that support it and the one finding that would change it.\n\nFinish with the plan in order: airway and spinal protection, the scan that is due or done, the neurosurgical referral, and what would force an operation. Never end on the diagnosis without a plan."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What three things must open every head injury presentation?",
+          "a": "The exact mechanism of injury, the time since injury, and the full timeline of consciousness including any lucid interval and the direction of change.",
+          "accept": [
+            "mechanism",
+            "timeline",
+            "consciousness",
+            "lucid interval"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why present the coma score as a trend with components rather than one number?",
+          "a": "Because a fall of two or more points signals deterioration and expanding compression, and the components show which function is failing while the total alone hides it.",
+          "accept": [
+            "trend",
+            "deterioration",
+            "components",
+            "compression"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "extradural_hematoma: clinicalPearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Head injuries"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.inguinal.risk": {
+      "id": "skill.hx.inguinal.risk",
+      "kind": "history",
+      "system": "surgery",
+      "title": "Past, personal, drug and family history in inguinal hernia",
+      "oneLine": "The pressure factors and past repairs that decide whether a hernia recurs after surgery",
+      "why": "A hernia is the meeting of a weak wall and raised pressure. Repair closes the defect but does nothing about a chronic cough, constipation or bladder outlet obstruction, so a patient sent to theatre without these asked after returns with a recurrence that was preventable.",
+      "asks": [
+        "Do you have a long-standing cough, and what brings up sputum day to day?",
+        "Do you strain to pass stools, and how often do your bowels move?",
+        "Do you pass urine frequently at night, wait for the stream to start, or feel the bladder never empties?",
+        "What work do you do each day, and does it involve lifting heavy weights?",
+        "Have you ever had a hernia repair before, on this side or the other side?",
+        "Have you had any earlier operation on the abdomen, including appendicectomy?",
+        "Do you smoke beedis or cigarettes, and for how many years?",
+        "Has anyone in your family had a hernia or a groin operation?",
+        "Which medicines do you take every day, including blood thinners and steroids?"
+      ],
+      "teach": [
+        {
+          "heading": "Ask after pressure before promising a repair",
+          "body": "Four chronic strains raise pressure inside the abdomen and push bowel through a weak groin: a persistent cough, habitual constipation, bladder outlet obstruction from an enlarged prostate or a urethral stricture, and repeated heavy lifting. Patients rarely volunteer them, because they seem unrelated to a groin lump, so each needs a direct question.\n\nTreating the cause is part of treating the hernia. A cough worked up before surgery, constipation eased with diet and fluids, and prostatic symptoms examined per rectum all lower the chance that the repair fails in the first year."
+        },
+        {
+          "heading": "Past operations change the plan",
+          "body": "Ask about every earlier abdominal operation. Division of nerves during appendicectomy can weaken the groin wall and precede a direct hernia, and any previous hernia repair on the same side means this swelling may be a recurrence, which needs a different operative approach from a first hernia.\n\nRecord daily drugs with bleeding in mind. Blood thinners and antiplatelet tablets matter for the timing of elective surgery, and long steroid use weakens tissues and wounds. Diabetes, hypertension and heart or lung disease decide fitness for anaesthesia rather than the hernia itself."
+        },
+        {
+          "heading": "Risk factors and what each one changes",
+          "table": {
+            "cols": [
+              "Factor to ask after",
+              "What it tells you",
+              "What to do about it"
+            ],
+            "rows": [
+              [
+                "Chronic cough",
+                "Repeated pressure spikes that formed the hernia and threaten the repair",
+                "Examine the chest and treat the cause before elective surgery"
+              ],
+              [
+                "Constipation with straining",
+                "Daily pressure loading on the groin wall",
+                "Fibre, fluids and habit before and after the operation"
+              ],
+              [
+                "Urinary hesitancy and frequency",
+                "Possible outlet obstruction straining the wall with every void",
+                "Rectal examination of the prostate and urology review"
+              ],
+              [
+                "Heavy lifting at work",
+                "Occupational strain that continues after discharge",
+                "Counsel on load and leave after repair"
+              ],
+              [
+                "Previous repair same side",
+                "Probable recurrence with scarred planes",
+                "Refer to a surgeon experienced in redo groin surgery"
+              ],
+              [
+                "Family history of hernia",
+                "Connective tissue weakness shared in the family",
+                "Examine the other groin; counsel, do not alarm"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three chronic strains you must ask after in every hernia history.",
+          "a": "A persistent cough, habitual constipation with straining, and bladder outlet obstruction such as prostatic enlargement, plus repeated heavy lifting.",
+          "accept": [
+            "cough",
+            "constipation",
+            "bladder outlet",
+            "prostate",
+            "lifting"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why does a previous appendicectomy matter in a patient with a new groin swelling?",
+          "a": "Division of nerves during appendicectomy can weaken the muscles of the groin region and precede a direct inguinal hernia on that side.",
+          "accept": [
+            "appendicectomy",
+            "nerves",
+            "weaken",
+            "direct hernia"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A patient with a reducible hernia also reports nocturia, hesitancy and a poor stream. What do you do before booking elective repair?",
+          "a": "Examine the prostate per rectum and arrange urology review for outlet obstruction, because unrelieved straining threatens the repair, and treat constipation and cough in the same sitting.",
+          "accept": [
+            "prostate",
+            "rectal examination",
+            "urology",
+            "straining"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "inguinal_hernia: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Hernias: aetiology and precipitating causes"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.inguinal.summary": {
+      "id": "skill.present.inguinal.summary",
+      "kind": "presentation",
+      "system": "surgery",
+      "title": "Summarising the inguinal hernia case",
+      "oneLine": "Side, extent, contents and complications in three sentences",
+      "why": "A hernia summary fails when it names the lump but not its behaviour. The consultant needs side, extent, reducibility, contents and complications in one breath, because each word changes the urgency from routine list to tonight.",
+      "teach": [
+        {
+          "heading": "The shape of the summary",
+          "body": "State the patient with age and work, the tempo of the swelling, then the syndrome in abstract terms: a right inguinoscrotal swelling with an expansile cough impulse, reducible with a gurgle, consistent with an indirect inguinal hernia containing bowel.\n\nClose with complications and fitness: no tenderness, no obstruction, no strangulation, and the pressure factors and comorbidity that decide fitness for elective mesh repair."
+        },
+        {
+          "heading": "A worked example",
+          "body": "A 48 year old farm labourer presents with a two year history of a right groin swelling that descends into the scrotum on standing and coughing and disappears on lying down, with a dragging ache late in the day.\n\nExamination shows a pyriform right inguinoscrotal swelling with an expansile cough impulse, from which one cannot get above, reducible with a gurgle and resonant to percussion. This is an uncomplicated right indirect inguinal hernia, an enterocele, with chronic constipation as a contributing strain and no features of obstruction or strangulation."
+        },
+        {
+          "heading": "What never to omit",
+          "points": [
+            "Side, extent and shape: groin only or down to the scrotum, pyriform or spherical.",
+            "The two classical signs: expansile impulse on coughing and reducibility.",
+            "Contents in one word where known: enterocele or omentocele, with the evidence.",
+            "The ring tests and what they showed: deep ring occlusion and the invagination finding.",
+            "Complications stated as negatives: no tenderness, no tension, no obstruction, impulse present.",
+            "Fitness and causes: comorbidity, drugs that bleed, and the cough, bowel and bladder history."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What six facts must every hernia summary contain?",
+          "a": "Side, extent, cough impulse, reducibility, contents, and complications with fitness for surgery.",
+          "accept": [
+            "side",
+            "extent",
+            "cough impulse",
+            "reducibility",
+            "contents",
+            "complications"
+          ],
+          "minMatch": 4
+        },
+        {
+          "level": 3,
+          "q": "Why must complications be stated even when they are absent?",
+          "a": "Because a reducible hernia and a strangulated one differ only in tension, tenderness, impulse and bowel function, and the listener cannot grade urgency without hearing those negatives.",
+          "accept": [
+            "strangulated",
+            "tension",
+            "tenderness",
+            "urgency",
+            "negatives"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "inguinal_hernia: clinicalPearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "The groin hernia: history and examination"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.leg.risk": {
+      "asks": [
+        {
+          "text": "Ask about diabetes: known sugar illness, tablets or insulin, recent sugar readings, and whether wounds elsewhere have healed slowly."
+        },
+        {
+          "text": "Ask about hypertension and heart disease: known high pressure, chest pain on effort, and swelling of both feet by evening."
+        },
+        {
+          "text": "Ask about tobacco in every form: bidis, cigarettes, chewing tobacco, and years of use, plus alcohol and usual diet."
+        },
+        {
+          "text": "Ask about vein history: visible varicose veins, a past clot with prolonged leg swelling, calf swelling in pregnancy, and any prior vein operation or injection treatment."
+        },
+        {
+          "text": "Ask about past ulcers: an earlier sore on either leg, how long it took to heal, and what dressing or bandage was used."
+        },
+        {
+          "text": "Ask about medicines and local applications: steroids, water tablets, blood thinners, and every powder, oil, ointment or home remedy applied to the wound."
+        },
+        {
+          "text": "Ask about family and work: varicose veins or non healing sores in parents or siblings, hours spent standing, walking barefoot, and the footwear used daily."
+        }
+      ],
+      "id": "skill.hx.leg.risk",
+      "kind": "history",
+      "oneLine": "Sugar, pressure, tobacco, clot and vein history, drugs, family, standing work and footwear",
+      "pitfalls": [
+        "Recording the ulcer in detail while never asking about diabetes, so a neuropathic or infective component is missed.",
+        "Forgetting tobacco in chewed form, which many patients do not volunteer when asked only about smoking.",
+        "Missing a past deep vein thrombosis, which explains a venous ulcer in a leg with no visible varicosities."
+      ],
+      "probes": [
+        {
+          "a": "Diabetes with poor sugar control, which impairs healing and invites infection, and a past deep vein thrombosis, which damages valves and produces lasting venous hypertension.",
+          "accept": [
+            "diabetes",
+            "sugar",
+            "thrombosis",
+            "clot",
+            "valve",
+            "healing"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Name two background conditions that decide whether a leg ulcer will heal."
+        },
+        {
+          "a": "Steroids and immunosuppressants delay healing, water tablets alter swelling, blood thinners affect bleeding, and caustic powders and oils applied to the wound can cause contact allergy and chemical injury.",
+          "accept": [
+            "steroid",
+            "healing",
+            "bleeding",
+            "allergy",
+            "topical",
+            "ointment"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why do you ask about medicines and about powders or oils applied to the wound?"
+        },
+        {
+          "a": "Long hours standing still, walking barefoot on rough ground, and open or ill fitting footwear that causes repeated minor trauma, all of which turn a fragile gaiter skin into a chronic ulcer.",
+          "accept": [
+            "standing",
+            "barefoot",
+            "footwear",
+            "trauma",
+            "pressure"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "What work and footwear details matter in a venous or neuropathic ulcer?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "venous_leg_ulcer: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Leg ulcer (aetiology and risk factors)",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "A leg ulcer is the visible end of a background process, so the history must name that process. Diabetes slows healing and invites infection, hypertension underlies the small vessel disease of a Martorell ulcer, and tobacco damages both arteries and skin healing.\n\nAsk each of these directly. Patients rarely volunteer chewed tobacco, old water tablets, or a swollen leg years ago unless each is asked by name.",
+          "heading": "The background decides the healing"
+        },
+        {
+          "body": "A past deep vein thrombosis destroys deep valves and leaves lasting venous hypertension, so a venous ulcer can arise in a leg with no visible varicose veins at all. Ask about a leg that once swelled painfully for weeks, a long hospital stay, or swelling first noticed in pregnancy.\n\nAsk the same way about past sores on either leg, vein operations, and injection treatment, since a recurrent ulcer at the same site changes both the diagnosis and the plan.",
+          "heading": "An old clot explains a new ulcer"
+        },
+        {
+          "body": "Record every medicine and every local application. Steroids and immunosuppressants delay healing, blood thinners change bleeding, and powders, oils and strong ointments can cause contact allergy that mimics a spreading ulcer.\n\nClose with family, standing work, barefoot walking and footwear. Long hours standing still raise venous pressure, barefoot trauma seeds tropical and neuropathic ulcers, and tight or open footwear concentrates pressure on the same spot.",
+          "heading": "Drugs, dressings, family and feet"
+        }
+      ],
+      "title": "Risk factors in leg ulcer: veins, arteries, nerves and skin",
+      "why": "The ulcer you see is the result of a background process you cannot see, and that process decides whether the wound will heal. Diabetes, an old deep vein thrombosis, tobacco in every form, and the drugs and dressings already tried each change the diagnosis or the plan, and none of them is visible on the leg."
+    },
+    "skill.present.leg.ulcercase": {
+      "id": "skill.present.leg.ulcercase",
+      "kind": "presentation",
+      "oneLine": "Patient, tempo, ulcer description, circulation and nerve status, diagnosis and plan",
+      "probes": [
+        {
+          "a": "The patient with venous risk factors, the tempo in months, the ulcer in abstract terms with site and edge, the arterial and nerve status, and the provisional diagnosis with red flags and the plan.",
+          "accept": [
+            "tempo",
+            "ulcer",
+            "arterial",
+            "nerve",
+            "diagnosis",
+            "plan"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What elements belong in a leg ulcer case summary?"
+        },
+        {
+          "a": "Whether arterial disease has been excluded by pulse examination and the ankle brachial index, because compression bandaging is unsafe until that question is answered.",
+          "accept": [
+            "arterial",
+            "pulses",
+            "ankle brachial",
+            "compression",
+            "unsafe"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "What is the one safety statement a leg ulcer presentation must never omit?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "venous_leg_ulcer: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Examination of an ulcer: case summary",
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Open with the patient and the risks that matter: age, sex, standing work, varicose veins, an old clot, diabetes, tobacco. Then state the tempo: months of a non healing sore separates a venous ulcer from days of spreading infection.\n\nThen describe the ulcer in abstract terms with site, size, edge, floor and surrounding skin, followed by the circulation and nerve status: pulses, colour and warmth, and sensation. End with the provisional diagnosis, red flags, and what is still missing.",
+          "heading": "Four sentences that contain the ulcer case"
+        },
+        {
+          "body": "A 54 year old woman who stands all day selling vegetables presents with eight months of a painless oozing sore above the inner ankle. Examination shows a shallow ulcer with a sloping edge and pale granulation tissue, pigmented eczematous surrounding skin, palpable foot pulses, and normal sensation.\n\nThis is a venous leg ulcer pending duplex mapping and the ankle brachial index. No rolled edges, severe pain, or spreading redness are present, and compression awaits arterial exclusion.",
+          "heading": "A worked example"
+        }
+      ],
+      "title": "Presenting the leg ulcer case",
+      "why": "A leg ulcer presentation fails when it describes the wound at length but never states whether the leg can safely be compressed. The listener needs the circulation and nerve status in the same breath as the ulcer description, because that combination is what makes the diagnosis and the next step obvious."
+    },
+    "skill.hx.lymphadenopa.node_story": {
+      "id": "skill.hx.lymphadenopa.node_story",
+      "kind": "history",
+      "system": "surgery",
+      "title": "History of an enlarged lymph node",
+      "oneLine": "Age, duration, pain, fever pattern, the primary focus and pressure effects",
+      "why": "Most node diagnoses are already half made before touching the neck. A short painful history with a visible septic focus points one way, while months of painless growth with evening fever and weight loss points quite another, and the group first affected often names the cause.",
+      "asks": [
+        {
+          "text": "How old are you, and how long has this swelling been present: days, weeks or months?"
+        },
+        {
+          "text": "Is the swelling painful or painless, and has the pain changed as the swelling grew?"
+        },
+        {
+          "text": "Have you had fever with it: evening rise, periodic attacks, or prolonged bouts that come and go?"
+        },
+        {
+          "text": "Is there any sore throat, tooth pain, scalp sore, skin cut, ulcer or discharge in the area that drains into these nodes?"
+        },
+        {
+          "text": "Have you lost weight or appetite, had drenching sweats at night, or felt unusually tired for weeks?"
+        },
+        {
+          "text": "Is there any pressure symptom: noisy or difficult breathing, trouble swallowing, change in voice, or swelling of the face?"
+        },
+        {
+          "text": "Which group did you notice first, and have other groups in the neck, armpit or groin enlarged since?"
+        },
+        {
+          "text": "Have you had tuberculosis, syphilis, filarial attacks or a similar swelling before, and is there tuberculosis at home?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Age and duration set the field",
+          "body": "Tuberculous nodes and syphilis belong to the young, acute lymphadenitis can strike at any age, primary malignant lymphomas gather in the young adult, and secondary deposits favour the old. A history counted in days suggests acute infection, while one counted in months suggests tuberculosis or malignancy.\n\nAsk which group enlarged first. Cervical nodes lead in Hodgkin disease and tuberculosis, while the groin leads in filariasis and venereal bubo, though this clue guides rather than decides."
+        },
+        {
+          "heading": "Pain, fever and the primary focus",
+          "body": "Painful nodes mean inflammation, whether acute or chronic. Painless nodes mean syphilis, primary lymphoma or secondary carcinoma until shown otherwise. Evening rise favours tuberculosis, periodic fever with pain favours filariasis, and intermittent prolonged bouts favour Hodgkin disease.\n\nAlways hunt the primary focus in the drainage territory: a septic throat, bad teeth, a scalp sore or a small cut can explain the whole illness, and finding it confirms acute or chronic septic adenitis."
+        },
+        {
+          "heading": "Weight, sweats and pressure effects",
+          "points": [
+            "Ask about weight loss, night sweats and persistent tiredness in every case: they mark tuberculosis, lymphoma and disseminated disease.",
+            "Ask about pressure effects of deep nodes: facial puffiness, breathlessness, dysphagia, voice change and limb swelling.",
+            "Ask past history of tuberculosis, syphilis and filariasis, and family history of tuberculosis running in the household."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A neck swelling of three days is hot, red and exquisitely tender. What does the tempo and pain tell you?",
+          "a": "An acute inflammatory process, most likely acute lymphadenitis from a septic focus in the drainage area.",
+          "accept": [
+            "acute",
+            "inflammatory",
+            "lymphadenitis",
+            "septic focus"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which fever patterns point towards tuberculosis, filariasis and Hodgkin disease?",
+          "a": "Evening rise in tuberculosis, periodic fever with pain in filariasis, and intermittent prolonged bouts of remittent fever in Hodgkin disease.",
+          "accept": [
+            "evening rise",
+            "periodic",
+            "intermittent",
+            "remittent"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why must you ask which node group enlarged first?",
+          "a": "Because the first group hints at the cause: cervical first favours tuberculosis or Hodgkin disease, while inguinal first favours filariasis or venereal disease.",
+          "accept": [
+            "first",
+            "cervical",
+            "inguinal",
+            "cause"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "congenital_neck_masses_and_cervical_lymphadenopathy: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "The lymph nodes: history in lymphadenopathy"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.lymphadenopa.risk_factors": {
+      "id": "skill.hx.lymphadenopa.risk_factors",
+      "kind": "history",
+      "system": "surgery",
+      "title": "Past, personal, drug and family history in node enlargement",
+      "oneLine": "Contacts, exposures, habits and drugs that change what a node means",
+      "why": "Two identical necks mean different things in a student with a consumptive roommate and in a lifelong tobacco chewer. Contacts, occupation, exposures and a few drugs decide which cause climbs to the top of the list.",
+      "asks": [
+        {
+          "text": "Has anyone at home, in the hostel or at work had tuberculosis or a chronic cough, and have you been treated for tuberculosis before?"
+        },
+        {
+          "text": "What work do you do: barefoot labour, farming, fishing, butchery or health work with exposure to cuts, cattle, fish or patients?"
+        },
+        {
+          "text": "Do you smoke, chew tobacco, drink alcohol regularly, and have you had more than one sexual partner recently?"
+        },
+        {
+          "text": "Have you lived in or visited a filarial belt, kept cats, suffered scratches or thorn pricks, or drunk unboiled milk?"
+        },
+        {
+          "text": "Do you take regular medicines, especially drugs for fits, and have you had fever with rash or gum swelling since starting them?"
+        },
+        {
+          "text": "Is there tuberculosis, lymphoma or cancer in the family, and which childhood immunisations did you receive?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Contacts and household",
+          "body": "Ask every patient about tuberculosis contact at home, in the hostel or at work, and about their own past tuberculosis and its treatment. Tuberculosis runs in households, and a past episode makes relapse or nodal reactivation far more likely.\n\nAsk about family tumours and lymphomas. A household with several consumptives, or a family with lymphoid tumours, changes the pre-test odds before a single test is ordered."
+        },
+        {
+          "heading": "Work, habits and exposures",
+          "body": "Barefoot walking on cracked earth seeds groin nodes in labourers, oral sepsis and scalp lesions seed cervical nodes, and fishing or butchery injuries seed regional nodes. Tobacco and alcohol raise the odds that a hard neck node in an older adult is metastatic.\n\nAsk about filarial residence, cat scratches and thorn pricks, and recent sexual exposures, since bubo, cat scratch disease and secondary syphilis each need their own question to surface."
+        },
+        {
+          "heading": "Drugs that enlarge nodes",
+          "points": [
+            "Ask about regular medicines, particularly drugs taken for fits, which are a classic cause of generalised nodal enlargement.",
+            "Ask about recent vaccination, serum or new drugs where nodes followed within weeks.",
+            "Record BCG and childhood immunisation where tuberculosis is in the differential, without over reading the scar."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three exposures you must ask about in every enlarged node.",
+          "a": "Tuberculosis contact, occupation and barefoot exposure, and tobacco, alcohol or sexual exposures.",
+          "accept": [
+            "tuberculosis contact",
+            "occupation",
+            "tobacco",
+            "exposure"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why do you ask a young man with groin nodes about his feet and his sexual history?",
+          "a": "Because infected cracks from barefoot walking cause chronic septic adenitis, while venereal bubo and primary syphilis present in the groin.",
+          "accept": [
+            "barefoot",
+            "septic",
+            "venereal",
+            "syphilis"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "congenital_neck_masses_and_cervical_lymphadenopathy: additionalDifferentials"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "The lymph nodes: past and personal history"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.lymphadenopa.summary": {
+      "id": "skill.present.lymphadenopa.summary",
+      "kind": "presentation",
+      "system": "surgery",
+      "title": "Presenting the lymphadenopathy case",
+      "oneLine": "Patient, tempo, node description, spread and provisional diagnosis",
+      "why": "A node case is presented as a story of spread: who the patient is, how long the nodes have grown, exactly what the fingers found, how far the disease has travelled, and what it most likely is. Without that order the listener cannot judge urgency or the next step.",
+      "teach": [
+        {
+          "heading": "Four sentences that contain the case",
+          "body": "Name the patient with the risks that matter: age, occupation, tuberculosis contact and habits. Then state the tempo: days of painful swelling versus months of painless growth.\n\nThen describe the nodes in abstract terms: site and group, size, number, consistency, matting, fixity, skin and sinus. End with spread: other groups, liver, spleen and pressure effects, and the provisional diagnosis with what would confirm it."
+        },
+        {
+          "heading": "A worked example",
+          "body": "A 19 year old male student, with a consumptive roommate, presents with two months of painless right neck swelling with evening fever and weight loss. Examination shows multiple matted firm right deep cervical nodes with a fluctuant area and a healing sinus, with no other groups and no liver or spleen enlargement.\n\nThis is tuberculous lymphadenitis with cold abscess formation, awaiting needle sampling and molecular confirmation, for antitubercular treatment under the national programme."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What elements belong in a lymphadenopathy summary?",
+          "a": "The patient with relevant risks, the tempo, the node description with consistency and fixity, the spread to other groups and organs, and the provisional diagnosis.",
+          "accept": [
+            "tempo",
+            "consistency",
+            "spread",
+            "diagnosis",
+            "risks"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "congenital_neck_masses_and_cervical_lymphadenopathy: clinicalPearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "The lymph nodes: case summary"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.obstructive.jaundice": {
+      "id": "skill.hx.obstructive.jaundice",
+      "kind": "history",
+      "system": "surgery",
+      "title": "History of jaundice in a surgical patient",
+      "oneLine": "Painful and intermittent points to stone, painless and progressive to growth",
+      "why": "In a jaundiced surgical patient three answers carry the whole differential: whether the yellow colour deepens steadily or comes and goes, whether pain travels with it, and whether fever with shivering joins the attacks. Those three answers separate a stone that shifts in the duct from a growth that tightens around it, before a hand is laid on the abdomen.",
+      "asks": [
+        {
+          "text": "When did you first notice the yellow colour in the eyes or urine, and has it deepened steadily week by week or faded and returned?"
+        },
+        {
+          "text": "Is the jaundice painful or painless? Does pain come in attacks in the right upper abdomen, going through to the back or the right shoulder?"
+        },
+        {
+          "text": "Do you itch, especially on the palms and soles or at night, and have you scratched until the skin broke?"
+        },
+        {
+          "text": "Has your urine turned dark like strong tea while the stool turned pale like clay, and have the motions become bulky, pale and foul smelling?"
+        },
+        {
+          "text": "Have you had fever with shivering or shaking chills alongside the yellow colour, and has any attack needed hospital admission?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Painless and progressive points to growth, painful and intermittent to stone",
+          "body": "Ask first about pain and course together, since the pair is more telling than either alone. Painful jaundice that follows attacks of upper abdominal colic and then fades belongs to a stone in the common bile duct, while painless jaundice that deepens week by week without relief belongs to a growth at the head of the pancreas, the ampulla or the bile duct itself.\n\nFever with rigors riding on top of pain and jaundice means infection behind the block and changes the urgency entirely. That trio should be named the moment it appears, because it calls for admission and drainage rather than routine work-up."
+        },
+        {
+          "heading": "Stone jaundice and growth jaundice side by side",
+          "table": {
+            "cols": [
+              "Feature",
+              "Favours a stone",
+              "Favours a growth"
+            ],
+            "rows": [
+              [
+                "Pain",
+                "Colicky attacks before and with the jaundice",
+                "Painless, or a dull constant ache late"
+              ],
+              [
+                "Course",
+                "Intermittent, fading between attacks",
+                "Steadily deepening, never fading"
+              ],
+              [
+                "Fever",
+                "Common, with shivering in attacks",
+                "Uncommon until infection supervenes"
+              ],
+              [
+                "Gallbladder",
+                "Usually not palpable",
+                "Often palpable and non-tender"
+              ],
+              [
+                "Weight and appetite",
+                "Maintained early",
+                "Anorexia with steady weight loss"
+              ],
+              [
+                "Itch",
+                "Present in both, often severe",
+                "Present in both, often severe"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Urine, stool and itch place the block below the liver",
+          "body": "Dark urine with pale stools means conjugated bilirubin is reaching blood but not gut, which is the signature of obstruction rather than liver cell failure. Ask about the stool in plain words, since few patients volunteer that the motion has turned white unless asked directly.\n\nItching comes from bile salts held back in the blood and can precede any visible yellow by days. Scratch marks on the chest, back and limbs may then be the first sign on examination, so the history of itch should always be followed by a deliberate look at the skin in daylight."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What three features in the history of jaundice separate a stone from a growth?",
+          "a": "Whether pain travels with the jaundice, whether the course is intermittent or steadily progressive, and whether the gallbladder is palpable later on examination. Painful intermittent jaundice favours a stone, painless progressive jaundice favours a growth.",
+          "accept": [
+            "pain",
+            "intermittent",
+            "progressive",
+            "stone",
+            "growth"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "A patient reports jaundice that faded for two weeks and then returned. Does that exclude a growth?",
+          "a": "No. Jaundice from a growth at the ampulla can ease briefly when part of the tumour sloughs and the passage opens, then deepen again. Intermittent jaundice favours a stone but never proves one, and the rest of the picture still decides.",
+          "accept": [
+            "slough",
+            "ampulla",
+            "tumour",
+            "stone",
+            "intermittent"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "progressive_familial_intrahepatic_cholestasis_type_3: redFlags"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Obstructive jaundice: symptoms and course"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Jaundice: history taking"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.obstructive.risk": {
+      "id": "skill.hx.obstructive.risk",
+      "kind": "history",
+      "system": "surgery",
+      "title": "Risk factors and background in biliary obstruction",
+      "oneLine": "Stones have company, growths have warnings, and the past rewrites both",
+      "why": "The same yellow patient means something different with a decade of gallstone attacks behind them, a cholecystectomy scar on the abdomen, or a family where gallstones struck young. Risk factors set the pre-test probability before the examination begins, and past operations and drugs decide which investigations are safe to order next.",
+      "asks": [
+        {
+          "text": "Have you had attacks of upper abdominal pain after fatty food before, or has anyone told you that you carry gallstones?"
+        },
+        {
+          "text": "Have you had fever with shivering alongside the yellow colour before, or any operation on the gallbladder or bile duct, including keyhole surgery or endoscopy?"
+        },
+        {
+          "text": "What medicines do you take every day, including pills for tuberculosis, fits, hormones or herbal preparations, and how much alcohol do you drink in a week?"
+        },
+        {
+          "text": "Has anyone in your family needed gallstone surgery young, had jaundice in pregnancy, or liver disease that ran in the family?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Stones have company: who gets calculous jaundice",
+          "body": "Middle-aged women, obesity, rapid weight loss and repeated pregnancies all raise the chance that a blocked duct is blocked by a stone, as does a long story of flatulent dyspepsia with pain after fatty food. Chronic haemolysis, biliary infection and parasites produce pigment stones by a different route and matter in patients from endemic belts.\n\nA previous attack of acute cholecystitis leaves a scarred, fibrotic gallbladder that cannot distend, which is exactly why the gallbladder stays impalpable when a stone later blocks the duct. Ask for that past attack in every patient, since it explains the examination before it happens."
+        },
+        {
+          "heading": "Age, weight loss and anorexia warn of a growth",
+          "body": "A new, painless, deepening jaundice in an older patient with steady weight loss and loss of appetite should be treated as malignant until proved otherwise. New back pain passing through from the upper abdomen, new diabetes or an attack that looks like pancreatitis in an older patient all raise the same warning.\n\nInflammatory bowel disease points toward sclerosing cholangitis rather than a stone, and an old cholecystectomy with a clip or stricture history points toward a benign postoperative narrowing. Both change the choice of the next investigation."
+        },
+        {
+          "heading": "Past, drug and family history that changes the plan",
+          "points": [
+            "Earlier endoscopy with a cut at the papilla or a stent in the duct, and any earlier cholecystectomy, since retained or reformed stones and strictures follow procedures.",
+            "Drugs that injure bile flow, so list every regular tablet rather than accepting that the patient takes nothing.",
+            "Alcohol in honest weekly amounts, smoking, and diabetes, which colour both fitness for surgery and the risk of pancreatic disease.",
+            "Family gallstones at a young age, jaundice in pregnancy, or inherited bile disorders, which should raise the thought of an ABCB4-related low-phospholipid stone syndrome and referral for family testing."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Why do you ask about a past attack of cholecystitis in a patient with a suspected duct stone?",
+          "a": "A past attack leaves a scarred fibrotic gallbladder that cannot distend, which explains why the gallbladder stays impalpable when a stone blocks the duct, and it confirms the stone-forming background.",
+          "accept": [
+            "fibrotic",
+            "scarred",
+            "distend",
+            "impalpable",
+            "stone"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A young adult has repeated gallstones and a sister who had jaundice in pregnancy. What inherited thread do you consider?",
+          "a": "An ABCB4-related bile disorder of the low-phospholipid stone spectrum, which runs in families, produces cholesterol stones and intrahepatic lithiasis, and needs genetic counselling and family testing rather than surgery alone.",
+          "accept": [
+            "ABCB4",
+            "low-phospholipid",
+            "family",
+            "genetic",
+            "stones"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gallbladder_disease: clinicalPearls"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "progressive_familial_intrahepatic_cholestasis_type_3: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Gallstones: risk factors and formation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.obstructive.summary": {
+      "id": "skill.present.obstructive.summary",
+      "kind": "presentation",
+      "system": "surgery",
+      "title": "Presenting the surgical jaundice case",
+      "oneLine": "Tempo, discriminators, Courvoisier status, level, cause and plan in six sentences",
+      "why": "A jaundice presentation fails when it lists findings without committing: the consultant needs the tempo, the two or three discriminators that split stone from growth, the state of the gallbladder, and a named level and likely cause with the next investigation. Six sentences in that order carry the whole case and invite exactly one question, which test of the diagnosis comes first.",
+      "teach": [
+        {
+          "heading": "Six sentences carry the case",
+          "body": "Name the patient with age and background, then state the tempo in one clause: painless and progressive over weeks, or painful and intermittent over months. Name the syndrome next in abstract terms, an extrahepatic biliary obstruction with conjugated hyperbilirubinaemia, rather than reciting every symptom.\n\nThen give the discriminators that split the causes: state of the gallbladder, fever pattern, weight and appetite, and the urine and stool change. Close with the provisional level and cause, the fitness for procedure, and the single next step, usually an ultrasound already done and the scan that must follow."
+        },
+        {
+          "heading": "A worked presentation",
+          "body": "A 58 year old farmer presents with six weeks of painless, steadily deepening jaundice with itching, pale stools and dark urine, with anorexia and steady weight loss. Examination shows deep icterus with scratch marks and a smooth, non-tender, palpable gallbladder moving with respiration, with no fever at any stage.\n\nThis is an extrahepatic biliary obstruction, clinically malignant with a positive Courvoisier sign, most likely a periampullary growth. He is fit with normal cardiorespiratory reserve, and the next step is contrast imaging with MRCP to define the level and stage before hepatobiliary referral."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What must a surgical jaundice summary contain that a medical jaundice summary may omit?",
+          "a": "The tempo as painful intermittent or painless progressive, the state of the gallbladder with the Courvoisier reading, a named level and likely cause, and the fitness and next procedural step, since the endpoint is an intervention rather than a prescription.",
+          "accept": [
+            "tempo",
+            "gallbladder",
+            "Courvoisier",
+            "level",
+            "plan"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "progressive_familial_intrahepatic_cholestasis_type_3: additionalDifferentials"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Jaundice: presenting the findings"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.peripheral.risk": {
+      "abnormal": "Heavy beedi use, long-standing poorly controlled diabetes, hypertension, past heart attack or stroke, and a family history of early vascular disease all raise the prior probability of arterial disease and of a poor outcome.",
+      "asks": [
+        {
+          "text": "How many beedis or cigarettes do you smoke each day, and since what age?"
+        },
+        {
+          "text": "Do you have diabetes? Since when, what treatment do you take, and was your last sugar controlled?"
+        },
+        {
+          "text": "Do you have high blood pressure, and do you take its tablets regularly?"
+        },
+        {
+          "text": "Have you ever had a heart attack, angina, a stroke, or a clot in the leg or lung?"
+        },
+        {
+          "text": "Has anyone in your family lost a toe, foot or leg to poor blood supply or diabetes?"
+        },
+        {
+          "text": "Do you walk barefoot, and how do you cut your toenails?"
+        }
+      ],
+      "id": "skill.hx.peripheral.risk",
+      "kind": "history",
+      "normal": "No tobacco use, no diabetes, blood pressure normal on treatment, no past heart attack or stroke, and no family history of early vascular disease or amputation.",
+      "oneLine": "The risk factors that decide how likely arterial disease is before the leg is examined",
+      "probes": [
+        {
+          "a": "Beedi or cigarette smoking, diabetes, hypertension, past heart attack or stroke, and a family history of early vascular disease or amputation.",
+          "accept": [
+            "smoking",
+            "beedi",
+            "diabetes",
+            "hypertension",
+            "heart attack",
+            "stroke",
+            "family"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "Name four risk factors you must ask about in every suspected ischaemic limb."
+        },
+        {
+          "a": "Because beedis deliver the same arterial injury as cigarettes, dose and duration set the risk, and quitting is the single most effective treatment for claudication distance and graft survival.",
+          "accept": [
+            "beedi",
+            "dose",
+            "duration",
+            "quitting",
+            "arterial injury"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why do you count beedis separately instead of writing smoking as yes or no?"
+        },
+        {
+          "a": "Ask when the diabetes was found, what drugs or insulin are taken and whether doses are missed, and what the last fasting sugar or HbA1c showed, since uncontrolled sugar drives both atherosclerosis and poor healing of any foot wound.",
+          "accept": [
+            "duration",
+            "treatment",
+            "fasting sugar",
+            "HbA1c",
+            "healing"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "What exactly do you ask a diabetic patient beyond do you have sugar?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "significance": "Risk factors do two jobs at once: they raise the probability that leg pain is arterial, and they decide the treatment, since revascularisation fails early in a patient who keeps smoking with uncontrolled sugar.",
+      "sources": [
+        {
+          "locator": "peripheral_arterial_disease_and_acute_limb_ischemia: pathophysiology",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Arterial disease: risk factors and prevention",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Four exposures cause most peripheral arterial disease in Indian practice: tobacco (beedis included), diabetes, hypertension, and disturbed lipids. Each multiplies the others, so a diabetic beedi smoker with hypertension carries many times the risk of a patient with one factor alone.\n\nAsk every factor in every case, even when the leg already looks gangrenous. The risk history decides the diagnosis in an atypical limb and decides the treatment in every limb, because bypass grafts and angioplasties block early in patients who keep smoking.",
+          "heading": "Four exposures cause most disease"
+        },
+        {
+          "body": "Count tobacco as dose times duration: how many beedis or cigarettes a day, since what age, and whether the patient still smokes. A bundle-a-day habit since youth is the commonest history behind Buerger disease in young men, and continued smoking is the commonest reason a claudicant deteriorates.\n\nRecord diabetes the same way: age at detection, tablets or insulin with missed doses admitted honestly, and the last fasting sugar. Barefoot walking and careless nail paring then complete the diabetic foot story, since trivial trauma starts the ulcer that ischaemia prevents from healing.",
+          "heading": "Dose and duration, not yes or no"
+        },
+        {
+          "body": "Ask about the heart, brain and the other leg in the same breath: angina or heart attack, stroke or transient weakness, and claudication or coldness in the opposite limb. Atherosclerosis is a generalised disease, and the patient who presents with a toe may die of the coronary artery.\n\nFinish with family: early heart attacks, strokes, or amputations in parents and siblings. Familial predisposition is reported in Buerger disease, and a young non-smoker with claudication needs a different differential from a sixty-year-old diabetic smoker.",
+          "heading": "Heart, brain, other leg, family"
+        }
+      ],
+      "title": "Risk-factor history in the ischaemic limb",
+      "why": "The risk history sets the prior probability of arterial disease before the leg is touched, and it decides the treatment afterwards, since no revascularisation survives continued smoking with uncontrolled diabetes."
+    },
+    "skill.present.peripheral.padcase": {
+      "id": "skill.present.peripheral.padcase",
+      "kind": "presentation",
+      "oneLine": "Present the ischaemic limb: tempo, level, stage and plan in under three minutes",
+      "probes": [
+        {
+          "a": "Age and risk factors, tempo from claudication to rest pain to tissue loss, level of pulses and key bedside findings, ABPI and imaging, Fontaine or Rutherford stage, and the plan including revascularisation and foot care.",
+          "accept": [
+            "risk factors",
+            "tempo",
+            "pulses",
+            "ABPI",
+            "stage",
+            "plan"
+          ],
+          "level": 2,
+          "minMatch": 3,
+          "q": "What six elements must every ischaemic limb presentation contain?"
+        },
+        {
+          "a": "Because the stage decides the treatment: claudication is exercised and risk-managed, rest pain and tissue loss need urgent revascularisation, and a threatened limb cannot wait for the next routine list.",
+          "accept": [
+            "stage",
+            "claudication",
+            "rest pain",
+            "revascularisation",
+            "urgent"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why do you state the Fontaine or Rutherford stage out loud in the summary?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "peripheral_arterial_disease_and_acute_limb_ischemia: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "History and examination of arterial disease",
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Open with the patient and the risks in one sentence: a 62 year old diabetic beedi smoker with two years of calf pain on walking. That single line tells the consultant the tempo and the cause before any finding is mentioned.\n\nThen walk the story forward in time: claudication distance shrinking month by month, night pain relieved by hanging the foot down, then blackening of the toe. Tempo is the diagnosis in arterial disease: gradual means atherosclerosis, sudden means embolus.",
+          "heading": "One line for the patient, then the tempo"
+        },
+        {
+          "body": "Give the level before the lesion: femoral present, popliteal weak, tibial and dorsalis pedis absent, with a vascular angle under 30 degrees and an ABPI of 0.55. Findings read proximal to distal, pulses before skin changes, measurements before adjectives.\n\nClose with stage and plan: Fontaine stage IV chronic limb threatening ischaemia with dry gangrene of the great toe, for urgent vascular referral, risk factor control, and foot care with a guarded prognosis for the toe already lost.",
+          "heading": "Level, measurements, stage, plan"
+        }
+      ],
+      "title": "Presenting the ischaemic limb case",
+      "why": "A consultant judges an ischaemic limb presentation by whether the tempo, the level of disease, the stage and the urgency all appear in order, since each decides a different part of the plan."
+    },
+    "skill.hx.peritonitis.risk": {
+      "id": "skill.hx.peritonitis.risk",
+      "kind": "history",
+      "system": "surgery",
+      "title": "Ulcer past and perforation risk in the acute abdomen",
+      "oneLine": "Hunger pains, painkillers and old bleeding that explain why this ulcer gave way",
+      "why": "Most perforated ulcers do not arrive without warning. A past of rhythmic hunger pains, painkiller use or an old bleed turns a sudden catastrophe into the expected end of a known disease, and each of these facts changes what you do after the operation.",
+      "asks": [
+        {
+          "text": "Ask about rhythmic upper abdominal pain in the past months or years, and what relieved it."
+        },
+        {
+          "text": "Ask about regular painkiller tablets, especially for joint or back pain, taken without stomach protection."
+        },
+        {
+          "text": "Ask about smoking bidis or cigarettes, alcohol use, and irregular or missed meals."
+        },
+        {
+          "text": "Ask about any previous vomiting of blood or black stools, and any past treatment for ulcer."
+        },
+        {
+          "text": "Ask about known diabetes, steroid tablets, and any previous abdominal operation."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "The past that predicts the perforation",
+          "body": "Ask every acute abdomen with upper abdominal pain about earlier ulcer type pain. Hunger pains that woke the patient at night, burning pain eased by food or antacids, and pain returning in episodes over months are the classic past of a chronic duodenal ulcer.\n\nMany patients ignored these episodes or treated them with tablets from a chemist. That neglected past is exactly why the perforation happened, and it also tells you the ulcer is chronic, which matters for the definitive plan later."
+        },
+        {
+          "heading": "Painkillers, smoke and drink",
+          "body": "Ask directly about painkiller tablets taken regularly for joint pain, backache or headache. Self taken anti inflammatory drugs without food or stomach protection are among the commonest precipitants of perforation in Indian practice.\n\nAsk about bidi or cigarette smoking and regular alcohol in the same breath. Both delay ulcer healing and both raise the chance that an ulcer bleeds or perforates rather than healing quietly."
+        },
+        {
+          "heading": "Old bleeding and old treatment",
+          "points": [
+            "Vomiting of blood or black tarry stools in the past means the same ulcer has already bled once, and the disease is proven chronic.",
+            "Ask whether the patient ever took a course of tablets for ulcer or for H pylori, and whether it was completed.",
+            "Ask about diabetes and steroid tablets, since both impair healing and worsen infection.",
+            "Ask about any previous abdominal operation, since old scars change both the examination and the operative plan."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What past pain history points to a chronic duodenal ulcer behind a perforation?",
+          "a": "Rhythmic hunger pains over months, waking at night, eased by food or antacids, returning in episodes.",
+          "accept": [
+            "hunger",
+            "night",
+            "food",
+            "antacid",
+            "episodes"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which two habits or drugs most raise the risk that an ulcer perforates?",
+          "a": "Regular painkiller tablets taken without protection, and smoking with regular alcohol use.",
+          "accept": [
+            "painkiller",
+            "smoking",
+            "alcohol",
+            "protection"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gastric_neoplasms_peptic_ulcer_and_gastrectomy: pathophysiology"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Perforated peptic ulcer"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "The acute abdomen"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.peritonitis.summary": {
+      "id": "skill.present.peritonitis.summary",
+      "kind": "presentation",
+      "system": "surgery",
+      "title": "Summarising the perforation case",
+      "oneLine": "Tempo, peritoneal signs, gas under the diaphragm, and the clock that is running",
+      "why": "A perforation summary is judged on whether the listener feels the urgency. Tempo first, then the two bedside proofs of perforation, then the film, then the plan, all inside a minute, because this is a disease measured in hours.",
+      "teach": [
+        {
+          "heading": "The order that carries urgency",
+          "body": "Open with the patient and the tempo in one sentence: a middle aged man with sudden severe upper abdominal pain of a few hours. Then name the syndrome in abstract terms: an acute abdomen with generalised peritonitis.\n\nFollow with the examination proofs: board like rigidity, absent bowel sounds, and loss of liver dullness. Then the investigation that confirms: gas under the diaphragm on erect film. Close with the diagnosis and the immediate plan."
+        },
+        {
+          "heading": "A worked example",
+          "body": "A 48 year old mason presents with sudden stabbing upper abdominal pain of six hours, now spread all over the abdomen, with one episode of vomiting and no flatus since. He gives a past of hunger pains relieved by food and daily painkiller tablets.\n\nOn examination he lies still, the abdomen is rigid like a board with rebound tenderness, bowel sounds are absent, and liver dullness is obliterated. Erect chest film shows free gas under the right diaphragm. This is generalised peritonitis due to perforated peptic ulcer, for urgent resuscitation and laparotomy."
+        },
+        {
+          "heading": "What never to leave out",
+          "points": [
+            "The tempo in hours, since it separates perforation from slower surgical illness.",
+            "The ulcer past and the painkiller history, since they explain the cause.",
+            "Relevant negatives: no distension early, no previous similar catastrophe, no chest findings that suggest a thoracic mimic.",
+            "The resuscitation state: pulse, pressure, urine output, and what fluids and antibiotics have started."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What four elements must a perforation summary contain in order?",
+          "a": "Tempo in hours, the peritoneal examination proofs, the confirmatory film finding, and the immediate resuscitation and operative plan.",
+          "accept": [
+            "tempo",
+            "peritoneal",
+            "film",
+            "plan"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_peritonitis_damage_control_and_compartment_syndrome: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Perforated peptic ulcer"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "The acute abdomen"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.renal.risk": {
+      "id": "skill.hx.renal.risk",
+      "kind": "history",
+      "system": "surgery",
+      "title": "Stone risk: past, personal, drug and family history",
+      "oneLine": "The background that makes a stone likely, and the causes worth treating",
+      "why": "A first stone is often treated as bad luck, but recurrence is the rule when the background is ignored. Low fluid intake, gout and the metabolic syndrome, a high purine diet, chronic bowel fluid loss, and some drugs each point to a cause that can be treated, so this history decides the prevention plan as much as the scans do.",
+      "asks": [
+        {
+          "text": "Have you ever passed a stone before, or seen blood or grit in the urine? Was a stone ever analysed, and what treatment followed?"
+        },
+        {
+          "text": "Do your joints ever swell painfully, especially the big toe? Have you been told you have gout, diabetes, or high uric acid?"
+        },
+        {
+          "text": "How much water do you drink in a day, and what colour is your urine by evening? Do you work long hours in heat without drinking?"
+        },
+        {
+          "text": "What do you eat most days: how often meat, offal, or beer, and how much salt? Have you lost or gained weight recently?"
+        },
+        {
+          "text": "Do you have chronic loose motions or bowel disease, and have you had bowel surgery? Do you take water tablets, excess vitamin C, calcium or antacid tablets, or treatment for gout?"
+        },
+        {
+          "text": "Has anyone in your family had kidney stones, gout, or kidney failure? At what age did their trouble start?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "A past stone is the strongest predictor",
+          "body": "Ask every patient with loin pain about earlier colic, passage of grit or a stone, and any prior analysis or procedure. A stone that was never analysed is unfinished business: composition decides whether dissolution, diet change, or a drug has a role.\n\nRecurrence clusters in families and in hot climates where fluid intake lags behind sweat loss. A young patient with repeated stones needs a metabolic workup, not reassurance."
+        },
+        {
+          "heading": "The metabolic cluster behind uric acid stones",
+          "body": "Gout, type 2 diabetes, obesity, and the metabolic syndrome travel with persistently acidic urine, and acidic urine is what lets uric acid crystallise. Ask about joint attacks, thirst and weight, and check for diabetes where the story suggests it.\n\nHigh purine intake from meat and rapid cell turnover add urate load. Chronic diarrhoea depletes volume and alkali together, which concentrates the urine and keeps it acidic."
+        },
+        {
+          "heading": "Drugs, bowel loss, and family",
+          "body": "Some drugs raise stone risk: thiazide-like water tablets alter calcium handling, excess vitamin C can convert to oxalate, and calcium-based antacids add load. Starting allopurinol during an acute gout attack without cover can worsen the joint, a separate trap worth knowing.\n\nAsk about bowel disease and resection, which waste fluid and alkali. A family history of stones, gout, or early kidney failure marks a patient for full metabolic study rather than a single episode of care."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three background factors that raise the risk of a uric acid stone.",
+          "a": "Persistently acidic urine, low fluid intake with concentrated urine, and gout or the metabolic syndrome with diabetes and obesity.",
+          "accept": [
+            "acidic urine",
+            "low fluid intake",
+            "gout",
+            "metabolic syndrome",
+            "diabetes"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does chronic diarrhoea predispose to uric acid stones?",
+          "a": "It causes volume depletion with alkali loss, leaving a scanty, concentrated, persistently acidic urine, which favours uric acid crystallisation.",
+          "accept": [
+            "volume depletion",
+            "alkali loss",
+            "concentrated",
+            "acidic urine"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A 30-year-old has passed three stones in two years. What does the history need to establish?",
+          "a": "Stone composition from analysis, fluid intake and heat exposure, purine diet, gout and diabetes, bowel disease, relevant drugs, and a family history of stones or kidney failure, leading to a full metabolic evaluation.",
+          "accept": [
+            "stone analysis",
+            "fluid intake",
+            "gout",
+            "diabetes",
+            "family history",
+            "metabolic evaluation"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "uric_acid_nephrolithiasis: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Urinary stone disease: risk factors and prevention"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.renal.summary": {
+      "id": "skill.present.renal.summary",
+      "kind": "presentation",
+      "system": "surgery",
+      "title": "Presenting the renal colic case",
+      "oneLine": "Three sentences that carry the patient, the syndrome, and the plan",
+      "why": "A colic presentation fails when it becomes a list of pain adjectives with no syndrome, no severity, and no plan. The consultant needs the tempo, the radiation path, the stone evidence, and whether infection or obstruction makes this an emergency, in under a minute.",
+      "teach": [
+        {
+          "heading": "The shape of the summary",
+          "body": "Name the patient with the risk background, state the tempo as sudden colicky episodes with pain-free gaps, describe the syndrome in abstract terms with its radiation path, and close with severity and plan.\n\nA worked example: a 38-year-old truck driver with low daily fluid intake presents with sudden severe left loin pain radiating to the groin in waves, with vomiting and blood in the urine. Examination shows a restless patient with left renal angle tenderness and no guarding or fever. This is a left ureteric stone with mild hydronephrosis on imaging, uncomplicated, for analgesia, fluids, medical expulsive therapy, and planned review for passage."
+        },
+        {
+          "heading": "What must never be missing",
+          "points": [
+            "Tempo and behaviour: sudden, colicky, restless between waves, pain-free intervals.",
+            "Radiation path stated plainly: loin to groin, and what the level of the stone suggests.",
+            "Relevant positives and negatives: haematuria and strangury present; fever, rigors, guarding, and anuria absent.",
+            "Stone evidence: imaging finding with size and site, urine pH, and whether infection markers are present.",
+            "Plan in one line: analgesia, fluids, expulsive therapy or intervention, and how passage will be confirmed."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What five elements belong in a renal colic case summary?",
+          "a": "The patient with risk background, the sudden colicky tempo, the syndrome with its radiation path, the stone evidence from imaging, and the severity with the plan.",
+          "accept": [
+            "risk background",
+            "tempo",
+            "radiation",
+            "imaging",
+            "plan"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Why do the negatives matter as much as the positives in this summary?",
+          "a": "Absence of fever, guarding, and anuria is what keeps the case uncomplicated and suitable for conservative care; their presence would convert it into an emergency needing drainage.",
+          "accept": [
+            "fever",
+            "guarding",
+            "anuria",
+            "uncomplicated",
+            "emergency"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "uric_acid_nephrolithiasis: management"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Urinary symptoms: history and examination"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.sinus.riskfactors": {
+      "id": "skill.hx.sinus.riskfactors",
+      "kind": "history",
+      "system": "surgery",
+      "title": "Past, personal, drug and family history in sinus and fistula disease",
+      "oneLine": "The background illnesses and drugs that keep a track open",
+      "why": "A sinus or fistula persists because something keeps it open, and that something is usually in the past history rather than at the opening itself: tuberculosis, diabetes, inflammatory bowel disease, a retained suture or mesh, or a drug that slows healing. Missing this history means treating the track while the cause continues.",
+      "asks": [
+        {
+          "text": "Ask about past or household tuberculosis: prolonged cough, evening fever, night sweats, weight loss, lymph node swellings, bone or joint tuberculosis, and antitubercular treatment taken, including whether the full course was completed."
+        },
+        {
+          "text": "Ask about diabetes and recurrent skin sepsis: known diabetes, excessive thirst and urination, recurrent boils, carbuncles or perianal abscesses, and the most recent blood sugar value if tested."
+        },
+        {
+          "text": "Ask about bowel symptoms that point to Crohn disease or ulcerative colitis: chronic diarrhoea, blood or mucus in the stool, mouth ulcers, weight loss, and any previous colonoscopy or bowel surgery."
+        },
+        {
+          "text": "Ask about every previous operation, drainage procedure, implant, mesh repair, suture material left in the wound, fracture fixation device, and any bone chips or discharge of bony particles since."
+        },
+        {
+          "text": "Take a full drug history: steroids, immunosuppressants, anticancer drugs, recent prolonged antibiotics, and native or over the counter medicines applied to the wound."
+        },
+        {
+          "text": "Ask about personal habits and nutrition: smoking, chewing tobacco, alcohol use, occupation with exposure to dust or minor trauma, footwear and foot care where the leg is involved, and recent weight change."
+        },
+        {
+          "text": "Ask the family history: tuberculosis, inflammatory bowel disease, or fistula in ano in close relatives, and living conditions that favour spread of tuberculosis."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Why the past history decides the fate of the track",
+          "body": "A fresh sinus from a drained pyogenic abscess usually closes once the cavity collapses and the cause is gone. A sinus that has discharged for months has a keeper, and the keeper is named in the past history far more often than at the bedside.\n\nTuberculosis, retained dead bone or suture material, Crohn disease, actinomycosis, diabetes with poor control, and continued pressure or movement at the site are the usual keepers. Each one changes the plan completely, from sequestrectomy to antitubercular therapy to bowel workup."
+        },
+        {
+          "heading": "Drugs and habits that hold healing back",
+          "body": "Steroids and immunosuppressants blunt the inflammatory response that walls off infection, so abscesses in these patients spread quietly and sinuses close slowly. Prolonged unguided antibiotics select resistant organisms while the deep nidus survives untouched.\n\nSmoking impairs small vessel flow to healing tissue, and protein energy undernutrition does the same from the inside. Both are correctable, and both should be recorded and addressed rather than merely noted."
+        },
+        {
+          "heading": "Family history is an exposure history here",
+          "points": [
+            "Tuberculosis in a household contact raises the prior probability that a chronic cold sinus is tuberculous, and should trigger a contact and BCG history in children.",
+            "Crohn disease and ulcerative colitis cluster in families, so bowel symptoms in a relative strengthen the case for colonoscopy in complex perianal fistulae.",
+            "Fistula in ano itself is seen in more than one member of a family often enough that the question is worth asking directly.",
+            "Record who gave the history and how reliable it is, since operative details from years ago are often approximate."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name four background conditions you must ask about in every chronic discharging sinus.",
+          "a": "Tuberculosis, diabetes mellitus, inflammatory bowel disease such as Crohn disease, and actinomycosis, plus any previous operation with retained material.",
+          "accept": [
+            "tuberculosis",
+            "diabetes",
+            "crohn",
+            "bowel",
+            "actinomycosis",
+            "operation",
+            "retained"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why do you ask about steroids and immunosuppressants in a patient with a persistent sinus?",
+          "a": "Because they blunt the inflammatory response that walls off infection, so abscesses spread quietly and sinuses close slowly while the drug continues.",
+          "accept": [
+            "blunt",
+            "inflammatory",
+            "healing",
+            "slowly",
+            "steroid"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A young man has complex multiple perianal fistulae. His brother has chronic diarrhoea with blood. What does the family history change?",
+          "a": "It raises Crohn disease as the shared cause, so the patient needs bowel assessment with colonoscopy and the fistulae should not be laid open as if they were simple cryptoglandular ones.",
+          "accept": [
+            "crohn",
+            "bowel",
+            "colonoscopy",
+            "not simple"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "retropharyngeal_abscess: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Sinus and fistula"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.sinus.summary": {
+      "id": "skill.present.sinus.summary",
+      "kind": "presentation",
+      "system": "surgery",
+      "title": "Summarising the sinus or fistula case",
+      "oneLine": "Site, track, keeper and state, in one breath",
+      "why": "A sinus case summary fails when it lists the discharge but never names the keeper of the track. The listener needs the anatomy of the lesion, the cause that keeps it open, and the current state of activity, because each one points to a different operation or drug.",
+      "teach": [
+        {
+          "heading": "A fixed order for every sinus summary",
+          "points": [
+            "Open with the patient and the tempo: age, occupation, and how many weeks or months the discharge has lasted.",
+            "State the anatomy: single or multiple openings, exact site, and whether it is a blind sinus or a communicating fistula with what leaks through it.",
+            "Name the keeper: sequestrum, retained suture or mesh, tuberculosis, Crohn disease, pilonidal disease, or none found yet.",
+            "Close with the state of activity and the plan: active inflammation with fever and cellulitis, or quiet chronic discharge, then the investigation that proves the keeper and the operation or drug that removes it."
+          ]
+        },
+        {
+          "heading": "A worked example",
+          "body": "A 34 year old sugarcane cutter presents with a single discharging sinus over the middle third of the left shin for eighteen months, following an open fracture fixed with a rod. The discharge is purulent with occasional bony particles, the track is fixed to irregular thickened tibia, and a probe strikes bare gritty bone.\n\nThis is a chronic osteomyelitic sinus kept open by dead bone, currently in an active flare with fever and surrounding cellulitis. The plan is a radiograph for sequestrum, pus culture, sugar testing, then sequestrectomy with saucerisation once the flare settles."
+        },
+        {
+          "heading": "What to leave out",
+          "body": "Leave out the full dressing chronology, every normal systemic finding, and the entire drug list. Keep one line for relevant negatives: no bowel symptoms, no diabetic history, no household tuberculosis contact.\n\nEnd with the question the summary answers: what keeps this track open, and what will close it. If the summary cannot answer that, the workup is not finished."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What four elements must a sinus case summary contain, in order?",
+          "a": "The patient with tempo, the anatomy of the track, the keeper that holds it open, and the current state of activity with the plan.",
+          "accept": [
+            "tempo",
+            "anatomy",
+            "keeper",
+            "activity",
+            "plan"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Why does the summary name the keeper rather than just describing the discharge?",
+          "a": "Because the discharge looks similar whatever the cause, while the keeper decides the treatment: dead bone needs removal, tuberculosis needs drugs, and a fistula needs its abnormal passage made patent or repaired.",
+          "accept": [
+            "keeper",
+            "treatment",
+            "dead bone",
+            "tuberculosis",
+            "fistula"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "retropharyngeal_abscess: clinicalPearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Examination of a sinus or fistula"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.oesophagus.risk": {
+      "id": "skill.hx.oesophagus.risk",
+      "kind": "history",
+      "system": "surgery",
+      "title": "Risk factors and background history in carcinoma oesophagus",
+      "oneLine": "Tobacco, alcohol and diet exposures, predisposing oesophageal disease, and family history",
+      "why": "Carcinoma of the oesophagus is strongly linked to exposures the patient can report and to long standing oesophageal disease already in the notes. Asking about them takes two minutes, separates a high risk from a low risk story, and tells you which relatives need counselling about the same habits.",
+      "asks": [
+        {
+          "text": "Do you smoke bidis or cigarettes, chew tobacco, gutka or betel nut, and for how many years? How much alcohol do you drink each week?"
+        },
+        {
+          "text": "Do you drink very hot tea or food, and what does your daily diet look like, especially fresh fruit and vegetables?"
+        },
+        {
+          "text": "Have you had heartburn or acid coming up for many years, difficulty swallowing in the past, or treatment for achalasia or a long standing narrowing of the food pipe?"
+        },
+        {
+          "text": "Have you ever swallowed a corrosive such as acid or alkali, received radiation to the chest or neck, or had repeated instrumentation of the gullet?"
+        },
+        {
+          "text": "Have you been told you are anaemic or low in iron, with a sore tongue or brittle nails, and is there any cancer of the food pipe or stomach in the family?"
+        },
+        {
+          "text": "What medicines do you take regularly for acidity or pain, and have you lost weight or changed what you eat because of swallowing trouble?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Why exposure history matters here",
+          "body": "Most squamous cancers of the gullet follow years of injury to its lining. Tobacco and alcohol act together, so the combined habit carries far more weight than either alone. Chewed tobacco with areca nut, frequent very hot drinks, and old corrosive burns each add their own risk, and all of them are common in Indian practice."
+        },
+        {
+          "heading": "Ask about tobacco, alcohol and heat in every case",
+          "points": [
+            "Smoke: bidis as well as cigarettes, number per day and years of use; chewing: tobacco, gutka, betel nut with areca.",
+            "Alcohol: type, amount and years; ask about both together, since the two potentiate each other.",
+            "Heat: habitually drinking tea or food scalding hot, a repeated thermal injury to the lining.",
+            "Diet: low intake of fresh fruit and vegetables goes with higher risk; record what the patient actually eats."
+          ]
+        },
+        {
+          "heading": "Diseases that predispose to cancer",
+          "points": [
+            "Long standing achalasia: stagnant food and chronic irritation over many years.",
+            "Plummer-Vinson pattern: iron deficiency with webs in the upper gullet, a recognised precancerous setting.",
+            "Old corrosive stricture and prior chest radiation: both leave scarred lining that can turn malignant decades later.",
+            "Chronic reflux with Barrett change: the main background for adenocarcinoma near the junction with the stomach."
+          ]
+        },
+        {
+          "heading": "Drugs, weight and family",
+          "body": "Record regular antacids and acid suppressing medicines, since they may have masked years of reflux. Ask about painkillers that injure the lining. Document weight loss with dates, any change in diet texture to cope, and cancers of the gullet or stomach in close relatives."
+        }
+      ],
+      "pitfalls": [
+        "Asking only about cigarettes and missing bidi smoking, tobacco chewing and areca nut, which dominate the exposure in many Indian patients.",
+        "Forgetting to ask about scalding hot tea, an exposure the patient will not volunteer unless asked directly.",
+        "Skipping the corrosive and radiation history because it was decades ago, when that long interval is exactly the pattern."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name four exposures or background conditions that raise the risk of squamous carcinoma of the oesophagus.",
+          "a": "Tobacco smoking or chewing, alcohol use, very hot beverages, areca nut chewing, long standing achalasia, Plummer-Vinson syndrome with iron deficiency, old corrosive stricture, and prior radiation.",
+          "accept": [
+            "tobacco",
+            "alcohol",
+            "hot",
+            "areca",
+            "achalasia",
+            "iron deficiency",
+            "corrosive",
+            "radiation"
+          ],
+          "minMatch": 4
+        },
+        {
+          "level": 2,
+          "q": "A 62 year old man chews tobacco and drinks alcohol daily. Why does the combination matter more than either habit alone?",
+          "a": "Alcohol and tobacco act synergistically on the oesophageal lining, so the combined habit multiplies the risk of squamous carcinoma rather than simply adding to it.",
+          "accept": [
+            "synergistic",
+            "tobacco",
+            "alcohol",
+            "multiplies",
+            "combined"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which reflux related change in the lower gullet predisposes to adenocarcinoma, and what history points to it?",
+          "a": "Barrett metaplasia from years of gastro-oesophageal reflux: long standing heartburn and regurgitation, often masked by regular antacid or acid suppressing treatment.",
+          "accept": [
+            "barrett",
+            "reflux",
+            "heartburn",
+            "metaplasia",
+            "antacid"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "upper_gastrointestinal_tract_cancers: pathophysiology"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Carcinoma of the oesophagus"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Dysphagia"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }
