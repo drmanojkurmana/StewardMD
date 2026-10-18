@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 import Capacitor
 import SwiftUI
 import UserNotifications
@@ -37,7 +38,18 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "getStatus", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "openCodeBlue", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "clinicalActivityUpsert", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "clinicalActivityEnd", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "clinicalActivityEnd", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "audioBegin", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "audioEnd", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "audioConfigure", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "audioMutes", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "audioMetronome", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "audioBreaths", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "audioTone", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "audioSpeak", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "audioSetCues", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "codeBlueGetState", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "codeBlueLog", returnType: CAPPluginReturnPromise)
     ]
 
     private let suiteName = "group.in.stewardmd.app"
@@ -54,13 +66,20 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
     private lazy var relay = WatchConnectivityRelay()
     /// Last Code Blue running state emitted to JS — so `codeBlueActive` fires only on change.
     private var lastCodeBlueRunning: Bool?
+    /// Streams every merged Code Blue state (watch frames + phone scribe entries) to JS as `codeBlueState`.
+    private var codeBlueStateObserver: AnyCancellable?
 
     override public func load() {
         // Force the WCSession to activate at plugin load so getStatus() is reliable.
         _ = relay
         // Start the phone-side Code Blue live mirror so it ingests + persists even
         // before the Command Center screen is opened.
-        DispatchQueue.main.async { CodeBlueLiveModel.shared.begin() }
+        DispatchQueue.main.async { [weak self] in
+            CodeBlueLiveModel.shared.begin()
+            self?.codeBlueStateObserver = CodeBlueLiveModel.shared.$state.dropFirst().sink { [weak self] st in
+                self?.notifyListeners("codeBlueState", data: Self.codeBlueDict(st, receivedAt: CodeBlueLiveModel.shared.lastWatchUpdate))
+            }
+        }
         // Start the Sepsis/Procedure Live Activity driver (listens for the watch's timerActivity relay).
         DispatchQueue.main.async { TimerActivityManager.shared.begin() }
         // Tell the web layer when a code goes active/inactive (drives the on-screen
@@ -252,6 +271,87 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
     /// Phone-app Live Activities (live-activities.js). See ClinicalActivityBridge.
     @objc func clinicalActivityUpsert(_ call: CAPPluginCall) { ClinicalActivityBridge.upsert(call) }
     @objc func clinicalActivityEnd(_ call: CAPPluginCall) { ClinicalActivityBridge.end(call) }
+
+    /// JSON-safe snapshot of the merged Code Blue state for the web screen. `elapsed` is the
+    /// watch clock at `receivedAtMs` (epoch ms on this phone), so JS can add the time since.
+    static func codeBlueDict(_ s: CodeBlueState, receivedAt: Date?) -> [String: Any] {
+        [
+            "running": s.running, "paused": s.paused, "rosc": s.rosc,
+            "elapsed": s.elapsed,
+            "receivedAtMs": (receivedAt ?? Date()).timeIntervalSince1970 * 1000,
+            "mode": (s.mode ?? .adult).rawValue,
+            "cycle": s.cycle, "shockCount": s.shockCount, "adrenalineCount": s.adrenalineCount,
+            "events": s.events.map { e -> [String: Any] in
+                ["id": e.id, "elapsed": e.elapsed, "kind": e.kind.rawValue, "label": e.label, "source": e.sourceDeviceId]
+            }
+        ]
+    }
+
+    /// Current merged state, so the web screen can join a watch code that started before it opened.
+    @objc func codeBlueGetState(_ call: CAPPluginCall) {
+        DispatchQueue.main.async {
+            let m = CodeBlueLiveModel.shared
+            call.resolve(Self.codeBlueDict(m.state, receivedAt: m.lastWatchUpdate))
+        }
+    }
+
+    /// Scribe an event from the web screen into the same record the watch feeds
+    /// (kind: shock | drug | rhythm | rosc). Ignored unless a code is running.
+    @objc func codeBlueLog(_ call: CAPPluginCall) {
+        guard let kind = call.getString("kind") else { call.reject("kind required"); return }
+        let label = String((call.getString("label") ?? "").prefix(80))
+        DispatchQueue.main.async {
+            let m = CodeBlueLiveModel.shared
+            switch kind {
+            case "shock": m.logShock(energyJ: call.getInt("energyJ"))
+            case "drug": m.logDrug(label)
+            case "rhythm": m.logRhythm(label)
+            case "rosc": m.logROSC()
+            default: call.reject("unknown kind"); return
+            }
+            call.resolve()
+        }
+    }
+
+    // Native Code Blue cues that keep playing with the screen locked (CodeBlueAudioEngine).
+    @objc func audioBegin(_ call: CAPPluginCall) {
+        call.resolve(["active": CodeBlueAudioEngine.shared.begin()])
+    }
+    @objc func audioEnd(_ call: CAPPluginCall) {
+        CodeBlueAudioEngine.shared.end(); call.resolve()
+    }
+    @objc func audioConfigure(_ call: CAPPluginCall) {
+        CodeBlueAudioEngine.shared.configure(bpm: call.getInt("bpm"), voiceRate: call.getDouble("voiceRate"), lowAlert: call.getBool("lowAlert"))
+        call.resolve()
+    }
+    @objc func audioMutes(_ call: CAPPluginCall) {
+        CodeBlueAudioEngine.shared.setMutes(voice: call.getBool("voice"), metronome: call.getBool("metronome"), breaths: call.getBool("breaths"))
+        call.resolve()
+    }
+    @objc func audioMetronome(_ call: CAPPluginCall) {
+        CodeBlueAudioEngine.shared.setMetronome(on: call.getBool("on") ?? false); call.resolve()
+    }
+    @objc func audioBreaths(_ call: CAPPluginCall) {
+        CodeBlueAudioEngine.shared.setBreaths(on: call.getBool("on") ?? false, intervalSeconds: call.getDouble("intervalSeconds") ?? 6)
+        call.resolve()
+    }
+    @objc func audioTone(_ call: CAPPluginCall) {
+        guard let kind = call.getString("kind") else { call.reject("kind required"); return }
+        if kind == "resetOverdue" { CodeBlueAudioEngine.shared.resetOverdue() } else { CodeBlueAudioEngine.shared.playTone(kind) }
+        call.resolve()
+    }
+    @objc func audioSpeak(_ call: CAPPluginCall) {
+        guard let text = call.getString("text") else { call.reject("text required"); return }
+        CodeBlueAudioEngine.shared.speak(text); call.resolve()
+    }
+    @objc func audioSetCues(_ call: CAPPluginCall) {
+        let raw = call.getArray("cues", JSObject.self) ?? []
+        let cues = raw.compactMap { o -> CodeBlueAudioEngine.Cue? in
+            guard let at = o["atMs"] as? Double ?? (o["atMs"] as? Int).map(Double.init) else { return nil }
+            return CodeBlueAudioEngine.Cue(atMs: at, speak: o["speak"] as? String, tone: o["tone"] as? String)
+        }
+        CodeBlueAudioEngine.shared.setCues(cues); call.resolve()
+    }
 
     @objc func openCodeBlue(_ call: CAPPluginCall) {
         DispatchQueue.main.async { [weak self] in
