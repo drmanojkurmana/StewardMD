@@ -286,6 +286,8 @@ if [ -f prep/taxonomy.json ]; then
   # Interactive figures (fig-viewer.js): self-contained pages built with the Anima kit (MIT), dark + light, with their licence.
   if [ -d prep/figures ]; then
     mkdir -p "$WWW/prep/figures" && cp prep/figures/*.html prep/figures/figures.json prep/figures/ANIMA-LICENSE.txt prep/figures/ANATOMY-LICENSE.txt "$WWW/prep/figures/"
+    # Mechanism mastery (fig-viewer.js "Steps" sheet): Trigger, Target, Mechanism, Manifestation, Intervention per figure.
+    [ -f prep/figures/mastery.json ] && cp prep/figures/mastery.json "$WWW/prep/figures/"
   fi
   # Cards (prep-flash.js): the committed pilot decks and their index (occlusion images come from prep/lessons/media).
   # A full generated set (prep/cards/gen) goes to R2, not here; tools/prep-cards.mjs work files never ship.
