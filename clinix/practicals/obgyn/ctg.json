@@ -1,0 +1,834 @@
+{
+  "v": 1,
+  "subject": "obgyn",
+  "section": "ctg",
+  "title": {
+    "en": "Cardiotocography"
+  },
+  "intro": {
+    "en": "Comprehensive guide to intrapartum electronic fetal monitoring covering equipment, DR C BRAVADO interpretation framework, physiological abnormalities, and NICE/RCOG clinical management guidelines."
+  },
+  "source": {
+    "book": "obg-practical-guide",
+    "section": "IV"
+  },
+  "items": [
+    {
+      "id": "obg.ctg.monitor",
+      "kind": "device",
+      "title": {
+        "en": "Cardiotocograph monitor"
+      },
+      "aka": [
+        "Electronic fetal monitor",
+        "CTG machine",
+        "EFM apparatus"
+      ],
+      "group": "Cardiotocography",
+      "summary": "Continuous electronic apparatus used to simultaneously record fetal cardiac activity and uterine contractions throughout antepartum surveillance and active labour.",
+      "blocks": [
+        {
+          "title": "Components and mechanism",
+          "bullets": [
+            "Continuous electronic fetal monitoring records fetal heart rate alongside uterine muscular contractions.",
+            "Ultrasound Doppler transducer placed over the maternal abdomen detects moving cardiac valves, calculating heart rate via autocorrelation.",
+            "Tocodynamometer pressure transducer positioned over the uterine fundus detects changes in abdominal wall displacement during contractions.",
+            "Dual-channel recording console prints fetal heart rate in the upper pane and uterine tone in the lower pane on calibrated paper moving at standard speed.",
+            "Maternal event marker button allows the pregnant woman to flag perceived fetal movements, producing an upward deflection on the paper printout."
+          ]
+        },
+        {
+          "title": "External versus internal cardiotocography",
+          "table": {
+            "head": [
+              "Parameter",
+              "External CTG",
+              "Internal CTG"
+            ],
+            "rows": [
+              [
+                "Transducers",
+                "Both transducers secured externally across maternal abdomen (fundus and lower quadrant)",
+                "Intrauterine pressure catheter in uterine cavity plus fetal scalp electrode attached to fetal head"
+              ],
+              [
+                "Invasiveness",
+                "Completely non-invasive monitoring method",
+                "Invasive procedure carrying minor fetal scalp trauma"
+              ],
+              [
+                "Membranes",
+                "Usable with either intact or ruptured amniotic membranes",
+                "Requires ruptured membranes for lead attachment"
+              ],
+              [
+                "Cervical dilatation",
+                "Applicable irrespective of cervical dilatation or effacement",
+                "Requires partial cervical dilatation to introduce catheter and lead"
+              ],
+              [
+                "Timing of use",
+                "Suitable for both antenatal assessment and intrapartum monitoring",
+                "Strictly restricted to the intrapartum setting"
+              ],
+              [
+                "Clinical expertise",
+                "Simple and rapid to initiate with standard training",
+                "Requires formal clinical training and aseptic technique"
+              ],
+              [
+                "Maternal infections",
+                "Completely safe in maternal blood-borne viruses (HIV, HBV, HCV, HSV)",
+                "Contraindicated due to high risk of vertical transmission"
+              ],
+              [
+                "Signal accuracy",
+                "Susceptible to maternal movement and obesity; maternal pulse may be mistaken for fetal",
+                "Direct fetal ECG gives continuous, precise R-R interval detection"
+              ],
+              [
+                "Patient comfort",
+                "Non-invasive and agreeable without requiring internal examination",
+                "May cause hesitation or discomfort from vaginal exam and lead fixation"
+              ],
+              [
+                "Cost",
+                "Economical with reusable transducers",
+                "Expensive due to single-use disposable internal leads"
+              ]
+            ]
+          }
+        },
+        {
+          "title": "Indications for monitoring",
+          "groups": [
+            {
+              "label": "Antenatal maternal risk factors",
+              "bullets": [
+                "Pre-existing diabetes mellitus or gestational diabetes mellitus (GDM).",
+                "Chronic hypertension, gestational hypertension, or pre-eclampsia.",
+                "Previous lower segment caesarean section (LSCS).",
+                "Recurrent antepartum haemorrhage (APH).",
+                "Maternal obesity with body mass index > 35 kg/m2.",
+                "Prolonged pre-labour rupture of membranes."
+              ]
+            },
+            {
+              "label": "Antenatal fetal risk factors",
+              "bullets": [
+                "Multiple pregnancy (twins, higher-order multiples).",
+                "Fetal growth restriction (IUGR/FGR).",
+                "Polyhydramnios or oligohydramnios.",
+                "Breech presentation or unstable fetal lie.",
+                "Maternally reported reduced fetal movements over the preceding 24 hours."
+              ]
+            },
+            {
+              "label": "Intrapartum risk factors",
+              "bullets": [
+                "Augmented or induced labour with intravenous oxytocin.",
+                "Labour following epidural analgesia.",
+                "Fresh vaginal bleeding presenting during labour.",
+                "Maternal pyrexia or unexplained maternal tachycardia.",
+                "Suspected chorioamnionitis or intra-amniotic infection.",
+                "Meconium-stained amniotic fluid.",
+                "Abnormal fetal heart rate auscultated via Pinard stethoscope or handheld Doppler."
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Advantages and disadvantages",
+          "groups": [
+            {
+              "label": "Advantages",
+              "bullets": [
+                "Straightforward to execute with minimal operator preparation.",
+                "Provides continuous permanent graphic documentation valuable for medico-legal verification.",
+                "Associated with a significant decrease in the occurrence of early neonatal seizures."
+              ]
+            },
+            {
+              "label": "Disadvantages and limitations",
+              "bullets": [
+                "Time consuming and restricts maternal ambulation during continuous recording.",
+                "High false-positive rate of roughly 70% for predicting fetal hypoxia.",
+                "Low clinical specificity for true fetal acidosis, leading to unnecessary caesarean births.",
+                "Generates parental anxiety and distress regarding fetal status.",
+                "Highly subjective visual analysis with wide inter-observer and intra-observer inconsistency.",
+                "Cannot anticipate abrupt cataclysmic events such as cord prolapse or uterine rupture.",
+                "Weak association with long-term childhood neurodevelopmental outcomes.",
+                "Provides limited clinical benefit without adjunct fetal blood sampling (FBS) facilities."
+              ]
+            }
+          ]
+        }
+      ],
+      "viva": [
+        {
+          "q": "What two physiological parameters does a cardiotocograph monitor simultaneously?",
+          "a": "It records the fetal heart rate using a pulsed Doppler ultrasound transducer and the frequency and duration of uterine contractions using an external tocodynamometer."
+        },
+        {
+          "q": "Why is internal cardiotocography contraindicated in a mother who is seropositive for HIV or Hepatitis B?",
+          "a": "Attaching the spiral fetal scalp electrode causes microscopic breach of the fetal epidermis, markedly escalating the risk of vertical pathogen transmission to the fetus."
+        },
+        {
+          "q": "What is the principal clinical disadvantage of continuous intrapartum electronic fetal monitoring?",
+          "a": "It has an elevated false-positive rate of approximately 70% for fetal hypoxaemia, which increases operative interventions without improving long-term neurological outcomes."
+        }
+      ],
+      "image": {
+        "brief": "Modern electronic fetal monitor console resting on an equipment trolley, displaying dual digital rate readouts, paper strip chart dispensing from the front recorder, ultrasound transducer, and tocodynamometer on a plain neutral background.",
+        "file": null,
+        "mediaId": null
+      },
+      "src": {
+        "book": "obg-practical-guide",
+        "section": "IV",
+        "no": 1
+      },
+      "review": "ai_drafted"
+    },
+    {
+      "id": "obg.ctg.interpretation-dr-c-bravado",
+      "kind": "method",
+      "title": {
+        "en": "Systematic CTG interpretation: DR C BRAVADO method"
+      },
+      "aka": [
+        "DR C BRAVADO mnemonic",
+        "ALSO CTG systematic review",
+        "Intrapartum CTG interpretation framework"
+      ],
+      "group": "Cardiotocography",
+      "summary": "Structured assessment mnemonic devised by Advanced Life Support in Obstetrics (ALSO) ensuring rigorous, sequential evaluation of intrapartum cardiotocograph traces.",
+      "blocks": [
+        {
+          "title": "The DR C BRAVADO framework",
+          "bullets": [
+            "D (Define): Establish the baseline clinical context, reason for monitoring, and verify paper speed calibration.",
+            "R (Risk): Determine whether the pregnancy has antenatal or intrapartum high-risk or low-risk characteristics.",
+            "C (Contractions): Count uterine contractions across a 10-minute window, noting frequency, duration, strength, and resting tone.",
+            "B (Baseline): Establish the average resting fetal heart rate over a 10-minute window between contractions, ignoring accelerations and decelerations.",
+            "R (Rate): Check that baseline resting rate falls within the normal physiological bracket of 100 to 160 beats per minute.",
+            "V (Variability): Measure the amplitude of minor beat-to-beat baseline fluctuations over a 1-minute interval (normal > 5 bpm).",
+            "A (Accelerations): Identify transient heart rate increases above baseline, reflecting a healthy, neurologically responsive fetus.",
+            "D (Decelerations): Detect episodic transient dips below baseline rate and classify their timing (early, late, variable, or prolonged).",
+            "O (Overall assessment): Synthesize all physiological features into a final clinical judgment (reassuring, non-reassuring, or abnormal) to formulate the plan."
+          ]
+        },
+        {
+          "title": "Clinical points to remember",
+          "bullets": [
+            "A cardiotocograph trace should never be judged in isolation; it must be interpreted alongside maternal observations, labour progress, and parity.",
+            "Contraction frequency is recorded as the number of contractions per 10 minutes; tachysystole is defined as more than 5 contractions in 10 minutes.",
+            "Baseline rate determination requires a stable trace segment of at least 10 minutes free from contractions and episodic changes."
+          ]
+        }
+      ],
+      "viva": [
+        {
+          "q": "What does the mnemonic DR C BRAVADO stand for in CTG interpretation?",
+          "a": "Define, Risk, Contractions, Baseline Rate, Variability, Accelerations, Decelerations, and Overall assessment."
+        },
+        {
+          "q": "How is uterine contraction frequency evaluated under the DR C BRAVADO approach?",
+          "a": "Contraction frequency is quantified as the total number of contractions occurring over a rolling 10-minute period; normal labour typically demonstrates 3 to 4 contractions per 10 minutes."
+        },
+        {
+          "q": "Why is the final letter O in DR C BRAVADO critical?",
+          "a": "Overall assessment requires the clinician to combine all separate features into a definitive category and establish a prompt management plan."
+        }
+      ],
+      "image": {
+        "brief": "Educational flow chart showing the nine letters of the DR C BRAVADO mnemonic with concise step-by-step interpretation instructions arranged sequentially on a clean white background.",
+        "file": null,
+        "mediaId": null
+      },
+      "src": {
+        "book": "obg-practical-guide",
+        "section": "IV",
+        "no": 1
+      },
+      "review": "ai_drafted"
+    },
+    {
+      "id": "obg.ctg.baseline-heart-rate",
+      "kind": "topic",
+      "title": {
+        "en": "Baseline fetal heart rate and abnormalities"
+      },
+      "aka": [
+        "Baseline FHR",
+        "Fetal tachycardia and bradycardia"
+      ],
+      "group": "Cardiotocography",
+      "summary": "Evaluation of the resting mean fetal heart rate between uterine contractions, identifying normal physiological ranges and the differential diagnosis of baseline tachycardia and bradycardia.",
+      "blocks": [
+        {
+          "title": "Normal baseline rate and definitions",
+          "bullets": [
+            "Normal resting baseline rate ranges between 100 and 160 beats per minute (bpm).",
+            "Baseline tachycardia is defined as a resting heart rate sustained above 160 bpm for at least 10 minutes.",
+            "Severe baseline tachycardia is defined as a resting heart rate exceeding 180 bpm.",
+            "Baseline bradycardia is defined as a resting heart rate sustained below 100 bpm for at least 10 minutes.",
+            "A single prolonged deceleration exceeding 3 minutes in duration is classified as acute fetal bradycardia."
+          ]
+        },
+        {
+          "title": "Causes of baseline tachycardia",
+          "groups": [
+            {
+              "label": "Maternal causes",
+              "bullets": [
+                "Maternal fever or chorioamnionitis and systemic sepsis.",
+                "Maternal dehydration or prolonged ketosis in labour.",
+                "Maternal psychological anxiety or severe acute pain.",
+                "Maternal chronic or acute anaemia.",
+                "Maternal hyperthyroidism or thyroid storm.",
+                "Incidental maternal tachycardia.",
+                "Epidural analgesia.",
+                "Medications, notably beta-sympathomimetic tocolytics such as ritodrine hydrochloride, and anticholinergic agents."
+              ]
+            },
+            {
+              "label": "Fetal causes",
+              "bullets": [
+                "Early fetal hypoxia and hypoxaemia triggering compensatory sympathetic stimulation.",
+                "Extreme prematurity due to incomplete parasympathetic cardiac autonomic maturation.",
+                "Fetal tachyarrhythmias (such as supraventricular tachycardia).",
+                "Decompensated congestive cardiac failure.",
+                "Fetal anaemia secondary to isoimmunisation or feto-maternal hemorrhage.",
+                "Vigorous active fetal somatic movements."
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Causes of baseline bradycardia",
+          "groups": [
+            {
+              "label": "Maternal causes",
+              "bullets": [
+                "Maternal supine hypotensive syndrome due to inferior vena cava compression.",
+                "Acute systemic hypotension following epidural or spinal sympathetic blockade.",
+                "Maternal epileptic seizures or eclamptic convulsions.",
+                "Post-dated or post-term gestation.",
+                "Local anaesthetic toxicity following paracervical infiltration or accidental intravenous entry.",
+                "Administration of narcotic analgesic agents."
+              ]
+            },
+            {
+              "label": "Fetal causes",
+              "bullets": [
+                "Severe, prolonged, or decompensated fetal hypoxia and metabolic acidosis.",
+                "Acute umbilical cord prolapse or prolonged cord occlusion.",
+                "Congenital complete atrioventricular heart block, frequently associated with maternal autoimmune anti-Ro/SSA antibodies.",
+                "Sustained fetal head compression during late second stage of labour.",
+                "Occipitoposterior malposition.",
+                "Transverse or oblique fetal lie."
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Clinical points to remember",
+          "bullets": [
+            "Tachycardia accompanied by reduced variability and decelerations indicates progressive fetal metabolic acidaemia.",
+            "Isolated mild tachycardia with normal variability and accelerations is usually maternal pyrexia or dehydration; rehydrate and administer paracetamol.",
+            "Acute bradycardia lasting over 3 minutes requires immediate intrauterine resuscitation and urgent preparations for operative delivery."
+          ]
+        }
+      ],
+      "viva": [
+        {
+          "q": "What is the normal baseline fetal heart rate range on an intrapartum CTG?",
+          "a": "The physiological baseline heart rate is 100 to 160 beats per minute established over a 10-minute segment free from uterine contractions."
+        },
+        {
+          "q": "Which maternal medications commonly cause fetal baseline tachycardia?",
+          "a": "Beta-sympathomimetics such as ritodrine hydrochloride and terbutaline, and anticholinergic drugs like atropine cause fetal tachycardia through transplacental adrenergic stimulation."
+        },
+        {
+          "q": "What cardiac abnormality should be suspected when persistent fetal bradycardia occurs with completely normal variability?",
+          "a": "Congenital complete atrioventricular heart block, frequently linked to maternal autoimmune conditions with anti-Ro/SSA or anti-La/SSB antibodies."
+        }
+      ],
+      "image": {
+        "brief": null,
+        "file": null,
+        "mediaId": null
+      },
+      "src": {
+        "book": "obg-practical-guide",
+        "section": "IV",
+        "no": 1
+      },
+      "review": "ai_drafted"
+    },
+    {
+      "id": "obg.ctg.baseline-variability",
+      "kind": "topic",
+      "title": {
+        "en": "Baseline variability and abnormalities"
+      },
+      "aka": [
+        "FHR variability",
+        "Reduced fetal heart rate variability",
+        "Saltatory variability"
+      ],
+      "group": "Cardiotocography",
+      "summary": "Analysis of the minor beat-to-beat fluctuations in the baseline fetal heart rate reflecting sympathetic-parasympathetic autonomic equilibrium and fetal cerebral oxygenation.",
+      "blocks": [
+        {
+          "title": "Normal variability and classification",
+          "bullets": [
+            "Baseline variability denotes the amplitude bandwidth of minor heart rate fluctuations recorded across a 1-minute window, excluding accelerations and decelerations.",
+            "Normal variability is defined as an amplitude of greater than 5 beats per minute (> 5 bpm), demonstrating an intact autonomic nervous system.",
+            "Reduced (non-reassuring) variability is defined as an amplitude of less than 5 bpm (< 5 bpm) lasting between 30 and 90 minutes.",
+            "Absent or severely reduced (abnormal) variability is defined as an amplitude of less than 5 bpm persisting for greater than 90 minutes (or > 30 minutes in the presence of decelerations).",
+            "Saltatory (exaggerated) variability denotes an excessively wide amplitude bandwidth, which may indicate acute fetal autonomic instability or cord compression."
+          ]
+        },
+        {
+          "title": "Etiology of abnormal variability",
+          "groups": [
+            {
+              "label": "Maternal pharmacological causes",
+              "bullets": [
+                "Central nervous system depressants including opioids (pethidine, morphine).",
+                "Benzodiazepines (diazepam, lorazepam).",
+                "Magnesium sulphate (MgSO4) administered for pre-eclampsia or eclampsia neuroprotection.",
+                "General anaesthetic inhalation agents.",
+                "Local anaesthetics (paracervical or epidural infiltration)."
+              ]
+            },
+            {
+              "label": "Fetal physiological causes",
+              "bullets": [
+                "Normal fetal quiet sleep state (typically resolving spontaneously within a brief resting episode).",
+                "Prematurity with immature development of the cardiac autonomic pacemakers and vagal pathways."
+              ]
+            },
+            {
+              "label": "Fetal pathological causes",
+              "bullets": [
+                "Fetal cerebral hypoxia and advancing metabolic acidosis causing central depression.",
+                "Structural central nervous system malformations or intracranial trauma.",
+                "Congenital cardiac structural malformations.",
+                "Antecedent neurological injury or impending intrauterine fetal demise."
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Clinical points to remember",
+          "bullets": [
+            "Normal baseline variability (> 5 bpm) is the most reassuring feature on a CTG, reliably confirming that the fetus is non-acidotic.",
+            "Reduced variability persisting beyond an ordinary resting episode without maternal sedation is unlikely to be physiological sleep; reassessment and stimulation are indicated.",
+            "The combination of reduced variability (< 5 bpm) and late or atypical variable decelerations denotes severe fetal metabolic acidaemia requiring urgent delivery."
+          ]
+        }
+      ],
+      "viva": [
+        {
+          "q": "What is the normal baseline variability on an intrapartum CTG?",
+          "a": "Normal baseline variability is greater than 5 beats per minute over a 1-minute trace interval, confirming intact cerebral oxygenation."
+        },
+        {
+          "q": "How does a normal fetal sleep cycle differ clinically from pathological reduced variability?",
+          "a": "Fetal sleep produces reduced variability that is transient and resolves spontaneously; pathological depression persists and is accompanied by decelerations."
+        },
+        {
+          "q": "Which maternal drugs frequently cause transient loss of fetal heart rate variability?",
+          "a": "Central nervous system depressants including pethidine, morphine, diazepam, and magnesium sulphate readily cross the placenta and suppress variability."
+        }
+      ],
+      "image": {
+        "brief": null,
+        "file": null,
+        "mediaId": null
+      },
+      "src": {
+        "book": "obg-practical-guide",
+        "section": "IV",
+        "no": 1
+      },
+      "review": "ai_drafted"
+    },
+    {
+      "id": "obg.ctg.early-deceleration",
+      "kind": "topic",
+      "title": {
+        "en": "Early decelerations"
+      },
+      "aka": [
+        "Early FHR decelerations",
+        "Head compression decelerations"
+      ],
+      "group": "Cardiotocography",
+      "summary": "Symmetrical, gradual transient dips in fetal heart rate coinciding synchronously with uterine contractions, caused by physiological compression of the fetal head.",
+      "blocks": [
+        {
+          "title": "Morphology and characteristics",
+          "bullets": [
+            "Symmetrical, gradual decline in fetal heart rate that forms the exact mirror image of the uterine contraction curve.",
+            "Synchronised onset: the heart rate begins falling concurrently with the commencement of the uterine contraction.",
+            "Concordant nadir: the lowest point (nadir) of the heart rate dip coincides precisely with the peak (acme) of the uterine contraction.",
+            "Prompt recovery: the fetal heart rate recovers fully back to baseline by the end of the contraction.",
+            "Preserved inter-contraction baseline: normal resting baseline rate and normal variability (> 5 bpm) are maintained between contractions."
+          ]
+        },
+        {
+          "title": "Pathophysiology and timing",
+          "bullets": [
+            "Mechanical pressure against the fetal skull during uterine contractions increases intracranial pressure, eliciting vagal parasympathetic discharge and reflex bradycardia.",
+            "The reflex slows cardiac pacing without causing tissue hypoxaemia or metabolic acidosis.",
+            "Typically observed in the late first stage of labour and early second stage as the presenting part engages and descends into the pelvic canal."
+          ]
+        },
+        {
+          "title": "Clinical implications and management",
+          "bullets": [
+            "Considered physiological and uncomplicated when resting baseline rate and baseline variability remain reassuring.",
+            "Does not signify fetal hypoxaemia or acidosis; immediate operative intervention or delivery is not required.",
+            "Continue regular cardiotocographic surveillance while checking for physical impediment to fetal descent, such as a distended maternal bladder."
+          ]
+        }
+      ],
+      "viva": [
+        {
+          "q": "What is the physiological mechanism responsible for early decelerations?",
+          "a": "Mechanical compression of the fetal head increases intracranial pressure and stimulates the vagus nerve, causing a transient benign reflex bradycardia that mirrors the contraction."
+        },
+        {
+          "q": "How can an examiner differentiate an early deceleration from a late deceleration on a CTG printout?",
+          "a": "In an early deceleration, the nadir aligns with the contraction peak and recovers with contraction offset; in a late deceleration, the nadir and recovery lag after the contraction."
+        },
+        {
+          "q": "What clinical intervention is indicated when early decelerations are noted in labour with normal variability?",
+          "a": "Immediate intervention is not needed; continue routine CTG monitoring and confirm that maternal bladder distension is not obstructing descending presenting part."
+        }
+      ],
+      "image": {
+        "brief": null,
+        "file": null,
+        "mediaId": null
+      },
+      "src": {
+        "book": "obg-practical-guide",
+        "section": "IV",
+        "no": 1
+      },
+      "review": "ai_drafted"
+    },
+    {
+      "id": "obg.ctg.late-deceleration",
+      "kind": "topic",
+      "title": {
+        "en": "Late decelerations"
+      },
+      "aka": [
+        "Late FHR decelerations",
+        "Uteroplacental insufficiency decelerations"
+      ],
+      "group": "Cardiotocography",
+      "summary": "Gradual transient decreases in fetal heart rate lagging after uterine contractions, characteristically reflecting compromised uteroplacental perfusion and fetal hypoxaemia.",
+      "blocks": [
+        {
+          "title": "Morphology and characteristics",
+          "bullets": [
+            "Typically exhibits a broad, shallow, symmetrical U-shaped contour.",
+            "Delayed onset: the heart rate starts declining after the uterine contraction has already commenced.",
+            "Delayed nadir: the lowest point (nadir) of the deceleration occurs after the peak of the uterine contraction.",
+            "Delayed offset: the fetal heart rate does not return to baseline until well after the uterine contraction has ceased.",
+            "Prolonged recovery: the deceleration takes substantially longer to resolve compared to a physiological early deceleration.",
+            "Late decelerations occurring in > 50% of contractions for up to 30 minutes are non-reassuring; persisting over 30 minutes is abnormal."
+          ]
+        },
+        {
+          "title": "Etiology",
+          "bullets": [
+            "Maternal hypotension: supine inferior vena caval compression (supine hypotensive syndrome), sympathetic vasomotor blockade following epidural analgesia.",
+            "Uteroplacental insufficiency: fetal growth restriction (IUGR), placental abruption, post-term pregnancy, maternal vascular disease.",
+            "Uterine tachysystole / hyperstimulation: excessive intravenous oxytocin titration or prostaglandin (PGE2) administration leading to inadequate intervillous recovery."
+          ]
+        },
+        {
+          "title": "Clinical implications and intrauterine resuscitation",
+          "bullets": [
+            "Notify the consultant obstetrician immediately; structured monitoring and prompt intrauterine resuscitation are mandatory.",
+            "Position the mother in the full left lateral tilt to relieve aortocaval compression and optimize venous return.",
+            "Administer an intravenous crystalloid fluid bolus; if hypotension persists after epidural, use vasopressors such as intravenous ephedrine.",
+            "Reduce or immediately stop intravenous oxytocin infusion.",
+            "Administer acute tocolytic therapy (such as subcutaneous terbutaline) if uterine hyperstimulation or hypertonus is present.",
+            "Perform fetal blood sampling (FBS) or prepare for expedited delivery within 30 minutes if late decelerations fail to resolve."
+          ]
+        }
+      ],
+      "viva": [
+        {
+          "q": "What is the pathological mechanism producing late decelerations in labour?",
+          "a": "Uteroplacental insufficiency causes transient fetal hypoxaemia during contractions, triggering chemoreceptor-mediated vagal bradycardia and direct myocardial depression lagging behind the contraction."
+        },
+        {
+          "q": "What are the first three immediate steps in intrauterine resuscitation for late decelerations?",
+          "a": "Turn the mother onto her left side, discontinue any oxytocin infusion immediately, and administer a rapid intravenous crystalloid fluid bolus."
+        },
+        {
+          "q": "What threshold defines late decelerations as abnormal rather than non-reassuring?",
+          "a": "Late decelerations occurring in > 50% of contractions persisting for over 30 minutes and failing to respond to conservative resuscitation are classified as abnormal."
+        }
+      ],
+      "image": {
+        "brief": null,
+        "file": null,
+        "mediaId": null
+      },
+      "src": {
+        "book": "obg-practical-guide",
+        "section": "IV",
+        "no": 1
+      },
+      "review": "ai_drafted"
+    },
+    {
+      "id": "obg.ctg.variable-deceleration",
+      "kind": "topic",
+      "title": {
+        "en": "Variable decelerations"
+      },
+      "aka": [
+        "Variable FHR decelerations",
+        "Cord compression decelerations"
+      ],
+      "group": "Cardiotocography",
+      "summary": "Abrupt, episodic decreases in fetal heart rate showing variable morphology and timing unrelated to uterine contractions, primarily caused by transient umbilical cord compression.",
+      "blocks": [
+        {
+          "title": "Morphology and defining features",
+          "bullets": [
+            "Displays variable, inconsistent contour, depth, and duration with no constant relationship to uterine contractions.",
+            "Characterized by rapid descent (< 30 seconds to nadir) and rapid recovery, often flanked by compensatory accelerations ('shoulders').",
+            "Uncomplicated variable decelerations: heart rate drops by < 60 bpm and takes < 60 seconds to recover, with preserved baseline variability.",
+            "Non-reassuring variable decelerations: drop < 60 bpm and recovery < 60 seconds lasting up to 30 minutes (or > 90 minutes) in > 50% of contractions; or drop >= 60 bpm and recovery >= 60 seconds.",
+            "Abnormal variable decelerations: non-reassuring variable decelerations persisting after 30 minutes of conservative treatment in > 50% of contractions."
+          ]
+        },
+        {
+          "title": "Etiology",
+          "bullets": [
+            "Mechanical compression of the umbilical cord between the fetal body and the uterine wall during contractions or movements.",
+            "Overt umbilical cord prolapse or occult cord presentation.",
+            "Nuchal cord (umbilical cord coiled snugly around the fetal neck).",
+            "Severe oligohydramnios resulting in loss of protective amniotic fluid buffer.",
+            "Reduced Wharton's jelly volume within the umbilical cord sheath, predisposing vessels to collapse."
+          ]
+        },
+        {
+          "title": "Management and clinical escalation",
+          "bullets": [
+            "Notify the consultant obstetrician; structured clinical assessment and management are required.",
+            "Perform urgent sterile vaginal examination to inspect and palpate for umbilical cord prolapse.",
+            "Change maternal posture (left lateral, right lateral, or knee-chest position) to relieve cord entrapment.",
+            "Consider amnioinfusion in labour complicated by severe oligohydramnios and persistent variable decelerations.",
+            "Perform fetal blood sampling (FBS) to check acid-base status or expedite delivery if decelerations become atypical and persistent."
+          ]
+        }
+      ],
+      "viva": [
+        {
+          "q": "What is the primary etiology of variable decelerations on a CTG?",
+          "a": "Transient umbilical cord compression, which abruptly increases fetal systemic vascular resistance, stimulating baroreceptors and triggering rapid vagal reflex bradycardia."
+        },
+        {
+          "q": "What features distinguish an uncomplicated variable deceleration from an atypical one?",
+          "a": "Uncomplicated decelerations drop by < 60 bpm, recover in < 60 seconds, and retain baseline variability; atypical decelerations drop >= 60 bpm, take >= 60 seconds, or lose variability."
+        },
+        {
+          "q": "What initial clinical examination must be performed when severe variable decelerations suddenly appear?",
+          "a": "An immediate sterile vaginal examination to exclude umbilical cord prolapse or occult presentation below the descending fetal head."
+        }
+      ],
+      "image": {
+        "brief": null,
+        "file": null,
+        "mediaId": null
+      },
+      "src": {
+        "book": "obg-practical-guide",
+        "section": "IV",
+        "no": 1
+      },
+      "review": "ai_drafted"
+    },
+    {
+      "id": "obg.ctg.fhr-feature-classification",
+      "kind": "chart",
+      "title": {
+        "en": "Categorisation of fetal heart rate features (NICE and RCOG)"
+      },
+      "aka": [
+        "CTG feature classification",
+        "NICE 2014 intrapartum FHR features",
+        "RCOG intrapartum CTG guidelines"
+      ],
+      "group": "Cardiotocography",
+      "summary": "Standardised clinical reference matrix categorising baseline heart rate, baseline variability, and decelerations into reassuring, non-reassuring, and abnormal tiers based on NICE and RCOG guidelines.",
+      "blocks": [
+        {
+          "title": "Fetal heart rate feature classification matrix",
+          "table": {
+            "head": [
+              "Feature",
+              "Normal / Reassuring",
+              "Non-reassuring",
+              "Abnormal"
+            ],
+            "rows": [
+              [
+                "Baseline fetal heart rate (bpm)",
+                "100 to 160",
+                "161 to 180",
+                "> 180 or < 100"
+              ],
+              [
+                "Baseline variability (bpm)",
+                "> 5",
+                "< 5 lasting for 30 to 90 minutes",
+                "< 5 lasting for > 30 minutes (or persistent)"
+              ],
+              [
+                "Decelerations",
+                "None OR early decelerations",
+                "Variable decelerations with drop < 60 bpm, recovery < 60s in > 50% contractions; or late decelerations up to 30 min in > 50% contractions",
+                "Persistent non-reassuring variable decelerations after 30 min treatment in > 50% contractions; late decelerations > 30 min; or single prolonged deceleration > 3 minutes"
+              ]
+            ]
+          }
+        },
+        {
+          "title": "Evaluation of accelerations",
+          "bullets": [
+            "Accelerations are defined as transient increases in fetal heart rate above baseline.",
+            "The presence of accelerations in an intrapartum trace is a reassuring sign of fetal autonomic stability and absence of metabolic acidosis.",
+            "The absence of accelerations in an otherwise normal intrapartum cardiotocograph is not by itself predictive of fetal hypoxaemia or acidosis."
+          ]
+        },
+        {
+          "title": "Points to remember",
+          "bullets": [
+            "Single prolonged deceleration lasting greater than 3 minutes is categorized as abnormal and mandates immediate intrauterine resuscitation and preparations for delivery.",
+            "Reassessment must occur whenever clinical parameters change or conservative corrective maneuvers are introduced.",
+            "Individual feature grading forms the basis for overall trace categorization into reassuring, suspicious, or pathological states."
+          ]
+        }
+      ],
+      "viva": [
+        {
+          "q": "How is baseline fetal heart rate categorized under RCOG and NICE guidelines?",
+          "a": "Normal is 100 to 160 bpm; non-reassuring is 161 to 180 bpm; abnormal is either baseline tachycardia > 180 bpm or baseline bradycardia < 100 bpm."
+        },
+        {
+          "q": "What duration of baseline variability < 5 bpm upgrades the feature from non-reassuring to abnormal?",
+          "a": "Variability < 5 bpm lasting 30 to 90 minutes is non-reassuring; if it persists beyond 90 minutes (or > 30 minutes with decelerations), it is categorized as abnormal."
+        },
+        {
+          "q": "What is the clinical significance of absent accelerations on an otherwise normal intrapartum CTG?",
+          "a": "In labour, the absence of accelerations on an otherwise normal trace is common and does not by itself indicate fetal acidosis or hypoxaemia."
+        }
+      ],
+      "image": {
+        "brief": null,
+        "file": null,
+        "mediaId": null
+      },
+      "src": {
+        "book": "obg-practical-guide",
+        "section": "IV",
+        "no": 1
+      },
+      "review": "ai_drafted"
+    },
+    {
+      "id": "obg.ctg.trace-classification",
+      "kind": "chart",
+      "title": {
+        "en": "Categorisation of CTG traces and clinical management (NICE and RCOG)"
+      },
+      "aka": [
+        "CTG trace classification",
+        "NICE CTG trace interpretation",
+        "Intrapartum CTG management algorithm"
+      ],
+      "group": "Cardiotocography",
+      "summary": "Integrated classification algorithm synthesizing individual fetal heart rate features to grade overall cardiotocograph traces into normal, suspicious, and pathological tiers with mandated clinical interventions.",
+      "blocks": [
+        {
+          "title": "Trace categorization and clinical management algorithm",
+          "table": {
+            "head": [
+              "Category",
+              "Criteria / Feature combination",
+              "Clinical interpretation and action plan"
+            ],
+            "rows": [
+              [
+                "Normal / Reassuring",
+                "All three features (baseline rate, variability, decelerations) are normal/reassuring",
+                "Normal CTG pattern indicating a healthy fetus; continue standard CTG monitoring and routine intrapartum care."
+              ],
+              [
+                "Non-reassuring / Suspicious",
+                "One feature is non-reassuring and two features are normal/reassuring",
+                "Increased risk of acidosis; identify causes, give IV fluids, left lateral tilt, paracetamol for fever, reduce or stop oxytocin, inform consultant."
+              ],
+              [
+                "Abnormal / Pathological",
+                "One feature is abnormal OR two features are non-reassuring",
+                "Significant acidosis risk; urgent resuscitation, fluids, lateral tilt, stop oxytocin, consider tocolytics, offer FBS, act within 30 min, expedite delivery."
+              ]
+            ]
+          }
+        },
+        {
+          "title": "Principles of intrauterine resuscitation",
+          "bullets": [
+            "Turn mother onto her left side to eliminate aortocaval compression and maximize uteroplacental blood flow.",
+            "Administer an intravenous crystalloid fluid bolus to correct dehydration and hypovolaemia.",
+            "Discontinue or reduce oxytocin infusion immediately to alleviate uterine hyperstimulation and restore intervillous perfusion.",
+            "Administer antipyretic medication (intravenous or oral paracetamol) in cases of maternal pyrexia.",
+            "Administer tocolytic therapy (such as subcutaneous terbutaline) if contractions exceed 5 in 10 minutes or prolonged hypertonus occurs.",
+            "Perform fetal blood sampling (FBS) to obtain scalp pH and lactate when the trace remains pathological and prompt delivery is not already underway."
+          ]
+        }
+      ],
+      "viva": [
+        {
+          "q": "What feature combination classifies an intrapartum CTG trace as non-reassuring?",
+          "a": "A trace having exactly one non-reassuring feature with the remaining two features normal is classified as non-reassuring (suspicious)."
+        },
+        {
+          "q": "What criteria place an intrapartum CTG trace into the abnormal (pathological) category?",
+          "a": "A trace is abnormal when it exhibits either one abnormal feature or two or more non-reassuring features, indicating significant risk of fetal acidosis."
+        },
+        {
+          "q": "What time limit applies to decision-making when persistent late decelerations occur on an abnormal CTG?",
+          "a": "Action must be taken within 30 minutes, initiating intrauterine resuscitation and proceeding with fetal blood sampling or expediting delivery."
+        }
+      ],
+      "image": {
+        "brief": null,
+        "file": null,
+        "mediaId": null
+      },
+      "src": {
+        "book": "obg-practical-guide",
+        "section": "IV",
+        "no": 1
+      },
+      "review": "ai_drafted"
+    }
+  ]
+}

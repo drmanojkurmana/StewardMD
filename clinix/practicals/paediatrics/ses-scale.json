@@ -1,0 +1,375 @@
+{
+  "v": 1,
+  "subject": "paediatrics",
+  "section": "ses-scale",
+  "title": {
+    "en": "Socioeconomic status scale and pedigree"
+  },
+  "intro": {
+    "en": "The Modified Kuppuswamy scale used to grade family socioeconomic status in the paediatric case sheet, with pedigree degrees for family history."
+  },
+  "source": {
+    "book": "manipal-clinical-paediatrics",
+    "section": "ses-scale"
+  },
+  "items": [
+    {
+      "id": "paed.ses.occupation",
+      "kind": "chart",
+      "title": {
+        "en": "Kuppuswamy scale: occupation scores"
+      },
+      "group": "Kuppuswamy scale",
+      "summary": "Scores for the occupation of the head of the family, the first of three parts of the scale.",
+      "blocks": [
+        {
+          "title": "How to score",
+          "text": "Take the highest scoring occupation in the household, usually the head of the family, and add its points to the education and income points before reading the class table."
+        },
+        {
+          "title": "Occupation and score",
+          "table": {
+            "head": [
+              "Occupation of head of family",
+              "Score"
+            ],
+            "rows": [
+              [
+                "Legislators, senior officials and managers",
+                "10"
+              ],
+              [
+                "Professional",
+                "9"
+              ],
+              [
+                "Technicians and associate professionals",
+                "8"
+              ],
+              [
+                "Clerks",
+                "7"
+              ],
+              [
+                "Skilled workers and shop and market sales workers",
+                "6"
+              ],
+              [
+                "Skilled agricultural and fishery workers",
+                "5"
+              ],
+              [
+                "Craft and related trade workers",
+                "4"
+              ],
+              [
+                "Semi-skilled worker",
+                "3"
+              ],
+              [
+                "Unskilled worker",
+                "2"
+              ],
+              [
+                "Unemployed",
+                "1"
+              ]
+            ]
+          }
+        },
+        {
+          "title": "Points to remember",
+          "bullets": [
+            "Unemployment scores the minimum of 1, while legislators, senior officials and managers score the maximum of 10.",
+            "Skilled work outranks semi-skilled work, which outranks unskilled work."
+          ]
+        }
+      ],
+      "viva": [
+        {
+          "q": "Which occupation scores highest on this scale?",
+          "a": "Legislators, senior officials and managers at 10 points."
+        },
+        {
+          "q": "How do you combine the three parts of the scale?",
+          "a": "Add occupation, education and income points, then read the class from the total score table."
+        },
+        {
+          "q": "What score does unemployment carry?",
+          "a": "The minimum score of 1."
+        }
+      ],
+      "src": {
+        "book": "manipal-clinical-paediatrics",
+        "section": "ses-scale",
+        "no": 1
+      },
+      "review": "ai_drafted",
+      "unsure": [
+        "Printed occupation numbering repeats 3, 4 and 5 after row 5; rows were renumbered 1 to 10 with labels and scores unchanged."
+      ]
+    },
+    {
+      "id": "paed.ses.education",
+      "kind": "chart",
+      "title": {
+        "en": "Kuppuswamy scale: education scores"
+      },
+      "group": "Kuppuswamy scale",
+      "summary": "Scores for schooling of the head of the family, the second of three parts of the scale.",
+      "blocks": [
+        {
+          "title": "How to score",
+          "text": "Take the schooling level reached by the head of the family and add its points to the occupation and income points before reading the class table."
+        },
+        {
+          "title": "Education and score",
+          "table": {
+            "head": [
+              "Education of head of family",
+              "Score"
+            ],
+            "rows": [
+              [
+                "Profession or honours",
+                "7"
+              ],
+              [
+                "Graduate or postgraduate",
+                "6"
+              ],
+              [
+                "Intermediate or post high school diploma",
+                "5"
+              ],
+              [
+                "High school certificate",
+                "4"
+              ],
+              [
+                "Middle school certificate",
+                "3"
+              ],
+              [
+                "Primary school certificate",
+                "2"
+              ],
+              [
+                "Illiterate",
+                "1"
+              ]
+            ]
+          }
+        },
+        {
+          "title": "Points to remember",
+          "bullets": [
+            "Each step of schooling adds one point, from 1 for no schooling to 7 for a profession or honours degree.",
+            "A graduate scores 6 while an intermediate pass scores 5."
+          ]
+        }
+      ],
+      "viva": [
+        {
+          "q": "What does a graduate score for education?",
+          "a": "6 points, one below a profession or honours degree at 7."
+        },
+        {
+          "q": "What does a middle school certificate score?",
+          "a": "3 points, midway between illiterate at 1 and high school at 4."
+        }
+      ],
+      "src": {
+        "book": "manipal-clinical-paediatrics",
+        "section": "ses-scale",
+        "no": 2
+      },
+      "review": "ai_drafted"
+    },
+    {
+      "id": "paed.ses.income",
+      "kind": "chart",
+      "title": {
+        "en": "Kuppuswamy scale: family income scores"
+      },
+      "group": "Kuppuswamy scale",
+      "summary": "Scores for total monthly family income in rupees, the third of three parts of the scale.",
+      "blocks": [
+        {
+          "title": "Which revision",
+          "text": "Income bands follow the March 2018 revision published in the Paripex Indian Journal of Research, volume 7, issue 3."
+        },
+        {
+          "title": "Monthly income and score",
+          "table": {
+            "head": [
+              "Family income per month in rupees",
+              "Score"
+            ],
+            "rows": [
+              [
+                "126,360 and above",
+                "12"
+              ],
+              [
+                "63,182-12,656",
+                "10"
+              ],
+              [
+                "47,266-63,178",
+                "6"
+              ],
+              [
+                "31,591-47,262",
+                "4"
+              ],
+              [
+                "18,953-31,589",
+                "3"
+              ],
+              [
+                "6,327-18,949",
+                "2"
+              ],
+              [
+                "Less than 6,323",
+                "1"
+              ]
+            ]
+          }
+        },
+        {
+          "title": "Points to remember",
+          "bullets": [
+            "Income carries the widest span of points, from 1 to 12.",
+            "Use total family income per month, not the income of one earner alone."
+          ]
+        }
+      ],
+      "viva": [
+        {
+          "q": "What is the highest income score and its band?",
+          "a": "12 points for 126,360 rupees and above per month."
+        },
+        {
+          "q": "Whose income do you count?",
+          "a": "Total monthly family income, not one earner alone."
+        },
+        {
+          "q": "Why does income carry the most points?",
+          "a": "It spans 1 to 12, the widest range of the three parts."
+        }
+      ],
+      "src": {
+        "book": "manipal-clinical-paediatrics",
+        "section": "ses-scale",
+        "no": 3
+      },
+      "review": "ai_drafted",
+      "unsure": [
+        "Income bands were kept exactly as printed, but the second band reads 63,182 to 12,656 with the upper bound below the lower, and small gaps sit between bands; flagged for review against the 2018 revision."
+      ]
+    },
+    {
+      "id": "paed.ses.total-class",
+      "kind": "chart",
+      "title": {
+        "en": "Kuppuswamy scale: total score and class"
+      },
+      "group": "Kuppuswamy scale",
+      "summary": "Total points from occupation, education and income mapped to five socioeconomic classes.",
+      "blocks": [
+        {
+          "title": "How to use it",
+          "text": "Add the three component scores, find the band holding the total, and record both the class name and its roman numeral on the case sheet."
+        },
+        {
+          "title": "Total score and class",
+          "table": {
+            "head": [
+              "Total score",
+              "Socioeconomic class"
+            ],
+            "rows": [
+              [
+                "26-29",
+                "Upper (I)"
+              ],
+              [
+                "16-25",
+                "Upper middle (II)"
+              ],
+              [
+                "11-15",
+                "Middle lower middle (III)"
+              ],
+              [
+                "5-10",
+                "Lower upper lower (IV)"
+              ],
+              [
+                "Below 5",
+                "Lower (V)"
+              ]
+            ]
+          }
+        }
+      ],
+      "viva": [
+        {
+          "q": "A family totals 20 points. Which class?",
+          "a": "Upper middle, class II, which spans 16 to 25."
+        },
+        {
+          "q": "What is the highest possible total?",
+          "a": "29, from 10 for occupation, 7 for education and 12 for income."
+        },
+        {
+          "q": "A family totals 8 points. Which class?",
+          "a": "Lower upper lower, class IV, which spans 5 to 10."
+        }
+      ],
+      "src": {
+        "book": "manipal-clinical-paediatrics",
+        "section": "ses-scale",
+        "no": 4
+      },
+      "review": "ai_drafted"
+    },
+    {
+      "id": "paed.ses.pedigree",
+      "kind": "topic",
+      "title": {
+        "en": "Pedigree degrees of relatives"
+      },
+      "group": "Family history",
+      "summary": "Degrees of blood relatives by share of genes, used when drawing the family tree.",
+      "blocks": [
+        {
+          "title": "The three degrees",
+          "bullets": [
+            "First degree: parents, children and siblings, sharing 50 percent of genes.",
+            "Second degree: uncles, aunts, nieces, nephews and grandparents, sharing 25 percent of genes.",
+            "Third degree: cousins, sharing 12.5 percent of genes."
+          ]
+        }
+      ],
+      "viva": [
+        {
+          "q": "Who counts as a first degree relative?",
+          "a": "Parents, children and siblings, sharing 50 percent of genes."
+        },
+        {
+          "q": "Where do cousins fall?",
+          "a": "Third degree relatives, sharing 12.5 percent of genes."
+        }
+      ],
+      "src": {
+        "book": "manipal-clinical-paediatrics",
+        "section": "ses-scale",
+        "no": 5
+      },
+      "review": "ai_drafted"
+    }
+  ]
+}

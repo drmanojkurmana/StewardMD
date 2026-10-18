@@ -470,7 +470,10 @@ test("TEACHING: taught content cites the standard texts, and never a private aut
   // GINA is the asthma counterpart of GOLD: an international guideline body, not an individual.
   // It was already cited by skill.hx.asthma.triggers but escaped this check while that skill had no
   // teach block, so the rule did not apply to it.
-  const OK = ["StewardMD Clinical KB", "Macleod", "Alagappan", "Harrison", "GOLD", "GINA", "WHO", "Indian Medical Council"];
+  const OK = ["StewardMD Clinical KB", "Macleod", "Alagappan", "Harrison", "GOLD", "GINA", "WHO", "Indian Medical Council",
+    // final-year expansion: standard texts and guideline bodies, never an individual
+    "Bailey", "Browse", "Nelson", "Berek", "Williams Obstetrics", "Indian Academy of Pediatrics", "IAP", "ATLS", "MoHFW",
+    "NICE", "RCOG", "FOGSI", "ACOG", "AAP", "ICMR", "National Health Mission", "UK Medical Eligibility", "NHS", "TeachMeObGyn", "Stanford Medicine", "Supreme Court of India", "SPIKES"];
   const taughtIds = Object.keys(shared).filter((id) => Array.isArray(shared[id].teach));
   assert.ok(taughtIds.length > 0);
   for (const id of taughtIds) {
