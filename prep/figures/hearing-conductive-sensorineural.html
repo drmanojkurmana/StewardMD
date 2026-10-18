@@ -1,0 +1,624 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Hearing: conductive and sensorineural loss</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="dark"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
+body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
+body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
+.t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
+.t-ven .tb-body{fill:color-mix(in srgb,var(--d-ven) 62%,var(--anatomy-paper))}.t-ven .tb-edge{stroke:var(--d-ven)}
+.t-dia .tb-body{fill:color-mix(in srgb,var(--d-dia) 55%,var(--anatomy-paper))}.t-dia .tb-edge{stroke:var(--d-dia)}
+.t-out .tb-body{fill:color-mix(in srgb,var(--d-ure) 40%,color-mix(in srgb,var(--d-dia) 40%,var(--anatomy-paper)))}
+.tb-shine{opacity:.5}
+.dr-lab-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}.dr-lab-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.dr-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.dr-pt{fill:var(--anatomy-strong);font:650 13px var(--anatomy-mono)}.dr-ps{fill:var(--anatomy-muted);font:11px var(--anatomy-mono)}.dr-pt2{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.dr-dband{fill:color-mix(in srgb,var(--d-dia) 13%,var(--anatomy-paper))}
+.dr-lumen{fill:color-mix(in srgb,var(--d-art) 15%,var(--anatomy-paper))}
+.dr-wall{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}.dr-pore{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.dr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4}.dr-beam-c{fill:none;stroke:var(--anatomy-hi);stroke-width:1.2}
+.dr-g-tr{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint)}.dr-g-fill{opacity:.95}
+#g-urea{fill:var(--d-ure)}#g-pot{fill:var(--d-pot)}#g-flu{fill:var(--d-wat)}
+.dr-g-v{fill:var(--anatomy-strong);font:600 10px var(--anatomy-mono);pointer-events:none}
+.dr-scr{fill:#0b1511;stroke:var(--anatomy-hi);stroke-width:.02}.dr-scr-bar{fill:#14261e}.dr-scr-fill{fill:var(--d-dia)}.dr-scr-led{fill:#555}
+.dr-vent{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.8}
+.p-rbc{fill:var(--d-rbc);stroke:color-mix(in srgb,var(--d-rbc) 50%,#000);stroke-width:.6}.p-rbc-c{fill:color-mix(in srgb,var(--d-rbc) 55%,#000);opacity:.55}
+.p-alb{fill:var(--d-alb);stroke:var(--anatomy-mid);stroke-width:.7}
+.p-ure{fill:var(--d-ure)}.p-pot{fill:var(--d-pot)}.p-bic{fill:var(--d-bic)}.p-wat{fill:var(--d-wat);opacity:.9}
+.p-rot-disc{fill:var(--anatomy-top);stroke:var(--anatomy-hi);stroke-width:1}.p-rot-hub{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}.p-roll{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:1}
+.p-plunger{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}.p-pad{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}
+.p-level{fill:color-mix(in srgb,var(--d-ven) 55%,var(--anatomy-paper));opacity:.9}.p-bubble{fill:none;stroke:var(--anatomy-hi);stroke-width:.8}
+.dr-fig .hot.dr-lab:hover .dr-lab-r{stroke:var(--anatomy-lit)}
+
+.t-sal .tb-body{fill:color-mix(in srgb,var(--d-bic) 45%,var(--anatomy-paper))}.t-sal .tb-edge{stroke:var(--d-bic)}
+.p-sal{fill:#fff;stroke:var(--d-bic);stroke-width:.8}
+.dr-jwin{fill:var(--anatomy-shade-1);stroke:var(--anatomy-hi);stroke-width:.02}.dr-jfill.dr-j-fresh{fill:var(--d-dia)}.dr-jfill.dr-j-used{fill:var(--d-ure)}.dr-jfill{opacity:.85}
+.dr-bez{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}.dr-face{fill:var(--anatomy-card)}.dr-ok{fill:none;stroke:#3ddc97;stroke-width:2.2;opacity:.8}
+.dr-tick{stroke:var(--anatomy-mid);stroke-width:.8}.dr-needle{stroke:var(--d-art);stroke-width:1.6;stroke-linecap:round}.dr-hub{fill:var(--anatomy-strong)}
+.dr-dl{fill:var(--anatomy-text);font:600 9.5px var(--anatomy-mono);pointer-events:none}
+.dr-dial:hover .dr-bez{stroke:var(--anatomy-lit)}
+
+.c-skin .iso-fill,.c-skin .iso-top{fill:var(--c-skin)}.c-gown .iso-fill,.c-gown .iso-top{fill:var(--c-gown)}.c-blanket .iso-fill,.c-blanket .iso-top{fill:var(--c-blanket)}
+.c-chair .iso-fill,.c-chair .iso-top{fill:var(--c-chair)}.c-chair2 .iso-fill,.c-chair2 .iso-top{fill:var(--c-chair2)}.c-vein .iso-fill,.c-vein .iso-top{fill:var(--c-vein)}
+.c-mach .iso-fill,.c-mach .iso-top{fill:var(--c-mach)}.c-mach2 .iso-fill,.c-mach2 .iso-top{fill:var(--c-mach2)}.c-door .iso-fill,.c-door .iso-top{fill:var(--c-door)}
+.c-skin .iso-shade,.c-gown .iso-shade,.c-blanket .iso-shade,.c-chair .iso-shade,.c-chair2 .iso-shade,.c-vein .iso-shade,.c-mach .iso-shade,.c-mach2 .iso-shade,.c-door .iso-shade{opacity:.45}
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
+
+.hr-pinna{fill:var(--c-eos);stroke:color-mix(in srgb,var(--c-eos) 55%,#000);stroke-width:1.4}
+.hr-canal{fill:color-mix(in srgb,var(--c-fl) 18%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.2}
+.hr-middle{fill:color-mix(in srgb,var(--c-plt) 14%,transparent);stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:4 3}
+.hr-tm{fill:var(--c-endo);stroke:color-mix(in srgb,var(--c-endo) 55%,#000);stroke-width:1.4}
+.hr-bone{fill:#e8dcc0;stroke:#9a8a68;stroke-width:1.3}
+body[data-theme="light"] .hr-bone{fill:#d9c69a;stroke:#7a6a48}
+.hr-oval{fill:var(--c-cyt2);stroke:color-mix(in srgb,var(--c-cyt2) 55%,#000);stroke-width:1.3}
+.hr-cochlea{fill:color-mix(in srgb,var(--c-mac) 32%,var(--anatomy-paper));stroke:var(--c-mac);stroke-width:1.6}
+.hr-spiral{fill:none;stroke:var(--c-mac);stroke-width:2.4;stroke-linecap:round}
+.hr-nerve{fill:none;stroke:var(--c-plt);stroke-width:5;stroke-linecap:round}
+.hr-membrane{fill:var(--c-good);stroke:color-mix(in srgb,var(--c-good) 55%,#000);stroke-width:1.2}
+.hr-hair{fill:var(--c-neut);stroke:color-mix(in srgb,var(--c-neut) 55%,#000);stroke-width:.8}
+.hr-wave{fill:none;stroke:var(--c-cyt);stroke-width:2.2;stroke-linecap:round}
+.hr-head{fill:color-mix(in srgb,var(--c-eos) 34%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-eos) 55%,#000);stroke-width:1.4}
+.hr-earside{fill:var(--c-eos);stroke:color-mix(in srgb,var(--c-eos) 55%,#000);stroke-width:1}
+.hr-fork{fill:none;stroke:var(--anatomy-strong);stroke-width:2.4;stroke-linecap:round}
+.hr-bar-tr{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1}
+.hr-bar-air{fill:var(--c-fl)}
+.hr-bar-bone{fill:var(--c-plt)}
+.hr-arrow{fill:none;stroke:var(--c-bad);stroke-width:2.2;stroke-linecap:round}
+.hr-device{fill:var(--c-cyt2);stroke:color-mix(in srgb,var(--c-cyt2) 55%,#000);stroke-width:1.2}
+.hr-electrode{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 55%,#000);stroke-width:.7}
+.hr-plaque{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 55%,#000);stroke-width:1}
+.p-snd{--cc:var(--c-fl)}
+.p-bonep{--cc:var(--c-plt)}
+.p-nervep{--cc:var(--c-plt)}
+.p-cochp{--cc:var(--c-cyt)}
+.dr-g-fill.g-air{fill:var(--c-fl)}.dr-g-fill.g-bone{fill:var(--c-plt)}.dr-g-fill.g-wave{fill:var(--c-cyt)}.dr-g-fill.g-hair{fill:var(--c-neut)}
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Hearing: conductive and sensorineural loss</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>air conduction normal · bone conduction normal · hearing normal</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated ear. Sound enters the external ear and ear canal, vibrates the tympanic membrane and the ossicles malleus, incus and stapes, and pushes at the oval window into the cochlea. An unrolled cochlea shows the basilar membrane, stiff base for high pitch and floppy apex for low pitch, with hair cells on it. Signals pass along the auditory nerve. Conductive loss blocks the air path while bone conduction is preserved. Sensorineural loss damages hair cells so air and bone conduction both fall. An inset shows Rinne and Weber tuning fork tests. Gauges show air and bone conduction, the basilar wave, hair cells, nerve signal and hearing. Treatments are a hearing aid, surgery for ossicular disease and a cochlear implant."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+<rect class="sc-tissue" x="14" y="44" width="560" height="396" rx="18"/>
+<rect class="sc-tissue" x="584" y="44" width="362" height="194" rx="18"/>
+<rect class="sc-tissue" x="584" y="246" width="362" height="194" rx="18"/>
+<text class="sc-zone" x="34" y="68">EAR: SOUND TO COCHLEA</text>
+<text class="sc-zone" x="604" y="68">COCHLEA, UNROLLED</text>
+<text class="sc-zone" x="604" y="270">FORK TESTS</text>
+<g id="ear"></g>
+<g id="coch"></g>
+<g id="fork"></g>
+<g id="parts"></g>
+<g id="over"></g>
+<g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, frequencies or numbers are shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Hearing state</span><input id="level" type="range" min="0" max="2" step="1" value="0" aria-valuetext="normal"><span class="dr-ticks"><i>normal</i><i>conductive</i><i>sensorineural</i></span></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">hearing aid</option><option value="2">surgery for ossicular disease</option><option value="3">cochlear implant</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul><li><strong>How hearing works.</strong> The pinna and external ear canal guide sound to the tympanic membrane. Its vibration moves the ossicles, malleus, incus and stapes, in the middle ear. The stapes footplate pushes at the oval window, setting up a travelling wave on the basilar membrane inside the cochlea. The membrane is stiff and narrow at the base, which responds best to high pitch, and wide and floppy at the apex, which responds best to low pitch: this place code is tonotopy. Hair cells on the membrane bend with the wave and send signals along the auditory nerve. This is standard teaching in physiology and ENT texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Conductive and sensorineural loss.</strong> Conductive loss is a failure of sound to reach the cochlea, for example a blocked canal, a perforated eardrum or ossicular disease. Otosclerosis fixes the stapes at the oval window and is a classic conductive cause. Bone conduction, which shakes the cochlea through the skull, is preserved, so in the Rinne test bone conduction is louder than air conduction and in the Weber test sound lateralises to the affected ear. Sensorineural loss is damage to hair cells or the nerve, for example noise damage, which injures hair cells, and presbycusis, age related loss that affects high pitch first. Air and bone conduction both fall, Rinne still has air louder than bone, and Weber lateralises to the better ear. This is standard teaching and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Treatment ideas shown.</strong> A hearing aid amplifies sound in the canal and helps when some hair cell function remains. Surgery for ossicular disease repairs or replaces a fixed or damaged ossicle, for example in otosclerosis, and restores the air path in conductive loss. A cochlear implant bypasses damaged hair cells and stimulates the auditory nerve directly with an electrode in the cochlea. These are teaching toggles only.</li></ul>
+<p><strong>What was simplified.</strong> Middle ear muscle reflexes, round window mechanics, cochlear fluids and potentials, outer and inner hair cell differences, central auditory pathways, grading of hearing loss, audiograms and tympanometry detail, and all device settings, surgical steps and numbers are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Hearing state","a":[1,0.25,0.3],"names":["normal","conductive loss","sensorineural loss"],"ticks":["normal","conductive","sensorineural"],"start":0},"settings":[{"label":"no treatment"},{"label":"hearing aid"},{"label":"surgery for ossicular disease"},{"label":"cochlear implant"}],"drugNames":["no treatment","hearing aid","ossicle surgery","cochlear implant"],"status":"Hearing: {level} · {drug} ·"}};
+const modelOf = function modelOf(S, level, drug) {
+  const TBL = [
+    { air: 1, bone: 1, coch: 0.95, wave: 1 },
+    { air: 0.22, bone: 0.92, coch: 0.95, wave: 0.9 },
+    { air: 0.28, bone: 0.28, coch: 0.4, wave: 0.3 },
+  ];
+  const cl = (v) => Math.max(0, Math.min(1, v));
+  const b = TBL[level];
+  let air = b.air, bone = b.bone, coch = b.coch, wave = b.wave;
+  const aid = drug === 1 ? 1 : 0, surg = drug === 2 ? 1 : 0, impl = drug === 3 ? 1 : 0;
+  if (surg && level === 1) { air = 0.92; wave = 0.95; }
+  const airHeard = cl(air * (aid ? 3.2 : 1) * coch);
+  const boneHeard = cl(bone * coch);
+  const waveEff = cl(wave * (air * (aid ? 1.5 : 1)) + (level === 1 && surg ? 0.75 : 0));
+  const nerve = impl ? 0.85 : airHeard;
+  const hearing = nerve;
+  const cond = level === 1 ? 1 : 0, sens = level === 2 ? 1 : 0;
+  const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
+  const words = [w(airHeard, 0.35, 0.7, ["low", "reduced", "normal"]), w(boneHeard, 0.35, 0.7, ["low", "reduced", "normal"]), w(hearing, 0.35, 0.7, ["low", "reduced", "normal"])];
+  return { air, bone, coch, wave, waveEff, airHeard, boneHeard, nerve, hearing, aid, surg, impl, cond, sens, words, readout: "air conduction " + words[0] + " · bone conduction " + words[1] + " · hearing " + words[2] };
+};
+/* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); if (parent) parent.appendChild(el); return el; };
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const lerp = (a, b, t) => a + (b - a) * t;
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const f1 = (v) => (+v).toFixed(1);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const S = SC.S;
+let level = S.level.start, drug = 0, playing = !reduce.matches, visible = true, last = 0, frame = 0, tm = 0, M = null, SCN = null;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), l0 = q.get("l");
+  if (d0 > 0 && d0 < S.settings.length) { drug = d0; drugBox.value = String(d0); }
+  if (l0 !== null && l0 !== "" && +l0 >= 0 && +l0 < S.level.a.length) { level = +l0; levelBox.value = String(level); } }
+levelBox.setAttribute("aria-valuetext", S.level.names[level]);
+
+/* a smooth closed blob path (Catmull-Rom through points), centred on 0,0 */
+function blobD(r, seed, wob, n) {
+  n = n || 9; wob = wob === undefined ? 0.1 : wob; const pts = [];
+  for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, k = 1 + wob * Math.sin(t * 3 + seed * 1.7) + wob * 0.6 * Math.cos(t * 2 + seed * 2.3); pts.push([r * k * Math.cos(t), r * k * Math.sin(t)]); }
+  let d = "M" + f1(pts[0][0]) + " " + f1(pts[0][1]);
+  for (let i = 0; i < n; i++) { const p0 = pts[(i + n - 1) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " + f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]); }
+  return d + "Z";
+}
+/* a lit, shaded cell: body, shade ring, highlight, optional nucleus. cls colours it (CSS: .cl-<cls> .cl-b) */
+function cell(parent, o) {
+  const g = mk("g", { class: "cl cl-" + o.cls }, parent), r = o.r, seed = o.seed || Math.random() * 9;
+  mk("path", { class: "cl-b", d: blobD(r, seed, o.wob === undefined ? 0.09 : o.wob, o.n) }, g);
+  mk("path", { class: "cl-s", d: blobD(r * 0.86, seed, o.wob === undefined ? 0.09 : o.wob, o.n), transform: "translate(" + f1(r * 0.04) + " " + f1(r * 0.05) + ")" }, g);
+  mk("path", { class: "cl-h", d: blobD(r * 0.62, seed + 1, 0.05, 7), transform: "translate(" + f1(-r * 0.14) + " " + f1(-r * 0.16) + ")" }, g);
+  if (o.nuc) mk("path", { class: "cl-n" + (o.nucCls ? " " + o.nucCls : ""), d: blobD(r * o.nuc, seed + 2, 0.12, 7), transform: "translate(" + f1(r * 0.05) + " " + f1(r * 0.02) + ")" }, g);
+  if (o.x !== undefined) g.setAttribute("transform", "translate(" + f1(o.x) + " " + f1(o.y) + ")");
+  return g;
+}
+const place = (g, x, y, rot, sc) => g.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ")" + (rot ? " rotate(" + f1(rot) + ")" : "") + (sc && sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : ""));
+/* label pill with a leader; hover/focus shows `text` in the info line */
+function pill(parent, text, x, y, tx, ty, infoText) {
+  const lw = text.length * 6.2 + 14, g = mk("g", { class: "hot dr-lab", tabindex: "0", "data-info": infoText || text }, parent);
+  mk("path", { class: "dr-leader", d: "M" + f1(x) + " " + f1(y) + "L" + f1(tx) + " " + f1(ty + 8) }, g);
+  mk("circle", { class: "dr-dot", cx: f1(x), cy: f1(y), r: 1.6 }, g);
+  mk("rect", { class: "dr-lab-r", x: f1(tx - lw / 2), y: f1(ty - 8), width: f1(lw), height: 17, rx: 8.5 }, g);
+  const t = mk("text", { class: "dr-lab-t", x: f1(tx), y: f1(ty + 4), "text-anchor": "middle" }, g); t.textContent = text; return g;
+}
+/* a vertical gauge (track + fill); set(v) moves it; the value word sits under it */
+function gauge(parent, x, y, h, w, cls, name, infoText) {
+  const g = mk("g", { class: "hot", tabindex: "0", "data-info": infoText || name }, parent);
+  mk("rect", { class: "dr-g-tr", x: x - w / 2, y, width: w, height: h, rx: w / 2 }, g);
+  const fill = mk("rect", { class: "dr-g-fill " + cls, x: x - w / 2, y: y + h, width: w, height: 0, rx: w / 2 }, g);
+  const t1 = mk("text", { class: "dr-pt2", x, y: y + h + 15, "text-anchor": "middle" }, g); t1.textContent = name;
+  const t2 = mk("text", { class: "dr-g-v", x, y: y + h + 28, "text-anchor": "middle" }, g);
+  return { set(v, word) { const hh = clamp(v) * h; fill.setAttribute("y", f1(y + h - hh)); fill.setAttribute("height", f1(hh)); if (word !== undefined && t2.textContent !== word) t2.textContent = word; } };
+}
+/* a path through points, with length table; at(u) gives {x,y,a} */
+function track(pts) { const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const len = cum[cum.length - 1];
+  return { len, at(u) { const d = clamp(u) * len; let i = 1; while (i < cum.length - 1 && cum[i] < d) i++; const f = (d - cum[i - 1]) / Math.max(0.001, cum[i] - cum[i - 1]); const a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) * 57.2958 }; } };
+}
+const wordOf = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+  if (SCN && SCN.onModel) SCN.onModel(M);
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now; tm += dt * 1000; SCN.step(dt, M); frame = requestAnimationFrame(tick); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
+function run(scn) {
+  SCN = scn;
+  levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  pauseBtn.addEventListener("click", () => setPlaying(!playing));
+  document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+  reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+  scn.init(); publish();
+  const idle = info.textContent;
+  svg.querySelectorAll(".hot").forEach((el) => { const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); }, off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+    el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+  if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+  for (let i = 0; i < 90; i++) scn.step(0.05, M);
+  start();
+}
+
+/* Hearing scene: sound in the canal, eardrum and ossicles, oval window, cochlea wave and hair cells, auditory nerve, fork tests and gauges. */
+const L = { ear: $("ear"), coch: $("coch"), fork: $("fork"), parts: $("parts"), over: $("over"), panel: $("panel") };
+const sm = { air: 1, bone: 1, coch: 0.95, waveEff: 0.9, airHeard: 0.95, boneHeard: 0.95, nerve: 0.95, hearing: 0.95, aid: 0, surg: 0, impl: 0, cond: 0, sens: 0 };
+const gg = {};
+const acc = { snd: 0, bonep: 0, cochp: 0, nervep: 0 };
+let tmG = null, malG = null, incG = null, stapG = null, aidDev = null, plaque = null, implantG = null, wavePath = null;
+let rinneAirBar = null, rinneBoneBar = null, rinneTxt = null, weberTxt = null, weberAff = null, weberGood = null;
+const hairs = [];
+
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0, u: 0 }; }); }
+const free = (pl) => pl.find((p) => !p.on);
+function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.u = 0; p.e.setAttribute("opacity", "1"); }
+function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
+
+const trackSnd = track([[18, 230], [90, 230], [170, 230], [242, 230]]);
+const trackBone = track([[252, 288], [320, 292], [392, 270], [438, 244]]);
+const trackNerve = track([[488, 214], [524, 202], [562, 196]]);
+const trackCoch = track([[634, 162], [730, 162], [826, 162], [906, 162]]);
+
+const snd = pool(24, () => mk("circle", { class: "sc-p p-snd", r: 2.6 }, L.parts));
+const bonep = pool(14, () => mk("circle", { class: "sc-p p-bonep", r: 2.4 }, L.parts));
+const cochp = pool(20, () => mk("circle", { class: "sc-p p-cochp", r: 2.4 }, L.parts));
+const nervep = pool(16, () => mk("circle", { class: "sc-p p-nervep", r: 2.6 }, L.parts));
+
+function init() {
+  /* ---- main ear, sound travelling left to right ---- */
+  const E = L.ear;
+  [26, 40].forEach((x, i) => { mk("path", { d: "M" + x + " 205 Q" + (x - 8) + " 230 " + x + " 255", fill: "none", stroke: "var(--c-fl)", "stroke-width": 2, opacity: 0.55 - i * 0.18 }, E); });
+  mk("path", { class: "hr-pinna", d: "M78 148 C48 168 44 230 58 282 C66 312 88 326 102 318 C88 300 82 270 84 238 C86 205 92 178 104 162 C94 146 86 144 78 148 Z" }, E);
+  mk("path", { d: "M76 178 C62 200 62 258 76 288", fill: "none", stroke: "var(--anatomy-mid)", "stroke-width": 1.4 }, E);
+  mk("rect", { class: "hr-canal", x: 106, y: 208, width: 142, height: 44, rx: 10 }, E);
+  mk("rect", { class: "hr-middle", x: 262, y: 168, width: 148, height: 124, rx: 12 }, E);
+  tmG = mk("g", {}, E); mk("ellipse", { class: "hr-tm", cx: 250, cy: 230, rx: 7, ry: 48 }, tmG);
+  malG = mk("g", {}, E); mk("ellipse", { class: "hr-bone", cx: 286, cy: 214, rx: 13, ry: 16 }, malG); mk("path", { class: "hr-bone", d: "M282 226 L258 236 L262 244 L286 234 Z" }, malG);
+  incG = mk("g", {}, E); mk("ellipse", { class: "hr-bone", cx: 326, cy: 200, rx: 12, ry: 13 }, incG); mk("path", { class: "hr-bone", d: "M330 210 L352 224 L346 232 L324 220 Z" }, incG);
+  stapG = mk("g", {}, E); mk("ellipse", { class: "hr-bone", cx: 368, cy: 220, rx: 10, ry: 11 }, stapG); mk("rect", { class: "hr-bone", x: 376, y: 214, width: 22, height: 12, rx: 4 }, stapG);
+  mk("ellipse", { class: "hr-oval", cx: 410, cy: 230, rx: 8, ry: 19 }, E);
+  plaque = mk("circle", { class: "hr-plaque", cx: 402, cy: 252, r: 10, opacity: 0 }, E);
+  /* small cochlea with a spiral, then the auditory nerve to the right */
+  mk("circle", { class: "hr-cochlea", cx: 458, cy: 230, r: 38 }, E);
+  mk("path", { class: "hr-spiral", d: "M430 230 a28 28 0 1 1 28 28 a20 20 0 1 1 -20 -20 a12 12 0 1 1 12 12" }, E);
+  implantG = mk("g", { opacity: 0 }, E);
+  mk("path", { d: "M486 176 C472 186 464 198 460 212", fill: "none", stroke: "var(--c-bad)", "stroke-width": 1.6 }, implantG);
+  mk("circle", { class: "hr-device", cx: 490, cy: 172, r: 9 }, implantG);
+  [[446, 218], [466, 226], [458, 242], [442, 236], [454, 230]].forEach(([x, y]) => { mk("circle", { class: "hr-electrode", cx: x, cy: y, r: 3.2 }, implantG); });
+  mk("path", { class: "hr-nerve", d: "M488 214 C515 202 540 198 562 196" }, E);
+  mk("path", { d: "M562 196 l-12 -5 l1 10 Z", fill: "var(--c-plt)", stroke: "var(--c-plt)", "stroke-width": 1 }, E);
+  aidDev = mk("g", { opacity: 0 }, E);
+  mk("rect", { class: "hr-device", x: 100, y: 158, width: 16, height: 24, rx: 6 }, aidDev);
+  mk("path", { d: "M108 158 C96 172 94 190 100 204", fill: "none", stroke: "var(--c-cyt2)", "stroke-width": 2.4 }, aidDev);
+
+  /* ---- cochlea unrolled: basilar membrane and hair cells ---- */
+  const C = L.coch;
+  mk("path", { class: "hr-membrane", d: "M632 158 L912 166 L912 174 L632 178 Z" }, C);
+  wavePath = mk("path", { class: "hr-wave", d: "M632 152 L912 152" }, C);
+  for (let i = 0; i < 12; i++) {
+    const g = mk("g", {}, C), x = 646 + i * 23;
+    mk("path", { class: "hr-hair", d: "M-4 0 L0 -14 L4 0 Z" }, g);
+    mk("circle", { class: "hr-hair", cx: 0, cy: -16, r: 2.6 }, g);
+    hairs.push({ g, x, y: 158, i });
+  }
+  const t1 = mk("text", { class: "sc-lab", x: 632, y: 196 }, C); t1.textContent = "base: high pitch";
+  const t2 = mk("text", { class: "sc-lab", x: 912, y: 196, "text-anchor": "end" }, C); t2.textContent = "apex: low pitch";
+
+  /* ---- fork tests ---- */
+  const F = L.fork;
+  mk("path", { class: "hr-fork", d: "M646 300 L646 322 Q655 332 664 322 L664 300 M655 330 L655 344" }, F);
+  const at = mk("text", { class: "sc-lab", x: 622, y: 358 }, F); at.textContent = "air";
+  const bt = mk("text", { class: "sc-lab", x: 618, y: 382 }, F); bt.textContent = "bone";
+  mk("rect", { class: "hr-bar-tr", x: 650, y: 348, width: 90, height: 10, rx: 5 }, F);
+  rinneAirBar = mk("rect", { class: "hr-bar-air", x: 650, y: 348, width: 80, height: 10, rx: 5 }, F);
+  mk("rect", { class: "hr-bar-tr", x: 650, y: 372, width: 90, height: 10, rx: 5 }, F);
+  rinneBoneBar = mk("rect", { class: "hr-bar-bone", x: 650, y: 372, width: 80, height: 10, rx: 5 }, F);
+  rinneTxt = mk("text", { class: "sc-lab", x: 608, y: 408 }, F); rinneTxt.textContent = "Rinne: air louder than bone";
+  weberTxt = mk("text", { class: "sc-lab", x: 608, y: 428 }, F); weberTxt.textContent = "Weber: hears it in the middle";
+  mk("circle", { class: "hr-head", cx: 835, cy: 368, r: 40 }, F);
+  mk("ellipse", { class: "hr-earside", cx: 795, cy: 368, rx: 7, ry: 14 }, F);
+  mk("ellipse", { class: "hr-earside", cx: 875, cy: 368, rx: 7, ry: 14 }, F);
+  mk("circle", { cx: 875, cy: 368, r: 17, fill: "none", stroke: "var(--c-bad)", "stroke-width": 1.6 }, F);
+  mk("path", { class: "hr-fork", d: "M826 296 L826 318 Q835 328 844 318 L844 296 M835 326 L835 330" }, F);
+  weberAff = mk("path", { class: "hr-arrow", d: "M842 338 Q862 348 868 358 M868 358 l-9 -1 l4 8", opacity: 0 }, F);
+  weberGood = mk("path", { class: "hr-arrow", d: "M828 338 Q808 348 802 358 M802 358 l9 -1 l-4 8", opacity: 0 }, F);
+
+  /* ---- label pills: centres checked on a grid so pills do not overlap ---- */
+  const o = L.over;
+  pill(o, "Pinna", 78, 170, 78, 96, "Pinna: the visible external ear. It gathers sound and guides it into the ear canal.");
+  pill(o, "Ear canal", 180, 208, 180, 130, "External ear canal: the tube from the pinna to the eardrum. Wax or blockage here causes conductive loss.");
+  pill(o, "Eardrum", 250, 190, 260, 96, "Eardrum (tympanic membrane): the thin membrane at the end of the canal. Sound vibrates it. A perforation causes conductive loss.");
+  pill(o, "Incus", 326, 188, 340, 130, "Incus: the middle ossicle. It passes vibration from the malleus to the stapes.");
+  pill(o, "Oval window", 410, 212, 430, 130, "Oval window: the opening into the cochlea. The stapes footplate pushes here. In otosclerosis the stapes fixes at this window.");
+  pill(o, "Auditory nerve", 520, 202, 505, 96, "Auditory nerve: carries signals from hair cells to the brain. Damage here is sensorineural loss.");
+  pill(o, "Otosclerosis", 402, 252, 140, 350, "Otosclerosis: new bone fixes the stapes at the oval window, so air conduction falls while bone conduction stays. Shown when conductive loss is selected.");
+  pill(o, "Malleus", 286, 230, 270, 350, "Malleus: the first ossicle, attached to the eardrum. It moves with the eardrum.");
+  pill(o, "Stapes", 380, 226, 380, 350, "Stapes: the smallest ossicle. Its footplate pushes at the oval window. It is the ossicle fixed in otosclerosis.");
+  pill(o, "Cochlea", 458, 262, 455, 350, "Cochlea: the spiral hearing organ. Fluid waves travel on the basilar membrane and hair cells turn them into nerve signals.");
+  pill(o, "Basilar membrane", 700, 158, 710, 96, "Basilar membrane, unrolled: stiff at the base for high pitch, floppy at the apex for low pitch. This place code is tonotopy.");
+  pill(o, "Hair cells", 850, 148, 850, 96, "Hair cells sit on the basilar membrane. Their hairs bend with the wave and start nerve signals. Noise and ageing injure them.");
+  pill(o, "Noise damage", 800, 145, 700, 215, "Noise damage: loud sound injures hair cells, often for high pitch first. Air and bone conduction both fall. Shown in sensorineural loss.");
+  pill(o, "Presbycusis", 650, 148, 860, 215, "Presbycusis: age related hair cell loss. High pitch at the base is affected first, so speech clarity falls. Shown in sensorineural loss.");
+  pill(o, "Rinne test", 655, 330, 665, 295, "Rinne test: a tuning fork on the mastoid bone, then beside the ear. Normal and sensorineural: air louder than bone. Conductive: bone louder than air.");
+  pill(o, "Weber test", 835, 318, 855, 295, "Weber test: a tuning fork in the middle of the forehead. Conductive loss: heard in the affected ear. Sensorineural loss: heard in the better ear.");
+  const p1 = pill(o, "Hearing aid", 108, 170, 110, 400, "Hearing aid: amplifies sound in the ear canal. It helps when some hair cell function remains, in conductive and in sensorineural loss.");
+  p1.setAttribute("id", "tx-aid");
+  const p2 = pill(o, "Ossicle surgery", 380, 245, 280, 400, "Surgery for ossicular disease: repairs or replaces a fixed or damaged ossicle, for example the stapes in otosclerosis. It restores air conduction in conductive loss.");
+  p2.setAttribute("id", "tx-surg");
+  const p3 = pill(o, "Implant", 458, 250, 440, 400, "Cochlear implant: an electrode in the cochlea stimulates the auditory nerve directly, bypassing damaged hair cells in sensorineural loss.");
+  p3.setAttribute("id", "tx-impl");
+
+  /* ---- gauges ---- */
+  const P = L.panel;
+  mk("rect", { class: "dr-panel", x: 24, y: 454, width: 912, height: 142, rx: 14 }, P);
+  const pt = mk("text", { class: "dr-pt", x: 40, y: 476 }, P); pt.textContent = "The ear";
+  [["air", "Air", "g-air", "Air conduction: sound through the canal, eardrum and ossicles to the cochlea. It falls in conductive and in sensorineural loss."], ["bone", "Bone", "g-bone", "Bone conduction: sound through the skull straight to the cochlea, bypassing canal and ossicles. It is preserved in conductive loss."], ["wave", "Basilar wave", "g-wave", "The travelling wave on the basilar membrane, set up by the stapes at the oval window and by bone conduction."], ["hair", "Hair cells", "g-hair", "Hair cell function in the cochlea. Noise damage and presbycusis reduce it, causing sensorineural loss."], ["nerve", "Nerve signal", "g-good", "Signal along the auditory nerve. A cochlear implant can restore it by direct stimulation when hair cells are damaged."], ["hear", "Hearing", "g-good", "Overall hearing in this schematic ear, from the sound that reaches the nerve by the air path or an implant."]]
+    .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, 130 + i * 142, 486, 52, 18, cls, name, tip); });
+}
+
+function step(dt, m) {
+  const k = Math.min(1, dt * 1.4);
+  sm.air = lerp(sm.air, m.air, k); sm.bone = lerp(sm.bone, m.bone, k); sm.coch = lerp(sm.coch, m.coch, k);
+  sm.waveEff = lerp(sm.waveEff, m.waveEff, k); sm.airHeard = lerp(sm.airHeard, m.airHeard, k); sm.boneHeard = lerp(sm.boneHeard, m.boneHeard, k);
+  sm.nerve = lerp(sm.nerve, m.nerve, k); sm.hearing = lerp(sm.hearing, m.hearing, k);
+  sm.aid = lerp(sm.aid, m.aid, k); sm.surg = lerp(sm.surg, m.surg, k); sm.impl = lerp(sm.impl, m.impl, k);
+  sm.cond = lerp(sm.cond, m.cond, k); sm.sens = lerp(sm.sens, m.sens, k);
+
+  /* eardrum and ossicles vibrate with the air path */
+  const vib = Math.sin(tm / 80) * (0.6 + 2.6 * sm.air * (sm.aid ? 1.3 : 1));
+  tmG.setAttribute("transform", "translate(" + f1(vib) + " 0)");
+  malG.setAttribute("transform", "translate(" + f1(vib * 0.9) + " 0)");
+  incG.setAttribute("transform", "translate(" + f1(vib * 0.8) + " 0)");
+  stapG.setAttribute("transform", "translate(" + f1(vib * 0.9) + " 0)");
+  plaque.setAttribute("opacity", (sm.cond * (sm.surg ? 0.3 : 0.95)).toFixed(2));
+  aidDev.setAttribute("opacity", sm.aid.toFixed(2));
+  implantG.setAttribute("opacity", sm.impl.toFixed(2));
+
+  /* basilar wave and hair cells in the unrolled cochlea */
+  let d = "";
+  for (let i = 0; i <= 14; i++) {
+    const u = i / 14, x = 632 + u * 280, env = Math.sin(u * 3.14);
+    const y = 152 - env * (3 + 15 * sm.waveEff) * (0.65 + 0.35 * Math.sin(tm / 240 - u * 7));
+    d += (i ? "L" : "M") + f1(x) + " " + f1(y) + " ";
+  }
+  wavePath.setAttribute("d", d);
+  hairs.forEach((hc) => {
+    const health = 1 - sm.sens * (hc.i < 5 ? 0.7 : 0.35);
+    const rot = Math.sin(tm / 210 + hc.i * 0.8) * 11 * sm.waveEff * health;
+    place(hc.g, hc.x, hc.y, rot, Math.max(0.35, health));
+    hc.g.style.opacity = (0.35 + 0.65 * health).toFixed(2);
+  });
+
+  /* sound particles along the canal to the eardrum */
+  acc.snd += dt * 8;
+  while (acc.snd >= 1) { acc.snd--; const p = free(snd); if (p) emit(p, 0, 0, 0, 0, 0); }
+  snd.forEach((p) => { if (!p.on) return; p.u += dt * 0.32; const pos = trackSnd.at(Math.min(1, p.u)); p.e.setAttribute("transform", "translate(" + f1(pos.x) + " " + f1(pos.y) + ")"); p.e.setAttribute("opacity", p.u > 0.9 ? clamp((1 - p.u) / 0.1).toFixed(2) : "1"); if (p.u >= 1) kill(p); });
+  /* bone conduction particles through the skull side to the cochlea */
+  acc.bonep += dt * sm.boneHeard * 5;
+  while (acc.bonep >= 1) { acc.bonep--; const p = free(bonep); if (p) emit(p, 0, 0, 0, 0, 0); }
+  bonep.forEach((p) => { if (!p.on) return; p.u += dt * 0.3; const pos = trackBone.at(Math.min(1, p.u)); p.e.setAttribute("transform", "translate(" + f1(pos.x) + " " + f1(pos.y) + ")"); if (p.u >= 1) kill(p); });
+  /* wave particles along the basilar membrane */
+  acc.cochp += dt * (1.5 + sm.waveEff * 8);
+  while (acc.cochp >= 1) { acc.cochp--; const p = free(cochp); if (p) emit(p, 0, 0, 0, 0, 0); }
+  cochp.forEach((p) => { if (!p.on) return; p.u += dt * 0.26; const pos = trackCoch.at(Math.min(1, p.u)); p.e.setAttribute("transform", "translate(" + f1(pos.x) + " " + f1(pos.y - Math.sin(p.u * 3.14) * 8 * sm.waveEff) + ")"); if (p.u >= 1) kill(p); });
+  /* nerve pulses from the cochlea */
+  acc.nervep += dt * sm.nerve * 9;
+  while (acc.nervep >= 1) { acc.nervep--; const p = free(nervep); if (p) emit(p, 0, 0, 0, 0, 0); }
+  nervep.forEach((p) => { if (!p.on) return; p.u += dt * 0.45; const pos = trackNerve.at(Math.min(1, p.u)); p.e.setAttribute("transform", "translate(" + f1(pos.x) + " " + f1(pos.y) + ")"); if (p.u >= 1) kill(p); });
+
+  /* fork tests: bars, lateralisation arrows and result words */
+  rinneAirBar.setAttribute("width", f1(Math.max(2, sm.airHeard * 90)));
+  rinneBoneBar.setAttribute("width", f1(Math.max(2, sm.boneHeard * 90)));
+  const rt = m.airHeard > m.boneHeard + 0.05 ? "Rinne: air louder than bone" : m.boneHeard > m.airHeard + 0.05 ? "Rinne: bone louder than air" : "Rinne: air and bone similar";
+  if (rinneTxt.textContent !== rt) rinneTxt.textContent = rt;
+  const wt = m.cond ? "Weber: hears it in the affected ear" : m.sens ? "Weber: hears it in the better ear" : "Weber: hears it in the middle";
+  if (weberTxt.textContent !== wt) weberTxt.textContent = wt;
+  weberAff.setAttribute("opacity", sm.cond.toFixed(2));
+  weberGood.setAttribute("opacity", sm.sens.toFixed(2));
+
+  /* treatment pills, only the active one shows */
+  $("tx-aid").style.opacity = sm.aid.toFixed(2);
+  $("tx-surg").style.opacity = sm.surg.toFixed(2);
+  $("tx-impl").style.opacity = sm.impl.toFixed(2);
+
+  gg.air.set(sm.airHeard, wordOf(sm.airHeard, 0.35, 0.7, ["low", "reduced", "normal"]));
+  gg.bone.set(sm.boneHeard, wordOf(sm.boneHeard, 0.35, 0.7, ["low", "reduced", "normal"]));
+  gg.wave.set(sm.waveEff, wordOf(sm.waveEff, 0.3, 0.65, ["small", "reduced", "full"]));
+  gg.hair.set(sm.coch, wordOf(sm.coch, 0.35, 0.7, ["damaged", "reduced", "healthy"]));
+  gg.nerve.set(sm.nerve, wordOf(sm.nerve, 0.35, 0.7, ["low", "reduced", "normal"]));
+  gg.hear.set(sm.hearing, wordOf(sm.hearing, 0.35, 0.7, ["low", "reduced", "normal"]));
+}
+run({ init, step });
+</script></body></html>
