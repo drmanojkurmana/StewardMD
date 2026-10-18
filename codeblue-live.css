@@ -1049,7 +1049,8 @@ body:not(.dark) #cblRoot .cbl-btn.cbl-primary {
 #cblRoot .cbl-node.done{color:var(--cbl-muted)}
 #cblRoot .cbl-nodecheck{flex:none;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;color:var(--cbl-rosc)}
 #cblRoot .cbl-nodecheck svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.75}
-#cblRoot .cbl-nodetext{flex:1}
+#cblRoot .cbl-nodetext{flex:1;min-width:0}
+#cblRoot .cbl-flowsrc{font-size:12px;color:var(--cbl-muted);margin:10px 2px 0;line-height:1.4}
 #cblRoot .cbl-node .cbl-gsrc{display:block;font-size:11px;color:var(--cbl-muted);margin-top:2px}
 #cblRoot .cbl-conn{display:flex;flex-direction:column;align-items:center;height:26px;flex:none}
 #cblRoot .cbl-connline{width:1px;flex:1;background:#343a40;background:var(--cbl-line)}
@@ -1130,3 +1131,38 @@ body:not(.dark) #cblRoot .cbl-btn.cbl-primary {
 }
 @media(prefers-reduced-motion:reduce){#cblRoot .cbl-switch .cbl-knob{transition:none}}
 #cblRoot .cbl-quickchip.cbl-toggle.on{background:var(--cbl-s1);color:var(--cbl-ink);border-color:var(--cbl-line)}
+
+/* cb4-I iPad portrait (768 to 1023 px wide, taller than wide): one main
+ * column at full width. The timeline returns to the phone bottom drawer
+ * (slim handle above the tab bar), the clock card spans the full width
+ * with the ring on the left and the Vent readout as the slim phone row
+ * under it, and the tile grid keeps fixed-height rows that never stretch
+ * to fill the leftover height. Landscape (1024 px and up) is untouched. */
+@media (min-width:768px) and (max-width:1023px) and (orientation:portrait){
+ #cblRoot .cbl-runbody{flex-direction:column}
+ #cblRoot .cbl-maincol{flex:1 1 0;width:100%;min-width:0}
+ #cblRoot .cbl-timeline{position:absolute;left:0;right:0;bottom:0;top:auto;flex:none;max-height:62%;transform:translateY(102%);border-top:1px solid var(--cbl-line);border-left:0;border-top-left-radius:var(--cbl-radius,12px);border-top-right-radius:var(--cbl-radius,12px);z-index:5}
+ #cblRoot .cbl-timeline.open{transform:none}
+ #cblRoot .cbl-tlscrim{display:block}
+ #cblRoot .cbl-tlhandle{display:flex;margin-top:auto}
+ #cblRoot .cbl-timer{gap:12px;padding:16px 20px 20px}
+ #cblRoot .cbl-ringrow{flex-direction:column;height:auto;gap:0}
+ #cblRoot .cbl-ringcard{flex:none;flex-direction:row;align-items:center;gap:16px;padding:16px 20px;border-bottom:0;border-bottom-left-radius:0;border-bottom-right-radius:0}
+ #cblRoot .cbl-ring{width:112px;height:112px;flex:none}
+ #cblRoot .cbl-ringmeta{flex:1 1 auto;min-width:0}
+ #cblRoot .cbl-ringtime{font-size:56px}
+ #cblRoot .cbl-ringline{white-space:normal}
+ #cblRoot .cbl-vent{flex:none;flex-direction:row;align-items:center;gap:10px;min-height:56px;padding:6px 10px 6px 20px;border-top:0;border-top-left-radius:0;border-top-right-radius:0;border-bottom-left-radius:var(--cbl-radius,14px);border-bottom-right-radius:var(--cbl-radius,14px);box-shadow:var(--cbl-shadow);margin:0}
+ #cblRoot .cbl-vents{display:none}
+ #cblRoot .cbl-ventcue{margin-left:auto;margin-top:0}
+ #cblRoot .cbl-due{flex:none}
+ #cblRoot .cbl-actions{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:92px;align-content:start;align-items:stretch;gap:12px;flex:none;height:auto;overflow:visible}
+ #cblRoot .cbl-tile,#cblRoot .cbl-drug{min-height:92px;height:auto}
+ #cblRoot .cbl-actions [data-kind="note"]{grid-column:1/-1;height:64px;min-height:64px;align-self:start;display:flex;flex-direction:row;align-items:center;gap:10px}
+ #cblRoot .cbl-settings-grid{display:block}
+ #cblRoot .cbl-setpane{display:none;border-left:0;padding-left:0}
+ #cblRoot .cbl-settings.has-detail .cbl-setroot{display:none}
+ #cblRoot .cbl-settings.has-detail .cbl-setpane{display:block}
+ #cblRoot .cbl-setdetail .cbl-backbtn{display:inline-flex}
+ #cblRoot .cbl-refgrid{grid-template-columns:repeat(2,1fr)}
+}

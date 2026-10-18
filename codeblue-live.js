@@ -594,7 +594,7 @@
     var src = modeSrc(mode);
     var out = [];
     if (epiN === 0) {
-      out.push({ id: "epi-now", text: "Non shockable rhythm. Epinephrine is indicated as soon as possible.", urgency: "due", src: src });
+      out.push({ id: "epi-now", text: "Non-shockable rhythm. Epinephrine is indicated as soon as possible.", urgency: "due", src: src });
     } else {
       out.push({ id: "epi-now", text: "Epinephrine timing is on the strip above.", urgency: epiUrgency(sinceEpi), src: src });
     }
@@ -1682,7 +1682,7 @@
   }
   /* Flowchart nodes: state is done (logged), current (next prompt) or future. */
   function flowNode(id, text, state, loggable, src) {
-    var inner = '<span class="cbl-nodecheck" aria-hidden="true">' + (state === "done" ? ICONS.check : "") + '</span><span class="cbl-nodetext">' + esc(text) + "</span>" + (src ? '<span class="cbl-gsrc">' + esc(src) + "</span>" : "");
+    var inner = '<span class="cbl-nodecheck" aria-hidden="true">' + (state === "done" ? ICONS.check : "") + '</span><span class="cbl-nodetext">' + esc(text) + "</span>";
     if (loggable) return '<button type="button" class="cbl-node ' + state + '" data-act="notes-step" data-step="' + esc(id) + '" data-node="' + esc(id) + '">' + inner + "</button>";
     return '<div class="cbl-node ' + state + '" data-node="' + esc(id) + '">' + inner + "</div>";
   }
@@ -1719,7 +1719,8 @@
         '<button type="button" class="cbl-bchip' + (activeBranch === "shockable" ? " on" : "") + '" data-act="notes-branch" data-branch="shockable" aria-pressed="' + (activeBranch === "shockable") + '">Shockable</button>' +
         '<button type="button" class="cbl-bchip' + (activeBranch === "nonshockable" ? " on" : "") + '" data-act="notes-branch" data-branch="nonshockable" aria-pressed="' + (activeBranch === "nonshockable") + '">Non-shockable</button></div>' +
         '<div class="cbl-branches">' + branchHtml("shockable", "Shockable: VF and pulseless VT", shockPrompts) + branchHtml("nonshockable", "Non-shockable: PEA and asystole", nonPrompts) + "</div>" + flowConn() +
-        flowNode("rosc", "ROSC: post-ROSC care", sess.rosc ? "done" : "", sess.rosc ? false : true, SRC.postRosc) + "</div>";
+        flowNode("rosc", "ROSC: post-ROSC care", sess.rosc ? "done" : "", sess.rosc ? false : true, SRC.postRosc) +
+        '<p class="cbl-flowsrc">Source: ' + esc(modeSrc(sess.mode)) + "</p></div>";
     }
     var prompts = algoPrompts();
     var seen = false;
@@ -1729,7 +1730,8 @@
       var loggable = true;
       return flowNode(p.id, p.text, st, loggable, p.src);
     });
-    return '<div class="cbl-flowchart" data-state="flowchart" data-algo="' + esc(notesAlgo) + '">' + nodes2.join(flowConn()) + "</div>";
+    return '<div class="cbl-flowchart" data-state="flowchart" data-algo="' + esc(notesAlgo) + '">' + nodes2.join(flowConn()) +
+      (prompts.length && prompts[0].src ? '<p class="cbl-flowsrc">Source: ' + esc(prompts[0].src) + "</p>" : "") + "</div>";
   }
   function notesTabView() {
     var algoTabs = [["arrest", "Arrest"], ["brady", "Bradycardia"], ["tachy", "Tachycardia"], ["postrosc", "ROSC"]].map(function (t) {

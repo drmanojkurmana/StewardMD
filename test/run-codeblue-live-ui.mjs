@@ -112,6 +112,15 @@ async function layoutAudit(tag, mode) {
     ok(handle === "none", tag + ": no timeline toggle on iPad");
     const empty = await ev(`return Array.from(document.querySelectorAll('${CBL} .cbl-priority > *, ${CBL} .cbl-secgrid > *')).filter(function (el) { return el.textContent.trim().length === 0; }).length;`);
     ok(empty === 0, tag + ": every grid cell has content");
+  } else if (mode === "ipad-portrait") {
+    const handle = await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-tlhandle')).display;`);
+    ok(handle !== "none", tag + ": slim timeline handle present on iPad portrait");
+    const tlPos = await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-timeline')).position;`);
+    ok(tlPos === "absolute", tag + ": timeline is the bottom drawer on iPad portrait (" + tlPos + ")");
+    const mainW = await ev(`return Math.round(document.querySelector('${CBL} .cbl-maincol').getBoundingClientRect().width);`);
+    ok(typeof mainW === "number" && mainW >= 760, tag + ": single main column uses the full width (" + mainW + " px)");
+    const empty = await ev(`return Array.from(document.querySelectorAll('${CBL} .cbl-priority > *, ${CBL} .cbl-secgrid > *')).filter(function (el) { return el.textContent.trim().length === 0; }).length;`);
+    ok(empty === 0, tag + ": every grid cell has content");
   } else {
     const handle = await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-tlhandle')).display;`);
     ok(handle !== "none", tag + ": slim timeline handle present on phone");
@@ -176,6 +185,33 @@ async function shellAudit(tag) {
     return bad;
   })();`);
   ok(Array.isArray(overlap2) && overlap2.length === 0, tag + ": no overlapping interactive rects (" + (overlap2 || []).join("|") + ")");
+}
+
+/* cb4-I iPad portrait contract (820x1180 and 768x1024): the four priority
+ * tiles are fully inside the viewport and above the tab bar (shellAudit),
+ * tile rows keep a fixed height and never stretch, the clock sits inside
+ * its full-width card and never overlaps the slim Vent row. */
+async function portraitAudit(tag) {
+  await shellAudit(tag);
+  const heights = await ev(`return Array.from(document.querySelectorAll('${CBL} .cbl-tile, ${CBL} .cbl-drug')).filter(function (el) { return el.getAttribute("data-kind") !== "note"; }).map(function (el) { return Math.round(el.getBoundingClientRect().height); });`);
+  ok(Array.isArray(heights) && heights.length >= 8 && heights.every((h) => h >= 80 && h <= 110), tag + ": tile heights within 80 to 110 px (" + (heights || []).join(",") + ")");
+  const noteH = await ev(`var el = document.querySelector('${CBL} .cbl-actions [data-kind="note"]'); return el ? Math.round(el.getBoundingClientRect().height) : null;`);
+  ok(noteH !== null && noteH >= 56 && noteH <= 72, tag + ": Note is a normal-height full-width bar (" + noteH + " px)");
+  const fit = await ev(`return (function () {
+    var t = document.querySelector('${CBL} .cbl-ringtime'), c = document.querySelector('${CBL} .cbl-ringcard'), v = document.querySelector('${CBL} .cbl-vent');
+    if (!t || !c || !v) return { clock: false, vent: false };
+    var tr = t.getBoundingClientRect(), cr = c.getBoundingClientRect(), vr = v.getBoundingClientRect();
+    return {
+      clock: tr.left >= cr.left - 1 && tr.right <= cr.right + 1 && tr.top >= cr.top - 1 && tr.bottom <= cr.bottom + 1,
+      vent: cr.bottom <= vr.top + 1 && tr.bottom <= vr.top + 1,
+      ventSlim: vr.height >= 44 && vr.height <= 72
+    };
+  })();`);
+  ok(!!(fit && fit.clock), tag + ": clock inside its card " + JSON.stringify(fit));
+  ok(!!(fit && fit.vent), tag + ": clock card does not overlap the Vent row " + JSON.stringify(fit));
+  ok(!!(fit && fit.ventSlim), tag + ": Vent is the slim inline row " + JSON.stringify(fit));
+  const cols = await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-actions')).gridTemplateColumns.split(" ").length;`);
+  ok(cols === 4, tag + ": 4 column tile grid in portrait (" + cols + ")");
 }
 
 async function contrast(tag) {
@@ -284,6 +320,11 @@ try {
   ok(await ev(`return document.querySelectorAll('${CBL} [data-state="reference-grid"] .cbl-refcard').length === 8;`) === true, "notes reference grid renders 8 cards");
   ok(await ev(`return !!document.querySelector('${CBL} [data-state="flowchart"]');`) === true, "notes flowchart renders");
   ok(await ev(`return document.querySelectorAll('${CBL} [data-state="flowchart"] .cbl-node').length >= 5;`) === true, "flowchart has nodes");
+  ok(await ev(`return document.querySelectorAll('${CBL} [data-state="flowchart"] .cbl-node .cbl-gsrc').length === 0;`) === true, "flowchart nodes carry no repeated citation");
+  ok(await ev(`return document.querySelectorAll('${CBL} [data-state="flowchart"] .cbl-flowsrc').length === 1;`) === true, "flowchart shows its source once");
+  ok(await ev(`return document.querySelector('${CBL} [data-state="flowchart"] .cbl-flowsrc').textContent === "Source: AHA 2020 adult cardiac arrest algorithm";`) === true, "flowchart source footnote text");
+  ok(await ev(`return document.querySelector('${CBL} [data-state="flowchart"]').textContent.indexOf("Non-shockable rhythm.") >= 0;`) === true, "flowchart writes Non-shockable with a hyphen");
+  ok(await ev(`return document.querySelector('${CBL} [data-state="flowchart"]').textContent.indexOf("Non shockable") < 0;`) === true, "no unhyphenated Non shockable label");
   ok(await ev(`return !document.querySelector('${CBL} [data-state="reference-grid"] .cbl-refprompts');`) === true, "no duplicated prompts inside reference tiles");
   await click(`${CBL} [data-act="notes-open"][data-id="hsts"]`);
   ok(await until(`return !!document.querySelector('${CBL} [data-state="reference-sheet"]');`, 5000), "reference tile opens a detail sheet");
@@ -545,21 +586,36 @@ try {
   ok(await ev(`return !!document.querySelector(".cb-sheet-ov, .cb-sheet");`) === true, "linked end opens the code sheet");
   await ev(`var o = document.querySelector(".cb-sheet-ov"); if (o) o.remove(); CodeBlueLive.close(); try{localStorage.clear();}catch(e){} delete window.SMD_ICU_GROUPS; return 1;`);
 
-  /* iPad: 820x1180 portrait, three zones, timeline as a right column. */
+  /* iPad portrait (cb4-I): 820x1180, single main column at full width,
+   * timeline as the phone bottom drawer from the slim handle, fixed-height
+   * tile rows, clock inside its full-width card beside the ring. */
   await call("Emulation.setDeviceMetricsOverride", { width: 820, height: 1180, deviceScaleFactor: 2, mobile: true });
   await ev(`CodeBlueLive.open(); return 1;`);
   await ev(`document.querySelector('${CBL} [data-act="start"]').click(); return 1;`);
   ok(await until(viewIs("running"), 5000), "running at 820x1180");
-  ok(await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-timeline')).position === "static";`) === true, "iPad portrait: timeline is a right column");
+  ok(await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-timeline')).position === "absolute";`) === true, "iPad portrait: timeline is a bottom drawer, not a right column");
   ok(await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-actions')).gridTemplateColumns.split(" ").length === 4;`) === true, "iPad portrait: 4 column action grid");
   ok(await ev(`return !!document.querySelector('${CBL} [data-state="strip"]');`) === true, "iPad portrait: strip visible");
   await click(`${CBL} [data-act="tab-log"]`);
   ok(await until(`return CodeBlueLive._rt.tab() === "log";`, 5000), "iPad portrait: log tab opens");
   ok(await ev(`return !!document.querySelector('${CBL} [data-state="strip"]');`) === true, "iPad portrait: strip stays above the Log tab");
+  await shot("logtab-820", true);
   await click(`${CBL} [data-act="tab-timer"]`);
+  await click(`${CBL} [data-act="timeline-toggle"]`);
+  ok(await ev(`return document.querySelector('${CBL} [data-state="timeline"]').classList.contains("open");`) === true, "iPad portrait: timeline drawer opens from the slim handle");
+  await click(`${CBL} [data-act="timeline-toggle"]`);
+  ok(await ev(`return !document.querySelector('${CBL} [data-state="timeline"]').classList.contains("open");`) === true, "iPad portrait: timeline drawer closes");
   await metrics("running-820"); await contrast("running-820-dark"); await visualAudit("running-820");
-  await layoutAudit("running-820", "ipad"); await shellAudit("running-820");
+  await layoutAudit("running-820", "ipad-portrait"); await portraitAudit("running-820");
   await shot("running-820", false); await shot("running-820", true);
+
+  /* iPad portrait, small: 768x1024 holds the same contract. */
+  await call("Emulation.setDeviceMetricsOverride", { width: 768, height: 1024, deviceScaleFactor: 2, mobile: true });
+  await sleep(300);
+  ok(await until(viewIs("running"), 5000), "running at 768x1024");
+  await metrics("running-768"); await visualAudit("running-768");
+  await layoutAudit("running-768", "ipad-portrait"); await portraitAudit("running-768");
+  await shot("running-768", false); await shot("running-768", true);
 
   /* iPad: 1194x834 landscape. */
   await call("Emulation.setDeviceMetricsOverride", { width: 1194, height: 834, deviceScaleFactor: 2, mobile: true });

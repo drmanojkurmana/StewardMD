@@ -161,6 +161,15 @@ test("guide: shockable, non-shockable, bradycardia, tachycardia, post-ROSC track
   assert.ok(post.some((p) => /12 lead ECG/i.test(p.text)));
 });
 
+test("guide: non-shockable label is hyphenated in every track", () => {
+  for (const mode of E.MODES) {
+    const non = E.guideFor({ mode, lastRhythm: "PEA", shockCount: 0, epiCount: 0, secsSinceEpi: null, rosc: false });
+    for (const p of non) assert.ok(!/Non shockable/.test(p.text), mode + ": " + p.text);
+  }
+  const adult = E.guideFor({ mode: "adult", lastRhythm: "PEA", shockCount: 0, epiCount: 0, secsSinceEpi: null, rosc: false });
+  assert.ok(adult.some((p) => p.text.indexOf("Non-shockable rhythm.") === 0));
+});
+
 test("guide: every prompt has id, text, urgency and a source line", () => {
   const rhythms = [null, "VF", "VT (pulseless)", "PEA", "Asystole",
     "Sinus rhythm (pulse)", "Bradycardia (pulse)", "Tachycardia (pulse)"];
