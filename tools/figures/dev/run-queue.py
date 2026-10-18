@@ -48,8 +48,10 @@ def hint(topic):
     r = sh(f'cd {HOME}/harrison-work && uv run --with pymupdf python -I hints.py "{lead}" 2>/dev/null')
     m = re.search(r"-> Harrison '([^']+)' p(\d+): (.*)", r.stdout)
     if not m: return ""
-    words = {w for w in re.findall(r"[a-z]{5,}", lead.lower())}
-    if not any(w[:5] in m.group(1).lower() for w in words): return ""
+    us = lambda t: re.sub("oe", "e", re.sub("ae", "e", t.lower()))
+    lw = re.findall(r"[a-z]{4,}", us(lead)); tw = re.findall(r"[a-z]{4,}", us(m.group(1)))
+    # accept only a clear match: a one-word lead that is a title word, or two stems overlap (a wrong chapter is worse than no hint)
+    if not (lw and ((len(lw) == 1 and lw[0] in tw) or len({w[:5] for w in lw} & {w[:5] for w in tw}) >= 2)): return ""
     return "Harrison reference concepts (keywords only, so the scene covers the mechanism steps a standard textbook stresses): " + m.group(3)[:300]
 
 def write_prompt(scene, fid, topic):
