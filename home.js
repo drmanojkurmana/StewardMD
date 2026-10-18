@@ -10130,7 +10130,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   window.SMD_dictateMaik = function () { try { openAskAi("", { dictate: true }); } catch (e) {} };
 
   // ---- Display & Accessibility engine ----
-  var DKEY = "smd_display_v1", DENS = { compact: 0.86, default: 1, comfortable: 1.18, large: 1.4 }, DDEF = { fontScale: 1, density: "default", autoFit: true, theme: "classic", font: "plex", headingStyle: "default", appearance: "standard" };
+  var DKEY = "smd_display_v1", DENS = { compact: 0.86, default: 1, comfortable: 1.18, large: 1.4 }, DDEF = { fontScale: 1, density: "default", autoFit: true, theme: "classic", font: "plex", headingStyle: "default", appearance: "liquid", appearSet: false };
   var APPEARANCES = [{ id: "standard", name: "Standard" }, { id: "frosted", name: "Frosted" }, { id: "liquid", name: "Liquid" }, { id: "tinted3d", name: "Tinted 3D" }, { id: "blend", name: "Blend" }];
   var THEMES = [
     { id: "classic", name: "Classic", accent: "#0e6e63", paper: "#f6f7f5" },
@@ -10172,7 +10172,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           theme: okTheme ? o.theme : "classic",
           font: okFont ? o.font : "plex",
           headingStyle: o.headingStyle === "script" ? "script" : "default",
-          appearance: okAppear ? o.appearance : "standard"
+          // Liquid is the default look (owner 2026-10-18). A saved "standard" counts as a choice only when the user picked it
+          // themselves (appearSet); older installs saved "standard" without ever choosing it, so they move to the default once.
+          appearance: (okAppear && (o.appearSet || o.appearance !== "standard")) ? o.appearance : "liquid",
+          appearSet: !!(okAppear && (o.appearSet || o.appearance !== "standard"))
         };
       }
     } catch (e) {}
@@ -10361,7 +10364,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       applyD(); refreshD();
     });
     s.querySelectorAll("#hvTheme .hv-th").forEach(function (b) { b.addEventListener("click", function () { ds.theme = b.getAttribute("data-t"); applyD(); refreshD(); }); });
-    s.querySelectorAll("#hvAppear button").forEach(function (b) { b.addEventListener("click", function () { ds.appearance = b.getAttribute("data-a"); applyD(); refreshD(); }); });
+    s.querySelectorAll("#hvAppear button").forEach(function (b) { b.addEventListener("click", function () { ds.appearance = b.getAttribute("data-a"); ds.appearSet = true; applyD(); refreshD(); }); });
 
     // The MaiK section edits the theme on screen: it used to edit only the light palette, so in dark
     // mode every change here did nothing (2026-09-26). Dark keeps its own background now.
