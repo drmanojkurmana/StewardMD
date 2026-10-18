@@ -16,9 +16,15 @@ for (const id of ids) {
         const a = pills[i].r, c = pills[j].r;
         if (a.left < c.right - 1 && c.left < a.right - 1 && a.top < c.bottom - 1 && c.top < a.bottom - 1) out.push(pills[i].t + " x " + pills[j].t);
       }
+      const texts = [...document.querySelectorAll("svg text")].filter((e) => e.getBoundingClientRect().width && e.textContent.trim() && !e.closest(".p-pill") && getComputedStyle(e).opacity !== "0")
+        .map((e) => ({ t: e.textContent.trim(), r: e.getBoundingClientRect() }));
+      for (const a of pills) for (const c of texts) {
+        const x = a.r, y = c.r;
+        if (a.t && x.left < y.right - 2 && y.left < x.right - 2 && x.top < y.bottom - 2 && y.top < x.bottom - 2) out.push("pill '" + a.t + "' on text '" + c.t.slice(0, 24) + "'");
+      }
       return out;
     });
-    r.forEach((x) => found.add(x));
+    r.filter((x) => x !== " x ").forEach((x) => found.add(x));
   }
   console.log(id, found.size ? "OVERLAP: " + [...found].join(" | ") : "ok");
 }

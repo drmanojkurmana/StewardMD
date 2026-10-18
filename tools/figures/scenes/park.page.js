@@ -1,12 +1,12 @@
 /* Parkinson scene: dopamine loss, direct and indirect pathways, the GPi brake, thalamus and a moving limb. */
 const layers = { nodes: $("nodes"), snc: $("snc-cells"), parts: $("parts"), limb: $("limb"), over: $("over"), panel: $("panel") };
 const NODES = [
-  ["snc", "snc", 170, 220, 36, "SNc", "dopamine"],
-  ["stri", "stri", 480, 220, 42, "Striatum", "input"],
-  ["gpe", "gpe", 300, 345, 30, "GPe", "relay"],
-  ["stn", "stn", 480, 345, 26, "STN", "relay"],
-  ["gpi", "gpi", 650, 345, 32, "GPi", "brake"],
-  ["thal", "thal", 650, 220, 32, "Thalamus", "relay"],
+  ["snc", "snc", 170, 220, 36],
+  ["stri", "stri", 480, 220, 42],
+  ["gpe", "gpe", 300, 345, 30],
+  ["stn", "stn", 480, 345, 26],
+  ["gpi", "gpi", 650, 345, 32],
+  ["thal", "thal", 650, 220, 32],
 ];
 const nodeG = {};
 const sncCells = [];
@@ -39,31 +39,27 @@ function initPanel() {
   [["dopa", "Dopamine", "g-dopa", "Dopamine signal reaching the striatum from the substantia nigra. It falls as dopamine neurons are lost and rises again with the treatments shown, which do not restore the neurons."], ["dir", "Direct", "g-dir", "Direct pathway: striatum to GPi. Dopamine excites it. It releases the thalamus from the GPi brake and promotes movement."], ["ind", "Indirect", "g-ind", "Indirect pathway: striatum to GPe to STN to GPi. Dopamine restrains it. When dopamine falls it becomes overactive and strengthens the brake."], ["gpi", "GPi brake", "g-gpi", "Output of the GPi onto the thalamus. A strong brake holds the thalamus down and movement drive falls."], ["move", "Movement", "g-move", "Thalamic drive to the cortex and to movement. Low drive means slow, small movement (bradykinesia), with rigidity and resting tremor."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
   const ox = layers.over;
-  pill(ox, "Cortex", 480, 88, 480, 67, "Cortex: the motor cortex excites the striatum with glutamate and receives drive back from the thalamus. It issues the final movement command.");
+  pill(ox, "Cortex", 480, 88, 480, 58, "Cortex: the motor cortex excites the striatum with glutamate and receives drive back from the thalamus. It issues the final movement command.");
   pill(ox, "Substantia nigra", 170, 184, 165, 148, "Substantia nigra pars compacta: dopamine neurons that project to the striatum. These neurons are progressively lost in Parkinson disease.");
-  pill(ox, "Striatum", 452, 186, 365, 165, "Striatum: the input nucleus. Dopamine excites its D1 direct pathway neurons and inhibits its D2 indirect pathway neurons.");
+  pill(ox, "Striatum", 452, 186, 365, 160, "Striatum: the input nucleus. Dopamine excites its D1 direct pathway neurons and inhibits its D2 indirect pathway neurons.");
   pill(ox, "Dopamine", 320, 220, 325, 195, "Dopamine released in the striatum. It boosts the direct pathway and restrains the indirect pathway, so movement is released at the right scale.");
-  pill(ox, "Thalamus", 650, 188, 650, 165, "Thalamus: the relay to the motor cortex. The GPi holds it down; when the direct pathway releases it, movement drive rises.");
+  pill(ox, "Thalamus", 650, 188, 650, 162, "Thalamus: the relay to the motor cortex. The GPi holds it down; when the direct pathway releases it, movement drive rises.");
   pill(ox, "Movement", 830, 190, 830, 150, "Movement output. With low drive the limb moves slowly and with small amplitude (bradykinesia), feels stiff (rigidity), and at rest it shakes (tremor).");
-  pill(ox, "Direct pathway", 566, 282, 575, 270, "Direct pathway: striatum inhibits the GPi, the GPi releases the thalamus, and movement is promoted. Dopamine loss weakens this pathway.");
-  pill(ox, "Indirect pathway", 390, 284, 390, 308, "Indirect pathway: striatum to GPe to subthalamic nucleus to GPi. It ends by exciting the GPi, so it applies the brake. Dopamine loss makes it overactive.");
+  pill(ox, "Direct pathway", 566, 282, 515, 298, "Direct pathway: striatum inhibits the GPi, the GPi releases the thalamus, and movement is promoted. Dopamine loss weakens this pathway.");
+  pill(ox, "Indirect pathway", 360, 300, 170, 295, "Indirect pathway: striatum to GPe to subthalamic nucleus to GPi. It ends by exciting the GPi, so it applies the brake. Dopamine loss makes it overactive.");
   pill(ox, "GPe", 272, 345, 195, 345, "Globus pallidus externa (GPe): the first relay of the indirect pathway. It inhibits the subthalamic nucleus.");
   pill(ox, "STN", 480, 371, 480, 395, "Subthalamic nucleus (STN): it excites the GPi with glutamate. Released from GPe inhibition, it drives the brake harder.");
-  pill(ox, "GPi output", 650, 377, 650, 395, "Globus pallidus interna (GPi): the output brake. Its inhibitory output onto the thalamus sets how much movement drive gets through.");
+  pill(ox, "GPi output", 650, 377, 650, 398, "Globus pallidus interna (GPi): the output brake. Its inhibitory output onto the thalamus sets how much movement drive gets through.");
 }
 const sm = { DA: 0.5, raw: 0.5, D: 0.5, I: 0.5, G: 0.5, T: 0.4, Sym: 0.5 };
 const acc = { dopa: 0, dir: 0, ind: 0, gpi: 0, thal: 0 };
 function init() {
   const cg = mk("g", {}, layers.nodes);
   mk("rect", { class: "pk-rest", x: 390, y: 88, width: 180, height: 44, rx: 12 }, cg);
-  const ct = mk("text", { class: "pk-node-t", x: 480, y: 108, "text-anchor": "middle" }, cg); ct.textContent = "CORTEX";
-  const cs = mk("text", { class: "pk-node-s", x: 480, y: 123, "text-anchor": "middle" }, cg); cs.textContent = "movement command";
   nodeG.cor = cg;
-  NODES.forEach(([id, cls, x, y, r, name, sub]) => {
+  NODES.forEach(([id, cls, x, y, r]) => {
     const g = cell(layers.nodes, { cls, r, nuc: 0.34, seed: x * 0.01 + y * 0.02, wob: 0.08 });
     place(g, x, y, 0, 1);
-    const t1 = mk("text", { class: "pk-node-t", x: 0, y: -1, "text-anchor": "middle" }, g); t1.textContent = name;
-    const t2 = mk("text", { class: "pk-node-s", x: 0, y: 12, "text-anchor": "middle" }, g); t2.textContent = sub;
     nodeG[id] = g;
   });
   for (let i = 0; i < 9; i++) {

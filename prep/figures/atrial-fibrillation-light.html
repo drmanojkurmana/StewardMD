@@ -290,7 +290,7 @@ body{--c-ch:#6b3a4a;--c-flash:#ff9a7a}body[data-theme="light"]{--c-ch:#e9b8c2;--
 <clipPath id="ecgclip"><rect x="556" y="92" width="372" height="150"/></clipPath>
 <g clip-path="url(#ecgclip)"><path class="af-grid major" d="M556 92V242"/><path class="af-grid" d="M574 92V242"/><path class="af-grid" d="M592 92V242"/><path class="af-grid" d="M610 92V242"/><path class="af-grid" d="M628 92V242"/><path class="af-grid major" d="M646 92V242"/><path class="af-grid" d="M664 92V242"/><path class="af-grid" d="M682 92V242"/><path class="af-grid" d="M700 92V242"/><path class="af-grid" d="M718 92V242"/><path class="af-grid major" d="M736 92V242"/><path class="af-grid" d="M754 92V242"/><path class="af-grid" d="M772 92V242"/><path class="af-grid" d="M790 92V242"/><path class="af-grid" d="M808 92V242"/><path class="af-grid major" d="M826 92V242"/><path class="af-grid" d="M844 92V242"/><path class="af-grid" d="M862 92V242"/><path class="af-grid" d="M880 92V242"/><path class="af-grid" d="M898 92V242"/><path class="af-grid major" d="M916 92V242"/><path class="af-grid major" d="M556 92H928"/><path class="af-grid" d="M556 110H928"/><path class="af-grid" d="M556 128H928"/><path class="af-grid" d="M556 146H928"/><path class="af-grid" d="M556 164H928"/><path class="af-grid major" d="M556 182H928"/><path class="af-grid" d="M556 200H928"/><path class="af-grid" d="M556 218H928"/><path class="af-grid" d="M556 236H928"/></g>
 <path class="af-base" d="M556 162H928"/>
-<text class="sc-zone sc-dim" x="566" y="264">ONE LEAD</text>
+<text class="sc-zone sc-dim" x="566" y="108">ONE LEAD</text>
 <g id="heart"></g><g id="parts"></g><g id="ecg"></g><g id="brain"></g><g id="over"></g><g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, rates in numbers or targets are shown or implied.</span></figcaption></figure>
 <div class="dr-controls">
   <label class="dr-range"><span>Pattern of atrial fibrillation</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="persistent"><span class="dr-ticks"><i>paroxysmal</i><i>persistent</i><i>permanent</i></span></label>
@@ -489,10 +489,10 @@ function init() {
 }
 function initPanel() {
   const o = L.over;
-  pill(o, "Pulmonary vein trigger", 304, 96, 150, 78, "Rapid ectopic firing from muscle sleeves around the pulmonary veins. This is the commonest trigger that starts atrial fibrillation.");
-  pill(o, "Re-entrant circuits", 210, 150, 360, 78, "Many small wandering re-entrant wavelets in the atria. The wavefront breaks up, so the atria quiver instead of contracting together.");
+  pill(o, "PV trigger", 304, 96, 82, 92, "Pulmonary vein trigger: rapid ectopic firing from muscle sleeves around the pulmonary veins. This is the commonest trigger that starts atrial fibrillation.");
+  pill(o, "Re-entry", 210, 150, 82, 126, "Re-entrant circuits: many small wandering re-entrant wavelets in the atria. The wavefront breaks up, so the atria quiver instead of contracting together.");
   pill(o, "Appendage clot", 274, 190, 82, 168, "The left atrial appendage: a small pouch where blood swirls slowly in atrial fibrillation. Stasis there lets a clot form.");
-  pill(o, "AV node filter", 272, 210, 482, 215, "The AV node is bombarded by atrial signals and lets only some through, at irregular intervals. That is why the pulse is irregularly irregular.");
+  pill(o, "AV node", 272, 210, 478, 215, "AV node filter: the AV node is bombarded by atrial signals and lets only some through, at irregular intervals. That is why the pulse is irregularly irregular.");
   pill(o, "Ventricles", 340, 320, 190, 418, "The ventricles follow the irregular signals that get through the AV node. When the rate is fast, filling and output fall.");
   pill(o, "Stasis", 260, 178, 380, 418, "Stasis: blood that barely moves in the fibrillating atrium and appendage. Slow flow is one part of clot formation.");
   pill(o, "No P waves", 600, 162, 720, 275, "On the ECG there is no clear P wave before each QRS, because the atria are not beating in order.");

@@ -65,7 +65,7 @@ const body = `
 <clipPath id="ecgclip"><rect x="${ECG.x}" y="${ECG.y}" width="${ECG.w}" height="${ECG.h}"/></clipPath>
 <g clip-path="url(#ecgclip)">${grid}</g>
 <path class="af-base" d="M${ECG.x} ${ECG.base}H${ECG.x + ECG.w}"/>
-<text class="sc-zone sc-dim" x="566" y="${ECG.y + ECG.h + 22}">ONE LEAD</text>
+<text class="sc-zone sc-dim" x="566" y="${ECG.y + 16}">ONE LEAD</text>
 <g id="heart"></g><g id="parts"></g><g id="ecg"></g><g id="brain"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({

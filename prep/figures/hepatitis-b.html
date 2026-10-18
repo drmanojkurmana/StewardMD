@@ -1,0 +1,552 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Hepatitis B: life cycle, immune injury and outcome</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="dark"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
+body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
+.t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
+.t-ven .tb-body{fill:color-mix(in srgb,var(--d-ven) 62%,var(--anatomy-paper))}.t-ven .tb-edge{stroke:var(--d-ven)}
+.t-dia .tb-body{fill:color-mix(in srgb,var(--d-dia) 55%,var(--anatomy-paper))}.t-dia .tb-edge{stroke:var(--d-dia)}
+.t-out .tb-body{fill:color-mix(in srgb,var(--d-ure) 40%,color-mix(in srgb,var(--d-dia) 40%,var(--anatomy-paper)))}
+.tb-shine{opacity:.5}
+.dr-lab-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}.dr-lab-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.dr-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.dr-pt{fill:var(--anatomy-strong);font:650 13px var(--anatomy-mono)}.dr-ps{fill:var(--anatomy-muted);font:11px var(--anatomy-mono)}.dr-pt2{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.dr-dband{fill:color-mix(in srgb,var(--d-dia) 13%,var(--anatomy-paper))}
+.dr-lumen{fill:color-mix(in srgb,var(--d-art) 15%,var(--anatomy-paper))}
+.dr-wall{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}.dr-pore{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.dr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4}.dr-beam-c{fill:none;stroke:var(--anatomy-hi);stroke-width:1.2}
+.dr-g-tr{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint)}.dr-g-fill{opacity:.95}
+#g-urea{fill:var(--d-ure)}#g-pot{fill:var(--d-pot)}#g-flu{fill:var(--d-wat)}
+.dr-g-v{fill:var(--anatomy-strong);font:600 10px var(--anatomy-mono);pointer-events:none}
+.dr-scr{fill:#0b1511;stroke:var(--anatomy-hi);stroke-width:.02}.dr-scr-bar{fill:#14261e}.dr-scr-fill{fill:var(--d-dia)}.dr-scr-led{fill:#555}
+.dr-vent{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.8}
+.p-rbc{fill:var(--d-rbc);stroke:color-mix(in srgb,var(--d-rbc) 50%,#000);stroke-width:.6}.p-rbc-c{fill:color-mix(in srgb,var(--d-rbc) 55%,#000);opacity:.55}
+.p-alb{fill:var(--d-alb);stroke:var(--anatomy-mid);stroke-width:.7}
+.p-ure{fill:var(--d-ure)}.p-pot{fill:var(--d-pot)}.p-bic{fill:var(--d-bic)}.p-wat{fill:var(--d-wat);opacity:.9}
+.p-rot-disc{fill:var(--anatomy-top);stroke:var(--anatomy-hi);stroke-width:1}.p-rot-hub{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}.p-roll{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:1}
+.p-plunger{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}.p-pad{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}
+.p-level{fill:color-mix(in srgb,var(--d-ven) 55%,var(--anatomy-paper));opacity:.9}.p-bubble{fill:none;stroke:var(--anatomy-hi);stroke-width:.8}
+.dr-fig .hot.dr-lab:hover .dr-lab-r{stroke:var(--anatomy-lit)}
+
+.t-sal .tb-body{fill:color-mix(in srgb,var(--d-bic) 45%,var(--anatomy-paper))}.t-sal .tb-edge{stroke:var(--d-bic)}
+.p-sal{fill:#fff;stroke:var(--d-bic);stroke-width:.8}
+.dr-jwin{fill:var(--anatomy-shade-1);stroke:var(--anatomy-hi);stroke-width:.02}.dr-jfill.dr-j-fresh{fill:var(--d-dia)}.dr-jfill.dr-j-used{fill:var(--d-ure)}.dr-jfill{opacity:.85}
+.dr-bez{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}.dr-face{fill:var(--anatomy-card)}.dr-ok{fill:none;stroke:#3ddc97;stroke-width:2.2;opacity:.8}
+.dr-tick{stroke:var(--anatomy-mid);stroke-width:.8}.dr-needle{stroke:var(--d-art);stroke-width:1.6;stroke-linecap:round}.dr-hub{fill:var(--anatomy-strong)}
+.dr-dl{fill:var(--anatomy-text);font:600 9.5px var(--anatomy-mono);pointer-events:none}
+.dr-dial:hover .dr-bez{stroke:var(--anatomy-lit)}
+
+.c-skin .iso-fill,.c-skin .iso-top{fill:var(--c-skin)}.c-gown .iso-fill,.c-gown .iso-top{fill:var(--c-gown)}.c-blanket .iso-fill,.c-blanket .iso-top{fill:var(--c-blanket)}
+.c-chair .iso-fill,.c-chair .iso-top{fill:var(--c-chair)}.c-chair2 .iso-fill,.c-chair2 .iso-top{fill:var(--c-chair2)}.c-vein .iso-fill,.c-vein .iso-top{fill:var(--c-vein)}
+.c-mach .iso-fill,.c-mach .iso-top{fill:var(--c-mach)}.c-mach2 .iso-fill,.c-mach2 .iso-top{fill:var(--c-mach2)}.c-door .iso-fill,.c-door .iso-top{fill:var(--c-door)}
+.c-skin .iso-shade,.c-gown .iso-shade,.c-blanket .iso-shade,.c-chair .iso-shade,.c-chair2 .iso-shade,.c-vein .iso-shade,.c-mach .iso-shade,.c-mach2 .iso-shade,.c-door .iso-shade{opacity:.45}
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
+
+.cl-hep{--cc:#d98a6a}.cl-hnuc{--cc:#8a7ac0}.cl-ctl{--cc:var(--c-lymph)}
+body[data-theme="light"] .cl-hep{--cc:#c97a5e}
+.hb-step{font-size:11px}
+.hb-box{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:.8}.hb-box.on{fill:color-mix(in srgb,var(--c-no) 35%,var(--anatomy-card));stroke:var(--c-no)}
+.hb-bn{fill:var(--anatomy-text);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.hb-env{fill:#c94f6d;stroke:#7a2b40;stroke-width:.8}.hb-core{fill:#f2d27a;stroke:#9a7a2a;stroke-width:.6}.hb-spk{stroke:#e8a0bf;stroke-width:1.2;stroke-linecap:round;fill:none}
+.hb-rna{fill:none;stroke:#f08a4b;stroke-width:1.5;stroke-linecap:round}.hb-dna{fill:none;stroke:#3a86e8;stroke-width:2;stroke-linecap:round}
+.hb-host{fill:none;stroke:var(--anatomy-hi);stroke-width:1.8;stroke-linecap:round}.hb-ccc{fill:none;stroke:#3a86e8;stroke-width:2.4}
+.hb-ab{fill:none;stroke:var(--c-good);stroke-width:2;stroke-linecap:round}.hb-rec{fill:none;stroke:#3a86e8;stroke-width:1.8;stroke-linecap:round}.hb-ribo{fill:var(--anatomy-mid)}
+.hb-fib{fill:none;stroke:#b08968;stroke-width:5;stroke-linecap:round}.hb-nod{fill:#a85d4a;stroke:#6e3527;stroke-width:.8}.hb-hcc{fill:#8e2f35;stroke:#4d1518;stroke-width:.9}.hb-hccn{fill:#4d1518}
+.hb-svp{fill:#e08a3c;stroke:#8a5a1e;stroke-width:.5}.hb-prot{fill:#e8a0bf;stroke:#6e2b49;stroke-width:.5}.hb-mrna{fill:#f08a4b}
+.hb-x{fill:none;stroke:var(--c-bad);stroke-width:2.4;stroke-linecap:round}.hb-xc{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.4}
+.hb-glow{fill:none;stroke:var(--c-bad);stroke-width:2}
+.pl-ax{stroke:var(--anatomy-mid);stroke-width:1;fill:none}
+.pl-sag{fill:none;stroke:var(--c-bad);stroke-width:2.6;stroke-linejoin:round}.pl-anti{fill:none;stroke:var(--c-good);stroke-width:2.6;stroke-linejoin:round}.pl-eag{fill:none;stroke:#e08a3c;stroke-width:2.2;stroke-linejoin:round;stroke-dasharray:5 3}
+.pl-sag.base,.pl-anti.base,.pl-eag.base{stroke-dasharray:4 4;stroke-width:1.4;opacity:.55}
+.pl-mk{stroke:var(--anatomy-strong);stroke-width:1;stroke-dasharray:2 3}.pl-dot{fill:var(--anatomy-strong)}
+.g-virus{fill:var(--c-bad)}.g-sag{fill:#e08a3c}.g-anti{fill:var(--c-good)}.g-inj{fill:var(--c-eos)}.g-fib{fill:#b08968}
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Hepatitis B: life cycle, immune injury and outcome</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>virus high · HBsAg high · liver injury raised · fibrosis some</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated hepatocyte and a marker plot over time. The virus enters through the NTCP receptor, forms cccDNA in the nucleus, makes viral RNA and proteins, copies its genome with its polymerase, assembles and leaves. Immune T cells kill infected hepatocytes, which is what injures the liver. The plot shows HBsAg, anti-HBs and HBeAg over time in acute resolving, chronic and cirrhosis courses. A nucleoside analogue blocks the polymerase; vaccine antibodies block entry and mainly prevent infection."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+<rect class="dr-panel" x="14" y="40" width="606" height="402" rx="16"/>
+<text class="sc-zone" x="32" y="64">A HEPATOCYTE AND ITS NEIGHBOURS</text>
+<text class="sc-lab hb-step" id="stepname" x="32" y="120">Step 1: entry</text>
+<g id="fib"></g>
+<g id="cellg"></g>
+<g id="steps"></g>
+<g id="over"></g>
+<rect class="dr-panel" x="632" y="40" width="314" height="402" rx="16"/>
+<text class="sc-zone" x="650" y="64">MARKERS OVER TIME</text>
+<g id="plot"></g>
+<g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or schedules are shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Course of infection</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="chronic"><span class="dr-ticks"><i>acute resolving</i><i>chronic</i><i>cirrhosis</i></span></label>
+  <label class="dr-range"><span>Treatment and prevention</span><select id="drug" data-without="No treatment" data-with="With intervention"><option value="0">none</option><option value="1">nucleoside analogue</option><option value="2">vaccine</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul><li><strong>How hepatitis B infects and injures the liver.</strong> The virion binds the NTCP bile-acid transporter on a hepatocyte and enters. Its partly double-stranded DNA is completed and kept in the nucleus as cccDNA, a stable mini-chromosome that host enzymes transcribe into viral RNAs. One RNA (pregenomic RNA) is packaged with the viral polymerase, which reverse-transcribes it back to DNA; new virions and large numbers of empty HBsAg particles are then secreted. The virus itself does little direct damage: liver injury is mainly immune-mediated, as cytotoxic T cells kill infected hepatocytes. Strong, broad immunity clears HBsAg and brings anti-HBs (resolution); weak or tolerant immunity leaves chronic infection, and years of injury and repair lay down scar tissue (cirrhosis), which raises the risk of liver failure and hepatocellular carcinoma. This is standard teaching in medicine, hepatology and infectious-disease texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Markers and treatment ideas shown.</strong> HBsAg marks current infection and persists in chronic disease; anti-HBs marks recovery and vaccine immunity; HBeAg marks active viral replication and infectivity, and its loss with anti-HBe is seroconversion. Nucleoside analogues block the viral polymerase and suppress replication and inflammation, but they rarely clear cccDNA or HBsAg, so stopping can relapse. Vaccine induces anti-HBs and prevents infection; it does not clear established chronic infection. These are teaching toggles only.</li></ul>
+<p><strong>What was simplified.</strong> Mother-to-child and other transmission routes, genotypes, HDV coinfection, occult infection, HBeAg-negative variants in detail, liver biopsy and elastography, transplant, hepatocellular carcinoma surveillance and treatment, resistance, and all doses, regimens and monitoring targets are left out. The marker curves are generic illustrations of each course and are not predictions for any person.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Course of infection","a":[0.15,0.55,0.9],"names":["acute, resolving","chronic","cirrhosis"],"ticks":["acute resolving","chronic","cirrhosis"],"start":1},"settings":[{"label":"none"},{"label":"nucleoside analogue"},{"label":"vaccine"}],"drugNames":["none","a nucleoside analogue","vaccine antibodies"],"status":"Course: {level} · {drug} ·"}};
+const modelOf = function modelOf(S, level, drug) {
+  const cl = (v) => Math.max(0, Math.min(1, v));
+  const VL0 = [0.3, 0.88, 0.62][level], SG0 = [0.32, 0.92, 0.86][level], EG0 = [0.45, 0.8, 0.45][level];
+  const IN0 = [0.68, 0.42, 0.55][level], FB0 = [0.04, 0.34, 0.96][level], AH0 = [0.82, 0.06, 0.04][level];
+  const na = drug === 1, vac = drug === 2;
+  const vacEff = vac ? [0.85, 0.1, 0.04][level] : 0;
+  const V = cl(VL0 * (na ? 0.14 : 1) * (1 - vacEff));
+  const Sag = cl(SG0 * (na ? 0.88 : 1) * (1 - vacEff * 0.9));
+  const Eag = cl(EG0 * (na ? 0.25 : 1) * (1 - vacEff * 0.7));
+  const Inj = cl(IN0 * (na ? (level === 2 ? 0.6 : 0.45) : 1) * (1 - vacEff * 0.55));
+  const Fib = cl(FB0 * (na && level < 2 ? 0.85 : 1));
+  const Anti = cl(AH0 + (vac ? [0.13, 0.05, 0.02][level] : 0));
+  const Ccc = cl(SG0 * (1 - vacEff * 0.9));
+  const risk = cl(Fib * (level === 2 ? 0.92 : level === 1 ? 0.3 : 0.05));
+  const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
+  const words = [w(V, 0.2, 0.55, ["low", "moderate", "high"]), w(Sag, 0.2, 0.6, ["cleared", "present", "high"]), w(Inj, 0.25, 0.58, ["low", "raised", "high"]), w(Fib, 0.2, 0.65, ["none", "some", "severe"])];
+  return { V, Sag, Eag, Inj, Fib, Anti, Ccc, risk, vacEff, blkP: na ? 1 : 0, blkE: vacEff, na: na ? 1 : 0, vac: vac ? 1 : 0, lvl: level, pos: [0.72, 0.48, 0.9][level], u0: S.level.a[level], words, readout: "virus " + words[0] + " · HBsAg " + words[1] + " · liver injury " + words[2] + " · fibrosis " + words[3] };
+};
+/* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); if (parent) parent.appendChild(el); return el; };
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const lerp = (a, b, t) => a + (b - a) * t;
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const f1 = (v) => (+v).toFixed(1);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const S = SC.S;
+let level = S.level.start, drug = 0, playing = !reduce.matches, visible = true, last = 0, frame = 0, tm = 0, M = null, SCN = null;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), l0 = q.get("l");
+  if (d0 > 0 && d0 < S.settings.length) { drug = d0; drugBox.value = String(d0); }
+  if (l0 !== null && l0 !== "" && +l0 >= 0 && +l0 < S.level.a.length) { level = +l0; levelBox.value = String(level); } }
+levelBox.setAttribute("aria-valuetext", S.level.names[level]);
+
+/* a smooth closed blob path (Catmull-Rom through points), centred on 0,0 */
+function blobD(r, seed, wob, n) {
+  n = n || 9; wob = wob === undefined ? 0.1 : wob; const pts = [];
+  for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, k = 1 + wob * Math.sin(t * 3 + seed * 1.7) + wob * 0.6 * Math.cos(t * 2 + seed * 2.3); pts.push([r * k * Math.cos(t), r * k * Math.sin(t)]); }
+  let d = "M" + f1(pts[0][0]) + " " + f1(pts[0][1]);
+  for (let i = 0; i < n; i++) { const p0 = pts[(i + n - 1) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " + f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]); }
+  return d + "Z";
+}
+/* a lit, shaded cell: body, shade ring, highlight, optional nucleus. cls colours it (CSS: .cl-<cls> .cl-b) */
+function cell(parent, o) {
+  const g = mk("g", { class: "cl cl-" + o.cls }, parent), r = o.r, seed = o.seed || Math.random() * 9;
+  mk("path", { class: "cl-b", d: blobD(r, seed, o.wob === undefined ? 0.09 : o.wob, o.n) }, g);
+  mk("path", { class: "cl-s", d: blobD(r * 0.86, seed, o.wob === undefined ? 0.09 : o.wob, o.n), transform: "translate(" + f1(r * 0.04) + " " + f1(r * 0.05) + ")" }, g);
+  mk("path", { class: "cl-h", d: blobD(r * 0.62, seed + 1, 0.05, 7), transform: "translate(" + f1(-r * 0.14) + " " + f1(-r * 0.16) + ")" }, g);
+  if (o.nuc) mk("path", { class: "cl-n" + (o.nucCls ? " " + o.nucCls : ""), d: blobD(r * o.nuc, seed + 2, 0.12, 7), transform: "translate(" + f1(r * 0.05) + " " + f1(r * 0.02) + ")" }, g);
+  if (o.x !== undefined) g.setAttribute("transform", "translate(" + f1(o.x) + " " + f1(o.y) + ")");
+  return g;
+}
+const place = (g, x, y, rot, sc) => g.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ")" + (rot ? " rotate(" + f1(rot) + ")" : "") + (sc && sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : ""));
+/* label pill with a leader; hover/focus shows `text` in the info line */
+function pill(parent, text, x, y, tx, ty, infoText) {
+  const lw = text.length * 6.2 + 14, g = mk("g", { class: "hot dr-lab", tabindex: "0", "data-info": infoText || text }, parent);
+  mk("path", { class: "dr-leader", d: "M" + f1(x) + " " + f1(y) + "L" + f1(tx) + " " + f1(ty + 8) }, g);
+  mk("circle", { class: "dr-dot", cx: f1(x), cy: f1(y), r: 1.6 }, g);
+  mk("rect", { class: "dr-lab-r", x: f1(tx - lw / 2), y: f1(ty - 8), width: f1(lw), height: 17, rx: 8.5 }, g);
+  const t = mk("text", { class: "dr-lab-t", x: f1(tx), y: f1(ty + 4), "text-anchor": "middle" }, g); t.textContent = text; return g;
+}
+/* a vertical gauge (track + fill); set(v) moves it; the value word sits under it */
+function gauge(parent, x, y, h, w, cls, name, infoText) {
+  const g = mk("g", { class: "hot", tabindex: "0", "data-info": infoText || name }, parent);
+  mk("rect", { class: "dr-g-tr", x: x - w / 2, y, width: w, height: h, rx: w / 2 }, g);
+  const fill = mk("rect", { class: "dr-g-fill " + cls, x: x - w / 2, y: y + h, width: w, height: 0, rx: w / 2 }, g);
+  const t1 = mk("text", { class: "dr-pt2", x, y: y + h + 15, "text-anchor": "middle" }, g); t1.textContent = name;
+  const t2 = mk("text", { class: "dr-g-v", x, y: y + h + 28, "text-anchor": "middle" }, g);
+  return { set(v, word) { const hh = clamp(v) * h; fill.setAttribute("y", f1(y + h - hh)); fill.setAttribute("height", f1(hh)); if (word !== undefined && t2.textContent !== word) t2.textContent = word; } };
+}
+/* a path through points, with length table; at(u) gives {x,y,a} */
+function track(pts) { const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const len = cum[cum.length - 1];
+  return { len, at(u) { const d = clamp(u) * len; let i = 1; while (i < cum.length - 1 && cum[i] < d) i++; const f = (d - cum[i - 1]) / Math.max(0.001, cum[i] - cum[i - 1]); const a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) * 57.2958 }; } };
+}
+const wordOf = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+  if (SCN && SCN.onModel) SCN.onModel(M);
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now; tm += dt * 1000; SCN.step(dt, M); frame = requestAnimationFrame(tick); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
+function run(scn) {
+  SCN = scn;
+  levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  pauseBtn.addEventListener("click", () => setPlaying(!playing));
+  document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+  reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+  scn.init(); publish();
+  const idle = info.textContent;
+  svg.querySelectorAll(".hot").forEach((el) => { const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); }, off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+    el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+  if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+  for (let i = 0; i < 90; i++) scn.step(0.05, M);
+  start();
+}
+
+/* Hepatitis B scene: virion journey in a hepatocyte, T cell injury, fibrosis, marker curves and gauges. */
+const W = SC.W, CX = 305, CY = 272, R = 118;
+const L = { fib: $("fib"), cell: $("cellg"), steps: $("steps"), over: $("over"), plot: $("plot"), panel: $("panel") };
+const NC = [340, 260], NR = 46, S0 = [CX - R, CY - 8], AS = [398, 345], OUT = [0.79, 0.61];
+const RB = [[312, 336], [348, 346], [282, 348]], POL = [265, 322], CTLH = [505, 178], CTLC = [438, 248];
+const STEPS = ["entry via NTCP", "cccDNA in the nucleus", "making viral RNA and proteins", "reverse transcription by polymerase", "assembly", "release"];
+const DUR = [2, 1.8, 2.6, 2.4, 2, 1.8];
+const ease = (t) => t * t * (3 - 2 * t);
+const bez = (a, b, t) => [lerp(a[0], b[0], t), lerp(a[1], b[1], t)];
+/* ---- step strip ---- */
+const boxes = STEPS.map((nm, i) => { const g = mk("g", { class: "hot", tabindex: "0", "data-info": "Step " + (i + 1) + ": " + nm }, L.steps); const b = mk("rect", { class: "hb-box", x: 30 + i * 62, y: 74, width: 54, height: 20, rx: 6 }, g); const t = mk("text", { class: "hb-bn", x: 30 + i * 62 + 27, y: 88, "text-anchor": "middle" }, g); t.textContent = String(i + 1); return b; });
+/* ---- hepatocyte, nucleus, receptors ---- */
+const cellG = mk("g", {}, L.cell); cell(cellG, { cls: "hep", r: R, wob: 0.03, n: 12, seed: 4, x: CX, y: CY });
+cell(cellG, { cls: "hnuc", r: NR, wob: 0.04, n: 10, seed: 6, x: NC[0], y: NC[1] });
+mk("path", { class: "hb-host", d: "M" + f1(NC[0] - 34) + " " + f1(NC[1] + 16) + "Q" + f1(NC[0] - 8) + " " + f1(NC[1] - 26) + " " + f1(NC[0] + 10) + " " + f1(NC[1] - 4) + "T" + f1(NC[0] + 36) + " " + f1(NC[1] + 18) }, L.cell);
+const cccEl = mk("circle", { class: "hb-ccc", cx: f1(NC[0] + 2), cy: f1(NC[1] - 10), r: 11, opacity: 0 }, L.cell);
+RB.forEach((p) => mk("circle", { class: "hv-ribo hb-ribo", cx: f1(p[0]), cy: f1(p[1]), r: 4, fill: "var(--anatomy-mid)" }, L.cell));
+[168, 180, 192].forEach((a) => { const t = a * Math.PI / 180, x = CX + R * Math.cos(t), y = CY + R * Math.sin(t); const g = mk("g", { transform: "translate(" + f1(x) + " " + f1(y) + ") rotate(" + f1(a - 180) + ")" }, L.cell); mk("path", { class: "hb-rec", d: "M0 0L-10 0M-10 0L-16 -5M-10 0L-16 5" }, g); });
+/* fibrosis bands and cancer nodule (behind pills, over tissue) */
+const fibPaths = ["M196 214Q300 196 414 218", "M192 300Q300 282 418 304", "M205 362Q305 346 405 366", "M432 240Q520 228 606 244", "M432 386Q520 374 606 390"].map((d) => mk("path", { class: "hb-fib", d, opacity: 0 }, L.fib));
+const nod1 = mk("circle", { class: "hb-nod", cx: 478, cy: 322, r: 15, opacity: 0 }, L.fib);
+const hccG = mk("g", { opacity: 0 }, L.fib); cell(hccG, { cls: "hep", r: 14, wob: 0.18, n: 8, seed: 9, x: 565, y: 402 }); mk("circle", { class: "hb-hccn", cx: 565, cy: 402, r: 5 }, hccG); hccG.querySelector(".cl-b").setAttribute("class", "hb-hcc");
+/* cytotoxic T cell */
+const ctlG = mk("g", {}, L.cell); const ctlCell = cell(ctlG, { cls: "ctl", r: 24, nuc: 0.5, seed: 11, wob: 0.12, x: CTLH[0], y: CTLH[1] });
+const glow = mk("circle", { class: "hb-glow", r: 16, opacity: 0 }, L.cell);
+/* ---- virion drawing ---- */
+function virion(parent, sc) { const g = mk("g", {}, parent); let d = ""; for (let i = 0; i < 8; i++) { const t = i * 0.785; d += "M" + f1(Math.cos(t) * 9) + " " + f1(Math.sin(t) * 9) + "L" + f1(Math.cos(t) * 13) + " " + f1(Math.sin(t) * 13); } mk("path", { class: "hb-spk", d }, g); mk("circle", { class: "hb-env", r: 9 }, g); mk("circle", { class: "hb-core", r: 4.2 }, g); if (sc) g.setAttribute("transform", "scale(" + sc + ")"); return { g }; }
+const hero = virion(L.cell), capG = mk("g", { opacity: 0 }, L.cell); mk("path", { class: "hb-core", d: "M-4 -8L4 -8L2 8L-2 8Z" }, capG);
+const rnaEl = mk("path", { class: "hb-rna", d: "M-14 -3q4 -5 7 0t7 0t7 0t7 0", opacity: 0 }, L.cell);
+const dnaEl = mk("path", { class: "hb-dna", d: "", opacity: 0 }, L.cell);
+const mrnas = Array.from({ length: 3 }, () => mk("circle", { class: "hb-mrna", r: 3, opacity: 0 }, L.cell));
+const prots = Array.from({ length: 8 }, () => mk("circle", { class: "hb-prot", r: 3, opacity: 0 }, L.cell));
+const bud = virion(L.cell); bud.g.setAttribute("opacity", 0);
+const prog = Array.from({ length: 5 }, () => { const v = virion(L.cell); v.g.setAttribute("opacity", 0); return { v, t: 9, x: 0, y: 0 }; });
+const amb = Array.from({ length: 8 }, () => { const v = virion(L.cell, 0.7); return { v, x: rnd(36, 140), y: rnd(175, 335), t: rnd(0, 6) }; });
+const svps = Array.from({ length: 20 }, () => { const e = mk("circle", { class: "hb-svp", r: 3, opacity: 0 }, L.cell); return { e, x: rnd(438, 602), y: rnd(118, 382), t: rnd(0, 6) }; });
+const abs = Array.from({ length: 5 }, (_, i) => { const g = mk("g", { opacity: 0 }, L.cell); mk("path", { class: "hb-ab", d: "M0 0L0 -7M0 -7L-5 -12M0 -7L5 -12" }, g); return { g, x: 78 + i * 22, y: 232 + (i % 2) * 26 }; });
+function xmark(x, y) { const g = mk("g", { transform: "translate(" + f1(x) + " " + f1(y) + ")", opacity: 0 }, L.cell); mk("circle", { class: "hb-xc", r: 9 }, g); mk("path", { class: "hb-x", d: "M-4 -4L4 4M4 -4L-4 4" }, g); return g; }
+const Xpol = xmark(POL[0], POL[1] - 18);
+/* ---- labels ---- */
+pill(L.over, "HBV virion", 62, 205, 90, 150, "Hepatitis B virion (Dane particle): an envelope carrying HBsAg around a core with partly double-stranded DNA and polymerase.");
+pill(L.over, "NTCP entry", S0[0], S0[1], 90, 310, "NTCP, the bile-acid transporter on hepatocytes, is the entry receptor for hepatitis B.");
+pill(L.over, "cccDNA", NC[0] + 4, NC[1] - 10, 485, 125, "cccDNA: the viral DNA kept as a stable mini-chromosome in the nucleus. It is the template for all viral RNAs and is hard to clear.");
+pill(L.over, "T cell (CTL)", CTLH[0], CTLH[1] - 24, 525, 228, "Cytotoxic T cell: it kills infected hepatocytes. This immune attack, not the virus itself, is the main cause of liver injury.");
+pill(L.over, "HBsAg particles", 470, 300, 510, 285, "Empty HBsAg particles: far more numerous than complete virions. HBsAg in blood marks current infection.");
+pill(L.over, "New virions", AS[0] + 8, AS[1] + 8, 510, 355, "Complete new virions leave the hepatocyte to infect other hepatocytes and other people.");
+pill(L.over, "Polymerase", POL[0], POL[1], 95, 365, "Viral polymerase (reverse transcriptase): it copies pregenomic RNA back into DNA. Nucleoside analogues block it.");
+pill(L.over, "Vaccine antibody", 105, 232, 110, 215, "Vaccine antibody (anti-HBs): it coats the virion and blocks entry. Vaccination prevents infection but does not clear established cccDNA.");
+pill(L.over, "Nucleoside drug", POL[0], POL[1] - 18, 150, 415, "Nucleoside analogue: a faulty building block that stops the polymerase, so viral replication and inflammation fall, but cccDNA often persists.");
+pill(L.over, "Liver cancer", 565, 402, 492, 420, "Hepatocellular carcinoma (HCC): liver cancer that arises more often in a cirrhotic liver.");
+const drugPills = L.over.querySelectorAll(".dr-lab");
+/* ---- marker plot ---- */
+const PX0 = 664, PX1 = 922, PY0 = 120, PY1 = 278, PW = PX1 - PX0, PH = PY1 - PY0;
+const SAG_PTS = [[[0, 0.15], [0.15, 0.85], [0.35, 0.9], [0.55, 0.45], [0.7, 0.08], [1, 0.02]], [[0, 0.7], [0.3, 0.88], [1, 0.92]], [[0, 0.75], [0.4, 0.84], [1, 0.85]]];
+const ANTI_PTS = [[[0, 0], [0.5, 0], [0.65, 0.1], [0.8, 0.75], [1, 0.9]], [[0, 0.03], [1, 0.03]], [[0, 0.03], [1, 0.03]]];
+const EAG_PTS = [[[0, 0.1], [0.2, 0.8], [0.4, 0.5], [0.55, 0.05], [1, 0]], [[0, 0.85], [0.6, 0.75], [1, 0.55]], [[0, 0.6], [0.6, 0.42], [1, 0.3]]];
+const evalPts = (pts, u) => { for (let i = 1; i < pts.length; i++) if (u <= pts[i][0]) { const a = pts[i - 1], b = pts[i], f = (u - a[0]) / Math.max(0.001, b[0] - a[0]); return lerp(a[1], b[1], ease(f)); } return pts[pts.length - 1][1]; };
+const px = (u) => PX0 + u * PW, py = (v) => PY1 - v * PH;
+mk("path", { class: "pl-ax", d: "M" + PX0 + " " + (PY0 - 6) + "L" + PX0 + " " + PY1 + "L" + PX1 + " " + PY1 }, L.plot);
+[["early", 0.12], ["later", 0.5], ["long term", 0.86]].forEach(([t, u]) => { const e = mk("text", { class: "dr-pt2", x: f1(px(u)), y: PY1 + 14, "text-anchor": "middle" }, L.plot); e.textContent = t; });
+const axT = mk("text", { class: "dr-pt2", x: PX0, y: PY0 - 14 }, L.plot); axT.textContent = "higher is more";
+const curves = { sagb: mk("path", { class: "pl-sag base" }, L.plot), sag: mk("path", { class: "pl-sag" }, L.plot), antib: mk("path", { class: "pl-anti base" }, L.plot), anti: mk("path", { class: "pl-anti" }, L.plot), eagb: mk("path", { class: "pl-eag base" }, L.plot), eag: mk("path", { class: "pl-eag" }, L.plot) };
+const mkr = mk("path", { class: "pl-mk" }, L.plot), dots = [mk("circle", { class: "pl-dot", r: 3.6 }, L.plot), mk("circle", { class: "pl-dot", r: 3.6 }, L.plot)];
+const poly = (fn, n) => { let d = ""; for (let i = 0; i <= n; i++) { const u = i / n; d += (i ? "L" : "M") + f1(px(u)) + " " + f1(py(clamp(fn(u)))); } return d; };
+function legend(x, y, cls, name, tip) { const g = mk("g", { class: "hot", tabindex: "0", "data-info": tip }, L.plot); mk("path", { class: cls, d: "M" + x + " " + y + "l22 0" }, g); const t = mk("text", { class: "dr-pt2", x: x + 28, y: y + 4 }, g); t.textContent = name; }
+legend(PX0, 312, "pl-sag", "HBsAg", "HBsAg (surface antigen): marks current infection. Lost in resolution, persistent in chronic infection.");
+legend(PX0 + 128, 312, "pl-anti", "Anti-HBs", "Anti-HBs (surface antibody): marks recovery after infection and immunity after vaccination.");
+legend(PX0, 332, "pl-eag", "HBeAg", "HBeAg (e antigen): marks active replication and infectivity. Its loss with anti-HBe is seroconversion.");
+const outT = mk("text", { class: "dr-pt2", x: 650, y: 360 }, L.plot); outT.textContent = "Outcome";
+const out1 = mk("text", { class: "dr-pt2", x: 650, y: 380 }, L.plot), out2 = mk("text", { class: "dr-pt2", x: 650, y: 398 }, L.plot);
+/* ---- gauges ---- */
+const gg = {};
+{ const y0 = 478, P = L.panel; mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: W - 48, height: 142, rx: 14 }, P); const t = mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P); t.textContent = "The patient";
+  [["virus", "Virus", "g-virus", "Viral replication in blood (HBV DNA). Nucleoside analogues bring this down."], ["sag", "HBsAg", "g-sag", "Surface antigen in blood: marks current infection and usually persists while cccDNA persists."], ["anti", "Anti-HBs", "g-anti", "Protective surface antibody: present after recovery or vaccination."], ["inj", "Injury", "g-inj", "Liver injury from immune killing of infected hepatocytes (the ALT pattern)."], ["fib", "Fibrosis", "g-fib", "Scar tissue laid down after years of injury and repair. Severe fibrosis is cirrhosis."]]
+    .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, 110 + i * 185, y0 + 2, 52, 18, cls, name, tip); }); }
+/* ---- state ---- */
+const sm = { V: 0.5, Sag: 0.5, Eag: 0.5, Inj: 0.4, Fib: 0.3, Anti: 0.1, Ccc: 0.5, pos: 0.48 };
+const hs = { step: 0, t: 0, stall: 0, chk: false, formed: false };
+let outKey = "";
+function stepName() { const s = $("stepname"); if (s) s.textContent = "Step " + (hs.step + 1) + ": " + STEPS[hs.step] + (hs.stall > 0 ? " (blocked)" : ""); boxes.forEach((b, i) => b.setAttribute("class", "hb-box" + (i === hs.step ? " on" : ""))); }
+function hideJourney() { [hero.g, capG, rnaEl, dnaEl, bud.g].forEach((e) => e.setAttribute("opacity", 0)); mrnas.concat(prots).forEach((e) => e.setAttribute("opacity", 0)); }
+function nextVirion() { hs.step = 0; hs.t = 0; hs.stall = 0; hs.chk = false; hideJourney(); stepName(); }
+function dnaPath(a, len, prog) { let d = ""; const n = Math.max(2, Math.round(22 * prog)); for (let i = 0; i <= n; i++) { const f = i / 22; d += (i ? "L" : "M") + f1(a[0] + f * len) + " " + f1(a[1] + Math.sin(f * 13) * 3.5); } return d; }
+function journey(dt, m) {
+  if (hs.stall > 0) { hs.stall -= dt; const k = clamp(hs.stall / 1.3); hero.g.setAttribute("opacity", k.toFixed(2)); if (hs.step === 3) capG.setAttribute("opacity", k.toFixed(2)); if (hs.stall <= 0) nextVirion(); return; }
+  const s = hs.step; hs.t += dt; const p = clamp(hs.t / DUR[s]), e = ease(p);
+  if (!hs.chk && ((s === 0 && p > 0.75) || (s === 3 && p > 0.1))) { hs.chk = true; const blk = s === 0 ? m.blkE : m.blkP; if (blk > 0 && Math.random() < blk) { hs.stall = 1.3; stepName(); return; } }
+  hideJourney();
+  if (s === 0) { const q = bez([52, 205], [S0[0] - 10, S0[1]], e); place(hero.g, q[0], q[1], 0, 1); hero.g.setAttribute("opacity", 1); }
+  else if (s === 1) { const q = bez([S0[0] + 6, S0[1]], [NC[0] - NR + 4, NC[1]], e); capG.setAttribute("opacity", 1); place(capG, q[0], q[1], 60, 1); if (p > 0.7) { hs.formed = true; glow.setAttribute("opacity", 0.7); glow.setAttribute("cx", f1(NC[0])); glow.setAttribute("cy", f1(NC[1] - 10)); glow.setAttribute("r", 15); } }
+  else if (s === 2) { mrnas.forEach((r, i) => { const f = clamp(p * 1.4 - i * 0.2); if (f <= 0) return; const q = bez([NC[0], NC[1] + 8], RB[i], ease(f)); r.setAttribute("opacity", p < 0.85 ? 1 : 0); r.setAttribute("cx", f1(q[0])); r.setAttribute("cy", f1(q[1])); }); prots.forEach((r, i) => { const f = clamp(p * 1.3 - i * 0.08); if (f <= 0) return; const b = RB[i % 3]; r.setAttribute("opacity", 1); r.setAttribute("cx", f1(b[0] + Math.sin(i * 2.1) * 13)); r.setAttribute("cy", f1(b[1] - 9 - (i % 3) * 7)); }); }
+  else if (s === 3) { capG.setAttribute("opacity", 1); place(capG, POL[0], POL[1], 60, 1); rnaEl.setAttribute("opacity", (1 - clamp(p * 1.3 - 0.15)).toFixed(2)); place(rnaEl, POL[0] + 2, POL[1] - 6, 0, 1); dnaEl.setAttribute("opacity", 1); dnaEl.setAttribute("d", dnaPath([POL[0] - 20, POL[1] + 10], 46, clamp(p * 1.2))); }
+  else if (s === 4) { prots.forEach((r, i) => { const q = bez([RB[i % 3][0] + Math.sin(i * 2.1) * 13, RB[i % 3][1] - 9 - (i % 3) * 7], [AS[0] - 12 + (i % 4) * 5, AS[1] - 12 + (i % 3) * 6], ease(clamp(p * 1.4))); r.setAttribute("opacity", p < 0.95 ? 1 : 0); r.setAttribute("cx", f1(q[0])); r.setAttribute("cy", f1(q[1])); }); bud.g.setAttribute("opacity", (p * 0.7).toFixed(2)); place(bud.g, AS[0] - 6, AS[1] - 6, 0, 0.6); }
+  else { const o = 4 + 26 * e, q = [AS[0] + OUT[0] * o, AS[1] + OUT[1] * o]; bud.g.setAttribute("opacity", 1); place(bud.g, q[0], q[1], 0, 1); }
+  if (p >= 1) { if (s === 5) { const pr = prog.find((q) => q.t >= 9) || prog[0]; pr.t = 0; pr.x = AS[0] + OUT[0] * 30; pr.y = AS[1] + OUT[1] * 30; nextVirion(); } else { hs.step++; hs.t = 0; hs.chk = false; stepName(); } }
+}
+function init() { stepName(); hideJourney(); }
+function step(dt, m) {
+  const k = Math.min(1, dt * 0.9);
+  sm.V = lerp(sm.V, m.V, k); sm.Sag = lerp(sm.Sag, m.Sag, k); sm.Eag = lerp(sm.Eag, m.Eag, k); sm.Inj = lerp(sm.Inj, m.Inj, k); sm.Fib = lerp(sm.Fib, m.Fib, k); sm.Anti = lerp(sm.Anti, m.Anti, k); sm.Ccc = lerp(sm.Ccc, m.Ccc, k); sm.pos = lerp(sm.pos, m.pos, Math.min(1, dt * 2));
+  journey(dt, m);
+  cccEl.setAttribute("opacity", hs.formed ? sm.Ccc.toFixed(2) : "0");
+  Xpol.setAttribute("opacity", m.blkP > 0 ? "1" : "0");
+  /* drug pills: indices in creation order (7 vaccine, 8 nucleoside) */
+  drugPills.forEach((g, i) => { if (i === 7) g.style.opacity = m.vac ? "1" : "0"; if (i === 8) g.style.opacity = m.na ? "1" : "0"; });
+  /* T cell attack: approach, contact flash, injury */
+  const atk = sm.Inj * (0.45 + 0.55 * (0.5 + 0.5 * Math.sin(tm / 850)));
+  const cp = bez(CTLH, CTLC, clamp(atk * 1.15));
+  ctlG.setAttribute("transform", "translate(" + f1(cp[0] - CTLH[0]) + " " + f1(cp[1] - CTLH[1]) + ")");
+  if (hs.step !== 1) { glow.setAttribute("cx", f1(CTLC[0] + 8)); glow.setAttribute("cy", f1(CTLC[1])); glow.setAttribute("r", 16); glow.setAttribute("opacity", atk > 0.55 ? (sm.Inj * 0.8).toFixed(2) : "0"); }
+  /* fibrosis and cancer */
+  fibPaths.forEach((p) => p.setAttribute("opacity", (sm.Fib * 0.75).toFixed(2)));
+  nod1.setAttribute("opacity", (sm.Fib * 0.9).toFixed(2));
+  hccG.setAttribute("opacity", m.lvl === 2 ? "1" : "0"); hccG.setAttribute("transform", "scale(1)");
+  /* ambient virions and HBsAg particles */
+  const nAmb = Math.round(sm.V * amb.length);
+  amb.forEach((a, i) => { const on = i < nAmb; a.t += dt; if (!on) { a.v.g.setAttribute("opacity", 0); return; } a.v.g.setAttribute("opacity", 0.85); a.x += 20 * dt; a.y = clamp(a.y + Math.sin(a.t * 0.9 + i * 2) * 9 * dt, 168, 338); if (a.x > S0[0] - 24) { a.x = rnd(32, 66); a.y = rnd(175, 335); } place(a.v.g, a.x, a.y, 0, 0.7); });
+  const nSvp = Math.round(sm.Sag * svps.length);
+  svps.forEach((a, i) => { const on = i < nSvp; a.t += dt; if (!on) { a.e.setAttribute("opacity", 0); return; } a.e.setAttribute("opacity", 0.9); a.x += Math.sin(a.t * 0.7 + i) * 6 * dt; a.y += Math.cos(a.t * 0.5 + i * 1.7) * 5 * dt; a.x = clamp(a.x, 436, 604); a.y = clamp(a.y, 116, 384); a.e.setAttribute("cx", f1(a.x)); a.e.setAttribute("cy", f1(a.y)); });
+  abs.forEach((a, i) => { a.g.style.opacity = m.vac ? "1" : "0"; place(a.g, a.x + Math.sin(tm / 600 + i) * 3, a.y + Math.cos(tm / 700 + i) * 3, Math.sin(tm / 800 + i) * 14, 1); });
+  prog.forEach((q) => { if (q.t >= 9) { q.v.g.setAttribute("opacity", 0); return; } q.t += dt; q.x += 14 * dt; q.y += 9 * dt; place(q.v.g, q.x, q.y, 0, 1); q.v.g.setAttribute("opacity", clamp(1.3 - q.t / 5).toFixed(2)); if (q.t > 6) q.t = 9; });
+  /* marker curves: dashed untreated, solid with intervention */
+  const lvl = m.lvl, sagF = m.na ? 0.88 : 1 - m.vacEff * 0.55, eagF = m.na ? 0.3 : 1 - m.vacEff * 0.5;
+  curves.sagb.setAttribute("d", poly((u) => evalPts(SAG_PTS[lvl], u), 60)); curves.sag.setAttribute("d", poly((u) => evalPts(SAG_PTS[lvl], u) * sagF, 60));
+  curves.antib.setAttribute("d", poly((u) => evalPts(ANTI_PTS[lvl], u), 60)); curves.anti.setAttribute("d", poly((u) => clamp(evalPts(ANTI_PTS[lvl], u) + (m.vac ? 0.35 * u : 0)), 60));
+  curves.eagb.setAttribute("d", poly((u) => evalPts(EAG_PTS[lvl], u), 60)); curves.eag.setAttribute("d", poly((u) => evalPts(EAG_PTS[lvl], u) * eagF, 60));
+  mkr.setAttribute("d", "M" + f1(px(sm.pos)) + " " + (PY0 - 6) + "L" + f1(px(sm.pos)) + " " + PY1);
+  dots[0].setAttribute("cx", f1(px(sm.pos))); dots[0].setAttribute("cy", f1(py(evalPts(SAG_PTS[lvl], sm.pos) * sagF)));
+  dots[1].setAttribute("cx", f1(px(sm.pos))); dots[1].setAttribute("cy", f1(py(clamp(evalPts(ANTI_PTS[lvl], sm.pos) + (m.vac ? 0.35 * sm.pos : 0)))));
+  const key = lvl + ":" + (m.na ? "na" : m.vac ? "vac" : "no");
+  if (key !== outKey) { outKey = key; const lines = m.na && lvl === 0 ? ["Virus suppressed in acute illness;", "clearance still depends on immunity"] : m.vac && lvl === 0 ? ["Antibodies block entry: infection is", "prevented or cleared (anti-HBs)"] : m.na && lvl === 1 ? ["Polymerase blocked: virus falls, but", "cccDNA and HBsAg often persist"] : m.na && lvl === 2 ? ["Virus suppressed, but scarring and", "cancer risk remain"] : lvl === 0 ? ["Immune clearance: HBsAg is lost and", "anti-HBs appears (resolved)"] : lvl === 1 ? ["HBsAg persists: chronic infection", "with ongoing injury and scarring"] : ["Cirrhosis: risk of liver failure", "and liver cancer (HCC)"]; out1.textContent = lines[0]; out2.textContent = lines[1]; }
+  gg.virus.set(sm.V, wordOf(sm.V, 0.2, 0.55, ["low", "moderate", "high"])); gg.sag.set(sm.Sag, wordOf(sm.Sag, 0.2, 0.6, ["cleared", "present", "high"])); gg.anti.set(sm.Anti, wordOf(sm.Anti, 0.2, 0.6, ["absent", "low", "present"])); gg.inj.set(sm.Inj, wordOf(sm.Inj, 0.25, 0.58, ["low", "raised", "high"])); gg.fib.set(sm.Fib, wordOf(sm.Fib, 0.2, 0.65, ["none", "some", "severe"]));
+}
+run({ init, step });
+</script></body></html>

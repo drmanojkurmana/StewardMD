@@ -68,10 +68,10 @@ function init() {
 }
 function initPanel() {
   const o = L.over;
-  pill(o, "Pulmonary vein trigger", 304, 96, 150, 78, "Rapid ectopic firing from muscle sleeves around the pulmonary veins. This is the commonest trigger that starts atrial fibrillation.");
-  pill(o, "Re-entrant circuits", 210, 150, 360, 78, "Many small wandering re-entrant wavelets in the atria. The wavefront breaks up, so the atria quiver instead of contracting together.");
+  pill(o, "PV trigger", 304, 96, 82, 92, "Pulmonary vein trigger: rapid ectopic firing from muscle sleeves around the pulmonary veins. This is the commonest trigger that starts atrial fibrillation.");
+  pill(o, "Re-entry", 210, 150, 82, 126, "Re-entrant circuits: many small wandering re-entrant wavelets in the atria. The wavefront breaks up, so the atria quiver instead of contracting together.");
   pill(o, "Appendage clot", 274, 190, 82, 168, "The left atrial appendage: a small pouch where blood swirls slowly in atrial fibrillation. Stasis there lets a clot form.");
-  pill(o, "AV node filter", 272, 210, 482, 215, "The AV node is bombarded by atrial signals and lets only some through, at irregular intervals. That is why the pulse is irregularly irregular.");
+  pill(o, "AV node", 272, 210, 478, 215, "AV node filter: the AV node is bombarded by atrial signals and lets only some through, at irregular intervals. That is why the pulse is irregularly irregular.");
   pill(o, "Ventricles", 340, 320, 190, 418, "The ventricles follow the irregular signals that get through the AV node. When the rate is fast, filling and output fall.");
   pill(o, "Stasis", 260, 178, 380, 418, "Stasis: blood that barely moves in the fibrillating atrium and appendage. Slow flow is one part of clot formation.");
   pill(o, "No P waves", 600, 162, 720, 275, "On the ECG there is no clear P wave before each QRS, because the atria are not beating in order.");
