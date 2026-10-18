@@ -13,7 +13,7 @@ const W = 960, H = 610;
  * level: 0 fetal, 1 first breath, 2 after closure.
  * drug: 0 none, 1 prostaglandin to keep the duct open, 2 indomethacin to close the duct. */
 const MD = {
-  level: { label: "Stage of transition", a: [0, 0.5, 1], names: ["fetal", "first breath", "after closure"], ticks: ["fetal", "first breath", "after closure"], start: 0 },
+  level: { label: "Stage of transition", a: [0, 0.5, 1], names: ["fetal", "first breath", "after closure"], ticks: ["fetal", "first breath", "after closure"], start: 1 },
   drugLabel: "Treatment",
   settings: [
     { label: "no treatment" },
@@ -66,59 +66,43 @@ const TESTS = [
   [0, 2, "lung flow low · ductus closing · foramen open · saturation mixed"],
 ];
 
-/* ---------------- static layout ---------------- */
+/* ---------------- static layout ----------------
+ * Organ art is placed by fetalcirc.page.js into the slots below; vessels are
+ * redrawn there from the organ ports so blood meets real anatomy. */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<text class="fc-zone" x="34" y="68">CIRCULATION</text>
 <g id="vessels">
-  <path id="vUmbArt" class="fc-vessel fc-v-deoxy" d="M665 390L450 425L230 400L195 385"/>
-  <path id="vVein" class="fc-vessel fc-v-deoxy" d="M665 390L580 418L540 360L535 330"/>
-  <path id="vUmb" class="fc-vessel fc-v-oxy" d="M195 350L285 335"/>
-  <path id="vDV" class="fc-vessel fc-v-oxy" d="M285 335L360 325L430 300L500 275L535 248"/>
-  <path id="vPA" class="fc-vessel fc-v-pa" d="M550 285L580 190L585 140L430 115"/>
-  <path id="vPAb" class="fc-vessel fc-v-pa" d="M585 140L598 128"/>
-  <path id="vPV" class="fc-vessel fc-v-oxy" d="M390 135L420 175L438 197M570 135L512 172L472 197"/>
-  <path id="vAo" class="fc-vessel fc-v-oxy" d="M405 325L368 290L365 165L365 70L690 70L690 360"/>
-  <path id="vDuct" class="fc-duct" d="M585 135L560 105L525 72"/>
+  <path id="vUmb" class="fc-vessel fc-v-oxy" d="M213 362L260 355L324 364"/>
+  <path id="vDV" class="fc-vessel fc-v-oxy" d="M330 297L380 320L440 350L457 359"/>
+  <path id="vPA" class="fc-vessel fc-v-pa" d="M505 186L430 140L351 119"/>
+  <path id="vPAb" class="fc-vessel fc-v-pa" d="M505 186L560 160L614 114"/>
+  <path id="vPV" class="fc-vessel fc-v-oxy" d="M351 119L400 150L460 172"/>
+  <path id="vPVb" class="fc-vessel fc-v-oxy" d="M614 114L560 150L460 172"/>
+  <path id="vAo" class="fc-vessel fc-v-oxy" d="M487 172L505 110L520 72L600 70L690 70L690 360L715 372"/>
+  <path id="vDuct" class="fc-duct" d="M512 178L530 140L538 105L542 71"/>
+  <path id="vFO" class="fc-fo" d="M522 260L458 260"/>
+  <path id="vRet" class="fc-vessel fc-v-deoxy" d="M700 398L600 415L520 395L480 375"/>
+  <path id="vUmbArt" class="fc-vessel fc-v-deoxy" d="M720 398L560 408L400 410L280 402L205 388"/>
 </g>
-<g id="nodes">
-  <g class="hot" tabindex="0" data-info="Lungs: collapsed and high resistance before birth, so little blood flows through them. At the first breath they expand, resistance falls and pulmonary flow rises.">
-    <ellipse id="lungL" class="fc-lung" cx="365" cy="108" rx="58" ry="32"/>
-    <ellipse id="lungR" class="fc-lung" cx="595" cy="108" rx="58" ry="32"/>
-    <text class="fc-cap" x="365" y="112" text-anchor="middle">LUNG</text>
-    <text class="fc-cap" x="595" y="112" text-anchor="middle">LUNG</text>
-  </g>
-  <g class="hot" tabindex="0" data-info="Placenta: the source of oxygen rich blood before birth. Blood leaves it in the umbilical vein and returns, oxygen poor, in the umbilical arteries. After birth the cord vessels constrict and this flow stops.">
-    <ellipse id="plac" class="fc-plac" cx="145" cy="372" rx="68" ry="34"/>
-    <text class="fc-cap" x="145" y="376" text-anchor="middle">PLACENTA</text>
-  </g>
-  <g class="hot" tabindex="0" data-info="Liver and ductus venosus: much umbilical vein blood passes through the ductus venosus, a channel past the liver, straight into the inferior vena cava toward the right atrium. It closes after birth.">
-    <rect class="fc-liver" x="285" y="312" width="92" height="38" rx="12"/>
-    <text class="fc-cap" x="331" y="335" text-anchor="middle">LIVER</text>
-  </g>
-  <g class="hot" tabindex="0" data-info="Body tissues: receive blood from the aorta and return oxygen poor blood to the right atrium. Colour here follows arterial saturation.">
-    <rect id="bodyRect" class="fc-body" x="665" y="360" width="190" height="38" rx="16"/>
-    <text class="fc-cap" x="760" y="383" text-anchor="middle">BODY</text>
-  </g>
+<g class="hot" tabindex="0" data-info="Placenta: gives oxygen rich blood to the baby through the cord vein, and takes used blood back.">
+  <ellipse id="plac" class="fc-plac" cx="145" cy="372" rx="68" ry="34"/>
+  <path class="fc-plac-t" d="M95 368Q115 356 135 366M125 380Q145 370 165 378M150 362Q168 354 186 362"/>
 </g>
-<g id="heart">
-  <rect class="fc-outer" x="385" y="185" width="200" height="175" rx="20"/>
-  <rect class="fc-sept" x="480" y="197" width="12" height="152"/>
-  <rect class="fc-sept" x="397" y="269" width="178" height="10"/>
-  <g class="hot" tabindex="0" data-info="Left atrium: before birth it receives mainly blood that crossed the foramen ovale. After the lungs expand, pulmonary vein return rises, left atrial pressure rises and the foramen flap is pressed shut."><rect id="chLA" class="fc-ch" x="397" y="197" width="83" height="72" rx="10"/><text class="fc-chlab" x="438" y="217" text-anchor="middle">Left atrium</text><text id="satLA" class="fc-sat" x="438" y="233" text-anchor="middle">mixed</text></g>
-  <g class="hot" tabindex="0" data-info="Right atrium: receives oxygen rich umbilical blood from below and oxygen poor body blood. Before birth most of its stream is directed across the foramen ovale to the left atrium."><rect id="chRA" class="fc-ch" x="492" y="197" width="83" height="72" rx="10"/><text class="fc-chlab" x="533" y="217" text-anchor="middle">Right atrium</text><text id="satRA" class="fc-sat" x="533" y="233" text-anchor="middle">mixed</text></g>
-  <g class="hot" tabindex="0" data-info="Left ventricle: pumps blood into the aorta to the body and brain. Before birth this is mainly blood that crossed the foramen ovale."><rect id="chLV" class="fc-ch" x="397" y="279" width="83" height="72" rx="10"/><text class="fc-chlab" x="438" y="299" text-anchor="middle">Left ventricle</text><text id="satLV" class="fc-sat" x="438" y="315" text-anchor="middle">mixed</text></g>
-  <g class="hot" tabindex="0" data-info="Right ventricle: pumps blood into the pulmonary artery. Before birth high lung resistance diverts most of it through the ductus arteriosus into the aorta, bypassing the lungs."><rect id="chRV" class="fc-ch" x="492" y="279" width="83" height="72" rx="10"/><text class="fc-chlab" x="533" y="299" text-anchor="middle">Right ventricle</text><text id="satRV" class="fc-sat" x="533" y="315" text-anchor="middle">oxygen poor</text></g>
-  <g id="defFO"><rect class="fc-hole" x="480" y="220" width="12" height="22" rx="5"/></g>
+<g class="hot" tabindex="0" data-info="Body: uses oxygen from aorta blood and sends used blood back to the heart and placenta.">
+  <rect id="bodyRect" class="fc-body" x="665" y="360" width="190" height="38" rx="16"/>
+  <path class="fc-body-t" d="M700 372Q715 366 730 372M740 380Q755 374 770 380M790 372Q802 367 814 372"/>
 </g>
+<g id="liverSlot"></g>
+<g id="heartSlot"></g>
+<g id="lungSlot"></g>
 <g id="flow"></g><g id="marks"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "fetal-circulation-birth-transition", fig: "Fig 1", title: "Fetal circulation and the transition at birth", W, H, body,
   label: "An animated diagram of fetal circulation and what changes at birth. Oxygen rich blood comes from the placenta in the umbilical vein, passes through the ductus venosus to the right atrium, crosses the foramen ovale to the left heart and aorta, while right ventricular blood bypasses the high resistance lungs through the ductus arteriosus. At the first breath the lungs expand, pulmonary resistance falls, the foramen ovale and ductus close and umbilical flow stops. Gauges show lung flow, the ductus, the foramen and saturation, with treatments that keep the duct open or close it.",
   caption: "Schematic, not to scale. Speeds, colours and gauge levels are qualitative and illustrative; no doses, sizes or numbers are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "fetalcirc.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "fetalcirc.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With indomethacin",
   sourcesLis: [
     "<strong>Fetal circulation.</strong> Oxygen rich blood from the placenta travels in the umbilical vein. Much of it passes through the ductus venosus into the inferior vena cava and right atrium, then crosses the foramen ovale to the left atrium, left ventricle and aorta. Blood reaching the right ventricle and pulmonary artery mostly passes through the ductus arteriosus into the aorta, because the unexpanded lungs have high vascular resistance and receive little flow. Oxygen poor blood returns to the placenta in the umbilical arteries. This is standard teaching in physiology, paediatrics and neonatology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Transition at birth.</strong> With the first breaths the lungs expand, pulmonary vascular resistance falls and pulmonary blood flow and pulmonary vein return rise. Rising left atrial pressure presses the foramen ovale flap shut. The ductus arteriosus and ductus venosus constrict and close, and umbilical vessels constrict as placental flow ends, leaving the usual series circulation through the lungs. This is standard teaching and was not checked against a linked source here, so it is flagged for review.",
@@ -126,24 +110,25 @@ buildScene({
   ],
   simplified: "Preferential streaming in detail, brain and coronary sparing, pressure values, the timing of anatomical closure, cord clamping practice, persistent pulmonary hypertension, duct dependent lesions in detail, and all doses are left out. Colours, counts and speeds are illustrative, and the figure does not say how any baby should be treated.",
   extraCss: `
-.fc-zone{fill:var(--anatomy-strong);font-size:12px;font-weight:600;letter-spacing:.04em;pointer-events:none}
-.fc-cap{fill:var(--anatomy-strong);font-size:10px;font-weight:600;pointer-events:none}
-.fc-chlab{fill:var(--anatomy-strong);font-size:10px;font-weight:600;pointer-events:none}
-.fc-sat{fill:var(--anatomy-text);font-size:9px;pointer-events:none;opacity:.85}
-.fc-lung{fill:color-mix(in srgb,var(--c-fl) 32%,var(--anatomy-paper));stroke:var(--c-fl);stroke-width:1.3}
-.fc-plac{fill:color-mix(in srgb,var(--c-rbc) 38%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 60%,#000);stroke-width:1.3}
-.fc-liver{fill:color-mix(in srgb,var(--c-eos) 42%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-eos) 60%,#000);stroke-width:1.2}
-.fc-body{fill:#8fb8dd;stroke:var(--anatomy-mid);stroke-width:1.2}
-.fc-outer{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.4}
-.fc-sept{fill:color-mix(in srgb,var(--c-rbc) 32%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 50%,#000);stroke-width:.8}
-.fc-ch{fill:color-mix(in srgb,var(--c-rbc) 28%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--anatomy-strong) 35%,#000);stroke-width:1}
-.fc-hole{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.4;stroke-dasharray:3 2}
 .fc-vessel{fill:none;stroke-linecap:round;stroke-linejoin:round}
 .fc-v-oxy{stroke:var(--c-rbc);stroke-width:8}
 .fc-v-deoxy{stroke:var(--c-cyt2);stroke-width:7}
 .fc-v-pa{stroke:var(--c-cyt2);stroke-width:8}
-.fc-duct{fill:none;stroke:#e8a13a;stroke-width:7;stroke-linecap:round}
+.fc-duct{fill:none;stroke:#e8a13a;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+.fc-fo{fill:none;stroke:var(--c-cyt);stroke-width:5;stroke-linecap:round;stroke-dasharray:7 5}
+.fc-plac{fill:color-mix(in srgb,var(--c-rbc) 38%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 60%,#000);stroke-width:1.3}
+.fc-plac-t{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 60%,#000);stroke-width:1;opacity:.6}
+.fc-body{fill:#8fb8dd;stroke:var(--anatomy-mid);stroke-width:1.2}
+.fc-body-t{fill:none;stroke:var(--anatomy-mid);stroke-width:1;opacity:.7}
+.fc-cap{fill:var(--anatomy-strong);font-size:12px}
+.fc-glow-i{fill:var(--c-cyt)}
+.fc-glow-p{fill:#f2b84a}
+.fc-lunghalo{fill:var(--c-fl)}
+.fc-strain{fill:var(--c-bad)}
+.fc-clamp{fill:none;stroke:var(--c-cyt);stroke-width:5;stroke-linecap:round}
 .p-blood{stroke:color-mix(in srgb,#000 25%,transparent);stroke-width:.5}
+.p-indo{--cc:var(--c-cyt)}
+.p-pge{--cc:#f2b84a}
 .dr-g-fill.g-lung{fill:var(--c-fl)}.dr-g-fill.g-duct{fill:#e8a13a}.dr-g-fill.g-foram{fill:var(--c-cyt)}.dr-g-fill.g-sat{fill:var(--c-good)}
 `,
 });
