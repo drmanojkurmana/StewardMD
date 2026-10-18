@@ -161,6 +161,15 @@ test("guide: shockable, non-shockable, bradycardia, tachycardia, post-ROSC track
   assert.ok(post.some((p) => /12 lead ECG/i.test(p.text)));
 });
 
+test("guide: non-shockable label is hyphenated in every track", () => {
+  for (const mode of E.MODES) {
+    const non = E.guideFor({ mode, lastRhythm: "PEA", shockCount: 0, epiCount: 0, secsSinceEpi: null, rosc: false });
+    for (const p of non) assert.ok(!/Non shockable/.test(p.text), mode + ": " + p.text);
+  }
+  const adult = E.guideFor({ mode: "adult", lastRhythm: "PEA", shockCount: 0, epiCount: 0, secsSinceEpi: null, rosc: false });
+  assert.ok(adult.some((p) => p.text.indexOf("Non-shockable rhythm.") === 0));
+});
+
 test("guide: every prompt has id, text, urgency and a source line", () => {
   const rhythms = [null, "VF", "VT (pulseless)", "PEA", "Asystole",
     "Sinus rhythm (pulse)", "Bradycardia (pulse)", "Tachycardia (pulse)"];
@@ -403,4 +412,129 @@ test("payload opens in codeblue-sheet.js with matching counts", () => {
   const counts = Sheet.computeCounts(parsed.events);
   assert.equal(counts.shocks, 1);
   assert.equal(counts.epi, 2);
+});
+
+/* ---------- fresh open resets mode and training (runner regression) ----------
+ * A training (or paediatric) session must not leak into the next open:
+ * the Chrome runner ends a training code, then starts unlinked and
+ * linked live codes in later opens. Uses a minimal DOM stub only;
+ * layout itself is covered by test/run-codeblue-live-ui.mjs. */
+test("open resets training and mode from the previous session", () => {
+  class El {
+    constructor(t) {
+      this.tagName = t; this.children = []; this.attrs = {}; this.innerHTML = ""; this._ev = {};
+      const s = new Set();
+      this.classList = { add: (c) => s.add(c), remove: (c) => s.delete(c), contains: (c) => s.has(c) };
+    }
+    setAttribute(k, v) { this.attrs[k] = v; }
+    getAttribute(k) { return this.attrs[k] ?? null; }
+    addEventListener(t, f) { this._ev[t] = f; }
+    appendChild(c) { this.children.push(c); return c; }
+    querySelector() { return null; }
+    querySelectorAll() { return []; }
+    contains() { return true; }
+    focus() {}
+  }
+  globalThis.document = {
+    createElement: (t) => new El(t), body: new El("body"), head: new El("head"),
+    addEventListener() {}, activeElement: null
+  };
+  try {
+    const root = () => globalThis.document.body.children.find((c) => c.id === "cblRoot");
+    const click = (act) => {
+      const btn = { getAttribute: (k) => (k === "data-act" ? act : null) };
+      root()._ev.click({ target: { closest: () => btn } });
+    };
+    assert.equal(Live.open({ training: true, mode: "paediatric" }), true);
+    click("start");
+    assert.equal(Live._rt.session().training, true);
+    Live.close();
+    assert.equal(Live.open(), true);
+    click("start");
+    assert.equal(Live._rt.session().training, false);
+    assert.equal(Live._rt.session().mode, "adult");
+    assert.match(root().innerHTML, /data-state="priority"/);
+    assert.ok(root().innerHTML.indexOf('data-act="tile-shock"') < root().innerHTML.indexOf('data-drug="epi"'));
+    assert.ok(!root().innerHTML.includes("End code"));
+    Live.close();
+  } finally {
+    delete globalThis.document;
+  }
+});
+
+/* ---------- cb4-F: debrief, scene, filters, past codes ---------- */
+
+test("debriefStats: empty log gives null times and null fraction", () => {
+  const d = E.debriefStats([], 0);
+  assert.equal(d.timeToFirstShock, null);
+  assert.equal(d.timeToFirstEpi, null);
+  assert.equal(d.pauseCount, 0);
+  assert.equal(d.longestPauseSeconds, 0);
+  assert.equal(d.cprFractionPct, null);
+  assert.equal(d.rosc, false);
+});
+
+test("debriefStats: first shock and epi, pauses, longest, fraction", () => {
+  const evs = [
+    { id: "1", elapsed: 60, kind: "shock", label: "Shock delivered" },
+    { id: "2", elapsed: 100, kind: "drug", label: "Epinephrine" },
+    { id: "3", elapsed: 120, kind: "drug", label: "Amiodarone" },
+    { id: "4", elapsed: 200, kind: "pauseStart", label: "Pause started" },
+    { id: "5", elapsed: 230, kind: "resume", label: "Compressions resumed" },
+    { id: "6", elapsed: 300, kind: "pauseStart", label: "Pause started" },
+    { id: "7", elapsed: 310, kind: "resume", label: "Compressions resumed" },
+    { id: "8", elapsed: 400, kind: "rosc", label: "ROSC" }
+  ];
+  const d = E.debriefStats(evs, 400);
+  assert.equal(d.timeToFirstShock, 60);
+  assert.equal(d.timeToFirstEpi, 100);
+  assert.equal(d.pauseCount, 2);
+  assert.equal(d.longestPauseSeconds, 30);
+  assert.equal(d.pauseSeconds, 40);
+  assert.equal(d.cprFractionPct, 90);
+  assert.equal(d.shocks, 1);
+  assert.equal(d.epi, 1);
+  assert.equal(d.rosc, true);
+});
+
+test("debriefStats: open pause counts to the end, fraction clamps", () => {
+  const evs = [{ id: "1", elapsed: 50, kind: "pauseStart", label: "Pause started" }];
+  const d = E.debriefStats(evs, 100);
+  assert.equal(d.pauseCount, 1);
+  assert.equal(d.longestPauseSeconds, 50);
+  assert.equal(d.cprFractionPct, 50);
+  assert.equal(E.debriefStats([{ id: "1", elapsed: 0, kind: "pauseStart", label: "Pause started" }], 50).cprFractionPct, 0);
+});
+
+test("normScene: keeps valid scene, drops unknown values, weight stored only", () => {
+  const s = E.normScene({ weightKg: 80, setting: "Ward", arrest: "Witnessed", bystanderCpr: "Yes", downTimeMin: 5, shocksBeforeArrival: 2, location: "Ward 3B", team: [" A ", "", "B"] });
+  assert.equal(s.weightKg, 80);
+  assert.equal(s.setting, "");
+  assert.equal(s.arrest, "Witnessed");
+  assert.deepEqual(s.team, ["A", "B"]);
+  assert.deepEqual(E.normScene(null), E.defaultScene());
+  assert.equal(E.buildPayload(E.newSession("adult", { wallNow: 0 }), { elapsed: 0 }).scene.weightKg, null);
+});
+
+test("eventMatchesFilter: each chip matches its kind only", () => {
+  assert.equal(E.eventMatchesFilter({ kind: "drug" }, "drugs"), true);
+  assert.equal(E.eventMatchesFilter({ kind: "drug" }, "shocks"), false);
+  assert.equal(E.eventMatchesFilter({ kind: "shock" }, "shocks"), true);
+  assert.equal(E.eventMatchesFilter({ kind: "rhythm" }, "rhythms"), true);
+  assert.equal(E.eventMatchesFilter({ kind: "procedure" }, "procedures"), true);
+  assert.equal(E.eventMatchesFilter({ kind: "note" }, "notes"), true);
+  assert.equal(E.eventMatchesFilter({ kind: "note" }, "all"), true);
+});
+
+test("past entries: capped at 50, newest first, short link id only", () => {
+  let list = [];
+  for (let i = 0; i < 55; i++) {
+    list = E.addPastEntry(list, E.pastEntryFromPayload(
+      { v: 2, mode: "adult", startedAt: "2026-01-01T00:00:00Z", durationSeconds: i, events: [], summary: { rosc: false }, training: false },
+      { id: "p" + i, savedWall: i, link: { gid: "g", pid: "abcdef123" } }));
+  }
+  assert.equal(list.length, 50);
+  assert.equal(list[0].id, "p54");
+  assert.equal(list[0].linkShort, "abcdef");
+  assert.equal(E.shortLinkId(null), "");
 });

@@ -668,8 +668,8 @@
   }
 
   function headHtml() {
-    return '<div class="cbecg-head"><span class="cbecg-train">TRAINING</span>' +
-      '<span class="cbecg-title">ECG rhythm course</span>' +
+    return '<div class="cbecg-head"><span class="cbecg-title">ECG rhythm course</span>' +
+      '<span class="cbecg-train">TRAINING</span>' +
       '<button class="cbecg-x" data-cbp-settings aria-label="Display settings">Display</button>' +
       '<button class="cbecg-x" data-cbecg-close aria-label="Close ECG course">Close</button></div>' +
       '<p class="cbecg-dis">' + escH(DISCLAIMER) + "</p>" +
@@ -700,7 +700,7 @@
     var opts = RHYTHMS.map(function (r) {
       return '<option value="' + r.id + '"' + (r.id === state.rhythm ? " selected" : "") + ">" + escH(r.name) + "</option>";
     }).join("");
-    return '<label class="cbecg-lbl" for="cbecg-rhy">Rhythm strip (schematic)</label>' +
+    return '<div class="cbecg-panes"><div class="cbecg-stripcol"><label class="cbecg-lbl" for="cbecg-rhy">Rhythm strip (schematic)</label>' +
       '<select id="cbecg-rhy" class="cbecg-sel" data-cbecg-rhythm>' + opts + "</select>" +
       '<div class="cbecg-stripwrap" data-cbecg-stripwrap>' + stripSvg(state.rhythm, 150, { heightMm: 34 }) +
       '<div class="cbecg-cal" data-cbecg-cal hidden>' +
@@ -710,11 +710,12 @@
       '<div class="cbecg-row"><button class="cbecg-btn" data-cbecg-calbtn aria-pressed="' + state.cal + '">' +
       (state.cal ? "Hide calipers" : "Show calipers") + "</button>" +
       '<span class="cbecg-read" data-cbecg-read role="status"></span></div>' +
+      measureHtml() + '</div><div class="cbecg-detailcol">' +
       '<dl class="cbecg-meta"><dt>Rate</dt><dd>' + (m.rate ? "about " + m.rate + " per min" : "no complexes") + "</dd>" +
       "<dt>Regularity</dt><dd>" + (m.regular ? "regular" : "irregular") + "</dd>" +
       "<dt>ACLS category</dt><dd>" + escH(CLS_LABEL[m.cls]) + "</dd></dl>" +
       '<ul class="cbecg-feats">' + m.features.map(function (f) { return "<li>" + escH(f) + "</li>"; }).join("") + "</ul>" +
-      measureHtml();
+      "</div></div>";
   }
 
   function measureHtml() {

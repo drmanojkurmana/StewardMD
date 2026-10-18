@@ -53,30 +53,37 @@
   var MAX_CUSTOM = 4;
   var MAX_LABEL = 14;
 
-  /* Canonical tokens per theme. Surfaces, lines and text only; the five
-   * state colours keep their hue family in every theme except Mono, where
-   * words and border shapes carry the state. Auto resolves in CSS: dark
-   * tokens by default, light tokens under prefers-color-scheme: light. */
+  /* Canonical tokens per theme (v3 palette, docs/codeblue/DESIGN.md owner
+   * overrides). Night Shift is Carbon and Graphite with Electric Blue;
+   * Ward Light is Frost White with a darker blue accent. Surfaces, lines
+   * and text only; the five state colours keep their hue family in every
+   * theme except Mono, where words and border shapes carry the state.
+   * Auto resolves in CSS: dark tokens by default, light tokens under
+   * prefers-color-scheme: light. The two quiet gradients (blue for Start,
+   * the CPR ring and the primary action; red for Shock, overdue and End)
+   * are shared constants, identical on every theme. */
+  var GRAD_BLUE = ["#3B82F6", "#1D4ED8"];
+  var GRAD_RED = ["#EF4444", "#B91C1C"];
   var THEMES = {
-    "night-shift": { bg: "#071318", surface: "#0D1D23", ink: "#E8F1EE",
-      muted: "#9DB8B1", line: "#1E343B", accent: "#42CDB5", accentInk: "#071318",
-      running: "#42CDB5", due: "#FFC53D", overdue: "#FF453A",
-      rosc: "#30D158", paused: "#9DB8B1", trace: "#42CDB5",
-      gridMinor: "#1A2E34", gridMajor: "#2A444C", scheme: "dark" },
-    "ward-light": { bg: "#F4F6F5", surface: "#FFFFFF", ink: "#10211D",
-      muted: "#3D5650", line: "#CFDBD7", accent: "#0C6E5E", accentInk: "#FFFFFF",
-      running: "#0C6E5E", due: "#8A5A00", overdue: "#B3261E",
-      rosc: "#17803A", paused: "#3D5650", trace: "#10211D",
-      gridMinor: "#D8E4E0", gridMajor: "#B7CBC5", scheme: "light" },
+    "night-shift": { bg: "#101317", surface: "#171B20", ink: "#F4F7FA",
+      muted: "#AAB2BD", line: "#343A40", accent: "#3B82F6", accentInk: "#0A0F16",
+      running: "#3B82F6", due: "#F5B544", overdue: "#EF4444",
+      rosc: "#34C759", paused: "#AAB2BD", trace: "#3B82F6",
+      gridMinor: "#232A31", gridMajor: "#39424B", scheme: "dark" },
+    "ward-light": { bg: "#F4F7FA", surface: "#FFFFFF", ink: "#101317",
+      muted: "#4A5560", line: "#D5DBE3", accent: "#2563EB", accentInk: "#FFFFFF",
+      running: "#2563EB", due: "#8A5A00", overdue: "#B91C1C",
+      rosc: "#17803A", paused: "#5B6B7A", trace: "#101317",
+      gridMinor: "#E2E8EF", gridMajor: "#C3CDD8", scheme: "light" },
     "high-contrast": { bg: "#000000", surface: "#000000", ink: "#FFFFFF",
-      muted: "#E8E8E8", line: "#FFFFFF", accent: "#00E5C0", accentInk: "#000000",
-      running: "#00E5C0", due: "#FFD60A", overdue: "#FF6B61",
-      rosc: "#3DFF6E", paused: "#D8D8D8", trace: "#00E5C0",
+      muted: "#E8E8E8", line: "#FFFFFF", accent: "#5AA9F0", accentInk: "#000000",
+      running: "#5AA9F0", due: "#FFD60A", overdue: "#FF6B61",
+      rosc: "#3DFF6E", paused: "#D8D8D8", trace: "#5AA9F0",
       gridMinor: "#3A3A3A", gridMajor: "#8A8A8A", scheme: "dark" },
     "red-room": { bg: "#150A0C", surface: "#221016", ink: "#F5E9E2",
-      muted: "#D3ABA0", line: "#43222B", accent: "#FF9B87", accentInk: "#22060A",
-      running: "#7FD9C6", due: "#FFC53D", overdue: "#FF6B61",
-      rosc: "#4ADE80", paused: "#D3ABA0", trace: "#7FD9C6",
+      muted: "#D3ABA0", line: "#43222B", accent: "#7FB0F5", accentInk: "#22060A",
+      running: "#7FB0F5", due: "#FFC53D", overdue: "#FF6B61",
+      rosc: "#4ADE80", paused: "#D3ABA0", trace: "#7FB0F5",
       gridMinor: "#331820", gridMajor: "#5A2C36", scheme: "dark" },
     "mono": { bg: "#0B0B0C", surface: "#161617", ink: "#F2F2F2",
       muted: "#C9C9C9", line: "#3A3A3D", accent: "#FFFFFF", accentInk: "#0B0B0C",
@@ -84,17 +91,60 @@
       rosc: "#FFFFFF", paused: "#C9C9C9", trace: "#F2F2F2",
       gridMinor: "#232326", gridMajor: "#4A4A4E", scheme: "dark" },
     "sepia-light": { bg: "#F3ECDD", surface: "#FFFDF4", ink: "#2A2114",
-      muted: "#5D5040", line: "#D3C6A8", accent: "#0C6E5E", accentInk: "#FFFFFF",
-      running: "#0B6B5C", due: "#7A5200", overdue: "#A3241B",
+      muted: "#5D5040", line: "#D3C6A8", accent: "#2563EB", accentInk: "#FFFFFF",
+      running: "#2563EB", due: "#7A5200", overdue: "#A3241B",
       rosc: "#166B32", paused: "#5D5040", trace: "#2A2114",
       gridMinor: "#E2D6BC", gridMajor: "#C0B08A", scheme: "light" },
     "auto": { scheme: "auto" }
   };
 
+  var SETTINGS = [
+    { id: "mode", label: "Patient mode", group: "Patient and CPR", keywords: "adult paediatric neonatal patient mode", type: "select", options: ["adult", "paediatric", "neonatal"] },
+    { id: "compressionRate", label: "Compression rate", group: "Patient and CPR", keywords: "compression rate metronome speed bpm", type: "range", min: 100, max: 120, def: 110, unit: " per min" },
+    { id: "cycleMin", label: "CPR cycle length", group: "Rhythm check", keywords: "rhythm check cycle length minutes", type: "range", min: 1, max: 3, def: 2, unit: " min" },
+    { id: "headsUpSec", label: "Rhythm check heads-up", group: "Rhythm check", keywords: "heads up warning rhythm check seconds", type: "select", options: [0, 10, 15, 30, 60], def: 30 },
+    { id: "autoResumeSec", label: "Auto-resume after pause", group: "Rhythm check", keywords: "auto resume pause seconds", type: "range", min: 3, max: 10, def: 6, unit: " s" },
+    { id: "rhythmPictures", label: "Rhythm pictures", group: "Rhythm check", keywords: "rhythm pictures ecg schematic images", type: "bool", def: true },
+    { id: "voice", label: "Voice prompts", group: "Voice and sound", keywords: "voice speech prompts sound", type: "bool", def: true },
+    { id: "voiceSpeed", label: "Voice speed", group: "Voice and sound", keywords: "voice speed rate speech", type: "range", min: 50, max: 150, def: 100, unit: "%" },
+    { id: "metronome", label: "Metronome", group: "Voice and sound", keywords: "metronome click beat sound", type: "bool", def: true },
+    { id: "breathCue", label: "Breath cue", group: "Voice and sound", keywords: "breath cue ventilation sound", type: "bool", def: true },
+    { id: "lowAlert", label: "Low alert sound", group: "Voice and sound", keywords: "low alert overdue sound", type: "bool", def: true },
+    { id: "epiIntervalMin", label: "Epinephrine reminder interval", group: "Medications", keywords: "epinephrine adrenaline interval reminder minutes drug", type: "range", min: 3, max: 5, def: 4, unit: " min" },
+    { id: "showAmio", label: "Show amiodarone button", group: "Medications", keywords: "amiodarone drug buttons show hide", type: "bool", def: true },
+    { id: "showLido", label: "Show lidocaine button", group: "Medications", keywords: "lidocaine drug buttons show hide", type: "bool", def: true },
+    { id: "shockSplit", label: "Split VF and pulseless VT", group: "Shock and airway", keywords: "shock vf pulseless vt split button defibrillation", type: "bool", def: false },
+    { id: "shockWaveform", label: "Shock waveform", group: "Shock and airway", keywords: "biphasic monophasic shock waveform energy", type: "select", options: ["biphasic", "monophasic"], def: "biphasic" },
+    { id: "theme", label: "Theme", group: "Appearance", keywords: "theme dark light appearance colour", type: "select" },
+    { id: "textScale", label: "Text size", group: "Appearance", keywords: "text size font appearance", type: "range", min: 90, max: 130, def: 100, unit: "%" },
+    { id: "uiSize", label: "UI size", group: "Appearance", keywords: "ui size button size appearance", type: "select" },
+    { id: "motion", label: "Reduced motion", group: "Appearance", keywords: "reduced motion animation appearance", type: "select" },
+    { id: "time24", label: "24-hour time", group: "Appearance", keywords: "24 hour time clock format", type: "bool", def: true },
+    { id: "tileOrder", label: "Button order and visibility", group: "Layout and buttons", keywords: "reorder hide buttons layout tiles custom", type: "custom" },
+    { id: "training", label: "Training mode default", group: "Training", keywords: "training practice mode", type: "bool", def: false },
+    { id: "favCards", label: "Favourite reference cards", group: "Notes", keywords: "favourites pinned cards notes", type: "custom" }
+  ];
+  function settingsDefaults() {
+    var d = {};
+    SETTINGS.forEach(function (s) { if (s.def !== undefined) d[s.id] = s.def; });
+    d.compressionRate = 110; d.cycleMin = 2; d.headsUpSec = 30; d.autoResumeSec = 6;
+    return d;
+  }
+  function searchSettings(q) {
+    q = String(q == null ? "" : q).trim().toLowerCase();
+    if (!q) return SETTINGS.slice();
+    return SETTINGS.filter(function (s) {
+      return (s.label + " " + s.group + " " + s.keywords).toLowerCase().indexOf(q) >= 0;
+    });
+  }
   function defaults() {
     return {
       theme: "night-shift", textScale: 100, uiSize: "standard", motion: "system",
-      tileOrder: TILE_IDS.slice(), hidden: {}, custom: [], customSeq: 0
+      tileOrder: TILE_IDS.slice(), hidden: {}, custom: [], customSeq: 0,
+      compressionRate: 110, cycleMin: 2, headsUpSec: 30, autoResumeSec: 6, rhythmPictures: true,
+      voice: true, voiceSpeed: 100, metronome: true, breathCue: true, lowAlert: true,
+      epiIntervalMin: 4, showAmio: true, showLido: true, shockSplit: false, shockWaveform: "biphasic",
+      time24: true, training: false, favCards: []
     };
   }
 
@@ -130,6 +180,13 @@
     if (!Array.isArray(d.custom)) d.custom = [];
     if (!isFinite(Number(d.customSeq))) d.customSeq = 0;
     if (!p || typeof p !== "object") return d;
+    ["compressionRate", "cycleMin", "headsUpSec", "autoResumeSec", "voiceSpeed", "epiIntervalMin"].forEach(function (k) {
+      var lim = { compressionRate: [100, 120], cycleMin: [1, 3], headsUpSec: [0, 60], autoResumeSec: [3, 10], voiceSpeed: [50, 150], epiIntervalMin: [3, 5] }[k];
+      var n = Number(p[k]); if (isFinite(n)) d[k] = Math.max(lim[0], Math.min(lim[1], n));
+    });
+    ["rhythmPictures", "voice", "metronome", "breathCue", "lowAlert", "showAmio", "showLido", "shockSplit", "time24", "training"].forEach(function (k) { if (typeof p[k] === "boolean") d[k] = p[k]; });
+    if (["biphasic", "monophasic"].indexOf(p.shockWaveform) >= 0) d.shockWaveform = p.shockWaveform;
+    if (Array.isArray(p.favCards)) d.favCards = p.favCards.filter(function (x) { return typeof x === "string"; }).slice(0, 12);
     if (THEME_IDS.indexOf(p.theme) >= 0) d.theme = p.theme;
     var ts = Math.round(Number(p.textScale));
     if (isFinite(ts)) d.textScale = Math.max(90, Math.min(130, ts));
@@ -675,8 +732,10 @@
     addCustom: addCustom, removeCustom: removeCustom,
     apply: apply, applyAll: applyAll,
     open: open, close: close, isOpen: isOpen,
+    SETTINGS: SETTINGS, searchSettings: searchSettings, settingsDefaults: settingsDefaults,
     THEME_IDS: THEME_IDS, TILE_IDS: TILE_IDS,
     MAX_CUSTOM: MAX_CUSTOM, MAX_LABEL: MAX_LABEL,
+    GRAD_BLUE: GRAD_BLUE, GRAD_RED: GRAD_RED,
     _themes: THEMES, _defaults: defaults,
     _normalise: normalise, _copy: allCopySamples,
     _selectorFor: selectorFor, _pickFocusTarget: pickFocusTarget

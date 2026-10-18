@@ -95,6 +95,7 @@
         rosc: s.rosc === true
       },
       training: p.training === true,
+      scene: normScene(p.scene),
       disclaimer: asStr(p.disclaimer || s.disclaimer, "")
     };
   }
@@ -124,13 +125,32 @@
   }
 
   function pauseStats(events, duration) {
-    var pauses = 0, secs = 0, openAt = null;
+    var pauses = 0, secs = 0, longest = 0, openAt = null;
     (events || []).forEach(function (ev) {
       if (isPause(ev)) { pauses++; if (openAt === null) openAt = ev.elapsed; }
-      else if (isResume(ev) && openAt !== null) { secs += Math.max(0, ev.elapsed - openAt); openAt = null; }
+      else if (isResume(ev) && openAt !== null) {
+        var len = Math.max(0, ev.elapsed - openAt);
+        secs += len; if (len > longest) longest = len; openAt = null;
+      }
     });
-    if (openAt !== null) secs += Math.max(0, duration - openAt);
-    return { pauses: pauses, pauseSeconds: Math.round(secs) };
+    if (openAt !== null) {
+      var openLen = Math.max(0, duration - openAt);
+      secs += openLen; if (openLen > longest) longest = openLen;
+    }
+    return { pauses: pauses, pauseSeconds: Math.round(secs), longestPauseSeconds: Math.round(longest) };
+  }
+
+  function normScene(raw) {
+    var out = { weightKg: null, setting: "", arrest: "", bystanderCpr: "", downTimeMin: null, shocksBeforeArrival: null, location: "", team: [] };
+    if (!raw || typeof raw !== "object") return out;
+    function num(x) { if (x == null || x === "") return null; var n = Number(x); return isFinite(n) && n >= 0 ? n : null; }
+    out.weightKg = num(raw.weightKg); out.downTimeMin = num(raw.downTimeMin); out.shocksBeforeArrival = num(raw.shocksBeforeArrival);
+    if (["In-hospital", "Out-of-hospital"].indexOf(raw.setting) >= 0) out.setting = raw.setting;
+    if (["Witnessed", "Unwitnessed"].indexOf(raw.arrest) >= 0) out.arrest = raw.arrest;
+    if (["Yes", "No"].indexOf(raw.bystanderCpr) >= 0) out.bystanderCpr = raw.bystanderCpr;
+    out.location = String(raw.location == null ? "" : raw.location).slice(0, 80);
+    if (Array.isArray(raw.team)) out.team = raw.team.map(function (n) { return String(n == null ? "" : n).trim().slice(0, 40); }).filter(Boolean).slice(0, 20);
+    return out;
   }
 
   function computeDebrief(state) {
@@ -144,6 +164,7 @@
     return {
       pauses: ps.pauses,
       pauseSeconds: ps.pauseSeconds,
+      longestPauseSeconds: ps.longestPauseSeconds,
       compressionFractionPct: frac,
       timeToFirstShock: firstElapsed(state.events, isShock),
       timeToFirstEpi: firstElapsed(state.events, isEpi),
@@ -180,7 +201,12 @@
     }
     L.push("");
     L.push("Totals: epinephrine " + c.epi + ", shocks " + c.shocks + ".");
-    L.push("Pauses: " + d.pauses + " (" + d.pauseSeconds + " s).");
+    L.push("Pauses: " + d.pauses + " (" + d.pauseSeconds + " s). Longest pause: " + d.longestPauseSeconds + " s.");
+    if (state.scene && (state.scene.location || state.scene.setting || state.scene.team.length)) {
+      var sc = state.scene;
+      L.push("Scene: " + [sc.setting, sc.arrest, sc.location].filter(Boolean).join(", ") +
+        (sc.team.length ? ". Team: " + sc.team.join(", ") : "") + ".");
+    }
     L.push("Estimated compression fraction: " + (d.compressionFractionPct === null ? "not available" : d.compressionFractionPct + "%") + ".");
     L.push("Time to first shock: " + fmtTimeOrDash(d.timeToFirstShock) + ".");
     L.push("Time to first epinephrine: " + fmtTimeOrDash(d.timeToFirstEpi) + ".");
@@ -413,7 +439,7 @@
     var d = computeDebrief(st);
     handle.debriefEl.innerHTML = "";
     var items = [
-      ["Pauses", d.pauses + " (" + d.pauseSeconds + " s)"],
+      ["Pauses", d.pauses ? d.pauses + ", longest " + d.longestPauseSeconds + " s" : "None"],
       ["Estimated compression fraction", d.compressionFractionPct === null ? "Not available" : d.compressionFractionPct + "%"],
       ["Time to first shock", fmtTimeOrDash(d.timeToFirstShock)],
       ["Time to first epinephrine", fmtTimeOrDash(d.timeToFirstEpi)],

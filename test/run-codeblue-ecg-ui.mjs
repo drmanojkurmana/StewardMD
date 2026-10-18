@@ -44,6 +44,16 @@ const shot = async (name, dark) => {
   const r = await shotCall({ format: "png" });
   if (r.result) fsx.writeFileSync(join(process.env.SHOTS, "ecg-" + name + "-" + (dark ? "dark" : "light") + ".png"), Buffer.from(r.result.data, "base64"));
 };
+const shotWidths = async (name) => {
+  for (const w of [820, 1194]) {
+    const h = w === 820 ? 1180 : 834;
+    await call("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 2, mobile: true });
+    await sleep(300);
+    await shot(name + "-" + w, false); await shot(name + "-" + w, true);
+  }
+  await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+  await ev(`document.body.classList.remove("dark"); return 1;`); await sleep(300);
+};
 const click = (sel) => ev(`var b=document.querySelector(${JSON.stringify(sel)}); if(!b) return "missing"; b.click(); return 1;`);
 
 try {
@@ -97,6 +107,7 @@ try {
   const afterTouch = await ev(`return document.querySelector("[data-cbecg-read]").textContent;`);
   ok(afterTouch !== afterKey, `touch drag moves a caliper (${afterKey} -> ${afterTouch})`);
   await shot("strip", false); await shot("strip", true);
+  await shotWidths("strip");
 
   // ---- 12-lead
   await click('[data-cbecg-tab="leads"]');
@@ -108,6 +119,7 @@ try {
   ok(await ev(`return document.querySelectorAll(".cbecg-cell.dn").length === 3 && document.querySelector("[data-cbecg-leadnote]").textContent.indexOf("V7 to V9") >= 0;`) === true, "posterior set: 3 depressed with posterior-lead note");
   ok(await ev(`return document.querySelectorAll(".cbecg-pattern").length === 2;`) === true, "LBBB and Wellens pattern cards render");
   await shot("leads", false); await shot("leads", true);
+  await shotWidths("leads");
 
   // ---- flashcards
   await click('[data-cbecg-tab="cards"]');
@@ -115,6 +127,7 @@ try {
   await click("[data-cbecg-flash]");
   ok(await ev(`return !!document.querySelector(".cbecg-flash .cbecg-cat");`) === true, "flashcard reveals name plus ACLS category");
   await shot("cards", false); await shot("cards", true);
+  await shotWidths("cards");
 
   // ---- quiz
   await click('[data-cbecg-tab="quiz"]');
@@ -127,6 +140,7 @@ try {
   console.log("quiz: " + await ev(`return document.querySelector(".cbecg-score").textContent;`));
   ok(await ev(`try{var s=JSON.parse(localStorage.getItem("smd.cbecg.v1")); return typeof s.quizBest === "number" && typeof s.misses === "object";}catch(e){return false;}`) === true, "quiz best and misses persist");
   await shot("quiz", false); await shot("quiz", true);
+  await shotWidths("quiz");
 
   // ---- compliance at 390 px
   const lum = (c) => { const x = c.match(/[\d.]+/g).map(Number).slice(0, 3).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * x[0] + 0.7152 * x[1] + 0.0722 * x[2]; };
@@ -146,6 +160,15 @@ try {
   ok(crDark >= 4.5, "dark: body-text contrast " + (bD === undefined ? String(await ev(cols)) : crDark.toFixed(2) + ":1"));
   ok(await ev(`return document.documentElement.clientWidth <= 390 && document.querySelector(".cbecg-sheet").scrollWidth <= 391;`) === true, "390 px: no horizontal scroll");
   ok(await ev(`return Array.from(document.querySelectorAll(".cbecg-btn,.cbecg-tab")).every(function(b){var r=b.getBoundingClientRect(); return r.height >= 44 || r.width === 0;});`) === true, "touch targets at least 44 px");
+  /* iPad: ECG holds at 820x1180 and 1194x834. */
+  for (const [w, h, tag] of [[820, 1180, "820"], [1194, 834, "1194"]]) {
+    await call("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 2, mobile: true });
+    await sleep(300);
+    ok(await ev(`return document.querySelector(".cbecg-sheet").scrollWidth <= ${w} + 1;`) === true, `${tag}: no horizontal scroll`);
+    ok(await ev(`return Array.from(document.querySelectorAll(".cbecg-btn,.cbecg-tab")).every(function(b){var r=b.getBoundingClientRect(); return r.height >= 44 || r.width === 0;});`) === true, `${tag}: touch targets at least 44 px`);
+  }
+  await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+  await sleep(300);
   ok(await ev(`return CodeBlueECG.isOpen(); CodeBlueECG.close(); return !CodeBlueECG.isOpen() && !document.querySelector(".cbecg");`) === true, "close() removes the dialog");
   ok(errors.length === 0, "no page errors" + (errors.length ? ": " + errors.slice(0, 2).join(" | ") : ""));
   console.log(fails ? `FAILED ${fails}` : "ALL PASS");

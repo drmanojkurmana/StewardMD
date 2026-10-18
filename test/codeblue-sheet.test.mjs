@@ -189,3 +189,24 @@ test("mm:ss formatter pads and clamps", () => {
   assert.equal(S.fmtMMSS(-5), "00:00");
   assert.equal(S.fmtMMSS(3600), "60:00");
 });
+
+test("scene: old payloads without scene stay valid, new scene parses", () => {
+  const old = S.parsePayload(v2(EVENTS));
+  assert.deepEqual(old.scene.team, []);
+  assert.equal(old.scene.weightKg, null);
+  const withScene = S.parsePayload(v2(EVENTS, { scene: { weightKg: 70, setting: "In-hospital", location: "Ward 3B", team: ["A"] } }));
+  assert.equal(withScene.scene.location, "Ward 3B");
+  assert.deepEqual(withScene.scene.team, ["A"]);
+});
+
+test("debrief: longest pause from logged pause and resume events", () => {
+  const st = S.parsePayload(v2(EVENTS, { summary: { compressions: 0, averageRateCPM: 0, compressionFractionPct: null, targetRatePct: 0, shockCount: 0, adrenalineCount: 0, rosc: false } }));
+  const d = S.computeDebrief(st);
+  assert.equal(d.pauses, 1);
+  assert.equal(d.longestPauseSeconds, 20);
+  assert.equal(d.timeToFirstShock, 125);
+  assert.equal(d.timeToFirstEpi, 200);
+  const empty = S.computeDebrief(S.parsePayload(null));
+  assert.equal(empty.longestPauseSeconds, 0);
+  assert.equal(empty.timeToFirstShock, null);
+});
