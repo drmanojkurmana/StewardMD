@@ -49,7 +49,8 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "audioSpeak", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "audioSetCues", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "codeBlueGetState", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "codeBlueLog", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "codeBlueLog", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "codeBlueNotifyWatch", returnType: CAPPluginReturnPromise)
     ]
 
     private let suiteName = "group.in.stewardmd.app"
@@ -311,6 +312,29 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
             }
             call.resolve()
         }
+    }
+
+    /// A code started (or ended) on the phone: tell the paired watch so it can offer to join. The
+    /// watch never auto-starts a code; it shows a prompt. Sent live when reachable and as a queued
+    /// transferUserInfo so a sleeping watch app still gets it (the watch dedupes by startedAtMs).
+    @objc func codeBlueNotifyWatch(_ call: CAPPluginCall) {
+        #if canImport(WatchConnectivity)
+        guard WCSession.isSupported() else { call.resolve(["sent": false]); return }
+        let s = WCSession.default
+        guard s.activationState == .activated, s.isPaired, s.isWatchAppInstalled else { call.resolve(["sent": false]); return }
+        let running = call.getBool("running") ?? false
+        var msg: [String: Any] = ["kind": running ? "phoneCodeStart" : "phoneCodeEnd"]
+        if running {
+            let mode = call.getString("mode") ?? "adult"
+            msg["mode"] = ["adult", "paediatric", "neonatal"].contains(mode) ? mode : "adult"
+            msg["startedAtMs"] = call.getDouble("startedAtMs") ?? Date().timeIntervalSince1970 * 1000
+        }
+        if s.isReachable { s.sendMessage(msg, replyHandler: nil, errorHandler: nil) }
+        s.transferUserInfo(msg)
+        call.resolve(["sent": true])
+        #else
+        call.resolve(["sent": false])
+        #endif
     }
 
     // Native Code Blue cues that keep playing with the screen locked (CodeBlueAudioEngine).

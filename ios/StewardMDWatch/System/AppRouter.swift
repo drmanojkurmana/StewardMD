@@ -14,6 +14,14 @@ struct CalcRoute: Hashable { let id: String }
 final class AppRouter: ObservableObject {
     @Published var path = NavigationPath()
     private let store = AppGroupStore()
+    private var routedPhoneCode: Date?
+
+    /// A code started on the iPhone: open Code Blue once per request so it can offer to join.
+    func routePhoneCode(_ request: WatchConnectivityManager.PhoneCodeRequest?) {
+        guard let request = request, routedPhoneCode != request.startedAt else { return }
+        routedPhoneCode = request.startedAt
+        navigate("codeBlue")
+    }
 
     /// Called when the app becomes active — routes any pending intent request.
     func consumePending() {
