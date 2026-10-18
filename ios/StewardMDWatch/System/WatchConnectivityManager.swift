@@ -25,6 +25,39 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
     @Published private(set) var isReachable: Bool = false
     private let store = WatchServices.store
 
+    /// A code started on the iPhone that the watch has not joined yet. The watch never
+    /// auto-starts: Code Blue shows a "Join" prompt for it (CodeBlueView).
+    struct PhoneCodeRequest: Equatable { let startedAt: Date; let mode: CodeMode }
+    @Published private(set) var phoneCode: PhoneCodeRequest?
+    private var lastPhoneStartMs: Double = 0
+
+    /// Phone relay for a code started or ended on the phone (live message or queued user info).
+    func handlePhoneCode(_ info: [String: Any]) {
+        switch info["kind"] as? String {
+        case "phoneCodeStart":
+            guard let ms = info["startedAtMs"] as? Double, ms != lastPhoneStartMs else { return }
+            let started = Date(timeIntervalSince1970: ms / 1000)
+            let age = Date().timeIntervalSince(started)
+            guard age < 6 * 3600, age > -60 else { return }   // ignore stale or far-future requests
+            lastPhoneStartMs = ms
+            let mode = CodeMode(rawValue: (info["mode"] as? String) ?? "adult") ?? .adult
+            phoneCode = PhoneCodeRequest(startedAt: started, mode: mode)
+            HapticManager.play(.critical)
+            ResusAlerts.requestAuth()
+            ResusAlerts.schedule(id: "phone-code", after: 1, title: "Code Blue",
+                                 body: "Code started on iPhone. Open to join.", repeats: false)
+            NotificationCenter.default.post(name: .smdPhoneCodeStart, object: nil)
+        case "phoneCodeEnd":
+            phoneCode = nil
+            ResusAlerts.cancel(["phone-code"])
+        default:
+            break
+        }
+    }
+
+    /// The watch joined (or dismissed) the phone's code; stop prompting for it.
+    func clearPhoneCode() { phoneCode = nil; ResusAlerts.cancel(["phone-code"]) }
+
     func activate() {
         // Seed the UI from the last-known relayed data so it isn't empty on launch.
         WatchServices.watchlist.set(store.loadWatchlist())
@@ -261,6 +294,8 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
 extension Notification.Name {
     /// Posted when bridged data (session/favorites/glance) is received or cleared.
     static let smdWatchDataUpdated = Notification.Name("smdWatchDataUpdated")
+    /// Posted when the iPhone starts a Code Blue the watch can join.
+    static let smdPhoneCodeStart = Notification.Name("smdPhoneCodeStart")
 }
 
 #if canImport(WatchConnectivity)
@@ -279,6 +314,14 @@ extension WatchConnectivityManager: WCSessionDelegate {
 
     nonisolated func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
         Task { @MainActor in self.apply(applicationContext) }
+    }
+
+    nonisolated func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
+        Task { @MainActor in self.handlePhoneCode(message) }
+    }
+
+    nonisolated func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any] = [:]) {
+        Task { @MainActor in self.handlePhoneCode(userInfo) }
     }
 
     nonisolated func sessionReachabilityDidChange(_ session: WCSession) {

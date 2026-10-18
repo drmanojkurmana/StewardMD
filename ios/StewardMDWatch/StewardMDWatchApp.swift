@@ -40,9 +40,13 @@ struct StewardMDWatchApp: App {
                 await features.refresh()
             }
             .onOpenURL { router.open($0) }
+            .onReceive(NotificationCenter.default.publisher(for: .smdPhoneCodeStart)) { _ in
+                router.routePhoneCode(connectivity.phoneCode)
+            }
             .onChange(of: scenePhase) { _, phase in
                 if phase == .active {
                     router.consumePending()
+                    router.routePhoneCode(connectivity.phoneCode)
                     Task { await features.refresh() }
                 }
             }

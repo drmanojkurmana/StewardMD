@@ -31,6 +31,8 @@ struct CodeBlueView: View {
     @State private var showChecklist = false
     @State private var showLog = false
     @State private var showResume = false
+    @State private var showJoin = false
+    @ObservedObject private var connectivity = WatchConnectivityManager.shared
     @State private var selectedMode: CodeMode = .adult
     @State private var lastCueElapsed: TimeInterval = 0
     @Environment(\.scenePhase) private var scenePhase
@@ -152,6 +154,16 @@ struct CodeBlueView: View {
         } message: {
             Text("A code was left running on this watch.")
         }
+        .confirmationDialog("Join code started on iPhone?",
+                            isPresented: $showJoin, titleVisibility: .visible) {
+            Button("Join") { joinPhoneCode() }
+            Button("Not now", role: .cancel) {}
+        } message: {
+            Text(joinMessage)
+        }
+        .onChange(of: connectivity.phoneCode) { _, request in
+            if request != nil, !running, !showResume { showJoin = true }
+        }
         .sheet(isPresented: $showGuide) { GuideSheet(prompts: model.guidePrompts) }
         .sheet(isPresented: $showChecklist) { ChecklistSheet(model: model) }
         .sheet(isPresented: $showLog) { LogSheet(model: model) }
@@ -160,6 +172,8 @@ struct CodeBlueView: View {
             if !running { ResusAlerts.cancel(["codeblue-cycle"]) }
             if !running, !model.isRunning, summary == nil, model.hasResumableSession() {
                 showResume = true
+            } else if !running, connectivity.phoneCode != nil {
+                showJoin = true
             }
         }
         // Leaving the Code Blue screen ends the reminder — a code session is tied to
@@ -373,20 +387,7 @@ struct CodeBlueView: View {
         Button(running ? "End" : "Start") {
             running.toggle()
             if running {
-                startDate = Date().addingTimeInterval(-model.elapsed)
-                model.startCode(mode: selectedMode)
-                lastEpiStatus = .none
-                lastCueElapsed = model.elapsed
-                if captureOn { CaptureLog.shared.begin(); captureNote = nil }   // fresh trace per code
-                // Guaranteed alert to the iPhone even when the app is force-quit: a
-                // direct backend push (only APNs shows on a terminated/locked phone).
-                Task { try? await WatchServices.appAPI.codeBlueStart() }
-                // Belt-and-braces: a guaranteed WC snapshot (transferUserInfo + app-context)
-                // wakes a merely-backgrounded app to alert locally too.
-                WatchConnectivityManager.shared.streamCodeBlueSnapshot(model.snapshot(batteryLevel: WKDeviceId.battery))
-                ResusAlerts.requestAuth()
-                ResusAlerts.schedule(id: "codeblue-cycle", after: 120,
-                                     title: "Code Blue", body: "Rhythm check — switch compressor.", repeats: true)
+                beginCode(from: nil)
             } else {
                 ResusAlerts.cancel(["codeblue-cycle"])
                 summary = model.endCode()
@@ -396,6 +397,49 @@ struct CodeBlueView: View {
         }
         .buttonStyle(.borderedProminent)
         .tint(running ? SMDPalette.critical.color : SMDPalette.success.color)
+    }
+
+    /// Start the code. `phoneStart` is set when joining a code the iPhone started: the clock is
+    /// back-dated to that moment, the cue engine resumes from "now" (no burst of past cues), and
+    /// the backend "Code Blue started" push is skipped because the phone already knows.
+    private func beginCode(from phoneStart: Date?) {
+        startDate = phoneStart ?? Date().addingTimeInterval(-model.elapsed)
+        model.startCode(mode: selectedMode)
+        lastEpiStatus = .none
+        if let s = phoneStart {
+            let off = Date().timeIntervalSince(s)
+            _ = model.sync(to: off)
+            lastCueElapsed = off
+        } else {
+            lastCueElapsed = model.elapsed
+        }
+        if captureOn { CaptureLog.shared.begin(); captureNote = nil }   // fresh trace per code
+        // Guaranteed alert to the iPhone even when the app is force-quit: a
+        // direct backend push (only APNs shows on a terminated/locked phone).
+        if phoneStart == nil { Task { try? await WatchServices.appAPI.codeBlueStart() } }
+        // Belt-and-braces: a guaranteed WC snapshot (transferUserInfo + app-context)
+        // wakes a merely-backgrounded app to alert locally too.
+        WatchConnectivityManager.shared.streamCodeBlueSnapshot(model.snapshot(batteryLevel: WKDeviceId.battery))
+        ResusAlerts.requestAuth()
+        ResusAlerts.schedule(id: "codeblue-cycle", after: 120,
+                             title: "Code Blue", body: "Rhythm check — switch compressor.", repeats: true)
+    }
+
+    /// Join the code the iPhone started (confirmed by the user; never automatic).
+    private func joinPhoneCode() {
+        guard !running, let request = connectivity.phoneCode else { return }
+        selectedMode = request.mode
+        summary = nil
+        running = true
+        beginCode(from: request.startedAt)
+        connectivity.clearPhoneCode()
+        HapticManager.play(.success)
+    }
+
+    private var joinMessage: String {
+        guard let r = connectivity.phoneCode else { return "" }
+        let secs = max(0, Int(Date().timeIntervalSince(r.startedAt)))
+        return String(format: "%@, running %d:%02d.", r.mode.displayName, secs / 60, secs % 60)
     }
 
     private func resumeSession() {
