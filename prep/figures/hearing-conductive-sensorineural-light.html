@@ -287,12 +287,20 @@ body[data-theme="light"] .hr-bone{fill:#d9c69a;stroke:#7a6a48}
 .hr-device{fill:var(--c-cyt2);stroke:color-mix(in srgb,var(--c-cyt2) 55%,#000);stroke-width:1.2}
 .hr-electrode{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 55%,#000);stroke-width:.7}
 .hr-plaque{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 55%,#000);stroke-width:1}
+.hr-boost{fill:none;stroke:var(--c-fl);stroke-width:3;stroke-linecap:round}
+.hr-prosth{fill:none;stroke:var(--c-good);stroke-width:5;stroke-linecap:round}
+.hr-cuff{fill:var(--c-good);stroke:color-mix(in srgb,var(--c-good) 55%,#000);stroke-width:1}
+.hr-glint{fill:#fff;stroke:none}
+.hr-heal{fill:color-mix(in srgb,var(--c-good) 35%,transparent);stroke:none}
+.hr-halo{fill:color-mix(in srgb,var(--c-bad) 30%,transparent);stroke:none}
+.hr-nervehot{fill:none;stroke:var(--c-good);stroke-width:5;stroke-linecap:round}
+.hr-cap{fill:var(--anatomy-strong);font-size:12px}
 .p-snd{--cc:var(--c-fl)}
 .p-bonep{--cc:var(--c-plt)}
 .p-nervep{--cc:var(--c-plt)}
 .p-cochp{--cc:var(--c-cyt)}
 .dr-g-fill.g-air{fill:var(--c-fl)}.dr-g-fill.g-bone{fill:var(--c-plt)}.dr-g-fill.g-wave{fill:var(--c-cyt)}.dr-g-fill.g-hair{fill:var(--c-neut)}
-</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Hearing: conductive and sensorineural loss</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>air conduction normal · bone conduction normal · hearing normal</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated ear. Sound enters the external ear and ear canal, vibrates the tympanic membrane and the ossicles malleus, incus and stapes, and pushes at the oval window into the cochlea. An unrolled cochlea shows the basilar membrane, stiff base for high pitch and floppy apex for low pitch, with hair cells on it. Signals pass along the auditory nerve. Conductive loss blocks the air path while bone conduction is preserved. Sensorineural loss damages hair cells so air and bone conduction both fall. An inset shows Rinne and Weber tuning fork tests. Gauges show air and bone conduction, the basilar wave, hair cells, nerve signal and hearing. Treatments are a hearing aid, surgery for ossicular disease and a cochlear implant."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Hearing: conductive and sensorineural loss</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>air conduction normal · bone conduction normal · hearing normal</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated ear. Sound enters the external ear and ear canal, vibrates the tympanic membrane and the ossicles malleus, incus and stapes, and pushes at the oval window into the cochlea. An unrolled cochlea shows the basilar membrane, stiff base for high pitch and floppy apex for low pitch, with hair cells on it. Signals pass along the auditory nerve. Conductive loss blocks the air path while bone conduction is preserved. Sensorineural loss damages hair cells so air and bone conduction both fall. An inset shows Rinne and Weber tuning fork tests. Gauges show air and bone conduction, the basilar wave, hair cells, nerve signal and hearing. Treatments act on the drawing: a hearing aid sits in the canal and boosts incoming sound, surgery clears the fixed stapes and bridges the gap, and a cochlear implant sparks the nerve past damaged hair cells."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
 <rect class="sc-tissue" x="14" y="44" width="560" height="396" rx="18"/>
 <rect class="sc-tissue" x="584" y="44" width="362" height="194" rx="18"/>
 <rect class="sc-tissue" x="584" y="246" width="362" height="194" rx="18"/>
@@ -307,7 +315,7 @@ body[data-theme="light"] .hr-bone{fill:#d9c69a;stroke:#7a6a48}
 <g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, frequencies or numbers are shown or implied.</span></figcaption></figure>
 <div class="dr-controls">
   <label class="dr-range"><span>Hearing state</span><input id="level" type="range" min="0" max="2" step="1" value="0" aria-valuetext="normal"><span class="dr-ticks"><i>normal</i><i>conductive</i><i>sensorineural</i></span></label>
-  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">hearing aid</option><option value="2">surgery for ossicular disease</option><option value="3">cochlear implant</option></select></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With cochlear implant"><option value="0">no treatment</option><option value="1">hearing aid</option><option value="2">surgery for ossicular disease</option><option value="3">cochlear implant</option></select></label>
   <button id="pause" type="button" aria-pressed="false">Pause motion</button>
 </div>
 <p id="status" class="dr-status" aria-live="polite"></p>
@@ -432,13 +440,17 @@ function run(scn) {
   start();
 }
 
-/* Hearing scene: sound in the canal, eardrum and ossicles, oval window, cochlea wave and hair cells, auditory nerve, fork tests and gauges. */
+/* Hearing scene: sound through the canal, eardrum and ossicles, cochlea wave and hair cells, auditory nerve and fork tests.
+ * Each treatment acts on the drawing: a hearing aid sits in the canal and boosts incoming sound, surgery clears the fixed
+ * stapes and bridges the gap with a prosthesis, and a cochlear implant sparks the nerve past damaged hair cells.
+ * A caption line states what is happening. */
 const L = { ear: $("ear"), coch: $("coch"), fork: $("fork"), parts: $("parts"), over: $("over"), panel: $("panel") };
 const sm = { air: 1, bone: 1, coch: 0.95, waveEff: 0.9, airHeard: 0.95, boneHeard: 0.95, nerve: 0.95, hearing: 0.95, aid: 0, surg: 0, impl: 0, cond: 0, sens: 0 };
 const gg = {};
-const acc = { snd: 0, bonep: 0, cochp: 0, nervep: 0 };
-let tmG = null, malG = null, incG = null, stapG = null, aidDev = null, plaque = null, implantG = null, wavePath = null;
+const acc = { snd: 0, bonep: 0, cochp: 0, nervep: 0, stim: 0 };
+let tmG = null, malG = null, incG = null, stapG = null, aidDev = null, aidBoost = null, plaque = null, prosthEl = null, healGlow = null, implantG = null, stimHalo = null, nerveHot = null, wavePath = null;
 let rinneAirBar = null, rinneBoneBar = null, rinneTxt = null, weberTxt = null, weberAff = null, weberGood = null;
+let capEl = null, capKey = "";
 const hairs = [];
 
 function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0, u: 0 }; }); }
@@ -449,12 +461,35 @@ function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
 const trackSnd = track([[18, 230], [90, 230], [170, 230], [242, 230]]);
 const trackBone = track([[252, 288], [320, 292], [392, 270], [438, 244]]);
 const trackNerve = track([[488, 214], [524, 202], [562, 196]]);
+const trackStim = track([[452, 230], [480, 220], [488, 214], [524, 202], [562, 196]]);
 const trackCoch = track([[634, 162], [730, 162], [826, 162], [906, 162]]);
 
 const snd = pool(24, () => mk("circle", { class: "sc-p p-snd", r: 2.6 }, L.parts));
 const bonep = pool(14, () => mk("circle", { class: "sc-p p-bonep", r: 2.4 }, L.parts));
 const cochp = pool(20, () => mk("circle", { class: "sc-p p-cochp", r: 2.4 }, L.parts));
 const nervep = pool(16, () => mk("circle", { class: "sc-p p-nervep", r: 2.6 }, L.parts));
+const stim = pool(10, () => mk("circle", { class: "sc-p p-nervep", r: 2.6 }, L.parts));
+
+function capText(l, d) {
+  if (d === 3) {
+    if (l === 2) return "Cochlear implant sparks the nerve directly. Hearing returns although hair cells stay damaged.";
+    if (l === 1) return "Cochlear implant sparks the nerve directly. Hearing returns although the air path stays blocked.";
+    return "Cochlear implant sparks the nerve directly. Hearing stays normal.";
+  }
+  if (d === 2) {
+    if (l === 1) return "Surgery frees the stapes and bridges the gap. Sound reaches the cochlea again.";
+    if (l === 2) return "Surgery repairs the ossicles, but the fault is deeper. Hearing stays low.";
+    return "Surgery repairs the ossicles. Hearing stays normal.";
+  }
+  if (d === 1) {
+    if (l === 2) return "Hearing aid makes canal sound bigger. Hearing improves a little.";
+    if (l === 1) return "Hearing aid makes canal sound bigger. More sound gets through.";
+    return "Hearing aid makes canal sound bigger. Hearing stays normal.";
+  }
+  if (l === 1) return "No treatment. The fixed stapes blocks sound. The cochlea hears little.";
+  if (l === 2) return "No treatment. Damaged hair cells stay still. Little signal reaches the nerve.";
+  return "No treatment. Sound shakes the ossicles and bends hair cells.";
+}
 
 function init() {
   /* ---- main ear, sound travelling left to right ---- */
@@ -470,18 +505,27 @@ function init() {
   stapG = mk("g", {}, E); mk("ellipse", { class: "hr-bone", cx: 368, cy: 220, rx: 10, ry: 11 }, stapG); mk("rect", { class: "hr-bone", x: 376, y: 214, width: 22, height: 12, rx: 4 }, stapG);
   mk("ellipse", { class: "hr-oval", cx: 410, cy: 230, rx: 8, ry: 19 }, E);
   plaque = mk("circle", { class: "hr-plaque", cx: 402, cy: 252, r: 10, opacity: 0 }, E);
+  healGlow = mk("ellipse", { class: "hr-heal", cx: 402, cy: 232, rx: 26, ry: 22, opacity: 0 }, E);
+  prosthEl = mk("g", { opacity: 0 }, E);
+  mk("path", { class: "hr-prosth", d: "M350 221 L400 229" }, prosthEl);
+  mk("circle", { class: "hr-cuff", cx: 400, cy: 229, r: 5.5 }, prosthEl);
+  mk("circle", { class: "hr-glint", cx: 375, cy: 225, r: 2 }, prosthEl);
   /* small cochlea with a spiral, then the auditory nerve to the right */
   mk("circle", { class: "hr-cochlea", cx: 458, cy: 230, r: 38 }, E);
   mk("path", { class: "hr-spiral", d: "M430 230 a28 28 0 1 1 28 28 a20 20 0 1 1 -20 -20 a12 12 0 1 1 12 12" }, E);
+  stimHalo = mk("ellipse", { class: "hr-halo", cx: 482, cy: 222, rx: 72, ry: 54, opacity: 0 }, E);
   implantG = mk("g", { opacity: 0 }, E);
   mk("path", { d: "M486 176 C472 186 464 198 460 212", fill: "none", stroke: "var(--c-bad)", "stroke-width": 1.6 }, implantG);
   mk("circle", { class: "hr-device", cx: 490, cy: 172, r: 9 }, implantG);
   [[446, 218], [466, 226], [458, 242], [442, 236], [454, 230]].forEach(([x, y]) => { mk("circle", { class: "hr-electrode", cx: x, cy: y, r: 3.2 }, implantG); });
   mk("path", { class: "hr-nerve", d: "M488 214 C515 202 540 198 562 196" }, E);
+  nerveHot = mk("path", { class: "hr-nervehot", d: "M488 214 C515 202 540 198 562 196", opacity: 0 }, E);
   mk("path", { d: "M562 196 l-12 -5 l1 10 Z", fill: "var(--c-plt)", stroke: "var(--c-plt)", "stroke-width": 1 }, E);
   aidDev = mk("g", { opacity: 0 }, E);
   mk("rect", { class: "hr-device", x: 100, y: 158, width: 16, height: 24, rx: 6 }, aidDev);
   mk("path", { d: "M108 158 C96 172 94 190 100 204", fill: "none", stroke: "var(--c-cyt2)", "stroke-width": 2.4 }, aidDev);
+  aidBoost = mk("g", { opacity: 0 }, E);
+  ["M150 214 Q141 230 150 246", "M175 214 Q166 230 175 246", "M200 214 Q191 230 200 246"].forEach((d) => { mk("path", { class: "hr-boost", d }, aidBoost); });
 
   /* ---- cochlea unrolled: basilar membrane and hair cells ---- */
   const C = L.coch;
@@ -515,30 +559,17 @@ function init() {
   weberAff = mk("path", { class: "hr-arrow", d: "M842 338 Q862 348 868 358 M868 358 l-9 -1 l4 8", opacity: 0 }, F);
   weberGood = mk("path", { class: "hr-arrow", d: "M828 338 Q808 348 802 358 M802 358 l9 -1 l-4 8", opacity: 0 }, F);
 
-  /* ---- label pills: centres checked on a grid so pills do not overlap ---- */
+  /* ---- label pills: eight short labels telling the story left to right ---- */
   const o = L.over;
-  pill(o, "Pinna", 78, 170, 78, 96, "Pinna: the visible external ear. It gathers sound and guides it into the ear canal.");
-  pill(o, "Ear canal", 180, 208, 180, 130, "External ear canal: the tube from the pinna to the eardrum. Wax or blockage here causes conductive loss.");
-  pill(o, "Eardrum", 250, 190, 260, 96, "Eardrum (tympanic membrane): the thin membrane at the end of the canal. Sound vibrates it. A perforation causes conductive loss.");
-  pill(o, "Incus", 326, 188, 340, 130, "Incus: the middle ossicle. It passes vibration from the malleus to the stapes.");
-  pill(o, "Oval window", 410, 212, 430, 130, "Oval window: the opening into the cochlea. The stapes footplate pushes here. In otosclerosis the stapes fixes at this window.");
-  pill(o, "Auditory nerve", 520, 202, 505, 96, "Auditory nerve: carries signals from hair cells to the brain. Damage here is sensorineural loss.");
-  pill(o, "Otosclerosis", 402, 252, 140, 350, "Otosclerosis: new bone fixes the stapes at the oval window, so air conduction falls while bone conduction stays. Shown when conductive loss is selected.");
-  pill(o, "Malleus", 286, 230, 270, 350, "Malleus: the first ossicle, attached to the eardrum. It moves with the eardrum.");
-  pill(o, "Stapes", 380, 226, 380, 350, "Stapes: the smallest ossicle. Its footplate pushes at the oval window. It is the ossicle fixed in otosclerosis.");
-  pill(o, "Cochlea", 458, 262, 455, 350, "Cochlea: the spiral hearing organ. Fluid waves travel on the basilar membrane and hair cells turn them into nerve signals.");
-  pill(o, "Basilar membrane", 700, 158, 710, 96, "Basilar membrane, unrolled: stiff at the base for high pitch, floppy at the apex for low pitch. This place code is tonotopy.");
-  pill(o, "Hair cells", 850, 148, 850, 96, "Hair cells sit on the basilar membrane. Their hairs bend with the wave and start nerve signals. Noise and ageing injure them.");
-  pill(o, "Noise damage", 800, 145, 700, 215, "Noise damage: loud sound injures hair cells, often for high pitch first. Air and bone conduction both fall. Shown in sensorineural loss.");
-  pill(o, "Presbycusis", 650, 148, 860, 215, "Presbycusis: age related hair cell loss. High pitch at the base is affected first, so speech clarity falls. Shown in sensorineural loss.");
-  pill(o, "Rinne test", 655, 330, 665, 295, "Rinne test: a tuning fork on the mastoid bone, then beside the ear. Normal and sensorineural: air louder than bone. Conductive: bone louder than air.");
-  pill(o, "Weber test", 835, 318, 855, 295, "Weber test: a tuning fork in the middle of the forehead. Conductive loss: heard in the affected ear. Sensorineural loss: heard in the better ear.");
-  const p1 = pill(o, "Hearing aid", 108, 170, 110, 400, "Hearing aid: amplifies sound in the ear canal. It helps when some hair cell function remains, in conductive and in sensorineural loss.");
-  p1.setAttribute("id", "tx-aid");
-  const p2 = pill(o, "Ossicle surgery", 380, 245, 280, 400, "Surgery for ossicular disease: repairs or replaces a fixed or damaged ossicle, for example the stapes in otosclerosis. It restores air conduction in conductive loss.");
-  p2.setAttribute("id", "tx-surg");
-  const p3 = pill(o, "Implant", 458, 250, 440, 400, "Cochlear implant: an electrode in the cochlea stimulates the auditory nerve directly, bypassing damaged hair cells in sensorineural loss.");
-  p3.setAttribute("id", "tx-impl");
+  pill(o, "Sound", 115, 230, 132, 96, "Sound: the outer ear gathers sound and the canal guides it to the eardrum.");
+  pill(o, "Eardrum", 250, 230, 250, 96, "Eardrum: sound vibrates this thin membrane. A hole in it causes conductive loss.");
+  pill(o, "Ossicles", 330, 210, 340, 96, "Ossicles: malleus, incus and stapes pass vibration inward. A stapes fixed by extra bone blocks the air path.");
+  pill(o, "Cochlea", 458, 230, 458, 96, "Cochlea: the spiral hearing organ. Movement at the oval window starts a wave inside.");
+  pill(o, "Nerve", 525, 202, 530, 96, "Auditory nerve: carries signals from hair cells toward the brain. An implant can spark it directly.");
+  pill(o, "Hair cells", 807, 148, 830, 96, "Hair cells sit on the membrane and bend with the wave. Loud sound and ageing injure them.");
+  pill(o, "Rinne", 655, 322, 700, 282, "Rinne test: fork on the bone, then by the ear. Healthy ears hear air louder than bone.");
+  pill(o, "Weber", 835, 336, 880, 300, "Weber test: fork on the forehead. Sound favours the poorly hearing ear in conductive loss.");
+  capEl = mk("text", { class: "hr-cap", x: 30, y: 428 }, o); capEl.textContent = capText(0, 0);
 
   /* ---- gauges ---- */
   const P = L.panel;
@@ -556,15 +587,25 @@ function step(dt, m) {
   sm.aid = lerp(sm.aid, m.aid, k); sm.surg = lerp(sm.surg, m.surg, k); sm.impl = lerp(sm.impl, m.impl, k);
   sm.cond = lerp(sm.cond, m.cond, k); sm.sens = lerp(sm.sens, m.sens, k);
 
-  /* eardrum and ossicles vibrate with the air path */
-  const vib = Math.sin(tm / 80) * (0.6 + 2.6 * sm.air * (sm.aid ? 1.3 : 1));
+  /* eardrum and ossicles vibrate with the air path, harder with an aid */
+  const vib = Math.sin(tm / 80) * (0.6 + 2.6 * sm.air * (sm.aid ? 1.6 : 1));
   tmG.setAttribute("transform", "translate(" + f1(vib) + " 0)");
   malG.setAttribute("transform", "translate(" + f1(vib * 0.9) + " 0)");
   incG.setAttribute("transform", "translate(" + f1(vib * 0.8) + " 0)");
   stapG.setAttribute("transform", "translate(" + f1(vib * 0.9) + " 0)");
-  plaque.setAttribute("opacity", (sm.cond * (sm.surg ? 0.3 : 0.95)).toFixed(2));
+  /* surgery dissolves the bony plaque and a bright prosthesis bridges the gap */
+  const ps = 1 - sm.surg;
+  plaque.setAttribute("transform", "translate(" + f1(402 * (1 - ps)) + " " + f1(252 * (1 - ps)) + ") scale(" + ps.toFixed(3) + ")");
+  plaque.setAttribute("opacity", (sm.cond * ps * 0.95).toFixed(2));
+  prosthEl.setAttribute("opacity", sm.surg.toFixed(2));
+  healGlow.setAttribute("opacity", (sm.surg * (0.3 + 0.14 * Math.sin(tm / 400))).toFixed(2));
+  /* hearing aid sits in the canal and boosts incoming sound */
   aidDev.setAttribute("opacity", sm.aid.toFixed(2));
+  aidBoost.setAttribute("opacity", sm.aid.toFixed(2));
+  /* implant electrodes glow inside the cochlea and the nerve lights up */
   implantG.setAttribute("opacity", sm.impl.toFixed(2));
+  stimHalo.setAttribute("opacity", (sm.impl * (0.375 + 0.075 * Math.sin(tm / 360))).toFixed(2));
+  nerveHot.setAttribute("opacity", sm.impl.toFixed(2));
 
   /* basilar wave and hair cells in the unrolled cochlea */
   let d = "";
@@ -581,10 +622,10 @@ function step(dt, m) {
     hc.g.style.opacity = (0.35 + 0.65 * health).toFixed(2);
   });
 
-  /* sound particles along the canal to the eardrum */
-  acc.snd += dt * 8;
+  /* sound particles along the canal to the eardrum, bigger and faster with an aid */
+  acc.snd += dt * (8 + 6 * sm.aid);
   while (acc.snd >= 1) { acc.snd--; const p = free(snd); if (p) emit(p, 0, 0, 0, 0, 0); }
-  snd.forEach((p) => { if (!p.on) return; p.u += dt * 0.32; const pos = trackSnd.at(Math.min(1, p.u)); p.e.setAttribute("transform", "translate(" + f1(pos.x) + " " + f1(pos.y) + ")"); p.e.setAttribute("opacity", p.u > 0.9 ? clamp((1 - p.u) / 0.1).toFixed(2) : "1"); if (p.u >= 1) kill(p); });
+  snd.forEach((p) => { if (!p.on) return; p.u += dt * (0.32 + 0.2 * sm.aid); const pos = trackSnd.at(Math.min(1, p.u)); place(p.e, pos.x, pos.y, 0, 1 + 0.9 * sm.aid); p.e.setAttribute("opacity", p.u > 0.9 ? clamp((1 - p.u) / 0.1).toFixed(2) : "1"); if (p.u >= 1) kill(p); });
   /* bone conduction particles through the skull side to the cochlea */
   acc.bonep += dt * sm.boneHeard * 5;
   while (acc.bonep >= 1) { acc.bonep--; const p = free(bonep); if (p) emit(p, 0, 0, 0, 0, 0); }
@@ -597,6 +638,10 @@ function step(dt, m) {
   acc.nervep += dt * sm.nerve * 9;
   while (acc.nervep >= 1) { acc.nervep--; const p = free(nervep); if (p) emit(p, 0, 0, 0, 0, 0); }
   nervep.forEach((p) => { if (!p.on) return; p.u += dt * 0.45; const pos = trackNerve.at(Math.min(1, p.u)); p.e.setAttribute("transform", "translate(" + f1(pos.x) + " " + f1(pos.y) + ")"); if (p.u >= 1) kill(p); });
+  /* implant stimulus sparks run from the electrodes to the nerve */
+  acc.stim += dt * sm.impl * 10;
+  while (acc.stim >= 1) { acc.stim--; const p = free(stim); if (p) emit(p, 0, 0, 0, 0, 0); }
+  stim.forEach((p) => { if (!p.on) return; p.u += dt * 0.5; const pos = trackStim.at(Math.min(1, p.u)); p.e.setAttribute("transform", "translate(" + f1(pos.x) + " " + f1(pos.y) + ")"); if (p.u >= 1) kill(p); });
 
   /* fork tests: bars, lateralisation arrows and result words */
   rinneAirBar.setAttribute("width", f1(Math.max(2, sm.airHeard * 90)));
@@ -608,17 +653,14 @@ function step(dt, m) {
   weberAff.setAttribute("opacity", sm.cond.toFixed(2));
   weberGood.setAttribute("opacity", sm.sens.toFixed(2));
 
-  /* treatment pills, only the active one shows */
-  $("tx-aid").style.opacity = sm.aid.toFixed(2);
-  $("tx-surg").style.opacity = sm.surg.toFixed(2);
-  $("tx-impl").style.opacity = sm.impl.toFixed(2);
-
   gg.air.set(sm.airHeard, wordOf(sm.airHeard, 0.35, 0.7, ["low", "reduced", "normal"]));
   gg.bone.set(sm.boneHeard, wordOf(sm.boneHeard, 0.35, 0.7, ["low", "reduced", "normal"]));
   gg.wave.set(sm.waveEff, wordOf(sm.waveEff, 0.3, 0.65, ["small", "reduced", "full"]));
   gg.hair.set(sm.coch, wordOf(sm.coch, 0.35, 0.7, ["damaged", "reduced", "healthy"]));
   gg.nerve.set(sm.nerve, wordOf(sm.nerve, 0.35, 0.7, ["low", "reduced", "normal"]));
   gg.hear.set(sm.hearing, wordOf(sm.hearing, 0.35, 0.7, ["low", "reduced", "normal"]));
+  const key = level + "-" + drug;
+  if (key !== capKey) { capKey = key; const t = capText(level, drug); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 run({ init, step });
 </script></body></html>

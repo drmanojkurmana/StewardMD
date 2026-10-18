@@ -284,38 +284,37 @@ body[data-theme="light"] .cl-epi{--cc:#c98a6c}
 .p-il4{--cc:var(--c-cyt2)}.p-il5{--cc:var(--c-eos)}.p-il13{--cc:var(--c-cyt)}.p-ige{--cc:var(--c-ab)}.p-hist{--cc:#ff5c8a}
 .p-alg{fill:#d9a24a;stroke:#8a5a14;stroke-width:.7}
 .dr-g-fill.g-mast{fill:var(--c-mast)}
+.bl-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
+.bl-wheal{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 60%,#000);stroke-width:.8}
 .sc-note{fill:var(--anatomy-mid);font-size:10.5px;text-anchor:middle}
-</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Biologics in type 2 airway and skin inflammation</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>free IgE high · eosinophils high · mast cells firing · flare severe</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated scene of type 2 airway and skin inflammation and where biologics act. Allergen wakes Th2 cells through dendritic cells. Th2 cells release IL-4, IL-5 and IL-13. IL-4 makes B cells switch to IgE, which arms mast cells in the airway and the skin. IL-5 calls in eosinophils. IL-13 drives mucus, tight muscle and skin barrier loss. Anti-IgE mops up free IgE, anti-IL-5 removes IL-5, and anti-IL-4 receptor blocks IL-4 and IL-13 signals. Gauges show Th2 activity, free IgE, eosinophils, mast firing, flare and control."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Biologics in type 2 airway and skin inflammation</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>free IgE raised · eosinophils raised · mast cells primed · flare ongoing</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated scene of type 2 airway and skin inflammation and where biologics act. Allergen wakes Th2 cells through dendritic cells. Th2 cells release IL-4, IL-5 and IL-13. IL-4 makes B cells switch to IgE, which arms mast cells in the airway and the skin. IL-5 calls in eosinophils. IL-13 drives mucus, tight muscle and skin barrier loss. Anti-IgE mops up free IgE, anti-IL-5 removes IL-5, and anti-IL-4 receptor blocks IL-4 and IL-13 signals. Gauges show Th2 activity, free IgE, eosinophils, mast firing, flare and control."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
 <rect class="sc-tissue" x="14" y="44" width="932" height="396" rx="18"/>
-<rect class="bl-box" x="24" y="80" width="300" height="192" rx="14"/>
-<rect id="airLumen" class="bl-lumen" x="32" y="88" width="284" height="48" rx="10"/>
-<rect id="airRed" class="bl-red" x="24" y="136" width="300" height="136" rx="14" opacity="0"/>
-<text class="sc-zone" x="40" y="100">AIRWAY LUMEN</text>
+<g id="lungSlot"></g>
+<rect id="airRed" class="bl-red" x="62" y="92" width="226" height="176" rx="16" opacity="0"/>
 <rect class="bl-box" x="636" y="80" width="300" height="192" rx="14"/>
 <rect id="skinRed" class="bl-red" x="636" y="134" width="300" height="138" rx="14" opacity="0"/>
 <rect id="skinEpi" class="bl-sepi" x="644" y="108" width="284" height="26" rx="8"/>
-<text class="sc-zone" x="850" y="100">SKIN</text>
 <g id="arrows"></g>
-<g id="muc"></g><g id="epi"></g><g id="musc"></g><g id="skin"></g>
+<g id="air"></g><g id="wheal"></g><g id="skin"></g>
 <g id="immune"></g><g id="parts"></g><g id="marks"></g><g id="over"></g><g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.</span></figcaption></figure>
 <div class="dr-controls">
-  <label class="dr-range"><span>Disease activity</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="severe"><span class="dr-ticks"><i>untreated</i><i>severe asthma or atopic dermatitis</i><i>controlled</i></span></label>
-  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">anti-IgE (binds free IgE)</option><option value="2">anti-IL-5 (blocks IL-5)</option><option value="3">anti-IL-4 receptor (blocks IL-4 and IL-13 signals)</option></select></label>
+  <label class="dr-range"><span>Disease activity</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="untreated"><span class="dr-ticks"><i>controlled</i><i>untreated</i><i>severe asthma or atopic dermatitis</i></span></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With anti-IL-4 receptor"><option value="0">no treatment</option><option value="1">anti-IgE (binds free IgE)</option><option value="2">anti-IL-5 (blocks IL-5)</option><option value="3">anti-IL-4 receptor (blocks IL-4 and IL-13 signals)</option></select></label>
   <button id="pause" type="button" aria-pressed="false">Pause motion</button>
 </div>
 <p id="status" class="dr-status" aria-live="polite"></p>
 <p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
 <h2>What the figure shows, and how sure we are</h2>
-<ul><li><strong>How type 2 inflammation runs.</strong> Allergen picked up by dendritic cells wakes Th2 helper cells. Th2 cytokines split the work: IL-4 pushes B cells to switch to IgE and grows the Th2 response, IL-5 calls in eosinophils and keeps them alive, IL-13 drives mucus, twitchy airway muscle and skin barrier loss. IgE arms mast cells in airway and skin, and allergen cross linking fires them to release histamine and other mediators. This is standard teaching in allergy and dermatology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>What the biologics do.</strong> Anti-IgE binds free IgE so mast cells are less well armed. Anti-IL-5 removes IL-5 so eosinophils fall. Anti-IL-4 receptor blocks the shared alpha chain for IL-4 and IL-13, calming mucus, barrier loss and IgE switching. Injection reactions can occur with each, rare anaphylaxis is a watch out with anti-IgE, and eye irritation with anti-IL-4 receptor. These are teaching toggles only.</li></ul>
+<ul><li><strong>How type 2 inflammation runs.</strong> Allergen picked up by dendritic cells wakes Th2 helper cells. Th2 cytokines split the work: IL-4 pushes B cells to switch to IgE and grows the Th2 response, IL-5 calls in eosinophils and keeps them alive, IL-13 drives mucus, twitchy airway muscle and skin barrier loss. IgE arms mast cells in airway and skin, and allergen cross linking fires them to release histamine and other mediators. This is standard teaching in allergy and dermatology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>What the biologics do.</strong> Anti-IgE binds free IgE so mast cells are less well armed. Anti-IL-5 removes IL-5 so eosinophils fall. Anti-IL-4 receptor blocks the shared alpha chain for IL-4 and IL-13, calming mucus, barrier loss and IgE switching. Injection reactions can occur with each, rare anaphylaxis is a watch out with anti-IgE, and eye irritation with anti-IL-4 receptor. These are teaching toggles only.</li><li><strong>Organ art.</strong> Organ art is NIH BioArt Source, public domain.</li></ul>
 <p><strong>What was simplified.</strong> Blood eosinophil cut offs and biomarker selection, dosing and intervals, non type 2 and neutrophilic disease, infections and parasites, vaccines, stopping rules, cost, and all doses and targets are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
-<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). Organ illustrations are NIH BioArt Source (public domain); all other drawing is original.</p>
 <p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
-</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Disease activity","a":[0.45,1,0.15],"names":["untreated","severe","controlled"],"ticks":["untreated","severe asthma or atopic dermatitis","controlled"],"start":1},"settings":[{"label":"no treatment"},{"label":"anti-IgE (binds free IgE)"},{"label":"anti-IL-5 (blocks IL-5)"},{"label":"anti-IL-4 receptor (blocks IL-4 and IL-13 signals)"}],"drugNames":["no treatment","anti-IgE","anti-IL-5","anti-IL-4 receptor"],"status":"Disease: {level} · {drug} ·"}};
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Disease activity","a":[0.15,0.45,1],"names":["controlled","untreated","severe"],"ticks":["controlled","untreated","severe asthma or atopic dermatitis"],"start":1},"settings":[{"label":"no treatment"},{"label":"anti-IgE (binds free IgE)"},{"label":"anti-IL-5 (blocks IL-5)"},{"label":"anti-IL-4 receptor (blocks IL-4 and IL-13 signals)"}],"drugNames":["no treatment","anti-IgE","anti-IL-5","anti-IL-4 receptor"],"status":"Disease: {level} · {drug} ·"}};
 const modelOf = function modelOf(S, level, drug) {
   const BANDS = { ig: [0.25, 0.55], eo: [0.25, 0.55], ma: [0.3, 0.7], fl: [0.35, 0.7] };
   const a = S.level.a[level], cl = (v) => Math.max(0, Math.min(1, v));
   const ige = drug === 1 ? a * 0.12 : drug === 3 ? a * 0.5 : a;
-  const il5 = drug === 2 ? a * 0.15 : drug === 1 ? a * 0.5 : drug === 3 ? a * 0.6 : a;
+  const il5 = drug === 2 ? a * 0.15 : drug === 1 ? a * 0.5 : drug === 3 ? a * 0.5 : a;
   const il4 = drug === 3 ? a * 0.22 : a;
   const mast = cl(0.05 + 0.9 * (0.35 * a + 0.65 * ige));
   const eos = cl(0.05 + 0.92 * il5);
@@ -419,23 +418,341 @@ function run(scn) {
   start();
 }
 
-/* Biologics in type 2 airway and skin inflammation: allergen, Th2 cytokines, IgE mast cell arming,
- * eosinophils, mucus and barrier loss, and where anti-IgE, anti-IL-5 and anti-IL-4 receptor act. */
-const L = { arrows: $("arrows"), muc: $("muc"), epi: $("epi"), musc: $("musc"), skin: $("skin"), immune: $("immune"), parts: $("parts"), marks: $("marks"), over: $("over"), panel: $("panel"), airRed: $("airRed"), skinRed: $("skinRed") };
-const W = SC.W;
-/* ---- airway lining: plain cells in a row ---- */
-const epiCells = [];
-function initEpi() {
-  for (let i = 0; i < 9; i++) { const g = mk("g", {}, L.epi); cell(g, { cls: "epi", r: 13, nuc: 0.3, seed: i + 1, wob: 0.06, n: 8 }); epiCells.push({ g, x: 44 + i * 33, i }); }
+/* Shared organ art for the animated mechanism scenes. Plain globals, ES2015, no imports.
+ * Inlined after bio.lib.js when buildScene gets organs:true, so mk/f1/clamp below are the shared ones.
+ * organ(parent, kind, x, y, w, opts) draws real anatomy art (NIH BioArt Source, public domain,
+ * injected as _ORG_ART by buildScene for the kinds the page uses) centred on x,y and w px wide,
+ * and falls back to the existing procedural layered silhouette for kinds without art
+ * (bladder, uterus, thyroid). Art ports are fractions of the art viewBox (see _ORG_FRAC).
+ * opts: { h (px height, else proportional), flip (mirror left/right), cls (extra class), id,
+ *   tint (a CSS colour with opacity, overlaid as an organ-shaped mask for disease states),
+ *   dim (dull the art) }.
+ * Returns { g, kind, x, y, w, h, ports, art } with absolute SVG coords; ports.in/out always exist.
+ * Art keeps its own colours (a faint contrast halo keeps it readable in dark and light themes);
+ * procedural fill is a vertical gradient whose stops derive from --cc (a theme aware palette var,
+ * so dark and light both work); edge stroke and landmark lines use color-mix detail classes.
+ * Emits no text, so label font and dash rules are inherited from the calling scene. */
+if (!document.getElementById("orgCss")) { var _orgSt = document.createElement("style"); _orgSt.id = "orgCss";
+  _orgSt.textContent = ".org-halo{filter:drop-shadow(0 0 1px rgba(0,0,0,.65)) drop-shadow(0 0 1px rgba(255,255,255,.45))}"
+  + ".org-b{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1.2;stroke-linejoin:round;stroke-linecap:round}"
+  + ".org-d{fill:none;stroke:color-mix(in srgb,var(--cc) 40%,var(--anatomy-hi));stroke-width:1;stroke-linecap:round;opacity:.8}"
+  + ".org-dk{fill:none;stroke:color-mix(in srgb,var(--cc) 62%,#000);stroke-width:1.1;stroke-linecap:round;opacity:.8}"
+  + ".org-f{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1;stroke-linejoin:round}"
+  + ".org-v{fill:none;stroke-linecap:round}"
+  + ".org-liver{--cc:var(--c-rbc)}.org-heart{--cc:var(--c-rbc)}.org-kidney{--cc:var(--c-eos)}.org-lung{--cc:var(--c-endo)}"
+  + ".org-stomach{--cc:var(--c-graft)}.org-brain{--cc:var(--c-mac)}.org-pancreas{--cc:var(--c-plt)}.org-spleen{--cc:var(--c-sm)}"
+  + ".org-bladder{--cc:var(--c-th2)}.org-uterus{--cc:var(--c-endo)}.org-thyroid{--cc:var(--c-neut)}.org-eye{--cc:#e6e1d4}.org-ganglion{--cc:var(--c-mac)}";
+  document.head.appendChild(_orgSt); }
+var _orgN = 0;
+/* per instance gradients: base (light -> base -> dark of --cc) plus a white top / dark bottom shade overlay */
+function _orgDefs(g) {
+  _orgN++; var id = "og" + _orgN, hid = "oh" + _orgN;
+  var defs = mk("defs", {}, g);
+  var lg = mk("linearGradient", { id: id, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  var s0 = mk("stop", { offset: "0", "stop-color": "#999" }, lg); s0.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 55%,#fff)");
+  var s1 = mk("stop", { offset: ".55", "stop-color": "#888" }, lg); s1.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 78%,var(--anatomy-paper))");
+  var s2 = mk("stop", { offset: "1", "stop-color": "#666" }, lg); s2.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 66%,#000)");
+  var hg = mk("linearGradient", { id: hid, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  mk("stop", { offset: "0", "stop-color": "#fff", "stop-opacity": ".2" }, hg);
+  mk("stop", { offset: ".55", "stop-color": "#fff", "stop-opacity": "0" }, hg);
+  mk("stop", { offset: "1", "stop-color": "#000", "stop-opacity": ".14" }, hg);
+  return { b: "url(#" + id + ")", h: "url(#" + hid + ")" };
 }
-/* ---- airway smooth muscle band ---- */
-const muscCells = [];
-function initMuscle() { for (let i = 0; i < 5; i++) { const g = mk("g", {}, L.musc); mk("ellipse", { class: "bl-mus", rx: 28, ry: 9 }, g); mk("ellipse", { class: "bl-mus-n", rx: 7, ry: 3 }, g); muscCells.push({ g, x: 62 + i * 55, y: 248 }); } }
-/* ---- mucus blobs in the lumen ---- */
-const blobs = [];
-function initMucus() { [150, 222, 286].forEach((x, i) => blobs.push({ e: mk("ellipse", { class: "mucus", rx: 14, ry: 7 }, L.muc), x, i })); }
-/* ---- skin dermis dots ---- */
-function initSkin() { [[660, 170], [700, 200], [880, 180], [910, 220], [680, 250], [900, 258], [740, 258], [860, 150]].forEach(([x, y], i) => mk("circle", { class: "bl-col", r: 2.4, cx: x, cy: y }, L.skin)); }
+/* one filled silhouette plus its shade overlay, same path data so the light stays inside */
+function _ob(g, d, G) {
+  mk("path", { class: "org-b", d: d, fill: G.b, stroke: "#666" }, g);
+  mk("path", { d: d, fill: G.h, stroke: "none", "pointer-events": "none" }, g);
+}
+function _ol(g, d, cls) { return mk("path", { class: cls || "org-d", d: d, fill: "none" }, g); }
+function _of(g, d, fillCss, cc) { var e = mk("path", { class: "org-f", d: d, stroke: "#666" }, g); e.setAttribute("style", "fill:" + fillCss + ";--cc:" + cc); return e; }
+function _ov(g, d, color, wdt) { var e = mk("path", { class: "org-v", d: d, fill: "none", stroke: "#777", "stroke-width": wdt, "stroke-linecap": "round" }, g); e.setAttribute("style", "stroke:" + color); return e; }
+function _odot(g, x, y, r, fillCss) { var e = mk("circle", { cx: x, cy: y, r: r, stroke: "none" }, g); e.setAttribute("style", "fill:" + fillCss); return e; }
+
+/* liver: big right lobe, smaller left lobe, falciform notch, gallbladder, porta hepatis stubs */
+function _orgLiver(g, G) {
+  _ov(g, "M-2 46L-2 18", "var(--d-ven)", 5); _ov(g, "M7 46L5 20", "var(--d-art)", 3); _ov(g, "M-11 46L-9 20", "var(--c-bac)", 2.5);
+  _ob(g, "M-6-30C22-33 44-25 50-7C54 9 40 25 18 30C2 33-5 22-7 6C-8-8-8-22-6-30Z", G);
+  _ob(g, "M-8-27C-24-27-40-19-48-6C-51 1-45 9-35 12C-24 15-11 9-8-1C-6-10-6-20-8-27Z", G);
+  _ol(g, "M-8-29C-7-18-6-6-4 6", "org-dk");
+  _ol(g, "M-2-28C14-29 30-24 40-14");
+  _of(g, "M10 18C16 16 22 18 23 24C24 31 19 37 14 36C9 35 7 28 8 23C8 21 9 19 10 18Z", "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  return { h0: 78, ports: { in: [-2, 46], out: [12, -30], porta: [-2, 18], gall: [16, 33], lobe: [20, 0] } };
+}
+/* heart: mass with apex down left, septum, coronary groove, aorta with arch, pulmonary split, caval stubs */
+function _orgHeart(g, G) {
+  _ov(g, "M-2-18L-2-44C-2-52-10-56-20-54C-28-52-32-46-32-38", "var(--d-art)", 8);
+  _ov(g, "M-8-52L-8-59M-15-54L-16-60M-22-53L-24-59", "var(--d-art)", 2.5);
+  _ov(g, "M12-16C8-28 2-34-4-38", "var(--d-ven)", 7);
+  _ov(g, "M-4-38C-12-40-20-38-28-34", "var(--d-ven)", 4.5); _ov(g, "M-4-38C4-40 12-38 20-34", "var(--d-ven)", 4.5);
+  _ov(g, "M20-20L20-52", "var(--d-ven)", 7); _ov(g, "M18 34L18 58", "var(--d-ven)", 7);
+  _ov(g, "M-36-2L-50-6M-34 14L-48 16", "var(--d-art)", 4);
+  _ob(g, "M-4-32C24-34 42-16 40 10C38 32 12 48-20 50C-34 44-40 24-36 2C-33-18-22-31-4-32Z", G);
+  _ol(g, "M0-30C4-10 0 14-14 44", "org-dk");
+  _ol(g, "M-34 6C-18 12 6 12 38 4");
+  _ol(g, "M-6-28C-14-18-18-6-20 8");
+  return { h0: 120, ports: { in: [20, -52], out: [-32, -38], ivc: [18, 58], apex: [-20, 50], pulm: [-28, -34] } };
+}
+/* kidney: bean with hilum, cortex rim, medulla rays, pelvis funnel, ureter, artery and vein stubs */
+function _orgKidney(g, G) {
+  _ov(g, "M-12 6C-22 12-28 18-28 30C-28 50-26 70-24 90", "var(--cc)", 4.5);
+  _ov(g, "M-50-8C-40-8-30-8-22-6", "var(--d-art)", 4); _ov(g, "M-50 10C-40 10-30 8-22 6", "var(--d-ven)", 5);
+  _ob(g, "M8-58C38-58 54-32 50 2C56 32 42 60 8 60C-8 60-16 48-19 34C-26 24-26-24-19-34C-16-48-8-58 8-58Z", G);
+  _ol(g, "M8-49C32-49 45-28 42 0C46 28 34 51 8 51C-1 51-8 43-10 32C-15 24-15-24-10-32C-8-43-1-49 8-49Z");
+  _ol(g, "M-6-30L14-38M-8-10L16-12M-8 12L16 14M-6 32L14 40");
+  _ol(g, "M16-44C30-36 38-20 38 0");
+  _of(g, "M-19-14C-8-12-2-8 2-2C-2 4-8 10-18 14C-22 8-22-8-19-14Z", "color-mix(in srgb,var(--cc) 35%,#fff)", "var(--cc)");
+  return { h0: 150, ports: { in: [-50, -8], out: [-24, 90], vein: [-50, 10], pelvis: [-12, 4], cortex: [30, 0] } };
+}
+/* lung: one lung with oblique fissure, hilum bronchus splitting into lobar and segmental branches */
+function _orgLung(g, G) {
+  _ov(g, "M-58 4L-30 4", "var(--anatomy-hi)", 6);
+  _ov(g, "M-30 4C-22-6-16-16-10-26", "var(--anatomy-hi)", 4.5); _ov(g, "M-30 4C-22 14-14 24-6 34", "var(--anatomy-hi)", 4.5);
+  _ov(g, "M-18-14L-28-22M-16-16L-8-24M-14-20L-14-32M-20 16L-30 24M-16 20L-6 28M-12 26L-10 38", "var(--anatomy-hi)", 2);
+  _ov(g, "M-58-8L-34-6", "var(--d-ven)", 4); _ov(g, "M-58 14L-34 12", "var(--d-art)", 4);
+  _ob(g, "M2-60C24-56 40-32 43 8C45 38 32 60 2 62C-24 62-40 42-42 10C-44-24-20-58 2-60Z", G);
+  _ol(g, "M-40-2C-20 8 0 22 24 40", "org-dk");
+  _ol(g, "M-8-48C8-50 22-40 30-26");
+  return { h0: 130, ports: { in: [-58, 4], out: [-58, 14], art: [-58, -8], apex: [2, -60], base: [2, 62] } };
+}
+/* stomach: J shape with fundus dome, rugae, antrum sweep, pylorus ring, oesophagus and duodenum stubs */
+function _orgStomach(g, G) {
+  _of(g, "M-38-58L-22-58L-22-36L-38-36Z", "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))", "var(--cc)");
+  _ob(g, "M-38-36C-46-24-50-8-46 10C-42 30-30 46-12 50C6 54 28 46 40 32C44 27 46 23 46 18L34 14C30 22 20 30 6 32C-8 34-22 26-28 12C-33-1-31-16-26-28C-24-32-22-34-22-36Z", G);
+  _ol(g, "M-36-10C-30 6-22 20-8 28M-28-22C-22-6-12 10 4 22M-16-30C-10-14 0 2 14 12");
+  _ol(g, "M40 15C43 19 43 25 40 29M34 14C37 18 37 26 34 30", "org-dk");
+  _ol(g, "M46 16L60 22M44 28L58 32", "org-dk");
+  return { h0: 116, ports: { in: [-30, -58], out: [60, 27], fundus: [-40, -12], antrum: [24, 38], pylorus: [40, 22] } };
+}
+/* brain lateral: cerebrum with Sylvian fissure and gyri, cerebellum with folia, tapered brainstem */
+function _orgBrain(g, G) {
+  _ov(g, "M10 50L10 64", "var(--d-art)", 5);
+  _ob(g, "M-50-6C-50-32-24-42 4-40C30-38 44-28 44-8C44 10 32 24 8 28C-18 31-50 24-50-6Z", G);
+  _ol(g, "M-12 10C2 6 18 2 34-4", "org-dk");
+  _ol(g, "M-38-20C-32-10-32 2-38 12M-26-30C-20-20-20-6-26 6M-4-32C2-22 2-8-4 2M10-30C16-20 16-6 10 4M28-22C34-14 34-2 28 8");
+  _ol(g, "M-16 6L-24-4M-10 4L-12-8", "org-dk");
+  _ob(g, "M2 24L16 24L12 56L6 56Z", G);
+  _ol(g, "M2 36C6 38 12 38 16 36");
+  _ob(g, "M22 24C34 22 46 26 48 34C50 42 42 48 32 47C24 46 20 38 20 32C20 28 20 26 22 24Z", G);
+  _ol(g, "M24 32L44 32M25 37L43 37M27 42L41 42");
+  return { h0: 110, ports: { in: [10, 64], out: [4, -40], parenchyma: [-8, -6], cereb: [34, 35], frontal: [-40, -8] } };
+}
+/* pancreas: bulky head right, tapering tail left, main duct with side branches, islet dots */
+function _orgPancreas(g, G) {
+  _ob(g, "M-50-4C-32-14-8-14 14-10C32-7 46-2 49 10C51 21 40 28 26 25C8 21-20 12-50 6Z", G);
+  _ol(g, "M-46 1C-20-2 10 0 38 10", "org-dk");
+  _ol(g, "M-30-1L-34-8M-10-1L-14-9M8 0L4-8M-28 1L-32 8M-6 1L-10 8M12 2L8 10");
+  _ol(g, "M52-6C58 4 58 16 50 24");
+  _odot(g, -20, -2, 1.6, "var(--d-art)"); _odot(g, 0, 0, 1.6, "var(--d-art)"); _odot(g, 22, 6, 1.6, "var(--d-art)");
+  return { h0: 60, ports: { in: [-10, -12], out: [49, 12], head: [36, 8], tail: [-48, 1] } };
+}
+/* spleen: crescent with top notch, trabeculae, hilar artery and vein stubs below */
+function _orgSpleen(g, G) {
+  _ov(g, "M-30 52C-28 44-26 40-22 36", "var(--d-art)", 3.5); _ov(g, "M-20 54C-19 46-17 42-13 38", "var(--d-ven)", 4.5);
+  _ob(g, "M-38-30C-8-40 28-34 44-12C52 4 44 26 20 34C-4 41-34 32-44 10C-48-4-46-22-38-30Z", G);
+  _ol(g, "M-8-36C-4-33 0-33 4-36", "org-dk");
+  _ol(g, "M-30-10C-10-2 12-2 32-10M-28 8C-8 16 12 16 30 8");
+  return { h0: 96, ports: { in: [-30, 52], out: [-20, 54], hilum: [-18, 37], pulp: [0, 0] } };
+}
+/* ganglion: sensory ganglion with capsule, fibre stubs, satellite glia dots, one big soma with nucleus */
+function _orgGanglion(g, G) {
+  _ov(g, "M-52 0L-30 0", "var(--anatomy-hi)", 7);
+  _ov(g, "M30 0L52 0", "var(--anatomy-hi)", 7);
+  _ob(g, "M-32-27C-12-37 13-37 30-25C43-12 43 12 30 25C13 37-12 37-32 27C-42 13-42-13-32-27Z", G);
+  _ol(g, "M-27-21C-10-29 12-29 26-19");
+  _of(g, "M-16 0C-16-9-9-16 0-16C9-16 16-9 16 0C16 9 9 16 0 16C-9 16-16 9-16 0Z", "color-mix(in srgb,var(--cc) 62%,var(--anatomy-paper))", "var(--cc)");
+  _of(g, "M-7 0C-7-4-4-7 0-7C4-7 7-4 7 0C7 4 4 7 0 7C-4 7-7 4-7 0Z", "color-mix(in srgb,var(--cc) 45%,#1a1030)", "var(--cc)");
+  _odot(g, 2, 1, 1.8, "color-mix(in srgb,var(--cc) 70%,#fff)");
+  _odot(g, -25, -13, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 25, -12, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 0, 28, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _ol(g, "M-13-8L-22-16M13-8L22-16");
+  return { h0: 96, ports: { in: [-52, 0], out: [52, 0], soma: [0, 0], nucleus: [0, 0] } };
+}
+/* bladder: dome with detrusor arcs, trigone, ureters in from above, urethra out below */
+function _orgBladder(g, G) {
+  _ov(g, "M-52-44C-44-34-36-26-30-18", "var(--cc)", 4); _ov(g, "M52-44C44-34 36-26 30-18", "var(--cc)", 4);
+  _ob(g, "M0-50C26-48 40-30 40-6C40 16 26 32 8 40L-8 40C-26 32-40 16-40-6C-40-30-26-48 0-50Z", G);
+  _ob(g, "M-8 40L8 40L8 64L-8 64Z", G);
+  _ol(g, "M-8 52L8 52", "org-dk");
+  _ol(g, "M-24-8L24-8L0 24Z");
+  _ol(g, "M-28-28C-12-36 12-36 28-28M-34-12C-16-22 16-22 34-12");
+  return { h0: 120, ports: { in: [-52, -44], out: [0, 64], inR: [52, -44], trigone: [0, 8], dome: [0, -48] } };
+}
+/* uterus: fundus, cavity, cervix, tubes with fimbriae, ovaries with follicles */
+function _orgUterus(g, G) {
+  _ov(g, "M-16-16C-26-17-32-19-38-23", "var(--cc)", 3.5); _ov(g, "M16-16C26-17 32-19 38-23", "var(--cc)", 3.5);
+  _ov(g, "M-38-23L-44-27M-38-23L-45-23M-38-23L-44-19M-38-23L-42-29", "var(--cc)", 1.2);
+  _ov(g, "M38-23L44-27M38-23L45-23M38-23L44-19M38-23L42-29", "var(--cc)", 1.2);
+  var eo = mk("ellipse", { class: "org-f", cx: -45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var eo2 = mk("ellipse", { class: "org-f", cx: 45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo2.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var _fol = "color-mix(in srgb,var(--c-plt) 45%,#000)";
+  _odot(g, -47, -14, 1.6, _fol); _odot(g, -43, -8, 1.6, _fol); _odot(g, -46, -4, 1.4, _fol);
+  _odot(g, 47, -14, 1.6, _fol); _odot(g, 43, -8, 1.6, _fol); _odot(g, 46, -4, 1.4, _fol);
+  _ob(g, "M-16-20C-8-26 8-26 16-20C20-2 15 20 8 32L-8 32C-15 20-20-2-16-20Z", G);
+  _of(g, "M-10-14L10-14L0 22Z", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  _ol(g, "M-11 18L11 18", "org-dk"); _ol(g, "M0 18L0 32");
+  return { h0: 100, ports: { in: [-45, -22], out: [0, 33], ovL: [-45, -10], ovR: [45, -10], fundus: [0, -24] } };
+}
+/* thyroid butterfly: two lobes, isthmus bridge, trachea rings behind, parathyroid dots */
+function _orgThyroid(g, G) {
+  _ov(g, "M-7-40L-7 40M7-40L7 40", "var(--anatomy-hi)", 2);
+  _ov(g, "M-7-28L7-28M-7-12L7-12M-7 24L7 24M-7 36L7 36", "var(--anatomy-hi)", 1.2);
+  _ob(g, "M16-32C28-30 35-16 33 4C31 22 25 32 16 32C8 32 6 20 8 2C10-14 11-28 16-32Z", G);
+  _ob(g, "M-16-32C-28-30-35-16-33 4C-31 22-25 32-16 32C-8 32-6 20-8 2C-10-14-11-28-16-32Z", G);
+  _ob(g, "M-10 6L10 6L10 16L-10 16Z", G);
+  _ol(g, "M14-20C18-10 18 6 14 20M-14-20C-18-10-18 6-14 20");
+  _odot(g, -30, 8, 2, "var(--c-plt)"); _odot(g, 30, -4, 2, "var(--c-plt)");
+  return { h0: 90, ports: { in: [16, -34], out: [0, 36], isthmus: [0, 11], lobeR: [22, 0], lobeL: [-22, 0] } };
+}
+/* eye: sclera ball with cornea bulge, iris and pupil facing left, retina arc, optic nerve stub right */
+function _orgEye(g, G) {
+  _ov(g, "M26 0L54 0", "var(--c-plt)", 8);
+  _ob(g, "M-36-4C-34-22-16-32 4-30C24-28 34-12 32 4C30 20 14 30-4 29C-22 28-36 14-36-4Z", G);
+  _of(g, "M-39 0C-39-6-35-11-30-11C-25-11-21-6-21 0C-21 6-25 11-30 11C-35 11-39 6-39 0Z", "color-mix(in srgb,var(--c-endo) 70%,var(--anatomy-paper))", "var(--c-endo)");
+  _odot(g, -30, 0, 5, "#241a12");
+  _odot(g, -32, -3.5, 1.5, "#ffffff");
+  _ol(g, "M16-15C23-5 23 7 15 17");
+  return { h0: 70, ports: { in: [-41, 0], out: [54, 0], retina: [16, 0], lens: [-20, 0] } };
+}
+/* Real-art store, filled by buildScene after this lib: _ORG_ART[kind] = { vb:[x,y,w,h],
+ * pfx:"oaxxx", body:"<inner svg markup>" }. Ports are fractions of the viewBox, measured
+ * off the slimmed art (see tools/figures/dev/svgslim.py); content fills the frame. */
+var _ORG_ART = {};
+var _ORG_FRAC = {
+  liver: { in: [.45, .95], out: [.46, .04], porta: [.45, .82], gall: [.30, .90], lobe: [.28, .45] },
+  heart: { in: [.30, .01], out: [.48, .01], aorta: [.48, .01], ivc: [.28, .90], apex: [.70, .97], pulm: [.60, .08] },
+  kidney: { in: [.04, .36], out: [.38, .97], vein: [.04, .46], pelvis: [.36, .41], cortex: [.62, .45], hilum: [.28, .41] },
+  lung: { in: [.46, .53], out: [.44, .60], art: [.44, .48], apex: [.24, .30], base: [.24, .87], trachea: [.49, .01], carina: [.49, .50], hilumL: [.42, .58], hilumR: [.56, .58], apexR: [.75, .34], baseR: [.75, .86] },
+  stomach: { in: [.42, .00], out: [.50, .95], fundus: [.38, .10], antrum: [.52, .30], pylorus: [.60, .35] },
+  intestine: { in: [.58, .38], out: [.50, .95], duodenum: [.60, .40], jejunum: [.42, .60], ileum: [.50, .72], cecum: [.60, .82], colon: [.28, .60], rectum: [.50, .92] },
+  brain: { in: [.60, .97], out: [.42, .04], parenchyma: [.42, .42], cereb: [.76, .78], frontal: [.08, .40], stem: [.60, .93], carotid: [.16, .75] },
+  pancreas: { in: [.50, .08], out: [.95, .50], head: [.85, .45], tail: [.06, .45], body: [.50, .45] },
+  spleen: { in: [.38, .78], out: [.52, .78], hilum: [.45, .72], pulp: [.50, .38] }
+};
+/* draw the injected art centred on x,y at w px wide. The art is clipped to its
+ * frame; tint overlays an organ-shaped translucent mask (the art itself, reused
+ * as a mask); dim dulls the art. Art ids are suffixed per instance so two of
+ * the same organ on one page never share gradient, clip or mask ids. */
+function _orgArt(parent, kind, x, y, w, opts, A) {
+  var vb = A.vb, vw = vb[2], vh = vb[3], cx = vb[0] + vw / 2, cy = vb[1] + vh / 2;
+  _orgN++;
+  var uid = "u" + _orgN;
+  var outer = mk("g", { class: "org org-art org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var sx = w / vw, sy = opts.h ? opts.h / vh : sx, fx = opts.flip ? -1 : 1;
+  var inner = mk("g", { transform: "translate(" + f1(-fx * cx * sx) + " " + f1(-cy * sy) + ") scale(" + (fx * sx).toFixed(4) + " " + sy.toFixed(4) + ")" }, outer);
+  var defs = mk("defs", {}, inner);
+  var cid = A.pfx + uid + "-frame";
+  var cp = mk("clipPath", { id: cid }, defs);
+  mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, cp);
+  var art = mk("g", { class: "org-halo", "clip-path": "url(#" + cid + ")" }, inner);
+  var aid = A.pfx + uid + "-art";
+  art.setAttribute("id", aid);
+  art.innerHTML = A.body.split('id="' + A.pfx + '-').join('id="' + A.pfx + uid + '-')
+    .split('url(#' + A.pfx + '-').join('url(#' + A.pfx + uid + '-')
+    .split('href="#' + A.pfx + '-').join('href="#' + A.pfx + uid + '-');
+  if (opts.dim) art.setAttribute("opacity", ".5");
+  if (opts.tint) {
+    var mid = A.pfx + uid + "-tintm";
+    var m = mk("mask", { id: mid, maskUnits: "userSpaceOnUse", x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, defs);
+    mk("use", { href: "#" + aid }, m);
+    var tg = mk("g", { "clip-path": "url(#" + cid + ")" }, inner);
+    mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh), fill: opts.tint, mask: "url(#" + mid + ")" }, tg);
+  }
+  var ports = {}, F = _ORG_FRAC[kind], k;
+  for (k in F) ports[k] = [Math.round((x + fx * (vb[0] + F[k][0] * vw - cx) * sx) * 10) / 10, Math.round((y + (vb[1] + F[k][1] * vh - cy) * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(vh * sy * 10) / 10, ports: ports, art: true };
+}
+/* dispatcher: outer g carries the theme class and gradients, inner g the local drawing scaled to w */
+function organ(parent, kind, x, y, w, opts) {
+  opts = opts || {};
+  if (_ORG_FRAC[kind] && _ORG_ART[kind]) return _orgArt(parent, kind, x, y, w, opts, _ORG_ART[kind]);
+  var outer = mk("g", { class: "org org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var G = _orgDefs(outer);
+  var inner = mk("g", {}, outer);
+  var r;
+  if (kind === "liver") r = _orgLiver(inner, G);
+  else if (kind === "heart") r = _orgHeart(inner, G);
+  else if (kind === "kidney") r = _orgKidney(inner, G);
+  else if (kind === "lung") r = _orgLung(inner, G);
+  else if (kind === "stomach") r = _orgStomach(inner, G);
+  else if (kind === "brain") r = _orgBrain(inner, G);
+  else if (kind === "pancreas") r = _orgPancreas(inner, G);
+  else if (kind === "spleen") r = _orgSpleen(inner, G);
+  else if (kind === "ganglion") r = _orgGanglion(inner, G);
+  else if (kind === "eye") r = _orgEye(inner, G);
+  else if (kind === "bladder") r = _orgBladder(inner, G);
+  else if (kind === "uterus") r = _orgUterus(inner, G);
+  else if (kind === "thyroid") r = _orgThyroid(inner, G);
+  else throw new Error("organ: unknown kind " + kind);
+  var sx = w / 100, sy = opts.h ? opts.h / r.h0 : sx, fx = opts.flip ? -1 : 1;
+  inner.setAttribute("transform", "scale(" + (fx * sx).toFixed(3) + " " + sy.toFixed(3) + ")");
+  var ports = {}, k;
+  for (k in r.ports) ports[k] = [Math.round((x + fx * r.ports[k][0] * sx) * 10) / 10, Math.round((y + r.ports[k][1] * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(r.h0 * sy * 10) / 10, ports: ports, art: false };
+}
+organ.kinds = ["liver", "heart", "kidney", "lung", "stomach", "intestine", "brain", "pancreas", "spleen", "bladder", "uterus", "thyroid", "eye", "ganglion"];
+
+_ORG_ART["lung"]={vb:[0,0,296.9,394.5],pfx:"oalun",body:"<defs><filter id=\"oalun-outer-glow-1\" x=\"157.3\" y=\"133.8\" width=\"130\" height=\"205.6\" filterUnits=\"userSpaceOnUse\"><feOffset dx=\"0\" dy=\"0\" /><feGaussianBlur result=\"blur\" stdDeviation=\"9.4\" /><feFlood flood-color=\"#ff6a6a\" flood-opacity=\".75\" /><feComposite in2=\"blur\" operator=\"in\" /><feComposite in=\"SourceGraphic\" /></filter><filter id=\"oalun-outer-glow-2\" x=\"12.9\" y=\"116.6\" width=\"119.5\" height=\"226.2\" filterUnits=\"userSpaceOnUse\"><feOffset dx=\"0\" dy=\"0\" /><feGaussianBlur result=\"blur-2\" stdDeviation=\"9.4\" /><feFlood flood-color=\"#ff6a6a\" flood-opacity=\".75\" /><feComposite in2=\"blur-2\" operator=\"in\" /><feComposite in=\"SourceGraphic\" /></filter></defs><g style=\"isolation:isolate\"><g id=\"oalun-Layer_1\"><g><g id=\"oalun-infected\"><path d=\"M19.8 393.3l-3.4 -.7 -2.4 -2 -3.1 -6.6 -2.8 -10 -4.9 -32.4 -2 -36 .6 -25.4 2.3 -22.2 6.6 -31.1 8.8 -28 14.2 -34.3 15.1 -28.3 8 -11.7 8.6 -10.2 8.8 -7.8 8.4 -4.4 6.2 -.4 9.4 3.5 6.9 5.1 6.5 8.1 5.2 11.8 10.3 48.2 3.5 -11.9 1.2 -10.7 -.3 -8.4 -1.6 -11.1 .6 -6.7 -.4 -7 1.1 -6.9 -.8 -16.1 .6 -5.1 -.8 -7.3 1.2 -4.6 -1.4 -5.9 1.2 -4.7 -.8 -6 .8 -5.3 -2.5 -11.6 -2.2 -3.9 -3.4 -13.6 -2.2 -3.9 -3.6 -3.9 -1.3 -3 0 -6.5 4.4 -10.6 1.7 -1.9 1.4 -.2 1 .9 .2 1.4 -1.8 9.2 7.7 -4.4 4.9 -.4 4.2 3.5 5.2 8 3.3 -9.2 2.1 -2.5 3.4 .4 13.1 4.5 -1.3 -9.9 .8 -1.5 1.5 -.1 3.1 3.6 2.4 7.1 -1.8 10.2 -4.6 7.4 -1 13.6 -3.7 4.9 -1 3.4 1 6 -1.2 3.2 .9 4.9 -1.5 5.4 1.1 2 .1 6 -1.3 3.5 1.8 4.4 -.5 4.6 -1.2 3.1 1.7 5.3 -1.4 5.6 1.3 6 -.9 4.6 1 6.5 -1.2 5.8 .9 5 -1.3 7.3 1.2 7.3 -1.4 4.5 -.1 8.4 2.7 12.9 2.5 -8.8 -.1 -8.8 2.2 -12.6 4.3 -14.1 2.9 -6.9 7.3 -12 4.3 -4.5 4 -2.8 5.6 -2.2 4.3 -.5 9.1 2 4.4 2.3 8.5 6.4 7.8 7.8 10 11.9 15.4 22.5 12.4 24.7 9.8 26.1 7.4 26.6 5.2 26.2 3.3 25 1.7 22.9 .3 19.9 -.8 16.1 -1.7 11.4 -4.7 16.9 -3.5 6.6 -4.9 4.5 -6.8 1.7 -6.9 -1.2 -27.7 -13.4 -34.1 -14.8 -12.8 -6.3 -8.7 -5.4 -8.9 -7.9 -7.4 -10.7 -2.6 -6.6 -1.6 -7.4 -2.1 -28.5 .6 -37.9 -4.5 -32.1 -.3 -1.6 -1.6 -1.6 -8.3 -6.5 -7.2 8.4 -6.4 10.3 -1.7 77.4 -2.4 17.8 -2.9 9 -1.9 3 -4.6 4.4 -10.7 7.8 -42.1 26.7 -28.6 20.3 -10 5.7 -8.2 2.2Z\" fill=\"#e8caca\" /><path d=\"M167.3 2.4l2.1 2.1 1.8 3.5 .9 5.7 -1.5 8.1 -4.6 7.7 -1.1 13.8 -3.5 4.5 -1.2 4 1 5.1 -1.2 4.2 .9 4.7 -.7 3.6 -1.1 1.7 1.3 2.2 .2 4.8 -.1 2.2 -1.3 2.6 1.8 4 -1.7 7.9 1.7 5 -1.4 5.6 1.3 6.1 -.9 4.4 1 6.6 -1.3 6.1 1 3.1 -.2 5.7 -1 3.6 1.2 7.2 -1.4 4.3 -.1 8.8 3.6 16.2 .3 .6 .4 -1.2 3.3 -11.4 -.2 -8.4 2.1 -12.5 4.3 -14.1 2.9 -6.9 7.2 -12 4.3 -4.4 3.9 -2.7 5.3 -2 8.2 .1 4.3 1.4 4.2 2.1 8.1 6.1 7.7 7.6 10.3 12.2 15.3 22.4 12.4 24.7 9.7 26.1 7.3 26.6 5.2 26.2 3.3 24.9 1.7 22.8 .3 19.8 -.8 15.9 -1.6 11.1 -4.5 16.3 -3.3 6.5 -4.6 4.4 -6.4 1.6 -6.5 -1.1 -30.4 -14.6 -43.8 -19.7 -9.8 -6.2 -9.8 -9.5 -4.1 -6.1 -3.2 -7.2 -1.9 -8.3 -2 -24.2 .5 -42.3 -4.6 -32.8 -.8 -1.9 -6.5 -6 -4 -2.2 -2.6 1.9 -5.5 6.9 -6.7 10.8 -1.9 79.5 -3 18.9 -3.7 8.4 -11.9 9.9 -43.8 27.9 -31 21.9 -13.1 6.6 -6 .1 -3.7 -4.1 -2.7 -7.4 -4.7 -23.7 -3.1 -31.4 -.6 -34.4 .9 -16.8 1.9 -15.7 2.7 -14.8 7.2 -28 8.8 -25.3 13.9 -31.4 8.3 -15.7 7.6 -12.2 8.3 -11 8.5 -8.9 8.3 -5.9 7.6 -2.2 5.6 1.2 7.1 3.4 6.6 5.5 5.7 8 4.4 10.7 8.4 40.9 2.7 9 4 -11.5 1.8 -12.4 -.2 -10.2 -1.6 -10.9 .6 -6.5 -.4 -7.1 1.1 -7.1 -.8 -16.4 .6 -4.8 -.8 -7.4 1.3 -4.6 -1.5 -6.3 1.3 -4.2 -.8 -6.1 .8 -5 -2.5 -11.7 -2.3 -4.4 -2.8 -12.1 -1.9 -4.2 -4.5 -5.1 -1.2 -2.7 0 -6.1 3.6 -9 2.5 -2.9 0 3.4 -2.1 9.5 8.6 -5.2 5.3 -1 3.4 2.6 6.8 9.9 3.6 -9.7 1.9 -3 17.4 5.1 -1.3 -9.5M167.3 0l-1.9 .8 -.9 1.8 .9 8.6 -11.5 -4 -3.9 -.4 -2.7 2.8 -2.7 7.4 -4.9 -7.1 -3.8 -2.7 -4.8 .1 -6.4 3.1 1 -7.8 -1.2 -1.8 -2.2 -.4 -3.3 3 -4.3 10.7 0 7 1.4 3.3 3.8 4.1 2 3.7 3.3 13.3 2.1 3.7 2.5 11.3 -.8 5.3 .8 5.8 -1.2 4.7 1.3 6 -1.1 4.7 .8 7.3 -.6 5.2 .8 16.1 -1.1 6.8 .4 7.1 -.7 6.7 1.9 18.1 -1.1 11.5 -2.3 8.6 -9.4 -44.7 -5.3 -12.1 -3.2 -4.6 -7 -6.7 -7 -3.9 -8.7 -2.2 -4.3 .6 -9 4.7 -9.1 8.2 -8.7 10.5 -7.8 11.6 -6.7 11.7 -8.3 16.4 -9.5 21.8 -9.4 26.2 -7.9 29.8 -3.9 23 -1.7 23.5 .4 35.1 3.2 33.4 5.2 25.4 3.8 8.9 3.5 2.9 3.4 .6 5.5 -1 9.7 -4.7 33.7 -23.6 40.8 -25.8 10.8 -7.9 4.7 -4.5 2 -3.1 3 -9.2 2.5 -18 1.7 -77.4 5.3 -8.6 7.4 -9.1 8.3 7.1 .7 2.1 4.3 31.6 -.7 37.7 2.1 28.7 1.7 7.6 2.7 6.7 7.5 11 9 8 8.8 5.5 74.9 34.6 7.2 1.2 7 -1.6 5.6 -4.8 3.9 -7.2 3.1 -10.1 2.6 -12.2 1.5 -23.2 -1.1 -31.2 -4.2 -35.7 -7.7 -36.4 -8.2 -26.5 -11.2 -26.7 -6.8 -13 -7.8 -12.5 -18.8 -23.9 -12.2 -11.4 -9 -5.3 -4.7 -1.5 -4.8 -.5 -6.1 .9 -5.8 2.8 -5.5 4.6 -4.7 6.1 -5.5 10.4 -3.7 9.7 -3.4 12.7 -1.7 11.7 .2 6.4 -1.3 3.5 -1.5 -7.6 .1 -8.2 1.4 -4.4 -1.2 -7.6 1.2 -6.2 0 -3.6 -.9 -2.6 1.2 -5.6 -1 -6.7 .9 -4.5 -1.3 -5.9 1.4 -6.3 -1.6 -5 1.2 -2.7 .5 -4.6 -1.6 -4.6 1.1 -3.2 -.1 -6.2 -.8 -1.9 1.3 -6 -.9 -4.2 1.2 -3.4 -.9 -5.9 .8 -2.9 3.8 -5 1.1 -13.9 4.5 -7.2 1.9 -10.6 -2.6 -7.9 -2.7 -3.4Z\" fill=\"#8f6464\" /></g><path id=\"oalun-inner_lungs\" d=\"M157.3 207.2l19.6 7.7 14.1 9 8.9 8.5 4.6 8.3 8.9 23.4 2.6 12.1 -.8 6.4 -3.2 8.4 -7.3 7.5 -4.5 5.8 9.4 -6.1 -1.4 12.5 -1.4 4.9 8.4 -15 6.5 -16.3 1.7 -13.8 -2 -10.6 9.7 6.3 2.3 2.7 -1.7 12.1 -2.6 6.8 7.2 -10.1 6.7 12 -1.1 -12.3 1.6 .4 4.9 4.6 10.6 12.3 4.4 9.7 1.9 8.3 -1.3 12.5 3.7 -7 .9 -.6 .9 .5 6.7 10 2.6 5.7 1.4 5.4 -1.5 -15.6 2.7 -.6 5.7 2 -6.7 -4.4 -4.6 -4.5 -4.7 -9.2 -2.9 -8 3.6 0 6.1 1.9 -13.2 -9.5 -9.3 -10.4 -.1 -.7 1.2 -.6 8.9 -.7 -17 -8.2 -5.4 -4.3 -6.3 -6.7 -16 -21.4 -8.4 -15.3 -1.4 -5.9 2.4 -1.1 7.8 1.6 12.4 4.9 7.8 4.7 2.8 3.1 4.4 7.8 3.9 12.5 1.2 8.4 .3 -13.9 .9 -6.4 7 7.5 7.5 9.6 3.6 6.6 1.8 11.9 .1 15.2 1.7 -3.2 2.9 -2.3 1.9 0 2.4 1.9 -3.9 -11.8 -3.3 -14.7 5.9 .8 3.1 1.6 -14.3 -12.8 -19.1 -22.6 -8.6 -8.6 -23.5 -13.5 -.9 -2.5 -.3 -6 .7 -6.5 1.3 -3.2 9.3 -4.4 4 -2.8 -11.6 1.5 -2.2 -.6 -1.3 -1.5 -8.2 -25.7 -5 -19.1 3.4 30.5 -14.5 -9 -5.6 -7.4 -1.5 -3.3 4 10.1 5 5.4 -10.3 5.5 6.8 -.8 7.4 .6 4.1 1.6 2.6 2.8 4.3 12.7 -.3 7.5 -3 2.9 -10.5 2.9 10.8 1.9 1.2 1.2 -1.1 2.1 -3 3.4 -3 1 -12 -4.2 -12.9 -8 -15.2 -15.4 -3.9 16Z\" fill=\"#fbebeb\" filter=\"url(#oalun-outer-glow-1)\" /><path d=\"M127.7 181.4l-4.1 5.4 -6.1 3.7 -7.7 -1.7 -3 -2 -1.9 -2.4 -4 -8.6 -.5 -2.9 1.6 -5.7 4.2 -4.7 1.8 -3.7 -9.8 8 -1.6 -4.4 .8 -3.9 5.2 -9.5 2 -7.7 -5.4 9.1 -4 5 -1.6 .2 -.7 -5.2 .2 -7.1 2.4 -7.2 4 -5.2 4.1 -2.4 -4.8 1.6 -5.3 3.3 -1.3 -12.1 -2.4 -4.7 .8 10.4 -.8 5.3 -4.6 -5.6 -2.6 -1.8 3.4 5.5 2.2 5.8 -.2 17.3 -9.3 -11.8 -.9 -9.8 -.8 11.5 -5.5 -3.4 -2.5 -3.2 3.3 5.5 6.6 5.4 6.9 9.5 9 24.1 -8 -2.7 -14.2 -1.6 -5.1 -4.3 -6 -12.6 1 8.2 -5.4 -.6 -7.4 -5.6 -4.5 0 4.9 2.7 21.4 15.3 3.2 1.4 15.4 3.5 10.1 6.3 3.1 2.6 .8 1.7 -2.2 2.2 -3.9 1.2 -20.7 -2.2 -20.5 3 -5.5 -1.3 -2.7 -1.5 -3.3 -7.2 -1.6 -1.7 -5.6 -.9 -.9 .3 6.2 3 1.2 5.2 2.5 4.2 -10.9 -.7 -3.9 1.4 6.1 .5 8.1 2.5 3.6 -.4 -.4 2.4 -2.1 2.6 -10.6 6 -11.2 2.6 9.3 -.5 2.2 .5 -2 2.5 -9.8 5.4 12 -4.4 11.4 -8.7 14.4 -6 10.4 -.4 22.3 1.5 19.1 -1.1 4.6 1.2 -3.2 8 -7.2 12.2 -7.7 6.9 -9.3 5.6 -7.9 2.6 -18.8 1.7 -18.2 .5 -9 -1.5 11 5.5 -3.9 4.3 -8.5 4.7 -4.3 3.4 17.4 -7.7 16 -2.1 -20.9 20 -7.6 4.9 -12.7 4.2 -8.3 1.4 -3.9 -.1 10.4 .2 4.1 .9 -8.8 11.5 10.3 -8 21.3 -13.2 14.1 -12.8 14.5 -7 13.3 -3.7 -24 23 -19.1 23.3 -21.7 14.8 20.2 -5.2 -3.8 5.5 -18.9 21.7 -7.1 7.5 -3.6 2.7 12.3 -8.1 10.8 -10.2 6.7 -4.7 5.9 -7.3 17.9 -26.4 9.5 -8.6 -4.1 13.5 -2.6 13.7 -1.9 3.5 -3.1 3 6.8 -3.8 1.7 -2.3 -1.4 11.3 -5.2 13.9 6.9 -9.3 3.5 -15.6 1.8 -14.6 4.5 -13.3 1.3 -2.7 1 -.1 2.2 6.6 1.2 -9.1 2.1 -4.3 2.5 -3 -.4 15.6 2.3 15.3 -1 8.3 -3.3 9.4 3.2 -3.3 -.1 4.8 -3.6 9.7 4.2 -5.3 2.3 -4.3 3.1 -16.7 4.1 6.8 1.9 5.3 -5.5 -24.1 -.8 -7.7 .2 -7.4 1.9 -5.6 21.2 -29.9 4.7 -8.9 3.3 -8.7 -.3 -9.1 -4 -27.7\" filter=\"url(#oalun-outer-glow-2)\" fill=\"#fbebeb\" /><path d=\"M157 208.7l1.7 -15.2 5.2 -18.7 -3 -21 1.3 -19.6 -.2 -51.9 .8 -33.4 3.6 -5 1.6 -13.6 3.3 -6.1 3 -9.9 -2.8 -9.6 -2.2 -2.4 -2.1 -1.1 -1 2.9 -.6 8.1 -10.8 -3.7 -4 -.6 -2.1 2.6 -3.9 7.9 -4.2 -7 -3.5 -3.3 -13.1 2.7 1.7 -8.5 -3 -.6 -2.2 .6 -1 1.2 -4 12.8 -.4 4 6.3 8.7 3.9 14.7 2.7 4.9 1.9 9.8 1.1 14.5 -.8 32.9 .9 9.6 -1.6 7.4 .3 17.6 1.4 7 .5 9.7 -2.4 13.8 -2 6.2 5.7 42.1 13.7 -17.8 10.2 9 1.9 -15.9 5.8 -23.8\" fill=\"#fae1e1\" /><path d=\"M127.2 178.5l4.1 26.3 1.3 13.7\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2.4px\" /><path d=\"M157 209.1l1.4-13.1 4.7-19 1.8-11\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2.4px\" /><path d=\"M132.1 59.2l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M131.7 70l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M131.9 80l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M130.6 91.8l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M130.6 103.4l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M131.7 113.9l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M131 127.1l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M131.3 139.4l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M132.9 151.1l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M132.6 162.8l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M131 42.4l5.8-3.2 3.6-.7 3.9 1.4 3.6-.8 5.5.5 3.3 1.4 1.8 2-2.7-1.2-12.4 3.2-8.5-2.7Z\" fill=\"#cac7c7\" style=\"mix-blend-mode:multiply\" /><path d=\"M164.2 17.9l-6.4-3.2-2.3-.2-1.8 1.1-2.7 5.6-1.1 5 .1 4.8 1.9 3.4-.8-7.8.6-3.2 3.5-2.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><g id=\"oalun-infected-2\" data-name=\"infected\"><path d=\"M167.3 2.4l2.1 2.1 1.8 3.5 .9 5.7 -1.5 8.1 -4.6 7.7 -1.1 13.8 -3.5 4.5 -1.2 4 1 5.1 -1.2 4.2 .9 4.7 -.7 3.6 -1.1 1.7 1.3 2.2 .2 4.8 -.1 2.2 -1.3 2.6 1.8 4 -1.7 7.9 1.7 5 -1.4 5.6 1.3 6.1 -.9 4.4 1 6.6 -1.3 6.1 1 3.1 -.2 5.7 -1 3.6 1.2 7.2 -1.4 4.3 -.1 8.8 3.6 16.2 .3 .6 .4 -1.2 3.3 -11.4 -.2 -8.4 2.1 -12.5 4.3 -14.1 2.9 -6.9 7.2 -12 4.3 -4.4 3.9 -2.7 5.3 -2 8.2 .1 4.3 1.4 4.2 2.1 8.1 6.1 7.7 7.6 10.3 12.2 15.3 22.4 12.4 24.7 9.7 26.1 7.3 26.6 5.2 26.2 3.3 24.9 1.7 22.8 .3 19.8 -.8 15.9 -1.6 11.1 -4.5 16.3 -3.3 6.5 -4.6 4.4 -6.4 1.6 -6.5 -1.1 -30.4 -14.6 -43.8 -19.7 -9.8 -6.2 -9.8 -9.5 -4.1 -6.1 -3.2 -7.2 -1.9 -8.3 -2 -24.2 .5 -42.3 -4.6 -32.8 -.8 -1.9 -6.5 -6 -4 -2.2 -2.6 1.9 -5.5 6.9 -6.7 10.8 -1.9 79.5 -3 18.9 -3.7 8.4 -11.9 9.9 -43.8 27.9 -31 21.9 -13.1 6.6 -6 .1 -3.7 -4.1 -2.7 -7.4 -4.7 -23.7 -3.1 -31.4 -.6 -34.4 .9 -16.8 1.9 -15.7 2.7 -14.8 7.2 -28 8.8 -25.3 13.9 -31.4 8.3 -15.7 7.6 -12.2 8.3 -11 8.5 -8.9 8.3 -5.9 7.6 -2.2 5.6 1.2 7.1 3.4 6.6 5.5 5.7 8 4.4 10.7 8.4 40.9 2.7 9 4 -11.5 1.8 -12.4 -.2 -10.2 -1.6 -10.9 .6 -6.5 -.4 -7.1 1.1 -7.1 -.8 -16.4 .6 -4.8 -.8 -7.4 1.3 -4.6 -1.5 -6.3 1.3 -4.2 -.8 -6.1 .8 -5 -2.5 -11.7 -2.3 -4.4 -2.8 -12.1 -1.9 -4.2 -4.5 -5.1 -1.2 -2.7 0 -6.1 3.6 -9 2.5 -2.9 0 3.4 -2.1 9.5 8.6 -5.2 5.3 -1 3.4 2.6 6.8 9.9 3.6 -9.7 1.9 -3 17.4 5.1 -1.3 -9.5M167.3 0l-1.9 .8 -.9 1.8 .9 8.6 -11.5 -4 -3.9 -.4 -2.7 2.8 -2.7 7.4 -4.9 -7.1 -3.8 -2.7 -4.8 .1 -6.4 3.1 1 -7.8 -1.2 -1.8 -2.2 -.4 -3.3 3 -4.3 10.7 0 7 1.4 3.3 3.8 4.1 2 3.7 3.3 13.3 2.1 3.7 2.5 11.3 -.8 5.3 .8 5.8 -1.2 4.7 1.3 6 -1.1 4.7 .8 7.3 -.6 5.2 .8 16.1 -1.1 6.8 .4 7.1 -.7 6.7 1.9 18.1 -1.1 11.5 -2.3 8.6 -9.4 -44.7 -5.3 -12.1 -3.2 -4.6 -7 -6.7 -7 -3.9 -8.7 -2.2 -4.3 .6 -9 4.7 -9.1 8.2 -8.7 10.5 -7.8 11.6 -6.7 11.7 -8.3 16.4 -9.5 21.8 -9.4 26.2 -7.9 29.8 -3.9 23 -1.7 23.5 .4 35.1 3.2 33.4 5.2 25.4 3.8 8.9 3.5 2.9 3.4 .6 5.5 -1 9.7 -4.7 33.7 -23.6 40.8 -25.8 10.8 -7.9 4.7 -4.5 2 -3.1 3 -9.2 2.5 -18 1.7 -77.4 5.3 -8.6 7.4 -9.1 8.3 7.1 .7 2.1 4.3 31.6 -.7 37.7 2.1 28.7 1.7 7.6 2.7 6.7 7.5 11 9 8 8.8 5.5 74.9 34.6 7.2 1.2 7 -1.6 5.6 -4.8 3.9 -7.2 3.1 -10.1 2.6 -12.2 1.5 -23.2 -1.1 -31.2 -4.2 -35.7 -7.7 -36.4 -8.2 -26.5 -11.2 -26.7 -6.8 -13 -7.8 -12.5 -18.8 -23.9 -12.2 -11.4 -9 -5.3 -4.7 -1.5 -4.8 -.5 -6.1 .9 -5.8 2.8 -5.5 4.6 -4.7 6.1 -5.5 10.4 -3.7 9.7 -3.4 12.7 -1.7 11.7 .2 6.4 -1.3 3.5 -1.5 -7.6 .1 -8.2 1.4 -4.4 -1.2 -7.6 1.2 -6.2 0 -3.6 -.9 -2.6 1.2 -5.6 -1 -6.7 .9 -4.5 -1.3 -5.9 1.4 -6.3 -1.6 -5 1.2 -2.7 .5 -4.6 -1.6 -4.6 1.1 -3.2 -.1 -6.2 -.8 -1.9 1.3 -6 -.9 -4.2 1.2 -3.4 -.9 -5.9 .8 -2.9 3.8 -5 1.1 -13.9 4.5 -7.2 1.9 -10.6 -2.6 -7.9 -2.7 -3.4Z\" fill=\"#8f6464\" /></g><path d=\"M128.8 173.7l5.9 7.3 4.4 4 4.7 2.5 2.3.2 2.1-.6 3.9-2.9 8.9-12.9 1.6.4.5 2.7 0 2.5-4.9 20.6-.8 9.7-2.5-.8-8.2-5.2-14.8 17.4.1-14.3-4.6-29.2Z\" fill=\"#cac7c7\" style=\"mix-blend-mode:multiply\" /></g></g></g>"};
+/* Biologics in type 2 lung and skin inflammation: allergen, Th2 cytokines, IgE mast cell arming,
+ * eosinophils, airway mucus and skin flare, and where anti-IgE, anti-IL-5 and anti-IL-4 receptor act.
+ * Left to right: allergen wakes dendritic and Th2 cells; Th2 signals fan out to the lung airway
+ * (mucus, tight muscle) and to the skin (barrier loss, wheals). Each biologic traps its own signal. */
+const L = { arrows: $("arrows"), air: $("air"), wheal: $("wheal"), skin: $("skin"), immune: $("immune"), parts: $("parts"), marks: $("marks"), over: $("over"), panel: $("panel"), airRed: $("airRed"), skinRed: $("skinRed") };
+const CX = 175, CY = 180, LY = 158;
+let lungO = null, capEl = null, capDrug = -1;
+let T = null, FLOWS = null;
+const mastHome = { A: [150, 240], S: [755, 222] };
+function capText(d) {
+  if (d === 1) return "Anti-IgE mops up free IgE. Mast cells fire less and flare eases.";
+  if (d === 2) return "Anti-IL-5 removes IL-5. Eosinophils leave and flare eases.";
+  if (d === 3) return "Anti-IL-4 receptor blocks IL-4 and IL-13 signals. Mucus clears and skin calms.";
+  return "No treatment. Th2 signals fill the airway with mucus and flare the skin.";
+}
+/* ---- real lung anatomy; mediator tracks end at its ports so particles meet anatomy ---- */
+function initOrgans() {
+  lungO = organ($("lungSlot"), "lung", CX, CY, 210, { h: 160 });
+  const P = lungO.ports, H = P.hilumR || P.hilum || P.in;
+  mastHome.A = [clamp(Math.round(H[0] - 40), 110, 220), 240];
+  const MA = mastHome.A;
+  T = {
+    dc2th: [[408, 148], [434, 155], [460, 160]],
+    il4: [[490, 156], [522, 152], [550, 150]],
+    igeL: [[552, 162], [440, 196], MA],
+    igeR: [[578, 160], [660, 188], [736, 208]],
+    il5L: [[464, 172], [340, 200], [H[0] - 10, H[1] + 10]],
+    il5R: [[488, 174], [650, 208], [818, 238]],
+    il13L: [[462, 170], [300, 166], [CX - 62, LY]],
+    il13R: [[490, 170], [640, 148], [766, 121]],
+    histA: [[MA[0], MA[1] + 20], [MA[0] - 4, MA[1] + 32], [MA[0] - 8, MA[1] + 42]],
+    histS: [[755, 242], [780, 256], [804, 266]]
+  };
+  FLOWS = [["dc2th", "p-il4", "t2", 1.6, 0], ["il4", "p-il4", "t2", 2.2, 3],
+    ["igeL", "p-ige", "ige", 2.6, 1], ["igeR", "p-ige", "ige", 2.6, 1],
+    ["il5L", "p-il5", "eos", 2.6, 2], ["il5R", "p-il5", "eos", 2.6, 2],
+    ["il13L", "p-il13", "il4", 2.2, 3], ["il13R", "p-il13", "il4", 2.2, 3],
+    ["histA", "p-hist", "mast", 3.4, 0], ["histS", "p-hist", "mast", 3.4, 0]]
+    .map(([k, cls, src, rate, bu]) => ({ k, cls, src, rate, bu, tr: track(T[k]), acc: 0 }));
+}
+/* ---- airway wall inside the lung: lumen, mucus, lining cells, muscle band ---- */
+const epiCells = [], muscCells = [], blobs = [];
+let lumenEl = null, tintEl = null;
+function initAirway() {
+  lumenEl = mk("rect", { class: "bl-lumen", x: CX - 92, y: LY - 15, width: 184, height: 30, rx: 10 }, L.air);
+  tintEl = mk("rect", { class: "mucus", x: CX - 92, y: LY - 15, width: 184, height: 30, rx: 10, opacity: "0" }, L.air);
+  for (let i = 0; i < 7; i++) { const g = mk("g", {}, L.air); cell(g, { cls: "epi", r: 12, nuc: 0.3, seed: i + 1, wob: 0.06, n: 8 }); epiCells.push({ g, x: CX - 78 + i * 26 }); }
+  for (let i = 0; i < 4; i++) { const g = mk("g", {}, L.air); mk("ellipse", { class: "bl-mus", rx: 26, ry: 9 }, g); mk("ellipse", { class: "bl-mus-n", rx: 7, ry: 3 }, g); muscCells.push({ g, x: CX - 66 + i * 44, y: 214 }); }
+  [CX - 55, CX + 5, CX + 60].forEach((x, i) => blobs.push({ e: mk("ellipse", { class: "mucus", rx: 22, ry: 11 }, L.air), x, i }));
+}
+/* ---- skin dermis dots plus raised wheals that flatten on treatment ---- */
+const wheals = [];
+function initSkin() {
+  [[660, 170], [700, 200], [880, 180], [910, 220], [680, 250], [900, 258], [740, 258], [860, 150]].forEach(([x, y]) => mk("circle", { class: "bl-col", r: 2.4, cx: x, cy: y }, L.skin));
+  [[700, 190], [800, 200], [870, 230], [710, 250], [840, 250]].forEach(([x, y], i) => wheals.push({ e: mk("circle", { class: "bl-wheal", r: 9, cx: x, cy: y }, L.wheal), x, y, i }));
+}
 /* ---- fixed immune cells ---- */
 const fix = {}, granules = [], igeDeco = [];
 function addFix(key, x, y, o) { const g = mk("g", {}, L.immune), c = cell(g, o); fix[key] = { g, c, x, y, ph: x % 7 + y % 5 }; return fix[key]; }
@@ -450,88 +767,79 @@ function initImmune() {
   for (let j = 0; j < 7; j++) { const t = j * 0.9 + 0.3; mk("path", { class: "dend", d: "M" + f1(Math.cos(t) * 14) + " " + f1(Math.sin(t) * 14) + "L" + f1(Math.cos(t) * 27) + " " + f1(Math.sin(t) * 27) }, dc.g); }
   addFix("th2", 475, 162, { cls: "th2", r: 13, nuc: 0.6, seed: 6 });
   addFix("b", 565, 150, { cls: "bcell", r: 14, nuc: 0.5, seed: 7 });
-  addMast("mastA", 180, 222, 9); addMast("mastS", 755, 222, 12);
+  addMast("mastA", mastHome.A[0], mastHome.A[1], 9); addMast("mastS", mastHome.S[0], mastHome.S[1], 12);
 }
-/* ---- eosinophils recruited into airway and skin ---- */
+/* ---- eosinophils recruited into lung and skin ---- */
 const mob = [];
 function initMobile() {
   for (let i = 0; i < 6; i++) { const air = i < 3, g = cell(L.immune, { cls: "eos", r: 11.5, nuc: 0.55, nucCls: "multi", seed: 30 + i, wob: 0.1 });
-    mob.push({ g, hx: air ? 225 + i * 26 : 806 + (i - 3) * 26, hy: air ? 246 : 244, st: 0, x: 0, y: 0, i }); }
+    mob.push({ g, hx: air ? 120 + i * 52 : 806 + (i - 3) * 26, hy: air ? 240 : 244, st: 0, x: 0, y: 0, i }); }
   mob.forEach((m) => { m.g.style.opacity = 0; place(m.g, -40, 250, 0, 0.1); });
 }
 /* ---- mediator tracks ---- */
-const T = { dc2th: [[408, 148], [434, 155], [460, 160]], il4: [[490, 156], [522, 152], [550, 150]], igeL: [[552, 160], [440, 188], [310, 210]], igeR: [[578, 160], [660, 188], [736, 208]], il5L: [[464, 172], [360, 208], [262, 240]], il5R: [[488, 174], [650, 208], [818, 238]], il13L: [[462, 170], [310, 178], [186, 190]], il13R: [[490, 170], [640, 148], [766, 130]], histA: [[180, 242], [176, 256], [172, 266]], histS: [[755, 242], [780, 256], [804, 266]] };
-const FLOWS = [["dc2th", "p-il4", "t2", 1.6], ["il4", "p-il4", "t2", 2.2], ["igeL", "p-ige", "ige", 2.6], ["igeR", "p-ige", "ige", 2.6], ["il5L", "p-il5", "eos", 2.6], ["il5R", "p-il5", "eos", 2.6], ["il13L", "p-il13", "il4", 2.2], ["il13R", "p-il13", "il4", 2.2], ["histA", "p-hist", "mast", 3.4], ["histS", "p-hist", "mast", 3.4]]
-  .map(([k, cls, src, rate]) => ({ k, cls, src, rate, tr: track(T[k]), acc: 0 }));
 function chev(parent, a, b) { const t = Math.atan2(b[1] - a[1], b[0] - a[0]), p = (d, o) => f1(b[0] - Math.cos(t + o) * d) + " " + f1(b[1] - Math.sin(t + o) * d); return mk("path", { class: "arh", d: "M" + p(7, 0.5) + "L" + f1(b[0]) + " " + f1(b[1]) + "L" + p(7, -0.5) }, parent); }
 function initArrows() { for (const k in T) { const pts = T[k]; mk("path", { class: "ar", d: "M" + pts.map((p) => f1(p[0]) + " " + f1(p[1])).join("L") }, L.arrows); chev(L.arrows, pts[pts.length - 2], pts[pts.length - 1]); } }
-/* ---- particles ---- */
-function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, u: 0, f: null }; }); }
+/* ---- particles; each flow names the drug that traps it ---- */
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, u: 0, f: null, chk: false }; }); }
 const parts = pool(120, () => mk("circle", { r: 2.3 }, L.parts));
-function emitP(f) { const p = parts.find((q) => !q.on); if (!p) return; p.on = true; p.f = f; p.u = 0; p.e.setAttribute("class", "sc-p " + f.cls); p.e.setAttribute("r", f.k === "igeL" || f.k === "igeR" ? 3 : 2.3); p.e.setAttribute("opacity", "1"); }
+function emitP(f) { const p = parts.find((q) => !q.on); if (!p) return; p.on = true; p.f = f; p.u = 0; p.chk = false; p.e.setAttribute("class", "sc-p " + f.cls); p.e.setAttribute("r", f.k === "igeL" || f.k === "igeR" ? 3 : 2.3); p.e.setAttribute("opacity", "1"); }
 const trig = pool(18, () => mk("path", { d: "M0 -5L1.4 -1.4L5 0L1.4 1.4L0 5L-1.4 1.4L-5 0L-1.4 -1.4Z", class: "p-alg" }, L.parts));
-/* ---- treatment marks: antibody Y shapes, block caps, receptor shields ---- */
+/* ---- treatment marks: antibody traps on each signal, receptor shields for anti-IL-4R ---- */
 const mkG = {};
 function capAt(g, x, y) { mk("circle", { class: "blk-c", cx: x, cy: y, r: 7.5 }, g); mk("path", { class: "blk-x", d: "M" + (x - 3.6) + " " + (y - 3.6) + "l7.2 7.2M" + (x + 3.6) + " " + (y - 3.6) + "l-7.2 7.2" }, g); }
 function abAt(g, x, y, rot) { mk("path", { class: "ab-y", d: "M0 0L0 -6M-4 -11L0 -6L4 -11", transform: "translate(" + x + " " + y + ") rotate(" + rot + ")" }, g); }
 function initMarks() {
   const g1 = mk("g", { opacity: 0 }, L.marks); mkG[1] = g1;
-  capAt(g1, 440, 188); capAt(g1, 660, 188); abAt(g1, 380, 200, 24); abAt(g1, 500, 176, -18); abAt(g1, 620, 178, 20); abAt(g1, 700, 196, -24);
+  capAt(g1, 440, 196); capAt(g1, 660, 188); abAt(g1, 380, 206, 24); abAt(g1, 500, 184, -18); abAt(g1, 610, 178, 20); abAt(g1, 706, 198, -24);
   const g2 = mk("g", { opacity: 0 }, L.marks); mkG[2] = g2;
-  capAt(g2, 360, 208); capAt(g2, 650, 208); abAt(g2, 420, 192, 20); abAt(g2, 300, 226, -22); abAt(g2, 560, 192, 18); abAt(g2, 740, 224, -20);
+  capAt(g2, 340, 200); capAt(g2, 650, 208); abAt(g2, 410, 186, 20); abAt(g2, 270, 214, -22); abAt(g2, 560, 192, 18); abAt(g2, 745, 226, -20);
   const g3 = mk("g", { opacity: 0 }, L.marks); mkG[3] = g3;
-  capAt(g3, 522, 152); capAt(g3, 310, 178); capAt(g3, 640, 148);
-  abAt(g3, 470, 168, 12); abAt(g3, 250, 184, -14); abAt(g3, 700, 140, 16);
-  [[565, 132], [120, 156], [770, 100]].forEach(([x, y]) => mk("path", { class: "rec-sh", d: "M" + (x - 9) + " " + y + "A9 9 0 0 1 " + (x + 9) + " " + y }, g3));
+  capAt(g3, 522, 152); capAt(g3, 300, 166); capAt(g3, 640, 148);
+  abAt(g3, 462, 162, 12); abAt(g3, 230, 162, -14); abAt(g3, 700, 140, 16);
+  [[565, 132], [CX + 60, 176], [770, 100]].forEach(([x, y]) => mk("path", { class: "rec-sh", d: "M" + (x - 9) + " " + y + "A9 9 0 0 1 " + (x + 9) + " " + y }, g3));
 }
-/* ---- labels, gauges, safety note ---- */
-const gg = {}, dpills = {};
+/* ---- eight short labels, gauges, caption, safety note ---- */
+const gg = {};
 function initPanel() {
   const P = L.panel, y0 = 478, h = 70, xs = [90, 225, 360, 495, 630, 765];
-  mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: W - 48, height: 142, rx: 14 }, P);
+  mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: 912, height: 142, rx: 14 }, P);
   const t = mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P); t.textContent = "Type 2 inflammation";
-  [["t2", "Th2", "g-cyt", "Th2 helper activity. Allergen shown by dendritic cells wakes Th2 cells, which release IL-4, IL-5 and IL-13."], ["ige", "IgE", "g-bad", "Free IgE in the tissue fluid. It arms mast cells. Anti-IgE binds it up."], ["eos", "Eos", "g-eos", "Eosinophils in airway and skin, called in by IL-5. Anti-IL-5 lowers them."], ["mast", "Mast", "g-mast", "Mast cell firing. Allergen cross links IgE on the surface and histamine is released."], ["flare", "Flare", "g-fl", "Flare: tight airway plus red itchy skin. Each biologic calms it through its own path."], ["ctrl", "Control", "g-good", "Control: calm airway and settled skin. Rises as flare falls."]]
+  [["t2", "Th2", "g-cyt", "Th2 helper activity. Allergen shown by dendritic cells wakes Th2 cells, which release IL-4, IL-5 and IL-13."], ["ige", "IgE", "g-bad", "Free IgE in the tissue fluid. It arms mast cells. Anti-IgE binds it up."], ["eos", "Eos", "g-eos", "Eosinophils in lung and skin, called in by IL-5. Anti-IL-5 lowers them."], ["mast", "Mast", "g-mast", "Mast cell firing. Allergen cross links IgE on the surface and histamine is released."], ["flare", "Flare", "g-fl", "Flare: tight mucus filled airway plus red itchy skin. Each biologic calms it through its own path."], ["ctrl", "Control", "g-good", "Control: calm airway and settled skin. Rises as flare falls."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
   const nt = mk("text", { class: "sc-note", x: 480, y: 582 }, P); nt.textContent = "Watch outs: injection reactions with each biologic. Rare anaphylaxis with anti-IgE. Eye irritation with anti-IL-4 receptor.";
   const ox = L.over;
-  pill(ox, "Airway", 170, 116, 140, 64, "Airway wall. In type 2 inflammation the lining makes mucus and the muscle tightens.");
-  pill(ox, "Allergen", 430, 66, 300, 64, "Allergen from air or skin. Dendritic cells pick it up and show it to helper T cells.");
-  pill(ox, "Skin", 790, 116, 850, 64, "Skin. In atopic dermatitis the barrier leaks and type 2 inflammation reddens and itches it.");
-  pill(ox, "Epithelium", 120, 168, 200, 96, "Airway lining. IL-13 makes it grow more mucus cells.");
-  pill(ox, "Mucus", 250, 112, 330, 96, "Mucus sitting in the lumen. Thick mucus narrows the airway.");
-  pill(ox, "IL-13", 350, 180, 440, 96, "IL-13 from Th2 cells. It drives mucus, twitchy muscle and skin barrier loss.");
-  pill(ox, "Skin barrier", 770, 128, 690, 96, "Skin barrier. IL-4 and IL-13 weaken it so water leaves and irritants enter.");
-  pill(ox, "Dendritic", 390, 150, 370, 320, "Dendritic cell. It picks up allergen and wakes helper T cells.");
-  pill(ox, "Th2 cell", 475, 162, 480, 320, "Th2 helper cell. It releases IL-4, IL-5 and IL-13.");
-  pill(ox, "B cell", 565, 150, 590, 320, "B cell. IL-4 tells it to switch to making IgE.");
-  pill(ox, "IgE", 630, 182, 690, 320, "IgE antibody. It arms mast cells and waits for allergen.");
-  pill(ox, "IL-5", 420, 190, 410, 280, "IL-5 from Th2 cells. It calls in eosinophils and keeps them alive.");
-  pill(ox, "IL-4", 525, 158, 530, 280, "IL-4 from Th2 cells. It pushes IgE switching and Th2 growth.");
-  pill(ox, "Mast cell", 180, 222, 120, 385, "Airway mast cell armed with IgE. Allergen cross links it and histamine is released.");
-  pill(ox, "Eosinophil", 255, 250, 262, 385, "Eosinophils. Their granules injure lining and keep flares going.");
-  pill(ox, "Muscle", 170, 258, 400, 385, "Airway smooth muscle. Mast mediators and IL-13 make it tighten.");
-  pill(ox, "Skin flare", 810, 270, 560, 385, "Flare: redness, swelling and itch where mast cells and eosinophils gather.");
-  pill(ox, "Skin mast", 755, 222, 705, 385, "Skin mast cell. Same IgE arming as in the airway.");
-  pill(ox, "Histamine", 830, 250, 845, 385, "Histamine and other mast mediators. They redden skin and tighten muscle.");
-  [[1, "Anti-IgE", "Anti-IgE binds free IgE in the tissue fluid, so less IgE arms mast cells and they fire less. Watch out for injection reactions and rare anaphylaxis."], [2, "Anti-IL-5", "Anti-IL-5 soaks up IL-5, so fewer eosinophils are called in and kept alive. Watch out for injection reactions."], [3, "Anti-IL-4R", "Anti-IL-4 receptor blocks the shared alpha chain used by IL-4 and IL-13, calming mucus, barrier loss and IgE switching. Watch out for injection reactions and eye irritation."]]
-    .forEach(([d, n, tip]) => { dpills[d] = pill(ox, n, 505, 96, 505, 64, tip); dpills[d].style.opacity = 0; });
+  pill(ox, "Allergen", 470, 100, 470, 64, "Allergen breathed in or touching skin. Dendritic cells pick it up and show it to helper cells.");
+  pill(ox, "Airway", 120, 130, 150, 64, "Airway in the lung. Type 2 signals fill it with mucus and tighten the muscle.");
+  pill(ox, "Skin", 790, 122, 790, 64, "Skin. Barrier loss plus mast cells and eosinophils make it red and itchy.");
+  pill(ox, "Th2 cell", 475, 162, 420, 320, "Th2 helper cell. Woken by dendritic cells, it releases IL-4, IL-5 and IL-13.");
+  pill(ox, "B cell", 565, 150, 560, 320, "B cell. IL-4 tells it to switch to making IgE.");
+  pill(ox, "IgE", 650, 190, 695, 320, "IgE. It arms mast cells. Anti-IgE mops it up before it can arm them.");
+  pill(ox, "Eosinophil", 200, 240, 250, 385, "Eosinophils. IL-5 calls them in and keeps them alive. Anti-IL-5 removes IL-5.");
+  pill(ox, "Mast cell", mastHome.A[0], mastHome.A[1], 110, 385, "Mast cell armed with IgE. Allergen cross links it and histamine is released.");
+  capEl = mk("text", { class: "bl-cap", x: 30, y: 428 }, ox); capEl.textContent = capText(0);
 }
 const s = { t2: 0.5, ige: 0.5, eos: 0.5, mast: 0.5, flare: 0.5, ctrl: 0.5, il4: 0.5 }, dw = [1, 0, 0, 0, 0];
 const acc = { allergen: 0 };
-function init() { initArrows(); initEpi(); initMuscle(); initMucus(); initSkin(); initImmune(); initMobile(); initMarks(); initPanel(); }
+function init() { initOrgans(); initAirway(); initSkin(); initImmune(); initMobile(); initArrows(); initMarks(); initPanel(); }
 function step(dt, m) {
   const k2 = Math.min(1, dt * 0.55), k1 = Math.min(1, dt * 1.2);
   for (const q of ["t2", "ige", "eos", "mast", "flare", "ctrl", "il4"]) s[q] = lerp(s[q], m[q === "t2" ? "a" : q], q === "flare" || q === "ctrl" ? k1 : k2);
   dw.forEach((_, d) => { dw[d] = lerp(dw[d], m.drug === d ? 1 : 0, k1); });
-  epiCells.forEach((e) => place(e.g, e.x, 168 + Math.sin(tm / 900 + e.i) * 0.7, 0, 1));
-  const mv = clamp(s.il4 * 1.3);
-  blobs.forEach((b) => { const v = clamp(mv - b.i * 0.18); b.e.setAttribute("transform", "translate(" + f1(b.x) + " 114) scale(" + (0.15 + 0.85 * v).toFixed(2) + ")"); b.e.setAttribute("opacity", v > 0.05 ? "1" : "0"); });
-  muscCells.forEach((c) => c.g.setAttribute("transform", "translate(" + f1(c.x) + " " + f1(c.y) + ") scale(" + (1 - 0.2 * s.flare).toFixed(2) + " " + (1 + 0.3 * s.flare).toFixed(2) + ")"));
-  L.airRed.setAttribute("opacity", (s.flare * 0.5).toFixed(2)); L.skinRed.setAttribute("opacity", (s.flare * 0.5).toFixed(2));
+  epiCells.forEach((e, i) => place(e.g, e.x, 184 + Math.sin(tm / 900 + i) * 0.7, 0, 1));
+  const ml = clamp(s.il4 * 1.3) * (1 - 0.9 * dw[3]);
+  blobs.forEach((b) => { const v = clamp(ml - b.i * 0.18); b.e.setAttribute("transform", "translate(" + f1(b.x) + " " + LY + ") scale(" + (0.15 + 0.85 * v).toFixed(2) + ")"); b.e.setAttribute("opacity", v > 0.05 ? "1" : "0"); });
+  tintEl.setAttribute("opacity", clamp(ml * 1.2).toFixed(2));
+  const lh = 30 + 14 * dw[3];
+  lumenEl.setAttribute("y", f1(LY - lh / 2)); lumenEl.setAttribute("height", f1(lh));
+  tintEl.setAttribute("y", f1(LY - lh / 2)); tintEl.setAttribute("height", f1(lh));
+  const relax = s.flare * (1 - 0.45 * dw[3]);
+  muscCells.forEach((c) => c.g.setAttribute("transform", "translate(" + f1(c.x) + " " + f1(c.y) + ") scale(" + (1 - 0.2 * relax).toFixed(2) + " " + (1 + 0.3 * relax).toFixed(2) + ")"));
+  L.airRed.setAttribute("opacity", (s.flare * 0.65).toFixed(2)); L.skinRed.setAttribute("opacity", (s.flare * 0.65).toFixed(2));
+  wheals.forEach((w) => { const v = clamp(s.flare * 1.2) * (1 - 0.85 * dw[3]); w.e.setAttribute("transform", "translate(" + f1(w.x) + " " + f1(w.y) + ") scale(" + (0.1 + 0.9 * v).toFixed(2) + ")"); w.e.setAttribute("opacity", v > 0.05 ? "1" : "0"); });
   for (const k in fix) { const f = fix[k], act = k === "mastA" || k === "mastS" ? s.mast : k === "b" ? s.ige : s.t2; place(f.g, f.x + Math.sin(tm / 1500 + f.ph) * 2.5, f.y + Math.cos(tm / 1700 + f.ph) * 2.2, Math.sin(tm / 2400 + f.ph) * 5, 1 + 0.05 * act * Math.sin(tm / 320 + f.ph)); f.g.style.opacity = (0.55 + 0.45 * clamp(act * 1.3)).toFixed(2); }
   granules.forEach((g) => g.e.setAttribute("opacity", (1 - 0.7 * s.mast).toFixed(2)));
-  igeDeco.forEach((y) => { y.e.style.opacity = ((1 - 0.9 * dw[1]) * (0.3 + 0.7 * s.t2)).toFixed(2); });
-  const ne = Math.round(s.eos * 6);
+  igeDeco.forEach((y) => { y.e.style.opacity = ((1 - 0.9 * dw[1]) * (1 - 0.4 * dw[3]) * (0.3 + 0.7 * s.t2)).toFixed(2); });
+  const ne = Math.round(6 * clamp(s.eos * (1 - 0.9 * dw[2]) * (1 - 0.35 * dw[3])));
   mob.forEach((o) => { const want = o.i < ne, op = parseFloat(o.g.style.opacity || 0);
     if (o.st === 0) { if (want) { o.st = 1; o.x = o.hx + rnd(-24, 24); o.y = 300; o.g.style.opacity = 1; } }
     else if (o.st === 1) { o.y -= 44 * dt; o.x += (o.hx - o.x) * dt * 0.8; place(o.g, o.x, o.y, 0, 1); if (o.y <= o.hy) o.st = 2; if (!want) o.st = 3; }
@@ -539,17 +847,20 @@ function step(dt, m) {
     else { o.g.style.opacity = Math.max(0, op - dt * 0.7); if (op < 0.06) { o.st = 0; o.g.style.opacity = 0; } } });
   const rate = { t2: s.t2, ige: s.ige * (1 - 0.85 * dw[1]), eos: s.eos * (1 - 0.4 * dw[2]), il4: s.il4 * (1 - 0.8 * dw[3]), mast: s.mast * (1 - 0.5 * dw[1]) * (1 - 0.25 * dw[3]) };
   FLOWS.forEach((f) => { let r = f.rate * (rate[f.src] || 0); f.acc += dt * r; while (f.acc >= 1) { f.acc--; emitP(f); } });
-  parts.forEach((p) => { if (!p.on) return; p.u += dt * 0.45; const a = p.f.tr.at(p.u); p.e.setAttribute("cx", f1(a.x + Math.sin(tm / 300 + p.u * 9) * 1.2)); p.e.setAttribute("cy", f1(a.y)); if (p.u > 1) { p.on = false; p.e.setAttribute("opacity", "0"); } else p.e.setAttribute("opacity", f1(Math.min(1, p.u * 6, (1 - p.u) * 6))); });
+  parts.forEach((p) => { if (!p.on) return; p.u += dt * 0.45;
+    if (p.f.bu && !p.chk && p.u > 0.45) { p.chk = true; if (Math.random() < dw[p.f.bu]) { p.on = false; p.e.setAttribute("opacity", "0"); return; } }
+    const a = p.f.tr.at(p.u); p.e.setAttribute("cx", f1(a.x + Math.sin(tm / 300 + p.u * 9) * 1.2)); p.e.setAttribute("cy", f1(a.y)); if (p.u > 1) { p.on = false; p.e.setAttribute("opacity", "0"); } else p.e.setAttribute("opacity", f1(Math.min(1, p.u * 6, (1 - p.u) * 6))); });
   acc.allergen += dt * 2.4 * (0.3 + s.t2);
   while (acc.allergen >= 1) { acc.allergen--; const p = trig.find((q) => !q.on); if (p) { p.on = true; p.x = rnd(360, 580); p.y = 52; p.vx = rnd(-6, 6); p.e.setAttribute("opacity", "1"); } }
   trig.forEach((p) => { if (!p.on) return; p.y += 32 * dt; p.x += p.vx * dt + Math.sin(tm / 500 + p.x) * 0.2; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(p.y * 3) + ")"); if (p.y > 138) { p.on = false; p.e.setAttribute("opacity", "0"); } });
-  for (const d in mkG) mkG[d].setAttribute("opacity", dw[d].toFixed(2)); for (const d in dpills) dpills[d].style.opacity = dw[d].toFixed(2);
+  for (const d in mkG) { mkG[d].setAttribute("opacity", dw[d].toFixed(2)); mkG[d].setAttribute("transform", "translate(0 " + f1(Math.sin(tm / 600) * 2 * dw[d]) + ")"); }
   gg.t2.set(s.t2, wordOf(s.t2, 0.25, 0.55, ["low", "raised", "high"]));
   gg.ige.set(s.ige, dw[1] > 0.5 && s.ige < 0.3 ? "blocked" : wordOf(s.ige, 0.25, 0.55, ["low", "raised", "high"]));
   gg.eos.set(s.eos, wordOf(s.eos, 0.25, 0.55, ["low", "raised", "high"]));
   gg.mast.set(s.mast, wordOf(s.mast, 0.3, 0.7, ["quiet", "primed", "firing"]));
   gg.flare.set(s.flare, wordOf(s.flare, 0.35, 0.7, ["calm", "ongoing", "severe"]));
   gg.ctrl.set(s.ctrl, wordOf(s.ctrl, 0.4, 0.7, ["poor", "fair", "good"]));
+  if (drug !== capDrug) { capDrug = drug; const t = capText(drug); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 run({ init, step });
 </script></body></html>

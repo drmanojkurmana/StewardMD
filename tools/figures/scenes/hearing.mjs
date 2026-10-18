@@ -48,6 +48,7 @@ const TESTS = [
   [1, 0, "air conduction low · bone conduction normal · hearing low"],
   [2, 0, "air conduction low · bone conduction low · hearing low"],
   [1, 2, "air conduction normal · bone conduction normal · hearing normal"],
+  [2, 3, "air conduction low · bone conduction low · hearing normal"],
 ];
 
 /* ---------------- static layout ---------------- */
@@ -67,10 +68,10 @@ const body = `
 
 buildScene({
   id: "hearing-conductive-sensorineural", fig: "Fig 1", title: "Hearing: conductive and sensorineural loss", W, H, body,
-  label: "An animated ear. Sound enters the external ear and ear canal, vibrates the tympanic membrane and the ossicles malleus, incus and stapes, and pushes at the oval window into the cochlea. An unrolled cochlea shows the basilar membrane, stiff base for high pitch and floppy apex for low pitch, with hair cells on it. Signals pass along the auditory nerve. Conductive loss blocks the air path while bone conduction is preserved. Sensorineural loss damages hair cells so air and bone conduction both fall. An inset shows Rinne and Weber tuning fork tests. Gauges show air and bone conduction, the basilar wave, hair cells, nerve signal and hearing. Treatments are a hearing aid, surgery for ossicular disease and a cochlear implant.",
+  label: "An animated ear. Sound enters the external ear and ear canal, vibrates the tympanic membrane and the ossicles malleus, incus and stapes, and pushes at the oval window into the cochlea. An unrolled cochlea shows the basilar membrane, stiff base for high pitch and floppy apex for low pitch, with hair cells on it. Signals pass along the auditory nerve. Conductive loss blocks the air path while bone conduction is preserved. Sensorineural loss damages hair cells so air and bone conduction both fall. An inset shows Rinne and Weber tuning fork tests. Gauges show air and bone conduction, the basilar wave, hair cells, nerve signal and hearing. Treatments act on the drawing: a hearing aid sits in the canal and boosts incoming sound, surgery clears the fixed stapes and bridges the gap, and a cochlear implant sparks the nerve past damaged hair cells.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, frequencies or numbers are shown or implied.",
   scene: { W, H }, pageJs: readFileSync(join(HERE, "hearing.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  withoutLabel: "Without treatment", withLabel: "With cochlear implant",
   sourcesLis: [
     "<strong>How hearing works.</strong> The pinna and external ear canal guide sound to the tympanic membrane. Its vibration moves the ossicles, malleus, incus and stapes, in the middle ear. The stapes footplate pushes at the oval window, setting up a travelling wave on the basilar membrane inside the cochlea. The membrane is stiff and narrow at the base, which responds best to high pitch, and wide and floppy at the apex, which responds best to low pitch: this place code is tonotopy. Hair cells on the membrane bend with the wave and send signals along the auditory nerve. This is standard teaching in physiology and ENT texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Conductive and sensorineural loss.</strong> Conductive loss is a failure of sound to reach the cochlea, for example a blocked canal, a perforated eardrum or ossicular disease. Otosclerosis fixes the stapes at the oval window and is a classic conductive cause. Bone conduction, which shakes the cochlea through the skull, is preserved, so in the Rinne test bone conduction is louder than air conduction and in the Weber test sound lateralises to the affected ear. Sensorineural loss is damage to hair cells or the nerve, for example noise damage, which injures hair cells, and presbycusis, age related loss that affects high pitch first. Air and bone conduction both fall, Rinne still has air louder than bone, and Weber lateralises to the better ear. This is standard teaching and was not checked against a linked source here, so it is flagged for review.",
@@ -101,6 +102,14 @@ body[data-theme="light"] .hr-bone{fill:#d9c69a;stroke:#7a6a48}
 .hr-device{fill:var(--c-cyt2);stroke:color-mix(in srgb,var(--c-cyt2) 55%,#000);stroke-width:1.2}
 .hr-electrode{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 55%,#000);stroke-width:.7}
 .hr-plaque{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 55%,#000);stroke-width:1}
+.hr-boost{fill:none;stroke:var(--c-fl);stroke-width:3;stroke-linecap:round}
+.hr-prosth{fill:none;stroke:var(--c-good);stroke-width:5;stroke-linecap:round}
+.hr-cuff{fill:var(--c-good);stroke:color-mix(in srgb,var(--c-good) 55%,#000);stroke-width:1}
+.hr-glint{fill:#fff;stroke:none}
+.hr-heal{fill:color-mix(in srgb,var(--c-good) 35%,transparent);stroke:none}
+.hr-halo{fill:color-mix(in srgb,var(--c-bad) 30%,transparent);stroke:none}
+.hr-nervehot{fill:none;stroke:var(--c-good);stroke-width:5;stroke-linecap:round}
+.hr-cap{fill:var(--anatomy-strong);font-size:12px}
 .p-snd{--cc:var(--c-fl)}
 .p-bonep{--cc:var(--c-plt)}
 .p-nervep{--cc:var(--c-plt)}
