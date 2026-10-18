@@ -1,6 +1,6 @@
 /* Wernicke Korsakoff as an animated, working scene (original drawing; Anima styling, Anatomy page shell).
  *   node tools/figures/scenes/wernicke.mjs [--print-model]
- * Static layout here; particles, brain injury and gauges move in wernicke.page.js. Qualitative: no doses, no numeric thresholds. */
+ * Static layout here; supply, gate, brain injury and gauges move in wernicke.page.js. Qualitative: no doses, no numeric thresholds. */
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -48,17 +48,19 @@ const TESTS = [
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<rect class="wk-sub" x="30" y="76" width="240" height="118" rx="12"/>
-<rect class="wk-sub" x="30" y="206" width="240" height="224" rx="12"/>
-<rect class="wk-sub" x="286" y="76" width="360" height="354" rx="12"/>
-<rect class="wk-sub" x="662" y="76" width="268" height="354" rx="12"/>
-<text class="sc-zone" x="46" y="96">WHY IT FALLS</text>
-<text class="sc-zone" x="46" y="226">ENERGY PATHWAYS</text>
-<text class="sc-zone" x="302" y="96">VULNERABLE BRAIN AREAS</text>
-<text class="sc-zone" x="678" y="96">WHAT IT LOOKS LIKE</text>
+<rect class="wk-sub" x="30" y="76" width="210" height="354" rx="12"/>
+<rect class="wk-sub" x="246" y="76" width="300" height="354" rx="12"/>
+<rect class="wk-sub" x="562" y="76" width="368" height="354" rx="12"/>
+<text class="sc-zone" x="46" y="96">SUPPLY</text>
+<text class="sc-zone" x="262" y="96">ENERGY GATE</text>
+<text class="sc-zone" x="578" y="96">BRAIN AND SIGNS</text>
+<path id="thiPipe" class="wk-pipe" d="M85 320 C160 320 250 280 330 250"/>
+<path id="gluPipe" class="wk-pipe" d="M185 332 C220 338 250 346 278 350"/>
+<path id="fuelVessel" class="wk-vessel" d="M508 250 C560 246 590 252 617 268"/>
 <g id="causeG"></g>
-<g id="pathG"></g>
-<g id="brainG"></g>
+<g id="gateG"></g>
+<g id="brainSlot"></g>
+<g id="injG"></g>
 <g id="clinG"></g>
 <g id="parts"></g>
 <g id="over"></g>
@@ -70,19 +72,23 @@ const extraCss = `
 .wk-bottle2{fill:#c98a3d}
 .wk-plate{fill:#d8dee6;stroke:var(--anatomy-mid);stroke-width:1}
 .wk-plate2{fill:var(--anatomy-paper);stroke:var(--anatomy-faint);stroke-width:1}
-.wk-brain{fill:#e9a2b3;stroke:color-mix(in srgb,#e9a2b3 55%,#000);stroke-width:1.2;opacity:.9}
-.wk-brain2{fill:color-mix(in srgb,#e9a2b3 72%,#fff);opacity:.7}
-.wk-node{fill:#b7a1e6;stroke:color-mix(in srgb,#b7a1e6 55%,#000);stroke-width:1}
-.wk-mam{fill:#ffd24a;stroke:color-mix(in srgb,#ffd24a 50%,#000);stroke-width:1}
-.wk-pag{fill:#7fc4e8;stroke:color-mix(in srgb,#7fc4e8 55%,#000);stroke-width:1}
-.wk-aq{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.8}
+.wk-bag{fill:#dfe9f2;stroke:var(--anatomy-mid);stroke-width:1.2}
+.wk-fluid{fill:#7ab8ff;stroke:none}
+.wk-line{fill:none;stroke:var(--anatomy-mid);stroke-width:2;stroke-linecap:round}
+.wk-drop{fill:#e9b84a;stroke:none}
+.wk-sugar{fill:#f4f6f8;stroke:var(--anatomy-mid);stroke-width:1}
+.wk-pipe{fill:none;stroke:var(--anatomy-mid);stroke-width:3;stroke-linecap:round;opacity:.6}
+.wk-vessel{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 42%,var(--anatomy-paper));stroke-width:13;stroke-linecap:round;opacity:.8}
 .wk-halo{fill:#e5484d;opacity:0}
+.wk-spot{fill:#e5484d;stroke:color-mix(in srgb,#e5484d 55%,#000);stroke-width:1}
 .wk-enz{fill:#3ec6b8;stroke:color-mix(in srgb,#3ec6b8 55%,#000);stroke-width:1}
+.wk-cof{fill:#e9b84a;stroke:color-mix(in srgb,#e9b84a 55%,#000);stroke-width:1}
 .wk-gluN{fill:#7ab8ff;stroke:color-mix(in srgb,#7ab8ff 55%,#000);stroke-width:1}
 .wk-tca{fill:#f2d27a;stroke:color-mix(in srgb,#f2d27a 50%,#000);stroke-width:1}
 .wk-box{fill:#c9b8e8;stroke:color-mix(in srgb,#c9b8e8 55%,#000);stroke-width:1}
 .wk-arrow{fill:none;stroke:var(--anatomy-mid);stroke-width:1.6;stroke-linecap:round}
 .wk-atp{fill:var(--c-good);stroke:color-mix(in srgb,var(--c-good) 55%,#000);stroke-width:.8}
+.wk-sup{fill:none;stroke:#7ab8ff;stroke-width:2.4;stroke-linecap:round}
 .wk-eyeW{fill:#f4f6f8;stroke:var(--anatomy-mid);stroke-width:1.2}
 .wk-iris{fill:#5fa8d3;stroke:color-mix(in srgb,#5fa8d3 55%,#000);stroke-width:.8}
 .wk-pupil{fill:#1c2430}
@@ -92,16 +98,17 @@ const extraCss = `
 .wk-book{fill:#7fc4e8;stroke:color-mix(in srgb,#7fc4e8 55%,#000);stroke-width:1}
 .wk-book2{fill:#f4f6f8;stroke:var(--anatomy-mid);stroke-width:.8}
 .wk-x{fill:none;stroke:var(--c-bad);stroke-width:2.4;stroke-linecap:round}
+.wk-cap{fill:var(--anatomy-strong);font-size:12px}
 .p-thi{--cc:#e9b84a}.p-gluP{--cc:#7ab8ff}.p-atp{--cc:#3ddc97}
 .g-thi{fill:#e9b84a}.g-enz{fill:#3ec6b8}.g-atp{fill:var(--c-good)}.g-dmg{fill:var(--c-bad)}.g-tri{fill:#f08a4b}.g-mem{fill:#7fc4e8}
 `;
 
 buildScene({
   id: "wernicke-korsakoff", fig: "Fig 1", title: "Wernicke Korsakoff: thiamine, energy and memory", W, H, body, extraCss,
-  label: "An animated scene of thiamine deficiency. Alcohol use and poor diet lower thiamine. Without thiamine as a cofactor, pyruvate dehydrogenase for the TCA cycle and transketolase for the pentose pathway work poorly, energy falls, and mammillary bodies, thalamus and periaqueductal grey are injured. That gives confusion, ataxia and ophthalmoplegia in Wernicke, then memory loss in Korsakoff. Gauges show thiamine, enzymes, energy, brain injury, the triad and memory. Treatment choices are intravenous thiamine first, glucose alone, or supportive care.",
+  label: "An animated supply line from left to right. Poor supply lowers thiamine. At the energy gate two engines need thiamine as a helper, so without it sugar cannot become fuel. The starved brain shows injury spots, then the Wernicke triad and memory loss. Thiamine first docks the helper and restores fuel, while sugar alone burns the last helper and worsens injury. Gauges show thiamine, enzymes, energy, brain injury, the triad and memory.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "wernicke.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "wernicke.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With IV thiamine",
   sourcesLis: [
     "<strong>Why thiamine matters.</strong> Thiamine (vitamin B1) is converted to thiamine pyrophosphate, a cofactor for pyruvate dehydrogenase and alpha-ketoglutarate dehydrogenase in and around the TCA cycle, and for transketolase in the pentose phosphate pathway. Stores are small, so alcohol use disorder, poor intake, vomiting and malabsorption can deplete it. Energy failure and related injury fall on periventricular structures: mammillary bodies, dorsomedial thalamus, periaqueductal grey, tectum and tissue around the third and fourth ventricles. This is standard teaching in neurology, medicine and biochemistry texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Features and the glucose point.</strong> Wernicke encephalopathy is taught as confusion, ataxia and ophthalmoplegia, though the full triad is often incomplete. Untreated or late disease can leave Korsakoff syndrome, with severe loss of new memory and confabulation. Giving glucose before thiamine can worsen the state because glucose metabolism consumes the remaining thiamine cofactor, so teaching is to give thiamine first or together. The treatment choices here are teaching toggles only.",

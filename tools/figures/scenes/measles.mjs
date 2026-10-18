@@ -48,6 +48,8 @@ const TESTS = [
   [2, 0, "viraemia high · rash widespread · immunity rising · complications present"],
   [2, 1, "viraemia high · rash widespread · immunity rising · complications possible"],
   [1, 2, "viraemia blocked · rash absent · immunity protective · complications unlikely"],
+  [2, 2, "viraemia blocked · rash absent · immunity protective · complications unlikely"],
+  [2, 3, "viraemia high · rash widespread · immunity rising · complications possible"],
 ];
 
 const body = `
@@ -59,8 +61,12 @@ const body = `
 <g id="air"></g>
 <g id="lymph"></g>
 <g id="vessel"></g>
+<path id="seedVessel" class="ms-seed" d="M572 340 C650 336 730 300 786 195" stroke-width="2"/>
 <g id="bodyfig"></g>
-<g id="organs"></g>
+<g id="washBack"></g>
+<g id="lungSlot"></g>
+<g id="brainSlot"></g>
+<g id="washFront"></g>
 <g id="parts"></g>
 <g id="over"></g>
 <g id="panel"></g>`;
@@ -80,6 +86,14 @@ const extraCss = `
 .ms-koplik{fill:#fff;stroke:var(--anatomy-mid);stroke-width:.4}
 .ms-rash{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 55%,#000);stroke-width:.4}
 .ms-drop{fill:var(--c-lymph);stroke:color-mix(in srgb,var(--c-lymph) 50%,#000);stroke-width:.5}
+.ms-seed{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 55%,var(--anatomy-mid));stroke-linecap:round}
+.ms-tube{fill:none;stroke:var(--anatomy-mid);stroke-width:5;stroke-linecap:round}
+.ms-wash{fill:var(--c-bad);stroke:none}
+.ms-focus{fill:var(--c-bad);stroke:none}
+.ms-rashwash{fill:var(--c-bad);stroke:none}
+.ms-shield{fill:color-mix(in srgb,var(--c-good) 30%,transparent);stroke:var(--c-good);stroke-width:1.4}
+.ms-halo{fill:color-mix(in srgb,var(--c-good) 35%,transparent);stroke:var(--c-good);stroke-width:1.2;stroke-dasharray:6 4}
+.ms-cap{fill:var(--anatomy-strong);font-size:12px}
 .p-virus{--cc:#e5484d}.p-ab{--cc:#3ddc97}
 .ms-ab-y{fill:none;stroke:var(--c-good);stroke-width:1.6;stroke-linecap:round}
 .ms-vac{fill:color-mix(in srgb,var(--c-good) 20%,var(--anatomy-paper));stroke:var(--c-good);stroke-width:1}
@@ -90,8 +104,8 @@ buildScene({
   id: "measles-complications", fig: "Fig 1", title: "Measles: prodrome, rash and complications", W, H, body, extraCss,
   label: "An animated airway, lymphoid tissue, bloodstream, skin and organs in measles. The virus enters in respiratory droplets, replicates in respiratory epithelium and lymphoid tissue, then spreads in the blood as viraemia. The prodrome brings fever with cough, coryza and conjunctivitis and Koplik spots on the mucosa, before a maculopapular rash spreads from head to toe. Cellular and antibody responses clear the virus but can erase earlier immune memory, called immune amnesia. Gauges show viraemia, rash, protective immunity, immune amnesia and complications such as pneumonia, encephalitis and the late brain disease SSPE.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses or numbers are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "measles.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "measles.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With vaccine prevention",
   sourcesLis: [
     "<strong>How measles develops.</strong> Measles virus spreads in respiratory droplets and secretions and first replicates in respiratory epithelium and nearby lymphoid tissue. Spread through the blood (viraemia) seeds skin, conjunctiva, respiratory mucosa and other organs during the infectious period. The first illness is a prodrome of fever with cough, coryza (runny nose) and conjunctivitis, with Koplik spots appearing on the buccal mucosa shortly before the rash. A maculopapular rash then appears and spreads downward from the head (cephalocaudal) as cellular immune responses and antibodies clear infected cells; the rash itself reflects that immune attack. Protective immunity after illness is usually lasting, yet measles can delete part of earlier antibody memory to other infections (immune amnesia), so bacterial superinfection becomes more likely for weeks to years. Complications stressed in standard teaching, particularly in young children and in persons with poor cellular immunity, include pneumonia (from the virus itself or secondary bacterial infection), acute encephalitis, and the rare late disease subacute sclerosing panencephalitis (SSPE). This is standard teaching in medicine and infectious disease texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> Vitamin A and supportive care (fluids, fever care, monitoring) lower the risk of severe disease and complications but do not instantly clear the virus. Vaccination before exposure gives protective antigens without disease and prevents the illness and its complications. Treating complications means supporting breathing and treating secondary bacterial pneumonia or encephalitis care in hospital. These are teaching toggles only.",

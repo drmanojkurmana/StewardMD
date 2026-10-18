@@ -13,7 +13,11 @@ const W = 960, H = 610;
  * level = reaction type: 0 ABO acute haemolytic, 1 febrile non-haemolytic,
  * 2 allergic / anaphylactic, 3 TRALI, 4 TACO, 5 delayed haemolytic.
  * drug (treatment): 0 none, 1 stop, 2 stop+fluids, 3 stop+antihistamine/steroid,
- * 4 stop+diuretic. All treatments from 1 on include stopping the transfusion. */
+ * 4 stop with matched care (stopping plus the fitting support for that reaction:
+ * fluids for haemolysis, histamine care for allergy, breathing support for TRALI,
+ * a diuretic for overload, watching for delayed). All treatments from 1 on
+ * include stopping the transfusion. Matched care ties or beats every other
+ * option in each reaction type, so it is the compare With state. */
 const MD = {
   level: { label: "Reaction type", a: [0, 1, 2, 3, 4, 5], names: ["ABO acute haemolytic", "febrile non-haemolytic", "allergic / anaphylactic", "TRALI", "TACO", "delayed haemolytic"], ticks: ["ABO acute", "febrile", "allergic", "TRALI", "TACO", "delayed"], start: 0 },
   drugLabel: "Treatment",
@@ -22,10 +26,10 @@ const MD = {
     { label: "stop the transfusion" },
     { label: "stop transfusion and give fluids" },
     { label: "stop transfusion, antihistamine and steroid" },
-    { label: "stop transfusion and give a diuretic" },
+    { label: "stop transfusion with matched care" },
   ],
   status: "Reaction: {level} · {drug} ·",
-  drugNames: ["no treatment", "transfusion stopped", "transfusion stopped with fluids", "transfusion stopped with antihistamine and steroid", "transfusion stopped with a diuretic"],
+  drugNames: ["no treatment", "transfusion stopped", "transfusion stopped with fluids", "transfusion stopped with antihistamine and steroid", "transfusion stopped with matched care"],
 };
 function modelOf(S, level, drug) {
   const t = S.level.a[level];
@@ -34,10 +38,10 @@ function modelOf(S, level, drug) {
   const H0 = [0.95, 0.05, 0.08, 0.08, 0.04, 0.8][t];
   const L0 = [0.18, 0.05, 0.5, 0.95, 0.95, 0.05][t];
   const C0 = [0.9, 0.3, 0.7, 0.75, 0.9, 0.35][t];
-  const redR = [[0, 0, 0, 0, 0, 0], [0.55, 0.6, 0.6, 0.5, 0.4, 0.1], [0.6, 0.6, 0.6, 0.5, 0.35, 0.15], [0.65, 0.7, 0.85, 0.55, 0.4, 0.25], [0.55, 0.6, 0.6, 0.5, 0.45, 0.1]][drug][t];
-  const redH = [[0, 0, 0, 0, 0, 0], [0.5, 0, 0, 0, 0, 0.05], [0.55, 0, 0, 0, 0, 0.1], [0.5, 0, 0.1, 0, 0, 0.15], [0.45, 0, 0, 0, 0, 0.05]][drug][t];
-  const dL = [[0, 0, 0, 0, 0, 0], [-0.05, 0, -0.1, -0.05, -0.1, 0], [0, 0, -0.05, 0.18, 0.22, 0], [-0.05, 0, -0.35, -0.05, -0.05, 0], [-0.02, 0, -0.08, -0.06, -0.55, 0]][drug][t];
-  const dC = [[0, 0, 0, 0, 0, 0], [-0.2, -0.1, -0.25, -0.1, -0.2, -0.02], [-0.45, -0.15, -0.35, 0.1, 0.2, -0.08], [-0.25, -0.2, -0.5, -0.15, -0.2, -0.05], [0.15, -0.05, -0.2, -0.05, -0.55, 0.05]][drug][t];
+  const redR = [[0, 0, 0, 0, 0, 0], [0.55, 0.6, 0.6, 0.5, 0.4, 0.1], [0.6, 0.6, 0.6, 0.5, 0.35, 0.15], [0.65, 0.7, 0.85, 0.55, 0.4, 0.25], [0.65, 0.7, 0.85, 0.6, 0.5, 0.35]][drug][t];
+  const redH = [[0, 0, 0, 0, 0, 0], [0.5, 0, 0, 0, 0, 0.05], [0.55, 0, 0, 0, 0, 0.1], [0.5, 0, 0.1, 0, 0, 0.15], [0.55, 0, 0.1, 0, 0, 0.15]][drug][t];
+  const dL = [[0, 0, 0, 0, 0, 0], [-0.05, 0, -0.1, -0.05, -0.1, 0], [0, 0, -0.05, 0.18, 0.22, 0], [-0.05, 0, -0.35, -0.05, -0.05, 0], [-0.05, 0, -0.35, -0.1, -0.55, 0]][drug][t];
+  const dC = [[0, 0, 0, 0, 0, 0], [-0.2, -0.1, -0.25, -0.1, -0.2, -0.02], [-0.45, -0.15, -0.35, 0.1, 0.2, -0.08], [-0.25, -0.2, -0.5, -0.15, -0.2, -0.05], [-0.45, -0.2, -0.5, -0.2, -0.55, -0.08]][drug][t];
   const R = cl(R0 * (1 - redR)), H = cl(H0 * (1 - redH)), L = cl(L0 + dL), C = cl(C0 + dC);
   const Sv = cl(0.35 * R + 0.25 * H + 0.2 * L + 0.2 * C);
   const w = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
@@ -47,7 +51,9 @@ function modelOf(S, level, drug) {
 const TESTS = [
   [0, 0, "reaction high · haemolysis marked · lung fluid little · severity severe"],
   [0, 2, "reaction moderate · haemolysis some · lung fluid little · severity moderate"],
+  [0, 4, "reaction moderate · haemolysis some · lung fluid little · severity moderate"],
   [2, 3, "reaction low · haemolysis little · lung fluid little · severity mild"],
+  [2, 4, "reaction low · haemolysis little · lung fluid little · severity mild"],
   [4, 4, "reaction low · haemolysis little · lung fluid some · severity mild"],
   [4, 2, "reaction low · haemolysis little · lung fluid marked · severity moderate"],
   [3, 4, "reaction moderate · haemolysis little · lung fluid marked · severity moderate"],
@@ -89,8 +95,12 @@ const extraCss = `
 .tf-merc{fill:var(--c-bad)}
 .tf-skin{fill:color-mix(in srgb,var(--c-endo) 45%,var(--anatomy-card));stroke:var(--c-endo);stroke-width:1}
 .tf-wheal{fill:#ff5e8a;opacity:.5}
-.tf-heart{fill:color-mix(in srgb,var(--c-rbc) 55%,var(--anatomy-card));stroke:var(--c-rbc);stroke-width:1.2}
-.tf-kid{fill:color-mix(in srgb,var(--c-graft) 60%,var(--anatomy-card));stroke:var(--c-graft);stroke-width:1.1}
+.tf-link{fill:none;stroke:var(--c-rbc);stroke-width:6;stroke-linecap:round;opacity:.6}
+.tf-tubeoff{fill:none;stroke:var(--c-bad);stroke-width:5;stroke-linecap:round}
+.tf-dmg{fill:var(--c-bad)}
+.tf-iv{fill:color-mix(in srgb,var(--c-fl) 30%,var(--anatomy-card));stroke:var(--c-fl);stroke-width:1.2}
+.tf-state{fill:var(--anatomy-strong);font-size:12px}
+.p-block{--cc:var(--c-good)}
 .mk-c{fill:var(--anatomy-card);stroke:var(--c-bad);stroke-width:1.4}.mk-x{fill:none;stroke:var(--c-bad);stroke-width:1.8;stroke-linecap:round}
 .mk-g{fill:none;stroke:var(--c-good);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .clk{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}.clk-h{stroke:var(--anatomy-strong);stroke-width:2;stroke-linecap:round}
@@ -99,16 +109,16 @@ const extraCss = `
 
 buildScene({
   id: "transfusion-reactions", fig: "Fig 1", title: "Blood transfusion reactions", W, H, body, extraCss,
-  label: "An animated set of six transfusion reactions. ABO incompatibility bursts donor red cells through complement. A febrile reaction follows antibody to donor white cells and stored cytokines. An allergic reaction releases histamine to donor plasma proteins. TRALI leaks fluid into alveoli through injured lung capillaries. TACO floods the lungs from volume overload. A delayed reaction removes antibody-coated donor cells in the spleen days later. Gauges show reaction activity, haemolysis, lung fluid and severity. Treatment choices are stopping the transfusion, fluids, antihistamine with steroid, and a diuretic.",
+  label: "An animated set of six transfusion reactions. ABO incompatibility bursts donor red cells through complement. A febrile reaction follows antibody to donor white cells and stored cytokines. An allergic reaction releases histamine to donor plasma proteins. TRALI leaks fluid into alveoli through injured lung capillaries. TACO floods the lungs from volume overload. A delayed reaction removes antibody-coated donor cells in the spleen days later. Gauges show reaction activity, haemolysis, lung fluid and severity. Treatment choices are stopping the transfusion, fluids, antihistamine with steroid, and matched care that pairs stopping with the fitting support for each reaction.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.",
-  scene: { W }, pageJs: readFileSync(join(HERE, "transf.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W }, pageJs: readFileSync(join(HERE, "transf.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With matched care",
   sourcesLis: [
     "<strong>ABO acute haemolytic reaction.</strong> Preformed recipient IgM against donor A or B antigens fixes complement on donor red cells, causing rapid intravascular haemolysis, free haemoglobin, hypotension, disseminated intravascular coagulation and kidney injury. Fever, flank pain and dark urine are classic teaching features. This is standard teaching in transfusion medicine and haematology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Febrile and allergic reactions.</strong> Febrile non-haemolytic reactions follow recipient antibody to donor leucocytes and cytokines that accumulate in stored components, producing fever and rigors without haemolysis. Allergic reactions follow recipient responses to donor plasma proteins, with histamine-mediated urticaria and flushing; severe reactions can progress to anaphylaxis with airway swelling and bronchospasm. This is standard teaching and was not checked against a linked source here, so it is flagged for review.",
     "<strong>TRALI and TACO.</strong> In TRALI (transfusion-related acute lung injury), donor anti-leucocyte antibodies and other mediators activate neutrophils sequestered in lung capillaries; the injured capillary leaks protein-rich fluid into alveoli, causing hypoxaemia without circulatory overload. In TACO (transfusion-associated circulatory overload), transfused volume raises cardiac filling pressures, especially with cardiac or renal susceptibility, causing cardiogenic pulmonary oedema with raised venous pressure and hypertension. Telling them apart matters because a diuretic helps TACO and not TRALI. This is standard teaching and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Delayed haemolytic reaction.</strong> A previously sensitised recipient mounts an anamnestic IgG response to a minor donor red-cell antigen (classically Kidd) days after transfusion. Antibody-coated donor cells are removed extravascularly, mainly in the spleen, with jaundice, fever and an unexpectedly falling haemoglobin. This is standard teaching and was not checked against a linked source here, so it is flagged for review.",
-    "<strong>Treatment ideas shown.</strong> Stopping the transfusion is the first step in any acute reaction and prevents more incompatible or offending component entering. Fluids support the circulation and kidney perfusion in haemolysis but can worsen lung fluid in TRALI and TACO. Antihistamine with steroid acts on allergic and febrile features. A diuretic unloads the circulation in TACO. Adrenaline for anaphylaxis, oxygen and ventilatory support, and component rechecking are essential in practice but are only noted here. They are teaching toggles only.",
+    "<strong>Treatment ideas shown.</strong> Stopping the transfusion is the first step in any acute reaction and prevents more incompatible or offending component entering. Fluids support the circulation and kidney perfusion in haemolysis but can worsen lung fluid in TRALI and TACO. Antihistamine with steroid acts on allergic and febrile features. A diuretic unloads the circulation in TACO. Adrenaline for anaphylaxis, oxygen and ventilatory support, and component rechecking are essential in practice but are only noted here. The matched care toggle combines stopping the transfusion with the fitting support for that reaction type. They are teaching toggles only.",
   ],
   simplified: "Transfusion-associated graft-versus-host disease, post-transfusion purpura, bacterial contamination, iron overload, alloimmunisation without haemolysis, hypotensive reactions, oxygen and ventilation, adrenaline, antipyretics, laboratory rechecking and reporting, and all doses and thresholds are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
 });
