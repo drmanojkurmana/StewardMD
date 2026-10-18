@@ -111,7 +111,8 @@ def commit(scenes, ids):
             [f"tools/figures/specs/{i}.json" for i in ids] + [f"tools/figures/scenes/{s}.{x}" for s in scenes for x in ("mjs", "page.js", "reg.json")]
     sh("git add " + " ".join(paths))
     msg = "Figures: " + ", ".join(ids) + "\n\n" + TRAILER
-    r = sh("git commit -q -m " + json.dumps(msg))
+    mf = TMP + "/q-commit-msg.txt"; open(mf, "w").write(msg + "\n")
+    r = sh("git commit -q -F " + mf)
     log(("committed " if r.returncode == 0 else "COMMIT FAILED ") + f"{len(ids)} scenes: {', '.join(ids)}" + ("" if r.returncode == 0 else " " + r.stderr[:200]))
 
 queue = []
