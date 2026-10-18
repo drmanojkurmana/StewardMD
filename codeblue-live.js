@@ -1120,20 +1120,22 @@
     return false;
   }
 
-  /* One Code Blue on phone and watch: starting or ending a code here tells
-   * the paired watch through the existing WatchBridge sendMessage path
-   * (native-watch.js clinix pattern). Silent no-op on web or without it. */
+  /* One Code Blue on phone and watch: a LIVE code started or ended here tells the paired
+   * watch (WatchBridge.codeBlueNotifyWatch). The watch never auto-starts: it shows a
+   * "Join code started on iPhone?" prompt. Not sent for TRAINING (practice never leaves the
+   * phone) nor for a code joined from the watch (the watch already has it). Silent no-op
+   * in a browser or without the native plugin. */
   function notifyWatch(running) {
     try {
       if (typeof window === "undefined") return false;
       var C = window.Capacitor;
       var p = (C && C.Plugins && C.Plugins.WatchBridge) || null;
-      if (p && p.sendMessage && sess) {
-        p.sendMessage({
-          type: "codeblue_active", running: running === true,
-          mode: sess.mode, training: sess.training === true,
-          elapsed: Math.max(0, Math.floor(nowElapsed()))
+      if (p && p.codeBlueNotifyWatch && sess && sess.training !== true && !watchJoined) {
+        var r = p.codeBlueNotifyWatch({
+          running: running === true, mode: sess.mode,
+          startedAtMs: sess.createdWall
         });
+        if (r && r.catch) r.catch(function () {});
       }
     } catch (e) {}
     try {

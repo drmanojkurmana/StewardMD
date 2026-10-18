@@ -35,6 +35,7 @@ window.Capacitor = {
     audioSetCues: function (a) { window.__watchCalls.push(["audioSetCues", a]); return Promise.resolve(); },
     codeBlueGetState: function () { window.__watchCalls.push(["codeBlueGetState"]); return Promise.resolve(window.__watchState); },
     codeBlueLog: function (a) { window.__watchCalls.push(["codeBlueLog", a]); return Promise.resolve(); },
+    codeBlueNotifyWatch: function (a) { window.__watchCalls.push(["codeBlueNotifyWatch", a]); return Promise.resolve({ sent: true }); },
     openCodeBlue: function () { window.__watchCalls.push(["openCodeBlue"]); return Promise.resolve(); },
     addListener: function (name, cb) { (window.__watchListeners[name] = window.__watchListeners[name] || []).push(cb); return Promise.resolve({ remove: function () { return Promise.resolve(); } }); }
   } }

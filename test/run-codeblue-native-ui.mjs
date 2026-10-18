@@ -68,6 +68,7 @@ async function scenario(width, theme, tag) {
   if (await shockBtn.count()) { await shockBtn.click(); await page.waitForTimeout(300); }
   const logged = await page.evaluate(() => window.__watchCalls.filter((c) => c[0] === "codeBlueLog"));
   ok(logged.some((c) => c[1] && c[1].kind === "shock"), tag + ": tapping Shock calls codeBlueLog " + JSON.stringify(logged));
+  ok(await page.evaluate(() => window.__watchCalls.filter((c) => c[0] === "codeBlueNotifyWatch").length === 0), tag + ": a code joined from the watch is not announced back to it");
   // Native cues scheduled (fake plugin active)
   const cues = await page.evaluate(() => window.__watchCalls.filter((c) => c[0] === "audioSetCues"));
   ok(cues.length > 0, tag + ": native cues scheduled via audioSetCues");
@@ -98,6 +99,26 @@ try {
   await page.waitForTimeout(800);
   ok(await page.evaluate(() => window.CodeBlueLive._rt.view() === "running" && window.CodeBlueLive._rt.watchJoined()), "banner: open({join:true}) opens joined");
   await page.close();
+  // Phone to watch: a LIVE code started here notifies the watch once; END notifies; TRAINING and a joined code never do.
+  const pn = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await pn.goto(HARNESS_URL, { waitUntil: "load" });
+  await pn.evaluate(() => { window.__watchState = { running: false, rosc: false, elapsed: 0, receivedAtMs: Date.now(), mode: "adult", events: [] }; window.__watchCalls.length = 0; window.CodeBlueLive.open({}); });
+  await pn.waitForTimeout(500);
+  await pn.locator('[data-act="start"]').click();
+  await pn.waitForTimeout(600);
+  const startCalls = await pn.evaluate(() => window.__watchCalls.filter((c) => c[0] === "codeBlueNotifyWatch"));
+  ok(startCalls.length === 1 && startCalls[0][1].running === true && startCalls[0][1].mode === "adult" && typeof startCalls[0][1].startedAtMs === "number" && Math.abs(startCalls[0][1].startedAtMs - Date.now()) < 5000, "phone to watch: LIVE start calls codeBlueNotifyWatch once with mode and startedAtMs " + JSON.stringify(startCalls));
+  await pn.evaluate(() => { window.confirm = () => true; });
+  await pn.locator('[data-act="end"]').first().click();
+  await pn.waitForTimeout(600);
+  const endCalls = await pn.evaluate(() => window.__watchCalls.filter((c) => c[0] === "codeBlueNotifyWatch" && c[1].running === false));
+  ok(endCalls.length >= 1, "phone to watch: ending the code notifies the watch (running false)");
+  await pn.evaluate(() => { window.CodeBlueLive.close(); window.__watchCalls.length = 0; window.CodeBlueLive.open({ training: true }); });
+  await pn.waitForTimeout(400);
+  await pn.locator('[data-act="start"]').click();
+  await pn.waitForTimeout(600);
+  ok(await pn.evaluate(() => window.__watchCalls.filter((c) => c[0] === "codeBlueNotifyWatch").length === 0), "phone to watch: TRAINING never notifies the watch");
+  await pn.close();
 } finally {
   await browser.close(); if (serve) serve.kill();
 }
