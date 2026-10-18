@@ -1,14 +1,20 @@
 /* Shared organ art for the animated mechanism scenes. Plain globals, ES2015, no imports.
  * Inlined after bio.lib.js when buildScene gets organs:true, so mk/f1/clamp below are the shared ones.
- * organ(parent, kind, x, y, w, opts) draws a recognisable layered silhouette in local units
- * (100 units wide, see h0 per kind), centred on x,y and w px wide, and returns anchor points.
- * opts: { h (px height, else proportional), flip (mirror left/right), cls (extra class), id }.
- * Returns { g, kind, x, y, w, h, ports } with absolute SVG coords; ports.in/out always exist.
- * Fill is a vertical gradient whose stops derive from --cc (a theme aware palette var, so dark
- * and light both work); edge stroke and landmark lines use color-mix detail classes.
+ * organ(parent, kind, x, y, w, opts) draws real anatomy art (NIH BioArt Source, public domain,
+ * injected as _ORG_ART by buildScene for the kinds the page uses) centred on x,y and w px wide,
+ * and falls back to the existing procedural layered silhouette for kinds without art
+ * (bladder, uterus, thyroid). Art ports are fractions of the art viewBox (see _ORG_FRAC).
+ * opts: { h (px height, else proportional), flip (mirror left/right), cls (extra class), id,
+ *   tint (a CSS colour with opacity, overlaid as an organ-shaped mask for disease states),
+ *   dim (dull the art) }.
+ * Returns { g, kind, x, y, w, h, ports, art } with absolute SVG coords; ports.in/out always exist.
+ * Art keeps its own colours (a faint contrast halo keeps it readable in dark and light themes);
+ * procedural fill is a vertical gradient whose stops derive from --cc (a theme aware palette var,
+ * so dark and light both work); edge stroke and landmark lines use color-mix detail classes.
  * Emits no text, so label font and dash rules are inherited from the calling scene. */
 if (!document.getElementById("orgCss")) { var _orgSt = document.createElement("style"); _orgSt.id = "orgCss";
-  _orgSt.textContent = ".org-b{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1.2;stroke-linejoin:round;stroke-linecap:round}"
+  _orgSt.textContent = ".org-halo{filter:drop-shadow(0 0 1px rgba(0,0,0,.65)) drop-shadow(0 0 1px rgba(255,255,255,.45))}"
+  + ".org-b{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1.2;stroke-linejoin:round;stroke-linecap:round}"
   + ".org-d{fill:none;stroke:color-mix(in srgb,var(--cc) 40%,var(--anatomy-hi));stroke-width:1;stroke-linecap:round;opacity:.8}"
   + ".org-dk{fill:none;stroke:color-mix(in srgb,var(--cc) 62%,#000);stroke-width:1.1;stroke-linecap:round;opacity:.8}"
   + ".org-f{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1;stroke-linejoin:round}"
@@ -165,9 +171,59 @@ function _orgThyroid(g, G) {
   _odot(g, -30, 8, 2, "var(--c-plt)"); _odot(g, 30, -4, 2, "var(--c-plt)");
   return { h0: 90, ports: { in: [16, -34], out: [0, 36], isthmus: [0, 11], lobeR: [22, 0], lobeL: [-22, 0] } };
 }
+/* Real-art store, filled by buildScene after this lib: _ORG_ART[kind] = { vb:[x,y,w,h],
+ * pfx:"oaxxx", body:"<inner svg markup>" }. Ports are fractions of the viewBox, measured
+ * off the slimmed art (see tools/figures/dev/svgslim.py); content fills the frame. */
+var _ORG_ART = {};
+var _ORG_FRAC = {
+  liver: { in: [.45, .95], out: [.46, .04], porta: [.45, .82], gall: [.30, .90], lobe: [.28, .45] },
+  heart: { in: [.30, .01], out: [.48, .01], aorta: [.48, .01], ivc: [.28, .90], apex: [.70, .97], pulm: [.60, .08] },
+  kidney: { in: [.04, .36], out: [.38, .97], vein: [.04, .46], pelvis: [.36, .41], cortex: [.62, .45], hilum: [.28, .41] },
+  lung: { in: [.46, .53], out: [.44, .60], art: [.44, .48], apex: [.24, .30], base: [.24, .87], trachea: [.49, .01], carina: [.49, .50], hilumL: [.42, .58], hilumR: [.56, .58], apexR: [.75, .34], baseR: [.75, .86] },
+  stomach: { in: [.42, .00], out: [.50, .95], fundus: [.38, .10], antrum: [.52, .30], pylorus: [.60, .35] },
+  intestine: { in: [.58, .38], out: [.50, .95], duodenum: [.60, .40], jejunum: [.42, .60], ileum: [.50, .72], cecum: [.60, .82], colon: [.28, .60], rectum: [.50, .92] },
+  brain: { in: [.60, .97], out: [.42, .04], parenchyma: [.42, .42], cereb: [.76, .78], frontal: [.08, .40], stem: [.60, .93], carotid: [.16, .75] },
+  pancreas: { in: [.50, .08], out: [.95, .50], head: [.85, .45], tail: [.06, .45], body: [.50, .45] },
+  spleen: { in: [.38, .78], out: [.52, .78], hilum: [.45, .72], pulp: [.50, .38] }
+};
+/* draw the injected art centred on x,y at w px wide. The art is clipped to its
+ * frame; tint overlays an organ-shaped translucent mask (the art itself, reused
+ * as a mask); dim dulls the art. Art ids are suffixed per instance so two of
+ * the same organ on one page never share gradient, clip or mask ids. */
+function _orgArt(parent, kind, x, y, w, opts, A) {
+  var vb = A.vb, vw = vb[2], vh = vb[3], cx = vb[0] + vw / 2, cy = vb[1] + vh / 2;
+  _orgN++;
+  var uid = "u" + _orgN;
+  var outer = mk("g", { class: "org org-art org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var sx = w / vw, sy = opts.h ? opts.h / vh : sx, fx = opts.flip ? -1 : 1;
+  var inner = mk("g", { transform: "translate(" + f1(-fx * cx * sx) + " " + f1(-cy * sy) + ") scale(" + (fx * sx).toFixed(4) + " " + sy.toFixed(4) + ")" }, outer);
+  var defs = mk("defs", {}, inner);
+  var cid = A.pfx + uid + "-frame";
+  var cp = mk("clipPath", { id: cid }, defs);
+  mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, cp);
+  var art = mk("g", { class: "org-halo", "clip-path": "url(#" + cid + ")" }, inner);
+  var aid = A.pfx + uid + "-art";
+  art.setAttribute("id", aid);
+  art.innerHTML = A.body.split('id="' + A.pfx + '-').join('id="' + A.pfx + uid + '-')
+    .split('url(#' + A.pfx + '-').join('url(#' + A.pfx + uid + '-')
+    .split('href="#' + A.pfx + '-').join('href="#' + A.pfx + uid + '-');
+  if (opts.dim) art.setAttribute("opacity", ".5");
+  if (opts.tint) {
+    var mid = A.pfx + uid + "-tintm";
+    var m = mk("mask", { id: mid, maskUnits: "userSpaceOnUse", x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, defs);
+    mk("use", { href: "#" + aid }, m);
+    var tg = mk("g", { "clip-path": "url(#" + cid + ")" }, inner);
+    mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh), fill: opts.tint, mask: "url(#" + mid + ")" }, tg);
+  }
+  var ports = {}, F = _ORG_FRAC[kind], k;
+  for (k in F) ports[k] = [Math.round((x + fx * (vb[0] + F[k][0] * vw - cx) * sx) * 10) / 10, Math.round((y + (vb[1] + F[k][1] * vh - cy) * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(vh * sy * 10) / 10, ports: ports, art: true };
+}
 /* dispatcher: outer g carries the theme class and gradients, inner g the local drawing scaled to w */
 function organ(parent, kind, x, y, w, opts) {
   opts = opts || {};
+  if (_ORG_FRAC[kind] && _ORG_ART[kind]) return _orgArt(parent, kind, x, y, w, opts, _ORG_ART[kind]);
   var outer = mk("g", { class: "org org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
   if (opts.id) outer.setAttribute("id", opts.id);
   var G = _orgDefs(outer);
@@ -189,6 +245,6 @@ function organ(parent, kind, x, y, w, opts) {
   inner.setAttribute("transform", "scale(" + (fx * sx).toFixed(3) + " " + sy.toFixed(3) + ")");
   var ports = {}, k;
   for (k in r.ports) ports[k] = [Math.round((x + fx * r.ports[k][0] * sx) * 10) / 10, Math.round((y + r.ports[k][1] * sy) * 10) / 10];
-  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(r.h0 * sy * 10) / 10, ports: ports };
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(r.h0 * sy * 10) / 10, ports: ports, art: false };
 }
-organ.kinds = ["liver", "heart", "kidney", "lung", "stomach", "brain", "pancreas", "spleen", "bladder", "uterus", "thyroid"];
+organ.kinds = ["liver", "heart", "kidney", "lung", "stomach", "intestine", "brain", "pancreas", "spleen", "bladder", "uterus", "thyroid"];

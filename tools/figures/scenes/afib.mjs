@@ -66,14 +66,14 @@ const body = `
 <g clip-path="url(#ecgclip)">${grid}</g>
 <path class="af-base" d="M${ECG.x} ${ECG.base}H${ECG.x + ECG.w}"/>
 <text class="sc-zone sc-dim" x="566" y="${ECG.y + 16}">ONE LEAD</text>
-<g id="heart"></g><g id="parts"></g><g id="ecg"></g><g id="brain"></g><g id="over"></g><g id="panel"></g>`;
+<g id="heartSlot"></g><g id="heart"></g><g id="parts"></g><g id="ecg"></g><g id="brainSlot"></g><g id="brain"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "atrial-fibrillation", fig: "Fig 1", title: "Atrial fibrillation: triggers, chaos and stroke risk", W, H, body,
-  label: "An animated heart in atrial fibrillation. Rapid triggers from the pulmonary veins and many small re-entrant circuits make the atria quiver instead of beating in order. The AV node lets only some signals through, so the ventricles beat fast and irregularly. Blood that barely moves in the left atrial appendage can form a clot, and a piece can travel to the brain and cause a stroke. A live ECG shows no clear P waves, a wavy baseline and irregular QRS complexes. Gauges show atrial activity, ventricular rate, irregularity, stasis, clot and stroke risk. Treatment choices include rate control, rhythm control and anticoagulation.",
+  label: "An animated heart in atrial fibrillation. Rapid triggers from the pulmonary veins and many small re-entrant circuits make the atria quiver instead of beating in order. The AV node lets only some signals through, so the ventricles beat fast and irregularly. Blood that barely moves in the left atrial appendage can form a clot, and a piece can travel to the brain and cause a stroke. A live ECG shows no clear P waves, a wavy baseline and irregular QRS complexes. Gauges show atrial activity, ventricular rate, irregularity, stasis, clot and stroke risk. Treatment choices include rate control, rhythm control, anticoagulation, and a combination of these.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, rates in numbers or targets are shown or implied.",
-  scene: { W, H, ECG }, pageJs: readFileSync(join(HERE, "afib.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H, ECG }, pageJs: readFileSync(join(HERE, "afib.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With the combination",
   sourcesLis: [
     "<strong>How atrial fibrillation starts and is sustained.</strong> Rapid ectopic firing, most often from sleeves of atrial muscle around the pulmonary veins, can trigger atrial fibrillation. Once started, it is sustained by many wandering re-entrant wavelets and areas of fibrosis that break the wavefront into chaotic activity, so the atria quiver and do not contract in an organised way. The atrioventricular node is bombarded and conducts only some impulses, at irregular intervals, so the ventricular response is irregularly irregular and often fast. Loss of organised atrial contraction and slow, swirling flow in the left atrial appendage favour stasis and clot formation; a clot fragment can embolise to the brain and cause a stroke. Paroxysmal episodes come and go, persistent episodes last and usually need cardioversion to stop, and permanent atrial fibrillation is accepted and no longer chased. This is standard teaching in medicine and cardiology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> Rate control slows conduction through the AV node so the ventricles slow, but the atria keep fibrillating. Rhythm control with an antiarrhythmic drug or cardioversion tries to restore and hold sinus rhythm. Anticoagulation lowers the chance that a clot forms and embolises, so it lowers stroke risk without changing the rhythm itself. The combination pairs rhythm or rate control with anticoagulation. These are teaching toggles only.",
@@ -85,10 +85,9 @@ body{--c-ch:#6b3a4a;--c-flash:#ff9a7a}body[data-theme="light"]{--c-ch:#e9b8c2;--
 .af-grid{stroke:var(--anatomy-faint);stroke-width:.5;fill:none;stroke-opacity:.35}.af-grid.major{stroke-opacity:.7}
 .af-base{stroke:var(--anatomy-mid);stroke-width:.8;stroke-dasharray:3 4;fill:none}
 .af-trace{fill:none;stroke:var(--c-good);stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
-.af-ch{fill:color-mix(in srgb,var(--c-flash) calc(var(--act,0) * 100%),var(--c-ch));stroke:var(--anatomy-mid);stroke-width:1.3}
-.af-app{fill:color-mix(in srgb,var(--c-flash) calc(var(--act,0) * 70%),var(--c-ch));stroke:var(--anatomy-mid);stroke-width:1.2}
-.af-septum{stroke:var(--anatomy-mid);stroke-width:1.2;fill:none}
-.af-vein{fill:none;stroke:var(--anatomy-mid);stroke-width:5;stroke-linecap:round}
+.af-zA{fill:color-mix(in srgb,var(--c-flash) calc(var(--act,0) * 100%),var(--c-ch));stroke:none;fill-opacity:.5}
+.af-zV{fill:color-mix(in srgb,var(--c-flash) calc(var(--act,0) * 100%),var(--c-ch));stroke:none;fill-opacity:.55}
+.af-cap{fill:var(--anatomy-strong);font-size:12px}
 .af-vein2{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 35%,var(--anatomy-paper));stroke-width:2.6;stroke-linecap:round}
 .af-node{fill:#f2b84a;stroke:color-mix(in srgb,#f2b84a 55%,#000);stroke-width:1}
 .af-wave{fill:var(--c-neut);stroke:color-mix(in srgb,var(--c-neut) 55%,#000);stroke-width:.6}
@@ -98,7 +97,7 @@ body{--c-ch:#6b3a4a;--c-flash:#ff9a7a}body[data-theme="light"]{--c-ch:#e9b8c2;--
 .af-vessel{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-linecap:round}
 .af-ok{fill:none;stroke:var(--c-good);stroke-width:2.2;stroke-linecap:round;stroke-dasharray:4 5}
 .af-x{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.6}.af-xp{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-linecap:round}
-.p-emb{--cc:var(--c-bad)}.p-trig{--cc:var(--c-neut)}
+.p-emb{--cc:var(--c-bad)}.p-trig{--cc:var(--c-neut)}.p-rate{--cc:#f2b84a}.p-rhy{--cc:var(--c-good)}.p-coag{--cc:var(--c-ab)}.p-cond{--cc:var(--c-neut)}
 .dr-g-fill.g-irreg{fill:var(--c-neut)}
 `,
 });

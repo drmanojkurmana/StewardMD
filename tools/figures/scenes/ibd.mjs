@@ -88,10 +88,13 @@ const extraCss = `
 .ibd-fiss{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.1}
 .ibd-fist{fill:none;stroke:var(--c-bad);stroke-width:5;stroke-linecap:round}
 .ibd-abs{fill:color-mix(in srgb,var(--c-bad) 55%,var(--anatomy-paper));stroke:var(--c-bad);stroke-width:1.2}
+.ibd-cap{fill:var(--anatomy-strong);font-size:12px}
 .cl-ent{--cc:#e9c07a}
 .p-tnfp{--cc:var(--c-cyt)}
 .p-bactp{--cc:var(--c-bac)}
 .p-asap{--cc:#ffd24a}
+.p-sterp{--cc:#7fc8a9}
+.p-biodp{--cc:#b78fe8}
 .dr-g-fill.g-inf{fill:var(--c-bad)}
 .dr-g-fill.g-ulc{fill:#ff9a3d}
 .dr-g-fill.g-wall{fill:var(--c-cyt)}
@@ -103,7 +106,7 @@ buildScene({
   label: "An animated map and bowel wall in inflammatory bowel disease. The pattern slider shows Crohn disease with patchy skip lesions, deep fissures and a fistula, ulcerative colitis with continuous inflammation spreading up from the rectum and shallow mucosal ulcers, and a severe flare with widespread deep inflammation. A broken barrier lets microbes meet immune cells, which release cytokines and recruit more cells. Gauges show inflammation, ulceration, wall damage and symptoms. Treatment choices are an aminosalicylate, a corticosteroid and a biologic.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
   scene: { W, H }, pageJs: readFileSync(join(HERE, "ibd.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  withoutLabel: "Without treatment", withLabel: "With biologic",
   sourcesLis: [
     "<strong>Two patterns of one group of diseases.</strong> Inflammatory bowel disease is chronic immune mediated inflammation of the gut, thought to arise from a disturbed barrier, gut microbes and a dysregulated immune response in a susceptible person. Crohn disease can affect any part of the gut, most often the terminal ileum and colon, in patchy skip lesions with healthy bowel between. Its inflammation goes through the full wall, so deep fissures, strictures, fistulae and abscesses can form. Ulcerative colitis affects the colon only, starts in the rectum and spreads upward without gaps, and its inflammation stays mainly in the mucosa, giving shallow ulcers, bleeding and urgency. A severe flare is widespread active inflammation with extensive ulceration and systemic upset in either pattern. This is standard teaching in medicine, gastroenterology and pathology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> An aminosalicylate calms the mucosal surface and helps most in ulcerative colitis, with less effect on deep Crohn inflammation. A corticosteroid broadly suppresses immune activity and settles a flare, but does not heal the wall fully and is not a long term plan. A biologic that blocks tumour necrosis factor neutralises a key cytokine, so immune recruitment, ulceration and transmural damage fall in both patterns. These are teaching toggles only and name no individual drug or dose.",

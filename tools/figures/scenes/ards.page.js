@@ -1,5 +1,14 @@
 /* ARDS scene: injured alveolar capillary barrier, protein rich oedema, hyaline membranes, neutrophils, shunt, stiff lung and fibrosis. */
-const layers = { cells: $("cellsG"), coll: $("collG"), rbcs: $("rbcsG"), parts: $("parts"), over: $("over"), panel: $("panel"), surf: $("surfG"), fluid: $("fluidEl"), hyal: $("hyal"), air: $("alvAir"), outer: $("alvOuter"), mini: $("miniLung"), cap: $("capLumen") };
+const layers = { cells: $("cellsG"), coll: $("collG"), rbcs: $("rbcsG"), parts: $("parts"), over: $("over"), panel: $("panel"), surf: $("surfG"), fluid: $("fluidEl"), hyal: $("hyal"), air: $("alvAir"), outer: $("alvOuter"), lungSlot: $("lungSlot"), glow: $("lungGlow"), shunt: $("shuntVessel"), nodeTop: $("nodeTop"), nodeBot: $("nodeBot"), icon: $("injIcon"), arrTop: $("arrTop"), arrBot: $("arrBot"), gateTop: $("gateTop"), gateBot: $("gateBot") };
+/* ---- whole lung beside the unit, from the shared organ art ---- */
+let lungO = null;
+function initOrgans() { lungO = organ(layers.lungSlot, "lung", 800, 210, 110, {}); }
+function capText(d, ph) {
+  if (d === 1) return ph === 2 ? "Gentle small breaths. Less further injury, but scarring keeps the lung stiff." : "Gentle small breaths. Less stretch injury, so healing is calmer.";
+  if (d === 2) return "Lying prone. Air and blood match better, so oxygen rises.";
+  if (d === 3) return ph === 2 ? "Treating the cause. The injury settles but scarring keeps the lung stiff." : "Treating the cause. The injury settles, so leak and fluid drain away.";
+  return ph === 2 ? "No treatment. Scarred air sacs stay stiff and oxygen stays low." : "No treatment. Fluid floods the air sac and blood leaves low in oxygen.";
+}
 /* ---- epithelial cells around the alveolus ---- */
 const epi = [];
 function initEpi() { for (let i = 0; i < 16; i++) { const t = (i / 16) * 6.283, g = cell(layers.cells, { cls: i % 4 === 0 ? "type2" : "epi", r: i % 4 === 0 ? 10 : 8, nuc: 0.4, seed: i + 3, wob: 0.1 }); epi.push({ g, t, type2: i % 4 === 0 }); } }
@@ -13,11 +22,14 @@ function initSurf() { for (let i = 0; i < 14; i++) { const t = (i / 14) * 6.283;
 const colls = [];
 function initColl() { for (let i = 0; i < 12; i++) { const t = (i / 12) * 6.283, x = 480 + Math.cos(t) * 155, y = 225 + Math.sin(t) * 101; const p = mk("path", { class: "ards-coll", d: "M" + f1(x - 12) + " " + f1(y) + "Q" + f1(x) + " " + f1(y - 6) + " " + f1(x + 12) + " " + f1(y) }, layers.coll); colls.push(p); } }
 const fibros = Array.from({ length: 5 }, (_, i) => { const g = cell(layers.cells, { cls: "fibro", r: 9, nuc: 0.4, seed: i + 30, wob: 0.14 }); const t = 0.6 + i * 1.1; return { g, x: 480 + Math.cos(t) * 155, y: 225 + Math.sin(t) * 101 }; });
+/* ---- overstretch flashes on the alveolar wall: bright without gentle breaths, gone with them ---- */
+const flashes = [];
+function initFlash() { [-0.5, 0.6, 3.3].forEach((a) => { const e = mk("path", { class: "ards-stretch", d: "M-13 0Q0 -9 13 0" }, layers.parts); flashes.push({ e, a }); }); }
 /* ---- neutrophils that leave the capillary for the alveolus ---- */
 const neus = Array.from({ length: 6 }, (_, i) => ({ g: cell(layers.cells, { cls: "neut", r: 10, nuc: 0.55, nucCls: "multi", seed: i + 50, wob: 0.14 }), x: 360 + i * 40, y: 342, tx: 390 + i * 32, ty: 245 + (i % 3) * 22, ph: i * 1.3 }));
 /* ---- red cells in the capillary and in shunted blood ---- */
 const rbcs = Array.from({ length: 14 }, (_, i) => { const g = mk("g", { class: "cl cl-rbc" }, layers.rbcs); mk("ellipse", { class: "cl-b", rx: 8, ry: 4.8 }, g); mk("ellipse", { class: "cl-s", rx: 3, ry: 1.5 }, g); return { g, x: 330 + i * 22, y: rnd(-8, 8), v: rnd(0.8, 1.2) }; });
-const shuntRbcs = Array.from({ length: 6 }, (_, i) => { const e = mk("ellipse", { rx: 7, ry: 4.2, fill: "#4a3560", stroke: "#2c1e3e", "stroke-width": 0.7 }, layers.rbcs); return { e, x: 728 + i * 28, y: 304 + rnd(-5, 5) }; });
+const shuntRbcs = Array.from({ length: 6 }, (_, i) => { const e = mk("ellipse", { rx: 7, ry: 4.2, fill: "#4a3560", stroke: "#2c1e3e", "stroke-width": 0.7 }, layers.rbcs); return { e, x: 756 + i * 27, y: 298 + rnd(-5, 5) }; });
 /* ---- particle pools ---- */
 function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0 }; }); }
 const prots = pool(28, () => mk("circle", { class: "sc-p p-prot", r: 2.6 }, layers.parts));
@@ -26,8 +38,9 @@ const injs = pool(12, () => mk("path", { class: "sc-p p-inj", d: "M0 -3L3 0L0 3L
 const freeP = (pl) => pl.find((p) => !p.on);
 function emitP(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
 function killP(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
-/* ---- labels and gauges ---- */
+/* ---- labels, caption and gauges ---- */
 const gg = {};
+let capEl = null, capDrug = -1, capPhase = -1;
 function initPanel() {
   const P = layers.panel, y0 = 478, h = 70, xs = [100, 240, 380, 520, 660, 800];
   mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: 912, height: 142, rx: 14 }, P);
@@ -47,21 +60,40 @@ function initPanel() {
   pill(ox, "Surfactant loss", 450, 295, 380, 382, "Surfactant loss: surfactant is washed out and not replaced when type II cells are injured, so alveoli collapse more easily and the lung stiffens.");
   pill(ox, "Capillary", 480, 342, 550, 382, "Pulmonary capillary: blood flowing past the alveolus. When the alveolus is flooded this blood leaves still oxygen poor.");
   pill(ox, "Endothelium", 600, 328, 680, 382, "Capillary endothelium: the vessel lining. When it is injured the barrier leaks protein rich fluid toward the alveolus.");
+  capEl = mk("text", { class: "ards-capline", x: 30, y: 420 }, ox); capEl.textContent = capText(0, 0);
 }
 const sm = { Leak: 0.8, Fluid: 0.8, Neut: 0.8, Fib: 0.1, Sh: 0.8, Ox: 0.2, Stiff: 0.7, Comp: 0.3, Hyal: 0.8, Surf: 0.2, prone: 0, lpv: 0, cause: 0, phase: 0 };
 const acc = { prot: 0, air: 0, inj: 0 };
-function init() { initEpi(); initEndo(); initSurf(); initColl(); initPanel(); }
+function init() { initOrgans(); initEpi(); initEndo(); initSurf(); initColl(); initFlash(); initPanel(); }
 function step(dt, m) {
   const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.55);
   ["Leak", "Fluid", "Neut", "Fib", "Sh", "Ox", "Stiff", "Comp", "Hyal", "Surf"].forEach((n) => { sm[n] = lerp(sm[n], m[n], k2); });
   sm.prone = lerp(sm.prone, m.prone, k1); sm.lpv = lerp(sm.lpv, m.lpv, k1); sm.cause = lerp(sm.cause, m.cause, k1); sm.phase = m.phase;
   const breath = 0.5 - 0.5 * Math.cos(tm * 0.0016), amp = sm.Comp * (1 - 0.4 * sm.lpv);
-  const orx = 165 * (1 + 0.05 * breath * amp), ory = 110 * (1 + 0.07 * breath * amp), arx = 145 * (1 + 0.05 * breath * amp), ary = 92 * (1 + 0.07 * breath * amp);
+  const orx = 165 * (1 + 0.05 * breath * amp), ory = 110 * (1 + 0.07 * breath * amp), arx = 145 * (1 + 0.05 * breath * amp + 0.03 * sm.prone), ary = 92 * (1 + 0.07 * breath * amp + 0.03 * sm.prone);
   layers.outer.setAttribute("rx", f1(orx)); layers.outer.setAttribute("ry", f1(ory));
   layers.air.setAttribute("rx", f1(arx)); layers.air.setAttribute("ry", f1(ary));
   layers.hyal.setAttribute("rx", f1(arx - 9)); layers.hyal.setAttribute("ry", f1(ary - 8)); layers.hyal.setAttribute("opacity", (0.85 * sm.Hyal).toFixed(2));
   layers.fluid.setAttribute("opacity", (0.6 * sm.Fluid).toFixed(2)); layers.fluid.setAttribute("ry", f1(14 + 26 * sm.Fluid)); layers.fluid.setAttribute("cy", f1(296 - 18 * sm.Fluid));
-  layers.mini.setAttribute("rx", f1(58 * (1 + 0.09 * breath * amp))); layers.mini.setAttribute("ry", f1(42 * (1 + 0.11 * breath * amp)));
+  /* whole lung breathes with the unit, shallower on gentle breaths, and glows as oxygen rises */
+  const ls = 1 + 0.09 * breath * amp + 0.02 * sm.prone;
+  layers.lungSlot.setAttribute("transform", "translate(800 210) scale(" + ls.toFixed(3) + ") translate(-800 -210)");
+  layers.glow.setAttribute("opacity", (0.55 * sm.Ox).toFixed(2));
+  /* shunt vessel narrows and pales as shunt falls, most of all when prone */
+  const vh = 6 + 22 * sm.Sh;
+  layers.shunt.setAttribute("height", f1(vh)); layers.shunt.setAttribute("y", f1(298 - vh / 2));
+  layers.shunt.setAttribute("opacity", (0.35 + 0.65 * sm.Sh).toFixed(2));
+  /* treating the cause gates the injury paths shut and the injury sources fade */
+  const dim = (1 - 0.65 * sm.cause).toFixed(2);
+  [layers.nodeTop, layers.nodeBot, layers.icon, layers.arrTop, layers.arrBot].forEach((e) => e.setAttribute("opacity", dim));
+  layers.gateTop.setAttribute("opacity", sm.cause.toFixed(2)); layers.gateBot.setAttribute("opacity", sm.cause.toFixed(2));
+  /* overstretch flashes blink on the wall with big breaths and fade on gentle breaths */
+  flashes.forEach((f, i) => {
+    const x = 480 + Math.cos(f.a) * arx, y = 225 + Math.sin(f.a) * ary;
+    const op = breath * (0.2 + 0.8 * sm.Leak) * (1 - 0.8 * sm.lpv) * (0.55 + 0.45 * Math.sin(tm / 160 + i * 2));
+    f.e.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ") rotate(" + f1(f.a * 57.3 + 90) + ")");
+    f.e.setAttribute("opacity", clamp(op, 0, 1).toFixed(2));
+  });
   /* epithelium: gaps when damaged, type II growth in the proliferative phase */
   epi.forEach((e) => { const x = 480 + Math.cos(e.t) * arx, y = 225 + Math.sin(e.t) * ary; const dmg = sm.phase === 0 ? 0.62 : sm.phase === 1 ? (e.type2 ? 1.35 : 0.95) : 0.85; place(e.g, x, y, 0, dmg); e.g.style.opacity = sm.phase === 0 ? "0.75" : "1"; });
   endo.forEach((e) => place(e.g, e.x, e.y, 0, 1 - 0.22 * sm.Leak));
@@ -73,18 +105,20 @@ function step(dt, m) {
   neus.forEach((n, i) => { const on = i < nn, f = on ? clamp((sm.Neut * neus.length - i)) : 0; const cx = lerp(n.x, n.tx, 0.5 + 0.5 * Math.sin(tm / 1400 + n.ph)), cy = lerp(n.y, n.ty, on ? 0.55 + 0.2 * Math.sin(tm / 900 + n.ph) : 0); place(n.g, clamp(cx, 350, 610), clamp(cy, 190, 345), Math.sin(tm / 400 + i) * 10, 0.4 + 0.6 * f); n.g.style.opacity = on ? "1" : "0"; });
   /* red cells: flow slows and colour stays dark when shunt is high */
   rbcs.forEach((r) => { r.x += r.v * 52 * (0.35 + 0.65 * sm.Ox) * dt; if (r.x > 634) { r.x = 326; r.y = rnd(-8, 8); } place(r.g, clamp(r.x, 326, 634), clamp(342 + r.y, 332, 352), 0, 1); r.g.style.opacity = "1"; });
-  shuntRbcs.forEach((r, i) => { r.x += 34 * dt; if (r.x > 904) r.x = 724; r.e.setAttribute("cx", f1(clamp(r.x, 724, 904))); r.e.setAttribute("cy", f1(clamp(r.y, 294, 314))); r.e.setAttribute("opacity", (0.25 + 0.75 * sm.Sh).toFixed(2)); });
+  shuntRbcs.forEach((r) => { r.x += 34 * dt; if (r.x > 896) r.x = 752; r.e.setAttribute("cx", f1(clamp(r.x, 752, 896))); r.e.setAttribute("cy", f1(clamp(r.y, 292, 304))); r.e.setAttribute("opacity", (0.25 + 0.75 * sm.Sh).toFixed(2)); });
   /* protein leak: dots rise from the capillary into the alveolus */
   acc.prot += dt * sm.Leak * 11; while (acc.prot >= 1) { acc.prot--; const p = freeP(prots); if (p) emitP(p, rnd(370, 590), 322, rnd(-5, 5), -rnd(18, 30), 0); }
   prots.forEach((p) => { if (!p.on) return; p.t += dt; p.x = clamp(p.x + p.vx * dt, 352, 608); p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.y < 195 || p.t > 4) killP(p); });
-  /* air: enters down the airway, less when the lung is stiff, steadier with lung-protective ventilation */
+  /* air: enters down the airway, less when the lung is stiff, smaller puffs on gentle breaths */
   acc.air += dt * (2 + 7 * sm.Comp) * (sm.lpv ? 0.8 : 1); while (acc.air >= 1) { acc.air--; const p = freeP(airs); if (p) emitP(p, 480 + rnd(-5, 5), 76, rnd(-3, 3), rnd(30, 44), 0); }
-  airs.forEach((p) => { if (!p.on) return; p.t += dt; p.x = clamp(p.x + p.vx * dt + Math.sin(tm / 300 + p.y) * 0.25, 360, 600); p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.y > 285 || p.t > 4) killP(p); });
+  const puff = 1 - 0.3 * sm.lpv;
+  airs.forEach((p) => { if (!p.on) return; p.t += dt; p.x = clamp(p.x + p.vx * dt + Math.sin(tm / 300 + p.y) * 0.25, 360, 600); p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") scale(" + puff.toFixed(2) + ")"); if (p.y > 285 || p.t > 4) killP(p); });
   /* injury signals from the two injury nodes toward the barrier */
   acc.inj += dt * (0.6 + 3.4 * sm.Leak); while (acc.inj >= 1) { acc.inj--; const p = freeP(injs), top = Math.random() < 0.5; if (p) emitP(p, 143, top ? 145 : 285, rnd(26, 36), top ? rnd(6, 12) : rnd(0, 6), top ? 0 : 1); }
   injs.forEach((p) => { if (!p.on) return; p.t += dt; p.x = clamp(p.x + p.vx * dt, 40, 330); p.y = clamp(p.y + p.vy * dt, 90, 320); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(tm / 6) + ")"); if (p.x > 325 || p.t > 6) killP(p); });
   /* gauges */
   gg.oed.set(sm.Fluid, wordOf(sm.Fluid, 0.35, 0.65, ["little", "some", "marked"])); gg.neut.set(sm.Neut, wordOf(sm.Neut, 0.3, 0.6, ["few", "some", "many"])); gg.shunt.set(sm.Sh, wordOf(sm.Sh, 0.3, 0.6, ["low", "raised", "high"]));
   gg.oxy.set(sm.Ox, wordOf(sm.Ox, 0.25, 0.55, ["very low", "low", "near normal"])); gg.stiff.set(sm.Stiff, wordOf(sm.Stiff, 0.45, 0.7, ["low", "raised", "high"])); gg.fib.set(sm.Fib, wordOf(sm.Fib, 0.25, 0.6, ["low", "some", "marked"]));
+  if (drug !== capDrug || m.phase !== capPhase) { capDrug = drug; capPhase = m.phase; const t = capText(drug, m.phase); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 run({ init, step });

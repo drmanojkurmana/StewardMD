@@ -2,7 +2,7 @@
 const LY = { mapSeg: $("mapSeg"), wallFx: $("wallFx"), cellsG: $("cellsG"), parts: $("parts"), over: $("over"), panel: $("panel"), inflam: $("inflam") };
 function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0 }; }); }
 const free = (pl) => pl.find((p) => !p.on);
-function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
+function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.st = 0; p.e.setAttribute("opacity", "1"); }
 function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
 
 /* ---- disease map segments: patchy, continuous and widespread ---- */
@@ -31,6 +31,17 @@ const lumenBugs = Array.from({ length: 9 }, (_, i) => { const g = mk("g", { clas
 const tnfs = pool(38, () => mk("circle", { class: "sc-p p-tnfp", r: 2.4 }, LY.parts));
 const bacts = pool(20, () => mk("ellipse", { class: "sc-p p-bactp", rx: 4, ry: 2.2 }, LY.parts));
 const asas = pool(18, () => mk("circle", { class: "sc-p p-asap", r: 2.6 }, LY.parts));
+const sterD = pool(14, () => mk("circle", { class: "sc-p p-sterp", r: 2.6 }, LY.parts));
+const bioD = pool(16, () => mk("circle", { class: "sc-p p-biodp", r: 3 }, LY.parts));
+
+/* ---- in stage caption, changed with the state ---- */
+let capEl = null, capDrug = -1;
+function capText(d, l) {
+  if (d === 1) return "Aminosalicylate coats the surface. Shallow ulcers heal but deep damage lingers.";
+  if (d === 2) return "Steroid switches the immune cells off. Inflammation fades fast but the wall heals slowly.";
+  if (d === 3) return "Biologic traps the TNF signal. Recruitment falls and the wall heals.";
+  return l === 2 ? "No treatment. Severe flare: inflammation spreads and the wall breaks down." : "No treatment. Immune attack continues and ulcers stay open.";
+}
 
 /* ---- labels and gauges ---- */
 let asaPill, sterPill, bioPill;
@@ -53,6 +64,7 @@ function initPanel() {
   asaPill = pill(ox, "Aminosalicylate", 760, 268, 855, 162, "An aminosalicylate calms the mucosal surface. It helps most in ulcerative colitis and does little for deep transmural Crohn inflammation.");
   sterPill = pill(ox, "Steroid", 760, 268, 855, 162, "A corticosteroid broadly suppresses the immune cells and cytokines. It settles a flare quickly but heals the wall less fully.");
   bioPill = pill(ox, "Biologic", 760, 268, 855, 162, "A biologic blocks tumour necrosis factor, a key cytokine. Immune recruitment, ulceration and deep wall damage fall in both patterns.");
+  capEl = mk("text", { class: "ibd-cap", x: 30, y: 30 }, ox); capEl.textContent = capText(0, 0);
 }
 const sm = { I: 0.7, U: 0.6, D: 0.8, Sym: 0.7, Fist: 0.6, crohnP: 1, ucP: 0, flareP: 0, asa: 0, ster: 0, bio: 0 };
 const acc = { tnf: 0, bact: 0, asa: 0 };
@@ -75,14 +87,33 @@ function step(dt, m) {
   fistG.setAttribute("opacity", sm.Fist.toFixed(2));
   /* epithelial row thins as ulceration rises */
   epiCells.forEach((c, i) => { place(c.g, c.x, c.y + Math.sin(tm / 900 + i) * 1.1, 0, 1 - 0.45 * sm.U); c.g.style.opacity = (1 - 0.55 * sm.U).toFixed(2); });
-  /* immune cells swell with activity */
-  macs.forEach((c, i) => place(c.g, c.x + Math.sin(tm / 1400 + c.ph) * 3, c.y + Math.cos(tm / 1600 + c.ph) * 2, Math.sin(tm / 2400 + c.ph) * 6, 1 + 0.22 * sm.I * Math.sin(tm / 300 + i)));
-  tcells.forEach((c) => place(c.g, c.x + Math.sin(tm / 1200 + c.ph) * 3, c.y, 0, 1 + 0.18 * sm.I));
-  neus.forEach((n, i) => { const on = sm.I > 0.28 + i * 0.14; n.g.style.opacity = on ? (0.3 + 0.7 * sm.I).toFixed(2) : "0"; place(n.g, n.x + Math.sin(tm / 700 + n.ph) * 5, 268 + Math.sin(tm / 600 + n.ph) * 5 + (1 - sm.I) * 34, Math.sin(tm / 400 + i) * 14, 0.5 + 0.6 * sm.I); });
+  /* immune cells swell with activity, and visibly shrink as steroid switches them off */
+  const calm = 1 - 0.38 * sm.ster;
+  macs.forEach((c, i) => { place(c.g, c.x + Math.sin(tm / 1400 + c.ph) * 3, c.y + Math.cos(tm / 1600 + c.ph) * 2, Math.sin(tm / 2400 + c.ph) * 6, (1 + 0.22 * sm.I * Math.sin(tm / 300 + i)) * calm); c.g.style.opacity = (1 - 0.45 * sm.ster).toFixed(2); });
+  tcells.forEach((c) => { place(c.g, c.x + Math.sin(tm / 1200 + c.ph) * 3, c.y, 0, (1 + 0.18 * sm.I) * calm); c.g.style.opacity = (1 - 0.45 * sm.ster).toFixed(2); });
+  neus.forEach((n, i) => { const on = sm.I * (1 - 0.55 * sm.ster) > 0.28 + i * 0.14; n.g.style.opacity = on ? (0.3 + 0.7 * sm.I).toFixed(2) : "0"; place(n.g, n.x + Math.sin(tm / 700 + n.ph) * 5, 268 + Math.sin(tm / 600 + n.ph) * 5 + (1 - sm.I) * 34, Math.sin(tm / 400 + i) * 14, (0.5 + 0.6 * sm.I) * calm); });
   lumenBugs.forEach((b, i) => { place(b.g, b.x + Math.sin(tm / 800 + b.ph) * 8, b.y, Math.sin(tm / 500 + b.ph) * 22, 1); b.g.style.opacity = (0.45 + 0.55 * sm.I).toFixed(2); });
   /* cytokines from macrophages spread through the wall */
   acc.tnf += dt * sm.I * 13; while (acc.tnf >= 1) { acc.tnf--; const p = free(tnfs), s = pick(macs); if (p) emit(p, s.x + rnd(-10, 10), s.y + rnd(-8, 8), rnd(-16, 22), rnd(-8, 18), 0); }
   tnfs.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.t > 3.4) kill(p); });
+  /* steroid dots land on immune cells and sit on them while the cells shrink */
+  if (sm.ster > 0.5 && Math.random() < dt * 7) { const p = free(sterD); if (p) { const c = pick(macs.concat(tcells).concat(neus)); p.tg = c; emit(p, c.x + rnd(-30, 30), 192, rnd(-6, 6), rnd(25, 40), 0); } }
+  sterD.forEach((p) => { if (!p.on) return; p.t += dt;
+    if (p.st === 0) { p.x += p.vx * dt; p.y += p.vy * dt; place(p.e, p.x, p.y, 0, 1);
+      const c = p.tg;
+      if (c && Math.hypot(p.x - c.x, p.y - c.y) < 15) { p.st = 1; p.t = 0; p.x = c.x + rnd(-8, 8); p.y = c.y + rnd(-6, 6); }
+      else if (p.y > 345 || p.t > 4) kill(p); }
+    else { place(p.e, p.x, p.y, 0, 1); p.e.setAttribute("opacity", clamp(1 - p.t / 2.5).toFixed(2)); if (p.t > 2.5) kill(p); } });
+  /* biologic dots hunt TNF dots, trap them on contact, then fade */
+  if (sm.bio > 0.5 && Math.random() < dt * 6) { const p = free(bioD); if (p) emit(p, rnd(70, 880), rnd(228, 260), 0, 0, 0); }
+  bioD.forEach((p) => { if (!p.on) return; p.t += dt;
+    if (p.st === 0) { let best = null, bd = 150;
+      tnfs.forEach((q) => { if (!q.on) return; const d = Math.hypot(q.x - p.x, q.y - p.y); if (d < bd) { bd = d; best = q; } });
+      if (best) { const d = Math.max(1, bd); p.x += (best.x - p.x) / d * 95 * dt; p.y += (best.y - p.y) / d * 95 * dt;
+        if (bd < 8) { kill(best); p.st = 1; p.t = 0; } }
+      else { p.y += 12 * dt; p.x += Math.sin(tm / 500 + p.y) * 4 * dt; if (p.y > 345 || p.t > 4) kill(p); }
+      place(p.e, p.x, p.y, 0, 1); }
+    else { place(p.e, p.x, p.y, 0, 1); p.e.setAttribute("opacity", clamp(1 - p.t / 1.5).toFixed(2)); if (p.t > 1.5) kill(p); } });
   /* microbes cross the broken barrier into the wall */
   acc.bact += dt * sm.I * sm.U * 7; while (acc.bact >= 1) { acc.bact--; const p = free(bacts); if (p) emit(p, rnd(70, 880), 214, rnd(-4, 4), rnd(18, 30), 0); }
   bacts.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(tm / 7) + ")"); if (p.y > 310 || p.t > 3) kill(p); });
@@ -94,5 +125,6 @@ function step(dt, m) {
   /* gauges */
   gg.inf.set(sm.I, wordOf(sm.I, 0.3, 0.6, ["low", "moderate", "high"])); gg.ulc.set(sm.U, wordOf(sm.U, 0.35, 0.65, ["little", "some", "extensive"]));
   gg.wall.set(sm.D, wordOf(sm.D, 0.45, 0.75, ["mucosal", "deep", "transmural"])); gg.sym.set(sm.Sym, wordOf(sm.Sym, 0.32, 0.62, ["mild", "moderate", "severe"]));
+  const capKey = drug * 10 + level; if (capKey !== capDrug) { capDrug = capKey; const t = capText(drug, level); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 run({ init, step });

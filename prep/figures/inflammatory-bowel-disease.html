@@ -8,7 +8,7 @@
   --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
   --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
   --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
-  --anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
 }
 .iso[data-theme="light"]{
@@ -199,6 +199,9 @@ body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px
 .bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
 .bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
 @media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
 body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
 body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
 .t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
@@ -275,10 +278,13 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 .ibd-fiss{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.1}
 .ibd-fist{fill:none;stroke:var(--c-bad);stroke-width:5;stroke-linecap:round}
 .ibd-abs{fill:color-mix(in srgb,var(--c-bad) 55%,var(--anatomy-paper));stroke:var(--c-bad);stroke-width:1.2}
+.ibd-cap{fill:var(--anatomy-strong);font-size:12px}
 .cl-ent{--cc:#e9c07a}
 .p-tnfp{--cc:var(--c-cyt)}
 .p-bactp{--cc:var(--c-bac)}
 .p-asap{--cc:#ffd24a}
+.p-sterp{--cc:#7fc8a9}
+.p-biodp{--cc:#b78fe8}
 .dr-g-fill.g-inf{fill:var(--c-bad)}
 .dr-g-fill.g-ulc{fill:#ff9a3d}
 .dr-g-fill.g-wall{fill:var(--c-cyt)}
@@ -309,7 +315,7 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 <g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.</span></figcaption></figure>
 <div class="dr-controls">
   <label class="dr-range"><span>Disease pattern</span><input id="level" type="range" min="0" max="2" step="1" value="0" aria-valuetext="Crohn disease"><span class="dr-ticks"><i>Crohn</i><i>ulcerative colitis</i><i>severe flare</i></span></label>
-  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">aminosalicylate</option><option value="2">corticosteroid</option><option value="3">biologic (anti TNF)</option></select></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With biologic"><option value="0">no treatment</option><option value="1">aminosalicylate</option><option value="2">corticosteroid</option><option value="3">biologic (anti TNF)</option></select></label>
   <button id="pause" type="button" aria-pressed="false">Pause motion</button>
 </div>
 <p id="status" class="dr-status" aria-live="polite"></p>
@@ -435,7 +441,7 @@ function run(scn) {
 const LY = { mapSeg: $("mapSeg"), wallFx: $("wallFx"), cellsG: $("cellsG"), parts: $("parts"), over: $("over"), panel: $("panel"), inflam: $("inflam") };
 function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0 }; }); }
 const free = (pl) => pl.find((p) => !p.on);
-function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
+function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.st = 0; p.e.setAttribute("opacity", "1"); }
 function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
 
 /* ---- disease map segments: patchy, continuous and widespread ---- */
@@ -464,6 +470,17 @@ const lumenBugs = Array.from({ length: 9 }, (_, i) => { const g = mk("g", { clas
 const tnfs = pool(38, () => mk("circle", { class: "sc-p p-tnfp", r: 2.4 }, LY.parts));
 const bacts = pool(20, () => mk("ellipse", { class: "sc-p p-bactp", rx: 4, ry: 2.2 }, LY.parts));
 const asas = pool(18, () => mk("circle", { class: "sc-p p-asap", r: 2.6 }, LY.parts));
+const sterD = pool(14, () => mk("circle", { class: "sc-p p-sterp", r: 2.6 }, LY.parts));
+const bioD = pool(16, () => mk("circle", { class: "sc-p p-biodp", r: 3 }, LY.parts));
+
+/* ---- in stage caption, changed with the state ---- */
+let capEl = null, capDrug = -1;
+function capText(d, l) {
+  if (d === 1) return "Aminosalicylate coats the surface. Shallow ulcers heal but deep damage lingers.";
+  if (d === 2) return "Steroid switches the immune cells off. Inflammation fades fast but the wall heals slowly.";
+  if (d === 3) return "Biologic traps the TNF signal. Recruitment falls and the wall heals.";
+  return l === 2 ? "No treatment. Severe flare: inflammation spreads and the wall breaks down." : "No treatment. Immune attack continues and ulcers stay open.";
+}
 
 /* ---- labels and gauges ---- */
 let asaPill, sterPill, bioPill;
@@ -486,6 +503,7 @@ function initPanel() {
   asaPill = pill(ox, "Aminosalicylate", 760, 268, 855, 162, "An aminosalicylate calms the mucosal surface. It helps most in ulcerative colitis and does little for deep transmural Crohn inflammation.");
   sterPill = pill(ox, "Steroid", 760, 268, 855, 162, "A corticosteroid broadly suppresses the immune cells and cytokines. It settles a flare quickly but heals the wall less fully.");
   bioPill = pill(ox, "Biologic", 760, 268, 855, 162, "A biologic blocks tumour necrosis factor, a key cytokine. Immune recruitment, ulceration and deep wall damage fall in both patterns.");
+  capEl = mk("text", { class: "ibd-cap", x: 30, y: 30 }, ox); capEl.textContent = capText(0, 0);
 }
 const sm = { I: 0.7, U: 0.6, D: 0.8, Sym: 0.7, Fist: 0.6, crohnP: 1, ucP: 0, flareP: 0, asa: 0, ster: 0, bio: 0 };
 const acc = { tnf: 0, bact: 0, asa: 0 };
@@ -508,14 +526,33 @@ function step(dt, m) {
   fistG.setAttribute("opacity", sm.Fist.toFixed(2));
   /* epithelial row thins as ulceration rises */
   epiCells.forEach((c, i) => { place(c.g, c.x, c.y + Math.sin(tm / 900 + i) * 1.1, 0, 1 - 0.45 * sm.U); c.g.style.opacity = (1 - 0.55 * sm.U).toFixed(2); });
-  /* immune cells swell with activity */
-  macs.forEach((c, i) => place(c.g, c.x + Math.sin(tm / 1400 + c.ph) * 3, c.y + Math.cos(tm / 1600 + c.ph) * 2, Math.sin(tm / 2400 + c.ph) * 6, 1 + 0.22 * sm.I * Math.sin(tm / 300 + i)));
-  tcells.forEach((c) => place(c.g, c.x + Math.sin(tm / 1200 + c.ph) * 3, c.y, 0, 1 + 0.18 * sm.I));
-  neus.forEach((n, i) => { const on = sm.I > 0.28 + i * 0.14; n.g.style.opacity = on ? (0.3 + 0.7 * sm.I).toFixed(2) : "0"; place(n.g, n.x + Math.sin(tm / 700 + n.ph) * 5, 268 + Math.sin(tm / 600 + n.ph) * 5 + (1 - sm.I) * 34, Math.sin(tm / 400 + i) * 14, 0.5 + 0.6 * sm.I); });
+  /* immune cells swell with activity, and visibly shrink as steroid switches them off */
+  const calm = 1 - 0.38 * sm.ster;
+  macs.forEach((c, i) => { place(c.g, c.x + Math.sin(tm / 1400 + c.ph) * 3, c.y + Math.cos(tm / 1600 + c.ph) * 2, Math.sin(tm / 2400 + c.ph) * 6, (1 + 0.22 * sm.I * Math.sin(tm / 300 + i)) * calm); c.g.style.opacity = (1 - 0.45 * sm.ster).toFixed(2); });
+  tcells.forEach((c) => { place(c.g, c.x + Math.sin(tm / 1200 + c.ph) * 3, c.y, 0, (1 + 0.18 * sm.I) * calm); c.g.style.opacity = (1 - 0.45 * sm.ster).toFixed(2); });
+  neus.forEach((n, i) => { const on = sm.I * (1 - 0.55 * sm.ster) > 0.28 + i * 0.14; n.g.style.opacity = on ? (0.3 + 0.7 * sm.I).toFixed(2) : "0"; place(n.g, n.x + Math.sin(tm / 700 + n.ph) * 5, 268 + Math.sin(tm / 600 + n.ph) * 5 + (1 - sm.I) * 34, Math.sin(tm / 400 + i) * 14, (0.5 + 0.6 * sm.I) * calm); });
   lumenBugs.forEach((b, i) => { place(b.g, b.x + Math.sin(tm / 800 + b.ph) * 8, b.y, Math.sin(tm / 500 + b.ph) * 22, 1); b.g.style.opacity = (0.45 + 0.55 * sm.I).toFixed(2); });
   /* cytokines from macrophages spread through the wall */
   acc.tnf += dt * sm.I * 13; while (acc.tnf >= 1) { acc.tnf--; const p = free(tnfs), s = pick(macs); if (p) emit(p, s.x + rnd(-10, 10), s.y + rnd(-8, 8), rnd(-16, 22), rnd(-8, 18), 0); }
   tnfs.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.t > 3.4) kill(p); });
+  /* steroid dots land on immune cells and sit on them while the cells shrink */
+  if (sm.ster > 0.5 && Math.random() < dt * 7) { const p = free(sterD); if (p) { const c = pick(macs.concat(tcells).concat(neus)); p.tg = c; emit(p, c.x + rnd(-30, 30), 192, rnd(-6, 6), rnd(25, 40), 0); } }
+  sterD.forEach((p) => { if (!p.on) return; p.t += dt;
+    if (p.st === 0) { p.x += p.vx * dt; p.y += p.vy * dt; place(p.e, p.x, p.y, 0, 1);
+      const c = p.tg;
+      if (c && Math.hypot(p.x - c.x, p.y - c.y) < 15) { p.st = 1; p.t = 0; p.x = c.x + rnd(-8, 8); p.y = c.y + rnd(-6, 6); }
+      else if (p.y > 345 || p.t > 4) kill(p); }
+    else { place(p.e, p.x, p.y, 0, 1); p.e.setAttribute("opacity", clamp(1 - p.t / 2.5).toFixed(2)); if (p.t > 2.5) kill(p); } });
+  /* biologic dots hunt TNF dots, trap them on contact, then fade */
+  if (sm.bio > 0.5 && Math.random() < dt * 6) { const p = free(bioD); if (p) emit(p, rnd(70, 880), rnd(228, 260), 0, 0, 0); }
+  bioD.forEach((p) => { if (!p.on) return; p.t += dt;
+    if (p.st === 0) { let best = null, bd = 150;
+      tnfs.forEach((q) => { if (!q.on) return; const d = Math.hypot(q.x - p.x, q.y - p.y); if (d < bd) { bd = d; best = q; } });
+      if (best) { const d = Math.max(1, bd); p.x += (best.x - p.x) / d * 95 * dt; p.y += (best.y - p.y) / d * 95 * dt;
+        if (bd < 8) { kill(best); p.st = 1; p.t = 0; } }
+      else { p.y += 12 * dt; p.x += Math.sin(tm / 500 + p.y) * 4 * dt; if (p.y > 345 || p.t > 4) kill(p); }
+      place(p.e, p.x, p.y, 0, 1); }
+    else { place(p.e, p.x, p.y, 0, 1); p.e.setAttribute("opacity", clamp(1 - p.t / 1.5).toFixed(2)); if (p.t > 1.5) kill(p); } });
   /* microbes cross the broken barrier into the wall */
   acc.bact += dt * sm.I * sm.U * 7; while (acc.bact >= 1) { acc.bact--; const p = free(bacts); if (p) emit(p, rnd(70, 880), 214, rnd(-4, 4), rnd(18, 30), 0); }
   bacts.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(tm / 7) + ")"); if (p.y > 310 || p.t > 3) kill(p); });
@@ -527,6 +564,7 @@ function step(dt, m) {
   /* gauges */
   gg.inf.set(sm.I, wordOf(sm.I, 0.3, 0.6, ["low", "moderate", "high"])); gg.ulc.set(sm.U, wordOf(sm.U, 0.35, 0.65, ["little", "some", "extensive"]));
   gg.wall.set(sm.D, wordOf(sm.D, 0.45, 0.75, ["mucosal", "deep", "transmural"])); gg.sym.set(sm.Sym, wordOf(sm.Sym, 0.32, 0.62, ["mild", "moderate", "severe"]));
+  const capKey = drug * 10 + level; if (capKey !== capDrug) { capDrug = capKey; const t = capText(drug, level); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 run({ init, step });
 </script></body></html>

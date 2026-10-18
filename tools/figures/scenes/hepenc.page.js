@@ -1,12 +1,21 @@
 /* Hepatic encephalopathy scene: gut ammonia, liver urea cycle, shunt, brain astrocyte swelling. */
 const layers = { flow: $("flow"), parts: $("parts"), cells: $("cells"), over: $("over"), panel: $("panel"), shuntEl: $("shunt"), scars: $("scars"), glow: $("brainGlow") };
 let liverO = null, brainO = null, capEl = null, capDrug = -1, neuronPos = [837, 228], brainBox = [718, 872, 130, 250];
+let trToLiver = null, trToJunction = null, trShunt = null, trEscape = null;
 function initOrgans() {
   liverO = organ($("liverSlot"), "liver", 465, 200, 230, {});
   brainO = organ($("brainSlot"), "brain", 800, 195, 190, {});
-  const bp = brainO.ports.parenchyma;
+  const LP = liverO.ports, BP = brainO.ports;
+  const bp = BP.parenchyma;
   neuronPos = [Math.round(bp[0] + 52), Math.round(bp[1] + 44)];
   brainBox = [Math.round(brainO.x - 82), Math.round(brainO.x + 72), Math.round(brainO.y - 65), Math.round(brainO.y + 55)];
+  $("vesselIn").setAttribute("d", "M222 255 L" + f1(LP.porta[0]) + " " + f1(LP.porta[1]));
+  $("vesselOut").setAttribute("d", "M" + f1(LP.out[0]) + " " + f1(LP.out[1]) + " C560 140 640 200 700 236");
+  layers.shuntEl.setAttribute("d", "M285 250 C295 165 375 108 500 100 C600 142 650 215 700 236 C712 238 724 236 " + f1(BP.carotid[0]) + " " + f1(BP.carotid[1]));
+  trToLiver = track([[235, 255], [330, 252], [405, 246], LP.porta]);
+  trToJunction = track([[235, 255], [285, 250]]);
+  trShunt = track([[285, 250], [295, 165], [375, 108], [500, 100], [600, 142], [650, 215], [700, 236], BP.carotid]);
+  trEscape = track([LP.out, [560, 160], [640, 210], [700, 236], BP.carotid]);
 }
 function capText(d) {
   if (d === 1) return "Lactulose traps gut ammonia as ammonium. Less reaches the brain.";
@@ -14,10 +23,7 @@ function capText(d) {
   if (d === 3) return "Treating the precipitant removes triggers that worsen confusion.";
   return "No treatment. Gut ammonia reaches the brain and astrocytes swell.";
 }
-const trToLiver = track([[235, 255], [330, 252], [405, 238], [455, 222]]);
-const trToJunction = track([[235, 255], [285, 250]]);
-const trShunt = track([[285, 250], [295, 165], [375, 108], [500, 100], [600, 142], [650, 215], [700, 236], [785, 220]]);
-const trEscape = track([[455, 222], [540, 228], [630, 224], [700, 236], [785, 220]]);
+/* tracks are built in initOrgans from the liver and brain ports (see above) */
 /* ---- particle pools ---- */
 function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0, st: 0, u: 0, tr: null, fate: 0 }; }); }
 const nh3 = pool(38, () => mk("path", { class: "sc-p p-nh3", d: "M0 -4L3.4 0L0 4L-3.4 0Z" }, layers.parts));
@@ -76,7 +82,7 @@ function step(dt, m) {
     const vis = b.prot ? 0.35 + 0.65 * sm.prod : (i / 12 < 1 - 0.55 * sm.rif - 0.35 * sm.lac ? 1 : 0.12);
     place(b.g, b.x, b.y, b.prot ? (b.rot || 0) + tm / 900 : Math.sin(tm / 700 + i) * 20, b.prot ? 0.7 + 0.5 * sm.prod : 1); b.g.style.opacity = vis.toFixed(2); });
   /* urea cycle dots circle inside the liver */
-  cycleDots.forEach((d, i) => { const t = tm / 650 + i * 2.1; d.setAttribute("transform", "translate(" + f1(465 + Math.cos(t) * 27) + " " + f1(222 + Math.sin(t) * 24) + ")"); d.setAttribute("opacity", (0.25 + 0.75 * clamp(sm.urea + 0.2)).toFixed(2)); });
+  cycleDots.forEach((d, i) => { const t = tm / 650 + i * 2.1; d.setAttribute("transform", "translate(" + f1(liverO.x + Math.cos(t) * 27) + " " + f1(liverO.y + 22 + Math.sin(t) * 24) + ")"); d.setAttribute("opacity", (0.25 + 0.75 * clamp(sm.urea + 0.2)).toFixed(2)); });
   /* astrocyte swells, neuron fades */
   const ap = brainO.ports.parenchyma;
   place(astro.g, ap[0] + Math.sin(tm / 1600) * 2, ap[1], Math.sin(tm / 2400) * 4, 1 + 0.6 * sm.swell);
@@ -91,7 +97,7 @@ function step(dt, m) {
       if (p.t > 0.8) { if (p.fate === 3) { p.st = 5; p.e.setAttribute("class", "sc-p p-nh4"); } else if (p.fate === 1) { p.tr = trToJunction; p.u = 0; p.st = 1; } else { p.tr = trToLiver; p.u = 0; p.st = 1; } } }
     else if (p.st === 1 || p.st === 2 || p.st === 3) { p.u += dt * 88 / p.tr.len; const q = p.tr.at(Math.min(1, p.u)); p.x = q.x; p.y = q.y; place(p.e, p.x, p.y, tm / 6, 1);
       if (p.u >= 1) { if (p.st === 1 && p.fate === 1) { p.tr = trShunt; p.u = 0; p.st = 2; }
-        else if (p.st === 1 && p.fate === 2) { kill(p); const u = free(urea); if (u) { emit(u, 462, 226, rnd(-4, 4), 30); } }
+        else if (p.st === 1 && p.fate === 2) { kill(p); const u = free(urea); if (u) { emit(u, liverO.ports.porta[0], liverO.ports.porta[1], rnd(-4, 4), 30); } }
         else if (p.st === 1) { p.tr = trEscape; p.u = 0; p.st = 3; }
         else { p.st = 4; p.t = 0; p.vx = rnd(-16, 16); p.vy = rnd(-12, 12); } } }
     else if (p.st === 4) { p.t += dt; p.x += p.vx * dt + Math.sin(tm / 380 + p.y) * 0.25; p.y += p.vy * dt; p.x = clamp(p.x, brainBox[0], brainBox[1]); p.y = clamp(p.y, brainBox[2], brainBox[3]); place(p.e, p.x, p.y, tm / 6, 1); p.e.setAttribute("opacity", clamp(1 - (p.t - 1.8) / 1.2).toFixed(2)); if (p.t > 3) kill(p); }

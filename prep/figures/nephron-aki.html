@@ -8,7 +8,7 @@
   --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
   --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
   --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
-  --anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
 }
 .iso[data-theme="light"]{
@@ -199,6 +199,9 @@ body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px
 .bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
 .bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
 @media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
 body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
 body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
 .t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
@@ -273,36 +276,43 @@ body{--c-brown:#8a5a2b}body[data-theme="light"]{--c-brown:#7a4a1e}
 .nf-bar{fill:none;stroke:var(--anatomy-strong);stroke-width:2.4;stroke-linecap:round}
 .nf-dep{fill:var(--c-cyt);stroke:color-mix(in srgb,var(--c-cyt) 50%,#000);stroke-width:.5}
 .nf-stone{fill:var(--anatomy-mid);stroke:var(--anatomy-strong);stroke-width:1.2;stroke-linejoin:round}
-.nf-stop{fill:none;stroke:var(--c-bad);stroke-width:2.2}
+.nf-cap{fill:var(--anatomy-strong);font-size:12.5px}
+.nf-urine{fill:color-mix(in srgb,var(--c-fl) 55%,var(--anatomy-paper));stroke:none}
+.nf-frag{fill:var(--anatomy-mid);stroke:var(--anatomy-strong);stroke-width:.8}
+.nf-badge{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:2.2}
+.nf-badgex{fill:none;stroke:var(--c-bad);stroke-width:2.2;stroke-linecap:round}
 .p-fd{fill:var(--c-fl)}.p-prot{fill:var(--c-plt);stroke:color-mix(in srgb,var(--c-plt) 45%,#000);stroke-width:.6}
 .p-bl{fill:var(--c-rbc);stroke:color-mix(in srgb,var(--c-rbc) 50%,#000);stroke-width:.5}.p-sl{fill:var(--c-brown);stroke:color-mix(in srgb,var(--c-brown) 50%,#000);stroke-width:.5}
-</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">The nephron and acute kidney injury</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>filtration reduced · urine output low · urine muddy casts</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated nephron. Blood enters a glomerulus through the afferent arteriole and is filtered into Bowman space. The filtrate flows along the proximal tubule, loop of Henle, distal tubule and collecting duct to the ureter. A level slider moves the injury between low blood flow before the kidney (prerenal), tubule injury, an inflamed nephritic glomerulus, a leaky nephrotic glomerulus, and a blocked ureter after the kidney (postrenal). Gauges show blood flow, back-pressure, tubule damage, inflammation, protein leak, filtration and urine output. Treatment choices include fluids, relieving an obstruction, stopping a nephrotoxin and a steroid."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">The nephron and acute kidney injury</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>filtration reduced · urine output low · urine muddy casts</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated nephron in its kidney. Blood enters through the renal artery at the hilum and reaches the glomerulus, where it is filtered into Bowman space. The filtrate flows along the proximal tubule, loop of Henle, distal tubule and collecting duct, then through the ureter into the bladder. A level slider moves the injury between low blood flow before the kidney (prerenal), tubule injury, an inflamed nephritic glomerulus, a leaky nephrotic glomerulus, and a blocked ureter after the kidney (postrenal). Gauges show blood flow, back-pressure, tubule damage, inflammation, protein leak, filtration and urine output. Treatment choices include fluids, relieving an obstruction, a steroid and stopping a nephrotoxin."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
 <rect class="sc-tissue" x="14" y="44" width="932" height="396" rx="18"/>
 <text id="tag" class="sc-zone" x="930" y="68" text-anchor="end"></text>
+<g id="kidneySlot"></g><g id="bladderSlot"></g>
 <g id="caps"></g><g id="tub"></g><g id="vess"></g><g id="glom"></g>
 <g id="rbcs"></g><g id="parts"></g><g id="stone"></g>
 <g id="over"></g>
 <g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names are shown or implied.</span></figcaption></figure>
 <div class="dr-controls">
   <label class="dr-range"><span>Where the injury is</span><input id="level" type="range" min="0" max="4" step="1" value="1" aria-valuetext="intrinsic: tubule injury"><span class="dr-ticks"><i>prerenal</i><i>tubule</i><i>nephritic</i><i>nephrotic</i><i>blocked</i></span></label>
-  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">fluids (restore blood volume)</option><option value="2">relieve the obstruction</option><option value="3">stop the nephrotoxin</option><option value="4">steroid (calm the immune attack)</option></select></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With the nephrotoxin stopped"><option value="0">no treatment</option><option value="1">fluids (restore blood volume)</option><option value="2">relieve the obstruction</option><option value="3">steroid (calm the immune attack)</option><option value="4">stop the nephrotoxin</option></select></label>
   <button id="pause" type="button" aria-pressed="false">Pause motion</button>
 </div>
 <p id="status" class="dr-status" aria-live="polite"></p>
 <p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
 <h2>What the figure shows, and how sure we are</h2>
-<ul><li><strong>How the kidney filters.</strong> Blood enters the glomerulus through the afferent arteriole. The filtration barrier (capillary lining, basement membrane and podocytes) lets water and small solutes into Bowman space while keeping blood cells and most protein in the blood. The filtrate is then reworked along the tubule (the proximal tubule reclaims most of it) and leaves as urine through the ureter. This is standard physiology teaching and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Three broad groups of acute kidney injury.</strong> Prerenal: too little blood reaches the glomerulus (low volume, poor pump function, drugs that change glomerular blood flow), so filtration falls while the kidney itself is intact; if it goes on, tubule cells can die. Intrinsic: damage inside the kidney, most often acute tubular necrosis from poor blood flow or a toxin (dead tubule cells shed and form casts), or disease of the glomerulus or interstitium. Postrenal: obstruction to drainage (for example a stone or an enlarged prostate) raises pressure back toward the kidney and lowers filtration. Flagged for review.</li><li><strong>Nephritic versus nephrotic.</strong> A nephritic picture is an inflamed glomerulus: red cells in the urine, red cell casts, often high blood pressure and swelling, and reduced filtration. A nephrotic picture is a leaky filter: heavy protein loss in the urine with low blood albumin and swelling, while filtration may stay near normal early on. Some immune-driven forms respond to steroids or other immune treatment, but many causes need different management. Flagged for review.</li><li><strong>Treatment ideas shown.</strong> Fluids for low volume, relieving a blockage, stopping a kidney-damaging toxin, and a steroid for an immune-driven glomerular disease. These are teaching toggles only; each helps only when it matches the cause, which is the point of the figure.</li></ul>
+<ul><li><strong>How the kidney filters.</strong> Blood enters the glomerulus through the afferent arteriole. The filtration barrier (capillary lining, basement membrane and podocytes) lets water and small solutes into Bowman space while keeping blood cells and most protein in the blood. The filtrate is then reworked along the tubule (the proximal tubule reclaims most of it) and leaves as urine through the ureter into the bladder. This is standard physiology teaching and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Three broad groups of acute kidney injury.</strong> Prerenal: too little blood reaches the glomerulus (low volume, poor pump function, drugs that change glomerular blood flow), so filtration falls while the kidney itself is intact; if it goes on, tubule cells can die. Intrinsic: damage inside the kidney, most often acute tubular necrosis from poor blood flow or a toxin (dead tubule cells shed and form casts), or disease of the glomerulus or interstitium. Postrenal: obstruction to drainage (for example a stone or an enlarged prostate) raises pressure back toward the kidney and lowers filtration. Flagged for review.</li><li><strong>Nephritic versus nephrotic.</strong> A nephritic picture is an inflamed glomerulus: red cells in the urine, red cell casts, often high blood pressure and swelling, and reduced filtration. A nephrotic picture is a leaky filter: heavy protein loss in the urine with low blood albumin and swelling, while filtration may stay near normal early on. Some immune-driven forms respond to steroids or other immune treatment, but many causes need different management. Flagged for review.</li><li><strong>Treatment ideas shown.</strong> Fluids for low volume, relieving a blockage, a steroid for an immune-driven glomerular disease, and stopping a kidney-damaging toxin. These are teaching toggles only; each helps only when it matches the cause, which is the point of the figure.</li><li><strong>Organ art.</strong> Organ art is NIH BioArt Source, public domain.</li></ul>
 <p><strong>What was simplified.</strong> Real cases overlap (for example prolonged low blood flow becomes tubule injury, and obstruction can follow other injury), and the interstitial and vascular causes, fluid overload, electrolyte and acid-base effects, the need for dialysis, the many causes of each glomerular disease, and all doses and targets are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
-<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). Organ illustrations are NIH BioArt Source (public domain); all other drawing is original.</p>
 <p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
-</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Where the injury is","a":[0,1,2,3,4],"names":["prerenal (low blood flow)","intrinsic: tubule injury","intrinsic: nephritic glomerulus","intrinsic: nephrotic glomerulus","postrenal (blocked drainage)"],"ticks":["prerenal","tubule","nephritic","nephrotic","blocked"],"tags":["Prerenal: too little blood reaches the glomerulus","Intrinsic (tubular): tubule cells are injured","Intrinsic (nephritic): inflamed glomerulus, blood in urine","Intrinsic (nephrotic): leaky glomerulus, protein in urine","Postrenal: urine cannot drain, pressure backs up"],"inj":[[0.25,0,0.12,0,0.02],[0.85,0,0.9,0,0.05],[0.85,0,0.1,0.85,0.3],[0.9,0,0.05,0.1,0.9],[0.85,0.9,0.3,0,0.02]],"start":1},"settings":[{"label":"no treatment"},{"label":"fluids (restore blood volume)"},{"label":"relieve the obstruction"},{"label":"stop the nephrotoxin"},{"label":"steroid (calm the immune attack)"}],"drugNames":["no treatment","fluids","relieving the obstruction","stopping the nephrotoxin","a steroid"],"status":"Injury: {level} · {drug} ·"}};
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Where the injury is","a":[0,1,2,3,4],"names":["prerenal (low blood flow)","intrinsic: tubule injury","intrinsic: nephritic glomerulus","intrinsic: nephrotic glomerulus","postrenal (blocked drainage)"],"ticks":["prerenal","tubule","nephritic","nephrotic","blocked"],"tags":["Prerenal: too little blood reaches the glomerulus","Intrinsic (tubular): tubule cells are injured","Intrinsic (nephritic): inflamed glomerulus, blood in urine","Intrinsic (nephrotic): leaky glomerulus, protein in urine","Postrenal: urine cannot drain, pressure backs up"],"start":1},"settings":[{"label":"no treatment"},{"label":"fluids (restore blood volume)"},{"label":"relieve the obstruction"},{"label":"steroid (calm the immune attack)"},{"label":"stop the nephrotoxin"}],"drugNames":["no treatment","fluids","relieving the obstruction","a steroid","stopping the nephrotoxin"],"status":"Injury: {level} · {drug} ·"}};
 const modelOf = function modelOf(S, level, drug) {
-  const b = S.level.inj[level], cl = (v) => Math.max(0, Math.min(1, v));
+  /* inj[level] = [blood flow, back-pressure, tubule injury, glomerular inflammation, protein leak] before any treatment */
+  const inj = [[0.25, 0, 0.12, 0, 0.02], [0.85, 0, 0.9, 0, 0.05], [0.85, 0, 0.1, 0.85, 0.3], [0.9, 0, 0.05, 0.1, 0.9], [0.85, 0.9, 0.3, 0, 0.02]];
+  const b = inj[level], cl = (v) => Math.max(0, Math.min(1, v));
   let F = b[0], O = b[1], T = b[2], G = b[3], P = b[4];
-  const fl = drug === 1 ? 1 : 0, rel = drug === 2 ? 1 : 0, stopT = drug === 3 ? 1 : 0, imm = drug === 4 ? 1 : 0;
+  const fl = drug === 1 ? 1 : 0, rel = drug === 2 ? 1 : 0, imm = drug === 3 ? 1 : 0, stopT = drug === 4 ? 1 : 0;
   if (fl && level === 0) { F = 0.88; T = 0.02; }
   if (rel && level === 4) { O = 0.04; T = 0.12; }
-  if (stopT && level === 1) T = 0.5;
+  if (stopT && level === 1) T = 0.2;
   if (imm && level === 2) { G = 0.3; P = 0.12; }
   if (imm && level === 3) P = 0.3;
   const X = level === 1 && !stopT ? 1 : 0, stop = level === 1 && stopT ? 1 : 0;
@@ -406,29 +416,307 @@ function run(scn) {
   start();
 }
 
-/* Nephron scene: glomerulus, tubule, blood, filtrate, protein, cells, a possible stone, and the gauges. */
+/* Shared organ art for the animated mechanism scenes. Plain globals, ES2015, no imports.
+ * Inlined after bio.lib.js when buildScene gets organs:true, so mk/f1/clamp below are the shared ones.
+ * organ(parent, kind, x, y, w, opts) draws real anatomy art (NIH BioArt Source, public domain,
+ * injected as _ORG_ART by buildScene for the kinds the page uses) centred on x,y and w px wide,
+ * and falls back to the existing procedural layered silhouette for kinds without art
+ * (bladder, uterus, thyroid). Art ports are fractions of the art viewBox (see _ORG_FRAC).
+ * opts: { h (px height, else proportional), flip (mirror left/right), cls (extra class), id,
+ *   tint (a CSS colour with opacity, overlaid as an organ-shaped mask for disease states),
+ *   dim (dull the art) }.
+ * Returns { g, kind, x, y, w, h, ports, art } with absolute SVG coords; ports.in/out always exist.
+ * Art keeps its own colours (a faint contrast halo keeps it readable in dark and light themes);
+ * procedural fill is a vertical gradient whose stops derive from --cc (a theme aware palette var,
+ * so dark and light both work); edge stroke and landmark lines use color-mix detail classes.
+ * Emits no text, so label font and dash rules are inherited from the calling scene. */
+if (!document.getElementById("orgCss")) { var _orgSt = document.createElement("style"); _orgSt.id = "orgCss";
+  _orgSt.textContent = ".org-halo{filter:drop-shadow(0 0 1px rgba(0,0,0,.65)) drop-shadow(0 0 1px rgba(255,255,255,.45))}"
+  + ".org-b{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1.2;stroke-linejoin:round;stroke-linecap:round}"
+  + ".org-d{fill:none;stroke:color-mix(in srgb,var(--cc) 40%,var(--anatomy-hi));stroke-width:1;stroke-linecap:round;opacity:.8}"
+  + ".org-dk{fill:none;stroke:color-mix(in srgb,var(--cc) 62%,#000);stroke-width:1.1;stroke-linecap:round;opacity:.8}"
+  + ".org-f{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1;stroke-linejoin:round}"
+  + ".org-v{fill:none;stroke-linecap:round}"
+  + ".org-liver{--cc:var(--c-rbc)}.org-heart{--cc:var(--c-rbc)}.org-kidney{--cc:var(--c-eos)}.org-lung{--cc:var(--c-endo)}"
+  + ".org-stomach{--cc:var(--c-graft)}.org-brain{--cc:var(--c-mac)}.org-pancreas{--cc:var(--c-plt)}.org-spleen{--cc:var(--c-sm)}"
+  + ".org-bladder{--cc:var(--c-th2)}.org-uterus{--cc:var(--c-endo)}.org-thyroid{--cc:var(--c-neut)}";
+  document.head.appendChild(_orgSt); }
+var _orgN = 0;
+/* per instance gradients: base (light -> base -> dark of --cc) plus a white top / dark bottom shade overlay */
+function _orgDefs(g) {
+  _orgN++; var id = "og" + _orgN, hid = "oh" + _orgN;
+  var defs = mk("defs", {}, g);
+  var lg = mk("linearGradient", { id: id, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  var s0 = mk("stop", { offset: "0", "stop-color": "#999" }, lg); s0.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 55%,#fff)");
+  var s1 = mk("stop", { offset: ".55", "stop-color": "#888" }, lg); s1.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 78%,var(--anatomy-paper))");
+  var s2 = mk("stop", { offset: "1", "stop-color": "#666" }, lg); s2.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 66%,#000)");
+  var hg = mk("linearGradient", { id: hid, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  mk("stop", { offset: "0", "stop-color": "#fff", "stop-opacity": ".2" }, hg);
+  mk("stop", { offset: ".55", "stop-color": "#fff", "stop-opacity": "0" }, hg);
+  mk("stop", { offset: "1", "stop-color": "#000", "stop-opacity": ".14" }, hg);
+  return { b: "url(#" + id + ")", h: "url(#" + hid + ")" };
+}
+/* one filled silhouette plus its shade overlay, same path data so the light stays inside */
+function _ob(g, d, G) {
+  mk("path", { class: "org-b", d: d, fill: G.b, stroke: "#666" }, g);
+  mk("path", { d: d, fill: G.h, stroke: "none", "pointer-events": "none" }, g);
+}
+function _ol(g, d, cls) { return mk("path", { class: cls || "org-d", d: d, fill: "none" }, g); }
+function _of(g, d, fillCss, cc) { var e = mk("path", { class: "org-f", d: d, stroke: "#666" }, g); e.setAttribute("style", "fill:" + fillCss + ";--cc:" + cc); return e; }
+function _ov(g, d, color, wdt) { var e = mk("path", { class: "org-v", d: d, fill: "none", stroke: "#777", "stroke-width": wdt, "stroke-linecap": "round" }, g); e.setAttribute("style", "stroke:" + color); return e; }
+function _odot(g, x, y, r, fillCss) { var e = mk("circle", { cx: x, cy: y, r: r, stroke: "none" }, g); e.setAttribute("style", "fill:" + fillCss); return e; }
+
+/* liver: big right lobe, smaller left lobe, falciform notch, gallbladder, porta hepatis stubs */
+function _orgLiver(g, G) {
+  _ov(g, "M-2 46L-2 18", "var(--d-ven)", 5); _ov(g, "M7 46L5 20", "var(--d-art)", 3); _ov(g, "M-11 46L-9 20", "var(--c-bac)", 2.5);
+  _ob(g, "M-6-30C22-33 44-25 50-7C54 9 40 25 18 30C2 33-5 22-7 6C-8-8-8-22-6-30Z", G);
+  _ob(g, "M-8-27C-24-27-40-19-48-6C-51 1-45 9-35 12C-24 15-11 9-8-1C-6-10-6-20-8-27Z", G);
+  _ol(g, "M-8-29C-7-18-6-6-4 6", "org-dk");
+  _ol(g, "M-2-28C14-29 30-24 40-14");
+  _of(g, "M10 18C16 16 22 18 23 24C24 31 19 37 14 36C9 35 7 28 8 23C8 21 9 19 10 18Z", "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  return { h0: 78, ports: { in: [-2, 46], out: [12, -30], porta: [-2, 18], gall: [16, 33], lobe: [20, 0] } };
+}
+/* heart: mass with apex down left, septum, coronary groove, aorta with arch, pulmonary split, caval stubs */
+function _orgHeart(g, G) {
+  _ov(g, "M-2-18L-2-44C-2-52-10-56-20-54C-28-52-32-46-32-38", "var(--d-art)", 8);
+  _ov(g, "M-8-52L-8-59M-15-54L-16-60M-22-53L-24-59", "var(--d-art)", 2.5);
+  _ov(g, "M12-16C8-28 2-34-4-38", "var(--d-ven)", 7);
+  _ov(g, "M-4-38C-12-40-20-38-28-34", "var(--d-ven)", 4.5); _ov(g, "M-4-38C4-40 12-38 20-34", "var(--d-ven)", 4.5);
+  _ov(g, "M20-20L20-52", "var(--d-ven)", 7); _ov(g, "M18 34L18 58", "var(--d-ven)", 7);
+  _ov(g, "M-36-2L-50-6M-34 14L-48 16", "var(--d-art)", 4);
+  _ob(g, "M-4-32C24-34 42-16 40 10C38 32 12 48-20 50C-34 44-40 24-36 2C-33-18-22-31-4-32Z", G);
+  _ol(g, "M0-30C4-10 0 14-14 44", "org-dk");
+  _ol(g, "M-34 6C-18 12 6 12 38 4");
+  _ol(g, "M-6-28C-14-18-18-6-20 8");
+  return { h0: 120, ports: { in: [20, -52], out: [-32, -38], ivc: [18, 58], apex: [-20, 50], pulm: [-28, -34] } };
+}
+/* kidney: bean with hilum, cortex rim, medulla rays, pelvis funnel, ureter, artery and vein stubs */
+function _orgKidney(g, G) {
+  _ov(g, "M-12 6C-22 12-28 18-28 30C-28 50-26 70-24 90", "var(--cc)", 4.5);
+  _ov(g, "M-50-8C-40-8-30-8-22-6", "var(--d-art)", 4); _ov(g, "M-50 10C-40 10-30 8-22 6", "var(--d-ven)", 5);
+  _ob(g, "M8-58C38-58 54-32 50 2C56 32 42 60 8 60C-8 60-16 48-19 34C-26 24-26-24-19-34C-16-48-8-58 8-58Z", G);
+  _ol(g, "M8-49C32-49 45-28 42 0C46 28 34 51 8 51C-1 51-8 43-10 32C-15 24-15-24-10-32C-8-43-1-49 8-49Z");
+  _ol(g, "M-6-30L14-38M-8-10L16-12M-8 12L16 14M-6 32L14 40");
+  _ol(g, "M16-44C30-36 38-20 38 0");
+  _of(g, "M-19-14C-8-12-2-8 2-2C-2 4-8 10-18 14C-22 8-22-8-19-14Z", "color-mix(in srgb,var(--cc) 35%,#fff)", "var(--cc)");
+  return { h0: 150, ports: { in: [-50, -8], out: [-24, 90], vein: [-50, 10], pelvis: [-12, 4], cortex: [30, 0] } };
+}
+/* lung: one lung with oblique fissure, hilum bronchus splitting into lobar and segmental branches */
+function _orgLung(g, G) {
+  _ov(g, "M-58 4L-30 4", "var(--anatomy-hi)", 6);
+  _ov(g, "M-30 4C-22-6-16-16-10-26", "var(--anatomy-hi)", 4.5); _ov(g, "M-30 4C-22 14-14 24-6 34", "var(--anatomy-hi)", 4.5);
+  _ov(g, "M-18-14L-28-22M-16-16L-8-24M-14-20L-14-32M-20 16L-30 24M-16 20L-6 28M-12 26L-10 38", "var(--anatomy-hi)", 2);
+  _ov(g, "M-58-8L-34-6", "var(--d-ven)", 4); _ov(g, "M-58 14L-34 12", "var(--d-art)", 4);
+  _ob(g, "M2-60C24-56 40-32 43 8C45 38 32 60 2 62C-24 62-40 42-42 10C-44-24-20-58 2-60Z", G);
+  _ol(g, "M-40-2C-20 8 0 22 24 40", "org-dk");
+  _ol(g, "M-8-48C8-50 22-40 30-26");
+  return { h0: 130, ports: { in: [-58, 4], out: [-58, 14], art: [-58, -8], apex: [2, -60], base: [2, 62] } };
+}
+/* stomach: J shape with fundus dome, rugae, antrum sweep, pylorus ring, oesophagus and duodenum stubs */
+function _orgStomach(g, G) {
+  _of(g, "M-38-58L-22-58L-22-36L-38-36Z", "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))", "var(--cc)");
+  _ob(g, "M-38-36C-46-24-50-8-46 10C-42 30-30 46-12 50C6 54 28 46 40 32C44 27 46 23 46 18L34 14C30 22 20 30 6 32C-8 34-22 26-28 12C-33-1-31-16-26-28C-24-32-22-34-22-36Z", G);
+  _ol(g, "M-36-10C-30 6-22 20-8 28M-28-22C-22-6-12 10 4 22M-16-30C-10-14 0 2 14 12");
+  _ol(g, "M40 15C43 19 43 25 40 29M34 14C37 18 37 26 34 30", "org-dk");
+  _ol(g, "M46 16L60 22M44 28L58 32", "org-dk");
+  return { h0: 116, ports: { in: [-30, -58], out: [60, 27], fundus: [-40, -12], antrum: [24, 38], pylorus: [40, 22] } };
+}
+/* brain lateral: cerebrum with Sylvian fissure and gyri, cerebellum with folia, tapered brainstem */
+function _orgBrain(g, G) {
+  _ov(g, "M10 50L10 64", "var(--d-art)", 5);
+  _ob(g, "M-50-6C-50-32-24-42 4-40C30-38 44-28 44-8C44 10 32 24 8 28C-18 31-50 24-50-6Z", G);
+  _ol(g, "M-12 10C2 6 18 2 34-4", "org-dk");
+  _ol(g, "M-38-20C-32-10-32 2-38 12M-26-30C-20-20-20-6-26 6M-4-32C2-22 2-8-4 2M10-30C16-20 16-6 10 4M28-22C34-14 34-2 28 8");
+  _ol(g, "M-16 6L-24-4M-10 4L-12-8", "org-dk");
+  _ob(g, "M2 24L16 24L12 56L6 56Z", G);
+  _ol(g, "M2 36C6 38 12 38 16 36");
+  _ob(g, "M22 24C34 22 46 26 48 34C50 42 42 48 32 47C24 46 20 38 20 32C20 28 20 26 22 24Z", G);
+  _ol(g, "M24 32L44 32M25 37L43 37M27 42L41 42");
+  return { h0: 110, ports: { in: [10, 64], out: [4, -40], parenchyma: [-8, -6], cereb: [34, 35], frontal: [-40, -8] } };
+}
+/* pancreas: bulky head right, tapering tail left, main duct with side branches, islet dots */
+function _orgPancreas(g, G) {
+  _ob(g, "M-50-4C-32-14-8-14 14-10C32-7 46-2 49 10C51 21 40 28 26 25C8 21-20 12-50 6Z", G);
+  _ol(g, "M-46 1C-20-2 10 0 38 10", "org-dk");
+  _ol(g, "M-30-1L-34-8M-10-1L-14-9M8 0L4-8M-28 1L-32 8M-6 1L-10 8M12 2L8 10");
+  _ol(g, "M52-6C58 4 58 16 50 24");
+  _odot(g, -20, -2, 1.6, "var(--d-art)"); _odot(g, 0, 0, 1.6, "var(--d-art)"); _odot(g, 22, 6, 1.6, "var(--d-art)");
+  return { h0: 60, ports: { in: [-10, -12], out: [49, 12], head: [36, 8], tail: [-48, 1] } };
+}
+/* spleen: crescent with top notch, trabeculae, hilar artery and vein stubs below */
+function _orgSpleen(g, G) {
+  _ov(g, "M-30 52C-28 44-26 40-22 36", "var(--d-art)", 3.5); _ov(g, "M-20 54C-19 46-17 42-13 38", "var(--d-ven)", 4.5);
+  _ob(g, "M-38-30C-8-40 28-34 44-12C52 4 44 26 20 34C-4 41-34 32-44 10C-48-4-46-22-38-30Z", G);
+  _ol(g, "M-8-36C-4-33 0-33 4-36", "org-dk");
+  _ol(g, "M-30-10C-10-2 12-2 32-10M-28 8C-8 16 12 16 30 8");
+  return { h0: 96, ports: { in: [-30, 52], out: [-20, 54], hilum: [-18, 37], pulp: [0, 0] } };
+}
+/* bladder: dome with detrusor arcs, trigone, ureters in from above, urethra out below */
+function _orgBladder(g, G) {
+  _ov(g, "M-52-44C-44-34-36-26-30-18", "var(--cc)", 4); _ov(g, "M52-44C44-34 36-26 30-18", "var(--cc)", 4);
+  _ob(g, "M0-50C26-48 40-30 40-6C40 16 26 32 8 40L-8 40C-26 32-40 16-40-6C-40-30-26-48 0-50Z", G);
+  _ob(g, "M-8 40L8 40L8 64L-8 64Z", G);
+  _ol(g, "M-8 52L8 52", "org-dk");
+  _ol(g, "M-24-8L24-8L0 24Z");
+  _ol(g, "M-28-28C-12-36 12-36 28-28M-34-12C-16-22 16-22 34-12");
+  return { h0: 120, ports: { in: [-52, -44], out: [0, 64], inR: [52, -44], trigone: [0, 8], dome: [0, -48] } };
+}
+/* uterus: fundus, cavity, cervix, tubes with fimbriae, ovaries with follicles */
+function _orgUterus(g, G) {
+  _ov(g, "M-16-16C-26-17-32-19-38-23", "var(--cc)", 3.5); _ov(g, "M16-16C26-17 32-19 38-23", "var(--cc)", 3.5);
+  _ov(g, "M-38-23L-44-27M-38-23L-45-23M-38-23L-44-19M-38-23L-42-29", "var(--cc)", 1.2);
+  _ov(g, "M38-23L44-27M38-23L45-23M38-23L44-19M38-23L42-29", "var(--cc)", 1.2);
+  var eo = mk("ellipse", { class: "org-f", cx: -45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var eo2 = mk("ellipse", { class: "org-f", cx: 45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo2.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var _fol = "color-mix(in srgb,var(--c-plt) 45%,#000)";
+  _odot(g, -47, -14, 1.6, _fol); _odot(g, -43, -8, 1.6, _fol); _odot(g, -46, -4, 1.4, _fol);
+  _odot(g, 47, -14, 1.6, _fol); _odot(g, 43, -8, 1.6, _fol); _odot(g, 46, -4, 1.4, _fol);
+  _ob(g, "M-16-20C-8-26 8-26 16-20C20-2 15 20 8 32L-8 32C-15 20-20-2-16-20Z", G);
+  _of(g, "M-10-14L10-14L0 22Z", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  _ol(g, "M-11 18L11 18", "org-dk"); _ol(g, "M0 18L0 32");
+  return { h0: 100, ports: { in: [-45, -22], out: [0, 33], ovL: [-45, -10], ovR: [45, -10], fundus: [0, -24] } };
+}
+/* thyroid butterfly: two lobes, isthmus bridge, trachea rings behind, parathyroid dots */
+function _orgThyroid(g, G) {
+  _ov(g, "M-7-40L-7 40M7-40L7 40", "var(--anatomy-hi)", 2);
+  _ov(g, "M-7-28L7-28M-7-12L7-12M-7 24L7 24M-7 36L7 36", "var(--anatomy-hi)", 1.2);
+  _ob(g, "M16-32C28-30 35-16 33 4C31 22 25 32 16 32C8 32 6 20 8 2C10-14 11-28 16-32Z", G);
+  _ob(g, "M-16-32C-28-30-35-16-33 4C-31 22-25 32-16 32C-8 32-6 20-8 2C-10-14-11-28-16-32Z", G);
+  _ob(g, "M-10 6L10 6L10 16L-10 16Z", G);
+  _ol(g, "M14-20C18-10 18 6 14 20M-14-20C-18-10-18 6-14 20");
+  _odot(g, -30, 8, 2, "var(--c-plt)"); _odot(g, 30, -4, 2, "var(--c-plt)");
+  return { h0: 90, ports: { in: [16, -34], out: [0, 36], isthmus: [0, 11], lobeR: [22, 0], lobeL: [-22, 0] } };
+}
+/* Real-art store, filled by buildScene after this lib: _ORG_ART[kind] = { vb:[x,y,w,h],
+ * pfx:"oaxxx", body:"<inner svg markup>" }. Ports are fractions of the viewBox, measured
+ * off the slimmed art (see tools/figures/dev/svgslim.py); content fills the frame. */
+var _ORG_ART = {};
+var _ORG_FRAC = {
+  liver: { in: [.45, .95], out: [.46, .04], porta: [.45, .82], gall: [.30, .90], lobe: [.28, .45] },
+  heart: { in: [.30, .01], out: [.48, .01], aorta: [.48, .01], ivc: [.28, .90], apex: [.70, .97], pulm: [.60, .08] },
+  kidney: { in: [.04, .36], out: [.38, .97], vein: [.04, .46], pelvis: [.36, .41], cortex: [.62, .45], hilum: [.28, .41] },
+  lung: { in: [.46, .53], out: [.44, .60], art: [.44, .48], apex: [.24, .30], base: [.24, .87], trachea: [.49, .01], carina: [.49, .50], hilumL: [.42, .58], hilumR: [.56, .58], apexR: [.75, .34], baseR: [.75, .86] },
+  stomach: { in: [.42, .00], out: [.50, .95], fundus: [.38, .10], antrum: [.52, .30], pylorus: [.60, .35] },
+  intestine: { in: [.58, .38], out: [.50, .95], duodenum: [.60, .40], jejunum: [.42, .60], ileum: [.50, .72], cecum: [.60, .82], colon: [.28, .60], rectum: [.50, .92] },
+  brain: { in: [.60, .97], out: [.42, .04], parenchyma: [.42, .42], cereb: [.76, .78], frontal: [.08, .40], stem: [.60, .93], carotid: [.16, .75] },
+  pancreas: { in: [.50, .08], out: [.95, .50], head: [.85, .45], tail: [.06, .45], body: [.50, .45] },
+  spleen: { in: [.38, .78], out: [.52, .78], hilum: [.45, .72], pulp: [.50, .38] }
+};
+/* draw the injected art centred on x,y at w px wide. The art is clipped to its
+ * frame; tint overlays an organ-shaped translucent mask (the art itself, reused
+ * as a mask); dim dulls the art. Art ids are suffixed per instance so two of
+ * the same organ on one page never share gradient, clip or mask ids. */
+function _orgArt(parent, kind, x, y, w, opts, A) {
+  var vb = A.vb, vw = vb[2], vh = vb[3], cx = vb[0] + vw / 2, cy = vb[1] + vh / 2;
+  _orgN++;
+  var uid = "u" + _orgN;
+  var outer = mk("g", { class: "org org-art org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var sx = w / vw, sy = opts.h ? opts.h / vh : sx, fx = opts.flip ? -1 : 1;
+  var inner = mk("g", { transform: "translate(" + f1(-fx * cx * sx) + " " + f1(-cy * sy) + ") scale(" + (fx * sx).toFixed(4) + " " + sy.toFixed(4) + ")" }, outer);
+  var defs = mk("defs", {}, inner);
+  var cid = A.pfx + uid + "-frame";
+  var cp = mk("clipPath", { id: cid }, defs);
+  mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, cp);
+  var art = mk("g", { class: "org-halo", "clip-path": "url(#" + cid + ")" }, inner);
+  var aid = A.pfx + uid + "-art";
+  art.setAttribute("id", aid);
+  art.innerHTML = A.body.split('id="' + A.pfx + '-').join('id="' + A.pfx + uid + '-')
+    .split('url(#' + A.pfx + '-').join('url(#' + A.pfx + uid + '-')
+    .split('href="#' + A.pfx + '-').join('href="#' + A.pfx + uid + '-');
+  if (opts.dim) art.setAttribute("opacity", ".5");
+  if (opts.tint) {
+    var mid = A.pfx + uid + "-tintm";
+    var m = mk("mask", { id: mid, maskUnits: "userSpaceOnUse", x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, defs);
+    mk("use", { href: "#" + aid }, m);
+    var tg = mk("g", { "clip-path": "url(#" + cid + ")" }, inner);
+    mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh), fill: opts.tint, mask: "url(#" + mid + ")" }, tg);
+  }
+  var ports = {}, F = _ORG_FRAC[kind], k;
+  for (k in F) ports[k] = [Math.round((x + fx * (vb[0] + F[k][0] * vw - cx) * sx) * 10) / 10, Math.round((y + (vb[1] + F[k][1] * vh - cy) * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(vh * sy * 10) / 10, ports: ports, art: true };
+}
+/* dispatcher: outer g carries the theme class and gradients, inner g the local drawing scaled to w */
+function organ(parent, kind, x, y, w, opts) {
+  opts = opts || {};
+  if (_ORG_FRAC[kind] && _ORG_ART[kind]) return _orgArt(parent, kind, x, y, w, opts, _ORG_ART[kind]);
+  var outer = mk("g", { class: "org org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var G = _orgDefs(outer);
+  var inner = mk("g", {}, outer);
+  var r;
+  if (kind === "liver") r = _orgLiver(inner, G);
+  else if (kind === "heart") r = _orgHeart(inner, G);
+  else if (kind === "kidney") r = _orgKidney(inner, G);
+  else if (kind === "lung") r = _orgLung(inner, G);
+  else if (kind === "stomach") r = _orgStomach(inner, G);
+  else if (kind === "brain") r = _orgBrain(inner, G);
+  else if (kind === "pancreas") r = _orgPancreas(inner, G);
+  else if (kind === "spleen") r = _orgSpleen(inner, G);
+  else if (kind === "bladder") r = _orgBladder(inner, G);
+  else if (kind === "uterus") r = _orgUterus(inner, G);
+  else if (kind === "thyroid") r = _orgThyroid(inner, G);
+  else throw new Error("organ: unknown kind " + kind);
+  var sx = w / 100, sy = opts.h ? opts.h / r.h0 : sx, fx = opts.flip ? -1 : 1;
+  inner.setAttribute("transform", "scale(" + (fx * sx).toFixed(3) + " " + sy.toFixed(3) + ")");
+  var ports = {}, k;
+  for (k in r.ports) ports[k] = [Math.round((x + fx * r.ports[k][0] * sx) * 10) / 10, Math.round((y + r.ports[k][1] * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(r.h0 * sy * 10) / 10, ports: ports, art: false };
+}
+organ.kinds = ["liver", "heart", "kidney", "lung", "stomach", "intestine", "brain", "pancreas", "spleen", "bladder", "uterus", "thyroid"];
+
+_ORG_ART["kidney"]={vb:[0,0,461.7,524.4],pfx:"oakid",body:"<defs><filter id=\"oakid-luminosity-invert\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"398.2\" color-interpolation-filters=\"sRGB\" filterUnits=\"userSpaceOnUse\"><feColorMatrix result=\"cm\" values=\"-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0\" /></filter><radialGradient id=\"oakid-radial-gradient\" cx=\"203.2\" cy=\"292.9\" fx=\"203.2\" fy=\"292.9\" r=\"173\" gradientUnits=\"userSpaceOnUse\"><stop offset=\".6\" stop-color=\"#000\" /><stop offset=\".9\" stop-color=\"#fff\" /></radialGradient><mask id=\"oakid-mask\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"398.2\" maskUnits=\"userSpaceOnUse\"><g filter=\"url(#oakid-luminosity-invert)\"><path d=\"M95.9 444.9l12.9 4.4 20.1 5.2 26 4.1 14.3 .9 14.8 -.3 14.9 -1.8 52.3 -10.4 19.3 -5.4 19.2 -6.8 18.4 -8.6 17 -10.7 14.9 -13.1 12.2 -15.8 8.9 -18.8 6.5 -21.3 5.4 -22.7 4.2 -23.5 3 -23.6 1.7 -23 .4 -21.8 -1 -19.9 -2.5 -17.4 -4 -14.3 -5.6 -10.4 -13.4 -8.8 -25.3 -9.2 -34.3 -8.8 -40.4 -7.7 -43.6 -5.8 -43.8 -3.1 -41.2 .4 -35.6 4.6 -27.2 9.6 -15.8 15.4 -8.7 20.4 -7.3 23.8 -5.3 26.7 -2.8 28.9 .4 30.6 4.2 31.7 8.6 32.2 13.6 32.2 19.2 31.5Z\" fill=\"url(#oakid-radial-gradient)\" /></g></mask><clipPath id=\"oakid-clippath\"><path d=\"M461.7 225.4l-2.9 36.6 -8.4 34.7 -13.5 32.3 -18.1 29.5 -22.2 26.3 -25.9 22.5 -29.1 18.3 -31.9 13.7 -34.2 8.5 -36 2.9 -36 -2.9 -34.2 -8.5 -31.9 -13.7 -29.1 -18.3 -25.9 -22.5 -22.2 -26.3 -18.1 -29.5 -13.5 -32.3 -8.4 -34.7 -2.9 -36.6 2.7 -36.4 7.9 -34.3 12.7 -31.8 17.1 -28.9 21.1 -25.7 24.6 -22.2 27.7 -18.2 30.4 -14 32.7 -9.3 34.5 -4.3 10.6 -.2 36 2.9 34.2 8.5 31.9 13.7 29.1 18.3 25.9 22.5 22.2 26.3 18.1 29.5 13.5 32.3 8.4 34.7Z\" fill=\"none\" /></clipPath><filter id=\"oakid-luminosity-invert-2\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"395.9\" color-interpolation-filters=\"sRGB\" filterUnits=\"userSpaceOnUse\"><feColorMatrix result=\"cm\" values=\"-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0\" /></filter><mask id=\"oakid-mask-1\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"395.9\" maskUnits=\"userSpaceOnUse\"><g filter=\"url(#oakid-luminosity-invert-2)\"><path d=\"M95.9 444.9l12.9 4.4 20.1 5.2 26 4.1 14.3 .9 14.8 -.3 14.9 -1.8 52.3 -10.4 19.3 -5.4 19.2 -6.8 18.4 -8.6 17 -10.7 14.9 -13.1 12.2 -15.8 8.9 -18.8 6.5 -21.3 5.4 -22.7 4.2 -23.5 3 -23.6 1.7 -23 .4 -21.8 -1 -19.9 -2.5 -17.4 -4 -14.3 -5.6 -10.4 -13.4 -8.8 -25.3 -9.2 -34.3 -8.8 -40.4 -7.7 -43.6 -5.8 -43.8 -3.1 -41.2 .4 -35.6 4.6 -27.2 9.6 -15.8 15.4 -8.7 20.4 -7.3 23.8 -5.3 26.7 -2.8 28.9 .4 30.6 4.2 31.7 8.6 32.2 13.6 32.2 19.2 31.5Z\" fill=\"url(#oakid-radial-gradient)\" /></g></mask><clipPath id=\"oakid-clippath-1\"><path d=\"M461.7 225.4l-2.9 36.6 -8.4 34.7 -13.5 32.3 -18.1 29.5 -22.2 26.3 -25.9 22.5 -29.1 18.3 -31.9 13.7 -34.2 8.5 -36 2.9 -36 -2.9 -34.2 -8.5 -31.9 -13.7 -29.1 -18.3 -25.9 -22.5 -22.2 -26.3 -18.1 -29.5 -13.5 -32.3 -8.4 -34.7 -2.9 -36.6 2.7 -36.4 7.9 -34.3 12.7 -31.8 17.1 -28.9 21.1 -25.7 24.6 -22.2 27.7 -18.2 30.4 -14 32.7 -9.3 34.5 -4.3 10.6 -.2 36 2.9 34.2 8.5 31.9 13.7 29.1 18.3 25.9 22.5 22.2 26.3 18.1 29.5 13.5 32.3 8.4 34.7Z\" fill=\"none\" /></clipPath></defs><g mask=\"url(#oakid-mask)\"><path id=\"oakid-ureter\" d=\"M185.3 197.9l-14.2 32.3 -16.1 28.8 -10.4 20.5 -5.3 13 -3.1 13.1 -1.6 17.2 -.3 19.1 4.1 64.9 -.8 113.4 6.6 -.9 2.5 -1.8 2 -3.3 1.7 -102.5 -1.6 -42.6 .3 -25.1 2.9 -22.7 2.9 -9.4 4.1 -7.4 9.3 -10.5 8.1 -6.2 12.8 -6.8 10.4 -8.9 12.9 -13.3 12.1 -15.1 4.7 -7.4 3.3 -6.9 1.5 -6.1 -1 -5.5 -3.4 -5.3 -5.2 -4.9 -6.4 -4.3 -7.1 -3.6 -14 -4.5 -5.7 -.5 -4.2 .8Z\" stroke-miterlimit=\"10\" fill=\"#f4dca9\" stroke-width=\"8.2px\" stroke=\"#725222\" /></g><g clip-path=\"url(#oakid-clippath)\"><g><path d=\"M11.7 232.9l0 12.3 61.8-5.4 43.8-7.2 18.9 7.9 15.5 8.8 15 11.9 12.1 12.8-1-3.7-3.3-5.5-9.7-10.4-15.8-11.9-23.5-14.2 4.9-3.8 17.3-7.3 20.9-7.8 17.9-4.5 6-3.3 1.3-2.4 0-2.6-28.2 7.1 11.6-11.5 4.8-7.4 3.4-12.2.1-3.8-1.1-4.9-1.3.2-1.5 3.5-1 8.6-1.8 5.4-4.3 6.4-5.6 6-7 6-6.9 4.4-23.5 10.6-17.8 6.6-12.4 2-51.6 6.3Z\" stroke-miterlimit=\"10\" stroke-width=\"8.2px\" fill=\"#5276b6\" stroke=\"#142b4f\" /><path d=\"M5.3 206.7l91.5 -6.9 3 -.9 10.5 -7.7 5.8 -2.7 9.6 -1.7 14.9 -.3 13.1 -1.5 7.8 -3.1 6.9 -6.1 4.2 -1.6 2.9 .3 -2.1 3.1 -4 4.3 -5.7 3.4 -13.1 3.1 -30.7 3.6 -4.6 1.6 -3.3 2.3 -3.9 4.5 1.5 .4 32.6 -7.6 11.4 -4.2 14.3 -9.5 16 -15.2 3.5 -1.1 2.3 1.6 1.2 3.7 .3 10.6 -1.9 15.2 -24.1 7.2 -30.6 7.6 -9.4 3.1 -3.4 2.3 3.3 .8 12.3 .5 48 -.1 1.2 .7 .7 2.4 -2.7 6.4 -30.2 -.6 -31.8 1.1 -26.3 -3.3 -89.4 8.5 -1.4 -.8 -1.4 -4.6 -.1 -6.8Z\" stroke-miterlimit=\"10\" stroke=\"#8f2e30\" fill=\"#d85452\" stroke-width=\"8.2px\" /></g></g><path d=\"M172.2 58.6l31.8 .1 12.1 1.3 9.6 2.6 14.8 6.5 10.3 6.1 10.4 7.5 10.2 8.9 16.6 16.6 8.8 11.7 1.5 4.4 .8 10.8 8.8 14.8 11.1 24 6.5 17.6 3 13.3 3.1 25.3 .2 8.2 -1.2 8.5 1.4 4.4 .6 7.9 0 29.6 -1.2 13.8 -6.1 26.9 -5.4 7 -4.6 13.8 -7.5 15.9 -12 17.8 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -1.4 -12.1 .9 -11.8 3.2 -9.3 6.1 -11.5 1.3 -5.4 -4 -19.4 .5 -12.3 2 -6.5 6.7 -13.5 .6 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" stroke-miterlimit=\"10\" fill=\"#a95c57\" stroke=\"#632b29\" stroke-width=\"8.2px\" /><path d=\"M166.1 7.2l3 2.3 3 3.7 4.9 9.5 5.8 19.1 5.2 13.4 -.2 5.2 -11.3 16.1 -5.9 12 -3.5 12.4 -.4 10.9 -1.9 10.8 -1.9 6.3 -3.2 6.6 -5.1 3.9 -14.8 6.6 -15.8 9.6 -5.4 2 -.9 -.3 -2.7 -4.2 -4.1 -9.9 -3.7 -15.2 -1 -9.5 -.2 -10.7 .9 -11.8 2.2 -13 7.1 -26.4 9.3 -23.4 5.5 -9.8 6 -8 6.5 -6 7 -3.6 7.5 -.9Z\" stroke-miterlimit=\"10\" fill=\"#f4dca9\" stroke=\"#5a4218\" stroke-width=\"8.2px\" /><g mask=\"url(#oakid-mask-1)\"><path id=\"oakid-ureter-2\" data-name=\"ureter\" d=\"M185.3 197.9l-14.2 32.3 -16.1 28.8 -10.4 20.5 -5.3 13 -3.1 13.1 -1.6 17.2 -.3 19.1 4.1 64.9 -.8 113.4 6.6 -.9 2.5 -1.8 2 -3.3 1.7 -102.5 -1.6 -42.6 .3 -25.1 2.9 -22.7 2.9 -9.4 4.1 -7.4 9.3 -10.5 8.1 -6.2 12.8 -6.8 10.4 -8.9 12.9 -13.3 12.1 -15.1 4.7 -7.4 3.3 -6.9 1.5 -6.1 -1 -5.5 -3.4 -5.3 -5.2 -4.9 -6.4 -4.3 -7.1 -3.6 -14 -4.5 -5.7 -.5 -4.2 .8Z\" stroke-miterlimit=\"10\" stroke-width=\"3.5px\" fill=\"#f4dca9\" stroke=\"#725222\" /></g><g clip-path=\"url(#oakid-clippath-1)\"><g><path d=\"M11.7 232.9l0 12.3 61.8-5.4 43.8-7.2 18.9 7.9 15.5 8.8 15 11.9 12.1 12.8-1-3.7-3.3-5.5-9.7-10.4-15.8-11.9-23.5-14.2 4.9-3.8 17.3-7.3 20.9-7.8 17.9-4.5 6-3.3 1.3-2.4 0-2.6-28.2 7.1 11.6-11.5 4.8-7.4 3.4-12.2.1-3.8-1.1-4.9-1.3.2-1.5 3.5-1 8.6-1.8 5.4-4.3 6.4-5.6 6-7 6-6.9 4.4-23.5 10.6-17.8 6.6-12.4 2-51.6 6.3Z\" fill=\"#5276b6\" /><path d=\"M6.8 204.4l65.9 -2.6 24.1 -2 3 -.9 10.5 -7.7 5.8 -2.7 9.6 -1.7 14.9 -.3 13.1 -1.5 7.8 -3.1 6.9 -6.1 4.2 -1.6 2.9 .3 -2.1 3.1 -4 4.3 -5.7 3.4 -13.1 3.1 -30.7 3.6 -4.6 1.6 -3.3 2.3 -3.9 4.5 1.5 .4 32.6 -7.6 11.4 -4.2 14.3 -9.5 16 -15.2 3.5 -1.1 2.3 1.6 1.2 3.7 .3 10.6 -1.9 15.2 -24.1 7.2 -30.6 7.6 -9.4 3.1 -3.4 2.3 3.3 .8 12.3 .5 48 -.1 1.2 .7 .7 2.4 -2.7 6.4 -30.2 -.6 -31.8 1.1 -26.3 -3.3 -87.9 6.2 -1.4 -.8 -1.4 -4.6 -.1 -6.8Z\" fill=\"#d85452\" /></g></g><path d=\"M172.2 58.6l31.8 .1 12.1 1.3 9.6 2.6 14.8 6.5 10.3 6.1 10.4 7.5 10.2 8.9 16.6 16.6 8.8 11.7 1.5 4.4 .8 10.8 8.8 14.8 11.1 24 6.5 17.6 3 13.3 3.1 25.3 .2 8.2 -1.2 8.5 1.4 4.4 .6 7.9 0 29.6 -1.2 13.8 -6.1 26.9 -5.4 7 -4.6 13.8 -7.5 15.9 -12 17.8 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -1.4 -12.1 .9 -11.8 3.2 -9.3 6.1 -11.5 1.3 -5.4 -4 -19.4 .5 -12.3 2 -6.5 6.7 -13.5 .6 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" stroke-miterlimit=\"10\" stroke-width=\"3.5px\" fill=\"#a95c57\" stroke=\"#632b29\" /><g><path d=\"M172.2 58.6l31.8 .1 17.1 2.4 14.6 5.1 10.5 5 10.5 6.6 10 8.5 25.9 28.4 5 7.2 1.8 13.7 9.3 13.6 6 11.4 5.4 12.5 3.6 12 4.7 26 3.2 23.2 .1 5.7 -1 6.4 1.6 7.7 -2 44.5 -4.5 29.2 -5.8 8.3 -7.9 21.3 -9.7 17.3 -6.6 8.9 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -.3 -15.8 1 -11.9 2.1 -5.5 5.7 -9.4 1.6 -5.6 -2.8 -25.1 0 -10.7 8.1 -17.8 .5 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" fill=\"#f5b6b3\" /></g><g><path d=\"M172.2 58.6l31.8 .1 17.1 2.4 14.6 5.1 10.5 5 10.5 6.6 10 8.5 25.9 28.4 5 7.2 1.8 13.7 9.3 13.6 6 11.4 5.4 12.5 3.6 12 4.7 26 3.2 23.2 .1 5.7 -1 6.4 1.6 7.7 -2 44.5 -4.5 29.2 -5.8 8.3 -7.9 21.3 -9.7 17.3 -6.6 8.9 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -.3 -15.8 1 -11.9 2.1 -5.5 5.7 -9.4 1.6 -5.6 -2.8 -25.1 0 -10.7 8.1 -17.8 .5 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" fill=\"#f5b6b3\" /></g><path d=\"M166.1 7.2l3 2.3 3 3.7 4.9 9.5 5.8 19.1 5.2 13.4 -.2 5.2 -11.3 16.1 -5.9 12 -3.5 12.4 -.4 10.9 -1.9 10.8 -1.9 6.3 -3.2 6.6 -5.1 3.9 -14.8 6.6 -15.8 9.6 -5.4 2 -.9 -.3 -2.7 -4.2 -4.1 -9.9 -3.7 -15.2 -1 -9.5 -.2 -10.7 .9 -11.8 2.2 -13 7.1 -26.4 9.3 -23.4 5.5 -9.8 6 -8 6.5 -6 7 -3.6 7.5 -.9Z\" stroke-miterlimit=\"10\" stroke-width=\"3.5px\" fill=\"#f4dca9\" stroke=\"#5a4218\" /><g><path d=\"M174 120.7l16.4 5.9 15.1 6.6 14.9 8.3 6.3 4.7 4.9 4.9 7.9 10.8 10.1 18.6 6.4 19.8 1.4 13 -.5 24.9 -1.8 30.3 -2.2 18.6 -3.1 14.1 3.8 -3.8 3.2 -5.7 2.8 -7.1 11.2 -46.2 1.7 -3.8 8 -11.7 2.9 -7.3 .7 -9 -.8 -5.4 -4.8 -13.3 -10 -18.9 -13.5 -21.2 -14.9 -19.3 -7.4 -7.7 -7 -5.7 -6.3 -3.2 -20.2 -5 -19.9 -3.1 -9.2 -.4 -2.5 .4 -.7 .9Z\" fill=\"#faeceb\" /></g><g><path d=\"M162.4 14.1l-13.1 21.1-9.8 22.5-9.3 35.6-3 20.8-1.3-14.5 1.2-17.6 3-18.1 6.2-22.5 10.1-21.2 5.7-8.8 3.9-1.1Z\" fill=\"#fffff6\" /></g><g opacity=\".4\"><g><path d=\"M177.8 34l-9.8 11.9 -10.7 17.7 -6.7 15.8 -11.3 37 -1.6 2.6 -1.8 1.3 -2.2 0 -2.7 -1.4 -.5 -14.6 3.6 -26.9 6.6 -24.9 4.8 -11.2 12.6 -21.4 3.9 -4.7 1.4 -.3 1.8 .9 4.1 4.5Z\" fill=\"#b68c3d\" /></g></g><g opacity=\".2\"><g><g><path d=\"M194.2 69.3l23.4 7.5 21.9 9.9 11.3 6.6 10.8 7.8 9.6 9 7.8 10.3 13.1 22.6 17.2 34.7 8.4 21.7 2.9 9.9 2.7 16.9 -.3 38.1 -2.2 23.1 -4.7 23.4 -3.5 11.3 -4.4 10.8 -5.7 10.7 -7 10.9 -8.2 10.8 -9.1 10.4 -9.9 9.6 -10.5 8.4 -10.9 6.8 -11.1 4.9 -11.2 2.6 -11 -.1 -10.3 -2.3 -9.3 -3.9 -8.3 -5.4 -7.2 -6.8 -5.9 -8 -4.5 -9.1 -3 -10 -1.4 -10.8 .3 -11.5 2.1 -12.1 4.2 -10.1 5.9 -8.4 13.2 -13.6 -10.1 -4.4 -4.9 -4.1 -4 4.6 -6.5 10 -4.6 9.8 -4.3 12.8 -1.1 15.2 1.3 20.5 2.3 11.5 3.8 11.5 5.7 10.8 7.9 9.5 10.5 7.5 12.3 4.8 12.8 2 13 -.3 12.7 -2.1 12.1 -3.4 11.1 -4.2 17.6 -9 9 -6.6 9.3 -11.1 8.8 -12.3 14.9 -35.1 .9 -1.6 2.7 -1.7 1.5 -3 3.1 -24.3 3.5 -39.8 -.1 -6.2 -2.1 -10.2 2.2 -5.3 .4 -3.6 -6.6 -40.2 -4.3 -20.7 -4.8 -10.6 -18 -29 -.8 -2.9 -.4 -9.8 -4.2 -6.4 -12.8 -14.2 -20.3 -18.3 -12.1 -8.5 -12.8 -6.8 -13.2 -4.2 -13.3 -.7Z\" fill=\"#fff\" /></g></g></g><g><path d=\"M180.1 174.7l9.2-6.9 2.9-5.5 2.3.6 1.4 1.4.6 2-.6 5.1-5.9 13.2-.9-7.4-1.8-2.5-3.1-1.3Z\" fill=\"#54221f\" /></g><g><path d=\"M180.1 174.7l9.2-6.9 2.9-5.5 2.3.6 1.4 1.4.6 2-.6 5.1-5.9 13.2-.9-7.4-1.8-2.5-3.1-1.3Z\" fill=\"#54221f\" /></g><g><path d=\"M183.8 241.6l7.1 -.1 6.6 1.4 -11.2 -8.7 -3.7 -4.7 1.6 7.3Z\" fill=\"#54221f\" /></g><g><path d=\"M174.4 282.9l14.2 5.9-.1 3-2.4 4.8-14-6.8 2.4-3Z\" fill=\"#54221f\" /></g>"};
+/* Nephron scene: kidney and bladder organs, glomerulus, tubule, blood, filtrate, protein, cells, a stone, treatment actions and gauges. */
 const WW = SC.W, GX = 190, GY = 178;
-const layers = { caps: $("caps"), tub: $("tub"), vess: $("vess"), glom: $("glom"), rbc: $("rbcs"), parts: $("parts"), stone: $("stone"), over: $("over"), panel: $("panel") };
+const layers = { kidney: $("kidneySlot"), bladder: $("bladderSlot"), caps: $("caps"), tub: $("tub"), vess: $("vess"), glom: $("glom"), rbc: $("rbcs"), parts: $("parts"), stone: $("stone"), over: $("over"), panel: $("panel") };
 /* Catmull-Rom sampling so one dense point list draws the path and also steers the particles */
 function smoothPts(p, n) { const out = [];
   for (let i = 0; i < p.length - 1; i++) { const p0 = p[Math.max(0, i - 1)], p1 = p[i], p2 = p[i + 1], p3 = p[Math.min(p.length - 1, i + 2)];
     for (let s = 0; s < n; s++) { const t = s / n, t2 = t * t, t3 = t2 * t, c = (a, b, c2, d) => 0.5 * (2 * b + (-a + c2) * t + (2 * a - 5 * b + 4 * c2 - d) * t2 + (-a + 3 * b - 3 * c2 + d) * t3); out.push([c(p0[0], p1[0], p2[0], p3[0]), c(p0[1], p1[1], p2[1], p3[1])]); } }
   out.push(p[p.length - 1]); return out; }
 const dp = (pts) => "M" + pts.map((q) => f1(q[0]) + " " + f1(q[1])).join("L");
-const TUB = smoothPts([[246, 178], [282, 178], [305, 152], [345, 202], [390, 152], [435, 202], [482, 218], [490, 330], [500, 392], [535, 404], [565, 392], [572, 300], [576, 236], [620, 206], [665, 246], [710, 206], [760, 206], [825, 206], [868, 216], [880, 262], [880, 330], [880, 390], [880, 426]], 10);
-const BLD = smoothPts([[16, 150], [110, 150], [150, 160], [178, 148], [218, 162], [228, 188], [200, 214], [165, 204], [150, 206], [128, 222], [90, 228], [16, 228]], 8);
-const tr = track(TUB), bt = track(BLD);
+const TUB = smoothPts([[246, 178], [282, 178], [305, 152], [345, 202], [390, 152], [435, 202], [482, 218], [490, 330], [500, 392], [535, 404], [565, 392], [572, 300], [576, 236], [620, 206], [665, 246], [710, 206], [760, 206], [825, 206], [868, 216], [880, 262], [880, 330], [880, 400]], 10);
+/* blood: renal artery from the left edge into the kidney hilum, through the tuft, back out to the renal vein */
+const BLD = smoothPts([[16, 206], [65, 206], [110, 212], [135, 192], [152, 170], [178, 150], [218, 164], [228, 190], [200, 216], [165, 206], [150, 208], [128, 224], [100, 232], [65, 242], [16, 240]], 8);
+/* drawn vessel halves; their tips hide under the tuft while the full track steers the cells */
+const AFF = smoothPts([[16, 206], [65, 206], [110, 212], [135, 192], [152, 170], [168, 158]], 8);
+const EFF = smoothPts([[172, 196], [150, 208], [128, 224], [100, 232], [65, 242], [16, 240]], 8);
+const tr = track(TUB), bt = track(BLD), fragTr = track([[880, 322], [880, 362], [880, 394]]);
+const BLOOD_U = 0.31;
 let uStone = 0.9; { let best = 1e9; for (let i = 0; i <= 600; i++) { const q = tr.at(i / 600), d = Math.hypot(q.x - 880, q.y - 322); if (d < best) { best = d; uStone = i / 600; } } }
 const E = {};
+/* ---- organs and the caption that follows the state ---- */
+let kidneyO = null, bladderO = null, bladFill = null, capEl = null, capKey = "";
+function initOrgans() {
+  kidneyO = organ(layers.kidney, "kidney", 165, 222, 200, {});
+  bladderO = organ(layers.bladder, "bladder", 880, 396, 72, {});
+  bladFill = mk("ellipse", { class: "nf-urine", cx: 0, cy: 8, rx: 26, ry: 15, opacity: "0" }, bladderO.g);
+}
+function capText(l, d) {
+  if (d === 1) return l === 0 ? "Fluids restore blood volume. Flow returns and filtration recovers." : "Fluids restore volume, but low volume is not the problem here. Little changes.";
+  if (d === 2) return l === 4 ? "Relieving the blockage. Urine drains again and the bladder fills." : "Nothing blocks drainage here, so relieving obstruction changes little.";
+  if (d === 3) {
+    if (l === 2) return "Steroid calms the immune attack. Inflammation fades and filtration recovers.";
+    if (l === 3) return "Steroid calms the immune attack. Protein loss eases.";
+    return "This injury is not an immune attack, so a steroid changes little.";
+  }
+  if (d === 4) return l === 1 ? "Stopping the toxin. No new toxin reaches the tubule. Damage fades." : "No toxin drives this injury, so stopping it changes little.";
+  if (l === 0) return "No treatment. Too little blood reaches the filter. Filtration stays very low.";
+  if (l === 1) return "No treatment. Injured tubule cells shed and clog the tubule. Filtration stays low.";
+  if (l === 2) return "No treatment. The inflamed filter leaks blood cells. Filtration stays low.";
+  if (l === 3) return "No treatment. The leaky filter spills protein into the urine.";
+  return "No treatment. Urine cannot drain. Pressure backs up and filtration stops.";
+}
 /* ---- static parts ---- */
 function initStatic() {
   mk("circle", { class: "nf-caps", cx: GX, cy: GY, r: 62 }, layers.caps);
   E.tw = mk("path", { class: "nf-wall", d: dp(TUB), "stroke-width": 22 }, layers.tub);
   E.tl = mk("path", { class: "nf-lum", d: dp(TUB), "stroke-width": 14 }, layers.tub);
   E.td = mk("path", { class: "nf-dmg", d: dp(TUB.slice(0, Math.floor(TUB.length * 0.5))), "stroke-width": 20, opacity: "0" }, layers.tub);
-  const A = smoothPts([[14, 150], [60, 150], [110, 150], [155, 166]], 8), B = smoothPts([[155, 200], [128, 222], [90, 228], [14, 228]], 8);
-  E.aw = mk("path", { class: "nf-vw", d: dp(A) }, layers.vess); E.al = mk("path", { class: "nf-vl", d: dp(A) }, layers.vess);
-  E.ew = mk("path", { class: "nf-vw", d: dp(B) }, layers.vess); E.el = mk("path", { class: "nf-vl", d: dp(B) }, layers.vess);
+  E.aw = mk("path", { class: "nf-vw", d: dp(AFF) }, layers.vess); E.al = mk("path", { class: "nf-vl", d: dp(AFF) }, layers.vess);
+  E.ew = mk("path", { class: "nf-vw", d: dp(EFF) }, layers.vess); E.el = mk("path", { class: "nf-vl", d: dp(EFF) }, layers.vess);
   E.tuft = mk("circle", { class: "nf-tuft", cx: GX, cy: GY, r: 42 }, layers.glom);
   ["M165 160C175 140 200 142 205 158C212 178 180 182 188 198", "M170 196C160 180 178 170 196 178C214 186 214 204 198 210", "M208 150C224 160 224 180 212 192"].forEach((d) => mk("path", { class: "nf-coil", d }, layers.glom));
   E.bar = mk("circle", { class: "nf-bar", cx: GX, cy: GY, r: 44 }, layers.glom);
@@ -437,9 +725,11 @@ function initStatic() {
   E.neus = Array.from({ length: 5 }, (_, i) => { const g = cell(layers.glom, { cls: "neut", r: 6, nuc: 0.55, nucCls: "multi", seed: i + 3, wob: 0.14 }); g.style.opacity = 0; return g; });
   E.stone = mk("g", { transform: "translate(880 322)", opacity: "0" }, layers.stone);
   mk("path", { class: "nf-stone", d: "M-10 -3L-4 -10L6 -8L11 0L6 9L-4 10L-11 4Z" }, E.stone);
-  E.stop = mk("g", { opacity: "0" }, layers.over); mk("circle", { class: "nf-stop", cx: 124, cy: 112, r: 8 }, E.stop); mk("path", { class: "nf-stop", d: "M118.5 117.5L129.5 106.5" }, E.stop);
+  E.badge = mk("g", { transform: "translate(70 206)", opacity: "0", "pointer-events": "none" }, layers.over);
+  mk("circle", { class: "nf-badge", r: 9 }, E.badge);
+  mk("path", { class: "nf-badgex", d: "M-5 5L5 -5" }, E.badge);
 }
-/* ---- red cells in the afferent and efferent vessels ---- */
+/* ---- red cells in the renal artery, through the tuft and out the renal vein ---- */
 const rbcs = [];
 function initRbc() { for (let i = 0; i < 16; i++) { const g = mk("g", { class: "cl cl-rbc" }, layers.rbc); mk("ellipse", { class: "cl-b", rx: 5.5, ry: 3.3 }, g); mk("ellipse", { class: "cl-s", rx: 2, ry: 1 }, g); rbcs.push({ g, u: i / 16, v: rnd(0.85, 1.15), lat: rnd(-2, 2) }); } }
 /* ---- particle pools ---- */
@@ -451,6 +741,7 @@ const slough = pool(26, () => mk("circle", { class: "p-sl", r: 3.8 }, layers.par
 const tox = pool(14, () => mk("path", { class: "sc-p p-lps", d: "M0 -3.4L3.4 0L0 3.4L-3.4 0Z" }, layers.parts));
 const fluid = pool(22, () => mk("path", { class: "p-fl p-bolus", d: "M0 -3.4C2.2 -.6 2.8 .8 2.8 1.8A2.8 2.8 0 0 1 -2.8 1.8C-2.8 .8 -2.2 -.6 0 -3.4Z" }, layers.parts));
 const caps = pool(8, () => { const g = mk("g", {}, layers.parts); mk("rect", { class: "p-pill", x: -4, y: -2, width: 8, height: 4, rx: 2 }, g); mk("rect", { class: "p-pill2", x: 0, y: -2, width: 4, height: 4, rx: 2 }, g); return g; });
+const frag = pool(10, () => mk("path", { class: "sc-p nf-frag", d: "M0 -3L3 2L-3 2Z" }, layers.parts));
 const free = (pl) => pl.find((p) => !p.on);
 function emit(p) { p.on = true; p.t = 0; p.v = rnd(0.85, 1.15); p.off = rnd(0, 0.16); p.lat = rnd(-4, 4); p.e.setAttribute("opacity", "1"); }
 function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
@@ -472,29 +763,31 @@ function initPanel() {
     ["UO", "Urine output", "g-neu", "How much urine is made. Low in most acute injury, and almost none if drainage is fully blocked."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i], y0 + 2, h - 18, 18, cls, name, tip); });
   const ox = layers.over, pl = (key, ...a) => { pills[key] = pill(ox, ...a); return pills[key]; };
-  pl("aff", "Afferent arteriole", 105, 142, 110, 62, "Afferent arteriole: brings blood into the glomerulus. How much blood arrives depends on the blood volume and pressure behind it. Prerenal problems act here.");
-  pl("glo", "Glomerulus", 200, 148, 225, 62, "Glomerulus: a tuft of capillaries where blood is filtered. Nephritic and nephrotic diseases are glomerular (intrinsic) problems.");
+  pl("aff", "Afferent arteriole", 135, 178, 110, 62, "Afferent arteriole: brings blood into the glomerulus. How much blood arrives depends on the blood volume and pressure behind it. Prerenal problems act here.");
+  pl("glo", "Glomerulus filter", 200, 148, 292, 62, "Glomerulus: a tuft of capillaries where blood is filtered. The filtration barrier (capillary lining, basement membrane and podocytes) normally keeps blood cells and protein in the blood. When it is inflamed and lets red cells through the picture is nephritic; when it leaks protein the picture is nephrotic.");
   pl("bow", "Bowman space", 228, 142, 340, 96, "Bowman space: the cup around the glomerulus that collects the filtered fluid (filtrate) before it enters the tubule.");
-  pl("bar", "Filter barrier", 190, 222, 170, 290, "Filtration barrier: capillary lining, basement membrane and podocytes. Normally it keeps blood cells and protein in the blood. When it leaks protein the picture is nephrotic; when it is inflamed and lets red cells through the picture is nephritic.");
-  pl("eff", "Efferent vessel", 70, 232, 70, 330, "Efferent arteriole: carries blood out of the glomerulus toward the tubules.");
+  pl("eff", "Efferent vessel", 116, 227, 60, 166, "Efferent arteriole: carries blood out of the glomerulus toward the tubules.");
   pl("pct", "Proximal tubule", 345, 202, 360, 262, "Proximal tubule: reclaims most of the filtered salt, water and sugar. Its cells use a lot of energy, so they are the usual casualty of poor blood flow or a toxin (acute tubular necrosis).");
   pl("loop", "Loop of Henle", 488, 330, 400, 350, "Loop of Henle: builds the salty gradient that lets the kidney concentrate urine.");
   pl("dct", "Distal tubule", 665, 246, 665, 300, "Distal tubule: fine tuning of salt, potassium and acid.");
-  pl("cd", "Collecting duct", 790, 206, 770, 140, "Collecting duct: the last place where water is adjusted under hormone control. Urine then drains to the ureter.");
-  pl("stone", "Obstruction (stone)", 880, 325, 790, 350, "A blockage in the urinary tract, for example a stone, an enlarged prostate or a tumour. Urine backs up, pressure rises toward the kidney and filtration falls (postrenal injury).");
-  pl("ure", "Ureter", 880, 392, 800, 400, "Ureter: the tube that carries urine from the kidney to the bladder.");
-  pl("uri", "Urine", 880, 424, 810, 430, "Urine leaving the kidney. Its volume and what it contains (protein, blood, casts) help tell the types of injury apart.");
-  pl("fl", "Fluids", 40, 152, 55, 190, "Intravenous fluids restore blood volume. They help when the problem is low volume (prerenal); they do not fix a blocked tract, an inflamed filter or a toxin.");
-  pl("tox", "Nephrotoxin", 35, 146, 55, 112, "A drug or toxin that damages tubule cells. It is filtered and concentrated in the tubule, where the cells take it up.");
-  pl("st", "Steroid", 228, 218, 270, 340, "A steroid dampens immune activity. It helps some immune-driven glomerular diseases (for example minimal change disease and some nephritis), but does nothing for low volume, a blockage or a toxin.");
+  pl("cd", "Collecting duct", 790, 206, 770, 140, "Collecting duct: the last place where water is adjusted under hormone control. Urine then drains through the ureter.");
+  pl("stone", "Obstruction (stone)", 880, 322, 770, 348, "A blockage in the urinary tract, for example a stone, an enlarged prostate or a tumour. Urine backs up, pressure rises toward the kidney and filtration falls (postrenal injury).");
+  pl("ure", "Ureter", 880, 290, 795, 300, "Ureter: the tube that carries urine from the kidney to the bladder. A stone here blocks drainage and pressure backs up.");
+  pl("uri", "Urine", 880, 385, 795, 432, "Urine entering the bladder. Its volume and what it contains (protein, blood, casts) help tell the types of injury apart.");
+  pl("kid", "Kidney", 185, 340, 170, 400, "Kidney: the glomerulus and tubule drawn here sit in its cortex. Blood arrives through the renal artery at the hilum.");
+  pl("bla", "Bladder", 907, 390, 830, 262, "Bladder: stores urine arriving through the ureter. It stays empty while the ureter is blocked.");
+  pl("fl", "Fluids", 52, 202, 55, 280, "Intravenous fluids restore blood volume. They help when the problem is low volume (prerenal); they do not fix a blocked tract, an inflamed filter or a toxin.");
+  pl("tox", "Nephrotoxin", 70, 206, 136, 192, "A drug or toxin that damages tubule cells. It arrives in the blood, is filtered, and the tubule cells take it up.");
+  pl("st", "Steroid", 228, 218, 250, 352, "A steroid dampens immune activity. It helps some immune-driven glomerular diseases (for example minimal change disease and some nephritis), but does nothing for low volume, a blockage or a toxin.");
+  capEl = mk("text", { class: "nf-cap", x: 30, y: 432 }, ox); capEl.textContent = capText(1, 0);
 }
 const sm = { F: 0.85, O: 0, T: 0.5, G: 0, P: 0, GFR: 0.5, UO: 0.5, X: 1, stop: 0, fl: 0, imm: 0 }, KEYS = Object.keys(sm);
-const acc = { filt: 0, prot: 0, bld: 0, slough: 0, tox: 0, fl: 0, cap: 0 };
-function init() { initStatic(); initRbc(); initPanel(); }
+const acc = { filt: 0, prot: 0, bld: 0, slough: 0, tox: 0, fl: 0, cap: 0, frag: 0 };
+function init() { initOrgans(); initStatic(); initRbc(); initPanel(); }
 /* particles that ride the tubule (stage 0: out of the glomerulus, 1: along the tubule, -1: toxin still in the blood) */
 function lumenStep(pl, dt, spd, blocked, dil) {
   pl.forEach((p) => { if (!p.on) return;
-    if (p.st === -1) { p.u += dt * 0.12 * (0.2 + sm.F); const q = bt.at(p.u); p.x = q.x; p.y = q.y; if (p.u > 0.34) { p.st = 0; p.sx = q.x; p.sy = q.y; p.t = 0; } }
+    if (p.st === -1) { p.u += dt * 0.12 * (0.2 + sm.F); const q = bt.at(p.u); p.x = q.x; p.y = q.y; if (p.u > BLOOD_U) { p.st = 0; p.sx = q.x; p.sy = q.y; p.t = 0; } }
     else if (p.st === 0) { p.t += dt / 0.75; const q = tr.at(0); p.x = lerp(p.sx, q.x, Math.min(1, p.t)); p.y = lerp(p.sy, q.y, Math.min(1, p.t)); if (p.t >= 1) { p.st = 1; p.u = 0; } }
     else { const lim = blocked && p.u < uStone ? uStone - 0.012 - p.off : 2; p.u = Math.min(lim, p.u + spd * dt * p.v / tr.len); if (p.u >= 1) { kill(p); return; }
       const q = tr.at(p.u), na = (q.a + 90) * 0.01745, l = p.lat * dil; p.x = q.x + Math.cos(na) * l; p.y = q.y + Math.sin(na) * l; }
@@ -515,8 +808,13 @@ function step(dt, m) {
   E.tuft.style.fill = "color-mix(in srgb,var(--c-bad) " + Math.round(sm.G * 32) + "%,color-mix(in srgb,var(--c-rbc) 16%,var(--anatomy-paper)))";
   E.dep.setAttribute("opacity", clamp(sm.G * 1.3).toFixed(2));
   E.neus.forEach((n, i) => { const t = tm / 2600 + i * 1.256, r = 51 + Math.sin(tm / 700 + i) * 2; place(n, GX + Math.cos(t) * r, GY + Math.sin(t) * r, Math.sin(tm / 400 + i) * 12, 1); n.style.opacity = clamp(sm.G * 1.5 - 0.3).toFixed(2); });
+  /* stone shrinks as the obstruction is relieved; the stop badge marks a halted toxin */
   E.stone.setAttribute("opacity", clamp(sm.O * 1.4).toFixed(2));
-  /* blood cells ride the afferent vessel, through the tuft and out the efferent vessel */
+  E.stone.setAttribute("transform", "translate(880 322) scale(" + (0.35 + 0.65 * clamp(sm.O * 1.6)).toFixed(2) + ")");
+  E.badge.setAttribute("opacity", clamp(sm.stop).toFixed(2));
+  /* urine pooling in the bladder mirrors output: empty while blocked, filling when draining */
+  bladFill.setAttribute("opacity", clamp((sm.UO - 0.15) * 1.4).toFixed(2));
+  /* blood cells ride the renal artery, through the tuft and out the renal vein */
   const nr = Math.ceil(sm.F * rbcs.length);
   rbcs.forEach((r, i) => { const act = i < nr; if (act) { r.u += dt * 0.11 * (0.25 + sm.F) * r.v; if (r.u > 1) r.u -= 1; } r.g.style.opacity = act ? 1 : 0;
     const q = bt.at(r.u), na = (q.a + 90) * 0.01745; place(r.g, q.x + Math.cos(na) * r.lat, q.y + Math.sin(na) * r.lat, q.a, 1); });
@@ -530,19 +828,37 @@ function step(dt, m) {
   lumenStep(filt, dt, spd, blocked, dil); lumenStep(prot, dt, spd * 0.95, blocked, dil); lumenStep(bld, dt, spd * 0.95, blocked, dil); lumenStep(slough, dt, spd * 0.8, blocked, dil);
   lumenStep(tox, dt, spd, blocked, dil);
   tox.forEach((p) => { if (p.on) p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(tm / 5) + ")"); });
-  /* fluid drops and steroid capsules ride the blood vessel toward the glomerulus */
+  /* stone fragments break off and wash into the bladder while the blockage is relieved */
+  acc.frag += dt * (drug === 2 ? 7 * clamp(sm.O + 0.12) : 0);
+  while (acc.frag >= 1) { acc.frag--; const p = free(frag); if (p) { emit(p); p.u = 0; } }
+  frag.forEach((p) => { if (!p.on) return; p.u += dt * 0.5 * p.v; if (p.u >= 1) { kill(p); return; }
+    const q = fragTr.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x + p.lat * 0.3) + " " + f1(q.y) + ") rotate(" + f1(tm / 7 + p.off * 90) + ")");
+    p.e.setAttribute("opacity", clamp((1 - p.u) * 4).toFixed(2)); });
+  /* fluid drops ride the renal artery toward the glomerulus while fluids run */
   acc.fl += dt * sm.fl * 6; while (acc.fl >= 1) { acc.fl--; const p = free(fluid); if (p) { emit(p); p.u = 0; } }
-  fluid.forEach((p) => { if (!p.on) return; p.u += dt * 0.2 * p.v; if (p.u > 0.34) { kill(p); return; } const q = bt.at(p.u), na = (q.a + 90) * 0.01745; p.e.setAttribute("transform", "translate(" + f1(q.x + Math.cos(na) * p.lat * 0.4) + " " + f1(q.y + Math.sin(na) * p.lat * 0.4) + ")"); });
-  acc.cap += dt * sm.imm * 1.6; while (acc.cap >= 1) { acc.cap--; const p = free(caps); if (p) { emit(p); p.u = 0; } }
-  caps.forEach((p) => { if (!p.on) return; p.u += dt * 0.12; if (p.u > 0.34) { kill(p); return; } const q = bt.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ") rotate(" + f1(q.a) + ")"); p.e.setAttribute("opacity", clamp((0.34 - p.u) * 12).toFixed(2)); });
-  /* treatment labels and stop sign */
+  fluid.forEach((p) => { if (!p.on) return; p.u += dt * 0.2 * p.v; if (p.u > BLOOD_U) { kill(p); return; } const q = bt.at(p.u), na = (q.a + 90) * 0.01745; p.e.setAttribute("transform", "translate(" + f1(q.x + Math.cos(na) * p.lat * 0.4) + " " + f1(q.y + Math.sin(na) * p.lat * 0.4) + ")"); });
+  /* steroid capsules arrive in the blood, dock on the inflamed filter and sit on it while selected */
+  caps.forEach((p, i) => {
+    if (drug === 3) {
+      const t = (i % 8) * 0.785 + 0.2, sx = GX + Math.cos(t) * 46.5, sy = GY + Math.sin(t) * 46.5;
+      if (!p.on) { const q = bt.at(0.12); emit(p); p.x = q.x + rnd(-6, 6); p.y = q.y + rnd(-6, 6); p.st = 0; }
+      const dx = sx - p.x, dy = sy - p.y, d = Math.hypot(dx, dy) || 1;
+      if (p.st === 0) { if (d < 7) p.st = 1; else { const go = 150 * dt; p.x += dx / d * Math.min(d, go); p.y += dy / d * Math.min(d, go); } }
+      else { p.x = sx + Math.sin(tm / 500 + i * 2.1) * 2; p.y = sy + Math.cos(tm / 430 + i * 1.7) * 2; }
+      p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(i * 45 + Math.sin(tm / 600 + i) * 6) + ")");
+      p.e.setAttribute("opacity", "1");
+    } else if (p.on) { p.t += dt; p.e.setAttribute("opacity", clamp(1 - p.t / 0.8).toFixed(2)); if (p.t > 0.8) kill(p); }
+  });
+  /* treatment labels and stone label follow the model */
   setVis(pills.fl, clamp(sm.fl)); setVis(pills.st, clamp(sm.imm)); setVis(pills.tox, clamp(Math.max(sm.X, sm.stop))); setVis(pills.stone, clamp(sm.O * 1.5));
-  E.stop.setAttribute("opacity", clamp(sm.stop).toFixed(2));
   /* gauges */
   gg.F.set(sm.F, wordOf(sm.F, 0.4, 0.7, ["low", "reduced", "normal"])); gg.O.set(sm.O, wordOf(sm.O, 0.2, 0.6, ["none", "some", "high"]));
   gg.T.set(sm.T, wordOf(sm.T, 0.2, 0.6, ["none", "some", "severe"])); gg.G.set(sm.G, wordOf(sm.G, 0.2, 0.6, ["none", "some", "marked"]));
   gg.P.set(sm.P, wordOf(sm.P, 0.2, 0.6, ["none", "some", "heavy"])); gg.GFR.set(sm.GFR, wordOf(sm.GFR, 0.35, 0.75, ["very low", "reduced", "near normal"]));
   gg.UO.set(sm.UO, wordOf(sm.UO, 0.1, 0.55, ["very little", "low", "adequate"]));
+  /* caption follows the injury and the treatment together */
+  const key = level + ":" + drug;
+  if (key !== capKey) { capKey = key; const c = capText(level, drug); if (capEl.textContent !== c) capEl.textContent = c; }
 }
 run({ init, step, onModel() { const t = $("tag"); if (t && t.textContent !== S.level.tags[level]) t.textContent = S.level.tags[level]; } });
 </script></body></html>

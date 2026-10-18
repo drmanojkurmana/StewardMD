@@ -49,7 +49,7 @@ const TESTS = [
 
 /* ---------------- static layout ---------------- */
 const CY = 300;                                                   // blood centre line
-const tube = "M580 392L700 392L762 418L860 398L930 424";
+const tube = "M623 394L700 394L762 418L860 400L930 424";
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="256" height="206" rx="16"/>
 <rect class="sc-tissue" x="280" y="44" width="320" height="206" rx="16"/>
@@ -62,22 +62,23 @@ const body = `
 <rect id="lumen" class="sc-lumen" x="160" y="${CY - 34}" width="786" height="68"/>
 <text class="sc-zone sc-dim" x="176" y="${CY + 4}">BLOOD</text>
 <path class="dka-tube" d="${tube}"/>
+<g id="pancSlot"></g><g id="liverSlot"></g><g id="kidneySlot"></g><g id="trig"></g>
 <g id="lungs"></g><g id="muscle"></g><g id="cells"></g>
 <g id="tr"></g><g id="parts"></g><g id="marks"></g><g id="over"></g><g id="panel"></g>`;
 
 const extraCss = `
 .dka-tube{fill:none;stroke:color-mix(in srgb,var(--c-fl) 28%,var(--anatomy-paper));stroke-width:26;stroke-linecap:round;stroke-linejoin:round}
-.cl-bcell{--cc:#e8a3c4}.cl-acell{--cc:#9fd0e8}.cl-fat{--cc:#f3e1a0}.cl-liver{--cc:#b8645a}.cl-mus{--cc:#d77a7a}
-.cl-vac .cl-b{fill:color-mix(in srgb,#fff6c8 80%,var(--c-neut))}
+.cl-fat{--cc:#f3e1a0}
+.cl-vac .cl-b{fill:color-mix(in srgb,#fff6c8 80%,var(--c-neut)}
 .p-gluc{--cc:#f2b23a}.p-ket{--cc:#ee6a4a}.p-k{--cc:#b27af0}.p-ffa{--cc:#e89a3c}.p-gcg{--cc:#f07a7a}.p-ins{--cc:#2fc2a3}.p-co2{--cc:#9aa3ad}.p-salt{--cc:#d9d4f2}.p-iv{fill:var(--c-fl)}
-.dka-lung{fill:color-mix(in srgb,var(--c-lymph) 35%,var(--anatomy-paper));stroke:var(--c-lymph);stroke-width:1.4}
 .dka-musc{fill:color-mix(in srgb,var(--c-mus,#d77a7a) 55%,var(--anatomy-paper));stroke:#c25a5a;stroke-width:1.4}
 .dka-stri{stroke:#c25a5a;stroke-width:.8;opacity:.5}
 .dka-gate{fill:#c25a5a}.dka-gate.open{fill:var(--c-good)}
 .dka-icon{fill:color-mix(in srgb,var(--c-fl) 40%,var(--anatomy-paper));stroke:var(--c-fl);stroke-width:1.3}
 .dka-ico2{fill:color-mix(in srgb,#2fc2a3 40%,var(--anatomy-paper));stroke:#2fc2a3;stroke-width:1.3}
 .dka-ico3{fill:color-mix(in srgb,#b27af0 40%,var(--anatomy-paper));stroke:#b27af0;stroke-width:1.3}
-.dka-stop{fill:none;stroke:var(--c-bad);stroke-width:1.8}
+.dka-x{fill:color-mix(in srgb,var(--anatomy-paper) 72%,transparent);stroke:var(--c-bad);stroke-width:1.8}
+.dka-cap{fill:var(--anatomy-strong);font-size:13px}
 .dr-g-fill.g-acid{fill:#ee6a4a}.dr-g-fill.g-gl{fill:#f2b23a}.dr-g-fill.g-dehy{fill:var(--c-fl)}.dr-g-fill.g-kr{fill:#b27af0}.dr-g-fill.g-sh{fill:var(--c-bad)}
 `;
 
@@ -85,9 +86,9 @@ buildScene({
   id: "dka-pathophysiology", fig: "Fig 1", title: "Diabetic ketoacidosis: what goes wrong", W, H, body, extraCss,
   label: "An animated map of diabetic ketoacidosis. With almost no insulin, muscle cannot take up glucose, fat breaks down into fatty acids and the liver turns them into ketone acids and makes more glucose. Blood glucose and acid rise, the kidney loses water, sodium and potassium, the lungs breathe deeply to blow off carbon dioxide, and the patient becomes dehydrated and shocked. Treatment choices are fluids, insulin and potassium, with gauges for glucose, ketones, dehydration, potassium risk and shock.",
   caption: "Schematic, not to scale. Speeds, particle counts and gauge levels are qualitative and illustrative; no doses, targets or numbers are shown or implied.",
-  scene: { CY, W, H, tube: [[580, 392], [700, 392], [762, 418], [860, 398], [930, 424]] },
-  pageJs: readFileSync(join(HERE, "dka.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { CY, W, H, tube: [[623, 394], [700, 394], [762, 418], [860, 400], [930, 424]] },
+  pageJs: readFileSync(join(HERE, "dka.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With full protocol",
   sourcesLis: [
     "<strong>How DKA develops.</strong> Severe insulin deficiency, with raised glucagon and stress hormones, stops muscle and fat taking up glucose and lets the liver make glucose (glycogen breakdown, gluconeogenesis). Fat breaks down into free fatty acids, and the liver turns them into ketone bodies (beta-hydroxybutyrate, acetoacetate), which are acids and lower blood pH with a raised anion gap. Glucose above the kidney threshold causes an osmotic diuresis that loses water, sodium and potassium. The lungs compensate with deep, fast breathing (Kussmaul). Insulin deficiency and acidosis shift potassium out of cells, so the blood level can look normal or high while total body potassium is low. This is standard teaching in medicine and endocrine texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> Fluids restore circulating volume; insulin switches off ketone production and drives glucose and potassium into cells; potassium replacement (with monitoring) prevents a dangerous fall once insulin starts; the cause (infection, missed insulin, new diabetes) is treated. The figure shows the direction of each effect, not how much to give or when.",

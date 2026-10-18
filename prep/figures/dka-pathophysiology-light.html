@@ -8,7 +8,7 @@
   --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
   --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
   --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
-  --anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
 }
 .iso[data-theme="light"]{
@@ -199,6 +199,9 @@ body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px
 .bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
 .bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
 @media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
 body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
 body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
 .t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
@@ -262,17 +265,17 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 .sc-dim{opacity:.45}
 
 .dka-tube{fill:none;stroke:color-mix(in srgb,var(--c-fl) 28%,var(--anatomy-paper));stroke-width:26;stroke-linecap:round;stroke-linejoin:round}
-.cl-bcell{--cc:#e8a3c4}.cl-acell{--cc:#9fd0e8}.cl-fat{--cc:#f3e1a0}.cl-liver{--cc:#b8645a}.cl-mus{--cc:#d77a7a}
-.cl-vac .cl-b{fill:color-mix(in srgb,#fff6c8 80%,var(--c-neut))}
+.cl-fat{--cc:#f3e1a0}
+.cl-vac .cl-b{fill:color-mix(in srgb,#fff6c8 80%,var(--c-neut)}
 .p-gluc{--cc:#f2b23a}.p-ket{--cc:#ee6a4a}.p-k{--cc:#b27af0}.p-ffa{--cc:#e89a3c}.p-gcg{--cc:#f07a7a}.p-ins{--cc:#2fc2a3}.p-co2{--cc:#9aa3ad}.p-salt{--cc:#d9d4f2}.p-iv{fill:var(--c-fl)}
-.dka-lung{fill:color-mix(in srgb,var(--c-lymph) 35%,var(--anatomy-paper));stroke:var(--c-lymph);stroke-width:1.4}
 .dka-musc{fill:color-mix(in srgb,var(--c-mus,#d77a7a) 55%,var(--anatomy-paper));stroke:#c25a5a;stroke-width:1.4}
 .dka-stri{stroke:#c25a5a;stroke-width:.8;opacity:.5}
 .dka-gate{fill:#c25a5a}.dka-gate.open{fill:var(--c-good)}
 .dka-icon{fill:color-mix(in srgb,var(--c-fl) 40%,var(--anatomy-paper));stroke:var(--c-fl);stroke-width:1.3}
 .dka-ico2{fill:color-mix(in srgb,#2fc2a3 40%,var(--anatomy-paper));stroke:#2fc2a3;stroke-width:1.3}
 .dka-ico3{fill:color-mix(in srgb,#b27af0 40%,var(--anatomy-paper));stroke:#b27af0;stroke-width:1.3}
-.dka-stop{fill:none;stroke:var(--c-bad);stroke-width:1.8}
+.dka-x{fill:color-mix(in srgb,var(--anatomy-paper) 72%,transparent);stroke:var(--c-bad);stroke-width:1.8}
+.dka-cap{fill:var(--anatomy-strong);font-size:13px}
 .dr-g-fill.g-acid{fill:#ee6a4a}.dr-g-fill.g-gl{fill:#f2b23a}.dr-g-fill.g-dehy{fill:var(--c-fl)}.dr-g-fill.g-kr{fill:#b27af0}.dr-g-fill.g-sh{fill:var(--c-bad)}
 </style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Diabetic ketoacidosis: what goes wrong</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>glucose very high · ketones high · dehydration severe · potassium danger</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated map of diabetic ketoacidosis. With almost no insulin, muscle cannot take up glucose, fat breaks down into fatty acids and the liver turns them into ketone acids and makes more glucose. Blood glucose and acid rise, the kidney loses water, sodium and potassium, the lungs breathe deeply to blow off carbon dioxide, and the patient becomes dehydrated and shocked. Treatment choices are fluids, insulin and potassium, with gauges for glucose, ketones, dehydration, potassium risk and shock."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
 <rect class="sc-tissue" x="14" y="44" width="256" height="206" rx="16"/>
@@ -285,22 +288,23 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 <text class="sc-zone" x="30" y="282">LUNGS</text><text class="sc-zone" x="32" y="364">TREATMENT, WHEN GIVEN</text><text class="sc-zone" x="578" y="364">KIDNEY</text>
 <rect id="lumen" class="sc-lumen" x="160" y="266" width="786" height="68"/>
 <text class="sc-zone sc-dim" x="176" y="304">BLOOD</text>
-<path class="dka-tube" d="M580 392L700 392L762 418L860 398L930 424"/>
+<path class="dka-tube" d="M623 394L700 394L762 418L860 400L930 424"/>
+<g id="pancSlot"></g><g id="liverSlot"></g><g id="kidneySlot"></g><g id="trig"></g>
 <g id="lungs"></g><g id="muscle"></g><g id="cells"></g>
 <g id="tr"></g><g id="parts"></g><g id="marks"></g><g id="over"></g><g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, particle counts and gauge levels are qualitative and illustrative; no doses, targets or numbers are shown or implied.</span></figcaption></figure>
 <div class="dr-controls">
   <label class="dr-range"><span>How severe</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="established DKA"><span class="dr-ticks"><i>early</i><i>established</i><i>severe</i></span></label>
-  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">none</option><option value="1">intravenous fluids only</option><option value="2">insulin only</option><option value="3">fluids plus insulin</option><option value="4">fluids, insulin and potassium (monitored)</option><option value="5">full protocol (also treat the cause)</option></select></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With full protocol"><option value="0">none</option><option value="1">intravenous fluids only</option><option value="2">insulin only</option><option value="3">fluids plus insulin</option><option value="4">fluids, insulin and potassium (monitored)</option><option value="5">full protocol (also treat the cause)</option></select></label>
   <button id="pause" type="button" aria-pressed="false">Pause motion</button>
 </div>
 <p id="status" class="dr-status" aria-live="polite"></p>
 <p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
 <h2>What the figure shows, and how sure we are</h2>
-<ul><li><strong>How DKA develops.</strong> Severe insulin deficiency, with raised glucagon and stress hormones, stops muscle and fat taking up glucose and lets the liver make glucose (glycogen breakdown, gluconeogenesis). Fat breaks down into free fatty acids, and the liver turns them into ketone bodies (beta-hydroxybutyrate, acetoacetate), which are acids and lower blood pH with a raised anion gap. Glucose above the kidney threshold causes an osmotic diuresis that loses water, sodium and potassium. The lungs compensate with deep, fast breathing (Kussmaul). Insulin deficiency and acidosis shift potassium out of cells, so the blood level can look normal or high while total body potassium is low. This is standard teaching in medicine and endocrine texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Treatment ideas shown.</strong> Fluids restore circulating volume; insulin switches off ketone production and drives glucose and potassium into cells; potassium replacement (with monitoring) prevents a dangerous fall once insulin starts; the cause (infection, missed insulin, new diabetes) is treated. The figure shows the direction of each effect, not how much to give or when.</li></ul>
+<ul><li><strong>How DKA develops.</strong> Severe insulin deficiency, with raised glucagon and stress hormones, stops muscle and fat taking up glucose and lets the liver make glucose (glycogen breakdown, gluconeogenesis). Fat breaks down into free fatty acids, and the liver turns them into ketone bodies (beta-hydroxybutyrate, acetoacetate), which are acids and lower blood pH with a raised anion gap. Glucose above the kidney threshold causes an osmotic diuresis that loses water, sodium and potassium. The lungs compensate with deep, fast breathing (Kussmaul). Insulin deficiency and acidosis shift potassium out of cells, so the blood level can look normal or high while total body potassium is low. This is standard teaching in medicine and endocrine texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Treatment ideas shown.</strong> Fluids restore circulating volume; insulin switches off ketone production and drives glucose and potassium into cells; potassium replacement (with monitoring) prevents a dangerous fall once insulin starts; the cause (infection, missed insulin, new diabetes) is treated. The figure shows the direction of each effect, not how much to give or when.</li><li><strong>Organ art.</strong> Organ art is NIH BioArt Source, public domain.</li></ul>
 <p><strong>What was simplified.</strong> The hyperosmolar hyperglycaemic state is only suggested by the severe stop; cerebral oedema, phosphate and magnesium, bicarbonate use, the switch to subcutaneous insulin, euglycaemic DKA with SGLT2 inhibitors, and all doses, rates and targets are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
-<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). Organ illustrations are NIH BioArt Source (public domain); all other drawing is original.</p>
 <p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
-</footer></main><script type="module">const SC = {"CY":300,"W":960,"H":610,"tube":[[580,392],[700,392],[762,418],[860,398],[930,424]],"S":{"level":{"label":"How severe","a":[0.45,0.75,1],"names":["early","established DKA","severe with shock"],"ticks":["early","established","severe"],"start":1},"settings":[{"label":"none"},{"label":"intravenous fluids only"},{"label":"insulin only"},{"label":"fluids plus insulin"},{"label":"fluids, insulin and potassium (monitored)"},{"label":"full protocol (also treat the cause)"}],"drugNames":["no treatment","fluids only","insulin only","fluids plus insulin","fluids, insulin and potassium","the full protocol"],"status":"{level} · {drug} ·"}};
+</footer></main><script type="module">const SC = {"CY":300,"W":960,"H":610,"tube":[[623,394],[700,394],[762,418],[860,400],[930,424]],"S":{"level":{"label":"How severe","a":[0.45,0.75,1],"names":["early","established DKA","severe with shock"],"ticks":["early","established","severe"],"start":1},"settings":[{"label":"none"},{"label":"intravenous fluids only"},{"label":"insulin only"},{"label":"fluids plus insulin"},{"label":"fluids, insulin and potassium (monitored)"},{"label":"full protocol (also treat the cause)"}],"drugNames":["no treatment","fluids only","insulin only","fluids plus insulin","fluids, insulin and potassium","the full protocol"],"status":"{level} · {drug} ·"}};
 const modelOf = function modelOf(S, level, drug) {
   const a = S.level.a[level];
   const fl = drug === 1 || drug >= 3 ? 1 : 0, ins = drug === 2 || drug >= 3 ? 1 : 0, kcl = drug >= 4 ? 1 : 0, full = drug === 5 ? 1 : 0;
@@ -410,33 +414,306 @@ function run(scn) {
   start();
 }
 
+/* Shared organ art for the animated mechanism scenes. Plain globals, ES2015, no imports.
+ * Inlined after bio.lib.js when buildScene gets organs:true, so mk/f1/clamp below are the shared ones.
+ * organ(parent, kind, x, y, w, opts) draws real anatomy art (NIH BioArt Source, public domain,
+ * injected as _ORG_ART by buildScene for the kinds the page uses) centred on x,y and w px wide,
+ * and falls back to the existing procedural layered silhouette for kinds without art
+ * (bladder, uterus, thyroid). Art ports are fractions of the art viewBox (see _ORG_FRAC).
+ * opts: { h (px height, else proportional), flip (mirror left/right), cls (extra class), id,
+ *   tint (a CSS colour with opacity, overlaid as an organ-shaped mask for disease states),
+ *   dim (dull the art) }.
+ * Returns { g, kind, x, y, w, h, ports, art } with absolute SVG coords; ports.in/out always exist.
+ * Art keeps its own colours (a faint contrast halo keeps it readable in dark and light themes);
+ * procedural fill is a vertical gradient whose stops derive from --cc (a theme aware palette var,
+ * so dark and light both work); edge stroke and landmark lines use color-mix detail classes.
+ * Emits no text, so label font and dash rules are inherited from the calling scene. */
+if (!document.getElementById("orgCss")) { var _orgSt = document.createElement("style"); _orgSt.id = "orgCss";
+  _orgSt.textContent = ".org-halo{filter:drop-shadow(0 0 1px rgba(0,0,0,.65)) drop-shadow(0 0 1px rgba(255,255,255,.45))}"
+  + ".org-b{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1.2;stroke-linejoin:round;stroke-linecap:round}"
+  + ".org-d{fill:none;stroke:color-mix(in srgb,var(--cc) 40%,var(--anatomy-hi));stroke-width:1;stroke-linecap:round;opacity:.8}"
+  + ".org-dk{fill:none;stroke:color-mix(in srgb,var(--cc) 62%,#000);stroke-width:1.1;stroke-linecap:round;opacity:.8}"
+  + ".org-f{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1;stroke-linejoin:round}"
+  + ".org-v{fill:none;stroke-linecap:round}"
+  + ".org-liver{--cc:var(--c-rbc)}.org-heart{--cc:var(--c-rbc)}.org-kidney{--cc:var(--c-eos)}.org-lung{--cc:var(--c-endo)}"
+  + ".org-stomach{--cc:var(--c-graft)}.org-brain{--cc:var(--c-mac)}.org-pancreas{--cc:var(--c-plt)}.org-spleen{--cc:var(--c-sm)}"
+  + ".org-bladder{--cc:var(--c-th2)}.org-uterus{--cc:var(--c-endo)}.org-thyroid{--cc:var(--c-neut)}";
+  document.head.appendChild(_orgSt); }
+var _orgN = 0;
+/* per instance gradients: base (light -> base -> dark of --cc) plus a white top / dark bottom shade overlay */
+function _orgDefs(g) {
+  _orgN++; var id = "og" + _orgN, hid = "oh" + _orgN;
+  var defs = mk("defs", {}, g);
+  var lg = mk("linearGradient", { id: id, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  var s0 = mk("stop", { offset: "0", "stop-color": "#999" }, lg); s0.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 55%,#fff)");
+  var s1 = mk("stop", { offset: ".55", "stop-color": "#888" }, lg); s1.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 78%,var(--anatomy-paper))");
+  var s2 = mk("stop", { offset: "1", "stop-color": "#666" }, lg); s2.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 66%,#000)");
+  var hg = mk("linearGradient", { id: hid, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  mk("stop", { offset: "0", "stop-color": "#fff", "stop-opacity": ".2" }, hg);
+  mk("stop", { offset: ".55", "stop-color": "#fff", "stop-opacity": "0" }, hg);
+  mk("stop", { offset: "1", "stop-color": "#000", "stop-opacity": ".14" }, hg);
+  return { b: "url(#" + id + ")", h: "url(#" + hid + ")" };
+}
+/* one filled silhouette plus its shade overlay, same path data so the light stays inside */
+function _ob(g, d, G) {
+  mk("path", { class: "org-b", d: d, fill: G.b, stroke: "#666" }, g);
+  mk("path", { d: d, fill: G.h, stroke: "none", "pointer-events": "none" }, g);
+}
+function _ol(g, d, cls) { return mk("path", { class: cls || "org-d", d: d, fill: "none" }, g); }
+function _of(g, d, fillCss, cc) { var e = mk("path", { class: "org-f", d: d, stroke: "#666" }, g); e.setAttribute("style", "fill:" + fillCss + ";--cc:" + cc); return e; }
+function _ov(g, d, color, wdt) { var e = mk("path", { class: "org-v", d: d, fill: "none", stroke: "#777", "stroke-width": wdt, "stroke-linecap": "round" }, g); e.setAttribute("style", "stroke:" + color); return e; }
+function _odot(g, x, y, r, fillCss) { var e = mk("circle", { cx: x, cy: y, r: r, stroke: "none" }, g); e.setAttribute("style", "fill:" + fillCss); return e; }
+
+/* liver: big right lobe, smaller left lobe, falciform notch, gallbladder, porta hepatis stubs */
+function _orgLiver(g, G) {
+  _ov(g, "M-2 46L-2 18", "var(--d-ven)", 5); _ov(g, "M7 46L5 20", "var(--d-art)", 3); _ov(g, "M-11 46L-9 20", "var(--c-bac)", 2.5);
+  _ob(g, "M-6-30C22-33 44-25 50-7C54 9 40 25 18 30C2 33-5 22-7 6C-8-8-8-22-6-30Z", G);
+  _ob(g, "M-8-27C-24-27-40-19-48-6C-51 1-45 9-35 12C-24 15-11 9-8-1C-6-10-6-20-8-27Z", G);
+  _ol(g, "M-8-29C-7-18-6-6-4 6", "org-dk");
+  _ol(g, "M-2-28C14-29 30-24 40-14");
+  _of(g, "M10 18C16 16 22 18 23 24C24 31 19 37 14 36C9 35 7 28 8 23C8 21 9 19 10 18Z", "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  return { h0: 78, ports: { in: [-2, 46], out: [12, -30], porta: [-2, 18], gall: [16, 33], lobe: [20, 0] } };
+}
+/* heart: mass with apex down left, septum, coronary groove, aorta with arch, pulmonary split, caval stubs */
+function _orgHeart(g, G) {
+  _ov(g, "M-2-18L-2-44C-2-52-10-56-20-54C-28-52-32-46-32-38", "var(--d-art)", 8);
+  _ov(g, "M-8-52L-8-59M-15-54L-16-60M-22-53L-24-59", "var(--d-art)", 2.5);
+  _ov(g, "M12-16C8-28 2-34-4-38", "var(--d-ven)", 7);
+  _ov(g, "M-4-38C-12-40-20-38-28-34", "var(--d-ven)", 4.5); _ov(g, "M-4-38C4-40 12-38 20-34", "var(--d-ven)", 4.5);
+  _ov(g, "M20-20L20-52", "var(--d-ven)", 7); _ov(g, "M18 34L18 58", "var(--d-ven)", 7);
+  _ov(g, "M-36-2L-50-6M-34 14L-48 16", "var(--d-art)", 4);
+  _ob(g, "M-4-32C24-34 42-16 40 10C38 32 12 48-20 50C-34 44-40 24-36 2C-33-18-22-31-4-32Z", G);
+  _ol(g, "M0-30C4-10 0 14-14 44", "org-dk");
+  _ol(g, "M-34 6C-18 12 6 12 38 4");
+  _ol(g, "M-6-28C-14-18-18-6-20 8");
+  return { h0: 120, ports: { in: [20, -52], out: [-32, -38], ivc: [18, 58], apex: [-20, 50], pulm: [-28, -34] } };
+}
+/* kidney: bean with hilum, cortex rim, medulla rays, pelvis funnel, ureter, artery and vein stubs */
+function _orgKidney(g, G) {
+  _ov(g, "M-12 6C-22 12-28 18-28 30C-28 50-26 70-24 90", "var(--cc)", 4.5);
+  _ov(g, "M-50-8C-40-8-30-8-22-6", "var(--d-art)", 4); _ov(g, "M-50 10C-40 10-30 8-22 6", "var(--d-ven)", 5);
+  _ob(g, "M8-58C38-58 54-32 50 2C56 32 42 60 8 60C-8 60-16 48-19 34C-26 24-26-24-19-34C-16-48-8-58 8-58Z", G);
+  _ol(g, "M8-49C32-49 45-28 42 0C46 28 34 51 8 51C-1 51-8 43-10 32C-15 24-15-24-10-32C-8-43-1-49 8-49Z");
+  _ol(g, "M-6-30L14-38M-8-10L16-12M-8 12L16 14M-6 32L14 40");
+  _ol(g, "M16-44C30-36 38-20 38 0");
+  _of(g, "M-19-14C-8-12-2-8 2-2C-2 4-8 10-18 14C-22 8-22-8-19-14Z", "color-mix(in srgb,var(--cc) 35%,#fff)", "var(--cc)");
+  return { h0: 150, ports: { in: [-50, -8], out: [-24, 90], vein: [-50, 10], pelvis: [-12, 4], cortex: [30, 0] } };
+}
+/* lung: one lung with oblique fissure, hilum bronchus splitting into lobar and segmental branches */
+function _orgLung(g, G) {
+  _ov(g, "M-58 4L-30 4", "var(--anatomy-hi)", 6);
+  _ov(g, "M-30 4C-22-6-16-16-10-26", "var(--anatomy-hi)", 4.5); _ov(g, "M-30 4C-22 14-14 24-6 34", "var(--anatomy-hi)", 4.5);
+  _ov(g, "M-18-14L-28-22M-16-16L-8-24M-14-20L-14-32M-20 16L-30 24M-16 20L-6 28M-12 26L-10 38", "var(--anatomy-hi)", 2);
+  _ov(g, "M-58-8L-34-6", "var(--d-ven)", 4); _ov(g, "M-58 14L-34 12", "var(--d-art)", 4);
+  _ob(g, "M2-60C24-56 40-32 43 8C45 38 32 60 2 62C-24 62-40 42-42 10C-44-24-20-58 2-60Z", G);
+  _ol(g, "M-40-2C-20 8 0 22 24 40", "org-dk");
+  _ol(g, "M-8-48C8-50 22-40 30-26");
+  return { h0: 130, ports: { in: [-58, 4], out: [-58, 14], art: [-58, -8], apex: [2, -60], base: [2, 62] } };
+}
+/* stomach: J shape with fundus dome, rugae, antrum sweep, pylorus ring, oesophagus and duodenum stubs */
+function _orgStomach(g, G) {
+  _of(g, "M-38-58L-22-58L-22-36L-38-36Z", "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))", "var(--cc)");
+  _ob(g, "M-38-36C-46-24-50-8-46 10C-42 30-30 46-12 50C6 54 28 46 40 32C44 27 46 23 46 18L34 14C30 22 20 30 6 32C-8 34-22 26-28 12C-33-1-31-16-26-28C-24-32-22-34-22-36Z", G);
+  _ol(g, "M-36-10C-30 6-22 20-8 28M-28-22C-22-6-12 10 4 22M-16-30C-10-14 0 2 14 12");
+  _ol(g, "M40 15C43 19 43 25 40 29M34 14C37 18 37 26 34 30", "org-dk");
+  _ol(g, "M46 16L60 22M44 28L58 32", "org-dk");
+  return { h0: 116, ports: { in: [-30, -58], out: [60, 27], fundus: [-40, -12], antrum: [24, 38], pylorus: [40, 22] } };
+}
+/* brain lateral: cerebrum with Sylvian fissure and gyri, cerebellum with folia, tapered brainstem */
+function _orgBrain(g, G) {
+  _ov(g, "M10 50L10 64", "var(--d-art)", 5);
+  _ob(g, "M-50-6C-50-32-24-42 4-40C30-38 44-28 44-8C44 10 32 24 8 28C-18 31-50 24-50-6Z", G);
+  _ol(g, "M-12 10C2 6 18 2 34-4", "org-dk");
+  _ol(g, "M-38-20C-32-10-32 2-38 12M-26-30C-20-20-20-6-26 6M-4-32C2-22 2-8-4 2M10-30C16-20 16-6 10 4M28-22C34-14 34-2 28 8");
+  _ol(g, "M-16 6L-24-4M-10 4L-12-8", "org-dk");
+  _ob(g, "M2 24L16 24L12 56L6 56Z", G);
+  _ol(g, "M2 36C6 38 12 38 16 36");
+  _ob(g, "M22 24C34 22 46 26 48 34C50 42 42 48 32 47C24 46 20 38 20 32C20 28 20 26 22 24Z", G);
+  _ol(g, "M24 32L44 32M25 37L43 37M27 42L41 42");
+  return { h0: 110, ports: { in: [10, 64], out: [4, -40], parenchyma: [-8, -6], cereb: [34, 35], frontal: [-40, -8] } };
+}
+/* pancreas: bulky head right, tapering tail left, main duct with side branches, islet dots */
+function _orgPancreas(g, G) {
+  _ob(g, "M-50-4C-32-14-8-14 14-10C32-7 46-2 49 10C51 21 40 28 26 25C8 21-20 12-50 6Z", G);
+  _ol(g, "M-46 1C-20-2 10 0 38 10", "org-dk");
+  _ol(g, "M-30-1L-34-8M-10-1L-14-9M8 0L4-8M-28 1L-32 8M-6 1L-10 8M12 2L8 10");
+  _ol(g, "M52-6C58 4 58 16 50 24");
+  _odot(g, -20, -2, 1.6, "var(--d-art)"); _odot(g, 0, 0, 1.6, "var(--d-art)"); _odot(g, 22, 6, 1.6, "var(--d-art)");
+  return { h0: 60, ports: { in: [-10, -12], out: [49, 12], head: [36, 8], tail: [-48, 1] } };
+}
+/* spleen: crescent with top notch, trabeculae, hilar artery and vein stubs below */
+function _orgSpleen(g, G) {
+  _ov(g, "M-30 52C-28 44-26 40-22 36", "var(--d-art)", 3.5); _ov(g, "M-20 54C-19 46-17 42-13 38", "var(--d-ven)", 4.5);
+  _ob(g, "M-38-30C-8-40 28-34 44-12C52 4 44 26 20 34C-4 41-34 32-44 10C-48-4-46-22-38-30Z", G);
+  _ol(g, "M-8-36C-4-33 0-33 4-36", "org-dk");
+  _ol(g, "M-30-10C-10-2 12-2 32-10M-28 8C-8 16 12 16 30 8");
+  return { h0: 96, ports: { in: [-30, 52], out: [-20, 54], hilum: [-18, 37], pulp: [0, 0] } };
+}
+/* bladder: dome with detrusor arcs, trigone, ureters in from above, urethra out below */
+function _orgBladder(g, G) {
+  _ov(g, "M-52-44C-44-34-36-26-30-18", "var(--cc)", 4); _ov(g, "M52-44C44-34 36-26 30-18", "var(--cc)", 4);
+  _ob(g, "M0-50C26-48 40-30 40-6C40 16 26 32 8 40L-8 40C-26 32-40 16-40-6C-40-30-26-48 0-50Z", G);
+  _ob(g, "M-8 40L8 40L8 64L-8 64Z", G);
+  _ol(g, "M-8 52L8 52", "org-dk");
+  _ol(g, "M-24-8L24-8L0 24Z");
+  _ol(g, "M-28-28C-12-36 12-36 28-28M-34-12C-16-22 16-22 34-12");
+  return { h0: 120, ports: { in: [-52, -44], out: [0, 64], inR: [52, -44], trigone: [0, 8], dome: [0, -48] } };
+}
+/* uterus: fundus, cavity, cervix, tubes with fimbriae, ovaries with follicles */
+function _orgUterus(g, G) {
+  _ov(g, "M-16-16C-26-17-32-19-38-23", "var(--cc)", 3.5); _ov(g, "M16-16C26-17 32-19 38-23", "var(--cc)", 3.5);
+  _ov(g, "M-38-23L-44-27M-38-23L-45-23M-38-23L-44-19M-38-23L-42-29", "var(--cc)", 1.2);
+  _ov(g, "M38-23L44-27M38-23L45-23M38-23L44-19M38-23L42-29", "var(--cc)", 1.2);
+  var eo = mk("ellipse", { class: "org-f", cx: -45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var eo2 = mk("ellipse", { class: "org-f", cx: 45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo2.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var _fol = "color-mix(in srgb,var(--c-plt) 45%,#000)";
+  _odot(g, -47, -14, 1.6, _fol); _odot(g, -43, -8, 1.6, _fol); _odot(g, -46, -4, 1.4, _fol);
+  _odot(g, 47, -14, 1.6, _fol); _odot(g, 43, -8, 1.6, _fol); _odot(g, 46, -4, 1.4, _fol);
+  _ob(g, "M-16-20C-8-26 8-26 16-20C20-2 15 20 8 32L-8 32C-15 20-20-2-16-20Z", G);
+  _of(g, "M-10-14L10-14L0 22Z", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  _ol(g, "M-11 18L11 18", "org-dk"); _ol(g, "M0 18L0 32");
+  return { h0: 100, ports: { in: [-45, -22], out: [0, 33], ovL: [-45, -10], ovR: [45, -10], fundus: [0, -24] } };
+}
+/* thyroid butterfly: two lobes, isthmus bridge, trachea rings behind, parathyroid dots */
+function _orgThyroid(g, G) {
+  _ov(g, "M-7-40L-7 40M7-40L7 40", "var(--anatomy-hi)", 2);
+  _ov(g, "M-7-28L7-28M-7-12L7-12M-7 24L7 24M-7 36L7 36", "var(--anatomy-hi)", 1.2);
+  _ob(g, "M16-32C28-30 35-16 33 4C31 22 25 32 16 32C8 32 6 20 8 2C10-14 11-28 16-32Z", G);
+  _ob(g, "M-16-32C-28-30-35-16-33 4C-31 22-25 32-16 32C-8 32-6 20-8 2C-10-14-11-28-16-32Z", G);
+  _ob(g, "M-10 6L10 6L10 16L-10 16Z", G);
+  _ol(g, "M14-20C18-10 18 6 14 20M-14-20C-18-10-18 6-14 20");
+  _odot(g, -30, 8, 2, "var(--c-plt)"); _odot(g, 30, -4, 2, "var(--c-plt)");
+  return { h0: 90, ports: { in: [16, -34], out: [0, 36], isthmus: [0, 11], lobeR: [22, 0], lobeL: [-22, 0] } };
+}
+/* Real-art store, filled by buildScene after this lib: _ORG_ART[kind] = { vb:[x,y,w,h],
+ * pfx:"oaxxx", body:"<inner svg markup>" }. Ports are fractions of the viewBox, measured
+ * off the slimmed art (see tools/figures/dev/svgslim.py); content fills the frame. */
+var _ORG_ART = {};
+var _ORG_FRAC = {
+  liver: { in: [.45, .95], out: [.46, .04], porta: [.45, .82], gall: [.30, .90], lobe: [.28, .45] },
+  heart: { in: [.30, .01], out: [.48, .01], aorta: [.48, .01], ivc: [.28, .90], apex: [.70, .97], pulm: [.60, .08] },
+  kidney: { in: [.04, .36], out: [.38, .97], vein: [.04, .46], pelvis: [.36, .41], cortex: [.62, .45], hilum: [.28, .41] },
+  lung: { in: [.46, .53], out: [.44, .60], art: [.44, .48], apex: [.24, .30], base: [.24, .87], trachea: [.49, .01], carina: [.49, .50], hilumL: [.42, .58], hilumR: [.56, .58], apexR: [.75, .34], baseR: [.75, .86] },
+  stomach: { in: [.42, .00], out: [.50, .95], fundus: [.38, .10], antrum: [.52, .30], pylorus: [.60, .35] },
+  intestine: { in: [.58, .38], out: [.50, .95], duodenum: [.60, .40], jejunum: [.42, .60], ileum: [.50, .72], cecum: [.60, .82], colon: [.28, .60], rectum: [.50, .92] },
+  brain: { in: [.60, .97], out: [.42, .04], parenchyma: [.42, .42], cereb: [.76, .78], frontal: [.08, .40], stem: [.60, .93], carotid: [.16, .75] },
+  pancreas: { in: [.50, .08], out: [.95, .50], head: [.85, .45], tail: [.06, .45], body: [.50, .45] },
+  spleen: { in: [.38, .78], out: [.52, .78], hilum: [.45, .72], pulp: [.50, .38] }
+};
+/* draw the injected art centred on x,y at w px wide. The art is clipped to its
+ * frame; tint overlays an organ-shaped translucent mask (the art itself, reused
+ * as a mask); dim dulls the art. Art ids are suffixed per instance so two of
+ * the same organ on one page never share gradient, clip or mask ids. */
+function _orgArt(parent, kind, x, y, w, opts, A) {
+  var vb = A.vb, vw = vb[2], vh = vb[3], cx = vb[0] + vw / 2, cy = vb[1] + vh / 2;
+  _orgN++;
+  var uid = "u" + _orgN;
+  var outer = mk("g", { class: "org org-art org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var sx = w / vw, sy = opts.h ? opts.h / vh : sx, fx = opts.flip ? -1 : 1;
+  var inner = mk("g", { transform: "translate(" + f1(-fx * cx * sx) + " " + f1(-cy * sy) + ") scale(" + (fx * sx).toFixed(4) + " " + sy.toFixed(4) + ")" }, outer);
+  var defs = mk("defs", {}, inner);
+  var cid = A.pfx + uid + "-frame";
+  var cp = mk("clipPath", { id: cid }, defs);
+  mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, cp);
+  var art = mk("g", { class: "org-halo", "clip-path": "url(#" + cid + ")" }, inner);
+  var aid = A.pfx + uid + "-art";
+  art.setAttribute("id", aid);
+  art.innerHTML = A.body.split('id="' + A.pfx + '-').join('id="' + A.pfx + uid + '-')
+    .split('url(#' + A.pfx + '-').join('url(#' + A.pfx + uid + '-')
+    .split('href="#' + A.pfx + '-').join('href="#' + A.pfx + uid + '-');
+  if (opts.dim) art.setAttribute("opacity", ".5");
+  if (opts.tint) {
+    var mid = A.pfx + uid + "-tintm";
+    var m = mk("mask", { id: mid, maskUnits: "userSpaceOnUse", x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, defs);
+    mk("use", { href: "#" + aid }, m);
+    var tg = mk("g", { "clip-path": "url(#" + cid + ")" }, inner);
+    mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh), fill: opts.tint, mask: "url(#" + mid + ")" }, tg);
+  }
+  var ports = {}, F = _ORG_FRAC[kind], k;
+  for (k in F) ports[k] = [Math.round((x + fx * (vb[0] + F[k][0] * vw - cx) * sx) * 10) / 10, Math.round((y + (vb[1] + F[k][1] * vh - cy) * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(vh * sy * 10) / 10, ports: ports, art: true };
+}
+/* dispatcher: outer g carries the theme class and gradients, inner g the local drawing scaled to w */
+function organ(parent, kind, x, y, w, opts) {
+  opts = opts || {};
+  if (_ORG_FRAC[kind] && _ORG_ART[kind]) return _orgArt(parent, kind, x, y, w, opts, _ORG_ART[kind]);
+  var outer = mk("g", { class: "org org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var G = _orgDefs(outer);
+  var inner = mk("g", {}, outer);
+  var r;
+  if (kind === "liver") r = _orgLiver(inner, G);
+  else if (kind === "heart") r = _orgHeart(inner, G);
+  else if (kind === "kidney") r = _orgKidney(inner, G);
+  else if (kind === "lung") r = _orgLung(inner, G);
+  else if (kind === "stomach") r = _orgStomach(inner, G);
+  else if (kind === "brain") r = _orgBrain(inner, G);
+  else if (kind === "pancreas") r = _orgPancreas(inner, G);
+  else if (kind === "spleen") r = _orgSpleen(inner, G);
+  else if (kind === "bladder") r = _orgBladder(inner, G);
+  else if (kind === "uterus") r = _orgUterus(inner, G);
+  else if (kind === "thyroid") r = _orgThyroid(inner, G);
+  else throw new Error("organ: unknown kind " + kind);
+  var sx = w / 100, sy = opts.h ? opts.h / r.h0 : sx, fx = opts.flip ? -1 : 1;
+  inner.setAttribute("transform", "scale(" + (fx * sx).toFixed(3) + " " + sy.toFixed(3) + ")");
+  var ports = {}, k;
+  for (k in r.ports) ports[k] = [Math.round((x + fx * r.ports[k][0] * sx) * 10) / 10, Math.round((y + r.ports[k][1] * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(r.h0 * sy * 10) / 10, ports: ports, art: false };
+}
+organ.kinds = ["liver", "heart", "kidney", "lung", "stomach", "intestine", "brain", "pancreas", "spleen", "bladder", "uterus", "thyroid"];
+
+_ORG_ART["pancreas"]={vb:[0,0,432.6,299.6],pfx:"oaxpan",body:"<path d=\"M87.9 295l-19.1 .4 -13.9 -1.4 -12.2 -4.3 -10.5 -6.9 -9 -9.1 -7.5 -11.1 -5.6 -11.9 -5 -18.7 -1.2 -12.9 .3 -13.2 6.5 -48 7.7 -7.2 7.2 -10.8 6.7 -7.8 7.4 -7.1 15.9 -13 7 -4.3 3.8 -.4 3.5 1.5 5.5 6 1.8 -2.5 .2 -9.7 2.9 -2.3 7.4 -.3 9.1 1.7 3.2 -.2 58 -15.6 2.8 .2 4.1 2.7 3.1 .4 9 -5.9 11.9 -.4 18.5 -5.1 25.2 -5.6 49.9 -16.6 8.6 -1.6 6 -4.3 7.2 -2.8 34.9 -7.2 15.2 -5.7 11.7 .1 3.6 -2.3 5.7 -6.5 11.6 -4.5 19.6 -2.6 4.2 .5 3.3 2.1 4.2 6.5 1.3 3.2 -1.7 4.4 -6 12.6 -7.1 12 -8 11.5 -6.7 7.2 -11.8 7.8 -29.5 12.2 -10.2 5.9 -8.9 7.5 -10.7 13.2 -8.3 8.7 -13.3 11.3 -9.5 6.6 -25.7 10.8 -7.3 2.2 -7.8 .2 -4.5 -1 -4 2.7 -5 1.1 -17.6 -.5 -3.9 1.2 -4.4 3.1 -2.3 .7 -11.7 -2.2 -6.3 .7 -4.1 1.8 -6.9 5.4 -5 2.7 -5.6 1.5 -8.3 .6 -2.7 1.4 -2.1 2.6 -6 1.1 -12.6 4.1 -12 5.9 -9.9 6.9 -6.4 7 -1.4 3.3 3.5 -.6 6.5 -2.8 10.5 -2.3 5.2 -.4 5.1 1.3 5.4 4.8 1.8 7.3 -4.3 30.9 -2.4 6.6 -1.9 -.6 -2.9 -4.4 -1.8 -.4 -.8 1.1 -1.8 4.5 -.8 12.3 -1.3 2.7 -3.2 3.7 -10.6 6.9 -22.7 9.6Z\" fill=\"#f7ce98\" /><path d=\"M419.9 30.8l-4 -8 -4.8 -3.8 -4.2 -.5 -19.6 2.6 -11.6 4.5 -5.7 6.5 -3.6 2.3 -11.7 -.1 -15.2 5.7 -34.9 7.2 -7.2 2.8 -6 4.3 -8.6 1.6 -49.9 16.6 -25.2 5.6 -18.5 5.1 -12.6 .6 -8.3 5.7 -3.1 -.4 -4.1 -2.7 -2.8 -.2 -58 15.6 -3.2 .2 -9.1 -1.7 -7.4 .3 -2.9 2.3 -.2 9.7 -1.3 2.2 -7.7 -6.8 -3.6 -.6 -4.1 1.4 -12.9 9.7 -11.6 10.1 -10.3 11.4 -7.2 10.8 -7.7 7.2 -1.7 -2.3 -.1 -2.7 7.6 -18.7 9.6 -15.9 24.9 -25.8 6 -4.7 6.7 -3.1 7.4 -1.4 34.3 -.3 17.8 -4.4 59.7 -9 13.7 -2.9 65.1 -17.7 15.5 -6.2 15.6 -8.7 56 -13.9 40.4 -14.1 7.5 -1.9 7.6 -.6 7.7 1.3 7.7 3.7 4.8 4 2.1 3.7 .2 4.8 -3.8 7.3 -3.1 2.1Z\" fill=\"#f6e1c6\" /><path d=\"M419.9 30.8l3.1-2.1 3.8-7.3 1.6 2.3.4 2.2-1.3 4.4-16.4 30.4-5.9 9-8.7 10.6-6.5 5.7-7.2 4.6-21.6 9.5-21.1 10.7-8.4 7.6-9.1 13.4-4.7 5.6-11.3 9.1-32.2 17.9-8.2 3.2-6.9 1.2-3-.6-2.5 1.7-11.4.5-23.4 4-19.1 1.1-8 1.2-7.8 2.4-14 7.3-17.3 3.2-.2-3.1 3-3.2 2.9-1.1 7.3-.3 5.6-1.5 5-2.7 6.9-5.4 4.1-1.8 6.3-.7 11.7 2.2 2.3-.7 4.4-3.1 3.9-1.2 17.6.5 5-1.2 4-2.7 4.5 1 7.8-.2 7.3-2.2 25.7-10.8 9.5-6.6 13.3-11.3 8.3-8.7 10.7-13.2 8.9-7.5 10.2-5.9 29.5-12.2 11.8-7.8 6.7-7.2 10.5-15.4 6.8-12.2Z\" fill=\"#d5b387\" /><path d=\"M152.6 186.6l.2 3.1 -3.8 5.3 -1.4 5.8 .2 4 3.6 16.8 .5 12.8 -3.3 40.5 -1.2 3.7 -2.2 2.9 -3.3 2.1 -15.2 3.4 -16.5 7.4 -9.4 1.5 -12.9 -.6 22.7 -9.6 10.6 -6.9 3.3 -3.7 1.3 -2.7 .8 -12.3 1.8 -4.5 .8 -1.1 1.8 .4 2.9 4.4 1.9 .6 3 -8.9 3.7 -28.7 -.8 -5.1 -2.5 -4.1 -4 -2.9 -5.1 -1.3 -5.2 .4 -10.5 2.3 -8.8 3.4 -1.2 0 1.4 -3.3 6.4 -7 15.7 -10 12.5 -5.1Z\" fill=\"#ceaa7c\" /><path d=\"M253.8 169.9l2.5-1.7 3 .6-2.9 2.7Z\" fill=\"#e5d5be\" /><path d=\"M259.3 168.8l6.9 -1.2 6.6 -2.4 33.8 -18.7 11.3 -9.1 4.7 -5.6 9.1 -13.4 8.4 -7.6 21.1 -10.7 21.6 -9.5 7.2 -4.6 6.5 -5.7 8.7 -10.6 5.9 -9 17.3 -32.6 .3 -3.3 -1.9 -3.4 .1 -3.4 -1.5 -4.1 -3.1 -3.2 -6.5 -4.1 -3.8 -1.5 -7.7 -1.3 -11.4 1.4 -44.1 15.2 -56 13.9 -15.6 8.7 -15.5 6.2 -69.6 18.8 -68.9 10.8 -17.8 4.4 -34.3 .3 -7.4 1.4 -6.7 3.1 -6 4.7 -24.9 25.8 -9.6 15.9 -7.1 17.3 -.5 3.5 1.9 3 -4.2 28.9 -2.6 25.8 1.2 19.5 2.9 12.6 7.7 18 7.5 11.1 9 9.1 10.5 6.9 12.2 4.3 6.7 1.1 26.3 -.2 9.7 .7 12.5 -1.6 14.9 -6.8 16.8 -3.9 4.5 -3.4 1.7 -3.3 3.4 -36 .3 -12.8 -.5 -6.4 -3.6 -16.8 -.2 -4 1.4 -5.8 3.8 -5.3 17.3 -3.2 14 -7.3 7.8 -2.4 8 -1.2 20.1 -1.2 25.3 -4.2 8.6 -.2 2.6 1.6Z\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"7.7px\" />"};
+_ORG_ART["liver"]={vb:[0,0,456.2,309.2],pfx:"oaxliv",body:"<path d=\"M270.5 47.7l5.7 5.7 4.2 10.2 -2.1 11.9 .2 132.5 1.8 5.9 3.7 5.3 7.8 5.7 5.8 1.5 4.4 -.5 2.3 -2.4 -8 -12 -2.7 -11.2 -1.1 -36.4 .3 -23.5 1 -10.4 2.7 -12.8 5.5 -15 7.7 -13.4 9.5 -12.1 16.8 -16.1 17.4 -12.4 18.2 -7.6 19.5 -4.1 13.5 -1.1 11 2.7 24.4 11.6 12.8 7.9 1.1 2.2 -.3 4.6 -4.4 12.7 -5 10.2 -60.2 84 -10.6 13.3 -11.9 11.8 -13 10.5 -21.1 13.9 -13.4 6.8 -12.6 2.9 -8.7 -.7 -7.7 -4.1 -9.2 -10.1 -10.5 12.7 -6.2 5.8 -30.7 18.8 -43.2 29.3 -10.3 5.3 -10.3 2 -2.5 1.6 -33 .4 -11.1 7.9 -5.7 2.9 -11.8 3.6 -6.1 .7 -12.5 -1 -6.5 -1.7 -10 -3.9 -11.3 -2.6 -7.3 -4.7 -7.6 -8.8 -9.5 -15.5 -5.7 -12.4 -3.8 -13.2 1.1 -6 -1.2 -13.9 1.1 -47.8 4 -37.1 2.7 -12.4 3 -9.6 6.7 -15.9 5.5 -10.1 6.3 -9.6 11.4 -13.8 6.7 -6.7 7.4 -5.8 25.3 -12.4 15.3 -5.8 10.5 -3.1 22.7 -3.7 17.3 -.2 15 1.6 50.5 10.8Z\" fill=\"#c69797\" /><path d=\"M270.5 47.7l-39.2 -6 -50.5 -10.8 -15 -1.6 -13 0 -17.4 1.9 -20.2 5.1 -25.2 10.3 -12.6 6.3 -5.3 3.5 -13.6 13 -12.6 16.2 -11 20.1 -7.3 20.3 -3.9 20.8 -2.8 28.8 -1.1 47.8 1.2 13.9 -1.1 6 -5.3 -13.3 -3.7 -13.7 -4.1 -22 -2.7 -19.9 -1.8 -22.5 .2 -12.3 3.1 -23.8 6.8 -22.7 4.8 -10.8 5.8 -10.5 6.7 -10.1 7.7 -9.7 9.7 -10.4 10.3 -9.2 10.9 -8.1 11.4 -6.9 12 -5.6 12.5 -4.4 13 -3 13.6 -1.7 14.1 -.3 19.4 1.8 18.7 5.1 52.5 22.4 25.6 8.4 4.4 2.7Z\" fill=\"#e1b6b6\" /><path d=\"M404.5 35.6l-20.1 2.1-12.9 3.1-12.3 4.6-11.7 6.4-11.7 8.9-11.5 10.5-10.2 11.5-8.6 12.7-6.6 14.2-4.3 15.3-1.7 13-.4 21.9.5 32.8 1 11.6 3.9 10.8 6.3 8.5-2.3 2.4-4.3.5-2.9-.5-5.7-2.6-7.1-6.7-2.8-5.7-.7-3.7-.1-131.8 2.2-11.1-2.1-6 8.2-4.9 16.9-8 17.6-6 18.1-4.3 18.5-2.8 23.1-1.6 13.5 1.3 6.7 1.7Z\" fill=\"#e1b6b6\" /><path d=\"M128.9 292l32.4-.4-12.9 2.2Z\" fill=\"#d3a6a6\" /><path d=\"M162.4 291.2l2-1.2 3.5-.3-2.6 1.4Z\" fill=\"#d3a6a6\" /><path d=\"M162.4 291.2l2.9-.2 9.4-3.1 8.3-4.1 45.2-30.5 28.9-17.6 8-7 10.5-12.7 9.2 10.1 5 3.1 5.5 1.5 9-.3 9.6-2.5 6-2.6 21.6-13.3 13.5-10 12.5-11.1 11.3-12.5 63.7-88.4 5.4-10 4.9-13.3 1.1-5.3-1.2-3.6-12.8-7.9-24.5-11.6-21.2-6.3-13.5-1.3-13.7.6-18.7 2.2-27.3 5.9-17.6 6-8.6 3.7-16.6 9.2-2.1-5-2.4-3.1-8.2-7.5-5.9-3.4-24.1-7.7-38.9-17.1-18.2-6.9-14.1-3.6-19.4-1.8-14.1.3-13.6 1.7-13 3-12.5 4.4-12 5.6-11.4 6.9-10.9 8.1-10.3 9.2-9.7 10.4-7.7 9.7-6.7 10.1-5.8 10.5-4.8 10.8-3.9 11.2-4.9 23.3-1.2 24.4 1.1 15.9 2.9 23.3 7 34.5 6.7 17.8 3.8 13.2 3.7 8.3 6.7 11.9 6.6 10 5.9 6.4 7.3 4.7 10.7 2.4 17 5.8 12.5 1 12-2.1 11.6-5 11.1-7.9 19.5 1.8 6.5-.6Z\" fill=\"none\" stroke=\"#6b4c4c\" stroke-miterlimit=\"10\" stroke-width=\"4.5px\" />"};
+_ORG_ART["kidney"]={vb:[0,0,461.7,524.4],pfx:"oakid",body:"<defs><filter id=\"oakid-luminosity-invert\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"398.2\" color-interpolation-filters=\"sRGB\" filterUnits=\"userSpaceOnUse\"><feColorMatrix result=\"cm\" values=\"-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0\" /></filter><radialGradient id=\"oakid-radial-gradient\" cx=\"203.2\" cy=\"292.9\" fx=\"203.2\" fy=\"292.9\" r=\"173\" gradientUnits=\"userSpaceOnUse\"><stop offset=\".6\" stop-color=\"#000\" /><stop offset=\".9\" stop-color=\"#fff\" /></radialGradient><mask id=\"oakid-mask\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"398.2\" maskUnits=\"userSpaceOnUse\"><g filter=\"url(#oakid-luminosity-invert)\"><path d=\"M95.9 444.9l12.9 4.4 20.1 5.2 26 4.1 14.3 .9 14.8 -.3 14.9 -1.8 52.3 -10.4 19.3 -5.4 19.2 -6.8 18.4 -8.6 17 -10.7 14.9 -13.1 12.2 -15.8 8.9 -18.8 6.5 -21.3 5.4 -22.7 4.2 -23.5 3 -23.6 1.7 -23 .4 -21.8 -1 -19.9 -2.5 -17.4 -4 -14.3 -5.6 -10.4 -13.4 -8.8 -25.3 -9.2 -34.3 -8.8 -40.4 -7.7 -43.6 -5.8 -43.8 -3.1 -41.2 .4 -35.6 4.6 -27.2 9.6 -15.8 15.4 -8.7 20.4 -7.3 23.8 -5.3 26.7 -2.8 28.9 .4 30.6 4.2 31.7 8.6 32.2 13.6 32.2 19.2 31.5Z\" fill=\"url(#oakid-radial-gradient)\" /></g></mask><clipPath id=\"oakid-clippath\"><path d=\"M461.7 225.4l-2.9 36.6 -8.4 34.7 -13.5 32.3 -18.1 29.5 -22.2 26.3 -25.9 22.5 -29.1 18.3 -31.9 13.7 -34.2 8.5 -36 2.9 -36 -2.9 -34.2 -8.5 -31.9 -13.7 -29.1 -18.3 -25.9 -22.5 -22.2 -26.3 -18.1 -29.5 -13.5 -32.3 -8.4 -34.7 -2.9 -36.6 2.7 -36.4 7.9 -34.3 12.7 -31.8 17.1 -28.9 21.1 -25.7 24.6 -22.2 27.7 -18.2 30.4 -14 32.7 -9.3 34.5 -4.3 10.6 -.2 36 2.9 34.2 8.5 31.9 13.7 29.1 18.3 25.9 22.5 22.2 26.3 18.1 29.5 13.5 32.3 8.4 34.7Z\" fill=\"none\" /></clipPath><filter id=\"oakid-luminosity-invert-2\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"395.9\" color-interpolation-filters=\"sRGB\" filterUnits=\"userSpaceOnUse\"><feColorMatrix result=\"cm\" values=\"-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0\" /></filter><mask id=\"oakid-mask-1\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"395.9\" maskUnits=\"userSpaceOnUse\"><g filter=\"url(#oakid-luminosity-invert-2)\"><path d=\"M95.9 444.9l12.9 4.4 20.1 5.2 26 4.1 14.3 .9 14.8 -.3 14.9 -1.8 52.3 -10.4 19.3 -5.4 19.2 -6.8 18.4 -8.6 17 -10.7 14.9 -13.1 12.2 -15.8 8.9 -18.8 6.5 -21.3 5.4 -22.7 4.2 -23.5 3 -23.6 1.7 -23 .4 -21.8 -1 -19.9 -2.5 -17.4 -4 -14.3 -5.6 -10.4 -13.4 -8.8 -25.3 -9.2 -34.3 -8.8 -40.4 -7.7 -43.6 -5.8 -43.8 -3.1 -41.2 .4 -35.6 4.6 -27.2 9.6 -15.8 15.4 -8.7 20.4 -7.3 23.8 -5.3 26.7 -2.8 28.9 .4 30.6 4.2 31.7 8.6 32.2 13.6 32.2 19.2 31.5Z\" fill=\"url(#oakid-radial-gradient)\" /></g></mask><clipPath id=\"oakid-clippath-1\"><path d=\"M461.7 225.4l-2.9 36.6 -8.4 34.7 -13.5 32.3 -18.1 29.5 -22.2 26.3 -25.9 22.5 -29.1 18.3 -31.9 13.7 -34.2 8.5 -36 2.9 -36 -2.9 -34.2 -8.5 -31.9 -13.7 -29.1 -18.3 -25.9 -22.5 -22.2 -26.3 -18.1 -29.5 -13.5 -32.3 -8.4 -34.7 -2.9 -36.6 2.7 -36.4 7.9 -34.3 12.7 -31.8 17.1 -28.9 21.1 -25.7 24.6 -22.2 27.7 -18.2 30.4 -14 32.7 -9.3 34.5 -4.3 10.6 -.2 36 2.9 34.2 8.5 31.9 13.7 29.1 18.3 25.9 22.5 22.2 26.3 18.1 29.5 13.5 32.3 8.4 34.7Z\" fill=\"none\" /></clipPath></defs><g mask=\"url(#oakid-mask)\"><path id=\"oakid-ureter\" d=\"M185.3 197.9l-14.2 32.3 -16.1 28.8 -10.4 20.5 -5.3 13 -3.1 13.1 -1.6 17.2 -.3 19.1 4.1 64.9 -.8 113.4 6.6 -.9 2.5 -1.8 2 -3.3 1.7 -102.5 -1.6 -42.6 .3 -25.1 2.9 -22.7 2.9 -9.4 4.1 -7.4 9.3 -10.5 8.1 -6.2 12.8 -6.8 10.4 -8.9 12.9 -13.3 12.1 -15.1 4.7 -7.4 3.3 -6.9 1.5 -6.1 -1 -5.5 -3.4 -5.3 -5.2 -4.9 -6.4 -4.3 -7.1 -3.6 -14 -4.5 -5.7 -.5 -4.2 .8Z\" stroke-miterlimit=\"10\" fill=\"#f4dca9\" stroke-width=\"8.2px\" stroke=\"#725222\" /></g><g clip-path=\"url(#oakid-clippath)\"><g><path d=\"M11.7 232.9l0 12.3 61.8-5.4 43.8-7.2 18.9 7.9 15.5 8.8 15 11.9 12.1 12.8-1-3.7-3.3-5.5-9.7-10.4-15.8-11.9-23.5-14.2 4.9-3.8 17.3-7.3 20.9-7.8 17.9-4.5 6-3.3 1.3-2.4 0-2.6-28.2 7.1 11.6-11.5 4.8-7.4 3.4-12.2.1-3.8-1.1-4.9-1.3.2-1.5 3.5-1 8.6-1.8 5.4-4.3 6.4-5.6 6-7 6-6.9 4.4-23.5 10.6-17.8 6.6-12.4 2-51.6 6.3Z\" stroke-miterlimit=\"10\" stroke-width=\"8.2px\" fill=\"#5276b6\" stroke=\"#142b4f\" /><path d=\"M5.3 206.7l91.5 -6.9 3 -.9 10.5 -7.7 5.8 -2.7 9.6 -1.7 14.9 -.3 13.1 -1.5 7.8 -3.1 6.9 -6.1 4.2 -1.6 2.9 .3 -2.1 3.1 -4 4.3 -5.7 3.4 -13.1 3.1 -30.7 3.6 -4.6 1.6 -3.3 2.3 -3.9 4.5 1.5 .4 32.6 -7.6 11.4 -4.2 14.3 -9.5 16 -15.2 3.5 -1.1 2.3 1.6 1.2 3.7 .3 10.6 -1.9 15.2 -24.1 7.2 -30.6 7.6 -9.4 3.1 -3.4 2.3 3.3 .8 12.3 .5 48 -.1 1.2 .7 .7 2.4 -2.7 6.4 -30.2 -.6 -31.8 1.1 -26.3 -3.3 -89.4 8.5 -1.4 -.8 -1.4 -4.6 -.1 -6.8Z\" stroke-miterlimit=\"10\" stroke=\"#8f2e30\" fill=\"#d85452\" stroke-width=\"8.2px\" /></g></g><path d=\"M172.2 58.6l31.8 .1 12.1 1.3 9.6 2.6 14.8 6.5 10.3 6.1 10.4 7.5 10.2 8.9 16.6 16.6 8.8 11.7 1.5 4.4 .8 10.8 8.8 14.8 11.1 24 6.5 17.6 3 13.3 3.1 25.3 .2 8.2 -1.2 8.5 1.4 4.4 .6 7.9 0 29.6 -1.2 13.8 -6.1 26.9 -5.4 7 -4.6 13.8 -7.5 15.9 -12 17.8 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -1.4 -12.1 .9 -11.8 3.2 -9.3 6.1 -11.5 1.3 -5.4 -4 -19.4 .5 -12.3 2 -6.5 6.7 -13.5 .6 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" stroke-miterlimit=\"10\" fill=\"#a95c57\" stroke=\"#632b29\" stroke-width=\"8.2px\" /><path d=\"M166.1 7.2l3 2.3 3 3.7 4.9 9.5 5.8 19.1 5.2 13.4 -.2 5.2 -11.3 16.1 -5.9 12 -3.5 12.4 -.4 10.9 -1.9 10.8 -1.9 6.3 -3.2 6.6 -5.1 3.9 -14.8 6.6 -15.8 9.6 -5.4 2 -.9 -.3 -2.7 -4.2 -4.1 -9.9 -3.7 -15.2 -1 -9.5 -.2 -10.7 .9 -11.8 2.2 -13 7.1 -26.4 9.3 -23.4 5.5 -9.8 6 -8 6.5 -6 7 -3.6 7.5 -.9Z\" stroke-miterlimit=\"10\" fill=\"#f4dca9\" stroke=\"#5a4218\" stroke-width=\"8.2px\" /><g mask=\"url(#oakid-mask-1)\"><path id=\"oakid-ureter-2\" data-name=\"ureter\" d=\"M185.3 197.9l-14.2 32.3 -16.1 28.8 -10.4 20.5 -5.3 13 -3.1 13.1 -1.6 17.2 -.3 19.1 4.1 64.9 -.8 113.4 6.6 -.9 2.5 -1.8 2 -3.3 1.7 -102.5 -1.6 -42.6 .3 -25.1 2.9 -22.7 2.9 -9.4 4.1 -7.4 9.3 -10.5 8.1 -6.2 12.8 -6.8 10.4 -8.9 12.9 -13.3 12.1 -15.1 4.7 -7.4 3.3 -6.9 1.5 -6.1 -1 -5.5 -3.4 -5.3 -5.2 -4.9 -6.4 -4.3 -7.1 -3.6 -14 -4.5 -5.7 -.5 -4.2 .8Z\" stroke-miterlimit=\"10\" stroke-width=\"3.5px\" fill=\"#f4dca9\" stroke=\"#725222\" /></g><g clip-path=\"url(#oakid-clippath-1)\"><g><path d=\"M11.7 232.9l0 12.3 61.8-5.4 43.8-7.2 18.9 7.9 15.5 8.8 15 11.9 12.1 12.8-1-3.7-3.3-5.5-9.7-10.4-15.8-11.9-23.5-14.2 4.9-3.8 17.3-7.3 20.9-7.8 17.9-4.5 6-3.3 1.3-2.4 0-2.6-28.2 7.1 11.6-11.5 4.8-7.4 3.4-12.2.1-3.8-1.1-4.9-1.3.2-1.5 3.5-1 8.6-1.8 5.4-4.3 6.4-5.6 6-7 6-6.9 4.4-23.5 10.6-17.8 6.6-12.4 2-51.6 6.3Z\" fill=\"#5276b6\" /><path d=\"M6.8 204.4l65.9 -2.6 24.1 -2 3 -.9 10.5 -7.7 5.8 -2.7 9.6 -1.7 14.9 -.3 13.1 -1.5 7.8 -3.1 6.9 -6.1 4.2 -1.6 2.9 .3 -2.1 3.1 -4 4.3 -5.7 3.4 -13.1 3.1 -30.7 3.6 -4.6 1.6 -3.3 2.3 -3.9 4.5 1.5 .4 32.6 -7.6 11.4 -4.2 14.3 -9.5 16 -15.2 3.5 -1.1 2.3 1.6 1.2 3.7 .3 10.6 -1.9 15.2 -24.1 7.2 -30.6 7.6 -9.4 3.1 -3.4 2.3 3.3 .8 12.3 .5 48 -.1 1.2 .7 .7 2.4 -2.7 6.4 -30.2 -.6 -31.8 1.1 -26.3 -3.3 -87.9 6.2 -1.4 -.8 -1.4 -4.6 -.1 -6.8Z\" fill=\"#d85452\" /></g></g><path d=\"M172.2 58.6l31.8 .1 12.1 1.3 9.6 2.6 14.8 6.5 10.3 6.1 10.4 7.5 10.2 8.9 16.6 16.6 8.8 11.7 1.5 4.4 .8 10.8 8.8 14.8 11.1 24 6.5 17.6 3 13.3 3.1 25.3 .2 8.2 -1.2 8.5 1.4 4.4 .6 7.9 0 29.6 -1.2 13.8 -6.1 26.9 -5.4 7 -4.6 13.8 -7.5 15.9 -12 17.8 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -1.4 -12.1 .9 -11.8 3.2 -9.3 6.1 -11.5 1.3 -5.4 -4 -19.4 .5 -12.3 2 -6.5 6.7 -13.5 .6 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" stroke-miterlimit=\"10\" stroke-width=\"3.5px\" fill=\"#a95c57\" stroke=\"#632b29\" /><g><path d=\"M172.2 58.6l31.8 .1 17.1 2.4 14.6 5.1 10.5 5 10.5 6.6 10 8.5 25.9 28.4 5 7.2 1.8 13.7 9.3 13.6 6 11.4 5.4 12.5 3.6 12 4.7 26 3.2 23.2 .1 5.7 -1 6.4 1.6 7.7 -2 44.5 -4.5 29.2 -5.8 8.3 -7.9 21.3 -9.7 17.3 -6.6 8.9 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -.3 -15.8 1 -11.9 2.1 -5.5 5.7 -9.4 1.6 -5.6 -2.8 -25.1 0 -10.7 8.1 -17.8 .5 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" fill=\"#f5b6b3\" /></g><g><path d=\"M172.2 58.6l31.8 .1 17.1 2.4 14.6 5.1 10.5 5 10.5 6.6 10 8.5 25.9 28.4 5 7.2 1.8 13.7 9.3 13.6 6 11.4 5.4 12.5 3.6 12 4.7 26 3.2 23.2 .1 5.7 -1 6.4 1.6 7.7 -2 44.5 -4.5 29.2 -5.8 8.3 -7.9 21.3 -9.7 17.3 -6.6 8.9 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -.3 -15.8 1 -11.9 2.1 -5.5 5.7 -9.4 1.6 -5.6 -2.8 -25.1 0 -10.7 8.1 -17.8 .5 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" fill=\"#f5b6b3\" /></g><path d=\"M166.1 7.2l3 2.3 3 3.7 4.9 9.5 5.8 19.1 5.2 13.4 -.2 5.2 -11.3 16.1 -5.9 12 -3.5 12.4 -.4 10.9 -1.9 10.8 -1.9 6.3 -3.2 6.6 -5.1 3.9 -14.8 6.6 -15.8 9.6 -5.4 2 -.9 -.3 -2.7 -4.2 -4.1 -9.9 -3.7 -15.2 -1 -9.5 -.2 -10.7 .9 -11.8 2.2 -13 7.1 -26.4 9.3 -23.4 5.5 -9.8 6 -8 6.5 -6 7 -3.6 7.5 -.9Z\" stroke-miterlimit=\"10\" stroke-width=\"3.5px\" fill=\"#f4dca9\" stroke=\"#5a4218\" /><g><path d=\"M174 120.7l16.4 5.9 15.1 6.6 14.9 8.3 6.3 4.7 4.9 4.9 7.9 10.8 10.1 18.6 6.4 19.8 1.4 13 -.5 24.9 -1.8 30.3 -2.2 18.6 -3.1 14.1 3.8 -3.8 3.2 -5.7 2.8 -7.1 11.2 -46.2 1.7 -3.8 8 -11.7 2.9 -7.3 .7 -9 -.8 -5.4 -4.8 -13.3 -10 -18.9 -13.5 -21.2 -14.9 -19.3 -7.4 -7.7 -7 -5.7 -6.3 -3.2 -20.2 -5 -19.9 -3.1 -9.2 -.4 -2.5 .4 -.7 .9Z\" fill=\"#faeceb\" /></g><g><path d=\"M162.4 14.1l-13.1 21.1-9.8 22.5-9.3 35.6-3 20.8-1.3-14.5 1.2-17.6 3-18.1 6.2-22.5 10.1-21.2 5.7-8.8 3.9-1.1Z\" fill=\"#fffff6\" /></g><g opacity=\".4\"><g><path d=\"M177.8 34l-9.8 11.9 -10.7 17.7 -6.7 15.8 -11.3 37 -1.6 2.6 -1.8 1.3 -2.2 0 -2.7 -1.4 -.5 -14.6 3.6 -26.9 6.6 -24.9 4.8 -11.2 12.6 -21.4 3.9 -4.7 1.4 -.3 1.8 .9 4.1 4.5Z\" fill=\"#b68c3d\" /></g></g><g opacity=\".2\"><g><g><path d=\"M194.2 69.3l23.4 7.5 21.9 9.9 11.3 6.6 10.8 7.8 9.6 9 7.8 10.3 13.1 22.6 17.2 34.7 8.4 21.7 2.9 9.9 2.7 16.9 -.3 38.1 -2.2 23.1 -4.7 23.4 -3.5 11.3 -4.4 10.8 -5.7 10.7 -7 10.9 -8.2 10.8 -9.1 10.4 -9.9 9.6 -10.5 8.4 -10.9 6.8 -11.1 4.9 -11.2 2.6 -11 -.1 -10.3 -2.3 -9.3 -3.9 -8.3 -5.4 -7.2 -6.8 -5.9 -8 -4.5 -9.1 -3 -10 -1.4 -10.8 .3 -11.5 2.1 -12.1 4.2 -10.1 5.9 -8.4 13.2 -13.6 -10.1 -4.4 -4.9 -4.1 -4 4.6 -6.5 10 -4.6 9.8 -4.3 12.8 -1.1 15.2 1.3 20.5 2.3 11.5 3.8 11.5 5.7 10.8 7.9 9.5 10.5 7.5 12.3 4.8 12.8 2 13 -.3 12.7 -2.1 12.1 -3.4 11.1 -4.2 17.6 -9 9 -6.6 9.3 -11.1 8.8 -12.3 14.9 -35.1 .9 -1.6 2.7 -1.7 1.5 -3 3.1 -24.3 3.5 -39.8 -.1 -6.2 -2.1 -10.2 2.2 -5.3 .4 -3.6 -6.6 -40.2 -4.3 -20.7 -4.8 -10.6 -18 -29 -.8 -2.9 -.4 -9.8 -4.2 -6.4 -12.8 -14.2 -20.3 -18.3 -12.1 -8.5 -12.8 -6.8 -13.2 -4.2 -13.3 -.7Z\" fill=\"#fff\" /></g></g></g><g><path d=\"M180.1 174.7l9.2-6.9 2.9-5.5 2.3.6 1.4 1.4.6 2-.6 5.1-5.9 13.2-.9-7.4-1.8-2.5-3.1-1.3Z\" fill=\"#54221f\" /></g><g><path d=\"M180.1 174.7l9.2-6.9 2.9-5.5 2.3.6 1.4 1.4.6 2-.6 5.1-5.9 13.2-.9-7.4-1.8-2.5-3.1-1.3Z\" fill=\"#54221f\" /></g><g><path d=\"M183.8 241.6l7.1 -.1 6.6 1.4 -11.2 -8.7 -3.7 -4.7 1.6 7.3Z\" fill=\"#54221f\" /></g><g><path d=\"M174.4 282.9l14.2 5.9-.1 3-2.4 4.8-14-6.8 2.4-3Z\" fill=\"#54221f\" /></g>"};
+_ORG_ART["lung"]={vb:[0,0,296.9,394.5],pfx:"oalun",body:"<defs><filter id=\"oalun-outer-glow-1\" x=\"157.3\" y=\"133.8\" width=\"130\" height=\"205.6\" filterUnits=\"userSpaceOnUse\"><feOffset dx=\"0\" dy=\"0\" /><feGaussianBlur result=\"blur\" stdDeviation=\"9.4\" /><feFlood flood-color=\"#ff6a6a\" flood-opacity=\".75\" /><feComposite in2=\"blur\" operator=\"in\" /><feComposite in=\"SourceGraphic\" /></filter><filter id=\"oalun-outer-glow-2\" x=\"12.9\" y=\"116.6\" width=\"119.5\" height=\"226.2\" filterUnits=\"userSpaceOnUse\"><feOffset dx=\"0\" dy=\"0\" /><feGaussianBlur result=\"blur-2\" stdDeviation=\"9.4\" /><feFlood flood-color=\"#ff6a6a\" flood-opacity=\".75\" /><feComposite in2=\"blur-2\" operator=\"in\" /><feComposite in=\"SourceGraphic\" /></filter></defs><g style=\"isolation:isolate\"><g id=\"oalun-Layer_1\"><g><g id=\"oalun-infected\"><path d=\"M19.8 393.3l-3.4 -.7 -2.4 -2 -3.1 -6.6 -2.8 -10 -4.9 -32.4 -2 -36 .6 -25.4 2.3 -22.2 6.6 -31.1 8.8 -28 14.2 -34.3 15.1 -28.3 8 -11.7 8.6 -10.2 8.8 -7.8 8.4 -4.4 6.2 -.4 9.4 3.5 6.9 5.1 6.5 8.1 5.2 11.8 10.3 48.2 3.5 -11.9 1.2 -10.7 -.3 -8.4 -1.6 -11.1 .6 -6.7 -.4 -7 1.1 -6.9 -.8 -16.1 .6 -5.1 -.8 -7.3 1.2 -4.6 -1.4 -5.9 1.2 -4.7 -.8 -6 .8 -5.3 -2.5 -11.6 -2.2 -3.9 -3.4 -13.6 -2.2 -3.9 -3.6 -3.9 -1.3 -3 0 -6.5 4.4 -10.6 1.7 -1.9 1.4 -.2 1 .9 .2 1.4 -1.8 9.2 7.7 -4.4 4.9 -.4 4.2 3.5 5.2 8 3.3 -9.2 2.1 -2.5 3.4 .4 13.1 4.5 -1.3 -9.9 .8 -1.5 1.5 -.1 3.1 3.6 2.4 7.1 -1.8 10.2 -4.6 7.4 -1 13.6 -3.7 4.9 -1 3.4 1 6 -1.2 3.2 .9 4.9 -1.5 5.4 1.1 2 .1 6 -1.3 3.5 1.8 4.4 -.5 4.6 -1.2 3.1 1.7 5.3 -1.4 5.6 1.3 6 -.9 4.6 1 6.5 -1.2 5.8 .9 5 -1.3 7.3 1.2 7.3 -1.4 4.5 -.1 8.4 2.7 12.9 2.5 -8.8 -.1 -8.8 2.2 -12.6 4.3 -14.1 2.9 -6.9 7.3 -12 4.3 -4.5 4 -2.8 5.6 -2.2 4.3 -.5 9.1 2 4.4 2.3 8.5 6.4 7.8 7.8 10 11.9 15.4 22.5 12.4 24.7 9.8 26.1 7.4 26.6 5.2 26.2 3.3 25 1.7 22.9 .3 19.9 -.8 16.1 -1.7 11.4 -4.7 16.9 -3.5 6.6 -4.9 4.5 -6.8 1.7 -6.9 -1.2 -27.7 -13.4 -34.1 -14.8 -12.8 -6.3 -8.7 -5.4 -8.9 -7.9 -7.4 -10.7 -2.6 -6.6 -1.6 -7.4 -2.1 -28.5 .6 -37.9 -4.5 -32.1 -.3 -1.6 -1.6 -1.6 -8.3 -6.5 -7.2 8.4 -6.4 10.3 -1.7 77.4 -2.4 17.8 -2.9 9 -1.9 3 -4.6 4.4 -10.7 7.8 -42.1 26.7 -28.6 20.3 -10 5.7 -8.2 2.2Z\" fill=\"#e8caca\" /><path d=\"M167.3 2.4l2.1 2.1 1.8 3.5 .9 5.7 -1.5 8.1 -4.6 7.7 -1.1 13.8 -3.5 4.5 -1.2 4 1 5.1 -1.2 4.2 .9 4.7 -.7 3.6 -1.1 1.7 1.3 2.2 .2 4.8 -.1 2.2 -1.3 2.6 1.8 4 -1.7 7.9 1.7 5 -1.4 5.6 1.3 6.1 -.9 4.4 1 6.6 -1.3 6.1 1 3.1 -.2 5.7 -1 3.6 1.2 7.2 -1.4 4.3 -.1 8.8 3.6 16.2 .3 .6 .4 -1.2 3.3 -11.4 -.2 -8.4 2.1 -12.5 4.3 -14.1 2.9 -6.9 7.2 -12 4.3 -4.4 3.9 -2.7 5.3 -2 8.2 .1 4.3 1.4 4.2 2.1 8.1 6.1 7.7 7.6 10.3 12.2 15.3 22.4 12.4 24.7 9.7 26.1 7.3 26.6 5.2 26.2 3.3 24.9 1.7 22.8 .3 19.8 -.8 15.9 -1.6 11.1 -4.5 16.3 -3.3 6.5 -4.6 4.4 -6.4 1.6 -6.5 -1.1 -30.4 -14.6 -43.8 -19.7 -9.8 -6.2 -9.8 -9.5 -4.1 -6.1 -3.2 -7.2 -1.9 -8.3 -2 -24.2 .5 -42.3 -4.6 -32.8 -.8 -1.9 -6.5 -6 -4 -2.2 -2.6 1.9 -5.5 6.9 -6.7 10.8 -1.9 79.5 -3 18.9 -3.7 8.4 -11.9 9.9 -43.8 27.9 -31 21.9 -13.1 6.6 -6 .1 -3.7 -4.1 -2.7 -7.4 -4.7 -23.7 -3.1 -31.4 -.6 -34.4 .9 -16.8 1.9 -15.7 2.7 -14.8 7.2 -28 8.8 -25.3 13.9 -31.4 8.3 -15.7 7.6 -12.2 8.3 -11 8.5 -8.9 8.3 -5.9 7.6 -2.2 5.6 1.2 7.1 3.4 6.6 5.5 5.7 8 4.4 10.7 8.4 40.9 2.7 9 4 -11.5 1.8 -12.4 -.2 -10.2 -1.6 -10.9 .6 -6.5 -.4 -7.1 1.1 -7.1 -.8 -16.4 .6 -4.8 -.8 -7.4 1.3 -4.6 -1.5 -6.3 1.3 -4.2 -.8 -6.1 .8 -5 -2.5 -11.7 -2.3 -4.4 -2.8 -12.1 -1.9 -4.2 -4.5 -5.1 -1.2 -2.7 0 -6.1 3.6 -9 2.5 -2.9 0 3.4 -2.1 9.5 8.6 -5.2 5.3 -1 3.4 2.6 6.8 9.9 3.6 -9.7 1.9 -3 17.4 5.1 -1.3 -9.5M167.3 0l-1.9 .8 -.9 1.8 .9 8.6 -11.5 -4 -3.9 -.4 -2.7 2.8 -2.7 7.4 -4.9 -7.1 -3.8 -2.7 -4.8 .1 -6.4 3.1 1 -7.8 -1.2 -1.8 -2.2 -.4 -3.3 3 -4.3 10.7 0 7 1.4 3.3 3.8 4.1 2 3.7 3.3 13.3 2.1 3.7 2.5 11.3 -.8 5.3 .8 5.8 -1.2 4.7 1.3 6 -1.1 4.7 .8 7.3 -.6 5.2 .8 16.1 -1.1 6.8 .4 7.1 -.7 6.7 1.9 18.1 -1.1 11.5 -2.3 8.6 -9.4 -44.7 -5.3 -12.1 -3.2 -4.6 -7 -6.7 -7 -3.9 -8.7 -2.2 -4.3 .6 -9 4.7 -9.1 8.2 -8.7 10.5 -7.8 11.6 -6.7 11.7 -8.3 16.4 -9.5 21.8 -9.4 26.2 -7.9 29.8 -3.9 23 -1.7 23.5 .4 35.1 3.2 33.4 5.2 25.4 3.8 8.9 3.5 2.9 3.4 .6 5.5 -1 9.7 -4.7 33.7 -23.6 40.8 -25.8 10.8 -7.9 4.7 -4.5 2 -3.1 3 -9.2 2.5 -18 1.7 -77.4 5.3 -8.6 7.4 -9.1 8.3 7.1 .7 2.1 4.3 31.6 -.7 37.7 2.1 28.7 1.7 7.6 2.7 6.7 7.5 11 9 8 8.8 5.5 74.9 34.6 7.2 1.2 7 -1.6 5.6 -4.8 3.9 -7.2 3.1 -10.1 2.6 -12.2 1.5 -23.2 -1.1 -31.2 -4.2 -35.7 -7.7 -36.4 -8.2 -26.5 -11.2 -26.7 -6.8 -13 -7.8 -12.5 -18.8 -23.9 -12.2 -11.4 -9 -5.3 -4.7 -1.5 -4.8 -.5 -6.1 .9 -5.8 2.8 -5.5 4.6 -4.7 6.1 -5.5 10.4 -3.7 9.7 -3.4 12.7 -1.7 11.7 .2 6.4 -1.3 3.5 -1.5 -7.6 .1 -8.2 1.4 -4.4 -1.2 -7.6 1.2 -6.2 0 -3.6 -.9 -2.6 1.2 -5.6 -1 -6.7 .9 -4.5 -1.3 -5.9 1.4 -6.3 -1.6 -5 1.2 -2.7 .5 -4.6 -1.6 -4.6 1.1 -3.2 -.1 -6.2 -.8 -1.9 1.3 -6 -.9 -4.2 1.2 -3.4 -.9 -5.9 .8 -2.9 3.8 -5 1.1 -13.9 4.5 -7.2 1.9 -10.6 -2.6 -7.9 -2.7 -3.4Z\" fill=\"#8f6464\" /></g><path id=\"oalun-inner_lungs\" d=\"M157.3 207.2l19.6 7.7 14.1 9 8.9 8.5 4.6 8.3 8.9 23.4 2.6 12.1 -.8 6.4 -3.2 8.4 -7.3 7.5 -4.5 5.8 9.4 -6.1 -1.4 12.5 -1.4 4.9 8.4 -15 6.5 -16.3 1.7 -13.8 -2 -10.6 9.7 6.3 2.3 2.7 -1.7 12.1 -2.6 6.8 7.2 -10.1 6.7 12 -1.1 -12.3 1.6 .4 4.9 4.6 10.6 12.3 4.4 9.7 1.9 8.3 -1.3 12.5 3.7 -7 .9 -.6 .9 .5 6.7 10 2.6 5.7 1.4 5.4 -1.5 -15.6 2.7 -.6 5.7 2 -6.7 -4.4 -4.6 -4.5 -4.7 -9.2 -2.9 -8 3.6 0 6.1 1.9 -13.2 -9.5 -9.3 -10.4 -.1 -.7 1.2 -.6 8.9 -.7 -17 -8.2 -5.4 -4.3 -6.3 -6.7 -16 -21.4 -8.4 -15.3 -1.4 -5.9 2.4 -1.1 7.8 1.6 12.4 4.9 7.8 4.7 2.8 3.1 4.4 7.8 3.9 12.5 1.2 8.4 .3 -13.9 .9 -6.4 7 7.5 7.5 9.6 3.6 6.6 1.8 11.9 .1 15.2 1.7 -3.2 2.9 -2.3 1.9 0 2.4 1.9 -3.9 -11.8 -3.3 -14.7 5.9 .8 3.1 1.6 -14.3 -12.8 -19.1 -22.6 -8.6 -8.6 -23.5 -13.5 -.9 -2.5 -.3 -6 .7 -6.5 1.3 -3.2 9.3 -4.4 4 -2.8 -11.6 1.5 -2.2 -.6 -1.3 -1.5 -8.2 -25.7 -5 -19.1 3.4 30.5 -14.5 -9 -5.6 -7.4 -1.5 -3.3 4 10.1 5 5.4 -10.3 5.5 6.8 -.8 7.4 .6 4.1 1.6 2.6 2.8 4.3 12.7 -.3 7.5 -3 2.9 -10.5 2.9 10.8 1.9 1.2 1.2 -1.1 2.1 -3 3.4 -3 1 -12 -4.2 -12.9 -8 -15.2 -15.4 -3.9 16Z\" fill=\"#fbebeb\" filter=\"url(#oalun-outer-glow-1)\" /><path d=\"M127.7 181.4l-4.1 5.4 -6.1 3.7 -7.7 -1.7 -3 -2 -1.9 -2.4 -4 -8.6 -.5 -2.9 1.6 -5.7 4.2 -4.7 1.8 -3.7 -9.8 8 -1.6 -4.4 .8 -3.9 5.2 -9.5 2 -7.7 -5.4 9.1 -4 5 -1.6 .2 -.7 -5.2 .2 -7.1 2.4 -7.2 4 -5.2 4.1 -2.4 -4.8 1.6 -5.3 3.3 -1.3 -12.1 -2.4 -4.7 .8 10.4 -.8 5.3 -4.6 -5.6 -2.6 -1.8 3.4 5.5 2.2 5.8 -.2 17.3 -9.3 -11.8 -.9 -9.8 -.8 11.5 -5.5 -3.4 -2.5 -3.2 3.3 5.5 6.6 5.4 6.9 9.5 9 24.1 -8 -2.7 -14.2 -1.6 -5.1 -4.3 -6 -12.6 1 8.2 -5.4 -.6 -7.4 -5.6 -4.5 0 4.9 2.7 21.4 15.3 3.2 1.4 15.4 3.5 10.1 6.3 3.1 2.6 .8 1.7 -2.2 2.2 -3.9 1.2 -20.7 -2.2 -20.5 3 -5.5 -1.3 -2.7 -1.5 -3.3 -7.2 -1.6 -1.7 -5.6 -.9 -.9 .3 6.2 3 1.2 5.2 2.5 4.2 -10.9 -.7 -3.9 1.4 6.1 .5 8.1 2.5 3.6 -.4 -.4 2.4 -2.1 2.6 -10.6 6 -11.2 2.6 9.3 -.5 2.2 .5 -2 2.5 -9.8 5.4 12 -4.4 11.4 -8.7 14.4 -6 10.4 -.4 22.3 1.5 19.1 -1.1 4.6 1.2 -3.2 8 -7.2 12.2 -7.7 6.9 -9.3 5.6 -7.9 2.6 -18.8 1.7 -18.2 .5 -9 -1.5 11 5.5 -3.9 4.3 -8.5 4.7 -4.3 3.4 17.4 -7.7 16 -2.1 -20.9 20 -7.6 4.9 -12.7 4.2 -8.3 1.4 -3.9 -.1 10.4 .2 4.1 .9 -8.8 11.5 10.3 -8 21.3 -13.2 14.1 -12.8 14.5 -7 13.3 -3.7 -24 23 -19.1 23.3 -21.7 14.8 20.2 -5.2 -3.8 5.5 -18.9 21.7 -7.1 7.5 -3.6 2.7 12.3 -8.1 10.8 -10.2 6.7 -4.7 5.9 -7.3 17.9 -26.4 9.5 -8.6 -4.1 13.5 -2.6 13.7 -1.9 3.5 -3.1 3 6.8 -3.8 1.7 -2.3 -1.4 11.3 -5.2 13.9 6.9 -9.3 3.5 -15.6 1.8 -14.6 4.5 -13.3 1.3 -2.7 1 -.1 2.2 6.6 1.2 -9.1 2.1 -4.3 2.5 -3 -.4 15.6 2.3 15.3 -1 8.3 -3.3 9.4 3.2 -3.3 -.1 4.8 -3.6 9.7 4.2 -5.3 2.3 -4.3 3.1 -16.7 4.1 6.8 1.9 5.3 -5.5 -24.1 -.8 -7.7 .2 -7.4 1.9 -5.6 21.2 -29.9 4.7 -8.9 3.3 -8.7 -.3 -9.1 -4 -27.7\" filter=\"url(#oalun-outer-glow-2)\" fill=\"#fbebeb\" /><path d=\"M157 208.7l1.7 -15.2 5.2 -18.7 -3 -21 1.3 -19.6 -.2 -51.9 .8 -33.4 3.6 -5 1.6 -13.6 3.3 -6.1 3 -9.9 -2.8 -9.6 -2.2 -2.4 -2.1 -1.1 -1 2.9 -.6 8.1 -10.8 -3.7 -4 -.6 -2.1 2.6 -3.9 7.9 -4.2 -7 -3.5 -3.3 -13.1 2.7 1.7 -8.5 -3 -.6 -2.2 .6 -1 1.2 -4 12.8 -.4 4 6.3 8.7 3.9 14.7 2.7 4.9 1.9 9.8 1.1 14.5 -.8 32.9 .9 9.6 -1.6 7.4 .3 17.6 1.4 7 .5 9.7 -2.4 13.8 -2 6.2 5.7 42.1 13.7 -17.8 10.2 9 1.9 -15.9 5.8 -23.8\" fill=\"#fae1e1\" /><path d=\"M127.2 178.5l4.1 26.3 1.3 13.7\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2.4px\" /><path d=\"M157 209.1l1.4-13.1 4.7-19 1.8-11\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2.4px\" /><path d=\"M132.1 59.2l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M131.7 70l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M131.9 80l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M130.6 91.8l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M130.6 103.4l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M131.7 113.9l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M131 127.1l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M131.3 139.4l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M132.9 151.1l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M132.6 162.8l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M131 42.4l5.8-3.2 3.6-.7 3.9 1.4 3.6-.8 5.5.5 3.3 1.4 1.8 2-2.7-1.2-12.4 3.2-8.5-2.7Z\" fill=\"#cac7c7\" style=\"mix-blend-mode:multiply\" /><path d=\"M164.2 17.9l-6.4-3.2-2.3-.2-1.8 1.1-2.7 5.6-1.1 5 .1 4.8 1.9 3.4-.8-7.8.6-3.2 3.5-2.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><g id=\"oalun-infected-2\" data-name=\"infected\"><path d=\"M167.3 2.4l2.1 2.1 1.8 3.5 .9 5.7 -1.5 8.1 -4.6 7.7 -1.1 13.8 -3.5 4.5 -1.2 4 1 5.1 -1.2 4.2 .9 4.7 -.7 3.6 -1.1 1.7 1.3 2.2 .2 4.8 -.1 2.2 -1.3 2.6 1.8 4 -1.7 7.9 1.7 5 -1.4 5.6 1.3 6.1 -.9 4.4 1 6.6 -1.3 6.1 1 3.1 -.2 5.7 -1 3.6 1.2 7.2 -1.4 4.3 -.1 8.8 3.6 16.2 .3 .6 .4 -1.2 3.3 -11.4 -.2 -8.4 2.1 -12.5 4.3 -14.1 2.9 -6.9 7.2 -12 4.3 -4.4 3.9 -2.7 5.3 -2 8.2 .1 4.3 1.4 4.2 2.1 8.1 6.1 7.7 7.6 10.3 12.2 15.3 22.4 12.4 24.7 9.7 26.1 7.3 26.6 5.2 26.2 3.3 24.9 1.7 22.8 .3 19.8 -.8 15.9 -1.6 11.1 -4.5 16.3 -3.3 6.5 -4.6 4.4 -6.4 1.6 -6.5 -1.1 -30.4 -14.6 -43.8 -19.7 -9.8 -6.2 -9.8 -9.5 -4.1 -6.1 -3.2 -7.2 -1.9 -8.3 -2 -24.2 .5 -42.3 -4.6 -32.8 -.8 -1.9 -6.5 -6 -4 -2.2 -2.6 1.9 -5.5 6.9 -6.7 10.8 -1.9 79.5 -3 18.9 -3.7 8.4 -11.9 9.9 -43.8 27.9 -31 21.9 -13.1 6.6 -6 .1 -3.7 -4.1 -2.7 -7.4 -4.7 -23.7 -3.1 -31.4 -.6 -34.4 .9 -16.8 1.9 -15.7 2.7 -14.8 7.2 -28 8.8 -25.3 13.9 -31.4 8.3 -15.7 7.6 -12.2 8.3 -11 8.5 -8.9 8.3 -5.9 7.6 -2.2 5.6 1.2 7.1 3.4 6.6 5.5 5.7 8 4.4 10.7 8.4 40.9 2.7 9 4 -11.5 1.8 -12.4 -.2 -10.2 -1.6 -10.9 .6 -6.5 -.4 -7.1 1.1 -7.1 -.8 -16.4 .6 -4.8 -.8 -7.4 1.3 -4.6 -1.5 -6.3 1.3 -4.2 -.8 -6.1 .8 -5 -2.5 -11.7 -2.3 -4.4 -2.8 -12.1 -1.9 -4.2 -4.5 -5.1 -1.2 -2.7 0 -6.1 3.6 -9 2.5 -2.9 0 3.4 -2.1 9.5 8.6 -5.2 5.3 -1 3.4 2.6 6.8 9.9 3.6 -9.7 1.9 -3 17.4 5.1 -1.3 -9.5M167.3 0l-1.9 .8 -.9 1.8 .9 8.6 -11.5 -4 -3.9 -.4 -2.7 2.8 -2.7 7.4 -4.9 -7.1 -3.8 -2.7 -4.8 .1 -6.4 3.1 1 -7.8 -1.2 -1.8 -2.2 -.4 -3.3 3 -4.3 10.7 0 7 1.4 3.3 3.8 4.1 2 3.7 3.3 13.3 2.1 3.7 2.5 11.3 -.8 5.3 .8 5.8 -1.2 4.7 1.3 6 -1.1 4.7 .8 7.3 -.6 5.2 .8 16.1 -1.1 6.8 .4 7.1 -.7 6.7 1.9 18.1 -1.1 11.5 -2.3 8.6 -9.4 -44.7 -5.3 -12.1 -3.2 -4.6 -7 -6.7 -7 -3.9 -8.7 -2.2 -4.3 .6 -9 4.7 -9.1 8.2 -8.7 10.5 -7.8 11.6 -6.7 11.7 -8.3 16.4 -9.5 21.8 -9.4 26.2 -7.9 29.8 -3.9 23 -1.7 23.5 .4 35.1 3.2 33.4 5.2 25.4 3.8 8.9 3.5 2.9 3.4 .6 5.5 -1 9.7 -4.7 33.7 -23.6 40.8 -25.8 10.8 -7.9 4.7 -4.5 2 -3.1 3 -9.2 2.5 -18 1.7 -77.4 5.3 -8.6 7.4 -9.1 8.3 7.1 .7 2.1 4.3 31.6 -.7 37.7 2.1 28.7 1.7 7.6 2.7 6.7 7.5 11 9 8 8.8 5.5 74.9 34.6 7.2 1.2 7 -1.6 5.6 -4.8 3.9 -7.2 3.1 -10.1 2.6 -12.2 1.5 -23.2 -1.1 -31.2 -4.2 -35.7 -7.7 -36.4 -8.2 -26.5 -11.2 -26.7 -6.8 -13 -7.8 -12.5 -18.8 -23.9 -12.2 -11.4 -9 -5.3 -4.7 -1.5 -4.8 -.5 -6.1 .9 -5.8 2.8 -5.5 4.6 -4.7 6.1 -5.5 10.4 -3.7 9.7 -3.4 12.7 -1.7 11.7 .2 6.4 -1.3 3.5 -1.5 -7.6 .1 -8.2 1.4 -4.4 -1.2 -7.6 1.2 -6.2 0 -3.6 -.9 -2.6 1.2 -5.6 -1 -6.7 .9 -4.5 -1.3 -5.9 1.4 -6.3 -1.6 -5 1.2 -2.7 .5 -4.6 -1.6 -4.6 1.1 -3.2 -.1 -6.2 -.8 -1.9 1.3 -6 -.9 -4.2 1.2 -3.4 -.9 -5.9 .8 -2.9 3.8 -5 1.1 -13.9 4.5 -7.2 1.9 -10.6 -2.6 -7.9 -2.7 -3.4Z\" fill=\"#8f6464\" /></g><path d=\"M128.8 173.7l5.9 7.3 4.4 4 4.7 2.5 2.3.2 2.1-.6 3.9-2.9 8.9-12.9 1.6.4.5 2.7 0 2.5-4.9 20.6-.8 9.7-2.5-.8-8.2-5.2-14.8 17.4.1-14.3-4.6-29.2Z\" fill=\"#cac7c7\" style=\"mix-blend-mode:multiply\" /></g></g></g>"};
 /* DKA scene: insulin-deficient muscle and liver, ketone production, blood, kidney loss, lungs and the treatment sources. */
 const CY = SC.CY, WW = SC.W;
-const layers = { lungs: $("lungs"), muscle: $("muscle"), cells: $("cells"), tr: $("tr"), parts: $("parts"), marks: $("marks"), over: $("over"), panel: $("panel"), lumen: $("lumen") };
-function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0, tx: 0, ty: 0 }; }); }
+const layers = { lungs: $("lungs"), muscle: $("muscle"), cells: $("cells"), tr: $("tr"), parts: $("parts"), marks: $("marks"), over: $("over"), panel: $("panel"), lumen: $("lumen"), panc: $("pancSlot"), liver: $("liverSlot"), kidney: $("kidneySlot"), trig: $("trig") };
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0, tx: 0, ty: 0, dwell: 0, liver: false }; }); }
 const free = (pl) => pl.find((p) => !p.on);
-function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
+function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.dwell = 0; p.e.setAttribute("opacity", "1"); }
 function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
 const at = (p) => p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
 const dot = (cls, r) => () => mk("circle", { class: "sc-p " + cls, r }, layers.parts);
 const dia = (cls) => () => mk("path", { class: "sc-p " + cls, d: "M0 -3.4L3.2 0L0 3.4L-3.2 0Z" }, layers.parts);
-const sm = { G: 0.8, Kt: 0.7, De: 0.7, Sh: 0.6, Kr: 0.6, Ks: 0.6, Kin: 0.3, ins: 0, fl: 0, kcl: 0, a: 0.75, og: 0.08 };
+const sm = { G: 0.8, Kt: 0.7, De: 0.7, Sh: 0.6, Kr: 0.6, Ks: 0.6, Kin: 0.3, ins: 0, fl: 0, kcl: 0, full: 0, a: 0.75, og: 0.08 };
 let hh = 34, breathPh = 0;
 
-/* ---- cells ---- */
-const beta = cell(layers.cells, { cls: "bcell", r: 34, nuc: 0.4, seed: 3, wob: 0.1, x: 100, y: 150 });
-const alpha = cell(layers.cells, { cls: "acell", r: 24, nuc: 0.4, seed: 5, wob: 0.1, x: 200, y: 185 });
-const vesicles = [[-12, -8], [8, -14], [14, 4], [-6, 10], [-16, 6], [2, 0]].map(([x, y]) => { const c = mk("circle", { class: "sc-p p-ins", r: 2.6, cx: 100 + x, cy: 150 + y }, layers.cells); c.setAttribute("opacity", "0.35"); return c; });
+/* ---- organs: pancreas, liver, kidney and two lungs replace the old blob art ---- */
+let pancO = null, liverO = null, kidneyO = null, lungWrapL = null, lungWrapR = null, capEl = null, capDrug = -1;
+const trigDots = [];
+function capText(d) {
+  if (d === 1) return "Fluids refill the vessels. Water loss improves, but sugar and acid stay high.";
+  if (d === 2) return "Insulin switches off acid making and lets sugar into muscle. Water loss stays bad and potassium can crash.";
+  if (d === 3) return "Fluids plus insulin. Sugar and acid fall and vessels refill, but potassium can still crash.";
+  if (d === 4) return "Potassium with monitoring. Potassium stays safe while sugar, acid and water improve.";
+  if (d === 5) return "Full protocol. The trigger is treated too, so sugar, acid, water and potassium all settle.";
+  return "No treatment. Sugar and acid build up, water is lost, and breathing works hard.";
+}
+function initOrgans() {
+  pancO = organ(layers.panc, "pancreas", 142, 150, 170, {});
+  liverO = organ(layers.liver, "liver", 505, 150, 150, {});
+  kidneyO = organ(layers.kidney, "kidney", 630, 392, 58, {});
+  lungWrapL = mk("g", {}, layers.lungs); lungWrapR = mk("g", {}, layers.lungs);
+  organ(lungWrapL, "lung", 55, 302, 64, { flip: true });
+  organ(lungWrapR, "lung", 115, 302, 64, {});
+  [[920, 66], [936, 70], [924, 80], [938, 80]].forEach(([x, y], i) => {
+    const e = mk("circle", { class: "sc-p p-gcg", r: 3.4 }, layers.trig);
+    trigDots.push({ e, x, y, ph: i * 1.7 });
+  });
+}
+
+/* ---- fat store stays a tissue cell; muscle stays fibre tissue with gates ---- */
 const fat = cell(layers.cells, { cls: "fat", r: 38, seed: 7, wob: 0.07, x: 345, y: 192 });
 const vac = mk("circle", { class: "cl-vac cl-b", cx: 345, cy: 192, r: 24, style: "fill:#fff3c0;stroke:#d9b44a" }, layers.cells);
-const liver = cell(layers.cells, { cls: "liver", r: 54, nuc: 0.28, seed: 9, wob: 0.1, x: 500, y: 150 });
 /* ---- muscle ---- */
 const mus = mk("rect", { class: "dka-musc", x: 650, y: 100, width: 260, height: 120, rx: 24 }, layers.muscle);
 for (let i = 0; i < 12; i++) mk("path", { class: "dka-stri", d: "M" + (672 + i * 20) + " 112L" + (672 + i * 20) + " 208" }, layers.muscle);
-const gates = [680, 735, 790, 845, 900].map((x) => ({ x, l: mk("rect", { class: "dka-gate", x: x - 8, y: 216, width: 7, height: 10, rx: 2 }, layers.muscle), r: mk("rect", { class: "dka-gate", x: x + 1, y: 216, width: 7, height: 10, rx: 2 }, layers.muscle), cross: mk("path", { class: "dka-stop", d: "M" + (x - 4) + " 230l8 8M" + (x + 4) + " 230l-8 8" }, layers.muscle) }));
+const gates = [680, 735, 790, 845, 900].map((x) => ({ x, l: mk("rect", { class: "dka-gate", x: x - 8, y: 216, width: 7, height: 10, rx: 2 }, layers.muscle), r: mk("rect", { class: "dka-gate", x: x + 1, y: 216, width: 7, height: 10, rx: 2 }, layers.muscle), cross: mk("path", { class: "dka-x", d: "M" + (x - 4) + " 230l8 8M" + (x + 4) + " 230l-8 8" }, layers.muscle) }));
 const kin = Array.from({ length: 16 }, (_, i) => mk("circle", { class: "sc-p p-k", r: 3, cx: 672 + (i % 8) * 31 + (i > 7 ? 14 : 0), cy: 134 + Math.floor(i / 8) * 44 }, layers.muscle));
-/* ---- lungs ---- */
-const lobes = [58, 108].map((x, i) => { const g = mk("g", {}, layers.lungs); mk("path", { class: "dka-lung", d: "M0 -26C16 -26 24 -8 22 10C20 24 8 28 0 24C-8 28 -20 24 -22 10C-24 -8 -16 -26 0 -26Z" }, g); mk("path", { class: "dka-stri", d: "M0 -20L0 12M0 -4L-10 6M0 -4L10 6" }, g); return { g, x }; });
 /* ---- treatment sources ---- */
 const bag = mk("g", { id: "tr-fl" }, layers.tr); mk("path", { class: "dka-icon", d: "M60 380h40v34a20 12 0 0 1-40 0Z" }, bag); mk("path", { class: "dka-icon", d: "M76 380v-6h8v6" }, bag); mk("path", { class: "p-fl", d: "M80 394c4 5 5 8 5 10a5 5 0 0 1-10 0c0-2 1-5 5-10Z" }, bag);
 const syr = mk("g", { id: "tr-ins" }, layers.tr); mk("rect", { class: "dka-ico2", x: 232, y: 386, width: 60, height: 16, rx: 3 }, syr); mk("path", { class: "dka-ico2", d: "M292 392h18v4h-18Z" }, syr); mk("path", { class: "dka-ico2", d: "M226 394h8M226 388v12" }, syr); mk("path", { class: "dka-ico2", d: "M250 386v16M262 386v16M274 386v16" }, syr);
@@ -456,8 +733,8 @@ const TUBE = track(SC.tube);
 const ng = Array.from({ length: 12 }, () => ({ e: dot("p-gluc", 3)(), u: Math.random() }));
 const wat = pool(24, () => mk("path", { class: "p-fl", d: "M0 -3.4C2.2 -.6 2.8 .8 2.8 1.8A2.8 2.8 0 0 1 -2.8 1.8C-2.8 .8 -2.2 -.6 0 -3.4Z" }, layers.parts));
 const salt = pool(10, dot("p-salt", 2.6));
-/* ---- marks (stops) ---- */
-const stops = [[470, 210], [532, 214], [405, 175]].map(([x, y]) => { const g = mk("g", { opacity: "0" }, layers.marks); mk("circle", { class: "dka-stop", cx: x, cy: y, r: 7 }, g); mk("path", { class: "dka-stop", d: "M" + (x - 5) + " " + (y + 5) + "L" + (x + 5) + " " + (y - 5) }, g); return g; });
+/* ---- block marks where insulin shuts production down ---- */
+const blocks = [[405, 178], [515, 232], [545, 232]].map(([x, y]) => { const g = mk("g", { opacity: "0" }, layers.marks); mk("circle", { class: "dka-x", cx: x, cy: y, r: 7 }, g); mk("path", { class: "dka-x", d: "M" + (x - 5) + " " + (y + 5) + "L" + (x + 5) + " " + (y - 5) }, g); return g; });
 const gg = {};
 function initPanel() {
   const P = layers.panel, y0 = 478, h = 70, xs = [130, 300, 470, 640, 810];
@@ -466,28 +743,29 @@ function initPanel() {
   [["gl", "Glucose", "g-gl", "Blood glucose. High because there is almost no insulin: muscle cannot take it up and the liver keeps making more."], ["kt", "Ketones, acid", "g-acid", "Ketone acids from fatty-acid breakdown. They lower blood pH (acidosis) and widen the anion gap."], ["de", "Dehydration", "g-dehy", "Water, sodium and potassium lost in urine because glucose drags water out (osmotic diuresis). Fluids correct it."], ["kr", "Potassium risk", "g-kr", "Total body potassium is low even if the blood level looks normal or high. Insulin pushes potassium into cells, so the level can fall dangerously fast without replacement."], ["sh", "Shock", "g-sh", "Low blood volume lowers blood pressure and organ perfusion."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
   const ox = layers.over;
-  pill(ox, "Beta cell", 100, 150, 100, 100, "Pancreatic beta cell. In type 1 diabetes it has been destroyed, so almost no insulin is released (the vesicles stay full).");
-  pill(ox, "Alpha cell", 200, 185, 206, 228, "Alpha cell. It releases glucagon, which tells the liver to make more glucose and ketones. Glucagon and other stress hormones are high in DKA.");
-  pill(ox, "Fat cell", 345, 192, 345, 104, "Fat cell. Without insulin its fat store breaks down (lipolysis) and releases free fatty acids.");
-  pill(ox, "Liver cell", 500, 150, 500, 80, "Liver cell. It turns fatty acids into ketone bodies and, with no insulin to stop it, keeps making glucose (gluconeogenesis, glycogen breakdown).");
-  pill(ox, "Muscle cell", 780, 150, 780, 88, "Muscle cell. Glucose enters through GLUT4 gates that need insulin. With no insulin the gates stay shut, and potassium leaks out of the cell.");
-  pill(ox, "GLUT4 gates", 790, 226, 830, 244, "GLUT4 transporters: opened by insulin. Closed here, so glucose piles up in the blood.");
-  pill(ox, "Kidney tube", 700, 392, 692, 366, "Kidney tubule. Glucose above the tubule's capacity stays in the urine and drags water, sodium and potassium with it (osmotic diuresis).");
-  pill(ox, "Lost in urine", 860, 398, 880, 438, "Water, sodium and potassium lost in urine: the main cause of dehydration in DKA.");
-  pill(ox, "Fluids", 80, 406, 80, 436, "Intravenous fluids: refill the blood vessels and dilute the glucose.");
-  pill(ox, "Insulin", 262, 402, 262, 436, "Insulin (given): switches off ketone and glucose production, opens the muscle gates and drives glucose and potassium into cells.");
-  pill(ox, "Potassium", 420, 410, 420, 436, "Potassium replacement (with monitoring): prevents the dangerous fall in potassium when insulin pushes it back into cells.");
-  [[lobes[0].x, 320, "Lungs: deep, fast breathing (Kussmaul) blows off carbon dioxide to offset the acid."]].forEach(([x, y, tip]) => { const hg = mk("g", { class: "hot", tabindex: "0", "data-info": tip }, ox); mk("rect", { x: 28, y: 290, width: 106, height: 46, rx: 12, fill: "transparent" }, hg); });
+  pill(ox, "Pancreas", 140, 108, 90, 90, "Pancreas. Beta cells here normally release insulin. In diabetes almost none is released, and alpha cells release glucagon that tells the liver to make sugar and ketones.");
+  pill(ox, "Fat cell", 345, 165, 345, 104, "Fat cell. Without insulin its fat store breaks down and releases fatty acids.");
+  pill(ox, "Liver", 505, 108, 505, 80, "Liver. It turns fatty acids into ketone acids and keeps making sugar while insulin is missing.");
+  pill(ox, "Muscle cell", 780, 140, 780, 88, "Muscle cell. Sugar enters through glucose gates that need insulin. With no insulin the gates stay shut, and potassium leaks out of the cell.");
+  pill(ox, "Glucose gates", 760, 222, 830, 244, "Glucose gates. Opened by insulin. Closed here, so sugar piles up in the blood.");
+  pill(ox, "Kidney", 630, 368, 692, 366, "Kidney. Sugar above what the tubule can reclaim stays in the urine and drags water, sodium and potassium with it.");
+  pill(ox, "Lost in urine", 930, 424, 880, 436, "Water, sodium and potassium lost in urine: the main cause of dehydration here.");
+  pill(ox, "Fluids", 80, 400, 80, 436, "Intravenous fluids: refill the blood vessels and dilute the sugar.");
+  pill(ox, "Insulin", 262, 394, 262, 436, "Insulin given as treatment: switches off ketone and sugar making, opens the muscle gates and moves sugar and potassium into cells.");
+  pill(ox, "Potassium", 420, 400, 420, 436, "Potassium replacement with monitoring: prevents the dangerous fall when insulin moves potassium back into cells.");
+  pill(ox, "Trigger", 928, 72, 890, 54, "A trigger, for example an infection or a missed insulin dose. The full protocol treats it alongside fluids, insulin and potassium.");
+  [["Lungs: deep, fast breathing blows off carbon dioxide to offset the acid."]].forEach(([tip]) => { const hg = mk("g", { class: "hot", tabindex: "0", "data-info": tip }, ox); mk("rect", { x: 28, y: 290, width: 106, height: 46, rx: 12, fill: "transparent" }, hg); });
   // a small legend in the gap above the blood
   const lg = mk("g", {}, ox); [["p-gluc", "glucose", 300], ["p-ket", "ketone acid", 392], ["p-k", "potassium", 510], ["p-ins", "insulin", 612]].forEach(([c, n, x]) => { mk("circle", { class: "sc-p " + c, cx: x, cy: 258, r: 3 }, lg); const tx = mk("text", { class: "sc-lab", x: x + 8, y: 261 }, lg); tx.textContent = n; });
+  capEl = mk("text", { class: "dka-cap", x: 30, y: 30 }, ox); capEl.textContent = capText(0);
 }
-function init() { initPanel(); }
+function init() { initOrgans(); initPanel(); }
 function fly(p, dt, sx) { p.x += p.vx * dt; p.y += p.vy * dt; at(p); }
 function step(dt, m) {
   const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.45);
   sm.G = lerp(sm.G, m.G, k2); sm.Kt = lerp(sm.Kt, m.Kt, k2); sm.De = lerp(sm.De, m.De, k2); sm.Sh = lerp(sm.Sh, m.Sh, k2); sm.Kr = lerp(sm.Kr, m.Kr, k2); sm.Ks = lerp(sm.Ks, m.Ks, k2); sm.Kin = lerp(sm.Kin, m.Kin, k2);
-  sm.ins = lerp(sm.ins, m.ins, k1); sm.fl = lerp(sm.fl, m.fl, k1); sm.kcl = lerp(sm.kcl, m.kcl, k1); sm.a = m.a; sm.og = lerp(sm.og, m.ins ? 0.95 : 0.08, k1);
-  hh = 34 * (1 - 0.38 * sm.De) + 2 * Math.sin(tm / 900);
+  sm.ins = lerp(sm.ins, m.ins, k1); sm.fl = lerp(sm.fl, m.fl, k1); sm.kcl = lerp(sm.kcl, m.kcl, k1); sm.full = lerp(sm.full, m.full, k1); sm.a = m.a; sm.og = lerp(sm.og, m.ins ? 0.95 : 0.08, k1);
+  hh = 34 * (1 - 0.5 * sm.De) + 2 * Math.sin(tm / 900);
   layers.lumen.setAttribute("y", f1(CY - hh)); layers.lumen.setAttribute("height", f1(hh * 2));
   const flow = 48 * (1 - 0.5 * sm.Sh);
   /* blood: glucose, ketone acid, potassium */
@@ -502,43 +780,56 @@ function step(dt, m) {
   kout.forEach((p) => { if (!p.on) return; fly(p, dt); if (p.y > CY - hh - 2) kill(p); });
   acc.kin += dt * sm.ins * sm.og * 4; while (acc.kin >= 1) { acc.kin--; const p = free(kinflux), g = pick(gates); if (p) emit(p, g.x + 4, CY - hh - 2, 0, -46, 0); }
   kinflux.forEach((p) => { if (!p.on) return; fly(p, dt); if (p.y < 190) kill(p); });
-  /* fat to liver to blood */
+  /* fat to liver to blood: insulin throttles release, blocks mark the shutoff */
   const Lr = (0.25 + 0.75 * sm.a) * (1 - 0.85 * sm.ins);
   vac.setAttribute("r", f1(24 - 7 * Lr));
-  acc.ffa += dt * Lr * 5; while (acc.ffa >= 1) { acc.ffa--; const p = free(ffa); if (p) emit(p, 372, 188 + rnd(-8, 8), 56, -6, 0); }
-  ffa.forEach((p) => { if (!p.on) return; fly(p, dt); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.x > 452) kill(p); });
-  acc.kp += dt * Lr * 4 * sm.Kt; while (acc.kp >= 1) { acc.kp--; const p = free(kprod); if (p) emit(p, 480 + rnd(-10, 10), 196, 0, 42, 0); }
+  acc.ffa += dt * Lr * 5; while (acc.ffa >= 1) { acc.ffa--; const p = free(ffa); if (p) emit(p, 382, 188 + rnd(-8, 8), 56, -6, 0); }
+  ffa.forEach((p) => { if (!p.on) return; fly(p, dt); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.x > 432) kill(p); });
+  acc.kp += dt * Lr * 4 * sm.Kt; while (acc.kp >= 1) { acc.kp--; const p = free(kprod); if (p) emit(p, 515 + rnd(-10, 10), 202, 0, 42, 0); }
   kprod.forEach((p) => { if (!p.on) return; fly(p, dt); if (p.y > CY - hh) kill(p); });
-  acc.gp += dt * Lr * 3.5 * (0.4 + sm.G); while (acc.gp >= 1) { acc.gp--; const p = free(gprod); if (p) emit(p, 535 + rnd(-8, 8), 196, 0, 42, 0); }
+  acc.gp += dt * Lr * 3.5 * (0.4 + sm.G); while (acc.gp >= 1) { acc.gp--; const p = free(gprod); if (p) emit(p, 545 + rnd(-8, 8), 200, 0, 42, 0); }
   gprod.forEach((p) => { if (!p.on) return; fly(p, dt); if (p.y > CY - hh) kill(p); });
-  acc.gcg += dt * (0.3 + 0.7 * sm.a) * (1 - 0.4 * sm.ins) * 2.2; while (acc.gcg >= 1) { acc.gcg--; const p = free(gcg); if (p) emit(p, 222, 182 + rnd(-6, 6), 62, -4, 0); }
-  gcg.forEach((p) => { if (!p.on) return; fly(p, dt); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(tm / 6) + ")"); if (p.x > 460) kill(p); });
-  stops[0].setAttribute("opacity", sm.ins.toFixed(2)); stops[1].setAttribute("opacity", sm.ins.toFixed(2)); stops[2].setAttribute("opacity", sm.ins.toFixed(2));
+  acc.gcg += dt * (0.3 + 0.7 * sm.a) * (1 - 0.4 * sm.ins) * (1 - 0.45 * sm.full) * 2.2; while (acc.gcg >= 1) { acc.gcg--; const p = free(gcg); if (p) emit(p, 205, 164 + rnd(-6, 6), 62, -2, 0); }
+  gcg.forEach((p) => { if (!p.on) return; fly(p, dt); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(tm / 6) + ")"); if (p.x > 430) kill(p); });
+  blocks[0].setAttribute("opacity", sm.ins.toFixed(2)); blocks[1].setAttribute("opacity", sm.ins.toFixed(2)); blocks[2].setAttribute("opacity", sm.ins.toFixed(2));
   /* treatment sources: icons light up, particles run into the blood */
   $("tr-fl").style.opacity = (0.3 + 0.7 * sm.fl).toFixed(2); $("tr-ins").style.opacity = (0.3 + 0.7 * sm.ins).toFixed(2); $("tr-kcl").style.opacity = (0.3 + 0.7 * sm.kcl).toFixed(2);
   acc.iv += dt * sm.fl * 5; while (acc.iv >= 1) { acc.iv--; const p = free(ivp); if (p) emit(p, 80, 372, 40, -50, 0); }
   ivp.forEach((p) => { if (!p.on) return; if (p.k === 0) { p.x += p.vx * dt; p.y += p.vy * dt; if (p.y < CY + hh - 2) { p.k = 1; p.vx = flow * 1.3; p.vy = 0; p.y = CY + rnd(-hh + 8, hh - 8); } } else { p.x += p.vx * dt; } at(p); if (p.x > 944) kill(p); });
-  acc.insv += dt * sm.ins * 2.6; while (acc.insv >= 1) { acc.insv--; const p = free(insp); if (p) { emit(p, 270, 384, 0, -50, 0); p.liver = Math.random() < 0.45; p.tx = p.liver ? 500 + rnd(-30, 30) : pick(gates).x; } }
-  insp.forEach((p) => { if (!p.on) return; if (p.k === 0) { p.y += p.vy * dt; if (p.y < CY + 6) { p.k = 1; p.y = CY + rnd(-6, 6); } } else if (p.k === 1) { p.x += 90 * dt; if (p.x >= p.tx) { p.k = 2; p.x = p.tx; } } else { p.y -= 60 * dt; if (p.y < (p.liver ? 200 : 214)) kill(p); } at(p); });
+  acc.insv += dt * sm.ins * 2.6; while (acc.insv >= 1) { acc.insv--; const p = free(insp); if (p) { emit(p, 270, 384, 0, -50, 0); p.liver = Math.random() < 0.45; p.tx = p.liver ? 510 + rnd(-20, 20) : pick(gates).x; } }
+  insp.forEach((p) => {
+    if (!p.on) return;
+    if (p.k === 0) { p.y += p.vy * dt; if (p.y < CY + 6) { p.k = 1; p.y = CY + rnd(-6, 6); } }
+    else if (p.k === 1) { p.x += 90 * dt; if (p.x >= p.tx) { p.k = 2; p.x = p.tx; p.dwell = 0; } }
+    else if (p.k === 2) { p.dwell += dt; p.x = p.tx + Math.sin(tm / 200 + p.tx) * 1.5; if (p.dwell > 0.8) p.k = 3; }
+    else { p.y -= 60 * dt; if (p.y < (p.liver ? 208 : 214)) kill(p); }
+    at(p);
+  });
   acc.kcl += dt * sm.kcl * 2.6; while (acc.kcl >= 1) { acc.kcl--; const p = free(kcp); if (p) emit(p, 420, 372, 0, -50, 0); }
   kcp.forEach((p) => { if (!p.on) return; if (p.k === 0) { p.y += p.vy * dt; if (p.y < CY + 6) { p.k = 1; p.y = CY + rnd(-8, 8); } } else { p.x += flow * 1.1 * dt; } at(p); if (p.x > 944) kill(p); });
-  /* lungs: deeper and faster with acid */
+  /* trigger: angry red while untreated, cooling down as the full protocol treats it */
+  trigDots.forEach((d) => {
+    const s = 1 - 0.55 * sm.full, wob = Math.sin(tm / 500 + d.ph) * 2;
+    d.e.setAttribute("transform", "translate(" + f1(d.x) + " " + f1(d.y + wob) + ")" + (s !== 1 ? " scale(" + s.toFixed(3) + ")" : ""));
+    d.e.setAttribute("opacity", ((0.15 + 0.85 * (1 - sm.full)) * (0.65 + 0.35 * Math.sin(tm / 450 + d.ph))).toFixed(2));
+  });
+  /* lungs: deeper and faster with acid, drawn from real lung organs */
   breathPh += dt * (1.2 + 4.2 * sm.Kt); const amp = 0.05 + 0.22 * sm.Kt;
-  lobes.forEach((l) => l.g.setAttribute("transform", "translate(" + l.x + " 316) scale(" + (1 + amp * Math.sin(breathPh)).toFixed(3) + " " + (1 + amp * 1.2 * Math.sin(breathPh)).toFixed(3) + ")"));
-  acc.co2 += dt * sm.Kt * 4; while (acc.co2 >= 1) { acc.co2--; const p = free(co2); if (p) emit(p, 70 + rnd(-30, 40), 302, 0, -26, 0); }
-  co2.forEach((p) => { if (!p.on) return; fly(p, dt); p.e.setAttribute("opacity", clamp(1 - (302 - p.y) / 34).toFixed(2)); if (p.y < 268) kill(p); });
+  const br = 1 + amp * Math.sin(breathPh);
+  lungWrapL.setAttribute("transform", "translate(55 302) scale(" + br.toFixed(3) + ") translate(-55 -302)");
+  lungWrapR.setAttribute("transform", "translate(115 302) scale(" + br.toFixed(3) + ") translate(-115 -302)");
+  acc.co2 += dt * sm.Kt * 4; while (acc.co2 >= 1) { acc.co2--; const p = free(co2); if (p) emit(p, 85 + rnd(-25, 25), 285, 0, -26, 0); }
+  co2.forEach((p) => { if (!p.on) return; fly(p, dt); p.e.setAttribute("opacity", clamp(1 - (285 - p.y) / 34).toFixed(2)); if (p.y < 252) kill(p); });
   /* kidney: glucose in the tube drags water, sodium and potassium out */
   const wn = Math.round(sm.G * ng.length); ng.forEach((p, i) => { p.u = (p.u + dt * 0.12) % 1; const a = TUBE.at(p.u); p.e.setAttribute("transform", "translate(" + f1(a.x) + " " + f1(a.y) + ")"); p.e.setAttribute("opacity", i < wn ? "1" : "0"); });
   acc.wat += dt * sm.G * 5; while (acc.wat >= 1) { acc.wat--; const p = free(wat), a = TUBE.at(rnd(0.15, 0.9)); if (p) emit(p, a.x, a.y + 8, rnd(-3, 3), 22, 0); }
   wat.forEach((p) => { if (!p.on) return; fly(p, dt); p.e.setAttribute("opacity", clamp(1 - (p.y - 400) / 36).toFixed(2)); if (p.t += dt, p.t > 1.6) kill(p); });
   acc.salt += dt * sm.G * 2; while (acc.salt >= 1) { acc.salt--; const p = free(salt), a = TUBE.at(rnd(0.2, 0.85)); if (p) emit(p, a.x, a.y + 8, rnd(-4, 4), 18, 0); }
   salt.forEach((p) => { if (!p.on) return; fly(p, dt); if (p.t += dt, p.t > 1.5) kill(p); });
-  /* cell life */
-  place(beta, 100 + Math.sin(tm / 1700) * 1.5, 150 + Math.cos(tm / 2100) * 1.5, 0, 1); place(alpha, 200 + Math.sin(tm / 1500) * 1.5, 185, 0, 1 + 0.05 * Math.sin(tm / 400));
-  place(liver, 500, 150 + Math.sin(tm / 1900) * 2, 0, 1 + 0.02 * Math.sin(tm / 700));
-  /* gauges */
+  /* gauges and the plain-language caption */
   gg.gl.set(sm.G, wordOf(sm.G, 0.4, 0.7, ["controlled", "high", "very high"])); gg.kt.set(sm.Kt, wordOf(sm.Kt, 0.25, 0.55, ["low", "present", "high"])); gg.de.set(sm.De, wordOf(sm.De, 0.3, 0.6, ["corrected", "moderate", "severe"]));
   gg.kr.set(sm.Kr, wordOf(sm.Kr, 0.3, 0.7, ["safe", "watch", "danger"])); gg.sh.set(sm.Sh, wordOf(sm.Sh, 0.3, 0.6, ["none", "mild", "severe"]));
+  if (drug !== capDrug) { capDrug = drug; const t = capText(drug); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 const acc = { up: 0, kout: 0, kin: 0, ffa: 0, kp: 0, gp: 0, gcg: 0, iv: 0, insv: 0, kcl: 0, co2: 0, wat: 0, salt: 0 };
 run({ init, step });

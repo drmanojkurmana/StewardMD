@@ -47,10 +47,10 @@ const TESTS = [
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<path id="shunt" class="he-shunt" d="M285 250 C295 165 375 108 500 100 C600 142 650 215 700 236 C730 246 760 238 785 220"/>
-<path class="he-vessel" d="M222 255 L448 244"/>
-<path class="he-vessel" d="M565 230 C630 220 680 235 722 246"/>
-<path class="he-ureaout" d="M465 308 L465 362"/>
+<path id="shunt" class="he-shunt" d="M285 250 C295 165 375 108 500 100 C600 142 650 215 700 236 C712 238 724 236 735.4 233.1"/>
+<path id="vesselIn" class="he-vessel" d="M222 255 L453.5 249.9"/>
+<path id="vesselOut" class="he-vessel" d="M455.8 128.3 C560 140 640 200 700 236"/>
+<path class="he-ureaout" d="M453.5 308 L453.5 362"/>
 <ellipse class="he-gut" cx="150" cy="242" rx="72" ry="52"/>
 <g id="liverSlot"></g>
 <g id="scars" class="he-scars"><circle cx="410" cy="180" r="13"/><circle cx="500" cy="165" r="10"/><circle cx="535" cy="215" r="12"/><circle cx="405" cy="220" r="9"/><circle cx="480" cy="255" r="8"/></g>
