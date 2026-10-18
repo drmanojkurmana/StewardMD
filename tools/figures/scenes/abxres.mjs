@@ -31,9 +31,9 @@ function modelOf(S, level, drug) {
   const ribo = a >= 2 ? 1 : 0;
   const blaEff = bla ? (drug === 0 ? 0.85 : drug === 1 ? 0.08 : 0) : 0;
   const pbpEff = pbp && drug !== 2 ? 0.7 : 0;
-  const effEff = eff ? (drug === 2 ? 0.35 : 0.5) : 0;
+  const effEff = eff ? (drug === 2 ? 0.25 : 0.5) : 0;
   const porEff = por * (drug === 2 ? 0.2 : 0.45);
-  const riboEff = ribo && drug === 2 ? 0.55 : 0;
+  const riboEff = ribo && drug === 2 ? 0.42 : 0;
   const Reach = cl((1 - porEff) * (1 - blaEff) * (1 - pbpEff) * (1 - effEff) * (1 - riboEff));
   const Kill = cl(Reach * 0.95);
   const Surv = cl(1 - Kill);
@@ -44,10 +44,10 @@ function modelOf(S, level, drug) {
   return { a, bla, pbp, eff, por, ribo, Reach, Kill, Surv, Barrier, Spread, words, readout: "bacteria " + words[0] + " · drug " + words[1] + " target · spread " + words[2] };
 }
 const TESTS = [
-  [0, 0, "bacteria killed · drug reaching target · spread low"],
   [1, 0, "bacteria thriving · drug blocked target · spread high"],
   [1, 1, "bacteria killed · drug reaching target · spread moderate"],
-  [2, 1, "bacteria thriving · drug blocked target · spread high"],
+  [2, 0, "bacteria thriving · drug blocked target · spread high"],
+  [2, 2, "bacteria surviving · drug partly reaching target · spread high"],
 ];
 
 /* ---------------- static layout ---------------- */
@@ -60,8 +60,15 @@ const body = `
 <g id="panel"></g>`;
 
 const extraCss = `
+.abx-cap{fill:var(--anatomy-strong);font-size:13px}
+.abx-damage{fill:var(--c-bad);stroke:none}
+.abx-crack{fill:none;stroke:var(--anatomy-strong);stroke-width:2;stroke-linecap:round}
+.abx-capd{fill:#3ddc97;stroke:color-mix(in srgb,#3ddc97 55%,#000);stroke-width:.6}
+.abx-bound{fill:#ff9a3d;stroke:color-mix(in srgb,#ff9a3d 55%,#000);stroke-width:.6}
+.abx-dock{fill:#7fd3ff;stroke:color-mix(in srgb,#7fd3ff 55%,#000);stroke-width:.6}
+.abx-chain{fill:#e8d36a;stroke:color-mix(in srgb,#e8d36a 55%,#000);stroke-width:.5}
+.abx-spark{--cc:#ffb020}
 .enzyme{fill:#ff9a3d;stroke:color-mix(in srgb,#ff9a3d 55%,#000);stroke-width:.8}
-.enzyme-t{fill:var(--anatomy-strong);font:700 9px var(--anatomy-mono);pointer-events:none}
 .porin{fill:var(--anatomy-card);stroke:var(--c-fl);stroke-width:1.4}
 .porin-in{fill:color-mix(in srgb,var(--c-fl) 45%,var(--anatomy-paper))}
 .pump-b{fill:#c978c9;stroke:color-mix(in srgb,#c978c9 55%,#000);stroke-width:.9}

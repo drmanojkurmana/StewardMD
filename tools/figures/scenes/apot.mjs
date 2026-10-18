@@ -1,6 +1,6 @@
 /* Cardiac action potential and ion channels as an animated, working scene. Original drawing.
  *   node tools/figures/scenes/apot.mjs [--print-model]
- * Layout and model here; traces, channels, particles and gauges move in apot.page.js. Qualitative: no doses, no numbers. */
+ * Layout and model here; traces, heart, channels, particles and gauges move in apot.page.js. Qualitative: no doses, no numbers. */
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -33,7 +33,7 @@ function modelOf(S, level, drug) {
   let up = base.up, plat = base.plat, repol = base.repol, dur = base.dur, pace = base.pace;
   if (drug === 1) { up = cl(up * 0.42); dur = cl(dur + 0.08); }
   if (drug === 2) { repol = cl(repol * 0.38); plat = cl(plat + 0.12); dur = cl(dur + 0.30); }
-  if (drug === 3) { plat = cl(plat * 0.42); dur = cl(dur - 0.18); pace = cl(pace * 0.45); repol = cl(repol + 0.06); }
+  if (drug === 3) { plat = cl(plat * 0.42); dur = cl(dur - 0.28); pace = cl(pace * 0.45); repol = cl(repol + 0.06); }
   const Na = cl(up), Ca = cl(plat), K = cl(repol), QT = cl(dur);
   const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
   const words = [
@@ -51,12 +51,15 @@ const TESTS = [
   [0, 1, "upstroke slow · plateau normal · repolarisation normal · QT normal"],
   [0, 2, "upstroke sharp · plateau normal · repolarisation slow · QT long"],
   [0, 3, "upstroke sharp · plateau short · repolarisation normal · QT short"],
+  [3, 3, "upstroke sharp · plateau normal · repolarisation slow · QT normal"],
 ];
 
 /* ---------------- static layout ---------------- */
 const AP = { x: 62, y: 86, w: 452, h: 168, base: 236, peak: 100 };
 const PM = { x: 628, y: 86, w: 296, h: 108, base: 176, peak: 102 };
 const EG = { x: 628, y: 232, w: 296, h: 102, base: 302 };
+const HX = 124, HY = 357, HW = 130;
+const MEM = { x: 230, y: 367, w: 330 };
 let grid = "";
 for (let x = AP.x; x <= AP.x + AP.w; x += 36) grid += `<path class="ap-grid" d="M${x} ${AP.y}V${AP.y + AP.h}"/>`;
 for (let y = AP.y; y <= AP.y + AP.h; y += 28) grid += `<path class="ap-grid" d="M${AP.x} ${y}H${AP.x + AP.w}"/>`;
@@ -75,31 +78,30 @@ const body = `
 <rect class="ap-bg" x="${AP.x - 8}" y="${AP.y - 6}" width="${AP.w + 16}" height="${AP.h + 14}" rx="10"/>
 <clipPath id="apclip"><rect x="${AP.x}" y="${AP.y}" width="${AP.w}" height="${AP.h}"/></clipPath>
 <g clip-path="url(#apclip)">${grid}</g>
-<path class="ap-axis" d="M${AP.x} ${AP.base}H${AP.x + AP.w}M${AP.x} ${AP.y}V${AP.y + AP.h}"/>
-<text class="ap-lab" x="${AP.x + 4}" y="${AP.y + 12}">potential</text>
-<text class="ap-lab" x="${AP.x + AP.w - 28}" y="${AP.base + 16}">time</text>
+<path class="ap-axis" d="M${AP.x} ${AP.base}H${AP.x + AP.w}M${AP.x} ${AP.y}V${AP.y + AP.h}" fill="none"/>
 <rect class="ap-bg" x="${PM.x - 8}" y="${PM.y - 6}" width="${PM.w + 16}" height="${PM.h + 14}" rx="10"/>
 <clipPath id="pmclip"><rect x="${PM.x}" y="${PM.y}" width="${PM.w}" height="${PM.h}"/></clipPath>
 <g clip-path="url(#pmclip)">${grid2}</g>
-<path class="ap-axis" d="M${PM.x} ${PM.base}H${PM.x + PM.w}"/>
+<path class="ap-axis" d="M${PM.x} ${PM.base}H${PM.x + PM.w}" fill="none"/>
 <rect class="ap-bg" x="${EG.x - 8}" y="${EG.y - 6}" width="${EG.w + 16}" height="${EG.h + 14}" rx="10"/>
 <clipPath id="egclip"><rect x="${EG.x}" y="${EG.y}" width="${EG.w}" height="${EG.h}"/></clipPath>
 <g clip-path="url(#egclip)">${grid3}</g>
-<path class="ap-axis" d="M${EG.x} ${EG.base}H${EG.x + EG.w}"/>
-<text class="ap-lab" x="${EG.x + 4}" y="${EG.y + 12}">ECG</text>
-<text class="ap-lab" x="40" y="292">0 upstroke · 1 notch · 2 plateau · 3 repolarisation · 4 rest</text>
-<text class="ap-lab" x="628" y="216">no stable rest: slow rise to threshold</text>
-<g id="apg"></g><g id="pmg"></g><g id="ecg"></g><g id="mem"></g><g id="parts"></g><g id="over"></g><g id="panel"></g>`;
+<path class="ap-axis" d="M${EG.x} ${EG.base}H${EG.x + EG.w}" fill="none"/>
+<g id="heartSlot"></g>
+<ellipse id="beatGlow" class="ap-beat" cx="${HX}" cy="${HY}" rx="72" ry="95" opacity="0"/>
+<path id="zoomA" class="ap-zoom" d="M186 330 L${MEM.x} 364" fill="none"/>
+<path id="zoomB" class="ap-zoom" d="M186 395 L${MEM.x} 388" fill="none"/>
+<g id="apg"></g><g id="pmg"></g><g id="ecg"></g><g id="mem"></g><g id="sig"></g><g id="parts"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "cardiac-action-potential", fig: "Fig 1", title: "Cardiac action potential and ion channels", W, H, body,
-  label: "An animated ventricular heart muscle cell action potential beside a pacemaker cell potential and an ECG. Phase 0 is a fast sodium upstroke, phase 1 an early notch, phase 2 a calcium plateau, phase 3 potassium repolarisation and phase 4 rest. The pacemaker cell has no stable rest and rises slowly through the funny current. Below, sodium, calcium and potassium channels in the membrane let particles through in time with the trace. Settings show normal, high potassium, low potassium and long QT, and blockers of sodium, potassium and calcium channels.",
+  label: "An animated heart beside the electrical traces of one heart muscle cell. The signal starts in the pacemaker, spreads through the heart, and shows on the ECG. Below, a zoomed patch of the heart wall shows sodium, calcium and potassium channels opening in turn with the trace. Settings show normal, high potassium, low potassium and long QT, and blockers of sodium, potassium and calcium channels.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, voltages, intervals or numbers are shown or implied.",
-  scene: { W, H, AP, PM, EG }, pageJs: readFileSync(join(HERE, "apot.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H, AP, PM, EG, HX, HY, HW, MEM }, pageJs: readFileSync(join(HERE, "apot.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With calcium channel blocker",
   sourcesLis: [
-    "<strong>How the cardiac action potential works.</strong> In a ventricular myocyte, opening of fast voltage-gated sodium channels drives the rapid phase 0 upstroke. Brief potassium efflux gives the phase 1 notch. In phase 2, calcium entry through L-type calcium channels balances potassium efflux and holds the plateau that triggers contraction. Phase 3 follows when calcium channels close and potassium efflux repolarises the cell to the phase 4 resting potential, held by inward-rectifier potassium channels. Pacemaker cells in the sinoatrial node have no stable resting potential: the funny current, then calcium currents, give a slow phase 4 rise to threshold and a slower, calcium-driven upstroke. The surface ECG sums these events: the QRS reflects ventricular depolarisation and the T wave ventricular repolarisation, so a longer action potential gives a longer QT. High extracellular potassium makes the resting potential less negative, inactivates sodium channels and speeds repolarisation. Low potassium reduces potassium conductance, prolongs repolarisation and flattens the T wave. This is standard teaching in physiology and cardiology texts and was not checked against a linked source here, so it is flagged for review.",
-    "<strong>Treatment ideas shown.</strong> A sodium channel blocker slows the phase 0 upstroke. A potassium channel blocker slows phase 3 and prolongs the action potential and QT. A calcium channel blocker shortens the plateau and slows the pacemaker rise. These are teaching toggles only.",
+    "<strong>How the cardiac action potential works.</strong> In a ventricular myocyte, opening of fast voltage-gated sodium channels drives the rapid upstroke. Brief potassium efflux gives an early notch. In the plateau, calcium entry through L-type calcium channels balances potassium efflux and holds the trace up while the cell contracts. Then calcium channels close and potassium efflux brings the cell back to rest. Pacemaker cells in the sinoatrial node have no stable rest: a slow inward current gives a rising slope to threshold and a slower, calcium-driven rise. The surface ECG sums these events: the spike reflects ventricular firing and the hump reflects resetting, so a longer action potential gives a longer QT. High outside potassium lifts the resting level, weakens sodium entry and speeds resetting. Low potassium slows potassium outflow, lengthens resetting and flattens the hump. This is standard teaching in physiology and cardiology texts and was not checked against a linked source here, so it is flagged for review.",
+    "<strong>Treatment ideas shown.</strong> A sodium channel blocker plugs the sodium channel and weakens the upstroke. A potassium channel blocker plugs the potassium channel, traps potassium inside, and lengthens the action potential and the QT. A calcium channel blocker plugs the calcium channel, shortens the plateau, and slows the pacemaker climb, which also calms a long QT. These are teaching toggles only.",
   ],
   simplified: "Single-cell currents, channel subunit detail, autonomic effects, conduction through the AV node and His-Purkinje system, other potassium and calcium currents, arrhythmia mechanisms in detail, drug classes and their cautions, and all doses, voltages and intervals are left out. Traces are schematic single leads and single cells. The figure does not say how any patient should be treated.",
   extraCss: `
@@ -108,7 +110,6 @@ body[data-theme="light"]{--c-na:#0a7fd1;--c-ca:#d98a1f;--c-k:#7c3aed;--c-fun:#0f
 .ap-bg{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
 .ap-grid{stroke:var(--anatomy-faint);stroke-width:.5;fill:none;stroke-opacity:.45}
 .ap-axis{stroke:var(--anatomy-mid);stroke-width:.9;fill:none}
-.ap-lab{fill:var(--anatomy-text);font:10px var(--anatomy-mono);pointer-events:none}
 .ap-trace{fill:none;stroke:var(--c-na);stroke-width:2.4;stroke-linejoin:round;stroke-linecap:round}
 .ap-faint{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4;opacity:.55}
 .pm-trace{fill:none;stroke:var(--c-fun);stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round}
@@ -116,7 +117,7 @@ body[data-theme="light"]{--c-na:#0a7fd1;--c-ca:#d98a1f;--c-k:#7c3aed;--c-fun:#0f
 .ap-dot{fill:#fff;stroke:var(--c-na);stroke-width:2.2}
 .pm-dot{fill:#fff;stroke:var(--c-fun);stroke-width:2.2}
 .ap-phase{fill:var(--anatomy-strong);stroke:var(--anatomy-paper);stroke-width:1}
-.ap-phase-t{fill:var(--anatomy-paper);font:700 9px var(--anatomy-mono);pointer-events:none}
+.ap-phase-t{fill:var(--anatomy-paper);font-size:10.5px;pointer-events:none;text-anchor:middle}
 .ap-mem{fill:var(--c-mem);opacity:.85}
 .ap-mem2{fill:color-mix(in srgb,var(--c-mem) 65%,#000)}
 .ap-chan-na{fill:var(--c-na);stroke:color-mix(in srgb,var(--c-na) 55%,#000);stroke-width:1}
@@ -126,7 +127,12 @@ body[data-theme="light"]{--c-na:#0a7fd1;--c-ca:#d98a1f;--c-k:#7c3aed;--c-fun:#0f
 .ap-gate{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.8}
 .p-na{--cc:var(--c-na)}.p-ca{--cc:var(--c-ca)}.p-k{--cc:var(--c-k)}.p-fun{--cc:var(--c-fun)}
 .dr-g-fill.g-na{fill:var(--c-na)}.dr-g-fill.g-ca{fill:var(--c-ca)}.dr-g-fill.g-k{fill:var(--c-k)}
-.ap-x{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-linecap:round}
-.ap-blk{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.2}
+.ap-cap{fill:var(--anatomy-strong)}
+.ap-zoom{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:4 3}
+.ap-beat{fill:var(--c-bad);stroke:none}
+.ap-sa{fill:var(--c-fun);stroke:var(--anatomy-paper);stroke-width:1}
+.ap-cond{fill:none;stroke:var(--c-fun);stroke-width:2;stroke-dasharray:5 4}
+.ap-plug{fill:var(--c-bad);stroke:var(--anatomy-paper);stroke-width:1.5}
+.ap-plug-hi{fill:color-mix(in srgb,#fff 55%,var(--c-bad));stroke:none}
 `,
 });
