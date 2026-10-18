@@ -50,14 +50,17 @@ const body = `
 <rect class="sc-tissue" x="464" y="44" width="482" height="394" rx="18"/>
 <text class="sc-zone" x="34" y="68">LYMPH NODE: PRIMING</text>
 <text class="sc-zone" x="484" y="68">TUMOUR: KILLING</text>
+<ellipse id="primeGlow" class="ck-prime" cx="235" cy="240" rx="130" ry="72" opacity="0"/>
+<ellipse id="tumGlow" class="ck-tum" cx="615" cy="200" rx="100" ry="85" opacity="0"/>
+<g id="gutSlot"></g>
 <g id="base"></g><g id="links"></g><g id="parts"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "immune-checkpoint-inhibitors-ctla4-pd1", fig: "Fig 1", title: "Immune checkpoint inhibitors: CTLA-4 and PD-1", W, H, body,
   label: "An animated lymph node and tumour. In the lymph node a dendritic cell primes a T cell through signal 1 (antigen on MHC) and signal 2 (B7 on CD28), while CTLA-4 competes for B7 and dampens priming until anti-CTLA-4 blocks it. Primed killer T cells travel to the tumour, where PD-1 on exhausted T cells binds PD-L1 on tumour cells until anti-PD-1 blocks it and restores killing. A healthy gut patch shows self tissue under attack. Gauges show priming, killing, tumour burden, both brakes and side effects.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses or schedules are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "checkpoint.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "checkpoint.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With both drugs",
   extraCss: `
 .sc-node{fill:var(--c-lymph);opacity:.1}
 body{--c-tum:#e0855a}
@@ -70,9 +73,10 @@ body[data-theme="light"]{--c-tum:#c46434}
 .p-ck{fill:none;stroke:var(--c-ab);stroke-width:2;stroke-linecap:round}
 .p-perf{fill:var(--c-bad)}
 .p-il2{--cc:var(--c-cyt2)}
-.gut-bg{fill:color-mix(in srgb,var(--c-ab) 12%,var(--anatomy-paper));stroke:var(--anatomy-faint);stroke-width:1}
-.gut-vil{fill:color-mix(in srgb,var(--c-ab) 45%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-ab) 60%,#000);stroke-width:.8}
-.gut-infl{fill:var(--c-bad)}
+.ck-prime{fill:var(--c-lymph);stroke:none}
+.ck-tum{fill:var(--c-bad);stroke:none}
+.ck-ginfl{fill:var(--c-bad);stroke:none}
+.ck-cap{fill:var(--anatomy-strong);font-size:13px}
 .r-stem{stroke:var(--anatomy-mid);stroke-width:1}
 .r-b7{fill:var(--c-donor);stroke:color-mix(in srgb,var(--c-donor) 50%,#000);stroke-width:.5}
 .r-cd28{fill:var(--c-cyt2);stroke:color-mix(in srgb,var(--c-cyt2) 50%,#000);stroke-width:.5}
