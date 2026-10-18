@@ -244,8 +244,8 @@
   /* Everything the persistent status strip shows, in one pure call. */
   function stripInfo(sess, elapsed, opts) {
     opts = opts || {};
-    var cyc = cycleInfo(sess.mode, elapsed, sess.cycleStart);
-    var epi = epiStatus(sess, elapsed);
+    var cyc = cycleInfo(sess.mode, elapsed, sess.cycleStart, opts);
+    var epi = epiStatus(sess, elapsed, opts);
     var dc = drugCounts(sess.events);
     var vent = ventInfo(sess, elapsed);
     var rhythmText, rhythmState;
@@ -460,18 +460,25 @@
   /* Epinephrine reminder: due 180 s after the last logged epinephrine,
    * overdue 300 s after it. Before the first logged epinephrine the state
    * is "none" and the guide says when it is indicated. */
-  function epiStatus(sess, elapsed) {
+  function epiStatus(sess, elapsed, opts) {
     var last = lastEpi(sess);
     if (!last) return { state: "none", since: null, remaining: null };
+    var dueS = EPI_DUE_S, overdueS = EPI_OVERDUE_S;
+    if (opts && isFinite(Number(opts.epiIntervalMin))) {
+      var mins = Math.max(3, Math.min(5, Number(opts.epiIntervalMin)));
+      dueS = (mins - 1) * 60; overdueS = dueS + 120;
+    }
     var since = elapsed - last.elapsed;
-    if (since >= EPI_OVERDUE_S) return { state: "overdue", since: since, remaining: 0 };
-    if (since >= EPI_DUE_S) return { state: "due", since: since, remaining: 0 };
-    return { state: "countdown", since: since, remaining: EPI_DUE_S - since };
+    if (since >= overdueS) return { state: "overdue", since: since, remaining: 0 };
+    if (since >= dueS) return { state: "due", since: since, remaining: 0 };
+    return { state: "countdown", since: since, remaining: dueS - since };
   }
 
   /* Rhythm check cycles: 120 s adult and paediatric, 60 s neonatal. */
-  function cycleInfo(mode, elapsed, cycleStart) {
+  function cycleInfo(mode, elapsed, cycleStart, opts) {
     var interval = MODE_CONFIG[normMode(mode)].rhythmInterval;
+    if (opts && isFinite(Number(opts.intervalSec)) && Number(opts.intervalSec) > 0) interval = Math.round(Number(opts.intervalSec));
+    if (typeof opts === "number" && isFinite(opts) && opts > 0) interval = Math.round(opts);
     var into = elapsed - (cycleStart || 0);
     var cycleNumber = Math.floor(Math.max(0, into) / interval) + 1;
     var remaining = interval - into;
@@ -498,10 +505,10 @@
     opts = opts || {};
     if (sess.rosc) return { text: "ROSC", level: "rosc" };
     if (opts.paused) return { text: "Paused", level: "paused" };
-    var epi = epiStatus(sess, elapsed);
+    var epi = epiStatus(sess, elapsed, opts);
     if (epi.state === "overdue") return { text: "Epinephrine overdue", level: "overdue" };
     if (shockAdvised(sess, elapsed)) return { text: "Shock", level: "overdue" };
-    var cyc = cycleInfo(sess.mode, elapsed, sess.cycleStart);
+    var cyc = cycleInfo(sess.mode, elapsed, sess.cycleStart, opts);
     if (cyc.due) return { text: "Rhythm check due", level: "due" };
     if (epi.state === "due") return { text: "Epinephrine due", level: "due" };
     var cands = [];
@@ -902,6 +909,7 @@
    * link chosen on idle, and the last patient-record export outcome. */
   var rtab = "timer", timelineOpen = false, pendingLink = null, exportState = null;
   var logSeg = "log", logFilter = "all", endedPast = false;
+  var notesAlgo = "arrest", settingsGroup = null, settingsQuery = "", logManualOpen = false;
 
   function hasDOM() { return typeof document !== "undefined" && !!document.createElement; }
   function Audio() {
@@ -1178,12 +1186,12 @@
    * on phone (ring plus vent panel beside the clock on iPad). Keeps the
    * cbl-clock and cbl-elapsed hooks (tests and the repaint path read them). */
   function clockView(elapsed) {
-    var cyc = cycleInfo(sess.mode, elapsed, sess.cycleStart);
+    var cyc = cycleInfo(sess.mode, elapsed, sess.cycleStart, engOpts());
     var frac = Math.max(0, Math.min(1, cyc.remaining / cyc.interval));
     var cls = paused ? "paused" : "running";
-    var epi = epiStatus(sess, elapsed);
+    var epi = epiStatus(sess, elapsed, engOpts());
     var ringState = epi.state === "overdue" ? "overdue" : "run";
-    var beat = Math.floor(elapsed * 110 / 60) % 2;
+    var beat = Math.floor(elapsed * Number(prefVal("compressionRate", 110)) / 60) % 2;
     var R = 54, C = 2 * Math.PI * R;
     var arc = C * (1 - frac);
     var knobA = -Math.PI / 2 + 2 * Math.PI * frac;
@@ -1211,7 +1219,7 @@
       '<div class="cbl-ringmeta">' +
       '<div class="cbl-elapsed cbl-ringtime" data-cbfx-counter data-cbfx-key="clock" aria-label="Elapsed time">' + esc(fmtMMSS(elapsed)) + "</div>" +
       '<div class="cbl-ringline"><span class="cbl-beat" data-beat="' + beat + '" aria-hidden="true"></span>' +
-      "110 per min <span aria-hidden='true'>|</span> " +
+      esc(String(prefVal("compressionRate", 110))) + " per min <span aria-hidden='true'>|</span> " +
       (sess.mode === "neonatal" ? "Heart rate check " : "Rhythm check ") +
       (cyc.due ? "due" : "in " + fmtShort(Math.max(0, cyc.remaining))) + "</div>" +
       '<div class="cbl-bar" role="progressbar" aria-label="Time to next rhythm check" aria-valuemin="0" aria-valuemax="' +
@@ -1233,7 +1241,7 @@
   /* Persistent status strip: CODE time, RHYTHM countdown, EPINEPHRINE
    * countdown, SHOCK count, VENT timer. Rendered above every tab. */
   function stripView(elapsed) {
-    var s = stripInfo(sess, elapsed, { paused: paused });
+    var so = engOpts(); so.paused = paused; var s = stripInfo(sess, elapsed, so);
     var cell = function (k, v, st) {
       var long = String(v).length > 5 ? ' data-long="1"' : "";
       return '<div class="cbl-cell" data-s="' + st + '"><span class="cbl-cellk">' + k +
@@ -1293,7 +1301,7 @@
   }
 
   function dueView(elapsed) {
-    var d = dueStrip(sess, elapsed, { paused: paused });
+    var dopts = engOpts(); dopts.paused = paused; var d = dueStrip(sess, elapsed, dopts);
     var main = d.text, count = "";
     var cm = /(\d+:\d+)\s*$/.exec(d.text);
     if (cm && d.level === "running") { count = cm[1]; main = d.text.slice(0, cm.index).replace(/\s+$/, ""); }
@@ -1347,7 +1355,7 @@
    * text; action tiles keep the cbl-tile hooks. On iPad CSS flattens
    * both grids into one 4 column grid in contract order. */
   function drugBtn(act, drug, label, doseText, sub, elapsed) {
-    var epiSt = epiStatus(sess, elapsed);
+    var epiSt = epiStatus(sess, elapsed, engOpts());
     var next = drug === "epi" && (epiSt.state === "due" || epiSt.state === "overdue");
     return '<button type="button" class="cbl-drug' + (next ? " cbl-nextdue" : "") +
       '" data-drug="' + drug + '" data-kind="' + drug + '" data-act="' + act + '"' +
@@ -1383,8 +1391,12 @@
       actionTile("pause", "Pause", elapsed) + "</div>";
     var sec = [];
     if (adult) {
-      sec.push(drugBtn("drug-amio", "amio", "Amiodarone", dose ? dose.amio : null, lastLine(isAmioDrug, dc.amio), elapsed));
-      sec.push(drugBtn("drug-lido", "lido", "Lidocaine", dose ? dose.lido : null, lastLine(isLidoDrug, dc.lido), elapsed));
+      if (prefVal("showAmio", true) !== false) sec.push(drugBtn("drug-amio", "amio", "Amiodarone", dose ? dose.amio : null, lastLine(isAmioDrug, dc.amio), elapsed));
+      if (prefVal("showLido", true) !== false) sec.push(drugBtn("drug-lido", "lido", "Lidocaine", dose ? dose.lido : null, lastLine(isLidoDrug, dc.lido), elapsed));
+    }
+    if (prefVal("shockSplit", false) === true) {
+      sec.push('<button type="button" class="cbl-tile" data-kind="shock-vf" data-act="tile-shock-vf" aria-label="Shock VF">' + tileInner("shock", "Shock VF", elapsed) + "</button>");
+      sec.push('<button type="button" class="cbl-tile" data-kind="shock-vt" data-act="tile-shock-vt" aria-label="Shock VT (pulseless)">' + tileInner("shock", "Shock VT (pulseless)", elapsed) + "</button>");
     }
     var pref = prefTiles();
     var hidden = (pref && pref.hidden) || {};
@@ -1484,9 +1496,15 @@
       return '<button type="button" class="cbl-chip' + (logFilter === f.id ? " on" : "") +
         '" data-act="log-filter" data-f="' + f.id + '" aria-pressed="' + (logFilter === f.id) + '">' + f.label + "</button>";
     }).join("");
+    if (!logManualOpen) {
+      return '<div class="cbl-chips" role="group" aria-label="Filter log">' + chips + "</div>" +
+        '<div data-sheet="log">' + logRows(logFilter) + "</div>" +
+        '<button type="button" class="cbl-disclosure" data-act="log-manual-toggle" aria-expanded="false"><span aria-hidden="true">+</span> Add a missed event</button>';
+    }
     return '<div class="cbl-chips" role="group" aria-label="Filter log">' + chips + "</div>" +
       '<div data-sheet="log">' + logRows(logFilter) + "</div>" +
-      '<div class="cbl-manual"><p class="cbl-label">Add a missed event</p>' +
+      '<button type="button" class="cbl-disclosure" data-act="log-manual-toggle" aria-expanded="true"><span aria-hidden="true">+</span> Add a missed event</button>' +
+      '<div class="cbl-manual">' +
       '<label class="cbl-label" for="cblManualLabel">Label</label>' +
       '<input id="cblManualLabel" class="cbl-input" type="text" maxlength="140" placeholder="Event label" />' +
       '<label class="cbl-label" for="cblManualTime">Time (minutes:seconds)</label>' +
@@ -1554,7 +1572,7 @@
       return '<p class="cbl-empty" data-state="past-empty">No finished codes on this device yet.</p>';
     }
     var rows = list.map(function (e) {
-      var when = e.date ? esc(String(e.date).slice(0, 10)) : "";
+      var when = e.date ? esc(String(e.date).slice(0, 10) + " " + fmtWall(e.date)) : "";
       return '<div class="cbl-pastrow" data-past="' + esc(e.id) + '"><span class="cbl-pastmain">' +
         when + " " + esc(MODE_LABEL[normMode(e.mode)] || e.mode) + ", " + esc(fmtMMSS(e.durationSeconds)) +
         ", shocks " + e.shocks + ", epinephrine " + e.epi + ", ROSC " + (e.rosc ? "yes" : "no") + ", " +
@@ -1566,35 +1584,161 @@
       '<div class="cbl-row"><button type="button" class="cbl-btn" data-act="past-clear">Delete all</button></div></div>';
   }
 
+  var HS_TS = ["Hypoxia", "Hypovolaemia", "Potassium changes", "Hypothermia", "Hydrogen ion", "Tamponade", "Tension pneumothorax", "Thrombosis", "Toxins"];
+  function prefGet() {
+    try { if (typeof window !== "undefined" && window.CodeBluePrefs) return window.CodeBluePrefs.get(); } catch (e) {}
+    return null;
+  }
+  function prefSet(patch) {
+    try { if (typeof window !== "undefined" && window.CodeBluePrefs) return window.CodeBluePrefs.set(patch); } catch (e) {}
+    return null;
+  }
+  function prefVal(k, def) { var pf = prefGet(); return pf && pf[k] != null ? pf[k] : def; }
+  function engOpts() {
+    return {
+      intervalSec: sess && sess.mode === "neonatal" ? null : Number(prefVal("cycleMin", 2)) * 60,
+      epiIntervalMin: Number(prefVal("epiIntervalMin", 4)),
+      headsUpSec: Number(prefVal("headsUpSec", 30))
+    };
+  }
+  function fmtWall(iso) {
+    try {
+      var d = new Date(iso); if (isNaN(d)) return String(iso || "").slice(0, 10);
+      var hh = d.getHours(), mm = ("0" + d.getMinutes()).slice(-2);
+      if (prefVal("time24", true)) return ("0" + hh).slice(-2) + ":" + mm;
+      var ap = hh >= 12 ? "PM" : "AM"; var h12 = hh % 12 || 12; return h12 + ":" + mm + " " + ap;
+    } catch (e) { return String(iso || "").slice(0, 10); }
+  }
+  var autoResumeTimer = null;
+  function clearAutoResume() { if (autoResumeTimer) { try { clearTimeout(autoResumeTimer); } catch (e) {} autoResumeTimer = null; } }
+  function applyAudioPrefs() {
+    var A = Audio(); if (!A) return;
+    try {
+      if (A.setMetronomeBpm) A.setMetronomeBpm(Number(prefVal("compressionRate", 110)));
+      if (A.setVoiceRate) A.setVoiceRate(Number(prefVal("voiceSpeed", 100)) / 100);
+      if (A.setLowAlert) A.setLowAlert(prefVal("lowAlert", true) !== false);
+      A.setMuted("voice", prefVal("voice", true) === false);
+      A.setMuted("breaths", prefVal("breathCue", true) === false);
+      A.setMuted("metronome", prefVal("metronome", true) === false);
+      if (prefVal("metronome", true) === false) A.stopMetronome();
+      else if (view === "running" && !paused && sess && !sess.training) A.startMetronome();
+    } catch (e) {}
+  }
+  function algoPrompts() {
+    var elapsed = nowElapsed();
+    if (notesAlgo === "brady") return guideFor({ mode: sess.mode, lastRhythm: "Bradycardia (pulse)", shockCount: 0, epiCount: 0, secsSinceEpi: null, rosc: false });
+    if (notesAlgo === "tachy") return guideFor({ mode: sess.mode, lastRhythm: "Tachycardia (pulse)", shockCount: 0, epiCount: 0, secsSinceEpi: null, rosc: false });
+    if (notesAlgo === "postrosc") return guideFor({ mode: sess.mode, lastRhythm: null, shockCount: 0, epiCount: 0, secsSinceEpi: null, rosc: true });
+    return guideFor(guideInput(elapsed));
+  }
+  function algoStepState(p, idx, prompts) {
+    var counts = computeCounts(sess.events);
+    if (p.id === "shock" && counts.shocks > 0) return "done";
+    if ((p.id === "epi-when" || p.id === "epi-now") && counts.epi > 0) return "done";
+    if (p.urgency === "due" || p.urgency === "overdue") return "current";
+    return idx === 0 ? "current" : "";
+  }
+  var REF_CARDS = [
+    { id: "arrest", title: "Cardiac arrest" },
+    { id: "hsts", title: "H's and T's" },
+    { id: "postrosc", title: "Post-ROSC care" },
+    { id: "brady", title: "Bradycardia prompts" },
+    { id: "tachy", title: "Tachycardia prompts" },
+    { id: "paed", title: "Paediatric arrest" },
+    { id: "neonatal", title: "Neonatal (NRP)" },
+    { id: "proc", title: "Procedures and access" }
+  ];
+  function refCardBody(id) {
+    if (id === "hsts") return '<div class="cbl-refitems">' + HS_TS.map(function (h) { return '<button type="button" class="cbl-refitem" data-act="notes-hst" data-label="' + esc(h) + '">' + esc(h) + "</button>"; }).join("") + "</div>";
+    if (id === "postrosc") {
+      var items = checklistFor(sess.mode);
+      return '<div class="cbl-refitems">' + items.map(function (it) {
+        var ticked = !!sess.checks[it.id];
+        return '<button type="button" class="cbl-refitem' + (ticked ? " ticked" : "") + '" data-act="notes-check" data-id="' + esc(it.id) + '" aria-pressed="' + ticked + '">' + (ticked ? "Done: " : "") + esc(it.text) + "</button>";
+      }).join("") + "</div>";
+    }
+    if (id === "proc") return '<div class="cbl-refitems">' + PROCEDURES.map(function (p) { return '<button type="button" class="cbl-refitem" data-act="notes-proc" data-label="' + esc(p) + '">' + esc(p) + "</button>"; }).join("") + "</div>";
+    var mode = id === "paed" ? "paediatric" : id === "neonatal" ? "neonatal" : sess.mode;
+    var rhythm = id === "brady" ? "Bradycardia (pulse)" : id === "tachy" ? "Tachycardia (pulse)" : null;
+    var prompts = id === "postrosc" ? [] : guideFor({ mode: mode, lastRhythm: rhythm, shockCount: 0, epiCount: 0, secsSinceEpi: null, rosc: id === "postrosc" });
+    if (id === "arrest") prompts = guideFor({ mode: sess.mode, lastRhythm: null, shockCount: 0, epiCount: 0, secsSinceEpi: null, rosc: false });
+    return '<ul class="cbl-refprompts">' + prompts.map(function (p) { return "<li>" + esc(p.text) + ' <span class="cbl-gsrc">' + esc(p.src) + "</span></li>"; }).join("") + "</ul>";
+  }
   function notesTabView() {
-    var notes = sess.events.filter(function (e) { return e.kind === "note"; })
-      .slice().sort(function (a, b) { return a.elapsed - b.elapsed; });
-    var items = notes.map(function (e) {
-      return "<li><span class='cbl-tltime'>" + esc(fmtMMSS(e.elapsed)) + "</span>" +
-        "<span>" + esc(e.label) + "</span></li>";
+    var elapsed = nowElapsed();
+    var prompts = algoPrompts();
+    var algoTabs = [["arrest", "Arrest"], ["brady", "Bradycardia"], ["tachy", "Tachycardia"], ["postrosc", "Post-ROSC"]].map(function (t) {
+      return '<button type="button" class="cbl-segbtn" data-act="notes-algo" data-algo="' + t[0] + '" aria-selected="' + (notesAlgo === t[0]) + '">' + t[1] + "</button>";
     }).join("");
+    var steps = prompts.map(function (p, i) {
+      var st = algoStepState(p, i, prompts);
+      var loggable = p.id === "shock" || p.id === "epi-when" || p.id === "epi-now";
+      return '<li class="cbl-step ' + st + '"><button type="button" class="cbl-stepbtn" data-act="notes-step" data-step="' + esc(p.id) + '" ' + (loggable ? "" : "disabled") + '><span class="cbl-steptext">' + esc(p.text) + '</span><span class="cbl-gsrc">' + esc(p.src) + "</span></button></li>";
+    }).join("");
+    var notes = sess.events.filter(function (e) { return e.kind === "note"; }).slice().sort(function (a, b) { return a.elapsed - b.elapsed; });
+    var items = notes.map(function (e) { return "<li><span class='cbl-tltime'>" + esc(fmtMMSS(e.elapsed)) + "</span><span>" + esc(e.label) + "</span></li>"; }).join("");
+    var pref = prefGet(); var favs = (pref && pref.favCards) || [];
+    var cardHtml = function (c) {
+      var fav = favs.indexOf(c.id) >= 0;
+      return '<section class="cbl-refcard" data-card="' + c.id + '"><div class="cbl-refhead"><h3>' + esc(c.title) + '</h3><button type="button" class="cbl-star' + (fav ? " on" : "") + '" data-act="notes-fav" data-id="' + c.id + '" aria-pressed="' + fav + '" aria-label="Pin ' + esc(c.title) + ' to favourites">' + (fav ? "Pinned" : "Pin") + "</button></div>" + refCardBody(c.id) + "</section>";
+    };
+    var favCards = REF_CARDS.filter(function (c) { return favs.indexOf(c.id) >= 0; });
+    var favRow = favCards.length ? '<div class="cbl-favrow" data-state="favourites"><p class="cbl-label">Favourites</p><div class="cbl-refgrid">' + favCards.map(cardHtml).join("") + "</div></div>" : "";
     return '<div class="cbl-tabpad" data-tabpanel="notes" role="tabpanel" aria-label="Notes">' +
       "<h2 class='cbl-h'>Notes</h2>" +
-      (items ? '<ul class="cbl-noteslist">' + items + "</ul>"
-        : '<p class="cbl-empty" data-state="empty-notes">No notes yet.</p>') +
+      '<div class="cbl-segs" role="tablist" aria-label="Algorithm">' + algoTabs + "</div>" +
+      '<div class="cbl-flow" data-algo="' + esc(notesAlgo) + '"><ol class="cbl-steps">' + steps + "</ol></div>" +
+      favRow +
+      '<div class="cbl-refgrid" data-state="reference-grid">' + REF_CARDS.map(cardHtml).join("") + "</div>" +
+      (items ? '<ul class="cbl-noteslist">' + items + "</ul>" : '<p class="cbl-empty" data-state="empty-notes">No notes yet.</p>') +
       '<label class="cbl-label" for="cblNoteTab">Free text note</label>' +
       '<input id="cblNoteTab" class="cbl-input" type="text" maxlength="280" placeholder="Free text note" />' +
       '<div class="cbl-row"><button type="button" class="cbl-btn cbl-primary" data-act="note-add">Add note</button></div></div>';
   }
 
+  var SETTING_GROUPS = ["Patient and CPR", "Rhythm check", "Voice and sound", "Medications", "Shock and airway", "Appearance", "Layout and buttons", "Training", "Code history", "About and disclaimer"];
+  function sliderRow(id, label, min, max, val, def, unit) {
+    var pct = max > min ? (def - min) / (max - min) * 100 : 50;
+    return '<div class="cbfx-slider-row"><div class="cbfx-slider-head"><span class="cbl-label" style="margin:0">' + esc(label) + '</span><span data-cbfx-value>' + val + esc(unit || "") + '</span></div>' +
+      '<input type="range" min="' + min + '" max="' + max + '" step="1" value="' + val + '" data-cbfx-slider data-unit="' + esc(unit || "") + '" data-setting="' + id + '" aria-label="' + esc(label) + '">' +
+      '<div class="cbfx-marker" aria-hidden="true"><span style="left:' + pct + '%"><i></i>' + def + " default</span></div></div>";
+  }
+  function toggleRow(id, label, on) {
+    return '<div class="cbl-setrow"><span>' + esc(label) + '</span><button type="button" class="cbl-toggle' + (on ? " on" : "") + '" data-act="setting-toggle" data-id="' + id + '" aria-pressed="' + !!on + '">' + (on ? "On" : "Off") + "</button></div>";
+  }
+  function settingsDetail(group, pref) {
+    var rows = "";
+    if (group === "Patient and CPR") rows = sliderRow("compressionRate", "Compression rate", 100, 120, pref.compressionRate, 110, " per min") + '<p class="cbl-note">Mode: ' + esc(MODE_LABEL[sess.mode]) + ". Change mode from the idle screen.</p>";
+    else if (group === "Rhythm check") rows = sliderRow("cycleMin", "CPR cycle length", 1, 3, pref.cycleMin, 2, " min") + sliderRow("autoResumeSec", "Auto-resume after pause", 3, 10, pref.autoResumeSec, 6, " s") + '<div class="cbl-setrow"><span>Rhythm check heads-up</span><select class="cbl-input cbl-setselect" data-setting-select="headsUpSec">' + [0, 10, 15, 30, 60].map(function (v) { return '<option value="' + v + '"' + (pref.headsUpSec === v ? " selected" : "") + ">" + (v === 0 ? "Off" : v + " s") + "</option>"; }).join("") + "</select></div>" + toggleRow("rhythmPictures", "Rhythm pictures", pref.rhythmPictures);
+    else if (group === "Voice and sound") rows = toggleRow("voice", "Voice prompts", pref.voice) + sliderRow("voiceSpeed", "Voice speed", 50, 150, pref.voiceSpeed, 100, "%") + toggleRow("metronome", "Metronome", pref.metronome) + toggleRow("breathCue", "Breath cue", pref.breathCue) + toggleRow("lowAlert", "Low alert", pref.lowAlert);
+    else if (group === "Medications") rows = sliderRow("epiIntervalMin", "Epinephrine reminder interval", 3, 5, pref.epiIntervalMin, 4, " min") + toggleRow("showAmio", "Show amiodarone button", pref.showAmio) + toggleRow("showLido", "Show lidocaine button", pref.showLido);
+    else if (group === "Shock and airway") rows = toggleRow("shockSplit", "Split VF and pulseless VT", pref.shockSplit) + '<div class="cbl-setrow"><span>Shock waveform</span><select class="cbl-input cbl-setselect" data-setting-select="shockWaveform">' + ["biphasic", "monophasic"].map(function (v) { return '<option value="' + v + '"' + (pref.shockWaveform === v ? " selected" : "") + ">" + v + "</option>"; }).join("") + "</select></div>";
+    else if (group === "Appearance") rows = '<button type="button" class="cbl-btn" data-cbp-settings>Display settings (themes, text and UI size)</button>' + toggleRow("time24", "24-hour time", pref.time24) + '<p class="cbl-note">Theme, text size, UI size, reduced motion: use Display settings.</p>';
+    else if (group === "Layout and buttons") rows = '<button type="button" class="cbl-btn" data-cbp-settings>Reorder, hide and custom buttons</button><p class="cbl-note">Use Display settings to reorder, hide or add custom buttons.</p>';
+    else if (group === "Training") rows = toggleRow("training", "Training mode default", pref.training);
+    else if (group === "Code history") rows = '<button type="button" class="cbl-btn" data-act="past-clear">Delete all past codes</button>';
+    else if (group === "About and disclaimer") rows = '<p class="cbl-note">' + esc(DISCLAIMER) + '</p><p class="cbl-note">Stored on this device only.</p>';
+    return '<div class="cbl-setdetail" data-settings-detail="' + esc(group) + '"><button type="button" class="cbl-btn cbl-backbtn" data-act="settings-back">Back</button><h3 class="cbl-seth">' + esc(group) + "</h3>" + rows + "</div>";
+  }
   function settingsTabView() {
-    return '<div class="cbl-tabpad" data-tabpanel="settings" role="tabpanel" aria-label="Settings">' +
-      "<h2 class='cbl-h'>Settings</h2>" +
-      '<p class="cbl-disc">' + esc(DISCLAIMER) + "</p>" +
+    var pref = prefGet() || { voice: true, metronome: true, lowAlert: true, training: false, compressionRate: 110, cycleMin: 2, headsUpSec: 30, autoResumeSec: 6, rhythmPictures: true, voiceSpeed: 100, breathCue: true, epiIntervalMin: 4, showAmio: true, showLido: true, shockSplit: false, shockWaveform: "biphasic", time24: true };
+    var PrefsApi = (typeof window !== "undefined" && window.CodeBluePrefs) || null;
+    var results = settingsQuery && PrefsApi && PrefsApi.searchSettings ? PrefsApi.searchSettings(settingsQuery) : null;
+    var quick = '<div class="cbl-quick" data-state="quick-toggles">' + toggleRow("voice", "Voice", pref.voice) + toggleRow("metronome", "Metronome", pref.metronome) + toggleRow("lowAlert", "Low alert", pref.lowAlert) + toggleRow("training", "Training", pref.training) + "</div>";
+    var searchHtml = '<label class="cbl-label" for="cblSettingsSearch">Search settings</label><input id="cblSettingsSearch" class="cbl-input" type="search" placeholder="Search settings" value="' + esc(settingsQuery) + '" data-settings-search />';
+    var navBody, detailBody;
+    if (results) {
+      navBody = '<div data-state="settings-results">' + (results.length ? results.map(function (s) { return '<button type="button" class="cbl-setrowbtn" data-act="settings-group" data-group="' + esc(s.group) + '"><span>' + esc(s.label) + '</span><span class="cbl-setgroup">' + esc(s.group) + "</span></button>"; }).join("") : '<p class="cbl-note">No settings match.</p>') + "</div>";
+      detailBody = settingsGroup ? settingsDetail(settingsGroup, pref) : '<p class="cbl-note cbl-setplaceholder">Select a setting.</p>';
+    } else {
+      navBody = SETTING_GROUPS.map(function (g) { return '<button type="button" class="cbl-setrowbtn' + (settingsGroup === g ? " on" : "") + '" data-act="settings-group" data-group="' + esc(g) + '" aria-selected="' + (settingsGroup === g) + '"><span>' + esc(g) + "</span><span aria-hidden=\"true\">›</span></button>"; }).join("") +
+        '<button type="button" class="cbl-btn" data-act="settings-reset">Reset settings</button>';
+      detailBody = settingsGroup ? settingsDetail(settingsGroup, pref) : '<p class="cbl-note cbl-setplaceholder">Select a setting.</p>';
+    }
+    return '<div class="cbl-tabpad cbl-settings' + (settingsGroup ? " has-detail" : "") + '" data-tabpanel="settings" role="tabpanel" aria-label="Settings">' +
+      "<h2 class='cbl-h'>Settings</h2>" + searchHtml + quick +
+      '<div class="cbl-settings-grid"><div class="cbl-setroot">' + navBody + '</div><div class="cbl-setpane">' + detailBody + "</div></div>" +
       linkRowView("run") +
-      '<button type="button" class="cbl-btn" data-act="audio">Sound settings</button>' +
-      '<button type="button" class="cbl-btn" data-cbp-settings>Display settings</button>' +
-      '<div class="cbfx-slider-row"><div class="cbfx-slider-head"><span class="cbl-label" style="margin:0">Compression rate</span><span data-cbfx-value>110 per min</span></div>' +
-      '<input type="range" min="100" max="120" step="1" value="110" data-cbfx-slider data-unit=" per min" data-fx-setting="rate" aria-label="Compression rate, 100 to 120 per minute">' +
-      '<div class="cbfx-marker" aria-hidden="true"><span style="left:50%"><i></i>110 default</span></div></div>' +
-      '<div class="cbfx-slider-row"><div class="cbfx-slider-head"><span class="cbl-label" style="margin:0">Cycle length</span><span data-cbfx-value>120 s</span></div>' +
-      '<input type="range" min="60" max="180" step="10" value="120" data-cbfx-slider data-unit=" s" data-fx-setting="cycle" aria-label="Cycle length in seconds">' +
-      '<div class="cbfx-marker" aria-hidden="true"><span style="left:50%"><i></i>120 default</span></div></div>' +
       '<p class="cbl-note">Stored on this device only. Training runs never write anywhere.</p></div>';
   }
 
@@ -1637,29 +1781,31 @@
       exportLine = '<p class="cbl-disc">No patient linked. Kept on this device only.</p>';
     }
     var dash = "Not logged";
+    var pauseVal = d.pauseCount ? d.pauseCount + ", longest " + fmtShort(d.longestPauseSeconds) : "-";
     var rows = [
-      ["Duration", fmtMMSS(d.durationSeconds)],
       ["Time to first shock", d.timeToFirstShock === null ? dash : fmtMMSS(d.timeToFirstShock)],
       ["Time to first epinephrine", d.timeToFirstEpi === null ? dash : fmtMMSS(d.timeToFirstEpi)],
-      ["Pauses", d.pauseCount + " (longest " + fmtMMSS(d.longestPauseSeconds) + ")"],
-      ["Estimated CPR fraction (estimated from logged pauses)", d.cprFractionPct === null ? "Not available" : d.cprFractionPct + "%"],
+      ["Pauses", pauseVal],
+      ["CPR fraction", d.cprFractionPct === null ? "Not available" : d.cprFractionPct + "%"],
       ["Shocks", String(d.shocks)],
       ["Epinephrine doses", String(d.epi)],
       ["ROSC", sess.rosc ? "Yes" : "No"]
     ];
     var sum = rows.map(function (r) {
-      return "<div><dt>" + esc(r[0]) + "</dt><dd>" + esc(r[1]) + "</dd></div>";
+      return '<div class="cbl-sumrow"><dt>' + esc(r[0]) + "</dt><dd>" + esc(r[1]) + "</dd></div>";
     }).join("");
     return statusRow() + '<div class="cbl-scroll"><div class="cbl-endview" data-state="ended">' +
       "<h2 class='cbl-h'>Debrief</h2>" +
+      '<div class="cbl-hero"><span class="cbl-heronum">' + esc(fmtMMSS(d.durationSeconds)) + '</span><span class="cbl-herolabel">Duration</span></div>' +
       '<dl class="cbl-sum">' + sum + "</dl>" +
+      '<p class="cbl-footnote">Estimated from logged pauses.</p>' +
       exportLine +
-      (sess.training ? "" : '<p class="cbl-disc">' + esc(DISCLAIMER) + "</p>") +
+      (sess.training ? "" : '<p class="cbl-footnote">' + esc(DISCLAIMER) + "</p>") +
       (canSheet
-        ? '<button type="button" class="cbl-btn cbl-primary" data-act="open-sheet">Share code sheet</button>'
-        : '<button type="button" class="cbl-btn cbl-primary" data-act="debrief-share">Share code sheet</button>') +
-      '<button type="button" class="cbl-btn" data-act="debrief-past">Past codes</button>' +
-      '<button type="button" class="cbl-btn" data-act="close">Done</button>' +
+        ? '<button type="button" class="cbl-btn cbl-primary cbl-full" data-act="open-sheet">Share code sheet</button>'
+        : '<button type="button" class="cbl-btn cbl-primary cbl-full" data-act="debrief-share">Share code sheet</button>') +
+      '<div class="cbl-row cbl-endrow"><button type="button" class="cbl-btn" data-act="debrief-past">Past codes</button>' +
+      '<button type="button" class="cbl-btn" data-act="close">Done</button></div>' +
       (endedPast ? pastView() : "") +
       "</div></div>";
   }
@@ -1732,7 +1878,7 @@
       return e.kind !== "modeSet" && e.kind !== "cprStart" && eventMatchesFilter(e, filter || "all");
     });
     if (!visible.length) {
-      return '<p class="cbl-empty" data-state="empty-log">No events yet. Logged actions will appear here.</p>';
+      return '<p class="cbl-empty cbl-empty-calm" data-state="empty-log"><span class="cbl-empty-icon" aria-hidden="true">' + (ICONS.log || "") + '</span>No events yet. Logged actions will appear here.</p>';
     }
     var rows = visible.slice().sort(function (a, b) { return a.elapsed - b.elapsed; });
     return '<ul class="cbl-log" data-cbfx-list>' + rows.map(function (e) {
@@ -1761,10 +1907,15 @@
     openSheet("Procedure", body);
   }
 
+  function rhythmPic(r) {
+    var pts = /VF/.test(r) ? "0,14 6,6 12,16 18,8 24,15 30,7 36,14" : /VT/.test(r) ? "0,16 6,4 12,16 18,4 24,16 30,4 36,16" : /PEA|Asystole/.test(r) ? "0,12 36,12" : /Brady/.test(r) ? "0,12 8,12 11,5 14,12 24,12 27,5 30,12 36,12" : /Tachy/.test(r) ? "0,12 4,5 8,12 12,5 16,12 20,5 24,12 28,5 32,12 36,12" : "0,12 8,12 11,5 14,12 22,12 25,5 28,12 36,12";
+    return '<svg class="cbl-rhythmpic" viewBox="0 0 36 20" aria-hidden="true"><polyline points="' + pts + '" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="cbl-schematic">schematic</span>';
+  }
   function openRhythmSheet() {
+    var pics = prefVal("rhythmPictures", true) !== false;
     var body = '<div class="cbl-pick">' + RHYTHMS.map(function (r) {
       return '<button type="button" class="cbl-pickbtn" data-act="rhythm-pick" data-label="' + esc(r) + '">' +
-        esc(r) + "</button>";
+        (pics ? rhythmPic(r) : "") + esc(r) + "</button>";
     }).join("") + "</div>";
     openSheet("Rhythm", body);
   }
@@ -1797,7 +1948,7 @@
     openSheet("Sound",
       '<p class="cbl-note">' + esc(line) + "</p>" +
       row("voice", "Voice cues", "Spoken prompts such as rhythm check and epinephrine due.", m.voice) +
-      row("metronome", "Metronome", "110 ticks per minute while the clock runs.", m.metronome) +
+      row("metronome", "Metronome", String(prefVal("compressionRate", 110)) + " ticks per minute while the clock runs.", m.metronome) +
       row("breaths", "Breath cues", "Tick every 6 s with an advanced airway.", m.breaths));
   }
 
@@ -1843,9 +1994,10 @@
     if (!A || sess.training) {
       if (sess && sess.training) return;
     }
-    var cyc = cycleInfo(sess.mode, elapsed, sess.cycleStart);
+    var cyc = cycleInfo(sess.mode, elapsed, sess.cycleStart, engOpts());
     var cycKey = "r" + Math.floor(Math.max(0, elapsed - sess.cycleStart) / cyc.interval);
-    if (!fired[cycKey + "-soon"] && !cyc.due && cyc.remaining <= 10 && cyc.remaining > 0) {
+    var headsUp = Number(prefVal("headsUpSec", 30));
+    if (headsUp > 0 && !fired[cycKey + "-soon"] && !cyc.due && cyc.remaining <= headsUp && cyc.remaining > 0) {
       fired[cycKey + "-soon"] = 1;
       try { A.speak("rhythmSoon"); } catch (e) {}
     }
@@ -1853,7 +2005,7 @@
       fired[cycKey + "-due"] = 1;
       try { A.speak("rhythmDue"); } catch (e) {}
     }
-    var epi = epiStatus(sess, elapsed);
+    var epi = epiStatus(sess, elapsed, engOpts());
     var le = lastEpi(sess);
     if (le) {
       var ek = "e" + le.id;
@@ -1863,7 +2015,7 @@
       }
       if (!fired[ek + "-od"] && epi.state === "overdue") {
         fired[ek + "-od"] = 1;
-        try { A.overdueTone(); A.speak("epiOverdue"); } catch (e2) {}
+        try { if (prefVal("lowAlert", true) !== false) A.overdueTone(); A.speak("epiOverdue"); } catch (e2) {}
       }
     }
   }
@@ -1939,6 +2091,8 @@
     var A = Audio();
     if (A) { try { A.unlock(); A.ensureWakeLock(); } catch (e) {} }
     sess = newSession(idleMode, { training: idleTraining });
+    sess.ventCue = prefVal("breathCue", true) !== false;
+    applyAudioPrefs();
     /* Team members persist for back-to-back codes on this device. */
     sess.scene.team = loadTeam(defaultStorage());
     /* LIVE captures the linked patient at Start; practice never links. */
@@ -1960,8 +2114,8 @@
     if (A && !sess.training) {
       try {
         var m = A.mutes();
-        if (!m.metronome) A.startMetronome();
-        if (!m.breaths && sess.mode !== "neonatal") A.startBreathTicks();
+        if (!m.metronome && prefVal("metronome", true) !== false) A.startMetronome();
+        if (!m.breaths && prefVal("breathCue", true) !== false && sess.mode !== "neonatal") A.startBreathTicks();
       } catch (e2) {}
     }
     startTick();
@@ -1971,6 +2125,7 @@
   function doPauseToggle() {
     var elapsed = nowElapsed();
     if (paused) {
+      clearAutoResume();
       paused = false;
       runStartWall = Date.now();
       logEvent(sess, "resume", null, elapsed);
@@ -1983,6 +2138,14 @@
       logEvent(sess, "pauseStart", null, elapsedOffset);
       persist();
       render();
+      clearAutoResume();
+      var autoSec = Number(prefVal("autoResumeSec", 6));
+      if (isFinite(autoSec) && autoSec > 0) {
+        autoResumeTimer = setTimeout(function () {
+          autoResumeTimer = null;
+          if (view === "running" && paused && sess) doPauseToggle();
+        }, autoSec * 1000 / (sess && sess.training ? TRAINING_SPEED : 1));
+      }
       toast("Paused. ", null);
       var t = rootEl.querySelector(".cbl-toast span");
       if (t) t.textContent = "CPR paused.";
@@ -1990,6 +2153,7 @@
   }
 
   function doEnd(manual) {
+    clearAutoResume();
     var elapsed = nowElapsed();
     var msg = "End this code? The timer stops and the log is kept for the code sheet.";
     try {
@@ -2062,7 +2226,7 @@
       return;
     }
     if (act === "idle-mode") { idleMode = normMode(el.getAttribute("data-mode")); render(); return; }
-    if (act === "idle-training") { idleTraining = !idleTraining; render(); return; }
+    if (act === "idle-training") { idleTraining = !idleTraining; prefSet({ training: idleTraining }); render(); return; }
     if (act === "start") { doStart(); return; }
     if (act === "resume-yes" && pendingResume) {
       var r = restoreSnapshot(pendingResume, Date.now());
@@ -2100,6 +2264,9 @@
       var k = el.getAttribute("data-k");
       var cur = A.mutes();
       A.setMuted(k, !cur[k]);
+      if (k === "voice") prefSet({ voice: !!cur[k] });
+      if (k === "metronome") prefSet({ metronome: !!cur[k] });
+      if (k === "breaths") prefSet({ breathCue: !!cur[k] });
       if (view === "running" && k === "metronome" && !A.mutes().metronome && !paused) {
         try { A.startMetronome(); } catch (err4) {}
       }
@@ -2129,7 +2296,7 @@
     }
     if (act === "timeline-toggle") { timelineOpen = !timelineOpen; render(); return; }
     if (act === "vent-cue") {
-      sess.ventCue = sess.ventCue === false;
+      sess.ventCue = sess.ventCue === false; prefSet({ breathCue: sess.ventCue }); applyAudioPrefs();
       var AU = Audio();
       if (AU && !sess.training) {
         try {
@@ -2141,6 +2308,8 @@
       render();
       return;
     }
+    if (act === "tile-shock-vf") { afterEvent(logEvent(sess, "rhythm", "VF", elapsed), null); afterEvent(logEvent(sess, "shock", null, nowElapsed()), "shockLogged"); return; }
+    if (act === "tile-shock-vt") { afterEvent(logEvent(sess, "rhythm", "VT (pulseless)", elapsed), null); afterEvent(logEvent(sess, "shock", null, nowElapsed()), "shockLogged"); return; }
     if (act === "tile-shock") { afterEvent(logEvent(sess, "shock", null, elapsed), "shockLogged"); return; }
     if (act === "tile-epi" || act === "drug-epi") {
       afterEvent(logEvent(sess, "drug", "Epinephrine", elapsed), null);
@@ -2265,6 +2434,32 @@
       toast("Event restored. ", null);
       return;
     }
+    if (act === "log-manual-toggle") { logManualOpen = !logManualOpen; render(); return; }
+    if (act === "notes-algo") { notesAlgo = el.getAttribute("data-algo") || "arrest"; render(); return; }
+    if (act === "notes-step") {
+      var step = el.getAttribute("data-step");
+      if (step === "shock") afterEvent(logEvent(sess, "shock", null, nowElapsed()), "shockLogged");
+      else if (step === "epi-when" || step === "epi-now") afterEvent(logEvent(sess, "drug", "Epinephrine", nowElapsed()), null);
+      return;
+    }
+    if (act === "notes-hst") { afterEvent(logEvent(sess, "note", el.getAttribute("data-label") || "Note", nowElapsed()), null); return; }
+    if (act === "notes-proc") { afterEvent(logEvent(sess, "procedure", el.getAttribute("data-label") || "Procedure", nowElapsed()), null); return; }
+    if (act === "notes-check") { toggleCheck(sess, el.getAttribute("data-id"), nowElapsed()); persist(); render(); return; }
+    if (act === "notes-fav") {
+      var fid = el.getAttribute("data-id"); var pf = prefGet(); var favs = pf && Array.isArray(pf.favCards) ? pf.favCards.slice() : [];
+      var ix = favs.indexOf(fid); if (ix >= 0) favs.splice(ix, 1); else favs.push(fid);
+      prefSet({ favCards: favs }); render(); return;
+    }
+    if (act === "settings-group") { settingsGroup = el.getAttribute("data-group"); settingsQuery = ""; render(); return; }
+    if (act === "settings-back") { settingsGroup = null; render(); return; }
+    if (act === "setting-toggle") {
+      var tid = el.getAttribute("data-id"); var cur = prefGet() || {}; var patch = {}; patch[tid] = !cur[tid]; prefSet(patch); if (tid === "training") idleTraining = patch[tid]; applyAudioPrefs(); render(); return;
+    }
+    if (act === "settings-reset") {
+      try { if (typeof window !== "undefined" && window.confirm && !window.confirm("Reset all settings to defaults?")) return; } catch (eR) {}
+      try { if (typeof window !== "undefined" && window.CodeBluePrefs) window.CodeBluePrefs.reset(); } catch (eR2) {}
+      settingsGroup = null; settingsQuery = ""; render(); return;
+    }
     if (act === "log-seg") { logSeg = el.getAttribute("data-seg") || "log"; render(); return; }
     if (act === "log-filter") { logFilter = el.getAttribute("data-f") || "all"; render(); return; }
     if (act === "log-add-manual") {
@@ -2377,11 +2572,32 @@
       rootEl.id = "cblRoot";
       document.body.appendChild(rootEl);
       rootEl.addEventListener("click", onClick);
+      rootEl.addEventListener("input", function (e) {
+        var t = e.target; if (!t || !t.hasAttribute) return;
+        if (t.hasAttribute("data-settings-search")) {
+          settingsQuery = String(t.value || ""); settingsGroup = null;
+          var val = t.value, pos = t.selectionStart; render();
+          var again = rootEl.querySelector("[data-settings-search]"); if (again) { again.focus(); try { again.setSelectionRange(pos, pos); } catch (eS) {} }
+        }
+        if (t.getAttribute && t.getAttribute("data-setting")) { var p2 = {}; p2[t.getAttribute("data-setting")] = Number(t.value); prefSet(p2); }
+      });
       rootEl.addEventListener("change", function (e) {
         var t = e.target;
         if (!t || !t.getAttribute) return;
         if (t.getAttribute("data-fx-setting")) {
           try { localStorage.setItem("smd.cbl.fx." + t.getAttribute("data-fx-setting"), String(t.value)); } catch (err) {}
+          return;
+        }
+        if (t.getAttribute("data-setting")) {
+          var patch = {}; patch[t.getAttribute("data-setting")] = Number(t.value); prefSet(patch); applyAudioPrefs(); return;
+        }
+        if (t.getAttribute("data-setting-select")) {
+          var sp = {}; var sv = t.value; sp[t.getAttribute("data-setting-select")] = isFinite(Number(sv)) && sv !== "" && t.getAttribute("data-setting-select") === "headsUpSec" ? Number(sv) : sv; prefSet(sp); return;
+        }
+        if (t.hasAttribute && t.hasAttribute("data-settings-search")) {
+          settingsQuery = String(t.value || ""); settingsGroup = null;
+          var pos = t.selectionStart; render();
+          var again = rootEl.querySelector("[data-settings-search]"); if (again) { again.focus(); try { again.setSelectionRange(pos, pos); } catch (eS) {} }
           return;
         }
         var field = t.getAttribute("data-scene");
@@ -2404,7 +2620,7 @@
     }
     if (opts.theme) rootEl.setAttribute("data-theme", opts.theme);
     idleMode = opts.mode ? normMode(opts.mode) : "adult";
-    idleTraining = opts.training === true;
+    idleTraining = opts.training != null ? opts.training === true : prefVal("training", false) === true;
     sess = null;
     view = "idle";
     elapsedOffset = 0;
@@ -2457,6 +2673,11 @@
     logSeg: function () { return logSeg; },
     setLogSeg: function (s) { logSeg = s; if (view === "running") render(); },
     setTab: function (t) { rtab = t; if (view === "running") render(); },
+    notesAlgo: function () { return notesAlgo; },
+    setNotesAlgo: function (a) { notesAlgo = a; if (view === "running") render(); },
+    settingsGroup: function () { return settingsGroup; },
+    setSettingsGroup: function (g) { settingsGroup = g; if (view === "running") render(); },
+    setSettingsQuery: function (q) { settingsQuery = q; if (view === "running") render(); },
     link: function () { return (sess && sess.link) || pendingLink; },
     exportState: function () { return exportState; },
     elapsed: function () { return nowElapsed(); },

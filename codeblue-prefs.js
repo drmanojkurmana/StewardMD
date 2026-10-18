@@ -98,10 +98,53 @@
     "auto": { scheme: "auto" }
   };
 
+  var SETTINGS = [
+    { id: "mode", label: "Patient mode", group: "Patient and CPR", keywords: "adult paediatric neonatal patient mode", type: "select", options: ["adult", "paediatric", "neonatal"] },
+    { id: "compressionRate", label: "Compression rate", group: "Patient and CPR", keywords: "compression rate metronome speed bpm", type: "range", min: 100, max: 120, def: 110, unit: " per min" },
+    { id: "cycleMin", label: "CPR cycle length", group: "Rhythm check", keywords: "rhythm check cycle length minutes", type: "range", min: 1, max: 3, def: 2, unit: " min" },
+    { id: "headsUpSec", label: "Rhythm check heads-up", group: "Rhythm check", keywords: "heads up warning rhythm check seconds", type: "select", options: [0, 10, 15, 30, 60], def: 30 },
+    { id: "autoResumeSec", label: "Auto-resume after pause", group: "Rhythm check", keywords: "auto resume pause seconds", type: "range", min: 3, max: 10, def: 6, unit: " s" },
+    { id: "rhythmPictures", label: "Rhythm pictures", group: "Rhythm check", keywords: "rhythm pictures ecg schematic images", type: "bool", def: true },
+    { id: "voice", label: "Voice prompts", group: "Voice and sound", keywords: "voice speech prompts sound", type: "bool", def: true },
+    { id: "voiceSpeed", label: "Voice speed", group: "Voice and sound", keywords: "voice speed rate speech", type: "range", min: 50, max: 150, def: 100, unit: "%" },
+    { id: "metronome", label: "Metronome", group: "Voice and sound", keywords: "metronome click beat sound", type: "bool", def: true },
+    { id: "breathCue", label: "Breath cue", group: "Voice and sound", keywords: "breath cue ventilation sound", type: "bool", def: true },
+    { id: "lowAlert", label: "Low alert sound", group: "Voice and sound", keywords: "low alert overdue sound", type: "bool", def: true },
+    { id: "epiIntervalMin", label: "Epinephrine reminder interval", group: "Medications", keywords: "epinephrine adrenaline interval reminder minutes drug", type: "range", min: 3, max: 5, def: 4, unit: " min" },
+    { id: "showAmio", label: "Show amiodarone button", group: "Medications", keywords: "amiodarone drug buttons show hide", type: "bool", def: true },
+    { id: "showLido", label: "Show lidocaine button", group: "Medications", keywords: "lidocaine drug buttons show hide", type: "bool", def: true },
+    { id: "shockSplit", label: "Split VF and pulseless VT", group: "Shock and airway", keywords: "shock vf pulseless vt split button defibrillation", type: "bool", def: false },
+    { id: "shockWaveform", label: "Shock waveform", group: "Shock and airway", keywords: "biphasic monophasic shock waveform energy", type: "select", options: ["biphasic", "monophasic"], def: "biphasic" },
+    { id: "theme", label: "Theme", group: "Appearance", keywords: "theme dark light appearance colour", type: "select" },
+    { id: "textScale", label: "Text size", group: "Appearance", keywords: "text size font appearance", type: "range", min: 90, max: 130, def: 100, unit: "%" },
+    { id: "uiSize", label: "UI size", group: "Appearance", keywords: "ui size button size appearance", type: "select" },
+    { id: "motion", label: "Reduced motion", group: "Appearance", keywords: "reduced motion animation appearance", type: "select" },
+    { id: "time24", label: "24-hour time", group: "Appearance", keywords: "24 hour time clock format", type: "bool", def: true },
+    { id: "tileOrder", label: "Button order and visibility", group: "Layout and buttons", keywords: "reorder hide buttons layout tiles custom", type: "custom" },
+    { id: "training", label: "Training mode default", group: "Training", keywords: "training practice mode", type: "bool", def: false },
+    { id: "favCards", label: "Favourite reference cards", group: "Notes", keywords: "favourites pinned cards notes", type: "custom" }
+  ];
+  function settingsDefaults() {
+    var d = {};
+    SETTINGS.forEach(function (s) { if (s.def !== undefined) d[s.id] = s.def; });
+    d.compressionRate = 110; d.cycleMin = 2; d.headsUpSec = 30; d.autoResumeSec = 6;
+    return d;
+  }
+  function searchSettings(q) {
+    q = String(q == null ? "" : q).trim().toLowerCase();
+    if (!q) return SETTINGS.slice();
+    return SETTINGS.filter(function (s) {
+      return (s.label + " " + s.group + " " + s.keywords).toLowerCase().indexOf(q) >= 0;
+    });
+  }
   function defaults() {
     return {
       theme: "night-shift", textScale: 100, uiSize: "standard", motion: "system",
-      tileOrder: TILE_IDS.slice(), hidden: {}, custom: [], customSeq: 0
+      tileOrder: TILE_IDS.slice(), hidden: {}, custom: [], customSeq: 0,
+      compressionRate: 110, cycleMin: 2, headsUpSec: 30, autoResumeSec: 6, rhythmPictures: true,
+      voice: true, voiceSpeed: 100, metronome: true, breathCue: true, lowAlert: true,
+      epiIntervalMin: 4, showAmio: true, showLido: true, shockSplit: false, shockWaveform: "biphasic",
+      time24: true, training: false, favCards: []
     };
   }
 
@@ -137,6 +180,13 @@
     if (!Array.isArray(d.custom)) d.custom = [];
     if (!isFinite(Number(d.customSeq))) d.customSeq = 0;
     if (!p || typeof p !== "object") return d;
+    ["compressionRate", "cycleMin", "headsUpSec", "autoResumeSec", "voiceSpeed", "epiIntervalMin"].forEach(function (k) {
+      var lim = { compressionRate: [100, 120], cycleMin: [1, 3], headsUpSec: [0, 60], autoResumeSec: [3, 10], voiceSpeed: [50, 150], epiIntervalMin: [3, 5] }[k];
+      var n = Number(p[k]); if (isFinite(n)) d[k] = Math.max(lim[0], Math.min(lim[1], n));
+    });
+    ["rhythmPictures", "voice", "metronome", "breathCue", "lowAlert", "showAmio", "showLido", "shockSplit", "time24", "training"].forEach(function (k) { if (typeof p[k] === "boolean") d[k] = p[k]; });
+    if (["biphasic", "monophasic"].indexOf(p.shockWaveform) >= 0) d.shockWaveform = p.shockWaveform;
+    if (Array.isArray(p.favCards)) d.favCards = p.favCards.filter(function (x) { return typeof x === "string"; }).slice(0, 12);
     if (THEME_IDS.indexOf(p.theme) >= 0) d.theme = p.theme;
     var ts = Math.round(Number(p.textScale));
     if (isFinite(ts)) d.textScale = Math.max(90, Math.min(130, ts));
@@ -682,6 +732,7 @@
     addCustom: addCustom, removeCustom: removeCustom,
     apply: apply, applyAll: applyAll,
     open: open, close: close, isOpen: isOpen,
+    SETTINGS: SETTINGS, searchSettings: searchSettings, settingsDefaults: settingsDefaults,
     THEME_IDS: THEME_IDS, TILE_IDS: TILE_IDS,
     MAX_CUSTOM: MAX_CUSTOM, MAX_LABEL: MAX_LABEL,
     GRAD_BLUE: GRAD_BLUE, GRAD_RED: GRAD_RED,

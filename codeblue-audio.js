@@ -48,6 +48,7 @@
     metroMuted: false,
     breathMuted: false,
     speaking: false,
+    metroBpm: 110, voiceRate: 1, lowAlert: true,
     wakeLock: null,
     overdueTonePlayed: false
   };
@@ -133,7 +134,10 @@
     } catch (e) {}
   }
 
-  function beatInterval() { return 60 / METRONOME_BPM; }
+  function beatInterval() { return 60 / (state.metroBpm || METRONOME_BPM); }
+  function setMetronomeBpm(bpm) { var n = Number(bpm); if (isFinite(n)) state.metroBpm = Math.max(100, Math.min(120, Math.round(n))); return state.metroBpm; }
+  function setVoiceRate(r) { var n = Number(r); if (isFinite(n)) state.voiceRate = Math.max(0.5, Math.min(1.5, n)); return state.voiceRate; }
+  function setLowAlert(on) { state.lowAlert = on !== false; return state.lowAlert; }
 
   function scheduleAhead() {
     var ctx = state.ctx;
@@ -200,6 +204,7 @@
   /* One distinct two-tone for overdue epinephrine. Played once per code. */
   function overdueTone() {
     var ctx = state.ctx;
+    if (state.lowAlert === false) return;
     if (!ctx || !state.unlocked || state.overdueTonePlayed) return;
     state.overdueTonePlayed = true;
     try {
@@ -246,7 +251,7 @@
       u.lang = "en-GB";
       var v = pickVoice();
       if (v) u.voice = v;
-      u.rate = 1;
+      u.rate = state.voiceRate || 1;
       u.volume = 1;
       state.speaking = true;
       duck(true);
@@ -322,7 +327,7 @@
     state.ctx = null; state.master = null; state.tickGain = null;
     state.unlocked = false; state.blocked = false;
     state.voiceOn = true; state.metroMuted = false; state.breathMuted = false;
-    state.speaking = false; state.nextTickAt = 0; state.overdueTonePlayed = false;
+    state.speaking = false; state.nextTickAt = 0; state.overdueTonePlayed = false; state.metroBpm = 110; state.voiceRate = 1; state.lowAlert = true;
   }
 
   return {
@@ -336,7 +341,8 @@
     breathTick: breathTick, threeCount: threeCount,
     overdueTone: overdueTone, resetOverdueTone: resetOverdueTone,
     speak: speak, cancelSpeech: cancelSpeech,
-    setMuted: setMuted, mutes: mutes,
+    setMuted: setMuted, mutes: mutes, setMetronomeBpm: setMetronomeBpm, setVoiceRate: setVoiceRate, setLowAlert: setLowAlert,
+    metronomeBpm: function () { return state.metroBpm || METRONOME_BPM; }, voiceRate: function () { return state.voiceRate || 1; }, lowAlert: function () { return state.lowAlert !== false; },
     ensureWakeLock: ensureWakeLock, releaseWakeLock: releaseWakeLock,
     shutdown: shutdown, _reset: _reset
   };

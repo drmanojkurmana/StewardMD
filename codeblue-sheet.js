@@ -439,8 +439,7 @@
     var d = computeDebrief(st);
     handle.debriefEl.innerHTML = "";
     var items = [
-      ["Pauses", d.pauses + " (" + d.pauseSeconds + " s)"],
-      ["Longest pause", d.longestPauseSeconds + " s"],
+      ["Pauses", d.pauses ? d.pauses + ", longest " + d.longestPauseSeconds + " s" : "None"],
       ["Estimated compression fraction", d.compressionFractionPct === null ? "Not available" : d.compressionFractionPct + "%"],
       ["Time to first shock", fmtTimeOrDash(d.timeToFirstShock)],
       ["Time to first epinephrine", fmtTimeOrDash(d.timeToFirstEpi)],

@@ -268,12 +268,39 @@ try {
   ok(await until(`return CodeBlueLive._rt.tab() === "notes";`, 5000), "notes tab opens");
   ok(await ev(`return !!document.querySelector('${CBL} [data-state="strip"]');`) === true, "strip stays above the Notes tab");
   ok(await ev(`return !!document.querySelector('${CBL} #cblNoteTab');`) === true, "notes composer renders");
+  ok(await ev(`return document.querySelectorAll('${CBL} [data-act="notes-algo"]').length === 4;`) === true, "notes algorithm tabs render");
+  ok(await ev(`return document.querySelectorAll('${CBL} [data-state="reference-grid"] .cbl-refcard').length === 8;`) === true, "notes reference grid renders 8 cards");
+  for (const algo of ["brady", "tachy", "postrosc", "arrest"]) {
+    await click(`${CBL} [data-act="notes-algo"][data-algo="${algo}"]`);
+    ok(await until(`return CodeBlueLive._rt.notesAlgo() === "${algo}";`, 5000), "algorithm tab " + algo + " opens");
+    await shot("notes-" + algo, false); await shot("notes-" + algo, true);
+  }
+  await shot("notes-grid", false); await shot("notes-grid", true);
+  for (const [w, h, tag] of [[820, 1180, "820"], [1194, 834, "1194"]]) {
+    await call("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 2, mobile: true });
+    await sleep(300); await shot("notes-grid-" + tag, true);
+    await click(`${CBL} [data-act="tab-settings"]`);
+    await shot("settings-root-" + tag, true);
+    await click(`${CBL} [data-act="tab-notes"]`);
+  }
+  await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+  await sleep(300);
   await ev(`document.querySelector('${CBL} #cblNoteTab').value = "Tab note"; document.querySelector('${CBL} [data-act="note-add"]').click(); return 1;`);
   ok(await until(`return CodeBlueLive._rt.session().events.some(function (e) { return e.kind === "note" && e.label === "Tab note"; });`, 5000), "note added from the Notes tab");
   await click(`${CBL} [data-act="tab-settings"]`);
   ok(await until(`return CodeBlueLive._rt.tab() === "settings";`, 5000), "settings tab opens");
   ok(await ev(`return !!document.querySelector('${CBL} [data-state="strip"]');`) === true, "strip stays above the Settings tab");
   ok(await ev(`return !!document.querySelector('${CBL} [data-tabpanel="settings"] [data-state="patient-link"]');`) === true, "settings reuses the patient link row");
+  ok(await ev(`return !!document.querySelector('${CBL} [data-settings-search]');`) === true, "settings search renders");
+  ok(await ev(`return document.querySelectorAll('${CBL} [data-state="quick-toggles"] .cbl-toggle').length === 4;`) === true, "settings quick toggles render");
+  await ev(`CodeBlueLive._rt.setSettingsQuery("compression"); return 1;`);
+  ok(await until(`return !!document.querySelector('${CBL} [data-state="settings-results"]');`, 5000), "settings search results render");
+  await shot("settings-search", false); await shot("settings-search", true);
+  await ev(`CodeBlueLive._rt.setSettingsQuery(""); CodeBlueLive._rt.setSettingsGroup("Rhythm check"); return 1;`);
+  ok(await until(`return !!document.querySelector('${CBL} [data-settings-detail="Rhythm check"]');`, 5000), "settings detail pane renders");
+  await shot("settings-detail", false); await shot("settings-detail", true);
+  await ev(`CodeBlueLive._rt.setSettingsGroup(null); return 1;`);
+  await shot("settings-root", false); await shot("settings-root", true);
   await click(`${CBL} [data-act="tab-timer"]`);
   ok(await until(`return CodeBlueLive._rt.tab() === "timer";`, 5000), "back to the Timer tab");
 
@@ -281,7 +308,8 @@ try {
   await click(`${CBL} [data-act="tab-log"]`);
   ok(await until(`return CodeBlueLive._rt.tab() === "log";`, 5000), "log tab reopens for segments");
   ok(await ev(`return document.querySelectorAll('${CBL} .cbl-segbtn').length === 3;`) === true, "three log segments render");
-  ok(await ev(`return !!document.querySelector('${CBL} [data-act="log-add-manual"]');`) === true, "manual entry renders");
+  await click(`${CBL} [data-act="log-manual-toggle"]`);
+  ok(await ev(`return !!document.querySelector('${CBL} [data-act="log-add-manual"]');`) === true, "manual entry renders behind disclosure");
   await ev(`document.querySelector('${CBL} #cblManualLabel').value = "Missed shock"; document.querySelector('${CBL} #cblManualTime').value = "1:00"; document.querySelector('${CBL} #cblManualKind').value = "shock"; document.querySelector('${CBL} [data-act="log-add-manual"]').click(); return 1;`);
   ok(await until(`return CodeBlueLive._rt.session().events.some(function (e) { return e.label === "Missed shock" && e.elapsed === 60; });`, 5000), "manual missed event added at its time");
   ok(await ev(`return CodeBlueLive._engine.computeCounts(CodeBlueLive._rt.session().events).shocks >= 1;`) === true, "counts recomputed after manual entry");

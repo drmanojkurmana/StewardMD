@@ -414,7 +414,7 @@
       '<button type="button" class="cbt-back" data-act="home" aria-label="Back to trainer home">Back</button>' +
       '<button type="button" class="cbt-back" data-cbp-settings aria-label="Display settings">Display</button>' +
       '<button type="button" class="cbt-close" data-act="close" aria-label="Close trainer">Close</button></div>' +
-      '<div class="cbt-scroll"><h2 class="cbt-h" tabindex="-1">' + esc(title) + '</h2><div class="cbt-layout">' + body + "</div></div>";
+      '<div class="cbt-scroll"><h2 class="cbt-h cbt-sr" tabindex="-1">' + esc(title) + '</h2><div class="cbt-layout">' + body + "</div></div>";
   }
   function modeTabs() {
     var html = '<div class="cbt-modes" role="tablist" aria-label="Mode">';
@@ -572,8 +572,15 @@
         '<span class="cbt-chip cbt-chip-' + esc(r.kind) + '">' + esc(chipFor[r.kind] || r.kind) + '</span>' +
         '<span class="cbt-rrow-text">' + esc(meta + r.prompt) + "</span></div>";
     }).join("");
+    var counts = { correct: 0, late: 0, missed: 0 };
+    res.rows.forEach(function (r) { if (counts[r.kind] != null) counts[r.kind]++; });
+    var summary = '<div class="cbt-score-summary" data-score-summary>' +
+      ["correct", "late", "missed"].map(function (k) {
+        return '<span class="cbt-sumitem"><span class="cbt-sub" data-verdict="' + k + '">' + chipFor[k] + '</span>' +
+          '<span class="cbt-sumnum">' + counts[k] + "</span></span>";
+      }).join("") + "</div>";
     var html = '<div class="cbt-result"><div class="cbt-result-side"><div class="cbt-result-head">' +
-      '<span class="cbt-result-score">' + res.pct + '%</span><span class="cbt-result-label">Test debrief</span></div>' +
+      '<span class="cbt-result-score cbt-score" data-score-pct="' + res.pct + '">' + res.pct + '%</span><span class="cbt-result-label">Score</span></div>' + summary +
       '<p class="cbt-note">' + esc(ref) + '</p><div class="cbt-result-actions">' +
       '<button type="button" class="cbt-next" data-act="start-test" data-id="' + esc(testSess.scn.id) + '">Try again</button>' +
       '<button type="button" class="cbt-next ghost" data-act="go-mine">My training</button></div></div>' +
@@ -677,7 +684,7 @@
           '<span class="cbt-rrow-text">' + esc(p.why) + "</span>" + (reviewBtn(link) || "") + "</div>";
       }).join("");
     var html = '<div class="cbt-result"><div class="cbt-result-side"><div class="cbt-result-head">' +
-      '<span class="cbt-result-score">' + res.score + " of " + res.total + '</span><span class="cbt-result-label">Case result</span></div>' +
+      '<span class="cbt-result-score cbt-score" data-score="' + res.score + '" data-total="' + res.total + '">' + res.score + " of " + res.total + '</span><span class="cbt-result-label">Score</span></div>' +
       '<div class="cbt-result-actions">' +
       '<button type="button" class="cbt-next" data-act="go-cases">More cases</button>' +
       '<button type="button" class="cbt-next ghost" data-act="go-mine">My training</button></div></div>' +

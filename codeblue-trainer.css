@@ -248,3 +248,18 @@ body.cbt-lock { overflow: hidden; }
   }
   #cbtRoot *:active { transform: none !important; }
 }
+
+/* cb4-G: one visible title, iPad result uses full width */
+#cbtRoot .cbt-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;margin:0}
+#cbtRoot .cbt-score-summary{display:flex;gap:16px;flex-wrap:wrap;margin:10px 0}
+#cbtRoot .cbt-sumitem{display:inline-flex;gap:6px;align-items:baseline}
+#cbtRoot .cbt-score-summary .cbt-sub{font-size:12px;font-weight:600;color:var(--cbt-muted);margin:0;letter-spacing:.04em}
+#cbtRoot .cbt-sumnum{font-weight:700;font-variant-numeric:tabular-nums}
+#cbtRoot .cbt-rrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px}
+#cbtRoot .cbt-rrow-text{grid-column:1/-1}
+@media(min-width:768px){
+ #cbtRoot .cbt-layout>.cbt-result{grid-column:1/-1;width:100%}
+ #cbtRoot .cbt-result{grid-template-columns:300px minmax(0,1fr)}
+ #cbtRoot[data-station="mine"] .cbt-layout,#cbtRoot[data-station="debrief"] .cbt-layout,#cbtRoot[data-station="result"] .cbt-layout{display:block}
+ #cbtRoot .cbt-result-score{font-size:64px;font-weight:200}
+}

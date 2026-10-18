@@ -967,3 +967,74 @@ body:not(.dark) #cblRoot .cbl-btn.cbl-primary {
 }
 #cblRoot .cbl-pastrow:first-child { border-top: 0; }
 #cblRoot .cbl-pastmain { flex: 1; min-width: 0; overflow-wrap: break-word; }
+
+/* cb4-G short phone: secondary tiles fit above tab bar at 360x740 */
+@media (max-width:767px) and (max-height:780px){
+ #cblRoot .cbl-ringcard{padding:6px 12px 4px}
+ #cblRoot .cbl-vent{min-height:44px}
+ #cblRoot .cbl-ringtime{font-size:52px}
+ #cblRoot .cbl-due{min-height:44px;height:44px}
+ #cblRoot .cbl-strip{height:56px}
+ #cblRoot .cbl-secondary{flex:1 1 0;min-height:0;overflow-y:auto}
+}
+
+/* cb4-G Debrief hero, Log, Notes, Settings */
+#cblRoot .cbl-hero{display:flex;align-items:baseline;gap:12px;margin:8px 0 16px}
+#cblRoot .cbl-heronum{font-size:56px;line-height:1;font-weight:200;font-variant-numeric:tabular-nums}
+#cblRoot .cbl-herolabel{color:var(--cbl-muted);font-size:14px}
+#cblRoot .cbl-sum{display:block;border-top:1px solid var(--cbl-hairline)}
+#cblRoot .cbl-sumrow{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--cbl-hairline)}
+#cblRoot .cbl-sumrow dt{color:var(--cbl-muted,#AAB2BD);font-size:14px;margin:0}
+#cblRoot .cbl-sumrow dd{margin:0;font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
+#cblRoot .cbl-footnote{color:var(--cbl-muted);font-size:12px;margin:8px 0}
+#cblRoot .cbl-full{width:100%}
+#cblRoot .cbl-endrow{display:flex;gap:8px}#cblRoot .cbl-endrow .cbl-btn{flex:1}
+#cblRoot .cbl-segs{display:flex;border:1px solid var(--cbl-line);border-radius:10px;overflow:hidden;margin:0 0 12px}
+#cblRoot .cbl-segbtn{flex:1;border:0;border-radius:0;border-right:1px solid var(--cbl-line)}
+#cblRoot .cbl-segbtn:last-child{border-right:0}
+#cblRoot .cbl-segbtn[aria-selected="true"]{background:var(--cbl-accent);color:var(--cbl-accent-ink)}
+#cblRoot .cbl-chips{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+#cblRoot .cbl-chip{flex:none}
+#cblRoot .cbl-empty-calm{border:0;display:flex;gap:8px;align-items:center}
+#cblRoot .cbl-disclosure{display:flex;gap:8px;align-items:center;min-height:44px;width:100%;background:transparent;border:0;border-top:1px solid var(--cbl-hairline);color:var(--cbl-ink);font-size:15px;cursor:pointer;padding:10px 0}
+#cblRoot .cbl-label{font-size:12px;color:var(--cbl-muted,#AAB2BD)}
+#cblRoot .cbl-input{min-height:44px;height:44px;box-sizing:border-box}
+#cblRoot .cbl-refgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+@media(min-width:768px){#cblRoot .cbl-refgrid{grid-template-columns:repeat(3,1fr)}}
+#cblRoot .cbl-refcard{border-top:1px solid var(--cbl-hairline);padding:10px 0}
+#cblRoot .cbl-refhead{display:flex;justify-content:space-between;align-items:center;gap:8px}
+#cblRoot .cbl-refhead h3{font-size:15px;margin:0}
+#cblRoot .cbl-star{min-height:44px;border:1px solid var(--cbl-line);border-radius:8px;background:transparent;color:var(--cbl-muted);cursor:pointer;padding:0 10px}
+#cblRoot .cbl-star.on{color:var(--cbl-accent);border-color:var(--cbl-accent)}
+#cblRoot .cbl-refitems{display:flex;flex-wrap:wrap;gap:6px}
+#cblRoot .cbl-refitem{min-height:44px;border:1px solid var(--cbl-line);border-radius:8px;background:transparent;color:var(--cbl-ink);cursor:pointer;padding:6px 10px;text-align:left}
+#cblRoot .cbl-refitem.ticked{border-color:var(--cbl-rosc);color:var(--cbl-rosc)}
+#cblRoot .cbl-refprompts{margin:6px 0;padding-left:18px;color:var(--cbl-muted);font-size:13px;line-height:1.5}
+#cblRoot .cbl-steps{list-style:none;margin:0 0 12px;padding:0}
+#cblRoot .cbl-stepbtn{width:100%;text-align:left;min-height:44px;background:transparent;border:0;border-bottom:1px solid var(--cbl-hairline);color:var(--cbl-ink);padding:10px 8px;cursor:pointer;display:flex;flex-direction:column;gap:2px}
+#cblRoot .cbl-step.current .cbl-stepbtn{border-left:3px solid var(--cbl-accent)}
+#cblRoot .cbl-step.done .cbl-steptext{text-decoration:line-through;color:var(--cbl-muted)}
+#cblRoot .cbl-stepbtn:disabled{cursor:default;opacity:.85}
+#cblRoot .cbl-setrow{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:44px;border-bottom:1px solid var(--cbl-hairline);padding:6px 0}
+#cblRoot .cbl-setrowbtn{display:flex;justify-content:space-between;width:100%;min-height:44px;background:transparent;border:0;border-bottom:1px solid var(--cbl-hairline);color:var(--cbl-ink);cursor:pointer;padding:10px 4px;font-size:15px;text-align:left}
+#cblRoot .cbl-toggle{min-height:44px;min-width:64px;border:1px solid var(--cbl-line);border-radius:999px;background:transparent;color:var(--cbl-muted);cursor:pointer}
+#cblRoot .cbl-toggle.on{background:var(--cbl-accent);color:var(--cbl-accent-ink);border-color:var(--cbl-accent)}
+#cblRoot .cbl-quick{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+#cblRoot .cbl-setselect{max-width:160px}
+@media(min-width:768px){#cblRoot .cbl-settings.has-detail .cbl-setroot{max-width:720px}}
+
+/* cb4-G settings wiring: phone pushed detail, iPad right pane */
+#cblRoot .cbl-settings-grid{display:block}
+#cblRoot .cbl-setpane{display:none}
+#cblRoot .cbl-settings.has-detail .cbl-setroot{display:none}
+#cblRoot .cbl-settings.has-detail .cbl-setpane{display:block}
+#cblRoot .cbl-setrowbtn.on{color:var(--cbl-accent)}
+#cblRoot .cbl-rhythmpic{width:36px;height:20px;flex:none}
+#cblRoot .cbl-schematic{font-size:11px;color:var(--cbl-muted)}
+@media(min-width:768px){
+ #cblRoot .cbl-settings-grid{display:grid;grid-template-columns:280px minmax(0,1fr);gap:24px;align-items:start}
+ #cblRoot .cbl-setpane{display:block;border-left:1px solid var(--cbl-hairline);padding-left:24px}
+ #cblRoot .cbl-settings.has-detail .cbl-setroot{display:block}
+ #cblRoot .cbl-settings.has-detail .cbl-setpane{display:block}
+ #cblRoot .cbl-setdetail .cbl-backbtn{display:none}
+}
