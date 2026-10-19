@@ -1,0 +1,946 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Methotrexate: tumour kill and side effects</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="dark"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
+body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
+body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
+.t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
+.t-ven .tb-body{fill:color-mix(in srgb,var(--d-ven) 62%,var(--anatomy-paper))}.t-ven .tb-edge{stroke:var(--d-ven)}
+.t-dia .tb-body{fill:color-mix(in srgb,var(--d-dia) 55%,var(--anatomy-paper))}.t-dia .tb-edge{stroke:var(--d-dia)}
+.t-out .tb-body{fill:color-mix(in srgb,var(--d-ure) 40%,color-mix(in srgb,var(--d-dia) 40%,var(--anatomy-paper)))}
+.tb-shine{opacity:.5}
+.dr-lab-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}.dr-lab-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.dr-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.dr-pt{fill:var(--anatomy-strong);font:650 13px var(--anatomy-mono)}.dr-ps{fill:var(--anatomy-muted);font:11px var(--anatomy-mono)}.dr-pt2{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.dr-dband{fill:color-mix(in srgb,var(--d-dia) 13%,var(--anatomy-paper))}
+.dr-lumen{fill:color-mix(in srgb,var(--d-art) 15%,var(--anatomy-paper))}
+.dr-wall{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}.dr-pore{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.dr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4}.dr-beam-c{fill:none;stroke:var(--anatomy-hi);stroke-width:1.2}
+.dr-g-tr{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint)}.dr-g-fill{opacity:.95}
+#g-urea{fill:var(--d-ure)}#g-pot{fill:var(--d-pot)}#g-flu{fill:var(--d-wat)}
+.dr-g-v{fill:var(--anatomy-strong);font:600 10px var(--anatomy-mono);pointer-events:none}
+.dr-scr{fill:#0b1511;stroke:var(--anatomy-hi);stroke-width:.02}.dr-scr-bar{fill:#14261e}.dr-scr-fill{fill:var(--d-dia)}.dr-scr-led{fill:#555}
+.dr-vent{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.8}
+.p-rbc{fill:var(--d-rbc);stroke:color-mix(in srgb,var(--d-rbc) 50%,#000);stroke-width:.6}.p-rbc-c{fill:color-mix(in srgb,var(--d-rbc) 55%,#000);opacity:.55}
+.p-alb{fill:var(--d-alb);stroke:var(--anatomy-mid);stroke-width:.7}
+.p-ure{fill:var(--d-ure)}.p-pot{fill:var(--d-pot)}.p-bic{fill:var(--d-bic)}.p-wat{fill:var(--d-wat);opacity:.9}
+.p-rot-disc{fill:var(--anatomy-top);stroke:var(--anatomy-hi);stroke-width:1}.p-rot-hub{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}.p-roll{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:1}
+.p-plunger{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}.p-pad{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}
+.p-level{fill:color-mix(in srgb,var(--d-ven) 55%,var(--anatomy-paper));opacity:.9}.p-bubble{fill:none;stroke:var(--anatomy-hi);stroke-width:.8}
+.dr-fig .hot.dr-lab:hover .dr-lab-r{stroke:var(--anatomy-lit)}
+
+.t-sal .tb-body{fill:color-mix(in srgb,var(--d-bic) 45%,var(--anatomy-paper))}.t-sal .tb-edge{stroke:var(--d-bic)}
+.p-sal{fill:#fff;stroke:var(--d-bic);stroke-width:.8}
+.dr-jwin{fill:var(--anatomy-shade-1);stroke:var(--anatomy-hi);stroke-width:.02}.dr-jfill.dr-j-fresh{fill:var(--d-dia)}.dr-jfill.dr-j-used{fill:var(--d-ure)}.dr-jfill{opacity:.85}
+.dr-bez{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}.dr-face{fill:var(--anatomy-card)}.dr-ok{fill:none;stroke:#3ddc97;stroke-width:2.2;opacity:.8}
+.dr-tick{stroke:var(--anatomy-mid);stroke-width:.8}.dr-needle{stroke:var(--d-art);stroke-width:1.6;stroke-linecap:round}.dr-hub{fill:var(--anatomy-strong)}
+.dr-dl{fill:var(--anatomy-text);font:600 9.5px var(--anatomy-mono);pointer-events:none}
+.dr-dial:hover .dr-bez{stroke:var(--anatomy-lit)}
+
+.c-skin .iso-fill,.c-skin .iso-top{fill:var(--c-skin)}.c-gown .iso-fill,.c-gown .iso-top{fill:var(--c-gown)}.c-blanket .iso-fill,.c-blanket .iso-top{fill:var(--c-blanket)}
+.c-chair .iso-fill,.c-chair .iso-top{fill:var(--c-chair)}.c-chair2 .iso-fill,.c-chair2 .iso-top{fill:var(--c-chair2)}.c-vein .iso-fill,.c-vein .iso-top{fill:var(--c-vein)}
+.c-mach .iso-fill,.c-mach .iso-top{fill:var(--c-mach)}.c-mach2 .iso-fill,.c-mach2 .iso-top{fill:var(--c-mach2)}.c-door .iso-fill,.c-door .iso-top{fill:var(--c-door)}
+.c-skin .iso-shade,.c-gown .iso-shade,.c-blanket .iso-shade,.c-chair .iso-shade,.c-chair2 .iso-shade,.c-vein .iso-shade,.c-mach .iso-shade,.c-mach2 .iso-shade,.c-door .iso-shade{opacity:.45}
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
+.oc-tox{fill:color-mix(in srgb,var(--c-bad) 7%,var(--anatomy-paper))}.cl-tum{--cc:var(--c-mast)}
+.oc-dna{fill:none;stroke:var(--anatomy-strong);stroke-width:1.6}.oc-rung{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.oc-enz{fill:color-mix(in srgb,var(--c-plt) 45%,var(--anatomy-paper));stroke:var(--anatomy-strong);stroke-width:1.2}
+.oc-pock{fill:color-mix(in srgb,#000 45%,var(--anatomy-paper))}
+.oc-plug{fill:var(--c-good);stroke:color-mix(in srgb,var(--c-good) 55%,#000);stroke-width:1}
+.oc-block{fill:none;stroke:var(--c-bad);stroke-width:2.5}
+.p-fol{--cc:#e8b93c}.p-thf{--cc:var(--c-fl)}.p-mtx{--cc:var(--c-good)}.p-bleb{--cc:var(--c-mast)}
+.p-leu{fill:none;stroke:var(--c-good);stroke-width:1.6}
+.p-crys{fill:#cfe3ef;stroke:#7fa3b8;stroke-width:.7}.p-flush{fill:var(--c-fl)}
+.p-spk{--cc:var(--c-bad)}.p-crk{--cc:var(--c-cyt)}
+.oc-sore{fill:color-mix(in srgb,var(--c-bad) 65%,#5a0d0d)}
+.oc-haze{fill:color-mix(in srgb,var(--c-cyt) 45%,var(--anatomy-paper))}
+.oc-liv{fill:color-mix(in srgb,var(--c-eos) 55%,var(--anatomy-paper))}.oc-fat{fill:var(--c-eos)}
+.oc-bone{fill:#e6dcc8;stroke:#8a7f6a;stroke-width:1.2}.oc-cav{fill:color-mix(in srgb,var(--c-rbc) 55%,var(--anatomy-paper))}
+.oc-cap{fill:var(--anatomy-strong);font-size:13px}</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Methotrexate: tumour kill and side effects</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>tumour growing · marrow ok · gut ok</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated figure. Methotrexate plugs the DHFR enzyme in a tumour cell, so THF runs out and the cell cannot make purines or thymidine to copy its DNA, and it dies. Fast dividing marrow and gut lining fail the same way, crystals block the kidney, and the liver and lung are harmed. Leucovorin gives ready THF past the block and fluids flush the kidney. Gauges show tumour kill and each harm as the course advances."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+<rect class="sc-tissue" x="14" y="44" width="452" height="394" rx="18"/>
+<rect class="oc-tox" x="474" y="44" width="472" height="394" rx="18"/>
+<text class="sc-zone" x="34" y="68">TUMOUR CELL RUNS OUT OF FOLATE</text>
+<text class="sc-zone" x="494" y="68">WHERE THE HARM HAPPENS</text>
+<path class="dr-beam" d="M470 52L470 430"/>
+<text class="sc-lab" x="20" y="356">drug in</text>
+<text class="sc-lab" x="24" y="410">rescue in</text>
+<g id="tumSlot"></g><g id="orgSlot"></g><g id="parts"></g><g id="over"></g><g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, schedules or thresholds are shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Course of treatment</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="middle"><span class="dr-ticks"><i>early</i><i>middle</i><i>late</i></span></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without methotrexate" data-with="With methotrexate, leucovorin and fluids"><option value="0">no treatment</option><option value="1">methotrexate</option><option value="2">methotrexate with leucovorin and fluids</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul><li><strong>How methotrexate works.</strong> Methotrexate is a folate analogue that binds dihydrofolate reductase (DHFR), so tetrahydrofolate falls and the cell cannot make purines or thymidylate to copy DNA. Tumour cells die, and fast-dividing normal tissues suffer the same way. Leucovorin (folinic acid) gives ready reduced folate past the block, and fluids with alkali urine flush kidney crystals. This is standard teaching in pharmacology and oncology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Side effects shown.</strong> Mucositis and myelosuppression from failed renewal of fast-dividing cells; hepatotoxicity over many courses; pneumonitis as an inflammatory lung reaction; and nephrotoxicity from drug crystals in acid urine, eased by hydration and alkalinisation. These are teaching toggles only.</li><li><strong>Organ art.</strong> Organ art is NIH BioArt Source, public domain; Servier Medical Art by Servier, CC BY 3.0 (https://smart.servier.com), recoloured and animated.</li></ul>
+<p><strong>What was simplified.</strong> Other effects such as nausea, hair loss and teratogenicity, combination regimens, the timing of leucovorin rescue after high doses, monitoring blood tests, and all doses and schedules are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). Organ illustrations are NIH BioArt Source (public domain); Servier Medical Art by Servier (CC BY 3.0); all other drawing is original.</p>
+<p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Course of treatment","a":[0.25,0.6,1],"names":["early","middle","late"],"ticks":["early","middle","late"],"start":1},"settings":[{"label":"no treatment"},{"label":"methotrexate"},{"label":"methotrexate with leucovorin and fluids"}],"drugNames":["no treatment","methotrexate","methotrexate with leucovorin and fluids"],"status":"Course: {level} · {drug} ·"}};
+const modelOf = function modelOf(S, level, drug) {
+  const a = S.level.a[level], on = drug > 0 ? 1 : 0, pro = drug === 2 ? 1 : 0;
+  const K = on ? a * (0.55 + 0.45 * a) : 0;
+  const Ms = on ? (0.15 + 0.75 * a) * (pro ? 0.3 : 1) : 0;
+  const Gu = on ? (0.2 + 0.7 * a) * (pro ? 0.3 : 1) : 0;
+  const Lv = on ? 0.6 * a * (pro ? 0.6 : 1) : 0;
+  const Lu = on ? 0.55 * a * (pro ? 0.7 : 1) : 0;
+  const Kd = on ? a * (pro ? 0.12 : 1) : 0;
+  const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
+  const words = [w(K, 0.25, 0.6, ["growing", "shrinking", "dying"]), w(Ms, 0.3, 0.65, ["ok", "low", "very low"]), w(Gu, 0.3, 0.65, ["ok", "sore", "raw"])];
+  return { a, on, pro, K, Ms, Gu, Lv, Lu, Kd, words, readout: "tumour " + words[0] + " · marrow " + words[1] + " · gut " + words[2] };
+};
+/* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); if (parent) parent.appendChild(el); return el; };
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const lerp = (a, b, t) => a + (b - a) * t;
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const f1 = (v) => (+v).toFixed(1);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const S = SC.S;
+let level = S.level.start, drug = 0, playing = !reduce.matches, visible = true, last = 0, frame = 0, tm = 0, M = null, SCN = null;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), l0 = q.get("l");
+  if (d0 > 0 && d0 < S.settings.length) { drug = d0; drugBox.value = String(d0); }
+  if (l0 !== null && l0 !== "" && +l0 >= 0 && +l0 < S.level.a.length) { level = +l0; levelBox.value = String(level); } }
+levelBox.setAttribute("aria-valuetext", S.level.names[level]);
+
+/* a smooth closed blob path (Catmull-Rom through points), centred on 0,0 */
+function blobD(r, seed, wob, n) {
+  n = n || 9; wob = wob === undefined ? 0.1 : wob; const pts = [];
+  for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, k = 1 + wob * Math.sin(t * 3 + seed * 1.7) + wob * 0.6 * Math.cos(t * 2 + seed * 2.3); pts.push([r * k * Math.cos(t), r * k * Math.sin(t)]); }
+  let d = "M" + f1(pts[0][0]) + " " + f1(pts[0][1]);
+  for (let i = 0; i < n; i++) { const p0 = pts[(i + n - 1) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " + f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]); }
+  return d + "Z";
+}
+/* a lit, shaded cell: body, shade ring, highlight, optional nucleus. cls colours it (CSS: .cl-<cls> .cl-b) */
+function cell(parent, o) {
+  const g = mk("g", { class: "cl cl-" + o.cls }, parent), r = o.r, seed = o.seed || Math.random() * 9;
+  mk("path", { class: "cl-b", d: blobD(r, seed, o.wob === undefined ? 0.09 : o.wob, o.n) }, g);
+  mk("path", { class: "cl-s", d: blobD(r * 0.86, seed, o.wob === undefined ? 0.09 : o.wob, o.n), transform: "translate(" + f1(r * 0.04) + " " + f1(r * 0.05) + ")" }, g);
+  mk("path", { class: "cl-h", d: blobD(r * 0.62, seed + 1, 0.05, 7), transform: "translate(" + f1(-r * 0.14) + " " + f1(-r * 0.16) + ")" }, g);
+  if (o.nuc) mk("path", { class: "cl-n" + (o.nucCls ? " " + o.nucCls : ""), d: blobD(r * o.nuc, seed + 2, 0.12, 7), transform: "translate(" + f1(r * 0.05) + " " + f1(r * 0.02) + ")" }, g);
+  if (o.x !== undefined) g.setAttribute("transform", "translate(" + f1(o.x) + " " + f1(o.y) + ")");
+  return g;
+}
+const place = (g, x, y, rot, sc) => g.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ")" + (rot ? " rotate(" + f1(rot) + ")" : "") + (sc && sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : ""));
+/* label pill with a leader; hover/focus shows `text` in the info line */
+function pill(parent, text, x, y, tx, ty, infoText) {
+  const lw = text.length * 6.2 + 14, g = mk("g", { class: "hot dr-lab", tabindex: "0", "data-info": infoText || text }, parent);
+  mk("path", { class: "dr-leader", d: "M" + f1(x) + " " + f1(y) + "L" + f1(tx) + " " + f1(ty + 8) }, g);
+  mk("circle", { class: "dr-dot", cx: f1(x), cy: f1(y), r: 1.6 }, g);
+  mk("rect", { class: "dr-lab-r", x: f1(tx - lw / 2), y: f1(ty - 8), width: f1(lw), height: 17, rx: 8.5 }, g);
+  const t = mk("text", { class: "dr-lab-t", x: f1(tx), y: f1(ty + 4), "text-anchor": "middle" }, g); t.textContent = text; return g;
+}
+/* a vertical gauge (track + fill); set(v) moves it; the value word sits under it */
+function gauge(parent, x, y, h, w, cls, name, infoText) {
+  const g = mk("g", { class: "hot", tabindex: "0", "data-info": infoText || name }, parent);
+  mk("rect", { class: "dr-g-tr", x: x - w / 2, y, width: w, height: h, rx: w / 2 }, g);
+  const fill = mk("rect", { class: "dr-g-fill " + cls, x: x - w / 2, y: y + h, width: w, height: 0, rx: w / 2 }, g);
+  const t1 = mk("text", { class: "dr-pt2", x, y: y + h + 15, "text-anchor": "middle" }, g); t1.textContent = name;
+  const t2 = mk("text", { class: "dr-g-v", x, y: y + h + 28, "text-anchor": "middle" }, g);
+  return { set(v, word) { const hh = clamp(v) * h; fill.setAttribute("y", f1(y + h - hh)); fill.setAttribute("height", f1(hh)); if (word !== undefined && t2.textContent !== word) t2.textContent = word; } };
+}
+/* a path through points, with length table; at(u) gives {x,y,a} */
+function track(pts) { const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const len = cum[cum.length - 1];
+  return { len, at(u) { const d = clamp(u) * len; let i = 1; while (i < cum.length - 1 && cum[i] < d) i++; const f = (d - cum[i - 1]) / Math.max(0.001, cum[i] - cum[i - 1]); const a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) * 57.2958 }; } };
+}
+const wordOf = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+  if (SCN && SCN.onModel) SCN.onModel(M);
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now; tm += dt * 1000; SCN.step(dt, M); frame = requestAnimationFrame(tick); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
+function run(scn) {
+  SCN = scn;
+  levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  pauseBtn.addEventListener("click", () => setPlaying(!playing));
+  document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+  reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+  scn.init(); publish();
+  const idle = info.textContent;
+  svg.querySelectorAll(".hot").forEach((el) => { const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); }, off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+    el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+  if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+  for (let i = 0; i < 90; i++) scn.step(0.05, M);
+  start();
+}
+
+/* Shared organ art for the animated mechanism scenes. Plain globals, ES2015, no imports.
+ * Inlined after bio.lib.js when buildScene gets organs:true, so mk/f1/clamp below are the shared ones.
+ * organ(parent, kind, x, y, w, opts) draws real anatomy art (NIH BioArt Source public domain,
+ * Servier Medical Art CC BY 3.0, one DBCLS CC BY 4.0 knee; injected as _ORG_ART by buildScene
+ * for the kinds the page uses) centred on x,y and w px wide, and falls back to the existing
+ * procedural layered silhouette for kinds without art (adrenal, uterus, thyroid, ganglion) or when art
+ * was not injected (liver, bladder and eye keep their procedural drawings as fallback).
+ * Art ports are fractions of the art viewBox (see _ORG_FRAC). The liver-4 art is the bare mass,
+ * so the lib adds a procedural gallbladder under the gall port plus short portal and hepatic
+ * vein stubs ending at the porta and hepvein ports.
+ * opts: { h (px height, else proportional), flip (mirror left/right), cls (extra class), id,
+ *   tint (a CSS colour with opacity, overlaid as an organ-shaped mask for disease states),
+ *   dim (dull the art) }.
+ * Returns { g, kind, x, y, w, h, ports, art } with absolute SVG coords; ports.in/out always exist.
+ * Art keeps its own colours (a faint contrast halo keeps it readable in dark and light themes);
+ * procedural fill is a vertical gradient whose stops derive from --cc (a theme aware palette var,
+ * so dark and light both work); edge stroke and landmark lines use color-mix detail classes.
+ * Emits no text, so label font and dash rules are inherited from the calling scene. */
+if (!document.getElementById("orgCss")) { var _orgSt = document.createElement("style"); _orgSt.id = "orgCss";
+  _orgSt.textContent = ".org-halo{filter:drop-shadow(0 0 1px rgba(0,0,0,.65)) drop-shadow(0 0 1px rgba(255,255,255,.45))}"
+  + ".org-b{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1.2;stroke-linejoin:round;stroke-linecap:round}"
+  + ".org-d{fill:none;stroke:color-mix(in srgb,var(--cc) 40%,var(--anatomy-hi));stroke-width:1;stroke-linecap:round;opacity:.8}"
+  + ".org-dk{fill:none;stroke:color-mix(in srgb,var(--cc) 62%,#000);stroke-width:1.1;stroke-linecap:round;opacity:.8}"
+  + ".org-f{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1;stroke-linejoin:round}"
+  + ".org-v{fill:none;stroke-linecap:round}"
+  + ".org-liver{--cc:var(--c-rbc)}.org-heart{--cc:var(--c-rbc)}.org-kidney{--cc:var(--c-eos)}.org-lung{--cc:var(--c-endo)}"
+  + ".org-stomach{--cc:var(--c-graft)}.org-brain{--cc:var(--c-mac)}.org-pancreas{--cc:var(--c-plt)}.org-spleen{--cc:var(--c-sm)}"
+  + ".org-bladder{--cc:var(--c-th2)}.org-uterus{--cc:var(--c-endo)}.org-ovary{--cc:var(--c-plt)}.org-testis{--cc:var(--c-plt)}.org-thyroid{--cc:var(--c-neut)}.org-eye{--cc:#e6e1d4}.org-ganglion{--cc:var(--c-mac)}"
+  + ".org-adrenal{--cc:#e9a13b}"
+  + ".org-pituitary{--cc:var(--c-mac)}"
+  + ".org-bowel{--cc:var(--c-graft)}.org-parathyroid{--cc:#e0a44a}.org-colon{--cc:var(--c-eos)}.org-ear{--cc:var(--c-plt)}.org-skin{--cc:#d9a58c}"
+  + ".org-muscle{--cc:var(--c-rbc)}.org-joint{--cc:#cfc8bd}.org-vessel{--cc:var(--c-rbc)}"
+  + ".org-lymphnode{--cc:var(--c-lymph)}";
+  document.head.appendChild(_orgSt); }
+var _orgN = 0;
+/* per instance gradients: base (light -> base -> dark of --cc) plus a white top / dark bottom shade overlay */
+function _orgDefs(g) {
+  _orgN++; var id = "og" + _orgN, hid = "oh" + _orgN;
+  var defs = mk("defs", {}, g);
+  var lg = mk("linearGradient", { id: id, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  var s0 = mk("stop", { offset: "0", "stop-color": "#999" }, lg); s0.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 55%,#fff)");
+  var s1 = mk("stop", { offset: ".55", "stop-color": "#888" }, lg); s1.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 78%,var(--anatomy-paper))");
+  var s2 = mk("stop", { offset: "1", "stop-color": "#666" }, lg); s2.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 66%,#000)");
+  var hg = mk("linearGradient", { id: hid, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  mk("stop", { offset: "0", "stop-color": "#fff", "stop-opacity": ".2" }, hg);
+  mk("stop", { offset: ".55", "stop-color": "#fff", "stop-opacity": "0" }, hg);
+  mk("stop", { offset: "1", "stop-color": "#000", "stop-opacity": ".14" }, hg);
+  return { b: "url(#" + id + ")", h: "url(#" + hid + ")" };
+}
+/* one filled silhouette plus its shade overlay, same path data so the light stays inside */
+function _ob(g, d, G) {
+  mk("path", { class: "org-b", d: d, fill: G.b, stroke: "#666" }, g);
+  mk("path", { d: d, fill: G.h, stroke: "none", "pointer-events": "none" }, g);
+}
+function _ol(g, d, cls) { return mk("path", { class: cls || "org-d", d: d, fill: "none" }, g); }
+function _of(g, d, fillCss, cc) { var e = mk("path", { class: "org-f", d: d, stroke: "#666" }, g); e.setAttribute("style", "fill:" + fillCss + ";--cc:" + cc); return e; }
+function _ov(g, d, color, wdt) { var e = mk("path", { class: "org-v", d: d, fill: "none", stroke: "#777", "stroke-width": wdt, "stroke-linecap": "round" }, g); e.setAttribute("style", "stroke:" + color); return e; }
+function _odot(g, x, y, r, fillCss) { var e = mk("circle", { cx: x, cy: y, r: r, stroke: "none" }, g); e.setAttribute("style", "fill:" + fillCss); return e; }
+
+/* liver: big right lobe, smaller left lobe, falciform notch, gallbladder, porta hepatis stubs */
+function _orgLiver(g, G) {
+  _ov(g, "M-2 46L-2 18", "var(--d-ven)", 5); _ov(g, "M7 46L5 20", "var(--d-art)", 3); _ov(g, "M-11 46L-9 20", "var(--c-bac)", 2.5);
+  _ob(g, "M-6-30C22-33 44-25 50-7C54 9 40 25 18 30C2 33-5 22-7 6C-8-8-8-22-6-30Z", G);
+  _ob(g, "M-8-27C-24-27-40-19-48-6C-51 1-45 9-35 12C-24 15-11 9-8-1C-6-10-6-20-8-27Z", G);
+  _ol(g, "M-8-29C-7-18-6-6-4 6", "org-dk");
+  _ol(g, "M-2-28C14-29 30-24 40-14");
+  _of(g, "M10 18C16 16 22 18 23 24C24 31 19 37 14 36C9 35 7 28 8 23C8 21 9 19 10 18Z", "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  return { h0: 78, ports: { in: [-2, 46], out: [12, -30], porta: [-2, 18], gall: [16, 33], lobe: [20, 0] } };
+}
+/* heart: mass with apex down left, septum, coronary groove, aorta with arch, pulmonary split, caval stubs */
+function _orgHeart(g, G) {
+  _ov(g, "M-2-18L-2-44C-2-52-10-56-20-54C-28-52-32-46-32-38", "var(--d-art)", 8);
+  _ov(g, "M-8-52L-8-59M-15-54L-16-60M-22-53L-24-59", "var(--d-art)", 2.5);
+  _ov(g, "M12-16C8-28 2-34-4-38", "var(--d-ven)", 7);
+  _ov(g, "M-4-38C-12-40-20-38-28-34", "var(--d-ven)", 4.5); _ov(g, "M-4-38C4-40 12-38 20-34", "var(--d-ven)", 4.5);
+  _ov(g, "M20-20L20-52", "var(--d-ven)", 7); _ov(g, "M18 34L18 58", "var(--d-ven)", 7);
+  _ov(g, "M-36-2L-50-6M-34 14L-48 16", "var(--d-art)", 4);
+  _ob(g, "M-4-32C24-34 42-16 40 10C38 32 12 48-20 50C-34 44-40 24-36 2C-33-18-22-31-4-32Z", G);
+  _ol(g, "M0-30C4-10 0 14-14 44", "org-dk");
+  _ol(g, "M-34 6C-18 12 6 12 38 4");
+  _ol(g, "M-6-28C-14-18-18-6-20 8");
+  return { h0: 120, ports: { in: [20, -52], out: [-32, -38], ivc: [18, 58], apex: [-20, 50], pulm: [-28, -34] } };
+}
+/* kidney: bean with hilum, cortex rim, medulla rays, pelvis funnel, ureter, artery and vein stubs */
+function _orgKidney(g, G) {
+  _ov(g, "M-12 6C-22 12-28 18-28 30C-28 50-26 70-24 90", "var(--cc)", 4.5);
+  _ov(g, "M-50-8C-40-8-30-8-22-6", "var(--d-art)", 4); _ov(g, "M-50 10C-40 10-30 8-22 6", "var(--d-ven)", 5);
+  _ob(g, "M8-58C38-58 54-32 50 2C56 32 42 60 8 60C-8 60-16 48-19 34C-26 24-26-24-19-34C-16-48-8-58 8-58Z", G);
+  _ol(g, "M8-49C32-49 45-28 42 0C46 28 34 51 8 51C-1 51-8 43-10 32C-15 24-15-24-10-32C-8-43-1-49 8-49Z");
+  _ol(g, "M-6-30L14-38M-8-10L16-12M-8 12L16 14M-6 32L14 40");
+  _ol(g, "M16-44C30-36 38-20 38 0");
+  _of(g, "M-19-14C-8-12-2-8 2-2C-2 4-8 10-18 14C-22 8-22-8-19-14Z", "color-mix(in srgb,var(--cc) 35%,#fff)", "var(--cc)");
+  return { h0: 150, ports: { in: [-50, -8], out: [-24, 90], vein: [-50, 10], pelvis: [-12, 4], cortex: [30, 0] } };
+}
+/* lung: one lung with oblique fissure, hilum bronchus splitting into lobar and segmental branches */
+function _orgLung(g, G) {
+  _ov(g, "M-58 4L-30 4", "var(--anatomy-hi)", 6);
+  _ov(g, "M-30 4C-22-6-16-16-10-26", "var(--anatomy-hi)", 4.5); _ov(g, "M-30 4C-22 14-14 24-6 34", "var(--anatomy-hi)", 4.5);
+  _ov(g, "M-18-14L-28-22M-16-16L-8-24M-14-20L-14-32M-20 16L-30 24M-16 20L-6 28M-12 26L-10 38", "var(--anatomy-hi)", 2);
+  _ov(g, "M-58-8L-34-6", "var(--d-ven)", 4); _ov(g, "M-58 14L-34 12", "var(--d-art)", 4);
+  _ob(g, "M2-60C24-56 40-32 43 8C45 38 32 60 2 62C-24 62-40 42-42 10C-44-24-20-58 2-60Z", G);
+  _ol(g, "M-40-2C-20 8 0 22 24 40", "org-dk");
+  _ol(g, "M-8-48C8-50 22-40 30-26");
+  return { h0: 130, ports: { in: [-58, 4], out: [-58, 14], art: [-58, -8], apex: [2, -60], base: [2, 62] } };
+}
+/* stomach: J shape with fundus dome, rugae, antrum sweep, pylorus ring, oesophagus and duodenum stubs */
+function _orgStomach(g, G) {
+  _of(g, "M-38-58L-22-58L-22-36L-38-36Z", "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))", "var(--cc)");
+  _ob(g, "M-38-36C-46-24-50-8-46 10C-42 30-30 46-12 50C6 54 28 46 40 32C44 27 46 23 46 18L34 14C30 22 20 30 6 32C-8 34-22 26-28 12C-33-1-31-16-26-28C-24-32-22-34-22-36Z", G);
+  _ol(g, "M-36-10C-30 6-22 20-8 28M-28-22C-22-6-12 10 4 22M-16-30C-10-14 0 2 14 12");
+  _ol(g, "M40 15C43 19 43 25 40 29M34 14C37 18 37 26 34 30", "org-dk");
+  _ol(g, "M46 16L60 22M44 28L58 32", "org-dk");
+  return { h0: 116, ports: { in: [-30, -58], out: [60, 27], fundus: [-40, -12], antrum: [24, 38], pylorus: [40, 22] } };
+}
+/* brain lateral: cerebrum with Sylvian fissure and gyri, cerebellum with folia, tapered brainstem */
+function _orgBrain(g, G) {
+  _ov(g, "M10 50L10 64", "var(--d-art)", 5);
+  _ob(g, "M-50-6C-50-32-24-42 4-40C30-38 44-28 44-8C44 10 32 24 8 28C-18 31-50 24-50-6Z", G);
+  _ol(g, "M-12 10C2 6 18 2 34-4", "org-dk");
+  _ol(g, "M-38-20C-32-10-32 2-38 12M-26-30C-20-20-20-6-26 6M-4-32C2-22 2-8-4 2M10-30C16-20 16-6 10 4M28-22C34-14 34-2 28 8");
+  _ol(g, "M-16 6L-24-4M-10 4L-12-8", "org-dk");
+  _ob(g, "M2 24L16 24L12 56L6 56Z", G);
+  _ol(g, "M2 36C6 38 12 38 16 36");
+  _ob(g, "M22 24C34 22 46 26 48 34C50 42 42 48 32 47C24 46 20 38 20 32C20 28 20 26 22 24Z", G);
+  _ol(g, "M24 32L44 32M25 37L43 37M27 42L41 42");
+  return { h0: 110, ports: { in: [10, 64], out: [4, -40], parenchyma: [-8, -6], cereb: [34, 35], frontal: [-40, -8] } };
+}
+/* pancreas: bulky head right, tapering tail left, main duct with side branches, islet dots */
+function _orgPancreas(g, G) {
+  _ob(g, "M-50-4C-32-14-8-14 14-10C32-7 46-2 49 10C51 21 40 28 26 25C8 21-20 12-50 6Z", G);
+  _ol(g, "M-46 1C-20-2 10 0 38 10", "org-dk");
+  _ol(g, "M-30-1L-34-8M-10-1L-14-9M8 0L4-8M-28 1L-32 8M-6 1L-10 8M12 2L8 10");
+  _ol(g, "M52-6C58 4 58 16 50 24");
+  _odot(g, -20, -2, 1.6, "var(--d-art)"); _odot(g, 0, 0, 1.6, "var(--d-art)"); _odot(g, 22, 6, 1.6, "var(--d-art)");
+  return { h0: 60, ports: { in: [-10, -12], out: [49, 12], head: [36, 8], tail: [-48, 1] } };
+}
+/* spleen: crescent with top notch, trabeculae, hilar artery and vein stubs below */
+function _orgSpleen(g, G) {
+  _ov(g, "M-30 52C-28 44-26 40-22 36", "var(--d-art)", 3.5); _ov(g, "M-20 54C-19 46-17 42-13 38", "var(--d-ven)", 4.5);
+  _ob(g, "M-38-30C-8-40 28-34 44-12C52 4 44 26 20 34C-4 41-34 32-44 10C-48-4-46-22-38-30Z", G);
+  _ol(g, "M-8-36C-4-33 0-33 4-36", "org-dk");
+  _ol(g, "M-30-10C-10-2 12-2 32-10M-28 8C-8 16 12 16 30 8");
+  return { h0: 96, ports: { in: [-30, 52], out: [-20, 54], hilum: [-18, 37], pulp: [0, 0] } };
+}
+/* adrenal: small cap that sits on the kidney pole, cortex rim, medulla fold, vessel stubs */
+function _orgAdrenal(g, G) {
+  _ov(g, "M-52 8L-38 8", "var(--d-art)", 3.5); _ov(g, "M38 8L52 8", "var(--d-ven)", 4);
+  _ob(g, "M-45 18C-40-6-22-26 0-26C22-26 40-6 45 18C30 10 15 6 0 6C-15 6-30 10-45 18Z", G);
+  _ol(g, "M-36 10C-28-2-14-10 0-10C14-10 28-2 36 10");
+  _ol(g, "M-20 4C-10 1 10 1 20 4", "org-dk");
+  _odot(g, -12, -8, 1.8, "var(--d-art)"); _odot(g, 8, -12, 1.8, "var(--d-art)");
+  return { h0: 60, ports: { in: [-52, 8], out: [52, 8], cortex: [0, -22], medulla: [0, 2] } };
+}
+/* parathyroid: small oval endocrine gland with capsule rim, chief cell dots, calcium sensor arc, vessel stubs */
+function _orgParathyroid(g, G) {
+  _ov(g, "M-52 4L-40 2", "var(--d-art)", 3); _ov(g, "M40 6L52 4", "var(--d-ven)", 3.5);
+  _ob(g, "M-40-20C-22-32 22-32 40-20C48-6 44 14 24 22C6 30-20 28-32 16C-42 6-43-8-40-20Z", G);
+  _ol(g, "M-33-13C-20-22 16-22 32-11");
+  _ol(g, "M28-26C34-24 38-20 40-14", "org-dk");
+  _odot(g, -16, -4, 3, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 0, 3, 3, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 16, -4, 3, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, -2, -12, 2.4, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 8, 10, 2.4, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  return { h0: 70, ports: { in: [-52, 4], out: [52, 4], casr: [28, -28], chief: [0, 0] } };
+}
+/* pituitary: pea-sized gland with a stalk stub rising toward the hypothalamus, posterior lobe wedge */
+function _orgPituitary(g, G) {
+  _ov(g, "M0-18L0-52", "var(--cc)", 7);
+  _ob(g, "M-30-20C-30-36-16-46 0-46C16-46 30-36 30-20C30-4 16 4 0 4C-16 4-30-4-30-20Z", G);
+  _ol(g, "M-3-42C-6-28-6-14-3-2", "org-dk");
+  _ol(g, "M-18-30C-10-36 10-36 18-30");
+  _of(g, "M3-34C13-32 19-24 17-14C15-6 9-2 3-2C0-12 0-26 3-34Z", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  return { h0: 100, ports: { in: [0, -52], out: [34, -4], stalk: [0, -46], post: [10, -18] } };
+}
+/* ganglion: sensory ganglion with capsule, fibre stubs, satellite glia dots, one big soma with nucleus */
+function _orgGanglion(g, G) {
+  _ov(g, "M-52 0L-30 0", "var(--anatomy-hi)", 7);
+  _ov(g, "M30 0L52 0", "var(--anatomy-hi)", 7);
+  _ob(g, "M-32-27C-12-37 13-37 30-25C43-12 43 12 30 25C13 37-12 37-32 27C-42 13-42-13-32-27Z", G);
+  _ol(g, "M-27-21C-10-29 12-29 26-19");
+  _of(g, "M-16 0C-16-9-9-16 0-16C9-16 16-9 16 0C16 9 9 16 0 16C-9 16-16 9-16 0Z", "color-mix(in srgb,var(--cc) 62%,var(--anatomy-paper))", "var(--cc)");
+  _of(g, "M-7 0C-7-4-4-7 0-7C4-7 7-4 7 0C7 4 4 7 0 7C-4 7-7 4-7 0Z", "color-mix(in srgb,var(--cc) 45%,#1a1030)", "var(--cc)");
+  _odot(g, 2, 1, 1.8, "color-mix(in srgb,var(--cc) 70%,#fff)");
+  _odot(g, -25, -13, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 25, -12, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 0, 28, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _ol(g, "M-13-8L-22-16M13-8L22-16");
+  return { h0: 96, ports: { in: [-52, 0], out: [52, 0], soma: [0, 0], nucleus: [0, 0] } };
+}
+/* lymph node: bean capsule with subcapsular sinus, two follicles with a germinal centre dot, afferent and efferent lymphatic stubs */
+function _orgLymphnode(g, G) {
+  _ov(g, "M-38-50L-26-32", "var(--c-lymph)", 4); _ov(g, "M-47-43L-31-29", "var(--c-lymph)", 3);
+  _ov(g, "M18 44L26 60", "var(--c-lymph)", 5);
+  _ob(g, "M-52-18C-52-44-24-52 2-48C30-44 50-26 48 2C46 30 28 48-2 48C-32 48-54 28-52 0Z", G);
+  _ol(g, "M-46-16C-44-36-20-44 2-41C26-38 42-24 41 0");
+  _ol(g, "M-40 20C-20 34 12 36 34 22");
+  _of(g, "M-32-8a15 15 0 1 0 30 0a15 15 0 1 0-30 0", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  _of(g, "M8-2a14 14 0 1 0 28 0a14 14 0 1 0-28 0", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  _odot(g, 22, 5, 6, "color-mix(in srgb,var(--cc) 70%,#000)");
+  _odot(g, -17, -8, 2.2, "var(--c-plt)"); _odot(g, 22, 5, 2, "var(--c-plt)");
+  return { h0: 110, ports: { in: [-38, -50], sinus: [-30, -34], follicle: [-17, -8], germ: [22, 5], paracortex: [-6, 32], hilum: [18, 44], out: [26, 60] } };
+}
+/* bladder: dome with detrusor arcs, trigone, ureters in from above, urethra out below */
+function _orgBladder(g, G) {
+  _ov(g, "M-52-44C-44-34-36-26-30-18", "var(--cc)", 4); _ov(g, "M52-44C44-34 36-26 30-18", "var(--cc)", 4);
+  _ob(g, "M0-50C26-48 40-30 40-6C40 16 26 32 8 40L-8 40C-26 32-40 16-40-6C-40-30-26-48 0-50Z", G);
+  _ob(g, "M-8 40L8 40L8 64L-8 64Z", G);
+  _ol(g, "M-8 52L8 52", "org-dk");
+  _ol(g, "M-24-8L24-8L0 24Z");
+  _ol(g, "M-28-28C-12-36 12-36 28-28M-34-12C-16-22 16-22 34-12");
+  return { h0: 120, ports: { in: [-52, -44], out: [0, 64], inR: [52, -44], trigone: [0, 8], dome: [0, -48] } };
+}
+/* uterus: fundus, cavity, cervix, tubes with fimbriae, ovaries with follicles */
+function _orgUterus(g, G) {
+  _ov(g, "M-16-16C-26-17-32-19-38-23", "var(--cc)", 3.5); _ov(g, "M16-16C26-17 32-19 38-23", "var(--cc)", 3.5);
+  _ov(g, "M-38-23L-44-27M-38-23L-45-23M-38-23L-44-19M-38-23L-42-29", "var(--cc)", 1.2);
+  _ov(g, "M38-23L44-27M38-23L45-23M38-23L44-19M38-23L42-29", "var(--cc)", 1.2);
+  var eo = mk("ellipse", { class: "org-f", cx: -45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var eo2 = mk("ellipse", { class: "org-f", cx: 45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo2.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var _fol = "color-mix(in srgb,var(--c-plt) 45%,#000)";
+  _odot(g, -47, -14, 1.6, _fol); _odot(g, -43, -8, 1.6, _fol); _odot(g, -46, -4, 1.4, _fol);
+  _odot(g, 47, -14, 1.6, _fol); _odot(g, 43, -8, 1.6, _fol); _odot(g, 46, -4, 1.4, _fol);
+  _ob(g, "M-16-20C-8-26 8-26 16-20C20-2 15 20 8 32L-8 32C-15 20-20-2-16-20Z", G);
+  _of(g, "M-10-14L10-14L0 22Z", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  _ol(g, "M-11 18L11 18", "org-dk"); _ol(g, "M0 18L0 32");
+  return { h0: 100, ports: { in: [-45, -22], out: [0, 33], ovL: [-45, -10], ovR: [45, -10], fundus: [0, -24] } };
+}
+/* ovary: almond body with surface arcs, hilar artery and vein stubs at the hilum */
+function _orgOvary(g, G) {
+  _ov(g, "M-52 0L-40 0", "var(--d-art)", 3); _ov(g, "M40 0L52 0", "var(--d-ven)", 3.5);
+  _ob(g, "M-40-6C-30-24-5-30 15-26C33-22 42-10 40 6C38 22 20 30 0 29C-20 28-38 14-40-6Z", G);
+  _ol(g, "M-28-12C-16-20 0-23 14-21");
+  _ol(g, "M-32 4C-20 12-2 17 14 14", "org-dk");
+  return { h0: 70, ports: { in: [-52, 0], out: [52, 0], dom: [0, 0], surf: [0, -27] } };
+}
+/* testis: oval body with tubule arcs, rete lines, vessel stubs above */
+function _orgTestis(g, G) {
+  _ov(g, "M-52-8L-40-4", "var(--d-art)", 3); _ov(g, "M40-8L52-8", "var(--d-ven)", 3.5);
+  _ob(g, "M-40-20C-22-32 22-32 40-20C48-6 44 14 24 22C6 30-20 28-32 16C-42 6-43-8-40-20Z", G);
+  _ol(g, "M-28-10C-14-16 8-18 24-12");
+  _ol(g, "M-30 6C-14 14 8 16 26 8", "org-dk");
+  _ol(g, "M-4-20C-2-8-2 8-4 20", "org-dk");
+  return { h0: 70, ports: { in: [-52, -8], out: [52, -8], parenchyma: [0, 0], barrier: [0, -24] } };
+}
+/* thyroid butterfly: two lobes, isthmus bridge, trachea rings behind, parathyroid dots */
+function _orgThyroid(g, G) {
+  _ov(g, "M-7-40L-7 40M7-40L7 40", "var(--anatomy-hi)", 2);
+  _ov(g, "M-7-28L7-28M-7-12L7-12M-7 24L7 24M-7 36L7 36", "var(--anatomy-hi)", 1.2);
+  _ob(g, "M16-32C28-30 35-16 33 4C31 22 25 32 16 32C8 32 6 20 8 2C10-14 11-28 16-32Z", G);
+  _ob(g, "M-16-32C-28-30-35-16-33 4C-31 22-25 32-16 32C-8 32-6 20-8 2C-10-14-11-28-16-32Z", G);
+  _ob(g, "M-10 6L10 6L10 16L-10 16Z", G);
+  _ol(g, "M14-20C18-10 18 6 14 20M-14-20C-18-10-18 6-14 20");
+  _odot(g, -30, 8, 2, "var(--c-plt)"); _odot(g, 30, -4, 2, "var(--c-plt)");
+  return { h0: 90, ports: { in: [16, -34], out: [0, 36], isthmus: [0, 11], lobeR: [22, 0], lobeL: [-22, 0] } };
+}
+/* eye: sclera ball with cornea bulge, iris and pupil facing left, retina arc, optic nerve stub right */
+function _orgEye(g, G) {
+  _ov(g, "M26 0L54 0", "var(--c-plt)", 8);
+  _ob(g, "M-36-4C-34-22-16-32 4-30C24-28 34-12 32 4C30 20 14 30-4 29C-22 28-36 14-36-4Z", G);
+  _of(g, "M-39 0C-39-6-35-11-30-11C-25-11-21-6-21 0C-21 6-25 11-30 11C-35 11-39 6-39 0Z", "color-mix(in srgb,var(--c-endo) 70%,var(--anatomy-paper))", "var(--c-endo)");
+  _odot(g, -30, 0, 5, "#241a12");
+  _odot(g, -32, -3.5, 1.5, "#ffffff");
+  _ol(g, "M16-15C23-5 23 7 15 17");
+  return { h0: 70, ports: { in: [-41, 0], out: [54, 0], retina: [16, 0], lens: [-20, 0] } };
+}
+/* Real-art store, filled by buildScene after this lib: _ORG_ART[kind] = { vb:[x,y,w,h],
+ * pfx:"oaxxx", body:"<inner svg markup>" }. Ports are fractions of the viewBox, measured
+ * off the slimmed art (see tools/figures/dev/svgslim.py); content fills the frame. */
+var _ORG_ART = {};
+var _ORG_FRAC = {
+  liver: { in: [.35, .95], out: [.40, .01], porta: [.35, .95], hepvein: [.40, .01], gall: [.55, .66], lobe: [.15, .70] },
+  heart: { in: [.30, .01], out: [.48, .01], aorta: [.48, .01], ivc: [.28, .90], apex: [.70, .97], pulm: [.60, .08] },
+  kidney: { in: [.04, .36], out: [.38, .97], vein: [.04, .46], pelvis: [.36, .41], cortex: [.62, .45], hilum: [.28, .41] },
+  lung: { in: [.46, .53], out: [.44, .60], art: [.44, .48], apex: [.24, .30], base: [.24, .87], trachea: [.49, .01], carina: [.49, .50], hilumL: [.42, .58], hilumR: [.56, .58], apexR: [.75, .34], baseR: [.75, .86] },
+  stomach: { in: [.42, .00], out: [.50, .95], fundus: [.38, .10], antrum: [.52, .30], pylorus: [.60, .35] },
+  intestine: { in: [.58, .38], out: [.50, .95], duodenum: [.60, .40], jejunum: [.42, .60], ileum: [.50, .72], cecum: [.60, .82], colon: [.28, .60], rectum: [.50, .92] },
+  brain: { in: [.60, .97], out: [.42, .04], parenchyma: [.42, .42], cereb: [.76, .78], frontal: [.08, .40], stem: [.60, .93], carotid: [.16, .75] },
+  pancreas: { in: [.50, .08], out: [.95, .50], head: [.85, .45], tail: [.06, .45], body: [.50, .45] },
+  spleen: { in: [.38, .78], out: [.52, .78], hilum: [.45, .72], pulp: [.50, .38] },
+  bowel: { in: [.21, .03], out: [.80, .99], coils: [.52, .52] },
+  colon: { in: [.75, .72], out: [.50, .98], caecum: [.75, .72], rectum: [.50, .98], ascending: [.88, .58], transverse: [.50, .62], descending: [.23, .44], sigmoid: [.42, .82] },
+  bladder: { in: [.25, .01], out: [.50, .99], inR: [.73, .01], trigone: [.50, .70], dome: [.50, .28] },
+  eye: { in: [.02, .50], out: [.99, .55], retina: [.75, .50], lens: [.19, .51], cornea: [.08, .50], nerve: [.99, .55] },
+  ear: { in: [.35, .45], out: [.02, .55], canals: [.57, .18], vestibule: [.50, .45], cochlea: [.55, .75], nerve: [.02, .55] },
+  skin: { in: [.50, .13], out: [.50, .97], surface: [.50, .13], epidermis: [.50, .17], dermis: [.47, .55], hypodermis: [.50, .92] },
+  muscle: { in: [.02, .50], out: [.99, .71], belly: [.32, .48], fibre: [.72, .58] },
+  joint: { in: [.50, .04], out: [.52, .96], femur: [.50, .20], joint: [.54, .58], patella: [.51, .52], tibia: [.52, .80], fibula: [.40, .78] },
+  vessel: { in: [.50, .01], out: [.50, .99], lumen: [.50, .05], wall: [.90, .50] }
+};
+/* liver-4 is the bare mass, so add the missing bits procedurally in art units
+ * (fractions of the liver-4 viewBox): a gallbladder blob under the art at the
+ * gall port (its fundus peeks below the inferior edge), a portal stub rising
+ * to the porta tip and a hepatic stub leaving at the hepvein tip. Drawn before
+ * the art group so the mass covers the joins; the inner flip mirrors them. */
+function _orgLiverExtra(inner, A, opts) {
+  var vw = A.vb[2], vh = A.vb[3];
+  var X = function (f) { return f1(f * vw); }, Y = function (f) { return f1(f * vh); };
+  var g = mk("g", {}, inner);
+  if (opts.dim) g.setAttribute("opacity", ".5");
+  _ov(g, "M" + X(.35) + " " + Y(.95) + "L" + X(.35) + " " + Y(.78), "var(--d-ven)", 11);
+  _ov(g, "M" + X(.40) + " " + Y(.01) + "L" + X(.40) + " " + Y(.14), "var(--d-ven)", 11);
+  var gb = _of(g, "M" + X(.55 - 17 / vw) + " " + Y(.63) + "a17 23 0 1 0 34 0a17 23 0 1 0 -34 0",
+    "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  gb.setAttribute("stroke-width", "2.2");
+  return g;
+}
+/* draw the injected art centred on x,y at w px wide. The art is clipped to its
+ * frame; tint overlays an organ-shaped translucent mask (the art itself, reused
+ * as a mask); dim dulls the art. Art ids are suffixed per instance so two of
+ * the same organ on one page never share gradient, clip or mask ids. */
+function _orgArt(parent, kind, x, y, w, opts, A) {
+  var vb = A.vb, vw = vb[2], vh = vb[3], cx = vb[0] + vw / 2, cy = vb[1] + vh / 2;
+  _orgN++;
+  var uid = "u" + _orgN;
+  var outer = mk("g", { class: "org org-art org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var sx = w / vw, sy = opts.h ? opts.h / vh : sx, fx = opts.flip ? -1 : 1;
+  var inner = mk("g", { transform: "translate(" + f1(-fx * cx * sx) + " " + f1(-cy * sy) + ") scale(" + (fx * sx).toFixed(4) + " " + sy.toFixed(4) + ")" }, outer);
+  var defs = mk("defs", {}, inner);
+  var cid = A.pfx + uid + "-frame";
+  var cp = mk("clipPath", { id: cid }, defs);
+  mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, cp);
+  if (kind === "liver") _orgLiverExtra(inner, A, opts);
+  var art = mk("g", { class: "org-halo", "clip-path": "url(#" + cid + ")" }, inner);
+  var aid = A.pfx + uid + "-art";
+  art.setAttribute("id", aid);
+  art.innerHTML = A.body.split('id="' + A.pfx + '-').join('id="' + A.pfx + uid + '-')
+    .split('url(#' + A.pfx + '-').join('url(#' + A.pfx + uid + '-')
+    .split('href="#' + A.pfx + '-').join('href="#' + A.pfx + uid + '-');
+  if (opts.dim) art.setAttribute("opacity", ".5");
+  if (opts.tint) {
+    var mid = A.pfx + uid + "-tintm";
+    var m = mk("mask", { id: mid, maskUnits: "userSpaceOnUse", x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, defs);
+    mk("use", { href: "#" + aid }, m);
+    var tg = mk("g", { "clip-path": "url(#" + cid + ")" }, inner);
+    mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh), fill: opts.tint, mask: "url(#" + mid + ")" }, tg);
+  }
+  var ports = {}, F = _ORG_FRAC[kind], k;
+  for (k in F) ports[k] = [Math.round((x + fx * (vb[0] + F[k][0] * vw - cx) * sx) * 10) / 10, Math.round((y + (vb[1] + F[k][1] * vh - cy) * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(vh * sy * 10) / 10, ports: ports, art: true };
+}
+/* dispatcher: outer g carries the theme class and gradients, inner g the local drawing scaled to w */
+function organ(parent, kind, x, y, w, opts) {
+  opts = opts || {};
+  if (_ORG_FRAC[kind] && _ORG_ART[kind]) return _orgArt(parent, kind, x, y, w, opts, _ORG_ART[kind]);
+  var outer = mk("g", { class: "org org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var G = _orgDefs(outer);
+  var inner = mk("g", {}, outer);
+  var r;
+  if (kind === "liver") r = _orgLiver(inner, G);
+  else if (kind === "heart") r = _orgHeart(inner, G);
+  else if (kind === "kidney") r = _orgKidney(inner, G);
+  else if (kind === "lung") r = _orgLung(inner, G);
+  else if (kind === "stomach") r = _orgStomach(inner, G);
+  else if (kind === "brain") r = _orgBrain(inner, G);
+  else if (kind === "pancreas") r = _orgPancreas(inner, G);
+  else if (kind === "spleen") r = _orgSpleen(inner, G);
+  else if (kind === "parathyroid") r = _orgParathyroid(inner, G);
+  else if (kind === "ganglion") r = _orgGanglion(inner, G);
+  else if (kind === "lymphnode") r = _orgLymphnode(inner, G);
+  else if (kind === "eye") r = _orgEye(inner, G);
+  else if (kind === "bladder") r = _orgBladder(inner, G);
+  else if (kind === "uterus") r = _orgUterus(inner, G);
+  else if (kind === "ovary") r = _orgOvary(inner, G);
+  else if (kind === "testis") r = _orgTestis(inner, G);
+  else if (kind === "thyroid") r = _orgThyroid(inner, G);
+  else if (kind === "adrenal") r = _orgAdrenal(inner, G);
+  else if (kind === "pituitary") r = _orgPituitary(inner, G);
+  else throw new Error("organ: unknown kind " + kind);
+  var sx = w / 100, sy = opts.h ? opts.h / r.h0 : sx, fx = opts.flip ? -1 : 1;
+  inner.setAttribute("transform", "scale(" + (fx * sx).toFixed(3) + " " + sy.toFixed(3) + ")");
+  var ports = {}, k;
+  for (k in r.ports) ports[k] = [Math.round((x + fx * r.ports[k][0] * sx) * 10) / 10, Math.round((y + r.ports[k][1] * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(r.h0 * sy * 10) / 10, ports: ports, art: false };
+}
+organ.kinds = ["liver", "heart", "kidney", "lung", "stomach", "intestine", "brain", "pancreas", "spleen", "bladder", "uterus", "ovary", "testis", "thyroid", "eye", "ganglion", "bowel", "colon", "ear", "skin", "muscle", "joint", "vessel", "adrenal", "lymphnode", "parathyroid", "pituitary"];
+
+_ORG_ART["bowel"]={vb:[0,0,215.7,212.6],pfx:"oasma",body:"<defs><clipPath clipPathUnits=\"userSpaceOnUse\" id=\"oasma-a\"><path d=\"M6.8 5.2l215.4 0 0 212.7-215.4 0Z\" /></clipPath></defs><path clip-path=\"url(#oasma-a)\" d=\"M59.2 179.5l1 7.5 3.9 8.1 7 7.2 4.7 2.8 5.5 2 6.3 1 7.1 -.1 13 -2.6 12.8 -6 7.1 -6.6 1.7 3.7 3.8 4.4 5.5 4.6 6.8 4.3 7.7 3.6 8.2 2.3 8.3 .5 8 -1.8 7.3 -4.5 6.2 -7.8 5.2 -.6 2.9 -1.2 6 -4.8 3 -3.7 5.6 -10.4 4.8 -14.9 2 -11.7 .4 -11.6 -.9 -11.2 -1.9 -10.7 -5.7 -19.1 -10.9 -23.7 2.8 -7.4 1.7 -8.1 .7 -8.5 -.2 -8.6 -2.8 -16.3 -5.4 -13.2 -3.4 -4.7 -3.8 -3.1 -4.2 -1.7 -4.2 -.6 -8.6 1.6 -9.6 5 -33 22.8 -8.2 3.8 -8.4 2.8 -16.3 2.6 -14.5 -.9 -6 -1.6 -5 -2.4 -3.7 -3 -14.3 -17.2 -7.4 -6.2 -4.1 -2.2 -4.3 -1.3 -4.5 -.2 -4.7 1 -4.9 2.5 -3.1 2.9 -4.4 8.8 -2.1 11.6 -.4 12.9 1.7 18.4 -4 5.4 -2.7 7.4 -1.5 8.9 .1 20.8 3.6 21.8 6.3 19.2 3.9 7.6 8.2 11.2 6.5 5.8 7.7 3.5 9.1 .5Z\" fill=\"#e6c1c7\" fill-rule=\"evenodd\" /><path clip-path=\"url(#oasma-a)\" d=\"M59.3 179.5l1 7.5 3.9 8.1 7 7.2 4.7 2.8 5.5 2 6.3 1 7.1 -.1 13 -2.6 12.8 -6 7.1 -6.6 1.7 3.7 3.8 4.4 5.5 4.6 6.8 4.3 7.7 3.6 8.2 2.3 8.3 .5 8 -1.8 7.3 -4.5 6.2 -7.8 5.2 -.6 2.9 -1.2 6 -4.8 3 -3.7 5.6 -10.4 4.8 -14.9 2 -11.7 .4 -11.6 -.9 -11.2 -1.9 -10.7 -5.7 -19.1 -10.9 -23.7 2.8 -7.4 1.7 -8.1 .7 -8.5 -.2 -8.6 -2.8 -16.3 -5.4 -13.2 -3.4 -4.7 -3.8 -3.1 -4.2 -1.7 -4.2 -.6 -8.6 1.6 -9.6 5 -33 22.8 -8.2 3.8 -8.4 2.8 -16.3 2.6 -14.5 -.9 -6 -1.6 -5 -2.4 -3.7 -3 -14.3 -17.2 -7.4 -6.2 -4.1 -2.2 -4.3 -1.3 -4.5 -.2 -4.7 1 -4.9 2.5 -3.1 2.9 -4.4 8.8 -2.1 11.6 -.4 12.9 1.7 18.4 -4 5.4 -2.7 7.4 -1.5 8.9 .1 20.8 3.6 21.8 6.3 19.2 3.9 7.6 8.2 11.2 6.5 5.8 7.7 3.5 9.1 .5\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M179.6 131.1l6.2 -10.3 5.5 -15.5 3.4 -20.6 .7 -12.5 -.9 -11.5 -2.8 -10.5 -4.9 -9.5 -2.9 -3.8 -6.3 -5.1 -6.4 -1.5 -3.1 .6 -5.5 4.2 -2.3 3.6 .4 -.9 -2.2 1.4 -3.6 .4 -8.2 -1.2 -4.4 -1.5 -3.3 -2.2 -1.5 -2.6 -4.8 12.5 -3.4 5 -4.1 4.2 -4.8 3.5 -6.3 3.2 -11.3 3.5 -9.9 .2 -8.9 -2.4 -8.3 -4.4 -18.7 -13 -11.1 -4.3 -7.3 .1 -3.6 1.2 -3.2 1.9 -4 5 -.9 3.1 .2 6.8 2.5 7.4 4.8 7.4 -4.2 .9 -5.8 3.8 -1.9 2.3 -2.1 5.2 .2 9 3.6 12.4 1 7.5 -1 7.2 -3 8.9 -.9 7 1.5 6.1 4.3 4.4 7.7 1.7 5.2 -.4 -18.8 21.8 -1.2 4 .4 4 1.3 2.4 2.9 2.4 7.9 2.3 6.6 -.9 3.6 -2.6 14 -15.2 3.3 11 3.1 5.4 5.2 4.8 8 3.6 8.9 1.8 11.1 .2 8.4 -1.7 12.7 -5 5.3 -.7 5.4 .6 11.7 3.3 4.5 0 6.9 -2.2 7.9 -5.2 .2 5.1 1.7 4.4 3 4.6 4.4 4.2 6.7 3.2 3.8 .8 3.7 .1 6.9 -1.6 3.1 -1.6 5.3 -4.7 3.8 -6.4 2.4 -7.2 1.9 -9.2 .2 -11.2 -2.1 -11.6 -2 -5.8 -2.7 -5.3 -3.4 -4.5 -4.3 -3.3 -5.2 -1.8Z\" fill=\"#e6c1c7\" fill-rule=\"evenodd\" /><path d=\"M111.7 140.4l-4.9 -.5 -7 -3.3 -12 -12 -4.3 -3.2 -2.6 -.9 7.9 -3.3 6.6 -6.5 1.7 7.1 3.1 6.6ZM105 167.9l-7.9.2-5.9-1.4-6-4.5-4-6.3 3.3 12.6 3.3 3.4 3.4.6 4.9-.6ZM45.5 102.2C45.5 105.8 46.7 109.3 45.9 112.9A66 66 0 0 1 43.8 120.4C47.1 118.2 51.3 116.8 56.3 117.3L56.7 117.3C54.2 115.9 52.1 114.6 51.3 112.9C50 110.6 48 106.2 45.9 102.2L45.5 102.2ZM121.6 97.3l.6-3.6 1.6-3.3 7.4-8.3-8 6-2.8 1.2-2.5 0ZM80.4 92.4l5.8-6.7-5.2-1.3-4.5-2.2-5.6-4.6-5-5.7 9.5 16.5Z\" fill=\"#bb5a74\" fill-rule=\"evenodd\" /><path d=\"M135 39.6l-5.3 2.9-4.5 4.1-5.2 7-3.3 6 5.7-3.5 5.2-4.4 4.2-5.5Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M147.6 164.8l-16.7 1.3 7.7 1.4Z\" fill=\"#bb5a74\" fill-rule=\"evenodd\" /><path d=\"M131.2 116.8l1.9 3 3.2 2.4 4.2 1.4 4.9 .2 5.2 -1.4 5.2 -3.3 4.9 -5.5 4.2 -8 3.2 -10.8 1.9 -14 -2.4 9.9 -2.4 6.2 -6.8 12.5 -4.4 5.2 -5 3.8 -5.5 2 -6.1 -.4ZM57.6 114.6l4.6 2.6 7.7 1.3 8.9-.4 8.3-2.5 3.3-2.2 2.5-2.8.9-9.1 2.8-6.4-7.8 11.5-6.6 5.4-6.1 2.6-6.6 1.5-6.4.1ZM162 191.8l2.9 4.4 4.7 3.7 9.1 3 6.5-.5 3.1-1.2 5.5-4.3 4.7-7.1 3.3-9.9 1.2-12.6-1.5-15.4-.2 14.9-1.9 12.5-4.6 11.5-3.6 4.5-4.7 3.3-5.9 1.7-3.6 0-8.4-2.6ZM114.2 184.8l7.6-2.1 14.7 4.9 7.7.3 7.3-3.6 12.8-10.2-3.8 1.5-12.5 7.5-3.8 1.3-3.8.1-12.7-3.7-7.1-.6-15.6 6.2-8.5 2.1-12.7.8-7.1-.7-4.9-1.5 10.8 3.6 8.3.4 10.5-1.7Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M107 130.6l3.9 5.1 6.9 5.4 9.5 4.3 5.6 1.4 12.6.3 6.9-1.4 6.8-2.4 11.3-7.1 8.5-9.5 6-11.3 5.3-19-5.3 15.3-6.2 11.3-8.9 10.3-5.6 4.3-6.5 3.5-7.4 2.4-7.6 1.3-7 0-6.3-1.1-10.6-4.1-7.4-4.9ZM27.9 145.7l4.8 1.7 3.7 0 4.4-1.7 9-6.6 4.5-2.1 5.3-.8 6 1.1 5 2.3 5.5 4.6 5.9 10.8 4.8 5.4 6.6 3.9 5.1 1-5.8-3.8-5.3-5.5-10.8-17.3-3.1-3-6.8-3.5-7-.7-6.3 1.4-4.8 2.8-11.2 9.5-4.2 1.4ZM37.6 119.9l-8.3 15.9 3.5-3 9.1-14.2 1.9-4.2.5-4.2-.6-6.7-1.7-4.1-2.9-3.9 1.9 5.9.7 7.6-1.1 5.4ZM36.3 71.1l4.4-.3 6.3 1.1 9.5 5.2 5.3 6.5 4.5 9.4 2.6 2 5.8-.2 3.4-1.4 1.2-1.4-4.6-3.1-3.8-8.4.4 3.5-1.6.1-3.5-2.6-7-8.3-7.8-3.7-8.8-.7-8.1 2ZM111.7 140.4l-9.1-12.4-12.5-.9 10.5 10 6.2 2.8Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M172.5 33l-3.4.9-3.1 1.8-3.7 5.5-2.3 10-.6 23.2-1.1 7.6-3.9 8.8-8.4 9.9-.3 2.2 1.1 1.6 1.4-2.9 9-9.7 3.4-7.2 2.9-15.3.2-19.3.9-8.3 2.7-6 2.3-1.9ZM175 85.7l-1.6 12.7-5.1 14.2-5.5 8-7.3 5.1 5.4-1.5 2.9-2.1 5.6-6.6 2.4-4.5 3.2-11.2ZM42.9 43.1l-6.6 1.4-5.3 4.4-1.4 4.9 1.3 6.6.3-5.8 2.8-6 3.6-3.3ZM26 97.8l-1.9-5.5-.6-4.7 1.9-5.7 3.3-2.9 4.8-2.2 8.1-.9 7.6 1.9 4.2 2.7 5 6.2 7.3 11.5 4.1 1.3 4.4-.4-4.8 1.1-5.2-.8-2.6-2-5.6-9.2-3.9-4.1-5.1-3.2-6.2-1.4-7.3 1.3-5.6 3.8-2.1 5.1ZM88.4 87.1l5.2-4.5 4.4-1.5 7.7.8 5.6 2.9-5.1-1.6-7.1-.4-5.3 1.2ZM40.9 125.7l6.6-4.4 7.1-1.4 12.1 2.6 15.5 1.3 2.7 1.5 2.2 2.6-3.9-2.8-15.2-.3-15.4-2.9-6.4.8ZM62.6 142.7l4.4 1.5 5.9 4.5 4.8 6.9 2.4 5.7-2.4-8.5-3.8-6.5-5.6-4.6-4.9-1.9-5.2-.1-5.2 1.6-5.1 3-7 6.4 11.3-6.6 4.8-1.3ZM180.8 156.3l-2.7-.7-6.5.8-19.6 8.8 17.6-10.6 5.9-1.1 2.7.7 2.5 1.7ZM100.1 173.7l12.3-7.1 4-1.4 5.7.4 11.3 3.8-16.4-2.1ZM183.4 152.3l3.7 4.7 2.1 6.3.3 7.1-3.3 15 1 2 1.2.5-.2-2.8 2.8-10.3.4-10.1-2-6.4Z\" fill=\"#fcf8f8\" fill-rule=\"evenodd\" /><path d=\"M130.4 83.2l8.3-6 5.9-5.5 3.8-5.2 7.7-14.1-.9 23.4-1.4 6.7-2.7 5.1 1.7-7.9-.8-3-2.2-2.5-1.5-.8-3.1 0-10.4 5.7Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M123.7 149.7l9.2 3.4 4.7.9 9.5.1 9.5-2.5 4.7-2.3 9-6.8-9.3 5.5-9.2 2.8-12.4 1Z\" fill=\"#fcf8f8\" fill-rule=\"evenodd\" /><path d=\"M44.6 174.2l4.8 -6.7 1.7 -4 .6 -5.4 1.6 -1.2 1.7 .4 1 2.3 -1.3 6.3 -2.8 3.3 -7 5.2Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M61.3 83.9l4.2 9.4 3.3 2.7 3.4.4 3.7-.6 3.7-2.9-3.2-2.2-2.2-3.6-.5 3.2-2.6.8-5.2-1.8-2.9-3.5ZM80.9 116.8l5.5-1.6 4.9-3.3 2-3.7.9-6.1-4.4 8.5-3.4 3.3-5.1 3.3ZM99.3 135.1l6.5 4.3 3 .8 1.7-.5-.9-2.6-3.6-4.8-.3 2.3-1.7 1.4ZM51.8 137.7l8-.5 6.8 1.7 3.4 1.7 6 5.2 4.1 8-2.8-9.3-2.8-4.3-3.8-3.3-4.8-1.8-5.9-.7-3.7.8ZM145.4 123.6l7-1.9 7.6-5.9 4.4-6.9 3.1-9.8-3 7.6-5.5 8.1-5.7 4.9Z\" fill=\"#d18293\" fill-rule=\"evenodd\" /><path d=\"M146.7 67.5l2.9-2.4 3.6-.9 2.6 2 1.2 3.6-.6-17.3ZM35.1 41.8l.7-4.2 1.6-2 2.7-.5 2.3.7 3.9 4.7-2.9-.4-6.6.9ZM172.5 30.7l4.7 -2.8 2.1 -.2 3.5 1.5 2.5 3.4 1.5 7.3 -3.8 -4.3 -6.6 -4.9ZM183.7 125.2l1.6 5.8-2.7-1-2.7 1ZM149.6 188.8l1.7 2.4 4.2 3.5 7.4 2.9-2.5-3.3-2.2-4.9-.6-6.4-4.6 3.6Z\" fill=\"#bb5a74\" fill-rule=\"evenodd\" /><path d=\"M200.9 81.3l6.2 13.1 7 22.4 3.2 17.7.7 18.3-2.5 15.6-3.4 10.4-7.3 13.3-6.1 6 5.3-9.3 2.2-8 .8-10.8-1.2-14.2.6.6.7-.4 1.6-3.8 1.5-12.1-1.1-18-1.2-6.1-3.2-9.2-3.7-5.1-3.5-1.3-2.6 2.4-1.5 4.7-.9.9 3.2-17.9Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M190.9 111.1l-5.2 13.2 2.2 7.1 3.1.3 4.1 2.8-3.2-4.1-1.9-5.1.6-2.9 1.7-2.2 1.5-.4 1.7 1-4.6-8.4ZM45.1 179l6.7 1 6.7-1-1.8-4.3-.7-7.2-6.7 5.3Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M46.7 176.5l5.1-6 3.6-2.6 2.5 9-3.8-4.1-1.6-.2-1.7 1.1Z\" fill=\"#bb5a74\" fill-rule=\"evenodd\" /><path d=\"M70.9 189.3l2.9 1.8 9.6 1.8 12.7 .5 7.5 -.9 16.2 -5.8 5 -.3 4.4 1.7 -4.6 6 -4.3 3.8 -9.7 5.1 -8.5 2.9 4.8 -4.3 .6 -1.9 -1.1 -.8 -10.2 -1 -12.6 -2.4 -9.1 -2.7 -3.8 -2.1ZM138.4 202.1l2.3 2.5 6.3 4.3 7.9 3.1 8.3 1.6 7.7-.1 3.3-.8 6.7-2.7 4.1-3.5-11.6-.9-4.2-1.5-2.9-2.4.1 2.9-2.2 2.9-5 1.5-3.7-.2-10.3-3.2ZM129.1 193.3l2.1-2.6 1.4-.5 9.3 1.3 5.6-.9.8 3.6-4.9-1.1-4.9 1.6-2 2.5-.2 3.7-5.3-4.1-1-1.9.5-1.6ZM15.9 74.2l2.3 9.2.8 11.3 3.9 13.1 1.1 6.6-.2 4.7-3.4 12.8.2 6.4 1.8 3.9 4.4 4.4 5.7 2.5 5.9.2-9 10.4-4.3 3.8.2-3-6-9.5-2.7-8.3-.3-9.7 2.8-12.7.4-5.2-3.8-19.5 1.4-15.1-.6-4.1Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M28.4 149.7l2.4 3.6.5 6.5 1.5-3 5.6-6.7-3.1-.7-3.1.3Z\" fill=\"#bb5a74\" fill-rule=\"evenodd\" /><path d=\"M25.9 55.9l2.1 9.3 2.2 4.9 2.3 2.7-5.8 2.2-5.5 3.5 2.1-3.9 1.1-4.4-1.1-14.1.5-3.9 1.6-3Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M25.1 54.6l.1-3.5 1.3-3.3 3.1-3.8 3.5-2.7 1.2-5.3 3.1-3.5 1.8-.4 3.7 1.2 8 7.6-4.5-8.3-4.2-3.6-5.1-1.3-2.5.5-3.6 2.1-4.1 6-3 12 .5 10.7 2.1 3.7ZM70.1 53.7l9.5 6.1 9.1 3.3 10.5 1.1 5.5-.6 5.6-1.6 5.6-2.8 8.3-12.5-12.1 9.8-10.2 3.1-12.9.6-5.9-1.3-8.4-3.2ZM203.8 39.1l.8 11.8-1 14-2.6 9.4-4.8 8.8.9-15.1-.8-7.4-2.2-7.3 3.9 6.2 1.4.5 1.8-1 2.4-8.8Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M122 53.8l5.1-7.2 4.1-2.9ZM85.4 47.6l11.2 1 12.1-.8 7.8-2 6.9-3.5-9.1 2.6-13.9 2.6-8.8.8ZM38.7 12.9l-8.3.7-5.5 3.2-2.5 2.9-3.8 9.3-1.6 15 2.7-11.9 5.3-11.2 5.7-5.4ZM13.5 131.1l-2.5-12.6-1-11.8.4-15 1.4-10.5-.3 27.7ZM127.9 112.4l-3.2-10.1-.3-6 1.8-5.3 4.7-4.7-3.4 6-1.5 5.8.4 7.3ZM205.8 153.2l-4.1-12-5-7 4 2.9 3.5 5.6 1.4 4.9Z\" fill=\"#fcf8f8\" fill-rule=\"evenodd\" /><path d=\"M97.9 95.6l-2.5 7.7 -.4 5.6 1.1 6.2 2.9 7.1 10.1 15 5.9 5.4 7.2 3.9 14.4 3.2 5.4 .1 9.9 -1.3 12.8 -5.3 7.6 -5.5 7.1 -6.7\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M38.8 149.2l6.9 -7 7.4 -4.5 8.2 -1.1 9.1 3 4.4 3.4 3.1 4.1 2 4.6 4.7 16.9 2 2.5 3 1.2 3.5 .1 6.5 -1.7 11.6 -6.2 5.6 -1.7 5.6 .6 12.8 3.9 7.7 -.9 6.6 -3 18.2 -11.2 7.2 -1.6 3.4 .6 5.3 3.7 2.8 5.2 .7 9.2 -3.3 16.5 .8 3 2.5 .7\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M168 168.9l1.3 1.1-.1 2.6-10.8 10.5M52.1 155.6l2.8.2 1.2 1.9-.3 9.5M95.5 110.7l-5.8 6.1-6.4 3-8.8 1.1-12.7-1.9-5.3-2-3.8-2.6-9.6-17.3-3-3.6-1.3-.6-1 .5\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M56.3 117.3l-6.8.5-5.5 2.3-6.2 5.7-7.8 10.6-2.4 1-1.3-1.4M81.3 120.4l6.5 4.1 12 12 7 3.3 4.9.5M145.5 107.6l-2.4-3-.1-3 8.1-12.2 4.5-10.4.8-7-.1-16.1 2.3-12.7M81.3 155.9l4 6.3 6 4.5 5.9 1.4 7.9-.2\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M45.5 102.3C45.5 105.8 46.8 109.4 45.9 112.9A63.7 63.7 0 0 1 43.8 120.4M118.4 89.3l2.1 0 2.8-1.2 8-5.9-7.4 8.2-1.6 3.3-.6 3.6M111.7 140.4l-4.9-.5-7-3.3-12-12-4.3-3.2-2.6-.9 7.9-3.3 6.6-6.5 1.7 7.1 3.1 6.6ZM105.1 167.9l-7.9.2-5.9-1.4-6-4.5-4-6.3 3.3 12.6 3.3 3.4 3.4.6 4.9-.6Z\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M45.5 102.3l.6 9.6-2.3 8.6 5.7-2.5 7.3-.6-4.8-3.4ZM147.6 164.8l-16.7 1.3 7.7 1.4M121.7 97.4l.6-3.6 1.6-3.3 7.4-8.3-8 6-2.8 1.2-2.5 0Z\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M176.2 69.9l-1.9-.1-1.8 3.1-1.6 22.8-2.8 9.4-4.2 8.6-4.2 5.5-4.7 3.7-5.1 2.2-5.4.7-5.6-.5-4.8-1.6-5.6-4.6-2.6-4.6-4.3-16.2-2.7-6.8-5.8-8.4-5.2-3.3-5.2-1.3-4.5 0-3.8 1.1-6.2 4.4-9.5 9.8-8.3 1.9-3.8-1.9-6.5-11-7.1-6.1-9.1-3.3-9.2-.3\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M160.4 38.6l-7.5 19-4.5 7.9-6.8 7.9-10.3 8.9M59.3 65l6.6 7M80.5 92.4l5.8-6.7-5.2-1.3-4.5-2.2-5.6-4.6-5-5.7 9.5 16.5M90.1 127.1l11.7.4M135 39.7l-5.3 2.9-4.5 4.1-5.2 7-3.3 6 5.7-3.5 5.2-4.4 4.2-5.5\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M175.9 71.6l.1-3.2-1.8-2.5-1.4 4.1.8 3.8 2.3 2.2M186.7 187.1l-.8 5.3M167.9 170.5l2.5-2.2M52.6 155.9l.9-1.7M96.8 95.9l2.9 1.4 -1.8 1.7 -1.8 -.7M58.8 66.2l2.5-2.2-.8 4.9 4.2-2.7-1.3 5.8M38.8 93.8l.9-3.5M26.7 135.1l-.3 2.6 1.6.8 1.4-2.1-.5-2.6\" fill=\"none\" stroke=\"#e6c1c7\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M127.6 192.9l2.8-5M69.3 37.3l7.2 10.1 6.9 3.7M201.7 77.8l-7.2 10.6M20.9 83.2l-2.1-5.3-2.1-9.4M179.6 28.1l2.5.6 3.4 4 1.8 5.3-.3 3M190.8 107.6l7.7 15.7.2 5.1-2.4 2.2M183.8 124.4l.3 2.3 2.1 3.9M149.6 189.2l1 2.4 4.2 3.4 8.9 3.1M35.1 41.3l.4-3.2 3-2.6 4.5 1 3 3.1\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M82.2 53l0-4-2.9 1.3-.4-3.3-3.8 1.1-.6-1.3-1.6.9M195 127.6l3.4 2 2.2-.8-.4-1.6-3.5-2.2\" fill=\"none\" stroke=\"#e6c1c7\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M43 180.8l12.9 -13.8 3.3 11 5.4 7.9 6.5 4.3 9 2.8 8.3 1.1 10.2 -.6 5.3 -1.3 11.3 -4.6 6.8 -1.1 5.4 .6 11.7 3.3 4.5 0 6.9 -2.2 7.9 -5.2 -.2 3.1 1 4.1 4 6.8 4.4 4.2 6.7 3.2 3.8 .8 7.2 -.4 6.4 -2.7 5.3 -4.7 5.2 -10 3.2 -14.7 -.1 -9.4 -2.1 -11.6 -4.6 -11.1 -3.4 -4.5 -4.3 -3.3 -5.2 -1.8 -6.1 0 6.2 -10.3 5.5 -15.5 4 -27 -.7 -17.7 -2.8 -10.5 -4.9 -9.5 -6 -6.8 -6.4 -3.3 -6.3 .3 -5.5 4.2 -2.3 3.6 .4 -.9 -1.3 1.1 -3.2 .7 -6.1 -.5 -6.5 -1.6 -4.7 -2.8 -1.5 -2.6 -4.8 12.5 -3.4 5 -4.1 4.2 -4.8 3.5 -6.3 3.2 -5.8 2.2 -10.6 1.8 -9.4 -1.2 -8.6 -3.5 -19.1 -13.2 -11.1 -5.6 -7.3 -1.3 -3.7 .4 -6.8 3 -4 5 -1.1 6.4 .4 3.5 2.5 7.4 4.8 7.4 -4.2 .9 -5.8 3.8 -1.9 2.3 -2.1 5.2 .2 9 3.6 12.4 1 7.5 -1 7.2 -3 8.9 -.9 7 1.5 6.1 4.3 4.4 7.7 1.7 5.2 -.4 -10 12.2 -7.4 7.2 -2.1 3.7 -.6 4\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M137.5 31.1l.2 1.9 1.4 1.8 7.3 3.5 10.2 1.3 3.4 -.9 1.2 -1.3 0 -1.9 -1.3 -1.8 -5.6 -3 -12.8 -1.7 -3.1 .7Z\" fill=\"#f7eced\" fill-rule=\"evenodd\" /><path d=\"M140.4 32.5l5.5 3 2.1-.3 1.1.9 6.2.7 1.9-1.1-1.2-1.8-7.2-.5-2.1-1.5-5.8.6Z\" fill=\"#bb5a74\" fill-rule=\"evenodd\" /><path d=\"M137.6 31.1l.2 1.9 1.4 1.8 7.3 3.5 10.2 1.3 3.4-.9 1.2-1.3 0-1.9-1.3-1.8-5.6-3-12.8-1.7-3.1.7\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M140.4 32.5l5.5 3 2.1-.3 1.1.9 6.2.7 1.9-1.1-1.2-1.8-7.2-.5-2.1-1.5-5.8.6\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\".8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" />"};
+_ORG_ART["kidney"]={vb:[0,0,461.7,524.4],pfx:"oakid",body:"<defs><filter id=\"oakid-luminosity-invert\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"398.2\" color-interpolation-filters=\"sRGB\" filterUnits=\"userSpaceOnUse\"><feColorMatrix result=\"cm\" values=\"-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0\" /></filter><radialGradient id=\"oakid-radial-gradient\" cx=\"203.2\" cy=\"292.9\" fx=\"203.2\" fy=\"292.9\" r=\"173\" gradientUnits=\"userSpaceOnUse\"><stop offset=\".6\" stop-color=\"#000\" /><stop offset=\".9\" stop-color=\"#fff\" /></radialGradient><mask id=\"oakid-mask\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"398.2\" maskUnits=\"userSpaceOnUse\"><g filter=\"url(#oakid-luminosity-invert)\"><path d=\"M95.9 444.9l12.9 4.4 20.1 5.2 26 4.1 14.3 .9 14.8 -.3 14.9 -1.8 52.3 -10.4 19.3 -5.4 19.2 -6.8 18.4 -8.6 17 -10.7 14.9 -13.1 12.2 -15.8 8.9 -18.8 6.5 -21.3 5.4 -22.7 4.2 -23.5 3 -23.6 1.7 -23 .4 -21.8 -1 -19.9 -2.5 -17.4 -4 -14.3 -5.6 -10.4 -13.4 -8.8 -25.3 -9.2 -34.3 -8.8 -40.4 -7.7 -43.6 -5.8 -43.8 -3.1 -41.2 .4 -35.6 4.6 -27.2 9.6 -15.8 15.4 -8.7 20.4 -7.3 23.8 -5.3 26.7 -2.8 28.9 .4 30.6 4.2 31.7 8.6 32.2 13.6 32.2 19.2 31.5Z\" fill=\"url(#oakid-radial-gradient)\" /></g></mask><clipPath id=\"oakid-clippath\"><path d=\"M461.7 225.4l-2.9 36.6 -8.4 34.7 -13.5 32.3 -18.1 29.5 -22.2 26.3 -25.9 22.5 -29.1 18.3 -31.9 13.7 -34.2 8.5 -36 2.9 -36 -2.9 -34.2 -8.5 -31.9 -13.7 -29.1 -18.3 -25.9 -22.5 -22.2 -26.3 -18.1 -29.5 -13.5 -32.3 -8.4 -34.7 -2.9 -36.6 2.7 -36.4 7.9 -34.3 12.7 -31.8 17.1 -28.9 21.1 -25.7 24.6 -22.2 27.7 -18.2 30.4 -14 32.7 -9.3 34.5 -4.3 10.6 -.2 36 2.9 34.2 8.5 31.9 13.7 29.1 18.3 25.9 22.5 22.2 26.3 18.1 29.5 13.5 32.3 8.4 34.7Z\" fill=\"none\" /></clipPath><filter id=\"oakid-luminosity-invert-2\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"395.9\" color-interpolation-filters=\"sRGB\" filterUnits=\"userSpaceOnUse\"><feColorMatrix result=\"cm\" values=\"-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0\" /></filter><mask id=\"oakid-mask-1\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"395.9\" maskUnits=\"userSpaceOnUse\"><g filter=\"url(#oakid-luminosity-invert-2)\"><path d=\"M95.9 444.9l12.9 4.4 20.1 5.2 26 4.1 14.3 .9 14.8 -.3 14.9 -1.8 52.3 -10.4 19.3 -5.4 19.2 -6.8 18.4 -8.6 17 -10.7 14.9 -13.1 12.2 -15.8 8.9 -18.8 6.5 -21.3 5.4 -22.7 4.2 -23.5 3 -23.6 1.7 -23 .4 -21.8 -1 -19.9 -2.5 -17.4 -4 -14.3 -5.6 -10.4 -13.4 -8.8 -25.3 -9.2 -34.3 -8.8 -40.4 -7.7 -43.6 -5.8 -43.8 -3.1 -41.2 .4 -35.6 4.6 -27.2 9.6 -15.8 15.4 -8.7 20.4 -7.3 23.8 -5.3 26.7 -2.8 28.9 .4 30.6 4.2 31.7 8.6 32.2 13.6 32.2 19.2 31.5Z\" fill=\"url(#oakid-radial-gradient)\" /></g></mask><clipPath id=\"oakid-clippath-1\"><path d=\"M461.7 225.4l-2.9 36.6 -8.4 34.7 -13.5 32.3 -18.1 29.5 -22.2 26.3 -25.9 22.5 -29.1 18.3 -31.9 13.7 -34.2 8.5 -36 2.9 -36 -2.9 -34.2 -8.5 -31.9 -13.7 -29.1 -18.3 -25.9 -22.5 -22.2 -26.3 -18.1 -29.5 -13.5 -32.3 -8.4 -34.7 -2.9 -36.6 2.7 -36.4 7.9 -34.3 12.7 -31.8 17.1 -28.9 21.1 -25.7 24.6 -22.2 27.7 -18.2 30.4 -14 32.7 -9.3 34.5 -4.3 10.6 -.2 36 2.9 34.2 8.5 31.9 13.7 29.1 18.3 25.9 22.5 22.2 26.3 18.1 29.5 13.5 32.3 8.4 34.7Z\" fill=\"none\" /></clipPath></defs><g mask=\"url(#oakid-mask)\"><path id=\"oakid-ureter\" d=\"M185.3 197.9l-14.2 32.3 -16.1 28.8 -10.4 20.5 -5.3 13 -3.1 13.1 -1.6 17.2 -.3 19.1 4.1 64.9 -.8 113.4 6.6 -.9 2.5 -1.8 2 -3.3 1.7 -102.5 -1.6 -42.6 .3 -25.1 2.9 -22.7 2.9 -9.4 4.1 -7.4 9.3 -10.5 8.1 -6.2 12.8 -6.8 10.4 -8.9 12.9 -13.3 12.1 -15.1 4.7 -7.4 3.3 -6.9 1.5 -6.1 -1 -5.5 -3.4 -5.3 -5.2 -4.9 -6.4 -4.3 -7.1 -3.6 -14 -4.5 -5.7 -.5 -4.2 .8Z\" stroke-miterlimit=\"10\" fill=\"#f4dca9\" stroke-width=\"8.2px\" stroke=\"#725222\" /></g><g clip-path=\"url(#oakid-clippath)\"><g><path d=\"M11.7 232.9l0 12.3 61.8-5.4 43.8-7.2 18.9 7.9 15.5 8.8 15 11.9 12.1 12.8-1-3.7-3.3-5.5-9.7-10.4-15.8-11.9-23.5-14.2 4.9-3.8 17.3-7.3 20.9-7.8 17.9-4.5 6-3.3 1.3-2.4 0-2.6-28.2 7.1 11.6-11.5 4.8-7.4 3.4-12.2.1-3.8-1.1-4.9-1.3.2-1.5 3.5-1 8.6-1.8 5.4-4.3 6.4-5.6 6-7 6-6.9 4.4-23.5 10.6-17.8 6.6-12.4 2-51.6 6.3Z\" stroke-miterlimit=\"10\" stroke-width=\"8.2px\" fill=\"#5276b6\" stroke=\"#142b4f\" /><path d=\"M5.3 206.7l91.5 -6.9 3 -.9 10.5 -7.7 5.8 -2.7 9.6 -1.7 14.9 -.3 13.1 -1.5 7.8 -3.1 6.9 -6.1 4.2 -1.6 2.9 .3 -2.1 3.1 -4 4.3 -5.7 3.4 -13.1 3.1 -30.7 3.6 -4.6 1.6 -3.3 2.3 -3.9 4.5 1.5 .4 32.6 -7.6 11.4 -4.2 14.3 -9.5 16 -15.2 3.5 -1.1 2.3 1.6 1.2 3.7 .3 10.6 -1.9 15.2 -24.1 7.2 -30.6 7.6 -9.4 3.1 -3.4 2.3 3.3 .8 12.3 .5 48 -.1 1.2 .7 .7 2.4 -2.7 6.4 -30.2 -.6 -31.8 1.1 -26.3 -3.3 -89.4 8.5 -1.4 -.8 -1.4 -4.6 -.1 -6.8Z\" stroke-miterlimit=\"10\" stroke=\"#8f2e30\" fill=\"#d85452\" stroke-width=\"8.2px\" /></g></g><path d=\"M172.2 58.6l31.8 .1 12.1 1.3 9.6 2.6 14.8 6.5 10.3 6.1 10.4 7.5 10.2 8.9 16.6 16.6 8.8 11.7 1.5 4.4 .8 10.8 8.8 14.8 11.1 24 6.5 17.6 3 13.3 3.1 25.3 .2 8.2 -1.2 8.5 1.4 4.4 .6 7.9 0 29.6 -1.2 13.8 -6.1 26.9 -5.4 7 -4.6 13.8 -7.5 15.9 -12 17.8 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -1.4 -12.1 .9 -11.8 3.2 -9.3 6.1 -11.5 1.3 -5.4 -4 -19.4 .5 -12.3 2 -6.5 6.7 -13.5 .6 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" stroke-miterlimit=\"10\" fill=\"#a95c57\" stroke=\"#632b29\" stroke-width=\"8.2px\" /><path d=\"M166.1 7.2l3 2.3 3 3.7 4.9 9.5 5.8 19.1 5.2 13.4 -.2 5.2 -11.3 16.1 -5.9 12 -3.5 12.4 -.4 10.9 -1.9 10.8 -1.9 6.3 -3.2 6.6 -5.1 3.9 -14.8 6.6 -15.8 9.6 -5.4 2 -.9 -.3 -2.7 -4.2 -4.1 -9.9 -3.7 -15.2 -1 -9.5 -.2 -10.7 .9 -11.8 2.2 -13 7.1 -26.4 9.3 -23.4 5.5 -9.8 6 -8 6.5 -6 7 -3.6 7.5 -.9Z\" stroke-miterlimit=\"10\" fill=\"#f4dca9\" stroke=\"#5a4218\" stroke-width=\"8.2px\" /><g mask=\"url(#oakid-mask-1)\"><path id=\"oakid-ureter-2\" data-name=\"ureter\" d=\"M185.3 197.9l-14.2 32.3 -16.1 28.8 -10.4 20.5 -5.3 13 -3.1 13.1 -1.6 17.2 -.3 19.1 4.1 64.9 -.8 113.4 6.6 -.9 2.5 -1.8 2 -3.3 1.7 -102.5 -1.6 -42.6 .3 -25.1 2.9 -22.7 2.9 -9.4 4.1 -7.4 9.3 -10.5 8.1 -6.2 12.8 -6.8 10.4 -8.9 12.9 -13.3 12.1 -15.1 4.7 -7.4 3.3 -6.9 1.5 -6.1 -1 -5.5 -3.4 -5.3 -5.2 -4.9 -6.4 -4.3 -7.1 -3.6 -14 -4.5 -5.7 -.5 -4.2 .8Z\" stroke-miterlimit=\"10\" stroke-width=\"3.5px\" fill=\"#f4dca9\" stroke=\"#725222\" /></g><g clip-path=\"url(#oakid-clippath-1)\"><g><path d=\"M11.7 232.9l0 12.3 61.8-5.4 43.8-7.2 18.9 7.9 15.5 8.8 15 11.9 12.1 12.8-1-3.7-3.3-5.5-9.7-10.4-15.8-11.9-23.5-14.2 4.9-3.8 17.3-7.3 20.9-7.8 17.9-4.5 6-3.3 1.3-2.4 0-2.6-28.2 7.1 11.6-11.5 4.8-7.4 3.4-12.2.1-3.8-1.1-4.9-1.3.2-1.5 3.5-1 8.6-1.8 5.4-4.3 6.4-5.6 6-7 6-6.9 4.4-23.5 10.6-17.8 6.6-12.4 2-51.6 6.3Z\" fill=\"#5276b6\" /><path d=\"M6.8 204.4l65.9 -2.6 24.1 -2 3 -.9 10.5 -7.7 5.8 -2.7 9.6 -1.7 14.9 -.3 13.1 -1.5 7.8 -3.1 6.9 -6.1 4.2 -1.6 2.9 .3 -2.1 3.1 -4 4.3 -5.7 3.4 -13.1 3.1 -30.7 3.6 -4.6 1.6 -3.3 2.3 -3.9 4.5 1.5 .4 32.6 -7.6 11.4 -4.2 14.3 -9.5 16 -15.2 3.5 -1.1 2.3 1.6 1.2 3.7 .3 10.6 -1.9 15.2 -24.1 7.2 -30.6 7.6 -9.4 3.1 -3.4 2.3 3.3 .8 12.3 .5 48 -.1 1.2 .7 .7 2.4 -2.7 6.4 -30.2 -.6 -31.8 1.1 -26.3 -3.3 -87.9 6.2 -1.4 -.8 -1.4 -4.6 -.1 -6.8Z\" fill=\"#d85452\" /></g></g><path d=\"M172.2 58.6l31.8 .1 12.1 1.3 9.6 2.6 14.8 6.5 10.3 6.1 10.4 7.5 10.2 8.9 16.6 16.6 8.8 11.7 1.5 4.4 .8 10.8 8.8 14.8 11.1 24 6.5 17.6 3 13.3 3.1 25.3 .2 8.2 -1.2 8.5 1.4 4.4 .6 7.9 0 29.6 -1.2 13.8 -6.1 26.9 -5.4 7 -4.6 13.8 -7.5 15.9 -12 17.8 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -1.4 -12.1 .9 -11.8 3.2 -9.3 6.1 -11.5 1.3 -5.4 -4 -19.4 .5 -12.3 2 -6.5 6.7 -13.5 .6 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" stroke-miterlimit=\"10\" stroke-width=\"3.5px\" fill=\"#a95c57\" stroke=\"#632b29\" /><g><path d=\"M172.2 58.6l31.8 .1 17.1 2.4 14.6 5.1 10.5 5 10.5 6.6 10 8.5 25.9 28.4 5 7.2 1.8 13.7 9.3 13.6 6 11.4 5.4 12.5 3.6 12 4.7 26 3.2 23.2 .1 5.7 -1 6.4 1.6 7.7 -2 44.5 -4.5 29.2 -5.8 8.3 -7.9 21.3 -9.7 17.3 -6.6 8.9 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -.3 -15.8 1 -11.9 2.1 -5.5 5.7 -9.4 1.6 -5.6 -2.8 -25.1 0 -10.7 8.1 -17.8 .5 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" fill=\"#f5b6b3\" /></g><g><path d=\"M172.2 58.6l31.8 .1 17.1 2.4 14.6 5.1 10.5 5 10.5 6.6 10 8.5 25.9 28.4 5 7.2 1.8 13.7 9.3 13.6 6 11.4 5.4 12.5 3.6 12 4.7 26 3.2 23.2 .1 5.7 -1 6.4 1.6 7.7 -2 44.5 -4.5 29.2 -5.8 8.3 -7.9 21.3 -9.7 17.3 -6.6 8.9 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -.3 -15.8 1 -11.9 2.1 -5.5 5.7 -9.4 1.6 -5.6 -2.8 -25.1 0 -10.7 8.1 -17.8 .5 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" fill=\"#f5b6b3\" /></g><path d=\"M166.1 7.2l3 2.3 3 3.7 4.9 9.5 5.8 19.1 5.2 13.4 -.2 5.2 -11.3 16.1 -5.9 12 -3.5 12.4 -.4 10.9 -1.9 10.8 -1.9 6.3 -3.2 6.6 -5.1 3.9 -14.8 6.6 -15.8 9.6 -5.4 2 -.9 -.3 -2.7 -4.2 -4.1 -9.9 -3.7 -15.2 -1 -9.5 -.2 -10.7 .9 -11.8 2.2 -13 7.1 -26.4 9.3 -23.4 5.5 -9.8 6 -8 6.5 -6 7 -3.6 7.5 -.9Z\" stroke-miterlimit=\"10\" stroke-width=\"3.5px\" fill=\"#f4dca9\" stroke=\"#5a4218\" /><g><path d=\"M174 120.7l16.4 5.9 15.1 6.6 14.9 8.3 6.3 4.7 4.9 4.9 7.9 10.8 10.1 18.6 6.4 19.8 1.4 13 -.5 24.9 -1.8 30.3 -2.2 18.6 -3.1 14.1 3.8 -3.8 3.2 -5.7 2.8 -7.1 11.2 -46.2 1.7 -3.8 8 -11.7 2.9 -7.3 .7 -9 -.8 -5.4 -4.8 -13.3 -10 -18.9 -13.5 -21.2 -14.9 -19.3 -7.4 -7.7 -7 -5.7 -6.3 -3.2 -20.2 -5 -19.9 -3.1 -9.2 -.4 -2.5 .4 -.7 .9Z\" fill=\"#faeceb\" /></g><g><path d=\"M162.4 14.1l-13.1 21.1-9.8 22.5-9.3 35.6-3 20.8-1.3-14.5 1.2-17.6 3-18.1 6.2-22.5 10.1-21.2 5.7-8.8 3.9-1.1Z\" fill=\"#fffff6\" /></g><g opacity=\".4\"><g><path d=\"M177.8 34l-9.8 11.9 -10.7 17.7 -6.7 15.8 -11.3 37 -1.6 2.6 -1.8 1.3 -2.2 0 -2.7 -1.4 -.5 -14.6 3.6 -26.9 6.6 -24.9 4.8 -11.2 12.6 -21.4 3.9 -4.7 1.4 -.3 1.8 .9 4.1 4.5Z\" fill=\"#b68c3d\" /></g></g><g opacity=\".2\"><g><g><path d=\"M194.2 69.3l23.4 7.5 21.9 9.9 11.3 6.6 10.8 7.8 9.6 9 7.8 10.3 13.1 22.6 17.2 34.7 8.4 21.7 2.9 9.9 2.7 16.9 -.3 38.1 -2.2 23.1 -4.7 23.4 -3.5 11.3 -4.4 10.8 -5.7 10.7 -7 10.9 -8.2 10.8 -9.1 10.4 -9.9 9.6 -10.5 8.4 -10.9 6.8 -11.1 4.9 -11.2 2.6 -11 -.1 -10.3 -2.3 -9.3 -3.9 -8.3 -5.4 -7.2 -6.8 -5.9 -8 -4.5 -9.1 -3 -10 -1.4 -10.8 .3 -11.5 2.1 -12.1 4.2 -10.1 5.9 -8.4 13.2 -13.6 -10.1 -4.4 -4.9 -4.1 -4 4.6 -6.5 10 -4.6 9.8 -4.3 12.8 -1.1 15.2 1.3 20.5 2.3 11.5 3.8 11.5 5.7 10.8 7.9 9.5 10.5 7.5 12.3 4.8 12.8 2 13 -.3 12.7 -2.1 12.1 -3.4 11.1 -4.2 17.6 -9 9 -6.6 9.3 -11.1 8.8 -12.3 14.9 -35.1 .9 -1.6 2.7 -1.7 1.5 -3 3.1 -24.3 3.5 -39.8 -.1 -6.2 -2.1 -10.2 2.2 -5.3 .4 -3.6 -6.6 -40.2 -4.3 -20.7 -4.8 -10.6 -18 -29 -.8 -2.9 -.4 -9.8 -4.2 -6.4 -12.8 -14.2 -20.3 -18.3 -12.1 -8.5 -12.8 -6.8 -13.2 -4.2 -13.3 -.7Z\" fill=\"#fff\" /></g></g></g><g><path d=\"M180.1 174.7l9.2-6.9 2.9-5.5 2.3.6 1.4 1.4.6 2-.6 5.1-5.9 13.2-.9-7.4-1.8-2.5-3.1-1.3Z\" fill=\"#54221f\" /></g><g><path d=\"M180.1 174.7l9.2-6.9 2.9-5.5 2.3.6 1.4 1.4.6 2-.6 5.1-5.9 13.2-.9-7.4-1.8-2.5-3.1-1.3Z\" fill=\"#54221f\" /></g><g><path d=\"M183.8 241.6l7.1 -.1 6.6 1.4 -11.2 -8.7 -3.7 -4.7 1.6 7.3Z\" fill=\"#54221f\" /></g><g><path d=\"M174.4 282.9l14.2 5.9-.1 3-2.4 4.8-14-6.8 2.4-3Z\" fill=\"#54221f\" /></g>"};
+_ORG_ART["liver"]={vb:[0,0,334.9,277.2],pfx:"oaliv",body:"<defs><clipPath clipPathUnits=\"userSpaceOnUse\" id=\"oaliv-a\"><path d=\"M4 14.3l334.5 0 0 277.4-334.5 0Z\" /></clipPath></defs><path clip-path=\"url(#oaliv-a)\" d=\"M71.9 273.5l17.3 -15.6 13.9 -16.9 7.1 -7.4 17 -14.1 36.9 -33.1 30.9 -21.7 9.9 -9.2 7.2 0 6.7 -1.1 12.5 -5.3 12.8 -8.8 33.1 -25.7 23.9 -13.5 32.8 -31.7 3.1 -4.8 .1 -1.9 -1 -1.6 -2.5 -1.2 -3.4 .4 -4.2 1.7 -23.7 15 -15.5 8.8 -23.3 9.4 -15.2 4.2 -43.4 5.5 -10.1 2.5 -10.9 5.2 -46.6 31 -4.6 2.3 -8.7 2.2 -17.5 2.2 -10.1 4 -5.7 3.6 -5.5 4.7 -4.6 5.3 -6.8 11.8 -4.2 12.3 -4.2 25.3 -1.6 3.9 -8.4 11.2 -14.8 14.5 -14.8 16.2 -5 7.3 -2.2 6.7 1.2 6.1 4.4 4.8 6.6 2.3 4.3 .1 10.3 -2 6 -2.3 13.3 -7.4Z\" fill=\"#7d4453\" fill-rule=\"evenodd\" /><path clip-path=\"url(#oaliv-a)\" d=\"M36.9 250.5l18.3-18.2 8.4-11.2 1.6-3.9 4.2-25.3 4.2-12.3 6.8-11.8 4.6-5.3 5.5-4.7 5.7-3.6 10.1-4 17.5-2.2 8.7-2.2 4.6-2.3 46.6-31.1 10.9-5.2 10.1-2.5 43.5-5.5 15.2-4.2 14.8-5.6 16.5-8.2 31.1-19.5 4.2-1.7 3.4-.4 3.1 1.2-.9-3.6-2.1-3.1-3.1-2.7-8.8-4.3-11.7-3.5-31.5-7.3-16.3-2.5-10.4-.6-9.2.6-13.4 3.6-6.3.5-52.9-13.1-38.3-7-19.9-1.9-19.6-.1-18.7 2.2-17.2 5-8.9 4.3-7.8 5.4-6.7 6.5-5.8 7.4-4.9 8.3-4.1 9.2-3.4 9.9-5 21.7-3.3 26.8-.7 13.9 1.1 34.9 4.6 38.1-1.2 29.9.3 18.1 1.1 8.6 2.1 7.8 3.3 6.8 4.8 5.3-3.2-5.8.5-6.4 6.4-10.8Z\" fill=\"#9c717a\" fill-rule=\"evenodd\" /><path d=\"M155.9 29.9l-26.6-5.9-23.2-2.3-12.1-.1-11.9.8-11.3 1.8-10.3 3.1-9 4.5-7.5 5.7-6.5 6.7-5.6 7.6-4.7 8.5-3.9 9.2-5.6 20.3-1.9 10.9-2.3 22.9 7.8-36.3 7.7-21.8 5.2-10.2 6.4-9 7.6-7.4 9-5.3 9.7-3.7 9.8-2.7 19.7-2.8 9.9-.3 19.9 1.2Z\" fill=\"#fff\" fill-rule=\"evenodd\" /><path d=\"M67.9 42.9l-9.4 5.4 -7.9 6.6 -6.5 7.6 -5.3 8.3 -7.6 17.9 -4.3 17.9 -2.1 15.9 -3.4 74.4 -3 25.1 0 -11.7 -4.9 -62.6 .2 -24 1 -11.6 3.7 -22 6.3 -20 4.2 -9 5 -8.3 5.8 -7.5 6.7 -6.7 7.6 -5.7 9.3 -4.5 11 -3.1 12.3 -1.9 13 -.8 26.4 .9 23.6 3.2 16.9 4.3 -20.5 -1.4 -32.7 1.9 -23.6 4.1 -11.2 3.2ZM297.3 46.7l-20.8-5.9-20.1-3-10.1-.1-11.2 3.1-4.2 2.7-3.1 3.6-9.9 18.6-18.1 22.8-5.1 9.1 25.3-23 10.4-14.6 3.8-4.1 4.7-3.9 5.9-3.4 7.2-2.7 8.7-1.8 10.3-.6 12.2.8Z\" fill=\"#b39198\" fill-rule=\"evenodd\" /><path d=\"M207.6 79.6l6.4-9.6 12.3-22.1 6.3-6.4 6.1-3 7.8-1.6 15.4 1-10.9 0-7.3 1.2-6.9 2.7-3.2 2.1-5.5 5.8-13.3 21.4Z\" fill=\"#fff\" fill-rule=\"evenodd\" /><path clip-path=\"url(#oaliv-a)\" d=\"M36.3 286.1l-7.7 1.6-3.8-.6-3.4-1.7-3.4-4.7-.4-3.7.9-3.8 3.9-7.2 7-9 29.5-29.5 5.2-9.4 1.6-8.5 1.5-3 1.3-.6 2.1 1 2.8 5.8-.1 6.7-2.1 6.4-7.6 11.3-26.4 26.3-4 4.8-2.7 4.8.2 4 1.6 1.4 6.2 1.1 6.9-1 10.4-4.4 9.1-6.3 5.7-5.9 23.6-29.6 5.1-4.8 9.9-7 15.1-14.3 24.5-17.7 28.6-17.7-.6 1.3-21 16.5-22.5 19.3-18.7 18.7-16.9 15-20.2 22.6-11.7 10.1-8.5 5.5-6.4 2.8-10.1 3.4-10.7 2.1-4.6-.1-3.6-1.1-2.1-2.4-.3-4Z\" fill=\"#57152d\" fill-rule=\"evenodd\" /><path d=\"M302.1 99.6l11.4 -11.9 18.4 -16.4 2.3 -3.4 1 -3.2 -.9 -3 -2.2 -.8 -.7 .2 0 1.2 -3 4.9 -5.8 6.9 -14.6 13.8 -27.1 17.2 -32.6 22.8 -13.9 8.3 -7.2 3.1 -2.9 .5 -5.1 -1.2 -2.1 -1.6 -3.3 -4.7 -2 -9.8 1.3 -6.8 2 -2.1 6.7 -1.9 15.8 -.8 13.5 -1.9 15.1 -5 14.6 -7.4 13 -8.3 14.9 -11.5 14.6 -13.3 -34.1 21.1 -25.5 10.6 -15.2 4.2 -43.2 5.4 -11 2.9 -4.3 2.5 -.7 3.6 4.1 14.1 2.5 14.5 4.9 8.1 4.9 3.2 3 .9 5.9 0 12 -3.4 12.7 -7.5 40 -30.7ZM188.5 128.8l2.4 12.4 4.8 11.5-.5 4.1-2.4 3.6-16.1 12.2-5.9 3.4-3.9 1.3 7.7-4.6 5.3-4.5 4.6-5.2 3.2-5.4 1.1-5.1-2.4-15 1-7.4Z\" fill=\"#57152d\" fill-rule=\"evenodd\" /><path d=\"M182 115.7l-8.6 4-20.8 14.9-18.4 10.4-7.6 2.9-10.5 1.9.6-1.2-4.6.5-10 2.5-8.5 4.3-8.5 6.7-4.6 5.3-6.8 11.8-5.6 18.3-2.7 18.9-3.1 7-4.9 6.7 5.9-1.5 4.4-2.5 9.6-10.8 18.8-12.8 6.5-6.7 2.6-4.3 2.8-8.9 1.8-17.7 3.6-4.7 26.1-11 6.9-3.8 7.7-5.2 16.7-14.2 5.3-3.1 3.6 0 3 2.2 3.7 13.4 2.1 2.6-.2-10.3-2-13-1.5-2.5Z\" fill=\"#57152d\" fill-rule=\"evenodd\" /><path d=\"M219.9 41.6l-1.3 7.9-4.3 9.8-4.8 7.2-13.1 15-6.9 11.1-2.5 6.7-.4 8.2-1-3.1-.2-6.8 3.3-10.6 7.9-12.5 20-22.2 2.7-6.6ZM222.2 97.6l26.8-3.3 14.5-4.2 12.2-6.1 17.9-10.4 16.9-7.6 13.5-8.2-7.8 1.7-30.3 11.1-7.1 3.7-10.5 7.6-6.7 3.2-34.7 10.1Z\" fill=\"#7d4453\" fill-rule=\"evenodd\" /><path d=\"M261.9 120.7l6.6-13.1 8.5-10.5 7.1-5.9 11.1-5.2 8.6-2 5.7.1 2.8 1.3-1.6 3.6-5.1 4.4-18.5 10.8-21.7 15.2Z\" fill=\"#57152d\" fill-rule=\"evenodd\" /><path d=\"M212.9 129.3l2.1 4.7 3.8 4.2 3 1.2 3.9.1 5-1.2 6.3-2.8 17.2-11.8-16.4 8.7-10 3-4.7.3-4.2-.7-3.4-2.1Z\" fill=\"#9c717a\" fill-rule=\"evenodd\" /><path d=\"M53.3 225.1l2.7-3.4 3.1-7.4 9.7-36.3 6.2-12.5 4.3-5.7 5.3-5 6.5-4.2 7.8-3.1 9.2-1.9 10.8-.6-18-.9-12.6 2.1-7.4 3.9-8.7 8.7-3.5 5.2-2.3 5.8-9.1 45.4-1.8 5.6Z\" fill=\"#b39198\" fill-rule=\"evenodd\" /><path clip-path=\"url(#oaliv-a)\" d=\"M71.9 273.6l17.3 -15.6 13.9 -16.9 7.1 -7.4 17 -14.1 36.9 -33.1 30.9 -21.7 9.9 -9.2 7.2 0 6.7 -1.1 12.5 -5.3 12.8 -8.8 33.1 -25.7 23.9 -13.5 32.8 -31.7 3.1 -4.8 .1 -1.9 -1 -1.6 -2.5 -1.2 -3.4 .4 -4.2 1.7 -23.7 15 -15.5 8.8 -23.3 9.4 -15.2 4.2 -43.4 5.5 -10.1 2.5 -10.9 5.2 -46.6 31 -4.6 2.3 -8.7 2.2 -17.5 2.2 -10.1 4 -5.7 3.6 -5.5 4.7 -4.6 5.3 -6.8 11.8 -4.2 12.3 -4.2 25.3 -1.6 3.9 -8.4 11.2 -14.8 14.5 -14.8 16.2 -5 7.3 -2.2 6.7 1.2 6.1 4.4 4.8 6.6 2.3 4.3 .1 10.3 -2 6 -2.3 13.3 -7.4\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path clip-path=\"url(#oaliv-a)\" d=\"M36.9 250.6l18.3-18.2 8.4-11.2 1.6-3.9 4.2-25.3 4.2-12.3 6.8-11.8 4.6-5.3 5.5-4.7 5.7-3.6 10.1-4 17.5-2.2 8.7-2.2 4.6-2.3 46.6-31.1 10.9-5.2 10.1-2.5 43.5-5.5 15.2-4.2 14.8-5.6 16.5-8.2 31.1-19.5 4.2-1.7 3.4-.4 3.1 1.2-.9-3.6-2.1-3.1-3.1-2.7-8.8-4.3-11.7-3.5-31.5-7.3-16.3-2.5-10.4-.6-9.2.6-13.4 3.6-6.3.5-52.9-13.1-38.3-7-19.9-1.9-19.6-.1-18.7 2.2-17.2 5-8.9 4.3-7.8 5.4-6.7 6.5-5.8 7.4-4.9 8.3-4.1 9.2-3.4 9.9-5 21.7-3.3 26.8-.7 13.9 1.1 34.9 4.6 38.1-1.2 29.9.3 18.1 1.1 8.6 2.1 7.8 3.3 6.8 4.8 5.3-3.2-5.8.5-6.4 6.4-10.8\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M219.3 41.7l-.2 6.7-3.3 7.9-5.5 8.7-16.1 21.9-4.2 7.2-3.2 8.3-.2 6.4M186.2 110.7l2.1 2.3 1.6 3.7 7 27.4 2.5 4.8 3.3 3.7 4.3 2.3\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" />"};
+_ORG_ART["lung"]={vb:[0,0,296.9,394.5],pfx:"oalun",body:"<defs><filter id=\"oalun-outer-glow-1\" x=\"157.3\" y=\"133.8\" width=\"130\" height=\"205.6\" filterUnits=\"userSpaceOnUse\"><feOffset dx=\"0\" dy=\"0\" /><feGaussianBlur result=\"blur\" stdDeviation=\"9.4\" /><feFlood flood-color=\"#ff6a6a\" flood-opacity=\".75\" /><feComposite in2=\"blur\" operator=\"in\" /><feComposite in=\"SourceGraphic\" /></filter><filter id=\"oalun-outer-glow-2\" x=\"12.9\" y=\"116.6\" width=\"119.5\" height=\"226.2\" filterUnits=\"userSpaceOnUse\"><feOffset dx=\"0\" dy=\"0\" /><feGaussianBlur result=\"blur-2\" stdDeviation=\"9.4\" /><feFlood flood-color=\"#ff6a6a\" flood-opacity=\".75\" /><feComposite in2=\"blur-2\" operator=\"in\" /><feComposite in=\"SourceGraphic\" /></filter></defs><g style=\"isolation:isolate\"><g id=\"oalun-Layer_1\"><g><g id=\"oalun-infected\"><path d=\"M19.8 393.3l-3.4 -.7 -2.4 -2 -3.1 -6.6 -2.8 -10 -4.9 -32.4 -2 -36 .6 -25.4 2.3 -22.2 6.6 -31.1 8.8 -28 14.2 -34.3 15.1 -28.3 8 -11.7 8.6 -10.2 8.8 -7.8 8.4 -4.4 6.2 -.4 9.4 3.5 6.9 5.1 6.5 8.1 5.2 11.8 10.3 48.2 3.5 -11.9 1.2 -10.7 -.3 -8.4 -1.6 -11.1 .6 -6.7 -.4 -7 1.1 -6.9 -.8 -16.1 .6 -5.1 -.8 -7.3 1.2 -4.6 -1.4 -5.9 1.2 -4.7 -.8 -6 .8 -5.3 -2.5 -11.6 -2.2 -3.9 -3.4 -13.6 -2.2 -3.9 -3.6 -3.9 -1.3 -3 0 -6.5 4.4 -10.6 1.7 -1.9 1.4 -.2 1 .9 .2 1.4 -1.8 9.2 7.7 -4.4 4.9 -.4 4.2 3.5 5.2 8 3.3 -9.2 2.1 -2.5 3.4 .4 13.1 4.5 -1.3 -9.9 .8 -1.5 1.5 -.1 3.1 3.6 2.4 7.1 -1.8 10.2 -4.6 7.4 -1 13.6 -3.7 4.9 -1 3.4 1 6 -1.2 3.2 .9 4.9 -1.5 5.4 1.1 2 .1 6 -1.3 3.5 1.8 4.4 -.5 4.6 -1.2 3.1 1.7 5.3 -1.4 5.6 1.3 6 -.9 4.6 1 6.5 -1.2 5.8 .9 5 -1.3 7.3 1.2 7.3 -1.4 4.5 -.1 8.4 2.7 12.9 2.5 -8.8 -.1 -8.8 2.2 -12.6 4.3 -14.1 2.9 -6.9 7.3 -12 4.3 -4.5 4 -2.8 5.6 -2.2 4.3 -.5 9.1 2 4.4 2.3 8.5 6.4 7.8 7.8 10 11.9 15.4 22.5 12.4 24.7 9.8 26.1 7.4 26.6 5.2 26.2 3.3 25 1.7 22.9 .3 19.9 -.8 16.1 -1.7 11.4 -4.7 16.9 -3.5 6.6 -4.9 4.5 -6.8 1.7 -6.9 -1.2 -27.7 -13.4 -34.1 -14.8 -12.8 -6.3 -8.7 -5.4 -8.9 -7.9 -7.4 -10.7 -2.6 -6.6 -1.6 -7.4 -2.1 -28.5 .6 -37.9 -4.5 -32.1 -.3 -1.6 -1.6 -1.6 -8.3 -6.5 -7.2 8.4 -6.4 10.3 -1.7 77.4 -2.4 17.8 -2.9 9 -1.9 3 -4.6 4.4 -10.7 7.8 -42.1 26.7 -28.6 20.3 -10 5.7 -8.2 2.2Z\" fill=\"#e8caca\" /><path d=\"M167.3 2.4l2.1 2.1 1.8 3.5 .9 5.7 -1.5 8.1 -4.6 7.7 -1.1 13.8 -3.5 4.5 -1.2 4 1 5.1 -1.2 4.2 .9 4.7 -.7 3.6 -1.1 1.7 1.3 2.2 .2 4.8 -.1 2.2 -1.3 2.6 1.8 4 -1.7 7.9 1.7 5 -1.4 5.6 1.3 6.1 -.9 4.4 1 6.6 -1.3 6.1 1 3.1 -.2 5.7 -1 3.6 1.2 7.2 -1.4 4.3 -.1 8.8 3.6 16.2 .3 .6 .4 -1.2 3.3 -11.4 -.2 -8.4 2.1 -12.5 4.3 -14.1 2.9 -6.9 7.2 -12 4.3 -4.4 3.9 -2.7 5.3 -2 8.2 .1 4.3 1.4 4.2 2.1 8.1 6.1 7.7 7.6 10.3 12.2 15.3 22.4 12.4 24.7 9.7 26.1 7.3 26.6 5.2 26.2 3.3 24.9 1.7 22.8 .3 19.8 -.8 15.9 -1.6 11.1 -4.5 16.3 -3.3 6.5 -4.6 4.4 -6.4 1.6 -6.5 -1.1 -30.4 -14.6 -43.8 -19.7 -9.8 -6.2 -9.8 -9.5 -4.1 -6.1 -3.2 -7.2 -1.9 -8.3 -2 -24.2 .5 -42.3 -4.6 -32.8 -.8 -1.9 -6.5 -6 -4 -2.2 -2.6 1.9 -5.5 6.9 -6.7 10.8 -1.9 79.5 -3 18.9 -3.7 8.4 -11.9 9.9 -43.8 27.9 -31 21.9 -13.1 6.6 -6 .1 -3.7 -4.1 -2.7 -7.4 -4.7 -23.7 -3.1 -31.4 -.6 -34.4 .9 -16.8 1.9 -15.7 2.7 -14.8 7.2 -28 8.8 -25.3 13.9 -31.4 8.3 -15.7 7.6 -12.2 8.3 -11 8.5 -8.9 8.3 -5.9 7.6 -2.2 5.6 1.2 7.1 3.4 6.6 5.5 5.7 8 4.4 10.7 8.4 40.9 2.7 9 4 -11.5 1.8 -12.4 -.2 -10.2 -1.6 -10.9 .6 -6.5 -.4 -7.1 1.1 -7.1 -.8 -16.4 .6 -4.8 -.8 -7.4 1.3 -4.6 -1.5 -6.3 1.3 -4.2 -.8 -6.1 .8 -5 -2.5 -11.7 -2.3 -4.4 -2.8 -12.1 -1.9 -4.2 -4.5 -5.1 -1.2 -2.7 0 -6.1 3.6 -9 2.5 -2.9 0 3.4 -2.1 9.5 8.6 -5.2 5.3 -1 3.4 2.6 6.8 9.9 3.6 -9.7 1.9 -3 17.4 5.1 -1.3 -9.5M167.3 0l-1.9 .8 -.9 1.8 .9 8.6 -11.5 -4 -3.9 -.4 -2.7 2.8 -2.7 7.4 -4.9 -7.1 -3.8 -2.7 -4.8 .1 -6.4 3.1 1 -7.8 -1.2 -1.8 -2.2 -.4 -3.3 3 -4.3 10.7 0 7 1.4 3.3 3.8 4.1 2 3.7 3.3 13.3 2.1 3.7 2.5 11.3 -.8 5.3 .8 5.8 -1.2 4.7 1.3 6 -1.1 4.7 .8 7.3 -.6 5.2 .8 16.1 -1.1 6.8 .4 7.1 -.7 6.7 1.9 18.1 -1.1 11.5 -2.3 8.6 -9.4 -44.7 -5.3 -12.1 -3.2 -4.6 -7 -6.7 -7 -3.9 -8.7 -2.2 -4.3 .6 -9 4.7 -9.1 8.2 -8.7 10.5 -7.8 11.6 -6.7 11.7 -8.3 16.4 -9.5 21.8 -9.4 26.2 -7.9 29.8 -3.9 23 -1.7 23.5 .4 35.1 3.2 33.4 5.2 25.4 3.8 8.9 3.5 2.9 3.4 .6 5.5 -1 9.7 -4.7 33.7 -23.6 40.8 -25.8 10.8 -7.9 4.7 -4.5 2 -3.1 3 -9.2 2.5 -18 1.7 -77.4 5.3 -8.6 7.4 -9.1 8.3 7.1 .7 2.1 4.3 31.6 -.7 37.7 2.1 28.7 1.7 7.6 2.7 6.7 7.5 11 9 8 8.8 5.5 74.9 34.6 7.2 1.2 7 -1.6 5.6 -4.8 3.9 -7.2 3.1 -10.1 2.6 -12.2 1.5 -23.2 -1.1 -31.2 -4.2 -35.7 -7.7 -36.4 -8.2 -26.5 -11.2 -26.7 -6.8 -13 -7.8 -12.5 -18.8 -23.9 -12.2 -11.4 -9 -5.3 -4.7 -1.5 -4.8 -.5 -6.1 .9 -5.8 2.8 -5.5 4.6 -4.7 6.1 -5.5 10.4 -3.7 9.7 -3.4 12.7 -1.7 11.7 .2 6.4 -1.3 3.5 -1.5 -7.6 .1 -8.2 1.4 -4.4 -1.2 -7.6 1.2 -6.2 0 -3.6 -.9 -2.6 1.2 -5.6 -1 -6.7 .9 -4.5 -1.3 -5.9 1.4 -6.3 -1.6 -5 1.2 -2.7 .5 -4.6 -1.6 -4.6 1.1 -3.2 -.1 -6.2 -.8 -1.9 1.3 -6 -.9 -4.2 1.2 -3.4 -.9 -5.9 .8 -2.9 3.8 -5 1.1 -13.9 4.5 -7.2 1.9 -10.6 -2.6 -7.9 -2.7 -3.4Z\" fill=\"#8f6464\" /></g><path id=\"oalun-inner_lungs\" d=\"M157.3 207.2l19.6 7.7 14.1 9 8.9 8.5 4.6 8.3 8.9 23.4 2.6 12.1 -.8 6.4 -3.2 8.4 -7.3 7.5 -4.5 5.8 9.4 -6.1 -1.4 12.5 -1.4 4.9 8.4 -15 6.5 -16.3 1.7 -13.8 -2 -10.6 9.7 6.3 2.3 2.7 -1.7 12.1 -2.6 6.8 7.2 -10.1 6.7 12 -1.1 -12.3 1.6 .4 4.9 4.6 10.6 12.3 4.4 9.7 1.9 8.3 -1.3 12.5 3.7 -7 .9 -.6 .9 .5 6.7 10 2.6 5.7 1.4 5.4 -1.5 -15.6 2.7 -.6 5.7 2 -6.7 -4.4 -4.6 -4.5 -4.7 -9.2 -2.9 -8 3.6 0 6.1 1.9 -13.2 -9.5 -9.3 -10.4 -.1 -.7 1.2 -.6 8.9 -.7 -17 -8.2 -5.4 -4.3 -6.3 -6.7 -16 -21.4 -8.4 -15.3 -1.4 -5.9 2.4 -1.1 7.8 1.6 12.4 4.9 7.8 4.7 2.8 3.1 4.4 7.8 3.9 12.5 1.2 8.4 .3 -13.9 .9 -6.4 7 7.5 7.5 9.6 3.6 6.6 1.8 11.9 .1 15.2 1.7 -3.2 2.9 -2.3 1.9 0 2.4 1.9 -3.9 -11.8 -3.3 -14.7 5.9 .8 3.1 1.6 -14.3 -12.8 -19.1 -22.6 -8.6 -8.6 -23.5 -13.5 -.9 -2.5 -.3 -6 .7 -6.5 1.3 -3.2 9.3 -4.4 4 -2.8 -11.6 1.5 -2.2 -.6 -1.3 -1.5 -8.2 -25.7 -5 -19.1 3.4 30.5 -14.5 -9 -5.6 -7.4 -1.5 -3.3 4 10.1 5 5.4 -10.3 5.5 6.8 -.8 7.4 .6 4.1 1.6 2.6 2.8 4.3 12.7 -.3 7.5 -3 2.9 -10.5 2.9 10.8 1.9 1.2 1.2 -1.1 2.1 -3 3.4 -3 1 -12 -4.2 -12.9 -8 -15.2 -15.4 -3.9 16Z\" fill=\"#fbebeb\" filter=\"url(#oalun-outer-glow-1)\" /><path d=\"M127.7 181.4l-4.1 5.4 -6.1 3.7 -7.7 -1.7 -3 -2 -1.9 -2.4 -4 -8.6 -.5 -2.9 1.6 -5.7 4.2 -4.7 1.8 -3.7 -9.8 8 -1.6 -4.4 .8 -3.9 5.2 -9.5 2 -7.7 -5.4 9.1 -4 5 -1.6 .2 -.7 -5.2 .2 -7.1 2.4 -7.2 4 -5.2 4.1 -2.4 -4.8 1.6 -5.3 3.3 -1.3 -12.1 -2.4 -4.7 .8 10.4 -.8 5.3 -4.6 -5.6 -2.6 -1.8 3.4 5.5 2.2 5.8 -.2 17.3 -9.3 -11.8 -.9 -9.8 -.8 11.5 -5.5 -3.4 -2.5 -3.2 3.3 5.5 6.6 5.4 6.9 9.5 9 24.1 -8 -2.7 -14.2 -1.6 -5.1 -4.3 -6 -12.6 1 8.2 -5.4 -.6 -7.4 -5.6 -4.5 0 4.9 2.7 21.4 15.3 3.2 1.4 15.4 3.5 10.1 6.3 3.1 2.6 .8 1.7 -2.2 2.2 -3.9 1.2 -20.7 -2.2 -20.5 3 -5.5 -1.3 -2.7 -1.5 -3.3 -7.2 -1.6 -1.7 -5.6 -.9 -.9 .3 6.2 3 1.2 5.2 2.5 4.2 -10.9 -.7 -3.9 1.4 6.1 .5 8.1 2.5 3.6 -.4 -.4 2.4 -2.1 2.6 -10.6 6 -11.2 2.6 9.3 -.5 2.2 .5 -2 2.5 -9.8 5.4 12 -4.4 11.4 -8.7 14.4 -6 10.4 -.4 22.3 1.5 19.1 -1.1 4.6 1.2 -3.2 8 -7.2 12.2 -7.7 6.9 -9.3 5.6 -7.9 2.6 -18.8 1.7 -18.2 .5 -9 -1.5 11 5.5 -3.9 4.3 -8.5 4.7 -4.3 3.4 17.4 -7.7 16 -2.1 -20.9 20 -7.6 4.9 -12.7 4.2 -8.3 1.4 -3.9 -.1 10.4 .2 4.1 .9 -8.8 11.5 10.3 -8 21.3 -13.2 14.1 -12.8 14.5 -7 13.3 -3.7 -24 23 -19.1 23.3 -21.7 14.8 20.2 -5.2 -3.8 5.5 -18.9 21.7 -7.1 7.5 -3.6 2.7 12.3 -8.1 10.8 -10.2 6.7 -4.7 5.9 -7.3 17.9 -26.4 9.5 -8.6 -4.1 13.5 -2.6 13.7 -1.9 3.5 -3.1 3 6.8 -3.8 1.7 -2.3 -1.4 11.3 -5.2 13.9 6.9 -9.3 3.5 -15.6 1.8 -14.6 4.5 -13.3 1.3 -2.7 1 -.1 2.2 6.6 1.2 -9.1 2.1 -4.3 2.5 -3 -.4 15.6 2.3 15.3 -1 8.3 -3.3 9.4 3.2 -3.3 -.1 4.8 -3.6 9.7 4.2 -5.3 2.3 -4.3 3.1 -16.7 4.1 6.8 1.9 5.3 -5.5 -24.1 -.8 -7.7 .2 -7.4 1.9 -5.6 21.2 -29.9 4.7 -8.9 3.3 -8.7 -.3 -9.1 -4 -27.7\" filter=\"url(#oalun-outer-glow-2)\" fill=\"#fbebeb\" /><path d=\"M157 208.7l1.7 -15.2 5.2 -18.7 -3 -21 1.3 -19.6 -.2 -51.9 .8 -33.4 3.6 -5 1.6 -13.6 3.3 -6.1 3 -9.9 -2.8 -9.6 -2.2 -2.4 -2.1 -1.1 -1 2.9 -.6 8.1 -10.8 -3.7 -4 -.6 -2.1 2.6 -3.9 7.9 -4.2 -7 -3.5 -3.3 -13.1 2.7 1.7 -8.5 -3 -.6 -2.2 .6 -1 1.2 -4 12.8 -.4 4 6.3 8.7 3.9 14.7 2.7 4.9 1.9 9.8 1.1 14.5 -.8 32.9 .9 9.6 -1.6 7.4 .3 17.6 1.4 7 .5 9.7 -2.4 13.8 -2 6.2 5.7 42.1 13.7 -17.8 10.2 9 1.9 -15.9 5.8 -23.8\" fill=\"#fae1e1\" /><path d=\"M127.2 178.5l4.1 26.3 1.3 13.7\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2.4px\" /><path d=\"M157 209.1l1.4-13.1 4.7-19 1.8-11\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2.4px\" /><path d=\"M132.1 59.2l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M131.7 70l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M131.9 80l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M130.6 91.8l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M130.6 103.4l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M131.7 113.9l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M131 127.1l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M131.3 139.4l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M132.9 151.1l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M132.6 162.8l8 2.8 6.8.7 8.5-1.5 6.3-3.3.2 1.8-.2 1.7-4.5 2.5-5.5 1.3-5.6.2-11.4-1.8-2.8-1.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><path d=\"M131 42.4l5.8-3.2 3.6-.7 3.9 1.4 3.6-.8 5.5.5 3.3 1.4 1.8 2-2.7-1.2-12.4 3.2-8.5-2.7Z\" fill=\"#cac7c7\" style=\"mix-blend-mode:multiply\" /><path d=\"M164.2 17.9l-6.4-3.2-2.3-.2-1.8 1.1-2.7 5.6-1.1 5 .1 4.8 1.9 3.4-.8-7.8.6-3.2 3.5-2.7Z\" fill=\"#dedbdb\" style=\"mix-blend-mode:multiply\" /><g id=\"oalun-infected-2\" data-name=\"infected\"><path d=\"M167.3 2.4l2.1 2.1 1.8 3.5 .9 5.7 -1.5 8.1 -4.6 7.7 -1.1 13.8 -3.5 4.5 -1.2 4 1 5.1 -1.2 4.2 .9 4.7 -.7 3.6 -1.1 1.7 1.3 2.2 .2 4.8 -.1 2.2 -1.3 2.6 1.8 4 -1.7 7.9 1.7 5 -1.4 5.6 1.3 6.1 -.9 4.4 1 6.6 -1.3 6.1 1 3.1 -.2 5.7 -1 3.6 1.2 7.2 -1.4 4.3 -.1 8.8 3.6 16.2 .3 .6 .4 -1.2 3.3 -11.4 -.2 -8.4 2.1 -12.5 4.3 -14.1 2.9 -6.9 7.2 -12 4.3 -4.4 3.9 -2.7 5.3 -2 8.2 .1 4.3 1.4 4.2 2.1 8.1 6.1 7.7 7.6 10.3 12.2 15.3 22.4 12.4 24.7 9.7 26.1 7.3 26.6 5.2 26.2 3.3 24.9 1.7 22.8 .3 19.8 -.8 15.9 -1.6 11.1 -4.5 16.3 -3.3 6.5 -4.6 4.4 -6.4 1.6 -6.5 -1.1 -30.4 -14.6 -43.8 -19.7 -9.8 -6.2 -9.8 -9.5 -4.1 -6.1 -3.2 -7.2 -1.9 -8.3 -2 -24.2 .5 -42.3 -4.6 -32.8 -.8 -1.9 -6.5 -6 -4 -2.2 -2.6 1.9 -5.5 6.9 -6.7 10.8 -1.9 79.5 -3 18.9 -3.7 8.4 -11.9 9.9 -43.8 27.9 -31 21.9 -13.1 6.6 -6 .1 -3.7 -4.1 -2.7 -7.4 -4.7 -23.7 -3.1 -31.4 -.6 -34.4 .9 -16.8 1.9 -15.7 2.7 -14.8 7.2 -28 8.8 -25.3 13.9 -31.4 8.3 -15.7 7.6 -12.2 8.3 -11 8.5 -8.9 8.3 -5.9 7.6 -2.2 5.6 1.2 7.1 3.4 6.6 5.5 5.7 8 4.4 10.7 8.4 40.9 2.7 9 4 -11.5 1.8 -12.4 -.2 -10.2 -1.6 -10.9 .6 -6.5 -.4 -7.1 1.1 -7.1 -.8 -16.4 .6 -4.8 -.8 -7.4 1.3 -4.6 -1.5 -6.3 1.3 -4.2 -.8 -6.1 .8 -5 -2.5 -11.7 -2.3 -4.4 -2.8 -12.1 -1.9 -4.2 -4.5 -5.1 -1.2 -2.7 0 -6.1 3.6 -9 2.5 -2.9 0 3.4 -2.1 9.5 8.6 -5.2 5.3 -1 3.4 2.6 6.8 9.9 3.6 -9.7 1.9 -3 17.4 5.1 -1.3 -9.5M167.3 0l-1.9 .8 -.9 1.8 .9 8.6 -11.5 -4 -3.9 -.4 -2.7 2.8 -2.7 7.4 -4.9 -7.1 -3.8 -2.7 -4.8 .1 -6.4 3.1 1 -7.8 -1.2 -1.8 -2.2 -.4 -3.3 3 -4.3 10.7 0 7 1.4 3.3 3.8 4.1 2 3.7 3.3 13.3 2.1 3.7 2.5 11.3 -.8 5.3 .8 5.8 -1.2 4.7 1.3 6 -1.1 4.7 .8 7.3 -.6 5.2 .8 16.1 -1.1 6.8 .4 7.1 -.7 6.7 1.9 18.1 -1.1 11.5 -2.3 8.6 -9.4 -44.7 -5.3 -12.1 -3.2 -4.6 -7 -6.7 -7 -3.9 -8.7 -2.2 -4.3 .6 -9 4.7 -9.1 8.2 -8.7 10.5 -7.8 11.6 -6.7 11.7 -8.3 16.4 -9.5 21.8 -9.4 26.2 -7.9 29.8 -3.9 23 -1.7 23.5 .4 35.1 3.2 33.4 5.2 25.4 3.8 8.9 3.5 2.9 3.4 .6 5.5 -1 9.7 -4.7 33.7 -23.6 40.8 -25.8 10.8 -7.9 4.7 -4.5 2 -3.1 3 -9.2 2.5 -18 1.7 -77.4 5.3 -8.6 7.4 -9.1 8.3 7.1 .7 2.1 4.3 31.6 -.7 37.7 2.1 28.7 1.7 7.6 2.7 6.7 7.5 11 9 8 8.8 5.5 74.9 34.6 7.2 1.2 7 -1.6 5.6 -4.8 3.9 -7.2 3.1 -10.1 2.6 -12.2 1.5 -23.2 -1.1 -31.2 -4.2 -35.7 -7.7 -36.4 -8.2 -26.5 -11.2 -26.7 -6.8 -13 -7.8 -12.5 -18.8 -23.9 -12.2 -11.4 -9 -5.3 -4.7 -1.5 -4.8 -.5 -6.1 .9 -5.8 2.8 -5.5 4.6 -4.7 6.1 -5.5 10.4 -3.7 9.7 -3.4 12.7 -1.7 11.7 .2 6.4 -1.3 3.5 -1.5 -7.6 .1 -8.2 1.4 -4.4 -1.2 -7.6 1.2 -6.2 0 -3.6 -.9 -2.6 1.2 -5.6 -1 -6.7 .9 -4.5 -1.3 -5.9 1.4 -6.3 -1.6 -5 1.2 -2.7 .5 -4.6 -1.6 -4.6 1.1 -3.2 -.1 -6.2 -.8 -1.9 1.3 -6 -.9 -4.2 1.2 -3.4 -.9 -5.9 .8 -2.9 3.8 -5 1.1 -13.9 4.5 -7.2 1.9 -10.6 -2.6 -7.9 -2.7 -3.4Z\" fill=\"#8f6464\" /></g><path d=\"M128.8 173.7l5.9 7.3 4.4 4 4.7 2.5 2.3.2 2.1-.6 3.9-2.9 8.9-12.9 1.6.4.5 2.7 0 2.5-4.9 20.6-.8 9.7-2.5-.8-8.2-5.2-14.8 17.4.1-14.3-4.6-29.2Z\" fill=\"#cac7c7\" style=\"mix-blend-mode:multiply\" /></g></g></g>"};
+/* Methotrexate scene: DHFR plugged in the tumour cell, THF rescue, and the harmed organs. */
+const L = { tum: $("tumSlot"), org: $("orgSlot"), parts: $("parts"), over: $("over"), panel: $("panel") };
+const TC = [225, 262], TR = 105;
+const sm = { K: 0, Ms: 0, Gu: 0, Lv: 0, Lu: 0, Kd: 0, on: 0, pro: 0 };
+const acc = { fol: 0, mtx: 0, thf: 0, leu: 0, res: 0, bleb: 0, spk: 0, crk: 0, cry: 0, flu: 0 };
+let tumG, dauG, dnaG, plugE, blockE, hazeE, livE, gg = {}, capEl = null, capKey = "";
+let marCells = [], soreE = [], fatDots = [];
+let trMtx, trFol, trThf, trLeu, fol, mtx, thf, leu, res, bleb, spk, crk, cry, flu;
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, u: 0, k: 0 }; }); }
+const free = (pl) => pl.find((p) => !p.on);
+function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.u = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
+function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
+function capText(d, l) {
+  if (d === 2) return ["Leucovorin gives ready THF past the block and fluids flush the kidney. Tumour kill goes on.", "Healthy tissues recover on rescue while the tumour keeps dying.", "Even late on, rescue guards marrow, gut and kidney. Other harms stay lower."][l];
+  if (d === 1) return ["Methotrexate plugs DHFR. THF runs out and tumour DNA copying stalls.", "THF stays low. The tumour dies back while marrow, gut, liver, lung and kidney suffer.", "Late courses kill more tumour but every harm builds."][l];
+  return ["No treatment. Folate flows through DHFR and the tumour cell copies its DNA.", "No treatment. The tumour keeps dividing and nothing else changes.", "No treatment. The tumour grows on, with no benefit and no harm."][l];
+}
+function buildDNA(g) {
+  let left = "", right = "", rungs = "";
+  for (let y = -30; y <= 30; y += 4) {
+    const x = 11 * Math.cos((y / 30) * Math.PI * 2);
+    left += (y === -30 ? "M" : "L") + f1(x) + " " + y;
+    right += (y === -30 ? "M" : "L") + f1(-x) + " " + y;
+    if (((y + 30) / 4) % 3 === 0) rungs += "M" + f1(x) + " " + y + "L" + f1(-x) + " " + y;
+  }
+  mk("path", { class: "oc-rung", d: rungs }, g);
+  mk("path", { class: "oc-dna", d: left }, g);
+  mk("path", { class: "oc-dna", d: right }, g);
+}
+const DROP = "M0 -3.4C2.2 -.6 2.8 .8 2.8 1.8A2.8 2.8 0 0 1 -2.8 1.8C-2.8 .8 -2.2 -.6 0 -3.4Z";
+function init() {
+  tumG = cell(L.tum, { cls: "tum", r: TR, nuc: 0.55, seed: 3, wob: 0.08, x: TC[0], y: TC[1] });
+  dnaG = mk("g", { transform: "translate(5 10)" }, tumG); buildDNA(dnaG);
+  /* DHFR enzyme with its pocket, plugged by drug */
+  const ez = mk("g", {}, L.tum);
+  mk("rect", { class: "oc-enz", x: 187, y: 173, width: 76, height: 30, rx: 9 }, ez);
+  mk("ellipse", { class: "oc-pock", cx: 225, cy: 175, rx: 11, ry: 5.5 }, ez);
+  const ezT = mk("text", { class: "sc-lab", x: 225, y: 193, "text-anchor": "middle" }, ez); ezT.textContent = "DHFR";
+  plugE = mk("path", { class: "oc-plug", d: "M225 164L236 175L225 186L214 175Z", opacity: "0" }, ez);
+  blockE = mk("rect", { class: "oc-block", x: 183, y: 169, width: 84, height: 38, rx: 12, opacity: "0" }, ez);
+  const fT = mk("text", { class: "sc-lab", x: 248, y: 160 }, L.tum); fT.textContent = "folate";
+  const hT = mk("text", { class: "sc-lab", x: 248, y: 228 }, L.tum); hT.textContent = "THF";
+  dauG = cell(L.tum, { cls: "tum", r: 28, nuc: 0.5, seed: 5, wob: 0.1, x: 415, y: 352 });
+  /* marrow bone with blood cells that run low */
+  const bg = mk("g", {}, L.org);
+  mk("rect", { class: "oc-bone", x: 505, y: 132, width: 110, height: 88, rx: 18 }, bg);
+  mk("ellipse", { class: "oc-bone", cx: 505, cy: 176, rx: 15, ry: 48 }, bg);
+  mk("ellipse", { class: "oc-bone", cx: 615, cy: 176, rx: 15, ry: 48 }, bg);
+  mk("rect", { class: "oc-cav", x: 520, y: 152, width: 80, height: 48, rx: 13 }, bg);
+  const mpos = [[534, 166, "rbc"], [556, 161, "neut"], [578, 166, "plt"], [591, 179, "rbc"], [545, 187, "neut"], [568, 190, "plt"]];
+  mpos.forEach(([x, y, cls], i) => marCells.push({ g: cell(bg, { cls, r: 7, nuc: cls === "plt" ? 0 : 0.4, seed: i + 11, wob: 0.12, x, y }), x, y }));
+  /* gut that turns sore, kidney that grows crystals, liver and lung */
+  organ(L.org, "bowel", 700, 172, 85, { h: 75 });
+  [[688, 168, 9, 6], [706, 178, 7, 5], [714, 164, 6, 4]].forEach(([x, y, rx, ry]) => soreE.push(mk("ellipse", { class: "oc-sore", cx: x, cy: y, rx, ry, opacity: "0" }, L.org)));
+  organ(L.org, "kidney", 852, 172, 64, { h: 85 });
+  organ(L.org, "liver", 600, 335, 130, {});
+  livE = mk("ellipse", { class: "oc-liv", cx: 600, cy: 335, rx: 48, ry: 30, opacity: "0" }, L.org);
+  [[575, 322], [590, 330], [608, 322], [620, 335], [588, 345], [605, 348]].forEach(([x, y]) => fatDots.push(mk("circle", { class: "oc-fat", cx: x, cy: y, r: 3, opacity: "0" }, L.org)));
+  organ(L.org, "lung", 830, 335, 120, {});
+  hazeE = mk("ellipse", { class: "oc-haze", cx: 830, cy: 335, rx: 50, ry: 36, opacity: "0" }, L.org);
+  /* tracks and particle pools */
+  trMtx = track([[16, 330], [90, 312], [150, 250], [190, 190]]);
+  trFol = track([[225, 148], [225, 170]]);
+  trThf = track([[225, 206], [225, 238]]);
+  trLeu = track([[16, 420], [250, 424], [470, 380], [560, 300], [545, 195]]);
+  fol = pool(10, () => mk("circle", { class: "sc-p p-fol", r: 2.6 }, L.parts));
+  mtx = pool(12, () => mk("path", { class: "sc-p p-mtx", d: "M0 -4L4 0L0 4L-4 0Z" }, L.parts));
+  thf = pool(10, () => mk("circle", { class: "sc-p p-thf", r: 2.6 }, L.parts));
+  leu = pool(12, () => mk("circle", { class: "p-leu", r: 4.5 }, L.parts));
+  res = pool(10, () => mk("circle", { class: "p-leu", r: 4 }, L.parts));
+  bleb = pool(12, () => mk("circle", { class: "sc-p p-bleb", r: 3.4 }, L.parts));
+  spk = pool(10, () => mk("circle", { class: "sc-p p-spk", r: 2.2 }, L.parts));
+  crk = pool(10, () => mk("circle", { class: "sc-p p-crk", r: 2.6 }, L.parts));
+  cry = pool(14, () => mk("path", { class: "p-crys", d: "M0 -3.5L3 2.5L-3 2.5Z" }, L.parts));
+  flu = pool(10, () => mk("path", { class: "p-flush", d: DROP }, L.parts));
+  /* labels, caption, gauges */
+  const ox = L.over;
+  pill(ox, "Methotrexate", 100, 302, 80, 400, "Methotrexate looks like folate but cannot be used. It plugs the DHFR enzyme so the cell cannot make THF.");
+  pill(ox, "DHFR", 263, 188, 340, 108, "Dihydrofolate reductase turns folate into THF, which builds purines and thymidine for DNA. Blocked, the cell cannot copy its DNA.");
+  pill(ox, "Tumour DNA", 230, 302, 225, 404, "Without purines and thymidine the tumour cell cannot copy its DNA, so it stops dividing and dies.");
+  pill(ox, "Marrow", 560, 148, 560, 92, "Marrow cells divide fast, so without THF they die and red cells, white cells and platelets all fall.");
+  pill(ox, "Gut sore", 700, 158, 700, 92, "Mouth and gut lining renew fast, so without THF the lining breaks down into painful sores.");
+  pill(ox, "Kidney", 852, 155, 852, 92, "Methotrexate crystals settle in acid urine and block kidney tubules. Fluids and alkali urine flush them out.");
+  pill(ox, "Liver", 560, 318, 512, 268, "The liver stores methotrexate, and over many courses the stored drug scars it.");
+  pill(ox, "Lung", 830, 312, 898, 268, "An immune reaction to methotrexate inflames the air sacs, causing dry cough and breathlessness.");
+  capEl = mk("text", { class: "oc-cap", x: 30, y: 443 }, ox); capEl.textContent = capText(drug, level);
+  const P = L.panel;
+  mk("rect", { class: "dr-panel", x: 24, y: 448, width: 912, height: 142, rx: 14 }, P);
+  const t = mk("text", { class: "dr-pt", x: 40, y: 470 }, P); t.textContent = "Benefit and harm together";
+  [["kill", "Tumour kill", "g-good", "How much tumour dies for lack of THF. Rises with each course."], ["mar", "Marrow low", "g-neu", "Marrow cells divide fast, so without THF they die and blood counts fall. Leucovorin guards them."], ["gut", "Gut sore", "g-bad", "Mouth and gut lining renew fast, so without THF the lining breaks into sores. Leucovorin guards it."], ["liv", "Liver harm", "g-eos", "The liver stores methotrexate, and over many courses the stored drug scars it."], ["lun", "Lung harm", "g-cyt", "An immune reaction to methotrexate inflames the air sacs, causing dry cough and breathlessness."], ["kid", "Kidney harm", "g-fl", "Drug crystals settle in acid urine and block kidney tubules. Fluids and alkali urine flush them out."]]
+    .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, 130 + i * 140, 478, 70, 18, cls, name, tip); });
+}
+function step(dt, m) {
+  const k2 = Math.min(1, dt * 1.2);
+  sm.K = lerp(sm.K, m.K, k2); sm.Ms = lerp(sm.Ms, m.Ms, k2); sm.Gu = lerp(sm.Gu, m.Gu, k2); sm.Lv = lerp(sm.Lv, m.Lv, k2); sm.Lu = lerp(sm.Lu, m.Lu, k2); sm.Kd = lerp(sm.Kd, m.Kd, k2); sm.on = lerp(sm.on, m.on, k2); sm.pro = lerp(sm.pro, m.pro, k2);
+  /* folate feeds DHFR, drug plugs it, THF output runs dry */
+  acc.fol += dt * 4;
+  while (acc.fol >= 1) { acc.fol--; const p = free(fol); if (p) emit(p, 0, 0, 0, 0, 0); }
+  fol.forEach((p) => { if (!p.on) return; p.u += dt * 1.1; if (p.u >= 1) { kill(p); return; } const q = trFol.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")"); });
+  acc.mtx += dt * sm.on * 5;
+  while (acc.mtx >= 1) { acc.mtx--; const p = free(mtx); if (p) emit(p, 0, 0, 0, 0, 0); }
+  mtx.forEach((p) => { if (!p.on) return; p.u += dt * 0.5; if (p.u >= 1) { kill(p); return; } const q = trMtx.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ") rotate(" + f1(p.u * 160) + ")"); });
+  plugE.setAttribute("opacity", sm.on.toFixed(2));
+  blockE.setAttribute("opacity", sm.on.toFixed(2));
+  acc.thf += dt * (1 - sm.K) * 5;
+  while (acc.thf >= 1) { acc.thf--; const p = free(thf); if (p) emit(p, 0, 0, 0, 0, 0); }
+  thf.forEach((p) => { if (!p.on) return; p.u += dt * 0.8; if (p.u >= 1) { kill(p); return; } const q = trThf.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")"); });
+  /* tumour DNA fades, blebs fly off, the daughter cell stalls */
+  dnaG.setAttribute("opacity", (1 - 0.65 * sm.K).toFixed(2));
+  acc.bleb += dt * sm.K * 5;
+  while (acc.bleb >= 1) { acc.bleb--; const p = free(bleb); if (p) { const a = rnd(0, 6.28); emit(p, TC[0] + Math.cos(a) * TR, TC[1] + Math.sin(a) * TR, Math.cos(a) * 26, Math.sin(a) * 26, 0); } }
+  bleb.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", clamp(1 - p.t / 1.6).toFixed(2)); if (p.t > 1.6) kill(p); });
+  const dg = 1 - sm.K;
+  place(dauG, 415, 352, 0, Math.max(dg, 0.001)); dauG.style.opacity = dg > 0.05 ? 1 : 0;
+  /* leucovorin bypass runs past the block to the marrow, and into marrow and gut */
+  acc.leu += dt * sm.pro * 4;
+  while (acc.leu >= 1) { acc.leu--; const p = free(leu); if (p) emit(p, 0, 0, 0, 0, 0); }
+  leu.forEach((p) => { if (!p.on) return; p.u += dt * 0.25; if (p.u >= 1) { kill(p); return; } const q = trLeu.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")"); });
+  acc.res += dt * sm.pro * 4;
+  while (acc.res >= 1) { acc.res--; const p = free(res); if (p) { const gut = Math.random() < 0.5; emit(p, gut ? 700 + rnd(-20, 20) : 560 + rnd(-28, 28), 116, 0, rnd(22, 30), 0); } }
+  res.forEach((p) => { if (!p.on) return; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", clamp(1 - (p.y - 116) / 90).toFixed(2)); if (p.y > 205) kill(p); });
+  /* marrow cells run low */
+  const keep = (1 - 0.85 * sm.Ms) * marCells.length;
+  marCells.forEach((c, i) => { const s = clamp(keep - i); place(c.g, c.x, c.y, 0, Math.max(s, 0.001)); c.g.style.opacity = s > 0.05 ? 1 : 0; });
+  /* gut sores glow and sparkle */
+  const so = sm.Gu * (0.75 + 0.25 * Math.sin(tm / 350));
+  soreE.forEach((e) => e.setAttribute("opacity", so.toFixed(2)));
+  acc.spk += dt * sm.Gu * 6;
+  while (acc.spk >= 1) { acc.spk--; const p = free(spk); if (p) emit(p, 700 + rnd(-30, 30), 172 + rnd(-24, 24), 0, 0, 0); }
+  spk.forEach((p) => { if (!p.on) return; p.t += dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") scale(" + (1 + p.t * 1.6).toFixed(2) + ")"); p.e.setAttribute("opacity", clamp(1 - p.t / 0.8).toFixed(2)); if (p.t > 0.8) kill(p); });
+  /* kidney crystals settle, fluids flush them out */
+  acc.cry += dt * sm.Kd * 6;
+  while (acc.cry >= 1) { acc.cry--; const p = free(cry); if (p) emit(p, 852 + rnd(-16, 16), 140 + rnd(-6, 6), 0, rnd(12, 20), 0); }
+  cry.forEach((p) => { if (!p.on) return; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(p.y * 6) + ")"); if (p.y > 205) kill(p); });
+  acc.flu += dt * sm.pro * 7;
+  while (acc.flu >= 1) { acc.flu--; const p = free(flu); if (p) emit(p, 852 + rnd(-16, 16), 136, 0, rnd(80, 100), 0); }
+  flu.forEach((p) => { if (!p.on) return; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.y > 208) kill(p); });
+  /* liver stores harm, lung hazes and crackles */
+  livE.setAttribute("opacity", (sm.Lv * 0.55).toFixed(2));
+  fatDots.forEach((e) => e.setAttribute("opacity", sm.Lv.toFixed(2)));
+  hazeE.setAttribute("opacity", (sm.Lu * 0.5).toFixed(2));
+  acc.crk += dt * sm.Lu * 4;
+  while (acc.crk >= 1) { acc.crk--; const p = free(crk); if (p) emit(p, 830 + rnd(-40, 40), 335 + rnd(-28, 28), 0, 0, 0); }
+  crk.forEach((p) => { if (!p.on) return; p.t += dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") scale(" + (1 + p.t * 1.4).toFixed(2) + ")"); p.e.setAttribute("opacity", clamp(1 - p.t / 0.9).toFixed(2)); if (p.t > 0.9) kill(p); });
+  /* caption and gauges */
+  const key = drug * 10 + level; if (key !== capKey) { capKey = key; const t = capText(drug, level); if (capEl.textContent !== t) capEl.textContent = t; }
+  gg.kill.set(sm.K, wordOf(sm.K, 0.25, 0.6, ["low", "medium", "high"]));
+  gg.mar.set(sm.Ms, wordOf(sm.Ms, 0.3, 0.65, ["ok", "low", "very low"]));
+  gg.gut.set(sm.Gu, wordOf(sm.Gu, 0.3, 0.65, ["ok", "sore", "raw"]));
+  gg.liv.set(sm.Lv, wordOf(sm.Lv, 0.2, 0.4, ["ok", "some", "much"]));
+  gg.lun.set(sm.Lu, wordOf(sm.Lu, 0.2, 0.4, ["ok", "some", "much"]));
+  gg.kid.set(sm.Kd, wordOf(sm.Kd, 0.2, 0.55, ["ok", "crystals", "blocked"]));
+}
+run({ init, step });
+</script></body></html>
