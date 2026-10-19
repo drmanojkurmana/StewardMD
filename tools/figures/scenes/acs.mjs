@@ -90,7 +90,7 @@ buildScene({
 .cl-foam{--cc:#f0d98a}.cl-foam .cl-n{fill:#b8962f;opacity:.5}
 .ac-vac{fill:none;stroke:#b8962f;stroke-width:.8}
 .ac-xc{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.6}.ac-xp{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-linecap:round}
-.ac-stent{fill:none;stroke:var(--anatomy-strong);stroke-width:1.6;stroke-linejoin:round}
+.ac-stent{fill:none;stroke:var(--anatomy-strong);stroke-width:2.4;stroke-linejoin:round}
 .ac-myo{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 55%,var(--c-tis))}.ac-cav{fill:color-mix(in srgb,var(--c-rbc) 35%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
 .ac-isch{fill:#8a5fc4}.ac-inf{fill:#4a4048}
 .ac-lad{fill:none;stroke:var(--c-rbc);stroke-width:5.5;stroke-linecap:round}.ac-lad2{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 50%,#fff);stroke-width:1.4;stroke-linecap:round;opacity:.7}

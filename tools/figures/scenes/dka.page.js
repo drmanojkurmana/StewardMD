@@ -1,6 +1,6 @@
 /* DKA scene: insulin-deficient muscle and liver, ketone production, blood, kidney loss, lungs and the treatment sources. */
 const CY = SC.CY, WW = SC.W;
-const layers = { lungs: $("lungs"), muscle: $("muscle"), cells: $("cells"), tr: $("tr"), parts: $("parts"), marks: $("marks"), over: $("over"), panel: $("panel"), lumen: $("lumen"), panc: $("pancSlot"), liver: $("liverSlot"), kidney: $("kidneySlot"), trig: $("trig") };
+const layers = { lungs: $("lungs"), muscle: $("muscle"), cells: $("cells"), tr: $("tr"), parts: $("parts"), marks: $("marks"), over: $("over"), panel: $("panel"), lumen: $("lumen"), haze: $("haze"), panc: $("pancSlot"), liver: $("liverSlot"), mslot: $("muscleSlot"), kidney: $("kidneySlot"), trig: $("trig") };
 function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0, tx: 0, ty: 0, dwell: 0, liver: false }; }); }
 const free = (pl) => pl.find((p) => !p.on);
 function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.dwell = 0; p.e.setAttribute("opacity", "1"); }
@@ -11,8 +11,9 @@ const dia = (cls) => () => mk("path", { class: "sc-p " + cls, d: "M0 -3.4L3.2 0L
 const sm = { G: 0.8, Kt: 0.7, De: 0.7, Sh: 0.6, Kr: 0.6, Ks: 0.6, Kin: 0.3, ins: 0, fl: 0, kcl: 0, full: 0, a: 0.75, og: 0.08 };
 let hh = 34, breathPh = 0;
 
-/* ---- organs: pancreas, liver, kidney and two lungs replace the old blob art ---- */
-let pancO = null, liverO = null, kidneyO = null, lungWrapL = null, lungWrapR = null, capEl = null, capDrug = -1;
+/* ---- organs: pancreas, liver, muscle, kidney and two lungs are real organ art ---- */
+let pancO = null, liverO = null, muscO = null, kidneyO = null, lungWrapL = null, lungWrapR = null, capEl = null, capDrug = -1;
+let gateY = 216;
 const trigDots = [];
 function capText(d) {
   if (d === 1) return "Fluids refill the vessels. Water loss improves, but sugar and acid stay high.";
@@ -25,6 +26,8 @@ function capText(d) {
 function initOrgans() {
   pancO = organ(layers.panc, "pancreas", 142, 150, 170, {});
   liverO = organ(layers.liver, "liver", 505, 150, 150, {});
+  muscO = organ(layers.mslot, "muscle", 780, 160, 260, {});
+  gateY = Math.round(muscO.y + muscO.h / 2) - 5;
   kidneyO = organ(layers.kidney, "kidney", 630, 392, 58, {});
   lungWrapL = mk("g", {}, layers.lungs); lungWrapR = mk("g", {}, layers.lungs);
   organ(lungWrapL, "lung", 55, 302, 64, { flip: true });
@@ -35,14 +38,15 @@ function initOrgans() {
   });
 }
 
-/* ---- fat store stays a tissue cell; muscle stays fibre tissue with gates ---- */
+/* ---- fat store stays a tissue cell; muscle is real organ art with gates ---- */
 const fat = cell(layers.cells, { cls: "fat", r: 38, seed: 7, wob: 0.07, x: 345, y: 192 });
 const vac = mk("circle", { class: "cl-vac cl-b", cx: 345, cy: 192, r: 24, style: "fill:#fff3c0;stroke:#d9b44a" }, layers.cells);
-/* ---- muscle ---- */
-const mus = mk("rect", { class: "dka-musc", x: 650, y: 100, width: 260, height: 120, rx: 24 }, layers.muscle);
-for (let i = 0; i < 12; i++) mk("path", { class: "dka-stri", d: "M" + (672 + i * 20) + " 112L" + (672 + i * 20) + " 208" }, layers.muscle);
-const gates = [680, 735, 790, 845, 900].map((x) => ({ x, l: mk("rect", { class: "dka-gate", x: x - 8, y: 216, width: 7, height: 10, rx: 2 }, layers.muscle), r: mk("rect", { class: "dka-gate", x: x + 1, y: 216, width: 7, height: 10, rx: 2 }, layers.muscle), cross: mk("path", { class: "dka-x", d: "M" + (x - 4) + " 230l8 8M" + (x + 4) + " 230l-8 8" }, layers.muscle) }));
-const kin = Array.from({ length: 16 }, (_, i) => mk("circle", { class: "sc-p p-k", r: 3, cx: 672 + (i % 8) * 31 + (i > 7 ? 14 : 0), cy: 134 + Math.floor(i / 8) * 44 }, layers.muscle));
+/* ---- muscle sugar gates sit on the lower edge of the real muscle art; potassium lives inside it ---- */
+let gates = [], kin = [];
+function initMuscle() {
+  gates = [680, 735, 790, 845, 900].map((x) => ({ x, l: mk("rect", { class: "dka-gate", x: x - 8, y: gateY, width: 7, height: 10, rx: 2 }, layers.muscle), r: mk("rect", { class: "dka-gate", x: x + 1, y: gateY, width: 7, height: 10, rx: 2 }, layers.muscle), cross: mk("path", { class: "dka-x", d: "M" + (x - 4) + " " + (gateY + 14) + "l8 8M" + (x + 4) + " " + (gateY + 14) + "l-8 8" }, layers.muscle) }));
+  kin = Array.from({ length: 16 }, (_, i) => mk("circle", { class: "sc-p p-k", r: 3, cx: 672 + (i % 8) * 31 + (i > 7 ? 14 : 0), cy: (gateY - 82) + Math.floor(i / 8) * 44 }, layers.muscle));
+}
 /* ---- treatment sources ---- */
 const bag = mk("g", { id: "tr-fl" }, layers.tr); mk("path", { class: "dka-icon", d: "M60 380h40v34a20 12 0 0 1-40 0Z" }, bag); mk("path", { class: "dka-icon", d: "M76 380v-6h8v6" }, bag); mk("path", { class: "p-fl", d: "M80 394c4 5 5 8 5 10a5 5 0 0 1-10 0c0-2 1-5 5-10Z" }, bag);
 const syr = mk("g", { id: "tr-ins" }, layers.tr); mk("rect", { class: "dka-ico2", x: 232, y: 386, width: 60, height: 16, rx: 3 }, syr); mk("path", { class: "dka-ico2", d: "M292 392h18v4h-18Z" }, syr); mk("path", { class: "dka-ico2", d: "M226 394h8M226 388v12" }, syr); mk("path", { class: "dka-ico2", d: "M250 386v16M262 386v16M274 386v16" }, syr);
@@ -72,40 +76,44 @@ function initPanel() {
   [["gl", "Glucose", "g-gl", "Blood glucose. High because there is almost no insulin: muscle cannot take it up and the liver keeps making more."], ["kt", "Ketones, acid", "g-acid", "Ketone acids from fatty-acid breakdown. They lower blood pH (acidosis) and widen the anion gap."], ["de", "Dehydration", "g-dehy", "Water, sodium and potassium lost in urine because glucose drags water out (osmotic diuresis). Fluids correct it."], ["kr", "Potassium risk", "g-kr", "Total body potassium is low even if the blood level looks normal or high. Insulin pushes potassium into cells, so the level can fall dangerously fast without replacement."], ["sh", "Shock", "g-sh", "Low blood volume lowers blood pressure and organ perfusion."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
   const ox = layers.over;
-  pill(ox, "Pancreas", 140, 108, 90, 90, "Pancreas. Beta cells here normally release insulin. In diabetes almost none is released, and alpha cells release glucagon that tells the liver to make sugar and ketones.");
-  pill(ox, "Fat cell", 345, 165, 345, 104, "Fat cell. Without insulin its fat store breaks down and releases fatty acids.");
-  pill(ox, "Liver", 505, 108, 505, 80, "Liver. It turns fatty acids into ketone acids and keeps making sugar while insulin is missing.");
-  pill(ox, "Muscle cell", 780, 140, 780, 88, "Muscle cell. Sugar enters through glucose gates that need insulin. With no insulin the gates stay shut, and potassium leaks out of the cell.");
-  pill(ox, "Glucose gates", 760, 222, 830, 244, "Glucose gates. Opened by insulin. Closed here, so sugar piles up in the blood.");
-  pill(ox, "Kidney", 630, 368, 692, 366, "Kidney. Sugar above what the tubule can reclaim stays in the urine and drags water, sodium and potassium with it.");
-  pill(ox, "Lost in urine", 930, 424, 880, 436, "Water, sodium and potassium lost in urine: the main cause of dehydration here.");
-  pill(ox, "Fluids", 80, 400, 80, 436, "Intravenous fluids: refill the blood vessels and dilute the sugar.");
-  pill(ox, "Insulin", 262, 394, 262, 436, "Insulin given as treatment: switches off ketone and sugar making, opens the muscle gates and moves sugar and potassium into cells.");
-  pill(ox, "Potassium", 420, 400, 420, 436, "Potassium replacement with monitoring: prevents the dangerous fall when insulin moves potassium back into cells.");
-  pill(ox, "Trigger", 928, 72, 890, 54, "A trigger, for example an infection or a missed insulin dose. The full protocol treats it alongside fluids, insulin and potassium.");
-  [["Lungs: deep, fast breathing blows off carbon dioxide to offset the acid."]].forEach(([tip]) => { const hg = mk("g", { class: "hot", tabindex: "0", "data-info": tip }, ox); mk("rect", { x: 28, y: 290, width: 106, height: 46, rx: 12, fill: "transparent" }, hg); });
-  // a small legend in the gap above the blood
-  const lg = mk("g", {}, ox); [["p-gluc", "glucose", 300], ["p-ket", "ketone acid", 392], ["p-k", "potassium", 510], ["p-ins", "insulin", 612]].forEach(([c, n, x]) => { mk("circle", { class: "sc-p " + c, cx: x, cy: 258, r: 3 }, lg); const tx = mk("text", { class: "sc-lab", x: x + 8, y: 261 }, lg); tx.textContent = n; });
+  pill(ox, "Pancreas", 140, 108, 90, 90, "Pancreas. Its beta cells should release insulin. Here almost none comes out, so sugar cannot enter muscle and the liver keeps making more.");
+  pill(ox, "Fat", 345, 162, 345, 104, "Fat. Without insulin, stored fat breaks down and releases fatty acids into the blood.");
+  pill(ox, "Liver", 505, 100, 505, 80, "Liver. It turns fatty acids into ketone acids and keeps making sugar.");
+  pill(ox, "Muscle", 780, 112, 780, 88, "Muscle. Its sugar gates need insulin. Shut here, so sugar stays in the blood and potassium leaks out.");
+  pill(ox, "Blood", 250, 296, 250, 244, "Blood. Sugar and ketone acids pile up. The red haze fades as treatment clears the acid.");
+  pill(ox, "Kidney", 630, 368, 692, 366, "Kidney. Sugar left in the urine drags water, sodium and potassium out.");
+  pill(ox, "Lungs", 85, 285, 85, 352, "Lungs. Deep fast breathing blows off carbon dioxide to offset the acid.");
+  pill(ox, "Treatment", 240, 386, 240, 436, "Treatment. Fluids refill the vessels. Insulin switches off acid making and opens the gates. Potassium is replaced with monitoring.");
+  const hot = (x, y, w, h, tip) => { const g = mk("g", { class: "hot", tabindex: "0", "data-info": tip }, ox); mk("rect", { x, y, width: w, height: h, rx: 10, fill: "transparent" }, g); };
+  hot(56, 376, 48, 42, "Fluids. They refill the blood vessels and dilute the sugar.");
+  hot(222, 382, 92, 24, "Insulin. It switches off ketone and sugar making, opens the muscle gates, and moves sugar and potassium into cells.");
+  hot(396, 376, 48, 42, "Potassium with monitoring. Insulin drives potassium into cells, so the blood level can fall fast without replacement.");
+  hot(908, 58, 40, 32, "A trigger such as infection or a missed insulin dose. The full protocol treats it as well.");
+  hot(664, 206, 248, 40, "Sugar gates. Opened by insulin. Shut here, so sugar piles up in the blood.");
+  hot(898, 398, 48, 40, "Lost in urine. Water, sodium and potassium leaving in urine: the main cause of dehydration here.");
   capEl = mk("text", { class: "dka-cap", x: 30, y: 30 }, ox); capEl.textContent = capText(0);
 }
-function init() { initOrgans(); initPanel(); }
+function init() { initOrgans(); initMuscle(); initPanel(); }
 function fly(p, dt, sx) { p.x += p.vx * dt; p.y += p.vy * dt; at(p); }
 function step(dt, m) {
   const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.45);
   sm.G = lerp(sm.G, m.G, k2); sm.Kt = lerp(sm.Kt, m.Kt, k2); sm.De = lerp(sm.De, m.De, k2); sm.Sh = lerp(sm.Sh, m.Sh, k2); sm.Kr = lerp(sm.Kr, m.Kr, k2); sm.Ks = lerp(sm.Ks, m.Ks, k2); sm.Kin = lerp(sm.Kin, m.Kin, k2);
   sm.ins = lerp(sm.ins, m.ins, k1); sm.fl = lerp(sm.fl, m.fl, k1); sm.kcl = lerp(sm.kcl, m.kcl, k1); sm.full = lerp(sm.full, m.full, k1); sm.a = m.a; sm.og = lerp(sm.og, m.ins ? 0.95 : 0.08, k1);
-  hh = 34 * (1 - 0.5 * sm.De) + 2 * Math.sin(tm / 900);
+  hh = 34 * (1 - 0.55 * sm.De) + 2 * Math.sin(tm / 900);
   layers.lumen.setAttribute("y", f1(CY - hh)); layers.lumen.setAttribute("height", f1(hh * 2));
+  layers.haze.setAttribute("y", f1(CY - hh)); layers.haze.setAttribute("height", f1(hh * 2));
+  layers.haze.setAttribute("opacity", (0.55 * sm.Kt).toFixed(2));
   const flow = 48 * (1 - 0.5 * sm.Sh);
-  /* blood: glucose, ketone acid, potassium */
+  /* blood: glucose, ketone acid, potassium; ketone shards shrink as insulin switches production off */
   const wg = Math.round(sm.G * gl.length), wk = Math.round(sm.Kt * ke.length), wp = Math.round(sm.Ks * ks.length);
-  [[gl, wg, 1], [ke, wk, 0.85], [ks, wp, 0.75]].forEach(([arr, want, sp]) => arr.forEach((p, i) => { const on = i < want; p.x += flow * sp * dt; if (p.x > 946) { p.x = 162; p.r = rnd(-0.8, 0.8); } p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(CY + p.r * (hh - 6)) + ")"); p.e.setAttribute("opacity", on ? "1" : "0"); }));
+  const ksc = 1 - 0.4 * sm.ins;
+  [[gl, wg, 1, 1], [ke, wk, 0.85, ksc], [ks, wp, 0.75, 1]].forEach(([arr, want, sp, sc]) => arr.forEach((p, i) => { const on = i < want; p.x += flow * sp * dt; if (p.x > 946) { p.x = 162; p.r = rnd(-0.8, 0.8); } p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(CY + p.r * (hh - 6)) + ")" + (sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : "")); p.e.setAttribute("opacity", on ? "1" : "0"); }));
   /* muscle gates and potassium */
   gates.forEach((g, i) => { const o = sm.og * 6; g.l.setAttribute("x", f1(g.x - 8 - o)); g.r.setAttribute("x", f1(g.x + 1 + o)); g.cross.setAttribute("opacity", (1 - sm.og).toFixed(2)); g.l.classList.toggle("open", sm.og > 0.5); g.r.classList.toggle("open", sm.og > 0.5); });
   const wkin = Math.round(sm.Kin * kin.length); kin.forEach((d, i) => d.setAttribute("opacity", i < wkin ? "1" : "0.12"));
   acc.up += dt * sm.og * (0.3 + sm.G) * 6; while (acc.up >= 1) { acc.up--; const p = free(up), g = pick(gates); if (p) emit(p, g.x, CY - hh - 2, 0, -50, 0); }
   up.forEach((p) => { if (!p.on) return; fly(p, dt); if (p.y < 190) kill(p); });
-  acc.kout += dt * (1 - sm.Kin) * 3; while (acc.kout >= 1) { acc.kout--; const p = free(kout); if (p) emit(p, rnd(670, 890), 214, 0, 32, 0); }
+  acc.kout += dt * (1 - sm.Kin) * 3; while (acc.kout >= 1) { acc.kout--; const p = free(kout); if (p) emit(p, rnd(670, 890), gateY - 2, 0, 32, 0); }
   kout.forEach((p) => { if (!p.on) return; fly(p, dt); if (p.y > CY - hh - 2) kill(p); });
   acc.kin += dt * sm.ins * sm.og * 4; while (acc.kin >= 1) { acc.kin--; const p = free(kinflux), g = pick(gates); if (p) emit(p, g.x + 4, CY - hh - 2, 0, -46, 0); }
   kinflux.forEach((p) => { if (!p.on) return; fly(p, dt); if (p.y < 190) kill(p); });
@@ -130,8 +138,8 @@ function step(dt, m) {
     if (!p.on) return;
     if (p.k === 0) { p.y += p.vy * dt; if (p.y < CY + 6) { p.k = 1; p.y = CY + rnd(-6, 6); } }
     else if (p.k === 1) { p.x += 90 * dt; if (p.x >= p.tx) { p.k = 2; p.x = p.tx; p.dwell = 0; } }
-    else if (p.k === 2) { p.dwell += dt; p.x = p.tx + Math.sin(tm / 200 + p.tx) * 1.5; if (p.dwell > 0.8) p.k = 3; }
-    else { p.y -= 60 * dt; if (p.y < (p.liver ? 208 : 214)) kill(p); }
+    else if (p.k === 2) { p.dwell += dt; p.x = p.tx + Math.sin(tm / 200 + p.tx) * 1.5; if (p.dwell > 1.1) p.k = 3; }
+    else { p.y -= 60 * dt; if (p.y < (p.liver ? 208 : gateY - 2)) kill(p); }
     at(p);
   });
   acc.kcl += dt * sm.kcl * 2.6; while (acc.kcl >= 1) { acc.kcl--; const p = free(kcp); if (p) emit(p, 420, 372, 0, -50, 0); }

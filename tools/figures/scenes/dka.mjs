@@ -57,13 +57,11 @@ const body = `
 <rect class="sc-tissue" x="14" y="262" width="136" height="76" rx="16"/>
 <rect class="sc-tissue" x="14" y="346" width="536" height="96" rx="16" opacity="0.7"/>
 <rect class="sc-tissue" x="560" y="346" width="386" height="96" rx="16" opacity="0.7"/>
-<text class="sc-zone" x="32" y="68">PANCREAS</text><text class="sc-zone" x="298" y="68">FAT AND LIVER</text><text class="sc-zone" x="628" y="68">MUSCLE</text>
-<text class="sc-zone" x="30" y="282">LUNGS</text><text class="sc-zone" x="32" y="364">TREATMENT, WHEN GIVEN</text><text class="sc-zone" x="578" y="364">KIDNEY</text>
 <rect id="lumen" class="sc-lumen" x="160" y="${CY - 34}" width="786" height="68"/>
-<text class="sc-zone sc-dim" x="176" y="${CY + 4}">BLOOD</text>
+<rect id="haze" class="dka-haze" x="160" y="${CY - 34}" width="786" height="68" opacity="0"/>
 <path class="dka-tube" d="${tube}"/>
-<g id="pancSlot"></g><g id="liverSlot"></g><g id="kidneySlot"></g><g id="trig"></g>
-<g id="lungs"></g><g id="muscle"></g><g id="cells"></g>
+<g id="trig"></g><g id="lungs"></g><g id="pancSlot"></g><g id="liverSlot"></g><g id="muscleSlot"></g><g id="kidneySlot"></g>
+<g id="cells"></g><g id="muscle"></g>
 <g id="tr"></g><g id="parts"></g><g id="marks"></g><g id="over"></g><g id="panel"></g>`;
 
 const extraCss = `
@@ -71,8 +69,7 @@ const extraCss = `
 .cl-fat{--cc:#f3e1a0}
 .cl-vac .cl-b{fill:color-mix(in srgb,#fff6c8 80%,var(--c-neut)}
 .p-gluc{--cc:#f2b23a}.p-ket{--cc:#ee6a4a}.p-k{--cc:#b27af0}.p-ffa{--cc:#e89a3c}.p-gcg{--cc:#f07a7a}.p-ins{--cc:#2fc2a3}.p-co2{--cc:#9aa3ad}.p-salt{--cc:#d9d4f2}.p-iv{fill:var(--c-fl)}
-.dka-musc{fill:color-mix(in srgb,var(--c-mus,#d77a7a) 55%,var(--anatomy-paper));stroke:#c25a5a;stroke-width:1.4}
-.dka-stri{stroke:#c25a5a;stroke-width:.8;opacity:.5}
+.dka-haze{fill:#ee6a4a;stroke:none}
 .dka-gate{fill:#c25a5a}.dka-gate.open{fill:var(--c-good)}
 .dka-icon{fill:color-mix(in srgb,var(--c-fl) 40%,var(--anatomy-paper));stroke:var(--c-fl);stroke-width:1.3}
 .dka-ico2{fill:color-mix(in srgb,#2fc2a3 40%,var(--anatomy-paper));stroke:#2fc2a3;stroke-width:1.3}

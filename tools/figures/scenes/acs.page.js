@@ -43,9 +43,9 @@ function init() {
   art.stentA.setAttribute("d", za); art.stentB.setAttribute("d", zb);
   plas = pool(10, () => mk("circle", { class: "sc-p p-plas", r: 2.2 }, L.art));
   spill = pool(14, () => mk("rect", { class: "sc-p p-spill", x: -2, y: -2, width: 4, height: 4, rx: 1 }, L.art));
-  apDrug = pool(12, () => mk("circle", { class: "sc-p p-apdrug", r: 2.6 }, L.art));
-  acDrug = pool(10, () => mk("circle", { class: "sc-p p-acdrug", r: 2.6 }, L.art));
-  statD = pool(8, () => mk("circle", { class: "sc-p p-stat", r: 2.4 }, L.art));
+  apDrug = pool(14, () => mk("circle", { class: "sc-p p-apdrug", r: 3 }, L.art));
+  acDrug = pool(12, () => mk("circle", { class: "sc-p p-acdrug", r: 3 }, L.art));
+  statD = pool(10, () => mk("circle", { class: "sc-p p-stat", r: 3 }, L.art));
   marks.ap = xmark(L.art, 268, 178, "x-ap"); marks.ac = xmark(L.art, 366, 176, "x-ac");
   /* ---- heart: the shared organ, with one surface artery, its blocked point and the muscle at risk ---- */
   heartO = organ(L.slot, "heart", HX, HY, HW, {});
@@ -71,20 +71,13 @@ function init() {
   mk("rect", { x: E.x, y: E.y, width: E.w, height: E.h, fill: "transparent" }, eh);
   /* ---- labels and gauges ---- */
   const o = L.over;
-  pill(o, "Fibrous cap", 262, 214, 232, 90, "The thin fibrous cap over a fatty plaque. When it cracks, the blood meets the material inside and clots.");
-  pill(o, "Platelet plug", 300, 200, 350, 90, "Platelets stick to the exposed plaque, switch on and clump together. Antiplatelet drugs act here.");
-  pill(o, "Fibrin", 340, 190, 452, 90, "The clotting cascade makes fibrin threads that bind the platelets into a firm clot. Heparin acts on this step.");
-  pill(o, "Blood flow", 70, 150, 100, 90, "Red cells carry oxygen. As the clot grows the flow slows and then stops.");
-  pill(o, "Foam cells", 288, 246, 140, 298, "Macrophages stuffed with oxidised cholesterol. They build the plaque core. Statins slow this process.");
-  pill(o, "Lipid core", 345, 245, 262, 298, "The soft fatty centre of the plaque. A large core under a thin cap makes a plaque unstable.");
-  pill(o, "Coronary artery", HX + 14, HY - 46, 640, 92, "One coronary artery runs on the surface of the heart and feeds a territory of muscle. Block it and that territory starves.");
-  pill(o, "Muscle at risk", TC[0], TC[1], 874, 182, "The territory of muscle fed by the blocked artery. It turns from healthy to ischaemic to dead (infarcted).");
-  pill(o, "Troponin", TC[0] + 32, TC[1] + 14, 880, 330, "Troponin is released from dying heart muscle cells. It is the blood test that shows muscle injury.");
-  pill(o, "Heart", HX + 40, HY + 10, HX, 410, "The heart pumps blood to the body. The marked surface artery feeds the shaded territory.");
-  const dr = pill(o, "Antiplatelet", 268, 178, 118, 172, "Antiplatelet drugs (aspirin, a P2Y12 inhibitor) stop platelets clumping, so the clot stays smaller."); dr.setAttribute("id", "p-ap"); dr.style.opacity = 0;
-  const da = pill(o, "Anticoagulant", 366, 176, 500, 172, "An anticoagulant (heparin) blocks thrombin and factor Xa, so less fibrin forms."); da.setAttribute("id", "p-ac"); da.style.opacity = 0;
-  const dp = pill(o, "Reperfusion", CX, 125, 300, 140, "Reperfusion: a balloon and stent (PCI) or a clot-dissolving drug (thrombolysis) reopens the vessel and brings blood back."); dp.setAttribute("id", "p-pci"); dp.style.opacity = 0;
-  const dv = pill(o, "Prevention", HX + 55, HY + 70, 884, 395, "A statin, a beta-blocker and an ACE inhibitor: the core and plaque shrink, the heart works less hard, and the muscle remodels less."); dv.setAttribute("id", "p-prev"); dv.style.opacity = 0;
+  pill(o, "Plaque", CX - 30, BOT + 8, 180, 298, "Fatty plaque with a thin cap. A crack lets blood meet the core and clotting starts. Statin care shrinks the core.");
+  pill(o, "Clot", CX, 190, 350, 90, "Clot made of platelets plus fibrin mesh. It narrows then blocks the lumen. Antiplatelet drugs and heparin keep it smaller.");
+  pill(o, "Blood flow", 70, 150, 100, 90, "Red cells carry oxygen downstream. Flow slows as the clot grows and stops when blocked. Reperfusion brings it back.");
+  pill(o, "Coronary artery", HX + 14, HY - 46, 640, 92, "A surface artery feeds a patch of heart muscle. The beam links the zoomed artery to this vessel.");
+  pill(o, "Heart muscle", TC[0], TC[1], 874, 182, "Muscle fed by the blocked artery. It turns pale when starved and dark when dead. Opening the artery saves it.");
+  pill(o, "Troponin", TC[0] + 32, TC[1] + 14, 880, 330, "Troponin leaks from dying muscle cells. It is the blood test that shows injury.");
+  pill(o, "Heart", HX + 40, HY + 10, HX, 410, "The heart pumps blood to the body. The marked artery feeds the shaded patch.");
   capEl = mk("text", { class: "ac-cap", x: 30, y: 449 }, o); capEl.textContent = capText(0, level);
   const P = L.panel, y0 = 486;
   mk("rect", { class: "dr-panel", x: 24, y: 454, width: 912, height: 142, rx: 14 }, P);
@@ -108,11 +101,11 @@ function artery(dt, m) {
   const g = R > 0.04 ? 5 + R * 30 : 0, cp = (xa, xb) => { let d = "", first = true; for (let x = xa; x <= xb; x += 5) { d += (first ? "M" : "L") + x + " " + f1(surf(x) - 0.5); first = false; } return d; };
   if (g === 0) { art.capL.setAttribute("d", cp(CX - PW, CX + PW)); art.capR.setAttribute("d", ""); } else { art.capL.setAttribute("d", cp(CX - PW, CX - g)); art.capR.setAttribute("d", cp(CX + g, CX + PW)); }
   /* clot: a mound on the broken cap; antiplatelet drugs keep the platelet pile low */
-  const apS = 1 - 0.55 * sm.antiplt;
+  const apS = 1 - 0.7 * sm.antiplt;
   let md = "M" + (CX - Wh * 2) + " " + f1(surf(CX - Wh * 2)); for (let x = CX - Wh * 2; x <= CX + Wh * 2; x += 6) md += "L" + x + " " + f1(surf(x) - Hh * prof(x)); md += "L" + (CX + Wh * 2) + " " + f1(surf(CX + Wh * 2)) + "Z"; art.mound.setAttribute("d", md);
   art.mound.setAttribute("opacity", clamp(Hh / 8).toFixed(2));
   plts.forEach((p) => { const x = CX + p.u * Wh * 1.5 * (1 - 0.3 * p.v), pr = prof(x), top = Hh * pr; const s = clamp(Hh / 14) * clamp(pr * 3) * apS; place(p.g, x, surf(x) - p.v * top * 0.92 - 2, 0, s * (0.85 + 0.15 * Math.sin(tm / 400 + p.i))); });
-  fibs.forEach((f) => { const x1 = CX + f.u * Wh * 1.4, x2 = CX + f.u2 * Wh * 1.4, y1 = surf(x1) - f.v * Hh * prof(x1), y2 = surf(x2) - f.v2 * Hh * prof(x2); f.e.setAttribute("d", "M" + f1(x1) + " " + f1(y1) + "L" + f1(x2) + " " + f1(y2)); f.e.setAttribute("opacity", (clamp(Hh / 40) * (1 - 0.8 * sm.anticoag)).toFixed(2)); });
+  fibs.forEach((f) => { const x1 = CX + f.u * Wh * 1.4, x2 = CX + f.u2 * Wh * 1.4, y1 = surf(x1) - f.v * Hh * prof(x1), y2 = surf(x2) - f.v2 * Hh * prof(x2); f.e.setAttribute("d", "M" + f1(x1) + " " + f1(y1) + "L" + f1(x2) + " " + f1(y2)); f.e.setAttribute("opacity", (clamp(Hh / 40) * (1 - 0.9 * sm.anticoag)).toFixed(2)); });
   trapped.forEach((t) => { const x = CX + t.u * Wh * 1.2, top = Hh * prof(x); place(t.g, x, surf(x) - t.v * top, t.rot, clamp(Hh / 30)); });
   art.stent.setAttribute("opacity", sm.reperf.toFixed(2));
   /* red cells flow, squeeze past the clot, or queue behind it */
@@ -128,14 +121,14 @@ function artery(dt, m) {
   });
   /* drug particles show each mechanism: blockers sit on the clot, statin sinks into the core */
   const moundTop = (x) => surf(x) - Hh * prof(x) - 5;
-  if (sm.antiplt > 0.5 && Math.random() < dt * 9) { const p = free(apDrug); if (p) emit(p, CX + rnd(-70, 70), TOP + 16, rnd(-6, 6), rnd(28, 40), 0); }
+  if (sm.antiplt > 0.5 && Math.random() < dt * 10) { const p = free(apDrug); if (p) emit(p, CX + rnd(-70, 70), TOP + 16, rnd(-6, 6), rnd(28, 40), 0); }
   apDrug.forEach((p) => { if (!p.on) return; p.t += dt;
     if (p.st === 0) { p.x += p.vx * dt; p.y += p.vy * dt; if (p.y >= moundTop(p.x)) { p.st = 1; p.t = 0; } place(p.e, p.x, p.y, 0, 1); }
-    else { place(p.e, p.x, p.y, 0, 1); p.e.setAttribute("opacity", clamp(1 - p.t / 2.5).toFixed(2)); if (p.t > 2.5) kill(p); } });
-  if (sm.anticoag > 0.5 && Math.random() < dt * 8) { const p = free(acDrug); if (p) emit(p, CX + rnd(-70, 70), TOP + 16, rnd(-6, 6), rnd(28, 40), 0); }
+    else { place(p.e, p.x, p.y, 0, 1); p.e.setAttribute("opacity", clamp(1 - p.t / 3.5).toFixed(2)); if (p.t > 3.5) kill(p); } });
+  if (sm.anticoag > 0.5 && Math.random() < dt * 9) { const p = free(acDrug); if (p) emit(p, CX + rnd(-70, 70), TOP + 16, rnd(-6, 6), rnd(28, 40), 0); }
   acDrug.forEach((p) => { if (!p.on) return; p.t += dt;
     if (p.st === 0) { p.x += p.vx * dt; p.y += p.vy * dt; if (p.y >= moundTop(p.x)) { p.st = 1; p.t = 0; } place(p.e, p.x, p.y, 0, 1); }
-    else { place(p.e, p.x, p.y, 0, 1); p.e.setAttribute("opacity", clamp(1 - p.t / 2.5).toFixed(2)); if (p.t > 2.5) kill(p); } });
+    else { place(p.e, p.x, p.y, 0, 1); p.e.setAttribute("opacity", clamp(1 - p.t / 3.5).toFixed(2)); if (p.t > 3.5) kill(p); } });
   if (sm.prev > 0.5 && Math.random() < dt * 4) { const p = free(statD); if (p) emit(p, CX + rnd(-55, 55), BOT - 55, rnd(-4, 4), rnd(22, 32), 0); }
   statD.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; place(p.e, p.x, p.y, 0, 1); p.e.setAttribute("opacity", clamp(1 - (p.y - (BOT - 10)) / 22).toFixed(2)); if (p.y > BOT + 12) kill(p); });
   /* plasmin dots dissolving the clot, lipid spilling from the rupture */
@@ -144,7 +137,6 @@ function artery(dt, m) {
   if (R > 0.1 && Math.random() < dt * R * 5) { const p = free(spill); if (p) emit(p, CX + rnd(-g, g), surf(CX) - 2, rnd(8, 26), -rnd(10, 22), 0); }
   spill.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", clamp(1 - p.t / 1.6).toFixed(2)); if (p.t > 1.6) kill(p); });
   marks.ap.setAttribute("opacity", sm.antiplt.toFixed(2)); marks.ac.setAttribute("opacity", sm.anticoag.toFixed(2));
-  $("p-ap").style.opacity = sm.antiplt.toFixed(2); $("p-ac").style.opacity = sm.anticoag.toFixed(2); $("p-pci").style.opacity = sm.reperf.toFixed(2); $("p-prev").style.opacity = sm.prev.toFixed(2);
 }
 
 function heartStep(dt, m) {

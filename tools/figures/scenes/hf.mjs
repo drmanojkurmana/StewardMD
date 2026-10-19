@@ -79,6 +79,7 @@ buildScene({
 .hf-node{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}
 .hf-node-t{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono);pointer-events:none}
 .hf-arrow{fill:none;stroke:var(--anatomy-mid);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.hf-tube{fill:none;stroke:var(--c-rbc);stroke-linecap:round;opacity:.55}
 .hf-head{fill:var(--anatomy-mid)}
 .hf-dot{fill:var(--c-cyt)}.hf-dot.v{fill:var(--c-fl)}.hf-dot.s{fill:var(--c-neut)}
 .hf-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
