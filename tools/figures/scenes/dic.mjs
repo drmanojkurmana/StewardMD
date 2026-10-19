@@ -57,20 +57,22 @@ const chips = CHIPS.map((c, i) => { const x = 30 + i * 225;
   return `<g class="hot" tabindex="0" data-info="${esc(c[1])}"><rect class="dic-chip" x="${x}" y="62" width="210" height="36" rx="10"/><text class="dic-chip-t" x="${x + 105}" y="84" text-anchor="middle">${esc(c[0])}</text></g>`; }).join("");
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-${chips}
+<g id="chips">${chips}</g>
 <g id="tfnode"></g>
-<rect id="lumen" class="sc-lumen" x="14" y="198" width="${W - 28}" height="84"/>
+<rect id="lumen" class="sc-lumen" x="14" y="198" width="790" height="84"/>
+<path id="kidneyFeed" class="dic-feed" d="M0 0"/>
 <g id="endo"></g><g id="rbcs"></g><g id="clots"></g><g id="parts"></g>
+<g id="kidSlot"></g>
 <g id="lower"></g>
 <g id="over"></g>
 <g id="panel"></g>`;
 
 buildScene({
   id: "disseminated-intravascular-coagulation", fig: "Fig 1", title: "DIC: clotting everywhere, then bleeding", W, H, body,
-  label: "An animated systemic capillary in disseminated intravascular coagulation. A trigger such as sepsis, major trauma, malignancy or an obstetric emergency releases tissue factor, which switches clotting on in vessels everywhere. Widespread microthrombi block small vessels and cause organ ischaemia, while platelets, clotting factors and fibrinogen are used up. Fibrinolysis breaks clots down and raises D-dimer, and the depleted blood then bleeds. Gauges show microthrombi, platelets, fibrinogen, D-dimer, bleeding and organ flow. Treatment choices are treating the cause and replacing products.",
+  label: "An animated systemic capillary in disseminated intravascular coagulation. A trigger such as sepsis, major trauma, malignancy or an obstetric emergency releases tissue factor, which switches clotting on in vessels everywhere. Widespread microthrombi block small vessels and starve the kidney of blood, while platelets, clotting factors and fibrinogen are used up. Fibrinolysis breaks clots down and raises D-dimer, and the depleted blood then bleeds. Gauges show microthrombi, platelets, fibrinogen, D-dimer, bleeding and organ flow. Treatment choices are treating the cause and replacing products.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, laboratory values or numbers are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "dic.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "dic.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With cause treated and products replaced",
   sourcesLis: [
     "<strong>What DIC is.</strong> Disseminated intravascular coagulation is not a disease in itself but a syndrome triggered by an underlying cause: sepsis, major trauma or burns, malignancy and obstetric emergencies are classic triggers. Tissue factor (with activated endothelium and monocytes) switches the clotting system on throughout the circulation instead of at one injury. Widespread microthrombi form in small vessels and impair organ perfusion, while platelets, clotting factors and fibrinogen are consumed faster than they can be replaced. Secondary fibrinolysis dissolves fibrin and raises fibrin degradation products such as D-dimer. The same patient therefore clots in small vessels and bleeds from depleted, weak clotting: oozing, purpura and organ dysfunction together. This is standard teaching in haematology and critical-care texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> Treating the underlying cause is the key step and is the only toggle that switches the drive off. Replacing platelets, plasma or fibrinogen concentrate refills what was used up but does not stop ongoing consumption, so on its own it only partly and temporarily helps. These are teaching toggles only.",
@@ -80,11 +82,13 @@ buildScene({
 .dic-chip{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
 .dic-chip-t{fill:var(--anatomy-strong);font-size:11px;font-weight:600;pointer-events:none}
 .dic-tf{fill:color-mix(in srgb,var(--c-eos) 32%,var(--anatomy-card));stroke:var(--c-eos);stroke-width:1.2}
-.dic-cap{fill:var(--anatomy-strong);font-size:11px;font-weight:600;pointer-events:none}
+.dic-block{fill:color-mix(in srgb,var(--c-good) 30%,var(--anatomy-card));stroke:var(--c-good);stroke-width:2}
+.dic-blockx{fill:none;stroke:var(--c-good);stroke-width:3;stroke-linecap:round}
+.dic-feed{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 42%,var(--anatomy-paper));stroke-width:17;stroke-linecap:round;opacity:.8}
+.dic-story{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
 .dic-lab2{fill:var(--anatomy-text);font-size:10.5px;pointer-events:none}
 .dic-tank{fill:color-mix(in srgb,var(--anatomy-mid) 22%,var(--anatomy-card));stroke:var(--anatomy-faint);stroke-width:1}
 .dic-fill-p{fill:var(--c-plt)}.dic-fill-f{fill:var(--c-fl)}.dic-fill-c{fill:var(--c-cyt)}
-.dic-organ{fill:color-mix(in srgb,var(--c-endo) 42%,var(--anatomy-card));stroke:var(--c-endo);stroke-width:1.2}
 .dic-isc{fill:#241d33}
 .dic-fib{fill:none;stroke:var(--c-plt);stroke-width:1.2;stroke-linecap:round}
 .dic-drop{fill:var(--c-rbc)}

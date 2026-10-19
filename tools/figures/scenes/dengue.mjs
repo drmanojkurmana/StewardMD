@@ -1,6 +1,8 @@
 /* Dengue as an animated, working scene (original drawing; Anima styling, Anatomy page shell).
  *   node tools/figures/scenes/dengue.mjs [--print-model]
- * Static layout here; mosquito, virus, immune cells, capillary, platelets and gauges move in dengue.page.js. Qualitative: no doses, no numbers. */
+ * Static layout here; skin and heart come from organs.lib.js. Mosquito, virus,
+ * immune cells, capillary leak, platelets, fluids and gauges move in dengue.page.js.
+ * Qualitative: no doses, no numbers. */
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -28,7 +30,7 @@ function modelOf(S, level, drug) {
   const V = [0.85, 0.45, 0.12][level];
   const F = [0.9, 0.5, 0.18][level];
   const L = [0.12, 0.92, 0.28][level];
-  const H = cl([0.3, 0.88, 0.38][level] - supF * 0.12 * L);
+  const H = cl([0.3, 0.88, 0.38][level] - supF * 0.3 * L);
   const Pl = cl(1 - [0.3, 0.88, 0.35][level] + supP * 0.3 * (level === 1 ? 1 : 0.4));
   const Vol = cl(0.95 - 0.7 * L + supF * 0.45);
   const BP = cl(0.35 + 0.6 * Vol - 0.15 * L);
@@ -39,7 +41,7 @@ function modelOf(S, level, drug) {
   const wp = Pl < 0.35 ? "very low" : Pl < 0.6 ? "falling" : "preserved";
   const wc = BP < 0.45 ? "at risk" : BP < 0.7 ? "borderline" : "stable";
   const words = [wv, wl, wp, wc];
-  return { V, F, L, H, Pl, Vol, BP, Sh, supF, supP, lev: level, words, readout: "virus " + wv + " · plasma leak " + wl + " · platelets " + wp + " · circulation " + wc };
+  return { V, F, L, H, Pl, Vol, BP, Sh, supF, supP, lev: level, drug, words, readout: "virus " + wv + " · plasma leak " + wl + " · platelets " + wp + " · circulation " + wc };
 }
 const TESTS = [
   [0, 0, "virus high · plasma leak none · platelets preserved · circulation stable"],
@@ -54,12 +56,14 @@ const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
 <rect id="fever" class="dn-fever" x="14" y="44" width="${W - 28}" height="396" rx="18" opacity="0"/>
 <rect id="oedema" class="sc-oed" x="14" y="44" width="${W - 28}" height="${CY - 70 - 44}" rx="18" opacity="0"/>
-<text class="sc-zone" x="34" y="68">SKIN AND TISSUE</text>
-<text class="sc-zone sc-dim" x="34" y="${CY - 52}">CAPILLARY</text>
-<rect class="dn-skin" x="34" y="146" width="250" height="9" rx="4"/>
+<text class="sc-zone" x="560" y="${CY - 52}">CAPILLARY</text>
+<ellipse id="shock" class="dn-shock" cx="800" cy="180" rx="102" ry="90" opacity="0"/>
+<g id="skinSlot"></g>
+<g id="heartSlot"></g>
 <g id="mosq"></g>
 <g id="immune"></g>
 <rect id="lumen" class="sc-lumen" x="14" y="${CY - 38}" width="${W - 28}" height="76"/>
+<rect id="refill" class="dn-refill" x="14" y="${CY - 60}" width="${W - 28}" height="120" opacity="0"/>
 <g id="rbcs"></g><g id="plts"></g>
 <g id="endo"></g>
 <g id="parts"></g>
@@ -68,12 +72,15 @@ const body = `
 
 buildScene({
   id: "dengue-fever", fig: "Fig 1", title: "Dengue: bite to plasma leakage and recovery", W, H, body,
-  label: "An animated dengue scene. An Aedes mosquito bite introduces virus at the skin. Virus copies itself in immune cells and spreads in the blood. In the febrile phase fever dominates. In the critical phase the capillary wall leaks plasma, the blood concentrates, platelets fall and circulation can fail. In recovery leaked fluid is reabsorbed and platelets rise. Gauges show virus, fever, plasma leak, haemoconcentration, platelets and circulation. Treatment choices are fluids with monitoring and platelet support only if bleeding.",
+  label: "An animated dengue scene built on real skin and heart anatomy. An Aedes mosquito bites the skin and virus copies itself in nearby immune cells before spreading in the blood. In the febrile phase fever dominates. In the critical phase the capillary wall leaks plasma, the blood thickens, platelets fall and the heart races as circulation fails. In recovery the leak stops and fluid returns. Fluids visibly refill and widen the vessel and steady the heart, platelet support tops up platelets, and a caption narrates each state. Gauges show virus, fever, plasma leak, haemoconcentration, platelets and circulation. Treatment choices are fluids with monitoring and platelet support only if bleeding.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.",
-  scene: { CY, W, H }, pageJs: readFileSync(join(HERE, "dengue.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { CY, W, H }, pageJs: readFileSync(join(HERE, "dengue.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With fluids and platelet support",
   extraCss: `
-.dn-fever{fill:var(--c-bad)}.dn-skin{fill:color-mix(in srgb,var(--c-endo) 55%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:.7}
+.dn-fever{fill:var(--c-bad)}
+.dn-shock{fill:var(--c-bad)}
+.dn-refill{fill:#2fb9e8}
+.dn-cap{fill:var(--anatomy-strong);font-size:12px}
 .dn-mos{fill:color-mix(in srgb,#8a8f9c 55%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
 .dn-wing{fill:var(--anatomy-card);stroke:var(--anatomy-mid);opacity:.75}
 .dn-leg{fill:none;stroke:var(--anatomy-mid);stroke-width:1.1;stroke-linecap:round}

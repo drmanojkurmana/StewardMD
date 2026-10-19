@@ -49,12 +49,16 @@ const TESTS = [
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
 <rect class="co-lumen" x="14" y="44" width="${W - 28}" height="150" rx="18"/>
-<rect id="blood" class="sc-lumen" x="24" y="400" width="${W - 48}" height="30" rx="15"/>
+<rect class="sc-lumen" x="24" y="400" width="${W - 48}" height="30" rx="15"/>
 <text class="sc-zone" x="34" y="68">GUT LUMEN</text>
 <text class="sc-zone sc-dim" x="34" y="392">LAMINA PROPRIA</text>
-<text class="sc-zone sc-dim" x="880" y="392" text-anchor="end">BLOOD</text>
 <g id="crypts"></g>
 <g id="villi"></g>
+<rect id="gfdWash" class="co-gfdwash" x="14" y="44" width="${W - 28}" height="150" rx="18" opacity="0"/>
+<g id="bowelSlot"></g>
+<ellipse id="replHalo" class="co-halo" cx="862" cy="320" rx="58" ry="98" opacity="0"/>
+<g id="vesselSlot"></g>
+<rect id="replWash" class="co-replwash" x="24" y="400" width="${W - 48}" height="30" rx="15" opacity="0"/>
 <g id="parts"></g>
 <g id="immune"></g>
 <g id="over"></g>
@@ -62,11 +66,11 @@ const body = `
 
 buildScene({
   id: "coeliac-malabsorption", fig: "Fig 1", title: "Coeliac disease: gluten to malabsorption", W, H, body,
-  label: "An animated small bowel mucosa. Gluten gliadin reaches the mucosa and is deamidated by tissue transglutaminase. An antigen-presenting cell carrying HLA-DQ2 or DQ8 shows deamidated gliadin to T cells. Activated T cells attack enterocytes, villi flatten and crypts deepen, so iron, folate and fat are poorly absorbed into the blood. Antibodies to tissue transglutaminase and endomysium appear. Gauges show gliadin load, T-cell attack, antibodies, villi, absorption and nutrient stores. A gluten-free diet removes the driver and nutrient replacement supports stores without healing the mucosa.",
+  label: "An animated small bowel mucosa, a magnified patch of the small bowel wall (inset, top right). Gluten gliadin reaches the mucosa and is deamidated by tissue transglutaminase. An antigen-presenting cell carrying HLA-DQ2 or DQ8 shows deamidated gliadin to T cells. Activated T cells attack enterocytes, villi flatten and crypts deepen, so iron, folate and fat are poorly absorbed into the blood (vessel, right). Antibodies to tissue transglutaminase and endomysium appear. Gauges show gliadin load, T-cell attack, antibodies, villi, absorption and nutrient stores. A gluten-free diet removes the driver and lets villi regrow, and nutrient replacement supports stores without healing the mucosa. A single line caption in the stage states the current treatment effect.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or test cut-offs are shown or implied.",
-  scene: { SURF, W, H }, pageJs: readFileSync(join(HERE, "coeliac.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
-  extraCss: `.co-lumen{fill:var(--c-fl);opacity:.14}.co-villus{fill:var(--c-endo);stroke:color-mix(in srgb,var(--c-endo) 55%,#000);stroke-width:1}.co-crypt{fill:var(--c-mac);opacity:.45;stroke:color-mix(in srgb,var(--c-mac) 55%,#000);stroke-width:.8}.co-surface{fill:none;stroke:var(--anatomy-strong);stroke-width:1.4;opacity:.6}.p-glu{--cc:#d9a441}.p-deam{--cc:#f08a4b}.p-atk{--cc:#e5484d}.p-iron{--cc:#c98a5e}.p-folate{--cc:#3ddc97}.p-fat{--cc:#f2d27a}.p-repl{--cc:#5ec1a0}.p-ttg{fill:var(--c-cyt);stroke:color-mix(in srgb,var(--c-cyt) 50%,#000);stroke-width:.5}.co-ab{fill:none;stroke:var(--c-ab);stroke-width:1.6;stroke-linecap:round}.dr-g-fill.g-gli{fill:#d9a441}.dr-g-fill.g-atk{fill:var(--c-bad)}.dr-g-fill.g-ab2{fill:var(--c-ab)}.dr-g-fill.g-vil{fill:var(--c-good)}.dr-g-fill.g-abs{fill:var(--c-fl)}.dr-g-fill.g-nut{fill:#e9b84a}`,
+  scene: { SURF, W, H }, pageJs: readFileSync(join(HERE, "coeliac.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With a gluten-free diet",
+  extraCss: `.co-lumen{fill:var(--c-fl);opacity:.14}.co-villus{fill:var(--c-endo);stroke:color-mix(in srgb,var(--c-endo) 55%,#000);stroke-width:1}.co-crypt{fill:var(--c-mac);opacity:.45;stroke:color-mix(in srgb,var(--c-mac) 55%,#000);stroke-width:.8}.co-surface{fill:none;stroke:var(--anatomy-strong);stroke-width:1.4;opacity:.6}.co-gfdwash{fill:var(--c-good)}.co-replwash{fill:var(--c-neut)}.co-halo{fill:var(--c-neut);stroke:none}.co-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}.p-glu{--cc:#d9a441}.p-deam{--cc:#f08a4b}.p-atk{--cc:#e5484d}.p-iron{--cc:#c98a5e}.p-folate{--cc:#3ddc97}.p-fat{--cc:#f2d27a}.p-repl{--cc:#5ec1a0}.p-nut{--cc:#5ec1a0}.p-vb{--cc:var(--c-rbc)}.p-ttg{fill:var(--c-cyt);stroke:color-mix(in srgb,var(--c-cyt) 50%,#000);stroke-width:.5}.co-ab{fill:none;stroke:var(--c-ab);stroke-width:1.6;stroke-linecap:round}.dr-g-fill.g-gli{fill:#d9a441}.dr-g-fill.g-atk{fill:var(--c-bad)}.dr-g-fill.g-ab2{fill:var(--c-ab)}.dr-g-fill.g-vil{fill:var(--c-good)}.dr-g-fill.g-abs{fill:var(--c-fl)}.dr-g-fill.g-nut{fill:#e9b84a}`,
   sourcesLis: [
     "<strong>How coeliac disease develops.</strong> In people with HLA-DQ2 or HLA-DQ8, gliadin peptides from dietary gluten resist digestion and cross the small bowel epithelium. In the lamina propria the enzyme tissue transglutaminase deamidates gliadin, which makes it bind HLA-DQ2 or DQ8 on antigen-presenting cells much more strongly. Those cells activate gluten-specific CD4 T cells. T-cell cytokines and cytotoxic attack injure enterocytes, producing villous atrophy with crypt hyperplasia and a flat mucosa that absorbs iron, folate, fat and other nutrients poorly. Antibodies to tissue transglutaminase and to endomysium are markers of the same response. This is standard teaching in gastroenterology and immunology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> A lifelong gluten-free diet removes the trigger and lets the mucosa recover. Nutrient replacement corrects deficiencies such as iron and folate while the mucosa is damaged, but on its own it does not stop the immune attack or heal villi. These are teaching toggles only.",
