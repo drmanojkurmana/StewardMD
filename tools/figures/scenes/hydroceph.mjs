@@ -51,35 +51,36 @@ const TESTS = [
   [1, 2, "ventricles enlarged · pressure raised · absorption good"],
 ];
 
-/* ---------------- static layout ---------------- */
+/* ---------------- static layout ----------------
+ * Brain and bowel are real organ art (slots filled in initOrgans); ventricles,
+ * channels, villi and the shunt tube are schematic overlays anchored to the
+ * organ ports, so vessels and particles always meet real anatomy. */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
 <text class="sc-zone" x="34" y="68">BRAIN AND CSF SPACES</text>
-<ellipse class="hc-sas" cx="325" cy="230" rx="284" ry="174"/>
-<ellipse id="brainShape" class="hc-brain" cx="325" cy="230" rx="258" ry="154"/>
-<path class="hc-sinus" d="M382 76Q478 50 574 82"/>
-<g class="hc-villi"><circle cx="458" cy="76" r="9"/><circle cx="484" cy="66" r="10"/><circle cx="511" cy="63" r="10"/><circle cx="538" cy="67" r="10"/><circle cx="563" cy="76" r="9"/></g>
-<g id="villiMark" opacity="0"><circle class="hc-markC" cx="511" cy="63" r="15"/><path class="hc-markX" d="M502 54L520 72M520 54L502 72"/></g>
-<path class="hc-channel" d="M292 190Q316 214 326 208"/>
-<path class="hc-channel" d="M332 272Q348 292 366 300"/>
-<g id="etvMark" opacity="0"><ellipse class="hc-stoma" cx="340" cy="272" rx="11" ry="5"/></g>
+<g id="brainSlot"></g>
+<ellipse id="pressGlow" class="hc-glow" cx="225" cy="201" rx="98" ry="72" opacity="0"/>
+<ellipse class="hc-sas" cx="325" cy="240" rx="250" ry="182"/>
+<path class="hc-sinus" d="M380 66Q480 50 580 64"/>
+<g id="villiG" class="hc-villi"><circle cx="450" cy="60" r="9"/><circle cx="478" cy="54" r="10"/><circle cx="506" cy="52" r="10"/><circle cx="534" cy="56" r="10"/><circle cx="560" cy="63" r="9"/></g>
+<g id="villiMark" opacity="0"><circle class="hc-markC" cx="506" cy="52" r="15"/><path class="hc-markX" d="M497 43L515 61M515 43L497 61"/></g>
+<path id="aqChannel" class="hc-channel" d="M330 279Q355 288 388 300"/>
 <g id="vent">
 <g id="ventLat"><path class="hc-vent" d="M-72 -16C-42 -40 48 -34 64 -2C52 28 -38 36 -70 14C-88 2 -88 -6 -72 -16Z"/></g>
 <g id="ventThird"><ellipse class="hc-vent" rx="13" ry="36"/></g>
 <g id="ventFourth"><path class="hc-vent" d="M0 -28L21 0L0 28L-21 0Z"/></g>
 </g>
 <g id="choroid"></g>
-<g id="blockMark" opacity="0"><circle class="hc-markC" cx="348" cy="282" r="14"/><path class="hc-markX" d="M340 274L356 290M356 274L340 290"/></g>
-<path id="shuntTube" class="hc-shunt" opacity="0" d="M268 158C380 92 620 78 760 118C790 150 800 230 805 318"/>
-<ellipse id="abdomen" class="hc-abdomen" cx="805" cy="340" rx="68" ry="52" opacity="0.25"/>
-<g id="triadG" opacity="0"><text class="sc-zone" x="648" y="168">NORMAL PRESSURE TRIAD</text><circle class="hc-dot" cx="654" cy="190" r="4"/><text class="sc-lab" x="668" y="194">gait unsteady</text><circle class="hc-dot" cx="654" cy="215" r="4"/><text class="sc-lab" x="668" y="219">thinking slowed</text><circle class="hc-dot" cx="654" cy="240" r="4"/><text class="sc-lab" x="668" y="244">bladder urgency</text></g>
-<g id="pressG" opacity="0"><text class="sc-zone" x="648" y="168">RAISED PRESSURE</text><circle class="hc-dot" cx="654" cy="190" r="4"/><text class="sc-lab" x="668" y="194">headache</text><circle class="hc-dot" cx="654" cy="215" r="4"/><text class="sc-lab" x="668" y="219">vomiting</text><circle class="hc-dot" cx="654" cy="240" r="4"/><text class="sc-lab" x="668" y="244">vision blurred</text></g>
+<g id="blockMark" opacity="0"><circle class="hc-markC" r="14"/><circle id="plugDot" class="hc-plug" r="8"/><path class="hc-markX" d="M-8 -8L8 8M8 -8L-8 8"/></g>
+<g id="etvMark" opacity="0"><ellipse id="stomaDot" class="hc-stoma" rx="11" ry="5"/></g>
+<path id="shuntTube" class="hc-shunt" opacity="0" d="M235 176L270 110L350 85L550 75L700 110L745 180L764 270L808 338"/>
+<ellipse id="bowelGlow" class="hc-bglow" cx="808" cy="338" rx="72" ry="66" opacity="0"/>
+<g id="bowelSlot"></g>
 <g id="parts"></g>
 <g id="over"></g>
 <g id="panel"></g>`;
 
 const extraCss = `
-.hc-brain{fill:var(--c-tis);stroke:var(--anatomy-faint);stroke-width:1.2}
 .hc-sas{fill:none;stroke:var(--c-fl);stroke-width:2;stroke-dasharray:7 6;opacity:.65}
 .hc-vent{fill:var(--c-fl);stroke:color-mix(in srgb,var(--c-fl) 55%,#000);stroke-width:1.2;opacity:.88}
 .hc-channel{fill:none;stroke:var(--c-fl);stroke-width:7;stroke-linecap:round;opacity:.75}
@@ -88,19 +89,21 @@ const extraCss = `
 .hc-villi circle{fill:var(--c-good);stroke:color-mix(in srgb,var(--c-good) 55%,#000);stroke-width:.8}
 .hc-markC{fill:var(--anatomy-card);stroke:var(--c-bad);stroke-width:1.4}
 .hc-markX{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-linecap:round}
+.hc-plug{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 55%,#000);stroke-width:.8}
 .hc-stoma{fill:var(--anatomy-paper);stroke:var(--c-good);stroke-width:2}
-.hc-shunt{fill:none;stroke:var(--c-good);stroke-width:4;stroke-linecap:round}
-.hc-abdomen{fill:color-mix(in srgb,var(--c-plt) 45%,var(--anatomy-paper));stroke:var(--c-plt);stroke-width:1.4}
-.hc-dot{fill:var(--c-bad)}
+.hc-shunt{fill:none;stroke:var(--c-good);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.hc-glow{fill:var(--c-bad);stroke:none}
+.hc-bglow{fill:var(--c-good);stroke:none}
+.hc-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
 .p-csf{--cc:var(--c-fl)}
 `;
 
 buildScene({
   id: "hydrocephalus-csf-circulation", fig: "Fig 1", title: "Hydrocephalus: CSF circulation and build up", W, H, body, extraCss,
-  label: "An animated side view of the brain and its CSF spaces. The choroid plexus in the lateral ventricle makes CSF, which flows to the third ventricle, through the aqueduct to the fourth ventricle, out into the subarachnoid space, and is absorbed by arachnoid villi into the venous sinus. A slider switches between normal flow, an obstructive block and failed absorption in communicating hydrocephalus, including the normal pressure triad. Treatments are a shunt, endoscopic third ventriculostomy and treating the cause. Gauges show production, flow, absorption, ventricle size, pressure and symptoms.",
+  label: "An animated side view of the brain and its CSF spaces. The choroid plexus in the lateral ventricle makes CSF, which flows down through the third ventricle, the aqueduct and the fourth ventricle, out into the space around the brain, and is absorbed by villi into the venous sinus. A slider switches between normal flow, an obstructive block and failed absorption in communicating hydrocephalus. Treatments are a shunt to the belly, a new opening in the third ventricle and treating the cause. Gauges show production, flow, absorption, ventricle size, pressure and symptoms.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, pressures or other numbers are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "hydroceph.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "hydroceph.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With shunt",
   sourcesLis: [
     "<strong>CSF circulation.</strong> Cerebrospinal fluid is made mainly by the choroid plexus in the ventricles. It flows from the lateral ventricles to the third ventricle, through the cerebral aqueduct to the fourth ventricle, then out into the subarachnoid space around the brain and spinal cord, and is absorbed through arachnoid villi into the venous sinuses. This is standard teaching in neuroanatomy and neurology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Obstructive and communicating patterns.</strong> In obstructive (non-communicating) hydrocephalus, flow is blocked inside the ventricular system, classically at the narrow cerebral aqueduct, so the ventricles before the block enlarge and pressure rises. In communicating hydrocephalus, CSF reaches the subarachnoid space but absorption fails, for example after bleeding or meningitis, so all the ventricles enlarge. Normal pressure hydrocephalus is a chronic communicating pattern in older adults with the triad of gait disturbance, cognitive slowing and urinary urgency, often with near normal CSF pressure.",
