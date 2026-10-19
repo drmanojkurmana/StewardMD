@@ -111,9 +111,20 @@
    * PURE, deterministic, unit-testable categorized search. No LLM, ever — every hit routes to an
    * existing tool that owns the real computation/content.
    * ========================================================================================== */
+  /* Animated drug mechanism figures for oncology (fig-viewer.js registry): one per anticancer drug, plus the class figures. */
+  var ONC_FIG = /-mechanism-adverse-effects$|^immune-checkpoint-inhibitors|^tyrosine-kinase-inhibitors|^cml-philadelphia/;
+  function oncFigs() { var L = []; try { L = (G.SMD_FIG && G.SMD_FIG.list && G.SMD_FIG.list()) || []; } catch (e) {} return L.filter(function (f) { return ONC_FIG.test(f.id); }); }
+  function figRowHtml(f) { return '<button class="oh-row" data-oh-act="fig:' + esc(f.id) + '"><span class="oh-row-t">' + esc(f.title) + '</span><span class="oh-row-s">' + esc(f.blurb || "Animated: how it works and why side effects happen") + "</span></button>"; }
+  function drugMechHtml() {
+    var L = oncFigs();
+    return '<button class="oh-back-inline" data-oh-act="home-dash">&lsaquo; Back</button>' +
+      '<div class="oh-sec-h">Anticancer drug mechanisms</div>' +
+      '<div class="oh-ctx-note">Animated: how each drug works on the tumour and why its side effects happen. Move the course slider and choose a protective measure to see the difference.</div>' +
+      '<div class="oh-sec">' + (L.length ? L.map(figRowHtml).join("") : emptyHtml("animation", "Figures are still loading. Try again in a moment.")) + "</div>";
+  }
   function search(q) {
     q = String(q == null ? "" : q).trim().toLowerCase();
-    if (!q) return { diseases: [], calculators: [], drugs: [], protocols: [] };
+    if (!q) return { diseases: [], calculators: [], drugs: [], protocols: [], figs: [] };
     var terms = expandTerms(q);
 
     var calculators = calcCatalog().filter(function (c) {
@@ -140,7 +151,9 @@
       return hay((p.name || "") + " " + (p.id || "") + " " + (p.diseaseId || ""), terms);
     }).map(function (p) { return { id: p.id, name: p.name, diseaseId: p.diseaseId, lifecycleState: p.lifecycleState }; });
 
-    return { diseases: diseases, calculators: calculators, drugs: drugsOut, protocols: protocols };
+    var figs = oncFigs().filter(function (f) { return hay((f.title || "") + " " + (f.blurb || "") + " " + (f.id || ""), terms); });
+
+    return { diseases: diseases, calculators: calculators, drugs: drugsOut, protocols: protocols, figs: figs };
   }
 
   /* ==========================================================================================
@@ -252,10 +265,11 @@
   function protocolRowHtml(p) { return '<button class="oh-row" data-oh-act="protodetail:' + esc(p.id) + '"><span class="oh-row-t">' + esc(p.name || p.id) + '</span><span class="oh-row-s">' + esc(p.lifecycleState || "") + "</span></button>"; }
 
   function searchResultsHtml(r) {
-    var any = r.calculators.length || r.diseases.length || r.drugs.length || r.protocols.length;
+    var any = r.calculators.length || r.diseases.length || r.drugs.length || r.protocols.length || (r.figs && r.figs.length);
     if (!any) return emptyHtml("search_off", "No matches. Try a drug name, a calculator (e.g. Khorana), or a disease/abbreviation (e.g. NSCLC).");
     return resultSection("Calculators & Scores", r.calculators.map(calcRowHtml).join("")) +
       resultSection("Diseases", r.diseases.map(diseaseRowHtml).join("")) +
+      resultSection("Drug mechanisms (animated)", (r.figs || []).map(figRowHtml).join("")) +
       resultSection("Drugs", r.drugs.map(drugRowHtml).join("")) +
       resultSection("Protocols", r.protocols.map(protocolRowHtml).join(""));
   }
@@ -267,6 +281,7 @@
       '<button class="oh-qa" data-oh-act="protocol-open">' + ms("clinical_notes") + "Protocols</button>" +
       '<button class="oh-qa" data-oh-act="calc-cat">' + ms("calculate") + "Calculators</button>" +
       '<button class="oh-qa" data-oh-act="drug-browse">' + ms("pill") + "Drugs</button>" +
+      '<button class="oh-qa" data-oh-act="drug-mech">' + ms("animation") + "Drug mechanisms</button>" +
       '<button class="oh-qa" data-oh-act="drug-interactions">' + ms("compare_arrows") + "Interactions</button>" +
       "</div>";
   }
@@ -413,6 +428,7 @@
     if (q) return searchResultsHtml(search(q));
     if (state.mode === "kb") return kbBrowseHtml();
     if (state.mode === "drugonco") return drugOncoHtml();
+    if (state.mode === "drugmech") return drugMechHtml();
     if (state.mode === "protoref") return protoRefHtml();
     return favSection() + contextStrip(state.ctx) + quickActionsHtml() + gridHtml();
   }
@@ -438,7 +454,7 @@
     // other interaction foregrounds it again. In-place modes (kb-browse / protoref /
     // drugonco / home-dash) repaint inside this overlay and never background it. Protocol taps
     // (protodetail:*) open the universal SMD_PROTOSHEET overlay instead of an in-place view.
-    var OPENS_OVERLAY = { calc: 1, "calc-cat": 1, kb: 1, "staging-open": 1, "ctcae-open": 1, "iotox-open": 1, "recist-open": 1, "drug-formulary": 1, "drug-interactions": 1 };
+    var OPENS_OVERLAY = { calc: 1, "calc-cat": 1, kb: 1, "staging-open": 1, "ctcae-open": 1, "iotox-open": 1, "recist-open": 1, "drug-formulary": 1, "drug-interactions": 1, fig: 1 };
     if (OPENS_OVERLAY[verb]) background(); else foreground();
 
     /* Every one of these verbs used to read `try { MOD && MOD.fn && MOD.fn(arg); } catch (e2) {}` -
@@ -463,6 +479,8 @@
     // Drug tile -> the in-overlay onco drug view, which offers BOTH "Interaction check"
     // (-> MEDDRUGS.openInteractions) and "Full formulary" (-> MEDDRUGS.openList). Search-result drug
     // rows keep drug-browse below (open MEDDRUGS directly for that drug).
+    if (verb === "drug-mech") { st.mode = "drugmech"; renderResults(); return; }
+    if (verb === "fig") { openOverlay("The figure", G.SMD_FIG && G.SMD_FIG.openFig, function () { G.SMD_FIG.openFig(arg, "", b); }); return; }
     if (verb === "drug-onco") { st.mode = "drugonco"; renderResults(); return; }
     // Drug SEARCH result / quick action: open the real MEDDRUGS browse overlay (flag routes to the split view).
     if (verb === "drug-browse") { if (flag("smd_onco_drugview")) { st.mode = "drugonco"; renderResults(); } else { try { G.MEDDRUGS && G.MEDDRUGS.openList && G.MEDDRUGS.openList(); } catch (e2) {} } return; }
