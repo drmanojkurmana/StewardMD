@@ -47,7 +47,7 @@ const TESTS = [
 
 /* ---------------- static layout ---------------- */
 const FAT = [];
-for (let i = 0; i < 9; i++) FAT.push([250 + i * 55, 150]);
+for (let i = 0; i < 4; i++) FAT.push([250 + i * 55, 150]);
 for (let i = 0; i < 9; i++) FAT.push([277 + i * 55, 378]);
 let fat = "";
 for (const [x, y] of FAT) fat += `<circle class="pc-fat" cx="${x}" cy="${y}" r="16"/>`;
@@ -55,23 +55,22 @@ const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
 <text class="sc-zone" x="34" y="108">TRIGGERS</text>
 <text class="sc-zone" x="34" y="212">PANCREAS</text>
-<text class="sc-zone" x="815" y="212">VESSEL</text>
+<text class="sc-zone" x="815" y="160">VESSEL</text>
 <g id="fatg">${fat}</g>
-<path class="pc-duo" d="M656 200C706 222 710 300 660 336"/>
-<path class="pc-bile" d="M648 148C652 190 640 240 628 288"/>
-<ellipse class="pc-gall" cx="640" cy="126" rx="32" ry="24" transform="rotate(-18 640 126)"/>
+<g id="liverSlot"></g>
+<path id="bile" class="pc-bile" d="M610 132C614 182 619 232 624 284"/>
 <g id="pancSlot"></g>
+<g id="bowelSlot"></g>
+<g id="vesselSlot"></g>
 <ellipse id="inj" class="pc-inj" cx="450" cy="275" rx="150" ry="62" opacity="0"/>
 <ellipse id="painHalo" class="pc-pain" cx="460" cy="262" rx="282" ry="86" opacity="0"/>
 <path class="pc-duct" d="M293 265L450 279L580 296L612 301M360 272L352 258M450 279L442 293M520 289L512 275"/>
+<path id="feedTube" class="pc-tube" d="M690 58L690 210" opacity="0"/>
 <path class="pc-arrow" d="M175 196C215 215 250 240 280 258"/>
 <g id="stone"><circle class="pc-stone" r="10"/><circle class="pc-stone-h" cx="-3" cy="-3" r="3"/></g>
 <path class="p-alcs" d="M132 132C140 144 143 150 143 156A11 11 0 0 1 121 156C121 150 124 144 132 132Z"/>
 <path class="p-alcs" d="M160 152C167 162 169 167 169 172A9 9 0 0 1 151 172C151 167 153 162 160 152Z"/>
 <path class="p-alcs" d="M108 158C115 168 117 173 117 178A9 9 0 0 1 99 178C99 173 101 168 108 158Z"/>
-<rect id="vessel" class="sc-lumen" x="815" y="238" width="122" height="48" rx="8"/>
-<rect id="vwallT" class="pc-vwall" x="815" y="232" width="122" height="6" rx="3"/>
-<rect id="vwallB" class="pc-vwall" x="815" y="286" width="122" height="6" rx="3"/>
 <g id="cells"></g><g id="spots"></g><g id="rbcs2"></g><g id="parts"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
@@ -94,15 +93,15 @@ body[data-theme="light"]{--c-acinar:#cf779e;--c-fat:#c9a52e;--c-tryp:#d6531a;--c
 .pc-pain{fill:var(--c-bad)}
 .pc-duct{fill:none;stroke:var(--anatomy-mid);stroke-width:5;stroke-linecap:round;opacity:.65}
 .pc-bile{fill:none;stroke:#6aa84f;stroke-width:7;stroke-linecap:round;opacity:.8}
-.pc-gall{fill:#7fbf5f;stroke:color-mix(in srgb,#7fbf5f 55%,#000);stroke-width:1}
+.pc-tube{fill:none;stroke:var(--c-good);stroke-width:3;stroke-linecap:round}
+.pc-capA{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}
+.pc-capB{fill:var(--c-bad);opacity:.7}
 .pc-stone{fill:#d9d2c2;stroke:#8a8172;stroke-width:1.2}.pc-stone-h{fill:#fff;opacity:.7}
 .p-alcs{fill:var(--c-tryp);stroke:color-mix(in srgb,var(--c-tryp) 55%,#000);stroke-width:.8}
 .p-alc{fill:var(--c-tryp)}
 .pc-arrow{fill:none;stroke:var(--c-tryp);stroke-width:2;stroke-dasharray:5 4;opacity:.8}
-.pc-duo{fill:none;stroke:color-mix(in srgb,var(--c-fat) 55%,var(--anatomy-mid));stroke-width:16;stroke-linecap:round;opacity:.55}
 .pc-fat{fill:var(--c-fat);stroke:color-mix(in srgb,var(--c-fat) 55%,#000);stroke-width:.8;opacity:.85}
 .pc-chalk{fill:#f7f2df;stroke:#cfc4a4;stroke-width:.7}
-.pc-vwall{fill:var(--c-endo)}
 .pc-gran{fill:var(--anatomy-paper);opacity:.75}
 .p-tryp{--cc:var(--c-tryp)}.p-enz{--cc:var(--c-enz)}.p-nut{--cc:var(--c-good)}.p-juice{--cc:var(--anatomy-mid)}.p-spark{--cc:var(--c-bad)}
 .dr-g-fill.g-tryp{fill:var(--c-tryp)}.dr-g-fill.g-fat{fill:var(--c-fat)}.dr-g-fill.g-pain{fill:var(--c-neut)}

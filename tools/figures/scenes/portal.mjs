@@ -62,26 +62,17 @@ const body = `
 <text class="sc-zone" x="318" y="244">LIVER</text><text class="sc-zone" x="614" y="68">OESOPHAGUS</text><text class="sc-zone" x="798" y="68">BRAIN</text><text class="sc-zone" x="598" y="308">ABDOMEN</text>
 <text class="sc-lab" x="884" y="276">to heart</text>
 <g id="fluid"></g>
-<path class="pv-coil" d="M30 300Q60 280 90 300T150 300T170 330Q140 345 100 335T40 345T60 400Q100 420 150 405"/>
-<path class="pv-v pv-thin" d="M60 345L100 350M140 335L100 350M100 400L100 350"/>
-<rect class="pv-wall" x="660" y="84" width="84" height="146" rx="26"/>
-<rect id="lumen" class="pv-lumen" x="694" y="90" width="44" height="134" rx="18"/>
-<rect id="bleedtint" class="pv-bleed" x="694" y="90" width="44" height="134" rx="18" opacity="0"/>
-<path id="v-portal" class="pv-v" d="M100 350L250 348L431 365"/>
-<path id="v-spl" class="pv-v" d="M78 184L150 205L250 348"/>
-<path id="v-coll" class="pv-v pv-coll" d="M250 348L258 300L262 200L262 110L300 96L610 96L650 108L668 130L672 170L670 210L672 250"/>
-<path id="v-hep" class="pv-v" d="M465 250L590 250L940 250"/>
-<path id="v-brain" class="pv-v" d="M879 250L879 232"/>
-<g id="organs"></g><g id="vari"></g><g id="tr"></g>
+<path id="v-portal" class="pv-v" d="M140 402L250 348L400 411"/>
+<path id="v-spl" class="pv-v" d="M94 165L150 205L250 348"/>
+<path id="v-coll" class="pv-v pv-coll" d="M250 348L258 300L262 200L262 110L300 96L610 96L700 57L700 232L879 250"/>
+<path id="v-hep" class="pv-v" d="M412 225L590 250L940 250"/>
+<path id="v-brain" class="pv-v" d="M879 250L879 193"/>
+<g id="organs"></g><rect id="bleedtint" class="pv-bleed" x="668" y="80" width="64" height="146" rx="20" opacity="0"/><g id="vari"></g><g id="tr"></g>
 <g id="parts"></g><g id="marks"></g><g id="over"></g><g id="panel"></g>`;
 
 const extraCss = `
 .pv-v{fill:none;stroke:color-mix(in srgb,var(--c-fl) 30%,var(--anatomy-paper));stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
-.pv-thin{stroke-width:5}
 .pv-coll{stroke:color-mix(in srgb,#9a5fd0 38%,var(--anatomy-paper));stroke-width:3}
-.pv-coil{fill:none;stroke:color-mix(in srgb,#e0a36a 55%,var(--anatomy-paper));stroke-width:16;stroke-linecap:round;stroke-linejoin:round}
-.pv-wall{fill:color-mix(in srgb,#e08a8a 38%,var(--anatomy-paper));stroke:#c76a6a;stroke-width:1.4}
-.pv-lumen{fill:color-mix(in srgb,#5a1a2a 30%,var(--anatomy-paper))}
 .pv-bleed{fill:var(--c-bad)}
 .pv-brain{fill:color-mix(in srgb,#b8a0d8 35%,var(--anatomy-paper));stroke:#9a82c0;stroke-width:1.4}
 .pv-brainl{fill:none;stroke:#9a82c0;stroke-width:1.1;opacity:.6}
@@ -100,7 +91,7 @@ const extraCss = `
 .pv-pool{fill:var(--c-fl)}.pv-surf{fill:none;stroke:var(--c-fl);stroke-width:2}
 .p-bl{--cc:var(--c-rbc)}.p-am{--cc:#c9e04a}.p-blood{fill:var(--c-bad)}.p-nh4{--cc:#2fc2a3}.p-sig{--cc:#9a5fd0}
 .pv-cap{fill:var(--anatomy-strong);font-size:12px}
-.pv-rec{fill:none;stroke:#2fc2a3;stroke-width:1.4;opacity:.75}
+.pv-rec{fill:color-mix(in srgb,#2fc2a3 45%,var(--anatomy-paper));stroke:#2fc2a3;stroke-width:1.4;opacity:.75}
 .pv-block{fill:color-mix(in srgb,#2fc2a3 60%,var(--anatomy-paper));stroke:#2fc2a3;stroke-width:1.2}
 .pv-vx.is-band{fill:#4a2436}
 .dr-g-fill.g-pp{fill:#9a5fd0}.dr-g-fill.g-vx{fill:var(--c-bad)}.dr-g-fill.g-as{fill:var(--c-fl)}.dr-g-fill.g-spl{fill:#8e5a8f}.dr-g-fill.g-he{fill:#c9e04a}

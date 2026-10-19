@@ -49,18 +49,17 @@ const TESTS = [
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<text class="sc-zone" x="34" y="64">FROM CIRRHOSIS TO KIDNEY FAILURE</text>
-<path class="hr-arrow" d="M314 133L328 140L314 147Z"/>
-<path class="hr-arrow" d="M524 133L538 140L524 147Z"/>
-<path class="hr-arrow" d="M764 133L778 140L764 147Z"/>
-<path class="hr-arrow" d="M762 238L774 248L760 256Z"/>
-<path id="v-portal" class="hr-vessel" d="M234 172L404 170"/>
-<path id="v-renal" class="hr-renal" d="M635 196C638 245 636 285 640 318"/>
-<path id="v-ureter" class="hr-ureter" d="M690 405C730 420 790 395 827 350"/>
-<path class="hr-beam" d="M810 190C780 230 755 280 738 325"/>
+<path class="hr-arrow" d="M300 133L314 140L300 147Z"/>
+<path class="hr-arrow" d="M510 133L524 140L510 147Z"/>
+<path class="hr-arrow" d="M668 286L682 294L666 300Z"/>
+<path id="v-portal" class="hr-vessel" d="M333 182L232 178"/>
+<path id="v-art" class="hr-arta" d="M469 178L568 175"/>
+<path id="v-renal" class="hr-renal" d="M600 253C614 283 660 300 693 318"/>
+<path id="v-ureter" class="hr-ureter" d="M702 383C742 397 790 395 860 386"/>
+<path id="beam" class="hr-beam" d="M604 253L650 285L693 318"/>
 <g id="liverSlot"></g>
-<g id="gutG"></g>
-<g id="raasG"></g>
+<g id="bowelSlot"></g>
+<g id="vesselSlot"></g>
 <g id="kidneySlot"></g>
 <g id="bladderSlot"></g>
 <g id="fluid"></g>
@@ -83,15 +82,14 @@ buildScene({
 .hr-ureter{fill:none;stroke:#c9a86a;stroke-width:4;stroke-linecap:round}
 .hr-arrow{fill:var(--anatomy-mid)}
 .hr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1.4;stroke-dasharray:4 5;opacity:.65}
-.hr-art{fill:color-mix(in srgb,var(--c-rbc) 22%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 55%,#000);stroke-width:1.2}
-.hr-gutv{fill:none;stroke:color-mix(in srgb,#e08a5a 65%,var(--anatomy-paper));stroke-width:5;stroke-linecap:round}
+.hr-arta{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 45%,var(--anatomy-paper));stroke-width:10;stroke-linecap:round;opacity:.8}
+.hr-bowv{fill:none;stroke:color-mix(in srgb,#e08a5a 65%,var(--anatomy-paper));stroke-width:5;stroke-linecap:round}
 .hr-nod{fill:#d99a76;stroke:#7a3e30;stroke-width:1}
 .hr-sqz{fill:none;stroke:var(--c-bad);stroke-width:3;stroke-linecap:round}
 .hr-rec{fill:none;stroke:var(--c-lymph);stroke-width:1.6}
 .hr-cap{fill:var(--anatomy-strong);font-size:12.5px}
 .hr-pool{fill:var(--c-fl)}
 .hr-surf{fill:none;stroke:var(--c-fl);stroke-width:2}
-.cl-liver{--cc:#b06a4a}.cl-gut{--cc:#d9906a}.cl-raas{--cc:#e9b84a}.cl-kidney{--cc:#c46a7a}.cl-blad{--cc:#8fb8d8}
 .p-raas{--cc:#e9b84a}.p-salt{--cc:#f2d27a}.p-alb{--cc:#eaf2ff}.p-block{--cc:#6fd3c8}.p-tox{--cc:#a8763a}.p-diur{--cc:#9fc4e8}
 .dr-g-fill.g-portal{fill:#9a7fd0}.dr-g-fill.g-raas{fill:var(--c-neut)}
 `,
