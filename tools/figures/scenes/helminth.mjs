@@ -15,12 +15,12 @@ const MD = {
   drugLabel: "Treatment and prevention",
   settings: [
     { label: "no treatment" },
-    { label: "albendazole" },
-    { label: "praziquantel" },
     { label: "sanitation and footwear" },
+    { label: "praziquantel" },
+    { label: "albendazole" },
   ],
   status: "Worm: {level} · {drug} ·",
-  drugNames: ["no treatment", "albendazole", "praziquantel", "sanitation and footwear"],
+  drugNames: ["no treatment", "sanitation and footwear", "praziquantel", "albendazole"],
 };
 function modelOf(S, level, drug) {
   const WORMS = [
@@ -29,15 +29,16 @@ function modelOf(S, level, drug) {
     { b: 0.72, mig: 0.34, an: 0.22, cy: 0.68 },
   ];
   const BURDEN = [
-    [1, 0.12, 0.88, 1],
-    [1, 0.3, 0.9, 1],
-    [1, 0.48, 0.12, 1],
+    [1, 1, 0.88, 0.12],
+    [1, 1, 0.9, 0.3],
+    [1, 1, 0.12, 0.48],
   ];
   const cl = (v) => Math.max(0, Math.min(1, v));
   const base = WORMS[level], bm = BURDEN[level][drug];
-  const entry = drug === 3 ? 0.12 : 1;
+  const san = drug === 1 ? 1 : 0;
+  const entry = san ? 0.12 : 1;
   const B = cl(base.b * bm);
-  const Sp = cl(B * (drug === 3 ? 0.18 : 0.95));
+  const Sp = cl(B * (san ? 0.18 : 0.95));
   const Mig = cl(base.mig * entry * (0.35 + 0.65 * bm));
   const An = cl(base.an * (0.2 + 0.8 * bm));
   const Cy = base.cy;
@@ -52,8 +53,8 @@ function modelOf(S, level, drug) {
 }
 const TESTS = [
   [0, 0, "adult worms many · spread high · anaemia none · cysts none"],
-  [0, 1, "adult worms cleared · spread blocked · anaemia none · cysts none"],
-  [1, 3, "adult worms many · spread blocked · anaemia marked · cysts none"],
+  [0, 3, "adult worms cleared · spread blocked · anaemia none · cysts none"],
+  [1, 1, "adult worms many · spread blocked · anaemia marked · cysts none"],
   [2, 2, "adult worms cleared · spread blocked · anaemia none · cysts present"],
 ];
 
@@ -74,26 +75,24 @@ const body = `
 <g id="pork"><ellipse class="hel-pork" cx="215" cy="135" rx="48" ry="24"/><g id="cystPork"><circle class="hel-cystdot" cx="200" cy="128" r="5"/><circle class="hel-cystdot" cx="222" cy="140" r="5"/><circle class="hel-cystdot" cx="232" cy="124" r="4"/></g></g>
 <rect class="hel-soil" x="24" y="192" width="256" height="52" rx="10"/>
 <g id="soilEggs"></g>
-<path class="hel-trachea" d="M470 78V112"/>
-<ellipse class="hel-lung" cx="428" cy="140" rx="38" ry="42"/>
-<ellipse class="hel-lung" cx="512" cy="140" rx="38" ry="42"/>
-<rect class="hel-skin" x="330" y="208" width="180" height="18" rx="8"/>
-<path class="hel-vessel" d="M390 208C420 184 438 168 458 156"/>
-<g id="brainG"><ellipse class="hel-brain" cx="735" cy="128" rx="46" ry="30"/><g id="cystBrain"><circle class="hel-cystdot" cx="720" cy="120" r="5"/><circle class="hel-cystdot" cx="744" cy="136" r="5"/><circle class="hel-cystdot" cx="752" cy="116" r="4"/></g></g>
-<g id="muscleG"><rect class="hel-muscle" x="828" y="98" width="88" height="58" rx="12"/><path class="hel-stripe" d="M838 112L906 112M838 128L906 128M838 144L906 144"/><g id="cystMuscle"><circle class="hel-cystdot" cx="858" cy="120" r="5"/><circle class="hel-cystdot" cx="882" cy="138" r="5"/></g></g>
-<rect class="hel-panel2" x="650" y="192" width="276" height="60" rx="12"/>
-<path class="hel-loop" d="M698 222a42 15 0 1 1 84 0a42 15 0 1 1 -84 0"/>
-<rect class="hel-gutwallbit" x="812" y="208" width="84" height="28" rx="8"/>
-<rect class="hel-gut" x="30" y="348" width="886" height="58" rx="16"/>
-<path class="hel-wall" d="M30 348H916M30 406H916"/>
-<g id="routes"></g><g id="worms"></g><g id="gutrbcs"></g><g id="parts"></g><g id="over"></g><g id="panel"></g>`;
+<rect id="drugwash" class="hel-wash" x="14" y="266" width="${W - 28}" height="174" rx="16" opacity="0"/>
+<g id="skinSlot"></g>
+<g id="lungSlot"></g>
+<g id="brainSlot"></g>
+<g id="musSlot"></g>
+<g id="bowelSlot"></g>
+<g id="colonSlot"></g>
+<g id="cystBrain"><circle class="hel-cystdot" cx="700" cy="118" r="5"/><circle class="hel-cystdot" cx="722" cy="134" r="5"/><circle class="hel-cystdot" cx="732" cy="114" r="4"/></g>
+<g id="cystMuscle"><circle class="hel-cystdot" cx="852" cy="112" r="5"/><circle class="hel-cystdot" cx="872" cy="128" r="5"/></g>
+<path id="bloodv" class="hel-vessel" d="M357 211C400 205 450 190 490 175"/>
+<g id="routes"></g><g id="worms"></g><g id="outG"></g><g id="gutrbcs"></g><g id="parts"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "intestinal-helminth-lifecycles", fig: "Fig 1", title: "Intestinal worms: entry, travel and harm", W, H, body,
-  label: "An animated comparison of intestinal worms. Roundworm eggs are swallowed, hatch in the gut, travel through the lungs and return to the gut as adults. Hookworm larvae in soil pass through skin, travel to the lungs and gut, and adult worms cause blood loss and anaemia. With Taenia solium, cysts in undercooked pork give an adult tapeworm in the gut, while swallowed eggs can form cysts in brain and muscle. A separate loop shows Strongyloides larvae re-entering without leaving the host. Gauges show adult worms, spread, migration, anaemia and cysts.",
+  label: "An animated comparison of intestinal worms. Roundworm eggs in dirty food or soil are swallowed, hatch in the gut, travel in blood through the lungs and return to the gut as adults. Hookworm larvae in soil pass through bare skin, travel to the lungs and gut, and adult worms bite the gut wall and feed on blood, causing anaemia. With Taenia solium, cysts in undercooked pork give an adult tapeworm in the gut, while swallowed eggs can form cysts in brain and muscle. Eggs leave in stool at the far end of the gut. Gauges show adult worms, spread, migration, anaemia and cysts.",
   caption: "Schematic, not to scale. Counts, speeds and gauge levels are qualitative and illustrative; no doses or numbers are shown or implied.",
-  scene: { GY, W, H }, pageJs: readFileSync(join(HERE, "helminth.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { GY, W, H }, pageJs: readFileSync(join(HERE, "helminth.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With albendazole",
   extraCss: `
 body{--c-worm:#e59aa8;--c-worm2:#d9c27a;--c-egg:#d9c27a}
 .hel-zone{fill:var(--c-tis);opacity:.45}
@@ -102,37 +101,35 @@ body{--c-worm:#e59aa8;--c-worm2:#d9c27a;--c-egg:#d9c27a}
 .hel-pork{fill:color-mix(in srgb,#e59a88 58%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
 .hel-cystdot{fill:var(--anatomy-paper);stroke:var(--anatomy-strong);stroke-width:1}
 .hel-soil{fill:color-mix(in srgb,#8a6a42 55%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
-.hel-lung{fill:color-mix(in srgb,var(--c-endo) 48%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
-.hel-trachea{fill:none;stroke:var(--anatomy-strong);stroke-width:5;stroke-linecap:round}
-.hel-skin{fill:color-mix(in srgb,#e9b88a 62%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
-.hel-vessel{fill:none;stroke:var(--c-rbc);stroke-width:2;stroke-dasharray:4 4;opacity:.8}
-.hel-brain{fill:color-mix(in srgb,var(--c-mac) 48%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
-.hel-muscle{fill:color-mix(in srgb,var(--c-rbc) 36%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
-.hel-stripe{fill:none;stroke:var(--anatomy-mid);stroke-width:1;opacity:.7}
-.hel-panel2{fill:color-mix(in srgb,var(--c-lymph) 18%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
-.hel-loop{fill:none;stroke:var(--anatomy-strong);stroke-width:1.6;stroke-dasharray:5 4}
-.hel-gutwallbit{fill:color-mix(in srgb,var(--c-endo) 38%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
-.hel-gut{fill:color-mix(in srgb,var(--c-rbc) 10%,var(--anatomy-paper));stroke:none}
-.hel-wall{fill:none;stroke:var(--c-endo);stroke-width:3;opacity:.85}
-.hel-wormA{fill:none;stroke:var(--c-worm);stroke-width:13;stroke-linecap:round}
-.hel-wormA2{fill:none;stroke:color-mix(in srgb,var(--c-worm) 70%,#fff);stroke-width:8;stroke-linecap:round}
-.hel-wormH{fill:none;stroke:var(--c-worm);stroke-width:6;stroke-linecap:round}
+.hel-vessel{fill:none;stroke:var(--c-rbc);stroke-width:2.5;opacity:.85}
+.hel-wash{fill:var(--c-good)}
+.hel-wormA{fill:none;stroke:var(--c-worm);stroke-width:14;stroke-linecap:round}
+.hel-wormA2{fill:none;stroke:color-mix(in srgb,var(--c-worm) 70%,#fff);stroke-width:9;stroke-linecap:round}
+.hel-wormA3{fill:none;stroke:color-mix(in srgb,var(--c-worm) 80%,#fff);stroke-width:7;stroke-linecap:round}
+.hel-wormH{fill:none;stroke:var(--c-worm);stroke-width:7;stroke-linecap:round}
 .hel-seg{fill:var(--c-worm2);stroke:color-mix(in srgb,var(--c-worm2) 55%,#000);stroke-width:.7}
 .hel-head{fill:var(--c-worm2);stroke:color-mix(in srgb,var(--c-worm2) 55%,#000);stroke-width:.7}
+#worms.hel-dead .hel-wormA,#worms.hel-dead .hel-wormH{stroke:#8f8f7d}
+#worms.hel-dead .hel-wormA2,#worms.hel-dead .hel-wormA3{stroke:#a9a999}
+#worms.hel-dead .hel-seg,#worms.hel-dead .hel-head{fill:#9a9a8a;stroke:#5c5c50}
+.hel-out{fill:none;stroke:#9a9a8a;stroke-width:9;stroke-linecap:round}
+.hel-outbit{fill:#b9b9aa;stroke:#5c5c50;stroke-width:.7}
 .p-egg{fill:var(--c-egg);stroke:color-mix(in srgb,var(--c-egg) 55%,#000);stroke-width:.7}
 .p-eggdot{fill:color-mix(in srgb,var(--c-egg) 45%,#000)}
 .p-larv{fill:none;stroke:var(--c-bac);stroke-width:2.4;stroke-linecap:round}
 .p-drop{fill:var(--c-rbc)}
 .p-cap{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}
 .p-cap2{fill:var(--c-good)}
+.p-bound{fill:#8ef4d2;stroke:#0b6e4f;stroke-width:.8}
 .hel-mark{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.6}
 .hel-markx{stroke:var(--c-bad);stroke-width:1.8;stroke-linecap:round}
 .hel-boot{fill:color-mix(in srgb,#5fa8d3 55%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
 .hel-route{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 5;opacity:.55}
+.hel-cap{fill:var(--anatomy-strong)}
 `,
   sourcesLis: [
     "<strong>Roundworm and hookworm.</strong> Ascaris eggs are swallowed from soil, food or hands. They hatch in the small bowel, larvae pass through the bowel wall and blood to the lungs, break into the air spaces, are coughed up and swallowed, and mature in the gut. Hookworm eggs hatch in soil; infective larvae penetrate skin, usually of the feet, travel in blood to the lungs and then to the gut, where adults attach to the bowel wall and feed on blood, causing iron loss and anaemia. This is standard teaching in parasitology and medicine texts and was not checked against a linked source here, so it is flagged for review.",
-    "<strong>Taenia solium, cysticercosis and Strongyloides.</strong> Eating undercooked pork containing Taenia solium cysts gives an adult tapeworm in the gut. Swallowing Taenia eggs shed by a human tapeworm carrier gives cysticercosis, with larvae forming cysts in tissues such as muscle and brain; that is a different outcome from having the adult worm. Strongyloides larvae can become infective inside the gut and re-enter through the bowel wall or skin around the anus, so infection can persist without new exposure from soil (autoinfection). Treatment ideas shown are by class and prevention only: albendazole, praziquantel, and sanitation with footwear. These are teaching toggles only.",
+    "<strong>Taenia solium and cysticercosis.</strong> Eating undercooked pork containing Taenia solium cysts gives an adult tapeworm in the gut. Swallowing Taenia eggs shed by a human tapeworm carrier gives cysticercosis, with larvae forming cysts in tissues such as muscle and brain; that is a different outcome from having the adult worm, and clearing the gut worm does not remove cysts already formed. Treatment ideas shown are by class and prevention only: albendazole, praziquantel, and sanitation with footwear. These are teaching toggles only.",
   ],
-  simplified: "Worm burden, species other than those named, larval lung symptoms, seizures and eye disease from cysts, immune suppression and severe Strongyloides infection, drug choice by species and site, resistance, and all doses and schedules are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
+  simplified: "Worm burden, species other than those named, Strongyloides autoinfection, larval lung symptoms, seizures and eye disease from cysts, immune suppression, drug choice by species and site, resistance, and all doses and schedules are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
 });

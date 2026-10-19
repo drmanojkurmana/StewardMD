@@ -1,7 +1,7 @@
 /* Leptospirosis as an animated, working scene (original drawing; Anima styling, Anatomy page shell).
  *   node tools/figures/scenes/leptosp.mjs [--print-model]
- * Exposure in urine-contaminated water, entry through skin or mucosa, leptospiraemia,
- * vasculitis, anicteric illness, then Weil disease. Qualitative: no doses, no numeric thresholds. */
+ * Exposure in urine-contaminated water, entry through skin, leptospiraemia,
+ * vasculitis, then Weil disease. Qualitative: no doses, no numeric thresholds. */
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -15,13 +15,13 @@ const MD = {
   drugLabel: "Treatment",
   settings: [
     { label: "no treatment" },
-    { label: "prophylaxis before exposure" },
-    { label: "doxycycline or penicillin" },
-    { label: "supportive care with dialysis" },
-    { label: "antibiotics with supportive care and dialysis" },
+    { label: "prophylaxis" },
+    { label: "antibiotic" },
+    { label: "support and dialysis" },
+    { label: "antibiotic with support and dialysis" },
   ],
   status: "Phase: {level} · {drug} ·",
-  drugNames: ["no treatment", "prophylaxis before exposure", "doxycycline or penicillin", "supportive care with dialysis", "antibiotics with supportive care and dialysis"],
+  drugNames: ["no treatment", "prophylaxis", "antibiotic", "support and dialysis", "antibiotic with support and dialysis"],
 };
 function modelOf(S, level, drug) {
   const TABLE = [
@@ -54,19 +54,22 @@ const TESTS = [
 
 const extraCss = `
 .lp-water{fill:var(--c-fl);opacity:.38;stroke:var(--anatomy-mid);stroke-width:1}
-.lp-skin{fill:color-mix(in srgb,var(--c-eos) 32%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
-.lp-skinIn{fill:color-mix(in srgb,var(--c-eos) 55%,var(--anatomy-paper));opacity:.8}
-.lp-eye{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}
-.lp-iris{fill:var(--c-lymph)}
-.lp-pupil{fill:#17202a}
-.lp-redv{fill:none;stroke:var(--c-bad);stroke-width:1.3;stroke-linecap:round}
-.lp-liver{fill:#b85c4a;stroke:color-mix(in srgb,#b85c4a 55%,#000);stroke-width:1.1}
-.lp-kidney{fill:#9a6ab5;stroke:color-mix(in srgb,#9a6ab5 55%,#000);stroke-width:1.1}
-.lp-lung{fill:#7fb3d9;stroke:color-mix(in srgb,#7fb3d9 55%,#000);stroke-width:1.1;opacity:.92}
-.lp-spot{fill:var(--c-bad)}
 .lp-arrow{fill:none;stroke:var(--anatomy-mid);stroke-width:1.6;stroke-dasharray:5 3}
 .lp-spiral{fill:none;stroke:var(--c-bac);stroke-width:1.6;stroke-linecap:round}
 .lp-abY{fill:none;stroke:var(--c-neut);stroke-width:1.6;stroke-linecap:round}
+.lp-spot{fill:var(--c-bad)}
+.lp-jau{fill:#e8c832}
+.lp-kid{fill:#2a1a33}
+.lp-redv{fill:none;stroke:var(--c-bad);stroke-width:1.3;stroke-linecap:round}
+.lp-cap{font-size:13px;fill:var(--anatomy-strong)}
+.lp-shield{fill:color-mix(in srgb,var(--c-good) 30%,transparent);stroke:var(--c-good);stroke-width:2;stroke-dasharray:7 5}
+.lp-mach{fill:color-mix(in srgb,var(--anatomy-mid) 30%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.2}
+.lp-cham{fill:color-mix(in srgb,var(--c-fl) 45%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
+.lp-light{fill:var(--c-good)}
+.lp-tube{fill:none;stroke:var(--anatomy-mid);stroke-width:2.4;stroke-linecap:round}
+.lp-drain{fill:none;stroke:var(--anatomy-mid);stroke-width:2;stroke-linecap:round;stroke-dasharray:3 4}
+.lp-dose{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}
+.lp-dose2{fill:var(--c-bad)}
 .dr-g-fill.g-spiro{fill:var(--c-bac)}
 .dr-g-fill.g-immune{fill:var(--c-neut)}
 .dr-g-fill.g-vessel{fill:var(--c-bad)}
@@ -75,34 +78,40 @@ const extraCss = `
 .dr-g-fill.g-lung{fill:var(--c-lymph)}
 `;
 
-const CY = 292;
+const CY = 262;
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<text class="sc-zone" x="368" y="68">EXPOSURE, BLOOD AND ORGANS</text>
 <rect class="lp-water" x="40" y="92" width="176" height="92" rx="14"/>
-<path class="lp-arrow" d="M224 138 L282 138"/>
-<rect class="lp-skin" x="292" y="84" width="26" height="108" rx="10"/>
-<rect class="lp-skinIn" x="298" y="84" width="6" height="108" rx="3"/>
-<path class="lp-arrow" d="M326 138 L392 196 L392 252"/>
+<path id="arrowIn" class="lp-arrow" d="M222 130 L272 130"/>
+<path id="dropPath" class="lp-arrow" d="M330 184 L330 226"/>
+<path id="connEye" class="lp-arrow" d="M110 296 L110 328"/>
+<path id="connLiver" class="lp-arrow" d="M350 296 L350 310"/>
+<path id="connKid" class="lp-arrow" d="M595 296 L595 321"/>
+<path id="connLung" class="lp-arrow" d="M815 296 L815 306"/>
+<g id="skinSlot"></g>
 <g id="waterfx"></g>
-<g id="spirals"></g>
 <rect id="lumen" class="sc-lumen" x="14" y="${CY - 34}" width="${W - 28}" height="68" rx="10"/>
 <g id="rbcs"></g>
 <g id="endo"></g>
+<g id="eyeSlot"></g>
+<g id="liverSlot"></g>
+<g id="kidSlot"></g>
+<g id="lungSlot"></g>
 <g id="parts"></g>
-<g id="organs"></g>
+<g id="fx"></g>
+<g id="mach"></g>
 <g id="over"></g>
 <g id="panel"></g>`;
 
 buildScene({
   id: "leptospirosis", fig: "Fig 1", title: "Leptospirosis: contaminated water to Weil disease", W, H, body, extraCss,
-  label: "An animated scene of leptospirosis. Water contaminated with animal urine holds spiral leptospires. They enter through skin or mucosa, spread in the blood, injure vessel walls, and in severe disease cause jaundice, kidney failure, bleeding and lung haemorrhage. The phase slider moves from leptospiraemic to immune to Weil disease. Treatment choices include prophylaxis, doxycycline or penicillin, and supportive care with dialysis.",
+  label: "An animated scene of leptospirosis. Water contaminated with animal urine holds spiral leptospires. They enter through skin, spread in the blood, injure vessel walls, and in severe disease cause jaundice, kidney failure and lung bleeding. The phase slider moves from leptospiraemic to immune to Weil disease. Treatment choices are prophylaxis, antibiotic, and support with dialysis.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or patient advice are shown or implied.",
-  scene: { CY, W, H }, pageJs: readFileSync(join(HERE, "leptosp.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { CY, W, H }, pageJs: readFileSync(join(HERE, "leptosp.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With antibiotic with support and dialysis",
   sourcesLis: [
-    "<strong>How leptospirosis develops.</strong> Leptospira bacteria live in the kidneys of animals and leave in urine, contaminating water and soil. After an incubation period they enter through cuts in skin or through mucosa, reach the blood (leptospiraemia) and spread to tissues. Outer membrane proteins help them attach and evade early immunity. The first phase brings fever, headache, muscle pain and conjunctival suffusion (red eyes without discharge). Antibodies then clear leptospires from blood, but they may persist in kidney tubules and appear in urine. In severe Weil disease, vasculitis and tissue injury cause jaundice from liver dysfunction, renal failure from tubular injury and interstitial nephritis, bleeding, and pulmonary haemorrhage, which drives mortality. Although many illnesses are anicteric and mild, severe disease can be fatal. This is standard textbook teaching, flagged as AI-assisted for clinician review.",
-    "<strong>Treatment ideas shown.</strong> Prophylaxis before exposure can reduce entry. Doxycycline or penicillin kills leptospires. Supportive care with dialysis supports failing kidneys and other organs but does not itself kill the bacteria. These are teaching toggles only.",
+    "<strong>How leptospirosis develops.</strong> Leptospira bacteria live in the kidneys of animals and leave in urine, contaminating water and soil. After an incubation period they enter through cuts in skin or through mucosa, reach the blood (leptospiraemia) and spread to tissues. The first phase brings fever, headache, muscle pain and conjunctival suffusion (red eyes without discharge). Antibodies then clear leptospires from blood, but they may persist in kidney tubules and appear in urine. In severe Weil disease, vasculitis and tissue injury cause jaundice from liver dysfunction, renal failure from tubular injury and interstitial nephritis, bleeding, and pulmonary haemorrhage, which drives mortality. Although many illnesses are mild, severe disease can be fatal. This is standard textbook teaching, flagged as AI-assisted for clinician review.",
+    "<strong>Treatment ideas shown.</strong> Prophylaxis before exposure can reduce entry. Antibiotic (doxycycline or penicillin) kills leptospires. Supportive care with dialysis supports failing kidneys and clears wastes but does not itself kill the bacteria. These are teaching toggles only.",
   ],
   simplified: "Animal reservoirs in detail, serovar differences, laboratory diagnosis, meningitis, uveitis, myocarditis, exact immune mechanisms, and all doses and dialysis prescriptions are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
 });
