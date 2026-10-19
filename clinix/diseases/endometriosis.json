@@ -1,1138 +1,1138 @@
 {
- "id": "endometriosis",
- "name": "Endometriosis and adenomyosis",
- "fullName": "Endometriosis and adenomyosis (including chocolate cyst and deep disease)",
- "system": "gynaecology",
- "subtitle": "Pelvic pain and infertility",
- "kbRef": "endometriosis_adenomyosis_chocolate_die",
- "oneLine": "Ectopic endometrium that bleeds where it cannot escape: pain, lumps and infertility",
- "estMinutes": 60,
- "review": {
-  "status": "ai_drafted"
- },
- "version": 1,
- "_comment": "AI drafted teaching pathway. Review status ai_drafted until clinician approval.",
- "chapters": [
-  {
-   "id": "basics",
-   "title": "Basics",
-   "skills": [
-    "skill.endometriosis.basics"
-   ]
+  "id": "endometriosis",
+  "name": "Endometriosis and adenomyosis",
+  "fullName": "Endometriosis and adenomyosis (including chocolate cyst and deep disease)",
+  "system": "obgyn",
+  "subtitle": "Pelvic pain and infertility",
+  "kbRef": "endometriosis_adenomyosis_chocolate_die",
+  "oneLine": "Ectopic endometrium that bleeds where it cannot escape: pain, lumps and infertility",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
   },
-  {
-   "id": "approach",
-   "title": "Approach to the patient",
-   "skills": [
-    "skill.approach.hygiene",
-    "skill.approach.introduce",
-    "skill.approach.consent",
-    "skill.approach.position"
-   ]
-  },
-  {
-   "id": "particulars",
-   "title": "Patient particulars",
-   "skills": [
-    "skill.particulars.demographics"
-   ],
-   "emphasis": {
-    "skill.particulars.demographics": {
-     "expect": "Reproductive age carries the weight: progressive pelvic pain with dyspareunia or infertility in a woman in her twenties or thirties is endometriosis until proved otherwise. Nulliparity and a sister or mother with the same pain raise the prior further, while onset after the menopause argues against it."
-    }
-   }
-  },
-  {
-   "id": "history",
-   "title": "History of presenting illness",
-   "skills": [
-    "skill.hx.chief_complaints",
-    "skill.hx.obg.menstrual_history",
-    "skill.hx.obg.gynae_symptoms"
-   ],
-   "emphasis": {
-    "skill.hx.chief_complaints": {
-     "expect": "Expect a story told in years, not days: secondary pain that worsens yearly, quantified by days off work and analgesics needed. That chronic progressive tempo alone moves you away from ectopic and acute infection."
+  "version": 1,
+  "_comment": "AI drafted teaching pathway. Review status ai_drafted until clinician approval.",
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "skills": [
+        "skill.endometriosis.basics"
+      ]
     },
-    "skill.hx.obg.gynae_symptoms": {
-     "expect": "Expect deep dyspareunia with thrusting pain, intermenstrual ache and cyclical bowel pain on passing stool. Pain that eased on earlier pills and returned on stopping proves hormone responsiveness."
-    }
-   }
-  },
-  {
-   "id": "past_personal_drug_family",
-   "title": "Past, personal, drug and family history",
-   "skills": [
-    "skill.hx.obg.gynae_background",
-    "skill.hx.endometriosi.risk"
-   ]
-  },
-  {
-   "id": "general_exam",
-   "title": "General examination",
-   "skills": [
-    "skill.gen.appearance",
-    "skill.gen.vitals",
-    "skill.gen.edema"
-   ],
-   "emphasis": {
-    "skill.gen.appearance": {
-     "expect": "Look for the pallor of chronic loss where adenomyosis bleeds heavily, and for the tiredness of a woman who loses two days a month to pain. Findings here are usually subtle: the disease declares itself in the history and pelvis, not in the general examination."
-    }
-   }
-  },
-  {
-   "id": "systemic_exam",
-   "title": "Pelvic and abdominal examination",
-   "skills": [
-    "skill.exam.obg.gynae_abdominal",
-    "skill.exam.obg.vulval_inspect",
-    "skill.exam.obg.speculum_insert",
-    "skill.exam.obg.speculum_inspect",
-    "skill.exam.obg.bimanual"
-   ],
-   "emphasis": {
-    "skill.exam.obg.gynae_abdominal": {
-     "expect": "The abdomen is often soft with only iliac fossa tenderness; a 5 cm chocolate cyst need not be felt above the pubis. Tenderness that is deep and lateral, without guarding, keeps you gynaecological rather than surgical."
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
     },
-    "skill.exam.obg.bimanual": {
-     "expect": "Expect a retroverted uterus with limited mobility and tenderness on movement, nodularity of the uterosacrals or pouch, and a tender adnexal mass that moves little with the cervix. A bulky boggy tender uterus adds the adenomyosis half. No cervical motion tenderness argues against PID."
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Reproductive age carries the weight: progressive pelvic pain with dyspareunia or infertility in a woman in her twenties or thirties is endometriosis until proved otherwise. Nulliparity and a sister or mother with the same pain raise the prior further, while onset after the menopause argues against it."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.menstrual_history",
+        "skill.hx.obg.gynae_symptoms"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect a story told in years, not days: secondary pain that worsens yearly, quantified by days off work and analgesics needed. That chronic progressive tempo alone moves you away from ectopic and acute infection."
+        },
+        "skill.hx.obg.gynae_symptoms": {
+          "expect": "Expect deep dyspareunia with thrusting pain, intermenstrual ache and cyclical bowel pain on passing stool. Pain that eased on earlier pills and returned on stopping proves hormone responsiveness."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "skills": [
+        "skill.hx.obg.gynae_background",
+        "skill.hx.endometriosi.risk"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for the pallor of chronic loss where adenomyosis bleeds heavily, and for the tiredness of a woman who loses two days a month to pain. Findings here are usually subtle: the disease declares itself in the history and pelvis, not in the general examination."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Pelvic and abdominal examination",
+      "skills": [
+        "skill.exam.obg.gynae_abdominal",
+        "skill.exam.obg.vulval_inspect",
+        "skill.exam.obg.speculum_insert",
+        "skill.exam.obg.speculum_inspect",
+        "skill.exam.obg.bimanual"
+      ],
+      "emphasis": {
+        "skill.exam.obg.gynae_abdominal": {
+          "expect": "The abdomen is often soft with only iliac fossa tenderness; a 5 cm chocolate cyst need not be felt above the pubis. Tenderness that is deep and lateral, without guarding, keeps you gynaecological rather than surgical."
+        },
+        "skill.exam.obg.bimanual": {
+          "expect": "Expect a retroverted uterus with limited mobility and tenderness on movement, nodularity of the uterosacrals or pouch, and a tender adnexal mass that moves little with the cervix. A bulky boggy tender uterus adds the adenomyosis half. No cervical motion tenderness argues against PID."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the endometriosis picture together",
+      "skills": [
+        "skill.endometriosis.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "skills": [
+        "skill.endometriosis.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "skills": [
+        "skill.endometriosis.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "skills": [
+        "skill.ix.endometriosis.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and staging",
+      "skills": [
+        "skill.endometriosis.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "skills": [
+        "skill.tx.endometriosis"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "skills": [
+        "skill.present.endometriosi.case"
+      ]
     }
-   }
-  },
-  {
-   "id": "disease_findings",
-   "title": "Putting the endometriosis picture together",
-   "skills": [
-    "skill.endometriosis.signs"
-   ]
-  },
-  {
-   "id": "summary",
-   "title": "Clinical summary",
-   "skills": [
-    "skill.endometriosis.summary"
-   ]
-  },
-  {
-   "id": "differential",
-   "title": "Differential diagnosis",
-   "skills": [
-    "skill.endometriosis.differential"
-   ]
-  },
-  {
-   "id": "investigations",
-   "title": "Investigations",
-   "skills": [
-    "skill.ix.endometriosis.workup"
-   ]
-  },
-  {
-   "id": "diagnosis",
-   "title": "Diagnosis and staging",
-   "skills": [
-    "skill.endometriosis.diagnosis"
-   ]
-  },
-  {
-   "id": "treatment",
-   "title": "Treatment",
-   "skills": [
-    "skill.tx.endometriosis"
-   ]
-  },
-  {
-   "id": "case",
-   "title": "Case presentation",
-   "skills": [
-    "skill.present.endometriosi.case"
-   ]
-  }
- ],
- "osce": {
-  "stations": [
-   {
-    "id": "osce.endometriosis.pelvic_exam",
-    "title": "Examine the pelvis in suspected endometriosis",
-    "task": "This 29 year old woman has four years of worsening period pain, deep dyspareunia and primary infertility. Examine her abdomen and pelvis, including speculum and bimanual examination, and present your findings.",
-    "seconds": 480,
-    "skills": [
-     "skill.approach.obg.intimate_consent",
-     "skill.exam.obg.gynae_abdominal",
-     "skill.exam.obg.vulval_inspect",
-     "skill.exam.obg.speculum_insert",
-     "skill.exam.obg.speculum_inspect",
-     "skill.exam.obg.bimanual",
-     "skill.approach.obg.pelvic_close"
-    ],
-    "examinerQuestions": [
-     "Her uterus is fixed and tender with left uterosacral nodularity. How does that pattern separate endometriosis from fibroid at the bedside?",
-     "There is no cervical motion tenderness and no discharge. Why does that pair of negatives matter, and what would you have done differently had they been positive?",
-     "The left fornix holds a tender 5 cm mass. What scan finding would confirm a chocolate cyst, and what single blood test must precede any ovarian surgery?"
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.endometriosis.pelvic_exam",
+        "title": "Examine the pelvis in suspected endometriosis",
+        "task": "This 29 year old woman has four years of worsening period pain, deep dyspareunia and primary infertility. Examine her abdomen and pelvis, including speculum and bimanual examination, and present your findings.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.obg.intimate_consent",
+          "skill.exam.obg.gynae_abdominal",
+          "skill.exam.obg.vulval_inspect",
+          "skill.exam.obg.speculum_insert",
+          "skill.exam.obg.speculum_inspect",
+          "skill.exam.obg.bimanual",
+          "skill.approach.obg.pelvic_close"
+        ],
+        "examinerQuestions": [
+          "Her uterus is fixed and tender with left uterosacral nodularity. How does that pattern separate endometriosis from fibroid at the bedside?",
+          "There is no cervical motion tenderness and no discharge. Why does that pair of negatives matter, and what would you have done differently had they been positive?",
+          "The left fornix holds a tender 5 cm mass. What scan finding would confirm a chocolate cyst, and what single blood test must precede any ovarian surgery?"
+        ]
+      },
+      {
+        "id": "osce.endometriosis.history_plan",
+        "title": "Take a pain and fertility history and outline the plan",
+        "task": "This 29 year old woman has chronic pelvic pain and has not conceived in four years of trying. Take a focused pain and fertility history in six minutes and be ready to state your plan.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.obg.menstrual_history",
+          "skill.hx.obg.gynae_symptoms",
+          "skill.hx.endometriosi.risk"
+        ],
+        "examinerQuestions": [
+          "Quantify her pain from what you found, and state which answers prove hormone responsiveness.",
+          "Her priority today is conception, her AMH is low-normal and the cyst is 5 cm. How does that combination choose between cystectomy, ablation and direct referral for assisted conception?",
+          "Her haemoglobin is 9 with a microcytic picture. What must happen before any operation is dated, and why?"
+        ]
+      }
     ]
-   },
-   {
-    "id": "osce.endometriosis.history_plan",
-    "title": "Take a pain and fertility history and outline the plan",
-    "task": "This 29 year old woman has chronic pelvic pain and has not conceived in four years of trying. Take a focused pain and fertility history in six minutes and be ready to state your plan.",
-    "seconds": 360,
+  },
+  "viva": {
     "skills": [
-     "skill.approach.introduce",
-     "skill.approach.consent",
-     "skill.hx.chief_complaints",
-     "skill.hx.obg.menstrual_history",
-     "skill.hx.obg.gynae_symptoms",
-     "skill.hx.endometriosi.risk"
-    ],
-    "examinerQuestions": [
-     "Quantify her pain from what you found, and state which answers prove hormone responsiveness.",
-     "Her priority today is conception, her AMH is low-normal and the cyst is 5 cm. How does that combination choose between cystectomy, ablation and direct referral for assisted conception?",
-     "Her haemoglobin is 9 with a microcytic picture. What must happen before any operation is dated, and why?"
+      "skill.endometriosis.basics",
+      "skill.exam.obg.bimanual",
+      "skill.endometriosis.signs",
+      "skill.endometriosis.summary",
+      "skill.endometriosis.differential",
+      "skill.ix.endometriosis.workup",
+      "skill.endometriosis.diagnosis",
+      "skill.tx.endometriosis"
     ]
-   }
+  },
+  "skills": {
+    "skill.endometriosis.basics": {
+      "id": "skill.endometriosis.basics",
+      "kind": "reasoning",
+      "title": "What endometriosis and adenomyosis are",
+      "oneLine": "Hormone responsive tissue outside the cavity, and inside the wall",
+      "system": "gynaecology",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "why": "Endometriosis and adenomyosis explain the triad of painful periods, pain with intercourse and infertility that no other single gynaecological diagnosis covers. Naming the disease as hormone responsive tissue in the wrong place, rather than as bad periods, is what moves the patient from years of analgesics to staged care.",
+      "teach": [
+        {
+          "heading": "What endometriosis is",
+          "body": "Endometriosis is endometrial-like tissue growing outside the uterine cavity, most often on the ovaries, the pouch of Douglas and the uterosacral ligaments. The deposits respond to ovarian hormones and bleed with each cycle, but the blood cannot escape, so it collects, scars and tethers nearby structures.\n\nRepeated cyclical bleeding forms blood-filled ovarian cysts, fibrotic nodules in the pelvis and dense adhesions. With time the pouch obliterates, the ovaries stick to the pelvic sidewall and the uterus fixes in retroversion."
+        },
+        {
+          "heading": "What adenomyosis is",
+          "body": "Adenomyosis is endometrial tissue within the uterine muscle itself, with hyperplasia of the surrounding junctional myometrium that thickens and stiffens the wall. The uterus enlarges symmetrically and feels bulky, boggy and tender.\n\nThe two conditions share oestrogen dependence and often coexist, but they are anatomically distinct: one sits outside the uterus, the other inside its wall. That distinction decides what the fingers and the scan should each look for."
+        },
+        {
+          "heading": "Where deposits sit and what they form",
+          "table": {
+            "cols": [
+              "Site",
+              "What forms",
+              "Why it matters"
+            ],
+            "rows": [
+              [
+                "Ovary",
+                "Blood-filled cyst with ground glass contents",
+                "Pain, rupture risk and falling ovarian reserve"
+              ],
+              [
+                "Pouch and uterosacral ligaments",
+                "Tender fibrotic nodules and scarring",
+                "Deep pain and a fixed retroverted uterus"
+              ],
+              [
+                "Rectovaginal septum, bowel or bladder",
+                "Deeply infiltrating plaques",
+                "Cyclical bowel or bladder symptoms, needs an equipped team"
+              ],
+              [
+                "Uterine wall",
+                "Thickened junctional zone, bulky boggy uterus",
+                "Heavy bleeding with a tender uterus"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why oestrogen runs the disease",
+          "body": "Both conditions are oestrogen driven: deposits carry hormone receptors, so symptoms begin after menarche, flare through the reproductive years and settle after the menopause. Pregnancy and induced hypoestrogenic states starve the implants and ease pain.\n\nTreatments that lower oestrogen shrink implants but thin bone when used long, which is why courses that suppress the ovary need planned add-back. Cyst surgery removes disease at the cost of healthy cortex, so operating also depletes follicles."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Where outside the uterus does endometriosis most often sit?",
+          "a": "On the ovaries, the pouch of Douglas and the uterosacral ligaments.",
+          "accept": [
+            "ovaries",
+            "douglas",
+            "uterosacral",
+            "ligaments"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How does adenomyosis differ anatomically from endometriosis?",
+          "a": "Adenomyosis sits within the uterine muscle with a thickened junctional zone, while endometriosis sits outside the uterus.",
+          "accept": [
+            "muscle",
+            "junctional",
+            "outside",
+            "wall"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why do symptoms settle after the menopause?",
+          "a": "Both conditions are oestrogen driven, so falling ovarian hormones starve the implants.",
+          "accept": [
+            "oestrogen",
+            "driven",
+            "starve",
+            "menopause"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "endometriosis_adenomyosis_chocolate_die: pathophysiology"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "endometriosis_adenomyosis_chocolate_die: clinicalPearls"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Endometriosis (definition and pathogenesis)"
+        }
+      ]
+    },
+    "skill.endometriosis.signs": {
+      "id": "skill.endometriosis.signs",
+      "kind": "reasoning",
+      "title": "The endometriosis picture: pain, lumps and infertility",
+      "oneLine": "Progressive period pain, deep dyspareunia, nodularity and a fixed tender uterus",
+      "system": "gynaecology",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "why": "The diagnosis is suspected at the bedside long before any scan: a progressive pain story plus nodularity or a fixed tender uterus is endometriosis until proved otherwise. Waiting for imaging while the history already declares itself costs fertile years.",
+      "teach": [
+        {
+          "heading": "The pain history that points here",
+          "points": [
+            "Secondary dysmenorrhoea that starts years after menarche and worsens year by year, unlike primary pain that starts with the first periods.",
+            "Deep dyspareunia: pain with deep thrusting that makes intercourse dreaded, distinct from superficial introital pain.",
+            "Chronic pelvic ache between periods as scarring and adhesions accumulate.",
+            "Cyclical bowel or bladder pain, pain on passing stool during periods, or blood in urine or stool with the cycle, marking deep plaques.",
+            "Pain severe enough to miss school or work, needing regular leave: severity that disrupts life is itself a clinical sign."
+          ]
+        },
+        {
+          "heading": "Infertility as the presenting complaint",
+          "body": "A large share of women with endometriosis present with difficulty conceiving rather than pain. Adhesions distort tubo-ovarian anatomy, the inflammatory peritoneal fluid harms gametes, and ovarian cysts deplete reserve.\n\nAsk duration of trying, cycle regularity and any prior treatment, because the plan forks early: pain-dominant disease leans medical, while tubal damage or poor reserve leans toward assisted conception."
+        },
+        {
+          "heading": "What the fingers find",
+          "points": [
+            "Tender nodularity of the uterosacral ligaments or the pouch of Douglas on vaginal or rectal examination.",
+            "A uterus that is retroverted, fixed or tender on movement, refusing the mobility of a normal uterus.",
+            "A tender adnexal mass that moves little with the uterus, the bedside face of the chocolate cyst.",
+            "A bulky, boggy, tender uterus where adenomyosis coexists with the deposits.",
+            "Pallor and a low haemoglobin where heavy bleeding dominates the adenomyosis half of the disease."
+          ]
+        },
+        {
+          "heading": "Endometriosis against adenomyosis at the bedside",
+          "table": {
+            "cols": [
+              "Feature",
+              "Endometriosis",
+              "Adenomyosis"
+            ],
+            "rows": [
+              [
+                "Uterus",
+                "Often normal size, may fix in retroversion",
+                "Symmetrically bulky, boggy, tender"
+              ],
+              [
+                "Bleeding",
+                "Usually of normal volume",
+                "Often heavy and prolonged"
+              ],
+              [
+                "Pain",
+                "Deep dyspareunia prominent",
+                "Dysmenorrhoea prominent"
+              ],
+              [
+                "Scan anchor",
+                "Ground glass cyst and nodules",
+                "Thickened junctional zone"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the three pains of endometriosis.",
+          "a": "Progressive secondary dysmenorrhoea, deep dyspareunia and chronic pelvic pain.",
+          "accept": [
+            "dysmenorrhoea",
+            "dyspareunia",
+            "pelvic"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How does endometriosis cause infertility?",
+          "a": "Adhesions distort tubo-ovarian anatomy, inflammatory fluid harms gametes and cysts deplete reserve.",
+          "accept": [
+            "adhesions",
+            "tubal",
+            "inflammatory",
+            "reserve"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What single bimanual finding best separates endometriosis from fibroid?",
+          "a": "Tender nodularity of the uterosacrals or pouch with a fixed tender uterus, where fibroid gives a firm nodular but non-tender mobile uterus.",
+          "accept": [
+            "nodularity",
+            "fixed",
+            "tender",
+            "uterosacral"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "endometriosis_adenomyosis_chocolate_die: clinicalPearls"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Endometriosis (clinical features)"
+        }
+      ]
+    },
+    "skill.endometriosis.summary": {
+      "id": "skill.endometriosis.summary",
+      "kind": "reasoning",
+      "title": "Summarising the endometriosis case",
+      "oneLine": "Tempo, pain triad, fertility status, exam anchors and anaemia in one paragraph",
+      "system": "gynaecology",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "why": "A summary that omits fertility wishes or the mobility of the uterus forces the consultant to re-examine the patient. The summary is the handover on which the choice between hormones, surgery and assisted conception rests.",
+      "teach": [
+        {
+          "heading": "One line first",
+          "body": "Open with age, parity, duration of trying and the working diagnosis: a 29 year old nulliparous woman with four years of progressive dysmenorrhoea, deep dyspareunia and primary infertility, with a tender fixed uterus and a left chocolate cyst on scan.\n\nThe opening line must carry fertility status beside the pain story, because those two facts together choose the arm of treatment."
+        },
+        {
+          "heading": "What earns its place",
+          "body": "Follow with the evidence in the order it was gathered: pain quantified by days off work and analgesics needed, the bimanual anchors of nodularity, mobility and fornices, and the scan anchors of ground glass and junctional zone.\n\nClose with the negatives that exclude mimics: no cervical motion tenderness, no discharge, a negative pregnancy test. Each negative closes one differential door."
+        },
+        {
+          "heading": "What never to omit",
+          "points": [
+            "Tempo in years: progressive secondary pain, never an acute story told as chronic.",
+            "The full pain triad: dysmenorrhoea, dyspareunia and intermenstrual ache, each stated or stated absent.",
+            "Fertility status: duration of trying, prior treatment and whether pain or conception is today's priority.",
+            "Exam anchors: uterine mobility, tenderness, nodularity and whether the fornices are free.",
+            "Anaemia grade and scan anchors, since haemoglobin decides timing and imaging decides route."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What must the first line of an endometriosis summary contain?",
+          "a": "Age, parity, duration of trying, the pain triad and the working diagnosis.",
+          "accept": [
+            "parity",
+            "trying",
+            "pain",
+            "diagnosis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which negatives belong in the summary and why?",
+          "a": "No cervical motion tenderness, no discharge and a negative pregnancy test, excluding PID and ectopic.",
+          "accept": [
+            "tenderness",
+            "discharge",
+            "pregnancy",
+            "ectopic"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "endometriosis_adenomyosis_chocolate_die: clinicalPearls"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Endometriosis (clinical features)"
+        }
+      ]
+    },
+    "skill.endometriosis.differential": {
+      "id": "skill.endometriosis.differential",
+      "kind": "reasoning",
+      "title": "What else chronic pelvic pain and a mass can be",
+      "oneLine": "Adenomyosis, PID, fibroid, ovarian tumour, ectopic and bowel mimics",
+      "system": "gynaecology",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "why": "Chronic pelvic pain is a shared symptom of gynaecological, bowel and urinary disease, and a tender adnexal mass is not always endometriosis. A differential worked from anatomy keeps PID treated promptly and ectopic never missed.",
+      "teach": [
+        {
+          "heading": "The mimics in one view",
+          "table": {
+            "cols": [
+              "Condition",
+              "Favours it",
+              "Argues against"
+            ],
+            "rows": [
+              [
+                "Adenomyosis",
+                "Bulky boggy tender uterus, heavy bleeding",
+                "Normal size mobile uterus"
+              ],
+              [
+                "Pelvic inflammatory disease",
+                "Cervical motion tenderness, discharge, fever",
+                "Cyclical pain, fixed nodularity"
+              ],
+              [
+                "Fibroid uterus",
+                "Firm nodular enlarged but mobile uterus",
+                "Tenderness, nodular fornices, dyspareunia"
+              ],
+              [
+                "Ovarian tumour",
+                "Large non-tender mobile cyst",
+                "Ground glass contents, tenderness, cyclical pain"
+              ],
+              [
+                "Ectopic pregnancy",
+                "Missed period, collapse, positive test",
+                "Chronic cyclical history over years"
+              ],
+              [
+                "Bowel mimic",
+                "Pain eased by defecation, no cycle link",
+                "Dyspareunia, nodularity, infertility"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "How to separate them at the bedside",
+          "points": [
+            "Uterus first: a symmetrically bulky tender uterus points to adenomyosis, a firm nodular non-tender one to fibroid, a normal size fixed one to endometriosis.",
+            "Tenderness pattern: cervical motion tenderness with discharge pushes toward PID and demands treatment, while uterosacral nodularity pushes toward endometriosis.",
+            "Pregnancy test in every woman of reproductive age: a chronic pain story does not exempt her, and a positive test reorders everything.",
+            "Cycle linkage: pain, bowel symptoms or bleeding that follow the periods favour endometriosis over bowel or urinary disease."
+          ]
+        },
+        {
+          "heading": "Red flags that break the routine",
+          "body": "Acute collapse with a positive test is ruptured ectopic until proved otherwise and needs resuscitation, not a scan queue. Fever with purulent discharge and severe tenderness is acute PID and needs prompt antibiotics to protect the tubes.\n\nA postmenopausal mass with ascites or nodularity points away from endometriosis toward ovarian malignancy and needs urgent referral on the cancer pathway."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name four differentials of chronic pelvic pain with an adnexal mass.",
+          "a": "Adenomyosis, pelvic inflammatory disease, fibroid and ovarian tumour.",
+          "accept": [
+            "adenomyosis",
+            "inflammatory",
+            "fibroid",
+            "ovarian"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How do you separate PID from endometriosis at the bedside?",
+          "a": "PID gives cervical motion tenderness with discharge and fever, while endometriosis gives cyclical pain with fixed nodularity.",
+          "accept": [
+            "motion",
+            "discharge",
+            "cyclical",
+            "nodularity"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "When does an endometriosis workup become an emergency?",
+          "a": "Collapse with a positive pregnancy test, or fever with purulent discharge and severe tenderness.",
+          "accept": [
+            "collapse",
+            "pregnancy",
+            "fever",
+            "discharge"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "endometriosis_adenomyosis_chocolate_die: additionalDifferentials"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Chronic pelvic pain (differential diagnosis)"
+        }
+      ]
+    },
+    "skill.ix.endometriosis.workup": {
+      "id": "skill.ix.endometriosis.workup",
+      "kind": "investigation",
+      "title": "Imaging and labs in endometriosis and adenomyosis",
+      "oneLine": "Transvaginal scan first, MRI mapping for deep disease, AMH before surgery",
+      "system": "gynaecology",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "why": "The scan decides whether treatment can stay medical and whether surgery needs an equipped team. Ordering the right sequence, scan then mapping then reserve testing, avoids operating blind on deep disease.",
+      "teach": [
+        {
+          "heading": "Ultrasound first",
+          "body": "Transvaginal ultrasound is first line: a unilocular cyst with homogeneous low-level ground glass echoes and poor Doppler flow marks the chocolate cyst, while a bulky heterogeneous uterus with a thickened junctional zone marks adenomyosis.\n\nRecord size, laterality, mobility on probe pressure and whether the ovary slides against the uterus. A fixed ovary warns of adhesions before any port is placed."
+        },
+        {
+          "heading": "Mapping and blood tests",
+          "body": "Magnetic resonance mapping stages deep disease before surgery: it shows junctional zone thickening and plaques on bowel or bladder that the fingers cannot reach. Reserve it for suspected deep disease or surgical planning, not for every pelvic ache.\n\nCA-125 may rise but never diagnoses alone and never excludes. Measure anti-Mullerian hormone before any ovarian surgery so the woman knows the reserve cost of cystectomy, and correct anaemia with iron studies where bleeding dominates."
+        },
+        {
+          "heading": "Laparoscopy and histology",
+          "points": [
+            "Laparoscopy with histology is the gold standard: powder-burn, vesicular and chocolate lesions seen and biopsied.",
+            "Stage and treat in the same sitting where the team is equipped; diagnostic-only laparoscopy wastes an anaesthetic.",
+            "Handle the endometrioma without spillage: spilled contents worsen adhesions and invite a frozen pelvis.",
+            "A urine pregnancy test precedes everything in a woman of reproductive age, and a full blood count grades the anaemia that decides fitness for any procedure."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the first-line imaging in suspected endometriosis?",
+          "a": "Transvaginal ultrasound, looking for ground glass cysts and junctional zone thickening.",
+          "accept": [
+            "transvaginal",
+            "ultrasound",
+            "ground",
+            "junctional"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why measure AMH before ovarian surgery?",
+          "a": "Cystectomy removes healthy cortex with the cyst wall, so AMH quantifies the reserve cost beforehand.",
+          "accept": [
+            "cortex",
+            "reserve",
+            "cystectomy",
+            "amh"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "When do you order MRI rather than stopping at ultrasound?",
+          "a": "Suspected deep disease of bowel, bladder or rectovaginal septum, for mapping before surgery.",
+          "accept": [
+            "deep",
+            "bowel",
+            "bladder",
+            "mapping"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "endometriosis_adenomyosis_chocolate_die: additionalInvestigations"
+        },
+        {
+          "source": "NICE guideline: Endometriosis",
+          "locator": "Endometriosis: diagnosis and management (diagnosis)"
+        }
+      ]
+    },
+    "skill.endometriosis.diagnosis": {
+      "id": "skill.endometriosis.diagnosis",
+      "kind": "reasoning",
+      "title": "Diagnosing endometriosis, deep disease and adenomyosis",
+      "oneLine": "Clinical diagnosis when classic, laparoscopy when in doubt, both labels when both present",
+      "system": "gynaecology",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "why": "Insisting on laparoscopy for every classic case delays care by months, while labelling without criteria medicalises normal periods. Knowing when the clinical picture suffices is what keeps the pathway moving.",
+      "teach": [
+        {
+          "heading": "When clinical diagnosis is enough",
+          "body": "A classic history of progressive dysmenorrhoea with deep dyspareunia or infertility, plus tender nodularity or a fixed tender uterus, plus a ground glass cyst or thickened junctional zone on scan, justifies treatment without surgery.\n\nDo not exclude endometriosis on a normal examination alone: early and deeply placed disease hides from the fingers. Treat the story with weight even when the pelvis feels normal."
+        },
+        {
+          "heading": "Deep disease and staging",
+          "body": "Deep infiltrating disease means lesions beyond the peritoneum: the rectovaginal septum, bowel wall or bladder. Suspect it from cyclical bowel or bladder symptoms and confirm by mapping before referring to an equipped team.\n\nOperative staging records extent, not suffering: a high stage can ache little and minimal disease can disable. Record site, size and laterality rather than arguing pain against stage."
+        },
+        {
+          "heading": "Labelling adenomyosis, and labelling both",
+          "body": "Label adenomyosis on a bulky, boggy, tender uterus with junctional zone thickening on imaging, especially where heavy bleeding dominates. The label matters because the intrauterine system works best exactly here.\n\nThe two labels commonly coexist, so carry both when both sets of criteria are met. One label alone then under-treats the other half of her symptoms."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "When can you diagnose endometriosis without laparoscopy?",
+          "a": "Classic progressive pain with dyspareunia or infertility plus nodularity or supportive scan findings.",
+          "accept": [
+            "classic",
+            "dyspareunia",
+            "nodularity",
+            "scan"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What defines deep infiltrating disease and why does the label matter?",
+          "a": "Lesions beyond the peritoneum into bowel, bladder or septum; it needs mapping and an equipped team.",
+          "accept": [
+            "peritoneum",
+            "bowel",
+            "bladder",
+            "mapping"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "endometriosis_adenomyosis_chocolate_die: additionalDifferentials"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Endometriosis (diagnosis and classification)"
+        }
+      ]
+    },
+    "skill.tx.endometriosis": {
+      "id": "skill.tx.endometriosis",
+      "kind": "treatment",
+      "title": "Stepped care for endometriosis and adenomyosis",
+      "oneLine": "Analgesia, hormones, ovarian suppression with add-back, surgery, then fertility care",
+      "system": "gynaecology",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of drug class and principle, with regimens quoted from the cited sources. Specific agents, regimens and doses must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "why": "Care is stepped from analgesia through hormones to surgery and fertility treatment, matched to whether pain or conception is today's priority. Getting the step wrong, repeated surgery where IVF was indicated or years of tablets where a cyst needed excision, costs ovarian reserve.",
+      "teach": [
+        {
+          "heading": "Start with pain and bleeding",
+          "body": "Begin with non-steroidal anti-inflammatory drugs with paracetamol for pain, and a combined oral pill or oral progestin to suppress deposits and regulate bleeding. Hormonal cover also preserves options while she decides about conception.\n\nPlace the levonorgestrel intrauterine system first where adenomyosis dominates or the cavity allows it: it thins the eutopic lining, lightens bleeding and eases pain for years. It suits the bulky boggy uterus best of all."
+        },
+        {
+          "heading": "Ovarian suppression with bone protection",
+          "body": "Gonadotrophin releasing hormone analogues drive a hypoestrogenic state that starves the implants. Expect hot flushes, vaginal dryness and loss of bone mineral density, and plan add-back with tibolone-like cover when the course crosses six months. A commonly cited depot is leuprolide 3.75 mg by intramuscular injection.\n\nOlder androgenic options still work where modern agents are unavailable: danazol 200 to 400 mg by mouth once or twice daily, and gestrinone 2.5 to 5 mg by mouth twice a week. Both bring acne, weight gain, voice change and lipid rise, so counsel before starting and keep them behind better tolerated options."
+        },
+        {
+          "heading": "Surgery: cyst wall or burn, and when to open",
+          "body": "At laparoscopy, cystectomy lowers recurrence but removes cortex with the wall and lowers reserve, while ablation spares reserve at the cost of higher recurrence: choose by anti-Mullerian hormone and recurrence history. Excision of deep disease belongs to equipped teams with bowel and urological cover.\n\nHandle the endometrioma without spillage, since spilled contents worsen adhesions toward a frozen pelvis. In extensive disease with distorted planes, identify the ureters and secure bleeding stepwise up to internal iliac control rather than clamping blind."
+        },
+        {
+          "heading": "Fertility and the Indian context",
+          "body": "Fork the plan on today's priority: pain-dominant disease leans medical then conservative surgery, while tubal damage, poor reserve or repeated failure leans toward in vitro fertilisation rather than another operation. Correct anaemia with iron well before any operation date and arrange blood in hand.\n\nRefer disease beyond local facilities to a medical college or endometriosis centre with advanced laparoscopy. Severe endometriosis or adenomyosis with completed family is an indication for hysterectomy, which is definitive; a young woman wanting fertility is referred for conservative surgery instead."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is first-line medical treatment for endometriosis pain?",
+          "a": "NSAIDs with paracetamol, plus a combined pill, progestin or the levonorgestrel intrauterine system.",
+          "accept": [
+            "nsaid",
+            "hormonal",
+            "progestin",
+            "levonorgestrel"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What must accompany a long GnRH analogue course and why?",
+          "a": "Add-back cover such as tibolone beyond six months, to protect bone mineral density.",
+          "accept": [
+            "add-back",
+            "tibolone",
+            "bone",
+            "density"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How do you choose between cystectomy and ablation?",
+          "a": "Cystectomy for recurrence control where reserve allows, ablation where AMH is low and follicles must be spared.",
+          "accept": [
+            "cystectomy",
+            "recurrence",
+            "ablation",
+            "reserve"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "endometriosis_adenomyosis_chocolate_die: clinicalPearls"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "endometriosis_adenomyosis_chocolate_die: pathophysiology"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Endometriosis (medical and surgical management)"
+        },
+        {
+          "source": "NICE guideline: Endometriosis",
+          "locator": "Endometriosis: diagnosis and management (management)"
+        }
+      ]
+    }
+  },
+  "cases": [
+    {
+      "id": "case.endometriosis.kavita",
+      "title": "A schoolteacher with four years of worsening period pain and no pregnancy",
+      "opening": "Kavita Jadhav, 29, a primary schoolteacher from Nashik, sits in the gynaecology outpatient room with her husband. She has been married six years and has not conceived. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "initialVitals": {
+        "bpDiastolic": 70,
+        "bpSystolic": 110,
+        "hr": 88,
+        "rr": 18,
+        "spo2": 98,
+        "temp": 37,
+        "gcs": 15
+      },
+      "patient": {
+        "name": "Kavita Jadhav",
+        "age": 29,
+        "sex": "female",
+        "occupation": "Primary schoolteacher",
+        "residence": "Urban, lives with her husband and mother-in-law in Nashik"
+      },
+      "history": {
+        "presenting": {
+          "key": true,
+          "skillId": "skill.hx.chief_complaints",
+          "cues": [
+            "what brings you here today",
+            "what is the main problem",
+            "why have you come to us",
+            "tell me about your complaints",
+            "how can I help you today",
+            "what is troubling you most"
+          ],
+          "reply": "Doctor, my periods have become very painful over four years, intercourse hurts deeply, and we have not had a child in six years of marriage."
+        },
+        "onset_course": {
+          "cues": [
+            "when did the pain begin",
+            "how has the pain changed over time",
+            "was it like this from the start",
+            "how long has this been going on"
+          ],
+          "reply": "My first periods at thirteen were only mildly painful. The severe pain started about four years ago and has worsened every year since."
+        },
+        "menstrual_pain": {
+          "key": true,
+          "cues": [
+            "describe the period pain",
+            "how bad are the cramps",
+            "pain during menstruation",
+            "do you miss work for pain",
+            "what medicines do you take for pain"
+          ],
+          "reply": "The pain starts a day before bleeding and lasts three days. I take two or three painkillers a day and still miss school for two days each month."
+        },
+        "pain_intercourse": {
+          "key": true,
+          "cues": [
+            "pain during intercourse",
+            "does relations hurt",
+            "deep pain with contact",
+            "avoiding physical relations",
+            "bleeding after intercourse"
+          ],
+          "reply": "Deep contact pains me sharply for the last two years, so we have started avoiding relations. There is no bleeding after."
+        },
+        "pelvic_ache": {
+          "cues": [
+            "aching between periods",
+            "constant lower abdominal pain",
+            "dull pain through the month",
+            "heaviness in the lower stomach"
+          ],
+          "reply": "For one year there is a dull ache low down even between periods. It never fully goes away now."
+        },
+        "bowel_bladder": {
+          "cues": [
+            "pain while passing stool",
+            "bowel symptoms with periods",
+            "pain while passing urine",
+            "blood in stool or urine"
+          ],
+          "reply": "Passing stool during periods pains me, and I feel constipated then. Passing urine is normal and I have never seen blood in stool or urine."
+        },
+        "bleeding_heavy": {
+          "cues": [
+            "how heavy is the bleeding",
+            "clots in menstrual blood",
+            "how many pads per day",
+            "bleeding between periods"
+          ],
+          "reply": "Bleeding lasts six days with small clots on the second day. I change four pads on heavy days. There is no bleeding between periods."
+        },
+        "fertility_trying": {
+          "key": true,
+          "cues": [
+            "how long trying for pregnancy",
+            "have you taken fertility treatment",
+            "was there ever a pregnancy",
+            "husband semen test done"
+          ],
+          "reply": "We have tried for four years without a single pregnancy. My husband's semen test last year was normal. I have taken only ovulation tablets for two cycles."
+        },
+        "obstetric_past": {
+          "cues": [
+            "tell me about past pregnancies",
+            "any abortion or miscarriage",
+            "any operation on the uterus",
+            "treatment for not conceiving"
+          ],
+          "reply": "I have never been pregnant. I had an appendicectomy at nineteen. There has been no surgery on the uterus or ovaries."
+        },
+        "contraception_use": {
+          "cues": [
+            "what contraception do you use",
+            "have you used birth control pills",
+            "copper T or hormonal coil",
+            "any injections for birth control"
+          ],
+          "reply": "We use nothing since we want a child. I took birth control pills for three months two years ago and the pain was less, then stopped them to try for pregnancy."
+        },
+        "drug_history": {
+          "cues": [
+            "what tablets do you take regularly",
+            "any hormones or injections taken",
+            "allergy to any medicine",
+            "thyroid or sugar tablets"
+          ],
+          "reply": "Only painkillers during periods. No thyroid or sugar tablets. I am not allergic to any medicine."
+        },
+        "medical_past": {
+          "cues": [
+            "any thyroid disease",
+            "tuberculosis in the past",
+            "diabetes or blood pressure",
+            "any major illness before"
+          ],
+          "reply": "No thyroid disease, no tuberculosis, no diabetes or high pressure. My cycles have always been regular at twenty eight days."
+        },
+        "family_background": {
+          "cues": [
+            "mother or sister with similar pain",
+            "family history of same complaints",
+            "anyone operated for uterus or ovaries",
+            "mother attained menopause when"
+          ],
+          "reply": "My elder sister also has painful periods and needed tablets to conceive. My mother attained menopause at forty eight."
+        },
+        "personal_habits": {
+          "cues": [
+            "tell me about your diet",
+            "tobacco or alcohol use",
+            "sleep and daily routine",
+            "weight change recently"
+          ],
+          "reply": "I eat a vegetarian diet and my weight is stable. I do not use tobacco or alcohol. Pain disturbs my sleep on period nights."
+        },
+        "urinary_symptoms": {
+          "cues": [
+            "burning while passing urine",
+            "going to toilet frequently",
+            "fever with urinary complaints",
+            "repeated urine infections"
+          ],
+          "reply": "No burning, no frequency, no fever. I have never been treated for a urine infection."
+        },
+        "vaginal_discharge": {
+          "key": true,
+          "cues": [
+            "any white discharge per vaginum",
+            "foul smelling discharge",
+            "itching in the private area",
+            "treated for white discharge"
+          ],
+          "reply": "There is no discharge, no itching and no foul smell. I was never treated for any infection down below."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Young woman of average build, looks tired, mild pallor of the conjunctiva, no icterus, no pedal oedema.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 88 regular. Blood pressure 110/70. Respiratory rate 18. SpO2 98 percent on room air. Afebrile.",
+          "abnormal": false
+        },
+        "skill.exam.obg.gynae_abdominal": {
+          "finding": "Soft abdomen, no palpable mass above the pubis. Tenderness in the left iliac fossa, worse on deep pressure. No guarding, no shifting dullness.",
+          "abnormal": true
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "finding": "No vulval lesions, no excoriation, no discharge at the introitus.",
+          "abnormal": false
+        },
+        "skill.exam.obg.speculum_insert": {
+          "finding": "Speculum passed gently with consent and chaperone; no vault lesion on entry.",
+          "abnormal": false
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "finding": "Cervix healthy, no erosion, no discharge from the os, no blood in the vault.",
+          "abnormal": false
+        },
+        "skill.exam.obg.bimanual": {
+          "finding": "Uterus retroverted, bulky and tender on movement with limited mobility. Tender nodularity of the left uterosacral ligament. Left fornix holds a 5 cm tender mass that moves little with the cervix. No cervical motion tenderness. Right fornix free.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "upt",
+        "usg",
+        "fbc"
+      ],
+      "investigations": {
+        "upt": {
+          "label": "Urine pregnancy test",
+          "result": "Negative.",
+          "note": "Excludes pregnancy before any hormonal treatment or procedure is planned.",
+          "indicated": true
+        },
+        "usg": {
+          "label": "Transvaginal pelvic ultrasound",
+          "result": "Left ovary holds a 5 cm unilocular cyst with homogeneous ground glass echoes and poor Doppler flow. Uterus bulky and heterogeneous with a thickened junctional zone. Right ovary normal. No free fluid.",
+          "note": "First-line imaging: the ground glass cyst marks the chocolate cyst and the thickened junctional zone marks coexistent adenomyosis.",
+          "indicated": true
+        },
+        "fbc": {
+          "label": "Full blood count with iron studies",
+          "result": "Haemoglobin 9 g/dL. Microcytic hypochromic picture. Ferritin low, fitting iron deficiency from chronic loss.",
+          "note": "Grades the anaemia that must be corrected with iron before any operation is dated.",
+          "indicated": true
+        },
+        "ca125_amh": {
+          "label": "CA-125 with anti-Mullerian hormone",
+          "result": "CA-125 modestly raised. Anti-Mullerian hormone at the lower end of normal for age.",
+          "note": "CA-125 never diagnoses alone; the AMH sets the reserve cost of cystectomy before counselling.",
+          "indicated": true
+        },
+        "mri": {
+          "label": "Pelvic MRI for mapping",
+          "result": "Advised, not yet done: mapping of the rectovaginal septum and left parametrium before any surgery.",
+          "note": "Reserved for suspected deep disease and surgical planning, to choose the team and the route.",
+          "indicated": false
+        }
+      },
+      "differentialModel": {
+        "answer": "Ovarian endometriosis with a chocolate cyst and coexistent adenomyosis. Consider pelvic inflammatory disease, fibroid uterus, an ovarian tumour, ectopic pregnancy and a bowel mimic.",
+        "accept": [
+          "endometriosis",
+          "adenomyosis",
+          "pid",
+          "fibroid",
+          "ovarian cyst",
+          "ectopic pregnancy",
+          "ibs"
+        ],
+        "minMatch": 3
+      },
+      "diagnosis": {
+        "answer": "Ovarian endometriosis with a left chocolate cyst and coexistent adenomyosis, with primary infertility.",
+        "accept": [
+          "endometriosis",
+          "adenomyosis",
+          "adenomyoma",
+          "ovarian cyst"
+        ],
+        "minMatch": 2
+      },
+      "managementModel": {
+        "answer": "Control pain with anti-inflammatory analgesia, suppress deposits with hormones or the levonorgestrel system, correct the iron deficiency anaemia, plan laparoscopic cystectomy with AMH counselling and spill-free technique, and refer for assisted conception where tubes or reserve fail.",
+        "accept": [
+          "analgesia",
+          "hormonal",
+          "levonorgestrel",
+          "iron",
+          "cystectomy",
+          "laparoscopy",
+          "ivf",
+          "refer"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "Tempo declares chronicity: four years of worsening secondary pain is endometriosis until proved otherwise, not the days of an ectopic or the weeks of PID.",
+        "The pill trial is diagnostic evidence: pain that eased on combined pills and returned on stopping proves hormone responsiveness.",
+        "Fixed nodularity with a tender immobile adnexal mass is the bedside diagnosis; a fibroid uterus is firm and nodular but non-tender and mobile.",
+        "No cervical motion tenderness and no discharge argue against PID without needing further tests to invoke it.",
+        "The AMH result changes the operation: low-normal reserve pushes the choice from cystectomy toward ablation or direct referral for assisted conception.",
+        "Infertility with a normal semen analysis and regular cycles localises the fault to tubo-ovarian disease, which is why this case forks toward surgery versus IVF rather than ovulation tablets alone."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
   ]
- },
- "viva": {
-  "skills": [
-   "skill.endometriosis.basics",
-   "skill.exam.obg.bimanual",
-   "skill.endometriosis.signs",
-   "skill.endometriosis.summary",
-   "skill.endometriosis.differential",
-   "skill.ix.endometriosis.workup",
-   "skill.endometriosis.diagnosis",
-   "skill.tx.endometriosis"
-  ]
- },
- "skills": {
-  "skill.endometriosis.basics": {
-   "id": "skill.endometriosis.basics",
-   "kind": "reasoning",
-   "title": "What endometriosis and adenomyosis are",
-   "oneLine": "Hormone responsive tissue outside the cavity, and inside the wall",
-   "system": "gynaecology",
-   "review": {
-    "status": "ai_drafted"
-   },
-   "why": "Endometriosis and adenomyosis explain the triad of painful periods, pain with intercourse and infertility that no other single gynaecological diagnosis covers. Naming the disease as hormone responsive tissue in the wrong place, rather than as bad periods, is what moves the patient from years of analgesics to staged care.",
-   "teach": [
-    {
-     "heading": "What endometriosis is",
-     "body": "Endometriosis is endometrial-like tissue growing outside the uterine cavity, most often on the ovaries, the pouch of Douglas and the uterosacral ligaments. The deposits respond to ovarian hormones and bleed with each cycle, but the blood cannot escape, so it collects, scars and tethers nearby structures.\n\nRepeated cyclical bleeding forms blood-filled ovarian cysts, fibrotic nodules in the pelvis and dense adhesions. With time the pouch obliterates, the ovaries stick to the pelvic sidewall and the uterus fixes in retroversion."
-    },
-    {
-     "heading": "What adenomyosis is",
-     "body": "Adenomyosis is endometrial tissue within the uterine muscle itself, with hyperplasia of the surrounding junctional myometrium that thickens and stiffens the wall. The uterus enlarges symmetrically and feels bulky, boggy and tender.\n\nThe two conditions share oestrogen dependence and often coexist, but they are anatomically distinct: one sits outside the uterus, the other inside its wall. That distinction decides what the fingers and the scan should each look for."
-    },
-    {
-     "heading": "Where deposits sit and what they form",
-     "table": {
-      "cols": [
-       "Site",
-       "What forms",
-       "Why it matters"
-      ],
-      "rows": [
-       [
-        "Ovary",
-        "Blood-filled cyst with ground glass contents",
-        "Pain, rupture risk and falling ovarian reserve"
-       ],
-       [
-        "Pouch and uterosacral ligaments",
-        "Tender fibrotic nodules and scarring",
-        "Deep pain and a fixed retroverted uterus"
-       ],
-       [
-        "Rectovaginal septum, bowel or bladder",
-        "Deeply infiltrating plaques",
-        "Cyclical bowel or bladder symptoms, needs an equipped team"
-       ],
-       [
-        "Uterine wall",
-        "Thickened junctional zone, bulky boggy uterus",
-        "Heavy bleeding with a tender uterus"
-       ]
-      ]
-     }
-    },
-    {
-     "heading": "Why oestrogen runs the disease",
-     "body": "Both conditions are oestrogen driven: deposits carry hormone receptors, so symptoms begin after menarche, flare through the reproductive years and settle after the menopause. Pregnancy and induced hypoestrogenic states starve the implants and ease pain.\n\nTreatments that lower oestrogen shrink implants but thin bone when used long, which is why courses that suppress the ovary need planned add-back. Cyst surgery removes disease at the cost of healthy cortex, so operating also depletes follicles."
-    }
-   ],
-   "probes": [
-    {
-     "level": 1,
-     "q": "Where outside the uterus does endometriosis most often sit?",
-     "a": "On the ovaries, the pouch of Douglas and the uterosacral ligaments.",
-     "accept": [
-      "ovaries",
-      "douglas",
-      "uterosacral",
-      "ligaments"
-     ],
-     "minMatch": 2
-    },
-    {
-     "level": 2,
-     "q": "How does adenomyosis differ anatomically from endometriosis?",
-     "a": "Adenomyosis sits within the uterine muscle with a thickened junctional zone, while endometriosis sits outside the uterus.",
-     "accept": [
-      "muscle",
-      "junctional",
-      "outside",
-      "wall"
-     ],
-     "minMatch": 2
-    },
-    {
-     "level": 3,
-     "q": "Why do symptoms settle after the menopause?",
-     "a": "Both conditions are oestrogen driven, so falling ovarian hormones starve the implants.",
-     "accept": [
-      "oestrogen",
-      "driven",
-      "starve",
-      "menopause"
-     ],
-     "minMatch": 2
-    }
-   ],
-   "sources": [
-    {
-     "source": "StewardMD Clinical KB",
-     "locator": "endometriosis_adenomyosis_chocolate_die: pathophysiology"
-    },
-    {
-     "source": "StewardMD Clinical KB",
-     "locator": "endometriosis_adenomyosis_chocolate_die: clinicalPearls"
-    },
-    {
-     "source": "Berek and Novak's Gynecology",
-     "locator": "Endometriosis (definition and pathogenesis)"
-    }
-   ]
-  },
-  "skill.endometriosis.signs": {
-   "id": "skill.endometriosis.signs",
-   "kind": "reasoning",
-   "title": "The endometriosis picture: pain, lumps and infertility",
-   "oneLine": "Progressive period pain, deep dyspareunia, nodularity and a fixed tender uterus",
-   "system": "gynaecology",
-   "review": {
-    "status": "ai_drafted"
-   },
-   "why": "The diagnosis is suspected at the bedside long before any scan: a progressive pain story plus nodularity or a fixed tender uterus is endometriosis until proved otherwise. Waiting for imaging while the history already declares itself costs fertile years.",
-   "teach": [
-    {
-     "heading": "The pain history that points here",
-     "points": [
-      "Secondary dysmenorrhoea that starts years after menarche and worsens year by year, unlike primary pain that starts with the first periods.",
-      "Deep dyspareunia: pain with deep thrusting that makes intercourse dreaded, distinct from superficial introital pain.",
-      "Chronic pelvic ache between periods as scarring and adhesions accumulate.",
-      "Cyclical bowel or bladder pain, pain on passing stool during periods, or blood in urine or stool with the cycle, marking deep plaques.",
-      "Pain severe enough to miss school or work, needing regular leave: severity that disrupts life is itself a clinical sign."
-     ]
-    },
-    {
-     "heading": "Infertility as the presenting complaint",
-     "body": "A large share of women with endometriosis present with difficulty conceiving rather than pain. Adhesions distort tubo-ovarian anatomy, the inflammatory peritoneal fluid harms gametes, and ovarian cysts deplete reserve.\n\nAsk duration of trying, cycle regularity and any prior treatment, because the plan forks early: pain-dominant disease leans medical, while tubal damage or poor reserve leans toward assisted conception."
-    },
-    {
-     "heading": "What the fingers find",
-     "points": [
-      "Tender nodularity of the uterosacral ligaments or the pouch of Douglas on vaginal or rectal examination.",
-      "A uterus that is retroverted, fixed or tender on movement, refusing the mobility of a normal uterus.",
-      "A tender adnexal mass that moves little with the uterus, the bedside face of the chocolate cyst.",
-      "A bulky, boggy, tender uterus where adenomyosis coexists with the deposits.",
-      "Pallor and a low haemoglobin where heavy bleeding dominates the adenomyosis half of the disease."
-     ]
-    },
-    {
-     "heading": "Endometriosis against adenomyosis at the bedside",
-     "table": {
-      "cols": [
-       "Feature",
-       "Endometriosis",
-       "Adenomyosis"
-      ],
-      "rows": [
-       [
-        "Uterus",
-        "Often normal size, may fix in retroversion",
-        "Symmetrically bulky, boggy, tender"
-       ],
-       [
-        "Bleeding",
-        "Usually of normal volume",
-        "Often heavy and prolonged"
-       ],
-       [
-        "Pain",
-        "Deep dyspareunia prominent",
-        "Dysmenorrhoea prominent"
-       ],
-       [
-        "Scan anchor",
-        "Ground glass cyst and nodules",
-        "Thickened junctional zone"
-       ]
-      ]
-     }
-    }
-   ],
-   "probes": [
-    {
-     "level": 1,
-     "q": "Name the three pains of endometriosis.",
-     "a": "Progressive secondary dysmenorrhoea, deep dyspareunia and chronic pelvic pain.",
-     "accept": [
-      "dysmenorrhoea",
-      "dyspareunia",
-      "pelvic"
-     ],
-     "minMatch": 2
-    },
-    {
-     "level": 2,
-     "q": "How does endometriosis cause infertility?",
-     "a": "Adhesions distort tubo-ovarian anatomy, inflammatory fluid harms gametes and cysts deplete reserve.",
-     "accept": [
-      "adhesions",
-      "tubal",
-      "inflammatory",
-      "reserve"
-     ],
-     "minMatch": 2
-    },
-    {
-     "level": 3,
-     "q": "What single bimanual finding best separates endometriosis from fibroid?",
-     "a": "Tender nodularity of the uterosacrals or pouch with a fixed tender uterus, where fibroid gives a firm nodular but non-tender mobile uterus.",
-     "accept": [
-      "nodularity",
-      "fixed",
-      "tender",
-      "uterosacral"
-     ],
-     "minMatch": 2
-    }
-   ],
-   "sources": [
-    {
-     "source": "StewardMD Clinical KB",
-     "locator": "endometriosis_adenomyosis_chocolate_die: clinicalPearls"
-    },
-    {
-     "source": "Berek and Novak's Gynecology",
-     "locator": "Endometriosis (clinical features)"
-    }
-   ]
-  },
-  "skill.endometriosis.summary": {
-   "id": "skill.endometriosis.summary",
-   "kind": "reasoning",
-   "title": "Summarising the endometriosis case",
-   "oneLine": "Tempo, pain triad, fertility status, exam anchors and anaemia in one paragraph",
-   "system": "gynaecology",
-   "review": {
-    "status": "ai_drafted"
-   },
-   "why": "A summary that omits fertility wishes or the mobility of the uterus forces the consultant to re-examine the patient. The summary is the handover on which the choice between hormones, surgery and assisted conception rests.",
-   "teach": [
-    {
-     "heading": "One line first",
-     "body": "Open with age, parity, duration of trying and the working diagnosis: a 29 year old nulliparous woman with four years of progressive dysmenorrhoea, deep dyspareunia and primary infertility, with a tender fixed uterus and a left chocolate cyst on scan.\n\nThe opening line must carry fertility status beside the pain story, because those two facts together choose the arm of treatment."
-    },
-    {
-     "heading": "What earns its place",
-     "body": "Follow with the evidence in the order it was gathered: pain quantified by days off work and analgesics needed, the bimanual anchors of nodularity, mobility and fornices, and the scan anchors of ground glass and junctional zone.\n\nClose with the negatives that exclude mimics: no cervical motion tenderness, no discharge, a negative pregnancy test. Each negative closes one differential door."
-    },
-    {
-     "heading": "What never to omit",
-     "points": [
-      "Tempo in years: progressive secondary pain, never an acute story told as chronic.",
-      "The full pain triad: dysmenorrhoea, dyspareunia and intermenstrual ache, each stated or stated absent.",
-      "Fertility status: duration of trying, prior treatment and whether pain or conception is today's priority.",
-      "Exam anchors: uterine mobility, tenderness, nodularity and whether the fornices are free.",
-      "Anaemia grade and scan anchors, since haemoglobin decides timing and imaging decides route."
-     ]
-    }
-   ],
-   "probes": [
-    {
-     "level": 2,
-     "q": "What must the first line of an endometriosis summary contain?",
-     "a": "Age, parity, duration of trying, the pain triad and the working diagnosis.",
-     "accept": [
-      "parity",
-      "trying",
-      "pain",
-      "diagnosis"
-     ],
-     "minMatch": 2
-    },
-    {
-     "level": 3,
-     "q": "Which negatives belong in the summary and why?",
-     "a": "No cervical motion tenderness, no discharge and a negative pregnancy test, excluding PID and ectopic.",
-     "accept": [
-      "tenderness",
-      "discharge",
-      "pregnancy",
-      "ectopic"
-     ],
-     "minMatch": 2
-    }
-   ],
-   "sources": [
-    {
-     "source": "StewardMD Clinical KB",
-     "locator": "endometriosis_adenomyosis_chocolate_die: clinicalPearls"
-    },
-    {
-     "source": "Berek and Novak's Gynecology",
-     "locator": "Endometriosis (clinical features)"
-    }
-   ]
-  },
-  "skill.endometriosis.differential": {
-   "id": "skill.endometriosis.differential",
-   "kind": "reasoning",
-   "title": "What else chronic pelvic pain and a mass can be",
-   "oneLine": "Adenomyosis, PID, fibroid, ovarian tumour, ectopic and bowel mimics",
-   "system": "gynaecology",
-   "review": {
-    "status": "ai_drafted"
-   },
-   "why": "Chronic pelvic pain is a shared symptom of gynaecological, bowel and urinary disease, and a tender adnexal mass is not always endometriosis. A differential worked from anatomy keeps PID treated promptly and ectopic never missed.",
-   "teach": [
-    {
-     "heading": "The mimics in one view",
-     "table": {
-      "cols": [
-       "Condition",
-       "Favours it",
-       "Argues against"
-      ],
-      "rows": [
-       [
-        "Adenomyosis",
-        "Bulky boggy tender uterus, heavy bleeding",
-        "Normal size mobile uterus"
-       ],
-       [
-        "Pelvic inflammatory disease",
-        "Cervical motion tenderness, discharge, fever",
-        "Cyclical pain, fixed nodularity"
-       ],
-       [
-        "Fibroid uterus",
-        "Firm nodular enlarged but mobile uterus",
-        "Tenderness, nodular fornices, dyspareunia"
-       ],
-       [
-        "Ovarian tumour",
-        "Large non-tender mobile cyst",
-        "Ground glass contents, tenderness, cyclical pain"
-       ],
-       [
-        "Ectopic pregnancy",
-        "Missed period, collapse, positive test",
-        "Chronic cyclical history over years"
-       ],
-       [
-        "Bowel mimic",
-        "Pain eased by defecation, no cycle link",
-        "Dyspareunia, nodularity, infertility"
-       ]
-      ]
-     }
-    },
-    {
-     "heading": "How to separate them at the bedside",
-     "points": [
-      "Uterus first: a symmetrically bulky tender uterus points to adenomyosis, a firm nodular non-tender one to fibroid, a normal size fixed one to endometriosis.",
-      "Tenderness pattern: cervical motion tenderness with discharge pushes toward PID and demands treatment, while uterosacral nodularity pushes toward endometriosis.",
-      "Pregnancy test in every woman of reproductive age: a chronic pain story does not exempt her, and a positive test reorders everything.",
-      "Cycle linkage: pain, bowel symptoms or bleeding that follow the periods favour endometriosis over bowel or urinary disease."
-     ]
-    },
-    {
-     "heading": "Red flags that break the routine",
-     "body": "Acute collapse with a positive test is ruptured ectopic until proved otherwise and needs resuscitation, not a scan queue. Fever with purulent discharge and severe tenderness is acute PID and needs prompt antibiotics to protect the tubes.\n\nA postmenopausal mass with ascites or nodularity points away from endometriosis toward ovarian malignancy and needs urgent referral on the cancer pathway."
-    }
-   ],
-   "probes": [
-    {
-     "level": 1,
-     "q": "Name four differentials of chronic pelvic pain with an adnexal mass.",
-     "a": "Adenomyosis, pelvic inflammatory disease, fibroid and ovarian tumour.",
-     "accept": [
-      "adenomyosis",
-      "inflammatory",
-      "fibroid",
-      "ovarian"
-     ],
-     "minMatch": 2
-    },
-    {
-     "level": 2,
-     "q": "How do you separate PID from endometriosis at the bedside?",
-     "a": "PID gives cervical motion tenderness with discharge and fever, while endometriosis gives cyclical pain with fixed nodularity.",
-     "accept": [
-      "motion",
-      "discharge",
-      "cyclical",
-      "nodularity"
-     ],
-     "minMatch": 2
-    },
-    {
-     "level": 3,
-     "q": "When does an endometriosis workup become an emergency?",
-     "a": "Collapse with a positive pregnancy test, or fever with purulent discharge and severe tenderness.",
-     "accept": [
-      "collapse",
-      "pregnancy",
-      "fever",
-      "discharge"
-     ],
-     "minMatch": 2
-    }
-   ],
-   "sources": [
-    {
-     "source": "StewardMD Clinical KB",
-     "locator": "endometriosis_adenomyosis_chocolate_die: additionalDifferentials"
-    },
-    {
-     "source": "Berek and Novak's Gynecology",
-     "locator": "Chronic pelvic pain (differential diagnosis)"
-    }
-   ]
-  },
-  "skill.ix.endometriosis.workup": {
-   "id": "skill.ix.endometriosis.workup",
-   "kind": "investigation",
-   "title": "Imaging and labs in endometriosis and adenomyosis",
-   "oneLine": "Transvaginal scan first, MRI mapping for deep disease, AMH before surgery",
-   "system": "gynaecology",
-   "review": {
-    "status": "ai_drafted"
-   },
-   "why": "The scan decides whether treatment can stay medical and whether surgery needs an equipped team. Ordering the right sequence, scan then mapping then reserve testing, avoids operating blind on deep disease.",
-   "teach": [
-    {
-     "heading": "Ultrasound first",
-     "body": "Transvaginal ultrasound is first line: a unilocular cyst with homogeneous low-level ground glass echoes and poor Doppler flow marks the chocolate cyst, while a bulky heterogeneous uterus with a thickened junctional zone marks adenomyosis.\n\nRecord size, laterality, mobility on probe pressure and whether the ovary slides against the uterus. A fixed ovary warns of adhesions before any port is placed."
-    },
-    {
-     "heading": "Mapping and blood tests",
-     "body": "Magnetic resonance mapping stages deep disease before surgery: it shows junctional zone thickening and plaques on bowel or bladder that the fingers cannot reach. Reserve it for suspected deep disease or surgical planning, not for every pelvic ache.\n\nCA-125 may rise but never diagnoses alone and never excludes. Measure anti-Mullerian hormone before any ovarian surgery so the woman knows the reserve cost of cystectomy, and correct anaemia with iron studies where bleeding dominates."
-    },
-    {
-     "heading": "Laparoscopy and histology",
-     "points": [
-      "Laparoscopy with histology is the gold standard: powder-burn, vesicular and chocolate lesions seen and biopsied.",
-      "Stage and treat in the same sitting where the team is equipped; diagnostic-only laparoscopy wastes an anaesthetic.",
-      "Handle the endometrioma without spillage: spilled contents worsen adhesions and invite a frozen pelvis.",
-      "A urine pregnancy test precedes everything in a woman of reproductive age, and a full blood count grades the anaemia that decides fitness for any procedure."
-     ]
-    }
-   ],
-   "probes": [
-    {
-     "level": 1,
-     "q": "What is the first-line imaging in suspected endometriosis?",
-     "a": "Transvaginal ultrasound, looking for ground glass cysts and junctional zone thickening.",
-     "accept": [
-      "transvaginal",
-      "ultrasound",
-      "ground",
-      "junctional"
-     ],
-     "minMatch": 2
-    },
-    {
-     "level": 2,
-     "q": "Why measure AMH before ovarian surgery?",
-     "a": "Cystectomy removes healthy cortex with the cyst wall, so AMH quantifies the reserve cost beforehand.",
-     "accept": [
-      "cortex",
-      "reserve",
-      "cystectomy",
-      "amh"
-     ],
-     "minMatch": 2
-    },
-    {
-     "level": 3,
-     "q": "When do you order MRI rather than stopping at ultrasound?",
-     "a": "Suspected deep disease of bowel, bladder or rectovaginal septum, for mapping before surgery.",
-     "accept": [
-      "deep",
-      "bowel",
-      "bladder",
-      "mapping"
-     ],
-     "minMatch": 2
-    }
-   ],
-   "sources": [
-    {
-     "source": "StewardMD Clinical KB",
-     "locator": "endometriosis_adenomyosis_chocolate_die: additionalInvestigations"
-    },
-    {
-     "source": "NICE guideline: Endometriosis",
-     "locator": "Endometriosis: diagnosis and management (diagnosis)"
-    }
-   ]
-  },
-  "skill.endometriosis.diagnosis": {
-   "id": "skill.endometriosis.diagnosis",
-   "kind": "reasoning",
-   "title": "Diagnosing endometriosis, deep disease and adenomyosis",
-   "oneLine": "Clinical diagnosis when classic, laparoscopy when in doubt, both labels when both present",
-   "system": "gynaecology",
-   "review": {
-    "status": "ai_drafted"
-   },
-   "why": "Insisting on laparoscopy for every classic case delays care by months, while labelling without criteria medicalises normal periods. Knowing when the clinical picture suffices is what keeps the pathway moving.",
-   "teach": [
-    {
-     "heading": "When clinical diagnosis is enough",
-     "body": "A classic history of progressive dysmenorrhoea with deep dyspareunia or infertility, plus tender nodularity or a fixed tender uterus, plus a ground glass cyst or thickened junctional zone on scan, justifies treatment without surgery.\n\nDo not exclude endometriosis on a normal examination alone: early and deeply placed disease hides from the fingers. Treat the story with weight even when the pelvis feels normal."
-    },
-    {
-     "heading": "Deep disease and staging",
-     "body": "Deep infiltrating disease means lesions beyond the peritoneum: the rectovaginal septum, bowel wall or bladder. Suspect it from cyclical bowel or bladder symptoms and confirm by mapping before referring to an equipped team.\n\nOperative staging records extent, not suffering: a high stage can ache little and minimal disease can disable. Record site, size and laterality rather than arguing pain against stage."
-    },
-    {
-     "heading": "Labelling adenomyosis, and labelling both",
-     "body": "Label adenomyosis on a bulky, boggy, tender uterus with junctional zone thickening on imaging, especially where heavy bleeding dominates. The label matters because the intrauterine system works best exactly here.\n\nThe two labels commonly coexist, so carry both when both sets of criteria are met. One label alone then under-treats the other half of her symptoms."
-    }
-   ],
-   "probes": [
-    {
-     "level": 2,
-     "q": "When can you diagnose endometriosis without laparoscopy?",
-     "a": "Classic progressive pain with dyspareunia or infertility plus nodularity or supportive scan findings.",
-     "accept": [
-      "classic",
-      "dyspareunia",
-      "nodularity",
-      "scan"
-     ],
-     "minMatch": 2
-    },
-    {
-     "level": 3,
-     "q": "What defines deep infiltrating disease and why does the label matter?",
-     "a": "Lesions beyond the peritoneum into bowel, bladder or septum; it needs mapping and an equipped team.",
-     "accept": [
-      "peritoneum",
-      "bowel",
-      "bladder",
-      "mapping"
-     ],
-     "minMatch": 2
-    }
-   ],
-   "sources": [
-    {
-     "source": "StewardMD Clinical KB",
-     "locator": "endometriosis_adenomyosis_chocolate_die: additionalDifferentials"
-    },
-    {
-     "source": "Berek and Novak's Gynecology",
-     "locator": "Endometriosis (diagnosis and classification)"
-    }
-   ]
-  },
-  "skill.tx.endometriosis": {
-   "id": "skill.tx.endometriosis",
-   "kind": "treatment",
-   "title": "Stepped care for endometriosis and adenomyosis",
-   "oneLine": "Analgesia, hormones, ovarian suppression with add-back, surgery, then fertility care",
-   "system": "gynaecology",
-   "review": {
-    "status": "ai_drafted"
-   },
-   "dosingNote": "This module teaches management at the level of drug class and principle, with regimens quoted from the cited sources. Specific agents, regimens and doses must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
-   "why": "Care is stepped from analgesia through hormones to surgery and fertility treatment, matched to whether pain or conception is today's priority. Getting the step wrong, repeated surgery where IVF was indicated or years of tablets where a cyst needed excision, costs ovarian reserve.",
-   "teach": [
-    {
-     "heading": "Start with pain and bleeding",
-     "body": "Begin with non-steroidal anti-inflammatory drugs with paracetamol for pain, and a combined oral pill or oral progestin to suppress deposits and regulate bleeding. Hormonal cover also preserves options while she decides about conception.\n\nPlace the levonorgestrel intrauterine system first where adenomyosis dominates or the cavity allows it: it thins the eutopic lining, lightens bleeding and eases pain for years. It suits the bulky boggy uterus best of all."
-    },
-    {
-     "heading": "Ovarian suppression with bone protection",
-     "body": "Gonadotrophin releasing hormone analogues drive a hypoestrogenic state that starves the implants. Expect hot flushes, vaginal dryness and loss of bone mineral density, and plan add-back with tibolone-like cover when the course crosses six months. A commonly cited depot is leuprolide 3.75 mg by intramuscular injection.\n\nOlder androgenic options still work where modern agents are unavailable: danazol 200 to 400 mg by mouth once or twice daily, and gestrinone 2.5 to 5 mg by mouth twice a week. Both bring acne, weight gain, voice change and lipid rise, so counsel before starting and keep them behind better tolerated options."
-    },
-    {
-     "heading": "Surgery: cyst wall or burn, and when to open",
-     "body": "At laparoscopy, cystectomy lowers recurrence but removes cortex with the wall and lowers reserve, while ablation spares reserve at the cost of higher recurrence: choose by anti-Mullerian hormone and recurrence history. Excision of deep disease belongs to equipped teams with bowel and urological cover.\n\nHandle the endometrioma without spillage, since spilled contents worsen adhesions toward a frozen pelvis. In extensive disease with distorted planes, identify the ureters and secure bleeding stepwise up to internal iliac control rather than clamping blind."
-    },
-    {
-     "heading": "Fertility and the Indian context",
-     "body": "Fork the plan on today's priority: pain-dominant disease leans medical then conservative surgery, while tubal damage, poor reserve or repeated failure leans toward in vitro fertilisation rather than another operation. Correct anaemia with iron well before any operation date and arrange blood in hand.\n\nRefer disease beyond local facilities to a medical college or endometriosis centre with advanced laparoscopy. Severe endometriosis or adenomyosis with completed family is an indication for hysterectomy, which is definitive; a young woman wanting fertility is referred for conservative surgery instead."
-    }
-   ],
-   "probes": [
-    {
-     "level": 1,
-     "q": "What is first-line medical treatment for endometriosis pain?",
-     "a": "NSAIDs with paracetamol, plus a combined pill, progestin or the levonorgestrel intrauterine system.",
-     "accept": [
-      "nsaid",
-      "hormonal",
-      "progestin",
-      "levonorgestrel"
-     ],
-     "minMatch": 2
-    },
-    {
-     "level": 2,
-     "q": "What must accompany a long GnRH analogue course and why?",
-     "a": "Add-back cover such as tibolone beyond six months, to protect bone mineral density.",
-     "accept": [
-      "add-back",
-      "tibolone",
-      "bone",
-      "density"
-     ],
-     "minMatch": 2
-    },
-    {
-     "level": 3,
-     "q": "How do you choose between cystectomy and ablation?",
-     "a": "Cystectomy for recurrence control where reserve allows, ablation where AMH is low and follicles must be spared.",
-     "accept": [
-      "cystectomy",
-      "recurrence",
-      "ablation",
-      "reserve"
-     ],
-     "minMatch": 2
-    }
-   ],
-   "sources": [
-    {
-     "source": "StewardMD Clinical KB",
-     "locator": "endometriosis_adenomyosis_chocolate_die: clinicalPearls"
-    },
-    {
-     "source": "StewardMD Clinical KB",
-     "locator": "endometriosis_adenomyosis_chocolate_die: pathophysiology"
-    },
-    {
-     "source": "Berek and Novak's Gynecology",
-     "locator": "Endometriosis (medical and surgical management)"
-    },
-    {
-     "source": "NICE guideline: Endometriosis",
-     "locator": "Endometriosis: diagnosis and management (management)"
-    }
-   ]
-  }
- },
- "cases": [
-  {
-   "id": "case.endometriosis.kavita",
-   "title": "A schoolteacher with four years of worsening period pain and no pregnancy",
-   "opening": "Kavita Jadhav, 29, a primary schoolteacher from Nashik, sits in the gynaecology outpatient room with her husband. She has been married six years and has not conceived. Introduce yourself and take a history.",
-   "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
-   "initialVitals": {
-    "bpDiastolic": 70,
-    "bpSystolic": 110,
-    "hr": 88,
-    "rr": 18,
-    "spo2": 98,
-    "temp": 37,
-    "gcs": 15
-   },
-   "patient": {
-    "name": "Kavita Jadhav",
-    "age": 29,
-    "sex": "female",
-    "occupation": "Primary schoolteacher",
-    "residence": "Urban, lives with her husband and mother-in-law in Nashik"
-   },
-   "history": {
-    "presenting": {
-     "key": true,
-     "skillId": "skill.hx.chief_complaints",
-     "cues": [
-      "what brings you here today",
-      "what is the main problem",
-      "why have you come to us",
-      "tell me about your complaints",
-      "how can I help you today",
-      "what is troubling you most"
-     ],
-     "reply": "Doctor, my periods have become very painful over four years, intercourse hurts deeply, and we have not had a child in six years of marriage."
-    },
-    "onset_course": {
-     "cues": [
-      "when did the pain begin",
-      "how has the pain changed over time",
-      "was it like this from the start",
-      "how long has this been going on"
-     ],
-     "reply": "My first periods at thirteen were only mildly painful. The severe pain started about four years ago and has worsened every year since."
-    },
-    "menstrual_pain": {
-     "key": true,
-     "cues": [
-      "describe the period pain",
-      "how bad are the cramps",
-      "pain during menstruation",
-      "do you miss work for pain",
-      "what medicines do you take for pain"
-     ],
-     "reply": "The pain starts a day before bleeding and lasts three days. I take two or three painkillers a day and still miss school for two days each month."
-    },
-    "pain_intercourse": {
-     "key": true,
-     "cues": [
-      "pain during intercourse",
-      "does relations hurt",
-      "deep pain with contact",
-      "avoiding physical relations",
-      "bleeding after intercourse"
-     ],
-     "reply": "Deep contact pains me sharply for the last two years, so we have started avoiding relations. There is no bleeding after."
-    },
-    "pelvic_ache": {
-     "cues": [
-      "aching between periods",
-      "constant lower abdominal pain",
-      "dull pain through the month",
-      "heaviness in the lower stomach"
-     ],
-     "reply": "For one year there is a dull ache low down even between periods. It never fully goes away now."
-    },
-    "bowel_bladder": {
-     "cues": [
-      "pain while passing stool",
-      "bowel symptoms with periods",
-      "pain while passing urine",
-      "blood in stool or urine"
-     ],
-     "reply": "Passing stool during periods pains me, and I feel constipated then. Passing urine is normal and I have never seen blood in stool or urine."
-    },
-    "bleeding_heavy": {
-     "cues": [
-      "how heavy is the bleeding",
-      "clots in menstrual blood",
-      "how many pads per day",
-      "bleeding between periods"
-     ],
-     "reply": "Bleeding lasts six days with small clots on the second day. I change four pads on heavy days. There is no bleeding between periods."
-    },
-    "fertility_trying": {
-     "key": true,
-     "cues": [
-      "how long trying for pregnancy",
-      "have you taken fertility treatment",
-      "was there ever a pregnancy",
-      "husband semen test done"
-     ],
-     "reply": "We have tried for four years without a single pregnancy. My husband's semen test last year was normal. I have taken only ovulation tablets for two cycles."
-    },
-    "obstetric_past": {
-     "cues": [
-      "tell me about past pregnancies",
-      "any abortion or miscarriage",
-      "any operation on the uterus",
-      "treatment for not conceiving"
-     ],
-     "reply": "I have never been pregnant. I had an appendicectomy at nineteen. There has been no surgery on the uterus or ovaries."
-    },
-    "contraception_use": {
-     "cues": [
-      "what contraception do you use",
-      "have you used birth control pills",
-      "copper T or hormonal coil",
-      "any injections for birth control"
-     ],
-     "reply": "We use nothing since we want a child. I took birth control pills for three months two years ago and the pain was less, then stopped them to try for pregnancy."
-    },
-    "drug_history": {
-     "cues": [
-      "what tablets do you take regularly",
-      "any hormones or injections taken",
-      "allergy to any medicine",
-      "thyroid or sugar tablets"
-     ],
-     "reply": "Only painkillers during periods. No thyroid or sugar tablets. I am not allergic to any medicine."
-    },
-    "medical_past": {
-     "cues": [
-      "any thyroid disease",
-      "tuberculosis in the past",
-      "diabetes or blood pressure",
-      "any major illness before"
-     ],
-     "reply": "No thyroid disease, no tuberculosis, no diabetes or high pressure. My cycles have always been regular at twenty eight days."
-    },
-    "family_background": {
-     "cues": [
-      "mother or sister with similar pain",
-      "family history of same complaints",
-      "anyone operated for uterus or ovaries",
-      "mother attained menopause when"
-     ],
-     "reply": "My elder sister also has painful periods and needed tablets to conceive. My mother attained menopause at forty eight."
-    },
-    "personal_habits": {
-     "cues": [
-      "tell me about your diet",
-      "tobacco or alcohol use",
-      "sleep and daily routine",
-      "weight change recently"
-     ],
-     "reply": "I eat a vegetarian diet and my weight is stable. I do not use tobacco or alcohol. Pain disturbs my sleep on period nights."
-    },
-    "urinary_symptoms": {
-     "cues": [
-      "burning while passing urine",
-      "going to toilet frequently",
-      "fever with urinary complaints",
-      "repeated urine infections"
-     ],
-     "reply": "No burning, no frequency, no fever. I have never been treated for a urine infection."
-    },
-    "vaginal_discharge": {
-     "key": true,
-     "cues": [
-      "any white discharge per vaginum",
-      "foul smelling discharge",
-      "itching in the private area",
-      "treated for white discharge"
-     ],
-     "reply": "There is no discharge, no itching and no foul smell. I was never treated for any infection down below."
-    }
-   },
-   "exam": {
-    "skill.gen.appearance": {
-     "finding": "Young woman of average build, looks tired, mild pallor of the conjunctiva, no icterus, no pedal oedema.",
-     "abnormal": true
-    },
-    "skill.gen.vitals": {
-     "finding": "Pulse 88 regular. Blood pressure 110/70. Respiratory rate 18. SpO2 98 percent on room air. Afebrile.",
-     "abnormal": false
-    },
-    "skill.exam.obg.gynae_abdominal": {
-     "finding": "Soft abdomen, no palpable mass above the pubis. Tenderness in the left iliac fossa, worse on deep pressure. No guarding, no shifting dullness.",
-     "abnormal": true
-    },
-    "skill.exam.obg.vulval_inspect": {
-     "finding": "No vulval lesions, no excoriation, no discharge at the introitus.",
-     "abnormal": false
-    },
-    "skill.exam.obg.speculum_insert": {
-     "finding": "Speculum passed gently with consent and chaperone; no vault lesion on entry.",
-     "abnormal": false
-    },
-    "skill.exam.obg.speculum_inspect": {
-     "finding": "Cervix healthy, no erosion, no discharge from the os, no blood in the vault.",
-     "abnormal": false
-    },
-    "skill.exam.obg.bimanual": {
-     "finding": "Uterus retroverted, bulky and tender on movement with limited mobility. Tender nodularity of the left uterosacral ligament. Left fornix holds a 5 cm tender mass that moves little with the cervix. No cervical motion tenderness. Right fornix free.",
-     "abnormal": true
-    }
-   },
-   "essentialInvestigations": [
-    "upt",
-    "usg",
-    "fbc"
-   ],
-   "investigations": {
-    "upt": {
-     "label": "Urine pregnancy test",
-     "result": "Negative.",
-     "note": "Excludes pregnancy before any hormonal treatment or procedure is planned.",
-     "indicated": true
-    },
-    "usg": {
-     "label": "Transvaginal pelvic ultrasound",
-     "result": "Left ovary holds a 5 cm unilocular cyst with homogeneous ground glass echoes and poor Doppler flow. Uterus bulky and heterogeneous with a thickened junctional zone. Right ovary normal. No free fluid.",
-     "note": "First-line imaging: the ground glass cyst marks the chocolate cyst and the thickened junctional zone marks coexistent adenomyosis.",
-     "indicated": true
-    },
-    "fbc": {
-     "label": "Full blood count with iron studies",
-     "result": "Haemoglobin 9 g/dL. Microcytic hypochromic picture. Ferritin low, fitting iron deficiency from chronic loss.",
-     "note": "Grades the anaemia that must be corrected with iron before any operation is dated.",
-     "indicated": true
-    },
-    "ca125_amh": {
-     "label": "CA-125 with anti-Mullerian hormone",
-     "result": "CA-125 modestly raised. Anti-Mullerian hormone at the lower end of normal for age.",
-     "note": "CA-125 never diagnoses alone; the AMH sets the reserve cost of cystectomy before counselling.",
-     "indicated": true
-    },
-    "mri": {
-     "label": "Pelvic MRI for mapping",
-     "result": "Advised, not yet done: mapping of the rectovaginal septum and left parametrium before any surgery.",
-     "note": "Reserved for suspected deep disease and surgical planning, to choose the team and the route.",
-     "indicated": false
-    }
-   },
-   "differentialModel": {
-    "answer": "Ovarian endometriosis with a chocolate cyst and coexistent adenomyosis. Consider pelvic inflammatory disease, fibroid uterus, an ovarian tumour, ectopic pregnancy and a bowel mimic.",
-    "accept": [
-     "endometriosis",
-     "adenomyosis",
-     "pid",
-     "fibroid",
-     "ovarian cyst",
-     "ectopic pregnancy",
-     "ibs"
-    ],
-    "minMatch": 3
-   },
-   "diagnosis": {
-    "answer": "Ovarian endometriosis with a left chocolate cyst and coexistent adenomyosis, with primary infertility.",
-    "accept": [
-     "endometriosis",
-     "adenomyosis",
-     "adenomyoma",
-     "ovarian cyst"
-    ],
-    "minMatch": 2
-   },
-   "managementModel": {
-    "answer": "Control pain with anti-inflammatory analgesia, suppress deposits with hormones or the levonorgestrel system, correct the iron deficiency anaemia, plan laparoscopic cystectomy with AMH counselling and spill-free technique, and refer for assisted conception where tubes or reserve fail.",
-    "accept": [
-     "analgesia",
-     "hormonal",
-     "levonorgestrel",
-     "iron",
-     "cystectomy",
-     "laparoscopy",
-     "ivf",
-     "refer"
-    ],
-    "minMatch": 3
-   },
-   "teachingPoints": [
-    "Tempo declares chronicity: four years of worsening secondary pain is endometriosis until proved otherwise, not the days of an ectopic or the weeks of PID.",
-    "The pill trial is diagnostic evidence: pain that eased on combined pills and returned on stopping proves hormone responsiveness.",
-    "Fixed nodularity with a tender immobile adnexal mass is the bedside diagnosis; a fibroid uterus is firm and nodular but non-tender and mobile.",
-    "No cervical motion tenderness and no discharge argue against PID without needing further tests to invoke it.",
-    "The AMH result changes the operation: low-normal reserve pushes the choice from cystectomy toward ablation or direct referral for assisted conception.",
-    "Infertility with a normal semen analysis and regular cycles localises the fault to tubo-ovarian disease, which is why this case forks toward surgery versus IVF rather than ovulation tablets alone."
-   ],
-   "review": {
-    "status": "ai_drafted"
-   }
-  }
- ]
 }

@@ -1,1027 +1,1027 @@
 {
- "_comment": "Postpartum haemorrhage pathway. Same architecture as pneumonia, abruptio placentae and pre-eclampsia: shared core and obgyn skills carry the approach, history and examination manoeuvres, chapter emphasis carries what differs in this disease, and the seven own skills (reasoning, investigation, treatment) carry the four-T picture, workup and stepwise management. New history and presentation skills live in the shared-postpartum-haemorrhage.json fragment and are referenced here by id.",
- "chapters": [
-  {
-   "blurb": "What postpartum haemorrhage is, and the four causes that explain every case",
-   "id": "basics",
-   "skills": [
-    "skill.pph.basics"
-   ],
-   "title": "Basics"
-  },
-  {
-   "blurb": "Before a single question",
-   "id": "approach",
-   "skills": [
-    "skill.approach.hygiene",
-    "skill.approach.introduce",
-    "skill.approach.consent",
-    "skill.approach.position"
-   ],
-   "title": "Approach to the patient"
-  },
-  {
-   "blurb": "Parity and place of birth set the risk before the bleeding is described",
-   "emphasis": {
-    "skill.particulars.demographics": {
-     "expect": "In a bleeding mother after birth, note age, parity and where she delivered first. A grand multipara delivered at home or at a primary centre without active management of the third stage, with no blood grouped and no transport arranged, is the commonest setting for a late and shocked arrival."
-    }
-   },
-   "id": "particulars",
-   "skills": [
-    "skill.particulars.demographics"
-   ],
-   "title": "Patient particulars"
-  },
-  {
-   "blurb": "Minutes since birth, pads soaked, and whether the placenta came whole",
-   "emphasis": {
-    "skill.hx.chief_complaints": {
-     "expect": "A typical story reads in minutes to a few hours: heavy vaginal bleeding starting soon after the birth of the baby, with clots, dizziness on sitting up, and sometimes fainting. That immediate post-birth tempo with a draining loss should move you towards atonic bleeding before anything else is known."
-    },
-    "skill.hx.obg.puerperal_complications": {
-     "expect": "In a woman bleeding after the first day, ask about fever, foul discharge and worsening lower abdominal pain alongside the bleeding. Secondary bleeding with these features points to retained tissue with infection rather than simple atony."
-    }
-   },
-   "id": "history",
-   "skills": [
-    "skill.hx.chief_complaints",
-    "skill.hx.pph.bleed_story",
-    "skill.hx.obg.puerperal_complications"
-   ],
-   "title": "History of presenting illness"
-  },
-  {
-   "blurb": "The tired womb, the overstretched womb, and the drugs she is already on",
-   "emphasis": {
-    "skill.hx.obg.medical_family_drug": {
-     "expect": "Ask directly about raised pressure and fits in this pregnancy, severe anaemia, fever in labour, and any blood thinner or aspirin she takes. A bleeding tendency, nose and gum bleeds, or heavy periods before pregnancy complete the clotting side of the risk."
-    },
-    "skill.hx.obg.previous_pregnancies": {
-     "expect": "A previous heavy bleed after delivery, needing transfusion or theatre, is the strongest warning of recurrence. Record each pregnancy in order with its outcome and mode of delivery, and note any caesarean scar, which changes the risk towards adherent placenta and rupture in this birth."
-    }
-   },
-   "id": "past_personal_drug_family",
-   "skills": [
-    "skill.hx.obg.medical_family_drug",
-    "skill.hx.obg.previous_pregnancies",
-    "skill.hx.pph.risk"
-   ],
-   "title": "Past, personal, drug and family history"
-  },
-  {
-   "blurb": "Pallor and pulse first, because the linen understates the loss",
-   "emphasis": {
-    "skill.gen.appearance": {
-     "expect": "Look for pallor, cold clammy hands, restlessness or drowsiness, and delayed capillary refill. A young mother compensates well and then collapses suddenly, so anxiety with air hunger and thirst matter more than the blood seen so far."
-    },
-    "skill.gen.vitals": {
-     "expect": "Pulse, pressure, breathing rate and urine output are the true measure of loss here. A rising pulse with a narrowing pulse pressure and falling urine output means shock even if the linen looks modest. Repeat them every few minutes; one set never rules shock out."
-    },
-    "skill.gen.cyanosis": {
-     "expect": "Central cyanosis is not an early sign here. When the lips and tongue turn blue in a bleeding mother, it means profound shock with failing perfusion, and it should trigger immediate resuscitation and escalation, not further examination."
-    }
-   },
-   "id": "general_exam",
-   "skills": [
-    "skill.gen.appearance",
-    "skill.gen.vitals",
-    "skill.gen.cyanosis"
-   ],
-   "title": "General examination"
-  },
-  {
-   "blurb": "The fundus, its tone, and the perineum it bled through",
-   "emphasis": {
-    "skill.exam.obg.preg_prep_inspect": {
-     "expect": "Inspect the pads, the perineum and the blood itself: bright red continuous flow with clots, pooling under her, and any visible tear or spurting vessel. Note the amount honestly in millilitres where a kidney tray or drape allows it, because visual guessing always understates."
-    },
-    "skill.exam.obg.fundal_height": {
-     "expect": "Feel the fundus for height and tone: high, soft and boggy means atony, and bleeding that eases as the uterus firms under your hand confirms it. A well contracted firm uterus with continued brisk bleeding means the blood is coming from a tear, retained tissue or clotting failure, not from atony."
-    },
-    "skill.exam.obg.puerperal_exam": {
-     "expect": "Assess involution, lochia and the perineum together: a uterus larger than expected for the day after birth with heavy red lochia suggests retained tissue or infection, and every tear, episiotomy and haematoma must be inspected under good light with an assistant, since missed trauma bleeds on."
-    }
-   },
-   "id": "systemic_exam",
-   "skills": [
-    "skill.exam.obg.preg_prep_inspect",
-    "skill.exam.obg.fundal_height",
-    "skill.exam.obg.puerperal_exam"
-   ],
-   "title": "Postnatal abdominal and perineal examination"
-  },
-  {
-   "blurb": "Tone, trauma, tissue and thrombin read as one picture",
-   "id": "disease_findings",
-   "skills": [
-    "skill.pph.findings"
-   ],
-   "title": "Putting the haemorrhage picture together"
-  },
-  {
-   "blurb": "One paragraph that carries the cause and the urgency",
-   "id": "summary",
-   "skills": [
-    "skill.pph.summary"
-   ],
-   "title": "Clinical summary"
-  },
-  {
-   "blurb": "Atony against tears, tissue, clotting failure and inversion",
-   "id": "differential",
-   "skills": [
-    "skill.pph.differential"
-   ],
-   "title": "Differential diagnosis"
-  },
-  {
-   "blurb": "Measure the loss, count the blood, test the clotting, look inside",
-   "id": "investigations",
-   "skills": [
-    "skill.ix.pph.workup"
-   ],
-   "title": "Investigations"
-  },
-  {
-   "blurb": "Primary or secondary, and how shocked she is",
-   "id": "diagnosis",
-   "skills": [
-    "skill.pph.diagnosis"
-   ],
-   "title": "Diagnosis and severity"
-  },
-  {
-   "blurb": "Resuscitate, contract, tranexamic acid, find the cause, escalate",
-   "id": "treatment",
-   "skills": [
-    "skill.tx.obg.pph_recognise",
-    "skill.tx.obg.pph_first_response",
-    "skill.tx.obg.pph_atony_escalate",
-    "skill.tx.pph",
-    "skill.approach.obg.team_leader"
-   ],
-   "title": "Treatment"
-  },
-  {
-   "blurb": "Two minutes, in a fixed order, ending with a plan",
-   "emphasis": {
-    "skill.present.pph.case": {
-     "expect": "Present a bleeding mother as one line of problem representation (parity, mode of delivery, time since birth, quantified loss), then uterine tone as the cause pointer, then maternal status as the severity, and close with resuscitation done and the cause-directed plan. End with blood readiness, referral need and counselling for the next pregnancy."
-    }
-   },
-   "id": "case",
-   "skills": [
-    "skill.present.pph.case"
-   ],
-   "title": "Case presentation"
-  }
- ],
- "estMinutes": 60,
- "fullName": "Postpartum haemorrhage (atonic, traumatic, retained tissue and coagulopathic)",
- "id": "postpartum-haemorrhage",
- "kbRef": "postpartum_haemorrhage",
- "name": "Postpartum haemorrhage",
- "oneLine": "Excessive bleeding after birth, and the four causes that decide its treatment",
- "review": {
-  "status": "ai_drafted"
- },
- "subtitle": "Atony, trauma, retained tissue and coagulopathy",
- "system": "obstetrics",
- "version": 1,
- "skills": {
-  "skill.pph.basics": {
-   "body": "Postpartum haemorrhage is excessive bleeding after birth from the placental bed or the birth canal. Primary haemorrhage starts within the first 24 hours, most of it in the first hour, and secondary haemorrhage starts after 24 hours and up to about 12 weeks. Every case is explained by one or more of the four Ts: tone, trauma, tissue and thrombin.",
-   "id": "skill.pph.basics",
-   "keyPoints": [
-    "Primary means within 24 hours of birth and secondary means from 24 hours up to about 12 weeks. The distinction matters because primary bleeding is usually atony or trauma needing immediate resuscitation, while secondary bleeding is usually retained tissue or infection needing exploration and antibiotics.",
-    "Tone, uterine atony, is by far the commonest cause. After the placenta separates, the crisscross muscle fibres of the upper segment must clamp the open sinuses shut; anything that tires or overstretches the muscle leaves the taps open.",
-    "Trauma means tears of the cervix, vagina or perineum, haematomas, an episiotomy that bleeds on, uterine rupture and uterine inversion. Bleeding with a firm contracted uterus is trauma until proven otherwise.",
-    "Tissue means a retained placenta, a retained cotyledon or membranes, and morbidly adherent placenta. Retained fragments keep the womb from contracting and bleed on despite drugs.",
-    "Thrombin means clotting failure: pre-existing bleeding disorders, anticoagulants, and disseminated intravascular coagulation from abruption, long retained dead fetus, severe pre-eclampsia or amniotic fluid embolism. Oozing from needle sites with a firm uterus is the bedside clue."
-   ],
-   "kind": "reasoning",
-   "media": [],
-   "oneLine": "Excessive bleeding after birth: primary or secondary, and the four Ts",
-   "pitfalls": [
-    "Calling any postnatal spotting a haemorrhage, when the definition needs excessive measured or symptomatic bleeding, not normal lochia.",
-    "Treating atony while a cervical tear bleeds on beside it, because nobody looked under good light.",
-    "Forgetting that one mother can have two Ts at once, such as atony with a coagulopathy, and stopping after finding the first."
-   ],
-   "probes": [
+  "_comment": "Postpartum haemorrhage pathway. Same architecture as pneumonia, abruptio placentae and pre-eclampsia: shared core and obgyn skills carry the approach, history and examination manoeuvres, chapter emphasis carries what differs in this disease, and the seven own skills (reasoning, investigation, treatment) carry the four-T picture, workup and stepwise management. New history and presentation skills live in the shared-postpartum-haemorrhage.json fragment and are referenced here by id.",
+  "chapters": [
     {
-     "a": "Excessive bleeding after birth, divided into primary within the first 24 hours and secondary from 24 hours up to about 12 weeks, explained by tone (atony), trauma (tears), tissue (retained placenta) and thrombin (coagulopathy).",
-     "accept": [
-      "24 hours",
-      "12 weeks",
-      "atony",
-      "trauma",
-      "tissue",
-      "thrombin"
-     ],
-     "level": 1,
-     "minMatch": 3,
-     "q": "Define postpartum haemorrhage and name the four Ts."
+      "blurb": "What postpartum haemorrhage is, and the four causes that explain every case",
+      "id": "basics",
+      "skills": [
+        "skill.pph.basics"
+      ],
+      "title": "Basics"
     },
     {
-     "a": "Because bleeding with a firm contracted uterus cannot be coming from atony, so the blood must be coming from a tear, retained tissue or clotting failure, each needing a different pair of hands.",
-     "accept": [
-      "firm",
-      "tear",
-      "tissue",
-      "clotting"
-     ],
-     "level": 2,
-     "minMatch": 2,
-     "q": "Bleeding continues though the uterus feels firm and well contracted. What does that tell you?"
+      "blurb": "Before a single question",
+      "id": "approach",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ],
+      "title": "Approach to the patient"
     },
     {
-     "a": "Thromboplastins and consumption from the underlying catastrophe deplete fibrinogen and platelets, so blood stops clotting anywhere, and this consumptive coagulopathy then keeps every other cause bleeding.",
-     "accept": [
-      "fibrinogen",
-      "consumptive",
-      "coagulopathy",
-      "clotting"
-     ],
-     "level": 3,
-     "minMatch": 2,
-     "q": "Why does abruption or a long retained dead fetus cause bleeding after birth even with an empty firm uterus?"
+      "blurb": "Parity and place of birth set the risk before the bleeding is described",
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In a bleeding mother after birth, note age, parity and where she delivered first. A grand multipara delivered at home or at a primary centre without active management of the third stage, with no blood grouped and no transport arranged, is the commonest setting for a late and shocked arrival."
+        }
+      },
+      "id": "particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "title": "Patient particulars"
+    },
+    {
+      "blurb": "Minutes since birth, pads soaked, and whether the placenta came whole",
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical story reads in minutes to a few hours: heavy vaginal bleeding starting soon after the birth of the baby, with clots, dizziness on sitting up, and sometimes fainting. That immediate post-birth tempo with a draining loss should move you towards atonic bleeding before anything else is known."
+        },
+        "skill.hx.obg.puerperal_complications": {
+          "expect": "In a woman bleeding after the first day, ask about fever, foul discharge and worsening lower abdominal pain alongside the bleeding. Secondary bleeding with these features points to retained tissue with infection rather than simple atony."
+        }
+      },
+      "id": "history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.pph.bleed_story",
+        "skill.hx.obg.puerperal_complications"
+      ],
+      "title": "History of presenting illness"
+    },
+    {
+      "blurb": "The tired womb, the overstretched womb, and the drugs she is already on",
+      "emphasis": {
+        "skill.hx.obg.medical_family_drug": {
+          "expect": "Ask directly about raised pressure and fits in this pregnancy, severe anaemia, fever in labour, and any blood thinner or aspirin she takes. A bleeding tendency, nose and gum bleeds, or heavy periods before pregnancy complete the clotting side of the risk."
+        },
+        "skill.hx.obg.previous_pregnancies": {
+          "expect": "A previous heavy bleed after delivery, needing transfusion or theatre, is the strongest warning of recurrence. Record each pregnancy in order with its outcome and mode of delivery, and note any caesarean scar, which changes the risk towards adherent placenta and rupture in this birth."
+        }
+      },
+      "id": "past_personal_drug_family",
+      "skills": [
+        "skill.hx.obg.medical_family_drug",
+        "skill.hx.obg.previous_pregnancies",
+        "skill.hx.pph.risk"
+      ],
+      "title": "Past, personal, drug and family history"
+    },
+    {
+      "blurb": "Pallor and pulse first, because the linen understates the loss",
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for pallor, cold clammy hands, restlessness or drowsiness, and delayed capillary refill. A young mother compensates well and then collapses suddenly, so anxiety with air hunger and thirst matter more than the blood seen so far."
+        },
+        "skill.gen.vitals": {
+          "expect": "Pulse, pressure, breathing rate and urine output are the true measure of loss here. A rising pulse with a narrowing pulse pressure and falling urine output means shock even if the linen looks modest. Repeat them every few minutes; one set never rules shock out."
+        },
+        "skill.gen.cyanosis": {
+          "expect": "Central cyanosis is not an early sign here. When the lips and tongue turn blue in a bleeding mother, it means profound shock with failing perfusion, and it should trigger immediate resuscitation and escalation, not further examination."
+        }
+      },
+      "id": "general_exam",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.cyanosis"
+      ],
+      "title": "General examination"
+    },
+    {
+      "blurb": "The fundus, its tone, and the perineum it bled through",
+      "emphasis": {
+        "skill.exam.obg.preg_prep_inspect": {
+          "expect": "Inspect the pads, the perineum and the blood itself: bright red continuous flow with clots, pooling under her, and any visible tear or spurting vessel. Note the amount honestly in millilitres where a kidney tray or drape allows it, because visual guessing always understates."
+        },
+        "skill.exam.obg.fundal_height": {
+          "expect": "Feel the fundus for height and tone: high, soft and boggy means atony, and bleeding that eases as the uterus firms under your hand confirms it. A well contracted firm uterus with continued brisk bleeding means the blood is coming from a tear, retained tissue or clotting failure, not from atony."
+        },
+        "skill.exam.obg.puerperal_exam": {
+          "expect": "Assess involution, lochia and the perineum together: a uterus larger than expected for the day after birth with heavy red lochia suggests retained tissue or infection, and every tear, episiotomy and haematoma must be inspected under good light with an assistant, since missed trauma bleeds on."
+        }
+      },
+      "id": "systemic_exam",
+      "skills": [
+        "skill.exam.obg.preg_prep_inspect",
+        "skill.exam.obg.fundal_height",
+        "skill.exam.obg.puerperal_exam"
+      ],
+      "title": "Postnatal abdominal and perineal examination"
+    },
+    {
+      "blurb": "Tone, trauma, tissue and thrombin read as one picture",
+      "id": "disease_findings",
+      "skills": [
+        "skill.pph.findings"
+      ],
+      "title": "Putting the haemorrhage picture together"
+    },
+    {
+      "blurb": "One paragraph that carries the cause and the urgency",
+      "id": "summary",
+      "skills": [
+        "skill.pph.summary"
+      ],
+      "title": "Clinical summary"
+    },
+    {
+      "blurb": "Atony against tears, tissue, clotting failure and inversion",
+      "id": "differential",
+      "skills": [
+        "skill.pph.differential"
+      ],
+      "title": "Differential diagnosis"
+    },
+    {
+      "blurb": "Measure the loss, count the blood, test the clotting, look inside",
+      "id": "investigations",
+      "skills": [
+        "skill.ix.pph.workup"
+      ],
+      "title": "Investigations"
+    },
+    {
+      "blurb": "Primary or secondary, and how shocked she is",
+      "id": "diagnosis",
+      "skills": [
+        "skill.pph.diagnosis"
+      ],
+      "title": "Diagnosis and severity"
+    },
+    {
+      "blurb": "Resuscitate, contract, tranexamic acid, find the cause, escalate",
+      "id": "treatment",
+      "skills": [
+        "skill.tx.obg.pph_recognise",
+        "skill.tx.obg.pph_first_response",
+        "skill.tx.obg.pph_atony_escalate",
+        "skill.tx.pph",
+        "skill.approach.obg.team_leader"
+      ],
+      "title": "Treatment"
+    },
+    {
+      "blurb": "Two minutes, in a fixed order, ending with a plan",
+      "emphasis": {
+        "skill.present.pph.case": {
+          "expect": "Present a bleeding mother as one line of problem representation (parity, mode of delivery, time since birth, quantified loss), then uterine tone as the cause pointer, then maternal status as the severity, and close with resuscitation done and the cause-directed plan. End with blood readiness, referral need and counselling for the next pregnancy."
+        }
+      },
+      "id": "case",
+      "skills": [
+        "skill.present.pph.case"
+      ],
+      "title": "Case presentation"
     }
-   ],
-   "review": {
+  ],
+  "estMinutes": 60,
+  "fullName": "Postpartum haemorrhage (atonic, traumatic, retained tissue and coagulopathic)",
+  "id": "postpartum-haemorrhage",
+  "kbRef": "postpartum_haemorrhage",
+  "name": "Postpartum haemorrhage",
+  "oneLine": "Excessive bleeding after birth, and the four causes that decide its treatment",
+  "review": {
     "status": "ai_drafted"
-   },
-   "rubric": [],
-   "sources": [
-    {
-     "locator": "postpartum_haemorrhage: clinicalPearls",
-     "source": "StewardMD Clinical KB"
-    },
-    {
-     "locator": "Postpartum haemorrhage",
-     "source": "Williams Obstetrics"
-    }
-   ],
-   "system": "obstetrics",
-   "title": "What postpartum haemorrhage is",
-   "why": "Every bleeding mother after birth is managed through the same four causes, and the treatment of each is different: drugs for atony, repair for trauma, exploration for tissue, blood products for clotting failure. Fixing the definition and the four Ts first is what stops the wrong treatment being given fast."
   },
-  "skill.pph.findings": {
-   "body": "The haemorrhage picture has four strands read together: how much she has lost, what her uterus feels like, where the blood is coming from, and whether her blood still clots. No single strand names the cause, but the four together rarely leave doubt, and the mismatch between modest linen and a shocked mother is itself a finding.",
-   "id": "skill.pph.findings",
-   "keyPoints": [
-    "Atony shows a high soft boggy uterus, often with clots and a steady drain that eases when the fundus is massaged and returns when the hand lifts. The fundus may sit above the umbilicus from clot distension.",
-    "Trauma shows a firm well contracted uterus with continued bright red bleeding, or a tense tender vulval swelling that grows with severe pain in a mother who has stopped bleeding per vaginam. Spurting from the angle of an episiotomy is trauma, not atony.",
-    "Tissue shows bleeding that persists despite a contracting uterus and full uterotonics, often with a placenta noted incomplete or membranes ragged at delivery. A uterus that never quite firms and a history of difficult placental delivery complete the picture.",
-    "Thrombin shows oozing from venepuncture sites, gums and the episiotomy, blood that fails to clot in a tray, and haematuria, with laboratory fibrinogen falling and clotting times lengthening. It usually follows abruption, severe pre-eclampsia, a long dead fetus or already massive loss and dilution.",
-    "The mother shows loss in her pulse, pressure, breathing, urine and sensorium: tachycardia with a narrowing pulse pressure, tachypnoea, thirst and restlessness, then cold peripheries, falling urine and drowsiness. Shock with modest visible loss means concealed bleeding, a vulval haematoma, or a broad ligament collection.",
-    "Uterine inversion shows sudden shock out of proportion to the bleeding with a mass at the introitus and no palpable fundus abdominally, often after cord traction on a high placenta. It is the one cause where the fundus disappears instead of rising."
-   ],
-   "kind": "reasoning",
-   "media": [],
-   "oneLine": "A boggy fundus, a firm uterus that still bleeds, oozing needle sites",
-   "pitfalls": [
-    "Massaging once and walking away, when an atonic uterus relaxes again within minutes and needs repeated assessment.",
-    "Missing a vulval haematoma because the pads look light, when the pain and the shock already declare concealed bleeding.",
-    "Reading oozing venepunctures as difficult veins, when they are the first bedside sign of consumptive coagulopathy."
-   ],
-   "probes": [
-    {
-     "a": "A high soft boggy uterus with bleeding that eases on massage is atony; a firm contracted uterus with continued bright bleeding is trauma; bleeding despite drugs with an incomplete placenta is retained tissue; oozing needle sites with unclotting blood is coagulopathy.",
-     "accept": [
-      "boggy",
-      "massage",
-      "firm",
-      "incomplete",
-      "oozing",
-      "unclotting"
-     ],
-     "level": 1,
-     "minMatch": 3,
-     "q": "How do the four causes look different at the bedside?"
+  "subtitle": "Atony, trauma, retained tissue and coagulopathy",
+  "system": "obgyn",
+  "version": 1,
+  "skills": {
+    "skill.pph.basics": {
+      "body": "Postpartum haemorrhage is excessive bleeding after birth from the placental bed or the birth canal. Primary haemorrhage starts within the first 24 hours, most of it in the first hour, and secondary haemorrhage starts after 24 hours and up to about 12 weeks. Every case is explained by one or more of the four Ts: tone, trauma, tissue and thrombin.",
+      "id": "skill.pph.basics",
+      "keyPoints": [
+        "Primary means within 24 hours of birth and secondary means from 24 hours up to about 12 weeks. The distinction matters because primary bleeding is usually atony or trauma needing immediate resuscitation, while secondary bleeding is usually retained tissue or infection needing exploration and antibiotics.",
+        "Tone, uterine atony, is by far the commonest cause. After the placenta separates, the crisscross muscle fibres of the upper segment must clamp the open sinuses shut; anything that tires or overstretches the muscle leaves the taps open.",
+        "Trauma means tears of the cervix, vagina or perineum, haematomas, an episiotomy that bleeds on, uterine rupture and uterine inversion. Bleeding with a firm contracted uterus is trauma until proven otherwise.",
+        "Tissue means a retained placenta, a retained cotyledon or membranes, and morbidly adherent placenta. Retained fragments keep the womb from contracting and bleed on despite drugs.",
+        "Thrombin means clotting failure: pre-existing bleeding disorders, anticoagulants, and disseminated intravascular coagulation from abruption, long retained dead fetus, severe pre-eclampsia or amniotic fluid embolism. Oozing from needle sites with a firm uterus is the bedside clue."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "Excessive bleeding after birth: primary or secondary, and the four Ts",
+      "pitfalls": [
+        "Calling any postnatal spotting a haemorrhage, when the definition needs excessive measured or symptomatic bleeding, not normal lochia.",
+        "Treating atony while a cervical tear bleeds on beside it, because nobody looked under good light.",
+        "Forgetting that one mother can have two Ts at once, such as atony with a coagulopathy, and stopping after finding the first."
+      ],
+      "probes": [
+        {
+          "a": "Excessive bleeding after birth, divided into primary within the first 24 hours and secondary from 24 hours up to about 12 weeks, explained by tone (atony), trauma (tears), tissue (retained placenta) and thrombin (coagulopathy).",
+          "accept": [
+            "24 hours",
+            "12 weeks",
+            "atony",
+            "trauma",
+            "tissue",
+            "thrombin"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "Define postpartum haemorrhage and name the four Ts."
+        },
+        {
+          "a": "Because bleeding with a firm contracted uterus cannot be coming from atony, so the blood must be coming from a tear, retained tissue or clotting failure, each needing a different pair of hands.",
+          "accept": [
+            "firm",
+            "tear",
+            "tissue",
+            "clotting"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Bleeding continues though the uterus feels firm and well contracted. What does that tell you?"
+        },
+        {
+          "a": "Thromboplastins and consumption from the underlying catastrophe deplete fibrinogen and platelets, so blood stops clotting anywhere, and this consumptive coagulopathy then keeps every other cause bleeding.",
+          "accept": [
+            "fibrinogen",
+            "consumptive",
+            "coagulopathy",
+            "clotting"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why does abruption or a long retained dead fetus cause bleeding after birth even with an empty firm uterus?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "postpartum_haemorrhage: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Postpartum haemorrhage",
+          "source": "Williams Obstetrics"
+        }
+      ],
+      "system": "obstetrics",
+      "title": "What postpartum haemorrhage is",
+      "why": "Every bleeding mother after birth is managed through the same four causes, and the treatment of each is different: drugs for atony, repair for trauma, exploration for tissue, blood products for clotting failure. Fixing the definition and the four Ts first is what stops the wrong treatment being given fast."
     },
-    {
-     "a": "Because blood can collect inside as a vulval or broad ligament haematoma while the pads stay light, so pulse, pressure, urine output and a tense tender swelling measure the true loss.",
-     "accept": [
-      "haematoma",
-      "concealed",
-      "pulse",
-      "urine",
-      "swelling"
-     ],
-     "level": 2,
-     "minMatch": 2,
-     "q": "Why do you trust the vitals more than the linen in a bleeding mother?"
+    "skill.pph.findings": {
+      "body": "The haemorrhage picture has four strands read together: how much she has lost, what her uterus feels like, where the blood is coming from, and whether her blood still clots. No single strand names the cause, but the four together rarely leave doubt, and the mismatch between modest linen and a shocked mother is itself a finding.",
+      "id": "skill.pph.findings",
+      "keyPoints": [
+        "Atony shows a high soft boggy uterus, often with clots and a steady drain that eases when the fundus is massaged and returns when the hand lifts. The fundus may sit above the umbilicus from clot distension.",
+        "Trauma shows a firm well contracted uterus with continued bright red bleeding, or a tense tender vulval swelling that grows with severe pain in a mother who has stopped bleeding per vaginam. Spurting from the angle of an episiotomy is trauma, not atony.",
+        "Tissue shows bleeding that persists despite a contracting uterus and full uterotonics, often with a placenta noted incomplete or membranes ragged at delivery. A uterus that never quite firms and a history of difficult placental delivery complete the picture.",
+        "Thrombin shows oozing from venepuncture sites, gums and the episiotomy, blood that fails to clot in a tray, and haematuria, with laboratory fibrinogen falling and clotting times lengthening. It usually follows abruption, severe pre-eclampsia, a long dead fetus or already massive loss and dilution.",
+        "The mother shows loss in her pulse, pressure, breathing, urine and sensorium: tachycardia with a narrowing pulse pressure, tachypnoea, thirst and restlessness, then cold peripheries, falling urine and drowsiness. Shock with modest visible loss means concealed bleeding, a vulval haematoma, or a broad ligament collection.",
+        "Uterine inversion shows sudden shock out of proportion to the bleeding with a mass at the introitus and no palpable fundus abdominally, often after cord traction on a high placenta. It is the one cause where the fundus disappears instead of rising."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "A boggy fundus, a firm uterus that still bleeds, oozing needle sites",
+      "pitfalls": [
+        "Massaging once and walking away, when an atonic uterus relaxes again within minutes and needs repeated assessment.",
+        "Missing a vulval haematoma because the pads look light, when the pain and the shock already declare concealed bleeding.",
+        "Reading oozing venepunctures as difficult veins, when they are the first bedside sign of consumptive coagulopathy."
+      ],
+      "probes": [
+        {
+          "a": "A high soft boggy uterus with bleeding that eases on massage is atony; a firm contracted uterus with continued bright bleeding is trauma; bleeding despite drugs with an incomplete placenta is retained tissue; oozing needle sites with unclotting blood is coagulopathy.",
+          "accept": [
+            "boggy",
+            "massage",
+            "firm",
+            "incomplete",
+            "oozing",
+            "unclotting"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "How do the four causes look different at the bedside?"
+        },
+        {
+          "a": "Because blood can collect inside as a vulval or broad ligament haematoma while the pads stay light, so pulse, pressure, urine output and a tense tender swelling measure the true loss.",
+          "accept": [
+            "haematoma",
+            "concealed",
+            "pulse",
+            "urine",
+            "swelling"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why do you trust the vitals more than the linen in a bleeding mother?"
+        },
+        {
+          "a": "Sudden disproportionate shock with a mass at the introitus and no fundus palpable abdominally, usually after fundal pressure or cord traction before the placenta separated.",
+          "accept": [
+            "introitus",
+            "no fundus",
+            "traction",
+            "separated"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "What declares an acute uterine inversion?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "postpartum_haemorrhage: redFlags",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Green-top Guideline 52: Postpartum haemorrhage, prevention and management",
+          "source": "RCOG"
+        }
+      ],
+      "system": "obstetrics",
+      "title": "The haemorrhage picture",
+      "why": "Bleeding mothers die of underestimation: the linen looks modest, the young mother compensates until she collapses, and the real cause hides behind the obvious one. Reading loss, tone, source and clotting as one connected picture is what makes the diagnosis before the collapse, not after."
     },
-    {
-     "a": "Sudden disproportionate shock with a mass at the introitus and no fundus palpable abdominally, usually after fundal pressure or cord traction before the placenta separated.",
-     "accept": [
-      "introitus",
-      "no fundus",
-      "traction",
-      "separated"
-     ],
-     "level": 3,
-     "minMatch": 2,
-     "q": "What declares an acute uterine inversion?"
+    "skill.pph.summary": {
+      "body": "A good haemorrhage summary is one paragraph that carries the cause and the urgency. State who she is, how she delivered and how long ago, the quantified loss with the state of the placenta, the uterine findings, then maternal status, and finish with severity and the plan the case demands.",
+      "id": "skill.pph.summary",
+      "keyPoints": [
+        "Open with parity, mode of delivery and time since birth: a 24 year old second gravida, normal vaginal delivery three hours ago, 900 mL measured loss. The listener should suspect atony before you say it.",
+        "State the bleed as primary or secondary with an honest quantified amount, then the placenta: complete or suspect, and whether the third stage was managed actively. A suspect placenta changes the whole plan.",
+        "Give uterine tone as its own sentence: boggy high fundus easing with massage, or firm contracted uterus with continued bleeding. Tone is the cause pointer and belongs before any plan.",
+        "Give maternal status next: pulse, pressure, pallor, urine output and clotting signs, stated plainly as stable or shocked. Never let reassuring linen soften a shocked set of vitals.",
+        "Close with severity and intent: moderate primary atonic haemorrhage responding to uterotonics, or severe traumatic bleeding for examination under anaesthesia and repair. End with blood readiness, referral need and counselling about the next pregnancy."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "One paragraph that carries the cause and the urgency",
+      "pitfalls": [
+        "Summarising findings without stating uterine tone, which leaves the listener with facts and no cause.",
+        "Quoting the linen instead of a quantified loss, so nobody can tell whether she has lost 300 mL or a litre.",
+        "Presenting the haemoglobin before the clinical picture, when the count lags the bleeding by hours and the vitals decide now."
+      ],
+      "probes": [
+        {
+          "a": "Parity and delivery details with time since birth, quantified loss with placental state, uterine tone and fundal findings, maternal pulse pressure urine and clotting status, then severity and the cause-directed plan.",
+          "accept": [
+            "parity",
+            "quantified",
+            "tone",
+            "maternal",
+            "severity",
+            "plan"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "What must a haemorrhage summary contain, in order?"
+        },
+        {
+          "a": "Because tone points to the cause, atony versus trauma versus tissue, and each cause needs different hands, so a summary without tone cannot justify its plan.",
+          "accept": [
+            "cause",
+            "atony",
+            "trauma",
+            "hands"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why does tone belong in the summary before the plan?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "postpartum_haemorrhage: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Postpartum haemorrhage",
+          "source": "Williams Obstetrics"
+        }
+      ],
+      "system": "obstetrics",
+      "title": "The clinical summary",
+      "why": "Consultants and examiners decide from the summary, not from the recitation. A summary that orders the facts as tone then maternal status then plan mirrors exactly how the management choice is made, so the next step sounds inevitable rather than guessed."
+    },
+    "skill.ix.pph.workup": {
+      "body": "Investigations in a bleeding mother answer four questions at once: how much has she really lost, is her clotting failing, is anything left inside, and is blood ready? Order them together on arrival, because haemorrhage outruns sequential testing, and never let a result delay massage, uterotonics or tranexamic acid.",
+      "id": "skill.ix.pph.workup",
+      "keyPoints": [
+        "Measure the loss quantitatively from the start: calibrated drapes or a kidney tray, pad weights, and continuous pulse, pressure, breathing rate and urine output. Quantified loss with shock index thinking replaces visual guessing throughout.",
+        "Send a full blood count with serial haemoglobin. A single early haemoglobin reflects the pre-bleed state, not the loss; only falling values on repeat sampling track ongoing bleeding, with the platelet trend warning of consumption.",
+        "Send a coagulation screen including fibrinogen. Falling fibrinogen with lengthening clotting times identifies disseminated intravascular coagulation early, when plasma, cryoprecipitate and fibrinogen can still stay ahead of it.",
+        "Group and crossmatch on arrival and keep blood ready, activating the massive transfusion protocol for ongoing major loss. A shocked mother can need transfusion within minutes, and waiting for the crossmatch then is waiting too long.",
+        "Look inside: inspect the placenta and membranes for completeness, examine the cervix, vagina and perineum under good light for tears, and use bedside ultrasound to check for retained tissue or clots distending the cavity. Examination under anaesthesia follows when the cause stays unclear or repair needs it.",
+        "Add arterial blood gas with lactate where loss is major, and renal function with electrolytes during resuscitation. Rising lactate with a falling base means tissues are still underperfused whatever the pressure reads."
+      ],
+      "kind": "investigation",
+      "media": [],
+      "oneLine": "Measure the loss, count the blood, test the clotting, look inside",
+      "pitfalls": [
+        "Filing one normal haemoglobin as reassurance, when haemodilution and equilibration take hours and the count always lags the bleed.",
+        "Omitting fibrinogen from the clotting screen, which is the earliest marker of consumption and the trigger for cryoprecipitate and fibrinogen replacement.",
+        "Delaying uterotonics and tranexamic acid while waiting for results, when the first drugs are clinical and the results only grade and guide."
+      ],
+      "probes": [
+        {
+          "a": "Quantified blood loss with continuous vitals and urine output, full blood count with serial haemoglobin, coagulation screen including fibrinogen, group and crossmatch with transfusion readiness, placental check with genital tract inspection and bedside ultrasound for retained tissue.",
+          "accept": [
+            "quantified",
+            "haemoglobin",
+            "fibrinogen",
+            "crossmatch",
+            "ultrasound",
+            "retained"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "What is the initial investigation set in postpartum haemorrhage?"
+        },
+        {
+          "a": "Because equilibration after acute loss takes hours, so the first count still shows the pre-bleed blood while the circulation is already diluted and losing; only serial values show whether bleeding continues.",
+          "accept": [
+            "equilibration",
+            "pre-bleed",
+            "serial",
+            "continues"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why does one early normal haemoglobin never reassure in acute bleeding?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "postpartum_haemorrhage: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Green-top Guideline 52: Postpartum haemorrhage, prevention and management",
+          "source": "RCOG"
+        }
+      ],
+      "system": "obstetrics",
+      "title": "Confirming and grading the bleeding",
+      "why": "Each test here protects a different decision: the loss count triggers transfusion, the clotting triggers blood products, the scan triggers exploration, and the crossmatch keeps blood ahead of need. Ordered together at arrival, they turn a frightened estimate into a graded emergency with a plan."
+    },
+    "skill.pph.diagnosis": {
+      "body": "Postpartum haemorrhage is a clinical diagnosis made at the bedside from excessive measured bleeding with its cause and its shock. Investigations support and grade it, but none of them overrules the picture, and waiting for proof while she bleeds is the cardinal error.",
+      "id": "skill.pph.diagnosis",
+      "keyPoints": [
+        "Diagnose on excessive bleeding after birth with its cause: boggy uterus easing with massage for atony, firm uterus with brisk bleeding for trauma, suspect placenta for tissue, oozing sites for clotting failure. With the cause in hand, manage at once.",
+        "Classify as primary within 24 hours or secondary from 24 hours to about 12 weeks, because secondary bleeding with fever and foul lochia means retained tissue with infection, needing exploration and antibiotics alongside resuscitation.",
+        "Grade severity by quantified loss with maternal response together: tachycardia, narrowing pulse pressure, tachypnoea, thirst and restlessness, then falling urine, cold peripheries and drowsiness. Shock with modest visible loss means concealed bleeding until proven otherwise.",
+        "Use bedside ultrasound to support retained tissue or clot, not to confirm atony or trauma, which are clinical. An empty contracting cavity with continued bleeding sends you back to tears and clotting, not to more oxytocin.",
+        "Confirm after control from the placenta, the exploration findings and the response: a missing cotyledon explains tissue, a repaired cervical tear explains trauma, a rising fibrinogen with stable vitals confirms recovery. The loop closes only when bleeding stops and stays stopped.",
+        "Record time of birth, quantified loss, placental state, tone, vitals with urine output, clotting results and blood given as one severity set. That set, repeated, is what tells you whether she is holding or slipping."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "Clinical diagnosis graded by cause, quantified loss and shock",
+      "pitfalls": [
+        "Waiting for the haemoglobin to fall before acting, when vitals and measured loss already declare major bleeding hours earlier.",
+        "Grading by linen alone and missing a major bleed into a haematoma or the broad ligament that the pulse and urine already declare.",
+        "Repeating uterotonics for bleeding from an unrepaired tear, when the firm uterus already said drugs are not the answer."
+      ],
+      "probes": [
+        {
+          "a": "Excessive bleeding after birth with its cause from tone and inspection, classified as primary or secondary, graded by quantified loss with pulse pressure urine and clotting status.",
+          "accept": [
+            "excessive",
+            "tone",
+            "primary",
+            "secondary",
+            "quantified",
+            "shock"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "How is postpartum haemorrhage diagnosed and graded?"
+        },
+        {
+          "a": "Because primary bleeding is atony or trauma needing immediate resuscitation and cause treatment, while secondary bleeding with fever and foul discharge is retained tissue with infection needing exploration and antibiotics.",
+          "accept": [
+            "atony",
+            "trauma",
+            "infection",
+            "exploration",
+            "antibiotics"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why does primary versus secondary change the management?"
+        },
+        {
+          "a": "An empty cavity with continued bleeding excludes retained tissue as the driver, so the search moves to tears and clotting failure, and further uterotonics without that search waste the window for repair and products.",
+          "accept": [
+            "empty",
+            "tears",
+            "clotting",
+            "repair"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "The scan shows an empty cavity but she still bleeds. What now?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "postpartum_haemorrhage: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Postpartum haemorrhage",
+          "source": "Williams Obstetrics"
+        }
+      ],
+      "system": "obstetrics",
+      "title": "Diagnosis and severity",
+      "why": "There is no blood test that says haemorrhage, and the count always lags the bleed. Owning the diagnosis as a clinical one, graded by how she compensates and what her uterus feels like, is what lets you act on the picture instead of waiting for a result that arrives after the collapse."
+    },
+    "skill.pph.differential": {
+      "body": "Every bleed after birth is worked through the four Ts in order, and every secondary bleed re-asks the list with infection added. The bedside discriminators are uterine tone, the state of the placenta, what inspection finds, and whether the blood still clots.",
+      "id": "skill.pph.differential",
+      "keyPoints": [
+        "Uterine atony: boggy high uterus with steady bleeding that eases on massage. The commonest cause, favoured by grand multiparity, overdistension, prolonged or augmented labour, and a full bladder, which must always be emptied first.",
+        "Genital tract trauma: firm contracted uterus with continued bright bleeding, or a growing vulval haematoma with severe pain. Cervical, vaginal and perineal tears, episiotomy bleeding and haematomas belong here; inspection under good light finds them.",
+        "Retained tissue: bleeding that persists despite a contracting uterus and full uterotonics, with a placenta noted incomplete or membranes ragged. Bedside ultrasound shows echogenic material or clot distending the cavity.",
+        "Placenta accreta spectrum: difficult or piecemeal placental delivery with torrential bleeding, favoured by a previous caesarean scar with a low lying placenta. Suspect it before pulling harder, because traction worsens it.",
+        "Coagulopathy: oozing from every puncture with blood that will not clot, following abruption, severe pre-eclampsia, long dead fetus, amniotic fluid embolism, or dilution after massive fluids. The laboratory shows falling fibrinogen with lengthening times.",
+        "Uterine inversion: sudden shock with a mass at the introitus and no fundus above, after cord traction or fundal pressure. Uterine rupture: collapse with abdominal pain and a high presenting part that recedes, in a scarred uterus in labour.",
+        "Secondary bleeding: retained tissue and endometritis with fever and foul lochia days to weeks later, subinvolution, and rarely choriocarcinoma or pseudoaneurysm with recurrent heavy bleeds. Fever with bleeding after the first day is infection with tissue until proven otherwise."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "Atony against tears, tissue, clotting failure and inversion",
+      "pitfalls": [
+        "Stopping at atony when a tear bleeds beside it, because nobody inspected under good light after the uterus firmed.",
+        "Pulling harder on a stuck placenta that is really accreta, turning a controlled problem into torrential bleeding.",
+        "Treating secondary bleeding as simple atony with more uterotonics, when fever with foul lochia means exploration and antibiotics."
+      ],
+      "probes": [
+        {
+          "a": "Atony gives a boggy uterus easing with massage, trauma gives a firm uterus with continued bright bleeding, tissue gives persistent bleeding with an incomplete placenta, coagulopathy gives oozing sites with unclotting blood, inversion gives shock with a mass at the introitus.",
+          "accept": [
+            "boggy",
+            "firm",
+            "incomplete",
+            "oozing",
+            "introitus"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "Contrast the four causes of primary bleeding."
+        },
+        {
+          "a": "Because traction on an adherent placenta tears through the wall and opens vessels that cannot contract shut, so the rule is to suspect accreta from the scar with a low placenta and stop pulling, moving to theatre with blood ready.",
+          "accept": [
+            "adherent",
+            "traction",
+            "theatre",
+            "blood"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why must traction stop when accreta is suspected?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "postpartum_haemorrhage: additionalDifferentials",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Green-top Guideline 52: Postpartum haemorrhage, prevention and management",
+          "source": "RCOG"
+        }
+      ],
+      "system": "obstetrics",
+      "title": "Differential diagnosis",
+      "why": "The wrong cause actively harms: more oxytocin on a tear wastes the repair window, traction on accreta opens a flood, and uterotonics alone on retained infected tissue miss the exploration. A differential built on tone, placenta, inspection and clotting keeps all three errors from happening."
+    },
+    "skill.tx.pph": {
+      "body": "Treat every postpartum bleed as resuscitation and cause treatment running together: fluids and blood for the shock, massage and uterotonics for atony, tranexamic acid early for all major bleeding, then the cause-directed step, then escalation without delay. Prevent the next bleed with active management of every third stage.",
+      "dosingNote": "This module teaches management at the level of drug class and principle, quoting only the regimens as stated in the cited book and guideline sources below. All agents, doses, routes and regimens must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "id": "skill.tx.pph",
+      "keyPoints": [
+        "RESUSCITATE at once: call for help and the obstetric emergency team, two wide bore intravenous lines, warmed fluids, oxygen, continuous vitals with strict urine output, and blood transfusion for major loss without waiting for laboratory permission. Keep her warm and nil by mouth.",
+        "MASSAGE the uterus and EMPTY the bladder: firm rhythmic fundal massage expresses clot and stimulates contraction, and a full bladder splints the womb and must be catheterised. Bleeding that eases with massage confirms atony and buys the drugs time.",
+        "GIVE uterotonics stepwise: oxytocin as the first line, with 10 units for active management of the third stage as the cited book states; ergometrine 0.2 mg intramuscularly at the anterior shoulder where oxytocin is not available, or Syntometrine with oxytocin 5 IU plus ergometrine 0.5 mg as the book describes it; carboprost 0.25 mg intramuscularly, repeatable every 15 minutes up to 8 doses for persisting atony, moving to theatre after the second dose as the book advises; misoprostol 400 to 1000 micrograms for PPH where injectables are unavailable, as the book ranges it.",
+        "CHOOSE drugs she can survive: never ergometrine in pre-eclampsia, eclampsia, hypertension or cardiac disease, where it provokes hypertensive and coronary events; never carboprost in asthma, where it provokes bronchospasm. The wrong uterotonic trades bleeding for a second emergency.",
+        "GIVE tranexamic acid early in every major bleed, alongside resuscitation rather than after it. Early administration reduces death from bleeding; late administration loses the benefit.",
+        "TREAT the cause found: repair cervical, vaginal and perineal tears in layers under good light with an assistant; evacuate retained tissue by controlled cord traction where indicated or manual removal under anaesthesia; correct coagulopathy with plasma, cryoprecipitate, fibrinogen and platelets guided by the clotting screen.",
+        "ESCALATE mechanically then surgically when bleeding persists: bimanual compression, then intrauterine balloon tamponade, using a Foley catheter where a Rusch balloon is unavailable; then compression sutures such as B-Lynch, uterine or internal iliac ligation and embolisation where available, with hysterectomy as the last resort that saves life at the cost of fertility.",
+        "PREVENT and REFER: actively manage every third stage with a prophylactic uterotonic, controlled cord traction and delayed cord clamping; from a primary centre resuscitate, give the first drugs and tranexamic acid, then refer early to a unit with blood, theatre and critical care, using free ambulance transport and cashless mother child schemes where available."
+      ],
+      "kind": "treatment",
+      "media": [],
+      "oneLine": "Resuscitate, contract, tranexamic acid early, treat the cause, escalate",
+      "pitfalls": [
+        "Undertransfusing while waiting for the haemoglobin report, when shock with measured major loss already mandates blood.",
+        "Repeating uterotonics on a firm uterus with an unrepaired tear, when inspection and suture are the treatment.",
+        "Giving ergometrine to a pre-eclamptic or carboprost to an asthmatic, adding a hypertensive crisis or bronchospasm to the bleed.",
+        "Escalating too slowly to tamponade and theatre while medical therapy visibly fails, losing the window where the uterus can still be saved.",
+        "Keeping a shocked coagulopathic mother at a primary centre for want of transport planning instead of resuscitating and referring at once."
+      ],
+      "probes": [
+        {
+          "a": "Simultaneous resuscitation with fluids blood and oxygen, uterine massage with bladder emptying, stepwise uterotonics chosen for her comorbidities, early tranexamic acid, cause treatment by repair evacuation or products, then tamponade and surgery, with active third-stage prevention and early referral.",
+          "accept": [
+            "resuscitation",
+            "massage",
+            "uterotonics",
+            "tranexamic",
+            "repair",
+            "tamponade",
+            "referral"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "State the principles of managing postpartum haemorrhage."
+        },
+        {
+          "a": "Because ergometrine provokes hypertensive episodes with cerebrovascular and coronary events, so in raised pressure the safe uterotonics are oxytocin with carboprost or misoprostol where available, chosen against her asthma and cardiac history too.",
+          "accept": [
+            "hypertensive",
+            "oxytocin",
+            "carboprost",
+            "misoprostol"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "A bleeding mother is also pre-eclamptic. Which uterotonic is forbidden and what replaces it?"
+        },
+        {
+          "a": "Resuscitate with blood and correct clotting first, keep massage and uterotonics running, tamponade with a balloon, and move to theatre for compression sutures or ligation without further delay, since persisting atony after full medical therapy is a surgical problem.",
+          "accept": [
+            "resuscitate",
+            "tamponade",
+            "theatre",
+            "sutures",
+            "surgical"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Bleeding persists after oxytocin, ergometrine and two carboprost doses. What is the plan?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "postpartum_haemorrhage: management",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "WHO recommendations for the prevention and treatment of postpartum haemorrhage",
+          "source": "WHO"
+        }
+      ],
+      "system": "obstetrics",
+      "title": "Managing postpartum haemorrhage",
+      "why": "Deaths from bleeding after birth cluster in the first hours and turn on order, not on knowledge: resuscitation while drugs are given, the cause treated while blood is arranged, and escalation before collapse. Getting that order right, with drugs she can survive, is what brings both mother and uterus through."
     }
-   ],
-   "review": {
-    "status": "ai_drafted"
-   },
-   "rubric": [],
-   "sources": [
-    {
-     "locator": "postpartum_haemorrhage: redFlags",
-     "source": "StewardMD Clinical KB"
-    },
-    {
-     "locator": "Green-top Guideline 52: Postpartum haemorrhage, prevention and management",
-     "source": "RCOG"
-    }
-   ],
-   "system": "obstetrics",
-   "title": "The haemorrhage picture",
-   "why": "Bleeding mothers die of underestimation: the linen looks modest, the young mother compensates until she collapses, and the real cause hides behind the obvious one. Reading loss, tone, source and clotting as one connected picture is what makes the diagnosis before the collapse, not after."
   },
-  "skill.pph.summary": {
-   "body": "A good haemorrhage summary is one paragraph that carries the cause and the urgency. State who she is, how she delivered and how long ago, the quantified loss with the state of the placenta, the uterine findings, then maternal status, and finish with severity and the plan the case demands.",
-   "id": "skill.pph.summary",
-   "keyPoints": [
-    "Open with parity, mode of delivery and time since birth: a 24 year old second gravida, normal vaginal delivery three hours ago, 900 mL measured loss. The listener should suspect atony before you say it.",
-    "State the bleed as primary or secondary with an honest quantified amount, then the placenta: complete or suspect, and whether the third stage was managed actively. A suspect placenta changes the whole plan.",
-    "Give uterine tone as its own sentence: boggy high fundus easing with massage, or firm contracted uterus with continued bleeding. Tone is the cause pointer and belongs before any plan.",
-    "Give maternal status next: pulse, pressure, pallor, urine output and clotting signs, stated plainly as stable or shocked. Never let reassuring linen soften a shocked set of vitals.",
-    "Close with severity and intent: moderate primary atonic haemorrhage responding to uterotonics, or severe traumatic bleeding for examination under anaesthesia and repair. End with blood readiness, referral need and counselling about the next pregnancy."
-   ],
-   "kind": "reasoning",
-   "media": [],
-   "oneLine": "One paragraph that carries the cause and the urgency",
-   "pitfalls": [
-    "Summarising findings without stating uterine tone, which leaves the listener with facts and no cause.",
-    "Quoting the linen instead of a quantified loss, so nobody can tell whether she has lost 300 mL or a litre.",
-    "Presenting the haemoglobin before the clinical picture, when the count lags the bleeding by hours and the vitals decide now."
-   ],
-   "probes": [
-    {
-     "a": "Parity and delivery details with time since birth, quantified loss with placental state, uterine tone and fundal findings, maternal pulse pressure urine and clotting status, then severity and the cause-directed plan.",
-     "accept": [
-      "parity",
-      "quantified",
-      "tone",
-      "maternal",
-      "severity",
-      "plan"
-     ],
-     "level": 1,
-     "minMatch": 3,
-     "q": "What must a haemorrhage summary contain, in order?"
-    },
-    {
-     "a": "Because tone points to the cause, atony versus trauma versus tissue, and each cause needs different hands, so a summary without tone cannot justify its plan.",
-     "accept": [
-      "cause",
-      "atony",
-      "trauma",
-      "hands"
-     ],
-     "level": 2,
-     "minMatch": 2,
-     "q": "Why does tone belong in the summary before the plan?"
-    }
-   ],
-   "review": {
-    "status": "ai_drafted"
-   },
-   "rubric": [],
-   "sources": [
-    {
-     "locator": "postpartum_haemorrhage: clinicalPearls",
-     "source": "StewardMD Clinical KB"
-    },
-    {
-     "locator": "Postpartum haemorrhage",
-     "source": "Williams Obstetrics"
-    }
-   ],
-   "system": "obstetrics",
-   "title": "The clinical summary",
-   "why": "Consultants and examiners decide from the summary, not from the recitation. A summary that orders the facts as tone then maternal status then plan mirrors exactly how the management choice is made, so the next step sounds inevitable rather than guessed."
+  "osce": {
+    "stations": [
+      {
+        "examinerQuestions": [
+          "Show me how you assess uterine tone and estimate the loss without delaying resuscitation, and tell me what a boggy fundus means.",
+          "Her uterus is firm and well contracted yet bright bleeding continues. What does that change, and what is the single most urgent next step?",
+          "Her pulse is rising while the linen looks modest. What does that mismatch mean, and which two bedside measures would you repeat right now?"
+        ],
+        "id": "osce.pph.assess",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.gen.vitals",
+          "skill.gen.appearance",
+          "skill.exam.obg.fundal_height",
+          "skill.exam.obg.preg_prep_inspect",
+          "skill.exam.obg.puerperal_exam"
+        ],
+        "task": "This 24-year-old woman delivered normally three hours ago and is now bleeding heavily with clots. Assess her for postpartum haemorrhage and present your findings with a plan.",
+        "title": "Assess the bleeding mother after birth"
+      },
+      {
+        "examinerQuestions": [
+          "Which two facts from her antenatal and labour history already marked her as high risk before she bled?",
+          "She mentions the placenta came in pieces and the attendant pulled on the cord. Why does that matter now, and what would you look for?",
+          "She is breathless with oozing venepunctures. Which uterotonics are now forbidden or risky, and where would you refer her from a primary centre tonight?"
+        ],
+        "id": "osce.pph.history",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.pph.bleed_story",
+          "skill.hx.pph.risk"
+        ],
+        "task": "This 24-year-old woman is bleeding heavily three hours after a normal delivery. Take a focused history for postpartum haemorrhage in six minutes and be ready to name the likely cause.",
+        "title": "Take a history and name the cause"
+      }
+    ]
   },
-  "skill.ix.pph.workup": {
-   "body": "Investigations in a bleeding mother answer four questions at once: how much has she really lost, is her clotting failing, is anything left inside, and is blood ready? Order them together on arrival, because haemorrhage outruns sequential testing, and never let a result delay massage, uterotonics or tranexamic acid.",
-   "id": "skill.ix.pph.workup",
-   "keyPoints": [
-    "Measure the loss quantitatively from the start: calibrated drapes or a kidney tray, pad weights, and continuous pulse, pressure, breathing rate and urine output. Quantified loss with shock index thinking replaces visual guessing throughout.",
-    "Send a full blood count with serial haemoglobin. A single early haemoglobin reflects the pre-bleed state, not the loss; only falling values on repeat sampling track ongoing bleeding, with the platelet trend warning of consumption.",
-    "Send a coagulation screen including fibrinogen. Falling fibrinogen with lengthening clotting times identifies disseminated intravascular coagulation early, when plasma, cryoprecipitate and fibrinogen can still stay ahead of it.",
-    "Group and crossmatch on arrival and keep blood ready, activating the massive transfusion protocol for ongoing major loss. A shocked mother can need transfusion within minutes, and waiting for the crossmatch then is waiting too long.",
-    "Look inside: inspect the placenta and membranes for completeness, examine the cervix, vagina and perineum under good light for tears, and use bedside ultrasound to check for retained tissue or clots distending the cavity. Examination under anaesthesia follows when the cause stays unclear or repair needs it.",
-    "Add arterial blood gas with lactate where loss is major, and renal function with electrolytes during resuscitation. Rising lactate with a falling base means tissues are still underperfused whatever the pressure reads."
-   ],
-   "kind": "investigation",
-   "media": [],
-   "oneLine": "Measure the loss, count the blood, test the clotting, look inside",
-   "pitfalls": [
-    "Filing one normal haemoglobin as reassurance, when haemodilution and equilibration take hours and the count always lags the bleed.",
-    "Omitting fibrinogen from the clotting screen, which is the earliest marker of consumption and the trigger for cryoprecipitate and fibrinogen replacement.",
-    "Delaying uterotonics and tranexamic acid while waiting for results, when the first drugs are clinical and the results only grade and guide."
-   ],
-   "probes": [
-    {
-     "a": "Quantified blood loss with continuous vitals and urine output, full blood count with serial haemoglobin, coagulation screen including fibrinogen, group and crossmatch with transfusion readiness, placental check with genital tract inspection and bedside ultrasound for retained tissue.",
-     "accept": [
-      "quantified",
-      "haemoglobin",
-      "fibrinogen",
-      "crossmatch",
-      "ultrasound",
-      "retained"
-     ],
-     "level": 1,
-     "minMatch": 3,
-     "q": "What is the initial investigation set in postpartum haemorrhage?"
-    },
-    {
-     "a": "Because equilibration after acute loss takes hours, so the first count still shows the pre-bleed blood while the circulation is already diluted and losing; only serial values show whether bleeding continues.",
-     "accept": [
-      "equilibration",
-      "pre-bleed",
-      "serial",
-      "continues"
-     ],
-     "level": 2,
-     "minMatch": 2,
-     "q": "Why does one early normal haemoglobin never reassure in acute bleeding?"
-    }
-   ],
-   "review": {
-    "status": "ai_drafted"
-   },
-   "rubric": [],
-   "sources": [
-    {
-     "locator": "postpartum_haemorrhage: additionalInvestigations",
-     "source": "StewardMD Clinical KB"
-    },
-    {
-     "locator": "Green-top Guideline 52: Postpartum haemorrhage, prevention and management",
-     "source": "RCOG"
-    }
-   ],
-   "system": "obstetrics",
-   "title": "Confirming and grading the bleeding",
-   "why": "Each test here protects a different decision: the loss count triggers transfusion, the clotting triggers blood products, the scan triggers exploration, and the crossmatch keeps blood ahead of need. Ordered together at arrival, they turn a frightened estimate into a graded emergency with a plan."
-  },
-  "skill.pph.diagnosis": {
-   "body": "Postpartum haemorrhage is a clinical diagnosis made at the bedside from excessive measured bleeding with its cause and its shock. Investigations support and grade it, but none of them overrules the picture, and waiting for proof while she bleeds is the cardinal error.",
-   "id": "skill.pph.diagnosis",
-   "keyPoints": [
-    "Diagnose on excessive bleeding after birth with its cause: boggy uterus easing with massage for atony, firm uterus with brisk bleeding for trauma, suspect placenta for tissue, oozing sites for clotting failure. With the cause in hand, manage at once.",
-    "Classify as primary within 24 hours or secondary from 24 hours to about 12 weeks, because secondary bleeding with fever and foul lochia means retained tissue with infection, needing exploration and antibiotics alongside resuscitation.",
-    "Grade severity by quantified loss with maternal response together: tachycardia, narrowing pulse pressure, tachypnoea, thirst and restlessness, then falling urine, cold peripheries and drowsiness. Shock with modest visible loss means concealed bleeding until proven otherwise.",
-    "Use bedside ultrasound to support retained tissue or clot, not to confirm atony or trauma, which are clinical. An empty contracting cavity with continued bleeding sends you back to tears and clotting, not to more oxytocin.",
-    "Confirm after control from the placenta, the exploration findings and the response: a missing cotyledon explains tissue, a repaired cervical tear explains trauma, a rising fibrinogen with stable vitals confirms recovery. The loop closes only when bleeding stops and stays stopped.",
-    "Record time of birth, quantified loss, placental state, tone, vitals with urine output, clotting results and blood given as one severity set. That set, repeated, is what tells you whether she is holding or slipping."
-   ],
-   "kind": "reasoning",
-   "media": [],
-   "oneLine": "Clinical diagnosis graded by cause, quantified loss and shock",
-   "pitfalls": [
-    "Waiting for the haemoglobin to fall before acting, when vitals and measured loss already declare major bleeding hours earlier.",
-    "Grading by linen alone and missing a major bleed into a haematoma or the broad ligament that the pulse and urine already declare.",
-    "Repeating uterotonics for bleeding from an unrepaired tear, when the firm uterus already said drugs are not the answer."
-   ],
-   "probes": [
-    {
-     "a": "Excessive bleeding after birth with its cause from tone and inspection, classified as primary or secondary, graded by quantified loss with pulse pressure urine and clotting status.",
-     "accept": [
-      "excessive",
-      "tone",
-      "primary",
-      "secondary",
-      "quantified",
-      "shock"
-     ],
-     "level": 1,
-     "minMatch": 3,
-     "q": "How is postpartum haemorrhage diagnosed and graded?"
-    },
-    {
-     "a": "Because primary bleeding is atony or trauma needing immediate resuscitation and cause treatment, while secondary bleeding with fever and foul discharge is retained tissue with infection needing exploration and antibiotics.",
-     "accept": [
-      "atony",
-      "trauma",
-      "infection",
-      "exploration",
-      "antibiotics"
-     ],
-     "level": 2,
-     "minMatch": 2,
-     "q": "Why does primary versus secondary change the management?"
-    },
-    {
-     "a": "An empty cavity with continued bleeding excludes retained tissue as the driver, so the search moves to tears and clotting failure, and further uterotonics without that search waste the window for repair and products.",
-     "accept": [
-      "empty",
-      "tears",
-      "clotting",
-      "repair"
-     ],
-     "level": 3,
-     "minMatch": 2,
-     "q": "The scan shows an empty cavity but she still bleeds. What now?"
-    }
-   ],
-   "review": {
-    "status": "ai_drafted"
-   },
-   "rubric": [],
-   "sources": [
-    {
-     "locator": "postpartum_haemorrhage: clinicalPearls",
-     "source": "StewardMD Clinical KB"
-    },
-    {
-     "locator": "Postpartum haemorrhage",
-     "source": "Williams Obstetrics"
-    }
-   ],
-   "system": "obstetrics",
-   "title": "Diagnosis and severity",
-   "why": "There is no blood test that says haemorrhage, and the count always lags the bleed. Owning the diagnosis as a clinical one, graded by how she compensates and what her uterus feels like, is what lets you act on the picture instead of waiting for a result that arrives after the collapse."
-  },
-  "skill.pph.differential": {
-   "body": "Every bleed after birth is worked through the four Ts in order, and every secondary bleed re-asks the list with infection added. The bedside discriminators are uterine tone, the state of the placenta, what inspection finds, and whether the blood still clots.",
-   "id": "skill.pph.differential",
-   "keyPoints": [
-    "Uterine atony: boggy high uterus with steady bleeding that eases on massage. The commonest cause, favoured by grand multiparity, overdistension, prolonged or augmented labour, and a full bladder, which must always be emptied first.",
-    "Genital tract trauma: firm contracted uterus with continued bright bleeding, or a growing vulval haematoma with severe pain. Cervical, vaginal and perineal tears, episiotomy bleeding and haematomas belong here; inspection under good light finds them.",
-    "Retained tissue: bleeding that persists despite a contracting uterus and full uterotonics, with a placenta noted incomplete or membranes ragged. Bedside ultrasound shows echogenic material or clot distending the cavity.",
-    "Placenta accreta spectrum: difficult or piecemeal placental delivery with torrential bleeding, favoured by a previous caesarean scar with a low lying placenta. Suspect it before pulling harder, because traction worsens it.",
-    "Coagulopathy: oozing from every puncture with blood that will not clot, following abruption, severe pre-eclampsia, long dead fetus, amniotic fluid embolism, or dilution after massive fluids. The laboratory shows falling fibrinogen with lengthening times.",
-    "Uterine inversion: sudden shock with a mass at the introitus and no fundus above, after cord traction or fundal pressure. Uterine rupture: collapse with abdominal pain and a high presenting part that recedes, in a scarred uterus in labour.",
-    "Secondary bleeding: retained tissue and endometritis with fever and foul lochia days to weeks later, subinvolution, and rarely choriocarcinoma or pseudoaneurysm with recurrent heavy bleeds. Fever with bleeding after the first day is infection with tissue until proven otherwise."
-   ],
-   "kind": "reasoning",
-   "media": [],
-   "oneLine": "Atony against tears, tissue, clotting failure and inversion",
-   "pitfalls": [
-    "Stopping at atony when a tear bleeds beside it, because nobody inspected under good light after the uterus firmed.",
-    "Pulling harder on a stuck placenta that is really accreta, turning a controlled problem into torrential bleeding.",
-    "Treating secondary bleeding as simple atony with more uterotonics, when fever with foul lochia means exploration and antibiotics."
-   ],
-   "probes": [
-    {
-     "a": "Atony gives a boggy uterus easing with massage, trauma gives a firm uterus with continued bright bleeding, tissue gives persistent bleeding with an incomplete placenta, coagulopathy gives oozing sites with unclotting blood, inversion gives shock with a mass at the introitus.",
-     "accept": [
-      "boggy",
-      "firm",
-      "incomplete",
-      "oozing",
-      "introitus"
-     ],
-     "level": 1,
-     "minMatch": 3,
-     "q": "Contrast the four causes of primary bleeding."
-    },
-    {
-     "a": "Because traction on an adherent placenta tears through the wall and opens vessels that cannot contract shut, so the rule is to suspect accreta from the scar with a low placenta and stop pulling, moving to theatre with blood ready.",
-     "accept": [
-      "adherent",
-      "traction",
-      "theatre",
-      "blood"
-     ],
-     "level": 2,
-     "minMatch": 2,
-     "q": "Why must traction stop when accreta is suspected?"
-    }
-   ],
-   "review": {
-    "status": "ai_drafted"
-   },
-   "rubric": [],
-   "sources": [
-    {
-     "locator": "postpartum_haemorrhage: additionalDifferentials",
-     "source": "StewardMD Clinical KB"
-    },
-    {
-     "locator": "Green-top Guideline 52: Postpartum haemorrhage, prevention and management",
-     "source": "RCOG"
-    }
-   ],
-   "system": "obstetrics",
-   "title": "Differential diagnosis",
-   "why": "The wrong cause actively harms: more oxytocin on a tear wastes the repair window, traction on accreta opens a flood, and uterotonics alone on retained infected tissue miss the exploration. A differential built on tone, placenta, inspection and clotting keeps all three errors from happening."
-  },
-  "skill.tx.pph": {
-   "body": "Treat every postpartum bleed as resuscitation and cause treatment running together: fluids and blood for the shock, massage and uterotonics for atony, tranexamic acid early for all major bleeding, then the cause-directed step, then escalation without delay. Prevent the next bleed with active management of every third stage.",
-   "dosingNote": "This module teaches management at the level of drug class and principle, quoting only the regimens as stated in the cited book and guideline sources below. All agents, doses, routes and regimens must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
-   "id": "skill.tx.pph",
-   "keyPoints": [
-    "RESUSCITATE at once: call for help and the obstetric emergency team, two wide bore intravenous lines, warmed fluids, oxygen, continuous vitals with strict urine output, and blood transfusion for major loss without waiting for laboratory permission. Keep her warm and nil by mouth.",
-    "MASSAGE the uterus and EMPTY the bladder: firm rhythmic fundal massage expresses clot and stimulates contraction, and a full bladder splints the womb and must be catheterised. Bleeding that eases with massage confirms atony and buys the drugs time.",
-    "GIVE uterotonics stepwise: oxytocin as the first line, with 10 units for active management of the third stage as the cited book states; ergometrine 0.2 mg intramuscularly at the anterior shoulder where oxytocin is not available, or Syntometrine with oxytocin 5 IU plus ergometrine 0.5 mg as the book describes it; carboprost 0.25 mg intramuscularly, repeatable every 15 minutes up to 8 doses for persisting atony, moving to theatre after the second dose as the book advises; misoprostol 400 to 1000 micrograms for PPH where injectables are unavailable, as the book ranges it.",
-    "CHOOSE drugs she can survive: never ergometrine in pre-eclampsia, eclampsia, hypertension or cardiac disease, where it provokes hypertensive and coronary events; never carboprost in asthma, where it provokes bronchospasm. The wrong uterotonic trades bleeding for a second emergency.",
-    "GIVE tranexamic acid early in every major bleed, alongside resuscitation rather than after it. Early administration reduces death from bleeding; late administration loses the benefit.",
-    "TREAT the cause found: repair cervical, vaginal and perineal tears in layers under good light with an assistant; evacuate retained tissue by controlled cord traction where indicated or manual removal under anaesthesia; correct coagulopathy with plasma, cryoprecipitate, fibrinogen and platelets guided by the clotting screen.",
-    "ESCALATE mechanically then surgically when bleeding persists: bimanual compression, then intrauterine balloon tamponade, using a Foley catheter where a Rusch balloon is unavailable; then compression sutures such as B-Lynch, uterine or internal iliac ligation and embolisation where available, with hysterectomy as the last resort that saves life at the cost of fertility.",
-    "PREVENT and REFER: actively manage every third stage with a prophylactic uterotonic, controlled cord traction and delayed cord clamping; from a primary centre resuscitate, give the first drugs and tranexamic acid, then refer early to a unit with blood, theatre and critical care, using free ambulance transport and cashless mother child schemes where available."
-   ],
-   "kind": "treatment",
-   "media": [],
-   "oneLine": "Resuscitate, contract, tranexamic acid early, treat the cause, escalate",
-   "pitfalls": [
-    "Undertransfusing while waiting for the haemoglobin report, when shock with measured major loss already mandates blood.",
-    "Repeating uterotonics on a firm uterus with an unrepaired tear, when inspection and suture are the treatment.",
-    "Giving ergometrine to a pre-eclamptic or carboprost to an asthmatic, adding a hypertensive crisis or bronchospasm to the bleed.",
-    "Escalating too slowly to tamponade and theatre while medical therapy visibly fails, losing the window where the uterus can still be saved.",
-    "Keeping a shocked coagulopathic mother at a primary centre for want of transport planning instead of resuscitating and referring at once."
-   ],
-   "probes": [
-    {
-     "a": "Simultaneous resuscitation with fluids blood and oxygen, uterine massage with bladder emptying, stepwise uterotonics chosen for her comorbidities, early tranexamic acid, cause treatment by repair evacuation or products, then tamponade and surgery, with active third-stage prevention and early referral.",
-     "accept": [
-      "resuscitation",
-      "massage",
-      "uterotonics",
-      "tranexamic",
-      "repair",
-      "tamponade",
-      "referral"
-     ],
-     "level": 1,
-     "minMatch": 3,
-     "q": "State the principles of managing postpartum haemorrhage."
-    },
-    {
-     "a": "Because ergometrine provokes hypertensive episodes with cerebrovascular and coronary events, so in raised pressure the safe uterotonics are oxytocin with carboprost or misoprostol where available, chosen against her asthma and cardiac history too.",
-     "accept": [
-      "hypertensive",
-      "oxytocin",
-      "carboprost",
-      "misoprostol"
-     ],
-     "level": 2,
-     "minMatch": 2,
-     "q": "A bleeding mother is also pre-eclamptic. Which uterotonic is forbidden and what replaces it?"
-    },
-    {
-     "a": "Resuscitate with blood and correct clotting first, keep massage and uterotonics running, tamponade with a balloon, and move to theatre for compression sutures or ligation without further delay, since persisting atony after full medical therapy is a surgical problem.",
-     "accept": [
-      "resuscitate",
-      "tamponade",
-      "theatre",
-      "sutures",
-      "surgical"
-     ],
-     "level": 3,
-     "minMatch": 2,
-     "q": "Bleeding persists after oxytocin, ergometrine and two carboprost doses. What is the plan?"
-    }
-   ],
-   "review": {
-    "status": "ai_drafted"
-   },
-   "rubric": [],
-   "sources": [
-    {
-     "locator": "postpartum_haemorrhage: management",
-     "source": "StewardMD Clinical KB"
-    },
-    {
-     "locator": "WHO recommendations for the prevention and treatment of postpartum haemorrhage",
-     "source": "WHO"
-    }
-   ],
-   "system": "obstetrics",
-   "title": "Managing postpartum haemorrhage",
-   "why": "Deaths from bleeding after birth cluster in the first hours and turn on order, not on knowledge: resuscitation while drugs are given, the cause treated while blood is arranged, and escalation before collapse. Getting that order right, with drugs she can survive, is what brings both mother and uterus through."
-  }
- },
- "osce": {
-  "stations": [
-   {
-    "examinerQuestions": [
-     "Show me how you assess uterine tone and estimate the loss without delaying resuscitation, and tell me what a boggy fundus means.",
-     "Her uterus is firm and well contracted yet bright bleeding continues. What does that change, and what is the single most urgent next step?",
-     "Her pulse is rising while the linen looks modest. What does that mismatch mean, and which two bedside measures would you repeat right now?"
-    ],
-    "id": "osce.pph.assess",
-    "seconds": 480,
+  "viva": {
     "skills": [
-     "skill.approach.hygiene",
-     "skill.approach.introduce",
-     "skill.approach.consent",
-     "skill.approach.position",
-     "skill.gen.vitals",
-     "skill.gen.appearance",
-     "skill.exam.obg.fundal_height",
-     "skill.exam.obg.preg_prep_inspect",
-     "skill.exam.obg.puerperal_exam"
-    ],
-    "task": "This 24-year-old woman delivered normally three hours ago and is now bleeding heavily with clots. Assess her for postpartum haemorrhage and present your findings with a plan.",
-    "title": "Assess the bleeding mother after birth"
-   },
-   {
-    "examinerQuestions": [
-     "Which two facts from her antenatal and labour history already marked her as high risk before she bled?",
-     "She mentions the placenta came in pieces and the attendant pulled on the cord. Why does that matter now, and what would you look for?",
-     "She is breathless with oozing venepunctures. Which uterotonics are now forbidden or risky, and where would you refer her from a primary centre tonight?"
-    ],
-    "id": "osce.pph.history",
-    "seconds": 360,
-    "skills": [
-     "skill.approach.introduce",
-     "skill.approach.consent",
-     "skill.hx.chief_complaints",
-     "skill.hx.pph.bleed_story",
-     "skill.hx.pph.risk"
-    ],
-    "task": "This 24-year-old woman is bleeding heavily three hours after a normal delivery. Take a focused history for postpartum haemorrhage in six minutes and be ready to name the likely cause.",
-    "title": "Take a history and name the cause"
-   }
+      "skill.pph.basics",
+      "skill.pph.findings",
+      "skill.pph.differential",
+      "skill.ix.pph.workup",
+      "skill.pph.diagnosis",
+      "skill.tx.pph",
+      "skill.tx.obg.pph_first_response"
+    ]
+  },
+  "cases": [
+    {
+      "diagnosis": {
+        "accept": [
+          "postpartum haemorrhage",
+          "pph",
+          "postpartum hemorrhage"
+        ],
+        "answer": "Primary atonic postpartum haemorrhage three hours after normal vaginal delivery, with measured major loss and maternal tachycardia and hypotension, responding to massage and uterotonics.",
+        "minMatch": 1
+      },
+      "differentialModel": {
+        "accept": [
+          "uterine atony",
+          "retained products of conception",
+          "genital tract trauma",
+          "uterine inversion",
+          "uterine rupture",
+          "secondary postpartum haemorrhage",
+          "disseminated intravascular coagulation",
+          "placenta accreta spectrum"
+        ],
+        "answer": "Primary atonic postpartum haemorrhage. Consider retained tissue, genital tract trauma, uterine inversion, uterine rupture and coagulopathy.",
+        "minMatch": 3
+      },
+      "essentialInvestigations": [
+        "blood_loss",
+        "cbc",
+        "clotting",
+        "crossmatch",
+        "usg"
+      ],
+      "exam": {
+        "skill.exam.obg.fundal_height": {
+          "abnormal": true,
+          "finding": "Fundus at the umbilicus, broad, soft and boggy. It firms under sustained massage and the bleeding visibly eases, then softens again when the hand lifts. Bladder empty after catheterisation."
+        },
+        "skill.exam.obg.preg_prep_inspect": {
+          "abnormal": true,
+          "finding": "Bright red vaginal bleeding with large clots, soaking about one pad every twenty minutes. Right mediolateral episiotomy clean with slight oozing from one angle. No visible cervical tissue or tear on inspection."
+        },
+        "skill.exam.obg.puerperal_exam": {
+          "abnormal": true,
+          "finding": "Uterus bulky and boggy, subtender over the fundus. Heavy red lochia with clots. Perineum shows the episiotomy described above, no haematoma, no foul smell. Calves soft with no tenderness."
+        },
+        "skill.gen.appearance": {
+          "abnormal": true,
+          "finding": "Pale, anxious and thirsty, with cold clammy hands and delayed capillary refill. Restless and breathless when she tries to sit up. No jaundice, no neck swelling."
+        },
+        "skill.gen.vitals": {
+          "abnormal": true,
+          "finding": "Pulse 118 per minute, thready but regular. Blood pressure 86/54 mmHg. Respiratory rate 26 per minute. SpO2 95 percent on air. Temperature 37 C. Urine 40 mL in the last two hours through the catheter."
+        }
+      },
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "history": {
+        "antenatal_visits": {
+          "cues": [
+            "where did you have checkups in this pregnancy",
+            "how many antenatal visits did you complete",
+            "what was your haemoglobin in pregnancy",
+            "was your blood pressure normal in checkups"
+          ],
+          "reply": "Four checkups at the primary health centre. Blood was low, so I took iron tablets. Pressure was normal throughout."
+        },
+        "baby_condition": {
+          "cues": [
+            "did the baby cry at birth",
+            "what is the weight of the baby",
+            "is the baby feeding at the breast",
+            "where is the baby now"
+          ],
+          "reply": "A girl, cried at once, weight two and a half kilos. She is with my mother-in-law and taking the breast."
+        },
+        "bleed_amount": {
+          "cues": [
+            "how many pads or cloths have soaked through",
+            "how often are you changing the pad",
+            "did you pass any large clots",
+            "is the blood flowing continuously or in gushes"
+          ],
+          "reply": "Six cloths soaked in three hours, with clots as big as lemons. It flows steadily and pours in gushes when they press my stomach."
+        },
+        "bleed_onset": {
+          "cues": [
+            "when did the bleeding start after the birth",
+            "did the bleeding start before the placenta came out",
+            "how soon after delivery did heavy bleeding begin",
+            "were you still on the delivery table when it started"
+          ],
+          "reply": "The baby came, then the placenta came after about ten minutes, and the heavy bleeding started almost at once after that. I was still on the table."
+        },
+        "bleeding_tendency": {
+          "cues": [
+            "do your nose or gums bleed without reason",
+            "were your monthly periods very heavy before",
+            "does anyone in your family bleed easily",
+            "do cuts take long to stop bleeding"
+          ],
+          "reply": "No nose or gum bleeds. Periods were normal, four days. Nobody in the family bleeds like this."
+        },
+        "family_support": {
+          "cues": [
+            "who has come with you to the hospital",
+            "is there anyone who can donate blood",
+            "how will you reach the district hospital if referred",
+            "does your family agree to further treatment and operation if needed"
+          ],
+          "reply": "My husband and mother-in-law are here. My brother can give blood. We will go wherever you send us, doctor, and agree to whatever is needed."
+        },
+        "illness_history": {
+          "cues": [
+            "any raised pressure or convulsions in this pregnancy",
+            "do you have sugar disease or thyroid problem",
+            "any fever in the days before delivery",
+            "any bleeding before this delivery in this pregnancy"
+          ],
+          "reply": "No pressure problem, no convulsions, no sugar. Slight fever for one day last week which settled. No bleeding before delivery."
+        },
+        "pain_after_birth": {
+          "cues": [
+            "do you have pain in the lower stomach now",
+            "is there severe pain in the private parts",
+            "are the afterpains continuous or coming and going",
+            "any burning while passing urine"
+          ],
+          "reply": "Dull cramping low down that comes and goes. No severe private-part pain, no swelling there. Passing urine through the tube without burning."
+        },
+        "past_pregnancies": {
+          "cues": [
+            "tell me about your previous pregnancies",
+            "how many children do you have living",
+            "was there any abortion or stillbirth before",
+            "how was your first child delivered"
+          ],
+          "reply": "First a normal delivery, a boy, four years old, with no heavy bleeding. No abortion or stillbirth after that."
+        },
+        "presenting": {
+          "cues": [
+            "what brings you to hospital",
+            "what is the main problem today",
+            "why were you brought here after delivery",
+            "tell me what happened today"
+          ],
+          "key": true,
+          "reply": "Doctor, I delivered three hours ago and since then I am bleeding heavily with clots, feeling dizzy whenever I sit up.",
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "shock_symptoms": {
+          "cues": [
+            "do you feel dizzy on sitting up",
+            "any palpitation or racing of the heart",
+            "are you feeling very thirsty",
+            "have you passed urine since delivery"
+          ],
+          "reply": "Very dizzy when I sit, heart racing, and very thirsty. Only a little urine through the tube since delivery."
+        },
+        "tablets_tobacco": {
+          "cues": [
+            "what tablets are you taking now",
+            "were you given aspirin or blood thinners",
+            "do you use tobacco in any form",
+            "did you take any painkiller today"
+          ],
+          "reply": "Only iron and calcium tablets from the centre. No aspirin, no thinners. No tobacco at all."
+        },
+        "third_stage_care": {
+          "cues": [
+            "were you given an injection after the baby was born",
+            "did the attendant massage your womb after delivery",
+            "was the cord pulled to deliver the placenta",
+            "did anyone press on your stomach after birth"
+          ],
+          "reply": "One injection in the thigh after the baby came. The nurse rubbed my stomach hard and pulled gently on the cord. The placenta came in ten minutes."
+        },
+        "labour_course": {
+          "cues": [
+            "how many hours did the pains last",
+            "was a drip used to speed up the pains",
+            "were forceps or vacuum used for delivery",
+            "was it a normal delivery or caesarean"
+          ],
+          "reply": "Pains from morning till evening, about fourteen hours. A bottle drip was put in the afternoon to strengthen pains. Normal delivery, no instruments, no operation."
+        },
+        "placenta_delivery": {
+          "cues": [
+            "did the placenta come out whole",
+            "who checked the placenta after delivery",
+            "was any piece of the placenta missing",
+            "did all the membranes come out"
+          ],
+          "reply": "The nurse said it came whole and showed it to us. She said both sides look complete. I did not see any missing piece."
+        }
+      },
+      "id": "case.pph.sunita",
+      "initialVitals": {
+        "bpDiastolic": 54,
+        "bpSystolic": 86,
+        "gcs": 15,
+        "hr": 118,
+        "rr": 26,
+        "spo2": 95,
+        "temp": 37
+      },
+      "investigations": {
+        "blood_loss": {
+          "label": "Quantified blood loss",
+          "note": "Measured loss replaces guessing; shock with modest linen means concealed bleeding elsewhere.",
+          "result": "About 900 mL collected in the drape and kidney tray over three hours, with large clots. One pad soaking every twenty minutes at assessment."
+        },
+        "cbc": {
+          "label": "Complete blood count",
+          "note": "The first count is the pre-bleed state; only serial values show whether bleeding continues.",
+          "result": "Haemoglobin 7.6 g per dL. Total leucocyte count within normal limits. Platelets adequate on smear."
+        },
+        "clotting": {
+          "label": "Coagulation screen with fibrinogen",
+          "note": "Normal clotting with a firm-cause bleed keeps the focus on tone and tears; falling fibrinogen would move products to the front.",
+          "result": "Prothrombin time and activated partial thromboplastin time within normal limits. Fibrinogen adequate. No oozing from venepuncture sites."
+        },
+        "crossmatch": {
+          "label": "Group and crossmatch",
+          "note": "Blood must be ready before it is needed; major loss with hypotension can demand transfusion within minutes.",
+          "result": "B positive. Two units grouped and crossmatched on arrival; one unit transfused during resuscitation with consent."
+        },
+        "usg": {
+          "label": "Bedside pelvic ultrasound",
+          "note": "An empty cavity with continued bleeding sends you back to tears and clotting, not to more oxytocin.",
+          "result": "Bulky uterus with a thin endometrial line and small clots. No echogenic retained tissue. No free fluid in the pouch of Douglas."
+        }
+      },
+      "managementModel": {
+        "accept": [
+          "resuscitate",
+          "transfusion",
+          "uterine massage",
+          "oxytocin",
+          "tranexamic acid",
+          "monitor",
+          "blood",
+          "tamponade",
+          "refer"
+        ],
+        "answer": "Resuscitate with oxygen, warmed fluids and blood transfusion, continuous vitals with strict urine output, firm uterine massage with bladder catheterisation, oxytocin with further uterotonics, early tranexamic acid, ongoing monitoring with serial counts, and referral readiness if bleeding persists.",
+        "minMatch": 3
+      },
+      "opening": "Sunita, 24, a second gravida, delivered normally three hours ago at the district hospital and has bled heavily since, with dizziness on sitting up. Introduce yourself and take a history.",
+      "patient": {
+        "age": 24,
+        "name": "Sunita",
+        "occupation": "Farm labourer and homemaker",
+        "residence": "Rural, village in Marathwada, lives with husband, mother-in-law and one son",
+        "sex": "female"
+      },
+      "review": {
+        "status": "ai_drafted"
+      },
+      "teachingPoints": [
+        "The tempo alone should move you: heavy bleeding within minutes of a complete placenta is atony until proven otherwise, and dizziness on sitting is shock talking.",
+        "A boggy fundus that firms with your hand is both the diagnosis and the first treatment. Massage, empty bladder, uterotonics, in that order, while resuscitation runs alongside.",
+        "Quantify everything: 900 mL measured with a pulse of 118 and a soft pressure is major bleeding whatever the linen suggests, and it already justifies blood.",
+        "The first haemoglobin is history, not news. It shows the pre-bleed state, so resuscitation and transfusion follow vitals and measured loss, not the count.",
+        "Normal clotting with continued bleeding keeps you on tone and tears; oozing sites with falling fibrinogen would move plasma and fibrinogen to the front instead.",
+        "From a primary setting this mother is resuscitated with the first drugs and tranexamic acid, then referred early with blood running, not kept until she collapses."
+      ],
+      "title": "A second gravida bleeding three hours after normal delivery"
+    }
   ]
- },
- "viva": {
-  "skills": [
-   "skill.pph.basics",
-   "skill.pph.findings",
-   "skill.pph.differential",
-   "skill.ix.pph.workup",
-   "skill.pph.diagnosis",
-   "skill.tx.pph",
-   "skill.tx.obg.pph_first_response"
-  ]
- },
- "cases": [
-  {
-   "diagnosis": {
-    "accept": [
-     "postpartum haemorrhage",
-     "pph",
-     "postpartum hemorrhage"
-    ],
-    "answer": "Primary atonic postpartum haemorrhage three hours after normal vaginal delivery, with measured major loss and maternal tachycardia and hypotension, responding to massage and uterotonics.",
-    "minMatch": 1
-   },
-   "differentialModel": {
-    "accept": [
-     "uterine atony",
-     "retained products of conception",
-     "genital tract trauma",
-     "uterine inversion",
-     "uterine rupture",
-     "secondary postpartum haemorrhage",
-     "disseminated intravascular coagulation",
-     "placenta accreta spectrum"
-    ],
-    "answer": "Primary atonic postpartum haemorrhage. Consider retained tissue, genital tract trauma, uterine inversion, uterine rupture and coagulopathy.",
-    "minMatch": 3
-   },
-   "essentialInvestigations": [
-    "blood_loss",
-    "cbc",
-    "clotting",
-    "crossmatch",
-    "usg"
-   ],
-   "exam": {
-    "skill.exam.obg.fundal_height": {
-     "abnormal": true,
-     "finding": "Fundus at the umbilicus, broad, soft and boggy. It firms under sustained massage and the bleeding visibly eases, then softens again when the hand lifts. Bladder empty after catheterisation."
-    },
-    "skill.exam.obg.preg_prep_inspect": {
-     "abnormal": true,
-     "finding": "Bright red vaginal bleeding with large clots, soaking about one pad every twenty minutes. Right mediolateral episiotomy clean with slight oozing from one angle. No visible cervical tissue or tear on inspection."
-    },
-    "skill.exam.obg.puerperal_exam": {
-     "abnormal": true,
-     "finding": "Uterus bulky and boggy, subtender over the fundus. Heavy red lochia with clots. Perineum shows the episiotomy described above, no haematoma, no foul smell. Calves soft with no tenderness."
-    },
-    "skill.gen.appearance": {
-     "abnormal": true,
-     "finding": "Pale, anxious and thirsty, with cold clammy hands and delayed capillary refill. Restless and breathless when she tries to sit up. No jaundice, no neck swelling."
-    },
-    "skill.gen.vitals": {
-     "abnormal": true,
-     "finding": "Pulse 118 per minute, thready but regular. Blood pressure 86/54 mmHg. Respiratory rate 26 per minute. SpO2 95 percent on air. Temperature 37 C. Urine 40 mL in the last two hours through the catheter."
-    }
-   },
-   "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
-   "history": {
-    "antenatal_visits": {
-     "cues": [
-      "where did you have checkups in this pregnancy",
-      "how many antenatal visits did you complete",
-      "what was your haemoglobin in pregnancy",
-      "was your blood pressure normal in checkups"
-     ],
-     "reply": "Four checkups at the primary health centre. Blood was low, so I took iron tablets. Pressure was normal throughout."
-    },
-    "baby_condition": {
-     "cues": [
-      "did the baby cry at birth",
-      "what is the weight of the baby",
-      "is the baby feeding at the breast",
-      "where is the baby now"
-     ],
-     "reply": "A girl, cried at once, weight two and a half kilos. She is with my mother-in-law and taking the breast."
-    },
-    "bleed_amount": {
-     "cues": [
-      "how many pads or cloths have soaked through",
-      "how often are you changing the pad",
-      "did you pass any large clots",
-      "is the blood flowing continuously or in gushes"
-     ],
-     "reply": "Six cloths soaked in three hours, with clots as big as lemons. It flows steadily and pours in gushes when they press my stomach."
-    },
-    "bleed_onset": {
-     "cues": [
-      "when did the bleeding start after the birth",
-      "did the bleeding start before the placenta came out",
-      "how soon after delivery did heavy bleeding begin",
-      "were you still on the delivery table when it started"
-     ],
-     "reply": "The baby came, then the placenta came after about ten minutes, and the heavy bleeding started almost at once after that. I was still on the table."
-    },
-    "bleeding_tendency": {
-     "cues": [
-      "do your nose or gums bleed without reason",
-      "were your monthly periods very heavy before",
-      "does anyone in your family bleed easily",
-      "do cuts take long to stop bleeding"
-     ],
-     "reply": "No nose or gum bleeds. Periods were normal, four days. Nobody in the family bleeds like this."
-    },
-    "family_support": {
-     "cues": [
-      "who has come with you to the hospital",
-      "is there anyone who can donate blood",
-      "how will you reach the district hospital if referred",
-      "does your family agree to further treatment and operation if needed"
-     ],
-     "reply": "My husband and mother-in-law are here. My brother can give blood. We will go wherever you send us, doctor, and agree to whatever is needed."
-    },
-    "illness_history": {
-     "cues": [
-      "any raised pressure or convulsions in this pregnancy",
-      "do you have sugar disease or thyroid problem",
-      "any fever in the days before delivery",
-      "any bleeding before this delivery in this pregnancy"
-     ],
-     "reply": "No pressure problem, no convulsions, no sugar. Slight fever for one day last week which settled. No bleeding before delivery."
-    },
-    "pain_after_birth": {
-     "cues": [
-      "do you have pain in the lower stomach now",
-      "is there severe pain in the private parts",
-      "are the afterpains continuous or coming and going",
-      "any burning while passing urine"
-     ],
-     "reply": "Dull cramping low down that comes and goes. No severe private-part pain, no swelling there. Passing urine through the tube without burning."
-    },
-    "past_pregnancies": {
-     "cues": [
-      "tell me about your previous pregnancies",
-      "how many children do you have living",
-      "was there any abortion or stillbirth before",
-      "how was your first child delivered"
-     ],
-     "reply": "First a normal delivery, a boy, four years old, with no heavy bleeding. No abortion or stillbirth after that."
-    },
-    "presenting": {
-     "cues": [
-      "what brings you to hospital",
-      "what is the main problem today",
-      "why were you brought here after delivery",
-      "tell me what happened today"
-     ],
-     "key": true,
-     "reply": "Doctor, I delivered three hours ago and since then I am bleeding heavily with clots, feeling dizzy whenever I sit up.",
-     "skillId": "skill.hx.chief_complaints"
-    },
-    "shock_symptoms": {
-     "cues": [
-      "do you feel dizzy on sitting up",
-      "any palpitation or racing of the heart",
-      "are you feeling very thirsty",
-      "have you passed urine since delivery"
-     ],
-     "reply": "Very dizzy when I sit, heart racing, and very thirsty. Only a little urine through the tube since delivery."
-    },
-    "tablets_tobacco": {
-     "cues": [
-      "what tablets are you taking now",
-      "were you given aspirin or blood thinners",
-      "do you use tobacco in any form",
-      "did you take any painkiller today"
-     ],
-     "reply": "Only iron and calcium tablets from the centre. No aspirin, no thinners. No tobacco at all."
-    },
-    "third_stage_care": {
-     "cues": [
-      "were you given an injection after the baby was born",
-      "did the attendant massage your womb after delivery",
-      "was the cord pulled to deliver the placenta",
-      "did anyone press on your stomach after birth"
-     ],
-     "reply": "One injection in the thigh after the baby came. The nurse rubbed my stomach hard and pulled gently on the cord. The placenta came in ten minutes."
-    },
-    "labour_course": {
-     "cues": [
-      "how many hours did the pains last",
-      "was a drip used to speed up the pains",
-      "were forceps or vacuum used for delivery",
-      "was it a normal delivery or caesarean"
-     ],
-     "reply": "Pains from morning till evening, about fourteen hours. A bottle drip was put in the afternoon to strengthen pains. Normal delivery, no instruments, no operation."
-    },
-    "placenta_delivery": {
-     "cues": [
-      "did the placenta come out whole",
-      "who checked the placenta after delivery",
-      "was any piece of the placenta missing",
-      "did all the membranes come out"
-     ],
-     "reply": "The nurse said it came whole and showed it to us. She said both sides look complete. I did not see any missing piece."
-    }
-   },
-   "id": "case.pph.sunita",
-   "initialVitals": {
-    "bpDiastolic": 54,
-    "bpSystolic": 86,
-    "gcs": 15,
-    "hr": 118,
-    "rr": 26,
-    "spo2": 95,
-    "temp": 37
-   },
-   "investigations": {
-    "blood_loss": {
-     "label": "Quantified blood loss",
-     "note": "Measured loss replaces guessing; shock with modest linen means concealed bleeding elsewhere.",
-     "result": "About 900 mL collected in the drape and kidney tray over three hours, with large clots. One pad soaking every twenty minutes at assessment."
-    },
-    "cbc": {
-     "label": "Complete blood count",
-     "note": "The first count is the pre-bleed state; only serial values show whether bleeding continues.",
-     "result": "Haemoglobin 7.6 g per dL. Total leucocyte count within normal limits. Platelets adequate on smear."
-    },
-    "clotting": {
-     "label": "Coagulation screen with fibrinogen",
-     "note": "Normal clotting with a firm-cause bleed keeps the focus on tone and tears; falling fibrinogen would move products to the front.",
-     "result": "Prothrombin time and activated partial thromboplastin time within normal limits. Fibrinogen adequate. No oozing from venepuncture sites."
-    },
-    "crossmatch": {
-     "label": "Group and crossmatch",
-     "note": "Blood must be ready before it is needed; major loss with hypotension can demand transfusion within minutes.",
-     "result": "B positive. Two units grouped and crossmatched on arrival; one unit transfused during resuscitation with consent."
-    },
-    "usg": {
-     "label": "Bedside pelvic ultrasound",
-     "note": "An empty cavity with continued bleeding sends you back to tears and clotting, not to more oxytocin.",
-     "result": "Bulky uterus with a thin endometrial line and small clots. No echogenic retained tissue. No free fluid in the pouch of Douglas."
-    }
-   },
-   "managementModel": {
-    "accept": [
-     "resuscitate",
-     "transfusion",
-     "uterine massage",
-     "oxytocin",
-     "tranexamic acid",
-     "monitor",
-     "blood",
-     "tamponade",
-     "refer"
-    ],
-    "answer": "Resuscitate with oxygen, warmed fluids and blood transfusion, continuous vitals with strict urine output, firm uterine massage with bladder catheterisation, oxytocin with further uterotonics, early tranexamic acid, ongoing monitoring with serial counts, and referral readiness if bleeding persists.",
-    "minMatch": 3
-   },
-   "opening": "Sunita, 24, a second gravida, delivered normally three hours ago at the district hospital and has bled heavily since, with dizziness on sitting up. Introduce yourself and take a history.",
-   "patient": {
-    "age": 24,
-    "name": "Sunita",
-    "occupation": "Farm labourer and homemaker",
-    "residence": "Rural, village in Marathwada, lives with husband, mother-in-law and one son",
-    "sex": "female"
-   },
-   "review": {
-    "status": "ai_drafted"
-   },
-   "teachingPoints": [
-    "The tempo alone should move you: heavy bleeding within minutes of a complete placenta is atony until proven otherwise, and dizziness on sitting is shock talking.",
-    "A boggy fundus that firms with your hand is both the diagnosis and the first treatment. Massage, empty bladder, uterotonics, in that order, while resuscitation runs alongside.",
-    "Quantify everything: 900 mL measured with a pulse of 118 and a soft pressure is major bleeding whatever the linen suggests, and it already justifies blood.",
-    "The first haemoglobin is history, not news. It shows the pre-bleed state, so resuscitation and transfusion follow vitals and measured loss, not the count.",
-    "Normal clotting with continued bleeding keeps you on tone and tears; oozing sites with falling fibrinogen would move plasma and fibrinogen to the front instead.",
-    "From a primary setting this mother is resuscitated with the first drugs and tranexamic acid, then referred early with blood running, not kept until she collapses."
-   ],
-   "title": "A second gravida bleeding three hours after normal delivery"
-  }
- ]
 }
