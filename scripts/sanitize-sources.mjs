@@ -47,6 +47,13 @@ function dedupe(arr, ref) {
   for (const v of arr) { if (typeof v === "string" && /^Standard textbooks: /.test(v)) { if (seen.has(v)) continue; seen.add(v); } out.push(v); }
   return out;
 }
+// The file being rewritten (set by the driver). CliniX disease files use `chapters` as the PATHWAY STRUCTURE
+// (an array of {id, title, skills}), not as a textbook chapter locator; blanking it left every pathway empty
+// in the native bundle (2026-10-20). Textbook-chapter fields elsewhere are numbers, strings or number arrays.
+let CUR_REL = "";
+function isPathwayChapters(k, v) {
+  return /^clinix\//.test(CUR_REL) && /^chapters$/i.test(k) && Array.isArray(v) && v.length > 0 && v.every((c) => c && typeof c === "object" && !Array.isArray(c));
+}
 function walk(o, ref, dataKeys) {
   if (typeof o === "string") return cleanString(o, ref);
   if (Array.isArray(o)) return dedupe(o.map((v) => walk(v, ref, dataKeys)), ref);
@@ -56,7 +63,7 @@ function walk(o, ref, dataKeys) {
   const out = {};
   for (const k of Object.keys(o)) {
     const v = o[k];
-    if (dataKeys && PAGE_KEY.test(k) && !(v && typeof v === "object" && !Array.isArray(v))) {
+    if (dataKeys && PAGE_KEY.test(k) && !isPathwayChapters(k, v) && !(v && typeof v === "object" && !Array.isArray(v))) {
       out[k] = typeof v === "number" ? null : Array.isArray(v) ? [] : typeof v === "string" ? "" : v;
       continue;
     }
@@ -160,6 +167,7 @@ for (const abs of files(WWW)) {
   const rel = relative(WWW, abs).split("\\").join("/");
   if (SKIP.test(rel) || !/\.(js|json|ndjson|json\.gz)$/.test(rel)) continue;
   const gz = rel.endsWith(".gz");
+  CUR_REL = rel;
   let src;
   try { src = gz ? gunzipSync(readFileSync(abs)).toString("utf8") : readFileSync(abs, "utf8"); } catch (e) { continue; }
   if (!E.hasBooks(src) && !(DATA_DIR.test(rel) && /"(?:page|pages|pageNo|pageStart|pageEnd)"\s*:\s*[\d"[]/.test(src))) { report.untouched++; continue; }

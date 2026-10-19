@@ -378,64 +378,6 @@
         "core",
         "obgyn"
       ],
-      "diseases": [],
-      "module": {
-        "id": "obgyn-osce",
-        "title": "OSCE and viva stations",
-        "subtitle": "10 stations: history, examination, counselling, consent and obstetric emergencies",
-        "file": "systems/obgyn.json",
-        "estMinutes": 150,
-        "chapters": 4,
-        "review": "ai_drafted"
-      }
-    },
-    {
-      "id": "anaesthesia",
-      "title": "Anaesthesiology",
-      "icon": "vital_signs",
-      "skillPacks": [
-        "core",
-        "anaesthesia"
-      ],
-      "diseases": [],
-      "module": {
-        "id": "anaesthesia-osce",
-        "title": "OSCE and viva stations",
-        "subtitle": "8 stations: preoperative assessment, airway, consent, airway devices, spinal and BLS",
-        "file": "systems/anaesthesia.json",
-        "estMinutes": 120,
-        "chapters": 4,
-        "review": "ai_drafted"
-      }
-    },
-    {
-      "id": "general",
-      "title": "Short cases",
-      "icon": "emergency",
-      "skillPacks": [
-        "core",
-        "general"
-      ],
-      "diseases": [
-        {
-          "id": "anemia",
-          "title": "Anaemia",
-          "subtitle": "A short case: not enough haemoglobin",
-          "file": "diseases/anemia.json",
-          "estMinutes": 40,
-          "chapters": 9,
-          "review": "ai_drafted"
-        }
-      ]
-    },
-    {
-      "id": "obstetrics",
-      "title": "Obstetrics",
-      "icon": "pregnant_woman",
-      "skillPacks": [
-        "core",
-        "obgyn"
-      ],
       "diseases": [
         {
           "id": "pre-eclampsia",
@@ -517,18 +459,7 @@
           "estMinutes": 60,
           "chapters": 14,
           "review": "ai_drafted"
-        }
-      ]
-    },
-    {
-      "id": "gynaecology",
-      "title": "Gynaecology",
-      "icon": "female",
-      "skillPacks": [
-        "core",
-        "obgyn"
-      ],
-      "diseases": [
+        },
         {
           "id": "uterine-fibroid",
           "title": "Uterine fibroid",
@@ -617,6 +548,54 @@
           "file": "diseases/menopause.json",
           "estMinutes": 60,
           "chapters": 14,
+          "review": "ai_drafted"
+        }
+      ],
+      "module": {
+        "id": "obgyn-osce",
+        "title": "OSCE and viva stations",
+        "subtitle": "10 stations: history, examination, counselling, consent and obstetric emergencies",
+        "file": "systems/obgyn.json",
+        "estMinutes": 150,
+        "chapters": 4,
+        "review": "ai_drafted"
+      }
+    },
+    {
+      "id": "anaesthesia",
+      "title": "Anaesthesiology",
+      "icon": "vital_signs",
+      "skillPacks": [
+        "core",
+        "anaesthesia"
+      ],
+      "diseases": [],
+      "module": {
+        "id": "anaesthesia-osce",
+        "title": "OSCE and viva stations",
+        "subtitle": "8 stations: preoperative assessment, airway, consent, airway devices, spinal and BLS",
+        "file": "systems/anaesthesia.json",
+        "estMinutes": 120,
+        "chapters": 4,
+        "review": "ai_drafted"
+      }
+    },
+    {
+      "id": "general",
+      "title": "Short cases",
+      "icon": "emergency",
+      "skillPacks": [
+        "core",
+        "general"
+      ],
+      "diseases": [
+        {
+          "id": "anemia",
+          "title": "Anaemia",
+          "subtitle": "A short case: not enough haemoglobin",
+          "file": "diseases/anemia.json",
+          "estMinutes": 40,
+          "chapters": 9,
           "review": "ai_drafted"
         }
       ]
