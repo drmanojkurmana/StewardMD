@@ -46,13 +46,13 @@ test("real MEDCALC/KB/MEDDRUGS globals are actually present (test would be vacuo
 
 test("empty query returns empty buckets (no curated content invented)", () => {
   const r = OH.search("");
-  assert.deepEqual(r, { diseases: [], calculators: [], drugs: [], protocols: [] });
-  assert.deepEqual(OH.search("   "), { diseases: [], calculators: [], drugs: [], protocols: [] });
+  assert.deepEqual(r, { diseases: [], calculators: [], drugs: [], protocols: [], figs: [] });
+  assert.deepEqual(OH.search("   "), { diseases: [], calculators: [], drugs: [], protocols: [], figs: [] });
 });
 
 test("no crash on an unknown/gibberish query — all buckets empty", () => {
   const r = OH.search("zzzznotarealclinicalterm12345");
-  assert.deepEqual(r, { diseases: [], calculators: [], drugs: [], protocols: [] });
+  assert.deepEqual(r, { diseases: [], calculators: [], drugs: [], protocols: [], figs: [] });
 });
 
 test('"khorana" -> the real Khorana calculator, from MEDCALC, not a local copy', () => {

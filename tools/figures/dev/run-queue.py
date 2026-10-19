@@ -62,7 +62,8 @@ def write_prompt(scene, fid, topic):
         "Original drawing from the mechanism, inspired by standard textbook teaching but never copying any figure. "
         "Run node commands with: export ANATOMY_DIR=$HOME/anatomy ANIMA_DIR=$HOME/anima\n" + RULES + "\n"
         f"Rules: create only scenes/{scene}.*, specs/{fid}.json, generated prep/figures/{fid}*.html. No register.sh, no git add/commit/push, no other files. "
-        "No doses or numbers, no em or en dashes, flagged AI-assisted for review.\nFinish with a short report: files, termcheck counts, known issues.\n")
+        "No doses or numbers, no em or en dashes, flagged AI-assisted for review.\nFinish with a short report: files, termcheck counts, known issues.\n"
+        + (open(os.environ["QUEUE_EXTRA"]).read() if os.environ.get("QUEUE_EXTRA") else ""))
     return p
 
 MODEL = os.environ.get("MUSE_MODEL", "muse-wonder-1.0")

@@ -301,7 +301,7 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     ".smdc{flex:none;margin:0 0 6px;display:grid;grid-template-columns:1fr 1fr}.smdc-t{grid-column:1/3;padding:3px}.smdc-t button{min-height:34px;font-size:14px}" +
     ".smdc-r{padding:6px 12px;font-size:13px;gap:1px;border-top:1px solid var(--anatomy-faint)}.smdc-r b{font-size:10px}" +
     "@media (max-width:640px){.smdc{grid-template-columns:1fr}.smdc-t{grid-column:1}}" +
-    ".smd-why{flex:0 0 auto;max-height:24vh;overflow:auto;margin:0 0 6px;display:grid;gap:3px;--w-t:#f2b84b;--w-m:#b48cff;--w-f:#4fd1a5;--w-i:#ff8fa3}body[data-theme='light'] .smd-why{--w-t:#9a6200;--w-m:#6a3fc4;--w-f:#0f7a5c;--w-i:#b4234a}" +
+    ".smd-why{flex:0 0 auto;max-height:24vh;overflow:auto;margin:0 0 6px;display:grid;gap:3px;--w-t:#f2b84b;--w-m:#b48cff;--w-f:#4fd1a5;--w-i:#ff8fa3;--w-a:#ff7a59}body[data-theme='light'] .smd-why{--w-t:#9a6200;--w-m:#6a3fc4;--w-f:#0f7a5c;--w-i:#b4234a;--w-a:#b8421d}" +
     ".smd-why p{margin:0;padding:4px 10px;border-left:4px solid var(--c);border-radius:6px;background:color-mix(in srgb,var(--c) 11%,transparent);font:13px/1.35 system-ui,-apple-system,sans-serif;color:var(--anatomy-text)}" +
     ".smd-why b{font:700 10px system-ui;letter-spacing:.05em;text-transform:uppercase;color:var(--c);margin-right:6px}.smd-why mark{background:none;color:var(--anatomy-strong);font-weight:700}" +
     "@media (min-width:900px){.smd-why p{font-size:14px}}" +
@@ -331,10 +331,11 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
       function fm(t) { return esc(t).replace(/\*\*(.+?)\*\*/g, "<mark>$1</mark>"); }
       var box = doc.createElement("div"); box.className = "smd-why"; box.setAttribute("aria-label", "What is happening");
       box.innerHTML = [["trigger", "Cause", "--w-t"], ["mechanism", "What it does", "--w-m"], ["manifestation", "Result", "--w-f"]].map(function (r) { return '<p style="--c:var(' + r[2] + ')"><b>' + r[1] + "</b>" + fm(first(m[r[0]])) + "</p>"; }).join("") +
-        '<p class="smd-why-i" style="--c:var(--w-i)" hidden><b>Treatment</b>' + fm(first(m.intervention)) + "</p>";
+        '<p class="smd-why-i" style="--c:var(--w-i)" hidden><b>Treatment</b>' + fm(first(m.intervention)) + "</p>" +
+        (m.adverse ? '<p class="smd-why-i smd-why-a" style="--c:var(--w-a)" hidden><b>Side effects</b>' + fm(first(m.adverse)) + "</p>" : "");
       dock.insertBefore(box, dock.firstChild);
-      var sel = doc.getElementById("drug"), ti = box.querySelector(".smd-why-i");
-      function sync() { ti.hidden = !(sel && sel.value !== "0"); }
+      var sel = doc.getElementById("drug"), tis = box.querySelectorAll(".smd-why-i");
+      function sync() { var on = !!(sel && sel.value !== "0"); Array.prototype.forEach.call(tis, function (t) { t.hidden = !on; }); }
       if (sel) { sel.addEventListener("change", sync); sync(); }
     });
   }
