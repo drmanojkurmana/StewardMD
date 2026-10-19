@@ -103,6 +103,7 @@ const EXPECTED_PORTS = {
   bladder: ["in", "out", "inR", "trigone", "dome"],
   uterus: ["in", "out", "fundus"],
   ovary: ["in", "out", "dom", "surf"],
+  testis: ["in", "out", "parenchyma", "barrier"],
   thyroid: ["in", "out", "isthmus"],
   eye: ["in", "out", "retina", "lens", "cornea", "nerve"],
   ganglion: ["in", "out", "soma", "nucleus"],
@@ -111,6 +112,10 @@ const EXPECTED_PORTS = {
   muscle: ["in", "out", "belly", "fibre"],
   joint: ["in", "out", "femur", "joint", "patella", "tibia", "fibula"],
   vessel: ["in", "out", "lumen", "wall"],
+  lymphnode: ["in", "sinus", "follicle", "germ", "paracortex", "hilum", "out"],
+  adrenal: ["in", "out", "cortex", "medulla"],
+  parathyroid: ["in", "out", "casr", "chief"],
+  pituitary: ["in", "out", "stalk", "post"],
 };
 
 test("fig-organs: organ() returns ports for each kind", () => {
@@ -127,7 +132,7 @@ test("fig-organs: organ() returns ports for each kind", () => {
       assert.ok(Array.isArray(o.ports[p]), k + " has port " + p);
       assert.ok(o.ports[p].every(Number.isFinite), k + "." + p + " is numeric");
     }
-    const wantArt = !(k === "uterus" || k === "ovary" || k === "thyroid" || k === "ganglion");
+    const wantArt = !(k === "uterus" || k === "ovary" || k === "testis" || k === "thyroid" || k === "ganglion" || k === "lymphnode" || k === "adrenal" || k === "parathyroid" || k === "pituitary");
     assert.equal(o.art, wantArt, k + (wantArt ? " uses art" : " falls back to procedural"));
   }
 });
