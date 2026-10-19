@@ -8,7 +8,7 @@
   --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
   --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
   --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
-  --anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
 }
 .iso[data-theme="light"]{
@@ -199,6 +199,9 @@ body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px
 .bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
 .bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
 @media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
 body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
 body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
 .t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
@@ -266,11 +269,15 @@ body[data-theme="light"] .cl-nuc{--cc:#9a86d6}
 .hv-env{fill:#b5517a;stroke:#6e2b49;stroke-width:.8}.hv-spk{stroke:#e8a0bf;stroke-width:1.3;stroke-linecap:round;fill:none}.hv-cap{fill:#f1d9a0;stroke:#9a7a2a;stroke-width:.8}
 .hv-rna{fill:none;stroke:#f08a4b;stroke-width:1.5;stroke-linecap:round}.hv-dna{fill:none;stroke:#3a86e8;stroke-width:2.3;stroke-linecap:round}.hv-host{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}
 .hv-prov{fill:none;stroke:#3a86e8;stroke-width:3.4;stroke-linecap:round}.hv-mrna{fill:#f08a4b}.hv-prot{fill:#e8a0bf;stroke:#6e2b49;stroke-width:.5}.hv-ribo{fill:var(--anatomy-mid)}
-.hv-imm .hv-env{fill:none;stroke-dasharray:3 2}.hv-x{fill:none;stroke:var(--c-bad);stroke-width:2.4;stroke-linecap:round}.hv-xc{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.4}
+.hv-imm .hv-env{fill:none;stroke-dasharray:3 2}
 .hv-cd4{fill:none;stroke:#3a86e8;stroke-width:2;stroke-linecap:round}.hv-ccr{fill:none;stroke:#f08a4b;stroke-width:2;stroke-linecap:round}
 .hv-glow{fill:none;stroke:var(--c-no);stroke-width:2}
 .hv-box{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:.8}.hv-box.on{fill:color-mix(in srgb,var(--c-no) 35%,var(--anatomy-card));stroke:var(--c-no)}
-.hv-bn{fill:var(--anatomy-text);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.hv-bn{fill:var(--anatomy-text);font-size:11px;font-weight:600;pointer-events:none}
+.hv-drug{fill:var(--c-no);stroke:var(--anatomy-paper);stroke-width:1}
+.hv-drug-in{fill:var(--anatomy-paper);stroke:none}
+.hv-dring{fill:none;stroke:var(--c-no);stroke-width:2}
+.hv-capline{fill:var(--anatomy-strong);font-size:12.5px;pointer-events:none}
 .pl-ax{stroke:var(--anatomy-mid);stroke-width:1;fill:none}.pl-ph{stroke:var(--anatomy-faint);stroke-width:.8;stroke-dasharray:3 3}
 .pl-cd{fill:none;stroke:var(--c-lymph);stroke-width:2.6;stroke-linejoin:round}.pl-vl{fill:none;stroke:var(--c-bad);stroke-width:2.6;stroke-linejoin:round}
 .pl-cd.base,.pl-vl.base{stroke-dasharray:4 4;stroke-width:1.6}.pl-mk{stroke:var(--anatomy-strong);stroke-width:1;stroke-dasharray:2 3}.pl-dot{fill:var(--anatomy-strong)}
@@ -278,7 +285,7 @@ body[data-theme="light"] .cl-nuc{--cc:#9a86d6}
 </style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">HIV: life cycle and immune decline</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>viral load moderate · CD4 count moderate · infection risk some</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated CD4 T cell and a plot over the years. A virion binds the CD4 receptor and a co-receptor, fuses, releases its RNA, reverse transcribes it to DNA, integrates the DNA into the host genome, makes new viral parts, assembles, buds out and matures. The plot shows CD4 count falling and viral load rising over the years, with opportunistic infections appearing as CD4 falls. Antiretroviral drugs block entry, reverse transcription, integration or maturation, and combination therapy suppresses the virus and lets CD4 recover."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
 <rect class="dr-panel" x="14" y="40" width="606" height="402" rx="16"/>
 <text class="sc-zone" x="32" y="64">INSIDE A CD4 T CELL</text>
-<text class="sc-lab hv-step" id="stepname" x="32" y="426">Step 1: binding</text>
+<text class="sc-lab hv-step" id="stepname" x="608" y="64" text-anchor="end">Step 1: binding</text>
 <g id="steps"></g>
 <g id="cellg"></g>
 <g id="over"></g>
@@ -288,7 +295,7 @@ body[data-theme="light"] .cl-nuc{--cc:#9a86d6}
 <g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or schedules are shown or implied.</span></figcaption></figure>
 <div class="dr-controls">
   <label class="dr-range"><span>Stage of infection</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="chronic, no symptoms"><span class="dr-ticks"><i>acute</i><i>chronic</i><i>advanced</i></span></label>
-  <label class="dr-range"><span>Antiretroviral treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">entry inhibitor (maraviroc, enfuvirtide class)</option><option value="2">reverse transcriptase inhibitor (NRTI or NNRTI)</option><option value="3">integrase inhibitor</option><option value="4">protease inhibitor</option><option value="5">combination antiretroviral therapy</option></select></label>
+  <label class="dr-range"><span>Antiretroviral treatment</span><select id="drug" data-without="Without treatment" data-with="With combination therapy"><option value="0">no treatment</option><option value="1">entry inhibitor (maraviroc, enfuvirtide class)</option><option value="2">reverse transcriptase inhibitor (NRTI or NNRTI)</option><option value="3">integrase inhibitor</option><option value="4">protease inhibitor</option><option value="5">combination antiretroviral therapy</option></select></label>
   <button id="pause" type="button" aria-pressed="false">Pause motion</button>
 </div>
 <p id="status" class="dr-status" aria-live="polite"></p>
@@ -424,9 +431,11 @@ const rec = [];
 [[158, "cd4"], [170, "ccr"], [184, "cd4"], [198, "ccr"], [146, "cd4"]].forEach(([a, k]) => { const t = a * Math.PI / 180, x = CX + R * Math.cos(t), y = CY + R * Math.sin(t) * 1;
   const g = mk("g", { transform: "translate(" + f1(x) + " " + f1(y) + ") rotate(" + f1(a - 180) + ")" }, L.cell);
   mk("path", { class: k === "cd4" ? "hv-cd4" : "hv-ccr", d: k === "cd4" ? "M0 0L-12 0M-12 0L-19 -6M-12 0L-19 6" : "M0 0L-6 -4L-9 4L-14 -3L-18 3" }, g); rec.push({ g, k, x, y, a }); });
-/* ---- block markers (shown when a drug blocks that step) ---- */
-function xmark(x, y) { const g = mk("g", { transform: "translate(" + f1(x) + " " + f1(y) + ")", opacity: 0 }, L.cell); mk("circle", { class: "hv-xc", r: 9 }, g); mk("path", { class: "hv-x", d: "M-4 -4L4 4M4 -4L-4 4" }, g); return g; }
-const X = { entry: xmark(S0[0] - 4, S0[1] - 30), rt: xmark(C1[0], C1[1] + 22), integ: xmark(INT[0] - 6, INT[1] - 22), prot: xmark(AS[0] + 34, AS[1] - 4) };
+/* ---- docked drug molecules (one sits on its target while that drug is on) ---- */
+function drugMol(x, y) { const g = mk("g", { opacity: 0 }, L.cell); const ring = mk("circle", { class: "hv-dring", cx: f1(x), cy: f1(y), r: 11 }, g); mk("circle", { class: "hv-drug", cx: f1(x), cy: f1(y), r: 6.5 }, g); mk("circle", { class: "hv-drug-in", cx: f1(x), cy: f1(y), r: 2.2 }, g); return { g, ring, x, y }; }
+const DM = { entry: drugMol(136, 318), rt: drugMol(228, 250), integ: drugMol(364, 226), prot: drugMol(442, 366) };
+function setMol(o, v) { o.g.setAttribute("opacity", v > 0 ? 1 : 0); if (v > 0) { place(o.g, Math.sin(tm / 500 + o.x) * 2, Math.cos(tm / 500 + o.y) * 2, 0, 1); o.ring.setAttribute("r", (11 + 1.6 * Math.sin(tm / 420 + o.x)).toFixed(1)); } }
+function dimOp(el, f) { if (f >= 0.999) return; const o = parseFloat(el.getAttribute("opacity") || "0"); if (o > 0) el.setAttribute("opacity", (o * f).toFixed(2)); }
 /* ---- the journey of one virion ---- */
 function virion(parent, mature) { const g = mk("g", {}, parent); const spk = mk("path", { class: "hv-spk", d: "" }, g); let d = ""; for (let i = 0; i < 8; i++) { const t = i * 0.785; d += "M" + f1(Math.cos(t) * 9) + " " + f1(Math.sin(t) * 9) + "L" + f1(Math.cos(t) * 14) + " " + f1(Math.sin(t) * 14); } spk.setAttribute("d", d);
   const env = mk("circle", { class: "hv-env", r: 9 }, g); const cap = mk("path", { class: "hv-cap", d: "M-3.4 -6L3.4 -6L1.4 6L-1.4 6Z" }, g); return { g, spk, env, cap }; }
@@ -441,20 +450,30 @@ const bud = virion(L.cell); bud.g.setAttribute("opacity", 0);
 const prog = Array.from({ length: 6 }, () => { const v = virion(L.cell); v.g.setAttribute("opacity", 0); return { v, t: 9, x: 0, y: 0, imm: false }; });
 /* ambient virions in the blood, drifting toward the receptors */
 const amb = Array.from({ length: 10 }, () => { const v = virion(L.cell); v.g.setAttribute("transform", "scale(0.7)"); return { v, x: rnd(40, 100), y: rnd(120, 350), t: rnd(0, 6), bounce: 0 }; });
-/* ---- labels ---- */
-const pills = {};
-pills.cd4 = pill(L.over, "CD4 receptor", rec[0].x - 12, rec[0].y, 70, 392, "CD4 on the T helper cell. The virion's gp120 protein binds it first.");
-pills.ccr = pill(L.over, "CCR5 co-receptor", rec[1].x - 10, rec[1].y, 100, 360, "A co-receptor (CCR5, or CXCR4 in later disease) that gp120 must also engage before gp41 can fuse the membranes.");
-pill(L.over, "Nucleus", NC[0] + 40, CY - 44, NC[0] + 112, CY - 92, "The host nucleus holds the cell's own DNA. The provirus is inserted here.");
-pill(L.over, "Host DNA", NC[0] + 30, CY + 14, NC[0] + 112, CY + 14, "The cell's own genome. Integrase splices the viral DNA into it, so every copy of the cell carries the provirus.");
-pill(L.over, "Ribosomes", RB[1][0] - 4, RB[1][1] + 4, RB[1][0] - 76, RB[1][1] + 34, "Host ribosomes translate viral mRNA into viral proteins.");
-pill(L.over, "New virion", AS[0] + 10, AS[1] + 12, AS[0] + 92, AS[1] + 42, "New virions assemble at the membrane, bud out and mature into infectious particles.");
+/* ---- labels: 4 base pills plus 4 short drug pills, 8 in all ---- */
+pill(L.over, "Entry receptors", 159, 312, 85, 378, "Entry receptors: CD4 plus a co-receptor. The virus must grip both before it can fuse and get in.");
+pill(L.over, "Nucleus", 408, 216, 476, 176, "Nucleus with the host DNA. Integrase splices viral DNA into it, so the cell carries the provirus.");
+pill(L.over, "Ribosomes", RB[1][0] - 4, RB[1][1] + 4, 296, 404, "Ribosomes: the host protein factories. They translate viral RNA into new viral parts.");
+pill(L.over, "New virions", AS[0] + 10, AS[1] + 12, 526, 400, "New virions assemble at the membrane, bud out and mature into infectious particles.");
 const dp = {
-  entry: pill(L.over, "Entry inhibitor", S0[0] - 4, S0[1] - 30, 86, 196, "Entry inhibitors stop the virion binding or fusing, so it cannot get in."),
-  rt: pill(L.over, "RT inhibitor", C1[0], C1[1] + 22, C1[0] + 24, C1[1] + 70, "Reverse transcriptase inhibitors give the enzyme a faulty building block or jam it, so no DNA copy is made."),
-  integ: pill(L.over, "Integrase inhibitor", INT[0] - 6, INT[1] - 22, INT[0] - 70, INT[1] - 86, "Integrase inhibitors stop the viral DNA being spliced into the host genome."),
-  prot: pill(L.over, "Protease inhibitor", AS[0] + 34, AS[1] - 4, AS[0] + 100, AS[1] - 40, "Protease inhibitors stop the virion's proteins being cut into working parts, so new virions stay immature and cannot infect."),
+  entry: pill(L.over, "Entry blocker", 152, 296, 86, 196, "Entry blockers sit in the doorway, so the virion cannot bind or fuse and never gets in."),
+  rt: pill(L.over, "RT blocker", C1[0], C1[1], 252, 336, "Reverse transcriptase blockers jam the copier, so viral RNA is never copied into DNA."),
+  integ: pill(L.over, "Integrase blocker", 360, 232, 294, 158, "Integrase blockers guard the host DNA, so viral DNA cannot settle into the genome."),
+  prot: pill(L.over, "Protease blocker", 446, 372, 536, 330, "Protease blockers stop the final cut, so new virions leave unfinished and harmless."),
 };
+/* ---- one plain language caption that changes with the state ---- */
+const capEl = mk("text", { class: "hv-capline", x: 32, y: 430 }, L.over);
+let capKey = "";
+function capText(d, l) {
+  if (d === 1) return "Entry blocker sits in the doorway. The virus cannot get into the cell.";
+  if (d === 2) return "RT blocker jams the copier. Viral RNA never becomes DNA.";
+  if (d === 3) return "Integrase blocker guards the host DNA. The virus cannot settle in.";
+  if (d === 4) return "Protease blocker stops the final cut. New virions leave unfinished.";
+  if (d === 5) return "Combination therapy blocks four steps at once. Virus falls and CD4 recovers.";
+  if (l === 0) return "No treatment. Early infection: the virus spikes while CD4 cells still hold.";
+  if (l === 2) return "No treatment. CD4 cells run low and other infections move in.";
+  return "No treatment. The virus keeps copying and CD4 cells slowly fall.";
+}
 /* ---- the over-the-years plot ---- */
 const PX0 = 664, PX1 = 922, PY0 = 112, PY1 = 308, PW = PX1 - PX0, PH = PY1 - PY0;
 const CD_PTS = [[0, 0.85], [0.07, 0.62], [0.2, 0.72], [0.5, 0.58], [0.75, 0.42], [0.9, 0.18], [1, 0.08]], VL_PTS = [[0, 0.1], [0.06, 0.95], [0.18, 0.5], [0.5, 0.42], [0.75, 0.5], [0.9, 0.8], [1, 0.9]];
@@ -479,18 +498,18 @@ const gg = {};
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, 150 + i * 200, y0 + 2, 52, 18, cls, name, tip); }); }
 /* ---- state ---- */
 const sm = { VL: 0.5, CD: 0.6, risk: 0.3, inf: 0.5, eff: 0, u0: 0.5 };
-const hs = { step: 0, t: 0, stall: 0, imm: false, ok: true };
+const hs = { step: 0, t: 0, stall: 0, imm: false, ok: true, bad: false, chk: false };
 function stepName() { const s = $("stepname"); if (s) s.textContent = "Step " + (hs.step + 1) + ": " + STEPS[hs.step] + (hs.stall > 0 ? " (blocked by the drug)" : ""); boxes.forEach((b, i) => b.setAttribute("class", "hv-box" + (i === hs.step ? " on" : ""))); }
 function blockedAt(step, m) { const p = step === 0 ? m.blk.entry : step === 2 ? m.blk.rt : step === 3 ? m.blk.integ : 0; return p > 0 && Math.random() < p; }
 function init() { stepName(); hideAll(); }
 function hideAll() { [hero.g, capG, rna, dna, glow, asm, bud.g].forEach((e) => e.setAttribute("opacity", 0)); mrnas.concat(prots).forEach((e) => e.setAttribute("opacity", 0)); prov.setAttribute("opacity", 0); }
-function nextVirion() { hs.step = 0; hs.t = 0; hs.stall = 0; hs.ok = true; hs.chk = false; hideAll(); stepName(); }
+function nextVirion() { hs.step = 0; hs.t = 0; hs.stall = 0; hs.ok = true; hs.bad = false; hs.chk = false; hideAll(); stepName(); }
 function dnaPath(a, len, prog) { let d = ""; const n = Math.max(2, Math.round(24 * prog)); for (let i = 0; i <= n; i++) { const f = i / 24; d += (i ? "L" : "M") + f1(a[0] + f * len) + " " + f1(a[1] + Math.sin(f * 14) * 4); } return d; }
 function journey(dt, m) {
   if (hs.stall > 0) { hs.stall -= dt; if (hs.step === 0) { place(hero.g, S0[0] - 12 - (1.3 - hs.stall) * 34, S0[1] - (1.3 - hs.stall) * 12, 0, 1); } const k = clamp(hs.stall / 1.3); hero.g.setAttribute("opacity", k.toFixed(2)); capG.setAttribute("opacity", (k * (hs.step === 2 || hs.step === 3 ? 1 : 0)).toFixed(2)); if (hs.stall <= 0) nextVirion(); return; }
   const s = hs.step; hs.t += dt; const p = clamp(hs.t / DUR[s]);
-  if (s !== 0 && hs.t === dt && blockedAt(s, m)) { hs.stall = 1.3; stepName(); return; }
-  if (s === 0 && !hs.chk && p > 0.8) { hs.chk = true; if (blockedAt(0, m)) { hs.stall = 1.3; stepName(); return; } }
+  if (s !== 0 && hs.t === dt && blockedAt(s, m)) { hs.bad = true; hs.stall = 1.3; stepName(); return; }
+  if (s === 0 && !hs.chk && p > 0.8) { hs.chk = true; if (blockedAt(0, m)) { hs.bad = true; hs.stall = 1.3; stepName(); return; } }
   hideAll(); const e = ease(p);
   if (s === 0) { const q = bez([48, 200], [S0[0] - 12, S0[1]], e); place(hero.g, q[0], q[1], 0, 1); hero.g.setAttribute("opacity", 1); hero.cap.setAttribute("opacity", 1); hero.env.setAttribute("opacity", 1); if (p > 0.7) { glow.setAttribute("opacity", 0.9); glow.setAttribute("cx", f1(S0[0])); glow.setAttribute("cy", f1(S0[1])); } }
   else if (s === 1) { place(hero.g, S0[0] - 12, S0[1], 0, 1); hero.env.setAttribute("opacity", (1 - e).toFixed(2)); hero.spk.setAttribute("opacity", (1 - e).toFixed(2)); hero.cap.setAttribute("opacity", 0); hero.g.setAttribute("opacity", 1 - e * 0.6); const q = bez([S0[0] + 4, S0[1]], C1, e); capG.setAttribute("opacity", 1); place(capG, q[0], q[1], 70, 1); hero.spk.setAttribute("opacity", 1 - e); }
@@ -500,22 +519,31 @@ function journey(dt, m) {
   else if (s === 5) { prov.setAttribute("opacity", 1); mrnas.forEach((r, i) => { const q = bez(PB, RB[i], ease(clamp(p * 1.6))); r.setAttribute("opacity", p < 0.8 ? 1 : 0); r.setAttribute("cx", f1(q[0])); r.setAttribute("cy", f1(q[1])); }); prots.forEach((r, i) => { const f = clamp(p * 1.3 - i * 0.08); if (f <= 0) return; const b = RB[i % 3]; r.setAttribute("opacity", 1); r.setAttribute("cx", f1(b[0] + Math.sin(i * 2) * 14)); r.setAttribute("cy", f1(b[1] - 10 - (i % 3) * 8)); r.setAttribute("r", (1.2 + 1.8 * f).toFixed(2)); }); }
   else if (s === 6) { prov.setAttribute("opacity", 1); prots.forEach((r, i) => { const q = bez([RB[i % 3][0] + Math.sin(i * 2) * 14, RB[i % 3][1] - 10 - (i % 3) * 8], [AS[0] - 10 + (i % 4) * 5, AS[1] - 12 + (i % 3) * 6], ease(clamp(p * 1.4))); r.setAttribute("opacity", p < 0.95 ? 1 : 0); r.setAttribute("cx", f1(q[0])); r.setAttribute("cy", f1(q[1])); r.setAttribute("r", 3); }); asm.setAttribute("opacity", clamp(p * 2)); const w = 6 + 16 * p, tx = -OUT[1], ty = OUT[0]; asm.setAttribute("d", "M" + f1(AS[0] - tx * w) + " " + f1(AS[1] - ty * w) + "L" + f1(AS[0] + tx * w) + " " + f1(AS[1] + ty * w)); }
   else if (s === 7) { prov.setAttribute("opacity", 1); const o = 4 + 12 * e; bud.g.setAttribute("opacity", 1); place(bud.g, AS[0] + OUT[0] * o, AS[1] + OUT[1] * o, 0, 0.45 + 0.55 * e); bud.cap.setAttribute("opacity", 0); bud.g.setAttribute("class", "hv-imm"); }
-  else if (s === 8) { prov.setAttribute("opacity", 1); const q = bez([AS[0] + OUT[0] * 16, AS[1] + OUT[1] * 16], [AS[0] + OUT[0] * 40, AS[1] + OUT[1] * 40], e); bud.g.setAttribute("opacity", 1); place(bud.g, q[0], q[1], 0, 1); const imm = m.blk.prot > 0 && (hs.imm = hs.imm || Math.random() < m.blk.prot); bud.g.setAttribute("class", imm ? "hv-imm" : ""); bud.cap.setAttribute("opacity", p > 0.5 && !imm ? 1 : 0); if (imm && p > 0.6) { X.prot.setAttribute("opacity", 1); } }
-  if (p >= 1) { if (s === 8) { const pr = prog.find((q) => q.t >= 9) || prog[0]; pr.t = 0; pr.x = AS[0] + OUT[0] * 40; pr.y = AS[1] + OUT[1] * 40; pr.imm = hs.imm; pr.v.g.setAttribute("class", hs.imm ? "hv-imm" : ""); pr.v.cap.setAttribute("opacity", hs.imm ? 0 : 1); hs.imm = false; nextVirion(); } else { hs.step++; hs.t = 0; stepName(); } }
+  else if (s === 8) { prov.setAttribute("opacity", 1); const q = bez([AS[0] + OUT[0] * 16, AS[1] + OUT[1] * 16], [AS[0] + OUT[0] * 40, AS[1] + OUT[1] * 40], e); bud.g.setAttribute("opacity", 1); place(bud.g, q[0], q[1], 0, 1); const imm = m.blk.prot > 0 && (hs.imm = hs.imm || Math.random() < m.blk.prot); bud.g.setAttribute("class", imm ? "hv-imm" : ""); bud.cap.setAttribute("opacity", p > 0.5 && !imm ? 1 : 0); }
+  if (p >= 1) { if (s === 8) { const fin = m.blk.prot > 0 && hs.imm;
+      if (!hs.bad || m.blk.prot > 0) { const pr = prog.find((q) => q.t >= 9) || prog[0]; pr.t = 0; pr.x = AS[0] + OUT[0] * 40; pr.y = AS[1] + OUT[1] * 40; pr.imm = fin; pr.v.g.setAttribute("class", fin ? "hv-imm" : ""); pr.v.cap.setAttribute("opacity", fin ? 0 : 1); }
+      hs.imm = false; nextVirion(); } else { hs.step++; hs.t = 0; stepName(); } }
 }
 function step(dt, m) {
   const k1 = Math.min(1, dt * 0.8);
   sm.VL = lerp(sm.VL, m.VL, k1); sm.CD = lerp(sm.CD, m.CD, k1); sm.risk = lerp(sm.risk, m.risk, k1); sm.inf = lerp(sm.inf, m.inf, k1); sm.eff = lerp(sm.eff, m.e, k1); sm.u0 = lerp(sm.u0, m.u0, Math.min(1, dt * 2));
   journey(dt, m);
-  ["entry", "rt", "integ", "prot"].forEach((k) => { const v = m.blk[k]; X[k].setAttribute("opacity", k === "prot" && v > 0 ? 0 : (v > 0 ? 1 : 0)); dp[k].style.opacity = v > 0 ? 1 : 0; if (k === "prot") X.prot.setAttribute("opacity", v > 0 ? 1 : 0); });
-  /* receptors glow while the entry inhibitor is on */
-  rec.forEach((r, i) => r.g.style.opacity = m.blk.entry > 0 && r.k === "ccr" && m.e > 0.9 ? 0.4 : 1);
-  /* progeny drift away */
-  prog.forEach((q) => { if (q.t >= 9) { q.v.g.setAttribute("opacity", 0); return; } q.t += dt; const f = q.t / 6; q.x += (REL[0] - q.x) * dt * 0.5 + 6 * dt; q.y += (REL[1] - q.y) * dt * 0.5 + 4 * dt; place(q.v.g, q.x, q.y, 0, 1); q.v.g.setAttribute("opacity", clamp(1.4 - f * 1.4).toFixed(2)); if (q.t > 6) q.t = 9; });
-  /* ambient virions drift in and bounce off or attach */
+  /* docked drugs on their targets, plus drug pills; everything downstream of a block fades */
+  ["entry", "rt", "integ", "prot"].forEach((k) => { setMol(DM[k], m.blk[k]); dp[k].style.opacity = m.blk[k] > 0 ? 1 : 0; });
+  const fE = 1 - 0.72 * m.blk.entry, fR = fE * (1 - 0.72 * m.blk.rt), fI = fR * (1 - 0.72 * m.blk.integ);
+  if (hs.stall <= 0) { dimOp(capG, fE); dimOp(rna, fE); dimOp(dna, fR); dimOp(prov, fI); dimOp(asm, fI); dimOp(bud.g, fI); dimOp(glow, Math.min(fE, fI));
+    mrnas.forEach((r) => dimOp(r, fI)); prots.forEach((r) => dimOp(r, fI)); }
+  /* receptors dim while the entry blocker sits on them */
+  rec.forEach((r) => { r.g.style.opacity = m.blk.entry > 0 && r.k === "ccr" ? 0.45 : 1; });
+  /* progeny drift away; unfinished ones leave smaller */
+  prog.forEach((q) => { if (q.t >= 9) { q.v.g.setAttribute("opacity", 0); return; } q.t += dt; const f = q.t / 6; q.x += (REL[0] - q.x) * dt * 0.5 + 6 * dt; q.y += (REL[1] - q.y) * dt * 0.5 + 4 * dt; place(q.v.g, q.x, q.y, 0, q.imm ? 0.82 : 1); q.v.g.setAttribute("opacity", clamp(1.4 - f * 1.4).toFixed(2)); if (q.t > 6) q.t = 9; });
+  /* ambient virions drift in; a blocked doorway holds them outside in a queue */
   const nAmb = Math.round(sm.VL * amb.length);
   amb.forEach((a, i) => { const on = i < nAmb; a.t += dt; if (!on) { a.v.g.setAttribute("opacity", 0); return; } a.v.g.setAttribute("opacity", 0.8);
-    a.x += (22 + 10 * Math.sin(a.t + i)) * dt; a.y = clamp(a.y + Math.sin(a.t * 0.8 + i * 2) * 10 * dt, 110, 350); if (a.x > S0[0] - 20 - (a.y - 260) * 0.0) { a.x = rnd(30, 70); a.y = rnd(120, 350); } place(a.v.g, a.x, a.y, 0, 0.7); });
+    a.x += (22 + 10 * Math.sin(a.t + i)) * dt; a.y = clamp(a.y + Math.sin(a.t * 0.8 + i * 2) * 10 * dt, 110, 350);
+    if (m.blk.entry > 0 && a.x > 118) a.x = 118;
+    if (a.x > S0[0] - 20) { a.x = rnd(30, 70); a.y = rnd(120, 350); } place(a.v.g, a.x, a.y, 0, 0.7); });
+  const capK = drug + ":" + level; if (capK !== capKey) { capKey = capK; capEl.textContent = capText(drug, level); }
   /* plot */
   const u0 = sm.u0, e = sm.eff, cb = evalPts(CD_PTS, u0), vb = evalPts(VL_PTS, u0);
   curves.cdb.setAttribute("d", poly((u) => evalPts(CD_PTS, u), 0, 1, 70)); curves.vlb.setAttribute("d", poly((u) => evalPts(VL_PTS, u), 0, 1, 70));

@@ -26,10 +26,10 @@ function modelOf(S, level, drug) {
   const a = S.level.a[level], hyc = drug === 1 ? 1 : 0, hyd = drug === 2 ? 1 : 0, txf = drug === 3 ? 1 : 0;
   const cl = (v) => Math.max(0, Math.min(1, v));
   const HbF = cl(hyc ? 0.78 : level === 0 ? 0.18 : 0.08);
-  const P = cl(a * (hyc ? 0.38 : 1) * (txf ? 0.58 : 1));
+  const P = cl(a * (hyc ? 0.38 : 1) * (txf ? 0.45 : 1));
   const Sick = cl(P * 1.05 - 0.02);
-  const Occ = cl(Sick * 0.96 * (hyd ? 0.58 : 1) * (txf ? 0.78 : 1));
-  const Haem = cl(Sick * 0.85 * (hyc ? 0.72 : 1) * (txf ? 0.55 : 1));
+  const Occ = cl(Sick * 0.96 * (hyd ? 0.52 : 1) * (txf ? 0.60 : 1));
+  const Haem = cl(Sick * 0.85 * (hyc ? 0.72 : 1) * (txf ? 0.45 : 1));
   const Pain = cl(Occ * 1.05 * (hyd ? 0.42 : 1));
   const Org = cl(0.62 * Occ + 0.38 * Haem);
   const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
@@ -40,7 +40,7 @@ const TESTS = [
   [0, 0, "sickling little · vessel open · haemolysis little"],
   [2, 0, "sickling marked · vessel blocked · haemolysis marked"],
   [2, 1, "sickling some · vessel narrowed · haemolysis some"],
-  [2, 3, "sickling some · vessel narrowed · haemolysis some"],
+  [2, 3, "sickling some · vessel narrowed · haemolysis little"],
 ];
 
 /* ---------------- static layout ---------------- */
@@ -54,7 +54,9 @@ const body = `
 <defs><marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L7 3L0 6Z" fill="#8a8496"/></marker></defs>
 <path class="sk-arrow" d="M206 145H252"/>
 <path class="sk-arrow" d="M438 145H492"/>
-<path class="sk-arrow" d="M648 315H704"/>
+<path class="sk-feed" d="M648 315H748"/>
+<path class="sk-man" d="M748 148V356"/>
+<g id="stubs"></g>
 <g id="hb">
   <circle class="sk-hba" cx="112" cy="128" r="21"/><circle class="sk-hba" cx="150" cy="128" r="21"/>
   <circle class="sk-hbb" cx="112" cy="164" r="21"/><circle class="sk-hbb" cx="150" cy="164" r="21"/>
@@ -74,22 +76,34 @@ const body = `
   <path id="bigsick" class="sk-sickle" d="M530 158Q566 108 616 132Q584 140 576 166Q550 178 530 158Z" opacity="0"/>
 </g>
 <rect id="lumen" class="sc-lumen" x="14" y="275" width="686" height="80" rx="6"/>
-<path class="sk-wall" d="M14 275H700M14 355H700"/>
-<g id="rbcs"></g><g id="occ"></g><g id="haem"></g><g id="organs"></g><g id="parts"></g><g id="over"></g><g id="panel"></g>`;
+<path id="walls" class="sk-wall" d="M14 275H700M14 355H700"/>
+<g id="bagG" class="hot" tabindex="0" data-info="Donor red cells: transfusion adds red cells with normal haemoglobin and dilutes the sickled cells, so the jam clears." opacity="0">
+  <rect class="sk-bag" x="26" y="196" width="44" height="56" rx="8"/>
+  <rect class="sk-bagfl" x="31" y="218" width="34" height="29" rx="5"/>
+  <path class="sk-tube" d="M48 252V273"/>
+</g>
+<circle id="haloBrain" class="sk-dmg" cx="829" cy="148" r="56" opacity="0"/>
+<circle id="haloSpleen" class="sk-dmg" cx="829" cy="258" r="44" opacity="0"/>
+<circle id="haloJoint" class="sk-dmg" cx="829" cy="356" r="50" opacity="0"/>
+<g id="brainSlot"></g><g id="spleenSlot"></g><g id="jointSlot"></g>
+<g id="stuck"></g>
+<g id="rbcs"></g><g id="occ"></g><g id="haem"></g><g id="parts"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "sickle-cell-disease", fig: "Fig 1", title: "Sickle cell disease: from HbS to vaso-occlusion", W, H, body,
   label: "An animated scene of sickle cell disease. A point change in the beta globin chain makes haemoglobin S. When it gives up oxygen, haemoglobin S sticks together into stiff polymers that bend red cells into sickles. Sickled cells block small vessels and break apart early, causing pain and organ damage. Gauges show polymer, sickling, vessel block, haemolysis, pain and organ risk. Treatment choices include hydroxycarbamide, hydration and analgesia, and transfusion.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.",
-  scene: { CY, W, H }, pageJs: readFileSync(join(HERE, "sickle.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { CY, W, H }, pageJs: readFileSync(join(HERE, "sickle.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With transfusion",
   sourcesLis: [
     "<strong>How sickle cell disease develops.</strong> A single point change in the beta globin gene swaps one amino acid in the beta chain, making haemoglobin S (HbS). Oxygenated HbS behaves much like normal haemoglobin, but deoxygenated HbS is sticky and joins into long polymers. The polymers stiffen and bend the red cell into a sickle. Sickled cells jam in small vessels (vaso-occlusion), causing pain and organ injury, and they survive a shorter time in the circulation, so haemolysis causes anaemia and jaundice. A person with one copy (trait) makes mostly normal haemoglobin and sickles little. This is standard teaching in medicine and haematology texts and was not checked against a linked source here, so it is flagged for review.",
-    "<strong>Treatment ideas shown.</strong> Hydroxycarbamide raises fetal haemoglobin (HbF), which does not join the polymer and so reduces sickling. Hydration and analgesia support flow and ease pain during a crisis without changing the haemoglobin. Transfusion adds red cells with normal haemoglobin and dilutes the sickled cells. These are teaching toggles only.",
+    "<strong>Treatment ideas shown.</strong> Hydroxycarbamide raises fetal haemoglobin (HbF), which does not join the polymer and so reduces sickling. Hydration and analgesia support flow and ease pain during a crisis without changing the haemoglobin. Transfusion adds red cells with normal haemoglobin and dilutes the sickled cells, which reopens the vessel. These are teaching toggles only.",
   ],
   simplified: "Oxygen affinity, HbF distribution between cells, adhesion to the vessel wall, inflammation, nitric oxide loss, stroke and leg ulcer and priapism detail, chronic organ screening, gene therapy and transplantation, drug choice and all doses are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
   extraCss: `
 .sk-arrow{fill:none;stroke:var(--anatomy-mid);stroke-width:2;marker-end:url(#arr)}
+.sk-feed{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 55%,var(--anatomy-paper));stroke-width:10;stroke-linecap:round;opacity:.85}
+.sk-man{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 45%,var(--anatomy-paper));stroke-width:5;stroke-linecap:round;opacity:.8}
 .sk-hba{fill:color-mix(in srgb,var(--c-lymph) 65%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-lymph) 60%,#000);stroke-width:1}
 .sk-hbb{fill:color-mix(in srgb,var(--c-rbc) 60%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 60%,#000);stroke-width:1}
 .sk-mut{fill:var(--c-neut);stroke:#7a5a12;stroke-width:1}
@@ -102,10 +116,13 @@ buildScene({
 .sk-o2{fill:none;stroke:var(--c-fl);stroke-width:1.2}
 .sk-hbf{fill:var(--c-good);stroke:color-mix(in srgb,var(--c-good) 50%,#000);stroke-width:.5}
 .p-fluid{fill:var(--c-fl)}
+.sk-drop{fill:var(--c-rbc);stroke:color-mix(in srgb,var(--c-rbc) 55%,#000);stroke-width:.5}
 .sk-frag{fill:none;stroke:var(--c-rbc);stroke-width:1.6;stroke-linecap:round}
 .sk-dmg{fill:var(--c-bad)}
-.sk-bone{fill:#e8ddc4;stroke:#9a8a62;stroke-width:1}
-.sk-spleen{fill:color-mix(in srgb,var(--c-mast) 70%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-mast) 55%,#000);stroke-width:1}
+.sk-bag{fill:color-mix(in srgb,var(--anatomy-paper) 80%,var(--c-fl));stroke:var(--anatomy-mid);stroke-width:1.2}
+.sk-bagfl{fill:var(--c-rbc);stroke:none}
+.sk-tube{fill:none;stroke:var(--anatomy-mid);stroke-width:2.5}
+.sk-cap{fill:var(--anatomy-strong);font-size:12px}
 .dr-g-fill.g-pain{fill:var(--c-neut)}
 `,
 });
