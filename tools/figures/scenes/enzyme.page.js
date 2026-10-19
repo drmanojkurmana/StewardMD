@@ -1,13 +1,13 @@
 /* Enzyme scene: substrate converted to product, inhibitor docking, Michaelis-Menten and Lineweaver-Burk plots, gauges. */
 const WW = SC.W;
-const layers = { main: $("enzMain"), parts: $("parts"), over: $("over"), panel: $("panel") };
+const layers = { main: $("enzMain"), parts: $("parts"), over: $("over"), panel: $("panel"), wash: $("subWash"), glow: $("rateGlow"), fill: $("mmFill"), cap: $("capLine") };
 const ENZ = { x: 112, y: 182, actX: 132, actY: 170, alloX: 88, alloY: 202, modX: 112, modY: 214 };
 const enzG = cell(layers.main, { cls: "enz", r: 34, nuc: 0, seed: 3, wob: 0.12 });
 mk("circle", { class: "enz-act", cx: 20, cy: -12, r: 9 }, enzG);
 mk("circle", { class: "enz-site", cx: -24, cy: 20, r: 7 }, enzG);
 mk("circle", { class: "enz-site", cx: 0, cy: 30, r: 6 }, enzG);
 place(enzG, ENZ.x, ENZ.y, 0, 1);
-const vigRects = [0, 1, 2].map(function (i) { return svg.querySelector("#vig" + i + " rect"); });
+const vigRects = [0, 1].map(function (i) { return svg.querySelector("#vig" + i + " rect"); });
 /* ---- particle pools ---- */
 function pool(n, build) { return Array.from({ length: n }, function () { const e = build(); e.setAttribute("opacity", "0"); return { e: e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0 }; }); }
 const subs = pool(18, function () { return mk("circle", { class: "sc-p p-sub", r: 5 }, layers.parts); });
@@ -17,6 +17,23 @@ const mods = pool(6, function () { return mk("path", { class: "sc-p p-modp", d: 
 const freeP = function (pl) { return pl.find(function (p) { return !p.on; }); };
 function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
 function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
+/* ---- one-line state summary inside the stage ---- */
+function capText(l, d) {
+  if (d === 1) {
+    if (l === 1) return "More substrate outnumbers the blocker at the active site, so the rate recovers.";
+    if (l === 2) return "More substrate cannot move the side site blocker, so the maximum rate stays low.";
+    return "More substrate fills more active sites, so the rate rises toward its ceiling.";
+  }
+  if (d === 2) {
+    if (l === 2) return "The modulator boosts the enzyme from a second site, so the maximum rate rises.";
+    if (l === 1) return "The modulator boosts the enzyme from its own site, so the rate recovers.";
+    return "The modulator sits on its own site and boosts the enzyme, so the rate rises.";
+  }
+  if (l === 1) return "No treatment. The blocker sits in the active site, so the rate stays slow.";
+  if (l === 2) return "No treatment. The blocker sits on its side site, so the maximum rate stays low.";
+  return "No inhibitor and no treatment. The enzyme turns substrate into product.";
+}
+let capKey = "";
 /* ---- labels and gauges ---- */
 const gg = {};
 function initPanel() {
@@ -34,19 +51,26 @@ function initPanel() {
   pill(ox, "Reciprocal", 720, 170, 800, 122, "Lineweaver-Burk plot: 1/rate against 1/substrate. It is a straight line. Where it meets the vertical axis shows 1/Vmax, and its steepness shows Km.");
 }
 const sm = { Vmax: 0.86, KmN: 0.32, Rate: 0.45, Sub: 0.38, SubG: 0.45, KmG: 0.4, comp: 0, nonc: 0, modu: 0 };
+const fast = { sub: 0.38, rate: 0.45 };
 const acc = { sub: 0, inh: 0, mod: 0 };
 function mmPath(Vmax, KmN) { let d = ""; for (let i = 0; i <= 24; i++) { const s = i / 24, v = Vmax * s / (KmN + s), x = 368 + 232 * s, y = 262 - 138 * v; d += (i ? "L" : "M") + f1(x) + " " + f1(y); } return d; }
+function mmArea(Vmax, KmN) { return mmPath(Vmax, KmN) + "L" + f1(368 + 232) + " 262L368 262Z"; }
 function lbPath(Vmax, KmN) { const ss = [1, 0.7, 0.45, 0.3, 0.2, 0.14]; let d = ""; ss.forEach(function (s, i) { const invS = 1 / s, invV = (KmN / Vmax) * invS + 1 / Vmax; const x = clamp(692 + (invS - 1) / 6.14 * 208, 692, 900), y = clamp(262 - (invV - 1) / 6 * 138, 126, 260); d += (i ? "L" : "M") + f1(x) + " " + f1(y); }); return d; }
 function init() { initPanel(); }
 function step(dt, m) {
-  const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.5);
+  const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.5), kf = Math.min(1, dt * 4);
   sm.Vmax = lerp(sm.Vmax, m.Vmax, k2); sm.KmN = lerp(sm.KmN, m.KmN, k2); sm.Rate = lerp(sm.Rate, m.Rate, k1); sm.Sub = lerp(sm.Sub, m.Sub, k1); sm.SubG = lerp(sm.SubG, m.SubG, k1); sm.KmG = lerp(sm.KmG, m.KmG, k2); sm.comp = lerp(sm.comp, m.comp, k1); sm.nonc = lerp(sm.nonc, m.nonc, k1); sm.modu = lerp(sm.modu, m.modu, k1);
+  fast.sub = lerp(fast.sub, m.Sub, kf); fast.rate = lerp(fast.rate, m.Rate, kf);
+  /* large washes so treatment on versus off reads at a glance: substrate flood, reaction glow */
+  layers.wash.setAttribute("opacity", (0.02 + 0.42 * fast.sub).toFixed(2));
+  layers.glow.setAttribute("opacity", clamp(fast.rate * 1.15 - 0.12, 0, 0.5).toFixed(2));
   /* enzyme pulses faster when the rate is high; modulator enlarges it a little */
   const es = 0.94 + 0.1 * sm.Rate + 0.07 * sm.modu + 0.02 * Math.sin(tm / 300);
   place(enzG, ENZ.x + Math.sin(tm / 1600) * 2, ENZ.y + Math.cos(tm / 1900) * 2, Math.sin(tm / 2400) * 5, es);
   vigRects.forEach(function (r, i) { if (r) r.setAttribute("opacity", ((i === 0 && sm.comp > 0.5) || (i === 1 && sm.nonc > 0.5)) ? "0.9" : "0"); });
   /* plots: current curve and line against the faint no-inhibitor baseline */
   $("mmCur").setAttribute("d", mmPath(sm.Vmax, sm.KmN)); $("mmBase").setAttribute("d", mmPath(0.86, 0.32));
+  layers.fill.setAttribute("d", mmArea(sm.Vmax, sm.KmN));
   $("lbCur").setAttribute("d", lbPath(sm.Vmax, sm.KmN)); $("lbBase").setAttribute("d", lbPath(0.86, 0.32));
   $("mmVmax").setAttribute("y1", f1(262 - 138 * sm.Vmax)); $("mmVmax").setAttribute("y2", f1(262 - 138 * sm.Vmax));
   const kmDot = $("mmKmDot"); kmDot.setAttribute("cx", f1(368 + 232 * Math.min(1, sm.KmN))); kmDot.setAttribute("cy", f1(262 - 138 * sm.Vmax / 2));
@@ -74,5 +98,7 @@ function step(dt, m) {
   /* gauges */
   gg.vmax.set(sm.Vmax, wordOf(sm.Vmax, 0.55, 0.9, ["low", "usual", "high"])); gg.km.set(sm.KmG, wordOf(sm.KmG, 0.3, 0.65, ["low", "usual", "high"]));
   gg.rate.set(sm.Rate, wordOf(sm.Rate, 0.28, 0.52, ["slow", "usual", "fast"])); gg.sub.set(sm.SubG, wordOf(sm.SubG, 0.35, 0.7, ["low", "usual", "high"]));
+  const key = level + ":" + drug;
+  if (key !== capKey) { capKey = key; const t = capText(level, drug); if (layers.cap.textContent !== t) layers.cap.textContent = t; }
 }
 run({ init: init, step: step });

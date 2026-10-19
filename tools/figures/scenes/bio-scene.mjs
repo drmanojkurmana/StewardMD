@@ -6,13 +6,30 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 export const ROOT = resolve(HERE, "../../..");
+/* organ kind -> slimmed art file (tools/figures/assets/organs/slim/<v>.svg) */
+const ORG_SLIM = { liver: "liver-4", heart: "heart-1", kidney: "kidney-1", lung: "lung-1", stomach: "stomach-1", intestine: "intestine-1", brain: "brain-1", pancreas: "pancreas-1", spleen: "spleen-1", bowel: "small-intestine-1", colon: "large-intestine-2", bladder: "bladder-1", eye: "eye-1", ear: "ear-2", skin: "skin-2", muscle: "muscle-1", joint: "joint-1", vessel: "blood-vessel-1" };
+/* organ kind -> art source for the footer credit (uterus/thyroid/ganglion are procedural: no entry) */
+const ORG_SRC = { liver: "servier", heart: "nih", kidney: "nih", lung: "nih", stomach: "nih", intestine: "nih", brain: "nih", pancreas: "nih", spleen: "nih", bowel: "servier", colon: "servier", bladder: "servier", eye: "servier", ear: "nih", skin: "nih", muscle: "servier", joint: "dbcls", vessel: "servier" };
+const ART_FULL = { nih: "NIH BioArt Source, public domain", servier: "Servier Medical Art by Servier, CC BY 3.0 (https://smart.servier.com), recoloured and animated", dbcls: "knee joint art by DataBase Center for Life Science (DBCLS), CC BY 4.0" };
+const ART_SHORT = { nih: "NIH BioArt Source (public domain)", servier: "Servier Medical Art by Servier (CC BY 3.0)", dbcls: "DBCLS knee joint art (CC BY 4.0)" };
+function organsArtJs(kinds) {
+  let js = "";
+  for (const k of kinds) {
+    const svg = readFileSync(join(HERE, "../assets/organs/slim", ORG_SLIM[k] + ".svg"), "utf8");
+    const vb = svg.match(/viewBox="([^"]+)"/)[1].split(/\s+/).map(Number);
+    const pfx = (svg.match(/id="(oa[a-z]{3})-/) || [0, "oax" + k.slice(0, 3)])[1];
+    const inner = svg.replace(/^[\s\S]*?<svg[^>]*>/, "").replace(/<\/svg>\s*$/, "");
+    js += "_ORG_ART[" + JSON.stringify(k) + "]={vb:[" + vb.join(",") + "],pfx:" + JSON.stringify(pfx) + ",body:" + JSON.stringify(inner) + "};\n";
+  }
+  return js;
+}
 const AN = process.env.ANATOMY_DIR || "/home/user/wheresryan22/anatomy";
 export const k = await import(pathToFileURL(join(AN, "kit/iso-kit.mjs")));
 const { BIO_CSS } = await import(pathToFileURL(join(process.env.ANIMA_DIR || "/home/user/garinmckayl/anima", "kit/blob.mjs")));
 export const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 export function buildScene(o) {
-  const { id, fig = "Fig 1", title, hint = "tap a part · space: pause", caption, W, H, body, label, scene = {}, pageJs, modelOf, MD, tests = [], withLabel, withoutLabel, sourcesLis = [], simplified, extraCss = "", extraControls = "" } = o;
+  const { id, fig = "Fig 1", title, hint = "tap a part · space: pause", caption, W, H, body, label, scene = {}, pageJs, modelOf, MD, tests = [], withLabel, withoutLabel, sourcesLis = [], simplified, extraCss = "", extraControls = "", organs = false } = o;
   if (process.argv.includes("--print-model")) { for (let l = 0; l < MD.level.a.length; l++) for (let d = 0; d < MD.settings.length; d++) console.log(JSON.stringify([l, d, modelOf(MD, l, d).readout])); process.exit(0); }
   for (const [l, d, t] of tests) { const r = modelOf(MD, l, d).readout; if (r !== t) throw new Error(`${id}: model readout "${r}" != "${t}" at level ${l}, drug ${d}`); }
   const start = modelOf(MD, MD.level.start, 0).readout;
@@ -26,15 +43,21 @@ export function buildScene(o) {
 </div>
 <p id="status" class="dr-status" aria-live="polite"></p>
 <p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p>`;
+  let organKinds = [];
+  if (organs) {
+    if (Array.isArray(organs)) organKinds = organs.filter((k) => ORG_SLIM[k]);
+    else { const seen = new Set(), re = /organ\(\s*[^,]+,\s*"([a-z]+)"/g; let m; while ((m = re.exec(pageJs))) if (ORG_SLIM[m[1]] && !seen.has(m[1])) { seen.add(m[1]); organKinds.push(m[1]); } }
+  }
+  const artSrcs = ["nih", "servier", "dbcls"].filter((s) => organKinds.some((k) => ORG_SRC[k] === s));
   const sources = `<footer class="bio-sources">
 <h2>What the figure shows, and how sure we are</h2>
-<ul>${sourcesLis.map((s) => `<li>${s}</li>`).join("")}</ul>
+<ul>${sourcesLis.map((s) => `<li>${s}</li>`).join("")}${artSrcs.length ? `<li><strong>Organ art.</strong> Organ art is ${artSrcs.map((s) => ART_FULL[s]).join("; ")}.</li>` : ""}</ul>
 <p><strong>What was simplified.</strong> ${simplified}</p>
-<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). ${artSrcs.length ? `Organ illustrations are ${artSrcs.map((s) => ART_SHORT[s]).join("; ")}; all other drawing is original.` : "All drawing is original."}</p>
 <p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
 </footer>`;
   const SC = { ...scene, S: { level: MD.level, settings: MD.settings, drugNames: MD.drugNames, status: MD.status } };
-  const script = `const SC = ${JSON.stringify(SC)};\nconst modelOf = ${modelOf.toString()};\n` + readFileSync(join(HERE, "bio.lib.js"), "utf8") + "\n" + pageJs;
+  const script = `const SC = ${JSON.stringify(SC)};\nconst modelOf = ${modelOf.toString()};\n` + readFileSync(join(HERE, "bio.lib.js"), "utf8") + "\n" + (organs ? readFileSync(join(HERE, "organs.lib.js"), "utf8") + "\n" + organsArtJs(organKinds) : "") + pageJs;
   const CSS = readFileSync(join(HERE, "../figure.css"), "utf8") + readFileSync(join(HERE, "dialysis.css"), "utf8") + readFileSync(join(HERE, "bio-scene.css"), "utf8") + extraCss;
   for (const light of [false, true]) {
     const html = k.pageHtml({ title, theme: light ? "light" : "dark", width: W + 40, body: `<style>${BIO_CSS}${CSS}</style>${framed}${controls}${sources}`, script });

@@ -30,7 +30,7 @@ function modelOf(S, level, drug) {
   const firstPass = iv ? 0 : liverImp ? 0.16 : 0.42;
   const metabBase = liverImp ? 0.22 : 0.62;
   const renalBase = kidneyImp ? 0.16 : 0.62;
-  const metab = cl(metabBase * (inducer ? 1.65 : inhibitor ? 0.38 : 1));
+  const metab = cl(metabBase * (inducer ? 1.8 : inhibitor ? 0.38 : 1));
   const renal = cl(renalBase);
   const bile = liverImp ? 0.18 : 0.32;
   const freeF = liverImp ? 0.46 : kidneyImp ? 0.38 : 0.28;
@@ -50,57 +50,61 @@ const TESTS = [
   [1, 0, "peak high · exposure high · half-life usual · steady state high"],
   [2, 0, "peak high · exposure high · half-life long · steady state high"],
   [0, 1, "peak moderate · exposure low · half-life short · steady state low"],
+  [0, 2, "peak moderate · exposure usual · half-life long · steady state usual"],
+  [2, 1, "peak high · exposure high · half-life usual · steady state high"],
+  [2, 3, "peak moderate · exposure high · half-life long · steady state high"],
+  [3, 3, "peak low · exposure usual · half-life long · steady state usual"],
 ];
 
-/* ---------------- static layout ---------------- */
+/* ---------------- static layout ----------------
+ * Left to right: gut organ, liver organ, blood zone, kidney organ. Below: tissue
+ * zone under blood, levels graph bottom left, bile box bottom centre. Page script
+ * anchors every vessel to real organ ports and builds particle tracks from them. */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<rect class="pk-node pk-gut" x="30" y="92" width="150" height="110" rx="14"/>
-<rect class="pk-node pk-liver" x="230" y="92" width="170" height="110" rx="14"/>
-<rect class="pk-node pk-plasma" x="450" y="92" width="200" height="110" rx="14"/>
-<rect class="pk-node pk-tissue" x="700" y="92" width="230" height="110" rx="14"/>
-<path class="pk-flow" d="M180 147H224"/><path class="pk-flow" d="M400 147H444"/>
-<path class="pk-flow" d="M650 138H694"/><path class="pk-flow" d="M694 158H656"/>
-<polygon class="pk-head" points="224,147 214,142 214,152"/><polygon class="pk-head" points="444,147 434,142 434,152"/>
-<polygon class="pk-head" points="694,138 684,133 684,143"/><polygon class="pk-head" points="656,158 666,153 666,163"/>
-<path class="pk-dash" d="M360 202V224H860V244"/>
-<path class="pk-dash" d="M550 202V244"/>
-<text class="sc-lab pk-cap" x="105" y="190" text-anchor="middle">lumen to blood</text>
-<text class="sc-lab pk-cap" x="315" y="190" text-anchor="middle">enzymes act here</text>
-<text class="sc-lab pk-cap" x="550" y="190" text-anchor="middle">bound and free</text>
-<text class="sc-lab pk-cap" x="815" y="190" text-anchor="middle">drug enters and leaves</text>
-<g id="gutdet"></g><g id="livdet"></g><g id="pladet"></g><g id="tisdet"></g>
-<rect class="pk-graph" x="30" y="250" width="430" height="160" rx="12"/>
+<path id="portalV" class="pk-vessel" d="M150 235 C220 232 300 222 360 208"/>
+<path id="hepV" class="pk-vessel" d="M362 103 C420 105 460 125 495 145"/>
+<path id="bkV" class="pk-vessel" d="M655 150 L750 141"/>
+<path id="exchD" class="pk-flow" d="M560 220V250"/><path id="exchU" class="pk-flow" d="M600 250V220"/>
+<polygon class="pk-head" points="560,250 555,242 565,242"/><polygon class="pk-head" points="600,220 595,228 605,228"/>
+<path id="urineTube" class="pk-tube" d="M791 224V395"/>
+<path id="bileDuct" class="pk-duct" d="M330 219 C395 228 430 250 452 292 C465 318 480 332 500 345"/>
+<g id="gutSlot"></g><g id="liverSlot"></g><g id="kidneySlot"></g>
+<rect id="bloodBox" class="pk-node pk-plasma" x="495" y="110" width="160" height="110" rx="14"/>
+<rect id="plasmaBoost" class="pk-boost" x="495" y="110" width="160" height="110" rx="14" opacity="0"/>
+<rect class="pk-node pk-tissue" x="495" y="250" width="160" height="85" rx="12"/>
+<ellipse id="liverGlow" class="pk-glow" cx="370" cy="165" rx="115" ry="80" opacity="0"/>
+<ellipse id="liverDim" class="pk-dim" cx="370" cy="165" rx="115" ry="80" opacity="0"/>
+<ellipse id="gutDim" class="pk-dim" cx="135" cy="170" rx="88" ry="85" opacity="0"/>
+<ellipse id="kidneyDim" class="pk-dim" cx="805" cy="160" rx="72" ry="82" opacity="0"/>
+<g id="enz"></g><g id="block"></g><g id="prot"></g><g id="tcells"></g>
+<rect class="pk-graph" x="30" y="250" width="390" height="160" rx="12"/>
 <g id="graph"></g>
-<rect class="pk-node pk-kidney" x="500" y="250" width="190" height="160" rx="12"/>
-<rect class="pk-node pk-bile" x="730" y="250" width="200" height="160" rx="12"/>
-<g id="kidet"></g><g id="bildet"></g>
+<rect class="pk-node pk-bile" x="480" y="345" width="180" height="55" rx="10"/>
 <g id="parts"></g>
 <g id="over"></g>
 <g id="panel"></g>`;
 
 const extraCss = `
-body{--c-drug:#e8930c;--c-prot:#2f9f7c;--c-metab:#8a8f98;--c-urine:#d9a92c;--c-bile:#6aa84f;--c-gut:#7ab8ff;--c-liv:#e07856;--c-tis:#b7a1e6}
-body[data-theme="light"]{--c-drug:#c77400;--c-prot:#237a5e;--c-metab:#6b7280;--c-urine:#a67c00;--c-bile:#4c7a34;--c-gut:#2f7ad8;--c-liv:#c2502e;--c-tis:#8f72d0}
+body{--c-drug:#e8930c;--c-prot:#2f9f7c;--c-metab:#8a8f98;--c-urine:#d9a92c;--c-bile:#6aa84f}
+body[data-theme="light"]{--c-drug:#c77400;--c-prot:#237a5e;--c-metab:#6b7280;--c-urine:#a67c00;--c-bile:#4c7a34}
 .pk-node{stroke:var(--anatomy-mid);stroke-width:1.2}
-.pk-gut{fill:color-mix(in srgb,var(--c-gut) 26%,var(--anatomy-paper))}
-.pk-liver{fill:color-mix(in srgb,var(--c-liv) 30%,var(--anatomy-paper))}
 .pk-plasma{fill:color-mix(in srgb,var(--c-rbc) 22%,var(--anatomy-paper))}
-.pk-tissue{fill:color-mix(in srgb,var(--c-tis) 26%,var(--anatomy-paper))}
-.pk-kidney{fill:color-mix(in srgb,var(--c-endo) 28%,var(--anatomy-paper))}
+.pk-tissue{fill:color-mix(in srgb,var(--c-endo) 20%,var(--anatomy-paper))}
 .pk-bile{fill:color-mix(in srgb,var(--c-bile) 24%,var(--anatomy-paper))}
 .pk-graph{fill:color-mix(in srgb,var(--anatomy-paper) 88%,var(--c-gut));stroke:var(--anatomy-mid);stroke-width:1.2}
+.pk-vessel{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 42%,var(--anatomy-paper));stroke-width:14;stroke-linecap:round;opacity:.8}
 .pk-flow{fill:none;stroke:var(--anatomy-mid);stroke-width:2}
 .pk-head{fill:var(--anatomy-mid)}
-.pk-dash{fill:none;stroke:var(--anatomy-mid);stroke-width:1.4;stroke-dasharray:5 4;opacity:.65}
-.pk-cap{opacity:.75}
-.pk-wall{fill:none;stroke:color-mix(in srgb,var(--c-gut) 55%,var(--anatomy-mid));stroke-width:2}
-.pk-lumen{fill:color-mix(in srgb,var(--c-gut) 16%,var(--anatomy-paper))}
-.pk-hep{fill:color-mix(in srgb,var(--c-liv) 45%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-liv) 55%,#000);stroke-width:.7}
+.pk-boost{fill:var(--c-drug);stroke:none}
+.pk-glow{fill:color-mix(in srgb,var(--c-drug) 55%,transparent);stroke:none}
+.pk-dim{fill:color-mix(in srgb,#3a4356 55%,transparent);stroke:none}
+.pk-auc{fill:color-mix(in srgb,var(--c-drug) 38%,transparent);stroke:none}
+.pk-cap{fill:var(--anatomy-strong);font-size:12px}
 .pk-enz{fill:var(--c-drug);stroke:color-mix(in srgb,var(--c-drug) 55%,#000);stroke-width:.5}
-.pk-block{stroke:var(--c-bad);stroke-width:2;stroke-linecap:round}
+.pk-block{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 55%,#000);stroke-width:.5}
 .pk-prot{fill:color-mix(in srgb,var(--c-prot) 55%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-prot) 60%,#000);stroke-width:.8}
-.pk-tcell{fill:color-mix(in srgb,var(--c-tis) 40%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-tis) 55%,#000);stroke-width:.7}
+.pk-tcell{fill:color-mix(in srgb,var(--c-endo) 40%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-endo) 55%,#000);stroke-width:.7}
 .pk-axis{stroke:var(--anatomy-mid);stroke-width:1.2}
 .pk-grid{stroke:var(--anatomy-mid);stroke-width:.6;opacity:.35}
 .pk-curve1{fill:none;stroke:var(--c-drug);stroke-width:2.6;stroke-linejoin:round}
@@ -119,14 +123,14 @@ body[data-theme="light"]{--c-drug:#c77400;--c-prot:#237a5e;--c-metab:#6b7280;--c
 
 buildScene({
   id: "pharmacokinetics-adme", fig: "Fig 1", title: "Pharmacokinetics: absorption, distribution, metabolism and excretion", W, H, body, extraCss,
-  label: "An animated pharmacokinetics scene. A dose crosses the gut wall, passes the liver in the portal blood where first-pass metabolism removes some drug, then reaches the plasma. In plasma, drug is either bound to protein or free; only free drug moves into tissues and back. The liver metabolises drug over time, the kidney excretes drug into urine, and some drug leaves in bile. A concentration over time curve shows a single dose decay, its half-life, and repeated dosing rising to a steady state. Route and organ function settings cover oral and intravenous dosing and liver or kidney impairment. Treatment settings cover an enzyme inducer, an enzyme inhibitor and a renal impairment adjustment. Gauges show absorption, free drug, liver metabolism, kidney excretion, half-life and overall exposure.",
+  label: "An animated pharmacokinetics scene. A swallowed dose crosses the gut wall into portal blood and passes the liver first, so first-pass metabolism removes some drug before it acts. In blood, drug rides bound to protein as a store or travels free, and only free drug moves down into tissues and back. Liver enzymes break drug into metabolites, the kidney passes drug out in urine, and bile carries some drug back to the gut. The lower left graph plots levels over time with the shaded area showing overall exposure. Settings cover oral and intravenous dosing and liver or kidney impairment, with an enzyme inducer, an enzyme blocker and an adjusted spacing of doses. Gauges show absorption, free drug, liver metabolism, kidney excretion, half-life and overall exposure.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "adme.page.js"), "utf8"), modelOf, MD, tests: TESTS,
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "adme.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
   withoutLabel: "No treatment", withLabel: "With renal adjustment",
   sourcesLis: [
-    "<strong>Absorption and first pass.</strong> After an oral dose, drug crosses the gut wall into portal blood and reaches the liver before the systemic circulation, so gut wall and liver enzymes can remove part of the dose before it acts (first-pass metabolism) and bioavailability is less than complete. An intravenous dose enters the systemic blood directly, bypasses absorption and first pass, and reaches a higher, faster peak. This is standard pharmacology teaching and was not checked against a linked source here, so it is flagged for review.",
-    "<strong>Distribution, binding and half-life.</strong> In plasma, drug exists in a dynamic balance between protein-bound drug (a circulating store that does not leave the blood) and free drug (the form that crosses into tissues, acts, and is cleared). Distribution into tissues and back, together with total clearance by metabolism and excretion, sets the half-life: the time for the plasma concentration to fall by half. Reduced clearance prolongs half-life and raises exposure. Flagged for review.",
-    "<strong>Metabolism, excretion, interactions and steady state.</strong> The liver metabolises drug (with a smaller biliary route into the gut), and the kidney excretes drug and metabolites in urine. Enzyme inducers speed liver metabolism and lower exposure; enzyme inhibitors slow it and raise exposure and half-life. With repeated dosing at a regular interval, drug accumulates until the amount cleared between doses balances the amount given, reaching a steady state; when kidney function is poor, adjusting the regimen (for example spacing doses) brings exposure back toward usual. These are teaching toggles only. Flagged for review.",
+    "<strong>Absorption and first pass.</strong> After an oral dose, drug crosses the gut wall into portal blood and reaches the liver before the body, so gut wall and liver enzymes can remove part of the dose before it acts and less than the full dose reaches the blood. An intravenous dose enters blood directly, bypasses absorption and first pass, and reaches a higher, faster peak. This is standard pharmacology teaching and was not checked against a linked source here, so it is flagged for review.",
+    "<strong>Distribution, binding and half-life.</strong> In plasma, drug exists in a dynamic balance between protein-bound drug (a circulating store that does not leave the blood) and free drug (the form that crosses into tissues, acts, and is cleared). Spread into tissues and back, together with total clearance by metabolism and excretion, sets the half-life: the time for the level to fall by half. Reduced clearance prolongs half-life and raises exposure. Flagged for review.",
+    "<strong>Metabolism, excretion, interactions and steady state.</strong> The liver metabolises drug (with a smaller biliary route into the gut), and the kidney excretes drug and metabolites in urine. Enzyme inducers speed liver metabolism and lower exposure; enzyme blockers sit on the enzymes, slow breakdown, and raise exposure and half-life. With repeated dosing at a regular spacing, drug builds up until the amount cleared between doses balances the amount given, reaching a steady state; when kidney function is poor, spacing the doses further apart brings exposure back toward usual. These are teaching toggles only. Flagged for review.",
   ],
   simplified: "Transporters, enterohepatic recycling detail, tissue binding, volume of distribution as a measured quantity, active metabolites, renal tubular secretion and reabsorption detail, saturable kinetics, and all doses, intervals and targets are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
 });

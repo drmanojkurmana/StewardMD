@@ -3,6 +3,7 @@
  * Abnormal placental implantation leaves the placenta ischaemic. It releases anti-angiogenic factors
  * into the maternal blood, injuring endothelium everywhere: vessels tighten (hypertension), the kidney
  * filter leaks protein, and liver, kidney and brain are involved; seizures define eclampsia.
+ * Static layout here; placenta, vessel, organs and gauges move in preec.page.js.
  * Qualitative: no doses, no numbers. */
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -51,42 +52,44 @@ const TESTS = [
 const CY = 230;
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<text class="sc-zone" x="34" y="68">FROM PLACENTA TO MOTHER</text>
-<g id="drivers"></g><g id="placenta"></g><g id="vessel"></g><g id="organs"></g><g id="parts"></g><g id="marks"></g><g id="over"></g><g id="panel"></g>`;
+<ellipse id="placGlow" class="pre-glow" cx="140" cy="225" rx="54" ry="50"/>
+<g id="uterusSlot"></g>
+<g id="placenta"></g>
+<rect id="vLum" class="pre-lum" x="260" y="208" width="670" height="44"/>
+<rect id="vWallT" class="pre-wall" x="260" y="188" width="670" height="20" rx="8"/>
+<rect id="vWallB" class="pre-wall" x="260" y="252" width="670" height="20" rx="8"/>
+<g id="vessel"></g>
+<ellipse id="haloKidney" class="pre-halo" cx="380" cy="345" rx="72" ry="68"/>
+<ellipse id="haloLiver" class="pre-halo" cx="570" cy="352" rx="88" ry="72"/>
+<ellipse id="haloBrain" class="pre-halo" cx="770" cy="352" rx="88" ry="70"/>
+<g id="kidneySlot"></g><g id="liverSlot"></g><g id="brainSlot"></g>
+<g id="parts"></g><g id="marks"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "pre-eclampsia", fig: "Fig 1", title: "Pre-eclampsia: placenta to maternal syndrome", W, H, body,
-  label: "An animated map of pre-eclampsia. Shallow placental implantation leaves the placenta short of blood. The ischaemic placenta releases anti-angiogenic factors into the maternal circulation. Those factors injure the vessel lining everywhere, so vessels tighten and blood pressure rises, the kidney filter leaks protein, and the liver, kidney and brain are involved. Seizures mark eclampsia. Gauges show the placental factors, endothelial injury, pressure, protein leak, organ involvement and seizure risk. Treatments act by lowering pressure, preventing seizures, or delivering the placenta.",
+  label: "An animated map of pre-eclampsia, read left to right. A shallowly implanted placenta inside the uterus (left) releases harmful factors that travel in maternal blood and tighten a vessel (middle), injuring the kidney, liver and brain (right). An antihypertensive parks on the vessel wall and opens it, magnesium parks on the brain and blocks seizures, and delivery removes the placenta so the whole syndrome settles. A slider sets the stage, and a one-line caption narrates the state.",
   caption: "Schematic, not to scale. Speeds, sizes and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.",
-  scene: { W, H, CY }, pageJs: readFileSync(join(HERE, "preec.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H, CY }, pageJs: readFileSync(join(HERE, "preec.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With delivery",
   sourcesLis: [
     "<strong>How pre-eclampsia develops.</strong> In normal pregnancy the placenta implants deeply and remodels the uterine spiral arteries into wide, low resistance vessels. In pre-eclampsia that remodelling is shallow, so the placenta is relatively ischaemic. The stressed placenta releases excess anti-angiogenic factors (such as soluble fms-like tyrosine kinase 1 and soluble endoglin) and less pro-angiogenic placental growth factor. In the maternal blood these injure endothelium, the single-cell lining of vessels, reducing relaxing signals and making vessels tighten and leak. The result is hypertension and proteinuria, with involvement of liver, kidney, brain and other organs; seizures define eclampsia. This is standard teaching in obstetrics and medicine texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> An antihypertensive lowers pressure but does not remove the placental cause. Magnesium sulphate prevents and treats seizures. Delivery of the baby and placenta is the definitive step that removes the source of the factors, after which the syndrome settles over days. These are teaching toggles only.",
   ],
   simplified: "Diagnostic thresholds and timing, fetal growth restriction and fetal monitoring, HELLP as a named variant, blood tests and their cut-offs, choice and dosing of individual drugs, timing and mode of delivery, and care after birth are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
   extraCss: `
-.pre-node{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}
-.pre-node-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
-.pre-node-s{fill:var(--anatomy-text);font:9.5px var(--anatomy-mono);pointer-events:none;opacity:.85}
-.pre-arrow{fill:none;stroke:var(--anatomy-mid);stroke-width:1.6;stroke-linecap:round}
-.pre-head{fill:var(--anatomy-mid)}
-.pre-ut{fill:color-mix(in srgb,var(--c-endo) 26%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-endo) 60%,#000);stroke-width:1.3}
+.pre-glow{fill:var(--c-bad);stroke:none}
+.pre-halo{fill:var(--c-bad);stroke:none}
+.pre-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
 .pre-plac{fill:color-mix(in srgb,var(--c-bad) 42%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-bad) 65%,#000);stroke-width:1.2}
 .pre-spiral{fill:none;stroke:var(--c-rbc);stroke-width:2;stroke-linecap:round}
 .pre-wall{fill:color-mix(in srgb,var(--c-sm) 50%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-sm) 62%,#000);stroke-width:1}
 .pre-lum{fill:color-mix(in srgb,var(--c-rbc) 13%,var(--anatomy-paper))}
-.pre-org{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}
-.pre-org-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
-.pre-dmg{fill:var(--c-bad)}
-.pre-brain{fill:color-mix(in srgb,var(--c-mac) 45%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.2}
-.pre-kid{fill:color-mix(in srgb,#b8645a 55%,var(--anatomy-paper));stroke:#8f4438;stroke-width:1.2}
-.pre-liv{fill:color-mix(in srgb,#c47b4a 52%,var(--anatomy-paper));stroke:#96582c;stroke-width:1.2}
+.pre-dmg{fill:none;stroke:var(--c-bad);stroke-width:2.2;stroke-linecap:round}
 .pre-bolt{fill:var(--c-neut);stroke:color-mix(in srgb,var(--c-neut) 60%,#000);stroke-width:.8}
-.pre-prot{fill:var(--c-neut)}
-.pre-x{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.6}
-.pre-xx{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-linecap:round}
-.p-ang{--cc:var(--c-cyt)}
+.p-ang{--cc:var(--c-bad)}
+.p-ah{--cc:var(--c-no)}
+.p-mg{--cc:var(--c-cyt)}
+.p-prot{--cc:var(--c-neut)}
 .dr-g-fill.g-endo{fill:var(--c-endo)}.dr-g-fill.g-org{fill:var(--c-bad)}.dr-g-fill.g-seiz{fill:var(--c-neut)}
 `,
 });

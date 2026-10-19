@@ -47,47 +47,38 @@ const TESTS = [
 
 /* ---------------- static layout ---------------- */
 const body = `
-<rect class="sc-tissue" x="14" y="44" width="932" height="110" rx="16"/>
-<rect class="sc-tissue" x="14" y="162" width="560" height="278" rx="16"/>
-<rect class="sc-tissue" x="584" y="162" width="362" height="278" rx="16"/>
-<text class="sc-zone" x="34" y="68">WHY A CLOT FORMS: VIRCHOW TRIAD</text>
-<text class="sc-zone" x="34" y="186">CALF VEIN</text>
-<text class="sc-zone" x="604" y="186">LUNG</text>
-<g id="triad"></g>
-<path class="dvt-tri" id="tri1" d="M180 132L210 268"/>
-<path class="dvt-tri" id="tri2" d="M480 132L300 268"/>
-<path class="dvt-tri" id="tri3" d="M780 132L390 268"/>
-<rect id="lumen" class="sc-lumen" x="44" y="272" width="540" height="56" rx="28"/>
-<rect id="lumen2" class="sc-lumen" x="584" y="272" width="362" height="56" rx="28"/>
-<path class="dvt-branch" d="M750 272L750 248M860 272L860 248"/>
-<g id="leg"></g><g id="lung"></g><g id="cells"></g><g id="parts"></g><g id="over"></g><g id="panel"></g>`;
+<rect class="sc-tissue" x="14" y="44" width="932" height="396" rx="18"/>
+<ellipse id="halo" class="dvt-halo" cx="250" cy="265" rx="120" ry="145"/>
+<g id="veinSlot"></g>
+<path id="route" class="dvt-route" d="M250 112 L732 254"/>
+<g id="lungSlot"></g>
+<g id="clot"></g><g id="cells"></g><g id="parts"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "deep-vein-thrombosis", fig: "Fig 1", title: "Deep vein thrombosis: calf clot to lung embolus", W, H, body,
-  label: "An animated calf vein and lung. Three influences from the Virchow triad, slow flow, vessel wall injury and blood that clots readily, let a clot start around a vein valve. The clot grows along the vein, blocks flow and swells the calf, and pieces can break off, travel to the lung and block lung flow. Gauges show clot, vein flow, swelling, growth, embolus risk and lung flow. Treatment choices are compression with mobilisation, an anticoagulant, and a filter with clot dissolving treatment.",
+  label: "An animated calf vein and lung. A clot starts around a vein valve and its tail grows up toward the heart. The blocked vein slows flow and swells the calf, and pieces can break off, travel to the lung and block lung flow. Gauges show clot, vein flow, swelling, growth, embolus risk and lung flow. Treatment choices are compression with mobilisation, an anticoagulant, and a filter with clot dissolving treatment.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, times or numbers are shown or implied.",
-  scene: { W, H, travel: [[400, 300], [540, 300], [575, 300], [640, 300], [700, 300]] }, pageJs: readFileSync(join(HERE, "dvt.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "dvt.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With filter and clot dissolving treatment",
   sourcesLis: [
     "<strong>How deep vein thrombosis develops.</strong> The Virchow triad groups the influences that favour a venous clot: slow or stagnant blood flow (stasis, for example during immobility), injury to the vein wall lining (endothelial injury), and blood that clots more readily (hypercoagulability). A clot often starts in the pocket around a calf vein valve, where flow is slowest. Platelets and fibrin build it up and it propagates along the vein toward the heart. The blocked vein raises pressure behind the clot, so fluid leaves the vessels and the calf swells and aches. A piece that breaks off is an embolus: it travels with venous blood to the lung and can block lung flow as a pulmonary embolism. This is standard teaching in medicine, haematology and pathology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> Compression and mobilisation squeeze the calf and speed venous flow, which eases swelling and stasis. An anticoagulant stops the clot growing and stops new clots forming while the body clears it. A filter placed in the large vein to the heart catches travelling pieces, and a clot dissolving treatment breaks clot up; both are reserved for selected situations. These are teaching toggles only.",
   ],
   simplified: "Risk factor detail, inherited and acquired clotting disorders, diagnosis by scan and blood tests, clot above the knee versus in the calf, post thrombotic syndrome, bleeding risk, filter placement detail, surgery, prevention in hospital, and all doses and targets are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
   extraCss: `
-.dvt-tri{fill:none;stroke:var(--anatomy-mid);stroke-width:1.3;stroke-dasharray:4 4;opacity:.5}
-.dvt-tribox{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}
-.dvt-trit{fill:var(--anatomy-strong);font:700 11px var(--anatomy-mono);pointer-events:none}
-.dvt-tris{fill:var(--anatomy-text);font:9.5px var(--anatomy-mono);pointer-events:none}
-.dvt-valve{fill:none;stroke:var(--anatomy-mid);stroke-width:1.8;stroke-linecap:round}
-.dvt-branch{fill:none;stroke:var(--c-fl);stroke-width:8;stroke-linecap:round;opacity:.55}
-.dvt-sac{fill:color-mix(in srgb,var(--c-lymph) 22%,var(--anatomy-paper));stroke:var(--c-lymph);stroke-width:1.6}
-.dvt-ds{fill:color-mix(in srgb,#9aa3ad 55%,var(--anatomy-paper));stroke:#9aa3ad;stroke-width:1.2}
-.dvt-calf{fill:none;stroke:var(--c-endo);stroke-width:2;stroke-linecap:round}
-.dvt-stock{fill:color-mix(in srgb,var(--c-good) 18%,transparent);stroke:var(--c-good);stroke-width:1.4;stroke-dasharray:5 4}
+.dvt-halo{fill:var(--c-fl);stroke:none}
+.dvt-route{fill:none;stroke:var(--anatomy-mid);stroke-width:1.3;stroke-dasharray:5 5;opacity:.45}
+.dvt-valve{fill:none;stroke:var(--anatomy-strong);stroke-width:1.8;stroke-linecap:round}
+.dvt-stock{fill:color-mix(in srgb,var(--c-good) 20%,transparent);stroke:var(--c-good);stroke-width:1.6;stroke-dasharray:6 4}
+.dvt-arrow{fill:none;stroke:var(--c-good);stroke-width:1.6;stroke-linecap:round}
 .dvt-shield{fill:var(--anatomy-paper);stroke:var(--c-good);stroke-width:1.8}
 .dvt-tick{fill:none;stroke:var(--c-good);stroke-width:2;stroke-linecap:round}
-.dvt-filter{fill:none;stroke:var(--anatomy-strong);stroke-width:1.5;stroke-linecap:round}
+.dvt-wash{fill:color-mix(in srgb,var(--c-good) 22%,transparent);stroke:none}
+.dvt-chev{fill:none;stroke:var(--c-bad);stroke-width:1.8;stroke-linecap:round}
+.dvt-filter{fill:none;stroke:var(--anatomy-strong);stroke-width:1.8;stroke-linecap:round}
 .dvt-spark{fill:none;stroke:#ffd24a;stroke-width:1.4;stroke-linecap:round}
+.dvt-block{fill:color-mix(in srgb,#9aa3ad 55%,var(--anatomy-paper));stroke:#9aa3ad;stroke-width:1.2}
+.dvt-cap{fill:var(--anatomy-strong);font-size:12px}
 .p-emb2{--cc:#8f2a3a}
 .dr-g-fill.g-swell{fill:var(--c-endo)}
 `,

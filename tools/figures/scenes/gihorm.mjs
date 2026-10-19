@@ -51,17 +51,11 @@ const TESTS = [
 /* ---------------- static layout ---------------- */
 const CY = 350;
 const body = `
-<rect class="sc-tissue" x="14" y="44" width="420" height="256" rx="16"/>
-<rect class="sc-tissue" x="448" y="44" width="498" height="256" rx="16"/>
-<text class="sc-zone" x="32" y="68">STOMACH</text>
-<text class="sc-zone" x="466" y="68">DUODENUM AND PANCREAS</text>
-<ellipse id="stomLum" class="gi-lum" cx="230" cy="200" rx="112" ry="62"/>
-<ellipse id="duodLum" class="gi-lum" cx="548" cy="198" rx="72" ry="56"/>
-<path class="gi-duct" d="M620 198C660 190 690 192 724 196"/>
-<path class="gi-duct" d="M824 136C780 168 680 190 622 196"/>
-<path class="gi-vagus" d="M98 132C130 150 145 148 158 150M100 140C180 210 280 235 322 244"/>
-<rect class="gi-panc" x="676" y="150" width="168" height="104" rx="46"/>
-<text class="sc-lab sc-dim" x="758" y="168">pancreas</text>
+<rect class="sc-tissue" x="14" y="44" width="400" height="256" rx="16"/>
+<rect class="sc-tissue" x="414" y="44" width="532" height="256" rx="16"/>
+<g id="brainSlot"></g><g id="stomachSlot"></g><g id="intestSlot"></g><g id="pancSlot"></g>
+<ellipse id="acidPool" class="gi-acidpool" cx="270" cy="195" rx="52" ry="38" opacity="0.5"/>
+<ellipse id="bicPool" class="gi-bicpool" cx="528" cy="208" rx="38" ry="28" opacity="0.3"/>
 <g id="cells"></g><g id="ducts"></g>
 <rect id="lumen" class="sc-lumen" x="14" y="${CY - 28}" width="932" height="56"/>
 <text class="sc-zone sc-dim" x="30" y="${CY + 4}">BLOOD</text>
@@ -69,25 +63,27 @@ const body = `
 
 const extraCss = `
 .cl-vagus{--cc:#7fc4e8}.cl-par{--cc:#e9a2b3}.cl-ecl{--cc:#f08a4b}.cl-gcell{--cc:#e8d36a}.cl-dcell{--cc:#c978c9}.cl-icell{--cc:#5ec1a0}.cl-scell{--cc:#38d1ff}.cl-kcell{--cc:#7fcf6a}.cl-lcell{--cc:#3ddc97}.cl-acinar{--cc:#f2b84a}.cl-ductc{--cc:#7ab8ff}.cl-beta{--cc:#e59a88}
-.gi-lum{fill:color-mix(in srgb,#ffd24a 14%,var(--anatomy-paper));stroke:var(--anatomy-faint);stroke-width:1.2}
-.gi-duct{fill:none;stroke:var(--anatomy-mid);stroke-width:3;stroke-linecap:round;opacity:.7}
+.gi-acidpool{fill:#ffd24a;stroke:none}
+.gi-bicpool{fill:#7ab8ff;stroke:none}
+.gi-tube{fill:none;stroke:var(--anatomy-mid);stroke-width:10;stroke-linecap:round;stroke-linejoin:round;opacity:.22}
+.gi-duct{fill:none;stroke:var(--anatomy-mid);stroke-width:2.4;stroke-linecap:round;opacity:.7}
 .gi-vagus{fill:none;stroke:var(--c-lymph);stroke-width:1.6;stroke-dasharray:5 4;opacity:.8}
-.gi-panc{fill:color-mix(in srgb,#f2b84a 20%,var(--anatomy-paper));stroke:#d9961f;stroke-width:1.4}
 .gi-gb{fill:color-mix(in srgb,#7fcf6a 55%,var(--anatomy-paper));stroke:#4fa63c;stroke-width:1.6}
+.gi-gbneck{fill:none;stroke:#4fa63c;stroke-width:5;stroke-linecap:round}
 .gi-block{fill:none;stroke:var(--c-bad);stroke-width:2.2;stroke-linecap:round}
-.p-gas{--cc:#e8d36a}.p-acid{--cc:#ffd24a}.p-hist{--cc:#f08a4b}.p-vag{--cc:#7fc4e8}.p-cck{--cc:#5ec1a0}.p-sec{--cc:#38d1ff}.p-bic{--cc:#7ab8ff}.p-enz{--cc:#e89a3c}.p-bile{--cc:#7fcf6a}.p-incr{--cc:#3ddc97}.p-ins{--cc:#e5484d}.p-soma{--cc:#c978c9}.p-food{--cc:#c98a5a}
+.p-gas{--cc:#e8d36a}.p-acid{--cc:#ffd24a}.p-hist{--cc:#f08a4b}.p-vag{--cc:#7fc4e8}.p-cck{--cc:#5ec1a0}.p-sec{--cc:#38d1ff}.p-bic{--cc:#7ab8ff}.p-enz{--cc:#e89a3c}.p-bile{--cc:#7fcf6a}.p-incr{--cc:#3ddc97}.p-ins{--cc:#e5484d}.p-soma{--cc:#c978c9}.p-food{--cc:#c98a5a}.p-ppi{--cc:#b678e8}.p-somad{--cc:#c978c9}
 .dr-g-fill.g-gas{fill:#e8d36a}.dr-g-fill.g-acid{fill:#ffd24a}.dr-g-fill.g-enz{fill:#e89a3c}.dr-g-fill.g-bic{fill:var(--c-fl)}.dr-g-fill.g-ins{fill:var(--c-bad)}.dr-g-fill.g-soma{fill:#c978c9}
 `;
 
 buildScene({
   id: "gi-hormones-secretion", fig: "Fig 1", title: "Gastrointestinal hormones: stomach to duodenum", W, H, body, extraCss,
-  label: "An animated fed-state sequence from stomach to duodenum. In the cephalic phase the vagus primes acid. In the gastric phase gastrin from G cells and histamine from ECL cells drive parietal acid. In the intestinal phase CCK contracts the gallbladder and drives pancreatic enzymes, secretin drives bicarbonate, and GIP and GLP-1 act as incretins releasing insulin. Somatostatin inhibits throughout. A slider selects cephalic, gastric or intestinal phase and treatment choices are none, a proton pump inhibitor or a somatostatin analogue. Gauges show gastrin, acid, enzymes, bicarbonate, insulin and somatostatin.",
+  label: "An animated fed-state sequence from stomach to duodenum. In the cephalic phase the brain sees food and the vagus primes stomach acid. In the gastric phase gastrin from G cells and histamine from ECL cells drive the parietal acid pump. In the intestinal phase CCK squeezes the gallbladder and drives pancreatic enzymes, secretin drives bicarbonate, and incretins release insulin from beta cells. A slider selects cephalic, gastric or intestinal phase and treatment choices are none, a proton pump inhibitor that plugs the acid pump, or a somatostatin analogue that brakes every gut signal. Gauges show gastrin, acid, enzymes, bicarbonate, insulin and somatostatin.",
   caption: "Schematic, not to scale. Particle speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.",
-  scene: { CY, W, H }, pageJs: readFileSync(join(HERE, "gihorm.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { CY, W, H }, pageJs: readFileSync(join(HERE, "gihorm.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With somatostatin analogue",
   sourcesLis: [
-    "<strong>Acid control.</strong> Sight, smell and thought of food start the cephalic phase: the vagus nerve primes parietal and G cells. Food stretching the stomach and peptides in it start the gastric phase: G cells release gastrin, which acts in blood and locally to drive parietal cells, helped by histamine from ECL cells and by vagal acetylcholine, all converging on the parietal acid pump. Somatostatin from D cells restrains gastrin, histamine and acid. This is standard teaching in physiology and medicine texts and was not checked against a linked source here, so it is flagged for review.",
-    "<strong>Intestinal phase.</strong> Acid and fat entering the duodenum start the intestinal phase and slow the stomach. I cells release cholecystokinin (CCK), which contracts the gallbladder and drives pancreatic enzyme secretion. S cells release secretin, which drives bicarbonate from pancreatic duct cells to neutralise acid chyme. K cells release GIP and L cells release GLP-1; both act as incretins, boosting glucose-dependent insulin release from pancreatic beta cells. A proton pump inhibitor blocks the parietal acid pump, so acid falls and gastrin rises by feedback. A somatostatin analogue broadly inhibits hormone release, acid, enzymes, bicarbonate and insulin. These are teaching toggles only.",
+    "<strong>Acid control.</strong> Sight, smell and thought of food start the cephalic phase: the brain sends vagal signals that prime parietal and G cells. Food stretching the stomach and peptides in it start the gastric phase: G cells release gastrin, which acts in blood and locally to drive parietal cells, helped by histamine from ECL cells and by vagal signals, all converging on the parietal acid pump. Somatostatin from D cells restrains gastrin, histamine and acid. This is standard teaching in physiology and medicine texts and was not checked against a linked source here, so it is flagged for review.",
+    "<strong>Intestinal phase.</strong> Acid and fat entering the duodenum start the intestinal phase and slow the stomach. I cells release cholecystokinin (CCK), which squeezes the gallbladder and drives pancreatic enzyme secretion. S cells release secretin, which drives bicarbonate from pancreatic duct cells to neutralise acid chyme. K and L cells release incretin hormones that boost insulin release from pancreatic beta cells. A proton pump inhibitor plugs the parietal acid pump, so acid falls and gastrin rises by feedback. A somatostatin analogue brakes every gut signal: acid, enzymes, bicarbonate and insulin all fall. These are teaching toggles only.",
   ],
   simplified: "Chief cell pepsin, motility patterns in detail, enteric reflex wiring, bile chemistry, enzyme names, glucose transport and insulin action in tissues, other gut peptides such as motilin and ghrelin, and every drug dose and protocol are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
 });

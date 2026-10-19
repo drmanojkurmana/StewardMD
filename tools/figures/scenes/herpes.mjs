@@ -13,8 +13,8 @@ const MD = {
   level: { label: "Stage of infection", a: [0, 1, 2], names: ["primary", "latent", "reactivation"], ticks: ["primary", "latent", "reactivation"], start: 0 },
   drugLabel: "Treatment",
   settings: [
-    { label: "none" },
-    { label: "aciclovir (nucleoside analogue)" },
+    { label: "no treatment" },
+    { label: "aciclovir" },
   ],
   status: "Stage: {level} · {drug} ·",
   drugNames: ["no treatment", "aciclovir"],
@@ -43,12 +43,9 @@ const TESTS = [
 
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<text class="sc-zone" x="40" y="68">SKIN AND MUCOSA</text>
-<text class="sc-zone" x="640" y="68">SENSORY GANGLION</text>
-<text class="sc-zone sc-dim" x="400" y="208">AXON</text>
 <g id="skin"></g>
 <g id="axon"></g>
-<g id="gang"></g>
+<g id="gang"><g id="gangSlot"></g></g>
 <g id="derm"></g>
 <g id="trig"></g>
 <g id="parts"></g>
@@ -59,27 +56,34 @@ const extraCss = `
 .cl-epi{--cc:#e9a2b3}.cl-neuron{--cc:#b7a1e6}.cl-sat{--cc:#7fc4e8}
 .hv-skin{fill:color-mix(in srgb,var(--c-endo) 22%,var(--anatomy-paper));stroke:var(--c-endo);stroke-width:1}
 .hv-axon{fill:color-mix(in srgb,var(--c-mac) 28%,var(--anatomy-paper));stroke:var(--c-mac);stroke-width:1.2}
-.hv-gang{fill:color-mix(in srgb,var(--c-mac) 16%,var(--anatomy-paper));stroke:var(--c-mac);stroke-width:1.2}
-.hv-nuc{fill:color-mix(in srgb,var(--c-mac) 55%,#1a1030);stroke:var(--c-mac);stroke-width:1.2}
+.hv-inf{fill:var(--c-bad);stroke:none}
+.hv-myel{fill:color-mix(in srgb,var(--c-plt) 55%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-plt) 60%,#000);stroke-width:1}
+.hv-basal{fill:none;stroke:var(--c-endo);stroke-width:2;opacity:.7}
 .hv-lat{fill:#ffd24a;stroke:color-mix(in srgb,#ffd24a 50%,#000);stroke-width:.6}
 .hv-ves{fill:color-mix(in srgb,var(--c-fl) 45%,#fff);stroke:var(--c-fl);stroke-width:1.1}
 .hv-derm{fill:color-mix(in srgb,var(--c-endo) 14%,var(--anatomy-paper));stroke:var(--anatomy-faint);stroke-width:1}
 .hv-derm-on{fill:color-mix(in srgb,var(--c-bad) 22%,var(--anatomy-paper))}
 .hv-trig{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
-.hv-trig-t{fill:var(--anatomy-text);font:10px var(--anatomy-mono);pointer-events:none}
 .p-virus{--cc:#e5484d}.p-virus2{--cc:#ff9a3d}.p-acic{--cc:#3ddc97}
 .hv-chain{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 3}
+.hv-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
+.dna-bb{fill:none;stroke:var(--c-bad);stroke-width:2.5;stroke-linecap:round}
+.dna-rg{fill:none;stroke:var(--c-bad);stroke-width:1.4;opacity:.8}
+.dna-tip{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 55%,#000);stroke-width:.8}
+.dna.off .dna-bb{stroke:var(--anatomy-faint)}
+.dna.off .dna-rg{stroke:var(--anatomy-faint)}
+.dna.off .dna-tip{fill:var(--anatomy-faint);stroke:var(--anatomy-faint)}
 `;
 
 buildScene({
   id: "herpes-virus-latency", fig: "Fig 1", title: "Herpes simplex: latency and reactivation", W, H, body, extraCss,
-  label: "An animated skin, axon and sensory ganglion. In primary infection the virus replicates in the epithelium and travels back along the axon to the neuron nucleus, where it stays latent. Stress or immunosuppression can reactivate it, and it travels forward along the axon to the skin to form vesicles in the dermatome. Gauges show viral replication, skin vesicles, latent genome and axonal spread. The treatment choice shows aciclovir as a nucleoside analogue concept that blocks viral DNA replication without clearing latency.",
+  label: "An animated skin, nerve fibre and sensory ganglion, read left to right. In primary infection the virus copies its DNA in skin cells and travels up the fibre to the nerve cell body, where the genome rests. Triggers can wake it, and new virus travels back down the fibre to blister the skin. Gauges show viral replication, skin vesicles, latent genome and spread along the fibre. Aciclovir caps the growing viral DNA chain so copying stops, without clearing the resting genome.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, levels or numbers are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "herpes.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "herpes.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With aciclovir",
   sourcesLis: [
-    "<strong>Latency and reactivation.</strong> Herpes simplex virus first replicates in skin or mucosal epithelium. Capsids travel by retrograde axonal transport to sensory neuron cell bodies in the ganglion, where the viral genome persists in the neuron nucleus as latent DNA with very little viral protein made. Triggers such as stress, fever, ultraviolet light and immunosuppression can reactivate the virus. New capsids then travel by anterograde transport along the same axon to the skin and replicate in the epithelium, forming grouped vesicles. Reactivation of varicella zoster virus follows the same ganglion idea and gives vesicles in the dermatome supplied by that ganglion (shingles). This is standard teaching in virology and infection texts and was not checked against a linked source here, so it is flagged for review.",
-    "<strong>Treatment idea shown.</strong> Aciclovir is a nucleoside analogue. After activation in infected cells it is built into growing viral DNA and stops the chain, so replication and new vesicle formation fall. It does not remove the latent genome from the neuron nucleus, so reactivation can still happen later. This is a teaching toggle only.",
+    "<strong>Latency and reactivation.</strong> Herpes simplex virus first copies itself in skin or mucosal cells. New virus travels up the sensory fibre to the nerve cell body in the ganglion, where the viral genome persists in the nucleus as resting DNA with very little viral protein made. Triggers such as stress, fever, ultraviolet light and low immunity can wake the virus. New virus then travels back down the same fibre to the skin and copies itself in skin cells again, forming grouped blisters. Reactivation of varicella zoster virus follows the same ganglion idea and gives blisters in the dermatome supplied by that ganglion (shingles). This is standard teaching in virology and infection texts and was not checked against a linked source here, so it is flagged for review.",
+    "<strong>Treatment idea shown.</strong> Aciclovir is a nucleoside analogue. After activation in infected cells it is built into growing viral DNA and caps the chain, so copying and new blister formation fall. It does not remove the resting genome from the nerve cell nucleus, so reactivation can still happen later. This is a teaching toggle only.",
   ],
   simplified: "The full latency gene programme, immune control in the ganglion, differences between herpes simplex types and varicella zoster in detail, antiviral resistance, and all doses and durations are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
 });

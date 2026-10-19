@@ -24,7 +24,7 @@ const MD = {
 };
 function modelOf(S, level, drug) {
   const cl = (v) => Math.max(0, Math.min(1, v));
-  const eff = [1, 0.78, 0.2, 0.06][drug];
+  const eff = [1, 0.6, 0.2, 0.06][drug];
   const surg = drug >= 2 ? 1 : 0, vaso = drug === 1 ? 1 : 0;
   const a = S.level.a[level];
   const R = cl(0.08 + 0.88 * a * eff);
@@ -42,53 +42,45 @@ function modelOf(S, level, drug) {
 }
 const TESTS = [
   [0, 0, "backflow mild · forward output maintained · lungs clear"],
-  [1, 0, "backflow moderate · forward output borderline · lungs congested"],
   [2, 0, "backflow severe · forward output reduced · lungs oedematous"],
-  [2, 1, "backflow severe · forward output borderline · lungs congested"],
+  [2, 1, "backflow moderate · forward output borderline · lungs congested"],
+  [2, 3, "backflow mild · forward output maintained · lungs clear"],
 ];
 
 /* ---------------- static layout ---------------- */
 const body = `
-<rect class="sc-tissue" x="14" y="44" width="492" height="396" rx="18"/>
-<rect class="sc-tissue" x="520" y="44" width="426" height="396" rx="18"/>
-<text class="sc-zone" x="34" y="68">LEFT HEART: MITRAL VALVE</text>
-<text class="sc-zone" x="540" y="68">WHAT THE LEAK DOES</text>
-<g id="heart"></g><g id="parts"></g><g id="chain"></g><g id="over"></g><g id="panel"></g>`;
+<rect class="sc-tissue" x="14" y="44" width="932" height="396" rx="18"/>
+<g id="lungSlot"></g><g id="heartSlot"></g><g id="heart"></g><g id="valve"></g><g id="vessel"></g><g id="parts"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "mitral-regurgitation", fig: "Fig 1", title: "Mitral regurgitation: a leaking valve and a volume-loaded heart", W, H, body,
-  label: "An animated left atrium and left ventricle with the mitral valve between them. In systole the ventricle contracts and part of its blood jets backward through the incompetent valve into the atrium instead of forward into the aorta. The atrium and ventricle dilate with the extra volume, pressure backs up into the pulmonary veins and lungs, forward output falls and a holosystolic murmur fills systole. Causes include leaflet prolapse, rheumatic leaflet damage, papillary muscle dysfunction and a dilated annulus. Gauges show backflow, forward output, atrial pressure, ventricle volume, lung congestion and the murmur.",
+  label: "An animated real heart and lung, read left to right. Blood enters the left atrium from the lungs, and in systole the ventricle contracts: part of its blood jets backward through the leaking mitral valve into the atrium instead of forward into the aorta. The atrium and ventricle swell with the extra blood, pressure backs up into the lungs, forward output falls and a holosystolic murmur fills systole. A vasodilator widens the aorta so more blood flows forward, repair rings the valve shut, and replacement with a new valve stops the leak. Gauges show backflow, forward output, atrial pressure, ventricle volume, lung congestion and the murmur.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "mre.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "mre.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With valve replacement",
   sourcesLis: [
     "<strong>How mitral regurgitation develops.</strong> The mitral leaflets fail to meet in systole, leaving a regurgitant orifice. Causes include leaflet prolapse (a floppy leaflet billowing into the atrium), rheumatic thickening and scarring of the leaflets, ischaemic papillary muscle dysfunction that tethers otherwise normal leaflets (secondary regurgitation), and dilatation of the annulus as the ventricle enlarges so normal leaflets can no longer coapt. Each systole part of the stroke volume goes backward into the left atrium as a rapid regurgitant jet. This is standard teaching in medicine and cardiology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>What the leak does.</strong> The atrium receives both pulmonary venous inflow and the regurgitant volume, so atrial pressure rises with a prominent systolic v wave, and both the atrium and the ventricle dilate to hold the extra volume (volume overload). Pressure is passed back through the pulmonary veins to the lungs, giving venous congestion and pulmonary edema. The share ejected forward into the aorta falls, so cardiac output and arterial pressure are reduced, worst in severe disease. The murmur is holosystolic: it starts with the first heart sound and fills all of systole to the second sound, because the ventricle is above atrial pressure throughout. A soft third heart sound can appear from the rapid return of the extra volume. Late, the dilated ventricle itself develops dysfunction, which is why repair or replacement is usually considered early, before dysfunction is fixed. This is standard teaching and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> A vasodilator lowers the resistance the ventricle ejects against, so more blood goes forward and less leaks back, and a diuretic unloads the congested lungs; neither fixes the valve. Repair (including an annuloplasty ring that restores the annulus size) keeps the patient's own valve, and replacement with a prosthetic valve abolishes the leak. These are teaching toggles only.",
   ],
-  simplified: "Acute regurgitation from a ruptured papillary muscle or endocarditis (where a small stiff atrium gives very high pressures and rapid pulmonary edema), grading by measured regurgitant volume or orifice area, atrial fibrillation from atrial dilatation, right heart failure late in the course, prosthetic valve complications and anticoagulation, surgical timing rules, and all doses and targets are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
+  simplified: "Acute regurgitation from a ruptured papillary muscle or endocarditis (where a small stiff atrium gives very high pressures and rapid pulmonary edema), grading by measured regurgitant volume or orifice area, atrial fibrillation from atrial dilatation, right heart failure late in the course, prosthetic valve complications and anticoagulation, and surgical timing rules are left out. The heart and lung are real anatomy art with a schematic cutaway overlay that shows the chambers, the wall and the valve. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
   extraCss: `
-.mre-aorta{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 42%,var(--anatomy-paper));stroke-width:24;stroke-linecap:round;opacity:.5}
-.mre-vein{fill:none;stroke:color-mix(in srgb,var(--c-fl) 55%,var(--anatomy-paper));stroke-width:11;stroke-linecap:round}
-.mre-wall{fill:color-mix(in srgb,var(--c-bad) 34%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-bad) 62%,#000);stroke-width:1.2}
-.mre-ch{fill:color-mix(in srgb,var(--c-rbc) 48%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 60%,#000);stroke-width:1}
-.mre-la{fill:color-mix(in srgb,var(--c-cyt) 34%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-cyt) 55%,#000);stroke-width:1.1}
+.mre-aorta{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 42%,var(--anatomy-paper));stroke-linecap:round;opacity:.55}
+.mre-vein{fill:none;stroke:color-mix(in srgb,var(--c-fl) 55%,var(--anatomy-paper));stroke-linecap:round}
+.mre-chamber{fill:color-mix(in srgb,var(--c-rbc) 22%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 45%,#000);stroke-width:1}
+.mre-atrium{fill:color-mix(in srgb,var(--c-cyt) 22%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-cyt) 50%,#000);stroke-width:1.1}
+.mre-wall{fill:none;stroke:color-mix(in srgb,var(--c-bad) 60%,#000);stroke-linecap:round}
 .mre-leaf{fill:none;stroke:var(--anatomy-strong);stroke-width:3.4;stroke-linecap:round}
 .mre-chord{fill:none;stroke:var(--anatomy-mid);stroke-width:1.1}
 .mre-pap{fill:color-mix(in srgb,var(--c-bad) 48%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-bad) 60%,#000);stroke-width:1}
 .mre-ring{fill:none;stroke:var(--c-good);stroke-width:3}
 .mre-prost{fill:var(--anatomy-card);stroke:var(--c-good);stroke-width:2.5}
 .mre-disc{stroke:var(--anatomy-strong);stroke-width:3;stroke-linecap:round}
-.mre-node{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}
-.mre-node-t{fill:var(--anatomy-strong);font-size:11px;font-weight:600;pointer-events:none}
-.mre-chip-t{fill:var(--anatomy-strong);font-size:10px;font-weight:600;pointer-events:none}
-.mre-arrow{fill:none;stroke:var(--anatomy-mid);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.mre-head{fill:var(--anatomy-mid)}
 .mre-jetF{fill:var(--c-rbc)}.mre-jetB{fill:var(--c-cyt)}.mre-jetI{fill:var(--c-fl)}
 .mre-wave{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-linecap:round}
-.mre-strip{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.1}
-.mre-band{fill:var(--c-cyt)}
-.mre-s3{fill:var(--c-fl)}
-.mre-cursor{stroke:var(--anatomy-strong);stroke-width:1.4}
-.mre-cap{fill:var(--anatomy-text);font-size:10.5px;pointer-events:none}`,
+.mre-cong{fill:var(--c-fl);stroke:none}
+.mre-rec{fill:var(--anatomy-paper);stroke:var(--c-lymph);stroke-width:1.4}
+.mre-drug{fill:var(--c-lymph);stroke:color-mix(in srgb,var(--c-lymph) 55%,#000);stroke-width:.6}
+.mre-drop{fill:var(--c-fl);stroke:none}
+.mre-cap{fill:var(--anatomy-strong);font-size:13px}`,
 });

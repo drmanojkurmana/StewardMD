@@ -18,16 +18,16 @@ const MD = {
     { label: "antibiotic" },
     { label: "fluids" },
     { label: "relieve obstruction" },
-    { label: "antibiotic with fluids and relieve obstruction" },
+    { label: "antibiotic with fluids and relief" },
   ],
   status: "Infection: {level} · {drug} ·",
-  drugNames: ["no treatment", "antibiotic", "fluids", "relieve obstruction", "antibiotic with fluids and relieve obstruction"],
+  drugNames: ["no treatment", "antibiotic", "fluids", "relieve obstruction", "antibiotic with fluids and relief"],
 };
 function modelOf(S, level, drug) {
   const a = S.level.a[level], abx = drug === 1 || drug === 4 ? 1 : 0, flu = drug === 2 || drug === 4 ? 1 : 0, rel = drug === 3 || drug === 4 ? 1 : 0;
   const cl = (v) => Math.max(0, Math.min(1, v));
   const obst = rel ? 0.05 : 0.55;
-  const B = cl(a * (abx ? 0.12 : 1) * (rel ? 0.55 : 1));
+  const B = cl(a * (abx ? 0.12 : 1) * (rel ? 0.45 : 1));
   const I = cl(0.08 + 0.88 * B);
   const K = cl(level === 0 ? 0.1 * B : 0.22 + 0.68 * B);
   const Sys = cl(level === 2 ? 0.18 + 0.72 * K : 0.04 + 0.18 * K);
@@ -45,53 +45,44 @@ const TESTS = [
 ];
 
 /* ---------------- static layout ---------------- */
+/* Organ art is placed into the slots by uti.page.js; ureter paths, halos and
+ * the stone are repositioned there from the organ ports so every vessel and
+ * particle route meets real anatomy. */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<text class="sc-zone" x="34" y="68">URINARY TRACT</text>
-<path class="ut-vessel" d="M180 60 C360 48 640 48 890 62"/>
-<g id="kidneys">
-  <path class="ut-kidney" d="M260 78 C225 78 205 105 210 132 C215 160 240 178 268 172 C292 167 302 148 296 132 C302 112 292 78 260 78Z"/>
-  <path id="kidLglow" class="ut-glow" d="M260 78 C225 78 205 105 210 132 C215 160 240 178 268 172 C292 167 302 148 296 132 C302 112 292 78 260 78Z" opacity="0"/>
-  <path class="ut-kidney" d="M700 78 C735 78 755 105 750 132 C745 160 720 178 692 172 C668 167 658 148 664 132 C658 112 668 78 700 78Z"/>
-  <path id="kidRglow" class="ut-glow" d="M700 78 C735 78 755 105 750 132 C745 160 720 178 692 172 C668 167 658 148 664 132 C658 112 668 78 700 78Z" opacity="0"/>
-</g>
-<path class="ut-ureter" d="M292 158 C340 210 390 240 430 272"/>
-<path class="ut-ureter" d="M668 158 C620 210 570 240 530 272"/>
-<path class="ut-ureterIn" d="M292 158 C340 210 390 240 430 272"/>
-<path class="ut-ureterIn" d="M668 158 C620 210 570 240 530 272"/>
-<g id="stoneG"><circle id="stone" class="ut-stone" cx="612" cy="212" r="10"/><path class="ut-stoneL" d="M606 206 L618 218 M618 206 L606 218"/></g>
-<g id="bladderG">
-  <path id="bladderWall" class="ut-bladder" d="M480 248 C545 248 588 285 582 332 C576 378 535 402 480 402 C425 402 384 378 378 332 C372 285 415 248 480 248Z"/>
-  <path id="bladderIn" class="ut-bladderIn" d="M480 262 C532 262 568 292 563 330 C558 366 525 388 480 388 C435 388 402 366 397 330 C392 292 428 262 480 262Z"/>
-</g>
-<path class="ut-urethra" d="M462 398 L460 438 M498 398 L500 438"/>
-<path class="ut-cath" d="M452 438 C450 400 452 360 458 330"/>
+<path id="bloodV" class="ut-vessel" d="M180 60 C360 48 640 48 890 62"/>
+<ellipse id="kidLhalo" class="ut-halo" cx="250" cy="135" rx="80" ry="90" opacity="0"/>
+<ellipse id="kidRhalo" class="ut-halo" cx="710" cy="135" rx="80" ry="90" opacity="0"/>
+<ellipse id="bladderHalo" class="ut-halo" cx="480" cy="320" rx="100" ry="100" opacity="0"/>
+<path id="ureterL" class="ut-ureter" d="M275 170 C275 215 430 195 430 250"/>
+<path id="ureterR" class="ut-ureter" d="M685 170 C685 215 530 195 530 250"/>
+<path id="ureterLIn" class="ut-ureterIn" d="M275 170 C275 215 430 195 430 250"/>
+<path id="ureterRIn" class="ut-ureterIn" d="M685 170 C685 215 530 195 530 250"/>
+<g id="stoneG"><circle id="stone" class="ut-stone" cx="0" cy="0" r="10"/><path class="ut-stoneL" d="M-6 -6 L6 6 M6 -6 L-6 6"/></g>
+<g id="kidLSlot"></g><g id="kidRSlot"></g><g id="bladderSlot"></g>
 <g id="flow"></g><g id="bac"></g><g id="wbc"></g><g id="parts"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "urinary-tract-infection", fig: "Fig 1", title: "Urinary tract infection: ascent to the kidney", W, H, body,
-  label: "An animated urinary tract. Bacteria enter the urethra, climb to the bladder and stick to its wall with fimbriae, causing cystitis. They may climb the ureters to the kidney, causing pyelonephritis, and in urosepsis affect blood pressure. Urine flow flushes bacteria out. Obstruction and a catheter help bacteria persist. Gauges show bacteria, bladder inflammation, kidney involvement, urine flow and blood pressure. Treatment choices include an antibiotic, fluids and relieving obstruction.",
+  label: "An animated urinary tract, read top to bottom. Bacteria enter at the urethra and climb to the bladder, sticking to its wall so urine cannot wash them away. They may climb a ureter to the kidney, and severe infection can enter the blood and lower blood pressure. Urine flows from kidney to bladder to exit and flushes bacteria out, while a stone blocking a ureter slows the flow. Watch each treatment act: antibiotic capsules arrive and bacteria die off, fluids surge and wash bacteria down, relief of the blockage clears the stone and restores flow.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "uti.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "uti.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With antibiotic, fluids and relief",
   sourcesLis: [
-    "<strong>How urinary infection develops.</strong> Bacteria from around the urethral opening climb the urethra to the bladder. Hair-like fimbriae help them stick to the bladder wall so urine does not wash them away, and the inflamed bladder causes cystitis. Bacteria may then climb a ureter to the kidney, causing pyelonephritis, and severe infection can enter the bloodstream as urosepsis with falling blood pressure. This is standard teaching in medicine and microbiology texts and was not checked against a linked source here, so it is flagged for review.",
-    "<strong>Host defences and risk factors shown.</strong> A steady urine flow and regular bladder emptying flush bacteria out. Blockage of urine flow (obstruction) and a urinary catheter help bacteria persist and climb. Treatment ideas shown are an antibiotic, fluids to support urine flow and circulation, and relieving obstruction. These are teaching toggles only.",
+    "<strong>How urinary infection develops.</strong> Bacteria from around the urethral opening climb the urethra to the bladder. Hair-like threads help them stick to the bladder wall so urine does not wash them away, and the inflamed bladder causes cystitis. Bacteria may then climb a ureter to the kidney, causing kidney infection, and severe infection can enter the bloodstream with falling blood pressure. This is standard teaching in medicine and microbiology texts and was not checked against a linked source here, so it is flagged for review.",
+    "<strong>Host defences and risk factors shown.</strong> A steady urine flow and regular bladder emptying flush bacteria out. A stone blocking urine flow helps bacteria persist and climb. Treatment ideas shown are an antibiotic that kills bacteria, fluids that support urine flow and circulation, and relief of the blockage that restores flow. These are teaching toggles only.",
   ],
-  simplified: "Vesicoureteric reflux, pregnancy, diabetes, prostate enlargement detail, stones by type, organism species, bladder immune signalling, and all doses and targets are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
+  simplified: "Vesicoureteric reflux, pregnancy, diabetes, prostate enlargement detail, stones by type, organism species, bladder immune signalling, catheters, and all doses and targets are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
   extraCss: `
-.ut-kidney{fill:color-mix(in srgb,var(--c-rbc) 38%,var(--c-tis));stroke:color-mix(in srgb,var(--c-rbc) 60%,#000);stroke-width:1.2}
-.ut-glow{fill:var(--c-bad);stroke:none}
 .ut-ureter{fill:none;stroke:color-mix(in srgb,var(--c-endo) 70%,#000);stroke-width:13;stroke-linecap:round}
 .ut-ureterIn{fill:none;stroke:color-mix(in srgb,var(--c-fl) 22%,var(--anatomy-paper));stroke-width:7;stroke-linecap:round}
-.ut-bladder{fill:color-mix(in srgb,var(--c-endo) 42%,var(--c-tis));stroke:color-mix(in srgb,var(--c-endo) 65%,#000);stroke-width:2}
-.ut-bladderIn{fill:color-mix(in srgb,var(--c-fl) 16%,var(--anatomy-paper));stroke:none}
-.ut-urethra{fill:none;stroke:var(--c-endo);stroke-width:3;stroke-linecap:round}
-.ut-cath{fill:none;stroke:var(--anatomy-mid);stroke-width:3.4;stroke-linecap:round;opacity:.85}
 .ut-vessel{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 55%,#000);stroke-width:5;stroke-linecap:round;opacity:.55}
+.ut-halo{fill:var(--c-bad);stroke:none}
 .ut-stone{fill:#d9c27a;stroke:#8a742f;stroke-width:1}
-.ut-stoneL{stroke:#8a742f;stroke-width:1}
-.ut-fimb{stroke:color-mix(in srgb,var(--c-bac) 60%,#000);stroke-width:.7;stroke-linecap:round}
+.ut-stoneL{fill:none;stroke:#8a742f;stroke-width:1}
+.ut-fimb{fill:none;stroke:color-mix(in srgb,var(--c-bac) 60%,#000);stroke-width:.7;stroke-linecap:round}
+.ut-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
+.p-kill{--cc:var(--c-ab)}
 .g-flow{fill:var(--c-fl)}.g-kid{fill:var(--c-bad)}
 `,
 });

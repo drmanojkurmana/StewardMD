@@ -14,7 +14,7 @@ const MD = {
   level: { label: "Phase of healing", a: [0.2, 0.6, 1], names: ["inflammation", "proliferation", "remodelling"], ticks: ["inflammation", "proliferation", "remodelling"], start: 0 },
   drugLabel: "Treatment",
   settings: [
-    { label: "none" },
+    { label: "no treatment" },
     { label: "clean and dress" },
     { label: "treat infection and ischaemia" },
   ],
@@ -29,15 +29,15 @@ function modelOf(S, level, drug) {
   const fibB = [0.15, 1, 0.45][level];
   const angB = [0.1, 1, 0.35][level];
   const granB = [0.05, 1, 0.25][level];
-  const epiB = [0.05, 0.65, 1][level];
+  const epiB = [0.05, 0.6, 1][level];
   const c3B = [0.1, 0.85, 0.25][level];
-  const c1B = [0.02, 0.25, 1][level];
+  const c1B = [0.02, 0.28, 1][level];
   const conB = [0.05, 0.35, 0.9][level];
   const infB = [0.9, 0.55, 0.28][level];
   const infectF = [1, 0.4, 0.07][drug];
   const perf = [0.38, 0.68, 1][drug];
   const Infect = cl(infB * infectF * 1.05);
-  const Clean = cl((0.55 * neuB + 0.45 * macB) * (1 - 0.25 * Infect));
+  const Clean = cl((0.55 * neuB + 0.45 * macB) * (1 - 0.45 * Infect));
   const Fib = cl(fibB * (0.4 + 0.6 * perf) * (1 - 0.5 * Infect));
   const Ang = cl(angB * perf * (1 - 0.45 * Infect));
   const Gran = cl(granB * (0.5 + 0.5 * perf) * (1 - 0.5 * Infect));
@@ -53,33 +53,22 @@ function modelOf(S, level, drug) {
   const Neu = cl(neuB * (1 - 0.2 * Infect));
   const Mac = cl(macB * (1 - 0.15 * Infect));
   const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
-  const words = [w(Clean, 0.3, 0.6, ["slow", "active", "brisk"]), w(Gran, 0.25, 0.6, ["little", "filling", "full"]), w(Epi, 0.3, 0.65, ["open", "closing", "closed"]), w(Strength, 0.25, 0.6, ["weak", "gaining", "strong"])];
+  const words = [w(Clean, 0.3, 0.6, ["slow", "active", "brisk"]), w(Gran, 0.2, 0.6, ["little", "filling", "full"]), w(Epi, 0.3, 0.65, ["open", "closing", "closed"]), w(Strength, 0.25, 0.6, ["weak", "gaining", "strong"])];
   return { a: S.level.a[level], perf, Clot, Neu, Mac, Clean, Fib, Ang, Gran, Epi, Coll3, Coll1, Contract, Scar, Strength, Infect, Delay, Keloid, words, readout: "cleaning " + words[0] + " · fill " + words[1] + " · closure " + words[2] + " · strength " + words[3] };
 }
 const TESTS = [
-  [0, 0, "cleaning brisk · fill little · closure open · strength weak"],
+  [0, 0, "cleaning active · fill little · closure open · strength weak"],
   [0, 2, "cleaning brisk · fill little · closure open · strength weak"],
   [1, 0, "cleaning active · fill filling · closure open · strength weak"],
-  [2, 2, "cleaning slow · fill little · closure closed · strength strong"],
+  [2, 2, "cleaning slow · fill filling · closure closed · strength strong"],
 ];
 
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<text class="sc-zone" x="34" y="68">WOUND IN CROSS SECTION</text>
-<g id="skinL">
-<rect class="wd-epi" x="30" y="108" width="320" height="14"/>
-<rect class="wd-derm" x="30" y="122" width="320" height="168"/>
-<rect class="wd-fat" x="30" y="290" width="320" height="70"/>
-<path class="wd-edge" d="M350 108L368 180L362 290L350 360"/>
-</g>
-<g id="skinR">
-<rect class="wd-epi" x="610" y="108" width="320" height="14"/>
-<rect class="wd-derm" x="610" y="122" width="320" height="168"/>
-<rect class="wd-fat" x="610" y="290" width="320" height="70"/>
-<path class="wd-edge" d="M610 108L592 180L598 290L610 360"/>
-</g>
-<rect class="wd-bed" x="362" y="290" width="236" height="70"/>
+<g id="skinSlotL"></g>
+<g id="skinSlotR"></g>
+<g id="vesselSlot"></g>
 <g id="gran"></g>
 <g id="clotG"></g>
 <g id="collG"></g>
@@ -87,23 +76,20 @@ const body = `
 <g id="epi"></g>
 <g id="cells"></g>
 <g id="parts"></g>
+<g id="dressG"></g>
 <g id="over"></g>
 <g id="panel"></g>`;
 
 buildScene({
   id: "wound-healing-fibrosis", fig: "Fig 1", title: "Wound healing: cleaning, filling and remodelling", W, H, body,
-  label: "An animated wound seen in cross section. A clot plugs the gap, then neutrophils and later macrophages clean it. Fibroblasts lay down granulation tissue, new vessels grow in, and new skin crawls across. Later, type III collagen is replaced by stronger type I collagen, myofibroblasts pull the edges together, and a scar remains. Gauges show cleaning, fill, closure and strength. Treatment choices are cleaning and dressing, and treating infection and poor blood supply.",
+  label: "An animated wound in real skin seen in cross section. A clot plugs the gap between the skin edges. Germs settle on the clot while neutrophils and macrophages clean, fibroblasts fill the gap with soft new tissue, new vessels sprout from the feeder vessel below, and new skin crawls across the top. Later, early thin collagen is replaced by thicker stronger collagen and the edges pull together into a scar. A slider moves through the phases. Cleaning and dressing covers the wound with a moist film, and treating infection and poor blood supply traps germs and widens the feeder vessel so more blood reaches the repair.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or values are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "wound.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "wound.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With infection and ischaemia treated",
   extraCss: `
 body{--c-epi:#e8b4a0;--c-derm:#d99a8a;--c-fat:#f2d27a;--c-bed:#b66a6a;--c-gran:#e88a7a;--c-clot:#8e2432;--c-fib:#7fc4a8;--c-myo:#c978a8;--c-coll3:#7ab8ff;--c-coll1:#e9b84a}
 body[data-theme="light"]{--c-epi:#d99078;--c-derm:#c97a68;--c-fat:#d9a92c;--c-bed:#a85a5a;--c-gran:#d96a58;--c-clot:#a02838;--c-fib:#3f9f7c;--c-myo:#a84f88;--c-coll3:#2f7ad8;--c-coll1:#c9961f}
-.wd-epi{fill:var(--c-epi);stroke:color-mix(in srgb,var(--c-epi) 55%,#000);stroke-width:.8}
-.wd-derm{fill:var(--c-derm);opacity:.75;stroke:color-mix(in srgb,var(--c-derm) 55%,#000);stroke-width:.8}
-.wd-fat{fill:var(--c-fat);opacity:.5;stroke:color-mix(in srgb,var(--c-fat) 55%,#000);stroke-width:.8}
-.wd-bed{fill:var(--c-bed);opacity:.55}
-.wd-edge{fill:color-mix(in srgb,var(--c-derm) 80%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-derm) 55%,#000);stroke-width:.8}
+.wd-blush{fill:var(--c-bad);stroke:none}
 .wd-gran{fill:var(--c-gran);stroke:color-mix(in srgb,var(--c-gran) 55%,#000);stroke-width:.8}
 .wd-clot{fill:var(--c-clot);stroke:color-mix(in srgb,var(--c-clot) 55%,#000);stroke-width:.8}
 .wd-epi-new{fill:var(--c-epi);stroke:color-mix(in srgb,var(--c-epi) 55%,#000);stroke-width:.8}
@@ -113,9 +99,13 @@ body[data-theme="light"]{--c-epi:#d99078;--c-derm:#c97a68;--c-fat:#d9a92c;--c-be
 .wd-c3{fill:none;stroke:var(--c-coll3);stroke-width:1.4;stroke-linecap:round}
 .wd-c1{fill:none;stroke:var(--c-coll1);stroke-width:2.6;stroke-linecap:round}
 .wd-arrow{fill:none;stroke:var(--anatomy-strong);stroke-width:1.6;stroke-linecap:round}
+.wd-film{fill:color-mix(in srgb,var(--c-plt) 55%,var(--anatomy-paper));stroke:none}
+.wd-filmb{fill:none;stroke:var(--c-plt);stroke-width:2}
+.wd-abx{fill:none;stroke:var(--c-ab);stroke-width:1.8;stroke-linecap:round}
+.wd-cap{fill:var(--anatomy-strong)}
 .cl-fib{--cc:var(--c-fib)}.cl-myo{--cc:var(--c-myo)}
 .dr-g-fill.g-clean{fill:var(--c-good)}.dr-g-fill.g-fill{fill:var(--c-gran)}.dr-g-fill.g-close{fill:var(--c-epi)}.dr-g-fill.g-str{fill:var(--c-coll1)}.dr-g-fill.g-delay{fill:var(--c-bad)}
-.p-bac{--cc:var(--c-bac)}.p-deb{--cc:#c9b8a8}
+.p-bac{--cc:var(--c-bac)}.p-deb{--cc:#c9b8a8}.p-rbc{--cc:var(--c-bad)}.p-trap{--cc:var(--c-ab)}
 `,
   sourcesLis: [
     "<strong>How a wound heals.</strong> Bleeding is stopped by a clot of platelets and fibrin (haemostasis). Neutrophils arrive first, then macrophages, and together they clear microbes and dead tissue. Fibroblasts then make granulation tissue, new blood vessels grow in (angiogenesis), and new skin cells crawl across the surface (re-epithelialisation). Later the early type III collagen is replaced by stronger type I collagen, myofibroblasts pull the edges together (contraction), and a scar remains. A raised scar that grows beyond the wound is a keloid. This is standard textbook teaching in pathology and surgery and was not checked against a linked source here, so it is flagged for review.",

@@ -15,12 +15,12 @@ const MD = {
   drugLabel: "Treatment",
   settings: [
     { label: "no treatment" },
-    { label: "IVIG" },
     { label: "aspirin" },
     { label: "anticoagulation for large aneurysm" },
+    { label: "IVIG" },
   ],
   status: "Phase: {level} · {drug} ·",
-  drugNames: ["no treatment", "IVIG", "aspirin", "anticoagulation"],
+  drugNames: ["no treatment", "aspirin", "anticoagulation", "IVIG"],
 };
 function modelOf(S, level, drug) {
   const PH = [
@@ -29,7 +29,7 @@ function modelOf(S, level, drug) {
     { f: 0.08, i: 0.2, a: 1, t: 0.58 },
   ][level];
   const cl = (v) => Math.max(0, Math.min(1, v));
-  const ivig = drug === 1 ? 1 : 0, asp = drug === 2 ? 1 : 0, ac = drug === 3 ? 1 : 0;
+  const asp = drug === 1 ? 1 : 0, ac = drug === 2 ? 1 : 0, ivig = drug === 3 ? 1 : 0;
   const F = cl(PH.f * (1 - 0.65 * ivig) - 0.04 * asp);
   const I = cl(PH.i * (1 - 0.7 * ivig) - 0.06 * asp);
   const A = cl(PH.a * (1 - 0.55 * ivig) * (0.65 + 0.35 * PH.i));
@@ -43,8 +43,8 @@ function modelOf(S, level, drug) {
 const TESTS = [
   [0, 0, "fever high · artery wall very inflamed · aneurysm none · clot risk low"],
   [1, 0, "fever present · artery wall inflamed · aneurysm large · clot risk high"],
-  [1, 1, "fever settled · artery wall calm · aneurysm small · clot risk raised"],
-  [2, 3, "fever settled · artery wall calm · aneurysm large · clot risk low"],
+  [1, 3, "fever settled · artery wall calm · aneurysm small · clot risk raised"],
+  [2, 2, "fever settled · artery wall calm · aneurysm large · clot risk low"],
 ];
 
 /* ---------------- static layout ---------------- */
@@ -73,10 +73,10 @@ const body = `
 
 buildScene({
   id: "kawasaki-disease", fig: "Fig 1", title: "Kawasaki disease: fever, inflamed artery and aneurysm", W, H, body,
-  label: "An animated scene of Kawasaki disease. On the left a child shows fever, red eyes, red lips, a large neck node, a rash and red swollen hands and feet. On the right a coronary artery wall becomes inflamed and weak, bulges into an aneurysm where blood swirls slowly, and may form a clot that threatens the heart muscle downstream. A slider moves from the acute phase to the subacute phase and then to the convalescent phase with an aneurysm. Treatment choices are IVIG, aspirin and anticoagulation for a large aneurysm.",
+  label: "An animated scene of Kawasaki disease. On the left a child shows fever, red eyes and a rash. On the right a coronary artery wall becomes inflamed and weak, bulges into an aneurysm where blood swirls slowly, and may form a clot that threatens the heart muscle downstream. A slider moves from the acute phase to the subacute phase and then to the convalescent phase with an aneurysm. Treatment choices are aspirin, anticoagulation for a large aneurysm and IVIG.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "kawasaki.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "kawasaki.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With IVIG",
   sourcesLis: [
     "<strong>How Kawasaki disease develops.</strong> Kawasaki disease is a childhood vasculitis of medium sized arteries, most importantly the coronary arteries. Days of fever come with red eyes without discharge, red and cracked lips and mouth changes, a rash, red and swollen hands and feet, and one large neck lymph node. Inflammation through the artery wall weakens it, so the wall can bulge into a coronary artery aneurysm. Blood swirls slowly inside an aneurysm and can form a thrombus, which can block the artery and injure heart muscle. This is standard teaching in paediatric and cardiology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> IVIG given early calms the inflammation and makes coronary aneurysms less likely, aspirin makes platelets less sticky while the artery is inflamed or dilated, and anticoagulation is used for a large aneurysm where slow moving blood is likely to clot. These are teaching toggles only.",
@@ -95,10 +95,11 @@ buildScene({
 .kw-thermof{fill:var(--c-bad)}
 .kw-lum{fill:color-mix(in srgb,var(--c-rbc) 12%,var(--anatomy-paper))}
 .kw-wall{fill:color-mix(in srgb,var(--c-endo) 48%,var(--c-tis));stroke:color-mix(in srgb,var(--c-endo) 55%,#000);stroke-width:.8}
-.kw-cav{fill:color-mix(in srgb,var(--c-rbc) 32%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
-.kw-myo{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 55%,var(--c-tis))}
+.kw-infl{fill:none;stroke:var(--c-bad);stroke-width:15;stroke-linecap:round}
+.kw-clotm{fill:color-mix(in srgb,var(--c-plt) 55%,var(--c-rbc));stroke:color-mix(in srgb,var(--c-plt) 55%,#000);stroke-width:.7}
 .kw-isch{fill:#8a5fc4}
-.kw-pivig{--cc:var(--c-ab)}
+.kw-cap{fill:var(--anatomy-strong);font-size:13px}
+.kw-pivig{--cc:var(--c-ab)}.kw-pac{--cc:#b48cf2}
 .dr-g-fill.g-bad{fill:var(--c-bad)}
 `,
 });

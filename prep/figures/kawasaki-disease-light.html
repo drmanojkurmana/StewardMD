@@ -276,12 +276,13 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 .kw-thermof{fill:var(--c-bad)}
 .kw-lum{fill:color-mix(in srgb,var(--c-rbc) 12%,var(--anatomy-paper))}
 .kw-wall{fill:color-mix(in srgb,var(--c-endo) 48%,var(--c-tis));stroke:color-mix(in srgb,var(--c-endo) 55%,#000);stroke-width:.8}
-.kw-cav{fill:color-mix(in srgb,var(--c-rbc) 32%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
-.kw-myo{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 55%,var(--c-tis))}
+.kw-infl{fill:none;stroke:var(--c-bad);stroke-width:15;stroke-linecap:round}
+.kw-clotm{fill:color-mix(in srgb,var(--c-plt) 55%,var(--c-rbc));stroke:color-mix(in srgb,var(--c-plt) 55%,#000);stroke-width:.7}
 .kw-isch{fill:#8a5fc4}
-.kw-pivig{--cc:var(--c-ab)}
+.kw-cap{fill:var(--anatomy-strong);font-size:13px}
+.kw-pivig{--cc:var(--c-ab)}.kw-pac{--cc:#b48cf2}
 .dr-g-fill.g-bad{fill:var(--c-bad)}
-</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Kawasaki disease: fever, inflamed artery and aneurysm</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>fever high · artery wall very inflamed · aneurysm none · clot risk low</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated scene of Kawasaki disease. On the left a child shows fever, red eyes, red lips, a large neck node, a rash and red swollen hands and feet. On the right a coronary artery wall becomes inflamed and weak, bulges into an aneurysm where blood swirls slowly, and may form a clot that threatens the heart muscle downstream. A slider moves from the acute phase to the subacute phase and then to the convalescent phase with an aneurysm. Treatment choices are IVIG, aspirin and anticoagulation for a large aneurysm."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Kawasaki disease: fever, inflamed artery and aneurysm</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>fever high · artery wall very inflamed · aneurysm none · clot risk low</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated scene of Kawasaki disease. On the left a child shows fever, red eyes and a rash. On the right a coronary artery wall becomes inflamed and weak, bulges into an aneurysm where blood swirls slowly, and may form a clot that threatens the heart muscle downstream. A slider moves from the acute phase to the subacute phase and then to the convalescent phase with an aneurysm. Treatment choices are aspirin, anticoagulation for a large aneurysm and IVIG."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
 <rect class="sc-tissue" x="14" y="44" width="330" height="396" rx="18"/>
 <rect class="sc-tissue" x="356" y="44" width="590" height="396" rx="18"/>
 <text class="sc-zone" x="30" y="66">THE CHILD</text>
@@ -305,17 +306,17 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 <g id="art"></g><g id="cells"></g><g id="parts"></g><g id="heartg"></g><g id="over"></g><g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.</span></figcaption></figure>
 <div class="dr-controls">
   <label class="dr-range"><span>Phase of the illness</span><input id="level" type="range" min="0" max="2" step="1" value="0" aria-valuetext="acute"><span class="dr-ticks"><i>acute</i><i>subacute</i><i>convalescent</i></span></label>
-  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">IVIG</option><option value="2">aspirin</option><option value="3">anticoagulation for large aneurysm</option></select></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With IVIG"><option value="0">no treatment</option><option value="1">aspirin</option><option value="2">anticoagulation for large aneurysm</option><option value="3">IVIG</option></select></label>
   <button id="pause" type="button" aria-pressed="false">Pause motion</button>
 </div>
 <p id="status" class="dr-status" aria-live="polite"></p>
 <p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
 <h2>What the figure shows, and how sure we are</h2>
-<ul><li><strong>How Kawasaki disease develops.</strong> Kawasaki disease is a childhood vasculitis of medium sized arteries, most importantly the coronary arteries. Days of fever come with red eyes without discharge, red and cracked lips and mouth changes, a rash, red and swollen hands and feet, and one large neck lymph node. Inflammation through the artery wall weakens it, so the wall can bulge into a coronary artery aneurysm. Blood swirls slowly inside an aneurysm and can form a thrombus, which can block the artery and injure heart muscle. This is standard teaching in paediatric and cardiology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Treatment ideas shown.</strong> IVIG given early calms the inflammation and makes coronary aneurysms less likely, aspirin makes platelets less sticky while the artery is inflamed or dilated, and anticoagulation is used for a large aneurysm where slow moving blood is likely to clot. These are teaching toggles only.</li></ul>
+<ul><li><strong>How Kawasaki disease develops.</strong> Kawasaki disease is a childhood vasculitis of medium sized arteries, most importantly the coronary arteries. Days of fever come with red eyes without discharge, red and cracked lips and mouth changes, a rash, red and swollen hands and feet, and one large neck lymph node. Inflammation through the artery wall weakens it, so the wall can bulge into a coronary artery aneurysm. Blood swirls slowly inside an aneurysm and can form a thrombus, which can block the artery and injure heart muscle. This is standard teaching in paediatric and cardiology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Treatment ideas shown.</strong> IVIG given early calms the inflammation and makes coronary aneurysms less likely, aspirin makes platelets less sticky while the artery is inflamed or dilated, and anticoagulation is used for a large aneurysm where slow moving blood is likely to clot. These are teaching toggles only.</li><li><strong>Organ art.</strong> Organ art is NIH BioArt Source, public domain.</li></ul>
 <p><strong>What was simplified.</strong> The trigger and immune mechanism, other arteries, myocarditis and valve changes, shock and macrophage activation presentations, laboratory markers, echocardiography follow up, refractory disease and extra treatments, and all doses and timing are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
-<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). Organ illustrations are NIH BioArt Source (public domain); all other drawing is original.</p>
 <p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
-</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Phase of the illness","a":[0,1,2],"names":["acute","subacute","convalescent with aneurysm"],"ticks":["acute","subacute","convalescent"],"start":0},"settings":[{"label":"no treatment"},{"label":"IVIG"},{"label":"aspirin"},{"label":"anticoagulation for large aneurysm"}],"drugNames":["no treatment","IVIG","aspirin","anticoagulation"],"status":"Phase: {level} · {drug} ·"}};
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Phase of the illness","a":[0,1,2],"names":["acute","subacute","convalescent with aneurysm"],"ticks":["acute","subacute","convalescent"],"start":0},"settings":[{"label":"no treatment"},{"label":"aspirin"},{"label":"anticoagulation for large aneurysm"},{"label":"IVIG"}],"drugNames":["no treatment","aspirin","anticoagulation","IVIG"],"status":"Phase: {level} · {drug} ·"}};
 const modelOf = function modelOf(S, level, drug) {
   const PH = [
     { f: 1, i: 1, a: 0.22, t: 0.22 },
@@ -323,7 +324,7 @@ const modelOf = function modelOf(S, level, drug) {
     { f: 0.08, i: 0.2, a: 1, t: 0.58 },
   ][level];
   const cl = (v) => Math.max(0, Math.min(1, v));
-  const ivig = drug === 1 ? 1 : 0, asp = drug === 2 ? 1 : 0, ac = drug === 3 ? 1 : 0;
+  const asp = drug === 1 ? 1 : 0, ac = drug === 2 ? 1 : 0, ivig = drug === 3 ? 1 : 0;
   const F = cl(PH.f * (1 - 0.65 * ivig) - 0.04 * asp);
   const I = cl(PH.i * (1 - 0.7 * ivig) - 0.06 * asp);
   const A = cl(PH.a * (1 - 0.55 * ivig) * (0.65 + 0.35 * PH.i));
@@ -427,53 +428,384 @@ function run(scn) {
   start();
 }
 
-/* Kawasaki scene: child signs, inflamed coronary wall, aneurysm, slow flow, clot and heart muscle. */
+/* Shared organ art for the animated mechanism scenes. Plain globals, ES2015, no imports.
+ * Inlined after bio.lib.js when buildScene gets organs:true, so mk/f1/clamp below are the shared ones.
+ * organ(parent, kind, x, y, w, opts) draws real anatomy art (NIH BioArt Source public domain,
+ * Servier Medical Art CC BY 3.0, one DBCLS CC BY 4.0 knee; injected as _ORG_ART by buildScene
+ * for the kinds the page uses) centred on x,y and w px wide, and falls back to the existing
+ * procedural layered silhouette for kinds without art (uterus, thyroid, ganglion) or when art
+ * was not injected (liver, bladder and eye keep their procedural drawings as fallback).
+ * Art ports are fractions of the art viewBox (see _ORG_FRAC). The liver-4 art is the bare mass,
+ * so the lib adds a procedural gallbladder under the gall port plus short portal and hepatic
+ * vein stubs ending at the porta and hepvein ports.
+ * opts: { h (px height, else proportional), flip (mirror left/right), cls (extra class), id,
+ *   tint (a CSS colour with opacity, overlaid as an organ-shaped mask for disease states),
+ *   dim (dull the art) }.
+ * Returns { g, kind, x, y, w, h, ports, art } with absolute SVG coords; ports.in/out always exist.
+ * Art keeps its own colours (a faint contrast halo keeps it readable in dark and light themes);
+ * procedural fill is a vertical gradient whose stops derive from --cc (a theme aware palette var,
+ * so dark and light both work); edge stroke and landmark lines use color-mix detail classes.
+ * Emits no text, so label font and dash rules are inherited from the calling scene. */
+if (!document.getElementById("orgCss")) { var _orgSt = document.createElement("style"); _orgSt.id = "orgCss";
+  _orgSt.textContent = ".org-halo{filter:drop-shadow(0 0 1px rgba(0,0,0,.65)) drop-shadow(0 0 1px rgba(255,255,255,.45))}"
+  + ".org-b{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1.2;stroke-linejoin:round;stroke-linecap:round}"
+  + ".org-d{fill:none;stroke:color-mix(in srgb,var(--cc) 40%,var(--anatomy-hi));stroke-width:1;stroke-linecap:round;opacity:.8}"
+  + ".org-dk{fill:none;stroke:color-mix(in srgb,var(--cc) 62%,#000);stroke-width:1.1;stroke-linecap:round;opacity:.8}"
+  + ".org-f{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1;stroke-linejoin:round}"
+  + ".org-v{fill:none;stroke-linecap:round}"
+  + ".org-liver{--cc:var(--c-rbc)}.org-heart{--cc:var(--c-rbc)}.org-kidney{--cc:var(--c-eos)}.org-lung{--cc:var(--c-endo)}"
+  + ".org-stomach{--cc:var(--c-graft)}.org-brain{--cc:var(--c-mac)}.org-pancreas{--cc:var(--c-plt)}.org-spleen{--cc:var(--c-sm)}"
+  + ".org-bladder{--cc:var(--c-th2)}.org-uterus{--cc:var(--c-endo)}.org-ovary{--cc:var(--c-plt)}.org-thyroid{--cc:var(--c-neut)}.org-eye{--cc:#e6e1d4}.org-ganglion{--cc:var(--c-mac)}"
+  + ".org-bowel{--cc:var(--c-graft)}.org-colon{--cc:var(--c-eos)}.org-ear{--cc:var(--c-plt)}.org-skin{--cc:#d9a58c}"
+  + ".org-muscle{--cc:var(--c-rbc)}.org-joint{--cc:#cfc8bd}.org-vessel{--cc:var(--c-rbc)}";
+  document.head.appendChild(_orgSt); }
+var _orgN = 0;
+/* per instance gradients: base (light -> base -> dark of --cc) plus a white top / dark bottom shade overlay */
+function _orgDefs(g) {
+  _orgN++; var id = "og" + _orgN, hid = "oh" + _orgN;
+  var defs = mk("defs", {}, g);
+  var lg = mk("linearGradient", { id: id, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  var s0 = mk("stop", { offset: "0", "stop-color": "#999" }, lg); s0.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 55%,#fff)");
+  var s1 = mk("stop", { offset: ".55", "stop-color": "#888" }, lg); s1.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 78%,var(--anatomy-paper))");
+  var s2 = mk("stop", { offset: "1", "stop-color": "#666" }, lg); s2.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 66%,#000)");
+  var hg = mk("linearGradient", { id: hid, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  mk("stop", { offset: "0", "stop-color": "#fff", "stop-opacity": ".2" }, hg);
+  mk("stop", { offset: ".55", "stop-color": "#fff", "stop-opacity": "0" }, hg);
+  mk("stop", { offset: "1", "stop-color": "#000", "stop-opacity": ".14" }, hg);
+  return { b: "url(#" + id + ")", h: "url(#" + hid + ")" };
+}
+/* one filled silhouette plus its shade overlay, same path data so the light stays inside */
+function _ob(g, d, G) {
+  mk("path", { class: "org-b", d: d, fill: G.b, stroke: "#666" }, g);
+  mk("path", { d: d, fill: G.h, stroke: "none", "pointer-events": "none" }, g);
+}
+function _ol(g, d, cls) { return mk("path", { class: cls || "org-d", d: d, fill: "none" }, g); }
+function _of(g, d, fillCss, cc) { var e = mk("path", { class: "org-f", d: d, stroke: "#666" }, g); e.setAttribute("style", "fill:" + fillCss + ";--cc:" + cc); return e; }
+function _ov(g, d, color, wdt) { var e = mk("path", { class: "org-v", d: d, fill: "none", stroke: "#777", "stroke-width": wdt, "stroke-linecap": "round" }, g); e.setAttribute("style", "stroke:" + color); return e; }
+function _odot(g, x, y, r, fillCss) { var e = mk("circle", { cx: x, cy: y, r: r, stroke: "none" }, g); e.setAttribute("style", "fill:" + fillCss); return e; }
+
+/* liver: big right lobe, smaller left lobe, falciform notch, gallbladder, porta hepatis stubs */
+function _orgLiver(g, G) {
+  _ov(g, "M-2 46L-2 18", "var(--d-ven)", 5); _ov(g, "M7 46L5 20", "var(--d-art)", 3); _ov(g, "M-11 46L-9 20", "var(--c-bac)", 2.5);
+  _ob(g, "M-6-30C22-33 44-25 50-7C54 9 40 25 18 30C2 33-5 22-7 6C-8-8-8-22-6-30Z", G);
+  _ob(g, "M-8-27C-24-27-40-19-48-6C-51 1-45 9-35 12C-24 15-11 9-8-1C-6-10-6-20-8-27Z", G);
+  _ol(g, "M-8-29C-7-18-6-6-4 6", "org-dk");
+  _ol(g, "M-2-28C14-29 30-24 40-14");
+  _of(g, "M10 18C16 16 22 18 23 24C24 31 19 37 14 36C9 35 7 28 8 23C8 21 9 19 10 18Z", "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  return { h0: 78, ports: { in: [-2, 46], out: [12, -30], porta: [-2, 18], gall: [16, 33], lobe: [20, 0] } };
+}
+/* heart: mass with apex down left, septum, coronary groove, aorta with arch, pulmonary split, caval stubs */
+function _orgHeart(g, G) {
+  _ov(g, "M-2-18L-2-44C-2-52-10-56-20-54C-28-52-32-46-32-38", "var(--d-art)", 8);
+  _ov(g, "M-8-52L-8-59M-15-54L-16-60M-22-53L-24-59", "var(--d-art)", 2.5);
+  _ov(g, "M12-16C8-28 2-34-4-38", "var(--d-ven)", 7);
+  _ov(g, "M-4-38C-12-40-20-38-28-34", "var(--d-ven)", 4.5); _ov(g, "M-4-38C4-40 12-38 20-34", "var(--d-ven)", 4.5);
+  _ov(g, "M20-20L20-52", "var(--d-ven)", 7); _ov(g, "M18 34L18 58", "var(--d-ven)", 7);
+  _ov(g, "M-36-2L-50-6M-34 14L-48 16", "var(--d-art)", 4);
+  _ob(g, "M-4-32C24-34 42-16 40 10C38 32 12 48-20 50C-34 44-40 24-36 2C-33-18-22-31-4-32Z", G);
+  _ol(g, "M0-30C4-10 0 14-14 44", "org-dk");
+  _ol(g, "M-34 6C-18 12 6 12 38 4");
+  _ol(g, "M-6-28C-14-18-18-6-20 8");
+  return { h0: 120, ports: { in: [20, -52], out: [-32, -38], ivc: [18, 58], apex: [-20, 50], pulm: [-28, -34] } };
+}
+/* kidney: bean with hilum, cortex rim, medulla rays, pelvis funnel, ureter, artery and vein stubs */
+function _orgKidney(g, G) {
+  _ov(g, "M-12 6C-22 12-28 18-28 30C-28 50-26 70-24 90", "var(--cc)", 4.5);
+  _ov(g, "M-50-8C-40-8-30-8-22-6", "var(--d-art)", 4); _ov(g, "M-50 10C-40 10-30 8-22 6", "var(--d-ven)", 5);
+  _ob(g, "M8-58C38-58 54-32 50 2C56 32 42 60 8 60C-8 60-16 48-19 34C-26 24-26-24-19-34C-16-48-8-58 8-58Z", G);
+  _ol(g, "M8-49C32-49 45-28 42 0C46 28 34 51 8 51C-1 51-8 43-10 32C-15 24-15-24-10-32C-8-43-1-49 8-49Z");
+  _ol(g, "M-6-30L14-38M-8-10L16-12M-8 12L16 14M-6 32L14 40");
+  _ol(g, "M16-44C30-36 38-20 38 0");
+  _of(g, "M-19-14C-8-12-2-8 2-2C-2 4-8 10-18 14C-22 8-22-8-19-14Z", "color-mix(in srgb,var(--cc) 35%,#fff)", "var(--cc)");
+  return { h0: 150, ports: { in: [-50, -8], out: [-24, 90], vein: [-50, 10], pelvis: [-12, 4], cortex: [30, 0] } };
+}
+/* lung: one lung with oblique fissure, hilum bronchus splitting into lobar and segmental branches */
+function _orgLung(g, G) {
+  _ov(g, "M-58 4L-30 4", "var(--anatomy-hi)", 6);
+  _ov(g, "M-30 4C-22-6-16-16-10-26", "var(--anatomy-hi)", 4.5); _ov(g, "M-30 4C-22 14-14 24-6 34", "var(--anatomy-hi)", 4.5);
+  _ov(g, "M-18-14L-28-22M-16-16L-8-24M-14-20L-14-32M-20 16L-30 24M-16 20L-6 28M-12 26L-10 38", "var(--anatomy-hi)", 2);
+  _ov(g, "M-58-8L-34-6", "var(--d-ven)", 4); _ov(g, "M-58 14L-34 12", "var(--d-art)", 4);
+  _ob(g, "M2-60C24-56 40-32 43 8C45 38 32 60 2 62C-24 62-40 42-42 10C-44-24-20-58 2-60Z", G);
+  _ol(g, "M-40-2C-20 8 0 22 24 40", "org-dk");
+  _ol(g, "M-8-48C8-50 22-40 30-26");
+  return { h0: 130, ports: { in: [-58, 4], out: [-58, 14], art: [-58, -8], apex: [2, -60], base: [2, 62] } };
+}
+/* stomach: J shape with fundus dome, rugae, antrum sweep, pylorus ring, oesophagus and duodenum stubs */
+function _orgStomach(g, G) {
+  _of(g, "M-38-58L-22-58L-22-36L-38-36Z", "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))", "var(--cc)");
+  _ob(g, "M-38-36C-46-24-50-8-46 10C-42 30-30 46-12 50C6 54 28 46 40 32C44 27 46 23 46 18L34 14C30 22 20 30 6 32C-8 34-22 26-28 12C-33-1-31-16-26-28C-24-32-22-34-22-36Z", G);
+  _ol(g, "M-36-10C-30 6-22 20-8 28M-28-22C-22-6-12 10 4 22M-16-30C-10-14 0 2 14 12");
+  _ol(g, "M40 15C43 19 43 25 40 29M34 14C37 18 37 26 34 30", "org-dk");
+  _ol(g, "M46 16L60 22M44 28L58 32", "org-dk");
+  return { h0: 116, ports: { in: [-30, -58], out: [60, 27], fundus: [-40, -12], antrum: [24, 38], pylorus: [40, 22] } };
+}
+/* brain lateral: cerebrum with Sylvian fissure and gyri, cerebellum with folia, tapered brainstem */
+function _orgBrain(g, G) {
+  _ov(g, "M10 50L10 64", "var(--d-art)", 5);
+  _ob(g, "M-50-6C-50-32-24-42 4-40C30-38 44-28 44-8C44 10 32 24 8 28C-18 31-50 24-50-6Z", G);
+  _ol(g, "M-12 10C2 6 18 2 34-4", "org-dk");
+  _ol(g, "M-38-20C-32-10-32 2-38 12M-26-30C-20-20-20-6-26 6M-4-32C2-22 2-8-4 2M10-30C16-20 16-6 10 4M28-22C34-14 34-2 28 8");
+  _ol(g, "M-16 6L-24-4M-10 4L-12-8", "org-dk");
+  _ob(g, "M2 24L16 24L12 56L6 56Z", G);
+  _ol(g, "M2 36C6 38 12 38 16 36");
+  _ob(g, "M22 24C34 22 46 26 48 34C50 42 42 48 32 47C24 46 20 38 20 32C20 28 20 26 22 24Z", G);
+  _ol(g, "M24 32L44 32M25 37L43 37M27 42L41 42");
+  return { h0: 110, ports: { in: [10, 64], out: [4, -40], parenchyma: [-8, -6], cereb: [34, 35], frontal: [-40, -8] } };
+}
+/* pancreas: bulky head right, tapering tail left, main duct with side branches, islet dots */
+function _orgPancreas(g, G) {
+  _ob(g, "M-50-4C-32-14-8-14 14-10C32-7 46-2 49 10C51 21 40 28 26 25C8 21-20 12-50 6Z", G);
+  _ol(g, "M-46 1C-20-2 10 0 38 10", "org-dk");
+  _ol(g, "M-30-1L-34-8M-10-1L-14-9M8 0L4-8M-28 1L-32 8M-6 1L-10 8M12 2L8 10");
+  _ol(g, "M52-6C58 4 58 16 50 24");
+  _odot(g, -20, -2, 1.6, "var(--d-art)"); _odot(g, 0, 0, 1.6, "var(--d-art)"); _odot(g, 22, 6, 1.6, "var(--d-art)");
+  return { h0: 60, ports: { in: [-10, -12], out: [49, 12], head: [36, 8], tail: [-48, 1] } };
+}
+/* spleen: crescent with top notch, trabeculae, hilar artery and vein stubs below */
+function _orgSpleen(g, G) {
+  _ov(g, "M-30 52C-28 44-26 40-22 36", "var(--d-art)", 3.5); _ov(g, "M-20 54C-19 46-17 42-13 38", "var(--d-ven)", 4.5);
+  _ob(g, "M-38-30C-8-40 28-34 44-12C52 4 44 26 20 34C-4 41-34 32-44 10C-48-4-46-22-38-30Z", G);
+  _ol(g, "M-8-36C-4-33 0-33 4-36", "org-dk");
+  _ol(g, "M-30-10C-10-2 12-2 32-10M-28 8C-8 16 12 16 30 8");
+  return { h0: 96, ports: { in: [-30, 52], out: [-20, 54], hilum: [-18, 37], pulp: [0, 0] } };
+}
+/* ganglion: sensory ganglion with capsule, fibre stubs, satellite glia dots, one big soma with nucleus */
+function _orgGanglion(g, G) {
+  _ov(g, "M-52 0L-30 0", "var(--anatomy-hi)", 7);
+  _ov(g, "M30 0L52 0", "var(--anatomy-hi)", 7);
+  _ob(g, "M-32-27C-12-37 13-37 30-25C43-12 43 12 30 25C13 37-12 37-32 27C-42 13-42-13-32-27Z", G);
+  _ol(g, "M-27-21C-10-29 12-29 26-19");
+  _of(g, "M-16 0C-16-9-9-16 0-16C9-16 16-9 16 0C16 9 9 16 0 16C-9 16-16 9-16 0Z", "color-mix(in srgb,var(--cc) 62%,var(--anatomy-paper))", "var(--cc)");
+  _of(g, "M-7 0C-7-4-4-7 0-7C4-7 7-4 7 0C7 4 4 7 0 7C-4 7-7 4-7 0Z", "color-mix(in srgb,var(--cc) 45%,#1a1030)", "var(--cc)");
+  _odot(g, 2, 1, 1.8, "color-mix(in srgb,var(--cc) 70%,#fff)");
+  _odot(g, -25, -13, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 25, -12, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 0, 28, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _ol(g, "M-13-8L-22-16M13-8L22-16");
+  return { h0: 96, ports: { in: [-52, 0], out: [52, 0], soma: [0, 0], nucleus: [0, 0] } };
+}
+/* bladder: dome with detrusor arcs, trigone, ureters in from above, urethra out below */
+function _orgBladder(g, G) {
+  _ov(g, "M-52-44C-44-34-36-26-30-18", "var(--cc)", 4); _ov(g, "M52-44C44-34 36-26 30-18", "var(--cc)", 4);
+  _ob(g, "M0-50C26-48 40-30 40-6C40 16 26 32 8 40L-8 40C-26 32-40 16-40-6C-40-30-26-48 0-50Z", G);
+  _ob(g, "M-8 40L8 40L8 64L-8 64Z", G);
+  _ol(g, "M-8 52L8 52", "org-dk");
+  _ol(g, "M-24-8L24-8L0 24Z");
+  _ol(g, "M-28-28C-12-36 12-36 28-28M-34-12C-16-22 16-22 34-12");
+  return { h0: 120, ports: { in: [-52, -44], out: [0, 64], inR: [52, -44], trigone: [0, 8], dome: [0, -48] } };
+}
+/* uterus: fundus, cavity, cervix, tubes with fimbriae, ovaries with follicles */
+function _orgUterus(g, G) {
+  _ov(g, "M-16-16C-26-17-32-19-38-23", "var(--cc)", 3.5); _ov(g, "M16-16C26-17 32-19 38-23", "var(--cc)", 3.5);
+  _ov(g, "M-38-23L-44-27M-38-23L-45-23M-38-23L-44-19M-38-23L-42-29", "var(--cc)", 1.2);
+  _ov(g, "M38-23L44-27M38-23L45-23M38-23L44-19M38-23L42-29", "var(--cc)", 1.2);
+  var eo = mk("ellipse", { class: "org-f", cx: -45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var eo2 = mk("ellipse", { class: "org-f", cx: 45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo2.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var _fol = "color-mix(in srgb,var(--c-plt) 45%,#000)";
+  _odot(g, -47, -14, 1.6, _fol); _odot(g, -43, -8, 1.6, _fol); _odot(g, -46, -4, 1.4, _fol);
+  _odot(g, 47, -14, 1.6, _fol); _odot(g, 43, -8, 1.6, _fol); _odot(g, 46, -4, 1.4, _fol);
+  _ob(g, "M-16-20C-8-26 8-26 16-20C20-2 15 20 8 32L-8 32C-15 20-20-2-16-20Z", G);
+  _of(g, "M-10-14L10-14L0 22Z", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  _ol(g, "M-11 18L11 18", "org-dk"); _ol(g, "M0 18L0 32");
+  return { h0: 100, ports: { in: [-45, -22], out: [0, 33], ovL: [-45, -10], ovR: [45, -10], fundus: [0, -24] } };
+}
+/* ovary: almond body with surface arcs, hilar artery and vein stubs at the hilum */
+function _orgOvary(g, G) {
+  _ov(g, "M-52 0L-40 0", "var(--d-art)", 3); _ov(g, "M40 0L52 0", "var(--d-ven)", 3.5);
+  _ob(g, "M-40-6C-30-24-5-30 15-26C33-22 42-10 40 6C38 22 20 30 0 29C-20 28-38 14-40-6Z", G);
+  _ol(g, "M-28-12C-16-20 0-23 14-21");
+  _ol(g, "M-32 4C-20 12-2 17 14 14", "org-dk");
+  return { h0: 70, ports: { in: [-52, 0], out: [52, 0], dom: [0, 0], surf: [0, -27] } };
+}
+/* thyroid butterfly: two lobes, isthmus bridge, trachea rings behind, parathyroid dots */
+function _orgThyroid(g, G) {
+  _ov(g, "M-7-40L-7 40M7-40L7 40", "var(--anatomy-hi)", 2);
+  _ov(g, "M-7-28L7-28M-7-12L7-12M-7 24L7 24M-7 36L7 36", "var(--anatomy-hi)", 1.2);
+  _ob(g, "M16-32C28-30 35-16 33 4C31 22 25 32 16 32C8 32 6 20 8 2C10-14 11-28 16-32Z", G);
+  _ob(g, "M-16-32C-28-30-35-16-33 4C-31 22-25 32-16 32C-8 32-6 20-8 2C-10-14-11-28-16-32Z", G);
+  _ob(g, "M-10 6L10 6L10 16L-10 16Z", G);
+  _ol(g, "M14-20C18-10 18 6 14 20M-14-20C-18-10-18 6-14 20");
+  _odot(g, -30, 8, 2, "var(--c-plt)"); _odot(g, 30, -4, 2, "var(--c-plt)");
+  return { h0: 90, ports: { in: [16, -34], out: [0, 36], isthmus: [0, 11], lobeR: [22, 0], lobeL: [-22, 0] } };
+}
+/* eye: sclera ball with cornea bulge, iris and pupil facing left, retina arc, optic nerve stub right */
+function _orgEye(g, G) {
+  _ov(g, "M26 0L54 0", "var(--c-plt)", 8);
+  _ob(g, "M-36-4C-34-22-16-32 4-30C24-28 34-12 32 4C30 20 14 30-4 29C-22 28-36 14-36-4Z", G);
+  _of(g, "M-39 0C-39-6-35-11-30-11C-25-11-21-6-21 0C-21 6-25 11-30 11C-35 11-39 6-39 0Z", "color-mix(in srgb,var(--c-endo) 70%,var(--anatomy-paper))", "var(--c-endo)");
+  _odot(g, -30, 0, 5, "#241a12");
+  _odot(g, -32, -3.5, 1.5, "#ffffff");
+  _ol(g, "M16-15C23-5 23 7 15 17");
+  return { h0: 70, ports: { in: [-41, 0], out: [54, 0], retina: [16, 0], lens: [-20, 0] } };
+}
+/* Real-art store, filled by buildScene after this lib: _ORG_ART[kind] = { vb:[x,y,w,h],
+ * pfx:"oaxxx", body:"<inner svg markup>" }. Ports are fractions of the viewBox, measured
+ * off the slimmed art (see tools/figures/dev/svgslim.py); content fills the frame. */
+var _ORG_ART = {};
+var _ORG_FRAC = {
+  liver: { in: [.35, .95], out: [.40, .01], porta: [.35, .95], hepvein: [.40, .01], gall: [.55, .66], lobe: [.15, .70] },
+  heart: { in: [.30, .01], out: [.48, .01], aorta: [.48, .01], ivc: [.28, .90], apex: [.70, .97], pulm: [.60, .08] },
+  kidney: { in: [.04, .36], out: [.38, .97], vein: [.04, .46], pelvis: [.36, .41], cortex: [.62, .45], hilum: [.28, .41] },
+  lung: { in: [.46, .53], out: [.44, .60], art: [.44, .48], apex: [.24, .30], base: [.24, .87], trachea: [.49, .01], carina: [.49, .50], hilumL: [.42, .58], hilumR: [.56, .58], apexR: [.75, .34], baseR: [.75, .86] },
+  stomach: { in: [.42, .00], out: [.50, .95], fundus: [.38, .10], antrum: [.52, .30], pylorus: [.60, .35] },
+  intestine: { in: [.58, .38], out: [.50, .95], duodenum: [.60, .40], jejunum: [.42, .60], ileum: [.50, .72], cecum: [.60, .82], colon: [.28, .60], rectum: [.50, .92] },
+  brain: { in: [.60, .97], out: [.42, .04], parenchyma: [.42, .42], cereb: [.76, .78], frontal: [.08, .40], stem: [.60, .93], carotid: [.16, .75] },
+  pancreas: { in: [.50, .08], out: [.95, .50], head: [.85, .45], tail: [.06, .45], body: [.50, .45] },
+  spleen: { in: [.38, .78], out: [.52, .78], hilum: [.45, .72], pulp: [.50, .38] },
+  bowel: { in: [.21, .03], out: [.80, .99], coils: [.52, .52] },
+  colon: { in: [.75, .72], out: [.50, .98], caecum: [.75, .72], rectum: [.50, .98], ascending: [.88, .58], transverse: [.50, .62], descending: [.23, .44], sigmoid: [.42, .82] },
+  bladder: { in: [.25, .01], out: [.50, .99], inR: [.73, .01], trigone: [.50, .70], dome: [.50, .28] },
+  eye: { in: [.02, .50], out: [.99, .55], retina: [.75, .50], lens: [.19, .51], cornea: [.08, .50], nerve: [.99, .55] },
+  ear: { in: [.35, .45], out: [.02, .55], canals: [.57, .18], vestibule: [.50, .45], cochlea: [.55, .75], nerve: [.02, .55] },
+  skin: { in: [.50, .13], out: [.50, .97], surface: [.50, .13], epidermis: [.50, .17], dermis: [.47, .55], hypodermis: [.50, .92] },
+  muscle: { in: [.02, .50], out: [.99, .71], belly: [.32, .48], fibre: [.72, .58] },
+  joint: { in: [.50, .04], out: [.52, .96], femur: [.50, .20], joint: [.54, .58], patella: [.51, .52], tibia: [.52, .80], fibula: [.40, .78] },
+  vessel: { in: [.50, .01], out: [.50, .99], lumen: [.50, .05], wall: [.90, .50] }
+};
+/* liver-4 is the bare mass, so add the missing bits procedurally in art units
+ * (fractions of the liver-4 viewBox): a gallbladder blob under the art at the
+ * gall port (its fundus peeks below the inferior edge), a portal stub rising
+ * to the porta tip and a hepatic stub leaving at the hepvein tip. Drawn before
+ * the art group so the mass covers the joins; the inner flip mirrors them. */
+function _orgLiverExtra(inner, A, opts) {
+  var vw = A.vb[2], vh = A.vb[3];
+  var X = function (f) { return f1(f * vw); }, Y = function (f) { return f1(f * vh); };
+  var g = mk("g", {}, inner);
+  if (opts.dim) g.setAttribute("opacity", ".5");
+  _ov(g, "M" + X(.35) + " " + Y(.95) + "L" + X(.35) + " " + Y(.78), "var(--d-ven)", 11);
+  _ov(g, "M" + X(.40) + " " + Y(.01) + "L" + X(.40) + " " + Y(.14), "var(--d-ven)", 11);
+  var gb = _of(g, "M" + X(.55 - 17 / vw) + " " + Y(.63) + "a17 23 0 1 0 34 0a17 23 0 1 0 -34 0",
+    "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  gb.setAttribute("stroke-width", "2.2");
+  return g;
+}
+/* draw the injected art centred on x,y at w px wide. The art is clipped to its
+ * frame; tint overlays an organ-shaped translucent mask (the art itself, reused
+ * as a mask); dim dulls the art. Art ids are suffixed per instance so two of
+ * the same organ on one page never share gradient, clip or mask ids. */
+function _orgArt(parent, kind, x, y, w, opts, A) {
+  var vb = A.vb, vw = vb[2], vh = vb[3], cx = vb[0] + vw / 2, cy = vb[1] + vh / 2;
+  _orgN++;
+  var uid = "u" + _orgN;
+  var outer = mk("g", { class: "org org-art org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var sx = w / vw, sy = opts.h ? opts.h / vh : sx, fx = opts.flip ? -1 : 1;
+  var inner = mk("g", { transform: "translate(" + f1(-fx * cx * sx) + " " + f1(-cy * sy) + ") scale(" + (fx * sx).toFixed(4) + " " + sy.toFixed(4) + ")" }, outer);
+  var defs = mk("defs", {}, inner);
+  var cid = A.pfx + uid + "-frame";
+  var cp = mk("clipPath", { id: cid }, defs);
+  mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, cp);
+  if (kind === "liver") _orgLiverExtra(inner, A, opts);
+  var art = mk("g", { class: "org-halo", "clip-path": "url(#" + cid + ")" }, inner);
+  var aid = A.pfx + uid + "-art";
+  art.setAttribute("id", aid);
+  art.innerHTML = A.body.split('id="' + A.pfx + '-').join('id="' + A.pfx + uid + '-')
+    .split('url(#' + A.pfx + '-').join('url(#' + A.pfx + uid + '-')
+    .split('href="#' + A.pfx + '-').join('href="#' + A.pfx + uid + '-');
+  if (opts.dim) art.setAttribute("opacity", ".5");
+  if (opts.tint) {
+    var mid = A.pfx + uid + "-tintm";
+    var m = mk("mask", { id: mid, maskUnits: "userSpaceOnUse", x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, defs);
+    mk("use", { href: "#" + aid }, m);
+    var tg = mk("g", { "clip-path": "url(#" + cid + ")" }, inner);
+    mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh), fill: opts.tint, mask: "url(#" + mid + ")" }, tg);
+  }
+  var ports = {}, F = _ORG_FRAC[kind], k;
+  for (k in F) ports[k] = [Math.round((x + fx * (vb[0] + F[k][0] * vw - cx) * sx) * 10) / 10, Math.round((y + (vb[1] + F[k][1] * vh - cy) * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(vh * sy * 10) / 10, ports: ports, art: true };
+}
+/* dispatcher: outer g carries the theme class and gradients, inner g the local drawing scaled to w */
+function organ(parent, kind, x, y, w, opts) {
+  opts = opts || {};
+  if (_ORG_FRAC[kind] && _ORG_ART[kind]) return _orgArt(parent, kind, x, y, w, opts, _ORG_ART[kind]);
+  var outer = mk("g", { class: "org org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var G = _orgDefs(outer);
+  var inner = mk("g", {}, outer);
+  var r;
+  if (kind === "liver") r = _orgLiver(inner, G);
+  else if (kind === "heart") r = _orgHeart(inner, G);
+  else if (kind === "kidney") r = _orgKidney(inner, G);
+  else if (kind === "lung") r = _orgLung(inner, G);
+  else if (kind === "stomach") r = _orgStomach(inner, G);
+  else if (kind === "brain") r = _orgBrain(inner, G);
+  else if (kind === "pancreas") r = _orgPancreas(inner, G);
+  else if (kind === "spleen") r = _orgSpleen(inner, G);
+  else if (kind === "ganglion") r = _orgGanglion(inner, G);
+  else if (kind === "eye") r = _orgEye(inner, G);
+  else if (kind === "bladder") r = _orgBladder(inner, G);
+  else if (kind === "uterus") r = _orgUterus(inner, G);
+  else if (kind === "ovary") r = _orgOvary(inner, G);
+  else if (kind === "thyroid") r = _orgThyroid(inner, G);
+  else throw new Error("organ: unknown kind " + kind);
+  var sx = w / 100, sy = opts.h ? opts.h / r.h0 : sx, fx = opts.flip ? -1 : 1;
+  inner.setAttribute("transform", "scale(" + (fx * sx).toFixed(3) + " " + sy.toFixed(3) + ")");
+  var ports = {}, k;
+  for (k in r.ports) ports[k] = [Math.round((x + fx * r.ports[k][0] * sx) * 10) / 10, Math.round((y + r.ports[k][1] * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(r.h0 * sy * 10) / 10, ports: ports, art: false };
+}
+organ.kinds = ["liver", "heart", "kidney", "lung", "stomach", "intestine", "brain", "pancreas", "spleen", "bladder", "uterus", "ovary", "thyroid", "eye", "ganglion", "bowel", "colon", "ear", "skin", "muscle", "joint", "vessel"];
+
+_ORG_ART["heart"]={vb:[0,0,289.4,406.4],pfx:"oahea",body:"<g opacity=\".8\"><g><path d=\"M47.4 132.2l-10.5 5.3-10 7.4-7.7 7.9-8 11.3-4.8 10.1-3.7 12.7-2.1 15.7-.5 16.8.7 15.5 1.9 13.8 3 11.6 4 9.1 6.1 8.4 8.4 9 13.8 12.5 11 8.1 2.1-.6 1.3-4.4.6-7.3-.6-51.9.6-7.7 1.3-4.8 11.1-19.6 7.2-17.5 9.9-9.9 9.5-13.2 19.1-17.9 4.9-7.6-.5-1.4-1.4-.9-4.2-1.5-19.3-3.8-24.2-6.6-9.9-.6Z\" fill=\"#e79091\" /></g></g><g><path d=\"M189.3 137.3l-1.7 2.2-.5 3.6 1.7 8.4 9.8 16.8 6.7 9.7 17.7 8.7 10.9 10.5 2.3.6 4.4-.8 1.3-3.3-1-6.4-7.6-15.4-3.8-13.6-5.7-8.7-8-7.7-6.4-3.6-12.9-2.8-3.4.4Z\" fill=\"#e99494\" /></g><g><g id=\"oahea-bottom_vessels\"><path d=\"M53.7 296.1l.6 99.9 6.3 5 3.7 1.9 5.8 1.3 6.9-.2 6-2 7.7-4.6.4-98.9Z\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" fill=\"#5276b8\" stroke=\"#142b4f\" /><g><path d=\"M58.2 397.3l6.2-81.9 14.9 38.7 1.1 45.2-8.7 1.4-5.9-.2-5.5-1.7Z\" fill=\"#fff\" /></g><g opacity=\".6\"><g><path d=\"M55.3 313.5l5 18.8 4.9 11.3 7.2 8.1 8.8 12.5 1.6.5 2.8-1.3 5.2-4.1 2.9-3.7 1.4-3.9-.9-2.7-12.8-13.6Z\" fill=\"#21385e\" /></g></g></g><g id=\"oahea-top_vessels\"><path d=\"M161.8 122l3.3 -6.2 3.7 -9.6 2.4 -12.4 .1 -6.8 -1 -7 -4.8 -12.1 -13.5 -20 -2.6 -19.5 -2.8 -14.2 -11.8 -1 -1.3 -4 -2.6 -.6 -13.8 2.1 -6.5 3 -1.9 -9.8 -4.7 -.7 -10.5 -.2 -7.4 1.5 -3.2 1.6 -2.6 2.3 .2 3.6 7.3 68.5 -5.8 18.9 -2.6 13 -.9 15.5 .6 8.6 1.5 8.8 5.3 16.6 3.5 7.5 7.8 12.7 7.7 8.5 3.5 2.3 3 .7 15.4 -3.8 12.8 -5.1 7.9 -4 1.4 -2.4 3.5 -11.6Z\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" fill=\"#db5452\" stroke=\"#912e30\" /><path d=\"M109.7 9.5l9.4 30.9 4.1 9.4 1.6 2.6 1.1-.3.9-.9-.1-1.3-10.1-21.5Z\" fill=\"#912e30\" /><g><path d=\"M85.4 8.3l4.5 27.5 1.3 1.6 2.6-.3 6.3-3.2-7.4-25.9-3.3-1.2Z\" fill=\"#fff\" /></g><path d=\"M134.8 13.1l6.1 31.2.9 2.7 1.9 1.6Z\" fill=\"#912e30\" /><g opacity=\".8\"><g><path d=\"M124.3 13.4l11.3 35.5-1.4 3.6-4.8 2.5-2.2-.8 2.9-4.9-.4-5-9.6-27.9.8-1.9Z\" fill=\"#fff\" /></g></g><path d=\"M75.6 8.6l6.5 24.6 61.8-25.5 19.9-6.5 3.6 3.2 4.1 6.9 1.8 7.8-.5 4.7-60.8 30-15.2 9.5-3.8 3.7-7.2 14-4.6 15.1-2.9 21.4.8 19.7-3 4-8.2 4.2-11.5 3.6-29.5 3 2.5-9.2 1-20.1 1.9-16.5 9.4-45.2.8-15.3-.6-33.5 6-2.5 11.3-2.5 11-.1Z\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" fill=\"#5276b8\" stroke=\"#142b4f\" /><g><path d=\"M49.8 67.5l-4.9 35.6 -2.8 36.6 1 10.2 1.6 2.7 2.2 1.4 2.7 .4 6 -1.4 9.8 -4.6 1.1 -1.2 .6 -6.2 -.7 -24.9 1.1 -16.9 1.4 -9.1 2.6 -8.8 4.1 -7.8 5.1 -6.9 12 -11 12 -7.5 13 -5.9 1.6 -3.1 -1.3 -3.9 -3.9 -4.5 -3.7 -.3 -7.8 2.4 -40.5 23.8 -8.4 6Z\" fill=\"#fff\" /></g><g><path d=\"M137.9 134.2l-3.2-14 .1-6.5.8-2.7 1.5-2.1 12.1-10.2 3.4-4.2-3 4.9-5.9 6.4 9.9-3.6 4.9-2.7-6.8 4.5-7.7 3.6-2.3 2.8-1.5 5.8 8.3-.7-8.1 2.9-1.4 1.2Z\" fill=\"#6e2626\" /></g><g opacity=\".9\"><g><path d=\"M153.3 66.9l-4.2 11.6-4 6.7-8.7 10.3-3.7 10.2-1.6 17.7.6 9.8 1.5 8.4-.9 5.8-1.5 3.8-3.1 3.8-5.1 2-8.2.6-4.2-1.6-3.7-3.5-2.8-6-1.4-8.9.4-12.4 4.3-28.3 2.5-30.2 1.7-8.4 1.3-2.7 30.6 6.3 5.9 2.1Z\" fill=\"#eebbba\" /></g></g><g><path d=\"M53 11l2.3 33.9 1.1 1.6 3.2-.1 10.5-4.3.2-3.7-8.4-27.3-2.3-1.3Z\" fill=\"#fff\" /></g><g><path d=\"M105.6 63l-5.8 7.1 5.7 6.9 -9.5 29.7 -.9 10.6 1.1 13.3 1.6 7 2 4.8 10.4 18.6 2.5 2.4 9.3 .4 2.4 -.9 1.1 -1.9 -10.6 -20.3 -2.6 -11.4 .3 -13.1 4.2 -40 -1.5 -4 -4 -6 -3 -2.7Z\" fill=\"#fff\" /></g><g><path d=\"M105.6 63l-5.8 7.1 5.7 6.9 -9.5 29.7 -.9 10.6 1.1 13.3 1.6 7 2 4.8 10.4 18.6 2.5 2.4 9.3 .4 2.4 -.9 1.1 -1.9 -10.6 -20.3 -2.6 -11.4 .3 -13.1 4.2 -40 -1.5 -4 -4 -6 -3 -2.7Z\" fill=\"#fff\" /></g></g><g id=\"oahea-left_vessels\"><path d=\"M221 124.5l4.6 1 1.7 16 0 7.9-.6 1.6-2.5 2-3.5.7-5.9-.4-7.3-6.8.9-11.6Z\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" fill=\"#db5452\" stroke=\"#912e30\" /><path d=\"M120.4 161.1l4.1 -12.8 5.8 -10.6 11.1 -11.7 7.3 -4.6 4.5 -1.8 11.1 -2.3 33.9 .5 7.1 -.6 7.1 -1.8 4.1 3.6 6 9.2 -10.4 14 -1.8 9.6 -1.1 16.3 -23.7 15.9Z\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" fill=\"#5276b8\" stroke=\"#142b4f\" /><g><path d=\"M148.7 148.4l21.2-23.5 4.2-2.5 2.5.2.9 3.2-1.8 7.5-6.1 15.4-5.1 8.2-1.8.4-3.3-1.5Z\" fill=\"#fbf1f2\" /></g><g><path d=\"M178.9 119.6l5.9 3.6 3.7 3.3 3.7 6.8.4 3.2-.8 6.2-5.8 12.9.7 3.1 1.6 1.5 4.7.5 13.3-4.5 0-3.2-3.9-12.1-7.6-16-3-2.9-5-2.6-4.8-1.1Z\" fill=\"#433768\" /></g><path d=\"M228 162.2l15.6 1.1 3 8.8.2 6.5-9 .6Z\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" fill=\"#db5452\" stroke=\"#912e30\" /><path d=\"M247.8 183.6l-14.7.1-7.6 19.8 7.5 7.7 6.4-5.6 11.6-.3-.2-15.8-1.6-4.6Z\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" fill=\"#db5452\" stroke=\"#912e30\" /><g><path d=\"M203.9 133.5l7.6-6.9 6.5-3.3.6-.9-.6-1.5-1.6-1.4-2.1-.4-16.6 1.8-.8 1.8 1.4 4.7 2.4 3.4Z\" fill=\"#fbf1f2\" /></g></g><path d=\"M53.9 255.5l-2.8 16.8 -.2 10.6 1.7 11.5 4.4 12.2 9.5 17.8 16 26 11 10 14.2 9.9 17.5 8.6 15.1 5 24.6 6.3 40.6 8.2 21.6 6.6 11.9 .2 9.9 -1.9 7.2 -3.5 3.5 -2.7 6.4 -7.7 6.3 -12.3 6.5 -17.1 5.6 -20.5 3.5 -22.3 .6 -11.4 -1.5 -22.1 -3.3 -18.9 -2.2 -8.3 -5.8 -14.5 -3.7 -6.4 -9 -11.3 -14.3 -14.2 -11.7 -19.7 -1.9 -1.9 -14.6 -7.7 -10.6 -10.2 -12.3 -9.2 -16.1 -8.8 -11.6 -3.8 -11.2 -1.8 -14.9 -.2 -11.4 2.5 -2.8 1.3 -11.4 8.6 -13.4 4.8 -6.8 3.3 -6.4 5.1 -14.5 17.8 -11 15.2 -5 8.8 -2.5 11.3Z\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" fill=\"#b74b27\" stroke=\"#7b2222\" /><g opacity=\".8\"><g><path d=\"M53.9 255.5l-2.8 16.8 -.2 10.6 1.7 11.5 4.4 12.2 9.5 17.8 16 26 11 10 14.2 9.9 17.5 8.6 15.1 5 24.6 6.3 40.6 8.2 21.6 6.6 11.9 .2 9.9 -1.9 7.2 -3.5 3.5 -2.7 6.4 -7.7 6.3 -12.3 6.5 -17.1 5.6 -20.5 3.5 -22.3 .6 -11.4 -1.5 -22.1 -3.3 -18.9 -2.2 -8.3 -5.8 -14.5 -3.7 -6.4 -9 -11.3 -14.3 -14.2 -11.7 -19.7 -1.9 -1.9 -14.6 -7.7 -10.6 -10.2 -12.3 -9.2 -16.1 -8.8 -11.6 -3.8 -11.2 -1.8 -14.9 -.2 -11.4 2.5 -2.8 1.3 -11.4 8.6 -13.4 4.8 -6.8 3.3 -6.4 5.1 -14.5 17.8 -11 15.2 -5 8.8 -2.5 11.3Z\" fill=\"#e69ea3\" /></g></g><g opacity=\".8\"><g><path d=\"M171 156.7l14.7 6.3 6.7 5 2.7 3.1 3.4 7.3 1.9 8.7 .9 9 -.1 11.8 -6.7 32.1 -14 58.6 -28 87.3 .8 1.5 6.6 2.7 35.1 6.2 14.6 3.9 30.9 -77.8 8.1 -29.9 4.1 -18.2 -1.5 -38.6 -1.5 -21.4 -4.3 -8.4 -4.5 -6 -10.1 -9.3 -9.8 -6.3 -11.4 -6 -9.1 -12.9 -6.9 -7.1 -11.9 -6.2 -14.3 -4.8 -11 -1.7 -5.7 -.1 -11.1 1.7 -7.7 2.4 -5.5 2.9 -24 15.4 -13.4 11.3 -19.8 20.7 -10.3 12.5 -5.8 8.4 -1.9 10.5 -.4 17.5 1.1 28.6 1.5 16.6 3.5 11.8 5.6 12.4 8.6 12.8 5.6 5.7 6.5 4.7 7.4 3.4 11.6 3.3 4.5 -.1 -.2 -2.3 -6.6 -8.3 -22.9 -22.8 -5.9 -8 -1.3 -3.3 -.8 -6.5 .8 -11.9 2.8 -14.7 4.3 -16.7 1.6 -3.7 3.2 -3.9 3.5 -.5 6 1.4 5.1 -.3 2.4 -1.1 3.4 -3.9 1.8 -5.2 .1 -8.3 -6.9 -17.4 -.3 -9 4.7 -9.7 11 -13.4 7.5 -6.8 8.6 -6.2 9.5 -5.2 10.3 -3.5 11 -1.4Z\" fill=\"#f3cb91\" /></g></g><g><path d=\"M115.4 161.3l11.8 -8.5 10.3 -4.3 6.1 -1.4 6.6 -.5 7.1 .5 15.3 2.9 8.2 2.5 7.8 3.4 17.5 11 7.4 6.3 5.2 5.7 3.3 4.8 2 4.8 -1.4 3.9 -6.2 9.1 -4.9 4.9 -2.1 1.2 -1.7 0 -1 -1.5 -5.6 -25.6 -4.3 -8.7 -3 -3.3 -3.6 -2.2 -16.8 -6.4 -14.3 -2.6 -10.7 .5 -5.8 1.2 -11.7 4 -10.8 5.9 -5 3.7 -9 9.2 -7.4 11.6 -3.9 10.8 1.1 7.8 5.6 15.6 -.1 8.2 -1.8 4.2 -2.1 2.7 -11.5 6.7 -6.4 5.7 -6 11 -2.6 8.4 -.6 7.2 1.4 8 7 17 19.4 33.8 .4 2.7 -2.1 1.7 -3.7 -1 -4.9 -3.2 -11.8 -10.9 -11.8 -13.4 -10.5 -15.4 -1.5 -16 -1.6 -54.1 1.4 -6.6 6.3 -15 8.4 -14.8 10.5 -15.8 19.3 -11.3 9.3 -3.9Z\" fill=\"#f3cb91\" /></g><g><path d=\"M146.1 169.6l-7.5 4.5-14.9 13.9-9.7 11.4-7.2 11-3.4 9.4-1.3 9.9.6 10.3 1.1 5.1 4.1 9.6 3.1 4.3 3.8 3.9 10.6 6.3 13.8 4.6 14.4 2.9 12.5 1.2 8.1-.6 1.2-.8-1.1-1.1-12.2-6.5-11-8.2-5-5.7-4.1-6.9-2.6-8.3-1-10.8 1.4-9.3 3.2-7.8 4.4-6.6 5.2-5.5 14.9-11.6 3-2.8 1.1-2.5-1.1-4.9-1.3-2.4-4.2-4.3-2.8-1.6-7.1-1.6Z\" fill=\"#f2d7d7\" /></g><g><path d=\"M188.7 332.9l.5 1.5 1.9 1.5 7.2 2.9 19.6 4.3 13.1.8 10.8-1.4 5.4-1.5 9.7-5 4-3.6 3.1-4.4 2.1-5.2.8-6.2-.3-6.1-1.2-5.1-1.9-4.1-5-5.3-2.7-1.2-4.6.3-1.5 1.4-.7 2.3-2.8 12.8-5.1 9-6.8 5.8-7.9 3.3-8.5 1.5-22.5-.4-4.5.4Z\" fill=\"#f2d7d7\" /></g><path d=\"M200.7 170.2l8.4 21.1 2.5 11.1 -.6 29 -1 5.6 -5.3 10.8 -9.1 9.4 -31.9 22.1 5.2 -1.2 6.6 -2.9 8.2 -7 3.6 -1.4 -.8 3.7 -7.8 14.1 -2 5.3 1 -.9 8.4 -11.8 6.3 -12.9 12.6 -13.3 5.3 -7.8 3.8 -13.7 .6 -13.9 3.4 17.2 .6 13.1 2.9 13.1 -.3 6.2 -2.1 7.9 -4.2 11.3 -5.3 9.5 -1.5 1.9 -8.4 5.8 -6.5 .7 -12.3 -4.5 -11.9 .9 -9.2 -2.1 3.2 2 4.7 1.4 11.8 0 13.3 4.9 -9.9 3 -16.3 -.1 -15.3 4.4 -.2 1.9 2.1 1.6 10.5 -3.6 13.7 .7 -1.5 3.9 -3 2.9 -24.7 12.9 7.7 -2.2 14.4 -5.8 6.4 -4.4 3.7 -4.9 3.2 -2.7 16.8 -7.3 9.3 -5.5 -1 8.8 -7 17.8 -3.4 16.1 -5.4 16.6 -4.8 25.5 -2.2 3.6 -8.3 4.1 3.1 1.1 5.3 -2.1 4 -3.7 7.4 -33.4 4.7 -12.7 2.4 -14 6 -13.9 9.2 9.4 7 4.2 5.7 7.8 7.3 5.3 -7.3 -9.5 -.7 -2.8 2.4 -1.2 5.6 -.9 3.8 .5 7.1 3.8 7.1 5.1 -2.3 -5.3 -4.9 -4.7 -10.1 -2.8 -12 .7 -3 -.6 -7.3 -5.4 -4.5 -6.1 -.7 -5.7 .4 -6.4 10.8 -27.3 2.5 -11.5 3.9 2.4 4.9 6.3 3.6 15.1 8.3 9.5 2.9 8.6 2.4 11.1 3.4 6.5 -1.9 -15.7 -3.2 -11.6 8.2 3.7 4.2 3.1 13.1 16.4 -4.1 -7.9 -8.1 -11.4 -14.5 -7.9 -6.8 -5.2 -1.6 -2.7 -1.5 -10.2 -2.5 -5.1 -4.7 -6.5 -6.4 -4.2 -2.4 -9.7 -.1 -14.5 -3.6 -15.1 -2.5 -20.4 -2.7 -10 -2.5 -4.6 -5.9 -7.1 -3.3 -2.5Z\" fill=\"#ee6d6f\" /><path d=\"M100.3 174.5l-19.5 20 -1.5 6.8 .5 6.4 .8 .3 1.8 -1.2 13.3 -11.4 9.8 -9.8 9.7 -13.8 13.6 -12.4 -14 15.7 -4.2 8.1 4 -.9 10.2 -7 -.6 2.6 -3.1 2.6 -12.1 6.3 -7 6.9 15.9 7.4 7.2 2.3 .5 1.8 -.8 .6 -5.2 -.4 -13.7 -6.3 -6.7 -1.5 -14.2 11.8 -4.4 5.3 .8 9.8 1.6 5 1.8 2 8.9 2 21.3 .2 9.6 1.7 .8 1.6 -1.5 .7 -8.8 -1.6 -1.6 .1 -.3 .7 3.4 5.8 10.7 6.9 -5.2 -.7 -3.6 -1.4 -11 -10.3 -4.6 .7 7.5 8 7 5.1 -1.1 .3 -2.4 .1 -2.2 -1 -9.9 -9.3 -5.5 -3.9 -8.2 -.2 1.3 4 6.5 11.3 6.1 4.8 4.9 1.9 20.1 3.9 5.1 2.4 0 .8 -2.4 .3 -26.3 -3.2 8.1 10.6 11.7 7.8 21.6 8.3 10.2 5 -6 -.2 -16.8 -5.9 -9.2 -2.3 5 8.7 13.7 9.6 -3.8 .2 -3.6 -.9 -4.6 -2.9 -5.3 -4.8 -7.8 -12.2 -15.5 -16.8 -15.2 -25.3 -5.3 -10.5 -3 -8.4 -3.3 -18.9 -5.5 6.1 -14.8 24.1 -7.4 21.2 -.1 11 -1.2 10.8 3.1 5.7 2.3 6.8 12 18.8 3.9 4.7 4.4 3.1 4.7 .8 9.8 -.1 14.2 -3 5.4 -.4 3.2 .4 9.9 3.7 -16.3 -1.4 -16.4 5.2 12.5 9.8 9.3 6.1 4.2 1.9 8.9 2.1 12.1 -1.6 19.1 1 11.3 2 -16.3 -1 -10.8 .7 -9.3 1.4 -2.2 2 6.3 3.8 39.2 16.1 14.9 2.6 8.5 -1.5 -1.4 2.3 -11.4 1.4 -3.9 -.7 -13.6 -3.7 -17 -7.6 -11.3 -2.1 13.5 11.9 16.3 9.7 -3.6 -1.1 -15.5 -8 -23.1 -18.7 -20.5 -10.8 -19.1 -15.3 -9.3 -2.9 -4.1 -.7 .5 2.8 4.5 10.4 6.7 9.7 -8.4 -9.4 -5.9 -11.8 -8.1 -12 -10.8 -23.1 -3.1 -2 -3.9 -9.6 2.3 -2.8 1.2 -10.1 -2.5 5.8 -8.8 -7.9 24.9 -68 13 -16.5 14 -7.1 9.3 -7Z\" fill=\"#ee6d6f\" /><path d=\"M239.9 194.4l2 3.7 0 1.7 -4.3 .8 -14.4 -1 -1.2 1.3 1.6 5 11.9 6.7 11.2 5.2 13.1 4.8 4.5 3.1 7.6 9.3 4.2 6.9 5.2 15.1 2.4 12.8 -7.1 -21 -6.6 -12.8 -3.5 -4.8 -13 -8.8 -4.1 -1.4 -2.7 0 7.6 8.5 1.9 9.7 7.9 16.9 -3 -3.1 -5.4 -10.4 -2.4 -9.9 -2 -3.1 -12.9 -12.9 -16.2 -8.3 2.2 11.9 5.7 13 0 13.7 4.4 8.6 8.2 10.4 5.2 11 6 5 4.2 5.9 10.7 10.2 8.3 9.6 2.9 5.6 1.8 8 -8.6 -15.5 -10.1 -10.5 -6.6 -4.9 -8.5 -9.4 -1.7 .4 -1.5 1.6 -.5 3.6 .4 3.9 2.3 6.9 1.5 11.7 -2.4 -6.2 -1.6 -8.5 -2.8 -8.5 .2 -3 1.9 -5.1 -1.1 -6.6 -1.9 -3.6 -8.9 -10.9 -1.4 1.7 -1.5 7 .9 9.8 -2.7 12.8 -1.1 10.7 -1.7 -1 .5 -9.1 2.6 -8.9 -.7 -10.1 .5 -13.8 -.8 -7.7 .2 -13.6 -6.1 -14.1 -3.4 -16.5 -.8 -.7 -5 6.6 -.7 17.6 -3.5 15.4 .9 17 -3.9 40.6 -8.2 34.7 -9 33.7 -2.3 14.5 5.6 5.3 9.8 6.2 22.6 8.4 13 3 -6.3 0 -10.9 -2.3 -23.6 -8.6 -7.9 -4.6 -.3 1.7 1.2 2.8 -2.6 0 -3.2 -6.9 -.7 -7.3 -7.3 1.5 -6.7 .4 -15.1 -1.7 18.8 -.5 10.4 -3.5 7.8 -28.3 2.6 -12.6 -5.2 1.4 -7.1 .4 -8.1 -1.9 11.2 .3 5.8 -1.6 3.9 -1.9 8.8 -33.6 3.2 -36.8 -.4 -16.6 3.3 -16.5 -.2 -19.7 3 -11 -3.3 -2.6 -3 -1 -3.2 4.9 -1.5 5.2 -1.4 23.9 -4.6 8.2 -4.2 10.8 -10.6 14.3 -.5 13.3 -5.9 13.9 3.5 -12.3 .2 -9.9 -1.2 -.3 -3.8 1.6 -6.6 5.3 3.3 -4.9 7.7 -6.2 3.1 -5.4 7.7 -10.2 3.6 -10.3 5.6 -9.8 .1 -2.8 -.5 -1.7 -1 -.5 -13.7 .4 -12.7 -2.1 4.1 -.6 7.8 .8 14.9 -2 .9 -1.7 .8 -16.8 3.1 -7.1 -3.5 -5.8 -4.6 -4.5 -11.1 -4.1 -6.7 -.9 3.8 -1.2 9.5 2.1 7.5 4.7 8 7.1 8.3 4.9 8.5 -.6 4.4 -2.3 5.5 -1.6 10.6 4.2Z\" fill=\"#7fa0d3\" /><path d=\"M71.5 190.7l2.7 22.4 8.4 -1.4 22.2 -18.7 7.8 -3.5 7.6 -5 11.2 -3.3 10.7 -6.1 16.9 -4.3 7 -.4 -9.2 1.7 -7 3 -6.3 1.3 -8.6 6 -12.6 2.8 -8.2 6 -8 3.5 -6.3 6.6 11.8 5 15.8 -2.6 9.3 -.2 7 -1.3 10.9 -.6 5.3 0 4.5 2.1 -7.2 -.5 -15 1.2 -5.1 1.3 -9.1 .7 -11.8 3.2 -3.2 -.2 -15.1 -4.2 -5.4 2 -8.7 6.4 -7.6 3 -2.4 3 1.2 4.8 10.5 -.6 3.3 .6 2.5 9.3 2.9 5.4 7.4 7.9 4.3 6.9 -2.8 -1.3 -5.7 -7 -5 -4.4 -3.2 -5.9 -1.5 -7.9 -6.1 -.4 -5.6 1.4 -1.3 1.2 -.4 6.1 1.9 9.5 4.7 8.6 8.3 8.4 12.9 10.4 2.1 1.1 5.4 .8 8.9 -.6 10.8 3.5 13.1 0 4.6 1.5 10.9 .4 3.7 1 -.4 .9 -1.9 .5 -5.8 -.6 -5.9 .7 -5.1 -1.2 -8.3 1.1 -14.4 -3.8 -10.3 1.5 1 4.3 4.1 7.2 7.4 5.1 4.9 6.2 11.9 7.2 -8.5 -2 -7.9 -5.4 -12.3 -11.5 -5.4 -11.8 -15 -11.8 -11.8 -11.4 -2.9 -5.8 -4.2 -13.3 -.2 -8.4 -3.9 5.3 -3.5 9.8 -.7 4.2 .2 9.9 5.6 1.5 3 4.3 4.4 1.2 1.4 1.4 -6.6 -.4 -2.2 -1.2 -1.8 -2.7 -3.5 .1 1.4 9.1 -.1 6.2 6.1 1.7 3 2.3 5.8 2.8 3.7 5.8 2.5 1.6 6.9 2.1 6.3 -1.2 3.7 .2 9.6 4.1 -3.4 .5 -5.2 -2 -3.5 .1 -2.8 1.3 1.3 3.9 1.1 1.5 14.4 5.7 4.9 3.7 -20.1 -6.4 -5.3 -7.5 -8.9 -2.5 -6 -7.2 -10.9 -6.4 -5.1 -.6 -8.8 3.4 14.8 29.5 5 7.1 10.2 11.6 18.3 10.5 13.3 9 4 1.2 7.2 -.3 11.3 -4.5 11.1 1.3 15.2 0 -13.7 2.8 -11.1 -1.3 -6.8 3.9 -11 2.2 10 9.4 11.2 8.7 4.3 2.7 6.5 2.3 -4.5 .4 -.8 2.4 -1.1 -1 .3 -2 -10.1 -6.3 -23.7 -19 -25.9 -15.9 -.7 -.2 .2 .8 2.4 5.9 8.6 10.1 5.5 5.7 10.3 7.1 -8 -4 -8.2 -7.1 -8.2 -9 -6.4 -10.9 -16.8 -22.2 -17.2 -29.8 -6.5 -3.9 -9.2 -14.5 2.6 -14.1 5.2 3.1 -.3 11.7 4.8 8.7 1.7 1.2 2.5 .3 12 -.5 -2 -23.9 0 -9.1 8.1 -19.1 1.1 -11.8 -4.6 -17.4 1.8 -2.3Z\" fill=\"#7fa0d3\" /><path d=\"M53.9 255.5l-2.8 16.8 -.2 10.6 1.7 11.5 4.4 12.2 9.5 17.8 16 26 11 10 14.2 9.9 17.5 8.6 15.1 5 24.6 6.3 40.6 8.2 21.6 6.6 11.9 .2 9.9 -1.9 7.2 -3.5 3.5 -2.7 6.4 -7.7 6.3 -12.3 6.5 -17.1 5.6 -20.5 3.5 -22.3 .6 -11.4 -1.5 -22.1 -3.3 -18.9 -2.2 -8.3 -5.8 -14.5 -3.7 -6.4 -9 -11.3 -14.3 -14.2 -11.7 -19.7 -1.9 -1.9 -14.6 -7.7 -10.6 -10.2 -12.3 -9.2 -16.1 -8.8 -11.6 -3.8 -11.2 -1.8 -14.9 -.2 -11.4 2.5 -2.8 1.3 -11.4 8.6 -13.4 4.8 -6.8 3.3 -6.4 5.1 -14.5 17.8 -11 15.2 -5 8.8 -2.5 11.3Z\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" stroke=\"#7b2222\" fill=\"none\" /><path d=\"M51.8 132.7l-10.5 5.3 -10 7.3 -7.7 7.9 -8 11.3 -4.8 10.1 -3.8 12.7 -2.2 15.7 -.6 16.8 .7 15.5 1.9 13.8 3 11.7 4 9.1 6.1 8.4 8.4 9.1 13.7 12.6 10.9 8.2 2.1 -.6 1.3 -4.4 .6 -7.3 -.4 -51.9 .6 -7.7 1.3 -4.8 11.1 -19.6 7.2 -17.5 10 -9.9 9.5 -13.2 19.2 -17.8 5 -7.5 -.5 -1.4 -1.4 -.9 -4.2 -1.5 -19.3 -3.9 -24.2 -6.8 -9.9 -.7Z\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" fill=\"#fac9a4\" stroke=\"#814b24\" /><path d=\"M193.7 138.3l-1.7 2.2-.5 3.5 1.6 8.4 8.6 14.5 6.9 9.6 5.6 5.1 13 6.4 10.8 10.4 2.3.6 4.4-.8 1.3-3.3-1-6.4-7.6-15.5-3.7-13.6-5.7-8.8-8-7.8-6.4-3.7-12.9-2.8-3.4.4Z\" fill=\"#f8b18b\" stroke=\"#814b23\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" /><g><path d=\"M114.3 146.3l-9.6 7.9-4.2 5.3-2.4 1.1-1.9-.6-.1-1.6 1.7-3.1 7.8-8.1 4.6-2.1 2.1.1Z\" fill=\"#fff\" /></g><g><path d=\"M94.1 165.4l-12.6 13.1-7.1 5.5-.5 6.5-2.5 8.8-3.7 7-3.2 1.9-.4-2.1 5-16.3 1.4-9.2 1.8-2 10.1-6.7 8.1-7.2 3.1-1.1Z\" fill=\"#fff\" /></g><g><path d=\"M196.6 156l7.6 12 9.3 9.4 7.4 4.7 5.7 2.5 5.5.8 2.6-1.2.8-4.5-1.3-4.4-1.4 4-1.8 1.2-6-.2-4.1-1.8-10.6-7.8Z\" fill=\"#fff\" /></g><g><path d=\"M225.6 187.1l6.1 2.1 4.1 0 1.9-1.9.7-3.1-1.6-5.6-10.7-20.6 12.3 21.6 1.8 5.8-1.5 4-3.5 1.7-5.2-1Z\" fill=\"#4b1715\" /></g><g><path d=\"M225.6 187.1l6.1 2.1 4.1 0 1.9-1.9.7-3.1-1.6-5.6-10.7-20.6 12.3 21.6 1.8 5.8-1.5 4-3.5 1.7-5.2-1Z\" fill=\"#4b1715\" /></g><g><path d=\"M36 244.5l7.4-3.4 5.6-3.6 9.2-8.4 9.4-14.4 5.7-11.7 2.9-7.9-9.5 16.6-10 14-8.6 8.6-12.5 9.3Z\" fill=\"#6e2626\" /></g><g><path d=\"M30 147.2l-11.9 16.3-7.3 16.1-3.5 19.7-1.7 16.8-.3 17.8.7 8.7 3.6 15.8 3.1 6.6 8.2 11.5 9.1 9.9 8.9 8.1 10.4 7.8 2.1 1.3 2 .1 1-.7-.5-1.3-22.7-20.8-11.1-11.4-5.3-9.8-4.1-15.3-.8-15.4 2.2-20.1 5.4-21.1 14.1-35 .8-3.3-.4-1.9Z\" fill=\"#f8e0df\" /></g><g opacity=\".4\"><g><path d=\"M59.9 304l16 30.3 10.8 17.3 5.1 4.6 13.5 8.7 19.7 10.2 15.1 5.7 68.6 15.8 16.6 5.4 6.6.8 10.9-1.1 7.6-2.3 5.2-4.7 5.7-9.3 10.9-21.7 8.1-22.2 3.8-17 1.6-18.4-.9-18.6-2.9-17.5-4.2-15.1-5-11.5-8.5-10.9-24.4-24.3-1.8-.7-1.3.8-1.4 2.8 25.6 26.9 6.1 11.3 4.7 12.8 2.5 9.4 3.7 19.8 1.3 14.4-.3 8.4-4.1 21.3-2.7 10.7-3.9 10.9-5.5 10.5-8.1 12.3-4.2 5.4-4.2 3.4-4.9 1.6-6.3.1-39.4-6-29.9-7.8-26.2-9.2-13.7-6.9-37.8-24.6-4-3.7-18.7-24.6-4.3-3.7Z\" fill=\"#fbf1f2\" /></g></g></g>"};
+/* Kawasaki scene: sick child, inflamed coronary wall, aneurysm, clot and the heart downstream. */
 const CY = 210, AX0 = 380, AX1 = 922, ACX = 660;
+const HX = 828, HY = 350, HW = 110;
 const L = { art: $("art"), cells: $("cells"), parts: $("parts"), heartg: $("heartg"), over: $("over"), panel: $("panel") };
 const sm = { F: 0.8, I: 0.8, A: 0.2, T: 0.2, Flow: 0.8, Strain: 0.1, ivig: 0, asp: 0, ac: 0 };
-let wallT, wallB, lumen, thrG, heart = {}, gg = {}, rbcs = [], swirl = [], wallCells = [], plts = [], fibs = [];
+let wallT, wallB, wallTHi, wallBHi, lumen, clotMound, thrG, heartO = null, beam, isch, capEl = null, capKey = "";
+let gg = {}, rbcs = [], swirl = [], wallCells = [], plts = [], fibs = [], docked = [];
 const halfAt = (x) => 32 + sm.A * 40 * Math.exp(-Math.pow((x - ACX) / 115, 2));
-function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0 }; }); }
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0, st: 0, ax: 0, ay: 0 }; }); }
 const free = (pl) => pl.find((p) => !p.on);
-function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
+function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.st = 0; p.e.setAttribute("opacity", "1"); }
 function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
-const cyt = pool(36, () => mk("circle", { class: "sc-p p-cyt", r: 2.4 }, L.parts));
+const cyt = pool(30, () => mk("circle", { class: "sc-p p-cyt", r: 2.4 }, L.parts));
 const ivp = pool(16, () => mk("circle", { class: "sc-p kw-pivig", r: 2.6 }, L.parts));
-const medp = pool(12, () => { const g = mk("g", {}, L.parts); mk("rect", { class: "p-pill", x: -4, y: -2, width: 8, height: 4, rx: 2 }, g); mk("rect", { class: "p-pill2", x: 0, y: -2, width: 4, height: 4, rx: 2 }, g); return g; });
-const acc = { cyt: 0, ivp: 0, medp: 0 };
+const aspP = pool(12, () => { const g = mk("g", {}, L.parts); mk("rect", { class: "p-pill", x: -4, y: -2, width: 8, height: 4, rx: 2 }, g); mk("rect", { class: "p-pill2", x: 0, y: -2, width: 4, height: 4, rx: 2 }, g); return g; });
+const acP = pool(12, () => mk("circle", { class: "sc-p kw-pac", r: 2.6 }, L.parts));
+const acc = { cyt: 0, ivp: 0, asp: 0, ac: 0 };
+function capText(d, l) {
+  if (d === 1) return "Aspirin coats platelets so they stick less. The clot stays smaller.";
+  if (d === 2) return "Anticoagulation blocks the clotting mesh. Clot in the bulge stays smaller.";
+  if (d === 3) return "IVIG calms inflammation. The wall heals and the bulge stays small.";
+  if (l >= 2) return "No treatment. A large bulge remains. Clot can block blood to the heart.";
+  if (l >= 1) return "No treatment. The weak wall bulges. Slow blood inside can form a clot.";
+  return "No treatment. Fever and rash show. The artery wall is inflamed and weak.";
+}
 
 function init() {
   lumen = mk("path", { class: "kw-lum" }, L.art);
+  wallTHi = mk("path", { class: "kw-infl" }, L.art);
+  wallBHi = mk("path", { class: "kw-infl" }, L.art);
   const rg = mk("g", {}, L.art);
   for (let i = 0; i < 18; i++) { const g = mk("g", { class: "cl cl-rbc" }, rg); mk("ellipse", { class: "cl-b", rx: 8, ry: 4.8 }, g); mk("ellipse", { class: "cl-s", rx: 3, ry: 1.5 }, g); rbcs.push({ g, x: rnd(AX0, AX1), y: rnd(-0.75, 0.75), v: rnd(0.85, 1.15), rot: rnd(-15, 15) }); }
   const sg = mk("g", {}, L.art);
   for (let i = 0; i < 5; i++) { const g = mk("g", { class: "cl cl-rbc" }, sg); mk("ellipse", { class: "cl-b", rx: 7, ry: 4.2 }, g); mk("ellipse", { class: "cl-s", rx: 2.6, ry: 1.3 }, g); swirl.push({ g, ph: i * 1.256, i }); }
+  clotMound = mk("ellipse", { class: "kw-clotm", cx: ACX, cy: CY + 40, rx: 10, ry: 6, opacity: "0" }, L.art);
   thrG = mk("g", {}, L.art);
   for (let i = 0; i < 22; i++) plts.push({ g: cell(thrG, { cls: "plt", r: 5 + (i % 3) * 0.7, seed: i + 4, wob: 0.16, n: 7 }), u: rnd(-1, 1), v: rnd(0.05, 0.95), i });
   for (let i = 0; i < 10; i++) fibs.push({ e: mk("path", { class: "fibrin" }, thrG), u: rnd(-1, 1), v: rnd(0.1, 0.9), u2: rnd(-1, 1), v2: rnd(0.1, 0.9) });
   wallT = mk("path", { class: "kw-wall" }, L.art); wallB = mk("path", { class: "kw-wall" }, L.art);
   for (let i = 0; i < 14; i++) { const top = i % 2 === 0; wallCells.push({ g: cell(L.cells, { cls: i % 3 ? "neut" : "mac", r: 7, nuc: 0.4, seed: i + 8, wob: 0.12, n: 8 }), x: 420 + i * 38, top, i }); }
-  /* heart: short axis ring downstream */
-  heart.cav = mk("circle", { class: "kw-cav", cx: 835, cy: 362, r: 17 }, L.heartg);
-  heart.myo = mk("circle", { class: "kw-myo", cx: 835, cy: 362, r: 26, "stroke-width": 18 }, L.heartg);
-  heart.isch = mk("path", { class: "kw-isch", opacity: "0" }, L.heartg);
-  mk("path", { class: "dr-beam", d: "M922 210C940 260 900 300 862 332" }, L.heartg);
-  /* labels */
+  for (let i = 0; i < 14; i++) docked.push({ e: mk("circle", { class: "sc-p kw-pivig", r: 3 }, L.parts) });
+  /* heart: the shared organ downstream, fed by this artery */
+  heartO = organ(L.heartg, "heart", HX, HY, HW, {});
+  const ap = heartO.ports.aorta || heartO.ports.out;
+  beam = mk("path", { class: "dr-beam", d: "M" + AX1 + " " + CY + "C940 260 900 300 " + f1(ap[0]) + " " + f1(ap[1]) }, L.heartg);
+  isch = mk("ellipse", { class: "kw-isch", cx: HX, cy: HY + 42, rx: 36, ry: 24, opacity: "0" }, L.heartg);
+  /* labels: the story runs left to right, sick child to artery to heart */
   const o = L.over;
-  pill(o, "Fever", 292, 100, 292, 78, "Fever that lasts for days is the starting point. It reflects widespread inflammation, not just infection.");
+  pill(o, "Fever", 292, 120, 292, 84, "Fever that lasts for days is the starting point. It reflects widespread inflammation, not just infection.");
   pill(o, "Red eyes", 137, 122, 80, 98, "Red eyes without discharge: inflammation of the conjunctiva on both sides.");
-  pill(o, "Red lips", 160, 144, 248, 122, "Red, dry and cracked lips with a red tongue and mouth lining.");
-  pill(o, "Neck node", 192, 168, 250, 158, "One large neck lymph node, usually on one side.");
-  pill(o, "Rash", 140, 220, 72, 192, "A widespread rash on the trunk, often brighter around the nappy area.");
-  pill(o, "Hands and feet", 218, 235, 262, 262, "Red and swollen hands and feet early on. Later the skin around the nails may peel.");
-  pill(o, "Inflamed wall", 520, 176, 465, 110, "Inflammation spreads through the coronary artery wall. It weakens the wall, especially the middle layer.");
-  pill(o, "Aneurysm", ACX, 168, ACX, 90, "Aneurysm: the weakened wall bulges out. Small ones may heal; large ones can persist.");
-  pill(o, "Clot", 700, 255, 795, 138, "Blood moves slowly and swirls inside an aneurysm. Clot can form there and block the artery.");
+  pill(o, "Rash", 150, 225, 80, 192, "A widespread rash on the trunk. Hands and feet swell early and skin may peel later.");
+  pill(o, "Inflamed wall", 520, 172, 465, 110, "Inflammation spreads through the coronary artery wall. It weakens the wall, especially the middle layer.");
+  pill(o, "Aneurysm", ACX, 150, ACX, 90, "Aneurysm: the weakened wall bulges out. Small ones may heal; large ones can persist.");
+  pill(o, "Clot", 700, 248, 800, 140, "Blood moves slowly and swirls inside a bulge. Clot can form there and block the artery.");
   pill(o, "Blood flow", 425, 210, 425, 288, "Red cells carry oxygen to the heart muscle. Flow is fast in a smooth artery and slow inside a bulge.");
-  pill(o, "Heart muscle", 835, 334, 835, 302, "Heart muscle fed by this coronary artery. If a clot blocks flow, this muscle is starved of oxygen.");
-  const t1 = pill(o, "IVIG", 580, 266, 480, 345, "IVIG: pooled antibodies given into a vein. Given early, it calms the inflammation and makes aneurysms less likely."); t1.setAttribute("id", "p-ivig"); t1.style.opacity = 0;
-  const t2 = pill(o, "Aspirin", 700, 255, 480, 345, "Aspirin makes platelets less sticky, so clot is less likely while the artery is inflamed or dilated."); t2.setAttribute("id", "p-asp"); t2.style.opacity = 0;
-  const t3 = pill(o, "Anticoagulation", 700, 255, 480, 345, "Anticoagulation for a large aneurysm: it slows the clotting system so a large, slow moving pool of blood is less likely to clot."); t3.setAttribute("id", "p-ac"); t3.style.opacity = 0;
+  pill(o, "Heart", HX, 296, HX, 262, "Heart muscle fed by this coronary artery. If a clot blocks flow, this muscle is starved of oxygen.");
+  capEl = mk("text", { class: "kw-cap", x: 30, y: 432 }, o); capEl.textContent = capText(0, 0);
   const P = L.panel;
   mk("rect", { class: "dr-panel", x: 24, y: 454, width: 912, height: 142, rx: 14 }, P);
   const t = mk("text", { class: "dr-pt", x: 40, y: 476 }, P); t.textContent = "The patient";
@@ -490,39 +822,53 @@ function step(dt, m) {
   $("feverHalo").setAttribute("opacity", (sm.F * 0.5).toFixed(2));
   const tf = $("thermoF"); if (tf) { const h = 70 * sm.F; tf.setAttribute("y", f1(170 - h)); tf.setAttribute("height", f1(h)); }
   /* artery walls and lumen outline */
-  let wt = "", wb = "";
-  for (let x = AX0; x <= AX1; x += 6) { const h = halfAt(x); wt += (x === AX0 ? "M" : "L") + x + " " + f1(CY - h); wb += (x === AX0 ? "M" : "L") + x + " " + f1(CY + h); }
+  let wt = "", wb = "", bt = "", bb = "";
+  for (let x = AX0; x <= AX1; x += 6) { const h = halfAt(x); wt += (x === AX0 ? "M" : "L") + x + " " + f1(CY - h); wb += (x === AX0 ? "M" : "L") + x + " " + f1(CY + h); bt += (x === AX0 ? "M" : "L") + x + " " + f1(CY - h - 8); bb += (x === AX0 ? "M" : "L") + x + " " + f1(CY + h + 8); }
   let wtD = wt; for (let x = AX1; x >= AX0; x -= 6) wtD += "L" + x + " " + f1(CY - halfAt(x) - 16);
   wallT.setAttribute("d", wtD + "Z");
   let wbD = wb; for (let x = AX1; x >= AX0; x -= 6) wbD += "L" + x + " " + f1(CY + halfAt(x) + 16);
   wallB.setAttribute("d", wbD + "Z");
-  wallT.style.opacity = (0.75 + 0.25 * sm.I).toFixed(2); wallB.style.opacity = (0.75 + 0.25 * sm.I).toFixed(2);
+  wallTHi.setAttribute("d", bt); wallBHi.setAttribute("d", bb);
+  wallTHi.setAttribute("opacity", (sm.I * 0.7).toFixed(2)); wallBHi.setAttribute("opacity", (sm.I * 0.7).toFixed(2));
   let lumD = wt; for (let x = AX1; x >= AX0; x -= 6) lumD += "L" + x + " " + f1(CY + halfAt(x)); lumen.setAttribute("d", lumD + "Z");
-  wallCells.forEach((c) => { const h = halfAt(c.x); place(c.g, c.x, c.top ? CY - h - 8 : CY + h + 8, 0, 0.4 + 0.6 * sm.I); c.g.style.opacity = (0.15 + 0.85 * sm.I).toFixed(2); });
+  /* wall inflammatory cells calm down as IVIG docks onto them */
+  wallCells.forEach((c) => { const h = halfAt(c.x); place(c.g, c.x, c.top ? CY - h - 8 : CY + h + 8, 0, Math.max(0.01, (0.4 + 0.6 * sm.I) * (1 - 0.35 * sm.ivig))); c.g.style.opacity = (0.15 + 0.85 * sm.I).toFixed(2); });
+  docked.forEach((d, i) => { const c = wallCells[i % wallCells.length], h = halfAt(c.x);
+    d.e.setAttribute("transform", "translate(" + f1(c.x + 7) + " " + f1((c.top ? CY - h - 8 : CY + h + 8) - 5) + ")");
+    d.e.setAttribute("opacity", sm.ivig > 0.05 ? sm.ivig.toFixed(2) : "0"); });
   /* red cells: through flow plus slow swirl inside the bulge */
   const vf = 62 * clamp(sm.Flow + 0.15);
   rbcs.forEach((r) => { r.x += r.v * vf * dt * (Math.abs(r.x - ACX) < 90 ? 0.45 : 1); if (r.x > AX1 + 10) { r.x = AX0 - 10; r.y = rnd(-0.75, 0.75); } const h = halfAt(r.x); place(r.g, r.x, CY + r.y * Math.max(8, h - 11), r.rot + Math.sin(tm / 500 + r.x) * 8, 1); });
   swirl.forEach((s) => { const a = tm / 1400 + s.ph, sc = sm.A; place(s.g, ACX + Math.cos(a) * 52, CY + Math.sin(a) * 20, a * 57.3, Math.max(0.01, sc)); s.g.style.opacity = sc > 0.08 ? 1 : 0; });
-  /* thrombus platelets and fibrin inside the aneurysm */
-  const th = sm.T;
-  plts.forEach((p) => { const x = ACX + p.u * 72, y = CY + halfAt(x) - 8 - p.v * 26 * th; place(p.g, x, y, 0, Math.max(0.01, th * (0.5 + 0.5 * p.v))); p.g.style.opacity = th > 0.06 ? 1 : 0; });
-  fibs.forEach((f) => { const x1 = ACX + f.u * 70, x2 = ACX + f.u2 * 70; f.e.setAttribute("d", "M" + f1(x1) + " " + f1(CY + halfAt(x1) - 6 - f.v * 24 * th) + "L" + f1(x2) + " " + f1(CY + halfAt(x2) - 6 - f.v2 * 24 * th)); f.e.setAttribute("opacity", (th * 0.85).toFixed(2)); });
-  /* cytokines from the inflamed wall */
-  acc.cyt += dt * sm.I * 11; while (acc.cyt >= 1) { acc.cyt--; const p = free(cyt); if (p) { const x = rnd(420, 900); emit(p, x, CY - halfAt(x) - 4, rnd(-5, 5), rnd(18, 30), 0); } }
+  /* thrombus: a mound plus platelets and fibrin inside the aneurysm */
+  const th = sm.T, tc = clamp(th * 1.5), coat = 1 - 0.3 * sm.asp - 0.45 * sm.ac;
+  clotMound.setAttribute("cy", f1(CY + 18 + sm.A * 34));
+  clotMound.setAttribute("rx", f1(8 + 58 * tc)); clotMound.setAttribute("ry", f1(4 + 16 * tc));
+  clotMound.setAttribute("opacity", (tc * 0.9).toFixed(2));
+  plts.forEach((p) => { const x = ACX + p.u * 72, y = CY + halfAt(x) - 8 - p.v * 26 * th; place(p.g, x, y, 0, Math.max(0.01, (0.3 + 0.7 * p.v) * th * coat)); p.g.style.opacity = th > 0.06 ? 1 : 0; });
+  fibs.forEach((f) => { const x1 = ACX + f.u * 70, x2 = ACX + f.u2 * 70; f.e.setAttribute("d", "M" + f1(x1) + " " + f1(CY + halfAt(x1) - 6 - f.v * 24 * th) + "L" + f1(x2) + " " + f1(CY + halfAt(x2) - 6 - f.v2 * 24 * th)); f.e.setAttribute("opacity", (th * 0.85 * (1 - 0.35 * sm.asp) * (1 - 0.8 * sm.ac)).toFixed(2)); });
+  /* cytokines from the inflamed wall, fading as IVIG docks */
+  acc.cyt += dt * sm.I * 11 * (1 - 0.7 * sm.ivig); while (acc.cyt >= 1) { acc.cyt--; const p = free(cyt); if (p) { const x = rnd(420, 900); emit(p, x, CY - halfAt(x) - 4, rnd(-5, 5), rnd(18, 30), 0); } }
   cyt.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.t > 1.8 || p.y > CY + halfAt(p.x) + 10) kill(p); });
-  /* treatment particles flowing in from the left */
+  /* IVIG antibodies flowing in to dock on the wall */
   acc.ivp += dt * sm.ivig * 7; while (acc.ivp >= 1) { acc.ivp--; const p = free(ivp); if (p) emit(p, AX0 + 4, CY + rnd(-18, 18), 78, 0, 0); }
   ivp.forEach((p) => { if (!p.on) return; p.x += p.vx * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.x > AX1) kill(p); });
-  acc.medp += dt * (sm.asp + sm.ac) * 3.2; while (acc.medp >= 1) { acc.medp--; const p = free(medp); if (p) emit(p, AX0 + 4, CY + rnd(-14, 14), 70, 0, 0); }
-  medp.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(p.t * 80) + ")"); if (p.x > AX1) kill(p); });
-  $("p-ivig").style.opacity = sm.ivig.toFixed(2); $("p-asp").style.opacity = sm.asp.toFixed(2); $("p-ac").style.opacity = sm.ac.toFixed(2);
-  /* heart muscle downstream */
-  const ph = ((tm / 1000) % 1), c = ph < 0.4 ? Math.sin(Math.PI * ph / 0.4) : 0;
-  const cav = 17 * (1 - 0.18 * c * (1 - sm.Strain * 0.6));
-  heart.cav.setAttribute("r", f1(cav)); heart.myo.setAttribute("r", f1(cav + 9)); heart.myo.setAttribute("stroke-width", f1(34 - cav));
-  let sec = ""; const n = 20; for (let i = 0; i <= n; i++) { const a = (210 + 110 * i / n) * Math.PI / 180; sec += (i ? "L" : "M") + f1(835 + 35 * Math.cos(a)) + " " + f1(362 + 35 * Math.sin(a)); }
-  for (let i = n; i >= 0; i--) { const a = (210 + 110 * i / n) * Math.PI / 180; sec += "L" + f1(835 + (cav + 2) * Math.cos(a)) + " " + f1(362 + (cav + 2) * Math.sin(a)); }
-  heart.isch.setAttribute("d", sec + "Z"); heart.isch.setAttribute("opacity", (sm.Strain * 0.9).toFixed(2));
+  /* aspirin capsules: flow in, then stick onto the clot */
+  acc.asp += dt * sm.asp * 6; while (acc.asp >= 1) { acc.asp--; const p = free(aspP); if (p) emit(p, AX0 + 4, CY + rnd(-14, 14), 70, 0, 0); }
+  aspP.forEach((p) => { if (!p.on) return;
+    if (p.st === 0) { p.t += dt; p.x += p.vx * dt;
+      if (p.x > ACX - 95 && sm.T > 0.08) { p.st = 1; p.ax = ACX + rnd(-58, 58); p.ay = CY + halfAt(p.ax) - 10 - rnd(0, 22) * sm.T; }
+      else { p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(p.t * 80) + ")"); if (p.x > AX1) kill(p); } }
+    if (p.st === 1) { if (sm.asp < 0.25) kill(p); else { p.t += dt; p.e.setAttribute("transform", "translate(" + f1(p.ax + Math.sin(tm / 300 + p.ay) * 1.5) + " " + f1(p.ay) + ") rotate(" + f1(p.t * 20) + ")"); p.e.setAttribute("opacity", sm.asp.toFixed(2)); } } });
+  /* anticoagulant particles: linger where blood pools and dissolve the mesh */
+  acc.ac += dt * sm.ac * 6; while (acc.ac >= 1) { acc.ac--; const p = free(acP); if (p) emit(p, AX0 + 4, CY + rnd(-14, 14), 66, 0, 0); }
+  acP.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt * (Math.abs(p.x - ACX) < 90 ? 0.3 : 1); p.y += Math.sin(tm / 350 + p.t * 4) * 12 * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.x > AX1) kill(p); });
+  /* heart muscle downstream, fed through the beam */
+  beam.setAttribute("opacity", (0.25 + 0.75 * sm.Flow).toFixed(2));
+  isch.setAttribute("opacity", (sm.Strain * 0.9).toFixed(2));
+  const beat = (tm / 1000) % 1, cb = beat < 0.4 ? Math.sin(Math.PI * beat / 0.4) : 0, s = 1 + 0.025 * cb * (1 - 0.5 * sm.Strain);
+  L.heartg.setAttribute("transform", "translate(" + f1(HX) + " " + f1(HY) + ") scale(" + s.toFixed(3) + ") translate(" + f1(-HX) + " " + f1(-HY) + ")");
+  const key = drug * 10 + level; if (key !== capKey) { capKey = key; const t = capText(drug, level); if (capEl.textContent !== t) capEl.textContent = t; }
   gg.fv.set(sm.F, wordOf(sm.F, 0.3, 0.65, ["settled", "present", "high"]));
   gg.inf.set(sm.I, wordOf(sm.I, 0.3, 0.65, ["low", "raised", "high"]));
   gg.ane.set(sm.A, wordOf(sm.A, 0.25, 0.6, ["none", "small", "large"]));

@@ -49,11 +49,11 @@ const TESTS = [
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="dr-panel" x="14" y="40" width="606" height="402" rx="16"/>
-<text class="sc-zone" x="32" y="64">A HEPATOCYTE AND ITS NEIGHBOURS</text>
-<text class="sc-lab hb-step" id="stepname" x="32" y="120">Step 1: entry</text>
+<text class="sc-zone" x="32" y="64">HEPATITIS B IN THE LIVER</text>
+<g id="liverSlot"></g>
 <g id="fib"></g>
 <g id="cellg"></g>
-<g id="steps"></g>
+<g id="parts"></g>
 <g id="over"></g>
 <rect class="dr-panel" x="632" y="40" width="314" height="402" rx="16"/>
 <text class="sc-zone" x="650" y="64">MARKERS OVER TIME</text>
@@ -62,21 +62,20 @@ const body = `
 
 buildScene({
   id: "hepatitis-b", fig: "Fig 1", title: "Hepatitis B: life cycle, immune injury and outcome", W, H, body,
-  label: "An animated hepatocyte and a marker plot over time. The virus enters through the NTCP receptor, forms cccDNA in the nucleus, makes viral RNA and proteins, copies its genome with its polymerase, assembles and leaves. Immune T cells kill infected hepatocytes, which is what injures the liver. The plot shows HBsAg, anti-HBs and HBeAg over time in acute resolving, chronic and cirrhosis courses. A nucleoside analogue blocks the polymerase; vaccine antibodies block entry and mainly prevent infection.",
+  label: "An animated liver and a marker plot over time. The virus enters a hepatocyte through the NTCP receptor, forms cccDNA in the nucleus, makes viral RNA and proteins, copies its genome with its polymerase, assembles and leaves. Immune T cells kill infected hepatocytes, which is what injures the liver. The plot shows HBsAg, anti-HBs and HBeAg over time in acute resolving, chronic and cirrhosis courses. A nucleoside analogue blocks the polymerase; vaccine antibodies block entry and mainly prevent infection.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or schedules are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "hbv.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "No treatment", withLabel: "With intervention",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "hbv.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "No treatment", withLabel: "With nucleoside analogue",
   extraCss: `
-.cl-hep{--cc:#d98a6a}.cl-hnuc{--cc:#8a7ac0}.cl-ctl{--cc:var(--c-lymph)}
-body[data-theme="light"] .cl-hep{--cc:#c97a5e}
-.hb-step{font-size:11px}
-.hb-box{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:.8}.hb-box.on{fill:color-mix(in srgb,var(--c-no) 35%,var(--anatomy-card));stroke:var(--c-no)}
-.hb-bn{fill:var(--anatomy-text);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.cl-ctl{--cc:var(--c-lymph)}
+.hb-cap{fill:var(--anatomy-strong)}
+.hb-nuc{fill:none;stroke:var(--anatomy-hi);stroke-width:1.8}
+.hb-drug{fill:var(--c-no);stroke:var(--anatomy-paper);stroke-width:1}
 .hb-env{fill:#c94f6d;stroke:#7a2b40;stroke-width:.8}.hb-core{fill:#f2d27a;stroke:#9a7a2a;stroke-width:.6}.hb-spk{stroke:#e8a0bf;stroke-width:1.2;stroke-linecap:round;fill:none}
 .hb-rna{fill:none;stroke:#f08a4b;stroke-width:1.5;stroke-linecap:round}.hb-dna{fill:none;stroke:#3a86e8;stroke-width:2;stroke-linecap:round}
 .hb-host{fill:none;stroke:var(--anatomy-hi);stroke-width:1.8;stroke-linecap:round}.hb-ccc{fill:none;stroke:#3a86e8;stroke-width:2.4}
 .hb-ab{fill:none;stroke:var(--c-good);stroke-width:2;stroke-linecap:round}.hb-rec{fill:none;stroke:#3a86e8;stroke-width:1.8;stroke-linecap:round}.hb-ribo{fill:var(--anatomy-mid)}
-.hb-fib{fill:none;stroke:#b08968;stroke-width:5;stroke-linecap:round}.hb-nod{fill:#a85d4a;stroke:#6e3527;stroke-width:.8}.hb-hcc{fill:#8e2f35;stroke:#4d1518;stroke-width:.9}.hb-hccn{fill:#4d1518}
+.hb-fib{fill:none;stroke:#b08968;stroke-width:5;stroke-linecap:round}
 .hb-svp{fill:#e08a3c;stroke:#8a5a1e;stroke-width:.5}.hb-prot{fill:#e8a0bf;stroke:#6e2b49;stroke-width:.5}.hb-mrna{fill:#f08a4b}
 .hb-x{fill:none;stroke:var(--c-bad);stroke-width:2.4;stroke-linecap:round}.hb-xc{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.4}
 .hb-glow{fill:none;stroke:var(--c-bad);stroke-width:2}

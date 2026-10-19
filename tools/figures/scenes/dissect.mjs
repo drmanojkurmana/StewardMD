@@ -16,17 +16,17 @@ const MD = {
   settings: [
     { label: "no treatment" },
     { label: "blood pressure and heart rate control" },
-    { label: "surgery" },
     { label: "endovascular repair" },
+    { label: "surgery" },
   ],
   status: "Pattern: {level} · {drug} ·",
-  drugNames: ["no treatment", "blood pressure and heart rate control", "surgery", "endovascular repair"],
+  drugNames: ["no treatment", "blood pressure and heart rate control", "endovascular repair", "surgery"],
 };
 function modelOf(S, level, drug) {
   const cl = (v) => Math.max(0, Math.min(1, v));
   const a = S.level.a[level];
   const typeA = level > 0 ? 1 : 0, compl = level === 2 ? 1 : 0;
-  const ctrl = drug === 1 ? 1 : 0, surg = drug === 2 ? 1 : 0, endo = drug === 3 ? 1 : 0;
+  const ctrl = drug === 1 ? 1 : 0, endo = drug === 2 ? 1 : 0, surg = drug === 3 ? 1 : 0;
   const surgEff = surg ? (typeA ? 0.9 : 0.35) : 0;
   const endoEff = endo ? (typeA ? 0.15 : 0.9) : 0;
   const repair = Math.max(surgEff, endoEff);
@@ -45,23 +45,21 @@ const TESTS = [
   [0, 0, "false lumen expanding · branches open · complications none"],
   [1, 0, "false lumen extensive · branches open · complications developing"],
   [2, 0, "false lumen extensive · branches blocked · complications severe"],
-  [2, 2, "false lumen contained · branches threatened · complications developing"],
-  [0, 3, "false lumen contained · branches open · complications none"],
+  [2, 3, "false lumen contained · branches threatened · complications developing"],
+  [0, 2, "false lumen contained · branches open · complications none"],
 ];
 
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<text class="sc-zone" x="34" y="68">HEART AND AORTA</text>
-<text class="sc-zone sc-dim" x="850" y="68">BRANCHES</text>
 <g id="aorta"></g><g id="branches"></g><g id="organs"></g><g id="heart"></g><g id="parts"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "aortic-dissection", fig: "Fig 1", title: "Aortic dissection: tear, false lumen and complications", W, H, body,
   label: "An animated aorta and heart. A tear in the inner lining lets blood enter the wall and split it, forming a false lumen beside the true lumen. Type B starts in the descending aorta, type A involves the ascending aorta and root, and the complicated pattern adds blocked branch vessels, fluid around the heart and a leaking aortic valve. Gauges show the false lumen, impulse on the wall, branch blockage, tamponade, valve leak and pain. Treatment choices include impulse control, surgery and endovascular repair.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "dissect.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "dissect.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With surgery",
   sourcesLis: [
     "<strong>How a dissection develops.</strong> A tear in the intima, the inner lining of the aorta, lets pressurised blood enter the media, the middle layer of the wall. The blood splits the media and creates a false lumen beside the true lumen, separated by an intimal flap. The split can propagate along the aorta. Hypertension increases the impulse and shear on the wall, and connective tissue disease can weaken the media, so both predispose to dissection. The classic symptom is abrupt tearing chest or back pain. This is standard teaching in medicine and cardiology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Patterns and complications shown.</strong> In the Stanford scheme, type A involves the ascending aorta and often the aortic root, while type B is confined to the descending aorta. Propagation can cover branch vessel openings and block flow to organs. A type A dissection can leak blood into the pericardium and cause tamponade, and root involvement can distort the aortic valve and cause aortic regurgitation. A complicated pattern here means branch blockage or a major complication is present.",
@@ -76,19 +74,17 @@ buildScene({
 .ds-tear{fill:none;stroke:var(--c-bad);stroke-width:3;stroke-linecap:round}
 .ds-graft{fill:none;stroke:#e8dcc0;stroke-width:44;stroke-linecap:round;opacity:.95}
 .ds-stent{fill:none;stroke:var(--anatomy-strong);stroke-width:1.7;stroke-linejoin:round}
-.ds-weak{fill:none;stroke:var(--c-bad);stroke-width:3;stroke-dasharray:5 5;opacity:.8}
 .ds-branch{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 55%,var(--anatomy-mid));stroke-width:7;stroke-linecap:round}
 .ds-branch-end{fill:var(--c-lymph);stroke:color-mix(in srgb,var(--c-lymph) 55%,#000);stroke-width:.9}
-.ds-organ{fill:var(--c-fl);stroke:color-mix(in srgb,var(--c-fl) 55%,#000);stroke-width:.9}
 .ds-occ{fill:#5a5258;stroke:#3a3438;stroke-width:.9}
 .ds-peri{fill:none;stroke:var(--anatomy-mid);stroke-width:1.4;stroke-dasharray:5 4}
 .ds-fluid{fill:var(--c-fl)}
-.ds-myo{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 55%,var(--c-tis))}
-.ds-cav{fill:color-mix(in srgb,var(--c-rbc) 35%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
-.ds-valve{fill:none;stroke:#f3e6c4;stroke-width:3;stroke-linecap:round}
+.ds-strain{fill:none;stroke:var(--c-bad);stroke-linecap:round;stroke-linejoin:round}
+.ds-rec{fill:var(--c-lymph);stroke:color-mix(in srgb,var(--c-lymph) 55%,#000);stroke-width:.8}
 .ds-arrow{fill:var(--c-bad)}
 .ds-pain{fill:none;stroke:var(--c-neut);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.p-false{--cc:#e5484d}.p-ar{--cc:var(--c-fl)}
+.ds-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
+.p-false{--cc:#e5484d}.p-ar{--cc:var(--c-fl)}.p-block{--cc:var(--c-lymph)}
 .dr-g-fill.g-imp{fill:var(--c-neut)}.dr-g-fill.g-tamp{fill:var(--c-fl)}.dr-g-fill.g-pain{fill:var(--c-neut)}
 `,
 });

@@ -261,6 +261,22 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
       svg.appendChild(gr);
     });
   }
+  /* Touch has no hover: a tap on a labelled part shows its one-line explanation and keeps it until another part is tapped. */
+  function tapInfo(doc, win) {
+    var info = doc.getElementById("info"); if (!info || info.getAttribute("data-tap")) return;
+    info.setAttribute("data-tap", "1");
+    if (/hover or focus/i.test(info.textContent)) info.textContent = "Tap a labelled part for a one-line explanation.";
+    var idle = info.textContent, last = null;
+    ["pointerleave", "blur"].forEach(function (t) {
+      doc.addEventListener(t, function (e) { if (e.target && e.target.closest && e.target.closest("[data-info]") && (t === "blur" || e.pointerType === "touch")) e.stopImmediatePropagation(); }, true);
+    });
+    doc.addEventListener("click", function (e) {
+      var el = e.target && e.target.closest ? e.target.closest("[data-info]") : null;
+      if (last) last.classList.remove("is-hot");
+      if (!el) { last = null; info.textContent = idle; return; }
+      last = el; el.classList.add("is-hot"); info.textContent = el.getAttribute("data-info");
+    });
+  }
   function appMode(doc, win) {
     if (!doc || !doc.body || doc.getElementById("smdAppCss")) return;
     var st = doc.createElement("style"); st.id = "smdAppCss"; st.textContent = APP_CSS + COLOR_CSS + IC_CSS; doc.body.appendChild(st);
@@ -273,7 +289,76 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     }
     /* a tap on a labelled part shows its explanation (touch has no hover) */
     Array.prototype.forEach.call(doc.querySelectorAll(".hot"), function (h) { h.addEventListener("touchend", function () { try { h.focus(); } catch (e) {} }, { passive: true }); });
-    legend(doc); arrows(doc); scenery(doc); organIcons(doc); compare(doc); zoomer(doc, win);
+    legend(doc); arrows(doc); scenery(doc); organIcons(doc); compare(doc); layout(doc, win); zoomer(doc, win);
+  }
+  /* One-screen layout: readout and figure fill the sheet, the controls sit in a dock under the figure, the small print is a footer. */
+  var LAY_CSS = "html,body{height:100%}body{position:relative;display:flex;flex-direction:column;height:100dvh;overflow:hidden;padding:0!important}" +
+    ".iso-page{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;padding:6px 12px 0!important}" +
+    ".iso-figure{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}.iso-plate{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;position:relative}" +
+    ".iso-plate-corners{flex:none}.smdz-st{flex:1 1 auto;min-height:90px;display:flex;justify-content:flex-start}.smdz-in{flex:none}" +
+    ".smdz-bt{position:absolute;right:8px;bottom:8px;margin:0}.smdz-bt span{display:none}.smdz-bt button{min-width:36px;min-height:36px;font-size:18px;opacity:.9}" +
+    ".iso-legend{flex:none;margin:4px 0 0}.iso-legend .iso-caption{display:none}" +
+    ".smdc{flex:none;margin:0 0 6px;display:grid;grid-template-columns:1fr 1fr}.smdc-t{grid-column:1/3;padding:3px}.smdc-t button{min-height:34px;font-size:14px}" +
+    ".smdc-r{padding:6px 12px;font-size:13px;gap:1px;border-top:1px solid var(--anatomy-faint)}.smdc-r b{font-size:10px}" +
+    "@media (max-width:640px){.smdc{grid-template-columns:1fr}.smdc-t{grid-column:1}}" +
+    ".smd-why{flex:0 0 auto;max-height:24vh;overflow:auto;margin:0 0 6px;display:grid;gap:3px;--w-t:#f2b84b;--w-m:#b48cff;--w-f:#4fd1a5;--w-i:#ff8fa3}body[data-theme='light'] .smd-why{--w-t:#9a6200;--w-m:#6a3fc4;--w-f:#0f7a5c;--w-i:#b4234a}" +
+    ".smd-why p{margin:0;padding:4px 10px;border-left:4px solid var(--c);border-radius:6px;background:color-mix(in srgb,var(--c) 11%,transparent);font:13px/1.35 system-ui,-apple-system,sans-serif;color:var(--anatomy-text)}" +
+    ".smd-why b{font:700 10px system-ui;letter-spacing:.05em;text-transform:uppercase;color:var(--c);margin-right:6px}.smd-why mark{background:none;color:var(--anatomy-strong);font-weight:700}" +
+    "@media (min-width:900px){.smd-why p{font-size:14px}}" +
+    ".smd-dock{flex:0 0 auto;padding:8px 12px 4px;border-top:1px solid var(--anatomy-faint);background:var(--anatomy-card)}" +
+    ".smd-dock .dr-controls{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;margin:0;font:600 13px/1.25 system-ui,-apple-system,sans-serif}" +
+    "@media (max-width:640px){.smd-dock .dr-controls{grid-template-columns:1fr}}" +
+    ".smd-dock .dr-range{gap:2px}.smd-dock .dr-range input{height:28px}.smd-dock .dr-range select{min-height:38px;font-size:15px}.smd-dock .dr-ticks{font-size:11px}" +
+    ".smd-dock #pause{display:none}.smd-dock .dr-status{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:0}" +
+    ".smd-dock .dr-info{position:static;margin:6px 0 0;padding:7px 12px;font-size:13px;line-height:1.35;box-shadow:0 0 0 1px var(--anatomy-faint)}" +
+    ".smd-foot{flex:0 0 auto;padding:2px 12px calc(env(safe-area-inset-bottom,0px) + 3px);font:8px/1.4 system-ui,-apple-system,sans-serif;color:var(--anatomy-muted)}" +
+    ".smd-foot .bio-sources{margin:0}.smd-foot .bio-sources summary{font:600 8px system-ui,sans-serif;min-height:0;display:inline-flex;color:var(--anatomy-muted)}" +
+    ".smd-foot details[open]{max-height:38vh;overflow:auto;font-size:12px;line-height:1.45;padding-top:4px}.smd-foot details[open] summary{font-size:11px}" +
+    ".smdc .smdc-r{display:none}.smdc-t{grid-column:1/3}" +
+    "@media (min-width:800px) and (min-aspect-ratio:5/4){body{display:grid;grid-template-columns:minmax(0,1fr) 380px;grid-template-rows:minmax(0,1fr) auto}.iso-page{grid-column:1;grid-row:1/3}" +
+    ".smd-dock{grid-column:2;grid-row:1;overflow:auto;border-top:0;border-left:1px solid var(--anatomy-faint);padding:10px 14px}.smd-foot{grid-column:2;grid-row:2;background:var(--anatomy-card)}" +
+    ".smd-dock .dr-controls{grid-template-columns:1fr}.smd-why{max-height:none;margin-bottom:10px}.smd-why p{font-size:14px}}" +
+    ".smd-help{position:absolute;inset:0;z-index:9;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.45)}" +
+    ".smd-help div{max-width:340px;margin:16px;padding:18px 20px;border-radius:18px;background:var(--anatomy-card);color:var(--anatomy-strong);box-shadow:0 0 0 1px var(--anatomy-faint),0 12px 40px rgba(0,0,0,.4);font:15px/1.45 system-ui,-apple-system,sans-serif}" +
+    ".smd-help b{display:block;font-size:17px;margin-bottom:8px}.smd-help ol{margin:0 0 12px;padding-left:20px}.smd-help li{margin:4px 0}" +
+    ".smd-help button{width:100%;min-height:44px;border:0;border-radius:12px;background:var(--k-mid,#4fb3ff);color:#04121c;font:700 15px system-ui}";
+  /* "What is happening": the figure's Mechanism mastery entry, one short colour coded line each, with the treatment line shown when a treatment is on. */
+  function explain(doc, win, dock) {
+    var id = (String(win.location.pathname).match(/\/([a-z0-9-]+?)(?:-light)?\.html$/) || [])[1]; if (!id) return;
+    msReady().then(function (all) {
+      var m = all[id]; if (!m || !doc.body) return;
+      function first(t) { t = String(t || ""); var i = t.search(/[.!?](\s|$)/); return i > 0 ? t.slice(0, i + 1) : t; }
+      function fm(t) { return esc(t).replace(/\*\*(.+?)\*\*/g, "<mark>$1</mark>"); }
+      var box = doc.createElement("div"); box.className = "smd-why"; box.setAttribute("aria-label", "What is happening");
+      box.innerHTML = [["trigger", "Cause", "--w-t"], ["mechanism", "What it does", "--w-m"], ["manifestation", "Result", "--w-f"]].map(function (r) { return '<p style="--c:var(' + r[2] + ')"><b>' + r[1] + "</b>" + fm(first(m[r[0]])) + "</p>"; }).join("") +
+        '<p class="smd-why-i" style="--c:var(--w-i)" hidden><b>Treatment</b>' + fm(first(m.intervention)) + "</p>";
+      dock.insertBefore(box, dock.firstChild);
+      var sel = doc.getElementById("drug"), ti = box.querySelector(".smd-why-i");
+      function sync() { ti.hidden = !(sel && sel.value !== "0"); }
+      if (sel) { sel.addEventListener("change", sync); sync(); }
+    });
+  }
+  function layout(doc, win) {
+    var st = doc.createElement("style"); st.id = "smdLayoutCss"; st.textContent = LAY_CSS; doc.body.appendChild(st);
+    var ctl = doc.querySelector(".dr-controls"), stat = doc.getElementById("status"), info = doc.getElementById("info"), src = doc.querySelector(".bio-sources");
+    if (!ctl) return;
+    var dock = doc.createElement("div"); dock.className = "smd-dock";
+    ctl.parentNode.insertBefore(dock, ctl);
+    [ctl, stat, info].forEach(function (n) { if (n) dock.appendChild(n); });
+    try { explain(doc, win, dock); } catch (e) {}
+    var cap = doc.querySelector(".iso-caption"), foot = doc.createElement("div"); foot.className = "smd-foot";
+    foot.appendChild(doc.createTextNode(((cap && cap.textContent) || "Schematic, not to scale.") + " Best experienced on iPad. "));
+    if (src) foot.appendChild(src);
+    doc.body.appendChild(dock); doc.body.appendChild(foot);
+    var lv = doc.querySelector("#level"), lbl = lv && lv.closest("label") && lv.closest("label").querySelector("span");
+    if (lbl && !/drag/i.test(lbl.textContent)) lbl.textContent = lbl.textContent + " (drag)";
+    var KEY = "smdFigHelp", seen = false; try { seen = G.localStorage.getItem(KEY) === "1"; } catch (e) {}
+    if (!seen) {
+      var h = doc.createElement("div"); h.className = "smd-help";
+      h.innerHTML = "<div><b>How to use this figure</b><ol><li>Drag the slider to make the disease worse or milder.</li><li>Pick a treatment and watch what changes.</li><li>Tap any label to read what it is.</li></ol><button type=\"button\">Got it</button></div>";
+      h.querySelector("button").addEventListener("click", function () { h.remove(); try { G.localStorage.setItem(KEY, "1"); } catch (e) {} });
+      doc.body.appendChild(h);
+    }
   }
   function zoomer(doc, win) {
     var box = doc.querySelector(".dr-svg") || doc.querySelector(".iso-plate"), svg = box && box.querySelector("svg");
@@ -284,15 +369,25 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     box.parentNode.insertBefore(st, box); inn.appendChild(box); st.appendChild(inn); st.parentNode.insertBefore(bt, st.nextSibling);
     var hint = doc.createElement("span"); hint.textContent = "Pinch or double-tap to zoom"; bt.appendChild(hint);
     var S = { s: 1, x: 0, y: 0 }, MAX = 4, W = 0, H = 0;
-    function size() { W = st.clientWidth; var r = vb ? vb.height / vb.width : 0.67; H = Math.round(W * r); st.style.height = H + "px"; clamp(); paint(); }
-    function clamp() { S.s = Math.max(1, Math.min(MAX, S.s)); S.x = Math.min(0, Math.max(W - W * S.s, S.x)); S.y = Math.min(0, Math.max(H - H * S.s, S.y)); }
+    var FW = 0, FH = 0, OX = 0;
+    function size() {
+      W = st.clientWidth; var r = vb ? vb.height / vb.width : 0.67, avail = st.clientHeight || Math.round(W * r);
+      FW = Math.min(W, Math.floor(avail / r)); FH = Math.round(FW * r); H = FH; OX = Math.floor((W - FW) / 2);
+      inn.style.width = FW + "px"; inn.style.marginLeft = OX + "px"; clamp(); paint();
+    }
+    function clamp() {
+      S.s = Math.max(1, Math.min(MAX, S.s));
+      var cw = FW * S.s, ch = FH * S.s;
+      S.x = cw + 2 * OX > W ? Math.min(-OX, Math.max(W - OX - cw, S.x)) : 0;
+      S.y = ch > st.clientHeight ? Math.min(0, Math.max(st.clientHeight - ch, S.y)) : 0;
+    }
     function paint() { inn.style.transform = "translate(" + S.x + "px," + S.y + "px) scale(" + S.s + ")"; st.style.touchAction = S.s > 1.01 ? "none" : "pan-y"; }
     function zoomAt(px, py, ns) { ns = Math.max(1, Math.min(MAX, ns)); var k = ns / S.s; S.x = px - (px - S.x) * k; S.y = py - (py - S.y) * k; S.s = ns; clamp(); paint(); }
     function mk(t, label, fn) { var b = doc.createElement("button"); b.type = "button"; b.textContent = t; b.setAttribute("aria-label", label); b.addEventListener("click", fn); bt.appendChild(b); }
-    mk("\u2212", "Zoom out", function () { zoomAt(W / 2, H / 2, S.s / 1.6); });
-    mk("+", "Zoom in", function () { zoomAt(W / 2, H / 2, S.s * 1.6); });
+    mk("\u2212", "Zoom out", function () { zoomAt(FW / 2, FH / 2, S.s / 1.6); });
+    mk("+", "Zoom in", function () { zoomAt(FW / 2, FH / 2, S.s * 1.6); });
     var g = null, last = 0, lp = null;
-    function pt(e, i) { var r = st.getBoundingClientRect(), t = e.touches[i]; return { x: t.clientX - r.left, y: t.clientY - r.top }; }
+    function pt(e, i) { var r = st.getBoundingClientRect(), t = e.touches[i]; return { x: t.clientX - r.left - OX, y: t.clientY - r.top }; }
     st.addEventListener("touchstart", function (e) {
       if (e.target && e.target.closest && e.target.closest(".smdz-bt")) return;
       if (e.touches.length === 2) { var a = pt(e, 0), b = pt(e, 1); g = { k: "pinch", d: Math.hypot(a.x - b.x, a.y - b.y) || 1, mx: (a.x + b.x) / 2, my: (a.y + b.y) / 2, s: S.s, x: S.x, y: S.y }; }
@@ -314,7 +409,7 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
       }
     }, { passive: false });
     st.addEventListener("touchend", function (e) { if (e.touches.length === 0 && g && g.k !== "tap") g = null; });
-    win.addEventListener("resize", size); size();
+    win.addEventListener("resize", size); if (win.ResizeObserver) new win.ResizeObserver(size).observe(st); size();
     S._api = { zoomAt: zoomAt, size: size, state: S };
     win.__smdZoom = S;
   }
@@ -383,7 +478,7 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     el.innerHTML = '<div class="smdfig-top"><p>' + esc(o.title || "Interactive figure") + '' + '</p><span class="smdfig-tools"><button type="button" class="smdfig-pp smdfig-ms-btn" aria-expanded="false" hidden>Steps</button><button type="button" class="smdfig-pp" aria-pressed="false" hidden>Pause</button><button type="button" class="smdfig-x" aria-label="Close the figure">&#10005;</button></span></div>' +
       '<div class="smdfig-sc"><iframe class="smdfig-fr" title="' + esc(o.title || "Interactive figure") + '" src="' + esc(pageOf(src, dark) + (q ? "?" + q : "")) + '" sandbox="allow-scripts allow-same-origin"></iframe></div>';
     var fr = el.querySelector("iframe");
-    fr.addEventListener("load", function () { try { appMode(fr.contentDocument, fr.contentWindow); } catch (e) {} try { motionToggle(el, fr.contentDocument, fr.contentWindow); } catch (e) {} });
+    fr.addEventListener("load", function () { try { appMode(fr.contentDocument, fr.contentWindow); } catch (e) {} try { tapInfo(fr.contentDocument, fr.contentWindow); } catch (e) {} try { motionToggle(el, fr.contentDocument, fr.contentWindow); } catch (e) {} });
     el.querySelector(".smdfig-x").addEventListener("click", close);
     try { masteryPanel(el, String(o.src || "")); } catch (e) {}
     var key = function (e) { if (e.key === "Escape") { e.stopPropagation(); var ms = el.querySelector(".smdfig-ms"); if (ms && !ms.hidden) { ms.hidden = true; var mb = el.querySelector(".smdfig-ms-btn"); if (mb) mb.setAttribute("aria-expanded", "false"); } else close(); } };

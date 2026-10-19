@@ -29,23 +29,23 @@ function modelOf(S, level, drug) {
   const type = level < 2 ? 0 : 1;              // 0 Hodgkin, 1 B-cell non-Hodgkin
   const adv = level % 2 === 1;
   const base = adv ? 0.86 : 0.48;
+  const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
   let eff = 0, sysEff = 0;                     // eff on the clone in the node, sysEff on spread and symptoms
   if (drug === 1) { eff = 0.68; sysEff = 0.68; }
-  else if (drug === 2) { eff = type === 1 ? 0.66 : 0.04; sysEff = eff; }
+  else if (drug === 2) { eff = type === 1 ? 0.66 : 0; sysEff = eff; }
   else if (drug === 3) { eff = adv ? 0.18 : 0.62; sysEff = adv ? 0.05 : 0.5; }
   const C = cl(base * (1 - eff));
   const N = cl((adv ? 0.84 : 0.5) * (1 - eff * 0.85));
   const Sp = cl((adv ? 0.88 : 0.18) * (1 - sysEff));
   const Bs = cl((adv ? 0.78 : 0.24) * (1 - sysEff * 0.9) + C * 0.08);
-  const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
   const words = [w(C, 0.25, 0.55, ["low", "moderate", "high"]), w(Sp, 0.25, 0.55, ["confined", "regional", "widespread"]), w(Bs, 0.25, 0.55, ["absent", "mild", "marked"])];
   return { type, adv, drug, eff, sysEff, C, N, Sp, Bs, words, readout: "clone " + words[0] + " · spread " + words[1] + " · B symptoms " + words[2] };
 }
 const TESTS = [
   [0, 0, "clone moderate · spread confined · B symptoms mild"],
   [1, 0, "clone high · spread widespread · B symptoms marked"],
-  [3, 2, "clone moderate · spread regional · B symptoms mild"],
-  [1, 3, "clone high · spread widespread · B symptoms marked"],
+  [2, 1, "clone low · spread confined · B symptoms absent"],
+  [0, 2, "clone moderate · spread confined · B symptoms mild"],
 ];
 
 /* ---------------- static layout ---------------- */
@@ -53,6 +53,12 @@ const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
 <text class="sc-zone" x="34" y="68">LYMPH NODE, SECTION</text>
 <text class="sc-zone" x="612" y="68">SPREAD MAP</text>
+<circle class="body-o" cx="762" cy="104" r="20"/>
+<path class="body-o" d="M728 132C716 190 720 250 736 306L742 392L762 392L768 318L774 392L794 392L800 306C816 250 820 190 796 132C786 124 738 124 728 132Z"/>
+<path class="diaph" d="M716 252L808 252"/>
+<path id="bloodV" class="ly-blood" d="M60 320 L300 315 L520 285 L722 280"/>
+<g id="spleenSlot"></g>
+<g id="liverSlot"></g>
 <g id="stage"></g>
 <g id="over"></g>
 <g id="panel"></g>`;
@@ -68,23 +74,28 @@ const extraCss = `
 .cd20{fill:var(--c-good);stroke:color-mix(in srgb,var(--c-good) 50%,#000);stroke-width:.4}
 .body-o{fill:color-mix(in srgb,var(--anatomy-mid) 12%,transparent);stroke:var(--anatomy-mid);stroke-width:1.6}
 .diaph{stroke:var(--anatomy-mid);stroke-width:1.4;stroke-dasharray:6 5}
+.ly-blood{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 45%,var(--anatomy-paper));stroke-width:9;stroke-linecap:round;opacity:.55}
+.ly-fever{fill:var(--c-bad);stroke:none}
+.ly-inv{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 55%,#000);stroke-width:1}
+.ly-bleach{fill:var(--anatomy-paper);stroke:none}
+.ly-ray{fill:none;stroke:var(--c-plt);stroke-width:2.5;stroke-linecap:round}
 .site{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}
 .site.on{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 55%,#000)}
 .site.sp{fill:var(--c-plt)}
-.organ{fill:color-mix(in srgb,var(--c-endo) 35%,var(--anatomy-paper));stroke:var(--c-endo);stroke-width:1}
-.beam{fill:var(--c-plt);opacity:.16}
+.beam{fill:var(--c-plt)}
 .field{fill:none;stroke:var(--c-plt);stroke-width:1.6;stroke-dasharray:7 5}
 .arr{fill:none;stroke:var(--anatomy-mid);stroke-width:1.6;marker-end:url(#arrh)}
 .p-chemo{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}
 .ab2{fill:none;stroke:var(--c-good);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ly-cap{fill:var(--anatomy-strong);font-size:12px}
 `;
 
 buildScene({
   id: "lymphoma", fig: "Fig 1", title: "Lymphoma: Hodgkin and B-cell non-Hodgkin", W, H, body, extraCss,
   label: "An animated lymph node section and spread map. In Hodgkin lymphoma a few large Reed-Sternberg cells sit in a rich reactive background and the node architecture is partly kept. In B-cell non-Hodgkin lymphoma sheets of similar B cells carrying CD20 fill and efface the node. Limited disease stays in one region; advanced disease crosses the diaphragm or reaches organs and marrow. Gauges show clone burden, node swelling, B symptoms and spread. Treatments are chemotherapy, anti-CD20 antibody and radiotherapy.",
   caption: "Schematic, not to scale. Counts, speeds and gauge levels are qualitative and illustrative; no doses or treatment schedules are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "lymph.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "lymph.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With chemotherapy",
   sourcesLis: [
     "<strong>Hodgkin lymphoma.</strong> The malignant Reed-Sternberg cells (large, often with two nuclei like owl eyes, CD30 positive and usually CD15 positive, typically without CD20) are a minority scattered in a reactive mix of lymphocytes, eosinophils, plasma cells and histiocytes. It tends to spread in an orderly way to neighbouring node groups. This is standard teaching in pathology and haematology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>B-cell non-Hodgkin lymphoma.</strong> A clonal sheet of B cells (CD20 positive) grows monotonously and effaces the normal follicles and zones of the node. Spread is less orderly and organs or bone marrow may be involved early. Subtypes, grading and molecular groups are not shown.",

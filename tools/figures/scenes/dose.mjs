@@ -53,12 +53,16 @@ const TESTS = [
  * Graph panel x14-500, cell panel x510-946, both y44-440. Gauges panel below (from y448).
  * Graph plot: x84-474 (log concentration), y85-350 (response, top is the ceiling).
  * Concentration ticks for low, medium, high sit at x187, 319, 412 under the axis.
- * Label pills (centres checked against each other, the axes and the panel titles):
+ * Label pills (8, centres checked against each other, the axes and the panel titles):
  *   graph: Efficacy 390,78 and Potency 140,120 - well apart, clear of the zone title at left.
  *   cell: Receptor 585,88 and Agonist 795,88 on the top row; Competitive blocker 645,152 and
  *   Non-competitive blocker 835,152 on the next row (only one is visible at a time, and their
- *   boxes do not touch anyway); Cell response 625,368, Inverse agonist 825,318 and
- *   Spare receptors 825,368 along the bottom, each clear of the next. */
+ *   boxes do not touch anyway); Cell response 625,368 and Spare receptors 825,368 along the
+ *   bottom, each clear of the next. The inverse agonist idea lives in the sources footer only.
+ * State caption: one .dose-cap line at 30,428, clear of the pills above and the gauges below.
+ * No listed organ (heart, liver, kidney, lung, stomach, brain, pancreas, spleen, bladder,
+ * uterus, thyroid) is drawn here: the cell and its receptors are molecular-scale diagrams,
+ * so organs.lib.js is intentionally not used. */
 const GX0 = 84, GX1 = 474, GY0 = 85, GY1 = 350;
 const body = `
 <rect class="sc-tissue dose-bg" x="14" y="44" width="486" height="396" rx="18"/>
@@ -101,6 +105,9 @@ body[data-theme="light"]{--c-full:#0a7fd1;--c-part:#b57f0a;--c-comp:#d13a5e;--c-
 .rec-fill{fill:var(--c-lig)}
 .rec-allo{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1}
 .lig-p{fill:var(--c-lig);stroke:color-mix(in srgb,var(--c-lig) 50%,#000);stroke-width:.5}
+.lig-pp{fill:var(--c-part);stroke:color-mix(in srgb,var(--c-part) 50%,#000);stroke-width:.5}
+.rec-plug{fill:var(--c-noncomp)}
+.dose-cap{fill:var(--anatomy-strong);font-size:12px;font-weight:700}
 .ant-c{fill:var(--c-comp);stroke:color-mix(in srgb,var(--c-comp) 50%,#000);stroke-width:.5}
 .ant-n{fill:var(--c-noncomp);stroke:color-mix(in srgb,var(--c-noncomp) 50%,#000);stroke-width:.5}
 .sig-p{fill:var(--c-sig)}
@@ -112,7 +119,7 @@ buildScene({
   label: "An animated dose and response graph beside receptors in a cell membrane. Raising the drug concentration binds more receptors and raises the response. A full agonist reaches the full ceiling, a partial agonist reaches only part of it, a competitive antagonist shifts the curve to the right with the same ceiling, and a non-competitive antagonist lowers the ceiling. Gauges show binding, response, the ceiling and antagonist block.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, concentrations or drug names are shown or implied.",
   scene: { W, H, GX0, GX1, GY0, GY1 }, pageJs: readFileSync(join(HERE, "dose.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Full agonist alone", withLabel: "With a partial agonist or an antagonist",
+  withoutLabel: "Full agonist alone", withLabel: "With non-competitive antagonist",
   sourcesLis: [
     "<strong>Binding and response.</strong> A drug binds reversibly to a receptor. More concentration means more receptors occupied (binding, or occupancy) until binding saturates. The response also rises and then levels at a ceiling (the maximum effect, called efficacy). The concentration position of the curve is potency: a curve further left needs less drug for the same effect. Response can reach its ceiling before every receptor is bound, because the cell amplifies the signal: these unneeded receptors are called spare receptors. This is standard teaching in pharmacology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Agonists and antagonists shown.</strong> A full agonist binds and fully switches the receptor on. A partial agonist binds but only partly switches it on, so its ceiling is lower however much is given. A competitive antagonist binds the same site reversibly without switching the receptor on: more agonist can out-compete it, so the curve shifts right with the same ceiling (surmountable). A non-competitive antagonist binds a separate site or disables the receptor, so the ceiling itself falls and more agonist cannot restore it. An inverse agonist (explained in the figure, not a selectable drug) binds and lowers the resting activity that some receptors show on their own. These are teaching toggles only.",

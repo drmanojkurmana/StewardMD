@@ -54,20 +54,24 @@ const TESTS = [
   [1, 0, "output low · preload high · vessel tone high · pressure low"],
   [2, 0, "output normal · preload low · vessel tone low · pressure low"],
   [3, 0, "output low · preload high · vessel tone high · pressure low"],
+  [0, 5, "output normal · preload normal · vessel tone normal · pressure maintained"],
+  [1, 5, "output high · preload normal · vessel tone normal · pressure maintained"],
+  [2, 5, "output normal · preload normal · vessel tone normal · pressure maintained"],
+  [3, 5, "output normal · preload high · vessel tone normal · pressure maintained"],
 ];
 
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
 <text class="sc-zone" x="34" y="68">CIRCULATION</text>
-<g id="vessels"></g><g id="parts"></g><g id="blood"></g><g id="heartg"></g><g id="marks"></g><g id="over"></g><g id="panel"></g>`;
+<g id="vessels"></g><g id="lungSlot"></g><g id="heartSlot"></g><g id="blood"></g><g id="parts"></g><g id="marks"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "shock-types", fig: "Fig 1", title: "Shock: four types", W, H, body,
-  label: "An animated circulation: a heart pumping blood through arteries to the tissues, with a venous reservoir returning blood to the heart. The level slider chooses hypovolaemic, cardiogenic, distributive or obstructive shock. Each type changes blood volume, the pump, vessel tone or an obstruction in a different way. Gauges show cardiac output, preload, vessel tone, blood pressure, oxygen delivery and lung congestion. Treatment choices include fluids, a vasopressor, an inotrope, and treating the cause.",
+  label: "An animated circulation: a heart pumping blood through arteries to the tissues, with a venous reservoir returning blood to the heart. The level slider chooses hypovolaemic, cardiogenic, distributive or obstructive shock. Each type changes blood volume, the pump, vessel tone or an obstruction in a different way. The heart and lungs are drawn as recognisable organs, and each treatment visibly acts on the drawing. Gauges show cardiac output, preload, vessel tone, blood pressure, oxygen delivery and lung congestion. Treatment choices include fluids, a vasopressor, an inotrope, and treating the cause.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "shock.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "shock.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With cause treated plus support",
   sourcesLis: [
     "<strong>What shock is.</strong> Shock is a circulation that cannot deliver enough oxygen to the tissues. Blood pressure is roughly output times vessel tone, so each type fails in a different place: too little blood (hypovolaemic), a failing pump (cardiogenic), vessels that have lost their tone (distributive, for example septic, anaphylactic or neurogenic), or a block to flow (obstructive, for example tamponade, pulmonary embolism or tension pneumothorax). The classic bedside pattern of output, filling pressure and vessel tone differs by type. This is standard teaching in medicine and critical-care texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> Fluids or blood fit a low volume, an inotrope fits a weak pump, a vasopressor fits lost vessel tone, and relieving the obstruction fits a block. Treating the cause matters most in every type. A wrong choice gives little benefit or harm (for example fluids in a failing pump worsen lung congestion). These are teaching toggles only.",
@@ -80,16 +84,17 @@ buildScene({
 .sc-organ{fill:color-mix(in srgb,var(--c-rbc) calc(var(--ox,.7) * 38%),#4b3f66);stroke:var(--anatomy-mid);stroke-width:1}
 .sc-resv{fill:color-mix(in srgb,var(--c-fl) 14%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.2}
 .sc-resvfill{fill:color-mix(in srgb,var(--c-fl) 70%,var(--anatomy-paper))}
-.sc-heart{fill:color-mix(in srgb,var(--c-rbc) 45%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 60%,#000);stroke-width:1.2}
-.sc-chamber{fill:color-mix(in srgb,var(--c-rbc) 80%,var(--anatomy-paper))}
 .sc-infarct{fill:#2b1a1a;stroke:none}
 .sc-sac{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2;stroke-dasharray:4 3}
 .sc-effusion{fill:var(--c-fl)}
-.sc-lung{fill:color-mix(in srgb,var(--c-lymph) 18%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.1}
-.sc-lungfill{fill:var(--c-fl)}
+.sc-fluid{fill:var(--c-fl);stroke:none}
+.sc-recep{fill:color-mix(in srgb,var(--c-eos) 70%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-eos) 60%,#000);stroke-width:.8}
+.sc-seal{fill:none;stroke:var(--c-no);stroke-width:2.5;stroke-linecap:round}
 .sc-clot{fill:var(--c-plt);stroke:color-mix(in srgb,var(--c-plt) 50%,#000);stroke-width:.8}
-.sc-wound{stroke:var(--c-bad);stroke-width:2.5;stroke-linecap:round}
-.sc-spark{stroke:var(--c-no);stroke-width:2;stroke-linecap:round}
+.sc-wound{fill:none;stroke:var(--c-bad);stroke-width:2.5;stroke-linecap:round}
+.sc-spark{fill:none;stroke:var(--c-no);stroke-width:2;stroke-linecap:round}
+.sh-cap{fill:var(--anatomy-strong);font-size:13px}
 .p-bleed{fill:var(--c-rbc)}.p-iv{fill:var(--c-fl)}
+.p-vp{--cc:#b78ae6}.p-ino{--cc:var(--c-no)}.p-trig{--cc:#ff9a3d}
 `,
 });

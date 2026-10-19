@@ -1,15 +1,21 @@
-/* Checkpoint scene: lymph node priming (CD28/B7, CTLA-4 brake), tumour killing (PD-1/PD-L1 brake), gut side effects. */
-const CK = { base: $("base"), links: $("links"), parts: $("parts"), over: $("over"), panel: $("panel") };
+/* Checkpoint scene: lymph node priming (CD28/B7, CTLA-4 brake), tumour killing (PD-1/PD-L1 brake), bowel side effects. */
+const CK = { base: $("base"), links: $("links"), parts: $("parts"), over: $("over"), panel: $("panel"), gut: $("gutSlot"), primeGlow: $("primeGlow"), tumGlow: $("tumGlow") };
 const APC = { x: 140, y: 240, r: 22 };
 const TN = { x: 330, y: 240, r: 20 };
 const TE = { x: 758, y: 195, r: 18 };
-const GUT = { x: 740, y: 315, w: 190, h: 105 };
 const EFF = track([[352, 262], [420, 300], [492, 302], [545, 262]]);
 const lolli = (g, ang, r, cls) => { const c = Math.cos(ang), s = Math.sin(ang);
   mk("path", { class: "r-stem", d: "M" + f1(c * r) + " " + f1(s * r) + "L" + f1(c * (r + 6)) + " " + f1(s * (r + 6)) }, g);
   mk("circle", { class: cls, cx: f1(c * (r + 8)), cy: f1(s * (r + 8)), r: 3.2 }, g); };
 const yAb = (parent, x, y, s) => { const g = mk("g", { transform: "translate(" + x + " " + y + ") scale(" + s + ")" }, parent);
   mk("path", { class: "p-ck", d: "M0 6V1M-4.5 -5L0 1L4.5 -5" }, g); return g; };
+/* ---- bowel organ for the healthy gut under attack, plus its inflammation veil ---- */
+let bowelO = null, ginfl = null, coils = [838, 365];
+function initOrgans() {
+  bowelO = organ(CK.gut, "bowel", 835, 362, 150, {});
+  coils = bowelO.ports.coils;
+  ginfl = mk("ellipse", { class: "ck-ginfl", cx: f1(bowelO.x), cy: f1(bowelO.y), rx: 60, ry: 58, opacity: "0" }, CK.gut);
+}
 /* ---- lymph node cells ---- */
 const apcG = mk("g", {}, CK.base), tnG = mk("g", {}, CK.base), teG = mk("g", {}, CK.base);
 function initCells() {
@@ -36,18 +42,7 @@ function initTumour() {
     place(g, jx, jy); tumours.push({ g, inner, x: jx, y: jy, dm: 0, sens: 0.6 + ((c + r * 2) % 4) * 0.18 });
   }));
 }
-/* ---- gut inset ---- */
-const gutCells = [];
-let gutInfl = null;
-function initGut() {
-  mk("rect", { class: "gut-bg", x: GUT.x, y: GUT.y, width: GUT.w, height: GUT.h, rx: 10 }, CK.base);
-  gutInfl = mk("rect", { class: "gut-infl", x: GUT.x, y: GUT.y, width: GUT.w, height: GUT.h, rx: 10, opacity: "0" }, CK.base);
-  [772, 812, 852].forEach((x) => mk("rect", { class: "gut-vil", x, y: 378, width: 18, height: 30, rx: 9 }, CK.base));
-  [[786, 408], [826, 408], [866, 408], [900, 408]].forEach(([x, y], i) => {
-    const g = mk("g", {}, CK.base); cell(g, { cls: "gut", r: 7, nuc: 0.4, seed: 40 + i, wob: 0.1 }); place(g, x, y); gutCells.push({ g, x, y });
-  });
-}
-/* ---- signal links and antibodies ---- */
+/* ---- signal links and docked blocker antibodies ---- */
 let s1 = null, s2 = null, brakeC = null, pd1 = null, pd2 = null, absC = null, absP = null;
 function initLinks() {
   s1 = mk("path", { class: "sig", d: "M169 231L303 232" }, CK.links);
@@ -55,8 +50,8 @@ function initLinks() {
   brakeC = mk("path", { class: "sigB", d: "M164 258L308 257" }, CK.links);
   pd1 = mk("path", { class: "sigB", d: "M732 200L707 200" }, CK.links);
   pd2 = mk("path", { class: "sigB", d: "M733 189L704 187" }, CK.links);
-  absC = mk("g", { opacity: "0" }, CK.links); yAb(absC, 285, 268, 1.1); yAb(absC, 290, 290, 1.1);
-  absP = mk("g", { opacity: "0" }, CK.links); yAb(absP, 722, 188, 1.1); yAb(absP, 726, 214, 1.1);
+  absC = mk("g", { opacity: "0" }, CK.links); yAb(absC, 306, 252, 1.6); yAb(absC, 312, 266, 1.6);
+  absP = mk("g", { opacity: "0" }, CK.links); yAb(absP, 730, 186, 1.6); yAb(absP, 730, 200, 1.6);
 }
 /* ---- pools ---- */
 function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, u: 0, k: 0, s: 1 }; }); }
@@ -67,7 +62,15 @@ const il2 = pool(10, () => mk("rect", { class: "sc-p p-il2", x: -2.2, y: -2.2, w
 const perf = pool(12, () => mk("circle", { class: "p-perf", r: 1.8 }, CK.parts));
 const clones = pool(6, () => { const g = mk("g", {}, CK.parts); cell(g, { cls: "lymph", r: 7, nuc: 0.5, seed: 50, wob: 0.1 }); return g; });
 const effs = pool(6, () => { const g = mk("g", {}, CK.parts); cell(g, { cls: "eos", r: 9, nuc: 0.5, seed: 60, wob: 0.1 }); return g; });
-const gutT = pool(4, () => { const g = mk("g", {}, CK.parts); cell(g, { cls: "eos", r: 8, nuc: 0.5, seed: 70, wob: 0.1 }); return g; });
+const gutT = pool(6, () => { const g = mk("g", {}, CK.parts); cell(g, { cls: "eos", r: 8, nuc: 0.5, seed: 70, wob: 0.1 }); return g; });
+/* ---- in stage caption, changed with the treatment ---- */
+let capEl = null, capDrug = -1;
+function capText(d) {
+  if (d === 1) return "Anti-CTLA-4 sits on the early brake. Priming rises and more killers reach the tumour.";
+  if (d === 2) return "Anti-PD-1 sits on the tired cell brake. Killers recover and shrink the tumour.";
+  if (d === 3) return "Both drugs together. Strongest killing, but the healthy gut is attacked more.";
+  return "No treatment. Both brakes stay on, so priming is weak and the tumour grows.";
+}
 /* ---- labels and gauges ---- */
 const gg = {};
 function initOver() {
@@ -83,41 +86,49 @@ function initOver() {
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
   const O = CK.over;
   pill(O, "Dendritic cell", APC.x, APC.y - 22, 140, 100, "Dendritic cell in the lymph node. It shows tumour antigen on MHC (signal 1) and B7 (signal 2) to a naive T cell.");
-  pill(O, "Signal 1", 236, 231, 235, 150, "Signal 1: the T cell receptor recognises tumour antigen on MHC. Alone it is not enough to switch the T cell on.");
-  pill(O, "Signal 2", 235, 245, 235, 300, "Signal 2: CD28 on the T cell meets B7 on the dendritic cell. Both signals together prime the T cell to divide and hunt.");
-  pill(O, "CTLA-4 brake", 308, 257, 330, 350, "CTLA-4 appears after activation and steals B7 from CD28, which dampens priming. Anti-CTLA-4 (ipilimumab) blocks CTLA-4 so priming continues.");
-  const abC = pill(O, "Anti-CTLA-4", 288, 279, 150, 360, "Anti-CTLA-4 antibody (ipilimumab). It covers CTLA-4 so B7 stays free for CD28. Shown only when treatment includes it."); abC.setAttribute("id", "ckabC");
+  pill(O, "Two signals", 236, 239, 240, 150, "Signals 1 and 2: the T cell receptor recognises antigen on MHC, and CD28 meets B7. Both together prime the T cell to divide and hunt.");
+  pill(O, "CTLA-4 brake", 308, 257, 330, 350, "CTLA-4 appears after activation and steals B7 from CD28, which dampens priming. Anti-CTLA-4 blocks CTLA-4 so priming continues.");
+  const abC = pill(O, "Anti-CTLA-4", 288, 279, 150, 360, "Anti-CTLA-4 antibody. It sits on CTLA-4 so B7 stays free for CD28. Shown only when treatment includes it."); abC.setAttribute("id", "ckabC");
   pill(O, "Tumour", 620, 122, 600, 100, "Tumour cells. They carry PD-L1 on their surface, which switches off attacking T cells.");
   pill(O, "Killer T cell", TE.x, TE.y - 18, 830, 110, "A primed killer T cell that reached the tumour. PD-1 on its surface marks exhaustion; blocking PD-1 reinvigorates it.");
-  pill(O, "PD-1 brake", 719, 195, 745, 275, "PD-1 on the exhausted T cell binds PD-L1 on the tumour and switches killing off. Anti-PD-1 (pembrolizumab, nivolumab) blocks PD-1.");
-  const abP = pill(O, "Anti-PD-1", 726, 214, 870, 270, "Anti-PD-1 antibody (pembrolizumab, nivolumab). It covers PD-1 so the tumour cannot switch the T cell off. Shown only when treatment includes it."); abP.setAttribute("id", "ckabP");
-  pill(O, "Healthy gut", 835, 340, 800, 301, "Healthy gut lining. Reinvigorated T cells can also attack self tissue, causing colitis, pneumonitis, hepatitis or hormone gland failure.");
+  pill(O, "PD-1 brake", 719, 195, 745, 275, "PD-1 on the exhausted T cell binds PD-L1 on the tumour and switches killing off. Anti-PD-1 blocks PD-1.");
+  const abP = pill(O, "Anti-PD-1", 726, 214, 870, 270, "Anti-PD-1 antibody. It sits on PD-1 so the tumour cannot switch the T cell off. Shown only when treatment includes it."); abP.setAttribute("id", "ckabP");
+  capEl = mk("text", { class: "ck-cap", x: 30, y: 428 }, O); capEl.textContent = capText(0);
 }
-const sm = { P: 0.3, K: 0.1, T: 0.85, CTLA: 0.6, PD: 0.7, A: 0.1, cB: 0, pB: 0 };
+const sm = { P: 0.3, K: 0.1, T: 0.85, CTLA: 0.6, PD: 0.7, A: 0.1, cB: 0, pB: 0, gP: 0.3, gT: 0.85 };
 const acc = { il2: 0, perf: 0, clone: 0, eff: 0, gut: 0 };
-function init() { initCells(); initTumour(); initGut(); initLinks(); initOver(); }
+function init() { initOrgans(); initCells(); initTumour(); initLinks(); initOver(); }
 function step(dt, m) {
   const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.45);
   sm.P = lerp(sm.P, m.P, k2); sm.K = lerp(sm.K, m.K, k2); sm.T = lerp(sm.T, m.T, Math.min(1, dt * 0.3));
   sm.CTLA = lerp(sm.CTLA, m.CTLA, k2); sm.PD = lerp(sm.PD, m.PD, k2); sm.A = lerp(sm.A, m.A, k2);
   sm.cB = lerp(sm.cB, m.cB, k1); sm.pB = lerp(sm.pB, m.pB, k1);
+  sm.gP = lerp(sm.gP, m.P, k1); sm.gT = lerp(sm.gT, m.T, k1);
+  /* priming and burden glows: the stage brightens and dims with the state */
+  CK.primeGlow.setAttribute("opacity", (0.3 * sm.gP).toFixed(2));
+  CK.tumGlow.setAttribute("opacity", (0.35 * sm.gT).toFixed(2));
   /* cells bob; naive cell swells with priming, effector brightens as the PD brake lifts */
   place(apcG, APC.x + Math.sin(tm / 1200) * 2, APC.y + Math.cos(tm / 1500) * 2, Math.sin(tm / 2000) * 4, 1);
   place(tnG, TN.x + Math.sin(tm / 1000 + 1) * 2, TN.y + Math.cos(tm / 1300) * 2, 0, 1 + 0.12 * sm.P * Math.sin(tm / 350));
   place(teG, TE.x + Math.sin(tm / 1100 + 2) * 2, TE.y + Math.cos(tm / 1400) * 2, 0, 0.88 + 0.24 * (1 - sm.PD) + 0.05 * sm.K * Math.sin(tm / 300));
-  /* tumour cells take damage from killing */
+  /* tumour cells take damage from killing: they shrink and grey out */
   tumours.forEach((c, i) => { c.dm = lerp(c.dm, clamp(sm.K * c.sens * 1.15), Math.min(1, dt * 0.35));
     c.inner.style.setProperty("--dm", c.dm.toFixed(2));
-    place(c.g, c.x + Math.sin(tm / 1300 + i) * 0.8, c.y + Math.cos(tm / 1700 + i) * 0.8, 0, 1 - 0.16 * c.dm); });
-  /* gut inflammation and injury from side effects */
-  gutInfl.setAttribute("opacity", (sm.A * 0.4).toFixed(2));
-  gutCells.forEach((c, i) => place(c.g, c.x + Math.sin(tm / 1200 + i) * 0.6, c.y, 0, 1 - 0.28 * sm.A));
-  /* signals strengthen with priming; brakes fade when blocked */
+    place(c.g, c.x + Math.sin(tm / 1300 + i) * 0.8, c.y + Math.cos(tm / 1700 + i) * 0.8, 0, 1 - 0.25 * c.dm); });
+  /* bowel inflammation veil follows side effects; attackers home to the bowel coils */
+  ginfl.setAttribute("opacity", (0.6 * sm.A).toFixed(2));
+  /* signals strengthen with priming; brakes fade as blockers dock on them */
   s1.setAttribute("opacity", (0.15 + 0.85 * sm.P).toFixed(2));
+  s1.setAttribute("stroke-width", f1(1.2 + 2.2 * sm.P));
   s2.setAttribute("opacity", (0.15 + 0.85 * sm.P * (1 - 0.55 * sm.CTLA)).toFixed(2));
+  s2.setAttribute("stroke-width", f1(1.2 + 2.2 * sm.P * (1 - 0.5 * sm.CTLA)));
   brakeC.setAttribute("opacity", sm.CTLA.toFixed(2));
+  brakeC.setAttribute("stroke-width", f1(1 + 2.5 * sm.CTLA));
   pd1.setAttribute("opacity", sm.PD.toFixed(2)); pd2.setAttribute("opacity", sm.PD.toFixed(2));
+  pd1.setAttribute("stroke-width", f1(1 + 2.5 * sm.PD)); pd2.setAttribute("stroke-width", f1(1 + 2.5 * sm.PD));
   absC.setAttribute("opacity", sm.cB.toFixed(2)); absP.setAttribute("opacity", sm.pB.toFixed(2));
+  absC.setAttribute("transform", "translate(0 " + f1(Math.sin(tm / 500) * 1.5) + ")");
+  absP.setAttribute("transform", "translate(0 " + f1(Math.sin(tm / 500 + 1) * 1.5) + ")");
   $("ckabC").style.opacity = sm.cB.toFixed(2); $("ckabP").style.opacity = sm.pB.toFixed(2);
   /* IL-2 around the primed cell */
   acc.il2 += dt * sm.P * 6; while (acc.il2 >= 1) { acc.il2--; const p = free(il2); if (p) { emit(p, TN.x + rnd(-14, 14), TN.y + rnd(-12, 12)); p.vx = rnd(-10, 10); p.vy = rnd(-26, -14); } }
@@ -131,13 +142,13 @@ function step(dt, m) {
   acc.eff += dt * (0.15 + sm.P * 0.85); while (acc.eff >= 1) { acc.eff--; const p = free(effs); if (p) { emit(p, 0, 0); p.s = rnd(0.8, 1.2); } }
   effs.forEach((p) => { if (!p.on) return; p.u += dt * 0.2 * p.s; const q = EFF.at(p.u);
     place(p.e, q.x, q.y + Math.sin(tm / 300 + p.s * 7) * 2, 0, 1); p.e.setAttribute("opacity", p.u > 0.85 ? clamp((1 - p.u) / 0.15).toFixed(2) : "1"); if (p.u >= 1) kill(p); });
-  /* perforin from the reinvigorated cell into the tumour */
-  acc.perf += dt * sm.K * 10; while (acc.perf >= 1) { acc.perf--; const p = free(perf); if (p) { emit(p, 740, TE.y + rnd(-8, 8)); p.vx = -rnd(40, 58); p.vy = rnd(-6, 6); } }
+  /* perforin from the reinvigorated cell flies left and strikes the tumour */
+  acc.perf += dt * sm.K * 12; while (acc.perf >= 1) { acc.perf--; const p = free(perf); if (p) { emit(p, 745, TE.y + rnd(-8, 8)); p.vx = -rnd(40, 58); p.vy = rnd(-6, 6); } }
   perf.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt;
-    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", (1 - p.t / 0.8).toFixed(2)); if (p.t > 0.8 || p.x < 700) kill(p); });
-  /* self reactive cells attack the gut */
-  acc.gut += dt * sm.A * 2.2; while (acc.gut >= 1) { acc.gut--; const p = free(gutT); if (p) { emit(p, rnd(775, 900), GUT.y + 8); p.k = rnd(385, 405); } }
-  gutT.forEach((p) => { if (!p.on) return; p.t += dt; p.y = lerp(p.y, p.k, dt * 1.2);
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", (1 - p.t / 1.6).toFixed(2)); if (p.t > 1.6 || p.x < 655) kill(p); });
+  /* self reactive cells home to the bowel coils and injure the gut */
+  acc.gut += dt * sm.A * 3; while (acc.gut >= 1) { acc.gut--; const p = free(gutT); if (p) { emit(p, rnd(788, 882), 302); p.vx = coils[0] + rnd(-24, 24); p.k = coils[1] + rnd(-22, 22); } }
+  gutT.forEach((p) => { if (!p.on) return; p.t += dt; p.x = lerp(p.x, p.vx, dt * 0.8); p.y = lerp(p.y, p.k, dt * 1.2);
     place(p.e, p.x + Math.sin(tm / 400 + p.k) * 2, p.y, 0, 1); p.e.setAttribute("opacity", p.t > 3 ? clamp(1 - (p.t - 3) / 1.2).toFixed(2) : "1"); if (p.t > 4.2) kill(p); });
   /* gauges */
   gg.prim.set(sm.P, wordOf(sm.P, 0.35, 0.65, ["low", "moderate", "high"]));
@@ -146,5 +157,6 @@ function step(dt, m) {
   gg.ctla.set(sm.CTLA, wordOf(sm.CTLA, 0.3, 0.6, ["blocked", "some", "active"]));
   gg.pd.set(sm.PD, wordOf(sm.PD, 0.3, 0.6, ["blocked", "some", "active"]));
   gg.ae.set(sm.A, wordOf(sm.A, 0.3, 0.55, ["few", "some", "many"]));
+  if (drug !== capDrug) { capDrug = drug; const t = capText(drug); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 run({ init, step });

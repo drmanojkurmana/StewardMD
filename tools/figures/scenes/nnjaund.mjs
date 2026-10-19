@@ -42,13 +42,13 @@ function modelOf(S, level, drug) {
   const free = cl(bil * bil * 1.25 + bil * 0.18 - 0.08);
   const brain = cl(free * (0.35 + 0.75 * L.bbb) * (1 - 0.35 * T.exch));
   const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
-  const words = [w(bil, 0.28, 0.58, ["mild", "raised", "high"]), w(brain, 0.12, 0.38, ["minimal", "possible", "likely"]), w(excr, 0.35, 0.62, ["low", "steady", "good"])];
+  const words = [w(bil, 0.28, 0.58, ["mild", "raised", "high"]), w(brain, 0.12, 0.45, ["minimal", "possible", "likely"]), w(excr, 0.35, 0.62, ["low", "steady", "good"])];
   return { a: S.level.a[level], prod, conj, excr, bil, free, brain, haem: L.haem, bbb: L.bbb, photo: T.photo, exch: T.exch, feed: T.feed, words, readout: "bilirubin " + words[0] + " · brain entry " + words[1] + " · excretion " + words[2] };
 }
 const TESTS = [
   [0, 0, "bilirubin mild · brain entry minimal · excretion good"],
   [2, 0, "bilirubin high · brain entry likely · excretion steady"],
-  [2, 1, "bilirubin raised · brain entry likely · excretion good"],
+  [2, 1, "bilirubin raised · brain entry possible · excretion good"],
   [2, 2, "bilirubin mild · brain entry minimal · excretion good"],
 ];
 
@@ -57,40 +57,32 @@ const body = `
 <rect class="sc-tissue" x="14" y="44" width="286" height="186" rx="16"/>
 <rect class="sc-tissue" x="330" y="44" width="290" height="186" rx="16"/>
 <rect class="sc-tissue" x="650" y="44" width="296" height="186" rx="16"/>
-<rect class="sc-tissue" x="14" y="256" width="540" height="184" rx="16"/>
-<rect class="sc-tissue" x="570" y="256" width="130" height="184" rx="16"/>
-<rect class="sc-tissue" x="714" y="256" width="232" height="184" rx="16"/>
-<text class="sc-zone" x="34" y="68">RED CELL TURNOVER</text>
-<text class="sc-zone" x="344" y="68">LIVER</text>
-<text class="sc-zone" x="664" y="68">GUT</text>
-<text class="sc-zone" x="34" y="280">BLOOD</text>
-<text class="sc-zone" x="728" y="280">BRAIN</text>
-<ellipse class="nn-liver" cx="478" cy="152" rx="104" ry="58"/>
-<ellipse class="nn-liver-hl" cx="448" cy="132" rx="42" ry="18"/>
-<g id="ugt"></g>
-<path class="nn-gut" d="M712 118 h150 a24 24 0 0 1 0 48 h-120 a20 20 0 0 0 0 40 h110"/>
-<circle class="nn-gut-end" cx="852" cy="206" r="7"/>
-<rect class="sc-lumen" x="24" y="306" width="520" height="58" rx="12"/>
-<rect class="sc-lumen" x="544" y="326" width="176" height="18"/>
-<g id="rbcsTop"></g><g id="alb"></g>
-<g id="baby">
-<circle class="nn-skin" cx="635" cy="322" r="23"/>
-<ellipse class="nn-skin" cx="635" cy="386" rx="36" ry="42"/>
-<circle id="skinOv" class="nn-jaund" cx="635" cy="322" r="23" opacity="0"/>
-<ellipse id="skinOv2" class="nn-jaund" cx="635" cy="386" rx="36" ry="42" opacity="0"/>
+<rect class="sc-tissue" x="14" y="256" width="540" height="150" rx="16"/>
+<rect class="sc-tissue" x="570" y="256" width="130" height="150" rx="16"/>
+<rect class="sc-tissue" x="714" y="256" width="232" height="150" rx="16"/>
+<path id="vRbcLiv" class="nn-ves" d="M180 210 C260 212 320 190 368 172"/>
+<path id="vBile" class="nn-bile" d="M560 190 C640 200 700 180 760 160"/>
+<path id="vBloodBrain" class="nn-ves" d="M700 344 C722 344 734 350 750 358"/>
+<rect class="sc-lumen" x="24" y="318" width="520" height="52" rx="12"/>
+<rect id="bloodClean" class="nn-clean" x="24" y="318" width="520" height="52" rx="12" opacity="0"/>
+<path id="bbb" class="nn-bbb" d="M722 282 V400"/>
+<g id="liverSlot"></g><g id="bowelSlot"></g>
+<g id="rbcsTop"></g><g id="ugt"></g>
+<g id="skinSlot"></g>
+<ellipse id="skinGlow" class="nn-photoglow" cx="635" cy="348" rx="70" ry="45" opacity="0"/>
+<ellipse id="skinOv" class="nn-jaund" cx="635" cy="348" rx="52" ry="36" opacity="0"/>
+<g id="lampG" opacity="0">
+<rect class="nn-lamp" x="600" y="258" width="70" height="12" rx="6"/>
+<path class="nn-ray" d="M610 270 L600 302 M635 270 L635 302 M660 270 L670 302"/>
 </g>
-<g id="photoLamp" opacity="0">
-<rect class="nn-lamp" x="600" y="262" width="70" height="12" rx="6"/>
-<path class="nn-ray" d="M610 274 L600 306M635 274 L635 306M660 274 L670 306"/>
-</g>
-<ellipse class="nn-brain" cx="836" cy="352" rx="82" ry="58"/>
-<path class="nn-brain-line" d="M786 330 q20 -18 42 0 q22 -16 40 2 M792 372 q22 16 44 2 q20 14 38 -2"/>
-<ellipse id="brainOv" class="nn-jaund" cx="836" cy="352" rx="82" ry="58" opacity="0"/>
-<path class="nn-bbb" d="M720 286 V424"/>
+<path id="lightCone" class="nn-cone" d="M600 270 L670 270 L702 332 L568 332 Z" opacity="0"/>
+<g id="brainSlot"></g>
+<ellipse id="brainOv" class="nn-jaund" cx="830" cy="348" rx="80" ry="60" opacity="0"/>
 <g id="endoBBB"></g>
+<g id="alb"></g>
 <g id="exchG" opacity="0">
-<path class="nn-exch" d="M70 396 h70 M126 386 l14 10 l-14 10"/>
-<path class="nn-exch2" d="M210 396 h-70 M154 386 l-14 10 l14 10"/>
+<path class="nn-exch" d="M70 388 h70 M126 378 l14 10 l-14 10"/>
+<path class="nn-exch2" d="M210 400 h-70 M154 390 l-14 10 l14 10"/>
 </g>
 <g id="parts"></g>
 <g id="over"></g>
@@ -100,7 +92,7 @@ buildScene({
   id: "neonatal-jaundice", fig: "Fig 1", title: "Neonatal jaundice: bilirubin production, conjugation and brain risk", W, H, body,
   label: "An animated newborn bilirubin pathway. Red cell turnover releases unconjugated bilirubin. The immature liver conjugates only part of it for excretion in the gut. The rest travels in blood on albumin, yellows the skin, and when free bilirubin is high it can cross the blood brain barrier into the brain. Gauges show breakdown, bilirubin, brain entry and excretion. Treatment choices include feeding and monitoring, phototherapy and exchange transfusion.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "nnjaund.page.js"), "utf8"), modelOf, MD, tests: TESTS,
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "nnjaund.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
   withoutLabel: "Feed and monitor", withLabel: "Exchange transfusion",
   sourcesLis: [
     "<strong>Why newborns become jaundiced.</strong> Newborn red cells turn over quickly and the newborn liver has immature conjugation (low UGT activity), so unconjugated bilirubin accumulates. Prematurity makes both worse. Breast milk can increase enterohepatic reabsorption and reduce conjugation, prolonging physiological jaundice. This is standard teaching in paediatrics and neonatology texts and was not checked against a linked source here, so it is flagged for review.",
@@ -111,19 +103,18 @@ buildScene({
   extraCss: `
 body{--c-bili:#e8c832;--c-conj:#2ec4a6;--c-liver:#c25e6d;--c-brain:#e8a2c0;--c-alb:#5aa0e8;--c-skin:#f0c8a0;--c-jaund:#e8b81e}
 body[data-theme="light"]{--c-bili:#b8910a;--c-conj:#0f8f76;--c-liver:#b04a5a;--c-brain:#d478a8;--c-alb:#2f6fc2;--c-skin:#e8b88a;--c-jaund:#c9960a}
-.p-bili{--cc:var(--c-bili)}.p-conj{--cc:var(--c-conj)}.p-alb{--cc:var(--c-alb)}.p-ent{--cc:#e8843a}
-.nn-liver{fill:var(--c-liver);stroke:color-mix(in srgb,var(--c-liver) 55%,#000);stroke-width:1}
-.nn-liver-hl{fill:color-mix(in srgb,var(--c-liver) 45%,#fff);opacity:.5}
-.nn-gut{fill:none;stroke:var(--c-conj);stroke-width:18;stroke-linecap:round;opacity:.75}
-.nn-gut-end{fill:var(--c-conj)}
-.nn-skin{fill:var(--c-skin);stroke:color-mix(in srgb,var(--c-skin) 55%,#000);stroke-width:.9}
-.nn-jaund{fill:var(--c-jaund)}
-.nn-brain{fill:var(--c-brain);stroke:color-mix(in srgb,var(--c-brain) 55%,#000);stroke-width:1}
-.nn-brain-line{fill:none;stroke:color-mix(in srgb,var(--c-brain) 45%,#000);stroke-width:1.4;opacity:.6}
+.p-bili{--cc:var(--c-bili)}.p-conj{--cc:var(--c-conj)}.p-alb{--cc:var(--c-alb)}.p-ent{--cc:#e8843a}.p-light{--cc:#7ec8f0}
+.nn-ves{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 42%,var(--anatomy-paper));stroke-width:14;stroke-linecap:round;opacity:.8}
+.nn-bile{fill:none;stroke:var(--c-conj);stroke-width:8;stroke-linecap:round;opacity:.7}
 .nn-bbb{stroke:var(--c-bad);stroke-width:3;stroke-dasharray:7 5;fill:none}
 .nn-lamp{fill:var(--c-alb);stroke:color-mix(in srgb,var(--c-alb) 55%,#000)}
-.nn-ray{stroke:var(--c-alb);stroke-width:2.4;fill:none;opacity:.8}
+.nn-ray{stroke:var(--c-alb);stroke-width:2.4;fill:none}
+.nn-cone{fill:color-mix(in srgb,var(--c-alb) 32%,transparent);stroke:none}
+.nn-photoglow{fill:color-mix(in srgb,var(--c-alb) 42%,transparent);stroke:none}
+.nn-jaund{fill:var(--c-jaund)}
+.nn-clean{fill:color-mix(in srgb,var(--c-conj) 38%,transparent);stroke:none}
 .nn-exch{stroke:var(--c-bad);stroke-width:2.4;fill:none}.nn-exch2{stroke:var(--c-good);stroke-width:2.4;fill:none}
+.nn-cap{fill:var(--anatomy-strong);font-size:12px}
 .dr-g-fill.g-bili{fill:var(--c-bili)}.dr-g-fill.g-brain{fill:var(--c-bad)}.dr-g-fill.g-conj{fill:var(--c-conj)}.dr-g-fill.g-prod{fill:var(--c-rbc)}
 .cl-ugt{--cc:var(--c-conj)}
 `,

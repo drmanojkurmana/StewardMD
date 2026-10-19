@@ -8,7 +8,7 @@
   --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
   --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
   --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
-  --anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
 }
 .iso[data-theme="light"]{
@@ -199,6 +199,9 @@ body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px
 .bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
 .bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
 @media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
 body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
 body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
 .t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
@@ -276,11 +279,29 @@ body[data-theme="light"] {
   --c-bone: #d97706;
 }
 
-.pt-thyroid {
-  fill: color-mix(in srgb, var(--c-endo) 30%, var(--anatomy-paper));
-  stroke: color-mix(in srgb, var(--c-endo) 70%, var(--anatomy-mid));
+.cp-ves {
+  fill: none;
+  stroke: color-mix(in srgb, var(--c-rbc) 42%, var(--anatomy-paper));
+  stroke-width: 12;
+  stroke-linecap: round;
+  opacity: 0.85;
+}
+.cp-pool {
+  fill: color-mix(in srgb, var(--c-rbc) 16%, var(--anatomy-paper));
+  stroke: color-mix(in srgb, var(--c-rbc) 50%, var(--anatomy-mid));
   stroke-width: 1.4;
 }
+.w-gut { fill: var(--c-vitd); stroke: none; }
+.w-kid { fill: var(--c-fl); stroke: none; }
+.w-bone { fill: var(--c-good); stroke: none; }
+.w-gland { fill: var(--c-pth); stroke: none; }
+.w-blood { fill: var(--c-ca); stroke: none; }
+.cp-cap { fill: var(--anatomy-strong); font: 12px var(--anatomy-mono); }
+.cp-badge { font: 600 12px var(--anatomy-mono); }
+.cp-badge-bad { fill: var(--c-bad); }
+.cp-badge-warn { fill: var(--c-neut); }
+.cp-badge-ok { fill: var(--anatomy-strong); }
+
 .pt-gland {
   fill: var(--c-pth);
   stroke: color-mix(in srgb, var(--c-pth) 60%, #000);
@@ -350,53 +371,10 @@ body[data-theme="light"] {
   stroke-width: 0.6;
 }
 
-.pt-kidney {
-  fill: color-mix(in srgb, var(--c-rbc) 25%, var(--anatomy-paper));
-  stroke: color-mix(in srgb, var(--c-rbc) 60%, var(--anatomy-mid));
-  stroke-width: 1.5;
-}
-.pt-calyx {
-  fill: none;
-  stroke: color-mix(in srgb, var(--c-fl) 50%, var(--anatomy-mid));
-  stroke-width: 1.5;
-}
-.pt-ureter {
-  fill: none;
-  stroke: color-mix(in srgb, var(--c-fl) 40%, var(--anatomy-mid));
-  stroke-width: 3.5;
-}
-.pt-cyp-node {
-  fill: var(--c-vitd);
-  stroke: color-mix(in srgb, var(--c-vitd) 60%, #000);
-  stroke-width: 0.8;
-}
-.pt-dt-node {
-  fill: var(--c-ca);
-  stroke: color-mix(in srgb, var(--c-ca) 60%, #000);
-  stroke-width: 0.8;
-}
 .pt-stone {
   fill: #fde047;
   stroke: #ca8a04;
   stroke-width: 1.2;
-}
-.pt-stone-text {
-  fill: var(--c-bad);
-  font: 700 9.5px var(--anatomy-mono);
-  paint-order: stroke;
-  stroke: var(--anatomy-paper);
-  stroke-width: 2px;
-}
-
-.pt-gut {
-  fill: color-mix(in srgb, var(--c-graft) 22%, var(--anatomy-paper));
-  stroke: color-mix(in srgb, var(--c-graft) 60%, var(--anatomy-mid));
-  stroke-width: 1.5;
-}
-.pt-villi {
-  fill: none;
-  stroke: color-mix(in srgb, var(--c-graft) 70%, var(--anatomy-mid));
-  stroke-width: 1.8;
 }
 .pt-gut-arr {
   fill: none;
@@ -431,38 +409,6 @@ body[data-theme="light"] {
   stroke-width: 2;
   stroke-linecap: round;
 }
-.nm-badge {
-  font: 600 10.5px var(--anatomy-mono);
-}
-.nm-badge-bad { fill: var(--c-bad); }
-.nm-badge-warn { fill: var(--c-neut); }
-.nm-badge-ok { fill: var(--anatomy-strong); }
-
-.pt-vessel-bg {
-  fill: none;
-  stroke: var(--anatomy-mid);
-  stroke-width: 1;
-  stroke-dasharray: 3 5;
-  opacity: 0.45;
-}
-.pt-vessel-path {
-  fill: none;
-  stroke: color-mix(in srgb, var(--c-rbc) 22%, var(--anatomy-paper));
-  stroke-width: 14;
-  stroke-linecap: round;
-}
-.pt-vessel-core {
-  fill: none;
-  stroke: color-mix(in srgb, var(--c-rbc) 45%, var(--anatomy-paper));
-  stroke-width: 10;
-  stroke-linecap: round;
-}
-.pt-feed-line {
-  fill: none;
-  stroke: var(--c-ca);
-  stroke-width: 1.4;
-  stroke-dasharray: 4 4;
-}
 
 .p-pth { fill: var(--c-pth); stroke: color-mix(in srgb, var(--c-pth) 50%, #000); stroke-width: 0.5; }
 .p-ca { fill: var(--c-ca); stroke: color-mix(in srgb, var(--c-ca) 50%, #000); stroke-width: 0.5; }
@@ -472,89 +418,54 @@ body[data-theme="light"] {
 .p-tx-fl { fill: var(--c-fl); }
 .p-tx-bisp { fill: var(--c-good); stroke: color-mix(in srgb, var(--c-good) 50%, #000); stroke-width: 0.6; }
 .p-tx-cmim { fill: var(--c-bad); stroke: color-mix(in srgb, var(--c-bad) 50%, #000); stroke-width: 0.6; }
-</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Calcium and parathyroid hormone homeostasis</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>calcium normal · parathyroid hormone normal · clinical state stable tone</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated calcium and parathyroid hormone homeostasis loop showing the parathyroid glands, bone, kidneys, gut, and neuromuscular junction. Parathyroid glands release PTH when calcium drops; PTH stimulates osteoclasts to break down bone mineral, tells kidneys to save calcium and activate vitamin D, and active vitamin D drives gut calcium absorption. Circulating calcium feeds back negatively on parathyroid calcium-sensing receptors. A level slider shifts between hypoparathyroidism, vitamin D deficiency, healthy homeostasis, primary hyperparathyroidism, and severe hypercalcaemic crisis. Gauges show PTH, serum calcium, serum phosphate, active vitamin D, bone resorption, and gut absorption. Treatment options include calcium with calcitriol, intravenous fluids, bisphosphonates, calcimimetics, and parathyroidectomy."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Calcium and parathyroid hormone homeostasis</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>calcium normal · parathyroid hormone normal · clinical state stable tone</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated calcium and parathyroid hormone loop. The parathyroid glands release PTH when calcium drops. PTH tells bone eating cells to release calcium, tells the kidney to save calcium and switch on vitamin D, and vitamin D tells the gut to absorb calcium. Blood calcium feeds back on the gland sensor. Low calcium makes muscle twitch and cramp, high calcium makes it weak. A slider moves from parathyroid failure through balanced control to adenoma and crisis, and each treatment visibly acts on its target."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
 <rect class="sc-tissue" x="14" y="44" width="932" height="396" rx="18"/>
-
-<!-- Vascular channels and flow tracks -->
-<g id="tracks">
-  <!-- Central vascular loop -->
-  <path class="pt-vessel-path" d="M210,165 C260,195 380,240 480,245 C580,240 680,195 730,165"/>
-  <path class="pt-vessel-path" d="M210,335 C260,310 380,260 480,255 C580,260 680,310 730,335"/>
-  <path class="pt-vessel-path" d="M480,140 V255"/>
-
-  <path class="pt-vessel-core" d="M210,165 C260,195 380,240 480,245 C580,240 680,195 730,165"/>
-  <path class="pt-vessel-core" d="M210,335 C260,310 380,260 480,255 C580,260 680,310 730,335"/>
-  <path class="pt-vessel-core" d="M480,140 V255"/>
-
-  <!-- Endocrine and feedback pathways -->
-  <path class="pt-vessel-bg" d="M165,140 C290,112 520,102 745,126"/>
-  <path class="pt-vessel-bg" d="M155,175 C150,235 165,295 165,295"/>
-  <path class="pt-vessel-bg" d="M215,345 C380,360 580,360 735,345"/>
-  <path class="pt-feed-line" d="M430,240 C330,210 230,180 185,160"/>
+<path id="vBone" class="cp-ves" d="M150 130 C300 92 550 92 730 128"/>
+<path id="vKid" class="cp-ves" d="M138 186 C130 225 132 250 140 272"/>
+<path id="vVitD" class="cp-ves" d="M225 360 C400 380 600 380 712 358"/>
+<path id="vBCa" class="cp-ves" d="M730 165 C660 208 560 238 512 248"/>
+<path id="vGCa" class="cp-ves" d="M712 322 C640 292 560 265 512 255"/>
+<path id="vFb" class="cp-ves" d="M430 238 C330 212 230 188 188 172"/>
+<path id="vCaM" class="cp-ves" d="M480 202 L480 142"/>
+<path id="vCaK" class="cp-ves" d="M430 268 C340 290 250 305 212 318"/>
+<ellipse id="bloodPool" class="cp-pool" cx="480" cy="250" rx="72" ry="48"/>
+<g id="thySlot"></g>
+<g id="kidSlot"></g>
+<g id="gutSlot"></g>
+<g id="glands">
+  <circle id="pt-gland-a" class="pt-gland" cx="124" cy="142" r="4.5"/>
+  <circle id="pt-gland-b" class="pt-gland" cx="128" cy="180" r="4.5"/>
+  <circle id="pt-gland-c" class="pt-gland" cx="176" cy="142" r="4.5"/>
+  <g id="pt-adenoma" transform="translate(174 180)">
+    <circle class="pt-gland-adenoma" cx="0" cy="0" r="5"/>
+    <circle id="pt-adenoma-glow" class="pt-adenoma-glow" cx="0" cy="0" r="12" opacity="0"/>
+  </g>
+  <g id="pt-scars" opacity="0">
+    <path d="M120 138L128 146M128 138L120 146M124 176L132 184M132 176L124 184M172 138L180 146M180 138L172 146M170 176L178 184M178 176L170 184" class="pt-scar-mark"/>
+  </g>
+  <path id="pt-casr" class="pt-casr" d="M192 162 C201 167 204 177 196 184" opacity="0.4"/>
+  <circle id="pt-casr-dot" class="pt-casr-dot" cx="199" cy="172" r="2.5"/>
+  <ellipse id="ptx-cut" class="pt-ptx-ring" cx="174" cy="180" rx="15" ry="15" opacity="0"/>
 </g>
-
-<!-- Organs and structural units -->
-<g id="organs">
-  <!-- Top Left: Thyroid and Parathyroid glands -->
-  <g id="thyroid-group">
-    <path class="pt-thyroid" d="M115,105 C95,120 90,165 110,185 C125,200 135,185 140,165 C145,150 155,150 160,165 C165,185 175,200 190,185 C210,165 205,120 185,105 C170,120 165,140 150,140 C135,140 130,120 115,105 Z"/>
-    <g id="pt-glands">
-      <circle id="pt-gland-ul" class="pt-gland" cx="112" cy="125" r="5"/>
-      <circle id="pt-gland-ll" class="pt-gland" cx="118" cy="170" r="5"/>
-      <circle id="pt-gland-ur" class="pt-gland" cx="188" cy="125" r="5"/>
-      <g id="pt-adenoma" transform="translate(182 170)">
-        <circle class="pt-gland-adenoma" cx="0" cy="0" r="5"/>
-        <circle id="pt-adenoma-glow" class="pt-adenoma-glow" cx="0" cy="0" r="12" opacity="0"/>
-      </g>
-    </g>
-    <g id="pt-scars" opacity="0">
-      <path d="M107 120L117 130M117 120L107 130M113 165L123 175M123 165L113 175M183 120L193 130M193 120L183 130M177 165L187 175M187 165L177 175" class="pt-scar-mark"/>
-    </g>
-    <!-- CaSR receptor site -->
-    <path id="pt-casr" class="pt-casr" d="M196 160C205 165 208 175 200 182" opacity="0.4"/>
-    <circle class="pt-casr-dot" cx="202" cy="170" r="2.5"/>
-    <ellipse id="ptx-cut" class="pt-ptx-ring" cx="182" cy="170" rx="16" ry="16" opacity="0"/>
+<g id="bone-group">
+  <path class="pt-bone" d="M720,95 H875 C885,95 890,100 890,110 V180 C890,190 885,195 875,195 H720 C710,195 705,190 705,180 V110 C705,100 710,95 720,95 Z"/>
+  <path class="pt-trab" d="M735,115 Q760,140 780,115 T830,115 T870,135 M745,170 Q775,145 805,170 T860,170"/>
+  <path id="bone-lacuna" class="pt-lacuna" d="M740 115Q726 145 740 175"/>
+  <g id="osteoclast" transform="translate(742 145)">
+    <path class="pt-ruffle" d="M-6 -18Q-10 -12 -6 -6Q-11 0 -6 6Q-10 12 -6 18"/>
+    <path class="pt-oclast-body" d="M-6 -18C15 -18 25 -10 25 0C25 10 15 18 -6 18Z"/>
+    <circle cx="6" cy="-8" r="3" class="cl-n"/>
+    <circle cx="12" cy="0" r="3.2" class="cl-n"/>
+    <circle cx="6" cy="8" r="3" class="cl-n"/>
   </g>
-
-  <!-- Top Right: Bone and Osteoclasts -->
-  <g id="bone-group">
-    <path class="pt-bone" d="M720,95 H875 C885,95 890,100 890,110 V180 C890,190 885,195 875,195 H720 C710,195 705,190 705,180 V110 C705,100 710,95 720,95 Z"/>
-    <path class="pt-trab" d="M735,115 Q760,140 780,115 T830,115 T870,135 M745,170 Q775,145 805,170 T860,170"/>
-    <path id="bone-lacuna" class="pt-lacuna" d="M740 115Q726 145 740 175"/>
-    <g id="osteoclast" transform="translate(742 145)">
-      <path class="pt-ruffle" d="M-6 -18Q-10 -12 -6 -6Q-11 0 -6 6Q-10 12 -6 18"/>
-      <path class="pt-oclast-body" d="M-6 -18C15 -18 25 -10 25 0C25 10 15 18 -6 18Z"/>
-      <circle cx="6" cy="-8" r="3" class="cl-n"/>
-      <circle cx="12" cy="0" r="3.2" class="cl-n"/>
-      <circle cx="6" cy="8" r="3" class="cl-n"/>
-    </g>
-    <g id="bisp-coat" opacity="0">
-      <path d="M738 122L742 125L738 128L734 125ZM732 138L736 141L732 144L728 141ZM731 152L735 155L731 158L727 155ZM738 166L742 169L738 172L734 169Z" class="pt-bisp-crystal"/>
-    </g>
-  </g>
-
-  <!-- Bottom Left: Kidney and Nephron Unit -->
-  <g id="kidney-group">
-    <path class="pt-kidney" d="M125,285 C100,310 100,360 125,385 C150,405 185,395 205,370 C215,355 210,345 200,335 C210,325 215,315 205,300 C185,275 150,265 125,285 Z"/>
-    <path class="pt-calyx" d="M190,320 Q160,335 190,350"/>
-    <path class="pt-ureter" d="M195,340 Q215,355 225,395"/>
-    <circle cx="180" cy="310" r="5" class="pt-cyp-node"/>
-    <circle cx="155" cy="355" r="5" class="pt-dt-node"/>
-    <polygon id="kidney-stone" class="pt-stone" points="194,340 200,336 204,342 199,348 193,346" opacity="0"/>
-    <text id="stone-badge" class="pt-stone-text" x="198" y="360" text-anchor="middle" opacity="0">stone risk</text>
-  </g>
-
-  <!-- Bottom Right: Small Intestine -->
-  <g id="gut-group">
-    <path class="pt-gut" d="M720,290 C705,310 705,360 720,380 H875 C890,360 890,310 875,290 Z"/>
-    <path class="pt-villi" d="M735,335 Q745,305 755,335 T775,335 T795,335 T815,335 T835,335 T855,335"/>
-    <g id="gut-pumps">
-      <path d="M755 315H770M765 311L771 315L765 319M755 335H770M765 331L771 335L765 339M755 355H770M765 351L771 355L765 359" class="pt-gut-arr"/>
-    </g>
+  <g id="bisp-coat" opacity="0">
+    <path d="M738 122L742 125L738 128L734 125ZM732 138L736 141L732 144L728 141ZM731 152L735 155L731 158L727 155ZM738 166L742 169L738 172L734 169Z" class="pt-bisp-crystal"/>
   </g>
 </g>
-
-<!-- Neuromuscular Junction -->
+<polygon id="kidney-stone" class="pt-stone" points="192,348 198,344 202,350 197,356 191,354" opacity="0"/>
+<g id="gut-pumps">
+  <path d="M755 315H770M765 311L771 315L765 319M755 335H770M765 331L771 335L765 339M755 355H770M765 351L771 355L765 359" class="pt-gut-arr"/>
+</g>
 <g id="nmj">
   <path class="nm-axon" d="M425 115H465"/>
   <circle class="nm-bouton" cx="468" cy="115" r="7"/>
@@ -566,27 +477,27 @@ body[data-theme="light"] {
     <line class="nm-stria" x1="48" y1="2" x2="48" y2="44"/>
     <line class="nm-stria" x1="64" y1="2" x2="64" y2="44"/>
   </g>
-  <text id="nm-badge" class="nm-badge nm-badge-ok" x="526" y="156" text-anchor="middle">stable neuromuscular tone</text>
+  <text id="nm-badge" class="cp-badge cp-badge-ok" x="526" y="158" text-anchor="middle">stable muscle tone</text>
 </g>
-
-<!-- Dynamic particles container -->
+<ellipse id="glandWash" class="w-gland" cx="150" cy="160" rx="95" ry="85" opacity="0"/>
+<rect id="boneWash" class="w-bone" x="705" y="95" width="185" height="100" rx="12" opacity="0"/>
+<ellipse id="kidWash" class="w-kid" cx="150" cy="335" rx="85" ry="80" opacity="0"/>
+<ellipse id="gutWash" class="w-gut" cx="800" cy="335" rx="95" ry="70" opacity="0"/>
+<ellipse id="bloodWash" class="w-blood" cx="480" cy="250" rx="72" ry="48" opacity="0"/>
 <g id="particles"></g>
-
-<!-- Labels and overlays -->
-<g id="labels"></g>
 <g id="over"></g>
 <g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Hormone flow, ion speeds, and gauge levels are qualitative and illustrative; no doses, lab reference ranges, or numeric thresholds are shown or implied.</span></figcaption></figure>
 <div class="dr-controls">
   <label class="dr-range"><span>Calcium and parathyroid state</span><input id="level" type="range" min="0" max="4" step="1" value="2" aria-valuetext="healthy homeostasis (calcium balanced)"><span class="dr-ticks"><i>hypoparathyroid</i><i>vit D deficient</i><i>balanced</i><i>primary hyperPTH</i><i>severe crisis</i></span></label>
-  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">calcium and active vitamin D (replace)</option><option value="2">intravenous fluids (expand and excrete)</option><option value="3">bisphosphonate (block bone resorption)</option><option value="4">calcimimetic (sensitize the calcium sensor)</option><option value="5">parathyroidectomy (remove overactive tissue)</option></select></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With parathyroidectomy"><option value="0">no treatment</option><option value="1">calcium and active vitamin D (replace)</option><option value="2">intravenous fluids (expand and excrete)</option><option value="3">bisphosphonate (block bone resorption)</option><option value="4">calcimimetic (sensitize the calcium sensor)</option><option value="5">parathyroidectomy (remove overactive tissue)</option></select></label>
   <button id="pause" type="button" aria-pressed="false">Pause motion</button>
 </div>
 <p id="status" class="dr-status" aria-live="polite"></p>
 <p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
 <h2>What the figure shows, and how sure we are</h2>
-<ul><li><strong>Calcium and PTH physiology.</strong> Extracellular calcium concentration is sensed by the G-protein-coupled calcium-sensing receptor (CaSR) on parathyroid chief cells. When calcium falls, CaSR inhibition is relieved, triggering secretion of parathyroid hormone (PTH). PTH acts directly on the bone (stimulating osteoclasts to resorb bone mineral, releasing calcium and phosphate) and the kidney (enhancing distal tubular calcium reabsorption and proximal tubular phosphate excretion, while stimulating 1-alpha-hydroxylase to convert 25-hydroxyvitamin D to active 1,25-dihydroxyvitamin D / calcitriol). Calcitriol in turn drives active intestinal absorption of dietary calcium and phosphate, and feeds back to suppress PTH synthesis. This is standard teaching in endocrinology and physiology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Hypo- versus hyperparathyroidism and calcium states.</strong> In hypoparathyroidism (often post-surgical or autoimmune), lack of PTH causes hypocalcaemia, hyperphosphataemia, low calcitriol, and neuromuscular irritability (tetany, carpopedal spasm, Chvostek and Trousseau signs). In secondary hyperparathyroidism (vitamin D deficiency or chronic renal failure), hypocalcaemia elicits a compensatory surge in PTH, causing bone demineralization (rickets or osteomalacia). In primary hyperparathyroidism (usually a benign solitary adenoma), autonomous PTH drives hypercalcaemia, hypophosphataemia, hypercalciuria (nephrolithiasis / kidney stones), and bone resorption ('bones, stones, abdominal groans, and psychic moans'). Flagged for review.</li><li><strong>Conceptual treatments shown.</strong> Calcium and active vitamin D (calcitriol) to treat hypocalcaemia; volume expansion with intravenous saline to promote calciuresis in hypercalcaemia; bisphosphonates to inhibit osteoclasts and halt bone breakdown; calcimimetics (such as cinacalcet) to allosterically stimulate parathyroid CaSRs and turn down PTH; and surgical parathyroidectomy to excise the adenoma. These are teaching toggles only, with no doses or drug regimens.</li></ul>
-<p><strong>What was simplified.</strong> Calcitonin from thyroid C cells, fibroblast growth factor 23 (FGF23) and klotho phosphate regulation, calcium-albumin binding and ionized calcium formulas, tertiary hyperparathyroidism, familial hypocalciuric hypercalcaemia (FHH), hungry bone syndrome after parathyroidectomy, electrocardiographic changes (QT interval changes), and all numeric doses and lab thresholds are omitted. Particle counts, speeds, and gauge levels are illustrative, and the figure does not say how any patient should be treated.</p>
-<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<ul><li><strong>Calcium and PTH physiology.</strong> Extracellular calcium is sensed by the calcium sensing receptor on parathyroid chief cells. When calcium falls, the gland releases parathyroid hormone (PTH). PTH stimulates osteoclasts to resorb bone, tells the kidney to reclaim calcium and waste phosphate while switching on active vitamin D, and active vitamin D drives gut calcium uptake. Calcium and vitamin D feed back to quiet the gland. This is standard teaching in endocrinology and physiology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Low versus high calcium states.</strong> In hypoparathyroidism the failed glands make too little PTH, so calcium falls and phosphate rises, and nerves and muscle become excitable with cramps and spasms. In vitamin D deficiency the glands work overtime to compensate. In primary hyperparathyroidism, usually a small benign adenoma, autonomous PTH drives calcium high with stones, bone loss, weakness and fatigue. Flagged for review.</li><li><strong>Conceptual treatments shown.</strong> Calcium with active vitamin D to top up low calcium, saline fluids to help the kidney flush out high calcium, bisphosphonates to coat bone and quiet osteoclasts, calcimimetics to sensitize the gland sensor so less PTH is released, and parathyroidectomy to remove the overactive tissue. These are teaching toggles only, with no doses or drug regimens.</li><li><strong>Organ art.</strong> Organ art is NIH BioArt Source, public domain.</li></ul>
+<p><strong>What was simplified.</strong> Calcitonin, phosphate hormones, calcium binding in blood, familial and tertiary forms, hungry bone after surgery, heart trace changes, and all numeric doses and lab thresholds are omitted. Particle counts, speeds, and gauge levels are illustrative, and the figure does not say how any patient should be treated.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). Organ illustrations are NIH BioArt Source (public domain); all other drawing is original.</p>
 <p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
 </footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Calcium and parathyroid state","a":[0,1,2,3,4],"names":["hypoparathyroidism (parathyroid failure)","vitamin D deficiency (secondary response)","healthy homeostasis (calcium balanced)","primary hyperparathyroidism (adenoma)","severe hypercalcaemic crisis"],"ticks":["hypoparathyroid","vit D deficient","balanced","primary hyperPTH","severe crisis"],"start":2},"settings":[{"label":"no treatment"},{"label":"calcium and active vitamin D (replace)"},{"label":"intravenous fluids (expand and excrete)"},{"label":"bisphosphonate (block bone resorption)"},{"label":"calcimimetic (sensitize the calcium sensor)"},{"label":"parathyroidectomy (remove overactive tissue)"}],"drugNames":["no treatment","calcium and active vitamin D","intravenous fluids","a bisphosphonate","a calcimimetic","parathyroidectomy"],"status":"State: {level} · {drug} ·"}};
 const modelOf = function modelOf(S, level, drug) {
@@ -597,7 +508,7 @@ const modelOf = function modelOf(S, level, drug) {
   const dCmim   = drug === 4 ? 1 : 0;
   const dPtx    = drug === 5 ? 1 : 0;
 
-  // Autonomous or physiological drive of the parathyroid gland
+  // Autonomous or physiological drive of the parathyroid glands
   let pthDrive = 0.5;
   if (level === 0) pthDrive = 0.08;
   else if (level === 1) pthDrive = 0.88;
@@ -605,16 +516,22 @@ const modelOf = function modelOf(S, level, drug) {
   else if (level === 3) pthDrive = 0.9;
   else if (level === 4) pthDrive = 1.0;
 
-  // Interventions acting directly on the parathyroid gland
-  if (dPtx && (level === 3 || level === 4)) pthDrive = 0.42;
+  // Replacement restores feedback in vitamin D deficiency
+  if (dCalVit && level === 1) pthDrive = 0.48;
+  // Calcimimetics sensitize the sensor wherever glands still function
+  if (dCmim && level === 1) pthDrive = 0.6;
+  else if (dCmim && level === 2) pthDrive = 0.28;
   else if (dCmim && (level === 3 || level === 4)) pthDrive = 0.45;
-  else if (dCalVit && level === 1) pthDrive = 0.48; // negative feedback restored
+  // Surgery removes overactive tissue, and drops PTH wherever glands function
+  if (dPtx && level === 1) pthDrive = 0.55;
+  else if (dPtx && level === 2) pthDrive = 0.28;
+  else if (dPtx && (level === 3 || level === 4)) pthDrive = 0.42;
 
   // Bone resorption driven by PTH, inhibited by bisphosphonate
   let boneResorp = cl(0.1 + 0.85 * pthDrive);
   if (dBisp) boneResorp = cl(boneResorp * 0.38);
 
-  // Active Vitamin D (calcitriol synthesized by renal 1-alpha-hydroxylase)
+  // Active Vitamin D (calcitriol made by renal 1-alpha-hydroxylase)
   let vitD = cl(0.08 + 0.85 * pthDrive);
   if (level === 1 && !dCalVit) vitD = 0.15; // primary defect is lack of precursor or calcitriol
   if (dCalVit) vitD = cl(vitD + 0.55);
@@ -622,19 +539,19 @@ const modelOf = function modelOf(S, level, drug) {
   // Gut calcium absorption (dependent on active vitamin D)
   let gutAbs = cl(0.12 + 0.8 * vitD);
 
-  // Serum ionized / total calcium
+  // Serum calcium
   let ca = 0.5;
   if (level === 0) {
     ca = cl(0.18 + (dCalVit ? 0.35 : 0) - (dFluids ? 0.06 : 0) - (dBisp ? 0.06 : 0));
   } else if (level === 1) {
-    ca = cl(0.38 + (dCalVit ? 0.14 : 0) - (dFluids ? 0.08 : 0) - (dBisp ? 0.12 : 0));
+    ca = cl(0.38 + (dCalVit ? 0.14 : 0) - (dFluids ? 0.08 : 0) - (dBisp ? 0.12 : 0) - (dCmim ? 0.04 : 0) - (dPtx ? 0.05 : 0));
   } else if (level === 2) {
-    ca = cl(0.5 + (dCalVit ? 0.25 : 0) - (dFluids ? 0.1 : 0) - (dBisp ? 0.12 : 0));
+    ca = cl(0.5 + (dCalVit ? 0.25 : 0) - (dFluids ? 0.1 : 0) - (dBisp ? 0.12 : 0) - (dCmim ? 0.12 : 0) - (dPtx ? 0.12 : 0));
   } else if (level === 3) {
-    const red = (dFluids ? 0.15 : 0) + (dBisp ? 0.28 : 0) + (dCmim ? 0.36 : 0) + (dPtx ? 0.38 : 0);
+    const red = (dFluids ? 0.2 : 0) + (dBisp ? 0.28 : 0) + (dCmim ? 0.36 : 0) + (dPtx ? 0.38 : 0);
     ca = cl(0.86 - red + (dCalVit ? 0.12 : 0));
   } else if (level === 4) {
-    const red = (dFluids ? 0.2 : 0) + (dBisp ? 0.32 : 0) + (dCmim ? 0.38 : 0) + (dPtx ? 0.42 : 0);
+    const red = (dFluids ? 0.3 : 0) + (dBisp ? 0.32 : 0) + (dCmim ? 0.38 : 0) + (dPtx ? 0.42 : 0);
     ca = cl(0.98 - red + (dCalVit ? 0.05 : 0));
   }
 
@@ -758,50 +675,356 @@ function run(scn) {
   start();
 }
 
-/* Calcium and parathyroid hormone homeostasis scene:
- * Parathyroid CaSR sensing, PTH endocrine drive, bone resorption, renal calcium conservation,
- * proximal tubule vitamin D activation, intestinal absorption, neuromuscular excitability,
- * and conceptual therapies. */
-const L = {
-  tracks: $("tracks"),
-  organs: $("organs"),
-  nmj: $("nmj"),
+/* Shared organ art for the animated mechanism scenes. Plain globals, ES2015, no imports.
+ * Inlined after bio.lib.js when buildScene gets organs:true, so mk/f1/clamp below are the shared ones.
+ * organ(parent, kind, x, y, w, opts) draws real anatomy art (NIH BioArt Source, public domain,
+ * injected as _ORG_ART by buildScene for the kinds the page uses) centred on x,y and w px wide,
+ * and falls back to the existing procedural layered silhouette for kinds without art
+ * (bladder, uterus, thyroid). Art ports are fractions of the art viewBox (see _ORG_FRAC).
+ * opts: { h (px height, else proportional), flip (mirror left/right), cls (extra class), id,
+ *   tint (a CSS colour with opacity, overlaid as an organ-shaped mask for disease states),
+ *   dim (dull the art) }.
+ * Returns { g, kind, x, y, w, h, ports, art } with absolute SVG coords; ports.in/out always exist.
+ * Art keeps its own colours (a faint contrast halo keeps it readable in dark and light themes);
+ * procedural fill is a vertical gradient whose stops derive from --cc (a theme aware palette var,
+ * so dark and light both work); edge stroke and landmark lines use color-mix detail classes.
+ * Emits no text, so label font and dash rules are inherited from the calling scene. */
+if (!document.getElementById("orgCss")) { var _orgSt = document.createElement("style"); _orgSt.id = "orgCss";
+  _orgSt.textContent = ".org-halo{filter:drop-shadow(0 0 1px rgba(0,0,0,.65)) drop-shadow(0 0 1px rgba(255,255,255,.45))}"
+  + ".org-b{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1.2;stroke-linejoin:round;stroke-linecap:round}"
+  + ".org-d{fill:none;stroke:color-mix(in srgb,var(--cc) 40%,var(--anatomy-hi));stroke-width:1;stroke-linecap:round;opacity:.8}"
+  + ".org-dk{fill:none;stroke:color-mix(in srgb,var(--cc) 62%,#000);stroke-width:1.1;stroke-linecap:round;opacity:.8}"
+  + ".org-f{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1;stroke-linejoin:round}"
+  + ".org-v{fill:none;stroke-linecap:round}"
+  + ".org-liver{--cc:var(--c-rbc)}.org-heart{--cc:var(--c-rbc)}.org-kidney{--cc:var(--c-eos)}.org-lung{--cc:var(--c-endo)}"
+  + ".org-stomach{--cc:var(--c-graft)}.org-brain{--cc:var(--c-mac)}.org-pancreas{--cc:var(--c-plt)}.org-spleen{--cc:var(--c-sm)}"
+  + ".org-bladder{--cc:var(--c-th2)}.org-uterus{--cc:var(--c-endo)}.org-thyroid{--cc:var(--c-neut)}.org-eye{--cc:#e6e1d4}";
+  document.head.appendChild(_orgSt); }
+var _orgN = 0;
+/* per instance gradients: base (light -> base -> dark of --cc) plus a white top / dark bottom shade overlay */
+function _orgDefs(g) {
+  _orgN++; var id = "og" + _orgN, hid = "oh" + _orgN;
+  var defs = mk("defs", {}, g);
+  var lg = mk("linearGradient", { id: id, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  var s0 = mk("stop", { offset: "0", "stop-color": "#999" }, lg); s0.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 55%,#fff)");
+  var s1 = mk("stop", { offset: ".55", "stop-color": "#888" }, lg); s1.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 78%,var(--anatomy-paper))");
+  var s2 = mk("stop", { offset: "1", "stop-color": "#666" }, lg); s2.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 66%,#000)");
+  var hg = mk("linearGradient", { id: hid, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  mk("stop", { offset: "0", "stop-color": "#fff", "stop-opacity": ".2" }, hg);
+  mk("stop", { offset: ".55", "stop-color": "#fff", "stop-opacity": "0" }, hg);
+  mk("stop", { offset: "1", "stop-color": "#000", "stop-opacity": ".14" }, hg);
+  return { b: "url(#" + id + ")", h: "url(#" + hid + ")" };
+}
+/* one filled silhouette plus its shade overlay, same path data so the light stays inside */
+function _ob(g, d, G) {
+  mk("path", { class: "org-b", d: d, fill: G.b, stroke: "#666" }, g);
+  mk("path", { d: d, fill: G.h, stroke: "none", "pointer-events": "none" }, g);
+}
+function _ol(g, d, cls) { return mk("path", { class: cls || "org-d", d: d, fill: "none" }, g); }
+function _of(g, d, fillCss, cc) { var e = mk("path", { class: "org-f", d: d, stroke: "#666" }, g); e.setAttribute("style", "fill:" + fillCss + ";--cc:" + cc); return e; }
+function _ov(g, d, color, wdt) { var e = mk("path", { class: "org-v", d: d, fill: "none", stroke: "#777", "stroke-width": wdt, "stroke-linecap": "round" }, g); e.setAttribute("style", "stroke:" + color); return e; }
+function _odot(g, x, y, r, fillCss) { var e = mk("circle", { cx: x, cy: y, r: r, stroke: "none" }, g); e.setAttribute("style", "fill:" + fillCss); return e; }
+
+/* liver: big right lobe, smaller left lobe, falciform notch, gallbladder, porta hepatis stubs */
+function _orgLiver(g, G) {
+  _ov(g, "M-2 46L-2 18", "var(--d-ven)", 5); _ov(g, "M7 46L5 20", "var(--d-art)", 3); _ov(g, "M-11 46L-9 20", "var(--c-bac)", 2.5);
+  _ob(g, "M-6-30C22-33 44-25 50-7C54 9 40 25 18 30C2 33-5 22-7 6C-8-8-8-22-6-30Z", G);
+  _ob(g, "M-8-27C-24-27-40-19-48-6C-51 1-45 9-35 12C-24 15-11 9-8-1C-6-10-6-20-8-27Z", G);
+  _ol(g, "M-8-29C-7-18-6-6-4 6", "org-dk");
+  _ol(g, "M-2-28C14-29 30-24 40-14");
+  _of(g, "M10 18C16 16 22 18 23 24C24 31 19 37 14 36C9 35 7 28 8 23C8 21 9 19 10 18Z", "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  return { h0: 78, ports: { in: [-2, 46], out: [12, -30], porta: [-2, 18], gall: [16, 33], lobe: [20, 0] } };
+}
+/* heart: mass with apex down left, septum, coronary groove, aorta with arch, pulmonary split, caval stubs */
+function _orgHeart(g, G) {
+  _ov(g, "M-2-18L-2-44C-2-52-10-56-20-54C-28-52-32-46-32-38", "var(--d-art)", 8);
+  _ov(g, "M-8-52L-8-59M-15-54L-16-60M-22-53L-24-59", "var(--d-art)", 2.5);
+  _ov(g, "M12-16C8-28 2-34-4-38", "var(--d-ven)", 7);
+  _ov(g, "M-4-38C-12-40-20-38-28-34", "var(--d-ven)", 4.5); _ov(g, "M-4-38C4-40 12-38 20-34", "var(--d-ven)", 4.5);
+  _ov(g, "M20-20L20-52", "var(--d-ven)", 7); _ov(g, "M18 34L18 58", "var(--d-ven)", 7);
+  _ov(g, "M-36-2L-50-6M-34 14L-48 16", "var(--d-art)", 4);
+  _ob(g, "M-4-32C24-34 42-16 40 10C38 32 12 48-20 50C-34 44-40 24-36 2C-33-18-22-31-4-32Z", G);
+  _ol(g, "M0-30C4-10 0 14-14 44", "org-dk");
+  _ol(g, "M-34 6C-18 12 6 12 38 4");
+  _ol(g, "M-6-28C-14-18-18-6-20 8");
+  return { h0: 120, ports: { in: [20, -52], out: [-32, -38], ivc: [18, 58], apex: [-20, 50], pulm: [-28, -34] } };
+}
+/* kidney: bean with hilum, cortex rim, medulla rays, pelvis funnel, ureter, artery and vein stubs */
+function _orgKidney(g, G) {
+  _ov(g, "M-12 6C-22 12-28 18-28 30C-28 50-26 70-24 90", "var(--cc)", 4.5);
+  _ov(g, "M-50-8C-40-8-30-8-22-6", "var(--d-art)", 4); _ov(g, "M-50 10C-40 10-30 8-22 6", "var(--d-ven)", 5);
+  _ob(g, "M8-58C38-58 54-32 50 2C56 32 42 60 8 60C-8 60-16 48-19 34C-26 24-26-24-19-34C-16-48-8-58 8-58Z", G);
+  _ol(g, "M8-49C32-49 45-28 42 0C46 28 34 51 8 51C-1 51-8 43-10 32C-15 24-15-24-10-32C-8-43-1-49 8-49Z");
+  _ol(g, "M-6-30L14-38M-8-10L16-12M-8 12L16 14M-6 32L14 40");
+  _ol(g, "M16-44C30-36 38-20 38 0");
+  _of(g, "M-19-14C-8-12-2-8 2-2C-2 4-8 10-18 14C-22 8-22-8-19-14Z", "color-mix(in srgb,var(--cc) 35%,#fff)", "var(--cc)");
+  return { h0: 150, ports: { in: [-50, -8], out: [-24, 90], vein: [-50, 10], pelvis: [-12, 4], cortex: [30, 0] } };
+}
+/* lung: one lung with oblique fissure, hilum bronchus splitting into lobar and segmental branches */
+function _orgLung(g, G) {
+  _ov(g, "M-58 4L-30 4", "var(--anatomy-hi)", 6);
+  _ov(g, "M-30 4C-22-6-16-16-10-26", "var(--anatomy-hi)", 4.5); _ov(g, "M-30 4C-22 14-14 24-6 34", "var(--anatomy-hi)", 4.5);
+  _ov(g, "M-18-14L-28-22M-16-16L-8-24M-14-20L-14-32M-20 16L-30 24M-16 20L-6 28M-12 26L-10 38", "var(--anatomy-hi)", 2);
+  _ov(g, "M-58-8L-34-6", "var(--d-ven)", 4); _ov(g, "M-58 14L-34 12", "var(--d-art)", 4);
+  _ob(g, "M2-60C24-56 40-32 43 8C45 38 32 60 2 62C-24 62-40 42-42 10C-44-24-20-58 2-60Z", G);
+  _ol(g, "M-40-2C-20 8 0 22 24 40", "org-dk");
+  _ol(g, "M-8-48C8-50 22-40 30-26");
+  return { h0: 130, ports: { in: [-58, 4], out: [-58, 14], art: [-58, -8], apex: [2, -60], base: [2, 62] } };
+}
+/* stomach: J shape with fundus dome, rugae, antrum sweep, pylorus ring, oesophagus and duodenum stubs */
+function _orgStomach(g, G) {
+  _of(g, "M-38-58L-22-58L-22-36L-38-36Z", "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))", "var(--cc)");
+  _ob(g, "M-38-36C-46-24-50-8-46 10C-42 30-30 46-12 50C6 54 28 46 40 32C44 27 46 23 46 18L34 14C30 22 20 30 6 32C-8 34-22 26-28 12C-33-1-31-16-26-28C-24-32-22-34-22-36Z", G);
+  _ol(g, "M-36-10C-30 6-22 20-8 28M-28-22C-22-6-12 10 4 22M-16-30C-10-14 0 2 14 12");
+  _ol(g, "M40 15C43 19 43 25 40 29M34 14C37 18 37 26 34 30", "org-dk");
+  _ol(g, "M46 16L60 22M44 28L58 32", "org-dk");
+  return { h0: 116, ports: { in: [-30, -58], out: [60, 27], fundus: [-40, -12], antrum: [24, 38], pylorus: [40, 22] } };
+}
+/* brain lateral: cerebrum with Sylvian fissure and gyri, cerebellum with folia, tapered brainstem */
+function _orgBrain(g, G) {
+  _ov(g, "M10 50L10 64", "var(--d-art)", 5);
+  _ob(g, "M-50-6C-50-32-24-42 4-40C30-38 44-28 44-8C44 10 32 24 8 28C-18 31-50 24-50-6Z", G);
+  _ol(g, "M-12 10C2 6 18 2 34-4", "org-dk");
+  _ol(g, "M-38-20C-32-10-32 2-38 12M-26-30C-20-20-20-6-26 6M-4-32C2-22 2-8-4 2M10-30C16-20 16-6 10 4M28-22C34-14 34-2 28 8");
+  _ol(g, "M-16 6L-24-4M-10 4L-12-8", "org-dk");
+  _ob(g, "M2 24L16 24L12 56L6 56Z", G);
+  _ol(g, "M2 36C6 38 12 38 16 36");
+  _ob(g, "M22 24C34 22 46 26 48 34C50 42 42 48 32 47C24 46 20 38 20 32C20 28 20 26 22 24Z", G);
+  _ol(g, "M24 32L44 32M25 37L43 37M27 42L41 42");
+  return { h0: 110, ports: { in: [10, 64], out: [4, -40], parenchyma: [-8, -6], cereb: [34, 35], frontal: [-40, -8] } };
+}
+/* pancreas: bulky head right, tapering tail left, main duct with side branches, islet dots */
+function _orgPancreas(g, G) {
+  _ob(g, "M-50-4C-32-14-8-14 14-10C32-7 46-2 49 10C51 21 40 28 26 25C8 21-20 12-50 6Z", G);
+  _ol(g, "M-46 1C-20-2 10 0 38 10", "org-dk");
+  _ol(g, "M-30-1L-34-8M-10-1L-14-9M8 0L4-8M-28 1L-32 8M-6 1L-10 8M12 2L8 10");
+  _ol(g, "M52-6C58 4 58 16 50 24");
+  _odot(g, -20, -2, 1.6, "var(--d-art)"); _odot(g, 0, 0, 1.6, "var(--d-art)"); _odot(g, 22, 6, 1.6, "var(--d-art)");
+  return { h0: 60, ports: { in: [-10, -12], out: [49, 12], head: [36, 8], tail: [-48, 1] } };
+}
+/* spleen: crescent with top notch, trabeculae, hilar artery and vein stubs below */
+function _orgSpleen(g, G) {
+  _ov(g, "M-30 52C-28 44-26 40-22 36", "var(--d-art)", 3.5); _ov(g, "M-20 54C-19 46-17 42-13 38", "var(--d-ven)", 4.5);
+  _ob(g, "M-38-30C-8-40 28-34 44-12C52 4 44 26 20 34C-4 41-34 32-44 10C-48-4-46-22-38-30Z", G);
+  _ol(g, "M-8-36C-4-33 0-33 4-36", "org-dk");
+  _ol(g, "M-30-10C-10-2 12-2 32-10M-28 8C-8 16 12 16 30 8");
+  return { h0: 96, ports: { in: [-30, 52], out: [-20, 54], hilum: [-18, 37], pulp: [0, 0] } };
+}
+/* bladder: dome with detrusor arcs, trigone, ureters in from above, urethra out below */
+function _orgBladder(g, G) {
+  _ov(g, "M-52-44C-44-34-36-26-30-18", "var(--cc)", 4); _ov(g, "M52-44C44-34 36-26 30-18", "var(--cc)", 4);
+  _ob(g, "M0-50C26-48 40-30 40-6C40 16 26 32 8 40L-8 40C-26 32-40 16-40-6C-40-30-26-48 0-50Z", G);
+  _ob(g, "M-8 40L8 40L8 64L-8 64Z", G);
+  _ol(g, "M-8 52L8 52", "org-dk");
+  _ol(g, "M-24-8L24-8L0 24Z");
+  _ol(g, "M-28-28C-12-36 12-36 28-28M-34-12C-16-22 16-22 34-12");
+  return { h0: 120, ports: { in: [-52, -44], out: [0, 64], inR: [52, -44], trigone: [0, 8], dome: [0, -48] } };
+}
+/* uterus: fundus, cavity, cervix, tubes with fimbriae, ovaries with follicles */
+function _orgUterus(g, G) {
+  _ov(g, "M-16-16C-26-17-32-19-38-23", "var(--cc)", 3.5); _ov(g, "M16-16C26-17 32-19 38-23", "var(--cc)", 3.5);
+  _ov(g, "M-38-23L-44-27M-38-23L-45-23M-38-23L-44-19M-38-23L-42-29", "var(--cc)", 1.2);
+  _ov(g, "M38-23L44-27M38-23L45-23M38-23L44-19M38-23L42-29", "var(--cc)", 1.2);
+  var eo = mk("ellipse", { class: "org-f", cx: -45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var eo2 = mk("ellipse", { class: "org-f", cx: 45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo2.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var _fol = "color-mix(in srgb,var(--c-plt) 45%,#000)";
+  _odot(g, -47, -14, 1.6, _fol); _odot(g, -43, -8, 1.6, _fol); _odot(g, -46, -4, 1.4, _fol);
+  _odot(g, 47, -14, 1.6, _fol); _odot(g, 43, -8, 1.6, _fol); _odot(g, 46, -4, 1.4, _fol);
+  _ob(g, "M-16-20C-8-26 8-26 16-20C20-2 15 20 8 32L-8 32C-15 20-20-2-16-20Z", G);
+  _of(g, "M-10-14L10-14L0 22Z", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  _ol(g, "M-11 18L11 18", "org-dk"); _ol(g, "M0 18L0 32");
+  return { h0: 100, ports: { in: [-45, -22], out: [0, 33], ovL: [-45, -10], ovR: [45, -10], fundus: [0, -24] } };
+}
+/* thyroid butterfly: two lobes, isthmus bridge, trachea rings behind, parathyroid dots */
+function _orgThyroid(g, G) {
+  _ov(g, "M-7-40L-7 40M7-40L7 40", "var(--anatomy-hi)", 2);
+  _ov(g, "M-7-28L7-28M-7-12L7-12M-7 24L7 24M-7 36L7 36", "var(--anatomy-hi)", 1.2);
+  _ob(g, "M16-32C28-30 35-16 33 4C31 22 25 32 16 32C8 32 6 20 8 2C10-14 11-28 16-32Z", G);
+  _ob(g, "M-16-32C-28-30-35-16-33 4C-31 22-25 32-16 32C-8 32-6 20-8 2C-10-14-11-28-16-32Z", G);
+  _ob(g, "M-10 6L10 6L10 16L-10 16Z", G);
+  _ol(g, "M14-20C18-10 18 6 14 20M-14-20C-18-10-18 6-14 20");
+  _odot(g, -30, 8, 2, "var(--c-plt)"); _odot(g, 30, -4, 2, "var(--c-plt)");
+  return { h0: 90, ports: { in: [16, -34], out: [0, 36], isthmus: [0, 11], lobeR: [22, 0], lobeL: [-22, 0] } };
+}
+/* eye: sclera ball with cornea bulge, iris and pupil facing left, retina arc, optic nerve stub right */
+function _orgEye(g, G) {
+  _ov(g, "M26 0L54 0", "var(--c-plt)", 8);
+  _ob(g, "M-36-4C-34-22-16-32 4-30C24-28 34-12 32 4C30 20 14 30-4 29C-22 28-36 14-36-4Z", G);
+  _of(g, "M-39 0C-39-6-35-11-30-11C-25-11-21-6-21 0C-21 6-25 11-30 11C-35 11-39 6-39 0Z", "color-mix(in srgb,var(--c-endo) 70%,var(--anatomy-paper))", "var(--c-endo)");
+  _odot(g, -30, 0, 5, "#241a12");
+  _odot(g, -32, -3.5, 1.5, "#ffffff");
+  _ol(g, "M16-15C23-5 23 7 15 17");
+  return { h0: 70, ports: { in: [-41, 0], out: [54, 0], retina: [16, 0], lens: [-20, 0] } };
+}
+/* Real-art store, filled by buildScene after this lib: _ORG_ART[kind] = { vb:[x,y,w,h],
+ * pfx:"oaxxx", body:"<inner svg markup>" }. Ports are fractions of the viewBox, measured
+ * off the slimmed art (see tools/figures/dev/svgslim.py); content fills the frame. */
+var _ORG_ART = {};
+var _ORG_FRAC = {
+  liver: { in: [.45, .95], out: [.46, .04], porta: [.45, .82], gall: [.30, .90], lobe: [.28, .45] },
+  heart: { in: [.30, .01], out: [.48, .01], aorta: [.48, .01], ivc: [.28, .90], apex: [.70, .97], pulm: [.60, .08] },
+  kidney: { in: [.04, .36], out: [.38, .97], vein: [.04, .46], pelvis: [.36, .41], cortex: [.62, .45], hilum: [.28, .41] },
+  lung: { in: [.46, .53], out: [.44, .60], art: [.44, .48], apex: [.24, .30], base: [.24, .87], trachea: [.49, .01], carina: [.49, .50], hilumL: [.42, .58], hilumR: [.56, .58], apexR: [.75, .34], baseR: [.75, .86] },
+  stomach: { in: [.42, .00], out: [.50, .95], fundus: [.38, .10], antrum: [.52, .30], pylorus: [.60, .35] },
+  intestine: { in: [.58, .38], out: [.50, .95], duodenum: [.60, .40], jejunum: [.42, .60], ileum: [.50, .72], cecum: [.60, .82], colon: [.28, .60], rectum: [.50, .92] },
+  brain: { in: [.60, .97], out: [.42, .04], parenchyma: [.42, .42], cereb: [.76, .78], frontal: [.08, .40], stem: [.60, .93], carotid: [.16, .75] },
+  pancreas: { in: [.50, .08], out: [.95, .50], head: [.85, .45], tail: [.06, .45], body: [.50, .45] },
+  spleen: { in: [.38, .78], out: [.52, .78], hilum: [.45, .72], pulp: [.50, .38] }
+};
+/* draw the injected art centred on x,y at w px wide. The art is clipped to its
+ * frame; tint overlays an organ-shaped translucent mask (the art itself, reused
+ * as a mask); dim dulls the art. Art ids are suffixed per instance so two of
+ * the same organ on one page never share gradient, clip or mask ids. */
+function _orgArt(parent, kind, x, y, w, opts, A) {
+  var vb = A.vb, vw = vb[2], vh = vb[3], cx = vb[0] + vw / 2, cy = vb[1] + vh / 2;
+  _orgN++;
+  var uid = "u" + _orgN;
+  var outer = mk("g", { class: "org org-art org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var sx = w / vw, sy = opts.h ? opts.h / vh : sx, fx = opts.flip ? -1 : 1;
+  var inner = mk("g", { transform: "translate(" + f1(-fx * cx * sx) + " " + f1(-cy * sy) + ") scale(" + (fx * sx).toFixed(4) + " " + sy.toFixed(4) + ")" }, outer);
+  var defs = mk("defs", {}, inner);
+  var cid = A.pfx + uid + "-frame";
+  var cp = mk("clipPath", { id: cid }, defs);
+  mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, cp);
+  var art = mk("g", { class: "org-halo", "clip-path": "url(#" + cid + ")" }, inner);
+  var aid = A.pfx + uid + "-art";
+  art.setAttribute("id", aid);
+  art.innerHTML = A.body.split('id="' + A.pfx + '-').join('id="' + A.pfx + uid + '-')
+    .split('url(#' + A.pfx + '-').join('url(#' + A.pfx + uid + '-')
+    .split('href="#' + A.pfx + '-').join('href="#' + A.pfx + uid + '-');
+  if (opts.dim) art.setAttribute("opacity", ".5");
+  if (opts.tint) {
+    var mid = A.pfx + uid + "-tintm";
+    var m = mk("mask", { id: mid, maskUnits: "userSpaceOnUse", x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, defs);
+    mk("use", { href: "#" + aid }, m);
+    var tg = mk("g", { "clip-path": "url(#" + cid + ")" }, inner);
+    mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh), fill: opts.tint, mask: "url(#" + mid + ")" }, tg);
+  }
+  var ports = {}, F = _ORG_FRAC[kind], k;
+  for (k in F) ports[k] = [Math.round((x + fx * (vb[0] + F[k][0] * vw - cx) * sx) * 10) / 10, Math.round((y + (vb[1] + F[k][1] * vh - cy) * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(vh * sy * 10) / 10, ports: ports, art: true };
+}
+/* dispatcher: outer g carries the theme class and gradients, inner g the local drawing scaled to w */
+function organ(parent, kind, x, y, w, opts) {
+  opts = opts || {};
+  if (_ORG_FRAC[kind] && _ORG_ART[kind]) return _orgArt(parent, kind, x, y, w, opts, _ORG_ART[kind]);
+  var outer = mk("g", { class: "org org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var G = _orgDefs(outer);
+  var inner = mk("g", {}, outer);
+  var r;
+  if (kind === "liver") r = _orgLiver(inner, G);
+  else if (kind === "heart") r = _orgHeart(inner, G);
+  else if (kind === "kidney") r = _orgKidney(inner, G);
+  else if (kind === "lung") r = _orgLung(inner, G);
+  else if (kind === "stomach") r = _orgStomach(inner, G);
+  else if (kind === "brain") r = _orgBrain(inner, G);
+  else if (kind === "pancreas") r = _orgPancreas(inner, G);
+  else if (kind === "spleen") r = _orgSpleen(inner, G);
+  else if (kind === "eye") r = _orgEye(inner, G);
+  else if (kind === "bladder") r = _orgBladder(inner, G);
+  else if (kind === "uterus") r = _orgUterus(inner, G);
+  else if (kind === "thyroid") r = _orgThyroid(inner, G);
+  else throw new Error("organ: unknown kind " + kind);
+  var sx = w / 100, sy = opts.h ? opts.h / r.h0 : sx, fx = opts.flip ? -1 : 1;
+  inner.setAttribute("transform", "scale(" + (fx * sx).toFixed(3) + " " + sy.toFixed(3) + ")");
+  var ports = {}, k;
+  for (k in r.ports) ports[k] = [Math.round((x + fx * r.ports[k][0] * sx) * 10) / 10, Math.round((y + r.ports[k][1] * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(r.h0 * sy * 10) / 10, ports: ports, art: false };
+}
+organ.kinds = ["liver", "heart", "kidney", "lung", "stomach", "intestine", "brain", "pancreas", "spleen", "bladder", "uterus", "thyroid", "eye"];
+
+_ORG_ART["kidney"]={vb:[0,0,461.7,524.4],pfx:"oakid",body:"<defs><filter id=\"oakid-luminosity-invert\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"398.2\" color-interpolation-filters=\"sRGB\" filterUnits=\"userSpaceOnUse\"><feColorMatrix result=\"cm\" values=\"-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0\" /></filter><radialGradient id=\"oakid-radial-gradient\" cx=\"203.2\" cy=\"292.9\" fx=\"203.2\" fy=\"292.9\" r=\"173\" gradientUnits=\"userSpaceOnUse\"><stop offset=\".6\" stop-color=\"#000\" /><stop offset=\".9\" stop-color=\"#fff\" /></radialGradient><mask id=\"oakid-mask\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"398.2\" maskUnits=\"userSpaceOnUse\"><g filter=\"url(#oakid-luminosity-invert)\"><path d=\"M95.9 444.9l12.9 4.4 20.1 5.2 26 4.1 14.3 .9 14.8 -.3 14.9 -1.8 52.3 -10.4 19.3 -5.4 19.2 -6.8 18.4 -8.6 17 -10.7 14.9 -13.1 12.2 -15.8 8.9 -18.8 6.5 -21.3 5.4 -22.7 4.2 -23.5 3 -23.6 1.7 -23 .4 -21.8 -1 -19.9 -2.5 -17.4 -4 -14.3 -5.6 -10.4 -13.4 -8.8 -25.3 -9.2 -34.3 -8.8 -40.4 -7.7 -43.6 -5.8 -43.8 -3.1 -41.2 .4 -35.6 4.6 -27.2 9.6 -15.8 15.4 -8.7 20.4 -7.3 23.8 -5.3 26.7 -2.8 28.9 .4 30.6 4.2 31.7 8.6 32.2 13.6 32.2 19.2 31.5Z\" fill=\"url(#oakid-radial-gradient)\" /></g></mask><clipPath id=\"oakid-clippath\"><path d=\"M461.7 225.4l-2.9 36.6 -8.4 34.7 -13.5 32.3 -18.1 29.5 -22.2 26.3 -25.9 22.5 -29.1 18.3 -31.9 13.7 -34.2 8.5 -36 2.9 -36 -2.9 -34.2 -8.5 -31.9 -13.7 -29.1 -18.3 -25.9 -22.5 -22.2 -26.3 -18.1 -29.5 -13.5 -32.3 -8.4 -34.7 -2.9 -36.6 2.7 -36.4 7.9 -34.3 12.7 -31.8 17.1 -28.9 21.1 -25.7 24.6 -22.2 27.7 -18.2 30.4 -14 32.7 -9.3 34.5 -4.3 10.6 -.2 36 2.9 34.2 8.5 31.9 13.7 29.1 18.3 25.9 22.5 22.2 26.3 18.1 29.5 13.5 32.3 8.4 34.7Z\" fill=\"none\" /></clipPath><filter id=\"oakid-luminosity-invert-2\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"395.9\" color-interpolation-filters=\"sRGB\" filterUnits=\"userSpaceOnUse\"><feColorMatrix result=\"cm\" values=\"-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0\" /></filter><mask id=\"oakid-mask-1\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"395.9\" maskUnits=\"userSpaceOnUse\"><g filter=\"url(#oakid-luminosity-invert-2)\"><path d=\"M95.9 444.9l12.9 4.4 20.1 5.2 26 4.1 14.3 .9 14.8 -.3 14.9 -1.8 52.3 -10.4 19.3 -5.4 19.2 -6.8 18.4 -8.6 17 -10.7 14.9 -13.1 12.2 -15.8 8.9 -18.8 6.5 -21.3 5.4 -22.7 4.2 -23.5 3 -23.6 1.7 -23 .4 -21.8 -1 -19.9 -2.5 -17.4 -4 -14.3 -5.6 -10.4 -13.4 -8.8 -25.3 -9.2 -34.3 -8.8 -40.4 -7.7 -43.6 -5.8 -43.8 -3.1 -41.2 .4 -35.6 4.6 -27.2 9.6 -15.8 15.4 -8.7 20.4 -7.3 23.8 -5.3 26.7 -2.8 28.9 .4 30.6 4.2 31.7 8.6 32.2 13.6 32.2 19.2 31.5Z\" fill=\"url(#oakid-radial-gradient)\" /></g></mask><clipPath id=\"oakid-clippath-1\"><path d=\"M461.7 225.4l-2.9 36.6 -8.4 34.7 -13.5 32.3 -18.1 29.5 -22.2 26.3 -25.9 22.5 -29.1 18.3 -31.9 13.7 -34.2 8.5 -36 2.9 -36 -2.9 -34.2 -8.5 -31.9 -13.7 -29.1 -18.3 -25.9 -22.5 -22.2 -26.3 -18.1 -29.5 -13.5 -32.3 -8.4 -34.7 -2.9 -36.6 2.7 -36.4 7.9 -34.3 12.7 -31.8 17.1 -28.9 21.1 -25.7 24.6 -22.2 27.7 -18.2 30.4 -14 32.7 -9.3 34.5 -4.3 10.6 -.2 36 2.9 34.2 8.5 31.9 13.7 29.1 18.3 25.9 22.5 22.2 26.3 18.1 29.5 13.5 32.3 8.4 34.7Z\" fill=\"none\" /></clipPath></defs><g mask=\"url(#oakid-mask)\"><path id=\"oakid-ureter\" d=\"M185.3 197.9l-14.2 32.3 -16.1 28.8 -10.4 20.5 -5.3 13 -3.1 13.1 -1.6 17.2 -.3 19.1 4.1 64.9 -.8 113.4 6.6 -.9 2.5 -1.8 2 -3.3 1.7 -102.5 -1.6 -42.6 .3 -25.1 2.9 -22.7 2.9 -9.4 4.1 -7.4 9.3 -10.5 8.1 -6.2 12.8 -6.8 10.4 -8.9 12.9 -13.3 12.1 -15.1 4.7 -7.4 3.3 -6.9 1.5 -6.1 -1 -5.5 -3.4 -5.3 -5.2 -4.9 -6.4 -4.3 -7.1 -3.6 -14 -4.5 -5.7 -.5 -4.2 .8Z\" stroke-miterlimit=\"10\" fill=\"#f4dca9\" stroke-width=\"8.2px\" stroke=\"#725222\" /></g><g clip-path=\"url(#oakid-clippath)\"><g><path d=\"M11.7 232.9l0 12.3 61.8-5.4 43.8-7.2 18.9 7.9 15.5 8.8 15 11.9 12.1 12.8-1-3.7-3.3-5.5-9.7-10.4-15.8-11.9-23.5-14.2 4.9-3.8 17.3-7.3 20.9-7.8 17.9-4.5 6-3.3 1.3-2.4 0-2.6-28.2 7.1 11.6-11.5 4.8-7.4 3.4-12.2.1-3.8-1.1-4.9-1.3.2-1.5 3.5-1 8.6-1.8 5.4-4.3 6.4-5.6 6-7 6-6.9 4.4-23.5 10.6-17.8 6.6-12.4 2-51.6 6.3Z\" stroke-miterlimit=\"10\" stroke-width=\"8.2px\" fill=\"#5276b6\" stroke=\"#142b4f\" /><path d=\"M5.3 206.7l91.5 -6.9 3 -.9 10.5 -7.7 5.8 -2.7 9.6 -1.7 14.9 -.3 13.1 -1.5 7.8 -3.1 6.9 -6.1 4.2 -1.6 2.9 .3 -2.1 3.1 -4 4.3 -5.7 3.4 -13.1 3.1 -30.7 3.6 -4.6 1.6 -3.3 2.3 -3.9 4.5 1.5 .4 32.6 -7.6 11.4 -4.2 14.3 -9.5 16 -15.2 3.5 -1.1 2.3 1.6 1.2 3.7 .3 10.6 -1.9 15.2 -24.1 7.2 -30.6 7.6 -9.4 3.1 -3.4 2.3 3.3 .8 12.3 .5 48 -.1 1.2 .7 .7 2.4 -2.7 6.4 -30.2 -.6 -31.8 1.1 -26.3 -3.3 -89.4 8.5 -1.4 -.8 -1.4 -4.6 -.1 -6.8Z\" stroke-miterlimit=\"10\" stroke=\"#8f2e30\" fill=\"#d85452\" stroke-width=\"8.2px\" /></g></g><path d=\"M172.2 58.6l31.8 .1 12.1 1.3 9.6 2.6 14.8 6.5 10.3 6.1 10.4 7.5 10.2 8.9 16.6 16.6 8.8 11.7 1.5 4.4 .8 10.8 8.8 14.8 11.1 24 6.5 17.6 3 13.3 3.1 25.3 .2 8.2 -1.2 8.5 1.4 4.4 .6 7.9 0 29.6 -1.2 13.8 -6.1 26.9 -5.4 7 -4.6 13.8 -7.5 15.9 -12 17.8 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -1.4 -12.1 .9 -11.8 3.2 -9.3 6.1 -11.5 1.3 -5.4 -4 -19.4 .5 -12.3 2 -6.5 6.7 -13.5 .6 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" stroke-miterlimit=\"10\" fill=\"#a95c57\" stroke=\"#632b29\" stroke-width=\"8.2px\" /><path d=\"M166.1 7.2l3 2.3 3 3.7 4.9 9.5 5.8 19.1 5.2 13.4 -.2 5.2 -11.3 16.1 -5.9 12 -3.5 12.4 -.4 10.9 -1.9 10.8 -1.9 6.3 -3.2 6.6 -5.1 3.9 -14.8 6.6 -15.8 9.6 -5.4 2 -.9 -.3 -2.7 -4.2 -4.1 -9.9 -3.7 -15.2 -1 -9.5 -.2 -10.7 .9 -11.8 2.2 -13 7.1 -26.4 9.3 -23.4 5.5 -9.8 6 -8 6.5 -6 7 -3.6 7.5 -.9Z\" stroke-miterlimit=\"10\" fill=\"#f4dca9\" stroke=\"#5a4218\" stroke-width=\"8.2px\" /><g mask=\"url(#oakid-mask-1)\"><path id=\"oakid-ureter-2\" data-name=\"ureter\" d=\"M185.3 197.9l-14.2 32.3 -16.1 28.8 -10.4 20.5 -5.3 13 -3.1 13.1 -1.6 17.2 -.3 19.1 4.1 64.9 -.8 113.4 6.6 -.9 2.5 -1.8 2 -3.3 1.7 -102.5 -1.6 -42.6 .3 -25.1 2.9 -22.7 2.9 -9.4 4.1 -7.4 9.3 -10.5 8.1 -6.2 12.8 -6.8 10.4 -8.9 12.9 -13.3 12.1 -15.1 4.7 -7.4 3.3 -6.9 1.5 -6.1 -1 -5.5 -3.4 -5.3 -5.2 -4.9 -6.4 -4.3 -7.1 -3.6 -14 -4.5 -5.7 -.5 -4.2 .8Z\" stroke-miterlimit=\"10\" stroke-width=\"3.5px\" fill=\"#f4dca9\" stroke=\"#725222\" /></g><g clip-path=\"url(#oakid-clippath-1)\"><g><path d=\"M11.7 232.9l0 12.3 61.8-5.4 43.8-7.2 18.9 7.9 15.5 8.8 15 11.9 12.1 12.8-1-3.7-3.3-5.5-9.7-10.4-15.8-11.9-23.5-14.2 4.9-3.8 17.3-7.3 20.9-7.8 17.9-4.5 6-3.3 1.3-2.4 0-2.6-28.2 7.1 11.6-11.5 4.8-7.4 3.4-12.2.1-3.8-1.1-4.9-1.3.2-1.5 3.5-1 8.6-1.8 5.4-4.3 6.4-5.6 6-7 6-6.9 4.4-23.5 10.6-17.8 6.6-12.4 2-51.6 6.3Z\" fill=\"#5276b6\" /><path d=\"M6.8 204.4l65.9 -2.6 24.1 -2 3 -.9 10.5 -7.7 5.8 -2.7 9.6 -1.7 14.9 -.3 13.1 -1.5 7.8 -3.1 6.9 -6.1 4.2 -1.6 2.9 .3 -2.1 3.1 -4 4.3 -5.7 3.4 -13.1 3.1 -30.7 3.6 -4.6 1.6 -3.3 2.3 -3.9 4.5 1.5 .4 32.6 -7.6 11.4 -4.2 14.3 -9.5 16 -15.2 3.5 -1.1 2.3 1.6 1.2 3.7 .3 10.6 -1.9 15.2 -24.1 7.2 -30.6 7.6 -9.4 3.1 -3.4 2.3 3.3 .8 12.3 .5 48 -.1 1.2 .7 .7 2.4 -2.7 6.4 -30.2 -.6 -31.8 1.1 -26.3 -3.3 -87.9 6.2 -1.4 -.8 -1.4 -4.6 -.1 -6.8Z\" fill=\"#d85452\" /></g></g><path d=\"M172.2 58.6l31.8 .1 12.1 1.3 9.6 2.6 14.8 6.5 10.3 6.1 10.4 7.5 10.2 8.9 16.6 16.6 8.8 11.7 1.5 4.4 .8 10.8 8.8 14.8 11.1 24 6.5 17.6 3 13.3 3.1 25.3 .2 8.2 -1.2 8.5 1.4 4.4 .6 7.9 0 29.6 -1.2 13.8 -6.1 26.9 -5.4 7 -4.6 13.8 -7.5 15.9 -12 17.8 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -1.4 -12.1 .9 -11.8 3.2 -9.3 6.1 -11.5 1.3 -5.4 -4 -19.4 .5 -12.3 2 -6.5 6.7 -13.5 .6 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" stroke-miterlimit=\"10\" stroke-width=\"3.5px\" fill=\"#a95c57\" stroke=\"#632b29\" /><g><path d=\"M172.2 58.6l31.8 .1 17.1 2.4 14.6 5.1 10.5 5 10.5 6.6 10 8.5 25.9 28.4 5 7.2 1.8 13.7 9.3 13.6 6 11.4 5.4 12.5 3.6 12 4.7 26 3.2 23.2 .1 5.7 -1 6.4 1.6 7.7 -2 44.5 -4.5 29.2 -5.8 8.3 -7.9 21.3 -9.7 17.3 -6.6 8.9 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -.3 -15.8 1 -11.9 2.1 -5.5 5.7 -9.4 1.6 -5.6 -2.8 -25.1 0 -10.7 8.1 -17.8 .5 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" fill=\"#f5b6b3\" /></g><g><path d=\"M172.2 58.6l31.8 .1 17.1 2.4 14.6 5.1 10.5 5 10.5 6.6 10 8.5 25.9 28.4 5 7.2 1.8 13.7 9.3 13.6 6 11.4 5.4 12.5 3.6 12 4.7 26 3.2 23.2 .1 5.7 -1 6.4 1.6 7.7 -2 44.5 -4.5 29.2 -5.8 8.3 -7.9 21.3 -9.7 17.3 -6.6 8.9 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -.3 -15.8 1 -11.9 2.1 -5.5 5.7 -9.4 1.6 -5.6 -2.8 -25.1 0 -10.7 8.1 -17.8 .5 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" fill=\"#f5b6b3\" /></g><path d=\"M166.1 7.2l3 2.3 3 3.7 4.9 9.5 5.8 19.1 5.2 13.4 -.2 5.2 -11.3 16.1 -5.9 12 -3.5 12.4 -.4 10.9 -1.9 10.8 -1.9 6.3 -3.2 6.6 -5.1 3.9 -14.8 6.6 -15.8 9.6 -5.4 2 -.9 -.3 -2.7 -4.2 -4.1 -9.9 -3.7 -15.2 -1 -9.5 -.2 -10.7 .9 -11.8 2.2 -13 7.1 -26.4 9.3 -23.4 5.5 -9.8 6 -8 6.5 -6 7 -3.6 7.5 -.9Z\" stroke-miterlimit=\"10\" stroke-width=\"3.5px\" fill=\"#f4dca9\" stroke=\"#5a4218\" /><g><path d=\"M174 120.7l16.4 5.9 15.1 6.6 14.9 8.3 6.3 4.7 4.9 4.9 7.9 10.8 10.1 18.6 6.4 19.8 1.4 13 -.5 24.9 -1.8 30.3 -2.2 18.6 -3.1 14.1 3.8 -3.8 3.2 -5.7 2.8 -7.1 11.2 -46.2 1.7 -3.8 8 -11.7 2.9 -7.3 .7 -9 -.8 -5.4 -4.8 -13.3 -10 -18.9 -13.5 -21.2 -14.9 -19.3 -7.4 -7.7 -7 -5.7 -6.3 -3.2 -20.2 -5 -19.9 -3.1 -9.2 -.4 -2.5 .4 -.7 .9Z\" fill=\"#faeceb\" /></g><g><path d=\"M162.4 14.1l-13.1 21.1-9.8 22.5-9.3 35.6-3 20.8-1.3-14.5 1.2-17.6 3-18.1 6.2-22.5 10.1-21.2 5.7-8.8 3.9-1.1Z\" fill=\"#fffff6\" /></g><g opacity=\".4\"><g><path d=\"M177.8 34l-9.8 11.9 -10.7 17.7 -6.7 15.8 -11.3 37 -1.6 2.6 -1.8 1.3 -2.2 0 -2.7 -1.4 -.5 -14.6 3.6 -26.9 6.6 -24.9 4.8 -11.2 12.6 -21.4 3.9 -4.7 1.4 -.3 1.8 .9 4.1 4.5Z\" fill=\"#b68c3d\" /></g></g><g opacity=\".2\"><g><g><path d=\"M194.2 69.3l23.4 7.5 21.9 9.9 11.3 6.6 10.8 7.8 9.6 9 7.8 10.3 13.1 22.6 17.2 34.7 8.4 21.7 2.9 9.9 2.7 16.9 -.3 38.1 -2.2 23.1 -4.7 23.4 -3.5 11.3 -4.4 10.8 -5.7 10.7 -7 10.9 -8.2 10.8 -9.1 10.4 -9.9 9.6 -10.5 8.4 -10.9 6.8 -11.1 4.9 -11.2 2.6 -11 -.1 -10.3 -2.3 -9.3 -3.9 -8.3 -5.4 -7.2 -6.8 -5.9 -8 -4.5 -9.1 -3 -10 -1.4 -10.8 .3 -11.5 2.1 -12.1 4.2 -10.1 5.9 -8.4 13.2 -13.6 -10.1 -4.4 -4.9 -4.1 -4 4.6 -6.5 10 -4.6 9.8 -4.3 12.8 -1.1 15.2 1.3 20.5 2.3 11.5 3.8 11.5 5.7 10.8 7.9 9.5 10.5 7.5 12.3 4.8 12.8 2 13 -.3 12.7 -2.1 12.1 -3.4 11.1 -4.2 17.6 -9 9 -6.6 9.3 -11.1 8.8 -12.3 14.9 -35.1 .9 -1.6 2.7 -1.7 1.5 -3 3.1 -24.3 3.5 -39.8 -.1 -6.2 -2.1 -10.2 2.2 -5.3 .4 -3.6 -6.6 -40.2 -4.3 -20.7 -4.8 -10.6 -18 -29 -.8 -2.9 -.4 -9.8 -4.2 -6.4 -12.8 -14.2 -20.3 -18.3 -12.1 -8.5 -12.8 -6.8 -13.2 -4.2 -13.3 -.7Z\" fill=\"#fff\" /></g></g></g><g><path d=\"M180.1 174.7l9.2-6.9 2.9-5.5 2.3.6 1.4 1.4.6 2-.6 5.1-5.9 13.2-.9-7.4-1.8-2.5-3.1-1.3Z\" fill=\"#54221f\" /></g><g><path d=\"M180.1 174.7l9.2-6.9 2.9-5.5 2.3.6 1.4 1.4.6 2-.6 5.1-5.9 13.2-.9-7.4-1.8-2.5-3.1-1.3Z\" fill=\"#54221f\" /></g><g><path d=\"M183.8 241.6l7.1 -.1 6.6 1.4 -11.2 -8.7 -3.7 -4.7 1.6 7.3Z\" fill=\"#54221f\" /></g><g><path d=\"M174.4 282.9l14.2 5.9-.1 3-2.4 4.8-14-6.8 2.4-3Z\" fill=\"#54221f\" /></g>"};
+_ORG_ART["intestine"]={vb:[0,0,500,500],pfx:"oaint",body:"<defs><filter id=\"oaint-luminosity-invert\" x=\"37.2\" y=\"-17.4\" width=\"429.3\" height=\"517.6\" color-interpolation-filters=\"sRGB\" filterUnits=\"userSpaceOnUse\"><feColorMatrix result=\"cm\" values=\"-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0\" /></filter><linearGradient id=\"oaint-linear-gradient\" x1=\"253.2\" y1=\"43.9\" x2=\"253.2\" y2=\"79\" gradientTransform=\"translate(521.9 -.5) rotate(90)\" gradientUnits=\"userSpaceOnUse\"><stop offset=\"0\" stop-color=\"#fff\" /><stop offset=\"1\" stop-color=\"#000\" /></linearGradient><mask id=\"oaint-mask\" x=\"37.2\" y=\"-17.4\" width=\"429.3\" height=\"517.6\" maskUnits=\"userSpaceOnUse\"><g filter=\"url(#oaint-luminosity-invert)\"><rect x=\"5.3\" y=\"39.1\" width=\"493.1\" height=\"427.2\" transform=\"translate(-2 503.5) rotate(-89.8)\" fill=\"url(#oaint-linear-gradient)\" /></g></mask><clipPath id=\"oaint-clippath\"><path d=\"M233.7 -11.4l6.9 38.7 3.3 23.4 4.6 53.7 .2 16.6 -1.1 8.6 -5 8.3 -2.9 2.8 -3.4 1.8 -19.1 .7 -6.4 5.1 -10.2 1.2 -7.9 1.9 -4.1 1.9 -4.2 3.1 -6.2 8 -3.2 8.7 -1.7 12.4 -.1 7.8 -3.8 -1.3 -5.2 -.4 -2.8 .5 -2.7 1.6 -7.1 -3.3 -5.4 -.8 -5.9 2.1 -7.1 6.4 -2.8 4.7 -1.6 5.7 -2.9 1.9 -2.7 3.5 -1.5 6.5 -5.1 4.7 -2 3.8 -.4 7.5 -1.9 1.8 -1.5 3.1 -1 8.4 -1.4 1.8 -1.1 4.2 .3 5 1.8 5.7 -2.8 3.4 -1.3 3.4 .3 2.5 -3.2 3.3 -2.3 5.7 .2 4.3 2.5 6.3 -3.4 6.1 -1.9 9.1 1.4 5.8 4 6.6 -2.5 5.1 -.7 5.1 1.7 4 4.5 4 -.3 12.4 2.3 8 4.5 6.1 6.1 5.6 12.2 5.6 5.4 4.3 1.7 2.2 5.5 13.3 3.6 4.6 4.3 1.8 -6.7 -12.5 -.6 -2.5 .5 -2.3 5.4 -8.7 2.2 -6.4 4.5 -5.3 7.8 -13.1 -2.7 14.6 .7 7.5 2.3 5.6 2.5 1.3 5.3 1.1 4.9 -.2 1.7 -.9 11.3 7.6 7.8 3.6 12.5 1.1 11.7 -1 -4.2 4.9 -4.1 7.5 -1.7 6 -.2 6.4 2 7 5.6 11.6 -2.7 16.6 .9 7.8 6.4 16 .8 3.8 3.6 .3 1.5 -.1 1.4 -4.4 6.1 -10.3 2.7 -7.6 .1 -4.3 -1.4 -7 -4.4 -8.8 5.3 -6.3 1.7 -4 .3 -2.9 -1.5 -6.7 -3.9 -9.5 14.1 7.3 7.9 2.6 5.9 .7 9.5 -.2 15.9 -2.1 9.6 -2.2 7 -2.7 10.3 -5.9 5.2 -4.7 2.9 -4.3 7.4 -15.6 9.1 -9.5 2.2 -4.7 .8 -5.3 3.3 -2.8 1.9 -2.7 .7 -3.3 -.9 -10.4 3.8 -5.7 1.6 -4.5 -.9 -11.3 5.1 -7.6 1.3 -5.3 -3.1 -12 2.4 -12 -2.1 -11.9 2.7 -8.4 -3.2 -9.6 4.1 -10.1 -2.7 -9.9 2.8 -8.3 .4 -4.6 -4.8 -15 .8 -2.4 4.1 -3.1 .7 -8.3 -.8 -6.1 -1.7 -3.4 -7 -5.5 -7 -3 -4.7 -1.1 -12.1 -.2 -7.8 1.7 -4.3 2.7 -1.7 2 -7.1 .9 -5.7 1.6 -3 1.8 -2.3 2.7 -7 2.3 -4.7 3.6 -6.7 .8 -2.2 1.4 -4.8 -.3 -6.6 2 -3.7 2.3 -2 2.9 -7.3 -.8 -7.5 .9 -2.2 4.1 -8.4 -1.4 -7.3 0 -4.1 .9 -6.2 -.9 -3.4 1.6 -1.6 2.7 -20.2 -5.9 .7 -15.6 1.8 -6.1 4.2 -5 3.2 -2 4.5 -1.5 2.6 .2 1.8 1 13.5 10 6.2 3.5 11.2 2.4 12.6 .6 15.7 -1.5 17.8 -4.7 9.3 -3.9 18.2 -10.9 14.1 -10.9 5.4 -5.3 7.9 -10.6 4.4 -11.1 1.3 -12.3 -.4 -6.2 -2.6 -10.9 -2.1 -4.7 -5.4 -7.7 -6.4 -5.6 -6.8 -3.5 -6.4 -1.9 -7.3 -.8 -8.3 .9 -4.5 1.3 -9.8 4.7 -5.3 3.6 -10.8 11 -2 -.4 -2.2 -2 -2.3 -3.4 -1.7 -5 -.9 -21.7 -10.1 -82.9 -.6 -.8 -3.5 -.2Z\" fill=\"none\" /></clipPath></defs><g><g id=\"oaint-Layer_1\"><path d=\"M145.6 266.6l-6.2 38.2 3.1 11.7 2.8 5 5.4 6.6 17 0 1.8 .9 5.5 9 -3.7 -.6 -7.3 .6 -4.2 5.4 -2.3 6.1 -.5 3 3.6 9 .8 12 1.7 7.3 2.4 2 6.8 1.9 6.8 -1.2 13.3 8.1 9.2 3.9 11.5 .2 22.6 -2.4 17.3 -.9 4.1 -2.5 2 -2.3 -.6 -10.8 6.4 2.6 11.1 1.1 14.4 -15.6 1.5 -5.8 .5 -8.9 8 -13.4 6.7 -.3 12.4 -8.4 5.3 -7 4.2 -7.9 -.5 -16.8 4.2 -13 .6 -7.1 -.6 -6.9 -2.7 -8.5 -3 -4.7 -2 -1.3 -6.8 -1.2 5.9 -8.8 1.2 -3.9 -.1 -3.4 -4 -13.1 -4.7 -3.5 -1.4 -4.1 -3.2 -2.1 -8.4 .1 -7.1 1.3 -34.6 8.2 -28.6 5.7 -54.6 9.6 -16.2 1.8 -18.5 8.8 -4.7 8Z\" fill=\"#f7e2e2\" /><g mask=\"url(#oaint-mask)\"><g><g><path d=\"M171.1 190.6l-.9 11.1 6.6 7.1 1.2 .8 15.5 .6 -1.8 -9 1 -12.9 5 -8.3 2.4 -2.2 3.3 -1.5 5.7 1 20.9 14.1 6.4 1.5 11.3 .7 22.1 -2.5 8.8 -1.8 22.1 -7.8 12.4 -6.6 5.5 -4 21.5 -21 4.5 -7.3 4.1 -14.4 .9 -8 -.3 -5.1 -3 -9.6 -4.1 -9.3 -3.6 -5.5 -6.9 -5.3 -8.2 -3.7 -7.7 -2.1 -5.8 -.4 -7.2 .8 -8.2 1.9 -7.1 3.2 -7.6 6.1 -9.1 9.2 -1.7 -.7 -3.2 -4.3 -1.6 -3.9 -1.2 -23 -5.6 -50.8 -4.4 -30.6 -2.1 -3 -5.7 -.2 -13.8 4 8.2 46.2 2.4 19.5 3.3 30.6 1.5 43.8 -3.9 8 -3.9 4.1 -9.9 1.7 -12.3 -.2 -6 5.6 -16.8 2 -8.9 5.6 -5.5 5.4 -2.5 4.5 -4.1 13.3Z\" fill=\"#f6b7b7\" /><path d=\"M173.1 193.2l.2 -6.5 2.2 -7.9 5.9 -13.3 6 -8.5 6.1 -3.8 3.9 -1.2 15.4 -1.6 3.4 -.9 4.1 -2.7 13.1 -.8 7.9 -1.9 4 -2.6 4 -9.6 1.6 -11.5 -.1 -9.1 -4.5 -54 -2.6 -20.9 -8.8 -49.7 -2.6 1.6 2 16.3 5.9 29.7 2 15.2 4.3 45 1.1 32 -5.2 9.4 -3.8 3.5 -3.5 2 -17.8 .9 -7.4 4.4 -17.4 2.8 -5 2.1 -10.1 11.3 -2.6 5.3 -2.5 8.4 -1.6 14.3Z\" fill=\"#f9f5f5\" opacity=\".7\" /><path d=\"M249.5 -15.4l2.5 1.2 10.1 82.9 .5 18.6 1.1 5.9 2.1 4.2 3.4 3.5 2 .4 9.6 -10.1 4.3 -3.2 8.9 -4.9 8.1 -2.6 12 -.5 6.9 1.5 5.9 2.4 6.7 4.6 3.1 3.1 5.4 7.7 2.1 4.7 2.6 10.9 .4 6.2 -1.3 12.3 -4.4 11.1 -3.5 5.3 -9.8 10.6 -14.1 10.9 -8.8 5.7 -11.8 6.3 -11.6 4.4 -11.1 2.8 -15.2 1.8 -13.9 -.3 -12.5 -2.6 -6.1 -3.5 -13.4 -10 -1.8 -1 -2.7 -.2 -4.5 1.5 -3.2 2 -4.2 5 -1.8 6.1 -.7 15.6 20.2 5.9 2 -3 3.4 -1.3 5.9 1 4.6 -.9 7.4 0 7.9 1.3 2.4 -4.2 7.7 -.9 6.9 .8 2.7 -3.5 5 -2.5 5.4 -1.3 4 .4 2.2 -1.4 6.7 -.8 4.7 -3.6 7 -2.3 2.3 -2.7 3 -1.8 5.7 -1.6 7.1 -.9 2.7 -2.9 5.4 -2.6 8.3 -1.1 9.6 .3 7.1 2 6.7 3.4 4.9 4.2 1.7 3.4 .7 4 -.6 10.4 -4.1 3.1 -.8 2.4 4.8 15 -.4 4.6 -2.8 7.6 2.7 10.7 -4.1 10.1 3.2 9.6 -2.7 8.4 2.1 11.9 -2.4 12 3.1 12 -1.3 5.3 -5.1 7.7 .9 11.3 -1.6 4.5 -3.8 5.7 .9 10.4 -.7 3.3 -5.2 5.6 -.8 5.3 -2.2 4.7 -9.1 9.5 -7.4 15.6 -6.3 7.7 -7.8 5 -10.1 4.7 -12.1 2.9 -17.9 2 -9 -.1 -5.6 -1.2 -11 -4.4 -8.5 -4.9 3.9 9.5 1.5 6.7 -.3 2.9 -1.7 4 -5.3 6.3 4.4 8.8 1.4 7 -.1 4.3 -2.7 7.6 -6.1 10.3 -1.4 4.4 -2.3 0 -2.8 -.3 -.8 -3.8 -6.4 -16 -.9 -7.8 2.7 -16.6 -5.6 -11.6 -2 -7 .2 -6.4 1.7 -6 4.1 -7.5 4.2 -4.9 -12.4 1 -10.6 -.9 -7.1 -2.8 -13.2 -8.7 -2.1 1 -3.5 .2 -8.2 -2 -2.5 -4.2 -1 -7.5 .3 -5.5 2.4 -10.8 -7.8 13.1 -4.5 5.3 -2.2 6.4 -5.8 9.9 1 5.1 6.1 11 -2.4 -.5 -2 -1.4 -3.5 -4.6 -5.4 -13.1 -1.7 -2.2 -5.4 -4.3 -12.2 -5.6 -6.1 -5.6 -4.5 -6.1 -2.3 -8 .3 -12.4 -3.8 -3.1 -2.2 -3.8 .6 -6.2 2.5 -5.1 -4.7 -8.3 -.7 -6.3 2.4 -8.5 2.8 -4.5 -2.5 -6.3 .1 -5.3 2.1 -4.7 3.2 -3.3 -.4 -1.5 .8 -3.2 3.4 -4.6 -1.8 -5.7 -.3 -5 1.1 -4.2 1.4 -1.8 1 -8.4 1.5 -3.1 1.9 -1.8 .7 -8.5 2.5 -3.7 4.3 -3.8 1.5 -6.5 2.7 -3.5 2.9 -1.9 1.6 -5.7 2.8 -4.7 5.3 -5.2 7.2 -3.2 5.4 .6 7.6 3.5 2.5 -1.6 3.2 -.6 4.7 .4 4.1 1.3 .7 -14.5 2.5 -10.4 3.7 -7.2 4.2 -4.8 4.2 -3.1 4.1 -1.9 7.8 -1.9 10.3 -1.2 6.5 -5.1 19 -.7 3.4 -1.8 2.9 -2.8 4.3 -6.7 1.6 -6.6 .1 -16.2 -4.5 -55.5 -3.5 -25.6 -6.9 -38.7 10.2 -3.2M249.5 -17.4l-8 1.4 -10 3.3 7.2 40.3 3.4 24.6 4.5 53 0 19.2 -1.5 6 -4 6.2 -5.3 3.9 -18.9 .6 -6.5 5.1 -15.6 2.3 -5.2 1.8 -4.5 2.8 -6.8 7.1 -3.7 7.2 -2.5 9.8 -1 13.1 -7.6 -.8 -5.3 1.7 -7.2 -3.1 -6.2 -.5 -7.7 3.5 -5.6 5.4 -3 4.8 -1.9 5.6 -5 4.9 -2.1 7.3 -4.8 4.6 -2 3.5 -.8 7.9 -3.1 5 -1.1 8.3 -2.5 6.2 -.1 4.1 1.6 6.8 -2.3 3.4 -1.4 5.6 -3.1 4 -2.1 5.6 .3 5 2 5.5 -3.2 6.9 -1.6 8.1 1.5 6.9 3.5 5.9 -2.3 5.8 -.3 6.1 1.9 3.7 3.9 3.8 0 12.6 2.4 7.7 4.7 6.5 6.5 6 4.8 2.7 7.5 2.9 4.8 3.8 1.5 1.8 5.7 13.6 4.4 5.4 3.1 1.6 4.9 .1 -7.4 -13.7 -.9 -3.7 5.6 -9.4 1.9 -6.1 6.5 -8.3 -.1 6.6 1 6.4 1.5 3.5 2.7 2.2 7.1 1.8 6.9 -.6 11 7.3 7.6 3.4 9.4 1.2 10.3 -.2 -5.5 10.1 -1.6 7.3 .1 5.1 1.8 6.7 5.8 12 -2.7 15.7 .7 7.8 6.8 17.5 .6 4.6 4.7 .7 4.1 -.2 1.3 -5 6.4 -10.8 2.8 -8 -1 -10.7 -4 -9.4 4.4 -5.7 2 -5.2 -.3 -5.6 -2.9 -8.1 10.3 4.7 7.8 2.4 7.9 .6 12.9 -.8 13.7 -2.2 11.3 -3.3 11 -5.9 5.2 -3.8 5.8 -7.4 7.7 -16 8.7 -8.9 2.6 -5.5 .6 -4.7 3 -2.5 2.5 -3.8 .7 -4.2 -.9 -9.5 3.8 -5.4 1.7 -5.3 -1 -10.8 5 -7.3 1.4 -5.9 -3.1 -12.2 2.4 -11.3 -2.1 -12.6 2.6 -8.7 -3.2 -9.1 4 -9.4 -.2 -3.9 -2.4 -7.2 2.6 -6.9 .7 -4.5 -1 -5.8 -3.7 -10.4 3.6 -3.2 1.1 -2 .6 -10.4 -1.8 -7.4 -2.4 -3.1 -3.8 -3 -7.2 -3.7 -5.1 -1.6 -7.6 -.8 -8.8 .3 -8.3 2.3 -5.1 4.1 -6.7 .9 -5.7 1.7 -3.1 1.9 -2.5 2.7 -6.8 2.3 -4.8 3.4 -16.9 2.8 -5.3 2.3 -3.8 3.6 -6.8 -.4 -6.9 .9 -1.6 .8 -1.8 2.9 -8.6 -1 -10.1 .8 -5.9 -.8 -3.3 1 -3 3 -17.2 -5 .6 -13.1 1.7 -6.2 3.7 -4.4 6.8 -3.1 2.6 .6 18.2 12.9 5.4 2.2 8.6 1.5 10.8 .6 14.1 -.9 16.7 -3.6 12 -4.5 12.4 -6.6 8.9 -5.8 14.3 -11 10.1 -10.8 3.6 -5.5 4.5 -11.6 1.4 -12.8 -.4 -6.7 -2.8 -11.5 -2.3 -4.9 -5.7 -8.1 -3.3 -3.2 -6.9 -4.7 -6.6 -2.6 -7.3 -1.5 -7.2 -.1 -5.7 .9 -8.6 2.9 -8.7 4.9 -4.7 3.6 -8.6 9.2 -3 -3 -2.7 -7.1 -.7 -20 -10.2 -83.6 -1.4 -2.2Z\" fill=\"#462d2d\" /><path d=\"M362.2 202.3l-2.5 2.9 -4 1.7 -3.5 0 -4.1 -1.3 -3 4.7 -4.3 2.7 -8.2 1 -9.2 -1.7 -2 3.1 -5 3.9 -6.1 2.2 -3.9 0 -2.3 2.7 -3.5 .4 -5.1 -1.2 -3 4.3 -5 1.8 -6.8 .2 -1.5 2.5 -2.7 1.6 -5.3 1.1 -5.8 -.4 -1.7 2.3 -4.9 2 -6 .1 -3.6 -1.3 -2.5 2.8 -5.1 2.8 -7.6 1 -4.5 2.3 -5.8 -.3 -1.7 1.7 -4.5 1.9 -7.9 .1 -8 -2.6 -5.5 .4 -4.2 -.7 -3.1 -1.5 -3.8 -3.4 -3 .8 -5.2 -.8 -4.9 -2.5 -2.4 -2.2 -5.2 -.6 -8.7 -3.2 -.1 2.8 -2.7 4.8 .7 2 -.6 4 -4.2 7.2 1 1.9 -.1 2.7 -3.6 8.5 1.3 2.5 -.1 1.8 -3.5 6 1.7 2.4 .6 4.9 -.6 3.6 -2.1 4.8 2.7 2.5 1.4 3.7 .1 6.3 -1.4 5.2 3.7 3.4 3.9 12.1 6.7 9.5 3.2 7.6 .4 7 -2.3 8.2\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M195.2 205.5l-12.5-3.9-11.7-10.5\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M258.1 388.4l-3.9 3.7-3.9 1.3-19.9.3-7.9.8-3 1.1\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M306.9 337.1l7.3-4.2 4.9-4.1 4.9-6 3.3-6 1.9-7.1-.8-12.2 3.9-14.4.7-6.3-1.4-10.6-3.5-7.8-5.3-4-4.6-.3 4.1-4.4 2.3-5.7-.3-8.3-1.6-6.5-4.5-5.8-5.4-2.4\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /></g><path d=\"M172.5 180.6l7.5 4.1 5.3 1.5 5.2-.4 2.3-1.3.4 4.8-1 15.7-5.3-1.4-6.2-2.9-8.9-8.3Z\" fill=\"#ca9696\" /><path d=\"M206.6 174.4l24.2 8.3 13.4 2.2 11 .4 11.5 -1.3 11.9 -2.9 12.6 -4.3 12.8 -6 12.8 -8.2 6.2 -5 6.1 -5.7 6 -9 4.6 -12.5 2.6 -13.9 0 -13.3 -1.2 -5.8 -2.1 -4.9 4 6.5 3.9 8.4 2.3 8.3 -1.3 13.4 -3.5 13.8 -6.6 8.9 -13.9 14.4 -25.6 17.3 -18.4 5.9 -16.4 4.1 -8.3 1.2 -9.7 -.3 -9 -1.3 -8 -2.2 -22 -15Z\" fill=\"#ca9696\" /><path d=\"M233.6 244.7l20.3 4.1 13.6 7.1 11.6 3.8 2.9 1.6.2 2.7-2.4 6.9 1.1 4 2.8 2.9-2.1 1.4-4.1 5.5-9.9 14.9 2.5 1.9 2.1 3.5-1.2-5.3.5-2.3 3.3-6.8 5.3-6.8 5.7-5 5 .3 3.3 1.5 4.4 10.1-2.8 4.7-5.2 4.5-1.5 2.4-1.1 14.9-8 6.4 8.2-3.7 5.8 5.3-3.9-5.8-.2-10.9.7-4.8 2.2-3.3 1.7-1.1 9.7 3.2 4.6-.1-2.9 8.3-.5 5.6 10.2-20.5 1-8.8-1.5-13.5 5.8-8.4-3.7 3.1-3.4 4.5.6 15.6-1.4 8.6-2.1 1.9-3.7 1.1-5.5.1-4.8-2.6-.2-.7 2.7-3 1-2.9-2.8-6.5-.5-3.6-2.8-2-8.7-3.4-3.5-4 2.6-10.2 6.7-8.7 10.3-9.4 5.7-3 4.4-.8-5.8-1.4 2-4-7.4 8-17.4 15.7-12.7-2.4-11.5-5.1-3.1-2.4 0-.7 9.2-8.3 1.8-2.5-.1-1.3-1.9.1-1.8 1.6-9.6 10.8-15.6-3.1Z\" fill=\"#958888\" /><path d=\"M172.4 239.5l7.4 4.5 6.4 2.6 6 .8 9-.3 5 1.9-11.2 1.1-8.5-1.2-6.8-2.5-7.1-3.8-4.7-5 1.7-.4Z\" fill=\"none\" /><path d=\"M212.8 250.2l.9 3.1-1 2.7-12.9 14.4-4 6.5 4.5-3.5 3.5-.9 15.8 5.5 12.8 6.6 3 3.7 3.7 7.4-.9-7 6.4-8.8-8 5.8-17.6-9.8-15.7-4.8 1.3-3.2 7.2-7.5 3.3-5.1.8-4.8Z\" fill=\"none\" /><path d=\"M224.4 254.2l5.2 8 -5.8 3.3 6.5 -1.5 5.5 .2 19.7 6.3 2.5 1.2 .9 2.1 .9 6.6 -2.2 7.4 -2.7 14.9 -1.7 3.2 -3.2 2.5 -5.7 1.6 -10.7 -1.6 -8.7 -2.6 -11.1 -8.7 -18.9 -6.6 -4.6 -.7 -10.9 1.7 -2.6 -1.6 -2.3 -3.2 -.5 -3.2 5.3 -17.8 14 -6.4 -13.3 4.3 -16 .2 -7.3 -2.5 -2.9 -2.4 -2.2 -3.5 5.3 7.1 6.9 3.3 -4.1 9.1 -4 14.4 .2 5.6 2.2 7.3 3.2 6.8 2.2 2.9 2.8 1.4 7.7 1.4 -6.9 13.8 4.8 7.1 -10.9 2.2 1.8 3.7 .4 -1.4 1.4 -1.1 7.3 0 5.4 1.3 4.5 3.8 2 2.7 .7 2.8 -2.9 8.4 .4 5.7 2.6 3.7 7.8 5.6 6 2.6 5.8 1.2 29.3 2.1 6.2 3.1 -2.6 -2.3 5.2 -.6 -2.1 -.7 -28.6 -2 -8.6 -1.6 -12.1 -6 -4.6 -3.1 -2.8 -3.1 .1 -6.2 1.8 -7.4 1.3 -1.5 4.4 -.9 16 4.8 -8.2 4.1 -.9 3.4 -3 1.7 9.2 1.3 28.4 8.8 10 .5 3.7 -.8 1.8 -1.3 .8 -3.7 -.4 -5.1 -3.2 -6.4 -10.1 -8.6 -5.4 -3.2 -5 -1.3 -2.3 -2.5 -2 1.8 -5.6 1.7 14.5 2 10.8 7.6 2.9 3 3.3 6.9 1.1 4.6 -.8 1.9 -5.1 1.7 -7.5 .2 -34.2 -11.5 1.2 -1.7 4.5 -2.4 4.5 -1.3 5.1 -.3 6 .6 3.8 1.2 4.3 3.8 -2.3 -4.2 -3.8 -2.7 -18.6 -2 -2.7 -1 -5 -3.6 -.4 -1.2 .7 -1.3 9.9 -10.3 4.1 -1.3 10 .1 7.4 2.2 2.3 1.6 .3 1.1 9.4 1.2 5.2 4.9 5.6 2.1 14.6 14.2 -1.2 9.6 7.3 -8.8 5.3 -4.1 -9.4 2.5 -13.4 -12.8 -11.1 -6.7 -.5 -1.4 .7 -4.1 2.7 -4.9 4.3 -2.7 7.3 -1.3 -8.8 -.7 .4 -2.2 3.6 -1.1 -3 .2 -3 2.5 -6.4 13.2 -7.5 -.8 -2.5 -2.2 -5.5 -2.8 -4.7 -1.3 -5.2 -.4 10.8 -7.8 6.3 -.9 -5 -.7 -.5 -4.7 -2 5 -17.6 11 -14.3 13.9 -2.3 .5 -4.2 -1.3 -10.8 -5.8 -4.4 -5.3 -1.2 -4.6 4.3 -9.1 3.7 -3.9 3.6 -1.8 27.7 -3.5 -9 -1.2 2.2 -1.1 1.1 -2.2 -5.6 3.4 -16.7 1.7 -8.2 3.8 -6.1 -.8 -3.8 -3.1 -2.1 -4.2 -2.6 -9.3 -.6 -5.8 .6 -5.1 2.8 -9.2 3.4 -7.1 2.7 -2.8 5.3 -.4 3.6 .8 -4 16.1 .5 5.6 2.4 4.8 3.2 .8 9.7 -1.1 6.7 .3 20.6 7.5 3.1 4.9 -.3 3.1 -4.5 5 -17.6 9.3 -3.1 .9 -2.6 -.2 -8.9 -4.6 8.2 6.3 .9 11.5 .4 -8 1.1 -3 17.9 -8.4 12.4 -9.6 19.2 5.3 11.3 -2.9 10 4.9 5 4.2 .6 2.9 -3.6 8.2 -.7 3.6 .8 2.3 4.2 4.3 8.3 5.6 13.3 5 6.2 -4.2 3.7 -8.8 -2.5 -5.7 -.7 1 .2 7.5 -4.7 4.9 -4 1.5 -5.5 -1.5 -8.2 -3.9 -4.9 -3.1 -3 -3 .1 -4 3.6 -9.8 -1 -3.6 -3.3 -4.5 -8.8 -3.7 -2.9 -2.5 3.2 -8.5 4 -19.3 -4.3 -10.6 -25.2 -7.5 -8.8 -7.1Z\" fill=\"#958888\" /><path d=\"M172.4 239.5l8.8 5.9 6.8 2.6 12.2 2 9.1 -.5 4.3 1.4 .3 2.6 -1.6 4.2 -10.6 10.5 -5.7 9.4 5.4 -4.4 2.1 -.6 19.1 7 6.2 3.5 4.9 4.1 2.9 3.9 1.8 5 0 -8.1 3.5 -5.4 3 -2.8 -8.6 5.2 -13.8 -7.7 -19.7 -6.8 12.3 -13.4 -.2 -7.1 -8.4 -.8 -5.3 -1.5 -8.8 -.5 -7.6 -5.1 -4.9 .8Z\" fill=\"#958888\" /><path d=\"M285.1 229.4l.1 3.7 -3.3 5.4 -4.8 4.2 -5.5 3.2 6.1 -.9 .8 3.4 1.1 -4 7.6 -10.4 12.1 -9.5 -3.7 -1 -1.9 3.1 -3.2 2.1Z\" fill=\"#958888\" /><path d=\"M296.8 263.8l7.6-1.6 8.3-5 3-2.7 3.4-.6 2.7.6-7.8 2.9-7.7 6.1Z\" fill=\"#958888\" /><g clip-path=\"url(#oaint-clippath)\"><path d=\"M171.5 192l9.1 8.3 3.4 1.8 24 7.1 3.1 -.2 .4 -2.2 2.9 -1.2 16.5 -.5 10.4 .6 2.3 -3.6 14.2 -.6 3.5 -2.6 7.3 -3.1 5.1 -1.3 5.5 -.2 5.6 -1.9 19.1 -11.3 10.8 -1.4 2.5 -2.6 4.3 -2.4 6.5 -1.9 15.7 2 10.2 2.8 2.7 1.8 6.5 8.8 .5 7.3 -.5 4.8 -1.6 4.2 -2.3 2.7 -.6 1.9 2.9 8 1.7 8.5 -4 9.8 3.4 9.6 -4 11.7 2.3 7 -1.6 10.4 1.8 12 -2.8 11.7 2.4 7.6 .6 6.5 -6 11.5 .9 11.8 -1.5 4.1 -4 6.1 1.5 11.3 -6.5 9 -2.3 8.3 -9.5 10 -10.4 20.2 -11.9 9.8 -12.8 5.4 -15.1 3.1 -15.8 1.2 -7.8 -.3 -19.6 -6.8 2.5 8.1 .7 5 -6.7 10.3 3.5 9.5 1.2 6.7 -2.4 11.7 -8.2 16.1 -8.1 -.3 -1.2 -5.9 -6.6 -18.1 -.3 -2.6 3 -18 -5.8 -12.9 -2.5 -8 1.9 -8 3 -8.1 2.4 -4.2 3 -2.1 9.4 -1.3 18.8 -.8 6 -2.1 4.4 -3.5 19.8 4.1 4.7 -7.7 4.1 -4.8 3.9 -2.1 6.8 -2.2 1.5 -9.3 2.3 -7.2 2.7 -3.9 3.9 -2 -1.3 -15.4 8.2 -4.4 5.8 -5.6 5.6 -8.9 2.4 -5.9 .6 -5.1 -1.3 -9.2 4.4 -16.6 .6 -8.7 -.4 -4.4 -2.2 -6.6 -3.1 -4.2 -4.8 -3.3 -4.5 -.1 3.3 -3.6 2.6 -5.7 .7 -5.3 -.4 -4 -1.7 -6.1 -2.9 -5.4 -8 -3 -4.9 .3 -3.6 2.9 -7.6 -1 -4.2 4.7 -10.7 1.7 -4.2 4.1 -10.8 .6 -6.9 4.2 -9.2 -.9 -5.9 4.5 -6.6 1.9 -2.7 -.2 -4 2.1 -6.3 0 -4.9 2.8 -3.6 1 -8.8 -.6 -4.9 -2.1 -7.6 .1 -5.8 -2.4 -3.1 -2.9 -3.8 .5 -5.9 -1 -5.6 -3.8 -4 -.7 -10.1 -3.7 -.7 3.2 -2.2 3.8 .5 1.7 -.7 5 -4 6.7 1.1 2.3 -.3 2.1 -3.3 8.8 1.3 3.6 -3.8 6.9 2.4 5.1 -1.3 7 -1.5 3.5 2.6 2.7 1.4 3.3 -1 11.7 4.4 4.7 3.8 12 7 11.1 2.3 7 .6 4.8 -2.8 10 -15.5 25.7 -.4 7.4 8 13 -3.1 .8 -5.2 -1.5 -2.2 -2 -8 -18.5 -4.4 -4.3 -10.7 -5.2 -8.5 -6.3 -3.1 -3.7 -3.5 -7 -1.1 -4.4 -.3 -11.9 -4.8 -6.2 -1.4 -3.2 3.2 -10.2 -5.2 -15 4.7 -12.9 -2.1 -11.5 4.6 -8.2 3.6 -9 -1 -10.8 6.8 -20.2 2.4 -10.1 4.6 -4.9 3.1 -7.9 4.8 -5.8 6.1 -10.9 5.6 -4.2 7.9 -3.5 11.6 4.1 6.8 -2.1Z\" fill=\"#f2dddd\" /><path d=\"M358.8 214.1l3.5 7 .3 7.2 -.3 2 -2.6 4.9 2.1 5.7 -.1 4 -.3 4.4 -2.4 5.7 0 2.2 3.1 8.1 -2.6 6.5 -.3 3.5 1.7 9 -.7 7.5 -1.9 8.1 3 8.3 .4 4.5 -2.1 5.3 -4.4 5.3 .9 9.8 -.6 3.1 -5 9.1 .7 5.6 -.8 8.4 -5.3 5.6 -2 8.6 -11 12.9 -7.2 14.8 -7.5 9 -21.7 8.9 -21.6 3.9 -18.5 -1.2 -14.8 -6.5 1.3 7.7 .2 8.9 -5.4 8.1 3.3 8.4 1.7 11.9 -1.4 5.5 -3 6.6 -3.3 4.7 -2.7 5.5 -1.4 .4 -2.5 0 6.1 -13.5 2.7 -8.9 -1.3 -12.7 -3.2 -7.3 4.9 -6 1.5 -4.9 -1.9 -15.2 -2.2 -6.6 16.3 7.5 11.8 3.4 13.4 .9 7.1 -1.1 7.3 -2.4 13.3 -6.7 14.9 -11.2 6.6 -7.3 4.7 -9.2 7.3 -6.4 4.2 -6.3 1.2 -5.8 4.1 -6.2 1.8 -7.5 -.6 -1.9 -5.6 -2.3 4.7 -1.3 2.4 -2.1 3.5 -9.3 -.1 -5.1 -5.7 -6.4 7.5 -2.5 2.7 -2.8 .7 -1.9 -.1 -4.8 -1.7 -5.6 -2.6 -3.4 -3.1 -1.5 3.6 -3.9 2.1 -6.3 -1.9 -9.4 -1.4 -2.6 -1.6 -1.1 4.9 -3 2.3 -4.9 -.7 -3.7 -1.6 -2.5 -5.5 -4.2 5.2 -4.5 2.7 -5.7 -.8 -7.2 -1.3 -2.3 -2.5 -1.6 3.4 -5.3 -.6 -5.9 -1.7 -3.6 -1.9 -1.9 -8.5 -1.9 -6.9 3.3 -2.8 -.3 -2 1.1 -3.1 0 -6.2 1.5 3.8 8.4 4.1 5.6 -2.3 6.5 -.5 5.8 6.1 18.1 -.3 15.8 .9 9.4 -2 16 -.8 16.5 -3.4 20.2 -18.3 12.2 -4.3 4.7 -3 7.3 -.2 10.4 -7.5 1.8 -5.1 2.8 -7.2 6.4 -4.1 5.6 -10.6 -.7 -34.7 1.5 -9.5 2 -4.3 1.8 -3.7 2.4 -3.1 3.4 6.5 -11.8 8 -1.4 14.7 0 8.8 -.8 1.9 -.7 5 -4.5 20.1 4.4 3.8 -7.7 2.9 -3.2 6.5 -3.5 7.5 -1.3 -1.8 -8.9 1.5 -9.4 2.5 -2.1 7.2 -3.2 -2 -15.1 9.6 -5.8 4.4 -4.4 5.8 -7.9 2.9 -8.3 -1.1 -13.8 4.7 -15.7 .4 -5 -.7 -5.7 -3.1 -10 -2.2 -3.8 -3.2 -1.9 -6.2 -.8 6 -5.8 .9 -3.7 .2 -6.1 -2.1 -11.5 -6.3 -4.4 -1.7 2.1 -6.4 4 -28.7 10.5 -16.6 3.8 -19.8 2.7 -13.4 5.3 -9.8 1.1 -35.8 -3.1 -23.3 -5.3 -3.1 10.6 -2.7 5.2 -2 1.8 -1.4 3.5 -4 13.8 1.9 14.5 1.8 2.9 .9 3.8 0 5.9 -.9 4.2 2.5 3 3.1 6.3 2.7 14 3.1 3.8 4.1 2.1 1.1 1.5 .7 4.3 -1 7.2 -6.3 22.4 -1.7 -8.7 -7.6 9.7 -6.6 11.8 1 4.5 5.8 14.6 -6.1 -3 -5.1 -4.5 -4.6 -10.1 -6.5 -8.3 -15.5 -7.8 -5.7 -8.2 4 4 7.3 3.8 7.3 3.1 6 .3 8.1 -2.6 11.5 -6.2 3.7 -3.3 2.1 -4.3 .7 -5 -1.6 -10.5 -3.9 -9.1 -4.2 -5.1 -1.5 -.2 .6 -3.7 -1.2 -4.7 -3.4 -6.6 -2.6 -3 1.8 -3.2 -.8 -6.9 -1.9 -4.5 -3.1 -3.7 1.8 -1.3 2 -3.7 .1 -6.6 -1.5 -5.3 3.2 -3.8 .9 -3.9 -.9 -2.1 1.5 -1.6 1 -3 .5 -5.2 -.6 -3.2 1.6 -1.4 .8 -4.3 -1.4 -6.1 3.6 -2.1 1.7 -3.9 -.1 -4.8 -4.9 -6.4 3 1.9 3 -.3 8 -6.2 -4.7 5.4 8 2.3 4.8 5.4 1.9 .4 2.3 -.8 6.1 -4.9 -3.8 6.8 -.1 1.5 3 1.9 8.6 .9 9.2 -.4 2.3 -2 2.6 -5.5 .5 7.9 .5 1.8 1.5 1.3 5 1.1 6.1 -.3 5.3 -1.3 2.6 -1.7 3.3 2 3.1 -1.6 2.9 -4 3.6 2 6.2 -1.6 4.9 -4.4 1.3 -3 6 3 6.2 -.2 1.8 -4.5 -.9 -5.2 5.1 4.5 5.8 2 1.7 -.9 1.2 -1.9 1.1 -5.5 3.4 2.5 6.5 -.4 5.7 -3.6 2 -3.3 1.4 1.8 3 1.8 3.5 .8 3 -.3 .8 -2.6 -1.2 -5 2.5 5.4 1 1 3.1 -.1 6 -3.4 7.1 -5.8 5.8 .5 6.8 -1.3 9.5 -3.6 5.1 -3.4 4.3 -.6 4.5 -3.7 3.6 -6.4 .6 2.7 -.4 5.4 -1.5 4.8 -2.8 3.7 .2 6.4\" fill=\"#c6b5b5\" /></g><path d=\"M249.5 -15.4l2.5 1.2 10.1 82.9 .5 18.6 1.1 5.9 2.1 4.2 3.4 3.5 2 .4 9.6 -10.1 4.3 -3.2 8.9 -4.9 8.1 -2.6 12 -.5 6.9 1.5 5.9 2.4 6.7 4.6 3.1 3.1 5.4 7.7 2.1 4.7 2.6 10.9 .4 6.2 -1.3 12.3 -4.4 11.1 -3.5 5.3 -9.8 10.6 -14.1 10.9 -8.8 5.7 -11.8 6.3 -11.6 4.4 -11.1 2.8 -15.2 1.8 -13.9 -.3 -12.5 -2.6 -6.1 -3.5 -13.4 -10 -1.8 -1 -2.7 -.2 -4.5 1.5 -3.2 2 -4.2 5 -1.8 6.1 -.7 15.6 20.2 5.9 2 -3 3.4 -1.3 5.9 1 4.6 -.9 7.4 0 7.9 1.3 2.4 -4.2 7.7 -.9 6.9 .8 2.7 -3.5 5 -2.5 5.4 -1.3 4 .4 2.2 -1.4 6.7 -.8 4.7 -3.6 7 -2.3 2.3 -2.7 3 -1.8 5.7 -1.6 7.1 -.9 2.7 -2.9 5.4 -2.6 8.3 -1.1 9.6 .3 7.1 2 6.7 3.4 4.9 4.2 1.7 3.4 .7 4 -.6 10.4 -4.1 3.1 -.8 2.4 4.8 15 -.4 4.6 -2.8 7.6 2.7 10.7 -4.1 10.1 3.2 9.6 -2.7 8.4 2.1 11.9 -2.4 12 3.1 12 -1.3 5.3 -5.1 7.7 .9 11.3 -1.6 4.5 -3.8 5.7 .9 10.4 -.7 3.3 -5.2 5.6 -.8 5.3 -2.2 4.7 -9.1 9.5 -7.4 15.6 -6.3 7.7 -7.8 5 -10.1 4.7 -12.1 2.9 -17.9 2 -9 -.1 -5.6 -1.2 -11 -4.4 -8.5 -4.9 3.9 9.5 1.5 6.7 -.3 2.9 -1.7 4 -5.3 6.3 4.4 8.8 1.4 7 -.1 4.3 -2.7 7.6 -6.1 10.3 -1.4 4.4 -2.3 0 -2.8 -.3 -.8 -3.8 -6.4 -16 -.9 -7.8 2.7 -16.6 -5.6 -11.6 -2 -7 .2 -6.4 1.7 -6 4.1 -7.5 4.2 -4.9 -12.4 1 -10.6 -.9 -7.1 -2.8 -13.2 -8.7 -2.1 1 -3.5 .2 -8.2 -2 -2.5 -4.2 -1 -7.5 .3 -5.5 2.4 -10.8 -7.8 13.1 -4.5 5.3 -2.2 6.4 -5.8 9.9 1 5.1 6.1 11 -2.4 -.5 -2 -1.4 -3.5 -4.6 -5.4 -13.1 -1.7 -2.2 -5.4 -4.3 -12.2 -5.6 -6.1 -5.6 -4.5 -6.1 -2.3 -8 .3 -12.4 -3.8 -3.1 -2.2 -3.8 .6 -6.2 2.5 -5.1 -4.7 -8.3 -.7 -6.3 2.4 -8.5 2.8 -4.5 -2.5 -6.3 .1 -5.3 2.1 -4.7 3.2 -3.3 -.4 -1.5 .8 -3.2 3.4 -4.6 -1.8 -5.7 -.3 -5 1.1 -4.2 1.4 -1.8 1 -8.4 1.5 -3.1 1.9 -1.8 .7 -8.5 2.5 -3.7 4.3 -3.8 1.5 -6.5 2.7 -3.5 2.9 -1.9 1.6 -5.7 2.8 -4.7 5.3 -5.2 7.2 -3.2 5.4 .6 7.6 3.5 2.5 -1.6 3.2 -.6 4.7 .4 4.1 1.3 .7 -14.5 2.5 -10.4 3.7 -7.2 4.2 -4.8 4.2 -3.1 4.1 -1.9 7.8 -1.9 10.3 -1.2 6.5 -5.1 19 -.7 3.4 -1.8 2.9 -2.8 4.3 -6.7 1.6 -6.6 .1 -16.2 -4.5 -55.5 -3.5 -25.6 -6.9 -38.7 10.2 -3.2M249.5 -17.4l-8 1.4 -10 3.3 7.2 40.3 3.4 24.6 4.5 53 0 19.2 -1.5 6 -4 6.2 -5.3 3.9 -18.9 .6 -6.5 5.1 -15.6 2.3 -5.2 1.8 -4.5 2.8 -6.8 7.1 -3.7 7.2 -2.5 9.8 -1 13.1 -7.6 -.8 -5.3 1.7 -7.2 -3.1 -6.2 -.5 -7.7 3.5 -5.6 5.4 -3 4.8 -1.9 5.6 -5 4.9 -2.1 7.3 -4.8 4.6 -2 3.5 -.8 7.9 -3.1 5 -1.1 8.3 -2.5 6.2 -.1 4.1 1.6 6.8 -2.3 3.4 -1.4 5.6 -3.1 4 -2.1 5.6 .3 5 2 5.5 -3.2 6.9 -1.6 8.1 1.5 6.9 3.5 5.9 -2.3 5.8 -.3 6.1 1.9 3.7 3.9 3.8 0 12.6 2.4 7.7 4.7 6.5 6.5 6 4.8 2.7 7.5 2.9 4.8 3.8 1.5 1.8 5.7 13.6 4.4 5.4 3.1 1.6 4.9 .1 -7.4 -13.7 -.9 -3.7 5.6 -9.4 1.9 -6.1 6.5 -8.3 -.1 6.6 1 6.4 1.5 3.5 2.7 2.2 7.1 1.8 6.9 -.6 11 7.3 7.6 3.4 9.4 1.2 10.3 -.2 -5.5 10.1 -1.6 7.3 .1 5.1 1.8 6.7 5.8 12 -2.7 15.7 .7 7.8 6.8 17.5 .6 4.6 4.7 .7 4.1 -.2 1.3 -5 6.4 -10.8 2.8 -8 -1 -10.7 -4 -9.4 4.4 -5.7 2 -5.2 -.3 -5.6 -2.9 -8.1 10.3 4.7 7.8 2.4 7.9 .6 12.9 -.8 13.7 -2.2 11.3 -3.3 11 -5.9 5.2 -3.8 5.8 -7.4 7.7 -16 8.7 -8.9 2.6 -5.5 .6 -4.7 3 -2.5 2.5 -3.8 .7 -4.2 -.9 -9.5 3.8 -5.4 1.7 -5.3 -1 -10.8 5 -7.3 1.4 -5.9 -3.1 -12.2 2.4 -11.3 -2.1 -12.6 2.6 -8.7 -3.2 -9.1 4 -9.4 -.2 -3.9 -2.4 -7.2 2.6 -6.9 .7 -4.5 -1 -5.8 -3.7 -10.4 3.6 -3.2 1.1 -2 .6 -10.4 -1.8 -7.4 -2.4 -3.1 -3.8 -3 -7.2 -3.7 -5.1 -1.6 -7.6 -.8 -8.8 .3 -8.3 2.3 -5.1 4.1 -6.7 .9 -5.7 1.7 -3.1 1.9 -2.5 2.7 -6.8 2.3 -4.8 3.4 -16.9 2.8 -5.3 2.3 -3.8 3.6 -6.8 -.4 -6.9 .9 -1.6 .8 -1.8 2.9 -8.6 -1 -10.1 .8 -5.9 -.8 -3.3 1 -3 3 -17.2 -5 .6 -13.1 1.7 -6.2 3.7 -4.4 6.8 -3.1 2.6 .6 18.2 12.9 5.4 2.2 8.6 1.5 10.8 .6 14.1 -.9 16.7 -3.6 12 -4.5 12.4 -6.6 8.9 -5.8 14.3 -11 10.1 -10.8 3.6 -5.5 4.5 -11.6 1.4 -12.8 -.4 -6.7 -2.8 -11.5 -2.3 -4.9 -5.7 -8.1 -3.3 -3.2 -6.9 -4.7 -6.6 -2.6 -7.3 -1.5 -7.2 -.1 -5.7 .9 -8.6 2.9 -8.7 4.9 -4.7 3.6 -8.6 9.2 -3 -3 -2.7 -7.1 -.7 -20 -10.2 -83.6 -1.4 -2.2Z\" fill=\"#8f6464\" /></g></g><path d=\"M144.2 367.3l-7 -11.7 -6.1 -17.2 -2.3 -15.1 -1.5 -26.1 .5 -23 4.6 -20.2 5.4 -16.7 3.1 -6.9 1.1 -1.2 5.1 -1.6 -5.9 -6.6 -3.1 -6 -1.5 12.2 -7 20.5 -4.7 22.5 -1.6 19.1 .2 20.6 1.9 19.5 3.9 17 2.8 7.1 3.4 6 4 4.6Z\" fill=\"#f5e5e5\" /><path d=\"M157.3 197.1l3.8 1.2 1.8-1.5 1.1 5.1 1.3 1.6 8.1 4.9 11.1 4.4 9.4 2.1 10.4 1.1 17 1.3 7.9-.2 24.5-3.3 39.4-11.9 24.7-9.7 22.4-13.8-8.3 9.9-8.2 4.3-18.5 7.3-32.6 11.2-26.1 6.6-35.3 2.3-25.7-4.6-15.6-4.5-6.2-5.6Z\" fill=\"#f5e5e5\" /><path d=\"M158.8 329.4l9.4.5 3.6 5.8-5.1.1-3.3 1.1M154.2 326.8l9.1 13.4 1.1-1.5 2.6-.9 9.4 0-3.1-3.5-4.1-6.6-5.5.2Z\" fill=\"#8f6464\" /><path d=\"M332.4 214.1l5 28.4 -.9 30.5 -2.2 34.4 -5.1 41.3 -7.5 21.6 -8.1 16.9 9.9 -15.2 7.4 -15.5 1.8 -8.6 3.6 -31.3 3.2 -51.3 .5 -28.3 -.6 -7.9 -3.4 -13.5 -.8 -2Z\" fill=\"#f5e5e5\" /><path d=\"M306.6 338.2l.3 14-5.4 2.4-3.3 4.2-1.5 6.8 1 9.1-6.5 1.1-5 2.9-5.5 6.2-3.1 6.3-18-4.2.3-7.6 16 1.2 1.8-.5 4-3.2 5.9-7.4 5.2-8.8 1-5.6-1.1-5.2 2.6-1.3 3.3-3.2 3.4-6.9M308.5 335.6l-5 .9-3-.5-1.4 4.9-3.1 4.6-2.7 2.1-3.8.8 2.4 5.2-.6 6-6.3 10.5-6.4 7.3-2.5 1.2-10.1-.5-6.4-.9-2.2-1.2 1 7.8-1.3 4.4 22.2 5 3.8-8 5.9-5.9 5.4-2.3 6.1 0-1.6-8.8.3-5.6 2-4.7 1.9-1.8 5.9-2.2Z\" fill=\"#8f6464\" /><path d=\"M217.9 396.1l7.5-1.8 24.4-1.3 5.3-1.9 3.4-3.4\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M162.9 337.6l2 5 .4 4.9-1.5 8.4-2.7 5.2\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M155.2 327.1l.1 -6 -1.4 -4.1 -2.2 -2.7 -4.6 -3.1 1 -11.1 -1.5 -3.9 -2.6 -2.6 2 -4.2 .7 -3.8 -.5 -4.7 -1.3 -3.4 3.2 -6.3 -1.3 -3.6 2.6 -4.1 1.1 -3.9 -1.2 -5.2 4.9 -7.6 .1 -2.3 -1.1 -3.1 2 -3 1.1 -4.7 8.5 4 5.5 .5 3.2 2.6 4.4 2 3.6 .4 4.1 -.8 4.2 3.4 4.7 2.1 3.6 .3 4 -.7 8.4 2.9 4.4 .1 5.4 -1.6 4 -2.6 5.7 .3 4.6 -2.4 6.4 -.6 8.7 -5.7 8.5 1.1 4.7 -1.8 2.9 -2.7 9.5 0 2.9 -1.6 2.6 -3.2 6.7 -.2 4.4 -1.5 3.9 -4.1 6.3 .8 3.1 -1.2 1.7 -2.1 6.6 0 4.2 1.3 2.7 2 4.4 11.3 -.7 10.2 -2.6 4.1 -3.6 3.6 7.4 1.3 3.6 3.7 3.7 9.8 .7 10.7 -1.5 7.9 -3.2 8.4 .9 15.1 -2.9 8.4 -3.8 6.4 -3.7 3.8 -11.8 7.6\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M172.6 191.8l9.1 8.3 4.4 2.1 6.1 1.7\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M313.7 221.1l6.1-3.3 3.1-3.2 19.8-3.1 9.8-4-8 4.4-13.3 3.4-6.8.7-4.7 3.7Z\" fill=\"#8f6464\" /></g></g>"};
+/* Calcium and parathyroid hormone scene: gland sensing, PTH drive, bone resorption,
+ * renal calcium saving with vitamin D switch on, gut uptake, muscle tone, and a
+ * visible action for every treatment (gut top up, kidney flush, bone coat,
+ * sensor blocker sitting on its receptor, adenoma removal). */
+const layers = {
   parts: $("particles"),
-  labels: $("labels"),
   over: $("over"),
   panel: $("panel"),
+  vBone: $("vBone"),
+  vKid: $("vKid"),
+  vVitD: $("vVitD"),
+  vBCa: $("vBCa"),
+  vGCa: $("vGCa"),
+  vFb: $("vFb"),
+  vCaM: $("vCaM"),
+  vCaK: $("vCaK"),
 };
+let thyO = null, kidO = null, gutO = null, capEl = null, capDrug = -1;
+let trPTHbone = null, trPTHkid = null, trVitD = null, trVitG = null, trBoneCa = null;
+let trGutCa = null, trFb = null, trCaM = null, trCaK = null, trPoolBone = null, trPoolGland = null;
+const CASR = [199, 172], BONF = [730, 150], POOL = [480, 250];
 
-const sm = {
-  pth: 0.5,
-  ca: 0.5,
-  po4: 0.5,
-  vitD: 0.5,
-  bone: 0.5,
-  gut: 0.5,
-  dCalVit: 0,
-  dFluids: 0,
-  dBisp: 0,
-  dCmim: 0,
-  dPtx: 0,
-};
+/* fixed landmarks (thyroid art is procedural, so its ports are fixed; bone is a fixed panel) */
+const GTOP = [177, 102], GL = [113, 160], GFB = [188, 172];
+const BONL = [718, 138], BONC = [730, 168];
+const POOLR = [552, 252], POOLR2 = [552, 258], POOLL = [408, 244], POOLT = [480, 202], POOLB = [435, 275];
 
-const acc = {
-  pth: 0,
-  ca: 0,
-  po4: 0,
-  vitd: 0,
-  txCalVit: 0,
-  txFluids: 0,
-  txBisp: 0,
-  txCmim: 0,
-};
+function nearest(ports, hint) {
+  let best = null, bd = 1e9;
+  for (const k in ports) {
+    const p = ports[k];
+    const d = Math.hypot(p[0] - hint[0], p[1] - hint[1]);
+    if (d < bd) { bd = d; best = p; }
+  }
+  return best ? [best[0], best[1]] : hint.slice();
+}
+function setVessel(el, pts) {
+  el.setAttribute("d", "M" + f1(pts[0][0]) + " " + f1(pts[0][1]) + " C" + f1(pts[1][0]) + " " + f1(pts[1][1]) +
+    " " + f1(pts[2][0]) + " " + f1(pts[2][1]) + " " + f1(pts[3][0]) + " " + f1(pts[3][1]));
+}
+function initOrgans() {
+  thyO = organ($("thySlot"), "thyroid", 150, 160, 170, {});
+  kidO = organ($("kidSlot"), "kidney", 150, 335, 150, {});
+  gutO = organ($("gutSlot"), "intestine", 800, 335, 180, {});
+  const KP = kidO.ports, GP = gutO.ports;
+  const kTop = nearest(KP, [150, 262]), kIn = nearest(KP, [212, 318]), kR = nearest(KP, [228, 352]);
+  const guL = nearest(GP, [712, 348]);
+  const pBone = [GTOP, [320, 88], [560, 92], BONL];
+  const pKid = [GL, [105, 200], [112, 235], kTop];
+  const pVitD = [kR, [400, 382], [600, 382], guL];
+  const pVitG = [kTop, [120, 220], [150, 185], GFB];
+  const pBCa = [BONC, [650, 210], [560, 240], POOLR];
+  const pGCa = [guL, [640, 295], [565, 265], POOLR2];
+  const pFb = [POOLL, [320, 215], [240, 190], GFB];
+  const pCaK = [POOLB, [340, 292], [255, 308], kIn];
+  setVessel(layers.vBone, pBone);
+  setVessel(layers.vKid, pKid);
+  setVessel(layers.vVitD, pVitD);
+  setVessel(layers.vBCa, pBCa);
+  setVessel(layers.vGCa, pGCa);
+  setVessel(layers.vFb, pFb);
+  setVessel(layers.vCaK, pCaK);
+  layers.vCaM.setAttribute("d", "M" + f1(POOLT[0]) + " " + f1(POOLT[1]) + " L480 142");
+  trPTHbone = track(pBone); trPTHkid = track(pKid); trVitD = track(pVitD); trVitG = track(pVitG);
+  trBoneCa = track(pBCa); trGutCa = track(pGCa); trFb = track(pFb);
+  trCaM = track([POOLT, [480, 142]]); trCaK = track(pCaK);
+  trPoolBone = track([POOLR, [560, 240], [650, 210], BONC]);
+  trPoolGland = track([POOLL, [320, 215], [240, 190], GFB]);
+}
 
+/* caption per treatment, plain words */
+function capText(d) {
+  if (d === 1) return "Calcium with active vitamin D tops up gut uptake. Blood calcium climbs back.";
+  if (d === 2) return "Saline flush helps the kidney wash extra calcium out in urine. Stones slow.";
+  if (d === 3) return "Bisphosphonate coats bone and quiets the bone eating cells. Less calcium leaves bone.";
+  if (d === 4) return "Calcimimetic sits on the gland sensor. The gland releases less PTH.";
+  if (d === 5) return "Surgery removes the overactive gland tissue. PTH falls and calcium settles.";
+  return "No treatment. Gland signals move calcium between bone, kidney and gut.";
+}
+
+/* ---- particle pools (every pool item carries its element as p.e) ---- */
 function pool(n, build) {
   return Array.from({ length: n }, () => {
     const e = build();
     e.setAttribute("opacity", "0");
-    return { e, on: false, u: 0, k: 0, x: 0, y: 0 };
+    return { e, on: false, u: 0, k: 0, x: 0, y: 0, vx: 0, vy: 0, t: 0, life: 0 };
   });
 }
 const free = (pl) => pl.find((p) => !p.on);
@@ -809,46 +1032,25 @@ function emit(p, k) {
   p.on = true;
   p.u = 0;
   p.k = k || 0;
+  p.t = 0;
+  p.life = 0;
   p.e.setAttribute("opacity", "1");
 }
 function kill(p) {
   p.on = false;
   p.e.setAttribute("opacity", "0");
 }
+const plPTH = pool(16, () => mk("polygon", { class: "p-pth", points: "0,-3.2 3.2,0 0,3.2 -3.2,0" }, layers.parts));
+const plCa = pool(26, () => mk("circle", { class: "p-ca", r: 2.5 }, layers.parts));
+const plPO4 = pool(12, () => mk("circle", { class: "p-po4", r: 2.2 }, layers.parts));
+const plVitD = pool(12, () => mk("polygon", { class: "p-vitd", points: "-2.6,-2.6 2.6,-2.6 2.6,2.6 -2.6,2.6" }, layers.parts));
+const plTxCal = pool(8, () => mk("rect", { class: "p-tx-cal", x: -4, y: -2, width: 8, height: 4, rx: 2 }, layers.parts));
+const plTxFl = pool(10, () => mk("circle", { class: "p-tx-fl", r: 2.6 }, layers.parts));
+const plTxBisp = pool(8, () => mk("polygon", { class: "p-tx-bisp", points: "0,-3.5 3.5,0 0,3.5 -3.5,0" }, layers.parts));
+const plTxCmim = pool(8, () => mk("circle", { class: "p-tx-cmim", r: 2.4 }, layers.parts));
 
-/* Track coordinates matching anatomical layout */
-const tracks = {
-  pth_bone: track([[165, 140], [290, 112], [520, 102], [745, 126]]),
-  pth_kid: track([[155, 175], [150, 235], [165, 295]]),
-  kid_gut: track([[215, 345], [380, 360], [580, 360], [735, 345]]),
-  kid_pth: track([[185, 295], [205, 235], [190, 185]]),
-  bone_ca: track([[745, 155], [660, 205], [560, 235], [480, 250]]),
-  gut_ca: track([[735, 330], [650, 300], [560, 265], [480, 255]]),
-  ca_pth: track([[430, 240], [330, 210], [230, 180], [185, 160]]),
-  ca_nm: track([[480, 225], [480, 175], [480, 140]]),
-  ca_kid: track([[420, 260], [310, 290], [225, 315], [195, 335]]),
-  gut_tx: track([[630, 370], [680, 360], [735, 345]]),
-  kid_tx: track([[280, 270], [250, 290], [215, 310]]),
-  bone_tx: track([[680, 115], [710, 125], [740, 135]]),
-  pt_tx: track([[182, 220], [182, 195], [195, 175]]),
-};
-
-/* Particles */
-const plPTH = pool(18, () => mk("polygon", { class: "p-pth", points: "0,-3.2 3.2,0 0,3.2 -3.2,0" }, L.parts));
-const plCa = pool(28, () => mk("circle", { class: "p-ca", r: 2.5 }, L.parts));
-const plPO4 = pool(14, () => mk("circle", { class: "p-po4", r: 2.2 }, L.parts));
-const plVitD = pool(14, () => mk("polygon", { class: "p-vitd", points: "-2.6,-2.6 2.6,-2.6 2.6,2.6 -2.6,2.6" }, L.parts));
-const plTxCal = pool(8, () => {
-  const g = mk("g", {}, L.parts);
-  mk("rect", { class: "p-tx-cal", x: -4, y: -2, width: 8, height: 4, rx: 2 }, g);
-  return g;
-});
-const plTxFl = pool(8, () => mk("circle", { class: "p-tx-fl", r: 2.6 }, L.parts));
-const plTxBisp = pool(8, () => mk("polygon", { class: "p-tx-bisp", points: "0,-3.5 3.5,0 0,3.5 -3.5,0" }, L.parts));
-const plTxCmim = pool(8, () => mk("circle", { class: "p-tx-cmim", r: 2.4 }, L.parts));
-
-/* DOM elements */
-const ptGlands = $("pt-glands");
+/* dynamic anatomy refs */
+const ptGlands = ["pt-gland-a", "pt-gland-b", "pt-gland-c"].map((id) => $(id));
 const ptAdenoma = $("pt-adenoma");
 const ptAdenomaGlow = $("pt-adenoma-glow");
 const ptScars = $("pt-scars");
@@ -858,98 +1060,65 @@ const boneLacuna = $("bone-lacuna");
 const osteoclast = $("osteoclast");
 const bispCoat = $("bisp-coat");
 const kidneyStone = $("kidney-stone");
-const stoneBadge = $("stone-badge");
 const gutPumps = $("gut-pumps");
 const nmMuscle = $("nm-muscle-wrap");
 const nmSparks = $("nm-sparks");
 const nmBadge = $("nm-badge");
+const glandWash = $("glandWash"), boneWash = $("boneWash"), kidWash = $("kidWash");
+const gutWash = $("gutWash"), bloodWash = $("bloodWash");
 
-/* Treatment pills */
-let calvitPill, fluidsPill, bispPill, cmimPill, ptxPill;
+const sm = { pth: 0.5, ca: 0.5, po4: 0.5, vitD: 0.5, bone: 0.5, gut: 0.5, dCalVit: 0, dFluids: 0, dBisp: 0, dCmim: 0, dPtx: 0 };
+const acc = { pth: 0, ca: 0, po4: 0, vitd: 0, txCalVit: 0, txFluids: 0, txBisp: 0, txCmim: 0 };
 
 const gg = {};
 function initPanel() {
-  const P = L.panel, y0 = 478, h = 52, w = 18;
+  const P = layers.panel, y0 = 478, h = 52, w = 18;
   const xs = [100, 252, 404, 556, 708, 860];
   mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: 912, height: 142, rx: 14 }, P);
-  mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P).textContent = "Endocrine and organ balance";
-
+  mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P).textContent = "Hormone, calcium and organs";
   const defs = [
-    ["pth", "Parathyroid hormone", "g-eos", "PTH released by parathyroid chief cells. Drives bone resorption, renal calcium conservation, and activation of vitamin D."],
-    ["ca", "Serum calcium", "g-fl", "Extracellular ionized calcium. Tightly maintained; low triggers tetany and cramps, high causes weakness, stones and confusion."],
-    ["po4", "Serum phosphate", "g-cyt", "Extracellular phosphate. PTH promotes renal phosphate excretion; calcitriol increases intestinal phosphate absorption."],
-    ["vitD", "Active vitamin D", "g-neu", "Calcitriol (1,25-dihydroxyvitamin D), synthesized in renal proximal tubules via 1-alpha-hydroxylase under PTH control. Drives gut calcium uptake."],
-    ["bone", "Bone resorption", "g-bad", "Osteoclasts actively dissolving bone matrix. Liberates calcium and phosphate into blood; inhibited by bisphosphonates."],
-    ["gut", "Gut absorption", "g-good", "Fraction of dietary calcium transported across intestinal enterocytes into blood, dependent on active vitamin D."],
+    ["pth", "Parathyroid hormone", "g-eos", "PTH from the glands. Raises calcium by acting on bone, kidney and vitamin D."],
+    ["ca", "Serum calcium", "g-fl", "Calcium in blood. Low brings cramps and spasms, high brings weakness and stones."],
+    ["po4", "Serum phosphate", "g-cyt", "Phosphate in blood. PTH wastes it in urine while the gut absorbs more."],
+    ["vitD", "Active vitamin D", "g-neu", "Switched on in the kidney under PTH control. Tells the gut to absorb calcium."],
+    ["bone", "Bone resorption", "g-bad", "Bone eating cells dissolving mineral. Releases calcium into blood."],
+    ["gut", "Gut absorption", "g-good", "Calcium taken up from food in the gut, driven by active vitamin D."],
   ];
-
   defs.forEach(([id, name, cls, tip], i) => {
     gg[id] = gauge(P, xs[i], y0 + 2, h, w, cls, name, tip);
   });
-}
-
-function initLabels() {
-  const o = L.over;
-  const P = (t, x, y, tx, ty, info) => pill(o, t, x, y, tx, ty, info);
-
-  P("Parathyroid glands", 130, 140, 135, 68,
-    "Four parathyroid glands on the posterior thyroid. Chief cells monitor extracellular ionized calcium via calcium-sensing receptors (CaSR) and release parathyroid hormone (PTH) when calcium drops.");
-
-  P("PTH release", 280, 115, 280, 75,
-    "Parathyroid hormone (PTH): acts rapidly on the kidney to reabsorb calcium and excrete phosphate, stimulates 1-alpha-hydroxylase to activate vitamin D, and drives osteoclast bone resorption.");
-
-  P("Neuromuscular state", 480, 115, 480, 68,
-    "Neuromuscular responsiveness: hypocalcaemia lowers the threshold of sodium channels, causing spontaneous firing, tetany, cramps, and paresthesias. Hypercalcaemia raises the threshold, causing weakness and fatigue.");
-
-  P("Bone resorption", 760, 145, 810, 68,
-    "Bone mineral reservoir: osteoblasts signal osteoclasts via RANKL to resorb mineralized bone, liberating calcium and phosphate into the circulation. PTH accelerates this resorption.");
-
-  P("Negative feedback", 198, 168, 275, 145,
-    "Negative feedback: calcium binding to parathyroid CaSRs activates G-protein signaling that suppresses PTH secretion. Calcitriol also binds nuclear VDRs to repress PTH synthesis.");
-
-  P("Extracellular calcium", 480, 255, 480, 255,
-    "Ionized extracellular calcium: essential for cardiac and neuromuscular action potentials, excitation-contraction coupling, and clotting. Maintained in a narrow physiological range.");
-
-  P("Active vitamin D", 390, 350, 390, 380,
-    "Active vitamin D (calcitriol, 1,25-dihydroxyvitamin D): steroid hormone that up-regulates intestinal calcium and phosphate absorption and suppresses parathyroid hormone transcription.");
-
-  P("Kidneys", 150, 350, 150, 416,
-    "Kidneys: under PTH drive, distal tubules reclaim filtered calcium while proximal tubules waste phosphate and hydroxylate 25-hydroxyvitamin D into active 1,25-dihydroxyvitamin D (calcitriol).");
-
-  P("Small intestine", 800, 350, 800, 416,
-    "Intestinal enterocytes: absorb dietary calcium and phosphate through active channels (TRPV6) and calbindin, heavily dependent on stimulation by active vitamin D.");
-
-  /* Dynamic treatment pills */
-  calvitPill = P("Calcium and calcitriol", 740, 340, 620, 380,
-    "Oral calcium and active calcitriol: replenishes circulating calcium and bypasses impaired renal 1-alpha-hydroxylation to restore gut calcium absorption.");
-
-  fluidsPill = P("Intravenous saline", 210, 310, 270, 280,
-    "Intravenous isotonic saline: expands intravascular volume and induces renal calciuresis, promoting urinary calcium clearance in hypercalcaemia.");
-
-  bispPill = P("Bisphosphonate", 745, 135, 680, 120,
-    "Bisphosphonates: adhere avidly to bone hydroxyapatite crystals and inhibit osteoclast bone resorption, halting calcium release from the skeletal reservoir.");
-
-  cmimPill = P("Calcimimetic", 195, 170, 182, 225,
-    "Calcimimetics (such as cinacalcet): allosterically activate parathyroid calcium-sensing receptors, deceiving the gland into suppressing PTH secretion.");
-
-  ptxPill = P("Parathyroidectomy", 182, 170, 182, 225,
-    "Surgical parathyroidectomy: excision of an overactive parathyroid adenoma or hyperplastic glands, removing the source of autonomous PTH secretion.");
-
-  [calvitPill, fluidsPill, bispPill, cmimPill, ptxPill].forEach((p) => {
-    p.style.opacity = "0";
-    p.style.pointerEvents = "none";
-  });
+  const ox = layers.over;
+  const Q = (t, x, y, tx, ty, info) => pill(ox, t, x, y, tx, ty, info);
+  Q("Glands", 140, 150, 150, 66,
+    "Parathyroid glands on the thyroid. They sense calcium and release PTH when it falls.");
+  const pd = trPTHbone.at(0.3);
+  Q("PTH", pd.x, pd.y, 430, 66,
+    "Parathyroid hormone travelling to bone and kidney. Raises calcium, wastes phosphate.");
+  Q("Muscle", 540, 115, 620, 66,
+    "Muscle and nerve tone follows calcium. Low brings cramp, high brings weakness.");
+  Q("Bone", 790, 140, 810, 66,
+    "Bone mineral store. PTH wakes bone eating cells that release calcium into blood.");
+  Q("Blood calcium", POOL[0], POOL[1], 480, 308,
+    "Blood calcium pool. Bone, gut and kidney all add or remove calcium here.");
+  const kL = nearest(kidO.ports, [80, 335]);
+  Q("Kidney", kL[0], kL[1], 58, 292,
+    "Kidney. Saves calcium, wastes phosphate, and switches on vitamin D under PTH.");
+  const gL = nearest(gutO.ports, [712, 348]);
+  Q("Gut", gL[0], gL[1], 862, 252,
+    "Gut. Absorbs calcium from food when active vitamin D tells it to.");
+  capEl = mk("text", { class: "cp-cap", x: 30, y: 428 }, ox);
+  capEl.textContent = capText(0);
 }
 
 function init() {
+  initOrgans();
   initPanel();
-  initLabels();
 }
 
-function move(pl, tr, sp, getTr) {
+function move(pl, getTr, sp) {
   pl.forEach((p) => {
     if (!p.on) return;
-    const T = getTr ? getTr(p) : tr;
+    const T = getTr(p);
     p.u += (sp / T.len) * 0.05;
     if (p.u >= 1) {
       kill(p);
@@ -966,95 +1135,84 @@ function step(dt, m) {
     sm[n] = lerp(sm[n], m[n], k);
   });
 
-  /* Parathyroid gland display */
+  /* glands: failure scars, adenoma growth, sensor glow, surgery ring */
   const isHypo = m.words[1] === "low" && m.words[0] === "low";
   const adenomaActivity = Math.max(0, (sm.pth - 0.55) / 0.45);
   ptScars.setAttribute("opacity", isHypo ? (1 - sm.pth * 1.5).toFixed(2) : "0");
-  ptGlands.setAttribute("opacity", isHypo ? "0.3" : "1");
-
-  const adScale = 1 + adenomaActivity * 1.6 + (adenomaActivity > 0.1 ? 0.08 * Math.sin(tm / 250) : 0);
-  ptAdenoma.setAttribute("transform", "translate(182 170) scale(" + adScale.toFixed(3) + ")");
-  ptAdenomaGlow.setAttribute("opacity", (adenomaActivity * 0.85).toFixed(2));
-
-  ptCasr.setAttribute("stroke-opacity", clamp(0.2 + 0.8 * sm.ca).toFixed(2));
+  const quiet = 1 - 0.45 * Math.max(sm.dCmim, sm.dPtx);
+  ptGlands.forEach((g) => g.setAttribute("opacity", (isHypo ? 0.3 : quiet).toFixed(2)));
+  const adScale = (1 + adenomaActivity * 1.6 + (adenomaActivity > 0.1 ? 0.08 * Math.sin(tm / 250) : 0)) * (1 - 0.75 * sm.dPtx);
+  ptAdenoma.setAttribute("transform", "translate(174 180) scale(" + Math.max(0.2, adScale).toFixed(3) + ")");
+  ptAdenomaGlow.setAttribute("opacity", (adenomaActivity * (1 - sm.dPtx) * 0.85).toFixed(2));
+  ptCasr.setAttribute("stroke-opacity", clamp(0.2 + 0.8 * sm.ca + 0.3 * sm.dCmim, 0, 1).toFixed(2));
   ptPtxRing.setAttribute("opacity", sm.dPtx.toFixed(2));
+  glandWash.setAttribute("opacity", clamp(0.05 + 0.4 * sm.dCmim + 0.4 * sm.dPtx, 0, 0.85).toFixed(2));
 
-  /* Bone and osteoclast */
+  /* bone: osteoclast shrinks and stills as bisphosphonate coats the surface */
   const ocWobble = sm.bone * 0.12 * Math.sin(tm / 180);
   osteoclast.setAttribute("transform", "translate(" + (742 + ocWobble * 15).toFixed(1) + " 145) scale(" + (0.8 + 0.4 * sm.bone).toFixed(2) + ")");
   boneLacuna.setAttribute("stroke-width", (1.5 + 2.5 * sm.bone).toFixed(1));
   bispCoat.setAttribute("opacity", sm.dBisp.toFixed(2));
+  boneWash.setAttribute("opacity", (0.05 + 0.5 * sm.dBisp).toFixed(2));
 
-  /* Kidney and stones */
+  /* kidney stone follows calcium; flush wash shows saline at work */
   const stoneOp = Math.max(0, (sm.ca - 0.68) * 3.2);
   kidneyStone.setAttribute("opacity", stoneOp.toFixed(2));
-  stoneBadge.setAttribute("opacity", stoneOp.toFixed(2));
+  kidWash.setAttribute("opacity", (0.05 + 0.45 * sm.dFluids).toFixed(2));
 
-  /* Gut transport */
+  /* gut pumps and washes: replacement visibly tops up uptake */
   gutPumps.setAttribute("opacity", (0.2 + 0.8 * sm.gut).toFixed(2));
+  gutWash.setAttribute("opacity", (0.06 + 0.5 * sm.dCalVit).toFixed(2));
+  bloodWash.setAttribute("opacity", (0.05 + 0.4 * sm.dCalVit).toFixed(2));
 
-  /* Neuromuscular excitability */
+  /* muscle tone follows calcium */
   if (sm.ca < 0.35) {
     const tremor = Math.sin(tm / 40) * 2.2 * (0.35 - sm.ca) * 6;
     nmMuscle.setAttribute("transform", "translate(" + (488 + tremor).toFixed(1) + " 92)");
     nmSparks.setAttribute("opacity", (0.5 + 0.5 * Math.sin(tm / 70)).toFixed(2));
-    if (nmBadge.textContent !== "tetany and cramps") {
-      nmBadge.textContent = "tetany and cramps";
-      nmBadge.setAttribute("class", "nm-badge nm-badge-bad");
+    if (nmBadge.textContent !== "cramp and spasm") {
+      nmBadge.textContent = "cramp and spasm";
+      nmBadge.setAttribute("class", "cp-badge cp-badge-bad");
     }
   } else if (sm.ca > 0.7) {
     nmMuscle.setAttribute("transform", "translate(488 92)");
     nmSparks.setAttribute("opacity", "0");
-    if (nmBadge.textContent !== "weakness and fatigue") {
-      nmBadge.textContent = "weakness and fatigue";
-      nmBadge.setAttribute("class", "nm-badge nm-badge-warn");
+    if (nmBadge.textContent !== "weak and tired") {
+      nmBadge.textContent = "weak and tired";
+      nmBadge.setAttribute("class", "cp-badge cp-badge-warn");
     }
   } else {
     nmMuscle.setAttribute("transform", "translate(488 92)");
     nmSparks.setAttribute("opacity", "0");
-    if (nmBadge.textContent !== "stable neuromuscular tone") {
-      nmBadge.textContent = "stable neuromuscular tone";
-      nmBadge.setAttribute("class", "nm-badge nm-badge-ok");
+    if (nmBadge.textContent !== "stable muscle tone") {
+      nmBadge.textContent = "stable muscle tone";
+      nmBadge.setAttribute("class", "cp-badge cp-badge-ok");
     }
   }
 
-  /* Treatment overlay pills */
-  calvitPill.style.opacity = sm.dCalVit.toFixed(2);
-  fluidsPill.style.opacity = sm.dFluids.toFixed(2);
-  bispPill.style.opacity = sm.dBisp.toFixed(2);
-  cmimPill.style.opacity = sm.dCmim.toFixed(2);
-  ptxPill.style.opacity = sm.dPtx.toFixed(2);
-
-  [calvitPill, fluidsPill, bispPill, cmimPill, ptxPill].forEach((p) => {
-    p.style.pointerEvents = parseFloat(p.style.opacity) > 0.3 ? "auto" : "none";
-  });
-
-  /* Particle emissions */
+  /* hormone and ion emissions, all model driven */
   acc.pth += dt * sm.pth * 4.2;
   while (acc.pth >= 1) {
     acc.pth--;
     const p = free(plPTH);
-    if (p) emit(p, Math.random() < 0.65 ? 0 : 1);
+    if (p) emit(p, Math.random() < 0.6 ? 0 : 1);
   }
-
   acc.vitd += dt * sm.vitD * 3.8;
   while (acc.vitd >= 1) {
     acc.vitd--;
     const p = free(plVitD);
     if (p) emit(p, Math.random() < 0.8 ? 0 : 1);
   }
-
   acc.ca += dt * (sm.bone * 2.5 + sm.gut * 2.8 + sm.ca * 2.0);
   while (acc.ca >= 1) {
     acc.ca--;
     const p = free(plCa);
     if (p) {
       const r = Math.random();
-      const k = r < 0.3 ? 0 : r < 0.6 ? 1 : r < 0.75 ? 2 : r < 0.9 ? 3 : 4;
-      emit(p, k);
+      const kk = r < 0.3 ? 0 : r < 0.6 ? 1 : r < 0.75 ? 2 : r < 0.9 ? 3 : 4;
+      emit(p, kk);
     }
   }
-
   acc.po4 += dt * (sm.bone * 1.5 + sm.gut * 1.5);
   while (acc.po4 >= 1) {
     acc.po4--;
@@ -1062,59 +1220,99 @@ function step(dt, m) {
     if (p) emit(p, Math.random() < 0.5 ? 0 : 1);
   }
 
-  /* Treatment particle emissions */
-  acc.txCalVit += dt * sm.dCalVit * 2.0;
+  /* treatment actions, each animated at its target */
+  acc.txCalVit += dt * sm.dCalVit * 2.4;
   while (acc.txCalVit >= 1) {
     acc.txCalVit--;
     const p = free(plTxCal);
     if (p) emit(p);
   }
-
-  acc.txFluids += dt * sm.dFluids * 2.5;
+  acc.txFluids += dt * sm.dFluids * 3.0;
   while (acc.txFluids >= 1) {
     acc.txFluids--;
     const p = free(plTxFl);
     if (p) emit(p);
   }
-
   acc.txBisp += dt * sm.dBisp * 1.8;
   while (acc.txBisp >= 1) {
     acc.txBisp--;
     const p = free(plTxBisp);
-    if (p) emit(p);
+    if (p) { emit(p); p.t = 0; }
   }
-
   acc.txCmim += dt * sm.dCmim * 2.0;
   while (acc.txCmim >= 1) {
     acc.txCmim--;
     const p = free(plTxCmim);
-    if (p) emit(p);
+    if (p) { emit(p); p.t = 0; }
   }
 
-  /* Particle movements */
-  move(plPTH, null, 48, (p) => (p.k === 0 ? tracks.pth_bone : tracks.pth_kid));
-  move(plVitD, null, 45, (p) => (p.k === 0 ? tracks.kid_gut : tracks.kid_pth));
-  move(plCa, null, 55, (p) => {
-    if (p.k === 0) return tracks.bone_ca;
-    if (p.k === 1) return tracks.gut_ca;
-    if (p.k === 2) return tracks.ca_pth;
-    if (p.k === 3) return tracks.ca_nm;
-    return tracks.ca_kid;
+  move(plPTH, (p) => (p.k === 0 ? trPTHbone : trPTHkid), 48);
+  move(plVitD, (p) => (p.k === 0 ? trVitD : trVitG), 45);
+  move(plCa, (p) => {
+    if (p.k === 0) return trBoneCa;
+    if (p.k === 1) return trGutCa;
+    if (p.k === 2) return trFb;
+    if (p.k === 3) return trCaM;
+    return trCaK;
+  }, 55);
+  move(plPO4, (p) => (p.k === 0 ? trBoneCa : trGutCa), 48);
+  move(plTxCal, () => trGutCa, 40);
+
+  /* saline flush: carried to the kidney, then washed down and out */
+  plTxFl.forEach((p) => {
+    if (!p.on) return;
+    if (p.u < 1) {
+      p.u += (45 / trCaK.len) * 0.05;
+      if (p.u >= 1) { p.u = 1; p.t = 0; const q = trCaK.at(1); p.x = q.x; p.y = q.y; }
+      else { const q = trCaK.at(p.u); p.x = q.x; p.y = q.y; }
+      p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    } else {
+      p.t += dt;
+      p.y += 170 * dt;
+      p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+      p.e.setAttribute("opacity", clamp(1 - p.t / 2.2).toFixed(2));
+      if (p.t > 2.2) kill(p);
+    }
   });
-  move(plPO4, null, 48, (p) => (p.k === 0 ? tracks.bone_ca : tracks.gut_ca));
 
-  move(plTxCal, tracks.gut_tx, 40);
-  move(plTxFl, tracks.kid_tx, 45);
-  move(plTxBisp, tracks.bone_tx, 38);
-  move(plTxCmim, tracks.pt_tx, 40);
+  /* bisphosphonate: travels to bone, sits on the surface, then fades */
+  plTxBisp.forEach((p) => {
+    if (!p.on) return;
+    if (p.u < 1) {
+      p.u += (38 / trPoolBone.len) * 0.05;
+      if (p.u >= 1) { p.t = 5; p.x = BONF[0] + rnd(-14, 14); p.y = BONF[1] + rnd(-22, 22); }
+      else { const q = trPoolBone.at(p.u); p.x = q.x; p.y = q.y; }
+      p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    } else {
+      p.t -= dt;
+      p.e.setAttribute("opacity", clamp(p.t / 5).toFixed(2));
+      if (p.t <= 0) kill(p);
+    }
+  });
 
-  /* Gauges */
+  /* calcimimetic: travels to the gland, sits on the sensor, then fades */
+  plTxCmim.forEach((p) => {
+    if (!p.on) return;
+    if (p.u < 1) {
+      p.u += (40 / trPoolGland.len) * 0.05;
+      if (p.u >= 1) { p.t = 5; p.x = CASR[0] + rnd(-4, 4); p.y = CASR[1] + rnd(-5, 5); }
+      else { const q = trPoolGland.at(p.u); p.x = q.x; p.y = q.y; }
+      p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    } else {
+      p.t -= dt;
+      p.e.setAttribute("opacity", clamp(p.t / 5).toFixed(2));
+      if (p.t <= 0) kill(p);
+    }
+  });
+
+  /* gauges */
   gg.pth.set(sm.pth, wordOf(sm.pth, 0.3, 0.7, ["low", "normal", "high"]));
   gg.ca.set(sm.ca, wordOf(sm.ca, 0.35, 0.7, ["low", "normal", "high"]));
   gg.po4.set(sm.po4, wordOf(sm.po4, 0.35, 0.65, ["low", "normal", "high"]));
   gg.vitD.set(sm.vitD, wordOf(sm.vitD, 0.3, 0.7, ["low", "normal", "high"]));
   gg.bone.set(sm.bone, wordOf(sm.bone, 0.35, 0.7, ["quiescent", "balanced", "high"]));
   gg.gut.set(sm.gut, wordOf(sm.gut, 0.35, 0.7, ["poor", "adequate", "high"]));
+  if (drug !== capDrug) { capDrug = drug; const t = capText(drug); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 
 run({ init, step });

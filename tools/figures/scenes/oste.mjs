@@ -1,6 +1,6 @@
 /* Osteomyelitis as an animated, working scene (original drawing; Anima styling, Anatomy page shell).
  *   node tools/figures/scenes/oste.mjs [--print-model]
- * Static layout here; bacteria, pus, dead bone and gauges move in oste.page.js. Qualitative: no doses, no numeric thresholds. */
+ * Static layout here; heart, blood seeding, pus, dead bone and gauges move in oste.page.js. Qualitative: no doses, no numeric thresholds. */
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -60,11 +60,9 @@ const TESTS = [
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<text class="sc-zone sc-dim" x="34" y="428">CHILD LONG BONE, CUT ALONG ITS LENGTH</text>
-<g id="vessel">
-<rect class="ost-vessel" x="28" y="76" width="306" height="28" rx="14"/>
-<path class="ost-arrow" d="M334 90L366 112L334 118Z"/>
-</g>
+<text class="sc-zone" x="34" y="68">CHILD LONG BONE, CUT ALONG ITS LENGTH</text>
+<path id="vesselPath" class="ost-vessel" d="M115 156 C240 150 300 175 380 215"/>
+<g id="heartSlot"></g>
 <g id="bone">
 <path class="ost-bone" d="M372 96Q480 72 588 96L584 142L596 168L560 232L552 424Q480 438 408 424L400 232L364 168L376 142Z"/>
 <rect class="ost-plate" x="378" y="140" width="204" height="10" rx="5"/>
@@ -81,11 +79,9 @@ const body = `
 <polygon class="ost-seq2" points="492,306 520,298 528,322 500,332 486,320"/>
 <circle class="ost-seqdot" cx="478" cy="264" r="7"/>
 </g>
-<g id="sinusG">
-<path id="sinusPath" class="ost-sinus" d="M536 282Q612 286 656 266Q682 254 700 262"/>
-<circle id="sinusMouth" class="ost-mouth" cx="702" cy="262" r="7"/>
-</g>
-<rect class="ost-skin" x="700" y="172" width="34" height="196" rx="12"/>
+<g id="skinSlot"></g>
+<path id="sinusPath" class="ost-sinus" d="M566 282 Q660 280 828 294"/>
+<circle id="sinusMouth" class="ost-mouth" cx="828" cy="294" r="7"/>
 <g id="bac"></g>
 <g id="cells"></g>
 <g id="parts"></g>
@@ -95,19 +91,18 @@ const body = `
 
 buildScene({
   id: "osteomyelitis", fig: "Fig 1", title: "Osteomyelitis: infected bone under pressure", W, H, body,
-  label: "An animated child long bone. Bacteria carried in the blood lodge in the metaphysis, multiply as Staphylococcus aureus, and form pus under pressure. Pressure cuts off the bone blood supply, dead bone forms a sequestrum, new bone forms an involucrum under a lifted periosteum, and a chronic sinus drains to skin. In sickle cell disease Salmonella is a classic alternative organism. Gauges show infection, pus pressure, dead bone, new bone, sinus and healing. Treatments include prolonged antibiotics, surgical debridement and immobilisation.",
+  label: "An animated child long bone with its blood supply. The heart pumps blood that carries germs to the metaphysis, where Staphylococcus aureus multiplies and forms pus under pressure. Pressure cuts off the bone blood supply, dead bone forms a sequestrum, new bone forms an involucrum under a lifted periosteum, and a chronic sinus drains pus to the skin. In sickle cell disease Salmonella is a classic alternative organism. Gauges show infection, pus pressure, dead bone, new bone, sinus and healing. Treatments include prolonged antibiotics, surgical debridement and immobilisation.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "oste.page.js"), "utf8"), modelOf, MD, tests: TESTS,
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "oste.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
   withoutLabel: "Without treatment", withLabel: "With combined care",
   extraCss: `
-body{--c-bone:#e8d9b0;--c-cortex:#c9a86a;--c-marrow:#f4ead0;--c-pus:#e9c84a;--c-seq:#6b5a4a;--c-skin:#d9a07a;--c-vess:#d63a4a;--c-staph:#e9a13b;--c-inv:#d9b878;--c-splint:#7ab8ff}
-body[data-theme="light"]{--c-bone:#e0cda0;--c-cortex:#b8934f;--c-marrow:#f7efdb;--c-pus:#c9a227;--c-seq:#5a4636;--c-skin:#c9855a;--c-vess:#c42a3d;--c-staph:#c47a1a;--c-inv:#b8934f;--c-splint:#2f7ad8}
+body{--c-bone:#e8d9b0;--c-cortex:#c9a86a;--c-marrow:#f4ead0;--c-pus:#e9c84a;--c-seq:#6b5a4a;--c-vess:#d63a4a;--c-staph:#e9a13b;--c-inv:#d9b878;--c-splint:#7ab8ff}
+body[data-theme="light"]{--c-bone:#e0cda0;--c-cortex:#b8934f;--c-marrow:#f7efdb;--c-pus:#c9a227;--c-seq:#5a4636;--c-vess:#c42a3d;--c-staph:#c47a1a;--c-inv:#b8934f;--c-splint:#2f7ad8}
 .ost-bone{fill:var(--c-bone);stroke:color-mix(in srgb,var(--c-cortex) 70%,#000);stroke-width:1.2}
 .ost-plate{fill:var(--c-cortex);opacity:.9}
 .ost-marrow{fill:var(--c-marrow);opacity:.85}
 .ost-cortex{fill:none;stroke:var(--c-cortex);stroke-width:16;opacity:.55;stroke-linecap:round}
-.ost-vessel{fill:color-mix(in srgb,var(--c-vess) 28%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-vess) 60%,#000);stroke-width:1}
-.ost-arrow{fill:var(--c-vess);opacity:.8}
+.ost-vessel{fill:none;stroke:color-mix(in srgb,var(--c-vess) 45%,var(--anatomy-paper));stroke-width:16;stroke-linecap:round;opacity:.85}
 .ost-peri{fill:none;stroke:var(--c-endo);stroke-width:5;stroke-linecap:round}
 .ost-inv{fill:none;stroke:var(--c-inv);stroke-width:9;stroke-linecap:round}
 .ost-pus{fill:var(--c-pus);stroke:color-mix(in srgb,var(--c-pus) 55%,#000);stroke-width:.9}
@@ -116,9 +111,9 @@ body[data-theme="light"]{--c-bone:#e0cda0;--c-cortex:#b8934f;--c-marrow:#f7efdb;
 .ost-seqdot{fill:color-mix(in srgb,var(--c-seq) 70%,#fff);opacity:.8}
 .ost-sinus{fill:none;stroke:var(--c-pus);stroke-width:7;stroke-linecap:round}
 .ost-mouth{fill:var(--c-pus);stroke:color-mix(in srgb,var(--c-pus) 55%,#000);stroke-width:.8}
-.ost-skin{fill:var(--c-skin);stroke:color-mix(in srgb,var(--c-skin) 55%,#000);stroke-width:1}
 .ost-splint{fill:var(--c-splint);stroke:color-mix(in srgb,var(--c-splint) 55%,#000);stroke-width:1;stroke-dasharray:6 4}
 .ost-strap{fill:none;stroke:var(--c-splint);stroke-width:4;stroke-linecap:round}
+.ost-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
 .cl-staph{--cc:var(--c-staph)}.cl-ost{--cc:var(--c-inv)}
 .p-pus{--cc:var(--c-pus)}.p-sinus{--cc:var(--c-pus)}
 .dr-g-fill.g-pus{fill:var(--c-pus)}.dr-g-fill.g-seq{fill:var(--c-seq)}.dr-g-fill.g-inv{fill:var(--c-inv)}.dr-g-fill.g-sinus{fill:var(--c-pus)}.dr-g-fill.g-heal{fill:var(--c-good)}

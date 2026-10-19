@@ -27,8 +27,8 @@ function modelOf(S, level, drug) {
   const cl = (v) => Math.max(0, Math.min(1, v));
   const baseI = [0.78, 0.72, 0.96][t], baseU = [0.70, 0.76, 0.94][t], baseD = [0.92, 0.34, 0.88][t];
   const baseF = [0.85, 0.05, 0.70][t];
-  const eI = [[0, 0, 0], [0.18, 0.48, 0.12], [0.55, 0.58, 0.62], [0.68, 0.65, 0.75]][drug][t];
-  const eU = [[0, 0, 0], [0.15, 0.45, 0.10], [0.48, 0.52, 0.55], [0.62, 0.60, 0.70]][drug][t];
+  const eI = [[0, 0, 0], [0.18, 0.48, 0.40], [0.55, 0.58, 0.62], [0.68, 0.65, 0.75]][drug][t];
+  const eU = [[0, 0, 0], [0.15, 0.45, 0.35], [0.48, 0.52, 0.55], [0.62, 0.60, 0.70]][drug][t];
   const eD = [[0, 0, 0], [0.08, 0.28, 0.05], [0.30, 0.32, 0.35], [0.55, 0.48, 0.62]][drug][t];
   const I = cl(baseI * (1 - eI)), U = cl(baseU * (1 - eU)), D = cl(baseD * (1 - eD));
   const Sym = cl(0.55 * I + 0.30 * U + 0.15 * D);
@@ -50,19 +50,20 @@ const TESTS = [
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<text class="sc-zone" x="34" y="68">DISEASE MAP, TERMINAL ILEUM TO RECTUM</text>
-<rect class="ibd-map" x="40" y="86" width="880" height="34" rx="17"/>
-<g id="mapSeg"></g>
-<text class="sc-lab" x="48" y="136">terminal ileum</text>
-<text class="sc-lab" x="480" y="136" text-anchor="middle">colon</text>
-<text class="sc-lab" x="912" y="136" text-anchor="end">rectum</text>
+<text class="sc-zone" x="34" y="66">DISEASE MAP</text>
+<g id="washG"></g>
+<g id="gutSlot"></g>
+<g id="colonSlot"></g>
+<g id="lesG"></g>
 <rect class="ibd-lum" x="40" y="185" width="880" height="36" rx="8"/>
 <text class="sc-lab sc-dim" x="52" y="207">lumen</text>
+<text class="sc-zone" x="34" y="178">WALL CLOSE UP</text>
 <rect class="ibd-muc" x="40" y="221" width="880" height="54"/>
 <rect class="ibd-sub" x="40" y="275" width="880" height="42"/>
 <rect class="ibd-musc" x="40" y="317" width="880" height="54"/>
 <rect class="ibd-ser" x="40" y="371" width="880" height="22"/>
 <rect id="inflam" class="ibd-inflam" x="40" y="221" width="880" height="120" opacity="0.3"/>
+<rect id="coat" class="ibd-coat" x="40" y="221" width="880" height="12" rx="6" opacity="0"/>
 <text class="sc-lab" x="912" y="252" text-anchor="end">mucosa</text>
 <text class="sc-lab" x="912" y="300" text-anchor="end">submucosa</text>
 <text class="sc-lab" x="912" y="348" text-anchor="end">muscle</text>
@@ -74,10 +75,10 @@ const body = `
 <g id="panel"></g>`;
 
 const extraCss = `
-.ibd-map{fill:color-mix(in srgb,var(--c-fl) 12%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
-.ibd-lesC{fill:var(--c-bad)}
-.ibd-lesU{fill:#ff9a3d}
-.ibd-lesF{fill:var(--c-bad)}
+.ibd-wash{fill:var(--c-bad)}
+.ibd-spotC{fill:var(--c-bad)}
+.ibd-ucband{fill:none;stroke:#ff9a3d;stroke-width:14;stroke-linecap:round}
+.ibd-coat{fill:#ffd24a;stroke:color-mix(in srgb,#ffd24a 60%,#000);stroke-width:.8}
 .ibd-lum{fill:color-mix(in srgb,var(--c-fl) 16%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-fl) 40%,var(--anatomy-mid));stroke-width:1}
 .ibd-muc{fill:color-mix(in srgb,var(--c-endo) 30%,transparent)}
 .ibd-sub{fill:color-mix(in srgb,var(--c-plt) 18%,transparent)}
@@ -88,10 +89,13 @@ const extraCss = `
 .ibd-fiss{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.1}
 .ibd-fist{fill:none;stroke:var(--c-bad);stroke-width:5;stroke-linecap:round}
 .ibd-abs{fill:color-mix(in srgb,var(--c-bad) 55%,var(--anatomy-paper));stroke:var(--c-bad);stroke-width:1.2}
+.ibd-cap{fill:var(--anatomy-strong);font-size:12px}
 .cl-ent{--cc:#e9c07a}
 .p-tnfp{--cc:var(--c-cyt)}
 .p-bactp{--cc:var(--c-bac)}
 .p-asap{--cc:#ffd24a}
+.p-sterp{--cc:#7fc8a9}
+.p-biodp{--cc:#b78fe8}
 .dr-g-fill.g-inf{fill:var(--c-bad)}
 .dr-g-fill.g-ulc{fill:#ff9a3d}
 .dr-g-fill.g-wall{fill:var(--c-cyt)}
@@ -100,10 +104,10 @@ const extraCss = `
 
 buildScene({
   id: "inflammatory-bowel-disease", fig: "Fig 1", title: "Inflammatory bowel disease: Crohn disease and ulcerative colitis", W, H, body, extraCss,
-  label: "An animated map and bowel wall in inflammatory bowel disease. The pattern slider shows Crohn disease with patchy skip lesions, deep fissures and a fistula, ulcerative colitis with continuous inflammation spreading up from the rectum and shallow mucosal ulcers, and a severe flare with widespread deep inflammation. A broken barrier lets microbes meet immune cells, which release cytokines and recruit more cells. Gauges show inflammation, ulceration, wall damage and symptoms. Treatment choices are an aminosalicylate, a corticosteroid and a biologic.",
+  label: "An animated bowel map and wall close up in inflammatory bowel disease. The pattern slider shows Crohn disease with patchy spots on the small bowel, ulcerative colitis with continuous inflammation spreading up the colon from the rectum, and a severe flare lighting up both. Below, a magnified wall section shows the leaking surface, immune cells releasing TNF, ulcers, a deep fissure and a fistula. Aminosalicylate coats the surface gold, corticosteroid switches immune cells off, and biologic traps TNF. Gauges show inflammation, ulceration, wall damage and symptoms. Treatment choices are an aminosalicylate, a corticosteroid and a biologic.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "ibd.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "ibd.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With biologic",
   sourcesLis: [
     "<strong>Two patterns of one group of diseases.</strong> Inflammatory bowel disease is chronic immune mediated inflammation of the gut, thought to arise from a disturbed barrier, gut microbes and a dysregulated immune response in a susceptible person. Crohn disease can affect any part of the gut, most often the terminal ileum and colon, in patchy skip lesions with healthy bowel between. Its inflammation goes through the full wall, so deep fissures, strictures, fistulae and abscesses can form. Ulcerative colitis affects the colon only, starts in the rectum and spreads upward without gaps, and its inflammation stays mainly in the mucosa, giving shallow ulcers, bleeding and urgency. A severe flare is widespread active inflammation with extensive ulceration and systemic upset in either pattern. This is standard teaching in medicine, gastroenterology and pathology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> An aminosalicylate calms the mucosal surface and helps most in ulcerative colitis, with less effect on deep Crohn inflammation. A corticosteroid broadly suppresses immune activity and settles a flare, but does not heal the wall fully and is not a long term plan. A biologic that blocks tumour necrosis factor neutralises a key cytokine, so immune recruitment, ulceration and transmural damage fall in both patterns. These are teaching toggles only and name no individual drug or dose.",

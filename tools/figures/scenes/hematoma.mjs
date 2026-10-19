@@ -15,22 +15,22 @@ const MD = {
   drugLabel: "Treatment",
   settings: [
     { label: "no treatment" },
-    { label: "surgical evacuation" },
     { label: "observation" },
     { label: "measures for raised intracranial pressure" },
+    { label: "surgical evacuation" },
   ],
   status: "Haematoma: {level} · {drug} ·",
-  drugNames: ["no treatment", "surgical evacuation", "observation", "raised pressure measures"],
+  drugNames: ["no treatment", "observation", "raised pressure measures", "surgical evacuation"],
 };
 function modelOf(S, level, drug) {
   const kinds = [
     { grow: 0.92, injury: 0.22, atrophy: 0.12 },
     { grow: 0.88, injury: 0.78, atrophy: 0.2 },
-    { grow: 0.6, injury: 0.28, atrophy: 0.85 },
+    { grow: 0.55, injury: 0.28, atrophy: 0.85 },
   ];
   const k = kinds[level];
   const cl = (v) => Math.max(0, Math.min(1, v));
-  const surg = drug === 1 ? 1 : 0, obs = drug === 2 ? 1 : 0, icpM = drug === 3 ? 1 : 0;
+  const obs = drug === 1 ? 1 : 0, icpM = drug === 2 ? 1 : 0, surg = drug === 3 ? 1 : 0;
   const C = cl(k.grow * (surg ? 0.16 : icpM ? 0.94 : obs ? 0.98 : 1));
   const inj = cl(k.injury * (surg ? 0.85 : 1));
   const P = cl(0.06 + 0.74 * C + 0.2 * inj - (icpM ? 0.26 : 0) - (surg ? 0.04 : 0));
@@ -42,9 +42,9 @@ function modelOf(S, level, drug) {
 }
 const TESTS = [
   [0, 0, "collection large · pressure high · shift marked · alertness reduced"],
-  [0, 1, "collection small · pressure normal · shift none · alertness preserved"],
+  [0, 3, "collection small · pressure normal · shift none · alertness preserved"],
   [1, 0, "collection large · pressure high · shift marked · alertness low"],
-  [2, 3, "collection moderate · pressure normal · shift mild · alertness preserved"],
+  [2, 2, "collection moderate · pressure normal · shift mild · alertness preserved"],
 ];
 
 /* ---------------- static layout ---------------- */
@@ -57,8 +57,8 @@ buildScene({
   id: "extradural-subdural-haematoma", fig: "Fig 1", title: "Head injury haematomas: extradural and subdural", W, H, body,
   label: "An animated head in cross section. A temporal skull fracture tears the middle meningeal artery and blood collects between skull and dura as a lens shaped extradural haematoma, often after a lucid interval. A torn bridging vein lets blood spread between dura and brain as a crescent shaped subdural haematoma, acute after major trauma or chronic and liquefied in an older atrophic brain. Blood in the subarachnoid space and a cerebral contusion are also shown. A growing collection raises intracranial pressure, shifts the midline and threatens herniation. Gauges show collection size, pressure, shift, brain injury and alertness. Treatment choices include surgical evacuation, observation and measures for raised intracranial pressure.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "hematoma.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "hematoma.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With surgical evacuation",
   sourcesLis: [
     "<strong>Extradural haematoma.</strong> A fracture of the temporal bone can tear the middle meningeal artery. Arterial blood strips the dura from the inner skull and forms a biconvex, lens shaped collection that is limited where the dura is firmly attached. The classic story is a brief loss of consciousness, a lucid interval when the person seems to recover, then rapid deterioration as the collection expands and pressure rises. This is standard teaching in neurosurgery and emergency medicine texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Subdural haematoma.</strong> Bridging veins that cross from the brain surface to the dural sinuses can tear, classically with acceleration and deceleration injury. Venous blood spreads freely between dura and brain as a crescent that can cross suture lines. An acute subdural often comes with underlying contusion and brain injury, so the outlook is worse than the collection alone suggests. A chronic subdural forms slowly, often after minor trauma in an older person with an atrophic brain and stretched veins; the blood liquefies and a membrane forms around it. This is standard teaching and was not checked against a linked source here, so it is flagged for review.",
@@ -85,7 +85,12 @@ buildScene({
 .hm-flap{fill:color-mix(in srgb,#d9b97a 45%,var(--anatomy-paper));stroke:var(--anatomy-strong);stroke-width:1.4}
 .hm-drain{fill:none;stroke:var(--anatomy-strong);stroke-width:1.6;stroke-linecap:round}
 .hm-arrow{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-linecap:round}
+.hm-glow{fill:var(--c-bad);stroke:none}
+.hm-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
+.hm-pulse{fill:none;stroke:var(--c-good);stroke-width:2}
+.hm-wedge{fill:color-mix(in srgb,var(--c-fl) 30%,var(--anatomy-card));stroke:var(--anatomy-strong);stroke-width:1.2}
 .p-blood{--cc:var(--c-rbc)}
+.p-out{--cc:var(--c-fl)}
 .dr-g-fill.g-coll{fill:var(--c-rbc)}.dr-g-fill.g-press{fill:var(--c-bad)}.dr-g-fill.g-shift{fill:var(--c-cyt)}.dr-g-fill.g-inj{fill:#8a5fc4}.dr-g-fill.g-alert{fill:var(--c-good)}
 `,
 });

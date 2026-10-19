@@ -61,6 +61,7 @@ const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
 <text class="sc-zone" x="34" y="68">GLOMERULUS AND BOWMAN CAPSULE</text>
 <text class="sc-zone sc-dim" x="560" y="68">TUBULE, URINE AND BODY EFFECTS</text>
+<g id="kidneySlot"></g>
 <g id="vess"></g>
 <g id="caps"></g>
 <g id="tuft"></g>
@@ -96,15 +97,17 @@ body[data-theme="light"]{--c-dep:#c99612;--c-comp:#d96a25;--c-iga:#c44a74;--c-gb
 .gn-arrow{fill:none;stroke:var(--c-fib);stroke-width:2.6;stroke-linecap:round}
 .gn-drop{fill:var(--c-fl);stroke:color-mix(in srgb,var(--c-fl) 50%,#000);stroke-width:.6}
 .p-comp{--cc:var(--c-comp)}.p-prot{--cc:var(--c-prot)}
+.p-drug{fill:var(--anatomy-paper);stroke:var(--anatomy-strong);stroke-width:.8}
+.gn-cap{fill:var(--anatomy-strong);font-size:13px}
 .dr-g-fill.g-dep{fill:var(--c-dep)}.dr-g-fill.g-comp{fill:var(--c-comp)}.dr-g-fill.g-prot{fill:var(--c-prot)}
 `;
 
 buildScene({
   id: "glomerulonephritis", fig: "Fig 1", title: "Glomerulonephritis: immune injury of the glomerulus", W, H, body, extraCss,
-  label: "An animated glomerulus inside Bowman capsule, with a tubule leading to urine. Immune complexes, mesangial IgA, antibody along the glomerular basement membrane, or pauci-immune injury activate complement and neutrophils. The capillary wall is damaged, so red cells and some protein escape into Bowman space and the tubule, filtration falls, and salt and water are retained. A crescent of proliferating cells and fibrin can fill Bowman space in rapidly progressive disease. In contrast, nephrotic podocyte injury causes heavy protein leak with little inflammation or blood. Gauges show immune deposit, complement, neutrophils, protein leak, blood in urine and filtration.",
+  label: "An animated glomerulus inside Bowman capsule, with a tubule leading to urine. A small kidney at the top right shows where the magnified glomerulus sits. Immune complexes, mesangial IgA, antibody along the glomerular basement membrane, or pauci-immune injury activate complement and neutrophils. The capillary wall is damaged, so red cells and some protein escape into Bowman space and the tubule, filtration falls, and salt and water are retained. A crescent of proliferating cells and fibrin can fill Bowman space in rapidly progressive disease. In contrast, nephrotic podocyte injury causes heavy protein leak with little inflammation or blood. With treatment, steroid tablets stream in through the arteriole, sit on deposits and immune cells, and inflammation visibly fades. Gauges show immune deposit, complement, neutrophils, protein leak, blood in urine and filtration.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { CX, CY, W, H }, pageJs: readFileSync(join(HERE, "gn.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Supportive only", withLabel: "With immunosuppression",
+  scene: { CX, CY, W, H }, pageJs: readFileSync(join(HERE, "gn.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Supportive only", withLabel: "With steroid plus immunosuppression",
   sourcesLis: [
     "<strong>How the glomerulus is injured.</strong> In glomerulonephritis the filter is attacked by the immune system: immune complexes deposit in the capillary wall (as after some streptococcal infections), IgA deposits in the mesangium in IgA nephropathy, antibody binds along the glomerular basement membrane in anti-GBM disease, or small vessel inflammation injures the tuft with few deposits (pauci-immune disease). Complement is activated and neutrophils are recruited. The damaged wall lets red cells and protein through, giving a nephritic picture of haematuria, hypertension, oedema and falling filtration. This is standard teaching in medicine and nephrology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Patterns and the nephrotic contrast.</strong> Post-infectious disease follows an infection and often settles; IgA disease tends to smoulder with episodes of visible blood; crescentic disease fills Bowman space with a crescent of cells and fibrin and destroys filtration rapidly, so it is called rapidly progressive. Nephrotic injury is different: the podocyte and its slit diaphragm fail, protein leaks heavily, but there is little inflammation and little blood. Flagged for review.",

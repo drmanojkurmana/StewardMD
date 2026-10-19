@@ -38,11 +38,11 @@ function modelOf(S, level, drug) {
   const ppv = cl(TP / Math.max(0.001, TP + FP)), npv = cl(TN / Math.max(0.001, TN + FN));
   const confirm = drug === 3 ? 1 : 0;
   const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
-  const words = [w(sens, 0.6, 0.85, ["low", "moderate", "high"]), w(spec, 0.6, 0.85, ["low", "moderate", "high"]), w(ppv, 0.35, 0.65, ["low", "moderate", "high"]), w(npv, 0.65, 0.9, ["low", "moderate", "high"])];
+  const words = [w(sens, 0.6, 0.85, ["low", "moderate", "high"]), w(spec, 0.6, 0.85, ["low", "moderate", "high"]), w(ppv, 0.35, 0.72, ["low", "moderate", "high"]), w(npv, 0.65, 0.9, ["low", "moderate", "high"])];
   return { prev, sens, spec, ppv, npv, TP, FN, FP, TN, cutX, confirm, words, readout: "sensitivity " + words[0] + " · specificity " + words[1] + " · positive predictive value " + words[2] + " · negative predictive value " + words[3] };
 }
 const TESTS = [
-  [1, 0, "sensitivity moderate · specificity moderate · positive predictive value high · negative predictive value moderate"],
+  [1, 0, "sensitivity moderate · specificity moderate · positive predictive value moderate · negative predictive value moderate"],
   [1, 1, "sensitivity high · specificity low · positive predictive value moderate · negative predictive value high"],
   [1, 2, "sensitivity low · specificity high · positive predictive value high · negative predictive value moderate"],
   [0, 3, "sensitivity moderate · specificity high · positive predictive value high · negative predictive value high"],
@@ -50,16 +50,17 @@ const TESTS = [
 
 /* ---------------- static layout ----------------
  * Left panel x14-554, right panel x566-946, both y44-440. Gauges panel below from y448.
- * Graph plot: axis x78-520 at y292, distributions centred at x215 (disease absent) and x365 (disease present).
- * Label pills (centres, checked against each other, the zone titles, axes and cell text):
- *   graph top row: Disease absent 150,96 (box 99-201), Cut-off 285,96 (box 257-313),
- *     Disease present 410,96 (box 356-464); their boxes are separated and clear of the titles at y68.
- *   graph lower row: Test negative 150,336 (box 102-198), Test positive 410,336 (box 362-458);
- *     the axis caption sits at y314 and the first strip label at y366, so neither touches the pills.
- *   table micro-pills: TP 706,128, FN 844,128, FP 706,254, TN 844,254 (tiny two letter boxes inside
- *     the cell tops; the cell names sit lower at y168 and y294, clear of the pill boxes).
- *   table bottom row: Confirmatory test 706,422 (box 647-765), Prevalence 852,422 (box 814-890);
- *     the population bar sits at y370-386 and its legend at y402, clear of both pill boxes. */
+ * Graph plot: axis x78-520 at y292, distributions centred at x215 (no disease) and x365 (disease).
+ * Story top to bottom, left to right: curves, sliding cut-off gate, person rows, caption,
+ * then the 2 by 2 table and the population mix bar. Eight label pills total:
+ *   graph top row: No disease 150,96 (box 112-188), Cut-off 285,96 (box 256-314),
+ *     Disease 410,96 (box 381-439); separated and clear of the titles at y68.
+ *   Second check 445,336 (box 401-489, y328-345); clear of the axis captions at y314
+ *     and the first strip label at y358. Its dot rides the confirmatory gate.
+ *   table cells: True positive 706,140 (box 658-754), False negative 844,140 (box 793-895),
+ *     False positive 706,266 (box 655-757), True negative 844,266 (box 796-892);
+ *     each box sits inside its cell, clear of the column headers at y96 and the mini dots.
+ * Caption line at y433 in the left panel; person rows sit at y374 and y408 so dots stay clear of it. */
 const body = `
 <rect class="ep-panel" x="14" y="44" width="540" height="396" rx="18"/>
 <rect class="ep-panel" x="566" y="44" width="380" height="396" rx="18"/>
@@ -70,8 +71,8 @@ const body = `
 <text class="sc-lab" x="78" y="314">low result</text>
 <text class="sc-lab" x="299" y="314" text-anchor="middle">test result</text>
 <text class="sc-lab" x="520" y="314" text-anchor="end">high result</text>
-<text class="sc-lab" x="78" y="366">Disease present: each dot is one person</text>
-<text class="sc-lab" x="78" y="406">Disease absent: each dot is one person</text>
+<text class="sc-lab" x="78" y="358">Disease present: each dot is one person</text>
+<text class="sc-lab" x="78" y="392">Disease absent: each dot is one person</text>
 <text class="sc-lab" x="706" y="96" text-anchor="middle">Test positive</text>
 <text class="sc-lab" x="844" y="96" text-anchor="middle">Test negative</text>
 <text class="ep-rowlab" font-size="11" x="622" y="175" text-anchor="middle" transform="rotate(-90 622 175)">Disease present</text>
@@ -80,10 +81,6 @@ const body = `
 <rect id="cellFN" class="ep-cell ep-cell-fn" x="778" y="110" width="132" height="110" rx="10"/>
 <rect id="cellFP" class="ep-cell ep-cell-fp" x="640" y="236" width="132" height="110" rx="10"/>
 <rect id="cellTN" class="ep-cell ep-cell-tn" x="778" y="236" width="132" height="110" rx="10"/>
-<text class="sc-lab ep-cellname" x="706" y="172" text-anchor="middle">True positive</text>
-<text class="sc-lab ep-cellname" x="844" y="172" text-anchor="middle">False negative</text>
-<text class="sc-lab ep-cellname" x="706" y="298" text-anchor="middle">False positive</text>
-<text class="sc-lab ep-cellname" x="844" y="298" text-anchor="middle">True negative</text>
 <text class="sc-lab" x="640" y="362">Population mix</text>
 <rect class="ep-popbg" x="640" y="370" width="270" height="16" rx="8"/>
 <rect id="popD" class="ep-popd" x="640" y="370" width="94" height="16" rx="8"/>
@@ -102,20 +99,25 @@ buildScene({
   extraCss: `.ep-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
 .ep-axis{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2;stroke-linecap:round}
 .ep-rowlab{fill:var(--anatomy-text);pointer-events:none}
-.ep-cellname{pointer-events:none}
+.ep-wash{fill:var(--anatomy-strong);stroke:none}
+.ep-knob{fill:var(--anatomy-paper);stroke:var(--anatomy-strong);stroke-width:2}
+.ep-band{fill:var(--c-cyt);stroke:none}
+.ep-lid{fill:var(--anatomy-paper);stroke:none}
+.ep-cap{fill:var(--anatomy-strong);font-size:12px}
 .ep-cell{stroke:var(--anatomy-faint);stroke-width:1}
 .ep-cell-tp{fill:var(--c-good)}.ep-cell-fn{fill:var(--c-bad)}.ep-cell-fp{fill:var(--c-eos)}.ep-cell-tn{fill:var(--c-lymph)}
 .ep-area-tp{fill:var(--c-good)}.ep-area-fn{fill:var(--c-bad)}.ep-area-fp{fill:var(--c-eos)}.ep-area-tn{fill:var(--c-lymph)}
 .ep-curve-a{fill:none;stroke:var(--c-lymph);stroke-width:2.5;stroke-linecap:round}
 .ep-curve-p{fill:none;stroke:var(--c-bad);stroke-width:2.5;stroke-linecap:round}
 .ep-cut{stroke:var(--anatomy-strong);stroke-width:2;stroke-dasharray:6 4}
-.ep-conf{stroke:var(--c-cyt);stroke-width:2;stroke-dasharray:3 3}
+.ep-conf{stroke:var(--c-cyt);stroke-width:3;stroke-dasharray:3 3}
 .ep-dot{stroke:color-mix(in srgb,var(--anatomy-paper) 35%,transparent);stroke-width:.6}
 .ep-d-tp{fill:var(--c-good)}.ep-d-fn{fill:var(--c-bad)}.ep-d-fp{fill:var(--c-eos)}.ep-d-tn{fill:var(--c-lymph)}
 .ep-mini{stroke:color-mix(in srgb,var(--anatomy-paper) 35%,transparent);stroke-width:.5}
 .ep-m-tp{fill:var(--c-good)}.ep-m-fn{fill:var(--c-bad)}.ep-m-fp{fill:var(--c-eos)}.ep-m-tn{fill:var(--c-lymph)}
 .ep-flow{fill:var(--anatomy-strong);stroke:var(--anatomy-paper);stroke-width:.6}
 .ep-flow-pos{fill:var(--c-eos)}
+.ep-flow-caught{fill:var(--c-cyt)}
 .ep-popbg{fill:var(--anatomy-shade-2);stroke:var(--anatomy-faint);stroke-width:.8}
 .ep-popd{fill:var(--c-bad)}
 .ep-legd{fill:var(--c-bad)}.ep-lega{fill:var(--anatomy-shade-2);stroke:var(--anatomy-faint);stroke-width:.8}`,

@@ -1,6 +1,6 @@
 /* Lysosomal storage diseases as an animated, working scene (original drawing; Anima styling, Anatomy page shell).
  *   node tools/figures/scenes/lysos.mjs [--print-model]
- * Static layout here; particles, lysosome filling and gauges move in lysos.page.js. Qualitative: no doses, no numbers. */
+ * Static layout here; particles, lysosome filling, organs and gauges move in lysos.page.js. Qualitative: no doses, no numbers. */
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -46,43 +46,58 @@ const TESTS = [
 
 /* ---------------- static layout ---------------- */
 const DISEASES = [
-  { name: "No defect", enzyme: "lysosomal enzymes work", substrate: "lipids and glycogen", sites: "breakdown keeps up" },
-  { name: "Gaucher disease", enzyme: "glucocerebrosidase missing", substrate: "glucocerebroside lipid", sites: "liver, spleen and bone" },
-  { name: "Tay-Sachs disease", enzyme: "hexosaminidase A missing", substrate: "GM2 ganglioside lipid", sites: "brain and nerve cells" },
-  { name: "Fabry disease", enzyme: "alpha-galactosidase A missing", substrate: "Gb3 lipid", sites: "kidney, heart and nerves" },
-  { name: "Niemann-Pick disease", enzyme: "sphingomyelinase missing", substrate: "sphingomyelin lipid", sites: "liver, spleen and brain" },
-  { name: "Pompe disease", enzyme: "acid maltase missing", substrate: "glycogen", sites: "heart and skeletal muscle" },
+  { name: "No defect", enzyme: "all lysosomal enzymes", substrate: "lipids and glycogen", sites: "breakdown keeps up",
+    caps: ["Healthy cell. Lysosomes clear storage as fast as it arrives.", "Healthy cell. No storage builds up, so treatment adds nothing.", "Healthy cell. No storage builds up, so treatment adds nothing."] },
+  { name: "Gaucher disease", enzyme: "glucocerebrosidase", substrate: "glucocerebroside lipid", sites: "liver, spleen and bone",
+    caps: ["No treatment. Fatty storage fills the lysosome and swells liver and spleen.", "Enzyme replacement adds the missing enzyme. Storage drains and organs shrink.", "Substrate reduction slows new storage. Less arrives, so swelling eases."] },
+  { name: "Tay-Sachs disease", enzyme: "hexosaminidase A", substrate: "ganglioside lipid", sites: "brain and nerve cells",
+    caps: ["No treatment. Fatty storage fills brain cells and nerves fail.", "Enzyme replacement helps organs. Little reaches the brain, so nerves stay affected.", "Substrate reduction slows new storage. Brain swelling eases a little."] },
+  { name: "Fabry disease", enzyme: "alpha-galactosidase A", substrate: "fatty storage lipid", sites: "kidney, heart and nerves",
+    caps: ["No treatment. Storage injures kidney, heart and nerves.", "Enzyme replacement adds the missing enzyme. Storage drains and organs recover.", "Substrate reduction slows new storage. Less arrives, so injury slows."] },
+  { name: "Niemann-Pick disease", enzyme: "sphingomyelinase", substrate: "sphingomyelin lipid", sites: "liver, spleen and brain",
+    caps: ["No treatment. Storage fills liver, spleen and brain.", "Enzyme replacement adds the missing enzyme. Organs shrink, but nerves stay affected.", "Substrate reduction slows new storage. Less arrives, so swelling eases."] },
+  { name: "Pompe disease", enzyme: "acid maltase", substrate: "glycogen", sites: "heart and skeletal muscle",
+    caps: ["No treatment. Glycogen storage swells heart and muscle.", "Enzyme replacement adds the missing enzyme. Storage drains and the heart shrinks back.", "Substrate reduction slows new storage. Less arrives, so swelling eases a little."] },
 ];
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<text class="sc-zone" x="34" y="68">CYTOSOL</text>
-<text id="disTitle" class="sc-zone" x="620" y="66" text-anchor="middle"></text>
-<text id="disSub" class="sc-lab" x="620" y="84" text-anchor="middle"></text>
-<g id="swell"></g>
+<g id="glowG"></g>
+<g id="liverSlot"></g>
+<g id="heartSlot"></g>
+<g id="brainSlot"></g>
+<g id="supplyG"></g>
 <g id="lysoG"></g>
+<g id="cellG"></g>
 <g id="parts"></g>
 <g id="over"></g>
 <g id="panel"></g>`;
 
 const extraCss = `
-.lyso-b{fill:color-mix(in srgb,var(--c-mac) 26%,var(--anatomy-paper));stroke:var(--c-mac);stroke-width:1.6}
-.lyso-in{fill:color-mix(in srgb,var(--c-mac) 12%,var(--anatomy-paper));stroke:none}
 .stored{fill:#ff9a3d;stroke:color-mix(in srgb,#ff9a3d 50%,#000);stroke-width:.5}
+.ly-wash{fill:#ff9a3d;stroke:none;pointer-events:none}
+.og-wash{fill:#ff9a3d;stroke:none;pointer-events:none}
+.br-wash{fill:var(--c-cyt2);stroke:none;pointer-events:none}
+.br-glow{fill:var(--c-cyt2);stroke:none;pointer-events:none}
 .enz-p{fill:none;stroke:var(--c-good);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.xmark{fill:none;stroke:var(--c-bad);stroke-width:2.2;stroke-linecap:round}
+.enz-dock{fill:none;stroke:#38d1ff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.xmark{fill:none;stroke:var(--c-bad);stroke-width:2.4;stroke-linecap:round}
 .p-sub{--cc:#ff9a3d}.p-frag{--cc:var(--c-good)}.p-ert{--cc:#38d1ff}
-.ves{fill:color-mix(in srgb,#ff9a3d 22%,var(--anatomy-paper));stroke:#ff9a3d;stroke-width:1.2}
-.out-b{fill:color-mix(in srgb,var(--c-good) 16%,var(--anatomy-paper));stroke:var(--c-good);stroke-width:1.2}
+.ves{fill:color-mix(in srgb,#ff9a3d 22%,var(--anatomy-paper));stroke:#ff9a3d;stroke-width:1.4}
+.pipe{fill:none;stroke:color-mix(in srgb,#ff9a3d 55%,var(--anatomy-paper));stroke-width:9;stroke-linecap:round;opacity:.75}
+.pipe-out{fill:none;stroke:var(--c-good);stroke-width:5;stroke-linecap:round;stroke-dasharray:5 5;opacity:.6}
+.gate{fill:var(--anatomy-strong);stroke:none}
+.arr{fill:var(--anatomy-mid);stroke:none}
+.ly-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
 `;
 
 buildScene({
   id: "lysosomal-storage-diseases", fig: "Fig 1", title: "Lysosomal storage diseases: one missing enzyme, stored substrate", W, H, body, extraCss,
-  label: "An animated cell. Substrate particles made in the cytosol flow into a lysosome, where enzymes break down lipids and glycogen. When one enzyme is missing, its substrate cannot be broken down and fills the lysosome, swelling cells and enlarging organs, with nerve involvement in some diseases. The slider picks Gaucher, Tay-Sachs, Fabry, Niemann-Pick or Pompe disease. Treatment choices are enzyme replacement, substrate reduction or none. Gauges show enzyme activity, stored substrate, cell swelling, organ enlargement, nerve involvement and cell function.",
+  label: "An animated cell and its organs, left to right. Substrate made in the cell flows into a lysosome, where one missing enzyme leaves its substrate stored. Filled lysosomes swell cells, and the liver, heart and brain show what swells or fails in the body. The slider picks Gaucher, Tay-Sachs, Fabry, Niemann-Pick or Pompe disease. Treatment choices are enzyme replacement, which adds a working copy of the missing enzyme, and substrate reduction, which makes less substrate in the first place. Gauges show enzyme activity, stored substrate, cell swelling, organ enlargement, nerve involvement and cell function.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.",
-  scene: { W, diseases: DISEASES }, pageJs: readFileSync(join(HERE, "lysos.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, diseases: DISEASES }, pageJs: readFileSync(join(HERE, "lysos.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With enzyme replacement",
   sourcesLis: [
-    "<strong>One missing lysosome enzyme, one stored substrate.</strong> Lysosomes are the cell recycling compartments. Their acid enzymes break down lipids and glycogen delivered from the cytosol. Each storage disease lacks one enzyme, so only its substrate builds up: Gaucher disease (glucocerebrosidase; glucocerebroside, mainly liver, spleen and bone), Tay-Sachs disease (hexosaminidase A; GM2 ganglioside, mainly brain), Fabry disease (alpha-galactosidase A; Gb3 lipid, kidney, heart and nerves), Niemann-Pick disease (sphingomyelinase; sphingomyelin, liver, spleen and brain) and Pompe disease (acid maltase, also called acid alpha-glucosidase; glycogen, heart and muscle). Filled lysosomes swell cells, enlarge organs and injure nerves. This is standard teaching in pathology and metabolic medicine texts and was not checked against a linked source here, so it is flagged for review.",
+    "<strong>One missing lysosome enzyme, one stored substrate.</strong> Lysosomes are the cell recycling compartments. Their acid enzymes break down lipids and glycogen delivered from the cytosol. Each storage disease lacks one enzyme, so only its substrate builds up: Gaucher disease (glucocerebrosidase; glucocerebroside, mainly liver, spleen and bone), Tay-Sachs disease (hexosaminidase A; ganglioside lipid, mainly brain), Fabry disease (alpha-galactosidase A; fatty storage lipid, kidney, heart and nerves), Niemann-Pick disease (sphingomyelinase; sphingomyelin, liver, spleen and brain) and Pompe disease (acid maltase, also called acid alpha-glucosidase; glycogen, heart and muscle). Filled lysosomes swell cells, enlarge organs and injure nerves. This is standard teaching in pathology and metabolic medicine texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> Enzyme replacement supplies a working copy of the missing enzyme taken up into lysosomes; it reaches blood-fed organs well and the brain poorly. Substrate reduction makes less of the stored substrate in the first place, so less arrives at the lysosome. They are teaching toggles only.",
   ],
   simplified: "Inheritance, newborn screening, carrier testing, chaperone and gene therapies, bone and eye findings, the cholesterol-trafficking form of Niemann-Pick disease, and every drug and dose are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",

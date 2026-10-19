@@ -45,43 +45,45 @@ const TESTS = [
 
 /* ---------------- static layout ---------------- */
 const body = `
-<rect class="sc-tissue all-marrow" x="30" y="96" width="500" height="264" rx="16"/>
-<rect class="all-vessel" x="560" y="96" width="130" height="264" rx="16"/>
-<rect class="all-box" x="720" y="96" width="210" height="72" rx="12"/>
-<rect class="all-box" x="720" y="180" width="210" height="72" rx="12"/>
-<rect class="all-box" x="720" y="264" width="210" height="96" rx="12"/>
-<path class="all-arrow" d="M530 228H552"/>
-<path class="all-arrow" d="M690 150H712M690 216H712M690 312H712"/>
-<text class="sc-zone" x="46" y="120">BONE MARROW</text>
-<text class="sc-zone sc-dim" x="576" y="120">BLOOD</text>
+<rect class="sc-tissue all-bone" x="14" y="56" width="560" height="360" rx="18"/>
+<rect id="healthLay" class="all-health" x="14" y="56" width="560" height="360" rx="18" opacity="0"/>
+<rect id="crowdLay" class="all-crowd" x="14" y="56" width="560" height="360" rx="18" opacity="0"/>
+<path class="all-arrow" d="M574 240H600"/>
+<path class="all-arrow" d="M672 150H742"/>
+<path class="all-arrow" d="M672 250H742"/>
+<path class="all-arrow" d="M672 340H742"/>
+<text class="sc-zone" x="30" y="80">BONE MARROW</text>
+<text class="sc-zone sc-dim" x="592" y="80">BLOOD</text>
+<text class="sc-zone sc-dim" x="748" y="80">SHELTERS</text>
+<g id="vesselSlot"></g>
+<g id="brainSlot"></g>
+<g id="testisSlot"></g>
 <g id="stage"></g>
 <g id="over"></g>
 <g id="panel"></g>`;
 
 const extraCss = `
-.all-marrow{stroke:var(--anatomy-faint);stroke-width:1}
-.all-vessel{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper));stroke:var(--anatomy-faint);stroke-width:1}
-.all-box{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.all-bone{stroke:var(--anatomy-faint);stroke-width:1}
+.all-health{fill:var(--c-good);stroke:none}
+.all-crowd{fill:var(--c-bad);stroke:none}
 .all-arrow{fill:none;stroke:var(--anatomy-mid);stroke-width:2;stroke-linecap:round}
-.all-barrier{fill:none;stroke:var(--c-bad);stroke-width:1.4;stroke-dasharray:5 4}
+.all-barrier{fill:color-mix(in srgb,var(--c-bad) 10%,transparent);stroke:var(--c-bad);stroke-width:1.4;stroke-dasharray:5 4}
 .all-chrA{fill:#d9a441;stroke:color-mix(in srgb,#d9a441 55%,#000);stroke-width:.7}
 .all-chrB{fill:#5fa8d3;stroke:color-mix(in srgb,#5fa8d3 55%,#000);stroke-width:.7}
 .all-fus{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 55%,#000);stroke-width:.7}
-.all-mass{fill:var(--c-sm);stroke:color-mix(in srgb,var(--c-sm) 55%,#000);stroke-width:1}
-.all-brain{fill:var(--c-endo);stroke:color-mix(in srgb,var(--c-endo) 55%,#000);stroke-width:1}
-.all-testis{fill:var(--c-plt);stroke:color-mix(in srgb,var(--c-plt) 55%,#000);stroke-width:1}
+.all-rec{fill:color-mix(in srgb,var(--c-bad) 30%,var(--anatomy-paper));stroke:var(--c-bad);stroke-width:1.6}
+.all-cap{fill:var(--anatomy-strong);font-size:12px}
 .cl-risk{--cc:#d9a441}.cl-lyb{--cc:var(--c-lymph)}.cl-prog2{--cc:#4fae94}
-.p-div{--cc:var(--c-bad)}.p-cns{--cc:var(--c-cyt2)}.p-tgt{--cc:#ffd24a}
+.p-div{--cc:var(--c-bad)}.p-cns{--cc:var(--c-cyt2)}.p-tgt{--cc:#ffd24a}.p-sig{--cc:var(--c-cyt2)}
 .dr-g-fill.g-rbc{fill:var(--c-rbc)}.dr-g-fill.g-med{fill:var(--c-sm)}.dr-g-fill.g-sanc{fill:var(--c-cyt)}
-.mk-c{fill:var(--anatomy-card);stroke:var(--c-bad);stroke-width:1.4}.mk-x{fill:none;stroke:var(--c-bad);stroke-width:1.8;stroke-linecap:round}
 `;
 
 buildScene({
   id: "acute-lymphoblastic-leukaemia", fig: "Fig 1", title: "Acute lymphoblastic leukaemia: a lymphoblast clone takes over", W, H, body, extraCss,
   label: "An animated bone marrow, blood, and sanctuary sites in acute lymphoblastic leukaemia. A predisposed lymphoid progenitor gains a genetic hit and expands as a B or T lymphoblast clone. The clone replaces the marrow, so red cells, neutrophils and platelets fall. Blasts can shelter behind barriers in the brain and testis, and T lineage disease can form a mediastinal mass. Gauges show lymphoblasts, sanctuary cells, the mediastinal mass, red cells, neutrophils and platelets. Treatment choices include induction chemotherapy, CNS prophylaxis, and targeted therapy or transplant.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "all.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "all.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With targeted therapy or transplant",
   sourcesLis: [
     "<strong>How the clone starts.</strong> Acute lymphoblastic leukaemia is a clonal neoplasm of B or T lymphoblasts. Genetic aberrations, including fusion genes and other mutations, block lymphoid maturation and drive growth. Some first hits arise before birth, and germline genetic predisposition, inherited variant patterns and prior radiation exposure can raise risk in a minority. A predisposed progenitor that gains further mutations expands as one clone. This is standard teaching in haematology and oncology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Marrow replacement and cytopenias.</strong> Lymphoblasts fill the marrow and normal hematopoiesis is crowded out and suppressed. Red cell loss gives anemia, neutrophil loss allows infection, and platelet loss gives bruising and bleeding. Blasts also enter the blood. Classification in practice follows the World Health Organization approach, separating B and T lineage and recurrent genetic groups, because lineage and genetics guide therapy and relapse risk. This is standard teaching and was not checked against a linked source here, so it is flagged for review.",

@@ -8,7 +8,7 @@
   --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
   --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
   --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
-  --anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
 }
 .iso[data-theme="light"]{
@@ -199,6 +199,9 @@ body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px
 .bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
 .bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
 @media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
 body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
 body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
 .t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
@@ -265,48 +268,56 @@ body{--c-prox:#5ec1a0;--c-alpha:#e9a2b3;--c-prin:#7fc4e8;--c-aldo:#e9b84a;--c-hc
 body[data-theme="light"]{--c-prox:#2f9f7c;--c-alpha:#d9788f;--c-prin:#3fa0d4;--c-aldo:#b8860b;--c-hco3:#1f8f83;--c-hplus:#d96a25;--c-pot:#7c4fc4;--c-stone:#8a857c}
 .cl-prox{--cc:var(--c-prox)}.cl-alpha{--cc:var(--c-alpha)}.cl-prin{--cc:var(--c-prin)}.cl-aldo{--cc:var(--c-aldo)}
 .rt-lumen{fill:color-mix(in srgb,var(--c-fl) 16%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-endo) 55%,var(--anatomy-mid));stroke-width:1.6}
-.rt-mid{fill:color-mix(in srgb,var(--c-endo) 22%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.2}
 .rt-blood{fill:color-mix(in srgb,var(--c-rbc) 16%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 50%,var(--anatomy-mid));stroke-width:1.4}
-.rt-cup{fill:color-mix(in srgb,var(--c-fl) 30%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.4}
+.rt-ves{fill:none;stroke:color-mix(in srgb,var(--c-fl) 55%,var(--anatomy-paper));stroke-width:12;stroke-linecap:round;opacity:.85}
+.rt-wash-bic{fill:var(--c-hco3);stroke:none}
+.rt-wash-ktx{fill:var(--c-pot);stroke:none}
+.rt-wash-min{fill:var(--c-aldo);stroke:none}
+.rt-cap{fill:var(--anatomy-strong);font-size:12px}
 .rt-stone{fill:var(--c-stone);stroke:color-mix(in srgb,var(--c-stone) 55%,#000);stroke-width:1}
 .p-hco3{--cc:var(--c-hco3)}.p-hplus{--cc:var(--c-hplus)}.p-pot{--cc:var(--c-pot)}.p-aldo{--cc:var(--c-aldo)}
 .dr-g-fill.g-hco3{fill:var(--c-hco3)}.dr-g-fill.g-hplus{fill:var(--c-hplus)}.dr-g-fill.g-pot{fill:var(--c-pot)}.dr-g-fill.g-stone{fill:var(--c-stone)}.dr-g-fill.g-aldo{fill:var(--c-aldo)}.dr-g-fill.g-chlor{fill:var(--c-fl)}
-</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Renal tubular acidosis: where the tubule fails</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>blood bicarbonate low · urine pH partly acidic · potassium low</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated nephron tubule. In the proximal tubule, cells reclaim bicarbonate from the filtrate into the blood. In the distal tubule and collecting duct, alpha-intercalated cells secrete acid into the urine, and aldosterone supports acid and potassium handling. The level slider switches between proximal type 2 bicarbonate wasting, distal type 1 failure of acid secretion with alkaline urine and stones, and type 4 hypoaldosteronism with high potassium. All three give a normal anion gap hyperchloraemic acidosis. Gauges show bicarbonate reclaim, acid secretion, urine pH, stones, potassium and chloride. Treatment choices are bicarbonate, potassium and a mineralocorticoid."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Renal tubular acidosis: where the tubule fails</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>blood bicarbonate low · urine pH partly acidic · potassium low</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated kidney tubule, shown magnified. The kidney filters blood, the proximal tubule reclaims bicarbonate into the blood, and the distal tubule and collecting duct secrete acid into the urine with help from aldosterone. The level slider switches between proximal type 2 bicarbonate wasting, distal type 1 failure of acid secretion with alkaline urine and stones, and type 4 hypoaldosteronism with high potassium. All three give a normal anion gap hyperchloraemic acidosis. Gauges show bicarbonate reclaim, acid secretion, urine pH, stones, potassium and chloride. Treatment choices are potassium, a mineralocorticoid and bicarbonate."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
 <rect class="sc-tissue" x="14" y="44" width="932" height="396" rx="18"/>
-<text class="sc-zone" x="34" y="68">PROXIMAL TUBULE</text>
-<text class="sc-zone" x="540" y="68">DISTAL TUBULE AND COLLECTING DUCT</text>
-<rect class="rt-lumen" x="50" y="190" width="380" height="68" rx="12"/>
-<rect class="rt-lumen" x="500" y="190" width="410" height="68" rx="12"/>
-<rect class="rt-mid" x="430" y="208" width="70" height="32" rx="8"/>
-<text class="sc-lab" x="438" y="202">later segments</text>
+<text class="sc-zone" x="44" y="68">KIDNEY</text>
+<text class="sc-zone" x="246" y="68">PROXIMAL TUBULE</text>
+<text class="sc-zone" x="530" y="68">DISTAL TUBULE AND COLLECTING DUCT</text>
+<text class="sc-zone" x="830" y="68">BLADDER</text>
+<path id="filtVessel" class="rt-ves" d="M150 208 L246 224"/>
+<rect class="rt-lumen" x="246" y="190" width="252" height="68" rx="12"/>
+<rect id="proxWash" class="rt-wash-bic" x="246" y="190" width="252" height="68" rx="12" opacity="0"/>
+<rect class="rt-lumen" x="498" y="212" width="32" height="24" rx="6"/>
+<rect class="rt-lumen" x="530" y="190" width="240" height="68" rx="12"/>
+<rect id="distWash" class="rt-wash-min" x="530" y="190" width="240" height="68" rx="12" opacity="0"/>
+<path id="urineVessel" class="rt-ves" d="M770 224 L814 186"/>
+<g id="kidneySlot"></g>
+<g id="bladderSlot"></g>
+<ellipse id="kidneyWash" class="rt-wash-min" cx="128" cy="212" rx="80" ry="95" opacity="0"/>
 <g id="cells"></g>
 <g id="stones"></g>
 <g id="parts"></g>
-<path class="rt-cup" d="M884 282h44l-6 42h-32z"/>
-<text class="sc-lab" x="884" y="338">urine</text>
 <rect class="rt-blood" x="50" y="344" width="860" height="40" rx="20"/>
+<rect id="bloodWbic" class="rt-wash-bic" x="50" y="344" width="860" height="40" rx="20" opacity="0"/>
+<rect id="bloodWktx" class="rt-wash-ktx" x="50" y="344" width="860" height="40" rx="20" opacity="0"/>
 <text class="sc-zone sc-dim" x="34" y="336">BLOOD</text>
-<text class="sc-lab" x="56" y="404">blood carries acid, bicarbonate and potassium to the gauges below</text>
-<text class="sc-lab" x="56" y="288">reclaims bicarbonate</text>
-<text class="sc-lab" x="566" y="288">secretes acid into urine</text>
 <g id="over"></g>
-<g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.</span></figcaption></figure>
+<g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.</span></figcaption></figure>
 <div class="dr-controls">
   <label class="dr-range"><span>Type of tubular acidosis</span><input id="level" type="range" min="0" max="2" step="1" value="0" aria-valuetext="type 2 proximal"><span class="dr-ticks"><i>type 2</i><i>type 1</i><i>type 4</i></span></label>
-  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">bicarbonate</option><option value="2">potassium</option><option value="3">mineralocorticoid</option></select></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With bicarbonate"><option value="0">no treatment</option><option value="1">potassium</option><option value="2">mineralocorticoid</option><option value="3">bicarbonate</option></select></label>
   <button id="pause" type="button" aria-pressed="false">Pause motion</button>
 </div>
 <p id="status" class="dr-status" aria-live="polite"></p>
 <p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
 <h2>What the figure shows, and how sure we are</h2>
-<ul><li><strong>The shared picture.</strong> In renal tubular acidosis the glomeruli filter fairly normally, but the tubule cannot keep blood bicarbonate up, so blood becomes acidic while chloride rises to balance it. That is a normal anion gap, hyperchloraemic acidosis. This is standard teaching in medicine and nephrology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Proximal type 2 and distal type 1.</strong> In proximal (type 2) disease the proximal tubule fails to reclaim filtered bicarbonate, so bicarbonate is wasted in the urine and blood bicarbonate falls. In distal (type 1) disease alpha-intercalated cells in the distal tubule and collecting duct fail to secrete hydrogen ions, so the urine cannot be acidified, urine pH stays high, and calcium stones and nephrocalcinosis are favoured, often with low potassium. Flagged for review.</li><li><strong>Type 4 and treatment ideas shown.</strong> In type 4 disease aldosterone is lacking or resisted, so potassium excretion fails and potassium rises, with a milder acidosis because less ammonium is made. Bicarbonate (alkali) replaces what is lost or not regenerated, potassium replaces a low potassium where present, and a mineralocorticoid replaces missing aldosterone action in type 4. These are teaching toggles only, and potassium given when potassium is already high would be harmful in real care.</li></ul>
+<ul><li><strong>The shared picture.</strong> In renal tubular acidosis the glomeruli filter fairly normally, but the tubule cannot keep blood bicarbonate up, so blood becomes acidic while chloride rises to balance it. That is a normal anion gap, hyperchloraemic acidosis. This is standard teaching in medicine and nephrology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Proximal type 2 and distal type 1.</strong> In proximal (type 2) disease the proximal tubule fails to reclaim filtered bicarbonate, so bicarbonate is wasted in the urine and blood bicarbonate falls. In distal (type 1) disease alpha-intercalated cells in the distal tubule and collecting duct fail to secrete hydrogen ions, so the urine cannot be acidified, urine pH stays high, and calcium stones and nephrocalcinosis are favoured, often with low potassium. Flagged for review.</li><li><strong>Type 4 and treatment ideas shown.</strong> In type 4 disease aldosterone is lacking or resisted, so potassium excretion fails and potassium rises, with a milder acidosis because less ammonium is made. Bicarbonate (alkali) replaces what is lost or not regenerated, potassium replaces a low potassium where present, and a mineralocorticoid replaces missing aldosterone action in type 4. These are teaching toggles only, and potassium given when potassium is already high would be harmful in real care.</li><li><strong>Organ art.</strong> Organ art is NIH BioArt Source, public domain.</li></ul>
 <p><strong>What was simplified.</strong> Causes of each type, Fanconi syndrome features in proximal disease, bone disease, growth effects, ammonium handling in detail, urine anion gap testing, stone composition, and all doses and targets are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
-<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). Organ illustrations are NIH BioArt Source (public domain); all other drawing is original.</p>
 <p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
-</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Type of tubular acidosis","a":[0.2,0.55,0.9],"names":["type 2 proximal","type 1 distal","type 4 hypoaldosteronism"],"ticks":["type 2","type 1","type 4"],"start":0},"settings":[{"label":"no treatment"},{"label":"bicarbonate"},{"label":"potassium"},{"label":"mineralocorticoid"}],"drugNames":["no treatment","bicarbonate","potassium","mineralocorticoid"],"status":"Renal tubular acidosis: {level} · {drug} ·"}};
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Type of tubular acidosis","a":[0.2,0.55,0.9],"names":["type 2 proximal","type 1 distal","type 4 hypoaldosteronism"],"ticks":["type 2","type 1","type 4"],"start":0},"settings":[{"label":"no treatment"},{"label":"potassium"},{"label":"mineralocorticoid"},{"label":"bicarbonate"}],"drugNames":["no treatment","potassium","mineralocorticoid","bicarbonate"],"status":"Renal tubular acidosis: {level} · {drug} ·"}};
 const modelOf = function modelOf(S, level, drug) {
   const cl = (v) => Math.max(0, Math.min(1, v));
-  const bic = drug === 1 ? 1 : 0, ktx = drug === 2 ? 1 : 0, min = drug === 3 ? 1 : 0;
+  const ktx = drug === 1 ? 1 : 0, min = drug === 2 ? 1 : 0, bic = drug === 3 ? 1 : 0;
   const reabs = level === 0 ? 0.18 : level === 1 ? 0.86 : 0.78;
   const waste = level === 0 ? 0.85 : 0.18;
   let aldo = level === 2 ? 0.14 : 0.85;
@@ -419,35 +430,341 @@ function run(scn) {
   start();
 }
 
-/* Renal tubular acidosis scene: bicarbonate reclaim, acid secretion, aldosterone, stones, potassium and gauges. */
-const layers = { cells: $("cells"), stones: $("stones"), parts: $("parts"), over: $("over"), panel: $("panel") };
+/* Shared organ art for the animated mechanism scenes. Plain globals, ES2015, no imports.
+ * Inlined after bio.lib.js when buildScene gets organs:true, so mk/f1/clamp below are the shared ones.
+ * organ(parent, kind, x, y, w, opts) draws real anatomy art (NIH BioArt Source, public domain,
+ * injected as _ORG_ART by buildScene for the kinds the page uses) centred on x,y and w px wide,
+ * and falls back to the existing procedural layered silhouette for kinds without art
+ * (bladder, uterus, thyroid, pituitary, adrenal). Art ports are fractions of the art viewBox (see _ORG_FRAC).
+ * opts: { h (px height, else proportional), flip (mirror left/right), cls (extra class), id,
+ *   tint (a CSS colour with opacity, overlaid as an organ-shaped mask for disease states),
+ *   dim (dull the art) }.
+ * Returns { g, kind, x, y, w, h, ports, art } with absolute SVG coords; ports.in/out always exist.
+ * Art keeps its own colours (a faint contrast halo keeps it readable in dark and light themes);
+ * procedural fill is a vertical gradient whose stops derive from --cc (a theme aware palette var,
+ * so dark and light both work); edge stroke and landmark lines use color-mix detail classes.
+ * Emits no text, so label font and dash rules are inherited from the calling scene. */
+if (!document.getElementById("orgCss")) { var _orgSt = document.createElement("style"); _orgSt.id = "orgCss";
+  _orgSt.textContent = ".org-halo{filter:drop-shadow(0 0 1px rgba(0,0,0,.65)) drop-shadow(0 0 1px rgba(255,255,255,.45))}"
+  + ".org-b{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1.2;stroke-linejoin:round;stroke-linecap:round}"
+  + ".org-d{fill:none;stroke:color-mix(in srgb,var(--cc) 40%,var(--anatomy-hi));stroke-width:1;stroke-linecap:round;opacity:.8}"
+  + ".org-dk{fill:none;stroke:color-mix(in srgb,var(--cc) 62%,#000);stroke-width:1.1;stroke-linecap:round;opacity:.8}"
+  + ".org-f{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1;stroke-linejoin:round}"
+  + ".org-v{fill:none;stroke-linecap:round}"
+  + ".org-liver{--cc:var(--c-rbc)}.org-heart{--cc:var(--c-rbc)}.org-kidney{--cc:var(--c-eos)}.org-lung{--cc:var(--c-endo)}"
+  + ".org-stomach{--cc:var(--c-graft)}.org-brain{--cc:var(--c-mac)}.org-pancreas{--cc:var(--c-plt)}.org-spleen{--cc:var(--c-sm)}"
+  + ".org-bladder{--cc:var(--c-th2)}.org-uterus{--cc:var(--c-endo)}.org-thyroid{--cc:var(--c-neut)}.org-eye{--cc:#e6e1d4}"
+  + ".org-pituitary{--cc:var(--c-endo)}.org-adrenal{--cc:var(--c-eos)}";
+  document.head.appendChild(_orgSt); }
+var _orgN = 0;
+/* per instance gradients: base (light -> base -> dark of --cc) plus a white top / dark bottom shade overlay */
+function _orgDefs(g) {
+  _orgN++; var id = "og" + _orgN, hid = "oh" + _orgN;
+  var defs = mk("defs", {}, g);
+  var lg = mk("linearGradient", { id: id, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  var s0 = mk("stop", { offset: "0", "stop-color": "#999" }, lg); s0.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 55%,#fff)");
+  var s1 = mk("stop", { offset: ".55", "stop-color": "#888" }, lg); s1.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 78%,var(--anatomy-paper))");
+  var s2 = mk("stop", { offset: "1", "stop-color": "#666" }, lg); s2.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 66%,#000)");
+  var hg = mk("linearGradient", { id: hid, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  mk("stop", { offset: "0", "stop-color": "#fff", "stop-opacity": ".2" }, hg);
+  mk("stop", { offset: ".55", "stop-color": "#fff", "stop-opacity": "0" }, hg);
+  mk("stop", { offset: "1", "stop-color": "#000", "stop-opacity": ".14" }, hg);
+  return { b: "url(#" + id + ")", h: "url(#" + hid + ")" };
+}
+/* one filled silhouette plus its shade overlay, same path data so the light stays inside */
+function _ob(g, d, G) {
+  mk("path", { class: "org-b", d: d, fill: G.b, stroke: "#666" }, g);
+  mk("path", { d: d, fill: G.h, stroke: "none", "pointer-events": "none" }, g);
+}
+function _ol(g, d, cls) { return mk("path", { class: cls || "org-d", d: d, fill: "none" }, g); }
+function _of(g, d, fillCss, cc) { var e = mk("path", { class: "org-f", d: d, stroke: "#666" }, g); e.setAttribute("style", "fill:" + fillCss + ";--cc:" + cc); return e; }
+function _ov(g, d, color, wdt) { var e = mk("path", { class: "org-v", d: d, fill: "none", stroke: "#777", "stroke-width": wdt, "stroke-linecap": "round" }, g); e.setAttribute("style", "stroke:" + color); return e; }
+function _odot(g, x, y, r, fillCss) { var e = mk("circle", { cx: x, cy: y, r: r, stroke: "none" }, g); e.setAttribute("style", "fill:" + fillCss); return e; }
+
+/* liver: big right lobe, smaller left lobe, falciform notch, gallbladder, porta hepatis stubs */
+function _orgLiver(g, G) {
+  _ov(g, "M-2 46L-2 18", "var(--d-ven)", 5); _ov(g, "M7 46L5 20", "var(--d-art)", 3); _ov(g, "M-11 46L-9 20", "var(--c-bac)", 2.5);
+  _ob(g, "M-6-30C22-33 44-25 50-7C54 9 40 25 18 30C2 33-5 22-7 6C-8-8-8-22-6-30Z", G);
+  _ob(g, "M-8-27C-24-27-40-19-48-6C-51 1-45 9-35 12C-24 15-11 9-8-1C-6-10-6-20-8-27Z", G);
+  _ol(g, "M-8-29C-7-18-6-6-4 6", "org-dk");
+  _ol(g, "M-2-28C14-29 30-24 40-14");
+  _of(g, "M10 18C16 16 22 18 23 24C24 31 19 37 14 36C9 35 7 28 8 23C8 21 9 19 10 18Z", "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  return { h0: 78, ports: { in: [-2, 46], out: [12, -30], porta: [-2, 18], gall: [16, 33], lobe: [20, 0] } };
+}
+/* heart: mass with apex down left, septum, coronary groove, aorta with arch, pulmonary split, caval stubs */
+function _orgHeart(g, G) {
+  _ov(g, "M-2-18L-2-44C-2-52-10-56-20-54C-28-52-32-46-32-38", "var(--d-art)", 8);
+  _ov(g, "M-8-52L-8-59M-15-54L-16-60M-22-53L-24-59", "var(--d-art)", 2.5);
+  _ov(g, "M12-16C8-28 2-34-4-38", "var(--d-ven)", 7);
+  _ov(g, "M-4-38C-12-40-20-38-28-34", "var(--d-ven)", 4.5); _ov(g, "M-4-38C4-40 12-38 20-34", "var(--d-ven)", 4.5);
+  _ov(g, "M20-20L20-52", "var(--d-ven)", 7); _ov(g, "M18 34L18 58", "var(--d-ven)", 7);
+  _ov(g, "M-36-2L-50-6M-34 14L-48 16", "var(--d-art)", 4);
+  _ob(g, "M-4-32C24-34 42-16 40 10C38 32 12 48-20 50C-34 44-40 24-36 2C-33-18-22-31-4-32Z", G);
+  _ol(g, "M0-30C4-10 0 14-14 44", "org-dk");
+  _ol(g, "M-34 6C-18 12 6 12 38 4");
+  _ol(g, "M-6-28C-14-18-18-6-20 8");
+  return { h0: 120, ports: { in: [20, -52], out: [-32, -38], ivc: [18, 58], apex: [-20, 50], pulm: [-28, -34] } };
+}
+/* kidney: bean with hilum, cortex rim, medulla rays, pelvis funnel, ureter, artery and vein stubs */
+function _orgKidney(g, G) {
+  _ov(g, "M-12 6C-22 12-28 18-28 30C-28 50-26 70-24 90", "var(--cc)", 4.5);
+  _ov(g, "M-50-8C-40-8-30-8-22-6", "var(--d-art)", 4); _ov(g, "M-50 10C-40 10-30 8-22 6", "var(--d-ven)", 5);
+  _ob(g, "M8-58C38-58 54-32 50 2C56 32 42 60 8 60C-8 60-16 48-19 34C-26 24-26-24-19-34C-16-48-8-58 8-58Z", G);
+  _ol(g, "M8-49C32-49 45-28 42 0C46 28 34 51 8 51C-1 51-8 43-10 32C-15 24-15-24-10-32C-8-43-1-49 8-49Z");
+  _ol(g, "M-6-30L14-38M-8-10L16-12M-8 12L16 14M-6 32L14 40");
+  _ol(g, "M16-44C30-36 38-20 38 0");
+  _of(g, "M-19-14C-8-12-2-8 2-2C-2 4-8 10-18 14C-22 8-22-8-19-14Z", "color-mix(in srgb,var(--cc) 35%,#fff)", "var(--cc)");
+  return { h0: 150, ports: { in: [-50, -8], out: [-24, 90], vein: [-50, 10], pelvis: [-12, 4], cortex: [30, 0] } };
+}
+/* lung: one lung with oblique fissure, hilum bronchus splitting into lobar and segmental branches */
+function _orgLung(g, G) {
+  _ov(g, "M-58 4L-30 4", "var(--anatomy-hi)", 6);
+  _ov(g, "M-30 4C-22-6-16-16-10-26", "var(--anatomy-hi)", 4.5); _ov(g, "M-30 4C-22 14-14 24-6 34", "var(--anatomy-hi)", 4.5);
+  _ov(g, "M-18-14L-28-22M-16-16L-8-24M-14-20L-14-32M-20 16L-30 24M-16 20L-6 28M-12 26L-10 38", "var(--anatomy-hi)", 2);
+  _ov(g, "M-58-8L-34-6", "var(--d-ven)", 4); _ov(g, "M-58 14L-34 12", "var(--d-art)", 4);
+  _ob(g, "M2-60C24-56 40-32 43 8C45 38 32 60 2 62C-24 62-40 42-42 10C-44-24-20-58 2-60Z", G);
+  _ol(g, "M-40-2C-20 8 0 22 24 40", "org-dk");
+  _ol(g, "M-8-48C8-50 22-40 30-26");
+  return { h0: 130, ports: { in: [-58, 4], out: [-58, 14], art: [-58, -8], apex: [2, -60], base: [2, 62] } };
+}
+/* stomach: J shape with fundus dome, rugae, antrum sweep, pylorus ring, oesophagus and duodenum stubs */
+function _orgStomach(g, G) {
+  _of(g, "M-38-58L-22-58L-22-36L-38-36Z", "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))", "var(--cc)");
+  _ob(g, "M-38-36C-46-24-50-8-46 10C-42 30-30 46-12 50C6 54 28 46 40 32C44 27 46 23 46 18L34 14C30 22 20 30 6 32C-8 34-22 26-28 12C-33-1-31-16-26-28C-24-32-22-34-22-36Z", G);
+  _ol(g, "M-36-10C-30 6-22 20-8 28M-28-22C-22-6-12 10 4 22M-16-30C-10-14 0 2 14 12");
+  _ol(g, "M40 15C43 19 43 25 40 29M34 14C37 18 37 26 34 30", "org-dk");
+  _ol(g, "M46 16L60 22M44 28L58 32", "org-dk");
+  return { h0: 116, ports: { in: [-30, -58], out: [60, 27], fundus: [-40, -12], antrum: [24, 38], pylorus: [40, 22] } };
+}
+/* brain lateral: cerebrum with Sylvian fissure and gyri, cerebellum with folia, tapered brainstem */
+function _orgBrain(g, G) {
+  _ov(g, "M10 50L10 64", "var(--d-art)", 5);
+  _ob(g, "M-50-6C-50-32-24-42 4-40C30-38 44-28 44-8C44 10 32 24 8 28C-18 31-50 24-50-6Z", G);
+  _ol(g, "M-12 10C2 6 18 2 34-4", "org-dk");
+  _ol(g, "M-38-20C-32-10-32 2-38 12M-26-30C-20-20-20-6-26 6M-4-32C2-22 2-8-4 2M10-30C16-20 16-6 10 4M28-22C34-14 34-2 28 8");
+  _ol(g, "M-16 6L-24-4M-10 4L-12-8", "org-dk");
+  _ob(g, "M2 24L16 24L12 56L6 56Z", G);
+  _ol(g, "M2 36C6 38 12 38 16 36");
+  _ob(g, "M22 24C34 22 46 26 48 34C50 42 42 48 32 47C24 46 20 38 20 32C20 28 20 26 22 24Z", G);
+  _ol(g, "M24 32L44 32M25 37L43 37M27 42L41 42");
+  return { h0: 110, ports: { in: [10, 64], out: [4, -40], parenchyma: [-8, -6], cereb: [34, 35], frontal: [-40, -8] } };
+}
+/* pancreas: bulky head right, tapering tail left, main duct with side branches, islet dots */
+function _orgPancreas(g, G) {
+  _ob(g, "M-50-4C-32-14-8-14 14-10C32-7 46-2 49 10C51 21 40 28 26 25C8 21-20 12-50 6Z", G);
+  _ol(g, "M-46 1C-20-2 10 0 38 10", "org-dk");
+  _ol(g, "M-30-1L-34-8M-10-1L-14-9M8 0L4-8M-28 1L-32 8M-6 1L-10 8M12 2L8 10");
+  _ol(g, "M52-6C58 4 58 16 50 24");
+  _odot(g, -20, -2, 1.6, "var(--d-art)"); _odot(g, 0, 0, 1.6, "var(--d-art)"); _odot(g, 22, 6, 1.6, "var(--d-art)");
+  return { h0: 60, ports: { in: [-10, -12], out: [49, 12], head: [36, 8], tail: [-48, 1] } };
+}
+/* spleen: crescent with top notch, trabeculae, hilar artery and vein stubs below */
+function _orgSpleen(g, G) {
+  _ov(g, "M-30 52C-28 44-26 40-22 36", "var(--d-art)", 3.5); _ov(g, "M-20 54C-19 46-17 42-13 38", "var(--d-ven)", 4.5);
+  _ob(g, "M-38-30C-8-40 28-34 44-12C52 4 44 26 20 34C-4 41-34 32-44 10C-48-4-46-22-38-30Z", G);
+  _ol(g, "M-8-36C-4-33 0-33 4-36", "org-dk");
+  _ol(g, "M-30-10C-10-2 12-2 32-10M-28 8C-8 16 12 16 30 8");
+  return { h0: 96, ports: { in: [-30, 52], out: [-20, 54], hilum: [-18, 37], pulp: [0, 0] } };
+}
+/* bladder: dome with detrusor arcs, trigone, ureters in from above, urethra out below */
+function _orgBladder(g, G) {
+  _ov(g, "M-52-44C-44-34-36-26-30-18", "var(--cc)", 4); _ov(g, "M52-44C44-34 36-26 30-18", "var(--cc)", 4);
+  _ob(g, "M0-50C26-48 40-30 40-6C40 16 26 32 8 40L-8 40C-26 32-40 16-40-6C-40-30-26-48 0-50Z", G);
+  _ob(g, "M-8 40L8 40L8 64L-8 64Z", G);
+  _ol(g, "M-8 52L8 52", "org-dk");
+  _ol(g, "M-24-8L24-8L0 24Z");
+  _ol(g, "M-28-28C-12-36 12-36 28-28M-34-12C-16-22 16-22 34-12");
+  return { h0: 120, ports: { in: [-52, -44], out: [0, 64], inR: [52, -44], trigone: [0, 8], dome: [0, -48] } };
+}
+/* uterus: fundus, cavity, cervix, tubes with fimbriae, ovaries with follicles */
+function _orgUterus(g, G) {
+  _ov(g, "M-16-16C-26-17-32-19-38-23", "var(--cc)", 3.5); _ov(g, "M16-16C26-17 32-19 38-23", "var(--cc)", 3.5);
+  _ov(g, "M-38-23L-44-27M-38-23L-45-23M-38-23L-44-19M-38-23L-42-29", "var(--cc)", 1.2);
+  _ov(g, "M38-23L44-27M38-23L45-23M38-23L44-19M38-23L42-29", "var(--cc)", 1.2);
+  var eo = mk("ellipse", { class: "org-f", cx: -45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var eo2 = mk("ellipse", { class: "org-f", cx: 45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo2.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var _fol = "color-mix(in srgb,var(--c-plt) 45%,#000)";
+  _odot(g, -47, -14, 1.6, _fol); _odot(g, -43, -8, 1.6, _fol); _odot(g, -46, -4, 1.4, _fol);
+  _odot(g, 47, -14, 1.6, _fol); _odot(g, 43, -8, 1.6, _fol); _odot(g, 46, -4, 1.4, _fol);
+  _ob(g, "M-16-20C-8-26 8-26 16-20C20-2 15 20 8 32L-8 32C-15 20-20-2-16-20Z", G);
+  _of(g, "M-10-14L10-14L0 22Z", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  _ol(g, "M-11 18L11 18", "org-dk"); _ol(g, "M0 18L0 32");
+  return { h0: 100, ports: { in: [-45, -22], out: [0, 33], ovL: [-45, -10], ovR: [45, -10], fundus: [0, -24] } };
+}
+/* thyroid butterfly: two lobes, isthmus bridge, trachea rings behind, parathyroid dots */
+function _orgThyroid(g, G) {
+  _ov(g, "M-7-40L-7 40M7-40L7 40", "var(--anatomy-hi)", 2);
+  _ov(g, "M-7-28L7-28M-7-12L7-12M-7 24L7 24M-7 36L7 36", "var(--anatomy-hi)", 1.2);
+  _ob(g, "M16-32C28-30 35-16 33 4C31 22 25 32 16 32C8 32 6 20 8 2C10-14 11-28 16-32Z", G);
+  _ob(g, "M-16-32C-28-30-35-16-33 4C-31 22-25 32-16 32C-8 32-6 20-8 2C-10-14-11-28-16-32Z", G);
+  _ob(g, "M-10 6L10 6L10 16L-10 16Z", G);
+  _ol(g, "M14-20C18-10 18 6 14 20M-14-20C-18-10-18 6-14 20");
+  _odot(g, -30, 8, 2, "var(--c-plt)"); _odot(g, 30, -4, 2, "var(--c-plt)");
+  return { h0: 90, ports: { in: [16, -34], out: [0, 36], isthmus: [0, 11], lobeR: [22, 0], lobeL: [-22, 0] } };
+}
+/* pituitary: pea gland in its bony pocket, big anterior lobe, small bright posterior lobe, stalk stub up */
+function _orgPituitary(g, G) {
+  _of(g, "M-5-40L5-40L4-22L-4-22Z", "color-mix(in srgb,var(--cc) 55%,var(--anatomy-paper))", "var(--cc)");
+  _ob(g, "M-24-16C-10-24 10-24 24-16C28-2 16 14 0 14C-16 14-28-2-24-16Z", G);
+  _ol(g, "M-18-12C-8-16 8-16 18-12");
+  _of(g, "M6 0C14 0 20 6 18 12C16 17 8 18 4 14C0 10 1 3 6 0Z", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  _ol(g, "M-34 20C-20 32 20 32 34 20", "org-dk");
+  return { h0: 76, ports: { stalk: [0, -40], ant: [-12, -2], post: [12, 8], base: [0, 16] } };
+}
+/* adrenal: small crescent cap with cortex band and medulla dots, sits above the kidney */
+function _orgAdrenal(g, G) {
+  _ob(g, "M-30 8C-28-10-12-20 0-20C12-20 28-10 30 8C20 2 10 0 0 0C-10 0-20 2-30 8Z", G);
+  _ol(g, "M-24 0C-12-5 12-5 24 0");
+  _odot(g, -8, -8, 1.8, "var(--c-plt)"); _odot(g, 0, -10, 1.8, "var(--c-plt)"); _odot(g, 8, -8, 1.8, "var(--c-plt)");
+  return { h0: 44, ports: { in: [-24, 2], out: [24, 2], top: [0, -18] } };
+}
+/* eye: sclera ball with cornea bulge, iris and pupil facing left, retina arc, optic nerve stub right */
+function _orgEye(g, G) {
+  _ov(g, "M26 0L54 0", "var(--c-plt)", 8);
+  _ob(g, "M-36-4C-34-22-16-32 4-30C24-28 34-12 32 4C30 20 14 30-4 29C-22 28-36 14-36-4Z", G);
+  _of(g, "M-39 0C-39-6-35-11-30-11C-25-11-21-6-21 0C-21 6-25 11-30 11C-35 11-39 6-39 0Z", "color-mix(in srgb,var(--c-endo) 70%,var(--anatomy-paper))", "var(--c-endo)");
+  _odot(g, -30, 0, 5, "#241a12");
+  _odot(g, -32, -3.5, 1.5, "#ffffff");
+  _ol(g, "M16-15C23-5 23 7 15 17");
+  return { h0: 70, ports: { in: [-41, 0], out: [54, 0], retina: [16, 0], lens: [-20, 0] } };
+}
+/* Real-art store, filled by buildScene after this lib: _ORG_ART[kind] = { vb:[x,y,w,h],
+ * pfx:"oaxxx", body:"<inner svg markup>" }. Ports are fractions of the viewBox, measured
+ * off the slimmed art (see tools/figures/dev/svgslim.py); content fills the frame. */
+var _ORG_ART = {};
+var _ORG_FRAC = {
+  liver: { in: [.45, .95], out: [.46, .04], porta: [.45, .82], gall: [.30, .90], lobe: [.28, .45] },
+  heart: { in: [.30, .01], out: [.48, .01], aorta: [.48, .01], ivc: [.28, .90], apex: [.70, .97], pulm: [.60, .08] },
+  kidney: { in: [.04, .36], out: [.38, .97], vein: [.04, .46], pelvis: [.36, .41], cortex: [.62, .45], hilum: [.28, .41] },
+  lung: { in: [.46, .53], out: [.44, .60], art: [.44, .48], apex: [.24, .30], base: [.24, .87], trachea: [.49, .01], carina: [.49, .50], hilumL: [.42, .58], hilumR: [.56, .58], apexR: [.75, .34], baseR: [.75, .86] },
+  stomach: { in: [.42, .00], out: [.50, .95], fundus: [.38, .10], antrum: [.52, .30], pylorus: [.60, .35] },
+  intestine: { in: [.58, .38], out: [.50, .95], duodenum: [.60, .40], jejunum: [.42, .60], ileum: [.50, .72], cecum: [.60, .82], colon: [.28, .60], rectum: [.50, .92] },
+  brain: { in: [.60, .97], out: [.42, .04], parenchyma: [.42, .42], cereb: [.76, .78], frontal: [.08, .40], stem: [.60, .93], carotid: [.16, .75] },
+  pancreas: { in: [.50, .08], out: [.95, .50], head: [.85, .45], tail: [.06, .45], body: [.50, .45] },
+  spleen: { in: [.38, .78], out: [.52, .78], hilum: [.45, .72], pulp: [.50, .38] }
+};
+/* draw the injected art centred on x,y at w px wide. The art is clipped to its
+ * frame; tint overlays an organ-shaped translucent mask (the art itself, reused
+ * as a mask); dim dulls the art. Art ids are suffixed per instance so two of
+ * the same organ on one page never share gradient, clip or mask ids. */
+function _orgArt(parent, kind, x, y, w, opts, A) {
+  var vb = A.vb, vw = vb[2], vh = vb[3], cx = vb[0] + vw / 2, cy = vb[1] + vh / 2;
+  _orgN++;
+  var uid = "u" + _orgN;
+  var outer = mk("g", { class: "org org-art org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var sx = w / vw, sy = opts.h ? opts.h / vh : sx, fx = opts.flip ? -1 : 1;
+  var inner = mk("g", { transform: "translate(" + f1(-fx * cx * sx) + " " + f1(-cy * sy) + ") scale(" + (fx * sx).toFixed(4) + " " + sy.toFixed(4) + ")" }, outer);
+  var defs = mk("defs", {}, inner);
+  var cid = A.pfx + uid + "-frame";
+  var cp = mk("clipPath", { id: cid }, defs);
+  mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, cp);
+  var art = mk("g", { class: "org-halo", "clip-path": "url(#" + cid + ")" }, inner);
+  var aid = A.pfx + uid + "-art";
+  art.setAttribute("id", aid);
+  art.innerHTML = A.body.split('id="' + A.pfx + '-').join('id="' + A.pfx + uid + '-')
+    .split('url(#' + A.pfx + '-').join('url(#' + A.pfx + uid + '-')
+    .split('href="#' + A.pfx + '-').join('href="#' + A.pfx + uid + '-');
+  if (opts.dim) art.setAttribute("opacity", ".5");
+  if (opts.tint) {
+    var mid = A.pfx + uid + "-tintm";
+    var m = mk("mask", { id: mid, maskUnits: "userSpaceOnUse", x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, defs);
+    mk("use", { href: "#" + aid }, m);
+    var tg = mk("g", { "clip-path": "url(#" + cid + ")" }, inner);
+    mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh), fill: opts.tint, mask: "url(#" + mid + ")" }, tg);
+  }
+  var ports = {}, F = _ORG_FRAC[kind], k;
+  for (k in F) ports[k] = [Math.round((x + fx * (vb[0] + F[k][0] * vw - cx) * sx) * 10) / 10, Math.round((y + (vb[1] + F[k][1] * vh - cy) * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(vh * sy * 10) / 10, ports: ports, art: true };
+}
+/* dispatcher: outer g carries the theme class and gradients, inner g the local drawing scaled to w */
+function organ(parent, kind, x, y, w, opts) {
+  opts = opts || {};
+  if (_ORG_FRAC[kind] && _ORG_ART[kind]) return _orgArt(parent, kind, x, y, w, opts, _ORG_ART[kind]);
+  var outer = mk("g", { class: "org org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var G = _orgDefs(outer);
+  var inner = mk("g", {}, outer);
+  var r;
+  if (kind === "liver") r = _orgLiver(inner, G);
+  else if (kind === "heart") r = _orgHeart(inner, G);
+  else if (kind === "kidney") r = _orgKidney(inner, G);
+  else if (kind === "lung") r = _orgLung(inner, G);
+  else if (kind === "stomach") r = _orgStomach(inner, G);
+  else if (kind === "brain") r = _orgBrain(inner, G);
+  else if (kind === "pancreas") r = _orgPancreas(inner, G);
+  else if (kind === "spleen") r = _orgSpleen(inner, G);
+  else if (kind === "eye") r = _orgEye(inner, G);
+  else if (kind === "bladder") r = _orgBladder(inner, G);
+  else if (kind === "uterus") r = _orgUterus(inner, G);
+  else if (kind === "thyroid") r = _orgThyroid(inner, G);
+  else if (kind === "pituitary") r = _orgPituitary(inner, G);
+  else if (kind === "adrenal") r = _orgAdrenal(inner, G);
+  else throw new Error("organ: unknown kind " + kind);
+  var sx = w / 100, sy = opts.h ? opts.h / r.h0 : sx, fx = opts.flip ? -1 : 1;
+  inner.setAttribute("transform", "scale(" + (fx * sx).toFixed(3) + " " + sy.toFixed(3) + ")");
+  var ports = {}, k;
+  for (k in r.ports) ports[k] = [Math.round((x + fx * r.ports[k][0] * sx) * 10) / 10, Math.round((y + r.ports[k][1] * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(r.h0 * sy * 10) / 10, ports: ports, art: false };
+}
+organ.kinds = ["liver", "heart", "kidney", "lung", "stomach", "intestine", "brain", "pancreas", "spleen", "bladder", "uterus", "thyroid", "eye", "pituitary", "adrenal"];
+
+_ORG_ART["kidney"]={vb:[0,0,461.7,524.4],pfx:"oakid",body:"<defs><filter id=\"oakid-luminosity-invert\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"398.2\" color-interpolation-filters=\"sRGB\" filterUnits=\"userSpaceOnUse\"><feColorMatrix result=\"cm\" values=\"-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0\" /></filter><radialGradient id=\"oakid-radial-gradient\" cx=\"203.2\" cy=\"292.9\" fx=\"203.2\" fy=\"292.9\" r=\"173\" gradientUnits=\"userSpaceOnUse\"><stop offset=\".6\" stop-color=\"#000\" /><stop offset=\".9\" stop-color=\"#fff\" /></radialGradient><mask id=\"oakid-mask\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"398.2\" maskUnits=\"userSpaceOnUse\"><g filter=\"url(#oakid-luminosity-invert)\"><path d=\"M95.9 444.9l12.9 4.4 20.1 5.2 26 4.1 14.3 .9 14.8 -.3 14.9 -1.8 52.3 -10.4 19.3 -5.4 19.2 -6.8 18.4 -8.6 17 -10.7 14.9 -13.1 12.2 -15.8 8.9 -18.8 6.5 -21.3 5.4 -22.7 4.2 -23.5 3 -23.6 1.7 -23 .4 -21.8 -1 -19.9 -2.5 -17.4 -4 -14.3 -5.6 -10.4 -13.4 -8.8 -25.3 -9.2 -34.3 -8.8 -40.4 -7.7 -43.6 -5.8 -43.8 -3.1 -41.2 .4 -35.6 4.6 -27.2 9.6 -15.8 15.4 -8.7 20.4 -7.3 23.8 -5.3 26.7 -2.8 28.9 .4 30.6 4.2 31.7 8.6 32.2 13.6 32.2 19.2 31.5Z\" fill=\"url(#oakid-radial-gradient)\" /></g></mask><clipPath id=\"oakid-clippath\"><path d=\"M461.7 225.4l-2.9 36.6 -8.4 34.7 -13.5 32.3 -18.1 29.5 -22.2 26.3 -25.9 22.5 -29.1 18.3 -31.9 13.7 -34.2 8.5 -36 2.9 -36 -2.9 -34.2 -8.5 -31.9 -13.7 -29.1 -18.3 -25.9 -22.5 -22.2 -26.3 -18.1 -29.5 -13.5 -32.3 -8.4 -34.7 -2.9 -36.6 2.7 -36.4 7.9 -34.3 12.7 -31.8 17.1 -28.9 21.1 -25.7 24.6 -22.2 27.7 -18.2 30.4 -14 32.7 -9.3 34.5 -4.3 10.6 -.2 36 2.9 34.2 8.5 31.9 13.7 29.1 18.3 25.9 22.5 22.2 26.3 18.1 29.5 13.5 32.3 8.4 34.7Z\" fill=\"none\" /></clipPath><filter id=\"oakid-luminosity-invert-2\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"395.9\" color-interpolation-filters=\"sRGB\" filterUnits=\"userSpaceOnUse\"><feColorMatrix result=\"cm\" values=\"-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0\" /></filter><mask id=\"oakid-mask-1\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"395.9\" maskUnits=\"userSpaceOnUse\"><g filter=\"url(#oakid-luminosity-invert-2)\"><path d=\"M95.9 444.9l12.9 4.4 20.1 5.2 26 4.1 14.3 .9 14.8 -.3 14.9 -1.8 52.3 -10.4 19.3 -5.4 19.2 -6.8 18.4 -8.6 17 -10.7 14.9 -13.1 12.2 -15.8 8.9 -18.8 6.5 -21.3 5.4 -22.7 4.2 -23.5 3 -23.6 1.7 -23 .4 -21.8 -1 -19.9 -2.5 -17.4 -4 -14.3 -5.6 -10.4 -13.4 -8.8 -25.3 -9.2 -34.3 -8.8 -40.4 -7.7 -43.6 -5.8 -43.8 -3.1 -41.2 .4 -35.6 4.6 -27.2 9.6 -15.8 15.4 -8.7 20.4 -7.3 23.8 -5.3 26.7 -2.8 28.9 .4 30.6 4.2 31.7 8.6 32.2 13.6 32.2 19.2 31.5Z\" fill=\"url(#oakid-radial-gradient)\" /></g></mask><clipPath id=\"oakid-clippath-1\"><path d=\"M461.7 225.4l-2.9 36.6 -8.4 34.7 -13.5 32.3 -18.1 29.5 -22.2 26.3 -25.9 22.5 -29.1 18.3 -31.9 13.7 -34.2 8.5 -36 2.9 -36 -2.9 -34.2 -8.5 -31.9 -13.7 -29.1 -18.3 -25.9 -22.5 -22.2 -26.3 -18.1 -29.5 -13.5 -32.3 -8.4 -34.7 -2.9 -36.6 2.7 -36.4 7.9 -34.3 12.7 -31.8 17.1 -28.9 21.1 -25.7 24.6 -22.2 27.7 -18.2 30.4 -14 32.7 -9.3 34.5 -4.3 10.6 -.2 36 2.9 34.2 8.5 31.9 13.7 29.1 18.3 25.9 22.5 22.2 26.3 18.1 29.5 13.5 32.3 8.4 34.7Z\" fill=\"none\" /></clipPath></defs><g mask=\"url(#oakid-mask)\"><path id=\"oakid-ureter\" d=\"M185.3 197.9l-14.2 32.3 -16.1 28.8 -10.4 20.5 -5.3 13 -3.1 13.1 -1.6 17.2 -.3 19.1 4.1 64.9 -.8 113.4 6.6 -.9 2.5 -1.8 2 -3.3 1.7 -102.5 -1.6 -42.6 .3 -25.1 2.9 -22.7 2.9 -9.4 4.1 -7.4 9.3 -10.5 8.1 -6.2 12.8 -6.8 10.4 -8.9 12.9 -13.3 12.1 -15.1 4.7 -7.4 3.3 -6.9 1.5 -6.1 -1 -5.5 -3.4 -5.3 -5.2 -4.9 -6.4 -4.3 -7.1 -3.6 -14 -4.5 -5.7 -.5 -4.2 .8Z\" stroke-miterlimit=\"10\" fill=\"#f4dca9\" stroke-width=\"8.2px\" stroke=\"#725222\" /></g><g clip-path=\"url(#oakid-clippath)\"><g><path d=\"M11.7 232.9l0 12.3 61.8-5.4 43.8-7.2 18.9 7.9 15.5 8.8 15 11.9 12.1 12.8-1-3.7-3.3-5.5-9.7-10.4-15.8-11.9-23.5-14.2 4.9-3.8 17.3-7.3 20.9-7.8 17.9-4.5 6-3.3 1.3-2.4 0-2.6-28.2 7.1 11.6-11.5 4.8-7.4 3.4-12.2.1-3.8-1.1-4.9-1.3.2-1.5 3.5-1 8.6-1.8 5.4-4.3 6.4-5.6 6-7 6-6.9 4.4-23.5 10.6-17.8 6.6-12.4 2-51.6 6.3Z\" stroke-miterlimit=\"10\" stroke-width=\"8.2px\" fill=\"#5276b6\" stroke=\"#142b4f\" /><path d=\"M5.3 206.7l91.5 -6.9 3 -.9 10.5 -7.7 5.8 -2.7 9.6 -1.7 14.9 -.3 13.1 -1.5 7.8 -3.1 6.9 -6.1 4.2 -1.6 2.9 .3 -2.1 3.1 -4 4.3 -5.7 3.4 -13.1 3.1 -30.7 3.6 -4.6 1.6 -3.3 2.3 -3.9 4.5 1.5 .4 32.6 -7.6 11.4 -4.2 14.3 -9.5 16 -15.2 3.5 -1.1 2.3 1.6 1.2 3.7 .3 10.6 -1.9 15.2 -24.1 7.2 -30.6 7.6 -9.4 3.1 -3.4 2.3 3.3 .8 12.3 .5 48 -.1 1.2 .7 .7 2.4 -2.7 6.4 -30.2 -.6 -31.8 1.1 -26.3 -3.3 -89.4 8.5 -1.4 -.8 -1.4 -4.6 -.1 -6.8Z\" stroke-miterlimit=\"10\" stroke=\"#8f2e30\" fill=\"#d85452\" stroke-width=\"8.2px\" /></g></g><path d=\"M172.2 58.6l31.8 .1 12.1 1.3 9.6 2.6 14.8 6.5 10.3 6.1 10.4 7.5 10.2 8.9 16.6 16.6 8.8 11.7 1.5 4.4 .8 10.8 8.8 14.8 11.1 24 6.5 17.6 3 13.3 3.1 25.3 .2 8.2 -1.2 8.5 1.4 4.4 .6 7.9 0 29.6 -1.2 13.8 -6.1 26.9 -5.4 7 -4.6 13.8 -7.5 15.9 -12 17.8 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -1.4 -12.1 .9 -11.8 3.2 -9.3 6.1 -11.5 1.3 -5.4 -4 -19.4 .5 -12.3 2 -6.5 6.7 -13.5 .6 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" stroke-miterlimit=\"10\" fill=\"#a95c57\" stroke=\"#632b29\" stroke-width=\"8.2px\" /><path d=\"M166.1 7.2l3 2.3 3 3.7 4.9 9.5 5.8 19.1 5.2 13.4 -.2 5.2 -11.3 16.1 -5.9 12 -3.5 12.4 -.4 10.9 -1.9 10.8 -1.9 6.3 -3.2 6.6 -5.1 3.9 -14.8 6.6 -15.8 9.6 -5.4 2 -.9 -.3 -2.7 -4.2 -4.1 -9.9 -3.7 -15.2 -1 -9.5 -.2 -10.7 .9 -11.8 2.2 -13 7.1 -26.4 9.3 -23.4 5.5 -9.8 6 -8 6.5 -6 7 -3.6 7.5 -.9Z\" stroke-miterlimit=\"10\" fill=\"#f4dca9\" stroke=\"#5a4218\" stroke-width=\"8.2px\" /><g mask=\"url(#oakid-mask-1)\"><path id=\"oakid-ureter-2\" data-name=\"ureter\" d=\"M185.3 197.9l-14.2 32.3 -16.1 28.8 -10.4 20.5 -5.3 13 -3.1 13.1 -1.6 17.2 -.3 19.1 4.1 64.9 -.8 113.4 6.6 -.9 2.5 -1.8 2 -3.3 1.7 -102.5 -1.6 -42.6 .3 -25.1 2.9 -22.7 2.9 -9.4 4.1 -7.4 9.3 -10.5 8.1 -6.2 12.8 -6.8 10.4 -8.9 12.9 -13.3 12.1 -15.1 4.7 -7.4 3.3 -6.9 1.5 -6.1 -1 -5.5 -3.4 -5.3 -5.2 -4.9 -6.4 -4.3 -7.1 -3.6 -14 -4.5 -5.7 -.5 -4.2 .8Z\" stroke-miterlimit=\"10\" stroke-width=\"3.5px\" fill=\"#f4dca9\" stroke=\"#725222\" /></g><g clip-path=\"url(#oakid-clippath-1)\"><g><path d=\"M11.7 232.9l0 12.3 61.8-5.4 43.8-7.2 18.9 7.9 15.5 8.8 15 11.9 12.1 12.8-1-3.7-3.3-5.5-9.7-10.4-15.8-11.9-23.5-14.2 4.9-3.8 17.3-7.3 20.9-7.8 17.9-4.5 6-3.3 1.3-2.4 0-2.6-28.2 7.1 11.6-11.5 4.8-7.4 3.4-12.2.1-3.8-1.1-4.9-1.3.2-1.5 3.5-1 8.6-1.8 5.4-4.3 6.4-5.6 6-7 6-6.9 4.4-23.5 10.6-17.8 6.6-12.4 2-51.6 6.3Z\" fill=\"#5276b6\" /><path d=\"M6.8 204.4l65.9 -2.6 24.1 -2 3 -.9 10.5 -7.7 5.8 -2.7 9.6 -1.7 14.9 -.3 13.1 -1.5 7.8 -3.1 6.9 -6.1 4.2 -1.6 2.9 .3 -2.1 3.1 -4 4.3 -5.7 3.4 -13.1 3.1 -30.7 3.6 -4.6 1.6 -3.3 2.3 -3.9 4.5 1.5 .4 32.6 -7.6 11.4 -4.2 14.3 -9.5 16 -15.2 3.5 -1.1 2.3 1.6 1.2 3.7 .3 10.6 -1.9 15.2 -24.1 7.2 -30.6 7.6 -9.4 3.1 -3.4 2.3 3.3 .8 12.3 .5 48 -.1 1.2 .7 .7 2.4 -2.7 6.4 -30.2 -.6 -31.8 1.1 -26.3 -3.3 -87.9 6.2 -1.4 -.8 -1.4 -4.6 -.1 -6.8Z\" fill=\"#d85452\" /></g></g><path d=\"M172.2 58.6l31.8 .1 12.1 1.3 9.6 2.6 14.8 6.5 10.3 6.1 10.4 7.5 10.2 8.9 16.6 16.6 8.8 11.7 1.5 4.4 .8 10.8 8.8 14.8 11.1 24 6.5 17.6 3 13.3 3.1 25.3 .2 8.2 -1.2 8.5 1.4 4.4 .6 7.9 0 29.6 -1.2 13.8 -6.1 26.9 -5.4 7 -4.6 13.8 -7.5 15.9 -12 17.8 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -1.4 -12.1 .9 -11.8 3.2 -9.3 6.1 -11.5 1.3 -5.4 -4 -19.4 .5 -12.3 2 -6.5 6.7 -13.5 .6 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" stroke-miterlimit=\"10\" stroke-width=\"3.5px\" fill=\"#a95c57\" stroke=\"#632b29\" /><g><path d=\"M172.2 58.6l31.8 .1 17.1 2.4 14.6 5.1 10.5 5 10.5 6.6 10 8.5 25.9 28.4 5 7.2 1.8 13.7 9.3 13.6 6 11.4 5.4 12.5 3.6 12 4.7 26 3.2 23.2 .1 5.7 -1 6.4 1.6 7.7 -2 44.5 -4.5 29.2 -5.8 8.3 -7.9 21.3 -9.7 17.3 -6.6 8.9 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -.3 -15.8 1 -11.9 2.1 -5.5 5.7 -9.4 1.6 -5.6 -2.8 -25.1 0 -10.7 8.1 -17.8 .5 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" fill=\"#f5b6b3\" /></g><g><path d=\"M172.2 58.6l31.8 .1 17.1 2.4 14.6 5.1 10.5 5 10.5 6.6 10 8.5 25.9 28.4 5 7.2 1.8 13.7 9.3 13.6 6 11.4 5.4 12.5 3.6 12 4.7 26 3.2 23.2 .1 5.7 -1 6.4 1.6 7.7 -2 44.5 -4.5 29.2 -5.8 8.3 -7.9 21.3 -9.7 17.3 -6.6 8.9 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -.3 -15.8 1 -11.9 2.1 -5.5 5.7 -9.4 1.6 -5.6 -2.8 -25.1 0 -10.7 8.1 -17.8 .5 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" fill=\"#f5b6b3\" /></g><path d=\"M166.1 7.2l3 2.3 3 3.7 4.9 9.5 5.8 19.1 5.2 13.4 -.2 5.2 -11.3 16.1 -5.9 12 -3.5 12.4 -.4 10.9 -1.9 10.8 -1.9 6.3 -3.2 6.6 -5.1 3.9 -14.8 6.6 -15.8 9.6 -5.4 2 -.9 -.3 -2.7 -4.2 -4.1 -9.9 -3.7 -15.2 -1 -9.5 -.2 -10.7 .9 -11.8 2.2 -13 7.1 -26.4 9.3 -23.4 5.5 -9.8 6 -8 6.5 -6 7 -3.6 7.5 -.9Z\" stroke-miterlimit=\"10\" stroke-width=\"3.5px\" fill=\"#f4dca9\" stroke=\"#5a4218\" /><g><path d=\"M174 120.7l16.4 5.9 15.1 6.6 14.9 8.3 6.3 4.7 4.9 4.9 7.9 10.8 10.1 18.6 6.4 19.8 1.4 13 -.5 24.9 -1.8 30.3 -2.2 18.6 -3.1 14.1 3.8 -3.8 3.2 -5.7 2.8 -7.1 11.2 -46.2 1.7 -3.8 8 -11.7 2.9 -7.3 .7 -9 -.8 -5.4 -4.8 -13.3 -10 -18.9 -13.5 -21.2 -14.9 -19.3 -7.4 -7.7 -7 -5.7 -6.3 -3.2 -20.2 -5 -19.9 -3.1 -9.2 -.4 -2.5 .4 -.7 .9Z\" fill=\"#faeceb\" /></g><g><path d=\"M162.4 14.1l-13.1 21.1-9.8 22.5-9.3 35.6-3 20.8-1.3-14.5 1.2-17.6 3-18.1 6.2-22.5 10.1-21.2 5.7-8.8 3.9-1.1Z\" fill=\"#fffff6\" /></g><g opacity=\".4\"><g><path d=\"M177.8 34l-9.8 11.9 -10.7 17.7 -6.7 15.8 -11.3 37 -1.6 2.6 -1.8 1.3 -2.2 0 -2.7 -1.4 -.5 -14.6 3.6 -26.9 6.6 -24.9 4.8 -11.2 12.6 -21.4 3.9 -4.7 1.4 -.3 1.8 .9 4.1 4.5Z\" fill=\"#b68c3d\" /></g></g><g opacity=\".2\"><g><g><path d=\"M194.2 69.3l23.4 7.5 21.9 9.9 11.3 6.6 10.8 7.8 9.6 9 7.8 10.3 13.1 22.6 17.2 34.7 8.4 21.7 2.9 9.9 2.7 16.9 -.3 38.1 -2.2 23.1 -4.7 23.4 -3.5 11.3 -4.4 10.8 -5.7 10.7 -7 10.9 -8.2 10.8 -9.1 10.4 -9.9 9.6 -10.5 8.4 -10.9 6.8 -11.1 4.9 -11.2 2.6 -11 -.1 -10.3 -2.3 -9.3 -3.9 -8.3 -5.4 -7.2 -6.8 -5.9 -8 -4.5 -9.1 -3 -10 -1.4 -10.8 .3 -11.5 2.1 -12.1 4.2 -10.1 5.9 -8.4 13.2 -13.6 -10.1 -4.4 -4.9 -4.1 -4 4.6 -6.5 10 -4.6 9.8 -4.3 12.8 -1.1 15.2 1.3 20.5 2.3 11.5 3.8 11.5 5.7 10.8 7.9 9.5 10.5 7.5 12.3 4.8 12.8 2 13 -.3 12.7 -2.1 12.1 -3.4 11.1 -4.2 17.6 -9 9 -6.6 9.3 -11.1 8.8 -12.3 14.9 -35.1 .9 -1.6 2.7 -1.7 1.5 -3 3.1 -24.3 3.5 -39.8 -.1 -6.2 -2.1 -10.2 2.2 -5.3 .4 -3.6 -6.6 -40.2 -4.3 -20.7 -4.8 -10.6 -18 -29 -.8 -2.9 -.4 -9.8 -4.2 -6.4 -12.8 -14.2 -20.3 -18.3 -12.1 -8.5 -12.8 -6.8 -13.2 -4.2 -13.3 -.7Z\" fill=\"#fff\" /></g></g></g><g><path d=\"M180.1 174.7l9.2-6.9 2.9-5.5 2.3.6 1.4 1.4.6 2-.6 5.1-5.9 13.2-.9-7.4-1.8-2.5-3.1-1.3Z\" fill=\"#54221f\" /></g><g><path d=\"M180.1 174.7l9.2-6.9 2.9-5.5 2.3.6 1.4 1.4.6 2-.6 5.1-5.9 13.2-.9-7.4-1.8-2.5-3.1-1.3Z\" fill=\"#54221f\" /></g><g><path d=\"M183.8 241.6l7.1 -.1 6.6 1.4 -11.2 -8.7 -3.7 -4.7 1.6 7.3Z\" fill=\"#54221f\" /></g><g><path d=\"M174.4 282.9l14.2 5.9-.1 3-2.4 4.8-14-6.8 2.4-3Z\" fill=\"#54221f\" /></g>"};
+/* Renal tubular acidosis scene: kidney tubule handling, with a visible treatment effect for every option. */
+const layers = { cells: $("cells"), stones: $("stones"), parts: $("parts"), over: $("over"), panel: $("panel"), filt: $("filtVessel"), urine: $("urineVessel"), proxW: $("proxWash"), distW: $("distWash"), bloodWbic: $("bloodWbic"), bloodWktx: $("bloodWktx"), kidneyW: $("kidneyWash") };
+let kidneyO = null, bladderO = null, capEl = null, capDrug = -1, aldoG = null;
+let bladIn = [814, 186], filtStart = [150, 208];
+const PRINC = [736, 172], ALPHA = [650, 168], ALDON = [792, 122];
+function initOrgans() {
+  kidneyO = organ($("kidneySlot"), "kidney", 128, 212, 168, {});
+  bladderO = organ($("bladderSlot"), "bladder", 868, 232, 104, {});
+  const P = kidneyO.ports, cand = [P.cortex, P.pelvis, P.hilum, P.out].filter(Boolean);
+  let pv = cand[0] || [150, 208];
+  cand.forEach((c) => { if (Math.hypot(c[0] - 246, c[1] - 224) < Math.hypot(pv[0] - 246, pv[1] - 224)) pv = c; });
+  filtStart = pv;
+  bladIn = bladderO.ports.in;
+  layers.filt.setAttribute("d", "M" + f1(pv[0]) + " " + f1(pv[1]) + " L246 224");
+  layers.urine.setAttribute("d", "M770 224 L" + f1(bladIn[0]) + " " + f1(bladIn[1]));
+}
 /* ---- cells along the tubule walls (every cell body has a visible fill via the cell helper) ---- */
 function initCells() {
-  for (let i = 0; i < 9; i++) { const top = cell(layers.cells, { cls: "prox", r: 13, nuc: 0.34, seed: i + 1, wob: 0.08 }); place(top, 76 + i * 40, 184, 0, 1);
-    const bot = cell(layers.cells, { cls: "prox", r: 13, nuc: 0.34, seed: i + 20, wob: 0.08 }); place(bot, 76 + i * 40, 264, 0, 1); }
-  for (let i = 0; i < 10; i++) { const top = cell(layers.cells, { cls: "prin", r: 12, nuc: 0.3, seed: i + 40, wob: 0.08 }); place(top, 522 + i * 40, 184, 0, 1);
-    const bot = cell(layers.cells, { cls: "prin", r: 12, nuc: 0.3, seed: i + 60, wob: 0.08 }); place(bot, 522 + i * 40, 264, 0, 1); }
-  const alpha = cell(layers.cells, { cls: "alpha", r: 23, nuc: 0.4, seed: 7, wob: 0.1 }); place(alpha, 680, 172, 0, 1);
-  const prin = cell(layers.cells, { cls: "prin", r: 19, nuc: 0.36, seed: 9, wob: 0.1 }); place(prin, 792, 176, 0, 1);
-  const aldoNode = cell(layers.cells, { cls: "aldo", r: 16, nuc: 0.38, seed: 4, wob: 0.1 }); place(aldoNode, 825, 142, 0, 1);
+  for (let i = 0; i < 6; i++) { const top = cell(layers.cells, { cls: "prox", r: 12, nuc: 0.34, seed: i + 1, wob: 0.08 }); place(top, 272 + i * 40, 182, 0, 1);
+    const bot = cell(layers.cells, { cls: "prox", r: 12, nuc: 0.34, seed: i + 20, wob: 0.08 }); place(bot, 272 + i * 40, 264, 0, 1); }
+  [554, 594].forEach((x, i) => { const t = cell(layers.cells, { cls: "prin", r: 11, nuc: 0.3, seed: i + 40, wob: 0.08 }); place(t, x, 182, 0, 1); });
+  for (let i = 0; i < 6; i++) { const b = cell(layers.cells, { cls: "prin", r: 11, nuc: 0.3, seed: i + 60, wob: 0.08 }); place(b, 552 + i * 40, 264, 0, 1); }
+  const alpha = cell(layers.cells, { cls: "alpha", r: 22, nuc: 0.4, seed: 7, wob: 0.1 }); place(alpha, ALPHA[0], ALPHA[1], 0, 1);
+  const prin = cell(layers.cells, { cls: "prin", r: 18, nuc: 0.36, seed: 9, wob: 0.1 }); place(prin, PRINC[0], PRINC[1], 0, 1);
+  aldoG = cell(layers.cells, { cls: "aldo", r: 14, nuc: 0.38, seed: 4, wob: 0.1 }); place(aldoG, ALDON[0], ALDON[1], 0, 1);
 }
 /* ---- stones in the distal lumen ---- */
-const stoneGroups = [[724, 226], [792, 234], [856, 222]].map(([x, y], i) => { const g = mk("g", {}, layers.stones);
+const stoneGroups = [[640, 232], [700, 238], [748, 230]].map(([x, y], i) => { const g = mk("g", {}, layers.stones);
   mk("path", { class: "rt-stone", d: "M-11 4L-4 -9L7 -7L12 3L4 10L-7 10Z" }, g);
   mk("path", { class: "rt-stone", d: "M-4 0L3 -5L8 2L2 6L-4 5Z" }, g);
   place(g, x, y, i * 24, 0.2); return { g, x, y, i }; });
 /* ---- particle pools ---- */
-function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0, tx: 0 }; }); }
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0, tx: 0, st: 0, ang: 0, life: 0 }; }); }
 const hco3 = pool(26, () => mk("circle", { class: "sc-p p-hco3", r: 3 }, layers.parts));
 const hplus = pool(18, () => mk("path", { class: "sc-p p-hplus", d: "M0 -3.4L3 0L0 3.4L-3 0Z" }, layers.parts));
-const aldoDots = pool(10, () => mk("circle", { class: "sc-p p-aldo", r: 2.6 }, layers.parts));
+const aldoDots = pool(12, () => mk("circle", { class: "sc-p p-aldo", r: 2.6 }, layers.parts));
+const kOut = pool(12, () => mk("circle", { class: "sc-p p-pot", r: 2.8 }, layers.parts));
 const bicTx = pool(10, () => mk("rect", { class: "sc-p p-hco3", x: -2.6, y: -2.6, width: 5.2, height: 5.2, rx: 1 }, layers.parts));
+const ktxIn = pool(10, () => mk("circle", { class: "sc-p p-pot", r: 3 }, layers.parts));
 const potBlood = [];
 function initPot() { for (let i = 0; i < 18; i++) { const e = mk("circle", { class: "sc-p p-pot", r: 3 }, layers.parts); potBlood.push({ e, x: rnd(60, 900), y: rnd(352, 376), v: rnd(0.7, 1.2) }); } }
 const freeP = (pl) => pl.find((p) => !p.on);
-function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
+function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.st = 0; p.life = 0; p.e.setAttribute("opacity", "1"); }
 function killP(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
-function resetHco3(p, atLeft) { p.on = true; p.x = atLeft ? 56 : rnd(56, 880); p.y = rnd(212, 238); p.k = Math.random() < sm.reabs ? 1 : 0; p.tx = rnd(150, 400); p.t = 0; p.e.setAttribute("opacity", "1"); }
+function resetHco3(p) { p.on = true; p.st = 0; p.x = filtStart[0] + rnd(-4, 4); p.y = filtStart[1] + rnd(-6, 6); p.k = Math.random() < sm.reabs ? 1 : 0; p.tx = rnd(280, 480); p.e.setAttribute("opacity", "1"); }
+function toBladder(p, dt, sp) { const dx = bladIn[0] - p.x, dy = bladIn[1] - p.y, d = Math.hypot(dx, dy) || 1; p.x += (dx / d) * sp * dt; p.y += (dy / d) * sp * dt; return d; }
+/* ---- caption text per treatment ---- */
+function capText(d) {
+  if (d === 3) return "Bicarbonate replaces the lost alkali. Blood acid falls and stones slow.";
+  if (d === 1) return "Potassium replaces urinary losses. It helps only when potassium is low.";
+  if (d === 2) return "Mineralocorticoid adds aldosterone action. It helps most when aldosterone is missing.";
+  return "No treatment. The tubule wastes what the blood needs, and the blood stays acidic.";
+}
 /* ---- labels and gauges ---- */
 const gg = {};
 function initPanel() {
@@ -455,50 +772,78 @@ function initPanel() {
   mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: SC.W - 48, height: 142, rx: 14 }, P);
   const t = mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P); t.textContent = "Blood and urine";
   [["reabs", "Bicarb reclaim", "g-hco3", "How much filtered bicarbonate the proximal tubule reclaims into the blood. In proximal type 2 this fails and bicarbonate is wasted in urine."],
-    ["hsec", "Acid secretion", "g-hplus", "Hydrogen ions secreted by alpha-intercalated cells in the distal tubule and collecting duct. In distal type 1 this fails."],
+    ["hsec", "Acid secretion", "g-hplus", "Hydrogen ions secreted by alpha cells in the distal tubule and collecting duct. In distal type 1 this fails."],
     ["uph", "Urine pH", "g-hplus", "How acidic the urine can become. If acid cannot be secreted, urine pH stays high (alkaline)."],
-    ["stone", "Stones", "g-stone", "Calcium stones favoured by alkaline urine and low citrate in distal type 1 disease."],
+    ["stone", "Stones", "g-stone", "Calcium stones favoured by alkaline urine and low citrate in distal type 1 disease. Bicarbonate slows them."],
     ["pot", "Potassium", "g-pot", "Blood potassium. Low in proximal and distal disease from urinary losses; high in type 4 because aldosterone action is missing."],
     ["chlor", "Chloride", "g-chlor", "Blood chloride rises as bicarbonate falls, keeping the anion gap normal. This is a hyperchloraemic acidosis."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
   const ox = layers.over;
-  pill(ox, "Bicarbonate", 110, 224, 110, 152, "Bicarbonate in the filtrate. The proximal tubule normally reclaims most of it into the blood; in type 2 it is wasted in the urine.");
-  pill(ox, "Proximal cell", 210, 182, 210, 118, "Proximal tubule cell. It reclaims filtered bicarbonate, sodium, glucose and phosphate. Failure here is proximal type 2 acidosis, sometimes as part of Fanconi syndrome.");
-  pill(ox, "Alpha cell", 680, 178, 680, 108, "Alpha-intercalated cell of the distal tubule and collecting duct. It secretes hydrogen ions into the urine. Failure here is distal type 1 acidosis.");
-  pill(ox, "Aldosterone", 825, 142, 825, 92, "Aldosterone, the salt hormone from the adrenal gland. It supports sodium uptake, potassium excretion and acid handling. Lacking or resisted aldosterone gives type 4 acidosis with high potassium.");
-  pill(ox, "Stone", 792, 230, 760, 285, "Calcium stone forming in alkaline urine, a feature of distal type 1 disease.");
-  pill(ox, "Potassium", 850, 364, 800, 312, "Potassium in the blood. It rises in type 4 disease and falls from urinary losses in proximal and distal disease.");
-  pill(ox, "Urine", 906, 224, 900, 152, "Urine leaving the collecting duct. Its pH shows whether the distal tubule could secrete acid.");
-  const bt = pill(ox, "Bicarbonate given", 180, 356, 180, 312, "Bicarbonate treatment enters the blood and replaces bicarbonate that was wasted or not regenerated."); bt.setAttribute("id", "bic-pill");
+  pill(ox, "Kidney", 196, 206, 150, 116, "Kidney: blood is filtered here. The tubule beside it is shown magnified, much larger than life.");
+  pill(ox, "Bicarbonate", 360, 222, 360, 148, "Bicarbonate in the tubule fluid. The proximal tubule normally reclaims it into the blood. In type 2 it is lost in the urine.");
+  pill(ox, "Proximal cell", 312, 182, 252, 116, "Proximal tubule cell. It reclaims filtered bicarbonate into the blood. Failure here is proximal type 2 disease.");
+  pill(ox, "Acid pump", 650, 166, 650, 104, "Acid pump on the alpha cell. It pushes acid into the urine. Failure here is distal type 1 disease.");
+  pill(ox, "Aldosterone", 792, 122, 800, 82, "Aldosterone signal. This salt hormone tells the collecting duct to waste potassium and keep acid moving out. Without it, potassium rises.");
+  pill(ox, "Blood", 430, 364, 430, 308, "Blood: bicarbonate, potassium and chloride sampled for the gauges below. Treatment washes tint it.");
+  pill(ox, "Stone", 700, 236, 700, 298, "Stone forming in alkaline urine, seen in distal type 1 disease.");
+  pill(ox, "Urine", 868, 232, 886, 146, "Urine leaving for the bladder. Its acidity shows whether acid secretion worked.");
+  capEl = mk("text", { class: "rt-cap", x: 30, y: 428 }, ox); capEl.textContent = capText(0);
 }
-const sm = { reabs: 0.2, hsec: 0.8, acid: 0.7, pot: 0.3, uph: 0.5, stone: 0.1, chlor: 0.8, aldo: 0.8, bic: 0 };
-const acc = { h: 0, a: 0, b: 0 };
-function init() { initCells(); initPot(); initPanel(); hco3.forEach((p) => resetHco3(p, false)); }
+const sm = { reabs: 0.2, hsec: 0.8, acid: 0.7, pot: 0.3, uph: 0.5, stone: 0.1, chlor: 0.8, aldo: 0.85, bic: 0, ktx: 0, min: 0 };
+const acc = { h: 0, a: 0, k: 0, b: 0, k2: 0 };
+function init() { initOrgans(); initCells(); initPot(); initPanel(); hco3.forEach((p) => resetHco3(p)); }
 function step(dt, m) {
   const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.55);
   sm.reabs = lerp(sm.reabs, m.reabs, k2); sm.hsec = lerp(sm.hsec, m.hsec, k2); sm.acid = lerp(sm.acid, m.acid, k2); sm.pot = lerp(sm.pot, m.pot, k2);
-  sm.uph = lerp(sm.uph, m.uph, k2); sm.stone = lerp(sm.stone, m.stone, k2); sm.chlor = lerp(sm.chlor, m.chlor, k2); sm.aldo = lerp(sm.aldo, m.aldo, k1); sm.bic = lerp(sm.bic, m.bic, k1);
-  /* bicarbonate: reclaimed down to blood in the proximal segment, otherwise wasted to urine */
-  hco3.forEach((p) => { if (!p.on) resetHco3(p, true);
-    if (p.k === 1 && p.x >= p.tx && p.y < 330) { p.y += 52 * dt; p.x += 8 * dt; }
-    else if (p.y >= 330) { resetHco3(p, true); return; }
-    else p.x += 58 * dt;
-    if (p.x > 908) resetHco3(p, true);
-    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); });
-  /* acid secreted by the alpha cell into the distal lumen, then carried to urine */
-  acc.h += dt * sm.hsec * 9; while (acc.h >= 1) { acc.h--; const p = freeP(hplus); if (p) emit(p, 680 + rnd(-8, 8), 198, rnd(34, 52), rnd(4, 12), 0); }
-  hplus.forEach((p) => { if (!p.on) return; p.x += p.vx * dt; p.y += p.vy * dt; if (p.y > 250) p.y = 250; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(tm / 6) + ")"); if (p.x > 908) killP(p); });
-  /* aldosterone signal from the adrenal node to the collecting duct cells */
-  acc.a += dt * sm.aldo * 5; while (acc.a >= 1) { acc.a--; const p = freeP(aldoDots); if (p) emit(p, 818, 154, 0, 0, 0); }
-  aldoDots.forEach((p) => { if (!p.on) return; p.t += dt; const tx = 796, ty = 182, dx = tx - p.x, dy = ty - p.y, d = Math.hypot(dx, dy) || 1; p.x += (dx / d) * 44 * dt; p.y += (dy / d) * 44 * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (d < 8 || p.t > 3) killP(p); });
-  /* bicarbonate treatment particles in the blood */
-  acc.b += dt * sm.bic * 6; while (acc.b >= 1) { acc.b--; const p = freeP(bicTx); if (p) emit(p, 54, rnd(352, 376), rnd(70, 95), 0, 0); }
+  sm.uph = lerp(sm.uph, m.uph, k2); sm.stone = lerp(sm.stone, m.stone, k2); sm.chlor = lerp(sm.chlor, m.chlor, k2); sm.aldo = lerp(sm.aldo, m.aldo, k1);
+  sm.bic = lerp(sm.bic, m.bic, k1); sm.ktx = lerp(sm.ktx, m.ktx, k1); sm.min = lerp(sm.min, m.min, k1);
+  /* treatment washes: large tinted areas so every option visibly acts on the drawing */
+  layers.proxW.setAttribute("opacity", (0.06 + 0.5 * sm.bic).toFixed(2));
+  layers.distW.setAttribute("opacity", (0.05 + 0.32 * sm.bic + 0.5 * sm.min).toFixed(2));
+  layers.bloodWbic.setAttribute("opacity", (0.05 + 0.45 * sm.bic).toFixed(2));
+  layers.bloodWktx.setAttribute("opacity", (0.05 + 0.45 * sm.ktx).toFixed(2));
+  layers.kidneyW.setAttribute("opacity", (0.04 + 0.36 * sm.min).toFixed(2));
+  place(aldoG, ALDON[0], ALDON[1], Math.sin(tm / 900) * 8, 1 + 0.18 * sm.min);
+  /* bicarbonate: reclaimed down to blood in the proximal segment, otherwise wasted to the bladder */
+  hco3.forEach((p) => { if (!p.on) { resetHco3(p); return; }
+    if (p.st === 0) { p.x += 60 * dt; p.y += (224 - p.y) * Math.min(1, dt * 3);
+      if (p.k === 1 && p.x >= p.tx && p.x < 498) p.st = 1;
+      else if (p.x > 766) p.st = 2; }
+    else if (p.st === 1) { p.y += 60 * dt; p.x += 8 * dt;
+      if (p.y > 330) p.e.setAttribute("opacity", clamp(1 - (p.y - 330) / 28).toFixed(2));
+      if (p.y > 358) { resetHco3(p); return; } }
+    else { if (toBladder(p, dt, 70) < 10) { resetHco3(p); return; } }
+    place(p.e, p.x, p.y, 0, 1); });
+  /* acid secreted by the alpha cell into the distal lumen, then carried to the bladder */
+  acc.h += dt * (0.5 + 9 * sm.hsec); while (acc.h >= 1) { acc.h--; const p = freeP(hplus); if (p) emit(p, ALPHA[0] + rnd(-8, 8), 192, rnd(34, 52), rnd(4, 12), 0); }
+  hplus.forEach((p) => { if (!p.on) return; p.x += p.vx * dt; p.y += p.vy * dt; if (p.y > 248) p.y = 248;
+    if (p.x > 766) { if (toBladder(p, dt, 70) < 10) { killP(p); return; } }
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(tm / 6) + ")"); });
+  /* aldosterone signal: dots travel to the principal cell and sit on its surface, then fade */
+  acc.a += dt * (0.3 + 5 * sm.aldo); while (acc.a >= 1) { acc.a--; const p = freeP(aldoDots); if (p) { emit(p, ALDON[0], ALDON[1] + 12, 0, 0, 0); p.ang = rnd(3.6, 5.8); p.st = 1; } }
+  aldoDots.forEach((p) => { if (!p.on) return;
+    if (p.st === 1) { const tx = PRINC[0] + Math.cos(p.ang) * 20, ty = PRINC[1] + Math.sin(p.ang) * 18, dx = tx - p.x, dy = ty - p.y, d = Math.hypot(dx, dy) || 1;
+      p.x += (dx / d) * 52 * dt; p.y += (dy / d) * 52 * dt;
+      if (d < 6) { if (Math.random() < 0.55) { p.st = 2; p.life = rnd(3, 5.5); } else { killP(p); return; } } }
+    else { p.ang += dt * 0.9; p.life -= dt; p.x = PRINC[0] + Math.cos(p.ang) * 21; p.y = PRINC[1] + Math.sin(p.ang) * 19;
+      if (p.life < 1) p.e.setAttribute("opacity", clamp(p.life).toFixed(2));
+      if (p.life <= 0) { killP(p); return; } }
+    place(p.e, p.x, p.y, 0, 1); });
+  /* potassium excreted by the principal cell: strong with aldosterone, a trickle without */
+  acc.k += dt * (0.2 + 5.5 * sm.aldo); while (acc.k >= 1) { acc.k--; const p = freeP(kOut); if (p) emit(p, PRINC[0] + rnd(-10, 10), 192, rnd(30, 50), rnd(6, 14), 0); }
+  kOut.forEach((p) => { if (!p.on) return; p.x += p.vx * dt; p.y += p.vy * dt; if (p.y > 246) p.y = 246;
+    if (p.x > 766) { if (toBladder(p, dt, 70) < 10) { killP(p); return; } }
+    place(p.e, p.x, p.y, 0, 1); });
+  /* bicarbonate treatment floods the blood */
+  acc.b += dt * 7 * sm.bic; while (acc.b >= 1) { acc.b--; const p = freeP(bicTx); if (p) emit(p, 54, rnd(352, 376), rnd(70, 95), 0, 0); }
   bicTx.forEach((p) => { if (!p.on) return; p.x += p.vx * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.x > 906) killP(p); });
+  /* potassium treatment feeds the blood */
+  acc.k2 += dt * 7 * sm.ktx; while (acc.k2 >= 1) { acc.k2--; const p = freeP(ktxIn); if (p) emit(p, 54, rnd(352, 376), rnd(60, 90), 0, 0); }
+  ktxIn.forEach((p) => { if (!p.on) return; p.x += p.vx * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.x > 906) killP(p); });
   /* potassium dots in the blood: visible count follows the potassium level */
   potBlood.forEach((r, i) => { r.x += r.v * 42 * dt; if (r.x > 906) r.x = 54; r.e.setAttribute("transform", "translate(" + f1(r.x) + " " + f1(r.y) + ")"); r.e.setAttribute("opacity", i < Math.round(sm.pot * potBlood.length) ? "1" : "0"); });
   /* stones grow in distal type 1 */
   stoneGroups.forEach((s) => { const sc = 0.15 + 0.95 * sm.stone; place(s.g, s.x, s.y, s.i * 24, sc); s.g.style.opacity = sm.stone > 0.08 ? 1 : 0; });
-  const bp = $("bic-pill"); if (bp) bp.style.opacity = sm.bic.toFixed(2);
   /* gauges */
   gg.reabs.set(sm.reabs, wordOf(sm.reabs, 0.35, 0.65, ["failed", "reduced", "working"]));
   gg.hsec.set(sm.hsec, wordOf(sm.hsec, 0.35, 0.65, ["failed", "reduced", "working"]));
@@ -506,6 +851,7 @@ function step(dt, m) {
   gg.stone.set(sm.stone, wordOf(sm.stone, 0.3, 0.6, ["none", "some", "forming"]));
   gg.pot.set(sm.pot, wordOf(sm.pot, 0.35, 0.65, ["low", "normal", "high"]));
   gg.chlor.set(sm.chlor, wordOf(sm.chlor, 0.35, 0.7, ["normal", "raised", "high"]));
+  if (drug !== capDrug) { capDrug = drug; const t = capText(drug); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 run({ init, step });
 </script></body></html>

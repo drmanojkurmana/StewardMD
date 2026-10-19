@@ -55,16 +55,16 @@ const TESTS = [
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="462" height="396" rx="18"/>
 <rect class="sc-tissue" x="486" y="44" width="460" height="396" rx="18"/>
-<text class="sc-zone" x="34" y="68">INJURY SITE</text>
+<text class="sc-zone" x="250" y="68">INJURY SITE</text>
 <text class="sc-zone" x="506" y="68">CLOTTING CASCADE</text>
-<g id="inj"></g><g id="mini"></g><g id="casc"></g><g id="over"></g><g id="panel"></g>`;
+<g id="vesSlot"></g><g id="inj"></g><g id="mini"></g><g id="casc"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "coagulation-dic", fig: "Fig 1", title: "Clotting: plug, cascade and DIC", W, H, body,
   label: "An animated blood vessel with a break in its lining. Platelets stick, change shape and clump into a plug, while the clotting cascade turns fibrinogen into a fibrin mesh. A second small vessel shows what happens when the trigger is systemic: widespread micro-clots use up platelets and clotting factors and then bleeding follows (DIC). Gauges show clot formation, platelets, fibrinogen, bleeding risk and clotting risk. Treatment choices include heparin, warfarin, a direct oral anticoagulant, an antiplatelet drug, and replacing factors while treating the cause.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, laboratory values or numbers are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "coag.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "coag.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With cause treated and products replaced",
   sourcesLis: [
     "<strong>How a clot forms.</strong> When the vessel lining breaks, collagen and tissue factor are exposed. Platelets stick through von Willebrand factor (primary haemostasis), activate and clump through fibrinogen bridges (GPIIb/IIIa) into a plug. At the same time the clotting cascade runs: tissue factor with factor VIIa (extrinsic arm, tested by PT), the contact factors XII, XI, IX with VIII (intrinsic arm, tested by aPTT), both feeding factor X with V (common arm) to make thrombin. Thrombin turns fibrinogen into fibrin and factor XIII cross-links it. Plasmin later dissolves the clot (fibrinolysis), releasing D-dimer. This is standard teaching in medicine, haematology and pathology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>DIC.</strong> A massive trigger (for example severe sepsis or an obstetric catastrophe) switches clotting on everywhere. Micro-clots block small vessels, and platelets and clotting factors are consumed faster than they are made, so the same patient can clot and bleed. Treating the cause matters most.",
@@ -85,7 +85,9 @@ buildScene({
 .cg-node{fill:color-mix(in srgb,var(--c-cyt) calc(var(--act,0) * 55%),var(--anatomy-card));stroke:var(--anatomy-mid);stroke-width:1.1}
 .cg-nt{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
 .cg-vk{fill:var(--c-neut);stroke:color-mix(in srgb,var(--c-neut) 50%,#000);stroke-width:.5}
-.cg-vkt{fill:#1a1030;font:700 7.5px var(--anatomy-mono);pointer-events:none}
+.cg-tear{fill:color-mix(in srgb,var(--c-rbc) 45%,#000);stroke:none}
+.cg-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
+.p-hep{--cc:var(--c-good)}.p-doac{--cc:var(--c-good)}.p-apl{--cc:var(--c-good)}
 .cg-ar{fill:none;stroke:color-mix(in srgb,var(--c-cyt) 70%,var(--anatomy-mid));stroke-width:1.8;stroke-dasharray:5 4;stroke-linecap:round}
 .cg-fb{fill:none;stroke:var(--c-neut);stroke-width:1.3;stroke-dasharray:3 4}
 .cg-br{fill:none;stroke-width:3;stroke-linecap:round}.cg-br.pt{stroke:var(--c-neut)}.cg-br.ap{stroke:var(--c-lymph)}

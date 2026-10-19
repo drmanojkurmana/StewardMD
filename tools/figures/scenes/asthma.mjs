@@ -17,15 +17,15 @@ const MD = {
     { label: "no treatment" },
     { label: "reliever bronchodilator only" },
     { label: "inhaled corticosteroid only" },
-    { label: "reliever plus inhaled corticosteroid" },
     { label: "anti-IgE biologic (add on)" },
+    { label: "reliever plus inhaled corticosteroid" },
   ],
   status: "Severity: {level} · {drug} ·",
-  drugNames: ["no treatment", "reliever only", "inhaled steroid only", "reliever plus inhaled steroid", "anti-IgE biologic"],
+  drugNames: ["no treatment", "reliever only", "inhaled steroid only", "anti-IgE biologic", "reliever plus inhaled steroid"],
 };
 function modelOf(S, level, drug) {
   const a = S.level.a[level], cl = (v) => Math.max(0, Math.min(1, v));
-  const relief = drug === 1 || drug === 3 ? 1 : 0, ics = drug === 2 || drug === 3 ? 1 : 0, bio = drug === 4 ? 1 : 0;
+  const relief = drug === 1 || drug === 4 ? 1 : 0, ics = drug === 2 || drug === 4 ? 1 : 0, bio = drug === 3 ? 1 : 0;
   const T2 = cl(a * (ics ? 0.42 : 1) * (bio ? 0.88 : 1));
   const Ig = cl(a * (bio ? 0.16 : ics ? 0.58 : 1));
   const mast = cl(0.04 + 0.88 * a * (bio ? 0.24 : 1) * (ics ? 0.6 : 1));
@@ -43,7 +43,7 @@ const TESTS = [
   [0, 0, "inflammation low · bronchoconstriction relaxed · mucus thin · airflow open"],
   [3, 0, "inflammation high · bronchoconstriction tight · mucus plugging · airflow low"],
   [3, 1, "inflammation high · bronchoconstriction relaxed · mucus plugging · airflow reduced"],
-  [3, 3, "inflammation raised · bronchoconstriction relaxed · mucus thick · airflow open"],
+  [3, 4, "inflammation raised · bronchoconstriction relaxed · mucus thick · airflow open"],
 ];
 
 /* ---------------- static layout ---------------- */
@@ -52,19 +52,21 @@ const body = `
 <rect id="lumen" class="sc-air" x="14" y="44" width="${W - 28}" height="140" rx="18"/>
 <text class="sc-zone" x="34" y="68">AIRWAY LUMEN</text>
 <text class="sc-zone sc-dim" x="34" y="428">SUBMUCOSA AND MUSCLE</text>
+<g id="lungSlot"></g>
+<path id="airway" class="as-airway" d="M114 101 C300 96 500 120 700 142"/>
 <g id="arrows"></g>
 <g id="mucus"></g><g id="epi"></g><g id="base"></g><g id="glands"></g><g id="vessel"></g><g id="muscle"></g>
-<g id="parts"></g><g id="immune"></g><g id="marks"></g><g id="over"></g><g id="panel"></g>`;
+<g id="parts"></g><g id="immune"></g><g id="rx"></g><g id="marks"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "asthma-pathogenesis", fig: "Fig 1", title: "Asthma: allergen to narrowed airway", W, H, body,
-  label: "An animated airway wall in asthma. Inhaled allergen reaches the lining and is shown to dendritic cells. Helper T cells of the Th2 type help B cells make IgE, which arms mast cells. On re-exposure the allergen cross-links IgE, mast cells release histamine and other mediators, eosinophils are called in, goblet cells make thick mucus that can plug the lumen, and the airway smooth muscle tightens so the lumen narrows. With repeated inflammation the wall remodels: the basement membrane thickens, muscle and glands enlarge, and narrowing becomes harder to reverse. Gauges show eosinophilic inflammation, mast cell activation, mucus, bronchoconstriction, remodelling and airflow. Treatment choices include a reliever bronchodilator, an inhaled corticosteroid, both together, and an anti-IgE biologic.",
+  label: "An animated airway wall in asthma. Inhaled allergen enters through the lung bronchus and reaches the lining, where it is shown to dendritic cells. Helper T cells of the Th2 type help B cells make IgE, which arms mast cells. On re-exposure the allergen cross-links IgE, mast cells release histamine and other mediators, eosinophils are called in from the vessel, goblet cells make thick mucus that can plug the lumen, and the airway smooth muscle tightens so the lumen narrows. With repeated inflammation the wall remodels: the basement membrane thickens, muscle and glands enlarge, and narrowing becomes harder to reverse. The lung inset shows where this small airway sits. Gauges show eosinophilic inflammation, mast cell activation, mucus, bronchoconstriction, remodelling and airflow. Treatment choices include a reliever bronchodilator, an inhaled corticosteroid, an anti-IgE biologic, and reliever plus corticosteroid together.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "asthma.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "asthma.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With reliever plus inhaled corticosteroid",
   sourcesLis: [
     "<strong>How asthma develops.</strong> In allergic asthma an inhaled allergen is taken up by dendritic cells in the airway lining and presented to helper T cells, which take a Th2 pattern. Th2 cytokines help B cells switch to making IgE (IL-4), call in and sustain eosinophils (IL-5), and drive goblet cell mucus and twitchy smooth muscle (IL-13). IgE sits on mast cells; when allergen cross-links it the mast cell degranulates, releasing histamine and other mediators that tighten smooth muscle, swell the wall and increase mucus. Eosinophil granule proteins injure the lining and keep inflammation going. Repeated inflammation remodels the wall, with a thicker basement membrane, more and larger smooth muscle and enlarged submucosal glands, so airflow limitation becomes less fully reversible. Airway hyperresponsiveness means the muscle tightens too easily and too much to triggers such as cold air, exercise, smoke and viral infection. This is standard teaching in respiratory medicine and was not checked against a linked source here, so it is flagged for review.",
-    "<strong>Treatment ideas shown.</strong> A reliever bronchodilator relaxes smooth muscle and opens the airway quickly but does not treat the inflammation underneath. An inhaled corticosteroid switches off many inflammatory genes across lining, immune and mast cells, reducing eosinophils, mucus and hyperresponsiveness over time and slowing remodelling. Used together they give quick relief plus control of the cause. An anti-IgE biologic mops up IgE so mast cells are less well armed, which suits allergic disease. These are teaching toggles only.",
+    "<strong>Treatment ideas shown.</strong> A reliever bronchodilator relaxes smooth muscle and opens the airway quickly but does not treat the inflammation underneath. An inhaled corticosteroid switches off many inflammatory genes across lining, immune and mast cells, reducing eosinophils, mucus and hyperresponsiveness over time and slowing remodelling. An anti-IgE biologic mops up IgE so mast cells are less well armed, which suits allergic disease. Reliever plus corticosteroid together give quick relief plus control of the cause, which is the most effective option here. These are teaching toggles only.",
   ],
   simplified: "Non-allergic and neutrophilic asthma, aspirin-exacerbated disease, the late phase reaction in detail, neural control, small airway disease, infection and pollution triggers in detail, biomarker selection for biologics, inhaler technique, adherence, side effects, exacerbation management and all doses are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
   extraCss: `
@@ -89,5 +91,10 @@ body[data-theme="light"] .cl-epi{--cc:#c98a6c}body[data-theme="light"] .cl-gob{-
 .bd-a{fill:none;stroke:var(--c-good);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .mk-g{fill:none;stroke:var(--c-good);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .dr-g-fill.g-mast{fill:var(--c-mast)}.dr-g-fill.g-mucus{fill:#5a9db6}.dr-g-fill.g-remod{fill:#b8965a}.dr-g-fill.g-air{fill:var(--c-good)}
+.as-airway{fill:none;stroke:color-mix(in srgb,var(--c-fl) 55%,var(--anatomy-paper));stroke-width:6;stroke-linecap:round;stroke-dasharray:9 8;opacity:.35}
+.as-cap{fill:var(--anatomy-strong);font-size:12px}
+.p-rel{--cc:var(--c-good)}.p-ster{--cc:var(--c-mac)}.p-bio{--cc:var(--c-ab)}.p-air{--cc:var(--c-fl)}
+.bio-cap{fill:none;stroke:var(--c-ab);stroke-width:1.8;stroke-linecap:round}
+.rel-halo{fill:none;stroke:var(--c-good);stroke-width:2;stroke-linecap:round}
 `,
 });

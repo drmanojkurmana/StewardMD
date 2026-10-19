@@ -1,6 +1,23 @@
 /* Glomerulonephritis scene: deposits, complement, neutrophils, crescents, podocytes, leak into the tubule, body effects and gauges. */
 const CX = SC.CX, CY = SC.CY, WW = SC.W;
 const layers = { vess: $("vess"), caps: $("caps"), tuft: $("tuft"), deps: $("deps"), cells: $("cells"), parts: $("parts"), urine: $("urine"), boxes: $("boxes"), over: $("over"), panel: $("panel") };
+/* ---- shared anatomical kidney inset (locator: this scene magnifies one glomerulus of the cortex) ---- */
+let kidneyO = null, capEl = null, capKey = "";
+function initOrgans() {
+  kidneyO = organ($("kidneySlot"), "kidney", 872, 108, 100, { h: 110 });
+}
+function capText(l, d) {
+  const lp = ["Immune complexes deposit in the wall. ", "IgA deposits in the mesangium. ", "Crescents crush the tuft. ", "Podocytes fail and leak protein. "][l];
+  const dp = ["Without treatment the injury runs on.", "Steroid tablets dock on the attack and inflammation fades.", "Steroid plus immunosuppression blocks the attack and the filter recovers."][d];
+  return lp + dp;
+}
+/* ---- where a steroid tablet can dock: deposit and injury sites per pattern, then active neutrophils ---- */
+const ANCH = [
+  [[272, 156], [320, 150], [368, 156]],
+  [[296, 224], [344, 224], [320, 258]],
+  [[272, 192], [368, 192], [320, 286]],
+  [[320, 152], [232, 164], [408, 164]],
+];
 /* ---- static vessels, capsule, tubule and boxes ---- */
 let fluidRect = null, dropEl = null, bpArrow = null;
 function initStatic() {
@@ -38,7 +55,7 @@ const mes = [[296, 224], [344, 224], [320, 258]].map(([x, y], i) => { const g = 
 const pods = [[232, 164], [320, 152], [408, 164], [408, 312], [320, 326], [232, 312]].map(([x, y], i) => { const g = cell(layers.cells, { cls: "pod", r: 13, nuc: 0.4, seed: i + 7, wob: 0.14 }); place(g, x, y, 0, 1); return { g, x, y, i }; });
 const pars = [];
 function initPars() { for (let i = 0; i < 10; i++) { const a = (i / 10) * 6.283 + 0.3, x = CX + Math.cos(a) * 112, y = CY + Math.sin(a) * 112; const g = cell(layers.cells, { cls: "par", r: 9, nuc: 0.38, seed: i + 30, wob: 0.1 }); place(g, x, y, 0, 1); pars.push({ g, x, y }); } }
-const neus = Array.from({ length: 5 }, (_, i) => ({ g: cell(layers.cells, { cls: "neut", r: 11, nuc: 0.55, nucCls: "multi", seed: i + 20, wob: 0.14 }), st: 0, x: -30, y: CY, t: 0, tx: 0, ty: 0, i }));
+const neus = Array.from({ length: 5 }, (_, i) => ({ g: cell(layers.cells, { cls: "neut", r: 11, nuc: 0.55, nucCls: "multi", seed: i + 20, wob: 0.14 }), st: 0, x: -30, y: CY, t: 0, tx: 0, ty: 0, i, blk: null }));
 const rbcs = [];
 function initRbcs() { for (let i = 0; i < 12; i++) { const g = mk("g", { class: "cl cl-rbc" }, layers.vess); mk("ellipse", { class: "cl-b", rx: 9, ry: 5.4 }, g); mk("ellipse", { class: "cl-s", rx: 3.4, ry: 1.7 }, g); rbcs.push({ g, x: rnd(0, 200), y: rnd(-9, 9), v: rnd(0.8, 1.2) }); } }
 /* ---- particle pools ---- */
@@ -47,9 +64,81 @@ const comp = pool(30, () => mk("circle", { class: "sc-p p-comp", r: 2.6 }, layer
 const prot = pool(34, () => mk("rect", { class: "sc-p p-prot", x: -2.4, y: -2.4, width: 4.8, height: 4.8, rx: 1 }, layers.parts));
 const leak = pool(16, () => { const g = mk("g", { class: "cl cl-rbc" }, layers.parts); mk("ellipse", { class: "cl-b", rx: 8, ry: 4.8 }, g); mk("ellipse", { class: "cl-s", rx: 3, ry: 1.5 }, g); return g; });
 const filt = pool(18, () => mk("path", { class: "gn-drop", d: "M0 -3.4C2.2 -.6 2.8 .8 2.8 1.8A2.8 2.8 0 0 1 -2.8 1.8C-2.8 .8 -2.2 -.6 0 -3.4Z" }, layers.parts));
+const drugTabs = pool(12, () => mk("rect", { class: "p-drug", x: -5.5, y: -3.25, width: 11, height: 6.5, rx: 3.25 }, layers.parts));
 const free = (pl) => pl.find((p) => !p.on);
 function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
 function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
+/* a free deposit site first, else an active neutrophil without a tablet; null when nothing needs blocking */
+function pickTarget() {
+  const A = ANCH[level], used = {};
+  drugTabs.forEach((o) => { if (o.on && o.st === 1 && o.li === level && o.tgt && o.tgt.ai >= 0) used[o.tgt.ai] = 1; });
+  for (let i = 0; i < A.length; i++) if (!used[i]) return { ai: i, ni: -1 };
+  const nn2 = Math.round(sm.Neut * neus.length), cands = [];
+  neus.forEach((n, i) => { if (i < nn2 && (n.st === 1 || n.st === 2) && !n.blk) cands.push(i); });
+  return cands.length ? { ai: -1, ni: pick(cands) } : null;
+}
+function releaseTab(tb) {
+  if (tb.tgt && tb.tgt.ni >= 0 && neus[tb.tgt.ni] && neus[tb.tgt.ni].blk === tb) neus[tb.tgt.ni].blk = null;
+  tb.tgt = null;
+}
+function tabPos(tb) {
+  if (!tb.tgt) return null;
+  if (tb.tgt.ai >= 0) return tb.li === level ? ANCH[level][tb.tgt.ai] : null;
+  const n = neus[tb.tgt.ni];
+  return (n && (n.st === 1 || n.st === 2)) ? [n.x, n.y] : null;
+}
+/* steroid tablets ride the arteriole in, home onto a deposit site or neutrophil, and sit on it;
+ * while one sits on a deposit, complement bursting from that site fades; a held neutrophil shrinks and stalls */
+function stepTabs(dt) {
+  if (drug) {
+    acc.drug += dt * (drug === 2 ? 2.6 : 1.6);
+    while (acc.drug >= 1) {
+      acc.drug--;
+      const tgt = pickTarget(), tb = tgt && free(drugTabs);
+      if (!tb) { acc.drug = 0; break; }
+      emit(tb, 24, CY + rnd(-8, 8), 0, 0, 0);
+      tb.st = 0; tb.tgt = tgt; tb.li = level; tb.ox = rnd(8, 14); tb.oy = rnd(-14, -8); tb.rot = rnd(-30, 30);
+    }
+  } else acc.drug = 0;
+  drugTabs.forEach((tb) => {
+    if (!tb.on) return;
+    if (tb.st === 0 && tb.k === 0) {
+      tb.x += 78 * dt; tb.y = CY + Math.sin(tm / 300 + tb.x) * 5;
+      place(tb.e, tb.x, tb.y, tb.rot, 1);
+      if (tb.x >= 218) tb.k = 1;
+    } else if (tb.st === 0) {
+      const tp = drug ? tabPos(tb) : null;
+      if (!tp) {
+        if (!drug && tb.st !== 2) { tb.st = 2; tb.t = 0; }
+        else if (drug) { releaseTab(tb); const nt = pickTarget(); if (!nt) { tb.st = 2; tb.t = 0; } else { tb.tgt = nt; tb.li = level; } }
+        if (tb.st === 2) return;
+      } else {
+        const dx = tp[0] - tb.x, dy = tp[1] - tb.y, d = Math.hypot(dx, dy);
+        if (d < 9) { tb.st = 1; if (tb.tgt.ni >= 0) neus[tb.tgt.ni].blk = tb; }
+        else { tb.x += dx / d * 110 * dt; tb.y += dy / d * 110 * dt; }
+        place(tb.e, tb.x, tb.y, tb.rot, 1);
+      }
+    } else if (tb.st === 1) {
+      const tp = drug ? tabPos(tb) : null;
+      const held = tp && (tb.tgt.ai >= 0 || (neus[tb.tgt.ni] && neus[tb.tgt.ni].blk === tb));
+      if (!held) {
+        releaseTab(tb);
+        if (!drug) { tb.st = 2; tb.t = 0; return; }
+        tb.li = level;
+        const nt = pickTarget();
+        if (!nt) { tb.st = 2; tb.t = 0; return; }
+        tb.tgt = nt; tb.st = 0; tb.k = 1; return;
+      }
+      place(tb.e, tp[0] + tb.ox, tp[1] + tb.oy, tb.rot, 1);
+    } else {
+      tb.t += dt; tb.y += 30 * dt; tb.x += 6 * dt;
+      tb.e.setAttribute("opacity", clamp(1 - tb.t).toFixed(2));
+      place(tb.e, tb.x, tb.y, tb.rot + tb.t * 50, 1);
+      if (tb.t >= 1) { kill(tb); tb.tgt = null; }
+    }
+    if (!drug && tb.st !== 2 && tb.on) { releaseTab(tb); tb.st = 2; tb.t = 0; }
+  });
+}
 /* ---- labels and gauges ---- */
 const gg = {};
 function initPanel() {
@@ -68,13 +157,16 @@ function initPanel() {
   pill(ox, "Podocyte", 404, 178, 555, 165, "Podocyte: the cell wrapping the capillary with foot processes and a slit diaphragm. When it fails, protein leaks heavily and the picture is nephrotic, not nephritic.");
   pill(ox, "Bowman capsule", 232, 322, 135, 390, "Bowman capsule: the cup around the tuft. Filtrate, and in disease red cells and protein, collect in its space and enter the tubule.");
   pill(ox, "Protein leak", 640, 238, 690, 155, "Protein that has crossed the damaged filter flowing down the tubule. Heavy in podocyte disease.");
-  pill(ox, "Blood in urine", 790, 252, 835, 155, "Red cells in the tubule and urine (haematuria), often with casts. Blood with little protein suggests nephritic injury.");
+  pill(ox, "Blood in urine", 790, 252, 765, 118, "Red cells in the tubule and urine (haematuria), often with casts. Blood with little protein suggests nephritic injury.");
   pill(ox, "Filtration falls", 620, 344, 620, 300, "Filtration falls as inflamed and crescent-blocked glomeruli stop filtering. Waste and salt and water build up.");
   pill(ox, "Fluid and pressure", 800, 362, 815, 300, "Salt and water are retained as filtration falls, causing oedema and raising blood pressure. The arrow rises with pressure.");
+  pill(ox, "Kidney", 890, 105, 878, 58, "Kidney: this scene magnifies one glomerulus from the kidney cortex, where blood is first filtered.");
+  pill(ox, "Steroid", 70, 238, 70, 300, "Steroid tablets ride the blood in, sit on deposits and immune cells, and switch the attack off.");
+  capEl = mk("text", { class: "gn-cap", x: 30, y: 424 }, ox); capEl.textContent = capText(level, drug);
 }
 const sm = { Dep: 0.5, Comp: 0.4, Neut: 0.4, Inj: 0.4, Cres: 0.1, Pod: 0.3, Prot: 0.3, Haem: 0.3, GFR: 0.7, BP: 0.4, Oed: 0.3 };
-const acc = { comp: 0, prot: 0, leak: 0, filt: 0 };
-function init() { initStatic(); initTuft(); initPars(); initRbcs(); initPanel(); }
+const acc = { comp: 0, prot: 0, leak: 0, filt: 0, drug: 0 };
+function init() { initOrgans(); initStatic(); initTuft(); initPars(); initRbcs(); initPanel(); }
 function step(dt, m) {
   const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.5);
   ["Dep", "Comp", "Neut", "Inj", "Cres", "Pod", "Prot", "Haem", "GFR", "BP", "Oed"].forEach((key) => { sm[key] = lerp(sm[key], m[key], k2); });
@@ -91,8 +183,10 @@ function step(dt, m) {
   pars.forEach((c, i) => place(c.g, c.x, c.y, 0, 1 + 0.05 * Math.sin(tm / 1400 + i)));
   /* red cells in the afferent arteriole */
   rbcs.forEach((r) => { r.x += r.v * 55 * dt; if (r.x > 202) r.x = 8; place(r.g, r.x, CY + r.y, Math.sin(tm / 500 + r.x) * 8, 1); });
-  /* complement drifts from the deposit area into the tuft */
-  acc.comp += dt * sm.Comp * 11;
+  /* complement drifts from the deposit area into the tuft; tablets sitting on deposits choke it off */
+  let blockedSites = 0;
+  drugTabs.forEach((o) => { if (o.on && o.st === 1 && o.li === level && o.tgt && o.tgt.ai >= 0) blockedSites++; });
+  acc.comp += dt * sm.Comp * 11 * (1 - 0.6 * blockedSites / ANCH[level].length);
   while (acc.comp >= 1) { acc.comp--; const p = free(comp); if (p) emit(p, rnd(235, 405), rnd(150, 200), rnd(-8, 8), rnd(18, 32), 0); }
   comp.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.y > 320 || p.t > 3.2) kill(p); });
   /* protein crosses the wall, collects, then flows down the tubule */
@@ -107,13 +201,18 @@ function step(dt, m) {
   acc.filt += dt * (0.4 + 5 * sm.GFR);
   while (acc.filt >= 1) { acc.filt--; const p = free(filt); if (p) emit(p, 446, 262, 0, 0, 0); }
   filt.forEach((p) => { if (!p.on) return; p.x += (34 + 58 * sm.GFR) * dt; p.y = 258 + Math.sin(p.x / 48 + 1) * 9; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.x > 880) kill(p); });
-  /* neutrophils enter from the arteriole and crowd the tuft */
+  /* neutrophils enter from the arteriole and crowd the tuft; a tablet-held cell stalls and fades */
   const nn = Math.round(sm.Neut * neus.length);
   neus.forEach((n, i) => { const act = i < nn;
+    if (n.blk) {
+      if (!drug) n.blk = null;
+      else { n.g.style.opacity = "0.22"; place(n.g, n.x, n.y, Math.sin(tm / 400 + i) * 10, 0.85); return; }
+    }
     if (n.st === 0) { if (act) { n.x = 30; n.y = CY; n.st = 1; } else { n.g.style.opacity = 0; place(n.g, -40, CY, 0, 0.1); } }
     else if (n.st === 1) { n.g.style.opacity = 1; n.x += 52 * dt; place(n.g, n.x, CY + Math.sin(tm / 300 + i) * 5, 0, 1); if (n.x > 225) { n.st = 2; n.tx = rnd(255, 385); n.ty = rnd(185, 295); } }
-    else if (n.st === 2) { n.x += (n.tx - n.x) * dt * 1.1; n.y += (n.ty - n.y) * dt * 1.1; place(n.g, n.x, n.y, Math.sin(tm / 400 + i) * 10, 1); n.t += dt; if (n.t > 8 || !act) { n.t = 0; n.st = 3; } }
+    else if (n.st === 2) { n.x += (n.tx - n.x) * dt * 1.1; n.y += (n.ty - n.y) * dt * 1.1; place(n.g, n.x, n.y, Math.sin(tm / 400 + i) * 10, 1); n.g.style.opacity = clamp(parseFloat(n.g.style.opacity || 1) + dt * 0.9).toFixed(2); n.t += dt; if (n.t > 8 || !act) { n.t = 0; n.st = 3; } }
     else { n.g.style.opacity = clamp(parseFloat(n.g.style.opacity || 1) - dt * 0.6); if (parseFloat(n.g.style.opacity) < 0.05) n.st = 0; } });
+  stepTabs(dt);
   /* body effects: retained fluid rises, pressure arrow grows, filtrate drop slows */
   const fh = 8 + sm.Oed * 46;
   fluidRect.setAttribute("y", f1(388 - fh)); fluidRect.setAttribute("height", f1(fh));
@@ -122,5 +221,7 @@ function step(dt, m) {
   /* gauges */
   gg.inj.set(sm.Inj, wordOf(sm.Inj, 0.25, 0.6, ["low", "raised", "high"])); gg.comp.set(sm.Comp, wordOf(sm.Comp, 0.3, 0.6, ["low", "raised", "high"])); gg.neut.set(sm.Neut, wordOf(sm.Neut, 0.3, 0.6, ["few", "some", "many"]));
   gg.prot.set(sm.Prot, wordOf(sm.Prot, 0.3, 0.65, ["small", "moderate", "heavy"])); gg.haem.set(sm.Haem, wordOf(sm.Haem, 0.25, 0.6, ["absent", "present", "marked"])); gg.gfr.set(sm.GFR, wordOf(sm.GFR, 0.4, 0.68, ["low", "reduced", "preserved"]));
+  const capK = level + ":" + drug;
+  if (capK !== capKey) { capKey = capK; const t = capText(level, drug); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 run({ init, step });

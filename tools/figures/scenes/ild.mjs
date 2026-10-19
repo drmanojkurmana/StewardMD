@@ -15,20 +15,20 @@ const MD = {
   drugLabel: "Treatment",
   settings: [
     { label: "no treatment" },
-    { label: "antifibrotic" },
-    { label: "immunosuppression for inflammatory type" },
+    { label: "immunosuppression" },
     { label: "oxygen and transplant" },
+    { label: "antifibrotic" },
   ],
   status: "Interstitial lung disease: {level} · {drug} ·",
-  drugNames: ["no treatment", "antifibrotic", "immunosuppression for inflammatory type", "oxygen and transplant"],
+  drugNames: ["no treatment", "immunosuppression", "oxygen and transplant", "antifibrotic"],
 };
 function modelOf(S, level, drug) {
   const a = S.level.a[level], cl = (v) => Math.max(0, Math.min(1, v));
-  const anti = drug === 1 ? 1 : 0, imm = drug === 2 ? 1 : 0, oxyT = drug === 3 ? 1 : 0;
+  const imm = drug === 1 ? 1 : 0, oxyT = drug === 2 ? 1 : 0, anti = drug === 3 ? 1 : 0;
   const inj = cl((0.1 + 0.8 * a) * (imm ? 0.42 : 1) * (anti ? 0.88 : 1));
-  const fib = cl((0.08 + 0.88 * a) * (anti ? 0.52 : 1) * (imm ? 0.78 : 1));
-  const col = cl((0.06 + 0.55 * a + 0.4 * a * a) * (anti ? 0.7 : 1) * (imm ? 0.9 : 1));
-  const honey = cl((col - 0.32) * 1.5 * (anti ? 0.82 : 1));
+  const fib = cl((0.08 + 0.88 * a) * (anti ? 0.5 : 1) * (imm ? 0.78 : 1));
+  const col = cl((0.06 + 0.55 * a + 0.4 * a * a) * (anti ? 0.55 : 1) * (imm ? 0.9 : 1));
+  const honey = cl((col - 0.32) * 1.5 * (anti ? 0.82 : 1) * (imm ? 0.92 : 1));
   const diff = cl(1 - 0.72 * col - 0.18 * honey);
   const comp = cl(1 - 0.68 * col - 0.2 * honey);
   const vol = cl(1 - 0.62 * col - 0.22 * honey);
@@ -40,8 +40,8 @@ function modelOf(S, level, drug) {
 const TESTS = [
   [0, 0, "fibrosis little · diffusion near normal · compliance near normal · oxygen near normal"],
   [2, 0, "fibrosis extensive · diffusion low · compliance low · oxygen low"],
-  [2, 1, "fibrosis extensive · diffusion reduced · compliance reduced · oxygen reduced"],
-  [2, 3, "fibrosis extensive · diffusion low · compliance low · oxygen reduced"],
+  [2, 3, "fibrosis moderate · diffusion reduced · compliance reduced · oxygen reduced"],
+  [2, 2, "fibrosis extensive · diffusion low · compliance low · oxygen reduced"],
 ];
 
 /* ---------------- static layout ---------------- */
@@ -49,17 +49,21 @@ const body = `
 <rect class="sc-tissue" x="14" y="44" width="932" height="396" rx="18"/>
 <text class="sc-zone" x="34" y="68">ALVEOLAR UNIT</text>
 <text class="sc-zone" x="640" y="68">WHOLE LUNG</text>
-<g id="lungG"></g><g id="alvG"></g><g id="parts"></g><g id="over"></g><g id="panel"></g>`;
+<path id="airway" class="ild-airway" d="M790 58 L790 100"/>
+<g id="lungSlot"></g>
+<g id="alvG"></g>
+<path id="diaph" class="ild-diaph" d="M660 398 Q790 424 920 398"/>
+<g id="parts"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "interstitial-lung-disease", fig: "Fig 1", title: "Interstitial lung disease: injury to pulmonary fibrosis", W, H, body,
-  label: "An animated view of interstitial lung disease and pulmonary fibrosis. Repeated injury to alveolar epithelial cells, from causes that include idiopathic disease, connective tissue disease, asbestos and some drugs, wakes fibroblasts in the interstitium. Fibroblasts lay down collagen, the interstitium thickens, gas diffusion falls and the lung becomes stiff and smaller, a restrictive pattern. Late disease shows honeycombing. Signs include cough, breathlessness, fine crackles and finger clubbing. Gauges show injury, fibrosis, diffusion, compliance, lung volume and oxygen. Treatment choices include an antifibrotic, immunosuppression for an inflammatory type, and oxygen with transplant referral.",
-  caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "ild.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  label: "An animated view of interstitial lung disease and pulmonary fibrosis. The left inset magnifies one air sac; the right shows the whole lung. Repeated injury to the air sac lining wakes scar making fibroblasts. They lay down scar tissue, the wall thickens, oxygen crosses poorly and the lung turns stiff and small. Late disease shows honeycomb cysts at the lung bases. Treatment choices are immunosuppression for an inflammatory type, oxygen with transplant referral, and an antifibrotic that slows new scarring.",
+  caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "ild.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With antifibrotic",
   sourcesLis: [
-    "<strong>How interstitial lung disease develops.</strong> The interstitium is the thin support tissue between the alveolar epithelium and the capillary endothelium, where oxygen crosses into blood. Repeated alveolar epithelial injury and abnormal repair activate fibroblasts, which become matrix making cells and deposit collagen and other extracellular matrix. The interstitium thickens and stiffens, alveolar walls distort, and in advanced disease clustered cystic spaces called honeycombing replace normal lung. Causes and patterns include idiopathic pulmonary fibrosis, connective tissue disease, hypersensitivity and inhaled exposures such as asbestos, and some drugs; in many cases the cause is unknown. Thickened walls increase the distance for diffusion, and a stiff, low compliance lung gives a restrictive pattern with reduced lung volumes. Typical findings stressed in standard textbook teaching such as Harrison Interstitial Lung Disease include cough, progressive breathlessness, fine inspiratory crackles (rales), and finger clubbing in some patients, with impaired gas transfer on lung function. This account was not checked against a linked source here, so it is flagged for review.",
-    "<strong>Treatment ideas shown.</strong> An antifibrotic slows fibroblast driven scarring and decline but does not remove established collagen. Immunosuppression helps mainly where inflammation drives the pattern, for example some connective tissue disease related disease, and is not a treatment for established scar alone. Oxygen supports blood oxygen when it is low without reversing fibrosis. Transplant referral is the definitive option considered for suitable patients with end-stage disease. These are teaching toggles only.",
+    "<strong>How interstitial lung disease develops.</strong> The interstitium is the thin support tissue between the air sac lining and the capillary, where oxygen crosses into blood. Repeated lining injury and abnormal repair activate fibroblasts, which become scar making cells and deposit collagen and other matrix. The wall thickens and stiffens, air sacs distort, and in advanced disease clustered cystic spaces called honeycombing replace normal lung at the bases. Causes and patterns include idiopathic pulmonary fibrosis, connective tissue disease, hypersensitivity and inhaled exposures such as asbestos, and some drugs; in many cases the cause is unknown. Thickened walls lengthen the path for diffusion, and a stiff, low compliance lung gives a restrictive pattern with reduced volumes. Typical findings stressed in standard textbook teaching include cough, progressive breathlessness, fine inspiratory crackles, and finger clubbing in some patients, with impaired gas transfer on lung function. This account was not checked against a linked source here, so it is flagged for review.",
+    "<strong>Treatment ideas shown.</strong> An antifibrotic slows fibroblast driven scarring and decline but does not remove established scar. Immunosuppression helps mainly where inflammation drives the pattern, for example some connective tissue disease related disease, and is not a treatment for established scar alone. Oxygen supports blood oxygen when it is low without reversing scar. Transplant referral is the definitive option considered for suitable patients with end-stage disease. These are teaching toggles only.",
   ],
   simplified: "The many named patterns and causes, imaging and biopsy criteria, lung function numbers, infection and malignancy exclusion, pulmonary hypertension, acute exacerbations, rehabilitation and vaccination, transplant assessment, and all doses and targets are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
   extraCss: `
@@ -70,14 +74,16 @@ body[data-theme="light"] .cl-epi2{--cc:#c9a24a}body[data-theme="light"] .cl-fib2
 .ild-cap{fill:none;stroke:var(--c-rbc);stroke-width:7;stroke-linecap:round;opacity:.75}
 .ild-coll{fill:none;stroke:#d9a05a;stroke-width:1.6;stroke-linecap:round}
 body[data-theme="light"] .ild-coll{stroke:#b57a2e}
-.ild-lung{fill:color-mix(in srgb,var(--c-endo) 22%,var(--anatomy-paper));stroke:var(--c-endo);stroke-width:2}
-.ild-trach{fill:none;stroke:var(--anatomy-mid);stroke-width:6;stroke-linecap:round}
+.ild-airway{fill:none;stroke:var(--anatomy-mid);stroke-width:7;stroke-linecap:round}
+.ild-o2tube{fill:none;stroke:var(--c-fl);stroke-width:4;stroke-linecap:round}
+.ild-glow{fill:var(--c-fl);stroke:none}
 .ild-honey{fill:color-mix(in srgb,var(--anatomy-paper) 70%,transparent);stroke:#d9a05a;stroke-width:1.6}
-.ild-retic{fill:none;stroke:var(--anatomy-mid);stroke-width:.8;opacity:.5}
+.ild-scar{fill:none;stroke:#d9a05a;stroke-width:2.6;stroke-linecap:round}
+body[data-theme="light"] .ild-scar{stroke:#b57a2e}
+.ild-halo{fill:none;stroke:var(--c-ab);stroke-width:2;opacity:0}
 .ild-diaph{fill:none;stroke:var(--anatomy-mid);stroke-width:2;stroke-linecap:round}
-.ild-finger{fill:var(--c-endo);stroke:color-mix(in srgb,var(--c-endo) 55%,#000);stroke-width:.8}
-.ild-nail{fill:color-mix(in srgb,var(--anatomy-paper) 75%,var(--c-endo));stroke:var(--anatomy-mid);stroke-width:.6}
-.p-inj{--cc:#ff9a3d}.p-oxy{--cc:#5fd0f5}.p-colp{--cc:#d9a05a}
+.ild-capline{fill:var(--anatomy-strong);font-size:13px}
+.p-inj{--cc:#ff9a3d}.p-oxy{--cc:#5fd0f5}.p-colp{--cc:#d9a05a}.p-calm{--cc:var(--c-ab)}
 .dr-g-fill.g-ildfib{fill:var(--c-cyt)}.dr-g-fill.g-ildinj{fill:#ff9a3d}.dr-g-fill.g-ilddif{fill:var(--c-fl)}.dr-g-fill.g-ildoxy{fill:#5fd0f5}
 `,
 });

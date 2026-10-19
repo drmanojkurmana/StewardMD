@@ -57,10 +57,6 @@ const body = `
 <text class="sc-zone" x="34" y="68">KIDNEY</text>
 <text class="sc-zone" x="360" y="68">TUBULE AND CYST</text>
 <text class="sc-zone" x="650" y="68">BODY EFFECTS</text>
-<rect class="pk-box" x="648" y="82" width="134" height="82" rx="10"/>
-<rect class="pk-box" x="798" y="82" width="134" height="82" rx="10"/>
-<rect class="pk-box" x="648" y="202" width="284" height="58" rx="10"/>
-<rect class="pk-box" x="648" y="292" width="284" height="66" rx="10"/>
 <g id="kid"></g><g id="tub"></g><g id="bodyfx"></g><g id="parts"></g>
 <g id="over"></g>
 <g id="panel"></g>`;
@@ -69,13 +65,15 @@ const extraCss = `
 body{--c-cyst:#e8a33d;--c-fluid:#5ec8e8;--c-epi:#e58aa5;--c-liver:#c96a5a;--c-berry:#e5484d}
 body[data-theme="light"]{--c-cyst:#c47f1a;--c-fluid:#1f8fc4;--c-epi:#c95f83;--c-liver:#b05040;--c-berry:#c42a3d}
 .cl-epi{--cc:var(--c-epi)}
-.pk-kid{fill:color-mix(in srgb,var(--c-endo) 22%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-endo) 55%,var(--anatomy-mid));stroke-width:2.4}
+.pk-cap{fill:var(--anatomy-strong);font-size:12px}
 .pk-cyst{fill:color-mix(in srgb,var(--c-cyst) 55%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-cyst) 65%,#000);stroke-width:1.2}
 .pk-lumen{fill:color-mix(in srgb,var(--c-fluid) 30%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-fluid) 60%,var(--anatomy-mid));stroke-width:1.4}
-.pk-box{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1;opacity:.7}
-.pk-liver{fill:color-mix(in srgb,var(--c-liver) 55%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-liver) 60%,#000);stroke-width:1.2}
-.pk-vess{fill:color-mix(in srgb,var(--c-rbc) 16%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 50%,var(--anatomy-mid));stroke-width:1.4}
-.pk-blad{fill:color-mix(in srgb,var(--c-fluid) 28%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-fluid) 55%,var(--anatomy-mid));stroke-width:1.4}
+.pk-glow{fill:var(--c-rbc);stroke:none}
+.pk-rec{fill:var(--anatomy-paper);stroke:var(--c-berry);stroke-width:1.4}
+.pk-filt{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.4}
+.pk-mem{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.p-waste{fill:var(--c-cyst);stroke:color-mix(in srgb,var(--c-cyst) 55%,#000);stroke-width:.5}
+.p-clean{fill:var(--c-fluid);stroke:color-mix(in srgb,var(--c-fluid) 50%,#000);stroke-width:.5}
 .pk-berry{fill:var(--c-berry);stroke:color-mix(in srgb,var(--c-berry) 55%,#000);stroke-width:1}
 .pk-ureter{fill:none;stroke:color-mix(in srgb,var(--c-fluid) 60%,var(--anatomy-mid));stroke-width:4;stroke-linecap:round}
 .pk-dna{fill:none;stroke:var(--c-cyt);stroke-width:2;stroke-linecap:round}
@@ -93,8 +91,8 @@ buildScene({
   id: "polycystic-kidney-disease", fig: "Fig 1", title: "Autosomal dominant polycystic kidney disease: cyst growth and kidney failure", W, H, body, extraCss,
   label: "An animated polycystic kidney beside a magnified tubule cyst and body effects. A PKD1 or PKD2 mutation makes defective polycystin, so the primary cilium on tubular epithelial cells signals poorly. The cells multiply and secrete fluid into the tubule wall, and a cyst buds off and grows. Many cysts enlarge both kidneys, crush working nephrons and lower filtration, and cause high blood pressure, blood in the urine and flank pain. Cysts in the liver and a berry aneurysm on a brain vessel are shown as associations. Gauges show cyst burden, kidney size, filtration, pressure, waste, blood in urine and pain. Treatment choices include blood pressure control, a tolvaptan concept that slows cyst growth, and dialysis or transplant.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "pkd.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With dialysis or transplant",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "pkd.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With tolvaptan concept",
   sourcesLis: [
     "<strong>How autosomal dominant polycystic kidney disease develops.</strong> A mutation in PKD1 or PKD2 makes polycystin faulty. Polycystin sits on the primary cilium of tubular epithelial cells and helps the cilium sense flow and control cell growth and fluid movement. When signalling fails, tubular cells multiply and secrete fluid, a cyst forms from the tubule wall and grows, and over years many cysts enlarge the kidneys and replace working nephrons. This is standard teaching in medicine and nephrology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Effects in the body.</strong> Enlarging cysts cause flank pain and can bleed, giving blood in the urine. High blood pressure is common and speeds kidney damage. Filtration falls and waste is retained as nephrons are lost, ending in kidney failure. Cysts also occur in the liver, and there is an association with a berry aneurysm on a brain vessel, which is shown as a small sac on the vessel. Flagged for review.",

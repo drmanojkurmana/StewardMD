@@ -64,8 +64,10 @@ const cards = CARDS.map((c, i) => { const x = 22 + i * 232;
 const body = `
 <rect class="sc-tissue" x="14" y="126" width="${W - 28}" height="316" rx="18"/>
 ${cards}
-<text class="sc-zone" x="580" y="148">CIRCULATION</text>
-<g id="stage"></g>
+<g id="flow"></g>
+<g id="uterusSlot"></g>
+<g id="heartSlot"></g>
+<g id="cells"></g>
 <g id="parts"></g>
 <g id="over"></g>
 <g id="panel"></g>`;
@@ -74,9 +76,7 @@ const extraCss = `
 .sc-card-r{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
 .sc-card.on .sc-card-r{stroke:var(--anatomy-lit);stroke-width:2;fill:color-mix(in srgb,var(--anatomy-lit) 10%,var(--anatomy-card))}
 .sc-dim2{opacity:.75}
-.pp-wall{fill:color-mix(in srgb,var(--c-endo) 62%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-endo) 70%,#000);stroke-width:1.4}
-.pp-cav{fill:color-mix(in srgb,var(--c-rbc) 16%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-endo) 45%,#000);stroke-width:1}
-.pp-cervix{fill:color-mix(in srgb,var(--c-endo) 55%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-endo) 65%,#000);stroke-width:1.2}
+.pp-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
 .pp-spiral{fill:none;stroke:var(--c-rbc);stroke-width:2.4;stroke-linecap:round}
 .pp-tear{fill:none;stroke:var(--c-bad);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
 .pp-stitch{fill:none;stroke:var(--anatomy-strong);stroke-width:1.6;stroke-linecap:round}
@@ -84,7 +84,9 @@ const extraCss = `
 .pp-pool{fill:var(--c-rbc);stroke:color-mix(in srgb,var(--c-rbc) 55%,#000);stroke-width:.8}
 .pp-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}
 .pp-vwall{fill:color-mix(in srgb,var(--c-endo) 60%,var(--anatomy-paper));stroke:var(--c-endo);stroke-width:1}
-.pp-heart{fill:color-mix(in srgb,var(--c-rbc) 72%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 60%,#000);stroke-width:1.2}
+.pp-canal{fill:color-mix(in srgb,var(--c-endo) 55%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-endo) 65%,#000);stroke-width:1.2}
+.pp-dish{fill:color-mix(in srgb,var(--c-endo) 60%,var(--anatomy-paper));stroke:var(--c-endo);stroke-width:1}
+.pp-stub{fill:none;stroke:var(--c-rbc);stroke-width:10;stroke-linecap:round;opacity:.85}
 .pp-fibrin{fill:none;stroke:#f6f1e0;stroke-width:1.1;opacity:.9}
 .p-drop{fill:var(--c-rbc);stroke:color-mix(in srgb,var(--c-rbc) 50%,#000);stroke-width:.5}
 .p-txa{--cc:var(--c-good)}
@@ -94,10 +96,10 @@ const extraCss = `
 
 buildScene({
   id: "postpartum-haemorrhage", fig: "Fig 1", title: "Postpartum haemorrhage: the four Ts", W, H, body, extraCss,
-  label: "An animated uterus after delivery. It must contract to squeeze the spiral arteries shut. Four causes of heavy bleeding are shown: tone (the uterus stays soft), trauma (a tear), tissue (retained placenta) and thrombin (blood that does not clot). Blood escapes into a pool, clot forms in a vessel on the right, and the circulation slows as pressure falls. Gauges show contraction, bleeding, clotting and blood pressure. Treatments are uterine massage with a uterotonic, repair or removing tissue, and tranexamic acid with clotting support.",
+  label: "An animated uterus after delivery. It must contract to squeeze the spiral arteries shut. Four causes of heavy bleeding are shown: tone (the uterus stays soft), trauma (a tear), tissue (retained placenta) and thrombin (blood that does not clot). Blood escapes into a pool, clot forms in a dish on the right, and the circulation slows as pressure falls. Gauges show contraction, bleeding, clotting and blood pressure. Treatments are uterine massage with a uterotonic, repair or removing tissue, and tranexamic acid with clotting support.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "pph.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "pph.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With uterine massage and uterotonic",
   sourcesLis: [
     "<strong>Why bleeding happens after delivery.</strong> When the placenta separates, the spiral arteries are left open. A firm uterine contraction compresses them and stops the flow, so failure to contract (tone, uterine atony) is the leading cause of postpartum haemorrhage. The other causes in the four Ts are trauma (tears of the cervix, vagina or uterus), tissue (retained placenta or membranes preventing full contraction) and thrombin (coagulopathy, where clots do not form). Heavy loss lowers circulating volume and blood pressure and can progress to shock. This is standard teaching in obstetrics texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> Uterine massage and a uterotonic restore tone, repair of a tear or removal of retained tissue removes that source, and tranexamic acid with clotting support helps a firm clot form and hold. Resuscitation and transfusion run alongside in real care but are not drawn here. They are teaching toggles only.",

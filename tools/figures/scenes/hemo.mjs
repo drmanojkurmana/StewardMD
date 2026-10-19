@@ -15,9 +15,9 @@ const MD = {
   drugLabel: "Treatment",
   settings: [
     { label: "no treatment" },
-    { label: "factor replacement (factor VIII or IX concentrate)" },
-    { label: "desmopressin (releases stored von Willebrand factor and factor VIII)" },
-    { label: "avoid NSAIDs (protect platelet function)" },
+    { label: "factor replacement" },
+    { label: "desmopressin" },
+    { label: "avoid NSAIDs" },
   ],
   status: "Defect: {level} · {drug} ·",
   drugNames: ["no treatment", "factor replacement", "desmopressin", "avoiding NSAIDs"],
@@ -50,46 +50,42 @@ const TESTS = [
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<text class="sc-zone" x="34" y="68">INJURED VESSEL</text>
-<text class="sc-zone" x="34" y="282">INTRINSIC CASCADE</text>
-<rect class="sc-lumen" x="14" y="158" width="${W - 28}" height="84"/>
-<rect class="hm-wall" x="14" y="150" width="416" height="8" rx="4"/>
-<rect class="hm-wall" x="530" y="150" width="416" height="8" rx="4"/>
-<rect class="hm-wall" x="14" y="242" width="${W - 28}" height="8" rx="4"/>
-<path class="hm-coll" d="M432 156q9 -7 18 0t18 0t18 0t18 0t18 0"/>
-<g id="vwf"></g><g id="plug"></g><g id="fib"></g><g id="rbcs"></g>
-<g id="casc"></g><g id="jointG"></g><g id="parts"></g>
-<g><rect class="hm-badge" x="34" y="398" width="216" height="30" rx="8"/><text id="badA" class="sc-lab" x="46" y="417">aPTT: prolonged</text></g>
-<g><rect class="hm-badge" x="266" y="398" width="236" height="30" rx="8"/><text id="badB" class="sc-lab" x="278" y="417">Bleeding time: prolonged</text></g>
-<g class="hot" tabindex="0" data-info="PT follows the extrinsic arm (tissue factor and factor VII). That arm is intact in haemophilia and von Willebrand disease, so PT stays normal while aPTT is prolonged."><rect class="hm-badge" x="518" y="398" width="216" height="30" rx="8"/><text class="sc-lab" x="530" y="417">PT: normal</text></g>
+<g id="vesselSlot"></g>
+<g id="jointSlot"></g>
+<g id="haloG"></g>
+<g id="vwf"></g>
+<g id="plug"></g>
+<g id="fib"></g>
+<g id="casc"></g>
+<g id="parts"></g>
 <g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "haemophilia-coagulation-defects", fig: "Fig 1", title: "Haemophilia and von Willebrand disease: defects that bleed", W, H, body,
-  label: "An animated injured vessel, intrinsic clotting cascade and knee joint. Platelets need von Willebrand factor strands to stick to exposed collagen and form a plug. The intrinsic cascade, factors XII, XI, IX with its cofactor VIII, then X and thrombin, makes the fibrin that stabilises the plug. Missing factor VIII or IX (haemophilia) or missing von Willebrand factor weakens the plug, prolongs aPTT or bleeding time, and lets blood collect in a joint. Gauges show von Willebrand factor adhesion, factor VIII and IX activity, fibrin, plug stability, aPTT prolongation and bleeding time. Treatment choices are factor replacement, desmopressin and avoiding NSAIDs.",
+  label: "An animated story from left to right. A torn vessel wall exposes collagen. Von Willebrand factor strands catch platelets into a plug, while a short cascade from factors XII and XI through IX (helped by VIII) to X, thrombin and fibrin weaves the fibrin mesh that firms the plug. Without enough factor VIII or IX the mesh is thin, blood leaks out and collects in the knee joint. Without von Willebrand factor the platelets cannot stick. A slider sets defect severity. Factor replacement, desmopressin and avoiding NSAIDs each act on the drawing.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, factor levels or laboratory values are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "hemo.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "hemo.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With factor replacement",
   sourcesLis: [
     "<strong>Two defects, one weak plug.</strong> Primary haemostasis: platelets stick to exposed collagen through von Willebrand factor (vWF, platelet GPIb), activate and clump into a plug. In von Willebrand disease vWF is low or works poorly, so platelets stick badly, mucosal bleeding and heavy periods are typical, and bleeding time is prolonged. Secondary haemostasis: the intrinsic cascade (XII, XI, IX with cofactor VIII) feeds factor X, thrombin and fibrin, which stabilises the plug. Missing factor VIII (haemophilia A) or IX (haemophilia B, Christmas disease) gives haemophilia: the plug forms but is not stabilised, so bleeding is deep, into joints (haemarthrosis) and muscles, often after a delay, and aPTT is prolonged because aPTT tests the intrinsic arm. PT, which tests the extrinsic arm, stays normal in both. This is standard teaching in haematology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> Factor replacement supplies the missing VIII or IX (aPTT and fibrin correct, but a pure factor concentrate does not fix a vWF adhesion defect, so bleeding time can stay prolonged). Desmopressin releases stored vWF and factor VIII from vessel lining cells, helping most in mild disease and much less when little is stored, as in severe disease. Avoiding NSAIDs protects platelet function, because NSAIDs block platelet cyclo-oxygenase, so it eases the platelet side but does not correct the cascade or aPTT. These are teaching toggles only.",
   ],
   simplified: "Haemophilia carriers and inheritance (X linked), inhibitors against replaced factor, the types and laboratory subtyping of von Willebrand disease, acquired von Willebrand syndrome, platelet receptor detail, tranexamic acid and other adjuncts, prophylaxis schedules, joint damage over time, and all doses and factor levels are left out. One vessel and one joint stand for many bleeding sites, and counts and speeds are illustrative. The figure does not say how any patient should be treated.",
   extraCss: `
-.hm-wall{fill:color-mix(in srgb,var(--c-endo) 70%,var(--anatomy-paper));stroke:var(--c-endo);stroke-width:1}
-.hm-coll{fill:none;stroke:color-mix(in srgb,var(--c-neut) 60%,var(--anatomy-paper));stroke-width:2.6;stroke-linecap:round}
-.hm-vwf{fill:none;stroke:var(--anatomy-hi);stroke-width:1.4;stroke-linecap:round}
-.hm-fib{fill:none;stroke:color-mix(in srgb,var(--c-plt) 60%,var(--anatomy-paper));stroke-width:1.1;stroke-linecap:round}
+.hm-vwf{fill:none;stroke:var(--anatomy-hi);stroke-width:1.6;stroke-linecap:round}
+.hm-fib{fill:none;stroke:color-mix(in srgb,var(--c-plt) 60%,var(--anatomy-paper));stroke-width:1.2;stroke-linecap:round}
+.hm-coll{fill:none;stroke:color-mix(in srgb,var(--c-neut) 60%,var(--anatomy-paper));stroke-width:2.4;stroke-linecap:round}
+.hm-wound{fill:color-mix(in srgb,var(--c-bad) 55%,#000);stroke:color-mix(in srgb,var(--c-bad) 70%,var(--anatomy-mid));stroke-width:1}
+.hm-halo{fill:var(--c-bad);stroke:none}
 .hm-node{fill:color-mix(in srgb,var(--c-cyt) 28%,var(--anatomy-card));stroke:var(--anatomy-mid);stroke-width:1.2}
-.hm-nodebad{fill:color-mix(in srgb,var(--c-bad) 22%,var(--anatomy-card));stroke:var(--c-bad);stroke-width:1.4}
+.hm-nodebad{fill:color-mix(in srgb,var(--c-bad) 26%,var(--anatomy-card));stroke:var(--c-bad);stroke-width:1.6}
 .hm-arr{fill:none;stroke:color-mix(in srgb,var(--c-cyt) 70%,var(--anatomy-mid));stroke-width:1.8;stroke-linecap:round}
 .hm-dash{fill:none;stroke:var(--anatomy-mid);stroke-width:1.1;stroke-dasharray:4 3}
-.hm-badge{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
-.hm-bone{fill:color-mix(in srgb,var(--anatomy-paper) 80%,var(--c-plt));stroke:var(--anatomy-mid);stroke-width:1.1}
-.hm-caps{fill:color-mix(in srgb,var(--c-rbc) 8%,var(--anatomy-card));stroke:var(--anatomy-mid);stroke-width:1.2}
-.hm-jblood{fill:var(--c-rbc);opacity:.75}
+.hm-jblood{fill:var(--c-rbc);stroke:none}
+.hm-jring{fill:none;stroke:var(--c-bad);stroke-width:2}
 .hm-xp{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-linecap:round}
-.p-casc{--cc:var(--c-cyt)}.p-leak{fill:var(--c-rbc)}.p-desmo{--cc:var(--c-good)}
+.hm-flash{fill:none;stroke:var(--c-good);stroke-width:2}
+.p-casc{--cc:var(--c-cyt)}.p-leak{fill:var(--c-rbc)}.p-fac{--cc:#d9a441}.p-desmo{--cc:var(--c-good)}.p-nsaid{--cc:#9aa3ab}
 .dr-g-fill.g-vwf{fill:var(--c-fl)}.dr-g-fill.g-fac{fill:var(--c-cyt)}.dr-g-fill.g-stab{fill:var(--c-good)}
 `,
 });

@@ -15,9 +15,9 @@ const MD = {
   drugLabel: "Treatment",
   settings: [
     { label: "no treatment" },
-    { label: "antibiotic only (treat the infection)" },
-    { label: "oxygen only (support breathing)" },
-    { label: "antibiotic with oxygen (both)" },
+    { label: "antibiotic only" },
+    { label: "oxygen only" },
+    { label: "antibiotic with oxygen" },
   ],
   status: "Pneumonia: {level} · {drug} ·",
   drugNames: ["no treatment", "an antibiotic only", "oxygen only", "an antibiotic with oxygen"],
@@ -55,14 +55,14 @@ const body = `
 <text class="sc-zone" x="670" y="68">EDGE OF THE LUNG</text>
 <text class="sc-zone sc-dim" x="32" y="338">BLOOD LEAVING THE LUNGS</text>
 <rect id="lumen" class="sc-lumen" x="14" y="364" width="932" height="44"/>
-<g id="alv"></g><g id="lobe"></g><g id="pleu"></g><g id="cells"></g><g id="parts"></g><g id="over"></g><g id="panel"></g>`;
+<g id="lobeSlot"></g><g id="lungSlot"></g><g id="alv"></g><g id="lobe"></g><g id="pleu"></g><g id="ves"></g><g id="cells"></g><g id="parts"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "pneumonia", fig: "Fig 1", title: "Pneumonia: filled air sacs to low oxygen", W, H, body,
   label: "An animated view of pneumonia. Bacteria multiply in the air sacs and neutrophils flood in, filling the sacs with exudate so they become solid, which is consolidation. Patchy filling around small airways is bronchopneumonia and can merge to fill a whole lobe in lobar pneumonia, when the lobe looks red and solid like liver, called red hepatisation. Filled sacs cannot add oxygen, so blood oxygen falls. Infection can spread outward to the pleura and cause pleural fluid. An antibiotic clears the infection so the sacs can clear in resolution, and oxygen supports blood oxygen while that happens. Gauges show infection, exudate, consolidation, blood oxygen, pleura and resolution.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "pneu.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "pneu.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With antibiotic with oxygen",
   sourcesLis: [
     "<strong>How pneumonia develops.</strong> Bacteria reach the air sacs (alveoli) and multiply. Neutrophils and fluid flood into the sacs as exudate, filling air space so that part of the lung becomes solid, which is consolidation and cannot exchange gas, so blood oxygen falls (hypoxia). Filling that starts patchily around small airways is bronchopneumonia; filling of a whole lobe is lobar pneumonia, and a freshly filled lobe is red and firm like liver, called red hepatisation, before it gradually clears in resolution as the infection is treated and debris is removed. Infection reaching the lung surface inflames the pleura and can collect pleural fluid beside the lung. This is standard teaching in medicine and respiratory texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> An antibiotic to treat the infection itself, and oxygen to support blood oxygen while the sacs clear. These are teaching toggles only.",
@@ -73,15 +73,15 @@ buildScene({
 .pneu-sac{fill:color-mix(in srgb,var(--c-lymph) 20%,var(--anatomy-paper));stroke:var(--c-lymph);stroke-width:1.8}
 .pneu-exud{fill:color-mix(in srgb,var(--c-neut) 62%,var(--anatomy-paper));stroke:none}
 .pneu-cons{fill:color-mix(in srgb,var(--c-bad) 72%,#7a1f24);stroke:none}
-.pneu-lobe{fill:color-mix(in srgb,var(--c-lymph) 13%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.8}
 .pneu-bronch{fill:none;stroke:var(--c-lymph);stroke-width:5;stroke-linecap:round;opacity:.75}
 .pneu-patch{fill:color-mix(in srgb,var(--c-neut) 55%,var(--c-bad));stroke:color-mix(in srgb,var(--c-bad) 55%,#000);stroke-width:.8}
-.pneu-lung{fill:color-mix(in srgb,var(--c-lymph) 15%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.6}
 .pneu-pleura{fill:none;stroke:var(--c-endo);stroke-width:3;stroke-linecap:round}
 .pneu-wall{fill:color-mix(in srgb,var(--anatomy-mid) 28%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.4}
 .pneu-hatch{stroke:var(--anatomy-mid);stroke-width:1.2}
 .pneu-eff{fill:color-mix(in srgb,var(--c-fl) 62%,var(--anatomy-paper));stroke:var(--c-fl);stroke-width:1.2}
 .pneu-mask{fill:color-mix(in srgb,#5fd0f5 45%,var(--anatomy-paper));stroke:#2e9cc4;stroke-width:1.4}
+.pneu-blood{fill:none;stroke:var(--c-rbc);stroke-width:10;stroke-linecap:round;opacity:.55}
+.pneu-cap{fill:var(--anatomy-strong);font-size:12px}
 .p-o2{--cc:#5fd0f5}
 .dr-g-fill.g-ox{fill:#5fd0f5}.dr-g-fill.g-cons{fill:var(--c-bad)}.dr-g-fill.g-exud{fill:var(--c-neut)}.dr-g-fill.g-pleu{fill:var(--c-fl)}.dr-g-fill.g-res{fill:var(--c-good)}
 `,

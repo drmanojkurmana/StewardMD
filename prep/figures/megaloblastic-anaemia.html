@@ -8,7 +8,7 @@
   --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
   --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
   --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
-  --anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
 }
 .iso[data-theme="light"]{
@@ -199,6 +199,9 @@ body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px
 .bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
 .bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
 @media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
 body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
 body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
 .t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
@@ -268,16 +271,22 @@ body[data-theme="light"]{--c-fol:#4fa63c;--c-b12:#7c3aed;--c-if:#d9a92c;--c-myel
 .mg-inset{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
 .mg-flow{fill:none;stroke:var(--anatomy-mid);stroke-width:2;stroke-linecap:round}
 .mg-axon{fill:none;stroke:var(--anatomy-mid);stroke-width:3;stroke-linecap:round}
-.mg-organ{fill:color-mix(in srgb,var(--c-endo) 45%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-endo) 60%,#000);stroke-width:1}
-.mg-gut{fill:none;stroke:color-mix(in srgb,var(--c-endo) 65%,#000);stroke-width:7;stroke-linecap:round}
 .mg-dna{fill:none;stroke:var(--c-cyt2);stroke-width:2;stroke-linecap:round}
-.mg-rung{stroke:var(--anatomy-mid);stroke-width:1}
-.mg-block{stroke:var(--c-bad);stroke-width:3;stroke-linecap:round}
+.mg-rung{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.mg-block{fill:none;stroke:var(--c-bad);stroke-width:3;stroke-linecap:round}
 .mg-myel{fill:var(--c-myel);stroke:color-mix(in srgb,var(--c-myel) 55%,#000);stroke-width:.8}
+.mg-gap{fill:color-mix(in srgb,#000 55%,transparent);stroke:none}
+.mg-halo{fill:#e88ca0;stroke:none}
+.mg-tab{fill:var(--c-fol);stroke:color-mix(in srgb,var(--c-fol) 55%,#000);stroke-width:1}
+.mg-vial{fill:color-mix(in srgb,var(--c-b12) 55%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-b12) 60%,#000);stroke-width:1.2}
+.mg-vcap{fill:color-mix(in srgb,var(--c-b12) 60%,#000);stroke:none}
+.mg-trap{fill:color-mix(in srgb,var(--c-fol) 45%,#888);stroke:color-mix(in srgb,var(--c-fol) 55%,#000);stroke-width:.6}
+.mg-cap{fill:var(--anatomy-strong);font-size:13px}
 .cl-fol{--cc:var(--c-fol)}.cl-b12{--cc:var(--c-b12)}.cl-mega{--cc:#e88ca0}.cl-daught{--cc:#e9a2b3}
-.p-fol{--cc:var(--c-fol)}.p-b12{--cc:var(--c-b12)}.p-if{fill:var(--c-if);stroke:color-mix(in srgb,var(--c-if) 55%,#000);stroke-width:.5}
+.p-fol{--cc:var(--c-fol)}.p-b12{--cc:var(--c-b12)}.p-b12if{--cc:var(--c-b12);stroke:var(--c-if);stroke-width:2}
+.p-if{fill:var(--c-if);stroke:color-mix(in srgb,var(--c-if) 55%,#000);stroke-width:.5}
 .dr-g-fill.g-fol{fill:var(--c-fol)}.dr-g-fill.g-b12{fill:var(--c-b12)}.dr-g-fill.g-macro{fill:var(--c-rbc)}
-</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Megaloblastic anaemia: when DNA synthesis lags behind</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>DNA synthesis low · red cells very large · nerves damaged</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated supply chain, bone marrow, blood and nerve picture. Folate and vitamin B12 are both needed to make DNA building blocks. B12 is taken in with food, binds intrinsic factor from the stomach, and is absorbed in the terminal ileum. When folate or B12 is missing, marrow cells keep growing their cytoplasm but cannot divide their nucleus on time, so they release large red cells called macrocytes and neutrophils with too many nucleus lobes. B12 lack also damages myelin and nerves, which folate lack does not. Gauges show DNA synthesis, vitamin levels, red cell size and nerve health. Treatment choices are folate replacement and B12 replacement."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Megaloblastic anaemia: when DNA synthesis lags behind</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>DNA synthesis low · red cells very large · nerves damaged</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated supply chain, bone marrow, blood and nerve picture. Folate and vitamin B12 are both needed to make DNA building blocks. B12 is taken in with food, binds intrinsic factor from the stomach, and is absorbed in the terminal ileum. When folate or B12 is missing, marrow cells keep growing their cytoplasm but cannot divide their nucleus on time, so they release large red cells called macrocytes and neutrophils with too many nucleus lobes. B12 lack also traps folate in an unusable form and damages myelin and nerves, which folate lack does not. Folate tablets restock DNA blocks, B12 replacement frees trapped folate and reaches the marrow even when the gut cannot absorb, and gauges show DNA synthesis, vitamin levels, red cell size and nerve health. Treatment choices are folate replacement and B12 replacement."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
 <rect class="sc-tissue" x="14" y="44" width="286" height="396" rx="18"/>
 <rect class="sc-tissue mg-marrow" x="312" y="44" width="328" height="396" rx="18"/>
 <rect class="sc-tissue" x="652" y="44" width="294" height="396" rx="18"/>
@@ -289,6 +298,8 @@ body[data-theme="light"]{--c-fol:#4fa63c;--c-b12:#7c3aed;--c-if:#d9a92c;--c-myel
 <rect class="mg-vessel" x="672" y="92" width="254" height="168" rx="16"/>
 <rect class="mg-inset" x="336" y="292" width="280" height="92" rx="10"/>
 <path class="mg-axon" d="M682 352H928"/>
+<g id="stomachSlot"></g>
+<g id="bowelSlot"></g>
 <g id="supply"></g>
 <g id="marrow"></g>
 <g id="blood"></g>
@@ -296,15 +307,15 @@ body[data-theme="light"]{--c-fol:#4fa63c;--c-b12:#7c3aed;--c-if:#d9a92c;--c-myel
 <g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or schedules are shown or implied.</span></figcaption></figure>
 <div class="dr-controls">
   <label class="dr-range"><span>What is missing</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="vitamin B12 deficiency"><span class="dr-ticks"><i>folate low</i><i>B12 low</i><i>pernicious</i></span></label>
-  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">folate replacement</option><option value="2">vitamin B12 replacement</option><option value="3">folate and B12 replacement</option></select></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With folate and B12"><option value="0">no treatment</option><option value="1">folate replacement</option><option value="2">vitamin B12 replacement</option><option value="3">folate and B12 replacement</option></select></label>
   <button id="pause" type="button" aria-pressed="false">Pause motion</button>
 </div>
 <p id="status" class="dr-status" aria-live="polite"></p>
 <p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
 <h2>What the figure shows, and how sure we are</h2>
-<ul><li><strong>Why the cells become large.</strong> Folate, helped by vitamin B12, supplies one carbon units needed to build thymine and other DNA building blocks. Without enough of either vitamin, DNA copying slows while RNA and protein making in the cytoplasm carries on. The nucleus lags behind the cytoplasm (nuclear cytoplasmic asynchrony), marrow precursors grow large and divide fewer times, and the blood shows large red cells (macrocytes, raised mean cell volume) and neutrophils with extra nucleus lobes (hypersegmented neutrophils). This is standard teaching in haematology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>How B12 is absorbed, and pernicious anaemia.</strong> Vitamin B12 from food binds intrinsic factor, a protein made by parietal cells of the stomach. The combined complex is absorbed in the terminal ileum. In pernicious anaemia the immune system attacks parietal cells or intrinsic factor itself, so intrinsic factor is missing and B12 cannot be absorbed even when the diet contains enough. Folate is absorbed higher in the small bowel and does not need intrinsic factor. This is standard teaching in haematology and gastroenterology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Nerves, and the treatment trap.</strong> Vitamin B12 is also needed to keep myelin healthy, so B12 deficiency can damage the spinal cord and peripheral nerves, while folate deficiency alone does not do this. Giving folate to a person who lacks B12 can repair the blood picture while nerve damage carries on, which is why the missing vitamin must be identified. Treatment choices in the figure are teaching toggles only.</li></ul>
+<ul><li><strong>Why the cells become large.</strong> Folate, helped by vitamin B12, supplies one carbon units needed to build thymine and other DNA building blocks. Without enough of either vitamin, DNA copying slows while RNA and protein making in the cytoplasm carries on. The nucleus lags behind the cytoplasm (nuclear cytoplasmic asynchrony), marrow precursors grow large and divide fewer times, and the blood shows large red cells (macrocytes, raised mean cell volume) and neutrophils with extra nucleus lobes (hypersegmented neutrophils). This is standard teaching in haematology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>How B12 is absorbed, and pernicious anaemia.</strong> Vitamin B12 from food binds intrinsic factor, a protein made by parietal cells of the stomach. The combined complex is absorbed in the terminal ileum. In pernicious anaemia the immune system attacks parietal cells or intrinsic factor itself, so intrinsic factor is missing and B12 cannot be absorbed even when the diet contains enough. Folate is absorbed higher in the small bowel and does not need intrinsic factor. This is standard teaching in haematology and gastroenterology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Nerves, and the treatment trap.</strong> Vitamin B12 is also needed to keep myelin healthy, so B12 deficiency can damage the spinal cord and peripheral nerves, while folate deficiency alone does not do this. B12 lack also traps folate in a form the cell cannot use for DNA, so giving folate to a person who lacks B12 can repair the blood picture while nerve damage carries on, which is why the missing vitamin must be identified. Treatment choices in the figure are teaching toggles only.</li><li><strong>Organ art.</strong> Organ art is NIH BioArt Source, public domain.</li></ul>
 <p><strong>What was simplified.</strong> Causes of folate and B12 lack beyond diet and pernicious anaemia (bowel disease and surgery, medicines, pregnancy demand, alcohol), homocysteine and methylmalonic acid testing, antibodies and gastric biopsy, other blood lineages and pancytopenia, glossitis and other clinical features, how B12 replacement is given in practice, and all doses and schedules are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
-<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). Organ illustrations are NIH BioArt Source (public domain); all other drawing is original.</p>
 <p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
 </footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"What is missing","a":[0,1,2],"names":["folate deficiency","vitamin B12 deficiency","pernicious anaemia"],"ticks":["folate low","B12 low","pernicious"],"start":1},"settings":[{"label":"no treatment"},{"label":"folate replacement"},{"label":"vitamin B12 replacement"},{"label":"folate and B12 replacement"}],"drugNames":["no treatment","folate replacement","vitamin B12 replacement","folate and B12 replacement"],"status":"Picture: {level} · {drug} ·"}};
 const modelOf = function modelOf(S, level, drug) {
@@ -417,19 +428,375 @@ function run(scn) {
   start();
 }
 
-/* Megaloblastic anaemia scene: vitamin supply and absorption, marrow DNA failure, macrocytes, hypersegmented neutrophils and myelin. */
+/* Shared organ art for the animated mechanism scenes. Plain globals, ES2015, no imports.
+ * Inlined after bio.lib.js when buildScene gets organs:true, so mk/f1/clamp below are the shared ones.
+ * organ(parent, kind, x, y, w, opts) draws real anatomy art (NIH BioArt Source public domain,
+ * Servier Medical Art CC BY 3.0, one DBCLS CC BY 4.0 knee; injected as _ORG_ART by buildScene
+ * for the kinds the page uses) centred on x,y and w px wide, and falls back to the existing
+ * procedural layered silhouette for kinds without art (adrenal, uterus, thyroid, ganglion) or when art
+ * was not injected (liver, bladder and eye keep their procedural drawings as fallback).
+ * Art ports are fractions of the art viewBox (see _ORG_FRAC). The liver-4 art is the bare mass,
+ * so the lib adds a procedural gallbladder under the gall port plus short portal and hepatic
+ * vein stubs ending at the porta and hepvein ports.
+ * opts: { h (px height, else proportional), flip (mirror left/right), cls (extra class), id,
+ *   tint (a CSS colour with opacity, overlaid as an organ-shaped mask for disease states),
+ *   dim (dull the art) }.
+ * Returns { g, kind, x, y, w, h, ports, art } with absolute SVG coords; ports.in/out always exist.
+ * Art keeps its own colours (a faint contrast halo keeps it readable in dark and light themes);
+ * procedural fill is a vertical gradient whose stops derive from --cc (a theme aware palette var,
+ * so dark and light both work); edge stroke and landmark lines use color-mix detail classes.
+ * Emits no text, so label font and dash rules are inherited from the calling scene. */
+if (!document.getElementById("orgCss")) { var _orgSt = document.createElement("style"); _orgSt.id = "orgCss";
+  _orgSt.textContent = ".org-halo{filter:drop-shadow(0 0 1px rgba(0,0,0,.65)) drop-shadow(0 0 1px rgba(255,255,255,.45))}"
+  + ".org-b{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1.2;stroke-linejoin:round;stroke-linecap:round}"
+  + ".org-d{fill:none;stroke:color-mix(in srgb,var(--cc) 40%,var(--anatomy-hi));stroke-width:1;stroke-linecap:round;opacity:.8}"
+  + ".org-dk{fill:none;stroke:color-mix(in srgb,var(--cc) 62%,#000);stroke-width:1.1;stroke-linecap:round;opacity:.8}"
+  + ".org-f{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1;stroke-linejoin:round}"
+  + ".org-v{fill:none;stroke-linecap:round}"
+  + ".org-liver{--cc:var(--c-rbc)}.org-heart{--cc:var(--c-rbc)}.org-kidney{--cc:var(--c-eos)}.org-lung{--cc:var(--c-endo)}"
+  + ".org-stomach{--cc:var(--c-graft)}.org-brain{--cc:var(--c-mac)}.org-pancreas{--cc:var(--c-plt)}.org-spleen{--cc:var(--c-sm)}"
+  + ".org-bladder{--cc:var(--c-th2)}.org-uterus{--cc:var(--c-endo)}.org-ovary{--cc:var(--c-plt)}.org-thyroid{--cc:var(--c-neut)}.org-eye{--cc:#e6e1d4}.org-ganglion{--cc:var(--c-mac)}"
+  + ".org-adrenal{--cc:#e9a13b}"
+  + ".org-bowel{--cc:var(--c-graft)}.org-colon{--cc:var(--c-eos)}.org-ear{--cc:var(--c-plt)}.org-skin{--cc:#d9a58c}"
+  + ".org-muscle{--cc:var(--c-rbc)}.org-joint{--cc:#cfc8bd}.org-vessel{--cc:var(--c-rbc)}";
+  document.head.appendChild(_orgSt); }
+var _orgN = 0;
+/* per instance gradients: base (light -> base -> dark of --cc) plus a white top / dark bottom shade overlay */
+function _orgDefs(g) {
+  _orgN++; var id = "og" + _orgN, hid = "oh" + _orgN;
+  var defs = mk("defs", {}, g);
+  var lg = mk("linearGradient", { id: id, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  var s0 = mk("stop", { offset: "0", "stop-color": "#999" }, lg); s0.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 55%,#fff)");
+  var s1 = mk("stop", { offset: ".55", "stop-color": "#888" }, lg); s1.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 78%,var(--anatomy-paper))");
+  var s2 = mk("stop", { offset: "1", "stop-color": "#666" }, lg); s2.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 66%,#000)");
+  var hg = mk("linearGradient", { id: hid, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  mk("stop", { offset: "0", "stop-color": "#fff", "stop-opacity": ".2" }, hg);
+  mk("stop", { offset: ".55", "stop-color": "#fff", "stop-opacity": "0" }, hg);
+  mk("stop", { offset: "1", "stop-color": "#000", "stop-opacity": ".14" }, hg);
+  return { b: "url(#" + id + ")", h: "url(#" + hid + ")" };
+}
+/* one filled silhouette plus its shade overlay, same path data so the light stays inside */
+function _ob(g, d, G) {
+  mk("path", { class: "org-b", d: d, fill: G.b, stroke: "#666" }, g);
+  mk("path", { d: d, fill: G.h, stroke: "none", "pointer-events": "none" }, g);
+}
+function _ol(g, d, cls) { return mk("path", { class: cls || "org-d", d: d, fill: "none" }, g); }
+function _of(g, d, fillCss, cc) { var e = mk("path", { class: "org-f", d: d, stroke: "#666" }, g); e.setAttribute("style", "fill:" + fillCss + ";--cc:" + cc); return e; }
+function _ov(g, d, color, wdt) { var e = mk("path", { class: "org-v", d: d, fill: "none", stroke: "#777", "stroke-width": wdt, "stroke-linecap": "round" }, g); e.setAttribute("style", "stroke:" + color); return e; }
+function _odot(g, x, y, r, fillCss) { var e = mk("circle", { cx: x, cy: y, r: r, stroke: "none" }, g); e.setAttribute("style", "fill:" + fillCss); return e; }
+
+/* liver: big right lobe, smaller left lobe, falciform notch, gallbladder, porta hepatis stubs */
+function _orgLiver(g, G) {
+  _ov(g, "M-2 46L-2 18", "var(--d-ven)", 5); _ov(g, "M7 46L5 20", "var(--d-art)", 3); _ov(g, "M-11 46L-9 20", "var(--c-bac)", 2.5);
+  _ob(g, "M-6-30C22-33 44-25 50-7C54 9 40 25 18 30C2 33-5 22-7 6C-8-8-8-22-6-30Z", G);
+  _ob(g, "M-8-27C-24-27-40-19-48-6C-51 1-45 9-35 12C-24 15-11 9-8-1C-6-10-6-20-8-27Z", G);
+  _ol(g, "M-8-29C-7-18-6-6-4 6", "org-dk");
+  _ol(g, "M-2-28C14-29 30-24 40-14");
+  _of(g, "M10 18C16 16 22 18 23 24C24 31 19 37 14 36C9 35 7 28 8 23C8 21 9 19 10 18Z", "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  return { h0: 78, ports: { in: [-2, 46], out: [12, -30], porta: [-2, 18], gall: [16, 33], lobe: [20, 0] } };
+}
+/* heart: mass with apex down left, septum, coronary groove, aorta with arch, pulmonary split, caval stubs */
+function _orgHeart(g, G) {
+  _ov(g, "M-2-18L-2-44C-2-52-10-56-20-54C-28-52-32-46-32-38", "var(--d-art)", 8);
+  _ov(g, "M-8-52L-8-59M-15-54L-16-60M-22-53L-24-59", "var(--d-art)", 2.5);
+  _ov(g, "M12-16C8-28 2-34-4-38", "var(--d-ven)", 7);
+  _ov(g, "M-4-38C-12-40-20-38-28-34", "var(--d-ven)", 4.5); _ov(g, "M-4-38C4-40 12-38 20-34", "var(--d-ven)", 4.5);
+  _ov(g, "M20-20L20-52", "var(--d-ven)", 7); _ov(g, "M18 34L18 58", "var(--d-ven)", 7);
+  _ov(g, "M-36-2L-50-6M-34 14L-48 16", "var(--d-art)", 4);
+  _ob(g, "M-4-32C24-34 42-16 40 10C38 32 12 48-20 50C-34 44-40 24-36 2C-33-18-22-31-4-32Z", G);
+  _ol(g, "M0-30C4-10 0 14-14 44", "org-dk");
+  _ol(g, "M-34 6C-18 12 6 12 38 4");
+  _ol(g, "M-6-28C-14-18-18-6-20 8");
+  return { h0: 120, ports: { in: [20, -52], out: [-32, -38], ivc: [18, 58], apex: [-20, 50], pulm: [-28, -34] } };
+}
+/* kidney: bean with hilum, cortex rim, medulla rays, pelvis funnel, ureter, artery and vein stubs */
+function _orgKidney(g, G) {
+  _ov(g, "M-12 6C-22 12-28 18-28 30C-28 50-26 70-24 90", "var(--cc)", 4.5);
+  _ov(g, "M-50-8C-40-8-30-8-22-6", "var(--d-art)", 4); _ov(g, "M-50 10C-40 10-30 8-22 6", "var(--d-ven)", 5);
+  _ob(g, "M8-58C38-58 54-32 50 2C56 32 42 60 8 60C-8 60-16 48-19 34C-26 24-26-24-19-34C-16-48-8-58 8-58Z", G);
+  _ol(g, "M8-49C32-49 45-28 42 0C46 28 34 51 8 51C-1 51-8 43-10 32C-15 24-15-24-10-32C-8-43-1-49 8-49Z");
+  _ol(g, "M-6-30L14-38M-8-10L16-12M-8 12L16 14M-6 32L14 40");
+  _ol(g, "M16-44C30-36 38-20 38 0");
+  _of(g, "M-19-14C-8-12-2-8 2-2C-2 4-8 10-18 14C-22 8-22-8-19-14Z", "color-mix(in srgb,var(--cc) 35%,#fff)", "var(--cc)");
+  return { h0: 150, ports: { in: [-50, -8], out: [-24, 90], vein: [-50, 10], pelvis: [-12, 4], cortex: [30, 0] } };
+}
+/* lung: one lung with oblique fissure, hilum bronchus splitting into lobar and segmental branches */
+function _orgLung(g, G) {
+  _ov(g, "M-58 4L-30 4", "var(--anatomy-hi)", 6);
+  _ov(g, "M-30 4C-22-6-16-16-10-26", "var(--anatomy-hi)", 4.5); _ov(g, "M-30 4C-22 14-14 24-6 34", "var(--anatomy-hi)", 4.5);
+  _ov(g, "M-18-14L-28-22M-16-16L-8-24M-14-20L-14-32M-20 16L-30 24M-16 20L-6 28M-12 26L-10 38", "var(--anatomy-hi)", 2);
+  _ov(g, "M-58-8L-34-6", "var(--d-ven)", 4); _ov(g, "M-58 14L-34 12", "var(--d-art)", 4);
+  _ob(g, "M2-60C24-56 40-32 43 8C45 38 32 60 2 62C-24 62-40 42-42 10C-44-24-20-58 2-60Z", G);
+  _ol(g, "M-40-2C-20 8 0 22 24 40", "org-dk");
+  _ol(g, "M-8-48C8-50 22-40 30-26");
+  return { h0: 130, ports: { in: [-58, 4], out: [-58, 14], art: [-58, -8], apex: [2, -60], base: [2, 62] } };
+}
+/* stomach: J shape with fundus dome, rugae, antrum sweep, pylorus ring, oesophagus and duodenum stubs */
+function _orgStomach(g, G) {
+  _of(g, "M-38-58L-22-58L-22-36L-38-36Z", "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))", "var(--cc)");
+  _ob(g, "M-38-36C-46-24-50-8-46 10C-42 30-30 46-12 50C6 54 28 46 40 32C44 27 46 23 46 18L34 14C30 22 20 30 6 32C-8 34-22 26-28 12C-33-1-31-16-26-28C-24-32-22-34-22-36Z", G);
+  _ol(g, "M-36-10C-30 6-22 20-8 28M-28-22C-22-6-12 10 4 22M-16-30C-10-14 0 2 14 12");
+  _ol(g, "M40 15C43 19 43 25 40 29M34 14C37 18 37 26 34 30", "org-dk");
+  _ol(g, "M46 16L60 22M44 28L58 32", "org-dk");
+  return { h0: 116, ports: { in: [-30, -58], out: [60, 27], fundus: [-40, -12], antrum: [24, 38], pylorus: [40, 22] } };
+}
+/* brain lateral: cerebrum with Sylvian fissure and gyri, cerebellum with folia, tapered brainstem */
+function _orgBrain(g, G) {
+  _ov(g, "M10 50L10 64", "var(--d-art)", 5);
+  _ob(g, "M-50-6C-50-32-24-42 4-40C30-38 44-28 44-8C44 10 32 24 8 28C-18 31-50 24-50-6Z", G);
+  _ol(g, "M-12 10C2 6 18 2 34-4", "org-dk");
+  _ol(g, "M-38-20C-32-10-32 2-38 12M-26-30C-20-20-20-6-26 6M-4-32C2-22 2-8-4 2M10-30C16-20 16-6 10 4M28-22C34-14 34-2 28 8");
+  _ol(g, "M-16 6L-24-4M-10 4L-12-8", "org-dk");
+  _ob(g, "M2 24L16 24L12 56L6 56Z", G);
+  _ol(g, "M2 36C6 38 12 38 16 36");
+  _ob(g, "M22 24C34 22 46 26 48 34C50 42 42 48 32 47C24 46 20 38 20 32C20 28 20 26 22 24Z", G);
+  _ol(g, "M24 32L44 32M25 37L43 37M27 42L41 42");
+  return { h0: 110, ports: { in: [10, 64], out: [4, -40], parenchyma: [-8, -6], cereb: [34, 35], frontal: [-40, -8] } };
+}
+/* pancreas: bulky head right, tapering tail left, main duct with side branches, islet dots */
+function _orgPancreas(g, G) {
+  _ob(g, "M-50-4C-32-14-8-14 14-10C32-7 46-2 49 10C51 21 40 28 26 25C8 21-20 12-50 6Z", G);
+  _ol(g, "M-46 1C-20-2 10 0 38 10", "org-dk");
+  _ol(g, "M-30-1L-34-8M-10-1L-14-9M8 0L4-8M-28 1L-32 8M-6 1L-10 8M12 2L8 10");
+  _ol(g, "M52-6C58 4 58 16 50 24");
+  _odot(g, -20, -2, 1.6, "var(--d-art)"); _odot(g, 0, 0, 1.6, "var(--d-art)"); _odot(g, 22, 6, 1.6, "var(--d-art)");
+  return { h0: 60, ports: { in: [-10, -12], out: [49, 12], head: [36, 8], tail: [-48, 1] } };
+}
+/* spleen: crescent with top notch, trabeculae, hilar artery and vein stubs below */
+function _orgSpleen(g, G) {
+  _ov(g, "M-30 52C-28 44-26 40-22 36", "var(--d-art)", 3.5); _ov(g, "M-20 54C-19 46-17 42-13 38", "var(--d-ven)", 4.5);
+  _ob(g, "M-38-30C-8-40 28-34 44-12C52 4 44 26 20 34C-4 41-34 32-44 10C-48-4-46-22-38-30Z", G);
+  _ol(g, "M-8-36C-4-33 0-33 4-36", "org-dk");
+  _ol(g, "M-30-10C-10-2 12-2 32-10M-28 8C-8 16 12 16 30 8");
+  return { h0: 96, ports: { in: [-30, 52], out: [-20, 54], hilum: [-18, 37], pulp: [0, 0] } };
+}
+/* adrenal: small cap that sits on the kidney pole, cortex rim, medulla fold, vessel stubs */
+function _orgAdrenal(g, G) {
+  _ov(g, "M-52 8L-38 8", "var(--d-art)", 3.5); _ov(g, "M38 8L52 8", "var(--d-ven)", 4);
+  _ob(g, "M-45 18C-40-6-22-26 0-26C22-26 40-6 45 18C30 10 15 6 0 6C-15 6-30 10-45 18Z", G);
+  _ol(g, "M-36 10C-28-2-14-10 0-10C14-10 28-2 36 10");
+  _ol(g, "M-20 4C-10 1 10 1 20 4", "org-dk");
+  _odot(g, -12, -8, 1.8, "var(--d-art)"); _odot(g, 8, -12, 1.8, "var(--d-art)");
+  return { h0: 60, ports: { in: [-52, 8], out: [52, 8], cortex: [0, -22], medulla: [0, 2] } };
+}
+/* ganglion: sensory ganglion with capsule, fibre stubs, satellite glia dots, one big soma with nucleus */
+function _orgGanglion(g, G) {
+  _ov(g, "M-52 0L-30 0", "var(--anatomy-hi)", 7);
+  _ov(g, "M30 0L52 0", "var(--anatomy-hi)", 7);
+  _ob(g, "M-32-27C-12-37 13-37 30-25C43-12 43 12 30 25C13 37-12 37-32 27C-42 13-42-13-32-27Z", G);
+  _ol(g, "M-27-21C-10-29 12-29 26-19");
+  _of(g, "M-16 0C-16-9-9-16 0-16C9-16 16-9 16 0C16 9 9 16 0 16C-9 16-16 9-16 0Z", "color-mix(in srgb,var(--cc) 62%,var(--anatomy-paper))", "var(--cc)");
+  _of(g, "M-7 0C-7-4-4-7 0-7C4-7 7-4 7 0C7 4 4 7 0 7C-4 7-7 4-7 0Z", "color-mix(in srgb,var(--cc) 45%,#1a1030)", "var(--cc)");
+  _odot(g, 2, 1, 1.8, "color-mix(in srgb,var(--cc) 70%,#fff)");
+  _odot(g, -25, -13, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 25, -12, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 0, 28, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _ol(g, "M-13-8L-22-16M13-8L22-16");
+  return { h0: 96, ports: { in: [-52, 0], out: [52, 0], soma: [0, 0], nucleus: [0, 0] } };
+}
+/* bladder: dome with detrusor arcs, trigone, ureters in from above, urethra out below */
+function _orgBladder(g, G) {
+  _ov(g, "M-52-44C-44-34-36-26-30-18", "var(--cc)", 4); _ov(g, "M52-44C44-34 36-26 30-18", "var(--cc)", 4);
+  _ob(g, "M0-50C26-48 40-30 40-6C40 16 26 32 8 40L-8 40C-26 32-40 16-40-6C-40-30-26-48 0-50Z", G);
+  _ob(g, "M-8 40L8 40L8 64L-8 64Z", G);
+  _ol(g, "M-8 52L8 52", "org-dk");
+  _ol(g, "M-24-8L24-8L0 24Z");
+  _ol(g, "M-28-28C-12-36 12-36 28-28M-34-12C-16-22 16-22 34-12");
+  return { h0: 120, ports: { in: [-52, -44], out: [0, 64], inR: [52, -44], trigone: [0, 8], dome: [0, -48] } };
+}
+/* uterus: fundus, cavity, cervix, tubes with fimbriae, ovaries with follicles */
+function _orgUterus(g, G) {
+  _ov(g, "M-16-16C-26-17-32-19-38-23", "var(--cc)", 3.5); _ov(g, "M16-16C26-17 32-19 38-23", "var(--cc)", 3.5);
+  _ov(g, "M-38-23L-44-27M-38-23L-45-23M-38-23L-44-19M-38-23L-42-29", "var(--cc)", 1.2);
+  _ov(g, "M38-23L44-27M38-23L45-23M38-23L44-19M38-23L42-29", "var(--cc)", 1.2);
+  var eo = mk("ellipse", { class: "org-f", cx: -45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var eo2 = mk("ellipse", { class: "org-f", cx: 45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo2.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var _fol = "color-mix(in srgb,var(--c-plt) 45%,#000)";
+  _odot(g, -47, -14, 1.6, _fol); _odot(g, -43, -8, 1.6, _fol); _odot(g, -46, -4, 1.4, _fol);
+  _odot(g, 47, -14, 1.6, _fol); _odot(g, 43, -8, 1.6, _fol); _odot(g, 46, -4, 1.4, _fol);
+  _ob(g, "M-16-20C-8-26 8-26 16-20C20-2 15 20 8 32L-8 32C-15 20-20-2-16-20Z", G);
+  _of(g, "M-10-14L10-14L0 22Z", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  _ol(g, "M-11 18L11 18", "org-dk"); _ol(g, "M0 18L0 32");
+  return { h0: 100, ports: { in: [-45, -22], out: [0, 33], ovL: [-45, -10], ovR: [45, -10], fundus: [0, -24] } };
+}
+/* ovary: almond body with surface arcs, hilar artery and vein stubs at the hilum */
+function _orgOvary(g, G) {
+  _ov(g, "M-52 0L-40 0", "var(--d-art)", 3); _ov(g, "M40 0L52 0", "var(--d-ven)", 3.5);
+  _ob(g, "M-40-6C-30-24-5-30 15-26C33-22 42-10 40 6C38 22 20 30 0 29C-20 28-38 14-40-6Z", G);
+  _ol(g, "M-28-12C-16-20 0-23 14-21");
+  _ol(g, "M-32 4C-20 12-2 17 14 14", "org-dk");
+  return { h0: 70, ports: { in: [-52, 0], out: [52, 0], dom: [0, 0], surf: [0, -27] } };
+}
+/* thyroid butterfly: two lobes, isthmus bridge, trachea rings behind, parathyroid dots */
+function _orgThyroid(g, G) {
+  _ov(g, "M-7-40L-7 40M7-40L7 40", "var(--anatomy-hi)", 2);
+  _ov(g, "M-7-28L7-28M-7-12L7-12M-7 24L7 24M-7 36L7 36", "var(--anatomy-hi)", 1.2);
+  _ob(g, "M16-32C28-30 35-16 33 4C31 22 25 32 16 32C8 32 6 20 8 2C10-14 11-28 16-32Z", G);
+  _ob(g, "M-16-32C-28-30-35-16-33 4C-31 22-25 32-16 32C-8 32-6 20-8 2C-10-14-11-28-16-32Z", G);
+  _ob(g, "M-10 6L10 6L10 16L-10 16Z", G);
+  _ol(g, "M14-20C18-10 18 6 14 20M-14-20C-18-10-18 6-14 20");
+  _odot(g, -30, 8, 2, "var(--c-plt)"); _odot(g, 30, -4, 2, "var(--c-plt)");
+  return { h0: 90, ports: { in: [16, -34], out: [0, 36], isthmus: [0, 11], lobeR: [22, 0], lobeL: [-22, 0] } };
+}
+/* eye: sclera ball with cornea bulge, iris and pupil facing left, retina arc, optic nerve stub right */
+function _orgEye(g, G) {
+  _ov(g, "M26 0L54 0", "var(--c-plt)", 8);
+  _ob(g, "M-36-4C-34-22-16-32 4-30C24-28 34-12 32 4C30 20 14 30-4 29C-22 28-36 14-36-4Z", G);
+  _of(g, "M-39 0C-39-6-35-11-30-11C-25-11-21-6-21 0C-21 6-25 11-30 11C-35 11-39 6-39 0Z", "color-mix(in srgb,var(--c-endo) 70%,var(--anatomy-paper))", "var(--c-endo)");
+  _odot(g, -30, 0, 5, "#241a12");
+  _odot(g, -32, -3.5, 1.5, "#ffffff");
+  _ol(g, "M16-15C23-5 23 7 15 17");
+  return { h0: 70, ports: { in: [-41, 0], out: [54, 0], retina: [16, 0], lens: [-20, 0] } };
+}
+/* Real-art store, filled by buildScene after this lib: _ORG_ART[kind] = { vb:[x,y,w,h],
+ * pfx:"oaxxx", body:"<inner svg markup>" }. Ports are fractions of the viewBox, measured
+ * off the slimmed art (see tools/figures/dev/svgslim.py); content fills the frame. */
+var _ORG_ART = {};
+var _ORG_FRAC = {
+  liver: { in: [.35, .95], out: [.40, .01], porta: [.35, .95], hepvein: [.40, .01], gall: [.55, .66], lobe: [.15, .70] },
+  heart: { in: [.30, .01], out: [.48, .01], aorta: [.48, .01], ivc: [.28, .90], apex: [.70, .97], pulm: [.60, .08] },
+  kidney: { in: [.04, .36], out: [.38, .97], vein: [.04, .46], pelvis: [.36, .41], cortex: [.62, .45], hilum: [.28, .41] },
+  lung: { in: [.46, .53], out: [.44, .60], art: [.44, .48], apex: [.24, .30], base: [.24, .87], trachea: [.49, .01], carina: [.49, .50], hilumL: [.42, .58], hilumR: [.56, .58], apexR: [.75, .34], baseR: [.75, .86] },
+  stomach: { in: [.42, .00], out: [.50, .95], fundus: [.38, .10], antrum: [.52, .30], pylorus: [.60, .35] },
+  intestine: { in: [.58, .38], out: [.50, .95], duodenum: [.60, .40], jejunum: [.42, .60], ileum: [.50, .72], cecum: [.60, .82], colon: [.28, .60], rectum: [.50, .92] },
+  brain: { in: [.60, .97], out: [.42, .04], parenchyma: [.42, .42], cereb: [.76, .78], frontal: [.08, .40], stem: [.60, .93], carotid: [.16, .75] },
+  pancreas: { in: [.50, .08], out: [.95, .50], head: [.85, .45], tail: [.06, .45], body: [.50, .45] },
+  spleen: { in: [.38, .78], out: [.52, .78], hilum: [.45, .72], pulp: [.50, .38] },
+  bowel: { in: [.21, .03], out: [.80, .99], coils: [.52, .52] },
+  colon: { in: [.75, .72], out: [.50, .98], caecum: [.75, .72], rectum: [.50, .98], ascending: [.88, .58], transverse: [.50, .62], descending: [.23, .44], sigmoid: [.42, .82] },
+  bladder: { in: [.25, .01], out: [.50, .99], inR: [.73, .01], trigone: [.50, .70], dome: [.50, .28] },
+  eye: { in: [.02, .50], out: [.99, .55], retina: [.75, .50], lens: [.19, .51], cornea: [.08, .50], nerve: [.99, .55] },
+  ear: { in: [.35, .45], out: [.02, .55], canals: [.57, .18], vestibule: [.50, .45], cochlea: [.55, .75], nerve: [.02, .55] },
+  skin: { in: [.50, .13], out: [.50, .97], surface: [.50, .13], epidermis: [.50, .17], dermis: [.47, .55], hypodermis: [.50, .92] },
+  muscle: { in: [.02, .50], out: [.99, .71], belly: [.32, .48], fibre: [.72, .58] },
+  joint: { in: [.50, .04], out: [.52, .96], femur: [.50, .20], joint: [.54, .58], patella: [.51, .52], tibia: [.52, .80], fibula: [.40, .78] },
+  vessel: { in: [.50, .01], out: [.50, .99], lumen: [.50, .05], wall: [.90, .50] }
+};
+/* liver-4 is the bare mass, so add the missing bits procedurally in art units
+ * (fractions of the liver-4 viewBox): a gallbladder blob under the art at the
+ * gall port (its fundus peeks below the inferior edge), a portal stub rising
+ * to the porta tip and a hepatic stub leaving at the hepvein tip. Drawn before
+ * the art group so the mass covers the joins; the inner flip mirrors them. */
+function _orgLiverExtra(inner, A, opts) {
+  var vw = A.vb[2], vh = A.vb[3];
+  var X = function (f) { return f1(f * vw); }, Y = function (f) { return f1(f * vh); };
+  var g = mk("g", {}, inner);
+  if (opts.dim) g.setAttribute("opacity", ".5");
+  _ov(g, "M" + X(.35) + " " + Y(.95) + "L" + X(.35) + " " + Y(.78), "var(--d-ven)", 11);
+  _ov(g, "M" + X(.40) + " " + Y(.01) + "L" + X(.40) + " " + Y(.14), "var(--d-ven)", 11);
+  var gb = _of(g, "M" + X(.55 - 17 / vw) + " " + Y(.63) + "a17 23 0 1 0 34 0a17 23 0 1 0 -34 0",
+    "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  gb.setAttribute("stroke-width", "2.2");
+  return g;
+}
+/* draw the injected art centred on x,y at w px wide. The art is clipped to its
+ * frame; tint overlays an organ-shaped translucent mask (the art itself, reused
+ * as a mask); dim dulls the art. Art ids are suffixed per instance so two of
+ * the same organ on one page never share gradient, clip or mask ids. */
+function _orgArt(parent, kind, x, y, w, opts, A) {
+  var vb = A.vb, vw = vb[2], vh = vb[3], cx = vb[0] + vw / 2, cy = vb[1] + vh / 2;
+  _orgN++;
+  var uid = "u" + _orgN;
+  var outer = mk("g", { class: "org org-art org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var sx = w / vw, sy = opts.h ? opts.h / vh : sx, fx = opts.flip ? -1 : 1;
+  var inner = mk("g", { transform: "translate(" + f1(-fx * cx * sx) + " " + f1(-cy * sy) + ") scale(" + (fx * sx).toFixed(4) + " " + sy.toFixed(4) + ")" }, outer);
+  var defs = mk("defs", {}, inner);
+  var cid = A.pfx + uid + "-frame";
+  var cp = mk("clipPath", { id: cid }, defs);
+  mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, cp);
+  if (kind === "liver") _orgLiverExtra(inner, A, opts);
+  var art = mk("g", { class: "org-halo", "clip-path": "url(#" + cid + ")" }, inner);
+  var aid = A.pfx + uid + "-art";
+  art.setAttribute("id", aid);
+  art.innerHTML = A.body.split('id="' + A.pfx + '-').join('id="' + A.pfx + uid + '-')
+    .split('url(#' + A.pfx + '-').join('url(#' + A.pfx + uid + '-')
+    .split('href="#' + A.pfx + '-').join('href="#' + A.pfx + uid + '-');
+  if (opts.dim) art.setAttribute("opacity", ".5");
+  if (opts.tint) {
+    var mid = A.pfx + uid + "-tintm";
+    var m = mk("mask", { id: mid, maskUnits: "userSpaceOnUse", x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, defs);
+    mk("use", { href: "#" + aid }, m);
+    var tg = mk("g", { "clip-path": "url(#" + cid + ")" }, inner);
+    mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh), fill: opts.tint, mask: "url(#" + mid + ")" }, tg);
+  }
+  var ports = {}, F = _ORG_FRAC[kind], k;
+  for (k in F) ports[k] = [Math.round((x + fx * (vb[0] + F[k][0] * vw - cx) * sx) * 10) / 10, Math.round((y + (vb[1] + F[k][1] * vh - cy) * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(vh * sy * 10) / 10, ports: ports, art: true };
+}
+/* dispatcher: outer g carries the theme class and gradients, inner g the local drawing scaled to w */
+function organ(parent, kind, x, y, w, opts) {
+  opts = opts || {};
+  if (_ORG_FRAC[kind] && _ORG_ART[kind]) return _orgArt(parent, kind, x, y, w, opts, _ORG_ART[kind]);
+  var outer = mk("g", { class: "org org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var G = _orgDefs(outer);
+  var inner = mk("g", {}, outer);
+  var r;
+  if (kind === "liver") r = _orgLiver(inner, G);
+  else if (kind === "heart") r = _orgHeart(inner, G);
+  else if (kind === "kidney") r = _orgKidney(inner, G);
+  else if (kind === "lung") r = _orgLung(inner, G);
+  else if (kind === "stomach") r = _orgStomach(inner, G);
+  else if (kind === "brain") r = _orgBrain(inner, G);
+  else if (kind === "pancreas") r = _orgPancreas(inner, G);
+  else if (kind === "spleen") r = _orgSpleen(inner, G);
+  else if (kind === "ganglion") r = _orgGanglion(inner, G);
+  else if (kind === "eye") r = _orgEye(inner, G);
+  else if (kind === "bladder") r = _orgBladder(inner, G);
+  else if (kind === "uterus") r = _orgUterus(inner, G);
+  else if (kind === "ovary") r = _orgOvary(inner, G);
+  else if (kind === "thyroid") r = _orgThyroid(inner, G);
+  else if (kind === "adrenal") r = _orgAdrenal(inner, G);
+  else throw new Error("organ: unknown kind " + kind);
+  var sx = w / 100, sy = opts.h ? opts.h / r.h0 : sx, fx = opts.flip ? -1 : 1;
+  inner.setAttribute("transform", "scale(" + (fx * sx).toFixed(3) + " " + sy.toFixed(3) + ")");
+  var ports = {}, k;
+  for (k in r.ports) ports[k] = [Math.round((x + fx * r.ports[k][0] * sx) * 10) / 10, Math.round((y + r.ports[k][1] * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(r.h0 * sy * 10) / 10, ports: ports, art: false };
+}
+organ.kinds = ["liver", "heart", "kidney", "lung", "stomach", "intestine", "brain", "pancreas", "spleen", "bladder", "uterus", "ovary", "thyroid", "eye", "ganglion", "bowel", "colon", "ear", "skin", "muscle", "joint", "vessel", "adrenal"];
+
+_ORG_ART["stomach"]={vb:[0,0,500,500],pfx:"oasto",body:"<defs><filter id=\"oasto-luminosity-invert\" x=\"37.2\" y=\"-17.4\" width=\"429.3\" height=\"517.6\" color-interpolation-filters=\"sRGB\" filterUnits=\"userSpaceOnUse\"><feColorMatrix result=\"cm\" values=\"-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0\" /></filter><linearGradient id=\"oasto-linear-gradient\" x1=\"253.2\" y1=\"43.9\" x2=\"253.2\" y2=\"79\" gradientTransform=\"translate(521.9 -.5) rotate(90)\" gradientUnits=\"userSpaceOnUse\"><stop offset=\"0\" stop-color=\"#fff\" /><stop offset=\"1\" stop-color=\"#000\" /></linearGradient><mask id=\"oasto-mask\" x=\"37.2\" y=\"-17.4\" width=\"429.3\" height=\"517.6\" maskUnits=\"userSpaceOnUse\"><g filter=\"url(#oasto-luminosity-invert)\"><rect x=\"5.3\" y=\"39.1\" width=\"493.1\" height=\"427.2\" transform=\"translate(-2 503.5) rotate(-89.8)\" fill=\"url(#oasto-linear-gradient)\" /></g></mask><clipPath id=\"oasto-clippath\"><path d=\"M233.7 -11.4l6.9 38.7 3.3 23.4 4.6 53.7 .2 16.6 -1.1 8.6 -5 8.3 -2.9 2.8 -3.4 1.8 -19.1 .7 -6.4 5.1 -10.2 1.2 -7.9 1.9 -4.1 1.9 -4.2 3.1 -6.2 8 -3.2 8.7 -1.7 12.4 -.1 7.8 -3.8 -1.3 -5.2 -.4 -2.8 .5 -2.7 1.6 -7.1 -3.3 -5.4 -.8 -5.9 2.1 -7.1 6.4 -2.8 4.7 -1.6 5.7 -2.9 1.9 -2.7 3.5 -1.5 6.5 -5.1 4.7 -2 3.8 -.4 7.5 -1.9 1.8 -1.5 3.1 -1 8.4 -1.4 1.8 -1.1 4.2 .3 5 1.8 5.7 -2.8 3.4 -1.3 3.4 .3 2.5 -3.2 3.3 -2.3 5.7 .2 4.3 2.5 6.3 -3.4 6.1 -1.9 9.1 1.4 5.8 4 6.6 -2.5 5.1 -.7 5.1 1.7 4 4.5 4 -.3 12.4 2.3 8 4.5 6.1 6.1 5.6 12.2 5.6 5.4 4.3 1.7 2.2 5.5 13.3 3.6 4.6 4.3 1.8 -6.7 -12.5 -.6 -2.5 .5 -2.3 5.4 -8.7 2.2 -6.4 4.5 -5.3 7.8 -13.1 -2.7 14.6 .7 7.5 2.3 5.6 2.5 1.3 5.3 1.1 4.9 -.2 1.7 -.9 11.3 7.6 7.8 3.6 12.5 1.1 11.7 -1 -4.2 4.9 -4.1 7.5 -1.7 6 -.2 6.4 2 7 5.6 11.6 -2.7 16.6 .9 7.8 6.4 16 .8 3.8 3.6 .3 1.5 -.1 1.4 -4.4 6.1 -10.3 2.7 -7.6 .1 -4.3 -1.4 -7 -4.4 -8.8 5.3 -6.3 1.7 -4 .3 -2.9 -1.5 -6.7 -3.9 -9.5 14.1 7.3 7.9 2.6 5.9 .7 9.5 -.2 15.9 -2.1 9.6 -2.2 7 -2.7 10.3 -5.9 5.2 -4.7 2.9 -4.3 7.4 -15.6 9.1 -9.5 2.2 -4.7 .8 -5.3 3.3 -2.8 1.9 -2.7 .7 -3.3 -.9 -10.4 3.8 -5.7 1.6 -4.5 -.9 -11.3 5.1 -7.6 1.3 -5.3 -3.1 -12 2.4 -12 -2.1 -11.9 2.7 -8.4 -3.2 -9.6 4.1 -10.1 -2.7 -9.9 2.8 -8.3 .4 -4.6 -4.8 -15 .8 -2.4 4.1 -3.1 .7 -8.3 -.8 -6.1 -1.7 -3.4 -7 -5.5 -7 -3 -4.7 -1.1 -12.1 -.2 -7.8 1.7 -4.3 2.7 -1.7 2 -7.1 .9 -5.7 1.6 -3 1.8 -2.3 2.7 -7 2.3 -4.7 3.6 -6.7 .8 -2.2 1.4 -4.8 -.3 -6.6 2 -3.7 2.3 -2 2.9 -7.3 -.8 -7.5 .9 -2.2 4.1 -8.4 -1.4 -7.3 0 -4.1 .9 -6.2 -.9 -3.4 1.6 -1.6 2.7 -20.2 -5.9 .7 -15.6 1.8 -6.1 4.2 -5 3.2 -2 4.5 -1.5 2.6 .2 1.8 1 13.5 10 6.2 3.5 11.2 2.4 12.6 .6 15.7 -1.5 17.8 -4.7 9.3 -3.9 18.2 -10.9 14.1 -10.9 5.4 -5.3 7.9 -10.6 4.4 -11.1 1.3 -12.3 -.4 -6.2 -2.6 -10.9 -2.1 -4.7 -5.4 -7.7 -6.4 -5.6 -6.8 -3.5 -6.4 -1.9 -7.3 -.8 -8.3 .9 -4.5 1.3 -9.8 4.7 -5.3 3.6 -10.8 11 -2 -.4 -2.2 -2 -2.3 -3.4 -1.7 -5 -.9 -21.7 -10.1 -82.9 -.6 -.8 -3.5 -.2Z\" fill=\"none\" /></clipPath></defs><g><g id=\"oasto-Layer_1\"><path d=\"M145.6 266.6l-6.2 38.2 3.1 11.7 2.8 5 5.4 6.6 17 0 1.8 .9 5.5 9 -3.7 -.6 -7.3 .6 -4.2 5.4 -2.3 6.1 -.5 3 3.6 9 .8 12 1.7 7.3 2.4 2 6.8 1.9 6.8 -1.2 13.3 8.1 9.2 3.9 11.5 .2 22.6 -2.4 17.3 -.9 4.1 -2.5 2 -2.3 -.6 -10.8 6.4 2.6 11.1 1.1 14.4 -15.6 1.5 -5.8 .5 -8.9 8 -13.4 6.7 -.3 12.4 -8.4 5.3 -7 4.2 -7.9 -.5 -16.8 4.2 -13 .6 -7.1 -.6 -6.9 -2.7 -8.5 -3 -4.7 -2 -1.3 -6.8 -1.2 5.9 -8.8 1.2 -3.9 -.1 -3.4 -4 -13.1 -4.7 -3.5 -1.4 -4.1 -3.2 -2.1 -8.4 .1 -7.1 1.3 -34.6 8.2 -28.6 5.7 -54.6 9.6 -16.2 1.8 -18.5 8.8 -4.7 8Z\" fill=\"#f7e2e2\" /><g mask=\"url(#oasto-mask)\"><g><g><path d=\"M171.1 190.6l-.9 11.1 6.6 7.1 1.2 .8 15.5 .6 -1.8 -9 1 -12.9 5 -8.3 2.4 -2.2 3.3 -1.5 5.7 1 20.9 14.1 6.4 1.5 11.3 .7 22.1 -2.5 8.8 -1.8 22.1 -7.8 12.4 -6.6 5.5 -4 21.5 -21 4.5 -7.3 4.1 -14.4 .9 -8 -.3 -5.1 -3 -9.6 -4.1 -9.3 -3.6 -5.5 -6.9 -5.3 -8.2 -3.7 -7.7 -2.1 -5.8 -.4 -7.2 .8 -8.2 1.9 -7.1 3.2 -7.6 6.1 -9.1 9.2 -1.7 -.7 -3.2 -4.3 -1.6 -3.9 -1.2 -23 -5.6 -50.8 -4.4 -30.6 -2.1 -3 -5.7 -.2 -13.8 4 8.2 46.2 2.4 19.5 3.3 30.6 1.5 43.8 -3.9 8 -3.9 4.1 -9.9 1.7 -12.3 -.2 -6 5.6 -16.8 2 -8.9 5.6 -5.5 5.4 -2.5 4.5 -4.1 13.3Z\" fill=\"#f6b7b7\" /><path d=\"M173.1 193.2l.2 -6.5 2.2 -7.9 5.9 -13.3 6 -8.5 6.1 -3.8 3.9 -1.2 15.4 -1.6 3.4 -.9 4.1 -2.7 13.1 -.8 7.9 -1.9 4 -2.6 4 -9.6 1.6 -11.5 -.1 -9.1 -4.5 -54 -2.6 -20.9 -8.8 -49.7 -2.6 1.6 2 16.3 5.9 29.7 2 15.2 4.3 45 1.1 32 -5.2 9.4 -3.8 3.5 -3.5 2 -17.8 .9 -7.4 4.4 -17.4 2.8 -5 2.1 -10.1 11.3 -2.6 5.3 -2.5 8.4 -1.6 14.3Z\" fill=\"#f9f5f5\" opacity=\".7\" /><path d=\"M249.5 -15.4l2.5 1.2 10.1 82.9 .5 18.6 1.1 5.9 2.1 4.2 3.4 3.5 2 .4 9.6 -10.1 4.3 -3.2 8.9 -4.9 8.1 -2.6 12 -.5 6.9 1.5 5.9 2.4 6.7 4.6 3.1 3.1 5.4 7.7 2.1 4.7 2.6 10.9 .4 6.2 -1.3 12.3 -4.4 11.1 -3.5 5.3 -9.8 10.6 -14.1 10.9 -8.8 5.7 -11.8 6.3 -11.6 4.4 -11.1 2.8 -15.2 1.8 -13.9 -.3 -12.5 -2.6 -6.1 -3.5 -13.4 -10 -1.8 -1 -2.7 -.2 -4.5 1.5 -3.2 2 -4.2 5 -1.8 6.1 -.7 15.6 20.2 5.9 2 -3 3.4 -1.3 5.9 1 4.6 -.9 7.4 0 7.9 1.3 2.4 -4.2 7.7 -.9 6.9 .8 2.7 -3.5 5 -2.5 5.4 -1.3 4 .4 2.2 -1.4 6.7 -.8 4.7 -3.6 7 -2.3 2.3 -2.7 3 -1.8 5.7 -1.6 7.1 -.9 2.7 -2.9 5.4 -2.6 8.3 -1.1 9.6 .3 7.1 2 6.7 3.4 4.9 4.2 1.7 3.4 .7 4 -.6 10.4 -4.1 3.1 -.8 2.4 4.8 15 -.4 4.6 -2.8 7.6 2.7 10.7 -4.1 10.1 3.2 9.6 -2.7 8.4 2.1 11.9 -2.4 12 3.1 12 -1.3 5.3 -5.1 7.7 .9 11.3 -1.6 4.5 -3.8 5.7 .9 10.4 -.7 3.3 -5.2 5.6 -.8 5.3 -2.2 4.7 -9.1 9.5 -7.4 15.6 -6.3 7.7 -7.8 5 -10.1 4.7 -12.1 2.9 -17.9 2 -9 -.1 -5.6 -1.2 -11 -4.4 -8.5 -4.9 3.9 9.5 1.5 6.7 -.3 2.9 -1.7 4 -5.3 6.3 4.4 8.8 1.4 7 -.1 4.3 -2.7 7.6 -6.1 10.3 -1.4 4.4 -2.3 0 -2.8 -.3 -.8 -3.8 -6.4 -16 -.9 -7.8 2.7 -16.6 -5.6 -11.6 -2 -7 .2 -6.4 1.7 -6 4.1 -7.5 4.2 -4.9 -12.4 1 -10.6 -.9 -7.1 -2.8 -13.2 -8.7 -2.1 1 -3.5 .2 -8.2 -2 -2.5 -4.2 -1 -7.5 .3 -5.5 2.4 -10.8 -7.8 13.1 -4.5 5.3 -2.2 6.4 -5.8 9.9 1 5.1 6.1 11 -2.4 -.5 -2 -1.4 -3.5 -4.6 -5.4 -13.1 -1.7 -2.2 -5.4 -4.3 -12.2 -5.6 -6.1 -5.6 -4.5 -6.1 -2.3 -8 .3 -12.4 -3.8 -3.1 -2.2 -3.8 .6 -6.2 2.5 -5.1 -4.7 -8.3 -.7 -6.3 2.4 -8.5 2.8 -4.5 -2.5 -6.3 .1 -5.3 2.1 -4.7 3.2 -3.3 -.4 -1.5 .8 -3.2 3.4 -4.6 -1.8 -5.7 -.3 -5 1.1 -4.2 1.4 -1.8 1 -8.4 1.5 -3.1 1.9 -1.8 .7 -8.5 2.5 -3.7 4.3 -3.8 1.5 -6.5 2.7 -3.5 2.9 -1.9 1.6 -5.7 2.8 -4.7 5.3 -5.2 7.2 -3.2 5.4 .6 7.6 3.5 2.5 -1.6 3.2 -.6 4.7 .4 4.1 1.3 .7 -14.5 2.5 -10.4 3.7 -7.2 4.2 -4.8 4.2 -3.1 4.1 -1.9 7.8 -1.9 10.3 -1.2 6.5 -5.1 19 -.7 3.4 -1.8 2.9 -2.8 4.3 -6.7 1.6 -6.6 .1 -16.2 -4.5 -55.5 -3.5 -25.6 -6.9 -38.7 10.2 -3.2M249.5 -17.4l-8 1.4 -10 3.3 7.2 40.3 3.4 24.6 4.5 53 0 19.2 -1.5 6 -4 6.2 -5.3 3.9 -18.9 .6 -6.5 5.1 -15.6 2.3 -5.2 1.8 -4.5 2.8 -6.8 7.1 -3.7 7.2 -2.5 9.8 -1 13.1 -7.6 -.8 -5.3 1.7 -7.2 -3.1 -6.2 -.5 -7.7 3.5 -5.6 5.4 -3 4.8 -1.9 5.6 -5 4.9 -2.1 7.3 -4.8 4.6 -2 3.5 -.8 7.9 -3.1 5 -1.1 8.3 -2.5 6.2 -.1 4.1 1.6 6.8 -2.3 3.4 -1.4 5.6 -3.1 4 -2.1 5.6 .3 5 2 5.5 -3.2 6.9 -1.6 8.1 1.5 6.9 3.5 5.9 -2.3 5.8 -.3 6.1 1.9 3.7 3.9 3.8 0 12.6 2.4 7.7 4.7 6.5 6.5 6 4.8 2.7 7.5 2.9 4.8 3.8 1.5 1.8 5.7 13.6 4.4 5.4 3.1 1.6 4.9 .1 -7.4 -13.7 -.9 -3.7 5.6 -9.4 1.9 -6.1 6.5 -8.3 -.1 6.6 1 6.4 1.5 3.5 2.7 2.2 7.1 1.8 6.9 -.6 11 7.3 7.6 3.4 9.4 1.2 10.3 -.2 -5.5 10.1 -1.6 7.3 .1 5.1 1.8 6.7 5.8 12 -2.7 15.7 .7 7.8 6.8 17.5 .6 4.6 4.7 .7 4.1 -.2 1.3 -5 6.4 -10.8 2.8 -8 -1 -10.7 -4 -9.4 4.4 -5.7 2 -5.2 -.3 -5.6 -2.9 -8.1 10.3 4.7 7.8 2.4 7.9 .6 12.9 -.8 13.7 -2.2 11.3 -3.3 11 -5.9 5.2 -3.8 5.8 -7.4 7.7 -16 8.7 -8.9 2.6 -5.5 .6 -4.7 3 -2.5 2.5 -3.8 .7 -4.2 -.9 -9.5 3.8 -5.4 1.7 -5.3 -1 -10.8 5 -7.3 1.4 -5.9 -3.1 -12.2 2.4 -11.3 -2.1 -12.6 2.6 -8.7 -3.2 -9.1 4 -9.4 -.2 -3.9 -2.4 -7.2 2.6 -6.9 .7 -4.5 -1 -5.8 -3.7 -10.4 3.6 -3.2 1.1 -2 .6 -10.4 -1.8 -7.4 -2.4 -3.1 -3.8 -3 -7.2 -3.7 -5.1 -1.6 -7.6 -.8 -8.8 .3 -8.3 2.3 -5.1 4.1 -6.7 .9 -5.7 1.7 -3.1 1.9 -2.5 2.7 -6.8 2.3 -4.8 3.4 -16.9 2.8 -5.3 2.3 -3.8 3.6 -6.8 -.4 -6.9 .9 -1.6 .8 -1.8 2.9 -8.6 -1 -10.1 .8 -5.9 -.8 -3.3 1 -3 3 -17.2 -5 .6 -13.1 1.7 -6.2 3.7 -4.4 6.8 -3.1 2.6 .6 18.2 12.9 5.4 2.2 8.6 1.5 10.8 .6 14.1 -.9 16.7 -3.6 12 -4.5 12.4 -6.6 8.9 -5.8 14.3 -11 10.1 -10.8 3.6 -5.5 4.5 -11.6 1.4 -12.8 -.4 -6.7 -2.8 -11.5 -2.3 -4.9 -5.7 -8.1 -3.3 -3.2 -6.9 -4.7 -6.6 -2.6 -7.3 -1.5 -7.2 -.1 -5.7 .9 -8.6 2.9 -8.7 4.9 -4.7 3.6 -8.6 9.2 -3 -3 -2.7 -7.1 -.7 -20 -10.2 -83.6 -1.4 -2.2Z\" fill=\"#462d2d\" /><path d=\"M362.2 202.3l-2.5 2.9 -4 1.7 -3.5 0 -4.1 -1.3 -3 4.7 -4.3 2.7 -8.2 1 -9.2 -1.7 -2 3.1 -5 3.9 -6.1 2.2 -3.9 0 -2.3 2.7 -3.5 .4 -5.1 -1.2 -3 4.3 -5 1.8 -6.8 .2 -1.5 2.5 -2.7 1.6 -5.3 1.1 -5.8 -.4 -1.7 2.3 -4.9 2 -6 .1 -3.6 -1.3 -2.5 2.8 -5.1 2.8 -7.6 1 -4.5 2.3 -5.8 -.3 -1.7 1.7 -4.5 1.9 -7.9 .1 -8 -2.6 -5.5 .4 -4.2 -.7 -3.1 -1.5 -3.8 -3.4 -3 .8 -5.2 -.8 -4.9 -2.5 -2.4 -2.2 -5.2 -.6 -8.7 -3.2 -.1 2.8 -2.7 4.8 .7 2 -.6 4 -4.2 7.2 1 1.9 -.1 2.7 -3.6 8.5 1.3 2.5 -.1 1.8 -3.5 6 1.7 2.4 .6 4.9 -.6 3.6 -2.1 4.8 2.7 2.5 1.4 3.7 .1 6.3 -1.4 5.2 3.7 3.4 3.9 12.1 6.7 9.5 3.2 7.6 .4 7 -2.3 8.2\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M195.2 205.5l-12.5-3.9-11.7-10.5\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M258.1 388.4l-3.9 3.7-3.9 1.3-19.9.3-7.9.8-3 1.1\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M306.9 337.1l7.3-4.2 4.9-4.1 4.9-6 3.3-6 1.9-7.1-.8-12.2 3.9-14.4.7-6.3-1.4-10.6-3.5-7.8-5.3-4-4.6-.3 4.1-4.4 2.3-5.7-.3-8.3-1.6-6.5-4.5-5.8-5.4-2.4\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /></g><path d=\"M172.5 180.6l7.5 4.1 5.3 1.5 5.2-.4 2.3-1.3.4 4.8-1 15.7-5.3-1.4-6.2-2.9-8.9-8.3Z\" fill=\"#ca9696\" /><path d=\"M206.6 174.4l24.2 8.3 13.4 2.2 11 .4 11.5 -1.3 11.9 -2.9 12.6 -4.3 12.8 -6 12.8 -8.2 6.2 -5 6.1 -5.7 6 -9 4.6 -12.5 2.6 -13.9 0 -13.3 -1.2 -5.8 -2.1 -4.9 4 6.5 3.9 8.4 2.3 8.3 -1.3 13.4 -3.5 13.8 -6.6 8.9 -13.9 14.4 -25.6 17.3 -18.4 5.9 -16.4 4.1 -8.3 1.2 -9.7 -.3 -9 -1.3 -8 -2.2 -22 -15Z\" fill=\"#ca9696\" /><path d=\"M233.6 244.7l20.3 4.1 13.6 7.1 11.6 3.8 2.9 1.6.2 2.7-2.4 6.9 1.1 4 2.8 2.9-2.1 1.4-4.1 5.5-9.9 14.9 2.5 1.9 2.1 3.5-1.2-5.3.5-2.3 3.3-6.8 5.3-6.8 5.7-5 5 .3 3.3 1.5 4.4 10.1-2.8 4.7-5.2 4.5-1.5 2.4-1.1 14.9-8 6.4 8.2-3.7 5.8 5.3-3.9-5.8-.2-10.9.7-4.8 2.2-3.3 1.7-1.1 9.7 3.2 4.6-.1-2.9 8.3-.5 5.6 10.2-20.5 1-8.8-1.5-13.5 5.8-8.4-3.7 3.1-3.4 4.5.6 15.6-1.4 8.6-2.1 1.9-3.7 1.1-5.5.1-4.8-2.6-.2-.7 2.7-3 1-2.9-2.8-6.5-.5-3.6-2.8-2-8.7-3.4-3.5-4 2.6-10.2 6.7-8.7 10.3-9.4 5.7-3 4.4-.8-5.8-1.4 2-4-7.4 8-17.4 15.7-12.7-2.4-11.5-5.1-3.1-2.4 0-.7 9.2-8.3 1.8-2.5-.1-1.3-1.9.1-1.8 1.6-9.6 10.8-15.6-3.1Z\" fill=\"#958888\" /><path d=\"M172.4 239.5l7.4 4.5 6.4 2.6 6 .8 9-.3 5 1.9-11.2 1.1-8.5-1.2-6.8-2.5-7.1-3.8-4.7-5 1.7-.4Z\" fill=\"none\" /><path d=\"M212.8 250.2l.9 3.1-1 2.7-12.9 14.4-4 6.5 4.5-3.5 3.5-.9 15.8 5.5 12.8 6.6 3 3.7 3.7 7.4-.9-7 6.4-8.8-8 5.8-17.6-9.8-15.7-4.8 1.3-3.2 7.2-7.5 3.3-5.1.8-4.8Z\" fill=\"none\" /><path d=\"M224.4 254.2l5.2 8 -5.8 3.3 6.5 -1.5 5.5 .2 19.7 6.3 2.5 1.2 .9 2.1 .9 6.6 -2.2 7.4 -2.7 14.9 -1.7 3.2 -3.2 2.5 -5.7 1.6 -10.7 -1.6 -8.7 -2.6 -11.1 -8.7 -18.9 -6.6 -4.6 -.7 -10.9 1.7 -2.6 -1.6 -2.3 -3.2 -.5 -3.2 5.3 -17.8 14 -6.4 -13.3 4.3 -16 .2 -7.3 -2.5 -2.9 -2.4 -2.2 -3.5 5.3 7.1 6.9 3.3 -4.1 9.1 -4 14.4 .2 5.6 2.2 7.3 3.2 6.8 2.2 2.9 2.8 1.4 7.7 1.4 -6.9 13.8 4.8 7.1 -10.9 2.2 1.8 3.7 .4 -1.4 1.4 -1.1 7.3 0 5.4 1.3 4.5 3.8 2 2.7 .7 2.8 -2.9 8.4 .4 5.7 2.6 3.7 7.8 5.6 6 2.6 5.8 1.2 29.3 2.1 6.2 3.1 -2.6 -2.3 5.2 -.6 -2.1 -.7 -28.6 -2 -8.6 -1.6 -12.1 -6 -4.6 -3.1 -2.8 -3.1 .1 -6.2 1.8 -7.4 1.3 -1.5 4.4 -.9 16 4.8 -8.2 4.1 -.9 3.4 -3 1.7 9.2 1.3 28.4 8.8 10 .5 3.7 -.8 1.8 -1.3 .8 -3.7 -.4 -5.1 -3.2 -6.4 -10.1 -8.6 -5.4 -3.2 -5 -1.3 -2.3 -2.5 -2 1.8 -5.6 1.7 14.5 2 10.8 7.6 2.9 3 3.3 6.9 1.1 4.6 -.8 1.9 -5.1 1.7 -7.5 .2 -34.2 -11.5 1.2 -1.7 4.5 -2.4 4.5 -1.3 5.1 -.3 6 .6 3.8 1.2 4.3 3.8 -2.3 -4.2 -3.8 -2.7 -18.6 -2 -2.7 -1 -5 -3.6 -.4 -1.2 .7 -1.3 9.9 -10.3 4.1 -1.3 10 .1 7.4 2.2 2.3 1.6 .3 1.1 9.4 1.2 5.2 4.9 5.6 2.1 14.6 14.2 -1.2 9.6 7.3 -8.8 5.3 -4.1 -9.4 2.5 -13.4 -12.8 -11.1 -6.7 -.5 -1.4 .7 -4.1 2.7 -4.9 4.3 -2.7 7.3 -1.3 -8.8 -.7 .4 -2.2 3.6 -1.1 -3 .2 -3 2.5 -6.4 13.2 -7.5 -.8 -2.5 -2.2 -5.5 -2.8 -4.7 -1.3 -5.2 -.4 10.8 -7.8 6.3 -.9 -5 -.7 -.5 -4.7 -2 5 -17.6 11 -14.3 13.9 -2.3 .5 -4.2 -1.3 -10.8 -5.8 -4.4 -5.3 -1.2 -4.6 4.3 -9.1 3.7 -3.9 3.6 -1.8 27.7 -3.5 -9 -1.2 2.2 -1.1 1.1 -2.2 -5.6 3.4 -16.7 1.7 -8.2 3.8 -6.1 -.8 -3.8 -3.1 -2.1 -4.2 -2.6 -9.3 -.6 -5.8 .6 -5.1 2.8 -9.2 3.4 -7.1 2.7 -2.8 5.3 -.4 3.6 .8 -4 16.1 .5 5.6 2.4 4.8 3.2 .8 9.7 -1.1 6.7 .3 20.6 7.5 3.1 4.9 -.3 3.1 -4.5 5 -17.6 9.3 -3.1 .9 -2.6 -.2 -8.9 -4.6 8.2 6.3 .9 11.5 .4 -8 1.1 -3 17.9 -8.4 12.4 -9.6 19.2 5.3 11.3 -2.9 10 4.9 5 4.2 .6 2.9 -3.6 8.2 -.7 3.6 .8 2.3 4.2 4.3 8.3 5.6 13.3 5 6.2 -4.2 3.7 -8.8 -2.5 -5.7 -.7 1 .2 7.5 -4.7 4.9 -4 1.5 -5.5 -1.5 -8.2 -3.9 -4.9 -3.1 -3 -3 .1 -4 3.6 -9.8 -1 -3.6 -3.3 -4.5 -8.8 -3.7 -2.9 -2.5 3.2 -8.5 4 -19.3 -4.3 -10.6 -25.2 -7.5 -8.8 -7.1Z\" fill=\"#958888\" /><path d=\"M172.4 239.5l8.8 5.9 6.8 2.6 12.2 2 9.1 -.5 4.3 1.4 .3 2.6 -1.6 4.2 -10.6 10.5 -5.7 9.4 5.4 -4.4 2.1 -.6 19.1 7 6.2 3.5 4.9 4.1 2.9 3.9 1.8 5 0 -8.1 3.5 -5.4 3 -2.8 -8.6 5.2 -13.8 -7.7 -19.7 -6.8 12.3 -13.4 -.2 -7.1 -8.4 -.8 -5.3 -1.5 -8.8 -.5 -7.6 -5.1 -4.9 .8Z\" fill=\"#958888\" /><path d=\"M285.1 229.4l.1 3.7 -3.3 5.4 -4.8 4.2 -5.5 3.2 6.1 -.9 .8 3.4 1.1 -4 7.6 -10.4 12.1 -9.5 -3.7 -1 -1.9 3.1 -3.2 2.1Z\" fill=\"#958888\" /><path d=\"M296.8 263.8l7.6-1.6 8.3-5 3-2.7 3.4-.6 2.7.6-7.8 2.9-7.7 6.1Z\" fill=\"#958888\" /><g clip-path=\"url(#oasto-clippath)\"><path d=\"M171.5 192l9.1 8.3 3.4 1.8 24 7.1 3.1 -.2 .4 -2.2 2.9 -1.2 16.5 -.5 10.4 .6 2.3 -3.6 14.2 -.6 3.5 -2.6 7.3 -3.1 5.1 -1.3 5.5 -.2 5.6 -1.9 19.1 -11.3 10.8 -1.4 2.5 -2.6 4.3 -2.4 6.5 -1.9 15.7 2 10.2 2.8 2.7 1.8 6.5 8.8 .5 7.3 -.5 4.8 -1.6 4.2 -2.3 2.7 -.6 1.9 2.9 8 1.7 8.5 -4 9.8 3.4 9.6 -4 11.7 2.3 7 -1.6 10.4 1.8 12 -2.8 11.7 2.4 7.6 .6 6.5 -6 11.5 .9 11.8 -1.5 4.1 -4 6.1 1.5 11.3 -6.5 9 -2.3 8.3 -9.5 10 -10.4 20.2 -11.9 9.8 -12.8 5.4 -15.1 3.1 -15.8 1.2 -7.8 -.3 -19.6 -6.8 2.5 8.1 .7 5 -6.7 10.3 3.5 9.5 1.2 6.7 -2.4 11.7 -8.2 16.1 -8.1 -.3 -1.2 -5.9 -6.6 -18.1 -.3 -2.6 3 -18 -5.8 -12.9 -2.5 -8 1.9 -8 3 -8.1 2.4 -4.2 3 -2.1 9.4 -1.3 18.8 -.8 6 -2.1 4.4 -3.5 19.8 4.1 4.7 -7.7 4.1 -4.8 3.9 -2.1 6.8 -2.2 1.5 -9.3 2.3 -7.2 2.7 -3.9 3.9 -2 -1.3 -15.4 8.2 -4.4 5.8 -5.6 5.6 -8.9 2.4 -5.9 .6 -5.1 -1.3 -9.2 4.4 -16.6 .6 -8.7 -.4 -4.4 -2.2 -6.6 -3.1 -4.2 -4.8 -3.3 -4.5 -.1 3.3 -3.6 2.6 -5.7 .7 -5.3 -.4 -4 -1.7 -6.1 -2.9 -5.4 -8 -3 -4.9 .3 -3.6 2.9 -7.6 -1 -4.2 4.7 -10.7 1.7 -4.2 4.1 -10.8 .6 -6.9 4.2 -9.2 -.9 -5.9 4.5 -6.6 1.9 -2.7 -.2 -4 2.1 -6.3 0 -4.9 2.8 -3.6 1 -8.8 -.6 -4.9 -2.1 -7.6 .1 -5.8 -2.4 -3.1 -2.9 -3.8 .5 -5.9 -1 -5.6 -3.8 -4 -.7 -10.1 -3.7 -.7 3.2 -2.2 3.8 .5 1.7 -.7 5 -4 6.7 1.1 2.3 -.3 2.1 -3.3 8.8 1.3 3.6 -3.8 6.9 2.4 5.1 -1.3 7 -1.5 3.5 2.6 2.7 1.4 3.3 -1 11.7 4.4 4.7 3.8 12 7 11.1 2.3 7 .6 4.8 -2.8 10 -15.5 25.7 -.4 7.4 8 13 -3.1 .8 -5.2 -1.5 -2.2 -2 -8 -18.5 -4.4 -4.3 -10.7 -5.2 -8.5 -6.3 -3.1 -3.7 -3.5 -7 -1.1 -4.4 -.3 -11.9 -4.8 -6.2 -1.4 -3.2 3.2 -10.2 -5.2 -15 4.7 -12.9 -2.1 -11.5 4.6 -8.2 3.6 -9 -1 -10.8 6.8 -20.2 2.4 -10.1 4.6 -4.9 3.1 -7.9 4.8 -5.8 6.1 -10.9 5.6 -4.2 7.9 -3.5 11.6 4.1 6.8 -2.1Z\" fill=\"#f2dddd\" /><path d=\"M358.8 214.1l3.5 7 .3 7.2 -.3 2 -2.6 4.9 2.1 5.7 -.1 4 -.3 4.4 -2.4 5.7 0 2.2 3.1 8.1 -2.6 6.5 -.3 3.5 1.7 9 -.7 7.5 -1.9 8.1 3 8.3 .4 4.5 -2.1 5.3 -4.4 5.3 .9 9.8 -.6 3.1 -5 9.1 .7 5.6 -.8 8.4 -5.3 5.6 -2 8.6 -11 12.9 -7.2 14.8 -7.5 9 -21.7 8.9 -21.6 3.9 -18.5 -1.2 -14.8 -6.5 1.3 7.7 .2 8.9 -5.4 8.1 3.3 8.4 1.7 11.9 -1.4 5.5 -3 6.6 -3.3 4.7 -2.7 5.5 -1.4 .4 -2.5 0 6.1 -13.5 2.7 -8.9 -1.3 -12.7 -3.2 -7.3 4.9 -6 1.5 -4.9 -1.9 -15.2 -2.2 -6.6 16.3 7.5 11.8 3.4 13.4 .9 7.1 -1.1 7.3 -2.4 13.3 -6.7 14.9 -11.2 6.6 -7.3 4.7 -9.2 7.3 -6.4 4.2 -6.3 1.2 -5.8 4.1 -6.2 1.8 -7.5 -.6 -1.9 -5.6 -2.3 4.7 -1.3 2.4 -2.1 3.5 -9.3 -.1 -5.1 -5.7 -6.4 7.5 -2.5 2.7 -2.8 .7 -1.9 -.1 -4.8 -1.7 -5.6 -2.6 -3.4 -3.1 -1.5 3.6 -3.9 2.1 -6.3 -1.9 -9.4 -1.4 -2.6 -1.6 -1.1 4.9 -3 2.3 -4.9 -.7 -3.7 -1.6 -2.5 -5.5 -4.2 5.2 -4.5 2.7 -5.7 -.8 -7.2 -1.3 -2.3 -2.5 -1.6 3.4 -5.3 -.6 -5.9 -1.7 -3.6 -1.9 -1.9 -8.5 -1.9 -6.9 3.3 -2.8 -.3 -2 1.1 -3.1 0 -6.2 1.5 3.8 8.4 4.1 5.6 -2.3 6.5 -.5 5.8 6.1 18.1 -.3 15.8 .9 9.4 -2 16 -.8 16.5 -3.4 20.2 -18.3 12.2 -4.3 4.7 -3 7.3 -.2 10.4 -7.5 1.8 -5.1 2.8 -7.2 6.4 -4.1 5.6 -10.6 -.7 -34.7 1.5 -9.5 2 -4.3 1.8 -3.7 2.4 -3.1 3.4 6.5 -11.8 8 -1.4 14.7 0 8.8 -.8 1.9 -.7 5 -4.5 20.1 4.4 3.8 -7.7 2.9 -3.2 6.5 -3.5 7.5 -1.3 -1.8 -8.9 1.5 -9.4 2.5 -2.1 7.2 -3.2 -2 -15.1 9.6 -5.8 4.4 -4.4 5.8 -7.9 2.9 -8.3 -1.1 -13.8 4.7 -15.7 .4 -5 -.7 -5.7 -3.1 -10 -2.2 -3.8 -3.2 -1.9 -6.2 -.8 6 -5.8 .9 -3.7 .2 -6.1 -2.1 -11.5 -6.3 -4.4 -1.7 2.1 -6.4 4 -28.7 10.5 -16.6 3.8 -19.8 2.7 -13.4 5.3 -9.8 1.1 -35.8 -3.1 -23.3 -5.3 -3.1 10.6 -2.7 5.2 -2 1.8 -1.4 3.5 -4 13.8 1.9 14.5 1.8 2.9 .9 3.8 0 5.9 -.9 4.2 2.5 3 3.1 6.3 2.7 14 3.1 3.8 4.1 2.1 1.1 1.5 .7 4.3 -1 7.2 -6.3 22.4 -1.7 -8.7 -7.6 9.7 -6.6 11.8 1 4.5 5.8 14.6 -6.1 -3 -5.1 -4.5 -4.6 -10.1 -6.5 -8.3 -15.5 -7.8 -5.7 -8.2 4 4 7.3 3.8 7.3 3.1 6 .3 8.1 -2.6 11.5 -6.2 3.7 -3.3 2.1 -4.3 .7 -5 -1.6 -10.5 -3.9 -9.1 -4.2 -5.1 -1.5 -.2 .6 -3.7 -1.2 -4.7 -3.4 -6.6 -2.6 -3 1.8 -3.2 -.8 -6.9 -1.9 -4.5 -3.1 -3.7 1.8 -1.3 2 -3.7 .1 -6.6 -1.5 -5.3 3.2 -3.8 .9 -3.9 -.9 -2.1 1.5 -1.6 1 -3 .5 -5.2 -.6 -3.2 1.6 -1.4 .8 -4.3 -1.4 -6.1 3.6 -2.1 1.7 -3.9 -.1 -4.8 -4.9 -6.4 3 1.9 3 -.3 8 -6.2 -4.7 5.4 8 2.3 4.8 5.4 1.9 .4 2.3 -.8 6.1 -4.9 -3.8 6.8 -.1 1.5 3 1.9 8.6 .9 9.2 -.4 2.3 -2 2.6 -5.5 .5 7.9 .5 1.8 1.5 1.3 5 1.1 6.1 -.3 5.3 -1.3 2.6 -1.7 3.3 2 3.1 -1.6 2.9 -4 3.6 2 6.2 -1.6 4.9 -4.4 1.3 -3 6 3 6.2 -.2 1.8 -4.5 -.9 -5.2 5.1 4.5 5.8 2 1.7 -.9 1.2 -1.9 1.1 -5.5 3.4 2.5 6.5 -.4 5.7 -3.6 2 -3.3 1.4 1.8 3 1.8 3.5 .8 3 -.3 .8 -2.6 -1.2 -5 2.5 5.4 1 1 3.1 -.1 6 -3.4 7.1 -5.8 5.8 .5 6.8 -1.3 9.5 -3.6 5.1 -3.4 4.3 -.6 4.5 -3.7 3.6 -6.4 .6 2.7 -.4 5.4 -1.5 4.8 -2.8 3.7 .2 6.4\" fill=\"#c6b5b5\" /></g><path d=\"M249.5 -15.4l2.5 1.2 10.1 82.9 .5 18.6 1.1 5.9 2.1 4.2 3.4 3.5 2 .4 9.6 -10.1 4.3 -3.2 8.9 -4.9 8.1 -2.6 12 -.5 6.9 1.5 5.9 2.4 6.7 4.6 3.1 3.1 5.4 7.7 2.1 4.7 2.6 10.9 .4 6.2 -1.3 12.3 -4.4 11.1 -3.5 5.3 -9.8 10.6 -14.1 10.9 -8.8 5.7 -11.8 6.3 -11.6 4.4 -11.1 2.8 -15.2 1.8 -13.9 -.3 -12.5 -2.6 -6.1 -3.5 -13.4 -10 -1.8 -1 -2.7 -.2 -4.5 1.5 -3.2 2 -4.2 5 -1.8 6.1 -.7 15.6 20.2 5.9 2 -3 3.4 -1.3 5.9 1 4.6 -.9 7.4 0 7.9 1.3 2.4 -4.2 7.7 -.9 6.9 .8 2.7 -3.5 5 -2.5 5.4 -1.3 4 .4 2.2 -1.4 6.7 -.8 4.7 -3.6 7 -2.3 2.3 -2.7 3 -1.8 5.7 -1.6 7.1 -.9 2.7 -2.9 5.4 -2.6 8.3 -1.1 9.6 .3 7.1 2 6.7 3.4 4.9 4.2 1.7 3.4 .7 4 -.6 10.4 -4.1 3.1 -.8 2.4 4.8 15 -.4 4.6 -2.8 7.6 2.7 10.7 -4.1 10.1 3.2 9.6 -2.7 8.4 2.1 11.9 -2.4 12 3.1 12 -1.3 5.3 -5.1 7.7 .9 11.3 -1.6 4.5 -3.8 5.7 .9 10.4 -.7 3.3 -5.2 5.6 -.8 5.3 -2.2 4.7 -9.1 9.5 -7.4 15.6 -6.3 7.7 -7.8 5 -10.1 4.7 -12.1 2.9 -17.9 2 -9 -.1 -5.6 -1.2 -11 -4.4 -8.5 -4.9 3.9 9.5 1.5 6.7 -.3 2.9 -1.7 4 -5.3 6.3 4.4 8.8 1.4 7 -.1 4.3 -2.7 7.6 -6.1 10.3 -1.4 4.4 -2.3 0 -2.8 -.3 -.8 -3.8 -6.4 -16 -.9 -7.8 2.7 -16.6 -5.6 -11.6 -2 -7 .2 -6.4 1.7 -6 4.1 -7.5 4.2 -4.9 -12.4 1 -10.6 -.9 -7.1 -2.8 -13.2 -8.7 -2.1 1 -3.5 .2 -8.2 -2 -2.5 -4.2 -1 -7.5 .3 -5.5 2.4 -10.8 -7.8 13.1 -4.5 5.3 -2.2 6.4 -5.8 9.9 1 5.1 6.1 11 -2.4 -.5 -2 -1.4 -3.5 -4.6 -5.4 -13.1 -1.7 -2.2 -5.4 -4.3 -12.2 -5.6 -6.1 -5.6 -4.5 -6.1 -2.3 -8 .3 -12.4 -3.8 -3.1 -2.2 -3.8 .6 -6.2 2.5 -5.1 -4.7 -8.3 -.7 -6.3 2.4 -8.5 2.8 -4.5 -2.5 -6.3 .1 -5.3 2.1 -4.7 3.2 -3.3 -.4 -1.5 .8 -3.2 3.4 -4.6 -1.8 -5.7 -.3 -5 1.1 -4.2 1.4 -1.8 1 -8.4 1.5 -3.1 1.9 -1.8 .7 -8.5 2.5 -3.7 4.3 -3.8 1.5 -6.5 2.7 -3.5 2.9 -1.9 1.6 -5.7 2.8 -4.7 5.3 -5.2 7.2 -3.2 5.4 .6 7.6 3.5 2.5 -1.6 3.2 -.6 4.7 .4 4.1 1.3 .7 -14.5 2.5 -10.4 3.7 -7.2 4.2 -4.8 4.2 -3.1 4.1 -1.9 7.8 -1.9 10.3 -1.2 6.5 -5.1 19 -.7 3.4 -1.8 2.9 -2.8 4.3 -6.7 1.6 -6.6 .1 -16.2 -4.5 -55.5 -3.5 -25.6 -6.9 -38.7 10.2 -3.2M249.5 -17.4l-8 1.4 -10 3.3 7.2 40.3 3.4 24.6 4.5 53 0 19.2 -1.5 6 -4 6.2 -5.3 3.9 -18.9 .6 -6.5 5.1 -15.6 2.3 -5.2 1.8 -4.5 2.8 -6.8 7.1 -3.7 7.2 -2.5 9.8 -1 13.1 -7.6 -.8 -5.3 1.7 -7.2 -3.1 -6.2 -.5 -7.7 3.5 -5.6 5.4 -3 4.8 -1.9 5.6 -5 4.9 -2.1 7.3 -4.8 4.6 -2 3.5 -.8 7.9 -3.1 5 -1.1 8.3 -2.5 6.2 -.1 4.1 1.6 6.8 -2.3 3.4 -1.4 5.6 -3.1 4 -2.1 5.6 .3 5 2 5.5 -3.2 6.9 -1.6 8.1 1.5 6.9 3.5 5.9 -2.3 5.8 -.3 6.1 1.9 3.7 3.9 3.8 0 12.6 2.4 7.7 4.7 6.5 6.5 6 4.8 2.7 7.5 2.9 4.8 3.8 1.5 1.8 5.7 13.6 4.4 5.4 3.1 1.6 4.9 .1 -7.4 -13.7 -.9 -3.7 5.6 -9.4 1.9 -6.1 6.5 -8.3 -.1 6.6 1 6.4 1.5 3.5 2.7 2.2 7.1 1.8 6.9 -.6 11 7.3 7.6 3.4 9.4 1.2 10.3 -.2 -5.5 10.1 -1.6 7.3 .1 5.1 1.8 6.7 5.8 12 -2.7 15.7 .7 7.8 6.8 17.5 .6 4.6 4.7 .7 4.1 -.2 1.3 -5 6.4 -10.8 2.8 -8 -1 -10.7 -4 -9.4 4.4 -5.7 2 -5.2 -.3 -5.6 -2.9 -8.1 10.3 4.7 7.8 2.4 7.9 .6 12.9 -.8 13.7 -2.2 11.3 -3.3 11 -5.9 5.2 -3.8 5.8 -7.4 7.7 -16 8.7 -8.9 2.6 -5.5 .6 -4.7 3 -2.5 2.5 -3.8 .7 -4.2 -.9 -9.5 3.8 -5.4 1.7 -5.3 -1 -10.8 5 -7.3 1.4 -5.9 -3.1 -12.2 2.4 -11.3 -2.1 -12.6 2.6 -8.7 -3.2 -9.1 4 -9.4 -.2 -3.9 -2.4 -7.2 2.6 -6.9 .7 -4.5 -1 -5.8 -3.7 -10.4 3.6 -3.2 1.1 -2 .6 -10.4 -1.8 -7.4 -2.4 -3.1 -3.8 -3 -7.2 -3.7 -5.1 -1.6 -7.6 -.8 -8.8 .3 -8.3 2.3 -5.1 4.1 -6.7 .9 -5.7 1.7 -3.1 1.9 -2.5 2.7 -6.8 2.3 -4.8 3.4 -16.9 2.8 -5.3 2.3 -3.8 3.6 -6.8 -.4 -6.9 .9 -1.6 .8 -1.8 2.9 -8.6 -1 -10.1 .8 -5.9 -.8 -3.3 1 -3 3 -17.2 -5 .6 -13.1 1.7 -6.2 3.7 -4.4 6.8 -3.1 2.6 .6 18.2 12.9 5.4 2.2 8.6 1.5 10.8 .6 14.1 -.9 16.7 -3.6 12 -4.5 12.4 -6.6 8.9 -5.8 14.3 -11 10.1 -10.8 3.6 -5.5 4.5 -11.6 1.4 -12.8 -.4 -6.7 -2.8 -11.5 -2.3 -4.9 -5.7 -8.1 -3.3 -3.2 -6.9 -4.7 -6.6 -2.6 -7.3 -1.5 -7.2 -.1 -5.7 .9 -8.6 2.9 -8.7 4.9 -4.7 3.6 -8.6 9.2 -3 -3 -2.7 -7.1 -.7 -20 -10.2 -83.6 -1.4 -2.2Z\" fill=\"#8f6464\" /></g></g><path d=\"M144.2 367.3l-7 -11.7 -6.1 -17.2 -2.3 -15.1 -1.5 -26.1 .5 -23 4.6 -20.2 5.4 -16.7 3.1 -6.9 1.1 -1.2 5.1 -1.6 -5.9 -6.6 -3.1 -6 -1.5 12.2 -7 20.5 -4.7 22.5 -1.6 19.1 .2 20.6 1.9 19.5 3.9 17 2.8 7.1 3.4 6 4 4.6Z\" fill=\"#f5e5e5\" /><path d=\"M157.3 197.1l3.8 1.2 1.8-1.5 1.1 5.1 1.3 1.6 8.1 4.9 11.1 4.4 9.4 2.1 10.4 1.1 17 1.3 7.9-.2 24.5-3.3 39.4-11.9 24.7-9.7 22.4-13.8-8.3 9.9-8.2 4.3-18.5 7.3-32.6 11.2-26.1 6.6-35.3 2.3-25.7-4.6-15.6-4.5-6.2-5.6Z\" fill=\"#f5e5e5\" /><path d=\"M158.8 329.4l9.4.5 3.6 5.8-5.1.1-3.3 1.1M154.2 326.8l9.1 13.4 1.1-1.5 2.6-.9 9.4 0-3.1-3.5-4.1-6.6-5.5.2Z\" fill=\"#8f6464\" /><path d=\"M332.4 214.1l5 28.4 -.9 30.5 -2.2 34.4 -5.1 41.3 -7.5 21.6 -8.1 16.9 9.9 -15.2 7.4 -15.5 1.8 -8.6 3.6 -31.3 3.2 -51.3 .5 -28.3 -.6 -7.9 -3.4 -13.5 -.8 -2Z\" fill=\"#f5e5e5\" /><path d=\"M306.6 338.2l.3 14-5.4 2.4-3.3 4.2-1.5 6.8 1 9.1-6.5 1.1-5 2.9-5.5 6.2-3.1 6.3-18-4.2.3-7.6 16 1.2 1.8-.5 4-3.2 5.9-7.4 5.2-8.8 1-5.6-1.1-5.2 2.6-1.3 3.3-3.2 3.4-6.9M308.5 335.6l-5 .9-3-.5-1.4 4.9-3.1 4.6-2.7 2.1-3.8.8 2.4 5.2-.6 6-6.3 10.5-6.4 7.3-2.5 1.2-10.1-.5-6.4-.9-2.2-1.2 1 7.8-1.3 4.4 22.2 5 3.8-8 5.9-5.9 5.4-2.3 6.1 0-1.6-8.8.3-5.6 2-4.7 1.9-1.8 5.9-2.2Z\" fill=\"#8f6464\" /><path d=\"M217.9 396.1l7.5-1.8 24.4-1.3 5.3-1.9 3.4-3.4\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M162.9 337.6l2 5 .4 4.9-1.5 8.4-2.7 5.2\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M155.2 327.1l.1 -6 -1.4 -4.1 -2.2 -2.7 -4.6 -3.1 1 -11.1 -1.5 -3.9 -2.6 -2.6 2 -4.2 .7 -3.8 -.5 -4.7 -1.3 -3.4 3.2 -6.3 -1.3 -3.6 2.6 -4.1 1.1 -3.9 -1.2 -5.2 4.9 -7.6 .1 -2.3 -1.1 -3.1 2 -3 1.1 -4.7 8.5 4 5.5 .5 3.2 2.6 4.4 2 3.6 .4 4.1 -.8 4.2 3.4 4.7 2.1 3.6 .3 4 -.7 8.4 2.9 4.4 .1 5.4 -1.6 4 -2.6 5.7 .3 4.6 -2.4 6.4 -.6 8.7 -5.7 8.5 1.1 4.7 -1.8 2.9 -2.7 9.5 0 2.9 -1.6 2.6 -3.2 6.7 -.2 4.4 -1.5 3.9 -4.1 6.3 .8 3.1 -1.2 1.7 -2.1 6.6 0 4.2 1.3 2.7 2 4.4 11.3 -.7 10.2 -2.6 4.1 -3.6 3.6 7.4 1.3 3.6 3.7 3.7 9.8 .7 10.7 -1.5 7.9 -3.2 8.4 .9 15.1 -2.9 8.4 -3.8 6.4 -3.7 3.8 -11.8 7.6\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M172.6 191.8l9.1 8.3 4.4 2.1 6.1 1.7\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M313.7 221.1l6.1-3.3 3.1-3.2 19.8-3.1 9.8-4-8 4.4-13.3 3.4-6.8.7-4.7 3.7Z\" fill=\"#8f6464\" /></g></g>"};
+_ORG_ART["intestine"]={vb:[0,0,500,500],pfx:"oaint",body:"<defs><filter id=\"oaint-luminosity-invert\" x=\"37.2\" y=\"-17.4\" width=\"429.3\" height=\"517.6\" color-interpolation-filters=\"sRGB\" filterUnits=\"userSpaceOnUse\"><feColorMatrix result=\"cm\" values=\"-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0\" /></filter><linearGradient id=\"oaint-linear-gradient\" x1=\"253.2\" y1=\"43.9\" x2=\"253.2\" y2=\"79\" gradientTransform=\"translate(521.9 -.5) rotate(90)\" gradientUnits=\"userSpaceOnUse\"><stop offset=\"0\" stop-color=\"#fff\" /><stop offset=\"1\" stop-color=\"#000\" /></linearGradient><mask id=\"oaint-mask\" x=\"37.2\" y=\"-17.4\" width=\"429.3\" height=\"517.6\" maskUnits=\"userSpaceOnUse\"><g filter=\"url(#oaint-luminosity-invert)\"><rect x=\"5.3\" y=\"39.1\" width=\"493.1\" height=\"427.2\" transform=\"translate(-2 503.5) rotate(-89.8)\" fill=\"url(#oaint-linear-gradient)\" /></g></mask><clipPath id=\"oaint-clippath\"><path d=\"M233.7 -11.4l6.9 38.7 3.3 23.4 4.6 53.7 .2 16.6 -1.1 8.6 -5 8.3 -2.9 2.8 -3.4 1.8 -19.1 .7 -6.4 5.1 -10.2 1.2 -7.9 1.9 -4.1 1.9 -4.2 3.1 -6.2 8 -3.2 8.7 -1.7 12.4 -.1 7.8 -3.8 -1.3 -5.2 -.4 -2.8 .5 -2.7 1.6 -7.1 -3.3 -5.4 -.8 -5.9 2.1 -7.1 6.4 -2.8 4.7 -1.6 5.7 -2.9 1.9 -2.7 3.5 -1.5 6.5 -5.1 4.7 -2 3.8 -.4 7.5 -1.9 1.8 -1.5 3.1 -1 8.4 -1.4 1.8 -1.1 4.2 .3 5 1.8 5.7 -2.8 3.4 -1.3 3.4 .3 2.5 -3.2 3.3 -2.3 5.7 .2 4.3 2.5 6.3 -3.4 6.1 -1.9 9.1 1.4 5.8 4 6.6 -2.5 5.1 -.7 5.1 1.7 4 4.5 4 -.3 12.4 2.3 8 4.5 6.1 6.1 5.6 12.2 5.6 5.4 4.3 1.7 2.2 5.5 13.3 3.6 4.6 4.3 1.8 -6.7 -12.5 -.6 -2.5 .5 -2.3 5.4 -8.7 2.2 -6.4 4.5 -5.3 7.8 -13.1 -2.7 14.6 .7 7.5 2.3 5.6 2.5 1.3 5.3 1.1 4.9 -.2 1.7 -.9 11.3 7.6 7.8 3.6 12.5 1.1 11.7 -1 -4.2 4.9 -4.1 7.5 -1.7 6 -.2 6.4 2 7 5.6 11.6 -2.7 16.6 .9 7.8 6.4 16 .8 3.8 3.6 .3 1.5 -.1 1.4 -4.4 6.1 -10.3 2.7 -7.6 .1 -4.3 -1.4 -7 -4.4 -8.8 5.3 -6.3 1.7 -4 .3 -2.9 -1.5 -6.7 -3.9 -9.5 14.1 7.3 7.9 2.6 5.9 .7 9.5 -.2 15.9 -2.1 9.6 -2.2 7 -2.7 10.3 -5.9 5.2 -4.7 2.9 -4.3 7.4 -15.6 9.1 -9.5 2.2 -4.7 .8 -5.3 3.3 -2.8 1.9 -2.7 .7 -3.3 -.9 -10.4 3.8 -5.7 1.6 -4.5 -.9 -11.3 5.1 -7.6 1.3 -5.3 -3.1 -12 2.4 -12 -2.1 -11.9 2.7 -8.4 -3.2 -9.6 4.1 -10.1 -2.7 -9.9 2.8 -8.3 .4 -4.6 -4.8 -15 .8 -2.4 4.1 -3.1 .7 -8.3 -.8 -6.1 -1.7 -3.4 -7 -5.5 -7 -3 -4.7 -1.1 -12.1 -.2 -7.8 1.7 -4.3 2.7 -1.7 2 -7.1 .9 -5.7 1.6 -3 1.8 -2.3 2.7 -7 2.3 -4.7 3.6 -6.7 .8 -2.2 1.4 -4.8 -.3 -6.6 2 -3.7 2.3 -2 2.9 -7.3 -.8 -7.5 .9 -2.2 4.1 -8.4 -1.4 -7.3 0 -4.1 .9 -6.2 -.9 -3.4 1.6 -1.6 2.7 -20.2 -5.9 .7 -15.6 1.8 -6.1 4.2 -5 3.2 -2 4.5 -1.5 2.6 .2 1.8 1 13.5 10 6.2 3.5 11.2 2.4 12.6 .6 15.7 -1.5 17.8 -4.7 9.3 -3.9 18.2 -10.9 14.1 -10.9 5.4 -5.3 7.9 -10.6 4.4 -11.1 1.3 -12.3 -.4 -6.2 -2.6 -10.9 -2.1 -4.7 -5.4 -7.7 -6.4 -5.6 -6.8 -3.5 -6.4 -1.9 -7.3 -.8 -8.3 .9 -4.5 1.3 -9.8 4.7 -5.3 3.6 -10.8 11 -2 -.4 -2.2 -2 -2.3 -3.4 -1.7 -5 -.9 -21.7 -10.1 -82.9 -.6 -.8 -3.5 -.2Z\" fill=\"none\" /></clipPath></defs><g><g id=\"oaint-Layer_1\"><path d=\"M145.6 266.6l-6.2 38.2 3.1 11.7 2.8 5 5.4 6.6 17 0 1.8 .9 5.5 9 -3.7 -.6 -7.3 .6 -4.2 5.4 -2.3 6.1 -.5 3 3.6 9 .8 12 1.7 7.3 2.4 2 6.8 1.9 6.8 -1.2 13.3 8.1 9.2 3.9 11.5 .2 22.6 -2.4 17.3 -.9 4.1 -2.5 2 -2.3 -.6 -10.8 6.4 2.6 11.1 1.1 14.4 -15.6 1.5 -5.8 .5 -8.9 8 -13.4 6.7 -.3 12.4 -8.4 5.3 -7 4.2 -7.9 -.5 -16.8 4.2 -13 .6 -7.1 -.6 -6.9 -2.7 -8.5 -3 -4.7 -2 -1.3 -6.8 -1.2 5.9 -8.8 1.2 -3.9 -.1 -3.4 -4 -13.1 -4.7 -3.5 -1.4 -4.1 -3.2 -2.1 -8.4 .1 -7.1 1.3 -34.6 8.2 -28.6 5.7 -54.6 9.6 -16.2 1.8 -18.5 8.8 -4.7 8Z\" fill=\"#f7e2e2\" /><g mask=\"url(#oaint-mask)\"><g><g><path d=\"M171.1 190.6l-.9 11.1 6.6 7.1 1.2 .8 15.5 .6 -1.8 -9 1 -12.9 5 -8.3 2.4 -2.2 3.3 -1.5 5.7 1 20.9 14.1 6.4 1.5 11.3 .7 22.1 -2.5 8.8 -1.8 22.1 -7.8 12.4 -6.6 5.5 -4 21.5 -21 4.5 -7.3 4.1 -14.4 .9 -8 -.3 -5.1 -3 -9.6 -4.1 -9.3 -3.6 -5.5 -6.9 -5.3 -8.2 -3.7 -7.7 -2.1 -5.8 -.4 -7.2 .8 -8.2 1.9 -7.1 3.2 -7.6 6.1 -9.1 9.2 -1.7 -.7 -3.2 -4.3 -1.6 -3.9 -1.2 -23 -5.6 -50.8 -4.4 -30.6 -2.1 -3 -5.7 -.2 -13.8 4 8.2 46.2 2.4 19.5 3.3 30.6 1.5 43.8 -3.9 8 -3.9 4.1 -9.9 1.7 -12.3 -.2 -6 5.6 -16.8 2 -8.9 5.6 -5.5 5.4 -2.5 4.5 -4.1 13.3Z\" fill=\"#f6b7b7\" /><path d=\"M173.1 193.2l.2 -6.5 2.2 -7.9 5.9 -13.3 6 -8.5 6.1 -3.8 3.9 -1.2 15.4 -1.6 3.4 -.9 4.1 -2.7 13.1 -.8 7.9 -1.9 4 -2.6 4 -9.6 1.6 -11.5 -.1 -9.1 -4.5 -54 -2.6 -20.9 -8.8 -49.7 -2.6 1.6 2 16.3 5.9 29.7 2 15.2 4.3 45 1.1 32 -5.2 9.4 -3.8 3.5 -3.5 2 -17.8 .9 -7.4 4.4 -17.4 2.8 -5 2.1 -10.1 11.3 -2.6 5.3 -2.5 8.4 -1.6 14.3Z\" fill=\"#f9f5f5\" opacity=\".7\" /><path d=\"M249.5 -15.4l2.5 1.2 10.1 82.9 .5 18.6 1.1 5.9 2.1 4.2 3.4 3.5 2 .4 9.6 -10.1 4.3 -3.2 8.9 -4.9 8.1 -2.6 12 -.5 6.9 1.5 5.9 2.4 6.7 4.6 3.1 3.1 5.4 7.7 2.1 4.7 2.6 10.9 .4 6.2 -1.3 12.3 -4.4 11.1 -3.5 5.3 -9.8 10.6 -14.1 10.9 -8.8 5.7 -11.8 6.3 -11.6 4.4 -11.1 2.8 -15.2 1.8 -13.9 -.3 -12.5 -2.6 -6.1 -3.5 -13.4 -10 -1.8 -1 -2.7 -.2 -4.5 1.5 -3.2 2 -4.2 5 -1.8 6.1 -.7 15.6 20.2 5.9 2 -3 3.4 -1.3 5.9 1 4.6 -.9 7.4 0 7.9 1.3 2.4 -4.2 7.7 -.9 6.9 .8 2.7 -3.5 5 -2.5 5.4 -1.3 4 .4 2.2 -1.4 6.7 -.8 4.7 -3.6 7 -2.3 2.3 -2.7 3 -1.8 5.7 -1.6 7.1 -.9 2.7 -2.9 5.4 -2.6 8.3 -1.1 9.6 .3 7.1 2 6.7 3.4 4.9 4.2 1.7 3.4 .7 4 -.6 10.4 -4.1 3.1 -.8 2.4 4.8 15 -.4 4.6 -2.8 7.6 2.7 10.7 -4.1 10.1 3.2 9.6 -2.7 8.4 2.1 11.9 -2.4 12 3.1 12 -1.3 5.3 -5.1 7.7 .9 11.3 -1.6 4.5 -3.8 5.7 .9 10.4 -.7 3.3 -5.2 5.6 -.8 5.3 -2.2 4.7 -9.1 9.5 -7.4 15.6 -6.3 7.7 -7.8 5 -10.1 4.7 -12.1 2.9 -17.9 2 -9 -.1 -5.6 -1.2 -11 -4.4 -8.5 -4.9 3.9 9.5 1.5 6.7 -.3 2.9 -1.7 4 -5.3 6.3 4.4 8.8 1.4 7 -.1 4.3 -2.7 7.6 -6.1 10.3 -1.4 4.4 -2.3 0 -2.8 -.3 -.8 -3.8 -6.4 -16 -.9 -7.8 2.7 -16.6 -5.6 -11.6 -2 -7 .2 -6.4 1.7 -6 4.1 -7.5 4.2 -4.9 -12.4 1 -10.6 -.9 -7.1 -2.8 -13.2 -8.7 -2.1 1 -3.5 .2 -8.2 -2 -2.5 -4.2 -1 -7.5 .3 -5.5 2.4 -10.8 -7.8 13.1 -4.5 5.3 -2.2 6.4 -5.8 9.9 1 5.1 6.1 11 -2.4 -.5 -2 -1.4 -3.5 -4.6 -5.4 -13.1 -1.7 -2.2 -5.4 -4.3 -12.2 -5.6 -6.1 -5.6 -4.5 -6.1 -2.3 -8 .3 -12.4 -3.8 -3.1 -2.2 -3.8 .6 -6.2 2.5 -5.1 -4.7 -8.3 -.7 -6.3 2.4 -8.5 2.8 -4.5 -2.5 -6.3 .1 -5.3 2.1 -4.7 3.2 -3.3 -.4 -1.5 .8 -3.2 3.4 -4.6 -1.8 -5.7 -.3 -5 1.1 -4.2 1.4 -1.8 1 -8.4 1.5 -3.1 1.9 -1.8 .7 -8.5 2.5 -3.7 4.3 -3.8 1.5 -6.5 2.7 -3.5 2.9 -1.9 1.6 -5.7 2.8 -4.7 5.3 -5.2 7.2 -3.2 5.4 .6 7.6 3.5 2.5 -1.6 3.2 -.6 4.7 .4 4.1 1.3 .7 -14.5 2.5 -10.4 3.7 -7.2 4.2 -4.8 4.2 -3.1 4.1 -1.9 7.8 -1.9 10.3 -1.2 6.5 -5.1 19 -.7 3.4 -1.8 2.9 -2.8 4.3 -6.7 1.6 -6.6 .1 -16.2 -4.5 -55.5 -3.5 -25.6 -6.9 -38.7 10.2 -3.2M249.5 -17.4l-8 1.4 -10 3.3 7.2 40.3 3.4 24.6 4.5 53 0 19.2 -1.5 6 -4 6.2 -5.3 3.9 -18.9 .6 -6.5 5.1 -15.6 2.3 -5.2 1.8 -4.5 2.8 -6.8 7.1 -3.7 7.2 -2.5 9.8 -1 13.1 -7.6 -.8 -5.3 1.7 -7.2 -3.1 -6.2 -.5 -7.7 3.5 -5.6 5.4 -3 4.8 -1.9 5.6 -5 4.9 -2.1 7.3 -4.8 4.6 -2 3.5 -.8 7.9 -3.1 5 -1.1 8.3 -2.5 6.2 -.1 4.1 1.6 6.8 -2.3 3.4 -1.4 5.6 -3.1 4 -2.1 5.6 .3 5 2 5.5 -3.2 6.9 -1.6 8.1 1.5 6.9 3.5 5.9 -2.3 5.8 -.3 6.1 1.9 3.7 3.9 3.8 0 12.6 2.4 7.7 4.7 6.5 6.5 6 4.8 2.7 7.5 2.9 4.8 3.8 1.5 1.8 5.7 13.6 4.4 5.4 3.1 1.6 4.9 .1 -7.4 -13.7 -.9 -3.7 5.6 -9.4 1.9 -6.1 6.5 -8.3 -.1 6.6 1 6.4 1.5 3.5 2.7 2.2 7.1 1.8 6.9 -.6 11 7.3 7.6 3.4 9.4 1.2 10.3 -.2 -5.5 10.1 -1.6 7.3 .1 5.1 1.8 6.7 5.8 12 -2.7 15.7 .7 7.8 6.8 17.5 .6 4.6 4.7 .7 4.1 -.2 1.3 -5 6.4 -10.8 2.8 -8 -1 -10.7 -4 -9.4 4.4 -5.7 2 -5.2 -.3 -5.6 -2.9 -8.1 10.3 4.7 7.8 2.4 7.9 .6 12.9 -.8 13.7 -2.2 11.3 -3.3 11 -5.9 5.2 -3.8 5.8 -7.4 7.7 -16 8.7 -8.9 2.6 -5.5 .6 -4.7 3 -2.5 2.5 -3.8 .7 -4.2 -.9 -9.5 3.8 -5.4 1.7 -5.3 -1 -10.8 5 -7.3 1.4 -5.9 -3.1 -12.2 2.4 -11.3 -2.1 -12.6 2.6 -8.7 -3.2 -9.1 4 -9.4 -.2 -3.9 -2.4 -7.2 2.6 -6.9 .7 -4.5 -1 -5.8 -3.7 -10.4 3.6 -3.2 1.1 -2 .6 -10.4 -1.8 -7.4 -2.4 -3.1 -3.8 -3 -7.2 -3.7 -5.1 -1.6 -7.6 -.8 -8.8 .3 -8.3 2.3 -5.1 4.1 -6.7 .9 -5.7 1.7 -3.1 1.9 -2.5 2.7 -6.8 2.3 -4.8 3.4 -16.9 2.8 -5.3 2.3 -3.8 3.6 -6.8 -.4 -6.9 .9 -1.6 .8 -1.8 2.9 -8.6 -1 -10.1 .8 -5.9 -.8 -3.3 1 -3 3 -17.2 -5 .6 -13.1 1.7 -6.2 3.7 -4.4 6.8 -3.1 2.6 .6 18.2 12.9 5.4 2.2 8.6 1.5 10.8 .6 14.1 -.9 16.7 -3.6 12 -4.5 12.4 -6.6 8.9 -5.8 14.3 -11 10.1 -10.8 3.6 -5.5 4.5 -11.6 1.4 -12.8 -.4 -6.7 -2.8 -11.5 -2.3 -4.9 -5.7 -8.1 -3.3 -3.2 -6.9 -4.7 -6.6 -2.6 -7.3 -1.5 -7.2 -.1 -5.7 .9 -8.6 2.9 -8.7 4.9 -4.7 3.6 -8.6 9.2 -3 -3 -2.7 -7.1 -.7 -20 -10.2 -83.6 -1.4 -2.2Z\" fill=\"#462d2d\" /><path d=\"M362.2 202.3l-2.5 2.9 -4 1.7 -3.5 0 -4.1 -1.3 -3 4.7 -4.3 2.7 -8.2 1 -9.2 -1.7 -2 3.1 -5 3.9 -6.1 2.2 -3.9 0 -2.3 2.7 -3.5 .4 -5.1 -1.2 -3 4.3 -5 1.8 -6.8 .2 -1.5 2.5 -2.7 1.6 -5.3 1.1 -5.8 -.4 -1.7 2.3 -4.9 2 -6 .1 -3.6 -1.3 -2.5 2.8 -5.1 2.8 -7.6 1 -4.5 2.3 -5.8 -.3 -1.7 1.7 -4.5 1.9 -7.9 .1 -8 -2.6 -5.5 .4 -4.2 -.7 -3.1 -1.5 -3.8 -3.4 -3 .8 -5.2 -.8 -4.9 -2.5 -2.4 -2.2 -5.2 -.6 -8.7 -3.2 -.1 2.8 -2.7 4.8 .7 2 -.6 4 -4.2 7.2 1 1.9 -.1 2.7 -3.6 8.5 1.3 2.5 -.1 1.8 -3.5 6 1.7 2.4 .6 4.9 -.6 3.6 -2.1 4.8 2.7 2.5 1.4 3.7 .1 6.3 -1.4 5.2 3.7 3.4 3.9 12.1 6.7 9.5 3.2 7.6 .4 7 -2.3 8.2\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M195.2 205.5l-12.5-3.9-11.7-10.5\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M258.1 388.4l-3.9 3.7-3.9 1.3-19.9.3-7.9.8-3 1.1\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M306.9 337.1l7.3-4.2 4.9-4.1 4.9-6 3.3-6 1.9-7.1-.8-12.2 3.9-14.4.7-6.3-1.4-10.6-3.5-7.8-5.3-4-4.6-.3 4.1-4.4 2.3-5.7-.3-8.3-1.6-6.5-4.5-5.8-5.4-2.4\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /></g><path d=\"M172.5 180.6l7.5 4.1 5.3 1.5 5.2-.4 2.3-1.3.4 4.8-1 15.7-5.3-1.4-6.2-2.9-8.9-8.3Z\" fill=\"#ca9696\" /><path d=\"M206.6 174.4l24.2 8.3 13.4 2.2 11 .4 11.5 -1.3 11.9 -2.9 12.6 -4.3 12.8 -6 12.8 -8.2 6.2 -5 6.1 -5.7 6 -9 4.6 -12.5 2.6 -13.9 0 -13.3 -1.2 -5.8 -2.1 -4.9 4 6.5 3.9 8.4 2.3 8.3 -1.3 13.4 -3.5 13.8 -6.6 8.9 -13.9 14.4 -25.6 17.3 -18.4 5.9 -16.4 4.1 -8.3 1.2 -9.7 -.3 -9 -1.3 -8 -2.2 -22 -15Z\" fill=\"#ca9696\" /><path d=\"M233.6 244.7l20.3 4.1 13.6 7.1 11.6 3.8 2.9 1.6.2 2.7-2.4 6.9 1.1 4 2.8 2.9-2.1 1.4-4.1 5.5-9.9 14.9 2.5 1.9 2.1 3.5-1.2-5.3.5-2.3 3.3-6.8 5.3-6.8 5.7-5 5 .3 3.3 1.5 4.4 10.1-2.8 4.7-5.2 4.5-1.5 2.4-1.1 14.9-8 6.4 8.2-3.7 5.8 5.3-3.9-5.8-.2-10.9.7-4.8 2.2-3.3 1.7-1.1 9.7 3.2 4.6-.1-2.9 8.3-.5 5.6 10.2-20.5 1-8.8-1.5-13.5 5.8-8.4-3.7 3.1-3.4 4.5.6 15.6-1.4 8.6-2.1 1.9-3.7 1.1-5.5.1-4.8-2.6-.2-.7 2.7-3 1-2.9-2.8-6.5-.5-3.6-2.8-2-8.7-3.4-3.5-4 2.6-10.2 6.7-8.7 10.3-9.4 5.7-3 4.4-.8-5.8-1.4 2-4-7.4 8-17.4 15.7-12.7-2.4-11.5-5.1-3.1-2.4 0-.7 9.2-8.3 1.8-2.5-.1-1.3-1.9.1-1.8 1.6-9.6 10.8-15.6-3.1Z\" fill=\"#958888\" /><path d=\"M172.4 239.5l7.4 4.5 6.4 2.6 6 .8 9-.3 5 1.9-11.2 1.1-8.5-1.2-6.8-2.5-7.1-3.8-4.7-5 1.7-.4Z\" fill=\"none\" /><path d=\"M212.8 250.2l.9 3.1-1 2.7-12.9 14.4-4 6.5 4.5-3.5 3.5-.9 15.8 5.5 12.8 6.6 3 3.7 3.7 7.4-.9-7 6.4-8.8-8 5.8-17.6-9.8-15.7-4.8 1.3-3.2 7.2-7.5 3.3-5.1.8-4.8Z\" fill=\"none\" /><path d=\"M224.4 254.2l5.2 8 -5.8 3.3 6.5 -1.5 5.5 .2 19.7 6.3 2.5 1.2 .9 2.1 .9 6.6 -2.2 7.4 -2.7 14.9 -1.7 3.2 -3.2 2.5 -5.7 1.6 -10.7 -1.6 -8.7 -2.6 -11.1 -8.7 -18.9 -6.6 -4.6 -.7 -10.9 1.7 -2.6 -1.6 -2.3 -3.2 -.5 -3.2 5.3 -17.8 14 -6.4 -13.3 4.3 -16 .2 -7.3 -2.5 -2.9 -2.4 -2.2 -3.5 5.3 7.1 6.9 3.3 -4.1 9.1 -4 14.4 .2 5.6 2.2 7.3 3.2 6.8 2.2 2.9 2.8 1.4 7.7 1.4 -6.9 13.8 4.8 7.1 -10.9 2.2 1.8 3.7 .4 -1.4 1.4 -1.1 7.3 0 5.4 1.3 4.5 3.8 2 2.7 .7 2.8 -2.9 8.4 .4 5.7 2.6 3.7 7.8 5.6 6 2.6 5.8 1.2 29.3 2.1 6.2 3.1 -2.6 -2.3 5.2 -.6 -2.1 -.7 -28.6 -2 -8.6 -1.6 -12.1 -6 -4.6 -3.1 -2.8 -3.1 .1 -6.2 1.8 -7.4 1.3 -1.5 4.4 -.9 16 4.8 -8.2 4.1 -.9 3.4 -3 1.7 9.2 1.3 28.4 8.8 10 .5 3.7 -.8 1.8 -1.3 .8 -3.7 -.4 -5.1 -3.2 -6.4 -10.1 -8.6 -5.4 -3.2 -5 -1.3 -2.3 -2.5 -2 1.8 -5.6 1.7 14.5 2 10.8 7.6 2.9 3 3.3 6.9 1.1 4.6 -.8 1.9 -5.1 1.7 -7.5 .2 -34.2 -11.5 1.2 -1.7 4.5 -2.4 4.5 -1.3 5.1 -.3 6 .6 3.8 1.2 4.3 3.8 -2.3 -4.2 -3.8 -2.7 -18.6 -2 -2.7 -1 -5 -3.6 -.4 -1.2 .7 -1.3 9.9 -10.3 4.1 -1.3 10 .1 7.4 2.2 2.3 1.6 .3 1.1 9.4 1.2 5.2 4.9 5.6 2.1 14.6 14.2 -1.2 9.6 7.3 -8.8 5.3 -4.1 -9.4 2.5 -13.4 -12.8 -11.1 -6.7 -.5 -1.4 .7 -4.1 2.7 -4.9 4.3 -2.7 7.3 -1.3 -8.8 -.7 .4 -2.2 3.6 -1.1 -3 .2 -3 2.5 -6.4 13.2 -7.5 -.8 -2.5 -2.2 -5.5 -2.8 -4.7 -1.3 -5.2 -.4 10.8 -7.8 6.3 -.9 -5 -.7 -.5 -4.7 -2 5 -17.6 11 -14.3 13.9 -2.3 .5 -4.2 -1.3 -10.8 -5.8 -4.4 -5.3 -1.2 -4.6 4.3 -9.1 3.7 -3.9 3.6 -1.8 27.7 -3.5 -9 -1.2 2.2 -1.1 1.1 -2.2 -5.6 3.4 -16.7 1.7 -8.2 3.8 -6.1 -.8 -3.8 -3.1 -2.1 -4.2 -2.6 -9.3 -.6 -5.8 .6 -5.1 2.8 -9.2 3.4 -7.1 2.7 -2.8 5.3 -.4 3.6 .8 -4 16.1 .5 5.6 2.4 4.8 3.2 .8 9.7 -1.1 6.7 .3 20.6 7.5 3.1 4.9 -.3 3.1 -4.5 5 -17.6 9.3 -3.1 .9 -2.6 -.2 -8.9 -4.6 8.2 6.3 .9 11.5 .4 -8 1.1 -3 17.9 -8.4 12.4 -9.6 19.2 5.3 11.3 -2.9 10 4.9 5 4.2 .6 2.9 -3.6 8.2 -.7 3.6 .8 2.3 4.2 4.3 8.3 5.6 13.3 5 6.2 -4.2 3.7 -8.8 -2.5 -5.7 -.7 1 .2 7.5 -4.7 4.9 -4 1.5 -5.5 -1.5 -8.2 -3.9 -4.9 -3.1 -3 -3 .1 -4 3.6 -9.8 -1 -3.6 -3.3 -4.5 -8.8 -3.7 -2.9 -2.5 3.2 -8.5 4 -19.3 -4.3 -10.6 -25.2 -7.5 -8.8 -7.1Z\" fill=\"#958888\" /><path d=\"M172.4 239.5l8.8 5.9 6.8 2.6 12.2 2 9.1 -.5 4.3 1.4 .3 2.6 -1.6 4.2 -10.6 10.5 -5.7 9.4 5.4 -4.4 2.1 -.6 19.1 7 6.2 3.5 4.9 4.1 2.9 3.9 1.8 5 0 -8.1 3.5 -5.4 3 -2.8 -8.6 5.2 -13.8 -7.7 -19.7 -6.8 12.3 -13.4 -.2 -7.1 -8.4 -.8 -5.3 -1.5 -8.8 -.5 -7.6 -5.1 -4.9 .8Z\" fill=\"#958888\" /><path d=\"M285.1 229.4l.1 3.7 -3.3 5.4 -4.8 4.2 -5.5 3.2 6.1 -.9 .8 3.4 1.1 -4 7.6 -10.4 12.1 -9.5 -3.7 -1 -1.9 3.1 -3.2 2.1Z\" fill=\"#958888\" /><path d=\"M296.8 263.8l7.6-1.6 8.3-5 3-2.7 3.4-.6 2.7.6-7.8 2.9-7.7 6.1Z\" fill=\"#958888\" /><g clip-path=\"url(#oaint-clippath)\"><path d=\"M171.5 192l9.1 8.3 3.4 1.8 24 7.1 3.1 -.2 .4 -2.2 2.9 -1.2 16.5 -.5 10.4 .6 2.3 -3.6 14.2 -.6 3.5 -2.6 7.3 -3.1 5.1 -1.3 5.5 -.2 5.6 -1.9 19.1 -11.3 10.8 -1.4 2.5 -2.6 4.3 -2.4 6.5 -1.9 15.7 2 10.2 2.8 2.7 1.8 6.5 8.8 .5 7.3 -.5 4.8 -1.6 4.2 -2.3 2.7 -.6 1.9 2.9 8 1.7 8.5 -4 9.8 3.4 9.6 -4 11.7 2.3 7 -1.6 10.4 1.8 12 -2.8 11.7 2.4 7.6 .6 6.5 -6 11.5 .9 11.8 -1.5 4.1 -4 6.1 1.5 11.3 -6.5 9 -2.3 8.3 -9.5 10 -10.4 20.2 -11.9 9.8 -12.8 5.4 -15.1 3.1 -15.8 1.2 -7.8 -.3 -19.6 -6.8 2.5 8.1 .7 5 -6.7 10.3 3.5 9.5 1.2 6.7 -2.4 11.7 -8.2 16.1 -8.1 -.3 -1.2 -5.9 -6.6 -18.1 -.3 -2.6 3 -18 -5.8 -12.9 -2.5 -8 1.9 -8 3 -8.1 2.4 -4.2 3 -2.1 9.4 -1.3 18.8 -.8 6 -2.1 4.4 -3.5 19.8 4.1 4.7 -7.7 4.1 -4.8 3.9 -2.1 6.8 -2.2 1.5 -9.3 2.3 -7.2 2.7 -3.9 3.9 -2 -1.3 -15.4 8.2 -4.4 5.8 -5.6 5.6 -8.9 2.4 -5.9 .6 -5.1 -1.3 -9.2 4.4 -16.6 .6 -8.7 -.4 -4.4 -2.2 -6.6 -3.1 -4.2 -4.8 -3.3 -4.5 -.1 3.3 -3.6 2.6 -5.7 .7 -5.3 -.4 -4 -1.7 -6.1 -2.9 -5.4 -8 -3 -4.9 .3 -3.6 2.9 -7.6 -1 -4.2 4.7 -10.7 1.7 -4.2 4.1 -10.8 .6 -6.9 4.2 -9.2 -.9 -5.9 4.5 -6.6 1.9 -2.7 -.2 -4 2.1 -6.3 0 -4.9 2.8 -3.6 1 -8.8 -.6 -4.9 -2.1 -7.6 .1 -5.8 -2.4 -3.1 -2.9 -3.8 .5 -5.9 -1 -5.6 -3.8 -4 -.7 -10.1 -3.7 -.7 3.2 -2.2 3.8 .5 1.7 -.7 5 -4 6.7 1.1 2.3 -.3 2.1 -3.3 8.8 1.3 3.6 -3.8 6.9 2.4 5.1 -1.3 7 -1.5 3.5 2.6 2.7 1.4 3.3 -1 11.7 4.4 4.7 3.8 12 7 11.1 2.3 7 .6 4.8 -2.8 10 -15.5 25.7 -.4 7.4 8 13 -3.1 .8 -5.2 -1.5 -2.2 -2 -8 -18.5 -4.4 -4.3 -10.7 -5.2 -8.5 -6.3 -3.1 -3.7 -3.5 -7 -1.1 -4.4 -.3 -11.9 -4.8 -6.2 -1.4 -3.2 3.2 -10.2 -5.2 -15 4.7 -12.9 -2.1 -11.5 4.6 -8.2 3.6 -9 -1 -10.8 6.8 -20.2 2.4 -10.1 4.6 -4.9 3.1 -7.9 4.8 -5.8 6.1 -10.9 5.6 -4.2 7.9 -3.5 11.6 4.1 6.8 -2.1Z\" fill=\"#f2dddd\" /><path d=\"M358.8 214.1l3.5 7 .3 7.2 -.3 2 -2.6 4.9 2.1 5.7 -.1 4 -.3 4.4 -2.4 5.7 0 2.2 3.1 8.1 -2.6 6.5 -.3 3.5 1.7 9 -.7 7.5 -1.9 8.1 3 8.3 .4 4.5 -2.1 5.3 -4.4 5.3 .9 9.8 -.6 3.1 -5 9.1 .7 5.6 -.8 8.4 -5.3 5.6 -2 8.6 -11 12.9 -7.2 14.8 -7.5 9 -21.7 8.9 -21.6 3.9 -18.5 -1.2 -14.8 -6.5 1.3 7.7 .2 8.9 -5.4 8.1 3.3 8.4 1.7 11.9 -1.4 5.5 -3 6.6 -3.3 4.7 -2.7 5.5 -1.4 .4 -2.5 0 6.1 -13.5 2.7 -8.9 -1.3 -12.7 -3.2 -7.3 4.9 -6 1.5 -4.9 -1.9 -15.2 -2.2 -6.6 16.3 7.5 11.8 3.4 13.4 .9 7.1 -1.1 7.3 -2.4 13.3 -6.7 14.9 -11.2 6.6 -7.3 4.7 -9.2 7.3 -6.4 4.2 -6.3 1.2 -5.8 4.1 -6.2 1.8 -7.5 -.6 -1.9 -5.6 -2.3 4.7 -1.3 2.4 -2.1 3.5 -9.3 -.1 -5.1 -5.7 -6.4 7.5 -2.5 2.7 -2.8 .7 -1.9 -.1 -4.8 -1.7 -5.6 -2.6 -3.4 -3.1 -1.5 3.6 -3.9 2.1 -6.3 -1.9 -9.4 -1.4 -2.6 -1.6 -1.1 4.9 -3 2.3 -4.9 -.7 -3.7 -1.6 -2.5 -5.5 -4.2 5.2 -4.5 2.7 -5.7 -.8 -7.2 -1.3 -2.3 -2.5 -1.6 3.4 -5.3 -.6 -5.9 -1.7 -3.6 -1.9 -1.9 -8.5 -1.9 -6.9 3.3 -2.8 -.3 -2 1.1 -3.1 0 -6.2 1.5 3.8 8.4 4.1 5.6 -2.3 6.5 -.5 5.8 6.1 18.1 -.3 15.8 .9 9.4 -2 16 -.8 16.5 -3.4 20.2 -18.3 12.2 -4.3 4.7 -3 7.3 -.2 10.4 -7.5 1.8 -5.1 2.8 -7.2 6.4 -4.1 5.6 -10.6 -.7 -34.7 1.5 -9.5 2 -4.3 1.8 -3.7 2.4 -3.1 3.4 6.5 -11.8 8 -1.4 14.7 0 8.8 -.8 1.9 -.7 5 -4.5 20.1 4.4 3.8 -7.7 2.9 -3.2 6.5 -3.5 7.5 -1.3 -1.8 -8.9 1.5 -9.4 2.5 -2.1 7.2 -3.2 -2 -15.1 9.6 -5.8 4.4 -4.4 5.8 -7.9 2.9 -8.3 -1.1 -13.8 4.7 -15.7 .4 -5 -.7 -5.7 -3.1 -10 -2.2 -3.8 -3.2 -1.9 -6.2 -.8 6 -5.8 .9 -3.7 .2 -6.1 -2.1 -11.5 -6.3 -4.4 -1.7 2.1 -6.4 4 -28.7 10.5 -16.6 3.8 -19.8 2.7 -13.4 5.3 -9.8 1.1 -35.8 -3.1 -23.3 -5.3 -3.1 10.6 -2.7 5.2 -2 1.8 -1.4 3.5 -4 13.8 1.9 14.5 1.8 2.9 .9 3.8 0 5.9 -.9 4.2 2.5 3 3.1 6.3 2.7 14 3.1 3.8 4.1 2.1 1.1 1.5 .7 4.3 -1 7.2 -6.3 22.4 -1.7 -8.7 -7.6 9.7 -6.6 11.8 1 4.5 5.8 14.6 -6.1 -3 -5.1 -4.5 -4.6 -10.1 -6.5 -8.3 -15.5 -7.8 -5.7 -8.2 4 4 7.3 3.8 7.3 3.1 6 .3 8.1 -2.6 11.5 -6.2 3.7 -3.3 2.1 -4.3 .7 -5 -1.6 -10.5 -3.9 -9.1 -4.2 -5.1 -1.5 -.2 .6 -3.7 -1.2 -4.7 -3.4 -6.6 -2.6 -3 1.8 -3.2 -.8 -6.9 -1.9 -4.5 -3.1 -3.7 1.8 -1.3 2 -3.7 .1 -6.6 -1.5 -5.3 3.2 -3.8 .9 -3.9 -.9 -2.1 1.5 -1.6 1 -3 .5 -5.2 -.6 -3.2 1.6 -1.4 .8 -4.3 -1.4 -6.1 3.6 -2.1 1.7 -3.9 -.1 -4.8 -4.9 -6.4 3 1.9 3 -.3 8 -6.2 -4.7 5.4 8 2.3 4.8 5.4 1.9 .4 2.3 -.8 6.1 -4.9 -3.8 6.8 -.1 1.5 3 1.9 8.6 .9 9.2 -.4 2.3 -2 2.6 -5.5 .5 7.9 .5 1.8 1.5 1.3 5 1.1 6.1 -.3 5.3 -1.3 2.6 -1.7 3.3 2 3.1 -1.6 2.9 -4 3.6 2 6.2 -1.6 4.9 -4.4 1.3 -3 6 3 6.2 -.2 1.8 -4.5 -.9 -5.2 5.1 4.5 5.8 2 1.7 -.9 1.2 -1.9 1.1 -5.5 3.4 2.5 6.5 -.4 5.7 -3.6 2 -3.3 1.4 1.8 3 1.8 3.5 .8 3 -.3 .8 -2.6 -1.2 -5 2.5 5.4 1 1 3.1 -.1 6 -3.4 7.1 -5.8 5.8 .5 6.8 -1.3 9.5 -3.6 5.1 -3.4 4.3 -.6 4.5 -3.7 3.6 -6.4 .6 2.7 -.4 5.4 -1.5 4.8 -2.8 3.7 .2 6.4\" fill=\"#c6b5b5\" /></g><path d=\"M249.5 -15.4l2.5 1.2 10.1 82.9 .5 18.6 1.1 5.9 2.1 4.2 3.4 3.5 2 .4 9.6 -10.1 4.3 -3.2 8.9 -4.9 8.1 -2.6 12 -.5 6.9 1.5 5.9 2.4 6.7 4.6 3.1 3.1 5.4 7.7 2.1 4.7 2.6 10.9 .4 6.2 -1.3 12.3 -4.4 11.1 -3.5 5.3 -9.8 10.6 -14.1 10.9 -8.8 5.7 -11.8 6.3 -11.6 4.4 -11.1 2.8 -15.2 1.8 -13.9 -.3 -12.5 -2.6 -6.1 -3.5 -13.4 -10 -1.8 -1 -2.7 -.2 -4.5 1.5 -3.2 2 -4.2 5 -1.8 6.1 -.7 15.6 20.2 5.9 2 -3 3.4 -1.3 5.9 1 4.6 -.9 7.4 0 7.9 1.3 2.4 -4.2 7.7 -.9 6.9 .8 2.7 -3.5 5 -2.5 5.4 -1.3 4 .4 2.2 -1.4 6.7 -.8 4.7 -3.6 7 -2.3 2.3 -2.7 3 -1.8 5.7 -1.6 7.1 -.9 2.7 -2.9 5.4 -2.6 8.3 -1.1 9.6 .3 7.1 2 6.7 3.4 4.9 4.2 1.7 3.4 .7 4 -.6 10.4 -4.1 3.1 -.8 2.4 4.8 15 -.4 4.6 -2.8 7.6 2.7 10.7 -4.1 10.1 3.2 9.6 -2.7 8.4 2.1 11.9 -2.4 12 3.1 12 -1.3 5.3 -5.1 7.7 .9 11.3 -1.6 4.5 -3.8 5.7 .9 10.4 -.7 3.3 -5.2 5.6 -.8 5.3 -2.2 4.7 -9.1 9.5 -7.4 15.6 -6.3 7.7 -7.8 5 -10.1 4.7 -12.1 2.9 -17.9 2 -9 -.1 -5.6 -1.2 -11 -4.4 -8.5 -4.9 3.9 9.5 1.5 6.7 -.3 2.9 -1.7 4 -5.3 6.3 4.4 8.8 1.4 7 -.1 4.3 -2.7 7.6 -6.1 10.3 -1.4 4.4 -2.3 0 -2.8 -.3 -.8 -3.8 -6.4 -16 -.9 -7.8 2.7 -16.6 -5.6 -11.6 -2 -7 .2 -6.4 1.7 -6 4.1 -7.5 4.2 -4.9 -12.4 1 -10.6 -.9 -7.1 -2.8 -13.2 -8.7 -2.1 1 -3.5 .2 -8.2 -2 -2.5 -4.2 -1 -7.5 .3 -5.5 2.4 -10.8 -7.8 13.1 -4.5 5.3 -2.2 6.4 -5.8 9.9 1 5.1 6.1 11 -2.4 -.5 -2 -1.4 -3.5 -4.6 -5.4 -13.1 -1.7 -2.2 -5.4 -4.3 -12.2 -5.6 -6.1 -5.6 -4.5 -6.1 -2.3 -8 .3 -12.4 -3.8 -3.1 -2.2 -3.8 .6 -6.2 2.5 -5.1 -4.7 -8.3 -.7 -6.3 2.4 -8.5 2.8 -4.5 -2.5 -6.3 .1 -5.3 2.1 -4.7 3.2 -3.3 -.4 -1.5 .8 -3.2 3.4 -4.6 -1.8 -5.7 -.3 -5 1.1 -4.2 1.4 -1.8 1 -8.4 1.5 -3.1 1.9 -1.8 .7 -8.5 2.5 -3.7 4.3 -3.8 1.5 -6.5 2.7 -3.5 2.9 -1.9 1.6 -5.7 2.8 -4.7 5.3 -5.2 7.2 -3.2 5.4 .6 7.6 3.5 2.5 -1.6 3.2 -.6 4.7 .4 4.1 1.3 .7 -14.5 2.5 -10.4 3.7 -7.2 4.2 -4.8 4.2 -3.1 4.1 -1.9 7.8 -1.9 10.3 -1.2 6.5 -5.1 19 -.7 3.4 -1.8 2.9 -2.8 4.3 -6.7 1.6 -6.6 .1 -16.2 -4.5 -55.5 -3.5 -25.6 -6.9 -38.7 10.2 -3.2M249.5 -17.4l-8 1.4 -10 3.3 7.2 40.3 3.4 24.6 4.5 53 0 19.2 -1.5 6 -4 6.2 -5.3 3.9 -18.9 .6 -6.5 5.1 -15.6 2.3 -5.2 1.8 -4.5 2.8 -6.8 7.1 -3.7 7.2 -2.5 9.8 -1 13.1 -7.6 -.8 -5.3 1.7 -7.2 -3.1 -6.2 -.5 -7.7 3.5 -5.6 5.4 -3 4.8 -1.9 5.6 -5 4.9 -2.1 7.3 -4.8 4.6 -2 3.5 -.8 7.9 -3.1 5 -1.1 8.3 -2.5 6.2 -.1 4.1 1.6 6.8 -2.3 3.4 -1.4 5.6 -3.1 4 -2.1 5.6 .3 5 2 5.5 -3.2 6.9 -1.6 8.1 1.5 6.9 3.5 5.9 -2.3 5.8 -.3 6.1 1.9 3.7 3.9 3.8 0 12.6 2.4 7.7 4.7 6.5 6.5 6 4.8 2.7 7.5 2.9 4.8 3.8 1.5 1.8 5.7 13.6 4.4 5.4 3.1 1.6 4.9 .1 -7.4 -13.7 -.9 -3.7 5.6 -9.4 1.9 -6.1 6.5 -8.3 -.1 6.6 1 6.4 1.5 3.5 2.7 2.2 7.1 1.8 6.9 -.6 11 7.3 7.6 3.4 9.4 1.2 10.3 -.2 -5.5 10.1 -1.6 7.3 .1 5.1 1.8 6.7 5.8 12 -2.7 15.7 .7 7.8 6.8 17.5 .6 4.6 4.7 .7 4.1 -.2 1.3 -5 6.4 -10.8 2.8 -8 -1 -10.7 -4 -9.4 4.4 -5.7 2 -5.2 -.3 -5.6 -2.9 -8.1 10.3 4.7 7.8 2.4 7.9 .6 12.9 -.8 13.7 -2.2 11.3 -3.3 11 -5.9 5.2 -3.8 5.8 -7.4 7.7 -16 8.7 -8.9 2.6 -5.5 .6 -4.7 3 -2.5 2.5 -3.8 .7 -4.2 -.9 -9.5 3.8 -5.4 1.7 -5.3 -1 -10.8 5 -7.3 1.4 -5.9 -3.1 -12.2 2.4 -11.3 -2.1 -12.6 2.6 -8.7 -3.2 -9.1 4 -9.4 -.2 -3.9 -2.4 -7.2 2.6 -6.9 .7 -4.5 -1 -5.8 -3.7 -10.4 3.6 -3.2 1.1 -2 .6 -10.4 -1.8 -7.4 -2.4 -3.1 -3.8 -3 -7.2 -3.7 -5.1 -1.6 -7.6 -.8 -8.8 .3 -8.3 2.3 -5.1 4.1 -6.7 .9 -5.7 1.7 -3.1 1.9 -2.5 2.7 -6.8 2.3 -4.8 3.4 -16.9 2.8 -5.3 2.3 -3.8 3.6 -6.8 -.4 -6.9 .9 -1.6 .8 -1.8 2.9 -8.6 -1 -10.1 .8 -5.9 -.8 -3.3 1 -3 3 -17.2 -5 .6 -13.1 1.7 -6.2 3.7 -4.4 6.8 -3.1 2.6 .6 18.2 12.9 5.4 2.2 8.6 1.5 10.8 .6 14.1 -.9 16.7 -3.6 12 -4.5 12.4 -6.6 8.9 -5.8 14.3 -11 10.1 -10.8 3.6 -5.5 4.5 -11.6 1.4 -12.8 -.4 -6.7 -2.8 -11.5 -2.3 -4.9 -5.7 -8.1 -3.3 -3.2 -6.9 -4.7 -6.6 -2.6 -7.3 -1.5 -7.2 -.1 -5.7 .9 -8.6 2.9 -8.7 4.9 -4.7 3.6 -8.6 9.2 -3 -3 -2.7 -7.1 -.7 -20 -10.2 -83.6 -1.4 -2.2Z\" fill=\"#8f6464\" /></g></g><path d=\"M144.2 367.3l-7 -11.7 -6.1 -17.2 -2.3 -15.1 -1.5 -26.1 .5 -23 4.6 -20.2 5.4 -16.7 3.1 -6.9 1.1 -1.2 5.1 -1.6 -5.9 -6.6 -3.1 -6 -1.5 12.2 -7 20.5 -4.7 22.5 -1.6 19.1 .2 20.6 1.9 19.5 3.9 17 2.8 7.1 3.4 6 4 4.6Z\" fill=\"#f5e5e5\" /><path d=\"M157.3 197.1l3.8 1.2 1.8-1.5 1.1 5.1 1.3 1.6 8.1 4.9 11.1 4.4 9.4 2.1 10.4 1.1 17 1.3 7.9-.2 24.5-3.3 39.4-11.9 24.7-9.7 22.4-13.8-8.3 9.9-8.2 4.3-18.5 7.3-32.6 11.2-26.1 6.6-35.3 2.3-25.7-4.6-15.6-4.5-6.2-5.6Z\" fill=\"#f5e5e5\" /><path d=\"M158.8 329.4l9.4.5 3.6 5.8-5.1.1-3.3 1.1M154.2 326.8l9.1 13.4 1.1-1.5 2.6-.9 9.4 0-3.1-3.5-4.1-6.6-5.5.2Z\" fill=\"#8f6464\" /><path d=\"M332.4 214.1l5 28.4 -.9 30.5 -2.2 34.4 -5.1 41.3 -7.5 21.6 -8.1 16.9 9.9 -15.2 7.4 -15.5 1.8 -8.6 3.6 -31.3 3.2 -51.3 .5 -28.3 -.6 -7.9 -3.4 -13.5 -.8 -2Z\" fill=\"#f5e5e5\" /><path d=\"M306.6 338.2l.3 14-5.4 2.4-3.3 4.2-1.5 6.8 1 9.1-6.5 1.1-5 2.9-5.5 6.2-3.1 6.3-18-4.2.3-7.6 16 1.2 1.8-.5 4-3.2 5.9-7.4 5.2-8.8 1-5.6-1.1-5.2 2.6-1.3 3.3-3.2 3.4-6.9M308.5 335.6l-5 .9-3-.5-1.4 4.9-3.1 4.6-2.7 2.1-3.8.8 2.4 5.2-.6 6-6.3 10.5-6.4 7.3-2.5 1.2-10.1-.5-6.4-.9-2.2-1.2 1 7.8-1.3 4.4 22.2 5 3.8-8 5.9-5.9 5.4-2.3 6.1 0-1.6-8.8.3-5.6 2-4.7 1.9-1.8 5.9-2.2Z\" fill=\"#8f6464\" /><path d=\"M217.9 396.1l7.5-1.8 24.4-1.3 5.3-1.9 3.4-3.4\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M162.9 337.6l2 5 .4 4.9-1.5 8.4-2.7 5.2\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M155.2 327.1l.1 -6 -1.4 -4.1 -2.2 -2.7 -4.6 -3.1 1 -11.1 -1.5 -3.9 -2.6 -2.6 2 -4.2 .7 -3.8 -.5 -4.7 -1.3 -3.4 3.2 -6.3 -1.3 -3.6 2.6 -4.1 1.1 -3.9 -1.2 -5.2 4.9 -7.6 .1 -2.3 -1.1 -3.1 2 -3 1.1 -4.7 8.5 4 5.5 .5 3.2 2.6 4.4 2 3.6 .4 4.1 -.8 4.2 3.4 4.7 2.1 3.6 .3 4 -.7 8.4 2.9 4.4 .1 5.4 -1.6 4 -2.6 5.7 .3 4.6 -2.4 6.4 -.6 8.7 -5.7 8.5 1.1 4.7 -1.8 2.9 -2.7 9.5 0 2.9 -1.6 2.6 -3.2 6.7 -.2 4.4 -1.5 3.9 -4.1 6.3 .8 3.1 -1.2 1.7 -2.1 6.6 0 4.2 1.3 2.7 2 4.4 11.3 -.7 10.2 -2.6 4.1 -3.6 3.6 7.4 1.3 3.6 3.7 3.7 9.8 .7 10.7 -1.5 7.9 -3.2 8.4 .9 15.1 -2.9 8.4 -3.8 6.4 -3.7 3.8 -11.8 7.6\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M172.6 191.8l9.1 8.3 4.4 2.1 6.1 1.7\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M313.7 221.1l6.1-3.3 3.1-3.2 19.8-3.1 9.8-4-8 4.4-13.3 3.4-6.8.7-4.7 3.7Z\" fill=\"#8f6464\" /></g></g>"};
+/* Megaloblastic anaemia scene: vitamin supply and absorption, marrow DNA failure, macrocytes and myelin.
+ * Folate tablets dissolve into the supply stream; B12 visibly binds intrinsic factor at the stomach,
+ * trapped folate parks uselessly until B12 frees it, and replacement B12 bypasses a gut that cannot absorb. */
 const layers = { supply: $("supply"), marrow: $("marrow"), blood: $("blood"), over: $("over"), panel: $("panel") };
-const folTrack = track([[70, 116], [92, 350], [180, 410], [360, 410], [428, 262]]);
-const b12Track = track([[155, 116], [100, 158], [106, 236], [186, 288], [236, 408], [360, 410], [428, 262]]);
-let eryG = null, eryNuc = null, macroG = null, lobesG = null, blockG = null, dnaG = null;
-const daughters = [], myelinSegs = [];
+let stomachO = null, bowelO = null;
+let folTrack = null, b12TrackA = null, b12TrackB = null, bypassTrack = null, bindPt = [130, 250], ileumPt = [212, 360];
+let haloEl = null, eryG = null, eryNuc = null, blockG = null, dnaG = null;
+const daughters = [], myelinSegs = [], myelinGaps = [], vesselCells = [], trapDots = [];
+let tabG = null, vialG = null, capEl = null, capKey = -1;
+const FOL_FOOD = [52, 100], B12_FOOD = [160, 100], TAB_SPOT = [52, 168], VIAL_TOP = [264, 112], INSET_IN = [348, 338];
+function initOrgans() {
+  stomachO = organ($("stomachSlot"), "stomach", 105, 222, 130, {});
+  bowelO = organ($("bowelSlot"), "intestine", 218, 352, 130, {});
+  const SP = stomachO.ports, IP = bowelO.ports;
+  bindPt = SP.pylorus.slice(); ileumPt = IP.ileum.slice();
+  const gut = [IP.duodenum, IP.jejunum, IP.ileum];
+  folTrack = track([FOL_FOOD, [100, 170], gut[0], gut[1], gut[2], [300, 408], INSET_IN]);
+  b12TrackA = track([B12_FOOD, SP.in, SP.pylorus, gut[0], gut[1], gut[2]]);
+  b12TrackB = track([gut[2], [300, 408], INSET_IN]);
+  bypassTrack = track([[VIAL_TOP[0], VIAL_TOP[1] + 66], [318, 250], INSET_IN]);
+}
 function initSupply() {
-  cell(layers.supply, { cls: "fol", r: 13, nuc: 0, seed: 3, wob: 0.1, x: 70, y: 100 });
-  cell(layers.supply, { cls: "b12", r: 13, nuc: 0, seed: 5, wob: 0.1, x: 155, y: 100 });
-  mk("ellipse", { class: "mg-organ", cx: 85, cy: 198, rx: 36, ry: 46, transform: "rotate(-14 85 198)" }, layers.supply);
-  mk("path", { class: "mg-gut", d: "M158 266h58a17 17 0 0 1 0 34h-46a15 15 0 0 0 0 30h58" }, layers.supply);
+  cell(layers.supply, { cls: "fol", r: 13, nuc: 0, seed: 3, wob: 0.1, x: FOL_FOOD[0], y: FOL_FOOD[1] });
+  cell(layers.supply, { cls: "b12", r: 13, nuc: 0, seed: 5, wob: 0.1, x: B12_FOOD[0], y: B12_FOOD[1] });
+  tabG = mk("g", { opacity: "0" }, layers.supply);
+  [[30, 158, 8], [58, 162, -10], [42, 178, 4]].forEach(([x, y, r]) => {
+    mk("rect", { class: "mg-tab", x: x - 15, y: y - 7, width: 30, height: 14, rx: 7, transform: "rotate(" + r + " " + x + " " + y + ")" }, tabG);
+    mk("path", { class: "mg-tab", d: "M" + (x - 15) + " " + y + "L" + (x + 15) + " " + y }, tabG);
+  });
+  vialG = mk("g", { opacity: "0" }, layers.supply);
+  mk("rect", { class: "mg-vcap", x: VIAL_TOP[0] - 8, y: VIAL_TOP[1], width: 16, height: 12, rx: 3 }, vialG);
+  mk("rect", { class: "mg-vial", x: VIAL_TOP[0] - 14, y: VIAL_TOP[1] + 12, width: 28, height: 54, rx: 7 }, vialG);
+  mk("rect", { class: "mg-vial", x: VIAL_TOP[0] - 9, y: VIAL_TOP[1] + 34, width: 18, height: 26, rx: 5 }, vialG);
 }
 function initMarrow() {
+  haloEl = mk("ellipse", { class: "mg-halo", cx: 430, cy: 205, rx: 80, ry: 68, opacity: "0" }, layers.marrow);
   eryG = mk("g", { class: "cl cl-mega" }, layers.marrow);
   mk("path", { class: "cl-b", d: blobD(46, 4, 0.08, 9) }, eryG);
   mk("path", { class: "cl-s", d: blobD(39, 4, 0.08, 9), transform: "translate(2 2)" }, eryG);
@@ -444,74 +811,113 @@ function initMarrow() {
   for (let x = 368; x <= 592; x += 24) { const yy = Math.sin((x - 356) / 22) * 10; mk("path", { class: "mg-rung", d: "M" + x + " " + f1(338 - yy) + "L" + x + " " + f1(338 + yy) }, dnaG); }
   blockG = mk("g", { opacity: "0" }, layers.marrow);
   mk("path", { class: "mg-block", d: "M512 326L536 350M536 326L512 350" }, blockG);
+  for (let i = 0; i < 8; i++) trapDots.push(mk("circle", { class: "mg-trap", cx: 516 + i * 11, cy: 366, r: 4, opacity: "0" }, layers.marrow));
 }
 function initBlood() {
-  macroG = mk("g", { class: "cl cl-rbc" }, layers.blood);
-  mk("ellipse", { class: "cl-b", rx: 26, ry: 16 }, macroG); mk("ellipse", { class: "cl-s", rx: 10, ry: 5 }, macroG);
+  for (let i = 0; i < 4; i++) {
+    const g = mk("g", { class: "cl cl-rbc" }, layers.blood);
+    mk("ellipse", { class: "cl-b", rx: 20, ry: 12 }, g); mk("ellipse", { class: "cl-s", rx: 8, ry: 4 }, g);
+    vesselCells.push({ g, x: 700 + i * 58, y: 150 + (i % 2) * 55, vx: 10 + i * 2, ph: i * 1.7 });
+  }
+  const big = mk("g", { class: "cl cl-rbc" }, layers.blood);
+  mk("ellipse", { class: "cl-b", rx: 26, ry: 16 }, big); mk("ellipse", { class: "cl-s", rx: 10, ry: 5 }, big);
+  vesselCells.push({ g: big, x: 745, y: 152, vx: 0, ph: 0, anchor: true });
   const norm = mk("g", { class: "cl cl-rbc", transform: "translate(845 145)" }, layers.blood);
   mk("ellipse", { class: "cl-b", rx: 13, ry: 8 }, norm); mk("ellipse", { class: "cl-s", rx: 5, ry: 2.4 }, norm);
-  const neu = cell(layers.blood, { cls: "neut", r: 25, nuc: 0.55, nucCls: "multi", seed: 21, wob: 0.12, x: 795, y: 215 });
-  lobesG = mk("g", { class: "cl cl-neut" }, layers.blood);
+  cell(layers.blood, { cls: "neut", r: 25, nuc: 0.55, nucCls: "multi", seed: 21, wob: 0.12, x: 795, y: 215 });
+  const lobesG = mk("g", { class: "cl cl-neut" }, layers.blood);
   [[782, 204], [808, 208], [796, 228]].forEach(([x, y]) => mk("circle", { class: "cl-n", cx: x, cy: y, r: 6 }, lobesG));
+  vesselCells.lobes = lobesG;
   for (let i = 0; i < 5; i++) myelinSegs.push(mk("rect", { class: "mg-myel", x: 690 + i * 48, y: 340, width: 38, height: 24, rx: 10 }, layers.blood));
+  for (let i = 0; i < 4; i++) myelinGaps.push(mk("rect", { class: "mg-gap", x: 726 + i * 48, y: 336, width: 12, height: 32, rx: 5, opacity: "0" }, layers.blood));
 }
-function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, u: 0, k: 0 }; }); }
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, u: 0, k: 0, st: 0, bound: false }; }); }
 const folDots = pool(22, () => mk("circle", { class: "sc-p p-fol", r: 3 }, layers.supply));
-const b12Dots = pool(22, () => mk("circle", { class: "sc-p p-b12", r: 3.2 }, layers.supply));
+const b12Dots = pool(24, () => mk("circle", { class: "sc-p p-b12", r: 3.2 }, layers.supply));
+const passDots = pool(14, () => mk("circle", { class: "sc-p p-b12", r: 3.4 }, layers.supply));
 const ifDots = pool(12, () => mk("path", { class: "p-if", d: "M0 -4L3 0L0 4L-3 0Z" }, layers.supply));
 const dnaDots = pool(16, () => mk("rect", { class: "sc-p p-cyt2", x: -2.4, y: -2.4, width: 4.8, height: 4.8, rx: 1 }, layers.marrow));
 const freeP = (pl) => pl.find((p) => !p.on);
-function emit(p, x, y, vx, vy) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.u = 0; p.e.setAttribute("opacity", "1"); }
+function emit(p, x, y, vx, vy) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.u = 0; p.st = 0; p.bound = false; p.e.setAttribute("opacity", "1"); }
 function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
 const gg = {};
 function initPanel() {
   const P = layers.panel, y0 = 478, h = 70, xs = [110, 285, 460, 635, 810];
   mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: 912, height: 142, rx: 14 }, P);
   const t = mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P); t.textContent = "The patient";
-  [["dna", "DNA synthesis", "g-good", "Copying of DNA in marrow cells. It needs folate, and B12 to keep folate working (the methyl trap when B12 is missing)."], ["b12", "Vitamin B12", "g-b12", "Vitamin B12 level. It falls when intake or absorption fails, and in pernicious anaemia where intrinsic factor is missing."], ["fol", "Folate", "g-fol", "Folate level from food and replacement. Folate can look normal while B12 lack traps it in an unusable form."], ["macro", "Red cell size", "g-macro", "Size of red cells leaving the marrow. Too few divisions make large red cells (macrocytes, raised mean cell volume)."], ["nerve", "Nerves", "g-good", "Health of myelin and nerves. Only B12 lack damages them; folate lack alone does not."]]
+  [["dna", "DNA synthesis", "g-good", "Copying of DNA in marrow cells. It needs folate, and B12 keeps folate working."], ["b12", "Vitamin B12", "g-b12", "Vitamin B12 level. It falls when intake or absorption fails, and in pernicious anaemia where intrinsic factor is missing."], ["fol", "Folate", "g-fol", "Folate level from food and replacement. Folate can look normal while B12 lack traps it in an unusable form."], ["macro", "Red cell size", "g-macro", "Size of red cells leaving the marrow. Too few divisions make large red cells."], ["nerve", "Nerves", "g-good", "Health of myelin and nerves. Only B12 lack damages them. Folate lack alone does not."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
-  const ox = layers.over;
-  pill(ox, "Folate", 70, 114, 62, 142, "Folate from green vegetables and other foods. It is absorbed in the upper small bowel and supplies building blocks for DNA.");
-  pill(ox, "Vitamin B12", 155, 114, 168, 142, "Vitamin B12 from animal foods. It must bind intrinsic factor and be absorbed in the terminal ileum.");
-  pill(ox, "Intrinsic factor", 114, 192, 205, 200, "Intrinsic factor: a protein made by parietal cells in the stomach. B12 binds it for absorption. In pernicious anaemia it is missing, so B12 is not absorbed.");
-  pill(ox, "Terminal ileum", 196, 300, 190, 382, "Terminal ileum: the end of the small bowel, where the B12 and intrinsic factor complex is absorbed.");
-  pill(ox, "Erythroblast", 430, 160, 430, 125, "Erythroblast: a red cell precursor in the marrow. Its cytoplasm matures and turns pink while its nucleus lags behind when DNA synthesis fails.");
-  pill(ox, "Lagging nucleus", 444, 200, 550, 125, "The nucleus cannot copy its DNA and divide on time, while the cytoplasm keeps growing. This mismatch is nuclear cytoplasmic asynchrony.");
-  pill(ox, "Daughter cells", 568, 206, 560, 280, "Healthy precursors divide several times, making many smaller red cells. With too little DNA building material there are fewer divisions and each cell stays large.");
-  pill(ox, "DNA synthesis", 524, 338, 480, 418, "Making DNA building blocks (including thymine) needs folate, and B12 keeps folate in its usable form. When either is missing, DNA copying stalls.");
-  pill(ox, "Macrocyte", 745, 132, 738, 112, "Macrocyte: an unusually large red cell released from a megaloblastic marrow. The mean cell volume is raised.");
-  pill(ox, "Normal red cell", 845, 137, 858, 112, "A normal sized red cell for comparison. Macrocytes are larger and often oval.");
-  pill(ox, "Hyperseg. neutrophil", 795, 240, 798, 282, "A neutrophil whose nucleus has too many lobes (hypersegmented). A classic sign of megaloblastic marrow failure.");
-  pill(ox, "Myelin", 758, 350, 718, 398, "Myelin: the fatty sheath around nerve fibres. B12 lack thins it and damages nerves and the spinal cord; folate lack alone does not.");
+  const ox = layers.over, SP = stomachO.ports, IP = bowelO.ports;
+  pill(ox, "Folate", FOL_FOOD[0], FOL_FOOD[1], 56, 132, "Folate from food. It supplies blocks for copying DNA.");
+  pill(ox, "Vitamin B12", B12_FOOD[0], B12_FOOD[1], 170, 132, "B12 from food. It must bind intrinsic factor to be absorbed.");
+  pill(ox, "Stomach", SP.fundus[0], SP.fundus[1], 60, 308, "The stomach makes intrinsic factor. B12 binds it here.");
+  pill(ox, "Ileum", IP.ileum[0], IP.ileum[1], 258, 210, "Terminal ileum. The B12 complex is absorbed here. In pernicious anaemia this step fails.");
+  pill(ox, "Marrow", 400, 170, 352, 112, "Marrow precursors. Without DNA blocks the nucleus lags while the cell body keeps growing.");
+  pill(ox, "DNA", 470, 338, 600, 300, "DNA copying needs folate, and B12 keeps folate usable. Lack stalls copying.");
+  pill(ox, "Blood cells", 745, 152, 745, 286, "Large red cells and lobed neutrophils spill into blood.");
+  pill(ox, "Nerves", 800, 352, 800, 398, "Myelin around nerves. Only B12 lack damages it. Folate cannot protect nerves.");
+  capEl = mk("text", { class: "mg-cap", x: 30, y: 430 }, ox); capEl.textContent = "";
 }
-const sm = { dna: 0.3, macro: 0.7, nerve: 0.2, folLvl: 0.5, bLvl: 0.2, fEff: 0.7, bEff: 0.8, ifK: 1, txB: 0 };
-const acc = { fol: 0, b12: 0, ifd: 0, dna: 0 };
-function init() { initSupply(); initMarrow(); initBlood(); initPanel(); }
+function capText(t, d) {
+  if (d === 1) return t === 0 ? "Folate restocks DNA blocks. Copying restarts and red cells recover." : "Folate restocks DNA blocks, so red cells recover. Nerves still need B12.";
+  if (d === 2) return t === 0 ? "B12 cannot fix a folate lack. DNA copying still stalls." : t === 1 ? "B12 frees trapped folate and feeds nerves. Blood and nerves recover." : "Replacement B12 bypasses the gut. Blood and nerves recover.";
+  if (d === 3) return "Folate plus B12 restocks everything. DNA, red cells and nerves recover.";
+  return t === 0 ? "No treatment. Folate is low, so DNA copying stalls and red cells come out oversized." : t === 1 ? "No treatment. B12 is low, so DNA copying stalls and red cells are oversized. Nerves suffer." : "No treatment. Without intrinsic factor, B12 cannot be absorbed. Nerves suffer too.";
+}
+const sm = { dna: 0.3, macro: 0.7, nerve: 0.2, folLvl: 0.5, bLvl: 0.2, fEff: 0.7, bEff: 0.8, ifK: 1, txF: 0, txB: 0 };
+const acc = { fol: 0, b12: 0, pass: 0, ifd: 0, dna: 0 };
+function init() { initOrgans(); initSupply(); initMarrow(); initBlood(); initPanel(); }
 function step(dt, m) {
   const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.45), kN = Math.min(1, dt * 0.3);
   sm.dna = lerp(sm.dna, m.dna, k1); sm.macro = lerp(sm.macro, m.macro, k1); sm.folLvl = lerp(sm.folLvl, m.folLvl, k1); sm.bLvl = lerp(sm.bLvl, m.bLvl, k1);
-  sm.fEff = lerp(sm.fEff, m.fEff, k1); sm.bEff = lerp(sm.bEff, m.bEff, k1); sm.ifK = lerp(sm.ifK, m.ifK, k1); sm.txB = lerp(sm.txB, m.txB, k1);
+  sm.fEff = lerp(sm.fEff, m.fEff, k1); sm.bEff = lerp(sm.bEff, m.bEff, k1); sm.ifK = lerp(sm.ifK, m.ifK, k1);
+  sm.txF = lerp(sm.txF, m.txF, k1); sm.txB = lerp(sm.txB, m.txB, k1);
   sm.nerve = lerp(sm.nerve, m.nerve, sm.nerve < m.nerve ? kN : k1);
-  const eryS = 1 + 0.36 * sm.macro;
+  const eryS = 0.92 + 0.44 * sm.macro;
+  haloEl.setAttribute("opacity", (0.55 * sm.macro * (0.9 + 0.1 * Math.sin(tm / 500))).toFixed(2));
   place(eryG, 430, 205, Math.sin(tm / 2400) * 5, eryS);
   place(eryNuc, 444, 200, 0, eryS * (1.18 - 0.42 * sm.macro));
   daughters.forEach((d) => { const s = clamp((sm.dna - d.i * 0.16) * 1.7, 0.08, 1); place(d.g, d.x, d.y, Math.sin(tm / 700 + d.i * 2) * 10, s); d.g.style.opacity = s > 0.2 ? 1 : 0.25; });
-  dnaG.setAttribute("opacity", (0.3 + 0.7 * sm.dna).toFixed(2));
+  dnaG.setAttribute("opacity", (0.35 + 0.65 * sm.dna).toFixed(2));
   blockG.setAttribute("opacity", clamp(1 - sm.dna * 1.4).toFixed(2));
-  place(macroG, 745, 152, Math.sin(tm / 900) * 12, 0.78 + 0.55 * sm.macro);
-  lobesG.setAttribute("opacity", sm.macro.toFixed(2));
+  const nTrap = Math.round(8 * clamp(sm.bEff * 1.15 - 0.08));
+  trapDots.forEach((e, i) => { const on = i < nTrap; e.setAttribute("opacity", on ? "1" : "0"); if (on) e.setAttribute("transform", "translate(" + f1(Math.sin(tm / 600 + i * 2.1) * 2.5) + " " + f1(Math.cos(tm / 700 + i * 1.7) * 2.5) + ")"); });
+  tabG.setAttribute("opacity", sm.txF.toFixed(2));
+  vialG.setAttribute("opacity", sm.txB.toFixed(2));
+  vesselCells.forEach((c) => {
+    if (c.anchor) { place(c.g, c.x, c.y + Math.sin(tm / 900) * 3, Math.sin(tm / 900) * 12, 0.78 + 0.55 * sm.macro); return; }
+    c.x += c.vx * dt; if (c.x > 912) c.x = 688;
+    place(c.g, c.x, c.y + Math.sin(tm / 800 + c.ph) * 6, Math.sin(tm / 900 + c.ph) * 10, 0.7 + 0.6 * sm.macro);
+  });
+  vesselCells.lobes.setAttribute("opacity", sm.macro.toFixed(2));
   myelinSegs.forEach((r) => { const th = 8 + 18 * sm.nerve; r.setAttribute("y", f1(352 - th / 2)); r.setAttribute("height", f1(th)); });
-  acc.fol += dt * (1.5 + 8 * sm.folLvl); while (acc.fol >= 1) { acc.fol--; const p = freeP(folDots); if (p) { emit(p, 70, 116, 0, 0); } }
-  folDots.forEach((p) => { if (!p.on) return; p.u += dt * 0.14; if (p.u >= 1) { kill(p); return; } const q = folTrack.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")"); });
-  const blocked = sm.ifK < 0.5 && sm.txB < 0.5;
-  acc.b12 += dt * (1.5 + 8 * sm.bLvl + (blocked ? 5 : 0)); while (acc.b12 >= 1) { acc.b12--; const p = freeP(b12Dots); if (p) emit(p, 155, 116, 0, 0); }
-  b12Dots.forEach((p) => { if (!p.on) return; p.u += dt * 0.14; if (blocked && p.u > 0.5) { kill(p); return; } if (p.u >= 1) { kill(p); return; } const q = b12Track.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")"); });
-  acc.ifd += dt * sm.ifK * 5; while (acc.ifd >= 1) { acc.ifd--; const p = freeP(ifDots); if (p) emit(p, 112, 196, rnd(14, 22), rnd(22, 30)); }
-  ifDots.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(tm / 6) + ")"); if (p.t > 3.4 || p.y > 320) kill(p); });
+  myelinGaps.forEach((r) => r.setAttribute("opacity", clamp(1.1 - sm.nerve * 1.6).toFixed(2)));
+  const gutOpen = sm.ifK >= 0.5;
+  acc.fol += dt * (1 + 9 * sm.folLvl); while (acc.fol >= 1) { acc.fol--; const p = freeP(folDots); if (p) { const fromTab = sm.txF > 0.5 && Math.random() < 0.5; emit(p, fromTab ? TAB_SPOT[0] + rnd(-14, 14) : FOL_FOOD[0], fromTab ? TAB_SPOT[1] + rnd(-6, 6) : FOL_FOOD[1], 0, 0); } }
+  folDots.forEach((p) => { if (!p.on) return; p.u += dt * 0.12; if (p.u >= 1) { kill(p); return; } const q = folTrack.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")"); });
+  acc.b12 += dt * (1 + 9 * sm.bLvl); while (acc.b12 >= 1) { acc.b12--; const p = freeP(b12Dots); if (p) { emit(p, B12_FOOD[0], B12_FOOD[1], 0, 0); p.e.setAttribute("class", "sc-p p-b12"); } }
+  b12Dots.forEach((p) => {
+    if (!p.on) return;
+    if (p.st === 0) {
+      p.u += dt * 0.11; const q = b12TrackA.at(Math.min(1, p.u)); p.x = q.x; p.y = q.y;
+      if (!p.bound && gutOpen && Math.hypot(q.x - bindPt[0], q.y - bindPt[1]) < 30) { p.bound = true; p.e.setAttribute("class", "sc-p p-b12if"); }
+      p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")");
+      if (p.u >= 1) { if (gutOpen) { p.st = 1; p.u = 0; } else { p.st = 2; p.t = 0; p.vx = rnd(-6, 6); p.vy = rnd(14, 22); } }
+    } else if (p.st === 1) {
+      p.u += dt * 0.12; if (p.u >= 1) { kill(p); return; } const q = b12TrackB.at(p.u); p.x = q.x; p.y = q.y;
+      p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")");
+    } else { p.t += dt; p.x += (p.vx || 0) * dt; p.y += (p.vy || 0) * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", clamp(1 - p.t / 1.6).toFixed(2)); if (p.t > 1.6) kill(p); }
+  });
+  if (sm.txB > 0.5) { acc.pass += dt * 7; while (acc.pass >= 1) { acc.pass--; const p = freeP(passDots); if (p) emit(p, VIAL_TOP[0], VIAL_TOP[1] + 66, 0, 0); } }
+  passDots.forEach((p) => { if (!p.on) return; p.u += dt * 0.22; if (p.u >= 1) { kill(p); return; } const q = bypassTrack.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")"); });
+  acc.ifd += dt * sm.ifK * 5; while (acc.ifd >= 1) { acc.ifd--; const p = freeP(ifDots); if (p) { const SP = stomachO.ports; emit(p, SP.antrum[0] + rnd(-8, 8), SP.antrum[1] + rnd(-8, 8), (SP.pylorus[0] - SP.antrum[0]) * 0.45, (SP.pylorus[1] - SP.antrum[1]) * 0.45); } }
+  ifDots.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(tm / 6) + ")"); if (p.t > 3.2) kill(p); });
   acc.dna += dt * sm.dna * 9; while (acc.dna >= 1) { acc.dna--; const p = freeP(dnaDots); if (p) emit(p, 430 + rnd(-24, 24), 205 + rnd(-18, 18), rnd(-8, 26), rnd(-16, -6)); }
   dnaDots.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.t > 2.2) kill(p); });
   gg.dna.set(sm.dna, wordOf(sm.dna, 0.3, 0.65, ["low", "reduced", "working"])); gg.b12.set(sm.bLvl, wordOf(sm.bLvl, 0.3, 0.65, ["low", "reduced", "ok"])); gg.fol.set(sm.folLvl, wordOf(sm.folLvl, 0.3, 0.65, ["low", "reduced", "ok"]));
   gg.macro.set(sm.macro, wordOf(sm.macro, 0.3, 0.65, ["normal", "large", "very large"])); gg.nerve.set(sm.nerve, wordOf(sm.nerve, 0.35, 0.7, ["damaged", "at risk", "intact"]));
+  const key = m.t * 4 + drug;
+  if (key !== capKey) { capKey = key; const s = capText(m.t, drug); if (capEl.textContent !== s) capEl.textContent = s; }
 }
 run({ init, step });
 </script></body></html>

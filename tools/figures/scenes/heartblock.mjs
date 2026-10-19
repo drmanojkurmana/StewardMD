@@ -11,7 +11,7 @@ const W = 960, H = 610;
 
 /* ---------------- model ---------------- */
 const MD = {
-  level: { label: "Degree of AV block", a: [0, 1, 2, 3, 4], names: ["no block", "first degree", "second degree, Mobitz I (Wenckebach)", "second degree, Mobitz II", "third degree, complete block"], ticks: ["none", "first", "Mobitz I", "Mobitz II", "third"], start: 2 },
+  level: { label: "Degree of AV block", a: [0, 1, 2, 3, 4], names: ["no block", "first degree", "second degree, Mobitz I (Wenckebach)", "second degree, Mobitz II", "third degree, complete block"], ticks: ["none", "first", "Mobitz I", "Mobitz II", "third"], start: 4 },
   drugLabel: "Treatment",
   settings: [
     { label: "observe" },
@@ -51,23 +51,16 @@ const TESTS = [
   [1, 0, "signals reaching ventricles all · PR pattern long · ventricular rate normal · output normal"],
   [2, 0, "signals reaching ventricles most · PR pattern lengthening then a dropped beat · ventricular rate normal · output reduced"],
   [3, 1, "signals reaching ventricles some · PR pattern sudden dropped beats · ventricular rate slow · output low"],
+  [4, 0, "signals reaching ventricles none · PR pattern no relation · ventricular rate slow · output low"],
   [4, 2, "signals reaching ventricles none · PR pattern no relation · ventricular rate normal, paced · output normal"],
 ];
 
 /* ---------------- static layout ---------------- */
-const GEO = {
-  sa: [150, 112], av: [260, 214], his: [260, 252],
-  bach: [[150, 112], [210, 98], [300, 98], [350, 120]],
-  inter: [[150, 112], [190, 160], [240, 200], [260, 214]],
-  hisTrack: [[260, 214], [260, 252]],
-  lbb: [[260, 252], [292, 318], [330, 388]], rbb: [[260, 252], [226, 318], [188, 388]],
-  apexL: [330, 388], apexR: [188, 388], lead: [196, 384], pm: [452, 128], escape: [200, 330],
-};
+const PM = [470, 130];
 const ECG = { x: 556, y: 92, w: 372, h: 170, base: 190 };
 let grid = "";
 for (let x = ECG.x; x <= ECG.x + ECG.w; x += 18) grid += `<path class="hb-grid${(x - ECG.x) % 90 === 0 ? " major" : ""}" d="M${x} ${ECG.y}V${ECG.y + ECG.h}"/>`;
 for (let y = ECG.y; y <= ECG.y + ECG.h; y += 18) grid += `<path class="hb-grid${(y - ECG.y) % 90 === 0 ? " major" : ""}" d="M${ECG.x} ${y}H${ECG.x + ECG.w}"/>`;
-const P = (pts) => pts.map((p, i) => (i ? "L" : "M") + p[0] + " " + p[1]).join("");
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="526" height="396" rx="18"/>
 <rect class="hb-ecgbg" x="546" y="44" width="400" height="396" rx="18"/>
@@ -85,32 +78,36 @@ const body = `
 <rect id="delayfill" class="hb-fill" x="636" y="372" width="40" height="10" rx="5"/>
 <text class="hb-leg" x="636" y="404">short</text>
 <text class="hb-leg" x="928" y="404" text-anchor="end">blocked</text>
-<path id="ch-ra" class="hb-ch" d="M130 100Q130 88 150 88H232Q252 88 252 110V176Q252 200 230 200H150Q130 200 130 180Z"/>
-<path id="ch-la" class="hb-ch" d="M270 110Q270 88 292 88H372Q392 88 392 110V180Q392 200 370 200H292Q270 200 270 180Z"/>
-<path id="ch-rv" class="hb-ch" d="M102 238Q102 214 128 214H255V396Q190 428 140 386Q102 340 102 238Z"/>
-<path id="ch-lv" class="hb-ch" d="M265 214H402Q438 214 438 256Q438 340 394 394Q330 432 265 396Z"/>
-<path class="hb-septum" d="M260 214V400"/>
-<path class="hb-wire" d="${P(GEO.bach)}"/><path class="hb-wire" d="${P(GEO.inter)}"/><path class="hb-wire" d="${P(GEO.hisTrack)}"/><path class="hb-wire" d="${P(GEO.lbb)}"/><path class="hb-wire" d="${P(GEO.rbb)}"/>
-<path class="hb-fine" d="M292 318L346 308M330 388L380 360M330 388L318 330M226 318L172 308M188 384L142 360M188 384L204 330"/>
-<circle class="hb-node" cx="${GEO.sa[0]}" cy="${GEO.sa[1]}" r="8"/>
-<circle class="hb-node hb-avnode" cx="${GEO.av[0]}" cy="${GEO.av[1]}" r="9"/>
-<circle class="hb-node" cx="${GEO.his[0]}" cy="${GEO.his[1]}" r="5"/>
-<circle class="hb-escnode" cx="${GEO.escape[0]}" cy="${GEO.escape[1]}" r="6"/>
-<g id="delaybars" opacity="0.7"><rect class="hb-delaybar" x="240" y="202" width="5" height="24" rx="2"/><rect class="hb-delaybar" x="275" y="202" width="5" height="24" rx="2"/></g>
-<g id="blockx" opacity="0"><circle class="hb-x" cx="${GEO.av[0] + 20}" cy="${GEO.av[1] - 16}" r="8"/><path class="hb-xp" d="M${GEO.av[0] + 16} ${GEO.av[1] - 20}l8 8m0 -8l-8 8"/></g>
-<g id="helpm" opacity="0"><circle class="hb-okc" cx="${GEO.av[0] + 20}" cy="${GEO.av[1] - 16}" r="8"/><path class="hb-okp" d="M${GEO.av[0] + 16} ${GEO.av[1] - 16}l3 3l5 -6"/></g>
-<g id="pmg" opacity="0"><rect class="hb-pm" x="${GEO.pm[0] - 26}" y="${GEO.pm[1] - 16}" width="52" height="32" rx="8"/><path class="hb-lead" d="M${GEO.pm[0] - 26} ${GEO.pm[1]}Q330 150 236 160M${GEO.pm[0] - 26} ${GEO.pm[1] + 8}Q380 290 ${GEO.lead[0]} ${GEO.lead[1]}"/><circle class="hb-tip" cx="${GEO.lead[0]}" cy="${GEO.lead[1]}" r="4"/></g>
+<g id="heartSlot"></g>
+<ellipse id="flashA" class="hb-flasha" cx="283" cy="155" rx="69" ry="45"/>
+<ellipse id="flashV" class="hb-flashv" cx="258" cy="323" rx="60" ry="58"/>
+<path id="wSA" class="hb-wire" d="M302 129Q318 140 329 155"/>
+<path id="wAV" class="hb-wire" d="M302 129Q280 180 258 239"/>
+<path id="wHis" class="hb-wire" d="M258 239L258 277"/>
+<path id="wLBB" class="hb-wire" d="M258 277Q290 320 306 355"/>
+<path id="wRBB" class="hb-wire" d="M258 277Q230 320 210 355"/>
+<path id="wEsc" class="hb-wire" d="M258 323L254 368"/>
+<circle id="ndSA" class="hb-node" cx="302" cy="129" r="8"/>
+<circle id="ndAV" class="hb-node hb-avnode" cx="258" cy="239" r="9"/>
+<circle id="ndHis" class="hb-node" cx="258" cy="277" r="5"/>
+<circle id="ndEsc" class="hb-escnode" cx="258" cy="323" r="6"/>
+<g id="delaybars" opacity="0.7" transform="translate(258 239)"><rect class="hb-delaybar" x="-24" y="-12" width="5" height="24" rx="2"/><rect class="hb-delaybar" x="19" y="-12" width="5" height="24" rx="2"/></g>
+<g id="blockx" opacity="0" transform="translate(258 239)"><circle class="hb-x" cx="20" cy="-16" r="8"/><path class="hb-xp" d="M16 -20l8 8m0 -8l-8 8"/></g>
+<g id="helpm" opacity="0" transform="translate(258 239)"><circle class="hb-okc" cx="20" cy="-16" r="8"/><path class="hb-okp" d="M16 -16l3 3l5 -6"/></g>
+<g id="atrop" opacity="0"><circle class="hb-ablock" cx="248" cy="229" r="5"/><circle class="hb-ablock" cx="270" cy="233" r="5"/><circle class="hb-ablock" cx="258" cy="253" r="5"/></g>
+<g id="pmg" opacity="0"><rect class="hb-pm" x="${PM[0] - 26}" y="${PM[1] - 16}" width="52" height="32" rx="8"/><path id="wLead" class="hb-lead" d="M444 130Q360 170 300 250T263 319"/><circle id="tipLead" class="hb-tip" cx="263" cy="319" r="4"/></g>
+<text id="cap" class="hb-cap" x="30" y="428"></text>
 <g id="marks"></g><g id="imps"></g><g id="ecg"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "av-heart-block", fig: "Fig 1", title: "AV heart block: when the signal is delayed or dropped", W, H, body,
-  label: "An animated heart conduction system. The SA node fires, the signal crosses the atria, waits at the AV node, then runs through the His bundle and Purkinje fibres to the ventricles. The degree slider shows no block, first degree with a long PR interval, Mobitz I Wenckebach with lengthening then a dropped beat, Mobitz II with sudden dropped beats, and third degree complete block where atria and ventricles beat independently with a slow escape rhythm. An ECG and a delay bar show the same events. Treatment choices are observe, atropine and pacing.",
+  label: "An animated heart conduction system built on real heart anatomy. The SA node fires at the top, the signal crosses the atria, waits at the AV node, then runs through the His bundle and Purkinje fibres to the ventricles. The degree slider shows no block, first degree with a long PR interval, Mobitz I Wenckebach with lengthening then a dropped beat, Mobitz II with sudden dropped beats, and third degree complete block where atria and ventricles beat independently with a slow escape rhythm. An ECG and a delay bar show the same events. Treatment choices are observe, atropine which parks on the AV node, and pacing which takes over the ventricles.",
   caption: "Schematic, not to scale. Timing, counts and gauge levels are qualitative and illustrative; no doses, rates in numbers or targets are shown or implied.",
-  scene: { W, H, GEO, ECG }, pageJs: readFileSync(join(HERE, "heartblock.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H, PM, ECG }, pageJs: readFileSync(join(HERE, "heartblock.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With pacing",
   sourcesLis: [
     "<strong>How AV conduction works and fails.</strong> The sinoatrial (SA) node fires first and the signal spreads across the atria, giving the P wave. The atrioventricular (AV) node is the normal gateway to the ventricles and holds the signal briefly so the ventricles can fill; that pause is most of the PR interval. The signal then runs down the bundle of His, the bundle branches and the Purkinje fibres, so the ventricles fire together in a narrow QRS. In first degree block every signal still gets through, but the PR interval is long. In Mobitz I (Wenckebach) block, usually at the AV node, the delay grows beat by beat until one signal is dropped, then the cycle repeats. In Mobitz II block, usually below the AV node in the His-Purkinje system, beats are dropped suddenly without lengthening first, and it is more likely to progress. In third degree (complete) block no atrial signal reaches the ventricles: the atria and ventricles beat independently and a slow, wide escape rhythm from lower down keeps the ventricles going. This is standard teaching in medicine and cardiology texts and was not checked against a linked source here, so it is flagged for review.",
-    "<strong>Treatment ideas shown.</strong> Observation leaves the rhythm as it is. Atropine acts at the AV node, so it can shorten the delay in first degree and Mobitz I block, but it does not repair Mobitz II or complete block below the node. Pacing takes over the ventricles when dropped or blocked beats make the ventricular rate too slow, and it sits on standby when conduction is still adequate. These are teaching toggles only.",
+    "<strong>Treatment ideas shown.</strong> Observation leaves the rhythm as it is. Atropine parks on the AV node, so it can shorten the delay in first degree and Mobitz I block, but it does not repair Mobitz II or complete block below the node. Pacing takes over the ventricles when dropped or blocked beats make the ventricular rate too slow, and it sits on standby when conduction is still adequate. These are teaching toggles only.",
   ],
   simplified: "Symptoms and their assessment, syncope workup, reversible causes such as drugs, electrolytes and ischaemia, other escape rhythms and their sites, bundle branch patterns, temporary versus permanent pacing detail, pacing modes, and all doses and targets are left out. The ECG is one schematic lead, and timing is illustrative. The figure does not say how any patient should be treated.",
   extraCss: `
@@ -118,17 +115,18 @@ body{--c-ch:#6b3a4a;--c-flash:#ff9a7a}body[data-theme="light"]{--c-ch:#e9b8c2;--
 .hb-zone{fill:var(--anatomy-strong);font-size:12px;font-weight:600;letter-spacing:.04em;pointer-events:none}
 .hb-leg{fill:var(--anatomy-text);font-size:10.5px;pointer-events:none}
 .hb-note{fill:var(--anatomy-strong);font-size:11px;font-weight:600;pointer-events:none}
+.hb-cap{fill:var(--anatomy-strong);font-size:12px;pointer-events:none}
 .hb-ecgbg{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
 .hb-grid{stroke:var(--anatomy-faint);stroke-width:.5;fill:none;stroke-opacity:.4}.hb-grid.major{stroke-opacity:.8}
 .hb-base{stroke:var(--anatomy-mid);stroke-width:.8;stroke-dasharray:3 4;fill:none}
 .hb-trace{fill:none;stroke:var(--c-good);stroke-width:1.9;stroke-linejoin:round;stroke-linecap:round}
-.hb-ch{fill:color-mix(in srgb,var(--c-flash) calc(var(--act,0) * 100%),var(--c-ch));stroke:var(--anatomy-mid);stroke-width:1.3}
-.hb-septum{stroke:var(--anatomy-mid);stroke-width:1.2;fill:none}
+.hb-flasha,.hb-flashv{fill:color-mix(in srgb,var(--c-flash) calc(var(--act,0) * 100%),transparent);stroke:none}
 .hb-wire{fill:none;stroke:var(--anatomy-hi);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.hb-fine{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
 .hb-node{fill:#f2b84a;stroke:color-mix(in srgb,#f2b84a 55%,#000);stroke-width:1}
 .hb-avnode{fill:#ff9a3d;stroke:color-mix(in srgb,#ff9a3d 55%,#000)}
+.hb-avhelp{fill:var(--c-good);stroke:color-mix(in srgb,var(--c-good) 55%,#000)}
 .hb-escnode{fill:var(--c-good);stroke:color-mix(in srgb,var(--c-good) 55%,#000);stroke-width:1}
+.hb-ablock{fill:var(--c-cyt);stroke:color-mix(in srgb,var(--c-cyt) 55%,#000);stroke-width:1}
 .hb-delaybar{fill:var(--anatomy-hi)}
 .hb-imp{fill:#fff;stroke:var(--c-neut);stroke-width:2}
 .hb-x{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.4}

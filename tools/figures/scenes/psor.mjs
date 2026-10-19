@@ -56,6 +56,7 @@ const EPITOP = 118;
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
 <rect class="ps-derm" x="14" y="185" width="${W - 28}" height="255" rx="18"/>
+<g id="blush"></g>
 <text class="sc-zone" x="34" y="68">SKIN PLAQUE, CROSS SECTION</text>
 <text class="sc-zone sc-dim" x="34" y="208">DERMIS</text>
 <g id="vessels"></g>
@@ -63,6 +64,7 @@ const body = `
 <path id="gran" class="ps-gran" d=""/>
 <g id="kcs"></g>
 <g id="scales"></g>
+<g id="jointSlot"></g>
 <g id="joint"></g>
 <g id="immune"></g>
 <g id="fx"></g>
@@ -74,8 +76,8 @@ buildScene({
   id: "psoriasis-pathogenesis", fig: "Fig 1", title: "Psoriasis: immune drive to scaly plaque", W, H, body,
   label: "An animated cross section of skin with a psoriasis plaque. Dendritic cells in the dermis are activated and release IL-23, which sustains Th17 cells. Th17 cells release IL-17 and TNF, which drive keratinocytes in the epidermis to divide too fast. The epidermis thickens, its granular layer thins, nuclei are retained in the scale (parakeratosis), dermal vessels dilate, and a scaly plaque forms. Removing scale can give pinpoint bleeding (Auspitz sign), injury can seed new lesions (Koebner phenomenon), and the same inflammation can involve joints. Gauges show immune drive, cytokines, epidermal thickness, scale, redness and joint inflammation. Treatments include topical steroid with vitamin D, phototherapy, and biologics targeting TNF, IL-17 or IL-23.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { W, H, EPITOP }, pageJs: readFileSync(join(HERE, "psor.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H, EPITOP }, pageJs: readFileSync(join(HERE, "psor.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With biologic targeting TNF, IL-17 or IL-23",
   sourcesLis: [
     "<strong>How psoriasis develops.</strong> In susceptible skin, triggers and injury activate dendritic cells. Their IL-23 sustains Th17 cells, and Th17 cytokines IL-17 and TNF act on keratinocytes, which proliferate and mature too fast. The epidermis thickens with elongated rete ridges, the granular layer is lost, and nuclei persist in the stratum corneum (parakeratosis), giving a silvery scaly plaque over dilated dermal vessels. Pinpoint bleeding when scale is lifted is the Auspitz sign; new plaques at sites of trauma are the Koebner phenomenon; a related inflammatory arthritis can affect joints. This is standard teaching in dermatology and internal medicine texts covering eczema, psoriasis and other common skin disorders, including topical agents and systemic options for characteristic lesions, and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> Topical steroid with a vitamin D agent calms inflammation and slows keratinocyte growth on the skin, phototherapy dampens cutaneous immune activity, and a biologic that targets TNF, IL-17 or IL-23 interrupts the cytokine axis and can also help joint disease. These are teaching toggles only.",
@@ -100,6 +102,9 @@ buildScene({
 .ps-ray{stroke:#f2c94c;stroke-width:2;stroke-linecap:round}
 .p-il23{--cc:var(--c-cyt)}.p-il17{--cc:var(--c-cyt2)}.p-tnf{--cc:#ff9a3d}.p-ab{--cc:var(--c-good)}
 .ps-ab{fill:none;stroke:var(--c-good);stroke-width:1.6;stroke-linecap:round}
+.ps-blush{fill:var(--c-bad);stroke:none}
+.ps-block{fill:none;stroke:var(--c-good);stroke-width:1.8;stroke-linecap:round}
+.ps-cap{fill:var(--anatomy-strong)}
 .dr-g-fill.g-imm{fill:var(--c-mac)}.dr-g-fill.g-epi{fill:var(--c-endo)}.dr-g-fill.g-scale{fill:#d9c98a}
 `,
 });

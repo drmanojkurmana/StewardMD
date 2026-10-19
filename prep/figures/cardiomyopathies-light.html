@@ -8,7 +8,7 @@
   --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
   --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
   --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
-  --anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
 }
 .iso[data-theme="light"]{
@@ -199,6 +199,9 @@ body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px
 .bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
 .bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
 @media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
 body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
 body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
 .t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
@@ -261,41 +264,48 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 .cl-n.multi{opacity:.9}
 .sc-dim{opacity:.45}
 
-.cmp-myo{fill:color-mix(in srgb,var(--c-rbc) 52%,var(--c-tis));stroke:color-mix(in srgb,var(--c-rbc) 60%,#000);stroke-width:1}
-.cmp-cav{fill:color-mix(in srgb,var(--c-rbc) 30%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
-.cmp-la{fill:color-mix(in srgb,var(--c-rbc) 42%,var(--c-tis));stroke:color-mix(in srgb,var(--c-rbc) 55%,#000);stroke-width:1}
-.cmp-aorta{fill:color-mix(in srgb,var(--c-endo) 55%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
-.cmp-sept{fill:color-mix(in srgb,var(--c-rbc) 68%,#000);opacity:.55}
 .cmp-node{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1}
-.cmp-icon{fill:var(--c-neut);stroke:color-mix(in srgb,var(--c-neut) 55%,#000);stroke-width:.7}
-.cmp-icon2{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 55%,#000);stroke-width:.7}
-.cmp-icon3{fill:var(--c-lymph);stroke:color-mix(in srgb,var(--c-lymph) 55%,#000);stroke-width:.7}
-.cmp-icon4{fill:var(--c-cyt);stroke:color-mix(in srgb,var(--c-cyt) 55%,#000);stroke-width:.7}
-.cmp-fib{fill:none;stroke:var(--c-cyt);stroke-width:1.4;stroke-linecap:round}
-.p-in{--cc:var(--c-fl)}.p-out{--cc:var(--c-rbc)}.p-amy{--cc:var(--c-cyt)}
+.cmp-ic{fill:var(--c-neut);stroke:color-mix(in srgb,var(--c-neut) 55%,#000);stroke-width:.8}
+.cmp-ic2{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 55%,#000);stroke-width:.8}
+.cmp-ic3{fill:none;stroke:var(--c-lymph);stroke-width:2;stroke-linecap:round}
+.cmp-ic4{fill:none;stroke:var(--c-cyt);stroke-width:1.6;stroke-linecap:round}
+.cmp-icd{fill:var(--c-cyt);stroke:color-mix(in srgb,var(--c-cyt) 55%,#000);stroke-width:.6}
+.cmp-ves{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 42%,var(--anatomy-paper));stroke-linecap:round;opacity:.85}
+.cmp-vesIn{fill:none;stroke:color-mix(in srgb,var(--c-fl) 55%,var(--anatomy-paper));stroke-linecap:round;opacity:.85}
+.cmp-cav{fill:color-mix(in srgb,var(--c-rbc) 22%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 45%,#000);stroke-width:1}
+.cmp-ring{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 55%,var(--c-tis));stroke-linecap:round}
+.cmp-bulge{fill:color-mix(in srgb,var(--c-rbc) 62%,var(--c-tis));stroke:color-mix(in srgb,var(--c-rbc) 60%,#000);stroke-width:1}
+.cmp-wall{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 60%,#000);stroke-linecap:round}
+.cmp-shade{fill:var(--c-bad);stroke:none}
+.cmp-halo{fill:none;stroke:var(--c-fl);stroke-linecap:round}
+.cmp-amy{fill:var(--c-cyt);stroke:color-mix(in srgb,var(--c-cyt) 55%,#000);stroke-width:.6}
+.cmp-rec{fill:none;stroke:var(--c-lymph);stroke-width:1.6;stroke-linecap:round}
+.cmp-arrow{fill:var(--c-rbc);stroke:none}
+.p-in{--cc:var(--c-fl)}.p-out{--cc:var(--c-rbc)}.p-turb{--cc:var(--c-eos)}.p-blk{--cc:var(--c-lymph)}.p-sup{--cc:var(--c-fl)}.p-clr{--cc:var(--c-cyt)}
+.cmp-cap{fill:var(--anatomy-strong);font-size:13px}
 .dr-g-fill.g-dil{fill:var(--c-bad)}.dr-g-fill.g-wall{fill:var(--c-neut)}.dr-g-fill.g-stiff{fill:var(--c-cyt)}.dr-g-fill.g-fill{fill:var(--c-fl)}.dr-g-fill.g-ej{fill:var(--c-good)}.dr-g-fill.g-out{fill:var(--c-eos)}
-</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Cardiomyopathies: three ways the ventricle fails</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>chamber dilated · wall thin · filling reduced · ejection poor</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated left heart in dilated, hypertrophic and restrictive cardiomyopathy. In dilated disease the ventricle stretches, the wall thins and squeezing fails, after causes such as alcohol, viral or immune myocarditis and genetic disease. In hypertrophic disease the septum thickens, blocks outflow and impairs filling, with a risk of sudden death. In restrictive disease amyloid and scarring stiffen the wall so filling fails. Gauges show dilatation, wall thickness, stiffness, filling, ejection and outflow block. Treatment choices are heart failure therapy, a beta-blocker or myectomy for outflow obstruction, and treating the cause."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Cardiomyopathies: three ways the ventricle fails</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>chamber dilated · wall thin · filling reduced · ejection poor</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated real heart in dilated, hypertrophic and restrictive cardiomyopathy. In dilated disease the ventricle stretches, the wall thins and squeezing fails, after causes such as alcohol, viral myocarditis and genetic disease. In hypertrophic disease the septum thickens and blocks outflow. In restrictive disease amyloid deposits stiffen the wall so filling fails. Blood flows in from the left and leaves for the body on the right. Gauges show dilatation, wall thickness, stiffness, filling, ejection and outflow block. Treatment choices are heart failure therapy, a beta blocker or septal reduction, treating the cause, and a full bundle of all of them."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
 <rect class="sc-tissue" x="14" y="44" width="932" height="396" rx="18"/>
 <text class="sc-zone" x="34" y="68">CAUSES</text>
-<text class="sc-zone" x="604" y="68">WHAT GOES WRONG</text>
-<text class="sc-zone sc-dim" x="400" y="68">LEFT HEART, CUT OPEN</text>
-<g id="causes"></g><g id="heart"></g><g id="cons"></g><g id="parts"></g><g id="over"></g><g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Chamber sizes, speeds and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.</span></figcaption></figure>
+<text class="sc-zone" x="400" y="68">HEART</text>
+<text class="sc-zone" x="640" y="68">BLOOD OUT</text>
+<g id="causes"></g><g id="heartSlot"></g><g id="heart"></g><g id="parts"></g><g id="over"></g><g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Chamber sizes, speeds and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.</span></figcaption></figure>
 <div class="dr-controls">
   <label class="dr-range"><span>Cardiomyopathy type</span><input id="level" type="range" min="0" max="2" step="1" value="0" aria-valuetext="dilated"><span class="dr-ticks"><i>dilated</i><i>hypertrophic</i><i>restrictive</i></span></label>
-  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">heart failure therapy</option><option value="2">beta-blocker or myectomy for outflow obstruction</option><option value="3">treat the cause</option></select></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With the full bundle"><option value="0">no treatment</option><option value="1">heart failure therapy</option><option value="2">beta blocker or septal reduction</option><option value="3">treat the cause</option><option value="4">full bundle: all of the above</option></select></label>
   <button id="pause" type="button" aria-pressed="false">Pause motion</button>
 </div>
 <p id="status" class="dr-status" aria-live="polite"></p>
 <p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
 <h2>What the figure shows, and how sure we are</h2>
-<ul><li><strong>What cardiomyopathy means.</strong> A cardiomyopathy is disease of heart muscle where the cardiac muscle itself fails, without valve, coronary or pressure overload explaining it. The three classic patterns are dilated (ventricular dilatation, thin wall, systolic failure), hypertrophic (septal hypertrophy, dynamic outflow obstruction, diastolic dysfunction and sudden death risk) and restrictive (a stiff ventricle, classically from amyloid, with poor filling). This is standard teaching in medicine and cardiology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Causes stressed for dilated disease.</strong> Multiple causes are implicated, often together in a patient with an initial insult and systemic involvement. Stressed examples are alcohol, viral myocarditis including COVID-19, inflammatory and immune disease including immune checkpoint therapy, systemic disease with cardiac involvement, and genetic disease. Myocarditis is inflammation of heart muscle that can heal, scar or progress to a dilated ventricle. These are teaching associations only.</li><li><strong>Treatment ideas shown.</strong> Heart failure therapy supports a failing ventricle, a beta-blocker or septal myectomy relieves outflow obstruction in hypertrophic disease, and treating the cause means removing alcohol, treating myocarditis or treating amyloid and other systemic causes. These are teaching toggles only.</li></ul>
-<p><strong>What was simplified.</strong> Genetic subtypes and testing, arrhythmia devices and anticoagulation, transplant and mechanical support, specific amyloid therapies, imaging measurements, exercise advice and all doses and drug choices are left out. The heart is a simple two chamber schematic and does not show the right ventricle separately. The figure does not say how any patient should be treated.</p>
-<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<ul><li><strong>What cardiomyopathy means.</strong> A cardiomyopathy is disease of heart muscle where the cardiac muscle itself fails, without valve, coronary or pressure overload explaining it. The three classic patterns are dilated (ventricular dilatation, thin wall, systolic failure), hypertrophic (septal hypertrophy, dynamic outflow obstruction, diastolic dysfunction and sudden death risk) and restrictive (a stiff ventricle, classically from amyloid, with poor filling). This is standard teaching in medicine and cardiology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Causes shown on the left.</strong> Multiple causes are implicated, often together in a patient with an initial insult and systemic involvement. Shown examples are alcohol, viral myocarditis, inherited gene changes and amyloid deposits. Myocarditis is inflammation of heart muscle that can heal, scar or progress to a dilated ventricle. These are teaching associations only.</li><li><strong>Treatment ideas shown.</strong> Heart failure therapy unloads a failing ventricle so it squeezes better, a beta blocker slows and softens contraction so the outflow tract opens, septal reduction thins the bulging septum, treating the cause removes alcohol, infection or amyloid triggers, and the full bundle does all of these together. These are teaching toggles only.</li><li><strong>Organ art.</strong> Organ art is NIH BioArt Source, public domain.</li></ul>
+<p><strong>What was simplified.</strong> Genetic subtypes and testing, arrhythmia devices and anticoagulation, transplant and mechanical support, specific amyloid therapies, imaging measurements, exercise advice and all doses and drug choices are left out. The heart is real anatomy art with a schematic cutaway overlay that shows chamber size, wall thickness and deposits. The figure does not say how any patient should be treated.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). Organ illustrations are NIH BioArt Source (public domain); all other drawing is original.</p>
 <p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
-</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Cardiomyopathy type","a":[1,1,1],"names":["dilated","hypertrophic","restrictive"],"ticks":["dilated","hypertrophic","restrictive"],"start":0},"settings":[{"label":"no treatment"},{"label":"heart failure therapy"},{"label":"beta-blocker or myectomy for outflow obstruction"},{"label":"treat the cause"}],"drugNames":["no treatment","heart failure therapy","beta-blocker or myectomy","treat the cause"],"status":"Type: {level} · {drug} ·"}};
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Cardiomyopathy type","a":[1,1,1],"names":["dilated","hypertrophic","restrictive"],"ticks":["dilated","hypertrophic","restrictive"],"start":0},"settings":[{"label":"no treatment"},{"label":"heart failure therapy"},{"label":"beta blocker or septal reduction"},{"label":"treat the cause"},{"label":"full bundle: all of the above"}],"drugNames":["no treatment","heart failure therapy","a beta blocker or septal reduction","treating the cause","the full bundle"],"status":"Type: {level} · {drug} ·"}};
 const modelOf = function modelOf(S, level, drug) {
   const cl = (v) => Math.max(0, Math.min(1, v));
-  const hf = drug === 1 ? 1 : 0, bb = drug === 2 ? 1 : 0, cause = drug === 3 ? 1 : 0;
+  const hf = drug === 1 || drug === 4 ? 1 : 0, bb = drug === 2 || drug === 4 ? 1 : 0, cause = drug === 3 || drug === 4 ? 1 : 0;
   const P0 = level === 0 ? 1 : 0, P1 = level === 1 ? 1 : 0, P2 = level === 2 ? 1 : 0;
   let Dil = P0 ? 0.92 : P1 ? 0.24 : 0.30;
   let Wall = P0 ? 0.18 : P1 ? 0.92 : 0.46;
@@ -303,9 +313,9 @@ const modelOf = function modelOf(S, level, drug) {
   let Dia = P0 ? 0.45 : P1 ? 0.78 : 0.92;
   let Sys = P0 ? 0.88 : P1 ? 0.24 : 0.34;
   let Out = P1 ? 0.86 : 0.05;
-  if (hf) { Sys = cl(Sys - (P0 ? 0.36 : 0.08)); Dia = cl(Dia - 0.10); }
-  if (bb) { Out = cl(Out - (P1 ? 0.66 : 0.02)); Dia = cl(Dia - (P1 ? 0.26 : 0.03)); Sys = cl(Sys - (P1 ? 0.04 : 0)); }
-  if (cause) { Dil = cl(Dil - (P0 ? 0.24 : 0.04)); Stiff = cl(Stiff - (P2 ? 0.32 : 0.05)); Dia = cl(Dia - (P2 ? 0.32 : P0 ? 0.14 : 0.04)); Sys = cl(Sys - (P0 ? 0.16 : 0.05)); Wall = cl(Wall - (P2 ? 0.06 : 0)); }
+  if (hf) { Sys = cl(Sys - (P0 ? 0.36 : 0.08)); Dia = cl(Dia - 0.10); Dil = cl(Dil - (P0 ? 0.06 : 0)); }
+  if (bb) { Out = cl(Out - (P1 ? 0.66 : 0.02)); Dia = cl(Dia - (P1 ? 0.26 : 0.05)); }
+  if (cause) { Dil = cl(Dil - (P0 ? 0.30 : 0.03)); Stiff = cl(Stiff - (P2 ? 0.32 : 0.05)); Dia = cl(Dia - (P2 ? 0.32 : P0 ? 0.16 : 0.05)); Sys = cl(Sys - (P0 ? 0.25 : P2 ? 0.05 : 0.02)); Wall = cl(Wall - (P2 ? 0.06 : 0)); Out = cl(Out - (P1 ? 0.05 : 0)); }
   const Fill = cl(1 - Dia), Ej = cl(1 - Sys);
   const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
   const words = [w(Dil, 0.35, 0.65, ["small", "normal", "dilated"]), w(Wall, 0.35, 0.65, ["thin", "normal", "thick"]), w(Fill, 0.35, 0.65, ["poor", "reduced", "good"]), w(Ej, 0.35, 0.65, ["poor", "reduced", "good"])];
@@ -404,107 +414,438 @@ function run(scn) {
   start();
 }
 
-/* Cardiomyopathies scene: a left heart that dilates, hypertrophies or stiffens, with causes, consequences and gauges. */
-const HX = 480, HY = 252;
-const L = { causes: $("causes"), heart: $("heart"), cons: $("cons"), parts: $("parts"), over: $("over"), panel: $("panel") };
-const sm = { Dil: 0.92, Wall: 0.18, Stiff: 0.30, Dia: 0.45, Sys: 0.88, Out: 0.05, Fill: 0.55, Ej: 0.12, hf: 0, bb: 0, cause: 0, P0: 1, P1: 0, P2: 0 };
-let myo, cav, la, aorta, sept, amyRing = [], gg = {};
-const causeNodes = [], consNodes = [];
-function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0 }; }); }
-const free = (pl) => pl.find((p) => !p.on);
-function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
-function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
-const inflow = pool(18, () => mk("circle", { class: "sc-p p-in", r: 2.6 }, L.parts));
-const outflow = pool(18, () => mk("circle", { class: "sc-p p-out", r: 2.6 }, L.parts));
-const amy = pool(12, () => mk("rect", { class: "sc-p p-amy", x: -2.2, y: -2.2, width: 4.4, height: 4.4, rx: 1 }, L.parts));
-const acc = { inn: 0, out: 0, amy: 0 };
-
-function causeNode(x, y, kind) {
-  const g = mk("g", {}, L.causes);
-  mk("circle", { class: "cmp-node", cx: x, cy: y, r: 24 }, g);
-  if (kind === 0) { mk("rect", { class: "cmp-icon", x: x - 6, y: y - 12, width: 12, height: 22, rx: 3 }, g); mk("rect", { class: "cmp-icon", x: x - 2.5, y: y - 17, width: 5, height: 6, rx: 1 }, g); }
-  else if (kind === 1) { mk("circle", { class: "cmp-icon2", cx: x, cy: y, r: 9 }, g); for (let i = 0; i < 6; i++) { const a = i * 1.047; mk("path", { class: "cmp-fib", d: "M" + f1(x + Math.cos(a) * 9) + " " + f1(y + Math.sin(a) * 9) + "L" + f1(x + Math.cos(a) * 14) + " " + f1(y + Math.sin(a) * 14) }, g); } }
-  else if (kind === 2) { mk("path", { class: "cmp-fib", d: "M" + (x - 8) + " " + (y - 12) + "C" + (x + 8) + " " + (y - 4) + " " + (x - 8) + " " + (y + 4) + " " + (x + 8) + " " + (y + 12) }, g); mk("path", { class: "cmp-fib", d: "M" + (x + 8) + " " + (y - 12) + "C" + (x - 8) + " " + (y - 4) + " " + (x + 8) + " " + (y + 4) + " " + (x - 8) + " " + (y + 12) }, g); }
-  else { for (let i = -1; i <= 1; i++) mk("path", { class: "cmp-fib", d: "M" + (x - 12) + " " + (y + i * 7) + "q6 -5 12 0t12 0" }, g); }
-  causeNodes.push({ g, kind });
-  return g;
+/* Shared organ art for the animated mechanism scenes. Plain globals, ES2015, no imports.
+ * Inlined after bio.lib.js when buildScene gets organs:true, so mk/f1/clamp below are the shared ones.
+ * organ(parent, kind, x, y, w, opts) draws real anatomy art (NIH BioArt Source, public domain,
+ * injected as _ORG_ART by buildScene for the kinds the page uses) centred on x,y and w px wide,
+ * and falls back to the existing procedural layered silhouette for kinds without art
+ * (bladder, uterus, thyroid). Art ports are fractions of the art viewBox (see _ORG_FRAC).
+ * opts: { h (px height, else proportional), flip (mirror left/right), cls (extra class), id,
+ *   tint (a CSS colour with opacity, overlaid as an organ-shaped mask for disease states),
+ *   dim (dull the art) }.
+ * Returns { g, kind, x, y, w, h, ports, art } with absolute SVG coords; ports.in/out always exist.
+ * Art keeps its own colours (a faint contrast halo keeps it readable in dark and light themes);
+ * procedural fill is a vertical gradient whose stops derive from --cc (a theme aware palette var,
+ * so dark and light both work); edge stroke and landmark lines use color-mix detail classes.
+ * Emits no text, so label font and dash rules are inherited from the calling scene. */
+if (!document.getElementById("orgCss")) { var _orgSt = document.createElement("style"); _orgSt.id = "orgCss";
+  _orgSt.textContent = ".org-halo{filter:drop-shadow(0 0 1px rgba(0,0,0,.65)) drop-shadow(0 0 1px rgba(255,255,255,.45))}"
+  + ".org-b{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1.2;stroke-linejoin:round;stroke-linecap:round}"
+  + ".org-d{fill:none;stroke:color-mix(in srgb,var(--cc) 40%,var(--anatomy-hi));stroke-width:1;stroke-linecap:round;opacity:.8}"
+  + ".org-dk{fill:none;stroke:color-mix(in srgb,var(--cc) 62%,#000);stroke-width:1.1;stroke-linecap:round;opacity:.8}"
+  + ".org-f{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1;stroke-linejoin:round}"
+  + ".org-v{fill:none;stroke-linecap:round}"
+  + ".org-liver{--cc:var(--c-rbc)}.org-heart{--cc:var(--c-rbc)}.org-kidney{--cc:var(--c-eos)}.org-lung{--cc:var(--c-endo)}"
+  + ".org-stomach{--cc:var(--c-graft)}.org-brain{--cc:var(--c-mac)}.org-pancreas{--cc:var(--c-plt)}.org-spleen{--cc:var(--c-sm)}"
+  + ".org-bladder{--cc:var(--c-th2)}.org-uterus{--cc:var(--c-endo)}.org-thyroid{--cc:var(--c-neut)}";
+  document.head.appendChild(_orgSt); }
+var _orgN = 0;
+/* per instance gradients: base (light -> base -> dark of --cc) plus a white top / dark bottom shade overlay */
+function _orgDefs(g) {
+  _orgN++; var id = "og" + _orgN, hid = "oh" + _orgN;
+  var defs = mk("defs", {}, g);
+  var lg = mk("linearGradient", { id: id, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  var s0 = mk("stop", { offset: "0", "stop-color": "#999" }, lg); s0.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 55%,#fff)");
+  var s1 = mk("stop", { offset: ".55", "stop-color": "#888" }, lg); s1.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 78%,var(--anatomy-paper))");
+  var s2 = mk("stop", { offset: "1", "stop-color": "#666" }, lg); s2.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 66%,#000)");
+  var hg = mk("linearGradient", { id: hid, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  mk("stop", { offset: "0", "stop-color": "#fff", "stop-opacity": ".2" }, hg);
+  mk("stop", { offset: ".55", "stop-color": "#fff", "stop-opacity": "0" }, hg);
+  mk("stop", { offset: "1", "stop-color": "#000", "stop-opacity": ".14" }, hg);
+  return { b: "url(#" + id + ")", h: "url(#" + hid + ")" };
 }
-function consNode(x, y, kind) {
-  const g = mk("g", {}, L.cons);
-  mk("circle", { class: "cmp-node", cx: x, cy: y, r: 24 }, g);
-  if (kind === 0) { mk("ellipse", { class: "cmp-icon2", cx: x, cy: y, rx: 11, ry: 8 }, g); }
-  else if (kind === 1) { mk("rect", { class: "cmp-icon2", x: x - 13, y: y - 4, width: 26, height: 8, rx: 3 }, g); }
-  else if (kind === 2) { mk("path", { class: "cmp-icon3", d: "M" + x + " " + (y - 12) + "C" + (x + 7) + " " + (y - 2) + " " + (x + 8) + " " + (y + 2) + " " + (x + 8) + " " + (y + 5) + "A8 8 0 0 1 " + (x - 8) + " " + (y + 5) + "C" + (x - 8) + " " + (y + 2) + " " + (x - 7) + " " + (y - 2) + " " + x + " " + (y - 12) + "Z" }, g); }
-  else { mk("path", { class: "cmp-icon", d: "M" + (x + 3) + " " + (y - 14) + "L" + (x - 7) + " " + (y + 2) + "L" + (x - 1) + " " + (y + 2) + "L" + (x - 3) + " " + (y + 14) + "L" + (x + 8) + " " + (y - 3) + "L" + (x + 1) + " " + (y - 3) + "Z" }, g); }
-  consNodes.push({ g, kind });
-  return g;
+/* one filled silhouette plus its shade overlay, same path data so the light stays inside */
+function _ob(g, d, G) {
+  mk("path", { class: "org-b", d: d, fill: G.b, stroke: "#666" }, g);
+  mk("path", { d: d, fill: G.h, stroke: "none", "pointer-events": "none" }, g);
+}
+function _ol(g, d, cls) { return mk("path", { class: cls || "org-d", d: d, fill: "none" }, g); }
+function _of(g, d, fillCss, cc) { var e = mk("path", { class: "org-f", d: d, stroke: "#666" }, g); e.setAttribute("style", "fill:" + fillCss + ";--cc:" + cc); return e; }
+function _ov(g, d, color, wdt) { var e = mk("path", { class: "org-v", d: d, fill: "none", stroke: "#777", "stroke-width": wdt, "stroke-linecap": "round" }, g); e.setAttribute("style", "stroke:" + color); return e; }
+function _odot(g, x, y, r, fillCss) { var e = mk("circle", { cx: x, cy: y, r: r, stroke: "none" }, g); e.setAttribute("style", "fill:" + fillCss); return e; }
+
+/* liver: big right lobe, smaller left lobe, falciform notch, gallbladder, porta hepatis stubs */
+function _orgLiver(g, G) {
+  _ov(g, "M-2 46L-2 18", "var(--d-ven)", 5); _ov(g, "M7 46L5 20", "var(--d-art)", 3); _ov(g, "M-11 46L-9 20", "var(--c-bac)", 2.5);
+  _ob(g, "M-6-30C22-33 44-25 50-7C54 9 40 25 18 30C2 33-5 22-7 6C-8-8-8-22-6-30Z", G);
+  _ob(g, "M-8-27C-24-27-40-19-48-6C-51 1-45 9-35 12C-24 15-11 9-8-1C-6-10-6-20-8-27Z", G);
+  _ol(g, "M-8-29C-7-18-6-6-4 6", "org-dk");
+  _ol(g, "M-2-28C14-29 30-24 40-14");
+  _of(g, "M10 18C16 16 22 18 23 24C24 31 19 37 14 36C9 35 7 28 8 23C8 21 9 19 10 18Z", "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  return { h0: 78, ports: { in: [-2, 46], out: [12, -30], porta: [-2, 18], gall: [16, 33], lobe: [20, 0] } };
+}
+/* heart: mass with apex down left, septum, coronary groove, aorta with arch, pulmonary split, caval stubs */
+function _orgHeart(g, G) {
+  _ov(g, "M-2-18L-2-44C-2-52-10-56-20-54C-28-52-32-46-32-38", "var(--d-art)", 8);
+  _ov(g, "M-8-52L-8-59M-15-54L-16-60M-22-53L-24-59", "var(--d-art)", 2.5);
+  _ov(g, "M12-16C8-28 2-34-4-38", "var(--d-ven)", 7);
+  _ov(g, "M-4-38C-12-40-20-38-28-34", "var(--d-ven)", 4.5); _ov(g, "M-4-38C4-40 12-38 20-34", "var(--d-ven)", 4.5);
+  _ov(g, "M20-20L20-52", "var(--d-ven)", 7); _ov(g, "M18 34L18 58", "var(--d-ven)", 7);
+  _ov(g, "M-36-2L-50-6M-34 14L-48 16", "var(--d-art)", 4);
+  _ob(g, "M-4-32C24-34 42-16 40 10C38 32 12 48-20 50C-34 44-40 24-36 2C-33-18-22-31-4-32Z", G);
+  _ol(g, "M0-30C4-10 0 14-14 44", "org-dk");
+  _ol(g, "M-34 6C-18 12 6 12 38 4");
+  _ol(g, "M-6-28C-14-18-18-6-20 8");
+  return { h0: 120, ports: { in: [20, -52], out: [-32, -38], ivc: [18, 58], apex: [-20, 50], pulm: [-28, -34] } };
+}
+/* kidney: bean with hilum, cortex rim, medulla rays, pelvis funnel, ureter, artery and vein stubs */
+function _orgKidney(g, G) {
+  _ov(g, "M-12 6C-22 12-28 18-28 30C-28 50-26 70-24 90", "var(--cc)", 4.5);
+  _ov(g, "M-50-8C-40-8-30-8-22-6", "var(--d-art)", 4); _ov(g, "M-50 10C-40 10-30 8-22 6", "var(--d-ven)", 5);
+  _ob(g, "M8-58C38-58 54-32 50 2C56 32 42 60 8 60C-8 60-16 48-19 34C-26 24-26-24-19-34C-16-48-8-58 8-58Z", G);
+  _ol(g, "M8-49C32-49 45-28 42 0C46 28 34 51 8 51C-1 51-8 43-10 32C-15 24-15-24-10-32C-8-43-1-49 8-49Z");
+  _ol(g, "M-6-30L14-38M-8-10L16-12M-8 12L16 14M-6 32L14 40");
+  _ol(g, "M16-44C30-36 38-20 38 0");
+  _of(g, "M-19-14C-8-12-2-8 2-2C-2 4-8 10-18 14C-22 8-22-8-19-14Z", "color-mix(in srgb,var(--cc) 35%,#fff)", "var(--cc)");
+  return { h0: 150, ports: { in: [-50, -8], out: [-24, 90], vein: [-50, 10], pelvis: [-12, 4], cortex: [30, 0] } };
+}
+/* lung: one lung with oblique fissure, hilum bronchus splitting into lobar and segmental branches */
+function _orgLung(g, G) {
+  _ov(g, "M-58 4L-30 4", "var(--anatomy-hi)", 6);
+  _ov(g, "M-30 4C-22-6-16-16-10-26", "var(--anatomy-hi)", 4.5); _ov(g, "M-30 4C-22 14-14 24-6 34", "var(--anatomy-hi)", 4.5);
+  _ov(g, "M-18-14L-28-22M-16-16L-8-24M-14-20L-14-32M-20 16L-30 24M-16 20L-6 28M-12 26L-10 38", "var(--anatomy-hi)", 2);
+  _ov(g, "M-58-8L-34-6", "var(--d-ven)", 4); _ov(g, "M-58 14L-34 12", "var(--d-art)", 4);
+  _ob(g, "M2-60C24-56 40-32 43 8C45 38 32 60 2 62C-24 62-40 42-42 10C-44-24-20-58 2-60Z", G);
+  _ol(g, "M-40-2C-20 8 0 22 24 40", "org-dk");
+  _ol(g, "M-8-48C8-50 22-40 30-26");
+  return { h0: 130, ports: { in: [-58, 4], out: [-58, 14], art: [-58, -8], apex: [2, -60], base: [2, 62] } };
+}
+/* stomach: J shape with fundus dome, rugae, antrum sweep, pylorus ring, oesophagus and duodenum stubs */
+function _orgStomach(g, G) {
+  _of(g, "M-38-58L-22-58L-22-36L-38-36Z", "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))", "var(--cc)");
+  _ob(g, "M-38-36C-46-24-50-8-46 10C-42 30-30 46-12 50C6 54 28 46 40 32C44 27 46 23 46 18L34 14C30 22 20 30 6 32C-8 34-22 26-28 12C-33-1-31-16-26-28C-24-32-22-34-22-36Z", G);
+  _ol(g, "M-36-10C-30 6-22 20-8 28M-28-22C-22-6-12 10 4 22M-16-30C-10-14 0 2 14 12");
+  _ol(g, "M40 15C43 19 43 25 40 29M34 14C37 18 37 26 34 30", "org-dk");
+  _ol(g, "M46 16L60 22M44 28L58 32", "org-dk");
+  return { h0: 116, ports: { in: [-30, -58], out: [60, 27], fundus: [-40, -12], antrum: [24, 38], pylorus: [40, 22] } };
+}
+/* brain lateral: cerebrum with Sylvian fissure and gyri, cerebellum with folia, tapered brainstem */
+function _orgBrain(g, G) {
+  _ov(g, "M10 50L10 64", "var(--d-art)", 5);
+  _ob(g, "M-50-6C-50-32-24-42 4-40C30-38 44-28 44-8C44 10 32 24 8 28C-18 31-50 24-50-6Z", G);
+  _ol(g, "M-12 10C2 6 18 2 34-4", "org-dk");
+  _ol(g, "M-38-20C-32-10-32 2-38 12M-26-30C-20-20-20-6-26 6M-4-32C2-22 2-8-4 2M10-30C16-20 16-6 10 4M28-22C34-14 34-2 28 8");
+  _ol(g, "M-16 6L-24-4M-10 4L-12-8", "org-dk");
+  _ob(g, "M2 24L16 24L12 56L6 56Z", G);
+  _ol(g, "M2 36C6 38 12 38 16 36");
+  _ob(g, "M22 24C34 22 46 26 48 34C50 42 42 48 32 47C24 46 20 38 20 32C20 28 20 26 22 24Z", G);
+  _ol(g, "M24 32L44 32M25 37L43 37M27 42L41 42");
+  return { h0: 110, ports: { in: [10, 64], out: [4, -40], parenchyma: [-8, -6], cereb: [34, 35], frontal: [-40, -8] } };
+}
+/* pancreas: bulky head right, tapering tail left, main duct with side branches, islet dots */
+function _orgPancreas(g, G) {
+  _ob(g, "M-50-4C-32-14-8-14 14-10C32-7 46-2 49 10C51 21 40 28 26 25C8 21-20 12-50 6Z", G);
+  _ol(g, "M-46 1C-20-2 10 0 38 10", "org-dk");
+  _ol(g, "M-30-1L-34-8M-10-1L-14-9M8 0L4-8M-28 1L-32 8M-6 1L-10 8M12 2L8 10");
+  _ol(g, "M52-6C58 4 58 16 50 24");
+  _odot(g, -20, -2, 1.6, "var(--d-art)"); _odot(g, 0, 0, 1.6, "var(--d-art)"); _odot(g, 22, 6, 1.6, "var(--d-art)");
+  return { h0: 60, ports: { in: [-10, -12], out: [49, 12], head: [36, 8], tail: [-48, 1] } };
+}
+/* spleen: crescent with top notch, trabeculae, hilar artery and vein stubs below */
+function _orgSpleen(g, G) {
+  _ov(g, "M-30 52C-28 44-26 40-22 36", "var(--d-art)", 3.5); _ov(g, "M-20 54C-19 46-17 42-13 38", "var(--d-ven)", 4.5);
+  _ob(g, "M-38-30C-8-40 28-34 44-12C52 4 44 26 20 34C-4 41-34 32-44 10C-48-4-46-22-38-30Z", G);
+  _ol(g, "M-8-36C-4-33 0-33 4-36", "org-dk");
+  _ol(g, "M-30-10C-10-2 12-2 32-10M-28 8C-8 16 12 16 30 8");
+  return { h0: 96, ports: { in: [-30, 52], out: [-20, 54], hilum: [-18, 37], pulp: [0, 0] } };
+}
+/* bladder: dome with detrusor arcs, trigone, ureters in from above, urethra out below */
+function _orgBladder(g, G) {
+  _ov(g, "M-52-44C-44-34-36-26-30-18", "var(--cc)", 4); _ov(g, "M52-44C44-34 36-26 30-18", "var(--cc)", 4);
+  _ob(g, "M0-50C26-48 40-30 40-6C40 16 26 32 8 40L-8 40C-26 32-40 16-40-6C-40-30-26-48 0-50Z", G);
+  _ob(g, "M-8 40L8 40L8 64L-8 64Z", G);
+  _ol(g, "M-8 52L8 52", "org-dk");
+  _ol(g, "M-24-8L24-8L0 24Z");
+  _ol(g, "M-28-28C-12-36 12-36 28-28M-34-12C-16-22 16-22 34-12");
+  return { h0: 120, ports: { in: [-52, -44], out: [0, 64], inR: [52, -44], trigone: [0, 8], dome: [0, -48] } };
+}
+/* uterus: fundus, cavity, cervix, tubes with fimbriae, ovaries with follicles */
+function _orgUterus(g, G) {
+  _ov(g, "M-16-16C-26-17-32-19-38-23", "var(--cc)", 3.5); _ov(g, "M16-16C26-17 32-19 38-23", "var(--cc)", 3.5);
+  _ov(g, "M-38-23L-44-27M-38-23L-45-23M-38-23L-44-19M-38-23L-42-29", "var(--cc)", 1.2);
+  _ov(g, "M38-23L44-27M38-23L45-23M38-23L44-19M38-23L42-29", "var(--cc)", 1.2);
+  var eo = mk("ellipse", { class: "org-f", cx: -45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var eo2 = mk("ellipse", { class: "org-f", cx: 45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo2.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var _fol = "color-mix(in srgb,var(--c-plt) 45%,#000)";
+  _odot(g, -47, -14, 1.6, _fol); _odot(g, -43, -8, 1.6, _fol); _odot(g, -46, -4, 1.4, _fol);
+  _odot(g, 47, -14, 1.6, _fol); _odot(g, 43, -8, 1.6, _fol); _odot(g, 46, -4, 1.4, _fol);
+  _ob(g, "M-16-20C-8-26 8-26 16-20C20-2 15 20 8 32L-8 32C-15 20-20-2-16-20Z", G);
+  _of(g, "M-10-14L10-14L0 22Z", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  _ol(g, "M-11 18L11 18", "org-dk"); _ol(g, "M0 18L0 32");
+  return { h0: 100, ports: { in: [-45, -22], out: [0, 33], ovL: [-45, -10], ovR: [45, -10], fundus: [0, -24] } };
+}
+/* thyroid butterfly: two lobes, isthmus bridge, trachea rings behind, parathyroid dots */
+function _orgThyroid(g, G) {
+  _ov(g, "M-7-40L-7 40M7-40L7 40", "var(--anatomy-hi)", 2);
+  _ov(g, "M-7-28L7-28M-7-12L7-12M-7 24L7 24M-7 36L7 36", "var(--anatomy-hi)", 1.2);
+  _ob(g, "M16-32C28-30 35-16 33 4C31 22 25 32 16 32C8 32 6 20 8 2C10-14 11-28 16-32Z", G);
+  _ob(g, "M-16-32C-28-30-35-16-33 4C-31 22-25 32-16 32C-8 32-6 20-8 2C-10-14-11-28-16-32Z", G);
+  _ob(g, "M-10 6L10 6L10 16L-10 16Z", G);
+  _ol(g, "M14-20C18-10 18 6 14 20M-14-20C-18-10-18 6-14 20");
+  _odot(g, -30, 8, 2, "var(--c-plt)"); _odot(g, 30, -4, 2, "var(--c-plt)");
+  return { h0: 90, ports: { in: [16, -34], out: [0, 36], isthmus: [0, 11], lobeR: [22, 0], lobeL: [-22, 0] } };
+}
+/* Real-art store, filled by buildScene after this lib: _ORG_ART[kind] = { vb:[x,y,w,h],
+ * pfx:"oaxxx", body:"<inner svg markup>" }. Ports are fractions of the viewBox, measured
+ * off the slimmed art (see tools/figures/dev/svgslim.py); content fills the frame. */
+var _ORG_ART = {};
+var _ORG_FRAC = {
+  liver: { in: [.45, .95], out: [.46, .04], porta: [.45, .82], gall: [.30, .90], lobe: [.28, .45] },
+  heart: { in: [.30, .01], out: [.48, .01], aorta: [.48, .01], ivc: [.28, .90], apex: [.70, .97], pulm: [.60, .08] },
+  kidney: { in: [.04, .36], out: [.38, .97], vein: [.04, .46], pelvis: [.36, .41], cortex: [.62, .45], hilum: [.28, .41] },
+  lung: { in: [.46, .53], out: [.44, .60], art: [.44, .48], apex: [.24, .30], base: [.24, .87], trachea: [.49, .01], carina: [.49, .50], hilumL: [.42, .58], hilumR: [.56, .58], apexR: [.75, .34], baseR: [.75, .86] },
+  stomach: { in: [.42, .00], out: [.50, .95], fundus: [.38, .10], antrum: [.52, .30], pylorus: [.60, .35] },
+  intestine: { in: [.58, .38], out: [.50, .95], duodenum: [.60, .40], jejunum: [.42, .60], ileum: [.50, .72], cecum: [.60, .82], colon: [.28, .60], rectum: [.50, .92] },
+  brain: { in: [.60, .97], out: [.42, .04], parenchyma: [.42, .42], cereb: [.76, .78], frontal: [.08, .40], stem: [.60, .93], carotid: [.16, .75] },
+  pancreas: { in: [.50, .08], out: [.95, .50], head: [.85, .45], tail: [.06, .45], body: [.50, .45] },
+  spleen: { in: [.38, .78], out: [.52, .78], hilum: [.45, .72], pulp: [.50, .38] }
+};
+/* draw the injected art centred on x,y at w px wide. The art is clipped to its
+ * frame; tint overlays an organ-shaped translucent mask (the art itself, reused
+ * as a mask); dim dulls the art. Art ids are suffixed per instance so two of
+ * the same organ on one page never share gradient, clip or mask ids. */
+function _orgArt(parent, kind, x, y, w, opts, A) {
+  var vb = A.vb, vw = vb[2], vh = vb[3], cx = vb[0] + vw / 2, cy = vb[1] + vh / 2;
+  _orgN++;
+  var uid = "u" + _orgN;
+  var outer = mk("g", { class: "org org-art org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var sx = w / vw, sy = opts.h ? opts.h / vh : sx, fx = opts.flip ? -1 : 1;
+  var inner = mk("g", { transform: "translate(" + f1(-fx * cx * sx) + " " + f1(-cy * sy) + ") scale(" + (fx * sx).toFixed(4) + " " + sy.toFixed(4) + ")" }, outer);
+  var defs = mk("defs", {}, inner);
+  var cid = A.pfx + uid + "-frame";
+  var cp = mk("clipPath", { id: cid }, defs);
+  mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, cp);
+  var art = mk("g", { class: "org-halo", "clip-path": "url(#" + cid + ")" }, inner);
+  var aid = A.pfx + uid + "-art";
+  art.setAttribute("id", aid);
+  art.innerHTML = A.body.split('id="' + A.pfx + '-').join('id="' + A.pfx + uid + '-')
+    .split('url(#' + A.pfx + '-').join('url(#' + A.pfx + uid + '-')
+    .split('href="#' + A.pfx + '-').join('href="#' + A.pfx + uid + '-');
+  if (opts.dim) art.setAttribute("opacity", ".5");
+  if (opts.tint) {
+    var mid = A.pfx + uid + "-tintm";
+    var m = mk("mask", { id: mid, maskUnits: "userSpaceOnUse", x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, defs);
+    mk("use", { href: "#" + aid }, m);
+    var tg = mk("g", { "clip-path": "url(#" + cid + ")" }, inner);
+    mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh), fill: opts.tint, mask: "url(#" + mid + ")" }, tg);
+  }
+  var ports = {}, F = _ORG_FRAC[kind], k;
+  for (k in F) ports[k] = [Math.round((x + fx * (vb[0] + F[k][0] * vw - cx) * sx) * 10) / 10, Math.round((y + (vb[1] + F[k][1] * vh - cy) * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(vh * sy * 10) / 10, ports: ports, art: true };
+}
+/* dispatcher: outer g carries the theme class and gradients, inner g the local drawing scaled to w */
+function organ(parent, kind, x, y, w, opts) {
+  opts = opts || {};
+  if (_ORG_FRAC[kind] && _ORG_ART[kind]) return _orgArt(parent, kind, x, y, w, opts, _ORG_ART[kind]);
+  var outer = mk("g", { class: "org org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var G = _orgDefs(outer);
+  var inner = mk("g", {}, outer);
+  var r;
+  if (kind === "liver") r = _orgLiver(inner, G);
+  else if (kind === "heart") r = _orgHeart(inner, G);
+  else if (kind === "kidney") r = _orgKidney(inner, G);
+  else if (kind === "lung") r = _orgLung(inner, G);
+  else if (kind === "stomach") r = _orgStomach(inner, G);
+  else if (kind === "brain") r = _orgBrain(inner, G);
+  else if (kind === "pancreas") r = _orgPancreas(inner, G);
+  else if (kind === "spleen") r = _orgSpleen(inner, G);
+  else if (kind === "bladder") r = _orgBladder(inner, G);
+  else if (kind === "uterus") r = _orgUterus(inner, G);
+  else if (kind === "thyroid") r = _orgThyroid(inner, G);
+  else throw new Error("organ: unknown kind " + kind);
+  var sx = w / 100, sy = opts.h ? opts.h / r.h0 : sx, fx = opts.flip ? -1 : 1;
+  inner.setAttribute("transform", "scale(" + (fx * sx).toFixed(3) + " " + sy.toFixed(3) + ")");
+  var ports = {}, k;
+  for (k in r.ports) ports[k] = [Math.round((x + fx * r.ports[k][0] * sx) * 10) / 10, Math.round((y + r.ports[k][1] * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(r.h0 * sy * 10) / 10, ports: ports, art: false };
+}
+organ.kinds = ["liver", "heart", "kidney", "lung", "stomach", "intestine", "brain", "pancreas", "spleen", "bladder", "uterus", "thyroid"];
+
+_ORG_ART["heart"]={vb:[0,0,289.4,406.4],pfx:"oahea",body:"<g opacity=\".8\"><g><path d=\"M47.4 132.2l-10.5 5.3-10 7.4-7.7 7.9-8 11.3-4.8 10.1-3.7 12.7-2.1 15.7-.5 16.8.7 15.5 1.9 13.8 3 11.6 4 9.1 6.1 8.4 8.4 9 13.8 12.5 11 8.1 2.1-.6 1.3-4.4.6-7.3-.6-51.9.6-7.7 1.3-4.8 11.1-19.6 7.2-17.5 9.9-9.9 9.5-13.2 19.1-17.9 4.9-7.6-.5-1.4-1.4-.9-4.2-1.5-19.3-3.8-24.2-6.6-9.9-.6Z\" fill=\"#e79091\" /></g></g><g><path d=\"M189.3 137.3l-1.7 2.2-.5 3.6 1.7 8.4 9.8 16.8 6.7 9.7 17.7 8.7 10.9 10.5 2.3.6 4.4-.8 1.3-3.3-1-6.4-7.6-15.4-3.8-13.6-5.7-8.7-8-7.7-6.4-3.6-12.9-2.8-3.4.4Z\" fill=\"#e99494\" /></g><g><g id=\"oahea-bottom_vessels\"><path d=\"M53.7 296.1l.6 99.9 6.3 5 3.7 1.9 5.8 1.3 6.9-.2 6-2 7.7-4.6.4-98.9Z\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" fill=\"#5276b8\" stroke=\"#142b4f\" /><g><path d=\"M58.2 397.3l6.2-81.9 14.9 38.7 1.1 45.2-8.7 1.4-5.9-.2-5.5-1.7Z\" fill=\"#fff\" /></g><g opacity=\".6\"><g><path d=\"M55.3 313.5l5 18.8 4.9 11.3 7.2 8.1 8.8 12.5 1.6.5 2.8-1.3 5.2-4.1 2.9-3.7 1.4-3.9-.9-2.7-12.8-13.6Z\" fill=\"#21385e\" /></g></g></g><g id=\"oahea-top_vessels\"><path d=\"M161.8 122l3.3 -6.2 3.7 -9.6 2.4 -12.4 .1 -6.8 -1 -7 -4.8 -12.1 -13.5 -20 -2.6 -19.5 -2.8 -14.2 -11.8 -1 -1.3 -4 -2.6 -.6 -13.8 2.1 -6.5 3 -1.9 -9.8 -4.7 -.7 -10.5 -.2 -7.4 1.5 -3.2 1.6 -2.6 2.3 .2 3.6 7.3 68.5 -5.8 18.9 -2.6 13 -.9 15.5 .6 8.6 1.5 8.8 5.3 16.6 3.5 7.5 7.8 12.7 7.7 8.5 3.5 2.3 3 .7 15.4 -3.8 12.8 -5.1 7.9 -4 1.4 -2.4 3.5 -11.6Z\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" fill=\"#db5452\" stroke=\"#912e30\" /><path d=\"M109.7 9.5l9.4 30.9 4.1 9.4 1.6 2.6 1.1-.3.9-.9-.1-1.3-10.1-21.5Z\" fill=\"#912e30\" /><g><path d=\"M85.4 8.3l4.5 27.5 1.3 1.6 2.6-.3 6.3-3.2-7.4-25.9-3.3-1.2Z\" fill=\"#fff\" /></g><path d=\"M134.8 13.1l6.1 31.2.9 2.7 1.9 1.6Z\" fill=\"#912e30\" /><g opacity=\".8\"><g><path d=\"M124.3 13.4l11.3 35.5-1.4 3.6-4.8 2.5-2.2-.8 2.9-4.9-.4-5-9.6-27.9.8-1.9Z\" fill=\"#fff\" /></g></g><path d=\"M75.6 8.6l6.5 24.6 61.8-25.5 19.9-6.5 3.6 3.2 4.1 6.9 1.8 7.8-.5 4.7-60.8 30-15.2 9.5-3.8 3.7-7.2 14-4.6 15.1-2.9 21.4.8 19.7-3 4-8.2 4.2-11.5 3.6-29.5 3 2.5-9.2 1-20.1 1.9-16.5 9.4-45.2.8-15.3-.6-33.5 6-2.5 11.3-2.5 11-.1Z\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" fill=\"#5276b8\" stroke=\"#142b4f\" /><g><path d=\"M49.8 67.5l-4.9 35.6 -2.8 36.6 1 10.2 1.6 2.7 2.2 1.4 2.7 .4 6 -1.4 9.8 -4.6 1.1 -1.2 .6 -6.2 -.7 -24.9 1.1 -16.9 1.4 -9.1 2.6 -8.8 4.1 -7.8 5.1 -6.9 12 -11 12 -7.5 13 -5.9 1.6 -3.1 -1.3 -3.9 -3.9 -4.5 -3.7 -.3 -7.8 2.4 -40.5 23.8 -8.4 6Z\" fill=\"#fff\" /></g><g><path d=\"M137.9 134.2l-3.2-14 .1-6.5.8-2.7 1.5-2.1 12.1-10.2 3.4-4.2-3 4.9-5.9 6.4 9.9-3.6 4.9-2.7-6.8 4.5-7.7 3.6-2.3 2.8-1.5 5.8 8.3-.7-8.1 2.9-1.4 1.2Z\" fill=\"#6e2626\" /></g><g opacity=\".9\"><g><path d=\"M153.3 66.9l-4.2 11.6-4 6.7-8.7 10.3-3.7 10.2-1.6 17.7.6 9.8 1.5 8.4-.9 5.8-1.5 3.8-3.1 3.8-5.1 2-8.2.6-4.2-1.6-3.7-3.5-2.8-6-1.4-8.9.4-12.4 4.3-28.3 2.5-30.2 1.7-8.4 1.3-2.7 30.6 6.3 5.9 2.1Z\" fill=\"#eebbba\" /></g></g><g><path d=\"M53 11l2.3 33.9 1.1 1.6 3.2-.1 10.5-4.3.2-3.7-8.4-27.3-2.3-1.3Z\" fill=\"#fff\" /></g><g><path d=\"M105.6 63l-5.8 7.1 5.7 6.9 -9.5 29.7 -.9 10.6 1.1 13.3 1.6 7 2 4.8 10.4 18.6 2.5 2.4 9.3 .4 2.4 -.9 1.1 -1.9 -10.6 -20.3 -2.6 -11.4 .3 -13.1 4.2 -40 -1.5 -4 -4 -6 -3 -2.7Z\" fill=\"#fff\" /></g><g><path d=\"M105.6 63l-5.8 7.1 5.7 6.9 -9.5 29.7 -.9 10.6 1.1 13.3 1.6 7 2 4.8 10.4 18.6 2.5 2.4 9.3 .4 2.4 -.9 1.1 -1.9 -10.6 -20.3 -2.6 -11.4 .3 -13.1 4.2 -40 -1.5 -4 -4 -6 -3 -2.7Z\" fill=\"#fff\" /></g></g><g id=\"oahea-left_vessels\"><path d=\"M221 124.5l4.6 1 1.7 16 0 7.9-.6 1.6-2.5 2-3.5.7-5.9-.4-7.3-6.8.9-11.6Z\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" fill=\"#db5452\" stroke=\"#912e30\" /><path d=\"M120.4 161.1l4.1 -12.8 5.8 -10.6 11.1 -11.7 7.3 -4.6 4.5 -1.8 11.1 -2.3 33.9 .5 7.1 -.6 7.1 -1.8 4.1 3.6 6 9.2 -10.4 14 -1.8 9.6 -1.1 16.3 -23.7 15.9Z\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" fill=\"#5276b8\" stroke=\"#142b4f\" /><g><path d=\"M148.7 148.4l21.2-23.5 4.2-2.5 2.5.2.9 3.2-1.8 7.5-6.1 15.4-5.1 8.2-1.8.4-3.3-1.5Z\" fill=\"#fbf1f2\" /></g><g><path d=\"M178.9 119.6l5.9 3.6 3.7 3.3 3.7 6.8.4 3.2-.8 6.2-5.8 12.9.7 3.1 1.6 1.5 4.7.5 13.3-4.5 0-3.2-3.9-12.1-7.6-16-3-2.9-5-2.6-4.8-1.1Z\" fill=\"#433768\" /></g><path d=\"M228 162.2l15.6 1.1 3 8.8.2 6.5-9 .6Z\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" fill=\"#db5452\" stroke=\"#912e30\" /><path d=\"M247.8 183.6l-14.7.1-7.6 19.8 7.5 7.7 6.4-5.6 11.6-.3-.2-15.8-1.6-4.6Z\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" fill=\"#db5452\" stroke=\"#912e30\" /><g><path d=\"M203.9 133.5l7.6-6.9 6.5-3.3.6-.9-.6-1.5-1.6-1.4-2.1-.4-16.6 1.8-.8 1.8 1.4 4.7 2.4 3.4Z\" fill=\"#fbf1f2\" /></g></g><path d=\"M53.9 255.5l-2.8 16.8 -.2 10.6 1.7 11.5 4.4 12.2 9.5 17.8 16 26 11 10 14.2 9.9 17.5 8.6 15.1 5 24.6 6.3 40.6 8.2 21.6 6.6 11.9 .2 9.9 -1.9 7.2 -3.5 3.5 -2.7 6.4 -7.7 6.3 -12.3 6.5 -17.1 5.6 -20.5 3.5 -22.3 .6 -11.4 -1.5 -22.1 -3.3 -18.9 -2.2 -8.3 -5.8 -14.5 -3.7 -6.4 -9 -11.3 -14.3 -14.2 -11.7 -19.7 -1.9 -1.9 -14.6 -7.7 -10.6 -10.2 -12.3 -9.2 -16.1 -8.8 -11.6 -3.8 -11.2 -1.8 -14.9 -.2 -11.4 2.5 -2.8 1.3 -11.4 8.6 -13.4 4.8 -6.8 3.3 -6.4 5.1 -14.5 17.8 -11 15.2 -5 8.8 -2.5 11.3Z\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" fill=\"#b74b27\" stroke=\"#7b2222\" /><g opacity=\".8\"><g><path d=\"M53.9 255.5l-2.8 16.8 -.2 10.6 1.7 11.5 4.4 12.2 9.5 17.8 16 26 11 10 14.2 9.9 17.5 8.6 15.1 5 24.6 6.3 40.6 8.2 21.6 6.6 11.9 .2 9.9 -1.9 7.2 -3.5 3.5 -2.7 6.4 -7.7 6.3 -12.3 6.5 -17.1 5.6 -20.5 3.5 -22.3 .6 -11.4 -1.5 -22.1 -3.3 -18.9 -2.2 -8.3 -5.8 -14.5 -3.7 -6.4 -9 -11.3 -14.3 -14.2 -11.7 -19.7 -1.9 -1.9 -14.6 -7.7 -10.6 -10.2 -12.3 -9.2 -16.1 -8.8 -11.6 -3.8 -11.2 -1.8 -14.9 -.2 -11.4 2.5 -2.8 1.3 -11.4 8.6 -13.4 4.8 -6.8 3.3 -6.4 5.1 -14.5 17.8 -11 15.2 -5 8.8 -2.5 11.3Z\" fill=\"#e69ea3\" /></g></g><g opacity=\".8\"><g><path d=\"M171 156.7l14.7 6.3 6.7 5 2.7 3.1 3.4 7.3 1.9 8.7 .9 9 -.1 11.8 -6.7 32.1 -14 58.6 -28 87.3 .8 1.5 6.6 2.7 35.1 6.2 14.6 3.9 30.9 -77.8 8.1 -29.9 4.1 -18.2 -1.5 -38.6 -1.5 -21.4 -4.3 -8.4 -4.5 -6 -10.1 -9.3 -9.8 -6.3 -11.4 -6 -9.1 -12.9 -6.9 -7.1 -11.9 -6.2 -14.3 -4.8 -11 -1.7 -5.7 -.1 -11.1 1.7 -7.7 2.4 -5.5 2.9 -24 15.4 -13.4 11.3 -19.8 20.7 -10.3 12.5 -5.8 8.4 -1.9 10.5 -.4 17.5 1.1 28.6 1.5 16.6 3.5 11.8 5.6 12.4 8.6 12.8 5.6 5.7 6.5 4.7 7.4 3.4 11.6 3.3 4.5 -.1 -.2 -2.3 -6.6 -8.3 -22.9 -22.8 -5.9 -8 -1.3 -3.3 -.8 -6.5 .8 -11.9 2.8 -14.7 4.3 -16.7 1.6 -3.7 3.2 -3.9 3.5 -.5 6 1.4 5.1 -.3 2.4 -1.1 3.4 -3.9 1.8 -5.2 .1 -8.3 -6.9 -17.4 -.3 -9 4.7 -9.7 11 -13.4 7.5 -6.8 8.6 -6.2 9.5 -5.2 10.3 -3.5 11 -1.4Z\" fill=\"#f3cb91\" /></g></g><g><path d=\"M115.4 161.3l11.8 -8.5 10.3 -4.3 6.1 -1.4 6.6 -.5 7.1 .5 15.3 2.9 8.2 2.5 7.8 3.4 17.5 11 7.4 6.3 5.2 5.7 3.3 4.8 2 4.8 -1.4 3.9 -6.2 9.1 -4.9 4.9 -2.1 1.2 -1.7 0 -1 -1.5 -5.6 -25.6 -4.3 -8.7 -3 -3.3 -3.6 -2.2 -16.8 -6.4 -14.3 -2.6 -10.7 .5 -5.8 1.2 -11.7 4 -10.8 5.9 -5 3.7 -9 9.2 -7.4 11.6 -3.9 10.8 1.1 7.8 5.6 15.6 -.1 8.2 -1.8 4.2 -2.1 2.7 -11.5 6.7 -6.4 5.7 -6 11 -2.6 8.4 -.6 7.2 1.4 8 7 17 19.4 33.8 .4 2.7 -2.1 1.7 -3.7 -1 -4.9 -3.2 -11.8 -10.9 -11.8 -13.4 -10.5 -15.4 -1.5 -16 -1.6 -54.1 1.4 -6.6 6.3 -15 8.4 -14.8 10.5 -15.8 19.3 -11.3 9.3 -3.9Z\" fill=\"#f3cb91\" /></g><g><path d=\"M146.1 169.6l-7.5 4.5-14.9 13.9-9.7 11.4-7.2 11-3.4 9.4-1.3 9.9.6 10.3 1.1 5.1 4.1 9.6 3.1 4.3 3.8 3.9 10.6 6.3 13.8 4.6 14.4 2.9 12.5 1.2 8.1-.6 1.2-.8-1.1-1.1-12.2-6.5-11-8.2-5-5.7-4.1-6.9-2.6-8.3-1-10.8 1.4-9.3 3.2-7.8 4.4-6.6 5.2-5.5 14.9-11.6 3-2.8 1.1-2.5-1.1-4.9-1.3-2.4-4.2-4.3-2.8-1.6-7.1-1.6Z\" fill=\"#f2d7d7\" /></g><g><path d=\"M188.7 332.9l.5 1.5 1.9 1.5 7.2 2.9 19.6 4.3 13.1.8 10.8-1.4 5.4-1.5 9.7-5 4-3.6 3.1-4.4 2.1-5.2.8-6.2-.3-6.1-1.2-5.1-1.9-4.1-5-5.3-2.7-1.2-4.6.3-1.5 1.4-.7 2.3-2.8 12.8-5.1 9-6.8 5.8-7.9 3.3-8.5 1.5-22.5-.4-4.5.4Z\" fill=\"#f2d7d7\" /></g><path d=\"M200.7 170.2l8.4 21.1 2.5 11.1 -.6 29 -1 5.6 -5.3 10.8 -9.1 9.4 -31.9 22.1 5.2 -1.2 6.6 -2.9 8.2 -7 3.6 -1.4 -.8 3.7 -7.8 14.1 -2 5.3 1 -.9 8.4 -11.8 6.3 -12.9 12.6 -13.3 5.3 -7.8 3.8 -13.7 .6 -13.9 3.4 17.2 .6 13.1 2.9 13.1 -.3 6.2 -2.1 7.9 -4.2 11.3 -5.3 9.5 -1.5 1.9 -8.4 5.8 -6.5 .7 -12.3 -4.5 -11.9 .9 -9.2 -2.1 3.2 2 4.7 1.4 11.8 0 13.3 4.9 -9.9 3 -16.3 -.1 -15.3 4.4 -.2 1.9 2.1 1.6 10.5 -3.6 13.7 .7 -1.5 3.9 -3 2.9 -24.7 12.9 7.7 -2.2 14.4 -5.8 6.4 -4.4 3.7 -4.9 3.2 -2.7 16.8 -7.3 9.3 -5.5 -1 8.8 -7 17.8 -3.4 16.1 -5.4 16.6 -4.8 25.5 -2.2 3.6 -8.3 4.1 3.1 1.1 5.3 -2.1 4 -3.7 7.4 -33.4 4.7 -12.7 2.4 -14 6 -13.9 9.2 9.4 7 4.2 5.7 7.8 7.3 5.3 -7.3 -9.5 -.7 -2.8 2.4 -1.2 5.6 -.9 3.8 .5 7.1 3.8 7.1 5.1 -2.3 -5.3 -4.9 -4.7 -10.1 -2.8 -12 .7 -3 -.6 -7.3 -5.4 -4.5 -6.1 -.7 -5.7 .4 -6.4 10.8 -27.3 2.5 -11.5 3.9 2.4 4.9 6.3 3.6 15.1 8.3 9.5 2.9 8.6 2.4 11.1 3.4 6.5 -1.9 -15.7 -3.2 -11.6 8.2 3.7 4.2 3.1 13.1 16.4 -4.1 -7.9 -8.1 -11.4 -14.5 -7.9 -6.8 -5.2 -1.6 -2.7 -1.5 -10.2 -2.5 -5.1 -4.7 -6.5 -6.4 -4.2 -2.4 -9.7 -.1 -14.5 -3.6 -15.1 -2.5 -20.4 -2.7 -10 -2.5 -4.6 -5.9 -7.1 -3.3 -2.5Z\" fill=\"#ee6d6f\" /><path d=\"M100.3 174.5l-19.5 20 -1.5 6.8 .5 6.4 .8 .3 1.8 -1.2 13.3 -11.4 9.8 -9.8 9.7 -13.8 13.6 -12.4 -14 15.7 -4.2 8.1 4 -.9 10.2 -7 -.6 2.6 -3.1 2.6 -12.1 6.3 -7 6.9 15.9 7.4 7.2 2.3 .5 1.8 -.8 .6 -5.2 -.4 -13.7 -6.3 -6.7 -1.5 -14.2 11.8 -4.4 5.3 .8 9.8 1.6 5 1.8 2 8.9 2 21.3 .2 9.6 1.7 .8 1.6 -1.5 .7 -8.8 -1.6 -1.6 .1 -.3 .7 3.4 5.8 10.7 6.9 -5.2 -.7 -3.6 -1.4 -11 -10.3 -4.6 .7 7.5 8 7 5.1 -1.1 .3 -2.4 .1 -2.2 -1 -9.9 -9.3 -5.5 -3.9 -8.2 -.2 1.3 4 6.5 11.3 6.1 4.8 4.9 1.9 20.1 3.9 5.1 2.4 0 .8 -2.4 .3 -26.3 -3.2 8.1 10.6 11.7 7.8 21.6 8.3 10.2 5 -6 -.2 -16.8 -5.9 -9.2 -2.3 5 8.7 13.7 9.6 -3.8 .2 -3.6 -.9 -4.6 -2.9 -5.3 -4.8 -7.8 -12.2 -15.5 -16.8 -15.2 -25.3 -5.3 -10.5 -3 -8.4 -3.3 -18.9 -5.5 6.1 -14.8 24.1 -7.4 21.2 -.1 11 -1.2 10.8 3.1 5.7 2.3 6.8 12 18.8 3.9 4.7 4.4 3.1 4.7 .8 9.8 -.1 14.2 -3 5.4 -.4 3.2 .4 9.9 3.7 -16.3 -1.4 -16.4 5.2 12.5 9.8 9.3 6.1 4.2 1.9 8.9 2.1 12.1 -1.6 19.1 1 11.3 2 -16.3 -1 -10.8 .7 -9.3 1.4 -2.2 2 6.3 3.8 39.2 16.1 14.9 2.6 8.5 -1.5 -1.4 2.3 -11.4 1.4 -3.9 -.7 -13.6 -3.7 -17 -7.6 -11.3 -2.1 13.5 11.9 16.3 9.7 -3.6 -1.1 -15.5 -8 -23.1 -18.7 -20.5 -10.8 -19.1 -15.3 -9.3 -2.9 -4.1 -.7 .5 2.8 4.5 10.4 6.7 9.7 -8.4 -9.4 -5.9 -11.8 -8.1 -12 -10.8 -23.1 -3.1 -2 -3.9 -9.6 2.3 -2.8 1.2 -10.1 -2.5 5.8 -8.8 -7.9 24.9 -68 13 -16.5 14 -7.1 9.3 -7Z\" fill=\"#ee6d6f\" /><path d=\"M239.9 194.4l2 3.7 0 1.7 -4.3 .8 -14.4 -1 -1.2 1.3 1.6 5 11.9 6.7 11.2 5.2 13.1 4.8 4.5 3.1 7.6 9.3 4.2 6.9 5.2 15.1 2.4 12.8 -7.1 -21 -6.6 -12.8 -3.5 -4.8 -13 -8.8 -4.1 -1.4 -2.7 0 7.6 8.5 1.9 9.7 7.9 16.9 -3 -3.1 -5.4 -10.4 -2.4 -9.9 -2 -3.1 -12.9 -12.9 -16.2 -8.3 2.2 11.9 5.7 13 0 13.7 4.4 8.6 8.2 10.4 5.2 11 6 5 4.2 5.9 10.7 10.2 8.3 9.6 2.9 5.6 1.8 8 -8.6 -15.5 -10.1 -10.5 -6.6 -4.9 -8.5 -9.4 -1.7 .4 -1.5 1.6 -.5 3.6 .4 3.9 2.3 6.9 1.5 11.7 -2.4 -6.2 -1.6 -8.5 -2.8 -8.5 .2 -3 1.9 -5.1 -1.1 -6.6 -1.9 -3.6 -8.9 -10.9 -1.4 1.7 -1.5 7 .9 9.8 -2.7 12.8 -1.1 10.7 -1.7 -1 .5 -9.1 2.6 -8.9 -.7 -10.1 .5 -13.8 -.8 -7.7 .2 -13.6 -6.1 -14.1 -3.4 -16.5 -.8 -.7 -5 6.6 -.7 17.6 -3.5 15.4 .9 17 -3.9 40.6 -8.2 34.7 -9 33.7 -2.3 14.5 5.6 5.3 9.8 6.2 22.6 8.4 13 3 -6.3 0 -10.9 -2.3 -23.6 -8.6 -7.9 -4.6 -.3 1.7 1.2 2.8 -2.6 0 -3.2 -6.9 -.7 -7.3 -7.3 1.5 -6.7 .4 -15.1 -1.7 18.8 -.5 10.4 -3.5 7.8 -28.3 2.6 -12.6 -5.2 1.4 -7.1 .4 -8.1 -1.9 11.2 .3 5.8 -1.6 3.9 -1.9 8.8 -33.6 3.2 -36.8 -.4 -16.6 3.3 -16.5 -.2 -19.7 3 -11 -3.3 -2.6 -3 -1 -3.2 4.9 -1.5 5.2 -1.4 23.9 -4.6 8.2 -4.2 10.8 -10.6 14.3 -.5 13.3 -5.9 13.9 3.5 -12.3 .2 -9.9 -1.2 -.3 -3.8 1.6 -6.6 5.3 3.3 -4.9 7.7 -6.2 3.1 -5.4 7.7 -10.2 3.6 -10.3 5.6 -9.8 .1 -2.8 -.5 -1.7 -1 -.5 -13.7 .4 -12.7 -2.1 4.1 -.6 7.8 .8 14.9 -2 .9 -1.7 .8 -16.8 3.1 -7.1 -3.5 -5.8 -4.6 -4.5 -11.1 -4.1 -6.7 -.9 3.8 -1.2 9.5 2.1 7.5 4.7 8 7.1 8.3 4.9 8.5 -.6 4.4 -2.3 5.5 -1.6 10.6 4.2Z\" fill=\"#7fa0d3\" /><path d=\"M71.5 190.7l2.7 22.4 8.4 -1.4 22.2 -18.7 7.8 -3.5 7.6 -5 11.2 -3.3 10.7 -6.1 16.9 -4.3 7 -.4 -9.2 1.7 -7 3 -6.3 1.3 -8.6 6 -12.6 2.8 -8.2 6 -8 3.5 -6.3 6.6 11.8 5 15.8 -2.6 9.3 -.2 7 -1.3 10.9 -.6 5.3 0 4.5 2.1 -7.2 -.5 -15 1.2 -5.1 1.3 -9.1 .7 -11.8 3.2 -3.2 -.2 -15.1 -4.2 -5.4 2 -8.7 6.4 -7.6 3 -2.4 3 1.2 4.8 10.5 -.6 3.3 .6 2.5 9.3 2.9 5.4 7.4 7.9 4.3 6.9 -2.8 -1.3 -5.7 -7 -5 -4.4 -3.2 -5.9 -1.5 -7.9 -6.1 -.4 -5.6 1.4 -1.3 1.2 -.4 6.1 1.9 9.5 4.7 8.6 8.3 8.4 12.9 10.4 2.1 1.1 5.4 .8 8.9 -.6 10.8 3.5 13.1 0 4.6 1.5 10.9 .4 3.7 1 -.4 .9 -1.9 .5 -5.8 -.6 -5.9 .7 -5.1 -1.2 -8.3 1.1 -14.4 -3.8 -10.3 1.5 1 4.3 4.1 7.2 7.4 5.1 4.9 6.2 11.9 7.2 -8.5 -2 -7.9 -5.4 -12.3 -11.5 -5.4 -11.8 -15 -11.8 -11.8 -11.4 -2.9 -5.8 -4.2 -13.3 -.2 -8.4 -3.9 5.3 -3.5 9.8 -.7 4.2 .2 9.9 5.6 1.5 3 4.3 4.4 1.2 1.4 1.4 -6.6 -.4 -2.2 -1.2 -1.8 -2.7 -3.5 .1 1.4 9.1 -.1 6.2 6.1 1.7 3 2.3 5.8 2.8 3.7 5.8 2.5 1.6 6.9 2.1 6.3 -1.2 3.7 .2 9.6 4.1 -3.4 .5 -5.2 -2 -3.5 .1 -2.8 1.3 1.3 3.9 1.1 1.5 14.4 5.7 4.9 3.7 -20.1 -6.4 -5.3 -7.5 -8.9 -2.5 -6 -7.2 -10.9 -6.4 -5.1 -.6 -8.8 3.4 14.8 29.5 5 7.1 10.2 11.6 18.3 10.5 13.3 9 4 1.2 7.2 -.3 11.3 -4.5 11.1 1.3 15.2 0 -13.7 2.8 -11.1 -1.3 -6.8 3.9 -11 2.2 10 9.4 11.2 8.7 4.3 2.7 6.5 2.3 -4.5 .4 -.8 2.4 -1.1 -1 .3 -2 -10.1 -6.3 -23.7 -19 -25.9 -15.9 -.7 -.2 .2 .8 2.4 5.9 8.6 10.1 5.5 5.7 10.3 7.1 -8 -4 -8.2 -7.1 -8.2 -9 -6.4 -10.9 -16.8 -22.2 -17.2 -29.8 -6.5 -3.9 -9.2 -14.5 2.6 -14.1 5.2 3.1 -.3 11.7 4.8 8.7 1.7 1.2 2.5 .3 12 -.5 -2 -23.9 0 -9.1 8.1 -19.1 1.1 -11.8 -4.6 -17.4 1.8 -2.3Z\" fill=\"#7fa0d3\" /><path d=\"M53.9 255.5l-2.8 16.8 -.2 10.6 1.7 11.5 4.4 12.2 9.5 17.8 16 26 11 10 14.2 9.9 17.5 8.6 15.1 5 24.6 6.3 40.6 8.2 21.6 6.6 11.9 .2 9.9 -1.9 7.2 -3.5 3.5 -2.7 6.4 -7.7 6.3 -12.3 6.5 -17.1 5.6 -20.5 3.5 -22.3 .6 -11.4 -1.5 -22.1 -3.3 -18.9 -2.2 -8.3 -5.8 -14.5 -3.7 -6.4 -9 -11.3 -14.3 -14.2 -11.7 -19.7 -1.9 -1.9 -14.6 -7.7 -10.6 -10.2 -12.3 -9.2 -16.1 -8.8 -11.6 -3.8 -11.2 -1.8 -14.9 -.2 -11.4 2.5 -2.8 1.3 -11.4 8.6 -13.4 4.8 -6.8 3.3 -6.4 5.1 -14.5 17.8 -11 15.2 -5 8.8 -2.5 11.3Z\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" stroke=\"#7b2222\" fill=\"none\" /><path d=\"M51.8 132.7l-10.5 5.3 -10 7.3 -7.7 7.9 -8 11.3 -4.8 10.1 -3.8 12.7 -2.2 15.7 -.6 16.8 .7 15.5 1.9 13.8 3 11.7 4 9.1 6.1 8.4 8.4 9.1 13.7 12.6 10.9 8.2 2.1 -.6 1.3 -4.4 .6 -7.3 -.4 -51.9 .6 -7.7 1.3 -4.8 11.1 -19.6 7.2 -17.5 10 -9.9 9.5 -13.2 19.2 -17.8 5 -7.5 -.5 -1.4 -1.4 -.9 -4.2 -1.5 -19.3 -3.9 -24.2 -6.8 -9.9 -.7Z\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" fill=\"#fac9a4\" stroke=\"#814b24\" /><path d=\"M193.7 138.3l-1.7 2.2-.5 3.5 1.6 8.4 8.6 14.5 6.9 9.6 5.6 5.1 13 6.4 10.8 10.4 2.3.6 4.4-.8 1.3-3.3-1-6.4-7.6-15.5-3.7-13.6-5.7-8.8-8-7.8-6.4-3.7-12.9-2.8-3.4.4Z\" fill=\"#f8b18b\" stroke=\"#814b23\" stroke-miterlimit=\"10\" stroke-width=\"2.3px\" /><g><path d=\"M114.3 146.3l-9.6 7.9-4.2 5.3-2.4 1.1-1.9-.6-.1-1.6 1.7-3.1 7.8-8.1 4.6-2.1 2.1.1Z\" fill=\"#fff\" /></g><g><path d=\"M94.1 165.4l-12.6 13.1-7.1 5.5-.5 6.5-2.5 8.8-3.7 7-3.2 1.9-.4-2.1 5-16.3 1.4-9.2 1.8-2 10.1-6.7 8.1-7.2 3.1-1.1Z\" fill=\"#fff\" /></g><g><path d=\"M196.6 156l7.6 12 9.3 9.4 7.4 4.7 5.7 2.5 5.5.8 2.6-1.2.8-4.5-1.3-4.4-1.4 4-1.8 1.2-6-.2-4.1-1.8-10.6-7.8Z\" fill=\"#fff\" /></g><g><path d=\"M225.6 187.1l6.1 2.1 4.1 0 1.9-1.9.7-3.1-1.6-5.6-10.7-20.6 12.3 21.6 1.8 5.8-1.5 4-3.5 1.7-5.2-1Z\" fill=\"#4b1715\" /></g><g><path d=\"M225.6 187.1l6.1 2.1 4.1 0 1.9-1.9.7-3.1-1.6-5.6-10.7-20.6 12.3 21.6 1.8 5.8-1.5 4-3.5 1.7-5.2-1Z\" fill=\"#4b1715\" /></g><g><path d=\"M36 244.5l7.4-3.4 5.6-3.6 9.2-8.4 9.4-14.4 5.7-11.7 2.9-7.9-9.5 16.6-10 14-8.6 8.6-12.5 9.3Z\" fill=\"#6e2626\" /></g><g><path d=\"M30 147.2l-11.9 16.3-7.3 16.1-3.5 19.7-1.7 16.8-.3 17.8.7 8.7 3.6 15.8 3.1 6.6 8.2 11.5 9.1 9.9 8.9 8.1 10.4 7.8 2.1 1.3 2 .1 1-.7-.5-1.3-22.7-20.8-11.1-11.4-5.3-9.8-4.1-15.3-.8-15.4 2.2-20.1 5.4-21.1 14.1-35 .8-3.3-.4-1.9Z\" fill=\"#f8e0df\" /></g><g opacity=\".4\"><g><path d=\"M59.9 304l16 30.3 10.8 17.3 5.1 4.6 13.5 8.7 19.7 10.2 15.1 5.7 68.6 15.8 16.6 5.4 6.6.8 10.9-1.1 7.6-2.3 5.2-4.7 5.7-9.3 10.9-21.7 8.1-22.2 3.8-17 1.6-18.4-.9-18.6-2.9-17.5-4.2-15.1-5-11.5-8.5-10.9-24.4-24.3-1.8-.7-1.3.8-1.4 2.8 25.6 26.9 6.1 11.3 4.7 12.8 2.5 9.4 3.7 19.8 1.3 14.4-.3 8.4-4.1 21.3-2.7 10.7-3.9 10.9-5.5 10.5-8.1 12.3-4.2 5.4-4.2 3.4-4.9 1.6-6.3.1-39.4-6-29.9-7.8-26.2-9.2-13.7-6.9-37.8-24.6-4-3.7-18.7-24.6-4.3-3.7Z\" fill=\"#fbf1f2\" /></g></g></g>"};
+/* Cardiomyopathies scene: a real heart organ with a cutaway overlay, cause icons, inflow and outflow blood, drug particles and gauges. */
+const HX = 480, HY = 250, HW = 210;
+const CX = 494, CY = 312;
+const L = { causes: $("causes"), slot: $("heartSlot"), heart: $("heart"), parts: $("parts"), over: $("over"), panel: $("panel") };
+const sm = { Dil: 0.92, Wall: 0.18, Stiff: 0.30, Dia: 0.45, Sys: 0.88, Out: 0.05, Fill: 0.55, Ej: 0.12, hf: 0, bb: 0, cause: 0, P0: 1, P1: 0, P2: 0 };
+let heartO = null, cavEl, ringEl, bulgeEl, shadeEl, haloEl, vesIn, vesOut, wallL, wallR, capEl = null, capKey = -1, tpDrug = -1;
+let trIn = null, trOut = null;
+const amyDots = [], causeIcons = [], receptors = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
+const gg = {};
+let tpG = null, tpT = null, tpR = null, tpOp = 0;
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0, st: 0, u: 0, ri: 0 }; }); }
+const free = (pl) => pl.find((p) => !p.on);
+function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.st = 0; p.u = 0; p.e.setAttribute("opacity", "1"); }
+function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
+const inflow = pool(16, () => mk("circle", { class: "sc-p p-in", r: 2.6 }, L.parts));
+const outflow = pool(16, () => mk("circle", { class: "sc-p p-out", r: 2.6 }, L.parts));
+const turb = pool(8, () => mk("circle", { class: "sc-p p-turb", r: 2.2 }, L.parts));
+const blk = pool(8, () => mk("circle", { class: "sc-p p-blk", r: 2.8 }, L.parts));
+const sup = pool(10, () => mk("circle", { class: "sc-p p-sup", r: 2.4 }, L.parts));
+const clr = pool(10, () => mk("circle", { class: "sc-p p-clr", r: 2.2 }, L.parts));
+const acc = { inn: 0, out: 0 };
+function capText(d, l) {
+  if (d === 1) return "Heart failure therapy unloads the heart. The squeeze strengthens and flow returns.";
+  if (d === 2) return "Beta blocker slows and softens the squeeze. The exit opens and flow returns.";
+  if (d === 3) return l === 1 ? "Treating the cause helps this inherited thickening little. The exit stays narrow." : "Treating the cause clears the trigger. The muscle recovers and fills better.";
+  if (d === 4) return "Full bundle. The cause is treated and the heart is supported. Pumping and filling recover.";
+  if (l === 1) return "No treatment. The thick wall blocks the exit and little blood leaves the heart.";
+  if (l === 2) return "No treatment. Stiff deposits stop the heart filling, so little blood can leave.";
+  return "No treatment. The stretched heart squeezes weakly and only a thin stream leaves.";
+}
+const TP_TXT = ["", "Heart support", "Outflow relief", "Cause treated", "Full bundle"];
+
+function causeIcon(x, y, kind) {
+  const g = mk("g", {}, L.causes);
+  mk("circle", { class: "cmp-node", cx: x, cy: y, r: 22 }, g);
+  const h = mk("g", {}, g);
+  if (kind === 0) {
+    mk("rect", { class: "cmp-ic", x: -9, y: -12, width: 18, height: 26, rx: 5 }, h);
+    mk("rect", { class: "cmp-ic", x: -4, y: -22, width: 8, height: 12, rx: 2 }, h);
+    mk("rect", { class: "cmp-ic2", x: -6, y: 2, width: 12, height: 9, rx: 3 }, h);
+  } else if (kind === 1) {
+    for (let i = 0; i < 8; i++) { const a = i * 0.785, c = Math.cos(a), s = Math.sin(a);
+      mk("path", { class: "cmp-ic4", fill: "none", d: "M" + f1(c * 8) + " " + f1(s * 8) + "L" + f1(c * 13) + " " + f1(s * 13) }, h);
+      mk("circle", { class: "cmp-icd", cx: f1(c * 14), cy: f1(s * 14), r: 1.5 }, h); }
+    mk("circle", { class: "cmp-ic2", cx: 0, cy: 0, r: 8 }, h);
+  } else if (kind === 2) {
+    let d1 = "", d2 = "";
+    for (let t = -16; t <= 16; t += 2) { d1 += (t === -16 ? "M" : "L") + f1(Math.sin(t / 5) * 8) + " " + t; d2 += (t === -16 ? "M" : "L") + f1(-Math.sin(t / 5) * 8) + " " + t; }
+    mk("path", { class: "cmp-ic3", fill: "none", d: d1 }, h);
+    mk("path", { class: "cmp-ic3", fill: "none", d: d2 }, h);
+    for (let t = -10; t <= 10; t += 10) mk("path", { class: "cmp-ic4", fill: "none", d: "M" + f1(Math.sin(t / 5) * 8) + " " + t + "L" + f1(-Math.sin(t / 5) * 8) + " " + t }, h);
+  } else {
+    mk("path", { class: "cmp-ic4", fill: "none", d: "M-12 -8C-4 -12 4 -4 12 -8" }, h);
+    mk("path", { class: "cmp-ic4", fill: "none", d: "M-12 0C-4 -4 4 4 12 0" }, h);
+    mk("path", { class: "cmp-ic4", fill: "none", d: "M-12 8C-4 4 4 12 12 8" }, h);
+    mk("circle", { class: "cmp-icd", cx: -6, cy: -4, r: 1.8 }, h);
+    mk("circle", { class: "cmp-icd", cx: 5, cy: 4, r: 1.8 }, h);
+  }
+  causeIcons.push({ g: h, x, y });
 }
 
 function init() {
-  aorta = mk("rect", { class: "cmp-aorta", x: 532, y: 74, width: 28, height: 104, rx: 12 }, L.heart);
-  la = mk("ellipse", { class: "cmp-la", cx: 432, cy: 152, rx: 42, ry: 30 }, L.heart);
-  myo = mk("circle", { class: "cmp-myo", cx: HX, cy: HY, r: 90 }, L.heart);
-  cav = mk("circle", { class: "cmp-cav", cx: HX, cy: HY, r: 60 }, L.heart);
-  sept = mk("ellipse", { class: "cmp-sept", cx: HX + 34, cy: HY - 16, rx: 14, ry: 34 }, L.heart);
-  for (let i = 0; i < 14; i++) { const d = mk("rect", { class: "sc-p p-amy", x: -2.4, y: -2.4, width: 4.8, height: 4.8, rx: 1, opacity: "0" }, L.heart); amyRing.push({ e: d, a: (i / 14) * 6.283 }); }
-  causeNode(110, 120, 0); causeNode(110, 185, 1); causeNode(110, 250, 2); causeNode(110, 315, 3);
-  consNode(850, 120, 0); consNode(850, 185, 1); consNode(850, 250, 2); consNode(850, 315, 3);
+  causeIcon(95, 140, 0); causeIcon(95, 210, 1); causeIcon(95, 280, 2); causeIcon(95, 350, 3);
+  heartO = organ(L.slot, "heart", HX, HY, HW, {});
+  const outP = heartO.ports.out;
+  trIn = track([[150, 330], [300, 335], [390, 325], [440, 318]]);
+  trOut = track([[CX, CY - 60], [488, 190], [482, 140], outP, [outP[0] + 24, outP[1] - 25], [580, 75], [680, 75], [735, 75]]);
+  const g = L.heart;
+  shadeEl = mk("ellipse", { class: "cmp-shade", cx: CX, cy: CY, rx: 88, ry: 76, opacity: "0.2" }, g);
+  vesIn = mk("path", { class: "cmp-vesIn", fill: "none", d: "M150 330L300 335L390 325L440 318" }, g);
+  vesOut = mk("path", { class: "cmp-ves", fill: "none", d: "M" + CX + " " + (CY - 60) + "L488 190L482 140L" + f1(outP[0]) + " " + f1(outP[1]) }, g);
+  cavEl = mk("ellipse", { class: "cmp-cav", cx: CX, cy: CY, rx: 60, ry: 66 }, g);
+  ringEl = mk("ellipse", { class: "cmp-ring", cx: CX, cy: CY, rx: 70, ry: 76 }, g);
+  bulgeEl = mk("ellipse", { class: "cmp-bulge", cx: 521, cy: 190, rx: 30, ry: 34 }, g);
+  wallL = mk("path", { class: "cmp-wall", fill: "none", d: "M470 158L470 222" }, g);
+  wallR = mk("path", { class: "cmp-wall", fill: "none", d: "M500 158L500 222" }, g);
+  haloEl = mk("ellipse", { class: "cmp-halo", cx: HX, cy: HY, rx: 112, ry: 148, opacity: "0" }, g);
+  for (let i = 0; i < 14; i++) { const a = i * 2.4, rr = 20 + (i % 3) * 18;
+    const d = mk("circle", { class: "cmp-amy", cx: f1(CX + Math.cos(a) * rr * 1.15), cy: f1(CY + Math.sin(a) * rr * 0.85), r: 3, opacity: "0" }, g);
+    amyDots.push(d); }
+  for (let i = 0; i < 6; i++) mk("path", { class: "cmp-rec", fill: "none", d: "M0 0L6 0" }, g).setAttribute("id", "rec" + i);
+  const e = trOut.at(1);
+  mk("path", { class: "cmp-arrow", d: "M" + f1(e.x - 2) + " " + f1(e.y - 7) + "L" + f1(e.x + 9) + " " + f1(e.y) + "L" + f1(e.x - 2) + " " + f1(e.y + 7) + "Z" }, g);
   const o = L.over;
-  pill(o, "Alcohol", 110, 120, 110, 82, "Alcohol: long term heavy alcohol use can injure heart muscle and dilate the ventricle. Stopping alcohol is treating the cause.");
-  pill(o, "Myocarditis", 110, 185, 110, 147, "Myocarditis: inflammation of heart muscle, often viral, including COVID-19, and sometimes immune, for example after immune checkpoint therapy or in systemic inflammatory disease. It can scar and dilate the ventricle.");
-  pill(o, "Genetic", 110, 250, 110, 212, "Genetic disease: inherited variants in cardiac muscle proteins cause dilated disease in some families and hypertrophic disease in others. Family screening matters.");
-  pill(o, "Amyloid", 110, 315, 110, 277, "Amyloid: misfolded protein deposited in the heart wall. The wall becomes stiff and restrictive, so filling fails. Treating the amyloid cause helps.");
-  pill(o, "Left atrium", 432, 140, 330, 90, "Left atrium: it fills the ventricle. When filling is poor it enlarges and pressure backs up toward the lungs.");
-  pill(o, "Outflow tract", 546, 128, 695, 88, "Outflow tract: the exit from the left ventricle to the aorta. A thick septum narrows it and can block ejection, especially on exertion.");
-  pill(o, "Septum", 518, 214, 635, 150, "Septum: the wall between the ventricles. In hypertrophic disease it thickens most, bulges into the outflow tract and obstructs flow.");
-  pill(o, "Left ventricle", HX, 272, HX, 378, "Left ventricle: the main pumping chamber. Dilated it is large and weak, hypertrophic it is thick and stiff, restrictive it is stiff with poor filling.");
-  pill(o, "Weak squeeze", 850, 120, 850, 82, "Systolic failure: the ventricle cannot squeeze blood out. This dominates in dilated disease and causes breathlessness and fluid retention.");
-  pill(o, "Blocked outflow", 850, 185, 850, 147, "Outflow obstruction: the thick septum and mitral leaflet block the exit in hypertrophic disease. A beta-blocker or myectomy relieves it.");
-  pill(o, "Poor filling", 850, 250, 850, 212, "Diastolic dysfunction: a thick or stiff ventricle cannot relax and fill. Pressure rises even when squeezing looks preserved.");
-  pill(o, "Sudden death", 850, 315, 850, 277, "Sudden death risk: hypertrophic muscle is prone to dangerous rhythms, especially in the young and on exertion. Risk assessment guides device decisions, not shown here.");
-  const phf = pill(o, "HF therapy", HX, 292, 275, 408, "Heart failure therapy: medicines that unload the heart and block harmful neurohormonal signals. They help most when squeezing is weak."); phf.setAttribute("id", "p-hf"); phf.style.opacity = 0;
-  const pbb = pill(o, "Beta-blocker", 546, 128, 680, 408, "A beta-blocker slows and softens contraction so the outflow tract opens. Septal myectomy surgically thins the septum when obstruction persists."); pbb.setAttribute("id", "p-bb"); pbb.style.opacity = 0;
-  const pca = pill(o, "Treat cause", 110, 315, 110, 408, "Treat the cause: stop alcohol, treat myocarditis and systemic disease, or treat amyloid. This acts upstream of the ventricle."); pca.setAttribute("id", "p-cause"); pca.style.opacity = 0;
+  pill(o, "Causes", 95, 140, 95, 84, "Causes that injure heart muscle: heavy alcohol use, viral myocarditis, inherited gene changes and amyloid deposits. Treating the cause shrinks these triggers.");
+  pill(o, "Heart", 585, 180, 720, 150, "The heart. The shaded cutaway shows the left ventricle squeezing blood out to the body.");
+  pill(o, "Thick wall", 556, 340, 640, 330, "Wall thickness. Thin and stretched in dilated disease, thick in hypertrophic disease.");
+  pill(o, "Blocked outflow", 488, 190, 640, 180, "The outflow exit. A thick septum narrows it in hypertrophic disease so little blood leaves, especially on effort.");
+  pill(o, "Stiff deposits", 530, 360, 470, 392, "Amyloid deposits stiffen the wall in restrictive disease so the heart cannot fill. They clear when the cause is treated.");
+  pill(o, "Weak squeeze", 735, 75, 700, 110, "Blood leaving for the body. A weak squeeze sends a thin slow stream. Treatment makes it strong again.");
+  pill(o, "Poor filling", 260, 330, 250, 382, "Blood arriving to fill the heart. A stiff or thick wall fills slowly and blood queues up behind it.");
+  tpG = pill(o, "Full bundle", 520, 390, 700, 406, "Treatment at work. Drug dots dock on the heart while the caption below explains what changes.");
+  tpG.setAttribute("id", "p-treat"); tpG.style.opacity = 0;
+  tpT = tpG.querySelector("text"); tpR = tpG.querySelector("rect");
+  capEl = mk("text", { class: "cmp-cap", x: 30, y: 432 }, o); capEl.textContent = capText(0, level);
   const P = L.panel;
   mk("rect", { class: "dr-panel", x: 24, y: 454, width: 912, height: 142, rx: 14 }, P);
   const t = mk("text", { class: "dr-pt", x: 40, y: 476 }, P); t.textContent = "The ventricle";
-  [["dil", "Dilatation", "g-dil", "How stretched and enlarged the ventricle cavity is. High in dilated disease."], ["wall", "Wall", "g-wall", "Wall thickness. Thin in dilated disease, thick in hypertrophic disease."], ["stiff", "Stiffness", "g-stiff", "How stiff and non compliant the wall is. Highest in restrictive disease from amyloid and scarring."], ["fill", "Filling", "g-fill", "Diastolic filling of the ventricle. Poor when the wall is thick or stiff."], ["ej", "Ejection", "g-ej", "Systolic ejection, how well the ventricle squeezes blood out. Poor in dilated disease."], ["out", "Outflow block", "g-out", "Blockage of the outflow tract by the thick septum. A feature of hypertrophic disease."]]
+  [["dil", "Dilatation", "g-dil", "How stretched and enlarged the ventricle cavity is. High in dilated disease."], ["wall", "Wall", "g-wall", "Wall thickness. Thin in dilated disease, thick in hypertrophic disease."], ["stiff", "Stiffness", "g-stiff", "How stiff the wall is. Highest in restrictive disease from amyloid deposits."], ["fill", "Filling", "g-fill", "How well the ventricle fills with blood. Poor when the wall is thick or stiff."], ["ej", "Ejection", "g-ej", "How well the ventricle squeezes blood out. Poor in dilated disease."], ["out", "Outflow block", "g-out", "Blockage of the outflow exit by the thick septum. Seen in hypertrophic disease."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, 120 + i * 140, 486, 60, 18, cls, name, tip); });
 }
 
 function step(dt, m) {
   const k1 = Math.min(1, dt * 1.1), k2 = Math.min(1, dt * 0.55);
   ["Dil", "Wall", "Stiff", "Dia", "Sys", "Out", "Fill", "Ej", "hf", "bb", "cause", "P0", "P1", "P2"].forEach((q) => { sm[q] = lerp(sm[q], m[q], q === "Fill" || q === "Ej" ? k2 : k1); });
-  const thick = 10 + sm.Wall * 26 - sm.Dil * 4;
-  let cavR = 28 + sm.Dil * 46 - sm.Wall * 11 - sm.Stiff * 5;
-  const beatPh = (tm / 1050) % 1, contract = beatPh < 0.36 ? Math.sin(Math.PI * beatPh / 0.36) : 0;
-  cavR = cavR * (1 - 0.15 * sm.Ej * contract);
-  const outR = cavR + thick;
-  myo.setAttribute("r", f1(outR)); cav.setAttribute("r", f1(Math.max(14, cavR)));
-  la.setAttribute("rx", f1(36 + (1 - sm.Fill) * 24)); la.setAttribute("ry", f1(26 + (1 - sm.Fill) * 15));
-  const aw = 28 - sm.Out * 14;
-  aorta.setAttribute("width", f1(aw)); aorta.setAttribute("x", f1(546 - aw / 2));
-  sept.setAttribute("cx", f1(HX + cavR * 0.60)); sept.setAttribute("cy", f1(HY - cavR * 0.28));
-  sept.setAttribute("rx", f1(7 + sm.Wall * 15 + sm.Out * 9)); sept.setAttribute("ry", f1(Math.max(16, cavR * 0.52)));
-  sept.setAttribute("opacity", (0.25 + 0.55 * sm.Wall).toFixed(2));
-  amyRing.forEach((d) => { const rr = cavR + thick * 0.5; d.e.setAttribute("transform", "translate(" + f1(HX + rr * Math.cos(d.a)) + " " + f1(HY + rr * Math.sin(d.a)) + ") rotate(" + f1(d.a * 57.3) + ")"); d.e.setAttribute("opacity", (sm.P2 * sm.Stiff * 0.95).toFixed(2)); });
-  const cAct = [sm.P0, sm.P0, Math.max(sm.P0, sm.P1), sm.P2];
-  causeNodes.forEach((n, i) => { n.g.style.opacity = (0.32 + 0.68 * cAct[i]).toFixed(2); });
-  const sAct = [sm.Sys, sm.Out, sm.Dia, sm.P1 * (0.35 + 0.65 * sm.Out)];
-  consNodes.forEach((n, i) => { n.g.style.opacity = (0.32 + 0.68 * clamp(sAct[i])).toFixed(2); });
-  $("p-hf").style.opacity = sm.hf.toFixed(2); $("p-bb").style.opacity = sm.bb.toFixed(2); $("p-cause").style.opacity = sm.cause.toFixed(2);
-  acc.inn += dt * sm.Fill * 6; while (acc.inn >= 1) { acc.inn--; const p = free(inflow); if (p) emit(p, 424 + rnd(-10, 18), 168, rnd(-3, 3), rnd(30, 46), 0); }
-  inflow.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.y > HY + 18 || p.t > 3) kill(p); });
-  acc.out += dt * sm.Ej * (1 - sm.Out * 0.82) * 6; while (acc.out >= 1) { acc.out--; const p = free(outflow); if (p) emit(p, 546 + rnd(-5, 5), 168, rnd(-2, 2), -rnd(42, 60), 0); }
-  outflow.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.y < 80 || p.t > 3) kill(p); });
-  acc.amy += dt * sm.P2 * sm.Stiff * 4; while (acc.amy >= 1) { acc.amy--; const p = free(amy); if (p) { const a = rnd(0, 6.28), rr = cavR + thick * 0.5; emit(p, HX + rr * Math.cos(a), HY + rr * Math.sin(a), rnd(-4, 4), rnd(-4, 4), 0); } }
-  amy.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", clamp(1 - p.t / 2.2).toFixed(2)); if (p.t > 2.2) kill(p); });
+  const beatT = 1.05 + 0.45 * sm.bb, ph = ((tm / 1000) / beatT) % 1;
+  const contract = ph < 0.38 ? Math.sin(Math.PI * ph / 0.38) : 0;
+  const flowOut = sm.Ej * (1 - sm.Out * 0.85);
+  place(heartO.g, HX, HY - 1.5 * contract * sm.Ej, 0, 1 + 0.015 * contract * sm.Ej);
+  const cavR = Math.max(16, (30 + sm.Dil * 52 - sm.Wall * 10 - sm.Stiff * 5) * (1 - 0.16 * sm.Ej * contract));
+  cavEl.setAttribute("rx", f1(cavR)); cavEl.setAttribute("ry", f1(cavR * 1.12));
+  const sw = 6 + sm.Wall * 24;
+  ringEl.setAttribute("rx", f1(cavR + sw / 2 + 2)); ringEl.setAttribute("ry", f1(cavR * 1.12 + sw / 2 + 2));
+  ringEl.setAttribute("stroke-width", f1(sw));
+  const gap = lerp(46, 12, sm.Out);
+  wallL.setAttribute("d", "M" + f1(485 - gap / 2) + " 158L" + f1(485 - gap / 2) + " 222");
+  wallR.setAttribute("d", "M" + f1(485 + gap / 2) + " 158L" + f1(485 + gap / 2) + " 222");
+  const brx = 8 + sm.Out * 24 + sm.Wall * 6;
+  bulgeEl.setAttribute("rx", f1(brx)); bulgeEl.setAttribute("cx", f1(485 + gap / 2 + brx - 6));
+  shadeEl.setAttribute("opacity", (0.05 + 0.22 * (1 - sm.Ej)).toFixed(2));
+  haloEl.setAttribute("opacity", (sm.hf * 0.75).toFixed(2));
+  vesIn.setAttribute("stroke-width", f1(8 + 10 * sm.Fill));
+  vesOut.setAttribute("stroke-width", f1(5 + 13 * flowOut));
+  const amyOp = sm.P2 * clamp((sm.Stiff - 0.4) * 2, 0, 1) * (1 - 0.8 * sm.cause);
+  amyDots.forEach((d) => { d.setAttribute("opacity", amyOp.toFixed(2)); d.setAttribute("r", f1(3 * (1 - 0.55 * sm.cause))); });
+  causeIcons.forEach((c) => { place(c.g, c.x, c.y, 0, 1 - 0.62 * sm.cause); c.g.style.opacity = (1 - 0.55 * sm.cause).toFixed(2); });
+  for (let i = 0; i < 6; i++) {
+    const rx = 485 - gap / 2 - 8, ry = 165 + i * 10;
+    receptors[i][0] = rx; receptors[i][1] = ry;
+    const r = $("rec" + i);
+    r.setAttribute("d", "M" + f1(rx - 5) + " " + ry + "L" + f1(rx + 1) + " " + ry);
+    r.setAttribute("opacity", (0.25 + 0.75 * sm.bb).toFixed(2));
+  }
+  acc.inn += dt * (1 + 7 * sm.Fill);
+  while (acc.inn >= 1) { acc.inn--; const p = free(inflow); if (p) { p.u = 0; emit(p, 0, 0, 0, 0, 0); } }
+  inflow.forEach((p) => { if (!p.on) return;
+    p.u += dt * (0.14 + 0.5 * sm.Fill) * (p.u > 0.35 && sm.Fill < 0.35 ? 0.2 : 1);
+    if (p.u >= 1) { kill(p); return; }
+    const q = trIn.at(p.u); p.x = q.x; p.y = q.y;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); });
+  acc.out += dt * (1 + 8 * flowOut);
+  while (acc.out >= 1) { acc.out--; const p = free(outflow); if (p) { p.u = 0; emit(p, 0, 0, 0, 0, 0); } }
+  outflow.forEach((p) => { if (!p.on) return;
+    p.u += dt * (0.16 + 0.55 * flowOut);
+    if (p.u >= 1) { kill(p); return; }
+    const q = trOut.at(p.u); p.x = q.x; p.y = q.y;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); });
+  turb.forEach((p, i) => { const a = tm / 420 + i * 0.785;
+    p.x = 485 + Math.cos(a) * (gap / 2 + 8); p.y = 190 + Math.sin(a) * 26;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    p.e.setAttribute("opacity", (sm.Out * (0.35 + 0.65 * contract)).toFixed(2)); });
+  if (sm.bb > 0.5 && Math.random() < dt * 6) { const p = free(blk); if (p) { p.ri = blk.indexOf(p) % 6; emit(p, 640, 250, 0, 0, 0); } }
+  blk.forEach((p) => { if (!p.on) return;
+    const r = receptors[p.ri];
+    if (sm.bb < 0.4) { p.t += dt; p.e.setAttribute("opacity", clamp(1 - p.t / 0.8).toFixed(2)); if (p.t > 0.8) kill(p); return; }
+    if (p.st === 0) { p.x += (r[0] - p.x) * Math.min(1, dt * 3); p.y += (r[1] - p.y) * Math.min(1, dt * 3);
+      if (Math.hypot(r[0] - p.x, r[1] - p.y) < 3) { p.st = 1; p.t = 0; } }
+    else { p.x = r[0]; p.y = r[1]; }
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); });
+  if (sm.hf > 0.5 && Math.random() < dt * 7) { const p = free(sup); if (p) emit(p, rnd(380, 580), 430, rnd(-6, 6), -rnd(40, 60), 0); }
+  sup.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    p.e.setAttribute("opacity", clamp(1 - (p.t - 1.6) / 1).toFixed(2)); if (p.t > 2.6 || p.y < 120) kill(p); });
+  if (sm.cause > 0.5 && Math.random() < dt * 7) { const d = amyDots.length ? amyDots[Math.floor(Math.random() * amyDots.length)] : null;
+    const p = free(clr); if (p && d) emit(p, +d.getAttribute("cx") + rnd(-8, 8), +d.getAttribute("cy") + rnd(-8, 8), rnd(-8, 8), rnd(-14, -4), 0); }
+  clr.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    p.e.setAttribute("opacity", clamp(1 - p.t / 1.4).toFixed(2)); if (p.t > 1.4) kill(p); });
   gg.dil.set(sm.Dil, wordOf(sm.Dil, 0.35, 0.65, ["small", "normal", "dilated"]));
   gg.wall.set(sm.Wall, wordOf(sm.Wall, 0.35, 0.65, ["thin", "normal", "thick"]));
   gg.stiff.set(sm.Stiff, wordOf(sm.Stiff, 0.3, 0.6, ["soft", "firm", "stiff"]));
   gg.fill.set(sm.Fill, wordOf(sm.Fill, 0.35, 0.65, ["poor", "reduced", "good"]));
   gg.ej.set(sm.Ej, wordOf(sm.Ej, 0.35, 0.65, ["poor", "reduced", "good"]));
   gg.out.set(sm.Out, wordOf(sm.Out, 0.25, 0.6, ["open", "narrowed", "blocked"]));
+  const key = drug * 10 + level;
+  if (key !== capKey) { capKey = key; const t = capText(drug, level); if (capEl.textContent !== t) capEl.textContent = t; }
+  if (drug !== tpDrug) { tpDrug = drug; const t = TP_TXT[drug] || "";
+    if (tpT.textContent !== t) { tpT.textContent = t; const lw = t.length * 6.2 + 14; tpR.setAttribute("x", f1(700 - lw / 2)); tpR.setAttribute("width", f1(lw)); } }
+  tpOp = lerp(tpOp, drug > 0 ? 1 : 0, Math.min(1, dt * 3));
+  tpG.style.opacity = tpOp.toFixed(2);
 }
 run({ init, step });
 </script></body></html>

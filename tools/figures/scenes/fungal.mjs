@@ -1,6 +1,6 @@
 /* Fungal infections as an animated, working scene (original drawing; Anima styling, Anatomy page shell).
  *   node tools/figures/scenes/fungal.mjs [--print-model]
- * Static layout here; fungi, treatment particles and gauges move in fungal.page.js. Qualitative: no doses, no numbers. */
+ * Static layout here; organs, fungi, treatment particles and gauges move in fungal.page.js. Qualitative: no doses, no numbers. */
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -17,7 +17,7 @@ const MD = {
     { label: "no treatment" },
     { label: "topical azole" },
     { label: "systemic azole" },
-    { label: "polyene or echinocandin (invasive)" },
+    { label: "polyene or echinocandin" },
   ],
   status: "Infection: {level} · {drug} ·",
   drugNames: ["no treatment", "a topical azole", "a systemic azole", "a polyene or echinocandin"],
@@ -44,19 +44,20 @@ const TESTS = [
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<rect class="fn-col" x="28" y="54" width="284" height="276" rx="12"/>
-<rect class="fn-col" x="326" y="54" width="308" height="276" rx="12"/>
-<rect class="fn-col" x="648" y="54" width="284" height="276" rx="12"/>
-<rect id="hl0" class="fn-hl" x="28" y="54" width="284" height="276" rx="12"/>
-<rect id="hl1" class="fn-hl" x="326" y="54" width="308" height="276" rx="12"/>
-<rect id="hl2" class="fn-hl" x="648" y="54" width="284" height="276" rx="12"/>
-<text class="sc-zone" x="40" y="72">SUPERFICIAL</text>
-<text class="sc-zone" x="338" y="72">MUCOSAL</text>
-<text class="sc-zone" x="660" y="72">INVASIVE</text>
-<g id="colA"></g><g id="colB"></g><g id="colC"></g>
 <rect class="fn-strip" x="28" y="342" width="904" height="88" rx="12"/>
-<text class="sc-zone" x="300" y="366">FUNGAL CELL TARGETS</text>
+<path id="bloodTube" class="fn-tube" d="M531 304 C600 326 682 300 752 237" fill="none"/>
+<ellipse id="brainGlow" class="fn-glow" cx="815" cy="200" rx="105" ry="85" fill="var(--c-cyt2)" opacity="0"/>
+<g id="skinSlot"></g>
+<g id="gutSlot"></g>
+<g id="lungSlot"></g>
+<g id="brainSlot"></g>
+<g id="siteSkin"></g>
+<g id="siteGut"></g>
+<g id="siteLung"></g>
+<g id="siteBrain"></g>
+<g id="siteBlood"></g>
 <g id="fungcell"></g>
+<g id="flow"></g>
 <g id="parts"></g>
 <g id="over"></g>
 <g id="panel"></g>`;
@@ -65,20 +66,16 @@ const extraCss = `
 body{--c-fung:#9ed67a;--c-cand:#f2e6a0;--c-wall:#7fc4e8;--c-erg:#f08a4b}
 body[data-theme="light"]{--c-fung:#3f9e4d;--c-cand:#b89a2a;--c-wall:#2f7ad8;--c-erg:#d95f1e}
 .cl-yeast{--cc:var(--c-fung)}.cl-cand{--cc:var(--c-cand)}
-.fn-col{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
-.fn-hl{fill:none;stroke:var(--anatomy-lit);stroke-width:2;pointer-events:none}
 .fn-strip{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
-.fn-ker{fill:color-mix(in srgb,var(--c-cand) 34%,var(--anatomy-paper));stroke:var(--anatomy-faint);stroke-width:1}
-.fn-skin{fill:color-mix(in srgb,var(--c-endo) 30%,var(--anatomy-paper));stroke:var(--anatomy-faint);stroke-width:1}
-.fn-muc{fill:color-mix(in srgb,var(--c-endo) 42%,var(--anatomy-paper));stroke:var(--anatomy-faint);stroke-width:1}
-.fn-plaque{fill:var(--anatomy-strong);stroke:var(--anatomy-faint);stroke-width:.7}
+.fn-tube{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 42%,var(--anatomy-paper));stroke-width:15;stroke-linecap:round;opacity:.8}
+.fn-glow{fill:var(--c-cyt2);stroke:none}
+.fn-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
+.fn-cream{fill:color-mix(in srgb,#9fd8f0 55%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1;opacity:0}
 .fn-ring{fill:none;stroke:var(--c-fung);stroke-width:3}
 .fn-ring2{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2;stroke-dasharray:4 4}
 .fn-hyph{fill:none;stroke:var(--c-fung);stroke-width:2.4;stroke-linecap:round}
 .fn-hyph2{fill:none;stroke:var(--c-cand);stroke-width:2.2;stroke-linecap:round}
-.fn-alv{fill:color-mix(in srgb,var(--c-fl) 12%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.2}
-.fn-vessel{fill:color-mix(in srgb,var(--c-rbc) 20%,var(--anatomy-paper));stroke:var(--c-rbc);stroke-width:1.2}
-.fn-men{fill:none;stroke:var(--c-wall);stroke-width:3;stroke-linecap:round}
+.fn-plaque{fill:var(--anatomy-strong);stroke:var(--anatomy-faint);stroke-width:.7}
 .fn-halo{fill:color-mix(in srgb,var(--c-wall) 18%,transparent);stroke:var(--c-wall);stroke-width:1.2}
 .fn-wallring{fill:color-mix(in srgb,var(--c-fung) 22%,var(--anatomy-paper));stroke:var(--c-wall);stroke-width:6}
 .fn-membring{fill:none;stroke:var(--c-erg);stroke-width:2.4;stroke-dasharray:5 4}
@@ -89,10 +86,10 @@ body[data-theme="light"]{--c-fung:#3f9e4d;--c-cand:#b89a2a;--c-wall:#2f7ad8;--c-
 
 buildScene({
   id: "fungal-infections", fig: "Fig 1", title: "Fungal infections: surface to invasive", W, H, body, extraCss,
-  label: "An animated scene of fungal infection at three depths. On skin, hair and nails, dermatophytes grow in keratin and cause scaly tinea lesions and nail infection. On moist mucosa, Candida yeast forms white plaques and pseudohyphae. In a host with weak immune defences, fungi invade deeply: Aspergillus hyphae in lung, Candida in blood, and encapsulated Cryptococcus reaching the meninges. A magnified fungal cell shows the glucan wall and the ergosterol membrane that antifungal classes target. Gauges show fungal burden, invasion, tissue damage and treatment reach.",
+  label: "An animated scene of fungal infection that travels from left to right. On skin, dermatophytes grow in keratin and cause a scaly ring. On moist mucosa, Candida yeast forms white plaques. Spores reach the lung and sprout invading hyphae, yeast rides the blood to the brain lining, and a magnified fungal cell shows the wall and membrane targets that drugs hit. The slider sets the depth, and each treatment visibly attacks the fungi where it can reach.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or treatment schedules are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "fungal.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "fungal.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With polyene or echinocandin",
   sourcesLis: [
     "<strong>Superficial infection.</strong> Dermatophyte fungi (species of Trichophyton, Microsporum and Epidermophyton) digest keratin in skin, hair and nails. They cause tinea: scaly, itchy, ring-like lesions that spread at the edge, scalp and hair-shaft infection, and onychomycosis, where the nail thickens and crumbles. Malassezia, a skin yeast, causes pityriasis versicolor. Superficial disease usually responds to topical therapy, but hair and nail infection needs oral therapy for months because the drug must grow out with the nail. This is standard teaching in dermatology and infectious-disease texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Candida and invasive disease.</strong> Candida is a normal mucosal organism that causes candidiasis (white plaques, soreness) when local or immune defences slip, and can enter the blood in very ill or immunosuppressed patients. Aspergillus spores are inhaled and can invade lung tissue and blood vessels when neutrophil defences are weak. Cryptococcus is an encapsulated yeast that can reach the meninges and cause meningitis, mainly in advanced immune suppression.",

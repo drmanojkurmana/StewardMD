@@ -4,7 +4,7 @@
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { buildScene, esc } from "./bio-scene.mjs";
+import { buildScene } from "./bio-scene.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const W = 960, H = 610;
@@ -45,21 +45,15 @@ const TESTS = [
 ];
 
 /* ---------------- static layout ---------------- */
-const TYPES = [
-  ["Ca oxalate", "Calcium oxalate: the commonest type. Hard, spiky crystals form when urine is concentrated or calcium or oxalate is high."],
-  ["Uric acid", "Uric acid stones form in acidic, concentrated urine, often with gout or a purine rich diet. They do not show on a plain X ray."],
-  ["Struvite", "Struvite stones grow fast with urease splitting urinary infections. They can fill the pelvis as a staghorn stone."],
-  ["Cystine", "Cystine stones are uncommon and inherited. Poorly soluble cystine crystallises, often from childhood."],
-];
-const typeCards = TYPES.map((c, i) => { const x = 462 + i * 120;
-  const shape = i === 0 ? `<path class="ks-tshape" d="M${x + 59} 66l10 12l-6 13l-13 3l-9 -9l3 -13z"/>` : i === 1 ? `<ellipse class="ks-tshape" cx="${x + 59}" cy="80" rx="15" ry="11"/>` : i === 2 ? `<path class="ks-tshape" d="M${x + 46} 68h26l7 12l-8 12h-24l-7 -12z"/>` : `<path class="ks-tshape" d="M${x + 59} 66l13 8v13l-13 8l-13 -8v-13z"/>`;
-  return `<g class="hot" tabindex="0" data-info="${esc(c[1])}"><rect class="ks-card" x="${x}" y="56" width="112" height="62" rx="10"/>${shape}<text class="sc-lab" x="${x + 59}" y="110" text-anchor="middle">${esc(c[0])}</text></g>`; }).join("");
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
 <text class="sc-zone" x="34" y="68">KIDNEY AND URINARY TRACT</text>
-${typeCards}
-<g id="tract"></g>
+<path id="ureterTube" class="ks-ureter" d="M144 196L147 255L148 314L240 322L330 312L460 292L580 262L655 240L727 211"/>
+<path id="ureterIn" class="ks-ureter-in" d="M144 196L147 255L148 314L240 322L330 312L460 292L580 262L655 240L727 211"/>
+<g id="kidneySlot"></g>
+<g id="bladderSlot"></g>
 <g id="hydro"></g>
+<g id="backupG"></g>
 <g id="urine"></g>
 <g id="crystals"></g>
 <g id="stoneG"></g>
@@ -72,31 +66,30 @@ ${typeCards}
 
 buildScene({
   id: "kidney-stones", fig: "Fig 1", title: "Kidney stones: crystal to colic and blockage", W, H, body,
-  label: "An animated kidney, ureter and bladder. Concentrated urine becomes supersaturated, crystals nucleate on a surface in the renal pelvis and grow into a stone. Stone types are calcium oxalate, uric acid, struvite and cystine. As the stone grows and moves into the ureter it causes ureteric colic pain and blocks urine flow, so the pelvis swells with hydronephrosis and infection risk rises. Gauges show saturation, stone size, blockage, swelling, pain and infection risk. Treatments are fluids and analgesia, lithotripsy and ureteroscopy.",
+  label: "An animated kidney, ureter and bladder. Concentrated urine becomes supersaturated, crystals gather in the renal pelvis and grow into a stone. As the stone grows and moves into the ureter it causes waving loin to groin pain and blocks urine flow, so urine held back swells the kidney and infection risk rises. Fluids dilute the urine and ease pain, shock waves break the stone into pieces that can pass, and a scope passed up the ureter grabs and removes the stone so flow returns. Gauges show saturation, stone size, blockage, swelling, pain and infection risk.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, sizes or numbers are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "stones.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "stones.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With ureteroscopy",
   sourcesLis: [
-    "<strong>How a stone forms.</strong> Urine carries calcium, oxalate, uric acid, cystine and other solutes. When urine is concentrated, or solute load is high, it becomes supersaturated and crystals can nucleate, often on a small surface deposit in the renal pelvis, then grow and stick together into a stone. Calcium oxalate is the commonest type; uric acid stones favour acidic urine; struvite stones grow with urease splitting infection and can form a staghorn; cystine stones are an uncommon inherited type. A stone still in the kidney may be silent. Once it enters the ureter, the ureter squeezes against it and urine is held back: that gives the severe, waving loin to groin pain of ureteric colic, obstruction upstream, swelling of the pelvis and calyces (hydronephrosis), and a raised risk of infection in the held back urine, which can be dangerous. This is standard teaching in urology and renal texts and was not checked against a linked source here, so it is flagged for review.",
-    "<strong>Treatment ideas shown.</strong> Fluids dilute the urine and analgesia eases colic pain, which may let a small stone pass. Lithotripsy focuses shock waves to fragment a stone into pieces that can pass. Ureteroscopy passes a fine scope up the ureter to see, fragment and remove the stone and relieve the blockage. These are teaching toggles only.",
+    "<strong>How a stone forms.</strong> Urine carries calcium, oxalate, uric acid, cystine and other solutes. When urine is concentrated, or solute load is high, it becomes supersaturated and crystals can gather in the renal pelvis, then grow and stick together into a stone. Calcium oxalate is the commonest type; uric acid stones favour acidic urine; struvite stones grow with infection and can form a staghorn; cystine stones are an uncommon inherited type. A stone still in the kidney may be silent. Once it enters the ureter, the ureter squeezes against it and urine is held back: that gives the severe, waving loin to groin pain of ureteric colic, obstruction upstream, swelling of the pelvis (hydronephrosis), and a raised risk of infection in the held back urine, which can be dangerous. This is standard teaching in urology and renal texts and was not checked against a linked source here, so it is flagged for review.",
+    "<strong>Treatment ideas shown.</strong> Fluids dilute the urine and analgesia eases colic pain, which may let a small stone pass. Lithotripsy focuses shock waves to fragment a stone into pieces that can pass. Ureteroscopy passes a fine scope up the ureter to grab and remove the stone and relieve the blockage. These are teaching toggles only.",
   ],
   simplified: "Metabolic work up, stone prevention diets and medicines, pregnancy, single kidney and transplant kidneys, emergency drainage with a stent or nephrostomy for infected obstruction, open surgery, and all doses and size cut offs are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
   extraCss: `
-.ks-card{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
-.ks-tshape{fill:#d9a441;stroke:#8a5f14;stroke-width:1}
-.ks-kid{fill:color-mix(in srgb,var(--c-endo) 52%,var(--c-tis));stroke:color-mix(in srgb,var(--c-endo) 55%,#000);stroke-width:1.2}
-.ks-kid-in{fill:color-mix(in srgb,var(--c-fl) 22%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-fl) 45%,var(--anatomy-mid));stroke-width:1}
-.ks-cal{fill:none;stroke:color-mix(in srgb,var(--c-fl) 45%,var(--anatomy-mid));stroke-width:5;stroke-linecap:round;opacity:.55}
-.ks-ureter{fill:none;stroke:color-mix(in srgb,var(--c-endo) 60%,var(--anatomy-mid));stroke-width:13;stroke-linecap:round}
-.ks-ureter-in{fill:none;stroke:color-mix(in srgb,var(--c-fl) 20%,var(--anatomy-paper));stroke-width:6;stroke-linecap:round}
-.ks-blad{fill:color-mix(in srgb,var(--c-fl) 18%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-endo) 55%,var(--anatomy-mid));stroke-width:1.4}
+.ks-ureter{fill:none;stroke:color-mix(in srgb,var(--c-endo) 60%,var(--anatomy-mid));stroke-width:13;stroke-linecap:round;stroke-linejoin:round}
+.ks-ureter-in{fill:none;stroke:color-mix(in srgb,var(--c-fl) 20%,var(--anatomy-paper));stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
 .ks-hydro{fill:color-mix(in srgb,var(--c-fl) 38%,var(--anatomy-paper));stroke:var(--c-fl);stroke-width:1;opacity:0}
+.ks-dilute{fill:var(--c-fl);stroke:none;opacity:0}
+.ks-backup{fill:color-mix(in srgb,var(--c-fl) 45%,var(--anatomy-paper));stroke:var(--c-fl);stroke-width:1.2;opacity:0}
 .ks-stone{fill:#c98a2e;stroke:#7a4d0c;stroke-width:1.2}
 .ks-facet{fill:none;stroke:#7a4d0c;stroke-width:.8;opacity:.7}
 .ks-pain{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-linecap:round;opacity:0}
 .ks-shock{fill:none;stroke:var(--c-cyt2);stroke-width:2;stroke-linecap:round;opacity:0}
-.ks-scope{fill:none;stroke:var(--anatomy-strong);stroke-width:3;stroke-linecap:round;opacity:0}
+.ks-flash{fill:none;stroke:var(--c-cyt2);stroke-width:2.5;opacity:0}
+.ks-scope{fill:none;stroke:var(--c-good);stroke-width:6;stroke-linecap:round;stroke-linejoin:round;opacity:0}
 .ks-scope-tip{fill:var(--c-good);opacity:0}
+.ks-basket{fill:none;stroke:var(--c-good);stroke-width:2;stroke-dasharray:5 4;opacity:0}
+.ks-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
 .p-urine{fill:var(--c-fl)}.p-crys{fill:#e9c84a;stroke:#8a5f14;stroke-width:.5}.p-frag{fill:#c98a2e;stroke:#7a4d0c;stroke-width:.5}.p-drop{fill:var(--c-fl)}
 .cl-bug{--cc:#7fcf6a}
 .dr-g-fill.g-ss{fill:#e9c84a}.dr-g-fill.g-st{fill:#c98a2e}.dr-g-fill.g-ob{fill:var(--c-bad)}.dr-g-fill.g-hy{fill:var(--c-fl)}

@@ -1,6 +1,6 @@
 /* Renal tubular acidosis as an animated, working scene (original drawing; Anima styling, Anatomy page shell).
  *   node tools/figures/scenes/rta.mjs [--print-model]
- * Static layout here; particles, stones and gauges move in rta.page.js. Qualitative: no doses, no numeric thresholds. */
+ * Static layout here; kidney, particles, stones, washes and gauges move in rta.page.js. Qualitative: no doses, no numeric thresholds. */
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -15,16 +15,16 @@ const MD = {
   drugLabel: "Treatment",
   settings: [
     { label: "no treatment" },
-    { label: "bicarbonate" },
     { label: "potassium" },
     { label: "mineralocorticoid" },
+    { label: "bicarbonate" },
   ],
   status: "Renal tubular acidosis: {level} · {drug} ·",
-  drugNames: ["no treatment", "bicarbonate", "potassium", "mineralocorticoid"],
+  drugNames: ["no treatment", "potassium", "mineralocorticoid", "bicarbonate"],
 };
 function modelOf(S, level, drug) {
   const cl = (v) => Math.max(0, Math.min(1, v));
-  const bic = drug === 1 ? 1 : 0, ktx = drug === 2 ? 1 : 0, min = drug === 3 ? 1 : 0;
+  const ktx = drug === 1 ? 1 : 0, min = drug === 2 ? 1 : 0, bic = drug === 3 ? 1 : 0;
   const reabs = level === 0 ? 0.18 : level === 1 ? 0.86 : 0.78;
   const waste = level === 0 ? 0.85 : 0.18;
   let aldo = level === 2 ? 0.14 : 0.85;
@@ -46,30 +46,35 @@ function modelOf(S, level, drug) {
 }
 const TESTS = [
   [0, 0, "blood bicarbonate low · urine pH partly acidic · potassium low"],
-  [1, 0, "blood bicarbonate low · urine pH alkaline · potassium low"],
   [2, 0, "blood bicarbonate low · urine pH partly acidic · potassium high"],
-  [2, 3, "blood bicarbonate reduced · urine pH acidic · potassium normal"],
+  [2, 2, "blood bicarbonate reduced · urine pH acidic · potassium normal"],
+  [0, 3, "blood bicarbonate near normal · urine pH partly acidic · potassium low"],
 ];
 
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<text class="sc-zone" x="34" y="68">PROXIMAL TUBULE</text>
-<text class="sc-zone" x="540" y="68">DISTAL TUBULE AND COLLECTING DUCT</text>
-<rect class="rt-lumen" x="50" y="190" width="380" height="68" rx="12"/>
-<rect class="rt-lumen" x="500" y="190" width="410" height="68" rx="12"/>
-<rect class="rt-mid" x="430" y="208" width="70" height="32" rx="8"/>
-<text class="sc-lab" x="438" y="202">later segments</text>
+<text class="sc-zone" x="44" y="68">KIDNEY</text>
+<text class="sc-zone" x="246" y="68">PROXIMAL TUBULE</text>
+<text class="sc-zone" x="530" y="68">DISTAL TUBULE AND COLLECTING DUCT</text>
+<text class="sc-zone" x="830" y="68">BLADDER</text>
+<path id="filtVessel" class="rt-ves" d="M150 208 L246 224"/>
+<rect class="rt-lumen" x="246" y="190" width="252" height="68" rx="12"/>
+<rect id="proxWash" class="rt-wash-bic" x="246" y="190" width="252" height="68" rx="12" opacity="0"/>
+<rect class="rt-lumen" x="498" y="212" width="32" height="24" rx="6"/>
+<rect class="rt-lumen" x="530" y="190" width="240" height="68" rx="12"/>
+<rect id="distWash" class="rt-wash-min" x="530" y="190" width="240" height="68" rx="12" opacity="0"/>
+<path id="urineVessel" class="rt-ves" d="M770 224 L814 186"/>
+<g id="kidneySlot"></g>
+<g id="bladderSlot"></g>
+<ellipse id="kidneyWash" class="rt-wash-min" cx="128" cy="212" rx="80" ry="95" opacity="0"/>
 <g id="cells"></g>
 <g id="stones"></g>
 <g id="parts"></g>
-<path class="rt-cup" d="M884 282h44l-6 42h-32z"/>
-<text class="sc-lab" x="884" y="338">urine</text>
 <rect class="rt-blood" x="50" y="344" width="860" height="40" rx="20"/>
+<rect id="bloodWbic" class="rt-wash-bic" x="50" y="344" width="860" height="40" rx="20" opacity="0"/>
+<rect id="bloodWktx" class="rt-wash-ktx" x="50" y="344" width="860" height="40" rx="20" opacity="0"/>
 <text class="sc-zone sc-dim" x="34" y="336">BLOOD</text>
-<text class="sc-lab" x="56" y="404">blood carries acid, bicarbonate and potassium to the gauges below</text>
-<text class="sc-lab" x="56" y="288">reclaims bicarbonate</text>
-<text class="sc-lab" x="566" y="288">secretes acid into urine</text>
 <g id="over"></g>
 <g id="panel"></g>`;
 
@@ -78,9 +83,12 @@ body{--c-prox:#5ec1a0;--c-alpha:#e9a2b3;--c-prin:#7fc4e8;--c-aldo:#e9b84a;--c-hc
 body[data-theme="light"]{--c-prox:#2f9f7c;--c-alpha:#d9788f;--c-prin:#3fa0d4;--c-aldo:#b8860b;--c-hco3:#1f8f83;--c-hplus:#d96a25;--c-pot:#7c4fc4;--c-stone:#8a857c}
 .cl-prox{--cc:var(--c-prox)}.cl-alpha{--cc:var(--c-alpha)}.cl-prin{--cc:var(--c-prin)}.cl-aldo{--cc:var(--c-aldo)}
 .rt-lumen{fill:color-mix(in srgb,var(--c-fl) 16%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-endo) 55%,var(--anatomy-mid));stroke-width:1.6}
-.rt-mid{fill:color-mix(in srgb,var(--c-endo) 22%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.2}
 .rt-blood{fill:color-mix(in srgb,var(--c-rbc) 16%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 50%,var(--anatomy-mid));stroke-width:1.4}
-.rt-cup{fill:color-mix(in srgb,var(--c-fl) 30%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.4}
+.rt-ves{fill:none;stroke:color-mix(in srgb,var(--c-fl) 55%,var(--anatomy-paper));stroke-width:12;stroke-linecap:round;opacity:.85}
+.rt-wash-bic{fill:var(--c-hco3);stroke:none}
+.rt-wash-ktx{fill:var(--c-pot);stroke:none}
+.rt-wash-min{fill:var(--c-aldo);stroke:none}
+.rt-cap{fill:var(--anatomy-strong);font-size:12px}
 .rt-stone{fill:var(--c-stone);stroke:color-mix(in srgb,var(--c-stone) 55%,#000);stroke-width:1}
 .p-hco3{--cc:var(--c-hco3)}.p-hplus{--cc:var(--c-hplus)}.p-pot{--cc:var(--c-pot)}.p-aldo{--cc:var(--c-aldo)}
 .dr-g-fill.g-hco3{fill:var(--c-hco3)}.dr-g-fill.g-hplus{fill:var(--c-hplus)}.dr-g-fill.g-pot{fill:var(--c-pot)}.dr-g-fill.g-stone{fill:var(--c-stone)}.dr-g-fill.g-aldo{fill:var(--c-aldo)}.dr-g-fill.g-chlor{fill:var(--c-fl)}
@@ -88,10 +96,10 @@ body[data-theme="light"]{--c-prox:#2f9f7c;--c-alpha:#d9788f;--c-prin:#3fa0d4;--c
 
 buildScene({
   id: "renal-tubular-acidosis", fig: "Fig 1", title: "Renal tubular acidosis: where the tubule fails", W, H, body, extraCss,
-  label: "An animated nephron tubule. In the proximal tubule, cells reclaim bicarbonate from the filtrate into the blood. In the distal tubule and collecting duct, alpha-intercalated cells secrete acid into the urine, and aldosterone supports acid and potassium handling. The level slider switches between proximal type 2 bicarbonate wasting, distal type 1 failure of acid secretion with alkaline urine and stones, and type 4 hypoaldosteronism with high potassium. All three give a normal anion gap hyperchloraemic acidosis. Gauges show bicarbonate reclaim, acid secretion, urine pH, stones, potassium and chloride. Treatment choices are bicarbonate, potassium and a mineralocorticoid.",
-  caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "rta.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  label: "An animated kidney tubule, shown magnified. The kidney filters blood, the proximal tubule reclaims bicarbonate into the blood, and the distal tubule and collecting duct secrete acid into the urine with help from aldosterone. The level slider switches between proximal type 2 bicarbonate wasting, distal type 1 failure of acid secretion with alkaline urine and stones, and type 4 hypoaldosteronism with high potassium. All three give a normal anion gap hyperchloraemic acidosis. Gauges show bicarbonate reclaim, acid secretion, urine pH, stones, potassium and chloride. Treatment choices are potassium, a mineralocorticoid and bicarbonate.",
+  caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "rta.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With bicarbonate",
   sourcesLis: [
     "<strong>The shared picture.</strong> In renal tubular acidosis the glomeruli filter fairly normally, but the tubule cannot keep blood bicarbonate up, so blood becomes acidic while chloride rises to balance it. That is a normal anion gap, hyperchloraemic acidosis. This is standard teaching in medicine and nephrology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Proximal type 2 and distal type 1.</strong> In proximal (type 2) disease the proximal tubule fails to reclaim filtered bicarbonate, so bicarbonate is wasted in the urine and blood bicarbonate falls. In distal (type 1) disease alpha-intercalated cells in the distal tubule and collecting duct fail to secrete hydrogen ions, so the urine cannot be acidified, urine pH stays high, and calcium stones and nephrocalcinosis are favoured, often with low potassium. Flagged for review.",

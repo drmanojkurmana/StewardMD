@@ -1,6 +1,7 @@
-/* Hypothalamic-pituitary feedback axes (thyroid and adrenal) as an animated, working scene (original drawing; Anima styling, Anatomy page shell).
+/* Hypothalamic-pituitary-thyroid feedback axis as an animated, working scene (original drawing; Anima styling, Anatomy page shell).
  *   node tools/figures/scenes/endoaxis.mjs [--print-model]
- * Static layout here; hormones, feedback and gauges move in endoaxis.page.js. Qualitative: no doses, no numeric thresholds. */
+ * Static layout here; releasing hormone, TSH, thyroid hormone, feedback and gauges move in endoaxis.page.js.
+ * Qualitative: no doses, no numeric thresholds. The thyroid axis is drawn; the adrenal (CRH, ACTH, cortisol) axis follows the same logic. */
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -37,6 +38,7 @@ function modelOf(S, level, drug) {
   if (level === 3) hc = 0.15;
   if (level === 4) { if (rmG) cap = 0.06; else auto = 1; }
   if (level === 5 && !rmP) ad = 1;
+  if (rmP) pc = 0.12;
   let H = 0.5, P = 0.5, G = 0.5;
   for (let i = 0; i < 80; i++) {
     const h = hc * cl(1 - G);
@@ -59,40 +61,64 @@ const TESTS = [
   [5, 2, "pituitary drive high · end hormone normal · tissues balanced"],
 ];
 
-/* ---------------- static layout ---------------- */
+/* ---------------- static layout ----------------
+ * Left to right story: brain (hypothalamus) -> pituitary -> thyroid -> body tissues,
+ * with a dashed feedback brake running back along the bottom. Organ centres:
+ * brain (150, 235), pituitary (360, 250), thyroid (590, 250), body box (740..860, 225..335). */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<path class="ax-div" d="M480 56V428"/>
-<g id="arrows"></g>
-<g id="nodes"></g>
+<ellipse id="glandGlow" class="ex-glowg" cx="590" cy="250" rx="100" ry="80" opacity="0"/>
+<ellipse id="tisGlow" class="ex-glow" cx="800" cy="280" rx="100" ry="85" opacity="0"/>
+<path id="trhV" class="ex-portal" d="M155 263C225 260 280 252 322.6 250"/>
+<path id="tshV" class="ex-ves" d="M397.4 250C445 258 530 235 614 199"/>
+<path id="t4V" class="ex-ves" d="M590 304C645 307 695 304 740 300"/>
+<path id="blkV" class="ex-drop" d="M590 118C590 150 590 180 590 212"/>
+<path id="fbMain" class="ex-fb" d="M770 335L770 392L200 392L200 316M360 392L360 292"/>
+<path id="tbP" class="ex-tbar" d="M348 292L372 292"/>
+<path id="tbH" class="ex-tbar" d="M188 316L212 316"/>
+<g id="brainSlot"></g>
+<g id="pitSlot"></g>
+<g id="thySlot"></g>
+<g id="folls"></g>
+<circle id="hypo" class="ex-hypo" cx="155" cy="263" r="6"/>
+<g id="tisBox"></g>
+<g id="cells"></g>
 <g id="parts"></g>
+<g id="docks"></g>
+<ellipse id="ringG" class="ex-ring" cx="590" cy="250" rx="112" ry="82" opacity="0"/>
+<ellipse id="ringP" class="ex-ring" cx="360" cy="250" rx="62" ry="52" opacity="0"/>
 <g id="over"></g>
 <g id="panel"></g>`;
 
 const extraCss = `
-.ax-div{stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:2 6;opacity:.5}
-.ax-a{fill:none;stroke:var(--anatomy-mid);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.fb-l{fill:none;stroke:var(--c-bad);stroke-width:1.6;stroke-dasharray:5 4;stroke-linecap:round}
-.fb-t{fill:none;stroke:var(--c-bad);stroke-width:3.2;stroke-linecap:round}
-.ax-tis{fill:var(--c-fl)}
-.ax-tis-o{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
-.ax-st{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono);pointer-events:none}
-.ax-ring{fill:none;stroke:var(--c-bad);stroke-width:1.6;stroke-dasharray:5 4}
-.p-rel{--cc:var(--c-cyt)}.p-pit{--cc:var(--c-cyt2)}.p-end{--cc:#ff9a3d}.p-cap .p-pill{fill:var(--anatomy-paper)}
-.p-fb{fill:none;stroke:var(--c-bad);stroke-width:1.3}
-.p-blk{fill:var(--c-bad)}
+.ex-ves{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 42%,var(--anatomy-paper));stroke-width:14;stroke-linecap:round;opacity:.55}
+.ex-portal{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 30%,var(--anatomy-paper));stroke-width:7;stroke-linecap:round;opacity:.55}
+.ex-drop{fill:none;stroke:var(--anatomy-mid);stroke-width:1.4;stroke-dasharray:3 4;stroke-linecap:round;opacity:.6}
+.ex-fb{fill:none;stroke:var(--c-bad);stroke-width:1.8;stroke-dasharray:6 5;stroke-linecap:round}
+.ex-tbar{fill:none;stroke:var(--c-bad);stroke-width:3;stroke-linecap:round}
+.ex-glow{fill:var(--c-fl);stroke:none}
+.ex-glowg{fill:#ff9a3d;stroke:none}
+.ex-hypo{fill:var(--c-cyt);stroke:color-mix(in srgb,var(--c-cyt) 50%,#000);stroke-width:1}
+.ex-foll{fill:color-mix(in srgb,#ff9a3d 55%,var(--anatomy-paper));stroke:color-mix(in srgb,#ff9a3d 60%,#000);stroke-width:1}
+.ex-tis{fill:var(--c-fl)}
+.ex-tis-o{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.ex-rel{--cc:var(--c-cyt)}.ex-pit{--cc:var(--c-cyt2)}.ex-end{--cc:#ff9a3d}.ex-dock{--cc:var(--c-bad)}
+.ex-fbp{fill:none;stroke:var(--c-bad);stroke-width:1.3}
+.ex-cap2{fill:var(--c-fl)}
+.ex-cap{fill:var(--anatomy-strong);font-size:12px}
+.ex-ring{fill:none;stroke:var(--c-bad);stroke-width:1.8;stroke-dasharray:6 5}
 `;
 
 buildScene({
-  id: "endocrine-feedback-axes", fig: "Fig 1", title: "Hypothalamic-pituitary feedback axes", W, H, body, extraCss,
-  label: "Two animated hormone axes side by side, the thyroid axis and the adrenal axis. In each, the hypothalamus releases a releasing hormone, which tells the pituitary to release a trophic hormone, which tells the end gland to release its hormone. The end hormone acts on body tissues and also feeds back to turn the pituitary and hypothalamus down. A slider moves the fault between the gland, pituitary and hypothalamus, for failure or excess, and a treatment menu offers replacement, suppression, or removal of the source. Gauges show the releasing hormone, pituitary hormone, end hormone, gland size and strength of feedback.",
+  id: "endocrine-feedback-axes", fig: "Fig 1", title: "Hypothalamic pituitary feedback: the thyroid axis", W, H, body, extraCss,
+  label: "One animated hormone axis drawn left to right. The hypothalamus in the brain releases TRH, which tells the pituitary to release TSH, which tells the thyroid gland to release thyroid hormone. Thyroid hormone acts on body tissues and also feeds back along the bottom to turn the pituitary and the hypothalamus down. A slider moves the fault between the gland, the pituitary and the hypothalamus, for failure or excess, and a treatment menu offers replacement, suppression or block, or removal of the source. Gauges show the releasing hormone, the pituitary hormone, the end hormone, gland size and strength of feedback. The adrenal axis follows the same pattern and is not drawn.",
   caption: "Schematic, not to scale. Hormone flow, gland size and gauge levels are qualitative and illustrative; no doses, thresholds, reference ranges or drug names are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "endoaxis.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "endoaxis.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With source removed, then replaced",
   sourcesLis: [
-    "<strong>The axes.</strong> The hypothalamus releases TRH (thyroid axis) or CRH (adrenal axis). These make the anterior pituitary release TSH or ACTH, which drive the thyroid gland or the adrenal cortex to make thyroid hormone (T4, T3) or cortisol. The end hormone feeds back on both the pituitary and the hypothalamus (negative feedback), so the end hormone is held near a set level. TSH and ACTH also keep their gland grown. This is standard teaching in endocrinology and physiology texts and was not checked against a linked source here, so it is flagged for review.",
-    "<strong>Reading the fault.</strong> In primary failure the gland cannot respond, so the end hormone is low and the pituitary hormone is high. In secondary or tertiary failure the pituitary or hypothalamus fails, so the end hormone is low and the pituitary hormone is low or inappropriately normal (central hypothyroidism, secondary adrenal insufficiency). In primary excess the gland makes hormone on its own, so the pituitary hormone is suppressed. In secondary excess a pituitary tumour escapes feedback, so the pituitary hormone stays high and drives the gland (for example Cushing disease). Replacing an end hormone in a healthy axis, or blocking it in a failing one, pushes the axis the wrong way.",
-    "<strong>Treatment ideas shown.</strong> Replacing the missing end hormone, suppressing or blocking an excess one, and removing the source (the overactive gland or the pituitary tumour). These are teaching toggles only, with no agent names or doses.",
+    "<strong>The axis drawn.</strong> The hypothalamus releases TRH (thyrotropin-releasing hormone), which makes the anterior pituitary release TSH (thyroid-stimulating hormone), which drives the thyroid gland to make thyroid hormone (T4, T3). Thyroid hormone sets the metabolic pace of body tissues and feeds back on both the pituitary and the hypothalamus (negative feedback), so its level is held near a set point. TSH also keeps the gland grown. The adrenal axis (CRH, ACTH, cortisol) follows the same pattern and is not drawn. This is standard teaching in endocrinology and physiology texts and was not checked against a linked source here, so it is flagged for review.",
+    "<strong>Reading the fault.</strong> In primary failure the gland cannot respond, so thyroid hormone is low and TSH is high. In secondary or tertiary failure the pituitary or hypothalamus fails, so thyroid hormone is low and TSH is low. In primary excess the gland makes hormone on its own, so TSH is suppressed. In secondary excess a pituitary growth escapes feedback, so TSH stays high and drives the gland. Replacing hormone in a healthy axis, or blocking it in a failing one, pushes the axis the wrong way.",
+    "<strong>Treatment ideas shown.</strong> Replacing the missing end hormone, suppressing or blocking an excess one, and removing the source (the overactive gland or the pituitary growth), with replacement after removal. Removing a source without replacing leaves the axis low. These are teaching toggles only, with no agent names or doses.",
   ],
-  simplified: "Aldosterone and the renin system, thyroid hormone conversion and binding, immune and autoimmune causes, ectopic ACTH and other non-pituitary sources, tertiary excess, pituitary hormones other than TSH and ACTH, dynamic tests, the care needed when a source is removed or an axis is replaced (including stress cover for cortisol), and all doses and targets are left out. Gland size and hormone flow are illustrative, and the figure does not say how any patient should be treated or monitored.",
+  simplified: "The adrenal axis and all other pituitary hormones, thyroid hormone conversion and binding, immune and other causes, ectopic sources, tertiary excess, dynamic tests, the care needed when a source is removed or an axis is replaced, and all doses and targets are left out. Gland size and hormone flow are illustrative, and the figure does not say how any patient should be treated or monitored.",
 });

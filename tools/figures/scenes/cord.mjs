@@ -15,12 +15,12 @@ const MD = {
   drugLabel: "Treatment",
   settings: [
     { label: "no treatment" },
-    { label: "decompress (relieve compression)" },
-    { label: "steroid concept (calm inflammation)" },
-    { label: "rehabilitation (train spared pathways)" },
+    { label: "steroid concept (calm swelling)" },
+    { label: "rehabilitation (retrain pathways)" },
+    { label: "decompress (free the cord)" },
   ],
   status: "Lesion: {level} · {drug} ·",
-  drugNames: ["no treatment", "decompression", "a steroid concept", "rehabilitation"],
+  drugNames: ["no treatment", "a steroid concept", "rehabilitation", "decompression"],
 };
 function modelOf(S, level, drug) {
   const t = S.level.a[level];
@@ -31,25 +31,27 @@ function modelOf(S, level, drug) {
     { m: 0.45, p: 0.20, s: 0.78, infl: 0.32 },
     { m: 1.00, p: 1.00, s: 1.00, infl: 0.50 },
   ];
-  const DECOMP_RED = [0.35, 0.40, 0.15, 0.05];
+  const RED = [0.45, 0.50, 0.35, 0.08];
   const base = BASE[t];
-  const decomp = drug === 1 ? 1 : 0, steroid = drug === 2 ? 1 : 0, rehab = drug === 3 ? 1 : 0;
-  const red = decomp ? DECOMP_RED[t] : steroid ? 0.12 : rehab ? 0.05 : 0;
-  const Mtr = cl(base.m * (1 - red));
-  const Prop = cl(base.p * (1 - red));
-  const Pain = cl(base.s * (1 - red));
+  const steroid = drug === 1 ? 1 : 0, rehab = drug === 2 ? 1 : 0, decomp = drug === 3 ? 1 : 0;
+  const rec = decomp ? RED[t] : steroid ? 0.15 : rehab ? 0.05 : 0;
+  const Mtr = cl(base.m * (1 - rec));
+  const Prop = cl(base.p * (1 - rec));
+  const Pain = cl(base.s * (1 - rec));
   const Inflam = cl(base.infl * (steroid ? 0.35 : decomp ? 0.60 : 1));
   const Func = cl(1 - (0.45 * Mtr + 0.30 * Prop + 0.25 * Pain) + (rehab ? 0.22 : decomp ? 0.10 : steroid ? 0.05 : 0));
   const Spared = cl(1 - (Mtr + Prop + Pain) / 3);
+  const squeeze = decomp ? 0.06 : steroid ? 0.18 : rehab ? 0.45 : 0.50;
+  const train = rehab ? 0.32 : 0;
   const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
   const words = [w(Mtr, 0.35, 0.70, ["preserved", "weak", "lost"]), w(Prop, 0.35, 0.70, ["preserved", "reduced", "lost"]), w(Pain, 0.35, 0.70, ["preserved", "reduced", "lost"])];
-  return { type: t, decomp, steroid, rehab, Mtr, Prop, Pain, Inflam, Func, Spared, words, readout: "motor " + words[0] + " · proprioception " + words[1] + " · pain and temperature " + words[2] };
+  return { type: t, decomp, steroid, rehab, rec, squeeze, train, Mtr, Prop, Pain, Inflam, Func, Spared, words, readout: "motor " + words[0] + " · proprioception " + words[1] + " · pain and temperature " + words[2] };
 }
 const TESTS = [
   [0, 0, "motor weak · proprioception lost · pain and temperature lost"],
   [1, 0, "motor lost · proprioception preserved · pain and temperature lost"],
   [2, 0, "motor weak · proprioception preserved · pain and temperature lost"],
-  [3, 1, "motor lost · proprioception lost · pain and temperature lost"],
+  [2, 3, "motor preserved · proprioception preserved · pain and temperature reduced"],
 ];
 
 /* ---------------- static layout ---------------- */
@@ -82,15 +84,18 @@ const body = `
 <g id="lesionCentral" opacity="0"><ellipse class="cd-lesion" cx="265" cy="238" rx="58" ry="44"/><rect class="cd-lesion" x="202" y="227" width="126" height="22"/></g>
 <ellipse id="lesionComplete" class="cd-lesion" cx="265" cy="238" rx="148" ry="105" opacity="0"/>
 <ellipse id="syrinx" class="cd-syrinx" cx="265" cy="238" rx="29" ry="19" opacity="0"/>
+<ellipse id="squeeze" class="cd-squeeze" cx="265" cy="238" rx="148" ry="105" opacity="0.5"/>
+<ellipse id="trainGlow" class="cd-train" cx="265" cy="238" rx="148" ry="105" opacity="0"/>
+<g id="detour" opacity="0"><path class="cd-detour" d="M170 190C130 230 130 280 175 325"/><path class="cd-detour" d="M360 190C400 230 400 280 355 325"/></g>
 </g>
 <circle class="cd-centre" cx="265" cy="238" r="6"/>
 <path class="cd-fissure" d="M265 343L265 318"/>
-<g id="compressArrows" opacity="0"><path class="cd-arrow" d="M92 238H132M122 228L134 238L122 248"/><path class="cd-arrow" d="M438 238H398M408 228L396 238L408 248"/></g>
+<g id="compressArrows" opacity="0.85"><path class="cd-arrow" d="M92 238H132M122 228L134 238L122 248"/><path class="cd-arrow" d="M438 238H398M408 228L396 238L408 248"/></g>
 <g id="decompressArrows" opacity="0"><path class="cd-arrow cd-arrow-out" d="M132 238H92M102 228L90 238L102 248"/><path class="cd-arrow cd-arrow-out" d="M398 238H438M428 228L440 238L428 248"/></g>
 </g>
-<text class="sc-lab" x="108" y="428" text-anchor="middle">spinothalamic crosses in cord</text>
-<text class="sc-lab" x="268" y="428" text-anchor="middle">dorsal columns cross in medulla</text>
-<text class="sc-lab" x="420" y="428" text-anchor="middle">corticospinal crosses at pyramids</text>
+<g id="brainSlot"></g>
+<path id="linkDown" class="cd-link" d="M448 128L405 152L370 182"/>
+<path id="linkUp" class="cd-link" d="M258 148L330 124L412 128"/>
 <g id="bodywrap">
 <path class="cd-levelLine" d="M560 148H916"/>
 <circle class="cd-skin" cx="738" cy="106" r="24"/>
@@ -105,6 +110,8 @@ const body = `
 <path id="shPainR" class="cd-shadePain" d="M738 148H788L800 262H738Z M744 262H792L786 378H751Z" opacity="0"/>
 <path id="shPainL" class="cd-shadePain" d="M688 148H738V262H676Z M684 262H732L727 378H690Z" opacity="0"/>
 <path id="cape" class="cd-shadePain" d="M676 148H800L806 208H670Z M656 164L820 164L834 252L812 258L800 208H676L664 258L642 252Z" opacity="0"/>
+<path id="legTrainL" class="cd-legtrain" d="M684 262H732L727 378H690Z" opacity="0"/>
+<path id="legTrainR" class="cd-legtrain" d="M744 262H792L786 378H751Z" opacity="0"/>
 <path class="cd-midline" d="M738 150V378"/>
 </g>
 <g id="parts"></g>
@@ -126,6 +133,12 @@ body[data-theme="light"]{--c-dorsal:#2f9f7c;--c-cst:#c42a3d;--c-stt:#2f7ad8;--c-
 .cd-lesion{fill:var(--c-bad);stroke:var(--c-bad);stroke-width:1;stroke-dasharray:4 3}
 .cd-syrinx{fill:var(--anatomy-paper);stroke:var(--c-stt);stroke-width:1.4}
 .cd-inflam{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-dasharray:6 5;opacity:0}
+.cd-squeeze{fill:var(--c-bad);stroke:none}
+.cd-train{fill:var(--c-good);stroke:none}
+.cd-detour{fill:none;stroke:var(--c-good);stroke-width:5;stroke-linecap:round;stroke-dasharray:12 8}
+.cd-link{fill:none;stroke:var(--anatomy-mid);stroke-width:1.4;stroke-dasharray:4 4}
+.cd-legtrain{fill:var(--c-good);stroke:none}
+.cd-cap{fill:var(--anatomy-strong);font-size:12px}
 .cd-arrow{fill:none;stroke:var(--c-bad);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .cd-arrow-out{stroke:var(--c-good)}
 .cd-skin{fill:var(--c-skin);stroke:color-mix(in srgb,var(--c-skin) 55%,#000);stroke-width:.9;opacity:.94}
@@ -133,16 +146,16 @@ body[data-theme="light"]{--c-dorsal:#2f9f7c;--c-cst:#c42a3d;--c-stt:#2f7ad8;--c-
 .cd-shadePain{fill:url(#cdhatch);stroke:var(--c-stt);stroke-width:.8}
 .cd-levelLine{stroke:var(--c-bad);stroke-width:1.6;stroke-dasharray:6 4;fill:none}
 .cd-midline{stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4;fill:none;opacity:.6}
-.p-dorsal{--cc:var(--c-dorsal)}.p-cst{--cc:var(--c-cst)}.p-stt{--cc:var(--c-stt)}
+.p-dorsal{--cc:var(--c-dorsal)}.p-cst{--cc:var(--c-cst)}.p-stt{--cc:var(--c-stt)}.p-det{--cc:var(--c-good)}.p-sw{--cc:var(--c-neut)}
 .dr-g-fill.g-prop{fill:var(--c-cyt)}.dr-g-fill.g-pain{fill:var(--c-stt)}.dr-g-fill.g-inflam{fill:var(--c-neut)}
 `;
 
 buildScene({
   id: "spinal-cord-lesions", fig: "Fig 1", title: "Spinal cord lesions: tracts, levels and patterns", W, H, body, extraCss,
-  label: "An animated spinal cord cross section and body map. Dorsal columns carry proprioception and vibration upward on the same side and cross in the medulla. The spinothalamic tract carries pain and temperature, crosses in the cord near the level of entry, then rises on the opposite side. The corticospinal tract carries motor commands downward, mostly crossing at the pyramids, with upper motor neuron signs below the lesion. Lesion patterns include hemisection, anterior cord, central cord and complete transection. Gauges show motor loss, proprioception loss, pain and temperature loss, function, inflammation and spared tracts.",
+  label: "An animated spinal cord cross section and body map. The brain sends movement signals down the cord and the skin sends feeling signals up. Dorsal columns carry proprioception upward on the same side and cross in the medulla. The spinothalamic tract carries pain and temperature, crosses in the cord near the level of entry, then rises on the opposite side. The corticospinal tract carries motor commands downward, mostly crossing at the pyramids. Lesion patterns include hemisection, anterior cord, central cord and complete transection. A slider sets the pattern, and treatment choices show decompression, a steroid concept and rehabilitation.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "cord.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "cord.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With decompression",
   sourcesLis: [
     "<strong>How cord lesions are localised.</strong> A spinal cord lesion is placed by its level and by which tracts it interrupts. Ascending dorsal columns carry proprioception, vibration and fine touch from a sensory nerve on the same side up through cord segments, crossing only in the medulla, so a cord lesion usually loses these senses ipsilaterally below the lesion. Spinothalamic fibres from pain and temperature nerves cross in the anterior white commissure within a segment or two of entry and then ascend contralaterally, so pain and temperature loss is usually on the opposite side and starts a little below the level. Descending corticospinal fibres mostly cross at the medullary pyramids and run in the lateral cord, so a cord lesion gives upper motor neuron signs: weakness with spasticity, brisk reflexes and an upgoing plantar response below the lesion, with lower motor neuron signs only at the level where anterior horn cells or the nerve root are damaged. Vertebral bodies and the cord segment do not align exactly, and cervical segments sit higher than the same numbered vertebral bodies. This is standard teaching in clinical neurology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>The patterns shown.</strong> Complete transection interrupts every tract, with paralysis and loss of sensory and autonomic function below the level, first flaccid in spinal shock and later spastic. Brown-Sequard hemisection gives ipsilateral motor and proprioception loss with contralateral pain and temperature loss. Anterior cord syndrome from anterior spinal artery or compression damage spares the dorsal columns while motor and pain and temperature are lost below. Central cord injury and syringomyelia, usually idiopathic or linked to a Chiari malformation, expand around the central canal, interrupt crossing pain and temperature fibres first and give a cape like suspended sensory loss over the shoulders and arms, with upper limbs often weaker than lower limbs. Extrinsic compression from vertebral, disc, tumour, abscess or inflammation can mimic these patterns and is a surgical urgency. This is standard teaching and was not checked against a linked source here, so it is flagged for review.",

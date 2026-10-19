@@ -264,13 +264,12 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 .cl-n.multi{opacity:.9}
 .sc-dim{opacity:.45}
 
-.gerd-div{stroke:var(--anatomy-mid);stroke-width:1;opacity:.45}
+.gerd-div{fill:none;stroke:var(--anatomy-mid);stroke-width:1;opacity:.45}
 .gerd-zoom{fill:color-mix(in srgb,var(--anatomy-paper) 82%,var(--c-endo));stroke:var(--anatomy-mid);stroke-width:1}
 .gerd-lumen{fill:color-mix(in srgb,var(--c-fl) 10%,var(--anatomy-paper))}
 .gerd-wall{fill:#c9857a;stroke:color-mix(in srgb,#c9857a 55%,#000);stroke-width:1}
 body[data-theme="light"] .gerd-wall{fill:#d89a90}
 .gerd-muc{fill:#e8b7ab;stroke:color-mix(in srgb,#e8b7ab 55%,#000);stroke-width:.7}
-.gerd-stom{fill:#d98f7e;stroke:color-mix(in srgb,#d98f7e 55%,#000);stroke-width:1.2}
 .gerd-acidpool{fill:#e8c832;opacity:.8}
 .gerd-les{fill:#a8564a;stroke:color-mix(in srgb,#a8564a 55%,#000);stroke-width:1}
 .gerd-diag{fill:#8a7f72;stroke:color-mix(in srgb,#8a7f72 55%,#000);stroke-width:1;opacity:.92}
@@ -282,11 +281,17 @@ body[data-theme="light"] .gerd-wall{fill:#d89a90}
 .gerd-squam{fill:#e8c4b8;stroke:color-mix(in srgb,#e8c4b8 55%,#000);stroke-width:.6}
 .gerd-colcell{fill:#e8875f;stroke:color-mix(in srgb,#e8875f 55%,#000);stroke-width:.6}
 .gerd-gob{fill:var(--anatomy-paper);stroke:color-mix(in srgb,#e8875f 60%,#000);stroke-width:.6}
-.gerd-bm{stroke:#8a6a4a;stroke-width:2;stroke-linecap:round}
+.gerd-bm{fill:none;stroke:#8a6a4a;stroke-width:2;stroke-linecap:round}
 .gerd-nucleus{fill:#5a3040;opacity:.85}
 .gerd-dys{fill:#b85a6a;stroke:color-mix(in srgb,#b85a6a 55%,#000);stroke-width:.7}
 .p-acid{fill:#e8c832;stroke:#8a6d10;stroke-width:.6}
 .p-pep{fill:#2fb3a6;stroke:#14665e;stroke-width:.6}
+.p-weak{fill:#f3e7a8;stroke:#a8933a;stroke-width:.6}
+.gerd-pump{fill:var(--anatomy-paper);stroke:#8a6d10;stroke-width:1.4}
+.gerd-pumpin{fill:#8a6d10;stroke:none}
+.gerd-block{fill:#7c5cd6;stroke:#3d2b7a;stroke-width:.8}
+.gerd-wrap{fill:none;stroke:var(--c-good);stroke-width:8}
+.gerd-cap{fill:var(--anatomy-strong);font-size:12px}
 .dr-g-fill.g-reflux{fill:#e8c832}.dr-g-fill.g-injury{fill:var(--c-bad)}.dr-g-fill.g-barr{fill:#e07a4f}.dr-g-fill.g-strict{fill:#c9857a}.dr-g-fill.g-ca{fill:#7a4a5a}
 </style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">GERD and Barrett oesophagus: reflux to cancer</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>reflux moderate · injury severe · Barrett absent · cancer absent</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated oesophagus, lower sphincter and stomach beside a close-up of the mucosa. Acid and pepsin rise when the sphincter is weak or relaxes at the wrong time, especially with a hiatus hernia. Repeated injury causes oesophagitis and narrowing, then columnar Barrett mucosa, dysplasia and adenocarcinoma. Gauges show reflux, injury, Barrett change, stricture and cancer. Treatment choices include lifestyle measures, acid suppression and endoscopic or surgical treatment."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
 <rect class="sc-tissue" x="14" y="44" width="932" height="396" rx="18"/>
@@ -295,6 +300,7 @@ body[data-theme="light"] .gerd-wall{fill:#d89a90}
 <line class="gerd-div" x1="578" y1="60" x2="578" y2="424"/>
 <rect class="gerd-zoom" x="600" y="82" width="322" height="330" rx="14"/>
 <g id="hernia"></g>
+<g id="stomachSlot"></g>
 <g id="anatomy"></g>
 <g id="mucosa"></g>
 <g id="parts"></g>
@@ -302,15 +308,15 @@ body[data-theme="light"] .gerd-wall{fill:#d89a90}
 <g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.</span></figcaption></figure>
 <div class="dr-controls">
   <label class="dr-range"><span>Stage of the oesophagus</span><input id="level" type="range" min="0" max="3" step="1" value="1" aria-valuetext="oesophagitis"><span class="dr-ticks"><i>normal</i><i>oesophagitis</i><i>Barrett</i><i>cancer</i></span></label>
-  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">lifestyle measures</option><option value="2">acid suppression</option><option value="3">endoscopic or surgical treatment</option></select></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With endoscopic or surgical treatment"><option value="0">no treatment</option><option value="1">lifestyle measures</option><option value="2">acid suppression</option><option value="3">endoscopic or surgical treatment</option></select></label>
   <button id="pause" type="button" aria-pressed="false">Pause motion</button>
 </div>
 <p id="status" class="dr-status" aria-live="polite"></p>
 <p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
 <h2>What the figure shows, and how sure we are</h2>
-<ul><li><strong>How reflux injures the oesophagus.</strong> The lower oesophageal sphincter is normally closed between swallows. Weakness of the sphincter and transient relaxations at the wrong time let gastric acid and pepsin flow back into the oesophagus, and a hiatus hernia makes this worse by trapping refluxed fluid above the diaphragm and impairing clearance. Repeated mucosal injury causes oesophagitis, ulceration and peptic stricture. This is standard teaching in medicine texts on diseases of the oesophagus and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Barrett oesophagus and cancer.</strong> In some people the injured squamous lining is replaced by columnar metaplasia at the gastro-oesophageal junction: Barrett oesophagus. Barrett mucosa can develop low-grade and then high-grade dysplasia, and then oesophageal adenocarcinoma. Endoscopic surveillance and endoscopic or surgical treatment are teaching toggles in this figure only.</li><li><strong>Treatment ideas shown.</strong> Lifestyle measures that reduce reflux, acid suppression that makes the refluxed fluid less injurious and lets oesophagitis heal, and endoscopic or surgical treatment that can remove or ablate Barrett tissue and tighten the junction. These are teaching toggles only.</li></ul>
+<ul><li><strong>How reflux injures the oesophagus.</strong> The lower oesophageal sphincter is normally closed between swallows. Weakness of the sphincter and transient relaxations at the wrong time let gastric acid and pepsin flow back into the oesophagus, and a hiatus hernia makes this worse by trapping refluxed fluid above the diaphragm and impairing clearance. Repeated mucosal injury causes oesophagitis, ulceration and peptic stricture. This is standard teaching in medicine texts on diseases of the oesophagus and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Barrett oesophagus and cancer.</strong> In some people the injured squamous lining is replaced by columnar metaplasia at the gastro-oesophageal junction: Barrett oesophagus. Barrett mucosa can develop low-grade and then high-grade dysplasia, and then oesophageal adenocarcinoma. Endoscopic surveillance and endoscopic or surgical treatment are teaching toggles in this figure only.</li><li><strong>Treatment ideas shown.</strong> Lifestyle measures that reduce reflux, acid suppression that makes the refluxed fluid less injurious and lets oesophagitis heal, and endoscopic or surgical treatment that can remove or ablate Barrett tissue and tighten the junction. These are teaching toggles only.</li><li><strong>Organ art.</strong> Organ art is NIH BioArt Source, public domain.</li></ul>
 <p><strong>What was simplified.</strong> Swallowing and peristalsis detail, bile reflux, eosinophilic and infectious oesophagitis, detailed endoscopic grading, surveillance intervals, staging and all doses and targets are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
-<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). Organ illustrations are NIH BioArt Source (public domain); all other drawing is original.</p>
 <p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
 </footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Stage of the oesophagus","a":[0,1,2,3],"names":["normal","oesophagitis","Barrett","adenocarcinoma"],"ticks":["normal","oesophagitis","Barrett","cancer"],"start":1},"settings":[{"label":"no treatment"},{"label":"lifestyle measures"},{"label":"acid suppression"},{"label":"endoscopic or surgical treatment"}],"drugNames":["no treatment","lifestyle measures","acid suppression","endoscopic or surgical treatment"],"status":"Stage: {level} · {drug} ·"}};
 const modelOf = function modelOf(S, level, drug) {
@@ -325,7 +331,7 @@ const modelOf = function modelOf(S, level, drug) {
   const cl = (v) => Math.max(0, Math.min(1, v));
   const R = cl(stageReflux[level] * refluxMul[drug]);
   const A = cl(R * acidMul[drug] * 1.35 + (level === 0 ? 0.02 : 0.08));
-  const I = cl(stageInjury[level] * (drug === 2 ? 0.5 : drug === 3 ? 0.55 : drug === 1 ? 0.85 : 1));
+  const I = cl(stageInjury[level] * (drug === 2 ? 0.35 : drug === 3 ? 0.55 : drug === 1 ? 0.65 : 1));
   const B = cl(stageBarrett[level] * (drug === 3 ? 0.3 : 1));
   const ST = cl(stageStricture[level] * (drug === 3 ? 0.45 : 1));
   const CA = cl(stageCancer[level] * (drug === 3 && level < 3 ? 0.4 : drug === 3 ? 0.75 : 1));
@@ -429,16 +435,292 @@ function run(scn) {
   start();
 }
 
-/* GERD scene: acid and pepsin reflux, sphincter opening, hiatus hernia, mucosal change and the gauges. */
-const layers = { hernia: $("hernia"), anat: $("anatomy"), muc: $("mucosa"), parts: $("parts"), over: $("over"), panel: $("panel") };
+/* Shared organ art for the animated mechanism scenes. Plain globals, ES2015, no imports.
+ * Inlined after bio.lib.js when buildScene gets organs:true, so mk/f1/clamp below are the shared ones.
+ * organ(parent, kind, x, y, w, opts) draws real anatomy art (NIH BioArt Source, public domain,
+ * injected as _ORG_ART by buildScene for the kinds the page uses) centred on x,y and w px wide,
+ * and falls back to the existing procedural layered silhouette for kinds without art
+ * (bladder, uterus, thyroid). Art ports are fractions of the art viewBox (see _ORG_FRAC).
+ * opts: { h (px height, else proportional), flip (mirror left/right), cls (extra class), id,
+ *   tint (a CSS colour with opacity, overlaid as an organ-shaped mask for disease states),
+ *   dim (dull the art) }.
+ * Returns { g, kind, x, y, w, h, ports, art } with absolute SVG coords; ports.in/out always exist.
+ * Art keeps its own colours (a faint contrast halo keeps it readable in dark and light themes);
+ * procedural fill is a vertical gradient whose stops derive from --cc (a theme aware palette var,
+ * so dark and light both work); edge stroke and landmark lines use color-mix detail classes.
+ * Emits no text, so label font and dash rules are inherited from the calling scene. */
+if (!document.getElementById("orgCss")) { var _orgSt = document.createElement("style"); _orgSt.id = "orgCss";
+  _orgSt.textContent = ".org-halo{filter:drop-shadow(0 0 1px rgba(0,0,0,.65)) drop-shadow(0 0 1px rgba(255,255,255,.45))}"
+  + ".org-b{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1.2;stroke-linejoin:round;stroke-linecap:round}"
+  + ".org-d{fill:none;stroke:color-mix(in srgb,var(--cc) 40%,var(--anatomy-hi));stroke-width:1;stroke-linecap:round;opacity:.8}"
+  + ".org-dk{fill:none;stroke:color-mix(in srgb,var(--cc) 62%,#000);stroke-width:1.1;stroke-linecap:round;opacity:.8}"
+  + ".org-f{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1;stroke-linejoin:round}"
+  + ".org-v{fill:none;stroke-linecap:round}"
+  + ".org-liver{--cc:var(--c-rbc)}.org-heart{--cc:var(--c-rbc)}.org-kidney{--cc:var(--c-eos)}.org-lung{--cc:var(--c-endo)}"
+  + ".org-stomach{--cc:var(--c-graft)}.org-brain{--cc:var(--c-mac)}.org-pancreas{--cc:var(--c-plt)}.org-spleen{--cc:var(--c-sm)}"
+  + ".org-bladder{--cc:var(--c-th2)}.org-uterus{--cc:var(--c-endo)}.org-thyroid{--cc:var(--c-neut)}.org-eye{--cc:#e6e1d4}";
+  document.head.appendChild(_orgSt); }
+var _orgN = 0;
+/* per instance gradients: base (light -> base -> dark of --cc) plus a white top / dark bottom shade overlay */
+function _orgDefs(g) {
+  _orgN++; var id = "og" + _orgN, hid = "oh" + _orgN;
+  var defs = mk("defs", {}, g);
+  var lg = mk("linearGradient", { id: id, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  var s0 = mk("stop", { offset: "0", "stop-color": "#999" }, lg); s0.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 55%,#fff)");
+  var s1 = mk("stop", { offset: ".55", "stop-color": "#888" }, lg); s1.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 78%,var(--anatomy-paper))");
+  var s2 = mk("stop", { offset: "1", "stop-color": "#666" }, lg); s2.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 66%,#000)");
+  var hg = mk("linearGradient", { id: hid, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  mk("stop", { offset: "0", "stop-color": "#fff", "stop-opacity": ".2" }, hg);
+  mk("stop", { offset: ".55", "stop-color": "#fff", "stop-opacity": "0" }, hg);
+  mk("stop", { offset: "1", "stop-color": "#000", "stop-opacity": ".14" }, hg);
+  return { b: "url(#" + id + ")", h: "url(#" + hid + ")" };
+}
+/* one filled silhouette plus its shade overlay, same path data so the light stays inside */
+function _ob(g, d, G) {
+  mk("path", { class: "org-b", d: d, fill: G.b, stroke: "#666" }, g);
+  mk("path", { d: d, fill: G.h, stroke: "none", "pointer-events": "none" }, g);
+}
+function _ol(g, d, cls) { return mk("path", { class: cls || "org-d", d: d, fill: "none" }, g); }
+function _of(g, d, fillCss, cc) { var e = mk("path", { class: "org-f", d: d, stroke: "#666" }, g); e.setAttribute("style", "fill:" + fillCss + ";--cc:" + cc); return e; }
+function _ov(g, d, color, wdt) { var e = mk("path", { class: "org-v", d: d, fill: "none", stroke: "#777", "stroke-width": wdt, "stroke-linecap": "round" }, g); e.setAttribute("style", "stroke:" + color); return e; }
+function _odot(g, x, y, r, fillCss) { var e = mk("circle", { cx: x, cy: y, r: r, stroke: "none" }, g); e.setAttribute("style", "fill:" + fillCss); return e; }
+
+/* liver: big right lobe, smaller left lobe, falciform notch, gallbladder, porta hepatis stubs */
+function _orgLiver(g, G) {
+  _ov(g, "M-2 46L-2 18", "var(--d-ven)", 5); _ov(g, "M7 46L5 20", "var(--d-art)", 3); _ov(g, "M-11 46L-9 20", "var(--c-bac)", 2.5);
+  _ob(g, "M-6-30C22-33 44-25 50-7C54 9 40 25 18 30C2 33-5 22-7 6C-8-8-8-22-6-30Z", G);
+  _ob(g, "M-8-27C-24-27-40-19-48-6C-51 1-45 9-35 12C-24 15-11 9-8-1C-6-10-6-20-8-27Z", G);
+  _ol(g, "M-8-29C-7-18-6-6-4 6", "org-dk");
+  _ol(g, "M-2-28C14-29 30-24 40-14");
+  _of(g, "M10 18C16 16 22 18 23 24C24 31 19 37 14 36C9 35 7 28 8 23C8 21 9 19 10 18Z", "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  return { h0: 78, ports: { in: [-2, 46], out: [12, -30], porta: [-2, 18], gall: [16, 33], lobe: [20, 0] } };
+}
+/* heart: mass with apex down left, septum, coronary groove, aorta with arch, pulmonary split, caval stubs */
+function _orgHeart(g, G) {
+  _ov(g, "M-2-18L-2-44C-2-52-10-56-20-54C-28-52-32-46-32-38", "var(--d-art)", 8);
+  _ov(g, "M-8-52L-8-59M-15-54L-16-60M-22-53L-24-59", "var(--d-art)", 2.5);
+  _ov(g, "M12-16C8-28 2-34-4-38", "var(--d-ven)", 7);
+  _ov(g, "M-4-38C-12-40-20-38-28-34", "var(--d-ven)", 4.5); _ov(g, "M-4-38C4-40 12-38 20-34", "var(--d-ven)", 4.5);
+  _ov(g, "M20-20L20-52", "var(--d-ven)", 7); _ov(g, "M18 34L18 58", "var(--d-ven)", 7);
+  _ov(g, "M-36-2L-50-6M-34 14L-48 16", "var(--d-art)", 4);
+  _ob(g, "M-4-32C24-34 42-16 40 10C38 32 12 48-20 50C-34 44-40 24-36 2C-33-18-22-31-4-32Z", G);
+  _ol(g, "M0-30C4-10 0 14-14 44", "org-dk");
+  _ol(g, "M-34 6C-18 12 6 12 38 4");
+  _ol(g, "M-6-28C-14-18-18-6-20 8");
+  return { h0: 120, ports: { in: [20, -52], out: [-32, -38], ivc: [18, 58], apex: [-20, 50], pulm: [-28, -34] } };
+}
+/* kidney: bean with hilum, cortex rim, medulla rays, pelvis funnel, ureter, artery and vein stubs */
+function _orgKidney(g, G) {
+  _ov(g, "M-12 6C-22 12-28 18-28 30C-28 50-26 70-24 90", "var(--cc)", 4.5);
+  _ov(g, "M-50-8C-40-8-30-8-22-6", "var(--d-art)", 4); _ov(g, "M-50 10C-40 10-30 8-22 6", "var(--d-ven)", 5);
+  _ob(g, "M8-58C38-58 54-32 50 2C56 32 42 60 8 60C-8 60-16 48-19 34C-26 24-26-24-19-34C-16-48-8-58 8-58Z", G);
+  _ol(g, "M8-49C32-49 45-28 42 0C46 28 34 51 8 51C-1 51-8 43-10 32C-15 24-15-24-10-32C-8-43-1-49 8-49Z");
+  _ol(g, "M-6-30L14-38M-8-10L16-12M-8 12L16 14M-6 32L14 40");
+  _ol(g, "M16-44C30-36 38-20 38 0");
+  _of(g, "M-19-14C-8-12-2-8 2-2C-2 4-8 10-18 14C-22 8-22-8-19-14Z", "color-mix(in srgb,var(--cc) 35%,#fff)", "var(--cc)");
+  return { h0: 150, ports: { in: [-50, -8], out: [-24, 90], vein: [-50, 10], pelvis: [-12, 4], cortex: [30, 0] } };
+}
+/* lung: one lung with oblique fissure, hilum bronchus splitting into lobar and segmental branches */
+function _orgLung(g, G) {
+  _ov(g, "M-58 4L-30 4", "var(--anatomy-hi)", 6);
+  _ov(g, "M-30 4C-22-6-16-16-10-26", "var(--anatomy-hi)", 4.5); _ov(g, "M-30 4C-22 14-14 24-6 34", "var(--anatomy-hi)", 4.5);
+  _ov(g, "M-18-14L-28-22M-16-16L-8-24M-14-20L-14-32M-20 16L-30 24M-16 20L-6 28M-12 26L-10 38", "var(--anatomy-hi)", 2);
+  _ov(g, "M-58-8L-34-6", "var(--d-ven)", 4); _ov(g, "M-58 14L-34 12", "var(--d-art)", 4);
+  _ob(g, "M2-60C24-56 40-32 43 8C45 38 32 60 2 62C-24 62-40 42-42 10C-44-24-20-58 2-60Z", G);
+  _ol(g, "M-40-2C-20 8 0 22 24 40", "org-dk");
+  _ol(g, "M-8-48C8-50 22-40 30-26");
+  return { h0: 130, ports: { in: [-58, 4], out: [-58, 14], art: [-58, -8], apex: [2, -60], base: [2, 62] } };
+}
+/* stomach: J shape with fundus dome, rugae, antrum sweep, pylorus ring, oesophagus and duodenum stubs */
+function _orgStomach(g, G) {
+  _of(g, "M-38-58L-22-58L-22-36L-38-36Z", "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))", "var(--cc)");
+  _ob(g, "M-38-36C-46-24-50-8-46 10C-42 30-30 46-12 50C6 54 28 46 40 32C44 27 46 23 46 18L34 14C30 22 20 30 6 32C-8 34-22 26-28 12C-33-1-31-16-26-28C-24-32-22-34-22-36Z", G);
+  _ol(g, "M-36-10C-30 6-22 20-8 28M-28-22C-22-6-12 10 4 22M-16-30C-10-14 0 2 14 12");
+  _ol(g, "M40 15C43 19 43 25 40 29M34 14C37 18 37 26 34 30", "org-dk");
+  _ol(g, "M46 16L60 22M44 28L58 32", "org-dk");
+  return { h0: 116, ports: { in: [-30, -58], out: [60, 27], fundus: [-40, -12], antrum: [24, 38], pylorus: [40, 22] } };
+}
+/* brain lateral: cerebrum with Sylvian fissure and gyri, cerebellum with folia, tapered brainstem */
+function _orgBrain(g, G) {
+  _ov(g, "M10 50L10 64", "var(--d-art)", 5);
+  _ob(g, "M-50-6C-50-32-24-42 4-40C30-38 44-28 44-8C44 10 32 24 8 28C-18 31-50 24-50-6Z", G);
+  _ol(g, "M-12 10C2 6 18 2 34-4", "org-dk");
+  _ol(g, "M-38-20C-32-10-32 2-38 12M-26-30C-20-20-20-6-26 6M-4-32C2-22 2-8-4 2M10-30C16-20 16-6 10 4M28-22C34-14 34-2 28 8");
+  _ol(g, "M-16 6L-24-4M-10 4L-12-8", "org-dk");
+  _ob(g, "M2 24L16 24L12 56L6 56Z", G);
+  _ol(g, "M2 36C6 38 12 38 16 36");
+  _ob(g, "M22 24C34 22 46 26 48 34C50 42 42 48 32 47C24 46 20 38 20 32C20 28 20 26 22 24Z", G);
+  _ol(g, "M24 32L44 32M25 37L43 37M27 42L41 42");
+  return { h0: 110, ports: { in: [10, 64], out: [4, -40], parenchyma: [-8, -6], cereb: [34, 35], frontal: [-40, -8] } };
+}
+/* pancreas: bulky head right, tapering tail left, main duct with side branches, islet dots */
+function _orgPancreas(g, G) {
+  _ob(g, "M-50-4C-32-14-8-14 14-10C32-7 46-2 49 10C51 21 40 28 26 25C8 21-20 12-50 6Z", G);
+  _ol(g, "M-46 1C-20-2 10 0 38 10", "org-dk");
+  _ol(g, "M-30-1L-34-8M-10-1L-14-9M8 0L4-8M-28 1L-32 8M-6 1L-10 8M12 2L8 10");
+  _ol(g, "M52-6C58 4 58 16 50 24");
+  _odot(g, -20, -2, 1.6, "var(--d-art)"); _odot(g, 0, 0, 1.6, "var(--d-art)"); _odot(g, 22, 6, 1.6, "var(--d-art)");
+  return { h0: 60, ports: { in: [-10, -12], out: [49, 12], head: [36, 8], tail: [-48, 1] } };
+}
+/* spleen: crescent with top notch, trabeculae, hilar artery and vein stubs below */
+function _orgSpleen(g, G) {
+  _ov(g, "M-30 52C-28 44-26 40-22 36", "var(--d-art)", 3.5); _ov(g, "M-20 54C-19 46-17 42-13 38", "var(--d-ven)", 4.5);
+  _ob(g, "M-38-30C-8-40 28-34 44-12C52 4 44 26 20 34C-4 41-34 32-44 10C-48-4-46-22-38-30Z", G);
+  _ol(g, "M-8-36C-4-33 0-33 4-36", "org-dk");
+  _ol(g, "M-30-10C-10-2 12-2 32-10M-28 8C-8 16 12 16 30 8");
+  return { h0: 96, ports: { in: [-30, 52], out: [-20, 54], hilum: [-18, 37], pulp: [0, 0] } };
+}
+/* bladder: dome with detrusor arcs, trigone, ureters in from above, urethra out below */
+function _orgBladder(g, G) {
+  _ov(g, "M-52-44C-44-34-36-26-30-18", "var(--cc)", 4); _ov(g, "M52-44C44-34 36-26 30-18", "var(--cc)", 4);
+  _ob(g, "M0-50C26-48 40-30 40-6C40 16 26 32 8 40L-8 40C-26 32-40 16-40-6C-40-30-26-48 0-50Z", G);
+  _ob(g, "M-8 40L8 40L8 64L-8 64Z", G);
+  _ol(g, "M-8 52L8 52", "org-dk");
+  _ol(g, "M-24-8L24-8L0 24Z");
+  _ol(g, "M-28-28C-12-36 12-36 28-28M-34-12C-16-22 16-22 34-12");
+  return { h0: 120, ports: { in: [-52, -44], out: [0, 64], inR: [52, -44], trigone: [0, 8], dome: [0, -48] } };
+}
+/* uterus: fundus, cavity, cervix, tubes with fimbriae, ovaries with follicles */
+function _orgUterus(g, G) {
+  _ov(g, "M-16-16C-26-17-32-19-38-23", "var(--cc)", 3.5); _ov(g, "M16-16C26-17 32-19 38-23", "var(--cc)", 3.5);
+  _ov(g, "M-38-23L-44-27M-38-23L-45-23M-38-23L-44-19M-38-23L-42-29", "var(--cc)", 1.2);
+  _ov(g, "M38-23L44-27M38-23L45-23M38-23L44-19M38-23L42-29", "var(--cc)", 1.2);
+  var eo = mk("ellipse", { class: "org-f", cx: -45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var eo2 = mk("ellipse", { class: "org-f", cx: 45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo2.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var _fol = "color-mix(in srgb,var(--c-plt) 45%,#000)";
+  _odot(g, -47, -14, 1.6, _fol); _odot(g, -43, -8, 1.6, _fol); _odot(g, -46, -4, 1.4, _fol);
+  _odot(g, 47, -14, 1.6, _fol); _odot(g, 43, -8, 1.6, _fol); _odot(g, 46, -4, 1.4, _fol);
+  _ob(g, "M-16-20C-8-26 8-26 16-20C20-2 15 20 8 32L-8 32C-15 20-20-2-16-20Z", G);
+  _of(g, "M-10-14L10-14L0 22Z", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  _ol(g, "M-11 18L11 18", "org-dk"); _ol(g, "M0 18L0 32");
+  return { h0: 100, ports: { in: [-45, -22], out: [0, 33], ovL: [-45, -10], ovR: [45, -10], fundus: [0, -24] } };
+}
+/* thyroid butterfly: two lobes, isthmus bridge, trachea rings behind, parathyroid dots */
+function _orgThyroid(g, G) {
+  _ov(g, "M-7-40L-7 40M7-40L7 40", "var(--anatomy-hi)", 2);
+  _ov(g, "M-7-28L7-28M-7-12L7-12M-7 24L7 24M-7 36L7 36", "var(--anatomy-hi)", 1.2);
+  _ob(g, "M16-32C28-30 35-16 33 4C31 22 25 32 16 32C8 32 6 20 8 2C10-14 11-28 16-32Z", G);
+  _ob(g, "M-16-32C-28-30-35-16-33 4C-31 22-25 32-16 32C-8 32-6 20-8 2C-10-14-11-28-16-32Z", G);
+  _ob(g, "M-10 6L10 6L10 16L-10 16Z", G);
+  _ol(g, "M14-20C18-10 18 6 14 20M-14-20C-18-10-18 6-14 20");
+  _odot(g, -30, 8, 2, "var(--c-plt)"); _odot(g, 30, -4, 2, "var(--c-plt)");
+  return { h0: 90, ports: { in: [16, -34], out: [0, 36], isthmus: [0, 11], lobeR: [22, 0], lobeL: [-22, 0] } };
+}
+/* eye: sclera ball with cornea bulge, iris and pupil facing left, retina arc, optic nerve stub right */
+function _orgEye(g, G) {
+  _ov(g, "M26 0L54 0", "var(--c-plt)", 8);
+  _ob(g, "M-36-4C-34-22-16-32 4-30C24-28 34-12 32 4C30 20 14 30-4 29C-22 28-36 14-36-4Z", G);
+  _of(g, "M-39 0C-39-6-35-11-30-11C-25-11-21-6-21 0C-21 6-25 11-30 11C-35 11-39 6-39 0Z", "color-mix(in srgb,var(--c-endo) 70%,var(--anatomy-paper))", "var(--c-endo)");
+  _odot(g, -30, 0, 5, "#241a12");
+  _odot(g, -32, -3.5, 1.5, "#ffffff");
+  _ol(g, "M16-15C23-5 23 7 15 17");
+  return { h0: 70, ports: { in: [-41, 0], out: [54, 0], retina: [16, 0], lens: [-20, 0] } };
+}
+/* Real-art store, filled by buildScene after this lib: _ORG_ART[kind] = { vb:[x,y,w,h],
+ * pfx:"oaxxx", body:"<inner svg markup>" }. Ports are fractions of the viewBox, measured
+ * off the slimmed art (see tools/figures/dev/svgslim.py); content fills the frame. */
+var _ORG_ART = {};
+var _ORG_FRAC = {
+  liver: { in: [.45, .95], out: [.46, .04], porta: [.45, .82], gall: [.30, .90], lobe: [.28, .45] },
+  heart: { in: [.30, .01], out: [.48, .01], aorta: [.48, .01], ivc: [.28, .90], apex: [.70, .97], pulm: [.60, .08] },
+  kidney: { in: [.04, .36], out: [.38, .97], vein: [.04, .46], pelvis: [.36, .41], cortex: [.62, .45], hilum: [.28, .41] },
+  lung: { in: [.46, .53], out: [.44, .60], art: [.44, .48], apex: [.24, .30], base: [.24, .87], trachea: [.49, .01], carina: [.49, .50], hilumL: [.42, .58], hilumR: [.56, .58], apexR: [.75, .34], baseR: [.75, .86] },
+  stomach: { in: [.42, .00], out: [.50, .95], fundus: [.38, .10], antrum: [.52, .30], pylorus: [.60, .35] },
+  intestine: { in: [.58, .38], out: [.50, .95], duodenum: [.60, .40], jejunum: [.42, .60], ileum: [.50, .72], cecum: [.60, .82], colon: [.28, .60], rectum: [.50, .92] },
+  brain: { in: [.60, .97], out: [.42, .04], parenchyma: [.42, .42], cereb: [.76, .78], frontal: [.08, .40], stem: [.60, .93], carotid: [.16, .75] },
+  pancreas: { in: [.50, .08], out: [.95, .50], head: [.85, .45], tail: [.06, .45], body: [.50, .45] },
+  spleen: { in: [.38, .78], out: [.52, .78], hilum: [.45, .72], pulp: [.50, .38] }
+};
+/* draw the injected art centred on x,y at w px wide. The art is clipped to its
+ * frame; tint overlays an organ-shaped translucent mask (the art itself, reused
+ * as a mask); dim dulls the art. Art ids are suffixed per instance so two of
+ * the same organ on one page never share gradient, clip or mask ids. */
+function _orgArt(parent, kind, x, y, w, opts, A) {
+  var vb = A.vb, vw = vb[2], vh = vb[3], cx = vb[0] + vw / 2, cy = vb[1] + vh / 2;
+  _orgN++;
+  var uid = "u" + _orgN;
+  var outer = mk("g", { class: "org org-art org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var sx = w / vw, sy = opts.h ? opts.h / vh : sx, fx = opts.flip ? -1 : 1;
+  var inner = mk("g", { transform: "translate(" + f1(-fx * cx * sx) + " " + f1(-cy * sy) + ") scale(" + (fx * sx).toFixed(4) + " " + sy.toFixed(4) + ")" }, outer);
+  var defs = mk("defs", {}, inner);
+  var cid = A.pfx + uid + "-frame";
+  var cp = mk("clipPath", { id: cid }, defs);
+  mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, cp);
+  var art = mk("g", { class: "org-halo", "clip-path": "url(#" + cid + ")" }, inner);
+  var aid = A.pfx + uid + "-art";
+  art.setAttribute("id", aid);
+  art.innerHTML = A.body.split('id="' + A.pfx + '-').join('id="' + A.pfx + uid + '-')
+    .split('url(#' + A.pfx + '-').join('url(#' + A.pfx + uid + '-')
+    .split('href="#' + A.pfx + '-').join('href="#' + A.pfx + uid + '-');
+  if (opts.dim) art.setAttribute("opacity", ".5");
+  if (opts.tint) {
+    var mid = A.pfx + uid + "-tintm";
+    var m = mk("mask", { id: mid, maskUnits: "userSpaceOnUse", x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, defs);
+    mk("use", { href: "#" + aid }, m);
+    var tg = mk("g", { "clip-path": "url(#" + cid + ")" }, inner);
+    mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh), fill: opts.tint, mask: "url(#" + mid + ")" }, tg);
+  }
+  var ports = {}, F = _ORG_FRAC[kind], k;
+  for (k in F) ports[k] = [Math.round((x + fx * (vb[0] + F[k][0] * vw - cx) * sx) * 10) / 10, Math.round((y + (vb[1] + F[k][1] * vh - cy) * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(vh * sy * 10) / 10, ports: ports, art: true };
+}
+/* dispatcher: outer g carries the theme class and gradients, inner g the local drawing scaled to w */
+function organ(parent, kind, x, y, w, opts) {
+  opts = opts || {};
+  if (_ORG_FRAC[kind] && _ORG_ART[kind]) return _orgArt(parent, kind, x, y, w, opts, _ORG_ART[kind]);
+  var outer = mk("g", { class: "org org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var G = _orgDefs(outer);
+  var inner = mk("g", {}, outer);
+  var r;
+  if (kind === "liver") r = _orgLiver(inner, G);
+  else if (kind === "heart") r = _orgHeart(inner, G);
+  else if (kind === "kidney") r = _orgKidney(inner, G);
+  else if (kind === "lung") r = _orgLung(inner, G);
+  else if (kind === "stomach") r = _orgStomach(inner, G);
+  else if (kind === "brain") r = _orgBrain(inner, G);
+  else if (kind === "pancreas") r = _orgPancreas(inner, G);
+  else if (kind === "spleen") r = _orgSpleen(inner, G);
+  else if (kind === "eye") r = _orgEye(inner, G);
+  else if (kind === "bladder") r = _orgBladder(inner, G);
+  else if (kind === "uterus") r = _orgUterus(inner, G);
+  else if (kind === "thyroid") r = _orgThyroid(inner, G);
+  else throw new Error("organ: unknown kind " + kind);
+  var sx = w / 100, sy = opts.h ? opts.h / r.h0 : sx, fx = opts.flip ? -1 : 1;
+  inner.setAttribute("transform", "scale(" + (fx * sx).toFixed(3) + " " + sy.toFixed(3) + ")");
+  var ports = {}, k;
+  for (k in r.ports) ports[k] = [Math.round((x + fx * r.ports[k][0] * sx) * 10) / 10, Math.round((y + r.ports[k][1] * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(r.h0 * sy * 10) / 10, ports: ports, art: false };
+}
+organ.kinds = ["liver", "heart", "kidney", "lung", "stomach", "intestine", "brain", "pancreas", "spleen", "bladder", "uterus", "thyroid", "eye"];
+
+_ORG_ART["stomach"]={vb:[0,0,500,500],pfx:"oasto",body:"<defs><filter id=\"oasto-luminosity-invert\" x=\"37.2\" y=\"-17.4\" width=\"429.3\" height=\"517.6\" color-interpolation-filters=\"sRGB\" filterUnits=\"userSpaceOnUse\"><feColorMatrix result=\"cm\" values=\"-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0\" /></filter><linearGradient id=\"oasto-linear-gradient\" x1=\"253.2\" y1=\"43.9\" x2=\"253.2\" y2=\"79\" gradientTransform=\"translate(521.9 -.5) rotate(90)\" gradientUnits=\"userSpaceOnUse\"><stop offset=\"0\" stop-color=\"#fff\" /><stop offset=\"1\" stop-color=\"#000\" /></linearGradient><mask id=\"oasto-mask\" x=\"37.2\" y=\"-17.4\" width=\"429.3\" height=\"517.6\" maskUnits=\"userSpaceOnUse\"><g filter=\"url(#oasto-luminosity-invert)\"><rect x=\"5.3\" y=\"39.1\" width=\"493.1\" height=\"427.2\" transform=\"translate(-2 503.5) rotate(-89.8)\" fill=\"url(#oasto-linear-gradient)\" /></g></mask><clipPath id=\"oasto-clippath\"><path d=\"M233.7 -11.4l6.9 38.7 3.3 23.4 4.6 53.7 .2 16.6 -1.1 8.6 -5 8.3 -2.9 2.8 -3.4 1.8 -19.1 .7 -6.4 5.1 -10.2 1.2 -7.9 1.9 -4.1 1.9 -4.2 3.1 -6.2 8 -3.2 8.7 -1.7 12.4 -.1 7.8 -3.8 -1.3 -5.2 -.4 -2.8 .5 -2.7 1.6 -7.1 -3.3 -5.4 -.8 -5.9 2.1 -7.1 6.4 -2.8 4.7 -1.6 5.7 -2.9 1.9 -2.7 3.5 -1.5 6.5 -5.1 4.7 -2 3.8 -.4 7.5 -1.9 1.8 -1.5 3.1 -1 8.4 -1.4 1.8 -1.1 4.2 .3 5 1.8 5.7 -2.8 3.4 -1.3 3.4 .3 2.5 -3.2 3.3 -2.3 5.7 .2 4.3 2.5 6.3 -3.4 6.1 -1.9 9.1 1.4 5.8 4 6.6 -2.5 5.1 -.7 5.1 1.7 4 4.5 4 -.3 12.4 2.3 8 4.5 6.1 6.1 5.6 12.2 5.6 5.4 4.3 1.7 2.2 5.5 13.3 3.6 4.6 4.3 1.8 -6.7 -12.5 -.6 -2.5 .5 -2.3 5.4 -8.7 2.2 -6.4 4.5 -5.3 7.8 -13.1 -2.7 14.6 .7 7.5 2.3 5.6 2.5 1.3 5.3 1.1 4.9 -.2 1.7 -.9 11.3 7.6 7.8 3.6 12.5 1.1 11.7 -1 -4.2 4.9 -4.1 7.5 -1.7 6 -.2 6.4 2 7 5.6 11.6 -2.7 16.6 .9 7.8 6.4 16 .8 3.8 3.6 .3 1.5 -.1 1.4 -4.4 6.1 -10.3 2.7 -7.6 .1 -4.3 -1.4 -7 -4.4 -8.8 5.3 -6.3 1.7 -4 .3 -2.9 -1.5 -6.7 -3.9 -9.5 14.1 7.3 7.9 2.6 5.9 .7 9.5 -.2 15.9 -2.1 9.6 -2.2 7 -2.7 10.3 -5.9 5.2 -4.7 2.9 -4.3 7.4 -15.6 9.1 -9.5 2.2 -4.7 .8 -5.3 3.3 -2.8 1.9 -2.7 .7 -3.3 -.9 -10.4 3.8 -5.7 1.6 -4.5 -.9 -11.3 5.1 -7.6 1.3 -5.3 -3.1 -12 2.4 -12 -2.1 -11.9 2.7 -8.4 -3.2 -9.6 4.1 -10.1 -2.7 -9.9 2.8 -8.3 .4 -4.6 -4.8 -15 .8 -2.4 4.1 -3.1 .7 -8.3 -.8 -6.1 -1.7 -3.4 -7 -5.5 -7 -3 -4.7 -1.1 -12.1 -.2 -7.8 1.7 -4.3 2.7 -1.7 2 -7.1 .9 -5.7 1.6 -3 1.8 -2.3 2.7 -7 2.3 -4.7 3.6 -6.7 .8 -2.2 1.4 -4.8 -.3 -6.6 2 -3.7 2.3 -2 2.9 -7.3 -.8 -7.5 .9 -2.2 4.1 -8.4 -1.4 -7.3 0 -4.1 .9 -6.2 -.9 -3.4 1.6 -1.6 2.7 -20.2 -5.9 .7 -15.6 1.8 -6.1 4.2 -5 3.2 -2 4.5 -1.5 2.6 .2 1.8 1 13.5 10 6.2 3.5 11.2 2.4 12.6 .6 15.7 -1.5 17.8 -4.7 9.3 -3.9 18.2 -10.9 14.1 -10.9 5.4 -5.3 7.9 -10.6 4.4 -11.1 1.3 -12.3 -.4 -6.2 -2.6 -10.9 -2.1 -4.7 -5.4 -7.7 -6.4 -5.6 -6.8 -3.5 -6.4 -1.9 -7.3 -.8 -8.3 .9 -4.5 1.3 -9.8 4.7 -5.3 3.6 -10.8 11 -2 -.4 -2.2 -2 -2.3 -3.4 -1.7 -5 -.9 -21.7 -10.1 -82.9 -.6 -.8 -3.5 -.2Z\" fill=\"none\" /></clipPath></defs><g><g id=\"oasto-Layer_1\"><path d=\"M145.6 266.6l-6.2 38.2 3.1 11.7 2.8 5 5.4 6.6 17 0 1.8 .9 5.5 9 -3.7 -.6 -7.3 .6 -4.2 5.4 -2.3 6.1 -.5 3 3.6 9 .8 12 1.7 7.3 2.4 2 6.8 1.9 6.8 -1.2 13.3 8.1 9.2 3.9 11.5 .2 22.6 -2.4 17.3 -.9 4.1 -2.5 2 -2.3 -.6 -10.8 6.4 2.6 11.1 1.1 14.4 -15.6 1.5 -5.8 .5 -8.9 8 -13.4 6.7 -.3 12.4 -8.4 5.3 -7 4.2 -7.9 -.5 -16.8 4.2 -13 .6 -7.1 -.6 -6.9 -2.7 -8.5 -3 -4.7 -2 -1.3 -6.8 -1.2 5.9 -8.8 1.2 -3.9 -.1 -3.4 -4 -13.1 -4.7 -3.5 -1.4 -4.1 -3.2 -2.1 -8.4 .1 -7.1 1.3 -34.6 8.2 -28.6 5.7 -54.6 9.6 -16.2 1.8 -18.5 8.8 -4.7 8Z\" fill=\"#f7e2e2\" /><g mask=\"url(#oasto-mask)\"><g><g><path d=\"M171.1 190.6l-.9 11.1 6.6 7.1 1.2 .8 15.5 .6 -1.8 -9 1 -12.9 5 -8.3 2.4 -2.2 3.3 -1.5 5.7 1 20.9 14.1 6.4 1.5 11.3 .7 22.1 -2.5 8.8 -1.8 22.1 -7.8 12.4 -6.6 5.5 -4 21.5 -21 4.5 -7.3 4.1 -14.4 .9 -8 -.3 -5.1 -3 -9.6 -4.1 -9.3 -3.6 -5.5 -6.9 -5.3 -8.2 -3.7 -7.7 -2.1 -5.8 -.4 -7.2 .8 -8.2 1.9 -7.1 3.2 -7.6 6.1 -9.1 9.2 -1.7 -.7 -3.2 -4.3 -1.6 -3.9 -1.2 -23 -5.6 -50.8 -4.4 -30.6 -2.1 -3 -5.7 -.2 -13.8 4 8.2 46.2 2.4 19.5 3.3 30.6 1.5 43.8 -3.9 8 -3.9 4.1 -9.9 1.7 -12.3 -.2 -6 5.6 -16.8 2 -8.9 5.6 -5.5 5.4 -2.5 4.5 -4.1 13.3Z\" fill=\"#f6b7b7\" /><path d=\"M173.1 193.2l.2 -6.5 2.2 -7.9 5.9 -13.3 6 -8.5 6.1 -3.8 3.9 -1.2 15.4 -1.6 3.4 -.9 4.1 -2.7 13.1 -.8 7.9 -1.9 4 -2.6 4 -9.6 1.6 -11.5 -.1 -9.1 -4.5 -54 -2.6 -20.9 -8.8 -49.7 -2.6 1.6 2 16.3 5.9 29.7 2 15.2 4.3 45 1.1 32 -5.2 9.4 -3.8 3.5 -3.5 2 -17.8 .9 -7.4 4.4 -17.4 2.8 -5 2.1 -10.1 11.3 -2.6 5.3 -2.5 8.4 -1.6 14.3Z\" fill=\"#f9f5f5\" opacity=\".7\" /><path d=\"M249.5 -15.4l2.5 1.2 10.1 82.9 .5 18.6 1.1 5.9 2.1 4.2 3.4 3.5 2 .4 9.6 -10.1 4.3 -3.2 8.9 -4.9 8.1 -2.6 12 -.5 6.9 1.5 5.9 2.4 6.7 4.6 3.1 3.1 5.4 7.7 2.1 4.7 2.6 10.9 .4 6.2 -1.3 12.3 -4.4 11.1 -3.5 5.3 -9.8 10.6 -14.1 10.9 -8.8 5.7 -11.8 6.3 -11.6 4.4 -11.1 2.8 -15.2 1.8 -13.9 -.3 -12.5 -2.6 -6.1 -3.5 -13.4 -10 -1.8 -1 -2.7 -.2 -4.5 1.5 -3.2 2 -4.2 5 -1.8 6.1 -.7 15.6 20.2 5.9 2 -3 3.4 -1.3 5.9 1 4.6 -.9 7.4 0 7.9 1.3 2.4 -4.2 7.7 -.9 6.9 .8 2.7 -3.5 5 -2.5 5.4 -1.3 4 .4 2.2 -1.4 6.7 -.8 4.7 -3.6 7 -2.3 2.3 -2.7 3 -1.8 5.7 -1.6 7.1 -.9 2.7 -2.9 5.4 -2.6 8.3 -1.1 9.6 .3 7.1 2 6.7 3.4 4.9 4.2 1.7 3.4 .7 4 -.6 10.4 -4.1 3.1 -.8 2.4 4.8 15 -.4 4.6 -2.8 7.6 2.7 10.7 -4.1 10.1 3.2 9.6 -2.7 8.4 2.1 11.9 -2.4 12 3.1 12 -1.3 5.3 -5.1 7.7 .9 11.3 -1.6 4.5 -3.8 5.7 .9 10.4 -.7 3.3 -5.2 5.6 -.8 5.3 -2.2 4.7 -9.1 9.5 -7.4 15.6 -6.3 7.7 -7.8 5 -10.1 4.7 -12.1 2.9 -17.9 2 -9 -.1 -5.6 -1.2 -11 -4.4 -8.5 -4.9 3.9 9.5 1.5 6.7 -.3 2.9 -1.7 4 -5.3 6.3 4.4 8.8 1.4 7 -.1 4.3 -2.7 7.6 -6.1 10.3 -1.4 4.4 -2.3 0 -2.8 -.3 -.8 -3.8 -6.4 -16 -.9 -7.8 2.7 -16.6 -5.6 -11.6 -2 -7 .2 -6.4 1.7 -6 4.1 -7.5 4.2 -4.9 -12.4 1 -10.6 -.9 -7.1 -2.8 -13.2 -8.7 -2.1 1 -3.5 .2 -8.2 -2 -2.5 -4.2 -1 -7.5 .3 -5.5 2.4 -10.8 -7.8 13.1 -4.5 5.3 -2.2 6.4 -5.8 9.9 1 5.1 6.1 11 -2.4 -.5 -2 -1.4 -3.5 -4.6 -5.4 -13.1 -1.7 -2.2 -5.4 -4.3 -12.2 -5.6 -6.1 -5.6 -4.5 -6.1 -2.3 -8 .3 -12.4 -3.8 -3.1 -2.2 -3.8 .6 -6.2 2.5 -5.1 -4.7 -8.3 -.7 -6.3 2.4 -8.5 2.8 -4.5 -2.5 -6.3 .1 -5.3 2.1 -4.7 3.2 -3.3 -.4 -1.5 .8 -3.2 3.4 -4.6 -1.8 -5.7 -.3 -5 1.1 -4.2 1.4 -1.8 1 -8.4 1.5 -3.1 1.9 -1.8 .7 -8.5 2.5 -3.7 4.3 -3.8 1.5 -6.5 2.7 -3.5 2.9 -1.9 1.6 -5.7 2.8 -4.7 5.3 -5.2 7.2 -3.2 5.4 .6 7.6 3.5 2.5 -1.6 3.2 -.6 4.7 .4 4.1 1.3 .7 -14.5 2.5 -10.4 3.7 -7.2 4.2 -4.8 4.2 -3.1 4.1 -1.9 7.8 -1.9 10.3 -1.2 6.5 -5.1 19 -.7 3.4 -1.8 2.9 -2.8 4.3 -6.7 1.6 -6.6 .1 -16.2 -4.5 -55.5 -3.5 -25.6 -6.9 -38.7 10.2 -3.2M249.5 -17.4l-8 1.4 -10 3.3 7.2 40.3 3.4 24.6 4.5 53 0 19.2 -1.5 6 -4 6.2 -5.3 3.9 -18.9 .6 -6.5 5.1 -15.6 2.3 -5.2 1.8 -4.5 2.8 -6.8 7.1 -3.7 7.2 -2.5 9.8 -1 13.1 -7.6 -.8 -5.3 1.7 -7.2 -3.1 -6.2 -.5 -7.7 3.5 -5.6 5.4 -3 4.8 -1.9 5.6 -5 4.9 -2.1 7.3 -4.8 4.6 -2 3.5 -.8 7.9 -3.1 5 -1.1 8.3 -2.5 6.2 -.1 4.1 1.6 6.8 -2.3 3.4 -1.4 5.6 -3.1 4 -2.1 5.6 .3 5 2 5.5 -3.2 6.9 -1.6 8.1 1.5 6.9 3.5 5.9 -2.3 5.8 -.3 6.1 1.9 3.7 3.9 3.8 0 12.6 2.4 7.7 4.7 6.5 6.5 6 4.8 2.7 7.5 2.9 4.8 3.8 1.5 1.8 5.7 13.6 4.4 5.4 3.1 1.6 4.9 .1 -7.4 -13.7 -.9 -3.7 5.6 -9.4 1.9 -6.1 6.5 -8.3 -.1 6.6 1 6.4 1.5 3.5 2.7 2.2 7.1 1.8 6.9 -.6 11 7.3 7.6 3.4 9.4 1.2 10.3 -.2 -5.5 10.1 -1.6 7.3 .1 5.1 1.8 6.7 5.8 12 -2.7 15.7 .7 7.8 6.8 17.5 .6 4.6 4.7 .7 4.1 -.2 1.3 -5 6.4 -10.8 2.8 -8 -1 -10.7 -4 -9.4 4.4 -5.7 2 -5.2 -.3 -5.6 -2.9 -8.1 10.3 4.7 7.8 2.4 7.9 .6 12.9 -.8 13.7 -2.2 11.3 -3.3 11 -5.9 5.2 -3.8 5.8 -7.4 7.7 -16 8.7 -8.9 2.6 -5.5 .6 -4.7 3 -2.5 2.5 -3.8 .7 -4.2 -.9 -9.5 3.8 -5.4 1.7 -5.3 -1 -10.8 5 -7.3 1.4 -5.9 -3.1 -12.2 2.4 -11.3 -2.1 -12.6 2.6 -8.7 -3.2 -9.1 4 -9.4 -.2 -3.9 -2.4 -7.2 2.6 -6.9 .7 -4.5 -1 -5.8 -3.7 -10.4 3.6 -3.2 1.1 -2 .6 -10.4 -1.8 -7.4 -2.4 -3.1 -3.8 -3 -7.2 -3.7 -5.1 -1.6 -7.6 -.8 -8.8 .3 -8.3 2.3 -5.1 4.1 -6.7 .9 -5.7 1.7 -3.1 1.9 -2.5 2.7 -6.8 2.3 -4.8 3.4 -16.9 2.8 -5.3 2.3 -3.8 3.6 -6.8 -.4 -6.9 .9 -1.6 .8 -1.8 2.9 -8.6 -1 -10.1 .8 -5.9 -.8 -3.3 1 -3 3 -17.2 -5 .6 -13.1 1.7 -6.2 3.7 -4.4 6.8 -3.1 2.6 .6 18.2 12.9 5.4 2.2 8.6 1.5 10.8 .6 14.1 -.9 16.7 -3.6 12 -4.5 12.4 -6.6 8.9 -5.8 14.3 -11 10.1 -10.8 3.6 -5.5 4.5 -11.6 1.4 -12.8 -.4 -6.7 -2.8 -11.5 -2.3 -4.9 -5.7 -8.1 -3.3 -3.2 -6.9 -4.7 -6.6 -2.6 -7.3 -1.5 -7.2 -.1 -5.7 .9 -8.6 2.9 -8.7 4.9 -4.7 3.6 -8.6 9.2 -3 -3 -2.7 -7.1 -.7 -20 -10.2 -83.6 -1.4 -2.2Z\" fill=\"#462d2d\" /><path d=\"M362.2 202.3l-2.5 2.9 -4 1.7 -3.5 0 -4.1 -1.3 -3 4.7 -4.3 2.7 -8.2 1 -9.2 -1.7 -2 3.1 -5 3.9 -6.1 2.2 -3.9 0 -2.3 2.7 -3.5 .4 -5.1 -1.2 -3 4.3 -5 1.8 -6.8 .2 -1.5 2.5 -2.7 1.6 -5.3 1.1 -5.8 -.4 -1.7 2.3 -4.9 2 -6 .1 -3.6 -1.3 -2.5 2.8 -5.1 2.8 -7.6 1 -4.5 2.3 -5.8 -.3 -1.7 1.7 -4.5 1.9 -7.9 .1 -8 -2.6 -5.5 .4 -4.2 -.7 -3.1 -1.5 -3.8 -3.4 -3 .8 -5.2 -.8 -4.9 -2.5 -2.4 -2.2 -5.2 -.6 -8.7 -3.2 -.1 2.8 -2.7 4.8 .7 2 -.6 4 -4.2 7.2 1 1.9 -.1 2.7 -3.6 8.5 1.3 2.5 -.1 1.8 -3.5 6 1.7 2.4 .6 4.9 -.6 3.6 -2.1 4.8 2.7 2.5 1.4 3.7 .1 6.3 -1.4 5.2 3.7 3.4 3.9 12.1 6.7 9.5 3.2 7.6 .4 7 -2.3 8.2\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M195.2 205.5l-12.5-3.9-11.7-10.5\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M258.1 388.4l-3.9 3.7-3.9 1.3-19.9.3-7.9.8-3 1.1\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M306.9 337.1l7.3-4.2 4.9-4.1 4.9-6 3.3-6 1.9-7.1-.8-12.2 3.9-14.4.7-6.3-1.4-10.6-3.5-7.8-5.3-4-4.6-.3 4.1-4.4 2.3-5.7-.3-8.3-1.6-6.5-4.5-5.8-5.4-2.4\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /></g><path d=\"M172.5 180.6l7.5 4.1 5.3 1.5 5.2-.4 2.3-1.3.4 4.8-1 15.7-5.3-1.4-6.2-2.9-8.9-8.3Z\" fill=\"#ca9696\" /><path d=\"M206.6 174.4l24.2 8.3 13.4 2.2 11 .4 11.5 -1.3 11.9 -2.9 12.6 -4.3 12.8 -6 12.8 -8.2 6.2 -5 6.1 -5.7 6 -9 4.6 -12.5 2.6 -13.9 0 -13.3 -1.2 -5.8 -2.1 -4.9 4 6.5 3.9 8.4 2.3 8.3 -1.3 13.4 -3.5 13.8 -6.6 8.9 -13.9 14.4 -25.6 17.3 -18.4 5.9 -16.4 4.1 -8.3 1.2 -9.7 -.3 -9 -1.3 -8 -2.2 -22 -15Z\" fill=\"#ca9696\" /><path d=\"M233.6 244.7l20.3 4.1 13.6 7.1 11.6 3.8 2.9 1.6.2 2.7-2.4 6.9 1.1 4 2.8 2.9-2.1 1.4-4.1 5.5-9.9 14.9 2.5 1.9 2.1 3.5-1.2-5.3.5-2.3 3.3-6.8 5.3-6.8 5.7-5 5 .3 3.3 1.5 4.4 10.1-2.8 4.7-5.2 4.5-1.5 2.4-1.1 14.9-8 6.4 8.2-3.7 5.8 5.3-3.9-5.8-.2-10.9.7-4.8 2.2-3.3 1.7-1.1 9.7 3.2 4.6-.1-2.9 8.3-.5 5.6 10.2-20.5 1-8.8-1.5-13.5 5.8-8.4-3.7 3.1-3.4 4.5.6 15.6-1.4 8.6-2.1 1.9-3.7 1.1-5.5.1-4.8-2.6-.2-.7 2.7-3 1-2.9-2.8-6.5-.5-3.6-2.8-2-8.7-3.4-3.5-4 2.6-10.2 6.7-8.7 10.3-9.4 5.7-3 4.4-.8-5.8-1.4 2-4-7.4 8-17.4 15.7-12.7-2.4-11.5-5.1-3.1-2.4 0-.7 9.2-8.3 1.8-2.5-.1-1.3-1.9.1-1.8 1.6-9.6 10.8-15.6-3.1Z\" fill=\"#958888\" /><path d=\"M172.4 239.5l7.4 4.5 6.4 2.6 6 .8 9-.3 5 1.9-11.2 1.1-8.5-1.2-6.8-2.5-7.1-3.8-4.7-5 1.7-.4Z\" fill=\"none\" /><path d=\"M212.8 250.2l.9 3.1-1 2.7-12.9 14.4-4 6.5 4.5-3.5 3.5-.9 15.8 5.5 12.8 6.6 3 3.7 3.7 7.4-.9-7 6.4-8.8-8 5.8-17.6-9.8-15.7-4.8 1.3-3.2 7.2-7.5 3.3-5.1.8-4.8Z\" fill=\"none\" /><path d=\"M224.4 254.2l5.2 8 -5.8 3.3 6.5 -1.5 5.5 .2 19.7 6.3 2.5 1.2 .9 2.1 .9 6.6 -2.2 7.4 -2.7 14.9 -1.7 3.2 -3.2 2.5 -5.7 1.6 -10.7 -1.6 -8.7 -2.6 -11.1 -8.7 -18.9 -6.6 -4.6 -.7 -10.9 1.7 -2.6 -1.6 -2.3 -3.2 -.5 -3.2 5.3 -17.8 14 -6.4 -13.3 4.3 -16 .2 -7.3 -2.5 -2.9 -2.4 -2.2 -3.5 5.3 7.1 6.9 3.3 -4.1 9.1 -4 14.4 .2 5.6 2.2 7.3 3.2 6.8 2.2 2.9 2.8 1.4 7.7 1.4 -6.9 13.8 4.8 7.1 -10.9 2.2 1.8 3.7 .4 -1.4 1.4 -1.1 7.3 0 5.4 1.3 4.5 3.8 2 2.7 .7 2.8 -2.9 8.4 .4 5.7 2.6 3.7 7.8 5.6 6 2.6 5.8 1.2 29.3 2.1 6.2 3.1 -2.6 -2.3 5.2 -.6 -2.1 -.7 -28.6 -2 -8.6 -1.6 -12.1 -6 -4.6 -3.1 -2.8 -3.1 .1 -6.2 1.8 -7.4 1.3 -1.5 4.4 -.9 16 4.8 -8.2 4.1 -.9 3.4 -3 1.7 9.2 1.3 28.4 8.8 10 .5 3.7 -.8 1.8 -1.3 .8 -3.7 -.4 -5.1 -3.2 -6.4 -10.1 -8.6 -5.4 -3.2 -5 -1.3 -2.3 -2.5 -2 1.8 -5.6 1.7 14.5 2 10.8 7.6 2.9 3 3.3 6.9 1.1 4.6 -.8 1.9 -5.1 1.7 -7.5 .2 -34.2 -11.5 1.2 -1.7 4.5 -2.4 4.5 -1.3 5.1 -.3 6 .6 3.8 1.2 4.3 3.8 -2.3 -4.2 -3.8 -2.7 -18.6 -2 -2.7 -1 -5 -3.6 -.4 -1.2 .7 -1.3 9.9 -10.3 4.1 -1.3 10 .1 7.4 2.2 2.3 1.6 .3 1.1 9.4 1.2 5.2 4.9 5.6 2.1 14.6 14.2 -1.2 9.6 7.3 -8.8 5.3 -4.1 -9.4 2.5 -13.4 -12.8 -11.1 -6.7 -.5 -1.4 .7 -4.1 2.7 -4.9 4.3 -2.7 7.3 -1.3 -8.8 -.7 .4 -2.2 3.6 -1.1 -3 .2 -3 2.5 -6.4 13.2 -7.5 -.8 -2.5 -2.2 -5.5 -2.8 -4.7 -1.3 -5.2 -.4 10.8 -7.8 6.3 -.9 -5 -.7 -.5 -4.7 -2 5 -17.6 11 -14.3 13.9 -2.3 .5 -4.2 -1.3 -10.8 -5.8 -4.4 -5.3 -1.2 -4.6 4.3 -9.1 3.7 -3.9 3.6 -1.8 27.7 -3.5 -9 -1.2 2.2 -1.1 1.1 -2.2 -5.6 3.4 -16.7 1.7 -8.2 3.8 -6.1 -.8 -3.8 -3.1 -2.1 -4.2 -2.6 -9.3 -.6 -5.8 .6 -5.1 2.8 -9.2 3.4 -7.1 2.7 -2.8 5.3 -.4 3.6 .8 -4 16.1 .5 5.6 2.4 4.8 3.2 .8 9.7 -1.1 6.7 .3 20.6 7.5 3.1 4.9 -.3 3.1 -4.5 5 -17.6 9.3 -3.1 .9 -2.6 -.2 -8.9 -4.6 8.2 6.3 .9 11.5 .4 -8 1.1 -3 17.9 -8.4 12.4 -9.6 19.2 5.3 11.3 -2.9 10 4.9 5 4.2 .6 2.9 -3.6 8.2 -.7 3.6 .8 2.3 4.2 4.3 8.3 5.6 13.3 5 6.2 -4.2 3.7 -8.8 -2.5 -5.7 -.7 1 .2 7.5 -4.7 4.9 -4 1.5 -5.5 -1.5 -8.2 -3.9 -4.9 -3.1 -3 -3 .1 -4 3.6 -9.8 -1 -3.6 -3.3 -4.5 -8.8 -3.7 -2.9 -2.5 3.2 -8.5 4 -19.3 -4.3 -10.6 -25.2 -7.5 -8.8 -7.1Z\" fill=\"#958888\" /><path d=\"M172.4 239.5l8.8 5.9 6.8 2.6 12.2 2 9.1 -.5 4.3 1.4 .3 2.6 -1.6 4.2 -10.6 10.5 -5.7 9.4 5.4 -4.4 2.1 -.6 19.1 7 6.2 3.5 4.9 4.1 2.9 3.9 1.8 5 0 -8.1 3.5 -5.4 3 -2.8 -8.6 5.2 -13.8 -7.7 -19.7 -6.8 12.3 -13.4 -.2 -7.1 -8.4 -.8 -5.3 -1.5 -8.8 -.5 -7.6 -5.1 -4.9 .8Z\" fill=\"#958888\" /><path d=\"M285.1 229.4l.1 3.7 -3.3 5.4 -4.8 4.2 -5.5 3.2 6.1 -.9 .8 3.4 1.1 -4 7.6 -10.4 12.1 -9.5 -3.7 -1 -1.9 3.1 -3.2 2.1Z\" fill=\"#958888\" /><path d=\"M296.8 263.8l7.6-1.6 8.3-5 3-2.7 3.4-.6 2.7.6-7.8 2.9-7.7 6.1Z\" fill=\"#958888\" /><g clip-path=\"url(#oasto-clippath)\"><path d=\"M171.5 192l9.1 8.3 3.4 1.8 24 7.1 3.1 -.2 .4 -2.2 2.9 -1.2 16.5 -.5 10.4 .6 2.3 -3.6 14.2 -.6 3.5 -2.6 7.3 -3.1 5.1 -1.3 5.5 -.2 5.6 -1.9 19.1 -11.3 10.8 -1.4 2.5 -2.6 4.3 -2.4 6.5 -1.9 15.7 2 10.2 2.8 2.7 1.8 6.5 8.8 .5 7.3 -.5 4.8 -1.6 4.2 -2.3 2.7 -.6 1.9 2.9 8 1.7 8.5 -4 9.8 3.4 9.6 -4 11.7 2.3 7 -1.6 10.4 1.8 12 -2.8 11.7 2.4 7.6 .6 6.5 -6 11.5 .9 11.8 -1.5 4.1 -4 6.1 1.5 11.3 -6.5 9 -2.3 8.3 -9.5 10 -10.4 20.2 -11.9 9.8 -12.8 5.4 -15.1 3.1 -15.8 1.2 -7.8 -.3 -19.6 -6.8 2.5 8.1 .7 5 -6.7 10.3 3.5 9.5 1.2 6.7 -2.4 11.7 -8.2 16.1 -8.1 -.3 -1.2 -5.9 -6.6 -18.1 -.3 -2.6 3 -18 -5.8 -12.9 -2.5 -8 1.9 -8 3 -8.1 2.4 -4.2 3 -2.1 9.4 -1.3 18.8 -.8 6 -2.1 4.4 -3.5 19.8 4.1 4.7 -7.7 4.1 -4.8 3.9 -2.1 6.8 -2.2 1.5 -9.3 2.3 -7.2 2.7 -3.9 3.9 -2 -1.3 -15.4 8.2 -4.4 5.8 -5.6 5.6 -8.9 2.4 -5.9 .6 -5.1 -1.3 -9.2 4.4 -16.6 .6 -8.7 -.4 -4.4 -2.2 -6.6 -3.1 -4.2 -4.8 -3.3 -4.5 -.1 3.3 -3.6 2.6 -5.7 .7 -5.3 -.4 -4 -1.7 -6.1 -2.9 -5.4 -8 -3 -4.9 .3 -3.6 2.9 -7.6 -1 -4.2 4.7 -10.7 1.7 -4.2 4.1 -10.8 .6 -6.9 4.2 -9.2 -.9 -5.9 4.5 -6.6 1.9 -2.7 -.2 -4 2.1 -6.3 0 -4.9 2.8 -3.6 1 -8.8 -.6 -4.9 -2.1 -7.6 .1 -5.8 -2.4 -3.1 -2.9 -3.8 .5 -5.9 -1 -5.6 -3.8 -4 -.7 -10.1 -3.7 -.7 3.2 -2.2 3.8 .5 1.7 -.7 5 -4 6.7 1.1 2.3 -.3 2.1 -3.3 8.8 1.3 3.6 -3.8 6.9 2.4 5.1 -1.3 7 -1.5 3.5 2.6 2.7 1.4 3.3 -1 11.7 4.4 4.7 3.8 12 7 11.1 2.3 7 .6 4.8 -2.8 10 -15.5 25.7 -.4 7.4 8 13 -3.1 .8 -5.2 -1.5 -2.2 -2 -8 -18.5 -4.4 -4.3 -10.7 -5.2 -8.5 -6.3 -3.1 -3.7 -3.5 -7 -1.1 -4.4 -.3 -11.9 -4.8 -6.2 -1.4 -3.2 3.2 -10.2 -5.2 -15 4.7 -12.9 -2.1 -11.5 4.6 -8.2 3.6 -9 -1 -10.8 6.8 -20.2 2.4 -10.1 4.6 -4.9 3.1 -7.9 4.8 -5.8 6.1 -10.9 5.6 -4.2 7.9 -3.5 11.6 4.1 6.8 -2.1Z\" fill=\"#f2dddd\" /><path d=\"M358.8 214.1l3.5 7 .3 7.2 -.3 2 -2.6 4.9 2.1 5.7 -.1 4 -.3 4.4 -2.4 5.7 0 2.2 3.1 8.1 -2.6 6.5 -.3 3.5 1.7 9 -.7 7.5 -1.9 8.1 3 8.3 .4 4.5 -2.1 5.3 -4.4 5.3 .9 9.8 -.6 3.1 -5 9.1 .7 5.6 -.8 8.4 -5.3 5.6 -2 8.6 -11 12.9 -7.2 14.8 -7.5 9 -21.7 8.9 -21.6 3.9 -18.5 -1.2 -14.8 -6.5 1.3 7.7 .2 8.9 -5.4 8.1 3.3 8.4 1.7 11.9 -1.4 5.5 -3 6.6 -3.3 4.7 -2.7 5.5 -1.4 .4 -2.5 0 6.1 -13.5 2.7 -8.9 -1.3 -12.7 -3.2 -7.3 4.9 -6 1.5 -4.9 -1.9 -15.2 -2.2 -6.6 16.3 7.5 11.8 3.4 13.4 .9 7.1 -1.1 7.3 -2.4 13.3 -6.7 14.9 -11.2 6.6 -7.3 4.7 -9.2 7.3 -6.4 4.2 -6.3 1.2 -5.8 4.1 -6.2 1.8 -7.5 -.6 -1.9 -5.6 -2.3 4.7 -1.3 2.4 -2.1 3.5 -9.3 -.1 -5.1 -5.7 -6.4 7.5 -2.5 2.7 -2.8 .7 -1.9 -.1 -4.8 -1.7 -5.6 -2.6 -3.4 -3.1 -1.5 3.6 -3.9 2.1 -6.3 -1.9 -9.4 -1.4 -2.6 -1.6 -1.1 4.9 -3 2.3 -4.9 -.7 -3.7 -1.6 -2.5 -5.5 -4.2 5.2 -4.5 2.7 -5.7 -.8 -7.2 -1.3 -2.3 -2.5 -1.6 3.4 -5.3 -.6 -5.9 -1.7 -3.6 -1.9 -1.9 -8.5 -1.9 -6.9 3.3 -2.8 -.3 -2 1.1 -3.1 0 -6.2 1.5 3.8 8.4 4.1 5.6 -2.3 6.5 -.5 5.8 6.1 18.1 -.3 15.8 .9 9.4 -2 16 -.8 16.5 -3.4 20.2 -18.3 12.2 -4.3 4.7 -3 7.3 -.2 10.4 -7.5 1.8 -5.1 2.8 -7.2 6.4 -4.1 5.6 -10.6 -.7 -34.7 1.5 -9.5 2 -4.3 1.8 -3.7 2.4 -3.1 3.4 6.5 -11.8 8 -1.4 14.7 0 8.8 -.8 1.9 -.7 5 -4.5 20.1 4.4 3.8 -7.7 2.9 -3.2 6.5 -3.5 7.5 -1.3 -1.8 -8.9 1.5 -9.4 2.5 -2.1 7.2 -3.2 -2 -15.1 9.6 -5.8 4.4 -4.4 5.8 -7.9 2.9 -8.3 -1.1 -13.8 4.7 -15.7 .4 -5 -.7 -5.7 -3.1 -10 -2.2 -3.8 -3.2 -1.9 -6.2 -.8 6 -5.8 .9 -3.7 .2 -6.1 -2.1 -11.5 -6.3 -4.4 -1.7 2.1 -6.4 4 -28.7 10.5 -16.6 3.8 -19.8 2.7 -13.4 5.3 -9.8 1.1 -35.8 -3.1 -23.3 -5.3 -3.1 10.6 -2.7 5.2 -2 1.8 -1.4 3.5 -4 13.8 1.9 14.5 1.8 2.9 .9 3.8 0 5.9 -.9 4.2 2.5 3 3.1 6.3 2.7 14 3.1 3.8 4.1 2.1 1.1 1.5 .7 4.3 -1 7.2 -6.3 22.4 -1.7 -8.7 -7.6 9.7 -6.6 11.8 1 4.5 5.8 14.6 -6.1 -3 -5.1 -4.5 -4.6 -10.1 -6.5 -8.3 -15.5 -7.8 -5.7 -8.2 4 4 7.3 3.8 7.3 3.1 6 .3 8.1 -2.6 11.5 -6.2 3.7 -3.3 2.1 -4.3 .7 -5 -1.6 -10.5 -3.9 -9.1 -4.2 -5.1 -1.5 -.2 .6 -3.7 -1.2 -4.7 -3.4 -6.6 -2.6 -3 1.8 -3.2 -.8 -6.9 -1.9 -4.5 -3.1 -3.7 1.8 -1.3 2 -3.7 .1 -6.6 -1.5 -5.3 3.2 -3.8 .9 -3.9 -.9 -2.1 1.5 -1.6 1 -3 .5 -5.2 -.6 -3.2 1.6 -1.4 .8 -4.3 -1.4 -6.1 3.6 -2.1 1.7 -3.9 -.1 -4.8 -4.9 -6.4 3 1.9 3 -.3 8 -6.2 -4.7 5.4 8 2.3 4.8 5.4 1.9 .4 2.3 -.8 6.1 -4.9 -3.8 6.8 -.1 1.5 3 1.9 8.6 .9 9.2 -.4 2.3 -2 2.6 -5.5 .5 7.9 .5 1.8 1.5 1.3 5 1.1 6.1 -.3 5.3 -1.3 2.6 -1.7 3.3 2 3.1 -1.6 2.9 -4 3.6 2 6.2 -1.6 4.9 -4.4 1.3 -3 6 3 6.2 -.2 1.8 -4.5 -.9 -5.2 5.1 4.5 5.8 2 1.7 -.9 1.2 -1.9 1.1 -5.5 3.4 2.5 6.5 -.4 5.7 -3.6 2 -3.3 1.4 1.8 3 1.8 3.5 .8 3 -.3 .8 -2.6 -1.2 -5 2.5 5.4 1 1 3.1 -.1 6 -3.4 7.1 -5.8 5.8 .5 6.8 -1.3 9.5 -3.6 5.1 -3.4 4.3 -.6 4.5 -3.7 3.6 -6.4 .6 2.7 -.4 5.4 -1.5 4.8 -2.8 3.7 .2 6.4\" fill=\"#c6b5b5\" /></g><path d=\"M249.5 -15.4l2.5 1.2 10.1 82.9 .5 18.6 1.1 5.9 2.1 4.2 3.4 3.5 2 .4 9.6 -10.1 4.3 -3.2 8.9 -4.9 8.1 -2.6 12 -.5 6.9 1.5 5.9 2.4 6.7 4.6 3.1 3.1 5.4 7.7 2.1 4.7 2.6 10.9 .4 6.2 -1.3 12.3 -4.4 11.1 -3.5 5.3 -9.8 10.6 -14.1 10.9 -8.8 5.7 -11.8 6.3 -11.6 4.4 -11.1 2.8 -15.2 1.8 -13.9 -.3 -12.5 -2.6 -6.1 -3.5 -13.4 -10 -1.8 -1 -2.7 -.2 -4.5 1.5 -3.2 2 -4.2 5 -1.8 6.1 -.7 15.6 20.2 5.9 2 -3 3.4 -1.3 5.9 1 4.6 -.9 7.4 0 7.9 1.3 2.4 -4.2 7.7 -.9 6.9 .8 2.7 -3.5 5 -2.5 5.4 -1.3 4 .4 2.2 -1.4 6.7 -.8 4.7 -3.6 7 -2.3 2.3 -2.7 3 -1.8 5.7 -1.6 7.1 -.9 2.7 -2.9 5.4 -2.6 8.3 -1.1 9.6 .3 7.1 2 6.7 3.4 4.9 4.2 1.7 3.4 .7 4 -.6 10.4 -4.1 3.1 -.8 2.4 4.8 15 -.4 4.6 -2.8 7.6 2.7 10.7 -4.1 10.1 3.2 9.6 -2.7 8.4 2.1 11.9 -2.4 12 3.1 12 -1.3 5.3 -5.1 7.7 .9 11.3 -1.6 4.5 -3.8 5.7 .9 10.4 -.7 3.3 -5.2 5.6 -.8 5.3 -2.2 4.7 -9.1 9.5 -7.4 15.6 -6.3 7.7 -7.8 5 -10.1 4.7 -12.1 2.9 -17.9 2 -9 -.1 -5.6 -1.2 -11 -4.4 -8.5 -4.9 3.9 9.5 1.5 6.7 -.3 2.9 -1.7 4 -5.3 6.3 4.4 8.8 1.4 7 -.1 4.3 -2.7 7.6 -6.1 10.3 -1.4 4.4 -2.3 0 -2.8 -.3 -.8 -3.8 -6.4 -16 -.9 -7.8 2.7 -16.6 -5.6 -11.6 -2 -7 .2 -6.4 1.7 -6 4.1 -7.5 4.2 -4.9 -12.4 1 -10.6 -.9 -7.1 -2.8 -13.2 -8.7 -2.1 1 -3.5 .2 -8.2 -2 -2.5 -4.2 -1 -7.5 .3 -5.5 2.4 -10.8 -7.8 13.1 -4.5 5.3 -2.2 6.4 -5.8 9.9 1 5.1 6.1 11 -2.4 -.5 -2 -1.4 -3.5 -4.6 -5.4 -13.1 -1.7 -2.2 -5.4 -4.3 -12.2 -5.6 -6.1 -5.6 -4.5 -6.1 -2.3 -8 .3 -12.4 -3.8 -3.1 -2.2 -3.8 .6 -6.2 2.5 -5.1 -4.7 -8.3 -.7 -6.3 2.4 -8.5 2.8 -4.5 -2.5 -6.3 .1 -5.3 2.1 -4.7 3.2 -3.3 -.4 -1.5 .8 -3.2 3.4 -4.6 -1.8 -5.7 -.3 -5 1.1 -4.2 1.4 -1.8 1 -8.4 1.5 -3.1 1.9 -1.8 .7 -8.5 2.5 -3.7 4.3 -3.8 1.5 -6.5 2.7 -3.5 2.9 -1.9 1.6 -5.7 2.8 -4.7 5.3 -5.2 7.2 -3.2 5.4 .6 7.6 3.5 2.5 -1.6 3.2 -.6 4.7 .4 4.1 1.3 .7 -14.5 2.5 -10.4 3.7 -7.2 4.2 -4.8 4.2 -3.1 4.1 -1.9 7.8 -1.9 10.3 -1.2 6.5 -5.1 19 -.7 3.4 -1.8 2.9 -2.8 4.3 -6.7 1.6 -6.6 .1 -16.2 -4.5 -55.5 -3.5 -25.6 -6.9 -38.7 10.2 -3.2M249.5 -17.4l-8 1.4 -10 3.3 7.2 40.3 3.4 24.6 4.5 53 0 19.2 -1.5 6 -4 6.2 -5.3 3.9 -18.9 .6 -6.5 5.1 -15.6 2.3 -5.2 1.8 -4.5 2.8 -6.8 7.1 -3.7 7.2 -2.5 9.8 -1 13.1 -7.6 -.8 -5.3 1.7 -7.2 -3.1 -6.2 -.5 -7.7 3.5 -5.6 5.4 -3 4.8 -1.9 5.6 -5 4.9 -2.1 7.3 -4.8 4.6 -2 3.5 -.8 7.9 -3.1 5 -1.1 8.3 -2.5 6.2 -.1 4.1 1.6 6.8 -2.3 3.4 -1.4 5.6 -3.1 4 -2.1 5.6 .3 5 2 5.5 -3.2 6.9 -1.6 8.1 1.5 6.9 3.5 5.9 -2.3 5.8 -.3 6.1 1.9 3.7 3.9 3.8 0 12.6 2.4 7.7 4.7 6.5 6.5 6 4.8 2.7 7.5 2.9 4.8 3.8 1.5 1.8 5.7 13.6 4.4 5.4 3.1 1.6 4.9 .1 -7.4 -13.7 -.9 -3.7 5.6 -9.4 1.9 -6.1 6.5 -8.3 -.1 6.6 1 6.4 1.5 3.5 2.7 2.2 7.1 1.8 6.9 -.6 11 7.3 7.6 3.4 9.4 1.2 10.3 -.2 -5.5 10.1 -1.6 7.3 .1 5.1 1.8 6.7 5.8 12 -2.7 15.7 .7 7.8 6.8 17.5 .6 4.6 4.7 .7 4.1 -.2 1.3 -5 6.4 -10.8 2.8 -8 -1 -10.7 -4 -9.4 4.4 -5.7 2 -5.2 -.3 -5.6 -2.9 -8.1 10.3 4.7 7.8 2.4 7.9 .6 12.9 -.8 13.7 -2.2 11.3 -3.3 11 -5.9 5.2 -3.8 5.8 -7.4 7.7 -16 8.7 -8.9 2.6 -5.5 .6 -4.7 3 -2.5 2.5 -3.8 .7 -4.2 -.9 -9.5 3.8 -5.4 1.7 -5.3 -1 -10.8 5 -7.3 1.4 -5.9 -3.1 -12.2 2.4 -11.3 -2.1 -12.6 2.6 -8.7 -3.2 -9.1 4 -9.4 -.2 -3.9 -2.4 -7.2 2.6 -6.9 .7 -4.5 -1 -5.8 -3.7 -10.4 3.6 -3.2 1.1 -2 .6 -10.4 -1.8 -7.4 -2.4 -3.1 -3.8 -3 -7.2 -3.7 -5.1 -1.6 -7.6 -.8 -8.8 .3 -8.3 2.3 -5.1 4.1 -6.7 .9 -5.7 1.7 -3.1 1.9 -2.5 2.7 -6.8 2.3 -4.8 3.4 -16.9 2.8 -5.3 2.3 -3.8 3.6 -6.8 -.4 -6.9 .9 -1.6 .8 -1.8 2.9 -8.6 -1 -10.1 .8 -5.9 -.8 -3.3 1 -3 3 -17.2 -5 .6 -13.1 1.7 -6.2 3.7 -4.4 6.8 -3.1 2.6 .6 18.2 12.9 5.4 2.2 8.6 1.5 10.8 .6 14.1 -.9 16.7 -3.6 12 -4.5 12.4 -6.6 8.9 -5.8 14.3 -11 10.1 -10.8 3.6 -5.5 4.5 -11.6 1.4 -12.8 -.4 -6.7 -2.8 -11.5 -2.3 -4.9 -5.7 -8.1 -3.3 -3.2 -6.9 -4.7 -6.6 -2.6 -7.3 -1.5 -7.2 -.1 -5.7 .9 -8.6 2.9 -8.7 4.9 -4.7 3.6 -8.6 9.2 -3 -3 -2.7 -7.1 -.7 -20 -10.2 -83.6 -1.4 -2.2Z\" fill=\"#8f6464\" /></g></g><path d=\"M144.2 367.3l-7 -11.7 -6.1 -17.2 -2.3 -15.1 -1.5 -26.1 .5 -23 4.6 -20.2 5.4 -16.7 3.1 -6.9 1.1 -1.2 5.1 -1.6 -5.9 -6.6 -3.1 -6 -1.5 12.2 -7 20.5 -4.7 22.5 -1.6 19.1 .2 20.6 1.9 19.5 3.9 17 2.8 7.1 3.4 6 4 4.6Z\" fill=\"#f5e5e5\" /><path d=\"M157.3 197.1l3.8 1.2 1.8-1.5 1.1 5.1 1.3 1.6 8.1 4.9 11.1 4.4 9.4 2.1 10.4 1.1 17 1.3 7.9-.2 24.5-3.3 39.4-11.9 24.7-9.7 22.4-13.8-8.3 9.9-8.2 4.3-18.5 7.3-32.6 11.2-26.1 6.6-35.3 2.3-25.7-4.6-15.6-4.5-6.2-5.6Z\" fill=\"#f5e5e5\" /><path d=\"M158.8 329.4l9.4.5 3.6 5.8-5.1.1-3.3 1.1M154.2 326.8l9.1 13.4 1.1-1.5 2.6-.9 9.4 0-3.1-3.5-4.1-6.6-5.5.2Z\" fill=\"#8f6464\" /><path d=\"M332.4 214.1l5 28.4 -.9 30.5 -2.2 34.4 -5.1 41.3 -7.5 21.6 -8.1 16.9 9.9 -15.2 7.4 -15.5 1.8 -8.6 3.6 -31.3 3.2 -51.3 .5 -28.3 -.6 -7.9 -3.4 -13.5 -.8 -2Z\" fill=\"#f5e5e5\" /><path d=\"M306.6 338.2l.3 14-5.4 2.4-3.3 4.2-1.5 6.8 1 9.1-6.5 1.1-5 2.9-5.5 6.2-3.1 6.3-18-4.2.3-7.6 16 1.2 1.8-.5 4-3.2 5.9-7.4 5.2-8.8 1-5.6-1.1-5.2 2.6-1.3 3.3-3.2 3.4-6.9M308.5 335.6l-5 .9-3-.5-1.4 4.9-3.1 4.6-2.7 2.1-3.8.8 2.4 5.2-.6 6-6.3 10.5-6.4 7.3-2.5 1.2-10.1-.5-6.4-.9-2.2-1.2 1 7.8-1.3 4.4 22.2 5 3.8-8 5.9-5.9 5.4-2.3 6.1 0-1.6-8.8.3-5.6 2-4.7 1.9-1.8 5.9-2.2Z\" fill=\"#8f6464\" /><path d=\"M217.9 396.1l7.5-1.8 24.4-1.3 5.3-1.9 3.4-3.4\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M162.9 337.6l2 5 .4 4.9-1.5 8.4-2.7 5.2\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M155.2 327.1l.1 -6 -1.4 -4.1 -2.2 -2.7 -4.6 -3.1 1 -11.1 -1.5 -3.9 -2.6 -2.6 2 -4.2 .7 -3.8 -.5 -4.7 -1.3 -3.4 3.2 -6.3 -1.3 -3.6 2.6 -4.1 1.1 -3.9 -1.2 -5.2 4.9 -7.6 .1 -2.3 -1.1 -3.1 2 -3 1.1 -4.7 8.5 4 5.5 .5 3.2 2.6 4.4 2 3.6 .4 4.1 -.8 4.2 3.4 4.7 2.1 3.6 .3 4 -.7 8.4 2.9 4.4 .1 5.4 -1.6 4 -2.6 5.7 .3 4.6 -2.4 6.4 -.6 8.7 -5.7 8.5 1.1 4.7 -1.8 2.9 -2.7 9.5 0 2.9 -1.6 2.6 -3.2 6.7 -.2 4.4 -1.5 3.9 -4.1 6.3 .8 3.1 -1.2 1.7 -2.1 6.6 0 4.2 1.3 2.7 2 4.4 11.3 -.7 10.2 -2.6 4.1 -3.6 3.6 7.4 1.3 3.6 3.7 3.7 9.8 .7 10.7 -1.5 7.9 -3.2 8.4 .9 15.1 -2.9 8.4 -3.8 6.4 -3.7 3.8 -11.8 7.6\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M172.6 191.8l9.1 8.3 4.4 2.1 6.1 1.7\" fill=\"none\" stroke=\"#8f6464\" stroke-miterlimit=\"10\" stroke-width=\"2px\" /><path d=\"M313.7 221.1l6.1-3.3 3.1-3.2 19.8-3.1 9.8-4-8 4.4-13.3 3.4-6.8.7-4.7 3.7Z\" fill=\"#8f6464\" /></g></g>"};
+/* GERD scene: acid and pepsin reflux through the sphincter, stomach acid pumps
+ * blocked by treatment, wrap and healing of the lining, plus the gauges. */
+const layers = { hernia: $("hernia"), stomach: $("stomachSlot"), anat: $("anatomy"), muc: $("mucosa"), parts: $("parts"), over: $("over"), panel: $("panel") };
 const refs = {};
+let stomachO = null, capEl = null, capDrug = -1, acidWeak = false;
+const pumps = [], blockers = [];
+function capText(d) {
+  if (d === 1) return "Lifestyle measures tighten the junction. Less acid washes up.";
+  if (d === 2) return "Acid suppression blocks the acid pumps. Reflux is weaker and the lining heals.";
+  if (d === 3) return "Surgery wraps the junction and removes Barrett tissue. Reflux stops.";
+  return "No treatment. Acid washes up and burns the lining.";
+}
+function initOrgans() {
+  stomachO = organ($("stomachSlot"), "stomach", 380, 368, 170, { h: 92 });
+  mk("ellipse", { class: "gerd-acidpool", cx: 375, cy: 390, rx: 52, ry: 12 }, layers.stomach);
+}
 function initAnatomy() {
   const A = layers.anat;
-  mk("rect", { class: "gerd-lumen", x: 338, y: 78, width: 84, height: 250 }, A);
-  mk("rect", { class: "gerd-wall", x: 326, y: 78, width: 12, height: 250, rx: 5 }, A);
-  mk("rect", { class: "gerd-wall", x: 422, y: 78, width: 12, height: 250, rx: 5 }, A);
-  mk("rect", { class: "gerd-muc", x: 338, y: 78, width: 6, height: 250 }, A);
-  mk("rect", { class: "gerd-muc", x: 416, y: 78, width: 6, height: 250 }, A);
+  mk("rect", { class: "gerd-lumen", x: 338, y: 78, width: 84, height: 266 }, A);
+  mk("rect", { class: "gerd-wall", x: 326, y: 78, width: 12, height: 266, rx: 5 }, A);
+  mk("rect", { class: "gerd-wall", x: 422, y: 78, width: 12, height: 266, rx: 5 }, A);
+  mk("rect", { class: "gerd-muc", x: 338, y: 78, width: 6, height: 266 }, A);
+  mk("rect", { class: "gerd-muc", x: 416, y: 78, width: 6, height: 266 }, A);
   refs.infl = mk("rect", { class: "gerd-infl", x: 344, y: 208, width: 72, height: 120, opacity: "0" }, A);
   refs.barrL = mk("rect", { class: "gerd-barr", x: 338, y: 328, width: 9, height: 0 }, A);
   refs.barrR = mk("rect", { class: "gerd-barr", x: 413, y: 328, width: 9, height: 0 }, A);
@@ -449,9 +731,6 @@ function initAnatomy() {
   mk("circle", { class: "gerd-tum", cx: 414, cy: 292, r: 17 }, refs.tum);
   mk("circle", { class: "gerd-tum", cx: 400, cy: 306, r: 13 }, refs.tum);
   mk("circle", { class: "gerd-tum", cx: 424, cy: 310, r: 11 }, refs.tum);
-  mk("ellipse", { class: "gerd-stom", cx: 380, cy: 392, rx: 120, ry: 48 }, A);
-  mk("rect", { class: "gerd-stom", x: 334, y: 322, width: 92, height: 36 }, A);
-  mk("ellipse", { class: "gerd-acidpool", cx: 380, cy: 410, rx: 84, ry: 24 }, A);
   mk("rect", { class: "gerd-diag", x: 44, y: 318, width: 282, height: 14, rx: 6 }, A);
   mk("rect", { class: "gerd-diag", x: 434, y: 318, width: 124, height: 14, rx: 6 }, A);
   refs.herniaG = mk("g", {}, layers.hernia);
@@ -459,6 +738,16 @@ function initAnatomy() {
   mk("ellipse", { class: "gerd-acidpool", cx: 0, cy: 4, rx: 34, ry: 10 }, refs.herniaG);
   refs.lesL = mk("rect", { class: "gerd-les", x: 326, y: 326, width: 52, height: 17, rx: 8 }, A);
   refs.lesR = mk("rect", { class: "gerd-les", x: 382, y: 326, width: 52, height: 17, rx: 8 }, A);
+  refs.wrap = mk("rect", { class: "gerd-wrap", x: 318, y: 316, width: 124, height: 36, rx: 17, opacity: "0" }, A);
+  [[348, 392], [378, 396], [408, 392]].forEach(([x, y]) => {
+    mk("circle", { class: "gerd-pump", cx: x, cy: y, r: 5 }, layers.parts);
+    mk("circle", { class: "gerd-pumpin", cx: x, cy: y, r: 2 }, layers.parts);
+    pumps.push({ x, y });
+  });
+  for (let i = 0; i < 4; i++) {
+    const e = mk("circle", { class: "gerd-block", r: 4, opacity: "0" }, layers.parts);
+    blockers.push({ e, hx: 336 + i * 30, hy: 352 });
+  }
 }
 function initMucosa() {
   const M = layers.muc;
@@ -485,26 +774,28 @@ function initPanel() {
   [["reflux", "Reflux", "g-reflux", "How often and how high gastric fluid flows back into the oesophagus."], ["injury", "Injury", "g-injury", "Mucosal injury from acid and pepsin: redness, erosions and ulceration in oesophagitis."], ["barr", "Barrett", "g-barr", "Columnar metaplasia replacing squamous lining at the junction. It can progress through dysplasia."], ["strict", "Stricture", "g-strict", "Peptic narrowing from scarring after repeated injury. It makes swallowing harder."], ["ca", "Cancer", "g-ca", "Oesophageal adenocarcinoma arising in Barrett mucosa after high-grade dysplasia."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
   const ox = layers.over;
-  pill(ox, "Oesophagus", 365, 120, 200, 100, "Oesophagus: the muscular tube carrying food to the stomach. Its lower lining is normally squamous.");
-  pill(ox, "Lower sphincter", 330, 334, 170, 300, "Lower oesophageal sphincter: a ring of muscle at the junction. Weakness and transient relaxations at the wrong time let gastric fluid reflux.");
-  pill(ox, "Stomach", 460, 410, 535, 380, "Stomach: contains acid and pepsin that digest food. The same fluid injures the oesophageal lining.");
-  pill(ox, "Hiatus hernia", 380, 292, 500, 260, "Hiatus hernia: part of the stomach slides up through the diaphragm. It impairs the sphincter and traps refluxed fluid.");
-  pill(ox, "Acid and pepsin", 395, 398, 160, 380, "Acid and pepsin: gastric fluid that flows back during reflux. Acid suppression makes it less injurious.");
-  pill(ox, "Barrett segment", 418, 278, 500, 200, "Barrett segment: salmon-coloured columnar mucosa extending up from the junction, replacing squamous lining after repeated injury.");
-  pill(ox, "Stricture", 342, 246, 190, 210, "Peptic stricture: narrowing from inflammation and scarring. It can make swallowing solid food difficult.");
-  pill(ox, "Columnar cells", 700, 210, 680, 106, "Columnar cells with goblet cells: the metaplastic lining of Barrett oesophagus, seen in the close-up as taller orange cells.");
-  pill(ox, "Dysplasia", 820, 246, 838, 150, "Dysplasia: crowded, abnormal cells and nuclei in Barrett mucosa. High-grade dysplasia is the step before adenocarcinoma.");
-  pill(ox, "Basement membrane", 660, 308, 680, 380, "Basement membrane: the boundary under the lining. Cancer is present when abnormal cells grow through it into deeper tissue.");
+  pill(ox, "Oesophagus", 365, 140, 200, 108, "Food tube to the stomach. Acid washing up burns its lining.");
+  pill(ox, "Sphincter", 332, 334, 170, 300, "Muscle ring at the junction. When loose, stomach fluid flows back.");
+  pill(ox, "Stomach", 440, 392, 520, 400, "Makes acid and pepsin that digest food and can burn the gullet.");
+  pill(ox, "Hernia", 380, 296, 505, 262, "Bit of stomach pushed above the diaphragm. Harder to keep acid down.");
+  pill(ox, "Acid", 360, 390, 160, 382, "Stomach acid and pepsin. Acid suppression makes this fluid weaker.");
+  pill(ox, "Barrett", 418, 280, 505, 196, "Pink lining replacing the normal pale lining after burns. See the close up on the right.");
+  pill(ox, "Stricture", 340, 246, 190, 216, "Narrowing from scarring after repeated burns. Food can stick.");
+  pill(ox, "Cancer", 758, 310, 770, 152, "Abnormal growth in Barrett lining that has broken through. Surgery can remove it.");
+  capEl = mk("text", { class: "gerd-cap", x: 30, y: 434 }, ox); capEl.textContent = capText(0);
 }
-const sm = { R: 0.3, A: 0.3, I: 0.2, B: 0, ST: 0, CA: 0, H: 0.2, weak: 0.4, D: 0 };
+const sm = { R: 0.3, A: 0.3, I: 0.2, B: 0, ST: 0, CA: 0, H: 0.2, weak: 0.4, D: 0, block: 0, wrap: 0, life: 0 };
 const acc = { acid: 0, pep: 0 };
-function init() { initAnatomy(); initMucosa(); initPanel(); }
+function init() { initOrgans(); initAnatomy(); initMucosa(); initPanel(); }
 function step(dt, m) {
-  const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.55);
+  const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.7);
   sm.R = lerp(sm.R, m.R, k2); sm.A = lerp(sm.A, m.A, k2); sm.I = lerp(sm.I, m.I, k2); sm.B = lerp(sm.B, m.B, k2); sm.ST = lerp(sm.ST, m.ST, k2); sm.CA = lerp(sm.CA, m.CA, k2); sm.H = lerp(sm.H, m.H, k2); sm.weak = lerp(sm.weak, m.weak, k1); sm.D = lerp(sm.D, m.D || 0, k2);
+  sm.block = lerp(sm.block, drug === 2 ? 1 : 0, k1); sm.wrap = lerp(sm.wrap, drug === 3 ? 1 : 0, k1); sm.life = lerp(sm.life, drug === 1 ? 1 : 0, k1);
   const phase = (tm / 2800) % 1, transient = phase < 0.3 ? Math.sin((phase / 0.3) * Math.PI) : 0;
-  const gateOpen = clamp(sm.weak * 0.4 + transient * (0.25 + 0.75 * sm.R));
+  const gateOpen = clamp((sm.weak * 0.4 + transient * (0.25 + 0.75 * sm.R)) * (1 - 0.3 * sm.life) * (1 - 0.45 * sm.wrap));
   refs.lesL.setAttribute("x", f1(326 - gateOpen * 18)); refs.lesR.setAttribute("x", f1(382 + gateOpen * 18));
+  refs.wrap.setAttribute("opacity", (sm.wrap * 0.95).toFixed(2));
+  refs.wrap.setAttribute("transform", "translate(380 334) scale(" + (0.92 + 0.08 * sm.wrap).toFixed(3) + ") translate(-380 -334)");
   place(refs.herniaG, 380, 314, 0, 0.25 + 0.75 * sm.H); refs.herniaG.setAttribute("opacity", sm.H > 0.04 ? "1" : "0");
   refs.infl.setAttribute("opacity", (sm.I * 0.5).toFixed(2));
   const bh = sm.B * 118; refs.barrL.setAttribute("y", f1(328 - bh)); refs.barrL.setAttribute("height", f1(bh)); refs.barrR.setAttribute("y", f1(328 - bh)); refs.barrR.setAttribute("height", f1(bh));
@@ -514,11 +805,20 @@ function step(dt, m) {
   refs.colG.setAttribute("opacity", clamp(sm.B * (1 - sm.D * 0.45)).toFixed(2));
   refs.dysG.setAttribute("opacity", clamp(sm.D * (1 - sm.CA * 0.35)).toFixed(2));
   refs.caG.setAttribute("opacity", (sm.CA * 0.95).toFixed(2));
-  acc.acid += dt * sm.R * (gateOpen > 0.32 ? 13 : 1.5); while (acc.acid >= 1) { acc.acid--; const p = freeP(acid); if (p) emit(p, rnd(348, 412), rnd(398, 416), rnd(-5, 5), -rnd(42, 62), 326 - sm.R * 175 - rnd(0, 36)); }
+  const e = sm.block * sm.block * (3 - 2 * sm.block);
+  blockers.forEach((b, i) => {
+    const d = pumps[i % pumps.length];
+    place(b.e, lerp(b.hx, d.x, e), lerp(b.hy, d.y, e) + Math.sin(tm / 450 + i * 2.1) * 2 * e, 0, 0.6 + 0.4 * e);
+    b.e.setAttribute("opacity", e.toFixed(2));
+  });
+  const wantWeak = drug === 2;
+  if (wantWeak !== acidWeak) { acidWeak = wantWeak; acid.forEach((p) => p.e.setAttribute("class", acidWeak ? "p-weak" : "p-acid")); }
+  acc.acid += dt * (2 + 11 * sm.R) * (gateOpen > 0.32 ? 1 : 0.12); while (acc.acid >= 1) { acc.acid--; const p = freeP(acid); if (p) emit(p, rnd(348, 412), rnd(382, 396), rnd(-5, 5), -rnd(42, 62), 322 - sm.R * 170 - rnd(0, 36)); }
   acid.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt + Math.sin(tm / 380 + p.y) * 0.25; p.y += p.vy * dt; p.x = clamp(p.x, 342, 418); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.y < p.k || p.y < 84) kill(p); });
-  acc.pep += dt * sm.A * (gateOpen > 0.32 ? 7 : 0.8); while (acc.pep >= 1) { acc.pep--; const p = freeP(pep); if (p) emit(p, rnd(348, 412), rnd(398, 416), rnd(-5, 5), -rnd(36, 52), 326 - sm.A * 150 - rnd(0, 30)); }
+  acc.pep += dt * (0.5 + 7 * sm.A) * (gateOpen > 0.32 ? 1 : 0.15); while (acc.pep >= 1) { acc.pep--; const p = freeP(pep); if (p) emit(p, rnd(348, 412), rnd(382, 396), rnd(-5, 5), -rnd(36, 52), 322 - sm.A * 150 - rnd(0, 30)); }
   pep.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.x = clamp(p.x, 342, 418); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(tm / 6) + ")"); if (p.y < p.k || p.y < 84) kill(p); });
   gg.reflux.set(sm.R, wordOf(sm.R, 0.25, 0.6, ["low", "moderate", "high"])); gg.injury.set(sm.I, wordOf(sm.I, 0.2, 0.55, ["none", "inflamed", "severe"])); gg.barr.set(sm.B, wordOf(sm.B, 0.15, 0.6, ["absent", "present", "wide"])); gg.strict.set(sm.ST, wordOf(sm.ST, 0.2, 0.55, ["none", "mild", "tight"])); gg.ca.set(sm.CA, wordOf(sm.CA, 0.1, 0.5, ["absent", "at risk", "present"]));
+  if (drug !== capDrug) { capDrug = drug; const t = capText(drug); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 run({ init, step });
 </script></body></html>

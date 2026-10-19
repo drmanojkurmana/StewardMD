@@ -1,6 +1,6 @@
 /* Raised intracranial pressure (ICP) as an animated, working scene (original drawing; Anima styling, Anatomy page shell).
  *   node tools/figures/scenes/icp.mjs [--print-model]
- * Layout and model here; cranium, brain, ventricles, herniation, Monro-Kellie curve, Cushing waveforms and gauges move in icp.page.js.
+ * Layout and model here; skull, brain, mass, Monro-Kellie curve, Cushing waveforms and gauges move in icp.page.js.
  * Qualitative: no doses, no numeric thresholds. */
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -107,59 +107,58 @@ const TESTS = [
 
 /* ---------------- static layout ---------------- */
 const body = `
-<rect class="sc-tissue" x="14" y="44" width="560" height="396" rx="18"/>
-<rect class="sc-tissue" x="584" y="44" width="362" height="194" rx="18"/>
-<rect class="sc-tissue" x="584" y="246" width="362" height="194" rx="18"/>
-<text class="sc-zone" x="34" y="60">CRANIAL VAULT</text>
-<text class="sc-zone" x="604" y="60">MONRO-KELLIE DOCTRINE</text>
-<text class="sc-zone" x="604" y="262">CUSHING RESPONSE</text>
-<g id="cranium"></g>
-<g id="brain"></g>
+<rect class="sc-tissue" x="14" y="44" width="932" height="396" rx="18"/>
+<text class="sc-zone" x="34" y="68">HEAD IN SECTION</text>
+<text class="sc-zone" x="604" y="68">PRESSURE INSIDE</text>
+<text class="sc-zone" x="604" y="270">BODY ALARMS</text>
+<g id="skull"></g>
+<g id="brainMove"><g id="brainSlot"></g></g>
 <g id="mass"></g>
 <g id="devices"></g>
-<g id="pupil"></g>
+<g id="eye"></g>
 <g id="monro"></g>
-<g id="cushing"></g>
+<g id="alarm"></g>
+<g id="parts"></g>
 <g id="over"></g>
 <g id="panel"></g>`;
 
 buildScene({
   id: "raised-icp", fig: "Fig 1", title: "Raised intracranial pressure: Monro-Kellie and herniation", W, H, body,
-  label: "An animated coronal view of the brain inside the rigid cranium, with Monro-Kellie volume compliance, cerebral perfusion pressure, herniation pathways and the Cushing response. An expanding mass or oedema initially displaces venous blood and CSF. Once compliance buffers are exhausted, intracranial pressure spikes exponentially, causing subfalcine, uncal and tonsillar herniation. Medullary compression triggers the Cushing triad: severe hypertension, bradycardia and respiratory depression. A dynamic pupil monitor shows uncal third nerve compression. Gauges display intracranial pressure, perfusion pressure, compliance, midline shift, herniation and the Cushing reflex. Treatments include head elevation, osmotic agents, ventricular CSF drainage and decompressive craniectomy.",
-  caption: "Schematic, not to scale. Waveforms, speeds and gauge levels are qualitative and illustrative; no doses, pressures or numbers are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "icp.page.js"), "utf8"), modelOf, MD, tests: TESTS,
+  label: "An animated side view of the head. A growing mass takes up space inside the rigid skull, pressure climbs the steep part of the volume pressure curve, and the brain is pushed down toward the base of the skull. The pupil widens as the third nerve is squeezed, and failing brainstem control raises blood pressure while slowing pulse and breathing. Treatment choices are raising the head of the bed, drawing water out of the brain with osmotic therapy, draining fluid through a ventricular catheter, and removing a bone flap.",
+  caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, pressures or numbers are shown or implied.",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "icp.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
   withoutLabel: "Without treatment", withLabel: "With tiered care bundle",
   sourcesLis: [
-    "<strong>The Monro-Kellie doctrine and intracranial compliance.</strong> The rigid cranium contains brain tissue, blood and cerebrospinal fluid in fixed total volume. When an expanding mass or cerebral oedema develops, compensation initially displaces venous blood into jugular veins and CSF into the spinal subarachnoid space. Once these compensatory buffers are exhausted, intracranial compliance drops to zero, and small additional volume increments cause steep exponential spikes in intracranial pressure (ICP). This is standard teaching in neurology, neurosurgery and neurocritical care texts and was not checked against a linked source here, so it is flagged for review.",
-    "<strong>Cerebral perfusion and herniation syndromes.</strong> Cerebral perfusion pressure equals mean arterial pressure minus intracranial pressure. As ICP climbs, perfusion pressure collapses, precipitating cerebral ischaemia. Pressure gradients between compartments drive brain herniation: subfalcine under the falx cerebri, transtentorial uncal herniation compressing the midbrain and third cranial nerve (causing pupillary dilatation), and tonsillar herniation through the foramen magnum compressing the medulla oblongata. Medullary ischaemia triggers the Cushing response: severe hypertension, reflex bradycardia and respiratory depression.",
-    "<strong>Treatment mechanisms shown.</strong> Head elevation promotes jugular venous drainage without lowering arterial pressure; osmotic agents draw free water from brain parenchyma across an intact blood-brain barrier into the circulation; an external ventricular drain directly vents CSF; and decompressive craniectomy removes the rigid bone boundary to eliminate spatial constraint and relieve brainstem compression.",
+    "<strong>The Monro-Kellie doctrine and intracranial compliance.</strong> The rigid skull holds brain tissue, blood and cerebrospinal fluid in a fixed total volume. When a growing mass or swelling appears, compensation first squeezes venous blood out through the neck veins and fluid down around the spinal cord. Once that spare room is gone, small further growth causes steep rises in pressure inside the skull. This is standard teaching in neurology, neurosurgery and neurocritical care texts and was not checked against a linked source here, so it is flagged for review.",
+    "<strong>Perfusion and downward herniation.</strong> Blood reaches the brain only if arterial pressure beats intracranial pressure. As pressure climbs, that margin collapses and the brain becomes starved of blood. The mass pushes the brain sideways and down toward the opening at the skull base, squeezing the brainstem. Pressure on the third nerve widens the pupil on that side, and a squeezed brainstem fires the Cushing response of high blood pressure, slow pulse and uneven breathing. This is standard teaching and was not checked against a linked source here, so it is flagged for review.",
+    "<strong>Treatment ideas shown.</strong> Raising the head speeds venous drainage through the neck without lowering arterial pressure; osmotic therapy pulls water from swollen brain tissue into the blood; a ventricular drain vents fluid directly; and removing a bone flap gives the swollen brain room to bulge outward. These are teaching toggles only.",
   ],
-  simplified: "Specific intracranial pressure targets, osmolality thresholds, hyperventilation and carbon dioxide reactivity, neuromuscular blockade, barbiturate coma, hypothermia, underlying lesion aetiologies (such as traumatic contusion, extradural or subdural haematoma, intracerebral haemorrhage, ischaemic stroke or neoplasm), specific surgical techniques, and all drug doses are omitted. The anatomy is a schematic coronal representation, and the waveforms are qualitative teaching illustrations. This figure does not provide clinical guidance or treatment recommendations for any patient.",
+  simplified: "Specific pressure targets, carbon dioxide reactivity and hyperventilation, sedation and temperature measures, lesion causes such as trauma, bleeding, stroke or tumour, surgical detail, and all doses are left out. The head is a schematic side view and the waveforms are qualitative teaching drawings. This figure does not provide clinical guidance or treatment recommendations for any patient.",
   extraCss: `
 .icp-bone{fill:color-mix(in srgb,#f0e6d6 55%,var(--anatomy-paper));stroke:#8c7b66;stroke-width:2.2;stroke-linejoin:round}
-.icp-dura{fill:none;stroke:#6c7d93;stroke-width:2.2;stroke-linecap:round}
-.icp-brain{fill:color-mix(in srgb,var(--c-endo) 28%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-endo) 50%,#000);stroke-width:1}
-.icp-sulcus{fill:none;stroke:color-mix(in srgb,var(--c-endo) 45%,#000);stroke-width:1.1;stroke-linecap:round;opacity:.7}
-.icp-stem{fill:color-mix(in srgb,var(--c-mac) 26%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-mac) 45%,#000);stroke-width:1}
-.icp-csf{fill:color-mix(in srgb,var(--c-fl) 38%,var(--anatomy-paper));stroke:var(--c-fl);stroke-width:.8}
+.icp-dura{fill:none;stroke:#6c7d93;stroke-width:2;stroke-linecap:round}
+.icp-canal{fill:none;stroke:#8c7b66;stroke-width:4;stroke-linecap:round}
+.icp-glow{fill:var(--c-bad);stroke:none}
+.icp-cone{fill:var(--c-bad);stroke:none}
 .icp-mass{fill:color-mix(in srgb,var(--c-bad) 70%,#150505);stroke:var(--c-bad);stroke-width:1.5}
-.icp-oedema{fill:var(--c-fl);opacity:.35}
+.icp-oedema{fill:var(--c-fl);stroke:none;opacity:.35}
+.icp-bulge{fill:color-mix(in srgb,var(--c-endo) 40%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-endo) 55%,#000);stroke-width:1.2}
+.icp-flap{fill:color-mix(in srgb,#f0e6d6 65%,var(--anatomy-paper));stroke:var(--anatomy-strong);stroke-width:2;stroke-linejoin:round}
+.icp-evd{fill:none;stroke:var(--anatomy-strong);stroke-width:1.8}
+.icp-chamber{fill:color-mix(in srgb,var(--anatomy-card) 85%,transparent);stroke:var(--anatomy-mid);stroke-width:1.2}
+.icp-fluid{fill:color-mix(in srgb,var(--c-fl) 50%,var(--anatomy-paper));stroke:none}
+.icp-wedge{fill:color-mix(in srgb,var(--c-fl) 30%,var(--anatomy-card));stroke:var(--anatomy-strong);stroke-width:1.2}
 .icp-vess{fill:none;stroke-linecap:round}
 .icp-vess.art{stroke:var(--c-rbc);stroke-width:2.4}
 .icp-vess.ven{stroke:var(--c-fl);stroke-width:3}
-.icp-flap{fill:color-mix(in srgb,#f0e6d6 65%,var(--anatomy-paper));stroke:var(--anatomy-strong);stroke-width:2}
-.icp-evd{fill:none;stroke:var(--anatomy-strong);stroke-width:1.8;stroke-dasharray:3 2}
-.icp-chamber{fill:color-mix(in srgb,var(--anatomy-card) 85%,transparent);stroke:var(--anatomy-mid);stroke-width:1.2}
-.icp-fluid{fill:color-mix(in srgb,var(--c-fl) 50%,var(--anatomy-paper))}
-.icp-iris{fill:#4a7698;stroke:var(--anatomy-mid);stroke-width:1}
-.icp-aperture{fill:#06060c}
+.icp-arrow{fill:none;stroke:var(--c-bad);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.icp-aperture{fill:#06060c;stroke:none}
 .icp-grid{fill:none;stroke:var(--anatomy-faint);stroke-width:.5;opacity:.35}
-.icp-grid.major{opacity:.65}
 .icp-curve{fill:none;stroke:var(--c-bad);stroke-width:2.2;stroke-linecap:round}
-.icp-curve-comp{fill:none;stroke:var(--c-good);stroke-width:1.6;stroke-dasharray:4 3;opacity:.8}
 .icp-trace-bp{fill:none;stroke:var(--c-rbc);stroke-width:1.8;stroke-linejoin:round}
 .icp-trace-hr{fill:none;stroke:var(--c-good);stroke-width:1.6;stroke-linejoin:round}
 .icp-trace-resp{fill:none;stroke:var(--c-cyt);stroke-width:1.6;stroke-linejoin:round}
+.icp-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
 .p-art{--cc:var(--c-rbc)}
 .p-ven{--cc:var(--c-fl)}
 .p-csf{--cc:#7ab8ff}
@@ -168,6 +167,5 @@ buildScene({
 .mk-csf{fill:var(--c-fl)}
 .mk-blood{fill:var(--c-rbc)}
 .mk-mass{fill:var(--c-bad)}
-.x-mark{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.6}
 `,
 });

@@ -269,7 +269,11 @@ body[data-theme="light"]{--enz:#d99a1f;--enzsub:#e06a25;--enzprod:#0f8f7a;--enzi
 .enz-box{fill:color-mix(in srgb,var(--anatomy-paper) 72%,transparent);stroke:var(--anatomy-faint);stroke-width:1}
 .enz-ax{fill:var(--anatomy-text);font-size:11px;pointer-events:none}
 .enz-cap{fill:var(--anatomy-strong);font-size:11px;font-weight:600;pointer-events:none}
-.enz-cap2{fill:var(--anatomy-text);font-size:10px;pointer-events:none}
+.enz-cap2{fill:var(--anatomy-text);font-size:11px;pointer-events:none}
+.enz-capline{fill:var(--anatomy-strong);font-size:12.5px;font-weight:600;pointer-events:none}
+.enz-wash{fill:var(--enzsub);stroke:none}
+.enz-glow{fill:var(--enzprod);stroke:none}
+.enz-fill{fill:color-mix(in srgb,var(--enzcur) 20%,transparent);stroke:none}
 .enz-axis{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
 .enz-base{fill:none;stroke:var(--anatomy-mid);stroke-width:1.4;stroke-dasharray:4 4;opacity:.55}
 .enz-cur{fill:none;stroke:var(--enzcur);stroke-width:2.6;stroke-linecap:round}
@@ -286,17 +290,20 @@ body[data-theme="light"]{--enz:#d99a1f;--enzsub:#e06a25;--enzprod:#0f8f7a;--enzi
 .enz-vigf{fill:none;stroke:var(--enzinh);stroke-width:1.6;opacity:0}
 .p-sub{--cc:var(--enzsub)}.p-prod{--cc:var(--enzprod)}.p-inhp{--cc:var(--enzinh)}.p-modp{--cc:var(--enzmod)}
 .dr-g-fill.g-vmax{fill:var(--enzcur)}.dr-g-fill.g-km{fill:var(--enzlb)}.dr-g-fill.g-rate{fill:var(--enzsub)}.dr-g-fill.g-sub{fill:var(--enz)}
-</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Enzyme kinetics: inhibition and the two plots</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>max rate usual · Km usual · rate usual</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated enzyme converting substrate to product, with a Michaelis-Menten plot and a Lineweaver-Burk reciprocal plot beside it. Without inhibitor the rate rises with substrate to a maximum rate, Vmax, and Km is the substrate level at half that maximum. A competitive inhibitor competes for the active site, so Km rises and Vmax stays the same. A non-competitive inhibitor binds elsewhere, so Vmax falls and Km stays the same. An uncompetitive inhibitor, shown in the strip below, lowers both. More substrate overcomes competitive inhibition but not non-competitive inhibition. Gauges show max rate, Km, rate now and substrate."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Enzyme kinetics: inhibition and the two plots</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>max rate usual · Km usual · rate usual</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated enzyme converting substrate to product, with a Michaelis-Menten plot and a Lineweaver-Burk reciprocal plot beside it. Without inhibitor the rate rises with substrate to a maximum rate, Vmax, and Km is the substrate level at half that maximum. A competitive inhibitor competes for the active site, so Km rises and Vmax stays the same. A non-competitive inhibitor binds elsewhere, so Vmax falls and Km stays the same. More substrate overcomes competitive inhibition but not non-competitive inhibition. A modulator boosts the enzyme from its own site and raises the maximum rate again. Gauges show max rate, Km, rate now and substrate. A one-line summary inside the figure states what each choice does."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
 <rect class="sc-tissue" x="14" y="44" width="932" height="396" rx="18"/>
 <rect class="enz-box" x="28" y="80" width="276" height="210" rx="14"/>
 <rect class="enz-box" x="322" y="80" width="308" height="210" rx="14"/>
 <rect class="enz-box" x="648" y="80" width="284" height="210" rx="14"/>
+<rect id="subWash" class="enz-wash" x="34" y="110" width="264" height="174" rx="12" opacity="0.18"/>
+<ellipse id="rateGlow" class="enz-glow" cx="112" cy="182" rx="64" ry="56" opacity="0.15"/>
 <rect class="enz-box" x="28" y="306" width="904" height="124" rx="14"/>
 <text class="sc-zone" x="42" y="103">AT WORK</text>
 <text class="sc-zone" x="336" y="103">MICHAELIS-MENTEN</text>
 <text class="sc-zone" x="662" y="103">LINEWEAVER-BURK</text>
-<text class="sc-zone" x="42" y="329">INHIBITOR TYPES</text>
+<text id="capLine" class="enz-capline" x="34" y="327"></text>
 <path class="enz-axis" d="M368 262L368 124M368 262L600 262"/>
+<path id="mmFill" class="enz-fill" d="M368 262Z"/>
 <path id="mmBase" class="enz-base" d="M368 262L600 180"/>
 <path id="mmCur" class="enz-cur" d="M368 262L600 180"/>
 <line id="mmVmax" class="enz-dash" x1="368" y1="143" x2="600" y2="143"/>
@@ -311,28 +318,27 @@ body[data-theme="light"]{--enz:#d99a1f;--enzsub:#e06a25;--enzprod:#0f8f7a;--enzi
 <text class="enz-ax" x="796" y="284" text-anchor="middle">1 / substrate</text>
 <text class="enz-ax" x="682" y="196" text-anchor="middle" transform="rotate(-90 682 196)">1 / rate</text>
 <g id="enzMain"></g>
-<g id="vig0"><rect class="enz-vigf" x="92" y="338" width="196" height="58" rx="10"/><circle class="enz-mini" cx="150" cy="367" r="21"/><rect class="enz-inhS" x="158" y="352" width="18" height="11" rx="5"/><circle class="enz-subS" cx="205" cy="367" r="6"/><text class="enz-cap" x="190" y="412" text-anchor="middle">Competitive</text><text class="enz-cap2" x="190" y="425" text-anchor="middle">higher Km, same max rate</text></g>
-<g id="vig1"><rect class="enz-vigf" x="382" y="338" width="196" height="58" rx="10"/><circle class="enz-mini" cx="440" cy="367" r="21"/><rect class="enz-inhS" x="414" y="380" width="18" height="11" rx="5"/><circle class="enz-subS" cx="495" cy="367" r="6"/><text class="enz-cap" x="480" y="412" text-anchor="middle">Non-competitive</text><text class="enz-cap2" x="480" y="425" text-anchor="middle">lower max rate, same Km</text></g>
-<g id="vig2"><rect class="enz-vigf" x="672" y="338" width="196" height="58" rx="10"/><circle class="enz-mini" cx="730" cy="367" r="21"/><circle class="enz-subS" cx="738" cy="356" r="6"/><rect class="enz-inhS" x="742" y="368" width="18" height="11" rx="5"/><text class="enz-cap" x="770" y="412" text-anchor="middle">Uncompetitive</text><text class="enz-cap2" x="770" y="425" text-anchor="middle">max rate and Km both lower</text></g>
+<g id="vig0"><rect class="enz-vigf" x="140" y="336" width="280" height="58" rx="10"/><circle class="enz-mini" cx="250" cy="365" r="19"/><rect class="enz-inhS" x="257" y="349" width="20" height="12" rx="6"/><circle class="enz-subS" cx="312" cy="365" r="6"/><text class="enz-cap" x="280" y="410" text-anchor="middle">Competitive</text><text class="enz-cap2" x="280" y="423" text-anchor="middle">higher Km, same max rate</text></g>
+<g id="vig1"><rect class="enz-vigf" x="540" y="336" width="280" height="58" rx="10"/><circle class="enz-mini" cx="650" cy="365" r="19"/><circle class="enz-subS" cx="650" cy="355" r="6"/><rect class="enz-inhS" x="640" y="376" width="20" height="12" rx="6"/><text class="enz-cap" x="680" y="410" text-anchor="middle">Non-competitive</text><text class="enz-cap2" x="680" y="423" text-anchor="middle">lower max rate, same Km</text></g>
 <g id="parts"></g>
 <g id="over"></g>
 <g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names are shown or implied.</span></figcaption></figure>
 <div class="dr-controls">
   <label class="dr-range"><span>Inhibitor present</span><input id="level" type="range" min="0" max="2" step="1" value="0" aria-valuetext="no inhibitor"><span class="dr-ticks"><i>none</i><i>competitive</i><i>non-competitive</i></span></label>
-  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">none</option><option value="1">more substrate</option><option value="2">allosteric modulator</option></select></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With modulator"><option value="0">none</option><option value="1">more substrate</option><option value="2">allosteric modulator</option></select></label>
   <button id="pause" type="button" aria-pressed="false">Pause motion</button>
 </div>
 <p id="status" class="dr-status" aria-live="polite"></p>
 <p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
 <h2>What the figure shows, and how sure we are</h2>
-<ul><li><strong>How the plots work.</strong> In Michaelis-Menten kinetics the reaction rate rises with substrate and levels off at a maximum rate (Vmax) when the enzyme is saturated. Km is the substrate level that gives half the maximum rate, so a higher Km means more substrate is needed to reach the same rate. The Lineweaver-Burk plot draws the reciprocals (1/rate against 1/substrate) as a straight line, which makes changes in Vmax and Km easier to compare: the line meets the vertical axis at 1/Vmax and its steepness reflects Km. This is standard teaching in biochemistry and pharmacology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>How inhibitors differ.</strong> A competitive inhibitor resembles the substrate and competes for the active site, so it raises Km and leaves Vmax unchanged, and adding more substrate can overcome it. A non-competitive inhibitor binds at a separate (allosteric) site and distorts the enzyme, so it lowers Vmax and leaves Km unchanged, and more substrate cannot restore the maximum. An uncompetitive inhibitor binds only to the enzyme-substrate complex, so it lowers both Vmax and Km. The allosteric modulator toggle is shown as a positive modulator that partly raises activity. These are teaching toggles only.</li></ul>
-<p><strong>What was simplified.</strong> Uncompetitive inhibition is shown in the summary strip only and is not a slider setting. Multi-substrate reactions, cooperativity and sigmoidal kinetics, reversible binding steps in detail, enzyme concentration effects, and all doses and assay conditions are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
+<ul><li><strong>How the plots work.</strong> In Michaelis-Menten kinetics the reaction rate rises with substrate and levels off at a maximum rate (Vmax) when the enzyme is saturated. Km is the substrate level that gives half the maximum rate, so a higher Km means more substrate is needed to reach the same rate. The Lineweaver-Burk plot draws the reciprocals (1/rate against 1/substrate) as a straight line, which makes changes in Vmax and Km easier to compare: the line meets the vertical axis at 1/Vmax and its steepness reflects Km. This is standard teaching in biochemistry and pharmacology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>How inhibitors differ.</strong> A competitive inhibitor resembles the substrate and competes for the active site, so it raises Km and leaves Vmax unchanged, and adding more substrate can overcome it. A non-competitive inhibitor binds at a separate (allosteric) site and distorts the enzyme, so it lowers Vmax and leaves Km unchanged, and more substrate cannot restore the maximum. The modulator toggle is shown as a positive allosteric modulator that raises the maximum rate and lowers Km, helping against either inhibitor. These are teaching toggles only.</li></ul>
+<p><strong>What was simplified.</strong> Uncompetitive inhibition is not shown. Multi-substrate reactions, cooperativity and sigmoidal kinetics, reversible binding steps in detail, enzyme concentration effects, and all doses and assay conditions are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
 <p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
 <p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
-</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Inhibitor present","a":[0,1,2],"names":["no inhibitor","competitive inhibitor","non-competitive inhibitor"],"ticks":["none","competitive","non-competitive"],"start":0},"settings":[{"label":"none"},{"label":"more substrate"},{"label":"allosteric modulator"}],"drugNames":["no treatment","more substrate","an allosteric modulator"],"status":"Inhibitor: {level} · {drug} ·"}};
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Inhibitor present","a":[0,1,2],"names":["no inhibitor","competitive inhibitor","non-competitive inhibitor"],"ticks":["none","competitive","non-competitive"],"start":0},"settings":[{"label":"none"},{"label":"more substrate"},{"label":"allosteric modulator"}],"drugNames":["no treatment","more substrate","a modulator"],"status":"Inhibitor: {level} · {drug} ·"}};
 const modelOf = function modelOf(S, level, drug) {
   const INH = [{ v: 1, k: 1 }, { v: 1, k: 2.7 }, { v: 0.42, k: 1 }];
-  const TRT = [{ s: 0.38, v: 1, k: 1 }, { s: 0.95, v: 1, k: 1 }, { s: 0.38, v: 1.18, k: 0.72 }];
+  const TRT = [{ s: 0.38, v: 1, k: 1 }, { s: 0.95, v: 1, k: 1 }, { s: 0.38, v: 1.7, k: 0.45 }];
   const cl = (v) => Math.max(0, Math.min(1, v));
   const inh = INH[level], trt = TRT[drug];
   const Vmax = Math.min(0.97, 0.86 * inh.v * trt.v);
@@ -346,7 +352,7 @@ const modelOf = function modelOf(S, level, drug) {
   const moreSub = drug === 1 ? 1 : 0, modu = drug === 2 ? 1 : 0;
   const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
   const words = [w(Vmax, 0.55, 0.9, ["low", "usual", "high"]), w(KmG, 0.3, 0.65, ["low", "usual", "high"]), w(Rate, 0.28, 0.52, ["slow", "usual", "fast"])];
-  return { Vmax, KmF, KmN, KmG, Sub, SubG, Rate, comp, nonc, moreSub, modu, words, readout: "max rate " + words[0] + " \u00b7 Km " + words[1] + " \u00b7 rate " + words[2] };
+  return { Vmax, KmF, KmN, KmG, Sub, SubG, Rate, comp, nonc, moreSub, modu, words, readout: "max rate " + words[0] + " · Km " + words[1] + " · rate " + words[2] };
 };
 /* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
 const NS = "http://www.w3.org/2000/svg";
@@ -443,14 +449,14 @@ function run(scn) {
 
 /* Enzyme scene: substrate converted to product, inhibitor docking, Michaelis-Menten and Lineweaver-Burk plots, gauges. */
 const WW = SC.W;
-const layers = { main: $("enzMain"), parts: $("parts"), over: $("over"), panel: $("panel") };
+const layers = { main: $("enzMain"), parts: $("parts"), over: $("over"), panel: $("panel"), wash: $("subWash"), glow: $("rateGlow"), fill: $("mmFill"), cap: $("capLine") };
 const ENZ = { x: 112, y: 182, actX: 132, actY: 170, alloX: 88, alloY: 202, modX: 112, modY: 214 };
 const enzG = cell(layers.main, { cls: "enz", r: 34, nuc: 0, seed: 3, wob: 0.12 });
 mk("circle", { class: "enz-act", cx: 20, cy: -12, r: 9 }, enzG);
 mk("circle", { class: "enz-site", cx: -24, cy: 20, r: 7 }, enzG);
 mk("circle", { class: "enz-site", cx: 0, cy: 30, r: 6 }, enzG);
 place(enzG, ENZ.x, ENZ.y, 0, 1);
-const vigRects = [0, 1, 2].map(function (i) { return svg.querySelector("#vig" + i + " rect"); });
+const vigRects = [0, 1].map(function (i) { return svg.querySelector("#vig" + i + " rect"); });
 /* ---- particle pools ---- */
 function pool(n, build) { return Array.from({ length: n }, function () { const e = build(); e.setAttribute("opacity", "0"); return { e: e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0 }; }); }
 const subs = pool(18, function () { return mk("circle", { class: "sc-p p-sub", r: 5 }, layers.parts); });
@@ -460,6 +466,23 @@ const mods = pool(6, function () { return mk("path", { class: "sc-p p-modp", d: 
 const freeP = function (pl) { return pl.find(function (p) { return !p.on; }); };
 function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
 function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
+/* ---- one-line state summary inside the stage ---- */
+function capText(l, d) {
+  if (d === 1) {
+    if (l === 1) return "More substrate outnumbers the blocker at the active site, so the rate recovers.";
+    if (l === 2) return "More substrate cannot move the side site blocker, so the maximum rate stays low.";
+    return "More substrate fills more active sites, so the rate rises toward its ceiling.";
+  }
+  if (d === 2) {
+    if (l === 2) return "The modulator boosts the enzyme from a second site, so the maximum rate rises.";
+    if (l === 1) return "The modulator boosts the enzyme from its own site, so the rate recovers.";
+    return "The modulator sits on its own site and boosts the enzyme, so the rate rises.";
+  }
+  if (l === 1) return "No treatment. The blocker sits in the active site, so the rate stays slow.";
+  if (l === 2) return "No treatment. The blocker sits on its side site, so the maximum rate stays low.";
+  return "No inhibitor and no treatment. The enzyme turns substrate into product.";
+}
+let capKey = "";
 /* ---- labels and gauges ---- */
 const gg = {};
 function initPanel() {
@@ -477,19 +500,26 @@ function initPanel() {
   pill(ox, "Reciprocal", 720, 170, 800, 122, "Lineweaver-Burk plot: 1/rate against 1/substrate. It is a straight line. Where it meets the vertical axis shows 1/Vmax, and its steepness shows Km.");
 }
 const sm = { Vmax: 0.86, KmN: 0.32, Rate: 0.45, Sub: 0.38, SubG: 0.45, KmG: 0.4, comp: 0, nonc: 0, modu: 0 };
+const fast = { sub: 0.38, rate: 0.45 };
 const acc = { sub: 0, inh: 0, mod: 0 };
 function mmPath(Vmax, KmN) { let d = ""; for (let i = 0; i <= 24; i++) { const s = i / 24, v = Vmax * s / (KmN + s), x = 368 + 232 * s, y = 262 - 138 * v; d += (i ? "L" : "M") + f1(x) + " " + f1(y); } return d; }
+function mmArea(Vmax, KmN) { return mmPath(Vmax, KmN) + "L" + f1(368 + 232) + " 262L368 262Z"; }
 function lbPath(Vmax, KmN) { const ss = [1, 0.7, 0.45, 0.3, 0.2, 0.14]; let d = ""; ss.forEach(function (s, i) { const invS = 1 / s, invV = (KmN / Vmax) * invS + 1 / Vmax; const x = clamp(692 + (invS - 1) / 6.14 * 208, 692, 900), y = clamp(262 - (invV - 1) / 6 * 138, 126, 260); d += (i ? "L" : "M") + f1(x) + " " + f1(y); }); return d; }
 function init() { initPanel(); }
 function step(dt, m) {
-  const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.5);
+  const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.5), kf = Math.min(1, dt * 4);
   sm.Vmax = lerp(sm.Vmax, m.Vmax, k2); sm.KmN = lerp(sm.KmN, m.KmN, k2); sm.Rate = lerp(sm.Rate, m.Rate, k1); sm.Sub = lerp(sm.Sub, m.Sub, k1); sm.SubG = lerp(sm.SubG, m.SubG, k1); sm.KmG = lerp(sm.KmG, m.KmG, k2); sm.comp = lerp(sm.comp, m.comp, k1); sm.nonc = lerp(sm.nonc, m.nonc, k1); sm.modu = lerp(sm.modu, m.modu, k1);
+  fast.sub = lerp(fast.sub, m.Sub, kf); fast.rate = lerp(fast.rate, m.Rate, kf);
+  /* large washes so treatment on versus off reads at a glance: substrate flood, reaction glow */
+  layers.wash.setAttribute("opacity", (0.02 + 0.42 * fast.sub).toFixed(2));
+  layers.glow.setAttribute("opacity", clamp(fast.rate * 1.15 - 0.12, 0, 0.5).toFixed(2));
   /* enzyme pulses faster when the rate is high; modulator enlarges it a little */
   const es = 0.94 + 0.1 * sm.Rate + 0.07 * sm.modu + 0.02 * Math.sin(tm / 300);
   place(enzG, ENZ.x + Math.sin(tm / 1600) * 2, ENZ.y + Math.cos(tm / 1900) * 2, Math.sin(tm / 2400) * 5, es);
   vigRects.forEach(function (r, i) { if (r) r.setAttribute("opacity", ((i === 0 && sm.comp > 0.5) || (i === 1 && sm.nonc > 0.5)) ? "0.9" : "0"); });
   /* plots: current curve and line against the faint no-inhibitor baseline */
   $("mmCur").setAttribute("d", mmPath(sm.Vmax, sm.KmN)); $("mmBase").setAttribute("d", mmPath(0.86, 0.32));
+  layers.fill.setAttribute("d", mmArea(sm.Vmax, sm.KmN));
   $("lbCur").setAttribute("d", lbPath(sm.Vmax, sm.KmN)); $("lbBase").setAttribute("d", lbPath(0.86, 0.32));
   $("mmVmax").setAttribute("y1", f1(262 - 138 * sm.Vmax)); $("mmVmax").setAttribute("y2", f1(262 - 138 * sm.Vmax));
   const kmDot = $("mmKmDot"); kmDot.setAttribute("cx", f1(368 + 232 * Math.min(1, sm.KmN))); kmDot.setAttribute("cy", f1(262 - 138 * sm.Vmax / 2));
@@ -517,6 +547,8 @@ function step(dt, m) {
   /* gauges */
   gg.vmax.set(sm.Vmax, wordOf(sm.Vmax, 0.55, 0.9, ["low", "usual", "high"])); gg.km.set(sm.KmG, wordOf(sm.KmG, 0.3, 0.65, ["low", "usual", "high"]));
   gg.rate.set(sm.Rate, wordOf(sm.Rate, 0.28, 0.52, ["slow", "usual", "fast"])); gg.sub.set(sm.SubG, wordOf(sm.SubG, 0.35, 0.7, ["low", "usual", "high"]));
+  const key = level + ":" + drug;
+  if (key !== capKey) { capKey = key; const t = capText(level, drug); if (layers.cap.textContent !== t) layers.cap.textContent = t; }
 }
 run({ init: init, step: step });
 </script></body></html>

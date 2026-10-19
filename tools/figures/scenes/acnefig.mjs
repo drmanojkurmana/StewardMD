@@ -60,13 +60,13 @@ const body = `
 <text class="sc-zone" x="34" y="68">SKIN AND PILOSEBACEOUS UNIT</text>
 <text class="sc-zone sc-dim" x="34" y="128">EPIDERMIS</text>
 <text class="sc-zone sc-dim" x="34" y="162">DERMIS</text>
+<ellipse id="halo" class="sc-halo" cx="450" cy="245" rx="150" ry="125" opacity="0"/>
 <path class="sc-foll" d="M448 108 L462 342 Q480 356 498 342 L512 108 L498 108 L492 326 Q480 334 468 326 L462 108 Z"/>
-<path class="sc-duct" d="M448 232 L466 246 L466 262 L442 252 Z"/>
 <rect id="vessel" class="sc-lumen" x="14" y="392" width="${W - 28}" height="34"/>
 <text class="sc-zone sc-dim" x="34" y="414">DERMAL VESSEL</text>
 <path id="hair" class="sc-hair" d="M477 58 L483 58 L482 330 L478 330 Z"/>
 <g id="nodule"></g>
-<g id="gland"></g>
+<g id="glandSlot"></g>
 <g id="plug"></g>
 <g id="lesion"></g>
 <g id="bac"></g>
@@ -83,7 +83,9 @@ body[data-theme="light"]{--c-seb:#c9931a;--c-ker:#b89b5e;--c-cac:#4fa63c;--c-les
 .sc-epi{fill:color-mix(in srgb,var(--c-endo) 34%,var(--anatomy-paper));opacity:.85}
 .sc-derm{fill:color-mix(in srgb,var(--c-tis) 70%,var(--anatomy-paper));opacity:.5}
 .sc-foll{fill:color-mix(in srgb,var(--c-ker) 16%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.2}
-.sc-duct{fill:color-mix(in srgb,var(--c-seb) 30%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
+.sc-halo{fill:var(--c-les);stroke:none}
+.sc-sebduct{fill:color-mix(in srgb,var(--c-seb) 45%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
+.ac-cap{fill:var(--anatomy-strong);font-size:13px}
 .sc-hair{fill:#8a6a4a;stroke:#6b4f33;stroke-width:.8}
 .sc-plug{fill:var(--c-ker);stroke:color-mix(in srgb,var(--c-ker) 55%,#000);stroke-width:1}
 .sc-lesion{fill:var(--c-les);opacity:.55}
@@ -102,7 +104,7 @@ buildScene({
   label: "An animated cross section of skin with a hair follicle and sebaceous gland. Androgen driven sebum and abnormal shedding of follicle lining cells form a comedone plug. Cutibacterium acnes grows in the plugged, sebum rich follicle and inflammation follows, making papules and pustules and, when deep, nodules that can scar. Gauges show sebum, plug, bacteria, inflammation, lesion and scar risk. Treatment concepts include a topical retinoid, an antibiotic with benzoyl peroxide, and oral isotretinoin.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
   scene: { W, H }, pageJs: readFileSync(join(HERE, "acnefig.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  withoutLabel: "Without treatment", withLabel: "With oral isotretinoin",
   sourcesLis: [
     "<strong>How acne develops.</strong> Four linked steps are standard teaching: androgens at puberty enlarge sebaceous glands and increase sebum; follicle lining cells shed abnormally and stick together (follicular hyperkeratinisation), plugging the follicle as a comedone; Cutibacterium acnes (formerly Propionibacterium acnes), a normal skin resident, multiplies in the plugged sebum rich follicle; and inflammation follows, from early inflammatory signals around the follicle to papules, pustules and, when deep and intense, nodules and cyst like lesions that can scar. Whiteheads are closed comedones and blackheads are open comedones, the dark colour coming from exposed keratin and lipid, not dirt. This is standard teaching in dermatology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> A topical retinoid mainly normalises follicle shedding and unplugs comedones. An antibiotic with benzoyl peroxide mainly reduces C. acnes and inflammation (benzoyl peroxide also limits resistance). Oral isotretinoin, shown as a concept only, shrinks sebaceous glands and cuts sebum, and indirectly reduces plugging, bacteria and inflammation. They are teaching toggles only.",

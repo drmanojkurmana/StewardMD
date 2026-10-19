@@ -1,7 +1,20 @@
-/* Asthma scene: allergen, dendritic and Th2 cells, B cell IgE, mast cell degranulation, eosinophils, mucus, smooth muscle, remodelling and gauges. */
-const L = { lumen: $("lumen"), arrows: $("arrows"), mucus: $("mucus"), epi: $("epi"), base: $("base"), glands: $("glands"), vessel: $("vessel"), muscle: $("muscle"), parts: $("parts"), immune: $("immune"), marks: $("marks"), over: $("over"), panel: $("panel") };
+/* Asthma scene: lung inset with bronchus, allergen, dendritic and Th2 cells, B cell IgE, mast cell degranulation, eosinophils, mucus, smooth muscle, remodelling and gauges. */
+const L = { lung: $("lungSlot"), airway: $("airway"), lumen: $("lumen"), arrows: $("arrows"), mucus: $("mucus"), epi: $("epi"), base: $("base"), glands: $("glands"), vessel: $("vessel"), muscle: $("muscle"), parts: $("parts"), immune: $("immune"), rx: $("rx"), marks: $("marks"), over: $("over"), panel: $("panel") };
 const W = SC.W, WB = 195, MY = 370, VY = 422, EPI_N = 22, EW = 932 / EPI_N;
-let wallY = WB;
+const BRONC = [114, 101];
+let wallY = WB, lungO = null, airTr = null, capEl = null, capDrug = -1;
+function initOrgans() {
+  lungO = organ(L.lung, "lung", 70, 98, 76, { flip: true });
+  const bp = lungO.ports.in;
+  airTr = track([[bp[0], bp[1]], [300, 100], [500, 120], [700, 142]]);
+}
+function capText(d) {
+  if (d === 1) return "Reliever relaxes the muscle. Air opens but inflammation stays.";
+  if (d === 2) return "Steroid calms the wall. Less mucus, swelling and twitchiness.";
+  if (d === 3) return "Anti-IgE mops up IgE. Mast cells fire less.";
+  if (d === 4) return "Reliever plus steroid. Open airway with a calmer wall.";
+  return "No treatment. The airway is tight and mucus blocks air.";
+}
 /* ---- epithelium: ciliated cells, every fifth a goblet cell ---- */
 const epi = [];
 function initEpi() {
@@ -54,16 +67,28 @@ function initArrows() { for (const k in T) { const pts = T[k]; mk("path", { clas
 /* ---- particles ---- */
 const parts = Array.from({ length: 130 }, () => ({ e: mk("circle", { r: 2.2, opacity: 0 }, L.parts), on: false, u: 0, f: null }));
 function emitP(f) { const p = parts.find((q) => !q.on); if (!p) return; p.on = true; p.f = f; p.u = 0; p.e.setAttribute("class", "sc-p " + f.cls); p.e.setAttribute("r", f.k === "ige" ? 3 : 2.3); p.e.setAttribute("opacity", "1"); }
-const trig = Array.from({ length: 20 }, () => { const e = mk("path", { opacity: 0 }, L.parts); return { e, on: false, x: 0, y: 0, vx: 0 }; });
+const trig = Array.from({ length: 20 }, () => { const e = mk("path", { opacity: 0 }, L.parts); return { e, on: false, x: 0, y: 0, vx: 0, vy: 30 }; });
 const star = "M0 -5L1.4 -1.4L5 0L1.4 1.4L0 5L-1.4 1.4L-5 0L-1.4 -1.4Z";
-/* ---- treatment marks ---- */
-const MARKS = { 1: [], 2: [[250, 252], [540, 228], [332, 200]], 3: [[250, 252], [540, 228], [332, 200]], 4: [[455, 236], [530, 216]] };
+/* ---- treatment marks (setting order: 1 reliever, 2 steroid, 3 anti-IgE, 4 both) ---- */
+const MARKS = { 1: [], 2: [[250, 252], [540, 228], [332, 200]], 3: [[455, 236], [530, 216]], 4: [[250, 252], [540, 228], [332, 200]] };
 const mk2 = {};
 function initMarks() {
   for (const d in MARKS) { const g = mk("g", { opacity: 0 }, L.marks); mk2[d] = g;
     MARKS[d].forEach(([x, y]) => { mk("circle", { class: "blk-c", cx: x, cy: y, r: 7.5 }, g); mk("path", { class: "blk-x", d: "M" + (x - 3.6) + " " + (y - 3.6) + "l7.2 7.2M" + (x + 3.6) + " " + (y - 3.6) + "l-7.2 7.2" }, g); });
-    if (+d === 1 || +d === 3) [300, 560, 820].forEach((x) => { mk("path", { class: "bd-a", d: "M" + x + " " + (MY - 26) + "l0 -10l-5 5M" + x + " " + (MY - 36) + "l5 5" }, g); mk("path", { class: "bd-a", d: "M" + (x + 14) + " " + (MY + 26) + "l0 10l-5 -5M" + (x + 14) + " " + (MY + 36) + "l5 -5" }, g); });
-    if (+d === 4) mk("path", { class: "blk-y", d: "M470 250l0 -7M465 238l5 5l5 -5" }, g); }
+    if (+d === 1 || +d === 4) [300, 560, 820].forEach((x) => { mk("path", { class: "bd-a", d: "M" + x + " " + (MY - 26) + "l0 -10l-5 5M" + x + " " + (MY - 36) + "l5 5" }, g); mk("path", { class: "bd-a", d: "M" + (x + 14) + " " + (MY + 26) + "l0 10l-5 -5M" + (x + 14) + " " + (MY + 36) + "l5 -5" }, g); });
+    if (+d === 3) mk("path", { class: "blk-y", d: "M470 250l0 -7M465 238l5 5l5 -5" }, g); }
+}
+/* ---- animated drug particles: reliever rides the airway to the muscle, steroid docks on immune cells, anti-IgE caps mast cell IgE ---- */
+const REL_SITES = [[300, MY], [560, MY], [820, MY]];
+const STER_T = [[250, 265], [370, 235], [530, 240], [650, 275], [110, 250], [585, 300]];
+const relPool = [], sterPool = [], bioPool = [], airPool = [], haloG = [], capY = [];
+function initRx() {
+  for (let i = 0; i < 10; i++) { const e = mk("circle", { class: "sc-p p-rel", r: 3.4, opacity: 0 }, L.rx); relPool.push({ e, st: 0, u: 0, ue: 0.7, x: 0, y: 0, dx: 0, dy: 0, t: 0 }); }
+  for (let i = 0; i < 12; i++) { const e = mk("circle", { class: "sc-p p-ster", r: 2.8, opacity: 0 }, L.rx); sterPool.push({ e, st: 0, x: 0, y: 0, tx: 0, ty: 0, ph: rnd(0, 6.28) }); }
+  for (let i = 0; i < 8; i++) { const e = mk("path", { class: "bio-cap", d: "M0 0L0 -6M-3.5 -10L0 -6L3.5 -10", opacity: 0 }, L.rx); bioPool.push({ e, u: i / 8, ph: rnd(0, 6.28) }); }
+  for (let i = 0; i < 8; i++) { const e = mk("circle", { class: "sc-p p-air", r: 2.2, opacity: 0 }, L.rx); airPool.push({ e, on: false, u: 0 }); }
+  REL_SITES.forEach(([x, y]) => haloG.push(mk("ellipse", { class: "rel-halo", cx: x, cy: y, rx: 34, ry: 14, opacity: 0 }, L.rx)));
+  [["m1", 0], ["m1", 2], ["m1", 4], ["m2", 1], ["m2", 3], ["m2", 5]].forEach(([k, j]) => { const e = mk("path", { class: "bio-cap", d: "M0 0L0 -6M-3.5 -10L0 -6L3.5 -10", opacity: 0 }, L.rx); capY.push({ e, k, j }); });
 }
 /* ---- labels and gauges ---- */
 const gg = {}, dpills = {};
@@ -74,8 +99,9 @@ function initPanel() {
   [["eos", "Eosinophils", "g-eos", "Eosinophils in the airway wall, called in by IL-5 from Th2 cells. Their granule proteins damage the lining and keep inflammation going."], ["mast", "Mast cell", "g-mast", "Mast cell activation. IgE on the surface is cross-linked by allergen and the cell releases histamine and other mediators."], ["muc", "Mucus", "g-mucus", "Mucus from goblet cells and submucosal glands. It becomes thick in asthma and can plug the lumen."], ["bron", "Tightening", "g-bad", "Bronchoconstriction: how much the airway smooth muscle is tightening and narrowing the lumen."], ["remod", "Remodelling", "g-remod", "Remodelling of the wall with repeated inflammation: thicker basement membrane, larger muscle and glands. It reverses slowly, if at all."], ["air", "Airflow", "g-air", "How open the airway is. A reliever raises this fast but does not change the inflammation underneath."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
   const ox = L.over;
-  pill(ox, "Allergen", 620, 72, 660, 64, "Inhaled allergen such as pollen or house dust mite. It reaches the airway lining and, on re-exposure, cross-links IgE on mast cells.");
-  pill(ox, "Epithelium", 140, 168, 180, 96, "The airway lining. It senses allergen and other triggers, and its cilia sweep mucus out. Eosinophil proteins can injure it.");
+  pill(ox, "Lung", 70, 80, 150, 90, "Lung inset. This figure magnifies one small airway wall; inhaled air and allergen enter through the bronchus.");
+  pill(ox, "Allergen", 620, 72, 660, 64, "Inhaled allergen such as pollen or house dust mite. It enters through the bronchus, reaches the airway lining and, on re-exposure, cross-links IgE on mast cells.");
+  pill(ox, "Epithelium", 250, 178, 250, 96, "The airway lining. It senses allergen and other triggers, and its cilia sweep mucus out. Eosinophil proteins can injure it.");
   pill(ox, "Goblet cell", 332, 168, 385, 96, "Goblet cells in the lining make mucus. IL-13 from Th2 cells turns them up and increases their number.");
   pill(ox, "Mucus plug", 544, 148, 570, 110, "Thick mucus sitting in the lumen. When it plugs a small airway, air cannot pass and airflow falls.");
   pill(ox, "Remodelled wall", 420, 182, 825, 96, "With repeated inflammation the wall remodels: the basement membrane thickens, smooth muscle and submucosal glands enlarge, and narrowing becomes harder to reverse fully.");
@@ -89,16 +115,18 @@ function initPanel() {
   pill(ox, "Submucosal gland", 800, 292, 875, 338, "Submucosal glands make mucus. In remodelling they enlarge and add to plugging.");
   [["il13", "IL-13", 275, 228, 190, 338, "IL-13 from Th2 cells: more mucus, more goblet cells and twitchy smooth muscle."], ["il4", "IL-4", 315, 246, 305, 338, "IL-4 from Th2 cells: pushes B cells to make IgE and helps Th2 cells grow."], ["ige", "IgE", 455, 236, 465, 338, "IgE antibody made by B cells. It sits on mast cells and waits for allergen."], ["il5", "IL-5", 430, 300, 545, 338, "IL-5 from Th2 cells: calls eosinophils in from the blood and keeps them alive."], ["hist", "Histamine", 545, 300, 660, 338, "Histamine and other mast cell mediators. They tighten smooth muscle, widen and leak small vessels, and increase mucus."]]
     .forEach(([k, n, x, y, tx, ty, tip]) => { pill(ox, n, x, y, tx, ty, tip); });
-  [[1, "Reliever: muscle relaxes", 560, MY, 510, 64, "A reliever bronchodilator relaxes airway smooth muscle and opens the airway quickly. It does not treat the inflammation underneath."], [2, "Steroid: calms wall", 300, 220, 500, 64, "An inhaled corticosteroid switches off many inflammatory genes in lining, immune and mast cells, so eosinophils, mucus and twitchiness fall over time."], [3, "Steroid plus reliever", 560, MY, 505, 64, "Inhaled steroid for the inflammation plus a reliever for quick muscle relaxation: control of the cause with fast relief."], [4, "Anti-IgE: IgE mopped up", 500, 226, 510, 64, "An anti-IgE biologic binds IgE so mast cells are less well armed and degranulate less on allergen exposure."]]
+  [[1, "Reliever: muscle relaxes", 560, MY, 510, 64, "A reliever bronchodilator relaxes airway smooth muscle and opens the airway quickly. It does not treat the inflammation underneath."], [2, "Steroid: calms wall", 300, 220, 500, 64, "An inhaled corticosteroid switches off many inflammatory genes in lining, immune and mast cells, so eosinophils, mucus and twitchiness fall over time."], [3, "Anti-IgE: IgE mopped up", 500, 226, 510, 64, "An anti-IgE biologic binds IgE so mast cells are less well armed and degranulate less on allergen exposure."], [4, "Steroid plus reliever", 560, MY, 505, 64, "Inhaled steroid for the inflammation plus a reliever for quick muscle relaxation: control of the cause with fast relief."]]
     .forEach(([d, n, x, y, tx, ty, tip]) => { dpills[d] = pill(ox, n, x, y, tx, ty, tip); dpills[d].style.opacity = 0; });
+  capEl = mk("text", { class: "as-cap", x: 930, y: 136, "text-anchor": "end" }, ox); capEl.textContent = capText(0);
 }
 const acc = { allergen: 0 };
 const s = { T2: 0.5, Ig: 0.5, mast: 0.5, eos: 0.5, muc: 0.5, remod: 0.3, bron: 0.5, air: 0.5 }, dw = [1, 0, 0, 0, 0];
-function init() { initArrows(); initVessel(); initMuscle(); initBase(); initEpi(); initMucus(); initImmune(); initMobile(); initMarks(); initPanel(); }
+function init() { initOrgans(); initArrows(); initVessel(); initMuscle(); initBase(); initEpi(); initMucus(); initImmune(); initMobile(); initRx(); initMarks(); initPanel(); }
 function step(dt, m) {
   const k2 = Math.min(1, dt * 0.55), k1 = Math.min(1, dt * 1.2);
   for (const q of ["T2", "Ig", "mast", "eos", "muc", "remod", "bron", "air"]) s[q] = lerp(s[q], m[q], q === "bron" || q === "air" ? k1 : k2);
   dw.forEach((_, d) => { dw[d] = lerp(dw[d], m.drug === d ? 1 : 0, k1); });
+  const reliefW = Math.max(dw[1], dw[4]), icsW = Math.max(dw[2], dw[4]), bioW = dw[3];
   wallY = WB - 46 * s.bron - 10 * s.remod + 2 * Math.sin(tm / 1100);
   L.lumen.setAttribute("height", f1(wallY - 44));
   epi.forEach((e) => { place(e.g, e.x, wallY + 6 + Math.sin(tm / 900 + e.i) * 0.6, 0, 1); if (e.ci) { let d = ""; for (const o of [-6, 0, 6]) d += "M" + f1(o) + " -9q" + f1(Math.sin(tm / 260 + e.i + o) * 3) + " -5 " + f1(Math.sin(tm / 300 + o) * 3) + " -10"; e.ci.setAttribute("d", d); }
@@ -110,21 +138,50 @@ function step(dt, m) {
   sm.forEach((c) => { const sx = (1 - 0.28 * s.bron) * (1 + 0.15 * s.remod), sy = (1 + 0.3 * s.bron) * (1 + 0.12 * s.remod); c.g.setAttribute("transform", "translate(" + f1(c.x) + " " + f1(c.y) + ") scale(" + sx.toFixed(2) + " " + sy.toFixed(2) + ")"); });
   for (const k in fix) { const f = fix[k], act = k === "m1" || k === "m2" ? s.mast : k === "b" ? s.Ig : s.T2; place(f.g, f.x + Math.sin(tm / 1500 + f.ph) * 2.5, f.y + Math.cos(tm / 1700 + f.ph) * 2.2, Math.sin(tm / 2400 + f.ph) * 5, 1 + 0.05 * act * Math.sin(tm / 320 + f.ph)); f.g.style.opacity = (0.55 + 0.45 * clamp(act * 1.3)).toFixed(2); }
   granules.forEach((g) => g.e.setAttribute("opacity", (1 - 0.7 * s.mast).toFixed(2)));
-  ige.forEach((y) => { const a = clamp((1 - 0.85 * dw[4]) * (0.3 + 0.7 * s.T2)); y.e.style.opacity = a.toFixed(2); });
+  ige.forEach((y) => { const a = clamp((1 - 0.85 * bioW) * (0.3 + 0.7 * s.T2)); y.e.style.opacity = a.toFixed(2); });
   const ne = Math.round(s.eos * 7);
   mob.forEach((o) => { const want = o.i < ne, op = parseFloat(o.g.style.opacity || 0);
     if (o.st === 0) { if (want) { o.st = 1; o.x = o.hx + rnd(-26, 26); o.y = VY - 10; o.g.style.opacity = 1; } }
     else if (o.st === 1) { o.y -= 46 * dt; o.x += (o.hx - o.x) * dt * 0.8; place(o.g, o.x, o.y, 0, 1); if (o.y <= o.hy) o.st = 2; if (!want) o.st = 3; }
     else if (o.st === 2) { place(o.g, o.hx + Math.sin(tm / 700 + o.i) * 7, o.hy + Math.cos(tm / 900 + o.i * 2) * 5, Math.sin(tm / 500 + o.i) * 14, 1); if (!want) o.st = 3; }
     else { o.g.style.opacity = Math.max(0, op - dt * 0.7); if (op < 0.06) { o.st = 0; o.g.style.opacity = 0; } } });
-  const rate = { T2: s.T2, Ig: s.Ig * (1 - 0.7 * dw[4]), eos: s.eos * (1 - 0.5 * dw[2]) * (1 - 0.5 * dw[3]), mast: s.mast, muc: s.muc * s.T2 };
-  FLOWS.forEach((f) => { let r = f.rate * (rate[f.src] || 0); if (f.k === "ige") r *= 1 - 0.6 * dw[4]; if (f.k === "hist1" || f.k === "hist2") r *= 1 - 0.65 * dw[4]; r *= 1 - 0.45 * dw[2] - 0.45 * dw[3]; f.acc += dt * r; while (f.acc >= 1) { f.acc--; emitP(f); } });
-  parts.forEach((p) => { if (!p.on) return; p.u += dt * 0.45; const a = p.f.tr.at(p.u); p.e.setAttribute("cx", f1(a.x + Math.sin(tm / 300 + p.u * 9) * 1.2)); p.e.setAttribute("cy", f1(a.y)); if (p.u > 1) { p.on = false; p.e.setAttribute("opacity", "0"); } else p.e.setAttribute("opacity", f1(Math.min(1, p.u * 6, (1 - p.u) * 6))); });
+  const rate = { T2: s.T2, Ig: s.Ig * (1 - 0.7 * bioW), eos: s.eos * (1 - 0.5 * icsW), mast: s.mast, muc: s.muc * s.T2 };
+  FLOWS.forEach((f) => { let r = f.rate * (rate[f.src] || 0); if (f.k === "ige") r *= 1 - 0.6 * bioW; if (f.k === "hist1" || f.k === "hist2") r *= 1 - 0.65 * bioW; r *= 1 - 0.45 * icsW; f.acc += dt * r; while (f.acc >= 1) { f.acc--; emitP(f); } });
+  parts.forEach((p) => { if (!p.on) return;
+    if (p.f.k === "ige" && bioW > 0.5 && Math.random() < bioW * dt * 2.5) { p.on = false; p.e.setAttribute("opacity", "0"); return; }
+    p.u += dt * 0.45; const a = p.f.tr.at(p.u); p.e.setAttribute("cx", f1(a.x + Math.sin(tm / 300 + p.u * 9) * 1.2)); p.e.setAttribute("cy", f1(a.y)); if (p.u > 1) { p.on = false; p.e.setAttribute("opacity", "0"); } else p.e.setAttribute("opacity", f1(Math.min(1, p.u * 6, (1 - p.u) * 6))); });
   acc.allergen += dt * 2.6 * (0.3 + m.a);
-  while (acc.allergen >= 1) { acc.allergen--; const p = trig.find((q) => !q.on); if (p) { p.on = true; p.x = rnd(280, 780); p.y = 52; p.vx = rnd(-6, 6); p.e.setAttribute("d", star); p.e.setAttribute("class", "p-allergen"); } }
-  trig.forEach((p) => { if (!p.on) return; p.y += 30 * dt; p.x += p.vx * dt + Math.sin(tm / 500 + p.x) * 0.2; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(p.y * 3) + ")"); p.e.setAttribute("opacity", "1"); if (p.y > wallY - 16) { p.on = false; p.e.setAttribute("opacity", "0"); } });
-  for (const d in mk2) mk2[d].setAttribute("opacity", dw[d].toFixed(2)); for (const d in dpills) dpills[d].style.opacity = dw[d].toFixed(2);
+  while (acc.allergen >= 1) { acc.allergen--; const p = trig.find((q) => !q.on); if (p) { p.on = true; p.x = BRONC[0] + rnd(-8, 8); p.y = BRONC[1] + rnd(-8, 8); p.vx = rnd(30, 130); p.vy = rnd(15, 38); p.e.setAttribute("d", star); p.e.setAttribute("class", "p-allergen"); } }
+  trig.forEach((p) => { if (!p.on) return; p.y += p.vy * dt; p.x += p.vx * dt + Math.sin(tm / 500 + p.x) * 0.2; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(p.y * 3) + ")"); p.e.setAttribute("opacity", "1"); if (p.y > wallY - 16 || p.x > 930) { p.on = false; p.e.setAttribute("opacity", "0"); } });
+  for (const d in mk2) { const pu = (+d === 1 || +d === 4) ? 0.8 + 0.2 * Math.sin(tm / 300) : 1; mk2[d].setAttribute("opacity", clamp(dw[d] * pu).toFixed(2)); }
+  for (const d in dpills) dpills[d].style.opacity = dw[d].toFixed(2);
+  /* reliever rides the airway and docks on the muscle */
+  relPool.forEach((q) => {
+    if (reliefW < 0.3) { if (q.st !== 0) { q.e.setAttribute("opacity", "0"); q.st = 0; } return; }
+    if (q.st === 0) { if (Math.random() < reliefW * dt * 1.2) { q.st = 1; q.u = 0; q.ue = rnd(0.45, 0.9); const ds = REL_SITES[Math.floor(Math.random() * 3)]; q.dx = ds[0] + rnd(-24, 24); q.dy = ds[1] + rnd(-8, 8); } return; }
+    if (q.st === 1) { q.u += dt * 0.55; const a = airTr.at(Math.min(1, q.u)); q.x = a.x; q.y = a.y; q.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")"); q.e.setAttribute("opacity", "1"); if (q.u >= q.ue) q.st = 2; }
+    else if (q.st === 2) { q.x += (q.dx - q.x) * Math.min(1, dt * 3); q.y += (q.dy - q.y) * Math.min(1, dt * 3); q.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")"); q.e.setAttribute("opacity", "1"); if (Math.hypot(q.dx - q.x, q.dy - q.y) < 3) { q.st = 3; q.t = 0; } }
+    else if (q.st === 3) { q.t += dt; const wob = 1 + 0.18 * Math.sin(tm / 240 + q.dy); q.e.setAttribute("transform", "translate(" + f1(q.dx) + " " + f1(q.dy) + ") scale(" + wob.toFixed(2) + ")"); q.e.setAttribute("opacity", clamp(1.2 - q.t / 3).toFixed(2)); if (q.t > 3.6) q.st = 0; }
+  });
+  haloG.forEach((h) => h.setAttribute("opacity", (reliefW * (0.45 + 0.25 * Math.sin(tm / 300)) * clamp(s.air + 0.3)).toFixed(2)));
+  /* steroid drifts down and sits on immune cells */
+  sterPool.forEach((q) => {
+    if (q.st === 0) { if (icsW > 0.4 && Math.random() < icsW * dt * 1.4) { const tg = STER_T[Math.floor(Math.random() * STER_T.length)]; q.tx = tg[0] + rnd(-16, 16); q.ty = tg[1] + rnd(-14, 14); q.x = q.tx + rnd(-40, 40); q.y = 62; q.st = 1; } return; }
+    if (q.st === 1) { q.x += (q.tx - q.x) * Math.min(1, dt * 2.2); q.y += (q.ty - q.y) * Math.min(1, dt * 2.2); q.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")"); q.e.setAttribute("opacity", "1"); if (Math.hypot(q.tx - q.x, q.ty - q.y) < 4) q.st = 2; }
+    else if (icsW < 0.3) { q.st = 0; q.e.setAttribute("opacity", "0"); }
+    else { q.e.setAttribute("transform", "translate(" + f1(q.tx + Math.sin(tm / 700 + q.ph) * 3) + " " + f1(q.ty + Math.cos(tm / 900 + q.ph) * 3) + ")"); q.e.setAttribute("opacity", "1"); }
+  });
+  /* anti-IgE hovers over the IgE path and caps mast cell receptors */
+  bioPool.forEach((q) => { const u = (q.u + tm / 24000) % 1, g = T.ige, px = g[0][0] + (g[2][0] - g[0][0]) * u, py = g[0][1] + (g[2][1] - g[0][1]) * u;
+    q.e.setAttribute("transform", "translate(" + f1(px + Math.sin(tm / 600 + q.ph) * 4) + " " + f1(py - 12 + Math.cos(tm / 750 + q.ph) * 3) + ")"); q.e.setAttribute("opacity", bioW.toFixed(2)); });
+  capY.forEach((c) => { const f = fix[c.k]; if (!f) return; const t = c.j * 1.05 + (c.k === "m2" ? 1 : 0);
+    c.e.setAttribute("transform", "translate(" + f1(f.x + Math.cos(t) * 24 + Math.sin(tm / 1500 + f.ph) * 2.5) + " " + f1(f.y + Math.sin(t) * 24 - 3 + Math.cos(tm / 1700 + f.ph) * 2.2) + ") rotate(" + f1(t * 57.3 + 90) + ")"); c.e.setAttribute("opacity", (bioW * 0.95).toFixed(2)); });
+  /* air puffs stream through the bronchus; more when the airway is open */
+  airPool.forEach((q) => { if (!q.on) { if (Math.random() < dt * (0.6 + 7 * s.air)) { q.on = true; q.u = 0; } else { q.e.setAttribute("opacity", "0"); return; } }
+    q.u += dt * (0.35 + 0.5 * s.air); if (q.u >= 1) { q.on = false; q.e.setAttribute("opacity", "0"); return; }
+    const a = airTr.at(q.u); q.e.setAttribute("cx", f1(a.x)); q.e.setAttribute("cy", f1(a.y)); q.e.setAttribute("opacity", f1(Math.min(1, q.u * 8, (1 - q.u) * 4) * (0.25 + 0.75 * s.air))); });
   gg.eos.set(s.eos, wordOf(s.eos, 0.28, 0.58, ["low", "raised", "high"])); gg.mast.set(s.mast, wordOf(s.mast, 0.28, 0.58, ["quiet", "primed", "firing"])); gg.muc.set(s.muc, wordOf(s.muc, 0.3, 0.62, ["thin", "thick", "plugging"]));
   gg.bron.set(s.bron, wordOf(s.bron, 0.3, 0.58, ["relaxed", "narrowed", "tight"])); gg.remod.set(s.remod, wordOf(s.remod, 0.3, 0.58, ["little", "some", "marked"])); gg.air.set(s.air, wordOf(s.air, 0.32, 0.62, ["low", "reduced", "open"]));
+  if (drug !== capDrug) { capDrug = drug; const t = capText(drug); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 run({ init, step });

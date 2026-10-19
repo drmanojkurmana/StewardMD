@@ -59,24 +59,23 @@ for (let y = 356; y <= 432; y += 18) grid += `<path class="dg-grid${(y - 356) % 
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
 <text class="sc-zone" x="34" y="68">HEART MUSCLE CELL</text>
-<text class="sc-zone" x="510" y="68">CONDUCTION AND TOXICITY SIGNS</text>
+<text class="sc-zone" x="510" y="68">CONDUCTION AND WARNING SIGNS</text>
 <rect class="dg-cell" x="30" y="80" width="430" height="270" rx="16"/>
 <rect class="dg-extra" x="30" y="80" width="430" height="48" rx="16"/>
 <path class="dg-memb" d="M30 128H460"/>
-<text class="sc-zone sc-dim" x="44" y="100">OUTSIDE</text>
-<text class="sc-zone sc-dim" x="44" y="152">INSIDE</text>
 <rect class="dg-ecgbg" x="496" y="348" width="434" height="92" rx="14"/>
 <g clip-path="url(#dgclip)">${grid}</g>
 <clipPath id="dgclip"><rect x="506" y="356" width="414" height="76"/></clipPath>
 <text class="sc-zone sc-dim" x="510" y="368">ECG</text>
+<g id="heartSlot"></g><g id="eyeSlot"></g><g id="gutSlot"></g>
 <g id="cellg"></g><g id="cond"></g><g id="signs"></g><g id="ecg"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "digoxin-toxicity", fig: "Fig 1", title: "Digoxin: action and toxicity", W, H, body,
-  label: "An animated heart muscle cell, conduction pathway, ECG and toxicity signs. Digoxin blocks the sodium potassium pump, sodium and then calcium build up inside the cell and contraction strengthens. Vagal action slows the AV node. In toxicity, potassium builds up outside cells, the gut and eyes are affected and dangerous rhythms appear. Treatments are stopping the drug, correcting potassium and digoxin antibody fragments.",
+  label: "An animated heart muscle cell, a beating heart, conduction pathway, ECG and warning signs. Digoxin blocks the sodium potassium pump, sodium and then calcium build up inside the cell and contraction strengthens. Vagal action slows the AV node. In toxicity the eye sees halos, the gut is sick and dangerous rhythms appear. Treatments are stopping the drug, correcting potassium, digoxin antibody fragments, and all three together.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, levels or numbers are shown or implied.",
   scene: { W, H }, pageJs: readFileSync(join(HERE, "digoxin.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  withoutLabel: "Without treatment", withLabel: "With all measures", organs: true,
   sourcesLis: [
     "<strong>How digoxin works.</strong> Digoxin inhibits the membrane sodium potassium ATPase pump. Sodium then accumulates inside the heart muscle cell, the sodium calcium exchanger removes less calcium, intracellular calcium rises and contraction becomes stronger (positive inotropy). Digoxin also increases vagal tone, slowing conduction through the AV node and slowing the pulse. This is standard teaching in pharmacology and cardiology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Toxicity.</strong> Excess pump blockade gives nausea and vomiting, visual disturbance often described as yellow tinged vision or halos, confusion, and cardiac arrhythmias with AV block; acute severe poisoning raises extracellular potassium (hyperkalaemia) because the pump can no longer move potassium into cells. Low potassium (hypokalaemia) lets digoxin bind the pump more strongly and worsens toxicity, which is why correcting potassium matters. Teaching toggles only.",
@@ -106,6 +105,10 @@ body[data-theme="light"]{--c-dig:#b45309;--c-ca:#0284c7;--c-kx:#65a30d;--c-na:#b
 .dg-gut{fill:var(--c-eos);stroke:color-mix(in srgb,var(--c-eos) 55%,#000);stroke-width:1.1}
 .dg-sarc{stroke:var(--anatomy-mid);stroke-width:2;stroke-linecap:round}
 .dg-sarc2{stroke:var(--c-rbc);stroke-width:3;stroke-linecap:round}
+.dg-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
+.dg-glow{fill:var(--c-bad);stroke:none}
+.dg-wash{fill:var(--c-na);stroke:none}
+.dg-gutglow{fill:var(--c-kx);stroke:none}
 .p-dig{--cc:var(--c-dig)}.p-na{--cc:var(--c-na)}.p-ca{--cc:var(--c-ca)}.p-kx{--cc:var(--c-kx)}.p-fab{fill:none;stroke:var(--c-ab);stroke-width:1.8;stroke-linecap:round}
 .dr-g-fill.g-dig{fill:var(--c-dig)}.dr-g-fill.g-ca{fill:var(--c-ca)}.dr-g-fill.g-kx{fill:var(--c-kx)}
 `,

@@ -48,9 +48,8 @@ const TESTS = [
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<text class="sc-zone" x="34" y="68">ABDOMINAL WALL</text>
-<ellipse class="in-bowel" cx="150" cy="92" rx="58" ry="30"/>
-<ellipse class="in-bowel2" cx="138" cy="84" rx="30" ry="14"/>
+<text class="sc-zone" x="510" y="68">ABDOMINAL WALL</text>
+<g id="bowelSlot"></g>
 <path class="in-perit" d="M62 132Q210 64 372 128"/>
 <polygon class="in-canal" points="240,124 622,268 642,322 260,178"/>
 <polygon class="in-hess" points="340,180 545,245 455,338"/>
@@ -65,21 +64,21 @@ const body = `
 <ellipse class="in-ring" cx="250" cy="150" rx="15" ry="26" transform="rotate(62 250 150)"/>
 <ellipse class="in-ring" cx="632" cy="295" rx="14" ry="24" transform="rotate(62 632 295)"/>
 <ellipse class="in-scrot" cx="705" cy="388" rx="42" ry="32"/>
+<ellipse id="redGlow" class="in-glow" cx="690" cy="368" rx="70" ry="55" opacity="0"/>
 <g id="sacD"></g><g id="sacI"></g><g id="dots"></g><g id="treat"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "inguinal-canal-hernia", fig: "Fig 1", title: "Inguinal canal and hernias: indirect, direct and strangulation", W, H, body,
-  label: "An animated front view of the inguinal canal. The canal runs obliquely from the deep ring laterally to the superficial ring medially, carrying the spermatic cord. An indirect hernia sac enters the deep ring lateral to the inferior epigastric vessels and follows the canal. A direct bulge pushes through the weak posterior wall inside Hesselbach triangle, medial to the vessels. Gauges show how far the sac is out, trapping, blood supply, swelling, bowel obstruction and wall repair. The level slider moves from reducible to irreducible to strangulated, and treatments include a truss concept, elective repair and emergency surgery.",
+  label: "An animated front view of the inguinal canal. The canal runs obliquely from the deep ring on the outer side to the superficial ring near the midline, carrying the spermatic cord. An indirect hernia sac enters the deep ring outside the lower belly vessels and follows the canal toward the scrotum. A direct bulge pushes through the weak back wall inside the Hesselbach triangle, inside the vessels. The slider moves from reducible to irreducible to strangulated. A truss pad can only hold a reducible hernia in, while a planned mesh repair or emergency surgery mends the weak wall.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses or numbers are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "inguinal.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "inguinal.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With emergency surgery",
   sourcesLis: [
     "<strong>Anatomy shown.</strong> The inguinal canal is an oblique passage in the lower abdominal wall. It opens at the deep inguinal ring laterally and the superficial inguinal ring medially, has an anterior wall and a posterior wall, and transmits the spermatic cord in this drawing. The inferior epigastric vessels lie medial to the deep ring. Hesselbach triangle is bounded by those vessels laterally, the rectus abdominis medially and the inguinal ligament below. This is standard teaching in anatomy and surgery texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Hernia ideas shown.</strong> An indirect hernia enters through the deep ring, lateral to the inferior epigastric vessels, and follows the canal, sometimes reaching the scrotum. A direct hernia pushes forward through a weak posterior wall inside Hesselbach triangle, medial to the vessels. A reducible hernia can be pushed back, an irreducible hernia is trapped outside, and a strangulated hernia has its blood supply cut off, with swelling and bowel obstruction. A truss can only hold a reducible hernia in and does not cure it. Elective repair strengthens the posterior wall for a hernia that is not strangulated, while strangulation needs emergency surgery. These are teaching toggles only.",
   ],
   simplified: "Femoral hernias, the detailed layers and muscles forming each wall, conjoint tendon and reflexions, cord structures in detail, women and the round ligament, infant and congenital cases, operative technique, mesh choices, complications and all clinical decision rules are left out. The two sacs are shown together to compare routes and would not usually be drawn as one patient. The figure does not say how any patient should be treated.",
   extraCss: `
-.in-bowel{fill:#d98a7a;stroke:#a85a4c;stroke-width:1.2}.in-bowel2{fill:#e8a894;stroke:#a85a4c;stroke-width:.8}
 .in-perit{fill:none;stroke:var(--anatomy-mid);stroke-width:1.4;stroke-dasharray:5 4}
 .in-canal{fill:#e8cfa0;stroke:#b8935a;stroke-width:1.2;opacity:.85}
 .in-hess{fill:#7ab8ff;stroke:#2f7ad8;stroke-width:1.2;stroke-dasharray:6 4;opacity:.28}
@@ -93,12 +92,17 @@ buildScene({
 .in-vess2{fill:none;stroke:#3a86b8;stroke-width:3;stroke-linecap:round}
 .in-ring{fill:#2b1c22;stroke:#f2d27a;stroke-width:2.4}
 .in-scrot{fill:#e0b090;stroke:#a87a52;stroke-width:1.2}
+.in-glow{fill:#e5484d;stroke:none}
 .cl-sac{--cc:#e8a34a}.cl-sac2{--cc:#e07a5a}
 .in-sacisch{fill:#e5484d;opacity:0}
 .in-mesh{fill:#3ddc97;stroke:#0f9f76;stroke-width:1;opacity:.5}
-.in-meshln{stroke:#0f9f76;stroke-width:.8;opacity:.7}
+.in-meshln{fill:none;stroke:#0f9f76;stroke-width:.8;opacity:.7}
+.in-stitch{fill:none;stroke:#0f9f76;stroke-width:2;stroke-dasharray:7 5}
 .in-truss{fill:#f2d27a;stroke:#b8962f;stroke-width:1.4}
+.in-band{fill:#f2d27a;stroke:#b8962f;stroke-width:1.2;opacity:.35}
+.in-press{fill:none;stroke:#b8962f;stroke-width:2.4;stroke-linecap:round}
 .in-emerg{fill:#e5484d;stroke:#e5484d;stroke-width:1.6;stroke-dasharray:6 4;opacity:.18}
+.in-cap{fill:var(--anatomy-strong);font-size:12px}
 .p-flow{--cc:#fff3d6}.p-cordot{--cc:#ffd24a}
 .dr-g-fill.g-sac{fill:#e8a34a}.dr-g-fill.g-rep{fill:var(--c-good)}
 `,
