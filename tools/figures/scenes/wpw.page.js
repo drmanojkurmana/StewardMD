@@ -1,10 +1,18 @@
-/* WPW scene: SA node, AV node with dual pathways, accessory bypass, orthodromic circuit, AF pre-excitation, ECG and gauges. */
-const G = SC.GEO, E = SC.ECG, WW = SC.W;
-const L = { imps: $("imps"), marks: $("marks"), ecg: $("ecg"), over: $("over"), panel: $("panel"), inset: $("inset") };
-const chEls = { ra: $("ch-ra"), la: $("ch-la"), rv: $("ch-rv"), lv: $("ch-lv") };
-const act = { ra: 0, la: 0, rv: 0, lv: 0 };
-const trk = { bach: track(G.bach), inter: track(G.inter), his: track(G.hisTrack), lbb: track(G.lbb), rbb: track(G.rbb), accDown: track(G.accDown), accUp: track(G.accUp), downFull: track(G.downFull) };
-const sm = { rate: 0.7, delta: 0.1, circ: 0.5, danger: 0.3, avBlock: 0, bypass: 1, chaos: 0, irreg: 0.1, abl: 0, code: 2 };
+/* WPW scene: SA node, AV node gate, accessory bypass on a real heart, orthodromic circuit, AF pre-excitation, ECG and gauges. */
+const E = SC.ECG, WW = SC.W;
+const HX = 277, HY = 242, HW = 270, HS = HW / 100;
+const SAN = [Math.round(HX + 30 * HS), Math.round(HY - 15 * HS)];
+const AVN = [Math.round(HX - HS), Math.round(HY - 6 * HS)];
+const HIS = [Math.round(HX + 3 * HS), Math.round(HY + 8 * HS)];
+const BYA = [Math.round(HX - 38 * HS), Math.round(HY - 8 * HS)];
+const BYV = [Math.round(HX - 30 * HS), Math.round(HY + 26 * HS)];
+const VEN = [Math.round(HX + 12 * HS), Math.round(HY + 28 * HS)];
+const BYM = [Math.round((BYA[0] + BYV[0]) / 2 - 4), Math.round((BYA[1] + BYV[1]) / 2)];
+const L = { heart: $("heart"), inset: $("inset"), marks: $("marks"), imps: $("imps"), ecg: $("ecg"), over: $("over"), panel: $("panel") };
+let heartO = null, zA = null, zV = null;
+let actA = 0, actV = 0;
+const trk = {};
+const sm = { rate: 0.7, delta: 0.1, circ: 0.5, danger: 0.3, avBlock: 0, bypass: 1, chaos: 0, irreg: 0.1, abl: 0, vagal: 0, plug: 0, code: 2 };
 const gg = {};
 let beatT = 0.4, afT = 0.3, circT = 0.2, Tsec = 0;
 const holdQ = [];
@@ -13,10 +21,12 @@ const freeP = (pl) => pl.find((p) => !p.on);
 function killP(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
 const dots = pool(12, () => mk("circle", { class: "wp-imp", r: 5 }, L.imps));
 function launch(tr, dur, cb) { const p = freeP(dots); if (!p) { if (cb) cb(); return; } p.on = true; p.tr = tr; p.u = 0; p.sp = 1 / Math.max(0.05, dur); p.cb = cb || null; p.e.setAttribute("opacity", "1"); const q = tr.at(0); p.e.setAttribute("cx", f1(q.x)); p.e.setAttribute("cy", f1(q.y)); }
-function flashA() { act.ra = 1; act.la = 1; }
-function flashV() { act.rv = 1; act.lv = 1; }
-const wavelets = [];
+function flashA() { actA = 1; }
+function flashV() { actV = 1; }
+const wavelets = [], blockers = [];
 let ecgPath = null, ecgTxt = null, insetDot = null, dualDot = null, avMark = null, ablMark = null;
+let accEl = null, bypA = null, bypB = null, avWire = null, hisWire = null, vagalHalo = null;
+let capEl = null, capKey = "";
 function intervalOf() { return 1.25 - 0.78 * sm.rate; }
 function phaseAt(tSec) {
   const code = sm.code;
@@ -52,6 +62,53 @@ function ecgVal(tSec) {
   }
   return v;
 }
+function capText(d, l) {
+  if (d === 1) {
+    if (l === 1) return "Vagal manoeuvre slows the gate. The loop breaks and a normal beat returns.";
+    if (l === 2) return "Vagal manoeuvre slows the gate only. AF still races down the bridge.";
+    return "Vagal manoeuvre slows the gate. Beats slow a little.";
+  }
+  if (d === 2) {
+    if (l === 1) return "Adenosine plugs the gate. The loop breaks and a normal beat returns.";
+    if (l === 2) return "Adenosine plugs the gate. More beats rush down the bridge, which is unsafe.";
+    return "Adenosine plugs the gate. Beats slow until it wears off.";
+  }
+  if (d === 3) {
+    if (l === 1) return "Ablation scars the bridge shut. The loop cannot run again.";
+    if (l === 2) return "Ablation scars the bridge shut. AF can only pass through the gate.";
+    return "Ablation scars the bridge shut. Beats use the normal gate only.";
+  }
+  if (l === 1) return "No treatment. The beat loops down the gate and up the bridge, fast and regular.";
+  if (l === 2) return "No treatment. In AF many beats race down the bridge, very fast and wide.";
+  return "No treatment. The bridge fires early, so each beat starts with a slur.";
+}
+function initOrgans() {
+  heartO = organ($("heartSlot"), "heart", HX, HY, HW, {});
+  trk.bach = track([SAN, [315, 193], [240, 198], BYA]);
+  trk.inter = track([SAN, [328, 214], [300, 221], AVN]);
+  trk.his = track([AVN, HIS]);
+  trk.lbb = track([HIS, [296, 292], VEN]);
+  trk.rbb = track([HIS, [256, 292], [224, 318]]);
+  trk.accDown = track([BYA, [158, 250], [166, 286], BYV]);
+  trk.accUp = track([VEN, [252, 330], [210, 326], BYV, [166, 286], [158, 250], BYA]);
+  trk.downFull = track([SAN, [328, 214], [300, 221], AVN, HIS, [296, 292], VEN]);
+  const H = L.heart;
+  zA = mk("ellipse", { class: "wp-zA", cx: 300, cy: 205, rx: 95, ry: 40 }, H);
+  zV = mk("ellipse", { class: "wp-zV", cx: 272, cy: 318, rx: 95, ry: 55 }, H);
+  mk("path", { class: "wp-wire", d: "M" + SAN[0] + " " + SAN[1] + "L315 193L240 198L" + BYA[0] + " " + BYA[1] }, H);
+  avWire = mk("path", { class: "wp-wire", d: "M" + SAN[0] + " " + SAN[1] + "L328 214L300 221L" + AVN[0] + " " + AVN[1] }, H);
+  hisWire = mk("path", { class: "wp-wire", d: "M" + AVN[0] + " " + AVN[1] + "L" + HIS[0] + " " + HIS[1] + "L296 292L" + VEN[0] + " " + VEN[1] + "M" + HIS[0] + " " + HIS[1] + "L256 292L224 318" }, H);
+  accEl = mk("path", { class: "wp-acc", id: "accPath", d: "M" + BYA[0] + " " + BYA[1] + "L158 250L166 286L" + BYV[0] + " " + BYV[1] }, H);
+  mk("circle", { class: "wp-node", cx: SAN[0], cy: SAN[1], r: 8 }, H);
+  mk("circle", { class: "wp-node", cx: AVN[0], cy: AVN[1], r: 9 }, H);
+  mk("circle", { class: "wp-his", cx: HIS[0], cy: HIS[1], r: 5 }, H);
+  bypA = mk("circle", { class: "wp-node2", cx: BYA[0], cy: BYA[1], r: 5 }, H);
+  bypB = mk("circle", { class: "wp-node2", cx: BYV[0], cy: BYV[1], r: 5 }, H);
+  vagalHalo = mk("circle", { class: "wp-vagal", cx: AVN[0], cy: AVN[1], r: 20, opacity: "0" }, H);
+  for (let i = 0; i < 6; i++) blockers.push({ e: mk("circle", { class: "wp-block", r: 4, opacity: "0" }, H), a: i * 1.047 });
+  const wc = [[-70, -8], [-35, -14], [0, -6], [35, -12], [65, -2]];
+  wc.forEach(([dx, dy], i) => { const e = mk("circle", { class: "wp-node2", r: 3 }, L.imps); wavelets.push({ e, cx: 300 + dx, cy: 205 + dy, r: 8 + (i % 3) * 3, sp: 1.8 + (i % 3) * 0.6, ph: i * 1.2 }); });
+}
 function initInset() {
   const I = L.inset;
   mk("path", { class: "wp-wire", d: "M640 352L618 366L612 380L618 394L640 408" }, I);
@@ -70,8 +127,6 @@ function initInset() {
   const ts = mk("text", { class: "sc-lab", x: 858, y: 342, "text-anchor": "middle" }, I); ts.textContent = "slow";
   insetDot = mk("circle", { class: "wp-imp", r: 4.5 }, I);
   dualDot = mk("circle", { class: "wp-imp", r: 3.5 }, I);
-  const wc = [[205, 145], [235, 170], [320, 140], [355, 168], [300, 175]];
-  wc.forEach(([x, y], i) => { const e = mk("circle", { class: "wp-node2", r: 3 }, L.imps); wavelets.push({ e, cx: x, cy: y, r: 8 + (i % 3) * 3, sp: 1.8 + (i % 3) * 0.6, ph: i * 1.2 }); });
 }
 function initPanel() {
   initInset();
@@ -80,38 +135,34 @@ function initPanel() {
   const eh = mk("g", { class: "hot", tabindex: "0", "data-info": "One ECG lead. Sinus rhythm with pre-excitation: short PR interval and a slurred delta wave at the start of a widened QRS. Orthodromic SVT: regular narrow QRS with no delta wave. AF with pre-excitation: irregular, very fast, wide and varying QRS complexes." }, L.ecg);
   mk("rect", { x: E.x, y: E.y, width: E.w, height: E.h, fill: "transparent" }, eh);
   avMark = mk("g", { opacity: "0" }, L.marks);
-  mk("circle", { class: "wp-x", cx: G.av[0] + 18, cy: G.av[1] - 14, r: 8 }, avMark); mk("path", { class: "wp-xp", d: "M" + (G.av[0] + 14) + " " + (G.av[1] - 18) + "l8 8m0 -8l-8 8" }, avMark);
+  mk("circle", { class: "wp-x", cx: AVN[0], cy: AVN[1], r: 11 }, avMark); mk("path", { class: "wp-xp", d: "M" + (AVN[0] - 5) + " " + (AVN[1] - 5) + "l10 10m0 -10l-10 10" }, avMark);
   mk("circle", { class: "wp-x", cx: 624, cy: 366, r: 7 }, avMark); mk("path", { class: "wp-xp", d: "M621 363l6 6m0 -6l-6 6" }, avMark);
   ablMark = mk("g", { opacity: "0" }, L.marks);
-  mk("circle", { class: "wp-x", cx: 415, cy: 252, r: 9 }, ablMark); mk("path", { class: "wp-xp", d: "M411 248l8 8m0 -8l-8 8" }, ablMark);
+  mk("circle", { class: "wp-x", cx: BYM[0], cy: BYM[1], r: 10 }, ablMark); mk("path", { class: "wp-xp", d: "M" + (BYM[0] - 5) + " " + (BYM[1] - 5) + "l10 10m0 -10l-10 10" }, ablMark);
   mk("circle", { class: "wp-x", cx: 682, cy: 380, r: 8 }, ablMark); mk("path", { class: "wp-xp", d: "M679 377l6 6m0 -6l-6 6" }, ablMark);
   const o = L.over;
-  pill(o, "SA node", G.sa[0], G.sa[1], 80, 132, "Sinoatrial node: the normal pacemaker. It fires, the atria activate, and the impulse then reaches both the AV node and the accessory pathway.");
-  pill(o, "Atria", 340, 120, 480, 110, "Atria: the top chambers. Their activation is the P wave. In AF they fibrillate with chaotic, rapid activity and no organised P wave.");
-  pill(o, "AV node", G.av[0], G.av[1], 480, 225, "Compact AV node: the normal gateway to the ventricles. It delays the impulse so the ventricles can fill. Inside it, dual pathways (a fast and a slow pathway) can sustain AVNRT.");
-  pill(o, "Bypass tract", 415, 252, 485, 305, "Accessory pathway (bypass tract): an extra muscle bridge from atrium to ventricle that bypasses the AV node. It conducts fast and without the normal delay, so the ventricle starts early.");
-  pill(o, "His bundle", G.his[0], G.his[1], 480, 365, "Bundle of His and bundle branches: the fast route from the AV node that activates both ventricles together, giving a narrow QRS when it is the only route used.");
-  pill(o, "Ventricle", 150, 330, 62, 300, "Ventricles: the pumping chambers. Early activation through the bypass gives the delta wave; activation only through the His-Purkinje system gives a narrow QRS.");
-  pill(o, "Delta wave", 640, 155, 640, 275, "Delta wave: the slurred, slow start of the QRS in pre-excitation. Part of the ventricle starts through the bypass (slow muscle to muscle spread), then the rest follows fast through the His-Purkinje system.");
-  pill(o, "Fast wide QRS", 800, 150, 835, 275, "In AF with pre-excitation many atrial impulses race down the bypass without AV nodal filtering: the ventricular rate is very fast, irregular and wide, and it can collapse or degenerate. This is the dangerous form.");
-  pill(o, "Re-entry loop", 647, 380, 750, 332, "Orthodromic re-entry: down the AV node and His-Purkinje system to the ventricles (narrow QRS), then back up the accessory pathway to the atria, round and round. It needs the AV node, so AV nodal block can break it.");
-  pill(o, "Dual pathways", 838, 368, 838, 440, "AVNRT: dual AV nodal pathways, a fast and a slow pathway in and around the compact AV node. The impulse loops between them, activating atria and ventricles almost together. Ablation targets the slow pathway.");
-  const pv = pill(o, "Vagal slows AV node", G.av[0], G.av[1], 660, 440, "A vagal manoeuvre raises vagal tone and slows the AV node. It can terminate SVT that needs the AV node, but it does not stop AF racing down the bypass."); pv.setAttribute("id", "p-vagal"); pv.style.opacity = 0;
-  const pa = pill(o, "AV node blocked", G.av[0], G.av[1], 660, 440, "Adenosine transiently blocks the AV node. That breaks orthodromic AVRT and AVNRT, but in AF with pre-excitation it can shunt more impulses down the bypass, so it is avoided there."); pa.setAttribute("id", "p-adeno"); pa.style.opacity = 0;
-  const pb = pill(o, "Pathway ablated", 415, 252, 660, 440, "Catheter ablation destroys the accessory pathway (or the slow pathway in AVNRT). Pre-excitation and the re-entry circuit are removed, so SVT does not recur and AF can only reach the ventricles through the AV node."); pb.setAttribute("id", "p-abl"); pb.style.opacity = 0;
+  pill(o, "SA node", SAN[0], SAN[1], 470, 100, "SA node: the natural pacemaker. Each beat starts here and spreads across the atria.");
+  pill(o, "AV node", AVN[0], AVN[1], 470, 215, "AV node and His bundle: the normal gate to the ventricles. It delays the beat so the ventricles can fill. Vagal tone and adenosine plug it here.");
+  pill(o, "Bypass tract", BYM[0], BYM[1], 100, 140, "Bypass tract: an extra bridge from atrium to ventricle with no delay, so the ventricle starts early. Ablation scars it shut.");
+  pill(o, "Ventricle", VEN[0], VEN[1], 100, 360, "Ventricle: early start through the bridge gives the slurred delta wave on the ECG.");
+  pill(o, "Delta wave", 700, 150, 640, 275, "Delta wave: the slurred, slow start of the QRS in pre-excitation. Absent during orthodromic SVT and after ablation.");
+  pill(o, "Re-entry loop", 647, 380, 758, 330, "Orthodromic re-entry: down the AV node to the ventricles, then back up the bridge to the atria, round and round. Plugging the AV node breaks it.");
+  pill(o, "AF danger", 800, 150, 845, 275, "AF with pre-excitation: many impulses race down the bridge without AV nodal filtering. The pulse is very fast, wide and uneven. Plugging the AV node alone cannot stop it.");
+  capEl = mk("text", { class: "wp-cap", x: 30, y: 428 }, o); capEl.textContent = capText(0, 1);
   const P = L.panel, y0 = 486;
   mk("rect", { class: "dr-panel", x: 24, y: 454, width: WW - 48, height: 142, rx: 14 }, P);
   const t = mk("text", { class: "dr-pt", x: 40, y: 476 }, P); t.textContent = "The rhythm";
-  [["rate", "Ventricular rate", "g-bad", "How fast the ventricles beat. Orthodromic SVT is fast and regular; AF with pre-excitation is very fast and irregular."], ["circ", "Re-entry circuit", "g-circ", "How strongly the re-entry loop (or the dual pathway loop in AVNRT) is running."], ["delta", "Delta wave", "g-cyt", "Pre-excitation: how much ventricle is started early through the bypass. Present in sinus rhythm with WPW, absent during orthodromic SVT and after ablation."], ["danger", "Danger", "g-bad", "Risk from a very fast pre-excited response in AF, which can cause collapse. Blocking the AV node alone does not remove it."]]
+  [["rate", "Ventricular rate", "g-bad", "How fast the ventricles beat. Orthodromic SVT is fast and regular; AF with pre-excitation is very fast and irregular."], ["circ", "Re-entry circuit", "g-circ", "How strongly the re-entry loop is running."], ["delta", "Delta wave", "g-cyt", "Pre-excitation: how much ventricle is started early through the bypass. Present in sinus rhythm with WPW, absent during orthodromic SVT and after ablation."], ["danger", "Danger", "g-bad", "Risk from a very fast pre-excited response in AF, which can cause collapse. Blocking the AV node alone does not remove it."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, 180 + i * 200, y0 + 2, 52, 18, cls, name, tip); });
 }
-function init() { initPanel(); }
+function init() { initOrgans(); initPanel(); }
 function step(dt, m) {
   Tsec += dt;
   const k1 = Math.min(1, dt * 1.4), k2 = Math.min(1, dt * 0.7);
   sm.rate = lerp(sm.rate, m.rate, k1); sm.delta = lerp(sm.delta, m.delta, k2); sm.circ = lerp(sm.circ, m.circ, k2);
   sm.danger = lerp(sm.danger, m.danger, k2); sm.avBlock = lerp(sm.avBlock, m.avBlock, k1); sm.bypass = lerp(sm.bypass, m.bypass, k2);
   sm.chaos = lerp(sm.chaos, m.chaos, k2); sm.irreg = lerp(sm.irreg, m.irreg, k2); sm.abl = lerp(sm.abl, m.ablated, k1); sm.code = m.code;
+  sm.vagal = lerp(sm.vagal, drug === 1 ? 1 : 0, k1); sm.plug = lerp(sm.plug, drug === 2 ? 1 : 0, k1);
   for (let i = holdQ.length - 1; i >= 0; i--) { holdQ[i].t -= dt; if (holdQ[i].t <= 0) { const cb = holdQ[i].cb; holdQ.splice(i, 1); cb(); } }
   dots.forEach((p) => { if (!p.on) return; p.u += dt * p.sp; const q = p.tr.at(clamp(p.u)); p.e.setAttribute("cx", f1(q.x)); p.e.setAttribute("cy", f1(q.y)); if (p.u >= 1) { killP(p); if (p.cb) p.cb(); } });
   if (sm.code === 0 || sm.code === 1) {
@@ -131,17 +182,23 @@ function step(dt, m) {
       if (sm.bypass > 0.4) launch(trk.accDown, 0.16, () => flashV());
       else launch(trk.downFull, 0.24, () => flashV());
     }
-    act.ra = Math.max(act.ra, 0.2 + Math.random() * 0.25); act.la = Math.max(act.la, 0.2 + Math.random() * 0.25);
+    actA = Math.max(actA, 0.2 + Math.random() * 0.25);
   }
   const dec = Math.exp(-dt * 3.4);
-  ["ra", "la", "rv", "lv"].forEach((n) => { act[n] *= dec; chEls[n].style.setProperty("--act", act[n].toFixed(2)); });
+  actA *= dec; actV *= dec;
+  if (zA) zA.style.setProperty("--act", actA.toFixed(2));
+  if (zV) zV.style.setProperty("--act", actV.toFixed(2));
   wavelets.forEach((wv) => { const a = tm / 1000 * wv.sp + wv.ph, x = wv.cx + Math.cos(a) * wv.r, y = wv.cy + Math.sin(a * 1.3) * wv.r * 0.7; wv.e.setAttribute("cx", f1(x)); wv.e.setAttribute("cy", f1(y)); wv.e.setAttribute("opacity", sm.chaos > 0.15 ? "0.9" : "0"); });
-  const accEl = $("accPath"); if (accEl) accEl.setAttribute("opacity", (0.15 + 0.85 * sm.bypass).toFixed(2));
-  const accN = $("accNode"); if (accN) accN.setAttribute("opacity", (0.2 + 0.8 * sm.bypass).toFixed(2));
+  blockers.forEach((b, i) => { const a = tm / 1100 + b.a; b.e.setAttribute("cx", f1(AVN[0] + Math.cos(a) * 15)); b.e.setAttribute("cy", f1(AVN[1] + Math.sin(a) * 15)); b.e.setAttribute("opacity", clamp((sm.plug - 0.15) * 1.6).toFixed(2)); });
+  if (vagalHalo) { vagalHalo.setAttribute("opacity", (sm.vagal * (0.45 + 0.25 * Math.sin(tm / 300))).toFixed(2)); vagalHalo.setAttribute("r", f1(20 + 3 * Math.sin(tm / 300))); }
+  if (accEl) accEl.setAttribute("opacity", (0.15 + 0.85 * sm.bypass).toFixed(2));
+  if (bypA) bypA.setAttribute("opacity", (0.2 + 0.8 * sm.bypass).toFixed(2));
+  if (bypB) bypB.setAttribute("opacity", (0.2 + 0.8 * sm.bypass).toFixed(2));
   const inAcc = $("insetAcc"); if (inAcc) inAcc.setAttribute("opacity", (0.15 + 0.85 * sm.bypass).toFixed(2));
+  if (avWire) avWire.setAttribute("opacity", (1 - 0.65 * sm.avBlock).toFixed(2));
+  if (hisWire) hisWire.setAttribute("opacity", (1 - 0.65 * sm.avBlock).toFixed(2));
   if (avMark) avMark.setAttribute("opacity", clamp(sm.avBlock * 1.1).toFixed(2));
   if (ablMark) ablMark.setAttribute("opacity", sm.abl.toFixed(2));
-  $("p-vagal").style.opacity = m.drug === 1 ? "1" : "0"; $("p-adeno").style.opacity = m.drug === 2 ? "1" : "0"; $("p-abl").style.opacity = m.drug === 3 ? "1" : "0";
   if (insetDot) { const a = tm / 1000 * 2.4, show = sm.code === 2 ? 1 : 0; insetDot.setAttribute("cx", f1(647 + Math.cos(a) * 36)); insetDot.setAttribute("cy", f1(380 + Math.sin(a) * 28)); insetDot.setAttribute("opacity", show ? (0.35 + 0.65 * sm.circ).toFixed(2) : "0"); }
   if (dualDot) { const a = -tm / 1000 * 3.1, show = sm.code === 2 ? 1 : 0; dualDot.setAttribute("cx", f1(838 + Math.cos(a) * 17)); dualDot.setAttribute("cy", f1(368 + Math.sin(a) * 17)); dualDot.setAttribute("opacity", show ? (0.35 + 0.65 * sm.circ).toFixed(2) : "0"); }
   let d = "";
@@ -153,5 +210,7 @@ function step(dt, m) {
   gg.circ.set(sm.circ, wordOf(sm.circ, 0.25, 0.6, ["off", "weak", "running"]));
   gg.delta.set(sm.delta, wordOf(sm.delta, 0.15, 0.55, ["absent", "faint", "clear"]));
   gg.danger.set(sm.danger, wordOf(sm.danger, 0.25, 0.6, ["low", "raised", "high"]));
+  const key = drug + ":" + level;
+  if (key !== capKey) { capKey = key; const t = capText(drug, level); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 run({ init, step });
