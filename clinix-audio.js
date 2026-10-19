@@ -611,12 +611,100 @@
     return cycle;
   }
 
+
+  /* ── Recorded heart sounds (owner-supplied PCG reference clip) ─────────────────────────────────
+   * ONE AAC file (clinix/audio/heart-sounds.aac, 52.9 s) holding eight labelled segments: S1, S2, S3, S4 and
+   * four murmurs. They play beside the synthesized models in the Sound Lab and draw the real PCG from the
+   * recording itself. `pos` is a fraction of the segment; the app marks the heart sounds at those points.
+   * Unlike the synthesized kinds this is a RECORDING, so it is labelled as one and carries a credit line
+   * (REC_CREDIT) that must be confirmed before a public release. */
+  var REC_URL = "/clinix/audio/heart-sounds.aac";
+  var REC_CREDIT = "Owner-supplied reference recording (source to be confirmed)";
+  var RECORDINGS = [
+    { id: "s1", label: "S1: AV valves closing", start: 0.05, end: 3.85, cue: "LUB (S1 - S2)", desc: "Closure of the mitral and tricuspid valves at the start of systole. Louder than S2 at the apex.", marks: [["S1", 0.22], ["S2", 0.56]] },
+    { id: "s2", label: "S2: semilunar valves closing", start: 4.05, end: 8.80, cue: "DUB (S1 - S2)", desc: "Closure of the aortic and pulmonary valves at the end of systole. Louder than S1 at the base.", marks: [["S1", 0.22], ["S2", 0.56]] },
+    { id: "s3", label: "S3 gallop (ventricular)", start: 9.05, end: 17.80, cue: "Ken-tuck-y", desc: "Rapid ventricular filling in early diastole. A volume-overload sign in adults; can be normal in the young.", marks: [["S1", 0.20], ["S2", 0.52], ["S3", 0.66]] },
+    { id: "s4", label: "S4 gallop (atrial)", start: 18.05, end: 26.80, cue: "Ten-nes-see", desc: "The atrium contracting into a stiff ventricle. Heard in hypertrophy and ischaemia.", marks: [["S4", 0.14], ["S1", 0.26], ["S2", 0.58]] },
+    { id: "as", label: "Aortic stenosis murmur", start: 27.05, end: 32.80, cue: "Crescendo-decrescendo (diamond) between S1 and S2", desc: "Harsh ejection systolic murmur from a calcified or congenitally abnormal aortic valve.", marks: [["S1", 0.20], ["S2", 0.58]] },
+    { id: "mr", label: "Mitral regurgitation murmur", start: 33.05, end: 38.80, cue: "Holosystolic plateau from S1 to S2", desc: "Uniform blowing murmur filling systole when the mitral valve leaks.", marks: [["S1", 0.20], ["S2", 0.58]] },
+    { id: "ms", label: "Mitral stenosis (loud S1 + diastolic rumble)", start: 39.05, end: 45.80, cue: "LUB DUB DURRR", desc: "Loud S1, then S2, then a low diastolic rumble. Rheumatic scarring of the mitral valve.", marks: [["S1", 0.20], ["S2", 0.52]] },
+    { id: "ar", label: "Aortic regurgitation murmur", start: 46.05, end: 52.60, cue: "LUB DARRR (decrescendo right after S2)", desc: "High-pitched early diastolic decrescendo murmur from aortic root dilation or endocarditis.", marks: [["S1", 0.20], ["S2", 0.52]] }
+  ];
+  var recBuf = null, recLoading = null;
+  function loadRecording(c) {
+    if (recBuf) return Promise.resolve(recBuf);
+    if (recLoading) return recLoading;
+    if (typeof fetch !== "function") return Promise.reject(new Error("no-fetch"));
+    recLoading = fetch(REC_URL).then(function (r) { if (!r.ok) throw new Error("rec-" + r.status); return r.arrayBuffer(); })
+      .then(function (ab) {
+        return new Promise(function (res, rej) {
+          var p = c.decodeAudioData(ab, res, rej);   // callback form for older iOS WebKit
+          if (p && typeof p.then === "function") p.then(res, rej);
+        });
+      })
+      .then(function (b) { recBuf = b; return b; })
+      .catch(function (e) { recLoading = null; throw e; });
+    return recLoading;
+  }
+  RECORDINGS.forEach(function (r) {
+    KINDS["rec_" + r.id] = { type: "cardiac", recording: true, label: r.label, hint: r.desc + " Cue: " + r.cue + ".", seg: { start: r.start, end: r.end }, marks: r.marks };
+  });
+
+  /* Plays one recorded segment. Returns a handle shaped like play()'s so the Sound Lab trace, Stop button and
+   * onEnd work unchanged. The handle exists at once (the trace needs its analyser); the audio starts as soon as
+   * the clip is decoded (first play only). */
+  function playRecording(kind, spec, opts) {
+    var c = unlock();
+    if (!c) return null;
+    stopAll();
+    var master = c.createGain();
+    master.gain.value = typeof opts.volume === "number" ? opts.volume : 0.95;
+    var analyser = null;
+    try { analyser = c.createAnalyser(); analyser.fftSize = 2048; analyser.smoothingTimeConstant = 0; master.connect(analyser); analyser.connect(c.destination); }
+    catch (e) { analyser = null; master.connect(c.destination); }
+    var dur = spec.seg.end - spec.seg.start, src = null, done = false;
+    function disconnectAll() { try { master.disconnect(); } catch (e) {} if (analyser) { try { analyser.disconnect(); } catch (e) {} } }
+    function unlink() { for (var j = active.length - 1; j >= 0; j--) if (active[j] === handle) active.splice(j, 1); }
+    function finish(natural) {
+      if (done) return;
+      done = true; unlink(); disconnectAll();
+      if (natural && opts.onEnd) { try { opts.onEnd(); } catch (e) {} }
+    }
+    var handle = {
+      cycle: dur, spec: { recording: true, type: "cardiac", marksAbs: [] }, kind: kind, analyser: analyser,
+      startsAt: null, endsAt: null, ended: function () { return done; },
+      stop: function () {
+        if (done) return;
+        done = true; unlink();
+        try { master.gain.setTargetAtTime(0.0001, c.currentTime, 0.02); } catch (e) {}
+        try { if (src) src.stop(c.currentTime + 0.05); } catch (e) {}
+        try { setTimeout(disconnectAll, 200); } catch (e) { disconnectAll(); }
+      }
+    };
+    active.push(handle);
+    loadRecording(c).then(function (buf) {
+      if (done) return;
+      var go = function () {
+        if (done) return;
+        src = c.createBufferSource(); src.buffer = buf; src.connect(master);
+        var t = c.currentTime + 0.03;
+        handle.startsAt = t; handle.endsAt = t + dur;
+        handle.spec.marksAbs = spec.marks.map(function (m) { return { t: t + m[1] * dur, l: m[0] }; });
+        src.onended = function () { finish(true); };
+        src.start(t, spec.seg.start, dur);
+      };
+      if (resuming && c.state !== "running") resuming.then(go, go); else go();
+    }, function () { finish(true); });   // decode or fetch failed: end quietly, the screen repaints
+    return handle;
+  }
+
   /* play(kind, opts) -> { stop, cycle, spec }
    * opts.breaths (default 3), opts.beats / opts.cycles (default 4 for cardiac), opts.slow (stretches everything),
    * opts.onEnd, opts.onPhase(name) so the UI can show which phase is sounding. */
   function play(kind, opts) {
     opts = opts || {};
     var spec = KINDS[kind];
+    if (spec && spec.recording) return playRecording(kind, spec, opts);
     var c = unlock();
     if (!spec || !c) return null;
 
@@ -736,12 +824,13 @@
   for (var k in KINDS) {
     var item = KINDS[k];
     var isCard = item.type === "cardiac";
+    var isRec = item.recording === true;
     AUDIO_REGISTRY[k] = {
       id: "audio." + k,
       kind: k,
-      type: "synthetic",
-      source: "Web Audio mathematical oscillator & shaped noise synthesis",
-      license: "StewardMD original (CC BY-SA 4.0)",
+      type: isRec ? "recording" : "synthetic",
+      source: isRec ? REC_CREDIT : "Web Audio mathematical oscillator & shaped noise synthesis",
+      license: isRec ? "Owner-supplied (confirm before public release)" : "StewardMD original (CC BY-SA 4.0)",
       offlineAvailable: true,
       clinicalFinding: item.label || k,
       system: isCard ? "cardiovascular" : "respiratory",
@@ -771,7 +860,7 @@
   function has(kind) { return !!KINDS[kind]; }
 
   var API = {
-    KINDS: KINDS, has: has, available: available,
+    KINDS: KINDS, has: has, available: available, RECORDINGS: RECORDINGS, REC_CREDIT: REC_CREDIT, REC_URL: REC_URL,
     play: play, stopAll: stopAll, labelOf: labelOf, hintOf: hintOf,
     unlock: unlock, prewarm: prewarm,
     current: function () { return active.length ? active[active.length - 1] : null; },

@@ -3276,6 +3276,19 @@
     { kind: "aortic_regurgitation", label: "Aortic Regurgitation (Early Diastolic)", type: "cardiac", icon: "hearing", desc: "High-pitched early diastolic decrescendo murmur best heard at Erb's point leaning forward in expiration." },
     { kind: "pericardial_rub", label: "Pericardial Friction Rub", type: "cardiac", icon: "texture", desc: "Triphasic scratchy, superficial sound (atrial systole, ventricular systole, rapid filling) in acute pericarditis." }
   ];
+  // Recorded heart sounds (clinix-audio.js RECORDINGS): same list, a Recording button, the PCG drawn from the clip.
+  var recModelsAdded = false;
+  function addRecordingModels() {
+    if (recModelsAdded) return;
+    try {
+      var R = window.SMD_CLINIX_AUDIO && SMD_CLINIX_AUDIO.RECORDINGS;
+      if (!R) return;   // audio engine not loaded yet: try again on the next paint
+      recModelsAdded = true;
+      R.forEach(function (r) {
+        SOUND_MODELS.push({ kind: "rec_" + r.id, label: r.label + " (recording)", type: "cardiac", rec: true, icon: "monitor_heart", desc: r.desc + " Cue: " + r.cue + "." });
+      });
+    } catch (e) {}
+  }
 
   function openSoundLab() {
     state.diaMode = "all";
@@ -3298,6 +3311,10 @@
    * or the card leaves the screen. */
   function waveMarks(h, from, to) {
     var s = h.spec || {}, out = [], k, t;
+    if (s.recording) {   // a recorded clip carries its own marker times
+      (s.marksAbs || []).forEach(function (m) { if (m.t >= from && m.t < to) out.push(m); });
+      return out;
+    }
     var cardiac = s.type === "cardiac" || !!s.cardiac || !!s.bpm || !!s.systole || !!s.sysLen;
     if (cardiac) {
       var cyc = s.period || s.cycle || 0.85, sys = s.systole || s.sysLen || 0.3;
@@ -3346,6 +3363,7 @@
   }
 
   function renderSoundLab(host) {
+    addRecordingModels();
     try { if (window.SMD_CLINIX_AUDIO && SMD_CLINIX_AUDIO.prewarm) SMD_CLINIX_AUDIO.prewarm(); } catch (e) {}
     var html = header("Auscultation Sound Lab", "Acoustics & Real Audio Reference", "cx-back");
 
@@ -3355,9 +3373,10 @@
       ic("volume_up") + '<div><b>Offline Stethoscope Audio & Real YouTube Recordings</b>' +
       '<span>High-fidelity synthesized acoustics powered by the Web Audio API alongside clinical real patient recordings from verified medical channels.</span></div></div>' +
       '<div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;">' +
-        '<button type="button" class="cx-mode-btn' + (filter === "all" ? " cx-mode-btn--active" : "") + '" data-act="cx-sound-filter" data-id="all">All (17)</button>' +
+        '<button type="button" class="cx-mode-btn' + (filter === "all" ? " cx-mode-btn--active" : "") + '" data-act="cx-sound-filter" data-id="all">All (' + SOUND_MODELS.length + ')</button>' +
         '<button type="button" class="cx-mode-btn' + (filter === "resp" ? " cx-mode-btn--active" : "") + '" data-act="cx-sound-filter" data-id="resp">Respiratory</button>' +
         '<button type="button" class="cx-mode-btn' + (filter === "cardiac" ? " cx-mode-btn--active" : "") + '" data-act="cx-sound-filter" data-id="cardiac">Cardiac</button>' +
+        '<button type="button" class="cx-mode-btn' + (filter === "rec" ? " cx-mode-btn--active" : "") + '" data-act="cx-sound-filter" data-id="rec">Heart recordings</button>' +
         '<button type="button" class="cx-mode-btn' + (filter === "yt" ? " cx-mode-btn--active" : "") + '" data-act="cx-sound-filter" data-id="yt">Real (YouTube)</button>' +
       '</div><div class="cx-rows">';
 
@@ -3366,6 +3385,7 @@
       if (filter === "resp" && s.type !== "resp") continue;
       if (filter === "cardiac" && s.type !== "cardiac") continue;
       if (filter === "yt" && !s.ytVideoId) continue;
+      if (filter === "rec" && !s.rec) continue;
       var isPlaying = state.audioKind === s.kind;
       var isYtActive = state.activeYtSound === s.kind;
       html += '<div class="cx-pres-card" style="padding:14px;margin-bottom:8px;">' +
@@ -3373,11 +3393,12 @@
           '<div style="font-weight:700;font-size:15px;color:var(--cx-ink);flex:1;min-width:180px;">' + esc(s.label) + '</div>' +
           '<div style="display:flex;gap:6px;align-items:center;">' +
             '<button type="button" class="cx-btn ' + (isPlaying ? "cx-btn--ghost" : "cx-btn--primary") + '" style="padding:6px 10px;font-size:12.5px;" data-act="cx-audio" data-id="' + esc(s.kind) + '">' +
-              ic(isPlaying ? "stop" : "play_arrow") + ' ' + (isPlaying ? "Stop" : "Synthesized") + '</button>' +
+              ic(isPlaying ? "stop" : "play_arrow") + ' ' + (isPlaying ? "Stop" : (s.rec ? "Recording" : "Synthesized")) + '</button>' +
             (s.ytVideoId ? '<button type="button" class="cx-btn cx-btn--ghost" style="padding:6px 10px;font-size:12.5px;color:#c00;border-color:rgba(204,0,0,0.35);" data-act="cx-sound-yt" data-id="' + esc(s.kind) + '">' +
               ic(isYtActive ? "expand_less" : "smart_display") + ' ' + (isYtActive ? "Hide" : "Real (" + esc(s.ytChannel || "YouTube") + ")") + '</button>' : '') +
           '</div></div>' +
         '<div style="font-size:13px;color:var(--cx-muted);line-height:1.45;margin-bottom:6px;">' + esc(s.desc) + '</div>' +
+        (s.rec ? '<div style="font-size:11.5px;color:var(--cx-muted);margin-bottom:4px;">Real recording with phonocardiogram. ' + esc((window.SMD_CLINIX_AUDIO && SMD_CLINIX_AUDIO.REC_CREDIT) || "") + '</div>' : '') +
         (isPlaying ? '<canvas class="cx-wave" data-wave="' + esc(s.kind) + '" role="img" aria-label="Live waveform of the ' + esc(s.label) + ' sound" style="display:block;width:100%;height:72px;margin-top:6px;border-radius:10px;background:color-mix(in srgb,var(--cx-accent,#0f766e) 7%,transparent);color:var(--cx-accent,#0f766e)"></canvas>' : "");
 
       if (isYtActive && s.ytVideoId) {
