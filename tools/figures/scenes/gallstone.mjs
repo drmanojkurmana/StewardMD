@@ -54,23 +54,29 @@ const TESTS = [
   [1, 0, "stones large · blockage blocked · inflammation sore · jaundice none"],
   [2, 0, "stones large · blockage blocked · inflammation inflamed · jaundice none"],
   [3, 0, "stones large · blockage blocked · inflammation inflamed · jaundice marked"],
+  [2, 2, "stones none · blockage none · inflammation calm · jaundice none"],
+  [3, 3, "stones large · blockage none · inflammation calm · jaundice none"],
 ];
 
 /* ---------------- static layout ---------------- */
+const GB_D = "M355 180C395 195 415 235 405 285C395 340 355 365 305 360C255 355 225 320 230 270C235 225 260 195 295 182C315 175 335 175 355 180Z";
+const GB_BILE = "M348 192C380 205 396 238 388 280C380 325 350 346 308 342C268 338 244 312 248 272C252 232 272 208 300 196C316 189 332 188 348 192Z";
+const CBD_D = "M382 190L470 193L538 202L546 262L578 326L645 350L725 350";
+const HEP_D = "M330 178L438 187L538 202";
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<text class="sc-zone" x="34" y="68">GALLBLADDER AND BILE DUCTS</text>
-<path id="liverShape" class="gs-liver" d="M70 92C70 70 120 58 240 58C380 58 520 70 540 105C555 132 520 168 430 175L180 175C110 175 70 140 70 92Z"/>
-<path class="gs-duct" d="M475 148L512 186L538 202"/>
-<path class="gs-duct-in" d="M475 148L512 186L538 202"/>
-<path class="gs-duct" d="M382 190L470 193L538 202L546 262L578 326L645 350L725 350"/>
-<path class="gs-duct-in" d="M382 190L470 193L538 202L546 262L578 326L645 350L725 350"/>
+<path class="gs-duct" d="${HEP_D}"/>
+<path class="gs-duct-in" d="${HEP_D}"/>
+<path class="gs-duct" d="${CBD_D}"/>
+<path class="gs-duct-in" d="${CBD_D}"/>
 <ellipse class="gs-duo" cx="725" cy="320" rx="108" ry="78"/>
 <ellipse class="gs-duo-in" cx="725" cy="320" rx="72" ry="48"/>
+<g id="liverSlot"></g>
 <g id="gbWrap">
-<path id="gbWall" class="gs-gb" d="M355 180C395 195 415 235 405 285C395 340 355 365 305 360C255 355 225 320 230 270C235 225 260 195 295 182C315 175 335 175 355 180Z"/>
-<path id="gbBile" class="gs-bile" d="M348 192C380 205 396 238 388 280C380 325 350 346 308 342C268 338 244 312 248 272C252 232 272 208 300 196C316 189 332 188 348 192Z"/>
+<path id="gbWall" class="gs-gb" d="${GB_D}"/>
+<path id="gbBile" class="gs-bile" d="${GB_BILE}"/>
 </g>
+<path id="gbGhost" class="gs-ghost" d="${GB_D}" opacity="0"/>
 <g id="bileFlow"></g>
 <g id="crystals"></g>
 <g id="stonesG"></g>
@@ -86,8 +92,8 @@ buildScene({
   id: "gallstone-formation-cholecystitis", fig: "Fig 1", title: "Gallstones: from supersaturated bile to duct blockage", W, H, body,
   label: "An animated gallbladder, bile ducts and duodenum. Bile supersaturated with cholesterol compared with bile salts and lecithin forms crystals that nucleate and grow in a sluggish gallbladder into cholesterol stones, while pigment stones form from bilirubin in haemolysis. A stone stuck in the cystic duct causes biliary colic, ongoing blockage inflames the gallbladder as cholecystitis, and a stone in the common bile duct causes jaundice and cholangitis. Gauges show saturation, stones, blockage, inflammation, jaundice and pain. Treatments are analgesia, cholecystectomy and ERCP.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, sizes or numbers are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "gallstone.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "gallstone.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With cholecystectomy",
   sourcesLis: [
     "<strong>How gallstones form.</strong> The liver makes bile carrying cholesterol held in solution by bile salts and lecithin (phospholipid) in tiny micelles. When bile is supersaturated with cholesterol compared with bile salts and lecithin, cholesterol crystals can nucleate, helped by gallbladder stasis when the gallbladder empties poorly, and grow into cholesterol stones. Pigment stones are different: they are dark stones of calcium bilirubinate that form when excess bilirubin reaches bile, for example in haemolysis where red cells break down faster. A stone that sticks in the cystic duct while the gallbladder squeezes gives biliary colic. If the cystic duct stays blocked the trapped bile and pressure inflame the gallbladder wall as acute cholecystitis. A stone that passes into or forms in the common bile duct blocks bile reaching the gut, so bilirubin backs up and causes obstructive jaundice, and bacteria ascending from the duodenum can infect the held back bile as cholangitis. This is standard teaching in medicine and surgery texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> Analgesia eases the pain of colic but does not move the stone. Cholecystectomy removes the gallbladder and its stones and so cures gallbladder colic and cholecystitis, but it does not by itself clear a stone already in the common bile duct. ERCP passes a scope through the duodenum to open the duct opening and clear a duct stone, relieving jaundice and cholangitis, while gallbladder stones can remain. These are teaching toggles only.",
@@ -97,6 +103,8 @@ buildScene({
 .gs-liver{fill:color-mix(in srgb,#b85c48 58%,var(--c-tis));stroke:color-mix(in srgb,#b85c48 55%,#000);stroke-width:1.2}
 .gs-gb{fill:color-mix(in srgb,#6fa860 52%,var(--anatomy-paper));stroke:color-mix(in srgb,#4a7a3a 60%,#000);stroke-width:1.4}
 .gs-gb-hot{fill:color-mix(in srgb,var(--c-bad) 55%,var(--anatomy-paper));stroke:var(--c-bad);stroke-width:2.6}
+.gs-ghost{fill:none;stroke:var(--anatomy-mid);stroke-width:1.4;stroke-dasharray:7 5}
+.gs-cap{fill:var(--anatomy-strong);font-size:12px}
 .gs-bile{fill:color-mix(in srgb,#9bc53d 34%,var(--anatomy-paper));stroke:none}
 .gs-duct{fill:none;stroke:color-mix(in srgb,#6fa860 55%,var(--anatomy-mid));stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
 .gs-duct-in{fill:none;stroke:color-mix(in srgb,#9bc53d 30%,var(--anatomy-paper));stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
