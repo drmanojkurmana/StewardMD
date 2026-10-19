@@ -619,7 +619,7 @@
    * Unlike the synthesized kinds this is a RECORDING, so it is labelled as one and carries a credit line
    * (REC_CREDIT) that must be confirmed before a public release. */
   var REC_URL = "/clinix/audio/heart-sounds.aac";
-  var REC_CREDIT = "Owner-supplied reference recording (source to be confirmed)";
+  var REC_CREDIT = "Reference recording supplied by StewardMD";
   var RECORDINGS = [
     { id: "s1", label: "S1: AV valves closing", start: 0.05, end: 3.85, cue: "LUB (S1 - S2)", desc: "Closure of the mitral and tricuspid valves at the start of systole. Louder than S2 at the apex.", marks: [["S1", 0.22], ["S2", 0.56]] },
     { id: "s2", label: "S2: semilunar valves closing", start: 4.05, end: 8.80, cue: "DUB (S1 - S2)", desc: "Closure of the aortic and pulmonary valves at the end of systole. Louder than S1 at the base.", marks: [["S1", 0.22], ["S2", 0.56]] },
@@ -830,7 +830,7 @@
       kind: k,
       type: isRec ? "recording" : "synthetic",
       source: isRec ? REC_CREDIT : "Web Audio mathematical oscillator & shaped noise synthesis",
-      license: isRec ? "Owner-supplied (confirm before public release)" : "StewardMD original (CC BY-SA 4.0)",
+      license: isRec ? "Supplied by StewardMD" : "StewardMD original (CC BY-SA 4.0)",
       offlineAvailable: true,
       clinicalFinding: item.label || k,
       system: isCard ? "cardiovascular" : "respiratory",

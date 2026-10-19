@@ -55,7 +55,7 @@ test("each lesson label matches what the marker names say (S3 has an S3 marker, 
 test("recordings are registered as recordings with a credit, never as synthesized", () => {
   const meta = A.getAudioMetadata("rec_s3");
   assert.equal(meta.type, "recording");
-  assert.ok(/Owner-supplied/.test(meta.license));
+  assert.ok(/Supplied by StewardMD/.test(meta.license));
   assert.ok(A.REC_CREDIT.length > 10);
   assert.equal(A.getAudioMetadata("s3_gallop").type, "synthetic", "the synthesized sounds are unchanged");
 });

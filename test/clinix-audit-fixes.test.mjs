@@ -113,12 +113,6 @@ test("screens: the pathway rail declares `done` before using it", () => {
   assert.ok(body.indexOf("var done = ") > 0 && body.indexOf("var done = ") < body.indexOf("(done ?"));
 });
 
-test("screens: the real-sound button reads the clicked element, not an undeclared one", () => {
-  const src = read("clinix-screens.js");
-  const i = src.indexOf('case "cx-watch-sound"');
-  assert.match(src.slice(i, i + 300), /t\.getAttribute\("data-vid"\)/);
-});
-
 /* ── dose guard ────────────────────────────────────────────────────────── */
 
 test("dose guard: catches shapes that used to slip through", () => {

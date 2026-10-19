@@ -102,7 +102,7 @@ try {
   const labels = await ev("[...document.querySelectorAll('#clinixRoot [data-act=\"cx-audio\"]')].map(b => b.textContent.trim()).join('|')");
   ok(/Recording/.test(labels) && !/Synthesized/.test(labels), "buttons say Recording, not Synthesized: " + labels);
   ok((await ev("/Real recording with phonocardiogram/.test(document.getElementById('clinixScroll').textContent)")) === true, "each card says it is a real recording with a PCG");
-  ok((await ev("/source to be confirmed|Owner-supplied/.test(document.getElementById('clinixScroll').textContent)")) === true, "and carries its credit line");
+  ok((await ev("/Reference recording supplied by StewardMD/.test(document.getElementById('clinixScroll').textContent)")) === true, "and carries its credit line");
 
   // The clip decodes and plays: play S3 (needs a user gesture in real life; headless allows it with --autoplay-policy flag).
   await ev("(() => { SMD_CLINIX_AUDIO.unlock(); window.__plays = []; const o = SMD_CLINIX_AUDIO.play; SMD_CLINIX_AUDIO.play = function (k, op) { window.__plays.push(k + '@' + Date.now() % 100000); return o.call(SMD_CLINIX_AUDIO, k, op); }; return true; })()");
@@ -123,6 +123,32 @@ try {
   await sleep(300);
   const cur = await ev("(() => { const h = SMD_CLINIX_AUDIO.current(); return h ? h.kind + ':ended=' + h.ended() : 'none'; })()");
   ok(cur === "none", "Stop ends it (" + cur + ") plays=" + (await ev("window.__plays.join(',')")));
+
+  console.log("\n--- Physiology sandbox: Listen plays the recording ---");
+  await ev("(() => { const b = document.querySelector('#clinixRoot [data-act=\"cx-back\"]'); if (b) b.click(); return true; })()");
+  await sleep(300);
+  await ev("(() => { const b = document.querySelector('#clinixRoot [data-act=\"cx-sandbox\"]'); if (b) b.click(); return !!b; })()");
+  ok(await waitFor("!!document.querySelector('#clinixRoot [data-act=\"cx-physio-valve\"]')"), "the sandbox opens with the valve lesion picker");
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-physio-valve\"][data-id=\"ar\"]').click()");
+  await sleep(300);
+  const sndTxt = await ev("document.querySelector('#clinixRoot .cx-physio-listen').textContent");
+  ok(/ar murmur/.test(sndTxt), "aortic regurgitation selected, sound is the AR murmur: " + sndTxt.trim().slice(0, 40));
+  const lbl = await ev("[...document.querySelectorAll('#clinixRoot .cx-physio-listen [data-act=\"cx-physio-play\"]')].map(b => b.textContent.trim() + '#' + b.getAttribute('data-id')).join('|')");
+  ok(/Listen \(recording\)#rec_ar/.test(lbl) && /Synthesized model#ar_murmur/.test(lbl), "Listen is the recording, the synthesized model is one tap away: " + lbl);
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-physio-play\"][data-id=\"rec_ar\"]').click()");
+  ok(await waitFor("(() => { const h = SMD_CLINIX_AUDIO.current(); return !!(h && h.kind === 'rec_ar' && h.startsAt); })()", 80), "the AR recording plays from the sandbox");
+  ok(await waitFor("!!document.querySelector('#clinixRoot canvas.cx-physio-pcg')", 30), "a live PCG appears under the Listen button");
+  await sleep(1200);
+  const ink2 = await ev("(() => { const c = document.querySelector('#clinixRoot canvas.cx-physio-pcg'); if (!c) return -1; const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let n = 0; for (let i = 3; i < d.length; i += 4) if (d[i] > 40) n++; return n; })()");
+  ok(ink2 > 200, "the sandbox PCG is drawn from the audio (" + ink2 + " inked pixels)");
+  if (process.env.SHOTS) { await ev(`document.querySelectorAll("[id*=splash],[id*=Splash],#introPoster,#accountGate,#introOverlay").forEach(e => e.remove()); document.querySelector("#clinixRoot canvas.cx-physio-pcg").scrollIntoView({ block: "center" }); true`); await sleep(1500); const r2 = await call("Page.captureScreenshot", { format: "png" }); (await import("node:fs")).writeFileSync(process.env.SHOTS + "/heart-sandbox.png", Buffer.from(r2.result.data, "base64")); }
+  await ev("SMD_CLINIX_AUDIO.stopAll(); true");
+
+  console.log("\n--- no YouTube sound links anywhere in CliniX sounds ---");
+  const html = await ev("document.documentElement.outerHTML");
+  ok(!/Real \(YouTube|Listen to Real Patient Sound|cx-sound-yt|cx-watch-sound/.test(html), "no YouTube sound buttons are rendered");
+  const src = await (await fetch(BASE + "clinix-screens.js")).text();
+  ok(!/ytVideoId|cx-sound-yt|cx-watch-sound/.test(src), "and the code for them is gone");
   console.log("\n" + (fails ? fails + " FAILED" : "ALL GREEN"));
 } catch (e) { console.log("RUNNER ERROR", e); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); try { serveProc && serveProc.kill(); } catch {} process.exit(fails ? 1 : 0); }
