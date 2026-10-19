@@ -26,9 +26,9 @@ function modelOf(S, level, drug) {
   const nsaid = drug === 1 ? 1 : 0, ster = drug === 2 ? 1 : 0;
   const trigB = [0.6, 0.9, 0.22, 0.82][level], medB = [0.55, 1, 0.28, 0.74][level], neuB = [0.35, 1, 0.22, 0.45][level];
   const macB = [0.3, 0.65, 1, 0.9][level], exB = [0.55, 1, 0.4, 0.78][level], chron = level === 3 ? 1 : 0, resol = level === 2 ? 1 : 0;
-  const Hist = cl(medB * (ster ? 0.6 : 1));
-  const Pg = cl(medB * (nsaid ? 0.18 : ster ? 0.3 : 1));
-  const Ck = cl(medB * (ster ? 0.35 : 1));
+  const Hist = cl(medB * (ster ? 0.45 : 1));
+  const Pg = cl(medB * (nsaid ? 0.12 : ster ? 0.25 : 1));
+  const Ck = cl(medB * (ster ? 0.3 : 1));
   const Med = cl(0.35 * Hist + 0.3 * Pg + 0.35 * Ck);
   const Vas = cl(0.07 + 0.88 * (0.55 * Pg + 0.25 * Hist + 0.2 * Ck));
   const Perm = cl(0.05 + 0.9 * (0.32 * Hist + 0.42 * Pg + 0.26 * Ck));
@@ -53,10 +53,11 @@ const TESTS = [
 const CY = 320;
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
+<g id="skinSlot"></g>
 <rect id="redness" class="sc-red" x="14" y="44" width="${W - 28}" height="396" rx="18" opacity="0"/>
 <rect id="oedema" class="sc-oed" x="14" y="44" width="${W - 28}" height="230" rx="18" opacity="0"/>
-<text class="sc-zone" x="34" y="68">INJURED OR INFECTED TISSUE</text>
-<text class="sc-zone sc-dim" x="34" y="432">BLOOD VESSEL</text>
+<g id="tufts"></g>
+<g id="coxg"></g>
 <g id="bacteria"></g>
 <g id="lymph"></g>
 <g id="phag"></g>
@@ -70,11 +71,19 @@ const body = `
 
 buildScene({
   id: "acute-inflammation", fig: "Fig 1", title: "Acute inflammation: injury to clearing", W, H, body,
-  label: "An animated injured tissue and blood vessel. A trigger such as injury or infection wakes mast cells and macrophages. They release histamine, prostaglandin and cytokines. The vessel widens and its wall leaks, so protein rich exudate forms oedema. Neutrophils marginate, leave the vessel and phagocytose the trigger. Gauges show mediators, widening, swelling, neutrophils, clearing and the cardinal signs.",
+  label: "An animated injured skin and the blood vessel below it. A trigger such as injury or infection wakes mast cells and macrophages. They release histamine, prostaglandin and cytokines. The vessel widens and its wall leaks, so protein rich exudate forms oedema. Neutrophils slow at the wall, leave the vessel and eat the trigger. Treatments are an NSAID, which blocks prostaglandin making, and a steroid, which broadly quiets the response. Gauges show mediators, widening, swelling, neutrophils, clearing and the cardinal signs.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { CY, W, H }, pageJs: readFileSync(join(HERE, "inflam.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
-  extraCss: `.sc-red{fill:var(--c-bad)}.p-hist{--cc:#f2a541}.p-pg{--cc:#38d1ff}.p-ck{--cc:var(--c-cyt)}.heat-p{fill:none;stroke:var(--c-bad);stroke-width:1.6;stroke-linecap:round}.cl-deb{--cc:#c9b8a8}body[data-theme="light"] .cl-deb{--cc:#a08b76}`,
+  scene: { CY, W, H }, pageJs: readFileSync(join(HERE, "inflam.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With steroid",
+  extraCss: `.sc-red{fill:var(--c-bad)}.p-hist{--cc:#f2a541}.p-pg{--cc:#38d1ff}.p-ck{--cc:var(--c-cyt)}.heat-p{fill:none;stroke:var(--c-bad);stroke-width:1.6;stroke-linecap:round}.cl-deb{--cc:#c9b8a8}body[data-theme="light"] .cl-deb{--cc:#a08b76}
+.in-cap{fill:var(--anatomy-strong);font-size:12px}
+.in-tuft{fill:var(--c-bad);stroke:none}
+.in-cox{fill:var(--c-eos);stroke:color-mix(in srgb,var(--c-eos) 55%,#000);stroke-width:1}
+.in-block{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.6}
+.in-block2{fill:var(--c-bad);stroke:none}
+.in-ab{fill:var(--c-ab);stroke:none}
+.p-cap{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}
+.p-cap2{fill:var(--c-ab);stroke:none}`,
   sourcesLis: [
     "<strong>How acute inflammation develops.</strong> Injury or infection creates danger and microbial signals. Resident mast cells release histamine and macrophages release cytokines, while prostaglandin is made locally. Histamine, prostaglandin and cytokines widen the vessel (vasodilation) and open gaps in its wall (increased permeability). Protein rich fluid leaves as exudate and collects as oedema. Neutrophils slow and stick at the wall (margination), squeeze out (emigration), follow chemical signals and phagocytose microbes and debris. The cardinal signs are redness, heat, swelling, pain and loss of function. In resolution neutrophils die and macrophages clear them; if the trigger persists the response can become chronic with more macrophages and lymphocytes. This is standard textbook teaching in pathology and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> An NSAID blocks prostaglandin making, so widening, leak and pain signals fall while histamine, cytokines and phagocytosis are largely kept. A steroid broadly suppresses mediator making, neutrophil emigration and phagocytosis, so signs fall but clearing is slower and a trigger can persist. These are teaching toggles only.",
