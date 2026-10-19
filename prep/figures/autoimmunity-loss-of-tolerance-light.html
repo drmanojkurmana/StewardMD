@@ -266,19 +266,24 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 
 .sc-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
 .cl-treg{--cc:var(--c-ab)}
-.cl-tis2{--cc:var(--c-graft)}
 .p-ab{fill:none;stroke:var(--c-ab);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .p-cytk{--cc:var(--c-cyt)}
 .p-vir{--cc:#ff9a3d}
 .p-self{--cc:#ffd24a}
+.p-blk{--cc:var(--c-bad)}
+.p-horm{--cc:var(--c-good)}
 .del-x{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-linecap:round}
 .supp{fill:none;stroke:var(--c-ab);stroke-width:1.4;stroke-dasharray:3 3}
 .blk-c{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:2}
 .blk-l{stroke:var(--c-bad);stroke-width:2.2;stroke-linecap:round}
-.blk-t{fill:var(--c-bad);pointer-events:none;font-size:11px;font-weight:700}
 .vir-spike{stroke:#ff9a3d;stroke-width:1.3;stroke-linecap:round;fill:none}
 .dmg-ring{fill:none;stroke:var(--c-bad);stroke-width:1.4}
-</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Autoimmunity: loss of tolerance</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>escape some · autoantibodies moderate · tissue injured · function reduced</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated thymus, bone marrow, periphery and target tissue. In the thymus and marrow, developing lymphocytes that bind self strongly are deleted. In the periphery, regulatory T cells suppress escapees and other cells become anergic. When tolerance breaks down, helped by HLA risk genes, infection mimicry and release of hidden antigens, autoreactive T cells and autoantibodies injure tissue. Gauges show escape, autoantibodies, tissue damage and organ function. Treatment choices are immunosuppression, anti-B cell therapy and replacing lost function."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+.ai-vessel{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 42%,var(--anatomy-paper));stroke-width:10;stroke-linecap:round;opacity:.8}
+.ai-glow{fill:var(--c-bad);stroke:none}
+.ai-cap{fill:var(--anatomy-strong);font-size:12px}
+.ai-cap2{fill:var(--c-good);stroke:color-mix(in srgb,var(--c-good) 55%,#000);stroke-width:1}
+.ai-capline{stroke:var(--anatomy-paper);stroke-width:1.4;stroke-linecap:round}
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Autoimmunity: loss of tolerance</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>escape some · autoantibodies moderate · tissue injured · function reduced</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated path from training to attack. In the thymus and marrow, developing lymphocytes that bind self strongly are deleted. In the periphery, regulatory T cells calm escapees. When tolerance breaks down, helped by risk genes and infection mimicry, escaped attack cells travel a vessel to the kidney, B cells release autoantibodies, and the kidney is injured. A slider sets the tolerance state, and treatment choices are replacing lost function, anti-B cell therapy and immunosuppression."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
 <rect class="sc-panel" x="14" y="44" width="300" height="196" rx="18"/>
 <rect class="sc-panel" x="330" y="44" width="300" height="196" rx="18"/>
 <rect class="sc-panel" x="646" y="44" width="300" height="196" rx="18"/>
@@ -287,25 +292,27 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 <text class="sc-zone" x="350" y="68">BONE MARROW</text>
 <text class="sc-zone" x="666" y="68">PERIPHERY</text>
 <text class="sc-zone" x="34" y="280">TARGET TISSUE</text>
-<text class="sc-lab" x="700" y="280">organ-specific or systemic</text>
+<text class="sc-lab" x="700" y="280">kidney as one example target</text>
+<g id="kidSlot"></g>
+<path id="vesselKid" class="ai-vessel" d="M700 234 C700 268 720 300 745 330"/>
 <g id="Lbase"></g><g id="Lpart"></g><g id="Lover"></g><g id="Lpanel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.</span></figcaption></figure>
 <div class="dr-controls">
   <label class="dr-range"><span>Tolerance state</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="breakdown"><span class="dr-ticks"><i>tolerant</i><i>breakdown</i><i>established</i></span></label>
-  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">immunosuppression (dampens T and B cells)</option><option value="2">anti-B cell therapy (removes B cells)</option><option value="3">replace lost function</option></select></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With immunosuppression"><option value="0">no treatment</option><option value="1">replace lost function</option><option value="2">anti-B cell therapy (removes B cells)</option><option value="3">immunosuppression (dampens T and B cells)</option></select></label>
   <button id="pause" type="button" aria-pressed="false">Pause motion</button>
 </div>
 <p id="status" class="dr-status" aria-live="polite"></p>
 <p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
 <h2>What the figure shows, and how sure we are</h2>
-<ul><li><strong>Central and peripheral tolerance.</strong> Autoimmunity follows failure of tolerance to self antigens. In central tolerance, developing T cells in the thymus and B cells in the bone marrow that bind self strongly are deleted by cell death, edited or left unresponsive. In peripheral tolerance, regulatory T cells suppress escapees, and cells met by self antigen without costimulation become anergic. These layers normally keep immune responses to self low while preserving responses to microbes.</li><li><strong>Why tolerance fails.</strong> Susceptibility is genetic and environmental in various combinations. Certain HLA genes and many non-HLA genes alter antigen presentation and lymphocyte signalling and enhance risk in susceptible individuals; epigenetic change and innate sensing can promote proinflammatory responses. Environmental triggers include infection, where microbial antigens mimic self (molecular mimicry), and tissue injury that releases hidden or sequestered self antigens and nucleic acids. Defective clearance of dying cells and nucleic acids, described in systemic disease, keeps self material available and sustains inflammation. Hormonal and other factors linked to sex are considered relevant because many systemic autoimmune diseases are more common in women. Organ-specific examples include Graves disease of the thyroid; systemic examples spread across skin, joints, kidney and vessels. This is standard teaching in immunology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Treatment ideas shown.</strong> Immunosuppression dampens autoreactive T and B cell activity broadly. Anti-B cell therapy removes B cells and lowers autoantibodies while T cell injury may persist. Replacing lost function, for example a missing hormone, restores what the damaged organ no longer provides without itself stopping the immune attack. These are teaching toggles only.</li></ul>
+<ul><li><strong>Central and peripheral tolerance.</strong> Autoimmunity follows failure of tolerance to self antigens. In central tolerance, developing T cells in the thymus and B cells in the bone marrow that bind self strongly are deleted by cell death, edited or left unresponsive. In peripheral tolerance, regulatory T cells suppress escapees, and cells met by self antigen without costimulation become anergic. These layers normally keep immune responses to self low while preserving responses to microbes.</li><li><strong>Why tolerance fails.</strong> Susceptibility is genetic and environmental in various combinations. Certain HLA genes and many non-HLA genes alter antigen presentation and lymphocyte signalling and enhance risk in susceptible individuals; epigenetic change and innate sensing can promote proinflammatory responses. Environmental triggers include infection, where microbial antigens mimic self (molecular mimicry), and tissue injury that releases hidden or sequestered self antigens and nucleic acids. Defective clearance of dying cells and nucleic acids, described in systemic disease, keeps self material available and sustains inflammation. Hormonal and other factors linked to sex are considered relevant because many systemic autoimmune diseases are more common in women. The kidney stands in here as one example target; organ-specific examples include Graves disease of the thyroid, while systemic examples spread across skin, joints, kidney and vessels. This is standard teaching in immunology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Treatment ideas shown.</strong> Replacing lost function, for example a missing hormone, restores what the damaged organ no longer provides without itself stopping the immune attack. Anti-B cell therapy removes B cells and lowers autoantibodies while T cell injury may persist. Immunosuppression dampens autoreactive T and B cell activity broadly and so calms the whole attack. These are teaching toggles only.</li><li><strong>Organ art.</strong> Organ art is NIH BioArt Source, public domain.</li></ul>
 <p><strong>What was simplified.</strong> Receptor editing detail, the full gene list, complement and Fc pathways, each disease pattern, and all drug choices, monitoring and doses are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
-<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). Organ illustrations are NIH BioArt Source (public domain); all other drawing is original.</p>
 <p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
-</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Tolerance state","a":[0.08,0.55,1],"names":["tolerant","breakdown","established autoimmunity"],"ticks":["tolerant","breakdown","established"],"start":1},"settings":[{"label":"no treatment"},{"label":"immunosuppression (dampens T and B cells)"},{"label":"anti-B cell therapy (removes B cells)"},{"label":"replace lost function"}],"drugNames":["no treatment","immunosuppression","anti-B cell therapy","replacement of lost function"],"status":"Tolerance: {level} · {drug} ·"}};
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Tolerance state","a":[0.08,0.55,1],"names":["tolerant","breakdown","established autoimmunity"],"ticks":["tolerant","breakdown","established"],"start":1},"settings":[{"label":"no treatment"},{"label":"replace lost function"},{"label":"anti-B cell therapy (removes B cells)"},{"label":"immunosuppression (dampens T and B cells)"}],"drugNames":["no treatment","replacement of lost function","anti-B cell therapy","immunosuppression"],"status":"Tolerance: {level} · {drug} ·"}};
 const modelOf = function modelOf(S, level, drug) {
   const a = S.level.a[level];
   const cl = (v) => Math.max(0, Math.min(1, v));
-  const imm = drug === 1 ? 1 : 0, antiB = drug === 2 ? 1 : 0, repl = drug === 3 ? 1 : 0;
+  const repl = drug === 1 ? 1 : 0, antiB = drug === 2 ? 1 : 0, imm = drug === 3 ? 1 : 0;
   const E = cl(0.06 + 0.88 * a);
   const R = cl(0.92 - 0.72 * a);
   const T = cl(E * (1 - 0.55 * R) * (1 - 0.60 * imm) * (1 - 0.10 * antiB));
@@ -314,7 +321,7 @@ const modelOf = function modelOf(S, level, drug) {
   const Fn = cl(1 - 0.88 * D + (repl ? 0.52 * D : 0));
   const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
   const words = [w(E, 0.25, 0.60, ["low", "some", "high"]), w(Ab, 0.25, 0.55, ["low", "moderate", "high"]), w(D, 0.25, 0.55, ["intact", "injured", "damaged"]), w(Fn, 0.40, 0.70, ["failing", "reduced", "preserved"])];
-  return { a, E, R, T, Ab, D, Fn, imm, antiB, repl, words, readout: "escape " + words[0] + " \u00b7 autoantibodies " + words[1] + " \u00b7 tissue " + words[2] + " \u00b7 function " + words[3] };
+  return { a, E, R, T, Ab, D, Fn, imm, antiB, repl, words, readout: "escape " + words[0] + " · autoantibodies " + words[1] + " · tissue " + words[2] + " · function " + words[3] };
 };
 /* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
 const NS = "http://www.w3.org/2000/svg";
@@ -409,13 +416,345 @@ function run(scn) {
   start();
 }
 
-/* Autoimmunity scene: central deletion in thymus and marrow, peripheral regulation and anergy, escape, autoantibodies and tissue injury. */
+/* Shared organ art for the animated mechanism scenes. Plain globals, ES2015, no imports.
+ * Inlined after bio.lib.js when buildScene gets organs:true, so mk/f1/clamp below are the shared ones.
+ * organ(parent, kind, x, y, w, opts) draws real anatomy art (NIH BioArt Source public domain,
+ * Servier Medical Art CC BY 3.0, one DBCLS CC BY 4.0 knee; injected as _ORG_ART by buildScene
+ * for the kinds the page uses) centred on x,y and w px wide, and falls back to the existing
+ * procedural layered silhouette for kinds without art (adrenal, uterus, thyroid, ganglion) or when art
+ * was not injected (liver, bladder and eye keep their procedural drawings as fallback).
+ * Art ports are fractions of the art viewBox (see _ORG_FRAC). The liver-4 art is the bare mass,
+ * so the lib adds a procedural gallbladder under the gall port plus short portal and hepatic
+ * vein stubs ending at the porta and hepvein ports.
+ * opts: { h (px height, else proportional), flip (mirror left/right), cls (extra class), id,
+ *   tint (a CSS colour with opacity, overlaid as an organ-shaped mask for disease states),
+ *   dim (dull the art) }.
+ * Returns { g, kind, x, y, w, h, ports, art } with absolute SVG coords; ports.in/out always exist.
+ * Art keeps its own colours (a faint contrast halo keeps it readable in dark and light themes);
+ * procedural fill is a vertical gradient whose stops derive from --cc (a theme aware palette var,
+ * so dark and light both work); edge stroke and landmark lines use color-mix detail classes.
+ * Emits no text, so label font and dash rules are inherited from the calling scene. */
+if (!document.getElementById("orgCss")) { var _orgSt = document.createElement("style"); _orgSt.id = "orgCss";
+  _orgSt.textContent = ".org-halo{filter:drop-shadow(0 0 1px rgba(0,0,0,.65)) drop-shadow(0 0 1px rgba(255,255,255,.45))}"
+  + ".org-b{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1.2;stroke-linejoin:round;stroke-linecap:round}"
+  + ".org-d{fill:none;stroke:color-mix(in srgb,var(--cc) 40%,var(--anatomy-hi));stroke-width:1;stroke-linecap:round;opacity:.8}"
+  + ".org-dk{fill:none;stroke:color-mix(in srgb,var(--cc) 62%,#000);stroke-width:1.1;stroke-linecap:round;opacity:.8}"
+  + ".org-f{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1;stroke-linejoin:round}"
+  + ".org-v{fill:none;stroke-linecap:round}"
+  + ".org-liver{--cc:var(--c-rbc)}.org-heart{--cc:var(--c-rbc)}.org-kidney{--cc:var(--c-eos)}.org-lung{--cc:var(--c-endo)}"
+  + ".org-stomach{--cc:var(--c-graft)}.org-brain{--cc:var(--c-mac)}.org-pancreas{--cc:var(--c-plt)}.org-spleen{--cc:var(--c-sm)}"
+  + ".org-bladder{--cc:var(--c-th2)}.org-uterus{--cc:var(--c-endo)}.org-ovary{--cc:var(--c-plt)}.org-thyroid{--cc:var(--c-neut)}.org-eye{--cc:#e6e1d4}.org-ganglion{--cc:var(--c-mac)}"
+  + ".org-adrenal{--cc:#e9a13b}"
+  + ".org-bowel{--cc:var(--c-graft)}.org-colon{--cc:var(--c-eos)}.org-ear{--cc:var(--c-plt)}.org-skin{--cc:#d9a58c}"
+  + ".org-muscle{--cc:var(--c-rbc)}.org-joint{--cc:#cfc8bd}.org-vessel{--cc:var(--c-rbc)}";
+  document.head.appendChild(_orgSt); }
+var _orgN = 0;
+/* per instance gradients: base (light -> base -> dark of --cc) plus a white top / dark bottom shade overlay */
+function _orgDefs(g) {
+  _orgN++; var id = "og" + _orgN, hid = "oh" + _orgN;
+  var defs = mk("defs", {}, g);
+  var lg = mk("linearGradient", { id: id, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  var s0 = mk("stop", { offset: "0", "stop-color": "#999" }, lg); s0.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 55%,#fff)");
+  var s1 = mk("stop", { offset: ".55", "stop-color": "#888" }, lg); s1.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 78%,var(--anatomy-paper))");
+  var s2 = mk("stop", { offset: "1", "stop-color": "#666" }, lg); s2.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 66%,#000)");
+  var hg = mk("linearGradient", { id: hid, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  mk("stop", { offset: "0", "stop-color": "#fff", "stop-opacity": ".2" }, hg);
+  mk("stop", { offset: ".55", "stop-color": "#fff", "stop-opacity": "0" }, hg);
+  mk("stop", { offset: "1", "stop-color": "#000", "stop-opacity": ".14" }, hg);
+  return { b: "url(#" + id + ")", h: "url(#" + hid + ")" };
+}
+/* one filled silhouette plus its shade overlay, same path data so the light stays inside */
+function _ob(g, d, G) {
+  mk("path", { class: "org-b", d: d, fill: G.b, stroke: "#666" }, g);
+  mk("path", { d: d, fill: G.h, stroke: "none", "pointer-events": "none" }, g);
+}
+function _ol(g, d, cls) { return mk("path", { class: cls || "org-d", d: d, fill: "none" }, g); }
+function _of(g, d, fillCss, cc) { var e = mk("path", { class: "org-f", d: d, stroke: "#666" }, g); e.setAttribute("style", "fill:" + fillCss + ";--cc:" + cc); return e; }
+function _ov(g, d, color, wdt) { var e = mk("path", { class: "org-v", d: d, fill: "none", stroke: "#777", "stroke-width": wdt, "stroke-linecap": "round" }, g); e.setAttribute("style", "stroke:" + color); return e; }
+function _odot(g, x, y, r, fillCss) { var e = mk("circle", { cx: x, cy: y, r: r, stroke: "none" }, g); e.setAttribute("style", "fill:" + fillCss); return e; }
+
+/* liver: big right lobe, smaller left lobe, falciform notch, gallbladder, porta hepatis stubs */
+function _orgLiver(g, G) {
+  _ov(g, "M-2 46L-2 18", "var(--d-ven)", 5); _ov(g, "M7 46L5 20", "var(--d-art)", 3); _ov(g, "M-11 46L-9 20", "var(--c-bac)", 2.5);
+  _ob(g, "M-6-30C22-33 44-25 50-7C54 9 40 25 18 30C2 33-5 22-7 6C-8-8-8-22-6-30Z", G);
+  _ob(g, "M-8-27C-24-27-40-19-48-6C-51 1-45 9-35 12C-24 15-11 9-8-1C-6-10-6-20-8-27Z", G);
+  _ol(g, "M-8-29C-7-18-6-6-4 6", "org-dk");
+  _ol(g, "M-2-28C14-29 30-24 40-14");
+  _of(g, "M10 18C16 16 22 18 23 24C24 31 19 37 14 36C9 35 7 28 8 23C8 21 9 19 10 18Z", "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  return { h0: 78, ports: { in: [-2, 46], out: [12, -30], porta: [-2, 18], gall: [16, 33], lobe: [20, 0] } };
+}
+/* heart: mass with apex down left, septum, coronary groove, aorta with arch, pulmonary split, caval stubs */
+function _orgHeart(g, G) {
+  _ov(g, "M-2-18L-2-44C-2-52-10-56-20-54C-28-52-32-46-32-38", "var(--d-art)", 8);
+  _ov(g, "M-8-52L-8-59M-15-54L-16-60M-22-53L-24-59", "var(--d-art)", 2.5);
+  _ov(g, "M12-16C8-28 2-34-4-38", "var(--d-ven)", 7);
+  _ov(g, "M-4-38C-12-40-20-38-28-34", "var(--d-ven)", 4.5); _ov(g, "M-4-38C4-40 12-38 20-34", "var(--d-ven)", 4.5);
+  _ov(g, "M20-20L20-52", "var(--d-ven)", 7); _ov(g, "M18 34L18 58", "var(--d-ven)", 7);
+  _ov(g, "M-36-2L-50-6M-34 14L-48 16", "var(--d-art)", 4);
+  _ob(g, "M-4-32C24-34 42-16 40 10C38 32 12 48-20 50C-34 44-40 24-36 2C-33-18-22-31-4-32Z", G);
+  _ol(g, "M0-30C4-10 0 14-14 44", "org-dk");
+  _ol(g, "M-34 6C-18 12 6 12 38 4");
+  _ol(g, "M-6-28C-14-18-18-6-20 8");
+  return { h0: 120, ports: { in: [20, -52], out: [-32, -38], ivc: [18, 58], apex: [-20, 50], pulm: [-28, -34] } };
+}
+/* kidney: bean with hilum, cortex rim, medulla rays, pelvis funnel, ureter, artery and vein stubs */
+function _orgKidney(g, G) {
+  _ov(g, "M-12 6C-22 12-28 18-28 30C-28 50-26 70-24 90", "var(--cc)", 4.5);
+  _ov(g, "M-50-8C-40-8-30-8-22-6", "var(--d-art)", 4); _ov(g, "M-50 10C-40 10-30 8-22 6", "var(--d-ven)", 5);
+  _ob(g, "M8-58C38-58 54-32 50 2C56 32 42 60 8 60C-8 60-16 48-19 34C-26 24-26-24-19-34C-16-48-8-58 8-58Z", G);
+  _ol(g, "M8-49C32-49 45-28 42 0C46 28 34 51 8 51C-1 51-8 43-10 32C-15 24-15-24-10-32C-8-43-1-49 8-49Z");
+  _ol(g, "M-6-30L14-38M-8-10L16-12M-8 12L16 14M-6 32L14 40");
+  _ol(g, "M16-44C30-36 38-20 38 0");
+  _of(g, "M-19-14C-8-12-2-8 2-2C-2 4-8 10-18 14C-22 8-22-8-19-14Z", "color-mix(in srgb,var(--cc) 35%,#fff)", "var(--cc)");
+  return { h0: 150, ports: { in: [-50, -8], out: [-24, 90], vein: [-50, 10], pelvis: [-12, 4], cortex: [30, 0] } };
+}
+/* lung: one lung with oblique fissure, hilum bronchus splitting into lobar and segmental branches */
+function _orgLung(g, G) {
+  _ov(g, "M-58 4L-30 4", "var(--anatomy-hi)", 6);
+  _ov(g, "M-30 4C-22-6-16-16-10-26", "var(--anatomy-hi)", 4.5); _ov(g, "M-30 4C-22 14-14 24-6 34", "var(--anatomy-hi)", 4.5);
+  _ov(g, "M-18-14L-28-22M-16-16L-8-24M-14-20L-14-32M-20 16L-30 24M-16 20L-6 28M-12 26L-10 38", "var(--anatomy-hi)", 2);
+  _ov(g, "M-58-8L-34-6", "var(--d-ven)", 4); _ov(g, "M-58 14L-34 12", "var(--d-art)", 4);
+  _ob(g, "M2-60C24-56 40-32 43 8C45 38 32 60 2 62C-24 62-40 42-42 10C-44-24-20-58 2-60Z", G);
+  _ol(g, "M-40-2C-20 8 0 22 24 40", "org-dk");
+  _ol(g, "M-8-48C8-50 22-40 30-26");
+  return { h0: 130, ports: { in: [-58, 4], out: [-58, 14], art: [-58, -8], apex: [2, -60], base: [2, 62] } };
+}
+/* stomach: J shape with fundus dome, rugae, antrum sweep, pylorus ring, oesophagus and duodenum stubs */
+function _orgStomach(g, G) {
+  _of(g, "M-38-58L-22-58L-22-36L-38-36Z", "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))", "var(--cc)");
+  _ob(g, "M-38-36C-46-24-50-8-46 10C-42 30-30 46-12 50C6 54 28 46 40 32C44 27 46 23 46 18L34 14C30 22 20 30 6 32C-8 34-22 26-28 12C-33-1-31-16-26-28C-24-32-22-34-22-36Z", G);
+  _ol(g, "M-36-10C-30 6-22 20-8 28M-28-22C-22-6-12 10 4 22M-16-30C-10-14 0 2 14 12");
+  _ol(g, "M40 15C43 19 43 25 40 29M34 14C37 18 37 26 34 30", "org-dk");
+  _ol(g, "M46 16L60 22M44 28L58 32", "org-dk");
+  return { h0: 116, ports: { in: [-30, -58], out: [60, 27], fundus: [-40, -12], antrum: [24, 38], pylorus: [40, 22] } };
+}
+/* brain lateral: cerebrum with Sylvian fissure and gyri, cerebellum with folia, tapered brainstem */
+function _orgBrain(g, G) {
+  _ov(g, "M10 50L10 64", "var(--d-art)", 5);
+  _ob(g, "M-50-6C-50-32-24-42 4-40C30-38 44-28 44-8C44 10 32 24 8 28C-18 31-50 24-50-6Z", G);
+  _ol(g, "M-12 10C2 6 18 2 34-4", "org-dk");
+  _ol(g, "M-38-20C-32-10-32 2-38 12M-26-30C-20-20-20-6-26 6M-4-32C2-22 2-8-4 2M10-30C16-20 16-6 10 4M28-22C34-14 34-2 28 8");
+  _ol(g, "M-16 6L-24-4M-10 4L-12-8", "org-dk");
+  _ob(g, "M2 24L16 24L12 56L6 56Z", G);
+  _ol(g, "M2 36C6 38 12 38 16 36");
+  _ob(g, "M22 24C34 22 46 26 48 34C50 42 42 48 32 47C24 46 20 38 20 32C20 28 20 26 22 24Z", G);
+  _ol(g, "M24 32L44 32M25 37L43 37M27 42L41 42");
+  return { h0: 110, ports: { in: [10, 64], out: [4, -40], parenchyma: [-8, -6], cereb: [34, 35], frontal: [-40, -8] } };
+}
+/* pancreas: bulky head right, tapering tail left, main duct with side branches, islet dots */
+function _orgPancreas(g, G) {
+  _ob(g, "M-50-4C-32-14-8-14 14-10C32-7 46-2 49 10C51 21 40 28 26 25C8 21-20 12-50 6Z", G);
+  _ol(g, "M-46 1C-20-2 10 0 38 10", "org-dk");
+  _ol(g, "M-30-1L-34-8M-10-1L-14-9M8 0L4-8M-28 1L-32 8M-6 1L-10 8M12 2L8 10");
+  _ol(g, "M52-6C58 4 58 16 50 24");
+  _odot(g, -20, -2, 1.6, "var(--d-art)"); _odot(g, 0, 0, 1.6, "var(--d-art)"); _odot(g, 22, 6, 1.6, "var(--d-art)");
+  return { h0: 60, ports: { in: [-10, -12], out: [49, 12], head: [36, 8], tail: [-48, 1] } };
+}
+/* spleen: crescent with top notch, trabeculae, hilar artery and vein stubs below */
+function _orgSpleen(g, G) {
+  _ov(g, "M-30 52C-28 44-26 40-22 36", "var(--d-art)", 3.5); _ov(g, "M-20 54C-19 46-17 42-13 38", "var(--d-ven)", 4.5);
+  _ob(g, "M-38-30C-8-40 28-34 44-12C52 4 44 26 20 34C-4 41-34 32-44 10C-48-4-46-22-38-30Z", G);
+  _ol(g, "M-8-36C-4-33 0-33 4-36", "org-dk");
+  _ol(g, "M-30-10C-10-2 12-2 32-10M-28 8C-8 16 12 16 30 8");
+  return { h0: 96, ports: { in: [-30, 52], out: [-20, 54], hilum: [-18, 37], pulp: [0, 0] } };
+}
+/* adrenal: small cap that sits on the kidney pole, cortex rim, medulla fold, vessel stubs */
+function _orgAdrenal(g, G) {
+  _ov(g, "M-52 8L-38 8", "var(--d-art)", 3.5); _ov(g, "M38 8L52 8", "var(--d-ven)", 4);
+  _ob(g, "M-45 18C-40-6-22-26 0-26C22-26 40-6 45 18C30 10 15 6 0 6C-15 6-30 10-45 18Z", G);
+  _ol(g, "M-36 10C-28-2-14-10 0-10C14-10 28-2 36 10");
+  _ol(g, "M-20 4C-10 1 10 1 20 4", "org-dk");
+  _odot(g, -12, -8, 1.8, "var(--d-art)"); _odot(g, 8, -12, 1.8, "var(--d-art)");
+  return { h0: 60, ports: { in: [-52, 8], out: [52, 8], cortex: [0, -22], medulla: [0, 2] } };
+}
+/* ganglion: sensory ganglion with capsule, fibre stubs, satellite glia dots, one big soma with nucleus */
+function _orgGanglion(g, G) {
+  _ov(g, "M-52 0L-30 0", "var(--anatomy-hi)", 7);
+  _ov(g, "M30 0L52 0", "var(--anatomy-hi)", 7);
+  _ob(g, "M-32-27C-12-37 13-37 30-25C43-12 43 12 30 25C13 37-12 37-32 27C-42 13-42-13-32-27Z", G);
+  _ol(g, "M-27-21C-10-29 12-29 26-19");
+  _of(g, "M-16 0C-16-9-9-16 0-16C9-16 16-9 16 0C16 9 9 16 0 16C-9 16-16 9-16 0Z", "color-mix(in srgb,var(--cc) 62%,var(--anatomy-paper))", "var(--cc)");
+  _of(g, "M-7 0C-7-4-4-7 0-7C4-7 7-4 7 0C7 4 4 7 0 7C-4 7-7 4-7 0Z", "color-mix(in srgb,var(--cc) 45%,#1a1030)", "var(--cc)");
+  _odot(g, 2, 1, 1.8, "color-mix(in srgb,var(--cc) 70%,#fff)");
+  _odot(g, -25, -13, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 25, -12, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 0, 28, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _ol(g, "M-13-8L-22-16M13-8L22-16");
+  return { h0: 96, ports: { in: [-52, 0], out: [52, 0], soma: [0, 0], nucleus: [0, 0] } };
+}
+/* bladder: dome with detrusor arcs, trigone, ureters in from above, urethra out below */
+function _orgBladder(g, G) {
+  _ov(g, "M-52-44C-44-34-36-26-30-18", "var(--cc)", 4); _ov(g, "M52-44C44-34 36-26 30-18", "var(--cc)", 4);
+  _ob(g, "M0-50C26-48 40-30 40-6C40 16 26 32 8 40L-8 40C-26 32-40 16-40-6C-40-30-26-48 0-50Z", G);
+  _ob(g, "M-8 40L8 40L8 64L-8 64Z", G);
+  _ol(g, "M-8 52L8 52", "org-dk");
+  _ol(g, "M-24-8L24-8L0 24Z");
+  _ol(g, "M-28-28C-12-36 12-36 28-28M-34-12C-16-22 16-22 34-12");
+  return { h0: 120, ports: { in: [-52, -44], out: [0, 64], inR: [52, -44], trigone: [0, 8], dome: [0, -48] } };
+}
+/* uterus: fundus, cavity, cervix, tubes with fimbriae, ovaries with follicles */
+function _orgUterus(g, G) {
+  _ov(g, "M-16-16C-26-17-32-19-38-23", "var(--cc)", 3.5); _ov(g, "M16-16C26-17 32-19 38-23", "var(--cc)", 3.5);
+  _ov(g, "M-38-23L-44-27M-38-23L-45-23M-38-23L-44-19M-38-23L-42-29", "var(--cc)", 1.2);
+  _ov(g, "M38-23L44-27M38-23L45-23M38-23L44-19M38-23L42-29", "var(--cc)", 1.2);
+  var eo = mk("ellipse", { class: "org-f", cx: -45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var eo2 = mk("ellipse", { class: "org-f", cx: 45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo2.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var _fol = "color-mix(in srgb,var(--c-plt) 45%,#000)";
+  _odot(g, -47, -14, 1.6, _fol); _odot(g, -43, -8, 1.6, _fol); _odot(g, -46, -4, 1.4, _fol);
+  _odot(g, 47, -14, 1.6, _fol); _odot(g, 43, -8, 1.6, _fol); _odot(g, 46, -4, 1.4, _fol);
+  _ob(g, "M-16-20C-8-26 8-26 16-20C20-2 15 20 8 32L-8 32C-15 20-20-2-16-20Z", G);
+  _of(g, "M-10-14L10-14L0 22Z", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  _ol(g, "M-11 18L11 18", "org-dk"); _ol(g, "M0 18L0 32");
+  return { h0: 100, ports: { in: [-45, -22], out: [0, 33], ovL: [-45, -10], ovR: [45, -10], fundus: [0, -24] } };
+}
+/* ovary: almond body with surface arcs, hilar artery and vein stubs at the hilum */
+function _orgOvary(g, G) {
+  _ov(g, "M-52 0L-40 0", "var(--d-art)", 3); _ov(g, "M40 0L52 0", "var(--d-ven)", 3.5);
+  _ob(g, "M-40-6C-30-24-5-30 15-26C33-22 42-10 40 6C38 22 20 30 0 29C-20 28-38 14-40-6Z", G);
+  _ol(g, "M-28-12C-16-20 0-23 14-21");
+  _ol(g, "M-32 4C-20 12-2 17 14 14", "org-dk");
+  return { h0: 70, ports: { in: [-52, 0], out: [52, 0], dom: [0, 0], surf: [0, -27] } };
+}
+/* thyroid butterfly: two lobes, isthmus bridge, trachea rings behind, parathyroid dots */
+function _orgThyroid(g, G) {
+  _ov(g, "M-7-40L-7 40M7-40L7 40", "var(--anatomy-hi)", 2);
+  _ov(g, "M-7-28L7-28M-7-12L7-12M-7 24L7 24M-7 36L7 36", "var(--anatomy-hi)", 1.2);
+  _ob(g, "M16-32C28-30 35-16 33 4C31 22 25 32 16 32C8 32 6 20 8 2C10-14 11-28 16-32Z", G);
+  _ob(g, "M-16-32C-28-30-35-16-33 4C-31 22-25 32-16 32C-8 32-6 20-8 2C-10-14-11-28-16-32Z", G);
+  _ob(g, "M-10 6L10 6L10 16L-10 16Z", G);
+  _ol(g, "M14-20C18-10 18 6 14 20M-14-20C-18-10-18 6-14 20");
+  _odot(g, -30, 8, 2, "var(--c-plt)"); _odot(g, 30, -4, 2, "var(--c-plt)");
+  return { h0: 90, ports: { in: [16, -34], out: [0, 36], isthmus: [0, 11], lobeR: [22, 0], lobeL: [-22, 0] } };
+}
+/* eye: sclera ball with cornea bulge, iris and pupil facing left, retina arc, optic nerve stub right */
+function _orgEye(g, G) {
+  _ov(g, "M26 0L54 0", "var(--c-plt)", 8);
+  _ob(g, "M-36-4C-34-22-16-32 4-30C24-28 34-12 32 4C30 20 14 30-4 29C-22 28-36 14-36-4Z", G);
+  _of(g, "M-39 0C-39-6-35-11-30-11C-25-11-21-6-21 0C-21 6-25 11-30 11C-35 11-39 6-39 0Z", "color-mix(in srgb,var(--c-endo) 70%,var(--anatomy-paper))", "var(--c-endo)");
+  _odot(g, -30, 0, 5, "#241a12");
+  _odot(g, -32, -3.5, 1.5, "#ffffff");
+  _ol(g, "M16-15C23-5 23 7 15 17");
+  return { h0: 70, ports: { in: [-41, 0], out: [54, 0], retina: [16, 0], lens: [-20, 0] } };
+}
+/* Real-art store, filled by buildScene after this lib: _ORG_ART[kind] = { vb:[x,y,w,h],
+ * pfx:"oaxxx", body:"<inner svg markup>" }. Ports are fractions of the viewBox, measured
+ * off the slimmed art (see tools/figures/dev/svgslim.py); content fills the frame. */
+var _ORG_ART = {};
+var _ORG_FRAC = {
+  liver: { in: [.35, .95], out: [.40, .01], porta: [.35, .95], hepvein: [.40, .01], gall: [.55, .66], lobe: [.15, .70] },
+  heart: { in: [.30, .01], out: [.48, .01], aorta: [.48, .01], ivc: [.28, .90], apex: [.70, .97], pulm: [.60, .08] },
+  kidney: { in: [.04, .36], out: [.38, .97], vein: [.04, .46], pelvis: [.36, .41], cortex: [.62, .45], hilum: [.28, .41] },
+  lung: { in: [.46, .53], out: [.44, .60], art: [.44, .48], apex: [.24, .30], base: [.24, .87], trachea: [.49, .01], carina: [.49, .50], hilumL: [.42, .58], hilumR: [.56, .58], apexR: [.75, .34], baseR: [.75, .86] },
+  stomach: { in: [.42, .00], out: [.50, .95], fundus: [.38, .10], antrum: [.52, .30], pylorus: [.60, .35] },
+  intestine: { in: [.58, .38], out: [.50, .95], duodenum: [.60, .40], jejunum: [.42, .60], ileum: [.50, .72], cecum: [.60, .82], colon: [.28, .60], rectum: [.50, .92] },
+  brain: { in: [.60, .97], out: [.42, .04], parenchyma: [.42, .42], cereb: [.76, .78], frontal: [.08, .40], stem: [.60, .93], carotid: [.16, .75] },
+  pancreas: { in: [.50, .08], out: [.95, .50], head: [.85, .45], tail: [.06, .45], body: [.50, .45] },
+  spleen: { in: [.38, .78], out: [.52, .78], hilum: [.45, .72], pulp: [.50, .38] },
+  bowel: { in: [.21, .03], out: [.80, .99], coils: [.52, .52] },
+  colon: { in: [.75, .72], out: [.50, .98], caecum: [.75, .72], rectum: [.50, .98], ascending: [.88, .58], transverse: [.50, .62], descending: [.23, .44], sigmoid: [.42, .82] },
+  bladder: { in: [.25, .01], out: [.50, .99], inR: [.73, .01], trigone: [.50, .70], dome: [.50, .28] },
+  eye: { in: [.02, .50], out: [.99, .55], retina: [.75, .50], lens: [.19, .51], cornea: [.08, .50], nerve: [.99, .55] },
+  ear: { in: [.35, .45], out: [.02, .55], canals: [.57, .18], vestibule: [.50, .45], cochlea: [.55, .75], nerve: [.02, .55] },
+  skin: { in: [.50, .13], out: [.50, .97], surface: [.50, .13], epidermis: [.50, .17], dermis: [.47, .55], hypodermis: [.50, .92] },
+  muscle: { in: [.02, .50], out: [.99, .71], belly: [.32, .48], fibre: [.72, .58] },
+  joint: { in: [.50, .04], out: [.52, .96], femur: [.50, .20], joint: [.54, .58], patella: [.51, .52], tibia: [.52, .80], fibula: [.40, .78] },
+  vessel: { in: [.50, .01], out: [.50, .99], lumen: [.50, .05], wall: [.90, .50] }
+};
+/* liver-4 is the bare mass, so add the missing bits procedurally in art units
+ * (fractions of the liver-4 viewBox): a gallbladder blob under the art at the
+ * gall port (its fundus peeks below the inferior edge), a portal stub rising
+ * to the porta tip and a hepatic stub leaving at the hepvein tip. Drawn before
+ * the art group so the mass covers the joins; the inner flip mirrors them. */
+function _orgLiverExtra(inner, A, opts) {
+  var vw = A.vb[2], vh = A.vb[3];
+  var X = function (f) { return f1(f * vw); }, Y = function (f) { return f1(f * vh); };
+  var g = mk("g", {}, inner);
+  if (opts.dim) g.setAttribute("opacity", ".5");
+  _ov(g, "M" + X(.35) + " " + Y(.95) + "L" + X(.35) + " " + Y(.78), "var(--d-ven)", 11);
+  _ov(g, "M" + X(.40) + " " + Y(.01) + "L" + X(.40) + " " + Y(.14), "var(--d-ven)", 11);
+  var gb = _of(g, "M" + X(.55 - 17 / vw) + " " + Y(.63) + "a17 23 0 1 0 34 0a17 23 0 1 0 -34 0",
+    "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  gb.setAttribute("stroke-width", "2.2");
+  return g;
+}
+/* draw the injected art centred on x,y at w px wide. The art is clipped to its
+ * frame; tint overlays an organ-shaped translucent mask (the art itself, reused
+ * as a mask); dim dulls the art. Art ids are suffixed per instance so two of
+ * the same organ on one page never share gradient, clip or mask ids. */
+function _orgArt(parent, kind, x, y, w, opts, A) {
+  var vb = A.vb, vw = vb[2], vh = vb[3], cx = vb[0] + vw / 2, cy = vb[1] + vh / 2;
+  _orgN++;
+  var uid = "u" + _orgN;
+  var outer = mk("g", { class: "org org-art org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var sx = w / vw, sy = opts.h ? opts.h / vh : sx, fx = opts.flip ? -1 : 1;
+  var inner = mk("g", { transform: "translate(" + f1(-fx * cx * sx) + " " + f1(-cy * sy) + ") scale(" + (fx * sx).toFixed(4) + " " + sy.toFixed(4) + ")" }, outer);
+  var defs = mk("defs", {}, inner);
+  var cid = A.pfx + uid + "-frame";
+  var cp = mk("clipPath", { id: cid }, defs);
+  mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, cp);
+  if (kind === "liver") _orgLiverExtra(inner, A, opts);
+  var art = mk("g", { class: "org-halo", "clip-path": "url(#" + cid + ")" }, inner);
+  var aid = A.pfx + uid + "-art";
+  art.setAttribute("id", aid);
+  art.innerHTML = A.body.split('id="' + A.pfx + '-').join('id="' + A.pfx + uid + '-')
+    .split('url(#' + A.pfx + '-').join('url(#' + A.pfx + uid + '-')
+    .split('href="#' + A.pfx + '-').join('href="#' + A.pfx + uid + '-');
+  if (opts.dim) art.setAttribute("opacity", ".5");
+  if (opts.tint) {
+    var mid = A.pfx + uid + "-tintm";
+    var m = mk("mask", { id: mid, maskUnits: "userSpaceOnUse", x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, defs);
+    mk("use", { href: "#" + aid }, m);
+    var tg = mk("g", { "clip-path": "url(#" + cid + ")" }, inner);
+    mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh), fill: opts.tint, mask: "url(#" + mid + ")" }, tg);
+  }
+  var ports = {}, F = _ORG_FRAC[kind], k;
+  for (k in F) ports[k] = [Math.round((x + fx * (vb[0] + F[k][0] * vw - cx) * sx) * 10) / 10, Math.round((y + (vb[1] + F[k][1] * vh - cy) * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(vh * sy * 10) / 10, ports: ports, art: true };
+}
+/* dispatcher: outer g carries the theme class and gradients, inner g the local drawing scaled to w */
+function organ(parent, kind, x, y, w, opts) {
+  opts = opts || {};
+  if (_ORG_FRAC[kind] && _ORG_ART[kind]) return _orgArt(parent, kind, x, y, w, opts, _ORG_ART[kind]);
+  var outer = mk("g", { class: "org org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var G = _orgDefs(outer);
+  var inner = mk("g", {}, outer);
+  var r;
+  if (kind === "liver") r = _orgLiver(inner, G);
+  else if (kind === "heart") r = _orgHeart(inner, G);
+  else if (kind === "kidney") r = _orgKidney(inner, G);
+  else if (kind === "lung") r = _orgLung(inner, G);
+  else if (kind === "stomach") r = _orgStomach(inner, G);
+  else if (kind === "brain") r = _orgBrain(inner, G);
+  else if (kind === "pancreas") r = _orgPancreas(inner, G);
+  else if (kind === "spleen") r = _orgSpleen(inner, G);
+  else if (kind === "ganglion") r = _orgGanglion(inner, G);
+  else if (kind === "eye") r = _orgEye(inner, G);
+  else if (kind === "bladder") r = _orgBladder(inner, G);
+  else if (kind === "uterus") r = _orgUterus(inner, G);
+  else if (kind === "ovary") r = _orgOvary(inner, G);
+  else if (kind === "thyroid") r = _orgThyroid(inner, G);
+  else if (kind === "adrenal") r = _orgAdrenal(inner, G);
+  else throw new Error("organ: unknown kind " + kind);
+  var sx = w / 100, sy = opts.h ? opts.h / r.h0 : sx, fx = opts.flip ? -1 : 1;
+  inner.setAttribute("transform", "scale(" + (fx * sx).toFixed(3) + " " + sy.toFixed(3) + ")");
+  var ports = {}, k;
+  for (k in r.ports) ports[k] = [Math.round((x + fx * r.ports[k][0] * sx) * 10) / 10, Math.round((y + r.ports[k][1] * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(r.h0 * sy * 10) / 10, ports: ports, art: false };
+}
+organ.kinds = ["liver", "heart", "kidney", "lung", "stomach", "intestine", "brain", "pancreas", "spleen", "bladder", "uterus", "ovary", "thyroid", "eye", "ganglion", "bowel", "colon", "ear", "skin", "muscle", "joint", "vessel", "adrenal"];
+
+_ORG_ART["kidney"]={vb:[0,0,461.7,524.4],pfx:"oakid",body:"<defs><filter id=\"oakid-luminosity-invert\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"398.2\" color-interpolation-filters=\"sRGB\" filterUnits=\"userSpaceOnUse\"><feColorMatrix result=\"cm\" values=\"-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0\" /></filter><radialGradient id=\"oakid-radial-gradient\" cx=\"203.2\" cy=\"292.9\" fx=\"203.2\" fy=\"292.9\" r=\"173\" gradientUnits=\"userSpaceOnUse\"><stop offset=\".6\" stop-color=\"#000\" /><stop offset=\".9\" stop-color=\"#fff\" /></radialGradient><mask id=\"oakid-mask\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"398.2\" maskUnits=\"userSpaceOnUse\"><g filter=\"url(#oakid-luminosity-invert)\"><path d=\"M95.9 444.9l12.9 4.4 20.1 5.2 26 4.1 14.3 .9 14.8 -.3 14.9 -1.8 52.3 -10.4 19.3 -5.4 19.2 -6.8 18.4 -8.6 17 -10.7 14.9 -13.1 12.2 -15.8 8.9 -18.8 6.5 -21.3 5.4 -22.7 4.2 -23.5 3 -23.6 1.7 -23 .4 -21.8 -1 -19.9 -2.5 -17.4 -4 -14.3 -5.6 -10.4 -13.4 -8.8 -25.3 -9.2 -34.3 -8.8 -40.4 -7.7 -43.6 -5.8 -43.8 -3.1 -41.2 .4 -35.6 4.6 -27.2 9.6 -15.8 15.4 -8.7 20.4 -7.3 23.8 -5.3 26.7 -2.8 28.9 .4 30.6 4.2 31.7 8.6 32.2 13.6 32.2 19.2 31.5Z\" fill=\"url(#oakid-radial-gradient)\" /></g></mask><clipPath id=\"oakid-clippath\"><path d=\"M461.7 225.4l-2.9 36.6 -8.4 34.7 -13.5 32.3 -18.1 29.5 -22.2 26.3 -25.9 22.5 -29.1 18.3 -31.9 13.7 -34.2 8.5 -36 2.9 -36 -2.9 -34.2 -8.5 -31.9 -13.7 -29.1 -18.3 -25.9 -22.5 -22.2 -26.3 -18.1 -29.5 -13.5 -32.3 -8.4 -34.7 -2.9 -36.6 2.7 -36.4 7.9 -34.3 12.7 -31.8 17.1 -28.9 21.1 -25.7 24.6 -22.2 27.7 -18.2 30.4 -14 32.7 -9.3 34.5 -4.3 10.6 -.2 36 2.9 34.2 8.5 31.9 13.7 29.1 18.3 25.9 22.5 22.2 26.3 18.1 29.5 13.5 32.3 8.4 34.7Z\" fill=\"none\" /></clipPath><filter id=\"oakid-luminosity-invert-2\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"395.9\" color-interpolation-filters=\"sRGB\" filterUnits=\"userSpaceOnUse\"><feColorMatrix result=\"cm\" values=\"-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0\" /></filter><mask id=\"oakid-mask-1\" x=\"24.1\" y=\"126.2\" width=\"358.1\" height=\"395.9\" maskUnits=\"userSpaceOnUse\"><g filter=\"url(#oakid-luminosity-invert-2)\"><path d=\"M95.9 444.9l12.9 4.4 20.1 5.2 26 4.1 14.3 .9 14.8 -.3 14.9 -1.8 52.3 -10.4 19.3 -5.4 19.2 -6.8 18.4 -8.6 17 -10.7 14.9 -13.1 12.2 -15.8 8.9 -18.8 6.5 -21.3 5.4 -22.7 4.2 -23.5 3 -23.6 1.7 -23 .4 -21.8 -1 -19.9 -2.5 -17.4 -4 -14.3 -5.6 -10.4 -13.4 -8.8 -25.3 -9.2 -34.3 -8.8 -40.4 -7.7 -43.6 -5.8 -43.8 -3.1 -41.2 .4 -35.6 4.6 -27.2 9.6 -15.8 15.4 -8.7 20.4 -7.3 23.8 -5.3 26.7 -2.8 28.9 .4 30.6 4.2 31.7 8.6 32.2 13.6 32.2 19.2 31.5Z\" fill=\"url(#oakid-radial-gradient)\" /></g></mask><clipPath id=\"oakid-clippath-1\"><path d=\"M461.7 225.4l-2.9 36.6 -8.4 34.7 -13.5 32.3 -18.1 29.5 -22.2 26.3 -25.9 22.5 -29.1 18.3 -31.9 13.7 -34.2 8.5 -36 2.9 -36 -2.9 -34.2 -8.5 -31.9 -13.7 -29.1 -18.3 -25.9 -22.5 -22.2 -26.3 -18.1 -29.5 -13.5 -32.3 -8.4 -34.7 -2.9 -36.6 2.7 -36.4 7.9 -34.3 12.7 -31.8 17.1 -28.9 21.1 -25.7 24.6 -22.2 27.7 -18.2 30.4 -14 32.7 -9.3 34.5 -4.3 10.6 -.2 36 2.9 34.2 8.5 31.9 13.7 29.1 18.3 25.9 22.5 22.2 26.3 18.1 29.5 13.5 32.3 8.4 34.7Z\" fill=\"none\" /></clipPath></defs><g mask=\"url(#oakid-mask)\"><path id=\"oakid-ureter\" d=\"M185.3 197.9l-14.2 32.3 -16.1 28.8 -10.4 20.5 -5.3 13 -3.1 13.1 -1.6 17.2 -.3 19.1 4.1 64.9 -.8 113.4 6.6 -.9 2.5 -1.8 2 -3.3 1.7 -102.5 -1.6 -42.6 .3 -25.1 2.9 -22.7 2.9 -9.4 4.1 -7.4 9.3 -10.5 8.1 -6.2 12.8 -6.8 10.4 -8.9 12.9 -13.3 12.1 -15.1 4.7 -7.4 3.3 -6.9 1.5 -6.1 -1 -5.5 -3.4 -5.3 -5.2 -4.9 -6.4 -4.3 -7.1 -3.6 -14 -4.5 -5.7 -.5 -4.2 .8Z\" stroke-miterlimit=\"10\" fill=\"#f4dca9\" stroke-width=\"8.2px\" stroke=\"#725222\" /></g><g clip-path=\"url(#oakid-clippath)\"><g><path d=\"M11.7 232.9l0 12.3 61.8-5.4 43.8-7.2 18.9 7.9 15.5 8.8 15 11.9 12.1 12.8-1-3.7-3.3-5.5-9.7-10.4-15.8-11.9-23.5-14.2 4.9-3.8 17.3-7.3 20.9-7.8 17.9-4.5 6-3.3 1.3-2.4 0-2.6-28.2 7.1 11.6-11.5 4.8-7.4 3.4-12.2.1-3.8-1.1-4.9-1.3.2-1.5 3.5-1 8.6-1.8 5.4-4.3 6.4-5.6 6-7 6-6.9 4.4-23.5 10.6-17.8 6.6-12.4 2-51.6 6.3Z\" stroke-miterlimit=\"10\" stroke-width=\"8.2px\" fill=\"#5276b6\" stroke=\"#142b4f\" /><path d=\"M5.3 206.7l91.5 -6.9 3 -.9 10.5 -7.7 5.8 -2.7 9.6 -1.7 14.9 -.3 13.1 -1.5 7.8 -3.1 6.9 -6.1 4.2 -1.6 2.9 .3 -2.1 3.1 -4 4.3 -5.7 3.4 -13.1 3.1 -30.7 3.6 -4.6 1.6 -3.3 2.3 -3.9 4.5 1.5 .4 32.6 -7.6 11.4 -4.2 14.3 -9.5 16 -15.2 3.5 -1.1 2.3 1.6 1.2 3.7 .3 10.6 -1.9 15.2 -24.1 7.2 -30.6 7.6 -9.4 3.1 -3.4 2.3 3.3 .8 12.3 .5 48 -.1 1.2 .7 .7 2.4 -2.7 6.4 -30.2 -.6 -31.8 1.1 -26.3 -3.3 -89.4 8.5 -1.4 -.8 -1.4 -4.6 -.1 -6.8Z\" stroke-miterlimit=\"10\" stroke=\"#8f2e30\" fill=\"#d85452\" stroke-width=\"8.2px\" /></g></g><path d=\"M172.2 58.6l31.8 .1 12.1 1.3 9.6 2.6 14.8 6.5 10.3 6.1 10.4 7.5 10.2 8.9 16.6 16.6 8.8 11.7 1.5 4.4 .8 10.8 8.8 14.8 11.1 24 6.5 17.6 3 13.3 3.1 25.3 .2 8.2 -1.2 8.5 1.4 4.4 .6 7.9 0 29.6 -1.2 13.8 -6.1 26.9 -5.4 7 -4.6 13.8 -7.5 15.9 -12 17.8 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -1.4 -12.1 .9 -11.8 3.2 -9.3 6.1 -11.5 1.3 -5.4 -4 -19.4 .5 -12.3 2 -6.5 6.7 -13.5 .6 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" stroke-miterlimit=\"10\" fill=\"#a95c57\" stroke=\"#632b29\" stroke-width=\"8.2px\" /><path d=\"M166.1 7.2l3 2.3 3 3.7 4.9 9.5 5.8 19.1 5.2 13.4 -.2 5.2 -11.3 16.1 -5.9 12 -3.5 12.4 -.4 10.9 -1.9 10.8 -1.9 6.3 -3.2 6.6 -5.1 3.9 -14.8 6.6 -15.8 9.6 -5.4 2 -.9 -.3 -2.7 -4.2 -4.1 -9.9 -3.7 -15.2 -1 -9.5 -.2 -10.7 .9 -11.8 2.2 -13 7.1 -26.4 9.3 -23.4 5.5 -9.8 6 -8 6.5 -6 7 -3.6 7.5 -.9Z\" stroke-miterlimit=\"10\" fill=\"#f4dca9\" stroke=\"#5a4218\" stroke-width=\"8.2px\" /><g mask=\"url(#oakid-mask-1)\"><path id=\"oakid-ureter-2\" data-name=\"ureter\" d=\"M185.3 197.9l-14.2 32.3 -16.1 28.8 -10.4 20.5 -5.3 13 -3.1 13.1 -1.6 17.2 -.3 19.1 4.1 64.9 -.8 113.4 6.6 -.9 2.5 -1.8 2 -3.3 1.7 -102.5 -1.6 -42.6 .3 -25.1 2.9 -22.7 2.9 -9.4 4.1 -7.4 9.3 -10.5 8.1 -6.2 12.8 -6.8 10.4 -8.9 12.9 -13.3 12.1 -15.1 4.7 -7.4 3.3 -6.9 1.5 -6.1 -1 -5.5 -3.4 -5.3 -5.2 -4.9 -6.4 -4.3 -7.1 -3.6 -14 -4.5 -5.7 -.5 -4.2 .8Z\" stroke-miterlimit=\"10\" stroke-width=\"3.5px\" fill=\"#f4dca9\" stroke=\"#725222\" /></g><g clip-path=\"url(#oakid-clippath-1)\"><g><path d=\"M11.7 232.9l0 12.3 61.8-5.4 43.8-7.2 18.9 7.9 15.5 8.8 15 11.9 12.1 12.8-1-3.7-3.3-5.5-9.7-10.4-15.8-11.9-23.5-14.2 4.9-3.8 17.3-7.3 20.9-7.8 17.9-4.5 6-3.3 1.3-2.4 0-2.6-28.2 7.1 11.6-11.5 4.8-7.4 3.4-12.2.1-3.8-1.1-4.9-1.3.2-1.5 3.5-1 8.6-1.8 5.4-4.3 6.4-5.6 6-7 6-6.9 4.4-23.5 10.6-17.8 6.6-12.4 2-51.6 6.3Z\" fill=\"#5276b6\" /><path d=\"M6.8 204.4l65.9 -2.6 24.1 -2 3 -.9 10.5 -7.7 5.8 -2.7 9.6 -1.7 14.9 -.3 13.1 -1.5 7.8 -3.1 6.9 -6.1 4.2 -1.6 2.9 .3 -2.1 3.1 -4 4.3 -5.7 3.4 -13.1 3.1 -30.7 3.6 -4.6 1.6 -3.3 2.3 -3.9 4.5 1.5 .4 32.6 -7.6 11.4 -4.2 14.3 -9.5 16 -15.2 3.5 -1.1 2.3 1.6 1.2 3.7 .3 10.6 -1.9 15.2 -24.1 7.2 -30.6 7.6 -9.4 3.1 -3.4 2.3 3.3 .8 12.3 .5 48 -.1 1.2 .7 .7 2.4 -2.7 6.4 -30.2 -.6 -31.8 1.1 -26.3 -3.3 -87.9 6.2 -1.4 -.8 -1.4 -4.6 -.1 -6.8Z\" fill=\"#d85452\" /></g></g><path d=\"M172.2 58.6l31.8 .1 12.1 1.3 9.6 2.6 14.8 6.5 10.3 6.1 10.4 7.5 10.2 8.9 16.6 16.6 8.8 11.7 1.5 4.4 .8 10.8 8.8 14.8 11.1 24 6.5 17.6 3 13.3 3.1 25.3 .2 8.2 -1.2 8.5 1.4 4.4 .6 7.9 0 29.6 -1.2 13.8 -6.1 26.9 -5.4 7 -4.6 13.8 -7.5 15.9 -12 17.8 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -1.4 -12.1 .9 -11.8 3.2 -9.3 6.1 -11.5 1.3 -5.4 -4 -19.4 .5 -12.3 2 -6.5 6.7 -13.5 .6 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" stroke-miterlimit=\"10\" stroke-width=\"3.5px\" fill=\"#a95c57\" stroke=\"#632b29\" /><g><path d=\"M172.2 58.6l31.8 .1 17.1 2.4 14.6 5.1 10.5 5 10.5 6.6 10 8.5 25.9 28.4 5 7.2 1.8 13.7 9.3 13.6 6 11.4 5.4 12.5 3.6 12 4.7 26 3.2 23.2 .1 5.7 -1 6.4 1.6 7.7 -2 44.5 -4.5 29.2 -5.8 8.3 -7.9 21.3 -9.7 17.3 -6.6 8.9 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -.3 -15.8 1 -11.9 2.1 -5.5 5.7 -9.4 1.6 -5.6 -2.8 -25.1 0 -10.7 8.1 -17.8 .5 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" fill=\"#f5b6b3\" /></g><g><path d=\"M172.2 58.6l31.8 .1 17.1 2.4 14.6 5.1 10.5 5 10.5 6.6 10 8.5 25.9 28.4 5 7.2 1.8 13.7 9.3 13.6 6 11.4 5.4 12.5 3.6 12 4.7 26 3.2 23.2 .1 5.7 -1 6.4 1.6 7.7 -2 44.5 -4.5 29.2 -5.8 8.3 -7.9 21.3 -9.7 17.3 -6.6 8.9 -7.9 8.5 -9.2 7.8 -10.7 6.5 -11.9 5.2 -12.4 4.1 -12.7 2.7 -12.7 1.2 -12.4 -.5 -11.8 -2.4 -10.8 -4.4 -9.6 -6.6 -8 -8.9 -6.2 -11.4 -4.2 -12.5 -2.5 -12 -1 -11.4 .2 -10.6 2.8 -18.2 4.2 -13.3 3.4 -7.3 11.4 -14.4 -.3 -15.8 1 -11.9 2.1 -5.5 5.7 -9.4 1.6 -5.6 -2.8 -25.1 0 -10.7 8.1 -17.8 .5 -3.7 -2 -5.9 -2.3 -2 -14.3 6.9 -11 2.9 -6.9 -.4 -10.4 -3.8 -8.9 -6.3 -4 -4.9 -1.2 -2.6 -.5 -5.1 .4 -9.3 3.7 -26.7 3.5 -15.2 4.6 -14.9 5.8 -13.5 7.1 -11 8.5 -7.4Z\" fill=\"#f5b6b3\" /></g><path d=\"M166.1 7.2l3 2.3 3 3.7 4.9 9.5 5.8 19.1 5.2 13.4 -.2 5.2 -11.3 16.1 -5.9 12 -3.5 12.4 -.4 10.9 -1.9 10.8 -1.9 6.3 -3.2 6.6 -5.1 3.9 -14.8 6.6 -15.8 9.6 -5.4 2 -.9 -.3 -2.7 -4.2 -4.1 -9.9 -3.7 -15.2 -1 -9.5 -.2 -10.7 .9 -11.8 2.2 -13 7.1 -26.4 9.3 -23.4 5.5 -9.8 6 -8 6.5 -6 7 -3.6 7.5 -.9Z\" stroke-miterlimit=\"10\" stroke-width=\"3.5px\" fill=\"#f4dca9\" stroke=\"#5a4218\" /><g><path d=\"M174 120.7l16.4 5.9 15.1 6.6 14.9 8.3 6.3 4.7 4.9 4.9 7.9 10.8 10.1 18.6 6.4 19.8 1.4 13 -.5 24.9 -1.8 30.3 -2.2 18.6 -3.1 14.1 3.8 -3.8 3.2 -5.7 2.8 -7.1 11.2 -46.2 1.7 -3.8 8 -11.7 2.9 -7.3 .7 -9 -.8 -5.4 -4.8 -13.3 -10 -18.9 -13.5 -21.2 -14.9 -19.3 -7.4 -7.7 -7 -5.7 -6.3 -3.2 -20.2 -5 -19.9 -3.1 -9.2 -.4 -2.5 .4 -.7 .9Z\" fill=\"#faeceb\" /></g><g><path d=\"M162.4 14.1l-13.1 21.1-9.8 22.5-9.3 35.6-3 20.8-1.3-14.5 1.2-17.6 3-18.1 6.2-22.5 10.1-21.2 5.7-8.8 3.9-1.1Z\" fill=\"#fffff6\" /></g><g opacity=\".4\"><g><path d=\"M177.8 34l-9.8 11.9 -10.7 17.7 -6.7 15.8 -11.3 37 -1.6 2.6 -1.8 1.3 -2.2 0 -2.7 -1.4 -.5 -14.6 3.6 -26.9 6.6 -24.9 4.8 -11.2 12.6 -21.4 3.9 -4.7 1.4 -.3 1.8 .9 4.1 4.5Z\" fill=\"#b68c3d\" /></g></g><g opacity=\".2\"><g><g><path d=\"M194.2 69.3l23.4 7.5 21.9 9.9 11.3 6.6 10.8 7.8 9.6 9 7.8 10.3 13.1 22.6 17.2 34.7 8.4 21.7 2.9 9.9 2.7 16.9 -.3 38.1 -2.2 23.1 -4.7 23.4 -3.5 11.3 -4.4 10.8 -5.7 10.7 -7 10.9 -8.2 10.8 -9.1 10.4 -9.9 9.6 -10.5 8.4 -10.9 6.8 -11.1 4.9 -11.2 2.6 -11 -.1 -10.3 -2.3 -9.3 -3.9 -8.3 -5.4 -7.2 -6.8 -5.9 -8 -4.5 -9.1 -3 -10 -1.4 -10.8 .3 -11.5 2.1 -12.1 4.2 -10.1 5.9 -8.4 13.2 -13.6 -10.1 -4.4 -4.9 -4.1 -4 4.6 -6.5 10 -4.6 9.8 -4.3 12.8 -1.1 15.2 1.3 20.5 2.3 11.5 3.8 11.5 5.7 10.8 7.9 9.5 10.5 7.5 12.3 4.8 12.8 2 13 -.3 12.7 -2.1 12.1 -3.4 11.1 -4.2 17.6 -9 9 -6.6 9.3 -11.1 8.8 -12.3 14.9 -35.1 .9 -1.6 2.7 -1.7 1.5 -3 3.1 -24.3 3.5 -39.8 -.1 -6.2 -2.1 -10.2 2.2 -5.3 .4 -3.6 -6.6 -40.2 -4.3 -20.7 -4.8 -10.6 -18 -29 -.8 -2.9 -.4 -9.8 -4.2 -6.4 -12.8 -14.2 -20.3 -18.3 -12.1 -8.5 -12.8 -6.8 -13.2 -4.2 -13.3 -.7Z\" fill=\"#fff\" /></g></g></g><g><path d=\"M180.1 174.7l9.2-6.9 2.9-5.5 2.3.6 1.4 1.4.6 2-.6 5.1-5.9 13.2-.9-7.4-1.8-2.5-3.1-1.3Z\" fill=\"#54221f\" /></g><g><path d=\"M180.1 174.7l9.2-6.9 2.9-5.5 2.3.6 1.4 1.4.6 2-.6 5.1-5.9 13.2-.9-7.4-1.8-2.5-3.1-1.3Z\" fill=\"#54221f\" /></g><g><path d=\"M183.8 241.6l7.1 -.1 6.6 1.4 -11.2 -8.7 -3.7 -4.7 1.6 7.3Z\" fill=\"#54221f\" /></g><g><path d=\"M174.4 282.9l14.2 5.9-.1 3-2.4 4.8-14-6.8 2.4-3Z\" fill=\"#54221f\" /></g>"};
+/* Autoimmunity scene: thymus and marrow training, peripheral guards, escape down a vessel, autoantibodies and kidney injury. */
 const L = { base: $("Lbase"), part: $("Lpart"), over: $("Lover"), panel: $("Lpanel") };
-const SITE = { apcT: [164, 155], apcB: [480, 155], treg: [755, 130], autoT: [695, 190], anerg: [835, 170], bP: [885, 210], vir: [660, 215] };
-const TR_T = track([[164, 192], [205, 252], [320, 302], [420, 358]]);
-const TR_B = track([[480, 192], [505, 252], [545, 302], [580, 358]]);
-const TR_AB = track([[872, 226], [845, 290], [725, 338], [628, 358]]);
-const TR_CY = track([[688, 206], [640, 262], [562, 318], [505, 358]]);
+const SITE = { apcT: [164, 155], apcB: [480, 155], treg: [755, 130], autoT: [695, 195], anerg: [835, 170], bP: [885, 210], vir: [662, 200] };
+const KX = 790, KY = 348, KW = 140;
+let kidneyO = null, kidEntry = [721, 340], kidAim = [808, 350], glowEl = null;
+let TR_T = null, TR_B = null, TR_AB = null, TR_CY = null, TR_H = null;
+const ringEls = [];
 /* ---- central organs: presenting cells and developing lymphocytes ---- */
 function presenting(x, y, seed) { const g = mk("g", {}, L.base); cell(g, { cls: "mac", r: 18, nuc: 0.4, seed: seed, wob: 0.12 }); place(g, x, y); return { g, x, y }; }
 const apcT = presenting(SITE.apcT[0], SITE.apcT[1], 11), apcB = presenting(SITE.apcB[0], SITE.apcB[1], 12);
@@ -433,14 +772,36 @@ const anergC = statCell("th2", 13, SITE.anerg[0], SITE.anerg[1], 33);
 const bPC = statCell("bcell", 15, SITE.bP[0], SITE.bP[1], 34);
 const virIcon = (() => { const g = mk("g", {}, L.base); for (let j = 0; j < 8; j++) { const t = j * 0.785; mk("path", { class: "vir-spike", d: "M0 0L" + f1(Math.cos(t) * 11) + " " + f1(Math.sin(t) * 11) }, g); } mk("circle", { class: "sc-p p-vir", r: 6 }, g); place(g, SITE.vir[0], SITE.vir[1]); return g; })();
 const suppLine = mk("path", { class: "supp", d: "M" + (SITE.treg[0] - 12) + " " + (SITE.treg[1] + 12) + "L" + (SITE.autoT[0] + 10) + " " + (SITE.autoT[1] - 12) }, L.base);
-/* ---- target tissue cells and damage rings ---- */
-const tisCells = [], dmgRings = [];
-for (let i = 0; i < 9; i++) { const x = 80 + i * 100, y = 372, g = mk("g", {}, L.base); cell(g, { cls: "tis2", r: 15, nuc: 0.38, seed: 40 + i, wob: 0.1 }); place(g, x, y); tisCells.push({ g, x, y }); const ring = mk("circle", { class: "dmg-ring", cx: x, cy: y, r: 20, opacity: "0" }, L.part); dmgRings.push(ring); }
-/* ---- drug block markers ---- */
-const blocks = {};
-function blockMark(id, x, y, text, tip) { const g = mk("g", { class: "hot", tabindex: "0", "data-info": tip, opacity: "0" }, L.over); const t = mk("text", { class: "blk-t", x: x, y: y - 14, "text-anchor": "middle" }, g); t.textContent = text; mk("circle", { class: "blk-c", cx: x, cy: y, r: 9 }, g); mk("path", { class: "blk-l", d: "M" + (x - 5) + " " + (y + 5) + "L" + (x + 5) + " " + (y - 5) }, g); blocks[id] = g; }
+/* ---- kidney target with injury glow, damage rings, vessel and hormone capsule ---- */
+function initOrgans() {
+  kidneyO = organ($("kidSlot"), "kidney", KX, KY, KW, {});
+  if (kidneyO.ports.vein) kidEntry = kidneyO.ports.vein;
+  if (kidneyO.ports.cortex) kidAim = kidneyO.ports.cortex;
+  glowEl = mk("ellipse", { class: "ai-glow", cx: f1(KX), cy: f1(KY), rx: 80, ry: 64, opacity: "0" }, L.part);
+  [58, 70, 82].forEach((r) => ringEls.push(mk("circle", { class: "dmg-ring", cx: f1(KX), cy: f1(KY), r: r, opacity: "0" }, L.part)));
+  $("vesselKid").setAttribute("d", "M700 234 C700 268 " + f1(kidEntry[0] + 20) + " " + f1(kidEntry[1] - 60) + " " + f1(kidEntry[0]) + " " + f1(kidEntry[1]));
+  TR_T = track([[164, 192], [205, 252], [320, 302], [kidEntry[0] - 70, kidEntry[1] - 20], kidEntry]);
+  TR_B = track([[480, 192], [505, 252], [560, 300], [kidEntry[0] - 40, kidEntry[1] + 10], kidEntry]);
+  TR_AB = track([[872, 226], [(872 + kidAim[0]) / 2 + 20, (226 + kidAim[1]) / 2], kidAim]);
+  TR_CY = track([[702, 212], [688, 262], [kidAim[0] - 40, kidAim[1] - 6], [kidAim[0] - 24, kidAim[1] + 8]]);
+  TR_H = track([[648, 406], [690, 398], kidAim]);
+  const cap = mk("g", { class: "hot", tabindex: "0", "data-info": "Replacement hormone: tops up what the injured kidney no longer makes. It does not stop the attack." }, L.base);
+  mk("rect", { class: "ai-cap2", x: 617, y: 402, width: 30, height: 12, rx: 6 }, cap);
+  mk("path", { class: "ai-capline", d: "M632 402L632 414" }, cap);
+}
+/* ---- drug badges (symbols only) and stage caption ---- */
+const badges = {};
+function badge(id, x, y, tip) { const g = mk("g", { class: "hot", tabindex: "0", "data-info": tip, opacity: "0" }, L.over); mk("circle", { class: "blk-c", cx: x, cy: y, r: 9 }, g); mk("path", { class: "blk-l", d: "M" + (x - 5) + " " + (y + 5) + "L" + (x + 5) + " " + (y - 5) }, g); badges[id] = g; }
+let capEl = null, capKey = "";
+function capText(d, l) {
+  if (l === 0) return "Tolerance holds. Few escapees, and guards calm the rest.";
+  if (d === 3) return "Immunosuppression calms attack cells. Kidney injury fades.";
+  if (d === 2) return "Anti B therapy clears B cells. Antibody attack falls.";
+  if (d === 1) return "Replacement tops up kidney function. The attack itself goes on.";
+  return "No treatment. Escaped cells and antibodies injure the kidney.";
+}
 /* ---- particle pools (element is p.e) ---- */
-function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, u: 0, k: 0, s: 1 }; }); }
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, u: 0, k: 0, s: 1, tx: 0, ty: 0, st: 0 }; }); }
 const freeP = (pl) => pl.find((p) => !p.on);
 function emitP(p, x, y) { p.on = true; p.x = x; p.y = y; p.t = 0; p.u = 0; p.e.setAttribute("opacity", "1"); }
 function killP(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
@@ -451,75 +812,93 @@ const cytP = pool(12, () => mk("circle", { class: "sc-p p-cytk", r: 2.4 }, L.par
 const selfP = pool(10, () => mk("circle", { class: "sc-p p-self", r: 2.2 }, L.part));
 const suppP = pool(8, () => mk("circle", { class: "sc-p p-cytk", r: 2, style: "fill:var(--c-ab)" }, L.part));
 const virP = pool(5, () => mk("circle", { class: "sc-p p-vir", r: 3 }, L.part));
+const blockP = pool(10, () => mk("circle", { class: "sc-p p-blk", r: 3.4 }, L.part));
+const trapP = pool(6, () => mk("circle", { class: "sc-p p-blk", r: 2.6 }, L.part));
+const hormP = pool(8, () => mk("circle", { class: "sc-p p-horm", r: 2.6 }, L.part));
 /* ---- labels and gauges ---- */
 const gg = {};
 function initOver() {
   const P = L.panel, y0 = 478, h = 52, xs = [150, 320, 490, 660, 830];
   mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: SC.W - 48, height: 142, rx: 14 }, P);
   const t = mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P); t.textContent = "Tolerance and injury";
-  [["esc", "Escape", "g-cyt", "Self-reactive lymphocytes that leave the thymus or marrow instead of being deleted."], ["reg", "Regulation", "g-good", "Peripheral control by regulatory T cells and anergy. High means escapees are held in check."], ["ab", "Antibodies", "g-eos", "Autoantibodies made by B cells against self antigens."], ["dmg", "Damage", "g-bad", "Tissue injury from autoreactive T cells, autoantibodies and inflammation."], ["fn", "Function", "g-good", "How well the target organ still works. Replacement restores function without stopping damage."]]
+  [["esc", "Escape", "g-cyt", "Self-reactive lymphocytes that leave the thymus or marrow instead of being deleted."], ["reg", "Regulation", "g-good", "Peripheral control by regulatory T cells and anergy. High means escapees are held in check."], ["ab", "Antibodies", "g-eos", "Autoantibodies made by B cells against self antigens."], ["dmg", "Damage", "g-bad", "Kidney injury from autoreactive T cells, autoantibodies and inflammation."], ["fn", "Function", "g-good", "How well the kidney still works. Replacement restores function without stopping damage."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i], y0 + 2, h + 4, 20, cls, name, tip); });
   const O = L.over;
-  pill(O, "Developing T cell", 95, 130, 105, 96, "Developing T cell in the thymus. If it binds self strongly it is normally deleted before it can leave.");
-  pill(O, "Deleted clone", 225, 135, 240, 96, "Central deletion: a strongly self-reactive clone is removed by cell death in the thymus or marrow. The cross fades when clones escape instead.");
-  pill(O, "Developing B cell", 395, 130, 420, 96, "Developing B cell in the bone marrow. Strong binding to self leads to deletion, editing or unresponsiveness.");
-  pill(O, "Regulatory T cell", 755, 130, 760, 96, "Regulatory T cell: a peripheral guard. It suppresses self-reactive cells that escaped central deletion.");
-  pill(O, "Anergic cell", 835, 170, 860, 138, "Anergic cell: a self-reactive cell that met self antigen without costimulation and was switched off rather than deleted.");
-  pill(O, "Virus mimic", 665, 210, 700, 228, "Infection mimicry: a microbe carries shapes close to self. The response to the microbe can cross-react with self tissue.");
-  pill(O, "HLA risk", 500, 285, 470, 298, "HLA risk genes: inherited antigen-presentation variants linked to susceptibility. Non-HLA genes and epigenetic change also shape risk.");
-  pill(O, "Autoantibody", 620, 360, 580, 298, "Autoantibody: antibody against self, made after B cell help from autoreactive T cells. It binds target tissue and recruits inflammation.");
-  pill(O, "Injured cell", 240, 372, 240, 325, "Target tissue cell under attack by autoreactive T cells and autoantibodies. Injury may stay in one organ or spread systemically.");
-  pill(O, "Hidden antigen", 380, 372, 400, 325, "Hidden antigen: self material normally sequestered from the immune system. Injury releases it, along with nucleic acids from dying cells, and can start or worsen autoimmunity.");
-  blockMark("imm", 720, 180, "dampened", "Immunosuppression broadly dampens autoreactive T and B cell activity, so fewer effectors and antibodies reach the tissue.");
-  blockMark("antiB", 885, 178, "B cells off", "Anti-B cell therapy removes B cells. Autoantibodies fall, while autoreactive T cell injury can continue.");
-  blockMark("repl", 480, 418, "replaced", "Replacing lost function restores what the damaged organ no longer provides. It does not itself stop the immune attack, so damage can continue.");
+  pill(O, "Thymus", 95, 130, 108, 96, "Thymus: young T cells are tested against self here. Strong binders are normally deleted.");
+  pill(O, "Marrow", 395, 130, 420, 96, "Bone marrow: young B cells are tested against self here. Strong binders are removed or silenced.");
+  pill(O, "Guard cell", 755, 130, 805, 82, "Regulatory T cell: a guard that calms escaped self reactive cells. Pale dots show it working.");
+  pill(O, "Escapee", 695, 195, 720, 234, "Escaped attack cell: a self reactive T cell that slipped control. Infection mimicry can help trigger it.");
+  pill(O, "B cell", 885, 210, 890, 158, "B cell: with help from attack T cells it becomes an antibody factory aimed at self.");
+  pill(O, "Antibody", 866, 254, 902, 296, "Autoantibody: antibody against self. It travels to the kidney and recruits inflammation.");
+  pill(O, "Kidney", kidAim[0], kidAim[1], 890, 248, "Kidney: the target under attack here. Injury lowers function; treatment can calm the attack or top up function.");
+  badge("immT", 720, 182, "Blocked: immunosuppression damps this attack cell, so fewer signals reach the kidney.");
+  badge("immB", 885, 182, "Blocked: immunosuppression damps this B cell, so antibody output falls.");
+  badge("antiB", 862, 196, "B cells removed: anti B therapy clears B cells, so antibody output falls while T cell injury can continue.");
+  badge("repl", 838, 258, "Supported: replacement tops up kidney function while the attack continues.");
+  capEl = mk("text", { class: "ai-cap", x: 30, y: 428 }, O); capEl.textContent = capText(0, 1);
 }
 const sm = { E: 0.4, R: 0.6, T: 0.3, Ab: 0.3, D: 0.2, Fn: 0.7, imm: 0, antiB: 0, repl: 0 };
-const acc = { escT: 0, escB: 0, ab: 0, cyt: 0, self: 0, supp: 0, vir: 0 };
-function init() { initOver(); }
+const acc = { escT: 0, escB: 0, ab: 0, cyt: 0, self: 0, supp: 0, vir: 0, blk: 0, trap: 0, horm: 0 };
+function init() { initOrgans(); initOver(); }
 function step(dt, m) {
   const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.5);
   sm.E = lerp(sm.E, m.E, k2); sm.R = lerp(sm.R, m.R, k2); sm.T = lerp(sm.T, m.T, k2); sm.Ab = lerp(sm.Ab, m.Ab, k2); sm.D = lerp(sm.D, m.D, Math.min(1, dt * 0.35)); sm.Fn = lerp(sm.Fn, m.Fn, k1);
   sm.imm = lerp(sm.imm, m.imm, k1); sm.antiB = lerp(sm.antiB, m.antiB, k1); sm.repl = lerp(sm.repl, m.repl, k1);
-  blocks.imm.setAttribute("opacity", sm.imm.toFixed(2)); blocks.antiB.setAttribute("opacity", sm.antiB.toFixed(2)); blocks.repl.setAttribute("opacity", sm.repl.toFixed(2));
+  badges.immT.setAttribute("opacity", sm.imm.toFixed(2)); badges.immB.setAttribute("opacity", sm.imm.toFixed(2));
+  badges.antiB.setAttribute("opacity", sm.antiB.toFixed(2)); badges.repl.setAttribute("opacity", sm.repl.toFixed(2));
+  /* kidney injury: glow, rings and swelling track damage; vessel narrows as the attack fades */
+  glowEl.setAttribute("opacity", clamp((sm.D - 0.2) * 0.8).toFixed(2));
+  ringEls.forEach((r, i) => r.setAttribute("opacity", clamp(sm.D * 1.3 - i * 0.18).toFixed(2)));
+  place(kidneyO.g, KX, KY, 0, 1 - 0.05 * sm.D + 0.008 * Math.sin(tm / 500));
+  $("vesselKid").setAttribute("stroke-width", f1(5 + 9 * sm.T));
+  $("vesselKid").setAttribute("opacity", (0.3 + 0.55 * sm.T).toFixed(2));
   /* central organs pulse; deletion crosses fade as escape rises */
   place(apcT.g, apcT.x + Math.sin(tm / 1200) * 2, apcT.y + Math.cos(tm / 1400) * 2, 0, 1);
   place(apcB.g, apcB.x + Math.sin(tm / 1300 + 2) * 2, apcB.y + Math.cos(tm / 1500) * 2, 0, 1);
   tDevs.forEach((c, i) => place(c.g, c.x + Math.sin(tm / 1000 + i * 2) * 2, c.y + Math.cos(tm / 1200 + i) * 2, 0, 1 + 0.05 * Math.sin(tm / 350 + i)));
   bDevs.forEach((c, i) => place(c.g, c.x + Math.sin(tm / 1100 + i * 2 + 1) * 2, c.y + Math.cos(tm / 1300 + i) * 2, 0, 1 + 0.05 * Math.sin(tm / 380 + i)));
   delMarks.forEach((g) => g.setAttribute("opacity", clamp(1.05 - sm.E * 1.25).toFixed(2)));
-  /* periphery: Treg steady, autoreactive cell pulses with activation, anergic cell dim, B cell pulses with antibodies */
+  /* periphery: guard steady, escapee calmed by blockers, B cell cleared by anti B therapy */
   place(tregC.g, tregC.x + Math.sin(tm / 1100) * 2, tregC.y + Math.cos(tm / 1300) * 2, 0, 1 + 0.07 * sm.R * Math.sin(tm / 320));
-  place(autoTC.g, autoTC.x + Math.sin(tm / 900 + 1) * 2, autoTC.y + Math.cos(tm / 1100) * 2, 0, 1 + 0.1 * sm.T * Math.sin(tm / 300));
+  place(autoTC.g, autoTC.x + Math.sin(tm / 900 + 1) * 2, autoTC.y + Math.cos(tm / 1100) * 2, 0, (1 + 0.1 * sm.T * Math.sin(tm / 300)) * (1 - 0.15 * sm.imm));
   anergC.g.style.opacity = (0.45 + 0.3 * sm.R).toFixed(2); place(anergC.g, anergC.x, anergC.y, 0, 0.92);
-  place(bPC.g, bPC.x + Math.sin(tm / 1000 + 3) * 2, bPC.y + Math.cos(tm / 1200) * 2, 0, (1 + 0.1 * sm.Ab * Math.sin(tm / 340)) * (1 - 0.45 * sm.antiB));
-  bPC.g.style.opacity = (1 - 0.55 * sm.antiB).toFixed(2);
+  place(bPC.g, bPC.x + Math.sin(tm / 1000 + 3) * 2, bPC.y + Math.cos(tm / 1200) * 2, 0, (1 + 0.1 * sm.Ab * Math.sin(tm / 340)) * (1 - 0.5 * sm.antiB) * (1 - 0.15 * sm.imm));
+  bPC.g.style.opacity = (1 - 0.6 * sm.antiB - 0.15 * sm.imm).toFixed(2);
   suppLine.setAttribute("opacity", clamp(sm.R * 1.1).toFixed(2));
   /* self antigen dots drift inside the two central panels, kept inside the stage */
   acc.self += dt * 4; while (acc.self >= 1) { acc.self--; const p = freeP(selfP); if (p) { const inThy = Math.random() < 0.5; emitP(p, inThy ? rnd(50, 280) : rnd(365, 595), rnd(95, 210)); p.vx = rnd(-7, 7); p.vy = rnd(-5, 5); } }
   selfP.forEach((p) => { if (!p.on) return; p.t += dt; p.x = clamp(p.x + p.vx * dt, 44, 616); p.y = clamp(p.y + p.vy * dt, 84, 226); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.t > 3.5) killP(p); });
   /* virus mimic dots wander in the periphery panel only */
-  acc.vir += dt * (0.4 + 1.6 * sm.E); while (acc.vir >= 1) { acc.vir--; const p = freeP(virP); if (p) { emitP(p, rnd(665, 700), rnd(195, 230)); p.vx = rnd(10, 26); p.vy = rnd(-7, 7); } }
+  acc.vir += dt * (0.4 + 1.6 * sm.E); while (acc.vir >= 1) { acc.vir--; const p = freeP(virP); if (p) { emitP(p, rnd(660, 694), rnd(185, 220)); p.vx = rnd(10, 26); p.vy = rnd(-7, 7); } }
   virP.forEach((p) => { if (!p.on) return; p.t += dt; p.x = clamp(p.x + p.vx * dt, 656, 936); p.y = clamp(p.y + p.vy * dt, 84, 230); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.t > 4) killP(p); });
-  /* regulatory suppression dots travel from Treg toward the autoreactive cell */
+  /* regulatory suppression dots travel from the guard toward the escapee */
   acc.supp += dt * sm.R * 3.2; while (acc.supp >= 1) { acc.supp--; const p = freeP(suppP); if (p) { emitP(p, SITE.treg[0] - 10, SITE.treg[1] + 10); } }
   suppP.forEach((p) => { if (!p.on) return; p.t += dt; p.x = lerp(p.x, SITE.autoT[0] + 8, dt * 1.4); p.y = lerp(p.y, SITE.autoT[1] - 8, dt * 1.4); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.t > 1.8) killP(p); });
-  /* escaping clones travel from central organs down to the tissue */
-  acc.escT += dt * sm.T * 1.5; while (acc.escT >= 1) { acc.escT--; const p = freeP(escT); if (p) { emitP(p, 0, 0); p.s = rnd(0.85, 1.15); } }
+  /* blocker dots fly in and sit on the attack and B cells while immunosuppression is on */
+  acc.blk += dt * sm.imm * 7; while (acc.blk >= 1) { acc.blk--; const p = freeP(blockP); if (p) { emitP(p, rnd(680, 920), rnd(56, 80)); p.st = 0; const toB = Math.random() < 0.4; p.tx = toB ? SITE.bP[0] : SITE.autoT[0]; p.ty = toB ? SITE.bP[1] : SITE.autoT[1]; p.k = rnd(0, 6.28); } }
+  blockP.forEach((p) => { if (!p.on) return; p.t += dt;
+    if (p.st === 0) { p.x = lerp(p.x, p.tx, Math.min(1, dt * 2.2)); p.y = lerp(p.y, p.ty, Math.min(1, dt * 2.2)); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (Math.hypot(p.tx - p.x, p.ty - p.y) < 7) { p.st = 1; p.t = 0; } }
+    else { p.e.setAttribute("transform", "translate(" + f1(p.tx + Math.cos(p.k + tm / 600) * 17) + " " + f1(p.ty + Math.sin(p.k + tm / 600) * 17) + ")"); p.e.setAttribute("opacity", clamp(1 - (p.t - 1.4)).toFixed(2)); if (p.t > 2.4) killP(p); } });
+  /* trap dots converge on the B cell while anti B therapy is on */
+  acc.trap += dt * sm.antiB * 5; while (acc.trap >= 1) { acc.trap--; const p = freeP(trapP); if (p) { const a = rnd(0, 6.28); emitP(p, SITE.bP[0] + Math.cos(a) * rnd(44, 60), SITE.bP[1] + Math.sin(a) * rnd(44, 60)); } }
+  trapP.forEach((p) => { if (!p.on) return; p.t += dt; p.x = lerp(p.x, SITE.bP[0], Math.min(1, dt * 2.5)); p.y = lerp(p.y, SITE.bP[1], Math.min(1, dt * 2.5)); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (Math.hypot(SITE.bP[0] - p.x, SITE.bP[1] - p.y) < 6 || p.t > 3) killP(p); });
+  /* hormone dots flow from the capsule into the kidney while replacement is on */
+  acc.horm += dt * sm.repl * 5; while (acc.horm >= 1) { acc.horm--; const p = freeP(hormP); if (p) { emitP(p, 0, 0); p.s = rnd(0.85, 1.15); } }
+  hormP.forEach((p) => { if (!p.on) return; p.u += dt * 0.45 * p.s; const q = TR_H.at(clamp(p.u)); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")"); if (p.u >= 1) killP(p); });
+  /* escaping clones travel from central organs down to the kidney */
+  acc.escT += dt * sm.T * 2.2; while (acc.escT >= 1) { acc.escT--; const p = freeP(escT); if (p) { emitP(p, 0, 0); p.s = rnd(0.85, 1.15); } }
   escT.forEach((p) => { if (!p.on) return; p.u += dt * 0.16 * p.s; const q = TR_T.at(clamp(p.u)); place(p.e, q.x, q.y, 0, 1); p.e.setAttribute("opacity", p.u > 0.92 ? clamp((1 - p.u) * 12).toFixed(2) : "1"); if (p.u >= 1) killP(p); });
-  acc.escB += dt * sm.T * 0.8; while (acc.escB >= 1) { acc.escB--; const p = freeP(escB); if (p) { emitP(p, 0, 0); p.s = rnd(0.85, 1.15); } }
+  acc.escB += dt * sm.T * 1.0 * (1 - 0.5 * sm.antiB); while (acc.escB >= 1) { acc.escB--; const p = freeP(escB); if (p) { emitP(p, 0, 0); p.s = rnd(0.85, 1.15); } }
   escB.forEach((p) => { if (!p.on) return; p.u += dt * 0.16 * p.s; const q = TR_B.at(clamp(p.u)); place(p.e, q.x, q.y, 0, 1); p.e.setAttribute("opacity", p.u > 0.92 ? clamp((1 - p.u) * 12).toFixed(2) : "1"); if (p.u >= 1) killP(p); });
-  /* autoantibodies from the peripheral B cell to the tissue */
-  acc.ab += dt * sm.Ab * 5; while (acc.ab >= 1) { acc.ab--; const p = freeP(absP); if (p) { emitP(p, 0, 0); p.s = rnd(0.85, 1.15); } }
+  /* autoantibodies from the B cell to the kidney */
+  acc.ab += dt * sm.Ab * 6; while (acc.ab >= 1) { acc.ab--; const p = freeP(absP); if (p) { emitP(p, 0, 0); p.s = rnd(0.85, 1.15); } }
   absP.forEach((p) => { if (!p.on) return; p.u += dt * 0.14 * p.s; const q = TR_AB.at(clamp(p.u)); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ") rotate(" + f1(q.a + 90) + ")"); if (p.u >= 1) killP(p); });
-  /* proinflammatory cytokines from the autoreactive T cell to the tissue */
-  acc.cyt += dt * sm.T * 5; while (acc.cyt >= 1) { acc.cyt--; const p = freeP(cytP); if (p) { emitP(p, 0, 0); p.s = rnd(0.85, 1.15); } }
+  /* signals from the escapee to the kidney fade as blockers dock */
+  acc.cyt += dt * sm.T * 6 * (1 - 0.45 * sm.imm); while (acc.cyt >= 1) { acc.cyt--; const p = freeP(cytP); if (p) { emitP(p, 0, 0); p.s = rnd(0.85, 1.15); } }
   cytP.forEach((p) => { if (!p.on) return; p.u += dt * 0.18 * p.s; const q = TR_CY.at(clamp(p.u)); p.e.setAttribute("transform", "translate(" + f1(q.x + Math.sin(tm / 220 + p.s * 8) * 3) + " " + f1(q.y) + ")"); if (p.u >= 1) killP(p); });
-  /* tissue injury: cells shrink a little and damage rings grow */
-  tisCells.forEach((c, i) => place(c.g, c.x + Math.sin(tm / 1400 + i) * 0.7, c.y + Math.cos(tm / 1600 + i) * 0.7, 0, 1 - 0.16 * sm.D));
-  dmgRings.forEach((r, i) => { const v = clamp(sm.D * 1.25 - i * 0.05); r.setAttribute("opacity", (v * 0.9).toFixed(2)); r.setAttribute("r", (19 + 2.5 * Math.sin(tm / 420 + i)).toFixed(1)); });
-  /* gauges */
+  /* gauges and the stage caption */
   gg.esc.set(sm.E, wordOf(sm.E, 0.25, 0.60, ["low", "some", "high"])); gg.reg.set(sm.R, wordOf(sm.R, 0.35, 0.65, ["weak", "partial", "strong"])); gg.ab.set(sm.Ab, wordOf(sm.Ab, 0.25, 0.55, ["low", "moderate", "high"])); gg.dmg.set(sm.D, wordOf(sm.D, 0.25, 0.55, ["intact", "injured", "damaged"])); gg.fn.set(sm.Fn, wordOf(sm.Fn, 0.40, 0.70, ["failing", "reduced", "preserved"]));
+  const key = drug + ":" + level; if (key !== capKey) { capKey = key; const t = capText(drug, level); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 run({ init, step });
 </script></body></html>

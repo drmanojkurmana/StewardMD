@@ -15,11 +15,11 @@ const MD = {
   drugLabel: "Treatment",
   settings: [
     { label: "CPR only" },
-    { label: "CPR with defibrillation" },
-    { label: "CPR with drugs and treat reversible cause" },
+    { label: "CPR and a shock" },
+    { label: "Shock, drugs and cause treated" },
   ],
   status: "Rhythm: {level} · {drug} ·",
-  drugNames: ["CPR only", "CPR with defibrillation", "CPR with drugs and cause treated"],
+  drugNames: ["CPR only", "CPR and a shock", "shock, drugs and cause treated"],
 };
 function modelOf(S, level, drug) {
   const cl = (v) => Math.max(0, Math.min(1, v));
@@ -58,53 +58,49 @@ let grid = "";
 for (let x = ECG.x; x <= ECG.x + ECG.w; x += 18) grid += `<path class="ac-grid${(x - ECG.x) % 90 === 0 ? " major" : ""}" d="M${x} ${ECG.y}V${ECG.y + ECG.h}"/>`;
 for (let y = ECG.y; y <= ECG.y + ECG.h; y += 18) grid += `<path class="ac-grid${(y - ECG.y) % 90 === 0 ? " major" : ""}" d="M${ECG.x} ${y}H${ECG.x + ECG.w}"/>`;
 const body = `
-<rect class="sc-tissue" x="14" y="44" width="560" height="266" rx="18"/>
-<rect class="sc-tissue" x="584" y="44" width="362" height="396" rx="18"/>
+<rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
 <rect class="ar-ecgbg" x="14" y="312" width="560" height="128" rx="14"/>
 <g clip-path="url(#arrclip)">${grid}</g>
 <clipPath id="arrclip"><rect x="${ECG.x}" y="${ECG.y}" width="${ECG.w}" height="${ECG.h}"/></clipPath>
 <text class="sc-zone" x="34" y="68">HEART AND CIRCULATION</text>
 <text class="sc-zone" x="604" y="68">BRAIN AND ORGANS</text>
 <text class="sc-zone sc-dim" x="34" y="${ECG.y + 18}">ECG, ONE LEAD</text>
-<g id="vessels"></g><g id="flow"></g><g id="heart"></g><g id="brainG"></g><g id="organG"></g><g id="chain"></g><g id="causes"></g><g id="pads"></g><g id="hands"></g><g id="syr"></g><g id="ecg"></g><g id="over"></g><g id="panel"></g>`;
+<path id="artBrain" class="ar-art" d="M255 150C400 100 560 90 700 150"/>
+<path id="artKid" class="ar-art" d="M255 160C420 170 560 200 700 250"/>
+<path id="veinBack" class="ar-vein" d="M700 300C540 320 400 310 250 290"/>
+<g id="heartSlot"></g><g id="brainSlot"></g><g id="kidneySlot"></g>
+<g id="clotG"></g><g id="flashG"></g><g id="dims"></g><g id="flow"></g><g id="rx"></g>
+<g id="pads"></g><g id="hands"></g><g id="syr"></g>
+<g id="ecg"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "cardiac-arrest-als", fig: "Fig 1", title: "Cardiac arrest: rhythms, CPR and the chain of survival", W, H, body,
-  label: "An animated scene of cardiac arrest. The heart shows ventricular fibrillation, asystole, pulseless electrical activity or return of circulation. Without a heartbeat there is no cardiac output, so the brain and organs become ischaemic within a short time. Hands give chest compressions, pads deliver a shock for shockable rhythms, adrenaline and treatment of reversible causes are shown, and the chain of survival links recognition, CPR, defibrillation and post-arrest care. Gauges show output, brain and organ flow, ischaemia and the chance of return of circulation.",
+  label: "An animated scene of cardiac arrest. A real heart, brain and kidney are joined by vessels. The heart shows ventricular fibrillation, asystole, pulseless electrical activity or return of circulation. Hands give chest compressions, pads deliver a shock for shockable rhythms, adrenaline from a syringe tightens vessels, and a clot cause can be cleared. The ECG strip shows the rhythm and gauges show output, brain and organ flow.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { W, H, ECG }, pageJs: readFileSync(join(HERE, "arrest.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H, ECG }, pageJs: readFileSync(join(HERE, "arrest.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With shock, drugs and cause treated",
   sourcesLis: [
     "<strong>How cardiac arrest develops.</strong> In cardiac arrest the heart stops pumping effectively, so circulation and cardiac output are lost and the brain and other organs become ischaemic very quickly. Ventricular fibrillation and pulseless ventricular tachycardia are shockable rhythms, where a defibrillation shock may restore an organised rhythm. Asystole and pulseless electrical activity are non-shockable rhythms, where a shock does not help and the focus is on compressions, adrenaline and finding a reversible cause. This is standard teaching in resuscitation and cardiovascular texts, including the Harrison chapter on cardiovascular collapse, cardiac arrest and sudden cardiac death, and was not checked against a linked source here, so it is flagged for review.",
-    "<strong>Treatment ideas shown.</strong> The chain of survival: early recognition and call for help, high quality chest compressions with minimal interruption, early defibrillation for a shockable rhythm, adrenaline, treatment of reversible causes (the Hs and Ts: hypoxia, hypovolaemia, electrolyte disturbance, hypothermia, tamponade, toxins, tension pneumothorax and thrombosis), and post-arrest care after return of spontaneous circulation. These are teaching toggles only.",
+    "<strong>Treatment ideas shown.</strong> Early recognition and call for help, high quality chest compressions with minimal interruption, early defibrillation for a shockable rhythm, adrenaline which tightens vessels so compressions push more blood to the heart and brain, treatment of reversible causes such as a clot blocking flow, and post-arrest care after return of spontaneous circulation. These are teaching toggles only.",
   ],
-  simplified: "Airway and breathing detail, compression depth and rate targets, drug doses and timing, rhythm checks, airway devices, mechanical CPR, extracorporeal CPR, individual reversible cause treatments, targeted temperature and other post-arrest care detail, and all prognostic scoring are left out. The ECG is a single schematic lead and the heart, brain and kidney are simple symbols. The figure does not say how any patient should be treated.",
+  simplified: "Airway and breathing detail, compression depth and rate targets, drug doses and timing, rhythm checks, airway devices, mechanical CPR, extracorporeal CPR, individual reversible cause treatments beyond the clot shown, targeted temperature and other post-arrest care detail, and all prognostic scoring are left out. The ECG is a single schematic lead and the organ drawings are simplified. The figure does not say how any patient should be treated.",
   extraCss: `
 .ar-ecgbg{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
 .ac-grid{stroke:var(--anatomy-faint);stroke-width:.5;opacity:.35;fill:none}.ac-grid.major{opacity:.7}
 .ar-trace{fill:none;stroke:var(--c-good);stroke-width:1.8;stroke-linejoin:round}
-.ar-art{fill:none;stroke:var(--c-rbc);stroke-width:5;stroke-linecap:round;opacity:.75}
-.ar-vein{fill:none;stroke:var(--c-fl);stroke-width:4;stroke-linecap:round;opacity:.6}
-.ar-heart{fill:#d94f5c;stroke:#8f2432;stroke-width:1.4}
-.ar-heartHi{fill:#f0838f;opacity:.7}
-.ar-dark{fill:#3d363d}
-.ar-brain{fill:#e9a2b3;stroke:#a85a72;stroke-width:1.2}
-.ar-gyrus{fill:none;stroke:#a85a72;stroke-width:1.1;opacity:.7}
-.ar-organ{fill:#c9788a;stroke:#8f4458;stroke-width:1.2}
+.ar-art{fill:none;stroke:var(--c-rbc);stroke-width:5.5;stroke-linecap:round;opacity:.8}
+.ar-vein{fill:none;stroke:var(--c-fl);stroke-width:4;stroke-linecap:round;opacity:.55}
 .ar-pad{fill:#ffd24a;stroke:#9a7a14;stroke-width:1.2}
-.ar-bolt{fill:#9a7a14}
+.ar-bolt{fill:#9a7a14;stroke:none}
 .ar-wire{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
 .ar-hand{fill:#f0c8a0;stroke:#a87848;stroke-width:1.1}
-.ar-chain{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}
-.ar-chainOn{fill:var(--c-good);stroke:#1f7a4d;stroke-width:1.2}
-.ar-chainLine{stroke:var(--anatomy-mid);stroke-width:2;fill:none}
-.ar-cap{fill:var(--anatomy-text);font:9px var(--anatomy-mono);pointer-events:none}
-.ar-token{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}
-.ar-tokenOn{fill:#ffd24a;stroke:#9a7a14;stroke-width:1.4}
-.ar-tokT{fill:var(--anatomy-strong);font:700 11px var(--anatomy-mono);pointer-events:none}
 .ar-syrB{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1}
-.ar-syrF{fill:var(--c-bad);opacity:.75}
-.ar-needle{stroke:var(--anatomy-strong);stroke-width:1.4}
+.ar-syrF{fill:var(--c-bad);stroke:none;opacity:.75}
+.ar-needle{fill:none;stroke:var(--anatomy-strong);stroke-width:1.4}
+.ar-flash{fill:#fff8e0;stroke:#ffd24a;stroke-width:1.5}
+.ar-dim{fill:#2b2530;stroke:none}
+.ar-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
 .p-spark{--cc:#ffe27a}
+.p-rx{--cc:var(--c-bad)}
 `,
 });
