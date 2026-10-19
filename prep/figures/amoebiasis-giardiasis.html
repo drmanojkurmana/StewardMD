@@ -264,19 +264,11 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 .cl-n.multi{opacity:.9}
 .sc-dim{opacity:.45}
 
-.sc-card-r{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
-.sc-card.on .sc-card-r{stroke:var(--anatomy-lit);stroke-width:2;fill:color-mix(in srgb,var(--anatomy-lit) 10%,var(--anatomy-card))}
-.sc-dim2{opacity:.75}
 .cl-amb{--cc:#e8845a}.cl-gia{--cc:#3fb3a3}.cl-epi{--cc:#e9c07a}
-.am-lumen{fill:color-mix(in srgb,var(--c-fl) 14%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-fl) 40%,var(--anatomy-mid));stroke-width:1}
-.am-epi{fill:color-mix(in srgb,#e9c07a 55%,var(--anatomy-paper));stroke:color-mix(in srgb,#e9c07a 60%,#000);stroke-width:.8}
-.am-tis2{fill:color-mix(in srgb,var(--c-endo) 18%,var(--anatomy-paper))}
+.am-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
 .am-ulcer{fill:color-mix(in srgb,var(--c-bad) 62%,#5a1f1f);stroke:color-mix(in srgb,var(--c-bad) 65%,#000);stroke-width:1.2}
-.am-vessel{fill:color-mix(in srgb,var(--c-rbc) 22%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 45%,var(--anatomy-mid));stroke-width:1}
-.am-liver{fill:color-mix(in srgb,#b85c48 72%,var(--anatomy-paper));stroke:color-mix(in srgb,#b85c48 60%,#000);stroke-width:1.2}
 .am-abscess{fill:#7a3b2e;stroke:#4a2018;stroke-width:1.4}
 .am-portal{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 65%,var(--anatomy-mid));stroke-width:12;stroke-linecap:round;opacity:.55}
-.am-gutbox{fill:color-mix(in srgb,var(--c-fl) 12%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
 .am-villus{fill:color-mix(in srgb,#e9c07a 62%,var(--anatomy-paper));stroke:color-mix(in srgb,#e9c07a 60%,#000);stroke-width:.8}
 .am-cyst{fill:#cfe8a8;stroke:color-mix(in srgb,#7fae4c 60%,#000);stroke-width:1.4}
 .am-cystn{fill:#5c7a34}
@@ -285,36 +277,38 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 .am-debris{fill:#d9a08a}
 .am-beaker{fill:none;stroke:var(--anatomy-mid);stroke-width:1.6}
 .am-stool{fill:color-mix(in srgb,var(--c-bad) 55%,var(--anatomy-paper))}
+.am-stoolok{fill:color-mix(in srgb,var(--c-fl) 30%,var(--anatomy-paper))}
 .am-stoolg{fill:#f2d27a;opacity:.85}
+.am-drain{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}
 .p-blood{fill:var(--c-bad)}.p-fatp{fill:#f2d27a;stroke:color-mix(in srgb,#d9a92c 55%,#000);stroke-width:.5}
+.p-metro{--cc:var(--c-good)}.p-lum{--cc:var(--c-fl)}
 .mk-c{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.4}.mk-x{fill:none;stroke:var(--c-bad);stroke-width:1.8;stroke-linecap:round}
 .mk-g{fill:none;stroke:var(--c-good);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .dr-g-fill.g-par{fill:var(--c-bac)}.dr-g-fill.g-inj{fill:var(--c-bad)}.dr-g-fill.g-gut{fill:var(--c-fl)}.dr-g-fill.g-sev{fill:var(--c-plt)}
 </style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Intestinal protozoa: amoebiasis and giardiasis</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>parasites high · tissue injury marked · gut upset severe · severity severe</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated comparison of intestinal protozoa. In amoebic colitis, cysts of Entamoeba histolytica are swallowed, trophozoites invade the colon and make flask shaped ulcers with bloody dysentery. In liver abscess, trophozoites travel in portal blood to the liver and form an abscess of anchovy paste material. In giardiasis, Giardia attaches to the duodenum, blunts villi and causes malabsorption with greasy stool. The level slider switches the disease shown. Treatments are metronidazole, a luminal agent, and combined treatment with drainage only rarely. Gauges show parasites, tissue injury, gut upset and severity."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
-<rect class="sc-tissue" x="14" y="126" width="932" height="316" rx="18"/>
-<g class="hot sc-card" id="card0" tabindex="0" data-info="Amoebic colitis: cysts of Entamoeba histolytica are swallowed, trophozoites reach the colon, attach to the lining and invade, making flask shaped ulcers and bloody dysentery."><rect class="sc-card-r" x="22" y="46" width="300" height="72" rx="12"/><text class="sc-zone" x="34" y="66">AMOEBIC COLITIS</text><text class="sc-lab" x="34" y="86">Entamoeba invades the colon</text><text class="sc-lab sc-dim2" x="34" y="104">bloody dysentery, flask ulcers</text></g><g class="hot sc-card" id="card1" tabindex="0" data-info="Amoebic liver abscess: trophozoites from the colon travel in portal blood to the liver and make a necrotic abscess filled with anchovy paste material."><rect class="sc-card-r" x="334" y="46" width="300" height="72" rx="12"/><text class="sc-zone" x="346" y="66">LIVER ABSCESS</text><text class="sc-lab" x="346" y="86">spread through portal blood</text><text class="sc-lab sc-dim2" x="346" y="104">anchovy paste, tender liver</text></g><g class="hot sc-card" id="card2" tabindex="0" data-info="Giardiasis: Giardia trophozoites attach to the duodenum with a sucking disc, coat the surface and blunt the villi, so fat is poorly absorbed and the stool is greasy."><rect class="sc-card-r" x="646" y="46" width="300" height="72" rx="12"/><text class="sc-zone" x="658" y="66">GIARDIASIS</text><text class="sc-lab" x="658" y="86">Giardia coats the duodenum</text><text class="sc-lab sc-dim2" x="658" y="104">malabsorption, greasy stool</text></g>
+<rect class="sc-tissue" x="14" y="44" width="932" height="396" rx="18"/>
 <g id="stage"></g>
 <g id="over"></g>
 <g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, volumes or numbers are shown or implied.</span></figcaption></figure>
 <div class="dr-controls">
   <label class="dr-range"><span>Disease shown</span><input id="level" type="range" min="0" max="2" step="1" value="0" aria-valuetext="amoebic colitis"><span class="dr-ticks"><i>colitis</i><i>liver abscess</i><i>giardiasis</i></span></label>
-  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">metronidazole (tissue agent)</option><option value="2">luminal agent (clears the bowel lumen)</option><option value="3">metronidazole, luminal agent and drainage if needed</option></select></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With combined treatment"><option value="0">no treatment</option><option value="1">metronidazole (tissue agent)</option><option value="2">luminal agent (clears the bowel lumen)</option><option value="3">combined treatment and drainage if needed</option></select></label>
   <button id="pause" type="button" aria-pressed="false">Pause motion</button>
 </div>
 <p id="status" class="dr-status" aria-live="polite"></p>
 <p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
 <h2>What the figure shows, and how sure we are</h2>
-<ul><li><strong>Entamoeba histolytica.</strong> Infection follows swallowing mature cysts in food or water contaminated with feces, or by fecal oral contact. Cysts excyst in the small bowel and trophozoites reach the colon. Many infections stay in the lumen without symptoms, and stool tests including antigen and nucleic acid tests (NAATs) help tell invasive species apart. When trophozoites attach to and digest the colonic lining they invade the epithelium, recruit inflammation and undermine the surface, making flask shaped ulcers. That gives abdominal pain and bloody, frequent small volume stool (amoebic dysentery), which can become severe with perforation in vulnerable persons. Trophozoites can also enter portal blood and reach the liver, where a usually single abscess forms. Its centre is acellular necrotic material likened to anchovy paste, with trophozoites at the rim rather than in the centre. This is standard teaching in medicine, microbiology and infectious disease texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Giardia.</strong> Giardia cysts are swallowed in contaminated water or food or by fecal oral spread, excyst in the small bowel, and trophozoites attach to the duodenal lining with a ventral sucking disc. They do not invade the epithelium. Coating of the surface, villus blunting and disturbed fat absorption give bloating, cramps and bulky, greasy, offensive stool (steatorrhoea) with malabsorption, although many infected persons have no symptoms. Stool antigen and NAATs are commonly used because cysts and trophozoites are shed unevenly. Other intestinal protozoa such as Cryptosporidium, whose oocysts resist chlorination and can cause severe watery diarrhoea in immunocompromised persons, are mentioned here only to place the group and are not drawn. This summary was not checked against a linked source here, so it is flagged for review.</li><li><strong>Treatment ideas shown.</strong> Metronidazole is shown as a tissue agent that kills invasive trophozoites in the colon wall and liver and also acts against Giardia. A luminal agent is shown clearing parasites and cysts that remain in the bowel lumen after tissue treatment, which matters in amoebiasis to stop relapse and spread. Drainage of a liver abscess is shown as rarely needed, reserved for selected large, left sided, complicated or poorly responding abscesses alongside drug treatment. These are teaching toggles only.</li></ul>
+<ul><li><strong>Entamoeba histolytica.</strong> Infection follows swallowing mature cysts in food or water contaminated with feces, or by fecal oral contact. Cysts excyst in the small bowel and trophozoites reach the colon. Many infections stay in the lumen without symptoms, and stool tests including antigen and nucleic acid tests (NAATs) help tell invasive species apart. When trophozoites attach to and digest the colonic lining they invade the epithelium, recruit inflammation and undermine the surface, making flask shaped ulcers. That gives abdominal pain and bloody, frequent small volume stool (amoebic dysentery), which can become severe with perforation in vulnerable persons. Trophozoites can also enter portal blood and reach the liver, where a usually single abscess forms. Its centre is acellular necrotic material likened to anchovy paste, with trophozoites at the rim rather than in the centre. This is standard teaching in medicine, microbiology and infectious disease texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Giardia.</strong> Giardia cysts are swallowed in contaminated water or food or by fecal oral spread, excyst in the small bowel, and trophozoites attach to the duodenal lining with a ventral sucking disc. They do not invade the epithelium. Coating of the surface, villus blunting and disturbed fat absorption give bloating, cramps and bulky, greasy, offensive stool (steatorrhoea) with malabsorption, although many infected persons have no symptoms. Stool antigen and NAATs are commonly used because cysts and trophozoites are shed unevenly. Other intestinal protozoa such as Cryptosporidium, whose oocysts resist chlorination and can cause severe watery diarrhoea in immunocompromised persons, are mentioned here only to place the group and are not drawn. This summary was not checked against a linked source here, so it is flagged for review.</li><li><strong>Treatment ideas shown.</strong> Metronidazole is shown as a tissue agent that kills invasive trophozoites in the colon wall and liver and also acts against Giardia. A luminal agent is shown clearing parasites and cysts that remain in the bowel lumen after tissue treatment, which matters in amoebiasis to stop relapse and spread. Drainage of a liver abscess is shown as rarely needed, reserved for selected large, left sided, complicated or poorly responding abscesses alongside drug treatment. These are teaching toggles only.</li><li><strong>Organ art.</strong> Organ art is Servier Medical Art by Servier, CC BY 3.0 (https://smart.servier.com), recoloured and animated.</li></ul>
 <p><strong>What was simplified.</strong> Cyst and trophozoite nuclear detail, excystation steps, lectin attachment and protease mechanisms in molecular detail, fulminant colitis and perforation, brain and other rare spread, full differential diagnosis of dysentery and liver abscess, Cryptosporidium and other protozoa in full, drug choices in pregnancy and childhood, and all doses and durations are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
-<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). Organ illustrations are Servier Medical Art by Servier (CC BY 3.0); all other drawing is original.</p>
 <p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
-</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Disease shown","a":[0,1,2],"names":["amoebic colitis","liver abscess","giardiasis"],"ticks":["colitis","liver abscess","giardiasis"],"start":0},"settings":[{"label":"no treatment"},{"label":"metronidazole (tissue agent)"},{"label":"luminal agent (clears the bowel lumen)"},{"label":"metronidazole, luminal agent and drainage if needed"}],"drugNames":["no treatment","metronidazole","a luminal agent","combined treatment with drainage if needed"],"status":"Disease: {level} · {drug} ·"}};
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Disease shown","a":[0,1,2],"names":["amoebic colitis","liver abscess","giardiasis"],"ticks":["colitis","liver abscess","giardiasis"],"start":0},"settings":[{"label":"no treatment"},{"label":"metronidazole (tissue agent)"},{"label":"luminal agent (clears the bowel lumen)"},{"label":"combined treatment and drainage if needed"}],"drugNames":["no treatment","metronidazole","a luminal agent","combined treatment with drainage if needed"],"status":"Disease: {level} · {drug} ·"}};
 const modelOf = function modelOf(S, level, drug) {
   const t = S.level.a[level];
   const basePar = [0.9, 0.85, 0.9][t], baseInj = [0.85, 0.95, 0.3][t], baseGut = [0.9, 0.45, 0.9][t];
-  const effPar = [[0, 0, 0], [0.85, 0.85, 0.8], [0.7, 0.15, 0.55], [0.92, 0.9, 0.85]][drug][t];
-  const effInj = [[0, 0, 0], [0.75, 0.7, 0.7], [0.5, 0.1, 0.45], [0.8, 0.88, 0.75]][drug][t];
-  const effGut = [[0, 0, 0], [0.7, 0.55, 0.75], [0.55, 0.15, 0.5], [0.82, 0.75, 0.8]][drug][t];
+  const effPar = [[0, 0, 0], [0.85, 0.85, 0.8], [0.5, 0.15, 0.55], [0.92, 0.9, 0.85]][drug][t];
+  const effInj = [[0, 0, 0], [0.75, 0.7, 0.7], [0.35, 0.1, 0.45], [0.8, 0.88, 0.75]][drug][t];
+  const effGut = [[0, 0, 0], [0.7, 0.55, 0.75], [0.55, 0.4, 0.5], [0.82, 0.75, 0.8]][drug][t];
   const cl = (v) => Math.max(0, Math.min(1, v));
   const Par = cl(basePar * (1 - effPar)), Inj = cl(baseInj * (1 - effInj)), Gut = cl(baseGut * (1 - effGut));
   const Sev = cl(0.42 * Par + 0.38 * Inj + 0.2 * Gut);
@@ -415,10 +409,336 @@ function run(scn) {
   start();
 }
 
-/* Intestinal protozoa scene: amoebic colitis, amoebic liver abscess and giardiasis on one stage. */
+/* Shared organ art for the animated mechanism scenes. Plain globals, ES2015, no imports.
+ * Inlined after bio.lib.js when buildScene gets organs:true, so mk/f1/clamp below are the shared ones.
+ * organ(parent, kind, x, y, w, opts) draws real anatomy art (NIH BioArt Source public domain,
+ * Servier Medical Art CC BY 3.0, one DBCLS CC BY 4.0 knee; injected as _ORG_ART by buildScene
+ * for the kinds the page uses) centred on x,y and w px wide, and falls back to the existing
+ * procedural layered silhouette for kinds without art (uterus, thyroid, ganglion) or when art
+ * was not injected (liver, bladder and eye keep their procedural drawings as fallback).
+ * Art ports are fractions of the art viewBox (see _ORG_FRAC). The liver-4 art is the bare mass,
+ * so the lib adds a procedural gallbladder under the gall port plus short portal and hepatic
+ * vein stubs ending at the porta and hepvein ports.
+ * opts: { h (px height, else proportional), flip (mirror left/right), cls (extra class), id,
+ *   tint (a CSS colour with opacity, overlaid as an organ-shaped mask for disease states),
+ *   dim (dull the art) }.
+ * Returns { g, kind, x, y, w, h, ports, art } with absolute SVG coords; ports.in/out always exist.
+ * Art keeps its own colours (a faint contrast halo keeps it readable in dark and light themes);
+ * procedural fill is a vertical gradient whose stops derive from --cc (a theme aware palette var,
+ * so dark and light both work); edge stroke and landmark lines use color-mix detail classes.
+ * Emits no text, so label font and dash rules are inherited from the calling scene. */
+if (!document.getElementById("orgCss")) { var _orgSt = document.createElement("style"); _orgSt.id = "orgCss";
+  _orgSt.textContent = ".org-halo{filter:drop-shadow(0 0 1px rgba(0,0,0,.65)) drop-shadow(0 0 1px rgba(255,255,255,.45))}"
+  + ".org-b{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1.2;stroke-linejoin:round;stroke-linecap:round}"
+  + ".org-d{fill:none;stroke:color-mix(in srgb,var(--cc) 40%,var(--anatomy-hi));stroke-width:1;stroke-linecap:round;opacity:.8}"
+  + ".org-dk{fill:none;stroke:color-mix(in srgb,var(--cc) 62%,#000);stroke-width:1.1;stroke-linecap:round;opacity:.8}"
+  + ".org-f{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1;stroke-linejoin:round}"
+  + ".org-v{fill:none;stroke-linecap:round}"
+  + ".org-liver{--cc:var(--c-rbc)}.org-heart{--cc:var(--c-rbc)}.org-kidney{--cc:var(--c-eos)}.org-lung{--cc:var(--c-endo)}"
+  + ".org-stomach{--cc:var(--c-graft)}.org-brain{--cc:var(--c-mac)}.org-pancreas{--cc:var(--c-plt)}.org-spleen{--cc:var(--c-sm)}"
+  + ".org-bladder{--cc:var(--c-th2)}.org-uterus{--cc:var(--c-endo)}.org-ovary{--cc:var(--c-plt)}.org-thyroid{--cc:var(--c-neut)}.org-eye{--cc:#e6e1d4}.org-ganglion{--cc:var(--c-mac)}"
+  + ".org-bowel{--cc:var(--c-graft)}.org-colon{--cc:var(--c-eos)}.org-ear{--cc:var(--c-plt)}.org-skin{--cc:#d9a58c}"
+  + ".org-muscle{--cc:var(--c-rbc)}.org-joint{--cc:#cfc8bd}.org-vessel{--cc:var(--c-rbc)}";
+  document.head.appendChild(_orgSt); }
+var _orgN = 0;
+/* per instance gradients: base (light -> base -> dark of --cc) plus a white top / dark bottom shade overlay */
+function _orgDefs(g) {
+  _orgN++; var id = "og" + _orgN, hid = "oh" + _orgN;
+  var defs = mk("defs", {}, g);
+  var lg = mk("linearGradient", { id: id, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  var s0 = mk("stop", { offset: "0", "stop-color": "#999" }, lg); s0.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 55%,#fff)");
+  var s1 = mk("stop", { offset: ".55", "stop-color": "#888" }, lg); s1.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 78%,var(--anatomy-paper))");
+  var s2 = mk("stop", { offset: "1", "stop-color": "#666" }, lg); s2.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 66%,#000)");
+  var hg = mk("linearGradient", { id: hid, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  mk("stop", { offset: "0", "stop-color": "#fff", "stop-opacity": ".2" }, hg);
+  mk("stop", { offset: ".55", "stop-color": "#fff", "stop-opacity": "0" }, hg);
+  mk("stop", { offset: "1", "stop-color": "#000", "stop-opacity": ".14" }, hg);
+  return { b: "url(#" + id + ")", h: "url(#" + hid + ")" };
+}
+/* one filled silhouette plus its shade overlay, same path data so the light stays inside */
+function _ob(g, d, G) {
+  mk("path", { class: "org-b", d: d, fill: G.b, stroke: "#666" }, g);
+  mk("path", { d: d, fill: G.h, stroke: "none", "pointer-events": "none" }, g);
+}
+function _ol(g, d, cls) { return mk("path", { class: cls || "org-d", d: d, fill: "none" }, g); }
+function _of(g, d, fillCss, cc) { var e = mk("path", { class: "org-f", d: d, stroke: "#666" }, g); e.setAttribute("style", "fill:" + fillCss + ";--cc:" + cc); return e; }
+function _ov(g, d, color, wdt) { var e = mk("path", { class: "org-v", d: d, fill: "none", stroke: "#777", "stroke-width": wdt, "stroke-linecap": "round" }, g); e.setAttribute("style", "stroke:" + color); return e; }
+function _odot(g, x, y, r, fillCss) { var e = mk("circle", { cx: x, cy: y, r: r, stroke: "none" }, g); e.setAttribute("style", "fill:" + fillCss); return e; }
+
+/* liver: big right lobe, smaller left lobe, falciform notch, gallbladder, porta hepatis stubs */
+function _orgLiver(g, G) {
+  _ov(g, "M-2 46L-2 18", "var(--d-ven)", 5); _ov(g, "M7 46L5 20", "var(--d-art)", 3); _ov(g, "M-11 46L-9 20", "var(--c-bac)", 2.5);
+  _ob(g, "M-6-30C22-33 44-25 50-7C54 9 40 25 18 30C2 33-5 22-7 6C-8-8-8-22-6-30Z", G);
+  _ob(g, "M-8-27C-24-27-40-19-48-6C-51 1-45 9-35 12C-24 15-11 9-8-1C-6-10-6-20-8-27Z", G);
+  _ol(g, "M-8-29C-7-18-6-6-4 6", "org-dk");
+  _ol(g, "M-2-28C14-29 30-24 40-14");
+  _of(g, "M10 18C16 16 22 18 23 24C24 31 19 37 14 36C9 35 7 28 8 23C8 21 9 19 10 18Z", "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  return { h0: 78, ports: { in: [-2, 46], out: [12, -30], porta: [-2, 18], gall: [16, 33], lobe: [20, 0] } };
+}
+/* heart: mass with apex down left, septum, coronary groove, aorta with arch, pulmonary split, caval stubs */
+function _orgHeart(g, G) {
+  _ov(g, "M-2-18L-2-44C-2-52-10-56-20-54C-28-52-32-46-32-38", "var(--d-art)", 8);
+  _ov(g, "M-8-52L-8-59M-15-54L-16-60M-22-53L-24-59", "var(--d-art)", 2.5);
+  _ov(g, "M12-16C8-28 2-34-4-38", "var(--d-ven)", 7);
+  _ov(g, "M-4-38C-12-40-20-38-28-34", "var(--d-ven)", 4.5); _ov(g, "M-4-38C4-40 12-38 20-34", "var(--d-ven)", 4.5);
+  _ov(g, "M20-20L20-52", "var(--d-ven)", 7); _ov(g, "M18 34L18 58", "var(--d-ven)", 7);
+  _ov(g, "M-36-2L-50-6M-34 14L-48 16", "var(--d-art)", 4);
+  _ob(g, "M-4-32C24-34 42-16 40 10C38 32 12 48-20 50C-34 44-40 24-36 2C-33-18-22-31-4-32Z", G);
+  _ol(g, "M0-30C4-10 0 14-14 44", "org-dk");
+  _ol(g, "M-34 6C-18 12 6 12 38 4");
+  _ol(g, "M-6-28C-14-18-18-6-20 8");
+  return { h0: 120, ports: { in: [20, -52], out: [-32, -38], ivc: [18, 58], apex: [-20, 50], pulm: [-28, -34] } };
+}
+/* kidney: bean with hilum, cortex rim, medulla rays, pelvis funnel, ureter, artery and vein stubs */
+function _orgKidney(g, G) {
+  _ov(g, "M-12 6C-22 12-28 18-28 30C-28 50-26 70-24 90", "var(--cc)", 4.5);
+  _ov(g, "M-50-8C-40-8-30-8-22-6", "var(--d-art)", 4); _ov(g, "M-50 10C-40 10-30 8-22 6", "var(--d-ven)", 5);
+  _ob(g, "M8-58C38-58 54-32 50 2C56 32 42 60 8 60C-8 60-16 48-19 34C-26 24-26-24-19-34C-16-48-8-58 8-58Z", G);
+  _ol(g, "M8-49C32-49 45-28 42 0C46 28 34 51 8 51C-1 51-8 43-10 32C-15 24-15-24-10-32C-8-43-1-49 8-49Z");
+  _ol(g, "M-6-30L14-38M-8-10L16-12M-8 12L16 14M-6 32L14 40");
+  _ol(g, "M16-44C30-36 38-20 38 0");
+  _of(g, "M-19-14C-8-12-2-8 2-2C-2 4-8 10-18 14C-22 8-22-8-19-14Z", "color-mix(in srgb,var(--cc) 35%,#fff)", "var(--cc)");
+  return { h0: 150, ports: { in: [-50, -8], out: [-24, 90], vein: [-50, 10], pelvis: [-12, 4], cortex: [30, 0] } };
+}
+/* lung: one lung with oblique fissure, hilum bronchus splitting into lobar and segmental branches */
+function _orgLung(g, G) {
+  _ov(g, "M-58 4L-30 4", "var(--anatomy-hi)", 6);
+  _ov(g, "M-30 4C-22-6-16-16-10-26", "var(--anatomy-hi)", 4.5); _ov(g, "M-30 4C-22 14-14 24-6 34", "var(--anatomy-hi)", 4.5);
+  _ov(g, "M-18-14L-28-22M-16-16L-8-24M-14-20L-14-32M-20 16L-30 24M-16 20L-6 28M-12 26L-10 38", "var(--anatomy-hi)", 2);
+  _ov(g, "M-58-8L-34-6", "var(--d-ven)", 4); _ov(g, "M-58 14L-34 12", "var(--d-art)", 4);
+  _ob(g, "M2-60C24-56 40-32 43 8C45 38 32 60 2 62C-24 62-40 42-42 10C-44-24-20-58 2-60Z", G);
+  _ol(g, "M-40-2C-20 8 0 22 24 40", "org-dk");
+  _ol(g, "M-8-48C8-50 22-40 30-26");
+  return { h0: 130, ports: { in: [-58, 4], out: [-58, 14], art: [-58, -8], apex: [2, -60], base: [2, 62] } };
+}
+/* stomach: J shape with fundus dome, rugae, antrum sweep, pylorus ring, oesophagus and duodenum stubs */
+function _orgStomach(g, G) {
+  _of(g, "M-38-58L-22-58L-22-36L-38-36Z", "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))", "var(--cc)");
+  _ob(g, "M-38-36C-46-24-50-8-46 10C-42 30-30 46-12 50C6 54 28 46 40 32C44 27 46 23 46 18L34 14C30 22 20 30 6 32C-8 34-22 26-28 12C-33-1-31-16-26-28C-24-32-22-34-22-36Z", G);
+  _ol(g, "M-36-10C-30 6-22 20-8 28M-28-22C-22-6-12 10 4 22M-16-30C-10-14 0 2 14 12");
+  _ol(g, "M40 15C43 19 43 25 40 29M34 14C37 18 37 26 34 30", "org-dk");
+  _ol(g, "M46 16L60 22M44 28L58 32", "org-dk");
+  return { h0: 116, ports: { in: [-30, -58], out: [60, 27], fundus: [-40, -12], antrum: [24, 38], pylorus: [40, 22] } };
+}
+/* brain lateral: cerebrum with Sylvian fissure and gyri, cerebellum with folia, tapered brainstem */
+function _orgBrain(g, G) {
+  _ov(g, "M10 50L10 64", "var(--d-art)", 5);
+  _ob(g, "M-50-6C-50-32-24-42 4-40C30-38 44-28 44-8C44 10 32 24 8 28C-18 31-50 24-50-6Z", G);
+  _ol(g, "M-12 10C2 6 18 2 34-4", "org-dk");
+  _ol(g, "M-38-20C-32-10-32 2-38 12M-26-30C-20-20-20-6-26 6M-4-32C2-22 2-8-4 2M10-30C16-20 16-6 10 4M28-22C34-14 34-2 28 8");
+  _ol(g, "M-16 6L-24-4M-10 4L-12-8", "org-dk");
+  _ob(g, "M2 24L16 24L12 56L6 56Z", G);
+  _ol(g, "M2 36C6 38 12 38 16 36");
+  _ob(g, "M22 24C34 22 46 26 48 34C50 42 42 48 32 47C24 46 20 38 20 32C20 28 20 26 22 24Z", G);
+  _ol(g, "M24 32L44 32M25 37L43 37M27 42L41 42");
+  return { h0: 110, ports: { in: [10, 64], out: [4, -40], parenchyma: [-8, -6], cereb: [34, 35], frontal: [-40, -8] } };
+}
+/* pancreas: bulky head right, tapering tail left, main duct with side branches, islet dots */
+function _orgPancreas(g, G) {
+  _ob(g, "M-50-4C-32-14-8-14 14-10C32-7 46-2 49 10C51 21 40 28 26 25C8 21-20 12-50 6Z", G);
+  _ol(g, "M-46 1C-20-2 10 0 38 10", "org-dk");
+  _ol(g, "M-30-1L-34-8M-10-1L-14-9M8 0L4-8M-28 1L-32 8M-6 1L-10 8M12 2L8 10");
+  _ol(g, "M52-6C58 4 58 16 50 24");
+  _odot(g, -20, -2, 1.6, "var(--d-art)"); _odot(g, 0, 0, 1.6, "var(--d-art)"); _odot(g, 22, 6, 1.6, "var(--d-art)");
+  return { h0: 60, ports: { in: [-10, -12], out: [49, 12], head: [36, 8], tail: [-48, 1] } };
+}
+/* spleen: crescent with top notch, trabeculae, hilar artery and vein stubs below */
+function _orgSpleen(g, G) {
+  _ov(g, "M-30 52C-28 44-26 40-22 36", "var(--d-art)", 3.5); _ov(g, "M-20 54C-19 46-17 42-13 38", "var(--d-ven)", 4.5);
+  _ob(g, "M-38-30C-8-40 28-34 44-12C52 4 44 26 20 34C-4 41-34 32-44 10C-48-4-46-22-38-30Z", G);
+  _ol(g, "M-8-36C-4-33 0-33 4-36", "org-dk");
+  _ol(g, "M-30-10C-10-2 12-2 32-10M-28 8C-8 16 12 16 30 8");
+  return { h0: 96, ports: { in: [-30, 52], out: [-20, 54], hilum: [-18, 37], pulp: [0, 0] } };
+}
+/* ganglion: sensory ganglion with capsule, fibre stubs, satellite glia dots, one big soma with nucleus */
+function _orgGanglion(g, G) {
+  _ov(g, "M-52 0L-30 0", "var(--anatomy-hi)", 7);
+  _ov(g, "M30 0L52 0", "var(--anatomy-hi)", 7);
+  _ob(g, "M-32-27C-12-37 13-37 30-25C43-12 43 12 30 25C13 37-12 37-32 27C-42 13-42-13-32-27Z", G);
+  _ol(g, "M-27-21C-10-29 12-29 26-19");
+  _of(g, "M-16 0C-16-9-9-16 0-16C9-16 16-9 16 0C16 9 9 16 0 16C-9 16-16 9-16 0Z", "color-mix(in srgb,var(--cc) 62%,var(--anatomy-paper))", "var(--cc)");
+  _of(g, "M-7 0C-7-4-4-7 0-7C4-7 7-4 7 0C7 4 4 7 0 7C-4 7-7 4-7 0Z", "color-mix(in srgb,var(--cc) 45%,#1a1030)", "var(--cc)");
+  _odot(g, 2, 1, 1.8, "color-mix(in srgb,var(--cc) 70%,#fff)");
+  _odot(g, -25, -13, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 25, -12, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 0, 28, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _ol(g, "M-13-8L-22-16M13-8L22-16");
+  return { h0: 96, ports: { in: [-52, 0], out: [52, 0], soma: [0, 0], nucleus: [0, 0] } };
+}
+/* bladder: dome with detrusor arcs, trigone, ureters in from above, urethra out below */
+function _orgBladder(g, G) {
+  _ov(g, "M-52-44C-44-34-36-26-30-18", "var(--cc)", 4); _ov(g, "M52-44C44-34 36-26 30-18", "var(--cc)", 4);
+  _ob(g, "M0-50C26-48 40-30 40-6C40 16 26 32 8 40L-8 40C-26 32-40 16-40-6C-40-30-26-48 0-50Z", G);
+  _ob(g, "M-8 40L8 40L8 64L-8 64Z", G);
+  _ol(g, "M-8 52L8 52", "org-dk");
+  _ol(g, "M-24-8L24-8L0 24Z");
+  _ol(g, "M-28-28C-12-36 12-36 28-28M-34-12C-16-22 16-22 34-12");
+  return { h0: 120, ports: { in: [-52, -44], out: [0, 64], inR: [52, -44], trigone: [0, 8], dome: [0, -48] } };
+}
+/* uterus: fundus, cavity, cervix, tubes with fimbriae, ovaries with follicles */
+function _orgUterus(g, G) {
+  _ov(g, "M-16-16C-26-17-32-19-38-23", "var(--cc)", 3.5); _ov(g, "M16-16C26-17 32-19 38-23", "var(--cc)", 3.5);
+  _ov(g, "M-38-23L-44-27M-38-23L-45-23M-38-23L-44-19M-38-23L-42-29", "var(--cc)", 1.2);
+  _ov(g, "M38-23L44-27M38-23L45-23M38-23L44-19M38-23L42-29", "var(--cc)", 1.2);
+  var eo = mk("ellipse", { class: "org-f", cx: -45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var eo2 = mk("ellipse", { class: "org-f", cx: 45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo2.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var _fol = "color-mix(in srgb,var(--c-plt) 45%,#000)";
+  _odot(g, -47, -14, 1.6, _fol); _odot(g, -43, -8, 1.6, _fol); _odot(g, -46, -4, 1.4, _fol);
+  _odot(g, 47, -14, 1.6, _fol); _odot(g, 43, -8, 1.6, _fol); _odot(g, 46, -4, 1.4, _fol);
+  _ob(g, "M-16-20C-8-26 8-26 16-20C20-2 15 20 8 32L-8 32C-15 20-20-2-16-20Z", G);
+  _of(g, "M-10-14L10-14L0 22Z", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  _ol(g, "M-11 18L11 18", "org-dk"); _ol(g, "M0 18L0 32");
+  return { h0: 100, ports: { in: [-45, -22], out: [0, 33], ovL: [-45, -10], ovR: [45, -10], fundus: [0, -24] } };
+}
+/* ovary: almond body with surface arcs, hilar artery and vein stubs at the hilum */
+function _orgOvary(g, G) {
+  _ov(g, "M-52 0L-40 0", "var(--d-art)", 3); _ov(g, "M40 0L52 0", "var(--d-ven)", 3.5);
+  _ob(g, "M-40-6C-30-24-5-30 15-26C33-22 42-10 40 6C38 22 20 30 0 29C-20 28-38 14-40-6Z", G);
+  _ol(g, "M-28-12C-16-20 0-23 14-21");
+  _ol(g, "M-32 4C-20 12-2 17 14 14", "org-dk");
+  return { h0: 70, ports: { in: [-52, 0], out: [52, 0], dom: [0, 0], surf: [0, -27] } };
+}
+/* thyroid butterfly: two lobes, isthmus bridge, trachea rings behind, parathyroid dots */
+function _orgThyroid(g, G) {
+  _ov(g, "M-7-40L-7 40M7-40L7 40", "var(--anatomy-hi)", 2);
+  _ov(g, "M-7-28L7-28M-7-12L7-12M-7 24L7 24M-7 36L7 36", "var(--anatomy-hi)", 1.2);
+  _ob(g, "M16-32C28-30 35-16 33 4C31 22 25 32 16 32C8 32 6 20 8 2C10-14 11-28 16-32Z", G);
+  _ob(g, "M-16-32C-28-30-35-16-33 4C-31 22-25 32-16 32C-8 32-6 20-8 2C-10-14-11-28-16-32Z", G);
+  _ob(g, "M-10 6L10 6L10 16L-10 16Z", G);
+  _ol(g, "M14-20C18-10 18 6 14 20M-14-20C-18-10-18 6-14 20");
+  _odot(g, -30, 8, 2, "var(--c-plt)"); _odot(g, 30, -4, 2, "var(--c-plt)");
+  return { h0: 90, ports: { in: [16, -34], out: [0, 36], isthmus: [0, 11], lobeR: [22, 0], lobeL: [-22, 0] } };
+}
+/* eye: sclera ball with cornea bulge, iris and pupil facing left, retina arc, optic nerve stub right */
+function _orgEye(g, G) {
+  _ov(g, "M26 0L54 0", "var(--c-plt)", 8);
+  _ob(g, "M-36-4C-34-22-16-32 4-30C24-28 34-12 32 4C30 20 14 30-4 29C-22 28-36 14-36-4Z", G);
+  _of(g, "M-39 0C-39-6-35-11-30-11C-25-11-21-6-21 0C-21 6-25 11-30 11C-35 11-39 6-39 0Z", "color-mix(in srgb,var(--c-endo) 70%,var(--anatomy-paper))", "var(--c-endo)");
+  _odot(g, -30, 0, 5, "#241a12");
+  _odot(g, -32, -3.5, 1.5, "#ffffff");
+  _ol(g, "M16-15C23-5 23 7 15 17");
+  return { h0: 70, ports: { in: [-41, 0], out: [54, 0], retina: [16, 0], lens: [-20, 0] } };
+}
+/* Real-art store, filled by buildScene after this lib: _ORG_ART[kind] = { vb:[x,y,w,h],
+ * pfx:"oaxxx", body:"<inner svg markup>" }. Ports are fractions of the viewBox, measured
+ * off the slimmed art (see tools/figures/dev/svgslim.py); content fills the frame. */
+var _ORG_ART = {};
+var _ORG_FRAC = {
+  liver: { in: [.35, .95], out: [.40, .01], porta: [.35, .95], hepvein: [.40, .01], gall: [.55, .66], lobe: [.15, .70] },
+  heart: { in: [.30, .01], out: [.48, .01], aorta: [.48, .01], ivc: [.28, .90], apex: [.70, .97], pulm: [.60, .08] },
+  kidney: { in: [.04, .36], out: [.38, .97], vein: [.04, .46], pelvis: [.36, .41], cortex: [.62, .45], hilum: [.28, .41] },
+  lung: { in: [.46, .53], out: [.44, .60], art: [.44, .48], apex: [.24, .30], base: [.24, .87], trachea: [.49, .01], carina: [.49, .50], hilumL: [.42, .58], hilumR: [.56, .58], apexR: [.75, .34], baseR: [.75, .86] },
+  stomach: { in: [.42, .00], out: [.50, .95], fundus: [.38, .10], antrum: [.52, .30], pylorus: [.60, .35] },
+  intestine: { in: [.58, .38], out: [.50, .95], duodenum: [.60, .40], jejunum: [.42, .60], ileum: [.50, .72], cecum: [.60, .82], colon: [.28, .60], rectum: [.50, .92] },
+  brain: { in: [.60, .97], out: [.42, .04], parenchyma: [.42, .42], cereb: [.76, .78], frontal: [.08, .40], stem: [.60, .93], carotid: [.16, .75] },
+  pancreas: { in: [.50, .08], out: [.95, .50], head: [.85, .45], tail: [.06, .45], body: [.50, .45] },
+  spleen: { in: [.38, .78], out: [.52, .78], hilum: [.45, .72], pulp: [.50, .38] },
+  bowel: { in: [.21, .03], out: [.80, .99], coils: [.52, .52] },
+  colon: { in: [.75, .72], out: [.50, .98], caecum: [.75, .72], rectum: [.50, .98], ascending: [.88, .58], transverse: [.50, .62], descending: [.23, .44], sigmoid: [.42, .82] },
+  bladder: { in: [.25, .01], out: [.50, .99], inR: [.73, .01], trigone: [.50, .70], dome: [.50, .28] },
+  eye: { in: [.02, .50], out: [.99, .55], retina: [.75, .50], lens: [.19, .51], cornea: [.08, .50], nerve: [.99, .55] },
+  ear: { in: [.35, .45], out: [.02, .55], canals: [.57, .18], vestibule: [.50, .45], cochlea: [.55, .75], nerve: [.02, .55] },
+  skin: { in: [.50, .13], out: [.50, .97], surface: [.50, .13], epidermis: [.50, .17], dermis: [.47, .55], hypodermis: [.50, .92] },
+  muscle: { in: [.02, .50], out: [.99, .71], belly: [.32, .48], fibre: [.72, .58] },
+  joint: { in: [.50, .04], out: [.52, .96], femur: [.50, .20], joint: [.54, .58], patella: [.51, .52], tibia: [.52, .80], fibula: [.40, .78] },
+  vessel: { in: [.50, .01], out: [.50, .99], lumen: [.50, .05], wall: [.90, .50] }
+};
+/* liver-4 is the bare mass, so add the missing bits procedurally in art units
+ * (fractions of the liver-4 viewBox): a gallbladder blob under the art at the
+ * gall port (its fundus peeks below the inferior edge), a portal stub rising
+ * to the porta tip and a hepatic stub leaving at the hepvein tip. Drawn before
+ * the art group so the mass covers the joins; the inner flip mirrors them. */
+function _orgLiverExtra(inner, A, opts) {
+  var vw = A.vb[2], vh = A.vb[3];
+  var X = function (f) { return f1(f * vw); }, Y = function (f) { return f1(f * vh); };
+  var g = mk("g", {}, inner);
+  if (opts.dim) g.setAttribute("opacity", ".5");
+  _ov(g, "M" + X(.35) + " " + Y(.95) + "L" + X(.35) + " " + Y(.78), "var(--d-ven)", 11);
+  _ov(g, "M" + X(.40) + " " + Y(.01) + "L" + X(.40) + " " + Y(.14), "var(--d-ven)", 11);
+  var gb = _of(g, "M" + X(.55 - 17 / vw) + " " + Y(.63) + "a17 23 0 1 0 34 0a17 23 0 1 0 -34 0",
+    "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  gb.setAttribute("stroke-width", "2.2");
+  return g;
+}
+/* draw the injected art centred on x,y at w px wide. The art is clipped to its
+ * frame; tint overlays an organ-shaped translucent mask (the art itself, reused
+ * as a mask); dim dulls the art. Art ids are suffixed per instance so two of
+ * the same organ on one page never share gradient, clip or mask ids. */
+function _orgArt(parent, kind, x, y, w, opts, A) {
+  var vb = A.vb, vw = vb[2], vh = vb[3], cx = vb[0] + vw / 2, cy = vb[1] + vh / 2;
+  _orgN++;
+  var uid = "u" + _orgN;
+  var outer = mk("g", { class: "org org-art org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var sx = w / vw, sy = opts.h ? opts.h / vh : sx, fx = opts.flip ? -1 : 1;
+  var inner = mk("g", { transform: "translate(" + f1(-fx * cx * sx) + " " + f1(-cy * sy) + ") scale(" + (fx * sx).toFixed(4) + " " + sy.toFixed(4) + ")" }, outer);
+  var defs = mk("defs", {}, inner);
+  var cid = A.pfx + uid + "-frame";
+  var cp = mk("clipPath", { id: cid }, defs);
+  mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, cp);
+  if (kind === "liver") _orgLiverExtra(inner, A, opts);
+  var art = mk("g", { class: "org-halo", "clip-path": "url(#" + cid + ")" }, inner);
+  var aid = A.pfx + uid + "-art";
+  art.setAttribute("id", aid);
+  art.innerHTML = A.body.split('id="' + A.pfx + '-').join('id="' + A.pfx + uid + '-')
+    .split('url(#' + A.pfx + '-').join('url(#' + A.pfx + uid + '-')
+    .split('href="#' + A.pfx + '-').join('href="#' + A.pfx + uid + '-');
+  if (opts.dim) art.setAttribute("opacity", ".5");
+  if (opts.tint) {
+    var mid = A.pfx + uid + "-tintm";
+    var m = mk("mask", { id: mid, maskUnits: "userSpaceOnUse", x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, defs);
+    mk("use", { href: "#" + aid }, m);
+    var tg = mk("g", { "clip-path": "url(#" + cid + ")" }, inner);
+    mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh), fill: opts.tint, mask: "url(#" + mid + ")" }, tg);
+  }
+  var ports = {}, F = _ORG_FRAC[kind], k;
+  for (k in F) ports[k] = [Math.round((x + fx * (vb[0] + F[k][0] * vw - cx) * sx) * 10) / 10, Math.round((y + (vb[1] + F[k][1] * vh - cy) * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(vh * sy * 10) / 10, ports: ports, art: true };
+}
+/* dispatcher: outer g carries the theme class and gradients, inner g the local drawing scaled to w */
+function organ(parent, kind, x, y, w, opts) {
+  opts = opts || {};
+  if (_ORG_FRAC[kind] && _ORG_ART[kind]) return _orgArt(parent, kind, x, y, w, opts, _ORG_ART[kind]);
+  var outer = mk("g", { class: "org org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var G = _orgDefs(outer);
+  var inner = mk("g", {}, outer);
+  var r;
+  if (kind === "liver") r = _orgLiver(inner, G);
+  else if (kind === "heart") r = _orgHeart(inner, G);
+  else if (kind === "kidney") r = _orgKidney(inner, G);
+  else if (kind === "lung") r = _orgLung(inner, G);
+  else if (kind === "stomach") r = _orgStomach(inner, G);
+  else if (kind === "brain") r = _orgBrain(inner, G);
+  else if (kind === "pancreas") r = _orgPancreas(inner, G);
+  else if (kind === "spleen") r = _orgSpleen(inner, G);
+  else if (kind === "ganglion") r = _orgGanglion(inner, G);
+  else if (kind === "eye") r = _orgEye(inner, G);
+  else if (kind === "bladder") r = _orgBladder(inner, G);
+  else if (kind === "uterus") r = _orgUterus(inner, G);
+  else if (kind === "ovary") r = _orgOvary(inner, G);
+  else if (kind === "thyroid") r = _orgThyroid(inner, G);
+  else throw new Error("organ: unknown kind " + kind);
+  var sx = w / 100, sy = opts.h ? opts.h / r.h0 : sx, fx = opts.flip ? -1 : 1;
+  inner.setAttribute("transform", "scale(" + (fx * sx).toFixed(3) + " " + sy.toFixed(3) + ")");
+  var ports = {}, k;
+  for (k in r.ports) ports[k] = [Math.round((x + fx * r.ports[k][0] * sx) * 10) / 10, Math.round((y + r.ports[k][1] * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(r.h0 * sy * 10) / 10, ports: ports, art: false };
+}
+organ.kinds = ["liver", "heart", "kidney", "lung", "stomach", "intestine", "brain", "pancreas", "spleen", "bladder", "uterus", "ovary", "thyroid", "eye", "ganglion", "bowel", "colon", "ear", "skin", "muscle", "joint", "vessel"];
+
+_ORG_ART["colon"]={vb:[0,0,335.1,487.7],pfx:"oalar",body:"<defs><clipPath clipPathUnits=\"userSpaceOnUse\" id=\"oalar-a\"><path d=\"M4.5 5.7l334.7 0 0 488-334.7 0Z\" /></clipPath></defs><path clip-path=\"url(#oalar-a)\" d=\"M11.4 144l-2.1 -24.9 -3.5 -24.5 .5 -16.1 1.8 -10.9 9.8 -26.2 4.1 -7.9 6.4 -7.6 9.9 -7.3 5.9 -2.9 11 -3 9.3 -.3 11.2 2.5 5.5 -.3 7.1 -1.4 12.9 -5.7 7.4 -.4 8.7 3.8 6.2 5.9 12.1 1.1 9.3 2.1 10.2 4.1 16.1 8.9 3.3 .4 9.5 -1.2 11.9 .9 13.9 3 6.6 2.5 5.7 3.3 4.4 4.2 2.6 5.1 .2 6.7 -2.3 8.5 -4.1 9.7 -11.6 20.6 -17.2 25.2 -4.6 6.2 -2.1 1.6 -5.7 3.4 -8.6 3.4 -10.6 1.4 -5.8 -.6 -12 -4.4 -10.6 -6 -8.6 -6 -9.7 -8.4 -4.5 .8 7.1 10.5 3 10.8 -3.6 46.9 -.4 27.1 7.8 60.3 .8 12.5 3.4 11.1 4.4 6.5 2.7 2.2 2.9 1.3 3.2 0 3.3 -1.5 12.5 -9.3 11 -5.7 6.4 -1.5 7 -.2 7.6 1.6 8.3 3.7 9.1 6.2 15.7 16.3 6.1 5.1 7 2.6 8.2 -.8 8.2 -3.6 11.4 -9 9.7 -11.2 22.7 -31.4 6.9 -6.8 5.9 -2.9 5.3 1.7 6.8 3.6 6.6 6.2 2.5 4.3 1.5 5.1 .3 6 -2.3 11 -4.5 7.4 -5.1 4.5 -5.9 2.8 -13.2 12.6 -12.5 12.7 -11.6 14 -7.7 7.9 -9.7 7.1 -5.5 2.7 -5.9 1.8 -6.3 .8 -6.7 -.5 -12.1 -3.1 -13.7 -6 -22.2 -16.6 -4.6 -2.4 -9.9 -2.8 -9.8 .1 -4.4 1.3 -3.9 2.2 -3.1 3.2 -2.3 4.2 -2 9.4 -.4 14.3 -1.1 9.1 -3.8 8.2 -31.4 28.6 -5.9 3.7 -7.2 3 -8.5 1.8 -9.7 -.1 -10.9 -2.5 -12 -5.5 -13.2 -9.2 -1.7 -2.5 -1.4 -8.8 .4 -24.9 -.7 -11.4 -2.7 -8 -9.6 -17 -2.5 -9.3 -.2 -25.7 -.9 -9.7 -1.6 -7.5 -5.2 -15.1 -1 -7.8 .1 -12.9 2.3 -19.9 -4.5 -18.1 -1.1 -7.6 .3 -12.7 3.8 -19.1 -.1 -3 -2.4 -10.8Z\" fill=\"#f1dbd1\" fill-rule=\"evenodd\" /><path clip-path=\"url(#oalar-a)\" d=\"M337.4 279.9l-.2 8-2.9 9.4-7.1 12.6-5.7 7.4-40.5 44.5-12.9 10-7.5 3.7-8.6 2.7-9.9 1.5-10.2-.1-9.1-2-8.1-3.5-7.1-4.6-25.3-23.2-3.7-1.7-3.5-.5-6.6.5-3 1.1-5 4.1-1.9 3.1-2.4 8.5-.9 16.3-6.9-8.5-.7-14.9 2-8.1 3-4 5.4-4.2 5.6-2.7 5.3-1 7.4.9 6 2.6 27.5 20.8 8.7 4.8 10.9 2.5 8.3.3 8.4-1.1 7.8-2.9 13.3-7.8 8-6.4 17.2-21.1 16.8-16 5.9-4.2 7.9-3.7 3.5-2.5 3.8-5.7Z\" fill=\"#f1dbd1\" fill-rule=\"evenodd\" /><path clip-path=\"url(#oalar-a)\" d=\"M337.4 279.9l-5.5 16 -4.3 7.7 -6.4 8.9 -41.9 46.3 -12.9 10 -7.5 3.7 -8.6 2.7 -9.9 1.5 -10.2 -.1 -9.1 -2 -8.1 -3.5 -7.1 -4.6 -25.3 -23.2 -3.7 -1.7 -3.5 -.5 -6.6 .5 -3 1.1 -5 4.1 -1.9 3.1 -2.4 8.4 -.6 16.3 -5.3 -6.4 0 .8 6.9 8.5 .9 -16.3 2.4 -8.5 1.9 -3.1 5 -4.1 3 -1.1 6.6 -.5 3.5 .5 3.7 1.7 25.3 23.2 7.1 4.6 8.1 3.5 9.1 2 10.2 .1 9.9 -1.5 8.6 -2.7 7.5 -3.7 12.9 -10 40.5 -44.5 5.7 -7.4 7.1 -12.6 2.9 -9.4Z\" fill=\"#dfb1a2\" fill-rule=\"evenodd\" /><path clip-path=\"url(#oalar-a)\" d=\"M337.5 280l-.2 8-2.9 9.4-7.1 12.6-5.7 7.4-40.5 44.5-12.9 10-7.5 3.7-8.6 2.7-9.9 1.5-10.2-.1-9.1-2-8.1-3.5-7.1-4.6-25.3-23.2-3.7-1.7-3.5-.5-6.6.5-3 1.1-5 4.1-1.9 3.1-2.4 8.5-.9 16.3-6.9-8.5-.7-14.9 2-8.1 3-4 5.4-4.2 5.6-2.7 5.3-1 7.4.9 6 2.6 27.5 20.8 8.7 4.8 10.9 2.5 8.3.3 8.4-1.1 7.8-2.9 13.3-7.8 8-6.4 17.2-21.1 16.8-16 5.9-4.2 7.9-3.7 3.5-2.5 3.8-5.7\" fill=\"none\" stroke=\"#343434\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-miterlimit=\"8\" /><path d=\"M152.3 353.1l2.5 11.2 2 4.3 5.4 7.4 5.1 9.9 3.4 12.8 .2 7 -1.3 7.2 -3.1 7.2 -5.2 7 -2.8 2.8 -5.1 3.2 -8.6 2.3 -4.1 2.2 -14.8 15.4 -9.7 6.4 -5.7 2.4 -6.3 1.6 -6.8 .5 -7.4 -.7 -7.5 -2.3 -7.1 -3.6 -6.7 -4.7 -6.2 -5.6 -10.5 -12.9 -7.7 -13.5 -4.3 -12.1 4 -1.1 17.5 12.2 10.2 4.8 5.2 1.6 10.1 .7 5 -.8 9.8 -3.3 9.2 -5.1 7.9 -6.1 13 -13.6 9.8 -8.5 3.9 -7.4 4.4 -12.7 1.9 -8.7Z\" fill=\"#f1dbd1\" fill-rule=\"evenodd\" /><path d=\"M161.2 419.5l-2.8 2.8-5.1 3.2-8.6 2.3-4.1 2.2-14.8 15.4-9.7 6.4-12 4-6.8.5-7.4-.7-6.7-1.9-6.4-3-11.7-8.6-5.2-5.3-8.9-11.6-9-17.4-2.1.5 4.3 12.1 3.4 6.7 9.2 13.4 5.6 6.3 6.2 5.6 6.7 4.7 7.1 3.6 7.5 2.3 7.4.7 6.8-.5 12-4 9.7-6.4 14.8-15.4 4.1-2.2 8.6-2.3 5.1-3.2 5.2-5.4 4.9-8.2 2.2-8.4.1-8.3-2.8 10.3Z\" fill=\"#dfb1a2\" fill-rule=\"evenodd\" /><path d=\"M152.3 353.1l2.5 11.2 2 4.3 5.4 7.4 5.1 9.9 3.4 12.8 .2 7 -1.3 7.2 -3.1 7.2 -5.2 7 -2.8 2.8 -5.1 3.2 -8.6 2.3 -4.1 2.2 -14.8 15.4 -9.7 6.4 -5.7 2.4 -6.3 1.6 -6.8 .5 -7.4 -.7 -7.5 -2.3 -7.1 -3.6 -6.7 -4.7 -6.2 -5.6 -10.5 -12.9 -7.7 -13.5 -4.3 -12.1 4 -1.1 17.5 12.2 10.2 4.8 5.2 1.6 10.1 .7 5 -.8 9.8 -3.3 9.2 -5.1 7.9 -6.1 13 -13.6 9.8 -8.5 3.9 -7.4 4.4 -12.7 1.9 -8.7\" fill=\"none\" stroke=\"#343434\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-miterlimit=\"8\" /><path d=\"M309.7 254.3l-5.9 2.9 -6.9 6.8 -22.7 31.4 -9.7 11.2 -11.4 9 -8.2 3.6 -8.2 .8 -7 -2.6 -6.1 -5.1 -15.7 -16.3 -9.1 -6.2 -8.3 -3.7 -7.6 -1.6 -7 .2 -6.4 1.5 -11 5.7 -12.5 9.3 -3.3 1.5 -3.2 0 -2.9 -1.2 -5.1 -5.2 -4.8 -11.1 -1.5 -16.1 -7.1 -52.2 -1 -15.1 .3 -13.2 3.9 -49.8 -7.9 .5 -1 -4.5 -1.7 -3.1 -3 -2.9 -4.7 -1.6 -6.5 1.9 -15.5 7.6 -7.2 1.7 -3.1 -.6 -21.4 -11 -7.6 -1.9 -3.6 .1 -5.1 2.1 -5.1 4.7 -4.3 6.4 -2.8 7 -9.3 -.3 4.3 12.6 1.9 9.5 -.4 4.7 -2.9 12.6 -.9 12.7 .5 8.1 5.2 21.8 -2.3 19.9 .3 17 7.4 26.3 .9 9.7 -.3 19.8 1.6 10.8 3.2 8.1 7.8 13.2 2.7 8 .7 41.2 1 3.8 1.7 2.5 13.2 9.2 12 5.5 10.9 2.5 9.7 .1 8.5 -1.8 7.2 -3 10.6 -7.4 8.6 -8.6 14.7 -12.7 3.5 -3.7 3.8 -8.2 1.1 -9.1 .4 -14.3 2 -9.4 2.2 -4.2 3.1 -3.2 3.9 -2.2 9.2 -1.8 5 .3 9.9 2.8 4.6 2.4 22.2 16.6 13.7 6 12.1 3.1 6.7 .5 6.3 -.8 5.9 -1.8 10.6 -6.1 8.7 -7.7 15.2 -17.9 16.6 -16.6 9.1 -8.6 5.9 -2.8 5.1 -4.5 4.5 -7.4 2.3 -11 -.3 -6 -1.5 -5.1 -2.5 -4.3 -6.6 -6.2 -6.8 -3.6Z\" fill=\"#e7a4a4\" fill-rule=\"evenodd\" /><path d=\"M312.9 291.8l-7.3 6.5 -12 8.7 -11.4 10.2 -7.7 8.4 -10 12.8 -7 5.3 -3.9 1.9 -8.5 2.2 -4.5 .1 -9.5 -1.9 -6.1 -2.5 -9.2 -5.8 -12.5 -12.1 -6.7 -5.1 -6.8 -2.7 -5.8 -.1 -17.1 2.5 -7.5 -.1 -2.8 .5 -2.9 2.2 -5.4 7.8 -3.8 10.1 -1.2 9.6 .8 3.7 1.9 2.5 1.8 -6.8 2.9 -6.2 4.9 -7.2 5.1 -4.5 1.6 -4.1 .9 -.6 7.1 4.2 9.3 1.3 3.2 -1.5 2.1 .2 2 4.7 2.2 2.3 11.7 8.3 6.4 5.7 5.6 .5 3 5.7 5.9 2.5 6.3 1.5 8.7 .2 11.3 -2.3 6.6 -2.4 3.9 -2.6 .9 -4.5 4 1.4 3.1 -.8 9.8 -9.7 10.7 -12.6 1.9 -3.8 .5 -3.8 1.5 -2.1 1.5 -.6 2.7 1.5 1.2 -.3 10.8 -12.2 6 -4.7 1.6 -.6 0 4.5 6.1 -3.1 5.1 -4.5 4.5 -7.4 1.5 -5 .9 -7.6 -.6 -5.9 -2.3 6.1 -4.6 7.5 -4.3 2.9Z\" fill=\"#d09190\" fill-rule=\"evenodd\" /><path clip-path=\"url(#oalar-a)\" d=\"M11.4 144l-2.1 -24.9 -3.5 -24.5 .5 -16.1 1.8 -10.9 9.8 -26.2 4.1 -7.9 6.4 -7.6 9.9 -7.3 5.9 -2.9 11 -3 9.3 -.3 11.2 2.5 5.5 -.3 7.1 -1.4 12.9 -5.7 7.4 -.4 8.7 3.8 6.2 5.9 12.1 1.1 9.3 2.1 10.2 4.1 16.1 8.9 3.3 .4 9.5 -1.2 11.9 .9 13.9 3 6.6 2.5 5.7 3.3 4.4 4.2 2.6 5.1 .2 6.7 -2.3 8.5 -4.1 9.7 -11.6 20.6 -17.2 25.2 -4.6 6.2 -2.1 1.6 -5.7 3.4 -8.6 3.4 -10.6 1.4 -5.8 -.6 -12 -4.4 -10.6 -6 -8.6 -6 -9.7 -8.4 -4.5 .8 7.1 10.5 3 10.8 -3.6 46.9 -.4 27.1 7.8 60.3 .8 12.5 3.4 11.1 4.4 6.5 2.7 2.2 2.9 1.3 3.2 0 3.3 -1.5 12.5 -9.3 11 -5.7 6.4 -1.5 7 -.2 7.6 1.6 8.3 3.7 9.1 6.2 15.7 16.3 6.1 5.1 7 2.6 8.2 -.8 8.2 -3.6 11.4 -9 9.7 -11.2 22.7 -31.4 6.9 -6.8 5.9 -2.9 5.3 1.7 6.8 3.6 6.6 6.2 2.5 4.3 1.5 5.1 .3 6 -2.3 11 -4.5 7.4 -5.1 4.5 -5.9 2.8 -13.2 12.6 -12.5 12.7 -11.6 14 -7.7 7.9 -9.7 7.1 -5.5 2.7 -5.9 1.8 -6.3 .8 -6.7 -.5 -12.1 -3.1 -13.7 -6 -22.2 -16.6 -4.6 -2.4 -9.9 -2.8 -9.8 .1 -4.4 1.3 -3.9 2.2 -3.1 3.2 -2.3 4.2 -2 9.4 -.4 14.3 -1.1 9.1 -3.8 8.2 -31.4 28.6 -5.9 3.7 -7.2 3 -8.5 1.8 -9.7 -.1 -10.9 -2.5 -12 -5.5 -13.2 -9.2 -1.7 -2.5 -1.4 -8.8 .4 -24.9 -.7 -11.4 -2.7 -8 -9.6 -17 -2.5 -9.3 -.2 -25.7 -.9 -9.7 -1.6 -7.5 -5.2 -15.1 -1 -7.8 .1 -12.9 2.3 -19.9 -4.5 -18.1 -1.1 -7.6 .3 -12.7 3.8 -19 -.1 -3 -2.4 -10.8\" fill=\"none\" stroke=\"#343434\" stroke-width=\"1.2\" stroke-miterlimit=\"8\" /><path d=\"M111.6 113.6l-4.1 -1.1 -7.2 -4.1 -10.6 -9.2 -6.6 -7.2 -19.6 -25.2 -1.8 -.4 -9.7 2.3 -6.2 -.6 -4.3 -2.2 -13.4 -10.2 -3.5 -1.7\" fill=\"none\" stroke=\"#343434\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-miterlimit=\"8\" /><path d=\"M75.4 13.9l12.3 5.5 7.5 4.7 6 5.6 1.8 3.5-1.9.6 9.5 3 7.4 4 11.5 10.2.5 1.7-1.6 1 7.5 1 36.8 9.7 9.8 3.4 3 1.7 1.3 1.6 6.3-4.2-54-14.3-.9-1 .7-2-1.5 1.3-2-.1-9.7-8.3-17.8-9.9-.5-1.2 1.4-2.7-3.4.5-6.7-6.2-6.8-4.9-10.9-5-3-.2Z\" fill=\"#f5f0f0\" fill-rule=\"evenodd\" /><path d=\"M75.4 13.9l12.3 5.5 7.5 4.7 6 5.6 1.8 3.5-1.9.6 9.5 3 7.4 4 11.5 10.2.5 1.7-1.6 1 7.5 1 36.8 9.7 9.8 3.4 3 1.7 1.3 1.6 6.3-4.2-54-14.3-.9-1 .7-2-1.5 1.3-2-.1-9.7-8.3-17.8-9.9-.5-1.2 1.4-2.7-3.4.5-6.7-6.2-6.8-4.9-10.9-5-3-.2\" fill=\"none\" stroke=\"#343434\" stroke-width=\".8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" /><path d=\"M106.5 29.3l5.7-6 6.5-4.6-6.6 5.7-4.5 6.6 0-1.7ZM102.9 33.1l-7.3-.2-5.8 1.3-9.8 5.5 9.5-4.4 5.7-1.3 5.9.1ZM169.3 32l-4.2 -.7 -6.2 .3 -7.4 2.6 -7.3 6.5 -3.2 5.2 4.3 -5.9 5.8 -4.5 8.6 -2.8 5.5 -.2 6.3 .9ZM128.5 53.7l.3-1-6.1 1.8-5.7 3.5-2.7 2.8-4.1 8-.9 5.5 2.5-7.6 4-6.2 6.5-4.9 4.4-1.3 5.2-.1ZM62.9 65.8l-1.3-6.9.2-4.5 1.7-3.9 1.7-1.4-3.3 2.9-1.3 3.8.7 10.2Z\" fill=\"#343434\" fill-rule=\"evenodd\" /><path d=\"M59.7 66.7l3.9.1 3.6 4.9-4.7 4.9-2.4 3.9-1.1 4.4.2 2.2 3.8 9.1 2.9 2.6 2.3 0-1.4 2.4.2 3 4.6 5.7 4.4 7.6 2.8 8 0 4-10.9.3.1-7.5-2.4-8.4-12.6-16.6-4.1-2.9 2.7-.6 1.8-1.9-.1-12.1 2-4.1 5.1-5.9.3-2Z\" fill=\"#f5f0f0\" fill-rule=\"evenodd\" /><path d=\"M59.8 66.7l3.9.1 3.6 4.9-4.7 4.9-2.4 3.9-1.1 4.4.2 2.2 3.8 9.1 2.9 2.6 2.3 0-1.4 2.4.2 3 4.6 5.7 4.4 7.6 2.8 8 0 4-10.9.3.1-7.5-2.4-8.4-12.6-16.6-4.1-2.9 2.7-.6 1.8-1.9-.1-12.1 2-4.1 5.1-5.9.3-2\" fill=\"none\" stroke=\"#343434\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" /><path d=\"M67.1 98.2l7.6-4.3 5.8-1.3-9.7 4.7-3.7 4.6ZM50.2 94.8l1.3-1.6-4-.2-7-2.6-4.5-.5-8.2 1.3-9 4.9 7.4-3.7 9-1.6 3.3.3 6.3 2.3 6 3.2 3.2 2.7Z\" fill=\"#343434\" fill-rule=\"evenodd\" /><path d=\"M113.5 139.1l8.5 -.3 -2.1 41.8 3.7 25.8 -2.1 12.3 -.1 6.5 7.6 25.3 -.1 20.1 1.1 9.9 2.6 9 4.4 6 3 1.3 6.1 -1 13.9 -8.8 9.6 -4 5.9 -1 6.7 -.1 6.9 .9 6.2 1.8 10.5 5.6 8.2 7 11.1 12.2 6.9 5.4 5.6 2.1 6.6 0 7.7 -3 8.9 -7.2 24.7 -35.5 5.6 -7 5.9 -5.9 6.2 -4.5 6.6 -2.7 0 7.4 -6.7 2.7 -6.7 6.5 -14.3 21.4 -1.8 8.8 -5.8 2.5 -11.5 11.6 -5 3.6 -1.4 2.1 -.9 4.8 -1.3 .9 -1.6 -.1 -3.3 -2.7 -9.3 1.7 -10.1 -1.8 -5.5 2.9 -1.3 0 -.8 -1 .1 -4.7 -1 -3 -14 -14.5 -3.5 -2.2 -6.6 1.2 -1.3 -1.6 .8 -3.7 -1.2 -2.2 -4.8 -2.5 -7.5 -1.9 -9.1 .5 -6.1 2.2 -3.2 2.4 -1.6 5.1 -2.6 .4 -4.2 -1.6 -4.8 4.7 -5.2 3.6 -6.6 1.4 -3.7 -.9 -3.8 -2.4 -3.9 -4.2 -5.9 -8.9 -5.9 -1.8 -2.7 -3 -.2 -2.7 4.4 -3.6 1.4 -3 1.2 -18.7 -.7 -6.9 -2.4 -6.2 -10.8 -10.7 -1 -2.7 .5 -5.1 6.4 -12.3 .6 -3.3 -4.9 -23.4 -1.2 -11.1 -5 -6.8 -.5 -1.9 1.2 -1.9 6.3 -4.5 1.8 -2.6 2.4 -17.5Z\" fill=\"#f6f3ed\" fill-rule=\"evenodd\" /><path d=\"M309.9 251.3l0 7.4 4.3.8 5.7 2.3 5.7 4.6 2.3 3.5 1.6 4.4.7 5.4-.3 5.5-2.8 8.3-4.5 5.2-8 4.1 0 7.7 5-.9 6.5-3.1 6.5-6.7 2.5-5.1 1.7-6.5.5-8.1-.8-7.5-2.1-6.1-3-4.8-7.6-6.3-7.6-3-5.8-1Z\" fill=\"#f7f6ee\" fill-rule=\"evenodd\" /><path clip-path=\"url(#oalar-a)\" d=\"M310 251.4l0 7.4 4.3.8 5.7 2.3 5.7 4.6 2.3 3.5 1.6 4.4.7 5.4-.3 5.5-2.8 8.3-4.5 5.2-8 4.1 0 7.7 5-.9 6.5-3.1 6.5-6.7 2.5-5.1 1.7-6.5.5-8.1-.8-7.5-2.1-6.1-3-4.8-7.6-6.3-7.6-3-5.8-1\" fill=\"none\" stroke=\"#343434\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-miterlimit=\"8\" /><path d=\"M137.5 396.7l-1.3 3.6-2 2.3-6 2.8 6.2 13 2.5 9.6.5 5-.4 4.9-1.4 4.6-4.7 7-.7 6.2.9 5.4 3.2 5.2 6 3.8 5.6 1.4 8.7.3 3.6 1.7 3.9 6.5.5 11.1.4.8 1.8.2 1.2-2.2.2-6.1-1.3-6.8-2.3-4.7-4.9-4.1-14.2-4-1.9-1.7-2.3-4.5.3-8.5 4.2-9.2 2.1-7.5.4-8.8-1.7-10.1-1.7-5.5Z\" fill=\"#f5f0f0\" fill-rule=\"evenodd\" /><path clip-path=\"url(#oalar-a)\" d=\"M137.5 396.7l-1.3 3.6-2 2.3-6 2.8 6.2 13 2.5 9.6.5 5-.4 4.9-1.4 4.6-4.7 7-.7 6.2.9 5.4 3.2 5.2 6 3.8 5.6 1.4 8.7.3 3.6 1.7 3.9 6.5.5 11.1.4.8 1.8.2 1.2-2.2.2-6.1-1.3-6.8-2.3-4.7-4.9-4.1-14.2-4-1.9-1.7-2.3-4.5.3-8.5 4.2-9.2 2.1-7.5.4-8.8-1.7-10.1-1.7-5.5\" fill=\"none\" stroke=\"#f5f0f0\" stroke-width=\"1.4\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" /><path clip-path=\"url(#oalar-a)\" d=\"M137.5 396.7l-1.3 3.6-2 2.3-6 2.8 6.2 13 2.5 9.6.5 5-.4 4.9-1.4 4.6-4.7 7-.7 6.2.9 5.4 3.2 5.2 6 3.8 5.6 1.4 8.7.3 3.6 1.7 3.9 6.5.5 11.1.4.8 1.8.2 1.2-2.2.2-6.1-1.3-6.8-2.3-4.7-4.9-4.1-14.2-4-1.9-1.7-2.3-4.5.3-8.5 4.2-9.2 2.1-7.5.4-8.8-1.7-10.1-1.7-5.5\" fill=\"none\" stroke=\"#343434\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" /><path d=\"M28.7 224.3l5.4 2.8 10.3 10.8 6.4 4.5 9.2 3.9 9.9 1.4-10.2-.8-10-3.5-9.1-7.2-7.1-8.5-1-.5-1.9.5-1.3-2.9ZM106.3 225.7l-2 6.3-2 3.3-4.2 3.9-5 2.5 4-.9 4.9-4.4 3.4-6.4.8.5 0-4.5ZM32.7 290.3l8.9 4.4 11 7.7 5.3 2.8 10.6 2.7 8.8 -.3 -6.8 .5 -13.4 -2.2 -18.6 -11.2 -1.4 -.1 -.3 3.2 -1.3 -3.4 -2.9 -3.5ZM114.1 280.8l-2.2 2.2-4.3 8.7-4.7 5.6-6.3 4.7-5.1 1.5 5.9-1.2 6.7-4.9 4.4-4.9 4.1-7.9 1.4-.4.2.9 0-4.2ZM47.8 352l4.4 1.6 9.4 8.6 9 5.1 8.2 2.1 6.7-.7-1.5 1-3.7.3-11.5-2.2-11.9-7.7-4.3-3.9-1.5-.6-.6 1-2.1-4.2ZM158.8 297.4l6.9 4.8 3.3 4.8 2.2 9.3-.2 2.5-2.1 5 1.2-.5 1.4-2.4.4-3.5-2-9.9-2.4-4.6-3.7-3.3-.8-1.7-4-.8ZM195.6 297.8l.6 2.6 5.3 7.7 1.4 6.5 -1.1 8.7 -1.8 2.8 -2.9 1.8 3.7 -2 1.3 -1.7 1.6 -10.8 -.6 -4.2 -1.3 -2.7 -6.4 -8.2ZM223.2 322.7l.4 1.5 3.6 2.2 1.8 2.1 2.4 8.4-1.1 7-3.1 4.1-3.2 2.3 1 0 2.7-1.3 2.7-3.3 1.4-4.2.2-5-.8-5-1.4-3.1-4.8-4.9ZM163.7 326.3l4.1.4 2.2-.9-2.2 1.6-4.5-.6ZM185 331.1l3.6.7 2.5-.4-2.6 1.2-2.8-.2ZM212.1 351.9l5.6.3-4.1-1.1-4.9.5ZM252.1 323.4l7.4 4.4 2.3 2.6 1.2 3.3.7 6.9-.7-6.3-2.3-6-2.7-3-3.8-1.7ZM279.1 298.5l1.1.7 3.4-1.5 2.8-.2 6.3 3.1 1.2 1.6.6 3.1-1.1 6.4 1.8-7.6-.7-2.9-1.8-2.5-3-1.7-4-.9-3.4 1.1-1.1-.6-.8 1.6ZM124.7 293.7l1.6 1.5 1.4 4.1 3.2 22 4 10.5-3.7-11.7-1.2-17.7-2.1-5.2-2.5-2.8ZM143 305.9l-4.8 3-3.2 6-.6 4.4.9 3.8.5-6.6 1.1-3.6 5.1-6.3 3.4-1.8-2.1 0Z\" fill=\"#343434\" fill-rule=\"evenodd\" /><path d=\"M11.6 144.8l4.9 -10.3 5.7 -8.5 7.6 -6.9 4.4 -1.9 4.8 -.4 9 1.9 19.6 8.9 7.3 -2.4 5.8 2.4 15.6 -7.2 8.8 -1.7 4.3 .3 4 1.4 3.4 2.8 2.6 4.4 1.7 6.9 -.1 4.5 -7.9 .5 -1 -4.5 -1.7 -3.1 -3 -2.9 -4.7 -1.6 -6.5 1.8 -15.5 7.6 -7.2 1.7 -3.1 -.6 -21.4 -11 -7.6 -1.9 -3.6 .1 -5.1 2.1 -5.1 4.7 -4.3 6.4 -2.8 7ZM204.1 114.3l-10.5 11.5-7.1 6.4-3.8 2.2-3.8 1.1-3.8-.4-5.6-4.2-3.7-7.9-3.6-12.9-3.7-9.7-.2-8 1-4.2 4.3-7.9 3.3-3.3 4.1-2.6 5-1.7 10.7-1.5 1.2-1.2 1-3.9 4.6.2 9.8-10.8 7.7-6.7 7.9-4.4 3.6-.5 3.2 1.1 2.8 2.9 2.4 4.4 3.4 12.2.8 14.2-2.5 13.5-2.7 5.6-3.7 4.4-5.5 4-12 5.2Z\" fill=\"#f2e8e1\" fill-rule=\"evenodd\" /><path d=\"M204.2 114.3l-10.5 11.5-7.1 6.4-3.8 2.2-3.8 1.1-3.8-.4-5.6-4.2-3.7-7.9-3.6-12.9-3.7-9.7-.2-8 1-4.2 4.3-7.9 3.3-3.3 4.1-2.6 5-1.7 10.7-1.5 1.2-1.2 1-3.9 4.6.2 9.8-10.8 7.7-6.7 7.9-4.4 3.6-.5 3.2 1.1 2.8 2.9 2.4 4.4 3.4 12.2.8 14.2-2.5 13.5-2.7 5.6-3.7 4.4-5.5 4-12 5.2\" fill=\"none\" stroke=\"#343434\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-miterlimit=\"8\" /><path d=\"M201.5 111.9l-11.6 12.7 -6 4.5 -3 1 -3 -.2 -2.8 -1.6 -3.9 -6.4 -4 -14.9 -3.3 -8.6 -.2 -6.7 .9 -3.4 3.9 -6.4 3 -2.6 8.1 -3.4 10.8 -.2 3.4 -1.1 8.9 -11.4 9.2 -8.8 6.7 -3.8 3.1 -.4 2.8 .9 2.4 2.4 2 3.7 2.5 10.2 .1 12 -2.7 11.4 -2.5 4.7 -6 5.8Z\" fill=\"#e7a4a4\" fill-rule=\"evenodd\" /><path d=\"M176.6 111.4l-1.5-5.8.1-3 2.1-6.1 2.1-2.9 6.2-5.2 15-6.2 8.5-5.8 5.7-7.3 6.3-13.9 3.1-1.8 4.3 3-3.5-5-3.3-1.2-3.1.4-6.7 3.8-9.2 8.8-8.9 11.4-3.4 1.1-10.8.2-4.4 1.3-6.7 4.7-3.8 6.4-.9 3.4.2 6.7 3.2 8.6 3.9 14.9 3.9 6.4 2.3 1.5 3.7.3 6.4-3.4-4.4.5-4.9-1.2-1.2-3.3.6-6.8Z\" fill=\"#d09190\" fill-rule=\"evenodd\" /><path d=\"M201.5 112l-11.6 12.7 -6 4.5 -3 1 -3 -.2 -2.8 -1.6 -3.9 -6.4 -4 -14.9 -3.3 -8.6 -.2 -6.7 .9 -3.4 3.9 -6.4 3 -2.6 8.1 -3.4 10.8 -.2 3.4 -1.1 8.9 -11.4 9.2 -8.8 6.7 -3.8 3.1 -.4 2.8 .9 2.4 2.4 2 3.7 2.5 10.2 .1 12 -2.7 11.4 -2.5 4.7 -6 5.8\" fill=\"none\" stroke=\"#343434\" stroke-width=\"1.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" /><path d=\"M99.4 32.7l1.8-1-.4-2.4 1.7 2.4.4 2-3.2-.8ZM103.6 27.2l2.9 1.2 3.8-2.8-3.7 4-1.5-.2-1.5-1.9ZM128.5 52.9l.7-.6-.2-1.5.9 1.7Z\" fill=\"#343434\" fill-rule=\"evenodd\" /><path d=\"M101.9 29.3l.5 2.6-.8 1.4 2.1.8.4-2.4ZM103.4 27.9l4.5 1.6-2.4.9-1.8-1.9Z\" fill=\"#f5f0f0\" fill-rule=\"evenodd\" /><path d=\"M179.2 66.9l5.9 3.2-.5.8-1.4.2 3.5-.3-3.9-3ZM181.1 63.4l8.3 2.5.5-1.1ZM134.8 50l1.2.8 1.2-.3 2.6-2.8-1.1 4.1 1.3 1.1-1.8-.7-.1-1.7-1.6.8Z\" fill=\"#343434\" fill-rule=\"evenodd\" /><path d=\"M230.8 71.8l-1 13.3-3.7 9.7-2.1 2.6-7.1 5.3-15.6 8-5.3 5.1-2.5 3.7 1.7-6.3 4.9-6.4 2.7-2 13.9-6.4 6.1-4.5 2.5-3 3.8-7.9Z\" fill=\"#edb6b7\" fill-rule=\"evenodd\" /><path d=\"M229.5 85.3l-2 6.6-5.3 7-6.4 4.3-12.6 6.3-7 6.1 6.9-7.1 12.3-6.3 6.9-4.8 4.2-5Z\" fill=\"#f3d9db\" fill-rule=\"evenodd\" /><path d=\"M39.9 408l8.2 -2.4 8.1 6.2 8.9 5 11 3.8 6 .9 12.2 -.9 9.8 -3 7.1 -4.2 4.6 -4.8 2.2 -4.8 .8 -5.7 1.6 -2.4 4 -2.1 7.5 -1.9 7 -7 4.1 -7.8 2.6 -9.6 .2 -15.9 1.7 -7.9 1.5 -2.9 3.7 -4.1 7.3 -4.1 2.6 -5.1 1.8 .1 3.3 2.8 2.5 1.1 9.3 1.3 3.2 -1.5 2.1 .2 3.2 6.1 12.8 9.2 6.4 5.7 5.6 .5 2.4 5.2 4.1 2.2 5.1 1.7 7.5 1 10 -.9 14.5 -4.8 2 -1.8 .9 -4.5 4.9 1.4 3.5 -1.9 19.1 -21.2 1.9 -3.8 .5 -3.8 1.5 -2.1 1.5 -.6 2.7 1.5 1.2 -.3 10.8 -12.2 4.1 -3.5 3.5 -1.7 0 7.7 -9.1 7.9 -7.3 7.6 -17.2 22.3 -5.8 5.6 -13.9 9.3 -7.8 3.4 -8 2.3 -8.2 1.1 -8.1 -.2 -7.8 -1.7 -7.4 -3.3 -4.5 -2.9 -21.1 -16.5 -8.4 -5.3 -8.7 -3 -4.3 -.3 -7 2.1 -2.7 2.3 -3.8 6.6 -1.6 8.8 .8 14.6 -.5 4 -4.4 10.3 -3.9 4.9 -5.5 4.5 -3.9 7.2 -1.8 1.5 -4.4 1.6 -2.1 4.1 -4.6 5.3 -7.6 6.1 -10.1 5.4 -12 3.1 -6.5 .2 -12.7 -2.2 -16.3 -6.8 -8.4 -5.4Z\" fill=\"#f9f6f3\" fill-rule=\"evenodd\" /><path d=\"M105.8 127.6l-5.7 .1 -19 8.9 -7.2 1.7 -3.1 -.6 -17.5 -9.3 -7.8 -2.9 -7.4 -.5 -3.3 1.1 -7 5.8 -5.4 8.7 -3.6 12.6 -.4 5 .8 4.2 4.8 4.8 9.4 1.8 9.6 -1 17.9 -4.7 6.5 .3 11.6 3.1 6.4 .9 6.7 -.5 10 -3 9 -5.7 2.6 -18 -1.2 -5.3 -1.7 -3.1Z\" fill=\"#d09190\" fill-rule=\"evenodd\" /><path d=\"M11.7 144.9l4.9 -10.3 5.7 -8.5 7.6 -6.9 4.4 -1.9 4.8 -.4 9 1.9 19.6 8.9 7.3 -2.4 5.8 2.4 15.6 -7.2 8.8 -1.7 4.3 .3 4 1.4 3.4 2.8 2.6 4.4 1.7 6.9 -.1 4.5 -7.9 .5 -1 -4.5 -1.7 -3.1 -3 -2.9 -4.7 -1.6 -6.5 1.8 -15.5 7.6 -7.2 1.7 -3.1 -.6 -21.4 -11 -7.6 -1.9 -3.6 .1 -5.1 2.1 -5.1 4.7 -4.3 6.4 -2.8 7Z\" fill=\"none\" stroke=\"#343434\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-miterlimit=\"8\" /><path d=\"M25.4 167.6l9.9 14.6 6.7 4.8 5.3 5.1 5.6 2.9 4.2 1-9.2-4.4-3.2-2.4-9.1-8.5-6.4-10.4-5.2-4.5ZM102.5 164.5l-2.2 2-4.4 7.5-10.3 11-6.9 5.5-6 2.6 3.5-.5 3.4-1.6 12.3-10 8.7-12.2 1.6-1.2.3-2.6Z\" fill=\"#343434\" fill-rule=\"evenodd\" /><path d=\"M113.5 139.2l8.5 -.3 -2.1 41.8 3.7 25.8 -2.1 12.3 -.1 6.5 7.6 25.3 -.1 20.1 1.1 9.9 2.6 9 4.4 6 3 1.3 6.1 -1 13.9 -8.8 9.6 -4 5.9 -1 6.7 -.1 6.9 .9 6.2 1.8 10.5 5.6 8.2 7 11.1 12.2 6.9 5.4 5.6 2.1 6.6 0 7.7 -3 8.9 -7.2 24.7 -35.5 5.6 -7 5.9 -5.9 6.2 -4.5 6.6 -2.7 0 7.4 -6.7 2.7 -6.7 6.5 -14.3 21.4 -1.8 8.8 -5.8 2.5 -11.5 11.6 -5 3.6 -1.4 2.1 -.9 4.8 -1.3 .9 -1.6 -.1 -3.3 -2.7 -9.3 1.7 -10.1 -1.8 -5.5 2.9 -1.3 0 -.8 -1 .1 -4.7 -1 -3 -14 -14.5 -3.5 -2.2 -6.6 1.2 -1.3 -1.6 .8 -3.7 -1.2 -2.2 -4.8 -2.5 -7.5 -1.9 -9.1 .5 -6.1 2.2 -3.2 2.4 -1.6 5.1 -2.6 .4 -4.2 -1.6 -4.8 4.7 -5.2 3.6 -6.6 1.4 -3.7 -.9 -3.8 -2.4 -3.9 -4.2 -5.9 -8.9 -5.9 -1.8 -2.7 -3 -.2 -2.7 4.4 -3.6 1.4 -3 1.2 -18.7 -.7 -6.9 -2.4 -6.2 -10.8 -10.7 -1 -2.7 .5 -5.1 6.4 -12.3 .6 -3.3 -4.9 -23.4 -1.2 -11.1 -5 -6.8 -.5 -1.9 1.2 -1.9 6.3 -4.5 1.8 -2.6 2.4 -17.5\" fill=\"none\" stroke=\"#343434\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-miterlimit=\"8\" /><path d=\"M27.3 167.5l5.8 6 3.3 6.6 7.6 7 5.8 3.8 5.8 1.3 -3 -.5 -5.5 -3.4 -10.1 -10.7 -2.2 -5 0 -2 1.4 -1.8 3.9 -1.8 -5 -1.9 -8.3 -.2ZM88.8 166.1C90.1 166.4 91.1 166.1 92.2 167.2C93 168.3 93 169.8 92.7 171.2C92.5 174.1 90.9 175.4 88.8 177.3C86.4 179.1 85.1 181.8 83.5 184.2C81.7 186.6 79.8 187.9 77.4 189.2C81.7 188.9 84.6 184.2 87.2 181.3C89.3 178.9 91.9 177 94.3 174.6C96.4 172.2 97.2 169.6 98.8 166.7A25 25 0 0 1 102.5 162.9C103.3 162.1 104.9 160.8 103.3 160C102 159.2 97.2 161.6 95.9 162.1C94.8 162.4 92.7 162.9 91.9 162.9ZM18.9 199.3l1.2 12.4 1.9 5.8 2 3.2 11 6.2 8.8 9.4 3.8 2.9 5.7 3 4.9 1.1 -4.4 -2.1 -8.8 -6.6 -10.3 -11.8 -8.4 -4.2 -2.1 -3.8 -5 -15.6Z\" fill=\"#d09190\" fill-rule=\"evenodd\" /><path d=\"M27.5 171.2l0 3.8-4.8 8.1-2.9 6.9-.9 4.5.3 2.8 2.5-8.5 7.5-9.9.1-3.3-1.7-4.4ZM101.2 170.2l4.3 5.9.5 10.1 5.5 22.3-.4 3.6-2.8 4.3 2.1-6.3 0-2.1-4-18.6-2.3-6-.8-6.7-1.2-2-1.3-.5-6.2 4.6 6.1-7.9Z\" fill=\"#ecb4b4\" fill-rule=\"evenodd\" /><path d=\"M28.4 172.5l5.5 9.5 12.7 12-6.2-3.9-9.8-8.3-3.1-.5-2.1 1.1 2.6-6.1ZM99.9 172.2l-8.4 10.3-7.9 6.7 9.3-6.8 7.1-8.3 1.8-.8-1.3-1.6Z\" fill=\"#ecb4b4\" fill-rule=\"evenodd\" /><path d=\"M24.1 270.4l.5 4.3 3 6.9 6.2 7.2 8.9 4.9 7.6 5.8 7 3.4 10 3.4 10.4 1.3 -19.7 -6.1 -5.8 -2.9 -7.5 -6.5 -12.7 -8.7 -5.2 -7.4 -2.9 -6.3ZM119 266.4l-1.7 10.3-7.7 7.5-5.9 10.8-6.7 5.6-6.3 1.6 5.2-2.5 4-3.8 9.1-13.9 5.9-5.6 4.7-10.8ZM108.1 217.8l-3.5 7.3-1.5 6.4-4.4 5.3-7.3 4-11.9 2.7-8-1.1.9-.6 10.3.3 7-3.6 5.3-.7 3.7-2.7 3.2-4.5 1.9-7.1 4.2-5.5Z\" fill=\"#d09190\" fill-rule=\"evenodd\" /><path d=\"M101.8 230.7l.3-1.9-1-1.5-5 4.4-4.8 2-5.8 1.4-5.6-.5 15.5-4.5 8.2-8.2 2.5-1.4-2.1 6.1ZM43.9 285.5l14.1 9.3 14.4 6.3-12.6-6.6-1.8-1.7-.3-1.6 1.2-2.8 3.1-3.3 10.4-7-3.6.7-5.9 3.5-6.6 6.6-5.3-.3-6.2-3.4ZM38.1 339l1.9 4.4 3.2 3.8 8.4 4.6 13 10.3 10.4 4.8 5.4 1 5.7-.6 10.6-3.3 7.6-4.3-14.4 4.6-9.3 1.4-5.8-.4-5.5-2.6-11.5-7.6-7.5-7.5-7.8-2.6-2.7-2.5-1.4-2.6ZM123.7 293l2.7 7.1 1.9 17 4.1 14.7.1 4.5-1.3 4.3.2-7-3.4-8.6-2.3-23.2-2.8-8.5ZM147.4 305.6l-5.7 2.9-3.5 3.9-2 6.1 1.2 5.4-.5-4.9 1.5-5 1.4-1.8 4.7-2.6 3.1-3.7ZM157.3 297.1l1.9 2.4 7.1 4 2.4 3.2 1.2 4 .2 5.1-1.3 4.8-1.7 2.7-2.4 1.3 3-3.1 1.4-4.1 0-4.5-2.3-6.1-3.4-3.3-6-3-2.1.3-4 2.7 5.8-6.1ZM188.8 289.9l6 2.9 0 6.6 5.8 9.3 1.2 9.9-1.3 3.5-2.2 1.9 1.5-2.5 1-4.1-1.3-9.7-2.2-4.4-3.3-3.1-.6-4.4-5.3-6ZM215.3 310.1l5.2 5.9 1.3 7.9 3.9 2.6 2.1 3.2 1.9 5.4 0 5.5-1.3 3.5 0-7.2-2.3-8.2-5-4.5-1.3-5.7-3.5-3.9-1.3-3.4Z\" fill=\"#d09190\" fill-rule=\"evenodd\" /><path d=\"M202.2 345.9l5.8 4.6 8.3.4-3-1.2-5.7-.4-4.9-2.6Z\" fill=\"#c68687\" fill-rule=\"evenodd\" /><path d=\"M241.1 323.9l7.6-1.3 10.2 6.8 2.9 4.6.9 3.5-.2 3.6-1.9 4.4.1-8.4-3.3-5.1-9.8-6.7-6.9-1Z\" fill=\"#d09190\" fill-rule=\"evenodd\" /><path d=\"M258.9 350.6l2.8-2.6 1.2-3.8-5.1 6.9Z\" fill=\"#c68687\" fill-rule=\"evenodd\" /><path d=\"M276.9 300.9l7.3-2.6 3.5.3 5.2 2.5 1.2 4.4-1.1 8.6-3.7 5.3 2.8-10.1-.9-6.1-3-2.6-4.8-.2-12.7 7 6.1-7.4Z\" fill=\"#d09190\" fill-rule=\"evenodd\" /><path d=\"M23.8 263l1-21.5 6.8-8.9 1.8-3.8 7.6 10.5 4.1 4.1 8.2 4.3 8.7 2.4-4.7 0-5.7-1.3-15.8-6.8-4.8.2-1.8 1.3-2.5 4.3-2.9 12.5ZM79.3 246.1l3.5.1 14.5-4.1 3.1-2.1 5.2-5.9 7.9 5.9 4 5.5 1.5 6.7-.7 11-.8-8.4-1.3-4.9-2.8-3.2-5.4-3.1-4.6-.7-6.4 2.1-12.9 1.2-5.3 1.2ZM32.8 320.2l-.3-11.5 1-2.5 4-4.8.8-5.6 8.2 5.9 11.9 4.7 9.5 2.1 11.2.1-6 1.3-6.9 0-11.6-1.5-12.2-3-2.5.1-1.7.9-1.5 2.6-3.2 15.7ZM85.4 307.8l10.8-2.7 5.7-2.7 7.1-8.3 4.2-8.3 1.3 2.1 7.5 4.2 2.3 6.6 1.3 8.6-4.7-11.1-3.1-3.5-1.7-.7-1.7.3-1.7 1.5-5.3 7.9-3.5 2.8-8.9 1.9-7.4.7ZM130.5 302.4l3.2 2.9 3.8 1.3-3.9 6-.7 4.3.2 6.7-1.4-8.2.1-8.1ZM171.3 308.6l-2.9-6.1-3.7-3.7 1.9-5 2.7-1.7 8.9-2.8 4.1 0 2.2 1.2-8.8.6-4.5 2.4-2.8 2.8-.6 2.9 3 5.6 1.3 7.4ZM204.1 321.3l.6-9-.6-3.9-1.6-3.4-3.4-4.3 5.3-.3 9.4 8.5-4.7-3.1-2.1.1-.8 2.6-.2 8.5-2.2 6.5ZM232.4 343.2l.9-4.9-.5-6.4-1.9-3.8-3.8-3.5 1-1.9 3.6-.2 8.2 2.3-4.5.4-1.1.9.4 10.4-3 7.3ZM264.6 337.1l-1.2-8.1-2.7-3.7-3-2.4.1-3.5.7-1.7 9.7-8.5-5.9 11.3 2.5 15.2ZM295.1 300.7l-5.3-5-3.8-.5-2.9 1.2-.3-2 9.8-17.6 5.6-6.7-9.6 19.7.5 2.1 3.9 4.2 2.3 4.9ZM310.2 260.6l8 2.6 5.7 5.3 2.9 5.6.8 8.1-1.6-7-4.2-6.4-5.5-4.8-6.7-3.2Z\" fill=\"#ecb4b4\" fill-rule=\"evenodd\" /><path d=\"M88.2 421.6l11.2 -2.1 4.5 -1.7 7.1 -4.2 5.9 -7.3 1.7 -8 1.6 -2.4 4 -2.1 7.5 -1.9 4.6 -4 6.4 -10.9 2.6 -9.6 .3 -13.9 -2.3 -3.9 -1.9 -.2 -12.1 21.2 -6.4 7.2 -8.6 6.5 -11.2 5 -14.3 2.8 -6.8 -.2 -6.5 -1.2 -16.8 -5.2 -4.4 -.5 -3.7 .9 -2.9 2.8 -2 5.3 -1 8.2 .3 4.2 2.9 -.8 12.2 8.7 10 4.7 11.7 2.6Z\" fill=\"#d09190\" fill-rule=\"evenodd\" /><path d=\"M11.6 144.7l9.3.3-1.9 8-.2 7.3.6 1.9 5.7 6.2 1.1 2.8-.2 2.9-4.8 6.8-2.5 5.9-1.7 12.4 1.1 10.5 2.8 9.4 2.9 3.9 5.2 2 1.4 1.7-.6 5.3-5.2 4.7-1.6 3.2-1.7 20.4.6 9 2.4 9.5 3.1 6.6 7.3 8.3 1.7 3.6-.6 2.5-4.7 6.3-1.2 2.9 1.3 15.1 3.9 12.9 5.3 10.3 8.2 5.4 1.8 3.9-.5 3.2-4.1 7.8-1.1 4.5-.4 22.3 1.1 6.1 2.7 5.2-8.2 2.4-3.6-18-.3-22.1-1.7-11.8-3.2-9.9-7.9-16.9-2.8-10.5-.4-7.6 1-11.6-.6-7.1-2.2-9.1-4.1-12.1-1.6-12 .2-13.1 3.3-12.9.4-5.4-.9-7.3-3.6-13.5-1.4-10.2.5-10.3 2.9-11.9-3.3-16.7-.2-6.9 1.1-5.8Z\" fill=\"#f6f3ed\" fill-rule=\"evenodd\" /><path clip-path=\"url(#oalar-a)\" d=\"M11.7 144.7l9.3.3-1.9 8-.2 7.3.6 1.9 5.7 6.2 1.1 2.8-.2 2.9-4.8 6.8-2.5 5.9-1.7 12.4 1.1 10.5 2.8 9.4 2.9 3.9 5.2 2 1.4 1.7-.6 5.3-5.2 4.7-1.6 3.2-1.7 20.4.6 9 2.4 9.5 3.1 6.6 7.3 8.3 1.7 3.6-.6 2.5-4.7 6.3-1.2 2.9 1.3 15.1 3.9 12.9 5.3 10.3 8.2 5.4 1.8 3.9-.5 3.2-4.1 7.8-1.1 4.5-.4 22.3 1.1 6.1 2.7 5.2-8.2 2.4-3.6-18-.3-22.1-1.7-11.8-3.2-9.9-7.9-16.9-2.8-10.5-.4-7.6 1-11.6-.6-7.1-2.2-9.1-4.1-12.1-1.6-12 .2-13.1 3.3-12.9.4-5.4-.9-7.3-3.6-13.5-1.4-10.2.5-10.3 2.9-11.9-3.3-16.7-.2-6.9 1.1-5.8\" fill=\"none\" stroke=\"#343434\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-miterlimit=\"8\" /><path d=\"M40 408.1l8.2-2.4 8.1 6.2 8.9 5 11 3.8 6 .9 12.2-.9 9.8-3 7.1-4.2 4.6-4.8 2.2-4.8.8-5.7 1.6-2.4 4-2.1 7.5-1.9 7-7 4.1-7.8 2.6-9.6.2-15.9 1.7-7.9 1.5-2.9 3.7-4.1 7.3-4.1 2.6-5.1 1.8.1 3.3 2.8 2.5 1.1 9.3 1.3 3.2-1.5 2.1.2 3.2 6.1 12.8 9.2 6.4 5.7 5.6.5 2.4 5.2 4.1 2.2 5.1 1.7 7.5 1 10-.9 14.5-4.8 2-1.8.9-4.5 4.9 1.4 3.5-1.9 19.1-21.2 1.9-3.8.5-3.8 1.5-2.1 1.5-.6 2.7 1.5 1.2-.3 10.8-12.2 4.1-3.5 3.5-1.7 0 7.7-9.1 7.9-7.3 7.6-17.2 22.3-5.8 5.6-13.9 9.3-7.8 3.4-8 2.3-8.2 1.1-8.1-.2-7.8-1.7-7.4-3.3-4.5-2.9-21.1-16.5-8.4-5.3-8.7-3-4.3-.3-7 2.1-2.7 2.3-3.8 6.6-1.6 8.8.8 14.6-.5 4-4.4 10.3-3.9 4.9-5.5 4.5-3.9 7.2-1.8 1.5-4.4 1.6-2.1 4.1-4.6 5.3-7.6 6.1-10.1 5.4-12 3.1-6.5.2-12.7-2.2-16.3-6.8-8.4-5.4\" fill=\"none\" stroke=\"#343434\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-miterlimit=\"8\" /><path d=\"M45.5 397.2l.8 -24.4 1.5 -5.5 2.3 -3.3 -2.1 9.3 .2 8.6 2.7 2.3 8 2.1 -7.7 1.1 -4 8ZM169.2 308.8l1 8.1-.7 3.2-2.6 1.1-7.6-.8 5.6-1.9 2.1-2.7.5-5.7-1.8-5.6ZM192.5 318.8l2.8.9 3-.5 1.6-2.5.6-6.3.7 2 .1 6.1-2.2 5.1-6.3-2.7ZM230 338.5l-.7 3.7-2.1 3.4-10.3-5.8-2.2-2.6 6.8 4.3 3 .8 1.7-.6 1.4-1.8.8-6.4 1.1 4.2ZM255.7 330.2l2.8 3.9-.3 5.9-3 3.7-7.5 4.8 1.7.3 2.6-.8 7.4-3.9 1.4-1.7.8-3.8-.7-4.3-1.4-2.1-3.6-1.7ZM286.8 300l2.6 2.2.6 4.4-8.3 13.7 10.4-10.1 1.5-4.3-.4-2.4-1.3-2.1-2.7-1.8-2.4-.1ZM147.1 333.9l-2.7 7.4-1.7 2.2-1.9.3-2.2-2.7.9 7.8-2.5 11 6.9-7.4 1.7-4.8.5-5.2Z\" fill=\"#d09190\" fill-rule=\"evenodd\" /><path d=\"M50.5 363.3l1.6-2.2.3-4.2 5.6 5.9 5 2.3 3.6 3 6 3.1 8.5 1.9 9-2-8 2.7-5.1-1.3-9.4-.6-6.1-2.1-7.1-4.3-3.2 1.9-2.4 5.2ZM39.2 279.7l10.5 6.1 4.3 1.4 2.3-1 6.6-6.5 3.5-1.3-.7-.2-4.9 1.6-5.9 4.8-2.5.8-8.3-4.4-6-1.5ZM60.2 288.6l-1.3 1.7.5 2.6 8 3.9 6 4 4.7.8 10.3-1.7-6.6 1.2-6.1-.6-7.9-5.5-6.5-2.8-1.5-3.2ZM78.7 233.1l17.9 -4.9 5.1 -4.1 4.3 -6.8 -3.4 4 -4.2 2.9 -6.1 3.2 -7 2 -6.6 4.1ZM69.8 240.6l11.4-.4 6.9-2.3-2.6-.3-6.2 1.3-4.2-.3-4.5 1.4ZM126.4 328.6l2.2 4.7-1.2 6.7-3.7 4.1-9 5.5 10.4-10.1 1.5-3.8.6-6.3Z\" fill=\"#ecb4b4\" fill-rule=\"evenodd\" /><path d=\"M27.7 172.2l-.3 3.8-6.8 10.8-1.4 6.4 3-8.4 6.5-8.1ZM101 170.3l4.2 5.3 1.9 13-1.8-3.8-.9-6.5-1.2-3-1.6-1.4-2.7.4 2.1-2.9ZM30.4 175.7l4.5 7.2 8.1 7.5-8.5-6.7-2-3-1.5-4.3ZM97.3 176l-5.4 6.5-2.4 1.8 4.3-3.5 3.3-4.3ZM32.7 228.6l-1.4 4.1-5.3 5.5-1.2 2.7-2.1 18 1.9-5.3 2.5-13.2 2-2.7 4.1-2.5 1.7-2-.2-2.4-1.9-2.4ZM105.2 234.1l2 2.7 8.4 7 2.1 4.7.5 5.2-2.1-5.9-4-6.2-3.8-2.7-4.5-1.6-.1-1.7 1-1.6ZM33 311.5l.1 -3.8 4.1 -5.5 2 -6.6 1.3 1.9 6.4 4 -4 -2.1 -2.1 .2 -5.9 7.2ZM106.1 299l3.8-5.2 3.4-7.2 2 1.8 4.8 1.5 2.6 4.1-2.7-3-6.7-.8-7 7.4ZM132.2 304.5l2.8 2.1 1.3-.2-2.4 3.8-1.2 6.1.3-8.1-.6-3.4ZM171.4 307.7l-1.8-4.5-4-4.1-.4-2 1.1-2.7 2-1.9 6.8-1.9-5.3 2.7-3.1 3.5.3 1.9 3.4 4.6 1.2 5.3ZM204.7 313.3C204.7 309.6 202.6 303.5 199.4 301.1A8.1 8.1 0 0 1 204.4 301.1C206 301.6 208.4 303.2 209.2 304.6C206.8 303.8 204.4 302.7 202.3 301.9C202.3 303.5 203.9 305.6 204.2 306.9C204.4 309.1 205 311.2 205 313ZM233.2 334.1l-1-5.2-4.5-4.9 1.5-1.4 4.9.4 4.1 1.4-8.3-.8 3.1 5 1.3 5.8ZM264.1 331.1l-1.6 -4.5 -3.4 -4.1 -.4 -2.4 .7 -1.6 5.6 -5.3 -5 7.9 3.5 7.4 1.3 5ZM292.1 296.7l-4.1-1.8-4.5.2 1-4.9 5-8.1-4.7 11.4 4.9 1.2 3 2.3ZM49.1 370.4l3.3 -8.8 .4 -3.6 3.3 3.5 6.6 3.9 2.7 3.1 -8.6 -4.7 -2.8 -2.5 -2.8 3.9 -1.7 5Z\" fill=\"#f0cacb\" fill-rule=\"evenodd\" /><path d=\"M204.8 301.6l-2.6-1-2.6.4 3.1 4.1 1.8 5.5-3.2-8.8 1.2-.6 2.1.8ZM168.1 292.6l-2.1 2.3-.7 3.4 4.9 7.3-1.3-3.9-2.5-3.4 1.2-5.1ZM171.3 307.9l0 1.4ZM172.2 311.7l.5.8-.5-1.1ZM230.3 322.6l-2.8.4-.7 1.5 4.5 4.8-3-4.6.2-1.3 1.5-.8ZM231.8 331.3l.6 4.6.7-1.5-1-2.6ZM260.9 317l-2 1.3-.9 5.6 3.1 2.2-2-3.6.2-3.8 1.3-1.1ZM285.3 288.6l-1.4 3.1-.1 3 4.6.2-3.6-.9-.2-2.2.9-2.7ZM133.3 305.1l2.5 1.6-2.5 10.3 0-11.6ZM131.9 319.2l.8-1 .8 1-.8 1ZM132.7 322.4A.7 .7 0 0 1 133.4 321.8C133.7 321.8 134 322.1 134 322.4C134 322.8 133.7 323.1 133.4 323.1C133 323.1 132.7 322.8 132.7 322.4ZM231 347.1l1-1.1 1 1.1-1 1.1ZM229.8 349.5l1 0ZM202.2 325.2l1-1.1 1 1.1-1 1.1ZM200.3 327.4A.7 .7 0 0 1 201 326.7C201.4 326.7 201.7 327 201.7 327.4C201.7 327.8 201.4 328.1 201 328.1C200.6 328.1 200.3 327.8 200.3 327.4ZM172.7 319.4l.8-.8.8.8-.8.8ZM265 336.4l.7-.8.7.8-.7.8ZM266 339.7l1 0ZM296.1 305.1l1.1-1 1.1 1-1.1 1ZM296.1 310.1l.9 0Z\" fill=\"#f4edec\" fill-rule=\"evenodd\" /><path d=\"M72.2 430.1l7.7 1.5 11.6 0 7-1.2 7.4-2.4 7.6-4 7.5-5.8 7.1-8 4.5 9.1 1.8 8.2-2.2-6.6-2.2-2.7-1.4-.4-1.6.5-10.7 9.3-9.6 4.6-5.8 1.5-13.3.6-7.5-1.4Z\" fill=\"#f3e8e3\" fill-rule=\"evenodd\" /><path d=\"M147.3 427.4l-.3-8.2-1.6-7.4-6.1-15.2 6.6-5.9 5.6-9-2.9 6.5-5.4 9.1.4 4.5 2.9 9.1 1.4 7.7Z\" fill=\"#edcabc\" fill-rule=\"evenodd\" /><path d=\"M134.8 427.7l.6-1.3 1.4-.5 1.4.5.6 1.3-.6 1.3-1.4.5-1.4-.5ZM133.7 422.6l1.3-1.2 1.3 1.2-1.3 1.2Z\" fill=\"#fff\" fill-rule=\"evenodd\" /><path d=\"M67.4 73.6l15 19.4 11.1 11.5 11.6 8.3 5.5 1.9 4 4.5-5.2-1.8-4.7-.3-9.6 2.1-1.2-5-2.8-6.4-5.3-6.2-3.8-2.2-4.6-1.3-5.6 0 8.7-5.3-10.3 2.7 3-5.1 0-5.2-2.9-7.1Z\" fill=\"#dfb1a2\" fill-rule=\"evenodd\" /><path d=\"M63.4 64.6l5.2 5.2 15 20.3 11.3 12 5.9 4.9 5.6 3.5 5.1 1.5 4.4 -1 7.4 7 11.4 8.6 14.4 7.6 7.8 2.3 7.9 .7 7.8 -1.4 -3.8 -2.9 -2.4 -3.4 -2.6 -8.4 -12.6 .7 -8.7 -1.4 -4.3 -1.6 -4.1 -2.3 -19.7 -18.3 -3.2 -4.8 -1.8 -6.3 .5 5.1 -1 3.1 -1.3 .8 -2 -.1 -2.8 -1.3 -28 -24.6 -6.6 -4.4Z\" fill=\"#dfb1a2\" fill-rule=\"evenodd\" /><path d=\"M63.5 64.6l-1.4-6.3.5-4.3 2.5-4 2.3-1.6-3.6 6.2-.3 4.5 2.8 4.7 3 2.2Z\" fill=\"#dfb1a2\" fill-rule=\"evenodd\" /><path d=\"M61.9 50.4l-2 7.6 .6 7 -9.6 2.2 -7.6 -1.6 -12.4 -10.1 -4.9 -2.7 -2 -.2 9.2 1.5 11.7 5.7 6.5 1.2 4.1 -1.9 2 -2ZM64.5 75.6l-3.3 5.5-.5 5.5 3.3 8.2 2.7 2.5 1.7-.6-1.6-.7-2.3-3.4-2.8-6.9.3-4.7Z\" fill=\"#dfb1a2\" fill-rule=\"evenodd\" /><path d=\"M40.8 89.7l8 2.9 2.7-.3.7-1.9-.7-7.3.9-5 2.2-3.8 4.5-4.2.5-1.9-6.9 1.6-5.3-.3-6.3-2.5-3.4-2.4 6.4 5.3 6.7 1.8.9.9-3.5 6.6 1.6 8-.3 1.9-2.6.9ZM43.1 93.6l8.5 4.5 9.9 12 3.9 6.3 1.9 9.4-21.8-9.7 14.1 4.8 3-.1.2-.9-2-4.4-7.1-10.2-3.1-6.5ZM70.1 98.7l-2.1 4.2 9.8 14.1 3 8.8 6.8-3.7-3.9-.5-2.6-2-10.2-15.4-1.2-4ZM119.6 58l6.4-2.8 6.5 0 44.3 11.3 5.9 2.3 1.5 1.4-1.9.5 0-1.1-2.3-1.2-39.2-10.7-14.1-1.8-3.4.5ZM86.9 36.2l5.2 -1.4 6.3 -.4 12.5 3.4 6.5 3.7 9.5 8.3 1.5 2.4 -3.4 1.4 2 -1 -.1 -1.6 -14.8 -11 -5.9 -3 -10.5 -1.7 -6.3 .1ZM118.4 56.2l-5.6 5.2-3 5.7-1.7 8.4 0 5.3-.7-10 1.9-6.6 5-5.8Z\" fill=\"#dfb1a2\" fill-rule=\"evenodd\" /><path d=\"M89.4 21.5l9.3 6.6 1.7 2.5 -.1 1 -1.6 1 -10.2 1.8 -12 6.7 8.3 -6.4 11.9 -4.3 .4 -.8 -.7 -2.1ZM86.2 14.4l12.2 7.5 7.4 6.2 10.8-8.6 6.1-2.7-5.7 1.8-11 6.8-9-6ZM121.6 39.1l8.9 5.8 5.2 5.2 1.6 .3 4.8 -8.2 5.3 -6 4.9 -3.3 5.9 -1.8 -7.3 1.9 -5.1 2.8 -9.5 10.5 -2.8 -.5 -7.1 -5Z\" fill=\"#dfb1a2\" fill-rule=\"evenodd\" /><path d=\"M142.4 44.9l-3 5.1-.2 2.2 7.4 1.6-6.2-2.3.5-3.8ZM201 55.2l-7.1 9.1-1.6 1-40.3-10.4 38.3 8.5 2.4-.7Z\" fill=\"#dfb1a2\" fill-rule=\"evenodd\" /><path d=\"M174.7 71.1l-6.5 3-4.3 3.3-3.9 4.9-2.6 6.3-.9 5.8.2 4.9 6.5 19.4-2.2-5.9-5.4-9-.9-3.1-.3-8.1.8-4.5 4.3-8.6 3.8-3.6 5-2.9ZM117.4 60.1l-4.5 6.6-1.9 6.2-.3 8.2.9 4.8.1-8.5 1.2-6.6ZM95.7 36.5l-8.7.9-11.7 6.2-8.1 7.7-2.3 5.9.9 3.8 1.5 1.8 11.2 7.5 5.1 5.3-3.2-4.8-7.9-7.1-1.7-4.4.3-3.7 3.3-6 8.9-8.8 6-3.1 6.4-.6Z\" fill=\"#f3e8e3\" fill-rule=\"evenodd\" /><path d=\"M153.1 61.6l7.8 3 20.8 5.6-7.3 1.5-9 3.9-4.2 2.7-2.8 3.8 2.4-6.7-.1-4.4-2.9-5.7-4.9-3.6ZM74.1 16.3l-8.8-2.2-7.6-.1-9.2 1.8-10 4.2-7.8 5.1-5.7 5.8-4.1 6.6-4.4 11.4 4.7-8.3 5.7-7.5 7.6-7.1 4.5-2.8 19.8-6 7.1-.9ZM94.1 11.9l7.7-3.5 6.1-.2 5.9 2.4 7.3 5.5-8.7-4.4-6.8-1.6-7.6.4ZM111.1 27.2l3.4-4.6 3.1-2.6 4.1-1.7 5.1-.2 9.9.9 7.8 1.7 8.5 3 8.9 4.6-13.1-5.3-15-2.9-5.2.1-9.3 2.2-7.1 2.9-1.4 1.1ZM144.8 42.6l3.3-4.1 4.5-3.2 6.6-2.3 4.2-.4 12.8 1.6 6.9-.9 11.1.8 12.2 2 5.8 1.8-21.7-2.1-15 .7-9.8-1.8-4.9-.1-4.8 1.7ZM37.8 89l-9.6.3-7 2.2-7.2 4.9-3.3 3.7 1.5-3.1 3.5-3.8 6.2-3.4 9.7-1.4ZM39.5 114.5l-10.4 2.9-6.8 4.7-6.1 8.2-2.3 5.7 1-4.8 2.8-6.3 5.7-6.2 4.2-2.4 5.3-1.5ZM26.7 56.3l-4.2 -2.6 .5 -1.7 7.9 0 -9.8 -2.1 -3 .7 -1.5 2.4 0 1.4 1.4 1.5 8.7 .8Z\" fill=\"#f3e8e3\" fill-rule=\"evenodd\" /><path d=\"M26.1 55.8l-2.9-1.3-1-1.5.9-1.2 2.8-.1-3.9-.5-2.7.7-.7 1.1 6.5 2.9ZM62.1 68.7l-1 3.9 -5.9 7.5 -.5 6.9 .8 4.8 -.9 3.9 1.8 3.5 7.1 7.3 2.9 4.3 3 7.5 1 6.4 1.1 -2.4 .2 -4.2 -1.7 -5.6 -4 -7.1 -7.2 -6.3 -1.7 -3.7 -.2 -14 4.8 -9.9 .3 -2.6ZM79.1 14.4l14.6 7 5.8 5 6.1 6.9 6.9 3.1-4.6-2.3-4.5-5.8-7.9-6.5-10.2-5.7ZM136.2 53.8l37.1 9.5 12.7 4.7.8-1.6-35-9.5ZM134.4 407.6l5.1 12.3 1.3 9.8-1.7 11-2.6 5.7 2.9-2.3 3-5.3 1.3-9.7-2.5-15.1-3.3-10-.8 3ZM136.2 454.3l-.1 4.7 2.2 3.4 3.6 2.4 8 3.1-4.5.4-6.1-2.9-3.6-5.8 0-4.6Z\" fill=\"#fff\" fill-rule=\"evenodd\" /><path d=\"M134 446.3l-2.2 4.4.3 9 2.9 5.5 4.9 3.5-3.8-3.5-3.1-7.6-.4-5.7 1.3-5.3Z\" fill=\"#e3c9ca\" fill-rule=\"evenodd\" /><path d=\"M15.2 143.1l1.1-.5 3.9.5 2-5.6 5.9-9.1 3.1-3-3.4 2.1-9.3 10-3.1 5.1ZM75.9 127.7l-4 1.5-1.5 2.2 1.7 3.5 2.8.8 2.7-1.5 1.5-2.1-4-4.2ZM101.1 125.7l4.5-.8 2.1.5 3.1 3.5 3.7 7.6 2.7.4 2.5-1.2-6.6-7.7-3.7-2.8-5.6-1.6-2.8 1.8Z\" fill=\"#f4f0eb\" fill-rule=\"evenodd\" />"};
+_ORG_ART["liver"]={vb:[0,0,334.9,277.2],pfx:"oaliv",body:"<defs><clipPath clipPathUnits=\"userSpaceOnUse\" id=\"oaliv-a\"><path d=\"M4 14.3l334.5 0 0 277.4-334.5 0Z\" /></clipPath></defs><path clip-path=\"url(#oaliv-a)\" d=\"M71.9 273.5l17.3 -15.6 13.9 -16.9 7.1 -7.4 17 -14.1 36.9 -33.1 30.9 -21.7 9.9 -9.2 7.2 0 6.7 -1.1 12.5 -5.3 12.8 -8.8 33.1 -25.7 23.9 -13.5 32.8 -31.7 3.1 -4.8 .1 -1.9 -1 -1.6 -2.5 -1.2 -3.4 .4 -4.2 1.7 -23.7 15 -15.5 8.8 -23.3 9.4 -15.2 4.2 -43.4 5.5 -10.1 2.5 -10.9 5.2 -46.6 31 -4.6 2.3 -8.7 2.2 -17.5 2.2 -10.1 4 -5.7 3.6 -5.5 4.7 -4.6 5.3 -6.8 11.8 -4.2 12.3 -4.2 25.3 -1.6 3.9 -8.4 11.2 -14.8 14.5 -14.8 16.2 -5 7.3 -2.2 6.7 1.2 6.1 4.4 4.8 6.6 2.3 4.3 .1 10.3 -2 6 -2.3 13.3 -7.4Z\" fill=\"#7d4453\" fill-rule=\"evenodd\" /><path clip-path=\"url(#oaliv-a)\" d=\"M36.9 250.5l18.3-18.2 8.4-11.2 1.6-3.9 4.2-25.3 4.2-12.3 6.8-11.8 4.6-5.3 5.5-4.7 5.7-3.6 10.1-4 17.5-2.2 8.7-2.2 4.6-2.3 46.6-31.1 10.9-5.2 10.1-2.5 43.5-5.5 15.2-4.2 14.8-5.6 16.5-8.2 31.1-19.5 4.2-1.7 3.4-.4 3.1 1.2-.9-3.6-2.1-3.1-3.1-2.7-8.8-4.3-11.7-3.5-31.5-7.3-16.3-2.5-10.4-.6-9.2.6-13.4 3.6-6.3.5-52.9-13.1-38.3-7-19.9-1.9-19.6-.1-18.7 2.2-17.2 5-8.9 4.3-7.8 5.4-6.7 6.5-5.8 7.4-4.9 8.3-4.1 9.2-3.4 9.9-5 21.7-3.3 26.8-.7 13.9 1.1 34.9 4.6 38.1-1.2 29.9.3 18.1 1.1 8.6 2.1 7.8 3.3 6.8 4.8 5.3-3.2-5.8.5-6.4 6.4-10.8Z\" fill=\"#9c717a\" fill-rule=\"evenodd\" /><path d=\"M155.9 29.9l-26.6-5.9-23.2-2.3-12.1-.1-11.9.8-11.3 1.8-10.3 3.1-9 4.5-7.5 5.7-6.5 6.7-5.6 7.6-4.7 8.5-3.9 9.2-5.6 20.3-1.9 10.9-2.3 22.9 7.8-36.3 7.7-21.8 5.2-10.2 6.4-9 7.6-7.4 9-5.3 9.7-3.7 9.8-2.7 19.7-2.8 9.9-.3 19.9 1.2Z\" fill=\"#fff\" fill-rule=\"evenodd\" /><path d=\"M67.9 42.9l-9.4 5.4 -7.9 6.6 -6.5 7.6 -5.3 8.3 -7.6 17.9 -4.3 17.9 -2.1 15.9 -3.4 74.4 -3 25.1 0 -11.7 -4.9 -62.6 .2 -24 1 -11.6 3.7 -22 6.3 -20 4.2 -9 5 -8.3 5.8 -7.5 6.7 -6.7 7.6 -5.7 9.3 -4.5 11 -3.1 12.3 -1.9 13 -.8 26.4 .9 23.6 3.2 16.9 4.3 -20.5 -1.4 -32.7 1.9 -23.6 4.1 -11.2 3.2ZM297.3 46.7l-20.8-5.9-20.1-3-10.1-.1-11.2 3.1-4.2 2.7-3.1 3.6-9.9 18.6-18.1 22.8-5.1 9.1 25.3-23 10.4-14.6 3.8-4.1 4.7-3.9 5.9-3.4 7.2-2.7 8.7-1.8 10.3-.6 12.2.8Z\" fill=\"#b39198\" fill-rule=\"evenodd\" /><path d=\"M207.6 79.6l6.4-9.6 12.3-22.1 6.3-6.4 6.1-3 7.8-1.6 15.4 1-10.9 0-7.3 1.2-6.9 2.7-3.2 2.1-5.5 5.8-13.3 21.4Z\" fill=\"#fff\" fill-rule=\"evenodd\" /><path clip-path=\"url(#oaliv-a)\" d=\"M36.3 286.1l-7.7 1.6-3.8-.6-3.4-1.7-3.4-4.7-.4-3.7.9-3.8 3.9-7.2 7-9 29.5-29.5 5.2-9.4 1.6-8.5 1.5-3 1.3-.6 2.1 1 2.8 5.8-.1 6.7-2.1 6.4-7.6 11.3-26.4 26.3-4 4.8-2.7 4.8.2 4 1.6 1.4 6.2 1.1 6.9-1 10.4-4.4 9.1-6.3 5.7-5.9 23.6-29.6 5.1-4.8 9.9-7 15.1-14.3 24.5-17.7 28.6-17.7-.6 1.3-21 16.5-22.5 19.3-18.7 18.7-16.9 15-20.2 22.6-11.7 10.1-8.5 5.5-6.4 2.8-10.1 3.4-10.7 2.1-4.6-.1-3.6-1.1-2.1-2.4-.3-4Z\" fill=\"#57152d\" fill-rule=\"evenodd\" /><path d=\"M302.1 99.6l11.4 -11.9 18.4 -16.4 2.3 -3.4 1 -3.2 -.9 -3 -2.2 -.8 -.7 .2 0 1.2 -3 4.9 -5.8 6.9 -14.6 13.8 -27.1 17.2 -32.6 22.8 -13.9 8.3 -7.2 3.1 -2.9 .5 -5.1 -1.2 -2.1 -1.6 -3.3 -4.7 -2 -9.8 1.3 -6.8 2 -2.1 6.7 -1.9 15.8 -.8 13.5 -1.9 15.1 -5 14.6 -7.4 13 -8.3 14.9 -11.5 14.6 -13.3 -34.1 21.1 -25.5 10.6 -15.2 4.2 -43.2 5.4 -11 2.9 -4.3 2.5 -.7 3.6 4.1 14.1 2.5 14.5 4.9 8.1 4.9 3.2 3 .9 5.9 0 12 -3.4 12.7 -7.5 40 -30.7ZM188.5 128.8l2.4 12.4 4.8 11.5-.5 4.1-2.4 3.6-16.1 12.2-5.9 3.4-3.9 1.3 7.7-4.6 5.3-4.5 4.6-5.2 3.2-5.4 1.1-5.1-2.4-15 1-7.4Z\" fill=\"#57152d\" fill-rule=\"evenodd\" /><path d=\"M182 115.7l-8.6 4-20.8 14.9-18.4 10.4-7.6 2.9-10.5 1.9.6-1.2-4.6.5-10 2.5-8.5 4.3-8.5 6.7-4.6 5.3-6.8 11.8-5.6 18.3-2.7 18.9-3.1 7-4.9 6.7 5.9-1.5 4.4-2.5 9.6-10.8 18.8-12.8 6.5-6.7 2.6-4.3 2.8-8.9 1.8-17.7 3.6-4.7 26.1-11 6.9-3.8 7.7-5.2 16.7-14.2 5.3-3.1 3.6 0 3 2.2 3.7 13.4 2.1 2.6-.2-10.3-2-13-1.5-2.5Z\" fill=\"#57152d\" fill-rule=\"evenodd\" /><path d=\"M219.9 41.6l-1.3 7.9-4.3 9.8-4.8 7.2-13.1 15-6.9 11.1-2.5 6.7-.4 8.2-1-3.1-.2-6.8 3.3-10.6 7.9-12.5 20-22.2 2.7-6.6ZM222.2 97.6l26.8-3.3 14.5-4.2 12.2-6.1 17.9-10.4 16.9-7.6 13.5-8.2-7.8 1.7-30.3 11.1-7.1 3.7-10.5 7.6-6.7 3.2-34.7 10.1Z\" fill=\"#7d4453\" fill-rule=\"evenodd\" /><path d=\"M261.9 120.7l6.6-13.1 8.5-10.5 7.1-5.9 11.1-5.2 8.6-2 5.7.1 2.8 1.3-1.6 3.6-5.1 4.4-18.5 10.8-21.7 15.2Z\" fill=\"#57152d\" fill-rule=\"evenodd\" /><path d=\"M212.9 129.3l2.1 4.7 3.8 4.2 3 1.2 3.9.1 5-1.2 6.3-2.8 17.2-11.8-16.4 8.7-10 3-4.7.3-4.2-.7-3.4-2.1Z\" fill=\"#9c717a\" fill-rule=\"evenodd\" /><path d=\"M53.3 225.1l2.7-3.4 3.1-7.4 9.7-36.3 6.2-12.5 4.3-5.7 5.3-5 6.5-4.2 7.8-3.1 9.2-1.9 10.8-.6-18-.9-12.6 2.1-7.4 3.9-8.7 8.7-3.5 5.2-2.3 5.8-9.1 45.4-1.8 5.6Z\" fill=\"#b39198\" fill-rule=\"evenodd\" /><path clip-path=\"url(#oaliv-a)\" d=\"M71.9 273.6l17.3 -15.6 13.9 -16.9 7.1 -7.4 17 -14.1 36.9 -33.1 30.9 -21.7 9.9 -9.2 7.2 0 6.7 -1.1 12.5 -5.3 12.8 -8.8 33.1 -25.7 23.9 -13.5 32.8 -31.7 3.1 -4.8 .1 -1.9 -1 -1.6 -2.5 -1.2 -3.4 .4 -4.2 1.7 -23.7 15 -15.5 8.8 -23.3 9.4 -15.2 4.2 -43.4 5.5 -10.1 2.5 -10.9 5.2 -46.6 31 -4.6 2.3 -8.7 2.2 -17.5 2.2 -10.1 4 -5.7 3.6 -5.5 4.7 -4.6 5.3 -6.8 11.8 -4.2 12.3 -4.2 25.3 -1.6 3.9 -8.4 11.2 -14.8 14.5 -14.8 16.2 -5 7.3 -2.2 6.7 1.2 6.1 4.4 4.8 6.6 2.3 4.3 .1 10.3 -2 6 -2.3 13.3 -7.4\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path clip-path=\"url(#oaliv-a)\" d=\"M36.9 250.6l18.3-18.2 8.4-11.2 1.6-3.9 4.2-25.3 4.2-12.3 6.8-11.8 4.6-5.3 5.5-4.7 5.7-3.6 10.1-4 17.5-2.2 8.7-2.2 4.6-2.3 46.6-31.1 10.9-5.2 10.1-2.5 43.5-5.5 15.2-4.2 14.8-5.6 16.5-8.2 31.1-19.5 4.2-1.7 3.4-.4 3.1 1.2-.9-3.6-2.1-3.1-3.1-2.7-8.8-4.3-11.7-3.5-31.5-7.3-16.3-2.5-10.4-.6-9.2.6-13.4 3.6-6.3.5-52.9-13.1-38.3-7-19.9-1.9-19.6-.1-18.7 2.2-17.2 5-8.9 4.3-7.8 5.4-6.7 6.5-5.8 7.4-4.9 8.3-4.1 9.2-3.4 9.9-5 21.7-3.3 26.8-.7 13.9 1.1 34.9 4.6 38.1-1.2 29.9.3 18.1 1.1 8.6 2.1 7.8 3.3 6.8 4.8 5.3-3.2-5.8.5-6.4 6.4-10.8\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M219.3 41.7l-.2 6.7-3.3 7.9-5.5 8.7-16.1 21.9-4.2 7.2-3.2 8.3-.2 6.4M186.2 110.7l2.1 2.3 1.6 3.7 7 27.4 2.5 4.8 3.3 3.7 4.3 2.3\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" />"};
+_ORG_ART["bowel"]={vb:[0,0,215.7,212.6],pfx:"oasma",body:"<defs><clipPath clipPathUnits=\"userSpaceOnUse\" id=\"oasma-a\"><path d=\"M6.8 5.2l215.4 0 0 212.7-215.4 0Z\" /></clipPath></defs><path clip-path=\"url(#oasma-a)\" d=\"M59.2 179.5l1 7.5 3.9 8.1 7 7.2 4.7 2.8 5.5 2 6.3 1 7.1 -.1 13 -2.6 12.8 -6 7.1 -6.6 1.7 3.7 3.8 4.4 5.5 4.6 6.8 4.3 7.7 3.6 8.2 2.3 8.3 .5 8 -1.8 7.3 -4.5 6.2 -7.8 5.2 -.6 2.9 -1.2 6 -4.8 3 -3.7 5.6 -10.4 4.8 -14.9 2 -11.7 .4 -11.6 -.9 -11.2 -1.9 -10.7 -5.7 -19.1 -10.9 -23.7 2.8 -7.4 1.7 -8.1 .7 -8.5 -.2 -8.6 -2.8 -16.3 -5.4 -13.2 -3.4 -4.7 -3.8 -3.1 -4.2 -1.7 -4.2 -.6 -8.6 1.6 -9.6 5 -33 22.8 -8.2 3.8 -8.4 2.8 -16.3 2.6 -14.5 -.9 -6 -1.6 -5 -2.4 -3.7 -3 -14.3 -17.2 -7.4 -6.2 -4.1 -2.2 -4.3 -1.3 -4.5 -.2 -4.7 1 -4.9 2.5 -3.1 2.9 -4.4 8.8 -2.1 11.6 -.4 12.9 1.7 18.4 -4 5.4 -2.7 7.4 -1.5 8.9 .1 20.8 3.6 21.8 6.3 19.2 3.9 7.6 8.2 11.2 6.5 5.8 7.7 3.5 9.1 .5Z\" fill=\"#e6c1c7\" fill-rule=\"evenodd\" /><path clip-path=\"url(#oasma-a)\" d=\"M59.3 179.5l1 7.5 3.9 8.1 7 7.2 4.7 2.8 5.5 2 6.3 1 7.1 -.1 13 -2.6 12.8 -6 7.1 -6.6 1.7 3.7 3.8 4.4 5.5 4.6 6.8 4.3 7.7 3.6 8.2 2.3 8.3 .5 8 -1.8 7.3 -4.5 6.2 -7.8 5.2 -.6 2.9 -1.2 6 -4.8 3 -3.7 5.6 -10.4 4.8 -14.9 2 -11.7 .4 -11.6 -.9 -11.2 -1.9 -10.7 -5.7 -19.1 -10.9 -23.7 2.8 -7.4 1.7 -8.1 .7 -8.5 -.2 -8.6 -2.8 -16.3 -5.4 -13.2 -3.4 -4.7 -3.8 -3.1 -4.2 -1.7 -4.2 -.6 -8.6 1.6 -9.6 5 -33 22.8 -8.2 3.8 -8.4 2.8 -16.3 2.6 -14.5 -.9 -6 -1.6 -5 -2.4 -3.7 -3 -14.3 -17.2 -7.4 -6.2 -4.1 -2.2 -4.3 -1.3 -4.5 -.2 -4.7 1 -4.9 2.5 -3.1 2.9 -4.4 8.8 -2.1 11.6 -.4 12.9 1.7 18.4 -4 5.4 -2.7 7.4 -1.5 8.9 .1 20.8 3.6 21.8 6.3 19.2 3.9 7.6 8.2 11.2 6.5 5.8 7.7 3.5 9.1 .5\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M179.6 131.1l6.2 -10.3 5.5 -15.5 3.4 -20.6 .7 -12.5 -.9 -11.5 -2.8 -10.5 -4.9 -9.5 -2.9 -3.8 -6.3 -5.1 -6.4 -1.5 -3.1 .6 -5.5 4.2 -2.3 3.6 .4 -.9 -2.2 1.4 -3.6 .4 -8.2 -1.2 -4.4 -1.5 -3.3 -2.2 -1.5 -2.6 -4.8 12.5 -3.4 5 -4.1 4.2 -4.8 3.5 -6.3 3.2 -11.3 3.5 -9.9 .2 -8.9 -2.4 -8.3 -4.4 -18.7 -13 -11.1 -4.3 -7.3 .1 -3.6 1.2 -3.2 1.9 -4 5 -.9 3.1 .2 6.8 2.5 7.4 4.8 7.4 -4.2 .9 -5.8 3.8 -1.9 2.3 -2.1 5.2 .2 9 3.6 12.4 1 7.5 -1 7.2 -3 8.9 -.9 7 1.5 6.1 4.3 4.4 7.7 1.7 5.2 -.4 -18.8 21.8 -1.2 4 .4 4 1.3 2.4 2.9 2.4 7.9 2.3 6.6 -.9 3.6 -2.6 14 -15.2 3.3 11 3.1 5.4 5.2 4.8 8 3.6 8.9 1.8 11.1 .2 8.4 -1.7 12.7 -5 5.3 -.7 5.4 .6 11.7 3.3 4.5 0 6.9 -2.2 7.9 -5.2 .2 5.1 1.7 4.4 3 4.6 4.4 4.2 6.7 3.2 3.8 .8 3.7 .1 6.9 -1.6 3.1 -1.6 5.3 -4.7 3.8 -6.4 2.4 -7.2 1.9 -9.2 .2 -11.2 -2.1 -11.6 -2 -5.8 -2.7 -5.3 -3.4 -4.5 -4.3 -3.3 -5.2 -1.8Z\" fill=\"#e6c1c7\" fill-rule=\"evenodd\" /><path d=\"M111.7 140.4l-4.9 -.5 -7 -3.3 -12 -12 -4.3 -3.2 -2.6 -.9 7.9 -3.3 6.6 -6.5 1.7 7.1 3.1 6.6ZM105 167.9l-7.9.2-5.9-1.4-6-4.5-4-6.3 3.3 12.6 3.3 3.4 3.4.6 4.9-.6ZM45.5 102.2C45.5 105.8 46.7 109.3 45.9 112.9A66 66 0 0 1 43.8 120.4C47.1 118.2 51.3 116.8 56.3 117.3L56.7 117.3C54.2 115.9 52.1 114.6 51.3 112.9C50 110.6 48 106.2 45.9 102.2L45.5 102.2ZM121.6 97.3l.6-3.6 1.6-3.3 7.4-8.3-8 6-2.8 1.2-2.5 0ZM80.4 92.4l5.8-6.7-5.2-1.3-4.5-2.2-5.6-4.6-5-5.7 9.5 16.5Z\" fill=\"#bb5a74\" fill-rule=\"evenodd\" /><path d=\"M135 39.6l-5.3 2.9-4.5 4.1-5.2 7-3.3 6 5.7-3.5 5.2-4.4 4.2-5.5Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M147.6 164.8l-16.7 1.3 7.7 1.4Z\" fill=\"#bb5a74\" fill-rule=\"evenodd\" /><path d=\"M131.2 116.8l1.9 3 3.2 2.4 4.2 1.4 4.9 .2 5.2 -1.4 5.2 -3.3 4.9 -5.5 4.2 -8 3.2 -10.8 1.9 -14 -2.4 9.9 -2.4 6.2 -6.8 12.5 -4.4 5.2 -5 3.8 -5.5 2 -6.1 -.4ZM57.6 114.6l4.6 2.6 7.7 1.3 8.9-.4 8.3-2.5 3.3-2.2 2.5-2.8.9-9.1 2.8-6.4-7.8 11.5-6.6 5.4-6.1 2.6-6.6 1.5-6.4.1ZM162 191.8l2.9 4.4 4.7 3.7 9.1 3 6.5-.5 3.1-1.2 5.5-4.3 4.7-7.1 3.3-9.9 1.2-12.6-1.5-15.4-.2 14.9-1.9 12.5-4.6 11.5-3.6 4.5-4.7 3.3-5.9 1.7-3.6 0-8.4-2.6ZM114.2 184.8l7.6-2.1 14.7 4.9 7.7.3 7.3-3.6 12.8-10.2-3.8 1.5-12.5 7.5-3.8 1.3-3.8.1-12.7-3.7-7.1-.6-15.6 6.2-8.5 2.1-12.7.8-7.1-.7-4.9-1.5 10.8 3.6 8.3.4 10.5-1.7Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M107 130.6l3.9 5.1 6.9 5.4 9.5 4.3 5.6 1.4 12.6.3 6.9-1.4 6.8-2.4 11.3-7.1 8.5-9.5 6-11.3 5.3-19-5.3 15.3-6.2 11.3-8.9 10.3-5.6 4.3-6.5 3.5-7.4 2.4-7.6 1.3-7 0-6.3-1.1-10.6-4.1-7.4-4.9ZM27.9 145.7l4.8 1.7 3.7 0 4.4-1.7 9-6.6 4.5-2.1 5.3-.8 6 1.1 5 2.3 5.5 4.6 5.9 10.8 4.8 5.4 6.6 3.9 5.1 1-5.8-3.8-5.3-5.5-10.8-17.3-3.1-3-6.8-3.5-7-.7-6.3 1.4-4.8 2.8-11.2 9.5-4.2 1.4ZM37.6 119.9l-8.3 15.9 3.5-3 9.1-14.2 1.9-4.2.5-4.2-.6-6.7-1.7-4.1-2.9-3.9 1.9 5.9.7 7.6-1.1 5.4ZM36.3 71.1l4.4-.3 6.3 1.1 9.5 5.2 5.3 6.5 4.5 9.4 2.6 2 5.8-.2 3.4-1.4 1.2-1.4-4.6-3.1-3.8-8.4.4 3.5-1.6.1-3.5-2.6-7-8.3-7.8-3.7-8.8-.7-8.1 2ZM111.7 140.4l-9.1-12.4-12.5-.9 10.5 10 6.2 2.8Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M172.5 33l-3.4.9-3.1 1.8-3.7 5.5-2.3 10-.6 23.2-1.1 7.6-3.9 8.8-8.4 9.9-.3 2.2 1.1 1.6 1.4-2.9 9-9.7 3.4-7.2 2.9-15.3.2-19.3.9-8.3 2.7-6 2.3-1.9ZM175 85.7l-1.6 12.7-5.1 14.2-5.5 8-7.3 5.1 5.4-1.5 2.9-2.1 5.6-6.6 2.4-4.5 3.2-11.2ZM42.9 43.1l-6.6 1.4-5.3 4.4-1.4 4.9 1.3 6.6.3-5.8 2.8-6 3.6-3.3ZM26 97.8l-1.9-5.5-.6-4.7 1.9-5.7 3.3-2.9 4.8-2.2 8.1-.9 7.6 1.9 4.2 2.7 5 6.2 7.3 11.5 4.1 1.3 4.4-.4-4.8 1.1-5.2-.8-2.6-2-5.6-9.2-3.9-4.1-5.1-3.2-6.2-1.4-7.3 1.3-5.6 3.8-2.1 5.1ZM88.4 87.1l5.2-4.5 4.4-1.5 7.7.8 5.6 2.9-5.1-1.6-7.1-.4-5.3 1.2ZM40.9 125.7l6.6-4.4 7.1-1.4 12.1 2.6 15.5 1.3 2.7 1.5 2.2 2.6-3.9-2.8-15.2-.3-15.4-2.9-6.4.8ZM62.6 142.7l4.4 1.5 5.9 4.5 4.8 6.9 2.4 5.7-2.4-8.5-3.8-6.5-5.6-4.6-4.9-1.9-5.2-.1-5.2 1.6-5.1 3-7 6.4 11.3-6.6 4.8-1.3ZM180.8 156.3l-2.7-.7-6.5.8-19.6 8.8 17.6-10.6 5.9-1.1 2.7.7 2.5 1.7ZM100.1 173.7l12.3-7.1 4-1.4 5.7.4 11.3 3.8-16.4-2.1ZM183.4 152.3l3.7 4.7 2.1 6.3.3 7.1-3.3 15 1 2 1.2.5-.2-2.8 2.8-10.3.4-10.1-2-6.4Z\" fill=\"#fcf8f8\" fill-rule=\"evenodd\" /><path d=\"M130.4 83.2l8.3-6 5.9-5.5 3.8-5.2 7.7-14.1-.9 23.4-1.4 6.7-2.7 5.1 1.7-7.9-.8-3-2.2-2.5-1.5-.8-3.1 0-10.4 5.7Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M123.7 149.7l9.2 3.4 4.7.9 9.5.1 9.5-2.5 4.7-2.3 9-6.8-9.3 5.5-9.2 2.8-12.4 1Z\" fill=\"#fcf8f8\" fill-rule=\"evenodd\" /><path d=\"M44.6 174.2l4.8 -6.7 1.7 -4 .6 -5.4 1.6 -1.2 1.7 .4 1 2.3 -1.3 6.3 -2.8 3.3 -7 5.2Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M61.3 83.9l4.2 9.4 3.3 2.7 3.4.4 3.7-.6 3.7-2.9-3.2-2.2-2.2-3.6-.5 3.2-2.6.8-5.2-1.8-2.9-3.5ZM80.9 116.8l5.5-1.6 4.9-3.3 2-3.7.9-6.1-4.4 8.5-3.4 3.3-5.1 3.3ZM99.3 135.1l6.5 4.3 3 .8 1.7-.5-.9-2.6-3.6-4.8-.3 2.3-1.7 1.4ZM51.8 137.7l8-.5 6.8 1.7 3.4 1.7 6 5.2 4.1 8-2.8-9.3-2.8-4.3-3.8-3.3-4.8-1.8-5.9-.7-3.7.8ZM145.4 123.6l7-1.9 7.6-5.9 4.4-6.9 3.1-9.8-3 7.6-5.5 8.1-5.7 4.9Z\" fill=\"#d18293\" fill-rule=\"evenodd\" /><path d=\"M146.7 67.5l2.9-2.4 3.6-.9 2.6 2 1.2 3.6-.6-17.3ZM35.1 41.8l.7-4.2 1.6-2 2.7-.5 2.3.7 3.9 4.7-2.9-.4-6.6.9ZM172.5 30.7l4.7 -2.8 2.1 -.2 3.5 1.5 2.5 3.4 1.5 7.3 -3.8 -4.3 -6.6 -4.9ZM183.7 125.2l1.6 5.8-2.7-1-2.7 1ZM149.6 188.8l1.7 2.4 4.2 3.5 7.4 2.9-2.5-3.3-2.2-4.9-.6-6.4-4.6 3.6Z\" fill=\"#bb5a74\" fill-rule=\"evenodd\" /><path d=\"M200.9 81.3l6.2 13.1 7 22.4 3.2 17.7.7 18.3-2.5 15.6-3.4 10.4-7.3 13.3-6.1 6 5.3-9.3 2.2-8 .8-10.8-1.2-14.2.6.6.7-.4 1.6-3.8 1.5-12.1-1.1-18-1.2-6.1-3.2-9.2-3.7-5.1-3.5-1.3-2.6 2.4-1.5 4.7-.9.9 3.2-17.9Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M190.9 111.1l-5.2 13.2 2.2 7.1 3.1.3 4.1 2.8-3.2-4.1-1.9-5.1.6-2.9 1.7-2.2 1.5-.4 1.7 1-4.6-8.4ZM45.1 179l6.7 1 6.7-1-1.8-4.3-.7-7.2-6.7 5.3Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M46.7 176.5l5.1-6 3.6-2.6 2.5 9-3.8-4.1-1.6-.2-1.7 1.1Z\" fill=\"#bb5a74\" fill-rule=\"evenodd\" /><path d=\"M70.9 189.3l2.9 1.8 9.6 1.8 12.7 .5 7.5 -.9 16.2 -5.8 5 -.3 4.4 1.7 -4.6 6 -4.3 3.8 -9.7 5.1 -8.5 2.9 4.8 -4.3 .6 -1.9 -1.1 -.8 -10.2 -1 -12.6 -2.4 -9.1 -2.7 -3.8 -2.1ZM138.4 202.1l2.3 2.5 6.3 4.3 7.9 3.1 8.3 1.6 7.7-.1 3.3-.8 6.7-2.7 4.1-3.5-11.6-.9-4.2-1.5-2.9-2.4.1 2.9-2.2 2.9-5 1.5-3.7-.2-10.3-3.2ZM129.1 193.3l2.1-2.6 1.4-.5 9.3 1.3 5.6-.9.8 3.6-4.9-1.1-4.9 1.6-2 2.5-.2 3.7-5.3-4.1-1-1.9.5-1.6ZM15.9 74.2l2.3 9.2.8 11.3 3.9 13.1 1.1 6.6-.2 4.7-3.4 12.8.2 6.4 1.8 3.9 4.4 4.4 5.7 2.5 5.9.2-9 10.4-4.3 3.8.2-3-6-9.5-2.7-8.3-.3-9.7 2.8-12.7.4-5.2-3.8-19.5 1.4-15.1-.6-4.1Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M28.4 149.7l2.4 3.6.5 6.5 1.5-3 5.6-6.7-3.1-.7-3.1.3Z\" fill=\"#bb5a74\" fill-rule=\"evenodd\" /><path d=\"M25.9 55.9l2.1 9.3 2.2 4.9 2.3 2.7-5.8 2.2-5.5 3.5 2.1-3.9 1.1-4.4-1.1-14.1.5-3.9 1.6-3Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M25.1 54.6l.1-3.5 1.3-3.3 3.1-3.8 3.5-2.7 1.2-5.3 3.1-3.5 1.8-.4 3.7 1.2 8 7.6-4.5-8.3-4.2-3.6-5.1-1.3-2.5.5-3.6 2.1-4.1 6-3 12 .5 10.7 2.1 3.7ZM70.1 53.7l9.5 6.1 9.1 3.3 10.5 1.1 5.5-.6 5.6-1.6 5.6-2.8 8.3-12.5-12.1 9.8-10.2 3.1-12.9.6-5.9-1.3-8.4-3.2ZM203.8 39.1l.8 11.8-1 14-2.6 9.4-4.8 8.8.9-15.1-.8-7.4-2.2-7.3 3.9 6.2 1.4.5 1.8-1 2.4-8.8Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M122 53.8l5.1-7.2 4.1-2.9ZM85.4 47.6l11.2 1 12.1-.8 7.8-2 6.9-3.5-9.1 2.6-13.9 2.6-8.8.8ZM38.7 12.9l-8.3.7-5.5 3.2-2.5 2.9-3.8 9.3-1.6 15 2.7-11.9 5.3-11.2 5.7-5.4ZM13.5 131.1l-2.5-12.6-1-11.8.4-15 1.4-10.5-.3 27.7ZM127.9 112.4l-3.2-10.1-.3-6 1.8-5.3 4.7-4.7-3.4 6-1.5 5.8.4 7.3ZM205.8 153.2l-4.1-12-5-7 4 2.9 3.5 5.6 1.4 4.9Z\" fill=\"#fcf8f8\" fill-rule=\"evenodd\" /><path d=\"M97.9 95.6l-2.5 7.7 -.4 5.6 1.1 6.2 2.9 7.1 10.1 15 5.9 5.4 7.2 3.9 14.4 3.2 5.4 .1 9.9 -1.3 12.8 -5.3 7.6 -5.5 7.1 -6.7\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M38.8 149.2l6.9 -7 7.4 -4.5 8.2 -1.1 9.1 3 4.4 3.4 3.1 4.1 2 4.6 4.7 16.9 2 2.5 3 1.2 3.5 .1 6.5 -1.7 11.6 -6.2 5.6 -1.7 5.6 .6 12.8 3.9 7.7 -.9 6.6 -3 18.2 -11.2 7.2 -1.6 3.4 .6 5.3 3.7 2.8 5.2 .7 9.2 -3.3 16.5 .8 3 2.5 .7\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M168 168.9l1.3 1.1-.1 2.6-10.8 10.5M52.1 155.6l2.8.2 1.2 1.9-.3 9.5M95.5 110.7l-5.8 6.1-6.4 3-8.8 1.1-12.7-1.9-5.3-2-3.8-2.6-9.6-17.3-3-3.6-1.3-.6-1 .5\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M56.3 117.3l-6.8.5-5.5 2.3-6.2 5.7-7.8 10.6-2.4 1-1.3-1.4M81.3 120.4l6.5 4.1 12 12 7 3.3 4.9.5M145.5 107.6l-2.4-3-.1-3 8.1-12.2 4.5-10.4.8-7-.1-16.1 2.3-12.7M81.3 155.9l4 6.3 6 4.5 5.9 1.4 7.9-.2\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M45.5 102.3C45.5 105.8 46.8 109.4 45.9 112.9A63.7 63.7 0 0 1 43.8 120.4M118.4 89.3l2.1 0 2.8-1.2 8-5.9-7.4 8.2-1.6 3.3-.6 3.6M111.7 140.4l-4.9-.5-7-3.3-12-12-4.3-3.2-2.6-.9 7.9-3.3 6.6-6.5 1.7 7.1 3.1 6.6ZM105.1 167.9l-7.9.2-5.9-1.4-6-4.5-4-6.3 3.3 12.6 3.3 3.4 3.4.6 4.9-.6Z\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M45.5 102.3l.6 9.6-2.3 8.6 5.7-2.5 7.3-.6-4.8-3.4ZM147.6 164.8l-16.7 1.3 7.7 1.4M121.7 97.4l.6-3.6 1.6-3.3 7.4-8.3-8 6-2.8 1.2-2.5 0Z\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M176.2 69.9l-1.9-.1-1.8 3.1-1.6 22.8-2.8 9.4-4.2 8.6-4.2 5.5-4.7 3.7-5.1 2.2-5.4.7-5.6-.5-4.8-1.6-5.6-4.6-2.6-4.6-4.3-16.2-2.7-6.8-5.8-8.4-5.2-3.3-5.2-1.3-4.5 0-3.8 1.1-6.2 4.4-9.5 9.8-8.3 1.9-3.8-1.9-6.5-11-7.1-6.1-9.1-3.3-9.2-.3\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M160.4 38.6l-7.5 19-4.5 7.9-6.8 7.9-10.3 8.9M59.3 65l6.6 7M80.5 92.4l5.8-6.7-5.2-1.3-4.5-2.2-5.6-4.6-5-5.7 9.5 16.5M90.1 127.1l11.7.4M135 39.7l-5.3 2.9-4.5 4.1-5.2 7-3.3 6 5.7-3.5 5.2-4.4 4.2-5.5\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M175.9 71.6l.1-3.2-1.8-2.5-1.4 4.1.8 3.8 2.3 2.2M186.7 187.1l-.8 5.3M167.9 170.5l2.5-2.2M52.6 155.9l.9-1.7M96.8 95.9l2.9 1.4 -1.8 1.7 -1.8 -.7M58.8 66.2l2.5-2.2-.8 4.9 4.2-2.7-1.3 5.8M38.8 93.8l.9-3.5M26.7 135.1l-.3 2.6 1.6.8 1.4-2.1-.5-2.6\" fill=\"none\" stroke=\"#e6c1c7\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M127.6 192.9l2.8-5M69.3 37.3l7.2 10.1 6.9 3.7M201.7 77.8l-7.2 10.6M20.9 83.2l-2.1-5.3-2.1-9.4M179.6 28.1l2.5.6 3.4 4 1.8 5.3-.3 3M190.8 107.6l7.7 15.7.2 5.1-2.4 2.2M183.8 124.4l.3 2.3 2.1 3.9M149.6 189.2l1 2.4 4.2 3.4 8.9 3.1M35.1 41.3l.4-3.2 3-2.6 4.5 1 3 3.1\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M82.2 53l0-4-2.9 1.3-.4-3.3-3.8 1.1-.6-1.3-1.6.9M195 127.6l3.4 2 2.2-.8-.4-1.6-3.5-2.2\" fill=\"none\" stroke=\"#e6c1c7\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M43 180.8l12.9 -13.8 3.3 11 5.4 7.9 6.5 4.3 9 2.8 8.3 1.1 10.2 -.6 5.3 -1.3 11.3 -4.6 6.8 -1.1 5.4 .6 11.7 3.3 4.5 0 6.9 -2.2 7.9 -5.2 -.2 3.1 1 4.1 4 6.8 4.4 4.2 6.7 3.2 3.8 .8 7.2 -.4 6.4 -2.7 5.3 -4.7 5.2 -10 3.2 -14.7 -.1 -9.4 -2.1 -11.6 -4.6 -11.1 -3.4 -4.5 -4.3 -3.3 -5.2 -1.8 -6.1 0 6.2 -10.3 5.5 -15.5 4 -27 -.7 -17.7 -2.8 -10.5 -4.9 -9.5 -6 -6.8 -6.4 -3.3 -6.3 .3 -5.5 4.2 -2.3 3.6 .4 -.9 -1.3 1.1 -3.2 .7 -6.1 -.5 -6.5 -1.6 -4.7 -2.8 -1.5 -2.6 -4.8 12.5 -3.4 5 -4.1 4.2 -4.8 3.5 -6.3 3.2 -5.8 2.2 -10.6 1.8 -9.4 -1.2 -8.6 -3.5 -19.1 -13.2 -11.1 -5.6 -7.3 -1.3 -3.7 .4 -6.8 3 -4 5 -1.1 6.4 .4 3.5 2.5 7.4 4.8 7.4 -4.2 .9 -5.8 3.8 -1.9 2.3 -2.1 5.2 .2 9 3.6 12.4 1 7.5 -1 7.2 -3 8.9 -.9 7 1.5 6.1 4.3 4.4 7.7 1.7 5.2 -.4 -10 12.2 -7.4 7.2 -2.1 3.7 -.6 4\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M137.5 31.1l.2 1.9 1.4 1.8 7.3 3.5 10.2 1.3 3.4 -.9 1.2 -1.3 0 -1.9 -1.3 -1.8 -5.6 -3 -12.8 -1.7 -3.1 .7Z\" fill=\"#f7eced\" fill-rule=\"evenodd\" /><path d=\"M140.4 32.5l5.5 3 2.1-.3 1.1.9 6.2.7 1.9-1.1-1.2-1.8-7.2-.5-2.1-1.5-5.8.6Z\" fill=\"#bb5a74\" fill-rule=\"evenodd\" /><path d=\"M137.6 31.1l.2 1.9 1.4 1.8 7.3 3.5 10.2 1.3 3.4-.9 1.2-1.3 0-1.9-1.3-1.8-5.6-3-12.8-1.7-3.1.7\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M140.4 32.5l5.5 3 2.1-.3 1.1.9 6.2.7 1.9-1.1-1.2-1.8-7.2-.5-2.1-1.5-5.8.6\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\".8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" />"};
+/* Intestinal protozoa scene: amoebic colitis, amoebic liver abscess and giardiasis on one stage.
+ * Organs come from organs.lib.js; vessels and particles anchor to their ports. Drug dots hunt
+ * their targets: tissue drug dots stick to wall parasites and shrink them, luminal dots clear
+ * the bowel lumen, drainage shrinks the abscess. */
 const LY = { stage: $("stage"), over: $("over"), panel: $("panel") };
 const WW = SC.W;
-function mkPool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0, u: 0 }; }); }
+function mkPool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0, u: 0, hitT: 0, s: 1 }; }); }
 const freeP = (pl) => pl.find((p) => !p.on);
 function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.u = 0; p.e.setAttribute("opacity", "1"); }
 function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
@@ -430,112 +750,192 @@ function addMark(ty, drugs, x, y, text, tx, tyy, tip, good) {
   if (good) { mk("path", { class: "mk-g", d: "M" + f1(x - 6) + " " + f1(y) + "l4 5l8 -10" }, g); } else { mk("circle", { class: "mk-c", cx: f1(x), cy: f1(y), r: 8 }, g); mk("path", { class: "mk-x", d: "M" + f1(x - 4) + " " + f1(y - 4) + "l8 8M" + f1(x + 4) + " " + f1(y - 4) + "l-8 8" }, g); }
   pill(g, text, x, y, tx, tyy, tip); marks.push({ g, ty, drugs }); return g;
 }
+/* hunters: drug dots that home onto parasites and sit on them while active */
+function hunters(pool, targets, active, dt, speed) {
+  pool.forEach((h, i) => {
+    if (!active || !targets.length) { if (h.on) kill(h); return; }
+    const T = targets[i % targets.length];
+    if (!T) { if (h.on) kill(h); return; }
+    if (!h.on) emit(h, T.x + rnd(-90, 90), T.y + rnd(-70, 70), 0, 0, 0);
+    const dx = T.x - h.x, dy = T.y - h.y, d = Math.hypot(dx, dy) || 1, v = speed || 150;
+    const step = Math.min(d, v * dt);
+    h.x += dx / d * step; h.y += dy / d * step;
+    place(h.e, h.x, h.y, 0, 1);
+    if (d < 14) T.hitT = 1;
+  });
+}
+/* parasites shrink and fade while a drug dot sits on them, and recover when it leaves */
+function parasiteFace(P, Par, dt, base) {
+  P.hitT = Math.max(0, (P.hitT || 0) - dt * 0.22);
+  const want = (0.35 + 0.65 * Par) * (P.hitT > 0 ? 0.38 : 1);
+  P.s = lerp(P.s === undefined ? 1 : P.s, want, Math.min(1, dt * 2));
+  return P.s;
+}
+function parasiteAlpha(P, Par) { return ((0.2 + 0.8 * Par) * (P.hitT > 0 ? 0.4 : 1)).toFixed(2); }
 function cystAt(parent, s) { const g = mk("g", {}, parent); mk("ellipse", { class: "am-cyst", rx: 10 * s, ry: 7 * s }, g); mk("circle", { class: "am-cystn", cx: -3 * s, cy: -1, r: 1.7 * s }, g); mk("circle", { class: "am-cystn", cx: 3 * s, cy: 1.5 * s, r: 1.7 * s }, g); return g; }
 function beaker(parent, stoolCls) {
   mk("path", { class: "am-beaker", d: "M788 326h94l-10 74h-74z" }, parent);
   const st = mk("rect", { class: stoolCls, x: 796, y: 390, width: 78, height: 8, rx: 3 }, parent);
   return st;
 }
+function stoolLevel(rect, Gut) { const sh = 5 + Gut * 18; rect.setAttribute("y", f1(394 - sh)); rect.setAttribute("height", f1(sh)); }
+function capText(ty, d) {
+  if (ty === 0) {
+    if (d === 1) return "Metronidazole kills parasites in the colon wall. Ulcers heal and bleeding slows.";
+    if (d === 2) return "Luminal agent clears parasites left in the bowel. Fewer cysts pass on.";
+    if (d === 3) return "Combined treatment kills wall parasites and clears the bowel. Best effect.";
+    return "No treatment. Parasites invade the colon wall and ulcers bleed.";
+  }
+  if (ty === 1) {
+    if (d === 1) return "Metronidazole kills parasites at the abscess rim. The abscess shrinks.";
+    if (d === 2) return "Luminal agent only clears the bowel. The liver abscess stays.";
+    if (d === 3) return "Combined treatment plus drainage if needed. The abscess shrinks most.";
+    return "No treatment. Parasites reach the liver and an abscess grows.";
+  }
+  if (d === 1) return "Metronidazole kills Giardia on the surface. Villi recover.";
+  if (d === 2) return "Luminal clearing removes leftover cysts. Stool firms up.";
+  if (d === 3) return "Combined treatment clears Giardia and cysts. Best effect.";
+  return "No treatment. Giardia coats the duodenum and fat passes unabsorbed.";
+}
 
 /* ================= AMOEBIC COLITIS ================= */
 (function () {
   const g = mk("g", {}, LY.stage);
-  mk("rect", { class: "am-lumen", x: 34, y: 146, width: 892, height: 78, rx: 10 }, g);
-  mk("rect", { class: "am-tis2", x: 34, y: 238, width: 892, height: 184, rx: 10 }, g);
-  mk("rect", { class: "am-epi", x: 34, y: 224, width: 892, height: 14, rx: 6 }, g);
-  mk("path", { class: "am-ulcer", d: "M462 224h36l18 40c36 16 44 58 22 90c-20 30-96 30-116 0c-22-32-14-74 22-90z" }, g);
-  mk("rect", { class: "am-vessel", x: 34, y: 388, width: 892, height: 24, rx: 12 }, g);
+  const colonO = organ(g, "colon", 300, 255, 230, {});
+  const CP = colonO.ports, ux = CP.transverse[0], uy = CP.transverse[1];
+  const ulcer = mk("ellipse", { class: "am-ulcer", cx: f1(ux), cy: f1(uy), rx: 30, ry: 42 }, g);
   const stoolRect = beaker(g, "am-stool");
-  const cysts = Array.from({ length: 6 }, (_, i) => ({ e: cystAt(g, 1), x: 70 + i * 130, y: 178 + (i % 2) * 22, ph: i * 1.3 }));
-  const trophs = Array.from({ length: 5 }, (_, i) => { const e = mk("g", {}, g); cell(e, { cls: "amb", r: 13, nuc: 0.38, seed: 11 + i, wob: 0.22 }); return { e, x: 150 + i * 150, y: 200, ph: i * 1.7 }; });
-  const macs = [[380, 320], [590, 330], [680, 300]].map(([x, y], i) => { const e = mk("g", {}, g); cell(e, { cls: "mac", r: 16, nuc: 0.4, seed: 21 + i, wob: 0.13 }); place(e, x, y); return { e, x, y, ph: i * 2 }; });
+  const cysts = Array.from({ length: 6 }, (_, i) => ({ e: cystAt(g, 1), x: 70 + i * 120, y: 172 + (i % 2) * 22, ph: i * 1.3, hitT: 0, s: 1 }));
+  const homes = [218, 258, 300, 342, 382];
+  const trophs = homes.map((hx, i) => { const e = mk("g", {}, g); cell(e, { cls: "amb", r: 13, nuc: 0.38, seed: 11 + i, wob: 0.22 }); return { e, hx, x: hx, y: 240, ph: i * 1.7, hitT: 0, s: 1 }; });
+  const macs = [[490, 352], [590, 362], [680, 340]].map(([x, y], i) => { const e = mk("g", {}, g); cell(e, { cls: "mac", r: 16, nuc: 0.4, seed: 21 + i, wob: 0.13 }); place(e, x, y); return { e, x, y, ph: i * 2 }; });
   const blood = mkPool(18, () => dotP(g, "p-blood", 2.6));
   const stoolP = mkPool(20, () => mk("path", { class: "p-fl", d: "M0 -3.4C2.2 -.6 2.8 .8 2.8 1.8A2.8 2.8 0 0 1 -2.8 1.8C-2.8 .8 -2.2 -.6 0 -3.4Z" }, g));
+  const metro = mkPool(10, () => dotP(g, "p-metro", 3.2));
+  const lum = mkPool(8, () => dotP(g, "p-lum", 3));
   let accB = 0, accS = 0;
+  const st = { ux, uy };
   types.push({ g, upd(dt, m) {
-    cysts.forEach((c, i) => { c.x += dt * 14 * (0.4 + m.Par); if (c.x > 905) c.x = 55; place(c.e, c.x, c.y + Math.sin(tm / 700 + c.ph) * 3, Math.sin(tm / 900 + c.ph) * 14, 0.6 + 0.4 * m.Par); c.e.style.opacity = (0.35 + 0.65 * m.Par).toFixed(2); });
-    trophs.forEach((tr, i) => { const dive = 0.5 + 0.5 * Math.sin(tm / 2400 + tr.ph); const tx = tr.x + Math.sin(tm / 1100 + tr.ph) * 18, ty = 202 + dive * (i === 2 ? 62 : 18); place(tr.e, tx, ty, Math.sin(tm / 500 + tr.ph) * 18, 0.55 + 0.45 * m.Par); tr.e.style.opacity = (0.25 + 0.75 * m.Par).toFixed(2); });
+    const tissue = m.drug === 1 || m.drug === 3, luminal = m.drug === 2 || m.drug === 3;
+    hunters(metro, trophs, tissue, dt, 160); hunters(lum, cysts, luminal, dt, 130);
+    cysts.forEach((c) => { c.x += dt * 14 * (0.4 + m.Par); if (c.x > 790) c.x = 55; const s = parasiteFace(c, m.Par, dt);
+      place(c.e, c.x, c.y + Math.sin(tm / 700 + c.ph) * 3, Math.sin(tm / 900 + c.ph) * 14, s); c.e.style.opacity = parasiteAlpha(c, m.Par); });
+    trophs.forEach((tr, i) => { const dive = 0.5 + 0.5 * Math.sin(tm / 2400 + tr.ph);
+      tr.x = tr.hx + Math.sin(tm / 1100 + tr.ph) * 14; tr.y = 232 + dive * (i === 2 ? 60 : 26); const s = parasiteFace(tr, m.Par, dt);
+      place(tr.e, tr.x, tr.y, Math.sin(tm / 500 + tr.ph) * 18, s); tr.e.style.opacity = parasiteAlpha(tr, m.Par); });
     macs.forEach((mc) => place(mc.e, mc.x + Math.sin(tm / 1200 + mc.ph) * 4, mc.y + Math.cos(tm / 1400 + mc.ph) * 3, 0, 0.6 + 0.4 * m.Inj));
-    accB += dt * m.Inj * 7; while (accB >= 1) { accB--; const p = freeP(blood); if (p) emit(p, 480 + rnd(-18, 18), 250 + rnd(0, 60), rnd(-8, 8), rnd(-16, -8), 0); }
+    ulcer.setAttribute("rx", f1(30 * (0.35 + 0.65 * m.Inj))); ulcer.setAttribute("ry", f1(42 * (0.35 + 0.65 * m.Inj)));
+    ulcer.style.opacity = (0.25 + 0.75 * m.Inj).toFixed(2);
+    accB += dt * m.Inj * 7; while (accB >= 1) { accB--; const p = freeP(blood); if (p) emit(p, st.ux + rnd(-16, 16), st.uy + rnd(0, 40), rnd(-8, 8), rnd(-16, -8), 0); }
     blood.forEach((p) => { if (!p.on) return; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.y < 232) kill(p); });
     accS += dt * m.Gut * 9; while (accS >= 1) { accS--; const p = freeP(stoolP); if (p) emit(p, rnd(70, 300), rnd(162, 206), rnd(50, 72), 0, 0); }
     stoolP.forEach((p) => { if (!p.on) return; if (p.x < 832) { p.x += p.vx * dt; p.y = clamp(p.y, 156, 214); } else { p.x = 833; p.y += 78 * dt; } p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.style.fill = "var(--c-bad)"; if (p.y > 386) kill(p); });
-    const sh = 5 + m.Gut * 18; stoolRect.setAttribute("y", f1(394 - sh)); stoolRect.setAttribute("height", f1(sh));
+    stoolLevel(stoolRect, m.Gut);
+    stoolRect.setAttribute("class", m.Gut > 0.45 ? "am-stool" : "am-stoolok");
   } });
-  addLabel(0, "Cysts swallowed", 90, 182, 115, 148, "Mature cysts of Entamoeba histolytica are swallowed in food or water contaminated with feces. They survive the stomach and excyst in the small bowel.");
-  addLabel(0, "Trophozoite", 300, 202, 305, 148, "The active feeding form. In the colon it attaches to the lining, digests cells and can invade. In the lumen alone it may cause no symptoms.");
-  addLabel(0, "Flask ulcer", 480, 300, 485, 148, "Flask shaped ulcer: a narrow opening at the surface with a wide undermined base in the layer below, made as trophozoites spread sideways under the lining.");
-  addLabel(0, "Colon wall", 660, 231, 665, 148, "Colon wall: invasion and inflammation here give pain and frequent small bloody stools. Deep invasion can rarely perforate the wall.");
-  addLabel(0, "Bloody stool", 833, 340, 835, 410, "Bloody, mucoid stool of amoebic dysentery: blood and mucus from the ulcerated colon, passed often in small amounts.");
-  addMark(0, [1, 3], 480, 332, "Tissue form killed", 220, 408, "Metronidazole kills trophozoites invading the colon wall. It is the tissue agent in amoebiasis.", true);
-  addMark(0, [2, 3], 180, 182, "Lumen cleared", 505, 408, "A luminal agent clears trophozoites and cysts left in the bowel lumen after tissue treatment, reducing relapse and spread to others.");
+  addLabel(0, "Cysts", 110, 185, 100, 78, "Mature cysts swallowed in food or water contaminated with feces. They survive the stomach and release trophozoites.");
+  addLabel(0, "Colon", 300, 105, 300, 78, "Colon: trophozoites attach to the lining here, digest cells and invade. Invasion gives pain and frequent small bloody stools.");
+  addLabel(0, "Ulcer", ux, uy, 500, 78, "Flask shaped ulcer: a narrow opening at the surface with a wide base below, made as trophozoites spread under the lining.");
+  addLabel(0, "Bloody stool", 833, 350, 790, 78, "Bloody mucoid stool of amoebic dysentery: blood and mucus from the ulcerated colon, passed often in small amounts.");
+  addMark(0, [1, 3], ux, uy + 62, "Tissue drug works", 250, 408, "Metronidazole, the tissue agent, kills trophozoites invading the colon wall.", true);
+  addMark(0, [2, 3], 140, 190, "Bowel cleared", 560, 408, "A luminal agent clears parasites and cysts left in the bowel lumen, reducing relapse and spread.", true);
 })();
 
 /* ================= LIVER ABSCESS ================= */
 (function () {
   const g = mk("g", {}, LY.stage);
-  mk("rect", { class: "am-gutbox", x: 34, y: 290, width: 130, height: 120, rx: 12 }, g);
-  mk("path", { class: "am-portal", d: "M164 350C250 350 300 342 372 322C430 306 480 292 514 286" }, g);
-  mk("path", { class: "am-liver", d: "M214 152h688q24 0 24 26v182q0 62-66 62H266q-66 0-66-62V212q0-60 14-60z" }, g);
-  const abscess = mk("circle", { class: "am-abscess", cx: 580, cy: 285, r: 68 }, g);
-  const gutCells = [[78, 338], [120, 368]].map(([x, y], i) => { const e = mk("g", {}, g); cell(e, { cls: "amb", r: 11, nuc: 0.38, seed: 31 + i, wob: 0.2 }); place(e, x, y); return { e, x, y }; });
+  const srcO = organ(g, "colon", 115, 335, 120, {});
+  const liverO = organ(g, "liver", 620, 245, 380, {});
+  const LP = liverO.ports, ax = LP.lobe[0], ay = LP.lobe[1];
+  const vessel = mk("path", { class: "am-portal", d: "M175 330C300 330 400 360 563 386" }, g);
+  vessel.setAttribute("d", "M175 330C300 330 400 360 " + f1(LP.porta[0]) + " " + f1(LP.porta[1]));
+  const abscess = mk("circle", { class: "am-abscess", cx: f1(ax), cy: f1(ay), r: 68 }, g);
+  const drain = mk("path", { class: "am-drain", d: "M" + f1(ax + 60) + " " + f1(ay) + "L880 " + f1(ay + 40) }, g);
+  drain.style.display = "none";
+  const gutCells = [[95, 320], [135, 360]].map(([x, y], i) => { const e = mk("g", {}, g); cell(e, { cls: "amb", r: 11, nuc: 0.38, seed: 31 + i, wob: 0.2 }); place(e, x, y); return { e, x, y, hitT: 0, s: 1 }; });
   const debris = Array.from({ length: 12 }, (_, i) => { const e = mk("circle", { class: "am-debris", r: 3 + (i % 3) }, g); return { e, a: i * 0.9, r: 14 + (i % 4) * 11, ph: i }; });
-  const rim = Array.from({ length: 4 }, (_, i) => { const e = mk("g", {}, g); cell(e, { cls: "amb", r: 10, nuc: 0.38, seed: 41 + i, wob: 0.2 }); return { e, a: i * 1.57 + 0.4 }; });
-  const portalTrack = track([[164, 350], [280, 348], [380, 330], [470, 302], [514, 286]]);
+  const rim = Array.from({ length: 4 }, (_, i) => { const e = mk("g", {}, g); cell(e, { cls: "amb", r: 10, nuc: 0.38, seed: 41 + i, wob: 0.2 }); return { e, a: i * 1.57 + 0.4, x: 0, y: 0, hitT: 0, s: 1 }; });
+  const portalTrack = track([[175, 330], [300, 332], [400, 352], [LP.porta[0], LP.porta[1]]]);
   const travellers = mkPool(6, () => { const e = mk("g", {}, g); cell(e, { cls: "amb", r: 8, nuc: 0.38, seed: 51, wob: 0.2 }); return e; });
-  const stoolRect = mk("rect", { class: "am-stool", x: 796, y: 386, width: 10, height: 4, rx: 2, opacity: 0 }, g);
-  let accT = 0;
+  const drips = mkPool(8, () => dotP(g, "am-debris", 3));
+  const metro = mkPool(10, () => dotP(g, "p-metro", 3.2));
+  const lum = mkPool(6, () => dotP(g, "p-lum", 3));
+  let accT = 0, accD = 0;
+  const st = { ax, ay, r: 68, drainMix: 0 };
   types.push({ g, upd(dt, m) {
-    const pulse = 1 + 0.05 * m.Inj * Math.sin(tm / 420); abscess.setAttribute("r", f1(68 * pulse)); abscess.style.opacity = (0.45 + 0.55 * m.Par).toFixed(2);
-    debris.forEach((d) => { const a = d.a + tm / 9000; d.e.setAttribute("cx", f1(580 + Math.cos(a) * d.r)); d.e.setAttribute("cy", f1(285 + Math.sin(a) * d.r * 0.8)); d.e.style.opacity = (0.35 + 0.65 * m.Par).toFixed(2); });
-    rim.forEach((r2) => { place(r2.e, 580 + Math.cos(r2.a) * 68, 285 + Math.sin(r2.a) * 68, 0, 0.5 + 0.5 * m.Par); r2.e.style.opacity = (0.3 + 0.7 * m.Par).toFixed(2); });
-    gutCells.forEach((c, i) => place(c.e, c.x + Math.sin(tm / 900 + i) * 3, c.y + Math.cos(tm / 1100 + i) * 3, 0, 0.5 + 0.5 * m.Par));
-    accT += dt * m.Par * 1.6; while (accT >= 1) { accT--; const p = freeP(travellers); if (p) emit(p, 0, 0, 0, 0, 0); }
-    travellers.forEach((p) => { if (!p.on) return; p.u += dt * 0.16; const q = portalTrack.at(clamp(p.u)); place(p.e, q.x, q.y, 0, 1); if (p.u >= 1) kill(p); });
+    const tissue = m.drug === 1 || m.drug === 3, luminal = m.drug === 2 || m.drug === 3;
+    st.drainMix = lerp(st.drainMix, m.drug === 3 ? 1 : 0, Math.min(1, dt * 2));
+    drain.style.display = st.drainMix > 0.4 ? "" : "none";
+    hunters(metro, rim, tissue, dt, 160); hunters(lum, gutCells, luminal, dt, 130);
+    gutCells.forEach((c, i) => { const s = parasiteFace(c, m.Par, dt);
+      place(c.e, c.x + Math.sin(tm / 900 + i) * 3, c.y + Math.cos(tm / 1100 + i) * 3, 0, s); c.e.style.opacity = parasiteAlpha(c, m.Par); });
+    const wantR = 68 * (0.4 + 0.6 * m.Par) * (1 - 0.42 * st.drainMix);
+    st.r = lerp(st.r, wantR, Math.min(1, dt * 1.5));
+    abscess.setAttribute("r", f1(st.r)); abscess.style.opacity = (0.45 + 0.55 * m.Par).toFixed(2);
+    debris.forEach((d) => { const a = d.a + tm / 9000; d.e.setAttribute("cx", f1(st.ax + Math.cos(a) * d.r * st.r / 68)); d.e.setAttribute("cy", f1(st.ay + Math.sin(a) * d.r * 0.8 * st.r / 68)); d.e.style.opacity = (0.35 + 0.65 * m.Par).toFixed(2); });
+    rim.forEach((r2) => { r2.x = st.ax + Math.cos(r2.a) * st.r; r2.y = st.ay + Math.sin(r2.a) * st.r; const s = parasiteFace(r2, m.Par, dt);
+      place(r2.e, r2.x, r2.y, 0, s); r2.e.style.opacity = parasiteAlpha(r2, m.Par); });
+    const srcClear = gutCells[0].hitT > 0 || gutCells[1].hitT > 0 ? 0.5 : 1;
+    accT += dt * m.Par * 1.6 * (luminal ? 0.55 : 1) * srcClear; while (accT >= 1) { accT--; const p = freeP(travellers); if (p) emit(p, 0, 0, 0, 0, 0); }
+    travellers.forEach((p) => { if (!p.on) return; p.u += dt * 0.16; const q = portalTrack.at(clamp(p.u)); place(p.e, q.x, q.y, 0, 0.5 + 0.5 * m.Par); if (p.u >= 1) kill(p); });
+    accD += dt * st.drainMix * 6; while (accD >= 1) { accD--; const p = freeP(drips); if (p) emit(p, st.ax + st.r * 0.8, st.ay + rnd(-8, 8), rnd(60, 90), rnd(8, 20), 0); }
+    drips.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.x > 905 || p.y > 430) kill(p); });
   } });
-  addLabel(1, "From colon", 95, 330, 110, 148, "The source is the colon: trophozoites that invaded the bowel wall can enter small portal veins even when bowel symptoms are mild or absent.");
-  addLabel(1, "Portal blood", 290, 348, 330, 148, "Portal blood carries trophozoites from the colon to the liver, where they lodge and destroy liver tissue.");
-  addLabel(1, "Liver abscess", 580, 217, 580, 148, "A usually single cavity in the liver, most often on the right. Fever and tender liver pain are typical, with few bowel symptoms.");
-  addLabel(1, "Anchovy paste", 580, 285, 790, 148, "Anchovy paste: the odourless reddish brown necrotic centre of the abscess. It has few cells and trophozoites sit at the living rim, not in the centre.");
-  addLabel(1, "Tender liver", 880, 320, 850, 408, "An enlarged, tender liver with fever. A large or left sided abscess, or one that may burst, needs urgent specialist care.");
-  addMark(1, [1, 3], 648, 285, "Tissue agent works", 220, 408, "Metronidazole reaches the liver and kills trophozoites at the abscess rim. Most amoebic liver abscesses settle on drug treatment alone.", true);
-  addMark(1, [2, 3], 95, 372, "Bowel cleared after", 480, 408, "After tissue treatment, a luminal agent clears parasites left in the bowel so infection does not return or spread.");
-  addMark(1, [3], 580, 353, "Drainage rarely", 725, 408, "Drainage is rarely needed: it is kept for selected large, left sided, complicated or poorly responding abscesses, alongside drug treatment.");
+  const vmx = 370, vmy = 348;
+  addLabel(1, "Colon", 115, 300, 110, 78, "The source is the colon: trophozoites that invaded the bowel wall can enter small portal veins even when bowel symptoms are mild.");
+  addLabel(1, "Portal blood", vmx, vmy, 350, 78, "Portal blood carries trophozoites from the colon to the liver, where they lodge and destroy liver tissue.");
+  addLabel(1, "Liver", 620, 108, 600, 78, "Liver: trophozoites lodge here and destroy tissue. Fever with tender liver pain is typical, with few bowel symptoms.");
+  addLabel(1, "Abscess", ax, ay, 800, 78, "A usually single cavity, most often on the right. Its reddish brown necrotic centre holds few cells and trophozoites sit at the living rim.");
+  addMark(1, [1, 3], ax + 68, ay, "Tissue drug works", 220, 408, "Metronidazole reaches the liver and kills trophozoites at the abscess rim. Most abscesses settle on drug treatment alone.", true);
+  addMark(1, [2, 3], 115, 372, "Bowel cleared", 500, 408, "After tissue treatment, a luminal agent clears parasites left in the bowel so infection does not return or spread.", true);
+  addMark(1, [3], ax, ay + 68, "Drain if needed", 740, 408, "Drainage is rarely needed: it is kept for selected large or complicated abscesses, alongside drug treatment.", true);
 })();
 
 /* ================= GIARDIASIS ================= */
 (function () {
   const g = mk("g", {}, LY.stage);
-  mk("rect", { class: "am-lumen", x: 34, y: 146, width: 892, height: 70, rx: 10 }, g);
-  mk("rect", { class: "am-tis2", x: 34, y: 316, width: 892, height: 106, rx: 10 }, g);
-  const villusXs = [92, 162, 232, 302, 372, 442, 512, 582, 652, 722, 792, 862];
-  const villi = villusXs.map((x, i) => { const blunt = i >= 4 && i <= 8, len = blunt ? 46 : 88; const e = mk("rect", { class: "am-villus", x: x - 17, y: 216, width: 34, height: len, rx: 15 }, g); return { e, x, len, blunt }; });
-  const attached = villi.slice(3, 10).map((v, i) => { const e = mk("g", {}, g); cell(e, { cls: "gia", r: 11, nuc: 0.35, seed: 61 + i, wob: 0.12 }); mk("ellipse", { class: "am-disc", cx: 0, cy: 10, rx: 8, ry: 3.4 }, e); place(e, v.x, 216 + v.len + 8); return { e, x: v.x, y: 216 + v.len + 8, ph: i * 1.4 }; });
-  const freeGia = Array.from({ length: 4 }, (_, i) => { const e = mk("g", {}, g); cell(e, { cls: "gia", r: 10, nuc: 0.35, seed: 71 + i, wob: 0.12 }); return { e, x: 120 + i * 200, y: 180, ph: i * 1.6 }; });
-  const cysts2 = Array.from({ length: 5 }, (_, i) => ({ e: cystAt(g, 0.95), x: 80 + i * 170, y: 172 + (i % 2) * 18, ph: i }));
+  const duoO = organ(g, "bowel", 430, 250, 320, {});
+  const surfY = 300;
+  const villusXs = [285, 312, 339, 366, 393, 420, 447, 474, 501, 528, 555];
+  const villi = villusXs.map((x) => ({ e: mk("rect", { class: "am-villus", x: x - 17, y: surfY, width: 34, height: 88, rx: 15 }, g), x }));
+  const attached = villi.slice(2, 9).map((v, i) => { const e = mk("g", {}, g); cell(e, { cls: "gia", r: 11, nuc: 0.35, seed: 61 + i, wob: 0.12 }); mk("ellipse", { class: "am-disc", cx: 0, cy: 10, rx: 8, ry: 3.4 }, e); return { e, v, x: v.x, y: surfY + 96, ph: i * 1.4, hitT: 0, s: 1 }; });
+  const freeGia = Array.from({ length: 4 }, (_, i) => { const e = mk("g", {}, g); cell(e, { cls: "gia", r: 10, nuc: 0.35, seed: 71 + i, wob: 0.12 }); return { e, x: 120 + i * 160, y: 185, ph: i * 1.6, hitT: 0, s: 1 }; });
+  const cysts2 = Array.from({ length: 5 }, (_, i) => ({ e: cystAt(g, 0.95), x: 80 + i * 140, y: 165 + (i % 2) * 18, ph: i, hitT: 0, s: 1 }));
   const stoolRect = beaker(g, "am-stoolg");
   const fat = mkPool(20, () => mk("circle", { class: "sc-p p-fatp", r: 3.4 }, g));
+  const metro = mkPool(10, () => dotP(g, "p-metro", 3.2));
+  const lum = mkPool(8, () => dotP(g, "p-lum", 3));
   let accF = 0;
   types.push({ g, upd(dt, m) {
-    villi.forEach((v, i) => { const target = v.blunt ? 46 + 34 * (1 - m.Inj * 2.2) : 88; const cur = parseFloat(v.e.getAttribute("height")); v.e.setAttribute("height", f1(lerp(cur, clamp(target, 42, 92), Math.min(1, dt * 1.2)))); });
-    attached.forEach((a) => { const v = villi[3 + attached.indexOf(a)]; place(a.e, a.x + Math.sin(tm / 800 + a.ph) * 2, 216 + parseFloat(v.e.getAttribute("height")) + 8, Math.sin(tm / 600 + a.ph) * 10, 0.45 + 0.55 * m.Par); a.e.style.opacity = (0.3 + 0.7 * m.Par).toFixed(2); });
-    freeGia.forEach((fg) => { fg.x += dt * 22 * (0.4 + m.Par); if (fg.x > 905) fg.x = 55; place(fg.e, fg.x, 182 + Math.sin(tm / 500 + fg.ph) * 10, Math.sin(tm / 280 + fg.ph) * 34, 0.5 + 0.5 * m.Par); fg.e.style.opacity = (0.3 + 0.7 * m.Par).toFixed(2); });
-    cysts2.forEach((c) => { c.x += dt * 12 * (0.4 + m.Par); if (c.x > 905) c.x = 55; place(c.e, c.x, c.y + Math.sin(tm / 700 + c.ph) * 2, 0, 0.9); c.e.style.opacity = (0.3 + 0.7 * m.Par).toFixed(2); });
+    const tissue = m.drug === 1 || m.drug === 3, luminal = m.drug === 2 || m.drug === 3;
+    hunters(metro, attached.concat(freeGia), tissue, dt, 160); hunters(lum, cysts2, luminal, dt, 130);
+    villi.forEach((v) => { const target = clamp(46 + 42 * (1 - m.Inj * 1.6), 42, 92); const cur = parseFloat(v.e.getAttribute("height")); v.e.setAttribute("height", f1(lerp(cur, target, Math.min(1, dt * 1.2)))); });
+    attached.forEach((a) => { const h = parseFloat(a.v.e.getAttribute("height")); a.x = a.v.x + Math.sin(tm / 800 + a.ph) * 2; a.y = surfY + h + 8; const s = parasiteFace(a, m.Par, dt);
+      place(a.e, a.x, a.y, Math.sin(tm / 600 + a.ph) * 10, s); a.e.style.opacity = parasiteAlpha(a, m.Par); });
+    freeGia.forEach((fg) => { fg.x += dt * 22 * (0.4 + m.Par); if (fg.x > 790) fg.x = 55; const s = parasiteFace(fg, m.Par, dt);
+      place(fg.e, fg.x, 185 + Math.sin(tm / 500 + fg.ph) * 10, Math.sin(tm / 280 + fg.ph) * 34, s); fg.e.style.opacity = parasiteAlpha(fg, m.Par); });
+    cysts2.forEach((c) => { c.x += dt * 12 * (0.4 + m.Par); if (c.x > 790) c.x = 55; const s = parasiteFace(c, m.Par, dt);
+      place(c.e, c.x, c.y + Math.sin(tm / 700 + c.ph) * 2, 0, 0.9 * s); c.e.style.opacity = parasiteAlpha(c, m.Par); });
     accF += dt * m.Gut * 9; while (accF >= 1) { accF--; const p = freeP(fat); if (p) emit(p, rnd(70, 320), rnd(158, 200), rnd(48, 68), 0, 0); }
     fat.forEach((p) => { if (!p.on) return; if (p.x < 832) { p.x += p.vx * dt; p.y = clamp(p.y + Math.sin(tm / 400 + p.x) * 0.25, 154, 208); } else { p.x = 833; p.y += 76 * dt; } p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.y > 386) kill(p); });
-    const sh = 5 + m.Gut * 18; stoolRect.setAttribute("y", f1(394 - sh)); stoolRect.setAttribute("height", f1(sh));
+    stoolLevel(stoolRect, m.Gut);
+    stoolRect.setAttribute("class", m.Gut > 0.45 ? "am-stoolg" : "am-stoolok");
   } });
-  addLabel(2, "Cysts swallowed", 85, 174, 118, 148, "Giardia cysts are swallowed in contaminated water or food or by fecal oral spread. They excyst in the small bowel and each cyst releases trophozoites.");
-  addLabel(2, "Giardia", 300, 182, 302, 148, "Giardia trophozoite: a pear shaped parasite with flagella. It swims with a falling leaf motion and then attaches to the bowel lining.");
-  addLabel(2, "Sucking disc", 445, 272, 488, 148, "The ventral sucking disc sticks the trophozoite to the duodenal lining. Giardia coats the surface but does not invade the epithelium.");
-  addLabel(2, "Villi blunted", 610, 250, 664, 148, "Heavy coating disturbs the surface and blunts the villi, the small fingers that absorb food. Fat absorption suffers most.");
-  addLabel(2, "Fat not absorbed", 770, 180, 838, 148, "Unabsorbed fat passes on through the bowel. That is why the stool becomes bulky, pale, greasy and offensive, and weight and vitamins can suffer.");
-  addLabel(2, "Greasy stool", 833, 340, 835, 410, "Greasy stool of giardiasis (steatorrhoea): bulky, pale and difficult to flush, from fat malabsorption rather than invasion or blood.");
-  addMark(2, [1, 3], 430, 280, "Giardia killed", 220, 408, "Metronidazole kills Giardia trophozoites on the duodenal surface and is a standard treatment choice shown here as a teaching toggle.", true);
-  addMark(2, [2, 3], 180, 182, "Lumen cleared", 505, 408, "Clearing the lumen helps remove remaining parasites and cysts. Stool tests can still be uneven because shedding comes and goes.");
+  addLabel(2, "Cysts", 100, 180, 100, 78, "Giardia cysts swallowed in contaminated water or food. Each cyst releases trophozoites in the small bowel.");
+  addLabel(2, "Duodenum", 430, 150, 290, 78, "Duodenum: the first part of the small bowel, where Giardia trophozoites attach and feed.");
+  addLabel(2, "Giardia", 420, 330, 470, 78, "Giardia trophozoite: it swims with a falling leaf motion, then sticks to the lining with its sucking disc.");
+  addLabel(2, "Villi", 550, 348, 640, 78, "Villi: small fingers that absorb food. Heavy coating blunts them, so fat is poorly absorbed.");
+  addLabel(2, "Greasy stool", 833, 350, 830, 78, "Greasy bulky stool from fat malabsorption, rather than invasion or blood.");
+  addMark(2, [1, 3], 430, 300, "Giardia killed", 300, 408, "Metronidazole kills Giardia trophozoites on the duodenal surface.", true);
+  addMark(2, [2, 3], 140, 180, "Lumen cleared", 600, 408, "Clearing the lumen helps remove remaining parasites and cysts.", true);
 })();
 
-/* ---- gauges and switching ---- */
+/* ---- caption, gauges and switching ---- */
+let capEl = null, capTy = -1, capDrug = -1;
+function initCaption() {
+  capEl = mk("text", { class: "am-cap", x: 30, y: 428 }, LY.over);
+  capEl.textContent = capText(0, 0);
+}
 const gg = {};
 function initPanel() {
   const P = LY.panel, y0 = 478, h = 70, xs = [150, 360, 570, 780];
@@ -546,7 +946,7 @@ function initPanel() {
 }
 const sm = { Par: 0.8, Inj: 0.7, Gut: 0.8, Sev: 0.7 };
 let curType = -1;
-function init() { types.forEach((t) => { t.g.style.opacity = 0; }); initPanel(); }
+function init() { types.forEach((t) => { t.g.style.opacity = 0; }); initCaption(); initPanel(); }
 function step(dt, m) {
   if (m.type !== curType) { curType = m.type; document.querySelectorAll(".sc-card").forEach((c, i) => c.classList.toggle("on", i === m.type)); }
   const k = Math.min(1, dt * 1.4);
@@ -558,6 +958,7 @@ function step(dt, m) {
   marks.forEach((mk2) => { mk2.g.style.display = mk2.ty === m.type && mk2.drugs.indexOf(m.drug) > -1 ? "" : "none"; });
   gg.par.set(sm.Par, wordOf(sm.Par, 0.3, 0.6, ["low", "moderate", "high"])); gg.inj.set(sm.Inj, wordOf(sm.Inj, 0.3, 0.6, ["little", "some", "marked"]));
   gg.gut.set(sm.Gut, wordOf(sm.Gut, 0.3, 0.6, ["mild", "moderate", "severe"])); gg.sev.set(sm.Sev, wordOf(sm.Sev, 0.3, 0.6, ["mild", "moderate", "severe"]));
+  if (m.drug !== capDrug || m.type !== capTy) { capDrug = m.drug; capTy = m.type; const t = capText(m.type, m.drug); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 run({ init, step });
 </script></body></html>

@@ -62,24 +62,25 @@ const extraCss = `
 .sc-card-r{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
 .sc-card.on .sc-card-r{stroke:var(--anatomy-lit);stroke-width:2;fill:color-mix(in srgb,var(--anatomy-lit) 10%,var(--anatomy-card))}
 .sc-dim2{opacity:.75}
-.cl-rbc2{--cc:var(--c-rbc)}
-.p-allergen{--cc:#ff9a3d}.p-hist{--cc:#ff5e8a}.p-gran{--cc:#c978c9}.p-comp{--cc:#7fd3ff}.p-ifn{--cc:#c084fc}.p-perf{--cc:#ff7a45}.p-frag{--cc:var(--c-rbc)}.p-cplx{--cc:#ff9a3d}.p-enz{--cc:#ffd24a}
+.hy-cap{fill:var(--anatomy-strong);font-size:13px}
+.hy-glow{fill:var(--c-bad);stroke:none}
+.hy-tint{fill:var(--c-bad);stroke:none}
+.hy-cloud{fill:var(--c-fl);stroke:none}
+.hy-site{fill:var(--anatomy-mid);stroke:none}
 .ab-p{fill:none;stroke:var(--c-ab);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .ag{fill:#ff9a3d;stroke:color-mix(in srgb,#ff9a3d 50%,#000);stroke-width:.5}
-.sc-wall{fill:color-mix(in srgb,var(--c-endo) 70%,var(--anatomy-paper));stroke:var(--c-endo);stroke-width:1}
-.sc-lum2{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}
-.mk-c{fill:var(--anatomy-card);stroke:var(--c-bad);stroke-width:1.4}.mk-x{fill:none;stroke:var(--c-bad);stroke-width:1.8;stroke-linecap:round}
-.mk-g{fill:none;stroke:var(--c-good);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.cl-tgt{--cc:var(--c-graft)}.cl-act .cl-b{stroke:var(--c-bad)}
+.mk-c{fill:var(--anatomy-card);stroke:var(--c-bad);stroke-width:1.4}
+.cl-tgt{--cc:var(--c-graft)}
 .clk{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}.clk-h{stroke:var(--anatomy-strong);stroke-width:2;stroke-linecap:round}
+.p-hist{--cc:#ff5e8a}.p-gran{--cc:#c978c9}.p-comp{--cc:#7fd3ff}.p-ifn{--cc:#c084fc}.p-perf{--cc:#ff7a45}.p-frag{--cc:var(--c-rbc)}.p-enz{--cc:#ffd24a}.p-blk{--cc:#2dd4bf}
 `;
 
 buildScene({
   id: "hypersensitivity-types", fig: "Fig 1", title: "Hypersensitivity types I to IV", W, H, body, extraCss,
   label: "Four animated panels in one: type I (IgE on mast cells, histamine release), type II (antibody on cell surfaces, complement and phagocytes), type III (immune complexes in vessel walls with complement and neutrophils) and type IV (delayed T cell and macrophage attack). A strip compares onset and examples. Gauges show mediator release, tissue damage, onset speed and severity. Treatment choices include adrenaline, antihistamine, corticosteroid, immunosuppressant and removing the trigger.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, levels or numbers are shown or implied.",
-  scene: { W }, pageJs: readFileSync(join(HERE, "hypersens.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "hypersens.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With trigger removed",
   sourcesLis: [
     "<strong>The four types.</strong> The Gell and Coombs scheme groups immune-mediated tissue reactions. Type I: allergen cross-links IgE on mast cells, which release histamine and other mediators within minutes (allergy, anaphylaxis). Type II: antibody against a cell-surface or tissue antigen causes damage through complement, phagocytes, or by disturbing a receptor (transfusion reaction, autoimmune haemolysis, Goodpasture, Graves, myasthenia gravis). Type III: soluble antigen-antibody complexes deposit in vessel walls and trigger complement and neutrophils (serum sickness, SLE, post-streptococcal glomerulonephritis). Type IV: delayed, T cell and macrophage mediated (contact dermatitis, tuberculin test, graft rejection). This is standard teaching in immunology and pathology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> Adrenaline for anaphylaxis, antihistamines for histamine effects, corticosteroids and immunosuppressants for broader immune reactions, and removing the trigger. They are teaching toggles that show which step each class acts on.",
