@@ -3,7 +3,7 @@
  * organ(parent, kind, x, y, w, opts) draws real anatomy art (NIH BioArt Source public domain,
  * Servier Medical Art CC BY 3.0, one DBCLS CC BY 4.0 knee; injected as _ORG_ART by buildScene
  * for the kinds the page uses) centred on x,y and w px wide, and falls back to the existing
- * procedural layered silhouette for kinds without art (uterus, thyroid, ganglion) or when art
+ * procedural layered silhouette for kinds without art (adrenal, uterus, thyroid, ganglion) or when art
  * was not injected (liver, bladder and eye keep their procedural drawings as fallback).
  * Art ports are fractions of the art viewBox (see _ORG_FRAC). The liver-4 art is the bare mass,
  * so the lib adds a procedural gallbladder under the gall port plus short portal and hepatic
@@ -25,9 +25,12 @@ if (!document.getElementById("orgCss")) { var _orgSt = document.createElement("s
   + ".org-v{fill:none;stroke-linecap:round}"
   + ".org-liver{--cc:var(--c-rbc)}.org-heart{--cc:var(--c-rbc)}.org-kidney{--cc:var(--c-eos)}.org-lung{--cc:var(--c-endo)}"
   + ".org-stomach{--cc:var(--c-graft)}.org-brain{--cc:var(--c-mac)}.org-pancreas{--cc:var(--c-plt)}.org-spleen{--cc:var(--c-sm)}"
-  + ".org-bladder{--cc:var(--c-th2)}.org-uterus{--cc:var(--c-endo)}.org-ovary{--cc:var(--c-plt)}.org-thyroid{--cc:var(--c-neut)}.org-eye{--cc:#e6e1d4}.org-ganglion{--cc:var(--c-mac)}"
-  + ".org-bowel{--cc:var(--c-graft)}.org-colon{--cc:var(--c-eos)}.org-ear{--cc:var(--c-plt)}.org-skin{--cc:#d9a58c}"
-  + ".org-muscle{--cc:var(--c-rbc)}.org-joint{--cc:#cfc8bd}.org-vessel{--cc:var(--c-rbc)}";
+  + ".org-bladder{--cc:var(--c-th2)}.org-uterus{--cc:var(--c-endo)}.org-ovary{--cc:var(--c-plt)}.org-testis{--cc:var(--c-plt)}.org-thyroid{--cc:var(--c-neut)}.org-eye{--cc:#e6e1d4}.org-ganglion{--cc:var(--c-mac)}"
+  + ".org-adrenal{--cc:#e9a13b}"
+  + ".org-pituitary{--cc:var(--c-mac)}"
+  + ".org-bowel{--cc:var(--c-graft)}.org-parathyroid{--cc:#e0a44a}.org-colon{--cc:var(--c-eos)}.org-ear{--cc:var(--c-plt)}.org-skin{--cc:#d9a58c}"
+  + ".org-muscle{--cc:var(--c-rbc)}.org-joint{--cc:#cfc8bd}.org-vessel{--cc:var(--c-rbc)}"
+  + ".org-lymphnode{--cc:var(--c-lymph)}";
   document.head.appendChild(_orgSt); }
 var _orgN = 0;
 /* per instance gradients: base (light -> base -> dark of --cc) plus a white top / dark bottom shade overlay */
@@ -139,6 +142,37 @@ function _orgSpleen(g, G) {
   _ol(g, "M-30-10C-10-2 12-2 32-10M-28 8C-8 16 12 16 30 8");
   return { h0: 96, ports: { in: [-30, 52], out: [-20, 54], hilum: [-18, 37], pulp: [0, 0] } };
 }
+/* adrenal: small cap that sits on the kidney pole, cortex rim, medulla fold, vessel stubs */
+function _orgAdrenal(g, G) {
+  _ov(g, "M-52 8L-38 8", "var(--d-art)", 3.5); _ov(g, "M38 8L52 8", "var(--d-ven)", 4);
+  _ob(g, "M-45 18C-40-6-22-26 0-26C22-26 40-6 45 18C30 10 15 6 0 6C-15 6-30 10-45 18Z", G);
+  _ol(g, "M-36 10C-28-2-14-10 0-10C14-10 28-2 36 10");
+  _ol(g, "M-20 4C-10 1 10 1 20 4", "org-dk");
+  _odot(g, -12, -8, 1.8, "var(--d-art)"); _odot(g, 8, -12, 1.8, "var(--d-art)");
+  return { h0: 60, ports: { in: [-52, 8], out: [52, 8], cortex: [0, -22], medulla: [0, 2] } };
+}
+/* parathyroid: small oval endocrine gland with capsule rim, chief cell dots, calcium sensor arc, vessel stubs */
+function _orgParathyroid(g, G) {
+  _ov(g, "M-52 4L-40 2", "var(--d-art)", 3); _ov(g, "M40 6L52 4", "var(--d-ven)", 3.5);
+  _ob(g, "M-40-20C-22-32 22-32 40-20C48-6 44 14 24 22C6 30-20 28-32 16C-42 6-43-8-40-20Z", G);
+  _ol(g, "M-33-13C-20-22 16-22 32-11");
+  _ol(g, "M28-26C34-24 38-20 40-14", "org-dk");
+  _odot(g, -16, -4, 3, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 0, 3, 3, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 16, -4, 3, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, -2, -12, 2.4, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 8, 10, 2.4, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  return { h0: 70, ports: { in: [-52, 4], out: [52, 4], casr: [28, -28], chief: [0, 0] } };
+}
+/* pituitary: pea-sized gland with a stalk stub rising toward the hypothalamus, posterior lobe wedge */
+function _orgPituitary(g, G) {
+  _ov(g, "M0-18L0-52", "var(--cc)", 7);
+  _ob(g, "M-30-20C-30-36-16-46 0-46C16-46 30-36 30-20C30-4 16 4 0 4C-16 4-30-4-30-20Z", G);
+  _ol(g, "M-3-42C-6-28-6-14-3-2", "org-dk");
+  _ol(g, "M-18-30C-10-36 10-36 18-30");
+  _of(g, "M3-34C13-32 19-24 17-14C15-6 9-2 3-2C0-12 0-26 3-34Z", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  return { h0: 100, ports: { in: [0, -52], out: [34, -4], stalk: [0, -46], post: [10, -18] } };
+}
 /* ganglion: sensory ganglion with capsule, fibre stubs, satellite glia dots, one big soma with nucleus */
 function _orgGanglion(g, G) {
   _ov(g, "M-52 0L-30 0", "var(--anatomy-hi)", 7);
@@ -153,6 +187,19 @@ function _orgGanglion(g, G) {
   _odot(g, 0, 28, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
   _ol(g, "M-13-8L-22-16M13-8L22-16");
   return { h0: 96, ports: { in: [-52, 0], out: [52, 0], soma: [0, 0], nucleus: [0, 0] } };
+}
+/* lymph node: bean capsule with subcapsular sinus, two follicles with a germinal centre dot, afferent and efferent lymphatic stubs */
+function _orgLymphnode(g, G) {
+  _ov(g, "M-38-50L-26-32", "var(--c-lymph)", 4); _ov(g, "M-47-43L-31-29", "var(--c-lymph)", 3);
+  _ov(g, "M18 44L26 60", "var(--c-lymph)", 5);
+  _ob(g, "M-52-18C-52-44-24-52 2-48C30-44 50-26 48 2C46 30 28 48-2 48C-32 48-54 28-52 0Z", G);
+  _ol(g, "M-46-16C-44-36-20-44 2-41C26-38 42-24 41 0");
+  _ol(g, "M-40 20C-20 34 12 36 34 22");
+  _of(g, "M-32-8a15 15 0 1 0 30 0a15 15 0 1 0-30 0", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  _of(g, "M8-2a14 14 0 1 0 28 0a14 14 0 1 0-28 0", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  _odot(g, 22, 5, 6, "color-mix(in srgb,var(--cc) 70%,#000)");
+  _odot(g, -17, -8, 2.2, "var(--c-plt)"); _odot(g, 22, 5, 2, "var(--c-plt)");
+  return { h0: 110, ports: { in: [-38, -50], sinus: [-30, -34], follicle: [-17, -8], germ: [22, 5], paracortex: [-6, 32], hilum: [18, 44], out: [26, 60] } };
 }
 /* bladder: dome with detrusor arcs, trigone, ureters in from above, urethra out below */
 function _orgBladder(g, G) {
@@ -188,6 +235,15 @@ function _orgOvary(g, G) {
   _ol(g, "M-28-12C-16-20 0-23 14-21");
   _ol(g, "M-32 4C-20 12-2 17 14 14", "org-dk");
   return { h0: 70, ports: { in: [-52, 0], out: [52, 0], dom: [0, 0], surf: [0, -27] } };
+}
+/* testis: oval body with tubule arcs, rete lines, vessel stubs above */
+function _orgTestis(g, G) {
+  _ov(g, "M-52-8L-40-4", "var(--d-art)", 3); _ov(g, "M40-8L52-8", "var(--d-ven)", 3.5);
+  _ob(g, "M-40-20C-22-32 22-32 40-20C48-6 44 14 24 22C6 30-20 28-32 16C-42 6-43-8-40-20Z", G);
+  _ol(g, "M-28-10C-14-16 8-18 24-12");
+  _ol(g, "M-30 6C-14 14 8 16 26 8", "org-dk");
+  _ol(g, "M-4-20C-2-8-2 8-4 20", "org-dk");
+  return { h0: 70, ports: { in: [-52, -8], out: [52, -8], parenchyma: [0, 0], barrier: [0, -24] } };
 }
 /* thyroid butterfly: two lobes, isthmus bridge, trachea rings behind, parathyroid dots */
 function _orgThyroid(g, G) {
@@ -303,12 +359,17 @@ function organ(parent, kind, x, y, w, opts) {
   else if (kind === "brain") r = _orgBrain(inner, G);
   else if (kind === "pancreas") r = _orgPancreas(inner, G);
   else if (kind === "spleen") r = _orgSpleen(inner, G);
+  else if (kind === "parathyroid") r = _orgParathyroid(inner, G);
   else if (kind === "ganglion") r = _orgGanglion(inner, G);
+  else if (kind === "lymphnode") r = _orgLymphnode(inner, G);
   else if (kind === "eye") r = _orgEye(inner, G);
   else if (kind === "bladder") r = _orgBladder(inner, G);
   else if (kind === "uterus") r = _orgUterus(inner, G);
   else if (kind === "ovary") r = _orgOvary(inner, G);
+  else if (kind === "testis") r = _orgTestis(inner, G);
   else if (kind === "thyroid") r = _orgThyroid(inner, G);
+  else if (kind === "adrenal") r = _orgAdrenal(inner, G);
+  else if (kind === "pituitary") r = _orgPituitary(inner, G);
   else throw new Error("organ: unknown kind " + kind);
   var sx = w / 100, sy = opts.h ? opts.h / r.h0 : sx, fx = opts.flip ? -1 : 1;
   inner.setAttribute("transform", "scale(" + (fx * sx).toFixed(3) + " " + sy.toFixed(3) + ")");
@@ -316,4 +377,4 @@ function organ(parent, kind, x, y, w, opts) {
   for (k in r.ports) ports[k] = [Math.round((x + fx * r.ports[k][0] * sx) * 10) / 10, Math.round((y + r.ports[k][1] * sy) * 10) / 10];
   return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(r.h0 * sy * 10) / 10, ports: ports, art: false };
 }
-organ.kinds = ["liver", "heart", "kidney", "lung", "stomach", "intestine", "brain", "pancreas", "spleen", "bladder", "uterus", "ovary", "thyroid", "eye", "ganglion", "bowel", "colon", "ear", "skin", "muscle", "joint", "vessel"];
+organ.kinds = ["liver", "heart", "kidney", "lung", "stomach", "intestine", "brain", "pancreas", "spleen", "bladder", "uterus", "ovary", "testis", "thyroid", "eye", "ganglion", "bowel", "colon", "ear", "skin", "muscle", "joint", "vessel", "adrenal", "lymphnode", "parathyroid", "pituitary"];
