@@ -24,12 +24,12 @@ const MD = {
 };
 function modelOf(S, level, drug) {
   const baseK = [0.85, 0.9, 0.95];
-  const baseG = [0.78, 0.85, 0.45];
+  const baseG = [0.78, 0.85, 0.44];
   const baseB = [0.07, 0.35, 0.88];
   const baseN = [0.72, 0.48, 0.22];
   const baseSp = [0.55, 0.75, 0.85];
-  const effK = [[0, 0, 0], [0.2, 0.18, 0.15], [0.88, 0.62, 0.32], [0.9, 0.88, 0.85]][drug][level];
-  const effC = [[0, 0, 0], [0.45, 0.4, 0.35], [0.85, 0.55, 0.3], [0.9, 0.88, 0.82]][drug][level];
+  const effK = [[0, 0, 0], [0.2, 0.18, 0.15], [0.88, 0.62, 0.45], [0.9, 0.88, 0.85]][drug][level];
+  const effC = [[0, 0, 0], [0.45, 0.4, 0.5], [0.85, 0.55, 0.46], [0.9, 0.88, 0.82]][drug][level];
   const tox = [0, 0.12, 0.02, 0.08][drug];
   const cl = (v) => Math.max(0, Math.min(1, v));
   const K = cl(baseK[level] * (1 - effK));
@@ -45,7 +45,9 @@ const TESTS = [
   [0, 0, "kinase high · granulocytes high · blasts low"],
   [2, 0, "kinase high · granulocytes raised · blasts high"],
   [0, 2, "kinase low · granulocytes low · blasts low"],
-  [2, 2, "kinase high · granulocytes raised · blasts high"],
+  [2, 2, "kinase raised · granulocytes low · blasts high"],
+  [2, 1, "kinase high · granulocytes low · blasts high"],
+  [0, 3, "kinase low · granulocytes low · blasts low"],
 ];
 
 /* ---------------- static layout ---------------- */
@@ -71,7 +73,8 @@ const body = `
 <g id="kinase"><circle class="cml-kin" cx="150" cy="352" r="21"/><circle class="cml-kinin" cx="150" cy="352" r="8"/></g>
 <rect class="cml-marrow" x="320" y="84" width="330" height="310" rx="16"/>
 <rect class="cml-vessel" x="688" y="84" width="88" height="210" rx="16"/>
-<g id="spleen"></g>
+<path id="spleenLink" class="cml-link" d="M776 192 L830 235"/>
+<g id="spleenSlot"></g>
 <g id="stage"></g>
 <g id="over"></g>
 <g id="panel"></g>`;
@@ -79,25 +82,26 @@ const body = `
 const extraCss = `
 .cml-marrow{fill:color-mix(in srgb,var(--c-bac) 9%,var(--anatomy-paper));stroke:var(--anatomy-faint);stroke-width:1}
 .cml-vessel{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper));stroke:var(--anatomy-faint);stroke-width:1}
+.cml-link{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 42%,var(--anatomy-paper));stroke-width:10;stroke-linecap:round;opacity:.8}
 .cml-chr9{fill:#d9a441;stroke:color-mix(in srgb,#d9a441 55%,#000);stroke-width:.7}
 .cml-chr22{fill:#5fa8d3;stroke:color-mix(in srgb,#5fa8d3 55%,#000);stroke-width:.7}
 .cml-bcr{fill:#5fa8d3;stroke:color-mix(in srgb,#5fa8d3 55%,#000);stroke-width:.7}
 .cml-abl{fill:#d9a441;stroke:color-mix(in srgb,#d9a441 55%,#000);stroke-width:.7}
 .cml-kin{fill:var(--c-cyt);stroke:color-mix(in srgb,var(--c-cyt) 55%,#000);stroke-width:1}
 .cml-kinin{fill:var(--anatomy-paper);stroke:color-mix(in srgb,var(--c-cyt) 55%,#000);stroke-width:.7}
-.cml-spleen{fill:#b0526b;stroke:color-mix(in srgb,#b0526b 55%,#000);stroke-width:1}
 .cml-arrow{fill:none;stroke:var(--anatomy-mid);stroke-width:1.6;stroke-linecap:round}
+.cml-cap{fill:var(--anatomy-strong)}
+.cml-hit{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-linecap:round}
 .cl-cmlstem{--cc:#4fae94}.cl-cmlprog{--cc:#d9a441}.cl-cmlblast{--cc:#e07a6a}
-.p-sig{--cc:var(--c-cyt)}.p-tki{--cc:#ffd24a}.p-div{--cc:var(--c-bad)}
-.mk-c{fill:var(--anatomy-card);stroke:var(--c-bad);stroke-width:1.4}.mk-x{fill:none;stroke:var(--c-bad);stroke-width:1.8;stroke-linecap:round}
+.p-sig{--cc:var(--c-cyt)}.p-tki{--cc:#ffd24a}.p-div{--cc:var(--c-bad)}.p-chemo{--cc:var(--c-fl)}.p-wbc{--cc:#d9a441}
 `;
 
 buildScene({
   id: "cml-philadelphia", fig: "Fig 1", title: "Chronic myeloid leukaemia: the Philadelphia chromosome", W, H, body, extraCss,
   label: "An animated chromosome change, bone marrow, blood and spleen. A swap between chromosomes 9 and 22 makes the Philadelphia chromosome and a BCR-ABL fusion gene. Its kinase is always on and drives a clonal stem cell to make too many granulocytes, so the spleen enlarges. In chronic phase the cells still mature, in accelerated phase maturation falters, and in blast phase immature blasts take over and normal blood production fails. Gauges show kinase activity, granulocytes, blasts and normal blood. Treatment choices include chemotherapy, a tyrosine kinase inhibitor and stem cell transplant.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "cml.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "cml.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With stem cell transplant",
   sourcesLis: [
     "<strong>The chromosome change and the clone.</strong> Chronic myeloid leukaemia is a clonal myeloid neoplasm of a haematopoietic stem cell. A reciprocal swap between chromosomes 9 and 22 creates the Philadelphia chromosome and joins BCR on chromosome 22 to ABL on chromosome 9. The fusion gene makes a tyrosine kinase that stays switched on without its usual controls, so signalling for growth and survival never stops and granulocyte production expands. The clone gradually takes over haematopoiesis in the marrow. This is standard teaching in haematology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Phases, blood and spleen.</strong> In chronic phase the excess cells still mature, so granulocytes and sometimes platelets rise, red cell production is often fairly preserved at first, and the enlarged spleen may be the main finding. Further genetic aberrations and mutations can occur as the clone evolves. In accelerated phase maturation falters, blasts and basophils rise and anaemia deepens. In blast phase immature blasts dominate like an acute leukaemia, normal marrow fails, and anaemia, infection and bleeding follow. Germline predisposition is uncommon in this disease; radiation is a recognised risk factor in classic teaching. Classification follows the phase and the fusion, in line with World Health Organization style grouping of myeloid neoplasms. This is standard teaching and was not checked against a linked source here, so it is flagged for review.",
