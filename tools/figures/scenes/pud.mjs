@@ -11,7 +11,7 @@ const W = 960, H = 610;
 
 /* ---------------- model ---------------- */
 const MD = {
-  level: { label: "Ulcer site and state", a: [0.55, 0.75, 1], hp: [0.62, 0.92, 0.85], ns: [0.78, 0.35, 0.6], ac: [0.62, 0.92, 0.8], deep: [0.18, 0.22, 0.62], cx: [300, 630, 465], names: ["gastric", "duodenal", "complicated"], ticks: ["gastric", "duodenal", "complicated"], start: 0 },
+  level: { label: "Ulcer site and state", a: [0.55, 0.75, 1], hp: [0.62, 0.92, 0.85], ns: [0.78, 0.35, 0.6], ac: [0.62, 0.92, 0.8], deep: [0.18, 0.22, 0.62], cx: [560, 720, 640], names: ["gastric", "duodenal", "complicated"], ticks: ["gastric", "duodenal", "complicated"], start: 0 },
   drugLabel: "Treatment",
   settings: [
     { label: "no treatment" },
@@ -49,22 +49,25 @@ const TESTS = [
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<rect class="pud-lumen" x="14" y="44" width="${W - 28}" height="168" rx="18"/>
-<text class="sc-zone" x="34" y="68">LUMEN</text>
-<text class="sc-zone sc-dim" x="850" y="68">WALL</text>
-<g id="wallg"></g><g id="vesselg"></g><g id="craterg"></g><g id="bac"></g><g id="paric"></g><g id="nsaidg"></g><g id="parts"></g><g id="over"></g><g id="panel"></g>`;
+<rect class="pud-lumen" x="336" y="60" width="${W - 350}" height="96" rx="14"/>
+<text class="sc-zone" x="352" y="84">LUMEN</text>
+<text class="sc-zone sc-dim" x="872" y="84">WALL</text>
+<path id="bracket" class="pud-bracket" d="M292 172 L336 148 M292 312 L336 366"/>
+<path id="acidflow" class="pud-flow" d="M207 213 C250 200 300 158 340 118"/>
+<g id="wallg"></g><g id="vesselg"></g><ellipse id="tint" class="pud-tint" cx="560" cy="235" rx="130" ry="62"/>
+<g id="stomSlot"></g><g id="craterg"></g><g id="siteg"></g><g id="bac"></g><g id="paric"></g><g id="nsaidg"></g><g id="blockg"></g><g id="parts"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "peptic-ulcer", fig: "Fig 1", title: "Peptic ulcer disease: acid breaches weakened defence", W, H, body,
-  label: "An animated cross-section of gastric or duodenal wall. Helicobacter pylori and non-steroidal anti-inflammatory drugs weaken the mucus and bicarbonate defence, so acid and pepsin dig a crater into the mucosa. A deep crater can reach a blood vessel and bleed, or pass through the wall and perforate. Gauges show Helicobacter pylori, NSAID effect, acid, mucosal defence, ulcer depth and complications. Treatment choices are acid suppression, eradication of Helicobacter pylori, and stopping the NSAID.",
+  label: "An animated stomach with a magnified patch of its wall. Helicobacter pylori and non-steroidal anti-inflammatory drugs weaken the mucus and bicarbonate defence, so acid and pepsin dig a crater into the lining. A deep crater can reach a blood vessel and bleed, or pass through the wall and perforate. A slider moves from gastric to duodenal to complicated ulcer, and treatment choices are acid suppression, eradication of Helicobacter pylori, and stopping the NSAID.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or treatment recommendations are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "pud.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "pud.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With acid suppression",
   sourcesLis: [
-    "<strong>How a peptic ulcer forms.</strong> The stomach and duodenum are normally protected by a mucus and bicarbonate layer, mucosal blood flow and prostaglandin-supported repair. Helicobacter pylori inflames the mucosa and disturbs acid control, while NSAIDs block prostaglandin production and thin that defence. Acid and pepsin then erode a crater through the mucosa. A crater that reaches a vessel can bleed, and one that passes through the whole wall can perforate. Gastric ulcers lean more on weakened defence, duodenal ulcers more on Helicobacter pylori and acid. This is standard teaching in medicine and gastroenterology texts and was not checked against a linked source here, so it is flagged for review.",
-    "<strong>Treatment ideas shown.</strong> Acid suppression lowers acid and pepsin activity so the crater can heal, eradication removes Helicobacter pylori so ulcers are less likely to return, and stopping the NSAID lets prostaglandin-supported defence recover. These are teaching toggles only.",
+    "<strong>How a peptic ulcer forms.</strong> The stomach and duodenum are normally protected by a mucus and bicarbonate layer, mucosal blood flow and prostaglandin-supported repair. Helicobacter pylori inflames the lining and disturbs acid control, while NSAIDs block prostaglandin production and thin that defence. Acid and pepsin then erode a crater through the lining. A crater that reaches a vessel can bleed, and one that passes through the whole wall can perforate. Gastric ulcers lean more on weakened defence, duodenal ulcers more on Helicobacter pylori and acid. This is standard teaching in medicine and gastroenterology texts and was not checked against a linked source here, so it is flagged for review.",
+    "<strong>Treatment ideas shown.</strong> Acid suppression plugs the acid pumps so acid and pepsin fall and the crater can heal, eradication removes Helicobacter pylori so ulcers are less likely to return, and stopping the NSAID lets prostaglandin-supported defence recover. These are teaching toggles only.",
   ],
-  simplified: "Gastrin and acid hypersecretion syndromes, gastric cancer in a non-healing gastric ulcer, stress ulceration, other drugs and alcohol, endoscopy and surgery, transfusion, and all doses and durations are left out. Gastric, duodenal and complicated ulcers are shown on one shared wall cross-section, and the figure does not say how any patient should be treated.",
+  simplified: "Gastrin and acid hypersecretion syndromes, gastric cancer in a non-healing gastric ulcer, stress ulceration, other drugs and alcohol, endoscopy and surgery, transfusion, and all doses and durations are left out. Gastric, duodenal and complicated ulcers share one magnified wall, and the figure does not say how any patient should be treated.",
   extraCss: `
 .pud-lumen{fill:color-mix(in srgb,#e6c85a 12%,var(--anatomy-paper))}
 .pud-mucus{fill:color-mix(in srgb,var(--c-fl) 45%,var(--anatomy-paper));opacity:.8}
@@ -77,6 +80,13 @@ buildScene({
 .pud-pit{fill:none;stroke:color-mix(in srgb,var(--c-endo) 60%,#000);stroke-width:1;opacity:.5}
 .pud-nsaidtab{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.8}
 .pud-nsaidhalf{fill:var(--c-bad);opacity:.65}
+.pud-bracket{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2;stroke-dasharray:5 4;opacity:.7}
+.pud-flow{fill:none;stroke:#e6c85a;stroke-width:3;stroke-linecap:round;stroke-dasharray:2 7;opacity:.7}
+.pud-tint{fill:var(--c-bad);stroke:none;opacity:0}
+.pud-site{fill:none;stroke:var(--c-bad);stroke-width:2.5}
+.pud-block{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.8}
+.pud-nub{fill:var(--anatomy-blue);stroke:none}
+.pud-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
 .p-acid{--cc:#e6c85a}.p-pep{--cc:#ff9a3d}.p-bic{--cc:var(--c-fl)}.p-blood{--cc:var(--c-rbc)}.p-leak{--cc:#e6c85a}
 .cl-hp{--cc:var(--c-bac)}.cl-pari{--cc:#ff9a3d}
 .dr-g-fill.g-acid{fill:#e6c85a}.dr-g-fill.g-def{fill:var(--c-good)}.dr-g-fill.g-ulcer{fill:var(--c-bad)}.dr-g-fill.g-nsaid{fill:var(--anatomy-strong)}
