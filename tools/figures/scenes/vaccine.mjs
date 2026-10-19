@@ -47,7 +47,10 @@ const TESTS = [
   [2, 1, "antibody high · memory many · response fast and strong"],
 ];
 
-/* ---------------- static layout ---------------- */
+/* ---------------- static layout ----------------
+ * Skin, lymph node and blood vessel come from organs.lib.js (see vaccine.page.js
+ * initOrgans); the lymphatic path, infection tint and all cells are placed from
+ * their ports at runtime, so vessels and particles always meet real anatomy. */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
 <path class="zone-line" d="M322 52L322 432"/>
@@ -55,9 +58,11 @@ const body = `
 <text class="sc-zone" x="34" y="68">INJECTION SITE</text>
 <text class="sc-zone" x="342" y="68">LYMPH NODE</text>
 <text class="sc-zone" x="682" y="68">BLOOD</text>
-<path class="flow" d="M212 196C280 176 330 172 378 170"/>
-<path class="flow" d="M428 186C462 208 478 220 492 232"/>
-<path class="flow" d="M612 226C648 204 668 190 694 178"/>
+<ellipse id="infectGlow" class="va-glow" cx="810" cy="250" rx="105" ry="95" opacity="0"/>
+<g id="skinSlot"></g>
+<g id="nodeSlot"></g>
+<g id="vesselSlot"></g>
+<path id="lymphPath" class="va-lymph" d="M230 280 C300 270 340 250 380 240"/>
 <g id="stage"></g>
 <g id="parts"></g>
 <g id="over"></g>
@@ -66,22 +71,24 @@ const body = `
 const extraCss = `
 .cl-dc{--cc:var(--c-mac)}.cl-th{--cc:var(--c-th2)}.cl-plasma{--cc:#e88bb0}.cl-memb{--cc:var(--c-b)}.cl-memt{--cc:var(--c-lymph)}
 .zone-line{stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:5 6;opacity:.5}
-.flow{fill:none;stroke:var(--anatomy-mid);stroke-width:1.6;stroke-dasharray:6 5;opacity:.65}
+.va-lymph{fill:none;stroke:var(--c-lymph);stroke-width:2;stroke-dasharray:7 5;opacity:.7}
+.va-glow{fill:var(--c-bad);stroke:none}
+.va-cap{fill:var(--anatomy-strong);font-size:12px}
 .foll{fill:color-mix(in srgb,var(--c-b) 16%,var(--anatomy-paper));stroke:var(--c-b);stroke-width:1.6}
 .gc{fill:color-mix(in srgb,var(--c-b) 42%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-b) 60%,#000);stroke-width:1}
 .present{fill:var(--c-plt);stroke:color-mix(in srgb,var(--c-plt) 55%,#000);stroke-width:.5}
 .ab-y{fill:none;stroke:var(--c-ab);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ab-coat{fill:none;stroke:var(--c-ab);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .p-ag{--cc:#ff9a3d}.p-sig{--cc:var(--c-cyt)}.p-path{--cc:var(--c-bac)}
-.mem-ring{fill:none;stroke:var(--c-plt);stroke-width:1.4;stroke-dasharray:4 3}
 .dr-g-fill.g-dc{fill:var(--c-mac)}.dr-g-fill.g-th{fill:var(--c-th2)}.dr-g-fill.g-gc{fill:var(--c-b)}.dr-g-fill.g-ab{fill:var(--c-ab)}.dr-g-fill.g-mem{fill:var(--c-plt)}.dr-g-fill.g-prot{fill:var(--c-good)}
 `;
 
 buildScene({
   id: "vaccination-immune-memory", fig: "Fig 1", title: "Vaccination and immune memory", W, H, body, extraCss,
-  label: "An animated scene of vaccination and immune memory. At the injection site a dendritic cell takes up vaccine antigen and presents it. In the lymph node it activates helper T cells, which help B cells in a germinal centre. Plasma cells make antibody, and memory B and T cells persist. A booster or later exposure to the real pathogen gives a faster and stronger secondary response. Live attenuated and conjugate vaccines are compared with no vaccine.",
+  label: "An animated scene of vaccination and immune memory, read left to right. At the injection site in the skin a dendritic cell takes up vaccine antigen and signals through a lymphatic vessel to the lymph node. There it activates helper T cells, which help B cells in a germinal centre. Plasma cells release antibody into a blood vessel, and memory cells persist below the node. A booster or later exposure to the real pathogen gives a faster and stronger secondary response, and antibody coats and shrinks the pathogen. Live attenuated and conjugate vaccines are compared with no vaccine.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, schedules or product names are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "vaccine.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without vaccine", withLabel: "With vaccine",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "vaccine.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without vaccine", withLabel: "With conjugate vaccine",
   sourcesLis: [
     "<strong>Primary response.</strong> Dendritic cells carry antigen to a lymph node and present it to helper T cells. Activated helper T cells help antigen-specific B cells, which enter a germinal centre, multiply and refine their antibody. Some become plasma cells that secrete antibody; others become long-lived memory B cells, alongside memory T cells. The first response is slow and relatively weak because it starts from rare naive cells. This is standard teaching in immunology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Secondary response and boosters.</strong> Memory cells are more numerous and quicker to react than naive cells, so a booster dose or later exposure to the real pathogen produces antibody faster, in larger amount and of better quality, and the pathogen is controlled sooner. That is why the stage slider shows the response building at the first dose, strengthening at the booster and peaking on later exposure only when a vaccine was given.",

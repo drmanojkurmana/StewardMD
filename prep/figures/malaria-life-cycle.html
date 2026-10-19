@@ -8,7 +8,7 @@
   --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
   --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
   --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
-  --anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
 }
 .iso[data-theme="light"]{
@@ -199,6 +199,9 @@ body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px
 .bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
 .bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
 @media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
 body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
 body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
 .t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
@@ -262,37 +265,39 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 .sc-dim{opacity:.45}
 
 .mal-zone{fill:var(--c-tis);opacity:.5}.mal-liver{fill:color-mix(in srgb,#b36b3a 30%,var(--c-tis))}.mal-blood{fill:color-mix(in srgb,var(--c-rbc) 8%,var(--c-tis))}
-.mal-lumen{fill:color-mix(in srgb,var(--c-rbc) 16%,var(--anatomy-paper))}.mal-wall{fill:none;stroke:var(--c-endo);stroke-width:3;opacity:.8}
-.cl-hep{--cc:#c88a5a}.cl-mos{--cc:#8a8f9c}
+.mal-lumen{fill:color-mix(in srgb,var(--c-rbc) 16%,var(--anatomy-paper))}.mal-calm{fill:var(--c-good)}.mal-wall{fill:none;stroke:var(--c-endo);stroke-width:3;opacity:.8}
 .p-spz{fill:var(--c-bac);stroke:color-mix(in srgb,var(--c-bac) 50%,#000);stroke-width:.5}
 .p-mer{fill:#ff9a3d}.p-gam{fill:#b46ad9}.p-par{fill:none;stroke:#8a5cd6;stroke-width:2.2}.p-pig{fill:#3a2a1a}.p-dot{fill:#8a5cd6}
 .p-hyp{fill:#3a2a1a;stroke:#b36b3a;stroke-width:1.2}.p-pillm{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pillm2{fill:var(--c-good)}
-.mal-mark{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.6}.mal-markx{stroke:var(--c-bad);stroke-width:1.8;stroke-linecap:round}
+.mal-mark{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.6}.mal-markx{fill:none;stroke:var(--c-bad);stroke-width:1.8;stroke-linecap:round}
+.mal-door{fill:none;stroke:var(--c-good);stroke-width:2;stroke-dasharray:5 3}
 .mal-temp{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-linejoin:round}.mal-norm{stroke:var(--anatomy-mid);stroke-dasharray:3 4;stroke-width:1}
 .mal-gut{fill:color-mix(in srgb,#8a8f9c 35%,var(--anatomy-paper));stroke:var(--anatomy-mid)}.mal-gland{fill:color-mix(in srgb,var(--c-bac) 25%,var(--anatomy-paper));stroke:var(--anatomy-mid)}
 .mal-body{fill:color-mix(in srgb,#8a8f9c 50%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.2}.mal-wing{fill:var(--anatomy-card);stroke:var(--anatomy-mid);opacity:.7}
+.mal-prob{fill:none;stroke:var(--anatomy-strong);stroke-width:2.4}.mal-leg{fill:none;stroke:var(--anatomy-mid);stroke-width:1.6}
 .mal-route{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 5;opacity:.7}
 </style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Malaria: the parasite life cycle</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>parasites moderate · periodic fever · relapse risk high</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated malaria life cycle. A mosquito injects sporozoites, which travel to the liver and infect liver cells. The liver stage releases merozoites into the blood, where they invade red cells and repeat a cycle of ring, trophozoite and schizont that bursts the cell and causes a fever paroxysm. Some parasites become gametocytes taken up by a mosquito. Vivax can also leave dormant hypnozoites in the liver. Gauges show parasites, anaemia, fever, hypnozoite reservoir and severity."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
-<rect class="mal-zone" x="14" y="44" width="296" height="210" rx="16"/>
-<rect class="mal-zone mal-liver" x="322" y="44" width="318" height="210" rx="16"/>
+<rect class="mal-zone" x="14" y="44" width="236" height="210" rx="16"/>
+<rect class="mal-zone mal-liver" x="262" y="44" width="378" height="210" rx="16"/>
 <rect class="mal-zone" x="652" y="44" width="294" height="210" rx="16"/>
 <rect class="mal-zone mal-blood" x="14" y="266" width="932" height="176" rx="16"/>
-<text class="sc-zone" x="34" y="68">MOSQUITO</text><text class="sc-zone" x="342" y="68">HUMAN LIVER</text><text class="sc-zone" x="672" y="68">FEVER</text><text class="sc-zone sc-dim" x="34" y="288">BLOOD</text>
+<g id="liverSlot"></g>
 <g id="mosq"></g>
 <rect class="mal-lumen" x="14" y="326" width="932" height="92"/>
+<rect id="calm" class="mal-calm" x="14" y="326" width="932" height="92" opacity="0"/>
 <path class="mal-wall" d="M14 326H946M14 418H946"/>
 <g id="routes"></g><g id="liver"></g><g id="rbcs"></g><g id="parts"></g><g id="over"></g><g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Timing, counts and gauge levels are qualitative and illustrative; no doses, schedules or numbers are shown or implied.</span></figcaption></figure>
 <div class="dr-controls">
   <label class="dr-range"><span>Species and severity</span><input id="level" type="range" min="0" max="2" step="1" value="0" aria-valuetext="P. vivax (relapsing)"><span class="dr-ticks"><i>vivax</i><i>falciparum</i><i>severe</i></span></label>
-  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">blood schizonticide (for example an artemisinin combination)</option><option value="2">primaquine-type drug only</option><option value="3">chemoprophylaxis (blood-stage cover)</option><option value="4">radical cure (blood schizonticide plus primaquine-type)</option></select></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With radical cure"><option value="0">no treatment</option><option value="1">blood schizonticide (for example an artemisinin combination)</option><option value="2">primaquine-type drug only</option><option value="3">chemoprophylaxis (blood-stage cover)</option><option value="4">radical cure (blood schizonticide plus primaquine-type)</option></select></label>
   <button id="pause" type="button" aria-pressed="false">Pause motion</button>
 </div>
 <p id="status" class="dr-status" aria-live="polite"></p>
 <p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
 <h2>What the figure shows, and how sure we are</h2>
-<ul><li><strong>The life cycle.</strong> An infected female Anopheles mosquito injects sporozoites. They reach the liver within minutes and enter liver cells. There they multiply as a liver schizont (no symptoms), which bursts and releases merozoites into the blood. In P. vivax and P. ovale some liver forms stay dormant as hypnozoites and can reactivate weeks or months later, causing relapse. In the blood, merozoites invade red cells and pass through ring, trophozoite and schizont stages. The red cell bursts, releasing merozoites that infect new cells, and the pigment and cytokines released cause the periodic fever paroxysm. Some parasites become male and female gametocytes, which a mosquito takes up so the sexual cycle can continue. This is standard teaching in microbiology, medicine and tropical-medicine texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Severe falciparum malaria.</strong> Infected red cells stick to the lining of small vessels (cytoadherence and sequestration), including in the brain, and haemolysis causes anaemia. Treatment ideas shown are by class only: blood schizonticides clear the blood stage, primaquine-type drugs clear hypnozoites and gametocytes, and chemoprophylaxis covers the blood stage. These are teaching toggles only.</li></ul>
+<ul><li><strong>The life cycle.</strong> An infected female Anopheles mosquito injects sporozoites. They reach the liver within minutes and enter liver cells. There they multiply as a liver schizont (no symptoms), which bursts and releases merozoites into the blood. In P. vivax and P. ovale some liver forms stay dormant as hypnozoites and can reactivate weeks or months later, causing relapse. In the blood, merozoites invade red cells and pass through ring, trophozoite and schizont stages. The red cell bursts, releasing merozoites that infect new cells, and the pigment and cytokines released cause the periodic fever paroxysm. Some parasites become male and female gametocytes, which a mosquito takes up so the sexual cycle can continue. This is standard teaching in microbiology, medicine and tropical-medicine texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Severe falciparum malaria.</strong> Infected red cells stick to the lining of small vessels (cytoadherence and sequestration), including in the brain, and haemolysis causes anaemia. Treatment ideas shown are by class only: blood schizonticides clear the blood stage, primaquine-type drugs clear hypnozoites and gametocytes, and chemoprophylaxis covers the blood stage. These are teaching toggles only.</li><li><strong>Organ art.</strong> Organ art is Servier Medical Art by Servier, CC BY 3.0 (https://smart.servier.com), recoloured and animated.</li></ul>
 <p><strong>What was simplified.</strong> Species other than vivax and falciparum, drug resistance, G6PD testing before primaquine-type drugs, pregnancy and child dosing, severe-malaria management, vector control and vaccines, and all doses and schedules are left out. Counts, timing and gauge levels are illustrative, and the figure does not say how any patient should be treated.</p>
-<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). Organ illustrations are Servier Medical Art by Servier (CC BY 3.0); all other drawing is original.</p>
 <p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
 </footer></main><script type="module">const SC = {"CY":372,"HH":46,"W":960,"H":610,"S":{"level":{"label":"Species and severity","a":[0,1,2],"names":["P. vivax (relapsing)","P. falciparum (uncomplicated)","P. falciparum (severe)"],"ticks":["vivax","falciparum","severe"],"start":0},"settings":[{"label":"no treatment"},{"label":"blood schizonticide (for example an artemisinin combination)"},{"label":"primaquine-type drug only"},{"label":"chemoprophylaxis (blood-stage cover)"},{"label":"radical cure (blood schizonticide plus primaquine-type)"}],"drugNames":["no treatment","a blood schizonticide","a primaquine-type drug alone","chemoprophylaxis","radical cure"],"status":"{level} · {drug} ·"}};
 const modelOf = function modelOf(S, level, drug) {
@@ -402,142 +407,565 @@ function run(scn) {
   start();
 }
 
-/* Malaria scene: mosquito, sporozoites, liver stage (and hypnozoites), the red-cell cycle with synchronised rupture, fever trace and gauges. */
+/* Shared organ art for the animated mechanism scenes. Plain globals, ES2015, no imports.
+ * Inlined after bio.lib.js when buildScene gets organs:true, so mk/f1/clamp below are the shared ones.
+ * organ(parent, kind, x, y, w, opts) draws real anatomy art (NIH BioArt Source public domain,
+ * Servier Medical Art CC BY 3.0, one DBCLS CC BY 4.0 knee; injected as _ORG_ART by buildScene
+ * for the kinds the page uses) centred on x,y and w px wide, and falls back to the existing
+ * procedural layered silhouette for kinds without art (adrenal, uterus, thyroid, ganglion) or when art
+ * was not injected (liver, bladder and eye keep their procedural drawings as fallback).
+ * Art ports are fractions of the art viewBox (see _ORG_FRAC). The liver-4 art is the bare mass,
+ * so the lib adds a procedural gallbladder under the gall port plus short portal and hepatic
+ * vein stubs ending at the porta and hepvein ports.
+ * opts: { h (px height, else proportional), flip (mirror left/right), cls (extra class), id,
+ *   tint (a CSS colour with opacity, overlaid as an organ-shaped mask for disease states),
+ *   dim (dull the art) }.
+ * Returns { g, kind, x, y, w, h, ports, art } with absolute SVG coords; ports.in/out always exist.
+ * Art keeps its own colours (a faint contrast halo keeps it readable in dark and light themes);
+ * procedural fill is a vertical gradient whose stops derive from --cc (a theme aware palette var,
+ * so dark and light both work); edge stroke and landmark lines use color-mix detail classes.
+ * Emits no text, so label font and dash rules are inherited from the calling scene. */
+if (!document.getElementById("orgCss")) { var _orgSt = document.createElement("style"); _orgSt.id = "orgCss";
+  _orgSt.textContent = ".org-halo{filter:drop-shadow(0 0 1px rgba(0,0,0,.65)) drop-shadow(0 0 1px rgba(255,255,255,.45))}"
+  + ".org-b{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1.2;stroke-linejoin:round;stroke-linecap:round}"
+  + ".org-d{fill:none;stroke:color-mix(in srgb,var(--cc) 40%,var(--anatomy-hi));stroke-width:1;stroke-linecap:round;opacity:.8}"
+  + ".org-dk{fill:none;stroke:color-mix(in srgb,var(--cc) 62%,#000);stroke-width:1.1;stroke-linecap:round;opacity:.8}"
+  + ".org-f{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1;stroke-linejoin:round}"
+  + ".org-v{fill:none;stroke-linecap:round}"
+  + ".org-liver{--cc:var(--c-rbc)}.org-heart{--cc:var(--c-rbc)}.org-kidney{--cc:var(--c-eos)}.org-lung{--cc:var(--c-endo)}"
+  + ".org-stomach{--cc:var(--c-graft)}.org-brain{--cc:var(--c-mac)}.org-pancreas{--cc:var(--c-plt)}.org-spleen{--cc:var(--c-sm)}"
+  + ".org-bladder{--cc:var(--c-th2)}.org-uterus{--cc:var(--c-endo)}.org-ovary{--cc:var(--c-plt)}.org-thyroid{--cc:var(--c-neut)}.org-eye{--cc:#e6e1d4}.org-ganglion{--cc:var(--c-mac)}"
+  + ".org-adrenal{--cc:#e9a13b}"
+  + ".org-bowel{--cc:var(--c-graft)}.org-colon{--cc:var(--c-eos)}.org-ear{--cc:var(--c-plt)}.org-skin{--cc:#d9a58c}"
+  + ".org-muscle{--cc:var(--c-rbc)}.org-joint{--cc:#cfc8bd}.org-vessel{--cc:var(--c-rbc)}"
+  + ".org-lymphnode{--cc:var(--c-lymph)}";
+  document.head.appendChild(_orgSt); }
+var _orgN = 0;
+/* per instance gradients: base (light -> base -> dark of --cc) plus a white top / dark bottom shade overlay */
+function _orgDefs(g) {
+  _orgN++; var id = "og" + _orgN, hid = "oh" + _orgN;
+  var defs = mk("defs", {}, g);
+  var lg = mk("linearGradient", { id: id, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  var s0 = mk("stop", { offset: "0", "stop-color": "#999" }, lg); s0.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 55%,#fff)");
+  var s1 = mk("stop", { offset: ".55", "stop-color": "#888" }, lg); s1.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 78%,var(--anatomy-paper))");
+  var s2 = mk("stop", { offset: "1", "stop-color": "#666" }, lg); s2.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 66%,#000)");
+  var hg = mk("linearGradient", { id: hid, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  mk("stop", { offset: "0", "stop-color": "#fff", "stop-opacity": ".2" }, hg);
+  mk("stop", { offset: ".55", "stop-color": "#fff", "stop-opacity": "0" }, hg);
+  mk("stop", { offset: "1", "stop-color": "#000", "stop-opacity": ".14" }, hg);
+  return { b: "url(#" + id + ")", h: "url(#" + hid + ")" };
+}
+/* one filled silhouette plus its shade overlay, same path data so the light stays inside */
+function _ob(g, d, G) {
+  mk("path", { class: "org-b", d: d, fill: G.b, stroke: "#666" }, g);
+  mk("path", { d: d, fill: G.h, stroke: "none", "pointer-events": "none" }, g);
+}
+function _ol(g, d, cls) { return mk("path", { class: cls || "org-d", d: d, fill: "none" }, g); }
+function _of(g, d, fillCss, cc) { var e = mk("path", { class: "org-f", d: d, stroke: "#666" }, g); e.setAttribute("style", "fill:" + fillCss + ";--cc:" + cc); return e; }
+function _ov(g, d, color, wdt) { var e = mk("path", { class: "org-v", d: d, fill: "none", stroke: "#777", "stroke-width": wdt, "stroke-linecap": "round" }, g); e.setAttribute("style", "stroke:" + color); return e; }
+function _odot(g, x, y, r, fillCss) { var e = mk("circle", { cx: x, cy: y, r: r, stroke: "none" }, g); e.setAttribute("style", "fill:" + fillCss); return e; }
+
+/* liver: big right lobe, smaller left lobe, falciform notch, gallbladder, porta hepatis stubs */
+function _orgLiver(g, G) {
+  _ov(g, "M-2 46L-2 18", "var(--d-ven)", 5); _ov(g, "M7 46L5 20", "var(--d-art)", 3); _ov(g, "M-11 46L-9 20", "var(--c-bac)", 2.5);
+  _ob(g, "M-6-30C22-33 44-25 50-7C54 9 40 25 18 30C2 33-5 22-7 6C-8-8-8-22-6-30Z", G);
+  _ob(g, "M-8-27C-24-27-40-19-48-6C-51 1-45 9-35 12C-24 15-11 9-8-1C-6-10-6-20-8-27Z", G);
+  _ol(g, "M-8-29C-7-18-6-6-4 6", "org-dk");
+  _ol(g, "M-2-28C14-29 30-24 40-14");
+  _of(g, "M10 18C16 16 22 18 23 24C24 31 19 37 14 36C9 35 7 28 8 23C8 21 9 19 10 18Z", "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  return { h0: 78, ports: { in: [-2, 46], out: [12, -30], porta: [-2, 18], gall: [16, 33], lobe: [20, 0] } };
+}
+/* heart: mass with apex down left, septum, coronary groove, aorta with arch, pulmonary split, caval stubs */
+function _orgHeart(g, G) {
+  _ov(g, "M-2-18L-2-44C-2-52-10-56-20-54C-28-52-32-46-32-38", "var(--d-art)", 8);
+  _ov(g, "M-8-52L-8-59M-15-54L-16-60M-22-53L-24-59", "var(--d-art)", 2.5);
+  _ov(g, "M12-16C8-28 2-34-4-38", "var(--d-ven)", 7);
+  _ov(g, "M-4-38C-12-40-20-38-28-34", "var(--d-ven)", 4.5); _ov(g, "M-4-38C4-40 12-38 20-34", "var(--d-ven)", 4.5);
+  _ov(g, "M20-20L20-52", "var(--d-ven)", 7); _ov(g, "M18 34L18 58", "var(--d-ven)", 7);
+  _ov(g, "M-36-2L-50-6M-34 14L-48 16", "var(--d-art)", 4);
+  _ob(g, "M-4-32C24-34 42-16 40 10C38 32 12 48-20 50C-34 44-40 24-36 2C-33-18-22-31-4-32Z", G);
+  _ol(g, "M0-30C4-10 0 14-14 44", "org-dk");
+  _ol(g, "M-34 6C-18 12 6 12 38 4");
+  _ol(g, "M-6-28C-14-18-18-6-20 8");
+  return { h0: 120, ports: { in: [20, -52], out: [-32, -38], ivc: [18, 58], apex: [-20, 50], pulm: [-28, -34] } };
+}
+/* kidney: bean with hilum, cortex rim, medulla rays, pelvis funnel, ureter, artery and vein stubs */
+function _orgKidney(g, G) {
+  _ov(g, "M-12 6C-22 12-28 18-28 30C-28 50-26 70-24 90", "var(--cc)", 4.5);
+  _ov(g, "M-50-8C-40-8-30-8-22-6", "var(--d-art)", 4); _ov(g, "M-50 10C-40 10-30 8-22 6", "var(--d-ven)", 5);
+  _ob(g, "M8-58C38-58 54-32 50 2C56 32 42 60 8 60C-8 60-16 48-19 34C-26 24-26-24-19-34C-16-48-8-58 8-58Z", G);
+  _ol(g, "M8-49C32-49 45-28 42 0C46 28 34 51 8 51C-1 51-8 43-10 32C-15 24-15-24-10-32C-8-43-1-49 8-49Z");
+  _ol(g, "M-6-30L14-38M-8-10L16-12M-8 12L16 14M-6 32L14 40");
+  _ol(g, "M16-44C30-36 38-20 38 0");
+  _of(g, "M-19-14C-8-12-2-8 2-2C-2 4-8 10-18 14C-22 8-22-8-19-14Z", "color-mix(in srgb,var(--cc) 35%,#fff)", "var(--cc)");
+  return { h0: 150, ports: { in: [-50, -8], out: [-24, 90], vein: [-50, 10], pelvis: [-12, 4], cortex: [30, 0] } };
+}
+/* lung: one lung with oblique fissure, hilum bronchus splitting into lobar and segmental branches */
+function _orgLung(g, G) {
+  _ov(g, "M-58 4L-30 4", "var(--anatomy-hi)", 6);
+  _ov(g, "M-30 4C-22-6-16-16-10-26", "var(--anatomy-hi)", 4.5); _ov(g, "M-30 4C-22 14-14 24-6 34", "var(--anatomy-hi)", 4.5);
+  _ov(g, "M-18-14L-28-22M-16-16L-8-24M-14-20L-14-32M-20 16L-30 24M-16 20L-6 28M-12 26L-10 38", "var(--anatomy-hi)", 2);
+  _ov(g, "M-58-8L-34-6", "var(--d-ven)", 4); _ov(g, "M-58 14L-34 12", "var(--d-art)", 4);
+  _ob(g, "M2-60C24-56 40-32 43 8C45 38 32 60 2 62C-24 62-40 42-42 10C-44-24-20-58 2-60Z", G);
+  _ol(g, "M-40-2C-20 8 0 22 24 40", "org-dk");
+  _ol(g, "M-8-48C8-50 22-40 30-26");
+  return { h0: 130, ports: { in: [-58, 4], out: [-58, 14], art: [-58, -8], apex: [2, -60], base: [2, 62] } };
+}
+/* stomach: J shape with fundus dome, rugae, antrum sweep, pylorus ring, oesophagus and duodenum stubs */
+function _orgStomach(g, G) {
+  _of(g, "M-38-58L-22-58L-22-36L-38-36Z", "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))", "var(--cc)");
+  _ob(g, "M-38-36C-46-24-50-8-46 10C-42 30-30 46-12 50C6 54 28 46 40 32C44 27 46 23 46 18L34 14C30 22 20 30 6 32C-8 34-22 26-28 12C-33-1-31-16-26-28C-24-32-22-34-22-36Z", G);
+  _ol(g, "M-36-10C-30 6-22 20-8 28M-28-22C-22-6-12 10 4 22M-16-30C-10-14 0 2 14 12");
+  _ol(g, "M40 15C43 19 43 25 40 29M34 14C37 18 37 26 34 30", "org-dk");
+  _ol(g, "M46 16L60 22M44 28L58 32", "org-dk");
+  return { h0: 116, ports: { in: [-30, -58], out: [60, 27], fundus: [-40, -12], antrum: [24, 38], pylorus: [40, 22] } };
+}
+/* brain lateral: cerebrum with Sylvian fissure and gyri, cerebellum with folia, tapered brainstem */
+function _orgBrain(g, G) {
+  _ov(g, "M10 50L10 64", "var(--d-art)", 5);
+  _ob(g, "M-50-6C-50-32-24-42 4-40C30-38 44-28 44-8C44 10 32 24 8 28C-18 31-50 24-50-6Z", G);
+  _ol(g, "M-12 10C2 6 18 2 34-4", "org-dk");
+  _ol(g, "M-38-20C-32-10-32 2-38 12M-26-30C-20-20-20-6-26 6M-4-32C2-22 2-8-4 2M10-30C16-20 16-6 10 4M28-22C34-14 34-2 28 8");
+  _ol(g, "M-16 6L-24-4M-10 4L-12-8", "org-dk");
+  _ob(g, "M2 24L16 24L12 56L6 56Z", G);
+  _ol(g, "M2 36C6 38 12 38 16 36");
+  _ob(g, "M22 24C34 22 46 26 48 34C50 42 42 48 32 47C24 46 20 38 20 32C20 28 20 26 22 24Z", G);
+  _ol(g, "M24 32L44 32M25 37L43 37M27 42L41 42");
+  return { h0: 110, ports: { in: [10, 64], out: [4, -40], parenchyma: [-8, -6], cereb: [34, 35], frontal: [-40, -8] } };
+}
+/* pancreas: bulky head right, tapering tail left, main duct with side branches, islet dots */
+function _orgPancreas(g, G) {
+  _ob(g, "M-50-4C-32-14-8-14 14-10C32-7 46-2 49 10C51 21 40 28 26 25C8 21-20 12-50 6Z", G);
+  _ol(g, "M-46 1C-20-2 10 0 38 10", "org-dk");
+  _ol(g, "M-30-1L-34-8M-10-1L-14-9M8 0L4-8M-28 1L-32 8M-6 1L-10 8M12 2L8 10");
+  _ol(g, "M52-6C58 4 58 16 50 24");
+  _odot(g, -20, -2, 1.6, "var(--d-art)"); _odot(g, 0, 0, 1.6, "var(--d-art)"); _odot(g, 22, 6, 1.6, "var(--d-art)");
+  return { h0: 60, ports: { in: [-10, -12], out: [49, 12], head: [36, 8], tail: [-48, 1] } };
+}
+/* spleen: crescent with top notch, trabeculae, hilar artery and vein stubs below */
+function _orgSpleen(g, G) {
+  _ov(g, "M-30 52C-28 44-26 40-22 36", "var(--d-art)", 3.5); _ov(g, "M-20 54C-19 46-17 42-13 38", "var(--d-ven)", 4.5);
+  _ob(g, "M-38-30C-8-40 28-34 44-12C52 4 44 26 20 34C-4 41-34 32-44 10C-48-4-46-22-38-30Z", G);
+  _ol(g, "M-8-36C-4-33 0-33 4-36", "org-dk");
+  _ol(g, "M-30-10C-10-2 12-2 32-10M-28 8C-8 16 12 16 30 8");
+  return { h0: 96, ports: { in: [-30, 52], out: [-20, 54], hilum: [-18, 37], pulp: [0, 0] } };
+}
+/* adrenal: small cap that sits on the kidney pole, cortex rim, medulla fold, vessel stubs */
+function _orgAdrenal(g, G) {
+  _ov(g, "M-52 8L-38 8", "var(--d-art)", 3.5); _ov(g, "M38 8L52 8", "var(--d-ven)", 4);
+  _ob(g, "M-45 18C-40-6-22-26 0-26C22-26 40-6 45 18C30 10 15 6 0 6C-15 6-30 10-45 18Z", G);
+  _ol(g, "M-36 10C-28-2-14-10 0-10C14-10 28-2 36 10");
+  _ol(g, "M-20 4C-10 1 10 1 20 4", "org-dk");
+  _odot(g, -12, -8, 1.8, "var(--d-art)"); _odot(g, 8, -12, 1.8, "var(--d-art)");
+  return { h0: 60, ports: { in: [-52, 8], out: [52, 8], cortex: [0, -22], medulla: [0, 2] } };
+}
+/* ganglion: sensory ganglion with capsule, fibre stubs, satellite glia dots, one big soma with nucleus */
+function _orgGanglion(g, G) {
+  _ov(g, "M-52 0L-30 0", "var(--anatomy-hi)", 7);
+  _ov(g, "M30 0L52 0", "var(--anatomy-hi)", 7);
+  _ob(g, "M-32-27C-12-37 13-37 30-25C43-12 43 12 30 25C13 37-12 37-32 27C-42 13-42-13-32-27Z", G);
+  _ol(g, "M-27-21C-10-29 12-29 26-19");
+  _of(g, "M-16 0C-16-9-9-16 0-16C9-16 16-9 16 0C16 9 9 16 0 16C-9 16-16 9-16 0Z", "color-mix(in srgb,var(--cc) 62%,var(--anatomy-paper))", "var(--cc)");
+  _of(g, "M-7 0C-7-4-4-7 0-7C4-7 7-4 7 0C7 4 4 7 0 7C-4 7-7 4-7 0Z", "color-mix(in srgb,var(--cc) 45%,#1a1030)", "var(--cc)");
+  _odot(g, 2, 1, 1.8, "color-mix(in srgb,var(--cc) 70%,#fff)");
+  _odot(g, -25, -13, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 25, -12, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 0, 28, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _ol(g, "M-13-8L-22-16M13-8L22-16");
+  return { h0: 96, ports: { in: [-52, 0], out: [52, 0], soma: [0, 0], nucleus: [0, 0] } };
+}
+/* lymph node: bean capsule with subcapsular sinus, two follicles with a germinal centre dot, afferent and efferent lymphatic stubs */
+function _orgLymphnode(g, G) {
+  _ov(g, "M-38-50L-26-32", "var(--c-lymph)", 4); _ov(g, "M-47-43L-31-29", "var(--c-lymph)", 3);
+  _ov(g, "M18 44L26 60", "var(--c-lymph)", 5);
+  _ob(g, "M-52-18C-52-44-24-52 2-48C30-44 50-26 48 2C46 30 28 48-2 48C-32 48-54 28-52 0Z", G);
+  _ol(g, "M-46-16C-44-36-20-44 2-41C26-38 42-24 41 0");
+  _ol(g, "M-40 20C-20 34 12 36 34 22");
+  _of(g, "M-32-8a15 15 0 1 0 30 0a15 15 0 1 0-30 0", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  _of(g, "M8-2a14 14 0 1 0 28 0a14 14 0 1 0-28 0", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  _odot(g, 22, 5, 6, "color-mix(in srgb,var(--cc) 70%,#000)");
+  _odot(g, -17, -8, 2.2, "var(--c-plt)"); _odot(g, 22, 5, 2, "var(--c-plt)");
+  return { h0: 110, ports: { in: [-38, -50], sinus: [-30, -34], follicle: [-17, -8], germ: [22, 5], paracortex: [-6, 32], hilum: [18, 44], out: [26, 60] } };
+}
+/* bladder: dome with detrusor arcs, trigone, ureters in from above, urethra out below */
+function _orgBladder(g, G) {
+  _ov(g, "M-52-44C-44-34-36-26-30-18", "var(--cc)", 4); _ov(g, "M52-44C44-34 36-26 30-18", "var(--cc)", 4);
+  _ob(g, "M0-50C26-48 40-30 40-6C40 16 26 32 8 40L-8 40C-26 32-40 16-40-6C-40-30-26-48 0-50Z", G);
+  _ob(g, "M-8 40L8 40L8 64L-8 64Z", G);
+  _ol(g, "M-8 52L8 52", "org-dk");
+  _ol(g, "M-24-8L24-8L0 24Z");
+  _ol(g, "M-28-28C-12-36 12-36 28-28M-34-12C-16-22 16-22 34-12");
+  return { h0: 120, ports: { in: [-52, -44], out: [0, 64], inR: [52, -44], trigone: [0, 8], dome: [0, -48] } };
+}
+/* uterus: fundus, cavity, cervix, tubes with fimbriae, ovaries with follicles */
+function _orgUterus(g, G) {
+  _ov(g, "M-16-16C-26-17-32-19-38-23", "var(--cc)", 3.5); _ov(g, "M16-16C26-17 32-19 38-23", "var(--cc)", 3.5);
+  _ov(g, "M-38-23L-44-27M-38-23L-45-23M-38-23L-44-19M-38-23L-42-29", "var(--cc)", 1.2);
+  _ov(g, "M38-23L44-27M38-23L45-23M38-23L44-19M38-23L42-29", "var(--cc)", 1.2);
+  var eo = mk("ellipse", { class: "org-f", cx: -45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var eo2 = mk("ellipse", { class: "org-f", cx: 45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo2.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var _fol = "color-mix(in srgb,var(--c-plt) 45%,#000)";
+  _odot(g, -47, -14, 1.6, _fol); _odot(g, -43, -8, 1.6, _fol); _odot(g, -46, -4, 1.4, _fol);
+  _odot(g, 47, -14, 1.6, _fol); _odot(g, 43, -8, 1.6, _fol); _odot(g, 46, -4, 1.4, _fol);
+  _ob(g, "M-16-20C-8-26 8-26 16-20C20-2 15 20 8 32L-8 32C-15 20-20-2-16-20Z", G);
+  _of(g, "M-10-14L10-14L0 22Z", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  _ol(g, "M-11 18L11 18", "org-dk"); _ol(g, "M0 18L0 32");
+  return { h0: 100, ports: { in: [-45, -22], out: [0, 33], ovL: [-45, -10], ovR: [45, -10], fundus: [0, -24] } };
+}
+/* ovary: almond body with surface arcs, hilar artery and vein stubs at the hilum */
+function _orgOvary(g, G) {
+  _ov(g, "M-52 0L-40 0", "var(--d-art)", 3); _ov(g, "M40 0L52 0", "var(--d-ven)", 3.5);
+  _ob(g, "M-40-6C-30-24-5-30 15-26C33-22 42-10 40 6C38 22 20 30 0 29C-20 28-38 14-40-6Z", G);
+  _ol(g, "M-28-12C-16-20 0-23 14-21");
+  _ol(g, "M-32 4C-20 12-2 17 14 14", "org-dk");
+  return { h0: 70, ports: { in: [-52, 0], out: [52, 0], dom: [0, 0], surf: [0, -27] } };
+}
+/* thyroid butterfly: two lobes, isthmus bridge, trachea rings behind, parathyroid dots */
+function _orgThyroid(g, G) {
+  _ov(g, "M-7-40L-7 40M7-40L7 40", "var(--anatomy-hi)", 2);
+  _ov(g, "M-7-28L7-28M-7-12L7-12M-7 24L7 24M-7 36L7 36", "var(--anatomy-hi)", 1.2);
+  _ob(g, "M16-32C28-30 35-16 33 4C31 22 25 32 16 32C8 32 6 20 8 2C10-14 11-28 16-32Z", G);
+  _ob(g, "M-16-32C-28-30-35-16-33 4C-31 22-25 32-16 32C-8 32-6 20-8 2C-10-14-11-28-16-32Z", G);
+  _ob(g, "M-10 6L10 6L10 16L-10 16Z", G);
+  _ol(g, "M14-20C18-10 18 6 14 20M-14-20C-18-10-18 6-14 20");
+  _odot(g, -30, 8, 2, "var(--c-plt)"); _odot(g, 30, -4, 2, "var(--c-plt)");
+  return { h0: 90, ports: { in: [16, -34], out: [0, 36], isthmus: [0, 11], lobeR: [22, 0], lobeL: [-22, 0] } };
+}
+/* eye: sclera ball with cornea bulge, iris and pupil facing left, retina arc, optic nerve stub right */
+function _orgEye(g, G) {
+  _ov(g, "M26 0L54 0", "var(--c-plt)", 8);
+  _ob(g, "M-36-4C-34-22-16-32 4-30C24-28 34-12 32 4C30 20 14 30-4 29C-22 28-36 14-36-4Z", G);
+  _of(g, "M-39 0C-39-6-35-11-30-11C-25-11-21-6-21 0C-21 6-25 11-30 11C-35 11-39 6-39 0Z", "color-mix(in srgb,var(--c-endo) 70%,var(--anatomy-paper))", "var(--c-endo)");
+  _odot(g, -30, 0, 5, "#241a12");
+  _odot(g, -32, -3.5, 1.5, "#ffffff");
+  _ol(g, "M16-15C23-5 23 7 15 17");
+  return { h0: 70, ports: { in: [-41, 0], out: [54, 0], retina: [16, 0], lens: [-20, 0] } };
+}
+/* Real-art store, filled by buildScene after this lib: _ORG_ART[kind] = { vb:[x,y,w,h],
+ * pfx:"oaxxx", body:"<inner svg markup>" }. Ports are fractions of the viewBox, measured
+ * off the slimmed art (see tools/figures/dev/svgslim.py); content fills the frame. */
+var _ORG_ART = {};
+var _ORG_FRAC = {
+  liver: { in: [.35, .95], out: [.40, .01], porta: [.35, .95], hepvein: [.40, .01], gall: [.55, .66], lobe: [.15, .70] },
+  heart: { in: [.30, .01], out: [.48, .01], aorta: [.48, .01], ivc: [.28, .90], apex: [.70, .97], pulm: [.60, .08] },
+  kidney: { in: [.04, .36], out: [.38, .97], vein: [.04, .46], pelvis: [.36, .41], cortex: [.62, .45], hilum: [.28, .41] },
+  lung: { in: [.46, .53], out: [.44, .60], art: [.44, .48], apex: [.24, .30], base: [.24, .87], trachea: [.49, .01], carina: [.49, .50], hilumL: [.42, .58], hilumR: [.56, .58], apexR: [.75, .34], baseR: [.75, .86] },
+  stomach: { in: [.42, .00], out: [.50, .95], fundus: [.38, .10], antrum: [.52, .30], pylorus: [.60, .35] },
+  intestine: { in: [.58, .38], out: [.50, .95], duodenum: [.60, .40], jejunum: [.42, .60], ileum: [.50, .72], cecum: [.60, .82], colon: [.28, .60], rectum: [.50, .92] },
+  brain: { in: [.60, .97], out: [.42, .04], parenchyma: [.42, .42], cereb: [.76, .78], frontal: [.08, .40], stem: [.60, .93], carotid: [.16, .75] },
+  pancreas: { in: [.50, .08], out: [.95, .50], head: [.85, .45], tail: [.06, .45], body: [.50, .45] },
+  spleen: { in: [.38, .78], out: [.52, .78], hilum: [.45, .72], pulp: [.50, .38] },
+  bowel: { in: [.21, .03], out: [.80, .99], coils: [.52, .52] },
+  colon: { in: [.75, .72], out: [.50, .98], caecum: [.75, .72], rectum: [.50, .98], ascending: [.88, .58], transverse: [.50, .62], descending: [.23, .44], sigmoid: [.42, .82] },
+  bladder: { in: [.25, .01], out: [.50, .99], inR: [.73, .01], trigone: [.50, .70], dome: [.50, .28] },
+  eye: { in: [.02, .50], out: [.99, .55], retina: [.75, .50], lens: [.19, .51], cornea: [.08, .50], nerve: [.99, .55] },
+  ear: { in: [.35, .45], out: [.02, .55], canals: [.57, .18], vestibule: [.50, .45], cochlea: [.55, .75], nerve: [.02, .55] },
+  skin: { in: [.50, .13], out: [.50, .97], surface: [.50, .13], epidermis: [.50, .17], dermis: [.47, .55], hypodermis: [.50, .92] },
+  muscle: { in: [.02, .50], out: [.99, .71], belly: [.32, .48], fibre: [.72, .58] },
+  joint: { in: [.50, .04], out: [.52, .96], femur: [.50, .20], joint: [.54, .58], patella: [.51, .52], tibia: [.52, .80], fibula: [.40, .78] },
+  vessel: { in: [.50, .01], out: [.50, .99], lumen: [.50, .05], wall: [.90, .50] }
+};
+/* liver-4 is the bare mass, so add the missing bits procedurally in art units
+ * (fractions of the liver-4 viewBox): a gallbladder blob under the art at the
+ * gall port (its fundus peeks below the inferior edge), a portal stub rising
+ * to the porta tip and a hepatic stub leaving at the hepvein tip. Drawn before
+ * the art group so the mass covers the joins; the inner flip mirrors them. */
+function _orgLiverExtra(inner, A, opts) {
+  var vw = A.vb[2], vh = A.vb[3];
+  var X = function (f) { return f1(f * vw); }, Y = function (f) { return f1(f * vh); };
+  var g = mk("g", {}, inner);
+  if (opts.dim) g.setAttribute("opacity", ".5");
+  _ov(g, "M" + X(.35) + " " + Y(.95) + "L" + X(.35) + " " + Y(.78), "var(--d-ven)", 11);
+  _ov(g, "M" + X(.40) + " " + Y(.01) + "L" + X(.40) + " " + Y(.14), "var(--d-ven)", 11);
+  var gb = _of(g, "M" + X(.55 - 17 / vw) + " " + Y(.63) + "a17 23 0 1 0 34 0a17 23 0 1 0 -34 0",
+    "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  gb.setAttribute("stroke-width", "2.2");
+  return g;
+}
+/* draw the injected art centred on x,y at w px wide. The art is clipped to its
+ * frame; tint overlays an organ-shaped translucent mask (the art itself, reused
+ * as a mask); dim dulls the art. Art ids are suffixed per instance so two of
+ * the same organ on one page never share gradient, clip or mask ids. */
+function _orgArt(parent, kind, x, y, w, opts, A) {
+  var vb = A.vb, vw = vb[2], vh = vb[3], cx = vb[0] + vw / 2, cy = vb[1] + vh / 2;
+  _orgN++;
+  var uid = "u" + _orgN;
+  var outer = mk("g", { class: "org org-art org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var sx = w / vw, sy = opts.h ? opts.h / vh : sx, fx = opts.flip ? -1 : 1;
+  var inner = mk("g", { transform: "translate(" + f1(-fx * cx * sx) + " " + f1(-cy * sy) + ") scale(" + (fx * sx).toFixed(4) + " " + sy.toFixed(4) + ")" }, outer);
+  var defs = mk("defs", {}, inner);
+  var cid = A.pfx + uid + "-frame";
+  var cp = mk("clipPath", { id: cid }, defs);
+  mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, cp);
+  if (kind === "liver") _orgLiverExtra(inner, A, opts);
+  var art = mk("g", { class: "org-halo", "clip-path": "url(#" + cid + ")" }, inner);
+  var aid = A.pfx + uid + "-art";
+  art.setAttribute("id", aid);
+  art.innerHTML = A.body.split('id="' + A.pfx + '-').join('id="' + A.pfx + uid + '-')
+    .split('url(#' + A.pfx + '-').join('url(#' + A.pfx + uid + '-')
+    .split('href="#' + A.pfx + '-').join('href="#' + A.pfx + uid + '-');
+  if (opts.dim) art.setAttribute("opacity", ".5");
+  if (opts.tint) {
+    var mid = A.pfx + uid + "-tintm";
+    var m = mk("mask", { id: mid, maskUnits: "userSpaceOnUse", x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, defs);
+    mk("use", { href: "#" + aid }, m);
+    var tg = mk("g", { "clip-path": "url(#" + cid + ")" }, inner);
+    mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh), fill: opts.tint, mask: "url(#" + mid + ")" }, tg);
+  }
+  var ports = {}, F = _ORG_FRAC[kind], k;
+  for (k in F) ports[k] = [Math.round((x + fx * (vb[0] + F[k][0] * vw - cx) * sx) * 10) / 10, Math.round((y + (vb[1] + F[k][1] * vh - cy) * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(vh * sy * 10) / 10, ports: ports, art: true };
+}
+/* dispatcher: outer g carries the theme class and gradients, inner g the local drawing scaled to w */
+function organ(parent, kind, x, y, w, opts) {
+  opts = opts || {};
+  if (_ORG_FRAC[kind] && _ORG_ART[kind]) return _orgArt(parent, kind, x, y, w, opts, _ORG_ART[kind]);
+  var outer = mk("g", { class: "org org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var G = _orgDefs(outer);
+  var inner = mk("g", {}, outer);
+  var r;
+  if (kind === "liver") r = _orgLiver(inner, G);
+  else if (kind === "heart") r = _orgHeart(inner, G);
+  else if (kind === "kidney") r = _orgKidney(inner, G);
+  else if (kind === "lung") r = _orgLung(inner, G);
+  else if (kind === "stomach") r = _orgStomach(inner, G);
+  else if (kind === "brain") r = _orgBrain(inner, G);
+  else if (kind === "pancreas") r = _orgPancreas(inner, G);
+  else if (kind === "spleen") r = _orgSpleen(inner, G);
+  else if (kind === "ganglion") r = _orgGanglion(inner, G);
+  else if (kind === "lymphnode") r = _orgLymphnode(inner, G);
+  else if (kind === "eye") r = _orgEye(inner, G);
+  else if (kind === "bladder") r = _orgBladder(inner, G);
+  else if (kind === "uterus") r = _orgUterus(inner, G);
+  else if (kind === "ovary") r = _orgOvary(inner, G);
+  else if (kind === "thyroid") r = _orgThyroid(inner, G);
+  else if (kind === "adrenal") r = _orgAdrenal(inner, G);
+  else throw new Error("organ: unknown kind " + kind);
+  var sx = w / 100, sy = opts.h ? opts.h / r.h0 : sx, fx = opts.flip ? -1 : 1;
+  inner.setAttribute("transform", "scale(" + (fx * sx).toFixed(3) + " " + sy.toFixed(3) + ")");
+  var ports = {}, k;
+  for (k in r.ports) ports[k] = [Math.round((x + fx * r.ports[k][0] * sx) * 10) / 10, Math.round((y + r.ports[k][1] * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(r.h0 * sy * 10) / 10, ports: ports, art: false };
+}
+organ.kinds = ["liver", "heart", "kidney", "lung", "stomach", "intestine", "brain", "pancreas", "spleen", "bladder", "uterus", "ovary", "thyroid", "eye", "ganglion", "bowel", "colon", "ear", "skin", "muscle", "joint", "vessel", "adrenal", "lymphnode"];
+
+_ORG_ART["liver"]={vb:[0,0,334.9,277.2],pfx:"oaliv",body:"<defs><clipPath clipPathUnits=\"userSpaceOnUse\" id=\"oaliv-a\"><path d=\"M4 14.3l334.5 0 0 277.4-334.5 0Z\" /></clipPath></defs><path clip-path=\"url(#oaliv-a)\" d=\"M71.9 273.5l17.3 -15.6 13.9 -16.9 7.1 -7.4 17 -14.1 36.9 -33.1 30.9 -21.7 9.9 -9.2 7.2 0 6.7 -1.1 12.5 -5.3 12.8 -8.8 33.1 -25.7 23.9 -13.5 32.8 -31.7 3.1 -4.8 .1 -1.9 -1 -1.6 -2.5 -1.2 -3.4 .4 -4.2 1.7 -23.7 15 -15.5 8.8 -23.3 9.4 -15.2 4.2 -43.4 5.5 -10.1 2.5 -10.9 5.2 -46.6 31 -4.6 2.3 -8.7 2.2 -17.5 2.2 -10.1 4 -5.7 3.6 -5.5 4.7 -4.6 5.3 -6.8 11.8 -4.2 12.3 -4.2 25.3 -1.6 3.9 -8.4 11.2 -14.8 14.5 -14.8 16.2 -5 7.3 -2.2 6.7 1.2 6.1 4.4 4.8 6.6 2.3 4.3 .1 10.3 -2 6 -2.3 13.3 -7.4Z\" fill=\"#7d4453\" fill-rule=\"evenodd\" /><path clip-path=\"url(#oaliv-a)\" d=\"M36.9 250.5l18.3-18.2 8.4-11.2 1.6-3.9 4.2-25.3 4.2-12.3 6.8-11.8 4.6-5.3 5.5-4.7 5.7-3.6 10.1-4 17.5-2.2 8.7-2.2 4.6-2.3 46.6-31.1 10.9-5.2 10.1-2.5 43.5-5.5 15.2-4.2 14.8-5.6 16.5-8.2 31.1-19.5 4.2-1.7 3.4-.4 3.1 1.2-.9-3.6-2.1-3.1-3.1-2.7-8.8-4.3-11.7-3.5-31.5-7.3-16.3-2.5-10.4-.6-9.2.6-13.4 3.6-6.3.5-52.9-13.1-38.3-7-19.9-1.9-19.6-.1-18.7 2.2-17.2 5-8.9 4.3-7.8 5.4-6.7 6.5-5.8 7.4-4.9 8.3-4.1 9.2-3.4 9.9-5 21.7-3.3 26.8-.7 13.9 1.1 34.9 4.6 38.1-1.2 29.9.3 18.1 1.1 8.6 2.1 7.8 3.3 6.8 4.8 5.3-3.2-5.8.5-6.4 6.4-10.8Z\" fill=\"#9c717a\" fill-rule=\"evenodd\" /><path d=\"M155.9 29.9l-26.6-5.9-23.2-2.3-12.1-.1-11.9.8-11.3 1.8-10.3 3.1-9 4.5-7.5 5.7-6.5 6.7-5.6 7.6-4.7 8.5-3.9 9.2-5.6 20.3-1.9 10.9-2.3 22.9 7.8-36.3 7.7-21.8 5.2-10.2 6.4-9 7.6-7.4 9-5.3 9.7-3.7 9.8-2.7 19.7-2.8 9.9-.3 19.9 1.2Z\" fill=\"#fff\" fill-rule=\"evenodd\" /><path d=\"M67.9 42.9l-9.4 5.4 -7.9 6.6 -6.5 7.6 -5.3 8.3 -7.6 17.9 -4.3 17.9 -2.1 15.9 -3.4 74.4 -3 25.1 0 -11.7 -4.9 -62.6 .2 -24 1 -11.6 3.7 -22 6.3 -20 4.2 -9 5 -8.3 5.8 -7.5 6.7 -6.7 7.6 -5.7 9.3 -4.5 11 -3.1 12.3 -1.9 13 -.8 26.4 .9 23.6 3.2 16.9 4.3 -20.5 -1.4 -32.7 1.9 -23.6 4.1 -11.2 3.2ZM297.3 46.7l-20.8-5.9-20.1-3-10.1-.1-11.2 3.1-4.2 2.7-3.1 3.6-9.9 18.6-18.1 22.8-5.1 9.1 25.3-23 10.4-14.6 3.8-4.1 4.7-3.9 5.9-3.4 7.2-2.7 8.7-1.8 10.3-.6 12.2.8Z\" fill=\"#b39198\" fill-rule=\"evenodd\" /><path d=\"M207.6 79.6l6.4-9.6 12.3-22.1 6.3-6.4 6.1-3 7.8-1.6 15.4 1-10.9 0-7.3 1.2-6.9 2.7-3.2 2.1-5.5 5.8-13.3 21.4Z\" fill=\"#fff\" fill-rule=\"evenodd\" /><path clip-path=\"url(#oaliv-a)\" d=\"M36.3 286.1l-7.7 1.6-3.8-.6-3.4-1.7-3.4-4.7-.4-3.7.9-3.8 3.9-7.2 7-9 29.5-29.5 5.2-9.4 1.6-8.5 1.5-3 1.3-.6 2.1 1 2.8 5.8-.1 6.7-2.1 6.4-7.6 11.3-26.4 26.3-4 4.8-2.7 4.8.2 4 1.6 1.4 6.2 1.1 6.9-1 10.4-4.4 9.1-6.3 5.7-5.9 23.6-29.6 5.1-4.8 9.9-7 15.1-14.3 24.5-17.7 28.6-17.7-.6 1.3-21 16.5-22.5 19.3-18.7 18.7-16.9 15-20.2 22.6-11.7 10.1-8.5 5.5-6.4 2.8-10.1 3.4-10.7 2.1-4.6-.1-3.6-1.1-2.1-2.4-.3-4Z\" fill=\"#57152d\" fill-rule=\"evenodd\" /><path d=\"M302.1 99.6l11.4 -11.9 18.4 -16.4 2.3 -3.4 1 -3.2 -.9 -3 -2.2 -.8 -.7 .2 0 1.2 -3 4.9 -5.8 6.9 -14.6 13.8 -27.1 17.2 -32.6 22.8 -13.9 8.3 -7.2 3.1 -2.9 .5 -5.1 -1.2 -2.1 -1.6 -3.3 -4.7 -2 -9.8 1.3 -6.8 2 -2.1 6.7 -1.9 15.8 -.8 13.5 -1.9 15.1 -5 14.6 -7.4 13 -8.3 14.9 -11.5 14.6 -13.3 -34.1 21.1 -25.5 10.6 -15.2 4.2 -43.2 5.4 -11 2.9 -4.3 2.5 -.7 3.6 4.1 14.1 2.5 14.5 4.9 8.1 4.9 3.2 3 .9 5.9 0 12 -3.4 12.7 -7.5 40 -30.7ZM188.5 128.8l2.4 12.4 4.8 11.5-.5 4.1-2.4 3.6-16.1 12.2-5.9 3.4-3.9 1.3 7.7-4.6 5.3-4.5 4.6-5.2 3.2-5.4 1.1-5.1-2.4-15 1-7.4Z\" fill=\"#57152d\" fill-rule=\"evenodd\" /><path d=\"M182 115.7l-8.6 4-20.8 14.9-18.4 10.4-7.6 2.9-10.5 1.9.6-1.2-4.6.5-10 2.5-8.5 4.3-8.5 6.7-4.6 5.3-6.8 11.8-5.6 18.3-2.7 18.9-3.1 7-4.9 6.7 5.9-1.5 4.4-2.5 9.6-10.8 18.8-12.8 6.5-6.7 2.6-4.3 2.8-8.9 1.8-17.7 3.6-4.7 26.1-11 6.9-3.8 7.7-5.2 16.7-14.2 5.3-3.1 3.6 0 3 2.2 3.7 13.4 2.1 2.6-.2-10.3-2-13-1.5-2.5Z\" fill=\"#57152d\" fill-rule=\"evenodd\" /><path d=\"M219.9 41.6l-1.3 7.9-4.3 9.8-4.8 7.2-13.1 15-6.9 11.1-2.5 6.7-.4 8.2-1-3.1-.2-6.8 3.3-10.6 7.9-12.5 20-22.2 2.7-6.6ZM222.2 97.6l26.8-3.3 14.5-4.2 12.2-6.1 17.9-10.4 16.9-7.6 13.5-8.2-7.8 1.7-30.3 11.1-7.1 3.7-10.5 7.6-6.7 3.2-34.7 10.1Z\" fill=\"#7d4453\" fill-rule=\"evenodd\" /><path d=\"M261.9 120.7l6.6-13.1 8.5-10.5 7.1-5.9 11.1-5.2 8.6-2 5.7.1 2.8 1.3-1.6 3.6-5.1 4.4-18.5 10.8-21.7 15.2Z\" fill=\"#57152d\" fill-rule=\"evenodd\" /><path d=\"M212.9 129.3l2.1 4.7 3.8 4.2 3 1.2 3.9.1 5-1.2 6.3-2.8 17.2-11.8-16.4 8.7-10 3-4.7.3-4.2-.7-3.4-2.1Z\" fill=\"#9c717a\" fill-rule=\"evenodd\" /><path d=\"M53.3 225.1l2.7-3.4 3.1-7.4 9.7-36.3 6.2-12.5 4.3-5.7 5.3-5 6.5-4.2 7.8-3.1 9.2-1.9 10.8-.6-18-.9-12.6 2.1-7.4 3.9-8.7 8.7-3.5 5.2-2.3 5.8-9.1 45.4-1.8 5.6Z\" fill=\"#b39198\" fill-rule=\"evenodd\" /><path clip-path=\"url(#oaliv-a)\" d=\"M71.9 273.6l17.3 -15.6 13.9 -16.9 7.1 -7.4 17 -14.1 36.9 -33.1 30.9 -21.7 9.9 -9.2 7.2 0 6.7 -1.1 12.5 -5.3 12.8 -8.8 33.1 -25.7 23.9 -13.5 32.8 -31.7 3.1 -4.8 .1 -1.9 -1 -1.6 -2.5 -1.2 -3.4 .4 -4.2 1.7 -23.7 15 -15.5 8.8 -23.3 9.4 -15.2 4.2 -43.4 5.5 -10.1 2.5 -10.9 5.2 -46.6 31 -4.6 2.3 -8.7 2.2 -17.5 2.2 -10.1 4 -5.7 3.6 -5.5 4.7 -4.6 5.3 -6.8 11.8 -4.2 12.3 -4.2 25.3 -1.6 3.9 -8.4 11.2 -14.8 14.5 -14.8 16.2 -5 7.3 -2.2 6.7 1.2 6.1 4.4 4.8 6.6 2.3 4.3 .1 10.3 -2 6 -2.3 13.3 -7.4\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path clip-path=\"url(#oaliv-a)\" d=\"M36.9 250.6l18.3-18.2 8.4-11.2 1.6-3.9 4.2-25.3 4.2-12.3 6.8-11.8 4.6-5.3 5.5-4.7 5.7-3.6 10.1-4 17.5-2.2 8.7-2.2 4.6-2.3 46.6-31.1 10.9-5.2 10.1-2.5 43.5-5.5 15.2-4.2 14.8-5.6 16.5-8.2 31.1-19.5 4.2-1.7 3.4-.4 3.1 1.2-.9-3.6-2.1-3.1-3.1-2.7-8.8-4.3-11.7-3.5-31.5-7.3-16.3-2.5-10.4-.6-9.2.6-13.4 3.6-6.3.5-52.9-13.1-38.3-7-19.9-1.9-19.6-.1-18.7 2.2-17.2 5-8.9 4.3-7.8 5.4-6.7 6.5-5.8 7.4-4.9 8.3-4.1 9.2-3.4 9.9-5 21.7-3.3 26.8-.7 13.9 1.1 34.9 4.6 38.1-1.2 29.9.3 18.1 1.1 8.6 2.1 7.8 3.3 6.8 4.8 5.3-3.2-5.8.5-6.4 6.4-10.8\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M219.3 41.7l-.2 6.7-3.3 7.9-5.5 8.7-16.1 21.9-4.2 7.2-3.2 8.3-.2 6.4M186.2 110.7l2.1 2.3 1.6 3.7 7 27.4 2.5 4.8 3.3 3.7 4.3 2.3\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" />"};
+/* Malaria scene: a mosquito bite, the liver stage inside a real liver, the red-cell cycle with rupture bursts, a fever trace and gauges. */
 const CY = SC.CY, HH = SC.HH, WW = SC.W;
-const L = { mosq: $("mosq"), routes: $("routes"), liver: $("liver"), rbcs: $("rbcs"), parts: $("parts"), over: $("over"), panel: $("panel") };
+const L = { mosq: $("mosq"), routes: $("routes"), liver: $("liver"), rbcs: $("rbcs"), parts: $("parts"), over: $("over"), panel: $("panel"), calm: $("calm") };
+const TIP = [244, 178], GUT = [110, 150], GLAND = [165, 150];
+let liverO = null;
+let lobePt = [378, 185], hypPt = [419, 181], doorPt = [419, 228], exitPt = [398, 226];
+let trSpz = null, trMer = null, trGam = null;
+let capA = null, capB = null, capDrug = -1, capLevel = -1;
+let bHyp = null, bBlood = null, bLivD = null;
 /* ---- mosquito (abstract): body, wing, proboscis, gut with oocyst, salivary gland ---- */
-const GLAND = [212, 150], GUT = [120, 150], TIP = [292, 168];
 {
   const g = L.mosq;
-  mk("ellipse", { class: "mal-wing", cx: 112, cy: 100, rx: 56, ry: 18, transform: "rotate(-18 112 100)" }, g);
-  mk("ellipse", { class: "mal-body", cx: 130, cy: 160, rx: 108, ry: 38 }, g);
-  mk("circle", { class: "mal-body", cx: 236, cy: 160, r: 24 }, g);
-  mk("path", { class: "mal-route", d: "M254 164L" + TIP[0] + " " + TIP[1], style: "stroke-dasharray:none;opacity:1;stroke-width:2.4;stroke:var(--anatomy-strong)" }, g);
-  for (let i = 0; i < 4; i++) mk("path", { class: "mal-leg", d: "M" + (70 + i * 34) + " 196L" + (60 + i * 34) + " 232", style: "fill:none;stroke:var(--anatomy-mid);stroke-width:1.6" }, g);
-  mk("ellipse", { class: "mal-gut", cx: GUT[0], cy: GUT[1], rx: 52, ry: 24 }, g);
-  mk("ellipse", { class: "mal-gland", cx: GLAND[0], cy: GLAND[1], rx: 24, ry: 15 }, g);
+  mk("ellipse", { class: "mal-wing", cx: 105, cy: 86, rx: 44, ry: 14, transform: "rotate(-18 105 86)" }, g);
+  mk("ellipse", { class: "mal-body", cx: 120, cy: 160, rx: 78, ry: 30 }, g);
+  mk("circle", { class: "mal-body", cx: 198, cy: 160, r: 18 }, g);
+  mk("path", { class: "mal-prob", d: "M212 166L" + TIP[0] + " " + TIP[1] }, g);
+  for (let i = 0; i < 4; i++) mk("path", { class: "mal-leg", d: "M" + (66 + i * 30) + " 188L" + (58 + i * 30) + " 224" }, g);
+  mk("ellipse", { class: "mal-gut", cx: GUT[0], cy: GUT[1], rx: 40, ry: 18 }, g);
+  mk("ellipse", { class: "mal-gland", cx: GLAND[0], cy: GLAND[1], rx: 18, ry: 11 }, g);
 }
 const oocyst = mk("circle", { class: "p-spz", cx: GUT[0] + 4, cy: GUT[1], r: 4 }, L.mosq);
-const gland = Array.from({ length: 7 }, (_, i) => mk("ellipse", { class: "p-spz", rx: 5, ry: 1.7 }, L.mosq));
-/* ---- routes: mosquito to liver, liver to blood, blood to mosquito ---- */
-const ROUTE_SPZ = track([[TIP[0], TIP[1]], [298, 250], [330, CY - HH - 6], [400, CY - HH - 10], [400, 196]]);
-const ROUTE_MER = track([[420, 196], [420, CY - HH - 4], [430, CY - 16]]);
-const ROUTE_GAM = track([[180, CY - HH + 4], [160, 230], [GUT[0] + 20, GUT[1] + 20]]);
-mk("path", { class: "mal-route", d: "M" + TIP[0] + " " + TIP[1] + "L298 250L330 " + (CY - HH - 6) + "L400 " + (CY - HH - 10) + "L400 196" }, L.routes);
-mk("path", { class: "mal-route", d: "M180 " + (CY - HH + 4) + "L160 230L" + (GUT[0] + 20) + " " + (GUT[1] + 20) }, L.routes);
-/* ---- liver: four liver cells; one hosts the schizont, one holds a hypnozoite ---- */
-const HEP = [[392, 156], [486, 200], [560, 142], [604, 214]].map(([x, y], i) => { const g = mk("g", {}, L.liver); cell(g, { cls: "hep", r: 33, nuc: 0.3, seed: i * 3 + 1, wob: 0.07 }); place(g, x, y); return { x, y, g }; });
+const gland = Array.from({ length: 6 }, () => mk("ellipse", { class: "p-spz", rx: 5, ry: 1.7 }, L.mosq));
+/* ---- liver organ plus routes anchored on its real ports ---- */
+function initOrgans() {
+  liverO = organ($("liverSlot"), "liver", 451, 150, 210, {});
+  const P = liverO.ports;
+  lobePt = P.lobe;
+  hypPt = [(P.lobe[0] + P.gall[0]) / 2, (P.lobe[1] + P.gall[1]) / 2];
+  doorPt = P.porta;
+  exitPt = [(P.lobe[0] + P.porta[0]) / 2, (P.lobe[1] + P.porta[1]) / 2 + 20];
+  trSpz = track([TIP, [300, 250], [doorPt[0] - 40, doorPt[1] - 30], doorPt]);
+  trMer = track([exitPt, [exitPt[0] + 6, 290], [exitPt[0] + 16, CY - 20]]);
+  trGam = track([[180, CY - HH + 4], [160, 230], [GUT[0] + 20, GUT[1] + 20]]);
+  mk("path", { class: "mal-route", d: "M" + TIP[0] + " " + TIP[1] + "L300 250L" + f1(doorPt[0] - 40) + " " + f1(doorPt[1] - 30) + "L" + f1(doorPt[0]) + " " + f1(doorPt[1]) }, L.routes);
+  mk("path", { class: "mal-route", d: "M" + f1(exitPt[0]) + " " + f1(exitPt[1]) + "L" + f1(exitPt[0] + 6) + " 290L" + f1(exitPt[0] + 16) + " " + (CY - 20) }, L.routes);
+  mk("path", { class: "mal-route", d: "M180 " + (CY - HH + 4) + "L160 230L" + (GUT[0] + 20) + " " + (GUT[1] + 20) }, L.routes);
+}
+/* ---- liver stage actors: growing schizont, dormant hypnozoite, entering sporozoite ---- */
 const schizont = mk("g", {}, L.liver), sdots = Array.from({ length: 14 }, () => mk("circle", { class: "p-mer", r: 2.2 }, schizont));
 sdots.forEach((d, i) => { const a = i * 2.4, r = 3 + (i % 4) * 5; d.setAttribute("cx", f1(Math.cos(a) * r)); d.setAttribute("cy", f1(Math.sin(a) * r)); });
-const hyp = mk("g", {}, L.liver); mk("circle", { class: "p-hyp", r: 5.5 }, hyp); mk("circle", { class: "p-pig", r: 1.6 }, hyp); place(hyp, HEP[2].x + 8, HEP[2].y + 4);
+const hyp = mk("g", {}, L.liver); mk("circle", { class: "p-hyp", r: 5.5 }, hyp); mk("circle", { class: "p-pig", r: 1.6 }, hyp);
 const sporoIn = mk("ellipse", { class: "p-spz", rx: 6, ry: 2 }, L.liver);
-/* ---- red cells: ring, trophozoite, schizont, gametocyte, rupture ---- */
+/* ---- red cells: ring, trophozoite, schizont, gametocyte, rupture, drug melt ---- */
 const NR = 22, rb = [];
 for (let i = 0; i < NR; i++) { const g = mk("g", { class: "cl cl-rbc" }, L.rbcs); mk("ellipse", { class: "cl-b", rx: 13, ry: 9 }, g); mk("ellipse", { class: "cl-s", rx: 5, ry: 2.6 }, g);
   const par = mk("g", {}, g), ring = mk("circle", { class: "p-par", r: 3.4, cx: -2 }, par), pig = mk("circle", { class: "p-pig", r: 1.6, cx: 3 }, par), dots = Array.from({ length: 7 }, (_, j) => { const d = mk("circle", { class: "p-dot", r: 1.6, cx: f1(Math.cos(j * 0.9) * 5), cy: f1(Math.sin(j * 0.9) * 3.6) }, par); return d; });
   const gam = mk("path", { class: "p-gam", d: "M-8 0Q0 -9 8 0Q0 -3 -8 0Z" }, g);
-  rb.push({ g, par, ring, pig, dots, gam, x: (i / NR) * WW, y: rnd(-0.7, 0.7), v: rnd(0.9, 1.1), st: "h", ph: 0, vis: 1, die: 0, stuck: false, rot: rnd(-15, 15) }); }
-const mers = Array.from({ length: 40 }, () => { const e = mk("ellipse", { class: "p-mer", rx: 3, ry: 1.7 }, L.parts); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0 }; });
-const spz = Array.from({ length: 10 }, () => { const e = mk("ellipse", { class: "p-spz", rx: 6, ry: 1.9 }, L.parts); e.setAttribute("opacity", "0"); return { e, on: false, u: 0, kind: 0 }; });
-const pillsB = Array.from({ length: 12 }, () => { const g = mk("g", {}, L.parts); mk("rect", { class: "p-pillm", x: -4, y: -2, width: 8, height: 4, rx: 2 }, g); mk("rect", { class: "p-pillm2", x: 0, y: -2, width: 4, height: 4, rx: 2 }, g); g.setAttribute("opacity", "0"); return { e: g, on: false, x: 0, y: 0, t: 0, k: 0 }; });
+  rb.push({ g, par, ring, pig, dots, gam, x: (i / NR) * WW, yy: CY, y: rnd(-0.7, 0.7), v: rnd(0.9, 1.1), st: "h", ph: 0, vis: 1, die: 0, stuck: false, rot: rnd(-15, 15) }); }
+const mers = Array.from({ length: 36 }, () => { const e = mk("ellipse", { class: "p-mer", rx: 3, ry: 1.7 }, L.parts); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0 }; });
+const spz = Array.from({ length: 10 }, () => { const e = mk("ellipse", { class: "p-spz", rx: 6, ry: 1.9 }, L.parts); e.setAttribute("opacity", "0"); return { e, on: false, u: 0 }; });
+const drugP = Array.from({ length: 16 }, () => { const g = mk("g", {}, L.parts); mk("rect", { class: "p-pillm", x: -4, y: -2, width: 8, height: 4, rx: 2 }, g); mk("rect", { class: "p-pillm2", x: 0, y: -2, width: 4, height: 4, rx: 2 }, g); g.setAttribute("opacity", "0"); return { e: g, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, kind: 0, stick: 0, seed: rnd(0, 6.28), cell: null }; });
 const gams = Array.from({ length: 4 }, () => { const e = mk("path", { class: "p-gam", d: "M-7 0Q0 -8 7 0Q0 -3 -7 0Z" }, L.parts); e.setAttribute("opacity", "0"); return { e, on: false, u: 0 }; });
 /* ---- fever panel ---- */
 const FP = { x: 668, y: 90, w: 262, h: 140 }, NS_ = 150, temps = new Array(NS_).fill(0);
 mk("line", { class: "mal-norm", x1: FP.x, x2: FP.x + FP.w, y1: FP.y + FP.h * 0.72, y2: FP.y + FP.h * 0.72 }, L.over);
 const tline = mk("path", { class: "mal-temp" }, L.over);
 const fev = mk("text", { class: "dr-pt2", x: FP.x + FP.w, y: FP.y - 6, "text-anchor": "end" }, L.over); fev.textContent = "temperature";
-/* ---- marks for drug targets ---- */
-function mark(x, y) { const g = mk("g", { opacity: "0" }, L.over); mk("circle", { class: "mal-mark", r: 8, cx: x, cy: y }, g); mk("path", { class: "mal-markx", d: "M" + (x - 3.5) + " " + (y - 3.5) + "l7 7M" + (x + 3.5) + " " + (y - 3.5) + "l-7 7" }, g); return g; }
-const mkBlood = mark(300, CY + HH - 14), mkHyp = mark(HEP[2].x + 8, HEP[2].y - 20), mkGam = mark(180, CY - HH - 14);
-/* ---- labels and gauges ---- */
+/* ---- rings marking what each drug is doing ---- */
+function ringMk(circleCls, withCross) { const g = mk("g", { opacity: "0" }, L.over); mk("circle", { class: circleCls, r: 10, cx: 0, cy: 0 }, g); if (withCross) mk("path", { class: "mal-markx", d: "M-4 -4l8 8M4 -4l-8 8" }, g); return g; }
+const ringBlood = ringMk("mal-mark", true), ringHyp = ringMk("mal-mark", true), ringDoor = ringMk("mal-door", false);
+/* ---- labels, gauges and the state caption ---- */
 const gg = {};
+function capText(d, vivax) {
+  if (d === 1) return ["Blood drug at work. Parasites in red cells die,", vivax ? "so fever fades. Sleeping forms can return." : "so the bursts and the fever fade away."];
+  if (d === 2) return vivax ? ["Liver drug at work. It clears sleeping forms", "and the spreader forms. Blood stage remains."] : ["Liver drug at work. It clears the spreader forms.", "Blood parasites remain."];
+  if (d === 3) return ["Preventive drug at work. It blocks the liver stage,", "so few parasites ever reach the blood."];
+  if (d === 4) return vivax ? ["Radical cure at work. Blood and sleeping forms", "are cleared together. Fever settles."] : ["Radical cure at work. Blood and spreader forms", "are cleared together. Fever settles."];
+  return ["No treatment. Red cells burst in waves,", "and each wave brings a spike of fever."];
+}
 function initPanel() {
   const P = L.panel, y0 = 478, h = 70, xs = [90, 270, 450, 630, 810];
   mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: WW - 48, height: 142, rx: 14 }, P);
   mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P).textContent = "The patient";
-  [["pa", "Parasites", "g-bac", "Parasites in the blood. Blood schizonticides clear them quickly."], ["an", "Anaemia", "g-bad", "Red cells destroyed when infected cells burst, plus cells removed by the spleen."], ["fv", "Fever", "g-neu", "Each synchronised burst releases parasite material and cytokines, causing the periodic fever paroxysm."], ["hy", "Relapse risk", "g-cyt", "Dormant liver hypnozoites in vivax and ovale can reactivate later. Blood schizonticides do not remove them; a primaquine-type drug does."], ["sv", "Severity", "g-clot", "Severe falciparum: infected cells stick in small vessels (sequestration), including in the brain, causing cerebral malaria, anaemia and organ damage."]]
+  [["pa", "Parasites", "g-bac", "Parasites in the blood. Blood drugs clear them quickly."], ["an", "Anaemia", "g-bad", "Red cells destroyed when infected cells burst, plus cells removed by the spleen."], ["fv", "Fever", "g-neu", "Each synchronised burst releases parasite material and cytokines, causing the periodic fever spike."], ["hy", "Relapse risk", "g-cyt", "Dormant liver forms in vivax can wake later. Blood drugs do not remove them; a liver drug does."], ["sv", "Severity", "g-clot", "Severe falciparum: infected cells stick in small vessels, including in the brain, causing organ damage."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
   const o = L.over;
-  pill(o, "Anopheles mosquito", 130, 146, 128, 100, "The female Anopheles mosquito passes the parasite between people when she takes a blood meal.");
-  pill(o, "Sporozoites", 292, 168, 258, 214, "Slender sporozoites in the saliva are injected into the skin. They travel in the blood to the liver within minutes.");
-  pill(o, "Salivary gland", GLAND[0], GLAND[1], 218, 118, "Sporozoites collect in the salivary glands, ready for the next bite.");
-  pill(o, "Liver cell", HEP[1].x, HEP[1].y + 28, 480, 244, "A liver cell (hepatocyte) hosts the first stage of the parasite. This stage causes no symptoms.");
-  pill(o, "Liver schizont", HEP[0].x, HEP[0].y - 26, 392, 96, "Inside the liver cell one sporozoite multiplies into thousands of merozoites, then the cell bursts and releases them into the blood.");
-  pill(o, "Hypnozoite", HEP[2].x + 8, HEP[2].y + 4, 590, 96, "In P. vivax and P. ovale some liver forms stay dormant as hypnozoites and can wake weeks or months later, causing relapse. Only a primaquine-type drug removes them.");
-  pill(o, "Merozoites", 428, CY - HH - 4, 500, 300, "Merozoites leave the liver and invade red cells.");
-  pill(o, "Infected red cell", 700, CY - 4, 700, CY + HH + 14, "Inside the red cell the parasite goes through ring, trophozoite and schizont stages, about every two days. Then the cell bursts.");
-  pill(o, "Gametocyte", 140, CY - HH + 6, 110, 300, "Some parasites become gametocytes. A mosquito that takes them up starts the sexual cycle. Primaquine-type drugs reduce them.");
-  pill(o, "Fever paroxysm", FP.x + 120, FP.y + 20, FP.x + 130, FP.y - 16, "When infected red cells burst together, a wave of parasite material and cytokines causes a spike of fever, then sweating.");
-  const sq = pill(o, "Sequestration", 860, CY - HH + 6, 868, CY - HH - 22, "In severe falciparum malaria, infected red cells stick to the lining of small vessels and block them, including in the brain."); sq.setAttribute("id", "sq-pill");
-  const b1 = pill(o, "Blood schizonticide", 300, CY + HH - 14, 340, CY + HH + 14, "Blood schizonticides kill the parasites growing inside red cells, which stops the fever."); b1.setAttribute("id", "bl-pill");
-  const b2 = pill(o, "Primaquine-type", HEP[2].x + 8, HEP[2].y - 20, 570, 232, "A primaquine-type drug kills dormant liver hypnozoites and the gametocytes."); b2.setAttribute("id", "pq-pill");
+  pill(o, "Mosquito bite", TIP[0], TIP[1], 196, 112, "The female Anopheles mosquito injects slender sporozoites with her bite. They travel in the blood to the liver.");
+  pill(o, "Liver", 451, 92, 451, 66, "The liver hosts the first stage of the parasite. This stage causes no symptoms.");
+  pill(o, "Liver schizont", lobePt[0], lobePt[1], 330, 92, "Inside a liver cell one sporozoite multiplies into a schizont full of merozoites, then the cell bursts and releases them.");
+  bHyp = pill(o, "Sleeping liver form", hypPt[0], hypPt[1], 566, 92, "In vivax some liver forms sleep as hypnozoites and can wake weeks later, causing relapse. Only a liver drug removes them.");
+  pill(o, "Infected red cell", 640, 360, 640, 432, "Inside the red cell the parasite grows through ring and schizont stages in a repeating cycle. Then the cell bursts.");
+  pill(o, "Fever spike", FP.x + 120, FP.y + 20, FP.x + 130, FP.y - 16, "When infected red cells burst together, a wave of parasite material causes a spike of fever, then sweating.");
+  bBlood = pill(o, "Blood drug", 150, 378, 150, 300, "Blood drugs kill the parasites growing inside red cells, which stops the bursts and the fever.");
+  bLivD = pill(o, "Liver drug", hypPt[0], hypPt[1], 419, 300, "Liver drugs kill sleeping liver forms and the spreader forms. Preventive cover blocks the liver stage.");
+  const ct = capText(0, true);
+  capA = mk("text", { class: "dr-pt2", x: 600, y: 294 }, o); capA.textContent = ct[0];
+  capB = mk("text", { class: "dr-pt2", x: 600, y: 308 }, o); capB.textContent = ct[1];
 }
 /* ---- state ---- */
-const sm = { Pa: 0.4, Hy: 0.8, Gm: 0.5, An: 0.2, F: 0.4, Sv: 0.1, blood: 0, pq: 0, prophy: 0, sev: 0, fresh: 0 };
-const cyc = { pulse: 0, relapse: 0, ls: 0, lt: 0, hs: 0, ht: rnd(4, 8), tick: 0, accS: 0, accG: 0, accP: 0, reinf: 0 };
-function emitMer(x, y, n, sprd) { for (let i = 0; i < n; i++) { const p = mers.find((q) => !q.on); if (!p) return; p.on = true; p.x = x; p.y = y; const a = rnd(0, 6.28), s = rnd(10, sprd || 40); p.vx = Math.cos(a) * s; p.vy = Math.sin(a) * s; p.t = 0; p.e.setAttribute("opacity", "1"); } }
+const sm = { Pa: 0.4, Hy: 0.8, Gm: 0.5, An: 0.2, F: 0.4, Sv: 0.1, blood: 0, pq: 0, prophy: 0, sev: 0 };
+const cyc = { pulse: 0, ls: 0, lt: 0, ht: rnd(4, 8), tick: 0, accS: 0, accG: 0, accP: 0, reinf: 0, acc: 0, fev: 0, relapse: 0 };
+function emitMer(x, y, n, sprd) { for (let i = 0; i < n; i++) { const p = mers.find((q) => !q.on); if (!p) return; p.on = true; p.x = x; p.y = y; const a = rnd(0, 6.28), s = rnd(10, sprd || 40); p.vx = Math.cos(a) * s; p.vy = Math.sin(a) * s; p.t = 0; p.e.setAttribute("rx", "3"); p.e.setAttribute("ry", "1.7"); p.e.setAttribute("opacity", "1"); } }
 function parasitePose(r) { const ph = r.ph; r.ring.style.display = ph < 0.4 ? "" : "none"; r.pig.style.display = ph >= 0.25 ? "" : "none"; r.ring.setAttribute("r", (3 + ph * 7).toFixed(1));
   r.dots.forEach((d, j) => d.style.display = ph > 0.62 && j < Math.round((ph - 0.6) * 20) ? "" : "none"); r.pig.setAttribute("r", (1.4 + ph * 2.2).toFixed(1)); r.gam.style.display = "none"; }
 function setState(r, st, ph) { r.st = st; r.ph = ph || 0; r.die = 0; r.par.style.display = st === "i" ? "" : "none"; r.gam.style.display = st === "g" ? "" : "none"; if (st === "i") parasitePose(r); if (st !== "i") r.stuck = false; }
 function seedInfection() { let k = 0; rb.forEach((r) => { if (k < Math.round(sm.Pa * 11) && r.vis > 0.5 && r.st === "h") { setState(r, "i", rnd(0.35, 0.55)); k++; } }); }
-function init() { initPanel(); rb.forEach((r) => setState(r, "h", 0)); seedInfection(); gland.forEach((e, i) => { e.dataset.i = i; }); }
+function nearestCell(x, y, st) { let best = null, bd = 1e12; for (const r of rb) { if (r.st !== st || r.vis < 0.5) continue; const d = (r.x - x) * (r.x - x) + (r.yy - y) * (r.yy - y); if (d < bd) { bd = d; best = r; } } return best; }
+function init() { initOrgans(); initPanel(); rb.forEach((r) => setState(r, "h", 0)); seedInfection(); }
 function step(dt, m) {
   const k1 = Math.min(1, dt * 0.9);
   ["Pa", "Hy", "Gm", "An", "F", "Sv"].forEach((k) => sm[k] = lerp(sm[k], m[k], Math.min(1, dt * (k === "Pa" ? 0.5 : 0.4))));
   sm.blood = lerp(sm.blood, m.blood, k1); sm.pq = lerp(sm.pq, m.pq, k1); sm.prophy = lerp(sm.prophy, m.prophy, k1); sm.sev = lerp(sm.sev, SC_isSevere() ? 1 : 0, k1);
-  const flow = 1;
+  const vivax = level === 0;
+  L.calm.setAttribute("opacity", (sm.blood * 0.5).toFixed(2));
   /* red cells */
   const visN = Math.round(NR * (1 - 0.55 * sm.An)), target = Math.round(sm.Pa * 11) + (cyc.relapse > 0 ? 2 : 0), gamTarget = Math.round(sm.Gm * 4);
   let inf = rb.filter((r) => r.st === "i").length, gamN = rb.filter((r) => r.st === "g").length;
-  rb.forEach((r, i) => { r.vis = lerp(r.vis, i < visN || r.st === "i" ? 1 : 0, Math.min(1, dt * 1.5)); });
+  rb.forEach((r) => { r.vis = lerp(r.vis, r.st === "d" ? 1 : (r.st === "i" || rb.indexOf(r) < visN ? 1 : 0), Math.min(1, dt * 1.5)); });
   rb.forEach((r) => {
-    if (r.st === "i") { r.ph += dt / 6.2 * (r.stuck ? 1 : 1);
-      if (sm.sev > 0.5 && r.ph > 0.5 && r.ph < 0.96 && !r.stuck && Math.random() < dt * 0.9 && rb.filter((q) => q.stuck).length < 5) { r.stuck = true; r.y = -0.9; }
-      if (r.ph >= 1) { /* rupture: merozoites, fever pulse */ emitMer(r.x, CY + r.y * (HH - 14), 6, 46); cyc.pulse = 1; setState(r, "h", 0); r.die = 0.6; inf--; if (inf < target) cyc.reinf += 2; }
+    if (r.st === "i") { r.ph += dt / 6.2;
+      if (sm.sev > 0.5 && r.ph > 0.5 && r.ph < 0.96 && !r.stuck && Math.random() < dt * 0.9 && rb.filter((q) => q.stuck).length < 5) { r.stuck = true; }
+      if (r.ph >= 1) { emitMer(r.x, r.yy, sm.blood > 0.5 ? 2 : 6, 46); cyc.pulse = 1; setState(r, "h", 0); r.die = 0.6; inf--; if (inf < target && sm.blood < 0.5) cyc.reinf += 2; }
       else parasitePose(r);
-      if (inf > target + 0 && sm.Pa < 0.3 && Math.random() < dt * (0.35 + 1.6 * sm.blood)) { r.st = "d"; r.die = 1; inf--; } }
+      if (r.stuck && sm.blood > 0.5 && Math.random() < dt * 2) { r.stuck = false; r.st = "d"; r.die = 1; inf--; }
+      else if (inf > target && sm.Pa < 0.3 && Math.random() < dt * (0.35 + 1.6 * sm.blood)) { r.st = "d"; r.die = 1; inf--; } }
     else if (r.st === "d") { r.die -= dt * 0.8; r.par.style.opacity = clamp(r.die); if (r.die <= 0) { setState(r, "h", 0); r.par.style.opacity = 1; } }
-    else if (r.st === "g" && gamN > gamTarget && Math.random() < dt * 0.6) { setState(r, "h", 0); gamN--; }
+    else if (r.st === "g" && ((gamN > gamTarget && Math.random() < dt * 0.6) || (sm.pq > 0.5 && Math.random() < dt * 1.2))) { setState(r, "h", 0); gamN--; }
     else if (r.st === "h" && gamN < gamTarget && r.vis > 0.9 && Math.random() < dt * 0.25) { setState(r, "g", 0); gamN++; }
   });
-  /* reinvade: after bursts, merozoites take new cells while the infection is below target */
   while (cyc.reinf > 0 && inf < target) { cyc.reinf--; const c = rb.filter((r) => r.st === "h" && r.vis > 0.8); if (!c.length) break; setState(pick(c), "i", 0); inf++; }
   cyc.reinf = 0;
-  cyc.tick += dt; if (cyc.tick > 1.8 && inf < target) { cyc.tick = 0; const c = rb.filter((r) => r.st === "h" && r.vis > 0.8); if (c.length) { setState(pick(c), "i", rnd(0, 0.3)); inf++; } }
-  rb.forEach((r) => { if (!r.stuck) r.x += r.v * 62 * flow * dt; if (r.x > WW + 16) { r.x = -16; if (r.st !== "i") r.y = rnd(-0.7, 0.7); }
-    const yy = r.stuck ? CY - HH + 14 : CY + r.y * (HH - 14); place(r.g, r.x, yy, r.stuck ? 0 : r.rot + Math.sin(tm / 600 + r.x) * 8, 0.35 + 0.65 * r.vis); r.g.style.opacity = r.vis > 0.04 ? 1 : 0; });
-  /* merozoites wander and fade */
-  mers.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt + 22 * dt; p.y += p.vy * dt; p.vx *= 0.97; p.vy *= 0.97; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(p.t * 160) + ")"); p.e.setAttribute("opacity", clamp(1 - (p.t - 0.7) / 0.7).toFixed(2)); if (p.t > 1.4) { p.on = false; p.e.setAttribute("opacity", "0"); } });
+  cyc.tick += dt; if (cyc.tick > 1.8 && inf < target && sm.blood < 0.5) { cyc.tick = 0; const c = rb.filter((r) => r.st === "h" && r.vis > 0.8); if (c.length) { setState(pick(c), "i", rnd(0, 0.3)); inf++; } }
+  rb.forEach((r) => { if (!r.stuck) r.x += r.v * 62 * dt; if (r.x > WW + 16) { r.x = -16; if (r.st !== "i") r.y = rnd(-0.7, 0.7); }
+    r.yy = r.stuck ? CY - HH + 14 : CY + r.y * (HH - 14);
+    const melt = r.st === "d" ? 0.3 + 0.7 * clamp(r.die) : 1;
+    place(r.g, r.x, r.yy, r.stuck ? 0 : r.rot + Math.sin(tm / 600 + r.x) * 8, (0.35 + 0.65 * r.vis) * melt); r.g.style.opacity = r.vis > 0.04 ? 1 : 0; });
+  /* merozoites wander, shrink and fade fast under a blood drug */
+  const merLife = sm.blood > 0.5 ? 0.7 : 1.4;
+  mers.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt + 22 * dt; p.y += p.vy * dt; p.vx *= 0.97; p.vy *= 0.97;
+    const sh = 1 - 0.65 * sm.blood * Math.min(1, p.t * 2); p.e.setAttribute("rx", (3 * sh).toFixed(2)); p.e.setAttribute("ry", (1.7 * sh).toFixed(2));
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(p.t * 160) + ")"); p.e.setAttribute("opacity", clamp(1 - p.t / merLife).toFixed(2)); if (p.t > merLife) { p.on = false; p.e.setAttribute("opacity", "0"); } });
   /* mosquito: oocyst grows and bursts, gland sporozoites wiggle, sporozoites are injected */
   const og = (tm / 9000) % 1; oocyst.setAttribute("r", (3 + og * 9).toFixed(1)); oocyst.setAttribute("opacity", og > 0.96 ? "0" : "1");
-  gland.forEach((e, i) => { const a = i * 0.9 + tm / 700; e.setAttribute("cx", f1(GLAND[0] + Math.cos(a) * 11)); e.setAttribute("cy", f1(GLAND[1] + Math.sin(a * 1.3) * 6)); e.setAttribute("transform", "rotate(" + f1(a * 60) + " " + f1(GLAND[0] + Math.cos(a) * 11) + " " + f1(GLAND[1] + Math.sin(a * 1.3) * 6) + ")"); });
+  gland.forEach((e, i) => { const a = i * 0.9 + tm / 700; e.setAttribute("cx", f1(GLAND[0] + Math.cos(a) * 9)); e.setAttribute("cy", f1(GLAND[1] + Math.sin(a * 1.3) * 5)); e.setAttribute("transform", "rotate(" + f1(a * 60) + " " + f1(GLAND[0] + Math.cos(a) * 9) + " " + f1(GLAND[1] + Math.sin(a * 1.3) * 5) + ")"); });
   cyc.accS += dt * 0.3; while (cyc.accS >= 1) { cyc.accS--; const p = spz.find((q) => !q.on); if (p) { p.on = true; p.u = 0; p.e.setAttribute("opacity", "1"); } }
-  spz.forEach((p) => { if (!p.on) return; p.u += dt * 0.16; const q = ROUTE_SPZ.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ") rotate(" + f1(q.a) + ")"); if (p.u >= 1) { p.on = false; p.e.setAttribute("opacity", "0"); cyc.ls = 1; cyc.lt = 0; } });
+  spz.forEach((p) => { if (!p.on) return; p.u += dt * 0.16; const q = trSpz.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ") rotate(" + f1(q.a) + ")");
+    if (sm.prophy > 0.5 && p.u > 0.55) p.e.setAttribute("opacity", clamp(1 - (p.u - 0.55) / 0.2).toFixed(2));
+    if (p.u >= 1) { p.on = false; p.e.setAttribute("opacity", "0"); if (sm.prophy < 0.5) { cyc.ls = 1; cyc.lt = 0; } } });
   /* gametocytes are taken up by the mosquito */
   cyc.accG += dt * sm.Gm * 0.7; while (cyc.accG >= 1) { cyc.accG--; const p = gams.find((q) => !q.on); if (p) { p.on = true; p.u = 0; p.e.setAttribute("opacity", "1"); } }
-  gams.forEach((p) => { if (!p.on) return; p.u += dt * 0.18; const q = ROUTE_GAM.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ") rotate(" + f1(q.a) + ")"); if (p.u >= 1) { p.on = false; p.e.setAttribute("opacity", "0"); } });
-  /* liver stage: sporozoite enters, schizont grows, bursts; hypnozoite wakes now and then */
-  const H0 = HEP[0], H2 = HEP[2];
-  if (cyc.ls === 0 && cyc.lt > 6) { cyc.ls = 1; cyc.lt = 0; }
+  gams.forEach((p) => { if (!p.on) return; p.u += dt * 0.18; const q = trGam.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ") rotate(" + f1(q.a) + ")"); if (p.u >= 1) { p.on = false; p.e.setAttribute("opacity", "0"); } });
+  /* liver stage: sporozoite enters, schizont grows, bursts unless prevention arrests it */
+  if (cyc.ls === 0 && cyc.lt > 6 && sm.prophy < 0.5) { cyc.ls = 1; cyc.lt = 0; }
   cyc.lt += dt;
-  let sc = 0; if (cyc.ls === 1) { sc = clamp(cyc.lt / 8); if (cyc.lt > 9) { cyc.ls = 2; cyc.lt = 0; emitMer(H0.x, H0.y, 12, 50); /* merozoites leave toward the blood */ for (let k = 0; k < 6; k++) { const p = mers.find((q) => !q.on); if (p) { p.on = true; p.x = H0.x + 20; p.y = H0.y + 10; p.vx = rnd(-6, 12); p.vy = rnd(40, 70); p.t = 0; p.e.setAttribute("opacity", "1"); } } } }
+  let sc = 0;
+  if (cyc.ls === 1) { sc = clamp(cyc.lt / 8);
+    if (cyc.lt > 9) { cyc.ls = 2; cyc.lt = 0;
+      if (sm.prophy < 0.5) { emitMer(lobePt[0], lobePt[1], 12, 50);
+        for (let kk = 0; kk < 6; kk++) { const p = mers.find((q) => !q.on); if (p) { p.on = true; p.x = exitPt[0]; p.y = exitPt[1]; p.vx = rnd(-6, 12); p.vy = rnd(40, 70); p.t = 0; p.e.setAttribute("opacity", "1"); } } } } }
   else if (cyc.ls === 2 && cyc.lt > 3) { cyc.ls = 0; cyc.lt = 0; }
-  const killLiver = sm.prophy > 0.5 ? 1 : 0; schizont.style.display = cyc.ls === 1 ? "" : "none"; place(schizont, H0.x, H0.y, 0, (0.3 + 0.7 * sc) * (1 - 0.7 * killLiver * sc)); sdots.forEach((d, i) => d.style.display = i < Math.round(sc * 14) ? "" : "none");
-  sporoIn.setAttribute("opacity", cyc.ls === 1 && cyc.lt < 1.2 ? "1" : "0"); sporoIn.setAttribute("transform", "translate(" + f1(H0.x - 36 + cyc.lt * 36) + " " + f1(H0.y - 24 + cyc.lt * 24) + ") rotate(40)");
-  hyp.style.display = sm.Hy > 0.04 ? "" : "none"; place(hyp, H2.x + 8, H2.y + 4, 0, 0.4 + 0.9 * clamp(sm.Hy));
-  cyc.ht -= dt * (sm.Hy > 0.3 ? 1 : 0); if (cyc.ht < 0 && sm.Hy > 0.3) { cyc.ht = rnd(14, 20); cyc.relapse = 5; emitMer(H2.x, H2.y, 8, 50); }
+  schizont.style.display = cyc.ls === 1 ? "" : "none";
+  place(schizont, lobePt[0], lobePt[1], 0, (0.3 + 0.7 * sc) * (1 - 0.8 * sm.prophy));
+  sdots.forEach((d, i) => d.style.display = i < Math.round(sc * 14) ? "" : "none");
+  sporoIn.setAttribute("opacity", cyc.ls === 1 && cyc.lt < 1.2 ? "1" : "0");
+  sporoIn.setAttribute("transform", "translate(" + f1(doorPt[0] - 30 + cyc.lt * 30) + " " + f1(doorPt[1] - 20 + cyc.lt * 20) + ") rotate(40)");
+  hyp.style.display = sm.Hy > 0.04 ? "" : "none"; place(hyp, hypPt[0], hypPt[1], 0, 0.4 + 0.9 * clamp(sm.Hy));
+  cyc.ht -= dt * (sm.Hy > 0.3 ? 1 : 0); if (cyc.ht < 0 && sm.Hy > 0.3) { cyc.ht = rnd(14, 20); cyc.relapse = 5; emitMer(hypPt[0], hypPt[1], 8, 50); }
   if (cyc.relapse > 0) cyc.relapse -= dt;
-  /* drug visuals */
-  pillsB.forEach((p) => { if (!p.on) return; p.t += dt; p.x += (p.k ? 16 : 54) * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(p.t * 80) + ")"); p.e.setAttribute("opacity", clamp(1 - (p.t - 5) / 1.5).toFixed(2)); if (p.t > 6.5 || p.x > WW) { p.on = false; p.e.setAttribute("opacity", "0"); } });
-  cyc.accP += dt * (sm.blood * 1.6 + sm.pq * 0.8); while (cyc.accP >= 1) { cyc.accP--; const pq = Math.random() < sm.pq / (sm.pq + sm.blood + 0.001), p = pillsB.find((q) => !q.on); if (p) { p.on = true; p.t = 0; p.k = pq ? 1 : 0; p.x = pq ? rnd(340, 380) : rnd(20, 120); p.y = pq ? rnd(104, 126) : CY + rnd(-30, 30); } }
-  mkBlood.setAttribute("opacity", sm.blood.toFixed(2)); mkHyp.setAttribute("opacity", (sm.pq * (sm.Hy > 0.001 || m.Hy === 0 ? 1 : 1)).toFixed(2)); mkGam.setAttribute("opacity", sm.pq.toFixed(2));
-  $("bl-pill").style.opacity = sm.blood.toFixed(2); $("pq-pill").style.opacity = sm.pq.toFixed(2); $("sq-pill").style.opacity = sm.sev.toFixed(2);
+  /* drug particles: blood drug hunts infected cells, liver drug parks on the sleeper, prevention guards the liver door */
+  cyc.accP += dt * (sm.blood * 3 + sm.pq * 1.6 + sm.prophy * 2);
+  while (cyc.accP >= 1) { cyc.accP--; const p = drugP.find((q) => !q.on); if (!p) break;
+    const elig = [];
+    if (sm.blood > 0.3) elig.push(0, 0, 0);
+    if (sm.pq > 0.3) elig.push(1);
+    if (sm.prophy > 0.3) elig.push(2, 2);
+    if (!elig.length) break;
+    p.kind = pick(elig); p.on = true; p.t = 0; p.stick = 0; p.cell = null; p.vx = 0; p.vy = 0;
+    if (p.kind === 0) { p.x = rnd(30, 200); p.y = CY + rnd(-30, 30); p.cell = nearestCell(p.x, p.y, "i"); }
+    else if (p.kind === 1) { p.x = rnd(340, 400); p.y = rnd(100, 130); if (sm.Hy < 0.04) p.cell = nearestCell(p.x, p.y, "g"); }
+    else { p.x = doorPt[0] + rnd(-40, 40); p.y = doorPt[1] + rnd(-50, -20); }
+    p.e.setAttribute("opacity", "1"); }
+  drugP.forEach((p) => {
+    if (!p.on) return;
+    p.t += dt;
+    if (p.stick > 0) { p.stick -= dt;
+      if (p.kind === 0 && p.cell) { p.x = p.cell.x; p.y = p.cell.yy - 14; }
+      else if (p.kind === 1 && !p.cell) { p.x = hypPt[0]; p.y = hypPt[1] - 16; }
+      else if (p.kind === 1 && p.cell) { p.x = p.cell.x; p.y = p.cell.yy - 14; }
+      else { const a = tm / 500 + p.seed; p.x = doorPt[0] + Math.cos(a) * 16; p.y = doorPt[1] + Math.sin(a) * 12; }
+      p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(p.t * 40) + ")");
+      if (p.stick <= 0) { p.on = false; p.e.setAttribute("opacity", "0"); }
+      return; }
+    let tx = p.x + 40, ty = p.y;
+    if (p.kind === 0) { if (!p.cell || p.cell.st !== "i") p.cell = nearestCell(p.x, p.y, "i"); if (p.cell) { tx = p.cell.x; ty = p.cell.yy - 12; } }
+    else if (p.kind === 1) { if (p.cell && p.cell.st !== "g") p.cell = null; if (p.cell) { tx = p.cell.x; ty = p.cell.yy - 12; } else if (sm.Hy > 0.04) { tx = hypPt[0]; ty = hypPt[1] - 14; } else { tx = p.x + 40; ty = CY + rnd(-30, 30); } }
+    else { tx = doorPt[0]; ty = doorPt[1] - 10; }
+    const dx = tx - p.x, dy = ty - p.y, dd = Math.hypot(dx, dy) || 1, sp = 110, kk = Math.min(1, dt * 4);
+    p.vx = lerp(p.vx, dx / dd * sp, kk); p.vy = lerp(p.vy, dy / dd * sp, kk);
+    p.x += p.vx * dt; p.y += p.vy * dt;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(p.t * 80) + ")");
+    if (dd < 9) { p.stick = 1.1;
+      if (p.kind === 0 && p.cell && p.cell.st === "i") { p.cell.st = "d"; p.cell.die = 1; }
+      if (p.kind === 1 && p.cell && p.cell.st === "g") { p.cell.st = "d"; p.cell.die = 1; } }
+    if (p.t > 7) { p.on = false; p.e.setAttribute("opacity", "0"); } });
+  /* rings follow what the drugs are doing */
+  const fi = rb.find((r) => r.st === "i" && r.vis > 0.3);
+  if (fi && sm.blood > 0.05) { ringBlood.setAttribute("transform", "translate(" + f1(fi.x) + " " + f1(fi.yy) + ")"); ringBlood.setAttribute("opacity", sm.blood.toFixed(2)); }
+  else ringBlood.setAttribute("opacity", "0");
+  ringHyp.setAttribute("transform", "translate(" + f1(hypPt[0]) + " " + f1(hypPt[1]) + ")");
+  ringHyp.setAttribute("opacity", (sm.pq * (sm.Hy > 0.04 ? 1 : 0)).toFixed(2));
+  ringDoor.setAttribute("transform", "translate(" + f1(doorPt[0]) + " " + f1(doorPt[1]) + ")");
+  ringDoor.setAttribute("opacity", sm.prophy.toFixed(2));
+  bBlood.style.opacity = sm.blood.toFixed(2);
+  bLivD.style.opacity = Math.max(sm.pq, sm.prophy).toFixed(2);
+  bHyp.style.display = vivax ? "" : "none";
   /* fever trace */
   cyc.pulse = Math.max(0, cyc.pulse - dt * 0.5);
   cyc.fev = (cyc.fev || 0) + (cyc.pulse * sm.F * 1.2 - (cyc.fev || 0)) * Math.min(1, dt * 3);
-  cyc.acc = (cyc.acc || 0) + dt; if (cyc.acc > 0.1) { cyc.acc = 0; temps.push(0.08 + 0.92 * clamp(cyc.fev)); temps.shift(); let d = ""; temps.forEach((v, i) => { d += (i ? "L" : "M") + f1(FP.x + (i / (NS_ - 1)) * FP.w) + " " + f1(FP.y + FP.h - v * FP.h * 0.9 - 6); }); tline.setAttribute("d", d); }
+  cyc.acc = (cyc.acc || 0) + dt; if (cyc.acc > 0.06) { cyc.acc = 0; const nSh = sm.F < 0.35 ? 2 : 1; for (let s = 0; s < nSh; s++) { temps.push(0.08 + 0.92 * clamp(cyc.fev)); temps.shift(); } let d = ""; temps.forEach((v, i) => { d += (i ? "L" : "M") + f1(FP.x + (i / (NS_ - 1)) * FP.w) + " " + f1(FP.y + FP.h - v * FP.h * 0.9 - 6); }); tline.setAttribute("d", d); }
   gg.pa.set(sm.Pa, wordOf(sm.Pa, 0.15, 0.55, ["cleared", "moderate", "heavy"])); gg.an.set(sm.An, wordOf(sm.An, 0.25, 0.55, ["mild", "moderate", "marked"])); gg.fv.set(sm.F, wordOf(sm.F, 0.25, 0.7, ["none", "periodic", "high"]));
   gg.hy.set(sm.Hy, wordOf(sm.Hy, 0.05, 0.4, ["none", "low", "high"])); gg.sv.set(sm.Sv, wordOf(sm.Sv, 0.2, 0.55, ["low", "raised", "severe"]));
+  if (drug !== capDrug || level !== capLevel) { capDrug = drug; capLevel = level; const t = capText(drug, vivax); if (capA.textContent !== t[0]) capA.textContent = t[0]; if (capB.textContent !== t[1]) capB.textContent = t[1]; }
 }
 function SC_isSevere() { return level === 2; }
 run({ init, step });
