@@ -35,3 +35,11 @@
     java.lang.Object writeReplace();
     java.lang.Object readResolve();
 }
+
+# Optional SDKs referenced by plugins we do not use (Facebook login, Firebase ktx); R8 missing-class warnings are safe to ignore.
+-dontwarn com.facebook.CallbackManager$Factory
+-dontwarn com.facebook.CallbackManager
+-dontwarn com.facebook.FacebookCallback
+-dontwarn com.facebook.login.LoginManager
+-dontwarn com.facebook.login.widget.LoginButton
+-dontwarn com.google.firebase.ktx.Firebase
