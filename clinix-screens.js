@@ -150,7 +150,6 @@
     diaMode: null,
     diaView: "both",
     audioKind: null,
-    activeYtSound: null,
     caseDef: null,
     casePhase: "history",
     caseLog: [],
@@ -785,13 +784,6 @@
       var playing = state.audioKind === m.audioKind;
       var hint = "";
       try { if (window.SMD_CLINIX_AUDIO) hint = SMD_CLINIX_AUDIO.hintOf(m.audioKind); } catch (e) {}
-      var realYtHtml = "";
-      if (m.ytVideoId) {
-        realYtHtml = '<div class="cx-snd-real-wrap">' +
-          '<button type="button" class="cx-btn cx-btn--ghost cx-snd-real-btn" data-act="cx-watch-sound" data-vid="' + esc(m.ytVideoId) + '" data-start="' + (m.ytStart || 0) + '">' +
-          ic("smart_display") + ' Listen to Real Patient Sound (YouTube' + (m.ytChannel ? ': ' + esc(m.ytChannel) : '') + ')' +
-          '</button></div>';
-      }
       return head + '<figure class="cx-media cx-media--snd">' +
         '<button type="button" class="cx-snd' + (playing ? " cx-snd--on" : "") + '" data-act="cx-audio" data-id="' + esc(m.audioKind) + '">' +
           '<span class="cx-snd-ic">' + ic(playing ? "stop_circle" : "play_circle") + "</span>" +
@@ -799,7 +791,6 @@
           '<span class="cx-snd-s">' + esc(playing ? "playing three breaths" : "tap to listen") + "</span></span>" +
           '<span class="cx-snd-wave' + (playing ? " cx-snd-wave--on" : "") + '"><i></i><i></i><i></i><i></i><i></i></span>' +
         "</button>" +
-        realYtHtml +
         (hint ? '<div class="cx-snd-hint">' + esc(hint) + "</div>" : "") +
         '<figcaption class="cx-media-cap"><span class="cx-media-src">Synthesized teaching model, not a patient recording. ' +
         'Learn what to listen FOR, then listen to real patients.</span></figcaption></figure>';
@@ -2177,10 +2168,8 @@
         (res.valveGradient ? "<br><strong>Peak gradient:</strong> " + res.valveGradient + " mmHg" : "") +
         (res.regurgitantFraction ? "<br><strong>Regurgitant fraction:</strong> " + res.regurgitantFraction + "%" : "") +
         "</div>" +
-        '<button type="button" class="cx-btn ' + (state.audioKind === res.audioKind ? "cx-btn--danger" : "cx-btn--primary") +
-        '" data-act="cx-physio-play" data-id="' + esc(res.audioKind) + '">' +
-        ic(state.audioKind === res.audioKind ? "stop" : "volume_up") + " " + (state.audioKind === res.audioKind ? "Stop" : "Listen") + "</button>" +
-        "</div>" + signList("At the bedside", res.clinicalSigns) + "</div>";
+        '<div class="cx-physio-btns">' + listenBtns(res.audioKind) + "</div>" +
+        "</div>" + heartPcg(res.audioKind) + signList("At the bedside", res.clinicalSigns) + "</div>";
 
       html += '<div class="cx-physio-nums">' +
         '<span><b>EDV</b> ' + res.edv + " mL</span><span><b>ESV</b> " + res.esv + " mL</span>" +
@@ -3258,21 +3247,21 @@
   /* ── screen: auscultation sound lab ────────────────────────────────────────── */
 
   var SOUND_MODELS = [
-    { kind: "vesicular", label: "Normal Vesicular Breathing", type: "resp", icon: "air", desc: "Rustling wind in trees. Inspiratory phase 3x longer than expiratory. No gap between inspiration and expiration.", ytVideoId: "xddT24a5XYc", ytStart: 31, ytChannel: "Geeky Medics" },
-    { kind: "bronchial", label: "Tubular Bronchial Breathing", type: "resp", icon: "air", desc: "Hollow, tubular breath sound with a distinct pause/gap between inspiration and expiration. Hallmark of consolidation.", ytVideoId: "WfkWMfE9VTY", ytStart: 0, ytChannel: "Medzcool" },
-    { kind: "wheeze", label: "Polyphonic Expiratory Wheeze", type: "resp", icon: "graphic_eq", desc: "Musical chords of variable pitches during expiration due to diffuse airway narrowing (Asthma, COPD).", ytVideoId: "xddT24a5XYc", ytStart: 40, ytChannel: "Geeky Medics" },
-    { kind: "monophonic", label: "Monophonic Wheeze", type: "resp", icon: "graphic_eq", desc: "Single-pitch wheeze from fixed localized airway obstruction (foreign body, endobronchial tumor).", ytVideoId: "U8byn2NT_lo", ytStart: 42, ytChannel: "RegisteredNurseRN" },
-    { kind: "stridor", label: "Inspiratory Stridor", type: "resp", icon: "warning", desc: "Harsh, high-pitched monophonic inspiratory sound over trachea. Upper airway obstruction emergency.", ytVideoId: "xddT24a5XYc", ytStart: 21, ytChannel: "Geeky Medics" },
-    { kind: "fine", label: "Fine End-Inspiratory Crackles", type: "resp", icon: "grain", desc: "Velcro-like sound of sudden alveolar re-opening. Bibasal in pulmonary edema and interstitial fibrosis.", ytVideoId: "xddT24a5XYc", ytStart: 64, ytChannel: "Geeky Medics" },
-    { kind: "coarse", label: "Coarse Pan-Inspiratory Crackles", type: "resp", icon: "grain", desc: "Bubbling sound of air passing through secretions in large bronchi. Clears with coughing.", ytVideoId: "xddT24a5XYc", ytStart: 51, ytChannel: "Geeky Medics" },
-    { kind: "rub", label: "Pleural Friction Rub", type: "resp", icon: "texture", desc: "Leathery creaking sound during both inspiration and expiration. Disappears when effusion separates pleura.", ytVideoId: "U8byn2NT_lo", ytStart: 98, ytChannel: "RegisteredNurseRN" },
-    { kind: "s1_s2_normal", label: "Normal S1 & S2 Heart Sounds", type: "cardiac", icon: "favorite", desc: "LUB-DUB cycle with physiological S1 and S2 closure snaps.", ytVideoId: "K_BWCw7s1Xo", ytStart: 0, ytChannel: "Medzcool" },
-    { kind: "s1_s2_split", label: "Physiological S2 Split", type: "cardiac", icon: "favorite", desc: "Inspiratory widening of A2-P2 split due to increased venous return to right ventricle.", ytVideoId: "ECrIdk8Fhb0", ytStart: 0, ytChannel: "Medzcool" },
+    { kind: "vesicular", label: "Normal Vesicular Breathing", type: "resp", icon: "air", desc: "Rustling wind in trees. Inspiratory phase 3x longer than expiratory. No gap between inspiration and expiration." },
+    { kind: "bronchial", label: "Tubular Bronchial Breathing", type: "resp", icon: "air", desc: "Hollow, tubular breath sound with a distinct pause/gap between inspiration and expiration. Hallmark of consolidation." },
+    { kind: "wheeze", label: "Polyphonic Expiratory Wheeze", type: "resp", icon: "graphic_eq", desc: "Musical chords of variable pitches during expiration due to diffuse airway narrowing (Asthma, COPD)." },
+    { kind: "monophonic", label: "Monophonic Wheeze", type: "resp", icon: "graphic_eq", desc: "Single-pitch wheeze from fixed localized airway obstruction (foreign body, endobronchial tumor)." },
+    { kind: "stridor", label: "Inspiratory Stridor", type: "resp", icon: "warning", desc: "Harsh, high-pitched monophonic inspiratory sound over trachea. Upper airway obstruction emergency." },
+    { kind: "fine", label: "Fine End-Inspiratory Crackles", type: "resp", icon: "grain", desc: "Velcro-like sound of sudden alveolar re-opening. Bibasal in pulmonary edema and interstitial fibrosis." },
+    { kind: "coarse", label: "Coarse Pan-Inspiratory Crackles", type: "resp", icon: "grain", desc: "Bubbling sound of air passing through secretions in large bronchi. Clears with coughing." },
+    { kind: "rub", label: "Pleural Friction Rub", type: "resp", icon: "texture", desc: "Leathery creaking sound during both inspiration and expiration. Disappears when effusion separates pleura." },
+    { kind: "s1_s2_normal", label: "Normal S1 & S2 Heart Sounds", type: "cardiac", icon: "favorite", desc: "LUB-DUB cycle with physiological S1 and S2 closure snaps." },
+    { kind: "s1_s2_split", label: "Physiological S2 Split", type: "cardiac", icon: "favorite", desc: "Inspiratory widening of A2-P2 split due to increased venous return to right ventricle." },
     { kind: "s3_gallop", label: "S3 Ventricular Gallop ('Kentucky')", type: "cardiac", icon: "favorite", desc: "Dull, low-pitched early diastolic sound of rapid ventricular filling in volume overload / heart failure." },
     { kind: "s4_gallop", label: "S4 Atrial Gallop ('Tennessee')", type: "cardiac", icon: "favorite", desc: "Late diastolic sound of atrial kick against a stiff, non-compliant ventricle (LVH, hypertension)." },
-    { kind: "mitral_stenosis", label: "Mitral Stenosis (OS + Rumble)", type: "cardiac", icon: "hearing", desc: "Loud S1 + Opening Snap + Low-pitched mid-diastolic rumbling murmur with presystolic accentuation.", ytVideoId: "5oCPtZo4pUY", ytStart: 0, ytChannel: "Medzcool" },
+    { kind: "mitral_stenosis", label: "Mitral Stenosis (OS + Rumble)", type: "cardiac", icon: "hearing", desc: "Loud S1 + Opening Snap + Low-pitched mid-diastolic rumbling murmur with presystolic accentuation." },
     { kind: "mitral_regurgitation", label: "Mitral Regurgitation (Pansystolic)", type: "cardiac", icon: "hearing", desc: "Blowing holosystolic murmur radiating to the left axilla. Soft S1." },
-    { kind: "aortic_stenosis", label: "Aortic Stenosis (Ejection Systolic)", type: "cardiac", icon: "hearing", desc: "Harsh crescendo-decrescendo ejection systolic murmur radiating to carotids with slow-rising pulse.", ytVideoId: "tjIllL7ng2Q", ytStart: 0, ytChannel: "Clinical Auscultation" },
+    { kind: "aortic_stenosis", label: "Aortic Stenosis (Ejection Systolic)", type: "cardiac", icon: "hearing", desc: "Harsh crescendo-decrescendo ejection systolic murmur radiating to carotids with slow-rising pulse." },
     { kind: "aortic_regurgitation", label: "Aortic Regurgitation (Early Diastolic)", type: "cardiac", icon: "hearing", desc: "High-pitched early diastolic decrescendo murmur best heard at Erb's point leaning forward in expiration." },
     { kind: "pericardial_rub", label: "Pericardial Friction Rub", type: "cardiac", icon: "texture", desc: "Triphasic scratchy, superficial sound (atrial systole, ventricular systole, rapid filling) in acute pericarditis." }
   ];
@@ -3298,6 +3287,10 @@
    * or the card leaves the screen. */
   function waveMarks(h, from, to) {
     var s = h.spec || {}, out = [], k, t;
+    if (s.recording) {   // a recorded clip carries its own marker times
+      (s.marksAbs || []).forEach(function (m) { if (m.t >= from && m.t < to) out.push(m); });
+      return out;
+    }
     var cardiac = s.type === "cardiac" || !!s.cardiac || !!s.bpm || !!s.systole || !!s.sysLen;
     if (cardiac) {
       var cyc = s.period || s.cycle || 0.85, sys = s.systole || s.sysLen || 0.3;
@@ -3345,50 +3338,81 @@
     })();
   }
 
+  // Recorded heart sounds (clinix-audio.js RECORDINGS): same list, a Recording button, the PCG drawn from the clip.
+  var recModelsAdded = false;
+  function addRecordingModels() {
+    if (recModelsAdded) return;
+    try {
+      var R = window.SMD_CLINIX_AUDIO && SMD_CLINIX_AUDIO.RECORDINGS;
+      if (!R) return;   // audio engine not loaded yet: try again on the next paint
+      recModelsAdded = true;
+      R.forEach(function (r) {
+        SOUND_MODELS.push({ kind: "rec_" + r.id, label: r.label + " (recording)", type: "cardiac", rec: true, icon: "monitor_heart", desc: r.desc + " Cue: " + r.cue + "." });
+      });
+    } catch (e) {}
+  }
+
+  // Heart Listen: the real recording first (with its PCG), the synthesized model one tap away.
+  function listenBtns(audioKind) {
+    var rk = heartRecFor(audioKind), main = rk || audioKind, on = state.audioKind === main;
+    var h = '<button type="button" class="cx-btn ' + (on ? "cx-btn--danger" : "cx-btn--primary") + '" data-act="cx-physio-play" data-id="' + esc(main) + '">' +
+      ic(on ? "stop" : "volume_up") + " " + (on ? "Stop" : (rk ? "Listen (recording)" : "Listen")) + "</button>";
+    if (rk) {
+      var mon = state.audioKind === audioKind;
+      h += '<button type="button" class="cx-btn cx-btn--ghost" data-act="cx-physio-play" data-id="' + esc(audioKind) + '">' +
+        ic(mon ? "stop" : "graphic_eq") + " " + (mon ? "Stop" : "Synthesized model") + "</button>";
+    }
+    return h;
+  }
+  function heartPcg(audioKind) {
+    var rk = heartRecFor(audioKind);
+    if (!rk || state.audioKind !== rk) return "";
+    return '<canvas class="cx-wave cx-physio-pcg" data-wave="' + esc(rk) + '" role="img" aria-label="Live phonocardiogram of the recorded heart sound" ' +
+      'style="display:block;width:100%;height:72px;margin-top:8px;border-radius:10px"></canvas>' +
+      '<div class="cx-snd-hint">Real recording with phonocardiogram. ' + esc((window.SMD_CLINIX_AUDIO && SMD_CLINIX_AUDIO.REC_CREDIT) || "") + "</div>";
+  }
+
+  // The Physiology sandbox's heart Listen button plays the recorded clip when one exists for that finding.
+  var HEART_REC = { s1s2_normal: "rec_s1", s3_gallop: "rec_s3", s4_gallop: "rec_s4", as_murmur: "rec_as", mr_murmur: "rec_mr", tr_murmur: "rec_mr", ms_murmur: "rec_ms", ar_murmur: "rec_ar" };
+  function heartRecFor(kind) {
+    var rk = HEART_REC[kind];
+    return (rk && window.SMD_CLINIX_AUDIO && SMD_CLINIX_AUDIO.has(rk)) ? rk : null;
+  }
+
   function renderSoundLab(host) {
+    addRecordingModels();
     try { if (window.SMD_CLINIX_AUDIO && SMD_CLINIX_AUDIO.prewarm) SMD_CLINIX_AUDIO.prewarm(); } catch (e) {}
     var html = header("Auscultation Sound Lab", "Acoustics & Real Audio Reference", "cx-back");
 
     var filter = state.diaMode || "all";
 
     html += '<div class="cx-sec"><div class="cx-notice" style="margin-bottom:12px;">' +
-      ic("volume_up") + '<div><b>Offline Stethoscope Audio & Real YouTube Recordings</b>' +
-      '<span>High-fidelity synthesized acoustics powered by the Web Audio API alongside clinical real patient recordings from verified medical channels.</span></div></div>' +
+      ic("volume_up") + '<div><b>Heart and lung sounds</b>' +
+      '<span>Synthesized teaching models for heart and lung sounds, plus real heart recordings with a phonocardiogram.</span></div></div>' +
       '<div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;">' +
-        '<button type="button" class="cx-mode-btn' + (filter === "all" ? " cx-mode-btn--active" : "") + '" data-act="cx-sound-filter" data-id="all">All (17)</button>' +
+        '<button type="button" class="cx-mode-btn' + (filter === "all" ? " cx-mode-btn--active" : "") + '" data-act="cx-sound-filter" data-id="all">All (' + SOUND_MODELS.length + ')</button>' +
         '<button type="button" class="cx-mode-btn' + (filter === "resp" ? " cx-mode-btn--active" : "") + '" data-act="cx-sound-filter" data-id="resp">Respiratory</button>' +
         '<button type="button" class="cx-mode-btn' + (filter === "cardiac" ? " cx-mode-btn--active" : "") + '" data-act="cx-sound-filter" data-id="cardiac">Cardiac</button>' +
-        '<button type="button" class="cx-mode-btn' + (filter === "yt" ? " cx-mode-btn--active" : "") + '" data-act="cx-sound-filter" data-id="yt">Real (YouTube)</button>' +
+        '<button type="button" class="cx-mode-btn' + (filter === "rec" ? " cx-mode-btn--active" : "") + '" data-act="cx-sound-filter" data-id="rec">Heart recordings</button>' +
       '</div><div class="cx-rows">';
 
     for (var i = 0; i < SOUND_MODELS.length; i++) {
       var s = SOUND_MODELS[i];
       if (filter === "resp" && s.type !== "resp") continue;
       if (filter === "cardiac" && s.type !== "cardiac") continue;
-      if (filter === "yt" && !s.ytVideoId) continue;
+      if (filter === "rec" && !s.rec) continue;
       var isPlaying = state.audioKind === s.kind;
-      var isYtActive = state.activeYtSound === s.kind;
       html += '<div class="cx-pres-card" style="padding:14px;margin-bottom:8px;">' +
         '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;gap:8px;flex-wrap:wrap;">' +
           '<div style="font-weight:700;font-size:15px;color:var(--cx-ink);flex:1;min-width:180px;">' + esc(s.label) + '</div>' +
           '<div style="display:flex;gap:6px;align-items:center;">' +
             '<button type="button" class="cx-btn ' + (isPlaying ? "cx-btn--ghost" : "cx-btn--primary") + '" style="padding:6px 10px;font-size:12.5px;" data-act="cx-audio" data-id="' + esc(s.kind) + '">' +
-              ic(isPlaying ? "stop" : "play_arrow") + ' ' + (isPlaying ? "Stop" : "Synthesized") + '</button>' +
-            (s.ytVideoId ? '<button type="button" class="cx-btn cx-btn--ghost" style="padding:6px 10px;font-size:12.5px;color:#c00;border-color:rgba(204,0,0,0.35);" data-act="cx-sound-yt" data-id="' + esc(s.kind) + '">' +
-              ic(isYtActive ? "expand_less" : "smart_display") + ' ' + (isYtActive ? "Hide" : "Real (" + esc(s.ytChannel || "YouTube") + ")") + '</button>' : '') +
+              ic(isPlaying ? "stop" : "play_arrow") + ' ' + (isPlaying ? "Stop" : (s.rec ? "Recording" : "Synthesized")) + '</button>' +
+
           '</div></div>' +
         '<div style="font-size:13px;color:var(--cx-muted);line-height:1.45;margin-bottom:6px;">' + esc(s.desc) + '</div>' +
+        (s.rec ? '<div style="font-size:11.5px;color:var(--cx-muted);margin-bottom:4px;">Real recording with phonocardiogram. ' + esc((window.SMD_CLINIX_AUDIO && SMD_CLINIX_AUDIO.REC_CREDIT) || "") + '</div>' : '') +
         (isPlaying ? '<canvas class="cx-wave" data-wave="' + esc(s.kind) + '" role="img" aria-label="Live waveform of the ' + esc(s.label) + ' sound" style="display:block;width:100%;height:72px;margin-top:6px;border-radius:10px;background:color-mix(in srgb,var(--cx-accent,#0f766e) 7%,transparent);color:var(--cx-accent,#0f766e)"></canvas>' : "");
-
-      if (isYtActive && s.ytVideoId) {
-        var shimUrl = YT_SHIM + "?v=" + esc(s.ytVideoId) + (s.ytStart ? "&start=" + s.ytStart : "");
-        html += '<div style="margin-top:10px;border-radius:10px;overflow:hidden;background:#000;position:relative;padding-bottom:56.25%;height:0;">' +
-          '<iframe src="' + shimUrl + '" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' +
-          '</div>' +
-          '<div style="display:flex;justify-content:flex-end;margin-top:4px;">' +
-            '<button type="button" class="cx-btn cx-btn--ghost" style="padding:4px 8px;font-size:11.5px;" data-act="cx-watch-sound" data-vid="' + esc(s.ytVideoId) + '" data-start="' + (s.ytStart || 0) + '">' +
-            ic("open_in_new") + ' Open on YouTube</button></div>';
-      }
 
       html += '</div>';
     }
@@ -4159,24 +4183,8 @@
         openExternal("https://www.youtube.com/watch?v=" + id);
         haptic("tap"); return;
       }
-      case "cx-watch-sound": {
-        var vid = t.getAttribute("data-vid") || "";
-        var start = parseInt(t.getAttribute("data-start") || "0", 10);
-        var url = "https://www.youtube.com/watch?v=" + vid + (start ? "&t=" + start + "s" : "");
-        openExternal(url);
-        haptic("tap"); return;
-      }
       case "cx-sound-filter": {
         state.diaMode = id || "all";
-        haptic("tap"); repaint(); return;
-      }
-      case "cx-sound-yt": {
-        if (state.activeYtSound === id) {
-          state.activeYtSound = null;
-        } else {
-          state.activeYtSound = id;
-          stopAudio();
-        }
         haptic("tap"); repaint(); return;
       }
       case "cx-audio": {
@@ -4302,6 +4310,8 @@
         haptic("tap");
         var po = document.getElementById("cxPhysioOut");
         if (po) po.innerHTML = physioOutHTML(); else repaint();
+        var pcg = document.querySelector("#clinixRoot canvas.cx-physio-pcg");
+        if (pcg) startWave(pcg, pcg.getAttribute("data-wave"));
         return;
       }
 

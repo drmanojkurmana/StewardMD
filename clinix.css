@@ -1143,6 +1143,11 @@ html.cx-lock .mc-overlay { z-index: 1300; }
   margin-top: 8px; font-size: 13.5px; line-height: 1.55; color: var(--cx-ink);
 }
 #clinixRoot .cx-physio-listen .cx-btn { flex: 0 0 auto; }
+#clinixRoot .cx-physio-listen { flex-wrap: wrap; }
+#clinixRoot .cx-physio-listen > div:first-child { flex: 1 1 160px; min-width: 0; }
+/* Listen (recording) above the synthesized-model button, both full width of their column */
+#clinixRoot .cx-physio-btns { display: flex; flex-direction: column; gap: 8px; flex: 0 1 220px; min-width: 190px; }
+#clinixRoot .cx-physio-btns .cx-btn { width: 100%; justify-content: center; white-space: nowrap; }
 
 #clinixRoot .cx-physio-nums {
   display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 10px 0 4px;
