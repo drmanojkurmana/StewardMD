@@ -3276,19 +3276,6 @@
     { kind: "aortic_regurgitation", label: "Aortic Regurgitation (Early Diastolic)", type: "cardiac", icon: "hearing", desc: "High-pitched early diastolic decrescendo murmur best heard at Erb's point leaning forward in expiration." },
     { kind: "pericardial_rub", label: "Pericardial Friction Rub", type: "cardiac", icon: "texture", desc: "Triphasic scratchy, superficial sound (atrial systole, ventricular systole, rapid filling) in acute pericarditis." }
   ];
-  // Recorded heart sounds (clinix-audio.js RECORDINGS): same list, a Recording button, the PCG drawn from the clip.
-  var recModelsAdded = false;
-  function addRecordingModels() {
-    if (recModelsAdded) return;
-    try {
-      var R = window.SMD_CLINIX_AUDIO && SMD_CLINIX_AUDIO.RECORDINGS;
-      if (!R) return;   // audio engine not loaded yet: try again on the next paint
-      recModelsAdded = true;
-      R.forEach(function (r) {
-        SOUND_MODELS.push({ kind: "rec_" + r.id, label: r.label + " (recording)", type: "cardiac", rec: true, icon: "monitor_heart", desc: r.desc + " Cue: " + r.cue + "." });
-      });
-    } catch (e) {}
-  }
 
   function openSoundLab() {
     state.diaMode = "all";
@@ -3360,6 +3347,20 @@
       });
       requestAnimationFrame(frame);
     })();
+  }
+
+  // Recorded heart sounds (clinix-audio.js RECORDINGS): same list, a Recording button, the PCG drawn from the clip.
+  var recModelsAdded = false;
+  function addRecordingModels() {
+    if (recModelsAdded) return;
+    try {
+      var R = window.SMD_CLINIX_AUDIO && SMD_CLINIX_AUDIO.RECORDINGS;
+      if (!R) return;   // audio engine not loaded yet: try again on the next paint
+      recModelsAdded = true;
+      R.forEach(function (r) {
+        SOUND_MODELS.push({ kind: "rec_" + r.id, label: r.label + " (recording)", type: "cardiac", rec: true, icon: "monitor_heart", desc: r.desc + " Cue: " + r.cue + "." });
+      });
+    } catch (e) {}
   }
 
   function renderSoundLab(host) {
