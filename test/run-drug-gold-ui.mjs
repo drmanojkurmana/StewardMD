@@ -52,7 +52,7 @@ try {
   if (SHOTS) await page.screenshot({ path: SHOTS + "/gold-search.png" });
 
   /* ── the 104 monographs no bundle contained until now ───────────────────────────────── */
-  for (const q of ["Atropine sulfate", "Caspofungin acetate", "Enoxaparin sodium", "Clopidogrel bisulfate", "Belzutifan", "belzut"]) {
+  for (const q of ["Atropine sulfate", "Caspofungin acetate", "Enoxaparin sodium", "Clopidogrel bisulfate", "Belzutifan", "belzut", "Blinatumomab", "blinatum", "Blincyto"]) {
     const t = await type(q);
     ok(new RegExp(q.split(" ")[0], "i").test(t) && !/No drugs match/.test(t), "supplement-only monograph is searchable: " + q);
   }
@@ -66,7 +66,7 @@ try {
   ok(/No drugs match/.test(none), "nonsense still says so rather than showing loose matches: " + none.slice(0, 60));
 
   /* ── opening one renders the authored monograph, not a dead end ─────────────────────── */
-  for (const name of ["Cefiderocol", "Caspofungin acetate", "Belzutifan"]) {
+  for (const name of ["Cefiderocol", "Caspofungin acetate", "Belzutifan", "Blinatumomab"]) {
     await page.evaluate((n) => { MEDDB.openList(); MEDDB.openComposition(n); }, name);
     await page.waitForTimeout(6000);
     const d = await page.evaluate(() => {
@@ -77,6 +77,31 @@ try {
       name + " opens on its full monograph (" + d.secs.length + " sections)");
     ok(!/No structured clinical record|Full monograph pending/.test(d.txt), name + " is not the 'pending' placeholder");
     if (name === "Belzutifan") ok(/120 mg/.test(d.txt) && /embryo-fetal/i.test(d.txt) && /HIF-2/.test(d.txt) && !/gemini/i.test(d.txt), "Belzutifan shows its label dose, boxed-warning content and mechanism");
+    if (name === "Blinatumomab") {
+      ok(/Blincyto/.test(d.txt) && /28 mcg\/day/.test(d.txt) && /CRS/.test(d.txt) && /ICANS/.test(d.txt) && /CD19/.test(d.txt) && /CD3/.test(d.txt),
+        "Blinatumomab shows brand, label dose, boxed-warning content and both bridged targets");
+      ok(/Full FDA label/.test(d.secs.join("|")) && /Mechanism/.test(d.secs.join("|")),
+        "Blinatumomab keeps the verbatim label as a lower section and a Mechanism section");
+      ok(!/—/.test(d.txt), "no em-dash placeholder anywhere in the monograph");
+      const title = await page.evaluate(() => (document.querySelector(".db-gen") || {}).textContent || "");
+      ok(/^Blinatumomab/.test(title.trim()), "title-cased monograph title, not the lowercase label stub: " + title.trim().slice(0, 30));
+      // The animated mechanism must be one tap away on the first screen: wait for the
+      // async figure registry, then the generic late-card path must have inserted it.
+      try {
+        await page.waitForFunction(() => document.querySelector('.db-fig[data-f="blinatumomab-mechanism-adverse-effects"]'), null, { timeout: 15000 });
+      } catch {}
+      const fig = await page.evaluate(() => {
+        const el = document.querySelector('.db-fig[data-f="blinatumomab-mechanism-adverse-effects"]');
+        if (!el) return null;
+        el.click();
+        return { q: el.getAttribute("data-q") };
+      });
+      ok(fig && /name=Blinatumomab/.test(fig.q || ""), "the mechanism scene card is surfaced and presets Blinatumomab");
+      await page.waitForTimeout(1500);
+      const opened = await page.evaluate(() => !!(window.SMD_FIG && window.SMD_FIG.isOpen && window.SMD_FIG.isOpen()));
+      ok(opened, "tapping the card opens the scene in the standard figure viewer");
+      await page.evaluate(() => { if (window.SMD_FIG && window.SMD_FIG.close) window.SMD_FIG.close(); });
+    }
   }
   if (SHOTS) await page.screenshot({ path: SHOTS + "/gold-monograph.png" });
 
@@ -84,7 +109,7 @@ try {
   // A bare `1fr` grid track carries an implicit min-width:auto, so one long value ("Serum
   // electrolytes, renal function, fluid balance, ECG (K+/Mg2+/Ca2+)") widened its own track and
   // pushed the right-hand column off the screen edge. Reported on the Electrolytes card.
-  for (const name of ["Electrolytes", "Cefiderocol"]) {
+  for (const name of ["Electrolytes", "Cefiderocol", "Blinatumomab"]) {
     await page.evaluate((n) => { MEDDB.openList(); MEDDB.openComposition(n); }, name);
     await page.waitForTimeout(5000);
     const fit = await page.evaluate(() => {
@@ -117,7 +142,7 @@ try {
 
   /* ── the library really is the whole library ────────────────────────────────────────── */
   const stats = await page.evaluate(() => SMD_OFFLINE_CLINICAL.stats());
-  // 1,592 = the 1,541-row bundle plus the 51 supplement rows that are a genuinely new molecule.
+  // the bundle rows plus the supplement rows that are a genuinely new molecule.
   // The other 53 authored records are salt forms of a molecule the bundle already carries
   // ("Atropine sulfate" IS atropine) and are deliberately not shipped as a second row; the index
   // strips the counter-ion from a query instead, so those names are still findable.

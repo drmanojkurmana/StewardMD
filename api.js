@@ -662,13 +662,39 @@
   }
   /* Drugs that have an interactive "how it works" figure (fig-viewer.js registry, prep/figures/figures.json) get a card, preset to the
      drug's class. Matching is on the generic's first word, else on the class text (a class phrase the figure lists). */
-  function figCard(d) {
-    var F = window.SMD_FIG; if (!F || !F.forDrugs) return "";
-    var ms = F.forDrugs(d.composition);
-    if (!ms.length) ms = F.matchText([d["class"], d.action_class].join(" "), 1);
+  function figButtons(ms) {
     return ms.slice(0, 3).map(function (m) {
       return '<button type="button" class="db-fig" data-f="' + esc(m.id) + '" data-q="' + esc(m.query || "") + '"><i class="db-fig-i" aria-hidden="true">&#9654;</i><span><b>' + esc(m.title) + '</b><small>' + esc(m.blurb) + '</small></span></button>';
     }).join("");
+  }
+  function figMatches(d) {
+    var F = window.SMD_FIG; if (!F || !F.forDrugs) return [];
+    var ms = F.forDrugs(d.composition);
+    if (!ms.length) ms = F.matchText([d["class"], d.action_class].join(" "), 1);
+    return ms;
+  }
+  function figCard(d) { return figButtons(figMatches(d)); }
+  function wireFigButtons(host) {
+    host.querySelectorAll(".db-fig").forEach(function (fg) { fg.addEventListener("click", function () { window.SMD_FIG.openFig(fg.getAttribute("data-f"), fg.getAttribute("data-q"), fg); }); });
+  }
+  /* The figure registry (prep/figures/figures.json) loads async, so on a cold open it is
+   * usually not ready when the header renders and a drug that HAS an animated mechanism
+   * silently shows no Play card. Re-check once it is ready and insert the same card above
+   * the monograph. Generic: no per-drug exceptions, every figured drug benefits. */
+  function figCardLate(d) {
+    var F = window.SMD_FIG;
+    if (!F || typeof F.ready !== "function") return;
+    var name = d.composition, cls = d["class"], act = d.action_class;
+    F.ready().then(function () {
+      if (!st.info || st.name !== name) return;
+      var host = detailHost(); if (!host || host.querySelector(".db-fig")) return;
+      var html = figButtons(figMatches({ composition: name, "class": cls, action_class: act }));
+      if (!html) return;
+      var mono = host.querySelector("#dbMono");
+      var tmp = document.createElement("div"); tmp.innerHTML = html;
+      while (tmp.firstChild) host.insertBefore(tmp.firstChild, mono);
+      wireFigButtons(host);
+    });
   }
   function renderDetail() {
     var d = st.info, b = detailHost();
@@ -685,7 +711,8 @@
       (d.habit_forming ? '<div class="db-hf">Habit forming: <b>' + esc(d.habit_forming) + '</b></div>' : '') +
       figCard(d) +
       '<div id="dbMono" class="db-mono"><div class="db-soon">Loading prescribing details…</div></div>';
-    b.querySelectorAll(".db-fig").forEach(function (fg) { fg.addEventListener("click", function () { window.SMD_FIG.openFig(fg.getAttribute("data-f"), fg.getAttribute("data-q"), fg); }); });
+    wireFigButtons(b);
+    figCardLate(d);
     // brands (all filters + sorts preserved) -> right-side slide-in drawer
     var dw = root.querySelector("#dbDwBody");
     dw.innerHTML =

@@ -9,7 +9,7 @@ const OUT_SQL = path.join(ROOT, 'worker', 'data', 'import_gold_68.sql');
 
 const missing = [
   "Adagrasib", "Amivantamab", "Asciminib", "Avapritinib", "Avelumab",
-  "BCG Vaccine", "Brentuximab Vedotin", "Camizestrant", "Capivasertib", "Cefiderocol",
+  "BCG Vaccine", "Blinatumomab", "Brentuximab Vedotin", "Camizestrant", "Capivasertib", "Cefiderocol",
   "Cemiplimab", "Daraxonrasib", "Dostarlimab", "Elacestrant", "Elranatamab",
   "Enasidenib", "Enfortumab Vedotin", "Epcoritamab", "Erdafitinib", "Fedratinib",
   "Fruquintinib", "Futibatinib", "Glofitamab", "Herpes Zoster Vaccine", "Human Papillomavirus Vaccine",
@@ -72,7 +72,7 @@ const COLS = [
   "updated_at", "gold"
 ];
 
-let sqlOut = "-- Import 68 gold monographs + aliases into Cloudflare D1 drug_structured\n";
+let sqlOut = "-- Import 69 gold monographs + aliases into Cloudflare D1 drug_structured\n";
 
 for (const name of missing) {
   const filePath = path.join(GOLD_DIR, name + ".json");

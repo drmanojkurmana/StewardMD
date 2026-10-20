@@ -135,3 +135,35 @@ Owner supplied the WELIREG label (NDA 215383, rev 02/2024) and asked for it in t
 - **Coverage gap (same day audit):** `drug-lexicon.js` recognises 2,233 generics but the offline index holds 1,593 molecules. Checking 190
   recent drugs by hand found ~170 with no monograph (oral oncology kinase/PARP/BCL2 agents, new anti-infectives, new neuro agents, ADCs and
   bispecifics). A label-sourced batch is the fix; do NOT write doses from memory.
+
+## Blinatumomab added from the FDA label (2026-10-20)
+Owner screenshots: trastuzumab opens the polished monograph, blinatumomab a lowercase sparse raw-label dump (2 Quick Facts,
+blank preg/lact, renal/hepatic and PK cards) with the registered mechanism scene nowhere surfaced.
+- Root cause was data, not the renderer: no authored `worker/data/gold/` record existed, so `offline-clinical.js`
+  fell back to the verbatim `data/fda-labels/blinatumomab.json` as `gold`. The template then printed em dashes for
+  every missing field, and the index row stayed lowercase with no class/tags. A second, generic cause: `figCard()`
+  in `api.js` renders synchronously while the figure registry loads async, so on a cold open the Play card usually
+  never appeared for ANY figured drug.
+- `worker/data/gold/Blinatumomab.json`: authored from the DailyMed BLINCYTO label text only (setid
+  38b482a8-960b-4591-9857-5031ecb830aa, Apr 22, 2026): 3 labeled indications, weight/BSA step dosing with the
+  9-to-28 mcg/day R/R step-up, grade-based CRS/ICANS hold-restart rules, boxed CRS + neurotoxicity warnings,
+  benzyl-alcohol neonatal caution, intrathecal CNS prophylaxis. Same key set as the other gold records; the full
+  23-section label rides along verbatim as the lower expandable reference. No invented facts; unknowns stated plainly.
+- Ships through `data/clinical-supplement.json.gz` (53 molecules now) and `data/clinical-index.js`, both rebuilt;
+  `offline-clinical.js` tokens bumped (sup4, idx15); `index.html` and `sw.js` cache markers bumped. The index row is
+  now title-cased with class and the Blincyto tag, so the title, chips and brand search all work.
+- Renderer change (generic, no blinatumomab exception): `api.js` keeps the sync `figCard()` and adds `figCardLate()`,
+  which re-checks `SMD_FIG` once the registry is ready and inserts the same Play card above the monograph. Every
+  figured drug benefits on cold open.
+- Derived files rebuilt: `data/neo/monograph-neonatal.json` (15 verbatim benzyl-alcohol neonatal statements) and
+  `data/dose-rules.json.gz` (perm2 rows, parser round-trip clean).
+- Tests: `test/drug-blinatumomab.test.mjs` (7: sections, no placeholder dashes, verbatim label, label-accurate numbers,
+  index/supplement wiring, scene resolution); `test/run-drug-gold-ui.mjs` searches "Blinatumomab"/"blinatum"/"Blincyto",
+  opens the monograph (brand, dose, CRS/ICANS/CD19/CD3, Mechanism + Full FDA label sections, no em dash, title case),
+  waits for the late Play card, taps it and asserts the standard viewer opens; fit-check loop covers the new monograph.
+- Server parity: no D1 row (no Indian brand), so the server only learns it from the hardcoded
+  list in `worker/scripts/import_gold_to_d1.mjs` — Blinatumomab is now entry 69 there. Taking effect needs the
+  SQL re-import (`node worker/scripts/import_gold_to_d1.mjs`, then `node worker/scripts/execute_batch_d1.mjs`
+  against prod D1) plus the path-filtered `deploy-worker.yml` run on merge to `main` (environment-gated
+  approval). Until then `/structured?name=Blinatumomab` answers `found:false` on the server while the app
+  opens the full monograph offline; no production data was touched from this agent.

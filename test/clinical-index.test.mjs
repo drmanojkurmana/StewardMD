@@ -31,14 +31,19 @@ const supplement = readGz("clinical-supplement.json.gz");
 test("the index covers every molecule the app can open, and invents none", () => {
   // offline-clinical.js merges the supplement over the bundle, so the openable set is the union.
   // Label-only drugs (data/fda-labels/*.json, fetched on open) are openable too, by name.
+  // Comparison is case-normalized: every lookup the app performs (index get/search, struct
+  // cleanComp/deSalt) is case-insensitive, so a label file in one casing and the authored
+  // monograph in another ("blinatumomab" vs "Blinatumomab") is one reachable molecule, not a gap.
+  const norm = (s) => String(s == null ? "" : s).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
   const labelDir = new URL("../data/fda-labels/", import.meta.url);
   const labelNames = new Set(readdirSync(labelDir).filter((f) => f.endsWith(".json")).map((f) => JSON.parse(readFileSync(new URL(f, labelDir), "utf8")).generic));
   const openable = new Set([...Object.keys(bundle.struct), ...Object.keys(supplement.struct), ...labelNames]);
   const listed = new Set(I.all().map((r) => r.n));
-  assert.equal(listed.size, openable.size, "index lists " + listed.size + " of " + openable.size);
-  const phantom = [...listed].filter((n) => !openable.has(n));
+  const listedN = new Set([...listed].map(norm)), openableN = new Set([...openable].map(norm));
+  assert.equal(listedN.size, openableN.size, "index lists " + listedN.size + " of " + openableN.size);
+  const phantom = [...listed].filter((n) => !openableN.has(norm(n)));
   assert.deepEqual(phantom, [], "the index must never offer a molecule that cannot then be opened");
-  const unreachable = [...openable].filter((n) => !listed.has(n));
+  const unreachable = [...openable].filter((n) => !listedN.has(norm(n)));
   assert.deepEqual(unreachable.slice(0, 5), [], unreachable.length + " molecules are shipped but unsearchable");
 });
 
