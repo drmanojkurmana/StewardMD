@@ -281,7 +281,7 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     if (!doc || !doc.body || doc.getElementById("smdAppCss")) return;
     var st = doc.createElement("style"); st.id = "smdAppCss"; st.textContent = APP_CSS + COLOR_CSS + IC_CSS; doc.body.appendChild(st);
     var vp = doc.querySelector('meta[name="viewport"]'); if (vp) vp.setAttribute("content", "width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover");
-    var info = doc.getElementById("info"); if (info) info.textContent = "Tap a labelled part for a one-line explanation.";
+    var info = doc.getElementById("info"); if (info) info.textContent = "Tap a label to see its explanation.";
     var src = doc.querySelector(".bio-sources");
     if (src && !src.querySelector("details")) {
       var dt = doc.createElement("details"), sm = doc.createElement("summary"); sm.textContent = "What the figure shows, and how sure we are";
@@ -298,26 +298,29 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     ".iso-plate-corners{flex:none}.smdz-st{flex:1 1 auto;min-height:90px;display:flex;justify-content:flex-start}.smdz-in{flex:none}" +
     ".smdz-bt{position:absolute;right:8px;bottom:8px;margin:0}.smdz-bt span{display:none}.smdz-bt button{min-width:36px;min-height:36px;font-size:18px;opacity:.9}" +
     ".iso-legend{flex:none;margin:4px 0 0}.iso-legend .iso-caption{display:none}" +
-    ".smdc{flex:none;margin:0 0 6px;display:grid;grid-template-columns:1fr 1fr}.smdc-t{grid-column:1/3;padding:3px}.smdc-t button{min-height:34px;font-size:14px}" +
+    ".smdc{flex:none;min-width:0;margin:0 0 6px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.smdc>*{min-width:0}.smdc-t{grid-column:1/3;padding:3px}.smdc-t button{min-height:34px;font-size:14px}" +
     ".smdc-r{padding:6px 12px;font-size:13px;gap:1px;border-top:1px solid var(--anatomy-faint)}.smdc-r b{font-size:10px}" +
     "@media (max-width:640px){.smdc{grid-template-columns:1fr}.smdc-t{grid-column:1}}" +
     ".smd-why{flex:0 0 auto;max-height:24vh;overflow:auto;margin:0 0 6px;display:grid;gap:3px;--w-t:#f2b84b;--w-m:#b48cff;--w-f:#4fd1a5;--w-i:#ff8fa3;--w-a:#ff7a59}body[data-theme='light'] .smd-why{--w-t:#9a6200;--w-m:#6a3fc4;--w-f:#0f7a5c;--w-i:#b4234a;--w-a:#b8421d}" +
     ".smd-why p{margin:0;padding:4px 10px;border-left:4px solid var(--c);border-radius:6px;background:color-mix(in srgb,var(--c) 11%,transparent);font:13px/1.35 system-ui,-apple-system,sans-serif;color:var(--anatomy-text)}" +
     ".smd-why b{font:700 10px system-ui;letter-spacing:.05em;text-transform:uppercase;color:var(--c);margin-right:6px}.smd-why mark{background:none;color:var(--anatomy-strong);font-weight:700}" +
     "@media (min-width:900px){.smd-why p{font-size:14px}}" +
-    ".smd-dock{flex:0 0 auto;padding:8px 12px 4px;border-top:1px solid var(--anatomy-faint);background:var(--anatomy-card)}" +
-    ".smd-dock .dr-controls{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;margin:0;font:600 13px/1.25 system-ui,-apple-system,sans-serif}" +
+    ".smd-dock{flex:0 0 auto;min-width:0;max-width:100%;box-sizing:border-box;padding:8px 12px 4px;border-top:1px solid var(--anatomy-faint);background:var(--anatomy-card);overflow-y:auto}" +
+    ".smd-dock .dr-controls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px 16px;margin:0;font:600 13px/1.25 system-ui,-apple-system,sans-serif}" +
+    ".smd-dock .dr-controls>*{min-width:0}.smd-dock .dr-range select,.smd-dock .dr-range input{max-width:100%;min-width:0}" +
     "@media (max-width:640px){.smd-dock .dr-controls{grid-template-columns:1fr}}" +
     ".smd-dock .dr-range{gap:2px}.smd-dock .dr-range input{height:28px}.smd-dock .dr-range select{min-height:38px;font-size:15px}.smd-dock .dr-ticks{font-size:11px}" +
     ".smd-dock #pause{display:none}.smd-dock .dr-status{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:0}" +
-    ".smd-dock .dr-info{position:static;margin:6px 0 0;padding:7px 12px;font-size:13px;line-height:1.35;box-shadow:0 0 0 1px var(--anatomy-faint)}" +
+    ".smd-dock .dr-info{position:static;margin:6px 0 0;padding:7px 12px;font-size:12px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 0 0 1px var(--anatomy-faint)}" +
     ".smd-foot{flex:0 0 auto;padding:2px 12px calc(env(safe-area-inset-bottom,0px) + 3px);font:8px/1.4 system-ui,-apple-system,sans-serif;color:var(--anatomy-muted)}" +
     ".smd-foot .bio-sources{margin:0}.smd-foot .bio-sources summary{font:600 8px system-ui,sans-serif;min-height:0;display:inline-flex;color:var(--anatomy-muted)}" +
     ".smd-foot details[open]{max-height:38vh;overflow:auto;font-size:12px;line-height:1.45;padding-top:4px}.smd-foot details[open] summary{font-size:11px}" +
     ".smdc .smdc-r{display:none}.smdc-t{grid-column:1/3}" +
-    "@media (min-width:800px) and (min-aspect-ratio:5/4){body{display:grid;grid-template-columns:minmax(0,1fr) 380px;grid-template-rows:minmax(0,1fr) auto}.iso-page{grid-column:1;grid-row:1/3}" +
-    ".smd-dock{grid-column:2;grid-row:1;overflow:auto;border-top:0;border-left:1px solid var(--anatomy-faint);padding:10px 14px}.smd-foot{grid-column:2;grid-row:2;background:var(--anatomy-card)}" +
-    ".smd-dock .dr-controls{grid-template-columns:1fr}.smd-why{max-height:none;margin-bottom:10px}.smd-why p{font-size:14px}}" +
+    "@media (min-width:800px) and (min-aspect-ratio:5/4){body{display:grid;width:100%;grid-template-columns:minmax(0,1fr) minmax(300px,min(380px,38vw));grid-template-rows:minmax(0,1fr) auto}.iso-page{grid-column:1;grid-row:1/3;min-width:0}" +
+    ".smd-dock{grid-column:2;grid-row:1;min-height:0;overflow:auto;border-top:0;border-left:1px solid var(--anatomy-faint);padding:10px 14px}.smd-foot{grid-column:2;grid-row:2;min-width:0;background:var(--anatomy-card)}" +
+    ".smd-dock .dr-controls{grid-template-columns:minmax(0,1fr)}.smd-why{max-height:none;margin-bottom:10px}.smd-why p{font-size:14px}}" +
+    "@media (max-width:799px){.smd-dock{max-height:44dvh;overflow-y:auto}}" +
+    ".iso-page,.smd-dock,.smd-foot,.iso-figure,.iso-plate,.dr-svg,.smdz-st,.dr-controls,.dr-range,.smd-why{min-width:0;max-width:100%}" +
     ".smd-help{position:absolute;inset:0;z-index:9;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.45)}" +
     ".smd-help div{max-width:340px;margin:16px;padding:18px 20px;border-radius:18px;background:var(--anatomy-card);color:var(--anatomy-strong);box-shadow:0 0 0 1px var(--anatomy-faint),0 12px 40px rgba(0,0,0,.4);font:15px/1.45 system-ui,-apple-system,sans-serif}" +
     ".smd-help b{display:block;font-size:17px;margin-bottom:8px}.smd-help ol{margin:0 0 12px;padding-left:20px}.smd-help li{margin:4px 0}" +

@@ -39,6 +39,16 @@
   // goal: new questions a day for the daily plan. mh: finished mocks, newest last, at most 20 ({ ts, label, marks, max, n }).
   function emptyStore() { return { v: 1, cards: {}, conf: {}, days: {}, mod: {}, bm: {}, bmx: {}, bmt: {}, bma: {}, rep: {}, exam: "neet-pg", last: null, dl: {}, hid: { ids: {}, ts: 0 }, mt: {}, goal: 30, mh: [], ls: {}, lsp: { r: 1, au: 0 }, pl: null, pt: null, ra: [], ask: null, cel: null, ml: null, ps: {} }; }
   function deckKey(moduleId) { return "p:" + moduleId; }
+  /* Universal-search question status (runFind/paintQ): the finished state never keeps the pn-load
+     skeleton styling. finished is true only when every subject answered; retry is true when at least
+     one subject failed (rerunning bumps fnd.seq, so late answers from the old query are ignored). */
+  function findQStatus(got, capped, fail, done, total) {
+    if (done < total) return { text: "Searching the questions… " + done + " of " + total + " subjects", finished: false, retry: false };
+    if (!got && fail > 0) return { text: "Question search needs a connection the first time for each subject.", finished: true, retry: true };
+    if (fail > 0) return { text: got + (capped ? "+" : "") + " found · " + fail + " subject" + (fail === 1 ? "" : "s") + " need a connection", finished: true, retry: true };
+    if (!got) return { text: "No question matches. Try fewer or other words.", finished: true, retry: false };
+    return { text: got + (capped ? "+" : "") + " found", finished: true, retry: false };
+  }
   // hidden: item ids withdrawn after repeated student reports (/api/prep/flag?hidden=1), as an id -> 1 map.
   /* mergeOverlay(bank, extra) -> bank items, then overlay items whose id the bank (or an earlier overlay item) does not
      have. Items are kept as they are (x, r, img, imgPlace, prov, set, sid and the key untouched). */
@@ -718,7 +728,7 @@
   var BM_PAGE = 50, BM_FILES = 12, BM_FRESH_MS = 7 * 864e5;
   var BM_TAGS = [["hy", "High Yield", 168], ["dif", "Difficult", 212], ["rm", "Repeated Mistake", 16], ["mr", "Must Revise", 4]];
   var BM_NOTE_MAX = 500;
-  var PURE = { dayHash: dayHash, selfShare: selfShare, buildSearch: buildSearch, searchFile: searchFile, pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, qualBlocked: qualBlocked, isOutdated: isOutdated, poolFor: poolFor, progressByModule: progressByModule,
+  var PURE = { dayHash: dayHash, selfShare: selfShare, buildSearch: buildSearch, searchFile: searchFile, pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, qualBlocked: qualBlocked, isOutdated: isOutdated, poolFor: poolFor, progressByModule: progressByModule, findQStatus: findQStatus,
     statusOf: statusOf, stars: stars, countFor: countFor, ovFor: ovFor, normStem: normStem, unionItems: unionItems, xgroupsFor: xgroupsFor, xgroupById: xgroupById, xlistRow: xlistRow, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, oldOverlays: oldOverlays, levelOf: levelOf, markLevels: markLevels, shuffle: shuffle, fmtTime: fmtTime, qcNew: qcNew, qcPause: qcPause, qcShow: qcShow, qcLeft: qcLeft, qcTick: qcTick, qcNext: qcNext, qcStep: qcStep, qcLevel: qcLevel, qcAfter: qcAfter, qcStats: qcStats, QC_GAP: QC_GAP, reviewSplit: reviewSplit, reviewDefault: reviewDefault, psPack: psPack, psPurge: psPurge, psCap: psCap, psList: psList, psDaysLeft: psDaysLeft, psUnpack: psUnpack, PS_DAYS: PS_DAYS, PS_MAX: PS_MAX,
     targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, conceptKeyOf: conceptKeyOf, conceptKeys: conceptKeys, diversePick: diversePick, diverseOrder: diverseOrder,
     weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
@@ -3463,8 +3473,15 @@
           var t = topicOf(h.sid, h.t);
           return '<li><button type="button" class="pn-mod" data-act="find-hit" data-s="' + esc(h.sid) + '" data-m="' + esc(h.t) + '" data-i="' + esc(h.id) + '"><span class="pn-ic sm" style="--h:' + subjHue(h.sid) + '" aria-hidden="true">' + ico("search") + '</span><span class="pn-mb"><b>' + hl(esc(h.p), q) + "</b><small>" + (subjectById(h.sid) ? esc(tx(subjectById(h.sid).name)) : "") + (t ? " · " + esc(tx(t.title)) : "") + "</small></span>" + ico("chev") + "</button></li>";
         }).join("");
-        if (st2) st2.textContent = done < subs.length ? "Searching the questions… " + done + " of " + subs.length + " subjects" : (got.length ? got.length + (got.length > 40 ? "+" : "") + " found" + (fail ? " · " + fail + " subject" + (fail === 1 ? "" : "s") + " need a connection" : "") : fail ? "Question search needs a connection the first time for each subject." : "No question matches. Try fewer or other words.");
-        if (st2 && done >= subs.length) st2.removeAttribute("role");
+        if (!st2) return;
+        var r = findQStatus(got.length, got.length > 40, fail, done, subs.length);
+        st2.textContent = r.text;
+        if (!r.finished) return;
+        // Finished: drop the skeleton styling and sweep, but keep role="status" so the final state is announced.
+        if (st2.classList) st2.classList.remove("pn-load");
+        // A failed subject leaves hits usable: offer an explicit retry that reruns the current query.
+        // runFind bumps fnd.seq, so late answers from the abandoned query can never overwrite the new one.
+        if (r.retry && !root.querySelector('[data-act="find-retry"]')) st2.insertAdjacentHTML("afterend", '<p class="pn-mut pn-small">Some subjects did not load. <button type="button" class="pn-btn sm" data-act="find-retry">Try again</button></p>');
       }
       function next() {
         var sb = todo.shift(); if (!sb) return;
@@ -4166,6 +4183,7 @@
     if (a === "find") { fnd.q = ""; return push(renderFind); }
     if (a === "find-scope") { fnd.scope = b.getAttribute("data-v") === "all" ? "all" : "plan"; return rerender(); }
     if (a === "find-hit") { srch.sid = b.getAttribute("data-s"); return openHit(b.getAttribute("data-m"), b.getAttribute("data-i")); }
+    if (a === "find-retry") return runFind();
     if (a === "module" || a === "solvenext") { var s1 = b.getAttribute("data-s"), m1 = b.getAttribute("data-m"); return loadIndex(s1).then(function () { openModule(s1, m1); }); }
     if (a === "start") { var c = st.cur, k0 = b.getAttribute("data-k"); if (setupOn()) return setupModule(c.s, c.m, k0 === "due" ? "due" : null); return startModule(c.s, c.m, k0); }
     if (a === "answer") { if (Date.now() - (st.dragAt || 0) < 350) return; return answer(Number(b.getAttribute("data-k"))); }
