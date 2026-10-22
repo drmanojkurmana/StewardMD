@@ -209,7 +209,6 @@ test("gate [ENFORCE=1]: mint session without Origin header (curl) is refused wit
     headers: {
       Authorization: "Bearer tok-a",
       "Content-Type": "application/json",
-      "X-SMD-Device": "dev-test-1",
     },
     body: JSON.stringify({ deviceId: "dev-test-1", appVersion: "1.0.0" }),
   });

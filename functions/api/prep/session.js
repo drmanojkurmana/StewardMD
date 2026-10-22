@@ -33,8 +33,14 @@ export async function onRequestPost({ request, env }) {
   if (!o && request.headers.get("Referer")) {
     try { o = new URL(request.headers.get("Referer")).origin; } catch (e) {}
   }
-  if (!o || !isAllowedOrigin(o)) {
-    return json({ error: "forbidden", code: !o ? "origin-required" : "foreign-origin", message: "Requests must originate from the StewardMD application" }, 403);
+  if (o && !isAllowedOrigin(o)) {
+    return json({ error: "forbidden", code: "foreign-origin", message: "Requests must originate from the StewardMD application" }, 403);
+  }
+  // The iOS app sends its API calls through native networking (CapacitorHttp), which adds no Origin header at all.
+  // A missing Origin is accepted only with the app's device header AND a verified signed-in user (below); a bare
+  // request with neither (curl) stays refused. Owner 2026-10-22: every module showed "check your connection".
+  if (!o && !request.headers.get("X-SMD-Device")) {
+    return json({ error: "forbidden", code: "origin-required", message: "Requests must originate from the StewardMD application" }, 403);
   }
 
   // User auth check: caller must be signed in
