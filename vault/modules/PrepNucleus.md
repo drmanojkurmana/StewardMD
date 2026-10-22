@@ -238,6 +238,24 @@ own (inside `smd_prep`): the home row shows on the NEET-PG tab; data comes from 
 - **Frozen papers:** the owner deletes inputs after use, so a paper whose txt and pdf are gone is kept from the last
   build (its items, merges, images) instead of re-parsed; a rebuild without the inputs reproduced the same 10,485 items.
   `index.json` is now about 800 KB and the items file about 11 MB (split per paper if phones struggle).
+- **SS papers (2026-10-22):** NEET-SS and INI-SS recall papers (`exam: "neet-ss" | "ini-ss"`) list on the NEET-SS tab
+  (home row there too, its own recall note with no claim about who publishes what), are timed in the NEET-SS pattern
+  (`tabOf` in `prep-pyq.js`), and chips read "Asked in INI-SS 2026 (recall)". Explanations and their review are written
+  per exam family (`famOf`, `byFamily`: SS groups use the NEET-SS profile, never mixed with PG). Map stage: an SS
+  paper names its `subject` in the config and stays in it (no other-subject choice).
+- **Format `stem` (labelled revision guides):** "MCQ <n> (<label>):", "Question Stem:", "Options:" (inline with `|`,
+  one per line, or an "Option / Statement" table that may repeat its header after a page break), "Correct Answer:
+  Option X". One PDF holds several papers: each paper `pick`s headings by number range and/or label regex; `assign`
+  ({ "<n>#<k>": <n> }) moves a stem that out-of-order pages left under another heading (an unassigned second stem fails,
+  never guessed). Optional per paper: `ground: "source"` (the source's own explanation is private grounding for
+  `--explain`, written only to `work/near.json`, never to the output), `shuffle: true` (fixed option reorder by hash
+  when the source keys mostly A, letters in the grounding remapped), `fix` (a private JSON of reviewed edits, keyed by
+  paper id and number, applied before the shuffle). Test fixture `test/fixtures/prep-pyq/stem.txt` (made up).
+- **Third batch (2026-10-22, owner PDF, SS Medical Oncology):** one guide holding four papers: INI-SS April 2026 (42),
+  INI-SS April 2023 (26), NEET-SS December 2025 (34 of 35: MCQ 89 is missing from the PDF), NEET-SS 2024 (52); 154 items,
+  100% parsed. The PDF keyed A in 117 of 154 (now spread by `shuffle`); 37 keyed options carried the answer's
+  explanation and 12 stems asked a second question only the key answered: trimmed in the private fix file (12 stems, 77
+  options). Paid stages (dry run): about $0.07. Config and fix file live in `~/prep-data/pyq/` beside `papers.json`.
 - **Gotcha:** `emoji-icons.js` removes page locators ("pg 45") from rendered text, which also ate "PG 2025" out of
   "NEET-PG 2025"; `scrubBooks` now protects "NEET-PG" (test in `test/emoji-icons.test.mjs`).
 - **Tests:** `test/prep-pyq.test.mjs` (three parsers on synthetic fixtures incl. watermark shreds, option matching,

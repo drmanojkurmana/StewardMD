@@ -29,6 +29,12 @@
 //          diagonal watermark that pdftotext shreds into 2-4 letter fragments
 //   ques   "Ques <n>." (space optional), options "A.-D." or "a.-d." (Cyrillic look-alike letters normalised),
 //          "Ans. <letter>", repeated site headers and a shredded diagonal watermark appended to lines
+//   stem   labelled revision guides (SS recalls): "MCQ <n> (<label>):", "Question Stem:", "Options:", "Correct Answer:
+//          Option X"; one file can hold several papers, each with pick (and assign for page-order spills); see FORMATS.stem
+//   Optional per paper: subject (a taxonomy subject id for every item, SS papers), ground: "source" (the source's own
+//   explanation becomes private grounding for --explain, never output), shuffle: true (fixed option reorder when the
+//   source keys mostly A), fix: path to a private JSON of reviewed edits { "<paper id>": { "<n>": { q?, o?: { "<index>": text } } } }
+//   (indexes are the source's option order, before shuffle).
 //
 // OUT  prep/pyq/out/index.json        { v, papers: [{ id, exam, year, session, kind, n, items: [ids] }], file, tags,
 //                                      mods }  tags: { bankItemId: [module, [[exam, year, kind]]] }; mods: { module: n }
@@ -54,7 +60,7 @@ import { createVertex, requestBody, promptTokens, costUsd, usdToInr, sumUsage, v
 import { parseArgs, groupsOf, EST } from "./prep-fill.mjs";
 import { classifySchema, linesFor as classifyLines, othersOf, readClassify } from "./prep-classify.mjs";
 import { linesFor as screenLines, verdict } from "./prep-screen-keys.mjs";
-import { sanitizeSolve } from "../functions/_prep-core.js";
+import { sanitizeSolve, getProfile } from "../functions/_prep-core.js";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const readJson = (p, d) => { try { return JSON.parse(fs.readFileSync(p, "utf8")); } catch (e) { return d; } };
@@ -146,6 +152,141 @@ FORMATS.qno = {
   header: () => null, meta: /^\s*(Subject|Topic|Sub-Topic)\s*:\s*(.*)$/i, noise: [/https?:\/\/|www\./i], stop: null, mark: null,
   xq: /^\s*Ques No\s*:\s*(\d{1,4})/, xa: /^\s*Ans\s*:/,
 };
+// Revision guides with labelled fields (SS recall compilations): "MCQ <n> (<label>): <title>", then "Topic Discussion:",
+// "Question Stem:", "Options: A. .. | B. .. | C. .. | D. .." (inline, or one per line, or a two-column "Option /
+// Statement" table), "Correct Answer: Option X (..)", "Why Correct:", "Why Other Options Are Wrong:". One file holds
+// several papers: each paper picks its headings (pick: [{ from, to } | { label: "<regex on the heading label>" }]).
+// Pages printed out of order can leave a second stem under the wrong heading: assign { "<n>#<k>": <n> } moves the
+// k-th stem of heading n (k from 1) to another number; an unassigned second stem is a failure, never guessed. The
+// source's explanation is NOT kept in the item: it is returned as ground (private grounding for --explain, written
+// only to the gitignored work/near.json when the paper says ground: "source").
+FORMATS.stem = {
+  parse: (text, F) => parseStemPaper(text, F),
+  header: () => null, noise: [], stop: null, mark: null,
+  xq: /^\s*[●○•]?\s*MCQ\s+(\d{1,4})\b/, xa: /^\s*[●○•]?\s*Correct Answer\s*:/,
+};
+const STEM_LABELS = ["Topic Discussion", "Question Stem", "Options", "Correct Answer", "Why Correct", "Why Other Options Are Wrong"];
+const STEM_HEAD = /^\s*[●○•]?\s*MCQ\s+(\d{1,4})(?:\s*\(([^)]*)\))?\s*:\s*(.*)$/;
+// No en or em dash reaches app text: ranges read "10 to 15", joined words take a hyphen, an aside takes a comma.
+export const undash = (s) => String(s).replace(/(\d)\s*[\u2013\u2014]\s*(\d)/g, "$1 to $2").replace(/\s+[\u2013\u2014]\s+/g, ", ")
+  .replace(/(\w)[\u2013\u2014](\w)/g, "$1-$2").replace(/[\u2014]/g, ", ").replace(/[\u2013]/g, "-").replace(/,\s*,/g, ",");
+const stemText = (s) => undash(String(s).replace(/[●○■]/g, " ").replace(/\s+/g, " ").replace(/^[\s•|]+|[\s•|]+$/g, ""));
+/* stemFields(seg) -> { label: text } for the labels present in one stem segment. */
+function stemFields(seg) {
+  const at = STEM_LABELS.map((l) => [seg.search(new RegExp("(?:^|[\\s●○•])" + l + "\\s*:")), l]).filter((x) => x[0] >= 0).sort((a, b) => a[0] - b[0]);
+  const f = {};
+  at.forEach(([i, l], k) => { const s = seg.indexOf(":", seg.indexOf(l, i)) + 1, e = k + 1 < at.length ? at[k + 1][0] : seg.length; f[l] = seg.slice(s, e); });
+  return f;
+}
+/* stemOptions(text) -> [4] or null: "A. x | B. y" inline or one per line; else the "Option / Statement" table. */
+export function stemOptions(text) {
+  const s = " " + String(text).replace(/[●○•]/g, " | ").replace(/\s+/g, " ").trim();
+  // A, then the first B marker after it, and so on: an abbreviation such as "C. species" inside option D is not a fifth option
+  const at = [];
+  let from = 0;
+  for (const L of "ABCD") {
+    const m = new RegExp("(?:\\|\\s*|\\s)" + L + "\\.\\s+").exec(s.slice(from));
+    if (!m) return null;
+    at.push([from + m.index, from + m.index + m[0].length]);
+    from = from + m.index + m[0].length;
+  }
+  const o = at.map(([, e], k) => stemText(s.slice(e, k < 3 ? at[k + 1][0] : s.length)));
+  return o.every(Boolean) ? o : null;
+}
+// The "Option | Statement" table: a header line ("Option  Statement", or the two words on their own lines), then
+// rows "A    text" (or the letter alone) with wrapped lines below; the header repeats after a page break.
+const TABLE_HEAD = /^\s*Option(?:\s+Statement)?\s*$/;
+function stemTable(lines) {
+  const i = lines.findIndex((l) => TABLE_HEAD.test(l));
+  if (i < 0) return null;
+  const o = [], cur = { k: -1, t: [] };
+  const push = () => { if (cur.k >= 0) o[cur.k] = stemText(cur.t.join(" ")); };
+  for (let j = i + 1; j < lines.length; j++) {
+    const l = lines[j].trim();
+    if (TABLE_HEAD.test(l) || /^Statement$/.test(l) || !l) continue;
+    if (/^[●○•]?\s*Correct Answer\s*:/.test(l)) break;
+    const m = /^([A-D])(?:\s{2,}(.*))?$/.exec(l);
+    if (m) { push(); cur.k = "ABCD".indexOf(m[1]); cur.t = m[2] ? [m[2]] : []; continue; }
+    if (cur.k >= 0) cur.t.push(l);
+  }
+  push();
+  return o.length === 4 && o.every(Boolean) ? o : null;
+}
+export function parseStemPaper(text, F) {
+  const lines = String(text).replace(/\r\n?/g, "\n").split(/\n|\f/).map(normLine);
+  const heads = [];
+  lines.forEach((l, i) => { const m = STEM_HEAD.exec(l); if (m) heads.push({ i, n: Number(m[1]), label: (m[2] || "").trim() }); });
+  const pick = F.pick || [{ from: 1, to: 9999 }], assign = F.assign || {};
+  // a rule holds when its range (if any) and its label pattern (if any) both match
+  const picked = (n, label) => pick.some((r) => (r.from == null || (n >= r.from && n <= r.to)) && (r.label == null || new RegExp(r.label, "i").test(label)));
+  const out = [], fails = [], dropped = { captions: 0, duplicates: 0, unpicked: 0 }, seenQ = new Set(), dupN = [];
+  heads.forEach((h, k) => {
+    const blk = lines.slice(h.i, k + 1 < heads.length ? heads[k + 1].i : lines.length);
+    const text = blk.join("\n");
+    const stems = [];
+    for (let at = text.indexOf("Question Stem"); at >= 0; at = text.indexOf("Question Stem", at + 1)) stems.push(at);
+    if (!stems.length) { if (picked(h.n, h.label) && !Object.values(assign).includes(h.n)) fails.push({ n: h.n, why: "no question stem in the block" }); return; }
+    const disc = stemFields(text.slice(0, stems[0]))["Topic Discussion"] || "";
+    stems.forEach((s0, j) => {
+      const n = j === 0 ? h.n : assign[h.n + "#" + (j + 1)];
+      if (n == null) { if (picked(h.n, h.label)) fails.push({ n: h.n, why: "a second question stem under this heading (pages out of order?): set assign" }); return; }
+      // an assigned stem takes the label of the heading it moves to only through pick ranges, so an assign target must sit in a range
+      const lab = j === 0 ? h.label : "";
+      if (!picked(n, lab)) { dropped.unpicked++; return; }
+      const seg = text.slice(s0, j + 1 < stems.length ? stems[j + 1] : text.length);
+      const f = stemFields(seg);
+      let qRaw = f["Question Stem"] || "", o = stemOptions(f.Options || "");
+      if (!o) { const sl = seg.split("\n"), tl = stemTable(sl); if (tl) { o = tl; const hi = sl.findIndex((l) => TABLE_HEAD.test(l)); qRaw = stemFields(sl.slice(0, hi).join("\n"))["Question Stem"] || qRaw; } }
+      const q = stemText(qRaw);
+      const am = /Option\s+([A-D])\b/.exec(f["Correct Answer"] || "");
+      if (!q || q.length < 8) return fails.push({ n, why: "empty stem" });
+      if (!o) return fails.push({ n, why: "options not found" });
+      if (new Set(o.map(optKey)).size !== 4) return fails.push({ n, why: "repeated option" });
+      if (!am) return fails.push({ n, why: "no answer letter in the source" });
+      const key = normText(q);
+      if (seenQ.has(key)) { dropped.duplicates++; dupN.push(n); return; }
+      seenQ.add(key);
+      const ground = [f["Why Correct"], f["Why Other Options Are Wrong"], j === 0 ? disc : ""].map(stemText).filter(Boolean).join(" ");
+      out.push({ n, subject: null, q, o, a: "ABCD".indexOf(am[1]), flags: [], ground });
+    });
+  });
+  // numbers a range promises but the file does not hold
+  const have = new Set(out.map((x) => x.n).concat(fails.map((x) => x.n), dupN));
+  for (const r of pick) if (r.from != null && r.to < 9999) for (let n = r.from; n <= r.to; n++) if (!have.has(n) && !(r.label && heads.some((h) => h.n === n))) fails.push({ n, why: "number missing from the text" });
+  out.sort((a, b) => a.n - b.n);
+  return { items: out, fails, dropped };
+}
+/* applyFixes(items, fixes) -> items with the owner's reviewed edits for one paper: { "<n>": { q?, o?: { "<index>": text } } }
+ * (a private file named by the paper's fix field: it holds question text, so it stays outside the repo). */
+export function applyFixes(items, fixes) {
+  if (!fixes) return items;
+  for (const it of items) {
+    const f = fixes[String(it.n)];
+    if (!f) continue;
+    if (f.q) it.q = undash(f.q);
+    for (const [k, v] of Object.entries(f.o || {})) if (it.o[Number(k)] != null) it.o[Number(k)] = undash(v);
+  }
+  return items;
+}
+// "Option B", "Options A, C, and D" in a source explanation, remapped when the options move.
+const OPT_REF = /\b(Options?)(\s+)([A-D](?:(?:\s*,\s*and\s+|\s*,\s*|\s*\/\s*|\s+and\s+|\s+or\s+|\s*&\s*)[A-D])*)\b/g;
+export function remapLetters(text, map) {
+  return String(text).replace(OPT_REF, (m, w, sp, g) => {
+    const ls = (g.match(/[A-D]/g) || []).map((l) => map[l]).sort();
+    return w + sp + (ls.length === 1 ? ls[0] : ls.length === 2 ? ls[0] + " and " + ls[1] : ls.slice(0, -1).join(", ") + ", and " + ls[ls.length - 1]);
+  });
+}
+/* shuffleOptions(item, seed) -> the item with its key moved to a fixed position (sha256 of seed, mod 4), the other
+ * options in their order, and option letters in its ground remapped. For sources that put most keys at A. */
+export function shuffleOptions(it, seed) {
+  const p = parseInt(crypto.createHash("sha256").update(seed).digest("hex").slice(0, 8), 16) % 4;
+  const others = [0, 1, 2, 3].filter((i) => i !== it.a), order = others.slice(0, p).concat([it.a], others.slice(p));
+  const map = {};
+  order.forEach((old, nw) => { map["ABCD"[old]] = "ABCD"[nw]; });
+  it.o = order.map((i) => it.o[i]); it.a = p;
+  if (it.ground) it.ground = remapLetters(it.ground, map);
+  return it;
+}
 const LET = { A: 0, B: 1, C: 2, D: 3, 1: 0, 2: 1, 3: 2, 4: 3 };
 const words = (s) => String(s).trim().split(/\s+/).filter(Boolean).length;
 const join = (ls) => ls.map((l) => l.trim()).filter(Boolean).join(" ").replace(/\s+/g, " ").trim();
@@ -178,6 +319,7 @@ export function matchOption(ans, o) {
  * the LAST A..D (or 1..4) run before the answer line, so numbered statements inside a stem are kept in the stem. */
 export function parsePaper(text, format) {
   const F = typeof format === "string" ? FORMATS[format] : format;
+  if (F.parse) return F.parse(text, F);
   const out = [], fails = [], dropped = { captions: 0 };
   let subject = null, topic = null, cur = null, ord = 0;
   const finish = () => {
@@ -466,7 +608,7 @@ export function bankMatch(it, bank, top = 40) {
 // =====================================================================================================================
 export function toItems(paper, parsed, imgMap, brand = BRAND) {
   return parsed.items.map((x) => {
-    const it = { id: `pyq-${paper.id}-${x.n}`, exam: paper.exam, year: paper.year, kind: paper.kind, src: paper.id, n: x.n, subject: x.subject, q: x.q, o: x.o, a: x.a, flags: x.flags.slice() };
+    const it = { id: `pyq-${paper.id}-${x.n}`, exam: paper.exam, year: paper.year, kind: paper.kind, src: paper.id, n: x.n, subject: x.subject || paper.subject || null, q: x.q, o: x.o, a: x.a, flags: x.flags.slice() };
     if (x.topic) it.topic = x.topic;
     const img = imgMap && imgMap.get(x.n);
     if (img && img.length) it.img = img;
@@ -482,6 +624,8 @@ export function checkPaper(p) {
   if (!FORMATS[p.format]) throw new Error("unknown format " + p.format);
   if (!KIND.has(p.kind)) throw new Error("kind must be recall or official: " + p.id);
   if (!Number.isInteger(p.year)) throw new Error("year: " + p.id);
+  if (p.ground != null && p.ground !== "source") throw new Error("ground must be \"source\" or absent: " + p.id);
+  if (p.subject != null && !/^[a-z0-9-]+$/.test(p.subject)) throw new Error("subject: " + p.id);
 }
 /* indexFor(items, papers, tags) -> the app index (no question text). */
 export function indexFor(items, papers, tags, file) {
@@ -504,6 +648,7 @@ export async function build(args, deps = {}) {
   const imgDir = path.join(out, "img");
   const report = { v: 1, at: new Date().toISOString(), papers: [], subjects: {}, images: { found: 0, logos: 0, small: 0, kept: 0 } };
   let all = [];
+  const ground = new Map();   // item id -> the source's own explanation (ground: "source" papers); work/near.json only
   // A paper whose input files were deleted after use (owner rule: inputs go once the output is in the private bucket)
   // is FROZEN: its items (with their merges) and images are kept from the last build instead of re-parsed.
   const hasInput = (p) => (p.txt && fs.existsSync(p.txt)) || (p.pdf && fs.existsSync(p.pdf));
@@ -522,11 +667,13 @@ export async function build(args, deps = {}) {
     checkPaper(p);
     if (frozen.has(p.id)) continue;
     // the watermark text comes from the config (a publisher name stays out of this public file)
-    const F = p.mark ? { ...FORMATS[p.format], mark: p.mark } : FORMATS[p.format];
+    const F = { ...FORMATS[p.format], ...(p.mark ? { mark: p.mark } : {}), ...(p.pick ? { pick: p.pick } : {}), ...(p.assign ? { assign: p.assign } : {}) };
     let text = p.txt && fs.existsSync(p.txt) ? fs.readFileSync(p.txt, "utf8") : spawnSync("pdftotext", ["-layout", p.pdf, "-"], { encoding: "utf8", maxBuffer: 1 << 30 }).stdout;
     let ocrPages = 0;
     if (conf.ocr && p.pdf && fs.existsSync(p.pdf) && !args.flags.has("no-ocr")) ({ text, ocrPages } = ocrBlankPages(p.pdf, text, conf.ocr, path.join(work, p.id + "-ocr"), log));
     const parsed = parsePaper(text, F);
+    if (p.fix) applyFixes(parsed.items, (readJson(p.fix.replace(/^~(?=\/)/, os.homedir()), null) || (() => { throw new Error("fix file not readable: " + p.fix); })())[p.id]);
+    if (p.shuffle) parsed.items.forEach((x) => shuffleOptions(x, p.id + "#" + x.n));
     let imgs = null;
     if (!args.flags.has("no-images") && p.pdf && fs.existsSync(p.pdf)) {
       const r = paperImages(p, F, work, imgDir);
@@ -534,9 +681,10 @@ export async function build(args, deps = {}) {
       for (const k of Object.keys(report.images)) report.images[k] += r.stats[k];
     }
     const items = toItems(p, parsed, imgs, brandRe(conf.brand));
+    if (p.ground === "source") parsed.items.forEach((x, i) => { if (x.ground) ground.set(items[i].id, x.ground); });
     const nums = parsed.items.map((x) => x.n).concat(parsed.fails.map((x) => x.n));
     const maxN = Math.max(0, ...nums), gaps = [];
-    if (!F.ordinal) for (let n = 1; n <= maxN; n++) if (!nums.includes(n)) gaps.push(n);
+    if (!F.ordinal && !F.parse) for (let n = 1; n <= maxN; n++) if (!nums.includes(n)) gaps.push(n);
     const fails = parsed.fails.concat(gaps.map((n) => ({ n, why: "number missing from the text" })));
     const total = items.length + fails.length;
     report.papers.push({ id: p.id, parsed: items.length, failed: fails, total, pct: total ? Math.round(items.length * 1000 / total) / 10 : 0,
@@ -572,6 +720,13 @@ export async function build(args, deps = {}) {
       else if (s.pending) it.flags.push("exp-pending");   // shown as "Explanation coming soon"; does not hide the item
     }
   }
+  // The source's explanation outranks a bank neighbour as grounding; a frozen paper keeps the one from its last build.
+  const prevNear = readJson(path.join(work, "near.json"), {});
+  for (const it of all) {
+    const g = ground.get(it.id) || (it.pyq.some((x) => frozen.has(x.src)) && prevNear[it.id] && prevNear[it.id].src === "paper" ? prevNear[it.id].exp : "");
+    if (g) near[it.id] = { src: "paper", j: 1, exp: g };
+  }
+  report.groundFromSource = ground.size;
   for (const k of Object.keys(tags)) tags[k][1] = [...new Map(tags[k][1].map((x) => [x.join("|"), x])).values()];
   for (const it of all) { if (!it.flags.length) delete it.flags; else it.flags = [...new Set(it.flags)].sort(); }
   report.bank = { items: bank.items.length, hits, keyDiffers: keyDiff };
@@ -609,13 +764,21 @@ const ESchema = { type: "OBJECT", properties: { ex: { type: "ARRAY", items: { ty
   i: { type: "INTEGER" }, ra: { type: "STRING" }, rb: { type: "STRING" }, rc: { type: "STRING" }, rd: { type: "STRING" }, kp: { type: "STRING" } },
   required: ["i", "ra", "rb", "rc", "rd", "kp"], propertyOrdering: ["i", "ra", "rb", "rc", "rd", "kp"] } } }, required: ["ex"], propertyOrdering: ["ex"] };
 export const EXPLAIN_PER = 5;
+// Explanations and their review follow the exam family: SS papers (NEET-SS, INI-SS) use the NEET-SS profile.
+export const famOf = (exam) => (/-ss$/.test(String(exam || "")) ? "neet-ss" : "neet-pg");
+const FAM_NAME = { "neet-pg": "NEET-PG", "neet-ss": "NEET-SS and INI-SS superspeciality" };
+/* byFamily(items, per) -> groups of at most per items, never mixing exam families (PG-only input groups as before). */
+export function byFamily(items, per) {
+  const fams = [...new Set(items.map((x) => famOf(x.exam)))];
+  return fams.flatMap((f) => groupsOf(items.filter((x) => famOf(x.exam) === f), per));
+}
 /* explainPrompt(items: [{ q, o, a, ground, prev? }], { redo }) -> core prompt: for each option why it is right or wrong,
  * then a pearl. redo (the one retry, --explain-redo): each item carries prev, why its first explanation was rejected,
  * and the instruction to stay inside the notes is stricter. */
 export function explainPrompt(items, opts = {}) {
   const redo = !!opts.redo;
   const system = [
-    "You write explanations for NEET-PG previous-year MCQs whose key is given.",
+    "You write explanations for " + FAM_NAME[famOf(opts.exam)] + " previous-year MCQs whose key is given.",
     "For each option write one sentence of at most 25 words: for the key why it is right, for each other option why it is wrong here. Then kp, one exam pearl of at most 25 words.",
     "Ground every statement in the notes given with the item. Every number you write must appear in the notes or the question. If the notes do not support the key, still explain from standard teaching but add no numbers.",
     "Write fresh text in your own words: never copy a sentence of the notes. No book names, pages or sources.",
@@ -701,16 +864,17 @@ export function stageLines(name, items, ctx) {
   }
   if (name === "map") {
     const out = [];
-    for (const s of mbbs) {
+    // SS papers name their subject in the config and stay in it (no other-subject choice).
+    for (const s of all) {
       const its = items.filter((x) => x.subject === s.id).map((x) => ({ ...x, exp: groundFor(x, ctx.near).slice(0, 200) }));
-      if (its.length) out.push(...classifyLines(s, othersOf(all, s), its, 10).map((l) => ({ ...l, key: s.id + ":" + l.key, subject: s.id })));
+      if (its.length) out.push(...classifyLines(s, s.branch === "mbbs" ? othersOf(all, s) : [], its, 10).map((l) => ({ ...l, key: s.id + ":" + l.key, subject: s.id })));
     }
     return out;
   }
   if (name === "screen") return screenLines(items, PREP_LIMITS.solve.maxItems);
-  if (name === "explain") return groupsOf(items, EXPLAIN_PER).map((g, i) => ({ key: "e" + i, ids: g.map((x) => x.id), request: requestBody(explainPrompt(g.map((x) => ({ ...x, ground: groundFor(x, ctx.near) })))) }));
+  if (name === "explain") return byFamily(items, EXPLAIN_PER).map((g, i) => ({ key: "e" + i, ids: g.map((x) => x.id), request: requestBody(explainPrompt(g.map((x) => ({ ...x, ground: groundFor(x, ctx.near) })), { exam: g[0].exam })) }));
   // items carry prev (the rejection reason)
-  if (name === "explain-redo") return groupsOf(items, EXPLAIN_PER).map((g, i) => ({ key: "x" + i, ids: g.map((x) => x.id), request: requestBody(explainPrompt(g.map((x) => ({ ...x, ground: groundFor(x, ctx.near) })), { redo: true })) }));
+  if (name === "explain-redo") return byFamily(items, EXPLAIN_PER).map((g, i) => ({ key: "x" + i, ids: g.map((x) => x.id), request: requestBody(explainPrompt(g.map((x) => ({ ...x, ground: groundFor(x, ctx.near) })), { redo: true, exam: g[0].exam })) }));
   throw new Error("unknown stage " + name);
 }
 // Expected output tokens per item (dry-run): mapping and subject about 22, solve EST.solveOut, explanation about 150,
@@ -827,7 +991,7 @@ export async function stages(args, deps = {}) {
       const t2 = await job("map", ml);
       if (t2) {
         for (const l of ml) {
-          const s = tax.find((x) => x.id === l.subject), allowed = new Set(modulesOf(s).map((m) => m.id).concat(othersOf(tax, s)));
+          const s = tax.find((x) => x.id === l.subject), allowed = new Set(modulesOf(s).map((m) => m.id).concat(s.branch === "mbbs" ? othersOf(tax, s) : []));
           for (const [id, v] of Object.entries(readClassify(t2.get(l.key), l.ids, allowed))) { if (v[0].startsWith(s.code + "-")) R(id).t = v[0]; else R(id).subject = v[0]; }
         }
         report.map = Object.values(res).filter((x) => x.t).length;
@@ -850,8 +1014,8 @@ export async function stages(args, deps = {}) {
         const it = byId.get(l.ids[i]), g = explainGate(it, ex, groundFor(it, near));
         if (g) gate[g] = (gate[g] || 0) + 1; else pass.push({ it, ex });
       });
-      const groups = groupsOf(pass, PREP_LIMITS.review.maxItems);
-      const rl = groups.map((g, i) => ({ key: "r" + i, ids: g.map((x) => x.it.id), request: requestBody(buildReviewPrompt({ items: g.map((x) => ({ id: x.it.id, q: x.it.q, o: x.it.o, a: x.it.a, r: x.ex.r, kp: x.ex.kp })), paras: Object.fromEntries(g.map((x) => [x.it.id, groundFor(x.it, near) || "(no notes: judge g9 from standard teaching)"])) })) }));
+      const groups = byFamily(pass.map((x) => ({ ...x, exam: x.it.exam })), PREP_LIMITS.review.maxItems);
+      const rl = groups.map((g, i) => ({ key: "r" + i, ids: g.map((x) => x.it.id), request: requestBody(buildReviewPrompt({ profile: getProfile(famOf(g[0].it.exam)) || undefined, items: g.map((x) => ({ id: x.it.id, q: x.it.q, o: x.it.o, a: x.it.a, r: x.ex.r, kp: x.ex.kp })), paras: Object.fromEntries(g.map((x) => [x.it.id, groundFor(x.it, near) || "(no notes: judge g9 from standard teaching)"])) })) }));
       const t2 = await job("review", rl);
       if (t2) {
         let ok = 0;
@@ -873,8 +1037,8 @@ export async function stages(args, deps = {}) {
         const it = byId.get(l.ids[i]), g = explainGate(it, ex, groundFor(it, near));
         if (g) { gate[g] = (gate[g] || 0) + 1; fail.add(it.id); } else pass.push({ it, ex });
       });
-      const groups = groupsOf(pass, PREP_LIMITS.review.maxItems);
-      const rl = groups.map((g, i) => ({ key: "y" + i, ids: g.map((x) => x.it.id), request: requestBody(buildReviewPrompt({ items: g.map((x) => ({ id: x.it.id, q: x.it.q, o: x.it.o, a: x.it.a, r: x.ex.r, kp: x.ex.kp })), paras: Object.fromEntries(g.map((x) => [x.it.id, groundFor(x.it, near) || "(no notes: judge g9 from standard teaching)"])) })) }));
+      const groups = byFamily(pass.map((x) => ({ ...x, exam: x.it.exam })), PREP_LIMITS.review.maxItems);
+      const rl = groups.map((g, i) => ({ key: "y" + i, ids: g.map((x) => x.it.id), request: requestBody(buildReviewPrompt({ profile: getProfile(famOf(g[0].it.exam)) || undefined, items: g.map((x) => ({ id: x.it.id, q: x.it.q, o: x.it.o, a: x.it.a, r: x.ex.r, kp: x.ex.kp })), paras: Object.fromEntries(g.map((x) => [x.it.id, groundFor(x.it, near) || "(no notes: judge g9 from standard teaching)"])) })) }));
       const t2 = await job("review-redo", rl);
       if (t2) {
         let ok = 0;

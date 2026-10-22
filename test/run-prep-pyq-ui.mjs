@@ -1,6 +1,7 @@
 /* PrepNucleus previous-year papers in the REAL app (headless Chrome over CDP), against the synthetic PYQ fixture in
  * test/fixtures/prep/api/v2/pyq/ (made-up questions, a generated test-pattern image) and the small fixture bank.
- * What must hold: home shows "Previous year papers" on the NEET-PG tab; the papers screen says the papers are recalls,
+ * What must hold: home shows "Previous year papers" on the NEET-PG tab, and on the NEET-SS tab with only the SS paper
+ * (INI-SS, NEET-SS pattern, its own recall note); the papers screen says the papers are recalls,
  * not official, lists years newest first with a Recall label and counts that leave out flagged items; a paper shows its
  * questions, what was held back, the NEET-PG pattern timing and marking, and a subject list; practice runs in paper order
  * with "Asked in ..." chips (both years for a question asked twice), no bookmark ribbon, our explanation and a recall
@@ -79,10 +80,23 @@ try {
   ok(await until(`return !!document.querySelector("#smdPrep [data-act=y-home]");`, 20000), "home shows Previous year papers on the NEET-PG tab");
   ok(await ev(`return !!window.PREP_PYQ;`) === true, "prep-loader.js loads prep-pyq.js");
   ok(/Previous year papers/.test(await text("#smdPrep [data-act=y-home]")), "the row is named Previous year papers");
+  // ---- NEET-SS tab: superspeciality papers only (NEET-SS and INI-SS), timed in the NEET-SS pattern
   await click(`#smdPrep [data-act=exam][data-v=neet-ss]`);
-  ok(await until(`return !document.querySelector("#smdPrep [data-act=y-home]");`, 4000), "the NEET-SS tab has no papers row");
+  ok(await until(`var r=document.querySelector("#smdPrep [data-act=y-home]"); return !!r && /NEET-SS and INI-SS/.test(r.textContent);`, 4000), "the NEET-SS tab has its own papers row");
+  await click("#smdPrep [data-act=y-home]");
+  ok(await until(`return document.querySelectorAll("#smdPrep .pn-yq-row").length === 1;`, 8000), "the NEET-SS tab lists only the SS paper");
+  ok(/INI-SS 2099 · April/.test(await text(`#smdPrep [data-act=y-paper][data-v=fx-ss-2099-r1]`)), "the INI-SS paper is named with its session");
+  ok(/not official/i.test(await text("#smdPrep .pn-yq-note")) && !/NBEMS|AIPGMEE/.test(await text("#smdPrep .pn-yq-note")), "the SS note says recall, and makes no claim about NEET-PG papers");
+  await click(`#smdPrep [data-act=y-paper][data-v=fx-ss-2099-r1]`);
+  ok(await until(`return !!document.querySelector("#smdPrep [data-act=y-start][data-k=exam]");`, 6000), "the SS paper opens");
+  const ssTimed = await text("#smdPrep [data-act=y-start][data-k=exam]");
+  ok(/1 min/.test(ssTimed) && /\+4/.test(ssTimed) && /NEET-SS pattern/.test(await text("#smdPrep .pn-panel")), "the SS paper is timed in the NEET-SS pattern: " + ssTimed);
+  await click(`#smdPrep [data-act=y-start][data-k=study]`);
+  ok(await until(`return /Synthetic SS PYQ/.test((document.querySelector("#smdPrep .pn-q")||{}).textContent||"");`, 5000), "SS practice starts");
+  ok(await text("#smdPrep .pn-yq-tags") === "Asked in INI-SS 2099 (recall)", "the chip names INI-SS");
+  await ev(`PREP.back(); PREP.back(); PREP.back(); return 1;`);
   await click(`#smdPrep [data-act=exam][data-v=neet-pg]`);
-  await until(`return !!document.querySelector("#smdPrep [data-act=y-home]");`, 4000);
+  await until(`return !!document.querySelector("#smdPrep [data-act=y-home]") && !document.querySelector("#smdPrep .pn-yq-row");`, 4000);
 
   // ---- papers list
   await click("#smdPrep [data-act=y-home]");
@@ -182,8 +196,8 @@ try {
   ok(await ev(`var q=document.querySelector("#smdPrep .pn-q").textContent; var t=document.querySelector("#smdPrep .pn-yq-tags"); return /question 1 of/.test(q) ? !!t : !t;`) === true, "only the tagged item carries a chip in ordinary practice");
 
   // ---- offline copy, network, errors
-  ok(await evA(`PREP._host.cacheGet("pyq/index.json").then(function(f){ return !!(f && f.papers && f.papers.length===3); })`) === true, "the PYQ index is kept in IndexedDB");
-  ok(await evA(`PREP._host.cacheGet("pyq/items-0f0f0f01.json").then(function(f){ return !!(f && f.items && f.items.length===6); })`) === true, "the PYQ items are kept in IndexedDB");
+  ok(await evA(`PREP._host.cacheGet("pyq/index.json").then(function(f){ return !!(f && f.papers && f.papers.length===4); })`) === true, "the PYQ index is kept in IndexedDB");
+  ok(await evA(`PREP._host.cacheGet("pyq/items-0f0f0f01.json").then(function(f){ return !!(f && f.items && f.items.length===7); })`) === true, "the PYQ items are kept in IndexedDB");
   ok(reqs.some((u) => u.includes("/prep-pyq.js?v=" + LOADER_V)), "prep-pyq.js loads at the current token");
   ok(!reqs.some((u) => /\/api\/(ai|prep\/bank)/.test(u)), "no request to /api/ai or the live bank");
   await ev(`PREP.close(); return 1;`);

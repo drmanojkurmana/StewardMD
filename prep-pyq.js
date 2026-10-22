@@ -5,14 +5,16 @@
    the items file it names. Both are kept in IndexedDB prep-bank so papers open offline after the first time.
    Honesty: every paper here is a memory-based recall, labelled "recall" everywhere; NBEMS does not publish NEET-PG
    papers. Flagged items (key unclear, image missing, disputed, papers that disagree) never show.
-   Screens: Previous year papers (home row) -> a paper (timed test in the NEET-PG pattern from MOCKS, or practice);
+   Screens: Previous year papers (home row) -> a paper (timed test in the exam pattern from MOCKS, or practice);
    a PYQ chip on a module; "Asked in NEET-PG 2025 (recall)" chips on bank and PYQ items; question images with tap to
    enlarge (tap again for 2.2x; back or Escape closes). */
 (function (G) {
   "use strict";
-  var EXAM_LABEL = { "neet-pg": "NEET-PG", aipgmee: "AIPGMEE", "ini-cet": "INI-CET", "neet-ss": "NEET-SS", usmle: "USMLE" };
+  var EXAM_LABEL = { "neet-pg": "NEET-PG", aipgmee: "AIPGMEE", "ini-cet": "INI-CET", "neet-ss": "NEET-SS", "ini-ss": "INI-SS", usmle: "USMLE" };
   // AIPGMEE was the all-India PG entrance before NEET-PG (2017 session onwards): its papers sit on the NEET-PG tab.
-  var PG = { "neet-pg": 1, aipgmee: 1 };
+  // Superspeciality papers (NEET-SS, INI-SS) sit on the NEET-SS tab and are timed in the NEET-SS pattern.
+  var PG = { "neet-pg": 1, aipgmee: 1 }, SS = { "neet-ss": 1, "ini-ss": 1 };
+  function tabOf(exam) { return SS[exam] ? "neet-ss" : "neet-pg"; }
 
   /* ================= pure ================= */
   // [exam, year, kind] or { exam, year, kind } -> one line per exam and kind: "Asked in NEET-PG 2025, 2024 (recall)".
@@ -54,7 +56,7 @@
     return n;
   }
   function bySubject(items) { var c = {}; items.forEach(function (it) { var s = it.subject || "unsorted"; c[s] = (c[s] || 0) + 1; }); return c; }
-  var PURE = { tagLabel: tagLabel, paperTitle: paperTitle, paperScheme: paperScheme, usable: usable, paperItems: paperItems, moduleCount: moduleCount, bySubject: bySubject };
+  var PURE = { tabOf: tabOf, tagLabel: tagLabel, paperTitle: paperTitle, paperScheme: paperScheme, usable: usable, paperItems: paperItems, moduleCount: moduleCount, bySubject: bySubject };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -97,32 +99,36 @@
   function icon() { return svg("papers"); }
   function mockFor(host, exam) { return host.mockOf(exam, exam); }
 
-  // Home: one row in the Practise group (NEET-PG only: the papers we hold are NEET-PG).
-  function homeRow(host) {
+  // Home: one row in the Practise group, on the NEET-PG tab (NEET-PG and AIPGMEE papers) and the NEET-SS tab (NEET-SS
+  // and INI-SS papers).
+  function homeRow(host, exam) {
     warm(host);
-    return host.row("y-home", icon(), "Previous year papers", "NEET-PG recall papers by year, timed or practice");
+    return host.row("y-home", icon(), "Previous year papers", tabOf(exam) === "neet-ss" ? "NEET-SS and INI-SS recall papers, timed or practice" : "NEET-PG recall papers by year, timed or practice");
   }
 
-  var NOTE = '<section class="pn-yq-note" aria-label="About these papers"><span class="pn-yq-ni">' + svg("info", 18) + "</span><p><b>Recall papers, not official ones.</b> NBEMS does not publish NEET-PG papers, and AIPGMEE papers were not published either. These were put together from memory after each exam, so wording and options can differ from the real paper. Questions whose answer key is unclear or whose image is missing are held back.</p></section>";
+  var HELD = " Questions whose answer key is unclear or whose image is missing are held back.";
+  var NOTE = '<section class="pn-yq-note" aria-label="About these papers"><span class="pn-yq-ni">' + svg("info", 18) + "</span><p><b>Recall papers, not official ones.</b> NBEMS does not publish NEET-PG papers, and AIPGMEE papers were not published either. These were put together from memory after each exam, so wording and options can differ from the real paper." + HELD + "</p></section>";
+  var NOTE_SS = '<section class="pn-yq-note" aria-label="About these papers"><span class="pn-yq-ni">' + svg("info", 18) + "</span><p><b>Recall papers, not official ones.</b> These were put together from memory after each exam, so wording and options can differ from the real paper." + HELD + "</p></section>";
+  function curTab(host) { var s = null; try { s = host.store(); } catch (e) {} return tabOf(s && s.exam); }
   function renderPapers(host) {
-    var esc = host.esc;
-    host.paint(host.bar("Previous year papers", "NEET-PG and AIPGMEE · recall", "back") + '<div class="pn-body" id="pnYq">' + NOTE + '<p class="pn-load" role="status">Loading papers</p></div>');
+    var esc = host.esc, tab = curTab(host), NOTE_T = tab === "neet-ss" ? NOTE_SS : NOTE, ON = tab === "neet-ss" ? SS : PG;
+    host.paint(host.bar("Previous year papers", (tab === "neet-ss" ? "NEET-SS and INI-SS" : "NEET-PG and AIPGMEE") + " · recall", "back") + '<div class="pn-body" id="pnYq">' + NOTE_T + '<p class="pn-load" role="status">Loading papers</p></div>');
     Promise.all([loadIndex(host), loadItems(host)]).then(function (r) {
       var box = host.root() && host.root().querySelector("#pnYq"); if (!box) return;
       var ix = r[0], items = r[1], hid = hiddenOf(host), years = {}, html = "";
-      ix.papers.filter(function (p) { return PG[p.exam]; }).forEach(function (p) { (years[p.year] = years[p.year] || []).push(p); });
+      ix.papers.filter(function (p) { return ON[p.exam]; }).forEach(function (p) { (years[p.year] = years[p.year] || []).push(p); });
       var ys = Object.keys(years).sort(function (a, b) { return b - a; });
-      if (!ys.length) { box.innerHTML = NOTE + '<p class="pn-empty">No previous year papers for this exam yet.</p>'; return; }
+      if (!ys.length) { box.innerHTML = NOTE_T + '<p class="pn-empty">No previous year papers for this exam yet.</p>'; return; }
       ys.forEach(function (y) {
         html += '<h2 class="pn-sec">' + esc(y) + '</h2><div class="pn-group">' + years[y].map(function (p) {
           var list = paperItems(items, p.id), ok = list.filter(function (it) { return usable(it, hid); }), img = ok.filter(function (it) { return it.img; }).length;
           return '<button type="button" class="pn-row pn-yq-row" data-act="y-paper" data-v="' + esc(p.id) + '"><span class="pn-ri" aria-hidden="true">' + icon() + '</span><span class="pn-rb"><b>' + esc(paperTitle(p)) + "</b><small>" + host.fmt(ok.length) + " questions" + (img ? " · " + img + " with images" : "") + '</small></span><span class="pn-yq-kind">' + (p.kind === "official" ? "Official" : "Recall") + "</span>" + host.ico("chev") + "</button>";
         }).join("") + "</div>";
       });
-      box.innerHTML = NOTE + html;
+      box.innerHTML = NOTE_T + html;
     }, function () {
       var box = host.root() && host.root().querySelector("#pnYq"); if (!box) return;
-      box.innerHTML = NOTE + '<p class="pn-err" role="alert">Previous year papers need a connection the first time. Once opened they work offline.</p><button type="button" class="pn-btn" data-act="y-home-retry">Try again</button>';
+      box.innerHTML = NOTE_T + '<p class="pn-err" role="alert">Previous year papers need a connection the first time. Once opened they work offline.</p><button type="button" class="pn-btn" data-act="y-home-retry">Try again</button>';
     });
   }
   function hiddenOf(host) { try { var h = host.store().hid; return (h && h.ids) || {}; } catch (e) { return {}; } }
@@ -134,7 +140,7 @@
     if (!p || !P.items) return;
     var list = paperItems(P.items, pid), hid = hiddenOf(host), ok = list.filter(function (it) { return usable(it, hid); });
     // a compilation bigger than the real paper is timed as one real-size paper drawn at random from it
-    var held = list.length - ok.length, mock = mockFor(host, "neet-pg"), tn = Math.min(ok.length, mock.n), sc = paperScheme(mock, tn), subj = bySubject(ok);
+    var held = list.length - ok.length, mock = mockFor(host, tabOf(p.exam)), tn = Math.min(ok.length, mock.n), sc = paperScheme(mock, tn), subj = bySubject(ok);
     var subs = Object.keys(subj).sort(function (a, b) { return subj[b] - subj[a]; }).map(function (sid) {
       var sb = host.subjectById(sid);
       return '<li><span class="pn-yq-sn">' + (sb ? host.tx(sb.name) : "Not sorted yet") + '</span><span class="pn-st">' + subj[sid] + "</span></li>";
@@ -152,7 +158,7 @@
     if (!p || !ok.length) return host.toast("This paper has no questions to show yet.");
     var title = paperTitle(p) + " (recall)";
     if (kind === "exam") {
-      var mock = mockFor(host, "neet-pg"), pick = ok.length > mock.n ? host.shuffle(ok.slice()).slice(0, mock.n) : ok.slice(), sc = paperScheme(mock, pick.length);
+      var mock = mockFor(host, tabOf(p.exam)), pick = ok.length > mock.n ? host.shuffle(ok.slice()).slice(0, mock.n) : ok.slice(), sc = paperScheme(mock, pick.length);
       return host.run(pick, "exam", title, { limit: sc.limit, scheme: { plus: sc.plus, minus: sc.minus, label: sc.label } });
     }
     host.run(ok.slice(), "study", title);
@@ -174,7 +180,7 @@
     slot.innerHTML = '<div class="pn-wrap pn-yq-chips" role="group" aria-label="Show questions">' +
       '<button type="button" class="pn-chip' + (on ? "" : " on") + '" aria-pressed="' + !on + '" data-act="y-mf" data-v="all" data-s="' + host.esc(sid) + '" data-m="' + host.esc(mid) + '">All questions</button>' +
       '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="y-mf" data-v="pyq" data-s="' + host.esc(sid) + '" data-m="' + host.esc(mid) + '">PYQ · ' + n + "</button></div>" +
-      (on ? '<section class="pn-panel"><p class="pn-big">' + n + ' PYQs</p><p class="pn-mut">Asked in NEET-PG, from recall papers</p>' +
+      (on ? '<section class="pn-panel"><p class="pn-big">' + n + ' PYQs</p><p class="pn-mut">Asked in past exams, from recall papers</p>' +
         '<button type="button" class="pn-btn pri" data-act="y-mstart" data-k="study" data-s="' + host.esc(sid) + '" data-m="' + host.esc(mid) + '">' + host.ico("play") + " Practice PYQs</button>" +
         '<button type="button" class="pn-btn" data-act="y-mstart" data-k="exam" data-s="' + host.esc(sid) + '" data-m="' + host.esc(mid) + '">' + host.ico("clock") + " Timed test of PYQs</button></section>" : "");
   }

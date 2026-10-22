@@ -11528,3 +11528,13 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   keeps the old single reminder.
 - No emoji in the copy: the 2026-09-24 no-emoji rule stands and `emoji-icons.js` strips them from local notifications.
   Allowing emoji in nudges needs an owner call and an exemption there.
+
+## 2026-10-22 - PrepNucleus PYQ for superspeciality papers: NEET-SS tab, source explanations as private grounding
+- **Decision:** NEET-SS and INI-SS recall papers go through the same PYQ pipeline as NEET-PG (text never in git, R2
+  only) and list on the NEET-SS tab, timed in the NEET-SS pattern. An owner-supplied guide's own explanations are NOT
+  shipped (the 2026-10-06 rule stands): with `ground: "source"` they only ground our own `--explain` text, which
+  still passes the no-12-word-copy, grounded-numbers and review gates.
+- **Why not bundle the converted questions in the app:** a first pass on 2026-10-22 did (recall modules in
+  `prep/recall/`, committed); it was dropped before pushing because it put recall text in the public repo.
+- **Edits to a source** (option reorder when keys cluster, giveaway trims) are reproducible: `shuffle` is a fixed hash,
+  and reviewed edits sit in a private fix file next to the paper config, never in the repo.

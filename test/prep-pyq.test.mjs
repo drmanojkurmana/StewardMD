@@ -310,3 +310,61 @@ test("images in an ordinal layout wait for an option line and go to the next ans
   ];
   assert.deepEqual([...attachImages(ev, "num").entries()], [[1, ["q1.png"]], [2, ["q2.png"]]]);
 });
+
+test("stem format: inline, bulleted and table options, picks by range and label, assign for a page spill, repeats, no dashes, ground kept apart", async () => {
+  const { parseStemPaper, stemOptions, shuffleOptions, remapLetters, applyFixes, undash, build } = await import("../tools/prep-pyq.mjs");
+  const txt = read("stem.txt");
+  const all = parsePaper(txt, { ...FORMATS.stem, pick: [{ from: 1, to: 5 }], assign: { "4#2": 5 } });
+  assert.deepEqual(all.items.map((x) => x.n), [1, 2, 4, 5], "MCQ 3 repeats MCQ 1; MCQ 5 takes the spilled stem; MCQ 88 is outside the range");
+  assert.equal(all.dropped.duplicates, 1);
+  assert.deepEqual(all.fails, []);
+  const by = Object.fromEntries(all.items.map((x) => [x.n, x]));
+  assert.deepEqual(by[1].o, ["Zeta marker", "Eta marker", "Theta marker", "Iota marker"], "a wrapped inline option joins");
+  assert.equal(by[1].ground.includes("10 to 15%"), true, "dashes in a range read 'to'");
+  assert.deepEqual(by[2].o[2], "Sampleparin (e.g., C. sample strains resist it)", "a 'C.' inside an option is not a new option");
+  assert.equal(by[2].a, 1);
+  assert.equal(by[5].q, "Which fixture vitamin prevents sign V?"); assert.equal(by[5].a, 3);
+  assert.ok(!("exp" in by[1]), "the source explanation is never an item field");
+  const lab = parsePaper(txt, { ...FORMATS.stem, pick: [{ label: "^Beta 2098" }] });
+  assert.equal(lab.items.length, 1, "a label rule picks the table question");
+  assert.deepEqual(lab.items[0].o, ["It lowers fixture risk X by about half", "It raises fixture risk X tenfold", "It has no effect on anything", "It cures condition Q"], "the table survives a repeated header");
+  assert.equal(lab.items[0].q, "Which statement about fixture habit H is true?");
+  const ex = parsePaper(txt, { ...FORMATS.stem, pick: [{ from: 1, to: 5, label: "^(?!Beta)" }] });
+  assert.ok(ex.fails.some((f) => f.n === 4 && /second question stem/.test(f.why)), "an unassigned second stem fails, never guessed");
+  assert.ok(ex.fails.some((f) => f.n === 5 && /no question stem/.test(f.why)));
+  assert.equal(stemOptions("A. one | B. two | C. three"), null, "three options are not a question");
+  // shuffle: the key moves, the others keep their order, letters in the ground follow
+  const it = { n: 1, o: ["k", "w1", "w2", "w3"], a: 0, ground: "Option A is right; Options B, C, and D are wrong." };
+  shuffleOptions(it, "fx#1");
+  assert.equal(it.o[it.a], "k");
+  assert.deepEqual(it.o.filter((x) => x !== "k"), ["w1", "w2", "w3"]);
+  assert.ok(it.ground.startsWith("Option " + "ABCD"[it.a] + " is right"));
+  assert.equal(remapLetters("Options A and C", { A: "D", C: "B" }), "Options B and D");
+  assert.deepEqual(applyFixes([{ n: 2, q: "old", o: ["a", "b", "c", "d"] }], { 2: { q: "new — stem", o: { 1: "B2" } } })[0], { n: 2, q: "new, stem", o: ["a", "B2", "c", "d"] });
+  assert.equal(undash("APC–KRAS"), "APC-KRAS");
+  // build: subject from the paper, the source explanation only in work/near.json, never in the output
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "pyq-stem-"));
+  const fix = path.join(root, "fix.json");
+  fs.writeFileSync(fix, JSON.stringify({ "fx-ss-2099": { 2: { o: { 1: "Fixturinib (oral)" } } } }));
+  const conf = { papers: [{ id: "fx-ss-2099", format: "stem", exam: "neet-ss", year: 2099, kind: "recall", subject: "ss-medical-oncology", txt: path.join(FX, "stem.txt"),
+    pick: [{ from: 1, to: 5 }], assign: { "4#2": 5 }, ground: "source", shuffle: true, fix }] };
+  const b = await build({ flags: new Set(["no-images"]) }, { root, conf, bank: { items: [], post: new Map() }, log: () => {} });
+  assert.equal(b.items.length, 4);
+  assert.ok(b.items.every((x) => x.subject === "ss-medical-oncology" && x.exam === "neet-ss"));
+  const two = b.items.find((x) => x.n === 2);
+  assert.equal(two.o[two.a], "Fixturinib (oral)", "the fix applies before the shuffle, to the source's option");
+  const out = fs.readFileSync(path.join(b.out, b.file), "utf8");
+  assert.ok(!/fixture drug of choice/.test(out), "the source explanation is not in the items file");
+  const near = JSON.parse(fs.readFileSync(path.join(root, "prep", "pyq", "work", "near.json"), "utf8"));
+  assert.equal(near["pyq-fx-ss-2099-2"].src, "paper");
+  assert.ok(/fixture drug of choice/.test(near["pyq-fx-ss-2099-2"].exp));
+  assert.throws(() => checkPaper({ ...conf.papers[0], ground: "yes" }), /ground/);
+  // explanations never mix exam families, and an SS group is written and reviewed as superspeciality
+  const { byFamily, famOf } = await import("../tools/prep-pyq.mjs");
+  const mix = [{ id: "a", exam: "neet-pg" }, { id: "b", exam: "ini-ss" }, { id: "c", exam: "neet-pg" }, { id: "d", exam: "neet-ss" }];
+  assert.deepEqual(byFamily(mix, 5).map((g) => g.map((x) => x.id)), [["a", "c"], ["b", "d"]]);
+  assert.equal(famOf("ini-ss"), "neet-ss");
+  const el = stageLines("explain", b.items.slice(0, 2).map((x) => ({ ...x })), { tax: [], near });
+  assert.ok(/NEET-SS and INI-SS/.test(el[0].request.systemInstruction.parts[0].text));
+  fs.rmSync(root, { recursive: true, force: true });
+});

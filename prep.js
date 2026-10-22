@@ -452,8 +452,8 @@
       row("mistakes", ico("x"), "My mistakes", fmt(Object.keys(s.mt).length) + " to fix") +
       row("mocks", ico("clock"), "Mock exam", "Full pattern, marked") +
       (G.PREP_PLAN ? row("weak", ico("target"), "Weak areas", "Mistakes and modules under 60%") : "") +
-      // Previous year papers (prep-pyq.js): NEET-PG recall papers only, so the row shows on that tab.
-      (G.PREP_PYQ && s.exam === "neet-pg" ? G.PREP_PYQ.homeRow(HOST) : "") +
+      // Previous year papers (prep-pyq.js): NEET-PG papers on that tab, NEET-SS and INI-SS papers on the NEET-SS tab.
+      (G.PREP_PYQ && (s.exam === "neet-pg" || s.exam === "neet-ss") ? G.PREP_PYQ.homeRow(HOST, s.exam) : "") +
       // Cards due (prep-flash.js): shows once the student has studied any module card.
       (G.PREP_FLASH ? G.PREP_FLASH.homeRow(HOST) : "") +
       (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
