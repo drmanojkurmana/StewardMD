@@ -15,7 +15,7 @@ test("topic map covers every overlay prefix and module", () => {
   const topics = (readJ("prep/bank/topic-links.json").modules) || {};
   const lessons = (readJ("prep/lessons/v1/index.json").modules) || {};
   const sets = (readJ("prep/bank/overlay-counts.json").sets) || {};
-  const prefixes = ["maikbook", "maikbook2", "maikss", "maikfill", "gap", "maikpearl", "maiktopic", "maikimg", "maik"];
+  const prefixes = ["maikbook", "maikbook2", "maikss", "maikfill", "gap", "maikpearl", "maiktopic", "maikimg", "maik", "iniss"];
   let checked = 0;
   for (const [set, subs] of Object.entries(sets)) {
     assert.ok(prefixes.some((p) => set.startsWith(p)) || /^(ck2|medcov4|mrcs|plab|radmax|radnotes)/.test(set), `unclassified overlay set ${set}`);
