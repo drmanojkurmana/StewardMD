@@ -128,25 +128,50 @@
       }
     };
   }
-  function startProbe(url, total, meter) {
-    var alive = true, ctl = null, chunk = 393216;
-    try { if (typeof AbortController !== "undefined") ctl = new AbortController(); } catch (e) {}
+  function startProbe(url, total, meter, timeoutMs) {
+    var alive = true, ctl = null, timer = null, chunk = 393216;
+    var limit = timeoutMs > 0 ? timeoutMs : 8000;
     /* The probe is a plain-text download from /api/ota/probe on the same host as the bundle (n ASCII bytes, no-store).
      * It used to be a ranged request for a piece of the zip itself: that needs a CORS preflight and a binary body,
      * and on the devices that failed (owner, 2026-10-16: the card sat at 0.0 MB, "working it out") no sample ever
      * arrived. Text of a known length survives the native HTTP bridge. The reason a probe fails is kept (meter.fail)
-     * and shown on the card instead of being swallowed. */
+     * and shown on the card instead of being swallowed.
+     * On native the fetch must be the RELATIVE /api/ota/probe path, not the absolute bundle URL with its origin
+     * swapped: native-bridge.js only routes a relative /api/* URL (or api.stewardmd.in) through the explicit
+     * CapacitorHttp plugin request. An absolute stewardmd.in URL falls through to the CapacitorHttp auto-patch,
+     * whose GET path on iOS goes through the WKWebView http interceptor; that path is the one native-bridge.js
+     * already documents as failing access-control checks on iOS, and it can hang with no settle at all. A hung
+     * probe used to mean no sample, no error and no retry, forever, because the 1.5 s loop only ran after a
+     * settle and the single shared AbortController was never used as a deadline (CapacitorHttp ignores aborts
+     * anyway). So each attempt now gets a fresh controller plus a hard timer that records the failure and
+     * retries regardless of whether the fetch ever settles. */
     var probeUrl = String(url).replace(/\/file\/[0-9a-fA-F]+(\?.*)?$/, "/probe");
+    var fetchUrl = probeUrl;
+    try { if (isNative()) fetchUrl = probeUrl.replace(/^https?:\/\/[^/]+/i, ""); } catch (e) {}
     (function loop() {
       if (!alive) return;
-      var t = Date.now(), opts = { cache: "no-store" };
+      var t = Date.now(), settled = false;
+      try { ctl = typeof AbortController !== "undefined" ? new AbortController() : null; } catch (e) { ctl = null; }
+      var opts = { cache: "no-store" };
       if (ctl) opts.signal = ctl.signal;
-      fetch(probeUrl + "?n=" + chunk + "&t=" + t, opts).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
-        .then(function (txt) { var ms = Date.now() - t, n = txt ? txt.length : 0; if (!n) throw new Error("empty"); meter.sample(n, ms); chunk = n * 1000 / Math.max(ms, 1) > 1500000 ? 1572864 : 393216; })
-        .then(null, function (e) { try { if (alive) meter.fail(e && e.message ? e.message : e); } catch (x) {} })
-        .then(function () { if (alive) setTimeout(loop, 1500); });
+      timer = setTimeout(function () {
+        if (settled || !alive) return; settled = true;
+        try { if (ctl) ctl.abort(); } catch (e) {}
+        try { meter.fail("probe timed out"); } catch (e) {}
+        if (alive) setTimeout(loop, 1500);
+      }, limit);
+      var done = function () { settled = true; try { clearTimeout(timer); } catch (e) {} if (alive) setTimeout(loop, 1500); };
+      try {
+        fetch(fetchUrl + "?n=" + chunk + "&t=" + t, opts).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
+          .then(function (txt) {
+            if (settled) return;
+            var ms = Date.now() - t, n = txt ? txt.length : 0;
+            if (!n) { try { meter.fail("empty"); } catch (e) {} done(); return; }
+            meter.sample(n, ms); chunk = n * 1000 / Math.max(ms, 1) > 1500000 ? 1572864 : 393216; done();
+          }, function (e) { if (settled) return; try { if (alive) meter.fail(e && e.message ? e.message : e); } catch (x) {} done(); });
+      } catch (e) { try { if (alive) meter.fail(e && e.message ? e.message : e); } catch (x) {} done(); }
     })();
-    return function stop() { alive = false; try { if (ctl) ctl.abort(); } catch (e) {} };
+    return function stop() { alive = false; try { clearTimeout(timer); } catch (e) {} try { if (ctl) ctl.abort(); } catch (e) {} };
   }
   function fmtMB(b) { return (Math.round(b / 104857.6) / 10).toFixed(1); }
   function fmtSpeed(b) { return b >= 1048576 ? (Math.round(b / 104857.6) / 10).toFixed(1) + " MB/s" : Math.round(b / 1024) + " KB/s"; }
@@ -232,13 +257,15 @@
       ".otp-bar{position:relative;height:12px;margin:10px 0 8px;border-radius:7px;background:var(--otp-bg);overflow:hidden}" +
       ".otp-bar i{position:absolute;inset:0 auto 0 0;width:0;border-radius:7px;background:var(--otp-acc);transition:width .6s ease}" +
       ".otp-bar.wait i{opacity:.55}" +
+      ".otp-bar.ind i{width:40%;animation:otp-ind 1.1s ease-in-out infinite alternate}" +
+      "@keyframes otp-ind{from{left:0}to{left:60%}}" +
       ".otp-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 10px;font:600 12.5px/1.3 inherit;font-variant-numeric:tabular-nums}.otp-mb{white-space:nowrap}.otp-row span:last-child{color:var(--otp-mut);text-align:right}" +
       ".otp-spark{display:block;width:100%;height:46px;margin-top:10px}.otp-spark polyline{fill:none;stroke:var(--otp-acc);stroke-width:2;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}" +
       ".otp-spark path{fill:var(--otp-bg);stroke:none}.otp-spark text{font:600 9px inherit;fill:var(--otp-mut)}" +
       ".otp-note{margin:8px 0 0;font:500 11.5px/1.4 inherit;color:var(--otp-mut)}" +
       ".otp.compact{margin:6px 0 0;padding:0;background:none;border:0}.otp.compact .otp-bar{height:6px;margin:6px 0 4px;background:rgba(255,255,255,.25)}.otp.compact .otp-bar i{background:#fff}" +
       ".otp.compact .otp-row{font-size:11.5px}.otp.compact .otp-row span:last-child{color:rgba(255,255,255,.85)}" +
-      "@media(prefers-reduced-motion:reduce){.otp-bar i{transition:none}}";
+      "@media(prefers-reduced-motion:reduce){.otp-bar i{transition:none}.otp-bar.ind i{animation:none}}";
     (document.head || document.documentElement).appendChild(s);
   }
   function sparkSvg(hist) {
@@ -254,8 +281,8 @@
     otpCss();
     var compact = !!opts.compact;
     el.hidden = false;
-    el.innerHTML = '<div class="otp' + (compact ? " compact" : "") + '" aria-live="off"><div class="otp-top"' + (compact ? ' style="display:none"' : "") + '><b class="otp-ph">Downloading update</b><span class="otp-pc">0%</span></div>' +
-      '<div class="otp-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Update download"><i></i></div>' +
+    el.innerHTML = '<div class="otp' + (compact ? " compact" : "") + '" aria-live="off"><div class="otp-top"' + (compact ? ' style="display:none"' : "") + '><b class="otp-ph">Downloading update</b><span class="otp-pc"></span></div>' +
+      '<div class="otp-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Update download"><i></i></div>' +
       '<div class="otp-row"><span class="otp-mb">Starting…</span><span class="otp-sp"></span></div><div class="otp-gr"></div>' +
       (compact ? "" : '<p class="otp-note">Keep the app open. A large update can take several minutes on a slow connection. MB and speed are estimates from your connection.</p>') + "</div>";
     var q = function (c) { return el.querySelector(c); };
@@ -264,24 +291,27 @@
       update: function (pct, label, info) {
         if (!info) return;
         var bar = q(".otp-bar"), ph = q(".otp-ph");
+        var noSample = info.phase === "download" && info.samples === 0 && info.est;
         if (info.phase === "install") { ph.textContent = "Installing"; q(".otp-mb").textContent = fmtMB(info.total) + " MB downloaded"; q(".otp-sp").textContent = "verifying and unpacking"; }
         else if (info.phase === "restart") { ph.textContent = "Restarting"; q(".otp-mb").textContent = "Update ready"; q(".otp-sp").textContent = "reopening the app"; }
         else if (info.phase === "waiting") { ph.textContent = "Waiting for the network"; q(".otp-mb").textContent = (info.est ? "about " : "") + fmtMB(info.bytes) + " of " + fmtMB(info.total) + " MB"; q(".otp-sp").textContent = "no data coming through"; }
-        else if (info.phase === "download" && info.samples === 0 && info.est) {
-          // No speed measurement has come back yet. Say so plainly instead of "about 0.0 of N MB": the update IS downloading
-          // (natively); we just cannot see how far. After 12 s show how long it has run and why the measurement failed.
+        else if (noSample) {
+          // No speed measurement has come back yet. Never a bare 0% with "measuring": the update IS downloading
+          // (natively); we just cannot see how far. The bar moves on its own, and after 4 s the card shows how
+          // long it has run, the size, and why the measurement failed, instead of promising a measurement.
           ph.textContent = "Downloading update"; q(".otp-mb").textContent = fmtMB(info.total) + " MB";
-          q(".otp-sp").textContent = info.elapsed > 12000 ? "speed not available · " + Math.round(info.elapsed / 1000) + " s" + (info.err ? " (" + info.err + ")" : "") : "measuring your connection…";
+          q(".otp-sp").textContent = info.elapsed > 4000 ? "speed not available · " + Math.round(info.elapsed / 1000) + " s elapsed" + (info.err ? " (" + info.err + ")" : "") : "measuring your connection…";
         }
         else { ph.textContent = "Downloading update"; q(".otp-mb").textContent = (info.est ? "about " : "") + fmtMB(info.bytes) + " of " + fmtMB(info.total) + " MB"; q(".otp-sp").textContent = (info.speed ? fmtSpeed(info.speed) + " · " : "") + fmtEta(info.eta); }
-        q(".otp-pc").textContent = info.pct + "%";
+        q(".otp-pc").textContent = noSample ? "" : info.pct + "%";
         bar.classList.toggle("wait", info.phase === "waiting");
-        bar.firstChild.style.width = info.pct + "%";
-        bar.setAttribute("aria-valuenow", String(info.pct));
+        bar.classList.toggle("ind", !!noSample);
+        bar.firstChild.style.width = noSample ? "40%" : info.pct + "%";
+        if (noSample) { try { bar.removeAttribute("aria-valuenow"); } catch (e) {} bar.setAttribute("aria-valuetext", "Downloading update, speed not available"); } else { bar.setAttribute("aria-valuenow", String(info.pct)); bar.setAttribute("aria-valuetext", info.phase === "download" && info.est ? "about " + info.pct + " percent, estimated" : info.pct + " percent"); }
         if (!compact) { var g = q(".otp-gr"); if (g) g.innerHTML = sparkSvg(info.history || []); }
         var now = Date.now(); if (now - lastAnn > 15000) { lastAnn = now; try { el.firstChild.setAttribute("aria-live", "polite"); setTimeout(function () { try { el.firstChild.setAttribute("aria-live", "off"); } catch (e) {} }, 1200); } catch (e) {} }
       },
-      done: function () { var b = q(".otp-bar"); if (b) { b.firstChild.style.width = "100%"; b.setAttribute("aria-valuenow", "100"); } var p = q(".otp-pc"); if (p) p.textContent = "100%"; },
+      done: function () { var b = q(".otp-bar"); if (b) { try { b.classList.toggle("ind", false); } catch (e) {} b.firstChild.style.width = "100%"; b.setAttribute("aria-valuenow", "100"); b.setAttribute("aria-valuetext", "100 percent"); } var p = q(".otp-pc"); if (p) p.textContent = "100%"; },
       fail: function () { el.hidden = true; el.innerHTML = ""; }
     };
   }
@@ -358,7 +388,7 @@
     versionLabel: function (v) { return versionLabel(arguments.length ? v : myVersion()); },
     purgeOld: purgeOld,
     reconcile: function () { _truth = reconcileVersion(); return _truth; },
-    check: check, install: install, progressUI: progressUI, _meter: makeMeter,
+    check: check, install: install, progressUI: progressUI, _meter: makeMeter, _startProbe: startProbe,
   };
 
   // ---- The banner (the part home.js's dormant Settings row never had) -----------------------
