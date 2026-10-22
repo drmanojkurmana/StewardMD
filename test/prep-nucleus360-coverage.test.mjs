@@ -58,7 +58,9 @@ test("every taxonomy subject with modules has a non-empty hub (10-40 topics when
 test("every taxonomy module belongs to at least one topic (floor map complete)", () => {
   const entries = allModules().map((e) => ({ mid: e.mid, sid: e.sid }));
   const { uncovered } = FLOOR.buildFloorMap(entries, { topics });
-  assert.deepEqual(uncovered, []);
+  // Mixed recall papers span many topics: no honest single topic, so no Nucleus360 fallback link.
+  const MIXED = new Set(["son-iniss-recalls"]);
+  assert.deepEqual(uncovered.filter((m) => !MIXED.has(m)), []);
 });
 
 test("a shared topic is listed in every subject hub it belongs to", () => {
