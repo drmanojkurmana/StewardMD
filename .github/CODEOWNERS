@@ -5,3 +5,11 @@
 /.github/workflows/ota-publish.yml @drmanojkurmana
 /test/prep-r2-parity-guard.test.mjs @drmanojkurmana
 /.github/CODEOWNERS @drmanojkurmana
+
+# The native-iOS bank path (no Origin header). Three "Questions need a connection" outages came from changes here.
+/functions/api/prep/session.js @drmanojkurmana
+/functions/_prep_bank_gate.js @drmanojkurmana
+/prep-bank-client.js @drmanojkurmana
+/tools/prep-gate-smoke.mjs @drmanojkurmana
+/test/prep-session-noorigin.test.mjs @drmanojkurmana
+/test/prep-bank-gate.test.mjs @drmanojkurmana

@@ -21,6 +21,9 @@ jobs:
         env:
           SMD_TOOL_TOKEN: ${{ secrets.SMD_TOOL_TOKEN }}
         run: node tools/prep-r2-parity.mjs
+      - name: Bank gate answers the native iOS app (a refused session means no module loads on any phone)
+        if: ${{ !inputs.skip_parity }}
+        run: node tools/prep-gate-smoke.mjs
       - name: Install wrangler
         run: npm install -g wrangler@4.107.0
       - name: Publish staged candidate live to devices

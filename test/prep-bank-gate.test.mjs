@@ -198,6 +198,33 @@ test("gate [ENFORCE=1]: mint session + valid app proof gets 200 with private no-
   assert.equal(body.items.length, 1);
 });
 
+/* DO NOT WEAKEN OR DELETE (owner 2026-10-22, third "Questions need a connection" outage): the iOS app sends every API call
+ * through native networking (CapacitorHttp), which adds NO Origin header. With the gate enforced the whole flow must still
+ * work without one: mint a session, then fetch a question file with the app proof. If this test fails, every module on
+ * every iPhone and iPad shows "Questions need a connection". See also test/prep-session-noorigin.test.mjs. */
+test("gate [ENFORCE=1] NATIVE iOS FLOW: no Origin on session mint or on the module request still returns questions", async () => {
+  gate.resetBankGateMemory();
+  const env = {
+    PREP_BANK_ENFORCE: "1",
+    MAIK_KV: kv(),
+    PREP_BANK_R2: r2({ "prep-bank/v1/anatomy/mcq/ana-gametogenesis.json": '{"topic":"ana-gametogenesis","items":[{"id":"q1","q":"Test question"}]}' }),
+  };
+  const sessReq = new Request("https://stewardmd.in/api/prep/session", {
+    method: "POST",
+    headers: { Authorization: "Bearer tok-a", "Content-Type": "application/json", "X-SMD-Device": "ipad-1" },
+    body: JSON.stringify({ deviceId: "ipad-1", appVersion: "1.0.0" }),
+  });
+  const sessRes = await bank.onRequestPost({ env, params: { path: ["session"] }, request: sessReq });
+  assert.equal(sessRes.status, 200, "session mint without Origin must succeed for a signed-in app request");
+  const sessData = await sessRes.json();
+  const path = "v1/anatomy/mcq/ana-gametogenesis.json";
+  const req = await createSignedRequest(path, "tok-a", sessData, { dropOrigin: true });
+  assert.equal(req.headers.get("Origin"), null);
+  const r = await bank.onRequestGet({ env, params: { path: path.split("/") }, request: req });
+  assert.equal(r.status, 200, "module request without Origin but with app proof must succeed");
+  assert.equal((await r.json()).items.length, 1);
+});
+
 test("gate [ENFORCE=1]: mint session without Origin header (curl) is refused with 403", async () => {
   gate.resetBankGateMemory();
   const env = {

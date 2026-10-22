@@ -9,6 +9,10 @@ on:
     paths:
       - "prep/**"
       - "tools/prep-r2-*.mjs"
+      - "tools/prep-gate-smoke.mjs"
+      - "functions/api/prep/session.js"
+      - "functions/_prep_bank_gate.js"
+      - "prep-bank-client.js"
   schedule:
     - cron: "17 */6 * * *"
   workflow_dispatch: {}
@@ -32,3 +36,7 @@ jobs:
         continue-on-error: ${{ github.event_name == 'pull_request' }}
         run: |
           node tools/prep-r2-parity.mjs
+      - name: Bank gate answers the native iOS app (session route, no Origin header)
+        # A pull request is judged before its deploy, so it is informational there; main and the schedule are hard failures.
+        continue-on-error: ${{ github.event_name == 'pull_request' }}
+        run: node tools/prep-gate-smoke.mjs
