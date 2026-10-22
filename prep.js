@@ -1524,6 +1524,11 @@
     try { if (G.PREP_TIDE) G.PREP_TIDE.attach(root); } catch (e) {}
     try { if (G.PREP_NAV) G.PREP_NAV.attach(root, HOST); } catch (e) {}
     root.addEventListener("click", onClick);
+    root.addEventListener("error", function (e) {
+      var t = e && e.target;
+      if (t && t.tagName === "IMG" && G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.resignImg) G.PREP_BANK_CLIENT.resignImg(t);
+    }, true);
+    try { if (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.ensureSession) { var ep = G.PREP_BANK_CLIENT.ensureSession(); if (ep && ep.catch) ep.catch(function () {}); } } catch (e) {}
     bindSheetDrag();
     // A sheet over the runner (Ask MaiK, share, the Pro limit) stops the per-question clock; closing it starts it again.
     try { new G.MutationObserver(function () { var r = st.run; if (r && r.qc && r.qc.used && !r.done) { syncClock(r); tlSync(r); } }).observe(root, { childList: true }); } catch (e) {}
