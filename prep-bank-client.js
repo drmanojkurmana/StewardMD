@@ -251,12 +251,72 @@
     });
   }
 
+  function sessionValid() {
+    var now = Math.floor(Date.now() / 1000);
+    return !!(_session && _session.sessionKey && _session.sessionId && _session.expiresAt > now);
+  }
+
+  function ensureSession() {
+    return getSession().then(function (sess) { return sess; }, function () { return null; });
+  }
+
+  function stripSigned(u) {
+    var s = String(u || ""), hash = "", hi = s.indexOf("#");
+    if (hi >= 0) { hash = s.slice(hi); s = s.slice(0, hi); }
+    var q = s.indexOf("?");
+    if (q < 0) return s + hash;
+    var parts = s.slice(q + 1).split("&").filter(function (part) {
+      var k = part.split("=")[0];
+      return k !== "s" && k !== "exp" && k !== "sig";
+    });
+    return s.slice(0, q) + (parts.length ? "?" + parts.join("&") : "") + hash;
+  }
+
+  function isGatedImageUrl(urlOrPath) {
+    var p = extractBankPath(stripSigned(urlOrPath));
+    return isImagePath(p) && isGatedPath(p);
+  }
+
+  function alreadyResigned(el) {
+    try {
+      if (el.getAttribute && el.getAttribute("data-smd-resigned")) return true;
+      if (el.dataset && el.dataset.smdResigned) return true;
+    } catch (e) {}
+    return !!el._smdResigned;
+  }
+
+  function markResigned(el) {
+    try { el._smdResigned = 1; } catch (e) {}
+    try {
+      if (el.setAttribute) el.setAttribute("data-smd-resigned", "1");
+      else if (el.dataset) el.dataset.smdResigned = "1";
+    } catch (e) {}
+  }
+
+  function resignImg(imgEl, rawPath) {
+    if (!imgEl) return Promise.resolve(false);
+    if (alreadyResigned(imgEl)) return Promise.resolve(false);
+    var raw = rawPath || (imgEl.getAttribute ? imgEl.getAttribute("src") : null) || imgEl.src || "";
+    raw = stripSigned(raw);
+    if (!isGatedImageUrl(raw)) return Promise.resolve(false);
+    markResigned(imgEl);
+    return ensureSession().then(function (sess) {
+      if (!sess) return false;
+      var signed = signImageUrl(raw);
+      if (!signed || signed === raw || signed.indexOf("sig=") < 0) return false;
+      try { if (imgEl.setAttribute) imgEl.setAttribute("src", signed); } catch (e) {}
+      try { imgEl.src = signed; } catch (e) {}
+      return true;
+    }, function () { return false; });
+  }
+
   function signImageUrl(urlOrPath) {
     var p = extractBankPath(urlOrPath);
     if (!isImagePath(p) || !isGatedPath(p)) return urlOrPath;
 
     var now = Math.floor(Date.now() / 1000);
-    if (!_session || !_session.sessionKey || !_session.sessionId || _session.expiresAt <= now) {
+    if (!sessionValid()) {
+      try { ensureSession(); } catch (e) {}
       return urlOrPath;
     }
 
@@ -315,8 +375,20 @@
     clearSession: clearSession,
     signRequestHeaders: signRequestHeaders,
     signImageUrl: signImageUrl,
+    ensureSession: ensureSession,
+    resignImg: resignImg,
+    isGatedImageUrl: isGatedImageUrl,
     fetchBankJSON: fetchBankJSON
   };
+
+  try {
+    if (G.document && G.document.addEventListener) {
+      G.document.addEventListener("error", function (e) {
+        var t = e && e.target;
+        if (t && t.tagName === "IMG") resignImg(t);
+      }, true);
+    }
+  } catch (e) {}
 
   G.PREP_BANK_CLIENT = CLIENT;
   if (typeof module !== "undefined" && module.exports) {

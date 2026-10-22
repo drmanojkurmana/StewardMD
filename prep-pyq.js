@@ -299,7 +299,7 @@
     if ((it.imgPlace === "exp" ? "exp" : "stem") !== (where || "stem")) return "";
     var e = P.host.esc, of = where === "exp" ? "this explanation" : "this question";
     var figs = it.img.map(function (f, k) {
-      return '<figure class="pn-vfig pn-yq-fig' + (where === "exp" ? " pn-xfig" : "") + '"><button type="button" class="pn-vimg" data-act="y-zoom" data-v="' + e(f) + '" data-u="' + e(itemImg(it, P.host, f)) + '" aria-label="Enlarge image ' + (k + 1) + " of " + of + '"><img src="' + e(itemImg(it, P.host, f)) + '" alt="Image for ' + of + " (" + (k + 1) + " of " + it.img.length + ')" loading="lazy" decoding="async"></button>' +
+      return '<figure class="pn-vfig pn-yq-fig' + (where === "exp" ? " pn-xfig" : "") + '"><button type="button" class="pn-vimg" data-act="y-zoom" data-v="' + e(f) + '" data-u="' + e(itemImg(it, P.host, f)) + '" aria-label="Enlarge image ' + (k + 1) + " of " + of + '"><img src="' + e(itemImg(it, P.host, f)) + '" alt="Image for ' + of + " (" + (k + 1) + " of " + it.img.length + ')" loading="lazy" decoding="async" onerror="window.PREP_BANK_CLIENT&&window.PREP_BANK_CLIENT.resignImg&&window.PREP_BANK_CLIENT.resignImg(this)"></button>' +
         '<figcaption><span class="pn-vzi" aria-hidden="true">' + svg("zoom", 16) + '</span><span>Tap to enlarge.</span></figcaption></figure>';
     }).join("");
     if ((it.credit || it.licence) && (where || "stem") === "stem") {
@@ -323,7 +323,7 @@
     var root = host.root(), e = host.esc, el = G.document.createElement("div");
     el.className = "pn-zoom"; el.id = "pnYqZoom"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true"); el.setAttribute("aria-label", "Image, enlarged");
     el.innerHTML = '<div class="pn-zoom-top"><p>Question image</p><button type="button" class="pn-ib" data-act="y-unzoom" aria-label="Close image">' + host.ico("close") + "</button></div>" +
-      '<div class="pn-zoom-sc"><button type="button" class="pn-zoom-b" data-act="y-zoom2" aria-pressed="false" aria-label="Enlarge further"><img src="' + e(u || imgSrc(host, f)) + '" alt="Image for this question, enlarged"></button></div><p class="pn-zoom-h">Tap the image to enlarge it further</p>';
+      '<div class="pn-zoom-sc"><button type="button" class="pn-zoom-b" data-act="y-zoom2" aria-pressed="false" aria-label="Enlarge further"><img src="' + e(u || imgSrc(host, f)) + '" alt="Image for this question, enlarged" onerror="window.PREP_BANK_CLIENT&&window.PREP_BANK_CLIENT.resignImg&&window.PREP_BANK_CLIENT.resignImg(this)"></button></div><p class="pn-zoom-h">Tap the image to enlarge it further</p>';
     root.appendChild(el);
     P.zoom = { el: el, from: f };
     var c = el.querySelector("[data-act=y-unzoom]"); if (c) c.focus();

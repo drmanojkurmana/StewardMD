@@ -71,7 +71,7 @@
   }
   function stage(st, n, k, big) {
     return '<div class="pn-stack-st' + (big ? " big" : "") + '" tabindex="0" role="group" aria-roledescription="image series" aria-label="' + esc(st.lbl || "Image series") + ", slice " + (k + 1) + " of " + n + '. Use the arrow keys to move through the slices." style="--ar:' + (st.ar > 0 ? st.ar : 1) + '">' +
-      '<div class="pn-stack-z"><img class="pn-stack-im" src="' + esc(url(k)) + '" alt="' + esc(st.lbl || "Image series") + ", slice " + (k + 1) + " of " + n + '" draggable="false" decoding="async"></div>' +
+      '<div class="pn-stack-z"><img class="pn-stack-im" src="' + esc(url(k)) + '" alt="' + esc(st.lbl || "Image series") + ", slice " + (k + 1) + " of " + n + '" draggable="false" decoding="async" onerror="window.PREP_BANK_CLIENT&&window.PREP_BANK_CLIENT.resignImg&&window.PREP_BANK_CLIENT.resignImg(this)"></div>' +
       '<span class="pn-stack-ct" aria-hidden="true"><b>' + (k + 1) + "</b>/" + n + "</span>" +
       '<span class="pn-stack-ld" aria-hidden="true"><i></i></span></div>';
   }
@@ -118,7 +118,13 @@
         (function (k) {
           var im = new G.Image(); c[k] = { im: im, ok: 0 };
           im.onload = function () { c[k].ok = 1; live--; bar(); pump(); };
-          im.onerror = function () { live--; pump(); };
+          im.onerror = function () {
+            if (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.resignImg && !im._smdResigned) {
+              var rp = G.PREP_BANK_CLIENT.resignImg(im, url(k, wi));
+              if (rp && rp.then) { rp.then(function (ok) { if (!ok) { live--; pump(); } }); return; }
+            }
+            live--; pump();
+          };
           im.decoding = "async"; im.src = url(k, wi);
         })(k);
       }
