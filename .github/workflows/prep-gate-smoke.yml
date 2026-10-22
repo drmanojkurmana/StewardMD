@@ -1,0 +1,34 @@
+name: prep-gate-smoke
+# The iOS app calls the API through native networking, which sends NO Origin header. The session route must still
+# ANSWER such a request (401 login-required without a token); 403 origin-required hides every module on every phone.
+# This smoke needs no credentials and runs on its own workflow so the R2 parity guard stays untouched.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "tools/prep-gate-smoke.mjs"
+      - "functions/api/prep/session.js"
+      - "functions/_prep_bank_gate.js"
+      - "prep-bank-client.js"
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch: {}
+  pull_request:
+    paths:
+      - "tools/prep-gate-smoke.mjs"
+      - "functions/api/prep/session.js"
+      - "functions/_prep_bank_gate.js"
+      - "prep-bank-client.js"
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Bank gate answers the native iOS app (session route, no Origin header)
+        # A pull request is judged before its deploy, so it is informational there; main and the schedule are hard failures.
+        continue-on-error: ${{ github.event_name == 'pull_request' }}
+        run: node tools/prep-gate-smoke.mjs
