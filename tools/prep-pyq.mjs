@@ -644,6 +644,9 @@ export async function build(args, deps = {}) {
   const cfgPath = args.config || process.env.PREP_PYQ_CONFIG || path.join(os.homedir(), "prep-data", "pyq", "papers.json");
   const conf = deps.conf || readJson(cfgPath, null);
   if (!conf || !Array.isArray(conf.papers)) throw new Error("no paper config at " + cfgPath);
+  // "~/" in a paper's file paths is the home folder (the config is shared between machines)
+  const home = (s) => (typeof s === "string" ? s.replace(/^~(?=\/)/, os.homedir()) : s);
+  for (const p of conf.papers) for (const k of ["pdf", "txt", "fix"]) if (p[k]) p[k] = home(p[k]);
   const outRoot = path.resolve(root, args.out || "prep/pyq"), out = path.join(outRoot, "out"), work = path.join(outRoot, "work");
   const imgDir = path.join(out, "img");
   const report = { v: 1, at: new Date().toISOString(), papers: [], subjects: {}, images: { found: 0, logos: 0, small: 0, kept: 0 } };
@@ -672,7 +675,7 @@ export async function build(args, deps = {}) {
     let ocrPages = 0;
     if (conf.ocr && p.pdf && fs.existsSync(p.pdf) && !args.flags.has("no-ocr")) ({ text, ocrPages } = ocrBlankPages(p.pdf, text, conf.ocr, path.join(work, p.id + "-ocr"), log));
     const parsed = parsePaper(text, F);
-    if (p.fix) applyFixes(parsed.items, (readJson(p.fix.replace(/^~(?=\/)/, os.homedir()), null) || (() => { throw new Error("fix file not readable: " + p.fix); })())[p.id]);
+    if (p.fix) applyFixes(parsed.items, (readJson(p.fix, null) || (() => { throw new Error("fix file not readable: " + p.fix); })())[p.id]);
     if (p.shuffle) parsed.items.forEach((x) => shuffleOptions(x, p.id + "#" + x.n));
     let imgs = null;
     if (!args.flags.has("no-images") && p.pdf && fs.existsSync(p.pdf)) {
