@@ -1,0 +1,44 @@
+{
+  "id": "fixture-ms-af",
+  "title": "Breathless woman with a racing pulse",
+  "level": "mbbs",
+  "pathology": { "id": "mitral_stenosis", "severity": "severe" },
+  "stem": "A 38 year old woman presents with six months of worsening breathlessness on exertion, orthopnoea and palpitations. She had rheumatic fever as a child. Her pulse feels irregular.",
+  "history": [
+    { "q": "How far can you walk before you stop?", "a": "She stops after about 100 metres on the flat and must rest on stairs." },
+    { "q": "Do you wake breathless at night?", "a": "Yes, twice a week she wakes gasping and sits upright for relief." },
+    { "q": "Any chest pain, cough or fever?", "a": "No chest pain. Occasional dry cough, no fever, no haemoptysis." },
+    { "q": "Past medical history and medicines?", "a": "Rheumatic fever at age 11. No regular medicines. No known drug allergies." }
+  ],
+  "vitals": { "hr": 92, "sbp": 108, "dbp": 72, "rr": 22, "spo2": 95, "tempC": 36.8 },
+  "exam": {
+    "general": "Comfortable at rest, mild malar flush, no ankle oedema.",
+    "pulse": "Irregularly irregular pulse at 92 per minute, normal volume and character.",
+    "jvp": "Jugular venous pressure not raised, no prominent waves.",
+    "precordium": "Tapping apex beat in the fifth intercostal space at the midclavicular line.",
+    "auscultation": { "s1": "Loud first heart sound", "s2": "Normally split second heart sound with an opening snap shortly after", "added": "Opening snap in early diastole", "murmur": "Low pitched rumbling mid diastolic murmur at the apex, grade 3 of 4, no radiation, best heard with the bell in the left lateral position" },
+    "other": "Lungs clear. No hepatomegaly."
+  },
+  "ecg": { "rhythm": "Atrial fibrillation", "rate": 90, "axis": "Right axis deviation", "findings": ["No P waves with an irregularly irregular ventricular response", "Right ventricular hypertrophy pattern"] },
+  "echoTasks": [
+    { "view": "tte_a4c", "find": "Enlarged left atrium and a thickened doming mitral valve with restricted opening", "measure": { "what": "Mitral valve area by planimetry", "truth": 0.9, "unit": "sq cm", "tolerance": 0.2 } },
+    { "view": "tte_plax", "find": "Thickened mitral leaflets with doming of the anterior leaflet in diastole", "measure": null }
+  ],
+  "report": {
+    "required": [
+      { "field": "Left atrium", "answer": "Severely enlarged left atrium", "accept": ["severely enlarged left atrium", "severe left atrial enlargement", "large left atrium"] },
+      { "field": "Mitral valve", "answer": "Thickened and stenotic mitral valve", "accept": ["thickened and stenotic mitral valve", "mitral stenosis", "stenotic mitral valve", "rheumatic mitral stenosis"] },
+      { "field": "Mitral valve area", "answer": "0.9 sq cm severe stenosis", "accept": ["0.9", "severe", "severe stenosis"] },
+      { "field": "Rhythm during study", "answer": "Atrial fibrillation", "accept": ["atrial fibrillation", "af"] }
+    ]
+  },
+  "diagnosis": { "answer": "Severe rheumatic mitral stenosis with atrial fibrillation", "accept": ["severe rheumatic mitral stenosis with atrial fibrillation", "severe mitral stenosis with atrial fibrillation", "rheumatic mitral stenosis", "mitral stenosis"] },
+  "management": {
+    "model": "Rate control for atrial fibrillation, anticoagulation for mitral stenosis with atrial fibrillation, diuretics for congestion, and referral for mitral balloon valvuloplasty assessment at a tertiary centre. Rheumatic fever secondary prophylaxis is reviewed.",
+    "keyPoints": ["Control the ventricular rate", "Anticoagulate for atrial fibrillation with rheumatic mitral stenosis", "Relieve congestion with diuretics", "Refer for balloon mitral valvuloplasty assessment"]
+  },
+  "teaching": ["A loud first sound, an opening snap and a rumbling mid diastolic murmur point to mitral stenosis.", "Left atrial enlargement predisposes to atrial fibrillation."],
+  "lessons": ["path_mitral_stenosis", "view_a4c", "meas_simpson_ef"],
+  "sources": ["ASE guidance on valvular stenosis, restated in own words", "ESC guidance on valvular heart disease, restated in own words"],
+  "review": { "status": "ai_drafted" }
+}

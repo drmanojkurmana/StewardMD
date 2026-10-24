@@ -1,0 +1,43 @@
+{
+  "id": "fixture-anterior-mi",
+  "title": "Man with crushing central chest pain",
+  "level": "mbbs",
+  "pathology": { "id": "regional_wall_motion_abnormality_mi", "severity": "moderate" },
+  "stem": "A 56 year old man presents two hours after the onset of crushing central chest pain radiating to the left arm, with sweating and nausea. He smokes and has treated hypertension.",
+  "history": [
+    { "q": "Describe the pain and its onset.", "a": "Central, crushing, 9 of 10, began at rest two hours ago and has not eased." },
+    { "q": "Any breathlessness or palpitations?", "a": "Mild breathlessness since the pain began. No palpitations or syncope." },
+    { "q": "Risk factors and medicines?", "a": "Smokes 15 cigarettes a day, hypertension on amlodipine, no diabetes. No allergies." },
+    { "q": "Any recent similar episodes?", "a": "Two brief episodes of exertional chest tightness in the last month, each lasting five minutes." }
+  ],
+  "vitals": { "hr": 98, "sbp": 142, "dbp": 88, "rr": 20, "spo2": 97, "tempC": 36.6 },
+  "exam": {
+    "general": "Anxious, pale and sweaty, comfortable only when sitting still.",
+    "pulse": "Regular pulse at 98 per minute, normal volume and character.",
+    "jvp": "Jugular venous pressure not raised.",
+    "precordium": "Apex beat not displaced, normal character.",
+    "auscultation": { "s1": "Soft first heart sound", "s2": "Normally split second heart sound", "added": "Fourth heart sound present", "murmur": "No murmur heard" },
+    "other": "Lungs clear. No oedema."
+  },
+  "ecg": { "rhythm": "Sinus rhythm", "rate": 98, "axis": "Normal axis", "findings": ["ST elevation in V1 to V4 with hyperacute T waves", "Reciprocal ST depression in II, III and aVF"] },
+  "echoTasks": [
+    { "view": "tte_a4c", "find": "Akinetic anterior septum and apex with preserved basal contraction", "measure": { "what": "Left ventricular ejection fraction by Simpson biplane", "truth": 47, "unit": "percent", "tolerance": 5 } },
+    { "view": "tte_a2c", "find": "Akinetic anterior wall and apex in the left anterior descending territory", "measure": null }
+  ],
+  "report": {
+    "required": [
+      { "field": "Regional wall motion", "answer": "Akinetic anterior septum and apex", "accept": ["akinetic anterior septum and apex", "anterior and apical akinesia", "akinetic apex", "anterior wall motion abnormality"] },
+      { "field": "Left ventricular function", "answer": "Moderately impaired with ejection fraction 47 percent", "accept": ["moderately impaired", "ejection fraction 47 percent", "ef 47", "47 percent"] },
+      { "field": "Territory", "answer": "Left anterior descending territory", "accept": ["left anterior descending territory", "lad territory", "anterior territory"] }
+    ]
+  },
+  "diagnosis": { "answer": "Acute anterior ST elevation myocardial infarction", "accept": ["acute anterior st elevation myocardial infarction", "anterior stemi", "anterior myocardial infarction", "anterior mi"] },
+  "management": {
+    "model": "Immediate reperfusion pathway with primary percutaneous coronary intervention, dual antiplatelet therapy and anticoagulation per protocol, analgesia, and monitoring for arrhythmia. Echocardiography must not delay reperfusion.",
+    "keyPoints": ["Activate the primary PCI pathway without delay", "Give dual antiplatelet therapy and anticoagulation per protocol", "Monitor for ventricular arrhythmia", "Do not delay reperfusion for echocardiography"]
+  },
+  "teaching": ["Anterior ST elevation with reciprocal depression localises to the left anterior descending artery.", "A new regional wall motion abnormality appears within minutes of occlusion."],
+  "lessons": ["path_regional_wall_motion_abnormality_mi", "view_a4c", "view_a2c"],
+  "sources": ["ASE guidance on chamber quantification after infarction, restated in own words", "ESC guidance on ST elevation myocardial infarction, restated in own words"],
+  "review": { "status": "ai_drafted" }
+}

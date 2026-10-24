@@ -219,7 +219,17 @@
     I.setPref("ktab", id);
     st.view = "hub"; st.again = function (f) { showTab(tab(), f || null); };
     I.leave();
-    var lv = klevel(), body = id === "learn" ? learnHtml() : id === "practice" ? practiceHtml() : id === "kardiox" ? kardioxHtml() : soonHtml(id);
+    var lv = klevel();
+    if (id === "cases" && G.KARDIA_CASES) {
+      G.KARDIA_CASES.attach(host);
+      G.KARDIA_CASES.setNavigator(function (f) { showTab("cases", typeof f === "string" ? f : null); });
+      var cbody = G.KARDIA_CASES.html();
+      /* A case in progress paints its own top bar and progress; the list keeps the tab chrome. */
+      if (G.KARDIA_CASES._state && G.KARDIA_CASES._state.curId) { I.paint(cbody, focusSel); return; }
+      I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + cbody, focusSel);
+      return;
+    }
+    var body = id === "learn" ? learnHtml() : id === "practice" ? practiceHtml() : id === "kardiox" ? kardioxHtml() : soonHtml(id);
     I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + body, focusSel);
   }
 
