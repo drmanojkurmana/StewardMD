@@ -1,0 +1,171 @@
+{
+  "_comment": "CliniX 2.0 Presentation Library: Symptom-First Approach to Antepartum Haemorrhage. Reuses shared Skills as atoms and provides tiered clinical reasoning from recognition to discriminators and emergency obstetric actions.",
+  "schemaVersion": 1,
+  "id": "antepartum_haemorrhage",
+  "title": "Approach to Antepartum Haemorrhage",
+  "subtitle": "Obstetric haemorrhage after 20 weeks, placenta praevia, placental abruption, vasa praevia, and emergency resuscitation",
+  "system": "obgyn",
+  "estMinutes": 45,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "layers": {
+    "recognise": {
+      "redFlags": [
+        "Massive revealed vaginal haemorrhage causing maternal hypovolaemic shock (hypotension, resting tachycardia > 110/min, pallor, cold clammy periphery, air hunger)",
+        "Tense, board-like, 'woody' and exquisitely tender uterus failing to relax between contractions, with maternal shock disproportionately severe compared to visible external vaginal blood loss (severe concealed placental abruption)",
+        "Sudden catastrophic fetal bradycardia (< 100 bpm), sustained late decelerations, or sinusoidal fetal heart pattern immediately following spontaneous or artificial rupture of membranes, pathognomonic of torn vasa praevia",
+        "Sudden cessation of active labour contractions accompanied by sharp tearing abdominal pain, vaginal bleeding, recession of the presenting fetal part, and palpable superficial fetal limbs under maternal skin (complete uterine rupture)",
+        "Oozing from intravenous puncture sites, spontaneous epistaxis, haematuria, or petechiae indicating consumptive coagulopathy and disseminated intravascular coagulation (DIC)",
+        "Non-reassuring cardiotocography (CTG) showing recurrent prolonged decelerations or absent baseline variability reflecting critical placental insufficiency and impending intrauterine asphyxia"
+      ],
+      "vitalsPriorities": [
+        "Maternal Pulse, Blood Pressure, and Perfusion: Pregnant women have physiological hypervolaemia (expanded plasma volume by 40-50 percent); normotension can be deceptively maintained until up to 30 percent of total blood volume is lost. Tachycardia, narrowed pulse pressure (< 30 mmHg), tachypnoea, and delayed capillary refill (> 2 seconds) are earlier, far more sensitive indicators of hypovolaemia than resting systolic hypotension.",
+        "Uterine Palpation and Tonus: Assess uterine consistency immediately with gentle flat-hand palpation. A soft, non-tender, relaxed uterus indicates placenta praevia. A woody, rigid, hypertonic, and exquisitely tender uterus indicates concealed or mixed placental abruption.",
+        "Continuous Electronic Fetal Heart Rate Monitoring (CTG): The fetus is the most sensitive early monitor of maternal uteroplacental perfusion. Fetal distress and late decelerations frequently precede overt maternal hemodynamic collapse in abruption.",
+        "ABSOLUTE CONTRAINDICATION: Digital vaginal examination (per vaginam) is STRICTLY CONTRAINDICATED in any patient presenting with antepartum haemorrhage until placenta praevia has been definitively excluded by ultrasound examination. Inserting an examining finger through the internal os over a low-lying placenta can lacerate maternal cotyledons and cause catastrophic exsanguinating haemorrhage within seconds."
+      ]
+    },
+    "classify": {
+      "tempo": {
+        "acute_severe_exsanguinating": [
+          "Major Placenta Praevia with sudden torrential unprovoked bleeding",
+          "Severe Placental Abruption (concealed or revealed) with consumptive coagulopathy",
+          "Ruptured Vasa Praevia with rapid fetal exsanguination",
+          "Complete Uterine Rupture with fetal extrusion into the peritoneal cavity"
+        ],
+        "acute_subacute_recurrent": [
+          "Placenta Praevia 'warning bleeds' (painless, bright red, recurrent episodes)",
+          "Mild to Moderate Placental Abruption (marginal sinus bleed or localized retroplacental clot)",
+          "Heavy 'Show' marking onset of labour with cervical effacement and dilatation"
+        ],
+        "concealed_or_evolving": [
+          "Expanding Retroplacental Haematoma without external vaginal loss",
+          "Chronic Abruption-Oligohydramnios Sequence (CAOS)",
+          "Impending Scar Dehiscence / Uterine Window in a scarred uterus"
+        ]
+      },
+      "syndromes": {
+        "placental_site_disorders": [
+          "Placenta Praevia (Grade I low-lying, Grade II marginal, Grade III incomplete, Grade IV central/complete covering internal os)",
+          "Morbidly Adherent Placenta / Placenta Accreta Spectrum (PAS: accreta vera, increta, percreta; strongly associated with prior caesarean scar and anterior low placenta)",
+          "Placental Abruption (premature detachment of a normally situated placenta before delivery; revealed, concealed, or mixed)"
+        ],
+        "fetal_vessel_rupture": [
+          "Vasa Praevia with Velamentous Cord Insertion (fetal vessels traverse membranes unprotected by Wharton jelly)",
+          "Vasa Praevia with Succenturiate Placental Lobe (connecting vascular leash crosses internal os)"
+        ],
+        "uterine_and_cervical_causes": [
+          "Uterine Rupture (scarred uterus from previous caesarean delivery or myomectomy; unscarred from grand multiparity or obstructed labour)",
+          "Invasive Carcinoma of the Cervix co-existing with advanced pregnancy",
+          "Cervical Polyp, Severe Cervicitis, or Genital Tract Trauma / Laceration",
+          "Marginal Sinus Bleed / Circumvallate Placenta"
+        ],
+        "systemic_coagulopathy": [
+          "Consumptive Coagulopathy / DIC secondary to massive retroplacental thromboplastin release",
+          "Underlying Inherited or Acquired Bleeding Diathesis (severe thrombocytopenia, severe liver failure)"
+        ]
+      }
+    },
+    "discriminators": [
+      {
+        "title": "Placenta Praevia vs Placental Abruption (The Classical Bedside Obstetric Distinction)",
+        "finding": "Character of bleeding, pain, and abdominal examination findings. Placenta praevia presents with painless, causeless, recurrent, bright red vaginal bleeding; the abdomen is soft and non-tender, the presenting part is high or unengaged, fetal heart sounds are usually easily audible, and maternal shock corresponds directly to visible external blood loss. Placental abruption presents with painful, dark vaginal bleeding (or no bleeding if completely concealed); the abdomen is tense, woody, exquisitely tender, fetal parts are difficult to palpate, fetal heart sounds are frequently non-reassuring or absent, and maternal shock is often out of proportion to visible external loss.",
+        "highYield": "Painless bright red bleeding with a soft non-tender uterus points to placenta praevia; painful dark bleeding with a woody, rigid, hypertonic uterus points to placental abruption."
+      },
+      {
+        "title": "Vasa Praevia vs Placenta Praevia vs Abruption (Fetal vs Maternal Blood)",
+        "finding": "Timing of bleeding in relation to membrane rupture and maternal versus fetal hemodynamic impact. Vasa praevia presents with fresh vaginal bleeding occurring at the exact moment of spontaneous or artificial rupture of amniotic membranes, accompanied by sudden fetal bradycardia or sinusoidal trace, while maternal pulse and blood pressure remain entirely normal. The blood is fetal in origin. An Apt test (alkali denaturation) or Kleihauer-Betke test confirms alkali-resistant fetal haemoglobin (HbF).",
+        "highYield": "Bleeding coinciding with membrane rupture that triggers immediate catastrophic fetal distress while maternal vitals remain entirely stable is pathognomonic of vasa praevia."
+      },
+      {
+        "title": "Complete vs Low-Lying Placenta Praevia (Ultrasound Distance from Internal Os)",
+        "finding": "Transvaginal ultrasound measurement of the distance between the lower placental edge and the internal cervical os. When the placenta covers or reaches the internal os, it is complete placenta praevia, mandating elective caesarean section. When the placental margin is within 20 mm (2 cm) of the internal os, it is categorized as a low-lying placenta. When the distance exceeds 20 mm at term, a safe trial of vaginal delivery is achievable in the majority of patients without increased haemorrhagic risk.",
+        "highYield": "A placental edge overlapping the internal cervical os mandates caesarean delivery; an edge greater than 20 mm from the internal os permits a safe trial of labour."
+      },
+      {
+        "title": "Uterine Rupture vs Placental Abruption",
+        "finding": "Uterine rupture occurs predominantly in a scarred uterus during active labour, presenting with sudden acute tearing scar pain, abrupt cessation of previous uterine contractions, loss of uterine contour, recession of the presenting fetal part on vaginal palpation, and fetal parts easily felt superficially through the abdominal wall. In placental abruption, the uterus remains hypertonic and board-like without loss of uterine shape or retraction of the fetal presenting part.",
+        "highYield": "Sudden cessation of labour contractions with recession of the presenting fetal head and superficial palpability of fetal limbs indicates complete uterine rupture."
+      }
+    ],
+    "dontMiss": [
+      {
+        "disease": "Severe Placental Abruption with Consumptive Coagulopathy (DIC)",
+        "clue": "Woody tender uterus, dark vaginal bleeding, maternal shock, fetal demise or distress, and failure of a whole blood sample in a clean glass tube to form a firm clot within 10 minutes (bedside Lee-White / clot retraction test).",
+        "action": "RESUSCITATION & DELIVERY EMERGENCY. Insert two 14-16G IV cannulae, infuse warmed crystalloid, send stat blood for grouping, crossmatching, and full coagulation profile, order 4 units of packed red blood cells, fresh frozen plasma, and cryoprecipitate (target fibrinogen > 150-200 mg/dL), expedite delivery immediately (emergency caesarean if fetus alive, or augmented vaginal delivery under close monitoring if fetus deceased and mother stable), and anticipate severe postpartum haemorrhage from myometrial apoplexy (Couvelaire uterus)."
+      },
+      {
+        "disease": "Major Placenta Praevia with Exsanguinating Haemorrhage",
+        "clue": "Sudden torrential bright red painless vaginal bleeding in late pregnancy with high unengaged fetal head or abnormal fetal lie (transverse / oblique).",
+        "action": "DO NOT PERFORM DIGITAL EXAMINATION. Resuscitate with high-flow oxygen, rapid IV crystalloids, and emergency uncrossmatched O-negative or type-specific blood, alert senior obstetrician, consultant anaesthetist, and neonatal team, transfer immediately to operating theatre for emergency caesarean section, and prepare for placenta accreta spectrum (tamponade balloons, uterine compression sutures, uterine artery ligation, or caesarean hysterectomy)."
+      },
+      {
+        "disease": "Ruptured Vasa Praevia",
+        "clue": "Vaginal bleeding coinciding with amniotomy or membrane rupture followed immediately by profound fetal bradycardia (< 90 bpm) or sinusoidal CTG pattern.",
+        "action": "TIME-CRITICAL EMERGENCY. Total fetal blood volume is only 250 to 300 mL; loss of 50 mL is fatal. Immediate delivery by category 1 emergency caesarean section within minutes. Alert neonatal resuscitation team to prepare for immediate intubation, volume expansion with O-negative blood, and neonatal blood transfusion."
+      },
+      {
+        "disease": "Impending or Complete Uterine Rupture",
+        "clue": "Woman in labour with a scarred uterus (or obstructed labour) presenting with severe continuous abdominal pain, maternal tachycardia, hematuria, and a visible pathological retraction groove (Bandl's ring) across the lower abdomen.",
+        "action": "Stop all uterotonic and oxytocin infusions immediately, administer rapid intravenous fluid resuscitation, provide tocolysis (e.g. terbutaline) to relax the hyperactive myometrium, and transfer urgently for emergency exploratory laparotomy and caesarean delivery before maternal and fetal collapse."
+      }
+    ],
+    "investigations": {
+      "step1_immediate": [
+        "Bedside emergency blood grouping, RhD typing, and stat crossmatch for 4 units of packed red blood cells",
+        "Bedside Clot Retraction Test (Weiner test / Lee-White test): Place 5 mL of maternal blood in a plain clean glass tube; failure to form a solid clot within 8 to 10 minutes, or dissolution of the clot upon gentle agitation, indicates critical fibrinogen deficiency (< 150 mg/dL) and active consumptive coagulopathy",
+        "Emergency point-of-care transabdominal ultrasound (confirm fetal viability, evaluate fetal presentation, and localize placental site; NB: a normal ultrasound never rules out placental abruption)",
+        "Continuous electronic cardiotocography (CTG) monitoring to evaluate fetal wellbeing and uterine contraction frequency"
+      ],
+      "step2_urgent": [
+        "Complete blood count (CBC) with serial haematocrit and platelet count (platelets < 100,000/uL signals evolving DIC)",
+        "Coagulation profile: PT/INR, aPTT, quantitative serum fibrinogen, and D-dimer",
+        "Transvaginal Ultrasound (TVS): Safe and superior to transabdominal ultrasound for measuring the exact distance from the internal cervical os to the lower placental edge",
+        "Kleihauer-Betke test or flow cytometry in RhD-negative mothers to quantify feto-maternal haemorrhage and calculate additional anti-D immunoglobulin dosing",
+        "Renal function tests (urea, creatinine, serum electrolytes) and continuous urine output monitoring via an indwelling Foley catheter (oliguria < 30 mL/hr signals renal cortical hypoperfusion)"
+      ],
+      "step3_confirmatory": [
+        "Transvaginal Colour Doppler Sonography for Vasa Praevia (visualize aberrant fetal vessels crossing the internal cervical os with fetal pulse frequency) and Placenta Accreta Spectrum (detect loss of retroplacental clear zone, myometrial thinning < 1 mm, and turbulent placental lacunae)",
+        "Pelvic Magnetic Resonance Imaging (MRI without gadolinium) when placenta accreta spectrum with posterior placenta or invasive parametrial/bladder involvement is suspected",
+        "Apt test (alkali denaturation) on vaginal blood to identify fetal haemoglobin (addition of 1 percent sodium hydroxide: adult blood denatures to yellow-brown, whereas alkali-resistant fetal blood remains bright pink)",
+        "Thromboelastography (TEG) / Rotational Thromboelastometry (ROTEM) for goal-directed real-time massive transfusion therapy"
+      ]
+    },
+    "skills": [
+      "skill.hx.obg.booking_lmp",
+      "skill.hx.abruptio.bleed_pain",
+      "skill.hx.abruptio.risk",
+      "skill.hx.placenta.bleeding",
+      "skill.hx.placenta.risk",
+      "skill.present.placenta.case",
+      "skill.exam.obg.preg_prep_inspect",
+      "skill.exam.obg.fundal_height",
+      "skill.exam.obg.leopold",
+      "skill.exam.obg.fetal_heart",
+      "skill.ix.obg.ctg_interpretation",
+      "skill.ix.obg.ctg_classification",
+      "skill.approach.obg.team_leader",
+      "skill.approach.obg.cs_setup",
+      "skill.approach.obg.cs_info"
+    ],
+    "examPearls": [
+      {
+        "topic": "The Cardinal Rule of APH: Contraindication of Digital Examination",
+        "text": "In any woman presenting with antepartum haemorrhage after 20 weeks of gestation, a digital vaginal examination (per vaginam) must NEVER be performed until placenta praevia has been definitively excluded by ultrasound examination. Digital palpation of a low-lying placenta or cervical os can shear open maternal intervillous sinuses, producing torrential, catastrophic haemorrhage that can lead to maternal and fetal demise within minutes. Speculum examination under strict aseptic conditions may be performed only to exclude local cervical or vaginal pathology once ultrasound has confirmed the placenta is normally situated."
+      },
+      {
+        "topic": "Couvelaire Uterus (Uteroplacental Apoplexy)",
+        "text": "Couvelaire uterus occurs in severe concealed placental abruption when massive retroplacental bleeding extravasates through the myometrium, separating muscle fibres and dissecting beneath the uterine serosa and into the broad ligaments. At caesarean section, the uterus appears mottled, dark purplish-blue, and ecchymotic. Although the apoplectic myometrium exhibits impaired contractility predisposing to severe postpartum haemorrhage, hysterectomy is NOT routinely required; aggressive uterotonic therapy, warm packing, and compression sutures usually successfully restore haemostasis."
+      },
+      {
+        "topic": "Stallworthy's Sign in Posterior Placenta Praevia",
+        "text": "Stallworthy's sign refers to slowing of the fetal heart rate when the presenting head is pressed down into the pelvic inlet, with prompt recovery when the pressure is released. This occurs characteristically in posterior placenta praevia, where pressure on the fetal head directly compresses the placenta against the sacral promontory, slowing fetal placental circulation. Furthermore, posterior placenta praevia causes anterior displacement of the fetal head, making it difficult to engage."
+      },
+      {
+        "topic": "Macafee and Johnson Expectant Protocol for Placenta Praevia",
+        "text": "The Macafee regimen is an expectant conservative management protocol for women presenting with placenta praevia before 37 completed weeks of gestation, provided both mother and fetus remain stable. Criteria include: maternal haemodynamic stability, absence of active bleeding, reassuring fetal monitoring, and absence of labour. The goal is to gain fetal maturity while keeping the patient hospitalized in a tertiary obstetric unit with ready access to crossmatched blood and 24-hour emergency theatre facilities."
+      }
+    ]
+  }
+}

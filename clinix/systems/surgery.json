@@ -1,0 +1,1425 @@
+{
+  "_comment": "The CliniX General Surgery OSCE and viva module: disease-independent, shaped like a pathway so every runner (lesson, OSCE, viva, competency, case) works with no new code. Owns no skills; every reference is to skills/surgery.json, skills/core.json, or work/shared-osce-surgery.json. 14 timed stations covering lumps, ulcers, head/neck, breast, hernia, scrotum, vascular, acute abdomen, DRE, trauma, consent, and procedures; a viva pool across all surgical skills; and two simulated AI-patient cases (acute appendicitis and inguinal hernia). Deep link id: surgery-osce.",
+  "id": "surgery-osce",
+  "name": "OSCE and viva stations",
+  "fullName": "General surgery: OSCE and viva stations",
+  "system": "surgery",
+  "kind": "system-module",
+  "oneLine": "14 timed stations: lump, ulcer, thyroid, breast, hernia, scrotum, veins, arterial, acute abdomen, DRE, trauma, consent, tubes and suturing",
+  "estMinutes": 160,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "deepLink": "surgery-osce",
+  "kbRef": "acute_appendicitis",
+  "chapters": [
+    {
+      "id": "approach",
+      "title": "Approaching the surgical patient, consent and asepsis",
+      "blurb": "Hand hygiene, patient communication, consent, chaperone and privacy",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position",
+        "skill.approach.surg.intimate_chaperone",
+        "skill.approach.surg.consent_operation"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "Surgical history taking",
+      "blurb": "Framework, pain evaluation, lump, ulcer, vascular, and acute abdomen histories",
+      "skills": [
+        "skill.hx.surg.history_scheme",
+        "skill.hx.surg.pain",
+        "skill.hx.surg.lump",
+        "skill.hx.surg.ulcer",
+        "skill.hx.surg.groin_hernia",
+        "skill.hx.surg.scrotal_swelling_pain",
+        "skill.hx.surg.varicose_veins",
+        "skill.hx.surg.pvd_claudication_restpain",
+        "skill.hx.surg.acute_abdomen",
+        "skill.hx.surg.thyroid",
+        "skill.hx.surg.breast"
+      ]
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Physical examination skills",
+      "blurb": "Systematic examination of lumps, ulcers, neck, breast, groin, vascular, and acute abdomen",
+      "skills": [
+        "skill.exam.surg.lump_inspect",
+        "skill.exam.surg.lump_palpate",
+        "skill.exam.surg.lump_mobility_plane",
+        "skill.exam.surg.slip_sign",
+        "skill.exam.surg.ulcer_inspect",
+        "skill.exam.surg.ulcer_palpate",
+        "skill.exam.surg.regional_nodes",
+        "skill.exam.surg.thyroid_inspection",
+        "skill.exam.surg.thyroid_palpation",
+        "skill.exam.surg.thyroid_eye_signs",
+        "skill.exam.surg.thyroid_bruit",
+        "skill.exam.surg.breast_inspection",
+        "skill.exam.surg.breast_lump_palpation",
+        "skill.exam.surg.breast_mobility_fixity",
+        "skill.exam.surg.lymph_node_groups",
+        "skill.exam.surg.hernia_inspection",
+        "skill.exam.surg.hernia_palpation",
+        "skill.exam.surg.deep_ring_occlusion",
+        "skill.exam.surg.invagination_three_finger",
+        "skill.exam.surg.scrotal_palpation",
+        "skill.exam.surg.transillumination_scrotum",
+        "skill.exam.surg.cord_swelling_traction",
+        "skill.exam.surg.varicose_inspection_palpation",
+        "skill.exam.surg.trendelenburg_tourniquet",
+        "skill.exam.surg.perthes_deep_vein_patency",
+        "skill.exam.surg.pvd_inspection",
+        "skill.exam.surg.arterial_pulses_lower",
+        "skill.exam.surg.buerger_postural_test",
+        "skill.exam.surg.tenderness_rebound",
+        "skill.exam.surg.peritonitis_signs",
+        "skill.exam.surg.appendicitis_signs",
+        "skill.exam.surg.dre_surgical",
+        "skill.exam.surg.prostate_dre"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Emergency resuscitation and procedural skills",
+      "blurb": "ATLS primary survey, catheterisation, nasogastric intubation, and wound closure",
+      "skills": [
+        "skill.tx.surg.atls_primary_survey",
+        "skill.tx.surg.catheterisation",
+        "skill.tx.surg.nasogastric_tube",
+        "skill.tx.surg.suture_wound"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.surg.lump",
+        "title": "Examination of a lump or swelling",
+        "task": "A 34-year-old farmer from Meerut presents with a painless lump over his right forearm that has grown slowly over two years. Perform a systematic physical examination of the swelling, determine its anatomical plane, and present your clinical findings to the examiner.",
+        "seconds": 360,
+        "competencies": [
+          "SU1.1",
+          "SU1.2"
+        ],
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.surg.lump_inspect",
+          "skill.exam.surg.lump_palpate",
+          "skill.exam.surg.lump_mobility_plane",
+          "skill.exam.surg.slip_sign"
+        ],
+        "examinerQuestions": [
+          "How do you determine whether this lump is subcutaneous, intramuscular, or attached to underlying bone?",
+          "What is the physical sign that clinches a lipoma on palpation, and what causes it?",
+          "Which regional lymph node group must you examine for any soft tissue lump on the forearm?"
+        ],
+        "distractors": [
+          {
+            "text": "Palpate the lump vigorously before completing visual inspection.",
+            "why": "Premature palpation causes muscular guarding and misses subtle surface and dynamic signs.",
+            "unsafe": false
+          },
+          {
+            "text": "Perform a diagnostic needle aspiration of an undiagnosed pulsatile lump.",
+            "why": "Puncturing an aneurysm or vascular malformation can cause catastrophic haemorrhage.",
+            "unsafe": true
+          },
+          {
+            "text": "Instruct the patient to contract the underlying muscle while testing for skin tethering.",
+            "why": "Skin mobility must be assessed with the underlying muscle completely relaxed.",
+            "unsafe": false
+          },
+          {
+            "text": "Omit examination of the regional draining lymph node basin.",
+            "why": "Assessing regional lymph nodes is mandatory to evaluate for malignant or infective spread.",
+            "unsafe": false
+          },
+          {
+            "text": "Apply heavy perpendicular pressure directly over an acute tender inflammatory swelling.",
+            "why": "Excessive force causes severe pain and risks rupturing an acute abscess internally.",
+            "unsafe": true
+          }
+        ]
+      },
+      {
+        "id": "osce.surg.ulcer",
+        "title": "Examination of a chronic ulcer",
+        "task": "A 52-year-old weaver from Varanasi has had a non-healing ulcer over his medial malleolus for five months. Perform a systematic examination of the ulcer, inspect its margins and floor, palpate for induration, and check the regional lymph nodes.",
+        "seconds": 420,
+        "competencies": [
+          "SU1.1",
+          "SU28.2"
+        ],
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.surg.ulcer_inspect",
+          "skill.exam.surg.ulcer_palpate",
+          "skill.exam.surg.regional_nodes"
+        ],
+        "examinerQuestions": [
+          "Describe the edges of this ulcer: what morphological type of edge suggests venous insufficiency versus tuberculosis or malignancy?",
+          "How did you test for induration around the ulcer, and what does marked base induration signify?",
+          "What distinguishes a venous leg ulcer from an arterial ischaemic ulcer on clinical examination?"
+        ],
+        "distractors": [
+          {
+            "text": "Scrape the floor of the ulcer vigorously with a dry swab without local anaesthesia.",
+            "why": "Causes severe unnecessary pain and disrupts fragile granulation tissue.",
+            "unsafe": true
+          },
+          {
+            "text": "Examine the ulcer without exposing both lower extremities for bilateral comparison.",
+            "why": "Bilateral examination is essential to detect predisposing systemic or venous pathology.",
+            "unsafe": false
+          },
+          {
+            "text": "Apply an elastic compression bandage before checking peripheral arterial pulses.",
+            "why": "Applying high compression to an ischaemic limb can precipitate acute arterial gangrene.",
+            "unsafe": true
+          },
+          {
+            "text": "Test induration by pressing perpendicularly in the centre of the ulcer bed.",
+            "why": "Induration is tested by pinching the surrounding margin between finger and thumb.",
+            "unsafe": false
+          },
+          {
+            "text": "Assume an ulcer with punched-out edges is venous without assessing sensation or pulses.",
+            "why": "Punched-out edges are characteristic of arterial or trophic neuropathic ulcers.",
+            "unsafe": false
+          }
+        ]
+      },
+      {
+        "id": "osce.surg.thyroid",
+        "title": "Examination of the thyroid gland",
+        "task": "A 38-year-old schoolteacher from Dehradun noticed a swelling in the front of her neck six months ago. Perform a focused examination of the thyroid gland, test for retrosternal extension, elicit thyrotoxic eye signs, and auscultate for a bruit.",
+        "seconds": 420,
+        "competencies": [
+          "SU22.1",
+          "SU22.2"
+        ],
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.surg.thyroid_inspection",
+          "skill.exam.surg.thyroid_palpation",
+          "skill.exam.surg.thyroid_eye_signs",
+          "skill.exam.surg.thyroid_bruit"
+        ],
+        "examinerQuestions": [
+          "Why does the thyroid gland move with deglutition, and which other neck swellings also move on swallowing?",
+          "How do you clinically determine whether the lower border of a thyroid goitre extends retrosternally?",
+          "What eye signs did you assess, and how do you differentiate lid lag from lid retraction?"
+        ],
+        "distractors": [
+          {
+            "text": "Palpate the thyroid gland from behind while hyperextending the patient neck.",
+            "why": "Neck hyperextension tenses the strap muscles, obscuring thyroid palpation.",
+            "unsafe": false
+          },
+          {
+            "text": "Bimanually compress both common carotid pulses simultaneously to compare volume.",
+            "why": "Bilateral carotid compression can provoke acute cerebral hypoperfusion and syncope.",
+            "unsafe": true
+          },
+          {
+            "text": "Ask the patient to speak loudly while palpating the thyroid lobes.",
+            "why": "Swallowing water elevates the larynx and pretracheal fascia, whereas speaking does not.",
+            "unsafe": false
+          },
+          {
+            "text": "Percuss heavily over the upper sternum without checking for retrosternal dullness.",
+            "why": "Direct heavy sternal percussion causes discomfort and provides poor acoustic feedback.",
+            "unsafe": false
+          },
+          {
+            "text": "Forcefully palpate a suspected toxic goitre, risking thyroid storm.",
+            "why": "Excessive mechanical manipulation of a thyrotoxic gland can release large hormone surges.",
+            "unsafe": true
+          }
+        ]
+      },
+      {
+        "id": "osce.surg.breast",
+        "title": "Examination of the breast and axilla",
+        "task": "A 45-year-old mother of three from Bhopal reports a firm, painless lump in her left breast discovered while bathing. Perform a systematic clinical breast examination and examine the draining axillary and supraclavicular lymph node basins.",
+        "seconds": 480,
+        "competencies": [
+          "SU25.1",
+          "SU25.2"
+        ],
+        "skills": [
+          "skill.approach.surg.intimate_chaperone",
+          "skill.exam.surg.breast_inspection",
+          "skill.exam.surg.breast_lump_palpation",
+          "skill.exam.surg.breast_mobility_fixity",
+          "skill.exam.surg.lymph_node_groups"
+        ],
+        "examinerQuestions": [
+          "Which dynamic postural manoeuvres do you ask the patient to perform during breast inspection, and what do they demonstrate?",
+          "How do you test whether a breast lump is fixed to pectoralis major versus the serratus anterior and chest wall?",
+          "What components make up the triple assessment in a woman presenting with a breast lump?"
+        ],
+        "distractors": [
+          {
+            "text": "Perform breast examination with the patient remaining fully upright in a chair.",
+            "why": "Breast tissue must be flattened against the chest wall in the supine position.",
+            "unsafe": false
+          },
+          {
+            "text": "Pinch the breast tissue between the tips of the fingers to detect a lump.",
+            "why": "Pinching normal glandular lobules creates a false impression of a pathological lump.",
+            "unsafe": false
+          },
+          {
+            "text": "Proceed with clinical breast examination without offering a female chaperone.",
+            "why": "Breaches mandatory clinical and ethical guidelines for intimate examinations.",
+            "unsafe": false
+          },
+          {
+            "text": "Squeeze the nipple forcefully with two fingers to provoke discharge.",
+            "why": "Vigorous squeezing causes pain, tissue trauma, and non-specific ductal discharge.",
+            "unsafe": true
+          },
+          {
+            "text": "Omit systematic palpation of the supraclavicular and axillary lymph nodes.",
+            "why": "Axillary and supraclavicular nodes are the primary regional drainage basin.",
+            "unsafe": false
+          }
+        ]
+      },
+      {
+        "id": "osce.surg.inguinal_hernia",
+        "title": "Examination of an uncomplicated inguinal hernia",
+        "task": "A 56-year-old labourer from Gorakhpur complains of a bulge in his right groin that appears on heavy lifting and disappears when lying flat. Perform a focused groin examination, test for reducibility, and determine whether the hernia is direct or indirect.",
+        "seconds": 420,
+        "competencies": [
+          "SU18.1",
+          "SU18.2"
+        ],
+        "skills": [
+          "skill.approach.surg.intimate_chaperone",
+          "skill.exam.surg.hernia_inspection",
+          "skill.exam.surg.hernia_palpation",
+          "skill.exam.surg.deep_ring_occlusion",
+          "skill.exam.surg.invagination_three_finger"
+        ],
+        "examinerQuestions": [
+          "Describe the deep ring occlusion test: where exactly is the deep inguinal ring located, and how do you interpret control of the hernia?",
+          "How do you differentiate an indirect inguinal hernia from a femoral hernia on clinical examination?",
+          "What are the clinical signs that an inguinal hernia has become strangulated rather than merely irreducible?"
+        ],
+        "distractors": [
+          {
+            "text": "Attempt forceful manual reduction of an acutely tender, irreducible, red groin swelling.",
+            "why": "Forceful taxis on a strangulated hernia can cause bowel perforation or reduction en masse.",
+            "unsafe": true
+          },
+          {
+            "text": "Perform the deep ring occlusion test with the patient standing and the hernia unreduced.",
+            "why": "The hernia must be completely reduced into the abdomen before occluding the internal ring.",
+            "unsafe": false
+          },
+          {
+            "text": "Place the occluding finger over the superficial inguinal ring instead of the deep ring.",
+            "why": "Occluding the superficial ring tests external ring patency, not deep ring control.",
+            "unsafe": false
+          },
+          {
+            "text": "Examine the groin only while the patient is supine without standing the patient.",
+            "why": "Small or early reducible hernias may only become apparent when standing and coughing.",
+            "unsafe": false
+          },
+          {
+            "text": "Diagnose a femoral hernia if the swelling lies above and medial to the pubic tubercle.",
+            "why": "A swelling above and medial to the pubic tubercle is inguinal, not femoral.",
+            "unsafe": false
+          }
+        ]
+      },
+      {
+        "id": "osce.surg.scrotal",
+        "title": "Examination of a scrotal swelling",
+        "task": "A 24-year-old clerk from Patna presents with a heavy, non-tender swelling in the left hemiscrotum that has gradually enlarged over one year. Examine the scrotal contents, determine if you can get above the swelling, and test for transillumination.",
+        "seconds": 360,
+        "competencies": [
+          "SU30.1"
+        ],
+        "skills": [
+          "skill.approach.surg.intimate_chaperone",
+          "skill.exam.surg.scrotal_palpation",
+          "skill.exam.surg.transillumination_scrotum",
+          "skill.exam.surg.cord_swelling_traction"
+        ],
+        "examinerQuestions": [
+          "What is the anatomical significance of being able to get above a scrotal swelling?",
+          "How do you elicit transillumination in a scrotal swelling, and which scrotal conditions transilluminate brilliantly?",
+          "A young man presents with sudden severe scrotal pain of 3 hours duration. What is the emergency diagnosis and what is the window for surgical salvage?"
+        ],
+        "distractors": [
+          {
+            "text": "Squeeze an acutely swollen, tender hemiscrotum vigorously to elicit testicular sensation.",
+            "why": "Causes excruciating pain and can worsen ischaemic tissue loss in testicular torsion.",
+            "unsafe": true
+          },
+          {
+            "text": "Conclude a scrotal mass is purely testicular without attempting to get above it.",
+            "why": "Failing to get above the swelling misses an inguinoscrotal hernia.",
+            "unsafe": false
+          },
+          {
+            "text": "Test transillumination using an unshielded incandescent bulb touching bare scrotal skin.",
+            "why": "Prolonged contact with a hot bulb can cause cutaneous thermal burns.",
+            "unsafe": true
+          },
+          {
+            "text": "Delay immediate surgical exploration in a suspected acute testicular torsion for imaging.",
+            "why": "Testicular salvage drops steeply beyond 6 hours of onset; delays risk orchidectomy.",
+            "unsafe": true
+          },
+          {
+            "text": "Palpate the spermatic cord without comparing its thickness with the normal contralateral side.",
+            "why": "Bilateral comparison is essential to detect cord thickening, varicocele, or cysts.",
+            "unsafe": false
+          }
+        ]
+      },
+      {
+        "id": "osce.surg.varicose_veins",
+        "title": "Examination of varicose veins",
+        "task": "A 48-year-old traffic police constable from Lucknow complains of tortuous, aching swellings along the medial aspect of his right leg and thigh. Examine his varicose veins, test for saphenofemoral junction incompetence, and check deep venous patency.",
+        "seconds": 420,
+        "competencies": [
+          "SU28.1",
+          "SU28.2"
+        ],
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.surg.varicose_inspection_palpation",
+          "skill.exam.surg.trendelenburg_tourniquet",
+          "skill.exam.surg.perthes_deep_vein_patency"
+        ],
+        "examinerQuestions": [
+          "How do you perform the Brodie-Trendelenburg test, and how do you interpret rapid retrograde filling before tourniquet release?",
+          "Why must you perform Perthes' test or assess deep venous patency before planning any surgical ablation of superficial varicose veins?",
+          "What cutaneous changes of chronic venous hypertension did you look for in the gaiter area of the leg?"
+        ],
+        "distractors": [
+          {
+            "text": "Examine varicose veins only while the patient lies supine without standing up.",
+            "why": "Veins decompress when recumbent; valvular incompetence requires gravity to distend.",
+            "unsafe": false
+          },
+          {
+            "text": "Apply an elastic compression bandage tightly over the calf before assessing arterial pulses.",
+            "why": "Compression in the presence of occult arterial disease precipitates acute ischaemia.",
+            "unsafe": true
+          },
+          {
+            "text": "Perform Trendelenburg test by applying the tourniquet before elevating and emptying the veins.",
+            "why": "The superficial veins must be completely emptied by elevation before tourniquet placement.",
+            "unsafe": false
+          },
+          {
+            "text": "Advise saphenous vein stripping in a patient with an occluded deep venous system.",
+            "why": "Superficial veins act as critical collaterals when the deep veins are thrombosed.",
+            "unsafe": true
+          },
+          {
+            "text": "Tap the upper end of the saphenous vein without feeling for the transmitted impulse below.",
+            "why": "Chevrier's test requires palpating the retrograde impulse to confirm valvular incompetence.",
+            "unsafe": false
+          }
+        ]
+      },
+      {
+        "id": "osce.surg.peripheral_arterial",
+        "title": "Peripheral arterial examination of the lower limb",
+        "task": "A 62-year-old shopkeeper from Kanpur with a 30 pack-year smoking history complains of calf pain after walking 100 metres and pain in his toes at night. Perform a systematic peripheral vascular examination of both lower extremities.",
+        "seconds": 420,
+        "competencies": [
+          "SU27.1"
+        ],
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.surg.pvd_inspection",
+          "skill.exam.surg.arterial_pulses_lower",
+          "skill.exam.surg.buerger_postural_test"
+        ],
+        "examinerQuestions": [
+          "Explain the technique and vascular angle of Buerger's test, and what happens to the foot on dependency.",
+          "Where exactly do you palpate the dorsalis pedis and posterior tibial arterial pulses?",
+          "What is the definition of critical limb-threatening ischaemia, and what is the target ankle-brachial pressure index (ABPI)?"
+        ],
+        "distractors": [
+          {
+            "text": "Apply hot water bottles or heating pads to cold ischaemic feet to improve circulation.",
+            "why": "Thermal burns readily occur due to impaired tissue sensation and perfusion.",
+            "unsafe": true
+          },
+          {
+            "text": "Palpate the femoral pulse medial to the femoral vein in the groin.",
+            "why": "The femoral artery lies midway between ASIS and pubic symphysis, lateral to the vein.",
+            "unsafe": false
+          },
+          {
+            "text": "Elevate an acutely ischaemic leg to 60 degrees and maintain elevation to reduce pain.",
+            "why": "Elevation worsens limb ischaemia; ischaemic limbs gain relief from dependency.",
+            "unsafe": true
+          },
+          {
+            "text": "Assume normal peripheral circulation because the foot feels warm without palpating pulses.",
+            "why": "Cellulitis, arteriovenous shunts, or warm ambient temperature can falsely warm an ischaemic foot.",
+            "unsafe": false
+          },
+          {
+            "text": "Debride dry mummified ischaemic gangrenous toes before establishing arterial perfusion.",
+            "why": "Debriding dry gangrene in an ischaemic bed invites wet infective gangrene and amputation.",
+            "unsafe": true
+          }
+        ]
+      },
+      {
+        "id": "osce.surg.acute_abdomen",
+        "title": "Assessment of the acute abdomen",
+        "task": "A 22-year-old college student from Jaipur presents to the casualty with severe abdominal pain that started around the umbilicus and has shifted to the right iliac fossa. Perform a focused physical examination of the abdomen, elicit peritoneal signs, and report your findings.",
+        "seconds": 420,
+        "competencies": [
+          "SU17.1",
+          "SU17.2"
+        ],
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.exam.surg.tenderness_rebound",
+          "skill.exam.surg.peritonitis_signs"
+        ],
+        "examinerQuestions": [
+          "How do you elicit rebound tenderness without causing unnecessary agonizing pain to the patient?",
+          "What is the difference between voluntary guarding and true involuntary muscular rigidity?",
+          "Name three specific clinical signs of acute appendicitis and describe how each is elicited."
+        ],
+        "distractors": [
+          {
+            "text": "Administer heavy intravenous opiate sedation before any clinical abdominal examination.",
+            "why": "Excessive sedation masks physical signs of peritonitis and delays emergency laparotomy.",
+            "unsafe": true
+          },
+          {
+            "text": "Begin deep palpation directly over the site of maximum reported abdominal pain.",
+            "why": "Causes severe guarding, muscle spasm, and destroys patient cooperation for the exam.",
+            "unsafe": false
+          },
+          {
+            "text": "Elicit rebound tenderness by forcefully stabbing the abdomen and releasing suddenly.",
+            "why": "Sudden violent release causes unnecessary severe distress; gentle percussion is safer.",
+            "unsafe": false
+          },
+          {
+            "text": "Discharge a patient with shifting right iliac fossa pain after a normal plain abdominal X-ray.",
+            "why": "Plain radiography is usually normal in early appendicitis; clinical monitoring is mandatory.",
+            "unsafe": true
+          },
+          {
+            "text": "Omit digital rectal examination in a patient presenting with acute lower abdominal pain.",
+            "why": "Misses pelvic peritonitis, pelvic abscess, and occult rectal pathology.",
+            "unsafe": false
+          }
+        ]
+      },
+      {
+        "id": "osce.surg.dre",
+        "title": "Digital rectal examination on a pelvic trainer",
+        "task": "A 65-year-old retired clerk has presented with straining at micturition, nocturia, and occasional blood on the toilet paper. Demonstrate a digital rectal examination on this pelvic manikin, inspect the anal verge, palpate the prostate and rectal walls, and describe your findings.",
+        "seconds": 360,
+        "competencies": [
+          "SU32.1"
+        ],
+        "skills": [
+          "skill.approach.surg.intimate_chaperone",
+          "skill.approach.position",
+          "skill.exam.surg.dre_surgical",
+          "skill.exam.surg.prostate_dre"
+        ],
+        "examinerQuestions": [
+          "What characteristics of the prostate gland do you assess per rectum to differentiate benign hyperplasia from carcinoma?",
+          "In which positions can a digital rectal examination be performed, and which position is standard in Indian surgical clinics?",
+          "When is digital rectal examination absolutely contraindicated or deferred?"
+        ],
+        "distractors": [
+          {
+            "text": "Force the examining index finger into the anal canal in a patient with severe acute fissure pain.",
+            "why": "Severe sphincter spasm causes intolerable agony; exam should be under anaesthesia.",
+            "unsafe": true
+          },
+          {
+            "text": "Perform a digital rectal examination without water-soluble lubricant or gloves.",
+            "why": "Extremely painful, traumatic to anal mucosa, and violates basic infection control.",
+            "unsafe": true
+          },
+          {
+            "text": "Perform DRE without offering or having an independent chaperone present.",
+            "why": "Breaches professional standards for intimate medical examinations.",
+            "unsafe": false
+          },
+          {
+            "text": "Withdraw the finger immediately without palpating the prostate anteriorly or rectal walls.",
+            "why": "A comprehensive sweep of the prostate, rectal mucosa, and pouch of Douglas is required.",
+            "unsafe": false
+          },
+          {
+            "text": "Assume the prostate is benign because it feels smooth, ignoring a firm discrete nodule.",
+            "why": "Even a small firm solitary nodule on one lobe raises high suspicion for carcinoma.",
+            "unsafe": false
+          }
+        ]
+      },
+      {
+        "id": "osce.surg.trauma_primary_survey",
+        "title": "Primary survey in trauma: ATLS ABCDE approach",
+        "task": "A 28-year-old motorcyclist has been brought to the emergency department after a collision with a truck. He is agitated, bleeding from a scalp wound, and tachycardic. Lead the primary survey following the ATLS ABCDE protocol, verbalising your priority interventions.",
+        "seconds": 480,
+        "passMark": 60,
+        "competencies": [
+          "SU14.1",
+          "SU14.2"
+        ],
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.tx.surg.atls_primary_survey"
+        ],
+        "examinerQuestions": [
+          "How do you secure the airway while protecting the cervical spine in a blunt polytrauma victim?",
+          "The patient develops acute hypotension, distended neck veins, and absent breath sounds on the left hemithorax. What is the emergency diagnosis and immediate life-saving procedure?",
+          "What are the components of the lethal triad in exsanguinating trauma shock, and how is it prevented?"
+        ],
+        "distractors": [
+          {
+            "text": "Hyperextend the cervical spine with a chin lift to open the airway in blunt polytrauma.",
+            "why": "Can displace cervical spinal fractures and transect the spinal cord; use jaw thrust.",
+            "unsafe": true
+          },
+          {
+            "text": "Send an unstable hypotensive trauma patient for a contrast CT scan before resuscitation.",
+            "why": "Patients with active internal haemorrhage can arrest in the scanner; stabilize first.",
+            "unsafe": true
+          },
+          {
+            "text": "Infuse large volumes of cold intravenous crystalloid solutions rapidly.",
+            "why": "Exacerbates hypothermia, hemodilution, and life-threatening coagulopathy.",
+            "unsafe": true
+          },
+          {
+            "text": "Remove an impaled foreign body from the torso in the resuscitation bay.",
+            "why": "Removes the tamponade effect, leading to immediate catastrophic exsanguination.",
+            "unsafe": true
+          },
+          {
+            "text": "Proceed to secondary survey head-to-toe examination while the patient is still tachycardic.",
+            "why": "Persistent tachycardia indicates unaddressed shock; primary survey must be resolved first.",
+            "unsafe": false
+          }
+        ]
+      },
+      {
+        "id": "osce.surg.consent_operation",
+        "title": "Informed consent for an emergency laparotomy",
+        "task": "A 40-year-old shopkeeper has presented with generalised peritonitis due to a suspected perforated duodenal ulcer. He has been advised an emergency exploratory laparotomy. Take his informed consent for the procedure, explaining indications, steps, common and serious risks, and postoperative care.",
+        "seconds": 480,
+        "competencies": [
+          "SU1.1",
+          "SU2.1"
+        ],
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.surg.consent_operation"
+        ],
+        "examinerQuestions": [
+          "What are the essential legal and ethical prerequisites for informed surgical consent under Indian law?",
+          "The patient is in septic shock and drowsy with a GCS of 10. Who can give valid consent for his life-saving emergency laparotomy?",
+          "During laparotomy, the surgeon finds an unexpected incidental Meckel's diverticulum. Can the surgeon perform an incidental resection if the consent form did not cover it?"
+        ],
+        "distractors": [
+          {
+            "text": "Obtain consent from a heavily premedicated patient in the anaesthetic room.",
+            "why": "Sedation impairs decision-making capacity, invalidating legal consent.",
+            "unsafe": true
+          },
+          {
+            "text": "Assure the patient that the operation is completely routine with zero chance of complication.",
+            "why": "Misleading guarantee breaches legal duty to disclose known material surgical risks.",
+            "unsafe": false
+          },
+          {
+            "text": "Ask the patient adult son to sign the consent form for a fully conscious, competent adult.",
+            "why": "A competent adult must sign their own consent; family cannot substitute.",
+            "unsafe": false
+          },
+          {
+            "text": "Tell the patient that declining surgery will result in immediate discharge from hospital.",
+            "why": "Coercion invalidates consent; supportive non-operative care must remain available.",
+            "unsafe": false
+          },
+          {
+            "text": "Proceed with an elective procedure when the patient explicitly revokes consent on the table.",
+            "why": "A competent patient has the absolute right to revoke consent at any time.",
+            "unsafe": true
+          }
+        ]
+      },
+      {
+        "id": "osce.surg.catheter_ng",
+        "title": "Urinary catheterisation and nasogastric tube insertion",
+        "task": "A 50-year-old man with acute intestinal obstruction is being prepared for emergency surgery. On this manikin, demonstrate aseptic urethral catheterisation and nasogastric decompression tube insertion, verifying correct placement of both tubes.",
+        "seconds": 480,
+        "competencies": [
+          "SU11.1",
+          "SU11.2"
+        ],
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.consent",
+          "skill.tx.surg.catheterisation",
+          "skill.tx.surg.nasogastric_tube"
+        ],
+        "examinerQuestions": [
+          "Why must you observe urine draining freely before inflating the Foley balloon, and what happens if the balloon is inflated in the urethra?",
+          "What are the safe clinical methods to confirm that a nasogastric tube is in the stomach rather than the bronchial tree?",
+          "A polytrauma patient has blood at the external urethral meatus and a high-riding prostate. Why must you NOT pass a Foley catheter, and what is the next investigation?"
+        ],
+        "distractors": [
+          {
+            "text": "Inflate the Foley balloon as soon as resistance is met in the urethra.",
+            "why": "Inflating within the urethra causes extensive mucosal disruption, rupture, and stricture.",
+            "unsafe": true
+          },
+          {
+            "text": "Use the air insufflation whoosh test alone to confirm nasogastric tube position.",
+            "why": "Cannot differentiate between bronchial, oesophageal, or gastric placement.",
+            "unsafe": true
+          },
+          {
+            "text": "Insert a nasogastric tube through the nose in a patient with severe midface trauma.",
+            "why": "Fractures of the cribriform plate can permit intracranial tube entry.",
+            "unsafe": true
+          },
+          {
+            "text": "Force the catheter forward against strong resistance at the male prostate.",
+            "why": "Can create a false passage through the prostate or bladder neck.",
+            "unsafe": true
+          },
+          {
+            "text": "Start enteral feeding through a nasogastric tube when gastric aspirate pH is 7.5.",
+            "why": "A pH above 5.5 indicates probable respiratory tract placement or salivary aspirate.",
+            "unsafe": true
+          }
+        ]
+      },
+      {
+        "id": "osce.surg.suturing",
+        "title": "Wound debridement and simple interrupted suturing",
+        "task": "A 25-year-old carpenter sustained a clean 4 cm laceration over the extensor aspect of his forearm two hours ago. On this suture pad, demonstrate wound irrigation, local infiltration anaesthesia, and closure with four simple interrupted non-absorbable sutures using an instrument tie.",
+        "seconds": 420,
+        "competencies": [
+          "SU1.1",
+          "SU5.1",
+          "SU5.2"
+        ],
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.consent",
+          "skill.tx.surg.suture_wound"
+        ],
+        "examinerQuestions": [
+          "What is the maximum safe dose of 1% lignocaine with and without adrenaline in an adult, and where is adrenaline strictly contraindicated?",
+          "Why must the needle enter the skin at an angle of 90 degrees, and how do you ensure wound edge eversion?",
+          "After how many days are sutures removed from the face, scalp, trunk, and extremities, and what factors delay suture removal?"
+        ],
+        "distractors": [
+          {
+            "text": "Infiltrate 1% lignocaine with adrenaline into a lacerated index finger.",
+            "why": "Causes terminal digital arterial vasospasm and irreversible fingertip gangrene.",
+            "unsafe": true
+          },
+          {
+            "text": "Suture a heavily contaminated dog bite wound with deep layered braided sutures.",
+            "why": "High bacterial inoculum in closed dead space leads to severe closed space infection.",
+            "unsafe": true
+          },
+          {
+            "text": "Tie interrupted sutures under extreme tension so the skin blanches white.",
+            "why": "Strangulates microcirculation, causing edge necrosis, dehiscence, and prominent scarring.",
+            "unsafe": true
+          },
+          {
+            "text": "Close skin with inverted edges so the epidermis turns into the wound.",
+            "why": "Inverted wound margins heal slowly with a depressed scar and epidermal inclusion cysts.",
+            "unsafe": false
+          },
+          {
+            "text": "Mount the suture needle at its extreme posterior swaged end on the needle holder.",
+            "why": "Weakens or bends the needle and reduces mechanical control during tissue passage.",
+            "unsafe": false
+          }
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.hx.surg.lump",
+      "skill.exam.surg.lump_inspect",
+      "skill.exam.surg.lump_palpate",
+      "skill.exam.surg.lump_mobility_plane",
+      "skill.exam.surg.slip_sign",
+      "skill.hx.surg.ulcer",
+      "skill.exam.surg.ulcer_inspect",
+      "skill.exam.surg.ulcer_palpate",
+      "skill.exam.surg.regional_nodes",
+      "skill.hx.surg.thyroid",
+      "skill.exam.surg.thyroid_inspection",
+      "skill.exam.surg.thyroid_palpation",
+      "skill.exam.surg.thyroid_eye_signs",
+      "skill.exam.surg.thyroid_bruit",
+      "skill.hx.surg.breast",
+      "skill.exam.surg.breast_inspection",
+      "skill.exam.surg.breast_lump_palpation",
+      "skill.exam.surg.breast_mobility_fixity",
+      "skill.hx.surg.groin_hernia",
+      "skill.exam.surg.hernia_inspection",
+      "skill.exam.surg.hernia_palpation",
+      "skill.exam.surg.deep_ring_occlusion",
+      "skill.hx.surg.scrotal_swelling_pain",
+      "skill.exam.surg.scrotal_palpation",
+      "skill.exam.surg.transillumination_scrotum",
+      "skill.hx.surg.varicose_veins",
+      "skill.exam.surg.varicose_inspection_palpation",
+      "skill.exam.surg.trendelenburg_tourniquet",
+      "skill.hx.surg.pvd_claudication_restpain",
+      "skill.exam.surg.pvd_inspection",
+      "skill.exam.surg.arterial_pulses_lower",
+      "skill.hx.surg.acute_abdomen",
+      "skill.exam.surg.tenderness_rebound",
+      "skill.exam.surg.peritonitis_signs",
+      "skill.exam.surg.dre_surgical",
+      "skill.exam.surg.prostate_dre",
+      "skill.approach.surg.intimate_chaperone",
+      "skill.approach.surg.consent_operation",
+      "skill.tx.surg.atls_primary_survey",
+      "skill.tx.surg.catheterisation",
+      "skill.tx.surg.nasogastric_tube",
+      "skill.tx.surg.suture_wound"
+    ]
+  },
+  "cases": [
+    {
+      "id": "case.surg.acute_appendicitis",
+      "system": "surgery",
+      "title": "A 21-year-old student with acute migratory abdominal pain and fever",
+      "initialVitals": {
+        "hr": 104,
+        "bpSystolic": 118,
+        "bpDiastolic": 76,
+        "rr": 20,
+        "spo2": 98,
+        "temp": 38.1,
+        "gcs": 15
+      },
+      "opening": "Rohit Verma, 21, has presented to the surgical casualty with severe lower abdominal pain that started yesterday around his navel and has moved to the right lower side. Introduce yourself and take a surgical history. This is a teaching scenario, not a real patient.",
+      "fallback": "I am not sure what you mean, doctor. Could you ask that in a different way?",
+      "patient": {
+        "name": "Rohit Verma",
+        "age": 21,
+        "sex": "male",
+        "occupation": "College student",
+        "residence": "Urban, living in a college hostel in Lucknow"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "why have you come",
+            "what is the problem",
+            "complaint",
+            "how can i help",
+            "tell me about"
+          ],
+          "reply": "I have terrible pain in the right lower side of my stomach, doctor. It started yesterday around my belly button and moved down to the right.",
+          "key": true,
+          "skillId": "skill.hx.surg.acute_abdomen"
+        },
+        "pain_onset_shift": {
+          "cues": [
+            "when did the pain start",
+            "onset",
+            "did it move",
+            "shift",
+            "where did it start",
+            "belly button",
+            "around the navel",
+            "migrated"
+          ],
+          "reply": "It started about 24 hours ago as a dull ache around my navel. Around midnight it shifted down to the right lower side and became much sharper.",
+          "key": true,
+          "skillId": "skill.hx.surg.pain"
+        },
+        "pain_character": {
+          "cues": [
+            "what kind of pain",
+            "character of pain",
+            "sharp pain",
+            "constant",
+            "cramping",
+            "colicky",
+            "dull ache"
+          ],
+          "reply": "Now it is a constant, sharp, throbbing pain in my right lower abdomen. It does not come and go.",
+          "key": true,
+          "skillId": "skill.hx.surg.pain"
+        },
+        "aggravating_relieving": {
+          "cues": [
+            "what makes it worse",
+            "coughing",
+            "walking",
+            "movement",
+            "makes it better",
+            "relieving factor",
+            "bending your knees"
+          ],
+          "reply": "Coughing or walking makes it agony. It feels slightly better when I lie completely still with my right knee drawn up.",
+          "key": true,
+          "skillId": "skill.hx.surg.pain"
+        },
+        "anorexia": {
+          "cues": [
+            "appetite",
+            "feel like eating",
+            "hunger",
+            "food intake",
+            "anorexia"
+          ],
+          "reply": "I have completely lost my appetite. I have not been able to eat anything since yesterday morning.",
+          "key": true,
+          "skillId": "skill.hx.surg.acute_abdomen"
+        },
+        "nausea_vomiting": {
+          "cues": [
+            "vomiting",
+            "vomit",
+            "thrown up",
+            "nausea",
+            "feeling sick"
+          ],
+          "reply": "I felt nauseous right after the pain started, and I vomited twice last night. Just stomach fluid and bile, no blood.",
+          "key": true,
+          "skillId": "skill.hx.surg.acute_abdomen"
+        },
+        "fever": {
+          "cues": [
+            "fever",
+            "temperature",
+            "chills",
+            "rigors",
+            "feeling hot"
+          ],
+          "reply": "I felt feverish and had mild shivering this morning. I have not taken any paracetamol yet.",
+          "key": true,
+          "skillId": "skill.gen.surg.surgical_fever"
+        },
+        "bowels": {
+          "cues": [
+            "bowels",
+            "stool",
+            "diarrhoea",
+            "constipation",
+            "passed flatus",
+            "passed wind",
+            "motions"
+          ],
+          "reply": "I passed a normal stool yesterday morning before the pain started. Since then I have not passed stool or gas.",
+          "key": true,
+          "skillId": "skill.hx.surg.acute_abdomen"
+        },
+        "urinary": {
+          "cues": [
+            "urination",
+            "burning",
+            "urine",
+            "dysuria",
+            "blood in urine",
+            "frequency of urine"
+          ],
+          "reply": "No burning when I pass urine, and no blood. I had a slight urge to pass urine when the pain worsened, but no difficulty.",
+          "key": true,
+          "skillId": "skill.hx.surg.urinary_symptoms"
+        },
+        "previous_episodes": {
+          "cues": [
+            "had this before",
+            "previous episodes",
+            "similar pain",
+            "in the past"
+          ],
+          "reply": "Never, doctor. I have never had abdominal pain like this before in my life.",
+          "skillId": "skill.hx.acute.appendicitis_risk"
+        },
+        "medical_past": {
+          "cues": [
+            "medical history",
+            "past illness",
+            "diabetes",
+            "tuberculosis",
+            "asthma",
+            "operations",
+            "past surgery"
+          ],
+          "reply": "I have no medical illnesses, no diabetes, no TB, and I have never had any operations.",
+          "skillId": "skill.hx.surg.history_scheme"
+        },
+        "medications_allergies": {
+          "cues": [
+            "medicines",
+            "tablets",
+            "drugs",
+            "any pills",
+            "allergies",
+            "allergic"
+          ],
+          "reply": "I am not taking any regular medicines, and I have no known drug allergies.",
+          "skillId": "skill.hx.surg.history_scheme"
+        },
+        "habits": {
+          "cues": [
+            "smoking",
+            "smoke",
+            "alcohol",
+            "tobacco",
+            "gutka",
+            "drinks"
+          ],
+          "reply": "I do not smoke and I do not drink alcohol.",
+          "skillId": "skill.hx.surg.history_scheme"
+        },
+        "family": {
+          "cues": [
+            "family history",
+            "anyone in family",
+            "parents",
+            "hereditary"
+          ],
+          "reply": "My parents and elder brother are healthy. No hereditary medical problems in the family.",
+          "skillId": "skill.hx.surg.history_scheme"
+        }
+      },
+      "exam": {
+        "skill.gen.vitals": {
+          "finding": "Pulse 104 regular. Blood pressure 118/76 mmHg. Respiratory rate 20. SpO2 98 percent on room air. Temperature 38.1 C.",
+          "abnormal": true
+        },
+        "skill.gen.appearance": {
+          "finding": "Flushed, looks uncomfortable, lying still in bed with right hip slightly flexed, reluctant to take deep breaths or cough.",
+          "abnormal": true
+        },
+        "skill.exam.surg.tenderness_rebound": {
+          "finding": "Exquisite point tenderness on gentle single-finger pressure over McBurney point in the right iliac fossa, with localized involuntary muscle guarding and release tenderness.",
+          "abnormal": true
+        },
+        "skill.exam.surg.appendicitis_signs": {
+          "finding": "Rovsing sign positive with pain referred to the right iliac fossa upon left iliac fossa palpation. Psoas sign positive on passive right hip hyperextension. Obturator sign negative.",
+          "abnormal": true
+        },
+        "skill.exam.surg.dre_surgical": {
+          "finding": "Anal verge normal. Digital rectal examination reveals localized tenderness along the right pelvic peritoneal reflection with no mass or gross blood on the glove.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "complete_blood_count",
+        "ultrasound_abdomen"
+      ],
+      "investigations": {
+        "complete_blood_count": {
+          "label": "Complete blood count with differential",
+          "indicated": true,
+          "result": "Haemoglobin 14.2 g/dL, total leucocyte count 14,800/uL with 84 percent neutrophils (neutrophilic leucocytosis and left shift).",
+          "note": "Leucocytosis above 10,000/uL with neutrophilia strongly supports acute suppurative appendicitis."
+        },
+        "ultrasound_abdomen": {
+          "label": "High-resolution ultrasound of abdomen and pelvis",
+          "indicated": true,
+          "result": "Non-compressible, blind-ending tubular structure in the right iliac fossa measuring 8.2 mm in outer diameter with target sign, periappendiceal fat stranding, and a small pocket of free fluid. Normal kidneys and urinary bladder.",
+          "note": "Ultrasonography confirms acute appendicitis by demonstrating an aperistaltic, non-compressible appendix with an outer diameter exceeding 6 mm."
+        },
+        "urine_routine_microscopy": {
+          "label": "Urine routine and microscopy",
+          "indicated": true,
+          "result": "Specific gravity 1.022, 2 to 4 pus cells per high power field, no red blood cells, no nitrites.",
+          "note": "A few pus cells can occur when an inflamed appendix lies in contact with the right ureter or bladder, but excludes acute pyelonephritis or stone."
+        },
+        "contrast_ct_abdomen": {
+          "label": "Contrast-enhanced CT scan of abdomen and pelvis",
+          "indicated": false,
+          "result": "Not indicated in a young male with a classic clinical presentation and a positive high-resolution ultrasound.",
+          "note": "Not indicated in straightforward presentations; contrast CT carries ionizing radiation and is reserved for diagnostic uncertainty, atypical presentations, or suspected appendiceal phlegmon in older adults."
+        }
+      },
+      "differentialModel": {
+        "answer": "Acute appendicitis is the primary diagnosis. Differentials include acute mesenteric adenitis, Meckel diverticulitis, acute gastroenteritis, and right ureteric calculus.",
+        "accept": [
+          "acute appendicitis",
+          "mesenteric adenitis",
+          "meckel diverticulitis"
+        ],
+        "minMatch": 1
+      },
+      "diagnosis": {
+        "answer": "Acute appendicitis with localised right iliac fossa peritonitis in a young male, requiring emergency appendicectomy.",
+        "accept": [
+          "acute appendicitis",
+          "appendicitis"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Admit to the surgical ward, keep nil by mouth, establish wide-bore intravenous access and start isotonic fluid resuscitation. Administer parenteral analgesia, obtain written informed consent, and proceed to emergency appendicectomy (laparoscopic or open) with single-dose preoperative prophylactic intravenous antibiotics.",
+        "accept": [
+          "admit",
+          "appendicectomy",
+          "nil by mouth",
+          "intravenous fluids",
+          "antibiotics"
+        ],
+        "minMatch": 2
+      },
+      "teachingPoints": [
+        "The classic Murphy triad of appendicitis begins with periumbilical visceral pain and anorexia/nausea, followed by somatic pain shifting to the right iliac fossa.",
+        "Point tenderness at McBurney's point with localized involuntary guarding is the single most reliable clinical sign of acute appendicitis.",
+        "Ultrasound confirmation relies on demonstrating a blind-ending, non-compressible aperistaltic tubular structure exceeding 6 mm in transverse diameter.",
+        "Do not withhold analgesia while waiting for senior surgical review: evidence demonstrates that titrated analgesia relieves suffering without masking peritonitis."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    {
+      "id": "case.surg.inguinal_hernia",
+      "system": "surgery",
+      "title": "A 54-year-old labourer with a reducible right groin swelling",
+      "initialVitals": {
+        "hr": 76,
+        "bpSystolic": 126,
+        "bpDiastolic": 82,
+        "rr": 16,
+        "spo2": 98,
+        "temp": 36.8,
+        "gcs": 15
+      },
+      "opening": "Ram Kumar, 54, has attended the surgical outpatient department with a swelling in his right groin that has troubled him for eight months. Introduce yourself and take a surgical history. This is a teaching scenario, not a real patient.",
+      "fallback": "I am not sure what you mean, doctor. Could you ask that in a different way?",
+      "patient": {
+        "name": "Ram Kumar",
+        "age": 54,
+        "sex": "male",
+        "occupation": "Construction labourer",
+        "residence": "Semi-urban, Kanpur district"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "why have you come",
+            "what is the problem",
+            "complaint",
+            "how can i help",
+            "tell me about"
+          ],
+          "reply": "I have had a swelling in my right groin for eight months, doctor. It gets bigger when I lift cement bags at work and goes away when I lie down.",
+          "key": true,
+          "skillId": "skill.hx.surg.groin_hernia"
+        },
+        "swelling_onset_duration": {
+          "cues": [
+            "when did it start",
+            "how long",
+            "onset",
+            "duration",
+            "eight months",
+            "grow bigger"
+          ],
+          "reply": "I first noticed it eight months ago as a small lump in my groin. Over the past three months it has grown larger and reaches towards my scrotum.",
+          "key": true,
+          "skillId": "skill.hx.surg.groin_hernia"
+        },
+        "reducibility": {
+          "cues": [
+            "does it go back",
+            "reduce",
+            "reducibility",
+            "disappear",
+            "lying down",
+            "push it back",
+            "does the swelling go back",
+            "does it go back when you lie down"
+          ],
+          "reply": "Yes, when I lie flat on my back at night it slips back inside completely on its own, or I can push it back with gentle pressure.",
+          "key": true,
+          "skillId": "skill.hx.surg.groin_hernia"
+        },
+        "pain_dragging": {
+          "cues": [
+            "pain",
+            "does it hurt",
+            "dragging",
+            "discomfort",
+            "aching"
+          ],
+          "reply": "It does not have sharp pain, but by the end of a long working day there is a heavy, dragging ache in my groin.",
+          "key": true,
+          "skillId": "skill.hx.surg.groin_hernia"
+        },
+        "cough_straining": {
+          "cues": [
+            "cough make it bulge",
+            "pop out on coughing",
+            "heavy lifting make it appear",
+            "pops out when lifting",
+            "bulge when you cough"
+          ],
+          "reply": "Whenever I cough, sneeze, or lift heavy materials at the construction site, the bulge pops out immediately.",
+          "key": true,
+          "skillId": "skill.hx.inguinal.risk"
+        },
+        "urinary_straining": {
+          "cues": [
+            "urination",
+            "strain to pass urine",
+            "poor stream",
+            "nocturia",
+            "prostate",
+            "urine flow"
+          ],
+          "reply": "I have to strain a little to start passing urine, especially at night. The stream is slightly weak.",
+          "key": true,
+          "skillId": "skill.hx.bph.riskfactors"
+        },
+        "bowel_constipation": {
+          "cues": [
+            "constipation",
+            "strain at stool",
+            "bowels",
+            "hard stool",
+            "motions"
+          ],
+          "reply": "I often have constipation and have to strain to pass motions because of my rough diet.",
+          "key": true,
+          "skillId": "skill.hx.inguinal.risk"
+        },
+        "chronic_cough": {
+          "cues": [
+            "chest trouble",
+            "smoker cough",
+            "bring up phlegm",
+            "sputum",
+            "bronchitis",
+            "long standing cough"
+          ],
+          "reply": "I have had a mild morning smoker cough for two years, but no blood in the phlegm and no tuberculosis.",
+          "key": true,
+          "skillId": "skill.hx.inguinal.risk"
+        },
+        "heavy_lifting": {
+          "cues": [
+            "occupation",
+            "heavy lifting",
+            "work",
+            "physical labour",
+            "construction"
+          ],
+          "reply": "I work on construction sites lifting heavy cement bags, iron rods, and bricks for eight to ten hours every day.",
+          "skillId": "skill.hx.inguinal.risk"
+        },
+        "scrotal_extension": {
+          "cues": [
+            "scrotum",
+            "reach the scrotum",
+            "down into testicle",
+            "testis",
+            "scrotal swelling"
+          ],
+          "reply": "When I am standing for a long time, the swelling extends downwards towards the upper part of my right testicle.",
+          "skillId": "skill.hx.surg.groin_hernia"
+        },
+        "strangulation_signs": {
+          "cues": [
+            "stuck",
+            "got stuck",
+            "become stuck",
+            "get stuck",
+            "vomiting",
+            "turned red",
+            "severe agonizing pain"
+          ],
+          "reply": "No, it has never become stuck or intensely painful, and I have never had vomiting or redness over the swelling.",
+          "key": true,
+          "skillId": "skill.hx.surg.groin_hernia"
+        },
+        "past_operations": {
+          "cues": [
+            "operation",
+            "surgery in past",
+            "previous operation",
+            "appendicectomy"
+          ],
+          "reply": "I had an appendicectomy when I was 16 years old. I have had no other operations.",
+          "skillId": "skill.hx.surg.history_scheme"
+        },
+        "medical_illness": {
+          "cues": [
+            "diabetes",
+            "high blood pressure",
+            "heart",
+            "kidney",
+            "medical history"
+          ],
+          "reply": "I have mild high blood pressure for which I take a tablet from the dispensary. No diabetes or heart trouble.",
+          "skillId": "skill.hx.surg.history_scheme"
+        },
+        "habits": {
+          "cues": [
+            "bidi",
+            "smoking",
+            "smoke",
+            "tobacco",
+            "alcohol"
+          ],
+          "reply": "I smoke four to five bidis a day and have done so for 25 years. I do not drink alcohol.",
+          "skillId": "skill.hx.surg.history_scheme"
+        },
+        "family": {
+          "cues": [
+            "family history",
+            "hernia in family",
+            "father",
+            "brother"
+          ],
+          "reply": "My elder brother also had a hernia operation in his groin five years ago.",
+          "skillId": "skill.hx.surg.history_scheme"
+        }
+      },
+      "exam": {
+        "skill.gen.vitals": {
+          "finding": "Pulse 76 regular. Blood pressure 126/82 mmHg. Respiratory rate 16. SpO2 98 percent on room air. Temperature 36.8 C.",
+          "abnormal": false
+        },
+        "skill.gen.appearance": {
+          "finding": "Well built, comfortable at rest, no pallor, cyanosis, clubbing, or pedal oedema.",
+          "abnormal": false
+        },
+        "skill.exam.surg.hernia_inspection": {
+          "finding": "A pyriform swelling 7 x 4 cm in the right groin, extending obliquely downwards and medially along the inguinal canal towards the upper scrotum, with a visible expansile cough impulse.",
+          "abnormal": true
+        },
+        "skill.exam.surg.hernia_palpation": {
+          "finding": "Smooth, soft, non-tender swelling. The examiner can get above the swelling at the external ring. The mass reduces completely with gentle pressure upwards, backwards, and outwards with an initial bowel gurgle.",
+          "abnormal": true
+        },
+        "skill.exam.surg.deep_ring_occlusion": {
+          "finding": "With the hernia fully reduced, firm finger occlusion of the deep inguinal ring (1.25 cm above the midinguinal point) prevents the hernia from protruding when the patient coughs, confirming an indirect inguinal hernia.",
+          "abnormal": true
+        },
+        "skill.exam.surg.scrotal_palpation": {
+          "finding": "Both testes and epididymides are normal in size, shape, and testicular sensation. No hydrocele or varicocele.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "ultrasound_groin",
+        "preoperative_workup"
+      ],
+      "investigations": {
+        "ultrasound_groin": {
+          "label": "High-resolution ultrasonography of right groin and scrotum",
+          "indicated": true,
+          "result": "Hernial sac arising lateral to the inferior epigastric vessels through the deep inguinal ring containing omentum and small bowel loops on Valsalva. Complete reduction documented.",
+          "note": "Ultrasonography confirms an indirect inguinal hernia and evaluates the contralateral groin for subclinical defects."
+        },
+        "preoperative_workup": {
+          "label": "Baseline elective preoperative workup",
+          "indicated": true,
+          "result": "Haemoglobin 13.6 g/dL, fasting blood glucose 98 mg/dL, serum creatinine 0.9 mg/dL, normal 12-lead ECG and chest radiograph.",
+          "note": "Standard pre-anaesthetic evaluation for an elective surgical repair under regional anaesthesia."
+        },
+        "uroflowmetry_prostate_usg": {
+          "label": "Uroflowmetry and pelvic ultrasound for post-void residual",
+          "indicated": true,
+          "result": "Peak flow rate 14 mL/s with prostate volume 32 g and post-void residual volume 35 mL.",
+          "note": "Identifying and managing bladder outflow obstruction due to benign prostatic hyperplasia prevents postoperative acute retention and hernia recurrence."
+        },
+        "computed_tomography_abdomen": {
+          "label": "Computed tomography scan of abdomen and pelvis",
+          "indicated": false,
+          "result": "Not indicated for an uncomplicated reducible primary groin hernia.",
+          "note": "CT scanning is unnecessary in straightforward groin hernias and should be reserved for complex, recurrent, or suspected occult internal hernias."
+        }
+      },
+      "differentialModel": {
+        "answer": "Right indirect inguinal hernia is the leading diagnosis. Differentials include direct inguinal hernia, femoral hernia, encysted hydrocele of the cord, and varicocele.",
+        "accept": [
+          "inguinal hernia",
+          "indirect inguinal hernia",
+          "direct inguinal hernia",
+          "femoral hernia",
+          "hydrocele"
+        ],
+        "minMatch": 1
+      },
+      "diagnosis": {
+        "answer": "Uncomplicated reducible right indirect inguinal hernia (complete bubonocele/inguinoscrotal hernia).",
+        "accept": [
+          "inguinal hernia",
+          "indirect inguinal hernia"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Elective surgical repair (Lichtenstein tension-free polypropylene mesh hernioplasty or laparoscopic TEP/TAPP repair) under regional or local anaesthesia. Treat aggravating factors such as constipation and chronic cough, optimize benign prostatic hyperplasia, and advise on temporary avoidance of heavy lifting.",
+        "accept": [
+          "hernioplasty",
+          "mesh repair",
+          "elective surgery",
+          "lichtenstein"
+        ],
+        "minMatch": 1
+      },
+      "teachingPoints": [
+        "An indirect inguinal hernia enters the deep ring lateral to the inferior epigastric vessels, whereas a direct hernia pushes through Hesselbach's triangle medial to the vessels.",
+        "The deep ring occlusion test is performed by reducing the hernia and pressing 1.25 cm above the midinguinal point (midway between ASIS and pubic symphysis).",
+        "Precipitating causes of increased intra-abdominal pressure (chronic cough, constipation, benign prostatic hyperplasia, heavy occupational lifting) must be investigated and managed before surgery.",
+        "Teach the patient emergency danger signs: if the swelling becomes acutely painful, firm, tender, and will not reduce, seek immediate emergency surgical attention to avoid strangulation."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

@@ -35733,6 +35733,1065 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.approach.surg.intimate_chaperone": {
+      "id": "skill.approach.surg.intimate_chaperone",
+      "kind": "approach",
+      "system": "surgery",
+      "title": "Intimate surgical examination: chaperone, informed consent and respectful exposure",
+      "oneLine": "Explain the examination, secure verbal consent, arrange an independent chaperone, and maintain privacy",
+      "why": "Intimate surgical examination of the breast, groin, genitalia, or anorectum without an independent chaperone and informed consent breaches professional standards, increases patient anxiety, and leaves both clinician and patient unprotected.",
+      "steps": [
+        {
+          "text": "Introduce yourself clearly, confirm patient identity, and explain the precise clinical indication for the intimate examination."
+        },
+        {
+          "text": "Explain exactly what the examination involves, including the anatomical structures to be inspected and palpated, and the expected duration."
+        },
+        {
+          "text": "Obtain explicit voluntary verbal consent, confirming that the patient understands they may ask questions or pause the examination at any stage."
+        },
+        {
+          "text": "Offer and summon an independent healthcare chaperone (nurse or female attendant), recording the chaperone name and professional role."
+        },
+        {
+          "text": "Ensure complete privacy by drawing curtains, closing examination room doors, and providing a clean sheet or gown."
+        },
+        {
+          "text": "Expose only the specific anatomical area under direct examination, keeping all other areas draped until examination begins and promptly covering when finished."
+        }
+      ],
+      "practice": "Rehearse requesting a chaperone and explaining an intimate groin or rectal examination with a colleague in 45 seconds without using technical medical jargon.",
+      "pitfalls": [
+        "Proceeding with an intimate examination without offering or documenting an independent healthcare chaperone.",
+        "Allowing an accompanied family member to act as the official chaperone instead of a neutral healthcare worker.",
+        "Uncovering the patient completely rather than exposing only the region being actively examined.",
+        "Failing to explain what you are about to do before touching sensitive anatomical areas."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why is an independent healthcare chaperone required during an intimate surgical examination?",
+          "a": "A chaperone provides emotional support to the patient, safeguards patient dignity, and protects the clinician against misunderstanding or false allegations.",
+          "accept": [
+            "support",
+            "dignity",
+            "protect",
+            "allegations",
+            "misunderstanding",
+            "safeguard"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Can a family member or friend of the patient serve as the formal chaperone?",
+          "a": "No, a formal chaperone should be a qualified healthcare professional who understands the clinical examination and can witness that it was conducted appropriately.",
+          "accept": [
+            "healthcare",
+            "professional",
+            "qualified",
+            "witness",
+            "neutral",
+            "independent"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What should the clinician do if a patient declines an intimate examination when a chaperone is present?",
+          "a": "Respect the patient refusal, explore their concerns, explain the clinical consequences of not examining, document the refusal, and offer alternative options.",
+          "accept": [
+            "respect",
+            "refusal",
+            "concerns",
+            "document",
+            "alternative",
+            "consequences"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 4,
+          "q": "What specific documentation is required in the surgical record after an intimate examination?",
+          "a": "Document that consent was obtained, the identity and designation of the chaperone, the presence of the chaperone throughout, and key physical findings.",
+          "accept": [
+            "consent",
+            "chaperone",
+            "identity",
+            "designation",
+            "presence",
+            "findings",
+            "record"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "indication",
+          "text": "Explains the clinical necessity and nature of the intimate examination clearly"
+        },
+        {
+          "id": "consent",
+          "text": "Obtains explicit voluntary verbal consent before touching the patient",
+          "critical": true
+        },
+        {
+          "id": "chaperone",
+          "text": "Offers and arranges an independent healthcare chaperone and documents their presence",
+          "critical": true
+        },
+        {
+          "id": "privacy",
+          "text": "Ensures physical visual privacy with screens, curtains, and closed doors",
+          "critical": true
+        },
+        {
+          "id": "draping",
+          "text": "Drapes the patient with a clean sheet, exposing only the region under active evaluation",
+          "critical": true
+        },
+        {
+          "id": "communication",
+          "text": "Maintains continuous professional communication, warning before touching and allowing questions"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Principles of chaperone and intimate surgical examination",
+          "body": "An intimate examination includes physical evaluation of the breasts, genitalia, groin, and perineum or anorectum. These examinations can evoke significant emotional vulnerability, anxiety, or embarrassment.\n\nA qualified chaperone is a healthcare worker such as a staff nurse or resident doctor who understands the professional boundaries of physical examination."
+        },
+        {
+          "heading": "Essential procedural safeguards",
+          "table": {
+            "cols": [
+              "Step",
+              "Clinical Action",
+              "Professional Requirement"
+            ],
+            "rows": [
+              [
+                "Consent",
+                "Explain nature and purpose",
+                "Voluntary verbal agreement"
+              ],
+              [
+                "Chaperone",
+                "Summon nurse or staff",
+                "Document name and designation"
+              ],
+              [
+                "Privacy",
+                "Draw cubicle curtains",
+                "Visual and acoustic privacy"
+              ],
+              [
+                "Draping",
+                "Cover with clean sheet",
+                "Expose only the target area"
+              ]
+            ]
+          }
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "anorectal_disorders_hemorrhoids_and_fistula: chaperone and intimate examination"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Ethics, chaperone and examination of genitalia and rectum"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.approach.surg.consent_operation": {
+      "id": "skill.approach.surg.consent_operation",
+      "kind": "approach",
+      "system": "surgery",
+      "title": "Informed consent for an emergency or elective surgical operation",
+      "oneLine": "Assess capacity, explain diagnosis and surgical procedure, disclose material risks, and document voluntary consent",
+      "why": "Informed consent is a legal and ethical prerequisite for surgical intervention. Operating without valid consent constitutes battery except in life-threatening emergencies where the patient lacks decision-making capacity and no surrogate is available.",
+      "steps": [
+        {
+          "text": "Conduct the discussion in a quiet, private setting at an appropriate time before sedation or theatre transfer."
+        },
+        {
+          "text": "Assess decision-making capacity: confirm the patient can understand, retain, weigh the information, and communicate a choice."
+        },
+        {
+          "text": "Explain the diagnosis, the proposed operation, the primary objective, and what will happen during surgery in accessible language."
+        },
+        {
+          "text": "Disclose common complications and rare but severe material risks, including bleeding, infection, visceral injury, and anaesthetic hazards."
+        },
+        {
+          "text": "Discuss reasonable alternative management strategies, including conservative or non-operative care and the consequences of declining surgery."
+        },
+        {
+          "text": "Invite questions, confirm understanding using teach-back, and verify that consent is given voluntarily before obtaining signatures."
+        }
+      ],
+      "practice": "Deliver a simulated consent conversation for an emergency appendicectomy or laparotomy to a peer within six minutes, addressing a major surgical risk.",
+      "pitfalls": [
+        "Obtaining consent from a premedicated, heavily sedated, or drowsy patient.",
+        "Listing surgical risks rapidly without checking whether the patient understood the explanation.",
+        "Delegating complex surgical consent to an intern who cannot describe the operative procedure or potential complications.",
+        "Failing to explain the realistic alternative of conservative management and the risks of refusing treatment."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the four components of assessing mental capacity to give surgical consent?",
+          "a": "The patient must be able to understand the relevant information, retain it long enough, weigh it to reach a decision, and communicate their decision.",
+          "accept": [
+            "understand",
+            "retain",
+            "weigh",
+            "communicate",
+            "decision"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What constitutes a material risk that must be disclosed during surgical consent?",
+          "a": "A risk is material if a reasonable person in that patient position would attach significance to it, or if the doctor knows this particular patient would attach significance to it.",
+          "accept": [
+            "material",
+            "reasonable",
+            "significance",
+            "particular",
+            "patient",
+            "position"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Under what circumstances may a surgeon operate on an adult without explicit consent?",
+          "a": "Only in an emergency to save life or prevent severe harm when the patient lacks capacity and no legal surrogate or advance directive exists.",
+          "accept": [
+            "emergency",
+            "save life",
+            "life-threatening",
+            "capacity",
+            "necessity",
+            "harm"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 4,
+          "q": "Can a surgeon perform an incidental procedure during surgery if the consent form only named the primary procedure?",
+          "a": "No, incidental procedures without prior consent are unlawful unless immediately necessary to save the patient life or avoid severe detriment to health.",
+          "accept": [
+            "unlawful",
+            "necessary",
+            "save life",
+            "prior consent",
+            "detriment",
+            "emergency"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "setting",
+          "text": "Ensures private setting and conducts discussion before sedation or premedication"
+        },
+        {
+          "id": "capacity",
+          "text": "Assesses and confirms patient decision-making capacity",
+          "critical": true
+        },
+        {
+          "id": "procedure",
+          "text": "Explains diagnosis, proposed operative procedure, and surgical objectives in plain words"
+        },
+        {
+          "id": "risks",
+          "text": "Discloses common side effects and rare but serious material risks",
+          "critical": true
+        },
+        {
+          "id": "alternatives",
+          "text": "Discusses non-operative alternatives and the implications of refusing treatment",
+          "critical": true
+        },
+        {
+          "id": "voluntary",
+          "text": "Confirms voluntary consent without coercion and signs consent documentation",
+          "critical": true
+        }
+      ],
+      "teach": [
+        {
+          "heading": "The modern legal standard of informed consent",
+          "body": "Informed consent requires a collaborative dialogue between clinician and patient. The clinician shares medical knowledge while the patient contributes their values, anxieties, and priorities.\n\nConsent is not a signature on a paper form but an ongoing clinical process that respects patient autonomy and personal bodily integrity."
+        },
+        {
+          "heading": "Core elements of surgical consent disclosure",
+          "table": {
+            "cols": [
+              "Element",
+              "Information Provided",
+              "Key Clinical Focus"
+            ],
+            "rows": [
+              [
+                "Diagnosis",
+                "Condition requiring surgery",
+                "Natural history untreated"
+              ],
+              [
+                "Procedure",
+                "Steps of operation",
+                "Open vs laparoscopic, stoma"
+              ],
+              [
+                "Risks",
+                "Common and serious hazards",
+                "Bleeding, infection, visceral damage"
+              ],
+              [
+                "Alternatives",
+                "Non-operative treatment",
+                "Medical therapy, observation"
+              ]
+            ]
+          }
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_appendicitis: surgical consent and emergency preparation"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Preoperative preparation and informed consent"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.surg.atls_primary_survey": {
+      "id": "skill.tx.surg.atls_primary_survey",
+      "kind": "treatment",
+      "system": "surgery",
+      "title": "Trauma primary survey: ATLS ABCDE approach",
+      "oneLine": "Systematic identification and immediate life-saving treatment of lethal injuries in order of physiological priority",
+      "why": "Trauma patients die from preventable physiological failure within the golden hour. The ABCDE algorithm prioritises airway compromise, tension pneumothorax, massive haemorrhage, and intracranial herniation before secondary diagnostic workup.",
+      "dosingNote": "CliniX is a teaching aid and does not prescribe or administer medication. Trauma resuscitation protocols follow ATLS 10th Edition guidelines.",
+      "steps": [
+        {
+          "text": "Ensure scene safety, wear universal personal protective equipment, and approach patient while maintaining in-line cervical spine stabilisation."
+        },
+        {
+          "text": "Assess Airway: evaluate patency, suction blood or vomitus, insert simple airway adjunct if obtunded, and protect cervical spine with a rigid collar and blocks."
+        },
+        {
+          "text": "Assess Breathing: inspect chest wall excursion, auscultate bilaterally, administer high-flow oxygen, and decompress tension pneumothorax immediately if present."
+        },
+        {
+          "text": "Assess Circulation: apply direct pressure to external haemorrhage, palpate central pulses, assess capillary refill, and establish two large-bore 16G IV lines."
+        },
+        {
+          "text": "Assess Disability: determine Glasgow Coma Scale score, assess pupillary size and reactivity to light, and check capillary blood glucose."
+        },
+        {
+          "text": "Expose fully to inspect for occult wounds while preventing hypothermia with warmed blankets and warmed intravenous isotonic fluids."
+        }
+      ],
+      "practice": "Simulate leading a trauma primary survey on a mannequin, verbalising ABCDE assessments and immediate interventions within 180 seconds.",
+      "pitfalls": [
+        "Tilting or hyperextending the neck to open the airway in a blunt polytrauma victim.",
+        "Delaying needle or finger thoracostomy in a tension pneumothorax while waiting for a chest radiograph.",
+        "Failing to expose the back by gentle log-roll, missing posterior penetrating lacerations.",
+        "Allowing the patient to become hypothermic during exposure, triggering trauma-induced coagulopathy."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the very first action when managing the airway in blunt polytrauma?",
+          "a": "Maintain manual in-line cervical spine stabilization to prevent spinal cord injury during airway maneuvers.",
+          "accept": [
+            "cervical",
+            "spine",
+            "stabilization",
+            "in-line",
+            "manual",
+            "neck"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What physical signs indicate immediate needle decompression for suspected tension pneumothorax?",
+          "a": "Respiratory distress, absent unilateral breath sounds, hypotension, distended neck veins, and tracheal deviation to the opposite side.",
+          "accept": [
+            "absent",
+            "breath sounds",
+            "hypotension",
+            "neck veins",
+            "tracheal",
+            "distress"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What are the components of the trauma lethal triad, and how is each prevented during primary survey?",
+          "a": "Hypothermia, acidosis, and coagulopathy; prevented by rapid hemorrhage control, warm environment, warm IV fluids, and balanced blood transfusion.",
+          "accept": [
+            "hypothermia",
+            "acidosis",
+            "coagulopathy",
+            "warm",
+            "fluids",
+            "hemorrhage",
+            "transfusion"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 4,
+          "q": "Where are the primary anatomical compartments of occult blood loss in hypotensive blunt polytrauma?",
+          "a": "The five compartments are the chest, abdomen, retroperitoneum with pelvis, long bone fractures, and external blood loss on the scene.",
+          "accept": [
+            "chest",
+            "abdomen",
+            "pelvis",
+            "retroperitoneum",
+            "long bone",
+            "femur",
+            "external"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "airway_cspine",
+          "text": "Assesses airway patency while maintaining manual in-line cervical spine stabilisation",
+          "critical": true
+        },
+        {
+          "id": "breathing_o2",
+          "text": "Assesses breathing, delivers high-flow oxygen, and identifies life-threatening chest pathology",
+          "critical": true
+        },
+        {
+          "id": "decompression",
+          "text": "Performs immediate decompression without delay if tension pneumothorax is identified",
+          "critical": true
+        },
+        {
+          "id": "circulation_bleeding",
+          "text": "Controls external haemorrhage with direct pressure and assesses pulses, perfusion, and blood pressure",
+          "critical": true
+        },
+        {
+          "id": "access_resuscitate",
+          "text": "Places two wide-bore 16G intravenous cannulae and initiates warmed balanced crystalloid or blood",
+          "critical": true
+        },
+        {
+          "id": "disability_exposure",
+          "text": "Evaluates GCS and pupils, then exposes the patient completely while preventing hypothermia"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "The chronological imperative of the primary survey",
+          "body": "The primary survey follows an uncompromising hierarchy. The physiological insult that kills the patient fastest is treated first: airway loss before tension pneumothorax, tension pneumothorax before exsanguination.\n\nIf the patient deteriorates at any point, stop and re-evaluate the sequence beginning from Airway."
+        },
+        {
+          "heading": "Immediate life threats and their interventions",
+          "table": {
+            "cols": [
+              "Component",
+              "Lethal Condition",
+              "Immediate Intervention"
+            ],
+            "rows": [
+              [
+                "A - Airway",
+                "Airway obstruction / apnoea",
+                "Jaw thrust, suction, definitive airway"
+              ],
+              [
+                "B - Breathing",
+                "Tension pneumothorax",
+                "Immediate decompression and chest tube"
+              ],
+              [
+                "C - Circulation",
+                "Exsanguinating haemorrhage",
+                "Direct pressure, pelvic binder, fluids"
+              ],
+              [
+                "D - Disability",
+                "Intracranial mass effect",
+                "Hypertonic saline/mannitol, urgent scan"
+              ]
+            ]
+          }
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "advanced_trauma_life_support_primary_survey: ABCDE resuscitation sequence"
+        },
+        {
+          "source": "ATLS",
+          "locator": "Initial Assessment and Management: Primary Survey"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.surg.catheterisation": {
+      "id": "skill.tx.surg.catheterisation",
+      "kind": "treatment",
+      "system": "surgery",
+      "title": "Urinary bladder catheterisation: aseptic technique and balloon inflation",
+      "oneLine": "Aseptic urethral catheterisation with confirmation of urinary drainage before Foley balloon inflation",
+      "why": "Urethral catheterisation relieves acute urinary retention and monitors hourly urine output in shock and surgery. Inflating the retaining balloon within the urethra causes severe urethral rupture, haemorrhage, and permanent stricture.",
+      "dosingNote": "CliniX is a teaching aid and does not prescribe or administer medication. Catheter sizes and balloon volumes are standard surgical practice.",
+      "steps": [
+        {
+          "text": "Verify indication, explain procedure to patient, ensure privacy, and position patient supine with thighs abducted."
+        },
+        {
+          "text": "Inspect the external urethral meatus: confirm absence of meatal blood, stricture, or active purulence before proceeding."
+        },
+        {
+          "text": "Perform surgical hand scrub, don sterile gloves, and arrange sterile drape around the genitalia."
+        },
+        {
+          "text": "Cleanse the glans and meatus with aqueous chlorhexidine; instill 10 mL of 2% sterile lignocaine gel and wait 3 to 5 minutes."
+        },
+        {
+          "text": "Hold penis vertically on stretch, introduce Foley catheter gently without force, and advance fully to the side-arm junction."
+        },
+        {
+          "text": "Confirm free urine flow into the drainage tube before slowly inflating the balloon with 10 mL of sterile water, then gently withdraw to seat at bladder neck."
+        }
+      ],
+      "practice": "Demonstrate sterile Foley catheterisation on a male catheterisation trainer, highlighting the tactile stop and urine flashback.",
+      "pitfalls": [
+        "Attempting urethral catheterisation when blood is visible at the external meatus after pelvic trauma.",
+        "Inflating the balloon before urine is seen draining freely from the catheter lumen.",
+        "Inflating the balloon with normal saline instead of sterile water, risking valve crystallisation and balloon non-deflation.",
+        "Forcing the catheter past an obstruction when resistance is encountered at the prostate or sphincter."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the crucial confirmation required before inflating a Foley catheter balloon?",
+          "a": "Urine must be seen flowing freely from the catheter lumen, confirming that the catheter tip is inside the urinary bladder.",
+          "accept": [
+            "urine",
+            "flowing",
+            "draining",
+            "flow",
+            "bladder",
+            "tip",
+            "inside"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why must sterile water rather than normal saline be used to inflate the retention balloon?",
+          "a": "Normal saline can crystallize within the narrow inflation channel and valve mechanism, preventing balloon deflation during removal.",
+          "accept": [
+            "crystallize",
+            "saline",
+            "channel",
+            "valve",
+            "deflation",
+            "removal",
+            "block"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What are the clinical signs of urethral injury in pelvic trauma that contraindicate blind urethral catheterisation?",
+          "a": "Blood at the external urethral meatus, perineal or scrotal haematoma, and a high-riding prostate on digital rectal examination.",
+          "accept": [
+            "blood",
+            "meatus",
+            "haematoma",
+            "perineal",
+            "high-riding",
+            "prostate"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 4,
+          "q": "What is the immediate management if catheterisation encounters impassable resistance at the prostatic urethra in acute retention?",
+          "a": "Stop immediately without forcing, seek urological assistance, consider a coude tip catheter, or perform an ultrasound-guided suprapubic cystostomy.",
+          "accept": [
+            "stop",
+            "force",
+            "urology",
+            "coude",
+            "suprapubic",
+            "cystostomy"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "asepsis",
+          "text": "Prepares sterile field, performs hand hygiene, and dons sterile gloves"
+        },
+        {
+          "id": "meatal_check",
+          "text": "Inspects external urethral meatus for blood, discharge, or stricture",
+          "critical": true
+        },
+        {
+          "id": "anaesthetic_gel",
+          "text": "Instils 10 mL of 2% sterile lignocaine gel into urethra and allows adequate dwell time"
+        },
+        {
+          "id": "gentle_advance",
+          "text": "Advances catheter gently along the anatomical curve of urethra without applying force",
+          "critical": true
+        },
+        {
+          "id": "urine_confirmation",
+          "text": "Verifies free urine drainage before attempting any balloon inflation",
+          "critical": true
+        },
+        {
+          "id": "balloon_inflation",
+          "text": "Inflates balloon with 10 mL of sterile water only and connects closed drainage system",
+          "critical": true
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Anatomical safety principles in urethral catheterisation",
+          "body": "The male urethra is approximately 20 cm long and has two natural curvatures. Traction on the penis perpendicular to the abdominal wall straightens the anterior urethra, facilitating smooth passage.\n\nResistance at the membranous urethra is usually due to voluntary sphincter spasm. Reassuring the patient and asking them to breathe deeply relaxes the pelvic floor."
+        },
+        {
+          "heading": "Catheter types and clinical selections",
+          "table": {
+            "cols": [
+              "Type",
+              "Material / Channels",
+              "Primary Indication"
+            ],
+            "rows": [
+              [
+                "Two-way Foley",
+                "Silicone / latex, 2 ports",
+                "Routine drainage and output monitoring"
+              ],
+              [
+                "Three-way Foley",
+                "Large bore, 3 ports",
+                "Continuous bladder irrigation after TURP"
+              ],
+              [
+                "Coude tip",
+                "Curved semi-rigid tip",
+                "Navigating an enlarged prostatic median lobe"
+              ],
+              [
+                "Suprapubic",
+                "Trocar or Seldinger",
+                "Urethral disruption, impassable stricture"
+              ]
+            ]
+          }
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_urinary_retention: urethral catheterisation technique"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Urethral catheterisation and acute retention"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.surg.nasogastric_tube": {
+      "id": "skill.tx.surg.nasogastric_tube",
+      "kind": "treatment",
+      "system": "surgery",
+      "title": "Nasogastric tube insertion and position verification",
+      "oneLine": "Aseptic insertion of a wide-bore nasogastric tube with NEX measurement and pH verification of gastric placement",
+      "why": "Nasogastric tube decompression empties the stomach in intestinal obstruction, paralytic ileus, and acute peritonitis, preventing pulmonary aspiration of enteric contents. Blind tracheal placement risks pneumothorax, aspiration pneumonia, and fatal enteral infusion.",
+      "dosingNote": "CliniX is a teaching aid and does not prescribe or administer medication.",
+      "steps": [
+        {
+          "text": "Explain the procedure, agree on a stop signal with the patient, and position patient sitting upright with head in neutral position."
+        },
+        {
+          "text": "Measure insertion length using the NEX method: Nose tip to Earlobe to Xiphisternum, noting the marked centimeter graduation."
+        },
+        {
+          "text": "Inspect nostrils for patency, select the clearer nostril, and lubricate the distal 10 cm of the tube with water-soluble gel."
+        },
+        {
+          "text": "Insert tube horizontally along the floor of the nasal cavity towards the occiput until the posterior pharyngeal wall is reached."
+        },
+        {
+          "text": "Ask the patient to flex the neck forward and take small sips of water through a straw, advancing the tube synchronously with each swallow."
+        },
+        {
+          "text": "Advance to the predetermined NEX mark, aspirate gastric fluid with a 50 mL syringe, and confirm pH <= 5.5 using CE-marked pH indicator paper."
+        }
+      ],
+      "practice": "Measure NEX distance on a partner and demonstrate horizontal insertion vector along the nasal floor on a mannequin.",
+      "pitfalls": [
+        "Directing the tube upwards towards the cribriform plate instead of horizontally along the nasal floor.",
+        "Using the 'whoosh test' (air insufflation with epigastric auscultation) to confirm gastric placement; this is unreliable and unsafe.",
+        "Advancing the tube against persistent coughing, respiratory distress, or cyanosis indicating tracheal intubation.",
+        "Administering feed or medication before objective verification of gastric placement with pH paper or radiograph."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How is the insertion length of a nasogastric tube accurately determined?",
+          "a": "Measure the distance from the tip of the nose to the earlobe, and then down to the xiphisternum (the NEX measurement).",
+          "accept": [
+            "nose",
+            "earlobe",
+            "xiphisternum",
+            "nex",
+            "distance",
+            "measure"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why is the air insufflation 'whoosh test' no longer recommended to confirm nasogastric tube position?",
+          "a": "Auscultating air over the epigastrium cannot reliably distinguish between tube placement in the stomach, oesophagus, or respiratory tract.",
+          "accept": [
+            "unreliable",
+            "distinguish",
+            "stomach",
+            "oesophagus",
+            "respiratory",
+            "bronchial",
+            "whoosh"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What is the threshold gastric aspirate pH confirming that a nasogastric tube is in the stomach?",
+          "a": "A pH of 5.5 or lower on CE-marked indicator paper confirms gastric acid secretion and correct gastric placement.",
+          "accept": [
+            "5.5",
+            "acid",
+            "gastric",
+            "indicator",
+            "paper",
+            "lower"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 4,
+          "q": "What is the primary contraindication to nasogastric tube insertion via the nasal route?",
+          "a": "Suspected basilar skull fracture with CSF rhinorrhoea or midface trauma, where cribriform plate disruption risks intracranial tube entry.",
+          "accept": [
+            "basilar",
+            "skull fracture",
+            "cribriform",
+            "intracranial",
+            "rhinorrhoea",
+            "midface"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "positioning",
+          "text": "Positions patient sitting upright with head neutral and agrees on a stop signal"
+        },
+        {
+          "id": "nex_measurement",
+          "text": "Measures NEX distance (nose to earlobe to xiphisternum) and notes mark on tube",
+          "critical": true
+        },
+        {
+          "id": "horizontal_vector",
+          "text": "Lubricates tip and passes horizontally along nasal floor, avoiding upward trajectory"
+        },
+        {
+          "id": "swallow_advance",
+          "text": "Advances tube synchronously with patient swallowing sips of water with neck flexed"
+        },
+        {
+          "id": "distress_stop",
+          "text": "Withdraws tube immediately if patient coughs persistently, stridors, or desaturates",
+          "critical": true
+        },
+        {
+          "id": "ph_confirmation",
+          "text": "Aspirates gastric fluid and confirms pH 5.5 or less on pH indicator paper",
+          "critical": true
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Safe passage and verification of nasogastric decompression",
+          "body": "The nasogastric tube must travel parallel to the hard palate along the floor of the inferior meatus. Aiming upwards impacts the middle turbinate, causing severe epistaxis.\n\nNeck flexion closes the laryngeal inlet and steers the tube into the retrocricoid pharynx and upper oesophagus during swallowing."
+        },
+        {
+          "heading": "Placement confirmation hierarchy",
+          "table": {
+            "cols": [
+              "Method",
+              "Safety Profile",
+              "Clinical Recommendation"
+            ],
+            "rows": [
+              [
+                "pH paper (<= 5.5)",
+                "First-line bedside test",
+                "Confirms gastric placement reliably"
+              ],
+              [
+                "Chest radiograph",
+                "Gold standard definitive",
+                "Required if pH > 5.5 or no aspirate"
+              ],
+              [
+                "Auscultation (whoosh)",
+                "Dangerous and unsafe",
+                "Obsolete; completely condemned"
+              ],
+              [
+                "Litmus paper",
+                "Inaccurate pH resolution",
+                "Do not use; must use narrow-range pH"
+              ]
+            ]
+          }
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_intestinal_obstruction: nasogastric decompression"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Nasogastric decompression and enteral access"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.surg.suture_wound": {
+      "id": "skill.tx.surg.suture_wound",
+      "kind": "treatment",
+      "system": "surgery",
+      "title": "Wound debridement, infiltration anaesthesia and simple interrupted suturing",
+      "oneLine": "Aseptic wound preparation, local anaesthetic infiltration, non-viable tissue excision, and perpendicular interrupted skin closure",
+      "why": "Proper surgical wound closure restores the anatomical barrier, minimizes scar hypertrophy, and prevents wound infection. Inverting wound edges or tying sutures under strangulating tension produces ischaemic necrosis and dehiscence.",
+      "dosingNote": "CliniX is a teaching aid and does not prescribe or administer medication. Local anaesthetic doses and suture techniques are standard surgical practice.",
+      "steps": [
+        {
+          "text": "Assess wound location, check distal neurovascular and tendon function before local anaesthetic infiltration, and ensure tetanus prophylaxis status."
+        },
+        {
+          "text": "Irrigate wound copiously with sterile 0.9% saline under gentle pressure to remove particulate contamination."
+        },
+        {
+          "text": "Infiltrate 1% plain lignocaine (maximum 3 mg/kg) intradermally and subcutaneously through clean wound margins, aspirating first."
+        },
+        {
+          "text": "Perform surgical debridement: excise non-viable ragged edges and foreign material using scalpel or tissue scissors."
+        },
+        {
+          "text": "Mount curved reverse-cutting needle at junction of middle and posterior third with needle holder, and enter skin at 90 degrees 4-5 mm from margin."
+        },
+        {
+          "text": "Pass needle across wound bed at equal depth, exit perpendicularly 4-5 mm from opposite edge, and tie square knot with instrument tie without excessive tension."
+        }
+      ],
+      "practice": "Place five simple interrupted sutures on a silicone practice pad, ensuring equal bite depth and wound edge eversion with square instrument ties.",
+      "pitfalls": [
+        "Failing to document distal sensation and motor function before infiltrating local anaesthesia.",
+        "Using lignocaine with adrenaline on fingers, toes, penis, or ears, causing end-artery vasospasm and gangrene.",
+        "Tying knots so tightly that the skin blenches, causing dermal ischemia and transverse suture railroad tracks.",
+        "Permitting wound edges to roll inward (invert) rather than everting the skin margins."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why must the suture needle enter and exit the skin at a 90-degree angle to the surface?",
+          "a": "A perpendicular entry takes a wider bite in the deeper dermis than at the surface, ensuring that wound edges evert when the knot is tied.",
+          "accept": [
+            "perpendicular",
+            "90",
+            "evert",
+            "eversion",
+            "dermis",
+            "bite",
+            "edges"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the maximum safe dose of plain lignocaine (without adrenaline) in an adult for local infiltration?",
+          "a": "The maximum safe dose of plain lignocaine is 3 mg per kg of body weight (or approximately 200 mg in an average 70 kg adult).",
+          "accept": [
+            "3 mg/kg",
+            "3mg/kg",
+            "3 mg per kg",
+            "200 mg",
+            "3 mg"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why must adrenaline never be used in local anaesthetic for lacerations on the digits or earlobe?",
+          "a": "Adrenaline produces intense vasoconstriction in end-arteries without collateral supply, causing irreversible tissue ischemia and gangrene.",
+          "accept": [
+            "end-arteries",
+            "collateral",
+            "vasoconstriction",
+            "ischemia",
+            "gangrene",
+            "necrosis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 4,
+          "q": "What is the recommended timing for skin suture removal across different anatomical regions?",
+          "a": "Face sutures are removed at 3 to 5 days, scalp at 7 days, trunk and upper extremities at 7 to 10 days, and lower extremities or over joints at 10 to 14 days.",
+          "accept": [
+            "face 3 to 5",
+            "face 5",
+            "scalp 7",
+            "trunk",
+            "extremities",
+            "10 to 14",
+            "days"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "pre_exam",
+          "text": "Examines and documents distal neurovascular integrity before infiltrating local anaesthetic",
+          "critical": true
+        },
+        {
+          "id": "wound_irrigation",
+          "text": "Irrigates wound copiously with sterile normal saline to remove particulate contaminants"
+        },
+        {
+          "id": "safe_infiltration",
+          "text": "Aspirates before infiltrating local anaesthetic, staying within safe weight-based dose limits",
+          "critical": true
+        },
+        {
+          "id": "debridement",
+          "text": "Excises devitalised tissue and foreign debris while preserving viable anatomy"
+        },
+        {
+          "id": "perpendicular_bite",
+          "text": "Enters and exits skin at 90 degrees taking equal bites of skin and subcutaneous tissue",
+          "critical": true
+        },
+        {
+          "id": "knot_tension",
+          "text": "Ties square knot off the incision line, achieving wound edge eversion without strangulation",
+          "critical": true
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Principles of atraumatic wound closure",
+          "body": "The goal of wound suturing is precise anatomical approximation with gentle eversion of skin edges. Everted edges heal flat, whereas inverted edges produce a depressed, disfiguring scar.\n\nSutures should approximate, never strangulate. Tissue oedema invariably occurs during the first 48 hours; tying knots too tightly leads to dermal necrosis and cross-hatching marks."
+        },
+        {
+          "heading": "Suture selection guidelines",
+          "table": {
+            "cols": [
+              "Tissue Layer",
+              "Preferred Suture Material",
+              "Gauge (USP)",
+              "Removal Timing"
+            ],
+            "rows": [
+              [
+                "Facial skin",
+                "Non-absorbable monofilament (Nylon/Prolene)",
+                "5-0 or 6-0",
+                "3 to 5 days"
+              ],
+              [
+                "Scalp skin",
+                "Non-absorbable monofilament or staples",
+                "3-0 or 4-0",
+                "7 to 10 days"
+              ],
+              [
+                "Extremities / Trunk",
+                "Non-absorbable monofilament",
+                "3-0 or 4-0",
+                "10 to 14 days"
+              ],
+              [
+                "Subcutaneous fat",
+                "Absorbable braided (Vicryl)",
+                "3-0 or 4-0",
+                "Absorbed in vivo"
+              ]
+            ]
+          }
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "surgical_wound_healing_and_scarring: suture principles and wound closure"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Suture materials and surgical wound closure"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }

@@ -1,0 +1,1334 @@
+{
+  "_comment": "Obstetrics pathway: Ectopic pregnancy. Diagnosis and medical or surgical management. Clinical features, transvaginal ultrasound, serial beta-hCG discriminatory zone, methotrexate protocol, and surgical intervention for rupture.",
+  "id": "ectopic-pregnancy",
+  "name": "Ectopic pregnancy",
+  "fullName": "Tubal ectopic pregnancy",
+  "subtitle": "Diagnosis and medical or surgical management",
+  "system": "obgyn",
+  "kbRef": "ectopic_pregnancy",
+  "oneLine": "Extrauterine blastocyst implantation, early diagnostic triaging, and medical or surgical intervention",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "skills": [
+        "skill.ectopic.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position",
+        "skill.approach.obg.intimate_consent"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": "Age in the reproductive years, parity, and calculated gestational age from the last menstrual period set the pre-test probability of early pregnancy complications."
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.booking_lmp",
+        "skill.hx.obg.gynae_symptoms",
+        "skill.hx.obg.menstrual_history"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": "In early pregnancy, unilateral pelvic pain, abnormal vaginal bleeding, and amenorrhoea form the classic triad, but atypical presentations with fainting, diarrhea, or shoulder tip pain must never be overlooked.",
+        "skill.hx.obg.booking_lmp": "Accurate dating from the last menstrual period calculates the expected gestational age and determines whether an intrauterine gestational sac should be visible on transvaginal ultrasonography.",
+        "skill.hx.obg.gynae_symptoms": "Unilateral pelvic pain starting as a dull ache and becoming sharp or colicky is the hallmark of tubal distension, while shoulder-tip pain signifies diaphragmatic irritation from internal haemorrhage.",
+        "skill.hx.obg.menstrual_history": "Characteristically, vaginal bleeding in ectopic pregnancy is dark brown and scanty, representing endometrial decidual breakdown rather than heavy active arterial flow with clots."
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "skills": [
+        "skill.hx.obg.medical_family_drug",
+        "skill.hx.obg.previous_pregnancies",
+        "skill.hx.obg.gynae_background",
+        "skill.hx.ectopic.risk"
+      ],
+      "emphasis": {
+        "skill.hx.obg.previous_pregnancies": "A previous ectopic pregnancy is the single strongest clinical risk factor, carrying a ten-fold increase in recurrence.",
+        "skill.hx.obg.gynae_background": "Enquire specifically about past pelvic inflammatory disease, tubal surgery, sterilisation reversal, and contraception failure with an intrauterine contraceptive device."
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": "Look for pallor, cold clammy extremities, and distress indicating internal haemorrhage before abdominal palpation begins.",
+        "skill.gen.vitals": "Tachycardia above 100 beats per minute and postural hypotension or blood pressure below 100/60 mmHg indicate ruptured ectopic pregnancy with hemoperitoneum."
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Pelvic and abdominal examination",
+      "skills": [
+        "skill.exam.obg.gynae_abdominal",
+        "skill.exam.obg.vulval_inspect",
+        "skill.exam.obg.speculum_insert",
+        "skill.exam.obg.speculum_inspect",
+        "skill.exam.obg.bimanual",
+        "skill.approach.obg.pelvic_close"
+      ],
+      "emphasis": {
+        "skill.exam.obg.gynae_abdominal": "Localised tenderness in the iliac fossa with voluntary guarding indicates tubal inflammation; generalised peritonism with rebound tenderness signals substantial haemoperitoneum.",
+        "skill.exam.obg.bimanual": "Cervical motion tenderness (excitation) and an exquisite adnexal mass separate from the uterus are cardinal signs; palpate very gently to avoid provoking tubal rupture."
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the ectopic picture together",
+      "skills": [
+        "skill.ectopic.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "skills": [
+        "skill.ectopic.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "skills": [
+        "skill.ectopic.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "skills": [
+        "skill.ix.ectopic.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and severity",
+      "skills": [
+        "skill.ectopic.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "skills": [
+        "skill.tx.ectopic",
+        "skill.approach.obg.team_leader",
+        "skill.annex.ectopic.staging"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "skills": [
+        "skill.present.case",
+        "skill.present.ectopic.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.ectopic.triage_resuscitate",
+        "title": "Triage and emergency resuscitation of ruptured ectopic pregnancy",
+        "task": "A 28-year-old woman is brought to the emergency department in collapse with severe lower abdominal pain and 7 weeks of amenorrhoea. Demonstrate your initial emergency assessment, resuscitation, and preparation for surgical intervention.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.gen.appearance",
+          "skill.gen.vitals",
+          "skill.approach.obg.team_leader",
+          "skill.tx.ectopic"
+        ],
+        "examinerQuestions": [
+          "The patient has a blood pressure of 80/50 mmHg and heart rate of 124 beats per minute. What are your immediate first three resuscitative actions?",
+          "Bedside FAST ultrasound reveals echogenic free fluid in the pouch of Douglas and hepatorenal space. Would you delay transfer to the operating theatre for a formal transvaginal ultrasound or serum beta-hCG?",
+          "What is the definitive surgical procedure of choice in an unstable patient with ruptured tubal pregnancy?"
+        ]
+      },
+      {
+        "id": "osce.ectopic.history_counsel",
+        "title": "Take a focused early pregnancy history and counsel on methotrexate",
+        "task": "A 26-year-old woman presents to the gynaecology outpatient clinic with 6 weeks of amenorrhoea, right-sided pelvic pain, and dark vaginal spotting. Take a focused history to evaluate for ectopic pregnancy and counsel her on medical management with methotrexate.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.obg.booking_lmp",
+          "skill.hx.obg.gynae_symptoms",
+          "skill.hx.obg.gynae_background",
+          "skill.hx.ectopic.risk",
+          "skill.tx.ectopic"
+        ],
+        "examinerQuestions": [
+          "What specific history questions would you ask to assess whether this patient is a safe candidate for medical management with methotrexate?",
+          "Explain the day 4 and day 7 beta-hCG monitoring protocol following single-dose intramuscular methotrexate.",
+          "What precautions and red-flag symptoms must you instruct the patient about while receiving outpatient methotrexate therapy?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.ectopic.basics",
+      "skill.ectopic.signs",
+      "skill.ectopic.differential",
+      "skill.ix.ectopic.workup",
+      "skill.ectopic.diagnosis",
+      "skill.tx.ectopic",
+      "skill.annex.ectopic.staging",
+      "skill.hx.ectopic.risk"
+    ]
+  },
+  "skills": {
+    "skill.ectopic.basics": {
+      "id": "skill.ectopic.basics",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Implantation sites and mechanisms of tubal damage",
+      "oneLine": "Where blastocysts lodge outside the cavity, and why the tube ruptures",
+      "why": "Understanding the anatomical sites of ectopic implantation explains why presentations differ: an ampullary pregnancy aborts into the peritoneum with subtle symptoms, an isthmic pregnancy ruptures early, and a cornual pregnancy ruptures late with catastrophic bleeding.",
+      "teach": [
+        {
+          "heading": "Anatomical sites of extrauterine implantation",
+          "body": "More than ninety-five percent of ectopic pregnancies lodge within the fallopian tube. The ampulla is the most common site, accommodating approximately seventy percent of tubal gestations due to its wide lumen.\n\nThe isthmus accounts for twelve percent; its narrow and non-distensible lumen leads to early rupture between six and eight weeks of gestation. The fimbrial end accounts for eleven percent, often terminating in tubal abortion.\n\nInterstitial or cornual implantations represent two to three percent. Because the surrounding myometrium provides initial distension, rupture occurs later, between twelve and sixteen weeks, resulting in catastrophic haemorrhage from uterine artery branches.\n\nNon-tubal gestations are rare, comprising ovarian (three percent), caesarean scar (one percent), cervical (under one percent), and abdominal pregnancies."
+        },
+        {
+          "heading": "Pathophysiology: erosion, rupture, and tubal abortion",
+          "body": "Unlike the uterus, the fallopian tube possesses no submucosa and forms little or no decidual barrier. The trophoblast invades directly into the muscular wall and penetrates blood vessels.\n\nAs the conceptus grows, blood collects within the lumen, producing haematosalpinx. Progressive distension stretches the tubal serosa, causing sharp pelvic pain.\n\nIf the gestational sac separates from the tubal wall near the fimbria, it is extruded into the peritoneal cavity as a tubal abortion, often accompanied by recurrent low-grade intra-abdominal bleeding.\n\nIf invasion erodes the tubal wall, rupture occurs. Arterial bleeding into the peritoneal cavity produces haemoperitoneum, subdiaphragmatic irritation, and hypovolaemic shock."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which part of the fallopian tube is the most frequent site of ectopic implantation?",
+          "a": "The ampulla is the most frequent site of tubal ectopic implantation, accounting for approximately seventy percent of cases.",
+          "accept": [
+            "ampulla",
+            "ampullary",
+            "fallopian",
+            "tube",
+            "tubal"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does an interstitial or cornual ectopic pregnancy rupture later than an isthmic pregnancy?",
+          "a": "The interstitial portion of the tube is surrounded by thick myometrium that accommodates greater growth before rupturing at twelve to sixteen weeks.",
+          "accept": [
+            "myometrium",
+            "thick",
+            "muscular",
+            "accommodates",
+            "growth",
+            "interstitial",
+            "cornual"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does trophoblast invasion into the fallopian tube cause rapid tissue destruction compared to intrauterine implantation?",
+          "a": "The fallopian tube lacks a protective submucosa and well-developed decidual layer, allowing trophoblastic cells to invade directly into the muscularis and blood vessels.",
+          "accept": [
+            "decidua",
+            "decidual",
+            "submucosa",
+            "protective",
+            "invade",
+            "muscularis",
+            "blood vessels"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "sites",
+          "text": "Identifies the relative frequencies of ampullary, isthmic, fimbrial and cornual ectopic pregnancies"
+        },
+        {
+          "id": "timing",
+          "text": "Correlates tubal anatomy with the timing and severity of rupture"
+        },
+        {
+          "id": "erosion",
+          "text": "Explains how the absence of a decidual barrier facilitates tubal invasion and bleeding"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "ectopic_pregnancy: pathophysiology"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Ectopic Pregnancy, Anatomy and Implantation Sites"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ectopic.signs": {
+      "id": "skill.ectopic.signs",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Clinical presentation: the classic triad, atypical masquerades, and signs of rupture",
+      "oneLine": "Recognising pelvic pain, spotting, cervical motion tenderness, and haemoperitoneum",
+      "why": "Over half of ectopic pregnancies present without the textbook triad. Recognising cervical motion tenderness, adnexal fullness, and referred shoulder tip pain saves lives before overt haemorrhagic shock supervenes.",
+      "teach": [
+        {
+          "heading": "The clinical presentation and cardinal symptoms",
+          "body": "The textbook triad consists of amenorrhoea, unilateral lower abdominal pain, and abnormal vaginal bleeding. However, fewer than fifty percent of women exhibit all three features together.\n\nAmenorrhoea of six to eight weeks is usual, but fifteen to twenty percent of women experience spotting around their expected period and report no missed menses.\n\nPain is the most consistent symptom. It typically begins as a dull, unilateral ache in the iliac fossa and progresses to sharp, colicky spasms as the tube distends.\n\nVaginal bleeding is characteristically dark brown and scanty, with a prune-juice appearance, resulting from endometrial decidual sloughing rather than active bleeding from the tube. Occasionally an intact decidual cast is expelled."
+        },
+        {
+          "heading": "Physical examination and signs of internal haemorrhage",
+          "body": "Abdominal examination reveals localised tenderness and voluntary guarding in the affected iliac fossa. Generalised peritonism with rebound tenderness suggests significant haemoperitoneum.\n\nOn pelvic examination, cervical motion tenderness (excitation or the Chandelier sign) is elicited by moving the cervix; stretching the pelvic peritoneum overlying the inflamed tube produces acute pain.\n\nA tender, boggy adnexal mass separate from the uterus is palpable in approximately half of patients. Gentle palpation is critical to prevent iatrogenic rupture.\n\nDiaphragmatic irritation from haemoperitoneum causes referred shoulder-tip pain. Blood pooling in the pouch of Douglas causes rectal pressure and tenesmus. Tachycardia above one hundred beats per minute and hypotension signify severe rupture."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the characteristic colour and origin of vaginal bleeding in ectopic pregnancy?",
+          "a": "The bleeding is characteristically dark brown and scanty, arising from endometrial decidual sloughing caused by falling hormonal support.",
+          "accept": [
+            "dark brown",
+            "scanty",
+            "decidual",
+            "endometrial",
+            "sloughing",
+            "hormonal"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the clinical significance of referred shoulder tip pain in a woman with suspected ectopic pregnancy?",
+          "a": "Referred shoulder tip pain indicates haemoperitoneum irritating the phrenic nerve endings on the undersurface of the diaphragm.",
+          "accept": [
+            "haemoperitoneum",
+            "phrenic",
+            "diaphragm",
+            "irritation",
+            "blood",
+            "free fluid"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What is cervical motion tenderness and how does it arise in tubal pregnancy?",
+          "a": "Cervical motion tenderness is severe pain produced by gentle cervical displacement, which stretches the inflamed pelvic peritoneum adjacent to the affected fallopian tube.",
+          "accept": [
+            "cervical",
+            "motion",
+            "tenderness",
+            "stretching",
+            "peritoneum",
+            "inflamed",
+            "fallopian"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "triad",
+          "text": "Lists the classical triad and notes that fewer than half of women present with all three"
+        },
+        {
+          "id": "bleeding",
+          "text": "Describes the dark brown scanty nature of decidual sloughing bleeding"
+        },
+        {
+          "id": "cervical_motion",
+          "text": "Identifies cervical motion tenderness and its peritoneal basis"
+        },
+        {
+          "id": "haemoperitoneum",
+          "text": "Recognises shoulder tip pain and tenesmus as warning signs of internal haemorrhage"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "ectopic_pregnancy: clinicalPearls"
+        },
+        {
+          "source": "NICE",
+          "locator": "NG126: Symptoms and signs of ectopic pregnancy"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ectopic.summary": {
+      "id": "skill.ectopic.summary",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Clinical summary in suspected ectopic pregnancy",
+      "oneLine": "Synthesising the clinical picture, haemodynamic state, and risk profile",
+      "why": "A concise summary in early pregnancy pain immediately separates the stable patient who can undergo transvaginal ultrasound from the woman in impending haemorrhagic shock who needs simultaneous resuscitation and theatre transfer.",
+      "teach": [
+        {
+          "heading": "Synthesising the clinical summary",
+          "body": "A structured summary synthesises six core elements: age and parity; calculated gestational age from the last menstrual period; presence of the classic triad; haemodynamic stability; localised or generalised peritoneal signs; and key predisposing risk factors.\n\nClassifying the patient as haemodynamically stable versus unstable is the single most vital operational distinction.\n\nIn a stable patient, the summary directs immediate transvaginal ultrasound and quantitative serum beta-hCG testing.\n\nIn an unstable patient, the summary establishes immediate transfer to the operating theatre with concurrent intravenous volume and blood resuscitation."
+        },
+        {
+          "heading": "Clinical triage and urgency categories",
+          "table": {
+            "cols": [
+              "Category",
+              "Clinical picture",
+              "Immediate action"
+            ],
+            "rows": [
+              [
+                "Ruptured / Unstable",
+                "Shock, peritonism, syncope, falling BP",
+                "Immediate resuscitation and emergency surgery"
+              ],
+              [
+                "Symptomatic / Stable",
+                "Pain, brown spotting, localized tenderness",
+                "Urgent transvaginal scan and baseline beta-hCG"
+              ],
+              [
+                "Asymptomatic / PUL",
+                "Positive test, no pain, empty uterus",
+                "Serial 48-hour beta-hCG tracking protocol"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the primary objective of the clinical summary in early pregnancy acute abdomen?",
+          "a": "To determine immediate haemodynamic stability and differentiate patients requiring emergency resuscitation from those safe for diagnostic imaging.",
+          "accept": [
+            "haemodynamic",
+            "hemodynamic",
+            "stability",
+            "resuscitation",
+            "imaging",
+            "triage",
+            "surgery"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What clinical features place a patient in the unstable or ruptured ectopic category?",
+          "a": "Tachycardia, hypotension, syncope, pallor, generalised peritonism, and shoulder tip pain indicative of massive internal haemorrhage.",
+          "accept": [
+            "tachycardia",
+            "hypotension",
+            "syncope",
+            "pallor",
+            "peritonism",
+            "shoulder",
+            "haemorrhage"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "structure",
+          "text": "Includes gestation, clinical triad, haemodynamic vitals, and peritoneal signs in the summary"
+        },
+        {
+          "id": "triage",
+          "text": "Categorises the patient into emergency surgical resuscitation versus diagnostic imaging pathways"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "ectopic_pregnancy: algorithms"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline No. 21: Clinical Assessment and Summary"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ectopic.differential": {
+      "id": "skill.ectopic.differential",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Differential diagnosis of first-trimester pelvic pain and bleeding",
+      "oneLine": "Distinguishing ectopic pregnancy from miscarriage, ovarian accidents, and acute appendicitis",
+      "why": "Miscarriage, ruptured corpus luteum, ovarian torsion, pelvic infection, and appendicitis all present with pelvic pain and a missed period or irregular bleeding. Distinguishing them requires correlating ultrasound morphology with the hCG level and systemic signs.",
+      "teach": [
+        {
+          "heading": "Obstetric and early pregnancy look-alikes",
+          "body": "Threatened miscarriage presents with vaginal bleeding and central cramping suprapubic pain. On ultrasound, a viable intrauterine pregnancy with a cardiac flicker is seen, and the internal cervical os remains closed.\n\nIncomplete miscarriage presents with heavy vaginal bleeding and passing of clots or tissue through an open cervical os. Ultrasound shows retained products within a distended uterine cavity.\n\nA ruptured corpus luteal cyst occurs in early pregnancy and causes sudden unilateral pelvic pain with a positive pregnancy test. On ultrasound, an intrauterine sac is visible, and the ovary displays a thick-walled vascular cyst (the ring of fire) with fluid in the cul-de-sac.\n\nHeterotopic pregnancy must be considered in women undergoing assisted reproductive technology."
+        },
+        {
+          "heading": "Gynaecological and surgical differentials",
+          "table": {
+            "cols": [
+              "Condition",
+              "Pregnancy test",
+              "Key features",
+              "Ultrasound hallmark"
+            ],
+            "rows": [
+              [
+                "Ectopic pregnancy",
+                "Positive",
+                "Unilateral pain, dark spotting, excitation",
+                "Adnexal mass separate from ovary, empty uterus"
+              ],
+              [
+                "Threatened miscarriage",
+                "Positive",
+                "Central cramping, bright bleeding, closed os",
+                "Intrauterine gestational sac with fetal cardiac flicker"
+              ],
+              [
+                "Ruptured corpus luteum",
+                "Positive",
+                "Sudden sharp pain after intercourse or exercise",
+                "Intrauterine pregnancy present, cystic ovarian mass"
+              ],
+              [
+                "Acute appendicitis",
+                "Negative",
+                "Periumbilical pain migrating to right iliac fossa",
+                "Non-compressible blind-ended tubular structure"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How does the pain of threatened miscarriage differ in location and nature from tubal ectopic pregnancy?",
+          "a": "Threatened miscarriage pain is central, suprapubic, and cramping, whereas ectopic pregnancy pain is classically unilateral, lateralised to one iliac fossa, and sharp or colicky.",
+          "accept": [
+            "central",
+            "suprapubic",
+            "unilateral",
+            "lateralised",
+            "iliac fossa",
+            "cramping",
+            "sharp"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What ultrasound finding distinguishes a ruptured corpus luteal cyst from an ectopic pregnancy?",
+          "a": "A ruptured corpus luteum cyst is located within the ovary and is typically accompanied by a normal intrauterine gestational sac, whereas an ectopic pregnancy is seen in the adnexa separate from the ovary with an empty uterus.",
+          "accept": [
+            "ovary",
+            "intrauterine",
+            "adnexa",
+            "separate",
+            "empty uterus",
+            "gestational sac"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "obstetric_ddx",
+          "text": "Differentiates threatened and incomplete miscarriage by bleeding severity and ultrasound anatomy"
+        },
+        {
+          "id": "corpus_luteum",
+          "text": "Distinguishes corpus luteum rupture from ectopic gestation by intraovarian location and intrauterine sac"
+        },
+        {
+          "id": "surgical_ddx",
+          "text": "Contrasts appendicitis and ovarian torsion using pregnancy test results and pain migration"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "ectopic_pregnancy: additionalDifferentials"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Ectopic Pregnancy, Differential Diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.ectopic.workup": {
+      "id": "skill.ix.ectopic.workup",
+      "kind": "investigation",
+      "system": "obgyn",
+      "title": "Diagnostic workup: transvaginal ultrasound, serial beta-hCG, and discriminatory zone",
+      "oneLine": "Correlating imaging features with serial biochemical markers to locate the pregnancy",
+      "why": "A single beta-hCG value never locates a pregnancy. Combining high-resolution transvaginal ultrasound with serial 48-hour beta-hCG curves identifies tubal ectopics before rupture and guides non-surgical options.",
+      "teach": [
+        {
+          "heading": "Transvaginal ultrasound landmarks and signs",
+          "body": "Transvaginal ultrasound is the primary diagnostic modality, achieving sensitivity exceeding ninety percent. Examination must evaluate both adnexa, the uterine cavity, and the pouch of Douglas.\n\nDefinitive confirmation is the visualisation of an extrauterine gestational sac containing a yolk sac or embryo with cardiac activity, separate from the ovary.\n\nThe tubal ring or bagel sign is a concentric, brightly hyperechoic ring surrounding a small gestational sac within the fallopian tube.\n\nAn inhomogeneous or complex adnexal mass (the blob sign) is the most common sonographic appearance, representing haemorrhage and trophoblast within the tube.\n\nUterine signs include an empty cavity or a pseudogestational sac, which is a centrally located fluid collection lacking the double decidual sign of true intrauterine pregnancy. Echogenic fluid in the pouch of Douglas confirms haemoperitoneum."
+        },
+        {
+          "heading": "Serial serum beta-hCG and the discriminatory zone",
+          "body": "In a viable intrauterine pregnancy, serum beta-hCG rises by more than sixty-three percent every forty-eight hours. An abnormal rise of less than sixty-three percent or a plateau indicates a non-viable pregnancy or ectopic gestation.\n\nThe discriminatory zone is the serum beta-hCG threshold above which an intrauterine gestational sac should always be visible on transvaginal ultrasound, typically between fifteen hundred and two thousand international units per litre.\n\nIf the beta-hCG is above the discriminatory zone and the uterine cavity is empty, ectopic pregnancy is presumed until proven otherwise.\n\nA pregnancy of unknown location (PUL) is diagnosed when the pregnancy test is positive but transvaginal scan demonstrates neither an intrauterine nor an extrauterine gestation. Serum beta-hCG must be repeated forty-eight hours later to calculate the percentage change."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the transvaginal ultrasound discriminatory zone for serum beta-hCG?",
+          "a": "The discriminatory zone is fifteen hundred to two thousand international units per litre, above which an intrauterine gestational sac should always be visible on transvaginal scan.",
+          "accept": [
+            "1500",
+            "2000",
+            "discriminatory zone",
+            "intrauterine",
+            "visible",
+            "transvaginal",
+            "international units"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What sonographic features differentiate a pseudogestational sac from a true early intrauterine pregnancy?",
+          "a": "A pseudogestational sac is a central fluid collection without a double decidual sign or yolk sac, whereas a true early intrauterine sac is eccentric and displays a double decidual ring.",
+          "accept": [
+            "central",
+            "double decidual",
+            "yolk sac",
+            "eccentric",
+            "pseudogestational",
+            "fluid"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How is a pregnancy of unknown location managed when initial transvaginal ultrasound is inconclusive?",
+          "a": "Serum beta-hCG is measured at baseline and repeated forty-eight hours later to determine the trajectory: a rise above sixty-three percent suggests intrauterine pregnancy, a fall above fifty percent suggests failing pregnancy, and a plateau warrants early review for ectopic.",
+          "accept": [
+            "48 hours",
+            "forty-eight",
+            "rise",
+            "fall",
+            "plateau",
+            "trajectory",
+            "beta-hCG"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "tvs_signs",
+          "text": "Identifies the tubal ring, blob sign, and live adnexal embryo on transvaginal ultrasound"
+        },
+        {
+          "id": "discriminatory_zone",
+          "text": "Defines the 1500 to 2000 IU/L discriminatory zone and interprets an empty uterus above it"
+        },
+        {
+          "id": "pul_protocol",
+          "text": "Outlines the 48-hour serial beta-hCG tracking protocol for pregnancy of unknown location"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "ectopic_pregnancy: additionalInvestigations"
+        },
+        {
+          "source": "NICE",
+          "locator": "NG126: Ultrasound and serum hCG for ectopic pregnancy"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ectopic.diagnosis": {
+      "id": "skill.ectopic.diagnosis",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Diagnostic criteria and clinical risk stratification",
+      "oneLine": "Categorising stable unruptured versus ruptured ectopic pregnancy for management",
+      "why": "Treatment selection hinges on objective criteria: haemodynamic stability, presence of cardiac activity, adnexal mass size, baseline beta-hCG, and reliable patient follow-up.",
+      "teach": [
+        {
+          "heading": "Establishing definitive diagnosis",
+          "body": "Diagnosis is established when an extrauterine gestation is visualised on transvaginal ultrasound, or when serum beta-hCG exceeds the discriminatory zone with an empty uterine cavity and compatible adnexal findings.\n\nIn ambiguous cases where ultrasound remains inconclusive and the patient is stable, serial forty-eight hour beta-hCG monitoring and clinical reassessment identify the trend.\n\nDiagnostic laparoscopy is indicated when imaging is non-diagnostic but clinical suspicion remains elevated or when acute symptoms develop during surveillance.\n\nUterine curettage to check for chorionic villi may be considered only after confirming that the pregnancy is non-viable and an intrauterine gestation has been excluded."
+        },
+        {
+          "heading": "Risk stratification and management selection criteria",
+          "table": {
+            "cols": [
+              "Pathway",
+              "Clinical requirements",
+              "Key criteria",
+              "Safety caveat"
+            ],
+            "rows": [
+              [
+                "Expectant",
+                "Clinically stable, asymptomatic",
+                "hCG falling and below 1000 IU/L, mass under 30 mm",
+                "Requires compliant patient and proximity to emergency care"
+              ],
+              [
+                "Medical (Methotrexate)",
+                "Stable, no significant pain",
+                "hCG under 1500 IU/L, mass under 35 mm, no cardiac flicker",
+                "Guaranteed attendance for day 4 and 7 monitoring"
+              ],
+              [
+                "Surgical (Laparoscopy)",
+                "Pain, mass over 35 mm, hCG over 5000",
+                "Cardiac activity present, patient preference or contraindication to methotrexate",
+                "Salpingectomy preferred if contralateral tube is healthy"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What clinical criteria must all be satisfied before choosing medical management with methotrexate?",
+          "a": "The patient must be haemodynamically stable without significant pain, have an unruptured adnexal mass below thirty-five millimetres, no fetal cardiac activity, serum beta-hCG below fifteen hundred international units, and be able to attend follow-up.",
+          "accept": [
+            "stable",
+            "haemodynamically",
+            "mass",
+            "35",
+            "thirty-five",
+            "cardiac",
+            "heartbeat",
+            "1500",
+            "follow-up"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Under what clinical circumstances is surgical management preferred as first-line therapy?",
+          "a": "Surgery is first-line when there is haemodynamic instability, severe pain, adnexal mass thirty-five millimetres or larger, visible embryonic heartbeat, serum beta-hCG five thousand international units or higher, or inability to attend follow-up.",
+          "accept": [
+            "unstable",
+            "pain",
+            "35",
+            "heartbeat",
+            "cardiac",
+            "5000",
+            "follow-up",
+            "surgery"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "dx_criteria",
+          "text": "States the imaging and biochemical thresholds required to confirm ectopic pregnancy"
+        },
+        {
+          "id": "methotrexate_criteria",
+          "text": "Details the strict safety criteria for methotrexate selection"
+        },
+        {
+          "id": "surgical_indications",
+          "text": "Lists clinical indicators mandating immediate surgical rather than medical management"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "ectopic_pregnancy: management"
+        },
+        {
+          "source": "NICE",
+          "locator": "NG126: Choosing management for tubal ectopic pregnancy"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.ectopic": {
+      "id": "skill.tx.ectopic",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Medical, surgical and emergency management of ectopic pregnancy",
+      "oneLine": "Methotrexate protocol, laparoscopic salpingectomy, and resuscitation in rupture",
+      "why": "Management must be tailored to clinical stability and fertility desires: medical management avoids surgical risks in compliant patients with small masses, while ruptured ectopic demands immediate resuscitation and operative haemostasis.",
+      "dosingNote": "This module teaches management at the level of drug class and principle, quoting only the single-dose methotrexate and anti-D regimens from the cited guidelines. All agents, doses, routes and monitoring schedules must be verified against current national and hospital protocols before administration. CliniX does not prescribe.",
+      "teach": [
+        {
+          "heading": "Medical management: the single-dose methotrexate protocol",
+          "body": "Methotrexate is a folic acid antagonist that halts trophoblast proliferation by inhibiting dihydrofolate reductase during the synthesis phase of the cell cycle.\n\nIn suitable stable patients, the standard single-dose regimen is methotrexate 50 mg/m2 body surface area administered intramuscularly on day one.\n\nBaseline complete blood count, renal function, liver enzymes, and blood group must be confirmed normal before administration.\n\nSerum beta-hCG is measured on day four and day seven. A transient rise in hCG between day one and day four is common due to trophoblastic lysis.\n\nIf the beta-hCG falls by fifteen percent or more between day four and day seven, treatment is successful, and weekly hCG measurements continue until negative (under 5 IU/L).\n\nIf the fall is less than fifteen percent, a second dose of methotrexate 50 mg/m2 or surgical intervention is indicated.\n\nPatients must avoid folic acid, non-steroidal anti-inflammatory drugs, alcohol, and sexual intercourse, and report immediate pain."
+        },
+        {
+          "heading": "Surgical management and emergency resuscitation in rupture",
+          "body": "In ruptured ectopic pregnancy or haemodynamic collapse, resuscitation and theatre transfer proceed concurrently.\n\nImmediate actions include two large-bore intravenous cannulae, rapid crystalloid infusion, crossmatching blood, and initiating the massive transfusion protocol if shock is profound.\n\nDefinitive surgery in unstable patients is emergency laparotomy or laparoscopy with total salpingectomy. Clamps are applied along the mesosalpinx from the fimbriated end to the cornua, coagulating or ligating the cornual junction.\n\nIn stable women desiring future fertility whose contralateral tube is diseased or absent, salpingotomy is considered: a 1 to 2 cm longitudinal incision is made over the antimesenteric border of the tube, products are evacuated, and haemostasis is secured.\n\nSalpingotomy carries a three to twenty percent risk of persistent trophoblast, requiring weekly beta-hCG follow-up.\n\nAll non-sensitised Rh-negative women must receive anti-D immunoglobulin (250 IU before 20 weeks) within seventy-two hours."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What percentage fall in serum beta-hCG between day four and day seven indicates successful medical management with methotrexate?",
+          "a": "A fall of fifteen percent or greater between day four and day seven indicates successful response to methotrexate.",
+          "accept": [
+            "15",
+            "fifteen",
+            "percent",
+            "fall",
+            "drop",
+            "day 4",
+            "day 7"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "When is salpingotomy chosen over salpingectomy, and what key postoperative complication must be monitored?",
+          "a": "Salpingotomy is chosen when the patient wishes to preserve fertility and the contralateral tube is damaged or absent; the patient must be monitored with serial beta-hCG for persistent trophoblast.",
+          "accept": [
+            "fertility",
+            "contralateral",
+            "damaged",
+            "absent",
+            "persistent trophoblast",
+            "beta-hCG"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What instructions must be given to a woman receiving outpatient methotrexate regarding diet and medications?",
+          "a": "She must strictly avoid folic acid supplements which counteract the drug, avoid non-steroidal anti-inflammatory drugs which can worsen bleeding and mask pain, and abstain from alcohol and sexual intercourse.",
+          "accept": [
+            "folic acid",
+            "nsaids",
+            "alcohol",
+            "intercourse",
+            "supplements",
+            "bleeding",
+            "counteract"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "mtx_protocol",
+          "text": "Details the single-dose 50 mg/m2 methotrexate protocol and day 4 and 7 beta-hCG response criteria"
+        },
+        {
+          "id": "mtx_counsel",
+          "text": "Counsels on avoiding folic acid and NSAIDs and reporting signs of rupture"
+        },
+        {
+          "id": "surgical_options",
+          "text": "Compares indications, techniques, and risks of salpingectomy versus salpingotomy"
+        },
+        {
+          "id": "resuscitation",
+          "text": "Outlines emergency ABCDE resuscitation and anti-D administration in Rh-negative patients"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "ectopic_pregnancy: management"
+        },
+        {
+          "source": "NICE",
+          "locator": "NG126: Management of tubal ectopic pregnancy"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Ectopic Pregnancy, Treatment Options"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.ectopic.staging": {
+      "id": "skill.annex.ectopic.staging",
+      "kind": "annexure",
+      "system": "obgyn",
+      "title": "Methotrexate eligibility criteria and follow-up monitoring protocol",
+      "oneLine": "Reference criteria, contraindications, and day 1 to day 7 beta-hCG response thresholds",
+      "why": "Having a structured checklist for methotrexate selection and monitoring prevents inappropriate medical therapy in high-risk patients and ensures prompt detection of treatment failure.",
+      "teach": [
+        {
+          "heading": "Checklist for methotrexate eligibility and absolute contraindications",
+          "table": {
+            "cols": [
+              "Domain",
+              "Inclusion criteria",
+              "Absolute contraindications"
+            ],
+            "rows": [
+              [
+                "Clinical status",
+                "Haemodynamically stable, minimal pain",
+                "Haemodynamic instability, severe pain, peritonism"
+              ],
+              [
+                "Ultrasound",
+                "Unruptured mass under 35 mm, no cardiac flicker",
+                "Mass 35 mm or larger, embryonic heartbeat, IUP present"
+              ],
+              [
+                "Biomarkers",
+                "Serum beta-hCG under 1500 IU/L (or under 5000)",
+                "hCG 5000 IU/L or higher with pain or mass"
+              ],
+              [
+                "Organ function",
+                "Normal baseline renal, hepatic, and haematology panels",
+                "Renal failure, liver disease, active peptic ulcer, cytopenias"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Day-by-day protocol and action thresholds",
+          "table": {
+            "cols": [
+              "Day",
+              "Investigation / Action",
+              "Interpretation",
+              "Next step"
+            ],
+            "rows": [
+              [
+                "Day 1",
+                "Baseline hCG, CBC, LFT, RFT, blood group; MTX 50 mg/m2 IM",
+                "Confirm eligibility criteria met",
+                "Administer MTX; anti-D if Rh negative"
+              ],
+              [
+                "Day 4",
+                "Serum beta-hCG",
+                "hCG often rises due to tissue lysis",
+                "Compare with day 7; do not abandon therapy"
+              ],
+              [
+                "Day 7",
+                "Serum beta-hCG",
+                "Fall of 15% or more compared to day 4",
+                "If fall >=15%, weekly hCG; if <15%, repeat MTX or operate"
+              ],
+              [
+                "Follow-up",
+                "Weekly serum beta-hCG until under 5 IU/L",
+                "Confirm complete trophoblast clearance",
+                "Early scan next pregnancy at 5 to 6 weeks"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why is a rise in serum beta-hCG between day one and day four after methotrexate not considered treatment failure?",
+          "a": "A transient rise between day one and day four is expected due to the release of hCG from lysed trophoblastic cells, which is why response is evaluated between day four and day seven.",
+          "accept": [
+            "transient",
+            "rise",
+            "lysis",
+            "lysed",
+            "release",
+            "trophoblast",
+            "day 4",
+            "day 7"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What threshold of serum beta-hCG defines complete biochemical resolution of ectopic pregnancy?",
+          "a": "Complete resolution is defined when serum beta-hCG drops to non-pregnant levels below five international units per litre.",
+          "accept": [
+            "5",
+            "five",
+            "non-pregnant",
+            "resolution",
+            "negative",
+            "under 5"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "inclusion_table",
+          "text": "Applies the eligibility criteria checklist before prescribing methotrexate"
+        },
+        {
+          "id": "monitoring_schedule",
+          "text": "Follows the day 1, 4, and 7 schedule and correctly interprets hCG trajectories"
+        },
+        {
+          "id": "resolution_endpoint",
+          "text": "Defines the non-pregnant endpoint under 5 IU/L for stopping surveillance"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "ectopic_pregnancy: management"
+        },
+        {
+          "source": "NICE",
+          "locator": "NG126: Follow-up after methotrexate"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.ectopic.priya",
+      "initialVitals": {
+        "hr": 96,
+        "bpSystolic": 112,
+        "bpDiastolic": 74,
+        "rr": 18,
+        "spo2": 99,
+        "temp": 37,
+        "gcs": 15
+      },
+      "title": "26-year-old woman with 6 weeks amenorrhoea, right pelvic pain and dark spotting",
+      "opening": "Doctor, I missed my period by nearly two weeks, and since yesterday evening I have this sharp cramping pain in my right lower abdomen along with dark brown vaginal spotting.",
+      "fallback": "I do not quite understand that question, doctor. Could you ask in another way?",
+      "patient": {
+        "name": "Priya Sharma",
+        "age": 26,
+        "sex": "female",
+        "occupation": "Primary school teacher",
+        "residence": "Jaipur, Rajasthan"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you to the hospital today",
+            "what seems to be the main trouble",
+            "tell me what happened to bring you in",
+            "why did you come to the clinic today"
+          ],
+          "reply": "Doctor, I missed my period about twelve days ago, and since yesterday evening I have this sharp cramping pain on my right lower side and some dark brown vaginal spotting."
+        },
+        "pain_onset_course": {
+          "cues": [
+            "when did the lower abdominal pain start",
+            "how did the abdominal pain begin",
+            "has the abdominal pain been getting worse",
+            "onset and duration of the pelvic pain"
+          ],
+          "reply": "It started yesterday afternoon as a dull ache in my right lower side, but overnight it became much sharper and came in cramps that made it hard to sleep."
+        },
+        "pain_character_site": {
+          "cues": [
+            "where exactly is the abdominal pain located",
+            "what kind of pain is it feeling like",
+            "describe the nature of the lower abdominal pain",
+            "is the pain sharp or cramping or dull"
+          ],
+          "reply": "The pain is mostly in my right lower abdomen, right inside the hip bone. It feels like a severe sharp stitch that throbs and cramps every few minutes."
+        },
+        "pain_radiation_shoulder": {
+          "cues": [
+            "does the abdominal pain radiate anywhere else",
+            "do you feel pain in the tip of your shoulder",
+            "any pain spreading to your shoulder or upper back",
+            "shoulder pain when lying down flat"
+          ],
+          "reply": "No, doctor, I do not have any pain in my shoulders or upper back right now, it is staying down in my lower right side."
+        },
+        "vaginal_bleeding_details": {
+          "cues": [
+            "tell me about the vaginal bleeding you noticed",
+            "how much vaginal bleeding has there been",
+            "what colour is the vaginal discharge or bleeding",
+            "are you passing clots or fleshy pieces of tissue"
+          ],
+          "reply": "It is very light, just spotting that stained my clothes dark brown, almost like dried prune juice or coffee grounds. I have not passed any large red clots or pieces of fleshy tissue."
+        },
+        "amenorrhoea_lmp_dates": {
+          "cues": [
+            "when was the first day of your last menstrual period",
+            "how many days has your menstrual period been delayed",
+            "are your monthly menstrual periods normally regular",
+            "did you have a normal period last month"
+          ],
+          "reply": "My last normal period started exactly six weeks ago, on the twelfth of last month. My cycle is usually very regular every twenty-eight days, so I am about twelve days overdue."
+        },
+        "pregnancy_test_done": {
+          "cues": [
+            "have you done a urine pregnancy test at home",
+            "did you check a pregnancy test kit at home",
+            "was the home urine pregnancy test positive",
+            "result of the home urine pregnancy test"
+          ],
+          "reply": "Yes, doctor, when my period was five days late I used a home urine pregnancy kit and saw two distinct pink lines. We have been hoping for a baby, so we were very happy until this pain began."
+        },
+        "fainting_dizziness_syncope": {
+          "cues": [
+            "have you felt dizzy or lightheaded at any point",
+            "did you faint or pass out or lose consciousness",
+            "any dizziness when standing up from bed",
+            "feeling giddy or blacking out recently"
+          ],
+          "reply": "When I stood up quickly this morning I felt a bit unsteady and weak, but I did not black out or fall to the ground."
+        },
+        "gastrointestinal_rectal_symptoms": {
+          "cues": [
+            "any pain when opening your bowels",
+            "pain on defecation or rectal pressure sensation",
+            "any loose motions diarrhoea or vomiting spells",
+            "feeling of rectal tenesmus or fullness in the back passage"
+          ],
+          "reply": "I felt a heavy dragging pressure when I tried to pass motion this morning, which felt uncomfortable, but I have not had any loose motions or vomiting."
+        },
+        "urinary_symptoms": {
+          "cues": [
+            "any burning or stinging sensation when passing urine",
+            "pain on urination or having to pass urine frequently",
+            "any difficulty passing urine or urinary urgency",
+            "blood in the urine or dysuria symptoms"
+          ],
+          "reply": "No burning at all, doctor. I am passing urine normally without any pain or blood."
+        },
+        "contraceptive_details": {
+          "cues": [
+            "what contraception have you been using recently",
+            "did you have a copper t or intrauterine device inserted",
+            "any oral contraceptive pills or morning after pills",
+            "history of intrauterine contraceptive device use"
+          ],
+          "reply": "We were not using any contraception because we were actively trying to conceive. I had a Copper-T intrauterine device removed eight months ago after using it for three years."
+        },
+        "prior_ectopic_tubal_surgery": {
+          "cues": [
+            "have you ever had an ectopic pregnancy in the past",
+            "any past surgery on your fallopian tubes or ovaries",
+            "history of tubal surgery laparoscopy or sterilisation",
+            "past ectopic pregnancy or surgery for ovarian cyst"
+          ],
+          "reply": "No, I have never had an ectopic pregnancy before, and I have never had any operation on my tubes, ovaries, or appendix."
+        },
+        "past_infections_pid": {
+          "cues": [
+            "have you had any pelvic infections in the past",
+            "history of pelvic inflammatory disease or abnormal discharge",
+            "treated for vaginal infection or pelvic infection previously",
+            "prior episodes of lower abdominal pain accompanied by fever"
+          ],
+          "reply": "Two years ago I had an episode of foul vaginal discharge and lower abdominal pain with low fever. The doctor said it was a pelvic infection and gave me two weeks of antibiotic tablets which cured it."
+        },
+        "obstetric_history": {
+          "cues": [
+            "have you been pregnant before this time",
+            "any previous deliveries miscarriages or abortions",
+            "details of your past pregnancy history",
+            "gravida and parity obstetric details"
+          ],
+          "reply": "This is my second pregnancy. Four years ago I had a normal vaginal delivery of a healthy baby boy who is now four years old. I have never had a miscarriage."
+        },
+        "medical_and_drug_history": {
+          "cues": [
+            "do you have any regular medical conditions",
+            "are you taking any regular medications or supplements",
+            "history of liver disease kidney trouble or asthma",
+            "any known drug allergies or medicine reactions"
+          ],
+          "reply": "I am completely healthy with no diabetes, asthma, liver, or kidney problems. I only take folic acid tablets. I am not allergic to any medicines."
+        },
+        "fertility_treatment": {
+          "cues": [
+            "did you take medicines to help you conceive",
+            "any assisted reproductive treatment or ivf procedures",
+            "fertility treatment or ovulation induction injections",
+            "were you trying to conceive with fertility medicines"
+          ],
+          "reply": "No, doctor, we conceived naturally at home without any fertility injections, tablets, or IVF procedures."
+        },
+        "family_and_social_background": {
+          "cues": [
+            "anyone in your family with similar pregnancy problems",
+            "do you smoke cigarettes or use tobacco products",
+            "who is at home supporting you today",
+            "social support living situation and family history"
+          ],
+          "reply": "No one in my family had an ectopic pregnancy. I do not smoke, chew tobacco, or drink alcohol. My husband is waiting outside in the clinic corridor."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Alert, slightly pale young woman in mild to moderate abdominal discomfort, lying with hips slightly flexed; no jaundice, cyanosis, or peripheral oedema.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 96 beats per minute, regular, normal volume; blood pressure 112/74 mmHg supine, 108/70 mmHg sitting; respiratory rate 18 breaths per minute; temperature 37.0 C; room air oxygen saturation 99%.",
+          "abnormal": true
+        },
+        "skill.exam.obg.gynae_abdominal": {
+          "finding": "Abdomen soft, not distended; marked localised tenderness on deep palpation in the right iliac fossa with mild voluntary guarding; no rebound tenderness; no generalised rigidity; bowel sounds audible and normal.",
+          "abnormal": true
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "finding": "Normal external female genitalia; small amount of dark brownish blood trickling from the introitus; no active bright red haemorrhage.",
+          "abnormal": true
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "finding": "Cervix appears normal, external os closed, dark brownish blood in the posterior fornix with no active arterial bleeding, no products of conception protruding through the cervical os.",
+          "abnormal": true
+        },
+        "skill.exam.obg.bimanual": {
+          "finding": "Exquisite cervical motion tenderness (excitation positive) on moving the cervix; uterus normal to slightly enlarged (~6 weeks size), soft, anteverted; tender, ill-defined boggy mass palpable in the right adnexa measuring approximately 3 cm, separate from the ovary; left adnexa non-tender; pouch of Douglas mildly tender without bulging.",
+          "abnormal": true
+        },
+        "skill.ectopic.signs": {
+          "finding": "Classic presentation of unruptured tubal ectopic pregnancy: amenorrhoea of 6 weeks, right iliac fossa tenderness with cervical motion tenderness, and dark vaginal spotting without frank peritonism or shock.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "urine_hcg",
+        "serum_beta_hcg",
+        "transvaginal_usg",
+        "cbc_hb",
+        "blood_group_rh"
+      ],
+      "investigations": {
+        "urine_hcg": {
+          "label": "Urine pregnancy test",
+          "result": "Positive (strong positive line)",
+          "note": "Confirms presence of urinary hCG at >=25 mIU/mL."
+        },
+        "serum_beta_hcg": {
+          "label": "Serum quantitative beta-hCG",
+          "result": "1,240 mIU/mL",
+          "note": "Baseline level below the transvaginal ultrasound discriminatory zone (1,500 mIU/mL); requires 48-hour repeat to assess trajectory if imaging is non-definitive."
+        },
+        "transvaginal_usg": {
+          "label": "Transvaginal pelvic ultrasonography (TVS)",
+          "result": "Empty endometrial cavity with thickened decidual reaction (endometrial thickness 11 mm) and no intrauterine gestational sac. Well-defined hyperechoic tubal ring (bagel sign) in the right adnexa measuring 28 mm x 22 mm, separate from the right ovary, containing a small gestational sac with yolk sac but no visible embryo or cardiac activity. Left ovary and tube normal. Small amount of free fluid (depth 12 mm) in the pouch of Douglas.",
+          "note": "Confirms right unruptured tubal ectopic pregnancy below 35 mm without cardiac activity."
+        },
+        "cbc_hb": {
+          "label": "Complete blood count",
+          "result": "Haemoglobin 11.8 g/dL, haematocrit 35.2%, total leukocyte count 7,800/mcL, platelets 245,000/mcL",
+          "note": "Baseline haematology normal; no acute anaemia or severe leukocytosis."
+        },
+        "blood_group_rh": {
+          "label": "Blood group and Rh typing",
+          "result": "B Rh-negative",
+          "note": "Rh-negative status mandates anti-D immunoglobulin (250 IU) administration within 72 hours."
+        },
+        "lft_rft": {
+          "label": "Liver and renal function tests",
+          "result": "Serum creatinine 0.7 mg/dL, blood urea 22 mg/dL; AST 24 U/L, ALT 22 U/L, total bilirubin 0.6 mg/dL",
+          "note": "Normal hepatic and renal function fulfills baseline safety criteria for methotrexate therapy."
+        },
+        "coagulation_profile": {
+          "label": "Coagulation profile (PT/INR/aPTT)",
+          "result": "PT 12.0 seconds (INR 1.0), aPTT 28 seconds",
+          "note": "Normal baseline haemostasis."
+        }
+      },
+      "differentialModel": {
+        "answer": "Right unruptured tubal ectopic pregnancy at 6 weeks gestation. Differential diagnoses include threatened or incomplete miscarriage, ruptured corpus luteum cyst, acute pelvic inflammatory disease, ovarian torsion, and acute appendicitis.",
+        "accept": [
+          "ectopic pregnancy",
+          "threatened abortion",
+          "ruptured ovarian cyst",
+          "acute pelvic inflammatory disease",
+          "ovarian torsion",
+          "acute appendicitis"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Right unruptured tubal ectopic pregnancy at 6 weeks gestation in a B Rh-negative woman.",
+        "accept": [
+          "ectopic pregnancy",
+          "tubal pregnancy"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Admit for observation and evaluation. Administer single-dose intramuscular methotrexate 50 mg/m2 after confirming normal baseline hepatic and renal parameters. Administer anti-D immunoglobulin 250 IU for Rh-negative status within 72 hours. Measure repeat serum beta-hCG on day 4 and day 7. Counsel on warning symptoms of tubal rupture, avoiding NSAIDs, pelvic rest, and surgical escalation to laparoscopic salpingectomy if pain worsens or hCG fails to drop by 15% between day 4 and day 7.",
+        "accept": [
+          "intramuscular methotrexate",
+          "serial beta-hCG monitoring",
+          "rhesus immunoglobulin",
+          "laparoscopic salpingectomy",
+          "transvaginal ultrasound",
+          "blood group and crossmatch"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "Assume any woman of reproductive age presenting with abdominal pain, amenorrhoea and abnormal vaginal bleeding has an ectopic pregnancy until proven otherwise.",
+        "Transvaginal ultrasound combined with serial quantitative serum beta-hCG is the diagnostic cornerstone; an empty uterine cavity above the discriminatory zone (1,500 to 2,000 mIU/mL) strongly indicates ectopic pregnancy.",
+        "Single-dose intramuscular methotrexate (50 mg/m2) is first-line for suitable stable unruptured ectopic pregnancies with hCG under 1,500 IU/L, mass size under 35 mm, absent embryonic cardiac activity, and guaranteed patient compliance.",
+        "All non-sensitised Rh-negative women with ectopic pregnancy must receive anti-D immunoglobulin prophylaxis within 72 hours."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

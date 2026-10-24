@@ -19109,6 +19109,678 @@
       ],
       "title": "Presenting the child with pneumonia",
       "why": "The consultant judges this case on whether classification and plan arrive together: the counted rate with its cutoff, indrawing and danger signs, then severe pneumonia or pneumonia with home or hospital in the same breath. A presentation that lists signs without classifying describes the child but leaves the listener unable to act."
+    },
+    "skill.approach.paed.immunisation_counsel": {
+      "id": "skill.approach.paed.immunisation_counsel",
+      "kind": "approach",
+      "system": "paediatrics",
+      "title": "Paediatric immunisation counselling and addressing vaccine hesitancy",
+      "oneLine": "Structured parental counselling on vaccine schedules, benefits, minor adverse events, and addressing safety concerns",
+      "why": "Vaccine hesitancy often stems from fear of adverse events or conflicting misinformation. Empathetic, structured communication establishing vaccine benefits, expected minor reactions, and contraindication facts preserves immunisation coverage and protects children from vaccine-preventable diseases.",
+      "steps": [
+        {
+          "text": "Greet the parents respectfully, introduce yourself, and create an unhurried, supportive environment."
+        },
+        {
+          "text": "Elicit specific parental concerns, doubts, or previous adverse experiences with vaccination using open-ended questions."
+        },
+        {
+          "text": "Acknowledge and validate parental emotions empathetically without adopting an argumentative or dismissive tone."
+        },
+        {
+          "text": "Inspect the child's Mother and Child Protection card to verify age, previous doses, and currently due vaccines."
+        },
+        {
+          "text": "Explain the protective benefits of the scheduled vaccines in simple, accessible, non-technical language."
+        },
+        {
+          "text": "Discuss common expected minor adverse events such as low-grade fever, irritability, and local tenderness, advising on paracetamol use."
+        },
+        {
+          "text": "Clarify false contraindications including mild colds, low-grade fever, diarrhoea, and malnutrition to prevent missed opportunities."
+        },
+        {
+          "text": "Explain urgent danger signs requiring immediate return, such as high fever, persistent crying for over three hours, or lethargy."
+        },
+        {
+          "text": "Confirm parental understanding, obtain consent, record the next due date on the card, and thank the family warmly."
+        }
+      ],
+      "practice": "Practise a five-minute counselling session with a hesitant parent worried about post-vaccine fever following pentavalent vaccine, using the presumptive communication approach.",
+      "pitfalls": [
+        "Dismissing parental concerns as unscientific, which damages rapport and drives parents toward complete vaccine refusal.",
+        "Failing to warn parents about expected mild fever or pain, leading to anxiety and loss of confidence in the healthcare system.",
+        "Cancelling vaccination for minor illnesses like common colds or teething, resulting in missed immunisation opportunities.",
+        "Omitting clear written and verbal return instructions for the next scheduled dose on the immunisation card."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What common mild adverse events should parents be warned about after routine pentavalent vaccination?",
+          "a": "Mild fever, irritability, and transient pain, redness, or swelling at the injection site lasting one to two days.",
+          "accept": [
+            "fever",
+            "pain",
+            "swelling",
+            "redness",
+            "irritability"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Name two common false contraindications to childhood vaccination that frequently cause missed opportunities.",
+          "a": "Minor respiratory infections with low fever, mild diarrhoea, malnutrition, and a stable neurological history.",
+          "accept": [
+            "cold",
+            "cough",
+            "diarrhoea",
+            "fever",
+            "malnutrition",
+            "mild illness"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What constitutes an absolute contraindication to administering a subsequent dose of a vaccine?",
+          "a": "An immediate severe anaphylactic reaction or acute encephalopathy within seven days following a previous dose.",
+          "accept": [
+            "anaphylaxis",
+            "allergic reaction",
+            "encephalopathy",
+            "severe allergy"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "How should a clinician address a parent who refuses vaccination due to false rumours regarding autism?",
+          "a": "Validate the parent's protective intent, explain that comprehensive international research has thoroughly disproved any link between MMR and autism, and outline the severe risks of measles outbreaks.",
+          "accept": [
+            "empathy",
+            "autism",
+            "disproved",
+            "measles",
+            "evidence",
+            "validate"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "establish_rapport",
+          "text": "Greets parents respectfully, introduces self, and establishes a supportive dialogue"
+        },
+        {
+          "id": "explore_concerns",
+          "text": "Elicits specific doubts, fears, and previous experiences regarding vaccination through open questions"
+        },
+        {
+          "id": "validate_emotions",
+          "text": "Validates parental concerns empathetically without arguing or showing frustration"
+        },
+        {
+          "id": "review_mcp_card",
+          "text": "Inspects the immunisation record or Mother and Child Protection card to verify due vaccines",
+          "critical": true
+        },
+        {
+          "id": "explain_benefits",
+          "text": "Explains the protection and disease-preventing benefits offered by the due vaccines in clear language"
+        },
+        {
+          "id": "anticipate_aefi",
+          "text": "Counsels on expected mild adverse events including low fever, local tenderness, and paracetamol use",
+          "critical": true
+        },
+        {
+          "id": "clarify_myths",
+          "text": "Dispels false contraindications such as minor cough, low fever, or teething",
+          "critical": true
+        },
+        {
+          "id": "red_flag_warnings",
+          "text": "Outlines emergency danger signs requiring immediate medical contact (high fever, persistent crying, lethargy)",
+          "critical": true
+        },
+        {
+          "id": "next_appointment",
+          "text": "Records the date and vaccines for the next visit clearly on the card and confirms understanding"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Communication strategy for vaccine hesitancy",
+          "body": "Vaccine hesitancy represents a continuum between complete acceptance and outright refusal. Parents often delay vaccines because of alarming reports seen online or heard from peers.\n\nClinicians must adopt an open, empathetic approach. Validating the parent's protective intent before providing factual information builds trust. Dismissive communication increases resistance and drives parents toward total refusal."
+        },
+        {
+          "heading": "Differentiating true contraindications from harmless myths",
+          "body": "The majority of conditions cited by hesitant parents or misinformed health workers are not valid contraindications. Mild upper respiratory infections, low-grade fever under 38.5 C, mild diarrhoea, malnutrition, and stable neurological conditions are false contraindications.\n\nTrue contraindications are few: severe anaphylaxis to a prior dose or constituent, and severe immunosuppression for live attenuated vaccines."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "immunology_rheumatology_children_long_case: Immunisation schedule and parental counselling"
+        },
+        {
+          "source": "Indian Academy of Pediatrics",
+          "locator": "Guidebook on Immunization: Addressing Vaccine Hesitancy"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.approach.paed.ors_counsel_prep": {
+      "id": "skill.approach.paed.ors_counsel_prep",
+      "kind": "approach",
+      "system": "paediatrics",
+      "title": "Oral rehydration solution preparation, counselling, and fluid management",
+      "oneLine": "Correct reconstitution of low-osmolarity ORS, dosage explanation, feeding advice, and home fluid education",
+      "why": "Incorrect reconstitution of ORS powder with inappropriate water volumes produces hypernatraemic dehydration or ineffective rehydration. Clear maternal counselling on preparation, administration rate, and zinc supplementation prevents hospitalisation and reduces mortality from acute gastroenteritis.",
+      "steps": [
+        {
+          "text": "Greet the mother, explain the essential role of oral rehydration solution in replacing fluid lost through watery diarrhoea, and reassure her."
+        },
+        {
+          "text": "Wash hands thoroughly with soap and clean water before demonstrating solution preparation."
+        },
+        {
+          "text": "Show the standard packet of WHO low-osmolarity ORS and check the packet integrity and expiry date."
+        },
+        {
+          "text": "Measure exactly one litre of clean drinking water (boiled and cooled water if safety is uncertain) into a clean vessel."
+        },
+        {
+          "text": "Empty the entire packet of ORS powder into the measured litre of water; do not mix partial packets in smaller amounts of water."
+        },
+        {
+          "text": "Stir the solution with a clean spoon until all powder dissolves completely and the liquid becomes clear."
+        },
+        {
+          "text": "Instruct the mother to give the solution with a clean cup and spoon in small, frequent sips, rather than using a feeding bottle."
+        },
+        {
+          "text": "Explain management if the child vomits: wait ten minutes, then resume offering ORS slowly, one teaspoonful every one to two minutes."
+        },
+        {
+          "text": "Advise the mother to continue frequent breastfeeding and age-appropriate feeding throughout the diarrhoeal episode without dilution."
+        },
+        {
+          "text": "Counsel on zinc supplementation (20 mg daily for infants older than 6 months for 14 days) and explain that prepared ORS must be discarded after 24 hours."
+        }
+      ],
+      "practice": "Demonstrate the step-by-step reconstitution of a one-litre ORS sachet and counsel a simulated mother on volume requirements and feeding continuation during diarrhoea.",
+      "pitfalls": [
+        "Mixing only part of an ORS sachet into an unmeasured cup of water, causing dangerous hypernatraemic dehydration.",
+        "Boiling the reconstituted ORS solution, which alters electrolyte stability and precipitates mineral salts.",
+        "Administering ORS with a feeding bottle and teat instead of a cup and spoon, increasing aerophagia and bacterial contamination.",
+        "Withholding food or breast milk during the diarrhoeal episode, which worsens intestinal mucosal atrophy and precipitates malnutrition.",
+        "Storing reconstituted ORS at room temperature for more than 24 hours, permitting significant bacterial proliferation."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What volume of clean water must be used to dissolve a standard full packet of WHO low-osmolarity ORS?",
+          "a": "Exactly one litre of clean drinking water.",
+          "accept": [
+            "one litre",
+            "1 litre",
+            "1000 ml",
+            "1 l"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "How long can reconstituted ORS solution be safely kept before it must be discarded?",
+          "a": "It must be discarded after 24 hours because of the risk of bacterial contamination.",
+          "accept": [
+            "24 hours",
+            "one day",
+            "twenty four hours"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why is oral zinc supplementation recommended for 14 days in acute childhood diarrhoea?",
+          "a": "Zinc reduces the duration and severity of the diarrhoeal episode, repairs mucosal integrity, and prevents recurrences over the following two to three months.",
+          "accept": [
+            "duration",
+            "severity",
+            "mucosa",
+            "recurrence",
+            "reduces",
+            "months"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 4,
+          "q": "What dangerous metabolic complication occurs if a mother adds an entire packet of ORS powder to only one cup of water?",
+          "a": "Hypernatraemic dehydration, which can lead to intracranial haemorrhage, brain oedema, convulsions, and permanent neurological injury.",
+          "accept": [
+            "hypernatraemia",
+            "hypernatremic",
+            "sodium",
+            "convulsions",
+            "seizures",
+            "brain",
+            "haemorrhage"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "hand_hygiene",
+          "text": "Washes hands thoroughly with soap and clean water before handling equipment",
+          "critical": true
+        },
+        {
+          "id": "check_packet",
+          "text": "Inspects the WHO low-osmolarity ORS packet for integrity, expiry date, and instructions"
+        },
+        {
+          "id": "measure_one_litre",
+          "text": "Measures exactly one litre of clean drinking water into a clean container",
+          "critical": true
+        },
+        {
+          "id": "mix_full_packet",
+          "text": "Pours the entire sachet of ORS into the full litre and stirs until completely dissolved",
+          "critical": true
+        },
+        {
+          "id": "demonstrate_cup_spoon",
+          "text": "Demonstrates feeding with a clean cup and spoon rather than a bottle or teat"
+        },
+        {
+          "id": "manage_vomiting",
+          "text": "Explains that if the child vomits, wait 10 minutes and then resume ORS slowly by spoonfuls",
+          "critical": true
+        },
+        {
+          "id": "continue_feeding",
+          "text": "Emphasises continuous breastfeeding and uninterrupted feeding during the diarrhoeal episode",
+          "critical": true
+        },
+        {
+          "id": "zinc_and_shelf_life",
+          "text": "Prescribes zinc for 14 days and instructs the mother to discard leftover prepared ORS after 24 hours",
+          "critical": true
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Principles of low-osmolarity oral rehydration",
+          "body": "The World Health Organization low-osmolarity ORS formulation has an osmolarity of 245 mOsm/L, containing 75 mEq/L sodium and 75 mmol/L glucose.\n\nCoupled sodium-glucose transport across the intestinal brush border remains intact during secretory diarrhoea. Glucose facilitates sodium absorption, which draws water along an osmotic gradient. Low-osmolarity solution reduces stool output, shortens vomiting, and eliminates unscheduled intravenous therapy."
+        },
+        {
+          "heading": "Practical counselling points for mothers",
+          "body": "Measurement accuracy is vital. Adding powder to insufficient water causes severe hypernatraemia, while excess water dilutes electrolytes. The entire packet must be mixed in exactly one litre of water.\n\nFeeding must continue during rehydration. Fasting compromises enterocyte repair and precipitates malnutrition. Frequent breastfeeding should continue on demand, and zinc must be given daily for 14 days."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "diarrhoea_dehydration_children_long_case: Oral rehydration salt solution preparation and dosage"
+        },
+        {
+          "source": "WHO",
+          "locator": "The Treatment of Diarrhoea: A manual for physicians and other senior health workers"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.paed.imnci_danger_signs": {
+      "id": "skill.exam.paed.imnci_danger_signs",
+      "kind": "exam",
+      "system": "paediatrics",
+      "title": "IMNCI general danger signs assessment and emergency triage",
+      "oneLine": "Rapid systematic evaluation for inability to drink, vomiting everything, convulsions, and lethargy or unconsciousness",
+      "why": "The presence of any single general danger sign categorises the child as severely ill under IMNCI guidelines, mandating urgent pre-referral treatment, stabilisation, and immediate referral to a hospital facility.",
+      "steps": [
+        {
+          "text": "Observe the child without touching to evaluate spontaneous responsiveness, resting posture, and eye contact."
+        },
+        {
+          "text": "Ask the mother: Is the child able to drink or breastfeed?"
+        },
+        {
+          "text": "Offer the child clean water or breast milk directly to observe whether the child is able to suckle or swallow."
+        },
+        {
+          "text": "Ask the mother: Does the child vomit everything that is eaten or drunk?"
+        },
+        {
+          "text": "Check if the child vomits immediately following fluid intake or exhibits persistent effortless emesis."
+        },
+        {
+          "text": "Ask the mother: Has the child had convulsions or fits during this current illness?"
+        },
+        {
+          "text": "Assess the child's level of consciousness: determine whether the child is abnormally sleepy, difficult to wake, or completely unarousable."
+        },
+        {
+          "text": "If not awake, check if the child opens eyes or responds to voice or gentle tactile stimulation."
+        },
+        {
+          "text": "Check for emergency signs: obstructed breathing, severe respiratory distress, central cyanosis, cold extremities, or capillary refill over 3 seconds."
+        },
+        {
+          "text": "Categorise the child immediately and initiate emergency pre-referral measures including airway clearance, warming, and urgent transport."
+        }
+      ],
+      "normal": "Alert, attentive child who makes eye contact, drinks eagerly or suckles well, retains feeds without vomiting, with no history of convulsions, and arouses normally.",
+      "abnormal": "Inability to drink or suckle, vomiting everything, convulsions during current illness, lethargy, or unconsciousness.",
+      "significance": "Any one general danger sign indicates high risk of rapid mortality from sepsis, severe pneumonia, meningitis, or decompensated shock, requiring urgent pre-referral treatment and emergency referral.",
+      "practice": "Rapidly screen a paediatric patient in the casualty triage area for the four IMNCI general danger signs within two minutes.",
+      "pitfalls": [
+        "Relying solely on maternal assertion that the child cannot drink without personally offering fluids or breast milk to observe swallowing.",
+        "Mistaking a sleeping healthy child for a lethargic child without attempting gentle awakening.",
+        "Failing to ask specifically about seizures that occurred at home before arrival at the clinic.",
+        "Delaying urgent pre-referral treatment and hospital transfer while waiting for non-essential investigations."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the four IMNCI general danger signs in a child aged 2 months to 5 years?",
+          "a": "Inability to drink or breastfeed, vomiting everything, convulsions during this illness, and lethargy or unconsciousness.",
+          "accept": [
+            "drink",
+            "breastfeed",
+            "vomit",
+            "convulsions",
+            "lethargy",
+            "unconscious"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "How should a healthcare worker verify if a child is unable to drink or breastfeed?",
+          "a": "Offer the child clean water in a cup or ask the mother to breastfeed, and observe if the child is too weak to suck or swallow.",
+          "accept": [
+            "offer",
+            "water",
+            "breastfeed",
+            "observe",
+            "swallow",
+            "cup",
+            "suck"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What distinguishes lethargy from normal sleepiness in an acutely ill child?",
+          "a": "A normally sleeping child wakes with voice or gentle touch and becomes interactive, whereas a lethargic child does not look at the parent or clinician, appears drowsy, and shows no interest in surroundings.",
+          "accept": [
+            "wakes",
+            "arousal",
+            "interactive",
+            "surroundings",
+            "drowsy",
+            "interest"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 4,
+          "q": "If an 8-month-old infant with high fever has had two convulsions at home and is now lethargic, what immediate pre-referral actions must be taken before transfer?",
+          "a": "Ensure airway patency, administer oxygen, give a first dose of intramuscular antibiotic, and treat hypoglycaemia or provide oral sugar water.",
+          "accept": [
+            "airway",
+            "oxygen",
+            "antibiotic",
+            "ceftriaxone",
+            "glucose",
+            "sugar",
+            "hypoglycaemia"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "initial_observation",
+          "text": "Observes the child's alert state and interaction before touching or disturbing the patient"
+        },
+        {
+          "id": "check_drinking",
+          "text": "Asks if the child can drink or suckle and directly offers water or breast milk to observe swallowing",
+          "critical": true
+        },
+        {
+          "id": "check_vomiting",
+          "text": "Inquires specifically whether the child vomits everything ingested",
+          "critical": true
+        },
+        {
+          "id": "check_convulsions",
+          "text": "Asks whether the child had convulsions or seizures during the present illness",
+          "critical": true
+        },
+        {
+          "id": "assess_sensorium",
+          "text": "Determines whether the child is lethargic or unconscious by attempting verbal and tactile arousal",
+          "critical": true
+        },
+        {
+          "id": "screen_emergency_signs",
+          "text": "Screens for immediate emergency signs including stridor, severe retractions, and prolonged capillary refill",
+          "critical": true
+        },
+        {
+          "id": "classify_severe",
+          "text": "Correctly identifies any danger sign and classifies the child as severely ill",
+          "critical": true
+        },
+        {
+          "id": "pre_referral_actions",
+          "text": "Initiates urgent pre-referral stabilisation (warming, airway, oxygen, first antibiotic dose) and arranges transport",
+          "critical": true
+        }
+      ],
+      "teach": [
+        {
+          "heading": "The IMNCI triage framework",
+          "body": "The Integrated Management of Childhood Illness (IMNCI) protocol uses a colour-coded syndromic approach to triage sick children aged 2 months to 5 years.\n\nThe initial assessment always checks for the four general danger signs. A child with any danger sign has a high probability of severe infection, septicaemic shock, meningitis, or cerebral malaria, and is classified in the red row, requiring urgent hospital admission."
+        },
+        {
+          "heading": "Immediate pre-referral stabilization",
+          "body": "When a general danger sign is identified, transfer must not be delayed. However, essential pre-referral treatments significantly improve survival during transport.\n\nKey interventions include clearing secretions, providing supplemental oxygen if cyanosed, administering a first dose of recommended parenteral antibiotic, preventing hypothermia by wrapping, and preventing hypoglycaemia with breast milk or sugar solution."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_respiratory_infections_children_long_case: IMNCI general danger signs and emergency triage"
+        },
+        {
+          "source": "WHO",
+          "locator": "Integrated Management of Childhood Illness (IMNCI): Chart Booklet - General Danger Signs"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.paed.development_screening": {
+      "id": "skill.exam.paed.development_screening",
+      "kind": "exam",
+      "system": "paediatrics",
+      "title": "Developmental screening and milestone examination across four domains",
+      "oneLine": "Objective clinical elicitation of gross motor, fine motor, language, and personal-social milestones using standard screening tools",
+      "why": "Parental reporting can understate or overstate developmental progress. Direct observational screening with age-appropriate test items (such as red ring, wooden cubes, and small pellets) objectively verifies milestone acquisition and pinpoints domain-specific deficits.",
+      "steps": [
+        {
+          "text": "Establish rapport with the child and mother in a quiet, non-threatening room with adequate illumination."
+        },
+        {
+          "text": "Calculate the child's exact chronological age and adjust for gestational prematurity if born before 37 weeks."
+        },
+        {
+          "text": "Observe spontaneous behaviour: posture, mobility, eye contact, curiosity, vocalisation, and interaction with the caregiver."
+        },
+        {
+          "text": "Test gross motor milestones: evaluate head control, sitting balance, crawling, pulling to stand, standing unsupported, and walking according to age."
+        },
+        {
+          "text": "Test fine motor and adaptive skills: present a red ring or rattle, offer 2.5 cm wooden cubes, and test for transfer, tower building, and neat pincer grasp using a raisin or small pellet."
+        },
+        {
+          "text": "Assess personal and social skills: check for social smile, recognition of mother, response to mirror, waving bye-bye, and cooperative play."
+        },
+        {
+          "text": "Assess language and communication: evaluate response to voice, sound localisation, babbling, receptive vocabulary, and expressive words or sentences."
+        },
+        {
+          "text": "Screen for red-flag developmental signs: absent neck holding at 5 months, unable to sit without support at 9 months, not walking at 18 months, or absent words at 18 months."
+        },
+        {
+          "text": "Note any hand dominance before 18 months (suggesting contralateral hemiparesis) and verify that previously acquired milestones have not been lost."
+        },
+        {
+          "text": "Explain findings clearly to the parents, provide positive reinforcement, and outline developmental stimulation guidance or referral if delay is identified."
+        }
+      ],
+      "normal": "Milestones achieved within the normal age windows across all four domains, with symmetric limb use and steady developmental progress.",
+      "abnormal": "Failure to achieve key milestones by age limits, delay across two or more domains (global developmental delay), loss of previously attained skills, or early hand preference before 18 months.",
+      "significance": "Early identification of developmental delay enables timely intervention, specialist referral, and neurodevelopmental therapy when neuroplasticity is maximal.",
+      "practice": "Perform a structured developmental screen on a 12-month-old infant, testing gross motor stability, neat pincer grasp, and response to name.",
+      "pitfalls": [
+        "Failing to calculate corrected gestational age in infants born preterm, falsely diagnosing developmental delay.",
+        "Conducting the examination when the child is hungry, fatigued, or distressed, leading to uncooperative refusal and false negative testing.",
+        "Ignoring early hand preference before 18 months, missing early spastic hemiplegic cerebral palsy.",
+        "Overlooking milestone regression, which points to neurodegenerative or metabolic storage disease rather than static encephalopathy."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "By what age should an infant sit unsupported without falling, and what is the red-flag cut-off?",
+          "a": "Normal sitting without support occurs at 8 months; failure to sit unsupported by 9 to 10 months is a developmental red flag.",
+          "accept": [
+            "8 months",
+            "eight months",
+            "9 months",
+            "10 months",
+            "red flag"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What does the development of an apparent hand preference in an infant under one year of age suggest?",
+          "a": "It suggests pathological weakness or spasticity of the contralateral hand, such as in hemiplegic cerebral palsy, because handedness normally develops after 18 to 24 months.",
+          "accept": [
+            "hemiplegia",
+            "cerebral palsy",
+            "weakness",
+            "contralateral",
+            "pathological",
+            "spasticity"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Explain the difference between a crude pincer grasp and a neat pincer grasp, and give the typical ages of attainment.",
+          "a": "Crude or inferior pincer grasp uses the pad of the thumb against the pad of the index finger at 9 months, whereas neat or fine pincer grasp uses the tip of the thumb against the tip of the index finger at 12 months.",
+          "accept": [
+            "pad",
+            "tip",
+            "9 months",
+            "12 months",
+            "thumb",
+            "index"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 4,
+          "q": "A 2-year-old child who previously spoke twenty words and ran steadily now stumbles, has stopped speaking, and does not respond to his name. How does this presentation differ prognostically from static developmental delay?",
+          "a": "This represents neurodevelopmental regression, indicating a progressive neurodegenerative condition, inborn error of metabolism, or subacute panencephalitis, which carries a guarded prognosis and requires urgent metabolic and neurological investigation rather than simple rehabilitation.",
+          "accept": [
+            "regression",
+            "neurodegenerative",
+            "metabolic",
+            "progressive",
+            "storage",
+            "prognosis"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "calculate_corrected_age",
+          "text": "Calculates exact chronological age and adjusts for gestational prematurity if applicable",
+          "critical": true
+        },
+        {
+          "id": "assess_gross_motor",
+          "text": "Directly observes and tests age-appropriate gross motor milestones including posture, sitting, and walking",
+          "critical": true
+        },
+        {
+          "id": "test_fine_motor_pincer",
+          "text": "Tests fine motor-adaptive skills using cubes, ring, or pellets to evaluate grasp, transfer, and pincer grasp",
+          "critical": true
+        },
+        {
+          "id": "evaluate_social_skills",
+          "text": "Observes personal-social interaction including eye contact, smiling, waving bye-bye, or interactive play"
+        },
+        {
+          "id": "assess_speech_language",
+          "text": "Tests receptive and expressive language milestones from babbling to vocabulary and phrase speech"
+        },
+        {
+          "id": "screen_red_flags",
+          "text": "Actively checks for domain-specific red flags such as absent sitting at 9 months or absent walking at 18 months",
+          "critical": true
+        },
+        {
+          "id": "check_asymmetry_regression",
+          "text": "Examines for limb movement asymmetry, early hand preference, and verifies absence of regression",
+          "critical": true
+        },
+        {
+          "id": "counsel_and_plan",
+          "text": "Communicates findings empathetically to the parent and outlines home stimulation or referral plan"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Principles of objective developmental screening",
+          "body": "Development progresses in an orderly cephalocaudal and proximodistal sequence. While parent questionnaires provide helpful screening, direct observation is essential to verify skill quality.\n\nTesting must be conducted when the child is calm, fed, and rested, seated comfortably on the parent's lap. The examiner begins with less threatening observation before introducing test objects like rattles, cubes, and pellets."
+        },
+        {
+          "heading": "Developmental red flags requiring prompt intervention",
+          "body": "Red flags represent the outer limits of normal milestone attainment beyond which pathological delay is highly probable.\n\nMajor red flags include: absent neck holding by 5 months, inability to sit without support by 10 months, inability to stand with support by 12 months, not walking independently by 18 months, lack of single words by 18 months, and persistent primitive reflexes beyond 6 months."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "growth_short_stature_long_case: Developmental screening and milestone assessment"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Growth, Development, and Behavior: Developmental Assessment"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }

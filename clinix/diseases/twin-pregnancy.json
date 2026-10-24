@@ -1,0 +1,1360 @@
+{
+  "_comment": "Obstetrics pathway: Twin pregnancy. Chorionicity, complications, delivery. Focuses on first-trimester chorionicity determination, maternal and fetal complications, twin-to-twin transfusion syndrome, selective fetal growth restriction, surveillance protocols, and intrapartum conduct.",
+  "id": "twin-pregnancy",
+  "name": "Twin pregnancy",
+  "fullName": "Twin gestation and multifetal pregnancy",
+  "subtitle": "Chorionicity, complications, delivery",
+  "system": "obgyn",
+  "kbRef": "twin_twin_transfusion_syndrome",
+  "oneLine": "Multifetal gestation, first-trimester chorionicity determination, twin-specific complications, surveillance and delivery",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "Zygosity, chorionicity, amnionicity, and the biological timeline of twinning division",
+      "skills": [
+        "skill.twin.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Communication, dignity, comfort, and positioning for the multifetal obstetric examination",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age, parity, assisted conception background, and early risk stratification",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In multifetal pregnancy, maternal age, parity, conception history (spontaneous conception vs ovulation induction or assisted reproductive technology), and family history of dizygotic twinning provide early clues to zygosity and clinical risk."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of the present pregnancy",
+      "blurb": "Dates, exaggerated early symptoms, hyperemesis, and bilateral fetal movements",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.booking_lmp"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Exaggerated symptoms of early pregnancy including hyperemesis gravidarum, severe nausea, marked fatigue, rapid abdominal enlargement, and early sensation of fetal movements across both flanks should prompt immediate consideration of multifetal gestation."
+        },
+        "skill.hx.obg.booking_lmp": {
+          "expect": "Accurate menstrual dates and early first-trimester ultrasound dating are paramount in twin pregnancy to determine true gestational age before discordance or growth restriction evolves."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "Fertility treatments, family twinning, medical disorders, and nutritional status",
+      "skills": [
+        "skill.hx.obg.previous_pregnancies",
+        "skill.hx.obg.medical_family_drug",
+        "skill.hx.twin.risk"
+      ],
+      "emphasis": {
+        "skill.hx.twin.risk": {
+          "expect": "Probe ovulation induction, IVF, maternal family history of twins, prior preterm birth, hypertensive disorders, and current nutrition. Women carrying twins face heightened risks of pre-eclampsia, gestational diabetes, severe anaemia, and preterm labour."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Severe pallor, blood pressure tracking, and dependent versus pre-eclamptic oedema",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for severe conjunctival and mucosal pallor because physiological anaemia is markedly accentuated by increased plasma volume and heightened fetal iron demand in twin gestation. Assess nutritional status and respiratory effort."
+        },
+        "skill.gen.vitals": {
+          "expect": "Measure blood pressure with appropriate cuff size. Twin pregnancies carry a three-to-four-fold increased risk of gestational hypertension and pre-eclampsia developing at earlier gestations than singleton pregnancies."
+        },
+        "skill.gen.edema": {
+          "expect": "Distinguish dependent ankle oedema caused by mechanical venous compression from rapid-onset facial and hand oedema heralding pre-eclampsia, and assess together with blood pressure and proteinuria."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Obstetric abdominal examination",
+      "blurb": "Fundal height exceeding dates, multiple fetal poles, and two distinct heart rates",
+      "skills": [
+        "skill.exam.obg.preg_prep_inspect",
+        "skill.exam.obg.fundal_height",
+        "skill.exam.obg.leopold",
+        "skill.exam.obg.fetal_heart"
+      ],
+      "emphasis": {
+        "skill.exam.obg.fundal_height": {
+          "expect": "In twin gestation, the symphysis-fundal height and abdominal girth exceed gestational age by 4 cm or more after 20 weeks. Record the discrepancy and verify whether dates are accurate."
+        },
+        "skill.exam.obg.leopold": {
+          "expect": "Careful palpation reveals multiple fetal poles: palpating two distinct fetal heads, multiple fetal limbs on both flanks, or three or more fetal poles strongly supports multifetal pregnancy."
+        },
+        "skill.exam.obg.fetal_heart": {
+          "expect": "Auscultate two distinct fetal heart sounds at two separate sites on the maternal abdomen, simultaneously with the maternal radial pulse. A difference of at least 10 to 15 beats per minute between the two fetal hearts counted concurrently confirms multifetal gestation."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the twin pregnancy picture together",
+      "blurb": "Synthesising physical signs, growth concordance, and clinical presentation",
+      "skills": [
+        "skill.twin.findings"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Formulating the concise three-sentence multifetal obstetric summary",
+      "skills": [
+        "skill.twin.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Systematically evaluating causes of a uterus measuring larger than dates",
+      "skills": [
+        "skill.twin.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations and chorionicity assessment",
+      "blurb": "First-trimester ultrasound signs, biometry discordance, Doppler, and CTG",
+      "skills": [
+        "skill.ix.twin.workup",
+        "skill.ix.obg.ctg_interpretation"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and chorionicity classification",
+      "blurb": "Diagnostic formulation, Quintero staging, and screening for twin complications",
+      "skills": [
+        "skill.twin.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Management, surveillance and delivery",
+      "blurb": "Chorionicity-guided ultrasound protocols, TTTS laser surgery, and birth planning",
+      "skills": [
+        "skill.tx.twin",
+        "skill.annex.twin.quintero"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Presenting the complete twin pregnancy pathway to an obstetric consultant",
+      "skills": [
+        "skill.present.twin.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.twin.abdominal_exam",
+        "title": "Obstetric abdominal examination in suspected twin pregnancy",
+        "task": "A 24-year-old primigravida presents at 30 weeks gestation for routine antenatal review. Her symphysis-fundal height appears significantly larger than dates. Perform an obstetric abdominal examination to assess fundal height, palpate fetal parts, and auscultate the fetal heart rate(s). Present your clinical findings and initial diagnostic impression to the examiner.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.exam.obg.preg_prep_inspect",
+          "skill.exam.obg.fundal_height",
+          "skill.exam.obg.leopold",
+          "skill.exam.obg.fetal_heart"
+        ],
+        "examinerQuestions": [
+          "You measured the symphysis-fundal height at 36 cm at 30 weeks gestation. What physical signs on Leopold manoeuvres point specifically to a multifetal gestation rather than polyhydramnios alone?",
+          "How did you differentiate the fetal heart sounds of two fetuses from maternal vessels and from each other?",
+          "What ultrasound finding in the first trimester is the single most important determinant of pregnancy surveillance and perinatal prognosis?",
+          "Twin A is presenting cephalic and Twin B is breech at 34 weeks. What initial advice do you give regarding the planned mode of delivery?"
+        ]
+      },
+      {
+        "id": "osce.twin.history_counsel",
+        "title": "History taking and chorionicity counselling in twin pregnancy",
+        "task": "A 28-year-old woman at 14 weeks gestation has been diagnosed with a monochorionic diamniotic (MCDA) twin pregnancy on her first-trimester scan. Take a focused history exploring conception, symptoms and risk factors, explain the meaning of chorionicity, counsel her regarding ultrasound surveillance intervals and danger signs, and address her concerns.",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.obg.booking_lmp",
+          "skill.hx.twin.risk",
+          "skill.tx.twin"
+        ],
+        "examinerQuestions": [
+          "Why is determining chorionicity between 11 and 14 weeks significantly more accurate than in the third trimester?",
+          "What specific ultrasound surveillance schedule is mandated for uncomplicated monochorionic diamniotic twins, and what condition are you screening for?",
+          "The woman asks whether she should be placed on complete bed rest and prophylactic tocolysis to prevent preterm birth. What evidence-based guidance do you provide?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.twin.basics",
+      "skill.hx.twin.risk",
+      "skill.twin.findings",
+      "skill.twin.differential",
+      "skill.ix.twin.workup",
+      "skill.twin.diagnosis",
+      "skill.tx.twin",
+      "skill.annex.twin.quintero"
+    ]
+  },
+  "skills": {
+    "skill.twin.basics": {
+      "id": "skill.twin.basics",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Basics of Multifetal Pregnancy, Zygosity and Chorionicity",
+      "oneLine": "Biological origins, zygosity vs chorionicity, twinning division timeline, and placental vascular architecture",
+      "why": "Understanding the distinction between zygosity (genetic origin) and chorionicity (placental architecture) is fundamental in obstetrics. While zygosity determines whether twins are identical or fraternal, chorionicity dictates virtually all fetal risks, surveillance protocols, and clinical outcomes. Monochorionic twins carry a three-to-five-fold higher risk of perinatal mortality and severe morbidity compared to dichorionic twins due to shared placental vascular connections.",
+      "teach": [
+        {
+          "heading": "Zygosity versus Chorionicity",
+          "body": "Multifetal pregnancy occurs in approximately 1 in 80 spontaneous pregnancies, with rates rising with assisted reproductive technology. Zygosity refers to genetic constitution: dizygotic twins result from fertilisation of two separate ova by two sperm, whereas monozygotic twins arise from a single fertilised ovum that subsequently cleaves.\n\nAll dizygotic twins have separate placentas and amniotic sacs and are invariably dichorionic diamniotic (DCDA). In monozygotic twins, chorionicity and amnionicity depend entirely on the timing of zygotic division, ranging from dichorionic diamniotic to monochorionic diamniotic, monochorionic monoamniotic, and conjoined twins."
+        },
+        {
+          "heading": "Timing of Twinning Division",
+          "table": {
+            "cols": [
+              "Division timing",
+              "Chorionicity and amnionicity",
+              "Proportion of monozygotic",
+              "Placental architecture"
+            ],
+            "rows": [
+              [
+                "Days 0 to 3 (morula)",
+                "Dichorionic diamniotic (DCDA)",
+                "25 to 30 percent",
+                "Two separate placentas (or fused) and two chorions"
+              ],
+              [
+                "Days 4 to 8 (blastocyst)",
+                "Monochorionic diamniotic (MCDA)",
+                "70 to 75 percent",
+                "One shared placenta, one chorion, two amniotic sacs"
+              ],
+              [
+                "Days 8 to 12 (implanted)",
+                "Monochorionic monoamniotic (MCMA)",
+                "1 to 2 percent",
+                "One placenta, one chorion, single shared amniotic sac"
+              ],
+              [
+                "After day 13 (embryonic disc)",
+                "Conjoined twins",
+                "Less than 1 percent",
+                "Incompletely divided embryonic disc with shared organs"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Clinical Significance of Chorionicity",
+          "body": "Chorionicity, not zygosity, governs clinical management. Monochorionic placentas possess shared vascular anastomoses connecting the fetal circulations. These vascular connections can cause haemodynamic imbalance, leading to twin-to-twin transfusion syndrome, selective fetal growth restriction, and twin anaemia-polycythaemia sequence.\n\nBecause chorionicity dictates the frequency of ultrasound surveillance and the timing of delivery, early ultrasound determination of chorionicity in the first trimester is the single most critical step in twin antenatal care."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What determines chorionicity and amnionicity in monozygotic twin gestations?",
+          "a": "The timing of cleavage of the fertilised ovum: division within days 0 to 3 yields dichorionic diamniotic twins, days 4 to 8 yields monochorionic diamniotic, days 8 to 12 yields monochorionic monoamniotic, and after day 13 results in conjoined twins.",
+          "accept": [
+            "timing of cleavage",
+            "timing of division",
+            "days",
+            "cleavage"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why is chorionicity more clinically relevant to the obstetrician than zygosity?",
+          "a": "Chorionicity determines placental vascular architecture. Monochorionic twins share a single placenta with vascular anastomoses, predisposing to unique complications like twin-to-twin transfusion syndrome, twin anaemia-polycythaemia sequence, and acute co-twin demise upon single fetal death, requiring intensive fortnightly surveillance.",
+          "accept": [
+            "vascular anastomoses",
+            "twin-to-twin transfusion",
+            "TTTS",
+            "monochorionic",
+            "surveillance"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Are all dichorionic twins dizygotic?",
+          "a": "No. While all dizygotic twins are dichorionic, approximately 25 to 30 percent of monozygotic twins divide within the first 3 days after fertilisation and are also dichorionic diamniotic.",
+          "accept": [
+            "No",
+            "monozygotic",
+            "25 to 30",
+            "3 days"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "zygosity_chorionicity_distinction",
+          "text": "Explains difference between genetic zygosity and placental chorionicity"
+        },
+        {
+          "id": "division_timeline",
+          "text": "Outlines developmental cleavage timing from morula to blastocyst"
+        },
+        {
+          "id": "monochorionic_risk_rationale",
+          "text": "Articulates vascular anastomotic risks that mandate intensified monitoring"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "twin_twin_transfusion_syndrome: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Multifetal Gestation: Pathogenesis and Placentation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.twin.findings": {
+      "id": "skill.twin.findings",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Clinical Signs and Physical Diagnosis of Multifetal Pregnancy",
+      "oneLine": "Uterus larger than dates, palpation of multiple fetal poles, and simultaneous auscultation of two distinct heart rates",
+      "why": "Although ultrasound is the diagnostic gold standard, clinical suspicion of multiple pregnancy from physical examination remains vital, particularly in peripheral and resource-limited settings. Recognizing a uterine size exceeding dates, multiple fetal poles, and two distinct fetal heart rates prompts timely referral for ultrasound confirmation and avoids missing high-risk multifetal gestations.",
+      "teach": [
+        {
+          "heading": "Uterine Enlargement Exceeding Dates",
+          "body": "The classic physical sign of multifetal pregnancy is a symphysis-fundal height that exceeds gestational age by 4 cm or more after 20 weeks. Maternal abdominal girth is correspondingly increased, and early pregnancy symptoms such as nausea, vomiting, and fatigue are often markedly accentuated due to higher circulating beta-hCG and human placental lactogen.\n\nWhenever fundal height exceeds dates, the clinician must systematically distinguish multiple gestation from polyhydramnios, incorrect menstrual dates, full maternal bladder, macrosomia, and concurrent pelvic tumours such as uterine fibroids or ovarian cysts."
+        },
+        {
+          "heading": "Palpation of Multiple Fetal Poles",
+          "body": "Leopold manoeuvres in advanced multifetal pregnancy frequently reveal an abundance of fetal parts. Palpating two distinct, hard, rounded, ballotable fetal poles (fetal heads) in different uterine poles or quadrants is virtually diagnostic of multifetal gestation.\n\nSimilarly, palpating three or more fetal poles (for instance, two heads and one breech, or one head and two breeches) or identifying multiple small fetal limbs on both lateral sides of the maternal abdomen confirms the presence of more than one fetus."
+        },
+        {
+          "heading": "Simultaneous Auscultation of Two Fetal Hearts",
+          "body": "Auscultation of two distinct fetal hearts provides definitive clinical confirmation. Two observers listen simultaneously at two separate sites on the maternal abdomen using Pinnard stethoscopes or Doppler transducers, while simultaneously palpating the maternal radial pulse.\n\nTo confirm multifetal pregnancy, the two fetal heart sounds must be separated by an area of silence or distinct attenuation, and their rates must differ by at least 10 to 15 beats per minute when counted synchronously for one full minute."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What clinical discrepancy in fundal height should raise suspicion of a multiple gestation?",
+          "a": "A symphysis-fundal height that exceeds calculated gestational age by 4 cm or more after 20 weeks.",
+          "accept": [
+            "4 cm",
+            "exceeds dates",
+            "20 weeks",
+            "discrepancy"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "How is clinical confirmation of two fetal hearts achieved on physical examination?",
+          "a": "By two observers simultaneously counting the fetal heart rates at two distinct abdominal sites with stethoscopes or Doppler while palpating the maternal radial pulse; a difference of at least 10 to 15 beats per minute confirms two separate fetuses.",
+          "accept": [
+            "simultaneously",
+            "two observers",
+            "10 to 15",
+            "maternal pulse",
+            "separate sites"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What physical examination findings on abdominal palpation strongly suggest twins?",
+          "a": "Palpating two distinct hard ballotable fetal heads, identifying three or more fetal poles, or feeling multiple fetal limbs bilaterally on both flanks of the uterus.",
+          "accept": [
+            "two heads",
+            "three poles",
+            "fetal poles",
+            "multiple limbs",
+            "bilateral"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "fundal_height_discrepancy",
+          "text": "Identifies fundal height exceeding dates by 4 cm or more"
+        },
+        {
+          "id": "palpation_multiple_poles",
+          "text": "Palpates two fetal heads or three or more distinct fetal poles"
+        },
+        {
+          "id": "dual_fetal_heart_auscultation",
+          "text": "Auscultates two distinct fetal heart rates differing by at least 10 to 15 bpm"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "twin_twin_transfusion_syndrome: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Multifetal Gestation: Clinical Signs and Physical Examination"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.twin.summary": {
+      "id": "skill.twin.summary",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Structuring the Multifetal Pregnancy Clinical Summary",
+      "oneLine": "Parity, confirmed dates, chorionicity, fetal presentations, growth concordance, and complication status",
+      "why": "A disciplined obstetric case summary synthesises maternal parity, gestational age, chorionicity, fetal presentations, growth concordance, and maternal or fetal complications into a structured problem formulation. In multiple pregnancy, concise articulation of chorionicity and complications immediately guides the multidisciplinary care team and delivery plan.",
+      "teach": [
+        {
+          "heading": "Essential Components of the Obstetric Summary",
+          "body": "The summary of a multifetal pregnancy must communicate five essential elements in logical order: maternal demographic particulars and verified gestational age, chorionicity and amnionicity established on early scan, presentation and lie of each fetus (especially Twin A), growth concordance and amniotic fluid volume, and any maternal or fetal complications.\n\nAlways state whether chorionicity is monochorionic or dichorionic upfront, as this single distinction informs whether the pregnancy requires standard care or intense specialist surveillance for vascular complications."
+        },
+        {
+          "heading": "Standard Three-Sentence Formulation",
+          "points": [
+            "Sentence 1 (Core Identity): State age, gravidity, parity, exact gestational age based on reliable first-trimester scan, and chorionicity with amnionicity (for example, a 26-year-old primigravida at 28 weeks with a monochorionic diamniotic twin pregnancy).",
+            "Sentence 2 (Fetal Status): Summarise lie and presentation of Twin A and Twin B, growth concordance or discordance percentage, and amniotic fluid adequacy in each sac.",
+            "Sentence 3 (Maternal and Complication Status): State maternal blood pressure, presence or absence of pre-eclampsia, anaemia, gestational diabetes, preterm labour, and any twin-specific complications such as TTTS or sFGR."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why must chorionicity be stated in the very first sentence of a twin pregnancy case summary?",
+          "a": "Because chorionicity determines placental anatomy and fetal risk stratification, dictating whether the pregnancy is at risk for shared vascular complications such as TTTS and requiring fortnightly versus monthly surveillance.",
+          "accept": [
+            "chorionicity",
+            "risk stratification",
+            "TTTS",
+            "vascular complications",
+            "surveillance"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What presentation details regarding Twin A and Twin B must be highlighted in the summary?",
+          "a": "The presentation and lie of Twin A (the lower twin presenting to the internal os) must be highlighted because it dictates the feasibility of vaginal birth versus caesarean section, along with the presentation of Twin B.",
+          "accept": [
+            "Twin A",
+            "presentation",
+            "vaginal birth",
+            "caesarean",
+            "route of delivery"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "core_demographic_chorionicity",
+          "text": "Opens with parity, exact gestational age, and clear chorionicity statement"
+        },
+        {
+          "id": "fetal_status_discordance",
+          "text": "Summarises Twin A/B presentations, growth concordance, and amniotic fluid"
+        },
+        {
+          "id": "maternal_fetal_complications",
+          "text": "Concludes with maternal hypertensive, glycaemic, and vascular complication status"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "twin_twin_transfusion_syndrome: clinicalPearls"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Monochorionic Twin Pregnancy: Antenatal Assessment and Documentation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.twin.differential": {
+      "id": "skill.twin.differential",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Differential Diagnosis of Uterine Size Larger than Dates",
+      "oneLine": "Multiple pregnancy, wrong dates, polyhydramnios, fibroids, macrosomia, and hydatidiform mole",
+      "why": "A uterus measuring larger than dates is one of the commonest clinical triggers for obstetric referral. The clinician must systematically consider both physiological and pathological etiologies, distinguishing multifetal gestation from amniotic fluid abnormalities, pelvic masses, and altered fetal growth, while using bedside clinical clues and ultrasound to confirm the diagnosis.",
+      "teach": [
+        {
+          "heading": "Diagnostic Categories for Uterus Exceeding Dates",
+          "body": "When symphysis-fundal height exceeds gestational age by 4 cm or more, the differential diagnosis divides into four clinical categories: multifetal gestation, errors in gestational dating, amniotic fluid excess (polyhydramnios), and pelvic masses or macrosomia coexisting with pregnancy.\n\nThe commonest innocent explanation is inaccurate menstrual history, where conception occurred earlier than recalled or the recorded bleeding episode was first-trimester implantation bleeding rather than a true menstrual period."
+        },
+        {
+          "heading": "Differentiating Multiple Pregnancy from Clinical Mimics",
+          "table": {
+            "cols": [
+              "Condition",
+              "Palpation findings",
+              "Fetal heart auscultation",
+              "Ultrasound hallmark"
+            ],
+            "rows": [
+              [
+                "Multifetal pregnancy",
+                "Multiple fetal poles, two heads, small parts on both flanks",
+                "Two distinct heart rates differing by >= 10 to 15 bpm",
+                "Two or more gestational sacs, distinct embryos, dividing membrane"
+              ],
+              [
+                "Polyhydramnios",
+                "Tense cystic uterus, fluid thrill, difficult to palpate fetal parts",
+                "Single fetal heart, often muffled through deep fluid",
+                "Single fetus, amniotic fluid index >= 24 cm, deepest pool >= 8 cm"
+              ],
+              [
+                "Inaccurate menstrual dates",
+                "Uterus matches advanced maturity, single fetal pole",
+                "Single fetal heart heard clearly at expected site",
+                "Single fetus with biometric measurements matching older gestation"
+              ],
+              [
+                "Uterine fibroid in pregnancy",
+                "Asymmetric, firm, non-tender or tender mass distinct from fetus",
+                "Single fetal heart auscultated in normal location",
+                "Fetus with separate well-circumscribed hypoechoic myometrial mass"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Trophoblastic Disease and Fetal Macrosomia",
+          "body": "Complete or partial hydatidiform mole can cause rapid early uterine enlargement with markedly elevated beta-hCG and severe hyperemesis, but lacks fetal heart sounds or fetal poles, showing a classic snowstorm pattern on ultrasound. Later in gestation, maternal diabetes may cause fetal macrosomia, with a single large fetus and normal or increased liquor."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the commonest reason for a uterus measuring larger than dates in routine antenatal clinic?",
+          "a": "Inaccurate menstrual dates or mistaken last menstrual period is the commonest cause, followed by multifetal gestation and polyhydramnios.",
+          "accept": [
+            "inaccurate dates",
+            "wrong dates",
+            "mistaken LMP",
+            "menstrual dates"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "How do physical findings distinguish severe polyhydramnios from a twin pregnancy?",
+          "a": "Polyhydramnios presents with a tense, fluid-distended uterus with a positive fluid thrill, muffled fetal heart sounds, and difficulty palpating fetal poles, whereas twins exhibit multiple easily palpable poles and two distinct heart rates.",
+          "accept": [
+            "fluid thrill",
+            "tense",
+            "muffled",
+            "fetal poles",
+            "two heart rates"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What features on pelvic examination and ultrasound help identify a fibroid complicating pregnancy?",
+          "a": "Physical examination often reveals an asymmetric, firm nodular contour distinct from the uterus, while ultrasound demonstrates a distinct myometrial mass with characteristic acoustic shadowing separate from the gestational sac.",
+          "accept": [
+            "asymmetric",
+            "nodular",
+            "firm",
+            "myometrial mass",
+            "acoustic shadowing"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "differential_categorisation",
+          "text": "Categorises causes into multifetal, fluid excess, dating error, and pelvic mass"
+        },
+        {
+          "id": "physical_sign_distinction",
+          "text": "Distinguishes multiple poles and dual hearts from fluid thrills or fibroid masses"
+        },
+        {
+          "id": "ultrasound_confirmation",
+          "text": "Explains sonographic confirmation of twin sacs versus polyhydramnios or fibroids"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "twin_twin_transfusion_syndrome: additionalDifferentials"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Multifetal Gestation: Differential Diagnosis of Uterine Enlargement"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.twin.workup": {
+      "id": "skill.ix.twin.workup",
+      "kind": "investigation",
+      "system": "obgyn",
+      "title": "Ultrasound Evaluation and First-Trimester Chorionicity Determination",
+      "oneLine": "First-trimester lambda and T-sign, dividing membrane thickness, biometry discordance, and Doppler assessment",
+      "why": "Ultrasound is the cornerstone of multifetal pregnancy management. First-trimester ultrasound between 11+0 and 13+6 weeks achieves greater than 99 percent accuracy in assigning chorionicity and amnionicity. Establishing chorionicity early directs the frequency of surveillance, enables early detection of TTTS, and guides screening for aneuploidy and congenital malformations.",
+      "teach": [
+        {
+          "heading": "First-Trimester Chorionicity Determination (11 to 14 Weeks)",
+          "body": "Chorionicity is determined with highest accuracy between 11 and 13+6 weeks (crown-rump length 45 to 84 mm). The primary sonographic signs are the number of placental masses, the lambda (twin peak) sign versus the T-sign at the inter-twin membrane insertion, and the thickness of the dividing membrane.\n\nTwo completely separate placental masses or discordant fetal sex on later imaging definitively indicates dichorionic pregnancy. When placentas are adjacent or fused, the membrane-placenta junction must be scrutinised."
+        },
+        {
+          "heading": "The Lambda Sign versus the T-Sign",
+          "body": "The lambda (twin peak) sign represents a triangular wedge of chorionic villi extending between the two layers of amnion and chorion at the placental base, diagnostic of dichorionic diamniotic (DCDA) gestation. The dividing membrane in DCDA is thick, measuring greater than 2 mm, composed of four layers (two amnions and two chorions).\n\nThe T-sign is formed by the perpendicular abutment of the thin inter-twin membrane directly against the single placental surface without intervening chorionic tissue, diagnostic of monochorionic diamniotic (MCDA) gestation. The membrane is translucent and thin, measuring less than 2 mm."
+        },
+        {
+          "heading": "Assessing Growth Discordance and Doppler Surveillance",
+          "body": "Fetal biometry (head circumference, abdominal circumference, and femur length) calculates estimated fetal weight (EFW) for each twin. Growth discordance is calculated as: (larger twin weight minus smaller twin weight) divided by larger twin weight, multiplied by 100.\n\nA discordance of 20 to 25 percent or more is abnormal. Doppler assessment of the umbilical artery pulsatility index, middle cerebral artery peak systolic velocity, and ductus venosus a-wave evaluates fetal hemodynamic status and placental resistance."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the optimal gestational window for sonographic determination of chorionicity in twins?",
+          "a": "Between 11 weeks and 13 weeks plus 6 days (crown-rump length 45 to 84 mm), when the lambda sign or T-sign is clearest.",
+          "accept": [
+            "11 to 13",
+            "11 to 14",
+            "first trimester",
+            "crown-rump length"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What is the lambda sign and what does its presence indicate?",
+          "a": "A triangular wedge of chorionic tissue protruding into the base of the inter-twin dividing membrane at the placental junction, indicating a dichorionic pregnancy.",
+          "accept": [
+            "triangular",
+            "chorionic tissue",
+            "twin peak",
+            "dichorionic",
+            "DCDA"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How is inter-twin growth discordance mathematically calculated on ultrasound?",
+          "a": "Discordance percentage = [(Estimated fetal weight of larger twin - Estimated fetal weight of smaller twin) / Estimated fetal weight of larger twin] x 100. A discordance of 20 percent or greater is clinically significant.",
+          "accept": [
+            "larger twin",
+            "difference",
+            "percentage",
+            "20 percent"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "chorionicity_timing",
+          "text": "Names the 11 to 14 week first-trimester window for accurate chorionicity"
+        },
+        {
+          "id": "lambda_t_sign_distinction",
+          "text": "Contrasts the lambda sign of DCDA with the T-sign of MCDA gestation"
+        },
+        {
+          "id": "growth_discordance_calculation",
+          "text": "Calculates percentage growth discordance and interprets Doppler parameters"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "twin_twin_transfusion_syndrome: additionalInvestigations"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Management of Monochorionic Twin Pregnancy: Ultrasound and Chorionicity"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.twin.diagnosis": {
+      "id": "skill.twin.diagnosis",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Diagnosis, Staging and Recognition of Twin Complications",
+      "oneLine": "Complete diagnostic formulation, TTTS diagnostic criteria, and differentiating TTTS from sFGR and TAPS",
+      "why": "Accurate diagnosis of multifetal pregnancy requires defining chorionicity, amnionicity, and systematically screening for twin-specific and general obstetric complications. Monochorionic gestations require vigilant surveillance to detect twin-to-twin transfusion syndrome, selective fetal growth restriction, and twin anaemia-polycythaemia sequence before irreversible damage occurs.",
+      "teach": [
+        {
+          "heading": "Complete Diagnostic Formulation",
+          "body": "An obstetric diagnosis in multifetal pregnancy is never simply 'twin pregnancy'. It must specify: zygosity/chorionicity (monochorionic diamniotic, dichorionic diamniotic, or monochorionic monoamniotic), exact gestational age, presentation of Twin A and Twin B, growth status (concordant versus discordant growth), and presence or absence of maternal and fetal complications.\n\nMaternal complications include pre-eclampsia, gestational diabetes, hyperemesis, anaemia, and preterm labour. Fetal complications include TTTS, sFGR, TAPS, and congenital anomalies."
+        },
+        {
+          "heading": "Pathophysiology and Diagnosis of TTTS",
+          "body": "Twin-to-twin transfusion syndrome affects 10 to 15 percent of monochorionic diamniotic pregnancies. It results from unbalanced chronic net blood flow from a donor fetus to a recipient fetus through deep arteriovenous vascular anastomoses on the shared placental surface.\n\nSonographic diagnosis requires two concurrent criteria: oligohydramnios in the donor twin (deepest vertical pool < 2 cm) and polyhydramnios in the recipient twin (deepest vertical pool > 8 cm before 20 weeks, or > 10 cm after 20 weeks). Growth discordance is common but not part of the diagnostic definition."
+        },
+        {
+          "heading": "Differentiating TTTS from sFGR and TAPS",
+          "table": {
+            "cols": [
+              "Condition",
+              "Amniotic fluid volume",
+              "Bladder visibility",
+              "Doppler and MCA findings"
+            ],
+            "rows": [
+              [
+                "Twin-to-twin transfusion syndrome (TTTS)",
+                "Discordant: donor DVP < 2 cm, recipient DVP > 8 cm",
+                "Collapsed or absent in donor, distended in recipient",
+                "Abnormal umbilical artery/ductus venosus Doppler with disease progression"
+              ],
+              [
+                "Selective fetal growth restriction (sFGR)",
+                "Normal or mildly decreased in small twin; no polyhydramnios",
+                "Bladder visible in both twins",
+                "Severely elevated umbilical artery resistance or absent/reversed end-diastolic flow in small twin"
+              ],
+              [
+                "Twin anaemia-polycythaemia sequence (TAPS)",
+                "Normal and concordant in both amniotic sacs",
+                "Bladder visible normally in both twins",
+                "MCA-PSV discordant: > 1.5 MoM in anaemic donor, < 1.0 MoM in polycythaemic recipient"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the two mandatory ultrasound criteria required to diagnose twin-to-twin transfusion syndrome?",
+          "a": "A monochorionic pregnancy with oligohydramnios in one twin (deepest vertical pool < 2 cm) and polyhydramnios in the co-twin (deepest vertical pool > 8 cm).",
+          "accept": [
+            "oligohydramnios",
+            "polyhydramnios",
+            "deepest vertical pool",
+            "2 cm",
+            "8 cm"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How does selective fetal growth restriction (sFGR) differ clinically from TTTS in monochorionic twins?",
+          "a": "sFGR features severe growth discordance without the oligohydramnios-polyhydramnios sequence characteristic of TTTS; the amniotic fluid volume of the co-twin remains normal.",
+          "accept": [
+            "no polyhydramnios",
+            "normal fluid",
+            "growth discordance",
+            "fluid sequence"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What Doppler parameter is used to screen for and diagnose twin anaemia-polycythaemia sequence (TAPS)?",
+          "a": "Middle cerebral artery peak systolic velocity (MCA-PSV), where a donor value > 1.5 multiples of the median (MoM) indicates anaemia and a recipient value < 1.0 MoM indicates polycythaemia.",
+          "accept": [
+            "middle cerebral artery",
+            "MCA-PSV",
+            "peak systolic velocity",
+            "1.5 MoM",
+            "anaemia"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "comprehensive_diagnosis",
+          "text": "Formulates complete diagnosis including chorionicity, gestation, and complications"
+        },
+        {
+          "id": "ttts_criteria",
+          "text": "States the oligohydramnios-polyhydramnios ultrasound diagnostic criteria"
+        },
+        {
+          "id": "sfgr_taps_differentiation",
+          "text": "Distinguishes TTTS from selective FGR and TAPS using liquor and Doppler criteria"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "twin_twin_transfusion_syndrome: pathophysiology"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Multifetal Gestation: Unique Complications of Monochorionic Twins"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.twin": {
+      "id": "skill.tx.twin",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Antenatal Surveillance, Complication Management and Delivery Planning",
+      "oneLine": "Surveillance schedules by chorionicity, TTTS laser surgery, prevention of prematurity, and delivery timing",
+      "why": "Managing multifetal gestation demands proactive surveillance to prevent, detect and treat preterm labour, pre-eclampsia, growth restriction, and twin-specific vascular disorders. Timely delivery planning in an appropriately staffed and equipped facility mitigates perinatal morbidity and prevents catastrophic intrapartum complications.",
+      "dosingNote": "This module teaches management at the level of drug class and principle. Specific agents, doses, routes and regimens must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "teach": [
+        {
+          "heading": "Antenatal Surveillance Protocols",
+          "body": "Surveillance schedules are strictly governed by chorionicity. Uncomplicated dichorionic diamniotic (DCDA) twins receive serial ultrasound for fetal biometry and fluid assessment every 4 weeks starting from 24 weeks gestation.\n\nUncomplicated monochorionic diamniotic (MCDA) twins require ultrasound surveillance every 2 weeks starting from 16 weeks until delivery to detect early twin-to-twin transfusion syndrome, sFGR, and TAPS, evaluating deepest vertical pool, bladder filling, and umbilical artery Doppler."
+        },
+        {
+          "heading": "Definitive Management of TTTS",
+          "body": "Fetoscopic laser photocoagulation of anastomotic placental vessels is the gold-standard treatment for Quintero stage II, III, and IV TTTS diagnosed between 16 and 26 weeks. Laser therapy interrupts the communicating arteriovenous shunts while preserving non-communicating cotyledons.\n\nLaser ablation significantly improves dual twin survival and reduces neurodevelopmental disability compared to serial amnioreduction. Amnioreduction remains a secondary or palliative measure when laser surgery is unavailable or technically impossible."
+        },
+        {
+          "heading": "General Obstetric Precautions and Ineffective Interventions",
+          "body": "Women carrying twins should receive nutritional counselling, iron and folic acid supplementation to prevent severe anaemia, and screening for pre-eclampsia and gestational diabetes. Calcium supplementation and low-dose aspirin from 12 weeks are recommended for women with additional pre-eclampsia risk factors.\n\nRoutine hospitalization, prophylactic bed rest, routine cervical cerclage, and prophylactic oral tocolysis do not reduce preterm birth or perinatal mortality in unselected twins and are not recommended."
+        },
+        {
+          "heading": "Optimal Timing and Mode of Delivery",
+          "body": "Planned delivery timing avoids late intrauterine death: uncomplicated DCDA twins deliver at 37+0 to 37+6 weeks; uncomplicated MCDA twins deliver at 36+0 to 36+6 weeks; and monoamniotic (MCMA) twins deliver at 32+0 to 34+0 weeks by planned caesarean section.\n\nPlanned vaginal delivery is appropriate when Twin A is presenting cephalic in a well-equipped facility with continuous electronic fetal monitoring and immediate operative delivery capability. When Twin A is non-cephalic, planned caesarean section is indicated."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the recommended ultrasound surveillance frequency for monochorionic diamniotic twins?",
+          "a": "Every 2 weeks starting from 16 weeks gestation until delivery, assessing amniotic fluid deepest vertical pool, bladder filling, fetal growth, and Doppler.",
+          "accept": [
+            "every 2 weeks",
+            "fortnightly",
+            "16 weeks",
+            "deepest vertical pool"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the definitive first-line treatment for Quintero Stage II or higher twin-to-twin transfusion syndrome?",
+          "a": "Fetoscopic laser photocoagulation of shared placental vascular anastomoses.",
+          "accept": [
+            "fetoscopic laser",
+            "laser photocoagulation",
+            "laser ablation",
+            "laser"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What are the recommended delivery gestations for uncomplicated DCDA versus MCDA twins?",
+          "a": "DCDA twins deliver at 37+0 to 37+6 weeks, whereas MCDA twins deliver at 36+0 to 36+6 weeks.",
+          "accept": [
+            "37",
+            "36",
+            "DCDA",
+            "MCDA"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 4,
+          "q": "Under what conditions is a trial of vaginal delivery recommended in twin gestation?",
+          "a": "When Twin A is presenting cephalic, neither twin exhibits growth restriction or distress, there are no contraindications to vaginal birth, and delivery occurs in a hospital with continuous fetal monitoring, ultrasound, and immediate caesarean capability.",
+          "accept": [
+            "Twin A cephalic",
+            "monitoring",
+            "caesarean facility",
+            "cephalic"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "surveillance_by_chorionicity",
+          "text": "Outlines fortnightly scans for MCDA and monthly scans for DCDA twins"
+        },
+        {
+          "id": "ttts_laser_indication",
+          "text": "Identifies fetoscopic laser photocoagulation as definitive therapy for TTTS"
+        },
+        {
+          "id": "delivery_timing_and_route",
+          "text": "Specifies 36-week MCDA and 37-week DCDA timing and Twin A cephalic vaginal criteria"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "twin_twin_transfusion_syndrome: management"
+        },
+        {
+          "source": "NICE",
+          "locator": "Twin and Triplet Pregnancy: Antenatal Care, Surveillance and Delivery Timing"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Management of Monochorionic Twin Pregnancy: Antenatal Management and Delivery"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.twin.quintero": {
+      "id": "skill.annex.twin.quintero",
+      "kind": "annexure",
+      "system": "obgyn",
+      "title": "Quintero Staging System for Twin-to-Twin Transfusion Syndrome",
+      "oneLine": "Sonographic criteria and hemodynamic progression across Quintero Stages I to V",
+      "why": "The Quintero staging system provides a standardised, universally adopted sonographic classification of TTTS severity. It guides clinical triaging, determines candidacy for fetoscopic laser ablation, monitors treatment response, and establishes perinatal prognosis.",
+      "teach": [
+        {
+          "heading": "The Quintero Classification Scheme",
+          "body": "Developed in 1999, the Quintero staging system stratifies twin-to-twin transfusion syndrome into five distinct stages based on progressive ultrasound and Doppler abnormalities. Higher stages correlate with worsening hemodynamic compromise and elevated risks of fetal demise.\n\nImportantly, TTTS can present at any stage and may rapidly advance, remain stable, or rarely regress, underscoring the absolute necessity for serial fortnightly ultrasound monitoring in monochorionic twins."
+        },
+        {
+          "heading": "Quintero Stages I to V Criteria",
+          "table": {
+            "cols": [
+              "Quintero Stage",
+              "Defining ultrasound criteria",
+              "Haemodynamic significance",
+              "Primary clinical management"
+            ],
+            "rows": [
+              [
+                "Stage I",
+                "Severe fluid discordance: donor DVP < 2 cm and recipient DVP > 8 cm; donor bladder remains visible",
+                "Early volume discordance with preserved renal perfusion",
+                "Close weekly surveillance; fetoscopic laser ablation considered if symptomatic or progressing"
+              ],
+              [
+                "Stage II",
+                "Donor twin bladder persistently not visible over 60 minutes of scanning; fluid discordance persists",
+                "Severe hypovolaemia and renal shutdown in donor twin",
+                "Fetoscopic laser photocoagulation of placental anastomoses"
+              ],
+              [
+                "Stage III",
+                "Critically abnormal Doppler in either twin: absent/reversed end-diastolic flow in umbilical artery, reversed a-wave in ductus venosus, or pulsatile umbilical vein",
+                "Advanced cardiac and hemodynamic compromise in donor or recipient",
+                "Urgent fetoscopic laser photocoagulation at specialized fetal therapy centre"
+              ],
+              [
+                "Stage IV",
+                "Hydrops fetalis (ascites, pericardial/pleural effusion, scalp oedema) in either twin, usually the recipient",
+                "Congestive heart failure from chronic volume overload in recipient",
+                "Emergency laser photocoagulation or selective reduction if laser impossible"
+              ],
+              [
+                "Stage V",
+                "Demise of one or both twins",
+                "End-stage outcome; surviving co-twin at acute risk of exsanguination or stroke",
+                "Urgent fetal assessment, brain MRI at 4 to 6 weeks for survivor, delivery if near term"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What distinguishes Quintero Stage I from Quintero Stage II TTTS?",
+          "a": "In Stage I the donor twin bladder remains visible on ultrasound, whereas in Stage II the donor bladder is persistently non-visible throughout the examination due to severe anuria.",
+          "accept": [
+            "bladder visible",
+            "bladder not visible",
+            "Stage I",
+            "Stage II",
+            "anuria"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What specific Doppler abnormalities define Quintero Stage III TTTS?",
+          "a": "Critically abnormal Dopplers in either twin: absent or reversed end-diastolic velocity in the umbilical artery, reversed a-wave in the ductus venosus, or pulsatile flow in the umbilical vein.",
+          "accept": [
+            "absent or reversed",
+            "umbilical artery",
+            "ductus venosus",
+            "pulsatile umbilical vein",
+            "reversed a-wave"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is the demise of one twin in monochorionic TTTS (Stage V) acutely dangerous for the surviving co-twin?",
+          "a": "The surviving twin can rapidly exsanguinate into the low-resistance vascular bed of the deceased twin through patent placental anastomoses, causing sudden severe hypotension, ischaemic brain injury (periventricular leukomalacia), or secondary demise.",
+          "accept": [
+            "exsanguinate",
+            "hypotension",
+            "brain injury",
+            "periventricular leukomalacia",
+            "anastomoses"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "stage_i_ii_differentiation",
+          "text": "Differentiates Stage I from Stage II based on donor bladder visibility"
+        },
+        {
+          "id": "stage_iii_doppler_criteria",
+          "text": "Identifies umbilical artery and ductus venosus Doppler abnormalities in Stage III"
+        },
+        {
+          "id": "stage_iv_v_recognition",
+          "text": "Recognises hydrops fetalis in Stage IV and acute exsanguination risks in Stage V"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "twin_twin_transfusion_syndrome: tables"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Multifetal Gestation: Quintero Staging of TTTS"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.twin.mcda_28w",
+      "title": "A primigravida at 28 weeks with rapid abdominal growth",
+      "patient": {
+        "name": "Sunita Devi",
+        "age": 26,
+        "sex": "female",
+        "occupation": "Primary school teacher in a government school",
+        "residence": "Semi-urban district, lives with husband and in-laws"
+      },
+      "initialVitals": {
+        "hr": 84,
+        "bpSystolic": 118,
+        "bpDiastolic": 76,
+        "rr": 16,
+        "spo2": 98,
+        "temp": 36.8,
+        "gcs": 15
+      },
+      "opening": "Doctor, I am six and a half months pregnant with twins. Over the last month my tummy has grown much bigger very quickly, and I feel heavy and out of breath when I walk.",
+      "fallback": "I am not sure about that, doctor. Please check my ultrasound report and hospital antenatal card.",
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you to the hospital today",
+            "why did you come to the clinic today",
+            "what problem brings you to the clinic"
+          ],
+          "reply": "Doctor, I am in my seventh month of pregnancy with twins. My stomach has become very large quickly in the last few weeks, and I feel heavy and get tired and out of breath easily when doing household chores."
+        },
+        "rapid_enlargement": {
+          "cues": [
+            "rapid increase in abdominal size",
+            "tummy getting too big quickly",
+            "abdomen growing faster than expected"
+          ],
+          "reply": "Yes doctor, my stomach grew much faster compared to my friends who were pregnant. By five months my clothes stopped fitting completely."
+        },
+        "fetal_movements_both_sides": {
+          "cues": [
+            "baby kicks on both sides",
+            "movements felt simultaneously in different areas",
+            "feeling baby kicks in two different places"
+          ],
+          "reply": "I can feel baby movements very actively on both my right and left sides, often kicking at the exact same time in two different spots."
+        },
+        "hyperemesis_early_symptoms": {
+          "cues": [
+            "severe morning sickness early pregnancy",
+            "excessive vomiting in first trimester",
+            "trouble keeping food down early months"
+          ],
+          "reply": "In the first three months I had terrible nausea and vomited four to five times daily. I lost two kilograms before the doctor gave me tablets and it settled by sixteen weeks."
+        },
+        "menstrual_dating_lmp": {
+          "cues": [
+            "first day of last normal menstrual period",
+            "exact date of your last period",
+            "sure of your menstrual dates"
+          ],
+          "reply": "The first day of my last normal period was 14th April. My cycles have always been regular every twenty-eight days without any delay."
+        },
+        "early_ultrasound_chorionicity": {
+          "cues": [
+            "dating scan in first three months",
+            "first trimester ultrasound report",
+            "early scan report for twins"
+          ],
+          "reply": "I had an ultrasound at twelve weeks in the district hospital. The doctor told me there were two babies sharing one afterbirth placenta, and wrote monochorionic diamniotic on the card."
+        },
+        "conception_assisted_methods": {
+          "cues": [
+            "fertility treatment or ovulation medicines",
+            "did you take tablets or injections to get pregnant",
+            "natural conception or ivf treatment"
+          ],
+          "reply": "We conceived naturally eight months after marriage. I never took any fertility medicines, hormone tablets, or injections."
+        },
+        "family_history_twinning": {
+          "cues": [
+            "twins in your family or mother side",
+            "any multiple births among your relatives",
+            "family history of twin babies"
+          ],
+          "reply": "My maternal grandmother had twin brothers, but in my husband family there is no history of twins."
+        },
+        "breathlessness_exertion": {
+          "cues": [
+            "difficulty breathing when climbing stairs",
+            "feeling short of breath lying flat",
+            "breathlessness on walking or climbing"
+          ],
+          "reply": "I feel somewhat short of breath when climbing up to our first-floor room, but when I sit down or sleep with two pillows propping me up, I breathe easily without chest pain."
+        },
+        "headache_visual_swelling": {
+          "cues": [
+            "severe headache or blurring of vision",
+            "sudden swelling of face and hands",
+            "pain in the upper stomach with headache"
+          ],
+          "reply": "No doctor, I have not had severe headaches, no flashes of light or blurred vision, and no pain in the upper part of my stomach."
+        },
+        "contractions_backache_leaking": {
+          "cues": [
+            "painful tightenings or watery fluid leaking",
+            "pelvic pressure or lower backache",
+            "water breaking or painful uterine cramps"
+          ],
+          "reply": "No severe stomach cramping or painful tightenings. Sometimes my tummy feels tight for a minute if I walk a lot, but it does not hurt. No water leaking and no bleeding."
+        },
+        "urinary_symptoms_burning": {
+          "cues": [
+            "burning sensation during urination",
+            "frequent urgent need to pass urine",
+            "pain or burning when passing urine"
+          ],
+          "reply": "I go to the toilet more frequently because of the weight pressing down on my bladder, but there is no burning pain, no fever, and no foul smell."
+        },
+        "diet_nutrition_iron": {
+          "cues": [
+            "daily meals and iron tablets",
+            "dietary intake and calcium supplements",
+            "food intake and nutrition during pregnancy"
+          ],
+          "reply": "I eat three meals a day with lentils, green vegetables, milk, eggs, and chapattis. I take my iron and calcium tablets every day after lunch as prescribed at the anganwadi."
+        },
+        "previous_obstetric_history": {
+          "cues": [
+            "any previous pregnancies or miscarriages",
+            "is this your first pregnancy",
+            "history of earlier deliveries or abortions"
+          ],
+          "reply": "This is my very first pregnancy. I have never had any miscarriages, abortions, or prior operations."
+        },
+        "medical_comorbidities": {
+          "cues": [
+            "high blood pressure or high sugar before",
+            "history of thyroid or heart disease",
+            "chronic medical problems before pregnancy"
+          ],
+          "reply": "I have never had high blood pressure, diabetes, asthma, thyroid disorder, or kidney disease. My pre-pregnancy health was completely normal."
+        },
+        "current_medications_supplements": {
+          "cues": [
+            "all medicines taken currently",
+            "routine antenatal vitamins and supplements",
+            "any other tablets or traditional remedies"
+          ],
+          "reply": "Only iron, folic acid, and calcium tablets given at the government clinic. I do not take any indigenous medicines or painkillers."
+        },
+        "birth_preparedness_plan": {
+          "cues": [
+            "delivery hospital and transport arrangements",
+            "planned place for giving birth",
+            "arrangements made for hospital delivery"
+          ],
+          "reply": "My doctor told me that twin delivery requires a hospital with a newborn intensive care unit, so we registered at the district government medical college and saved money for transport."
+        },
+        "sleep_posture_fatigue": {
+          "cues": [
+            "sleeping on your side or back",
+            "daytime tiredness and sleep quality",
+            "difficulty sleeping comfortably at night"
+          ],
+          "reply": "I try to sleep on my left side using a folded pillow under my abdomen and between my knees. I wake up three or four times every night to pass urine."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Alert, comfortable at rest, mild conjunctival pallor, no pedal oedema at rest, no jaundice, no peripheral cyanosis or clubbing.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 84 beats per minute, regular, good volume; blood pressure 118/76 mmHg seated right arm; respiratory rate 16 breaths per minute; afebrile.",
+          "abnormal": false
+        },
+        "skill.gen.edema": {
+          "finding": "Mild bilateral dependent ankle pitting oedema after standing; no facial puffiness, no hand swelling, and no sacral oedema.",
+          "abnormal": false
+        },
+        "skill.exam.obg.preg_prep_inspect": {
+          "finding": "Abdomen markedly distended with longitudinal enlargement exceeding dates, midline linea nigra and fresh striae gravidarum; no surgical scars, no visible superficial collateral veins.",
+          "abnormal": true
+        },
+        "skill.exam.obg.fundal_height": {
+          "finding": "Symphysis-fundal height measures 34 cm (dates correspond to 28 weeks, discrepancy of +6 cm); abdominal girth is 96 cm at the umbilicus.",
+          "abnormal": true
+        },
+        "skill.exam.obg.leopold": {
+          "finding": "Fundal grip: one smooth rounded hard pole (fetal head) palpated in the fundus. Lateral grip: multiple fetal limbs felt on both maternal flanks, with a smooth back on the right flank and a second back on the left flank. Pelvic grips: smooth rounded hard ballotable pole (fetal head) over the pelvic brim, free and not engaged. Two distinct fetal heads and multiple poles confirmed.",
+          "abnormal": true
+        },
+        "skill.exam.obg.fetal_heart": {
+          "finding": "Two distinct fetal heart sounds auscultated simultaneously at two separate sites: Twin A in the right lower quadrant at 144 beats per minute, Twin B in the left upper quadrant at 156 beats per minute, distinct from maternal radial pulse (84 bpm) and differing from each other by 12 beats per minute.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "usg_scan",
+        "urine_albumin",
+        "hemoglobin"
+      ],
+      "investigations": {
+        "usg_scan": {
+          "label": "Obstetric ultrasound at 28 weeks",
+          "result": "Twin pregnancy: monochorionic diamniotic (single anterior placenta, thin dividing membrane with T-sign confirmed from 12-week first-trimester scan). Twin A (presenting cephalic): estimated fetal weight 1180 g, deepest vertical pool 4.4 cm, bladder clearly visible, normal umbilical artery Doppler with positive end-diastolic flow. Twin B (breech in upper uterus): estimated fetal weight 1020 g, deepest vertical pool 3.8 cm, bladder clearly visible, normal umbilical artery Doppler. Growth discordance calculated at 13.5 percent. Normal amniotic fluid in both sacs; no features of TTTS; no hydrops.",
+          "note": "MCDA twin pregnancy with concordant amniotic fluid volumes and mild 13.5 percent growth discordance without TTTS; requires continued fortnightly surveillance."
+        },
+        "urine_albumin": {
+          "label": "Urine dipstick protein",
+          "result": "Nil (negative for proteinuria and glycosuria).",
+          "note": "Normotensive without proteinuria; pre-eclampsia excluded at present."
+        },
+        "hemoglobin": {
+          "label": "Complete blood count and haemoglobin",
+          "result": "Haemoglobin 10.2 g/dL, packed cell volume 31 percent, platelets 210,000/mcL, leukocytes 8,400/mcL.",
+          "note": "Mild physiological anaemia of pregnancy accentuated by twin plasma volume expansion; oral iron therapy indicated."
+        },
+        "blood_group": {
+          "label": "Maternal blood group and Rh typing",
+          "result": "B positive, antibody screen negative.",
+          "note": "Rh positive; anti-D immunoglobulin not required."
+        },
+        "ogtt_sugar": {
+          "label": "Oral glucose tolerance test (75g 2-hour OGTT)",
+          "result": "Fasting 82 mg/dL, 1-hour 124 mg/dL, 2-hour 112 mg/dL.",
+          "note": "Normal glucose tolerance; gestational diabetes mellitus excluded."
+        }
+      },
+      "differentialModel": {
+        "answer": "Monochorionic diamniotic twin pregnancy at 28 weeks gestation. Key differentials for uterine enlargement exceeding dates include dichorionic diamniotic twin pregnancy, polyhydramnios in singleton pregnancy, inaccurate menstrual dates, uterine fibroid complicating pregnancy, fetal macrosomia, and gestational trophoblastic disease.",
+        "accept": [
+          "Multiple pregnancy",
+          "Polyhydramnios",
+          "Fibroid uterus",
+          "Gestational trophoblastic disease",
+          "Macrosomia"
+        ],
+        "minMatch": 3
+      },
+      "diagnosis": {
+        "answer": "Monochorionic diamniotic twin pregnancy at 28 weeks gestation with concordant liquor and without twin-to-twin transfusion syndrome.",
+        "accept": [
+          "Multiple pregnancy",
+          "Twin pregnancy",
+          "Twin gestation"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Ultrasound surveillance for fluid and growth discordance every 2 weeks, maternal pre-eclampsia screening with blood pressure and urine checks at every visit, oral iron and calcium supplementation, avoidance of routine bed rest or tocolysis, counselling on preterm labour danger symptoms, and planned delivery at 36 to 37 weeks in a facility with neonatal intensive care.",
+        "accept": [
+          "ultrasound surveillance for fluid and growth discordance",
+          "maternal pre-eclampsia screening",
+          "iron and calcium supplementation",
+          "counselling on preterm labour symptoms",
+          "avoidance of routine bed rest or tocolysis",
+          "planned delivery in a facility with newborn care"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "Chorionicity determination on first-trimester ultrasound (11 to 14 weeks) is the single most important prognostic and management determinant in twin pregnancy: MCDA twins mandate fortnightly ultrasound from 16 weeks to detect TTTS, whereas DCDA twins require monthly scans from 24 weeks.",
+        "Physical signs of twin pregnancy include symphysis-fundal height exceeding dates by 4 cm or more, palpation of two distinct fetal heads or multiple fetal limbs, and simultaneous auscultation of two fetal heart rates differing by at least 10 to 15 beats per minute.",
+        "Uncomplicated MCDA twins should be planned for delivery between 36+0 and 36+6 weeks, while uncomplicated DCDA twins deliver between 37+0 and 37+6 weeks. A trial of vaginal delivery is safe when Twin A presents cephalic in a unit equipped for immediate caesarean section and continuous electronic fetal monitoring.",
+        "Routine bed rest, prophylactic tocolytics, and prophylactic cervical cerclage have no proven benefit in multifetal pregnancy and should not be routinely prescribed."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

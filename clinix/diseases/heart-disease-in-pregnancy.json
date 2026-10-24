@@ -1,0 +1,1472 @@
+{
+  "_comment": "CliniX disease pathway: Heart disease in pregnancy (obstetrics). Grounded in StewardMD Clinical KB and standard guidelines.",
+  "id": "heart-disease-in-pregnancy",
+  "name": "Heart disease in pregnancy",
+  "fullName": "Heart disease in pregnancy: Risk stratification and labour planning",
+  "system": "obgyn",
+  "kbRef": "rheumatic_mitral_stenosis",
+  "oneLine": "Maternal cardiovascular risk stratification, valvular heart disease, physiological decompensation, and multidisciplinary labour planning",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics of heart disease in pregnancy",
+      "skills": [
+        "skill.heart.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the pregnant cardiac patient",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Maternal age, gravidity, parity, booking status, and gestational age provide the critical baseline for evaluating cardiovascular load and labour planning."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.booking_lmp",
+        "skill.hx.heart.symptoms"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Listen actively for symptoms of breathlessness on exertion, nocturnal cough, orthopnoea, and palpitations, establishing their precise onset and tempo."
+        },
+        "skill.hx.obg.booking_lmp": {
+          "expect": "Confirm reliable gestational dating from last menstrual period and early booking ultrasound to anticipate periods of peak hemodynamic volume expansion at 28 to 32 weeks."
+        },
+        "skill.hx.heart.symptoms": {
+          "expect": "Quantify functional capacity against specific daily domestic activities to assign NYHA class and screen rigorously for orthopnoea and paroxysmal nocturnal dyspnoea."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "skills": [
+        "skill.hx.obg.medical_family_drug",
+        "skill.hx.obg.previous_pregnancies",
+        "skill.hx.heart.risk"
+      ],
+      "emphasis": {
+        "skill.hx.obg.medical_family_drug": {
+          "expect": "Document childhood rheumatic fever episodes, secondary penicillin prophylaxis adherence, family cardiac history, and reconcile pre-existing cardiac medications."
+        },
+        "skill.hx.obg.previous_pregnancies": {
+          "expect": "Inquire whether heart failure, pulmonary oedema, or arrhythmias occurred during any previous pregnancy, labour, or puerperium."
+        },
+        "skill.hx.heart.risk": {
+          "expect": "Identify past balloon mitral valvuloplasty, valve replacement surgery (mechanical versus tissue), and screen for teratogenic medications like ACE inhibitors."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema",
+        "skill.gen.cyanosis",
+        "skill.gen.clubbing"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Observe for respiratory distress, resting tachypnoea, inability to lie flat, and malar flush typical of mitral stenosis."
+        },
+        "skill.gen.vitals": {
+          "expect": "Measure resting pulse rate and rhythm for tachycardia or atrial fibrillation, blood pressure, and oxygen saturation on room air."
+        },
+        "skill.gen.edema": {
+          "expect": "Examine for bilateral pitting dependent pedal and pretibial oedema, differentiating mild physiological swelling from severe cardiac fluid retention."
+        },
+        "skill.gen.cyanosis": {
+          "expect": "Inspect tongue and lips for central cyanosis and peripheral extremities for poor perfusion or digital clubbing indicative of right-to-left shunting."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Obstetric abdominal examination",
+      "skills": [
+        "skill.exam.obg.preg_prep_inspect",
+        "skill.exam.obg.fundal_height",
+        "skill.exam.obg.leopold",
+        "skill.exam.obg.fetal_heart"
+      ],
+      "emphasis": {
+        "skill.exam.obg.preg_prep_inspect": {
+          "expect": "Position the woman with left lateral wedge tilt to prevent aortocaval compression; inspect abdominal distension and midline pigmentation."
+        },
+        "skill.exam.obg.fundal_height": {
+          "expect": "Measure symphysis-fundal height to verify that fetal growth corresponds to dates; lagging height flags fetal growth restriction secondary to reduced cardiac output."
+        },
+        "skill.exam.obg.leopold": {
+          "expect": "Determine fetal lie, presentation, and attitude gently while observing maternal respiratory comfort during abdominal palpation."
+        },
+        "skill.exam.obg.fetal_heart": {
+          "expect": "Auscultate fetal heart sounds for baseline rate, rhythm, and regular variability to confirm reassuring fetal status."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Recognising cardiac decompensation and disease findings",
+      "skills": [
+        "skill.heart.findings"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary and risk scoring",
+      "skills": [
+        "skill.heart.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "skills": [
+        "skill.heart.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations and surveillance",
+      "skills": [
+        "skill.ix.heart.workup",
+        "skill.annex.heart.risk",
+        "skill.ix.obg.ctg_interpretation"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and risk stratification",
+      "skills": [
+        "skill.heart.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Management and labour planning",
+      "skills": [
+        "skill.tx.heart.antenatal",
+        "skill.tx.heart.labour",
+        "skill.approach.obg.instrumental_preconditions"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "skills": [
+        "skill.present.heart.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.heart.antenatal_assessment",
+        "title": "Valvular heart disease in pregnancy: history, risk stratification and counselling",
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.heart.symptoms",
+          "skill.hx.heart.risk",
+          "skill.annex.heart.risk"
+        ],
+        "seconds": 360,
+        "examinerQuestions": [
+          "How do you distinguish physiological breathlessness of pregnancy from NYHA Class II or III cardiac breathlessness?",
+          "What clinical features and echocardiographic findings classify a pregnant woman into modified WHO Class IV risk?",
+          "Why is medication reconciliation critical in early pregnancy for a woman with pre-existing heart disease, and which drug classes must be stopped immediately?"
+        ]
+      },
+      {
+        "id": "osce.heart.labour_management",
+        "title": "Intrapartum care and labour planning for a pregnant woman with cardiac disease",
+        "skills": [
+          "skill.heart.basics",
+          "skill.heart.findings",
+          "skill.tx.heart.antenatal",
+          "skill.tx.heart.labour",
+          "skill.approach.obg.instrumental_preconditions"
+        ],
+        "seconds": 360,
+        "examinerQuestions": [
+          "Why is vaginal delivery preferred over elective caesarean delivery in most pregnant women with cardiac disease?",
+          "What specific analgesia and positioning techniques are recommended during the first and second stages of labour for a cardiac patient?",
+          "Which standard postpartum uterotonic agents are strictly contraindicated in heart disease, and what is the recommended protocol for active management of the third stage of labour?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.heart.basics",
+      "skill.heart.findings",
+      "skill.heart.summary",
+      "skill.heart.differential",
+      "skill.ix.heart.workup",
+      "skill.annex.heart.risk",
+      "skill.heart.diagnosis",
+      "skill.tx.heart.antenatal",
+      "skill.tx.heart.labour"
+    ]
+  },
+  "skills": {
+    "skill.heart.basics": {
+      "id": "skill.heart.basics",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Maternal cardiovascular adaptations in normal pregnancy and mechanisms of cardiac decompensation",
+      "oneLine": "Plasma volume expansion, increased cardiac output, altered systemic vascular resistance, and hemodynamic triggers of failure",
+      "why": "Pregnancy demands profound circulatory adaptations to nourish the growing fetus, including a 40 to 50 percent increase in blood volume and cardiac output. In women with pre-existing valvular or myocardial disease, these physiological changes reduce cardiovascular reserve and can precipitate acute pulmonary oedema, arrhythmias, or maternal death.",
+      "teach": [
+        {
+          "heading": "Normal maternal haemodynamic adaptations in pregnancy",
+          "body": "During normal pregnancy, plasma volume increases by 40 to 50 percent, while red cell mass expands by 20 to 30 percent, producing physiological hemodilution. Cardiac output rises by 40 to 50 percent above non-pregnant levels, driven by both an increase in stroke volume and an increase in resting heart rate of 10 to 20 beats per minute.\n\nSystemic vascular resistance falls significantly due to high-flow uteroplacental shunting and progesterone-mediated vasodilation."
+        },
+        {
+          "heading": "Haemodynamic milestones and peak vulnerability periods",
+          "table": {
+            "cols": [
+              "Milestone",
+              "Haemodynamic Change",
+              "Clinical Risk"
+            ],
+            "rows": [
+              [
+                "28 to 32 weeks",
+                "Peak plasma volume and cardiac output expansion",
+                "Acute pulmonary oedema in mitral stenosis"
+              ],
+              [
+                "Second stage labour",
+                "Uterine contractions add 300 to 500 mL autotransfusion per contraction",
+                "Marked spikes in cardiac output and blood pressure"
+              ],
+              [
+                "Immediate postpartum",
+                "Relief of caval compression and massive uterine autotransfusion",
+                "Sudden volume overload and acute heart failure"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Pathophysiology of mitral stenosis decompensation",
+          "body": "In mitral stenosis, the narrowed valve orifice restricts left ventricular inflow during diastole. Increased maternal heart rate shortens diastolic filling time, while expanded circulating blood volume raises the transmitral pressure gradient.\n\nLeft atrial pressure rises steeply and is transmitted backwards into the pulmonary venous and capillary beds, provoking transudation of fluid into alveoli and sudden pulmonary oedema."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why does acute pulmonary oedema frequently develop during the 28th to 32nd weeks of gestation in pregnant women with mitral stenosis?",
+          "a": "Maternal plasma volume and cardiac output reach their peak expansion between 28 and 32 weeks, maximizing left atrial volume overload and pulmonary venous congestion across the stenotic mitral valve.",
+          "accept": [
+            "plasma volume",
+            "cardiac output",
+            "peak",
+            "28",
+            "32",
+            "left atrial",
+            "pulmonary",
+            "mitral"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How does the immediate postpartum period create an acute risk of cardiac decompensation in a woman with heart disease?",
+          "a": "Relief of caval compression and massive autotransfusion of blood from the empty contracted uterus abruptly increases venous return and cardiac preload, overloading compromised cardiac chambers.",
+          "accept": [
+            "autotransfusion",
+            "caval",
+            "venous return",
+            "preload",
+            "uterus",
+            "overload"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "haemodynamic_changes",
+          "text": "Explains maternal plasma volume expansion, heart rate changes, and cardiac output rise"
+        },
+        {
+          "id": "vulnerability_windows",
+          "text": "Identifies the three peak danger periods: 28 to 32 weeks, second stage labour, and early postpartum"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rheumatic_mitral_stenosis: pathophysiology"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Cardiovascular Disorders: Cardiovascular physiology of pregnancy"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.heart.findings": {
+      "id": "skill.heart.findings",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Clinical hallmarks of heart disease versus benign physiological findings of normal pregnancy",
+      "oneLine": "Differentiating functional flow murmurs and peripheral oedema from pathological diastolic rumbles, elevated JVP, and basal pulmonary crackles",
+      "why": "Normal gestational hyperdynamic circulation produces physical signs that closely mimic cardiac disease, including functional systolic murmurs, third heart sounds, and dependent pedal oedema. A clinician must reliably differentiate these benign physiological signs from true pathological hallmarks such as diastolic murmurs, elevated jugular venous pressure, and pulmonary crackles to prevent missed diagnoses.",
+      "teach": [
+        {
+          "heading": "Benign physiological signs versus pathological cardiac hallmarks",
+          "table": {
+            "cols": [
+              "Sign",
+              "Benign Physiological Finding",
+              "Pathological Cardiac Sign"
+            ],
+            "rows": [
+              [
+                "Murmurs",
+                "Soft systolic ejection murmur grade 1 to 2/6 at left sternal edge",
+                "Any diastolic murmur, or harsh systolic murmur grade 3/6 or higher with thrill"
+              ],
+              [
+                "Jugular venous pressure",
+                "Normal mean level with prominent a and v waves",
+                "Sustained elevation above 3 cm with prominent v waves or cannon waves"
+              ],
+              [
+                "Auscultatory sounds",
+                "Exaggerated S1 splitting and benign physiological S3",
+                "Loud tapping S1, opening snap, or pathological S4 gallop"
+              ],
+              [
+                "Chest auscultation",
+                "Clear breath sounds or bibasilar atelectasis clearing with cough",
+                "Persistent inspiratory crackles that do not clear on coughing"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Physical hallmarks of rheumatic mitral stenosis",
+          "body": "On precordial palpation, mitral stenosis typically produces a tapping apex beat representing a palpable loud first heart sound, without lateral displacement unless severe pulmonary hypertension has developed.\n\nOn auscultation, the diagnostic triad consists of a loud S1, an opening snap occurring early in diastole, and a low-pitched, rumbling mid-diastolic murmur best heard at the apex with the bell in the left lateral decubitus position."
+        },
+        {
+          "heading": "Recognising impending pulmonary oedema",
+          "body": "The earliest sign of pulmonary congestion in a pregnant cardiac patient is persistent tachypnoea accompanied by an irritating nocturnal cough.\n\nBilateral fine inspiratory crackles at the lung bases that persist after coughing confirm interstitial pulmonary fluid transudation. As alveolar oedema worsens, bubbling rales extend upwards across the lung fields, accompanied by wheezing and pink frothy sputum."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which auscultatory finding on cardiac examination is always abnormal in pregnancy and never physiological?",
+          "a": "Any diastolic murmur is always pathological in pregnancy, whereas soft systolic ejection murmurs are commonly physiological.",
+          "accept": [
+            "diastolic murmur",
+            "diastolic",
+            "pathological",
+            "abnormal"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the classic precordial physical examination triad of rheumatic mitral stenosis?",
+          "a": "A loud first heart sound, an opening snap in early diastole, and a low-pitched rumbling mid-diastolic murmur at the apex with presystolic accentuation in sinus rhythm.",
+          "accept": [
+            "loud s1",
+            "first heart sound",
+            "opening snap",
+            "mid-diastolic",
+            "rumble",
+            "apex"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "murmur_differentiation",
+          "text": "Differentiates physiological systolic flow murmurs from pathological diastolic murmurs"
+        },
+        {
+          "id": "mitral_stenosis_triad",
+          "text": "Identifies the auscultatory triad of rheumatic mitral stenosis"
+        },
+        {
+          "id": "congestion_signs",
+          "text": "Recognises elevated JVP, persistent lung crackles, and early signs of pulmonary oedema"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rheumatic_mitral_stenosis: clinicalPearls"
+        },
+        {
+          "source": "FOGSI",
+          "locator": "Good Clinical Practice Recommendations: Heart Disease in Pregnancy, Physical Examination"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.heart.summary": {
+      "id": "skill.heart.summary",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Synthesising the clinical summary and maternal-fetal risk profile in cardiac pregnancy",
+      "oneLine": "Formulating a concise obstetric and hemodynamic case synthesis incorporating NYHA status, mWHO risk category, and decompensation markers",
+      "why": "A comprehensive clinical summary bridges obstetric status and cardiac pathology into a unified management framework. By systematically articulating the anatomical lesion, functional NYHA class, modified WHO maternal risk category, and fetal growth parameters, the clinician establishes the risk profile that dictates antenatal surveillance frequency, delivery setting, and emergency contingencies.",
+      "teach": [
+        {
+          "heading": "Core structure of the cardiac obstetric summary",
+          "body": "The clinical summary must systematically weave maternal age, gravidity, parity, and gestational age together with the exact anatomical cardiac lesion, its aetiology, and prior surgical or balloon interventions.\n\nIt must explicitly state the patient functional capacity using the New York Heart Association classification and assign a modified WHO maternal cardiovascular risk category."
+        },
+        {
+          "heading": "Documenting functional status and decompensation markers",
+          "body": "Functional capacity must be documented objectively: Class I denotes no limitation; Class II denotes slight limitation on ordinary activities; Class III denotes marked limitation on less than ordinary activity; Class IV denotes symptoms at rest.\n\nThe summary must highlight recent symptom progression, nocturnal orthopnoea, past episodes of heart failure, and current medications including penicillin prophylaxis and diuretics."
+        },
+        {
+          "heading": "Integrating fetal growth and uteroplacental wellbeing",
+          "body": "Maternal cardiac disease and cyanotic or low-output states impair uteroplacental perfusion, predisposing to fetal growth restriction, oligohydramnios, and preterm delivery.\n\nThe summary must correlate fundal height, ultrasound biometry, amniotic fluid volume, and umbilical artery Doppler indices with maternal hemodynamic stability."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What clinical classification is used to quantify maternal functional exercise capacity in pregnancy, and what defines Class III?",
+          "a": "The New York Heart Association (NYHA) functional classification; Class III represents marked limitation of physical activity, where less than ordinary exertion causes fatigue, palpitations, or breathlessness.",
+          "accept": [
+            "nyha",
+            "new york heart association",
+            "marked limitation",
+            "less than ordinary",
+            "fatigue",
+            "breathlessness"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why must a clinical summary in a pregnant woman with cardiac disease integrate fetal biometry and umbilical artery Doppler findings?",
+          "a": "Maternal low cardiac output or cyanosis compromises uteroplacental blood flow, increasing the risks of fetal growth restriction, chronic hypoxia, and preterm delivery.",
+          "accept": [
+            "uteroplacental",
+            "cardiac output",
+            "growth restriction",
+            "fetal",
+            "hypoxia",
+            "doppler"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "syndromic_synthesis",
+          "text": "Synthesises obstetric parameters, structural cardiac lesion, and NYHA functional class"
+        },
+        {
+          "id": "risk_stratification",
+          "text": "Integrates modified WHO risk category and flags high-risk decompensation markers"
+        },
+        {
+          "id": "fetal_correlation",
+          "text": "Correlates maternal haemodynamics with fetal growth and uteroplacental Doppler findings"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rheumatic_mitral_stenosis: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Cardiovascular Disorders: Maternal risk stratification and preconception counselling"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.heart.differential": {
+      "id": "skill.heart.differential",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Differential diagnosis of acute breathlessness, chest discomfort and tachycardia during pregnancy",
+      "oneLine": "Distinguishing physiological gestational dyspnoea, severe gestational anaemia, pulmonary embolism, pre-eclampsia, and peripartum cardiomyopathy",
+      "why": "Breathlessness and tachycardia are exceptionally common in pregnancy, spanning benign physiological discomfort, non-cardiac obstetric complications, and life-threatening cardiopulmonary emergencies. Rapidly differentiating valvular decompensation from pulmonary embolism, severe anaemia, peripartum cardiomyopathy, and pre-eclampsia with pulmonary oedema is crucial for initiating lifesaving therapy.",
+      "teach": [
+        {
+          "heading": "Primary differentials of breathlessness in pregnancy",
+          "table": {
+            "cols": [
+              "Condition",
+              "Key Clinical Distinctions",
+              "Diagnostic Discriminator"
+            ],
+            "rows": [
+              [
+                "Physiological dyspnoea",
+                "Early onset, stable, no orthopnoea, normal JVP and chest auscultation",
+                "Normal echocardiogram, ECG, and natriuretic peptides"
+              ],
+              [
+                "Severe anaemia",
+                "Marked pallor, hyperdynamic pulse, hemic systolic murmur, fatigue",
+                "Haemoglobin below 7 g/dL, normal cardiac chamber anatomy"
+              ],
+              [
+                "Pulmonary embolism",
+                "Sudden dyspnoea, pleuritic pain, unilateral leg swelling, tachypnoea",
+                "Computed tomography pulmonary angiography or V/Q scan"
+              ],
+              [
+                "Peripartum cardiomyopathy",
+                "Late third trimester or postpartum onset, systolic dysfunction",
+                "Echocardiogram showing left ventricular EF below 45 percent"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Pre-eclampsia with pulmonary oedema versus primary cardiac failure",
+          "body": "Pre-eclampsia can provoke acute pulmonary oedema through increased capillary permeability, high systemic vascular resistance afterload, and iatrogenic fluid overload.\n\nIt is distinguished by significant hypertension, heavy proteinuria, and signs of end-organ involvement such as headache, visual disturbances, and hyperreflexia, in the absence of pre-existing valvular disease."
+        },
+        {
+          "heading": "Bronchial asthma versus cardiac asthma",
+          "body": "Bronchial asthma presents with wheezing, prolonged expiration, cough, and a history of atopy or prior bronchodilator response, without elevated JVP or cardiac murmurs.\n\nIn contrast, cardiac asthma reflects pulmonary venous congestion and interstitial oedema in mitral stenosis or left ventricular failure, presenting with crackles, elevated JVP, and orthopnoea."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How does peripartum cardiomyopathy differ from rheumatic mitral stenosis in its clinical presentation and echocardiographic findings?",
+          "a": "Peripartum cardiomyopathy typically manifests in the last gestational month or puerperium with dilated left ventricular systolic dysfunction (EF under 45%), whereas mitral stenosis presents with structural mitral valve narrowing and elevated diastolic gradients.",
+          "accept": [
+            "peripartum cardiomyopathy",
+            "systolic dysfunction",
+            "ejection fraction",
+            "narrowing",
+            "gradients",
+            "mitral stenosis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What features help distinguish pulmonary embolism from acute cardiac decompensation in a pregnant woman presenting with sudden breathlessness?",
+          "a": "Pulmonary embolism typically features sudden onset, pleuritic chest pain, risk factors for venous thrombosis, and normal lung fields on examination, whereas cardiac decompensation exhibits orthopnoea, lung crackles, and elevated JVP.",
+          "accept": [
+            "pulmonary embolism",
+            "pleuritic",
+            "sudden",
+            "orthopnoea",
+            "crackles",
+            "jvp",
+            "thrombosis"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "differential_identification",
+          "text": "Distinguishes physiological dyspnoea from pathological cardiopulmonary disorders"
+        },
+        {
+          "id": "structural_vs_myocardial",
+          "text": "Differentiates valvular disease from peripartum cardiomyopathy and pre-eclampsia"
+        },
+        {
+          "id": "emergency_rule_out",
+          "text": "Formulates a diagnostic strategy to exclude pulmonary embolism and acute heart failure"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "peripartum_cardiomyopathy: clinicalPearls"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline: Cardiac Disease in Pregnancy, Differential Diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.heart.workup": {
+      "id": "skill.ix.heart.workup",
+      "kind": "investigation",
+      "system": "obgyn",
+      "title": "Diagnostic investigations and surveillance in pregnant women with suspected or confirmed cardiac disease",
+      "oneLine": "Electrocardiography, transthoracic echocardiography, shielded chest radiography, cardiac biomarkers, and serial fetal ultrasound",
+      "why": "Safe and accurate diagnostic testing in pregnancy requires modalities that yield precise structural and hemodynamic information while minimising radiation and fetal risk. Transthoracic echocardiography is the gold standard diagnostic tool, supplemented by ECG, natriuretic peptides, and shielded radiographs when pulmonary oedema is suspected.",
+      "teach": [
+        {
+          "heading": "Transthoracic echocardiography as the gold standard modality",
+          "body": "Transthoracic echocardiography provides comprehensive, non-invasive assessment of valve morphology, chamber dimensions, ventricular systolic and diastolic function, and estimated pulmonary artery systolic pressure.\n\nIn mitral stenosis, key measurements include the mitral valve area by planimetry, mean transmitral diastolic pressure gradient, Wilkins morphology score, and presence of left atrial thrombus."
+        },
+        {
+          "heading": "Electrocardiography and cardiac biomarkers",
+          "body": "A 12-lead ECG detects sinus tachycardia, atrial fibrillation, left atrial enlargement (P mitrale with broad, notched P waves in lead II), and right ventricular hypertrophy.\n\nBrain natriuretic peptide (BNP) and NT-proBNP are reliable biomarkers of myocardial stretch and ventricular strain during pregnancy; levels remain low in normal pregnancy but rise markedly during cardiac decompensation."
+        },
+        {
+          "heading": "Chest radiography with abdominal shielding and fetal ultrasound",
+          "body": "Chest radiography with abdominal lead apron shielding delivers negligible radiation to the fetus (under 0.001 mGy) and should never be withheld in suspected pulmonary oedema.\n\nSerial obstetric ultrasound evaluates fetal biometry, amniotic fluid volume, and umbilical and middle cerebral artery Doppler indices to detect placental insufficiency and growth restriction."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the primary diagnostic investigation of choice for evaluating suspected cardiac disease in pregnancy, and why is it preferred?",
+          "a": "Transthoracic echocardiography is the investigation of choice because it provides detailed anatomical and hemodynamic data without exposing mother or fetus to ionising radiation.",
+          "accept": [
+            "transthoracic echocardiography",
+            "echocardiography",
+            "echo",
+            "radiation",
+            "safe",
+            "hemodynamic"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Is a chest radiograph safe during pregnancy when acute pulmonary oedema is suspected, and what protective measure is used?",
+          "a": "Yes, chest radiography is safe and should not be withheld; lead apron abdominal shielding reduces fetal radiation exposure to negligible levels far below teratogenic thresholds.",
+          "accept": [
+            "safe",
+            "lead apron",
+            "shielding",
+            "radiation",
+            "negligible",
+            "pulmonary oedema"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "echo_utility",
+          "text": "Selects transthoracic echocardiography and details key structural measurements"
+        },
+        {
+          "id": "ecg_biomarkers",
+          "text": "Interprets ECG changes and utilizes BNP/NT-proBNP in assessing ventricular strain"
+        },
+        {
+          "id": "radiation_safety",
+          "text": "Applies abdominal lead shielding principles for urgent chest radiographs in pregnancy"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rheumatic_mitral_stenosis: management"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Cardiovascular Disorders: Diagnostic modalities and cardiac imaging in pregnancy"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.heart.risk": {
+      "id": "skill.annex.heart.risk",
+      "kind": "annexure",
+      "system": "obgyn",
+      "title": "Modified WHO maternal cardiovascular risk classification and CARPREG II scoring",
+      "oneLine": "Stratification of maternal mortality and cardiac event risk across lesion categories and intrapartum care settings",
+      "why": "Risk stratification models provide an objective, validated framework for counselling women, determining surveillance frequency, and selecting the appropriate level of obstetric and cardiac care. The modified WHO classification is internationally endorsed as the most accurate predictor of maternal cardiovascular complications.",
+      "teach": [
+        {
+          "heading": "Modified WHO maternal cardiovascular risk classification",
+          "table": {
+            "cols": [
+              "Risk Class",
+              "Maternal Event Risk",
+              "Typical Cardiac Lesions and Clinical Setting"
+            ],
+            "rows": [
+              [
+                "WHO I",
+                "No detectable increase in mortality, mild morbidity",
+                "Uncomplicated pulmonary stenosis, patent ductus arteriosus, successfully repaired lesions; local hospital care"
+              ],
+              [
+                "WHO II / II to III",
+                "Small increase in mortality, moderate morbidity",
+                "Unoperated ASD or VSD, mild mitral stenosis, Turner syndrome without aortic dilation; district hospital or shared care"
+              ],
+              [
+                "WHO III",
+                "Significantly increased mortality or severe morbidity",
+                "Moderate mitral stenosis, mechanical prosthetic valve, systemic right ventricle, unrepaired cyanotic heart disease; tertiary centre care"
+              ],
+              [
+                "WHO IV",
+                "Extremely high mortality or severe morbidity; pregnancy contraindicated",
+                "Severe pulmonary arterial hypertension, severe systemic ventricular dysfunction (EF below 30 percent), severe symptomatic mitral or aortic stenosis"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "CARPREG II risk score predictors",
+          "points": [
+            "Prior cardiac events: heart failure, transient ischaemic attack, stroke, or sustained arrhythmia before pregnancy (3 points)",
+            "Baseline NYHA functional class III or IV, or baseline cyanosis with resting oxygen saturation under 90 percent (3 points)",
+            "High-risk left-sided heart obstruction: mitral valve area under 2.0 cm2 or aortic valve area under 1.5 cm2 (2 points)",
+            "Systemic ventricular systolic dysfunction with ejection fraction below 50 percent (2 points)",
+            "High-risk cardiovascular disease category: mechanical valve, unrepaired cyanotic lesion, or aortopathy (2 points)",
+            "Late pregnancy presentation or lack of prior specialized cardiac care (1 point)"
+          ]
+        },
+        {
+          "heading": "Lesions where pregnancy is contraindicated (WHO IV)",
+          "body": "Pregnancy is contraindicated in modified WHO Class IV conditions due to maternal mortality risks reaching 30 to 50 percent.\n\nThese conditions include pulmonary arterial hypertension of any cause, severe systemic ventricular dysfunction (EF under 30%), severe symptomatic mitral stenosis or aortic stenosis, vascular Ehlers-Danlos, and severe aortic dilation."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three cardiac conditions classified as modified WHO Class IV where pregnancy is strongly contraindicated due to high maternal mortality.",
+          "a": "Pulmonary arterial hypertension of any cause, severe systemic ventricular dysfunction with ejection fraction below 30 percent, and severe symptomatic mitral stenosis or aortic stenosis.",
+          "accept": [
+            "pulmonary arterial hypertension",
+            "pulmonary hypertension",
+            "ejection fraction",
+            "ventricular dysfunction",
+            "mitral stenosis",
+            "aortic stenosis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What clinical care setting is required for managing a pregnant woman classified as modified WHO Class III?",
+          "a": "Management must be provided in a specialized tertiary multidisciplinary centre with integrated maternal-fetal medicine, cardiology, and obstetric anaesthesia teams.",
+          "accept": [
+            "tertiary",
+            "multidisciplinary",
+            "cardiology",
+            "anaesthesia",
+            "centre",
+            "specialized"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "who_risk_tiers",
+          "text": "Classifies lesions across modified WHO categories I to IV and correlates with expected mortality"
+        },
+        {
+          "id": "carpreg_scoring",
+          "text": "Applies CARPREG II risk predictors to estimate maternal adverse event rates"
+        },
+        {
+          "id": "contraindication_recognition",
+          "text": "Identifies conditions where pregnancy is contraindicated and demands urgent counselling"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rheumatic_mitral_stenosis: clinicalPearls"
+        },
+        {
+          "source": "WHO",
+          "locator": "Cardiovascular disease in pregnancy: risk assessment and intrapartum care"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.heart.diagnosis": {
+      "id": "skill.heart.diagnosis",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Diagnostic formulation, severity grading and high-risk predictor identification in maternal heart disease",
+      "oneLine": "Integrating valvular lesion quantification, pulmonary hypertension presence, NYHA functional class, and multidisciplinary referral criteria",
+      "why": "Formulating a complete diagnostic statement in a pregnant cardiac patient goes beyond naming the disease. It requires defining the exact structural lesion, aetiology, hemodynamic severity, presence of pulmonary hypertension, functional NYHA class, and modified WHO risk category to determine timing of admission, level of delivery care, and intervention thresholds.",
+      "teach": [
+        {
+          "heading": "Mitral stenosis severity grading in pregnancy",
+          "table": {
+            "cols": [
+              "Severity Grade",
+              "Mitral Valve Area",
+              "Mean Diastolic Gradient",
+              "Pulmonary Artery Systolic Pressure"
+            ],
+            "rows": [
+              [
+                "Mild stenosis",
+                "Greater than 1.5 cm2",
+                "Less than 5 mmHg",
+                "Less than 30 mmHg"
+              ],
+              [
+                "Moderate stenosis",
+                "1.0 to 1.5 cm2",
+                "5 to 10 mmHg",
+                "30 to 50 mmHg"
+              ],
+              [
+                "Severe stenosis",
+                "Less than 1.0 cm2",
+                "Greater than 10 mmHg",
+                "Greater than 50 mmHg"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "The complete structured diagnostic statement",
+          "body": "A complete diagnosis follows a rigorous sequence: gravidity, parity, gestational age, underlying structural lesion, anatomical severity, aetiology, NYHA functional class, and modified WHO risk class.\n\nFor example: Gravida 2 Para 1 at 28 weeks gestation with moderate rheumatic mitral stenosis, in sinus rhythm, NYHA functional class II, modified WHO risk category III."
+        },
+        {
+          "heading": "Triggers for urgent tertiary hospital admission",
+          "points": [
+            "Deterioration in functional capacity by one or more NYHA classes, or development of orthopnoea",
+            "Onset of new atrial fibrillation, supraventricular tachycardia, or persistent resting heart rate over 100 bpm",
+            "Development of pulmonary congestion, basal lung crackles, or persistent nocturnal cough",
+            "Echocardiographic progression with mean gradient over 10 mmHg or pulmonary artery systolic pressure over 50 mmHg",
+            "Coexisting obstetric complications such as pre-eclampsia, fetal growth restriction, or preterm labour"
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What mitral valve area and mean transmitral diastolic pressure gradient define severe mitral stenosis?",
+          "a": "A mitral valve area less than 1.0 cm2 and a mean transmitral diastolic pressure gradient greater than 10 mmHg.",
+          "accept": [
+            "1.0",
+            "valve area",
+            "10",
+            "gradient",
+            "severe"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What clinical and hemodynamic triggers warrant immediate hospital admission in a pregnant woman with valvular heart disease?",
+          "a": "Functional deterioration by one or more NYHA classes, onset of orthopnoea, new atrial arrhythmias, persistent basal crackles, or mean diastolic gradient exceeding 10 mmHg.",
+          "accept": [
+            "nyha",
+            "orthopnoea",
+            "arrhythmias",
+            "crackles",
+            "gradient",
+            "admission",
+            "deterioration"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "severity_grading",
+          "text": "Applies quantitative echocardiographic criteria to grade mitral stenosis severity"
+        },
+        {
+          "id": "structured_statement",
+          "text": "Formulates a complete diagnostic statement including obstetric, structural, and functional status"
+        },
+        {
+          "id": "admission_thresholds",
+          "text": "Identifies red flag triggers requiring urgent maternal hospital admission"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rheumatic_mitral_stenosis: clinicalPearls"
+        },
+        {
+          "source": "FOGSI",
+          "locator": "Good Clinical Practice Recommendations: Heart Disease in Pregnancy, Diagnosis and Staging"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.heart.antenatal": {
+      "id": "skill.tx.heart.antenatal",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Antenatal medical management, decongestive therapy and secondary prophylaxis in pregnant cardiac patients",
+      "oneLine": "Diuretic titration, rate-controlling beta-blockers, rheumatic secondary penicillin prophylaxis, and multidisciplinary pregnancy heart team surveillance",
+      "dosingNote": "CliniX does not prescribe. Doses are quoted from standard obstetric protocols (Williams Obstetrics, RCOG, FOGSI) and the StewardMD Clinical KB for revision and examination purposes only.",
+      "why": "Antenatal medical therapy in pregnant women with valvular heart disease aims to maintain stable hemodynamics, control heart rate to prolong diastolic filling, relieve pulmonary congestion, and prevent recurrent rheumatic fever or infective endocarditis without compromising uteroplacental blood flow.",
+      "teach": [
+        {
+          "heading": "Decongestive diuretic therapy in pregnancy",
+          "body": "Oral loop diuretics, predominantly furosemide (20 to 40 mg daily), are indicated when pulmonary venous congestion or peripheral oedema develops in mitral stenosis.\n\nOver-diuresis must be strictly avoided because maternal intravascular volume depletion compromises uteroplacental perfusion, causing fetal growth restriction or acute oligohydramnios."
+        },
+        {
+          "heading": "Heart rate control and beta-blocker therapy",
+          "body": "Beta-1 selective blockers, specifically metoprolol (25 to 50 mg twice daily), are the agents of choice to slow sinus heart rate and prolong diastolic filling time across the stenotic valve.\n\nAtenolol is avoided in pregnancy due to associations with fetal growth restriction and placental hypoplasia. Propranolol can be used if metoprolol is unavailable."
+        },
+        {
+          "heading": "Secondary antibiotic prophylaxis and balloon valvuloplasty",
+          "body": "Secondary prophylaxis against recurrent rheumatic fever must continue throughout pregnancy: intramuscular benzathine penicillin G (1.2 million units every 3 to 4 weeks) is safe and mandatory.\n\nIn women with severe mitral stenosis refractory to medical therapy, percutaneous balloon mitral valvuloplasty can be performed safely after the 20th week of gestation under echocardiographic guidance with abdominal shielding."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which class of medications is the cornerstone for controlling heart rate and prolonging diastolic filling in pregnant women with mitral stenosis, and which specific agent is preferred?",
+          "a": "Beta-1 selective adrenergic blockers; metoprolol is the preferred agent because it preserves diastolic filling without the pronounced fetal growth restriction linked to atenolol.",
+          "accept": [
+            "beta blocker",
+            "beta-blocker",
+            "metoprolol",
+            "diastolic",
+            "heart rate",
+            "atenolol"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the role and timing of percutaneous balloon mitral valvuloplasty during pregnancy in women with severe mitral stenosis?",
+          "a": "Percutaneous balloon mitral valvuloplasty is indicated for severe symptomatic mitral stenosis refractory to medical therapy, ideally performed after 20 weeks of gestation with abdominal lead shielding.",
+          "accept": [
+            "balloon valvuloplasty",
+            "valvuloplasty",
+            "refractory",
+            "20 weeks",
+            "shielding",
+            "severe"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "diuretic_management",
+          "text": "Explains indications and safety margins for loop diuretics in pulmonary congestion"
+        },
+        {
+          "id": "rate_control",
+          "text": "Selects beta-1 selective blockers and contrasts metoprolol with atenolol"
+        },
+        {
+          "id": "rheumatic_prophylaxis",
+          "text": "Maintains secondary penicillin prophylaxis and details balloon valvuloplasty criteria"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rheumatic_mitral_stenosis: management"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Cardiovascular Disorders: Antenatal management of valvular heart disease"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.heart.labour": {
+      "id": "skill.tx.heart.labour",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Intrapartum labour management, anaesthetic technique, delivery timing and postpartum autotransfusion care",
+      "oneLine": "Vaginal delivery conduct, assisted second stage, epidural analgesia, fluid restriction, oxytocin titration, and avoiding ergometrine or carboprost",
+      "dosingNote": "CliniX does not prescribe. Doses are quoted from standard obstetric protocols (Williams Obstetrics, RCOG, FOGSI) and the StewardMD Clinical KB for revision and examination purposes only.",
+      "why": "Labour and the immediate postpartum period represent the most hemodynamically stressful phases of pregnancy. A multidisciplinary intrapartum plan addressing analgesia, maternal positioning, assisted second stage of labour, uterotonic selection, and postpartum volume monitoring is essential to prevent cardiovascular collapse.",
+      "teach": [
+        {
+          "heading": "Route and timing of delivery in cardiac disease",
+          "body": "Spontaneous or induced vaginal delivery is the preferred route for the majority of cardiac patients because it involves less blood loss, lower infection rates, and fewer thromboembolic complications than caesarean delivery.\n\nCaesarean delivery is reserved for obstetric indications, severe aortic pathology, acute refractory heart failure, or severe symptomatic aortic stenosis."
+        },
+        {
+          "heading": "Conduct of labour, positioning and epidural analgesia",
+          "body": "The woman should be positioned in left lateral decubitus or semi-recumbent posture to relieve aortocaval compression. Continuous early epidural analgesia is strongly recommended to eliminate pain-induced sympathetic surges and tachycardia.\n\nThe second stage of labour is shortened using instrumental delivery (vacuum or forceps) once the head is engaged to abolish strenuous maternal Valsalva efforts."
+        },
+        {
+          "heading": "Uterotonics and postpartum autotransfusion surveillance",
+          "body": "In the third stage of labour, ergometrine and carboprost are strictly contraindicated because they cause intense vasoconstriction, bronchospasm, and sudden surges in cardiac preload.\n\nActive management is conducted using slow, titrated intravenous oxytocin infusion (10 to 20 units in 500 mL normal saline). Strict fluid intake restriction (at or below 75 mL/hr) and monitoring for 72 hours postpartum prevent autotransfusion pulmonary oedema."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why are ergometrine and carboprost strictly contraindicated for managing the third stage of labour in a woman with heart disease?",
+          "a": "Ergometrine provokes intense peripheral vasoconstriction and severe hypertension, while carboprost causes pulmonary vasoconstriction and bronchospasm, both rapidly precipitating acute pulmonary oedema.",
+          "accept": [
+            "ergometrine",
+            "carboprost",
+            "vasoconstriction",
+            "pulmonary oedema",
+            "hypertension",
+            "afterload",
+            "bronchospasm"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why is an assisted second stage of labour using vacuum or forceps recommended for pregnant women with significant heart disease?",
+          "a": "Assisting the second stage abolishes strenuous maternal pushing (Valsalva manoeuvres), preventing dangerous spikes in intrathoracic pressure, blood pressure, and cardiac afterload.",
+          "accept": [
+            "assisted second stage",
+            "valsalva",
+            "pushing",
+            "blood pressure",
+            "intrathoracic",
+            "afterload",
+            "vacuum",
+            "forceps"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "delivery_mode_selection",
+          "text": "Rationalises preference for vaginal delivery and states caesarean indications"
+        },
+        {
+          "id": "analgesia_and_stage2",
+          "text": "Implements continuous epidural analgesia and assisted second stage to cut short Valsalva"
+        },
+        {
+          "id": "uterotonic_safety",
+          "text": "Contrasts titrated oxytocin with the absolute contraindications to ergometrine and carboprost"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "heart_failure_management: acute decompensation"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline: Cardiac Disease in Pregnancy, Intrapartum and Postpartum Care"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.heart.rheumatic_mitral_stenosis",
+      "title": "Sunita Devi, 24 years old, Primigravida at 28 weeks with rheumatic mitral stenosis and increasing breathlessness",
+      "patient": {
+        "name": "Sunita Devi",
+        "age": 24,
+        "sex": "female",
+        "occupation": "Homemaker and agricultural field worker",
+        "residence": "Rural district of Varanasi, Uttar Pradesh"
+      },
+      "initialVitals": {
+        "hr": 96,
+        "bpSystolic": 110,
+        "bpDiastolic": 70,
+        "rr": 22,
+        "spo2": 96,
+        "temp": 37,
+        "gcs": 15
+      },
+      "opening": "Doctor, I am seven months pregnant with my first baby. For the past two weeks, I get very breathless climbing even a few steps, and I cannot sleep flat at night without extra pillows.",
+      "fallback": "Doctor, I did not understand that question. Could you please ask me about my breathing, heart, or pregnancy?",
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you to the hospital today",
+            "what problem has brought you here",
+            "why have you come to the clinic",
+            "tell me what is troubling you"
+          ],
+          "reply": "Doctor, since the past two weeks I am having increasing breathlessness on walking, and for the last four days I cannot sleep flat without three pillows under my head.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "breathlessness_progression": {
+          "cues": [
+            "tell me more about your breathlessness",
+            "how far can you walk before getting breathless",
+            "when did the breathing difficulty start",
+            "does the breathlessness occur on exertion"
+          ],
+          "reply": "Earlier in this pregnancy I could finish all my household chores and walk to the fields. But over the last two weeks, even walking twenty paces or climbing four stairs makes me pant and gasp for breath.",
+          "key": true,
+          "skillId": "skill.hx.heart.symptoms"
+        },
+        "orthopnoea_pnd_symptoms": {
+          "cues": [
+            "how many pillows do you use to sleep",
+            "do you wake up gasping for breath at night",
+            "do you have difficulty breathing when lying flat",
+            "do you need to sit up at night to breathe"
+          ],
+          "reply": "Yes, doctor. If I lie flat, I feel like I am choking and suffocating within minutes. I have to prop myself up with three pillows, and twice this week I woke up at midnight gasping and had to sit by the open window.",
+          "key": true,
+          "skillId": "skill.hx.heart.symptoms"
+        },
+        "palpitation_episodes": {
+          "cues": [
+            "do you feel your heart racing or pounding",
+            "have you noticed any irregular heartbeats",
+            "do you have palpitations",
+            "does your heart flutter in your chest"
+          ],
+          "reply": "Yes, doctor. My heart starts thumping and racing very fast even after minimal effort, like sweeping the room. It feels like it is pounding inside my throat.",
+          "key": true,
+          "skillId": "skill.hx.heart.symptoms"
+        },
+        "chest_pain_evaluation": {
+          "cues": [
+            "have you had any chest pain or tightness",
+            "do you feel heaviness in your chest",
+            "is there any pain radiating to your arm or jaw",
+            "does your chest hurt when you walk"
+          ],
+          "reply": "No, doctor, I do not have any sharp or squeezing chest pain. Only a heavy feeling of breathlessness and tightness across my upper chest when my heart is racing.",
+          "key": false,
+          "skillId": "skill.hx.heart.symptoms"
+        },
+        "cough_haemoptysis_symptoms": {
+          "cues": [
+            "have you had any cough",
+            "have you coughed up any blood",
+            "do you bring up pink frothy phlegm",
+            "is there any blood in your sputum"
+          ],
+          "reply": "I have a dry irritating cough that troubles me mostly when I lie down at night. Yesterday morning when I coughed hard, I noticed two thin red streaks of blood in my phlegm, which frightened me greatly.",
+          "key": true,
+          "skillId": "skill.hx.heart.symptoms"
+        },
+        "syncope_presyncope_history": {
+          "cues": [
+            "have you had any blackouts or fainting spells",
+            "did you ever lose consciousness",
+            "do you feel dizzy or lightheaded",
+            "have you collapsed at any time"
+          ],
+          "reply": "No, doctor, I have never lost consciousness or fainted completely, but I feel slightly lightheaded and giddy if I stand up too quickly from my bed.",
+          "key": false,
+          "skillId": "skill.hx.heart.symptoms"
+        },
+        "pedal_oedema_swelling": {
+          "cues": [
+            "have you noticed swelling in your feet or legs",
+            "do your ankles swell towards the evening",
+            "is there puffiness of your face or hands",
+            "does the foot swelling remain in the morning"
+          ],
+          "reply": "Yes, doctor. Both my feet and ankles have been swollen for the past ten days. Earlier the swelling used to go away overnight, but now my feet remain puffy even when I wake up in the morning.",
+          "key": true,
+          "skillId": "skill.hx.heart.symptoms"
+        },
+        "gestational_age_dating": {
+          "cues": [
+            "what was the date of your last menstrual period",
+            "what is your estimated date of delivery",
+            "when is your calculated due date",
+            "how many months pregnant are you",
+            "do you have an early pregnancy ultrasound"
+          ],
+          "reply": "My last menstrual period was on 10 April. My cycles were always regular every 28 days. The doctor at the primary health centre confirmed my expected date of delivery is 17 January, and calculated that I am exactly 28 weeks pregnant today.",
+          "key": true,
+          "skillId": "skill.hx.obg.booking_lmp"
+        },
+        "childhood_rheumatic_fever": {
+          "cues": [
+            "did you have joint pains or swelling during childhood",
+            "did you suffer from repeated sore throats as a child",
+            "were you told you had rheumatic fever",
+            "did you have painful swollen joints that moved from knee to ankle"
+          ],
+          "reply": "Yes, doctor. When I was ten years old, I had high fever with severe pain and swelling that started in my knees and then shifted to my ankles and wrists. The doctor at that time told my parents it was rheumatic fever affecting my heart.",
+          "key": true,
+          "skillId": "skill.hx.heart.risk"
+        },
+        "penicillin_prophylaxis_history": {
+          "cues": [
+            "did you take monthly penicillin injections",
+            "were you prescribed preventive antibiotic injections",
+            "when did you stop taking penicillin",
+            "did you receive benzathine penicillin prophylaxis"
+          ],
+          "reply": "The hospital gave me a penicillin injection in my hip every three weeks for several years. But after I got married two years ago and moved to my husband village, I stopped going for the injections because the health centre was far away.",
+          "key": true,
+          "skillId": "skill.hx.heart.risk"
+        },
+        "prior_cardiac_interventions": {
+          "cues": [
+            "have you had any heart surgery or operation",
+            "did you ever have a balloon procedure to stretch your valve",
+            "do you have an artificial heart valve",
+            "have you undergone balloon mitral valvuloplasty"
+          ],
+          "reply": "No, doctor, I have never had any heart surgery, balloon stretching, or valve replacement. This is the first time my heart symptoms have become this severe.",
+          "key": true,
+          "skillId": "skill.hx.heart.risk"
+        },
+        "current_medication_intake": {
+          "cues": [
+            "what medicines or tablets are you taking currently",
+            "are you taking any heart tablets or water pills",
+            "did anyone prescribe blood thinners or bp medicines",
+            "are you on any routine antenatal supplements"
+          ],
+          "reply": "I am only taking the government iron and calcium tablets given by the ASHA worker. I am not taking any heart medicines, water pills, or blood thinners.",
+          "key": true,
+          "skillId": "skill.hx.heart.risk"
+        },
+        "prior_obstetric_history": {
+          "cues": [
+            "is this your first pregnancy",
+            "have you had any previous deliveries or miscarriages",
+            "have you ever been pregnant before this",
+            "any past abortions or ectopic pregnancy"
+          ],
+          "reply": "This is my very first pregnancy, doctor. I have never been pregnant before, and I have had no miscarriages or abortions.",
+          "key": false,
+          "skillId": "skill.hx.obg.previous_pregnancies"
+        },
+        "fetal_movements_monitoring": {
+          "cues": [
+            "how are the baby movements",
+            "do you feel your baby kicking well",
+            "are the fetal kicks regular and active",
+            "have you noticed any decrease in baby movements"
+          ],
+          "reply": "Yes, doctor, my baby is kicking very well. I feel active movements several times every day, especially after I eat my meals.",
+          "key": true,
+          "skillId": "skill.exam.obg.fetal_heart"
+        },
+        "antenatal_care_checkups": {
+          "cues": [
+            "where did you register your pregnancy",
+            "how many antenatal checkups have you attended",
+            "have you had blood tests and urine tests done",
+            "did you receive your tetanus injections"
+          ],
+          "reply": "I registered at the sub-centre in my village and had three visits with the ANM. She gave me two tetanus toxoid injections and tested my blood and urine, saying my blood count was slightly low.",
+          "key": false,
+          "skillId": "skill.hx.obg.booking_lmp"
+        },
+        "family_cardiac_background": {
+          "cues": [
+            "does anyone in your family have heart disease",
+            "did your parents or siblings have rheumatic fever",
+            "is there a family history of early heart attacks or sudden death",
+            "does heart trouble run in your family"
+          ],
+          "reply": "No, doctor. My parents and three younger brothers are all healthy. None of them had rheumatic fever or any heart problem.",
+          "key": false,
+          "skillId": "skill.hx.obg.medical_family_drug"
+        },
+        "socioeconomic_nutrition_support": {
+          "cues": [
+            "tell me about your diet and daily work",
+            "who is supporting you at home",
+            "do you eat green vegetables and milk",
+            "are you able to rest during the day"
+          ],
+          "reply": "We eat rice, wheat rotis, dal, and whatever seasonal vegetables we grow. My husband is a marginal farmer and works very hard. Since I became breathless, my mother-in-law has taken over cooking so I can rest.",
+          "key": false,
+          "skillId": "skill.hx.obg.medical_family_drug"
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "A young woman sitting propped up at 45 degrees, comfortable at rest but visibly tachypnoeic when speaking long sentences. Mild malar flush noted over bilateral cheeks. No diaphoresis.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 96 beats per minute, regular rhythm, normal volume. Blood pressure 110/70 mmHg in left lateral position. Respiratory rate 22 breaths per minute. Oxygen saturation 96 percent on room air. Temperature 37.0 C.",
+          "abnormal": true
+        },
+        "skill.gen.edema": {
+          "finding": "Bilateral pitting dependent pedal oedema extending over the dorsum of both feet and lower third of anterior tibia. No facial puffiness or sacral oedema.",
+          "abnormal": true
+        },
+        "skill.gen.cyanosis": {
+          "finding": "No central cyanosis on mucous membranes or lips. No peripheral cyanosis in fingers or toes.",
+          "abnormal": false
+        },
+        "skill.gen.clubbing": {
+          "finding": "No digital clubbing on fingernails or toenails. Normal Lovibond angle preserved.",
+          "abnormal": false
+        },
+        "skill.exam.obg.preg_prep_inspect": {
+          "finding": "Gravid abdomen with symmetrical enlargement consistent with late second trimester. Midline linea nigra and striae gravidarum present. No surgical scars, dilated veins, or visible peristalsis.",
+          "abnormal": false
+        },
+        "skill.exam.obg.fundal_height": {
+          "finding": "Fundus palpable midway between umbilicus and xiphisternum. Symphysis-fundal height measures 28 cm, corresponding appropriately to 28 weeks of gestation.",
+          "abnormal": false
+        },
+        "skill.exam.obg.leopold": {
+          "finding": "First manoeuvre confirms soft, irregular fetal breech at the fundus. Second manoeuvre identifies smooth regular fetal back on maternal left and small parts on the right. Third and fourth manoeuvres identify a smooth, hard, globular cephalic pole, freely movable and not engaged.",
+          "abnormal": false
+        },
+        "skill.exam.obg.fetal_heart": {
+          "finding": "Fetal heart sounds heard distinctly in the left lower maternal quadrant, regular rhythm with a baseline rate of 142 beats per minute. Normal variability appreciated.",
+          "abnormal": false
+        },
+        "skill.heart.findings": {
+          "finding": "Tapping apex beat in the left fifth intercostal space midclavicular line, without lateral displacement. Auscultation reveals a loud first heart sound (S1), a prominent early diastolic opening snap, and a low-pitched rumbling mid-diastolic murmur grade 3/6 with presystolic accentuation at the apex in left lateral position. Fine bilateral inspiratory crackles at both lung bases that do not clear on coughing.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "ecg",
+        "transthoracic_echocardiogram",
+        "complete_blood_count",
+        "chest_xray_shielded",
+        "obstetric_ultrasound_biometry"
+      ],
+      "investigations": {
+        "ecg": {
+          "label": "12-Lead Electrocardiogram",
+          "result": "Sinus rhythm, heart rate 96 bpm. Broad, bifid notched P waves in lead II with duration 0.12 seconds (P mitrale), biphasic P wave in lead V1 with prominent negative terminal deflection indicative of left atrial enlargement. Normal QRS axis (+60 degrees), no ischaemic ST-T changes.",
+          "note": "Essential baseline test in maternal heart disease. Confirms sinus rhythm and demonstrates electrocardiographic evidence of left atrial enlargement (P mitrale).",
+          "indicated": true
+        },
+        "transthoracic_echocardiogram": {
+          "label": "Transthoracic Echocardiogram",
+          "result": "Rheumatic mitral stenosis with thickened mitral leaflets, commissural fusion, and characteristic diastolic hockey-stick deformity of anterior leaflet. Mitral valve area by planimetry 1.2 cm2 (moderate stenosis). Mean transmitral diastolic pressure gradient 11 mmHg at heart rate 96 bpm. Left atrial diameter 44 mm with spontaneous echo contrast but no thrombus. Estimated pulmonary artery systolic pressure 38 mmHg (mild pulmonary hypertension). Normal left ventricular dimensions and preserved systolic function (LVEF 62%). Trace mitral regurgitation.",
+          "note": "The gold standard investigation. Quantifies valve area, diastolic gradients, pulmonary pressures, and chamber sizes without radiation exposure.",
+          "indicated": true
+        },
+        "complete_blood_count": {
+          "label": "Complete Blood Count",
+          "result": "Haemoglobin 10.6 g/dL, haematocrit 32 percent, MCV 84 fL, white cell count 8,400/uL, platelet count 220,000/uL.",
+          "note": "Essential to exclude gestational anaemia, which aggravates maternal tachycardia and precipitates cardiac decompensation.",
+          "indicated": true
+        },
+        "chest_xray_shielded": {
+          "label": "Chest Radiograph with Abdominal Lead Shielding",
+          "result": "Posteroanterior view performed with double abdominal lead apron shielding. Straightening of the left cardiac border, prominent left atrial appendage, mild cardiomegaly, and upper lobe pulmonary vascular diversion. No interstitial or alveolar pulmonary oedema.",
+          "note": "Safe in pregnancy with proper shielding (fetal exposure under 0.001 mGy). Excludes acute alveolar pulmonary oedema in suspected decompensation.",
+          "indicated": true
+        },
+        "obstetric_ultrasound_biometry": {
+          "label": "Obstetric Ultrasound and Fetal Biometry",
+          "result": "Single live intrauterine fetus in cephalic presentation. Biparietal diameter, head circumference, and femur length correspond to 28 weeks 2 days. Estimated fetal weight 1,180 grams (42nd percentile). Normal liquor volume with amniotic fluid index 13 cm. Umbilical artery Doppler pulsatility index within normal limits (PI 1.05), with positive continuous end-diastolic flow.",
+          "note": "Essential fetal surveillance to monitor growth and uteroplacental perfusion, as maternal cardiac disease predisposes to placental insufficiency.",
+          "indicated": true
+        },
+        "cardiac_biomarker_bnp": {
+          "label": "Serum NT-proBNP Level",
+          "result": "Serum NT-proBNP 380 pg/mL (elevated; normal non-pregnant upper limit 125 pg/mL, expected normal pregnancy level under 150 pg/mL).",
+          "note": "Useful objective biomarker of myocardial wall stress and left atrial strain. Elevated levels support hemodynamic decompensation and guide diuretic therapy.",
+          "indicated": true
+        },
+        "serum_electrolytes_creatinine": {
+          "label": "Serum Electrolytes and Renal Function",
+          "result": "Serum sodium 138 mEq/L, potassium 4.2 mEq/L, blood urea 18 mg/dL, serum creatinine 0.6 mg/dL.",
+          "note": "Provides essential baseline renal function and electrolyte parameters prior to initiating loop diuretic therapy.",
+          "indicated": true
+        },
+        "fetal_cardiotocography": {
+          "label": "Non-Stress Test (Cardiotocography)",
+          "result": "Baseline fetal heart rate 140 bpm, moderate baseline variability (10 to 15 bpm), two accelerations of 15 bpm for 15 seconds over 20 minutes, no decelerations. Reactive tracing.",
+          "note": "Reassuring non-stress test confirming fetal autonomic wellbeing and absence of hypoxia.",
+          "indicated": true
+        }
+      },
+      "differentialModel": {
+        "answer": "Rheumatic heart disease with moderate mitral stenosis in pregnancy (NYHA class II, modified WHO class III). Differentials to consider include physiological dyspnoea of pregnancy, peripartum cardiomyopathy, acute decompensated heart failure, pulmonary arterial hypertension, and severe anaemia.",
+        "accept": [
+          "Rheumatic heart disease",
+          "Mitral stenosis",
+          "Peripartum cardiomyopathy",
+          "Acute decompensated heart failure",
+          "Pulmonary arterial hypertension"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Rheumatic heart disease with moderate mitral stenosis in pregnancy at 28 weeks of gestation, NYHA class II functional status, modified WHO risk category III.",
+        "accept": [
+          "Rheumatic heart disease",
+          "Mitral stenosis",
+          "rhd"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Multidisciplinary pregnancy heart team management (obstetrician, cardiologist, obstetric anaesthetist); medical therapy with oral loop diuretic (furosemide) for pulmonary congestion, beta-1 selective blocker (metoprolol) for heart rate control; secondary antibiotic prophylaxis with intramuscular benzathine penicillin; serial clinical and echocardiographic surveillance; planned vaginal delivery at 37 to 38 weeks with early continuous epidural analgesia, left lateral tilt position, assisted second stage of labour with vacuum or forceps to avoid maternal bearing down; strict fluid management; active management of third stage of labour using slow titrated oxytocin infusion while strictly avoiding ergometrine and carboprost; close postpartum monitoring for 72 hours to detect pulmonary oedema from autotransfusion.",
+        "accept": [
+          "multidisciplinary",
+          "diuretic",
+          "beta blocker",
+          "penicillin",
+          "vaginal delivery",
+          "epidural",
+          "assisted second stage",
+          "oxytocin",
+          "avoid ergometrine",
+          "postpartum"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The 28th to 32nd weeks of gestation represent the primary danger zone for cardiac decompensation in mitral stenosis because physiological blood volume and cardiac output reach their peak expansion.",
+        "A diastolic murmur in pregnancy is always pathological and mandates prompt transthoracic echocardiography, whereas soft systolic flow murmurs are commonly physiological.",
+        "Tachycardia is hazardous in mitral stenosis because it shortens diastolic filling time, causing an exponential rise in left atrial pressure and rapid transudation of fluid into pulmonary alveoli.",
+        "Vaginal delivery is the preferred route for most cardiac patients; elective caesarean section carries greater blood loss, infection risk, and hemodynamic volatility, and is reserved for obstetric indications or severe aortic disease.",
+        "Assisting the second stage of labour with vacuum or forceps eliminates strenuous maternal pushing (Valsalva manoeuvres), preventing dangerous surges in venous return and blood pressure.",
+        "Ergometrine and carboprost are strictly contraindicated in maternal cardiac disease because they provoke acute hypertension, intense vasoconstriction, bronchospasm, and sudden pulmonary oedema.",
+        "The immediate postpartum period carries extreme risk of pulmonary oedema due to relief of inferior vena cava compression and autotransfusion of 300 to 500 mL of blood from the contracting uterus."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

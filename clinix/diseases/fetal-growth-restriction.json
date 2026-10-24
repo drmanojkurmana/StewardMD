@@ -1,0 +1,1278 @@
+{
+  "_comment": "CliniX disease pathway for Fetal growth restriction and oligohydramnios. Authoring rules: clinix-model.js, Final Year Expansion Plan WP3.",
+  "id": "fetal-growth-restriction",
+  "name": "Fetal growth restriction and oligohydramnios",
+  "fullName": "Fetal growth restriction and oligohydramnios: surveillance and timing of delivery",
+  "subtitle": "Surveillance and timing of delivery",
+  "system": "obgyn",
+  "kbRef": "intrauterine_growth_restriction",
+  "oneLine": "Pathological restriction of fetal growth potential with reduced liquor volume, Doppler surveillance, and the critical timing of preterm delivery",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "skills": [
+        "skill.fetal_growth.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Note maternal age, parity, booking status, and reliable first-trimester dating confirmation."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.booking_lmp",
+        "skill.hx.fetal.symptoms"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Ask specifically about reduced fetal movements, static abdominal size, and symptoms of pre-eclampsia."
+        },
+        "skill.hx.obg.booking_lmp": {
+          "expect": "Verify menstrual regularity and first-trimester ultrasound dating: reliable dating is essential for diagnosing growth restriction."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "skills": [
+        "skill.hx.obg.medical_family_drug",
+        "skill.hx.obg.previous_pregnancies",
+        "skill.hx.fetal.risk"
+      ],
+      "emphasis": {
+        "skill.hx.obg.medical_family_drug": {
+          "expect": "Screen for chronic hypertension, renal disease, thrombophilia, autoimmune conditions, and lack of prophylactic aspirin."
+        },
+        "skill.hx.obg.previous_pregnancies": {
+          "expect": "Check birth weights, small-for-gestational-age babies, stillbirths, and preterm deliveries in prior pregnancies."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema",
+        "skill.gen.cyanosis"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Assess maternal nutritional status, body build, and signs of chronic maternal disease."
+        },
+        "skill.gen.vitals": {
+          "expect": "Measure blood pressure carefully with appropriate cuff size to detect gestational hypertension or pre-eclampsia."
+        },
+        "skill.gen.edema": {
+          "expect": "Examine for peripheral and facial oedema indicative of coexisting pre-eclampsia."
+        },
+        "skill.gen.cyanosis": {
+          "expect": "Confirm absence of central or peripheral cyanosis."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Obstetric abdominal examination",
+      "skills": [
+        "skill.exam.obg.preg_prep_inspect",
+        "skill.exam.obg.fundal_height",
+        "skill.exam.obg.leopold",
+        "skill.exam.obg.fetal_heart"
+      ],
+      "emphasis": {
+        "skill.exam.obg.preg_prep_inspect": {
+          "expect": "Note abdominal contour: an undersized, flat-flanked abdomen suggesting reduced uterine volume."
+        },
+        "skill.exam.obg.fundal_height": {
+          "expect": "Measure symphysis-fundal height: a lag of 3 cm or more behind gestational weeks indicates suspected growth restriction."
+        },
+        "skill.exam.obg.leopold": {
+          "expect": "Assess lie and presentation: fetal parts are easily and sharply felt beneath the abdominal wall due to severe oligohydramnios."
+        },
+        "skill.exam.obg.fetal_heart": {
+          "expect": "Auscultate fetal heart rate for baseline rate and rhythm; listen for at least one full minute."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the fetal growth restriction picture together",
+      "skills": [
+        "skill.fetal_growth.findings"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "skills": [
+        "skill.fetal_growth.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "skills": [
+        "skill.fetal_growth.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "skills": [
+        "skill.ix.fetal_growth.workup",
+        "skill.annex.fetal_growth.doppler",
+        "skill.ix.obg.ctg_interpretation"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and staging",
+      "skills": [
+        "skill.fetal_growth.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment and delivery timing",
+      "skills": [
+        "skill.tx.fetal_growth",
+        "skill.tx.obg.mgso4",
+        "skill.approach.obg.cs_info",
+        "skill.approach.obg.newborn_immediate_care"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "skills": [
+        "skill.present.fetal.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.fetal_growth.antenatal_exam",
+        "title": "Obstetric examination in suspected fetal growth restriction",
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.gen.vitals",
+          "skill.exam.obg.fundal_height",
+          "skill.exam.obg.leopold",
+          "skill.exam.obg.fetal_heart"
+        ],
+        "seconds": 360,
+        "examinerQuestions": [
+          "What is the clinical definition of a significant symphysis-fundal height discrepancy, and what are its common causes?",
+          "How does severe oligohydramnios alter the physical findings during abdominal palpation and Leopold manoeuvres?",
+          "What bedside and ultrasound investigations must be arranged following the detection of a 5 cm fundal height lag?"
+        ]
+      },
+      {
+        "id": "osce.fetal_growth.surveillance_counsel",
+        "title": "Doppler surveillance interpretation and delivery planning",
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.ix.fetal_growth.workup",
+          "skill.fetal_growth.diagnosis",
+          "skill.tx.fetal_growth",
+          "skill.approach.obg.cs_info"
+        ],
+        "seconds": 360,
+        "examinerQuestions": [
+          "The umbilical artery Doppler shows absent end-diastolic flow at 33 weeks. What clinical stage does this represent and what is the delivery recommendation?",
+          "What two pharmacological therapies must be administered before delivering a growth-restricted fetus at 33 weeks?",
+          "Why is elective caesarean section preferred over labour induction in a growth-restricted fetus with absent or reversed umbilical diastolic flow?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.fetal_growth.basics",
+      "skill.fetal_growth.findings",
+      "skill.fetal_growth.summary",
+      "skill.fetal_growth.differential",
+      "skill.ix.fetal_growth.workup",
+      "skill.fetal_growth.diagnosis",
+      "skill.tx.fetal_growth",
+      "skill.annex.fetal_growth.doppler"
+    ]
+  },
+  "skills": {
+    "skill.fetal_growth.basics": {
+      "id": "skill.fetal_growth.basics",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "What fetal growth restriction and oligohydramnios are",
+      "oneLine": "Pathological failure to reach genetic growth potential, early versus late onset, and circulatory redistribution",
+      "why": "Growth restriction represents pathological failure to reach genetic growth potential rather than constitutionally small size. Distinguishing between them and recognising accompanying oligohydramnios dictates surveillance intensity, prevents stillbirth, and avoids iatrogenic premature delivery.",
+      "teach": [
+        {
+          "heading": "FGR versus small for gestational age",
+          "body": "Small for gestational age (SGA) describes any fetus whose estimated weight or abdominal circumference falls below the 10th centile for gestational age.\n\nFetal growth restriction (FGR) is a pathological condition in which the fetus fails to achieve its genetically determined growth potential, most often secondary to placental insufficiency. While all FGR fetuses may be SGA, not all SGA fetuses have FGR: constitutionally small fetuses are healthy and structurally normal."
+        },
+        {
+          "heading": "Early-onset versus late-onset disease",
+          "table": {
+            "cols": [
+              "Feature",
+              "Early-onset FGR",
+              "Late-onset FGR"
+            ],
+            "rows": [
+              [
+                "Gestation",
+                "Presents before 32 weeks",
+                "Presents at or after 32 weeks"
+              ],
+              [
+                "Placental disease",
+                "Severe spiral artery defect",
+                "Mild to moderate insufficiency"
+              ],
+              [
+                "Doppler pattern",
+                "Abnormal umbilical artery",
+                "Normal UA, abnormal MCA or CPR"
+              ],
+              [
+                "Clinical challenge",
+                "Prematurity versus hypoxia",
+                "Intrapartum asphyxia and stillbirth"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Pathophysiology and oligohydramnios",
+          "body": "Placental insufficiency stems from incomplete endovascular trophoblastic invasion of maternal spiral arteries, leaving high-resistance, non-remodeled vessels.\n\nThe fetus adapts to chronic hypoxia by redistributing cardiac output towards vital organs: the brain, myocardium, and adrenal glands, at the expense of renal and mesenteric perfusion. Decreased renal blood flow reduces fetal urine production, manifesting as oligohydramnios (amniotic fluid index under 5 cm or deepest vertical pocket under 2 cm)."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How does fetal growth restriction differ fundamentally from a constitutionally small-for-gestational-age fetus?",
+          "a": "Fetal growth restriction is a pathological failure to achieve genetic growth potential due to placental or fetal disease, whereas a constitutionally small fetus is biologically normal and healthy.",
+          "accept": [
+            "pathological",
+            "genetic growth potential",
+            "placental",
+            "normal",
+            "healthy"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the primary mechanism causing oligohydramnios in placental insufficiency?",
+          "a": "Chronic fetal hypoxia triggers circulatory redistribution away from the kidneys, reducing renal perfusion and fetal urine production, which is the primary constituent of amniotic fluid in the second half of pregnancy.",
+          "accept": [
+            "redistribution",
+            "renal perfusion",
+            "fetal urine",
+            "amniotic fluid",
+            "kidneys"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "intrauterine_growth_restriction: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Fetal growth restriction: definitions and pathophysiology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.fetal_growth.findings": {
+      "id": "skill.fetal_growth.findings",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "The fetal growth restriction and oligohydramnios picture",
+      "oneLine": "Lagging fundal height, easily palpable fetal parts from absent liquor, and maternal vascular warning signs",
+      "why": "Bedside physical examination in the antenatal clinic remains the primary screening modality for growth restriction in low-resource settings. Recognizing a lagging symphysis-fundal height, easily palpable fetal parts from absent liquor, and maternal hypertensive markers allows prompt referral for ultrasound and Doppler velocimetry.",
+      "teach": [
+        {
+          "heading": "Symphysis-fundal height discrepancy",
+          "body": "Symphysis-fundal height (SFH) measured in centimetres between 24 and 36 weeks should normally correspond to gestational age within plus or minus 2 cm.\n\nA fundal height lagging by 3 cm or more behind gestational age warrants immediate ultrasound biometry. Serial measurements plotted on a custom centile chart identify a flattened growth trajectory earlier than a single cross-sectional measurement."
+        },
+        {
+          "heading": "Palpatory signs of oligohydramnios",
+          "points": [
+            "Uterus feels small, tight, and contour-hugging around the fetal body with minimal intervening fluid.",
+            "Fetal parts (head, back, limbs) are palpable with unusual ease and sharpness directly beneath the maternal abdominal wall.",
+            "Fetal mobility and ballottement are restricted due to the absence of the amniotic fluid cushion.",
+            "Maternal abdominal girth is noticeably reduced for the period of amenorrhoea."
+          ]
+        },
+        {
+          "heading": "Coexisting maternal clues",
+          "body": "Look actively for underlying maternal vascular pathology: elevated blood pressure indicating gestational hypertension or pre-eclampsia, and proteinuria on dipstick.\n\nAssess maternal weight gain: static weight or gain under 1 kg per month in the second half of pregnancy warns of maternal malnutrition or progressive uteroplacental dysfunction."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What threshold difference between symphysis-fundal height in centimetres and gestational age in weeks indicates suspected growth restriction?",
+          "a": "A lag of 3 centimetres or more between symphysis-fundal height and completed weeks of gestation warrants diagnostic ultrasound evaluation.",
+          "accept": [
+            "3",
+            "centimetres",
+            "lag",
+            "ultrasound"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why are fetal parts felt with unusual sharpness on abdominal palpation in severe oligohydramnios?",
+          "a": "A deficiency of amniotic fluid removes the protective fluid cushion around the fetus, allowing fetal limbs and trunk to be palpated directly against the uterine and abdominal walls.",
+          "accept": [
+            "fluid cushion",
+            "deficiency",
+            "amniotic fluid",
+            "cushion",
+            "palpated"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "intrauterine_growth_restriction: pathophysiology"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Fetal growth restriction: physical diagnosis and fundal height"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.fetal_growth.summary": {
+      "id": "skill.fetal_growth.summary",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "The clinical summary",
+      "oneLine": "Structuring the problem representation: gestation, dating, biometry centiles, Doppler stage, and liquor volume",
+      "why": "A concise problem representation captures gestational maturity, dating confidence, degree of biometry deficit, liquor volume, Doppler compromise stage, and maternal complications. It provides the structured foundation for urgent multidisciplinary decisions regarding steroid administration, transfer, and timing of delivery.",
+      "teach": [
+        {
+          "heading": "Elements of the obstetric problem representation",
+          "body": "A clinical summary for fetal growth restriction must open with maternal age, gravidity, parity, and completed gestational weeks established by reliable first-trimester dating.\n\nState the clinical and sonographic severity: fundal height lag, estimated fetal weight centile, abdominal circumference centile, and whether the restriction is symmetrical or asymmetrical."
+        },
+        {
+          "heading": "Synthesising hemodynamic status and maternal risk",
+          "body": "Integrate the hemodynamic status by stating the specific Doppler abnormalities: umbilical artery resistance, middle cerebral artery redistribution, and ductus venosus flow.\n\nInclude amniotic fluid volume (AFI or deepest pocket) and maternal risk factors, especially blood pressure elevation, before summarizing the delivery timeline and newborn care readiness."
+        },
+        {
+          "heading": "Model summary template",
+          "body": "A 26-year-old gravida 2, para 1 at 34 completed weeks confirmed by 11-week dating ultrasound, presenting with lagging fundal height of 29 cm and reduced fetal movements.\n\nSonography confirms asymmetrical fetal growth restriction with AC below the 3rd centile, severe oligohydramnios, umbilical artery absent end-diastolic flow, and cerebral redistribution, requiring immediate corticosteroid administration and planned caesarean delivery."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What key vascular findings must be synthesized into the clinical summary of early-onset growth restriction?",
+          "a": "Umbilical artery Doppler status, middle cerebral artery redistribution or cerebroplacental ratio, and ductus venosus a-wave waveform must be explicitly stated.",
+          "accept": [
+            "umbilical artery",
+            "middle cerebral artery",
+            "ductus venosus",
+            "cerebroplacental ratio"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why must first-trimester dating confirmation be included in the opening sentence of the summary?",
+          "a": "Without reliable dating confirmation, growth restriction cannot be diagnosed with certainty, as an apparent size lag may simply reflect inaccurate menstrual dates.",
+          "accept": [
+            "dating confirmation",
+            "inaccurate",
+            "dates",
+            "diagnosed"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "intrauterine_growth_restriction: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Fetal growth restriction: synthesis and clinical evaluation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.fetal_growth.differential": {
+      "id": "skill.fetal_growth.differential",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Differential diagnosis",
+      "oneLine": "Distinguishing placental FGR from constitutional small size, chromosomal aneuploidy, infection, and dating error",
+      "why": "A small-for-dates uterus has distinct etiologies with radically different management pathways. Confusing a healthy constitutionally small fetus with placental insufficiency causes unnecessary premature delivery, while missing chromosomal aneuploidy or congenital infection results in inappropriate surveillance.",
+      "teach": [
+        {
+          "heading": "Constitutional SGA versus pathological FGR",
+          "body": "A constitutionally small fetus grows along its own lower centile (between 3rd and 10th centiles) without pathological deceleration over time.\n\nKey distinguishing features of constitutional SGA include normal umbilical artery and middle cerebral artery Doppler, normal amniotic fluid volume, proportional head-to-abdomen measurements, and absence of maternal vascular disease."
+        },
+        {
+          "heading": "Differential matrix for the small-for-dates uterus",
+          "table": {
+            "cols": [
+              "Condition",
+              "Biometry pattern",
+              "Doppler velocimetry",
+              "Amniotic fluid"
+            ],
+            "rows": [
+              [
+                "Placental FGR",
+                "Asymmetric (HC > AC)",
+                "High UA resistance, low CPR",
+                "Oligohydramnios"
+              ],
+              [
+                "Constitutional SGA",
+                "Symmetric (normal ratio)",
+                "Normal UA and MCA Doppler",
+                "Normal liquor volume"
+              ],
+              [
+                "Chromosomal aneuploidy",
+                "Early symmetric lag",
+                "Normal UA initially",
+                "Normal or polyhydramnios"
+              ],
+              [
+                "Congenital infection",
+                "Early symmetric lag",
+                "Normal or variable Doppler",
+                "Normal or oligohydramnios"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Non-placental causes of oligohydramnios",
+          "body": "When oligohydramnios accompanies a small uterus, rule out premature prelabour rupture of membranes (PPROM) via sterile speculum examination.\n\nAlso exclude bilateral fetal renal agenesis (Potter sequence), multicystic dysplastic kidneys, or posterior urethral valves on anatomical ultrasound survey, where absent urine production causes profound anhydramnios."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What ultrasound Doppler and amniotic fluid findings confirm a constitutionally small fetus rather than placental growth restriction?",
+          "a": "Normal umbilical artery Doppler velocimetry, normal middle cerebral artery flow, and normal amniotic fluid volume confirm constitutional small size.",
+          "accept": [
+            "normal umbilical artery",
+            "normal middle cerebral artery",
+            "normal amniotic fluid",
+            "doppler",
+            "normal"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which fetal biometry pattern is characteristic of chromosomal aneuploidy and congenital infections?",
+          "a": "Symmetrical growth restriction with proportional reduction in head circumference, abdominal circumference, and femur length presenting early in pregnancy.",
+          "accept": [
+            "symmetrical",
+            "proportional",
+            "head circumference",
+            "early"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "intrauterine_growth_restriction: additionalDifferentials"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Fetal growth restriction: differential diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.fetal_growth.workup": {
+      "id": "skill.ix.fetal_growth.workup",
+      "kind": "investigation",
+      "system": "obgyn",
+      "title": "Ultrasound biometry, Doppler velocimetry and amniotic fluid assessment",
+      "oneLine": "Serial biometric growth trajectory, umbilical-cerebral-venous Doppler progression, and liquor volume indices",
+      "why": "Modern management of fetal growth restriction is entirely guided by ultrasound biometry and multi-vessel Doppler velocimetry. Umbilical artery Doppler assesses placental resistance, middle cerebral artery Doppler detects brain-sparing redistribution, and ductus venosus Doppler identifies impending myocardial failure, establishing the precise threshold for delivery.",
+      "teach": [
+        {
+          "heading": "Ultrasound biometry protocol",
+          "body": "Serial biometry measures biparietal diameter (BPD), head circumference (HC), abdominal circumference (AC), and femur length (FL) to derive estimated fetal weight (EFW) using the Hadlock formula.\n\nAbdominal circumference is the single most sensitive parameter for glycogen and subcutaneous fat depletion. Scans must be spaced at least 14 days apart to avoid false-positive growth failure from measurement error."
+        },
+        {
+          "heading": "Doppler surveillance sequence",
+          "table": {
+            "cols": [
+              "Vessel",
+              "Normal finding",
+              "Abnormal finding",
+              "Clinical significance"
+            ],
+            "rows": [
+              [
+                "Umbilical artery",
+                "High diastolic flow",
+                "Absent or reversed end-diastolic flow",
+                "Placental vascular obliteration"
+              ],
+              [
+                "Middle cerebral artery",
+                "High-resistance flow",
+                "Low PI, low CPR (< 1.08)",
+                "Brain-sparing cerebral vasodilation"
+              ],
+              [
+                "Ductus venosus",
+                "Positive forward a-wave",
+                "Absent or reversed a-wave",
+                "Impending acidemia and heart failure"
+              ],
+              [
+                "Amniotic fluid",
+                "DVP 2-8 cm, AFI 5-25 cm",
+                "DVP < 2 cm or AFI < 5 cm",
+                "Reduced fetal renal perfusion"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Cardiotocography and biophysical profile",
+          "body": "Cardiotocography (CTG) assesses fetal autonomic function. Computerised CTG evaluating short-term variation (STV) is superior to traditional visual traces: an STV below 3.5 ms warns of severe metabolic acidemia.\n\nBiophysical profile (BPP) evaluates breathing, movement, tone, fluid, and CTG; a score of 4 or less out of 10 indicates severe asphyxia and prompts urgent delivery."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why should serial ultrasound biometry scans for fetal growth velocity be performed at least 14 days apart?",
+          "a": "Scanning at intervals shorter than two weeks introduces ultrasound measurement error that can falsely mimic growth arrest or artificial acceleration.",
+          "accept": [
+            "two weeks",
+            "14 days",
+            "measurement error",
+            "error"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the clinical significance of a reversed a-wave on ductus venosus Doppler velocimetry?",
+          "a": "A reversed a-wave during atrial contraction indicates elevated right ventricular afterload, cardiac decompensation, and impending fetal acidemia or demise.",
+          "accept": [
+            "decompensation",
+            "acidemia",
+            "atrial contraction",
+            "afterload",
+            "demise"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "intrauterine_growth_restriction: additionalInvestigations"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Assessment of fetal well-being: Doppler velocimetry"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.fetal_growth.diagnosis": {
+      "id": "skill.fetal_growth.diagnosis",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Diagnostic criteria, staging and severity classification",
+      "oneLine": "Delphi consensus definitions, Barcelona staging system, and liquor volume categorization",
+      "why": "Standardised Delphi consensus and Barcelona staging systems translate complex biometry and Doppler parameters into clear clinical stages. Staging establishes objective surveillance intervals and unambiguous delivery triggers, standardizing clinical practice between obstetricians and neonatologists.",
+      "teach": [
+        {
+          "heading": "Delphi consensus diagnostic criteria",
+          "body": "Early-onset FGR (< 32 weeks) is diagnosed if AC or EFW is below the 3rd centile, or if umbilical artery end-diastolic flow is absent, or if AC/EFW is < 10th centile combined with uterine artery or umbilical artery PI > 95th centile.\n\nLate-onset FGR (at or over 32 weeks) is diagnosed if AC/EFW is < 3rd centile, or if at least two of the following are met: AC/EFW < 10th centile, growth velocity falling > 50 centiles, or CPR < 5th centile."
+        },
+        {
+          "heading": "Clinical staging and delivery thresholds",
+          "table": {
+            "cols": [
+              "Stage",
+              "Severity definition",
+              "Primary Doppler criteria",
+              "Delivery gestation"
+            ],
+            "rows": [
+              [
+                "Stage 1",
+                "Mild insufficiency",
+                "AC/EFW < 3rd centile, or CPR < 5th centile",
+                "Deliver at 37 to 38 weeks"
+              ],
+              [
+                "Stage 2",
+                "Severe insufficiency",
+                "Umbilical artery absent end-diastolic flow",
+                "Deliver at 33 to 34 weeks"
+              ],
+              [
+                "Stage 3",
+                "Advanced compromise",
+                "UA reversed flow or DV-PI > 95th centile",
+                "Deliver at 30 to 32 weeks"
+              ],
+              [
+                "Stage 4",
+                "Impending demise",
+                "Ductus venosus reversed a-wave or low STV",
+                "Deliver at 26 weeks or above"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Oligohydramnios grading",
+          "body": "Amniotic fluid volume is assessed using two standard ultrasound metrics: the single deepest vertical pocket (DVP) and the four-quadrant amniotic fluid index (AFI).\n\nOligohydramnios is defined as a DVP under 2 cm or an AFI under 5 cm. In fetal growth restriction, oligohydramnios serves as an independent marker of chronic placental insufficiency and worsens perinatal prognosis."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What defining Doppler finding characterizes Stage 2 fetal growth restriction in the Barcelona staging system?",
+          "a": "Absent end-diastolic flow in the umbilical artery on repeated examinations characterizes Stage 2 fetal growth restriction.",
+          "accept": [
+            "absent end-diastolic flow",
+            "umbilical artery",
+            "stage 2",
+            "flow"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the target gestational age for delivery in a fetus with Stage 1 growth restriction and normal umbilical Doppler?",
+          "a": "Elective delivery is recommended at 37 to 38 completed weeks of gestation, balancing the risk of late stillbirth against mild neonatal morbidity.",
+          "accept": [
+            "37",
+            "38",
+            "weeks",
+            "stillbirth"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "intrauterine_growth_restriction: tables"
+        },
+        {
+          "source": "RCOG",
+          "locator": "The Investigation and Management of the Small-for-Gestational-Age Fetus: Staging and Classification"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.fetal_growth": {
+      "id": "skill.tx.fetal_growth",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Managing fetal growth restriction: surveillance and delivery",
+      "oneLine": "Inpatient surveillance, antenatal corticosteroids, magnesium neuroprotection, and Doppler-triggered delivery",
+      "why": "There is no medical therapy that reverses placental insufficiency; management centres entirely on meticulous fetal surveillance, maternal medical optimisation, and timed delivery. Balancing the hazards of intrauterine hypoxia against the risks of neonatal prematurity determines perinatal survival and long-term neurodevelopmental outcomes.",
+      "dosingNote": "CliniX does not prescribe. Doses are quoted from standard obstetric protocols (Williams Obstetrics, RCOG, FOGSI) and the StewardMD Clinical KB for revision and examination purposes only.",
+      "teach": [
+        {
+          "heading": "Antenatal surveillance intervals",
+          "body": "Surveillance frequency is governed by Doppler stage. Stage 1 fetuses undergo biweekly Doppler and CTG monitoring with biometry every 2 weeks.\n\nStage 2 (absent end-diastolic flow) requires Doppler and CTG surveillance 2 to 3 times weekly. Stage 3 (reversed end-diastolic flow) and Stage 4 mandate daily or continuous monitoring in an inpatient high-risk obstetric ward."
+        },
+        {
+          "heading": "Pharmacotherapy ahead of preterm birth",
+          "body": "Antenatal corticosteroids promote surfactant production and accelerate fetal lung maturation when preterm delivery is expected before 34 to 36+6 weeks: administer intramuscular betamethasone 12 mg in two doses 24 hours apart.\n\nMagnesium sulphate provides fetal neuroprotection against cerebral palsy when delivery is planned before 32 weeks: give a 4 g intravenous loading dose over 20 minutes followed by 1 g per hour maintenance for 12 to 24 hours."
+        },
+        {
+          "heading": "Timing and mode of delivery",
+          "table": {
+            "cols": [
+              "Doppler criteria",
+              "Surveillance interval",
+              "Timing of delivery",
+              "Mode of delivery"
+            ],
+            "rows": [
+              [
+                "Stage 1 (elevated UA PI)",
+                "Twice weekly Doppler",
+                "37 to 38 completed weeks",
+                "Induction with continuous CTG"
+              ],
+              [
+                "Stage 2 (UA AEDF)",
+                "Every 48 to 72 hours",
+                "33 to 34 completed weeks",
+                "Caesarean delivery indicated"
+              ],
+              [
+                "Stage 3 (UA REDF)",
+                "Daily CTG and Doppler",
+                "30 to 32 completed weeks",
+                "Caesarean delivery mandatory"
+              ],
+              [
+                "Stage 4 (DV reversed a-wave)",
+                "Continuous monitoring",
+                "Immediate (at or over 26 weeks)",
+                "Emergency caesarean delivery"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Maternal management and delivery setting",
+          "body": "Control maternal hypertension to maintain blood pressure around 135/85 mmHg without excessive hypotension that could further decrease placental perfusion.\n\nAdvise left lateral rest and complete cessation of smoking or tobacco chewing. Deliver in a tertiary hospital with Level 3 Neonatal Intensive Care Unit (NICU) capabilities, with neonatologists attending the birth."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What corticosteroid regimen is administered to accelerate fetal lung maturation prior to planned preterm delivery in growth restriction?",
+          "a": "Intramuscular betamethasone 12 mg administered in two doses 24 hours apart, or intramuscular dexamethasone 6 mg in four doses 12 hours apart.",
+          "accept": [
+            "betamethasone",
+            "12 mg",
+            "dexamethasone",
+            "6 mg",
+            "hours apart"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why is caesarean delivery indicated over labour induction in a growth-restricted fetus with absent or reversed umbilical artery end-diastolic flow?",
+          "a": "Uterine contractions during labour compromise intervillous perfusion; a fetus with pre-existing absent or reversed diastolic flow lacks placental reserve and will develop acute intrapartum asphyxia.",
+          "accept": [
+            "uterine contractions",
+            "placental reserve",
+            "asphyxia",
+            "compromise"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "intrauterine_growth_restriction: management"
+        },
+        {
+          "source": "FOGSI",
+          "locator": "FOGSI General Clinical Practice Recommendations: Timing of Delivery in FGR"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.fetal_growth.doppler": {
+      "id": "skill.annex.fetal_growth.doppler",
+      "kind": "annexure",
+      "system": "obgyn",
+      "title": "Doppler velocimetry indices and amniotic fluid thresholds",
+      "oneLine": "Standard formulas, cut-off values, and clinical interpretations for umbilical, cerebral, and venous Doppler",
+      "why": "Clinical decisions in fetal surveillance rely on precise mathematical indices and reference centiles. This annexure provides standard definitions, reference cut-offs, and clinical interpretations for umbilical, cerebral, and venous Doppler waveforms as well as amniotic fluid metrics.",
+      "teach": [
+        {
+          "heading": "Umbilical and cerebral Doppler indices",
+          "table": {
+            "cols": [
+              "Parameter",
+              "Calculation formula",
+              "Abnormal threshold",
+              "Interpretation"
+            ],
+            "rows": [
+              [
+                "Pulsatility Index (PI)",
+                "(Systolic - Diastolic) / Mean",
+                "> 95th centile for gestation",
+                "Increased downstream resistance"
+              ],
+              [
+                "Resistance Index (RI)",
+                "(Systolic - Diastolic) / Systolic",
+                "> 95th centile for gestation",
+                "Decreased downstream vascularity"
+              ],
+              [
+                "Systolic/Diastolic (S/D)",
+                "Peak Systolic / End Diastolic",
+                "> 3.0 after 30 weeks gestation",
+                "Placental bed obliterative disease"
+              ],
+              [
+                "Cerebroplacental Ratio",
+                "MCA-PI divided by UA-PI",
+                "CPR < 1.08 or < 5th centile",
+                "Brain-sparing cerebral redistribution"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Venous Doppler and liquor thresholds",
+          "table": {
+            "cols": [
+              "Parameter",
+              "Vessel or cavity",
+              "Normal reference",
+              "Pathological cut-off"
+            ],
+            "rows": [
+              [
+                "Ductus venosus PI",
+                "Ductus venosus",
+                "< 95th centile (< 0.8)",
+                "PI > 95th centile"
+              ],
+              [
+                "Ductus venosus a-wave",
+                "Ductus venosus",
+                "Positive forward wave",
+                "Absent or reversed a-wave"
+              ],
+              [
+                "Deepest vertical pocket",
+                "Single clearest pocket",
+                "2.0 to 8.0 cm",
+                "DVP < 2.0 cm (oligohydramnios)"
+              ],
+              [
+                "Amniotic fluid index",
+                "Sum of four quadrants",
+                "5.0 to 25.0 cm",
+                "AFI < 5.0 cm (oligohydramnios)"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What threshold value of the cerebroplacental ratio indicates brain-sparing cerebral redistribution?",
+          "a": "A cerebroplacental ratio of less than 1.08 or below the 5th centile for gestational age indicates cerebral redistribution.",
+          "accept": [
+            "1.08",
+            "5th centile",
+            "cerebroplacental ratio",
+            "redistribution"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What deepest vertical pocket measurement on ultrasound defines oligohydramnios?",
+          "a": "A single deepest vertical pocket of amniotic fluid measuring less than 2.0 centimetres defines oligohydramnios.",
+          "accept": [
+            "2.0",
+            "2",
+            "centimetres",
+            "deepest vertical pocket",
+            "pocket"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "intrauterine_growth_restriction: tables"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Doppler velocimetry: indices, reference ranges, and clinical interpretation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.fetal_growth.anita",
+      "title": "A multigravida at 34 weeks with lagging fundal height and reduced fetal movements",
+      "opening": "Anita Sharma, a 26-year-old multigravida (gravida 2, para 1) at 34 weeks of gestation from a semi-urban district in Madhya Pradesh, has been referred by the community health centre because her fundal height measures only 29 cm and she noticed reduced fetal movements over the past two days. Introduce yourself and take a focused history.",
+      "fallback": "I am sorry, doctor, I did not understand that. Could you ask me in another way?",
+      "patient": {
+        "name": "Anita Sharma",
+        "age": 26,
+        "sex": "female",
+        "occupation": "Primary school teacher, currently on maternity leave",
+        "residence": "Semi-urban township near Bhopal, Madhya Pradesh, living with husband and one child"
+      },
+      "initialVitals": {
+        "hr": 82,
+        "bpSystolic": 138,
+        "bpDiastolic": 88,
+        "rr": 18,
+        "spo2": 98,
+        "temp": 36.8,
+        "gcs": 15
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you to the hospital today",
+            "why have you been referred here",
+            "tell me what problem you are facing",
+            "chief complaint today"
+          ],
+          "reply": "Doctor, the nurse at the government health centre told me that my belly is too small for eight months, and I feel my baby has not been moving as strongly for two days."
+        },
+        "fetal_movements_pattern": {
+          "cues": [
+            "how are the baby movements",
+            "tell me about the fetal kicks",
+            "since when did the baby movements decrease",
+            "are you feeling normal baby kicks"
+          ],
+          "reply": "Normally my baby kicks vigorously after lunch and dinner. For the last two days, the kicks have become much weaker and fewer, maybe only three or four times all day."
+        },
+        "abdominal_size_lag": {
+          "cues": [
+            "has your abdomen been growing properly",
+            "do you feel your tummy is small",
+            "did you notice your belly size lagging",
+            "when did you notice small bump"
+          ],
+          "reply": "My mother-in-law noticed last month that my baby bump was smaller than other women at seven or eight months, and the health centre nurse said my measurement is behind."
+        },
+        "amniotic_leak_check": {
+          "cues": [
+            "have you noticed any watery fluid leaking",
+            "is there any continuous watery discharge",
+            "did your water break",
+            "any leaking from the vagina"
+          ],
+          "reply": "No doctor, there has been no watery fluid leaking or gushing from below at all. My undergarments stay completely dry."
+        },
+        "vaginal_bleeding_check": {
+          "cues": [
+            "have you had any bleeding from the vagina",
+            "any brown discharge or spotting",
+            "did you notice fresh blood per vaginam",
+            "any vaginal spotting"
+          ],
+          "reply": "No, I have not had any bleeding, brown discharge, or spotting throughout this entire pregnancy."
+        },
+        "headache_visual_symptoms": {
+          "cues": [
+            "do you have severe headaches",
+            "are you seeing flashing lights or spots",
+            "any blurring of your vision",
+            "have you had persistent headache"
+          ],
+          "reply": "I had a mild tension headache yesterday evening, but no severe throbbing headache and definitely no blurred vision, flashing lights, or spots before my eyes."
+        },
+        "epigastric_upper_pain": {
+          "cues": [
+            "do you have pain in the upper abdomen",
+            "any pain below your right ribs",
+            "any severe stomach pain or acidity",
+            "epigastric discomfort"
+          ],
+          "reply": "No, I have had no pain below my ribs or in the upper stomach area, only a little occasional acidity after heavy meals."
+        },
+        "booking_dating_history": {
+          "cues": [
+            "when was the first day of your last menstrual period",
+            "were your monthly periods regular before pregnancy",
+            "did you have an early dating ultrasound scan",
+            "what was your dating scan date"
+          ],
+          "reply": "My last menstrual period started on the twenty-sixth of February. My cycles were always regular every twenty-eight days. I had an ultrasound scan at eleven weeks in the district hospital which matched my dates exactly."
+        },
+        "anc_visits_trail": {
+          "cues": [
+            "how many antenatal checkups have you attended",
+            "did you attend the village mch clinic",
+            "were your blood pressure readings checked at every visit",
+            "show me your mch card"
+          ],
+          "reply": "I have attended five check-ups at the primary health centre and on PMSMA day on the ninth of each month. My blood pressure was always normal around 110/70 until two weeks ago when it measured 130/80."
+        },
+        "previous_pregnancy_outcome": {
+          "cues": [
+            "tell me about your previous delivery",
+            "what was the birth weight of your first child",
+            "did your first baby have any growth problems",
+            "was your first delivery normal or caesarean"
+          ],
+          "reply": "Three years ago I delivered a healthy baby boy at 39 weeks. His birth weight was 2.9 kg and he cried immediately. That pregnancy was completely uncomplicated."
+        },
+        "medical_illness_history": {
+          "cues": [
+            "did you have high blood pressure before pregnancy",
+            "do you suffer from diabetes or kidney problems",
+            "any history of heart disease or thyroid",
+            "any chronic medical conditions"
+          ],
+          "reply": "No, I never had high blood pressure, sugar disease, kidney trouble, or thyroid illness before getting pregnant."
+        },
+        "drug_supplement_history": {
+          "cues": [
+            "what medicines or supplements have you been taking",
+            "did you take your iron and folic acid tablets",
+            "were you taking calcium supplements regularly",
+            "any other medications during pregnancy"
+          ],
+          "reply": "I took folic acid for the first three months, and since the fourth month I take iron-folic acid and calcium tablets daily provided by the ASHA worker. I was not prescribed aspirin."
+        },
+        "family_medical_history": {
+          "cues": [
+            "does anyone in your family have high blood pressure",
+            "is there a family history of preeclampsia",
+            "did your mother or sister have small babies",
+            "any family history of diabetes"
+          ],
+          "reply": "My mother has mild blood pressure for the last five years, but none of my sisters had high pressure or small babies during their pregnancies."
+        },
+        "personal_nutrition_diet": {
+          "cues": [
+            "tell me about your daily food intake",
+            "how much milk, dal and eggs do you eat",
+            "do you consume any tobacco or bidi",
+            "do you chew gutkha or betel nut"
+          ],
+          "reply": "I eat a vegetarian diet with roti, dal, vegetables, and one glass of milk daily. I have never smoked bidis, consumed alcohol, or chewed tobacco or gutkha in my life."
+        },
+        "fever_rash_infection": {
+          "cues": [
+            "did you have any high fever with body rash",
+            "any viral infection in early pregnancy",
+            "any joint pain or swollen glands",
+            "did you have torch infection"
+          ],
+          "reply": "No, I had no fever, rash, joint swellings, or illness during the early months of pregnancy."
+        },
+        "urinary_symptoms_check": {
+          "cues": [
+            "do you have any burning sensation when passing urine",
+            "is your urine output adequate",
+            "any pain or frequency in urination",
+            "burning micturition"
+          ],
+          "reply": "I pass urine four to five times a day with normal light yellow colour. There is no burning, pain, or urgency."
+        },
+        "swelling_edema_check": {
+          "cues": [
+            "have your feet or ankles become swollen",
+            "any puffiness on your face in the mornings",
+            "did your rings become tight on your fingers",
+            "any swelling on your body"
+          ],
+          "reply": "I get mild tiredness in my feet in the evening after standing in class, but there is no swelling on my feet, hands, or face in the morning."
+        },
+        "social_support_referral": {
+          "cues": [
+            "who accompanied you to the hospital",
+            "how far did you travel to reach this centre",
+            "who is supporting you at home",
+            "referral from primary centre"
+          ],
+          "reply": "My husband brought me on his motorcycle from our township twenty-five kilometres away. The doctor at the health centre advised us to come immediately to this medical college hospital."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "abnormal": true,
+          "finding": "Thin, anxious young woman of light build, pale conjunctiva, no icterus, no peripheral oedema, calm but visibly distressed about the baby size."
+        },
+        "skill.gen.vitals": {
+          "abnormal": true,
+          "finding": "Blood pressure 138/88 mmHg right arm sitting, pulse 82 bpm regular, respiratory rate 18/min, afebrile, room air SpO2 98%."
+        },
+        "skill.gen.edema": {
+          "abnormal": false,
+          "finding": "No pedal, pretibial, or facial oedema detected on bilateral lower limbs."
+        },
+        "skill.gen.cyanosis": {
+          "abnormal": false,
+          "finding": "No central or peripheral cyanosis."
+        },
+        "skill.exam.obg.preg_prep_inspect": {
+          "abnormal": true,
+          "finding": "Abdomen appears smaller than expected for 34 weeks gestation. Flanks are flat, no scars, linea nigra and striae gravidarum present."
+        },
+        "skill.exam.obg.fundal_height": {
+          "abnormal": true,
+          "finding": "Symphysis-fundal height measures 29 cm, lagging by 5 cm behind 34 completed weeks. Fundal palpation confirms small uterine volume."
+        },
+        "skill.exam.obg.leopold": {
+          "abnormal": true,
+          "finding": "Longitudinal lie, cephalic presentation, fetal parts felt very easily with sharp definition beneath maternal abdominal wall due to severe oligohydramnios. Head is non-engaged."
+        },
+        "skill.exam.obg.fetal_heart": {
+          "abnormal": false,
+          "finding": "Fetal heart sounds heard distinctly in right lower quadrant at 144 beats per minute, regular rhythm, no bradycardia on auscultation."
+        }
+      },
+      "essentialInvestigations": [
+        "usg_biometry",
+        "umbilical_doppler",
+        "amniotic_fluid_index",
+        "ctg_monitoring",
+        "pre_eclampsia_labs"
+      ],
+      "investigations": {
+        "usg_biometry": {
+          "label": "Obstetric ultrasound biometry",
+          "result": "BPD 32 weeks, HC 32 weeks, FL 31 weeks, AC 28 weeks (AC < 3rd centile, marked head-sparing asymmetry with elevated HC/AC ratio). Estimated fetal weight 1480 g (< 3rd centile for 34 weeks). Anatomical survey reveals no gross structural anomalies.",
+          "note": "Confirms asymmetrical fetal growth restriction with abdominal circumference below the 3rd centile."
+        },
+        "amniotic_fluid_index": {
+          "label": "Amniotic fluid volume assessment",
+          "result": "Single deepest vertical pocket (DVP) measures 1.4 cm (normal 2 to 8 cm). Four-quadrant Amniotic Fluid Index (AFI) is 3.8 cm (normal 5 to 25 cm).",
+          "note": "Severe oligohydramnios consistent with reduced fetal renal perfusion from compensatory circulatory redistribution."
+        },
+        "umbilical_doppler": {
+          "label": "Umbilical artery and MCA Doppler",
+          "result": "Umbilical artery Doppler demonstrates absent end-diastolic flow (AEDF) on repeated cycles. Middle cerebral artery (MCA) Doppler shows pulsatility index below 5th centile indicating brain-sparing vasodilation. Cerebroplacental ratio (CPR) is 0.68 (abnormally low, < 1.08).",
+          "note": "Stage 2 placental insufficiency with umbilical artery absent end-diastolic flow and cerebral redistribution."
+        },
+        "ctg_monitoring": {
+          "label": "Cardiotocography (CTG)",
+          "result": "Baseline fetal heart rate 142 bpm, moderate baseline variability of 8 to 12 bpm, two accelerations over 20 minutes, no late or variable decelerations observed.",
+          "note": "Normal reactive CTG trace with preserved short-term variability, ruling out acute fetal acidemia at present."
+        },
+        "pre_eclampsia_labs": {
+          "label": "Maternal hypertensive workup and organ function",
+          "result": "Haemoglobin 10.8 g/dL, platelet count 195,000/uL, serum creatinine 0.7 mg/dL, AST 28 U/L, ALT 24 U/L, urine dipstick trace protein (negative for significant proteinuria).",
+          "note": "Gestational blood pressure elevation without laboratory evidence of pre-eclampsia or HELLP syndrome."
+        },
+        "ductus_venosus_doppler": {
+          "label": "Ductus venosus Doppler velocimetry",
+          "result": "Pulsatility index for veins (PIV) is 0.72 (within normal limits for 34 weeks). Forward positive a-wave maintained during atrial contraction.",
+          "note": "Preserved forward ductus venosus a-wave confirms absence of advanced myocardial compromise or systemic acidemia."
+        }
+      },
+      "differentialModel": {
+        "answer": "Pathological asymmetrical fetal growth restriction at 34 weeks with severe oligohydramnios and umbilical artery absent end-diastolic flow. Differentials include constitutionally small-for-gestational-age fetus, incorrect dates, congenital fetal infection, chromosomal abnormality, and ruptured membranes.",
+        "accept": [
+          "fetal growth restriction",
+          "constitutionally small for gestational age",
+          "wrong dates",
+          "gestational hypertension",
+          "preterm prelabour rupture of membranes",
+          "chromosomal abnormality",
+          "congenital fetal infection",
+          "oligohydramnios"
+        ]
+      },
+      "diagnosis": {
+        "answer": "Early-onset severe asymmetrical fetal growth restriction with oligohydramnios and umbilical artery absent end-diastolic flow at 34 weeks of gestation.",
+        "accept": [
+          "fetal growth restriction",
+          "intrauterine growth restriction",
+          "fgr",
+          "iugr",
+          "asymmetrical fetal growth restriction",
+          "oligohydramnios",
+          "placental insufficiency"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Admit to Level 3 obstetric centre with neonatal intensive care; administer antenatal corticosteroids for fetal lung maturation; start magnesium sulphate for fetal neuroprotection if preterm delivery is planned; monitor with daily CTG, ductus venosus Doppler and biophysical profile; plan delivery by caesarean section at 34 weeks due to absent end-diastolic flow; involve the neonatology team.",
+        "accept": [
+          "corticosteroids",
+          "steroids",
+          "magnesium",
+          "surveillance",
+          "doppler",
+          "ctg",
+          "delivery",
+          "caesarean",
+          "neonatology",
+          "nicu"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "A symphysis-fundal height lagging by 3 cm or more behind gestational age is a red flag that mandates urgent ultrasound biometry, but biometry alone cannot differentiate a constitutionally small fetus from pathological growth restriction without Doppler velocimetry.",
+        "Asymmetrical growth restriction with abdominal circumference lagging behind head circumference reflects brain-sparing redistribution of fetal cardiac output to protect vital organs during chronic uteroplacental hypoxia.",
+        "Oligohydramnios in intact membranes is a hemodynamic sign of reduced fetal renal blood flow caused by hypoxaemia-induced circulatory redistribution, directly warning of chronic placental compromise.",
+        "Absent end-diastolic flow in the umbilical artery signifies that over 60 percent of the placental vascular tree is obliterated, transforming the delivery decision into an urgent balance between prematurity and fatal acidemia.",
+        "Antenatal corticosteroids must be administered ahead of anticipated preterm delivery prior to 34 to 36+6 weeks, and magnesium sulphate given for neuroprotection prior to 32 weeks, with delivery conducted in a facility equipped with Level 3 NICU care."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

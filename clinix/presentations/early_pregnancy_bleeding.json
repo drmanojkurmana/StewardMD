@@ -1,0 +1,178 @@
+{
+  "_comment": "CliniX 2.0 Presentation Library: Symptom-First Approach to Bleeding in Early Pregnancy. Reuses shared Skills as atoms and provides tiered clinical reasoning from recognition to discriminators and emergency actions.",
+  "schemaVersion": 1,
+  "id": "early_pregnancy_bleeding",
+  "title": "Approach to Bleeding in Early Pregnancy",
+  "subtitle": "First-trimester vaginal bleeding, ectopic pregnancy triage, miscarriage spectrum, and gestational trophoblastic disease",
+  "system": "obgyn",
+  "estMinutes": 45,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "layers": {
+    "recognise": {
+      "redFlags": [
+        "Haemodynamic instability and shock (tachycardia > 100/min, hypotension BP < 90/60 mmHg, pallor, cold clammy extremities, dizziness, syncope) indicating ruptured ectopic pregnancy or exsanguinating incomplete miscarriage",
+        "Peritoneal irritation and diaphragmatic referral (involuntary abdominal guarding, rebound tenderness, shoulder-tip pain on recumbency, Kehr sign) pointing to significant haemoperitoneum from ruptured tubal or cornual pregnancy",
+        "Severe pelvic sepsis and septic shock (high fever with rigors, foul-smelling purulent cervical discharge, exquisite pelvic tenderness, leukocytosis) indicating septic miscarriage or unsafe instrumentation",
+        "Passage of grape-like vesicles per vaginam accompanied by severe hyperemesis gravidarum, markedly elevated serum beta-hCG, and uterine size disproportionately larger than gestational dates (gestational trophoblastic disease / hydatidiform mole)",
+        "Exquisite cervical motion tenderness (chandelier sign) and palpable tender unilateral adnexal mass on pelvic examination, highly suggestive of ectopic pregnancy",
+        "Torrential vaginal haemorrhage soaking more than two large sanitary pads per hour with passage of large fleshy tissue and clots, threatening rapid maternal decompensation"
+      ],
+      "vitalsPriorities": [
+        "Blood Pressure and Pulse Rate: Postural drop in systolic blood pressure (> 20 mmHg) or pulse rate > 100/min are early sensitive indicators of concealed intraperitoneal bleeding before resting supine hypotension manifests. In a woman of reproductive age, shock with pelvic pain is a ruptured ectopic pregnancy until proven otherwise.",
+        "Temperature: Pyrexia (> 38.0 C) or hypothermia with early pregnancy bleeding signifies septic abortion, demanding immediate blood cultures, intravenous broad-spectrum antimicrobial therapy, and urgent uterine evacuation under antibiotic cover.",
+        "Respiratory Rate and Oxygenation: Tachypnoea (RR > 20/min) reflects metabolic lactic acidosis secondary to tissue hypoperfusion in haemorrhagic shock or systemic inflammatory response in sepsis.",
+        "Urine Pregnancy Test (UPT) / Point-of-Care beta-hCG: Mandatory immediate bedside test in any female patient of childbearing potential presenting with acute lower abdominal pain, abnormal bleeding, syncope, or unexplained gastrointestinal symptoms, regardless of stated contraception or sexual history."
+      ]
+    },
+    "classify": {
+      "tempo": {
+        "hyperacute_minutes_to_hours": [
+          "Ruptured Tubal Ectopic Pregnancy with massive haemoperitoneum",
+          "Cornual / Interstitial Ectopic Pregnancy rupture with catastrophic bleeding",
+          "Cervical Shock from incomplete miscarriage tissue impacted in internal cervical os",
+          "Ruptured Haemorrhagic Corpus Luteum Cyst in early pregnancy"
+        ],
+        "acute_hours_to_days": [
+          "Inevitable Miscarriage with open internal cervical os and active cramping",
+          "Incomplete Miscarriage with ongoing heavy bleeding and retained tissue",
+          "Septic Miscarriage with ascending endometritis and peritonitis",
+          "Threatened Miscarriage with light painless bleeding and closed os",
+          "Acute Hydatidiform Mole with heavy spotting and passage of hydropic vesicles"
+        ],
+        "subacute_to_recurrent_days_to_weeks": [
+          "Missed Miscarriage (early embryonic demise or anembryonic sac with persistent amenorrhoea)",
+          "Pregnancy of Unknown Location (PUL) with indolent hCG plateau or sub-optimal rise",
+          "Cervical Polyp or Ectropion with postcoital or contact spotting",
+          "Implantation Bleeding (scant physiological decidual spotting around expected menstrual date)"
+        ]
+      },
+      "syndromes": {
+        "ectopic_gestations": [
+          "Ampullary Tubal Ectopic (most common implantation site, causing tubal abortion or rupture)",
+          "Isthmic Tubal Ectopic (narrow muscular lumen, prone to early rupture at 6 to 8 weeks)",
+          "Interstitial / Cornual Ectopic (myometrial vascularity leads to late catastrophic rupture at 12 to 16 weeks)",
+          "Cervical and Caesarean Scar Ectopic (high risk of intractable torrential haemorrhage requiring uterine artery control)",
+          "Heterotopic Pregnancy (concurrent intrauterine and extrauterine gestations, increased frequency after assisted conception)"
+        ],
+        "miscarriage_spectrum": [
+          "Threatened Miscarriage (closed cervical os, viable embryo with documented cardiac activity, favourable prognosis)",
+          "Inevitable Miscarriage (dilated cervical os, cramping lower abdominal pain, ruptured membranes, progression unavoidable)",
+          "Incomplete Miscarriage (dilated cervical os, partial expulsion of conception products, continuous bleeding from retained bits)",
+          "Complete Miscarriage (closed cervical os, entire conceptus expelled, uterus contracted, bleeding and pain rapidly subsiding)",
+          "Missed Miscarriage (closed cervical os, crown-rump length >= 7 mm without cardiac activity or mean sac diameter >= 25 mm without embryo)",
+          "Septic Miscarriage (infected retained tissue causing foul lochia, uterine tenderness, pelviperitonitis, and septicaemia)"
+        ],
+        "trophoblastic_disorders": [
+          "Complete Hydatidiform Mole (androgenetic diploid conception, diffuse hydropic villi, theca lutein cysts, high malignant potential)",
+          "Partial Hydatidiform Mole (triploid conception with maternal and paternal genomes, focal villous swelling, abnormal fetal tissue)",
+          "Gestational Trophoblastic Neoplasia (persistent post-evacuation bleeding, plateauing or rising beta-hCG titers)"
+        ],
+        "local_and_cervical_causes": [
+          "Cervical Ectropion (everted endocervical columnar epithelium prone to contact bleeding)",
+          "Endocervical Polyp (friable vascular polyp protruding through external os)",
+          "Severe Cervicitis / Trichomoniasis / Chlamydia trachomatis infection",
+          "Co-existing Carcinoma of the Cervix"
+        ]
+      }
+    },
+    "discriminators": [
+      {
+        "title": "Threatened vs Inevitable vs Incomplete Miscarriage",
+        "finding": "Evaluation of the internal cervical os on digital/speculum examination and ultrasound verification of cavity contents. In threatened miscarriage, the internal cervical os remains closed, bleeding is mild, and ultrasound confirms a viable intrauterine pregnancy with cardiac activity. In inevitable miscarriage, the internal os is open/dilated, bleeding is moderate to heavy with painful contractions, and continuation is impossible. In incomplete miscarriage, the os is open with tissue visible at the cervix or retained products of conception (> 15 mm irregular heterogeneous mass) within the cavity causing persistent haemorrhage.",
+        "highYield": "An open internal cervical os in the presence of cramps and bleeding distinguishes inevitable or incomplete miscarriage from a threatened miscarriage."
+      },
+      {
+        "title": "Ectopic Pregnancy vs Intrauterine Miscarriage (The Discriminatory Zone)",
+        "finding": "Correlation of quantitative serum beta-hCG with transvaginal ultrasound (TVS) findings. An intrauterine gestational sac must consistently be visible on high-resolution TVS once serum beta-hCG reaches 1,500 to 2,000 IU/L (the discriminatory zone). The absence of an intrauterine sac above this threshold, or detection of an adnexal mass separate from the ovary ('tubal ring' or gestational sac with yolk sac/fetal pole), strongly indicates an ectopic pregnancy. Serial beta-hCG rising by less than 63 percent or falling by less than 50 percent over 48 hours points towards ectopic gestation rather than normal pregnancy or complete miscarriage.",
+        "highYield": "An empty uterine cavity on TVS in a stable patient with serum beta-hCG above 1,500 to 2,000 IU/L is an ectopic pregnancy until proven otherwise."
+      },
+      {
+        "title": "Complete Hydatidiform Mole vs Normal Pregnancy / Miscarriage",
+        "finding": "Clinical presentation and ultrasound features. Complete hydatidiform mole classically presents with exaggerated pregnancy symptoms (hyperemesis gravidarum), bilateral enlarged multilocular theca lutein cysts from gonadotrophin hyperstimulation, uterus significantly larger than dates, markedly elevated serum beta-hCG (frequently > 100,000 IU/L), and an ultrasound 'snowstorm' or vesicular 'bunch of grapes' appearance with absence of any gestational sac or fetal pole.",
+        "highYield": "Uterine size greater than dates, absence of fetal parts, and characteristic 'snowstorm' vesicular echoes on ultrasound confirm complete hydatidiform mole."
+      },
+      {
+        "title": "Cervical Shock vs Hypovolaemic Shock in Early Pregnancy",
+        "finding": "Heart rate and clinical examination. In cervical shock, products of conception become trapped within the internal or external cervical canal, stimulating parasympathetic vagal fibres and causing marked bradycardia, profound hypotension, diaphoresis, and syncope. In hypovolaemic shock from active blood loss, marked tachycardia (> 100/min) accompanies hypotension and pallor.",
+        "highYield": "Hypotension accompanied by bradycardia indicates cervical shock; gently clearing tissue from the cervical canal with sterile sponge-holding forceps immediately reverses the vagal reflex."
+      }
+    ],
+    "dontMiss": [
+      {
+        "disease": "Ruptured Ectopic Pregnancy",
+        "clue": "Woman of reproductive age presenting with amenorrhoea, unilateral lower abdominal pain, fainting or syncope, shoulder-tip pain on recumbency, peritonism, and free fluid on bedside ultrasound.",
+        "action": "SURGICAL EMERGENCY. Insert two large-bore intravenous cannulae, initiate rapid warmed crystalloid infusion, send stat blood for group, crossmatch, and haemoglobin, alert consultant obstetrician and anaesthetist, activate massive transfusion protocol if unstable, and transfer immediately to theatre for emergency laparotomy or laparoscopy with salpingectomy without delaying for formal laboratory results."
+      },
+      {
+        "disease": "Septic Miscarriage",
+        "clue": "Early pregnancy bleeding associated with fever, chills, offensive purulent vaginal discharge, severe pelvic and abdominal guarding, uterine tenderness, and marked leukocytosis.",
+        "action": "SEPSIS EMERGENCY. Take peripheral blood cultures and high vaginal swabs, commence immediate intravenous broad-spectrum antimicrobial cover (e.g. third-generation cephalosporin plus metronidazole), check tetanus immunization history, stabilize haemodynamics, and proceed to urgent gentle suction evacuation of retained septic products under antibiotic cover within 4 to 6 hours."
+      },
+      {
+        "disease": "Cervical Shock from Impacted Conception Products",
+        "clue": "Bleeding patient who suddenly collapses with profound bradycardia, hypotension, and pale cold skin with open cervical os on examination.",
+        "action": "Immediate speculum visualization of the cervix, gentle digital or instrumental extraction of the tissue lodged in the cervical os using sterile ring or sponge-holding forceps, intravenous fluid bolus, and intravenous atropine if severe bradycardia persists."
+      },
+      {
+        "disease": "Hydatidiform Mole with Theca Lutein Cysts and Theca Rupture Risk",
+        "clue": "Hyperemesis, pre-eclampsia features before 20 weeks, bilateral tender adnexal cystic swellings, and extremely high serum beta-hCG.",
+        "action": "Preoperative chest radiograph to rule out pulmonary trophoblastic embolisation, blood crossmatching, baseline thyroid profile, and suction evacuation in operating theatre using large-bore suction cannula, initiating oxytocin infusion only after suction decompression has commenced to avoid trophoblastic embolisation."
+      }
+    ],
+    "investigations": {
+      "step1_immediate": [
+        "Bedside qualitative urine pregnancy test (detects beta-hCG down to 20-25 IU/L)",
+        "Stat blood grouping and RhD typing (mandatory to identify Rh-negative mothers requiring anti-D immunoglobulin prophylaxis)",
+        "Emergency point-of-care ultrasound (POCUS: assess presence of intrauterine gestational sac, adnexal masses, and free fluid in pouch of Douglas or Morrison pouch)",
+        "Full blood count (haemoglobin and haematocrit to establish baseline blood loss and evaluate for anaemia)"
+      ],
+      "step2_urgent": [
+        "Quantitative serum beta-hCG (establish baseline level to correlate with ultrasound discriminatory zone)",
+        "Serial quantitative serum beta-hCG repeated at 48-hour intervals in stable pregnancies of unknown location (PUL) to assess trajectory",
+        "Coagulation profile (PT/INR, aPTT, fibrinogen) in heavy haemorrhage or suspected septic abortion to detect consumptive coagulopathy",
+        "Renal function tests (urea, creatinine) and serum electrolytes",
+        "Blood cultures and endocervical swabs for aerobic/anaerobic organisms and genital pathogens if fever or purulent discharge is present"
+      ],
+      "step3_confirmatory": [
+        "Formal transvaginal sonography (TVS) with colour Doppler (assess endometrial stripe thickness, retained products, adnexal 'ring of fire' vascularity, and luteal flow)",
+        "Histopathological examination of evacuated uterine tissue (identify chorionic villi, hydropic villous degeneration, or decidual changes with Arias-Stella reaction)",
+        "Serial serum beta-hCG monitoring following evacuation of molar pregnancy (weekly until undetectable for 3 consecutive weeks, then monthly for 6 months)",
+        "Diagnostic laparoscopy when ectopic pregnancy is clinically suspected but ultrasound and biochemical findings remain indeterminate"
+      ]
+    },
+    "skills": [
+      "skill.hx.obg.booking_lmp",
+      "skill.hx.obg.previous_pregnancies",
+      "skill.hx.obg.gynae_symptoms",
+      "skill.approach.obg.intimate_consent",
+      "skill.exam.obg.vulval_inspect",
+      "skill.exam.obg.speculum_insert",
+      "skill.exam.obg.speculum_inspect",
+      "skill.exam.obg.bimanual",
+      "skill.approach.obg.pelvic_close",
+      "skill.approach.obg.bbn_disclose",
+      "skill.approach.obg.mva_procedure",
+      "skill.exam.obg.instrument_dilators_curettes"
+    ],
+    "examPearls": [
+      {
+        "topic": "The Discriminatory Zone of Serum beta-hCG",
+        "text": "The discriminatory zone is the serum beta-hCG concentration above which a normal intrauterine gestational sac must reliably be visualised by ultrasound. For transvaginal sonography (TVS), the discriminatory threshold is 1,500 to 2,000 IU/L (using the International Reference Preparation). For transabdominal sonography, it is 6,000 to 6,500 IU/L. An empty uterine cavity on TVS in the presence of a serum beta-hCG above 2,000 IU/L strongly indicates an ectopic pregnancy or an already completed abortion."
+      },
+      {
+        "topic": "Arias-Stella Reaction Physiology",
+        "text": "The Arias-Stella reaction represents profound hormonal and progestational changes in the endometrial glandular epithelium characterized by cellular hypertrophy, nuclear enlargement, hyperchromasia, and secretory vacuolation without stromal invasion. It occurs on endometrial curettage in up to 10 to 15 percent of ectopic pregnancies and reflects active trophoblastic stimulation elsewhere in the body. It must never be mistaken by examiners or pathologists for endometrial adenocarcinoma or clear cell carcinoma."
+      },
+      {
+        "topic": "Cervical Motion Tenderness and the Chandelier Sign",
+        "text": "Cervical motion tenderness (cervical excitation, or the chandelier sign) occurs during bimanual pelvic examination when digital manipulation of the cervix stretches the uterosacral ligaments and puts tension on an inflamed, distended, or ruptured fallopian tube in the pouch of Douglas. The patient experiences sudden excruciating sharp pain, reflexively jumping off the examination table. It is a classic clinical physical sign of ectopic pregnancy and acute pelvic inflammatory disease."
+      },
+      {
+        "topic": "RhD Immunoprophylaxis in Early Pregnancy Haemorrhage",
+        "text": "All RhD-negative, non-sensitised women presenting with early pregnancy bleeding must be evaluated for Rh immunoprophylaxis. In surgical or medical evacuation of miscarriage, manual vacuum aspiration, and ectopic pregnancy, anti-D immunoglobulin must be administered within 72 hours of the event. In the Indian clinical setting, where unscheduled repeat contact is uncertain and blood typing access may be delayed, anti-D is advised for any significant bleeding episode, trauma, or uterine instrumentation in RhD-negative mothers."
+      }
+    ]
+  }
+}

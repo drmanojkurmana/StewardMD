@@ -1,0 +1,1440 @@
+{
+  "_comment": "CliniX disease pathway for Rh isoimmunisation. Authoring rules: clinix-model.js, Final Year Expansion Plan WP3.",
+  "id": "rh-isoimmunisation",
+  "name": "Rh isoimmunisation",
+  "fullName": "Rh isoimmunisation: anti-D prophylaxis, fetal surveillance and haemolytic disease of the newborn",
+  "subtitle": "Anti-D and haemolytic disease of the newborn",
+  "system": "obgyn",
+  "kbRef": "rh_isoimmunization_and_fetal_hydrops",
+  "oneLine": "Maternal RhD alloimmunisation, anti-D prophylaxis schedules, middle cerebral artery Doppler surveillance, and intrauterine blood transfusion",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics of Rh isoimmunisation",
+      "skills": [
+        "skill.rh.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the obstetric patient",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected Rh isoimmunisation, maternal blood group and Rh typing must be verified from laboratory reports, not memory. Paternal blood group and Rh typing are equally essential: if the biological father is confirmed Rh-negative, the fetus is obligatorily Rh-negative and isoimmunisation cannot occur."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.booking_lmp",
+        "skill.hx.rh.symptoms"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect an asymptomatic woman presenting after routine antenatal blood grouping revealed an Rh-negative blood group or a positive indirect Coombs test. An alloimmunised fetus remains completely silent until profound anaemia or hydrops causes reduced movements or maternal mirror syndrome."
+        },
+        "skill.hx.obg.booking_lmp": {
+          "expect": "Establish reliable gestational age from last menstrual period and first-trimester dating ultrasound. Precise dating is mandatory because middle cerebral artery Doppler peak systolic velocity thresholds change weekly."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "skills": [
+        "skill.hx.obg.medical_family_drug",
+        "skill.hx.obg.previous_pregnancies",
+        "skill.hx.rh.risk"
+      ],
+      "emphasis": {
+        "skill.hx.obg.medical_family_drug": {
+          "expect": "Inquire specifically into prior blood transfusions, organ transplantation, or parenteral exposure that could sensitise to Rh or atypical red cell antigens, as well as family history of haemolytic disease."
+        },
+        "skill.hx.obg.previous_pregnancies": {
+          "expect": "Meticulously record each previous gestation: full-term deliveries, abortions, ectopic pregnancies, invasive procedures, and whether the babies developed neonatal jaundice or received phototherapy. Verify whether anti-D was administered after each event."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema",
+        "skill.gen.cyanosis"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "The mother is usually in good general condition and comfortable. Look for generalized maternal oedema, facial puffiness, or pallor, which in advanced hydrops may signal maternal mirror syndrome."
+        },
+        "skill.gen.vitals": {
+          "expect": "Vitals are typically normal. Blood pressure elevation with rapid weight gain and generalized fluid overload in the presence of fetal hydrops suggests maternal mirror syndrome."
+        },
+        "skill.gen.edema": {
+          "expect": "Pedal and facial oedema are usually absent in uncomplicated alloimmunisation. The development of sudden, severe generalized oedema points towards Ballantyne mirror syndrome."
+        },
+        "skill.gen.cyanosis": {
+          "expect": "Cyanosis is absent in uncomplicated pregnancy. Central cyanosis with breathlessness warrants urgent evaluation for maternal pulmonary oedema in mirror syndrome."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Obstetric abdominal examination",
+      "skills": [
+        "skill.exam.obg.preg_prep_inspect",
+        "skill.exam.obg.fundal_height",
+        "skill.exam.obg.leopold",
+        "skill.exam.obg.fetal_heart"
+      ],
+      "emphasis": {
+        "skill.exam.obg.preg_prep_inspect": {
+          "expect": "Inspect abdominal contour for symmetrical distension. Excessive abdominal distension with tense, shiny skin suggests polyhydramnios associated with fetal hydrops."
+        },
+        "skill.exam.obg.fundal_height": {
+          "expect": "Fundal height corresponds to gestational age in early or mild disease, but may exceed dates by 3 cm or more if hydropic placentomegaly and polyhydramnios have developed."
+        },
+        "skill.exam.obg.leopold": {
+          "expect": "Palpation typically reveals normal lie and presentation. In the presence of polyhydramnios, fetal parts feel fluid-cushioned and difficult to outline, with an easily ballotable fetus."
+        },
+        "skill.exam.obg.fetal_heart": {
+          "expect": "Fetal heart sounds are regular with a normal baseline of 110 to 160 bpm. Severe fetal anaemia produces persistent fetal tachycardia or an ominous sinusoidal rhythm."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the Rh isoimmunisation and hydrops picture together",
+      "skills": [
+        "skill.rh.findings"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "skills": [
+        "skill.rh.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "skills": [
+        "skill.rh.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "skills": [
+        "skill.ix.rh.workup",
+        "skill.annex.rh.thresholds",
+        "skill.ix.obg.ctg_interpretation"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and severity staging",
+      "skills": [
+        "skill.rh.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment, prophylaxis and fetal intervention",
+      "skills": [
+        "skill.tx.rh.prophylaxis",
+        "skill.tx.rh.management",
+        "skill.approach.obg.newborn_immediate_care"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "skills": [
+        "skill.present.rh.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.rh.antenatal_counsel",
+        "title": "Rh negative pregnancy: anti-D immunoprophylaxis counselling and sensitising events",
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.tx.rh.prophylaxis",
+          "skill.hx.rh.risk",
+          "skill.annex.rh.thresholds"
+        ],
+        "seconds": 360,
+        "examinerQuestions": [
+          "What is the recommended dose and timing of routine antenatal anti-D prophylaxis for an unsensitised Rh-negative pregnant woman in India?",
+          "List five sensitising events during pregnancy that mandate immediate administration of anti-D immunoglobulin.",
+          "A primigravida has an antepartum haemorrhage at 32 weeks and receives 300 mcg of anti-D. Why must a Kleihauer-Betke test still be performed?"
+        ]
+      },
+      {
+        "id": "osce.rh.fetal_surveillance",
+        "title": "Sensitised Rh-negative pregnancy: assessment and surveillance",
+        "skills": [
+          "skill.approach.introduce",
+          "skill.hx.rh.risk",
+          "skill.hx.rh.symptoms",
+          "skill.exam.obg.fundal_height",
+          "skill.exam.obg.fetal_heart",
+          "skill.present.rh.case"
+        ],
+        "seconds": 360,
+        "examinerQuestions": [
+          "What is the critical indirect Coombs test antibody titre threshold that warrants initiation of fetal MCA Doppler surveillance?",
+          "What finding on middle cerebral artery Doppler indicates moderate to severe fetal anaemia, and what is the underlying physiological mechanism?",
+          "What are the specifications of donor blood used for intrauterine fetal blood transfusion?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.rh.basics",
+      "skill.rh.findings",
+      "skill.rh.summary",
+      "skill.rh.differential",
+      "skill.ix.rh.workup",
+      "skill.annex.rh.thresholds",
+      "skill.rh.diagnosis",
+      "skill.tx.rh.prophylaxis",
+      "skill.tx.rh.management"
+    ]
+  },
+  "skills": {
+    "skill.rh.basics": {
+      "id": "skill.rh.basics",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "What Rh isoimmunisation and alloimmunisation are",
+      "oneLine": "Erythrocyte antigen incompatibility, transplacental sensitisation, maternal IgG transfer, and fetal extravascular haemolysis",
+      "why": "Rh isoimmunisation is the classic immunohaematological model of maternal-fetal conflict. Understanding how fetomaternal haemorrhage elicits anti-D antibodies that cross the placenta to destroy fetal erythrocytes provides the pathophysiological rationale for routine prophylaxis, antibody titration, Doppler surveillance, and timely intrauterine transfusion.",
+      "teach": [
+        {
+          "heading": "The Rh blood group system and antigen D",
+          "body": "The Rh blood group system comprises multiple surface protein antigens encoded on chromosome 1, of which antigen D is by far the most potent immunogen. Individuals possessing the D antigen on their red blood cells are classified as Rh-positive, while those lacking it are Rh-negative.\n\nIn India, approximately 5 to 6 percent of pregnant women are Rh-negative, compared with about 15 percent in Caucasian populations."
+        },
+        {
+          "heading": "Primary sensitisation versus secondary immune response",
+          "table": {
+            "cols": [
+              "Parameter",
+              "Primary Response",
+              "Secondary (Anamnestic) Response"
+            ],
+            "rows": [
+              [
+                "Trigger",
+                "First fetomaternal haemorrhage",
+                "Subsequent Rh-positive gestation"
+              ],
+              [
+                "Antibody isotype",
+                "IgM predominantly",
+                "High-affinity IgG antibodies"
+              ],
+              [
+                "Placental transfer",
+                "None (IgM pentamer)",
+                "Active across syncytiotrophoblast"
+              ],
+              [
+                "Fetal consequence",
+                "First baby typically unaffected",
+                "Progressive extravascular haemolysis"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Pathogenesis of fetal anaemia and hydrops fetalis",
+          "body": "When maternal IgG anti-D antibodies enter the fetal circulation, they coat Rh-positive fetal red cells. Macrophages in the fetal spleen recognise the Fc portion and phagocytose the erythrocytes, producing progressive extravascular haemolysis.\n\nSevere fetal anaemia stimulates extramedullary haematopoiesis in the liver and spleen. Hepatosplenomegaly leads to portal hypertension, hypoalbuminaemia, high-output cardiac failure, and hydrops fetalis."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which specific immunoglobulin isotype crosses the placenta to cause fetal red cell destruction in Rh isoimmunisation, and why does IgM not cross?",
+          "a": "IgG crosses the placenta actively via neonatal Fc receptors on the syncytiotrophoblast, whereas IgM is a large pentameric molecule that cannot cross the placental barrier.",
+          "accept": [
+            "igg",
+            "crosses",
+            "placenta",
+            "igm",
+            "pentamer",
+            "cannot cross",
+            "syncytiotrophoblast"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the sequence of pathophysiological changes linking severe fetal anaemia to the development of hydrops fetalis?",
+          "a": "Severe anaemia triggers hepatic extramedullary haematopoiesis, causing portal hypertension, hepatic parenchymal disruption, hypoalbuminaemia, capillary leakage, and high-output cardiac failure with generalised oedema.",
+          "accept": [
+            "extramedullary haematopoiesis",
+            "portal hypertension",
+            "hypoalbuminaemia",
+            "cardiac failure",
+            "edema",
+            "liver"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rh_isoimmunization_and_fetal_hydrops: pathophysiology"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Alloimmunization: pathophysiology of Rh disease and fetal hydrops"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.rh.findings": {
+      "id": "skill.rh.findings",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Clinical and ultrasound manifestations of fetal anaemia and hydrops fetalis",
+      "oneLine": "Recognising fetal hyperdynamic circulation, sinusoidal CTG, ultrasound markers of effusions, and maternal mirror syndrome",
+      "why": "Rh isoimmunisation is clinically occult in the mother until late stages, while the fetus deteriorates from severe anaemia to irreversible hydropic decompensation. Mastering the spectrum from subtle Doppler velocity elevations and sinusoidal heart traces to frank fluid accumulation ensures timely intervention before intrauterine death.",
+      "teach": [
+        {
+          "heading": "The clinical presentation of fetal anaemia",
+          "body": "An Rh-sensitised pregnancy is typically free of maternal symptoms until severe fetal compromise develops. Maternal perception of reduced fetal movements is an alarming sign indicating critical tissue hypoxia.\n\nOn physical examination, fundal height may exceed dates due to polyhydramnios and placentomegaly. Fetal heart auscultation may reveal resting fetal tachycardia, while cardiotocography demonstrates an ominous sinusoidal baseline pattern."
+        },
+        {
+          "heading": "Ultrasound features of hydrops fetalis",
+          "table": {
+            "cols": [
+              "Anatomical Site",
+              "Ultrasound Finding",
+              "Pathophysiological Mechanism"
+            ],
+            "rows": [
+              [
+                "Pericardium and pleura",
+                "Pericardial and pleural effusion",
+                "Capillary leak and cardiac failure"
+              ],
+              [
+                "Abdomen",
+                "Fetal ascites and hepatosplenomegaly",
+                "Extramedullary haematopoiesis"
+              ],
+              [
+                "Subcutaneous tissue",
+                "Scalp and skin oedema > 5 mm",
+                "Severe hypoalbuminaemia"
+              ],
+              [
+                "Placenta and liquor",
+                "Placentomegaly and polyhydramnios",
+                "Fluid retention and placental oedema"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Maternal mirror syndrome (Ballantyne syndrome)",
+          "body": "In advanced hydrops fetalis, the mother may develop generalized oedema, sudden weight gain, hypertension, and proteinuria that mirrors the hydropic fetus. This life-threatening state represents maternal endotheliopathy provoked by placental hyperplacentosis.\n\nMaternal mirror syndrome can lead to acute pulmonary oedema and mandates urgent delivery or fetal therapy, following which maternal features resolve rapidly."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What cardiotocography pattern is classically associated with severe, life-threatening fetal anaemia in Rh alloimmunisation?",
+          "a": "A sinusoidal fetal heart rate pattern, characterized by a smooth, undulating, sine-wave oscillation with a frequency of 2 to 5 cycles per minute, indicates severe fetal anaemia and impending acidemia.",
+          "accept": [
+            "sinusoidal",
+            "fetal heart rate",
+            "sine-wave",
+            "severe fetal anaemia",
+            "impending"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What ultrasound criteria establish the formal diagnosis of hydrops fetalis?",
+          "a": "Hydrops fetalis is diagnosed on ultrasound by pathological fluid accumulation in at least two fetal body cavities, such as ascites, pleural effusion, or pericardial effusion, often accompanied by subcutaneous skin oedema.",
+          "accept": [
+            "two",
+            "body cavities",
+            "ascites",
+            "pleural effusion",
+            "pericardial effusion",
+            "skin oedema"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rh_isoimmunization: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Hydrops fetalis: sonographic diagnosis and clinical features"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.rh.summary": {
+      "id": "skill.rh.summary",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "The clinical summary in Rh negative pregnancy",
+      "oneLine": "Synthesising maternal Rh status, antibody titres, previous obstetric history, and fetal Doppler metrics",
+      "why": "The clinical summary transforms scattered laboratory titres, past obstetric losses, and ultrasound Doppler numbers into a coherent case synthesis. Presenting a crisp, prioritized summary enables the multidisciplinary team to determine whether the patient needs simple antibody re-titration, middle cerebral artery surveillance, or immediate intrauterine transfusion.",
+      "teach": [
+        {
+          "heading": "The four pillars of the Rh summary",
+          "body": "A clinical summary in Rh isoimmunisation must integrate four distinct components: maternal antibody status, partner status, obstetric history of sensitising events, and current fetal well-being.\n\nStating maternal blood group alone is insufficient; the clinician must immediately qualify whether the woman is unsensitised or sensitised, the current antibody titre, and whether the critical threshold has been reached."
+        },
+        {
+          "heading": "Structuring the synthesis for decision-making",
+          "table": {
+            "cols": [
+              "Clinical Category",
+              "Key Historical and Diagnostic Data",
+              "Clinical Decision Implication"
+            ],
+            "rows": [
+              [
+                "Maternal status",
+                "O Rh-negative, ICT titre 1:32",
+                "Exceeds critical titre; triggers MCA Doppler"
+              ],
+              [
+                "Paternal status",
+                "B Rh-positive, homozygous RhD",
+                "100 percent probability of RhD-positive fetus"
+              ],
+              [
+                "Obstetric history",
+                "Prior unprophylaxed term birth and miscarriage",
+                "Explains origin of maternal alloimmunisation"
+              ],
+              [
+                "Fetal surveillance",
+                "MCA-PSV 1.6 MoM at 28 weeks, no hydrops",
+                "Confirms moderate-severe anaemia; indicates IUT"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Synthesising for transfer and multidisciplinary care",
+          "body": "When a sensitised mother reaches a critical titre or demonstrates elevated MCA Doppler velocities, the case summary serves as the transfer document to a tertiary fetal medicine unit.\n\nThe summary must highlight gestational age, fetal viability, latest MCA-PSV in multiples of the median, presence of hydrops, and blood bank coordination for specialised donor blood."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What crucial distinction separates an unsensitised Rh-negative pregnancy summary from a sensitised pregnancy summary?",
+          "a": "An unsensitised pregnancy summary focuses on anti-D prophylaxis schedules and screening intervals, whereas a sensitised summary focuses on antibody titres, critical thresholds, and fetal anaemia surveillance.",
+          "accept": [
+            "unsensitised",
+            "prophylaxis",
+            "sensitised",
+            "antibody titres",
+            "critical threshold",
+            "surveillance"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why is establishing paternal RhD zygosity important when evaluating an Rh-alloimmunised pregnant woman?",
+          "a": "If the father is homozygous for RhD, all offspring will be Rh-positive and at risk; if he is heterozygous, there is a 50 percent chance the fetus is Rh-negative and completely unaffected.",
+          "accept": [
+            "homozygous",
+            "heterozygous",
+            "50 percent",
+            "unaffected",
+            "rh-negative",
+            "rh-positive"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rh_isoimmunization: clinicalPearls"
+        },
+        {
+          "source": "RCOG",
+          "locator": "The Management of Women with Red Cell Antibodies during Pregnancy: Care Pathway"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.rh.differential": {
+      "id": "skill.rh.differential",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Differential diagnosis of fetal anaemia and hydrops fetalis",
+      "oneLine": "Differentiating RhD disease from ABO incompatibility, minor red cell antibodies, viral infections, and non-immune hydrops",
+      "why": "Not all fetal anaemia or hydrops is caused by RhD isoimmunisation. More than 85 percent of hydrops cases today are non-immune. Differentiating RhD alloimmunisation from ABO incompatibility, atypical red cell antibodies, congenital infections such as parvovirus B19, and alpha thalassaemia major directs appropriate laboratory testing and avoids administering useless anti-D.",
+      "teach": [
+        {
+          "heading": "Immune versus non-immune hydrops fetalis",
+          "body": "Fetal hydrops is divided into immune hydrops (alloimmune haemolytic disease) and non-immune hydrops fetalis (NIHF). With widespread anti-D prophylaxis, non-immune causes now account for nearly 90 percent of cases.\n\nNon-immune hydrops encompasses cardiovascular malformations, chromosomal anomalies (such as Turner syndrome and trisomy 21), congenital infections, twin-to-twin transfusion syndrome, and inborn errors of metabolism."
+        },
+        {
+          "heading": "Distinguishing common causes of fetal haemolysis and hydrops",
+          "table": {
+            "cols": [
+              "Condition",
+              "Maternal Blood Group & Screen",
+              "Fetal Manifestations & Key Features"
+            ],
+            "rows": [
+              [
+                "RhD alloimmunisation",
+                "Rh-negative, positive ICT for anti-D",
+                "Severe fetal anaemia, hydrops, IUT responsive"
+              ],
+              [
+                "ABO incompatibility",
+                "Mother group O, fetus group A or B",
+                "Mild neonatal jaundice, hydrops in utero is rare"
+              ],
+              [
+                "Anti-Kell alloimmunisation",
+                "Positive ICT for anti-K antibodies",
+                "Erythroid suppression in marrow, severe anaemia"
+              ],
+              [
+                "Parvovirus B19 infection",
+                "Negative red cell antibody screen",
+                "Pure red cell aplasia, transient hydrops, IgM+"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Alpha thalassaemia major and fetomaternal haemorrhage",
+          "body": "In populations with high alpha thalassaemia prevalence, homozygous deletion of all four alpha globin genes produces Haemoglobin Barts hydrops fetalis, presenting with severe anaemia, hepatosplenomegaly, and massive placentomegaly in an antibody-negative mother.\n\nAcute or chronic fetomaternal haemorrhage causes profound fetal anaemia and sinusoidal CTG without immune destruction, confirmed by a strongly positive maternal Kleihauer-Betke test."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why does ABO incompatibility rarely cause severe fetal anaemia or hydrops in utero compared with Rh isoimmunisation?",
+          "a": "ABO antigens are weakly expressed on fetal red cells and widely expressed on other fetal tissues and placenta, neutralizing maternal anti-A and anti-B antibodies before they can produce heavy fetal haemolysis.",
+          "accept": [
+            "weakly expressed",
+            "other tissues",
+            "placenta",
+            "neutralizing",
+            "fetal red cells",
+            "haemolysis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How does the mechanism of fetal anaemia in anti-Kell alloimmunisation differ fundamentally from RhD alloimmunisation?",
+          "a": "Anti-Kell antibodies destroy early erythroid progenitor cells in fetal bone marrow causing hyporegenerative anaemia, unlike RhD antibodies which cause predominantly peripheral extravascular splenic haemolysis.",
+          "accept": [
+            "erythroid progenitor",
+            "bone marrow",
+            "hyporegenerative",
+            "extravascular haemolysis",
+            "splenic"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rh_isoimmunization_and_fetal_hydrops: additionalDifferentials"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Alloimmunization: differential diagnosis and non-immune hydrops"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.rh.workup": {
+      "id": "skill.ix.rh.workup",
+      "kind": "investigation",
+      "system": "obgyn",
+      "title": "Antibody titration, cell-free fetal DNA, MCA Doppler PSV and fetal blood sampling",
+      "oneLine": "Diagnostic algorithm from indirect Coombs test and non-invasive prenatal testing to serial MCA Doppler and cordocentesis",
+      "why": "Modern management of Rh isoimmunisation has evolved from invasive amniocentesis to non-invasive ultrasound and molecular testing. Selecting maternal antibody titration, maternal plasma cell-free fetal DNA for RhD genotyping, and serial middle cerebral artery Doppler allows precise timing of invasive fetal blood sampling and blood transfusion while eliminating procedural fetal loss.",
+      "teach": [
+        {
+          "heading": "Maternal antibody titration and critical titres",
+          "body": "All pregnant women undergo ABO and Rh typing with an indirect Coombs test (ICT) or indirect antiglobulin test (IAT) at booking.\n\nIn an unsensitised Rh-negative woman, the antibody screen is repeated at 28 weeks. In an alloimmunised woman, the antibody is identified and titrated. When the titre reaches the critical threshold (typically 1:16 to 1:32), titration ceases to correlate with severity, and direct fetal monitoring begins."
+        },
+        {
+          "heading": "Cell-free fetal DNA and non-invasive prenatal testing",
+          "body": "Maternal plasma cell-free fetal DNA (cffDNA) testing detects fetal RHD gene fragments from 10 to 12 weeks of gestation with diagnostic accuracy exceeding 99 percent.\n\nIf cffDNA confirms the fetus is RhD-negative, further intensive surveillance is unnecessary because the fetus lacks the target antigen and cannot develop haemolytic disease."
+        },
+        {
+          "heading": "Middle cerebral artery Doppler and cordocentesis",
+          "table": {
+            "cols": [
+              "Investigation",
+              "Primary Clinical Purpose",
+              "Diagnostic Threshold / Action"
+            ],
+            "rows": [
+              [
+                "MCA Doppler PSV",
+                "Non-invasive detection of fetal anaemia",
+                "PSV > 1.5 MoM indicates moderate to severe anaemia"
+              ],
+              [
+                "Ultrasound biometry",
+                "Screening for hydrops and placentomegaly",
+                "Detection of ascites, pericardial effusion, oedema"
+              ],
+              [
+                "Cordocentesis (PUBS)",
+                "Direct measurement of fetal haematocrit",
+                "Haematocrit < 30 percent warrants immediate transfusion"
+              ],
+              [
+                "Kleihauer-Betke test",
+                "Quantifying fetomaternal haemorrhage",
+                "Calculates required anti-D dose after sensitising events"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the physiological mechanism explaining why the middle cerebral artery peak systolic velocity increases as fetal anaemia worsens?",
+          "a": "Anaemia reduces fetal blood viscosity and triggers hyperdynamic circulation with elevated cardiac output, while selective cerebral vasodilation increases blood flow velocity in the middle cerebral artery.",
+          "accept": [
+            "viscosity",
+            "cardiac output",
+            "hyperdynamic",
+            "vasodilation",
+            "velocity",
+            "cerebral"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "When is percutaneous umbilical blood sampling indicated in an Rh-sensitised pregnancy, and what is its main complication risk?",
+          "a": "Cordocentesis is indicated when MCA Doppler PSV exceeds 1.5 MoM to measure fetal haematocrit immediately prior to intrauterine transfusion; its primary risk is 1 to 2 percent procedure-related fetal loss.",
+          "accept": [
+            "1.5 mom",
+            "haematocrit",
+            "intrauterine transfusion",
+            "fetal loss",
+            "cordocentesis"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rh_isoimmunization_and_fetal_hydrops: additionalInvestigations"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Alloimmunization: fetal surveillance and middle cerebral artery Doppler"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.rh.thresholds": {
+      "id": "skill.annex.rh.thresholds",
+      "kind": "annexure",
+      "system": "obgyn",
+      "title": "Critical antibody titres, MCA Doppler PSV thresholds, and Kleihauer-Betke calculation",
+      "oneLine": "Reference tables and mathematical formulas for indirect Coombs titres, MCA-PSV multiples of the median, and anti-D dosing",
+      "why": "Precise numerical thresholds govern every key decision in Rh isoimmunisation: initiating Doppler scans, diagnosing moderate-to-severe fetal anaemia, timing intrauterine transfusions, and calculating the exact dose of anti-D required to clear large fetomaternal haemorrhages.",
+      "teach": [
+        {
+          "heading": "Critical maternal antibody titres and monitoring intervals",
+          "table": {
+            "cols": [
+              "Indirect Coombs Titre",
+              "Clinical Significance",
+              "Recommended Action"
+            ],
+            "rows": [
+              [
+                "Titre < 1:16",
+                "Sub-critical antibody concentration",
+                "Repeat maternal ICT every 2 to 4 weeks until 28 weeks, then fortnightly"
+              ],
+              [
+                "Titre 1:16 to 1:32",
+                "Critical titre threshold",
+                "Commence serial fetal MCA Doppler PSV scans every 1 to 2 weeks"
+              ],
+              [
+                "Anti-Kell positive",
+                "No safe critical titre exists",
+                "Initiate MCA Doppler early (from 16 to 18 weeks) regardless of titre"
+              ],
+              [
+                "Titre rising 4-fold",
+                "Active anamnestic immune response",
+                "Urgent referral to Maternal-Fetal Medicine unit"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Mari MCA Doppler peak systolic velocity reference values",
+          "table": {
+            "cols": [
+              "Gestational Age",
+              "Median PSV (1.0 MoM)",
+              "Threshold PSV (1.5 MoM)",
+              "Interpretation"
+            ],
+            "rows": [
+              [
+                "20 weeks",
+                "20 to 24 cm/s",
+                "30 to 36 cm/s",
+                "Values > 1.5 MoM indicate moderate to severe anaemia"
+              ],
+              [
+                "24 weeks",
+                "25 to 29 cm/s",
+                "38 to 44 cm/s",
+                "Indicates cordocentesis and intrauterine transfusion"
+              ],
+              [
+                "28 weeks",
+                "28 to 32 cm/s",
+                "42 to 48 cm/s",
+                "Serial scans performed every 1 to 2 weeks"
+              ],
+              [
+                "32 weeks",
+                "35 to 40 cm/s",
+                "53 to 60 cm/s",
+                "Balance intrauterine transfusion against delivery"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Kleihauer-Betke test calculation for fetomaternal haemorrhage",
+          "body": "The Kleihauer-Betke (acid elution) test counts fetal cells in 2,000 adult cells. Maternal blood volume is estimated as 5,000 mL, and the fetal red cell volume is calculated as: Fetal cells (%) x 50.\n\nBecause 300 micrograms (1500 IU) of anti-D neutralises up to 30 mL of fetal whole blood (15 mL of fetal packed red cells), divide the calculated volume of fetomaternal haemorrhage by 30 to determine the total 300 mcg ampoules required."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What volume of fetal whole blood and fetal packed red cells is effectively neutralized by a standard 300 microgram dose of anti-D immunoglobulin?",
+          "a": "A standard dose of 300 micrograms (1500 IU) of anti-D immunoglobulin neutralizes up to 30 mL of fetal whole blood or 15 mL of fetal packed red blood cells.",
+          "accept": [
+            "30 ml",
+            "15 ml",
+            "whole blood",
+            "packed red cells",
+            "300 micrograms"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why is anti-Kell alloimmunisation monitored with fetal MCA Doppler even when maternal antibody titres are low, such as 1:2 or 1:4?",
+          "a": "Anti-Kell antibodies directly suppress fetal erythroid progenitor cells in bone marrow rather than causing proportionate haemolysis, so severe fetal anaemia can develop even at very low maternal antibody titres.",
+          "accept": [
+            "suppress",
+            "erythroid progenitor",
+            "bone marrow",
+            "low titres",
+            "severe fetal anaemia",
+            "kell"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rh_isoimmunization_and_fetal_hydrops: clinicalPearls"
+        },
+        {
+          "source": "RCOG",
+          "locator": "The Use of Anti-D Immunoglobulin for RhD Prophylaxis: Kleihauer Testing and Dosing"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.rh.diagnosis": {
+      "id": "skill.rh.diagnosis",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Diagnostic criteria, staging, and risk stratification in Rh isoimmunisation",
+      "oneLine": "Categorising unsensitised risk, critical maternal alloimmunisation, mild to severe fetal anaemia, and hydrops fetalis",
+      "why": "Staging Rh isoimmunisation accurately determines the clinical trajectory from low-risk preventive care to urgent maternal-fetal intensive therapy. Formulating a precise diagnostic statement specifying maternal antibody titre, paternal zygosity, fetal MCA Doppler category, and presence of hydrops directs the surveillance schedule and delivery timing.",
+      "teach": [
+        {
+          "heading": "Diagnostic criteria and staging classification",
+          "table": {
+            "cols": [
+              "Clinical Stage",
+              "Diagnostic Findings",
+              "Clinical Severity and Risk"
+            ],
+            "rows": [
+              [
+                "Unsensitised Rh-negative",
+                "Negative Indirect Coombs Test (ICT)",
+                "Candidate for routine anti-D immunoprophylaxis"
+              ],
+              [
+                "Sensitised, sub-critical",
+                "Positive ICT, titre < 1:16",
+                "Low immediate fetal risk; serial antibody titres"
+              ],
+              [
+                "Sensitised, critical titre",
+                "Positive ICT, titre >= 1:16 or 1:32",
+                "High risk of fetal anaemia; mandatory MCA Doppler"
+              ],
+              [
+                "Overt fetal anaemia / Hydrops",
+                "MCA-PSV > 1.5 MoM +/- effusions",
+                "Critical emergency; requires IUT or delivery"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Stratifying severity of fetal anaemia",
+          "body": "Fetal anaemia is stratified by middle cerebral artery Doppler velocity into mild (MCA-PSV 1.29 to 1.50 MoM), moderate (1.50 to 1.55 MoM), and severe (greater than 1.55 MoM or associated with hydrops).\n\nWhen MCA-PSV exceeds 1.50 MoM, the sensitivity for detecting moderate to severe anaemia (haemoglobin deficit greater than 5 standard deviations) approaches 100 percent."
+        },
+        {
+          "heading": "Constructing the complete diagnostic statement",
+          "body": "A complete obstetric diagnosis must be articulated comprehensively: Gravida 3 Para 1 Live 1 Abortion 1 at 28 weeks of gestation with blood group O Rh-negative, husband B Rh-positive, Rh alloimmunisation with indirect Coombs titre 1:32, complicated by moderate-to-severe fetal anaemia on MCA Doppler (1.6 MoM) without hydrops fetalis.\n\nThis explicit statement identifies parity, gestation, immunologic status, severity, and immediate therapeutic urgency."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What findings classify an Rh-alloimmunised pregnancy as high risk requiring immediate tertiary fetal medicine referral?",
+          "a": "An indirect Coombs test antibody titre reaching or exceeding 1:16 to 1:32, a rapid four-fold titre rise, an MCA Doppler PSV exceeding 1.5 MoM, or ultrasound features of hydrops fetalis.",
+          "accept": [
+            "1:16",
+            "1:32",
+            "1.5 mom",
+            "mca doppler",
+            "hydrops",
+            "critical titre"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What components must be included in a complete diagnostic formulation for an Rh-isoimmunised pregnancy?",
+          "a": "The diagnosis must state maternal and paternal Rh status, parity, exact gestational age, maternal antibody titre, fetal MCA Doppler category or MoM value, and the presence or absence of hydrops fetalis.",
+          "accept": [
+            "rh status",
+            "gestational age",
+            "antibody titre",
+            "mca doppler",
+            "hydrops",
+            "parity"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rh_isoimmunization: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Alloimmunization: diagnosis and staging"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.rh.prophylaxis": {
+      "id": "skill.tx.rh.prophylaxis",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Anti-D immunoprophylaxis regimens: routine antenatal and sensitising events",
+      "oneLine": "Indications, timing, and dosages of polyclonal anti-D immunoglobulin in India and international guidelines",
+      "why": "Anti-D immunoprophylaxis is one of the greatest successes of modern preventive obstetrics, reducing maternal alloimmunisation rates from 16 percent to under 0.2 percent. Understanding the exact dosage thresholds, administration windows, and management of sensitising events is mandatory for every clinician caring for pregnant women.",
+      "dosingNote": "CliniX does not prescribe. Doses are quoted from standard obstetric protocols (Williams Obstetrics, RCOG, FOGSI) and the StewardMD Clinical KB for revision and examination purposes only.",
+      "teach": [
+        {
+          "heading": "Routine antenatal anti-D prophylaxis (RAADP)",
+          "body": "All unsensitised Rh-negative pregnant women should receive routine antenatal anti-D prophylaxis. In India, a single dose of 300 micrograms (1500 IU) is administered intramuscularly between 28 and 30 weeks of gestation.\n\nAn alternative two-dose regimen offers 100 to 120 micrograms (500 to 625 IU) at 28 weeks and again at 34 weeks. Prophylaxis is withheld only if the biological father is confirmed Rh-negative or cell-free fetal DNA confirms an Rh-negative fetus."
+        },
+        {
+          "heading": "Postpartum prophylaxis and the 72-hour window",
+          "body": "Following delivery, cord blood is collected to determine neonatal ABO and Rh status and direct antiglobulin test (DAT). If the neonate is Rh-positive and the mother is unsensitised, 300 micrograms (1500 IU) of anti-D is administered intramuscularly within 72 hours.\n\nIf the 72-hour window is missed, anti-D should still be administered as soon as realized, up to 28 days postpartum, because substantial protection is still achieved."
+        },
+        {
+          "heading": "Dosage regimens for sensitising events in pregnancy",
+          "table": {
+            "cols": [
+              "Sensitising Event",
+              "Gestational Timing",
+              "Dose in India (FOGSI)",
+              "Dose in RCOG Guidelines"
+            ],
+            "rows": [
+              [
+                "Early miscarriage, MTP, ectopic",
+                "< 12 to 20 weeks",
+                "50 micrograms (250 IU) IM",
+                "250 IU (50 micrograms) IM"
+              ],
+              [
+                "Miscarriage, MTP, trauma, APH",
+                ">= 20 weeks",
+                "300 micrograms (1500 IU) IM",
+                "500 IU (100 micrograms) IM"
+              ],
+              [
+                "Amniocentesis, CVS, ECV",
+                "Any gestational age",
+                "300 micrograms (1500 IU) IM",
+                "500 IU (100 micrograms) IM"
+              ],
+              [
+                "Massive fetomaternal bleed",
+                "Any gestational age",
+                "Additional dose per Kleihauer",
+                "Additional dose per Kleihauer"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Contraindications and common misconceptions",
+          "body": "Anti-D immunoglobulin is completely ineffective and contraindicated in an already sensitised woman (positive ICT with anti-D antibodies). It cannot reverse or treat existing antibody production.\n\nAnti-D must also never be given to an Rh-positive woman or an infant. Mild local pain, erythema, and low-grade fever are common side effects, while severe anaphylaxis is exceedingly rare."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What should be done if an Rh-negative mother did not receive anti-D immunoglobulin within the standard 72-hour postpartum window?",
+          "a": "Anti-D immunoglobulin should still be administered as soon as the omission is recognized, up to 28 days postpartum, as partial immunological protection is still conferred.",
+          "accept": [
+            "administered",
+            "28 days",
+            "as soon as",
+            "partial protection",
+            "postpartum"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why is anti-D immunoglobulin contraindicated in a pregnant woman who already has a positive indirect Coombs test for anti-D antibodies?",
+          "a": "Anti-D immunoglobulin is ineffective once maternal B-lymphocyte clones are actively producing endogenous anti-D antibodies, and it cannot reverse established alloimmunisation.",
+          "accept": [
+            "ineffective",
+            "alloimmunisation",
+            "active",
+            "endogenous",
+            "cannot reverse",
+            "established"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rh_isoimmunization_and_fetal_hydrops: clinicalPearls"
+        },
+        {
+          "source": "FOGSI",
+          "locator": "FOGSI GCPR: Routine Antenatal Care and Immunoprophylaxis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.rh.management": {
+      "id": "skill.tx.rh.management",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Management of sensitised pregnancy: intrauterine transfusion, timing of delivery, and neonatal care",
+      "oneLine": "Therapeutic protocols for severe fetal anaemia, cordocentesis technique, delivery thresholds, and neonatal exchange transfusion",
+      "why": "When maternal alloimmunisation produces severe fetal anaemia, prompt intervention with intrauterine blood transfusion can reverse hydrops and achieve fetal survival rates exceeding 90 percent. Understanding transfusion technique, delivery timing, and neonatal resuscitation prevents intrauterine demise and bilirubin encephalopathy.",
+      "dosingNote": "CliniX does not prescribe. Doses are quoted from standard obstetric protocols (Williams Obstetrics, RCOG, FOGSI) and the StewardMD Clinical KB for revision and examination purposes only.",
+      "teach": [
+        {
+          "heading": "Intrauterine blood transfusion (IUT) technique and indications",
+          "body": "Intrauterine blood transfusion is indicated when fetal MCA-PSV exceeds 1.5 MoM and cordocentesis confirms fetal haematocrit below 30 percent or haemoglobin deficit greater than 4 to 5 g/dL.\n\nUnder continuous ultrasound guidance, a 20- or 22-gauge spinal needle enters the umbilical vein at the placental insertion. Blood is infused slowly to raise fetal haematocrit to a target post-transfusion level of 40 to 45 percent."
+        },
+        {
+          "heading": "Donor blood specifications for intrauterine transfusion",
+          "table": {
+            "cols": [
+              "Parameter",
+              "Requirement",
+              "Clinical Justification"
+            ],
+            "rows": [
+              [
+                "ABO and Rh type",
+                "Group O, Rh-negative",
+                "Compatible with fetus and maternal anti-D antibodies"
+              ],
+              [
+                "Cross-match",
+                "Cross-matched against maternal serum",
+                "Prevents immune destruction by maternal antibodies"
+              ],
+              [
+                "Infection screening",
+                "CMV-negative, HIV/HBV/HCV negative",
+                "Prevents transplacental viral infection in utero"
+              ],
+              [
+                "Processing",
+                "Irradiated, leukodepleted, washed, Hct 75-85%",
+                "Prevents graft-versus-host disease and volume overload"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Timing and mode of delivery in sensitised pregnancy",
+          "body": "In uncomplicated sensitised pregnancies with sub-critical titres, delivery is planned at 37 to 38 weeks. In fetuses requiring repeated intrauterine transfusions, the final transfusion is performed around 34 to 35 weeks, with delivery scheduled at 35 to 37 weeks.\n\nAntenatal corticosteroids are administered before 34 weeks for fetal lung maturity. Delivery must take place in a tertiary centre equipped with advanced neonatal intensive care."
+        },
+        {
+          "heading": "Neonatal management: phototherapy and exchange transfusion",
+          "body": "At delivery, cord blood is sent for haematocrit, bilirubin, blood grouping, and direct antiglobulin test (DAT). Intensive phototherapy is initiated immediately to convert unconjugated bilirubin into lumirubin.\n\nDouble-volume exchange transfusion is performed if cord bilirubin exceeds 4.5 mg/dL, haemoglobin is under 11 g/dL, or serum bilirubin rises faster than 0.5 mg/dL per hour, preventing acute bilirubin encephalopathy (kernicterus)."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What specific criteria dictate the choice and preparation of donor blood for fetal intrauterine blood transfusion?",
+          "a": "Donor blood must be group O Rh-negative, cross-matched against maternal serum, CMV-negative, irradiated to prevent graft-versus-host disease, leukodepleted, and packed to a haematocrit of 75 to 85 percent.",
+          "accept": [
+            "group o",
+            "rh-negative",
+            "irradiated",
+            "cmv-negative",
+            "haematocrit 75",
+            "cross-matched"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What are the indications for immediate double-volume exchange transfusion in a newborn infant with Rh haemolytic disease?",
+          "a": "Indications include cord blood haemoglobin under 11 g/dL, cord bilirubin exceeding 4.5 mg/dL, bilirubin rising faster than 0.5 mg/dL per hour, or total serum bilirubin reaching exchange levels despite intensive phototherapy.",
+          "accept": [
+            "11 g/dl",
+            "4.5 mg/dl",
+            "0.5 mg/dl",
+            "phototherapy",
+            "exchange transfusion",
+            "cord bilirubin"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rh_isoimmunization_and_fetal_hydrops: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Alloimmunization: intrauterine transfusion and neonatal management"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.rh.kavita",
+      "title": "Gravida 3 Para 1 Live 1 Abortion 1 at 28 weeks gestation with Rh negative blood group and rising antibody titre",
+      "opening": "Namaste doctor. I have been referred here from the district hospital because my blood test shows I am Rh-negative and my antibody levels are rising. I am very worried about my baby.",
+      "fallback": "I do not quite understand that question, doctor. Could you ask me about my previous delivery, miscarriage, blood tests, or how the baby is moving?",
+      "patient": {
+        "name": "Kavita Sharma",
+        "age": 27,
+        "sex": "Female",
+        "occupation": "Primary school teacher",
+        "residence": "Jaipur, Rajasthan"
+      },
+      "initialVitals": {
+        "hr": 76,
+        "bpSystolic": 116,
+        "bpDiastolic": 74,
+        "rr": 16,
+        "spo2": 99,
+        "temp": 36.8,
+        "gcs": 15
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you to the hospital today",
+            "why have you been referred here",
+            "tell me what problem you are facing",
+            "chief complaint today"
+          ],
+          "reply": "I was referred by my district hospital doctor because my blood group is O Rh-negative and my antibody test came back positive with a high number. The doctor said my baby might become anaemic."
+        },
+        "fetal_movements_pattern": {
+          "cues": [
+            "how are the baby movements",
+            "tell me about the fetal kicks",
+            "since when did the baby movements change",
+            "are you feeling normal baby kicks"
+          ],
+          "reply": "The baby has been kicking actively every day, doctor. I count at least 10 kicks within two hours after my meals, and I have not noticed any reduction in movement."
+        },
+        "abdominal_swelling_growth": {
+          "cues": [
+            "has your abdomen been growing properly",
+            "do you feel your tummy is enlarged",
+            "did you notice your belly size growing rapidly",
+            "any sudden increase in abdominal girth"
+          ],
+          "reply": "My tummy has been growing gradually and naturally. My family says the bump looks completely normal for seven months, and it has not grown suddenly."
+        },
+        "amniotic_fluid_leak": {
+          "cues": [
+            "have you noticed any watery fluid leaking",
+            "is there any continuous watery discharge",
+            "did your water break",
+            "any leaking from the vagina"
+          ],
+          "reply": "No, doctor, there has been no leaking of water or any unusual wetness from below."
+        },
+        "vaginal_bleeding_check": {
+          "cues": [
+            "have you had any bleeding from the vagina",
+            "any brown discharge or spotting",
+            "did you notice fresh blood per vaginam",
+            "any vaginal spotting during this pregnancy"
+          ],
+          "reply": "No, I have not had any bleeding, spotting, or brownish discharge at any point during this pregnancy."
+        },
+        "booking_dating_history": {
+          "cues": [
+            "when was the first day of your last menstrual period",
+            "were your monthly periods regular before pregnancy",
+            "did you have an early dating ultrasound scan",
+            "what was your dating scan date"
+          ],
+          "reply": "My last period started on the 10th of April. My monthly cycles were always regular every 28 days. My first ultrasound at 8 weeks matched my dates exactly, giving an expected delivery date in mid-January."
+        },
+        "first_pregnancy_delivery": {
+          "cues": [
+            "tell me about your first delivery",
+            "what was the outcome of your first pregnancy",
+            "did your first baby have jaundice",
+            "did you receive an injection after your first delivery"
+          ],
+          "reply": "Three years ago, I delivered a healthy baby boy at our community health centre by normal delivery. He developed deep jaundice on day two and needed light treatment in the nursery. Nobody gave me any injection after delivery because the clinic had run out of stock."
+        },
+        "second_pregnancy_miscarriage": {
+          "cues": [
+            "tell me about your second pregnancy",
+            "did you have a miscarriage earlier",
+            "was surgical cleaning done for your miscarriage",
+            "did you receive anti-d after your miscarriage"
+          ],
+          "reply": "About eighteen months ago, I had a miscarriage at ten weeks. I had severe bleeding and cramps, so the local doctor performed a suction cleaning procedure. I was not given any injection after that procedure either."
+        },
+        "paternal_blood_group": {
+          "cues": [
+            "what is your husband blood group",
+            "has your partner been tested for blood group",
+            "do you know your husband rh status",
+            "what is your spouse blood type"
+          ],
+          "reply": "My husband had his blood checked at the district hospital when they found I was Rh-negative. His blood group is B Rh-positive, and both of his parents are also Rh-positive."
+        },
+        "anc_visits_trail": {
+          "cues": [
+            "how many antenatal checkups have you attended",
+            "did you attend the village mch clinic",
+            "were your blood pressure readings checked at every visit",
+            "show me your mch card"
+          ],
+          "reply": "I have attended four antenatal visits so far. I received both doses of tetanus toxoid and have been taking my daily iron, folic acid, and calcium tablets faithfully."
+        },
+        "blood_transfusion_history": {
+          "cues": [
+            "have you ever received a blood transfusion",
+            "any history of blood transfusion in the past",
+            "did you ever get blood or platelets",
+            "have you been transfused before"
+          ],
+          "reply": "No, doctor, I have never received any blood transfusion or blood products in my entire life."
+        },
+        "headache_visual_symptoms": {
+          "cues": [
+            "do you have severe headaches",
+            "are you seeing flashing lights or spots",
+            "any blurring of your vision",
+            "have you had persistent headache"
+          ],
+          "reply": "No, I have no headaches at all, and my vision is completely clear with no flashing spots."
+        },
+        "epigastric_upper_pain": {
+          "cues": [
+            "do you have pain in the upper abdomen",
+            "any pain below your right ribs",
+            "any severe stomach pain or acidity",
+            "epigastric discomfort or nausea"
+          ],
+          "reply": "No, I have no pain in my upper stomach or under my right ribs, and my digestion is fine."
+        },
+        "swelling_edema_check": {
+          "cues": [
+            "have your feet or ankles become swollen",
+            "any puffiness on your face in the mornings",
+            "did your rings become tight on your fingers",
+            "any swelling on your body"
+          ],
+          "reply": "No swelling on my feet, hands, or face. My wedding ring fits comfortably as usual."
+        },
+        "urinary_symptoms_check": {
+          "cues": [
+            "do you have any burning sensation when passing urine",
+            "is your urine output adequate",
+            "any pain or frequency in urination",
+            "burning micturition"
+          ],
+          "reply": "I pass urine easily without any burning, pain, or unusual frequency, and the colour is clear."
+        },
+        "fever_rash_illness": {
+          "cues": [
+            "did you have any high fever with body rash",
+            "any viral infection in early pregnancy",
+            "any joint pain or swollen glands",
+            "did you have torch infection"
+          ],
+          "reply": "No fever, no skin rashes, no joint pains, and no viral illnesses during this pregnancy."
+        },
+        "medical_illness_history": {
+          "cues": [
+            "did you have high blood pressure before pregnancy",
+            "do you suffer from diabetes or kidney problems",
+            "any history of heart disease or thyroid",
+            "any chronic medical conditions"
+          ],
+          "reply": "I have never had high blood pressure, diabetes, thyroid trouble, heart problems, or kidney disease."
+        },
+        "personal_nutrition_diet": {
+          "cues": [
+            "tell me about your daily food intake",
+            "how much milk, dal and vegetables do you eat",
+            "do you consume any tobacco or bidi",
+            "do you chew gutkha or betel nut"
+          ],
+          "reply": "I eat a vegetarian diet with wheat rotis, green vegetables, dal, and drink two glasses of milk daily. I have never smoked, chewed tobacco, or consumed alcohol."
+        },
+        "social_support_referral": {
+          "cues": [
+            "who accompanied you to the hospital",
+            "how far did you travel to reach this centre",
+            "who is supporting you at home",
+            "referral from primary centre"
+          ],
+          "reply": "My husband took leave from his school to travel with me from our town near Jaipur. We came directly because the doctor said this medical college has special facilities for baby blood transfusions."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "abnormal": false,
+          "finding": "Well-nourished, calm young woman in comfortable sitting posture, pink conjunctiva, no icterus, no peripheral oedema, visibly anxious regarding the baby health."
+        },
+        "skill.gen.vitals": {
+          "abnormal": false,
+          "finding": "Blood pressure 116/74 mmHg right arm sitting, pulse 76 bpm regular, respiratory rate 16/min, afebrile at 36.8 C, room air oxygen saturation 99%."
+        },
+        "skill.gen.edema": {
+          "abnormal": false,
+          "finding": "No pedal, pretibial, facial, or sacral oedema detected on examination."
+        },
+        "skill.gen.cyanosis": {
+          "abnormal": false,
+          "finding": "No central or peripheral cyanosis."
+        },
+        "skill.exam.obg.preg_prep_inspect": {
+          "abnormal": false,
+          "finding": "Abdomen uniformly distended consistent with late second trimester, longitudinal ovoid contour, midline pigmentation and striae gravidarum present, no previous surgical scars."
+        },
+        "skill.exam.obg.fundal_height": {
+          "abnormal": false,
+          "finding": "Symphysis-fundal height measures 28 cm, corresponding precisely to 28 completed weeks of gestation. Uterine tone is normal and relaxed."
+        },
+        "skill.exam.obg.leopold": {
+          "abnormal": false,
+          "finding": "Longitudinal lie, cephalic presentation, firm smooth back palpated on maternal left, fetal head is high and mobile above the pelvic brim."
+        },
+        "skill.exam.obg.fetal_heart": {
+          "abnormal": false,
+          "finding": "Fetal heart sounds heard clearly in left lower quadrant at 144 beats per minute, regular rhythm, no decelerations on auscultation."
+        }
+      },
+      "essentialInvestigations": [
+        "maternal_blood_group",
+        "indirect_coombs_test",
+        "paternal_blood_group",
+        "ultrasound_mca_doppler",
+        "complete_blood_count"
+      ],
+      "investigations": {
+        "maternal_blood_group": {
+          "label": "Maternal blood group and Rh factor",
+          "result": "Blood Group O, Rh (D) Negative",
+          "note": "Confirms maternal Rh-negative status placing the pregnancy at risk of Rh alloimmunisation."
+        },
+        "indirect_coombs_test": {
+          "label": "Maternal indirect Coombs test (ICT) antibody titre",
+          "result": "Positive for anti-D antibodies, titre 1:32",
+          "note": "Critical titre threshold (1:16 to 1:32) exceeded; confirms maternal alloimmunisation and mandates immediate fetal surveillance."
+        },
+        "paternal_blood_group": {
+          "label": "Paternal blood group and Rh phenotyping",
+          "result": "Blood Group B, Rh (D) Positive, homozygous for D antigen (D/D)",
+          "note": "Paternal homozygosity guarantees 100% probability of an RhD-positive fetus."
+        },
+        "complete_blood_count": {
+          "label": "Maternal complete blood count",
+          "result": "Haemoglobin 11.8 g/dL, platelets 240,000 /mcL, TLC 8,200 /mcL",
+          "note": "Maternal haematological indices are normal; anaemia is not present in the mother."
+        },
+        "ultrasound_mca_doppler": {
+          "label": "Fetal ultrasound biometry and middle cerebral artery Doppler",
+          "result": "Single live fetus, biometry 28 weeks, normal liquor (AFI 14 cm), no hydrops. Middle cerebral artery peak systolic velocity (MCA-PSV) is 48 cm/s (1.6 MoM for 28 weeks, median 30 cm/s).",
+          "note": "MCA-PSV exceeding 1.5 MoM indicates moderate to severe fetal anaemia, warranting cordocentesis and intrauterine transfusion."
+        },
+        "fetal_cardiotocography": {
+          "label": "Fetal cardiotocography (CTG)",
+          "result": "Baseline 142 bpm, moderate variability (10-15 bpm), no decelerations, reactive pattern, no sinusoidal rhythm.",
+          "note": "Fetal heart rate is currently reactive; sinusoidal pattern has not developed."
+        },
+        "kleihauer_betke_test": {
+          "label": "Maternal Kleihauer-Betke acid elution test",
+          "result": "Negative (< 2 fetal cells per 2,000 maternal adult erythrocytes)",
+          "note": "No acute massive fetomaternal haemorrhage detected."
+        }
+      },
+      "diagnosis": {
+        "answer": "Rh isoimmunisation (alloimmunisation) at 28 weeks of gestation with critical antibody titre 1:32 and moderate-to-severe fetal anaemia on MCA Doppler.",
+        "accept": [
+          "rh isoimmunisation",
+          "rh isoimmunization",
+          "rhesus isoimmunisation",
+          "rh alloimmunisation",
+          "rhesus alloimmunisation",
+          "rh incompatibility in pregnancy"
+        ],
+        "minMatch": 1
+      },
+      "differentialModel": {
+        "answer": "Rh isoimmunisation with fetal anaemia. Differentials include ABO incompatibility in pregnancy, minor red cell alloimmunisation (anti-Kell, anti-c), congenital parvovirus B19 infection, alpha thalassaemia major, and massive fetomaternal haemorrhage.",
+        "accept": [
+          "rh isoimmunisation",
+          "abo incompatibility in pregnancy",
+          "non-immune hydrops fetalis",
+          "minor red cell alloimmunisation",
+          "congenital parvovirus b19 infection",
+          "alpha thalassaemia major",
+          "fetomaternal haemorrhage"
+        ]
+      },
+      "managementModel": {
+        "answer": "Admit to tertiary fetal medicine unit; perform comprehensive ultrasound to rule out hydrops; prepare for percutaneous umbilical cord blood sampling (cordocentesis) and intrauterine blood transfusion using O Rh-negative irradiated washed packed red cells; administer antenatal corticosteroids for fetal lung maturity; maintain serial MCA Doppler surveillance every 1 to 2 weeks post-transfusion; plan delivery at 35 to 37 weeks in a centre with tertiary NICU facilities.",
+        "accept": [
+          "intrauterine transfusion",
+          "cordocentesis",
+          "doppler",
+          "corticosteroids",
+          "tertiary centre",
+          "ultrasound",
+          "delivery",
+          "nicu",
+          "transfusion",
+          "surveillance"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "Maternal Rh isoimmunisation is asymptomatic in the mother but causes progressive extravascular haemolysis and anaemia in the Rh-positive fetus due to transplacental transfer of maternal IgG anti-D antibodies.",
+        "Routine antenatal anti-D prophylaxis with 300 mcg (1500 IU) at 28 weeks and within 72 hours postpartum, plus for all sensitising events, prevents primary alloimmunisation in unsensitised Rh-negative women.",
+        "Once maternal alloimmunisation occurs and the indirect Coombs titre exceeds the critical threshold (1:16 to 1:32), serial middle cerebral artery peak systolic velocity Doppler (> 1.5 MoM) accurately detects moderate-to-severe fetal anaemia non-invasively.",
+        "Definitive management of severe fetal anaemia in utero before 35 weeks is intrauterine blood transfusion via cordocentesis using group O Rh-negative irradiated packed red cells, achieving fetal survival over 90 percent."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

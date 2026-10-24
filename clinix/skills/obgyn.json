@@ -15758,6 +15758,1863 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.hx.miscarriag.symptoms": {
+      "id": "skill.hx.miscarriag.symptoms",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Bleeding, pain and symptoms of early pregnancy loss",
+      "oneLine": "Characterising vaginal bleeding, tissue passage, and pelvic pain in early pregnancy",
+      "why": "Vaginal bleeding occurs in up to a quarter of first trimester pregnancies, but the clinical course ranges from benign spotting to life-threatening haemorrhage or ruptured ectopic pregnancy. Eliciting the precise onset, volume, colour, tissue passage, and pain pattern tells threatened miscarriage apart from inevitable or incomplete loss, and directs immediate resuscitation before examination.",
+      "body": "Ask systematically about vaginal bleeding, passage of clots or fleshy tissue, suprapubic cramping pain, shoulder tip pain or faintness, and any loss of subjective pregnancy symptoms.",
+      "asks": [
+        {
+          "text": "Bleeding onset and amount: when did the bleeding begin, how many sanitary pads have been soaked, is it fresh bright red blood or brownish spotting, and has it been getting heavier or lighter over the hours?"
+        },
+        {
+          "text": "Tissue passage: have you noticed any solid pieces, fleshy fragments, or greyish tissue passed down below, or has the discharge contained only liquid blood and dark clots?"
+        },
+        {
+          "text": "Pain character: where is the pain located, does it feel like period cramps coming in waves across the lower abdomen, or is it a sharp constant pain on one side?"
+        },
+        {
+          "text": "Systemic symptoms: have you felt dizzy, light-headed on standing, faint, or experienced pain at the tip of the shoulder, which points towards intraperitoneal bleeding?"
+        },
+        {
+          "text": "Pregnancy symptoms: have earlier early-pregnancy symptoms like nausea, morning sickness, and breast tenderness suddenly diminished or stopped over the preceding days?"
+        },
+        {
+          "text": "Fever and discharge: have you had any chills, fever, shivering, or unpleasant smelling vaginal discharge that suggests infected products of conception?"
+        }
+      ],
+      "keyPoints": [
+        "Light bleeding with minimal or no pain points toward threatened miscarriage, where the pregnancy may yet continue safely.",
+        "Heavy fresh bleeding with rhythmical suprapubic cramps and passage of fleshy fragments suggests inevitable or incomplete miscarriage with cervical dilatation.",
+        "Sudden sharp unilateral pelvic pain with faintness or shoulder tip pain suggests ruptured ectopic pregnancy rather than miscarriage, demanding emergency ultrasound.",
+        "Resolution of earlier pregnancy nausea and breast fullness often precedes the onset of bleeding in a missed miscarriage or embryonic demise."
+      ],
+      "pitfalls": [
+        "Failing to ask specifically whether fleshy tissue or only blood clots were passed, which is the key historical distinction between threatened and incomplete miscarriage.",
+        "Dismissing unilateral pain as simple uterine cramping without considering an ectopic pregnancy.",
+        "Neglecting to enquire about postural dizziness or syncope, which indicates significant occult blood loss."
+      ],
+      "teach": [
+        {
+          "heading": "Bleeding volume and tissue passage",
+          "body": "First trimester vaginal bleeding must be quantified by pad count and colour. Brown spotting represents old altered blood and carries a lower risk of imminent loss, whereas bright red bleeding soaking more than one sanitary pad per hour signals active haemorrhage.\n\nAsk whether the patient has passed recognisable tissue. Patients often mistake dark jelly-like blood clots for the conceptus; true products of conception appear firm, fleshy, grey-white or pinkish."
+        },
+        {
+          "heading": "Pain characteristics and danger signs",
+          "body": "Uterine cramping in miscarriage is typically midline, suprapubic, rhythmical, and accompanied by bleeding as the cervix softens and dilates to expel tissue.\n\nSharp, constant, or strictly unilateral iliac fossa pain should immediately raise suspicion of ectopic pregnancy. Shoulder tip pain reflects diaphragmatic irritation from haemoperitoneum and demands urgent surgical escalation."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How does the pain of miscarriage differ characteristically from the pain of an ectopic pregnancy?",
+          "a": "Miscarriage pain is usually midline, suprapubic, rhythmical, and cramping like labour, whereas ectopic pain is often sharp, constant, and strictly unilateral in the iliac fossa.",
+          "accept": [
+            "midline",
+            "suprapubic",
+            "rhythmical",
+            "cramping",
+            "unilateral"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the clinical significance of passing fleshy greyish tissue compared to dark red blood clots?",
+          "a": "Passing fleshy greyish tissue indicates expulsion of products of conception such as gestational sac or decidua, confirming an incomplete or complete miscarriage rather than a threatened loss with simple clots.",
+          "accept": [
+            "products of conception",
+            "incomplete",
+            "complete",
+            "gestational sac"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "contraceptives_emergency_uterotonics_abortion: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Abortion"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.miscarriag.risk": {
+      "id": "skill.hx.miscarriag.risk",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Risk factors and background in early pregnancy loss",
+      "oneLine": "Identifying maternal, genetic, endocrine, and anatomical factors predisposing to miscarriage",
+      "why": "While sporadic first trimester loss is most commonly caused by embryonic chromosomal aneuploidy, identifying maternal background factors is vital to prevent recurrence and uncover treatable systemic diseases such as antiphospholipid syndrome, thyroid disorders, or uncontrolled diabetes mellitus.",
+      "body": "Take a targeted background history covering maternal age, past pregnancy outcomes, medical comorbidities, endocrine disorders, prior uterine surgery or instrumentation, and medication exposures.",
+      "asks": [
+        {
+          "text": "Maternal age: what is your age, as chromosomal aneuploidy rises steeply in mothers over 35 years?"
+        },
+        {
+          "text": "Obstetric history: have you had previous miscarriages, terminations, ectopic pregnancies, or premature deliveries, and at what gestations did they occur?"
+        },
+        {
+          "text": "Medical disorders: do you have a history of thyroid disease, diabetes mellitus, systemic lupus erythematosus, or known blood clotting problems like thrombophilia?"
+        },
+        {
+          "text": "Uterine conditions: have you been told of any fibroids, uterine anomalies such as a septate uterus, or had previous cervical procedures or curettage?"
+        },
+        {
+          "text": "Medications and substances: are you taking any prescribed or over-the-counter medicines, non-steroidal anti-inflammatory drugs, or tobacco products?"
+        }
+      ],
+      "keyPoints": [
+        "Advanced maternal age is the strongest independent demographic predictor of spontaneous miscarriage due to rising rates of embryonic aneuploidy.",
+        "A history of two or more consecutive miscarriages meets the clinical definition of recurrent pregnancy loss and warrants systematic investigation.",
+        "Antiphospholipid syndrome is the primary treatable autoimmune cause of recurrent miscarriage and requires targeted anticoagulant prophylaxis in future pregnancies.",
+        "Uncontrolled maternal endocrine disorders, particularly overt hypothyroidism and poor glycaemic control in diabetes, substantially elevate early loss risk."
+      ],
+      "pitfalls": [
+        "Attributing recurrent early losses to stress or physical exertion without investigating for parental translocations, antiphospholipid syndrome, or uterine anomalies.",
+        "Failing to review medication history for teratogens or non-steroidal anti-inflammatory drugs taken in early pregnancy.",
+        "Overlooking previous surgical curettage or cervical trauma that could predispose to intrauterine adhesions or cervical weakness."
+      ],
+      "teach": [
+        {
+          "heading": "Genetic and maternal age contributions",
+          "body": "Chromosomal aneuploidy accounts for approximately fifty percent of sporadic first trimester spontaneous miscarriages. Trisomies, monosomy X, and polyploidies are the predominant genetic defects.\n\nThe risk of embryonic aneuploidy climbs progressively with maternal age, rising from about ten percent in women under thirty years to over fifty percent in women aged over forty years."
+        },
+        {
+          "heading": "Systemic and anatomical predisposing conditions",
+          "body": "Acquired autoimmune thrombophilias, specifically antiphospholipid syndrome with lupus anticoagulant or anticardiolipin antibodies, produce microvascular placental thrombosis and early failure.\n\nStructural uterine anomalies, including congenital uterine septa, submucosal fibroids, and intrauterine adhesions, impede adequate decidualisation and blastocyst implantation."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the single most common cause of sporadic first trimester spontaneous miscarriage?",
+          "a": "Embryonic chromosomal aneuploidy, which accounts for around fifty percent of all early spontaneous miscarriages.",
+          "accept": [
+            "chromosomal",
+            "aneuploidy",
+            "fifty percent",
+            "genetic"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which treatable autoimmune condition should be actively investigated in recurrent pregnancy loss?",
+          "a": "Antiphospholipid syndrome, identified by lupus anticoagulant, anticardiolipin antibodies, or anti-beta-2-glycoprotein-I antibodies, which responds to low-dose aspirin and heparin.",
+          "accept": [
+            "antiphospholipid",
+            "lupus anticoagulant",
+            "anticardiolipin",
+            "aspirin",
+            "heparin"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "recurrent_pregnancy_loss: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Abortion"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.miscarriag.case": {
+      "id": "skill.present.miscarriag.case",
+      "kind": "presentation",
+      "system": "obgyn",
+      "title": "Presenting the early pregnancy bleeding and miscarriage case",
+      "oneLine": "Two-minute structured case presentation synthesising history, examination, stage, and plan",
+      "why": "Presenting a patient with early pregnancy loss requires concise, compassionate clarity that immediately communicates haemodynamic stability, gestational age, clinical stage, sonographic findings, and a definitive management plan with emotional support.",
+      "body": "Deliver a concise two-minute case presentation structured into problem representation, clinical examination findings, ultrasound and laboratory results, definitive stage diagnosis, and therapeutic plan.",
+      "keyPoints": [
+        "Open with a precise problem representation stating maternal age, gravidity, parity, exact gestational age, and chief complaint of bleeding and pain.",
+        "State haemodynamic stability immediately, including pulse, blood pressure, and estimated blood loss.",
+        "Report cervical os state from speculum examination and uterine size relative to dates from bimanual examination.",
+        "Synthesise transvaginal ultrasound findings regarding intrauterine sac, embryonic pole, and cardiac activity.",
+        "Conclude with a clear management choice (expectant, medical, or surgical), anti-D administration status, and bereavement counselling."
+      ],
+      "pitfalls": [
+        "Failing to state whether the internal cervical os was open or closed on examination, which is the physical hallmark of stage classification.",
+        "Omitting the maternal Rhesus blood group and requirement for anti-D immunoglobulin.",
+        "Focusing entirely on evacuation procedures while forgetting psychological support and grief counselling."
+      ],
+      "teach": [
+        {
+          "heading": "Structuring the opening statement",
+          "body": "Begin with a crisp summary: Mrs Sunita is a twenty-four year old primigravida at nine weeks gestation presenting with six hours of vaginal bleeding and lower abdominal cramping.\n\nImmediately declare maternal stability: She is haemodynamically stable with normal blood pressure and pulse, and has had no syncopal episodes or signs of acute peritonism."
+        },
+        {
+          "heading": "Synthesising physical and sonographic findings",
+          "body": "Present pelvic findings clearly: Speculum examination reveals active dark red bleeding with the internal os admitting one fingertip and tissue in the canal. Bimanual examination shows an eight-week sized uterus with no adnexal mass.\n\nIntegrate imaging: Transvaginal ultrasound demonstrates retained irregular echoes in the endometrial cavity without a viable fetal pole, confirming an incomplete miscarriage."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What essential pieces of information must be stated in the opening thirty seconds of a miscarriage case presentation?",
+          "a": "Maternal age, parity, verified gestational age, duration and severity of bleeding and pain, and maternal haemodynamic stability.",
+          "accept": [
+            "gestational age",
+            "parity",
+            "bleeding",
+            "haemodynamic",
+            "stability"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why must the Rhesus status always be mentioned when concluding the case presentation?",
+          "a": "Because non-sensitised Rhesus-negative women require anti-D immunoglobulin within seventy-two hours of early pregnancy bleeding or evacuation to prevent isoimmunisation.",
+          "accept": [
+            "anti-D",
+            "rhesus",
+            "isoimmunisation",
+            "seventy-two hours"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "contraceptives_emergency_uterotonics_abortion: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Abortion"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.ectopic.risk": {
+      "id": "skill.hx.ectopic.risk",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Risk factors for ectopic pregnancy",
+      "oneLine": "Identifying previous ectopic, tubal surgery, PID, endometriosis, and IUCD conception",
+      "why": "Recognising predisposing tubal factors alerts the clinician early, although one-third of women with ectopic pregnancy have no identifiable risk factors.",
+      "body": "Ask systematically about past ectopic gestations, pelvic infections, pelvic surgery, assisted reproduction, and contraception at the time of conception.",
+      "asks": [
+        {
+          "text": "Past ectopic pregnancy: Have you ever had an ectopic pregnancy before? A previous ectopic is the strongest single risk factor, carrying a ten-fold increase in recurrence."
+        },
+        {
+          "text": "Tubal and pelvic surgery: Have you had surgery on your fallopian tubes, sterilisation, or surgery for appendicitis or pelvic adhesions? Prior tubal surgery alters ciliary motility and lumen architecture."
+        },
+        {
+          "text": "Pelvic infections and PID: Have you been treated for pelvic inflammatory disease, sexually transmitted infections like chlamydia or gonorrhoea, or chronic pelvic pain? Salpingitis produces endosalpingeal damage and intraluminal synechiae."
+        },
+        {
+          "text": "Contraceptive history: Were you using an intrauterine device or progestogen-only contraception when you conceived? While IUCDs reduce the overall rate of pregnancy, if pregnancy occurs with an IUCD in situ, up to fifty percent are ectopic."
+        },
+        {
+          "text": "Fertility treatments: Did this pregnancy occur following in vitro fertilisation or ovulation induction? Assisted conception increases the risk of both tubal and heterotopic gestations."
+        },
+        {
+          "text": "Endometriosis and smoking: Do you have a diagnosis of endometriosis, or do you smoke cigarettes? Endometriosis causes peritubal distortion, while cigarette smoking impairs tubal ciliary motility."
+        }
+      ],
+      "keyPoints": [
+        "A history of a previous ectopic pregnancy carries a ten-fold increased risk of recurrence, reaching ten to fifteen percent after one ectopic and over twenty-five percent after two.",
+        "Approximately one-third of women presenting with ectopic pregnancy have no identifiable risk factors, so the absence of risk factors must never be used to rule out the diagnosis.",
+        "If a woman conceives with an intrauterine contraceptive device in situ, the likelihood of that pregnancy being extrauterine is substantially heightened.",
+        "Assisted reproduction carries a risk of heterotopic pregnancy where an intrauterine and extrauterine gestation coexist simultaneously."
+      ],
+      "practice": "Take a focused risk-factor history in two minutes from a simulated patient presenting with positive pregnancy test and pelvic pain, covering previous ectopic, pelvic surgery, PID, and IUCD use.",
+      "pitfalls": [
+        "Assuming absence of documented risk factors excludes the possibility of an ectopic gestation.",
+        "Failing to ask about contraception at the time of conception, especially an intrauterine contraceptive device.",
+        "Neglecting the possibility of heterotopic pregnancy in women who have undergone assisted reproductive technologies."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the single strongest clinical risk factor for an ectopic pregnancy?",
+          "a": "A previous ectopic pregnancy is the strongest clinical risk factor, increasing recurrence risk to about ten to fifteen percent.",
+          "accept": [
+            "previous ectopic",
+            "prior ectopic",
+            "past ectopic",
+            "recurrence",
+            "ectopic pregnancy"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does a history of pelvic inflammatory disease increase the risk of tubal implantation?",
+          "a": "Pelvic inflammatory disease causes endosalpingeal inflammation, mucosal deciliation, and tubal scarring that impairs blastocyst transport through the fallopian tube.",
+          "accept": [
+            "inflammation",
+            "cilia",
+            "deciliation",
+            "scarring",
+            "adhesions",
+            "transport",
+            "fallopian",
+            "pelvic inflammatory disease"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What is the risk of ectopic pregnancy if a patient conceives with an intrauterine contraceptive device in place?",
+          "a": "Although an intrauterine contraceptive device markedly reduces overall pregnancy rates, if failure occurs and a pregnancy implants, the proportion of ectopic gestations is significantly higher.",
+          "accept": [
+            "higher",
+            "proportion",
+            "failure",
+            "intrauterine",
+            "device",
+            "iud",
+            "iucd",
+            "ectopic"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "prior_ectopic",
+          "text": "Inquires specifically about previous ectopic pregnancies and recurrence risks"
+        },
+        {
+          "id": "tubal_surgery",
+          "text": "Asks about previous tubal surgery, sterilisation, or adhesiolysis"
+        },
+        {
+          "id": "pid_history",
+          "text": "Explores past pelvic inflammatory disease, sexually transmitted infections, and salpingitis"
+        },
+        {
+          "id": "contraception",
+          "text": "Identifies contraceptive failure with intrauterine contraceptive devices"
+        },
+        {
+          "id": "art_history",
+          "text": "Screens for assisted conception and the possibility of heterotopic gestation"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "ectopic_pregnancy: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Ectopic Pregnancy, Risk Factors"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.ectopic.case": {
+      "id": "skill.present.ectopic.case",
+      "kind": "presentation",
+      "system": "obgyn",
+      "title": "Presenting the ectopic pregnancy case",
+      "oneLine": "Structured bedside presentation of early pregnancy pain, ultrasound, and management decision",
+      "why": "In acute gynaecology, a crisp structured case presentation clearly articulates haemodynamic stability, diagnostic imaging findings, and the justification for medical versus surgical therapy.",
+      "teach": [
+        {
+          "heading": "The sixty-second early pregnancy presentation",
+          "body": "Open with age, parity, and gestational age calculated from the last menstrual period.\n\nState clearly whether she is haemodynamically stable or unstable, her presenting complaints, and the key pelvic examination findings including cervical motion tenderness and adnexal fullness.\n\nConclude with the transvaginal ultrasound findings, baseline serum beta-hCG, and whether she meets criteria for medical management or requires immediate surgical intervention."
+        },
+        {
+          "heading": "Key elements to highlight to the senior clinician",
+          "body": "Emphasise four critical decision points: first, vital signs and signs of intra-abdominal bleeding or peritonism; second, the serum beta-hCG in relation to the transvaginal discriminatory zone; third, adnexal mass dimensions and presence of embryonic cardiac activity; fourth, patient compliance and suitability for outpatient methotrexate versus inpatient surgery."
+        }
+      ],
+      "practice": "Rehearse presenting an unruptured ectopic pregnancy case to a consultant in sixty seconds, summarising history, examination, transvaginal scan, hCG level, and medical management eligibility.",
+      "pitfalls": [
+        "Presenting extensive non-contributory background before stating the haemodynamic stability and vital signs.",
+        "Omitting the transvaginal ultrasound adnexal mass diameter or the baseline serum beta-hCG.",
+        "Proposing methotrexate without stating whether baseline hepatic, renal, and haematological labs have been confirmed normal."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the first clinical detail to communicate when presenting a suspected ectopic pregnancy?",
+          "a": "The patient haemodynamic stability and vital signs, to determine immediately whether resuscitation and emergency theatre transfer are required.",
+          "accept": [
+            "haemodynamic",
+            "hemodynamic",
+            "stability",
+            "vitals",
+            "vital signs",
+            "resuscitation",
+            "theatre"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which three ultrasound measurements must be reported when presenting a stable ectopic pregnancy for medical management?",
+          "a": "The presence or absence of an intrauterine gestation, the maximum diameter of the adnexal mass, and the presence or absence of embryonic cardiac activity.",
+          "accept": [
+            "diameter",
+            "mass",
+            "size",
+            "cardiac activity",
+            "heartbeat",
+            "intrauterine",
+            "gestation"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "opener",
+          "text": "States age, parity, gestation, and immediate haemodynamic stability in the opening sentence"
+        },
+        {
+          "id": "findings",
+          "text": "Summarises the classic triad, cervical excitation, and localized peritoneal findings"
+        },
+        {
+          "id": "investigations",
+          "text": "Quotes transvaginal scan features, mass size, cardiac activity, and quantitative beta-hCG"
+        },
+        {
+          "id": "plan",
+          "text": "Justifies the selected management pathway according to established safety criteria"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "ectopic_pregnancy: management"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline No. 21: Diagnosis and Management of Ectopic Pregnancy"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.post.risk": {
+      "id": "skill.hx.post.risk",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Risk factors and background in prolonged pregnancy",
+      "oneLine": "Accurate menstrual dates, prior post-term births, maternal weight and risks that mandate timely delivery",
+      "why": "Gestational age determines every obstetric threshold. The commonest cause of an apparently post-term pregnancy is inaccurate dates, while true prolonged pregnancy carries risk of placental senescence, oligohydramnios and stillbirth. Taking a meticulous history of menstrual regularity, early dating ultrasound, prior post-term births and maternal risk factors separates spurious dating errors from genuine prolonged gestation requiring induction.",
+      "asks": [
+        {
+          "text": "What was the exact first day of your last normal menstrual period, and were your cycles regular at 28 to 30 days before conceiving? Regular cycles are essential for applying the rule of adding 9 months and 7 days to calculate the true expected date of delivery."
+        },
+        {
+          "text": "Did you have an early ultrasound scan during the first three months of pregnancy? An ultrasound measurement of crown-rump length between 11 and 14 weeks provides the most accurate estimation of gestational age."
+        },
+        {
+          "text": "Have you had any previous deliveries that went past your due date, or did you require induction of labour in earlier pregnancies? A history of a prior prolonged pregnancy carries a recurrence risk of up to 30 percent."
+        },
+        {
+          "text": "Have you had any high blood pressure, diabetes, thyroid disease, or other medical illnesses during this pregnancy? Medical co-morbidities worsen placental insufficiency and lower the threshold for intervention."
+        },
+        {
+          "text": "Have you noticed regular fetal movements every day, or has there been any recent slowing down of the baby kicks? Decreased fetal movements in a late-term pregnancy can herald placental failure."
+        },
+        {
+          "text": "Have you noticed any watery fluid leaking from the vagina, bloody discharge, or painful uterine contractions? Leaking fluid may signify prelabour rupture of membranes compounding oligohydramnios."
+        }
+      ],
+      "practice": "Take a focused dating and risk history from a multiparous woman presenting at 41 weeks, verifying menstrual regularity, early scan confirmation, prior prolonged deliveries, and danger symptoms.",
+      "pitfalls": [
+        "Relying on the date a period was missed rather than the first day of the last normal bleeding episode.",
+        "Assuming dates are accurate when the woman had irregular cycles or conceived immediately after stopping oral contraceptive pills.",
+        "Overlooking decreased fetal movements as an urgent sign of placental compromise in late gestation."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the commonest cause of an apparent post-term pregnancy?",
+          "a": "Inaccurate menstrual dating due to irregular cycles or miscalculated last menstrual period is the commonest cause.",
+          "accept": [
+            "inaccurate",
+            "wrong dates",
+            "irregular cycles",
+            "dating error",
+            "miscalculated"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What ultrasound parameter in the first trimester gives the most reliable estimation of gestational age?",
+          "a": "Crown-rump length measurement between 11 and 14 weeks gives the most accurate gestational age estimation within 5 days.",
+          "accept": [
+            "crown-rump length",
+            "CRL",
+            "first trimester",
+            "11"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why does a history of previous post-term pregnancy matter in the current pregnancy?",
+          "a": "Prolonged pregnancy has a significant recurrence risk of 20 to 30 percent in subsequent pregnancies, warranting early dating and vigilant antenatal surveillance.",
+          "accept": [
+            "recurrence",
+            "recur",
+            "repeat",
+            "surveillance"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "dating_verification",
+          "text": "Verifies first day of last normal menstrual period and cycle regularity"
+        },
+        {
+          "id": "scan_correlation",
+          "text": "Cross-checks dates against first-trimester dating ultrasound crown-rump length"
+        },
+        {
+          "id": "risk_stratification",
+          "text": "Screens for prior post-term births, medical disorders, and decreased fetal movements"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "preterm_prom_postterm_steroids_induction: Post-term versus prolonged by dates"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Postterm Pregnancy: Clinical Considerations and Dating"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.post.case": {
+      "id": "skill.present.post.case",
+      "kind": "presentation",
+      "system": "obgyn",
+      "title": "Presenting the post-term pregnancy case",
+      "oneLine": "Maternal parity, confirmed gestational age, liquor and fetal status, Bishop score and induction plan",
+      "why": "Presenting a post-term pregnancy requires clear communication of dating reliability, maternal-fetal risk status, cervical readiness, and the proposed delivery plan. The listener needs the exact gestation in weeks and days, how it was verified, liquor status, and Bishop score to assess whether pre-induction cervical ripening or immediate delivery is required.",
+      "body": "Present a post-term obstetric case in a structured order: demographic particulars and parity, gestational age with dating basis, fetal surveillance findings, cervical Bishop score, and the step-by-step induction strategy.",
+      "keyPoints": [
+        "State maternal age, parity, gravidity, and exact gestational age in completed weeks and days, confirming how dates were verified (regular LMP versus early dating scan).",
+        "Summarise the clinical history including absence or presence of labour pains, membrane rupture, vaginal bleeding, and fetal movement activity.",
+        "Report physical examination: maternal vitals, fundal height (noting any lag indicating oligohydramnios), Leopold manoeuvres with presentation and station, and baseline fetal heart rate.",
+        "Present investigation findings clearly: ultrasound biometry, single deepest pocket or amniotic fluid index, and non-stress test or CTG categorisation.",
+        "Detail the pre-induction cervical assessment: calculate and break down the modified Bishop score out of 13, classifying the cervix as favourable (8 or above) or unfavourable (5 or less).",
+        "Conclude with an actionable management plan: method of cervical ripening (dinoprostone gel, oral misoprostol, or Foley balloon) or oxytocin induction, monitoring protocol, and thresholds for caesarean delivery."
+      ],
+      "pitfalls": [
+        "Failing to explain the evidence on which gestational age was established.",
+        "Recommending oxytocin induction without stating the Bishop score or cervical ripening status.",
+        "Omitting amniotic fluid volume and CTG findings when presenting fetal well-being."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What essential information must be included in the opening sentence of a post-term pregnancy presentation?",
+          "a": "Maternal age, gravidity, parity, accurate gestational age in weeks and days, and how the dates were confirmed.",
+          "accept": [
+            "age",
+            "parity",
+            "gestational age",
+            "weeks",
+            "dating"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why must the pre-induction Bishop score be presented before detailing the induction regimen?",
+          "a": "Because cervical favourability dictates the induction method: a score of 5 or less requires cervical ripening with prostaglandins or balloon, whereas a score of 8 or more allows direct amniotomy and oxytocin.",
+          "accept": [
+            "cervical favourability",
+            "cervical ripening",
+            "prostaglandins",
+            "balloon",
+            "amniotomy",
+            "oxytocin"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "opening_dating",
+          "text": "Opens with maternal particulars, exact gestational age, and dating confirmation"
+        },
+        {
+          "id": "fetal_surveillance",
+          "text": "Presents liquor volume and CTG findings systematically"
+        },
+        {
+          "id": "bishop_plan",
+          "text": "Reports Bishop score and provides an appropriate cervical ripening or induction plan"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "preterm_prom_postterm_steroids_induction: 42 risks 41 induces"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Induction of Labour: Presentation and Case Management"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.twin.risk": {
+      "id": "skill.hx.twin.risk",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Risk factors, conception background, and complications in multiple pregnancy",
+      "oneLine": "Conception history, family twinning, severe hyperemesis, pre-eclampsia warnings, and early labour signs",
+      "why": "A detailed multiple pregnancy history identifies risk factors for twinning (such as assisted reproductive technology, ovulation induction, advanced maternal age, and maternal family history of dizygotic twins), verifies menstrual dating before discordance develops, and screens proactively for major obstetric complications including severe hyperemesis, early-onset pre-eclampsia, gestational diabetes, severe anaemia, and preterm labour.",
+      "asks": [
+        {
+          "text": "Did this pregnancy occur naturally, or did you receive ovulation-inducing medications, intrauterine insemination, or in-vitro fertilisation? Ovulation induction and assisted reproductive technology dramatically increase dizygotic and higher-order multifetal conceptions."
+        },
+        {
+          "text": "What was the exact first day of your last normal menstrual period, and were your cycles regular before conceiving? Establishing accurate gestational dating in the first trimester is critical before discordant growth can confound assessment."
+        },
+        {
+          "text": "Did you have an ultrasound scan between 11 and 14 weeks of pregnancy? Early ultrasound provides definitive documentation of chorionicity and amnionicity, which stratifies all subsequent risk and surveillance."
+        },
+        {
+          "text": "Do you or your mother or sisters have a history of twin pregnancies? A maternal family history of twins indicates a genetic predisposition to polyovulation and dizygotic twinning."
+        },
+        {
+          "text": "Have you experienced persistent severe nausea, vomiting, or inability to keep fluids down during the first three months? Markedly elevated beta-hCG and human placental lactogen in multifetal pregnancy frequently cause severe hyperemesis gravidarum."
+        },
+        {
+          "text": "Have you noticed severe frontal headaches, visual blurring, flashes of light, swelling of your hands or face, or upper abdominal pain? Women with twins have a three-to-four-fold increased risk of developing pre-eclampsia at earlier gestational ages."
+        },
+        {
+          "text": "Have you felt regular painful abdominal tightenings, lower backache, pelvic pressure, watery vaginal leaking, or bloody discharge? Uterine overdistension predisposes to spontaneous preterm labour and preterm prelabour rupture of membranes."
+        }
+      ],
+      "practice": "Take a comprehensive multiple pregnancy history from a primigravida at 18 weeks, verifying conception mode, menstrual dates, first-trimester scan documentation, hyperemesis, and warning symptoms of pre-eclampsia and preterm labour.",
+      "pitfalls": [
+        "Failing to ask about fertility medications or embryo transfer numbers which influence zygosity and risk profiles.",
+        "Dismissing pronounced first-trimester vomiting as normal pregnancy nausea without assessing hydration, electrolytes, or weight loss.",
+        "Overlooking mild early hypertensive symptoms which can rapidly escalate to severe pre-eclampsia in multifetal gestation."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why is maternal family history relevant to dizygotic but not monozygotic twinning?",
+          "a": "Dizygotic twinning is influenced by a hereditary maternal tendency to multiple ovulation, whereas monozygotic twinning occurs at a constant rate of approximately 3.5 to 4 per 1,000 births without familial predisposition.",
+          "accept": [
+            "multiple ovulation",
+            "hyperovulation",
+            "dizygotic",
+            "constant",
+            "sporadic"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why is early first-trimester dating especially critical in multiple pregnancy?",
+          "a": "Because fetal growth restriction and inter-twin growth discordance can develop later in pregnancy, making late biometry unreliable for establishing true gestational age.",
+          "accept": [
+            "growth discordance",
+            "growth restriction",
+            "discordance",
+            "unreliable",
+            "later"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Name three maternal medical complications that occur with significantly higher frequency in twin gestation.",
+          "a": "Pre-eclampsia, gestational diabetes mellitus, severe hyperemesis gravidarum, and iron-deficiency anaemia.",
+          "accept": [
+            "pre-eclampsia",
+            "preeclampsia",
+            "gestational diabetes",
+            "anaemia",
+            "hyperemesis"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "conception_dating",
+          "text": "Inquires about natural versus assisted conception and confirms first-trimester dating"
+        },
+        {
+          "id": "chorionicity_scan",
+          "text": "Verifies whether early ultrasound established chorionicity and amnionicity"
+        },
+        {
+          "id": "complication_screening",
+          "text": "Systematically screens for hyperemesis, pre-eclampsia warnings, and preterm contractions"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "twin_twin_transfusion_syndrome: redFlags"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Multifetal Gestation: History and Risk Assessment"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.twin.case": {
+      "id": "skill.present.twin.case",
+      "kind": "presentation",
+      "system": "obgyn",
+      "title": "Presenting the twin pregnancy case",
+      "oneLine": "Maternal parity, confirmed gestational age, chorionicity, fetal presentations, growth concordance, and delivery plan",
+      "why": "Presenting a multifetal pregnancy to senior obstetricians requires an efficient, structured delivery that highlights gestational age, chorionicity, fetal presentations, growth concordance, amniotic fluid adequacy, maternal blood pressure, and a comprehensive delivery or surveillance plan. Clear articulation of chorionicity immediately frames whether the consultation focuses on monochorionic vascular complications or standard multifetal surveillance.",
+      "body": "Present a multifetal obstetric case in a structured order: demographic particulars and parity, gestational age with dating basis, first-trimester chorionicity determination, fetal lie and presentations (particularly Twin A), ultrasound biometry and growth concordance, amniotic fluid volumes, maternal blood pressure and laboratory screening, and the structured surveillance or delivery schedule.",
+      "keyPoints": [
+        "Open with maternal age, parity, gravidity, exact gestational age, and confirmed chorionicity and amnionicity from early scan.",
+        "Summarise relevant history including conception mode (spontaneous versus assisted), family history, and absence of pre-eclampsia warning symptoms or preterm labour pains.",
+        "Report physical examination: blood pressure, abdominal symphysis-fundal height discrepancy, Leopold palpation identifying multiple fetal poles, and two distinct fetal heart rates.",
+        "Present ultrasound findings systematically: presentation of Twin A and Twin B, individual estimated fetal weights, calculated growth discordance percentage, deepest vertical pool in each sac, and Doppler indices.",
+        "State maternal screening results: urinalysis for proteinuria, complete blood count for anaemia, and oral glucose tolerance testing.",
+        "Conclude with a definitive, chorionicity-tailored management plan: fortnightly scans for MCDA or monthly scans for DCDA, nutritional supplements, preterm labour advice, and planned delivery timing and route based on the presentation of Twin A."
+      ],
+      "pitfalls": [
+        "Failing to state chorionicity in the opening sentence of the presentation.",
+        "Omitting the presentation of Twin A, which is the single most critical determinant of planned vaginal birth versus caesarean section.",
+        "Neglecting to report amniotic fluid discordance and Doppler parameters when presenting monochorionic twins."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What essential information must be communicated in the very first sentence of a twin pregnancy case presentation?",
+          "a": "Maternal age, gravidity, parity, exact gestational age in weeks, and whether the pregnancy is monochorionic or dichorionic.",
+          "accept": [
+            "age",
+            "parity",
+            "gestational age",
+            "chorionicity",
+            "monochorionic",
+            "dichorionic"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why is the presentation of Twin A presented before Twin B when discussing the delivery plan?",
+          "a": "Because the presentation of Twin A dictates the route of delivery: if Twin A is cephalic, vaginal birth is feasible; if Twin A is non-cephalic, planned caesarean delivery is indicated regardless of Twin B.",
+          "accept": [
+            "Twin A",
+            "cephalic",
+            "route of delivery",
+            "vaginal birth",
+            "caesarean section"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "opening_chorionicity",
+          "text": "States maternal particulars, exact gestational age, and chorionicity upfront"
+        },
+        {
+          "id": "fetal_presentation_growth",
+          "text": "Presents Twin A presentation, growth discordance, and liquor status clearly"
+        },
+        {
+          "id": "delivery_plan",
+          "text": "Outlines an appropriate surveillance interval and evidence-based delivery timing"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "twin_twin_transfusion_syndrome: clinicalPearls"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Management of Monochorionic Twin Pregnancy: Case Presentation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.fetal.symptoms": {
+      "id": "skill.hx.fetal.symptoms",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Symptoms and maternal signs in suspected fetal growth restriction",
+      "oneLine": "Perception of fetal movements, small abdominal girth, fluid leakage, and maternal warning signs",
+      "why": "Fetal growth restriction is clinically silent in its early stages until maternal awareness of small abdominal size or declining fetal movements prompts medical attention. Inquiring systematically about the onset and tempo of fetal activity, changes in abdominal girth, loss of fluid per vaginam, and features of coexisting gestational hypertensive disorders enables early detection of chronic placental compromise before irreversible fetal acidemia develops.",
+      "asks": [
+        {
+          "text": "Have you noticed any change or reduction in your baby movements over recent days? A sudden reduction in fetal kicks is a cardinal symptom of worsening placental perfusion and chronic hypoxaemia."
+        },
+        {
+          "text": "Have you felt that your baby bump is not growing as expected or seems smaller than other women at the same stage of pregnancy? Maternal perception of static abdominal size often corresponds to lagging fundal height."
+        },
+        {
+          "text": "Have you noticed any continuous or sudden trickling of clear watery fluid from your vagina? Rupture of membranes must be differentiated from intact membranes with reduced liquor production."
+        },
+        {
+          "text": "Have you experienced any vaginal spotting, fresh bleeding, or sudden abdominal pain? Bleeding and pain may indicate concealed placental abruption complicating uteroplacental insufficiency."
+        },
+        {
+          "text": "Do you have any severe persistent headache, flashing lights or blurred vision, or sharp pain just below your ribs? These pre-eclampsia danger signs warn of multi-organ maternal disease accompanying placental dysfunction."
+        },
+        {
+          "text": "How has your appetite and nutritional intake been, and have you been gaining weight on your antenatal check-up card? Maternal undernutrition and poor gestational weight gain contribute to suboptimal fetal growth."
+        }
+      ],
+      "practice": "Take a focused symptom history from a pregnant woman presenting at 34 weeks with lagging abdominal growth, specifically screening for reduced fetal movements, fluid leakage, and pre-eclampsia symptoms.",
+      "pitfalls": [
+        "Dismissing maternal reporting of decreased fetal movement as normal late-pregnancy slowing without cardiotocography and ultrasound.",
+        "Failing to ask about watery discharge to exclude prelabour rupture of membranes as the primary cause of oligohydramnios.",
+        "Overlooking hypertensive warning signs like epigastric pain or persistent headache in a woman with an undersized uterus."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What symptom reported by the mother is the most urgent indicator of acute-on-chronic fetal compromise in growth restriction?",
+          "a": "A sudden reduction or cessation of fetal movements indicates worsening fetal hypoxaemia and mandates immediate cardiotocography and ultrasound Doppler evaluation.",
+          "accept": [
+            "reduction",
+            "fetal movements",
+            "cessation",
+            "movements"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why must you ask about watery vaginal fluid leakage in a woman found to have oligohydramnios on palpation?",
+          "a": "Watery leakage indicates premature rupture of membranes, which must be distinguished from intact membranes where oligohydramnios is caused by reduced fetal urine output secondary to placental insufficiency.",
+          "accept": [
+            "rupture of membranes",
+            "fetal urine",
+            "placental insufficiency",
+            "distinguished"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "movement_assessment",
+          "text": "Inquires specifically into the timing and pattern of fetal movements"
+        },
+        {
+          "id": "membrane_leakage",
+          "text": "Screens for fluid leakage to differentiate membrane rupture from oligohydramnios"
+        },
+        {
+          "id": "preeclampsia_symptoms",
+          "text": "Identifies coexisting maternal hypertensive warning signs"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "intrauterine_growth_restriction: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Fetal growth restriction: clinical presentation and surveillance"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.fetal.risk": {
+      "id": "skill.hx.fetal.risk",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Risk factors and background in fetal growth restriction and oligohydramnios",
+      "oneLine": "Previous small-for-gestational-age birth, maternal vascular disorders, nutritional status, and substance exposure",
+      "why": "Defective spiral artery invasion and secondary placental insufficiency cluster in women with identifiable pre-pregnancy and early-gestational risk factors. Eliciting a history of a prior growth-restricted newborn, recurrent stillbirths, chronic hypertension, renal disease, antiphospholipid antibodies, pre-gestational diabetes, severe anaemia, undernutrition, or tobacco exposure establishes pre-test probability, dictates surveillance frequency, and determines eligibility for prophylactic aspirin in subsequent pregnancies.",
+      "asks": [
+        {
+          "text": "What were the birth weights and gestational ages of your previous babies, and were any admitted to the special newborn care unit? A history of a previous small-for-gestational-age infant is the single strongest clinical predictor of recurrence."
+        },
+        {
+          "text": "Have you had any history of stillbirth, unexplained fetal loss, or recurrent miscarriages in past pregnancies? Recurrent pregnancy loss points towards parental chromosomal anomalies, thrombophilia, or severe uteroplacental vasculopathy."
+        },
+        {
+          "text": "Did you have high blood pressure, protein in the urine, or kidney problems before this pregnancy or early in gestation? Chronic vascular and renal diseases impede physiological trophoblastic remodelling of maternal spiral arteries."
+        },
+        {
+          "text": "Do you consume tobacco in any form, including bidi smoking or chewing gutkha and khaini? Nicotine and carbon monoxide cause maternal vasoconstriction, impair placental oxygen transport, and restrict fetal growth."
+        },
+        {
+          "text": "Were you started on low-dose aspirin tablets during the first four months of this pregnancy? Early initiation of aspirin by 16 weeks reduces the incidence of placenta-mediated growth restriction and pre-eclampsia in high-risk women."
+        },
+        {
+          "text": "Did you experience any high fever with skin rash, joint pains, or glandular swelling during the first trimester? Early maternal viral infections such as cytomegalovirus or rubella can cause symmetrical fetal growth failure."
+        }
+      ],
+      "practice": "Take a comprehensive obstetric and medical background history from a woman with suspected fetal growth restriction, evaluating prior birth weights, medical comorbidities, and substance use.",
+      "pitfalls": [
+        "Recording a previous birth without inquiring whether the baby was born small for gestational age or required neonatal nursery admission.",
+        "Missing smokeless tobacco consumption, which is widely used in rural and semi-urban Indian communities and significantly impairs placental perfusion.",
+        "Failing to verify whether prophylactic low-dose aspirin was prescribed and taken regularly from early pregnancy."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which historical risk factor confers the highest recurrence risk for fetal growth restriction in the current pregnancy?",
+          "a": "A previous pregnancy affected by fetal growth restriction or delivery of a small-for-gestational-age infant is the strongest predictor of recurrence.",
+          "accept": [
+            "previous pregnancy",
+            "small-for-gestational-age",
+            "recurrence",
+            "strongest"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why should low-dose aspirin prophylaxis be initiated prior to 16 weeks of gestation in women with major risk factors for placental insufficiency?",
+          "a": "Aspirin inhibits thromboxane synthesis and improves deep trophoblastic invasion of the spiral arteries, which is completed by 16 to 20 weeks of gestation.",
+          "accept": [
+            "trophoblastic invasion",
+            "spiral arteries",
+            "thromboxane",
+            "16"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "obstetric_recurrence",
+          "text": "Extracts detailed birth weights and outcomes of previous pregnancies"
+        },
+        {
+          "id": "medical_comorbidities",
+          "text": "Identifies maternal chronic vascular, renal, or autoimmune disorders"
+        },
+        {
+          "id": "substance_prophylaxis",
+          "text": "Inquires about tobacco consumption and adherence to low-dose aspirin prophylaxis"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "placental_insufficiency: clinicalPearls"
+        },
+        {
+          "source": "RCOG",
+          "locator": "The Investigation and Management of the Small-for-Gestational-Age Fetus: Risk Assessment"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.fetal.case": {
+      "id": "skill.present.fetal.case",
+      "kind": "presentation",
+      "system": "obgyn",
+      "title": "Presenting the fetal growth restriction and oligohydramnios case",
+      "oneLine": "Maternal particulars, dating certainty, biometry discrepancy, Doppler stage, and delivery plan",
+      "why": "A senior obstetrician evaluates a fetal growth restriction case to decide whether the fetus is safer continuing in utero under surveillance or being delivered into neonatal intensive care. Presenting clearly requires stating the exact gestational age and its dating basis, the degree of abdominal circumference and estimated fetal weight deficit, the Doppler staging sequence, liquor volume, and a concrete delivery recommendation balanced against prematurity.",
+      "body": "Present a case of fetal growth restriction and oligohydramnios in a standardised clinical sequence: demographic particulars with dating accuracy, clinical and fundal lag, ultrasound biometry centiles, multi-vessel Doppler progression, liquor status, and an evidence-based delivery recommendation.",
+      "keyPoints": [
+        "Open with maternal age, gravidity, parity, exact gestational age in completed weeks and days, and how dating was established using first-trimester crown-rump length or regular menstrual dates.",
+        "Summarise the clinical history including fetal movement perception, maternal perception of abdominal growth, and absence of membrane rupture or vaginal bleeding.",
+        "Report maternal physical examination: blood pressure, presence or absence of oedema, symphysis-fundal height with exact centimetres of lag, and abdominal palpation of fetal parts.",
+        "Present ultrasound biometry: specify abdominal circumference and estimated fetal weight centiles, head-sparing ratio, and confirmation of anatomical normality.",
+        "Detail the multi-vessel Doppler status: umbilical artery pulsatility index and presence, absence, or reversal of end-diastolic flow; middle cerebral artery pulsatility index and cerebroplacental ratio; and ductus venosus a-wave.",
+        "State the amniotic fluid volume using single deepest vertical pocket and amniotic fluid index.",
+        "Conclude with an actionable management plan: antenatal corticosteroids, magnesium sulphate if preterm delivery is planned, continuous fetal heart monitoring, and mode of delivery with neonatal team mobilization."
+      ],
+      "pitfalls": [
+        "Presenting an estimated fetal weight without stating the exact gestational centile and whether previous scans show static growth.",
+        "Failing to report Doppler findings in logical vascular sequence from umbilical artery to middle cerebral artery and ductus venosus.",
+        "Recommending urgent delivery without stating antenatal corticosteroid coverage or neonatal intensive care readiness."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What fundamental dating information must be stated at the beginning of a fetal growth restriction presentation?",
+          "a": "Maternal age, gravidity, parity, exact gestational age in weeks and days, and the method used to verify dating certainty.",
+          "accept": [
+            "age",
+            "parity",
+            "gestational age",
+            "dating",
+            "weeks"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why must the ductus venosus Doppler waveform be presented before deciding on delivery in early-onset severe growth restriction?",
+          "a": "Because ductus venosus a-wave reversal reflects advanced myocardial decompensation and acidemia, serving as a critical trigger for emergency delivery prior to 32 weeks.",
+          "accept": [
+            "ductus venosus",
+            "a-wave",
+            "decompensation",
+            "acidemia",
+            "delivery"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "dating_and_particulars",
+          "text": "Presents maternal demographics, verified gestational age, and dating criteria"
+        },
+        {
+          "id": "biometry_doppler_synthesis",
+          "text": "Reports biometry centiles, liquor volume, and Doppler progression systematically"
+        },
+        {
+          "id": "structured_management_plan",
+          "text": "Concludes with a concrete delivery plan, steroid coverage, and neonatal coordination"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "intrauterine_growth_restriction: management"
+        },
+        {
+          "source": "FOGSI",
+          "locator": "FOGSI General Clinical Practice Recommendations: Fetal Growth Restriction"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.rh.symptoms": {
+      "id": "skill.hx.rh.symptoms",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Maternal symptoms and fetal movement monitoring in Rh negative pregnancy",
+      "oneLine": "Systematic questioning to detect silent sensitisation, fetal movements, hydrops warnings, and mirror syndrome",
+      "why": "Unsensitised Rh-negative pregnancy is completely symptomless, and even severe fetal haemolytic disease develops silently in utero. Inquiring deliberately into fetal movement patterns, maternal perception of abdominal enlargement, generalised oedema, and hypertensive symptoms allows the clinician to identify impending hydrops fetalis and maternal mirror syndrome before fetal demise occurs.",
+      "asks": [
+        {
+          "text": "How are the movements of your baby over recent days, and have you noticed any reduction in kicks? A sudden reduction in fetal kicks is a cardinal symptom of worsening fetal compromise and severe haemolytic anaemia."
+        },
+        {
+          "text": "Have you felt that your baby bump is growing unusually fast or seems much larger than expected? Rapid abdominal enlargement suggests polyhydramnios and placentomegaly secondary to fetal hydrops."
+        },
+        {
+          "text": "Have you noticed sudden swelling of your legs, hands, or face, or rapid weight gain? Severe fetal hydrops can provoke maternal mirror syndrome with generalized anasarca."
+        },
+        {
+          "text": "Do you have any severe persistent headache, flashing lights before your eyes, or upper stomach pain? Maternal mirror syndrome often mimics severe pre-eclampsia with hypertensive danger signs."
+        },
+        {
+          "text": "Have you experienced any shortness of breath or difficulty breathing when lying flat? Maternal pulmonary oedema can develop as part of the generalized fluid overload in mirror syndrome."
+        },
+        {
+          "text": "Have you had any bleeding from the vagina or clear watery fluid leaking? Antepartum haemorrhage triggers further fetomaternal haemorrhage, while membrane rupture requires urgent evaluation."
+        }
+      ],
+      "practice": "In an antenatal clinic, demonstrate taking a targeted history from an Rh-negative pregnant woman, focusing on fetal movement trends, abdominal distension, and signs of maternal mirror syndrome.",
+      "pitfalls": [
+        "Assuming that absence of maternal symptoms guarantees fetal health when fetal anaemia develops silently",
+        "Dismissing rapid abdominal growth and maternal edema as normal third-trimester physiological changes",
+        "Failing to ask specifically about the daily tempo of fetal kicks in an alloimmunised pregnancy"
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why does an Rh-negative pregnant woman carrying a severely anaemic fetus often have no physical symptoms herself?",
+          "a": "Maternal Rh isoimmunisation affects fetal red blood cells through transplacental IgG antibodies, so the mother remains asymptomatic while the fetus develops progressive extravascular haemolysis and anaemia.",
+          "accept": [
+            "asymptomatic",
+            "fetal red blood cells",
+            "transplacental",
+            "extravascular haemolysis",
+            "anaemia"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is maternal mirror syndrome in severe Rh alloimmunisation, and what clinical features characterise it?",
+          "a": "Maternal mirror syndrome, or Ballantyne syndrome, is maternal generalised oedema and pre-eclampsia-like features that mirror severe fetal hydrops and placentomegaly.",
+          "accept": [
+            "mirror syndrome",
+            "ballantyne",
+            "oedema",
+            "hydrops",
+            "placentomegaly",
+            "pre-eclampsia"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "movement_assessment",
+          "text": "Inquires specifically into the timing and pattern of fetal movements"
+        },
+        {
+          "id": "hydrops_screening",
+          "text": "Screens for signs of polyhydramnios and maternal mirror syndrome"
+        },
+        {
+          "id": "complication_check",
+          "text": "Checks for coexisting antepartum bleeding, leaking, and hypertensive symptoms"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rh_isoimmunization: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Alloimmunization: clinical presentation and fetal hydrops"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.rh.risk": {
+      "id": "skill.hx.rh.risk",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Sensitising events, transfusion history and past obstetric outcomes in Rh negative pregnancy",
+      "oneLine": "Systematic inquiry into prior pregnancies, blood transfusions, invasive procedures and anti-D prophylaxis",
+      "why": "Maternal alloimmunisation requires prior exposure to foreign RhD-positive erythrocytes. Identifying whether sensitisation has occurred and quantifying recurrence risk requires a meticulous history of previous childbirths, abortions, ectopic pregnancies, invasive procedures, antepartum haemorrhages, blood transfusions, and whether adequate anti-D immunoglobulin was administered within the therapeutic window.",
+      "asks": [
+        {
+          "text": "What is your exact blood group and Rh status, and what is your husband blood group? Incompatibility requires an Rh-negative mother and an Rh-positive biological father."
+        },
+        {
+          "text": "In your previous deliveries, did the baby develop jaundice, and did you receive an anti-D injection within 72 hours? Omission of postnatal anti-D after an Rh-positive infant is the primary cause of isoimmunisation."
+        },
+        {
+          "text": "Have you had any miscarriages, abortions, or ectopic pregnancies, and did you receive anti-D each time? Early pregnancy bleeding and uterine curettage can cause significant fetomaternal haemorrhage."
+        },
+        {
+          "text": "Have you had any procedures during pregnancy, such as amniocentesis, CVS, or turning of the baby? Invasive intrauterine interventions disrupt the choriodecidual junction and require anti-D prophylaxis."
+        },
+        {
+          "text": "Have you had any vaginal bleeding or abdominal trauma during this pregnancy? Any antepartum haemorrhage or trauma warrants evaluation for fetomaternal haemorrhage and anti-D administration."
+        },
+        {
+          "text": "Have you ever received a blood transfusion or blood product transfusion in your life? Inadvertent transfusion of Rh-positive red cells or platelets can stimulate intense anti-D antibody production."
+        }
+      ],
+      "practice": "Demonstrate taking a complete obstetric history in an Rh-negative woman, identifying every potential sensitising event and verifying whether anti-D prophylaxis was received.",
+      "pitfalls": [
+        "Failing to ask about early pregnancy losses or terminations where anti-D was frequently omitted",
+        "Assuming anti-D was administered after a prior hospital delivery without checking written records",
+        "Neglecting the paternal blood group and zygosity in estimating fetal risk"
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Within what time window should prophylactic anti-D immunoglobulin ideally be administered following a potentially sensitising event?",
+          "a": "Anti-D immunoglobulin should be administered as soon as possible and within 72 hours of a potentially sensitising event, but some protection is still conferred if given up to 28 days.",
+          "accept": [
+            "72 hours",
+            "within 72 hours",
+            "sensitising event",
+            "28 days",
+            "prophylaxis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does an Rh-negative woman carrying her first Rh-positive pregnancy rarely have an infant affected by severe haemolytic disease?",
+          "a": "Primary maternal sensitization usually occurs during delivery, so maternal IgM antibodies form too late to affect the first baby, while high-affinity IgG anti-D antibodies threaten subsequent Rh-positive pregnancies.",
+          "accept": [
+            "primary sensitization",
+            "delivery",
+            "igm",
+            "subsequent pregnancies",
+            "igg",
+            "anti-d"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "blood_group_incompatibility",
+          "text": "Confirms maternal Rh-negative status and paternal blood group and Rh typing"
+        },
+        {
+          "id": "sensitising_event_inventory",
+          "text": "Exhaustively checks prior deliveries, abortions, procedures, trauma and transfusions"
+        },
+        {
+          "id": "prophylaxis_verification",
+          "text": "Verifies the timing and administration of anti-D immunoglobulin for each event"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rh_isoimmunization_and_fetal_hydrops: clinicalPearls"
+        },
+        {
+          "source": "RCOG",
+          "locator": "The Use of Anti-D Immunoglobulin for RhD Prophylaxis: Sensitising Events"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.rh.case": {
+      "id": "skill.present.rh.case",
+      "kind": "presentation",
+      "system": "obgyn",
+      "title": "Presenting the Rh isoimmunisation case",
+      "oneLine": "Structured clinical presentation of an Rh-negative pregnant woman with alloimmunisation and fetal risk stratification",
+      "why": "Presenting an Rh-alloimmunised pregnancy to a senior obstetrician or multi-disciplinary fetal medicine team demands concise communication of critical risk parameters. The presentation must immediately convey parity, gestational age, maternal antibody titre, paternal status, middle cerebral artery Doppler velocity, ultrasound features of hydrops, and a clear plan regarding intrauterine transfusion or timed delivery.",
+      "body": "A structured presentation begins with the patient identity, obstetric score, and reliable gestational age. State clearly: Mrs X is a G3P1L1A1 at 28 weeks of gestation with known blood group O Rh-negative and husband B Rh-positive, presenting with a rising indirect Coombs test titre of 1:32. Proceed immediately to the obstetric history: past delivery with neonatal jaundice and no anti-D prophylaxis, followed by an unprophylaxed miscarriage. Summarise the current fetal assessment: middle cerebral artery peak systolic velocity of 48 cm/s (exceeding 1.5 multiples of the median, indicating moderate-to-severe fetal anaemia) without hydrops on ultrasound. Conclude with the management plan: tertiary fetal medicine admission, cordocentesis and intrauterine blood transfusion, antenatal corticosteroids, and serial Doppler surveillance.",
+      "keyPoints": [
+        "State maternal and paternal blood groups, gestational age, and reliable dating basis upfront",
+        "Highlight prior sensitising events and whether anti-D prophylaxis was omitted",
+        "Report antibody titration, critical threshold status, and serial trends",
+        "Present fetal MCA Doppler peak systolic velocity in cm/s and multiples of the median (MoM)",
+        "State the presence or absence of ultrasound features of hydrops fetalis",
+        "Formulate an actionable management plan covering tertiary referral, fetal transfusion, steroids and delivery timing"
+      ],
+      "pitfalls": [
+        "Reporting maternal antibody titre without stating the centre critical titre threshold or previous values",
+        "Failing to convert raw MCA Doppler peak systolic velocity into multiples of the median for gestational age",
+        "Recommending immediate preterm delivery before evaluating feasibility of intrauterine transfusion"
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What essential parameters must be highlighted in the opening summary of an Rh-sensitised pregnancy case presentation?",
+          "a": "The opening summary must state maternal and paternal blood groups, parity, reliable gestational age, maternal antibody titre and trend, and whether the critical titre threshold has been exceeded.",
+          "accept": [
+            "blood groups",
+            "gestational age",
+            "antibody titre",
+            "critical titre",
+            "parity"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How should the fetal surveillance status be communicated when presenting an Rh-isoimmunised patient?",
+          "a": "Communicate the fetal status by stating the middle cerebral artery peak systolic velocity in multiples of the median, presence or absence of hydrops on ultrasound, and need for intrauterine transfusion.",
+          "accept": [
+            "middle cerebral artery",
+            "multiples of the median",
+            "mca psv",
+            "hydrops",
+            "intrauterine transfusion"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "identity_and_blood_groups",
+          "text": "Presents maternal and paternal blood groups, gestational age, and antibody titre clearly"
+        },
+        {
+          "id": "fetal_anaemia_metrics",
+          "text": "Accurately conveys MCA Doppler PSV, multiples of the median, and hydrops status"
+        },
+        {
+          "id": "intervention_plan",
+          "text": "Proposes an evidence-based management plan balancing intrauterine transfusion against delivery"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rh_isoimmunization_and_fetal_hydrops: additionalInvestigations"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Alloimmunization: management and fetal surveillance"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.puerperal.symptoms": {
+      "id": "skill.hx.puerperal.symptoms",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Maternal symptoms and clinical presentation of puerperal pelvic infection",
+      "oneLine": "Systematic inquiry into postpartum fever, shivering, lower abdominal pain, lochia alterations, and systemic danger signs",
+      "why": "Puerperal sepsis is a leading preventable cause of maternal mortality. Early infection often presents with non-specific malaise and mild lower abdominal ache before progressing rapidly to fulminant septic shock. A systematic symptom enquiry identifies the source of infection, detects uterine subinvolution and infected lochia, and flags systemic hypoperfusion early.",
+      "asks": [
+        {
+          "text": "When did the fever begin, how high was it, and was it accompanied by shaking chills or rigors? High-grade fever with rigors within the first 10 days postpartum strongly suggests invasive bacterial genital tract infection or bacteremia."
+        },
+        {
+          "text": "Where is your abdominal pain, and does it feel like worsening cramps or constant tenderness? Persistent lower abdominal pain and tenderness over the uterine fundus indicates puerperal endometritis or parametritis."
+        },
+        {
+          "text": "What is the colour, amount, and smell of your vaginal discharge (lochia)? Foul-smelling, purulent, or dark brownish lochia with clots indicates anaerobic or polymicrobial endometritis, though Group A Streptococcus may produce scant, serosanguinous, non-odorous discharge."
+        },
+        {
+          "text": "Do you have severe pain, burning, or swelling in your perineum, episiotomy site, or caesarean wound? Severe localised perineal pain suggests episiotomy wound infection, breakdown, haematoma, or necrotising fasciitis."
+        },
+        {
+          "text": "Have you noticed painful or burning urination, increased frequency, or pain in the flanks? Dysuria and flank tenderness help distinguish acute urinary tract infection or pyelonephritis from uterine infection."
+        },
+        {
+          "text": "Are your breasts painful, engorged, or red, and are you able to breastfeed comfortably? Unilateral breast erythema and wedge-shaped tenderness suggest acute mastitis rather than pelvic sepsis."
+        }
+      ],
+      "practice": "Practise taking a focused postpartum history from a mother with fever on day 3 following delivery, distinguishing genital tract infection from urinary, breast, and wound causes.",
+      "pitfalls": [
+        "Overlooking Group A Streptococcal endometritis which may present with scant, odorless lochia and rapid septic collapse",
+        "Dismissing lower abdominal cramping as normal postpartum afterpains in a febrile woman",
+        "Failing to inquire directly about the offensive odor of lochia on perineal pads"
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What clinical symptom triad classically points to acute puerperal endometritis?",
+          "a": "Maternal fever, lower abdominal or pelvic pain, and abnormal or foul-smelling lochia.",
+          "accept": [
+            "fever",
+            "abdominal pain",
+            "pelvic pain",
+            "foul lochia",
+            "offensive lochia",
+            "lochia"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why might a woman with life-threatening Group A Streptococcus puerperal sepsis not have foul-smelling lochia?",
+          "a": "Streptococcus pyogenes is an invasive non-putrefactive pathogen that causes fulminant bacteremia and shock with scant, serosanguinous, odorless lochia, unlike putrefactive anaerobic infections.",
+          "accept": [
+            "pyogenes",
+            "group a streptococcus",
+            "non-putrefactive",
+            "odorless",
+            "scant",
+            "invasive"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "sepsis_symptom_inquiry",
+          "text": "Inquires systematically into fever onset, temperature spikes, rigors, and systemic symptoms"
+        },
+        {
+          "id": "lochia_assessment",
+          "text": "Evaluates lochia colour, volume, consistency, clots, and offensive odour"
+        },
+        {
+          "id": "source_distinction",
+          "text": "Screens for alternative postpartum fever foci including breasts, surgical wounds, and urinary tract"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "puerperium_involution_sepsis_breastfeeding: Clinical pearls and management"
+        },
+        {
+          "source": "WHO",
+          "locator": "Managing puerperal sepsis: clinical assessment and danger signs"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.puerperal.risk": {
+      "id": "skill.hx.puerperal.risk",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Obstetric risk factors and predisposing events for puerperal sepsis",
+      "oneLine": "Detailed history of antenatal, intrapartum, and postpartum risk factors predisposing to genital tract sepsis",
+      "why": "The risk of puerperal sepsis increases dramatically with specific intrapartum events such as prolonged rupture of membranes, multiple unsterile vaginal examinations, prolonged labour, and operative intervention. Identifying these predisposing factors in the history establishes high pre-test probability, guides empirical antibiotic selection, and directs urgent investigation.",
+      "asks": [
+        {
+          "text": "When did your water break, and how many hours elapsed between membrane rupture and delivery of your baby? Rupture of membranes exceeding 18 hours allows ascending vaginal organisms to colonise the uterine cavity and fetal membranes."
+        },
+        {
+          "text": "How many internal vaginal examinations were performed during labour, and where did the delivery take place? Frequent vaginal examinations, particularly in unhygienic or home settings without sterile gloves, introduce exogenous pathogens into the genital tract."
+        },
+        {
+          "text": "How long did your labour last, and were you pushing for an extended duration? Prolonged labour leads to maternal exhaustion, dehydration, devitalised tissue, and increased microbial ascendancy."
+        },
+        {
+          "text": "How was your baby delivered, and were instruments or a caesarean section required? Emergency caesarean section carries a 5- to 20-fold increased risk of postpartum endometritis compared with uncomplicated vaginal delivery."
+        },
+        {
+          "text": "Did the afterbirth come out spontaneously and completely, or did the attendant have to remove it manually? Manual removal of the placenta and retained placental cotyledons create a large nidus for bacterial proliferation."
+        },
+        {
+          "text": "Did you have severe anaemia, diabetes, or malnutrition during your pregnancy? Pre-existing maternal anaemia (haemoglobin < 10 g/dL) and poorly controlled hyperglycemia impair host cellular immunity and wound healing."
+        }
+      ],
+      "practice": "Role-play taking an intrapartum and delivery history to uncover predisposing sepsis factors in a woman transferred from a primary rural birth centre.",
+      "pitfalls": [
+        "Neglecting to ask about the duration of ruptured membranes when evaluating a febrile postpartum woman",
+        "Failing to ask whether manual removal of the placenta was attempted during delivery",
+        "Underestimating the risk of severe sepsis following an emergency caesarean section"
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the single most important risk factor for postpartum endometritis?",
+          "a": "Caesarean section, particularly emergency caesarean delivery following prolonged labour or ruptured membranes.",
+          "accept": [
+            "caesarean section",
+            "cesarean",
+            "emergency caesarean",
+            "emergency c section"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "How does prolonged rupture of membranes predispose to puerperal sepsis?",
+          "a": "Prolonged rupture breaks the physical barrier and allows ascending cervicovaginal bacteria to invade the amniotic cavity, decidua, and exposed placental bed.",
+          "accept": [
+            "ascending",
+            "cervicovaginal",
+            "barrier",
+            "decidua",
+            "placental bed",
+            "amniotic"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "membrane_history",
+          "text": "Quantifies hours of ruptured membranes and identifies prolonged rupture (> 18 hours)"
+        },
+        {
+          "id": "labour_and_delivery_review",
+          "text": "Explores duration of labour, frequency of vaginal examinations, delivery mode, and placenta delivery"
+        },
+        {
+          "id": "host_risk_factors",
+          "text": "Evaluates underlying anaemia, gestational diabetes, nutrition, and immunosuppression"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "puerperium_involution_sepsis_breastfeeding: Pathophysiology and differentials"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Puerperal Infection: predisposing clinical risk factors"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.puerperal.case": {
+      "id": "skill.present.puerperal.case",
+      "kind": "presentation",
+      "system": "obgyn",
+      "title": "Presenting the puerperal sepsis case",
+      "oneLine": "Structured presentation of a postpartum mother with pelvic infection, systemic sepsis stratification, and resuscitation plan",
+      "why": "Presenting a septic postpartum mother to a consultant obstetrician or intensive care team requires rapid, structured delivery of essential clinical information. The presenter must immediately state maternal age, parity, delivery details, postpartum day of presentation, hemodynamic stability, localising pelvic examination findings, and an urgent Sepsis Six management plan.",
+      "body": "A structured presentation begins with the patient identity, obstetric history, and mode of birth: Mrs X is a 23-year-old P2L2, presenting on postpartum day 4 following a home delivery complicated by 22 hours of membrane rupture and unsterile vaginal examinations, presenting with high fever, rigors, lower abdominal cramps, and foul lochia. Proceed immediately to vital signs and sepsis screening: she is febrile at 39.1 degrees C, tachycardic at 116 beats per minute, tachypneic at 24 breaths per minute, with a blood pressure of 94/60 mmHg and serum lactate of 2.6 mmol/L, meeting obstetric sepsis criteria. Summarise key physical findings: uterine subinvolution at the umbilicus, marked uterine tenderness, purulent foul lochia, and cervical motion tenderness without peritonism. Conclude with the resuscitation and treatment plan: immediate Sepsis Six bundle including high-flow oxygen, blood and lochia cultures before antibiotics, broad-spectrum IV triple antibiotics (ampicillin, gentamicin, and metronidazole), IV crystalloid fluid boluses, strict catheterised urine monitoring, and pelvic ultrasound to exclude retained products of conception.",
+      "keyPoints": [
+        "State maternal identity, parity, mode, location, and postpartum day of delivery upfront",
+        "Highlight major intrapartum predisposing factors including duration of ruptured membranes and unsterile examinations",
+        "Present vital signs, modified obstetric early warning score, and serum lactate immediately",
+        "Describe abdominal and pelvic examination findings: fundal height, uterine tenderness, lochia characteristics, and cervical motion tenderness",
+        "State diagnostic differentials and exclude secondary sources including breasts, wound, chest, and urinary tract",
+        "Formulate an actionable management plan based on the Sepsis Six bundle, antimicrobial choice, and ultrasound imaging"
+      ],
+      "pitfalls": [
+        "Presenting maternal history chronologically without immediately highlighting hemodynamic instability and sepsis vitals",
+        "Omitting whether blood and high vaginal cultures were collected prior to initiating intravenous antibiotics",
+        "Failing to mention the plan for pelvic ultrasound to rule out retained placental tissue"
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What critical vitals and hemodynamic parameters must be delivered in the opening statement of a maternal sepsis presentation?",
+          "a": "Temperature, pulse rate, blood pressure, respiratory rate, oxygen saturation, and serum lactate.",
+          "accept": [
+            "temperature",
+            "pulse",
+            "blood pressure",
+            "respiratory rate",
+            "lactate",
+            "saturation"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What is the recommended timing for pelvic imaging in a woman presenting with puerperal endometritis?",
+          "a": "Pelvic ultrasound should be performed promptly after starting antimicrobial therapy and fluid resuscitation to identify retained infected products of conception or pelvic abscess.",
+          "accept": [
+            "ultrasound",
+            "pelvic ultrasound",
+            "retained products",
+            "abscess",
+            "promptly"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "clinical_summary_and_vitals",
+          "text": "Presents maternal identity, delivery complications, vital signs, and shock parameters clearly"
+        },
+        {
+          "id": "pelvic_findings_and_source",
+          "text": "Accurately conveys uterine fundal height, tenderness, lochia characteristics, and pelvic exam findings"
+        },
+        {
+          "id": "sepsis_management_plan",
+          "text": "Proposes an urgent Sepsis Six protocol, triple parenteral antibiotic regimen, and diagnostic ultrasound"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "puerperium_involution_sepsis_breastfeeding: Clinical pearls and management"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Bacterial Sepsis in Pregnancy and the Puerperium: clinical presentation and escalation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.heart.symptoms": {
+      "id": "skill.hx.heart.symptoms",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Cardiovascular symptoms, functional capacity and decompensation warnings in pregnancy",
+      "oneLine": "Systematic inquiry into gestational breathlessness, orthopnoea, paroxysmal nocturnal dyspnoea, palpitations, and NYHA functional staging",
+      "why": "Normal pregnancy physiological changes like expanded blood volume and cardiac output mimic mild cardiovascular symptoms. Distinguishing benign gestational dyspnoea from true pathological decompensation requires meticulous inquiry into symptom onset, exercise tolerance, nocturnal orthopnoea, and rapid heart rate changes to identify women at risk of acute pulmonary oedema.",
+      "asks": [
+        {
+          "text": "Are you experiencing any shortness of breath when walking on level ground or climbing stairs, and how far can you walk before needing to stop? Quantifying exercise tolerance establishes the baseline NYHA functional class and flags early cardiovascular compromise."
+        },
+        {
+          "text": "Do you need extra pillows to sleep comfortably at night, or do you have to sit upright in bed because of breathing difficulty? True orthopnoea indicates elevated left atrial and pulmonary venous pressures rather than mechanical gravid fundal pressure."
+        },
+        {
+          "text": "Do you wake suddenly from sleep gasping for breath and needing to open an outside window? Paroxysmal nocturnal dyspnoea is a cardinal sign of interstitial pulmonary congestion and impending pulmonary oedema."
+        },
+        {
+          "text": "Have you noticed any racing, pounding, or irregular heartbeats, and do they make you feel dizzy or lightheaded? Tachycardia and atrial arrhythmias critically shorten diastolic filling time across a stenotic mitral valve, provoking pulmonary oedema."
+        },
+        {
+          "text": "Have you experienced any chest tightness, heaviness, or pain during exertion or at rest? Chest discomfort warrants urgent evaluation for myocardial ischaemia, severe pulmonary hypertension, or aortic dissection."
+        },
+        {
+          "text": "Have you had any episodes of blackouts, sudden fainting, or feeling faint on minimal exertion? Syncope in a pregnant woman indicates fixed cardiac output obstruction or significant bradyarrhythmia."
+        },
+        {
+          "text": "Have you coughed up any blood, pink frothy sputum, or blood-streaked phlegm? Haemoptysis in mitral stenosis reflects ruptured thin-walled bronchial veins under high pulmonary venous pressure."
+        },
+        {
+          "text": "Have you noticed swelling of your ankles, feet, or legs that persists in the morning after waking? Rapidly progressive or generalised oedema suggests right heart strain or biventricular failure."
+        }
+      ],
+      "practice": "In an antenatal clinic or high-risk obstetric ward, demonstrate taking a structured cardiac history from a pregnant patient, systematically distinguishing physiological breathlessness from NYHA class II to IV symptoms and eliciting orthopnoea.",
+      "pitfalls": [
+        "Attributing orthopnoea and paroxysmal nocturnal dyspnoea to normal late pregnancy mechanical diaphragm elevation",
+        "Overlooking palpitations and sudden tachycardia as triggers for acute decompensation in mitral stenosis",
+        "Failing to quantify daily functional capacity against specific domestic or occupational tasks using NYHA criteria"
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How can a clinician distinguish physiological dyspnoea of pregnancy from pathological cardiac breathlessness?",
+          "a": "Physiological dyspnoea occurs early in gestation, improves when rested or seated, and is not associated with orthopnoea, paroxysmal nocturnal dyspnoea, nocturnal cough, or functional deterioration.",
+          "accept": [
+            "physiological",
+            "orthopnoea",
+            "nocturnal",
+            "early",
+            "rest",
+            "cough"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why is a sudden rise in maternal heart rate or the onset of atrial fibrillation dangerous in a pregnant woman with mitral stenosis?",
+          "a": "Tachycardia markedly reduces diastolic filling time across the narrowed mitral valve, raising left atrial pressure acutely and triggering pulmonary venous congestion and pulmonary oedema.",
+          "accept": [
+            "diastolic",
+            "filling time",
+            "left atrial",
+            "pulmonary",
+            "oedema",
+            "congestion",
+            "pressure"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "functional_grading",
+          "text": "Quantifies exercise tolerance and assigns NYHA functional class"
+        },
+        {
+          "id": "nocturnal_symptoms",
+          "text": "Screens specifically for orthopnoea, paroxysmal nocturnal dyspnoea, and cough"
+        },
+        {
+          "id": "arrhythmia_screening",
+          "text": "Inquires about palpitations, tachycardia episodes, syncope, and haemoptysis"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rheumatic_mitral_stenosis: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Cardiovascular Disorders: Clinical evaluation of heart disease in pregnancy"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.heart.risk": {
+      "id": "skill.hx.heart.risk",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Prior cardiac disease, rheumatic fever, structural interventions and medication reconciliation in pregnancy",
+      "oneLine": "Systematic inquiry into childhood sore throat and polyarthritis, prosthetic valves, percutaneous balloon valvuloplasty, and teratogenic cardiac drugs",
+      "why": "Rheumatic heart disease remains the dominant maternal cardiac pathology in lower- and middle-income countries. A detailed history of childhood rheumatic fever, secondary penicillin prophylaxis adherence, previous balloon mitral valvuloplasty, prosthetic valve types, and current medications such as ACE inhibitors or anticoagulants is vital to assess structural vulnerability and prevent fetal teratogenicity or maternal valve thrombosis.",
+      "asks": [
+        {
+          "text": "Did you suffer from repeated sore throats, joint swelling with pain moving from one joint to another, or abnormal involuntary twitches during childhood? A positive childhood history confirms acute rheumatic fever as the underlying aetiology of valvular disease."
+        },
+        {
+          "text": "Have you ever taken monthly injections of penicillin into the hip or daily penicillin tablets, and when was your last dose? Assessing adherence to secondary rheumatic fever prophylaxis determines ongoing vulnerability to recurrent streptococcal carditis."
+        },
+        {
+          "text": "Have you ever had an operation on your heart, a balloon inserted to stretch a valve, or a valve replacement? Establishing prior balloon mitral valvuloplasty or valve surgery identifies prosthetic valve status and residual stenotic or regurgitant lesions."
+        },
+        {
+          "text": "If you have an artificial valve, was it a mechanical metal valve or a biological tissue valve, and what blood thinner do you take? Mechanical valves carry high risks of catastrophic valve thrombosis and require strict therapeutic anticoagulation."
+        },
+        {
+          "text": "What daily cardiac or blood pressure tablets were you taking before and during this pregnancy? Immediate medication reconciliation identifies teratogenic medications such as ACE inhibitors, ARBs, and atenolol for prompt substitution."
+        },
+        {
+          "text": "How did your heart behave during any previous pregnancies, labours, or miscarriages? A history of cardiac decompensation or pulmonary oedema in a past pregnancy strongly predicts recurrence in the current gestation."
+        },
+        {
+          "text": "Were you born with any heart murmur, hole in the heart, or blue skin discolouration as an infant? Screening for congenital heart disease identifies maternal shunts, coarctation, or cyanotic lesions that require specialised surveillance."
+        }
+      ],
+      "practice": "Demonstrate taking a focused cardiac background history from an antenatal patient, covering childhood joint pain and chorea, previous cardiac surgery, mechanical versus bioprosthetic valves, and current medications.",
+      "pitfalls": [
+        "Failing to ask about childhood sore throats and migrating polyarthritis when evaluating a pregnant woman with heart disease",
+        "Continuing teratogenic medications such as ACE inhibitors or ARBs into the second and third trimesters",
+        "Missing a history of mechanical prosthetic valve replacement that requires immediate anticoagulation management"
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why is it essential to determine whether a prosthetic cardiac valve is mechanical or tissue in a pregnant patient?",
+          "a": "Mechanical valves have a high risk of valve thrombosis requiring continuous therapeutic anticoagulation, whereas bioprosthetic tissue valves have lower thrombotic risk and typically do not require full anticoagulation in sinus rhythm.",
+          "accept": [
+            "mechanical",
+            "thrombosis",
+            "anticoagulation",
+            "bioprosthetic",
+            "tissue",
+            "thrombotic"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which major classes of cardiovascular medications are strictly contraindicated in pregnancy due to fetal toxicity, and what adverse effects do they cause?",
+          "a": "ACE inhibitors and angiotensin receptor blockers are contraindicated because they cause fetal renal dysgenesis, oligohydramnios, pulmonary hypoplasia, and neonatal renal failure.",
+          "accept": [
+            "ace inhibitors",
+            "angiotensin",
+            "arbs",
+            "renal",
+            "oligohydramnios",
+            "pulmonary",
+            "failure"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "rheumatic_history",
+          "text": "Explores childhood rheumatic fever, chorea, and adherence to secondary prophylaxis"
+        },
+        {
+          "id": "structural_status",
+          "text": "Clarifies prior cardiac surgeries, balloon interventions, and prosthetic valve types"
+        },
+        {
+          "id": "drug_reconciliation",
+          "text": "Reconciles pre-existing medications and screens for teratogenic agents"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rheumatic_heart_disease: clinicalPearls"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline: Cardiac Disease in Pregnancy, Pre-pregnancy and Antenatal Care"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.heart.case": {
+      "id": "skill.present.heart.case",
+      "kind": "presentation",
+      "system": "obgyn",
+      "title": "Presenting the pregnant patient with heart disease",
+      "oneLine": "Synthesising obstetric parameters, cardiovascular lesion, functional NYHA class, modified WHO risk category, and multidisciplinary delivery plan",
+      "why": "Presenting a pregnant cardiac patient demands integrating two complex clinical fields: maternal gestational status and hemodynamic vulnerability. A structured presentation clearly communicates lesion severity, functional NYHA classification, modified WHO risk category, fetal wellbeing, and the coordinated intrapartum plan between obstetrics, cardiology, and obstetric anaesthesia.",
+      "steps": [
+        "State the patient age, parity, gravidity, period of gestation, and booking status in the opening sentence.",
+        "Summarise the specific cardiovascular diagnosis, underlying aetiology (rheumatic, congenital, or cardiomyopathy), and current NYHA functional class.",
+        "Present the presence or absence of cardiac decompensation features: orthopnoea, nocturnal dyspnoea, haemoptysis, and peripheral oedema.",
+        "Detail relevant past history, including childhood rheumatic episodes, secondary penicillin prophylaxis, and previous cardiac surgical or balloon interventions.",
+        "Report pertinent physical examination findings: pulse, blood pressure, respiratory rate, elevated JVP, cardiac murmurs, lung crackles, and obstetric abdominal findings.",
+        "Review essential diagnostic investigations: ECG rhythm, echocardiographic valve area and gradients, pulmonary artery systolic pressure, and fetal growth parameters.",
+        "State the calculated modified WHO maternal risk category and CARPREG II score to articulate maternal event risk.",
+        "Conclude with the comprehensive management strategy: antenatal medical optimisation, fetal surveillance, and the multidisciplinary labour plan specifying timing, route, anaesthesia, and postpartum monitoring."
+      ],
+      "practice": "Present an antenatal inpatient with rheumatic mitral stenosis or congenital heart disease to an interdisciplinary team, stating obstetric age, specific lesion, NYHA class, mWHO risk category, and intrapartum labour strategy.",
+      "probes": [
+        {
+          "level": 1,
+          "q": "What four core clinical components must always be included in the opening diagnostic summary of a pregnant cardiac case presentation?",
+          "a": "The obstetric profile (gravidity, parity, gestational age), the specific structural cardiac lesion with aetiology, the functional NYHA class, and the modified WHO maternal risk category.",
+          "accept": [
+            "gestational age",
+            "parity",
+            "lesion",
+            "nyha",
+            "who",
+            "obstetric",
+            "aetiology"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why is the modified WHO classification preferred over isolated clinical impression when presenting maternal cardiac risk to a multidisciplinary team?",
+          "a": "The modified WHO classification integrates maternal cardiac lesions into evidence-based risk categories predicting maternal mortality and morbidity, standardising care level and delivery location.",
+          "accept": [
+            "modified who",
+            "morbidity",
+            "mortality",
+            "evidence",
+            "risk",
+            "standardising",
+            "categories"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "concise_synthesis",
+          "text": "Delivers a structured opening combining obstetric profile, cardiac lesion, NYHA class, and mWHO category"
+        },
+        {
+          "id": "objective_findings",
+          "text": "Presents vital signs, auscultatory signs, echocardiographic parameters, and fetal wellbeing accurately"
+        },
+        {
+          "id": "labour_strategy",
+          "text": "Outlines a multidisciplinary delivery plan detailing timing, route, epidural analgesia, and postpartum safety"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "rheumatic_mitral_stenosis: management"
+        },
+        {
+          "source": "FOGSI",
+          "locator": "Good Clinical Practice Recommendations: Heart Disease in Pregnancy, Clinical Presentation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }

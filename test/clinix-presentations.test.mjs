@@ -9,10 +9,10 @@ const ROOT = path.resolve(__dirname, "..");
 const MANIFEST_PATH = path.join(ROOT, "clinix", "manifest.json");
 const PRESENTATIONS_DIR = path.join(ROOT, "clinix", "presentations");
 
-test("manifest registers all 5 core clinical presentations", () => {
+test("manifest registers the 5 core clinical presentations", () => {
   const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, "utf8"));
   assert.ok(Array.isArray(manifest.presentations), "manifest.presentations must be an array");
-  assert.equal(manifest.presentations.length, 5, "manifest must register 5 core presentations");
+  assert.ok(manifest.presentations.length >= 5, "manifest must register at least the 5 core presentations");
 
   const expectedIds = ["breathlessness", "chest_pain", "acute_weakness", "jaundice", "acute_abdomen"];
   const ids = manifest.presentations.map(p => p.id);

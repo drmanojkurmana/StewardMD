@@ -1,0 +1,1336 @@
+{
+  "_comment": "The Paediatrics OSCE and viva stations, as a system module: disease-independent, shaped like a pathway so every runner (lesson, OSCE, viva, competency, case) works with no new code. Owns no skills; every reference is to skills/paediatrics.json, skills/core.json, or shared work skills. Twelve stations covering history, development, growth charts, neonatal and systemic examination, counselling, dehydration, IMNCI, and resuscitation, a viva pool across paediatric skills, and two AI-patient cases (acute gastroenteritis with dehydration, neonatal jaundice). Deep link id: paediatrics-osce.",
+  "id": "paediatrics-osce",
+  "name": "OSCE and viva stations",
+  "fullName": "Paediatrics: OSCE and viva stations",
+  "system": "paediatrics",
+  "kind": "system-module",
+  "oneLine": "12 timed stations: history, development, growth chart, neonatal and child systemic examination, counselling and resuscitation",
+  "estMinutes": 180,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "deepLink": "paediatrics-osce",
+  "chapters": [
+    {
+      "id": "approach",
+      "title": "Approaching the child and parent",
+      "blurb": "Rapport, consent, assent, positioning, and counselling come first in paediatric care",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.paed.rapport",
+        "skill.approach.paed.consent_assent",
+        "skill.approach.paed.positioning",
+        "skill.approach.paed.immunisation_counsel",
+        "skill.approach.paed.ors_counsel_prep"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "Paediatric history taking",
+      "blurb": "Presenting complaints, birth history, developmental milestones, diet, and immunisation",
+      "skills": [
+        "skill.hx.paed.presenting_complaint",
+        "skill.hx.paed.birth_antenatal",
+        "skill.hx.paed.birth_natal_neonatal",
+        "skill.hx.paed.development",
+        "skill.hx.paed.diet_infant",
+        "skill.hx.paed.immunisation",
+        "skill.hx.paed.family_pedigree",
+        "skill.hx.paed.socioeconomic"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination and anthropometry",
+      "blurb": "Triage, vital signs, hydration, anthropometry, and growth chart plotting",
+      "skills": [
+        "skill.gen.paed.appearance",
+        "skill.gen.paed.vitals",
+        "skill.gen.paed.pallor",
+        "skill.gen.paed.hydration",
+        "skill.exam.paed.imnci_danger_signs",
+        "skill.exam.paed.weight",
+        "skill.exam.paed.length_height",
+        "skill.exam.paed.head_circumference",
+        "skill.exam.paed.muac",
+        "skill.proc.paed.growth_chart_plotting",
+        "skill.exam.paed.development_screening"
+      ]
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Systemic and neonatal examination",
+      "blurb": "Respiratory, cardiovascular, abdominal, neurological, and newborn evaluation",
+      "skills": [
+        "skill.exam.paed.resp.inspection",
+        "skill.exam.paed.resp.distress_grunt",
+        "skill.exam.paed.resp.palpation",
+        "skill.exam.paed.resp.percussion",
+        "skill.exam.paed.resp.auscultation",
+        "skill.exam.paed.cvs.pulses_bp",
+        "skill.exam.paed.cvs.inspection_palpation",
+        "skill.exam.paed.cvs.auscultation",
+        "skill.exam.paed.cvs.murmurs",
+        "skill.exam.paed.gi.inspection",
+        "skill.exam.paed.gi.palpation_percussion",
+        "skill.exam.paed.gi.liver",
+        "skill.exam.paed.gi.spleen",
+        "skill.exam.paed.cns.higher_mental_gcs",
+        "skill.exam.paed.cns.motor_tone_power",
+        "skill.exam.paed.cns.reflexes",
+        "skill.exam.paed.cns.meningeal",
+        "skill.exam.paed.neo.head_skull_trauma",
+        "skill.exam.paed.neo.chest_respiratory_cvs",
+        "skill.exam.paed.neo.abdomen_genitalia_spine",
+        "skill.exam.paed.neo.primitive_reflexes",
+        "skill.exam.paed.neo.jaundice_kramer"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Neonatal resuscitation and emergency procedures",
+      "blurb": "Thermal chain, airway opening, positive-pressure ventilation, and chest compressions",
+      "skills": [
+        "skill.approach.paed.neo.resuscitation_initial",
+        "skill.approach.paed.neo.bag_mask_ventilation",
+        "skill.approach.paed.neo.airway_intubation_meconium",
+        "skill.approach.paed.neo.chest_compression_circulation",
+        "skill.tx.paed.resuscitation_drugs",
+        "skill.tx.paed.anticonvulsants"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.paed.history",
+        "title": "Paediatric history from a parent",
+        "task": "A mother has brought her 14-month-old son to the outpatient clinic with fever and poor feeding for three days. Take a comprehensive paediatric history from the mother, including birth, dietary, and immunisation details, and give a concise summary.",
+        "seconds": 420,
+        "competencies": [
+          "PE1.1",
+          "PE34.1"
+        ],
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.paed.rapport",
+          "skill.hx.paed.presenting_complaint",
+          "skill.hx.paed.diet_infant",
+          "skill.hx.paed.immunisation"
+        ],
+        "examinerQuestions": [
+          "Summarise the primary presenting complaints and their chronological progression.",
+          "Why is an accurate birth and neonatal transition history essential in an infant presenting with systemic illness?",
+          "Which vaccines on the National Immunisation Schedule should this 14-month-old infant have received so far?"
+        ],
+        "distractors": [
+          {
+            "text": "Ask leading questions that suggest symptom duration rather than letting the parent describe the onset",
+            "why": "Leading questions bias parental recall and obscure the true chronology of the illness.",
+            "unsafe": false
+          },
+          {
+            "text": "Skip inquiring about the child's birth and neonatal transition history",
+            "why": "Birth events and prematurity are vital predisposing factors for childhood illness.",
+            "unsafe": false
+          },
+          {
+            "text": "Prescribe an adult over-the-counter cough syrup without weighing the child or confirming symptoms",
+            "why": "Uncalculated adult cough suppressants can cause fatal respiratory depression in infants.",
+            "unsafe": true
+          },
+          {
+            "text": "Disregard maternal reports of reduced wet diapers and dark urine",
+            "why": "Reduced urine output is a crucial early sign of hypovolaemia and progressive dehydration.",
+            "unsafe": true
+          },
+          {
+            "text": "Interview only an accompanying neighbour while ignoring the biological mother who provides primary daily care",
+            "why": "The primary caregiver possesses the only accurate knowledge of intake, activity, and symptoms.",
+            "unsafe": false
+          }
+        ]
+      },
+      {
+        "id": "osce.paed.development",
+        "title": "Developmental assessment",
+        "task": "A mother brings her 12-month-old infant for routine check-up and is worried he is not yet walking. Assess the infant across all four developmental domains, check for red flags, and determine whether development is age-appropriate.",
+        "seconds": 420,
+        "competencies": [
+          "PE2.1",
+          "PE2.3"
+        ],
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.paed.rapport",
+          "skill.hx.paed.development",
+          "skill.exam.paed.development_screening"
+        ],
+        "examinerQuestions": [
+          "What is the expected age window for independent unsupported walking, and when is delayed walking considered a red flag?",
+          "How do you distinguish a neat pincer grasp from an inferior pincer grasp during testing?",
+          "What is the clinical significance of a child demonstrating a clear hand preference before 18 months of age?"
+        ],
+        "distractors": [
+          {
+            "text": "Assess developmental milestones using chronological age without correcting for prematurity in an infant born at 30 weeks",
+            "why": "Failing to adjust for prematurity falsely labels a normal preterm infant as developmentally delayed.",
+            "unsafe": false
+          },
+          {
+            "text": "Force an anxious, crying child into formal testing without allowing time to establish rapport",
+            "why": "Distress causes task refusal and produces false negative results across motor and language domains.",
+            "unsafe": false
+          },
+          {
+            "text": "Reassure parents that an infant who cannot sit unsupported at 11 months will simply catch up on his own without further testing",
+            "why": "Sitting without support should be attained by 9 months; missing this red flag delays essential neurorehabilitation.",
+            "unsafe": true
+          },
+          {
+            "text": "Dismiss an early hand preference at 7 months as advanced manual dexterity",
+            "why": "Definite handedness before 18 months usually reflects pathological weakness of the contralateral hand.",
+            "unsafe": false
+          },
+          {
+            "text": "Test fine motor pincer grasp using a loose choking hazard without close supervision",
+            "why": "Small loose test objects can be aspirated into the airway, causing acute asphyxiation.",
+            "unsafe": true
+          }
+        ]
+      },
+      {
+        "id": "osce.paed.growth_chart",
+        "title": "Anthropometry and growth chart plotting",
+        "task": "A 9-month-old female infant born preterm at 32 weeks is brought for nutritional assessment. Measure weight, length, and head circumference, calculate corrected age, plot the values on the WHO growth chart, and interpret the growth trajectory.",
+        "seconds": 420,
+        "competencies": [
+          "PE1.2",
+          "PE1.3"
+        ],
+        "skills": [
+          "skill.approach.paed.positioning",
+          "skill.exam.paed.weight",
+          "skill.exam.paed.length_height",
+          "skill.exam.paed.head_circumference",
+          "skill.proc.paed.growth_chart_plotting"
+        ],
+        "examinerQuestions": [
+          "How did you calculate corrected gestational age for this infant, and until what age is corrected age used on growth charts?",
+          "What pattern on a longitudinal growth chart defines growth faltering?",
+          "Why must recumbent crown-heel length rather than standing height be measured in children under two years of age?"
+        ],
+        "distractors": [
+          {
+            "text": "Measure the length of an 11-month-old infant standing on an adult stadiometer",
+            "why": "Children under 2 years must be measured recumbently on an infantometer to avoid significant underestimation.",
+            "unsafe": false
+          },
+          {
+            "text": "Draw smoothed, speculative curves between widely spaced anthropometric plots",
+            "why": "Connecting dots with straight lines is required to accurately display true growth trajectory.",
+            "unsafe": false
+          },
+          {
+            "text": "Discontinue breastfeeding immediately to start high-solute hypercaloric feeds without fluid calculation",
+            "why": "Abrupt uncalculated high-solute feeds risk hypernatraemic dehydration and necrotising enterocolitis.",
+            "unsafe": true
+          },
+          {
+            "text": "Weigh an infant wearing heavy winter clothing and shoes on a spring scale",
+            "why": "Clothing and uncalibrated spring scales introduce large weight inaccuracies, distorting nutritional classification.",
+            "unsafe": false
+          },
+          {
+            "text": "Classify nutritional failure based on a single isolated weight plot without evaluating velocity",
+            "why": "A single point identifies current attained size but cannot establish whether growth velocity is normal or faltering.",
+            "unsafe": false
+          }
+        ]
+      },
+      {
+        "id": "osce.paed.newborn_exam",
+        "title": "Newborn examination",
+        "task": "Examine a full-term 24-hour-old newborn baby delivered by normal vaginal delivery before discharge. Perform a systematic head-to-toe examination including cranial sutures, heart and lungs, abdomen, genitalia, and primitive reflexes.",
+        "seconds": 480,
+        "competencies": [
+          "PE12.2",
+          "PE12.3"
+        ],
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.exam.paed.neo.head_skull_trauma",
+          "skill.exam.paed.neo.chest_respiratory_cvs",
+          "skill.exam.paed.neo.abdomen_genitalia_spine",
+          "skill.exam.paed.neo.primitive_reflexes"
+        ],
+        "examinerQuestions": [
+          "How do you differentiate a caput succedaneum from a cephalohaematoma?",
+          "What physical signs in the neonatal respiratory examination indicate significant respiratory distress?",
+          "Which primitive neonatal reflexes did you elicit, and at what age does the Moro reflex normally disappear?"
+        ],
+        "distractors": [
+          {
+            "text": "Examine the newborn baby undressed under a running cold ceiling fan",
+            "why": "Cold exposure causes rapid evaporative and convective heat loss, leading to neonatal hypothermia and acidosis.",
+            "unsafe": true
+          },
+          {
+            "text": "Forcefully reduce clicks or clunks during the Ortolani manoeuvre using excessive downward pressure",
+            "why": "Forceful manipulation can cause femoral head avascular necrosis or damage the acetabular labrum.",
+            "unsafe": true
+          },
+          {
+            "text": "Perform a solitary abdominal examination without checking for patency of the anus or passage of meconium",
+            "why": "Failure to verify anal patency delays the diagnosis of anorectal malformations.",
+            "unsafe": true
+          },
+          {
+            "text": "Omit palpation of femoral pulses in both groins",
+            "why": "Palpating bilateral femoral pulses is mandatory to screen for coarctation of the aorta.",
+            "unsafe": true
+          },
+          {
+            "text": "Assume overlapping cranial sutures at 12 hours of life represent craniosynostosis",
+            "why": "Moulding with overlapping cranial bones is a normal physiological phenomenon after vaginal birth that resolves spontaneously.",
+            "unsafe": false
+          }
+        ]
+      },
+      {
+        "id": "osce.paed.respiratory_exam",
+        "title": "Respiratory examination of a child",
+        "task": "A 3-year-old boy is admitted with fever, fast breathing, and cough. Position the child comfortably, inspect for signs of respiratory distress, and perform focused palpation, percussion, and chest auscultation.",
+        "seconds": 480,
+        "competencies": [
+          "PE28.1",
+          "PE28.2"
+        ],
+        "skills": [
+          "skill.approach.paed.positioning",
+          "skill.exam.paed.resp.inspection",
+          "skill.exam.paed.resp.distress_grunt",
+          "skill.exam.paed.resp.palpation",
+          "skill.exam.paed.resp.auscultation"
+        ],
+        "examinerQuestions": [
+          "What are the age-specific WHO cut-offs for tachypnoea or fast breathing in children under five years?",
+          "What is the pathophysiological mechanism and clinical significance of expiratory grunting in a young child?",
+          "How do you distinguish bronchial breathing from normal vesicular breath sounds in a toddler?"
+        ],
+        "distractors": [
+          {
+            "text": "Auscultate the chest while the child is vigorously screaming and crying",
+            "why": "Crying creates loud referred upper airway sounds that mask wheezes, crackles, and focal consolidation.",
+            "unsafe": false
+          },
+          {
+            "text": "Place a wooden tongue depressor forcefully into the throat of a child with acute stridor and fever",
+            "why": "Instrumentation in suspected acute epiglottitis can trigger sudden complete airway spasm and fatal respiratory arrest.",
+            "unsafe": true
+          },
+          {
+            "text": "Count respiratory rate for only ten seconds and multiply by six",
+            "why": "Paediatric breathing is irregular, requiring a full sixty-second count to determine fast breathing accurately.",
+            "unsafe": false
+          },
+          {
+            "text": "Omit exposing the chest to look for subcostal and intercostal retractions",
+            "why": "Chest indrawing is the most reliable clinical sign of severe lower respiratory tract infection.",
+            "unsafe": true
+          },
+          {
+            "text": "Perform forceful percussion on the fragile paediatric thoracic cage using heavy adult force",
+            "why": "Heavy percussion produces rib tenderness and causes reflex splinting without improving acoustic accuracy.",
+            "unsafe": false
+          }
+        ]
+      },
+      {
+        "id": "osce.paed.cardiovascular_exam",
+        "title": "Cardiovascular examination of a child",
+        "task": "A 5-year-old girl is referred for evaluation of an asymptomatic cardiac murmur detected during a school health check. Perform precordial inspection, palpation, and systematic auscultation, and characterise the murmur.",
+        "seconds": 480,
+        "competencies": [
+          "PE29.1",
+          "PE29.2"
+        ],
+        "skills": [
+          "skill.approach.paed.positioning",
+          "skill.exam.paed.cvs.pulses_bp",
+          "skill.exam.paed.cvs.inspection_palpation",
+          "skill.exam.paed.cvs.auscultation",
+          "skill.exam.paed.cvs.murmurs"
+        ],
+        "examinerQuestions": [
+          "What features differentiate an innocent flow murmur from a pathological congenital cardiac murmur?",
+          "Where is the apex beat normally located in a 5-year-old child, and when does it shift to the adult position?",
+          "What is the clinical significance of radio-femoral delay or diminished femoral pulses in a child?"
+        ],
+        "distractors": [
+          {
+            "text": "Examine the cardiovascular system while ignoring the femoral and brachial pulse volume",
+            "why": "Simultaneous radial and femoral pulse assessment is essential to detect coarctation of the aorta.",
+            "unsafe": true
+          },
+          {
+            "text": "Measure blood pressure using a loose adult-sized cuff on a toddler",
+            "why": "An oversized cuff falsely underestimates blood pressure, potentially masking hypertensive crises or shock.",
+            "unsafe": false
+          },
+          {
+            "text": "Dismiss a loud, harsh pansystolic murmur accompanied by a thrill as an innocent flow murmur",
+            "why": "Pansystolic murmurs and palpable thrills are always organic and require prompt echocardiographic evaluation.",
+            "unsafe": true
+          },
+          {
+            "text": "Palpate the precordium without identifying the true position of the apex beat",
+            "why": "Locating the apex beat determines cardiomegaly and distinguishes dextrocardia from mediastinal shift.",
+            "unsafe": false
+          },
+          {
+            "text": "Auscultate only at the cardiac apex and omit the base and back",
+            "why": "Radiation to the axilla, base, neck, and back is critical to differentiate valve lesions from septal defects.",
+            "unsafe": false
+          }
+        ]
+      },
+      {
+        "id": "osce.paed.abdominal_exam",
+        "title": "Abdominal examination of a child",
+        "task": "A 4-year-old child presents with gradual abdominal distension and fever. Position the child appropriately, inspect the abdomen, and palpate systematically for hepatomegaly, splenomegaly, and ascites.",
+        "seconds": 480,
+        "competencies": [
+          "PE30.1",
+          "PE30.2"
+        ],
+        "skills": [
+          "skill.approach.paed.positioning",
+          "skill.exam.paed.gi.inspection",
+          "skill.exam.paed.gi.palpation_percussion",
+          "skill.exam.paed.gi.liver",
+          "skill.exam.paed.gi.spleen"
+        ],
+        "examinerQuestions": [
+          "Up to what measurement below the right costal margin is the liver edge palpable as a normal finding in young children?",
+          "How do you clinically distinguish an enlarged spleen from an enlarged left kidney?",
+          "Which physical signs allow reliable bedside detection of ascites in a paediatric patient?"
+        ],
+        "distractors": [
+          {
+            "text": "Begin palpation directly over the area where the child reports severe pain",
+            "why": "Palpating painful areas first produces voluntary muscle guarding that prevents adequate examination of other quadrants.",
+            "unsafe": false
+          },
+          {
+            "text": "Palpate the child's abdomen with cold unwashed hands while the child is supine with extended knees",
+            "why": "Cold hands and extended knees increase abdominal wall tension, making organ palpation impossible.",
+            "unsafe": false
+          },
+          {
+            "text": "Perform deep forceful palpation over a suspected Wilms tumour",
+            "why": "Vigorous palpation of a renal mass risks tumour rupture and catastrophic peritoneal spillage.",
+            "unsafe": true
+          },
+          {
+            "text": "Measure liver enlargement from the xiphisternum instead of along the right midclavicular line",
+            "why": "Paediatric liver span must be measured along the midclavicular line to provide valid clinical comparison.",
+            "unsafe": false
+          },
+          {
+            "text": "Mistake a full urinary bladder for a lower abdominal pathological mass without asking the child to void",
+            "why": "A distended bladder easily mimics a cystic pelvic mass until emptied.",
+            "unsafe": false
+          }
+        ]
+      },
+      {
+        "id": "osce.paed.nervous_system_exam",
+        "title": "Nervous system examination of a child",
+        "task": "A 6-year-old boy presents with unsteady walking and weakness of both lower limbs for one week. Assess his mental status, tone, power, deep tendon reflexes, and signs of meningeal irritation.",
+        "seconds": 480,
+        "competencies": [
+          "PE31.1",
+          "PE31.2"
+        ],
+        "skills": [
+          "skill.approach.paed.rapport",
+          "skill.exam.paed.cns.higher_mental_gcs",
+          "skill.exam.paed.cns.motor_tone_power",
+          "skill.exam.paed.cns.reflexes",
+          "skill.exam.paed.cns.meningeal"
+        ],
+        "examinerQuestions": [
+          "How does the modified paediatric Glasgow Coma Scale differ from the adult GCS in scoring verbal response?",
+          "How do you distinguish upper motor neuron weakness from lower motor neuron weakness on physical examination?",
+          "Describe how to elicit Kernig sign and Brudzinski neck sign, and explain their anatomical basis."
+        ],
+        "distractors": [
+          {
+            "text": "Perform aggressive passive neck flexion in a child with suspected cervical spine trauma",
+            "why": "Forceful neck manipulation can precipitate irreversible spinal cord transection and respiratory arrest.",
+            "unsafe": true
+          },
+          {
+            "text": "Test tone by shaking the limbs rapidly while the child is crying and fighting",
+            "why": "Active resistance during distress mimics true spastic hypertonia, yielding misleading findings.",
+            "unsafe": false
+          },
+          {
+            "text": "Use an adult metal tendon hammer forcefully over the patellar tendon of an infant",
+            "why": "Excessive force induces pain, withdrawal, and tears of delicate paediatric soft tissues.",
+            "unsafe": true
+          },
+          {
+            "text": "Omit testing the anterior fontanelle for fullness in an infant with suspected meningitis",
+            "why": "A bulging fontanelle is a cardinal sign of raised intracranial pressure and CNS infection in infants.",
+            "unsafe": true
+          },
+          {
+            "text": "Declare motor power as normal based solely on the child moving his fingers in bed",
+            "why": "Distal finger movement does not exclude proximal limb girdle or anti-gravity muscle weakness.",
+            "unsafe": false
+          }
+        ]
+      },
+      {
+        "id": "osce.paed.immunisation_counsel",
+        "title": "Immunisation counselling",
+        "task": "The parents of a 6-week-old infant attending the primary health centre express fear about routine vaccinations after reading rumours about side effects. Elicit their concerns, counsel them with empathy on the National Immunisation Schedule, and explain vaccine safety.",
+        "seconds": 420,
+        "competencies": [
+          "PE19.1",
+          "PE19.2"
+        ],
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.paed.rapport",
+          "skill.hx.paed.immunisation",
+          "skill.approach.paed.immunisation_counsel"
+        ],
+        "examinerQuestions": [
+          "Which vaccines are scheduled at 6 weeks of age under the National Immunisation Schedule in India?",
+          "How do you counsel a mother regarding expected minor adverse events following pentavalent vaccination?",
+          "What are true absolute contraindications to childhood vaccination, and how do they differ from false contraindications?"
+        ],
+        "distractors": [
+          {
+            "text": "Tell the parents that their concerns about vaccine safety are ridiculous and unscientific",
+            "why": "Antagonistic communication breeds distrust and alienates parents, driving them toward complete vaccine refusal.",
+            "unsafe": false
+          },
+          {
+            "text": "Postpone scheduled vaccines because the infant has a mild afebrile common cold",
+            "why": "Withholding vaccines for minor illness represents a missed opportunity that leaves the child vulnerable to infection.",
+            "unsafe": false
+          },
+          {
+            "text": "Advise the mother to rub ice and apply native herbs forcefully to the injection site if swelling appears",
+            "why": "Applying unsterile native concoctions or ice directly introduces secondary skin and soft-tissue infections.",
+            "unsafe": true
+          },
+          {
+            "text": "Fail to warn parents that low-grade fever is an expected physiological response after DTwP",
+            "why": "Unanticipated fever triggers panic, emergency visits, and subsequent refusal of booster doses.",
+            "unsafe": false
+          },
+          {
+            "text": "Administer a full dose of live measles vaccine to a child on high-dose immunosuppressive chemotherapy",
+            "why": "Live viral vaccines in severely immunocompromised children can cause disseminated fatal vaccine-strain disease.",
+            "unsafe": true
+          }
+        ]
+      },
+      {
+        "id": "osce.paed.dehydration_ors",
+        "title": "Dehydration assessment and oral rehydration",
+        "task": "An 11-month-old infant is brought with watery diarrhoea for two days. Assess hydration status according to WHO/IMNCI criteria, determine the dehydration category, and demonstrate preparation and administration of low-osmolarity ORS.",
+        "seconds": 420,
+        "competencies": [
+          "PE24.1",
+          "PE24.2"
+        ],
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.paed.rapport",
+          "skill.gen.paed.hydration",
+          "skill.approach.paed.ors_counsel_prep"
+        ],
+        "examinerQuestions": [
+          "What four key clinical signs are assessed in the WHO classification of dehydration in acute diarrhoea?",
+          "What is the precise composition and total osmolarity of WHO low-osmolarity oral rehydration salts?",
+          "What volume of ORS should be administered over the first 4 hours for an infant with some dehydration under WHO Plan B?"
+        ],
+        "distractors": [
+          {
+            "text": "Mix a full packet of WHO ORS powder into one small cup (150 mL) of water",
+            "why": "Extremely concentrated ORS creates severe hypernatraemia, precipitating brain haemorrhage and convulsions.",
+            "unsafe": true
+          },
+          {
+            "text": "Boil the ORS solution vigorously after mixing to sterilise it",
+            "why": "Boiling decomposes glucose and alters salt balance, destroying the solution's rehydration efficacy.",
+            "unsafe": false
+          },
+          {
+            "text": "Stop breastfeeding and withhold all solid food until watery motions stop completely",
+            "why": "Fasting worsens mucosal atrophy and accelerates severe acute malnutrition.",
+            "unsafe": true
+          },
+          {
+            "text": "Prescribe antimotility drugs like loperamide to an 11-month-old infant to halt diarrhoea",
+            "why": "Antimotility agents cause toxic paralytic ileus, respiratory depression, and death in infants.",
+            "unsafe": true
+          },
+          {
+            "text": "Instruct the mother to keep and administer leftover reconstituted ORS after 48 hours",
+            "why": "ORS kept beyond 24 hours at room temperature becomes a culture medium for bacterial contamination.",
+            "unsafe": true
+          }
+        ]
+      },
+      {
+        "id": "osce.paed.imnci_danger_signs",
+        "title": "IMNCI general danger signs assessment",
+        "task": "A 9-month-old infant is brought to the outpatient triage desk with high fever and lethargy. Rapidly assess the child for the four IMNCI general danger signs and emergency signs, and decide on immediate urgent triage.",
+        "seconds": 360,
+        "competencies": [
+          "PE20.1",
+          "PE20.2"
+        ],
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.paed.rapport",
+          "skill.gen.paed.appearance",
+          "skill.exam.paed.imnci_danger_signs"
+        ],
+        "examinerQuestions": [
+          "List the four general danger signs evaluated in every sick child aged 2 months to 5 years under IMNCI.",
+          "How do you clinically evaluate whether a child is lethargic or unconscious versus normally sleeping?",
+          "What immediate pre-referral treatments must be initiated before transferring an infant with general danger signs?"
+        ],
+        "distractors": [
+          {
+            "text": "Rely exclusively on maternal history without offering fluid to observe whether the child can swallow",
+            "why": "Direct observation is required under IMNCI to confirm inability to drink or breastfeed.",
+            "unsafe": false
+          },
+          {
+            "text": "Delay emergency transfer of an unconscious infant while waiting for routine elective blood investigations",
+            "why": "Delaying transfer in a child with general danger signs dramatically increases the risk of mortality.",
+            "unsafe": true
+          },
+          {
+            "text": "Send a lethargic convulsing child home with oral paracetamol drops alone",
+            "why": "A child with danger signs has a severe, life-threatening infection requiring emergency inpatient admission and parenteral therapy.",
+            "unsafe": true
+          },
+          {
+            "text": "Assume a sleeping, quiet child is peacefully resting without attempting verbal or gentle tactile awakening",
+            "why": "Severe lethargy and exhaustion from septic shock or meningitis can easily be mistaken for normal sleep.",
+            "unsafe": true
+          },
+          {
+            "text": "Forget to check for stridor and chest indrawing while the child is calm",
+            "why": "Stridor in a calm child indicates severe airway compromise requiring immediate emergency intervention.",
+            "unsafe": true
+          }
+        ]
+      },
+      {
+        "id": "osce.paed.neonatal_resuscitation",
+        "title": "Neonatal resuscitation",
+        "task": "You are called to attend the delivery of a term neonate born through clear amniotic fluid who is apneic and limp at birth. Perform the initial resuscitation steps, evaluate response, and initiate positive-pressure ventilation and chest compressions as indicated.",
+        "seconds": 420,
+        "passMark": 60,
+        "competencies": [
+          "PE12.11",
+          "PE12.12"
+        ],
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.paed.neo.resuscitation_initial",
+          "skill.approach.paed.neo.bag_mask_ventilation",
+          "skill.approach.paed.neo.chest_compression_circulation"
+        ],
+        "examinerQuestions": [
+          "What three initial questions are assessed immediately upon delivery to decide if a neonate requires resuscitation at the warmer?",
+          "What are the MR SOPA corrective steps when positive-pressure ventilation fails to achieve adequate chest rise?",
+          "What is the ratio of chest compressions to ventilations in neonatal CPR, and how many events per minute are targeted?"
+        ],
+        "distractors": [
+          {
+            "text": "Initiate positive-pressure ventilation in a term newborn using 100 percent pure oxygen",
+            "why": "Term resuscitation must begin with 21 percent room air to prevent oxygen free-radical tissue damage.",
+            "unsafe": true
+          },
+          {
+            "text": "Slap the newborn's back or shake the infant upside down to stimulate breathing",
+            "why": "Rough physical handling risks intracranial haemorrhage, fractures, and cervical spinal cord damage.",
+            "unsafe": true
+          },
+          {
+            "text": "Begin chest compressions immediately when the newborn's heart rate is 80 beats per minute",
+            "why": "Chest compressions are indicated only when heart rate is below 60 despite 30 seconds of effective ventilation.",
+            "unsafe": true
+          },
+          {
+            "text": "Perform deep, vigorous pharyngeal suctioning immediately at birth in a vigorous newborn with clear fluid",
+            "why": "Aggressive suctioning triggers reflex vagal bradycardia, laryngospasm, and delayed respiration.",
+            "unsafe": true
+          },
+          {
+            "text": "Keep wet delivery towels wrapped around the infant under the radiant warmer",
+            "why": "Wet towels cause rapid evaporative cooling, worsening metabolic acidosis and pulmonary hypertension.",
+            "unsafe": true
+          },
+          {
+            "text": "Hyperextend the newborn's neck into an extreme backward posture to open the airway",
+            "why": "Hyperextending the pliable neonatal neck collapses the tracheal lumen rather than opening it.",
+            "unsafe": true
+          }
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.hx.paed.presenting_complaint",
+      "skill.hx.paed.birth_antenatal",
+      "skill.hx.paed.birth_natal_neonatal",
+      "skill.hx.paed.development",
+      "skill.hx.paed.diet_infant",
+      "skill.hx.paed.immunisation",
+      "skill.gen.paed.appearance",
+      "skill.gen.paed.vitals",
+      "skill.gen.paed.pallor",
+      "skill.gen.paed.hydration",
+      "skill.exam.paed.weight",
+      "skill.exam.paed.length_height",
+      "skill.exam.paed.head_circumference",
+      "skill.proc.paed.growth_chart_plotting",
+      "skill.exam.paed.development_screening",
+      "skill.exam.paed.resp.inspection",
+      "skill.exam.paed.resp.auscultation",
+      "skill.exam.paed.resp.distress_grunt",
+      "skill.exam.paed.cvs.pulses_bp",
+      "skill.exam.paed.cvs.inspection_palpation",
+      "skill.exam.paed.cvs.auscultation",
+      "skill.exam.paed.cvs.murmurs",
+      "skill.exam.paed.gi.inspection",
+      "skill.exam.paed.gi.palpation_percussion",
+      "skill.exam.paed.gi.liver",
+      "skill.exam.paed.gi.spleen",
+      "skill.exam.paed.cns.higher_mental_gcs",
+      "skill.exam.paed.cns.motor_tone_power",
+      "skill.exam.paed.cns.reflexes",
+      "skill.exam.paed.cns.meningeal",
+      "skill.exam.paed.neo.head_skull_trauma",
+      "skill.exam.paed.neo.jaundice_kramer",
+      "skill.approach.paed.neo.resuscitation_initial",
+      "skill.approach.paed.neo.bag_mask_ventilation",
+      "skill.approach.paed.immunisation_counsel",
+      "skill.approach.paed.ors_counsel_prep",
+      "skill.exam.paed.imnci_danger_signs"
+    ]
+  },
+  "cases": [
+    {
+      "id": "case.paed.acute_diarrhoea_dehydration",
+      "system": "paediatrics",
+      "title": "An infant with acute watery diarrhoea, vomiting and sunken eyes",
+      "initialVitals": {
+        "hr": 140,
+        "bpSystolic": 84,
+        "bpDiastolic": 52,
+        "rr": 38,
+        "spo2": 98,
+        "temp": 37.6,
+        "gcs": 15
+      },
+      "opening": "Pooja has brought her 10-month-old son Kabir to the outpatient clinic. He has had frequent watery motions and vomiting for two days, and is irritable and thirsty. Introduce yourself and take a focused paediatric history from the mother. This is a teaching scenario, not a real patient.",
+      "fallback": "I do not understand what you mean, doctor. Could you please ask that another way?",
+      "patient": {
+        "name": "Kabir Sharma",
+        "age": 10,
+        "sex": "male",
+        "occupation": "Infant, cared for at home",
+        "residence": "Semi-urban basti, 5 km from the community health centre"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "why have you come",
+            "what is the problem",
+            "tell me what happened",
+            "how can i help"
+          ],
+          "reply": "Doctor, my 10-month-old baby has been passing frequent watery stools for two days and vomiting everything he drinks. He is very irritable and thirsty.",
+          "key": true,
+          "skillId": "skill.hx.paed.presenting_complaint"
+        },
+        "frequency": {
+          "cues": [
+            "how many times",
+            "frequency of stools",
+            "how often loose motions",
+            "how many loose motions has he passed",
+            "how many loose motions",
+            "number of motions",
+            "times he passed stool"
+          ],
+          "reply": "He has passed loose watery motions about eight to ten times today alone, soaking through every cloth.",
+          "key": true,
+          "skillId": "skill.hx.paed.presenting_complaint"
+        },
+        "stool_character": {
+          "cues": [
+            "what does the stool look like",
+            "colour of stool",
+            "watery or loose",
+            "consistency of motions",
+            "rice water"
+          ],
+          "reply": "The stools are completely watery and yellowish-green, with no solid matter. They look like water.",
+          "key": true,
+          "skillId": "skill.hx.paed.presenting_complaint"
+        },
+        "blood_in_stool": {
+          "cues": [
+            "blood in stool",
+            "any blood in motions",
+            "is there blood",
+            "red stools",
+            "mucus in stool"
+          ],
+          "reply": "No, doctor, there is no blood or red colour in the motions at all, only watery liquid.",
+          "key": true,
+          "skillId": "skill.hx.paed.presenting_complaint"
+        },
+        "vomiting": {
+          "cues": [
+            "how many times vomiting",
+            "how many times has he vomited",
+            "vomiting everything",
+            "is he vomiting",
+            "unable to keep fluids down",
+            "vomited today"
+          ],
+          "reply": "He started vomiting yesterday. Today he vomited four times, especially right after drinking water.",
+          "key": true,
+          "skillId": "skill.hx.paed.presenting_complaint"
+        },
+        "fever": {
+          "cues": [
+            "does he have fever",
+            "temperature",
+            "is his body hot",
+            "has he felt warm",
+            "chills"
+          ],
+          "reply": "He felt warm to touch yesterday, but he does not have very high fever today.",
+          "skillId": "skill.hx.paed.presenting_complaint"
+        },
+        "thirst": {
+          "cues": [
+            "is he thirsty",
+            "drinking eagerly",
+            "does he want water",
+            "how is he drinking",
+            "refusing to drink"
+          ],
+          "reply": "Yes, doctor! He is very thirsty. Whenever I show him a katori of water or milk, he lunges forward and drinks eagerly.",
+          "key": true,
+          "skillId": "skill.gen.paed.hydration"
+        },
+        "urine_output": {
+          "cues": [
+            "passing urine",
+            "wet nappies",
+            "how many wet diapers",
+            "urine volume",
+            "has he passed urine"
+          ],
+          "reply": "He has passed urine only once this morning, and it was dark yellow. Usually he wets six or seven nappies a day.",
+          "key": true,
+          "skillId": "skill.gen.paed.hydration"
+        },
+        "sensorium": {
+          "cues": [
+            "is he active",
+            "how is his activity",
+            "is he unusually sleepy",
+            "irritable or crying",
+            "lethargic"
+          ],
+          "reply": "He is restless and irritable. He cries continuously and is only soothed for a few moments when I carry him and rock him.",
+          "key": true,
+          "skillId": "skill.gen.paed.appearance"
+        },
+        "feeding": {
+          "cues": [
+            "what do you feed him",
+            "is he breastfeeding",
+            "what does he eat",
+            "eating food",
+            "what has he eaten",
+            "dietary history"
+          ],
+          "reply": "He is breastfed, and I also give him thin rice porridge and mashed banana. He wants to breastfeed often because of thirst.",
+          "skillId": "skill.hx.paed.diet_infant"
+        },
+        "ors_given": {
+          "cues": [
+            "have you given ors",
+            "oral rehydration salts",
+            "did you give salt water",
+            "any fluids given at home",
+            "rehydration given"
+          ],
+          "reply": "A neighbour gave me one small packet of powder from the dispensary, but I did not know how to mix it so I put two spoonfuls in a half glass of water.",
+          "key": true,
+          "skillId": "skill.approach.paed.ors_counsel_prep"
+        },
+        "medications": {
+          "cues": [
+            "any medicines given",
+            "did you give any syrup",
+            "antibiotics or drops",
+            "chemists medicines",
+            "medication history"
+          ],
+          "reply": "I have not given him any other medicines or syrups from the chemist.",
+          "skillId": "skill.hx.paed.presenting_complaint"
+        },
+        "birth_and_past": {
+          "cues": [
+            "was he born at term",
+            "birth weight",
+            "previous hospital admission",
+            "past medical illness",
+            "natal history"
+          ],
+          "reply": "He was born at term in the community health centre. His birth weight was three kilos. He has never been admitted to hospital before.",
+          "skillId": "skill.hx.paed.birth_antenatal"
+        },
+        "immunisation": {
+          "cues": [
+            "has he received vaccines",
+            "immunisation card",
+            "rotavirus vaccine",
+            "vaccinations up to date",
+            "vaccine card"
+          ],
+          "reply": "His vaccinations are up to date on his government card. He received all his primary doses at six, ten, and fourteen weeks.",
+          "skillId": "skill.hx.paed.immunisation"
+        },
+        "water_sanitation": {
+          "cues": [
+            "source of drinking water",
+            "do you boil the water",
+            "toilet facility",
+            "sanitation at home",
+            "drinking water supply"
+          ],
+          "reply": "We get tap water from the municipal supply twice a week. We store it in a plastic drum. We usually filter it through a cloth but do not boil it.",
+          "skillId": "skill.hx.paed.socioeconomic"
+        },
+        "family": {
+          "cues": [
+            "anyone else ill at home",
+            "family members with diarrhoea",
+            "other children sick",
+            "family illness"
+          ],
+          "reply": "No one else at home has loose motions. His elder sister is five years old and she is completely healthy.",
+          "skillId": "skill.hx.paed.family_pedigree"
+        }
+      },
+      "exam": {
+        "skill.gen.vitals": {
+          "finding": "Pulse 140 regular, volume fair. Blood pressure 84/52 mmHg. Respiratory rate 38 breaths per minute, quiet and regular. SpO2 98 percent on room air. Temperature 37.6 C.",
+          "abnormal": true
+        },
+        "skill.gen.paed.hydration": {
+          "finding": "Irritable infant drinking ORS eagerly from a cup. Eyes sunken, tears reduced, oral mucosa dry. Abdominal skin pinch goes back slowly (between 1 and 2 seconds). Categorised as some dehydration (WHO Plan B).",
+          "abnormal": true
+        },
+        "skill.gen.paed.appearance": {
+          "finding": "Alert, irritable infant who quietens briefly when comforted by mother. Skin warm, pink, capillary refill time 2 seconds. No grunting or chest retractions.",
+          "abnormal": true
+        },
+        "skill.exam.paed.weight": {
+          "finding": "Current weight 8.2 kg, down from recorded clinic weight of 8.7 kg two weeks ago (5.7 percent acute body weight loss, consistent with some dehydration).",
+          "abnormal": true
+        },
+        "skill.exam.paed.gi.inspection": {
+          "finding": "Abdomen slightly sunken, soft, moves freely with respiration. No abdominal distension, no visible peristalsis, no dilated superficial veins.",
+          "abnormal": false
+        },
+        "skill.exam.paed.gi.palpation_percussion": {
+          "finding": "Abdomen soft, non-tender on gentle palpation throughout. No guarding, no rigidity. Tympanitic note on percussion. Hyperactive bowel sounds heard on auscultation.",
+          "abnormal": false
+        },
+        "skill.exam.paed.resp.auscultation": {
+          "finding": "Bilateral normal vesicular breath sounds without added wheeze or crackles. Good air entry bilaterally.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "serum_electrolytes_glucose",
+        "stool_microscopy"
+      ],
+      "investigations": {
+        "serum_electrolytes_glucose": {
+          "label": "Serum electrolytes and random blood glucose",
+          "indicated": true,
+          "result": "Sodium 138 mEq/L, potassium 3.9 mEq/L, chloride 104 mEq/L, bicarbonate 18 mEq/L, glucose 84 mg/dL.",
+          "note": "Electrolytes confirm isonatraemic dehydration without severe metabolic acidosis or hypoglycaemia."
+        },
+        "stool_microscopy": {
+          "label": "Stool routine examination and microscopy",
+          "indicated": true,
+          "result": "Watery stool, 2 to 3 pus cells per high power field, no red blood cells, no amoebic trophozoites or cysts.",
+          "note": "Absence of gross pus cells and red blood cells supports non-invasive viral or secretory enteritis rather than bacillary dysentery."
+        },
+        "stool_culture": {
+          "label": "Stool bacterial culture",
+          "indicated": false,
+          "result": "Not routinely indicated for uncomplicated acute watery diarrhoea in the outpatient setting.",
+          "note": "Not routinely indicated; culture is reserved for persistent diarrhoea, severe systemic toxicity, cholera outbreaks, or suspected invasive salmonella."
+        },
+        "serum_urea_creatinine": {
+          "label": "Renal function tests (urea and creatinine)",
+          "indicated": true,
+          "result": "Blood urea 28 mg/dL, serum creatinine 0.4 mg/dL.",
+          "note": "Confirms preserved renal perfusion with absence of acute kidney injury."
+        }
+      },
+      "differentialModel": {
+        "answer": "Acute diarrhoeal disease (likely viral or rotaviral gastroenteritis) with some dehydration is the leading diagnosis. Dysentery must be considered if blood is present, and systemic infections with secondary diarrhoea must be excluded.",
+        "accept": [
+          "acute diarrhoeal disease",
+          "acute gastroenteritis",
+          "rotavirus gastroenteritis",
+          "dehydration"
+        ],
+        "minMatch": 1
+      },
+      "diagnosis": {
+        "answer": "Acute diarrhoeal disease with some dehydration in a 10-month-old infant: prompt rehydration with low-osmolarity oral rehydration solution under WHO Plan B and 14 days of oral zinc supplementation.",
+        "accept": [
+          "acute diarrhoeal disease",
+          "acute gastroenteritis"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Administer WHO Plan B oral rehydration with low-osmolarity ORS at 75 mL/kg over 4 hours under observation, continue frequent breastfeeding, prescribe oral elemental zinc (20 mg once daily) for 14 days, educate the mother on danger signs, and avoid antimicrobials and antimotility agents.",
+        "accept": [
+          "oral rehydration",
+          "ors",
+          "zinc",
+          "breastfeed",
+          "plan b"
+        ],
+        "minMatch": 2
+      },
+      "teachingPoints": [
+        "Sunken eyes, thirst, and an abdominal skin pinch retracting in 1 to 2 seconds confirm WHO some dehydration, which responds to Plan B oral rehydration without intravenous cannulation.",
+        "Reconstitution errors are the leading cause of salt poisoning during rehydration. The entire packet of WHO low-osmolarity ORS must be dissolved in exactly one litre of clean water.",
+        "Antimicrobials and antimotility drugs have no role in acute watery diarrhoea in children. Oral zinc for 14 days and uninterrupted feeding accelerate intestinal mucosal recovery.",
+        "Reduced wet nappies indicate falling glomerular filtration from dehydration. Prompt oral rehydration restores urine output within 4 to 6 hours."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    {
+      "id": "case.paed.neonatal_jaundice",
+      "system": "paediatrics",
+      "title": "A term newborn with progressive jaundice on day 3 of life",
+      "initialVitals": {
+        "hr": 136,
+        "bpSystolic": 66,
+        "bpDiastolic": 40,
+        "rr": 44,
+        "spo2": 97,
+        "temp": 36.8,
+        "gcs": 15
+      },
+      "opening": "Priyanka has brought her 3-day-old baby boy Aarav back to the hospital. She noticed yellow discolouration of his face and chest since yesterday, and now his abdomen and thighs look yellow too. Take a focused history from the mother and examine the baby. This is a teaching scenario, not a real patient.",
+      "fallback": "I am not sure what you mean, doctor. Could you please rephrase that question?",
+      "patient": {
+        "name": "Aarav Verma",
+        "age": "3 days",
+        "sex": "male",
+        "occupation": "Newborn",
+        "residence": "Urban colony, 3 km from the district hospital"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "why have you brought the baby",
+            "what is the problem",
+            "tell me about the baby",
+            "how can i help"
+          ],
+          "reply": "Doctor, my baby is only three days old and his skin has turned yellow. The yellow colour started on his face yesterday and now his whole body looks yellow.",
+          "key": true,
+          "skillId": "skill.hx.paed.presenting_complaint"
+        },
+        "onset": {
+          "cues": [
+            "when did the jaundice start",
+            "when did you notice yellow colour",
+            "which day of life",
+            "onset of yellowing",
+            "how many hours old"
+          ],
+          "reply": "I first noticed the yellow colour yesterday morning, on his third day of life, around fifty hours after delivery.",
+          "key": true,
+          "skillId": "skill.exam.paed.neo.jaundice_kramer"
+        },
+        "progression": {
+          "cues": [
+            "has the yellow colour spread",
+            "is it spreading down",
+            "yellow face or abdomen",
+            "how far down the body",
+            "progression of jaundice"
+          ],
+          "reply": "Yesterday it was just on his face and forehead, but by last night his chest was yellow, and this morning his tummy and thighs look yellow too.",
+          "key": true,
+          "skillId": "skill.exam.paed.neo.jaundice_kramer"
+        },
+        "feeding": {
+          "cues": [
+            "how is the baby feeding",
+            "is he breastfeeding well",
+            "how is the baby breastfeeding",
+            "is the baby breastfeeding",
+            "how often does he feed",
+            "latching and suckling",
+            "breast milk intake"
+          ],
+          "reply": "I am trying to breastfeed him, but he feeds for only five minutes and then falls asleep at the breast. I feed him about five or six times a day.",
+          "key": true,
+          "skillId": "skill.approach.paed.neo.infant_feeding_breastmilk"
+        },
+        "activity": {
+          "cues": [
+            "is the baby active",
+            "how is his cry",
+            "is he too sleepy",
+            "lethargic or floppy",
+            "vigorous or dull"
+          ],
+          "reply": "He is quiet and sleeps a lot, but when I wake him he cries normally and moves his hands and legs well.",
+          "key": true,
+          "skillId": "skill.gen.paed.appearance"
+        },
+        "stool_colour": {
+          "cues": [
+            "what colour is the stool",
+            "are stools pale",
+            "clay coloured stools",
+            "yellow or golden motions",
+            "colour of bowel motions"
+          ],
+          "reply": "His stools have turned from dark green meconium to yellow, mustard-coloured loose motions. They are definitely not white or clay-coloured.",
+          "key": true,
+          "skillId": "skill.hx.paed.presenting_complaint"
+        },
+        "urine_colour": {
+          "cues": [
+            "what colour is the urine",
+            "is urine dark yellow",
+            "staining the nappy yellow",
+            "urine frequency",
+            "wet diapers"
+          ],
+          "reply": "He passes urine four or five times a day. The wet nappies look clear or pale yellow, not dark brown.",
+          "key": true,
+          "skillId": "skill.hx.paed.presenting_complaint"
+        },
+        "maternal_blood_group": {
+          "cues": [
+            "what is your blood group",
+            "mother blood group",
+            "rh negative or positive",
+            "o positive mother",
+            "maternal rh type"
+          ],
+          "reply": "My blood group is O positive. The doctor noted it in my antenatal card during pregnancy.",
+          "key": true,
+          "skillId": "skill.hx.paed.birth_antenatal"
+        },
+        "gestational_age": {
+          "cues": [
+            "was the baby born at term",
+            "gestational age",
+            "full term pregnancy",
+            "weeks of pregnancy at birth",
+            "preterm or term"
+          ],
+          "reply": "He was born at thirty-nine completed weeks of pregnancy, a full-term baby.",
+          "skillId": "skill.hx.paed.birth_antenatal"
+        },
+        "birth_and_delivery": {
+          "cues": [
+            "how was the delivery",
+            "normal delivery or caesarean",
+            "birth weight",
+            "did he cry at birth",
+            "did the baby cry at birth",
+            "any birth trauma"
+          ],
+          "reply": "He was delivered normally through the vagina at the civil hospital. He cried immediately at birth and his weight was two point nine kilos.",
+          "skillId": "skill.hx.paed.birth_natal_neonatal"
+        },
+        "previous_children": {
+          "cues": [
+            "did previous children have jaundice",
+            "siblings need phototherapy",
+            "previous baby exchange transfusion",
+            "family history of jaundice",
+            "other children jaundiced"
+          ],
+          "reply": "This is my second baby. My first child is a girl; she also had mild yellow jaundice on day four, but it went away on its own without any blue lights.",
+          "skillId": "skill.hx.paed.family_pedigree"
+        },
+        "fever_and_infection": {
+          "cues": [
+            "does the baby have fever",
+            "hypothermia or cold body",
+            "any sign of infection",
+            "umbilicus red or discharging",
+            "cord infection"
+          ],
+          "reply": "No, he has no fever. His body does not feel cold. His umbilical cord stump looks clean and dry without any pus or smell.",
+          "skillId": "skill.hx.paed.presenting_complaint"
+        },
+        "abnormal_movements": {
+          "cues": [
+            "any abnormal movements",
+            "fits or convulsions",
+            "arching of the back",
+            "high pitched cry",
+            "seizure like activity"
+          ],
+          "reply": "No, doctor, he has had no fits, convulsions, or strange jerky movements. He does not arch his neck backwards.",
+          "skillId": "skill.exam.paed.cns.higher_mental_gcs"
+        },
+        "antenatal": {
+          "cues": [
+            "any maternal illness in pregnancy",
+            "fever during pregnancy",
+            "antenatal checkups",
+            "ultrasound scans",
+            "pregnancy history"
+          ],
+          "reply": "My pregnancy was completely smooth. I took iron and calcium tablets, had three ultrasound scans, and received two tetanus injections.",
+          "skillId": "skill.hx.paed.birth_antenatal"
+        }
+      },
+      "exam": {
+        "skill.gen.vitals": {
+          "finding": "Pulse 136 regular. Blood pressure 66/40 mmHg. Respiratory rate 44 breaths per minute, unlaboured. SpO2 97 percent on room air. Temperature 36.8 C.",
+          "abnormal": false
+        },
+        "skill.exam.paed.neo.jaundice_kramer": {
+          "finding": "Deep yellow jaundice visible on face, trunk, abdomen, and extending over thighs down to the knees (Kramer zone 4). Scleral icterus present. Palms and soles are spared (zone 5 negative).",
+          "abnormal": true
+        },
+        "skill.exam.paed.neo.head_skull_trauma": {
+          "finding": "Normocephalic head with open, soft, and flat anterior fontanelle (2.5 x 2.5 cm). Cranial sutures mobile and not overlapping. No cephalohaematoma, no caput succedaneum, no subgaleal haemorrhage.",
+          "abnormal": false
+        },
+        "skill.exam.paed.neo.chest_respiratory_cvs": {
+          "finding": "Heart rate 136 regular, normal first and second heart sounds, no audible murmur. Bilateral clear breath sounds with no stridor, no retractions, and no grunting.",
+          "abnormal": false
+        },
+        "skill.exam.paed.neo.abdomen_genitalia_spine": {
+          "finding": "Abdomen soft and non-distended. Liver edge palpable 1.5 cm below right costal margin, soft and smooth. Spleen tip just palpable (normal neonatal variation). Umbilical stump clean and dry, without erythema or discharge. Normal male genitalia with bilateral descended testes. Spine straight and intact.",
+          "abnormal": false
+        },
+        "skill.exam.paed.neo.primitive_reflexes": {
+          "finding": "Symmetric, complete Moro reflex. Vigorous rooting and sucking reflexes. Normal palmar grasp. Good resting flexion tone in all four limbs without lethargy or hypotonia.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "total_serum_bilirubin",
+        "blood_grouping_and_coombs"
+      ],
+      "investigations": {
+        "total_serum_bilirubin": {
+          "label": "Total and conjugated serum bilirubin",
+          "indicated": true,
+          "result": "Total serum bilirubin 16.4 mg/dL (280 micromol/L), conjugated fraction 0.6 mg/dL.",
+          "note": "Unconjugated hyperbilirubinaemia above the phototherapy threshold for a 72-hour-old term infant on the AAP/IAP nomogram."
+        },
+        "blood_grouping_and_coombs": {
+          "label": "Maternal and infant blood group with direct Coombs test (DCT)",
+          "indicated": true,
+          "result": "Mother blood group O positive; infant blood group A positive. Direct Coombs test weakly positive (1+).",
+          "note": "Confirms ABO incompatibility with mild isoimmune haemolysis as the underlying mechanism."
+        },
+        "complete_blood_count_reticulocyte": {
+          "label": "Complete haemogram and reticulocyte count",
+          "indicated": true,
+          "result": "Haemoglobin 15.2 g/dL, haematocrit 46 percent, total leukocyte count 11,800/mm3, reticulocyte count 6.8 percent, peripheral smear shows polychromasia and occasional spherocytes.",
+          "note": "Elevated reticulocyte count and spherocytes support mild active haemolysis due to anti-A isoantibodies."
+        },
+        "sepsis_screen_crp": {
+          "label": "Neonatal sepsis screen (C-reactive protein and micro-ESR)",
+          "indicated": false,
+          "result": "CRP negative (<2 mg/L), micro-ESR 3 mm in first hour.",
+          "note": "Not indicated as primary workup in a vigorous, afebrile, well-feeding infant with isolated non-toxic hyperbilirubinaemia."
+        }
+      },
+      "differentialModel": {
+        "answer": "Neonatal jaundice secondary to ABO incompatibility is the primary diagnosis. Exaggerated physiological jaundice, breastfeeding jaundice, and early neonatal sepsis must be considered.",
+        "accept": [
+          "neonatal jaundice",
+          "abo haemolytic disease of the newborn",
+          "breastfeeding jaundice",
+          "neonatal sepsis"
+        ],
+        "minMatch": 1
+      },
+      "diagnosis": {
+        "answer": "Neonatal hyperbilirubinaemia on day 3 of life due to ABO incompatibility (mother O positive, infant A positive) with some component of breastfeeding jaundice, requiring intensive phototherapy and monitoring.",
+        "accept": [
+          "neonatal jaundice",
+          "abo haemolytic disease of the newborn"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Admit under intensive double-surface phototherapy with eye and gonad shielding, encourage frequent breastfeeding every two hours, check total and direct serum bilirubin every 8 to 12 hours, and prepare for exchange transfusion only if bilirubin approaches the exchange threshold.",
+        "accept": [
+          "phototherapy",
+          "breastfeed",
+          "bilirubin",
+          "admit"
+        ],
+        "minMatch": 2
+      },
+      "teachingPoints": [
+        "Jaundice extending to the thighs on day 3 corresponds to Kramer zone 4, indicating a serum bilirubin typically above 12 to 15 mg/dL and requiring immediate laboratory quantitation.",
+        "In an O-positive mother with an A-positive infant, anti-A IgG antibodies cross the placenta, causing ABO incompatibility and haemolytic hyperbilirubinaemia within the first 72 hours.",
+        "Phototherapy converts unconjugated bilirubin into water-soluble structural isomers (lumirubin) excreted in bile and urine without requiring hepatic glucuronidation.",
+        "Frequent breastfeeding every 2 to 3 hours promotes bowel motility, enhances enteral bilirubin clearance, and prevents exaggerated breastfeeding-associated jaundice."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "_comment": "CliniX catalog. Small on purpose: the app fetches this first, then only the packs the student actually opens. Modelled on atlas/modules.json, deliberately NOT on kardiox-content-pack.js (a 1.9 MB array parsed on every page load).",
   "schemaVersion": 1,
-  "contentVersion": "0.10.0-finalyear",
+  "contentVersion": "0.11.0-finalyear2",
   "updated": "2026-10-19",
   "practicals": {
     "index": "practicals/index.json"
@@ -97,6 +97,54 @@
       "title": "Approach to the Acute Abdomen",
       "subtitle": "Peritonitis, hollow viscus perforation, bowel obstruction, acute vascular ischemia, and medical mimics",
       "file": "presentations/acute_abdomen.json",
+      "estMinutes": 50,
+      "review": "ai_drafted"
+    },
+    {
+      "id": "early_pregnancy_bleeding",
+      "title": "Approach to Bleeding in Early Pregnancy",
+      "subtitle": "First-trimester vaginal bleeding, ectopic pregnancy triage, miscarriage spectrum, and gestational trophoblastic disease",
+      "file": "presentations/early_pregnancy_bleeding.json",
+      "estMinutes": 45,
+      "review": "ai_drafted"
+    },
+    {
+      "id": "antepartum_haemorrhage",
+      "title": "Approach to Antepartum Haemorrhage",
+      "subtitle": "Obstetric haemorrhage after 20 weeks, placenta praevia, placental abruption, vasa praevia, and emergency resuscitation",
+      "file": "presentations/antepartum_haemorrhage.json",
+      "estMinutes": 45,
+      "review": "ai_drafted"
+    },
+    {
+      "id": "abnormal_or_postmenopausal_uterine_bleeding",
+      "title": "Approach to Abnormal and Postmenopausal Uterine Bleeding",
+      "subtitle": "FIGO PALM-COEIN classification, endometrial cancer evaluation, postmenopausal bleeding triage, and outpatient biopsy",
+      "file": "presentations/abnormal_or_postmenopausal_uterine_bleeding.json",
+      "estMinutes": 45,
+      "review": "ai_drafted"
+    },
+    {
+      "id": "neck_lump",
+      "title": "Approach to a Lump in the Neck",
+      "subtitle": "Diagnostic triage of midline vs lateral cervical swellings, lymphadenopathy, thyroid pathology, and head-neck malignancy",
+      "file": "presentations/neck_lump.json",
+      "estMinutes": 45,
+      "review": "ai_drafted"
+    },
+    {
+      "id": "breast_lump",
+      "title": "Approach to a Lump in the Breast",
+      "subtitle": "Triple assessment of benign and malignant mammary masses, fibroadenoma, fibrocystic change, and breast carcinoma staging",
+      "file": "presentations/breast_lump.json",
+      "estMinutes": 45,
+      "review": "ai_drafted"
+    },
+    {
+      "id": "groin_and_scrotal_swelling",
+      "title": "Approach to Swelling in the Groin and Scrotum",
+      "subtitle": "Inguinal vs femoral hernias, acute scrotum, testicular torsion, hydrocele, varicocele, and inguinoscrotal differential diagnosis",
+      "file": "presentations/groin_and_scrotal_swelling.json",
       "estMinutes": 50,
       "review": "ai_drafted"
     }
@@ -552,6 +600,78 @@
           "estMinutes": 60,
           "chapters": 14,
           "review": "ai_drafted"
+        },
+        {
+          "id": "miscarriage",
+          "title": "Abortion and miscarriage",
+          "subtitle": "Threatened, inevitable, incomplete, missed",
+          "file": "diseases/miscarriage.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "ectopic-pregnancy",
+          "title": "Ectopic pregnancy",
+          "subtitle": "Diagnosis and medical or surgical management",
+          "file": "diseases/ectopic-pregnancy.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "post-term-pregnancy",
+          "title": "Post-term pregnancy and induction of labour",
+          "subtitle": "Bishop score and induction",
+          "file": "diseases/post-term-pregnancy.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "twin-pregnancy",
+          "title": "Twin pregnancy",
+          "subtitle": "Chorionicity, complications, delivery",
+          "file": "diseases/twin-pregnancy.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "fetal-growth-restriction",
+          "title": "Fetal growth restriction and oligohydramnios",
+          "subtitle": "Surveillance and timing of delivery",
+          "file": "diseases/fetal-growth-restriction.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "rh-isoimmunisation",
+          "title": "Rh isoimmunisation",
+          "subtitle": "Anti-D and haemolytic disease of the newborn",
+          "file": "diseases/rh-isoimmunisation.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "puerperal-sepsis",
+          "title": "Puerperal sepsis",
+          "subtitle": "Postpartum fever and its management",
+          "file": "diseases/puerperal-sepsis.json",
+          "estMinutes": 45,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "heart-disease-in-pregnancy",
+          "title": "Heart disease in pregnancy",
+          "subtitle": "Risk stratification and labour planning",
+          "file": "diseases/heart-disease-in-pregnancy.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
         }
       ],
       "module": {
@@ -720,7 +840,16 @@
           "chapters": 14,
           "review": "ai_drafted"
         }
-      ]
+      ],
+      "module": {
+        "id": "paediatrics-osce",
+        "title": "OSCE and viva stations",
+        "subtitle": "12 stations: history, development, growth chart, neonatal and child systemic examination, counselling and resuscitation",
+        "file": "systems/paediatrics.json",
+        "estMinutes": 180,
+        "chapters": 5,
+        "review": "ai_drafted"
+      }
     },
     {
       "id": "surgery",
@@ -911,7 +1040,16 @@
           "chapters": 14,
           "review": "ai_drafted"
         }
-      ]
+      ],
+      "module": {
+        "id": "surgery-osce",
+        "title": "OSCE and viva stations",
+        "subtitle": "14 stations: lump, ulcer, thyroid, breast, hernia, scrotum, veins, arterial, acute abdomen, DRE, trauma, consent, tubes and suturing",
+        "file": "systems/surgery.json",
+        "estMinutes": 160,
+        "chapters": 4,
+        "review": "ai_drafted"
+      }
     }
   ],
   "media": {
