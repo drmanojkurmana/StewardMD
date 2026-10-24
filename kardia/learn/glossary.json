@@ -1,0 +1,758 @@
+{
+ "v": 1,
+ "review": "ai_drafted",
+ "terms": {
+  "afterload": {
+   "term": {
+    "en": "Afterload"
+   },
+   "def": {
+    "en": "The load the ventricle pushes against during ejection, largely set by blood pressure and valve narrowing."
+   }
+  },
+  "akinesis": {
+   "term": {
+    "en": "Akinesis"
+   },
+   "def": {
+    "en": "No wall thickening or motion in a segment during systole."
+   }
+  },
+  "aliasing": {
+   "term": {
+    "en": "Aliasing"
+   },
+   "def": {
+    "en": "Wrap around of fast Doppler flow that the pulse rate cannot track, shown as colour reversal."
+   }
+  },
+  "aneurysm": {
+   "term": {
+    "en": "Aneurysm"
+   },
+   "def": {
+    "en": "A permanent widening of a vessel to 30 mm or more in the abdominal aorta, or a weak bulging wall segment."
+   }
+  },
+  "annulus": {
+   "term": {
+    "en": "Annulus"
+   },
+   "def": {
+    "en": "The fibrous ring where a valve leaflet hinges."
+   }
+  },
+  "aorta": {
+   "term": {
+    "en": "Aorta"
+   },
+   "def": {
+    "en": "The great artery that carries oxygen rich blood from the left ventricle to the body."
+   }
+  },
+  "aortic-root": {
+   "term": {
+    "en": "Aortic root"
+   },
+   "def": {
+    "en": "The first part of the aorta holding the three cusps and the coronary origins."
+   }
+  },
+  "apex": {
+   "term": {
+    "en": "Apex"
+   },
+   "def": {
+    "en": "The pointed tip of the left ventricle at the bottom of the apical views."
+   }
+  },
+  "artefact": {
+   "term": {
+    "en": "Artefact"
+   },
+   "def": {
+    "en": "A false echo feature from physics or settings, not from anatomy."
+   }
+  },
+  "atrium": {
+   "term": {
+    "en": "Atrium"
+   },
+   "def": {
+    "en": "An upper receiving chamber, right for body blood and left for lung blood."
+   }
+  },
+  "a-wave": {
+   "term": {
+    "en": "A wave"
+   },
+   "def": {
+    "en": "The second inflow peak from atrial squeeze in late diastole."
+   }
+  },
+  "baseline-shift": {
+   "term": {
+    "en": "Baseline shift"
+   },
+   "def": {
+    "en": "A Doppler control that moves the zero line to show fast one way flow without wrap."
+   }
+  },
+  "bernoulli-equation": {
+   "term": {
+    "en": "Bernoulli equation"
+   },
+   "def": {
+    "en": "The rule that pressure drop in mmHg equals four times peak velocity squared."
+   }
+  },
+  "bicuspid": {
+   "term": {
+    "en": "Bicuspid"
+   },
+   "def": {
+    "en": "An aortic valve with two cusps instead of three, prone to early stenosis."
+   }
+  },
+  "calcification": {
+   "term": {
+    "en": "Calcification"
+   },
+   "def": {
+    "en": "Bright calcium deposits that stiffen cusps and shadow behind them."
+   }
+  },
+  "cardiac-output": {
+   "term": {
+    "en": "Cardiac output"
+   },
+   "def": {
+    "en": "Stroke volume times heart rate, the litres per minute the heart pumps."
+   }
+  },
+  "chordae": {
+   "term": {
+    "en": "Chordae"
+   },
+   "def": {
+    "en": "Fine cords from papillary muscle tips to leaflet edges that stop prolapse."
+   }
+  },
+  "coarctation": {
+   "term": {
+    "en": "Coarctation"
+   },
+   "def": {
+    "en": "A narrowing of the aortic isthmus that raises arm pressure above leg pressure."
+   }
+  },
+  "colour-doppler": {
+   "term": {
+    "en": "Colour doppler"
+   },
+   "def": {
+    "en": "Colour overlay showing flow direction and speed over the grey image."
+   }
+  },
+  "continuous-wave-doppler": {
+   "term": {
+    "en": "Continuous wave doppler"
+   },
+   "def": {
+    "en": "Doppler that records all velocities along a line, best for high gradients."
+   }
+  },
+  "coronary-sinus": {
+   "term": {
+    "en": "Coronary sinus"
+   },
+   "def": {
+    "en": "The vein in the posterior groove draining heart muscle blood to the right atrium."
+   }
+  },
+  "deceleration-time": {
+   "term": {
+    "en": "Deceleration time"
+   },
+   "def": {
+    "en": "The time the early inflow wave takes to fall to zero, long in slow relaxation."
+   }
+  },
+  "depth": {
+   "term": {
+    "en": "Depth"
+   },
+   "def": {
+    "en": "How far the sector looks; extra depth shrinks the heart and slows the frame rate."
+   }
+  },
+  "diastasis": {
+   "term": {
+    "en": "Diastasis"
+   },
+   "def": {
+    "en": "The quiet mid diastolic pause between early filling and the atrial kick."
+   }
+  },
+  "diastole": {
+   "term": {
+    "en": "Diastole"
+   },
+   "def": {
+    "en": "The relaxed filling half of the cycle after the T wave."
+   }
+  },
+  "dilation": {
+   "term": {
+    "en": "Dilation"
+   },
+   "def": {
+    "en": "Enlargement of a chamber or vessel beyond its normal range."
+   }
+  },
+  "mirror-artefact": {
+   "term": {
+    "en": "Mirror artefact"
+   },
+   "def": {
+    "en": "A copy of a vessel painted by a strong reflector, moving exactly with the true one."
+   }
+  },
+  "dissection": {
+   "term": {
+    "en": "Dissection"
+   },
+   "def": {
+    "en": "Blood splitting the aortic wall through a tear, with a flap dividing two lumens."
+   }
+  },
+  "dropout": {
+   "term": {
+    "en": "Dropout"
+   },
+   "def": {
+    "en": "A false gap where an off axis beam misses a thin wall such as the septum."
+   }
+  },
+  "dyskinesis": {
+   "term": {
+    "en": "Dyskinesis"
+   },
+   "def": {
+    "en": "A segment that bulges outward in systole instead of thickening."
+   }
+  },
+  "e-prime": {
+   "term": {
+    "en": "E prime"
+   },
+   "def": {
+    "en": "The early diastolic speed of the mitral ring on tissue Doppler, low in slow relaxation."
+   }
+  },
+  "e-wave": {
+   "term": {
+    "en": "E wave"
+   },
+   "def": {
+    "en": "The first inflow peak from early diastolic suction."
+   }
+  },
+  "ecg-gating": {
+   "term": {
+    "en": "Ecg gating"
+   },
+   "def": {
+    "en": "Timing echo frames and measurements to the ECG trace."
+   }
+  },
+  "effective-orifice-area": {
+   "term": {
+    "en": "Effective orifice area"
+   },
+   "def": {
+    "en": "The true functional hole of a regurgitant or stenotic valve in sq cm."
+   }
+  },
+  "ejection-fraction": {
+   "term": {
+    "en": "Ejection fraction"
+   },
+   "def": {
+    "en": "The percent of diastolic volume ejected each beat, 55 percent or more being normal."
+   }
+  },
+  "end-diastole": {
+   "term": {
+    "en": "End diastole"
+   },
+   "def": {
+    "en": "The frame at QRS start when the ventricle is fullest, used for size measurement."
+   }
+  },
+  "end-systole": {
+   "term": {
+    "en": "End systole"
+   },
+   "def": {
+    "en": "The frame at aortic valve closure when the ventricle is emptiest."
+   }
+  },
+  "eustachian-valve": {
+   "term": {
+    "en": "Eustachian valve"
+   },
+   "def": {
+    "en": "A thin flap at the cava mouth that can mimic a mass or shunt flow."
+   }
+  },
+  "focus": {
+   "term": {
+    "en": "Focus"
+   },
+   "def": {
+    "en": "The depth where the beam is narrowest and lateral detail is sharpest."
+   }
+  },
+  "foreshortening": {
+   "term": {
+    "en": "Foreshortening"
+   },
+   "def": {
+    "en": "A cut that misses the true apex and flatters function while understating length."
+   }
+  },
+  "fractional-area-change": {
+   "term": {
+    "en": "Fractional area change"
+   },
+   "def": {
+    "en": "The percent fall in right ventricular area each beat, 35 percent or more being normal."
+   }
+  },
+  "fractional-shortening": {
+   "term": {
+    "en": "Fractional shortening"
+   },
+   "def": {
+    "en": "The percent fall in cavity diameter each beat on M mode."
+   }
+  },
+  "frame-rate": {
+   "term": {
+    "en": "Frame rate"
+   },
+   "def": {
+    "en": "Images per second; high rates freeze fast valves and motion."
+   }
+  },
+  "frequency": {
+   "term": {
+    "en": "Frequency"
+   },
+   "def": {
+    "en": "Probe frequency in MHz; high frequency suits children and near views, low suits adults."
+   }
+  },
+  "gain": {
+   "term": {
+    "en": "Gain"
+   },
+   "def": {
+    "en": "Overall brightness; too much fills blood with noise and hides thrombus."
+   }
+  },
+  "harmonics": {
+   "term": {
+    "en": "Harmonics"
+   },
+   "def": {
+    "en": "Imaging at twice the sent frequency for a cleaner picture with less clutter."
+   }
+  },
+  "hepatic-vein": {
+   "term": {
+    "en": "Hepatic vein"
+   },
+   "def": {
+    "en": "A liver vein draining to the cava whose Doppler pattern reports right heart pressure."
+   }
+  },
+  "hypertrophy": {
+   "term": {
+    "en": "Hypertrophy"
+   },
+   "def": {
+    "en": "Thickened walls from pressure load or inherited muscle disease."
+   }
+  },
+  "hypokinesis": {
+   "term": {
+    "en": "Hypokinesis"
+   },
+   "def": {
+    "en": "Reduced wall thickening in a segment during systole."
+   }
+  },
+  "inflow": {
+   "term": {
+    "en": "Inflow"
+   },
+   "def": {
+    "en": "The entry path to a ventricle through its atrioventricular valve."
+   }
+  },
+  "left-atrial-volume-index": {
+   "term": {
+    "en": "Left atrial volume index"
+   },
+   "def": {
+    "en": "Left atrial volume divided by body surface area, normal below 34 ml per sq m."
+   }
+  },
+  "m-mode": {
+   "term": {
+    "en": "M mode"
+   },
+   "def": {
+    "en": "A one line time trace showing motion such as valve opening through the cycle."
+   }
+  },
+  "mapse": {
+   "term": {
+    "en": "Mapse"
+   },
+   "def": {
+    "en": "Mitral ring travel toward the apex each beat, a long axis function marker."
+   }
+  },
+  "moderator-band": {
+   "term": {
+    "en": "Moderator band"
+   },
+   "def": {
+    "en": "A normal muscle bar across the right ventricle, not thrombus."
+   }
+  },
+  "nyquist-limit": {
+   "term": {
+    "en": "Nyquist limit"
+   },
+   "def": {
+    "en": "The fastest speed pulsed Doppler can show before wrap, raised by a higher pulse rate."
+   }
+  },
+  "outflow-tract": {
+   "term": {
+    "en": "Outflow tract"
+   },
+   "def": {
+    "en": "The exit path from a ventricle to its great artery."
+   }
+  },
+  "p-wave": {
+   "term": {
+    "en": "P wave"
+   },
+   "def": {
+    "en": "The ECG wave of atrial squeeze just before the QRS."
+   }
+  },
+  "papillary-muscle": {
+   "term": {
+    "en": "Papillary muscle"
+   },
+   "def": {
+    "en": "A cone of muscle anchoring the chordae inside the ventricle."
+   }
+  },
+  "parasternal": {
+   "term": {
+    "en": "Parasternal"
+   },
+   "def": {
+    "en": "The window at the left sternal edge for long and short axis views."
+   }
+  },
+  "patent-ductus": {
+   "term": {
+    "en": "Patent ductus"
+   },
+   "def": {
+    "en": "A persisting foetal vessel between trunk and aorta with continuous flow."
+   }
+  },
+  "pericardial-effusion": {
+   "term": {
+    "en": "Pericardial effusion"
+   },
+   "def": {
+    "en": "Fluid in the sac around the heart, measured as diastolic echo free space."
+   }
+  },
+  "pericardium": {
+   "term": {
+    "en": "Pericardium"
+   },
+   "def": {
+    "en": "The bright fibrous sac around the heart where fluid collects."
+   }
+  },
+  "pisa": {
+   "term": {
+    "en": "Pisa"
+   },
+   "def": {
+    "en": "A flow convergence shell method for grading regurgitant orifice size."
+   }
+  },
+  "preload": {
+   "term": {
+    "en": "Preload"
+   },
+   "def": {
+    "en": "The stretch on the ventricle before contraction, set by filling volume."
+   }
+  },
+  "pressure-half-time": {
+   "term": {
+    "en": "Pressure half time"
+   },
+   "def": {
+    "en": "The time for a transmitral gradient to halve, used as 220 divided by area for mitral area."
+   }
+  },
+  "probe-marker": {
+   "term": {
+    "en": "Probe marker"
+   },
+   "def": {
+    "en": "The notch on the probe edge that always maps to one side of the screen."
+   }
+  },
+  "prolapse": {
+   "term": {
+    "en": "Prolapse"
+   },
+   "def": {
+    "en": "A leaflet billowing back into the atrium in systole, sometimes with a leak."
+   }
+  },
+  "pulmonary-hypertension": {
+   "term": {
+    "en": "Pulmonary hypertension"
+   },
+   "def": {
+    "en": "Raised lung circulation pressure, read from tricuspid velocity plus atrial pressure."
+   }
+  },
+  "pulsed-wave-doppler": {
+   "term": {
+    "en": "Pulsed wave doppler"
+   },
+   "def": {
+    "en": "Doppler that samples speed at one gate depth, best for timing and low velocities."
+   }
+  },
+  "qrs-complex": {
+   "term": {
+    "en": "Qrs complex"
+   },
+   "def": {
+    "en": "The ECG spike of ventricular activation that shuts the inflow valves."
+   }
+  },
+  "regurgitation": {
+   "term": {
+    "en": "Regurgitation"
+   },
+   "def": {
+    "en": "Backward leak through a valve, graded by jet size, orifice and volume."
+   }
+  },
+  "reverberation": {
+   "term": {
+    "en": "Reverberation"
+   },
+   "def": {
+    "en": "Repeating lines from a strong near reflector that can fake a flap."
+   }
+  },
+  "rheumatic": {
+   "term": {
+    "en": "Rheumatic"
+   },
+   "def": {
+    "en": "Valve scarring after rheumatic fever, common in India, with fused commissures."
+   }
+  },
+  "sample-volume": {
+   "term": {
+    "en": "Sample volume"
+   },
+   "def": {
+    "en": "The small gate where pulsed Doppler listens."
+   }
+  },
+  "sector": {
+   "term": {
+    "en": "Sector"
+   },
+   "def": {
+    "en": "The fan shaped ultrasound field spreading from the probe face."
+   }
+  },
+  "septal-defect": {
+   "term": {
+    "en": "Septal defect"
+   },
+   "def": {
+    "en": "A hole in the interatrial or interventricular wall with shunt flow on colour."
+   }
+  },
+  "septum": {
+   "term": {
+    "en": "Septum"
+   },
+   "def": {
+    "en": "The wall between the ventricles or the atria."
+   }
+  },
+  "shadowing": {
+   "term": {
+    "en": "Shadowing"
+   },
+   "def": {
+    "en": "A dark band behind calcium or rib where sound cannot pass."
+   }
+  },
+  "shunt": {
+   "term": {
+    "en": "Shunt"
+   },
+   "def": {
+    "en": "Abnormal flow between chambers or vessels, such as through a defect or ductus."
+   }
+  },
+  "simpson-method": {
+   "term": {
+    "en": "Simpson method"
+   },
+   "def": {
+    "en": "Volume by stacked discs traced in two apical planes for ejection fraction."
+   }
+  },
+  "stenosis": {
+   "term": {
+    "en": "Stenosis"
+   },
+   "def": {
+    "en": "Valve narrowing graded by velocity, gradient and area."
+   }
+  },
+  "stroke-volume": {
+   "term": {
+    "en": "Stroke volume"
+   },
+   "def": {
+    "en": "Millilitres pumped per beat, from outflow area times outflow velocity integral."
+   }
+  },
+  "subcostal": {
+   "term": {
+    "en": "Subcostal"
+   },
+   "def": {
+    "en": "The window under the xiphoid looking up through the liver."
+   }
+  },
+  "suprasternal": {
+   "term": {
+    "en": "Suprasternal"
+   },
+   "def": {
+    "en": "The window in the neck notch looking down at the arch."
+   }
+  },
+  "systole": {
+   "term": {
+    "en": "Systole"
+   },
+   "def": {
+    "en": "The squeezing ejection half of the cycle between the sounds."
+   }
+  },
+  "t-wave": {
+   "term": {
+    "en": "T wave"
+   },
+   "def": {
+    "en": "The ECG wave of ventricular recovery marking the end of systole."
+   }
+  },
+  "tamponade": {
+   "term": {
+    "en": "Tamponade"
+   },
+   "def": {
+    "en": "Pressure from fluid that collapses chambers and needs urgent drainage."
+   }
+  },
+  "tapse": {
+   "term": {
+    "en": "Tapse"
+   },
+   "def": {
+    "en": "Tricuspid ring travel toward the apex each beat, 17 mm or more being normal."
+   }
+  },
+  "thrombus": {
+   "term": {
+    "en": "Thrombus"
+   },
+   "def": {
+    "en": "Clot, often apical after infarction, that sits still while walls move."
+   }
+  },
+  "tissue-doppler": {
+   "term": {
+    "en": "Tissue doppler"
+   },
+   "def": {
+    "en": "Doppler of muscle motion itself, used for ring speeds such as e prime."
+   }
+  },
+  "vegetation": {
+   "term": {
+    "en": "Vegetation"
+   },
+   "def": {
+    "en": "Infected mass stuck on a leaflet that moves with it."
+   }
+  },
+  "vena-contracta": {
+   "term": {
+    "en": "Vena contracta"
+   },
+   "def": {
+    "en": "The narrow neck of a regurgitant jet, 7 mm or more marking severe tricuspid leak."
+   }
+  },
+  "ventricle": {
+   "term": {
+    "en": "Ventricle"
+   },
+   "def": {
+    "en": "A lower pumping chamber, left to the body and right to the lungs."
+   }
+  },
+  "wall-filter": {
+   "term": {
+    "en": "Wall filter"
+   },
+   "def": {
+    "en": "A Doppler control that removes slow wall motion so slow flow can show."
+   }
+  }
+ }
+}

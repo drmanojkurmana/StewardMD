@@ -1,0 +1,268 @@
+{
+ "id": "view_a5c",
+ "unit": "views",
+ "level": "resident",
+ "levels": [
+  "resident",
+  "fellow",
+  "sonographer"
+ ],
+ "minutes": 6,
+ "title": {
+  "en": "Apical five chamber"
+ },
+ "idea": {
+  "en": "Tilt anterior from the four chamber to open the aortic valve."
+ },
+ "see": {
+  "diagram": "diagrams/view_a5c.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Echo Lab render of the Apical five chamber. Tilt anterior until the aortic root rises between septum and mitral valve."
+  },
+  "caption": {
+   "en": "Echo Lab render of the Apical five chamber. Tilt anterior until the aortic root rises between septum and mitral valve."
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Cavity of left ventricle"
+    },
+    "note": {
+     "en": "Landmarks to confirm: Cavity of left ventricle"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Cavity of left atrium"
+    },
+    "note": {
+     "en": "Cavity of left atrium"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Left ventricular outflow tract"
+    },
+    "note": {
+     "en": "Left ventricular outflow tract"
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Left posterior cusp of aortic valve"
+    },
+    "note": {
+     "en": "Left posterior cusp of aortic valve"
+    }
+   }
+  ],
+  "view": "tte_a5c"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: The four chambers stay on screen with the aortic root rising between the septum and the anterior mitral leaflet. The left ventricular outflow tract runs almost straight toward the probe, which suits Doppler alignment."
+   },
+   {
+    "en": "Landmarks to confirm: Do not accept the view until each of these is on screen."
+   },
+   {
+    "en": "Common mistakes and how to correct them: Each mistake below comes from the view catalogue with its correction."
+   },
+   {
+    "en": "Normal values and stenosis thresholds: Peak aortic velocity above 4 m per s means severe stenosis."
+   },
+   {
+    "en": "Mean transaortic gradient above 40 mmHg means severe stenosis."
+   },
+   {
+    "en": "Aortic valve area below 1.0 sq cm means severe stenosis."
+   },
+   {
+    "en": "Stroke volume in ml equals outflow tract area in sq cm times outflow tract velocity time integral in cm."
+   },
+   {
+    "en": "Valve area by continuity equals outflow area times outflow VTI divided by aortic VTI."
+   },
+   {
+    "en": "Pitfalls: Measuring the outflow diameter in systole overstates area, so measure diameter in the parasternal long axis instead. A high gradient with a small stroke volume can still mean severe stenosis, so always report stroke volume with the gradient."
+   }
+  ],
+  "analogy": {
+   "en": "Landmarks to confirm: Cavity of left ventricle"
+  }
+ },
+ "spot": [
+  {
+   "en": "Landmarks to confirm: Cavity of left ventricle"
+  },
+  {
+   "en": "Cavity of left atrium"
+  },
+  {
+   "en": "Left ventricular outflow tract"
+  },
+  {
+   "en": "Left posterior cusp of aortic valve"
+  },
+  {
+   "en": "Anterior cusp of aortic valve"
+  },
+  {
+   "en": "Anterior leaflet of mitral valve"
+  },
+  {
+   "en": "Interventricular septum"
+  },
+  {
+   "en": "Left ventricular apex"
+  },
+  {
+   "en": "Common mistakes and how to correct them: Losing the aortic valve by sitting too lateral on the apex. Correct it by sliding medially back to the point of maximal impulse and tilting anterior again."
+  },
+  {
+   "en": "Aorta dominating the image from too medial a position. Correct it by sliding laterally a touch until the ventricle lengthens and the aorta narrows."
+  },
+  {
+   "en": "Foreshortened outflow that understates gradients. Correct it by recovering the longest ventricle first and then tilting, since gradients need the true apex."
+  }
+ ],
+ "todo": [
+  {
+   "en": "How to get it: Place the probe at apex, fifth intercostal space, tilted anterior from four chamber."
+  },
+  {
+   "en": "Point the probe marker toward the left, about three o clock."
+  },
+  {
+   "en": "From a good four chamber, tilt the tail anterior a touch without sliding. If the aorta vanishes, you tilted posterior; if the ventricle shortens, you slid off the apex."
+  },
+  {
+   "en": "Freeze the image only when every listed landmark is on screen at once."
+  }
+ ],
+ "remember": {
+  "en": "Measure the outflow tract for stroke volume and valve area."
+ },
+ "check": [
+  {
+   "q": {
+    "en": "How do you reach the five chamber from the four chamber?"
+   },
+   "o": [
+    {
+     "en": "Rotate sixty degrees"
+    },
+    {
+     "en": "Tilt anterior a touch"
+    },
+    {
+     "en": "Slide to the sternum"
+    },
+    {
+     "en": "Move subcostal"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "A small anterior tilt opens the aortic root above the four chamber plane."
+   }
+  },
+  {
+   "q": {
+    "en": "Outflow diameter is 2 cm with outflow VTI 22 cm and aortic VTI 110 cm. What is the valve area?"
+   },
+   "o": [
+    {
+     "en": "0.4 sq cm"
+    },
+    {
+     "en": "0.7 sq cm"
+    },
+    {
+     "en": "1.0 sq cm"
+    },
+    {
+     "en": "1.4 sq cm"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Area is 3.14 times outflow area 3.14 sq cm times 22 divided by 110, about 0.7 sq cm."
+   }
+  },
+  {
+   "q": {
+    "en": "Gradient is 45 mmHg but stroke volume index is low. What next?"
+   },
+   "o": [
+    {
+     "en": "Call it moderate"
+    },
+    {
+     "en": "Report valve area, since low flow severe stenosis is possible"
+    },
+    {
+     "en": "Repeat after fluids"
+    },
+    {
+     "en": "Ignore the gradient"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Low flow can mask severity, so the continuity valve area decides."
+   }
+  },
+  {
+   "q": {
+    "en": "Where should the outflow diameter be measured?"
+   },
+   "o": [
+    {
+     "en": "In the five chamber in systole"
+    },
+    {
+     "en": "In the long axis at the valve insertion"
+    },
+    {
+     "en": "At the sinuses in diastole"
+    },
+    {
+     "en": "In the suprasternal view"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Diameter belongs in the long axis at the cusp insertion to avoid systolic overstatement."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "views"
+ },
+ "sources": [
+  "ASE 2019 guideline for the complete transthoracic examination, apical views section.",
+  "ASE and EACVI 2017 valvular stenosis guideline, aortic stenosis section."
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_a5c",
+ "objectives": [
+  "Tilt anterior from the four chamber to open the aortic valve.",
+  "Align Doppler through the outflow tract and aortic valve.",
+  "Measure the outflow tract for stroke volume and valve area."
+ ]
+}

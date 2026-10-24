@@ -1,0 +1,202 @@
+{
+ "id": "pocus_arrest_pulse_check",
+ "unit": "pocus",
+ "level": "resident",
+ "levels": [
+  "resident",
+  "fellow"
+ ],
+ "minutes": 5,
+ "title": {
+  "en": "Ten second pulse check echo in cardiac arrest"
+ },
+ "idea": {
+  "en": "Fit the echo inside a 10 second pause"
+ },
+ "see": {
+  "diagram": "diagrams/pocus_arrest_pulse_check.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Pulse check subxiphoid view of the arrest protocol"
+  },
+  "caption": {
+   "en": "Pulse check subxiphoid view of the arrest protocol"
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "tamponade fluid, a huge dilated right heart suggesting massive embolus, and empt"
+    },
+    "note": {
+     "en": "What you see: The arrest protocol fits the echo into the rhythm check pause without stretching it. The subxiphoid window shows one of three states: organised beating with a pulse meaning return of circulation, organised motion without a pulse meaning pulseless electrical activity, or a still heart meaning asystole. Around the heart the scan hunts reversible causes: tamponade fluid, a huge dilated right heart suggesting massive embolus, and empty flat chambers suggesting profound volume loss."
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Subxiphoid heart in the pause clip, pericardial space for tamponade, right heart"
+    },
+    "note": {
+     "en": "Landmarks to confirm: Subxiphoid heart in the pause clip, pericardial space for tamponade, right heart size for embolus pattern, chamber filling for volume state."
+    }
+   }
+  ],
+  "view": "pocus_arrest_subxiphoid"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: The arrest protocol fits the echo into the rhythm check pause without stretching it. The subxiphoid window shows one of three states: organised beating with a pulse meaning return of circulation, organised motion without a pulse meaning pulseless electrical activity, or a still heart meaning asystole. Around the heart the scan hunts reversible causes: tamponade fluid, a huge dilated right heart suggesting massive embolus, and empty flat chambers suggesting profound volume loss."
+   },
+   {
+    "en": "Landmarks to confirm: Subxiphoid heart in the pause clip, pericardial space for tamponade, right heart size for embolus pattern, chamber filling for volume state."
+   },
+   {
+    "en": "Common mistakes and correction: Stretching the pause to finish the scan: the clock owns the pause, so lift at 10 seconds regardless. Calling drifting clot echoes true motion: confirm organised wall contraction. Scanning without a preset so the heart never appears in time: set the subxiphoid preset before the pause arrives."
+   },
+   {
+    "en": "Normal values with units: Every pause lasts 10 seconds or less from stop to restart of compressions. Reversible causes to name on the scan are tamponade fluid, tension pneumothorax pattern where lung views are added, and profound hypovolaemia. No single finding alone decides when to stop resuscitation."
+   },
+   {
+    "en": "Pitfalls: The scan must never delay compressions, adrenaline, defibrillation or airway care. A poor window during transport is common, so state the limitation plainly. Debrief the clips after the event so the team learns without blame."
+   }
+  ],
+  "analogy": {
+   "en": "What you see: The arrest protocol fits the echo into the rhythm check pause without stretching it. The subxiphoid window shows one of three states: organised beating with a pulse meaning return of circulation, organised motion without a pulse meaning pulseless electrical activity, or a still heart meaning asystole. Around the heart the scan hunts reversible causes: tamponade fluid, a huge dilated right heart suggesting massive embolus, and empty flat chambers suggesting profound volume loss."
+  }
+ },
+ "spot": [
+  {
+   "en": "What you see: The arrest protocol fits the echo into the rhythm check pause without stretching it. The subxiphoid window shows one of three states: organised beating with a pulse meaning return of circulation, organised motion without a pulse meaning pulseless electrical activity, or a still heart meaning asystole. Around the heart the scan hunts reversible causes: tamponade fluid, a huge dilated right heart suggesting massive embolus, and empty flat chambers suggesting profound volume loss."
+  },
+  {
+   "en": "Landmarks to confirm: Subxiphoid heart in the pause clip, pericardial space for tamponade, right heart size for embolus pattern, chamber filling for volume state."
+  },
+  {
+   "en": "Figure: FAST subxiphoid window supporting the arrest protocol View pocus_fast_subxiphoid"
+  }
+ ],
+ "todo": [
+  {
+   "en": "How to get it step by step: Pre position the probe on the belly during compressions with the machine set to the subxiphoid preset. At the pause, place flat and aim at the left shoulder. Record a short clip and call the state in plain words. Hunt the reversible causes in the same clip: pericardial fluid, right heart size and chamber filling. Lift the probe and restart compressions at or before 10 seconds. Report the clip to the team leader after compressions resume."
+  }
+ ],
+ "remember": {
+  "en": "Hunt reversible causes without delaying care"
+ },
+ "check": [
+  {
+   "q": {
+    "en": "How long may the pulse check pause last?"
+   },
+   "o": [
+    {
+     "en": "15 seconds"
+    },
+    {
+     "en": "10 seconds or less"
+    },
+    {
+     "en": "30 seconds for a good clip"
+    },
+    {
+     "en": "Until certain"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Compressions must restart within 10 seconds."
+   }
+  },
+  {
+   "q": {
+    "en": "Organised wall motion with no palpable pulse means what?"
+   },
+   "o": [
+    {
+     "en": "Asystole"
+    },
+    {
+     "en": "Return of circulation"
+    },
+    {
+     "en": "Pulseless electrical activity"
+    },
+    {
+     "en": "Normal rhythm"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "Motion without pulse is pulseless electrical activity."
+   }
+  },
+  {
+   "q": {
+    "en": "Which reversible causes does the clip hunt?"
+   },
+   "o": [
+    {
+     "en": "Tamponade fluid, dilated right heart and empty chambers"
+    },
+    {
+     "en": "Valve area"
+    },
+    {
+     "en": "Diastolic grade"
+    },
+    {
+     "en": "Coronary calcium"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "Tamponade, massive embolus pattern and profound volume loss are the echo reversible causes."
+   }
+  },
+  {
+   "q": {
+    "en": "The image is unclear as the pause ends. What is correct?"
+   },
+   "o": [
+    {
+     "en": "Finish the scan first"
+    },
+    {
+     "en": "Delay the shock for the clip"
+    },
+    {
+     "en": "Hold drugs until review"
+    },
+    {
+     "en": "Lift at 10 seconds and report after compressions resume"
+    }
+   ],
+   "a": 3,
+   "why": {
+    "en": "The clock owns the pause, so lift on time and report after compressions resume."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "pocus"
+ },
+ "sources": [
+  "ACEP emergency ultrasound guidelines, section on ultrasound in cardiac arrest",
+  "International POCUS consensus, section on pulse check echo with minimised pauses"
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "pocus_arrest_subxiphoid",
+ "objectives": [
+  "Fit the echo inside a 10 second pause",
+  "Name the three arrest states on the scan",
+  "Hunt reversible causes without delaying care"
+ ]
+}

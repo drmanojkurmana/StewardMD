@@ -1,0 +1,281 @@
+{
+ "id": "meas_pasp",
+ "unit": "measurements",
+ "level": "resident",
+ "levels": [
+  "resident",
+  "fellow",
+  "sonographer"
+ ],
+ "minutes": 8,
+ "title": {
+  "en": "Pulmonary pressure estimate"
+ },
+ "idea": {
+  "en": "Record the best tricuspid envelope from every window"
+ },
+ "see": {
+  "diagram": "diagrams/meas_pasp.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Apical four chamber tricuspid jet for the pulmonary pressure estimate"
+  },
+  "caption": {
+   "en": "Apical four chamber tricuspid jet for the pulmonary pressure estimate"
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Dense tricuspid envelope with a sharp modal peak"
+    },
+    "note": {
+     "en": "Dense tricuspid envelope with a sharp modal peak"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Colour jet direction matching the Doppler interrogation line"
+    },
+    "note": {
+     "en": "Colour jet direction matching the Doppler interrogation line"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Caval size and collapse recorded for the atrial pressure term"
+    },
+    "note": {
+     "en": "Caval size and collapse recorded for the atrial pressure term"
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "D shaped septum flattening when pressure overloads the right side"
+    },
+    "note": {
+     "en": "D shaped septum flattening when pressure overloads the right side"
+    }
+   }
+  ],
+  "view": "tte_a4c"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "Pulmonary pressure by echo is a velocity plus a venous pressure. The tricuspid regurgitant jet velocity reflects the systolic pressure drop from right ventricle to right atrium, so four times velocity squared plus right atrial pressure from the cava gives systolic pulmonary artery pressure. A pulmonary regurgitant jet extends the same logic to mean and diastolic pressure. The estimate screens for pulmonary hypertension and follows it, but it is not a catheter: a faint envelope, a bad angle or a wrong atrial pressure all move the number. In India long standing rheumatic mitral stenosis is a leading cause of raised pulmonary pressure, often with a D shaped septum and a struggling right heart."
+   },
+   {
+    "en": "Find the tricuspid jet on colour in the view that shows it best: apical four chamber, right ventricle inflow or parasternal short axis."
+   },
+   {
+    "en": "Align continuous wave along the jet and record the densest envelope with the sharpest peak from every window."
+   },
+   {
+    "en": "Take the peak velocity of the best envelope only, never an average of windows."
+   },
+   {
+    "en": "Estimate right atrial pressure from caval size and sniff collapse by the caval lesson."
+   },
+   {
+    "en": "Add 4 times velocity squared to the atrial pressure for systolic pulmonary pressure."
+   },
+   {
+    "en": "Check the septal shape, right heart size and pulmonary regurgitant velocity as supporting evidence."
+   },
+   {
+    "en": "Reporting a faint partial envelope as the pressure. Fix: Try the next window and optimise gain. The true peak lives where alignment is best, and underreading hides hypertension."
+   },
+   {
+    "en": "Tracing gain noise above the true peak. Fix: Trace the dense modal edge only. Feathering and noise sit above the true peak."
+   },
+   {
+    "en": "Skipping the jet because colour looks trivial. Fix: A loud murmur with a tiny jet can still carry high velocity, so chase the signal rather than the colour size."
+   },
+   {
+    "en": "Trusting the peak in torrential tricuspid regurgitation. Fix: Severe free tricuspid regurgitation equalises pressures early and blunts the peak, so read pressure with the clinical picture."
+   },
+   {
+    "en": "Systolic pulmonary pressure formula. 4 times tricuspid velocity squared plus right atrial pressure. Source: ASE right heart assessment, section on pulmonary pressures"
+   },
+   {
+    "en": "Tricuspid velocity suggesting pulmonary hypertension. Peak velocity above 2.8 m per s deserves further assessment. Source: ASE and EACVI 2016 diastolic function, section on pulmonary pressures, and ESC pulmonary hypertension guidance, in own words"
+   },
+   {
+    "en": "Right atrial pressure terms. About 3, 8 or 15 mmHg from caval size with sniff collapse. Source: ASE right heart assessment, section on inferior vena cava and right atrial pressure"
+   },
+   {
+    "en": "Supporting mean pressure clue. Pulmonary regurgitant end diastolic velocity plus atrial pressure estimates diastolic pressure. Source: ASE right heart assessment, section on pulmonary regurgitation"
+   },
+   {
+    "en": "Agitated saline or contrast sharpens a faint envelope when pressure matters for a decision."
+   },
+   {
+    "en": "High cardiac output raises velocity without vascular disease, so read pressure with flow state."
+   },
+   {
+    "en": "Serial estimates need the same window and rhythm, or trends mislead."
+   }
+  ],
+  "analogy": {
+   "en": "Dense tricuspid envelope with a sharp modal peak"
+  }
+ },
+ "spot": [
+  {
+   "en": "Dense tricuspid envelope with a sharp modal peak"
+  },
+  {
+   "en": "Colour jet direction matching the Doppler interrogation line"
+  },
+  {
+   "en": "Caval size and collapse recorded for the atrial pressure term"
+  },
+  {
+   "en": "D shaped septum flattening when pressure overloads the right side"
+  },
+  {
+   "en": "Pulmonary regurgitant jet for the mean pressure cross check"
+  },
+  {
+   "en": "Figure: Right ventricle focused view showing septal flattening under pressure load View tte_a4c_rv_focus"
+  }
+ ],
+ "todo": [
+  {
+   "en": "Record the best tricuspid envelope from every window"
+  },
+  {
+   "en": "Combine the velocity with caval right atrial pressure"
+  },
+  {
+   "en": "Apply the 2.8 threshold for further assessment"
+  },
+  {
+   "en": "Support the number with septal shape and right heart size"
+  }
+ ],
+ "remember": {
+  "en": "Support the number with septal shape and right heart size"
+ },
+ "check": [
+  {
+   "q": {
+    "en": "How is systolic pulmonary pressure estimated?"
+   },
+   "o": [
+    {
+     "en": "Peak velocity divided by two"
+    },
+    {
+     "en": "Atrial pressure minus 4 v squared"
+    },
+    {
+     "en": "4 times velocity squared plus atrial pressure"
+    },
+    {
+     "en": "Mean gradient times heart rate"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "The tricuspid peak gives the ventriculo atrial drop as 4 v squared, and adding right atrial pressure from the cava yields systolic pulmonary pressure."
+   }
+  },
+  {
+   "q": {
+    "en": "Which tricuspid velocity triggers pulmonary hypertension assessment?"
+   },
+   "o": [
+    {
+     "en": "Below 2.0 m per s"
+    },
+    {
+     "en": "Above 2.8 m per s"
+    },
+    {
+     "en": "Above 4.0 m per s"
+    },
+    {
+     "en": "Any detectable jet"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Above 2.8 m per s the probability of pulmonary hypertension rises enough to deserve full assessment."
+   }
+  },
+  {
+   "q": {
+    "en": "Which envelope gives the peak velocity?"
+   },
+   "o": [
+    {
+     "en": "The densest envelope with the sharpest peak"
+    },
+    {
+     "en": "The average of all windows"
+    },
+    {
+     "en": "The first envelope found"
+    },
+    {
+     "en": "The faint outer feathering"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "Only the best aligned densest envelope holds the true peak; averaging or tracing noise corrupts the estimate."
+   }
+  },
+  {
+   "q": {
+    "en": "An Indian patient shows raised pulmonary pressure with a D shaped septum and a huge left atrium. What fits best?"
+   },
+   "o": [
+    {
+     "en": "Aortic stenosis"
+    },
+    {
+     "en": "Rheumatic mitral stenosis with a D shaped septum"
+    },
+    {
+     "en": "Isolated left ventricular hypertrophy"
+    },
+    {
+     "en": "Athletic bradycardia"
+    }
+   ],
+   "a": 3,
+   "why": {
+    "en": "Long standing rheumatic mitral stenosis raises pulmonary venous then arterial pressure, flattening the septum and straining the right heart."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "measurements"
+ },
+ "sources": [
+  "ASE right heart assessment by Rudski and colleagues, sections on pulmonary pressures and right atrial pressure, in own words",
+  "ASE and EACVI 2016 diastolic function, section on pulmonary pressures, in own words"
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_a4c",
+ "objectives": [
+  "Record the best tricuspid envelope from every window",
+  "Combine the velocity with caval right atrial pressure",
+  "Apply the 2.8 threshold for further assessment",
+  "Support the number with septal shape and right heart size"
+ ]
+}

@@ -1,0 +1,203 @@
+{
+ "id": "pocus_ivc_protocol",
+ "unit": "pocus",
+ "level": "resident",
+ "levels": [
+  "resident",
+  "fellow",
+  "sonographer"
+ ],
+ "minutes": 5,
+ "title": {
+  "en": "IVC collapsibility and fluid responsiveness"
+ },
+ "idea": {
+  "en": "Measure and calculate cava collapsibility correctly"
+ },
+ "see": {
+  "diagram": "diagrams/pocus_ivc_protocol.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Cava measurement view of the fluid protocol"
+  },
+  "caption": {
+   "en": "Cava measurement view of the fluid protocol"
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "This protocol turns the cava view into a fluid decision. In a spontaneously brea"
+    },
+    "note": {
+     "en": "What you see: This protocol turns the cava view into a fluid decision. In a spontaneously breathing patient the cava collapses on inspiration when venous pressure is low and stays fixed and plump when pressure is high. A small cava with big collapse predicts that fluids will raise output, while a large fixed cava warns that more fluid may harm. The scan always pairs with lungs, blood pressure trend and examination, since no single vessel decides resuscitation alone."
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Inferior vena cava trunk at 1 to 2 cm from the junction, right atrium entry, bil"
+    },
+    "note": {
+     "en": "Landmarks to confirm: Inferior vena cava trunk at 1 to 2 cm from the junction, right atrium entry, bilateral lung zones for B line monitoring."
+    }
+   }
+  ],
+  "view": "pocus_ivc"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: This protocol turns the cava view into a fluid decision. In a spontaneously breathing patient the cava collapses on inspiration when venous pressure is low and stays fixed and plump when pressure is high. A small cava with big collapse predicts that fluids will raise output, while a large fixed cava warns that more fluid may harm. The scan always pairs with lungs, blood pressure trend and examination, since no single vessel decides resuscitation alone."
+   },
+   {
+    "en": "Landmarks to confirm: Inferior vena cava trunk at 1 to 2 cm from the junction, right atrium entry, bilateral lung zones for B line monitoring."
+   },
+   {
+    "en": "Common mistakes and correction: Measuring a hepatic branch instead of the trunk: track to the atrial entry first. Oblique beam overstating collapse: keep perpendicular. Applying the sniff rule to a ventilated patient: ventilation reverses the pattern, so seek senior guidance instead."
+   },
+   {
+    "en": "Normal values with units: Diameter 2.1 cm or less with collapse of 50 percent or more on sniff marks right atrial pressure of 0 to 5 mmHg and predicts fluid tolerance. Diameter above 2.1 cm with collapse below 50 percent marks pressure of 10 to 20 mmHg and warns against large volumes. New B lines after fluids mean stop even when the cava still collapses."
+   },
+   {
+    "en": "Pitfalls: Raised abdominal pressure, severe tricuspid regurgitation and right heart failure all distend the cava regardless of true volume. In circulatory failure with lung injury, even small volumes can wetten the lungs, so monitor breathing continuously. Record numbers with the clinical context so the reviewer sees the full picture."
+   }
+  ],
+  "analogy": {
+   "en": "What you see: This protocol turns the cava view into a fluid decision. In a spontaneously breathing patient the cava collapses on inspiration when venous pressure is low and stays fixed and plump when pressure is high. A small cava with big collapse predicts that fluids will raise output, while a large fixed cava warns that more fluid may harm. The scan always pairs with lungs, blood pressure trend and examination, since no single vessel decides resuscitation alone."
+  }
+ },
+ "spot": [
+  {
+   "en": "What you see: This protocol turns the cava view into a fluid decision. In a spontaneously breathing patient the cava collapses on inspiration when venous pressure is low and stays fixed and plump when pressure is high. A small cava with big collapse predicts that fluids will raise output, while a large fixed cava warns that more fluid may harm. The scan always pairs with lungs, blood pressure trend and examination, since no single vessel decides resuscitation alone."
+  },
+  {
+   "en": "Landmarks to confirm: Inferior vena cava trunk at 1 to 2 cm from the junction, right atrium entry, bilateral lung zones for B line monitoring."
+  },
+  {
+   "en": "Figure: Lung monitoring view of the fluid protocol View pocus_blue_upper"
+  }
+ ],
+ "todo": [
+  {
+   "en": "How to get it step by step: Obtain the cava in sagittal through the liver and measure 1 to 2 cm from the atrial junction. Record M mode across a full breath with a sniff. Calculate collapse as the fall in diameter over the maximum, expressed as a percent. Scan the lungs for B lines before and after any fluid challenge. Reassess the cava after each challenge and stop fluids when the collapse normalises or lungs wetten."
+  }
+ ],
+ "remember": {
+  "en": "Monitor lungs across every fluid challenge"
+ },
+ "check": [
+  {
+   "q": {
+    "en": "How is collapsibility calculated?"
+   },
+   "o": [
+    {
+     "en": "Peak over trough in any order"
+    },
+    {
+     "en": "Fall over maximum as a percent across a full breath with sniff"
+    },
+    {
+     "en": "Mean of two random frames"
+    },
+    {
+     "en": "Systolic over diastolic"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Collapse is the fall in diameter over the maximum across a full breath with sniff."
+   }
+  },
+  {
+   "q": {
+    "en": "Which pattern predicts fluid tolerance?"
+   },
+   "o": [
+    {
+     "en": "Large fixed cava"
+    },
+    {
+     "en": "Small cava with 50 percent or more collapse"
+    },
+    {
+     "en": "Aorta size"
+    },
+    {
+     "en": "Heart rate alone"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "A small cava collapsing 50 percent or more marks low venous pressure and fluid tolerance."
+   }
+  },
+  {
+   "q": {
+    "en": "New B lines appear after a fluid challenge. What next?"
+   },
+   "o": [
+    {
+     "en": "Stop fluids even when the cava still collapses"
+    },
+    {
+     "en": "Push on regardless"
+    },
+    {
+     "en": "Ignore the lungs"
+    },
+    {
+     "en": "Repeat the cava only"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "Wettening lungs mean stop even when the cava still collapses."
+   }
+  },
+  {
+   "q": {
+    "en": "The patient is ventilated. What changes?"
+   },
+   "o": [
+    {
+     "en": "Apply the sniff rule unchanged"
+    },
+    {
+     "en": "Give fluids blindly"
+    },
+    {
+     "en": "Use the aorta instead"
+    },
+    {
+     "en": "Seek senior guidance since ventilation reverses the pattern"
+    }
+   ],
+   "a": 3,
+   "why": {
+    "en": "Positive pressure ventilation reverses the breathing pattern, so the sniff rule does not apply directly."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "pocus"
+ },
+ "sources": [
+  "ASE 2019 guideline for the complete transthoracic examination, section on inferior vena cava and right atrial pressure",
+  "International POCUS consensus, section on volume assessment with the inferior vena cava"
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "pocus_ivc",
+ "objectives": [
+  "Measure and calculate cava collapsibility correctly",
+  "Apply the 2.1 cm and 50 percent thresholds to fluid decisions",
+  "Monitor lungs across every fluid challenge"
+ ]
+}

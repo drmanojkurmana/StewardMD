@@ -106,7 +106,7 @@
       return v;
     }
     if (!l || typeof l !== "object") return ["lesson: not an object"];
-    if (typeof l.id !== "string" || !/^[a-z0-9-]+$/.test(l.id)) e.push("id: lowercase letters, digits and hyphens");
+    if (typeof l.id !== "string" || !/^[a-z0-9_-]+$/.test(l.id)) e.push("id: lowercase letters, digits, hyphens and underscores");
     if (typeof l.unit !== "string" || !l.unit) e.push("unit: missing");
     if (l.level !== "mbbs" && l.level !== "resident") e.push("level: mbbs or resident");
     if (!(l.minutes > 0)) e.push("minutes: a positive number");
@@ -115,7 +115,7 @@
     if (!s || typeof s !== "object") e.push("see: missing");
     else {
       if (!s.img && !s.diagram) e.push("see: needs img or diagram");
-      if (s.diagram && !/^diagrams\/[a-z0-9-]+\.svg$/.test(s.diagram)) e.push("see.diagram: diagrams/<name>.svg");
+      if (s.diagram && !/^diagrams\/[a-z0-9_-]+\.svg$/.test(s.diagram)) e.push("see.diagram: diagrams/<name>.svg");
       if (s.diagram && !(s.w > 0 && s.h > 0)) e.push("see.w, see.h: the diagram's viewBox width and height");
       if (s.deckItem && (typeof s.deckItem.deck !== "string" || s.deckItem.id == null)) e.push("see.deckItem: {deck, id}");
       // see.more: extra pictures from the image library, shown under the main one (alt, caption, credit from credits.json)

@@ -1,0 +1,222 @@
+{
+ "id": "view_subcostal_aorta",
+ "unit": "views",
+ "level": "resident",
+ "levels": [
+  "resident",
+  "fellow",
+  "sonographer"
+ ],
+ "minutes": 5,
+ "title": {
+  "en": "Subcostal abdominal aorta long axis"
+ },
+ "idea": {
+  "en": "Find the abdominal aorta in the midline epigastrium."
+ },
+ "see": {
+  "diagram": "diagrams/view_subcostal_aorta.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Echo Lab render of the Subcostal abdominal aorta long axis. Use the spine shadow as your landmark for the midline aorta."
+  },
+  "caption": {
+   "en": "Echo Lab render of the Subcostal abdominal aorta long axis. Use the spine shadow as your landmark for the midline aorta."
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Abdominal aorta"
+    },
+    "note": {
+     "en": "Landmarks to confirm: Abdominal aorta"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Thoracic spine shadow"
+    },
+    "note": {
+     "en": "Thoracic spine shadow"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Mistaking the inferior vena cava for the aorta. Correct it by watching a full br"
+    },
+    "note": {
+     "en": "Common mistakes and how to correct them: Mistaking the inferior vena cava for the aorta. Correct it by watching a full breath, since the aorta keeps its calibre while the cava changes."
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Spine shadow hiding the far wall. Correct it by angling slightly off midline unt"
+    },
+    "note": {
+     "en": "Spine shadow hiding the far wall. Correct it by angling slightly off midline until the far wall clears the shadow."
+    }
+   }
+  ],
+  "view": "tte_subcostal_aorta"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: The aorta runs as a thick walled pulsing tube just left of midline over the spine shadow, giving branches forward. It pulses with every beat and never collapses with a sniff."
+   },
+   {
+    "en": "Landmarks to confirm: Do not accept the view until each of these is on screen."
+   },
+   {
+    "en": "Common mistakes and how to correct them: Each mistake below comes from the view catalogue with its correction."
+   },
+   {
+    "en": "Normal values: Abdominal aorta 30 mm or more in diameter is aneurysmal and needs referral."
+   },
+   {
+    "en": "Measure maximum diameter perpendicular to the vessel, wall to wall."
+   },
+   {
+    "en": "Offer one time ultrasound screening to men aged 65 to 75 who have ever smoked."
+   },
+   {
+    "en": "Pitfalls: Tortuosity with age makes the aorta dive in and out of plane, so follow it from the diaphragm to the bifurcation before ruling out aneurysm. Mural thrombus lines the wall in aneurysms; measure wall to wall, not lumen to lumen."
+   }
+  ],
+  "analogy": {
+   "en": "Landmarks to confirm: Abdominal aorta"
+  }
+ },
+ "spot": [
+  {
+   "en": "Landmarks to confirm: Abdominal aorta"
+  },
+  {
+   "en": "Thoracic spine shadow"
+  },
+  {
+   "en": "Common mistakes and how to correct them: Mistaking the inferior vena cava for the aorta. Correct it by watching a full breath, since the aorta keeps its calibre while the cava changes."
+  },
+  {
+   "en": "Spine shadow hiding the far wall. Correct it by angling slightly off midline until the far wall clears the shadow."
+  },
+  {
+   "en": "Off midline cut that understates diameter. Correct it by sweeping side to side and keeping the largest diameter found."
+  }
+ ],
+ "todo": [
+  {
+   "en": "How to get it: Place the probe at midline epigastrium, sagittal through the aortic pulsation."
+  },
+  {
+   "en": "Point the probe marker toward the head, about twelve o clock."
+  },
+  {
+   "en": "Press sagittal in the midline and use the visible spine shadow as your landmark. If the vessel collapses, it is the cava; slide left to find the aorta."
+  },
+  {
+   "en": "Freeze the image only when every listed landmark is on screen at once."
+  }
+ ],
+ "remember": {
+  "en": "Measure maximum diameter for aneurysm screening."
+ },
+ "check": [
+  {
+   "q": {
+    "en": "Maximum diameter is 34 mm. What is this?"
+   },
+   "o": [
+    {
+     "en": "Normal aorta"
+    },
+    {
+     "en": "Aneurysm needing referral"
+    },
+    {
+     "en": "Tortuosity only"
+    },
+    {
+     "en": "Dissection"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "At 30 mm or more the aorta is aneurysmal by definition."
+   }
+  },
+  {
+   "q": {
+    "en": "Where do the callipers go for aneurysm size?"
+   },
+   "o": [
+    {
+     "en": "Lumen to lumen"
+    },
+    {
+     "en": "Wall to wall at maximum diameter"
+    },
+    {
+     "en": "Inner edge only"
+    },
+    {
+     "en": "At the branch mouth"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Wall to wall maximum diameter includes thrombus and avoids understating size."
+   }
+  },
+  {
+   "q": {
+    "en": "Which patients merit one time screening?"
+   },
+   "o": [
+    {
+     "en": "All adults over 40"
+    },
+    {
+     "en": "Men 65 to 75 who have ever smoked"
+    },
+    {
+     "en": "Women over 50"
+    },
+    {
+     "en": "Children"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "One time screening targets men 65 to 75 with a smoking history."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "views"
+ },
+ "sources": [
+  "ASE 2019 guideline for the complete transthoracic examination, subcostal views section.",
+  "ACC and AHA aortic disease guidance, abdominal aorta section.",
+  "Preventive task force guidance on aneurysm screening, one time ultrasound section."
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_subcostal_aorta",
+ "objectives": [
+  "Find the abdominal aorta in the midline epigastrium.",
+  "Tell aorta from cava by pulse and collapse.",
+  "Measure maximum diameter for aneurysm screening."
+ ]
+}

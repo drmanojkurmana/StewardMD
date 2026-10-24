@@ -8,7 +8,7 @@
   "use strict";
   var V = "krd1";
   var CSS = ["specialty.css", "kardia.css"];
-  var JS = ["specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "kardia-flags.js", "kardia.js"];
+  var JS = ["specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "specialty-learn.js", "specialty-bank.js", "kardia-flags.js", "kardia.js"];
   var loading = null;
 
   function enabled() {

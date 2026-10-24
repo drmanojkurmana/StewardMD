@@ -1,0 +1,230 @@
+{
+ "id": "view_a2c",
+ "unit": "views",
+ "level": "mbbs",
+ "levels": [
+  "mbbs",
+  "resident",
+  "sonographer"
+ ],
+ "minutes": 5,
+ "title": {
+  "en": "Apical two chamber"
+ },
+ "idea": {
+  "en": "Rotate sixty degrees from the four chamber to face the anterior and inferior walls."
+ },
+ "see": {
+  "diagram": "diagrams/view_a2c.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Echo Lab render of the Apical two chamber. Rotate sixty degrees with the apex anchored and longest."
+  },
+  "caption": {
+   "en": "Echo Lab render of the Apical two chamber. Rotate sixty degrees with the apex anchored and longest."
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Cavity of left ventricle"
+    },
+    "note": {
+     "en": "Landmarks to confirm: Cavity of left ventricle"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Cavity of left atrium"
+    },
+    "note": {
+     "en": "Cavity of left atrium"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Anterior leaflet of mitral valve"
+    },
+    "note": {
+     "en": "Anterior leaflet of mitral valve"
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Posterior leaflet of mitral valve"
+    },
+    "note": {
+     "en": "Posterior leaflet of mitral valve"
+    }
+   }
+  ],
+  "view": "tte_a2c"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: The left ventricle and left atrium stand alone with the anterior wall above and the inferior wall below. No right heart should be on screen; the right ventricle creeping in means over rotation."
+   },
+   {
+    "en": "Landmarks to confirm: Do not accept the view until each of these is on screen."
+   },
+   {
+    "en": "Common mistakes and how to correct them: Each mistake below comes from the view catalogue with its correction."
+   },
+   {
+    "en": "Normal values: Left ventricular ejection fraction 55 percent or more is normal, below 30 percent is severely reduced."
+   },
+   {
+    "en": "Trace endocardium at end diastole and end systole in both the four and two chamber for biplane Simpson ejection fraction."
+   },
+   {
+    "en": "Report wall motion with the 17 segment model of the left ventricle."
+   },
+   {
+    "en": "Pitfalls: The anterior wall drops out at depth in large patients, so shift focus there before judging motion. The left atrial appendage may flicker at the edge; do not mistake it for a pulmonary vein."
+   }
+  ],
+  "analogy": {
+   "en": "Landmarks to confirm: Cavity of left ventricle"
+  }
+ },
+ "spot": [
+  {
+   "en": "Landmarks to confirm: Cavity of left ventricle"
+  },
+  {
+   "en": "Cavity of left atrium"
+  },
+  {
+   "en": "Anterior leaflet of mitral valve"
+  },
+  {
+   "en": "Posterior leaflet of mitral valve"
+  },
+  {
+   "en": "Left ventricular apex"
+  },
+  {
+   "en": "Common mistakes and how to correct them: Aorta creeping into view from too anterior a rotation. Correct it by rotating slightly back toward the four chamber until the aorta clears."
+  },
+  {
+   "en": "Foreshortened apex hiding true length. Correct it by rechecking length against the four chamber and moving the probe if shorter."
+  },
+  {
+   "en": "Right ventricle in view meaning rotation has gone too far. Correct it by rotating back clockwise until only left heart fills the screen."
+  }
+ ],
+ "todo": [
+  {
+   "en": "How to get it: Place the probe at apex, fifth intercostal space, rotated about sixty degrees from four chamber."
+  },
+  {
+   "en": "Point the probe marker toward the left, about three o clock."
+  },
+  {
+   "en": "Anchor on the apex and rotate sixty degrees anticlockwise while watching the right heart leave the screen. Keep the apex at its longest through the turn."
+  },
+  {
+   "en": "Freeze the image only when every listed landmark is on screen at once."
+  }
+ ],
+ "remember": {
+  "en": "Check the left atrium and its appendage region."
+ },
+ "check": [
+  {
+   "q": {
+    "en": "Which walls does the two chamber show?"
+   },
+   "o": [
+    {
+     "en": "Septal and lateral"
+    },
+    {
+     "en": "Anterior and inferior"
+    },
+    {
+     "en": "Anteroseptal and inferolateral"
+    },
+    {
+     "en": "Inferior and inferolateral"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "The two chamber faces the anterior wall above and the inferior wall below."
+   }
+  },
+  {
+   "q": {
+    "en": "Why pair the four and two chamber for function?"
+   },
+   "o": [
+    {
+     "en": "For colour comparison"
+    },
+    {
+     "en": "For biplane Simpson ejection fraction"
+    },
+    {
+     "en": "For valve area"
+    },
+    {
+     "en": "For pressure estimates"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Two orthogonal planes traced at end diastole and end systole give biplane volumes."
+   }
+  },
+  {
+   "q": {
+    "en": "Right ventricle appears in the two chamber. What happened?"
+   },
+   "o": [
+    {
+     "en": "Under rotation"
+    },
+    {
+     "en": "Over rotation past sixty degrees"
+    },
+    {
+     "en": "Too much gain"
+    },
+    {
+     "en": "Wrong window"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Right heart on screen means the turn went too far, so rotate back."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "views"
+ },
+ "sources": [
+  "ASE 2019 guideline for the complete transthoracic examination, apical views section.",
+  "ASE 2015 chamber quantification guideline, left ventricular function section."
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_a2c",
+ "objectives": [
+  "Rotate sixty degrees from the four chamber to face the anterior and inferior walls.",
+  "Pair it with the four chamber for biplane function.",
+  "Check the left atrium and its appendage region."
+ ]
+}

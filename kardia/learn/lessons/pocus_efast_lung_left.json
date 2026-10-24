@@ -1,0 +1,178 @@
+{
+ "id": "pocus_efast_lung_left",
+ "unit": "pocus",
+ "level": "mbbs",
+ "levels": [
+  "mbbs",
+  "resident",
+  "fellow",
+  "sonographer"
+ ],
+ "minutes": 5,
+ "title": {
+  "en": "eFAST lung left"
+ },
+ "idea": {
+  "en": "Mirror the sliding assessment on the left chest"
+ },
+ "see": {
+  "diagram": "diagrams/pocus_efast_lung_left.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "eFAST left lung sliding as rendered by the Echo Lab from this lesson"
+  },
+  "caption": {
+   "en": "eFAST left lung sliding as rendered by the Echo Lab from this lesson"
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "ribs cast paired shadows with the bright pleural line sliding between them. Hear"
+    },
+    "note": {
+     "en": "What you see: The left chest mirrors the right: ribs cast paired shadows with the bright pleural line sliding between them. Heart motion may shimmer at the medial edge, which is normal and should not be mistaken for lung pathology. As on the right, M mode shows seashore when sliding is present and stratosphere when it is absent. Comparing left with right in the same breath phase is the core skill of this view."
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Rib shadows on either side, pleural line between them, lung below the line, comp"
+    },
+    "note": {
+     "en": "Landmarks to confirm: Rib shadows on either side, pleural line between them, lung below the line, comparison with the right sided findings."
+    }
+   }
+  ],
+  "view": "pocus_efast_lung_left"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: The left chest mirrors the right: ribs cast paired shadows with the bright pleural line sliding between them. Heart motion may shimmer at the medial edge, which is normal and should not be mistaken for lung pathology. As on the right, M mode shows seashore when sliding is present and stratosphere when it is absent. Comparing left with right in the same breath phase is the core skill of this view."
+   },
+   {
+    "en": "Landmarks to confirm: Rib shadows on either side, pleural line between them, lung below the line, comparison with the right sided findings."
+   },
+   {
+    "en": "Common mistakes and correction: Calling cardiac shimmer at the medial edge a lung point: the true lung point moves with breath along the chest wall. Judging one side without comparing: always record both sides. Mistaking absent sliding from breath holding for pneumothorax: watch a full deep breath before judging."
+   },
+   {
+    "en": "Normal values with units: No numeric threshold applies. In health sliding matches the right side with a seashore pattern in M mode. New asymmetry with a lung point on one side marks pneumothorax and needs urgent senior review."
+   },
+   {
+    "en": "Pitfalls: Left sided heart shimmer confuses beginners, so learn its medial position and cardiac rhythm. Subcutaneous emphysema scatters the beam and can hide the line, so record the limitation. In ventilated patients confirm tube position clinically as well, since the scan guides but never replaces the primary survey."
+   }
+  ],
+  "analogy": {
+   "en": "What you see: The left chest mirrors the right: ribs cast paired shadows with the bright pleural line sliding between them. Heart motion may shimmer at the medial edge, which is normal and should not be mistaken for lung pathology. As on the right, M mode shows seashore when sliding is present and stratosphere when it is absent. Comparing left with right in the same breath phase is the core skill of this view."
+  }
+ },
+ "spot": [
+  {
+   "en": "What you see: The left chest mirrors the right: ribs cast paired shadows with the bright pleural line sliding between them. Heart motion may shimmer at the medial edge, which is normal and should not be mistaken for lung pathology. As on the right, M mode shows seashore when sliding is present and stratosphere when it is absent. Comparing left with right in the same breath phase is the core skill of this view."
+  },
+  {
+   "en": "Landmarks to confirm: Rib shadows on either side, pleural line between them, lung below the line, comparison with the right sided findings."
+  }
+ ],
+ "todo": [
+  {
+   "en": "How to get it step by step: Mirror the right sided technique on the left front chest with the marker toward the head. Find the pleural line in a rib space and watch a full breath. Record M mode through the line. Slide to search for a lung point if sliding is absent. Always compare with the right side findings before concluding, since asymmetry is the key sign in trauma."
+  }
+ ],
+ "remember": {
+  "en": "Judge asymmetry against the right side"
+ },
+ "check": [
+  {
+   "q": {
+    "en": "What is the core comparison in bilateral lung assessment?"
+   },
+   "o": [
+    {
+     "en": "Ignore the left side when the right is normal"
+    },
+    {
+     "en": "Compare left with right in the same breath phase"
+    },
+    {
+     "en": "Scan the left only after CT"
+    },
+    {
+     "en": "Scan only the apex"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Asymmetry between sides in the same breath phase is the key sign."
+   }
+  },
+  {
+   "q": {
+    "en": "Rhythmic shimmer appears at the medial left edge. What is it?"
+   },
+   "o": [
+    {
+     "en": "A pneumothorax at once"
+    },
+    {
+     "en": "A rib fracture"
+    },
+    {
+     "en": "Normal cardiac shimmer at the medial edge"
+    },
+    {
+     "en": "Consolidation"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "Heart motion shimmers at the medial edge and is normal."
+   }
+  },
+  {
+   "q": {
+    "en": "Sliding looks absent on one side. What next?"
+   },
+   "o": [
+    {
+     "en": "Watch a full deep breath and search for a lung point"
+    },
+    {
+     "en": "Call pneumothorax at once"
+    },
+    {
+     "en": "Abandon the scan"
+    },
+    {
+     "en": "Increase depth to maximum"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "Absent sliding has several causes, so confirm across a full breath and find the lung point."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "pocus"
+ },
+ "sources": [
+  "ACEP emergency ultrasound guidelines, section on eFAST and pneumothorax",
+  "International POCUS consensus, section on lung ultrasound for pneumothorax"
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "pocus_efast_lung_left",
+ "objectives": [
+  "Mirror the sliding assessment on the left chest",
+  "Separate cardiac shimmer from true lung findings",
+  "Judge asymmetry against the right side"
+ ]
+}

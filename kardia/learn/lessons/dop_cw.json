@@ -1,0 +1,278 @@
+{
+ "id": "dop_cw",
+ "unit": "doppler",
+ "level": "resident",
+ "levels": [
+  "resident",
+  "fellow",
+  "sonographer"
+ ],
+ "minutes": 8,
+ "title": {
+  "en": "Continuous wave Doppler physics"
+ },
+ "idea": {
+  "en": "Explain why continuous wave has no aliasing and no depth information"
+ },
+ "see": {
+  "diagram": "diagrams/dop_cw.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Apical five chamber line along the aortic jet for the peak envelope"
+  },
+  "caption": {
+   "en": "Apical five chamber line along the aortic jet for the peak envelope"
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Dense complete envelope with a sharp modal peak"
+    },
+    "note": {
+     "en": "Dense complete envelope with a sharp modal peak"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Highest velocity among all interrogated windows"
+    },
+    "note": {
+     "en": "Highest velocity among all interrogated windows"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Colour jet direction matching the Doppler line"
+    },
+    "note": {
+     "en": "Colour jet direction matching the Doppler line"
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Aortic valve calcification and doming on the two dimensional image behind an aor"
+    },
+    "note": {
+     "en": "Aortic valve calcification and doming on the two dimensional image behind an aortic jet"
+    }
+   }
+  ],
+  "view": "tte_a5c"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "Continuous wave Doppler trades place for speed. It listens along the whole beam at once, so there is no sample volume and no Nyquist limit, and the fastest jet anywhere on the line is recorded faithfully. That makes it the tool for stenotic valves, regurgitant jets and septal defects, where velocities run far past the pulsed wave range. The cost is range ambiguity: the trace cannot say where along the line the fastest flow lives, so window, alignment and the shape of the envelope do the localising."
+   },
+   {
+    "en": "Find the jet direction on colour and two dimensional imaging first, then align the continuous wave line along it."
+   },
+   {
+    "en": "Interrogate from every window that faces the jet: apex, suprasternal and right parasternal for aortic stenosis."
+   },
+   {
+    "en": "Record the densest envelope with the sharpest peak and the highest velocity, and keep it."
+   },
+   {
+    "en": "Trace the outer edge of the dense envelope for peak velocity and the mean gradient, not the faint feathering."
+   },
+   {
+    "en": "Set gain so the envelope is bright and complete but the background stays dark."
+   },
+   {
+    "en": "Compare velocities across windows and report the highest well formed envelope."
+   },
+   {
+    "en": "Accepting the first low velocity from the apex only. Fix: Try the next window. Missing the true peak underreads the gradient and understages stenosis, and the right parasternal window often wins."
+   },
+   {
+    "en": "Tracing gain noise as the envelope peak. Fix: Turn gain down and raise the wall filter slightly until only the true envelope remains."
+   },
+   {
+    "en": "Off axis line giving a faint incomplete envelope. Fix: A jet caught across its edge looks weak and late peaking. Realign along the colour jet until the envelope is dense and early peaking."
+   },
+   {
+    "en": "Mixing outflow signal into a stenotic jet. Fix: Move the line fully into the jet and out of the outflow. Contamination fills in the window and fakes a gradient."
+   },
+   {
+    "en": "Normal aortic valve peak velocity. Usually below 2 m per s in a normal valve. Source: ASE and EACVI 2017 stenosis, section on normal versus stenotic velocities"
+   },
+   {
+    "en": "Severe aortic stenosis thresholds. Peak velocity 4 m per s or more with mean gradient 40 mmHg or more. Source: ASE and EACVI 2017 stenosis, section on severity grading"
+   },
+   {
+    "en": "Windows for the aortic jet. Apex, suprasternal notch and right parasternal; report the highest velocity. Source: ASE 2019 transthoracic examination, section on aortic stenosis interrogation"
+   },
+   {
+    "en": "What continuous wave cannot tell you. Depth of origin; it records the fastest flow anywhere along the line. Source: ASE 2019 transthoracic examination, section on continuous wave Doppler"
+   },
+   {
+    "en": "Pressure recovery makes catheter gradients lower than Doppler peaks in small aortas, so index and measure the root before disputing the catheter."
+   },
+   {
+    "en": "Atrial fibrillation varies the peak beat to beat, so average several envelopes."
+   },
+   {
+    "en": "A double envelope in the line means two jets share the beam; separate them with colour guidance before tracing."
+   }
+  ],
+  "analogy": {
+   "en": "Dense complete envelope with a sharp modal peak"
+  }
+ },
+ "spot": [
+  {
+   "en": "Dense complete envelope with a sharp modal peak"
+  },
+  {
+   "en": "Highest velocity among all interrogated windows"
+  },
+  {
+   "en": "Colour jet direction matching the Doppler line"
+  },
+  {
+   "en": "Aortic valve calcification and doming on the two dimensional image behind an aortic jet"
+  },
+  {
+   "en": "Quiet background without mirror or noise filling"
+  }
+ ],
+ "todo": [
+  {
+   "en": "Explain why continuous wave has no aliasing and no depth information"
+  },
+  {
+   "en": "Interrogate a stenotic jet from every useful window"
+  },
+  {
+   "en": "Trace peak velocity and mean gradient on the envelope"
+  },
+  {
+   "en": "Apply severity thresholds for aortic stenosis"
+  }
+ ],
+ "remember": {
+  "en": "Apply severity thresholds for aortic stenosis"
+ },
+ "check": [
+  {
+   "q": {
+    "en": "What does a continuous wave trace record?"
+   },
+   "o": [
+    {
+     "en": "A chosen sample volume depth"
+    },
+    {
+     "en": "The fastest flow anywhere along the beam line"
+    },
+    {
+     "en": "Mean pressure in the chamber"
+    },
+    {
+     "en": "Wall motion at the annulus"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "With no range gating it listens along the whole line, so the trace shows the fastest flow found anywhere on it."
+   }
+  },
+  {
+   "q": {
+    "en": "Which windows interrogate suspected aortic stenosis?"
+   },
+   "o": [
+    {
+     "en": "Apical only"
+    },
+    {
+     "en": "Suprasternal only"
+    },
+    {
+     "en": "Right parasternal only"
+    },
+    {
+     "en": "All three, reporting the highest"
+    }
+   ],
+   "a": 3,
+   "why": {
+    "en": "The jet is eccentric and each window catches a different angle, so apex, suprasternal and right parasternal are all tried and the highest well formed envelope wins."
+   }
+  },
+  {
+   "q": {
+    "en": "Which pair marks severe aortic stenosis?"
+   },
+   "o": [
+    {
+     "en": "4 m per s or more with mean gradient 40 mmHg or more"
+    },
+    {
+     "en": "2 m per s or more with mean gradient 20 mmHg or more"
+    },
+    {
+     "en": "6 m per s or more regardless of gradient"
+    },
+    {
+     "en": "Any velocity above 1 m per s"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "The ASE and EACVI 2017 severity scheme sets severe at peak velocity 4 m per s or more with mean gradient 40 mmHg or more."
+   }
+  },
+  {
+   "q": {
+    "en": "What can continuous wave never report on its own?"
+   },
+   "o": [
+    {
+     "en": "The depth the peak came from"
+    },
+    {
+     "en": "The exact orifice shape"
+    },
+    {
+     "en": "The valve area directly"
+    },
+    {
+     "en": "The peak velocity and gradients"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "Range ambiguity means no depth information, so origin and area need imaging and the continuity equation alongside."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "doppler"
+ },
+ "sources": [
+  "ASE and EACVI 2017 aortic stenosis by Baumgartner and colleagues, sections on severity grading and velocity recording, in own words",
+  "ASE 2019 transthoracic examination by Mitchell and colleagues, section on continuous wave Doppler, in own words"
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_a5c",
+ "objectives": [
+  "Explain why continuous wave has no aliasing and no depth information",
+  "Interrogate a stenotic jet from every useful window",
+  "Trace peak velocity and mean gradient on the envelope",
+  "Apply severity thresholds for aortic stenosis"
+ ]
+}

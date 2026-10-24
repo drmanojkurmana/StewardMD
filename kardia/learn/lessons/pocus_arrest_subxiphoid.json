@@ -1,0 +1,177 @@
+{
+ "id": "pocus_arrest_subxiphoid",
+ "unit": "pocus",
+ "level": "resident",
+ "levels": [
+  "resident",
+  "fellow",
+  "sonographer"
+ ],
+ "minutes": 5,
+ "title": {
+  "en": "Cardiac arrest subxiphoid pulse check"
+ },
+ "idea": {
+  "en": "Pre position the probe so the pause holds only recording"
+ },
+ "see": {
+  "diagram": "diagrams/pocus_arrest_subxiphoid.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Cardiac arrest subxiphoid pulse check as rendered by the Echo Lab from this lesson"
+  },
+  "caption": {
+   "en": "Cardiac arrest subxiphoid pulse check as rendered by the Echo Lab from this lesson"
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "During the pulse check the subxiphoid window opens onto the beating or still hea"
+    },
+    "note": {
+     "en": "What you see: During the pulse check the subxiphoid window opens onto the beating or still heart. Organised cardiac motion with a pulse means return of circulation, while organised motion without a pulse is pulseless electrical activity. A still heart with no motion through the pause is asystole. Clotted blood inside a chamber can mimic wall motion, so motion must be judged across the full pause with the gain set fairly."
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Heart with four chambers where visible, pericardium, liver as the window, femora"
+    },
+    "note": {
+     "en": "Landmarks to confirm: Heart with four chambers where visible, pericardium, liver as the window, femoral or carotid pulse correlation by the bedside team."
+    }
+   }
+  ],
+  "view": "pocus_arrest_subxiphoid"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: During the pulse check the subxiphoid window opens onto the beating or still heart. Organised cardiac motion with a pulse means return of circulation, while organised motion without a pulse is pulseless electrical activity. A still heart with no motion through the pause is asystole. Clotted blood inside a chamber can mimic wall motion, so motion must be judged across the full pause with the gain set fairly."
+   },
+   {
+    "en": "Landmarks to confirm: Heart with four chambers where visible, pericardium, liver as the window, femoral or carotid pulse correlation by the bedside team."
+   },
+   {
+    "en": "Common mistakes and correction: Letting the scan prolong the pause beyond the limit: the probe must lift when time is called. Calling clot motion true wall motion: confirm organised contraction of the walls, not drifting echoes. Starting the scan only when compressions stop: pre position during compressions so the pause holds only recording."
+   },
+   {
+    "en": "Normal values with units: The pause limit is 10 seconds or less from stop to restart of compressions. Reversible causes to seek on the scan are tamponade fluid, tension pneumothorax signs and profound empty chambers. No single scan finding alone decides stopping resuscitation."
+   },
+   {
+    "en": "Pitfalls: The scan must never delay compressions, drugs or defibrillation, so the team leader owns the clock. A poor window in a moving trolley case is common, so record the limitation instead of guessing. Share the clip with the team rather than whispering the finding to one member."
+   }
+  ],
+  "analogy": {
+   "en": "What you see: During the pulse check the subxiphoid window opens onto the beating or still heart. Organised cardiac motion with a pulse means return of circulation, while organised motion without a pulse is pulseless electrical activity. A still heart with no motion through the pause is asystole. Clotted blood inside a chamber can mimic wall motion, so motion must be judged across the full pause with the gain set fairly."
+  }
+ },
+ "spot": [
+  {
+   "en": "What you see: During the pulse check the subxiphoid window opens onto the beating or still heart. Organised cardiac motion with a pulse means return of circulation, while organised motion without a pulse is pulseless electrical activity. A still heart with no motion through the pause is asystole. Clotted blood inside a chamber can mimic wall motion, so motion must be judged across the full pause with the gain set fairly."
+  },
+  {
+   "en": "Landmarks to confirm: Heart with four chambers where visible, pericardium, liver as the window, femoral or carotid pulse correlation by the bedside team."
+  }
+ ],
+ "todo": [
+  {
+   "en": "How to get it step by step: Keep the probe ready on the belly during compressions without interrupting them. At the pause, place it subxiphoid flat and aimed at the left shoulder. Record a short clip of the heart through the pause. Call out what is seen in plain words: beating with pulse, motion without pulse, or still. Resume compressions the moment the pause limit is reached, then report the clip to the team leader."
+  }
+ ],
+ "remember": {
+  "en": "Hold every pause to 10 seconds or less"
+ },
+ "check": [
+  {
+   "q": {
+    "en": "What is the pause limit for the pulse check echo?"
+   },
+   "o": [
+    {
+     "en": "20 seconds"
+    },
+    {
+     "en": "10 seconds or less"
+    },
+    {
+     "en": "60 seconds"
+    },
+    {
+     "en": "No limit when the image is unclear"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Compressions must restart within 10 seconds, so the scan fits inside that pause."
+   }
+  },
+  {
+   "q": {
+    "en": "What is pulseless electrical activity on the scan?"
+   },
+   "o": [
+    {
+     "en": "Return of circulation"
+    },
+    {
+     "en": "Asystole"
+    },
+    {
+     "en": "Organised motion without a pulse"
+    },
+    {
+     "en": "Tamponade"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "Organised wall motion without a palpable pulse defines pulseless electrical activity."
+   }
+  },
+  {
+   "q": {
+    "en": "How is the pause kept within the limit?"
+   },
+   "o": [
+    {
+     "en": "Pre position during compressions and lift when time is called"
+    },
+    {
+     "en": "Start searching only after compressions stop"
+    },
+    {
+     "en": "Keep scanning until certain"
+    },
+    {
+     "en": "Delay drugs until the clip is reviewed"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "Pre positioning means the pause holds only recording, and lifting on time protects compressions."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "pocus"
+ },
+ "sources": [
+  "ACEP emergency ultrasound guidelines, section on ultrasound in cardiac arrest",
+  "International POCUS consensus, section on pulse check echo with minimised pauses"
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "pocus_arrest_subxiphoid",
+ "objectives": [
+  "Pre position the probe so the pause holds only recording",
+  "Separate beating heart, pulseless activity and asystole",
+  "Hold every pause to 10 seconds or less"
+ ]
+}
