@@ -20,13 +20,14 @@
       acts: ["startcase", "reasoning", "askai", "drugmenu", "calculators", "dosecalc", "dosing", "insulin", "electrolytes",
         "interactions", "syndromes", "antibiogram", "neo", "icu", "speckit", "docs", "dictate", "icdsearch"] },
     { role: "resident", tt: "Residents", sub: "Specialty and training",
-      acts: ["pglog", "surgx", "staging", "oncohome", "oncotree", "retinalscan", "kardiox", "thorex", "sknx", "ward", "hospital", "kxinbox"] },
+      acts: ["pglog", "surgx", "staging", "oncohome", "oncotree", "retinalscan", "kardia", "kardiox", "thorex", "sknx", "ward", "hospital", "kxinbox"] },
     { role: "doctor", tt: "Doctors", sub: "Practice and clinic",
       acts: ["followcare", "maitri", "queue", "agentconnect", "review", "govschemes"] }
   ];
   // What each tool does, in one line, for the All tools list. Plain words, no dashes.
   var DESC = {
     retinalscan: "AI reading of a retinal photo. Beta, not yet validated.",
+    kardia: "Echo and ECG learning with a simulator, atlas and cases.",
     kardiox: "AI reading of an ECG. Beta, not yet validated.",
     thorex: "AI reading of a chest X-ray. Beta, not yet validated.",
     sknx: "AI look at a skin lesion photo. Beta, not yet validated.",
@@ -86,7 +87,7 @@
   var PACKS = {
     obgyn: ["tokos"], paediatrics: ["neo"], ophthalmology: ["ophthalmos", "retinalscan"], anaesthesia: ["narke", "electrolytes"],
     emergency: ["icu", "kardiox"], "general-surgery": ["surgx", "staging"], orthopaedics: ["surgx", "atlas"],
-    cardiology: ["kardiox", "kxlearn"], pulmonology: ["thorex"], dermatology: ["sknx"], "cancer-screening": ["oncotree", "staging"],
+    cardiology: ["kardia", "kardiox", "kxlearn"], pulmonology: ["thorex"], dermatology: ["sknx"], "cancer-screening": ["oncotree", "staging"],
     "diabetes-endocrine": ["insulin", "electrolytes"], "nephrology-urology": ["electrolytes", "dosecalc"], neurology: ["atlas"],
     "community-medicine": ["govschemes"]
   };

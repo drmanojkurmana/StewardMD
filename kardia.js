@@ -1,0 +1,223 @@
+/* Kardia: the Echo and ECG learning module, a StewardMD specialty host on the specialty engine
+   (specialty-*.js). Tabs: Echo Lab, Learn, Practice, Cases, KardiQ X. Echo Lab, Practice and Cases are
+   coming soon (WP8: honest placeholder panels, no fake content). Learn opens the existing Learn ECG
+   lesson atlas in place, unchanged (KARDIOX.openLearn). KardiQ X opens the existing AI reading screen,
+   still behind SMD_XACCESS.gate("kardiox"), untouched.
+   Loaded on first open by kardia-loader.js, which is the only Kardia file the app loads at boot.
+   Flag: smd_kardia, DEFAULT OFF for everyone; a tester turns it on per device with ?kardia=1 or
+   localStorage smd_kardia = "1" (same tester mechanism as the other module flags, no early-access tier).
+   Levels (engine pattern): MBBS free; Resident, Fellow and Sonographer are StewardMD Pro. The free
+   preview is the first KARDIA_FREE_LESSONS Learn ECG lessons; everything else is Pro.
+   Content is ai_drafted: every screen carries the "To be verified, draft" footer until clinical review. */
+(function (G) {
+  "use strict";
+  var SP = G.SPECIALTY;
+  if (!SP || !SP.createHost) return;
+
+  /* Free preview: the first few Learn ECG lessons. Owner decision 2026-10-25 (about 5 to 10 percent):
+     a few Echo Lab views and lessons, and a few Learn ECG lessons. Everything else is Pro. */
+  var FREE_LESSONS = 5;
+  var TABS = ["echo", "learn", "practice", "cases", "kardiox"];
+  var LEVELS = ["mbbs", "resident", "fellow", "sonographer"];
+
+  function T(en, hi) { return { en: en, hi: hi }; }
+  var TAB_T = {
+    echo: T("Echo Lab", "इको लैब"), learn: T("Learn", "सीखें"), practice: T("Practice", "अभ्यास"),
+    cases: T("Cases", "केस"), kardiox: T("KardiQ X", "KardiQ X")
+  };
+  var TAB_SUB = {
+    echo: T("Probe lab and views", "प्रोब लैब और व्यू"),
+    learn: T("Learn ECG: the ECG atlas and quiz", "Learn ECG: ECG एटलस और प्रश्नोत्तरी"),
+    practice: T("Drills and protocols", "ड्रिल और प्रोटोकॉल"),
+    cases: T("Whole patient cases", "पूरे मरीज़ के केस"),
+    kardiox: T("AI ECG reading", "AI ECG रीडिंग")
+  };
+
+  var host = SP.createHost({
+    id: "kardia", global: "KARDIA", base: G.SMD_KARDIA_BASE || "/kardia/", rootId: "smdKardia", rootClass: "krd-root",
+    storeKey: "smd_kardia_v1", prefKey: "smd_kardia_prefs", flag: "smd_kardia",
+    title: T("Kardia", "कार्डिया"), subtitle: T("Echo and ECG learning", "इको और ECG सीखना"),
+    levels: { free: ["mbbs"] }, proFeature: "kardia",
+    statusBg: "#06090b", draft: true
+  });
+  var I = host._internal, st = host._st;
+
+  /* The engine's enabled() is a kill switch (absent flag reads ON). Kardia is opt-in: absent flag
+     reads OFF, the same tester mechanism (?kardia=1, localStorage "1") as the other module flags. */
+  function on() {
+    try { if (G.SMD_KARDIA_FLAGS && G.SMD_KARDIA_FLAGS.bool) return !!G.SMD_KARDIA_FLAGS.bool("smd_kardia"); } catch (e) {}
+    try {
+      var q = (G.location.search.match(/[?&]kardia=([^&]+)/) || [])[1];
+      if (q != null) return q === "1" || q === "on" || q === "true";
+      return G.localStorage.getItem("smd_kardia") === "1";
+    } catch (e) { return false; }
+  }
+
+  function tab() { var t = st.prefs && st.prefs.ktab; return TABS.indexOf(t) >= 0 ? t : "echo"; }
+  function klevel() { var l = st.prefs && st.prefs.klevel; return LEVELS.indexOf(l) >= 0 ? l : "mbbs"; }
+  function levelLockedK(lv) { return lv !== "mbbs" && !I.isPro(); }
+
+  function tabsHtml(cur) {
+    return '<div class="krd-tabs" role="tablist" aria-label="' + I.esc(I.t(host.cfg.title)) + '">' + TABS.map(function (id) {
+      return '<button type="button" role="tab" class="krd-tab" data-act="ktab" data-t="' + id + '"' +
+        ' aria-selected="' + (id === cur) + '">' + I.tx(TAB_T[id]) + "</button>";
+    }).join("") + "</div>";
+  }
+
+  function levelsHtml(lv) {
+    var seg = LEVELS.map(function (l) {
+      var locked = levelLockedK(l);
+      var label = l === "mbbs" ? "MBBS" : l === "resident" ? I.s("resident") : l === "fellow" ? "Fellow" : "Sonographer";
+      return '<button type="button" data-act="klevel" data-v="' + l + '" aria-pressed="' + (lv === l) + '">' + I.esc(label) +
+        (locked ? ' <span class="sp-pro">' + I.ico("lock") + I.s("pro") + "</span>" : "") + "</button>";
+    }).join("");
+    var note = lv === "mbbs" ? I.s("mbbsSub") : I.s("residentSub");
+    return '<div class="sp-levelrow"><div class="sp-seg" role="group" aria-label="' + I.s("level") + '">' + seg + "</div>" +
+      '<span class="sp-small">' + note + "</span></div>";
+  }
+
+  /* Coming soon: an honest panel. What the trainer will hold, in plain words; no fake lessons,
+     no demo buttons, nothing that looks finished before it is. */
+  var SOON = {
+    echo: {
+      icon: "pulse",
+      lines: T("The probe lab opens here: a beating 3D heart with a live ultrasound sector, the ECG strip and the heart sounds running off the same cycle. Target views with a quality score, from parasternal to apical, then knobology, Doppler and measurements with a known right answer.",
+        "यहाँ प्रोब लैब खुलेगी: धड़कता 3D दिल, लाइव अल्ट्रासाउंड सेक्टर, ECG स्ट्रिप और हृदय ध्वनियाँ एक ही चक्र पर। पैरास्टर्नल से एपिकल तक लक्ष्य व्यू, फिर नॉबोलॉजी, डॉप्लर और ज्ञात सही उत्तर वाली माप।")
+    },
+    practice: {
+      icon: "target",
+      lines: T("Graded drills open here: view acquisition against the clock, measurement and Doppler drills, knobology drills, POCUS protocols, and ECG spot diagnosis.",
+        "यहाँ ग्रेडेड ड्रिल खुलेंगी: समय पर व्यू पकड़ना, माप और डॉप्लर ड्रिल, नॉबोलॉजी ड्रिल, POCUS प्रोटोकॉल और ECG स्पॉट निदान।")
+    },
+    cases: {
+      icon: "folder",
+      lines: T("Whole patient cases open here: history, examination with heart sounds, ECG, echo acquisition and measurement, a structured report, then diagnosis and management.",
+        "यहाँ पूरे मरीज़ के केस खुलेंगे: हिस्ट्री, हृदय ध्वनियों के साथ जाँच, ECG, इको, संरचित रिपोर्ट, फिर निदान और उपचार।")
+    }
+  };
+
+  function soonHtml(id) {
+    var s = SOON[id];
+    return '<div class="sp-scroll sp-pad"><div class="sp-col"><div class="krd-soon">' +
+      '<div class="krd-soon-hero"><span class="krd-soon-lead" aria-hidden="true">' + I.tile(s.icon) + "</span>" +
+      "<div><h2>" + I.tx(TAB_T[id]) + '</h2><p class="krd-soon-sub">' + I.tx(TAB_SUB[id]) + "</p></div></div>" +
+      '<p class="krd-note">' + I.ico("info") + "<span><b>" +
+      I.tx(T("Coming soon.", "जल्द आ रहा है।")) + "</b> " + I.tx(s.lines) + "</span></p>" +
+      '<p class="krd-note">' + I.ico("lock") + "<span>" +
+      I.tx(T("This trainer is part of StewardMD Pro.", "यह ट्रेनर StewardMD Pro का हिस्सा है।")) + "</span></p>" +
+      "</div></div></div>";
+  }
+
+  function learnList() {
+    try {
+      var C = G.SMD_KARDIOX_CONTENT;
+      if (C && C.ecgs && C.ecgs.length) return C.ecgs;
+    } catch (e) {}
+    return null;
+  }
+
+  function lessonRows(list, n) {
+    return list.slice(0, n).map(function (e) {
+      return I.row("klearn", ' data-id="' + I.esc(e.id) + '"', I.tile("book"), I.esc(e.title),
+        e.category ? I.esc(e.category) : "", "");
+    }).join("");
+  }
+
+  function learnHtml() {
+    var list = learnList(), pro = I.isPro();
+    var head = '<p class="sp-small">' + I.tx(T("The Learn ECG atlas and quiz, with no AI. Your progress stays in Learn ECG. Atlas pictures need a connection the first time.",
+      "बिना AI वाला Learn ECG एटलस और प्रश्नोत्तरी। आपकी प्रगति Learn ECG में रहती है। एटलस की तस्वीरों को पहली बार कनेक्शन चाहिए।")) + "</p>";
+    if (!list || !list.length) {
+      return '<div class="sp-scroll sp-pad"><div class="sp-col">' + head +
+        '<div class="sp-err krd-err" role="alert"><p>' +
+        (!list
+          ? I.tx(T("Learn ECG did not load. Check the connection and try again.", "Learn ECG लोड नहीं हुआ। कनेक्शन जाँचें और फिर कोशिश करें।"))
+          : I.tx(T("No lessons yet. The atlas is being prepared.", "अभी कोई पाठ नहीं है। एटलस तैयार हो रहा है।"))) +
+        '</p><button type="button" class="sp-btn pri" data-act="kretry">' + I.ico("refresh") + " " + I.s("retry") + "</button></div></div></div>";
+    }
+    var free = lessonRows(list, FREE_LESSONS);
+    var rest = list.length > FREE_LESSONS
+      ? '<div class="krd-note">' + I.ico("lock") + "<span>" +
+        I.tx(T("Plus " + (list.length - FREE_LESSONS) + " more lessons in the full atlas. The full atlas is part of StewardMD Pro.",
+          "पूरे एटलस में " + (list.length - FREE_LESSONS) + " और पाठ। पूरा एटलस StewardMD Pro का हिस्सा है।")) +
+        '</span></div><p><button type="button" class="sp-btn sec sp-wide" data-act="kpro">' + I.ico("lock") + " " + I.s("seePro") + "</button></p>"
+      : "";
+    var openAll = pro
+      ? '<p><button type="button" class="sp-btn pri sp-wide" data-act="klearn">' + I.ico("play") + " " +
+        I.tx(T("Open the Learn ECG atlas", "Learn ECG एटलस खोलें")) + "</button></p>"
+      : "";
+    return '<div class="sp-scroll sp-pad"><div class="sp-col">' + head + openAll +
+      '<h2 class="sp-h2">' + I.tx(T("Free preview", "मुफ़्त झलक")) + "</h2>" +
+      '<ul class="sp-rows" aria-label="' + I.tx(T("Free preview lessons", "मुफ़्त झलक पाठ")) + '">' + free + "</ul>" +
+      (pro ? "" : rest) + "</div></div>";
+  }
+
+  function kardioxHtml() {
+    return '<div class="sp-scroll sp-pad"><div class="sp-col">' +
+      '<div class="krd-soon-hero"><span class="krd-soon-lead" aria-hidden="true">' + I.tile("bolt") + "</span>" +
+      "<div><h2>" + I.tx(TAB_T.kardiox) + '</h2><p class="krd-soon-sub">' + I.tx(TAB_SUB.kardiox) + "</p></div></div>" +
+      '<p class="sp-small">' + I.tx(T("AI reading of the ECG. It stays behind its access code until clinical sign-off, exactly as before.",
+        "ECG की AI रीडिंग। क्लिनिकल अनुमति तक यह अपने एक्सेस कोड के पीछे ही रहेगी, बिल्कुल पहले जैसी।")) + "</p>" +
+      '<p><button type="button" class="sp-btn pri sp-wide" data-act="kx">' +
+      I.tx(T("Open KardiQ X", "KardiQ X खोलें")) + "</button></p>" +
+      "</div></div>";
+  }
+
+  function showTab(id, focusSel) {
+    if (TABS.indexOf(id) < 0) id = "echo";
+    I.setPref("ktab", id);
+    st.view = "hub"; st.again = function (f) { showTab(tab(), f || null); };
+    I.leave();
+    var lv = klevel(), body = id === "learn" ? learnHtml() : id === "kardiox" ? kardioxHtml() : soonHtml(id);
+    I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + body, focusSel);
+  }
+
+  function openKardioX() {
+    try { G.localStorage.setItem("smd_kardiox", "1"); } catch (e) {}
+    if (G.KARDIOX && G.KARDIOX.open) G.KARDIOX.open();
+    else I.toast("KardiQ X AI loading…");
+  }
+
+  I.ACTIONS.ktab = function (b) { showTab(b.getAttribute("data-t")); };
+  I.ACTIONS.klevel = function (b) {
+    var v = b.getAttribute("data-v");
+    if (LEVELS.indexOf(v) < 0) return;
+    if (v !== klevel() && levelLockedK(v)) { I.showPro(); return; }
+    if (v === klevel()) return;
+    I.setPref("klevel", v);
+    showTab(tab(), '[data-act=klevel][data-v="' + v + '"]');
+  };
+  I.ACTIONS.klearn = function (b) {
+    var id = b.getAttribute && b.getAttribute("data-id");
+    try {
+      if (G.KARDIOX && G.KARDIOX.openLearn) { G.KARDIOX.openLearn(id || undefined); return; }
+    } catch (e) {}
+    I.toast("Learn ECG loading…");
+  };
+  I.ACTIONS.kx = function () {
+    try {
+      if (G.SMD_XACCESS && G.SMD_XACCESS.gate) { G.SMD_XACCESS.gate("kardiox", openKardioX); return; }
+    } catch (e) {}
+    openKardioX();
+  };
+  I.ACTIONS.kpro = function () { I.showPro(); };
+  I.ACTIONS.kretry = function () { showTab(tab(), "[data-act=kretry]"); };
+
+  /* Open on the engine host. The engine fetches kardia/tracks.json on first open; the tab screen does
+     not need it, so paint after the load settles (first open) or at once ( later opens, config cached).
+     Attached after the engine's own handlers, so the tab paint always wins, with no flash. */
+  var baseOpen = host.open;
+  host.open = function () {
+    if (!on()) return false;
+    var r = baseOpen();
+    if (!r) return r;
+    var L = st.loading;
+    if (L && !st.cfg && !st.err) L.then(showReady, showReady);
+    else showReady();
+    return r;
+  };
+  function showReady() { if (host.isOpen()) showTab(tab()); }
+
+  /* Review Desk style "Read it" hooks and tests read these; the atlas itself stays untouched. */
+  host._kardia = { tabs: TABS.slice(), levels: LEVELS.slice(), freeLessons: FREE_LESSONS, on: on, openKardioX: openKardioX };
+})(typeof window !== "undefined" ? window : this);

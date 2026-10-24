@@ -1125,6 +1125,13 @@
       if (!t || !homeToolEligible(t)) return;
       if (window.NARKE && NARKE.open) NARKE.open(); else toast("Narkē loading…");
     },
+    // Kardia (Echo and ECG learning on the specialty engine), the same quiet no-op as Tokós/Narkē
+    // when its flag is off: the Home tile hides and every entry refuses silently.
+    kardia: function () {
+      var t = HOME_TOOLS.filter(function (x) { return x.act === "kardia"; })[0];
+      if (!t || !homeToolEligible(t)) return;
+      if (window.KARDIA && KARDIA.open) KARDIA.open(); else toast("Kardia loading…");
+    },
     oncohome: function () { if (window.SMD_ONCOHOME && SMD_ONCOHOME.open) SMD_ONCOHOME.open(); else toast("ONCQIS loading…"); },
     oncotree: function () { if (window.SMD_ONCOTREE && SMD_ONCOTREE.open) SMD_ONCOTREE.open(); else toast("OncoTree loading…"); },
     staging: function () { if (window.SMD_ONCOSTAGING && SMD_ONCOSTAGING.openList) SMD_ONCOSTAGING.openList(); else toast("Cancer Staging loading…"); },
@@ -2092,6 +2099,14 @@
       return earlyAccessTier();
     } catch (e) { return false; }
   }
+  // Kardia (kardia.js on the specialty engine): tester-only, DEFAULT OFF for everyone. No early-access
+  // tier: only an explicit ?kardia=1 or localStorage smd_kardia = "1" turns the tile on.
+  function kardiaOn() {
+    try {
+      if (window.SMD_KARDIA_FLAGS && SMD_KARDIA_FLAGS.bool) return !!SMD_KARDIA_FLAGS.bool("smd_kardia");
+    } catch (e) {}
+    try { var q = (location.search.match(/[?&]kardia=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_kardia") === "1"; } catch (e) { return false; }
+  }
   // ---- Home "Clinical tools" registry (data-driven so users can customise the grid) ----------
   // eligible(): flag/entitlement gate — a locked/off tool never shows and never appears in Customize.
   // defOn: shown by default; users show/hide via the "Add Tool" -> Customize sheet (saved on device,
@@ -2109,8 +2124,12 @@
   var HOME_TOOLS = [
     { act: "retinalscan", ic: "visibility", tt: "FundX AI", sub: "Retinal scan", feat: true, beta: true, anim: "eye",
       eligible: function () { return expTileOn("smd_fundx", "fundx", null); } },
+    // Kardia (WP8) replaces the KardiQ X tile while smd_kardia is on; with the flag off the
+    // KardiQ X tile reads exactly as before (kardiaOn() is false, so this changes nothing).
+    { act: "kardia", ic: "cardiology", tt: "Kardia", sub: "Echo and ECG learning", feat: true,
+      eligible: function () { return kardiaOn(); } },
     { act: "kardiox", ic: "cardiology", tt: "KardiQ X AI", sub: "ECG", feat: true, beta: true, anim: "ecg",
-      eligible: function () { return expTileOn("smd_kardiox", "kardiox", "KARDIOX"); } },
+      eligible: function () { return expTileOn("smd_kardiox", "kardiox", "KARDIOX") && !kardiaOn(); } },
     { act: "thorex", ic: "pulmonology", tt: "ThoreX AI", sub: "Chest X-ray", feat: true, beta: true, anim: "cxr",
       eligible: function () { return expTileOn("smd_thorex", "thorex", "THOREX"); } },
     { act: "sknx", ic: "dermatology", tt: "SknX AI", sub: "Lesion analysis", feat: true, beta: true, anim: "derm",

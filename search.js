@@ -78,6 +78,7 @@
   // Static keyword aliases for tools; the tile title alone rarely matches what a doctor types.
   var TOOL_KW = {
     retinalscan: "fundus retina eye fundx", kardiox: "ecg electrocardiogram kardiq heart",
+    kardia: "kardia echo echocardiography ecg electrocardiogram heart simulator",
     thorex: "chest xray cxr radiograph", sknx: "skin derm lesion rash dermatology",
     clinix: "learning students clinical skills viva osce", surgx: "surgery surgical notes procedures protocols",
     pglog: "logbook nmc pg residents e-logbook", followcare: "follow up discharge recovery",

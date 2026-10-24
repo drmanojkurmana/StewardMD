@@ -1,0 +1,76 @@
+/* Kardia: the Echo and ECG learning module on the specialty engine (specialty.css draws every shared screen).
+   This file sets Kardia's palette on its root (.krd-root) and styles the Kardia tab bar, the coming soon
+   states and the free preview lesson list. Every shared control (buttons, rows, segmented levels, Pro
+   badges, the draft footer) is the engine's own, so both themes stay consistent with Tokos and Narke.
+   Two themes from the use scene. Monitor (dark): the echo lab at the bedside, near black with the ECG
+   trace green as the one accent. Paper (light): the ECG printout, dark ink on white with a deep teal accent.
+   The host resolves the system preference and the in-app choice into body.dark (body.v3-dark on v3 screens). */
+.krd-root {
+  --kd-bg: #06090b; --kd-s1: #0e1316; --kd-s2: #171e23; --kd-s3: #232c33; --kd-line: #2c353d;
+  --kd-text: #eef3f1; --kd-mut: #a3adb3; --kd-ok: #34c759; --kd-bad: #ff6961; --kd-warn: #ffc05a;
+  /* accent = the ECG trace green; text on the fill is 12.4:1 */
+  --kd-acc: #3ee07a; --kd-on-acc: #04160a; --kd-acc-soft: rgba(62, 224, 122, .14);
+  --kd-ease: cubic-bezier(0.23, 1, 0.32, 1);
+  /* the engine's tokens */
+  --sp-bg: var(--kd-bg); --sp-s1: var(--kd-s1); --sp-s2: var(--kd-s2); --sp-s3: var(--kd-s3); --sp-line: var(--kd-line);
+  --sp-text: var(--kd-text); --sp-mut: var(--kd-mut); --sp-acc: var(--kd-acc); --sp-ok: var(--kd-ok); --sp-bad: var(--kd-bad); --sp-warn: var(--kd-warn);
+  --sp-link: #7df0a7; --sp-link-line: rgba(125, 240, 167, .45);
+  --sp-pri: var(--kd-acc); --sp-on-pri: var(--kd-on-acc); --sp-pri-hover: #6cf596; --sp-acc-soft: var(--kd-acc-soft);
+  --sp-tile-bg: #04070a; --sp-tile-fg: var(--kd-acc); --sp-plate: #000; --sp-card: var(--kd-s3); --sp-on-ok: #04210d;
+  color-scheme: dark;
+}
+body:not(.dark):not(.v3-dark) .krd-root {
+  --kd-bg: #fff; --kd-s1: #eef2f1; --kd-s2: #e2e9e7; --kd-s3: #d2dbd9; --kd-line: #cfd8d5;
+  --kd-text: #14201d; --kd-mut: #55605c; --kd-ok: #15803d; --kd-bad: #b42318; --kd-warn: #9a5b00;
+  --kd-acc: #0c6b4f; --kd-on-acc: #fff; --kd-acc-soft: rgba(12, 107, 79, .1);
+  --sp-link: var(--kd-acc); --sp-link-line: rgba(12, 107, 79, .45); --sp-pri-hover: #09573f; --sp-card: #fbfdfc; --sp-on-ok: #fff;
+  --sp-tile-bg: #f2f7f5; --sp-tile-fg: var(--kd-acc);
+  color-scheme: light;
+}
+/* Four levels do not fit a 390px segmented control (the engine's two do): the row scrolls
+   instead of clipping Sonographer off. Scoped here; specialty.css stays host-agnostic. */
+.krd-root .sp-levelrow .sp-seg { display: flex; overflow-x: auto; scrollbar-width: none; }
+.krd-root .sp-levelrow .sp-seg::-webkit-scrollbar { display: none; }
+.krd-root .sp-levelrow .sp-seg button { flex: 0 0 auto; }
+/* Same 16px gutter as the tab row above it. */
+.krd-root .sp-levelrow { padding: 0 16px; }
+/* Kardia tab bar: five tabs, scrollable on narrow phones, one per screen reader tab. */
+.krd-root .krd-tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none;
+  padding: 8px 16px 4px; -webkit-overflow-scrolling: touch; }
+.krd-root .krd-tabs::-webkit-scrollbar { display: none; }
+.krd-root .krd-tab { flex: 1 0 auto; min-width: 0; min-height: 44px; padding: 10px 12px; border: 0;
+  background: transparent; color: var(--sp-mut); font-size: 15px; font-weight: 650; white-space: nowrap;
+  border-bottom: 2px solid transparent; border-radius: 8px 8px 0 0;
+  transition: color 140ms var(--kd-ease), background-color 140ms var(--kd-ease); }
+@media (hover: hover) and (pointer: fine) {
+  .krd-root .krd-tab:hover { color: var(--sp-text); background: var(--sp-s1); }
+}
+.krd-root .krd-tab:active { color: var(--sp-text); }
+.krd-root .krd-tab[aria-selected="true"] { color: var(--sp-text); border-bottom-color: var(--sp-acc); }
+.krd-root .krd-tab .sp-pro { margin-left: 6px; }
+/* Coming soon: one honest panel per future trainer. No fake controls, no demo data. */
+.krd-root .krd-soon { text-align: left; }
+.krd-root .krd-soon-hero { display: flex; gap: 14px; align-items: center; margin: 18px 0 6px; }
+.krd-root .krd-soon-lead { display: flex; align-items: center; justify-content: center;
+  width: 56px; height: 56px; flex: 0 0 auto; border-radius: 16px;
+  background: var(--sp-tile-bg); color: var(--sp-tile-fg); }
+.krd-root .krd-soon-lead .smd-ico, .krd-root .krd-soon-lead svg { width: 30px; height: 30px; }
+.krd-root .krd-soon h2 { margin: 0; font-size: 20px; line-height: 1.25; letter-spacing: -0.01em; }
+.krd-root .krd-soon-sub { margin: 2px 0 0; color: var(--sp-mut); font-size: 14px; line-height: 1.45; }
+.krd-root .krd-soon-list { margin: 14px 0 0; padding: 0; list-style: none;
+  border-top: 1px solid var(--sp-line); }
+.krd-root .krd-soon-list li { display: flex; gap: 10px; align-items: flex-start;
+  padding: 12px 2px; border-bottom: 1px solid var(--sp-line);
+  font-size: 15px; line-height: 1.5; }
+.krd-root .krd-soon-list li .smd-ico, .krd-root .krd-soon-list li svg { width: 20px; height: 20px;
+  flex: 0 0 auto; margin-top: 2px; color: var(--sp-acc); }
+.krd-root .krd-note { display: flex; gap: 10px; align-items: flex-start; margin: 14px 0 0;
+  padding: 12px 14px; border-radius: 12px; background: var(--sp-s1);
+  font-size: 14px; line-height: 1.5; color: var(--sp-mut); }
+.krd-root .krd-note .smd-ico, .krd-root .krd-note svg { width: 20px; height: 20px; flex: 0 0 auto;
+  margin-top: 1px; color: var(--sp-acc); }
+.krd-root .krd-note b { color: var(--sp-text); font-weight: 650; }
+.krd-root .krd-err { margin: 18px 0 0; }
+@media (prefers-reduced-motion: reduce) {
+  .krd-root .krd-tab { transition: none; }
+}
