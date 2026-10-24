@@ -29,7 +29,8 @@
     "/clinix-physiology.js?v=cx11a927-sandbox1-lazy1",
     "/clinix-profile.js?v=cx10a927-lazy1",
     "/clinix-examiner.js?v=cx10a927-lazy1",
-    "/clinix-screens.js?v=cx26a927-sandbox1-prolock-snd1-lazy1-own4-obg1-cel1-mkai1-mkw1-iso1-osce1-pro1-pn5"
+    "/clinix-practicals.js?v=cxp1-lazy1",
+    "/clinix-screens.js?v=cx27a927-sandbox1-prolock-snd1-lazy1-own4-obg1-cel1-mkai1-mkw1-iso1-osce1-pro1-pn5-prac1"
   ];
 
   function flags() { try { return (typeof window !== "undefined" && window.SMD_CLINIX_FLAGS) || null; } catch (e) { return null; } }
@@ -123,7 +124,7 @@
 
   /* Progress is per person. clinix-screens.js wires this itself, but with lazy loading it is absent
    * until the first open, so a sign-out before then must still clear the previous account's data. */
-  var STORE_KEYS = ["smd_clinix_skills_v1", "smd_clinix_pos_v1", "smd_clinix_log_v1"];
+  var STORE_KEYS = ["smd_clinix_skills_v1", "smd_clinix_pos_v1", "smd_clinix_log_v1", "smd_clinix_practicals_v1"];
   function wipeUnloaded() {
     if (window.SMD_CLINIX_WIPE) return;      // screens loaded: it handles sign-out
     for (var i = 0; i < STORE_KEYS.length; i++) { try { localStorage.removeItem(STORE_KEYS[i]); } catch (e) {} }
