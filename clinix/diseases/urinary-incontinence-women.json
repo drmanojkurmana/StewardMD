@@ -1,0 +1,1099 @@
+{
+  "_comment": "Authored for CliniX final-year expansion. Follows clinix-model schema, 14 chapters, 2 OSCE stations, viva pool, and simulated patient case.",
+  "id": "urinary-incontinence-women",
+  "name": "Urinary incontinence in women",
+  "fullName": "Urinary incontinence in women: stress and urge incontinence",
+  "system": "obgyn",
+  "kbRef": "pelvic_organ_prolapse_and_urinary_incontinence",
+  "oneLine": "Involuntary loss of urine in women: distinguishing stress, urge and mixed patterns to guide pelvic floor rehabilitation, medication and surgical repair.",
+  "estMinutes": 40,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "Functional anatomy of female continence, storage reflexes and involuntary loss",
+      "skills": [
+        "skill.urinary_incontinence.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Consent, dignity and positioning for an intimate urogynaecological assessment",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age, parity, occupation with heavy lifting and quality of life impact",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In urinary incontinence, record age, menopausal status, and exact parity with delivery modes. Note manual labour or agricultural work involving heavy load lifting and distance from toilet facilities, which severely compounds hygiene challenges and drives treatment urgency."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Leakage triggers, volume, urgency, frequency, nocturia and bladder diary",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.menstrual_history",
+        "skill.hx.obg.gynae_symptoms",
+        "skill.hx.urinary.symptoms"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Ask whether leaking occurs synchronously with coughing, sneezing, laughing, or lifting (stress leakage), or is preceded by a sudden uncontrollable desire to void (urgency leakage). Establish duration in months or years and twenty-four hour pad usage."
+        },
+        "skill.hx.urinary.symptoms": {
+          "expect": "Carefully dissect the phenotype: momentary spurts on coughing point to stress incontinence, whereas large volume soaking with urgency indicates detrusor overactivity. Rule out voiding dysfunction (hesitancy, straining, weak stream) and red flags like visible haematuria or pain."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "Obstetric trauma, pelvic surgery, chronic cough, constipation and offending drugs",
+      "skills": [
+        "skill.hx.obg.gynae_background",
+        "skill.hx.urinary.risk"
+      ],
+      "emphasis": {
+        "skill.hx.urinary.risk": {
+          "expect": "Probe for previous vaginal births, prolonged pushing, instrumental delivery, or severe perineal tears that weaken pelvic supports. Inquire about chronic cough, daily constipation with straining, obesity, prior hysterectomy, and medications like diuretics or ACE inhibitors."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Body habitus, mobility, cognitive status and exclusion of systemic illness",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Assess overall mobility, cognitive status, and body mass index: obesity is a strong, reversible driver of intra-abdominal pressure that doubles incontinence risk. Check for signs of systemic neurological disease like Parkinsonism or gait ataxia."
+        },
+        "skill.gen.vitals": {
+          "expect": "Vital signs are normally stable. Check blood pressure carefully: severe uncontrolled hypertension is an absolute contraindication to the beta-3 agonist mirabegron when managing urgency symptoms."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Pelvic examination",
+      "blurb": "Abdominal palpation, vulval inspection, cough stress test, POP-Q and bimanual exam",
+      "skills": [
+        "skill.exam.obg.gynae_abdominal",
+        "skill.exam.obg.vulval_inspect",
+        "skill.exam.obg.speculum_insert",
+        "skill.exam.obg.speculum_inspect",
+        "skill.exam.obg.bimanual",
+        "skill.exam.obg.prolapse_popq"
+      ],
+      "emphasis": {
+        "skill.exam.obg.vulval_inspect": {
+          "expect": "Inspect the vulval skin for dampness, excoriation, or ammoniacal dermatitis from chronic pad usage, and check for signs of postmenopausal atrophy. Perform the cough stress test in lithotomy with a comfortably full bladder, looking for immediate synchronous leakage."
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "expect": "Use a Sims speculum to inspect each vaginal wall systematically for cystocele, vault prolapse, or rectocele. If high-grade prolapse is present, reduce the bulge gently to test for occult stress incontinence."
+        },
+        "skill.exam.obg.bimanual": {
+          "expect": "Assess uterine size, mobility, and adnexal tenderness to exclude pelvic masses that transmit pressure to the bladder. Conclude with digital examination to grade voluntary levator ani contraction and ensure the patient does not bear down."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the urinary incontinence picture together",
+      "blurb": "Synthesising physical signs: cough stress leakage, urethral hypermobility and vaginal support",
+      "skills": [
+        "skill.urinary_incontinence.findings"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "A concise case summary framing the incontinence phenotype and management priorities",
+      "skills": [
+        "skill.urinary_incontinence.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Separating stress, urgency, mixed, overflow, fistula, diverticulum and infection",
+      "skills": [
+        "skill.urinary_incontinence.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Dipstick, 3-day bladder diary, post-void residual and selective urodynamics",
+      "skills": [
+        "skill.ix.urinary_incontinence.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and classification",
+      "blurb": "Phenotypic classification, ICIQ-UI SF severity grading and assessing readiness for surgery",
+      "skills": [
+        "skill.urinary_incontinence.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Supervised pelvic floor training, bladder retraining, pharmacotherapy and mid-urethral slings",
+      "skills": [
+        "skill.tx.urinary_incontinence"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "A 48-year-old multiparous woman with involuntary leakage on coughing and straining",
+      "skills": [
+        "skill.present.urinary.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.urinary.history_assessment",
+        "title": "History taking and clinical assessment in female urinary incontinence",
+        "seconds": 420,
+        "skills": [
+          "skill.hx.urinary.symptoms",
+          "skill.hx.urinary.risk",
+          "skill.particulars.demographics"
+        ],
+        "examinerQuestions": [
+          {
+            "q": "How do you differentiate stress urinary incontinence from urgency urinary incontinence based on history alone?",
+            "a": "Stress incontinence features momentary urine loss synchronous with coughing, sneezing, or physical exertion, whereas urgency incontinence features involuntary leakage preceded by a sudden compelling desire to void that cannot be deferred."
+          },
+          {
+            "q": "What specific questions should you ask to assess the severity and quality of life impact of urinary leakage?",
+            "a": "Ask about the 24-hour frequency of wetting episodes, the type and number of pads used and their degree of saturation, limitations on occupational and social activities, and sleep disruption from nocturia."
+          },
+          {
+            "q": "Name three non-gynaecological medications that can exacerbate female urinary incontinence and their mechanisms.",
+            "a": "Diuretics (produce acute volume surges and urgency), ACE inhibitors (trigger chronic dry cough causing stress leakage), and alpha-blockers (relax urethral smooth muscle and lower closure pressure)."
+          },
+          {
+            "q": "What red flag symptoms in a patient with urinary leakage necessitate urgent specialist referral?",
+            "a": "Gross visible haematuria, recurrent culture-proven urinary tract infections, persistent pelvic or loin pain, palpable pelvic or abdominal masses, and continuous day and night dribbling suggestive of a urinary fistula."
+          }
+        ]
+      },
+      {
+        "id": "osce.urinary.pelvic_examination",
+        "title": "Physical examination and cough stress test for female urinary incontinence",
+        "seconds": 420,
+        "skills": [
+          "skill.exam.obg.vulval_inspect",
+          "skill.exam.obg.speculum_inspect",
+          "skill.exam.obg.prolapse_popq",
+          "skill.urinary_incontinence.findings"
+        ],
+        "examinerQuestions": [
+          {
+            "q": "Describe the technique of performing a clinical cough stress test in the outpatient clinic.",
+            "a": "Ensure the patient has a comfortably full bladder (approx 200 to 250 mL). In dorsal lithotomy position, separate the labia and observe the external urethral meatus while the patient gives one or more vigorous coughs. If no leak is seen, repeat the test in the standing position."
+          },
+          {
+            "q": "How does the examiner test for occult or masked stress incontinence in a woman with advanced anterior vaginal prolapse?",
+            "a": "Gently reduce the anterior wall prolapse using a Sims speculum or ring pessary without compressing the urethra or bladder neck, and ask the patient to cough. Leakage on coughing with prolapse reduced confirms occult stress incontinence."
+          },
+          {
+            "q": "How do you assess pelvic floor muscle strength digitally prior to prescribing pelvic floor muscle training?",
+            "a": "Perform digital vaginal examination with one or two fingers placed inside the posterior vaginal wall. Ask the patient to squeeze around the fingers and lift inwards and upwards without breath-holding or abdominal straining, grading the squeeze from 0 to 5 on the modified Oxford scale."
+          },
+          {
+            "q": "What vulval and vaginal examination findings indicate severe local hypoestrogenism in postmenopausal incontinence?",
+            "a": "Pale, thin, dry vaginal mucosa with loss of rugae, petechiae, introital stenosis, resorption of labia minora, and urethral caruncle or mucosal eversion."
+          }
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.urinary_incontinence.basics",
+      "skill.hx.urinary.symptoms",
+      "skill.urinary_incontinence.findings",
+      "skill.urinary_incontinence.differential",
+      "skill.ix.urinary_incontinence.workup",
+      "skill.urinary_incontinence.diagnosis",
+      "skill.tx.urinary_incontinence"
+    ]
+  },
+  "skills": {
+    "skill.urinary_incontinence.basics": {
+      "id": "skill.urinary_incontinence.basics",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Functional anatomy of female continence and mechanisms of urinary leakage",
+      "oneLine": "Anatomy of urethral support, pubourethral ligaments, levator ani, intrinsic sphincter mechanism, and neurophysiology of storage",
+      "why": "Continence is an active mechanical balance between urethral closure pressure and intravesical pressure. Understanding the three levels of support described by DeLancey, the hammock hypothesis of Petros and Ulmsten, and parasympathetic detrusor control vs sympathetic and somatic urethral closure explains why childbirth tears and denervation lead to stress leakage, whereas detrusor hyperexcitability produces urge incontinence.",
+      "teach": [
+        {
+          "heading": "The urethral support hammock and closure mechanisms",
+          "body": "Normal female urinary continence relies on resting urethral closure pressure exceeding intravesical pressure at all times except during voluntary micturition.\n\nAccording to the hammock hypothesis, the mid-urethra rests on a supportive layer composed of the anterior vaginal wall, endopelvic fascia, and pubococcygeus muscle. When intra-abdominal pressure rises abruptly during a cough, the urethra is compressed against this firm suburethral hammock, maintaining closure."
+        },
+        {
+          "heading": "Urethral hypermobility versus intrinsic sphincter deficiency",
+          "body": "Stress urinary incontinence arises via two primary mechanical faults, which often overlap.\n\nUrethral hypermobility occurs when damage to the pubourethral ligaments and arcus tendineus fasciae pelvis allows the bladder neck and proximal urethra to rotate downwards outside the pelvic abdominal pressure transmission zone. Intrinsic sphincter deficiency involves mucosal thinning, vascular loss, and striated sphincter fibrosis, leading to an open bladder neck at rest."
+        },
+        {
+          "heading": "Neural control of bladder storage and detrusor overactivity",
+          "body": "Urine storage requires spinal sympathetic inhibition of the detrusor smooth muscle via beta-3 adrenergic receptors, combined with bladder neck contraction via alpha-1 receptors and voluntary pudendal sphincter activation.\n\nUrgency urinary incontinence stems from detrusor overactivity, defined urodynamically as involuntary detrusor muscle contractions during bladder filling. These contractions overcome urethral resistance, triggering sudden uncontrollable leakage."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What constitutes the physiological hammock that maintains urethral closure during coughing or straining?",
+          "a": "The hammock consists of the anterior vaginal wall, endopelvic fascia, and pubococcygeus levator ani muscle, against which the urethra is compressed as intra-abdominal pressure rises."
+        },
+        {
+          "level": 2,
+          "q": "How does urethral hypermobility differ pathophysiologically from intrinsic sphincter deficiency in women with stress incontinence?",
+          "a": "Urethral hypermobility is failure of anatomic fascial and ligamentous support allowing the bladder neck to rotate downwards on straining, whereas intrinsic sphincter deficiency is failure of the sphincter coaptation mechanism itself despite adequate support."
+        },
+        {
+          "level": 3,
+          "q": "Which autonomic receptors mediate detrusor smooth muscle relaxation during normal bladder filling?",
+          "a": "Sympathetic stimulation acting on beta-3 adrenergic receptors within the bladder body relaxes the detrusor smooth muscle to facilitate low-pressure urine storage."
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r1",
+          "text": "Explains the mechanical hammock hypothesis and anatomic support of the mid-urethra"
+        },
+        {
+          "id": "r2",
+          "text": "Distinguishes urethral hypermobility from intrinsic sphincter deficiency"
+        },
+        {
+          "id": "r3",
+          "text": "Outlines sympathetic storage mechanisms and the neurogenic basis of detrusor overactivity"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pelvic_organ_prolapse_and_urinary_incontinence: Pathophysiology"
+        },
+        {
+          "source": "Berek",
+          "locator": "Berek and Novak's Gynecology: Anatomy and Neurophysiology of the Lower Urinary Tract"
+        },
+        {
+          "source": "NICE",
+          "locator": "NG123: Pathophysiology and classification"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.urinary_incontinence.findings": {
+      "id": "skill.urinary_incontinence.findings",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Putting the urinary incontinence picture together: physical signs and phenotype synthesis",
+      "oneLine": "Synthesising physical signs: cough stress leakage, urethral hypermobility, vulval atrophy, and coexisting pelvic organ prolapse",
+      "why": "A physical examination in female urinary incontinence does not merely confirm leaking; it determines whether the leakage is synchronous with strain, checks whether advanced pelvic organ prolapse is kinking the urethra and concealing latent incontinence, and evaluates whether the woman can voluntarily recruit her pelvic floor muscles for conservative training.",
+      "teach": [
+        {
+          "heading": "The clinical cough stress test and urethral mobility",
+          "body": "The cough stress test directly verifies stress urinary incontinence. The patient must have a comfortably full bladder containing at least two hundred millilitres of urine.\n\nIn lithotomy position, the labia are gently parted and the patient is asked to cough forcefully. An instantaneous spurt of urine synchronous with the cough confirms stress incontinence. Delayed loss of a larger volume several seconds later points instead to cough-induced detrusor overactivity."
+        },
+        {
+          "heading": "Assessing pelvic organ prolapse and occult stress incontinence",
+          "body": "Examine the anterior, apical, and posterior vaginal compartments systematically using a Sims speculum. Note any cystocele, uterine descent, or rectocele staged by POP-Q criteria.\n\nAdvanced anterior or apical prolapse can kink the urethra and mechanically mask severe stress incontinence. In women with significant prolapse, reduce the bulge with a swab or ring pessary without compressing the urethra, and repeat the cough test to unmask occult stress leakage."
+        },
+        {
+          "heading": "Digital assessment of pelvic floor contraction",
+          "body": "Before prescribing pelvic floor muscle training, digital vaginal palpation is mandatory to confirm that the patient can contract the levator ani correctly without bearing down.\n\nTwo examining fingers assess muscle squeeze strength, duration, and inward and upward cranial displacement using the modified Oxford grading scale from zero (no contraction) to five (strong squeeze with suction lift). Up to thirty percent of women inadvertently bear down during initial attempts."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How do you distinguish genuine stress incontinence from cough-induced detrusor overactivity during a cough stress test?",
+          "a": "Genuine stress incontinence produces an immediate spurt synchronous with the cough, whereas cough-induced detrusor overactivity causes delayed leakage occurring several seconds after the cough."
+        },
+        {
+          "level": 2,
+          "q": "What is occult stress incontinence, and how is it elicited on examination?",
+          "a": "Occult stress incontinence is stress leakage masked by severe pelvic organ prolapse kinking the urethra; it is demonstrated by gently reducing the prolapse and asking the patient to cough."
+        },
+        {
+          "level": 3,
+          "q": "Why must digital vaginal examination precede unsupervised pelvic floor exercises in a woman with stress incontinence?",
+          "a": "Digital examination verifies that the woman can actively contract the levator ani with an inward and upward lift, ensuring she does not perform a Valsalva manoeuvre that could worsen pelvic descent."
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r1",
+          "text": "Describes proper conduct and interpretation of the cough stress test"
+        },
+        {
+          "id": "r2",
+          "text": "Explains how to detect occult stress incontinence in patients with coexisting prolapse"
+        },
+        {
+          "id": "r3",
+          "text": "Outlines digital assessment of voluntary pelvic floor muscle contraction using the Oxford scale"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pelvic_organ_prolapse_and_urinary_incontinence: Clinical pearls"
+        },
+        {
+          "source": "Berek",
+          "locator": "Berek and Novak's Gynecology: Physical Examination of the Urogynecologic Patient"
+        },
+        {
+          "source": "NICE",
+          "locator": "NG123: Physical examination and pelvic floor assessment"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.urinary_incontinence.summary": {
+      "id": "skill.urinary_incontinence.summary",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Synthesising the clinical summary in female urinary incontinence",
+      "oneLine": "Constructing a concise, actionable problem representation integrating phenotype, severity, structural support, and patient goals",
+      "why": "A clinical summary for urinary incontinence must do more than record symptoms; it must synthesize the phenotype, functional severity, anatomical findings, and medical fitness into a clear direction of care. A well-framed summary prevents mistreating stress incontinence with antimuscarinics or offering major mesh surgery to a woman whose primary concern is urgency.",
+      "teach": [
+        {
+          "heading": "The four components of an actionable summary",
+          "body": "A robust summary incorporates four core dimensions: the patient demographic profile and parity, the primary incontinence phenotype with daily pad burden, physical examination findings including prolapse and pelvic floor strength, and red flag exclusion.\n\nFraming the case in this manner immediately separates uncomplicated stress leakage suitable for conservative physiotherapy from complex mixed patterns requiring multidimensional care."
+        },
+        {
+          "heading": "Guiding the therapeutic pathway through problem representation",
+          "body": "The problem representation determines whether initial therapy should target pelvic floor strengthening, bladder retraining, topical hormonal replacement, or surgical referral.\n\nFor example, a postmenopausal woman with pure stress incontinence, demonstrated cough leakage, no prolapse, and intact levator tone is primed for supervised pelvic floor exercises, while another with heavy nocturnal urgency and urgency leakage needs bladder training first."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What four core elements must be stated in a clinical summary of female urinary incontinence?",
+          "a": "Patient profile and parity, primary incontinence phenotype and pad burden, physical findings including prolapse and pelvic floor tone, and exclusion of red flags."
+        },
+        {
+          "level": 2,
+          "q": "How does the clinical summary distinguish uncomplicated stress incontinence from complex urinary incontinence?",
+          "a": "Uncomplicated stress incontinence has exertional leakage, normal voiding, negative dipstick, and no prior surgery, whereas complex incontinence features prior surgery, continuous leakage, high residual, or pelvic radiotherapy."
+        },
+        {
+          "level": 3,
+          "q": "Why is patient treatment goal formulation a crucial component of the incontinence summary?",
+          "a": "Urinary incontinence is a quality of life condition; treatment targets (pad reduction, dry night sleep, returning to farming or social gatherings) must align with the patient's personal priorities rather than purely anatomical metrics."
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r1",
+          "text": "Synthesises demographic background, phenotype, and functional impairment into a single statement"
+        },
+        {
+          "id": "r2",
+          "text": "Integrates physical examination findings including pelvic floor tone and prolapse status"
+        },
+        {
+          "id": "r3",
+          "text": "Differentiates uncomplicated primary presentations from complex or refractory cases"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pelvic_organ_prolapse_and_urinary_incontinence: Clinical summary"
+        },
+        {
+          "source": "Berek",
+          "locator": "Berek and Novak's Gynecology: Clinical Decision Making in Incontinence"
+        },
+        {
+          "source": "NICE",
+          "locator": "NG123: Assessment and initial management"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.urinary_incontinence.differential": {
+      "id": "skill.urinary_incontinence.differential",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Differential diagnosis of female urinary leakage and voiding symptoms",
+      "oneLine": "Distinguishing stress, urgency, mixed, overflow, extraurethral fistula, diverticulum, and urinary tract infection",
+      "why": "Involuntary loss of urine is a symptom with multiple disparate etiologies. Confusing urge incontinence with stress leakage leads to unnecessary surgery that fails or worsens urgency, while missing an overflow state due to chronic retention risks bilateral hydronephrosis and renal failure. Accurate clinical discrimination is therefore paramount.",
+      "teach": [
+        {
+          "heading": "Stress, urgency, mixed, and overflow incontinence",
+          "body": "Stress incontinence features momentary leakage on exertion without premonitory desire, normal daytime frequency, and no nocturia.\n\nUrgency incontinence presents with sudden uncontrollable urge, daytime frequency, and nocturia. Mixed incontinence combines both, requiring identification of the predominant symptom. Overflow incontinence presents with constant dribbling, hesitancy, and a palpable bladder due to detrusor underactivity or severe outflow obstruction."
+        },
+        {
+          "heading": "Differential characteristics of female urinary leakage",
+          "table": {
+            "cols": [
+              "Feature",
+              "Stress UI",
+              "Urgency UI",
+              "Overflow UI"
+            ],
+            "rows": [
+              [
+                "Leak trigger",
+                "Cough, sneeze, effort",
+                "Sudden compelling urge",
+                "Continuous or with straining"
+              ],
+              [
+                "Loss volume",
+                "Small synchronous squirt",
+                "Moderate to large soak",
+                "Continuous dribble or leak"
+              ],
+              [
+                "Frequency",
+                "Normal (<8 per day)",
+                "Increased (>8 per day)",
+                "Frequent small voids"
+              ],
+              [
+                "Post-void residual",
+                "Normal (<50 mL)",
+                "Normal (<50 mL)",
+                "Significantly elevated (>150 mL)"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Fistulae, diverticula, and infectious differentials",
+          "body": "A vesicovaginal or ureterovaginal fistula causes continuous, painless dribbling of urine both day and night, typically following obstructed labour or hysterectomy, while normal voiding may still occur if the fistula is small or ureteric.\n\nA urethral diverticulum causes the classic triad of dysuria, dyspareunia, and post-micturition dribble with a tender suburethral mass. Acute urinary tract infection causes acute-onset dysuria and urgency, diagnosed by positive dipstick and urine culture."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How does the post-void residual volume distinguish urgency incontinence from overflow incontinence?",
+          "a": "Urgency incontinence has a normal post-void residual under 50 mL, whereas overflow incontinence has a high residual typically exceeding 150 to 200 mL."
+        },
+        {
+          "level": 2,
+          "q": "What clinical features suggest a vesicovaginal fistula rather than severe stress or urgency incontinence?",
+          "a": "Continuous, painless urine leakage occurring day and night, independent of posture, coughing, or bladder fullness, typically starting after obstructed labour or pelvic surgery."
+        },
+        {
+          "level": 3,
+          "q": "What is the classic diagnostic triad of a female urethral diverticulum on history and examination?",
+          "a": "Dysuria, dyspareunia, and post-micturition dribbling (the three Ds), with a tender cystic anterior vaginal mass milking purulent fluid on palpation."
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r1",
+          "text": "Differentiates stress, urgency, mixed, and overflow incontinence across triggers and residual volumes"
+        },
+        {
+          "id": "r2",
+          "text": "Identifies clinical features of vesicovaginal and ureterovaginal fistulae"
+        },
+        {
+          "id": "r3",
+          "text": "Recognises urethral diverticulum and excludes acute bacterial cystitis"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pelvic_organ_prolapse_and_urinary_incontinence: Additional differentials"
+        },
+        {
+          "source": "Berek",
+          "locator": "Berek and Novak's Gynecology: Differential Diagnosis of Urinary Incontinence"
+        },
+        {
+          "source": "NICE",
+          "locator": "NG123: Differential diagnosis and investigations"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.urinary_incontinence.workup": {
+      "id": "skill.ix.urinary_incontinence.workup",
+      "kind": "investigation",
+      "system": "obgyn",
+      "title": "Diagnostic investigations in female urinary incontinence: dipstick, bladder diary, residual volume, and urodynamics",
+      "oneLine": "Step-wise workup from urinalysis and frequency-volume charts to post-void residual ultrasound and selective multichannel urodynamic studies",
+      "why": "Routine investigation of uncomplicated urinary incontinence is conservative and non-invasive: dipstick urinalysis, a 3-day frequency-volume chart, and assessment of residual volume suffice for initial primary management. Invasive multichannel urodynamic testing is reserved for diagnostic uncertainty, prior failed surgery, mixed symptoms, or pre-operative verification.",
+      "teach": [
+        {
+          "heading": "Bedside urinalysis and the 3-day bladder diary",
+          "body": "A clean catch dipstick is mandatory in every woman presenting with incontinence to detect leucocytes, nitrites, haematuria, protein, and glycosuria.\n\nA three-day bladder diary recording fluid intake, time and volume of each void, and wetting episodes over working and leisure days is the gold standard clinical tool. It quantifies 24-hour volume, confirms daytime frequency and nocturia, and objectively distinguishes polyuria from detrusor instability."
+        },
+        {
+          "heading": "Post-void residual volume assessment",
+          "body": "Post-void residual volume should be measured by bedside portable ultrasound or sterile in-out catheterisation in women with voiding symptoms, recurrent infections, or pelvic organ prolapse.\n\nA normal residual is under fifty millilitres. A residual between fifty and one hundred millilitres is borderline and warrants repeat assessment. A residual persistently exceeding one hundred and fifty millilitres indicates incomplete emptying, warning against the use of antimuscarinic medications."
+        },
+        {
+          "heading": "Indications and interpretation of multichannel urodynamic studies",
+          "body": "Urodynamics are not required before first-line conservative therapy in uncomplicated stress or urgency incontinence.\n\nMultichannel cystometry is indicated when the clinical diagnosis is unclear, in mixed incontinence before surgical planning, after previous failed continence surgery, or when voiding dysfunction is suspected. It demonstrates detrusor overactivity during filling or urethral incompetence with low abdominal leak point pressure."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why is a three-day bladder diary considered the most valuable initial investigation in female incontinence?",
+          "a": "It objectively records actual fluid intake, voided volumes, diurnal frequency, nocturia, and leakage episodes across working and leisure days, removing recall bias."
+        },
+        {
+          "level": 2,
+          "q": "What post-void residual volume threshold contraindicates starting an antimuscarinic agent for urgency incontinence?",
+          "a": "A persistent post-void residual volume exceeding 100 to 150 mL contraindicates antimuscarinic drugs due to the risk of precipitating acute urinary retention."
+        },
+        {
+          "level": 3,
+          "q": "In which clinical scenarios should multichannel urodynamic testing be performed prior to stress incontinence surgery?",
+          "a": "When there are mixed symptoms with prominent urgency, suspected voiding dysfunction, previous failed continence surgery, coexisting advanced prolapse, or diagnostic uncertainty."
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r1",
+          "text": "Outlines dipstick urinalysis and interpretation of urinary biomarkers"
+        },
+        {
+          "id": "r2",
+          "text": "Explains how to analyse and interpret a 3-day frequency-volume bladder diary"
+        },
+        {
+          "id": "r3",
+          "text": "Defines post-void residual thresholds and indications for selective multichannel urodynamics"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pelvic_organ_prolapse_and_urinary_incontinence: Additional investigations"
+        },
+        {
+          "source": "Berek",
+          "locator": "Berek and Novak's Gynecology: Urodynamic Evaluation"
+        },
+        {
+          "source": "NICE",
+          "locator": "NG123: Investigations and urodynamics"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.urinary_incontinence.diagnosis": {
+      "id": "skill.urinary_incontinence.diagnosis",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Diagnostic classification and severity staging of female urinary incontinence",
+      "oneLine": "Standardised ICS definitions, ICIQ-UI SF score, assessment of predominant component in mixed incontinence, and defining surgical readiness",
+      "why": "Standardised clinical staging and validated symptom scoring with the International Consultation on Incontinence Questionnaire (ICIQ-UI SF) quantify baseline severity, document treatment response objectively, and establish whether conservative therapy has failed before advancing to surgical intervention.",
+      "teach": [
+        {
+          "heading": "International Continence Society clinical classification",
+          "body": "The International Continence Society defines urinary incontinence as the complaint of any involuntary loss of urine.\n\nStress urinary incontinence is involuntary loss on effort or exertion, sneezing, or coughing. Urgency urinary incontinence is involuntary leakage accompanied or immediately preceded by urgency. Mixed urinary incontinence is involuntary loss associated with both urgency and exertion, requiring clinical determination of which symptom is dominant."
+        },
+        {
+          "heading": "Validating severity with the ICIQ-UI Short Form score",
+          "body": "The International Consultation on Incontinence Questionnaire Short Form is a validated four-item tool that assesses frequency of leakage, volume lost, and overall impact on daily life.\n\nThe score ranges from zero (no symptoms) to twenty-one (maximum severity). A score of one to five represents slight incontinence, six to twelve moderate, thirteen to eighteen severe, and nineteen to twenty-one very severe. It provides an objective baseline to track therapeutic response."
+        },
+        {
+          "heading": "Establishing failure of conservative care and surgical readiness",
+          "body": "Conservative treatment failure is defined as persistent bothersome symptoms after completing at least three months of supervised pelvic floor muscle training for stress incontinence, or six weeks of bladder training for urgency incontinence.\n\nBefore undertaking surgery, the clinician must confirm patient desire for definitive repair, completion of childbearing where relevant, absence of active urinary infection, and documented realistic expectations regarding surgical risks."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the ICS definition of mixed urinary incontinence, and how does it affect initial treatment choice?",
+          "a": "Mixed urinary incontinence is involuntary leakage associated with urgency as well as exertion or coughing; initial treatment is directed toward whichever component the patient identifies as most troublesome."
+        },
+        {
+          "level": 2,
+          "q": "What score range on the ICIQ-UI Short Form indicates severe urinary incontinence?",
+          "a": "A score between 13 and 18 represents severe incontinence, and 19 to 21 represents very severe incontinence."
+        },
+        {
+          "level": 3,
+          "q": "What criteria must be satisfied before declaring failure of conservative management in a woman with stress incontinence?",
+          "a": "The patient must have completed at least 3 months of supervised, documented pelvic floor muscle exercises with confirmed correct contraction technique without satisfactory symptom relief."
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r1",
+          "text": "Classifies incontinence phenotype accurately according to International Continence Society criteria"
+        },
+        {
+          "id": "r2",
+          "text": "Applies the ICIQ-UI Short Form to quantify symptom frequency, volume, and quality of life impact"
+        },
+        {
+          "id": "r3",
+          "text": "Defines criteria for conservative treatment failure and assesses readiness for surgical referral"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pelvic_organ_prolapse_and_urinary_incontinence: Clinical pearls"
+        },
+        {
+          "source": "Berek",
+          "locator": "Berek and Novak's Gynecology: Classification and Quality of Life Assessment"
+        },
+        {
+          "source": "NICE",
+          "locator": "NG123: Assessment and initial management"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.urinary_incontinence": {
+      "id": "skill.tx.urinary_incontinence",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Comprehensive management of female urinary incontinence: conservative, pharmacological, and surgical therapies",
+      "oneLine": "Supervised pelvic floor training, bladder retraining, antimuscarinics, mirabegron, topical oestrogens, and mid-urethral synthetic slings",
+      "why": "Management follows an evidence-based stepped pyramid. Conservative lifestyle modification, supervised pelvic floor muscle exercises, and bladder drill form the non-invasive foundation for all women. Pharmacotherapy and mid-urethral sling surgery or bladder botulinum injections are reserved for persistent symptoms, tailored strictly to the underlying mechanism and patient preferences.",
+      "dosingNote": "CliniX does not prescribe. Doses are quoted from NICE NG123, FOGSI guidelines, and StewardMD clinical knowledge base for teaching only; verify against patient renal function, cognitive status, and local hospital protocols before administration.",
+      "teach": [
+        {
+          "heading": "First-line conservative therapies: pelvic floor training and bladder drill",
+          "body": "Supervised pelvic floor muscle training is first line for stress or mixed urinary incontinence. The regimen requires at least eight active contractions performed three times daily for a minimum of three months.\n\nFor urgency or mixed incontinence, bladder training for at least six weeks teaches scheduled voiding intervals, urge-suppression strategies, and distraction techniques. Lifestyle measures include caffeine reduction, moderating fluid intake, and weight loss if body mass index exceeds thirty."
+        },
+        {
+          "heading": "Pharmacotherapy for overactive bladder and urgency incontinence",
+          "body": "Antimuscarinic agents relax detrusor smooth muscle. Solifenacin is given at five milligrams orally once daily (increased to ten milligrams if needed). Tolterodine is administered at four milligrams daily modified-release, and oxybutynin at five milligrams two to three times daily.\n\nCommon adverse effects include dry mouth, blurred vision, and constipation. Before prescribing, assess total anticholinergic burden and cognitive status. In frail elderly women, immediate-release oxybutynin is avoided due to the risk of cognitive decline."
+        },
+        {
+          "heading": "Beta-3 agonists and second-line medical alternatives",
+          "body": "Mirabegron, a beta-3 adrenoceptor agonist, is given at fifty milligrams orally once daily (twenty-five milligrams in moderate renal or hepatic impairment). It relaxes detrusor muscle without anticholinergic side effects; blood pressure must be monitored as it is contraindicated in severe uncontrolled hypertension.\n\nDuloxetine forty milligrams twice daily is a second-line option for stress incontinence only in women declining surgery; nausea is frequent and tapering is required upon discontinuation."
+        },
+        {
+          "heading": "Topical oestrogen and pessary options in postmenopausal women",
+          "body": "In postmenopausal women with genitourinary syndrome of menopause, vaginal oestradiol ten microgram tablets or conjugated oestrogen cream applied daily for two weeks, then twice weekly, improves urethral mucosal vascularity and reduces urgency symptoms.\n\nIncontinence dish or ring pessaries with suburethral knobs provide non-surgical mechanical support for women with stress incontinence who are medically unfit for surgery, awaiting theatre, or desiring future pregnancy."
+        },
+        {
+          "heading": "Surgical management of stress incontinence: mid-urethral slings and colposuspension",
+          "body": "Synthetic mid-urethral slings (tension-free vaginal tape TVT and transobturator tape TOT) represent the surgical gold standard for stress incontinence failing conservative care.\n\nA macroporous polypropylene mesh tape is positioned loosely beneath the mid-urethra to restore dynamic backboard support during coughing. In resource-limited Indian public hospitals where mesh may be restricted or unavailable, Burch colposuspension or autologous rectus fascial slings offer proven durable alternatives."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the recommended duration and intensity of first-line pelvic floor muscle training for stress urinary incontinence?",
+          "a": "A minimum of 3 months of supervised training, consisting of at least 8 contractions performed 3 times daily."
+        },
+        {
+          "level": 2,
+          "q": "What pre-treatment assessment and contraindication must be checked before starting mirabegron for urgency incontinence?",
+          "a": "Blood pressure must be checked because mirabegron is contraindicated in severe uncontrolled hypertension; it offers an effective alternative without anticholinergic cognitive risks."
+        },
+        {
+          "level": 3,
+          "q": "Why is a tension-free mid-urethral tape placed without tension, and what complication occurs if it is overtightened?",
+          "a": "It is placed tension-free to provide dynamic support only during straining while avoiding obstruction; overtightening causes postoperative voiding dysfunction, urinary retention, and de novo urgency."
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r1",
+          "text": "Prescribes supervised pelvic floor muscle training and bladder drill as first-line measures"
+        },
+        {
+          "id": "r2",
+          "text": "Selects appropriate pharmacotherapy for overactive bladder, weighing anticholinergic burden and blood pressure"
+        },
+        {
+          "id": "r3",
+          "text": "Explains surgical options including mid-urethral slings (TVT, TOT), Burch colposuspension, and fascial slings"
+        },
+        {
+          "id": "r4",
+          "text": "Incorporates resource-limited and Indian clinical considerations including pessary therapy and non-mesh alternatives"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pelvic_organ_prolapse_and_urinary_incontinence: Management and surgical options"
+        },
+        {
+          "source": "NICE",
+          "locator": "NG123: Conservative, pharmacological and surgical management"
+        },
+        {
+          "source": "Berek",
+          "locator": "Berek and Novak's Gynecology: Surgical Management of Stress Urinary Incontinence"
+        },
+        {
+          "source": "FOGSI",
+          "locator": "Good Clinical Practice Recommendations on Female Urinary Incontinence"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.urinary.sunita",
+      "title": "A 48-year-old multiparous woman with involuntary leakage on coughing, sneezing and lifting loads",
+      "opening": "Doctor, for the past two years, whenever I cough, sneeze, or lift heavy brass water pots, urine leaks out and wets my clothes. Over the last six months, it has become so embarrassing that I avoid going to social functions or the temple.",
+      "fallback": "I am sorry doctor, I did not catch that. My main distress is that urine squirts out whenever I exert myself, cough, or carry heavy loads from the fields.",
+      "initialVitals": {
+        "hr": 78,
+        "bpSystolic": 126,
+        "bpDiastolic": 82,
+        "rr": 16,
+        "spo2": 99,
+        "temp": 37,
+        "gcs": 15
+      },
+      "patient": {
+        "name": "Sunita Devi",
+        "age": 48,
+        "sex": "female",
+        "occupation": "Agricultural worker and homemaker",
+        "residence": "Mirzapur district, Uttar Pradesh"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you to the hospital today",
+            "tell me about your main trouble",
+            "what is the chief problem"
+          ],
+          "reply": "Doctor, I have been leaking urine involuntarily whenever I cough, laugh, sneeze, or carry heavy loads of fodder and water for over two years."
+        },
+        "leakage_triggers": {
+          "cues": [
+            "what activities cause the urine to leak",
+            "does the leakage happen with coughing or sneezing",
+            "triggers for urinary loss"
+          ],
+          "reply": "It happens strictly when I exert myself: coughing hard, sneezing, laughing loudly, bending quickly, or lifting heavy brass pots and grain sacks. It does not leak when I am lying resting in bed."
+        },
+        "leakage_volume_pattern": {
+          "cues": [
+            "how much urine comes out during each leak",
+            "does it come as a spurt or soaking flood",
+            "volume of leakage episodes"
+          ],
+          "reply": "A small spurt of urine squirts out at the exact moment I cough or strain. It is not a continuous flow, but a sharp squirt that dampens my undergarments."
+        },
+        "urgency_symptom_inquiry": {
+          "cues": [
+            "do you get a sudden uncontrollable urge before leaking",
+            "is there a rush to reach the bathroom",
+            "urgency and rushing to toilet"
+          ],
+          "reply": "No, doctor, I do not get a sudden uncontrollable urge beforehand. I can hold my urine normally when walking to the toilet without rushing."
+        },
+        "daytime_voiding_frequency": {
+          "cues": [
+            "how many times do you pass urine during the daytime",
+            "daytime urinary frequency",
+            "number of voids during daytime"
+          ],
+          "reply": "I pass urine five to six times during the whole day, which has always been my normal pattern. I do not need to go every hour."
+        },
+        "nocturia_frequency_inquiry": {
+          "cues": [
+            "do you have to wake up at night to pass urine",
+            "nighttime voiding frequency",
+            "nocturia episodes"
+          ],
+          "reply": "Usually I sleep through the night without waking. Occasionally, if I drink water late in the evening, I wake up once to pass urine."
+        },
+        "containment_pad_usage": {
+          "cues": [
+            "do you wear pads or cloth pieces to protect yourself",
+            "how many pads do you use daily",
+            "pad usage and changing frequency"
+          ],
+          "reply": "I wear folded cotton cloth pads every day. On days when my cough is bad or I am working in the fields, I have to change three to four damp cloths daily."
+        },
+        "voiding_difficulty_stream": {
+          "cues": [
+            "do you have difficulty starting your urine stream",
+            "hesitancy, straining, or weak stream",
+            "difficulty emptying bladder"
+          ],
+          "reply": "No, once I sit down, the urine starts easily in a good steady stream. I do not have to strain, push on my belly, or wait for the flow to start."
+        },
+        "incomplete_emptying_feeling": {
+          "cues": [
+            "do you feel that your bladder is still full after passing urine",
+            "sensation of incomplete bladder emptying",
+            "feeling of residual urine"
+          ],
+          "reply": "No, my bladder feels completely empty and comfortable after I finish urinating."
+        },
+        "pelvic_bulge_prolapse": {
+          "cues": [
+            "do you feel any lump or bulge coming down in the vagina",
+            "sensation of something coming down below",
+            "prolapse or mass per vaginum"
+          ],
+          "reply": "I do feel a very slight fullness inside the vagina towards the evening after long standing, but nothing comes out of the vaginal opening."
+        },
+        "obstetric_delivery_history": {
+          "cues": [
+            "how many children have you delivered and what was the mode",
+            "obstetric history and delivery details",
+            "number of normal deliveries"
+          ],
+          "reply": "I have had three full-term normal vaginal deliveries at home in our village. All three children were healthy and weighed over three kilograms."
+        },
+        "labour_complications_tears": {
+          "cues": [
+            "did you have prolonged labour or perineal tears",
+            "complications during your childbirths",
+            "forceps delivery or cutting stitch"
+          ],
+          "reply": "During my second delivery the dai said labour was prolonged, and I pushed for nearly three hours. I suffered a small tear below that was not stitched, but healed on its own."
+        },
+        "menstrual_and_menopausal": {
+          "cues": [
+            "are your menstrual periods regular or have they stopped",
+            "menopausal status and last menstrual period",
+            "menstrual history details"
+          ],
+          "reply": "My periods stopped completely about two years ago, when I was forty-six. I have not had any bleeding, spotting, or unusual discharge since then."
+        },
+        "chronic_cough_bowels": {
+          "cues": [
+            "do you suffer from chronic cough, asthma, or constipation",
+            "persistent cough or straining at stool",
+            "respiratory and bowel habits"
+          ],
+          "reply": "I cook on a traditional wood-smoke chulha stove and have had a morning smoker-like cough for five years. I also suffer from constipation and have to strain to pass hard stools."
+        },
+        "medication_and_diuretics": {
+          "cues": [
+            "what medicines are you taking regularly",
+            "any blood pressure or water tablets",
+            "current drug history"
+          ],
+          "reply": "I take an ayurvedic herbal powder for digestion and paracetamol occasionally for joint pains. I do not take any daily blood pressure pills or water tablets."
+        },
+        "fluid_and_caffeine_habits": {
+          "cues": [
+            "how much water, tea, or liquids do you drink daily",
+            "daily fluid intake and tea consumption",
+            "tea and coffee intake"
+          ],
+          "reply": "I drink about one and a half to two litres of water a day, along with two small glasses of sweet milk tea, one in the morning and one in the late afternoon."
+        },
+        "quality_of_life_distress": {
+          "cues": [
+            "how is this leaking affecting your daily life and family",
+            "impact on social activities and work",
+            "emotional and lifestyle impact"
+          ],
+          "reply": "It has made me very self-conscious. I constantly fear I might smell of urine, so I avoid attending family marriages, sitting in village gatherings, or travelling on buses."
+        },
+        "red_flags_haematuria_pain": {
+          "cues": [
+            "have you seen blood in your urine or felt burning pain",
+            "haematuria, dysuria, or fever",
+            "blood in urine or severe pain"
+          ],
+          "reply": "No, doctor, my urine has never looked red or cloudy, and I have never had burning pain, fever, or pain in my back or lower stomach."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Alert 48-year-old woman, well-nourished, no pallor, no icterus, no peripheral oedema. Walks with normal gait and without assistance.",
+          "abnormal": false
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 78 beats/min regular, blood pressure 126/82 mmHg, respiratory rate 16 breaths/min, afebrile, BMI 26.4 kg/m2.",
+          "abnormal": false
+        },
+        "skill.gen.edema": {
+          "finding": "No pedal oedema, calves soft and non-tender, no signs of deep vein thrombosis.",
+          "abnormal": false
+        },
+        "skill.exam.obg.gynae_abdominal": {
+          "finding": "Abdomen soft, non-tender, no palpable mass, liver and spleen not enlarged. No suprapubic tenderness and no distended bladder felt.",
+          "abnormal": false
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "finding": "Vulva normal with mild introital gaping. No dermatitis or active skin excoriation. External urethral meatus healthy without caruncle or discharge.",
+          "abnormal": false
+        },
+        "skill.exam.obg.speculum_insert": {
+          "finding": "Sims speculum introduced gently into posterior vaginal fornix without discomfort; vaginal mucosa moist with slight loss of rugosity consistent with perimenopausal changes.",
+          "abnormal": false
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "finding": "Retraction of posterior vaginal wall reveals mild anterior vaginal wall descent (stage I cystocele, point Ba -1 cm). No cervical decubitus ulcer, no pooling of discharge or urine in the vault.",
+          "abnormal": true
+        },
+        "skill.exam.obg.bimanual": {
+          "finding": "Uterus normal size, anteverted, mobile, non-tender. Bilateral fornices free without adnexal mass. Digital pelvic floor assessment reveals voluntary levator ani contraction of Oxford grade 3 (moderate squeeze, upward lift maintained for 3 seconds).",
+          "abnormal": false
+        },
+        "skill.exam.obg.prolapse_popq": {
+          "finding": "POP-Q staging under maximal Valsalva: Aa -1, Ba -1, C -5, D -6, gh 3.5, pb 3.0, tvl 8.5, Ap -2, Bp -2 (Stage I anterior compartment prolapse). Cough stress test performed with bladder comfortably full (approx 250 mL) in lithotomy position demonstrates instantaneous, synchronous spurt of urine from the external urethral meatus on coughing. Cough stress test remains positive upon manual reduction of anterior wall.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "urine_dipstick",
+        "bladder_diary",
+        "post_void_residual"
+      ],
+      "investigations": {
+        "urine_dipstick": {
+          "label": "Urine dipstick",
+          "result": "Specific gravity 1.018, pH 6.0, protein negative, glucose negative, nitrites negative, leucocyte esterase negative, blood negative.",
+          "note": "Normal bedside urinalysis; excludes active urinary tract infection, glycosuria-induced osmotic diuresis, and microscopic haematuria."
+        },
+        "bladder_diary": {
+          "label": "3-day frequency-volume bladder diary",
+          "result": "Average daily fluid intake 1800 mL. Daytime voiding frequency 5 to 6 times. Nocturia 0 to 1 episode. Mean voided volume 250 to 320 mL. Leaking episodes occurred 3 to 4 times daily, exclusively during coughing, sneezing, or lifting heavy water vessels; zero urge leakage episodes recorded.",
+          "note": "Confirms pure stress urinary incontinence phenotype with normal bladder capacity, normal diurnal frequency, and absence of detrusor overactivity."
+        },
+        "post_void_residual": {
+          "label": "Post-void residual urine volume (bedside ultrasound)",
+          "result": "Bladder scanned immediately following voluntary voiding shows residual volume of 25 mL.",
+          "note": "Residual volume is well within normal limits (<50 mL), completely excluding chronic urinary retention and overflow incontinence."
+        },
+        "urine_culture": {
+          "label": "Midstream urine microscopy and culture",
+          "result": "Microscopy shows 2-4 pus cells/hpf, no red blood cells, no casts. Culture shows no significant bacterial growth (<10^3 CFU/mL).",
+          "note": "Confirms sterile urine; excludes asymptomatic bacteriuria and subclinical cystitis."
+        },
+        "blood_glucose": {
+          "label": "Fasting and postprandial blood glucose",
+          "result": "Fasting blood glucose 88 mg/dL, 2-hour postprandial blood glucose 118 mg/dL, HbA1c 5.4%.",
+          "note": "Excludes undiagnosed diabetes mellitus as a cause of polyuria."
+        },
+        "renal_function": {
+          "label": "Serum creatinine and electrolytes",
+          "result": "Serum creatinine 0.8 mg/dL (normal 0.6-1.1), blood urea 22 mg/dL, sodium 138 mEq/L, potassium 4.2 mEq/L.",
+          "note": "Normal baseline renal function."
+        },
+        "urodynamics": {
+          "label": "Multichannel urodynamic study (if indicated)",
+          "result": "First sensation of filling at 140 mL, normal bladder capacity 420 mL. No involuntary detrusor contractions during filling cystometry. On coughing at 200 mL bladder volume, synchronous urine leakage demonstrated with abdominal leak point pressure of 85 cmH2O. Pressure-flow voiding curve normal with maximum flow rate (Qmax) 24 mL/s and detrusor pressure at Qmax 22 cmH2O.",
+          "note": "Confirms genuine stress urinary incontinence secondary to urethral hypermobility; confirms normal detrusor stability and absence of bladder outflow obstruction."
+        }
+      },
+      "differentialModel": {
+        "answer": "Stress urinary incontinence, Urgency urinary incontinence, Mixed urinary incontinence, Urinary tract infection, Pelvic organ prolapse with cystocele",
+        "accept": [
+          "Stress urinary incontinence",
+          "stress incontinence",
+          "SUI",
+          "effort incontinence",
+          "Urgency urinary incontinence",
+          "urgency incontinence",
+          "urge incontinence",
+          "overactive bladder",
+          "Mixed urinary incontinence",
+          "mixed incontinence",
+          "Urinary tract infection",
+          "Cystocele",
+          "Pelvic organ prolapse",
+          "Urethral diverticulum",
+          "Overflow urinary incontinence"
+        ],
+        "minMatch": 3
+      },
+      "diagnosis": {
+        "answer": "Stress urinary incontinence",
+        "accept": [
+          "Stress urinary incontinence",
+          "stress incontinence",
+          "SUI",
+          "effort incontinence"
+        ]
+      },
+      "managementModel": {
+        "answer": "Supervised pelvic floor muscle training for at least 3 months, lifestyle modifications including fluid moderation and weight control, avoidance of heavy lifting, consideration of mid-urethral sling surgery if conservative therapy fails",
+        "accept": [
+          "pelvic floor muscle training",
+          "pelvic floor training",
+          "PFMT",
+          "Kegel exercises",
+          "conservative management",
+          "bladder diary",
+          "lifestyle modification",
+          "weight loss",
+          "avoid heavy lifting",
+          "mid-urethral sling",
+          "synthetic sling",
+          "tension-free vaginal tape",
+          "TVT",
+          "transobturator tape",
+          "TOT",
+          "colposuspension"
+        ]
+      },
+      "teachingPoints": [
+        "First-line management for uncomplicated female stress urinary incontinence is supervised pelvic floor muscle training for at least three months, performing at least eight contractions three times daily.",
+        "The clinical cough stress test must be performed with a comfortably full bladder (at least 200 mL); immediate synchronous leakage verifies stress incontinence, whereas delayed loss suggests cough-induced detrusor overactivity.",
+        "Synthetic mid-urethral slings (TVT or TOT) are the gold-standard surgical interventions for stress incontinence failing conservative care, providing a tension-free supportive backboard beneath the mid-urethra.",
+        "Routine multichannel urodynamics are not required for uncomplicated stress incontinence with positive cough test and normal residual; they are reserved for diagnostic uncertainty, mixed symptoms, or prior failed surgery."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

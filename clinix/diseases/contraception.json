@@ -1,0 +1,1623 @@
+{
+  "_comment": "CliniX disease pathway: Contraception counselling (method choice and eligibility)",
+  "id": "contraception",
+  "name": "Contraception counselling",
+  "fullName": "Contraception counselling: method choice and medical eligibility",
+  "system": "obgyn",
+  "kbRef": "infertility_and_contraception",
+  "oneLine": "Evidence-based contraceptive counselling, tiered effectiveness model, and medical eligibility assessment across clinical scenarios",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "skills": [
+        "skill.contracept.basics",
+        "skill.contracept.mec_framework"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the client",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.obg.contra_counsel"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "Contraceptive history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.menstrual_history",
+        "skill.hx.obg.contra_eligibility"
+      ]
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Medical background and risk screening",
+      "skills": [
+        "skill.hx.obg.medical_family_drug",
+        "skill.hx.obg.gynae_background",
+        "skill.hx.contracept.risk"
+      ],
+      "emphasis": {
+        "skill.hx.contracept.risk": 1
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ]
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Pelvic examination and pre-insertion checks",
+      "skills": [
+        "skill.approach.obg.intimate_consent",
+        "skill.exam.obg.vulval_inspect",
+        "skill.exam.obg.speculum_insert",
+        "skill.exam.obg.speculum_inspect",
+        "skill.exam.obg.bimanual",
+        "skill.approach.obg.pelvic_close"
+      ]
+    },
+    {
+      "id": "disease_findings",
+      "title": "Evaluating method contraindications and safety markers",
+      "skills": [
+        "skill.contracept.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary and shared decision-making",
+      "skills": [
+        "skill.contracept.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Comparative evaluation of candidate methods",
+      "skills": [
+        "skill.contracept.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations and medical eligibility reference",
+      "skills": [
+        "skill.ix.contracept.workup",
+        "skill.annex.contracept.mec_table"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Formulating the contraceptive plan and initiation schedule",
+      "skills": [
+        "skill.contracept.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Contraceptive provision, emergency cover, and side-effect management",
+      "skills": [
+        "skill.tx.contracept.counselling_provision"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "skills": [
+        "skill.present.contracept.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.contraception.counselling",
+        "title": "Contraceptive counselling and method choice",
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.obg.contra_counsel",
+          "skill.hx.obg.contra_eligibility"
+        ],
+        "seconds": 420,
+        "examinerQuestions": [
+          "Which four contraceptive methods belong to Tier 1 with typical first-year failure rates under 1%?",
+          "What are the six clinical criteria in the WHO Pregnancy Checklist that allow reasonable certainty a client is not pregnant?",
+          "How do you counsel a woman regarding expected menstrual bleeding changes during the first 3 to 6 months of using a levonorgestrel intrauterine system?"
+        ]
+      },
+      {
+        "id": "osce.contraception.eligibility_and_iud",
+        "title": "Medical eligibility screening and intrauterine contraception",
+        "skills": [
+          "skill.approach.obg.intimate_consent",
+          "skill.exam.obg.vulval_inspect",
+          "skill.exam.obg.speculum_insert",
+          "skill.exam.obg.speculum_inspect",
+          "skill.exam.obg.bimanual",
+          "skill.approach.obg.pelvic_close",
+          "skill.exam.obg.iucd_insertion"
+        ],
+        "seconds": 480,
+        "examinerQuestions": [
+          "Why is copper intrauterine device insertion classified as Category 3 between 48 hours and 4 weeks postpartum?",
+          "Which physical findings on bimanual pelvic and speculum examination represent absolute contraindications to immediate IUD insertion?",
+          "What is the management of a woman with an intrauterine device in situ who presents with mild pelvic inflammatory disease?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.contracept.basics",
+      "skill.contracept.mec_framework",
+      "skill.approach.obg.contra_counsel",
+      "skill.hx.obg.contra_eligibility",
+      "skill.contracept.differential",
+      "skill.ix.contracept.workup",
+      "skill.contracept.diagnosis",
+      "skill.tx.contracept.counselling_provision"
+    ]
+  },
+  "skills": {
+    "skill.contracept.basics": {
+      "id": "skill.contracept.basics",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Tiered contraceptive effectiveness and principles of family planning",
+      "oneLine": "Framing method efficacy by user dependence and real-world failure rates",
+      "why": "Contraceptive counselling begins with understanding the hierarchy of effectiveness rather than quoting isolated failure statistics. Framing options by tiers helps clients recognize that long-acting reversible contraception (LARC) has failure rates under 1% because it eliminates daily user dependence, whereas barrier and coitus-dependent methods carry typical failure rates exceeding 15%.",
+      "teach": [
+        {
+          "heading": "The tiered contraceptive effectiveness model",
+          "body": "Modern contraceptive counselling organizes methods into three distinct tiers of effectiveness based on real-world typical use.\n\nTier 1 comprises long-acting reversible contraceptives (intrauterine devices and subdermal implants) and permanent sterilisation, with first-year failure rates under 1%.\n\nTier 2 includes injectables, oral contraceptive pills, transdermal patches, and vaginal rings, where typical failure rates range between 4% and 9% due to missed doses or delayed administration.\n\nTier 3 consists of male and female condoms, diaphragms, withdrawal, and fertility awareness-based methods, where typical failure rates reach 15% to 24% because they require consistent motivation with every act of intercourse."
+        },
+        {
+          "heading": "Comparison of typical versus perfect use failure rates",
+          "table": {
+            "cols": [
+              "Contraceptive Tier",
+              "Representative Methods",
+              "Typical Failure Rate",
+              "Perfect Failure Rate"
+            ],
+            "rows": [
+              [
+                "Tier 1 (Highest)",
+                "Cu-IUD, LNG-IUS, Implant, Sterilisation",
+                "< 1% per year",
+                "< 0.5% per year"
+              ],
+              [
+                "Tier 2 (Moderate)",
+                "DMPA injection, Combined pill, POP",
+                "4% to 9% per year",
+                "0.3% to 3% per year"
+              ],
+              [
+                "Tier 3 (User-dependent)",
+                "Male condom, Diaphragm, Withdrawal",
+                "15% to 24% per year",
+                "2% to 5% per year"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Differentiating spacing from limiting reproductive goals",
+          "body": "Family planning consultations differentiate between spacing (delaying a subsequent pregnancy by several years) and limiting (permanent cessation of childbearing).\n\nFor spacing, reversible methods with prompt return of fecundity are preferred, whereas multiparous clients who have completed their desired family size should be counselled on permanent female sterilisation and non-scalpel vasectomy."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which contraceptive methods constitute Tier 1 with typical failure rates below 1%?",
+          "a": "Intrauterine devices (both copper IUD and levonorgestrel-releasing IUS), subdermal progestogen implants, and surgical sterilisation (vasectomy and tubal ligation).",
+          "accept": [
+            "intrauterine",
+            "iud",
+            "ius",
+            "implant",
+            "sterilisation",
+            "sterilization",
+            "vasectomy"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does the typical failure rate of oral contraceptive pills differ markedly from their perfect use failure rate?",
+          "a": "Typical use is compromised by human error such as missed pills, delayed packet restarts, vomiting, diarrhoea, and drug interactions with hepatic enzyme inducers.",
+          "accept": [
+            "missed",
+            "delayed",
+            "error",
+            "vomiting",
+            "interactions",
+            "compliance",
+            "adherence"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How does return of fertility differ between the copper intrauterine device and depot medroxyprogesterone acetate?",
+          "a": "Return of fertility is immediate following copper IUD removal, whereas DMPA injections can be associated with a median delay in return of ovulation of 7 to 10 months.",
+          "accept": [
+            "immediate",
+            "delay",
+            "months",
+            "ovulation",
+            "dmpa",
+            "return"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "tiers",
+          "text": "Explains the three tiers of contraceptive effectiveness accurately"
+        },
+        {
+          "id": "rates",
+          "text": "Differentiates typical use from perfect use failure rates"
+        },
+        {
+          "id": "larc",
+          "text": "Highlights LARC methods as first-line high-efficacy options"
+        },
+        {
+          "id": "intentions",
+          "text": "Distinguishes spacing from limiting reproductive intentions"
+        },
+        {
+          "id": "autonomy",
+          "text": "Emphasizes patient autonomy and informed choice"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "infertility_and_contraception: Principles of contraception and effectiveness"
+        },
+        {
+          "source": "WHO",
+          "locator": "Family Planning: A Global Handbook for Providers (2022 Edition), Comparing Contraceptive Methods and Effectiveness"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.contracept.mec_framework": {
+      "id": "skill.contracept.mec_framework",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "The WHO and national medical eligibility criteria framework",
+      "oneLine": "Applying the four-tier evidence-based classification for contraceptive safety",
+      "why": "The Medical Eligibility Criteria (MEC) framework removes arbitrary provider restrictions and replaces them with evidence-based categories of safety. Mastering the four tiers ensures that clinicians never prescribe a method with unacceptable health risks (Category 4) while preventing unnecessary denial of effective methods when benefits outweigh minor risks (Category 2).",
+      "teach": [
+        {
+          "heading": "The four medical eligibility categories defined",
+          "body": "Category 1 represents conditions with no restriction on method use, allowing unrestricted provision.\n\nCategory 2 indicates that advantages generally outweigh theoretical or proven risks, meaning the method can be safely used.\n\nCategory 3 denotes conditions where risks usually outweigh advantages, so the method is not recommended unless other methods are unavailable or unacceptable.\n\nCategory 4 indicates an unacceptable health risk where the method must not be used."
+        },
+        {
+          "heading": "MEC framework summary for clinical practice",
+          "table": {
+            "cols": [
+              "Category",
+              "Clinical Meaning",
+              "Practical Guidance",
+              "Prototypical Example"
+            ],
+            "rows": [
+              [
+                "Category 1",
+                "No restriction for use",
+                "Use method in any circumstance",
+                "Cu-IUD in healthy nulliparous woman"
+              ],
+              [
+                "Category 2",
+                "Advantages outweigh risks",
+                "Generally use the method",
+                "Combined pill in controlled epilepsy on valproate"
+              ],
+              [
+                "Category 3",
+                "Risks outweigh advantages",
+                "Not recommended without specialist review",
+                "Combined pill in smoker under 35 smoking 15+ cigs"
+              ],
+              [
+                "Category 4",
+                "Unacceptable health risk",
+                "Method must not be used",
+                "Combined pill in migraine with aura"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Distinction between initiation and continuation",
+          "body": "Medical eligibility criteria occasionally differentiate between initiating a method and continuing it.\n\nFor example, if a woman develops deep pelvic infection while using a copper IUD, continuation with antibiotic therapy is Category 2, whereas placing a new IUD during acute infection is Category 4.\n\nSimilarly, developing ischaemic heart disease while taking combined oral pills prompts immediate discontinuation."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the clinical definition of a WHO Category 4 condition in contraceptive counselling?",
+          "a": "A condition that represents an unacceptable health risk if the contraceptive method is used, constituting an absolute contraindication.",
+          "accept": [
+            "unacceptable",
+            "health risk",
+            "contraindication",
+            "absolute",
+            "not be used"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How does clinical management differ between Category 2 and Category 3 conditions in primary care?",
+          "a": "In Category 2, the method can generally be used because benefits outweigh risks; in Category 3, the method is not recommended unless more suitable methods are unavailable or rejected.",
+          "accept": [
+            "generally used",
+            "not recommended",
+            "outweigh",
+            "benefits",
+            "risks",
+            "unavailable"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does pelvic inflammatory disease have different categories for initiation versus continuation of an intrauterine device?",
+          "a": "Insertion through an infected cervix into the endometrial cavity risks introducing pathogens (Category 4), whereas an established IUD in mild PID can be kept in situ while treating with antibiotics (Category 2).",
+          "accept": [
+            "insertion",
+            "pathogens",
+            "antibiotics",
+            "in situ",
+            "continuation",
+            "category 4",
+            "category 2"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "cat_definitions",
+          "text": "Defines all four MEC categories accurately"
+        },
+        {
+          "id": "safety_gate",
+          "text": "Identifies Category 4 as an absolute contraindication",
+          "critical": true
+        },
+        {
+          "id": "primary_care",
+          "text": "Explains practical implementation of Category 2 versus Category 3"
+        },
+        {
+          "id": "init_cont",
+          "text": "Distinguishes initiation criteria from continuation criteria"
+        },
+        {
+          "id": "evidence",
+          "text": "Demonstrates knowledge of evidence-based safety guidance"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "infertility_and_contraception: Medical eligibility criteria framework"
+        },
+        {
+          "source": "WHO",
+          "locator": "Medical Eligibility Criteria for Contraceptive Use (5th Edition), Executive Summary and Category Definitions"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.contracept.signs": {
+      "id": "skill.contracept.signs",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Identifying clinical contraindications and method safety markers",
+      "oneLine": "Synthesising physical examination findings and clinical red flags that restrict contraceptive choices",
+      "why": "A focused physical examination identifies asymptomatic conditions that alter medical eligibility. Measuring resting blood pressure detects silent hypertension that precludes oestrogen-containing methods, while targeted pelvic assessment identifies purulent cervicitis or pelvic tenderness that contraindicates intrauterine device placement.",
+      "teach": [
+        {
+          "heading": "Blood pressure assessment as the primary screening gate",
+          "body": "Blood pressure measurement is the mandatory physical check before initiating combined hormonal contraceptives (pills, patch, and vaginal ring).\n\nSystolic blood pressure of 140 to 159 mmHg or diastolic of 90 to 99 mmHg is Category 3.\n\nSystolic pressure of 160 mmHg or more or diastolic pressure of 100 mmHg or more constitutes Category 4 due to sharp increases in ischaemic stroke and myocardial infarction risk.\n\nProgestogen-only pills, implants, and copper IUDs remain safe."
+        },
+        {
+          "heading": "Targeted pelvic examination signs prior to intrauterine placement",
+          "body": "Before placing an intrauterine device (Cu-IUD or LNG-IUS), a bimanual examination and speculum inspection must confirm normal uterine size, position, and mobile non-tenderness.\n\nPurulent cervical discharge, cervical motion tenderness, or adnexal fullness suggests acute pelvic inflammatory disease or active cervicitis, which absolutely contraindicates IUD insertion until treated and fully resolved.\n\nUterine enlargement with distortion of the cavity from fibroids precludes reliable placement."
+        },
+        {
+          "heading": "Recognizing breast and systemic malignant markers",
+          "body": "Active or past breast cancer is Category 4 for all hormonal contraceptive options, including combined pills, progestogen-only pills, DMPA injections, subdermal implants, and the levonorgestrel intrauterine system.\n\nIn women with a history of breast carcinoma, the copper intrauterine device is the premier high-efficacy, completely hormone-free contraceptive choice (Category 1)."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What blood pressure reading makes combined hormonal contraception an absolute contraindication (Category 4)?",
+          "a": "Systolic blood pressure of 160 mmHg or higher, or diastolic blood pressure of 100 mmHg or higher.",
+          "accept": [
+            "160",
+            "100",
+            "160/100",
+            "systolic",
+            "diastolic",
+            "category 4"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which physical examination findings on bimanual pelvic examination contraindicate immediate IUD insertion?",
+          "a": "Purulent cervical discharge, cervical motion tenderness, adnexal tenderness, or a tender, enlarged uterus indicating pelvic inflammatory disease.",
+          "accept": [
+            "purulent",
+            "discharge",
+            "cervical motion",
+            "tenderness",
+            "adnexal",
+            "pelvic inflammatory",
+            "pid"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A 32-year-old woman treated for breast cancer two years ago requests highly effective reversible contraception. What is the safest Tier 1 method?",
+          "a": "The copper intrauterine device (Cu-T 380A), because it is completely hormone-free (Category 1), whereas all hormonal methods are Category 4.",
+          "accept": [
+            "copper",
+            "cu-t",
+            "iud",
+            "hormone-free",
+            "category 1",
+            "copper t"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "bp_cutoffs",
+          "text": "Identifies blood pressure thresholds for combined hormonal methods",
+          "critical": true
+        },
+        {
+          "id": "pelvic_signs",
+          "text": "Recognises pelvic infection signs that contraindicate IUD placement"
+        },
+        {
+          "id": "breast_cancer",
+          "text": "Identifies breast malignancy as Category 4 for all hormonal methods"
+        },
+        {
+          "id": "cu_iud_safety",
+          "text": "Recommends copper IUD as the safe hormone-free option in malignancy"
+        },
+        {
+          "id": "exam_focus",
+          "text": "Prioritises mandatory physical assessments over non-essential checks"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "infertility_and_contraception: Clinical contraindications and safety markers"
+        },
+        {
+          "source": "Berek",
+          "locator": "Berek and Novak's Gynecology, Contraception and Sterilization: Patient Assessment and Contraindications"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.contracept.summary": {
+      "id": "skill.contracept.summary",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Synthesising the contraceptive consultation",
+      "oneLine": "Structuring clinical findings to align safety, efficacy, and patient preferences",
+      "why": "A contraceptive summary synthesises parity, reproductive timeline, medical eligibility tier, and personal priorities into a coherent decision. Formulating this synthesis ensures that contraindications are respected, non-contraceptive benefits are leveraged, and the client reaches an informed choice that promotes high long-term satisfaction and adherence.",
+      "teach": [
+        {
+          "heading": "The three components of a contraceptive synthesis",
+          "body": "A complete contraceptive synthesis begins by establishing reproductive intent: the desired duration of spacing or the decision to limit childbearing permanently.\n\nThe second component identifies medical conditions that alter eligibility, categorising potential methods by MEC tier.\n\nThe third component incorporates client priorities, such as bleeding profile preferences, privacy, coital independence, and ease of access."
+        },
+        {
+          "heading": "Reconciling safety with client preferences",
+          "body": "When a client expresses interest in a method that is Category 3 or 4 for her medical profile, the clinician must explain the specific health risks without being dismissive.\n\nPresenting safe alternatives within the same efficacy tier (for example, offering an LNG-IUS or subdermal implant to a woman with migraine with aura who requested combined pills) preserves efficacy while eliminating stroke risk."
+        },
+        {
+          "heading": "Documenting the shared contraceptive agreement",
+          "body": "Clear medical documentation records the exclusion of pregnancy via the pregnancy checklist, baseline blood pressure, counselling on expected bleeding changes, and instructions for managing complications.\n\nProviding a clear open-door policy encourages the client to return if side effects occur rather than discontinuing contraception abruptly."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What three elements must be synthesized before confirming a contraceptive prescription?",
+          "a": "Reproductive intentions (spacing or limiting), medical eligibility category, and patient preferences regarding administration and side effects.",
+          "accept": [
+            "intentions",
+            "spacing",
+            "limiting",
+            "eligibility",
+            "preferences",
+            "safety",
+            "goals"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "A client with controlled chronic hypertension requests oral contraceptive pills. How do you synthesise this recommendation?",
+          "a": "Advise that combined oral pills carry increased cardiovascular risk (Category 3), whereas progestogen-only pills or the levonorgestrel IUS provide safe alternatives (Category 1 or 2).",
+          "accept": [
+            "cardiovascular",
+            "category 3",
+            "progestogen",
+            "pop",
+            "ius",
+            "safe",
+            "combined"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is an open-door return policy essential in the contraceptive management summary?",
+          "a": "It ensures that clients with nuisance side effects such as irregular bleeding return for counselling or method switching rather than discontinuing contraception and risking unintended pregnancy.",
+          "accept": [
+            "side effects",
+            "bleeding",
+            "switching",
+            "discontinuing",
+            "unintended",
+            "pregnancy",
+            "continuation"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "intentions",
+          "text": "Clarifies spacing versus limiting goals in the summary"
+        },
+        {
+          "id": "safety_synthesis",
+          "text": "Synthesises medical safety markers into MEC categories"
+        },
+        {
+          "id": "preference_alignment",
+          "text": "Aligns clinical choices with client personal values"
+        },
+        {
+          "id": "shared_decision",
+          "text": "Executes shared decision-making without coercion",
+          "critical": true
+        },
+        {
+          "id": "follow_up_plan",
+          "text": "Structures follow-up and emergency contact access"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "infertility_and_contraception: Synthesising contraceptive consultations"
+        },
+        {
+          "source": "WHO",
+          "locator": "Family Planning: A Global Handbook for Providers (2022 Edition), Client Counselling and Decision-Making"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.contracept.differential": {
+      "id": "skill.contracept.differential",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Comparative evaluation of suitable contraceptive methods",
+      "oneLine": "Evaluating competing contraceptive modalities across efficacy, side-effect profiles, and non-contraceptive benefits",
+      "why": "When multiple methods are medically eligible, differential evaluation guides the patient toward the best individual fit. Weighing non-contraceptive benefits (such as reducing heavy menstrual bleeding with the LNG-IUS) against potential burdens (such as cramping with copper IUDs or compliance demands with daily pills) empowers personalized decision-making.",
+      "teach": [
+        {
+          "heading": "Comparing LARC options: Cu-IUD versus LNG-IUS",
+          "body": "The copper intrauterine device (Cu-T 380A) provides up to 10 years of hormone-free contraception with rapid return of fertility and no metabolic interactions.\n\nHowever, it can increase menstrual blood loss and dysmenorrhoea.\n\nIn contrast, the levonorgestrel intrauterine system (LNG-IUS) releases local progestogen, reducing menstrual blood loss by up to 90% and relieving dysmenorrhoea, making it the preferred choice in heavy menstrual bleeding."
+        },
+        {
+          "heading": "Differential method profile comparison",
+          "table": {
+            "cols": [
+              "Contraceptive Method",
+              "Duration of Action",
+              "Primary Mechanism",
+              "Key Menstrual Effect"
+            ],
+            "rows": [
+              [
+                "Cu-T 380A",
+                "10 years",
+                "Copper ion spermicidal action",
+                "May increase flow and cramping"
+              ],
+              [
+                "LNG-IUS (Mirena)",
+                "5 to 8 years",
+                "Endometrial suppression and mucus thickening",
+                "Marked reduction in flow, amenorrhoea"
+              ],
+              [
+                "DMPA injection",
+                "3 months",
+                "Ovulation inhibition by progestogen",
+                "Amenorrhoea after initial spotting"
+              ],
+              [
+                "Combined oral pill",
+                "Daily ingestion",
+                "Ovulation inhibition by feedback",
+                "Predictable regular withdrawal bleed"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Leveraging non-contraceptive health benefits",
+          "body": "Contraceptive selection should actively utilize non-contraceptive benefits.\n\nCombined oral contraceptives treat acne, dysmenorrhoea, and hirsutism while reducing long-term ovarian and endometrial cancer risk by 40% to 50%.\n\nThe levonorgestrel intrauterine system provides first-line medical therapy for idiopathic menorrhagia and adenomyosis, often preventing surgical intervention."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why is the levonorgestrel intrauterine system preferred over the copper IUD in a woman with heavy menstrual bleeding?",
+          "a": "The LNG-IUS releases local progestogen that suppresses the endometrium and reduces menstrual blood loss by up to 90%, whereas copper IUDs may increase bleeding and cramping.",
+          "accept": [
+            "progestogen",
+            "endometrium",
+            "suppresses",
+            "reduces",
+            "blood loss",
+            "copper",
+            "increase",
+            "bleeding"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What non-contraceptive oncological benefits are associated with long-term combined oral contraceptive use?",
+          "a": "A substantial reduction in the risk of ovarian cancer (around 40%) and endometrial cancer (around 50%), with protection persisting for decades after cessation.",
+          "accept": [
+            "ovarian",
+            "endometrial",
+            "cancer",
+            "reduction",
+            "protective",
+            "40%",
+            "50%"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "In which clinical situation would the copper IUD be preferred over the LNG-IUS despite increased menstrual cramping?",
+          "a": "When the woman desires completely hormone-free contraception, has a contraindication to progestogens such as current breast cancer, or requires immediate emergency contraception.",
+          "accept": [
+            "hormone-free",
+            "breast cancer",
+            "emergency",
+            "progestogen",
+            "contraindication"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "larc_comparison",
+          "text": "Compares copper IUD and LNG-IUS accurately"
+        },
+        {
+          "id": "menorrhagia_match",
+          "text": "Selects LNG-IUS for menorrhagia and dysmenorrhoea",
+          "critical": true
+        },
+        {
+          "id": "oncological_benefits",
+          "text": "Explains ovarian and endometrial cancer risk reduction"
+        },
+        {
+          "id": "dmpa_profile",
+          "text": "Outlines benefits and limitations of 3-monthly injectables"
+        },
+        {
+          "id": "tailoring",
+          "text": "Tailors method selection to specific co-morbidities"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "infertility_and_contraception: Comparative evaluation of contraceptive methods"
+        },
+        {
+          "source": "FOGSI",
+          "locator": "Good Clinical Practice Recommendations on Long-Acting Reversible Contraception and Spacing Options"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.contracept.workup": {
+      "id": "skill.ix.contracept.workup",
+      "kind": "investigation",
+      "system": "obgyn",
+      "title": "Essential assessment, pregnancy exclusion, and selective testing",
+      "oneLine": "Applying the pregnancy checklist, mandatory baseline checks, and avoiding unnecessary testing barriers",
+      "why": "Unnecessary routine laboratory testing imposes delays and financial burdens that impede contraceptive access. Modern guidelines establish that only blood pressure measurement is essential before combined hormonal methods, and bimanual examination before IUD placement. Applying the validated pregnancy checklist allows immediate method start without waiting for menses.",
+      "teach": [
+        {
+          "heading": "The pregnancy checklist: ruling out pregnancy clinically",
+          "body": "A provider can be reasonably certain a client is not pregnant if she has no pregnancy symptoms and meets any one of six criteria: within 7 days of normal menses start; exclusively breastfeeding and amenorrhoeic within 6 months of delivery; within 4 weeks postpartum (non-lactating); within 7 days post-abortion; has not had intercourse since last menses; or consistently using reliable contraception."
+        },
+        {
+          "heading": "Essential baseline clinical assessments by method",
+          "table": {
+            "cols": [
+              "Contraceptive Class",
+              "Mandatory Physical Exam",
+              "Essential Baseline Tests",
+              "Non-essential Tests"
+            ],
+            "rows": [
+              [
+                "Combined hormonal (COC, patch, ring)",
+                "Blood pressure and BMI measurement",
+                "None required routinely",
+                "Lipid profile, liver enzymes, pelvic exam"
+              ],
+              [
+                "Intrauterine devices (Cu-IUD, LNG-IUS)",
+                "Bimanual pelvic and speculum exam",
+                "Pregnancy test if uncertain",
+                "Routine ultrasound, cervical cytology"
+              ],
+              [
+                "Progestogen injectables and implants",
+                "BMI measurement",
+                "None required routinely",
+                "Pelvic examination, thrombophilia screen"
+              ],
+              [
+                "Barrier methods",
+                "None mandatory",
+                "None required",
+                "Any laboratory testing"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Indications for targeted laboratory and imaging investigations",
+          "body": "Laboratory testing is reserved for specific clinical indications.\n\nHigh-sensitivity urine pregnancy testing (hCG detection threshold 20 to 25 IU/L) is ordered whenever clinical pregnancy checklist criteria are not met.\n\nPelvic ultrasonography is indicated when pelvic examination reveals an enlarged, irregular, or distorted uterus, or to verify intrauterine device thread location when threads are not visible at the cervical os."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the only mandatory physical examination check before prescribing combined oral contraceptive pills?",
+          "a": "Accurate resting blood pressure measurement (along with baseline body mass index assessment).",
+          "accept": [
+            "blood pressure",
+            "bp",
+            "bmi",
+            "pressure",
+            "hypertension"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "State three criteria from the WHO pregnancy checklist that allow reasonable certainty a woman is not pregnant.",
+          "a": "She is within 7 days of the start of normal menses; she is exclusively breastfeeding, amenorrhoeic, and within 6 months of childbirth; she has not had intercourse since her last menses; she is within 7 days post-abortion; or she has been using a reliable method consistently.",
+          "accept": [
+            "7 days",
+            "menses",
+            "breastfeeding",
+            "amenorrhoeic",
+            "intercourse",
+            "abortion",
+            "reliable"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "When is pelvic ultrasonography genuinely indicated prior to or following intrauterine device placement?",
+          "a": "Prior to insertion if a distorted uterine cavity or fibroid is suspected on bimanual exam; following insertion if threads are not visible, or if severe pain or abnormal bleeding suggests perforation or expulsion.",
+          "accept": [
+            "distorted",
+            "fibroid",
+            "threads",
+            "missing",
+            "perforation",
+            "expulsion",
+            "ultrasound"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "preg_checklist",
+          "text": "Applies the WHO pregnancy checklist criteria accurately",
+          "critical": true
+        },
+        {
+          "id": "bp_check",
+          "text": "Identifies blood pressure as essential before combined hormonal methods"
+        },
+        {
+          "id": "pelvic_exam",
+          "text": "Confirms bimanual pelvic examination is essential before IUD placement"
+        },
+        {
+          "id": "barriers_removed",
+          "text": "Avoids ordering unnecessary routine biochemical or imaging screens"
+        },
+        {
+          "id": "targeted_ix",
+          "text": "Selects ultrasound and hCG testing for evidence-based indications"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "infertility_and_contraception: Essential pre-contraception assessment and testing"
+        },
+        {
+          "source": "NICE",
+          "locator": "NICE Clinical Guideline [CG30]: Long-acting reversible contraception: Pre-insertion Assessment and Investigations"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.contracept.mec_table": {
+      "id": "skill.annex.contracept.mec_table",
+      "kind": "annexure",
+      "system": "obgyn",
+      "title": "Medical eligibility criteria reference for high-yield conditions",
+      "oneLine": "Comprehensive tabular reference of WHO and UKMEC safety categories across medical co-morbidities",
+      "why": "Rapid reference to medical eligibility criteria across common medical disorders prevents inappropriate prescribing of unsafe methods and avoids unnecessary refusal of safe options. This table consolidates evidence-based safety categories for combined hormonal contraceptives, progestogen-only methods, and intrauterine devices.",
+      "teach": [
+        {
+          "heading": "Cardiovascular and neurological conditions reference",
+          "table": {
+            "cols": [
+              "Clinical Condition",
+              "CHC (Pill/Patch/Ring)",
+              "POP / Implant",
+              "Cu-IUD / LNG-IUS"
+            ],
+            "rows": [
+              [
+                "Migraine with neurological aura",
+                "Category 4",
+                "Category 1 or 2",
+                "Category 1 or 2"
+              ],
+              [
+                "Hypertension >= 160/100 mmHg",
+                "Category 4",
+                "Category 1 or 2",
+                "Category 1 or 2"
+              ],
+              [
+                "Current or past DVT or PE",
+                "Category 4",
+                "Category 2",
+                "Cu: Cat 1 / LNG: Cat 2"
+              ],
+              [
+                "Age 35+ smoking 15+ cigs/day",
+                "Category 4",
+                "Category 1",
+                "Category 1"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Postpartum and breastfeeding timing rules",
+          "body": "Postpartum timing dictates hormonal eligibility.\n\nIn breastfeeding women, combined hormonal methods are Category 4 during the first 6 weeks postpartum, Category 2 from 6 weeks to 6 months, and Category 1 after 6 months.\n\nProgestogen-only pills and implants can be initiated immediately postpartum (Category 1).\n\nCopper IUD and LNG-IUS can be inserted within 48 hours postpartum, or delayed until 4 weeks postpartum (Category 3 between 48 hours and 4 weeks due to perforation risk)."
+        },
+        {
+          "heading": "Gynaecological conditions and oncological disease",
+          "table": {
+            "cols": [
+              "Gynaecological Condition",
+              "Combined Pill (CHC)",
+              "POP / DMPA / Implant",
+              "Intrauterine (Cu / LNG)"
+            ],
+            "rows": [
+              [
+                "Current breast cancer",
+                "Category 4",
+                "Category 4",
+                "Cu: Cat 1 / LNG: Cat 4"
+              ],
+              [
+                "Acute purulent cervicitis / PID",
+                "Category 1",
+                "Category 1",
+                "Insertion: Category 4"
+              ],
+              [
+                "Unexplained vaginal bleeding",
+                "Category 2",
+                "Category 2",
+                "Insertion: Category 4"
+              ],
+              [
+                "Idiopathic heavy menstrual bleeding",
+                "Category 1",
+                "Category 1",
+                "Cu: Cat 2 / LNG: Cat 1"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the MEC category for combined oral contraceptives in a breastfeeding woman at 4 weeks postpartum?",
+          "a": "Category 4, representing an unacceptable health risk due to elevated venous thromboembolism risk in the first six weeks.",
+          "accept": [
+            "category 4",
+            "unacceptable",
+            "thromboembolism",
+            "six weeks",
+            "4"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why is intrauterine device insertion classified as Category 3 between 48 hours and 4 weeks postpartum?",
+          "a": "The postpartum uterus is soft, enlarged, and undergoing rapid involution, substantially increasing the risk of uterine perforation during insertion.",
+          "accept": [
+            "perforation",
+            "involution",
+            "soft",
+            "uterine perforation",
+            "risk"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A woman with current active pelvic inflammatory disease needs contraception. Can a copper IUD be inserted today?",
+          "a": "No, intrauterine device initiation is Category 4 during active pelvic inflammatory disease because sounding and insertion can spread infection into the upper genital tract.",
+          "accept": [
+            "no",
+            "category 4",
+            "cannot",
+            "spread",
+            "infection",
+            "contraindicated"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "cv_categories",
+          "text": "Identifies cardiovascular and migraine MEC categories accurately"
+        },
+        {
+          "id": "postpartum_timing",
+          "text": "Applies postpartum timing rules for CHC and intrauterine methods",
+          "critical": true
+        },
+        {
+          "id": "pid_restriction",
+          "text": "Recognises acute pelvic infection as Category 4 for IUD insertion"
+        },
+        {
+          "id": "breast_cancer_ref",
+          "text": "Applies hormone-free copper IUD in breast cancer"
+        },
+        {
+          "id": "menorrhagia_differentiation",
+          "text": "Differentiates LNG-IUS from Cu-IUD in menorrhagia"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "infertility_and_contraception: Medical eligibility criteria reference tables"
+        },
+        {
+          "source": "WHO",
+          "locator": "Medical Eligibility Criteria for Contraceptive Use (5th Edition), Summary Tables"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.contracept.diagnosis": {
+      "id": "skill.contracept.diagnosis",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Formulating the contraceptive plan and initiation schedule",
+      "oneLine": "Executing the Quick Start approach, establishing backup protection rules, and scheduling review",
+      "why": "Unnecessary waiting for the next menstrual period increases the risk of interval unintended pregnancy. Applying the Quick Start protocol allows immediate initiation of hormonal methods or intrauterine insertion whenever pregnancy can be reasonably excluded. Clear instruction on back-up barrier duration ensures flawless contraceptive cover during the latency period.",
+      "teach": [
+        {
+          "heading": "The Quick Start initiation protocol",
+          "body": "The Quick Start protocol permits starting a contraceptive method immediately on the day of the consultation, regardless of cycle day, provided pregnancy can be reasonably excluded.\n\nIf the last menstrual period began more than 5 to 7 days previously and unprotected intercourse occurred, a pregnancy test is performed.\n\nIf negative, the method is started immediately, and a follow-up pregnancy test is scheduled in 2 to 3 weeks."
+        },
+        {
+          "heading": "Back-up contraception requirements by method",
+          "table": {
+            "cols": [
+              "Contraceptive Method",
+              "Immediate Cover Window",
+              "Back-up Duration if Started Later",
+              "Barrier Instruction"
+            ],
+            "rows": [
+              [
+                "Combined oral pill / patch / ring",
+                "Days 1 to 5 of menses",
+                "7 days of back-up barrier",
+                "Use male condoms or abstain"
+              ],
+              [
+                "Progestogen-only pill (POP)",
+                "Days 1 to 5 of menses",
+                "48 hours of back-up barrier",
+                "Use male condoms or abstain"
+              ],
+              [
+                "DMPA injection / Implant",
+                "Days 1 to 5 of menses",
+                "7 days of back-up barrier",
+                "Use male condoms or abstain"
+              ],
+              [
+                "Copper IUD (Cu-T 380A)",
+                "Any cycle day",
+                "Immediate protection (0 days)",
+                "No back-up barrier required"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Safety net counselling and follow-up planning",
+          "body": "Every client receives clear safety net instructions regarding danger signs.\n\nFor intrauterine devices, the PAINS mnemonic guides urgent review: Period late, Abdominal pain, Infection or discharge, Not feeling well with fever, String missing or altered.\n\nFor combined hormonal contraception, ACHES highlights severe complications: Abdominal pain, Chest pain, Headaches, Eye visual disturbance, Severe leg pain."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How many days of back-up barrier contraception are required if a woman starts combined oral contraceptive pills on cycle day 10?",
+          "a": "Seven consecutive days of additional barrier contraception or sexual abstinence are required.",
+          "accept": [
+            "7 days",
+            "seven days",
+            "seven",
+            "7",
+            "barrier",
+            "condom"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does a copper intrauterine device provide immediate contraceptive protection without requiring back-up barrier cover?",
+          "a": "Copper ions exert an immediate spermicidal and toxic effect on gametes and create a local endometrial inflammatory reaction that prevents fertilisation and implantation immediately upon insertion.",
+          "accept": [
+            "immediate",
+            "spermicidal",
+            "copper ions",
+            "fertilisation",
+            "inflammatory",
+            "implantation"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What do the letters ACHES stand for in safety warning counselling for combined hormonal contraception?",
+          "a": "Abdominal pain (mesenteric or hepatic thrombosis), Chest pain (pulmonary embolism or myocardial infarction), Headaches (stroke or migraine), Eye changes (retinal vein thrombosis), and Severe leg pain (deep vein thrombosis).",
+          "accept": [
+            "abdominal",
+            "chest",
+            "headaches",
+            "eye",
+            "leg pain",
+            "thrombosis"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "quick_start",
+          "text": "Applies Quick Start initiation principles correctly"
+        },
+        {
+          "id": "backup_duration",
+          "text": "Specifies correct backup barrier duration for hormonal methods",
+          "critical": true
+        },
+        {
+          "id": "cu_immediate",
+          "text": "Notes that copper IUD provides immediate contraceptive cover"
+        },
+        {
+          "id": "safety_net",
+          "text": "Communicates warning mnemonics (PAINS and ACHES)"
+        },
+        {
+          "id": "follow_up_schedule",
+          "text": "Establishes clear follow-up schedule and open return access"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "infertility_and_contraception: Contraceptive planning and initiation schedule"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Faculty of Sexual and Reproductive Healthcare (FSRH) Clinical Guideline: Quick Starting Contraception"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.contracept.counselling_provision": {
+      "id": "skill.tx.contracept.counselling_provision",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Contraceptive provision, emergency cover, and side-effect management",
+      "oneLine": "Executing contraceptive provision, managing bleeding changes, emergency contraception, and Indian national program options",
+      "why": "Successful contraception requires ongoing management beyond initial prescription. Clinicians must provide rapid emergency contraception following unprotected intercourse, manage progestogen-induced irregular spotting through reassurance, address missed pill episodes systematically, and utilize Indian public health commodities such as Antara, Chhaya, and Mala-N.",
+      "dosingNote": "CliniX does not prescribe. All drug doses, regimens, and emergency contraception schedules must be verified against official national guidelines and the product summary of product characteristics before administration.",
+      "teach": [
+        {
+          "heading": "Emergency contraception modalities and therapeutic windows",
+          "body": "Emergency contraception prevents pregnancy after unprotected intercourse or method failure.\n\nThe copper intrauterine device (Cu-T 380A) is the most effective modality (> 99% efficacy) when inserted within 120 hours (5 days) of intercourse, and provides ongoing contraception.\n\nOral options include ulipristal acetate (30 mg single oral dose within 120 hours) and levonorgestrel (1.5 mg single oral dose within 72 hours, less effective up to 120 hours)."
+        },
+        {
+          "heading": "Anticipatory counselling for progestogen-induced bleeding changes",
+          "body": "Unscheduled bleeding is the most common reason for early discontinuation of progestogen-only methods (DMPA, implants, and LNG-IUS).\n\nProgestogens cause endometrial decidualization and fragile microvascular architecture, resulting in frequent spotting or light bleeding during the first 3 to 6 months.\n\nWith continued use, progressive endometrial atrophy produces oligomenorrhoea or amenorrhoea, which is benign and reversible."
+        },
+        {
+          "heading": "Indian public health family planning provision",
+          "body": "The National Health Mission provides free modern contraceptives across primary health centers and sub-centres.\n\nThese include Centchroman (Chhaya, non-steroidal SERM taken 30 mg twice weekly for 12 weeks, then once weekly), DMPA injections (Antara, 150 mg intramuscularly every 3 months), Combined oral pills (Mala-N), Copper IUDs (Cu-T 380A for 10 years, Cu-T 375 for 5 years), and condoms (Nirodh)."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the single most effective method of emergency contraception when presented within 5 days of unprotected intercourse?",
+          "a": "The copper intrauterine device (Cu-T 380A), which has a failure rate below 0.1% when inserted within 120 hours.",
+          "accept": [
+            "copper",
+            "cu-t",
+            "iud",
+            "intrauterine",
+            "copper t",
+            "120 hours",
+            "5 days"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How does ulipristal acetate differ from levonorgestrel when used as oral emergency contraception?",
+          "a": "Ulipristal acetate is a selective progesterone receptor modulator effective up to 120 hours and can inhibit ovulation even after the LH surge has started, whereas levonorgestrel is licensed within 72 hours and loses efficacy if the LH surge has begun.",
+          "accept": [
+            "ulipristal",
+            "sprm",
+            "120 hours",
+            "lh surge",
+            "ovulation",
+            "levonorgestrel",
+            "72 hours"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "What is Centchroman (Chhaya) and what is its standard dosing schedule under the Indian National Family Planning Programme?",
+          "a": "Centchroman is a non-hormonal, non-steroidal selective oestrogen receptor modulator taken as 30 mg twice weekly for the first 12 weeks on fixed days, followed by 30 mg once weekly thereafter.",
+          "accept": [
+            "non-hormonal",
+            "non-steroidal",
+            "serm",
+            "twice weekly",
+            "once weekly",
+            "12 weeks",
+            "30 mg"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "ec_modality",
+          "text": "Identifies copper IUD as the most effective emergency contraceptive",
+          "critical": true
+        },
+        {
+          "id": "ec_oral_windows",
+          "text": "Distinguishes ulipristal acetate (120h) from levonorgestrel (72h)"
+        },
+        {
+          "id": "bleeding_counselling",
+          "text": "Explains the pathophysiology of progestogen-induced spotting"
+        },
+        {
+          "id": "nhm_commodities",
+          "text": "Demonstrates knowledge of Indian national commodities (Chhaya, Antara, Mala-N)"
+        },
+        {
+          "id": "dosing_safety",
+          "text": "Refers drug regimens to official national guidelines without prescribing"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "infertility_and_contraception: Contraceptive provision and emergency contraception"
+        },
+        {
+          "source": "National Health Mission",
+          "locator": "Reference Manual for Contraceptive Services in India, MoHFW Guidelines: Antara, Chhaya and Emergency Contraception"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.contraception.01",
+      "title": "Contraceptive counselling and method selection in a 26-year-old multiparous woman",
+      "initialVitals": {
+        "hr": 74,
+        "bpSystolic": 118,
+        "bpDiastolic": 76,
+        "rr": 16,
+        "spo2": 99,
+        "temp": 36.8,
+        "gcs": 15
+      },
+      "opening": "Namaste doctor. I have come today because my husband and I want to wait at least 3 to 4 years before having another baby. My younger child is seven months old now. My menstrual periods restarted two months ago, but they have always been heavy, painful, and crampy. I want advice on a reliable contraceptive method that will protect me against pregnancy and hopefully not make my heavy bleeding and cramps even worse.",
+      "fallback": "I am here to find a safe and reliable method to space my next child by at least 3 to 4 years without worsening my heavy and painful periods.",
+      "patient": {
+        "name": "Pooja Sharma",
+        "age": 26,
+        "sex": "female",
+        "occupation": "School teacher",
+        "residence": "Lucknow, Uttar Pradesh"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you to the clinic",
+            "why have you come today",
+            "how can we help you",
+            "what is your main concern"
+          ],
+          "reply": "I have come for contraceptive advice. We want to space our next child by at least 3 to 4 years. My periods are back, but they are heavy and painful, so I want something reliable that will not worsen my bleeding."
+        },
+        "spacing_timeline": {
+          "cues": [
+            "how long do you want to delay pregnancy",
+            "how many years of spacing do you want",
+            "desired spacing interval",
+            "future pregnancy plans"
+          ],
+          "reply": "We want to wait at least 3 to 4 years before considering a third child. That way both our young children will be attending school before we even think about expanding our family."
+        },
+        "menstrual_pattern": {
+          "cues": [
+            "tell me about your periods",
+            "menstrual cycle regularity",
+            "duration of menstrual flow",
+            "last menstrual period date"
+          ],
+          "reply": "My cycles are regular every 28 to 30 days, lasting about 5 to 6 days. My last menstrual period started 4 days ago and is finishing today. The flow is quite heavy on the first three days, soaking 4 to 5 large pads daily with small clots."
+        },
+        "dysmenorrhoea_symptoms": {
+          "cues": [
+            "do you have menstrual cramps",
+            "pain with periods",
+            "dysmenorrhoea severity",
+            "lower abdominal cramps with menses"
+          ],
+          "reply": "Yes, I suffer from severe cramping in the lower abdomen and back on the first two days of every period. I frequently need to take mefenamic acid tablets just to manage teaching my classes."
+        },
+        "obstetric_history": {
+          "cues": [
+            "how many children do you have",
+            "previous pregnancy history",
+            "deliveries and modes of birth",
+            "obstetric background"
+          ],
+          "reply": "I have two children. My first is a 3-year-old girl and my second is a 7-month-old boy. Both were normal full-term vaginal deliveries in hospital with episiotomies that healed cleanly without complications."
+        },
+        "breastfeeding_status": {
+          "cues": [
+            "are you currently breastfeeding",
+            "infant feeding practices",
+            "lactation status",
+            "how often does the baby nurse"
+          ],
+          "reply": "I am still breastfeeding my 7-month-old son, but he is now taking porridge, dal, and mashed vegetables during the day, so breastfeeding is partial and menses returned 2 months ago."
+        },
+        "prior_contraception": {
+          "cues": [
+            "what methods have you used before",
+            "prior contraceptive experience",
+            "past family planning methods",
+            "previous birth control"
+          ],
+          "reply": "We have only ever used male condoms intermittently and withdrawal. After my daughter, we tried condoms, but my husband finds them inconvenient and we worry about breakage or forgetting them."
+        },
+        "headache_migraine": {
+          "cues": [
+            "do you get severe headaches",
+            "migraine symptoms",
+            "neurological aura or flashing lights",
+            "visual disturbances with headache"
+          ],
+          "reply": "I get occasional mild tension headaches when I am tired or dehydrated at the end of the school day, but never any migraine, visual flashing lights, zigzag lines, or numbness."
+        },
+        "thromboembolism_screening": {
+          "cues": [
+            "have you ever had a blood clot",
+            "deep vein thrombosis history",
+            "pulmonary embolism",
+            "swelling or pain in the legs"
+          ],
+          "reply": "No, I have never had any blood clots in my legs or lungs, no unexplained calf swelling, and nobody in my family has ever had a clotting disorder."
+        },
+        "hypertension_cardiovascular": {
+          "cues": [
+            "is your blood pressure high",
+            "history of high blood pressure",
+            "hypertension in pregnancy",
+            "heart disease or chest pain"
+          ],
+          "reply": "My blood pressure has always been completely normal, even throughout both of my pregnancies. I have never had chest pain, heart trouble, or high cholesterol."
+        },
+        "tobacco_smoking": {
+          "cues": [
+            "do you smoke cigarettes",
+            "tobacco consumption",
+            "use of bidi or gutkha",
+            "smoking history"
+          ],
+          "reply": "No, I have never smoked cigarettes or bidis, and I do not use gutkha or any tobacco products."
+        },
+        "liver_gallbladder": {
+          "cues": [
+            "any liver disease or jaundice",
+            "hepatitis history",
+            "gallbladder stones",
+            "abdominal pain or yellow eyes"
+          ],
+          "reply": "No, I have never had jaundice, hepatitis, gallbladder stones, or any liver problems."
+        },
+        "pelvic_infection_discharge": {
+          "cues": [
+            "abnormal vaginal discharge",
+            "pelvic inflammatory disease",
+            "history of sexually transmitted infection",
+            "foul smelling discharge or pelvic pain"
+          ],
+          "reply": "No, I have never had abnormal foul discharge, burning urination, pelvic infections, or sexually transmitted infections."
+        },
+        "medications_allergies": {
+          "cues": [
+            "are you taking any regular medications",
+            "current prescription drugs",
+            "drug allergies",
+            "medication history"
+          ],
+          "reply": "I only take paracetamol or mefenamic acid occasionally for menstrual cramps. I take no regular daily medicines and have no known allergies to any drugs or metals."
+        },
+        "cervical_screening_history": {
+          "cues": [
+            "have you had a pap smear",
+            "cervical cancer screening",
+            "pap test or hpv testing",
+            "cervical checkup"
+          ],
+          "reply": "I had a routine Pap smear and cervical screening done 6 months after my first baby delivered, and the doctor told me the report was completely normal."
+        },
+        "partner_involvement": {
+          "cues": [
+            "is your husband supportive",
+            "partner discussion about family planning",
+            "couple agreement on contraception",
+            "spouse view on birth control"
+          ],
+          "reply": "Yes, my husband and I discussed this thoroughly. He works in a local bank and agreed that we need a reliable method so that we can focus on educating our two children before considering another."
+        },
+        "preferences_and_concerns": {
+          "cues": [
+            "what matters most to you in a method",
+            "contraceptive method preferences",
+            "concerns about birth control",
+            "what kind of method do you prefer"
+          ],
+          "reply": "I prefer something that lasts for several years so I do not have to remember a pill every single day. Most importantly, I heard that some copper coils make bleeding heavier, and my periods are already so heavy and painful that I really want to avoid that."
+        },
+        "family_medical_history": {
+          "cues": [
+            "family history of medical problems",
+            "illnesses in parents or siblings",
+            "family history of breast cancer or clots",
+            "hereditary illnesses"
+          ],
+          "reply": "My parents are both alive and well with mild hypertension in their late fifties. There is no family history of breast cancer, stroke, heart attacks, or early deaths."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Alert, comfortable, well-nourished young woman in no acute distress. Body mass index is 22.4 kg/m2. No conjunctival pallor, no icterus, no peripheral lymphadenopathy.",
+          "abnormal": false
+        },
+        "skill.gen.vitals": {
+          "finding": "Resting pulse is 74 beats per minute, regular rhythm, normal volume. Blood pressure measured sitting in right arm is 118/76 mmHg. Respiratory rate 16 breaths per minute, afebrile.",
+          "abnormal": false
+        },
+        "skill.gen.edema": {
+          "finding": "No pedal oedema or sacral oedema noted.",
+          "abnormal": false
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "finding": "Normal external female genitalia. Perineum is intact with a well-healed, healthy right mediolateral episiotomy scar. No vulval ulceration, discharge, or inflammation.",
+          "abnormal": false
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "finding": "Cusco bivalve speculum reveals a parous cervix with closed external os. Cervical epithelium is healthy with no ectropion, ulceration, growth, or contact bleeding. Scant clear physiologic cervical mucus with no purulent discharge or abnormal odour.",
+          "abnormal": false
+        },
+        "skill.exam.obg.bimanual": {
+          "finding": "Uterus is anteverted, normal parous size (approximately 7 to 8 cm), firm, symmetrical, smooth, freely mobile, and non-tender. Cervical motion tenderness is absent. Bilateral fornices and adnexa are clear with no palpable mass or adnexal tenderness.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "urine_pregnancy_test",
+        "haemoglobin_cbc",
+        "pelvic_ultrasound"
+      ],
+      "investigations": {
+        "urine_pregnancy_test": {
+          "label": "Urine pregnancy test (hCG)",
+          "result": "Negative (< 5 IU/L)",
+          "note": "Rapid qualitative immunological assay confirms no detectable beta-hCG, corroborating clinical pregnancy checklist criteria."
+        },
+        "haemoglobin_cbc": {
+          "label": "Complete blood count and haemoglobin",
+          "result": "Haemoglobin 11.8 g/dL, Total leukocyte count 6,800/mm3, Platelets 240,000/mm3, MCV 84 fL",
+          "note": "Adequate haemoglobin and normocytic indices ruling out severe chronic iron deficiency anaemia despite reported heavy menses."
+        },
+        "pelvic_ultrasound": {
+          "label": "Transvaginal and pelvic ultrasound",
+          "result": "Uterus normal size (7.6 x 4.2 x 3.8 cm), regular contour. Endometrial echo complex central, regular, 5.2 mm thickness. No submucosal or intramural fibroids, no adenomyosis. Bilateral ovaries normal with antral follicles. Pouch of Douglas clear.",
+          "note": "Confirms normal intrauterine cavity architecture suitable for intrauterine device insertion with no fibroids or synechiae."
+        },
+        "cervical_cytology": {
+          "label": "Cervical liquid-based cytology and high-risk HPV",
+          "result": "Negative for intraepithelial lesion or malignancy (NILM). High-risk HPV DNA not detected.",
+          "note": "Reassuring baseline cervical screening."
+        }
+      },
+      "diagnosis": {
+        "answer": "Contraceptive counselling and method selection in a 26 year old multiparous woman with menorrhagia and dysmenorrhoea, choosing the levonorgestrel intrauterine system.",
+        "accept": [
+          "Contraceptive counselling",
+          "contraception counselling",
+          "Levonorgestrel intrauterine system",
+          "lng-ius"
+        ],
+        "minMatch": 1
+      },
+      "differentialModel": {
+        "answer": "Consider suitable reversible spacing options: Levonorgestrel intrauterine system, Intrauterine contraceptive device (Cu-T 380A), Progestogen-only injectable contraceptive (DMPA), Combined oral contraceptive pill, and Barrier contraception.",
+        "accept": [
+          "Levonorgestrel intrauterine system",
+          "Intrauterine contraceptive device",
+          "Progestogen-only injectable contraceptive",
+          "Combined oral contraceptive pill",
+          "Barrier contraception"
+        ],
+        "minMatch": 2
+      },
+      "managementModel": {
+        "answer": "Detailed counselling on method choices and effectiveness, screening of medical eligibility criteria, exclusion of pregnancy using the pregnancy checklist, pre-insertion bimanual examination and speculum inspection, counselling on anticipated bleeding changes and amenorrhoea, sterile insertion of the levonorgestrel intrauterine system, provision of condom barrier protection for dual protection, and structured instructions on warning signs and follow up visit.",
+        "accept": [
+          "counselling on method choices",
+          "screen medical eligibility",
+          "pregnancy checklist exclusion",
+          "levonorgestrel intrauterine system insertion",
+          "condom barrier protection for stis",
+          "warning signs and follow up visit"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "Contraceptive effectiveness should be communicated in plain terms using the tiered effectiveness model: Tier 1 LARC methods (subdermal implants and intrauterine systems) have failure rates under 1% in real-world typical use because they are independent of daily user adherence.",
+        "Medical eligibility criteria (WHO and UKMEC) ensure patient safety: in a woman with pre-existing menorrhagia and dysmenorrhoea, the levonorgestrel intrauterine system (LNG-IUS) provides Category 1 safety and therapeutic menstrual blood loss reduction of up to 90%, whereas copper intrauterine devices may worsen heavy bleeding.",
+        "Proactive pre-insertion counselling about expected bleeding profile changes (spotting and light irregular bleeding for the first 3 to 6 months followed by oligomenorrhoea or amenorrhoea) is the single most important factor ensuring high continuation rates with progestogen-releasing methods.",
+        "Dual protection with male latex condoms (Nirodh) should always be encouraged alongside high-efficacy contraceptive methods whenever protection against sexually transmitted infections is indicated."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

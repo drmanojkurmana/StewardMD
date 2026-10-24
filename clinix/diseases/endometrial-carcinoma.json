@@ -1,0 +1,1567 @@
+{
+  "_comment": "StewardMD CliniX pathway for Endometrial carcinoma (Postmenopausal bleeding). Aligned with clinix-model.js and final-year expansion plan.",
+  "id": "endometrial-carcinoma",
+  "name": "Endometrial carcinoma",
+  "fullName": "Carcinoma of the endometrium (Postmenopausal bleeding)",
+  "system": "obgyn",
+  "kbRef": "endometrial_cancer",
+  "oneLine": "Postmenopausal bleeding, transvaginal ultrasound, outpatient Pipelle sampling, and surgical staging",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics and biology",
+      "blurb": "Bokhman dual pathways, oestrogen drive, and modern molecular subgroups",
+      "skills": [
+        "skill.endometrial.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Respectful introduction, informed consent, and preparation for an intimate evaluation",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age, menopausal duration, and metabolic build set the pre-test probability",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected endometrial carcinoma, age in the sixth and seventh decades, postmenopausal status, nulliparity, and elevated body mass index provide substantial clinical weight: most cases present in postmenopausal women with metabolic risk factors."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Painless postmenopausal bleeding, discharge character, and temporal pattern",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.menstrual_history",
+        "skill.hx.obg.gynae_symptoms"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Painless postmenopausal vaginal spotting or bleeding of weeks to months duration. Quantify frequency, sanitary pad usage, colour, and whether blood is fresh red or dark brown."
+        },
+        "skill.hx.obg.menstrual_history": {
+          "expect": "Exact age at natural menopause, years of amenorrhoea before the onset of bleeding, and character of previous menstrual cycles. Bleeding after menopause is never physiological."
+        },
+        "skill.hx.obg.gynae_symptoms": {
+          "expect": "Watery or serosanguinous non-foul vaginal discharge, absence of severe pelvic pain in early disease, and presence of urinary frequency or tenesmus as markers of extrauterine spread."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "Hyperoestrogenism, metabolic syndrome, tamoxifen use, and Lynch screening",
+      "skills": [
+        "skill.hx.obg.gynae_background",
+        "skill.hx.endometria.risk"
+      ],
+      "emphasis": {
+        "skill.hx.obg.gynae_background": {
+          "expect": "Cervical screening history, prior pelvic ultrasound records, and absence of exogenous hormone replacement therapy or oral contraceptives."
+        },
+        "skill.hx.endometria.risk": {
+          "expect": "Chronic unopposed oestrogen drive: obesity, type 2 diabetes mellitus, hypertension, nulliparity, tamoxifen exposure, or family history of colorectal and uterine cancer indicating Lynch syndrome."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General physical examination",
+      "blurb": "Nutritional status, pallor from chronic blood loss, and metabolic markers",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Obese central body habitus, conjunctival pallor from chronic blood loss, and absence of peripheral lymphadenopathy or cachexia in early disease."
+        },
+        "skill.gen.vitals": {
+          "expect": "Blood pressure measurement to assess systemic hypertension as part of metabolic syndrome; hemodynamic stability and resting pulse rate."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Pelvic examination",
+      "blurb": "Speculum visualisation of the cervix and bimanual uterine assessment",
+      "skills": [
+        "skill.exam.obg.gynae_abdominal",
+        "skill.exam.obg.vulval_inspect",
+        "skill.exam.obg.speculum_insert",
+        "skill.exam.obg.speculum_inspect",
+        "skill.exam.obg.bimanual"
+      ],
+      "emphasis": {
+        "skill.exam.obg.gynae_abdominal": {
+          "expect": "Soft, non-tender obese abdomen without palpable suprapubic masses, hepatosplenomegaly, or ascites in early confined disease."
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "expect": "Atrophic vaginal mucosa and a smooth, healthy ectocervix with blood issuing from the external os, ruling out visible cervical cancer or prolapsing polyp."
+        },
+        "skill.exam.obg.bimanual": {
+          "expect": "Mildly bulky, mobile, non-tender anteverted uterus with clear adnexa and soft, pliable parametria without sidewall fixity."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Endometrial carcinoma findings",
+      "blurb": "Correlating bleeding patterns with clinical signs and red flags",
+      "skills": [
+        "skill.endometrial.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Synthesising bleeding history, metabolic risks, and pelvic examination",
+      "skills": [
+        "skill.endometrial.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Distinguishing endometrial atrophy, polyps, hyperplasia, and cervical malignancy",
+      "skills": [
+        "skill.endometrial.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Transvaginal ultrasound, outpatient Pipelle biopsy, and pelvic MRI",
+      "skills": [
+        "skill.ix.endometrial.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and staging",
+      "blurb": "FIGO anatomical staging and Proactive Molecular Risk Groups",
+      "skills": [
+        "skill.endometrial.diagnosis",
+        "skill.annex.endometrial.figo_molecular"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Management and surgical staging",
+      "blurb": "Minimally invasive hysterectomy, sentinel node mapping, and risk-tailored adjuvant care",
+      "skills": [
+        "skill.tx.endometrial"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Presenting the postmenopausal bleeding case to the consultant",
+      "skills": [
+        "skill.present.endometria.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.endometrial.pelvic_exam",
+        "title": "Pelvic examination and Pipelle sampling in postmenopausal bleeding",
+        "task": "This 62-year-old woman presents with two months of intermittent postmenopausal bleeding. Perform a chaperoned intimate pelvic examination, discuss the findings, and demonstrate your approach to outpatient endometrial sampling.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.obg.intimate_consent",
+          "skill.exam.obg.gynae_abdominal",
+          "skill.exam.obg.vulval_inspect",
+          "skill.exam.obg.speculum_insert",
+          "skill.exam.obg.speculum_inspect",
+          "skill.exam.obg.bimanual",
+          "skill.exam.obg.endometrial_sampling",
+          "skill.approach.obg.pelvic_close"
+        ],
+        "examinerQuestions": [
+          "What are the typical bimanual and speculum findings in early endometrial carcinoma, and what helps rule out a primary cervical cancer?",
+          "What endometrial thickness threshold on transvaginal ultrasound mandates endometrial biopsy in a postmenopausal woman?",
+          "What are the advantages of Pipelle suction curettage over traditional fractional curettage in the outpatient setting?"
+        ]
+      },
+      {
+        "id": "osce.endometrial.history_counsel",
+        "title": "Take a postmenopausal bleeding history and counsel on endometrial carcinoma",
+        "task": "A 60-year-old woman with diabetes and hypertension attends the gynaecology clinic reporting vaginal spotting six months after stopping hormone therapy. Take a focused history in seven minutes, explain the necessity of urgent investigations, and counsel her on the diagnostic pathway.",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.obg.menstrual_history",
+          "skill.hx.obg.gynae_symptoms",
+          "skill.hx.endometria.risk"
+        ],
+        "examinerQuestions": [
+          "Why is postmenopausal bleeding never considered normal or physiological, regardless of the quantity?",
+          "Name three classical metabolic and endocrine risk factors for Type 1 endometrioid adenocarcinoma.",
+          "How would you explain the need for an endometrial biopsy to an anxious patient who believes the bleeding is simply a late period?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.endometrial.basics",
+      "skill.endometrial.signs",
+      "skill.endometrial.differential",
+      "skill.ix.endometrial.workup",
+      "skill.annex.endometrial.figo_molecular",
+      "skill.endometrial.diagnosis",
+      "skill.tx.endometrial"
+    ]
+  },
+  "skills": {
+    "skill.endometrial.basics": {
+      "id": "skill.endometrial.basics",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Basics and pathophysiology of endometrial carcinoma",
+      "oneLine": "Dual Bokhman clinicopathological pathways, molecular classification, and mechanisms of local and nodal spread",
+      "why": "Understanding the biological distinction between oestrogen-dependent endometrioid tumours and aggressive non-endometrioid subtypes, together with modern molecular risk groups, informs surgical staging, prognostic risk, and adjuvant therapy selection.",
+      "teach": [
+        {
+          "heading": "Dual clinicopathological pathways: Bokhman classification",
+          "body": "Endometrial cancer encompasses two distinct biological entities described by Bokhman.\n\nType 1 tumours (80-85 percent) are endometrioid adenocarcinomas arising from atypical endometrial hyperplasia under chronic unopposed oestrogenic stimulation. They are low-grade, oestrogen receptor-positive, typically diagnosed in postmenopausal women with obesity, and harbour PTEN, PIK3CA, and mismatch repair alterations."
+        },
+        {
+          "heading": "Type 1 versus Type 2 endometrial carcinoma",
+          "table": {
+            "cols": [
+              "Feature",
+              "Type 1 (Endometrioid)",
+              "Type 2 (Serous / Clear Cell)",
+              "Clinical Distinction"
+            ],
+            "rows": [
+              [
+                "Pathogenesis",
+                "Unopposed oestrogen drive",
+                "Oestrogen-independent",
+                "Endocrine background"
+              ],
+              [
+                "Precursor",
+                "Atypical hyperplasia / EIN",
+                "Endometrial intraepithelial carcinoma",
+                "Histological precursor"
+              ],
+              [
+                "Genetic alterations",
+                "PTEN, PIK3CA, KRAS, MMR",
+                "TP53 mutation, HER2 amplification",
+                "Molecular divergence"
+              ],
+              [
+                "Behaviour",
+                "Favourable, diagnosed early",
+                "Aggressive, early deep invasion",
+                "Prognostic contrast"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Molecular subgroups and routes of neoplastic spread",
+          "body": "The molecular classification defines four prognostic categories: POLE ultramutated (favourable prognosis), mismatch repair deficient (MMRd), no specific molecular profile (NSMP), and p53 abnormal (aggressive, poor outcome).\n\nSpread occurs primarily through direct invasion through the myometrium to the serosa, transtubal dissemination into the peritoneal cavity, and lymphatic transport to pelvic and para-aortic lymph nodes."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the most common histological subtype of endometrial carcinoma, and what drives its progression from atypical hyperplasia?",
+          "a": "Endometrioid adenocarcinoma is the most common subtype, driven by prolonged unopposed oestrogenic stimulation.",
+          "accept": [
+            "endometrioid",
+            "adenocarcinoma",
+            "unopposed oestrogen",
+            "oestrogen",
+            "atypical hyperplasia"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which genetic alteration is classically present in over ninety percent of aggressive Type 2 uterine serous carcinomas?",
+          "a": "Mutations in the TP53 tumour suppressor gene resulting in abnormal p53 protein expression.",
+          "accept": [
+            "tp53",
+            "p53",
+            "mutation",
+            "tumour suppressor"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which molecular subgroup in modern classification carries an exceptionally favourable prognosis despite high histological grade?",
+          "a": "The POLE ultramutated subgroup, characterised by mutations in the exonuclease domain of DNA polymerase epsilon.",
+          "accept": [
+            "pole",
+            "ultramutated",
+            "favourable",
+            "polymerase epsilon"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r1",
+          "text": "Contrasts Bokhman Type 1 endometrioid from Type 2 serous and clear cell carcinoma."
+        },
+        {
+          "id": "r2",
+          "text": "Explains the roles of PTEN, mismatch repair deficiency, and TP53 alterations."
+        },
+        {
+          "id": "r3",
+          "text": "Identifies the four molecular categories including POLEmut and p53 abnormal."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "endometrial_cancer: pathophysiology"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Endometrial cancer: classification and molecular pathology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.endometrial.signs": {
+      "id": "skill.endometrial.signs",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Clinical features and physical examination findings in endometrial carcinoma",
+      "oneLine": "Recognising postmenopausal bleeding, evaluating pelvic examination findings, and identifying red flag signs",
+      "why": "Postmenopausal bleeding is the presenting symptom in over ninety percent of women with endometrial carcinoma. Correlating bleeding patterns with physical findings helps distinguish intrauterine neoplasia from lower genital tract lesions.",
+      "teach": [
+        {
+          "heading": "Cardinal presenting symptoms",
+          "body": "Postmenopausal bleeding is the hallmark of endometrial carcinoma. Any bleeding occurring twelve months or more after the final menstrual period is postmenopausal bleeding and requires mandatory investigation.\n\nBleeding is typically painless, beginning as intermittent light spotting or pinkish discharge, which may become continuous or heavier over time. In perimenopausal women, presentation takes the form of heavy or irregular intermenstrual bleeding."
+        },
+        {
+          "heading": "Physical examination findings and anatomical landmarks",
+          "body": "General examination evaluates nutritional status, pallor from chronic blood loss, obesity, hypertension, and supraclavicular lymphadenopathy.\n\nAbdominal examination is usually unremarkable in early stages; a palpable hypogastric mass indicates advanced uterine enlargement, haematometra, or extrauterine pelvic extension. Flank fullness or shifting dullness suggests ascites from peritoneal dissemination."
+        },
+        {
+          "heading": "Pelvic examination findings",
+          "table": {
+            "cols": [
+              "Examination Step",
+              "Expected Early Findings",
+              "Advanced Disease Signs",
+              "Diagnostic Significance"
+            ],
+            "rows": [
+              [
+                "Vulval and vaginal",
+                "Normal or atrophic mucosa",
+                "Suburethral or vaginal metastases",
+                "Excludes primary vaginal tumour"
+              ],
+              [
+                "Speculum examination",
+                "Clear ectocervix, os blood",
+                "Gross cervical stromal growth",
+                "Differentiates cervical cancer"
+              ],
+              [
+                "Bimanual palpation",
+                "Normal or mildly bulky uterus",
+                "Fixed, enlarged, rock-hard uterus",
+                "Assesses mobility and size"
+              ],
+              [
+                "Adnexal evaluation",
+                "Clear, non-tender fornices",
+                "Palpable fixed adnexal mass",
+                "Detects synchronous ovarian tumour"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Red flag signs and clinical pitfalls",
+          "body": "Pyometra or haematometra may occur in elderly women when an intrauterine tumour obstructs a stenotic cervical os, presenting with lower abdominal ache and purulent discharge.\n\nA dangerous pitfall is reassuring a patient because bleeding was small in volume or stopped spontaneously. The volume of bleeding does not correlate with stage or malignant invasion."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the cardinal presenting symptom seen in more than ninety percent of patients with endometrial carcinoma?",
+          "a": "Postmenopausal bleeding, defined as any vaginal bleeding occurring one year or more after menopause.",
+          "accept": [
+            "postmenopausal bleeding",
+            "vaginal bleeding",
+            "spotting",
+            "menopause"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why must speculum examination be performed carefully before concluding that bleeding originates from the uterine cavity?",
+          "a": "Speculum examination excludes bleeding lesions on the vulva, vagina, and cervix such as cervical carcinoma, polyps, or atrophy.",
+          "accept": [
+            "speculum",
+            "cervix",
+            "cervical carcinoma",
+            "vagina",
+            "polyp",
+            "atrophy"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What condition should be suspected when an elderly postmenopausal woman presents with pelvic cramp, foul purulent discharge, and a tender enlarged uterus?",
+          "a": "Pyometra secondary to cervical stenosis and obstructing endometrial malignancy.",
+          "accept": [
+            "pyometra",
+            "cervical stenosis",
+            "obstruction",
+            "malignancy",
+            "pus"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r1",
+          "text": "Identifies postmenopausal bleeding as the primary presenting symptom requiring investigation."
+        },
+        {
+          "id": "r2",
+          "text": "Describes expected findings on speculum and bimanual examination in early versus advanced disease."
+        },
+        {
+          "id": "r3",
+          "text": "Recognises pyometra and cervical stenosis as potential presentations in elderly women."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "endometrial_cancer: clinicalPearls"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline: Management of Endometrial Hyperplasia and Carcinoma"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.endometrial.summary": {
+      "id": "skill.endometrial.summary",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Synthesising the clinical picture in postmenopausal bleeding",
+      "oneLine": "Integrating bleeding duration, metabolic risk, physical examination, and ultrasound findings into a diagnostic synthesis",
+      "why": "Formulating a structured clinical summary allows the clinician to synthesise patient age, metabolic predisposition, bleeding chronology, and pelvic examination findings into a clear problem representation that justifies expedited tissue diagnosis.",
+      "teach": [
+        {
+          "heading": "Structuring the clinical synthesis",
+          "body": "A rigorous clinical summary states four key elements: patient demographics and menopausal timeline, bleeding characteristics and volume, presence of hyperoestrogenic metabolic risk factors, and pelvic examination findings.\n\nFraming the case as postmenopausal bleeding in a patient with risk factors establishes the pre-test probability and prevents diagnostic delay."
+        },
+        {
+          "heading": "Components of the case representation",
+          "table": {
+            "cols": [
+              "Summary Element",
+              "Clinical Example",
+              "Critical Detail",
+              "Management Implication"
+            ],
+            "rows": [
+              [
+                "Demographics",
+                "62-year-old postmenopausal woman",
+                "10 years post-menopause",
+                "Excludes physiological bleeding"
+              ],
+              [
+                "Symptom profile",
+                "Painless vaginal spotting for 2 months",
+                "Intermittent light bleeding",
+                "Warrants urgent cancer pathway"
+              ],
+              [
+                "Metabolic risk",
+                "Obesity, type 2 diabetes, nulliparity",
+                "Hyperoestrogenic profile",
+                "High pre-test probability for Type 1"
+              ],
+              [
+                "Pelvic findings",
+                "Normal cervix, mobile bulky uterus",
+                "Blood from external os",
+                "Directs sampling to endometrium"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Synthesising initial triage and priority",
+          "body": "Synthesising the presentation establishes an immediate priority: arranging transvaginal ultrasonography and outpatient endometrial biopsy without delay.\n\nIt communicates to the team that a normal cervical appearance in the presence of postmenopausal uterine bleeding points directly to an endometrial origin, requiring definitive histological sampling rather than empirical observation."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What four key clinical dimensions must be combined in a summary of suspected endometrial carcinoma?",
+          "a": "Patient age and menopausal status, bleeding characteristics, metabolic risk factors, and pelvic examination findings.",
+          "accept": [
+            "age",
+            "menopausal",
+            "bleeding",
+            "metabolic",
+            "pelvic examination",
+            "risk factors"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How does the presence of obesity, diabetes, and nulliparity influence the clinical synthesis in postmenopausal bleeding?",
+          "a": "It markedly raises the pre-test probability of oestrogen-driven Type 1 endometrioid adenocarcinoma.",
+          "accept": [
+            "pre-test probability",
+            "probability",
+            "type 1",
+            "endometrioid",
+            "oestrogen"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why should normal speculum findings not delay referral in a woman presenting with postmenopausal bleeding?",
+          "a": "A healthy ectocervix confirms that bleeding originates from inside the uterine cavity, strengthening the indication for endometrial sampling.",
+          "accept": [
+            "uterine cavity",
+            "endometrial sampling",
+            "cervix",
+            "inside",
+            "biopsy"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r1",
+          "text": "Formulates a concise summary integrating bleeding story, metabolic profile, and examination."
+        },
+        {
+          "id": "r2",
+          "text": "Explains how risk factors increase suspicion of Type 1 endometrioid disease."
+        },
+        {
+          "id": "r3",
+          "text": "Identifies the necessity of immediate transvaginal ultrasound and endometrial biopsy."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "endometrial_cancer: clinicalPearls"
+        },
+        {
+          "source": "NICE",
+          "locator": "NG12: Suspected cancer: recognition and referral - postmenopausal bleeding"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.endometrial.differential": {
+      "id": "skill.endometrial.differential",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Differential diagnosis of postmenopausal and abnormal uterine bleeding",
+      "oneLine": "Distinguishing endometrial atrophy, polyps, hyperplasia, cervical carcinoma, and sarcomas from carcinoma",
+      "why": "Although postmenopausal bleeding is assumed malignant until proven otherwise, benign etiologies account for approximately ninety percent of presentations. Systematically evaluating atrophy, polyps, hyperplasia, and lower tract pathology prevents diagnostic errors while expediting oncology care.",
+      "teach": [
+        {
+          "heading": "Etiological landscape of postmenopausal bleeding",
+          "body": "Endometrial atrophy accounts for 60 to 70 percent of postmenopausal bleeding, arising from mucosal friction and capillary fragility in an oestrogen-deficient environment.\n\nEndometrial polyps cause 10 to 15 percent of cases, endometrial hyperplasia accounts for 5 to 10 percent, and endometrial carcinoma is diagnosed in approximately 10 percent. Cervical cancer, uterine sarcomas, and hormone-producing ovarian tumours constitute rarer but vital differentials."
+        },
+        {
+          "heading": "Comparative differential diagnostic matrix",
+          "table": {
+            "cols": [
+              "Condition",
+              "Clinical Features",
+              "Ultrasound Findings",
+              "Diagnostic Test"
+            ],
+            "rows": [
+              [
+                "Endometrial atrophy",
+                "Scant spotting, vaginal dryness",
+                "Thin stripe (< 4 mm)",
+                "Pipelle: atrophic glands"
+              ],
+              [
+                "Endometrial polyp",
+                "Intermittent spotting, painless",
+                "Focal hyperechoic mass with pedicle",
+                "Saline infusion / hysteroscopy"
+              ],
+              [
+                "Atypical hyperplasia (EIN)",
+                "Recurrent bleeding, metabolic risk",
+                "Thickened heterogeneous stripe",
+                "Histopathology showing atypia"
+              ],
+              [
+                "Cervical carcinoma",
+                "Postcoital bleed, foul discharge",
+                "Visible cervical ulcer or mass",
+                "Cervical punch biopsy"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Non-uterine and systemic causes",
+          "body": "Extragenital bleeding sources must be actively distinguished from vaginal blood loss. Patients frequently confuse haematuria or rectal bleeding with vaginal bleeding.\n\nOestrogen-secreting ovarian sex cord-stromal tumours, such as granulosa cell tumours, can stimulate secondary endometrial proliferation and bleeding. Uterine sarcomas (leiomyosarcoma, endometrial stromal sarcoma) present with rapid uterine enlargement and abnormal bleeding."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the single most common benign cause of postmenopausal vaginal bleeding?",
+          "a": "Endometrial atrophy or atrophic vaginitis secondary to hypoestrogenism.",
+          "accept": [
+            "endometrial atrophy",
+            "atrophy",
+            "atrophic vaginitis",
+            "hypoestrogenism"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Which histological precursor lesion carries an approximate thirty percent risk of progression to invasive endometrioid adenocarcinoma if left untreated?",
+          "a": "Atypical endometrial hyperplasia, also termed endometrial intraepithelial neoplasia (EIN).",
+          "accept": [
+            "atypical hyperplasia",
+            "endometrial intraepithelial neoplasia",
+            "ein",
+            "atypical endometrial hyperplasia"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Which ovarian sex cord-stromal neoplasm can produce postmenopausal bleeding by secreting excess oestrogen?",
+          "a": "Granulosa cell tumour of the ovary.",
+          "accept": [
+            "granulosa cell tumour",
+            "granulosa cell tumor",
+            "granulosa",
+            "sex cord-stromal"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r1",
+          "text": "Lists the main causes of postmenopausal bleeding: atrophy, polyps, hyperplasia, and carcinoma."
+        },
+        {
+          "id": "r2",
+          "text": "Explains the progression risk of atypical hyperplasia / endometrial intraepithelial neoplasia."
+        },
+        {
+          "id": "r3",
+          "text": "Identifies non-uterine and extragenital sources including cervical and ovarian lesions."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "endometrial_cancer: additionalDifferentials"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Abnormal uterine bleeding and endometrial hyperplasia"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.endometrial.workup": {
+      "id": "skill.ix.endometrial.workup",
+      "kind": "investigation",
+      "system": "obgyn",
+      "title": "Diagnostic evaluation, imaging and tissue sampling in suspected endometrial carcinoma",
+      "oneLine": "Transvaginal ultrasonography, outpatient Pipelle suction curettage, pelvic MRI, and molecular MMR assessment",
+      "why": "Transvaginal ultrasound serves as an initial non-invasive triage test, but histological confirmation via Pipelle sampling or hysteroscopic biopsy is required before surgery. Staging MRI and mismatch repair immunohistochemistry direct definitive surgical planning.",
+      "teach": [
+        {
+          "heading": "Transvaginal ultrasonography: triage threshold",
+          "body": "Transvaginal ultrasound (TVS) is the first-line imaging triage test in postmenopausal bleeding.\n\nAn endometrial thickness of 4 mm or less in a postmenopausal woman has a high negative predictive value (greater than 99 percent for cancer). An endometrial thickness greater than 4 mm, or a focal mass, heterogeneous echotexture, or fluid collection, mandates histological tissue sampling."
+        },
+        {
+          "heading": "Endometrial tissue sampling modalities",
+          "table": {
+            "cols": [
+              "Sampling Method",
+              "Clinical Setting",
+              "Diagnostic Strengths",
+              "Key Limitations"
+            ],
+            "rows": [
+              [
+                "Pipelle suction curette",
+                "Outpatient clinic without anaesthesia",
+                "Sensitivity > 95% for diffuse lesions",
+                "Focal polyps may be missed"
+              ],
+              [
+                "Hysteroscopy and biopsy",
+                "Outpatient or operating theatre",
+                "Direct visualization of focal lesions",
+                "Requires equipment and expertise"
+              ],
+              [
+                "Dilatation and curettage",
+                "Operating theatre with anaesthesia",
+                "Useful if cervical stenosis prevents Pipelle",
+                "Risk of perforation and infection"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Staging imaging and pre-treatment workup",
+          "body": "Pelvic magnetic resonance imaging (MRI) with contrast is the gold standard imaging modality for pre-operative locoregional staging, assessing depth of myometrial invasion and cervical stromal infiltration.\n\nComputed tomography (CT) of the chest, abdomen, and pelvis is indicated in high-grade tumours (serous, clear cell, G3 endometrioid) to detect nodal or distant peritoneal and pulmonary metastases. Serum CA-125 aids in monitoring advanced disease."
+        },
+        {
+          "heading": "Mismatch repair testing and Lynch screening",
+          "body": "Universal immunohistochemical screening for the four mismatch repair proteins (MLH1, MSH2, MSH6, PMS2) is recommended on all newly diagnosed endometrial carcinomas.\n\nLoss of MSH2/MSH6 or isolated PMS2 strongly suggests Lynch syndrome. Loss of MLH1 is usually caused by somatic MLH1 promoter hypermethylation, tested via methylation analysis before genetic referral."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the accepted endometrial thickness threshold on transvaginal ultrasound above which tissue sampling is indicated in postmenopausal bleeding?",
+          "a": "An endometrial thickness greater than 4 mm on transvaginal ultrasound requires histological sampling.",
+          "accept": [
+            "4 mm",
+            "four millimetres",
+            "4",
+            "greater than 4 mm"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why is Pipelle suction curettage preferred over traditional operating theatre dilatation and curettage for initial sampling?",
+          "a": "Pipelle curettage is an outpatient procedure that avoids general anaesthesia, has lower cost, and causes less pain and perforation risk.",
+          "accept": [
+            "outpatient",
+            "anaesthesia",
+            "general anaesthesia",
+            "cost",
+            "perforation",
+            "pain"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which imaging modality is superior for evaluating depth of myometrial invasion and cervical stromal involvement before surgery?",
+          "a": "Pelvic MRI with contrast.",
+          "accept": [
+            "mri",
+            "pelvic mri",
+            "magnetic resonance imaging",
+            "contrast"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r1",
+          "text": "Applies the 4 mm endometrial thickness threshold on transvaginal ultrasound."
+        },
+        {
+          "id": "r2",
+          "text": "Compares Pipelle suction biopsy with hysteroscopy and fractional curettage."
+        },
+        {
+          "id": "r3",
+          "text": "Explains the roles of pelvic MRI and universal mismatch repair immunohistochemistry."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "endometrial_cancer: additionalInvestigations"
+        },
+        {
+          "source": "NICE",
+          "locator": "NG12: Suspected cancer: recognition and referral - postmenopausal bleeding"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.endometrial.figo_molecular": {
+      "id": "skill.annex.endometrial.figo_molecular",
+      "kind": "annexure",
+      "system": "obgyn",
+      "title": "FIGO staging and molecular classification of endometrial carcinoma",
+      "oneLine": "Surgical FIGO staging system and integration of the four Proactive Molecular Risk Groups",
+      "why": "Endometrial carcinoma is surgically staged. Integrating anatomical spread with molecular profiling (POLEmut, MMRd, NSMP, p53abn) provides an accurate framework that guides adjuvant radiotherapy and systemic treatment choices.",
+      "teach": [
+        {
+          "heading": "FIGO anatomical staging system",
+          "body": "Staging of endometrial cancer is surgical and pathological, established following total hysterectomy and bilateral salpingo-oophorectomy.\n\nStage I is confined to the uterine corpus (IA: inner half of myometrium; IB: outer half of myometrium). Stage II invades cervical stroma. Stage III exhibits regional spread to serosa, adnexa, vagina, or lymph nodes. Stage IV invades bladder or bowel mucosa, or has distant metastases."
+        },
+        {
+          "heading": "FIGO staging summary table",
+          "table": {
+            "cols": [
+              "Stage",
+              "Anatomical Criteria",
+              "Spread Location",
+              "Prognostic Impact"
+            ],
+            "rows": [
+              [
+                "Stage IA",
+                "Tumour limited to endometrium or < 50% myometrial invasion",
+                "Inner half myometrium",
+                "Excellent survival (> 90%)"
+              ],
+              [
+                "Stage IB",
+                "Tumour invades >= 50% of the myometrium",
+                "Outer half myometrium",
+                "Intermediate risk"
+              ],
+              [
+                "Stage II",
+                "Cervical stromal invasion without extrauterine spread",
+                "Cervix stroma",
+                "Requires adjuvant therapy"
+              ],
+              [
+                "Stage III",
+                "Serosa / adnexa (IIIA), vagina / parametrium (IIIB), nodes (IIIC)",
+                "Regional pelvic spread",
+                "Higher recurrence risk"
+              ],
+              [
+                "Stage IV",
+                "Bladder / bowel mucosa (IVA), distant / inguinal nodes (IVB)",
+                "Advanced dissemination",
+                "Systemic therapy required"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "The four molecular risk subgroups",
+          "body": "The molecular classification refines prognosis beyond morphology:\n\n1. POLE ultramutated (POLEmut): 5-10%, excellent prognosis, permits de-escalation of adjuvant therapy.\n2. Mismatch repair deficient (MMRd): 25-30%, intermediate prognosis, eligible for immune checkpoint blockade.\n3. No specific molecular profile (NSMP): 45-50%, intermediate prognosis, hormone receptor positive.\n4. p53 abnormal (p53abn): 10-15%, aggressive, poor prognosis, requires systemic chemotherapy."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What distinguishes FIGO Stage IA from Stage IB in endometrial carcinoma?",
+          "a": "Stage IA has less than 50 percent myometrial invasion, whereas Stage IB has 50 percent or more myometrial invasion.",
+          "accept": [
+            "50 percent",
+            "myometrial invasion",
+            "half",
+            "50%",
+            "myometrium"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What anatomical involvement defines FIGO Stage II endometrial cancer?",
+          "a": "Tumour invasion into the cervical stroma without extension beyond the uterus.",
+          "accept": [
+            "cervical stroma",
+            "cervix",
+            "stroma",
+            "stromal invasion"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How does FIGO Stage IIIC1 differ from Stage IIIC2?",
+          "a": "Stage IIIC1 involves regional pelvic lymph nodes, whereas Stage IIIC2 involves para-aortic lymph nodes with or without pelvic nodes.",
+          "accept": [
+            "pelvic",
+            "para-aortic",
+            "lymph nodes",
+            "iiic1",
+            "iiic2",
+            "pelvic lymph nodes"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r1",
+          "text": "Outlines the anatomical criteria for FIGO Stages I through IV."
+        },
+        {
+          "id": "r2",
+          "text": "Differentiates Stage IA (< 50% myometrium) from Stage IB (>= 50% myometrium)."
+        },
+        {
+          "id": "r3",
+          "text": "Summarises the four molecular subgroups: POLEmut, MMRd, NSMP, and p53abn."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "endometrial_cancer: pathophysiology"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline: Management of Endometrial Hyperplasia and Carcinoma"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.endometrial.diagnosis": {
+      "id": "skill.endometrial.diagnosis",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Formulating the definitive diagnosis and risk stratification in endometrial carcinoma",
+      "oneLine": "Integrating histological subtype, FIGO architectural grade, myometrial invasion depth, LVSI, and molecular groups",
+      "why": "Final diagnosis and staging in endometrial carcinoma are pathological and surgical. Combining histological subtype, architectural grade, myometrial invasion depth, lymphovascular space invasion, and molecular markers assigns patients to risk categories that govern adjuvant therapy.",
+      "teach": [
+        {
+          "heading": "FIGO architectural grading of endometrioid carcinoma",
+          "body": "Histological grading applies to endometrioid carcinomas and reflects the proportion of solid non-squamous tumour growth:\n\nGrade 1: 5 percent or less solid non-squamous growth pattern (well-differentiated).\nGrade 2: 6 to 50 percent solid non-squamous growth pattern (moderately differentiated).\nGrade 3: greater than 50 percent solid non-squamous growth pattern (poorly differentiated). Severe nuclear atypia upgrades G1 or G2 by one grade."
+        },
+        {
+          "heading": "Pathological risk stratification categories",
+          "table": {
+            "cols": [
+              "Risk Group",
+              "Pathological Criteria",
+              "Recurrence Risk",
+              "Adjuvant Strategy"
+            ],
+            "rows": [
+              [
+                "Low risk",
+                "Stage IA, Grade 1-2 endometrioid, LVSI negative",
+                "Very low (< 5%)",
+                "Observation only"
+              ],
+              [
+                "Intermediate risk",
+                "Stage IA Grade 3, or Stage IB Grade 1-2",
+                "Moderate (5-10%)",
+                "Vaginal brachytherapy"
+              ],
+              [
+                "High-intermediate",
+                "Stage IB Grade 3, or substantial LVSI",
+                "Significant (15-20%)",
+                "Brachytherapy or pelvic EBRT"
+              ],
+              [
+                "High risk",
+                "Stage II-III, serous / clear cell, p53 abnormal",
+                "High (> 30%)",
+                "Chemotherapy +/- EBRT"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Non-endometrioid and molecular integration",
+          "body": "Non-endometrioid subtypes (serous carcinoma, clear cell carcinoma, carcinosarcoma) are all designated high-grade tumours by definition, regardless of architectural pattern.\n\nImmunohistochemical staining for mismatch repair proteins (MMRd) and p53, together with POLE mutation analysis, completes the diagnostic formulation. A p53-abnormal tumour moves patients into high-risk protocols, while POLE mutation confirms a favourable course."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What architectural criterion separates FIGO Grade 1 from Grade 2 endometrioid adenocarcinoma?",
+          "a": "Grade 1 has 5 percent or less solid non-squamous growth, whereas Grade 2 has 6 to 50 percent solid growth.",
+          "accept": [
+            "5 percent",
+            "5%",
+            "solid",
+            "growth",
+            "6 to 50 percent",
+            "non-squamous"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why are uterine serous carcinomas and clear cell carcinomas not assigned a numerical FIGO grade?",
+          "a": "They are high-grade tumours by definition and behave aggressively regardless of architectural pattern.",
+          "accept": [
+            "high-grade",
+            "high grade",
+            "definition",
+            "aggressive",
+            "serous"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which pathological features place a patient with Stage I endometrioid cancer into the high-intermediate risk category?",
+          "a": "Deep myometrial invasion of 50 percent or more (Stage IB), high tumour grade (Grade 3), or substantial lymphovascular space invasion.",
+          "accept": [
+            "myometrial invasion",
+            "stage ib",
+            "grade 3",
+            "lymphovascular space invasion",
+            "lvsi",
+            "50 percent"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r1",
+          "text": "Applies FIGO architectural grading criteria (G1 <= 5%, G2 6-50%, G3 > 50%)."
+        },
+        {
+          "id": "r2",
+          "text": "Recognises serous and clear cell carcinomas as inherently high-grade malignancies."
+        },
+        {
+          "id": "r3",
+          "text": "Classifies patients into low, intermediate, high-intermediate, and high-risk categories."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "endometrial_cancer: pathophysiology"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Endometrial cancer: surgical staging and pathology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.endometrial": {
+      "id": "skill.tx.endometrial",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Surgical staging, adjuvant therapies, and systemic management of endometrial carcinoma",
+      "oneLine": "Minimally invasive hysterectomy with bilateral salpingo-oophorectomy, sentinel node mapping, and risk-tailored adjuvant therapy",
+      "why": "Total hysterectomy with bilateral salpingo-oophorectomy and surgical nodal evaluation provides primary curative treatment. Tailoring adjuvant radiation, chemotherapy, or hormonal therapy according to pathological and molecular risk prevents recurrence while minimising treatment-related morbidity.",
+      "dosingNote": "This module teaches management at the level of modality and principle. Specific agents, routes, combinations and schedules must be taken from your current national or institutional guideline and local protocols at the time of prescribing. CliniX does not prescribe.",
+      "teach": [
+        {
+          "heading": "Primary surgical staging",
+          "body": "The cornerstone of management is total hysterectomy and bilateral salpingo-oophorectomy (TH-BSO).\n\nMinimally invasive surgery (laparoscopic or robotic) is the preferred surgical approach over open laparotomy. It achieves identical oncological outcomes with substantially lower blood loss, fewer wound infections, and shorter hospital stays, which is particularly beneficial in obese and diabetic women."
+        },
+        {
+          "heading": "Lymph node staging and surgical options",
+          "table": {
+            "cols": [
+              "Procedure",
+              "Technical Description",
+              "Clinical Setting",
+              "Key Benefit"
+            ],
+            "rows": [
+              [
+                "Sentinel node mapping",
+                "Cervical injection of indocyanine green (ICG)",
+                "Early-stage disease (cT1)",
+                "High accuracy, low lymphoedema risk"
+              ],
+              [
+                "Systemic pelvic dissection",
+                "Excision of external, internal, obturator nodes",
+                "High-risk histology or bulky nodes",
+                "Accurate nodal staging"
+              ],
+              [
+                "Para-aortic dissection",
+                "Dissection up to the renal vessels",
+                "Gross pelvic nodes or high-risk features",
+                "Detects high retroperitoneal spread"
+              ],
+              [
+                "Omentectomy",
+                "Infragastric omentum removal",
+                "Serous and carcinosarcoma subtypes",
+                "Staging of transperitoneal spread"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Adjuvant radiotherapy modalities",
+          "body": "Adjuvant radiation is tailored to pathological risk:\n\nVaginal brachytherapy (VBT) is the standard adjuvant treatment for intermediate and high-intermediate risk disease confined to the uterus, offering excellent local vaginal vault control with minimal bowel or bladder toxicity. External beam radiation therapy (EBRT) to the pelvis is indicated for Stage II disease, positive margins, or extensive lymphovascular space invasion."
+        },
+        {
+          "heading": "Systemic chemotherapy and targeted immunotherapy",
+          "body": "Platinum-based combination chemotherapy (carboplatin plus paclitaxel for six cycles) is standard for Stage III or IV disease, high-risk histology (serous, clear cell, carcinosarcoma), and node-positive disease.\n\nIn advanced or recurrent mismatch repair deficient (MMRd) endometrial carcinomas, immune checkpoint inhibition (such as pembrolizumab) demonstrates substantial and durable antitumor response. Endocrine therapy (megestrol acetate, letrozole) serves as a palliative option in hormone receptor-positive low-grade recurrence."
+        },
+        {
+          "heading": "Indian clinical context and public schemes",
+          "body": "In India, surgical staging and radiotherapy for endometrial cancer are covered under the Ayushman Bharat PMJAY scheme and state health assurance programmes.\n\nPrimary care and district hospitals must maintain a low threshold for referring women with postmenopausal bleeding to tertiary Regional Cancer Centres (RCCs). Minimally invasive surgical facilities and high-dose-rate (HDR) brachytherapy units have expanded across government medical colleges."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the primary surgical operation performed for clinical Stage I endometrial carcinoma?",
+          "a": "Total hysterectomy and bilateral salpingo-oophorectomy, preferably via a minimally invasive laparoscopic approach.",
+          "accept": [
+            "total hysterectomy",
+            "bilateral salpingo-oophorectomy",
+            "salpingo-oophorectomy",
+            "laparoscopic",
+            "minimally invasive"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which adjuvant radiation modality provides vaginal vault control with minimal rectal and urinary toxicity in intermediate-risk disease?",
+          "a": "Vaginal vault brachytherapy (VBT).",
+          "accept": [
+            "vaginal brachytherapy",
+            "brachytherapy",
+            "vbt",
+            "vault brachytherapy"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Which systemic chemotherapy regimen is the standard first-line choice for advanced or high-risk endometrial carcinoma?",
+          "a": "Carboplatin and paclitaxel combination chemotherapy.",
+          "accept": [
+            "carboplatin",
+            "paclitaxel",
+            "chemotherapy",
+            "carboplatin and paclitaxel"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r1",
+          "text": "Recommends minimally invasive total hysterectomy with bilateral salpingo-oophorectomy as primary therapy."
+        },
+        {
+          "id": "r2",
+          "text": "Selects adjuvant vaginal brachytherapy or external beam radiation based on pathological risk."
+        },
+        {
+          "id": "r3",
+          "text": "Identifies carboplatin plus paclitaxel chemotherapy and immunotherapy for advanced disease."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "endometrial_cancer: management"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline: Management of Endometrial Hyperplasia and Carcinoma"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.endometrial.pmb_spotting",
+      "title": "A 62-year-old woman with painless postmenopausal bleeding and diabetes",
+      "opening": "Doctor, I reached menopause ten years ago, but over the last two months I have noticed intermittent painless reddish-brown spotting from below. My daughter insisted I come to hospital to get it checked.",
+      "fallback": "I am not sure about that detail, doctor. I came because of this reddish spotting that started two months ago after ten years of menopause.",
+      "patient": {
+        "name": "Kalyani Sen",
+        "age": 62,
+        "sex": "female",
+        "occupation": "Retired primary school teacher",
+        "residence": "Suburban town, lives with her husband and extended family"
+      },
+      "initialVitals": {
+        "hr": 78,
+        "bpSystolic": 138,
+        "bpDiastolic": 86,
+        "rr": 16,
+        "spo2": 98,
+        "temp": 36.8,
+        "gcs": 15
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you to hospital today",
+            "what is your main problem",
+            "why did you come to clinic",
+            "tell me about your main complaint",
+            "kya takleef hai aapko"
+          ],
+          "reply": "Doctor, for the past two months I have had reddish-brown spotting on and off from my vagina. It is completely painless, but I had my menopause ten years ago, so I was worried."
+        },
+        "bleeding_chronology": {
+          "cues": [
+            "when did the bleeding start",
+            "how long have you had this bleeding",
+            "since when are you spotting",
+            "duration of vaginal bleeding",
+            "how many days or weeks of bleeding"
+          ],
+          "reply": "It started roughly eight weeks ago. It is not continuous every day; I notice spotting for three or four days, then nothing for a week, and then it reappears again."
+        },
+        "bleeding_character": {
+          "cues": [
+            "colour and nature of the bleeding",
+            "what does the blood look like",
+            "is it fresh red blood or dark spotting",
+            "any clots in the bleeding",
+            "describe the vaginal bleeding"
+          ],
+          "reply": "It is mostly light reddish or brownish spotting on my undergarments. Occasionally there are small streaks of pinkish blood, but I have never passed large dark clots."
+        },
+        "bleeding_quantity": {
+          "cues": [
+            "how heavy is the bleeding",
+            "how many pads are you using",
+            "are you soaking sanitary pads",
+            "volume of blood loss",
+            "how much blood are you losing"
+          ],
+          "reply": "It is quite light. I use one or at most two panty liners a day just to protect my clothing. I have never soaked through a full sanitary pad."
+        },
+        "contact_bleeding": {
+          "cues": [
+            "does bleeding happen after intercourse",
+            "any bleeding after sex or contact",
+            "postcoital bleeding history",
+            "bleeding after marital relations"
+          ],
+          "reply": "No, doctor, my husband and I have not been sexually active for several years, so it is not related to marital relations or touch."
+        },
+        "pain_symptoms": {
+          "cues": [
+            "do you have any tummy or pelvic pain",
+            "is there lower abdominal pain",
+            "any cramps in the lower belly",
+            "do you have stomach cramps with the bleeding",
+            "pet me dard hai kya"
+          ],
+          "reply": "No, I have had no abdominal pain or lower tummy cramps at all. The spotting is entirely painless, which is why I delayed coming initially."
+        },
+        "vaginal_discharge": {
+          "cues": [
+            "any vaginal discharge",
+            "do you have white or watery discharge",
+            "any smelly or foul vaginal discharge",
+            "is there discharge between bleeding episodes"
+          ],
+          "reply": "Before the spotting started, I noticed a slight clear or pale yellowish watery discharge for about a month. It had no foul or unpleasant smell and caused no itching."
+        },
+        "menopause_history": {
+          "cues": [
+            "when was your menopause",
+            "at what age did your periods stop",
+            "how many years since your menopause",
+            "when was your last menstrual period",
+            "menstrual history before menopause"
+          ],
+          "reply": "My periods stopped naturally when I was 52 years old, exactly ten years ago. Before that, my periods had always been regular every 28 to 30 days."
+        },
+        "obstetric_parity": {
+          "cues": [
+            "how many children do you have",
+            "obstetric history and deliveries",
+            "how many pregnancies have you had",
+            "any miscarriages or abortions",
+            "parity and childbearing history"
+          ],
+          "reply": "I have never had any children, doctor. We were married for 38 years and tried for many years, but I was never able to conceive."
+        },
+        "hormone_therapy": {
+          "cues": [
+            "did you take hormone replacement therapy",
+            "any history of hrt or oestrogen tablets",
+            "have you taken hormones after menopause",
+            "any hormone medicines or injections"
+          ],
+          "reply": "No, I have never taken hormone replacement therapy or any kind of hormone pills or patches after my menopause."
+        },
+        "tamoxifen_exposure": {
+          "cues": [
+            "have you ever taken tamoxifen",
+            "any history of breast cancer treatment",
+            "have you taken medicines for breast lumps",
+            "any breast disease medication"
+          ],
+          "reply": "No, I have never had breast cancer or breast lumps, and I have never taken tamoxifen or any cancer medicines."
+        },
+        "metabolic_comorbidities": {
+          "cues": [
+            "do you have sugar or blood pressure",
+            "any medical problems like diabetes or hypertension",
+            "how long have you had diabetes",
+            "sugar ki bimari hai kya",
+            "high blood pressure history"
+          ],
+          "reply": "Yes, doctor. I have had type 2 diabetes for eight years, managed with metformin. I also have high blood pressure for five years and take an amlodipine tablet every morning."
+        },
+        "weight_changes": {
+          "cues": [
+            "have you noticed any weight change",
+            "have you lost or gained weight recently",
+            "any unintentional weight loss",
+            "body weight and build"
+          ],
+          "reply": "My weight has been fairly constant around 76 kilograms for the past few years. I have not had any sudden weight loss, though my doctor often tells me I am overweight."
+        },
+        "urinary_symptoms": {
+          "cues": [
+            "any burning or pain when passing urine",
+            "any blood in the urine or haematuria",
+            "urinary frequency or urgency problems",
+            "peshab me jalan ya khoon"
+          ],
+          "reply": "No burning, no pain, and no blood in my urine. I pass urine normally about four to five times a day."
+        },
+        "bowel_symptoms": {
+          "cues": [
+            "any bleeding from the back passage or motions",
+            "any change in bowel habits or constipation",
+            "rectal bleeding or piles problems",
+            "latrine me khoon ya dast"
+          ],
+          "reply": "My bowels are regular every morning. I have no constipation, diarrhoea, or bleeding from the back passage."
+        },
+        "family_history_cancer": {
+          "cues": [
+            "does anyone in your family have cancer",
+            "family history of uterine or bowel cancer",
+            "any history of colon or ovarian cancer in relatives",
+            "family cancer history"
+          ],
+          "reply": "My maternal aunt had cancer of the large bowel when she was about 48 years old. My mother had diabetes and heart disease, but no uterine cancer as far as I know."
+        },
+        "cervical_screening": {
+          "cues": [
+            "have you ever had a pap smear test",
+            "when was your last cervical screening test",
+            "prior cervical smear or screening check",
+            "any previous checkup of the cervix"
+          ],
+          "reply": "I had one Pap smear test done about fifteen years ago during a routine health camp, and I was told it was completely normal. I have not had any test since then."
+        },
+        "medication_history": {
+          "cues": [
+            "what medications are you currently taking",
+            "tell me about your regular daily medicines",
+            "prescribed medicines and tablets",
+            "are you on blood thinners like aspirin"
+          ],
+          "reply": "I take metformin 500 mg twice a day for my diabetes, and amlodipine 5 mg once a day for blood pressure. I do not take aspirin or any blood thinners."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Obese postmenopausal female (BMI approximately 31 kg/m2), comfortable in bed, alert and oriented. Mild conjunctival pallor. No supraclavicular, axillary, or inguinal lymphadenopathy. No jaundice or clubbing.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 78 beats/min regular and good volume; BP 138/86 mmHg; respiratory rate 16 breaths/min; temperature 36.8 C; SpO2 98% on room air. Haemodynamically stable.",
+          "abnormal": false
+        },
+        "skill.gen.edema": {
+          "finding": "No peripheral pedal oedema of bilateral lower extremities; no calf tenderness or signs of deep vein thrombosis.",
+          "abnormal": false
+        },
+        "skill.exam.obg.gynae_abdominal": {
+          "finding": "Abdomen is soft, obese, and non-tender throughout. No palpable suprapubic or abdominal mass; no hepatosplenomegaly. No shifting dullness or fluid thrill (no clinical ascites). Both renal angles non-tender.",
+          "abnormal": false
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "finding": "External genitalia show physiological postmenopausal atrophic changes. No vulval ulcers, leukoplakia, excoriations, or discrete masses. Introitus is healthy with no active bleeding pooling at the vulva.",
+          "abnormal": false
+        },
+        "skill.exam.obg.speculum_insert": {
+          "finding": "Bivalve Cusco speculum inserted gently with warm water lubrication; well tolerated without discomfort or resistance.",
+          "abnormal": false
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "finding": "Vaginal walls show mild postmenopausal atrophy. Cervix is flush with vault and smooth; external os is closed with a scant trickle of serosanguinous, blood-stained fluid issuing from the endocervical canal. No exophytic cervical growth, polyp, ulceration, or contact friability on the ectocervix.",
+          "abnormal": true
+        },
+        "skill.exam.obg.bimanual": {
+          "finding": "Uterus is anteverted, mildly bulky (approximately 8-week gestational size), firm, regular in contour, mobile, and non-tender. Cervix moves freely without excitation tenderness. Bilateral fornices and adnexa are clear without palpable masses or tenderness. Bilateral parametria are soft and pliable without induration reaching the pelvic sidewall. Pouch of Douglas is free.",
+          "abnormal": true
+        },
+        "skill.approach.obg.pelvic_close": {
+          "finding": "Speculum withdrawn under direct vision; perineum wiped cleanly, sheet replaced, and patient assisted to sit upright and dress in complete privacy.",
+          "abnormal": false
+        },
+        "skill.endometrial.signs": {
+          "finding": "Painless postmenopausal bleeding with a clear ectocervix and bloody discharge issuing from the os, a mildly enlarged uterine corpus (8-week size), and clear adnexa in an obese diabetic patient, highly characteristic of early endometrial neoplasia.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "tvs_pelvis",
+        "endometrial_biopsy",
+        "fbc",
+        "mri_pelvis"
+      ],
+      "investigations": {
+        "fbc": {
+          "label": "Full blood count (FBC / CBC)",
+          "result": "Haemoglobin 10.8 g/dL, haematocrit 33%, total leucocyte count 6,800/uL with normal differential, platelet count 240,000/uL; red cell indices show mild microcytosis (MCV 77 fL, MCH 25 pg).",
+          "note": "Mild microcytic hypochromic anaemia consistent with intermittent chronic blood loss from the postmenopausal endometrium."
+        },
+        "tvs_pelvis": {
+          "label": "Transvaginal ultrasonography (TVS)",
+          "result": "Uterus measures 8.2 x 5.1 x 4.4 cm. Endometrium is diffusely thickened, heterogeneous, and echogenic, measuring 14 mm in double-layer thickness (normal postmenopausal <= 4 mm), with an irregular endometrial-myometrial junction. Bilateral ovaries appear atrophic and normal; no adnexal cystic or solid mass; no pelvic free fluid.",
+          "note": "Endometrial thickness of 14 mm markedly exceeds the 4 mm postmenopausal triage cut-off, confirming the urgent indication for histological endometrial sampling."
+        },
+        "endometrial_biopsy": {
+          "label": "Pipelle endometrial biopsy and histopathology",
+          "result": "Multiple fragments of endometrioid adenocarcinoma, FIGO Grade 1 (well-differentiated, solid non-squamous architecture less than 5 percent). Crowded back-to-back glands with cribriforming and nuclear atypia. Immunohistochemistry: strong diffuse oestrogen and progesterone receptor positivity; intact nuclear expression of MLH1, MSH2, MSH6, and PMS2 (mismatch repair proficient / NSMP molecular group); wild-type p53 pattern.",
+          "note": "Definitive tissue diagnosis confirming well-differentiated endometrioid adenocarcinoma, Grade 1, mismatch repair proficient."
+        },
+        "mri_pelvis": {
+          "label": "Contrast-enhanced pelvic magnetic resonance imaging (MRI)",
+          "result": "Endometrial mass confined to the uterine cavity and inner myometrium, invading approximately 30% of the total myometrial wall thickness (< 50% myometrial invasion). Intact outer myometrial rim; no disruption of the uterine serosa. Normal cervical stroma with no tumour infiltration into the cervix. Bilateral parametria are clear. No enlarged pelvic or common iliac lymph nodes.",
+          "note": "Radiological FIGO Stage IA disease with superficial myometrial invasion (< 50%) and clear cervical stroma, supporting primary surgical curative intent."
+        },
+        "chest_xray": {
+          "label": "Chest X-ray (PA view)",
+          "result": "Normal lung parenchyma without focal infiltrates, nodular metastases, or consolidation. Normal cardiothoracic ratio. Costophrenic and cardiophrenic angles are sharp.",
+          "note": "No radiological evidence of pulmonary parenchymal metastases or pleural effusion; suitable for pre-anaesthetic clearance."
+        },
+        "renal_liver_panel": {
+          "label": "Renal function tests and serum electrolytes",
+          "result": "Serum creatinine 0.8 mg/dL, blood urea 22 mg/dL, serum sodium 139 mEq/L, serum potassium 4.2 mEq/L, fasting blood glucose 132 mg/dL, HbA1c 7.1%. Total bilirubin 0.6 mg/dL, ALT 24 U/L, AST 22 U/L, serum albumin 4.0 g/dL.",
+          "note": "Normal baseline renal and hepatic function with reasonably controlled type 2 diabetes, confirming suitability for elective surgical staging."
+        },
+        "ecg": {
+          "label": "12-lead Electrocardiogram (ECG)",
+          "result": "Normal sinus rhythm at 76 beats/min, normal PR and QRS intervals, normal electrical axis, no ST segment elevation, depression, or T wave inversion.",
+          "note": "Normal baseline cardiac tracing providing cardiovascular clearance for general anaesthesia."
+        },
+        "ca125": {
+          "label": "Serum CA-125 biomarker",
+          "result": "Serum CA-125 level is 18 U/mL (normal reference range < 35 U/mL).",
+          "note": "Normal baseline CA-125, consistent with disease confined to the uterine corpus without overt peritoneal or nodal spread."
+        }
+      },
+      "differentialModel": {
+        "answer": "Endometrial carcinoma. Primary differentials include endometrial hyperplasia with or without atypia, endometrial polyp, atrophic vaginitis or endometritis, carcinoma of the cervix, and submucosal fibroid uterus.",
+        "accept": [
+          "Endometrial carcinoma",
+          "Endometrial hyperplasia",
+          "Endometrial polyp",
+          "Carcinoma of the cervix",
+          "Genitourinary syndrome of menopause",
+          "Atrophic vaginitis",
+          "Fibroid uterus",
+          "Uterine sarcoma"
+        ],
+        "minMatch": 3
+      },
+      "diagnosis": {
+        "answer": "Endometrial carcinoma, clinical FIGO Stage IA (well-differentiated endometrioid adenocarcinoma, Grade 1) presenting with postmenopausal bleeding in a patient with metabolic risk factors.",
+        "accept": [
+          "Endometrial carcinoma",
+          "Carcinoma of the endometrium",
+          "endometrial cancer"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Refer to gynae-oncology multidisciplinary team for primary surgical staging with total hysterectomy and bilateral salpingo-oophorectomy, sentinel lymph node mapping, and pathological risk stratification for adjuvant therapy.",
+        "accept": [
+          "referral to a gynae oncology multidisciplinary team",
+          "total abdominal or laparoscopic hysterectomy with bilateral salpingo oophorectomy",
+          "sentinel lymph node mapping or pelvic lymphadenectomy",
+          "histopathological evaluation for myometrial invasion depth and grade",
+          "risk stratification for adjuvant vaginal brachytherapy",
+          "counselling on diagnosis surgical risks and surveillance follow up"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "Postmenopausal bleeding is never normal or physiological; any vaginal bleeding occurring twelve months or more after the final menstrual period mandates urgent investigation to exclude endometrial carcinoma.",
+        "Transvaginal ultrasound is the primary non-invasive imaging triage test; an endometrial thickness greater than 4 mm in a postmenopausal woman requires histological sampling via outpatient Pipelle biopsy or hysteroscopy.",
+        "Primary treatment and definitive staging for endometrial cancer is surgical: total hysterectomy with bilateral salpingo-oophorectomy and sentinel lymph node assessment, with adjuvant vaginal brachytherapy reserved for intermediate-risk features.",
+        "Obesity, type 2 diabetes mellitus, nulliparity, and late natural menopause constitute the classic hyperoestrogenic metabolic risk triad that drives Type 1 endometrioid adenocarcinoma."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

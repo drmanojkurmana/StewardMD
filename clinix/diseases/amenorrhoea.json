@@ -1,0 +1,1407 @@
+{
+  "_comment": "CliniX disease pathway for Amenorrhoea (primary and secondary causes). Authoring rules: clinix-model.js, Final Year Expansion Plan WP3.",
+  "id": "amenorrhoea",
+  "name": "Amenorrhoea",
+  "fullName": "Amenorrhoea: primary and secondary causes",
+  "subtitle": "Primary and secondary causes",
+  "system": "obgyn",
+  "kbRef": "amenorrhoea_primary_secondary_turner_asherman",
+  "oneLine": "Classification, clinical evaluation, and stepwise investigation of primary and secondary amenorrhoea across anatomical compartments",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics and Physiological Regulation",
+      "skills": [
+        "skill.amenorrhoea.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Clinical Approach and Communication",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient Particulars and Chronology",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In amenorrhoea, chronological age is decisive: an adolescent under 15 with secondary sexual characteristics may still be within normal biological variation, whereas absence of menarche by 15 or absence of thelarche by 13 meets criteria for primary amenorrhoea. In reproductive-age women, abrupt cessation of menses mandates immediate pregnancy testing."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of Present Illness and Symptoms",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.menstrual_history",
+        "skill.hx.obg.gynae_symptoms"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Listen for whether menses never occurred (primary amenorrhoea) or ceased after previously established cyclicity (secondary amenorrhoea). Enquire specifically about cyclical monthly pelvic cramping without external bleeding, which suggests an obstructive outflow tract defect with haematocolpos."
+        },
+        "skill.hx.obg.menstrual_history": {
+          "expect": "In secondary amenorrhoea, establish previous cycle frequency, duration, flow volume, and exact date of the last menstrual period. Determine whether cessation was abrupt (typical of pregnancy, Asherman syndrome, or premature ovarian failure) or followed progressive oligomenorrhoea (typical of PCOS or functional hypothalamic amenorrhoea)."
+        },
+        "skill.hx.obg.gynae_symptoms": {
+          "expect": "Enquire about cyclical pelvic or lower abdominal pain, which flags cryptomenorrhoea behind an intact hymen or transverse vaginal septum. Check for abnormal vaginal discharge or deep pelvic pain that might indicate pelvic inflammatory disease contributing to intrauterine adhesions."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, Personal, Drug and Family History",
+      "skills": [
+        "skill.hx.obg.gynae_background",
+        "skill.hx.amenorrhoe.risk"
+      ],
+      "emphasis": {
+        "skill.hx.obg.gynae_background": {
+          "expect": "Inquire meticulously about prior obstetric events and uterine instrumentation: evacuation and curettage for missed abortion, manual removal of placenta, or postpartum curettage, which are the classic predisposing events for Asherman syndrome. Review contraceptive history, as post-pill amenorrhoea requires standard investigation rather than passive waiting."
+        },
+        "skill.hx.amenorrhoe.risk": {
+          "expect": "Systematically review weight changes, dietary restriction, athletic training intensity, psychological stressors, and prescription medications (especially dopamine antagonists like antipsychotics and antiemetics). Screen for systemic endocrine symptoms: headaches and visual disturbance, galactorrhoea, and vasomotor flushes."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General Physical Examination",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Measure standing height and plot against centile charts: short stature below the 3rd centile strongly indicates Turner syndrome. Assess body mass index for severe underweight (functional hypothalamic amenorrhoea) or obesity (PCOS). Inspect for Turner stigmata: webbed neck, low hairline, high palate, shield chest, and cubitus valgus."
+        },
+        "skill.gen.vitals": {
+          "expect": "Record pulse, blood pressure in both upper and lower limbs, respiratory rate, and temperature. Hypertension with radiofemoral delay or upper-to-lower limb blood pressure gradient flags coarctation of the aorta in Turner syndrome."
+        },
+        "skill.gen.edema": {
+          "expect": "Check for peripheral pedal oedema or puffy hands and feet, which in an adolescent girl can be a residual sign of congenital lymphedema associated with lymphatic hypoplasia in Turner syndrome."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Systemic and Gynaecological Examination",
+      "skills": [
+        "skill.exam.obg.gynae_abdominal",
+        "skill.exam.obg.vulval_inspect",
+        "skill.exam.obg.speculum_insert",
+        "skill.exam.obg.speculum_inspect",
+        "skill.exam.obg.bimanual",
+        "skill.exam.obg.breast_exam"
+      ],
+      "emphasis": {
+        "skill.exam.obg.gynae_abdominal": {
+          "expect": "Inspect and palpate the abdomen: a tense, tender suprapubic midline mass arising from the pelvis in an adolescent with primary amenorrhoea and cyclical pain indicates a distended haematometra or massive haematocolpos."
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "expect": "Inspect the external genitalia: identify a tense, bulging bluish membrane at the introitus characteristic of an imperforate hymen. Note whether the vaginal opening is patent, absent, or ends in a shallow blind pouch (MRKH syndrome or complete androgen insensitivity syndrome), and evaluate pubic hair distribution."
+        },
+        "skill.exam.obg.speculum_insert": {
+          "expect": "In adult sexually active women with secondary amenorrhoea, speculum insertion allows inspection of the cervix for stenosis, ectropion, or discharge. In unmarried non-sexually active adolescents presenting with primary amenorrhoea, speculum insertion is deferred; external inspection and pelvic imaging suffice."
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "expect": "Inspect the cervical os for complete occlusion, pinhole stenosis, scarring, or discharge following previous cervical trauma or cryotherapy. In adolescents with primary amenorrhoea, direct inspection is omitted when imaging non-invasively confirms cervical and uterine anatomy."
+        },
+        "skill.exam.obg.bimanual": {
+          "expect": "In adult women, assess uterine size, mobility, and adnexal masses. In non-sexually active adolescents, bimanual vaginal examination is replaced by gentle recto-abdominal examination under chaperone to palpate a small prepubertal uterus or distended haematocolpos without compromising the hymenal ring."
+        },
+        "skill.exam.obg.breast_exam": {
+          "expect": "Systematically evaluate Tanner staging of breast development (thelarche) from stage 1 (infantile) to stage 5 (mature). Palpate for true glandular breast tissue versus adipose tissue, note widely spaced or hypoplastic nipples (shield chest in Turner syndrome), and check for spontaneous or expressible galactorrhoea."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Disease Findings and Phenotypic Signs",
+      "skills": [
+        "skill.amenorrhoea.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical Summary and Anatomical Compartments",
+      "skills": [
+        "skill.amenorrhoea.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential Diagnosis",
+      "skills": [
+        "skill.amenorrhoea.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations and Hormonal Challenges",
+      "skills": [
+        "skill.ix.amenorrhoea.workup",
+        "skill.annex.amenorrhoea.algorithm"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Formulating the Definitive Diagnosis",
+      "skills": [
+        "skill.amenorrhoea.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment Principles and Hormone Therapy",
+      "skills": [
+        "skill.tx.amenorrhoea"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case Simulation and Clinical Reasoning",
+      "skills": [
+        "skill.present.amenorrhoe.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.amenorrhoea.primary_evaluation",
+        "title": "Evaluation and Counselling of an Adolescent with Primary Amenorrhoea",
+        "scenario": "You are the specialist gynaecology medical officer in the outpatient department. A 16-year-old girl is brought by her mother because she has not attained menarche and is lagging behind her peers in growth. Take a focused history, outline your physical examination steps, interpret the preliminary hormonal and ultrasound findings, and counsel the mother and daughter empathetically on the diagnostic pathway.",
+        "seconds": 420,
+        "skills": [
+          "skill.hx.chief_complaints",
+          "skill.hx.obg.menstrual_history",
+          "skill.hx.amenorrhoe.risk",
+          "skill.gen.appearance",
+          "skill.exam.obg.breast_exam",
+          "skill.amenorrhoea.signs",
+          "skill.ix.amenorrhoea.workup",
+          "skill.amenorrhoea.differential",
+          "skill.amenorrhoea.diagnosis"
+        ],
+        "examinerQuestions": [
+          "What is your clinical definition of primary amenorrhoea, and does this 16-year-old meet diagnostic criteria?",
+          "Why is assessment of breast development (thelarche) the critical branching point in the diagnostic algorithm of primary amenorrhoea?",
+          "How do you interpret serum FSH of 94 IU/L with undetectable estradiol and small uterus on ultrasound?",
+          "What definitive genetic investigation is indicated, and what associated non-reproductive organ systems require mandatory baseline screening?"
+        ]
+      },
+      {
+        "id": "osce.amenorrhoea.secondary_workup",
+        "title": "Stepwise Diagnostic Workup and Management of Secondary Amenorrhoea",
+        "scenario": "A 28-year-old woman presents with 8 months of absent menses following an evacuation and curettage for missed abortion 10 months ago. Prior to that, her cycles were regular every 28 days. Take a targeted history, order and interpret the sequential hormonal and diagnostic challenges, explain the differential diagnosis, and describe the definitive management approach.",
+        "seconds": 480,
+        "skills": [
+          "skill.hx.obg.menstrual_history",
+          "skill.hx.obg.gynae_symptoms",
+          "skill.hx.obg.gynae_background",
+          "skill.amenorrhoea.differential",
+          "skill.ix.amenorrhoea.workup",
+          "skill.annex.amenorrhoea.algorithm",
+          "skill.amenorrhoea.diagnosis",
+          "skill.tx.amenorrhoea"
+        ],
+        "examinerQuestions": [
+          "What is the very first mandatory laboratory test in any reproductive-age woman presenting with secondary amenorrhoea?",
+          "How does the progesterone challenge test work, and what does failure to bleed after medroxyprogesterone acetate indicate?",
+          "What is the significance of negative withdrawal bleeding after combined estrogen-progestin therapy?",
+          "What is the gold standard diagnostic and therapeutic modality for Asherman syndrome, and how is adhesion reformation prevented postoperatively?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.amenorrhoea.basics",
+      "skill.exam.obg.breast_exam",
+      "skill.exam.obg.vulval_inspect",
+      "skill.amenorrhoea.signs",
+      "skill.amenorrhoea.summary",
+      "skill.amenorrhoea.differential",
+      "skill.ix.amenorrhoea.workup",
+      "skill.annex.amenorrhoea.algorithm",
+      "skill.amenorrhoea.diagnosis",
+      "skill.tx.amenorrhoea"
+    ]
+  },
+  "skills": {
+    "skill.amenorrhoea.basics": {
+      "id": "skill.amenorrhoea.basics",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Classification and pathophysiology of amenorrhoea",
+      "oneLine": "Definitions of primary and secondary amenorrhoea, the four anatomical compartments, and hypothalamic-pituitary-ovarian-uterine axis regulation",
+      "why": "Mastering the four-compartment anatomical classification and the feedback loops of the hypothalamic-pituitary-ovarian-uterine axis prevents disorganised testing and directs investigation straight to the failing organ system.",
+      "teach": [
+        {
+          "heading": "Definitions of primary and secondary amenorrhoea",
+          "body": "Primary amenorrhoea is defined as the failure of menarche by 15 years of age in the presence of normal secondary sexual characteristics and growth, or by 13 years of age if secondary sexual characteristics (such as breast development) are absent.\n\nSecondary amenorrhoea is the cessation of regular menses for 3 consecutive months, or for 6 consecutive months in a woman with previously irregular or oligomenorrhoeic cycles. Pregnancy is the most common cause."
+        },
+        {
+          "heading": "The four anatomical compartments",
+          "table": {
+            "cols": [
+              "Compartment",
+              "Anatomical Level",
+              "Primary Etiologies",
+              "Secondary Etiologies"
+            ],
+            "rows": [
+              [
+                "Compartment I",
+                "Uterus, cervix, vagina (outflow)",
+                "MRKH, imperforate hymen, transverse septum",
+                "Asherman syndrome, cervical stenosis"
+              ],
+              [
+                "Compartment II",
+                "Ovaries (gonadal level)",
+                "Turner syndrome, pure gonadal dysgenesis",
+                "Premature ovarian insufficiency, PCOS"
+              ],
+              [
+                "Compartment III",
+                "Anterior pituitary gland",
+                "Congenital hypopituitarism",
+                "Prolactinoma, Sheehan syndrome, adenoma"
+              ],
+              [
+                "Compartment IV",
+                "Hypothalamus and higher centres",
+                "Kallmann syndrome, GnRH deficiency",
+                "Functional hypothalamic amenorrhoea, stress"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Neuroendocrine regulation and feedback loops",
+          "body": "The menstrual cycle requires pulsatile release of GnRH from the arcuate nucleus of the hypothalamus every 60 to 90 minutes. Pulsatile GnRH stimulates anterior pituitary gonadotrophs to synthesize and secrete FSH and LH.\n\nFSH stimulates granulosa cells to aromatise androgens into estradiol. Estradiol exerts negative feedback on gonadotropins at low levels, but sustained high mid-cycle estradiol triggers the positive feedback LH surge that induces ovulation and corpus luteum formation."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the diagnostic age threshold for primary amenorrhoea in an adolescent who has no breast development or other secondary sexual characteristics?",
+          "a": "Menarche has not occurred by 13 years of age in the absence of secondary sexual characteristics.",
+          "accept": [
+            "13",
+            "age 13",
+            "thirteen",
+            "secondary sexual characteristics",
+            "breast development"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which anatomical level corresponds to Compartment I in the standard gynaecological classification of amenorrhoea?",
+          "a": "Compartment I comprises the outflow tract and target organ: the uterus, endometrium, cervix, and vagina.",
+          "accept": [
+            "outflow",
+            "uterus",
+            "endometrium",
+            "cervix",
+            "vagina"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How does primary ovarian failure in Compartment II alter circulating pituitary gonadotropin levels?",
+          "a": "Loss of ovarian follicular estrogen synthesis removes negative feedback inhibition, resulting in elevated serum FSH and LH levels (hypergonadotropic hypogonadism).",
+          "accept": [
+            "elevated",
+            "fsh",
+            "lh",
+            "negative feedback",
+            "hypergonadotropic",
+            "gonadotropins"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r.amenorrhoea.basics.defs",
+          "text": "Defines primary and secondary amenorrhoea precisely according to age, pubertal status, and cycle duration."
+        },
+        {
+          "id": "r.amenorrhoea.basics.compartments",
+          "text": "Classifies amenorrhoea etiologies into the four canonical anatomical compartments."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "amenorrhoea_primary_secondary_turner_asherman: pathophysiology"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Amenorrhea: Anatomy and Pathophysiology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.amenorrhoea.signs": {
+      "id": "skill.amenorrhoea.signs",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Clinical signs and phenotypic patterns in amenorrhoea",
+      "oneLine": "Systematic physical findings from Turner somatic stigmata and Tanner staging to hyperandrogenism, galactorrhoea, and external genital inspection",
+      "why": "Physical examination in amenorrhoea provides decisive clues to the underlying compartment and genetic syndrome before any laboratory investigation is performed.",
+      "teach": [
+        {
+          "heading": "Somatic stigmata of Turner syndrome",
+          "body": "Turner syndrome (45,X gonadal dysgenesis) presents with short stature (height consistently below the 3rd centile), webbing of the neck (pterygium colli), low posterior hairline, and a high-arched palate.\n\nAdditional physical signs include a broad shield-like chest with widely spaced hypoplastic nipples, an increased carrying angle of the elbows (cubitus valgus), short fourth metacarpals, multiple pigmented naevi, and cardiovascular murmurs from bicuspid aortic valve or coarctation."
+        },
+        {
+          "heading": "Sexual maturation rating and discordance",
+          "body": "Tanner staging systematically scores breast development (thelarche) and pubic hair growth (pubarche) from stage 1 (prepubertal) to stage 5 (mature adult).\n\nDiscordant development reveals specific pathologies: normal thelarche with absent or sparse pubarche indicates complete androgen insensitivity syndrome (AIS). Conversely, absent thelarche with present pubarche suggests gonadal dysgenesis or hypergonadotropic hypogonadism with intact adrenal adrenarche."
+        },
+        {
+          "heading": "Endocrine stigmata and external genital inspection",
+          "body": "Inspect for signs of hyperandrogenism including terminal facial hirsutism, cystic acne, temporal balding, and clitoromegaly. Examine the breasts for spontaneous or expressible galactorrhoea and test confrontation visual fields for bitemporal hemianopia.\n\nInspection of external genitalia distinguishes a tense, bulging bluish membrane (imperforate hymen with haematocolpos) from a shallow blind-ending vaginal dimple (Mayer-Rokitansky-Kuster-Hauser syndrome or AIS)."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What classic somatic stigmata should you look for on general examination in an adolescent with suspected Turner syndrome?",
+          "a": "Short stature below the 3rd centile, webbed neck, low posterior hairline, high-arched palate, broad shield chest with widely spaced nipples, and cubitus valgus.",
+          "accept": [
+            "short stature",
+            "webbed neck",
+            "shield chest",
+            "cubitus valgus",
+            "hairline",
+            "palate"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does complete androgen insensitivity syndrome present with mature breast development but absent or sparse pubic hair?",
+          "a": "Testicular androgens are aromatised peripherally to estrogens producing breasts, but non-functional androgen receptors prevent androgen-dependent pubic and axillary hair growth.",
+          "accept": [
+            "aromatised",
+            "estrogens",
+            "breasts",
+            "androgen receptors",
+            "pubic",
+            "androgens"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What specific finding on genital inspection identifies an imperforate hymen as the cause of primary amenorrhoea and cyclical abdominal pain?",
+          "a": "A tense, bulging, bluish or purplish membrane at the vaginal introitus caused by accumulated trapped menstrual blood (haematocolpos).",
+          "accept": [
+            "bulging",
+            "bluish",
+            "membrane",
+            "introitus",
+            "haematocolpos",
+            "blood"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r.amenorrhoea.signs.stigmata",
+          "text": "Identifies phenotypic stigmata of Turner syndrome, androgen excess, and pubertal delay."
+        },
+        {
+          "id": "r.amenorrhoea.signs.inspection",
+          "text": "Interprets discordant secondary sexual characteristics and anatomical genital examination findings."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "amenorrhoea_primary_secondary_turner_asherman: clinical features"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Amenorrhea: Physical Examination and Stigmata"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.amenorrhoea.summary": {
+      "id": "skill.amenorrhoea.summary",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Synthesising the amenorrhoea clinical picture",
+      "oneLine": "Structured clinical synthesis integrating age, secondary sexual characteristics, phenotypic clues, and prior uterine interventions",
+      "why": "Clinical synthesis brings together chronologic age, secondary sexual characteristics, phenotypic signs, and obstetric history to build a logical compartment hypothesis before ordering investigations.",
+      "teach": [
+        {
+          "heading": "The three-step clinical synthesis algorithm",
+          "body": "A structured approach to amenorrhoea addresses three consecutive physiological questions:\n\n1. Is the condition primary or secondary?\n2. Are secondary sexual characteristics, especially breast thelarche, present, delayed, or absent?\n3. Is a functional uterus present on clinical and sonographic examination?"
+        },
+        {
+          "heading": "Phenotypic matrix of primary amenorrhoea",
+          "table": {
+            "cols": [
+              "Thelarche (Breasts)",
+              "Uterus on USG",
+              "Dominant Diagnoses",
+              "Key Confirmatory Test"
+            ],
+            "rows": [
+              [
+                "Present (estrogenized)",
+                "Present",
+                "Outflow obstruction, imperforate hymen, PCOS",
+                "Genital exam, hormonal challenge"
+              ],
+              [
+                "Present (estrogenized)",
+                "Absent",
+                "MRKH syndrome (46,XX), AIS (46,XY)",
+                "Karyotype, serum testosterone"
+              ],
+              [
+                "Absent (hypoestrogenic)",
+                "Present",
+                "Turner (45,X), hypogonadotropic hypogonadism",
+                "Serum FSH, LH, karyotype"
+              ],
+              [
+                "Absent (hypoestrogenic)",
+                "Absent",
+                "17,20-desmolase deficiency, rare dysgenesis",
+                "Karyotype, adrenal steroid panel"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Synthesising secondary amenorrhoea presentations",
+          "body": "In secondary amenorrhoea, exclude pregnancy first with urine beta-hCG. An antecedent history of post-abortal or postpartum curettage strongly indicates Asherman syndrome.\n\nSevere postpartum haemorrhage with failed lactation suggests Sheehan syndrome. Oligomenorrhoea with hirsutism points to PCOS, while hot flushes and night sweats in a woman under 40 years point to premature ovarian insufficiency."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which two principal conditions must be differentiated when an adolescent presents with primary amenorrhoea, normal breast development, and an absent uterus?",
+          "a": "Mayer-Rokitansky-Kuster-Hauser (MRKH) syndrome and complete androgen insensitivity syndrome (AIS).",
+          "accept": [
+            "mrkh",
+            "mayer-rokitansky",
+            "androgen insensitivity",
+            "ais",
+            "mullerian agenesis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How does serum testosterone differentiate MRKH syndrome from complete androgen insensitivity syndrome in a patient with absent uterus?",
+          "a": "Serum testosterone is in the normal female range in MRKH syndrome (46,XX), whereas it is in the normal or elevated male range in complete androgen insensitivity syndrome (46,XY).",
+          "accept": [
+            "testosterone",
+            "female",
+            "male",
+            "mrkh",
+            "ais",
+            "46,xx",
+            "46,xy"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What is the most likely diagnosis in a 28-year-old woman with secondary amenorrhoea following an evacuation and curettage for missed abortion who fails to bleed after hormonal challenge?",
+          "a": "Asherman syndrome (intrauterine synechiae or adhesions obliterating the endometrial cavity).",
+          "accept": [
+            "asherman",
+            "intrauterine adhesions",
+            "synechiae",
+            "endometrial",
+            "curettage"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r.amenorrhoea.summary.matrix",
+          "text": "Synthesises clinical findings using the thelarche-uterus matrix to localise the anatomical compartment."
+        },
+        {
+          "id": "r.amenorrhoea.summary.secondary",
+          "text": "Correlates secondary amenorrhoea with antecedent pregnancy events, curettage, and endocrine symptoms."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "amenorrhoea_primary_secondary_turner_asherman: differential diagnosis"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Amenorrhea: Diagnostic Approach and Clinical Reasoning"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.amenorrhoea.differential": {
+      "id": "skill.amenorrhoea.differential",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Differential diagnosis of primary and secondary amenorrhoea",
+      "oneLine": "Separating gonadal dysgenesis, Mullerian agenesis, androgen insensitivity, PCOS, functional hypothalamic amenorrhoea, hyperprolactinaemia, and Asherman syndrome",
+      "why": "A structured differential diagnosis prevents overlooking rare genetic syndromes or treating an outflow obstruction with unnecessary hormonal therapy.",
+      "teach": [
+        {
+          "heading": "Primary amenorrhoea: key diagnostic distinctions",
+          "body": "In primary amenorrhoea, classify by secondary sexual characteristics and uterine presence. Turner syndrome (45,X) accounts for nearly half of hypergonadotropic hypogonadism cases with absent thelarche and short stature.\n\nWhen breast thelarche is normal but the uterus is absent, differentiate Mayer-Rokitansky-Kuster-Hauser (MRKH) syndrome from complete androgen insensitivity syndrome (AIS). Obstructive anomalies with cyclical pain include imperforate hymen and transverse vaginal septum."
+        },
+        {
+          "heading": "Differentiating MRKH syndrome from androgen insensitivity",
+          "table": {
+            "cols": [
+              "Diagnostic Feature",
+              "MRKH Syndrome",
+              "Complete AIS",
+              "Imperforate Hymen"
+            ],
+            "rows": [
+              [
+                "Karyotype",
+                "46,XX (female)",
+                "46,XY (male)",
+                "46,XX (female)"
+              ],
+              [
+                "Gonads",
+                "Normal ovaries",
+                "Testes (intra-abdominal)",
+                "Normal ovaries"
+              ],
+              [
+                "Pubic / axillary hair",
+                "Normal female distribution",
+                "Absent or very sparse",
+                "Normal female distribution"
+              ],
+              [
+                "Uterus / upper vagina",
+                "Absent or rudimentary",
+                "Absent",
+                "Present (distended with blood)"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Secondary amenorrhoea differential categories",
+          "body": "Pregnancy must be excluded first in all women of reproductive age. Polycystic ovary syndrome (PCOS) is the most frequent endocrine cause, characterised by oligo-anovulation and hyperandrogenism.\n\nOther major causes include functional hypothalamic amenorrhoea (underweight, intensive exercise, psychological stress), hyperprolactinaemia, premature ovarian insufficiency (elevated FSH before 40 years), and Asherman syndrome following uterine curettage."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the single most common cause of secondary amenorrhoea in women of reproductive age that must always be excluded first?",
+          "a": "Pregnancy is the most common cause of secondary amenorrhoea and must always be excluded with a urine or serum beta-hCG test.",
+          "accept": [
+            "pregnancy",
+            "pregnant",
+            "hcg",
+            "beta-hcg"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "How does the karyotype and pubic hair pattern distinguish MRKH syndrome from complete androgen insensitivity syndrome?",
+          "a": "MRKH syndrome has a 46,XX karyotype with normal female pubic hair, whereas complete AIS has a 46,XY karyotype with absent or sparse pubic hair.",
+          "accept": [
+            "46,xx",
+            "46,xy",
+            "pubic hair",
+            "mrkh",
+            "ais",
+            "karyotype"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "What clinical presentation distinguishes Asherman syndrome from functional hypothalamic amenorrhoea in secondary amenorrhoea?",
+          "a": "Asherman syndrome typically follows uterine curettage and fails to bleed after combined estrogen and progestin, whereas hypothalamic amenorrhoea bleeds after combined hormones and has low or normal gonadotropins.",
+          "accept": [
+            "curettage",
+            "adhesions",
+            "asherman",
+            "estrogen",
+            "progestin",
+            "combined"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r.amenorrhoea.diff.primary",
+          "text": "Distinguishes between gonadal dysgenesis, Mullerian agenesis, androgen insensitivity, and outflow tract obstruction."
+        },
+        {
+          "id": "r.amenorrhoea.diff.secondary",
+          "text": "Formulates a structured differential for secondary amenorrhoea spanning PCOS, prolactinoma, POI, and Asherman syndrome."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "amenorrhoea_primary_secondary_turner_asherman: additional differentials"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Amenorrhea: Differential Diagnosis and Clinical Features"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.amenorrhoea.workup": {
+      "id": "skill.ix.amenorrhoea.workup",
+      "kind": "investigation",
+      "system": "obgyn",
+      "title": "Stepwise diagnostic evaluation of amenorrhoea",
+      "oneLine": "Sequential workup using pregnancy testing, pelvic ultrasound, gonadotropins, prolactin, challenge tests, karyotype, and MRI",
+      "why": "Sequential, algorithmic testing avoids redundant hormonal assays, reduces patient expense, and methodically maps dysfunction to the specific anatomical compartment.",
+      "teach": [
+        {
+          "heading": "Initial screening and anatomical assessment",
+          "body": "Step 1 in all patients is a high-sensitivity urine pregnancy test (beta-hCG), serum TSH, and serum prolactin. Perform pelvic ultrasonography to confirm the presence of a uterus, endometrial stripe thickness, and ovarian morphology.\n\nIf the uterus is absent in primary amenorrhoea, immediately order a peripheral blood karyotype and serum total testosterone to differentiate MRKH (46,XX) from AIS (46,XY)."
+        },
+        {
+          "heading": "Endocrine profiling and hormonal challenge tests",
+          "body": "Measure serum FSH, LH, and estradiol. In primary amenorrhoea with absent breasts, elevated FSH (>40 IU/L) confirms hypergonadotropic hypogonadism, mandating karyotyping for Turner syndrome.\n\nIn secondary amenorrhoea with a normal uterus, perform the progesterone challenge test: medroxyprogesterone acetate 10 mg orally for 10 days. Withdrawal bleeding within 2 to 7 days confirms anovulation with adequate endogenous estrogen and a patent outflow tract (e.g. PCOS)."
+        },
+        {
+          "heading": "Combined challenge and advanced diagnostic modalities",
+          "body": "If no withdrawal bleed occurs after progesterone, administer cyclical estrogen followed by progestin (e.g. oral estradiol 2 mg daily for 21 days with medroxyprogesterone acetate 10 mg added for days 12 to 21).\n\nFailure to bleed after combined estrogen-progestin proves a Compartment I end-organ outflow defect, establishing Asherman syndrome. Diagnostic hysteroscopy is the gold standard to visualise and grade intrauterine adhesions."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the diagnostic significance of a positive withdrawal bleed following a 10-day progesterone challenge test?",
+          "a": "A positive withdrawal bleed confirms that the endometrium has been primed by endogenous estrogen, the outflow tract is patent, and the patient has anovulation (commonly PCOS).",
+          "accept": [
+            "estrogen",
+            "primed",
+            "patent",
+            "outflow",
+            "anovulation",
+            "pcos"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What does failure of withdrawal bleeding following a combined estrogen and progestin challenge indicate?",
+          "a": "Failure to bleed indicates an anatomical defect of the outflow tract or endometrium (Compartment I), most commonly Asherman syndrome or cervical stenosis.",
+          "accept": [
+            "outflow",
+            "compartment i",
+            "asherman",
+            "endometrium",
+            "adhesions",
+            "stenosis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What investigation is the gold standard for confirming and grading intrauterine adhesions in suspected Asherman syndrome?",
+          "a": "Diagnostic hysteroscopy is the gold standard to directly visualise, locate, and grade intrauterine adhesions.",
+          "accept": [
+            "hysteroscopy",
+            "diagnostic hysteroscopy",
+            "visualise",
+            "adhesions"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r.ix.amenorrhoea.initial",
+          "text": "Orders initial step 1 tests: pregnancy test, TSH, prolactin, and pelvic ultrasound."
+        },
+        {
+          "id": "r.ix.amenorrhoea.challenge",
+          "text": "Interprets progesterone and combined estrogen-progestin challenge tests and indicates advanced imaging or hysteroscopy."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "amenorrhoea_primary_secondary_turner_asherman: additional investigations"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Amenorrhea: Laboratory and Diagnostic Evaluation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.amenorrhoea.algorithm": {
+      "id": "skill.annex.amenorrhoea.algorithm",
+      "kind": "annexure",
+      "system": "obgyn",
+      "title": "Four-compartment classification and challenge test algorithm",
+      "oneLine": "Diagnostic flow chart mapping progesterone withdrawal, estrogen-progestin challenge, and gonadotropin levels to anatomical compartments",
+      "why": "The classic WHO and Greenblatt-Speroff challenge test algorithm provides an infallible decision tree that guides clinical decisions from initial presentation to definitive anatomical localisation.",
+      "teach": [
+        {
+          "heading": "Progesterone challenge test protocol and logic",
+          "body": "Administer oral medroxyprogesterone acetate 10 mg daily for 10 consecutive days. Any bleeding within 2 to 7 days of completion is considered positive.\n\nA positive withdrawal bleed proves two essential physiological facts: the ovaries are producing sufficient endogenous estrogen to proliferate the endometrium, and the outflow tract (cervix and vagina) is anatomically patent."
+        },
+        {
+          "heading": "Stepwise algorithmic challenge matrix",
+          "table": {
+            "cols": [
+              "Step & Test Result",
+              "Serum FSH / LH",
+              "Compartment Localised",
+              "Clinical Etiologies"
+            ],
+            "rows": [
+              [
+                "Progesterone test: Positive bleed",
+                "Normal LH / FSH",
+                "Eugonadotropic anovulation",
+                "PCOS, mild hypothalamic dysfunction"
+              ],
+              [
+                "Progesterone test: Negative bleed",
+                "Proceed to step 2",
+                "Estrogen deficiency or outflow defect",
+                "Requires estrogen-progestin challenge"
+              ],
+              [
+                "Estrogen-Progestin: Negative bleed",
+                "Not applicable",
+                "Compartment I (Outflow / Uterus)",
+                "Asherman syndrome, cervical stenosis"
+              ],
+              [
+                "Estrogen-Progestin: Positive bleed",
+                "FSH > 40 IU/L (High)",
+                "Compartment II (Ovary)",
+                "Turner syndrome, premature ovarian failure"
+              ],
+              [
+                "Estrogen-Progestin: Positive bleed",
+                "FSH < 5 IU/L (Low/Normal)",
+                "Compartment III / IV (Central)",
+                "Pituitary adenoma, Sheehan, hypothalamic"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Practical pitfalls and diagnostic safeguards",
+          "body": "Never initiate hormonal challenge tests before obtaining serum for baseline FSH, LH, and prolactin, as exogenous estrogens suppress gonadotropins and obscure the diagnosis.\n\nIn primary amenorrhoea, transabdominal pelvic ultrasound should always precede hormonal challenge tests to confirm uterine presence and avoid useless hormones in Mullerian agenesis."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "In the challenge test algorithm, if a patient has a positive bleed after combined estrogen-progestin and her serum FSH is 68 IU/L, where is the lesion localised?",
+          "a": "The lesion is localised to Compartment II (the ovary), indicating hypergonadotropic hypogonadism such as premature ovarian insufficiency or gonadal dysgenesis.",
+          "accept": [
+            "compartment ii",
+            "ovary",
+            "ovarian",
+            "hypergonadotropic",
+            "premature ovarian",
+            "gonadal"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "If a patient with secondary amenorrhoea bleeds after combined estrogen-progestin and has low serum FSH (1.8 IU/L), which compartments are implicated?",
+          "a": "Compartment III (anterior pituitary) or Compartment IV (hypothalamus), representing hypogonadotropic hypogonadism.",
+          "accept": [
+            "compartment iii",
+            "compartment iv",
+            "pituitary",
+            "hypothalamus",
+            "hypogonadotropic"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why must exogenous combined oral contraceptives be discontinued for at least 6 weeks before testing baseline gonadotropins in amenorrhoea?",
+          "a": "Exogenous ethinylestradiol and progestin exert negative feedback on the hypothalamic-pituitary axis, suppressing endogenous FSH and LH and producing misleading low levels.",
+          "accept": [
+            "negative feedback",
+            "suppressing",
+            "suppress",
+            "fsh",
+            "lh",
+            "exogenous",
+            "estrogen"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r.annex.amenorrhoea.flow",
+          "text": "Traces the stepwise algorithm from progesterone challenge through combined challenge to gonadotropin bifurcation."
+        },
+        {
+          "id": "r.annex.amenorrhoea.pitfalls",
+          "text": "Identifies common diagnostic pitfalls including pre-existing oral contraceptive use and premature hormonal challenge."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "amenorrhoea_primary_secondary_turner_asherman: pathophysiology"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Amenorrhea: Diagnostic Algorithms and Evaluation Protocols"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.amenorrhoea.diagnosis": {
+      "id": "skill.amenorrhoea.diagnosis",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Formulating a definitive diagnosis in amenorrhoea",
+      "oneLine": "Diagnostic formulation combining phenotypic evaluation, hormonal compartment localisation, genetic confirmation, and imaging validation",
+      "why": "Synthesising phenotypic features, challenge test results, hormonal assays, and genetic analysis establishes a definitive diagnosis and prevents misdiagnosing syndromic conditions.",
+      "teach": [
+        {
+          "heading": "Structure of the definitive diagnostic statement",
+          "body": "A complete diagnostic formulation in amenorrhoea states whether the condition is primary or secondary, names the definitive syndromic or endocrine etiology, localises the anatomical compartment, and documents hormonal status.\n\nIn genetic and syndromic conditions, the formulation must also record cytogenetic karyotype and associated non-gynaecological complications (such as cardiovascular or renal lesions in Turner syndrome)."
+        },
+        {
+          "heading": "Diagnostic criteria for Turner syndrome",
+          "body": "Turner syndrome is diagnosed by confirming a 45,X karyotype or mosaicism (e.g. 45,X/46,XX) on peripheral blood chromosomal analysis.\n\nClinical features include short stature (<3rd centile), pubertal delay (Tanner stage 1 thelarche), hypergonadotropic hypogonadism (elevated FSH and LH with low estradiol), small prepubertal uterus with bilateral streak gonads on pelvic ultrasound, and somatic stigmata."
+        },
+        {
+          "heading": "Diagnostic criteria for Asherman syndrome",
+          "body": "Asherman syndrome is diagnosed by secondary amenorrhoea or severe hypomenorrhoea following intrauterine curettage, a negative withdrawal bleed after combined estrogen-progestin challenge, and normal gonadotropins.\n\nDefinitive confirmation is established by direct hysteroscopic visualization of fibrous intrauterine synechiae and adhesions obliterating the uterine cavity."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What laboratory investigation is required to establish a definitive diagnosis of Turner syndrome in an adolescent with primary amenorrhoea and short stature?",
+          "a": "Peripheral blood chromosomal karyotyping with G-banding demonstrating 45,X monosomy or mosaicism.",
+          "accept": [
+            "karyotype",
+            "karyotyping",
+            "chromosomal",
+            "45,x",
+            "monosomy x",
+            "g-banding"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the diagnostic formulation for a 16-year-old girl with primary amenorrhoea, height 138 cm, Tanner stage 1 breasts, elevated FSH, and streak ovaries?",
+          "a": "Primary amenorrhoea secondary to Turner syndrome (45,X gonadal dysgenesis) with hypergonadotropic hypogonadism.",
+          "accept": [
+            "primary amenorrhoea",
+            "turner",
+            "gonadal dysgenesis",
+            "hypergonadotropic",
+            "hypogonadism"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How is a definitive diagnosis of Asherman syndrome confirmed after failed hormonal challenge testing?",
+          "a": "By diagnostic hysteroscopy directly visualising and grading fibrous intrauterine adhesions and cavity obliteration.",
+          "accept": [
+            "hysteroscopy",
+            "diagnostic hysteroscopy",
+            "adhesions",
+            "synechiae",
+            "intrauterine"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r.amenorrhoea.dx.statement",
+          "text": "Formulates a precise diagnostic statement including primary/secondary status, etiology, compartment, and genetics."
+        },
+        {
+          "id": "r.amenorrhoea.dx.criteria",
+          "text": "Applies evidence-based diagnostic criteria for Turner syndrome, Asherman syndrome, and central anovulation."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "amenorrhoea_primary_secondary_turner_asherman: clinical pearls"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Amenorrhea: Diagnostic Criteria and Syndromic Classification"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.amenorrhoea": {
+      "id": "skill.tx.amenorrhoea",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Management principles and hormone therapy in amenorrhoea",
+      "oneLine": "Etiology-directed treatment covering pubertal induction, hormone replacement therapy, dopamine agonists, surgical adhesiolysis, and fertility counselling",
+      "why": "Targeted treatment restores secondary sexual characteristics, prevents osteoporosis, resolves outflow obstructions, and addresses psychological wellbeing and reproductive goals.",
+      "dosingNote": "This module teaches management at the level of drug class and principle. Specific agents, regimens and durations must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "teach": [
+        {
+          "heading": "Pubertal induction and hormone replacement therapy",
+          "body": "In adolescents with hypergonadotropic hypogonadism (Turner syndrome), pubertal induction begins at 11 to 12 years with very low dose oral or transdermal 17-beta estradiol, gradually titrated over 2 to 3 years to permit normal breast bud development and prevent tubular deformity.\n\nCyclic progestin (micronised progesterone or medroxyprogesterone acetate) is added after 2 years or upon breakthrough bleeding for endometrial protection. Physiological HRT is maintained until age 51 for bone and cardiovascular health."
+        },
+        {
+          "heading": "Surgical management of Asherman and outflow obstruction",
+          "body": "Asherman syndrome is treated by hysteroscopic adhesiolysis under direct vision using cold miniature scissors or unipolar instruments. An intrauterine balloon catheter or hyaluronic acid barrier gel is placed temporarily to keep cavity walls separated.\n\nPostoperative high-dose cyclical oral estradiol is given for 30 to 60 days with cyclical progestin to stimulate endometrial re-epithelialisation. Imperforate hymen is managed by cruciate hymenotomy and drainage of haematocolpos."
+        },
+        {
+          "heading": "Syndromic management and Indian clinical context",
+          "body": "In Turner syndrome, perform baseline echocardiography for bicuspid aortic valve and aortic coarctation, screen annually for autoimmune hypothyroidism and celiac disease, and provide calcium and vitamin D.\n\nPatients with Y chromosome material require gonadectomy to eliminate gonadoblastoma risk. In India, infertility in gonadal dysgenesis or MRKH is managed via donor oocytes and assisted reproduction in compliance with the Assisted Reproductive Technology Act 2021."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why should pubertal induction with estrogen in Turner syndrome start with very low doses and titrate slowly over two to three years?",
+          "a": "To allow progressive, natural breast development without tubular deformity and to avoid premature epiphyseal closure that would compromise final adult height.",
+          "accept": [
+            "breast development",
+            "tubular",
+            "epiphyseal",
+            "growth",
+            "adult height",
+            "slowly"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the postoperative medical management following hysteroscopic adhesiolysis for Asherman syndrome to prevent adhesion recurrence?",
+          "a": "A temporary intrauterine barrier such as a balloon catheter or barrier gel combined with high-dose cyclical oral estrogen followed by progestin to stimulate endometrial regeneration.",
+          "accept": [
+            "estrogen",
+            "progestin",
+            "barrier",
+            "balloon",
+            "endometrial",
+            "regeneration"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is prophylactic gonadectomy recommended in phenotypically female patients with primary amenorrhoea who possess Y chromosomal material?",
+          "a": "Dysgenetic intra-abdominal gonads containing Y chromosomal material carry a high risk (approximately 25 to 30 percent) of malignant transformation into gonadoblastoma or dysgerminoma.",
+          "accept": [
+            "malignant",
+            "gonadoblastoma",
+            "dysgerminoma",
+            "risk",
+            "cancer",
+            "y chromosome"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r.tx.amenorrhoea.hrt",
+          "text": "Outlines pubertal induction principles, gradual estrogen titration, and cyclical progestin addition."
+        },
+        {
+          "id": "r.tx.amenorrhoea.asherman",
+          "text": "Describes hysteroscopic adhesiolysis, barrier placement, and postoperative endometrial regeneration therapy."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "amenorrhoea_primary_secondary_turner_asherman: management"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Amenorrhea: Medical Management and Hormone Replacement Therapy"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.amenorrhoea.turner",
+      "title": "Primary amenorrhoea in an adolescent with short stature and pubertal delay",
+      "opening": "A 16-year-old student, Pooja Deshmukh, is brought to the gynaecology outpatient clinic by her mother. The mother is distressed because Pooja has not yet started her menstrual periods, while all her classmates have, and her growth in height seems to have stalled over the past three years.",
+      "fallback": "I understand you are concerned about my periods and growth, doctor. Please tell me what tests I need to find out why I have not grown like my friends.",
+      "patient": {
+        "name": "Pooja Deshmukh",
+        "age": 16,
+        "sex": "female",
+        "occupation": "10th standard school student",
+        "residence": "Pune, Maharashtra, living with her parents and older sister"
+      },
+      "review": {
+        "status": "ai_drafted"
+      },
+      "initialVitals": {
+        "hr": 76,
+        "bpSystolic": 106,
+        "bpDiastolic": 70,
+        "rr": 16,
+        "spo2": 99,
+        "temp": 36.6,
+        "gcs": 15
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "why have you come today",
+            "what brings you to hospital",
+            "what is the main complaint"
+          ],
+          "reply": "Doctor, I am 16 years old and I have never had a menstrual period. All my school classmates started periods two or three years ago, and my mother was very worried and brought me here."
+        },
+        "growth_milestones": {
+          "cues": [
+            "tell me about height growth",
+            "have you noticed slow height",
+            "growth compared to friends",
+            "standing height progression"
+          ],
+          "reply": "I have always been the shortest girl in my class. For the past two or three years, I have not noticed any growth spurt, while my friends have all grown taller than me."
+        },
+        "pubertal_development": {
+          "cues": [
+            "development of breast tissue",
+            "growth of armpit hair",
+            "changes in your body shape",
+            "pubertal changes over time"
+          ],
+          "reply": "My breasts have not developed at all, doctor; my chest is completely flat like when I was a small child. I have noticed only a few fine hairs under my arms and in the private area in the last year."
+        },
+        "cyclical_pelvic_pain": {
+          "cues": [
+            "any cyclical monthly abdominal pain",
+            "pain in lower tummy every month",
+            "monthly spasms without bleeding",
+            "cramping pain in pelvis"
+          ],
+          "reply": "No, doctor, I do not get any stomach ache or cramping pains at monthly intervals. There is no periodic pain in my lower abdomen at all."
+        },
+        "olfactory_smell_sense": {
+          "cues": [
+            "can you smell perfumes and food",
+            "any problem smelling cooking",
+            "loss of sense of smell",
+            "ability to smell flowers"
+          ],
+          "reply": "My sense of smell is completely normal. I can easily smell food cooking, flowers, and perfumes at home."
+        },
+        "headache_visual_symptoms": {
+          "cues": [
+            "frequent severe headaches",
+            "blurring of vision or double vision",
+            "trouble seeing from sides",
+            "difficulty seeing peripheral objects"
+          ],
+          "reply": "No headaches at all, and my vision is sharp and clear. I have no trouble seeing things on the sides of my vision."
+        },
+        "galactorrhoea_discharge": {
+          "cues": [
+            "any discharge from nipples",
+            "milky fluid leaking from breasts",
+            "secretion from the nipples",
+            "spontaneous breast leakage"
+          ],
+          "reply": "No, there has never been any fluid or milky discharge from my nipples."
+        },
+        "hirsutism_acne_signs": {
+          "cues": [
+            "excess facial hair growth",
+            "coarse hair on chin or upper lip",
+            "severe acne on face or back",
+            "deepening of the voice"
+          ],
+          "reply": "No, I do not have thick or coarse facial hair, no chin hair, no severe acne, and my voice has not deepened."
+        },
+        "eating_exercise_habits": {
+          "cues": [
+            "daily eating pattern and meals",
+            "strict dieting or skipping food",
+            "heavy athletic sports training",
+            "vigorous daily gym running"
+          ],
+          "reply": "I eat regular homemade vegetarian meals with my family, including dal, rice, roti, and vegetables. I do not do any extreme dieting and I walk about twenty minutes to school daily, no intense athletic training."
+        },
+        "hot_flushes_vasomotor": {
+          "cues": [
+            "sudden warmth or sweating spells",
+            "night sweats during sleep",
+            "flushing sensation over face and neck",
+            "feeling intensely warm suddenly"
+          ],
+          "reply": "Occasionally over the past six months I feel sudden waves of heat over my face and neck, and sometimes wake up feeling warm and restless, but I thought it was just the summer weather."
+        },
+        "systemic_illness_past": {
+          "cues": [
+            "past history of tuberculosis",
+            "chronic kidney or liver trouble",
+            "history of childhood heart surgery",
+            "longstanding childhood illnesses"
+          ],
+          "reply": "I have had no major childhood illnesses, no tuberculosis, no asthma, and no surgeries. When I was ten, a school doctor noticed a soft heart murmur and told my mother to have it checked, but we did not follow up as I had no breathlessness."
+        },
+        "medications_and_treatments": {
+          "cues": [
+            "medicines taken regularly",
+            "any hormone pills tried before",
+            "ayurvedic or homeopathic mixtures",
+            "steroids or chronic treatments"
+          ],
+          "reply": "I do not take any regular prescription medicines. Six months ago my aunt gave me an Ayurvedic syrup to bring on periods, but I took it for only two weeks and nothing happened, so we stopped it."
+        },
+        "family_puberty_history": {
+          "cues": [
+            "age when mother started periods",
+            "menarche age of sisters",
+            "stature of mother and father",
+            "family members with delayed puberty"
+          ],
+          "reply": "My mother started her periods when she was 13 years old, and my older sister started at 12. Both my mother and father are of average height. No one in the family had delay in puberty or fertility problems."
+        },
+        "ear_hearing_infections": {
+          "cues": [
+            "frequent ear infections in childhood",
+            "trouble with hearing in school",
+            "discharge from ears as child",
+            "hearing tests in the past"
+          ],
+          "reply": "Yes, when I was in primary school I had repeated ear infections and ear pain with fluid discharge. My mother had to take me to the ENT doctor several times for antibiotics."
+        },
+        "urinary_and_bowel_function": {
+          "cues": [
+            "any burning during urination",
+            "frequent urinary tract infections",
+            "abdominal swelling or constipation",
+            "change in bowel frequency"
+          ],
+          "reply": "No burning when I pass urine, and no constipation or diarrhoea. My bowel movements and urination are completely normal."
+        },
+        "school_and_social_impact": {
+          "cues": [
+            "performance at school and studies",
+            "trouble with mathematics or drawing",
+            "feeling anxious about not starting periods",
+            "social interaction with classmates"
+          ],
+          "reply": "I do well in languages and history in 10th standard, though I struggle a bit with geometry and spatial puzzles. I feel very self-conscious when my classmates talk about their periods and sanitary pads, and I feel left behind."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Short stature, standing height 138 cm (consistently below 3rd centile for Indian adolescent girls; mid-parental target height 155 cm), weight 36 kg, body mass index 18.9 kg/m2. Prominent lateral cervical skin folds (pterygium colli / webbed neck), low posterior hairline, high-arched narrow palate, broad shield-like chest with widely spaced hypoplastic nipples, and bilateral increased carrying angle of the elbows (cubitus valgus). Multiple small pigmented naevi over face and forearms.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 76/min regular, good volume, equal bilaterally, no radio-radial or radio-femoral delay; blood pressure 106/70 mmHg in right upper limb and 110/72 mmHg in lower limbs; respiratory rate 16/min regular; temperature 36.6 C; SpO2 99% on ambient air.",
+          "abnormal": false
+        },
+        "skill.gen.edema": {
+          "finding": "No active pitting pedal oedema; subtle fullness and square appearance of dorsum of toes and fingers consistent with past lymphedema in infancy.",
+          "abnormal": false
+        },
+        "skill.exam.obg.breast_exam": {
+          "finding": "Tanner stage 1 thelarche: prepubertal breasts with elevation of papillae only, no glandular breast tissue palpable, infantile pale areolae, no tenderness, no expressible galactorrhoea, and widely spaced nipples on a shield chest.",
+          "abnormal": true
+        },
+        "skill.exam.obg.gynae_abdominal": {
+          "finding": "Abdomen soft, non-tender, no hepatosplenomegaly, no renal angle fullness; suprapubic region flat and non-tender with no distended bladder, haematometra, or pelvic mass palpable. Normal bowel sounds heard.",
+          "abnormal": false
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "finding": "Normal female external genitalia with infantile prepubertal appearance. Normal clitoris with clitoral index < 35 mm2 (no clitoromegaly or virilisation). Patent vaginal introitus with normal hymenal opening (no bulging bluish membrane or haematocolpos). Sparse fine pubic hair along labia majora corresponding to Tanner stage 2 pubarche.",
+          "abnormal": true
+        },
+        "skill.exam.obg.speculum_insert": {
+          "finding": "Speculum insertion deferred: invasive speculum examination is inappropriate and omitted in an unmarried, non-sexually active 16-year-old adolescent with intact hymen; external inspection and pelvic imaging confirm anatomy.",
+          "abnormal": false
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "finding": "Speculum inspection deferred: omitted in this adolescent patient; non-invasive transabdominal ultrasound and MRI confirm cervical and uterine morphology.",
+          "abnormal": false
+        },
+        "skill.exam.obg.bimanual": {
+          "finding": "Digital vaginal bimanual examination omitted in an adolescent who has never been sexually active; gentle recto-abdominal examination under nurse chaperone confirms a small prepubertal midline pelvic structure with no palpable haematometra or adnexal masses.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "upt",
+        "fsh_lh_profile",
+        "pelvic_ultrasound",
+        "karyotype"
+      ],
+      "investigations": {
+        "upt": {
+          "label": "Urine pregnancy test (beta-hCG)",
+          "result": "Negative",
+          "note": "Mandatory first step in any female of reproductive age presenting with amenorrhoea regardless of stated sexual activity history."
+        },
+        "fsh_lh_profile": {
+          "label": "Serum follicle stimulating hormone (FSH) and luteinising hormone (LH)",
+          "result": "Serum FSH 94.2 IU/L (markedly elevated, reference pubertal 1.5-12.8 IU/L), Serum LH 38.6 IU/L (elevated, reference 1.5-12.0 IU/L)",
+          "note": "Confirms hypergonadotropic hypogonadism, localising the failure to the gonads rather than the hypothalamic-pituitary axis."
+        },
+        "serum_estradiol": {
+          "label": "Serum estradiol (E2)",
+          "result": "Serum estradiol < 10 pg/mL (severely low, prepubertal level, adult female follicular range 30-120 pg/mL)",
+          "note": "Reflects absent ovarian follicular estrogen synthesis and accounts for absent thelarche and prepubertal genital status."
+        },
+        "pelvic_ultrasound": {
+          "label": "Transabdominal pelvic ultrasonography",
+          "result": "Prepubertal small uterus measuring 3.2 x 1.4 x 0.9 cm with thin endometrium (1.2 mm). Ovaries not clearly visualised; thin bilateral fibrous streak tissue noted in ovarian fossae with no follicular activity. No haematocolpos, haematometra, or adnexal mass.",
+          "note": "Confirms intact Mullerian anatomy with prepubertal hypoplasia and bilateral streak gonads, ruling out Mullerian agenesis (MRKH) and obstructive outflow anomalies."
+        },
+        "karyotype": {
+          "label": "Peripheral blood chromosomal karyotype and G-banding",
+          "result": "45,X in all 30 metaphase spreads examined (monosomy X). No mosaicism or Y chromosome material identified.",
+          "note": "Diagnostic of classic Turner syndrome (45,X gonadal dysgenesis)."
+        },
+        "serum_tsh": {
+          "label": "Serum thyroid stimulating hormone (TSH) and free T4",
+          "result": "TSH 3.1 mIU/L (normal, reference 0.4-4.5 mIU/L), free T4 1.2 ng/dL (normal)",
+          "note": "Rules out primary hypothyroidism as an endocrine contributor; annual TSH screening indicated due to high autoimmune thyroiditis risk."
+        },
+        "serum_prolactin": {
+          "label": "Serum prolactin",
+          "result": "Serum prolactin 11.4 ng/mL (normal, reference < 25 ng/mL)",
+          "note": "Excludes hyperprolactinaemia."
+        },
+        "echocardiography": {
+          "label": "Transthoracic echocardiography",
+          "result": "Bicuspid aortic valve without significant aortic stenosis or regurgitation. Ascending aorta normal diameter (Z-score +1.1). No coarctation of the aorta.",
+          "note": "Critical baseline screening for congenital cardiovascular lesions in Turner syndrome."
+        },
+        "renal_ultrasound": {
+          "label": "Renal and urinary tract ultrasonography",
+          "result": "Bilateral normal kidneys in orthotopic position with normal parenchymal thickness and no hydronephrosis. No horseshoe kidney or duplication anomaly.",
+          "note": "Screening for congenital renal anomalies present in approximately 30-40% of patients with Turner syndrome."
+        },
+        "bone_age_radiograph": {
+          "label": "Left hand and wrist radiograph for bone age",
+          "result": "Skeletal bone age corresponding to Greulich and Pyle standard of 13 years (chronological age 16 years, delay of 3 years). Epiphyses remain open.",
+          "note": "Delayed skeletal maturation due to lack of estrogen-driven epiphyseal fusion; open epiphyses indicate remaining therapeutic window for growth optimisation before full estrogenisation."
+        }
+      },
+      "differentialModel": {
+        "answer": "Turner syndrome (45,X gonadal dysgenesis). Differential diagnoses for primary amenorrhoea with pubertal delay include constitutional delay of growth and puberty, pure gonadal dysgenesis, hypogonadotropic hypogonadism (functional hypothalamic amenorrhoea or Kallmann syndrome), hypopituitarism, and conditions with normal thelarche but absent uterus such as Mayer-Rokitansky-Kuster-Hauser syndrome and complete androgen insensitivity syndrome.",
+        "accept": [
+          "turner syndrome",
+          "gonadal dysgenesis",
+          "constitutional delay of growth and puberty",
+          "mayer-rokitansky-kuster-hauser syndrome",
+          "androgen insensitivity syndrome",
+          "kallmann syndrome",
+          "hypogonadotropic hypogonadism",
+          "premature ovarian insufficiency"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Primary amenorrhoea secondary to Turner syndrome (45,X gonadal dysgenesis) presenting with hypergonadotropic hypogonadism, short stature, delayed thelarche (Tanner stage 1), streak gonads, and a bicuspid aortic valve.",
+        "accept": [
+          "turner syndrome",
+          "gonadal dysgenesis",
+          "primary amenorrhoea",
+          "45,x gonadal dysgenesis"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Comprehensive multidisciplinary care: paediatric endocrinology referral for pubertal induction with low-dose oral or transdermal 17-beta estradiol titrated over 2 to 3 years to induce progressive breast development, with cyclic progestin added after 2 years or upon breakthrough bleeding for endometrial protection; calcium (1000-1200 mg/day) and vitamin D optimisation with regular physical activity for bone mineral accrual; cardiology evaluation with baseline echocardiography and cardiac MRI surveillance for bicuspid aortic valve and aortic root dilatation; annual screening for autoimmune thyroiditis (TSH) and celiac disease; audiological screening for sensorineural hearing loss; psychological counselling and peer support; and adult reproductive counselling regarding third-party donor oocyte in vitro fertilisation in accordance with the Indian Assisted Reproductive Technology Act 2021.",
+        "accept": [
+          "estrogen",
+          "hormone replacement therapy",
+          "progestin",
+          "endocrinology",
+          "echocardiography",
+          "calcium",
+          "counselling",
+          "thyroid",
+          "karyotype"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "Classification of primary amenorrhoea pivots on the presence or absence of secondary sexual characteristics: failure of breast development (thelarche) reflects absent ovarian estrogen synthesis, directing attention to either gonadal failure (high gonadotropins) or hypothalamic-pituitary deficiency (low gonadotropins).",
+        "Elevated serum FSH (>40 IU/L) localises the defect decisively to the ovary (hypergonadotropic hypogonadism), whereas normal breasts with an absent uterus and blind vagina point to Mullerian agenesis (MRKH) or androgen insensitivity syndrome (AIS).",
+        "Short stature (<3rd centile) in an adolescent girl with delayed puberty or primary amenorrhoea should be considered Turner syndrome until a karyotype proves otherwise, even if classical somatic stigmata (webbed neck, shield chest) are subtle or absent.",
+        "Transabdominal pelvic ultrasound is an essential, non-invasive imaging modality that differentiates intact but hypoplastic Mullerian anatomy (streak ovaries and small uterus in Turner syndrome) from absent uterus (MRKH) or haematocolpos behind an imperforate hymen.",
+        "Pubertal induction in Turner syndrome must mimic normal physiology: start low-dose estrogen and titrate slowly over two to three years before adding cyclical progestin, allowing optimal breast bud development (avoiding tubular breast deformity) and uterine growth while monitoring epiphyseal fusion.",
+        "Cardiovascular complications, particularly bicuspid aortic valve, aortic coarctation, and aortic root dilatation, represent the major cause of excess premature mortality in Turner syndrome and mandate formal baseline echocardiography and lifelong imaging surveillance.",
+        "Fertility preservation and reproductive autonomy should be addressed with honesty and sensitivity: spontaneous conception is exceedingly rare (under 2-5%), but pregnancy can be achieved in adulthood using donor oocytes provided thorough preconception cardiovascular clearance confirms absence of aortic root enlargement."
+      ]
+    }
+  ]
+}

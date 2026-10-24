@@ -1,0 +1,170 @@
+{
+  "_comment": "CliniX 2.0 Presentation Library: Symptom-First Approach to Failure to Thrive and Poor Weight Gain. Reuses shared Skills as atoms and provides tiered clinical reasoning from recognition to discriminators and nutritional rehabilitation.",
+  "schemaVersion": 1,
+  "id": "failure_to_thrive",
+  "title": "Approach to Failure to Thrive and Poor Weight Gain",
+  "subtitle": "Growth faltering, severe acute malnutrition, organic vs non-organic aetiologies, anthropometric assessment, and structured rehabilitation",
+  "system": "paediatrics",
+  "estMinutes": 45,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "layers": {
+    "recognise": {
+      "redFlags": [
+        "Signs of Severe Acute Malnutrition (SAM): Bilateral pitting oedema of nutritional origin, mid-upper arm circumference (MUAC) < 11.5 cm in children aged 6 to 59 months, or weight-for-height/length < -3 Z-scores (WHO growth standards)",
+        "Acute metabolic or systemic instability: Hypoglycaemia (blood glucose < 54 mg/dL), hypothermia (axillary temperature < 35.0 C / rectal < 35.5 C), severe dehydration without visible tears, or shock with cold extremities",
+        "Severe wasting stigmata: Loss of buccal fat pads giving a shrunken, senile facies or old man appearance (the buccal fat pad is the last adipose store to be mobilised in extreme marasmus)",
+        "Kwashiorkor complications: Extensive peeling flaky-paint dermatosis (crazy-paving dermatitis), large open skin ulcerations, apathy and misery, marked hepatomegaly with hepatic steatosis, or concurrent severe systemic sepsis",
+        "Developmental regression: Loss of previously attained developmental milestones (motor, social, or cognitive), microcephaly with falling head circumference centiles, or focal neurological deficits",
+        "Red flags for serious organic or surgical disease: Persistent projectile non-bilious vomiting (infantile hypertrophic pyloric stenosis), bilious vomiting (malrotation/volvulus), chronic intractable diarrhoea, persistent tachypnoea/cyanosis with cardiac murmur (congenital heart disease), or recurrent severe pulmonary infections with failure to gain weight (cystic fibrosis, immunodeficiency)"
+      ],
+      "vitalsPriorities": [
+        "Body Temperature and Hypothermia Vigilance: Children with severe faltering growth and SAM have impaired thermogenesis due to loss of insulating subcutaneous adipose tissue and reduced metabolic rate. Axillary temp < 35.0 C indicates occult severe sepsis, requiring immediate warming (kangaroo mother care / overhead warmer) and 10% dextrose feeding.",
+        "Heart Rate and Respiratory Rate in Reduced Cardiac Mass: Malnutrition causes myocardial atrophy and decreased cardiac output. Tachycardia out of proportion to activity, tachypnoea with basal crackles, or raised JVP/tender hepatomegaly signals congestive heart failure. Intravenous fluids must be avoided unless clear signs of uncompensated shock are present.",
+        "Accurate Weight and Length/Height Measurement: Use a calibrated digital paediatric scale sensitive to 5-10 g (weigh nude or in clean dry nappy). Use an infantometer for length until 2 years, and a stadiometer for standing height above 2 years. Plot serial measurements on WHO growth charts; a trajectory crossing downward over two or more major percentile lines is diagnostic of growth faltering."
+      ]
+    },
+    "classify": {
+      "tempo": {
+        "acute_wasting_days_to_weeks": [
+          "Acute Severe Malnutrition (Wasting: Weight-for-Height < -2 or < -3 SD; acute loss of muscle and subcutaneous fat)",
+          "Acute Dehydration / Post-Diarrhoeal Enteropathy",
+          "Acute Hypermetabolic State (Severe sepsis, Extensive burns, Malignancy)",
+          "Acute Pyloric Stenosis (rapid weight loss with non-bilious vomiting and hypochloraemic alkalosis in a young infant)"
+        ],
+        "subacute_to_chronic_months": [
+          "Chronic Malnutrition (Stunting: Height-for-Age < -2 or < -3 SD; linear growth arrest indicating long-term undernutrition)",
+          "Coeliac Disease (growth faltering after introduction of gluten, abdominal distension, muscle wasting, chronic diarrhoea)",
+          "Cow Milk Protein Allergy (CMPA: persistent regurgitation, blood-streaked stools, colic, poor weight gain)",
+          "Cystic Fibrosis (steatorrhoea, voracious appetite with growth failure, recurrent respiratory tract infections)",
+          "Congenital Heart Disease (large left-to-right shunts: VSD, PDA with heart failure and high caloric expenditure)"
+        ],
+        "longstanding_congenital_or_syndromic_years": [
+          "Intrauterine Growth Restriction (IUGR / Small for Gestational Age failure to catch up)",
+          "Endocrine Growth Failure (Congenital Hypothyroidism, Isolated Growth Hormone Deficiency, Cushing syndrome)",
+          "Genetic and Chromosomal Syndromes (Down syndrome, Turner syndrome, Prader-Willi, Russell-Silver)",
+          "Chronic Renal Failure / Renal Tubular Acidosis (failure to thrive with polyuria, polydipsia, refractory metabolic acidosis)",
+          "Severe Psychosocial Deprivation and Neglect"
+        ]
+      },
+      "mechanism": {
+        "inadequate_caloric_intake": [
+          "Feeding difficulties, incorrect formula reconstitution (over-dilution), lactation failure, breast attachment problems",
+          "Poverty, food insecurity, inappropriate complementary feeding (delayed weaning, low caloric density diets)",
+          "Oromotor dysfunction (cleft lip/palate, cerebral palsy, pseudobulbar palsy, dysphagia)",
+          "Anorexia secondary to chronic infection, inflammatory states, or iron deficiency"
+        ],
+        "inadequate_nutrient_absorption_or_losses": [
+          "Malabsorption syndromes: Coeliac disease, Cystic fibrosis (pancreatic insufficiency), Short bowel syndrome",
+          "Gastrointestinal losses: Severe gastro-oesophageal reflux disease (GORD), Pyloric stenosis, Protein-losing enteropathy",
+          "Chronic diarrhoea and environmental enteric dysfunction (tropical enteropathy)"
+        ],
+        "increased_energy_requirements_hypermetabolic": [
+          "Congenital heart disease (large shunts with congestive heart failure and pulmonary hypertension)",
+          "Chronic respiratory disease (Bronchopulmonary dysplasia, Cystic fibrosis, Severe chronic asthma)",
+          "Chronic infections: Tuberculosis, Paediatric HIV, Chronic pyelonephritis",
+          "Malignancies (Leukaemia, Lymphoma, Neuroblastoma)"
+        ],
+        "inefficient_nutrient_utilisation_or_metabolic": [
+          "Renal tubular acidosis (RTA: Type 1 or Type 2, impaired growth due to systemic metabolic acidosis)",
+          "Inborn errors of metabolism (Galactosaemia, Organic acidurias, Urea cycle defects)",
+          "Endocrine disorders: Hypothyroidism, Growth hormone deficiency, Type 1 Diabetes mellitus"
+        ]
+      }
+    },
+    "discriminators": [
+      {
+        "title": "Marasmus vs Kwashiorkor (PEM Classification & Phenotype)",
+        "finding": "Marasmus is non-oedematous severe undernutrition resulting from severe combined deficiency of energy and protein; features include profound muscle wasting, loss of subcutaneous fat (groin/axilla -> thighs/buttocks -> chest -> buccal pad of fat), loose wrinkled skin, old man senile facies, voracious appetite, and weight-for-age < 60% of expected. Kwashiorkor results from inadequate protein intake despite marginal calories; hallmark is bilateral pitting nutritional oedema starting in feet/ankles progressing to moon face and ascites, accompanied by apathy, miserable irritability, anorexic refusal to feed, flag sign alternating light/dark hair pigmentation, and flaky-paint dermatosis.",
+        "highYield": "The presence of bilateral nutritional pitting oedema automatically classifies a child as having Severe Acute Malnutrition (Kwashiorkor or Marasmic Kwashiorkor) regardless of weight-for-height percentage, mandating NRC-level medical stabilisation."
+      },
+      {
+        "title": "Wasting (Acute Malnutrition) vs Stunting (Chronic Malnutrition) (Waterlow Classification)",
+        "finding": "Waterlow criteria separate wasting from stunting: Weight-for-Height reflects acute nutritional deficit (wasting: normal > 90%, mild 80-90%, moderate 70-80%, severe < 70% or < -3 SD). Height-for-Age reflects chronic nutritional insult over months to years (stunting: normal > 95%, mild 90-95%, moderate 85-90%, severe < 85% or < -3 SD). A child with low weight-for-height and low height-for-age suffers from acute-on-chronic malnutrition.",
+        "highYield": "Weight falters first in acute undernutrition; length/height falters only when undernutrition becomes chronic (> 3-6 months); head circumference is protected and falters last, only in severe longstanding deprivation."
+      },
+      {
+        "title": "Constitutional Growth Delay vs Endocrine Short Stature vs Organic FTT",
+        "finding": "In constitutional delay of growth, the child has normal body proportions, normal weight-for-height, delayed bone age equal to height age (bone age = height age < chronological age), positive family history of late puberty (late bloomers), and normal predicted adult height matching mid-parental height. In endocrine growth failure (hypothyroidism, GH deficiency), height is more severely affected than weight (overweight for height, chubby infant), and bone age is more delayed than height age (bone age < height age < chronological age). In organic FTT, weight is depressed far more than height (underweight for height), and bone age equals chronological or height age.",
+        "highYield": "Weight affected much more than height indicates nutritional or organic failure to thrive; height affected more than weight indicates endocrine or syndromic growth failure."
+      },
+      {
+        "title": "Non-Organic (Psychosocial / Dietary) vs Organic Failure to Thrive",
+        "finding": "Non-organic FTT accounts for > 80% of faltering growth in community practice, caused by inadequate caloric density, incorrect feed reconstitution, poor feeding routines, maternal depression, or poverty. Observation of a feeding session reveals chaotic interactions, forced feeding, or absent hunger cues. The child typically exhibits rapid catch-up growth when fed an energy-dense diet in a structured, supportive ward environment without medical intervention. In organic FTT, weight fails to improve despite adequate supervised caloric intake, and specific organ-system symptoms (steatorrhoea, vomiting, murmurs, organomegaly, acidosis) are evident.",
+        "highYield": "A supervised feeding trial demonstrating sustained weight gain on an appropriate caloric diet in the hospital or NRC is both diagnostic of non-organic growth faltering and therapeutic, avoiding expensive and invasive laboratory workups."
+      }
+    ],
+    "dontMiss": [
+      {
+        "disease": "Complicated Severe Acute Malnutrition with Refeeding Syndrome Risk",
+        "clue": "Child with severe wasting (weight-for-height < -3 SD) or nutritional oedema presenting with hypothermia, hypoglycaemia, severe apathy, or failed appetite test.",
+        "action": "Admit to a Nutrition Rehabilitation Centre (NRC). Initiate the WHO/IAP 10-step protocol: warm the child, correct hypoglycaemia with 10% dextrose, rehydrate cautiously using oral ReSoMal (avoid standard rapid IV fluids which precipitate fatal heart failure), administer broad-spectrum empirical antibiotics, initiate starter feeding strictly with F-75 formula (75 kcal/100 mL, low protein, low sodium) to prevent lethal refeeding syndrome, and defer iron supplementation until the catch-up phase begins."
+      },
+      {
+        "disease": "Coeliac Disease presenting as Growth Faltering",
+        "clue": "Toddler presenting with weight loss or poor weight gain, progressive abdominal protuberance, gluteal muscle wasting, chronic pale offensive stools, irritability, and iron-deficiency anaemia following the introduction of wheat or semolina (suji) into the diet.",
+        "action": "Maintain gluten in the diet while obtaining serum Total IgA and Anti-Tissue Transglutaminase (anti-tTG) IgA antibodies; if anti-tTG is markedly elevated (>= 10x upper limit of normal), confirm with anti-endomysial antibodies (EMA) or upper endoscopy with duodenal biopsies; initiate a strict life-long gluten-free diet once confirmed."
+      },
+      {
+        "disease": "Renal Tubular Acidosis (RTA) / Chronic Kidney Disease",
+        "clue": "Infant or young child with profound failure to thrive, polyuria, polydipsia, recurrent episodes of dehydration with minimal diarrhoea, refractory rickets, and unexplained vomiting.",
+        "action": "Perform arterial/venous blood gas and simultaneous serum electrolytes and urinalysis. Finding normal anion gap hyperchloraemic metabolic acidosis with inappropriately alkaline urine (pH > 5.5) points to distal (type 1) RTA; initiate oral sodium and potassium citrate (alkali therapy) to correct acidosis, which restores normal growth."
+      },
+      {
+        "disease": "Infantile Hypertrophic Pyloric Stenosis",
+        "clue": "3 to 6-week-old previously healthy infant (more commonly male/firstborn) presenting with progressive non-bilious projectile vomiting immediately after feeds, persistent hunger, rapid weight loss, and hypokalaemic hypochloraemic metabolic alkalosis.",
+        "action": "Look for visible peristaltic waves from left to right and palpate for a firm mobile olive mass in the epigastrium / right upper quadrant during feed; confirm via transabdominal ultrasound (pyloric muscle thickness >= 3-4 mm, channel length >= 14-16 mm); correct dehydration and electrolyte alkalosis completely with IV saline and potassium before performing Ramstedt pyloromyotomy."
+      }
+    ],
+    "investigations": {
+      "step1_immediate": [
+        "Bedside Capillary Blood Glucose (detect life-threatening hypoglycaemia < 54 mg/dL)",
+        "Complete Blood Count (CBC) with Peripheral Blood Smear (evaluate nutritional microcytic or macrocytic anaemia, leukocytosis, or leukopenia)",
+        "Urine Routine and Microscopy with Culture (clean catch or catheter sample to detect occult urinary tract infection, proteinuria, or haematuria)",
+        "Serum Electrolytes (Sodium, Potassium, Chloride) and Bicarbonate / Blood Gas (detect electrolyte derangements, dehydration type, or metabolic acidosis in RTA)"
+      ],
+      "step2_urgent": [
+        "Serum Albumin and Total Protein (evaluate visceral protein depletion and severity of kwashiorkor/oedema)",
+        "Renal Function Tests (Blood Urea and Serum Creatinine) and Liver Function Tests (AST, ALT, Bilirubin, Alkaline Phosphatase)",
+        "Serum Calcium, Phosphate, Alkaline Phosphatase, and 25-Hydroxyvitamin D (screen for nutritional rickets and hypocalcaemia)",
+        "Stool Examination: Microscopy for ova, cysts, and parasites; Stool reducing substances and pH (carbohydrate malabsorption); and Stool fat stain (Sudan III for steatorrhoea)",
+        "Tuberculin Skin Test (Mantoux) and Gastric Aspirates for CBNAAT / GeneXpert MTB (malnutrition is a major predisposing factor and consequence of paediatric TB)"
+      ],
+      "step3_confirmatory": [
+        "Coeliac Disease Serology: Serum Total IgA and Anti-Tissue Transglutaminase (anti-tTG) IgA antibodies",
+        "Sweat Chloride Test (pilocarpine iontophoresis) or CFTR genetic analysis (in recurrent respiratory infections, bronchiectasis, or steatorrhoea)",
+        "Thyroid Function Tests (Free T4, TSH) and Early Morning Cortisol (rule out endocrine growth failure)",
+        "Upper Gastrointestinal Endoscopy with Multiple Duodenal Biopsies (Marsh staging for coeliac disease, lymphangiectasia, or eosinophilic gastroenteritis)",
+        "Transthoracic Echocardiogram (TTE) to evaluate haemodynamically significant congenital cardiac malformations (large VSD, PDA, AV canal defect)"
+      ]
+    },
+    "skills": [
+      "skill.exam.paed.weight",
+      "skill.exam.paed.length_height",
+      "skill.exam.paed.muac",
+      "skill.exam.paed.head_circumference",
+      "skill.annex.paed.growth_charts",
+      "skill.proc.paed.growth_chart_plotting",
+      "skill.hx.paed.diet_infant",
+      "skill.hx.paed.diet_calorie_protein",
+      "skill.gen.paed.appearance",
+      "skill.gen.paed.vitals",
+      "skill.gen.paed.hydration"
+    ],
+    "examPearls": [
+      {
+        "topic": "The Fat-Wasting Hierarchy in Marasmus",
+        "text": "Subcutaneous fat loss in marasmus follows an orderly, predictable anatomical sequence reflecting metabolic conservation: adipose tissue disappears first from the axillae and groins, next from the thighs and buttocks, then from the chest and abdominal wall, and finally from the face. The buccal fat pad of Bichat is anatomically and metabolically specialised for suckling; its preservation until the terminal stage gives the infant a wizened, aged appearance (old man facies or senile facies) when all other stores are depleted."
+      },
+      {
+        "topic": "The Fallacy of Rapid IV Rehydration and Diuretics in SAM",
+        "text": "Children with complicated severe acute malnutrition and nutritional oedema (kwashiorkor) suffer from reduced myocardial mass, impaired cardiac reserve, and sodium retention with potassium/magnesium depletion. Never treat nutritional oedema with diuretics: it worsens lethal intravascular hypovolaemia. Similarly, never give rapid routine IV fluid boluses for dehydration in SAM: rapid intravascular volume expansion precipitates fatal congestive heart failure and pulmonary oedema. Rehydrate slowly using oral ReSoMal unless true uncompensated shock is present."
+      },
+      {
+        "topic": "Catch-Up Caloric Calculation Formula",
+        "text": "To achieve catch-up growth in a child with failure to thrive, calculate daily caloric and protein targets based on the child's IDEAL weight-for-height (the 50th percentile weight for current length/height), not the actual low body weight. Catch-up energy requirements typically reach 150 to 200 kcal/kg/day, with protein requirements of 3 to 4 g/kg/day, delivered via high-calorie density feeds (e.g. F-100 or ready-to-use therapeutic food [RUTF]) divided into 6 to 8 frequent meals."
+      }
+    ]
+  }
+}

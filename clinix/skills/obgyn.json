@@ -17615,6 +17615,2087 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.hx.hyperemesi.symptoms": {
+      "id": "skill.hx.hyperemesi.symptoms",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "History of nausea and vomiting in early pregnancy",
+      "oneLine": "Systematic inquiry into onset, frequency, oral fluid tolerance, weight loss, and dehydration severity",
+      "why": "Nausea and vomiting affect up to eighty percent of pregnant women, but hyperemesis gravidarum represents an intractable extreme requiring hospitalisation. Thorough questioning separates benign morning sickness from severe hyperemesis, quantifies volume depletion, detects ketosis and electrolyte failure early, and screens for life-threatening complications such as Wernicke encephalopathy and Mallory-Weiss tears before irreversible injury occurs.",
+      "asks": [
+        {
+          "text": "When did your nausea and vomiting begin, how many times a day are you vomiting, and is it constant throughout the day? Clarifying onset and frequency differentiates physiological morning sickness from intractable hyperemesis."
+        },
+        {
+          "text": "Can you keep down any fluids or food, and when was the last time you retained a drink? An inability to retain fluids for twenty-four hours indicates severe dehydration requiring intravenous resuscitation."
+        },
+        {
+          "text": "How much weight have you lost since becoming pregnant, and do your clothes feel loose? Weight loss exceeding five percent of pre-pregnancy weight is a defining diagnostic criterion for hyperemesis gravidarum."
+        },
+        {
+          "text": "How often are you passing urine, and is the colour dark yellow or brown? Marked oliguria and dark concentrated urine are sensitive clinical indicators of intravascular volume depletion."
+        },
+        {
+          "text": "Do you feel dizzy, lightheaded, or faint when you stand up from bed? Postural dizziness suggests significant orthostatic hypotension resulting from severe extracellular volume contraction."
+        },
+        {
+          "text": "Have you noticed any blood or dark coffee-ground specks in your vomit? Repeated violent retching can cause mucosal lacerations at the gastro-oesophageal junction known as Mallory-Weiss tears."
+        },
+        {
+          "text": "Do you have any double vision, unsteadiness while walking, or memory confusion? These symptoms constitute the classic triad of Wernicke encephalopathy due to severe thiamine deficiency."
+        },
+        {
+          "text": "Do you have any severe abdominal pain, fever, or diarrhoea? Severe pain or fever suggests an alternative surgical or infectious pathology such as appendicitis, cholecystitis, or gastroenteritis."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Quantifying Frequency and Hydration Status",
+          "body": "Begin by documenting the exact onset, daily frequency of vomiting, and duration of nausea. Physiological nausea typically begins around six weeks, peaks at nine weeks, and improves by sixteen weeks, occurring intermittently without causing dehydration.\n\nIn hyperemesis gravidarum, vomiting is intractable and persists throughout the day. Clinicians must establish whether the patient can keep down fluids and quantify the hours since last retention to gauge the urgency of rehydration."
+        },
+        {
+          "heading": "Assessing Weight Loss and Metabolic Strain",
+          "body": "Document pre-pregnancy weight and compare it against current weight. A loss greater than five percent indicates severe nutritional and fluid compromise, triggering starvation ketosis.\n\nAsk systematically about urinary output and postural lightheadedness. A reduction in daily micturition to once or twice, accompanied by dark concentrated urine and orthostatic dizziness, confirms substantial hypovolaemia requiring admission."
+        },
+        {
+          "heading": "Screening for Life-Threatening Red Flags",
+          "body": "Screen actively for thiamine deficiency, which causes Wernicke encephalopathy. Ask about visual changes, diplopia, nystagmus, ataxia, and memory lapses or acute confusion. Prompt recognition prevents irreversible Korsakoff psychosis.\n\nInquire about haematemesis from Mallory-Weiss tears and localized severe abdominal tenderness. True hyperemesis produces only mild epigastric soreness from retching; sharp focal pain or fever demands immediate exclusion of acute surgical conditions."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What degree of weight loss defines hyperemesis gravidarum compared to pre-pregnancy weight?",
+          "a": "A loss of more than five percent of pre-pregnancy weight.",
+          "accept": [
+            "five percent",
+            "5 percent",
+            "5%"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why must you ask about double vision, difficulty walking, and confusion in severe vomiting?",
+          "a": "To screen for Wernicke encephalopathy caused by thiamine deficiency.",
+          "accept": [
+            "Wernicke",
+            "thiamine",
+            "deficiency"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What does the appearance of dark specks or fresh blood in the vomit indicate after severe retching?",
+          "a": "Mallory-Weiss tears of the oesophageal mucosa resulting from violent retching.",
+          "accept": [
+            "Mallory-Weiss",
+            "mucosa",
+            "tears",
+            "retching"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "quantify_vomiting_fluid_tolerance",
+          "text": "Quantifies vomiting frequency, retching, and ability to retain oral liquids"
+        },
+        {
+          "id": "evaluate_weight_and_volume",
+          "text": "Assesses percentage weight loss, urinary frequency, and orthostatic dizziness"
+        },
+        {
+          "id": "screen_neurological_red_flags",
+          "text": "Screens deliberately for visual disturbance, ataxia, and confusion indicating Wernicke encephalopathy"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "hyperemesis_gravidarum: clinicalPearls"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline No. 69: The Management of Nausea and Vomiting in Pregnancy and Hyperemesis Gravidarum"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.hyperemesi.risk": {
+      "id": "skill.hx.hyperemesi.risk",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Risk factors and background in hyperemesis gravidarum",
+      "oneLine": "Identifying predisposing maternal, obstetric, endocrine, and metabolic risks for severe intractable emesis",
+      "why": "Hyperemesis gravidarum recurs in up to eighty percent of subsequent pregnancies and clusters strongly in families, reflecting genetic factors including GDF15 sensitivity. Enquiring into prior pregnancy sickness, multiple gestation, molar pregnancy history, pre-existing gastrointestinal or thyroid disorders, and dietary intake enables targeted monitoring and pre-emptive antiemetic therapy.",
+      "asks": [
+        {
+          "text": "Did you suffer from severe nausea or vomiting in any previous pregnancy, and did it require hospital admission? Recurrence in subsequent pregnancies occurs in up to eighty percent of women with a history of hyperemesis."
+        },
+        {
+          "text": "Did your mother or sisters experience severe vomiting during their pregnancies? A family history in first-degree relatives increases risk dramatically through shared genetic variants in GDF15."
+        },
+        {
+          "text": "Have you had an early ultrasound scan to check whether you are carrying twins or triplets? Multiple gestation produces higher circulating human chorionic gonadotrophin levels that trigger severe emesis."
+        },
+        {
+          "text": "Have you had any vaginal bleeding or passage of grape-like tissue? Molar pregnancy (gestational trophoblastic disease) causes markedly exaggerated hCG release and severe intractable vomiting."
+        },
+        {
+          "text": "Do you have a history of migraine headaches, motion sickness, or stomach sensitivity? Women with vestibulocochlear hypersensitivity or migraine have an elevated predisposition to hyperemesis gravidarum."
+        },
+        {
+          "text": "Have you been diagnosed with any thyroid condition, diabetes mellitus, or chronic liver disease? Pre-existing endocrine and metabolic disorders complicate fluid and electrolyte management during pregnancy."
+        },
+        {
+          "text": "What medications, iron supplements, or home remedies have you been taking since your pregnancy was confirmed? Oral iron supplements severely aggravate gastric irritation and should be stopped immediately."
+        },
+        {
+          "text": "How has this vomiting affected your ability to work, care for your family, and your emotional wellbeing? Hyperemesis carries a profound psychological burden, often provoking secondary anxiety and depression."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Genetic Predisposition and Recurrence Risk",
+          "body": "A previous history of hyperemesis gravidarum is the strongest single clinical predictor, carrying a recurrence rate between seventy and eighty percent. Inquire thoroughly about prior admissions, response to antiemetics, and gestational age at resolution.\n\nA family history in mothers or sisters points to genetic mechanisms. Recent genomic studies implicate placental GDF15 variants and maternal receptor sensitivity, explaining the marked familial clustering observed in clinical practice."
+        },
+        {
+          "heading": "Obstetric and Hormonal Triggers",
+          "body": "Conditions characterised by high placental mass and elevated human chorionic gonadotrophin (hCG) concentrations carry a higher incidence of hyperemesis. These include twin or higher-order multifetal gestations and gestational trophoblastic disease (hydatidiform mole).\n\nEvery woman presenting with severe early pregnancy vomiting requires confirmation of intrauterine singleton viability by ultrasonography to exclude molar changes and multiple pregnancy before hyperemesis is diagnosed."
+        },
+        {
+          "heading": "Medication Review and Psychosocial Impact",
+          "body": "Review all oral medications and nutritional supplements. Routine first-trimester iron supplementation frequently worsens nausea and vomiting; it should be discontinued until the second trimester and restarted only if anaemia develops.\n\nAssess psychosocial impact and mental health. Severe persistent nausea severely impairs occupational function and quality of life. Exploring emotional health allows the obstetric team to offer supportive counselling and mental health referral."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the expected recurrence risk of hyperemesis gravidarum in subsequent pregnancies?",
+          "a": "The recurrence rate is approximately seventy to eighty percent.",
+          "accept": [
+            "seventy",
+            "eighty",
+            "70",
+            "80"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Which common antenatal nutritional supplement should be temporarily discontinued in early pregnancy vomiting?",
+          "a": "Oral iron supplements should be stopped because they cause severe gastric irritation.",
+          "accept": [
+            "iron",
+            "supplements",
+            "gastric"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which two obstetric conditions associated with high hCG levels predispose to severe hyperemesis?",
+          "a": "Multiple pregnancy and gestational trophoblastic disease or hydatidiform mole.",
+          "accept": [
+            "multiple pregnancy",
+            "molar",
+            "gestational trophoblastic",
+            "twins"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "identify_recurrence_and_family_history",
+          "text": "Identifies personal recurrence and familial clustering of hyperemesis"
+        },
+        {
+          "id": "evaluate_obstetric_predispositions",
+          "text": "Checks for multiple gestation and molar pregnancy as hormonal drivers"
+        },
+        {
+          "id": "assess_medications_and_psychosocial_toll",
+          "text": "Reviews gastric irritants including iron supplements and evaluates psychological burden"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "hyperemesis_gravidarum: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Chapter 54: Gastrointestinal Disorders, Hyperemesis Gravidarum"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.hyperemesi.case": {
+      "id": "skill.present.hyperemesi.case",
+      "kind": "presentation",
+      "system": "obgyn",
+      "title": "Presenting the hyperemesis gravidarum case",
+      "oneLine": "Structured bedside presentation of early pregnancy vomiting, dehydration, biochemistry, and management plan",
+      "why": "A disciplined obstetric case presentation establishes gestational age, distinguishes physiological nausea from pathological hyperemesis, details volume loss and ketosis, and articulates a structured rehydration and antiemetic escalation plan. Communicating these findings clearly ensures prompt administration of thiamine before dextrose to prevent catastrophic Wernicke encephalopathy.",
+      "steps": [
+        "State patient demographics, gravidity, parity, and exact gestational age calculated from a reliable last menstrual period or early ultrasound.",
+        "Detail the chief complaints with exact onset, duration, vomiting frequency per day, and the time elapsed since last retaining oral liquids.",
+        "Quantify objective weight loss against verified pre-pregnancy weight and report the percentage loss.",
+        "Summarise hydration status from the history, including urinary frequency, urine colour, and postural lightheadedness.",
+        "Report relevant obstetric background, prior pregnancy hyperemesis, family history, and medication history including discontinuation of oral iron.",
+        "Present general physical examination findings, specifically mentioning vital signs, orthostatic blood pressure changes, dry mucous membranes, and breath odour.",
+        "Present abdominal examination findings, noting uterine size relative to dates and confirming the absence of peritoneal signs or localized tenderness.",
+        "Summarise essential investigation results: urine dipstick ketones, serum electrolytes, renal function, liver enzymes, and pelvic ultrasound findings.",
+        "State the definitive clinical diagnosis with severity category, hydration grade, and identified electrolyte derangements.",
+        "Outline the comprehensive management plan: intravenous crystalloid resuscitation, mandatory thiamine before dextrose, stepwise antiemetics, thromboprophylaxis, and monitoring."
+      ],
+      "teach": [
+        {
+          "heading": "Structuring the Opening and Severity Assessment",
+          "body": "Open with concise identification: age, gravidity, parity, and confirmed gestational age. State the chief complaint with precise numbers: daily vomiting episodes, duration of symptoms, and the critical interval since any oral fluid retention.\n\nState the measured weight loss clearly in kilograms and percentage. Highlighting weight loss exceeding five percent and the presence of severe ketonuria establishes the case immediately as pathological hyperemesis rather than mild morning sickness."
+        },
+        {
+          "heading": "Articulating Examination, Labs, and Resuscitation",
+          "body": "Present vital signs concisely, emphasizing resting tachycardia and postural blood pressure changes as markers of volume depletion. Note mucous membrane dryness and abdominal findings, confirming a soft abdomen with uterine size appropriate for dates.\n\nDeliver laboratory data systematically: urine ketones, serum potassium, sodium, chloride, and renal parameters. Conclude with pelvic ultrasound results confirming singleton viability and ruling out molar pregnancy. Present the resuscitation plan, highlighting thiamine administration before dextrose."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What key metric should always be calculated and reported when presenting weight in hyperemesis?",
+          "a": "The percentage of weight loss compared to pre-pregnancy weight.",
+          "accept": [
+            "percentage",
+            "weight loss",
+            "pre-pregnancy"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What critical prescribing sequence must be clearly articulated when presenting the intravenous fluid plan?",
+          "a": "Thiamine must be administered before or concurrently with any dextrose or glucose infusion.",
+          "accept": [
+            "thiamine",
+            "dextrose",
+            "glucose",
+            "before"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Which two crucial ultrasonographic findings must be reported to confirm uncomplicated hyperemesis?",
+          "a": "Confirmation of a viable intrauterine singleton fetus and exclusion of molar pregnancy or twin gestation.",
+          "accept": [
+            "viable",
+            "singleton",
+            "molar",
+            "twins"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "structured_case_opening",
+          "text": "Presents demographics, confirmed gestational age, vomiting tempo, and percentage weight loss"
+        },
+        {
+          "id": "synthesis_of_vitals_and_labs",
+          "text": "Articulates vital signs, ketonuria, electrolyte derangements, and pelvic ultrasound findings"
+        },
+        {
+          "id": "safe_resuscitation_hierarchy",
+          "text": "Outlines crystalloid rehydration, antiemetic protocol, and mandatory thiamine before dextrose"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "hyperemesis_gravidarum: clinicalPearls"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline No. 69: The Management of Nausea and Vomiting in Pregnancy and Hyperemesis Gravidarum"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.caesarean.symptoms": {
+      "id": "skill.hx.caesarean.symptoms",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Labour symptoms, scar pain, and urgent indications for caesarean delivery",
+      "oneLine": "Systematic inquiry into labour contractions, abnormal scar pain, vaginal bleeding, fluid loss, and fetal movements",
+      "why": "Recognizing acute intrapartum symptoms that indicate fetal compromise or uterine scar dehiscence is vital when evaluating the need for caesarean delivery. Constant severe lower abdominal pain localized over a prior scar between contractions, sudden cessation of uterine activity, fresh vaginal bleeding, or maternal collapse warn of impending or established uterine rupture requiring immediate surgical intervention.",
+      "asks": [
+        {
+          "text": "How frequent, regular, and painful are your labour contractions? Documenting contraction frequency, duration, and intensity determines whether labour is established, protracted, or obstructed."
+        },
+        {
+          "text": "Do you feel continuous pain, burning, or severe tenderness over your previous operation scar between contractions? Constant localized scar tenderness between contractions is a primary warning sign of impending uterine scar dehiscence."
+        },
+        {
+          "text": "Have your waters broken, and if so, what was the colour and odour of the fluid? Clear fluid is normal, whereas thick meconium staining or foul-smelling fluid indicates fetal distress or chorioamnionitis."
+        },
+        {
+          "text": "Have you noticed any fresh vaginal bleeding during labour? Vaginal bleeding may indicate placental abruption, placenta praevia, or lower uterine segment laceration/rupture."
+        },
+        {
+          "text": "Are you feeling normal baby movements, or has the baby become unusually quiet or agitated? Reduced or absent fetal movements during labour correlate with intrapartum hypoxia and acidemia."
+        },
+        {
+          "text": "Do you feel severe maternal exhaustion, dizziness, breathlessness, or persistent urge to push without descent? Uncontrolled pushing without descent warns of deep obstruction, while dizziness suggests hidden internal bleeding."
+        }
+      ],
+      "practice": "In active labour, conduct history in brief pauses between contractions. Speak directly and calmly to the mother, maintaining eye contact and validating her pain while gathering critical urgency markers.",
+      "pitfalls": [
+        "Dismissing constant localized suprapubic scar pain as ordinary labour contractions in a woman undergoing trial of labour after caesarean section.",
+        "Failing to ask specifically about the colour of amniotic fluid when membrane rupture has occurred, missing thick meconium passage."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What clinical symptoms and signs alert you to impending uterine rupture during a trial of labour after caesarean?",
+          "a": "Key signs include persistent continuous pain and localized tenderness over the lower uterine segment scar between contractions, fetal heart rate decelerations or persistent bradycardia, vaginal bleeding, haematuria, cessation of previously regular uterine contractions, maternal tachycardia, and recession of the presenting part on vaginal examination.",
+          "accept": [
+            "continuous pain",
+            "localized tenderness",
+            "scar",
+            "bradycardia",
+            "decelerations",
+            "vaginal bleeding",
+            "cessation of contractions"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is sudden cessation of contractions a grave warning sign during labour in a scarred uterus?",
+          "a": "Sudden cessation of regular contractions often heralds complete uterine rupture, where the uterine wall tears through, releasing intra-amniotic pressure and expelling the fetus or placenta into the peritoneal cavity, leading to rapid maternal hypovolemic shock and fetal asphyxia.",
+          "accept": [
+            "complete uterine rupture",
+            "uterine wall",
+            "peritoneal cavity",
+            "hypovolemic shock",
+            "fetal asphyxia"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "scar_pain_character",
+          "text": "Specifically differentiates intermittent labour contraction pain from constant localized suprapubic scar tenderness."
+        },
+        {
+          "id": "danger_signs_enquiry",
+          "text": "Routinely checks for fresh bleeding per vaginam, meconium-stained liquor, and sudden changes in fetal movement pattern."
+        },
+        {
+          "id": "labour_dynamics",
+          "text": "Assesses the progression, duration, and intensity of labour contractions to detect secondary arrest or dystocia."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "operative_obstetrics_forceps_vacuum_caesarean: Clinical pearls and section categories"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline No. 13: Caesarean Birth"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.caesarean.risk": {
+      "id": "skill.hx.caesarean.risk",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Obstetric background, prior uterine scars, and trial of labour eligibility",
+      "oneLine": "Detailed review of prior deliveries, indication for previous caesarean, incision type, inter-delivery interval, and contraindications to labour",
+      "why": "Assessing suitability for trial of labour after caesarean (TOLAC) versus planned repeat caesarean requires rigorous verification of past surgical history. An upper uterine segment or classical vertical incision carries a 4 to 9 percent risk of catastrophic rupture during labour and strictly mandates elective caesarean. A single prior transverse lower uterine segment incision carries a low rupture risk of approximately 0.5 percent (about 1 in 200). Identifying recurrent indications (such as contracted pelvis) versus non-recurrent indications (such as breech presentation or fetal distress) guides safe clinical decision-making.",
+      "asks": [
+        {
+          "text": "How many previous caesarean sections have you undergone, and at what gestation? Risk of uterine rupture rises significantly with two or more previous uterine incisions."
+        },
+        {
+          "text": "What was the medical reason for your previous caesarean delivery? Non-recurrent indications such as fetal malpresentation or distress carry a 70 to 75 percent VBAC success rate, whereas prior dystocia carries a lower success rate."
+        },
+        {
+          "text": "Was the incision on your womb lower segment transverse or vertical classical? Classical or inverted T incisions completely contraindicate labour due to high rupture risk."
+        },
+        {
+          "text": "Did you experience any high fever, foul discharge, wound breakdown, or blood transfusions after your previous delivery? Postoperative puerperal endometritis impairs myometrial scar healing and increases subsequent dehiscence risk."
+        },
+        {
+          "text": "What is the time gap between your last delivery and this pregnancy? An inter-delivery interval shorter than 18 to 24 months is associated with higher uterine scar rupture rates during labour."
+        },
+        {
+          "text": "Have you ever had a normal vaginal birth, before or after your previous caesarean section? Prior vaginal birth, particularly prior successful VBAC, is the single strongest predictor of successful vaginal delivery."
+        }
+      ],
+      "practice": "Always attempt to review the previous operative note and discharge summary. In resource-limited Indian public health settings where records may be unavailable, obtain a detailed account of the incision location and postoperative recovery duration.",
+      "pitfalls": [
+        "Assuming an abdominal skin Pfannenstiel scar always corresponds to a transverse lower uterine segment incision without verifying operative notes.",
+        "Permitting trial of labour in a patient with a prior classical incision or previous myomectomy that breached the uterine cavity."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What is the approximate risk of uterine scar rupture during a trial of labour after one prior lower segment caesarean section?",
+          "a": "The risk of symptomatic uterine rupture during planned trial of labour after one uncomplicated lower segment transverse caesarean section is approximately 0.5 percent (about 1 in 200 women), compared to approximately 0.1 percent (1 in 1000) for elective repeat caesarean.",
+          "accept": [
+            "0.5 percent",
+            "1 in 200",
+            "0.5",
+            "200",
+            "rupture"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which past obstetric factors strongly favor successful trial of labour after caesarean section?",
+          "a": "Factors favoring success include a non-recurrent indication for the previous caesarean (such as breech or fetal distress), at least one prior successful vaginal delivery (especially prior VBAC), spontaneous onset of labour, ripe cervix at admission, maternal age under 35 years, and fetal birth weight under 4000 grams.",
+          "accept": [
+            "non-recurrent indication",
+            "vaginal delivery",
+            "vbac",
+            "spontaneous onset",
+            "ripe cervix"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "prior_scar_verification",
+          "text": "Systematically establishes the number, type, and location of previous uterine incisions from history and operative records."
+        },
+        {
+          "id": "indication_categorisation",
+          "text": "Correctly distinguishes recurrent causes of caesarean delivery from non-recurrent causes."
+        },
+        {
+          "id": "healing_and_interval",
+          "text": "Enquires into the inter-pregnancy interval and signs of impaired scar healing such as postpartum sepsis."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "operative_obstetrics_forceps_vacuum_caesarean: VBAC versus repeat by scar and labour"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Prior Cesarean Delivery: patient counseling and risk factors"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.caesarean.case": {
+      "id": "skill.present.caesarean.case",
+      "kind": "presentation",
+      "system": "obgyn",
+      "title": "Presenting the caesarean section case",
+      "oneLine": "Structured presentation of an obstetric patient requiring caesarean section, including indication, urgency category, pre-operative readiness, and consent",
+      "why": "Presenting an obstetric patient who requires caesarean section demands rapid, structured clinical communication to mobilise the operating theatre, anaesthetist, and paediatrician without delay. The clinician must crisply communicate parity, gestation, specific indication, urgency classification (Category 1 emergency within 30 minutes versus Category 2 within 75 minutes), fetal heart tracing, maternal status, consent, and blood crossmatch preparation.",
+      "body": "Begin with patient identity, parity, and gestation: Mrs S is a 26-year-old G2P1L1 at 39 weeks gestation with one previous lower segment caesarean section performed three years ago for breech presentation, admitted in active labour for trial of labour after caesarean. Proceed directly to the active problem and indication: she has developed failure of progress in the active phase with secondary arrest of dilatation at 6 cm for over 3 hours despite adequate contractions, persistent station at minus 1 with severe caput and moulding indicating cephalopelvic disproportion, accompanied by localized scar tenderness and variable fetal heart decelerations. State the urgency category: this is a Category 2 emergency caesarean section requiring delivery within 75 minutes. Summarise preoperative readiness: informed consent has been obtained, patient is nil by mouth, intravenous access secured with 16G cannula, blood sent for crossmatch of 2 units, prophylactic antibiotics prescribed, and the theatre, anaesthetic, and neonatal teams alerted.",
+      "keyPoints": [
+        "State patient age, gravidity, parity, gestational age, and previous delivery details in the opening line.",
+        "Clearly state the primary indication for caesarean delivery and assign the urgency category (Category 1 to 4).",
+        "Summarise fetal surveillance findings including CTG classification and meconium status.",
+        "Confirm preoperative checklist completion: consent, nil by mouth status, blood grouping and crossmatching, IV access, and antibiotic timing."
+      ],
+      "pitfalls": [
+        "Failing to state the urgency classification (Category 1 vs 2), leading to ambiguous theatre prioritisation.",
+        "Neglecting to confirm blood group and crossmatch status before heading to the operating theatre in a scarred uterus."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "How do you define Category 1 and Category 2 caesarean sections in terms of urgency and recommended decision-to-delivery interval?",
+          "a": "Category 1 is an immediate threat to the life of the woman or fetus (such as sustained fetal bradycardia, cord prolapse, or uterine rupture) with a recommended decision-to-delivery interval of 30 minutes or less. Category 2 represents maternal or fetal compromise that is not immediately life-threatening (such as dystocia or non-reassuring CTG) with an audit target of 75 minutes or less.",
+          "accept": [
+            "category 1",
+            "category 2",
+            "immediate threat",
+            "30 minutes",
+            "75 minutes"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What essential preoperative preparation must be verified before transferring a patient to theatre for an emergency caesarean?",
+          "a": "Essential steps include confirmed informed consent, establishing large-bore IV access (16G or 18G), sending blood for crossmatch, verifying nil by mouth duration, antacid premedication (H2 antagonist or sodium citrate), surgical antibiotic prophylaxis (cefazolin 2 g IV), urinary bladder catheterisation with an indwelling Foley, and mobilizing the multidisciplinary team (anaesthetist, obstetrician, theatre scrub nurse, and paediatric resuscitation team).",
+          "accept": [
+            "informed consent",
+            "iv access",
+            "crossmatch",
+            "antibiotic prophylaxis",
+            "catheterisation",
+            "multidisciplinary team"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "urgency_articulation",
+          "text": "Explicitly states the primary clinical indication and assigns the appropriate urgency category."
+        },
+        {
+          "id": "fetal_and_maternal_synthesis",
+          "text": "Succinctly summarises both maternal hemodynamic stability and intrapartum fetal heart rate status."
+        },
+        {
+          "id": "preop_checklist_confirmation",
+          "text": "Verifies all critical preoperative safety items including informed consent, blood crossmatching, and antibiotic prophylaxis."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "operative_obstetrics_forceps_vacuum_caesarean: Elective versus crash section by categories"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline No. 13: Caesarean Birth"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.amenorrhoe.risk": {
+      "id": "skill.hx.amenorrhoe.risk",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Risk factors and background history in amenorrhoea",
+      "oneLine": "Systematic inquiry into pubertal timing, weight fluctuations, surgical trauma, medications, and endocrine red flags",
+      "why": "Amenorrhoea is a symptom rather than an isolated diagnosis. Detailed inquiry into pubertal timing, previous intrauterine curettage, body mass shifts, intense athletic training, medications, and systemic symptoms directs the diagnostic algorithm to the anatomical compartment responsible.",
+      "asks": [
+        {
+          "topic": "Menstrual timeline and previous cycle characteristics",
+          "detail": "Age at menarche, regularity of previous cycles, duration of bleeding, exact date of last menstrual period, and whether menses ceased abruptly or became progressively infrequent."
+        },
+        {
+          "topic": "Pubertal development and growth milestones",
+          "detail": "Timing and sequence of breast development (thelarche), pubic hair growth (pubarche), and growth spurt compared to chronological peers and maternal menarche age."
+        },
+        {
+          "topic": "Previous uterine instrumentation and obstetric interventions",
+          "detail": "History of dilatation and curettage, manual removal of placenta, post-abortal or postpartum evacuation, or pelvic infection predisposing to intrauterine synechiae."
+        },
+        {
+          "topic": "Weight, nutrition, exercise, and psychological stress",
+          "detail": "Rapid weight loss, dietary restriction, body image concerns, intensive endurance athletic training, or severe psychological stress pointing to functional hypothalamic amenorrhoea."
+        },
+        {
+          "topic": "Medication exposure and medical treatments",
+          "detail": "Use of antipsychotics, antidepressants, antiemetics (dopamine antagonists elevating prolactin), combined hormonal contraceptives, chemotherapy, or pelvic radiation."
+        },
+        {
+          "topic": "Systemic endocrine red flags and vasomotor symptoms",
+          "detail": "Headaches and visual field defects (pituitary mass), galactorrhoea, hot flushes and night sweats (hypoestrogenism), cold intolerance (hypothyroidism), or hirsutism and acne (androgen excess)."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Distinguishing primary from secondary presentations",
+          "body": "Primary amenorrhoea is diagnosed when menarche has not occurred by age 15 in the presence of normal secondary sexual characteristics, or by age 13 in the absence of secondary sexual characteristics.\n\nSecondary amenorrhoea is the absence of menses for 3 consecutive months in a woman with previously regular cycles, or 6 months in a woman with prior oligomenorrhoea. Pregnancy must always be excluded first."
+        },
+        {
+          "heading": "Anatomical compartments and historical clues",
+          "table": {
+            "cols": [
+              "Compartment",
+              "Key Pathology",
+              "Dominant Clues in History"
+            ],
+            "rows": [
+              [
+                "I: Outflow tract / uterus",
+                "Asherman syndrome, MRKH, imperforate hymen",
+                "Post-curettage amenorrhoea, cyclical pain without bleed, normal thelarche"
+              ],
+              [
+                "II: Ovary",
+                "Turner syndrome, premature ovarian insufficiency",
+                "Vasomotor hot flushes, night sweats, short stature, pubertal delay"
+              ],
+              [
+                "III: Anterior pituitary",
+                "Prolactinoma, Sheehan syndrome, adenoma",
+                "Galactorrhoea, headaches, visual defects, massive postpartum haemorrhage"
+              ],
+              [
+                "IV: Hypothalamus",
+                "Functional hypothalamic, Kallmann syndrome",
+                "Weight loss, rigorous exercise, severe stress, anosmia, absent thelarche"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "latrogenic and environmental triggers",
+          "body": "Intrauterine instrumentation, particularly curettage performed on a pregnant or postpartum uterus, damages the basal endometrium and triggers intrauterine synechiae (Asherman syndrome).\n\nPrescription dopamine antagonists such as metoclopramide, risperidone, and haloperidol disrupt hypothalamic dopamine inhibition, provoking hyperprolactinaemia with secondary amenorrhoea and galactorrhoea."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the clinical definition of primary amenorrhoea in an adolescent who has normal breast development?",
+          "a": "Absence of menarche by 15 years of age in the presence of normal secondary sexual characteristics and normal growth.",
+          "accept": [
+            "15",
+            "age 15",
+            "fifteen",
+            "secondary sexual characteristics",
+            "menarche"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does previous uterine curettage after a miscarriage or postpartum haemorrhage raise suspicion for secondary amenorrhoea?",
+          "a": "Vigorous curettage can injure the basal layer of the endometrium, producing fibrous intrauterine adhesions known as Asherman syndrome that obliterate the cavity.",
+          "accept": [
+            "basal",
+            "endometrium",
+            "adhesions",
+            "asherman",
+            "synechiae",
+            "cavity"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which medications commonly cause secondary amenorrhoea by antagonising dopamine receptors and elevating prolactin?",
+          "a": "Dopamine antagonists including antipsychotics such as risperidone and haloperidol, and antiemetics such as metoclopramide and domperidone.",
+          "accept": [
+            "antipsychotics",
+            "risperidone",
+            "metoclopramide",
+            "dopamine",
+            "prolactin",
+            "antiemetics"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r.hx.amenorrhoe.timeline",
+          "text": "Elicits chronological menstrual history, age of puberty, and establishes whether amenorrhoea is primary or secondary."
+        },
+        {
+          "id": "r.hx.amenorrhoe.etiology",
+          "text": "Systematically questions for uterine instrumentation, weight shifts, exercise, endocrine symptoms, and offending drugs."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "amenorrhoea_primary_secondary_turner_asherman: history and risk evaluation"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Amenorrhea: Clinical History and Evaluation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.amenorrhoe.case": {
+      "id": "skill.present.amenorrhoe.case",
+      "kind": "presentation",
+      "system": "obgyn",
+      "title": "Presenting the amenorrhoea case",
+      "oneLine": "Structured synthesised oral presentation of an amenorrhoea case from history and secondary sexual characteristics to anatomical compartment localisation and diagnostic plan",
+      "why": "A clear oral case presentation demonstrates clinical reasoning by categorising amenorrhoea as primary or secondary, localising the likely compartment (outflow, ovary, pituitary, or hypothalamus), and justifying a targeted investigation and management strategy.",
+      "teach": [
+        {
+          "heading": "Structure of the amenorrhoea case presentation",
+          "body": "Begin with patient demographics, chronological age, presenting complaint, and whether the condition represents primary or secondary amenorrhoea.\n\nState clearly whether secondary sexual characteristics (thelarche and pubarche) are present, delayed, or absent, as this immediately localises the hormonal failure."
+        },
+        {
+          "heading": "Synthesising history and physical examination",
+          "body": "Summarise key risk markers: previous intrauterine instrumentation, rapid weight changes, strenuous athletic training, galactorrhoea, headaches, or vasomotor flushes.\n\nPresent general physical examination findings: standing height centiles, body mass index, somatic stigmata (webbed neck, cubitus valgus), Tanner staging of breasts and pubic hair, and external genital inspection."
+        },
+        {
+          "heading": "Delivering the diagnostic formulation and plan",
+          "body": "Conclude with a provisional syndromic diagnosis, anatomical compartment localisation (outflow tract, ovary, pituitary, or hypothalamus), and differential diagnosis.\n\nOutline the targeted investigative sequence: urine pregnancy test, pelvic ultrasound, serum gonadotropins, prolactin, TSH, challenge tests, and karyotyping as clinically indicated."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the very first clinical discriminator that must be highlighted when presenting a case of primary amenorrhoea?",
+          "a": "The presence or absence of secondary sexual characteristics, particularly breast development (thelarche), which reflects prior ovarian estrogen production.",
+          "accept": [
+            "secondary sexual characteristics",
+            "thelarche",
+            "breast development",
+            "estrogen",
+            "breast"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How should you synthesise a presentation of a 16-year-old girl with primary amenorrhoea, short stature, and absent thelarche?",
+          "a": "Present as primary amenorrhoea with delayed puberty and short stature, localising provisionally to hypergonadotropic hypogonadism (Turner syndrome) or hypogonadotropic hypogonadism.",
+          "accept": [
+            "primary amenorrhoea",
+            "short stature",
+            "delayed puberty",
+            "turner",
+            "hypogonadism"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "When presenting secondary amenorrhoea in a woman following postpartum curettage, what compartment and syndrome should be prioritised?",
+          "a": "Compartment I (outflow tract and uterine cavity) and Asherman syndrome caused by traumatic intrauterine adhesions.",
+          "accept": [
+            "compartment i",
+            "outflow",
+            "asherman",
+            "adhesions",
+            "uterine cavity"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r.present.amenorrhoe.clarity",
+          "text": "Presents patient particulars, menarche status, pubertal stage, and clinical findings in a logical, structured sequence."
+        },
+        {
+          "id": "r.present.amenorrhoe.synthesis",
+          "text": "Synthesises clinical findings into anatomical compartments and justifies an evidence-based investigation pathway."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "amenorrhoea_primary_secondary_turner_asherman: case presentation"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Amenorrhea: Clinical Presentation and Evaluation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.endometria.risk": {
+      "id": "skill.hx.endometria.risk",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Risk factors and background history in endometrial carcinoma",
+      "oneLine": "Unopposed oestrogen, metabolic syndrome, tamoxifen, parity and Lynch syndrome history",
+      "why": "Endometrial carcinoma develops predominantly through chronic unopposed oestrogenic drive or mismatch repair defects. Taking a structured background history covering metabolic syndrome, reproductive milestones, exogenous hormone exposure, and family cancer clustering sets the pre-test probability before invasive tissue sampling.",
+      "asks": [
+        {
+          "topic": "Menopausal and reproductive milestones",
+          "detail": "Age at menarche, age at natural menopause, duration of regular cycles, and total duration of postmenopausal amenorrhoea."
+        },
+        {
+          "topic": "Obstetric and parity history",
+          "detail": "Number of pregnancies and deliveries, history of involuntary infertility, anovulatory cycles, or polycystic ovary syndrome."
+        },
+        {
+          "topic": "Exogenous hormone and medication exposures",
+          "detail": "Use of unopposed systemic oestrogen replacement therapy, sequential hormone therapy, or tamoxifen for breast cancer treatment."
+        },
+        {
+          "topic": "Metabolic comorbidities and body habitus",
+          "detail": "Duration and control of type 2 diabetes mellitus, systemic hypertension, and long-term weight trajectory or severe obesity."
+        },
+        {
+          "topic": "Family history of malignancy and Lynch syndrome",
+          "detail": "First-degree and second-degree relatives with colorectal, endometrial, ovarian, or upper urinary tract malignancies at early ages."
+        },
+        {
+          "topic": "Cervical screening and prior pelvic imaging",
+          "detail": "Timing and results of previous Pap smears, cervical screening, or pelvic ultrasonography for abnormal bleeding."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "The hyperoestrogenic metabolic triad",
+          "body": "Type 1 endometrioid adenocarcinoma accounts for roughly 80 percent of cases and arises from prolonged oestrogenic stimulation unopposed by progesterone.\n\nAdipose tissue converts circulating adrenal androstenedione into oestrone via peripheral aromatase activity. In obese women, this sustained endogenous oestrogen promotes continuous endometrial mitogenesis, moving from hyperplasia to invasive carcinoma."
+        },
+        {
+          "heading": "Clinical risk factors for endometrial neoplasia",
+          "table": {
+            "cols": [
+              "Risk Category",
+              "Specific Historical Factor",
+              "Mechanistic Basis",
+              "Relative Impact"
+            ],
+            "rows": [
+              [
+                "Endocrine",
+                "Early menarche and late menopause",
+                "Extended lifetime ovulatory and oestrogen exposure",
+                "Moderate increase"
+              ],
+              [
+                "Reproductive",
+                "Nulliparity and chronic anovulation / PCOS",
+                "Absence of protective gestational progesterone",
+                "Two-fold to three-fold"
+              ],
+              [
+                "Metabolic",
+                "Obesity (BMI > 30), type 2 diabetes, hypertension",
+                "Peripheral aromatisation and hyperinsulinaemia",
+                "Three-fold to four-fold"
+              ],
+              [
+                "Pharmacological",
+                "Tamoxifen therapy or unopposed oestrogen HRT",
+                "Partial oestrogen receptor agonism in the endometrium",
+                "Two-fold to six-fold"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Hereditary cancer syndromes and Lynch screening",
+          "body": "Approximately 3 percent of endometrial carcinomas occur in the setting of Lynch syndrome (hereditary non-polyposis colorectal cancer).\n\nGermline mutations in DNA mismatch repair genes (MLH1, MSH2, MSH6, PMS2) confer a 40 to 60 percent lifetime risk of endometrial cancer, often presenting before 50 years of age. A personal or family history of colorectal or uterine cancer mandates immunohistochemical mismatch repair screening."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which metabolic condition is most strongly associated with peripheral conversion of androgens to oestrone in postmenopausal women?",
+          "a": "Obesity increases peripheral aromatisation of androstenedione to oestrone in excess adipose tissue.",
+          "accept": [
+            "obesity",
+            "adipose tissue",
+            "aromatisation",
+            "oestrone",
+            "androstenedione"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does tamoxifen therapy for breast cancer raise the risk of developing endometrial carcinoma?",
+          "a": "Tamoxifen exerts paradoxical partial oestrogen receptor agonist activity on postmenopausal endometrium.",
+          "accept": [
+            "tamoxifen",
+            "agonist",
+            "oestrogen receptor",
+            "endometrium",
+            "paradoxical"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which autosomal dominant hereditary syndrome confers a 40 to 60 percent lifetime risk of endometrial cancer due to mismatch repair defects?",
+          "a": "Lynch syndrome, caused by germline mutations in DNA mismatch repair genes like MLH1, MSH2, MSH6, and PMS2.",
+          "accept": [
+            "lynch syndrome",
+            "mismatch repair",
+            "mlh1",
+            "msh2",
+            "msh6",
+            "pms2"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r1",
+          "text": "Identifies obesity and unopposed oestrogen as primary drivers of Type 1 endometrioid tumours."
+        },
+        {
+          "id": "r2",
+          "text": "Screens systematically for tamoxifen exposure, diabetes, nulliparity, and late menopause."
+        },
+        {
+          "id": "r3",
+          "text": "Recognises early-onset disease or family cancer clustering as indicators for Lynch syndrome evaluation."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "endometrial_cancer: clinicalPearls"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Endometrial cancer: risk factors and epidemiology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.endometria.case": {
+      "id": "skill.present.endometria.case",
+      "kind": "presentation",
+      "system": "obgyn",
+      "title": "Presenting the endometrial carcinoma case",
+      "oneLine": "Synthesise postmenopausal bleeding, metabolic risks, endometrial sampling and surgical plan for the consultant",
+      "why": "A postmenopausal bleeding case presentation is judged on whether the consultant can evaluate bleeding patterns, weigh metabolic risk factors, review transvaginal ultrasound thickness, interpret histology, and confirm surgical fitness from your concise summary.",
+      "teach": [
+        {
+          "heading": "Opening and the cardinal bleeding story",
+          "body": "Open with age, parity, and years since menopause, followed by the bleeding character in her own words: painless spotting or red blood, duration, volume, and absence of prior screening.\n\nState clearly that postmenopausal bleeding is never physiological and must always be investigated to exclude endometrial cancer. Follow with relevant risk factors: obesity, diabetes, hypertension, nulliparity, or tamoxifen therapy."
+        },
+        {
+          "heading": "Clinical examination and diagnostic findings",
+          "body": "Summarise general build, BMI, and vital signs, confirming cardiovascular stability and absence of lymphadenopathy or distant signs.\n\nDetail pelvic examination: speculum inspection ruling out primary cervical ulceration or vaginal growths, followed by bimanual findings of uterine size, mobility, and clear adnexa. Report transvaginal ultrasound endometrial thickness and biopsy histology."
+        },
+        {
+          "heading": "Structured closing and management proposal",
+          "body": "Conclude with a succinct provisional stage and action plan: well-differentiated endometrioid adenocarcinoma, clinical Stage I, scheduled for multidisciplinary review and primary surgical staging.\n\nOutline total hysterectomy with bilateral salpingo-oophorectomy, sentinel node mapping, and anaesthetic clearance for metabolic comorbidities."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the cardinal presenting symptom that must be highlighted in the opening sentence of an endometrial cancer presentation?",
+          "a": "Postmenopausal bleeding or abnormal per vaginal spotting in a postmenopausal woman.",
+          "accept": [
+            "postmenopausal bleeding",
+            "spotting",
+            "vaginal bleeding",
+            "bleeding"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Which transvaginal ultrasound measurement is critical to state when presenting the initial investigations?",
+          "a": "The endometrial thickness in millimetres, noting whether it exceeds the 4 mm postmenopausal threshold.",
+          "accept": [
+            "endometrial thickness",
+            "4 mm",
+            "four millimetres",
+            "millimetres",
+            "ultrasound"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What standard primary surgical staging procedure should be proposed in the management plan for clinical Stage I disease?",
+          "a": "Total hysterectomy with bilateral salpingo-oophorectomy, with sentinel lymph node mapping or pelvic lymphadenectomy.",
+          "accept": [
+            "total hysterectomy",
+            "bilateral salpingo-oophorectomy",
+            "salpingo-oophorectomy",
+            "sentinel lymph node",
+            "lymphadenectomy"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r1",
+          "text": "States age, parity, postmenopausal duration, and bleeding pattern with clarity in the opening sentence."
+        },
+        {
+          "id": "r2",
+          "text": "Presents transvaginal ultrasound endometrial thickness alongside histological biopsy subtype and grade."
+        },
+        {
+          "id": "r3",
+          "text": "Proposes primary surgical staging with total hysterectomy and bilateral salpingo-oophorectomy."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "endometrial_cancer: clinicalPearls"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline: Management of Endometrial Hyperplasia and Carcinoma"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.urinary.symptoms": {
+      "id": "skill.hx.urinary.symptoms",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "History of urinary incontinence symptoms and voiding patterns",
+      "oneLine": "Eliciting the phenotype, triggers, volume, diurnal frequency, urgency and pad usage in female urinary leakage",
+      "why": "Clinical history establishes the incontinence phenotype before examination or invasive testing. Separating effort-related leakage from sudden uninhibited urgency directs conservative rehabilitation, prevents inappropriate drug prescription, and quantifies personal hygiene and social impact.",
+      "asks": [
+        {
+          "topic": "Triggers and circumstances of urinary leakage",
+          "detail": "Determine whether urine leaks on coughing, sneezing, laughing, bending, lifting heavy objects, or walking, which indicates stress incontinence, versus leakage preceded by a sudden compelling desire to void that cannot be deferred, indicating urgency incontinence."
+        },
+        {
+          "topic": "Volume and velocity of urine loss",
+          "detail": "Ask whether the loss occurs as small synchronous squirts during physical exertion or as a continuous soaking flood where the bladder empties completely before the patient can reach a toilet."
+        },
+        {
+          "topic": "Diurnal frequency and nocturia",
+          "detail": "Record daytime voiding frequency (normal is up to seven times daily) and nocturia episodes (waking to void more than once at night). Increased frequency and nocturia strongly suggest detrusor overactivity or excessive fluid intake."
+        },
+        {
+          "topic": "Containment and pad usage",
+          "detail": "Document the type, number, and degree of saturation of pads or folded cloth used each day and night, skin excoriation from chronic dampness, and need to carry spare garments during daily travel."
+        },
+        {
+          "topic": "Voiding difficulty and sensation of incomplete emptying",
+          "detail": "Inquire about hesitancy, straining to initiate the stream, weak or intermittent stream, or the need to manually reduce an anterior vaginal bulge or lean forward to pass urine, suggesting pelvic organ prolapse or voiding dysfunction."
+        },
+        {
+          "topic": "Red flag symptoms",
+          "detail": "Screen for visible macroscopic haematuria, persistent pelvic or suprapubic pain, dysuria with fever, recurrent culture-proven urinary infections, or painless continuous urinary dribbling day and night that suggests a vesicovaginal fistula."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Differentiating stress and urgency phenotypes",
+          "body": "Stress urinary incontinence presents with involuntary leakage during sudden increases in intra-abdominal pressure such as coughing, laughing, sneezing, or lifting heavy loads.\n\nUrgency urinary incontinence is characterised by involuntary leakage immediately preceded by a sudden compelling desire to void that is difficult to defer. In mixed urinary incontinence, both components coexist, and treatment begins with the predominant symptom."
+        },
+        {
+          "heading": "Assessing severity and containment burden",
+          "body": "Severity is assessed by the frequency of wetting episodes, the volume lost, and the degree of disruption to occupational and social activities.\n\nAsk specifically about the number and wetness of sanitary pads or cloth pieces changed in twenty-four hours. Chronic dampness frequently causes vulval excoriation, secondary fungal intertrigo, sleep disturbance, and progressive social withdrawal."
+        },
+        {
+          "heading": "Red flag symptoms requiring fast-track referral",
+          "body": "Certain urinary presentations warrant urgent specialist referral rather than routine primary care management.\n\nVisible painless haematuria requires urgent exclusion of urothelial malignancy. Persistent pelvic pain, palpable pelvic masses, recurrent culture-positive infections, or continuous day and night leakage suggesting a urinary tract fistula demand expedited urological or urogynaecological assessment."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How does the symptom pattern differentiate stress urinary incontinence from urgency urinary incontinence?",
+          "a": "Stress incontinence features momentary leakage synchronous with physical exertion such as coughing or lifting, whereas urgency incontinence features involuntary loss preceded by a sudden compelling need to void.",
+          "accept": [
+            "cough",
+            "exertion",
+            "urgency",
+            "sudden"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A 52-year-old woman reports leakage on coughing as well as sudden rushes to the toilet with bedwetting. How should initial management be prioritized?",
+          "a": "Classify her presentation as mixed urinary incontinence, identify which component causes greater distress through a bladder diary, and direct initial conservative therapy at the predominant symptom.",
+          "accept": [
+            "mixed",
+            "bladder diary",
+            "predominant",
+            "conservative"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why must a history of continuous, painless urinary dribbling both day and night prompt speculum examination for fistula rather than urodynamic testing?",
+          "a": "Continuous day and night dribbling without prior urgency or strain points to an extraurethral bypass such as a vesicovaginal or ureterovaginal fistula, most commonly following obstructed labour or pelvic surgery.",
+          "accept": [
+            "fistula",
+            "vesicovaginal",
+            "continuous",
+            "obstructed labour"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r1",
+          "text": "Elicits exact leakage triggers, distinguishing exertion from sudden urgency"
+        },
+        {
+          "id": "r2",
+          "text": "Quantifies diurnal frequency, nocturia episodes, and twenty-four hour pad usage"
+        },
+        {
+          "id": "r3",
+          "text": "Screens thoroughly for red flags including visible haematuria, pain, and continuous dribbling"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pelvic_organ_prolapse_and_urinary_incontinence: Female urinary incontinence"
+        },
+        {
+          "source": "NICE",
+          "locator": "NG123: Assessment and initial management of urinary incontinence"
+        },
+        {
+          "source": "Berek",
+          "locator": "Berek and Novak's Gynecology: Urogynecology and Pelvic Reconstructive Surgery"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.urinary.risk": {
+      "id": "skill.hx.urinary.risk",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Risk factors and background history in female urinary incontinence",
+      "oneLine": "Systematic inquiry into obstetric trauma, intra-abdominal pressure, pelvic surgery, menopausal status, and contributing medications",
+      "why": "Female continence relies on endopelvic fascial attachments, intact pubourethral supports, pelvic floor muscle tone, and normal bladder innervation. Identifying reversible risk factors such as chronic cough, constipation, obesity, high-risk drugs, and oestrogen deficiency allows targeted correction before contemplating surgical repair.",
+      "asks": [
+        {
+          "topic": "Obstetric history and delivery trauma",
+          "detail": "Document parity, mode of deliveries, prolonged second stage of labour, instrumental vaginal delivery with forceps or vacuum, neonatal birth weight exceeding four kilograms, and third or fourth-degree perineal tears."
+        },
+        {
+          "topic": "Chronic increases in intra-abdominal pressure",
+          "detail": "Inquire about chronic cough from chronic obstructive pulmonary disease, asthma, or smoking, chronic constipation with daily straining, and occupational heavy lifting in manual or agricultural work."
+        },
+        {
+          "topic": "Prior gynaecological and pelvic surgery",
+          "detail": "Ask about previous hysterectomy, pelvic organ prolapse repair, prior continence procedures, or pelvic irradiation that may have compromised bladder neck support or scarred the urethral sphincter."
+        },
+        {
+          "topic": "Menopausal status and hypoestrogenism",
+          "detail": "Record age at menopause, years since last menses, and symptoms of genitourinary syndrome of menopause such as vaginal dryness, burning, dyspareunia, and recurrent urinary tract discomfort."
+        },
+        {
+          "topic": "Contributing medications",
+          "detail": "Review all concurrent drugs: loop or thiazide diuretics, angiotensin converting enzyme inhibitors producing dry cough, alpha-blockers relaxing urethral smooth muscle, sedatives, narcotics, and anticholinergics causing incomplete emptying."
+        },
+        {
+          "topic": "Systemic comorbidities and fluid intake",
+          "detail": "Evaluate type 2 diabetes mellitus with osmotic diuresis or diabetic neuropathy, neurological conditions like stroke, Parkinson disease, or lumbar spine injury, and daily intake of caffeinated tea, coffee, and carbonated beverages."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Obstetric trauma and pelvic floor denervation",
+          "body": "Vaginal childbirth is the single most important modifiable risk factor for stress incontinence. Vaginal distension and operative instrumentation can avulse levator ani attachments, stretch the endopelvic fascia, and cause stretch neuropraxia of the pudendal nerve.\n\nMultiparity, macrosomic infants weighing over four kilograms, and prolonged pushing during the second stage compound structural damage to the urethral suspension apparatus."
+        },
+        {
+          "heading": "Chronic intra-abdominal pressure and metabolic stress",
+          "body": "Repeated mechanical stress strains the endopelvic fascia and downwardly displaces the bladder neck below the pelvic diaphragm.\n\nChronic obstructive pulmonary disease, recurrent allergic bronchitis, persistent constipation with forceful defecatory straining, and occupational load bearing weaken pelvic collagen. Obesity directly increases baseline intravesical pressure and doubles the odds of daily urinary loss."
+        },
+        {
+          "heading": "Iatrogenic, pharmacological, and hormonal contributors",
+          "body": "Postmenopausal oestrogen deficiency causes mucosal atrophy of the distal urethra and reduces the mucosal seal that contributes one third of resting urethral closure pressure.\n\nDiuretics cause acute volume surges exceeding urethral resistance. Angiotensin converting enzyme inhibitors induce an intractable dry cough that worsens stress leaks, while alpha antagonists reduce urethral sphincter tone."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why is a detailed obstetric history essential when evaluating a multiparous woman with involuntary urine loss?",
+          "a": "Vaginal births, operative delivery, macrosomia, and prolonged second stage stretch or denervate the levator ani and pubourethral ligaments, predisposing to bladder neck hypermobility.",
+          "accept": [
+            "vaginal birth",
+            "levator ani",
+            "hypermobility",
+            "prolonged second stage"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How can an angiotensin converting enzyme inhibitor worsen urinary symptoms in a woman with borderline stress incontinence?",
+          "a": "ACE inhibitors induce a persistent bradykinin-mediated dry cough, generating recurrent intra-abdominal pressure spikes that overcome a weakened urethral closure mechanism.",
+          "accept": [
+            "cough",
+            "bradykinin",
+            "intra-abdominal pressure",
+            "urethral closure"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What role does postmenopausal hypoestrogenism play in the pathophysiology of female stress and urgency incontinence?",
+          "a": "Oestrogen loss causes thinning of the urethral mucosa, attenuates submucosal vascular cushions, reduces sensory thresholds in the bladder trigone, and predisposes to both effort leakage and urgency.",
+          "accept": [
+            "oestrogen",
+            "urethral mucosa",
+            "urgency",
+            "trigone"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r1",
+          "text": "Elicits parity, delivery modes, birth weights, and history of perineal trauma"
+        },
+        {
+          "id": "r2",
+          "text": "Investigates chronic pressure factors including cough, constipation, and occupational lifting"
+        },
+        {
+          "id": "r3",
+          "text": "Reviews medications and menopausal history that exacerbate bladder storage dysfunction"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pelvic_organ_prolapse_and_urinary_incontinence: Pathophysiology and risk factors"
+        },
+        {
+          "source": "Berek",
+          "locator": "Berek and Novak's Gynecology: Urogynecology and Pelvic Reconstructive Surgery"
+        },
+        {
+          "source": "NICE",
+          "locator": "NG123: Risk factors and conservative management"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.urinary.case": {
+      "id": "skill.present.urinary.case",
+      "kind": "presentation",
+      "system": "obgyn",
+      "title": "Presenting the case of female urinary incontinence",
+      "oneLine": "Structured synthesis of symptoms, obstetric background, physical signs, and initial non-surgical plan for the clinician",
+      "why": "A structured presentation communicates whether the patient has stress, urgency, or mixed incontinence, and highlights contributing systemic or pelvic conditions. It shows the examiner that the clinician has excluded red flags, confirmed pelvic floor muscle voluntary control, and chosen evidence-based conservative steps before surgical referral.",
+      "teach": [
+        {
+          "heading": "Synthesising the clinical picture and problem representation",
+          "body": "Open with patient age, parity, menopausal status, and duration of symptoms. State whether the primary complaint is stress leakage on exertion, sudden urgency leakage, or a mixed symptom picture.\n\nSummarise twenty-four hour pad usage, day and night voiding frequencies from the bladder diary, and relevant obstetric trauma, chronic cough, constipation, or medications like diuretics."
+        },
+        {
+          "heading": "Presenting physical findings and the initial management strategy",
+          "body": "Report body mass index, mobility, and abdominal examination excluding masses. On pelvic examination, state vulval skin health, the result of the cough stress test, the presence and stage of any coexisting pelvic organ prolapse, and voluntary levator ani contraction strength.\n\nConclude with negative dipstick findings, normal post-void residual, and a step-wise plan starting with supervised pelvic floor muscle training or bladder drill."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the key elements required in the opening sentence of a gynaecological case presentation for urinary incontinence?",
+          "a": "State the patient age, parity, menopausal status, primary symptom phenotype (stress, urgency, or mixed), duration, and daily pad requirement or degree of lifestyle limitation.",
+          "accept": [
+            "age",
+            "parity",
+            "menopausal",
+            "pad"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How should you present the physical examination findings of a woman with suspected stress urinary incontinence?",
+          "a": "Report abdominal palpation to exclude pelvic masses, vulval skin condition, direct visualisation of leakage during the cough stress test, POP-Q staging of any prolapse, and digital assessment of pelvic floor contraction.",
+          "accept": [
+            "cough stress test",
+            "prolapse",
+            "pelvic floor",
+            "pelvic mass"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How do you justify starting conservative therapy rather than immediate surgical referral during case presentation?",
+          "a": "Current guidelines mandate at least three months of supervised pelvic floor muscle training as first-line therapy for stress incontinence, as up to seventy percent of motivated women achieve significant symptom cure or improvement without surgical risk.",
+          "accept": [
+            "pelvic floor muscle training",
+            "three months",
+            "first-line",
+            "supervised"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r1",
+          "text": "Delivers a clear opening statement classifying incontinence phenotype and functional severity"
+        },
+        {
+          "id": "r2",
+          "text": "Summarises pertinent obstetric history, pressure factors, and medication review"
+        },
+        {
+          "id": "r3",
+          "text": "Presents examination findings accurately including cough stress test, prolapse stage, and pelvic floor tone"
+        },
+        {
+          "id": "r4",
+          "text": "Proposes an evidence-based initial conservative management plan grounded in guidelines"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pelvic_organ_prolapse_and_urinary_incontinence: Clinical evaluation"
+        },
+        {
+          "source": "Berek",
+          "locator": "Berek and Novak's Gynecology: Urogynecology and Pelvic Reconstructive Surgery"
+        },
+        {
+          "source": "RCOG",
+          "locator": "RCOG: Management of Urinary Incontinence in Women"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gestationa.risk": {
+      "id": "skill.hx.gestationa.risk",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Risk factors and background history in gestational trophoblastic disease",
+      "oneLine": "Eliciting extremes of maternal age, prior molar pregnancy, dietary deficiencies, and previous pregnancy loss",
+      "why": "Identifying predisposing epidemiological and reproductive risk factors alerts the clinician to the possibility of molar pregnancy, facilitating early sonographic and biochemical confirmation before complications supervene.",
+      "asks": [
+        {
+          "text": "Maternal age at conception: How old are you? Extremes of reproductive age, particularly adolescent pregnancies under sixteen and advanced maternal age over forty years, have a markedly increased risk of complete hydatidiform mole."
+        },
+        {
+          "text": "Prior molar pregnancy: Have you ever been diagnosed with a molar pregnancy or had an evacuation for grape-like tissue before? A previous molar gestation increases the recurrence risk to approximately one to two percent, and up to fifteen to twenty percent after two previous moles."
+        },
+        {
+          "text": "Previous pregnancy history and miscarriages: What were the outcomes of your previous pregnancies, including any miscarriages, terminations, or ectopic gestations? Antecedent spontaneous miscarriage is associated with a slightly elevated risk of molar gestations."
+        },
+        {
+          "text": "Dietary and nutritional background: What is your typical daily diet? Severe dietary deficiency of dietary carotene, animal fat, and vitamin A has been linked to an increased risk of complete molar pregnancy in observational studies."
+        },
+        {
+          "text": "Contraceptive history: What contraception were you using prior to this pregnancy? Establishing previous use of oral contraceptives or barrier methods helps clarify cycle baseline and exclude retained intrauterine devices."
+        },
+        {
+          "text": "Ethnic and geographical background: Where were you born and where have you lived? Populations in Southeast Asia and parts of Latin America have a higher reported incidence of gestational trophoblastic disease compared to Western populations."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Epidemiological risk factors for molar gestation",
+          "body": "The two strongest risk factors for hydatidiform mole are maternal age and a previous history of gestational trophoblastic disease.\n\nWomen younger than sixteen years face an elevated risk, while women older than forty years face a five to ten fold higher risk compared to those aged twenty to thirty-five. Over age fifty, the risk rises substantially.\n\nA previous molar pregnancy carries a recurrence risk of one to two percent, rising to fifteen to twenty percent after two previous molar gestations."
+        },
+        {
+          "heading": "Nutritional, genetic, and geographic determinants",
+          "body": "Complete hydatidiform mole occurs with higher frequency in Asian populations and developing countries, partly attributed to nutritional disparities including low dietary carotene and animal fat intake.\n\nPartial moles, by contrast, show much less variation with age and nutritional factors. Recurrent familial biparental complete moles are linked to autosomal recessive mutations in NLRP7 or KHDC3L genes."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the single most important reproductive demographic risk factor for complete hydatidiform mole?",
+          "a": "Advanced maternal age over forty years, and to a lesser extent adolescent pregnancy under sixteen years.",
+          "accept": [
+            "maternal age",
+            "advanced maternal age",
+            "age",
+            "extremes of age",
+            "over forty"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the recurrence risk of a molar pregnancy after a single previous hydatidiform mole?",
+          "a": "The recurrence risk is approximately one to two percent, which is about ten to twenty times higher than the baseline population risk.",
+          "accept": [
+            "one to two percent",
+            "1 to 2",
+            "1-2%",
+            "recurrence",
+            "ten times"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which dietary deficiencies have been linked to an increased frequency of complete hydatidiform mole?",
+          "a": "Deficiency of dietary beta carotene, vitamin A, and animal fat.",
+          "accept": [
+            "carotene",
+            "beta carotene",
+            "vitamin a",
+            "animal fat",
+            "dietary"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gestational_trophoblastic_disease: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Gestational Trophoblastic Disease: Epidemiology and Risk Factors"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.gestationa.case": {
+      "id": "skill.present.gestationa.case",
+      "kind": "presentation",
+      "system": "obgyn",
+      "title": "Presenting the gestational trophoblastic disease case",
+      "oneLine": "Structured bedside presentation of molar pregnancy synthesising history, uterine size discrepancy, ultrasound appearance, hCG level, and evacuation plan",
+      "why": "In gynaecological practice, a clear and concise case presentation rapidly conveys the severity of symptoms, haemodynamic status, biochemical and sonographic confirmation, and the multidisciplinary plan for suction evacuation and serial surveillance.",
+      "teach": [
+        {
+          "heading": "The sixty-second molar pregnancy presentation",
+          "body": "Open with patient age, parity, gravidity, and exact gestational age calculated from the last menstrual period.\n\nState the presenting complaints clearly, noting the duration and character of vaginal bleeding, passage of vesicles, and severity of hyperemesis.\n\nSummarise examination findings, highlighting the discrepancy between uterine fundal height and gestational dates, absence of fetal heart sounds, and any bilateral adnexal theca lutein cysts."
+        },
+        {
+          "heading": "Investigations and immediate management strategy",
+          "body": "Report quantitative serum beta-hCG, pelvic ultrasound findings showing the characteristic vesicular pattern without fetal parts, and baseline haematological, thyroid, and renal labs.\n\nConclude with the definitive management plan: suction evacuation under ultrasound guidance, avoidance of pre-evacuation oxytocics, anti-D prophylaxis for Rh-negative status, and structured post-evacuation serial hCG surveillance."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What opening details must be communicated immediately when presenting a suspected molar pregnancy?",
+          "a": "Patient age, parity, gestational age by dates, haemodynamic stability, and the presence of vaginal bleeding or passage of vesicular tissue.",
+          "accept": [
+            "age",
+            "parity",
+            "gestational age",
+            "haemodynamic",
+            "bleeding",
+            "vesicles"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which examination and ultrasound findings should you highlight to support a complete hydatidiform mole?",
+          "a": "Uterine size significantly larger than dates, absence of fetal parts or fetal heart tones, bilateral ovarian theca lutein cysts, and the classic snowstorm or vesicular pattern on ultrasound.",
+          "accept": [
+            "larger than dates",
+            "size discrepancy",
+            "snowstorm",
+            "vesicles",
+            "theca lutein",
+            "absent fetal heart"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What critical points must be stated regarding the evacuation and follow-up plan?",
+          "a": "Suction evacuation under ultrasound guidance, withholding oxytocic infusions until evacuation has begun, administering anti-D if Rh-negative, and enrolling in serial quantitative hCG follow-up with reliable contraception.",
+          "accept": [
+            "suction evacuation",
+            "oxytocic",
+            "anti-d",
+            "rh negative",
+            "serial hcg",
+            "contraception"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r.present.gestationa.opener",
+          "text": "States age, gravidity, parity, and gestational age alongside haemodynamic stability and key symptoms."
+        },
+        {
+          "id": "r.present.gestationa.findings",
+          "text": "Accurately highlights uterine size discrepancy, absence of fetal heart, and bilateral theca lutein cysts."
+        },
+        {
+          "id": "r.present.gestationa.workup",
+          "text": "Quotes quantitative beta-hCG, pathognomonic ultrasound features, and baseline organ function labs."
+        },
+        {
+          "id": "r.present.gestationa.plan",
+          "text": "Justifies suction evacuation technique, anti-D prophylaxis, and post-molar serial hCG follow-up protocol."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gestational_trophoblastic_disease: management"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline No. 38: Management of Gestational Trophoblastic Disease"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.cervical.risk": {
+      "id": "skill.hx.cervical.risk",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Risk factors and background history in cervical neoplasia",
+      "oneLine": "Detailed inquiry into sexual debut, parity, tobacco exposure, immunosuppression, screening timeline, and vaccination status",
+      "why": "Cervical intraepithelial neoplasia arises almost exclusively from persistent infection with oncogenic HPV types. Systematically assessing co-factors that impair viral clearance or promote cellular transformation directly guides risk estimation, screening intervals, and colposcopic urgency.",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "asks": [
+        {
+          "topic": "Age at sexual debut and lifetime sexual exposures",
+          "detail": "Age at first sexual intercourse, number of lifetime partners, and history of high-risk partners, reflecting duration and likelihood of oncogenic HPV exposure during periods of active cervical metaplasia."
+        },
+        {
+          "topic": "Cervical screening history and past cytological abnormalities",
+          "detail": "Timing and method of previous screening tests (Pap smear, liquid-based cytology, VIA, or HPV DNA testing), past abnormal results, colposcopies, or cervical excisional treatments."
+        },
+        {
+          "topic": "Prophylactic HPV vaccination status",
+          "detail": "Whether the woman received bivalent, quadrivalent, or 9-valent HPV vaccine, number of doses completed, and timing relative to sexual debut."
+        },
+        {
+          "topic": "Immunosuppression and HIV exposure",
+          "detail": "Documented HIV infection, CD4 cell count, antiretroviral therapy compliance, history of solid organ transplantation, or prolonged use of systemic corticosteroids or immunosuppressive drugs."
+        },
+        {
+          "topic": "Tobacco use and duration of exposure",
+          "detail": "Cigarette smoking or smokeless tobacco use, daily quantity, and pack-years; tobacco metabolites concentrate in cervical mucus and impair local Langerhans cell immune surveillance."
+        },
+        {
+          "topic": "Obstetric and contraceptive history",
+          "detail": "High parity (three or more full-term deliveries) and long-term use of combined oral contraceptives (five or more years), both recognised biological co-factors for cervical neoplasia."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Oncogenic HPV exposure and host co-factors",
+          "body": "High-risk human papillomavirus (hrHPV), particularly genotypes 16 and 18, is the necessary causal agent for cervical precancer. However, most acute infections clear spontaneously within 12 to 24 months through effective cell-mediated immunity.\n\nProgression to cervical intraepithelial neoplasia requires persistent viral infection. Host co-factors such as tobacco smoking, multiparity, oral contraceptive use, and coinfection with Chlamydia trachomatis accelerate viral persistence."
+        },
+        {
+          "heading": "Immunosuppression and high-risk screening intervals",
+          "body": "Women living with HIV experience substantially higher rates of persistent HPV infection, rapid progression to high-grade lesions, and recurrence following treatment.\n\nWorld Health Organization guidelines mandate screening women living with HIV from age 25 rather than age 30, with shorter re-screening intervals of 3 to 5 years rather than 5 to 10 years."
+        },
+        {
+          "heading": "Key risk factors and biological mechanisms",
+          "table": {
+            "cols": [
+              "Risk Factor",
+              "Biological Mechanism",
+              "Clinical Impact"
+            ],
+            "rows": [
+              [
+                "Early sexual debut (<18 years)",
+                "Active physiological metaplasia is highly vulnerable to viral DNA integration",
+                "Increased lifetime risk of persistent oncogenic infection"
+              ],
+              [
+                "Tobacco smoking",
+                "Cotinin concentrates in mucus and depletes local dendritic cells",
+                "Twofold increase in squamous cell precancer progression"
+              ],
+              [
+                "HIV / Immunosuppression",
+                "Impaired T-cell immunity prevents physiological HPV clearance",
+                "Accelerated transit from CIN 1 to invasive carcinoma"
+              ],
+              [
+                "Multiparity (>=3 births)",
+                "Cervical trauma and hormone-mediated eversion of transformation zone",
+                "Increased long-term risk of high-grade CIN"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why does tobacco smoking increase the risk of cervical intraepithelial neoplasia?",
+          "a": "Tobacco carcinogens and cotinine concentrate in cervical mucus and depress local cell-mediated immunity and Langerhans cells, doubling the risk of persistent oncogenic HPV infection and progression to CIN.",
+          "accept": [
+            "carcinogens",
+            "mucus",
+            "immunity",
+            "persistent",
+            "hpv"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How does the screening protocol differ for a woman living with HIV compared to the general population?",
+          "a": "Women living with HIV should initiate cervical screening earlier at age 25 rather than 30, and undergo screening every 3 to 5 years rather than every 5 to 10 years, because of higher persistence and rapid progression.",
+          "accept": [
+            "25",
+            "3 to 5",
+            "earlier",
+            "persistence",
+            "progression"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What role does prophylactic HPV vaccination history play when interpreting an abnormal screening test?",
+          "a": "Vaccination dramatically lowers the baseline probability of HPV 16 and 18 infection if given before sexual debut, but vaccinated women can still acquire non-vaccine oncogenic types and still require standard screening.",
+          "accept": [
+            "vaccination",
+            "sexual debut",
+            "screening",
+            "non-vaccine"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r.hx.cervical.1",
+          "text": "Elicits detailed sexual debut, screening history, and past cervical abnormalities"
+        },
+        {
+          "id": "r.hx.cervical.2",
+          "text": "Explores tobacco consumption, parity, contraceptive exposure, and HIV or immunosuppressive history"
+        },
+        {
+          "id": "r.hx.cervical.3",
+          "text": "Correctly identifies populations requiring intensified screening schedules according to national and international guidelines"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cervix_uterus_hpv_endometrial_leiomyoma: HPV, Bethesda and screening"
+        },
+        {
+          "source": "WHO",
+          "locator": "WHO guideline for screening and treatment of cervical pre-cancer lesions, 2nd ed, 2021"
+        },
+        {
+          "source": "Berek",
+          "locator": "Berek and Novak's Gynecology, 16th ed: Cervical Intraepithelial Neoplasia"
+        }
+      ]
+    },
+    "skill.present.cervical.case": {
+      "id": "skill.present.cervical.case",
+      "kind": "presentation",
+      "system": "obgyn",
+      "title": "Presenting the cervical screening and colposcopy case",
+      "oneLine": "Delivering a structured clinical presentation of a patient evaluated for an abnormal cervical screening test",
+      "why": "Presenting a cervical screening case demands concise integration of screening modality, cytology result, high-risk HPV genotype, transformation zone visibility, colposcopic impression, and histological biopsy findings to formulate an evidence-based management plan.",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "teach": [
+        {
+          "heading": "Structure of a cervical screening case presentation",
+          "body": "Begin with the patient's age, parity, and reason for referral: either routine screening or evaluation of red-flag symptoms such as postcoital bleeding.\n\nState the primary screening modality, the precise cytological category under Bethesda 2014, and whether high-risk HPV testing is positive, specifying genotype 16 or 18 if available."
+        },
+        {
+          "heading": "Articulating colposcopic assessment and biopsy findings",
+          "body": "Specify whether the examination was adequate and identify the transformation zone type (Type 1, 2, or 3). Describe acetowhite density, margin sharpness, and vascular patterns.\n\nSummarise the histological biopsy result, whether microinvasion is excluded, and state whether the recommended management is observation, ablative therapy, or excisional procedure (LLETZ)."
+        },
+        {
+          "heading": "Model clinical summary format",
+          "table": {
+            "cols": [
+              "Presentation Section",
+              "Critical Information",
+              "Clinical Decision Point"
+            ],
+            "rows": [
+              [
+                "Demographics and Risk",
+                "Age, parity, HIV status, smoking, and prior screening history",
+                "Determines baseline risk of invasive malignancy"
+              ],
+              [
+                "Screening Index Results",
+                "Cytology (Bethesda) and hrHPV DNA status with 16/18 genotyping",
+                "Indicates threshold for colposcopic referral"
+              ],
+              [
+                "Colposcopic Evaluation",
+                "Transformation zone type, acetowhite features, vascular signs",
+                "Validates examination adequacy and guides biopsy"
+              ],
+              [
+                "Histology and Plan",
+                "Punch biopsy diagnosis, ECC result, and proposed management",
+                "Selects between observation, ablation, and excision"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What essential elements must be articulated when presenting a patient referred for an abnormal cervical screening test?",
+          "a": "The presentation must state patient age and parity, indication for screening, exact cytology category, high-risk HPV status, transformation zone type, colposcopic impression, and histological biopsy results.",
+          "accept": [
+            "age",
+            "cytology",
+            "hpv",
+            "transformation zone",
+            "colposcopic",
+            "biopsy"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "How does failure to visualise the entire transformation zone influence your management recommendation during case presentation?",
+          "a": "If the transformation zone is Type 3 or not fully visible, colposcopy is incomplete and ablative therapy is contraindicated; an excisional procedure such as LLETZ or conization is required to evaluate the endocervical canal.",
+          "accept": [
+            "type 3",
+            "incomplete",
+            "ablative",
+            "contraindicated",
+            "excisional",
+            "conization"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r.present.cervical.1",
+          "text": "Presents age, screening background, cytology classification, and HPV genotype with precision"
+        },
+        {
+          "id": "r.present.cervical.2",
+          "text": "Clearly communicates transformation zone type, colposcopic findings, and biopsy location"
+        },
+        {
+          "id": "r.present.cervical.3",
+          "text": "Formulates a reasoned treatment recommendation supported by clinical guidelines"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cervix_uterus_hpv_endometrial_leiomyoma: HPV, Bethesda and screening"
+        },
+        {
+          "source": "Berek",
+          "locator": "Berek and Novak's Gynecology, 16th ed: Cervical Intraepithelial Neoplasia"
+        },
+        {
+          "source": "RCOG",
+          "locator": "RCOG / BSCCP Guidelines: Colposcopy and Management of Cervical Pre-invasive Lesions"
+        }
+      ]
+    },
+    "skill.hx.contracept.risk": {
+      "id": "skill.hx.contracept.risk",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Medical eligibility and risk factor screening in contraception",
+      "oneLine": "Systematic inquiry into cardiovascular risks, thromboembolism, migraine aura, smoking, and postpartum timing",
+      "why": "Medical eligibility screening prevents serious, preventable morbidity from hormonal and intrauterine methods. Proactive inquiry into blood pressure, thromboembolic history, focal neurological aura, smoking over age 35, and postpartum lactation timing determines whether combined hormonal contraception, progestogen-only methods, or intrauterine devices are safe under WHO and national guidelines.",
+      "asks": [
+        {
+          "topic": "Cardiovascular risk and blood pressure status",
+          "detail": "Inquire whether blood pressure has ever been measured high, history of hypertension in pregnancy, ischaemic heart disease, stroke, or peripheral vascular symptoms."
+        },
+        {
+          "topic": "Venous thromboembolism and familial clotting disorders",
+          "detail": "Ask specifically about personal history of deep vein thrombosis, pulmonary embolism, unexplained leg swelling, or known thrombogenic mutations in first-degree relatives."
+        },
+        {
+          "topic": "Headache patterns and neurological aura",
+          "detail": "Clarify headache characteristics, distinguishing common tension headache from migraine with aura such as flashing zigzag lights, scotoma, or unilateral motor or sensory tingling."
+        },
+        {
+          "topic": "Tobacco use, quantity, and age interaction",
+          "detail": "Determine exact age and whether the client smokes cigarettes or uses tobacco products, quantifying daily intake to establish the age 35 threshold."
+        },
+        {
+          "topic": "Obstetric timing and lactation status",
+          "detail": "Record the date of last delivery, whether currently breastfeeding, the degree of exclusivity, and the timing of postpartum recovery."
+        },
+        {
+          "topic": "Gynaecological symptoms and infection risks",
+          "detail": "Screen for unexplained abnormal uterine bleeding, dyspareunia, purulent vaginal discharge, or recent diagnosis of sexually transmitted infection."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Categorising safety with medical eligibility criteria",
+          "body": "The World Health Organization and national guidelines divide medical conditions into four categories.\n\nCategory 1 represents no restriction for method use. Category 2 indicates that advantages generally outweigh theoretical or proven risks.\n\nCategory 3 denotes conditions where risks usually outweigh advantages, requiring expert clinical judgment. Category 4 represents an unacceptable health risk where the method must not be used."
+        },
+        {
+          "heading": "High-yield Category 4 conditions for combined hormonal methods",
+          "table": {
+            "cols": [
+              "Clinical Condition",
+              "MEC Category",
+              "Pathophysiological Basis",
+              "Safe Alternative"
+            ],
+            "rows": [
+              [
+                "Migraine with aura",
+                "Category 4",
+                "Increased ischaemic stroke risk from oestrogen",
+                "Progestogen-only or Cu-IUD"
+              ],
+              [
+                "Age 35 or more smoking 15+ cigs",
+                "Category 4",
+                "Synergistic arterial thrombosis and myocardial infarction",
+                "Subdermal implant or LNG-IUS"
+              ],
+              [
+                "Current or past DVT or PE",
+                "Category 4",
+                "Prothrombotic hepatic coagulation protein synthesis",
+                "Copper IUD or POP"
+              ],
+              [
+                "Postpartum < 6 weeks breastfeeding",
+                "Category 4",
+                "Early postpartum hypercoagulability and neonatal impact",
+                "Progestogen implant or POP"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Specific contraindications to intrauterine devices",
+          "body": "Intrauterine contraceptive devices (copper IUD and levonorgestrel-releasing system) must not be inserted in the presence of unexplained vaginal bleeding before full evaluation.\n\nCurrent pelvic inflammatory disease, purulent cervicitis, or puerperal sepsis represents Category 4 for initiation.\n\nKnown uterine cavity distortion from large submucosal fibroids also precludes reliable retention and placement."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why is migraine with aura classified as WHO Category 4 for combined oral contraceptives?",
+          "a": "Oestrogen in combined hormonal contraception significantly increases the risk of ischaemic stroke in patients with migraine with aura.",
+          "accept": [
+            "stroke",
+            "ischaemic",
+            "oestrogen",
+            "estrogen",
+            "thrombosis",
+            "arterial"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A 36-year-old woman smokes 18 cigarettes a day. Which contraceptive method class is absolutely contraindicated?",
+          "a": "Combined hormonal contraception including combined oral contraceptive pills, transdermal patch, and combined vaginal ring is Category 4.",
+          "accept": [
+            "combined",
+            "oestrogen",
+            "cocp",
+            "patch",
+            "ring",
+            "category 4"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A woman 3 weeks postpartum who is exclusively breastfeeding requests contraception. Why is combined hormonal contraception contraindicated?",
+          "a": "It is Category 4 in the first six weeks postpartum during lactation due to increased venous thromboembolism risk and potential interference with early milk production.",
+          "accept": [
+            "six weeks",
+            "6 weeks",
+            "thromboembolism",
+            "clot",
+            "vte",
+            "milk",
+            "lactation",
+            "category 4"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "bp",
+          "text": "Screens for hypertension and cardiovascular risk factors"
+        },
+        {
+          "id": "vte",
+          "text": "Inquires about deep vein thrombosis and pulmonary embolism"
+        },
+        {
+          "id": "migraine",
+          "text": "Differentiates migraine with neurological aura from simple headache",
+          "critical": true
+        },
+        {
+          "id": "smoking",
+          "text": "Quantifies smoking status relative to age 35 threshold"
+        },
+        {
+          "id": "postpartum",
+          "text": "Assesses delivery date and breastfeeding status"
+        },
+        {
+          "id": "bleeding",
+          "text": "Screens for unexplained vaginal bleeding and pelvic infection"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "infertility_and_contraception: Medical eligibility and risk factor screening"
+        },
+        {
+          "source": "WHO",
+          "locator": "Medical Eligibility Criteria for Contraceptive Use (5th Edition), Category Classifications and Recommendations"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.contracept.case": {
+      "id": "skill.present.contracept.case",
+      "kind": "presentation",
+      "system": "obgyn",
+      "title": "Presenting the contraception counselling consultation",
+      "oneLine": "Structured case presentation synthesizing parity, reproductive goals, eligibility category, and shared decision-making",
+      "why": "Presenting a contraceptive consultation to examiners or colleagues requires a concise synthesis of obstetric history, medical co-morbidities, contraindicated methods, and the rationale for the mutually agreed contraceptive choice. A systematic summary demonstrates clinical safety and respect for patient autonomy.",
+      "teach": [
+        {
+          "heading": "The three-step structure of a contraceptive case presentation",
+          "body": "A professional contraceptive presentation begins with demographics, parity, and the client's stated reproductive plan (spacing versus limiting).\n\nThe second step summarizes the medical screening findings, highlighting any condition that dictates a Category 3 or 4 restriction.\n\nThe final step presents the candidate methods discussed, the client's informed preference, and the implementation plan."
+        },
+        {
+          "heading": "Standard format for presenting the clinical recommendation",
+          "points": [
+            "State age, parity, living children, and age of the youngest infant.",
+            "State the client's desired spacing interval or desire for permanent limiting.",
+            "Present key medical eligibility findings: blood pressure, smoking, aura, thrombotic history.",
+            "Explain why contraindicated methods were set aside.",
+            "Present the selected method, pre-initiation findings, and planned follow-up."
+          ]
+        },
+        {
+          "heading": "Articulating non-contraceptive benefits and side-effect counselling",
+          "body": "When presenting the chosen method, articulate relevant therapeutic non-contraceptive benefits, such as dysmenorrhoea relief or reduction of menstrual flow with the levonorgestrel intrauterine system.\n\nConfirm that anticipatory counselling on common bleeding pattern changes was delivered, ensuring long-term adherence and reassurance."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What core components must be included in the opening sentence of a contraceptive case presentation?",
+          "a": "Age, parity, age of youngest child, current lactation or pregnancy status, and primary reproductive goal (spacing versus limiting).",
+          "accept": [
+            "age",
+            "parity",
+            "youngest",
+            "spacing",
+            "limiting",
+            "goal"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "How should you present the rationale for choosing the levonorgestrel intrauterine system in a woman with heavy menstrual bleeding?",
+          "a": "State that it provides Tier 1 long-acting reversible contraception with typical failure under 1%, while offering therapeutic reduction of menstrual blood loss by up to 90%.",
+          "accept": [
+            "tier 1",
+            "larc",
+            "menstrual",
+            "blood loss",
+            "reduction",
+            "heavy",
+            "failure"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What must you highlight in the presentation if the client chooses an injectable or implant progestogen method?",
+          "a": "Highlight that anticipatory counselling regarding unscheduled bleeding, spotting, or eventual amenorrhoea was provided to ensure continuation.",
+          "accept": [
+            "bleeding",
+            "spotting",
+            "amenorrhoea",
+            "counselling",
+            "continuation",
+            "counsel"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "demographics",
+          "text": "Presents age, parity, and reproductive intentions clearly"
+        },
+        {
+          "id": "eligibility",
+          "text": "Summarizes medical eligibility criteria and contraindications",
+          "critical": true
+        },
+        {
+          "id": "rationale",
+          "text": "Explains clinical reasoning for chosen method over alternatives"
+        },
+        {
+          "id": "counselling",
+          "text": "Reports anticipatory side-effect and bleeding counselling"
+        },
+        {
+          "id": "plan",
+          "text": "Outlines initiation timing, backup method, and follow-up"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "infertility_and_contraception: Contraceptive case presentation"
+        },
+        {
+          "source": "FOGSI",
+          "locator": "Good Clinical Practice Recommendations on Contraceptive Counselling and Clinical Case Presentation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }

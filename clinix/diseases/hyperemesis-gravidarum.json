@@ -1,0 +1,1442 @@
+{
+  "_comment": "CliniX disease pathway: Hyperemesis gravidarum (obstetrics). Grounded in StewardMD Clinical KB and Williams/RCOG guidelines.",
+  "id": "hyperemesis-gravidarum",
+  "name": "Hyperemesis gravidarum",
+  "fullName": "Hyperemesis gravidarum",
+  "subtitle": "Early pregnancy vomiting",
+  "system": "obgyn",
+  "kbRef": "hyperemesis_gravidarum",
+  "oneLine": "Intractable early pregnancy nausea and vomiting causing dehydration, ketosis, weight loss, and metabolic derangements",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics of hyperemesis gravidarum",
+      "skills": [
+        "skill.hyperemesi.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In early pregnancy vomiting, note age, primigravida status, occupation, and home support; young nulliparous women and those lacking domestic support are at increased risk of delayed presentation and severe dehydration."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.booking_lmp",
+        "skill.hx.hyperemesi.symptoms"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical hyperemesis presentation reads in days to weeks: persistent nausea and vomiting 10 to 15 times daily starting at 6 to 8 weeks, with complete inability to retain oral fluids for 24 to 48 hours."
+        },
+        "skill.hx.obg.booking_lmp": {
+          "expect": "Establish exact gestational age by reliable LMP or ultrasound; hyperemesis peaks between 8 and 11 weeks and typically settles by 16 to 20 weeks."
+        },
+        "skill.hx.hyperemesi.symptoms": {
+          "expect": "Document vomiting frequency, absence of oral fluid tolerance, percentage weight loss exceeding five percent, reduced urinary frequency with dark urine, and screen for Wernicke encephalopathy and haematemesis."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "skills": [
+        "skill.hx.obg.medical_family_drug",
+        "skill.hx.obg.previous_pregnancies",
+        "skill.hx.hyperemesi.risk"
+      ],
+      "emphasis": {
+        "skill.hx.hyperemesi.risk": {
+          "expect": "Ask about hyperemesis in previous pregnancies (up to 80 percent recurrence), family history in mother or sisters, multiple pregnancy, molar pregnancy, and stop oral iron supplements immediately."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema",
+        "skill.gen.cyanosis"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for visible exhaustion, sunken eyes, dry furred tongue, dry mucous membranes, loss of skin turgor, and ketotic breath odour."
+        },
+        "skill.gen.vitals": {
+          "expect": "Check for resting tachycardia and postural hypotension; an orthostatic drop in blood pressure with compensatory tachycardia signifies significant intravascular hypovolaemia."
+        },
+        "skill.gen.edema": {
+          "expect": "Absence of peripheral oedema is standard; check for delayed capillary refill time exceeding two seconds as a sign of peripheral hypoperfusion."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Obstetric and abdominal examination",
+      "skills": [
+        "skill.exam.obg.preg_prep_inspect",
+        "skill.exam.obg.fundal_height"
+      ],
+      "emphasis": {
+        "skill.exam.obg.fundal_height": {
+          "expect": "In early pregnancy under 12 weeks, the uterus is pelvic and should not be palpable above the symphysis pubis; a fundus palpable above dates suggests multiple gestation or gestational trophoblastic disease (hydatidiform mole)."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the hyperemesis gravidarum picture together",
+      "skills": [
+        "skill.hyperemesi.signs",
+        "skill.annex.hyperemesi.puqe"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "skills": [
+        "skill.hyperemesi.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "skills": [
+        "skill.hyperemesi.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "skills": [
+        "skill.ix.hyperemesi.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and severity",
+      "skills": [
+        "skill.hyperemesi.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "skills": [
+        "skill.tx.hyperemesi",
+        "skill.approach.obg.team_leader"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "skills": [
+        "skill.present.case",
+        "skill.present.hyperemesi.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.hyperemesi.assessment_resuscitation",
+        "title": "Acute assessment and emergency resuscitation in severe hyperemesis gravidarum",
+        "task": "A 24-year-old woman at 9 weeks gestation presents with 7 days of intractable vomiting, unable to keep fluids down. She is orthostatic and tachycardic with 3+ ketones on urine dipstick. Formulate your immediate emergency resuscitation plan, select appropriate intravenous fluids, outline essential safety precautions, and justify your management to the examiner.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.gen.vitals",
+          "skill.hyperemesi.signs",
+          "skill.tx.hyperemesi",
+          "skill.approach.obg.team_leader"
+        ],
+        "examinerQuestions": [
+          "Which intravenous fluid will you infuse first, and why must glucose-containing solutions be avoided initially?",
+          "Why is parenteral thiamine administration mandatory, and what classic clinical triad signals Wernicke encephalopathy?",
+          "What electrolyte derangement is typical of prolonged vomiting, and how should it be safely replaced?",
+          "Name two obstetric conditions associated with abnormally high hCG that must be excluded by early ultrasound."
+        ]
+      },
+      {
+        "id": "osce.hyperemesi.history_counsel",
+        "title": "Focused history, severity assessment, and antiemetic counselling in early pregnancy vomiting",
+        "task": "Take a focused 6-minute history from this pregnant woman presenting with severe vomiting in her first trimester. Quantify her symptom severity using clinical criteria and the PUQE score, enquire into red flag symptoms, explain the diagnosis, and counsel her on the stepwise antiemetic plan.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.obg.booking_lmp",
+          "skill.hx.hyperemesi.symptoms",
+          "skill.hx.hyperemesi.risk",
+          "skill.annex.hyperemesi.puqe"
+        ],
+        "examinerQuestions": [
+          "How do you distinguish hyperemesis gravidarum from common physiological morning sickness?",
+          "Explain how the PUQE score categorises severity and guides your decision for hospital admission.",
+          "What is your stepwise antiemetic escalation protocol if first-line antihistamines fail to control symptoms?",
+          "What counselling will you provide regarding recurrence risk in future pregnancies?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.hyperemesi.basics",
+      "skill.hyperemesi.signs",
+      "skill.annex.hyperemesi.puqe",
+      "skill.hyperemesi.summary",
+      "skill.hyperemesi.differential",
+      "skill.ix.hyperemesi.workup",
+      "skill.hyperemesi.diagnosis",
+      "skill.tx.hyperemesi"
+    ]
+  },
+  "skills": {
+    "skill.hyperemesi.basics": {
+      "id": "skill.hyperemesi.basics",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Basics of hyperemesis gravidarum",
+      "oneLine": "Definition, epidemiology, hormonal drivers, and the differentiation from physiological pregnancy sickness",
+      "why": "Hyperemesis gravidarum is not mere morning sickness; it is a clinical syndrome of intractable vomiting causing dehydration, electrolyte imbalance, ketonuria, and weight loss exceeding five percent of pre-pregnancy weight. Defining this threshold prevents undertreating severely dehydrated mothers and avoids inappropriate diagnostic delays.",
+      "teach": [
+        {
+          "heading": "Definition and Core Diagnostic Triad",
+          "body": "Hyperemesis gravidarum affects up to three percent of pregnancies, presenting as severe, protracted nausea and vomiting in early gestation. Unlike benign pregnancy sickness, it leads to objective volume depletion, ketonuria, and electrolyte derangements.\n\nThe classic diagnostic criteria require onset in the first trimester, persistent vomiting unrelated to other causes, ketonuria on dipstick testing, and objective weight loss exceeding five percent of measured pre-pregnancy weight."
+        },
+        {
+          "heading": "Hormonal and Molecular Pathophysiology",
+          "body": "The exact aetiology is multifactorial. Rapidly rising concentrations of human chorionic gonadotrophin (hCG) and oestrogens strongly correlate with symptom severity, explaining why sickness peaks between eight and eleven weeks gestation.\n\nConditions with high placental volume, such as twin gestation and hydatidiform mole, produce markedly exaggerated hCG levels and higher rates of hyperemesis. Recent genomic discoveries highlight placental GDF15 acting on the maternal brainstem emetic centre."
+        },
+        {
+          "heading": "Distinguishing Morning Sickness from Hyperemesis",
+          "table": {
+            "cols": [
+              "Clinical feature",
+              "Morning sickness",
+              "Hyperemesis gravidarum"
+            ],
+            "rows": [
+              [
+                "Typical prevalence",
+                "Up to 80 percent of pregnancies",
+                "0.3 to 3.0 percent of pregnancies"
+              ],
+              [
+                "Hydration status",
+                "Euvolaemic and clinically stable",
+                "Dehydrated with postural hypotension"
+              ],
+              [
+                "Urinary ketones",
+                "Negative or trace",
+                "Persistently positive (2+ to 4+)"
+              ],
+              [
+                "Weight trajectory",
+                "Stable or mild transient loss",
+                "Loss exceeding 5 percent pre-pregnancy"
+              ],
+              [
+                "Management setting",
+                "Outpatient dietary advice",
+                "Hospital admission and IV therapy"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What objective weight loss threshold defines hyperemesis gravidarum?",
+          "a": "Loss of more than five percent of pre-pregnancy weight.",
+          "accept": [
+            "five percent",
+            "5 percent",
+            "5%"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Which placental hormone peaks between 8 and 11 weeks and is strongly implicated in hyperemesis?",
+          "a": "Human chorionic gonadotrophin or hCG.",
+          "accept": [
+            "chorionic gonadotrophin",
+            "hcg"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Which newly identified circulating peptide hormone acts on brainstem emetic circuits in hyperemesis?",
+          "a": "Growth differentiation factor 15 or GDF15.",
+          "accept": [
+            "growth differentiation factor",
+            "gdf15",
+            "gdf-15"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "define_diagnostic_triad",
+          "text": "Defines intractable vomiting, weight loss over 5 percent, and ketonuria"
+        },
+        {
+          "id": "articulate_hormonal_drivers",
+          "text": "Identifies hCG, oestrogen, and GDF15 as biological drivers"
+        },
+        {
+          "id": "contrast_with_morning_sickness",
+          "text": "Contrasts physiological morning sickness with pathological hyperemesis"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "hyperemesis_gravidarum: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Chapter 54: Gastrointestinal Disorders, Hyperemesis Gravidarum"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hyperemesi.signs": {
+      "id": "skill.hyperemesi.signs",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "The hyperemesis gravidarum picture",
+      "oneLine": "Clinical manifestations of severe dehydration, starvation ketosis, electrolyte derangements, and neurological risks",
+      "why": "Prolonged emesis depletes fluid, hydrogen, potassium, and chloride ions, producing hypochloraemic metabolic alkalosis, hypokalaemia, and prerenal azotaemia. Identifying dehydration signs early and recognising the danger signs of thiamine deficiency protects against circulatory collapse, acute kidney injury, and irreversible neurological damage.",
+      "teach": [
+        {
+          "heading": "Volume Depletion and Physical Signs",
+          "body": "Profound fluid loss manifests with sunken eyes, dry furred tongue, cracked lips, and reduced skin elasticity. Breath carries a characteristic sweetish, acetone odour from circulating acetoacetate and beta-hydroxybutyrate.\n\nCardiovascular examination reveals resting tachycardia and orthostatic hypotension, with a systolic drop exceeding twenty millimetres of mercury on standing. Peripheral perfusion is compromised, causing cool extremities and prolonged capillary refill."
+        },
+        {
+          "heading": "Acid-Base and Electrolyte Derangements",
+          "body": "Gastric juice contains high concentrations of hydrochloric acid, potassium, and sodium. Protracted loss of gastric acid produces hypochloraemic, hypokalaemic metabolic alkalosis. Renal hydrogen ion retention is overwhelmed, leading to paradoxical aciduria.\n\nStarvation forces the body to metabolise adipose triglycerides, generating ketone bodies that spill into the urine. Severe hypokalaemia triggers skeletal muscle weakness, ileus, and cardiac rhythm disturbances."
+        },
+        {
+          "heading": "Life-Threatening Neurological and Physical Complications",
+          "table": {
+            "cols": [
+              "Complication",
+              "Underlying mechanism",
+              "Cardinal manifestations"
+            ],
+            "rows": [
+              [
+                "Wernicke encephalopathy",
+                "Thiamine (vitamin B1) depletion",
+                "Nystagmus, ataxia, confusion"
+              ],
+              [
+                "Mallory-Weiss tear",
+                "Violent retching lacerating mucosa",
+                "Haematemesis and epigastric pain"
+              ],
+              [
+                "Central pontine myelinolysis",
+                "Overly rapid hyponatraemia correction",
+                "Dysarthria, spastic quadriparesis"
+              ],
+              [
+                "Venous thromboembolism",
+                "Dehydration in hypercoagulable state",
+                "Unilateral leg swelling, dyspnoea"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What characteristic breath odour is detected in severe starvation ketosis?",
+          "a": "A sweetish, acetone odour on the breath.",
+          "accept": [
+            "acetone",
+            "sweet"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What classic metabolic and electrolyte derangement is caused by persistent gastric acid loss?",
+          "a": "Hypochloraemic, hypokalaemic metabolic alkalosis.",
+          "accept": [
+            "hypochloraemic",
+            "hypokalaemic",
+            "metabolic alkalosis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What is the classic clinical triad of Wernicke encephalopathy in hyperemesis?",
+          "a": "Nystagmus or ophthalmoplegia, ataxia, and confusion.",
+          "accept": [
+            "nystagmus",
+            "ophthalmoplegia",
+            "ataxia",
+            "confusion"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "identify_dehydration_signs",
+          "text": "Identifies clinical signs of volume contraction, dry mucous membranes, and postural hypotension"
+        },
+        {
+          "id": "explain_metabolic_derangement",
+          "text": "Explains hypochloraemic hypokalaemic metabolic alkalosis and starvation ketosis"
+        },
+        {
+          "id": "recognise_wernicke_triad",
+          "text": "Recognises nystagmus, ataxia, and confusion as signs of acute thiamine deficiency"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "hyperemesis_gravidarum: pathophysiology"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline No. 69: The Management of Nausea and Vomiting in Pregnancy and Hyperemesis Gravidarum"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.hyperemesi.puqe": {
+      "id": "skill.annex.hyperemesi.puqe",
+      "kind": "annexure",
+      "system": "obgyn",
+      "title": "Pregnancy-Unique Quantification of Emesis (PUQE-24) score",
+      "oneLine": "Validated 24-hour scoring tool to categorise severity and guide admission and antiemetic escalation",
+      "why": "The PUQE-24 score provides an objective, reproducible metric for assessing vomiting, nausea duration, and retching over 24 hours. Using this validated score standardises triage, distinguishes outpatient candidates from those requiring day-case or inpatient admission, and monitors therapeutic response to antiemetic protocols.",
+      "teach": [
+        {
+          "heading": "The Three Domains of the PUQE-24 Score",
+          "body": "The Pregnancy-Unique Quantification of Emesis (PUQE-24) score evaluates three core clinical domains over the previous twenty-four hours: duration of nausea, number of vomiting episodes, and frequency of dry heaves or retching.\n\nEach domain is scored on an ordinal scale from one (no symptoms) to five (severe intractable symptoms), yielding a composite total score ranging between three and fifteen points."
+        },
+        {
+          "heading": "PUQE-24 Scoring Matrix and Triage Thresholds",
+          "table": {
+            "cols": [
+              "PUQE score",
+              "Clinical severity",
+              "Clinical presentation",
+              "Recommended triage"
+            ],
+            "rows": [
+              [
+                "3 to 6 points",
+                "Mild emesis",
+                "Occasional nausea, retains fluids",
+                "Primary care and oral antiemetic"
+              ],
+              [
+                "7 to 12 points",
+                "Moderate emesis",
+                "Persistent retching, borderline fluids",
+                "Ambulatory daycare hydration"
+              ],
+              [
+                "13 to 15 points",
+                "Severe hyperemesis",
+                "Intractable vomiting, severe ketosis",
+                "Inpatient hospital admission"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What three symptom domains are scored in the PUQE-24 tool?",
+          "a": "Duration of nausea, number of vomiting episodes, and frequency of retching or dry heaves.",
+          "accept": [
+            "nausea",
+            "vomiting",
+            "retching",
+            "dry heaves"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What total score range on the PUQE-24 scale defines severe hyperemesis gravidarum?",
+          "a": "A score of 13 to 15 points indicates severe hyperemesis.",
+          "accept": [
+            "13 to 15",
+            "13-15",
+            "13",
+            "15"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What clinical management is indicated for a patient with a moderate PUQE score of 7 to 12?",
+          "a": "Ambulatory daycare rehydration, parental or oral antiemetics, and active monitoring.",
+          "accept": [
+            "ambulatory",
+            "daycare",
+            "rehydration",
+            "monitoring"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "outline_puqe_domains",
+          "text": "States the three domains of nausea duration, vomiting episodes, and retching"
+        },
+        {
+          "id": "stratify_severity_bands",
+          "text": "Categorises mild (3-6), moderate (7-12), and severe (13-15) scoring bands"
+        },
+        {
+          "id": "apply_triage_actions",
+          "text": "Matches score categories to outpatient, ambulatory daycare, or inpatient admission"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "hyperemesis_gravidarum: clinicalPearls"
+        },
+        {
+          "source": "NICE",
+          "locator": "Clinical Guideline NG201: Antenatal care, Nausea and vomiting in pregnancy"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hyperemesi.summary": {
+      "id": "skill.hyperemesi.summary",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "The clinical summary in hyperemesis gravidarum",
+      "oneLine": "Synthesising gestational age, vomiting severity, degree of dehydration, biochemical derangement, and risk profile",
+      "why": "A precise clinical summary crystallises the diagnosis, quantifies dehydration and weight loss, reports acid-base and electrolyte status, and confirms the exclusion of secondary causes. A clear summary ensures the clinical team prioritises immediate thiamine administration before glucose-containing infusions.",
+      "teach": [
+        {
+          "heading": "Core Components of the Clinical Synthesis",
+          "body": "A structured summary begins with age, gravidity, parity, and ultrasound-confirmed gestational age. It states the duration and daily frequency of vomiting, and records percentage weight loss against pre-pregnancy baseline.\n\nIt documents hydration status, highlighting orthostatic vital signs, ketonuria, and electrolyte derangements including hypokalaemia. Finally, it confirms exclusion of alternative surgical, infectious, or trophoblastic conditions."
+        },
+        {
+          "heading": "Standard Exemplar Clinical Summary",
+          "body": "This is a 24-year-old primigravida at 9 weeks gestation with severe hyperemesis gravidarum, demonstrated by a PUQE score of 14, 6.7 percent weight loss, and 3+ ketonuria.\n\nShe has marked volume depletion with orthostatic tachycardia and hypokalaemic hypochloraemic metabolic alkalosis. Pelvic ultrasound confirms a viable singleton pregnancy, excluding molar disease. She requires urgent crystalloid resuscitation, thiamine before dextrose, and antiemetic escalation."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What four core elements should every hyperemesis summary contain?",
+          "a": "Gestational age, severity of vomiting with weight loss, hydration and electrolyte status, and confirmation of viable intrauterine singleton pregnancy.",
+          "accept": [
+            "gestational age",
+            "weight loss",
+            "electrolyte",
+            "viable",
+            "singleton"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why must the clinical summary explicitly note whether ultrasound has excluded molar pregnancy?",
+          "a": "Because hydatidiform mole causes high hCG levels and severe vomiting, requiring evacuation rather than supportive medical management.",
+          "accept": [
+            "molar",
+            "hydatidiform",
+            "hcg",
+            "evacuation"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What prescribing priority must be communicated in the management summary before any glucose is hung?",
+          "a": "Parenteral thiamine must be administered before or with dextrose to prevent Wernicke encephalopathy.",
+          "accept": [
+            "thiamine",
+            "dextrose",
+            "glucose",
+            "before"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "synthesise_core_demographics_and_severity",
+          "text": "Synthesises gestational age, PUQE score, percentage weight loss, and ketonuria"
+        },
+        {
+          "id": "report_electrolyte_and_ultrasound_findings",
+          "text": "Reports hypokalaemia, acid-base derangement, and ultrasound exclusion of molar gestation"
+        },
+        {
+          "id": "articulate_immediate_resuscitation_priorities",
+          "text": "Articulates crystalloid resuscitation, antiemetic escalation, and thiamine before dextrose"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "hyperemesis_gravidarum: management"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline No. 69: The Management of Nausea and Vomiting in Pregnancy and Hyperemesis Gravidarum"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hyperemesi.differential": {
+      "id": "skill.hyperemesi.differential",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Differential diagnosis of severe vomiting in early pregnancy",
+      "oneLine": "Distinguishing hyperemesis from gestational trophoblastic disease, twins, and gastrointestinal, hepatobiliary, and endocrine disorders",
+      "why": "Attributing all vomiting in early pregnancy to hyperemesis is a dangerous pitfall that delays recognition of molar pregnancy, acute pyelonephritis, appendicitis, or diabetic ketoacidosis. Hyperemesis is a diagnosis of exclusion; evaluating fever, severe localized abdominal pain, vaginal bleeding, or altered sensorium directs immediate alternative workup.",
+      "teach": [
+        {
+          "heading": "Obstetric Differentials: Trophoblast and Plurality",
+          "body": "Conditions with high circulating hCG levels lead the obstetric differential. Gestational trophoblastic disease (hydatidiform mole) presents with exaggerated vomiting, vaginal bleeding, uterus larger than dates, and bilateral theca lutein cysts.\n\nMultiple gestation similarly amplifies placental hormone secretion, producing severe sickness. Urgent pelvic ultrasonography differentiates these entities by demonstrating either multiple viable sacs or classic vesicular snowstorm changes."
+        },
+        {
+          "heading": "Gastrointestinal and Genitourinary Mimics",
+          "body": "Acute gastroenteritis is distinguished by watery diarrhoea, abdominal cramping, and sick contacts, resolving within forty-eight hours. Acute appendicitis in pregnancy produces fever, leucocytosis, and persistent right lower quadrant tenderness.\n\nAcute pyelonephritis presents with high spiking fevers, chills, and renal angle tenderness. Peptic ulcer disease presents with burning epigastric pain and may produce haematemesis without prominent systemic ketosis."
+        },
+        {
+          "heading": "Hepatobiliary, Pancreatic and Endocrine Disorders",
+          "table": {
+            "cols": [
+              "Clinical condition",
+              "Distinguishing signs",
+              "Differentiating investigation"
+            ],
+            "rows": [
+              [
+                "Acute pancreatitis",
+                "Severe epigastric pain radiating to back",
+                "Serum lipase elevated more than 3 times"
+              ],
+              [
+                "Acute cholecystitis",
+                "Right upper quadrant pain, Murphy sign",
+                "Gallbladder wall thickening on ultrasound"
+              ],
+              [
+                "Diabetic ketoacidosis",
+                "Hyperglycaemia, Kussmaul respirations",
+                "Elevated blood glucose, high anion gap"
+              ],
+              [
+                "Overt thyrotoxicosis",
+                "Goitre, ophthalmopathy, tremor",
+                "Elevated TPO or TSH receptor antibodies"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why is pelvic ultrasonography mandatory before confirming hyperemesis gravidarum?",
+          "a": "To exclude molar pregnancy (hydatidiform mole) and multiple pregnancy.",
+          "accept": [
+            "molar",
+            "hydatidiform",
+            "multiple",
+            "twins"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What laboratory finding differentiates diabetic ketoacidosis from starvation ketosis in hyperemesis?",
+          "a": "Marked hyperglycaemia and high anion gap metabolic acidosis occur in diabetic ketoacidosis, whereas hyperemesis patients are euglycaemic.",
+          "accept": [
+            "hyperglycaemia",
+            "glucose",
+            "euglycaemic",
+            "acidosis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which serum enzyme elevation confirms acute pancreatitis over uncomplicated hyperemesis?",
+          "a": "Serum lipase elevated more than three times the upper limit of normal.",
+          "accept": [
+            "lipase",
+            "three times",
+            "pancreatitis"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "differentiate_obstetric_mimics",
+          "text": "Differentiates molar pregnancy and multiple gestation using ultrasonography"
+        },
+        {
+          "id": "distinguish_gi_and_renal_infections",
+          "text": "Distinguishes gastroenteritis, appendicitis, and pyelonephritis by pain, fever, and urinalysis"
+        },
+        {
+          "id": "exclude_metabolic_and_pancreatic_emergencies",
+          "text": "Excludes diabetic ketoacidosis, pancreatitis, and overt hyperthyroidism with targeted tests"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "hyperemesis_gravidarum: additionalDifferentials"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Chapter 54: Gastrointestinal Disorders, Hyperemesis Gravidarum"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.hyperemesi.workup": {
+      "id": "skill.ix.hyperemesi.workup",
+      "kind": "investigation",
+      "system": "obgyn",
+      "title": "Diagnostic and baseline workup in hyperemesis gravidarum",
+      "oneLine": "Targeted laboratory and ultrasonographic investigations to grade severity, guide rehydration, and exclude mimics",
+      "why": "Investigations in hyperemesis serve two mandatory functions: assessing dehydration, electrolyte depletion, and organ stress, and excluding alternative diagnoses. Routine urine dipstick, renal and liver panels, and pelvic ultrasound are essential for safe resuscitation and rule out hydatidiform mole and twins.",
+      "teach": [
+        {
+          "heading": "Urinalysis and Renal Function Assessment",
+          "body": "Urinalysis by dipstick is the initial point-of-care test. It quantifies ketonuria (grades 1+ to 4+), indicating carbohydrate starvation, and measures specific gravity to confirm dehydration. Negative nitrites and leucocytes rule out urinary tract infection.\n\nRenal function testing includes serum urea, creatinine, and electrolytes. Prerenal azotaemia with an elevated urea-to-creatinine ratio reflects hypovolaemia, while high haematocrit on blood count confirms hemoconcentration."
+        },
+        {
+          "heading": "Electrolyte, Acid-Base, and Hepatic Profiling",
+          "body": "Serum electrolytes typically demonstrate hypokalaemia, hyponatraemia, and hypochloraemia. Venous or arterial blood gas testing reveals hypochloraemic metabolic alkalosis from stomach acid loss, or metabolic acidosis if starvation ketosis predominates.\n\nLiver transaminases (AST and ALT) are mildly elevated (two- to three-fold) in up to fifty percent of severe cases. Bilirubin remains normal or only slightly raised; marked jaundice demands evaluation for viral hepatitis or acute liver injury."
+        },
+        {
+          "heading": "Pelvic Ultrasonography and Endocrine Testing",
+          "body": "Pelvic ultrasound is non-negotiable. It confirms a live intrauterine fetus, establishes accurate gestational age, and excludes twin pregnancy and molar disease (gestational trophoblastic disease).\n\nThyroid function testing often reveals suppressed TSH and elevated free thyroxine (FT4). This transient gestational thyrotoxicosis is driven by hCG stimulating the TSH receptor, resolves spontaneously by twenty weeks, and requires no antithyroid medication."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What initial point-of-care urine test confirms starvation ketosis and dehydration?",
+          "a": "Urine dipstick demonstrating ketonuria and high specific gravity.",
+          "accept": [
+            "dipstick",
+            "ketonuria",
+            "ketones",
+            "specific gravity"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How should transient biochemical hyperthyroidism with low TSH and high FT4 be managed in hyperemesis?",
+          "a": "With supportive observation; it is self-limiting and does not require antithyroid drug therapy.",
+          "accept": [
+            "supportive",
+            "observation",
+            "self-limiting",
+            "no antithyroid"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What pattern of liver enzyme elevation is commonly seen in severe hyperemesis, and when does it resolve?",
+          "a": "Mild transaminitis with AST and ALT elevated two to three times normal, resolving with rehydration.",
+          "accept": [
+            "transaminitis",
+            "two",
+            "three",
+            "rehydration",
+            "resolving"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "interpret_urinalysis_and_rft",
+          "text": "Interprets ketonuria, elevated specific gravity, and prerenal azotaemia"
+        },
+        {
+          "id": "evaluate_electrolytes_and_lft",
+          "text": "Evaluates hypokalaemic hypochloraemic alkalosis and mild transaminase elevation"
+        },
+        {
+          "id": "rationalise_ultrasound_and_tft",
+          "text": "Uses ultrasound to exclude molar pregnancy and recognises self-limiting gestational thyrotoxicosis"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "hyperemesis_gravidarum: additionalInvestigations"
+        },
+        {
+          "source": "FOGSI",
+          "locator": "Good Clinical Practice Recommendations: Nausea and Vomiting in Pregnancy"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hyperemesi.diagnosis": {
+      "id": "skill.hyperemesi.diagnosis",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Diagnosis and severity stratification in hyperemesis gravidarum",
+      "oneLine": "Establishing the diagnosis by exclusion, stratifying clinical severity, and detecting organ complications",
+      "why": "Hyperemesis gravidarum is diagnosed when severe early pregnancy nausea and vomiting occurs with weight loss greater than 5 percent, ketonuria, and electrolyte derangements in the absence of an alternative medical condition. Accurate severity stratification guides the site of care between outpatient ambulatory rehydration and emergency inpatient admission.",
+      "teach": [
+        {
+          "heading": "Formal Diagnostic Criteria and Exclusionary Seam",
+          "body": "Hyperemesis gravidarum remains a clinical diagnosis reached after methodically excluding other causes of vomiting. The formal criteria require symptoms starting in early pregnancy, intractable vomiting, and inability to maintain oral hydration.\n\nObjective confirmation rests on documented weight loss exceeding five percent of measured pre-pregnancy weight, ketonuria of at least 2+, and associated electrolyte abnormalities, without fever or localized peritoneal signs."
+        },
+        {
+          "heading": "Stratification of Severity and Site-of-Care",
+          "table": {
+            "cols": [
+              "Severity grade",
+              "Clinical markers",
+              "Laboratory profile",
+              "Recommended setting"
+            ],
+            "rows": [
+              [
+                "Mild illness",
+                "PUQE 3-6, weight loss < 3%",
+                "Ketones trace/neg, normal electrolytes",
+                "Outpatient primary care"
+              ],
+              [
+                "Moderate illness",
+                "PUQE 7-12, weight loss 3-5%",
+                "Ketones 1-2+, mild hypokalaemia",
+                "Ambulatory daycare unit"
+              ],
+              [
+                "Severe illness",
+                "PUQE 13-15, weight loss > 5%",
+                "Ketones 3-4+, severe electrolyte loss",
+                "Inpatient hospital ward"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Screening for Red Flags and High-Risk Complications",
+          "body": "Inpatient admission is mandatory for women unable to maintain oral hydration, those with severe ketonuria, or those exhibiting significant weight loss. Immediate escalation to multidisciplinary care is triggered by danger signs.\n\nThese red flags include haemodynamic instability, severe refractory hypokalaemia under 3.0 mmol/L, haematemesis, or any neurological abnormality such as ataxia, nystagmus, or acute confusion signalling impending Wernicke encephalopathy."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What defines hyperemesis gravidarum after excluding secondary medical causes?",
+          "a": "Intractable vomiting in early pregnancy with weight loss exceeding five percent, ketonuria, and electrolyte imbalance.",
+          "accept": [
+            "five percent",
+            "ketonuria",
+            "electrolyte",
+            "vomiting"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Which clinical setting is appropriate for a patient with a moderate PUQE score and 3 percent weight loss?",
+          "a": "An ambulatory daycare rehydration unit with intravenous fluids and antiemetics.",
+          "accept": [
+            "ambulatory",
+            "daycare",
+            "rehydration"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Name two clinical red flags in hyperemesis that mandate immediate inpatient admission and escalation.",
+          "a": "Neurological signs of Wernicke encephalopathy and haematemesis or severe hypokalaemia.",
+          "accept": [
+            "Wernicke",
+            "haematemesis",
+            "hypokalaemia",
+            "neurological"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "apply_diagnostic_criteria",
+          "text": "Applies diagnostic criteria of intractable vomiting, weight loss over 5 percent, and ketonuria"
+        },
+        {
+          "id": "stratify_site_of_care",
+          "text": "Stratifies clinical severity to guide outpatient, daycare, or inpatient admission"
+        },
+        {
+          "id": "identify_emergency_red_flags",
+          "text": "Identifies neurological signs, haematemesis, and severe electrolyte derangement"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "hyperemesis_gravidarum: redFlags"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline No. 69: The Management of Nausea and Vomiting in Pregnancy and Hyperemesis Gravidarum"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.hyperemesi": {
+      "id": "skill.tx.hyperemesi",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Managing hyperemesis gravidarum",
+      "oneLine": "Intravenous crystalloid rehydration, mandatory thiamine before dextrose, stepwise antiemetic therapy, and thromboprophylaxis",
+      "why": "Effective therapy requires rapid correction of hypovolaemia and electrolytes, cessation of emesis through rational stepwise antiemetic regimens, and strict prevention of thiamine deficiency. Withholding glucose until thiamine is replenished is the single most critical safety rule in hyperemesis care, protecting against fatal Wernicke encephalopathy.",
+      "dosingNote": "This module teaches management at the level of drug class and principle. Specific agents, doses, routes and regimens must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "teach": [
+        {
+          "heading": "Intravenous Fluid Rehydration and Electrolyte Replacement",
+          "body": "Initial resuscitation requires isotonic crystalloids. Normal saline (0.9 percent sodium chloride) or Hartmann solution is the fluid of choice, restoring extracellular volume and correcting hypochloraemia.\n\nPotassium chloride supplementation must be added to maintenance fluids once urine output is verified, correcting hypokalaemic metabolic alkalosis. Avoid glucose-containing fluids initially because infusing dextrose without thiamine precipitates acute Wernicke encephalopathy."
+        },
+        {
+          "heading": "Mandatory Thiamine Repletion and Neurological Safety",
+          "body": "Thiamine (vitamin B1) stores are rapidly depleted by prolonged starvation and persistent emesis. Administer parenteral thiamine (100 mg daily or high-dose B-complex) to every admitted patient before or alongside intravenous fluids.\n\nDextrose administration accelerates carbohydrate oxidation, rapidly consuming remaining thiamine pyrophosphate cofactors. Co-administer pyridoxine and ensure serum magnesium is corrected, as hypomagnesaemia prevents thiamine utilisation."
+        },
+        {
+          "heading": "Stepwise Antiemetic Pharmacotherapy",
+          "table": {
+            "cols": [
+              "Treatment tier",
+              "Drug class and examples",
+              "Clinical indication and precautions"
+            ],
+            "rows": [
+              [
+                "First-line agents",
+                "H1 antihistamines (cyclizine, promethazine, doxylamine)",
+                "Mild to moderate emesis; safe throughout early pregnancy"
+              ],
+              [
+                "Second-line agents",
+                "Dopamine antagonists (metoclopramide) or ondansetron",
+                "Persistent vomiting; watch for dystonia with metoclopramide"
+              ],
+              [
+                "Third-line agents",
+                "Phenothiazines (prochlorperazine) or combination therapy",
+                "Refractory symptoms unresponsive to monotherapy"
+              ],
+              [
+                "Fourth-line rescue",
+                "Corticosteroids (hydrocortisone IV then prednisolone)",
+                "Severe refractory illness beyond 10 weeks gestation"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Thromboprophylaxis, Nutrition, and Discharge Criteria",
+          "body": "Severe dehydration combined with pregnancy hypercoagulability dramatically escalates venous thromboembolism risk. Provide graduated compression stockings and prophylactic low molecular weight heparin during inpatient hospitalisation.\n\nDiscontinue oral iron supplements until vomiting completely resolves. Discharge requires tolerance of oral fluids, cleared ketonuria, and stable electrolytes. Counsel on the seventy to eighty percent recurrence risk in future gestations."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the primary intravenous crystalloid recommended for initial rehydration in hyperemesis?",
+          "a": "Normal saline (0.9 percent sodium chloride) or Hartmann solution.",
+          "accept": [
+            "normal saline",
+            "0.9 percent",
+            "hartmann",
+            "sodium chloride"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why must intravenous thiamine always be administered before any glucose or dextrose infusion?",
+          "a": "To prevent precipitating acute Wernicke encephalopathy caused by rapid thiamine consumption.",
+          "accept": [
+            "Wernicke",
+            "encephalopathy",
+            "thiamine"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which antiemetic drug class is recommended as first-line therapy for nausea and vomiting of pregnancy?",
+          "a": "H1 antihistamines such as cyclizine, promethazine, or doxylamine with pyridoxine.",
+          "accept": [
+            "antihistamines",
+            "cyclizine",
+            "promethazine",
+            "doxylamine"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "execute_fluid_resuscitation",
+          "text": "Selects isotonic saline or Hartmann solution and supplements potassium after confirming urine flow"
+        },
+        {
+          "id": "enforce_thiamine_safety",
+          "text": "Enforces mandatory thiamine administration before dextrose to prevent Wernicke encephalopathy"
+        },
+        {
+          "id": "apply_stepwise_antiemetics",
+          "text": "Navigates stepwise antiemetics from antihistamines to dopamine antagonists, 5-HT3 blockers, and steroids"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "hyperemesis_gravidarum: management"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline No. 69: The Management of Nausea and Vomiting in Pregnancy and Hyperemesis Gravidarum"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.hyperemesi.meera",
+      "title": "A 24-year-old primigravida at 9 weeks gestation with intractable vomiting and weight loss",
+      "initialVitals": {
+        "hr": 116,
+        "bpSystolic": 94,
+        "bpDiastolic": 58,
+        "rr": 20,
+        "spo2": 99,
+        "temp": 36.8,
+        "gcs": 15
+      },
+      "patient": {
+        "name": "Meera Sharma",
+        "age": 24,
+        "sex": "female",
+        "occupation": "Primary school teacher",
+        "residence": "Urban, lives in Pune with her husband and mother-in-law"
+      },
+      "opening": "Doctor, please help me. For the past week I have been vomiting ten to fifteen times every day, and since yesterday I cannot even keep down a single sip of water.",
+      "fallback": "I feel very weak and dizzy, doctor. Can you please repeat what you are asking about?",
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you to the hospital today",
+            "what is the main trouble you are having",
+            "why have you come to casualty",
+            "tell me about your main problem",
+            "what can i help you with today",
+            "what seems to be the trouble"
+          ],
+          "reply": "Doctor, I have been vomiting ten to fifteen times every day for the past week, and for the last two days I cannot even keep down a single sip of water.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "onset_duration": {
+          "cues": [
+            "since when has the vomiting been happening",
+            "when did this nausea and vomiting first start",
+            "how many days have you been vomiting like this",
+            "how did the sickness begin"
+          ],
+          "reply": "I had mild morning sickness starting around my sixth week, but over the last seven days it became unbearable, constant, and happening all day and night.",
+          "key": true,
+          "skillId": "skill.hx.hyperemesi.symptoms"
+        },
+        "vomiting_frequency": {
+          "cues": [
+            "how many times do you vomit in a day",
+            "how often are you throwing up",
+            "number of vomiting episodes each day",
+            "how frequent are the vomiting episodes"
+          ],
+          "reply": "I throw up at least ten to fifteen times every single day. Even when my stomach is empty, I keep dry heaving and retching violently.",
+          "key": true,
+          "skillId": "skill.hx.hyperemesi.symptoms"
+        },
+        "vomitus_nature": {
+          "cues": [
+            "what does the vomitus look like",
+            "what is the colour and content of the vomit",
+            "is there any bile or food particles in the vomit",
+            "what are you bringing up when you vomit"
+          ],
+          "reply": "Initially it was undigested food, but now it is just clear or yellowish sour fluid. After violent retching this morning, I saw tiny brown specks in it.",
+          "key": true,
+          "skillId": "skill.hx.hyperemesi.symptoms"
+        },
+        "oral_fluid_intake": {
+          "cues": [
+            "can you keep down any oral liquids",
+            "are you able to retain fluids or solid food",
+            "can you keep down sips of oral rehydration",
+            "how long can you retain any oral intake"
+          ],
+          "reply": "Nothing stays down, doctor. Even a teaspoon of water, electoral, or coconut water comes straight back out within two minutes.",
+          "key": true,
+          "skillId": "skill.hx.hyperemesi.symptoms"
+        },
+        "weight_loss_record": {
+          "cues": [
+            "have you noticed any loss of weight",
+            "how much weight have you lost recently",
+            "do your clothes feel noticeably loose",
+            "what was your weight before becoming pregnant"
+          ],
+          "reply": "Before pregnancy I weighed fifty-four kilos. When they weighed me in triage just now, I was fifty point four kilos. I have lost over three and a half kilos.",
+          "key": true,
+          "skillId": "skill.hx.hyperemesi.symptoms"
+        },
+        "urinary_output": {
+          "cues": [
+            "how often are you passing urine each day",
+            "have you noticed less urine or dark urine",
+            "what is the colour and quantity of your urine",
+            "are you passing very little urine"
+          ],
+          "reply": "I am hardly passing any urine at all. In the last twenty-four hours I went only once, and it was a tiny amount of very dark yellow, almost brown urine.",
+          "key": true,
+          "skillId": "skill.hx.hyperemesi.symptoms"
+        },
+        "postural_dizziness": {
+          "cues": [
+            "do you feel dizzy or lightheaded upon standing upright",
+            "have you felt faint when rising from a lying position",
+            "do you experience postural giddiness or darkness before the eyes",
+            "does standing upright make you feel unsteady or syncopal"
+          ],
+          "reply": "Yes, every time I try to get out of bed, my head spins, dark spots appear before my eyes, and my legs feel so weak that my husband has to catch me.",
+          "key": true,
+          "skillId": "skill.hx.hyperemesi.symptoms"
+        },
+        "fever_screen": {
+          "cues": [
+            "have you had any fever chills or shivering",
+            "did you record any high temperature",
+            "any fever with body aches",
+            "have you felt hot or feverish"
+          ],
+          "reply": "No, I have had no fever, chills, or shivering at any point.",
+          "key": false,
+          "skillId": "skill.hx.hyperemesi.symptoms"
+        },
+        "epigastric_discomfort": {
+          "cues": [
+            "do you have any stomach pain or tummy cramps",
+            "is there any abdominal pain or burning sensation",
+            "where does your belly hurt",
+            "any pain in the lower abdomen or flanks"
+          ],
+          "reply": "My upper stomach feels sore and tender just because of the continuous retching, but there is no sharp pain, no cramping, and no pain in my lower tummy.",
+          "key": false,
+          "skillId": "skill.hx.hyperemesi.symptoms"
+        },
+        "bowel_habits": {
+          "cues": [
+            "have you had any loose motions or diarrhoea",
+            "how are your bowel movements",
+            "any changes in your stool pattern",
+            "are you having loose stools"
+          ],
+          "reply": "I have not passed stool for four days because I have eaten nothing, but there has been no loose motions or diarrhoea.",
+          "key": false,
+          "skillId": "skill.hx.hyperemesi.symptoms"
+        },
+        "obstetric_dates": {
+          "cues": [
+            "when was your last menstrual period",
+            "how many weeks pregnant are you",
+            "is this your first pregnancy",
+            "what are your pregnancy dates"
+          ],
+          "reply": "This is my very first pregnancy. My last period was exactly nine weeks ago on the seventeenth of August. My cycles were always regular.",
+          "key": true,
+          "skillId": "skill.hx.obg.booking_lmp"
+        },
+        "vaginal_bleeding_screen": {
+          "cues": [
+            "have you had any vaginal bleeding or spotting",
+            "any bleeding per vaginum or discharge",
+            "did you pass any clots or grape like tissue",
+            "have you noticed any blood on your underwear"
+          ],
+          "reply": "No, doctor. There has been no bleeding, no brown spotting, and no watery or fleshy discharge from below.",
+          "key": true,
+          "skillId": "skill.hx.hyperemesi.risk"
+        },
+        "past_medical_records": {
+          "cues": [
+            "do you have any past medical illnesses",
+            "any history of diabetes thyroid disease or ulcers",
+            "have you had stomach liver or kidney problems before",
+            "any chronic health conditions"
+          ],
+          "reply": "No, I have always been completely healthy. No diabetes, no thyroid disorder, no jaundice, and no stomach ulcers.",
+          "key": false,
+          "skillId": "skill.hx.obg.medical_family_drug"
+        },
+        "medications_history": {
+          "cues": [
+            "what medicines or supplements have you been taking",
+            "did you take any iron calcium or prenatal tablets",
+            "have you taken any antiemetic tablets",
+            "any medications since pregnancy was confirmed"
+          ],
+          "reply": "The local clinic gave me iron and folic acid tablets. The iron made me vomit even worse, so I stopped it three days ago. I tried ginger tea, but nothing helped.",
+          "key": true,
+          "skillId": "skill.hx.hyperemesi.risk"
+        },
+        "neurological_screen": {
+          "cues": [
+            "have you noticed any double vision or blurred vision",
+            "any difficulty walking unsteadiness or balance trouble",
+            "have you had any confusion or memory lapses",
+            "any eye twitching or trembling hands"
+          ],
+          "reply": "No double vision, no trouble walking, and my memory is clear, though I feel thoroughly exhausted and drowsy from weakness.",
+          "key": true,
+          "skillId": "skill.hx.hyperemesi.symptoms"
+        },
+        "thyroid_symptoms": {
+          "cues": [
+            "have you noticed any neck swelling or heat intolerance",
+            "any racing heart beats or shaking hands",
+            "do you feel unusually hot or sweaty",
+            "any prominent eyes or palpitations"
+          ],
+          "reply": "My heart races when I stand up because of weakness, but I have no neck swelling, no trembling fingers, and no intolerance to heat.",
+          "key": false,
+          "skillId": "skill.hx.hyperemesi.risk"
+        },
+        "family_social_support": {
+          "cues": [
+            "did your mother or sister have severe pregnancy vomiting",
+            "is there a family history of severe morning sickness",
+            "who is looking after you at home",
+            "do you have family support at home"
+          ],
+          "reply": "My mother told me she also had severe vomiting during both her pregnancies and had to be admitted on drips. My husband is here with me and is very supportive.",
+          "key": false,
+          "skillId": "skill.hx.hyperemesi.risk"
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Lying in bed, visibly exhausted and pale. Eyes appear sunken with dry mucous membranes, dry cracked lips, furred tongue, and poor skin turgor with delayed recoil. A distinct sweetish, acetone odour is noted on the breath.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 116 beats per minute, regular, low volume. Blood pressure 94/58 mmHg supine, falling to 80/50 mmHg upon sitting with postural dizziness. Respiratory rate 20 breaths per minute. Temperature 36.8 degrees Celsius. Oxygen saturation 99 percent on room air.",
+          "abnormal": true
+        },
+        "skill.gen.edema": {
+          "finding": "No pedal oedema, no facial puffiness, no sacral oedema. Peripheries are cool with capillary refill time prolonged at 3 seconds, indicating peripheral vasoconstriction from volume depletion.",
+          "abnormal": true
+        },
+        "skill.gen.cyanosis": {
+          "finding": "No central or peripheral cyanosis. Tongue and conjunctivae are dry and pale.",
+          "abnormal": true
+        },
+        "skill.exam.obg.preg_prep_inspect": {
+          "finding": "Abdomen is scaphoid, flat, and relaxed. No visible distension, no peristalsis, and no surgical scars or striae.",
+          "abnormal": false
+        },
+        "skill.exam.obg.fundal_height": {
+          "finding": "Uterus is not palpable per abdomen above the symphysis pubis, consistent with early gestational age of 9 weeks. Mild non-specific epigastric tenderness on deep palpation from frequent retching; no guarding, no rigidity, and normal bowel sounds.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "urine_dipstick",
+        "serum_electrolytes",
+        "renal_function",
+        "complete_blood_count",
+        "pelvic_ultrasound"
+      ],
+      "investigations": {
+        "urine_dipstick": {
+          "label": "Urine dipstick",
+          "result": "Ketones 3+ (strongly positive), specific gravity 1.032, protein negative, glucose negative, nitrites negative, leucocyte esterase negative.",
+          "note": "Severe ketonuria and high specific gravity confirm starvation ketosis and profound volume depletion; negative nitrites and leucocytes exclude urinary tract infection."
+        },
+        "serum_electrolytes": {
+          "label": "Serum electrolytes",
+          "result": "Sodium 131 mmol/L (mild hyponatraemia), potassium 3.1 mmol/L (hypokalaemia), chloride 92 mmol/L (hypochloraemia), bicarbonate 30 mmol/L (metabolic alkalosis).",
+          "note": "Loss of hydrochloric acid from gastric emesis produces hypochloraemic hypokalaemic metabolic alkalosis requiring urgent potassium-supplemented saline rehydration."
+        },
+        "renal_function": {
+          "label": "Renal function tests",
+          "result": "Blood urea 44 mg/dL, serum creatinine 1.1 mg/dL, serum uric acid 6.8 mg/dL.",
+          "note": "Elevated urea and creatinine indicate prerenal acute kidney injury secondary to dehydration; uric acid is elevated due to ketosis and hemoconcentration."
+        },
+        "liver_function": {
+          "label": "Liver function tests",
+          "result": "Total bilirubin 1.2 mg/dL, AST (SGOT) 78 U/L (mildly elevated), ALT (SGPT) 86 U/L (mildly elevated), alkaline phosphatase 95 U/L, serum albumin 4.2 g/dL.",
+          "note": "Mild transaminitis (2 to 3 times upper limit of normal) occurs in up to fifty percent of severe hyperemesis and resolves with hydration; normal bilirubin argues against primary hepatobiliary disease."
+        },
+        "complete_blood_count": {
+          "label": "Complete blood count",
+          "result": "Haemoglobin 14.4 g/dL, haematocrit 43 percent (hemoconcentration), total leucocyte count 8,600 /cu mm, platelet count 260,000 /cu mm.",
+          "note": "High haematocrit reflects plasma volume contraction and dehydration."
+        },
+        "pelvic_ultrasound": {
+          "label": "Pelvic ultrasound",
+          "result": "Single live intrauterine pregnancy, crown-rump length corresponding to 9 weeks 1 day, regular fetal cardiac activity at 168 beats per minute. Normal gestational sac, no subchorionic haemorrhage. Bilateral ovaries normal without theca lutein cysts. No evidence of vesicular molar changes or multiple gestation.",
+          "note": "Confirms viable singleton pregnancy and rules out gestational trophoblastic disease (hydatidiform mole) and twin pregnancy."
+        },
+        "thyroid_function": {
+          "label": "Thyroid function tests",
+          "result": "Serum TSH 0.15 mIU/L (suppressed), free T4 22.8 pmol/L (mildly elevated), thyroid peroxidase (TPO) antibodies negative, TSH receptor antibodies negative.",
+          "note": "Gestational transient thyrotoxicosis caused by high circulating hCG cross-reacting with the TSH receptor; self-limiting and does not require antithyroid drug therapy."
+        },
+        "serum_lipase_amylase": {
+          "label": "Serum amylase and lipase",
+          "result": "Serum amylase 92 U/L (normal), serum lipase 42 U/L (normal).",
+          "note": "Normal pancreatic enzymes rule out acute pancreatitis as a secondary cause of intractable vomiting."
+        },
+        "blood_glucose": {
+          "label": "Random blood glucose",
+          "result": "78 mg/dL (euglycaemic).",
+          "note": "Euglycaemia with ketonuria confirms starvation ketosis and rules out diabetic ketoacidosis."
+        }
+      },
+      "differentialModel": {
+        "answer": "Hyperemesis gravidarum, with secondary dehydration, hypokalaemic hypochloraemic metabolic alkalosis, and starvation ketonuria. Key differentials to exclude are gestational trophoblastic disease (molar pregnancy), multiple pregnancy, acute gastroenteritis, acute pyelonephritis, peptic ulcer disease, acute pancreatitis, diabetic ketoacidosis, and hyperthyroidism.",
+        "accept": [
+          "Hyperemesis gravidarum",
+          "Gestational trophoblastic disease",
+          "molar pregnancy",
+          "Multiple pregnancy",
+          "Acute gastroenteritis",
+          "Acute pyelonephritis",
+          "Peptic ulcer disease",
+          "Acute pancreatitis",
+          "Diabetic ketoacidosis",
+          "Hyperthyroidism"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Hyperemesis gravidarum in a 9-week primigravida, complicated by severe dehydration, starvation ketosis, hypokalaemia, and prerenal azotaemia.",
+        "accept": [
+          "Hyperemesis gravidarum",
+          "hyperemesis gravidarum"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Hospital admission, intravenous rehydration with normal saline or Hartmann solution, potassium chloride replacement, parenteral thiamine 100 mg before any dextrose infusion to prevent Wernicke encephalopathy, stepwise antiemetic therapy with promethazine or metoclopramide, thromboprophylaxis with low molecular weight heparin, withholding oral iron tablets, serial monitoring of fluid balance, weight, urinary ketones and electrolytes, and gradual reintroduction of light oral sips once vomiting subsides.",
+        "accept": [
+          "rehydration",
+          "saline",
+          "potassium",
+          "thiamine",
+          "dextrose",
+          "antiemetic",
+          "promethazine",
+          "metoclopramide",
+          "thromboprophylaxis",
+          "ketones",
+          "electrolytes"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "Hyperemesis gravidarum is a clinical diagnosis of exclusion defined by severe intractable early pregnancy nausea and vomiting leading to dehydration, electrolyte disturbance, ketonuria, and weight loss greater than 5 percent of pre-pregnancy weight.",
+        "Parenteral thiamine must ALWAYS be administered before or concurrently with any glucose or dextrose infusion to prevent precipitating acute Wernicke encephalopathy.",
+        "The primary rehydration fluid is normal saline (0.9 percent sodium chloride) or Hartmann solution supplemented with potassium chloride once urine output is verified, correcting the hypochloraemic hypokalaemic metabolic alkalosis.",
+        "Pelvic ultrasound is mandatory in every patient with suspected hyperemesis to confirm viability and actively exclude multiple pregnancy and gestational trophoblastic disease (molar pregnancy).",
+        "Antiemetic pharmacotherapy follows a stepwise escalation from first-line antihistamines or phenothiazines to dopamine antagonists (metoclopramide) or ondansetron, reserving corticosteroids for severe refractory cases after 10 weeks gestation.",
+        "Transient gestational thyrotoxicosis with suppressed TSH and elevated free T4 is driven by hCG cross-reactivity at the TSH receptor, resolves spontaneously by 18 to 20 weeks, and does not require antithyroid medications.",
+        "Severe dehydration in pregnancy significantly elevates venous thromboembolism risk, warranting thromboprophylaxis with graduated compression stockings and low molecular weight heparin during inpatient admission."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

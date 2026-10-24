@@ -1,0 +1,1568 @@
+{
+  "_comment": "CliniX disease pathway for Cervical Screening and CIN (Pap, HPV, colposcopy). Authoring rules: clinix-model.js, Final Year Expansion Plan WP3.",
+  "id": "cervical-screening-cin",
+  "name": "Cervical screening and CIN",
+  "fullName": "Cervical screening and cervical intraepithelial neoplasia",
+  "subtitle": "Pap, HPV, colposcopy",
+  "system": "obgyn",
+  "kbRef": "cervix_uterus_hpv_endometrial_leiomyoma",
+  "oneLine": "Systematic cervical cancer screening, HPV oncogenesis, colposcopic evaluation, and evidence-based management of cervical intraepithelial neoplasia",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics and Cervical Biology",
+      "skills": [
+        "skill.cervical.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach and Communication",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position",
+        "skill.approach.obg.intimate_consent"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient Particulars and Screening History",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In cervical screening, patient age dictates screening intervals and triage pathways. Women aged 30 to 65 years are the primary screening target in national and WHO guidelines. Routine screening in women under 25 is avoided due to high rates of transient, self-limiting HPV infections and the risk of overtreatment."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of Presenting Complaint and Symptoms",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.menstrual_history",
+        "skill.hx.obg.gynae_symptoms"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Listen for whether the patient is presenting for routine asymptomatic screening or following an abnormal referral. Explicitly ask about postcoital bleeding, intermenstrual bleeding, or foul-smelling discharge, which warrant urgent visual inspection to exclude invasive cancer."
+        },
+        "skill.hx.obg.menstrual_history": {
+          "expect": "Clarify menstrual cycle regularity, duration, and the exact date of the last menstrual period to ensure the patient is not currently bleeding heavily during planned colposcopy or cervical cytology sampling."
+        },
+        "skill.hx.obg.gynae_symptoms": {
+          "expect": "Enquire about unusual vaginal discharge, dyspareunia, or lower pelvic pain. Active vaginitis or cervicitis must be recognized and treated prior to definitive colposcopic assessment."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, Personal, Drug and Family History",
+      "skills": [
+        "skill.hx.obg.gynae_background",
+        "skill.hx.cervical.risk"
+      ],
+      "emphasis": {
+        "skill.hx.obg.gynae_background": {
+          "expect": "Establish parity, past contraceptive practices, and prior screening tests or cervical treatments. Note that prolonged use of combined oral contraceptives (over 5 years) and high parity are recognized co-factors for cervical intraepithelial neoplasia."
+        },
+        "skill.hx.cervical.risk": {
+          "expect": "Screen for major biological co-factors that impair HPV clearance: age at sexual debut under 18, multiple sexual partners, cigarette smoking, and immunocompromising conditions such as HIV infection, which mandate earlier and more frequent screening."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General Examination",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "General examination in cervical precancer is typically normal. Check for pallor or cachexia, which would raise suspicion of advanced invasive disease rather than pre-invasive CIN."
+        },
+        "skill.gen.vitals": {
+          "expect": "Confirm baseline normal vitals before scheduling outpatient procedural interventions such as colposcopy, cervical biopsy, or excisional LLETZ."
+        },
+        "skill.gen.edema": {
+          "expect": "Examine the lower extremities for bilateral or unilateral pedal oedema, which can occur with pelvic lymphatic obstruction in advanced pelvic malignancy."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Gynaecological and Speculum Examination",
+      "skills": [
+        "skill.exam.obg.vulval_inspect",
+        "skill.exam.obg.speculum_insert",
+        "skill.exam.obg.speculum_inspect",
+        "skill.exam.obg.bimanual",
+        "skill.approach.obg.pelvic_close",
+        "skill.exam.obg.pap_smear",
+        "skill.exam.obg.via_screening"
+      ],
+      "emphasis": {
+        "skill.exam.obg.vulval_inspect": {
+          "expect": "Inspect the vulva and perineum under good lighting to identify associated HPV lesions such as condyloma acuminata, vulval intraepithelial neoplasia, or ulcerative lesions."
+        },
+        "skill.exam.obg.speculum_insert": {
+          "expect": "Ensure warm, water-lubricated bivalve speculum insertion without lubricating jelly that could obscure cytology or visual inspection."
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "expect": "Carefully inspect the cervix for gross exophytic lesions, necrotic ulcers, or contact bleeding before applying acetic acid. In pre-invasive CIN, the cervix often appears grossly normal to the naked eye."
+        },
+        "skill.exam.obg.bimanual": {
+          "expect": "Assess uterine size, mobility, and adnexa. Ensure parametria are soft and supple bilaterally; parametrial induration or fixed nodularity indicates locally advanced invasive carcinoma."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Colposcopic Disease Findings",
+      "skills": [
+        "skill.cervical.colposcopy_findings"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical Summary",
+      "skills": [
+        "skill.cervical.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential Diagnosis",
+      "skills": [
+        "skill.cervical.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations and Diagnostic Protocols",
+      "skills": [
+        "skill.ix.cervical.screening_algorithms",
+        "skill.annex.cervical.bethesda"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Histological Diagnosis and Grading",
+      "skills": [
+        "skill.cervical.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Evidence-Based Management and Prevention",
+      "skills": [
+        "skill.tx.cervical.cin_management",
+        "skill.exam.obg.cervical_biopsy_lletz"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case Presentation",
+      "skills": [
+        "skill.present.case",
+        "skill.present.cervical.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.cervical.colposcopy_assessment",
+        "title": "Colposcopic assessment and identification of high-grade cervical lesions",
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.obg.intimate_consent",
+          "skill.exam.obg.speculum_inspect",
+          "skill.cervical.colposcopy_findings",
+          "skill.ix.cervical.screening_algorithms",
+          "skill.cervical.diagnosis"
+        ],
+        "seconds": 360,
+        "examinerQuestions": [
+          {
+            "q": "What optical and chemical agents are applied sequentially during colposcopy, and what is the biological mechanism of the acetowhite reaction?",
+            "a": "The green optical filter is used first to assess the vascular network, followed by 3 to 5 percent dilute acetic acid, and finally Lugol's iodine. Acetic acid causes intracellular dehydration and reversible coagulation of nuclear proteins; high nuclear-to-cytoplasmic ratio and dense chromatin in dysplastic cells reflect light to appear opaque white."
+          },
+          {
+            "q": "Differentiate between Type 1, Type 2, and Type 3 transformation zones, and explain how this impacts procedural selection.",
+            "a": "Type 1 is completely ectocervical and fully visible; Type 2 has an endocervical component but is fully visible; Type 3 extends high into the endocervical canal with an unseen upper margin. Type 1 lesions are amenable to either ablation or excision; Type 3 mandates formal excisional conization and completely contraindicates ablative therapy."
+          },
+          {
+            "q": "What key colposcopic features distinguish a high-grade intraepithelial lesion (CIN 2/3) from a low-grade lesion (CIN 1)?",
+            "a": "High-grade lesions exhibit rapid, dense, chalky acetowhite changes with well-demarcated sharp or rolled borders, coarse punctation, and wide irregular mosaicism; low-grade lesions display faint, translucent, slow-appearing acetowhiteness with feathered borders, fine punctation, and delicate mosaicism."
+          }
+        ]
+      },
+      {
+        "id": "osce.cervical.screening_counselling",
+        "title": "Counselling a patient with an abnormal cervical screening test and explaining management",
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.obg.gynae_background",
+          "skill.hx.cervical.risk",
+          "skill.cervical.basics",
+          "skill.tx.cervical.cin_management"
+        ],
+        "seconds": 360,
+        "examinerQuestions": [
+          {
+            "q": "How would you explain the meaning of an abnormal HPV and HSIL screening report to an anxious patient who fears she has invasive cancer?",
+            "a": "Reassure her clearly that an abnormal screening test and high-grade smear indicate precancerous cellular changes, not invasive cancer. Explain that high-risk HPV is a common infection that can cause slow cellular alterations over many years, and that finding and treating these precancers prevents cancer from ever developing."
+          },
+          {
+            "q": "What are the indications for excisional treatment (LLETZ) versus ablative therapy (thermal ablation or cryotherapy) in confirmed CIN 2/3?",
+            "a": "Ablative therapy is restricted strictly to fully visible Type 1 transformation zones where the entire lesion is visible with no endocervical involvement, no suspicion of microinvasion or glandular atypia, and cytology matches histology. Excisional LLETZ is required for Type 2 or 3 transformation zones, suspected invasion, recurrent disease, or discordant cytology."
+          },
+          {
+            "q": "What post-treatment advice and surveillance protocol must you explain to a patient undergoing LLETZ excision?",
+            "a": "Advise her to expect a mild brownish or blood-stained watery discharge for 2 to 4 weeks, avoid intercourse, tampon use, and heavy lifting for 4 weeks to prevent secondary haemorrhage, seek urgent care if heavy bleeding occurs, and attend an essential HPV test of cure follow-up at 6 to 12 months."
+          }
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.cervical.basics",
+      "skill.cervical.colposcopy_findings",
+      "skill.cervical.summary",
+      "skill.cervical.differential",
+      "skill.ix.cervical.screening_algorithms",
+      "skill.annex.cervical.bethesda",
+      "skill.cervical.diagnosis",
+      "skill.tx.cervical.cin_management"
+    ]
+  },
+  "skills": {
+    "skill.cervical.basics": {
+      "id": "skill.cervical.basics",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Cervical anatomy, transformation zone and HPV oncogenesis",
+      "oneLine": "Anatomical principles of the squamocolumnar junction, transformation zone maturation, and high-risk HPV oncogenic pathways",
+      "why": "Effective cervical screening relies entirely on understanding cervical epithelia and transformation zone dynamics. Persistent high-risk HPV infection drives carcinogenesis at this junction through viral oncoproteins E6 and E7, creating a long pre-invasive window for effective secondary prevention.",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "teach": [
+        {
+          "heading": "Cervical epithelia and squamocolumnar junction",
+          "body": "The ectocervix is covered by non-keratinising stratified squamous epithelium, while the endocervical canal is lined by single-layered mucin-secreting columnar epithelium.\n\nThe junction between these two epithelia is the squamocolumnar junction (SCJ). In childhood, the original SCJ sits close to the external os. During puberty and pregnancy, estrogen causes cervical eversion, exposing delicate columnar cells to acidic vaginal secretions."
+        },
+        {
+          "heading": "Transformation zone types and clinical relevance",
+          "body": "Exposure to acidity induces physiological squamous metaplasia, transforming columnar epithelium into mature stratified squamous epithelium. The region between the original and physiological new SCJ is the transformation zone.\n\nNearly all cervical precancers and carcinomas arise within this dynamic transformation zone. The International Federation for Cervical Pathology and Colposcopy classifies the transformation zone into three anatomical types based on visibility."
+        },
+        {
+          "heading": "Transformation zone classification",
+          "table": {
+            "cols": [
+              "TZ Type",
+              "Anatomical Location",
+              "Colposcopic Visibility",
+              "Excisional Treatment Choice"
+            ],
+            "rows": [
+              [
+                "Type 1",
+                "Completely ectocervical",
+                "Entirely visible without manipulation",
+                "Ablation or small excisional LLETZ"
+              ],
+              [
+                "Type 2",
+                "Endocervical component",
+                "Fully visible with speculum or cotton swab",
+                "Medium excisional loop (LLETZ)"
+              ],
+              [
+                "Type 3",
+                "Extends high into endocervical canal",
+                "Not fully visible; upper limit unseen",
+                "Formal excisional cone biopsy (knife or deep LLETZ)"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "High-risk HPV oncogenesis and cell-cycle disruption",
+          "body": "High-risk HPV genotypes 16 and 18 account for over 70 percent of invasive cervical cancers worldwide, while genotypes 31, 33, 35, 45, 52, and 58 cause the remainder.\n\nViral oncoprotein E6 binds host tumour suppressor p53, targeting it for ubiquitin-mediated proteasomal degradation and preventing apoptosis. Viral oncoprotein E7 binds retinoblastoma protein pRb, releasing transcription factor E2F and driving unchecked cellular entry into S-phase."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the transformation zone of the cervix and why is it clinically significant?",
+          "a": "The transformation zone is the area of physiological squamous metaplasia between the original and new squamocolumnar junctions where nearly all cervical intraepithelial neoplasia and carcinomas arise.",
+          "accept": [
+            "metaplasia",
+            "squamocolumnar",
+            "junction",
+            "neoplasia",
+            "carcinoma"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How do HPV oncoproteins E6 and E7 drive malignant transformation?",
+          "a": "Viral oncoprotein E6 causes proteasomal degradation of p53 to block apoptosis, while oncoprotein E7 binds and inactivates retinoblastoma protein pRb to liberate E2F, driving uncontrolled cell cycle progression.",
+          "accept": [
+            "e6",
+            "p53",
+            "e7",
+            "prb",
+            "e2f",
+            "apoptosis"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "What defines a Type 3 transformation zone and how does it alter management?",
+          "a": "A Type 3 transformation zone has an endocervical component whose upper boundary is not fully visible on colposcopy, making ablative therapy unsafe and requiring formal excisional biopsy.",
+          "accept": [
+            "type 3",
+            "endocervical",
+            "not fully visible",
+            "ablative",
+            "excisional"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r.cervical.basics.1",
+          "text": "Explains cervical epithelial histology and the physiological formation of the transformation zone"
+        },
+        {
+          "id": "r.cervical.basics.2",
+          "text": "Describes the classification of transformation zones (Types 1, 2, and 3) and explains their impact on colposcopic adequacy"
+        },
+        {
+          "id": "r.cervical.basics.3",
+          "text": "Articulates the molecular mechanisms of HPV oncoproteins E6 and E7 in disrupting p53 and retinoblastoma tumour suppressors"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cervix_uterus_hpv_endometrial_leiomyoma: E6 p53, E7 Rb: HPV transforms"
+        },
+        {
+          "source": "Berek",
+          "locator": "Berek and Novak's Gynecology, 16th ed: Cervical Intraepithelial Neoplasia"
+        },
+        {
+          "source": "WHO",
+          "locator": "WHO guideline for screening and treatment of cervical pre-cancer lesions, 2nd ed, 2021"
+        }
+      ]
+    },
+    "skill.cervical.colposcopy_findings": {
+      "id": "skill.cervical.colposcopy_findings",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Colposcopic evaluation, abnormal features and lesion grading",
+      "oneLine": "Systematic colposcopic examination, application of acetic acid and Lugol iodine, and differentiation between low-grade and high-grade signs",
+      "why": "Colposcopy evaluates women with abnormal cervical screening tests. Systematic inspection with green filter, dilute acetic acid, and Lugol iodine enables the colposcopist to assess examination adequacy, locate the squamocolumnar junction, and direct biopsies to areas of highest histological suspicion.",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "teach": [
+        {
+          "heading": "Stepwise colposcopic procedure and contrast agents",
+          "body": "Begin with naked-eye inspection of the vulva, vagina, and cervix under normal white light to detect obvious ulcers, condylomata, or visible exophytic tumours.\n\nNext, engage the green or blue optical filter to inspect the vascular network. Dilute 3 to 5 percent acetic acid is then gently applied to the cervix with a large cotton swab. Re-examine after 60 seconds as acetowhite changes develop gradually."
+        },
+        {
+          "heading": "Biological basis of acetowhiteness and Schiller test",
+          "body": "Acetic acid causes cellular dehydration and transient coagulation of nuclear proteins. Dysplastic epithelium contains high nuclear density and elevated chromatin, reflecting incident light to appear opaque and acetowhite.\n\nLugol iodine contains potassium iodide (Schiller test). Normal mature squamous epithelium is rich in glycogen and stains dark mahogany brown. Neoplastic cells are glycogen-depleted and fail to take up iodine, appearing mustard yellow."
+        },
+        {
+          "heading": "Low-grade versus high-grade colposcopic features",
+          "table": {
+            "cols": [
+              "Feature",
+              "Low-Grade Lesion (CIN 1)",
+              "High-Grade Lesion (CIN 2/3)",
+              "Invasive Carcinoma"
+            ],
+            "rows": [
+              [
+                "Acetowhite appearance",
+                "Translucent, faint, slow to appear, quick to fade",
+                "Dense, chalky, opaque, rapid appearance, slow to fade",
+                "Dense, grayish-white, necrotic or friable surface"
+              ],
+              [
+                "Margin definition",
+                "Feathered, irregular, geographic, scalloped border",
+                "Sharp, straight, demarcated border, rolled edges",
+                "Irregular, raised, rolled, spontaneous bleeding"
+              ],
+              [
+                "Vascular patterns",
+                "Fine punctation and fine regular mosaicism",
+                "Coarse punctation and coarse irregular wide mosaic",
+                "Atypical vessels: bizarre branching, non-tapering"
+              ],
+              [
+                "Lugol iodine uptake",
+                "Partial or mottled yellow uptake",
+                "Sharp mustard-yellow non-staining area",
+                "Variegated non-staining mass with tissue breakdown"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Colposcopic scoring systems and biopsy targeting",
+          "body": "Standardised indices such as the Reid Colposcopic Index or Swede score assign numerical points to acetowhite intensity, margin sharpness, vascular patterns, and lesion size.\n\nA score of 8 or higher on the Swede scale carries high specificity for CIN 2 or higher. Directed punch biopsies must be taken from the areas of densest acetowhiteness with coarse vascular patterns closest to the squamocolumnar junction."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What causes the appearance of acetowhite epithelium when acetic acid is applied during colposcopy?",
+          "a": "Dilute acetic acid dehydrates cells and coagulates nuclear proteins; dysplastic tissue has increased nuclear density and high chromatin content, which reflects incident light to appear opaque white.",
+          "accept": [
+            "dehydrates",
+            "nuclear",
+            "protein",
+            "density",
+            "chromatin",
+            "reflects"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Distinguish between the vascular patterns of low-grade and high-grade cervical intraepithelial lesions on colposcopy.",
+          "a": "Low-grade lesions display fine regular punctation and delicate mosaicism with narrow vessels, whereas high-grade lesions exhibit coarse irregular punctation and wide-calibre coarse mosaicism.",
+          "accept": [
+            "fine",
+            "coarse",
+            "punctation",
+            "mosaicism",
+            "vessels"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Explain why dysplastic cervical epithelium stains mustard yellow rather than mahogany brown with Lugol's iodine.",
+          "a": "Normal mature squamous cells contain abundant glycogen that stains dark mahogany brown with iodine, whereas dysplastic cells are undifferentiated and glycogen-depleted, remaining unstained and mustard yellow.",
+          "accept": [
+            "glycogen",
+            "mature",
+            "brown",
+            "depleted",
+            "yellow",
+            "unstained"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r.cervical.colpo.1",
+          "text": "Demonstrates understanding of optical contrast principles using green filter, acetic acid, and Lugol iodine"
+        },
+        {
+          "id": "r.cervical.colpo.2",
+          "text": "Differentiates fine versus coarse vascular abnormalities and faint versus dense acetowhite changes"
+        },
+        {
+          "id": "r.cervical.colpo.3",
+          "text": "Identifies atypical vessels and morphological markers indicating microinvasive or invasive carcinoma"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cervix_uterus_hpv_endometrial_leiomyoma: HSIL versus ASCUS by colposcopy thresholds"
+        },
+        {
+          "source": "Berek",
+          "locator": "Berek and Novak's Gynecology, 16th ed: Cervical Intraepithelial Neoplasia"
+        },
+        {
+          "source": "RCOG",
+          "locator": "RCOG / BSCCP Guidelines: Colposcopy and Management of Cervical Pre-invasive Lesions"
+        }
+      ]
+    },
+    "skill.cervical.summary": {
+      "id": "skill.cervical.summary",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Synthesising the cervical screening and colposcopy case summary",
+      "oneLine": "Constructing a clear, structured case summary combining screening modality, cytology, HPV status, colposcopic impression, and biopsy plan",
+      "why": "Synthesising a concise case summary ensures all critical prognostic elements are organized logically: patient age, immune status, index screening results, transformation zone type, colposcopic severity, and definitive histological plan to guide appropriate clinical decision-making.",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "teach": [
+        {
+          "heading": "Core elements of a cervical screening case summary",
+          "body": "A disciplined summary combines patient demographics, screening context, index screening findings, and colposcopic assessment into a coherent narrative.\n\nState whether the presentation is routine asymptomatic screening or prompt evaluation of abnormal bleeding, such as postcoital spotting or persistent foul-smelling vaginal discharge."
+        },
+        {
+          "heading": "Synthesising colposcopic impression and biopsy justification",
+          "body": "Document whether the colposcopy was adequate and state the transformation zone type (Type 1, 2, or 3). Detail the exact quadrant, clock hours, and colposcopic grade of the most suspicious lesion.\n\nConclude with the biopsy site, endocervical sampling status, and whether immediate excisional treatment (see-and-treat LLETZ) or staged management pending histological confirmation is indicated."
+        },
+        {
+          "heading": "Example summary framework",
+          "table": {
+            "cols": [
+              "Summary Component",
+              "Clinical Detail",
+              "Management Relevance"
+            ],
+            "rows": [
+              [
+                "Demographic Profile",
+                "Age, parity, smoking, and immunocompromise status",
+                "Identifies baseline risk of accelerated progression"
+              ],
+              [
+                "Screening Abnormality",
+                "Cytology category (Bethesda) and hrHPV genotype",
+                "Validates indication for colposcopic referral"
+              ],
+              [
+                "Colposcopy Adequacy",
+                "Transformation zone type and SCJ visibility",
+                "Determines whether ablative treatment remains an option"
+              ],
+              [
+                "Biopsy and Action Plan",
+                "Targeted punch biopsy sites and ECC recommendation",
+                "Guides definitive excisional or conservative care"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What four core components must be included when delivering a clinical summary of a patient referred for colposcopy?",
+          "a": "The summary must state patient age and immune status, index screening cytology and HPV genotype, colposcopic transformation zone type with lesion grade, and targeted biopsy or excisional plan.",
+          "accept": [
+            "age",
+            "cytology",
+            "hpv",
+            "transformation zone",
+            "colposcopic",
+            "biopsy"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why is explicit documentation of the transformation zone type essential in the clinical summary?",
+          "a": "Transformation zone type determines whether the upper lesion margin is fully visible; if it is Type 3, ablative treatments are contraindicated and formal excisional cone biopsy is required.",
+          "accept": [
+            "transformation zone",
+            "visible",
+            "type 3",
+            "ablative",
+            "contraindicated",
+            "excisional"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r.cervical.summary.1",
+          "text": "Succinctly articulates patient age, screening history, and high-risk HPV status"
+        },
+        {
+          "id": "r.cervical.summary.2",
+          "text": "Integrates colposcopic visual findings, transformation zone adequacy, and biopsy decisions"
+        },
+        {
+          "id": "r.cervical.summary.3",
+          "text": "Formulates an evidence-based recommendation consistent with national screening and triage guidelines"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cervix_uterus_hpv_endometrial_leiomyoma: HPV, Bethesda and screening"
+        },
+        {
+          "source": "Berek",
+          "locator": "Berek and Novak's Gynecology, 16th ed: Cervical Intraepithelial Neoplasia"
+        },
+        {
+          "source": "FOGSI",
+          "locator": "FOGSI Good Clinical Practice Recommendations for Cervical Cancer Screening, 2020"
+        }
+      ]
+    },
+    "skill.cervical.differential": {
+      "id": "skill.cervical.differential",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Differential diagnosis of acetowhite and cervical lesions",
+      "oneLine": "Distinguishing cervical intraepithelial neoplasia from benign cervical ectropion, immature metaplasia, cervicitis, and invasive carcinoma",
+      "why": "Acetowhite change and contact bleeding are not pathognomonic for high-grade CIN. Misidentifying immature physiological metaplasia or severe cervicitis as CIN leads to unnecessary excisional surgery and cervical damage, while mistaking early invasive cancer for pre-invasive dysplasia causes catastrophic delays in definitive oncological therapy.",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "teach": [
+        {
+          "heading": "Physiological and inflammatory mimics of CIN",
+          "body": "Cervical ectropion occurs when endocervical columnar epithelium extends onto the ectocervix, appearing bright red with a delicate papillary surface. Contact bleeding may occur during intercourse, but colposcopy shows grape-like villi without true acetowhite plaques.\n\nImmature squamous metaplasia displays faint, translucent, patchy acetowhiteness that fades rapidly and shows ill-defined margins, commonly seen in young women."
+        },
+        {
+          "heading": "Infectious cervicitis and condylomata",
+          "body": "Acute cervicitis caused by Chlamydia trachomatis, Neisseria gonorrhoeae, or Trichomonas vaginalis produces diffuse cervical erythema, edema, and copious purulent discharge. Acetowhiteness is patchy and non-circumscribed; infections must be treated before repeating cytology.\n\nCondyloma acuminata (genital warts caused by low-risk HPV 6 and 11) appear as raised, exophytic, frond-like or spiked micropapillary lesions that turn bright white."
+        },
+        {
+          "heading": "Differentiating benign and malignant cervical conditions",
+          "table": {
+            "cols": [
+              "Condition",
+              "Clinical Presentation",
+              "Colposcopic Features",
+              "Key Diagnostic Distinctions"
+            ],
+            "rows": [
+              [
+                "Cervical Ectropion",
+                "Excessive mucoid discharge or postcoital spotting",
+                "Red velvet papillary columnar villi, positive Lugol staining",
+                "Normal physiological eversion; no true dysplastic atypia"
+              ],
+              [
+                "Immature Metaplasia",
+                "Asymptomatic in young or pregnant women",
+                "Faint, translucent acetowhite with indistinct margins",
+                "Normal maturation; negative for high-risk HPV"
+              ],
+              [
+                "Severe Cervicitis",
+                "Purulent discharge, dysuria, contact bleeding",
+                "Diffuse erythema, punctate bleeding (strawberry cervix)",
+                "Resolves completely following antimicrobial therapy"
+              ],
+              [
+                "Invasive Carcinoma",
+                "Foul-smelling discharge, irregular or postcoital bleeding",
+                "Exophytic, ulcerative, friable mass, bizarre atypical vessels",
+                "Biopsy reveals stromal invasion beyond basement membrane"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Identifying signs of microinvasive and invasive cancer",
+          "body": "Any visible exophytic growth, deep irregular ulceration, hard induration on bimanual palpation, or bizarre, non-tapering atypical corkscrew vessels mandates immediate punch biopsy.\n\nInvasive cancer is never staged or managed by colposcopy alone; it requires histological diagnosis and formal clinical or radiological staging according to FIGO guidelines."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How does cervical ectropion differ clinically and colposcopically from cervical intraepithelial neoplasia?",
+          "a": "Cervical ectropion is a normal physiological eversion of columnar epithelium showing delicate grape-like villi without dense opaque acetowhite plaques or coarse abnormal vascular patterns.",
+          "accept": [
+            "eversion",
+            "columnar",
+            "villi",
+            "acetowhite",
+            "vascular"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why should active infectious cervicitis be treated before repeating cervical screening or colposcopy?",
+          "a": "Severe inflammation and cellular degeneration cause false-positive cytological atypia and reactive patchy acetowhiteness on colposcopy, which can resolve completely once infection clears.",
+          "accept": [
+            "inflammation",
+            "atypia",
+            "false-positive",
+            "acetowhiteness",
+            "infection",
+            "clears"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What vascular and surface abnormalities on colposcopy raise immediate suspicion of invasive cervical carcinoma?",
+          "a": "Immediate suspicion of invasive carcinoma is raised by bizarre atypical branching vessels, non-tapering corkscrew vessels, irregular surface contours, and spontaneous contact bleeding or tissue friability.",
+          "accept": [
+            "atypical",
+            "vessels",
+            "corkscrew",
+            "friability",
+            "bleeding",
+            "invasive"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r.cervical.diff.1",
+          "text": "Accurately differentiates physiological ectropion and immature metaplasia from high-grade precancer"
+        },
+        {
+          "id": "r.cervical.diff.2",
+          "text": "Explains how severe cervicitis confounds cytological and colposcopic interpretation"
+        },
+        {
+          "id": "r.cervical.diff.3",
+          "text": "Recognises morphological and vascular red flags that demand exclusion of invasive carcinoma"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cervix_uterus_hpv_endometrial_leiomyoma: HSIL versus ASCUS by colposcopy thresholds"
+        },
+        {
+          "source": "Berek",
+          "locator": "Berek and Novak's Gynecology, 16th ed: Cervical Intraepithelial Neoplasia"
+        },
+        {
+          "source": "RCOG",
+          "locator": "RCOG / BSCCP Guidelines: Colposcopy and Management of Cervical Pre-invasive Lesions"
+        }
+      ]
+    },
+    "skill.ix.cervical.screening_algorithms": {
+      "id": "skill.ix.cervical.screening_algorithms",
+      "kind": "investigation",
+      "system": "obgyn",
+      "title": "Cervical cancer screening modalities, triage algorithms and biopsy techniques",
+      "oneLine": "Comparative performance of HPV DNA, cytology, VIA, screening intervals, and colposcopically directed tissue sampling",
+      "why": "Effective cervical cancer screening demands systematic selection of screening tests and risk-based triage. Clinicians must understand the superior analytical sensitivity of high-risk HPV DNA testing, cytology triage pathways, the role of visual inspection with acetic acid (VIA) in resource-limited settings, and the technical execution of targeted cervical punch biopsy.",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "teach": [
+        {
+          "heading": "Comparative performance of primary screening modalities",
+          "body": "High-risk HPV DNA testing provides superior clinical sensitivity exceeding 90 percent and high negative predictive value, permitting safe extension of screening intervals to 5 or 10 years in HPV-negative women.\n\nConventional Pap smear and Liquid-Based Cytology (LBC) provide higher specificity (over 95 percent) but lower sensitivity (50 to 70 percent), requiring shorter intervals of 3 years. Liquid-based cytology allows automated processing and reflex HPV testing from the same vial."
+        },
+        {
+          "heading": "Point-of-care visual screening in resource-limited settings",
+          "body": "Visual Inspection with Acetic Acid (VIA) is recommended by the World Health Organization and India's NP-NCD programme for primary screening in settings where laboratory cytology or molecular HPV testing is unavailable.\n\nVIA involves applying 3 to 5 percent dilute acetic acid and inspecting the cervix under a bright halogen light after one minute. A positive test reveals distinct, opaque acetowhite lesions touching the squamocolumnar junction, enabling single-visit screen-and-treat protocols."
+        },
+        {
+          "heading": "Risk-based triage algorithms",
+          "table": {
+            "cols": [
+              "Primary Screening Result",
+              "Triage Investigation",
+              "Clinical Action",
+              "Follow-Up Interval"
+            ],
+            "rows": [
+              [
+                "hrHPV Negative",
+                "None required",
+                "Routine rescreening",
+                "Repeat screening in 5 to 10 years (3 to 5 years if HIV positive)"
+              ],
+              [
+                "HPV 16 or 18 Positive",
+                "Immediate colposcopy",
+                "Colposcopy and directed biopsy",
+                "Follow histological diagnosis"
+              ],
+              [
+                "Other 12 hrHPV Positive",
+                "Reflex cervical cytology",
+                "Colposcopy if cytology >=ASC-US; repeat HPV at 12 months if NILM",
+                "12-month re-evaluation"
+              ],
+              [
+                "Cytology ASC-US (Cytology Primary)",
+                "Reflex hrHPV testing",
+                "Colposcopy if hrHPV positive; repeat cytology at 12 months if negative",
+                "12-month re-evaluation"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Technique of directed punch biopsy and endocervical curettage",
+          "body": "Colposcopically directed punch biopsy uses sharp Tischler or punch forceps to obtain tissue cores from the most suspicious acetowhite area touching the SCJ. Apply Monsel solution (ferric subsulphate) for haemostasis.\n\nEndocervical curettage (ECC) is performed with a Kevorkian curette when the transformation zone is Type 3, when atypical glandular cells are reported, or when colposcopy is inconclusive."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why does WHO recommend high-risk HPV DNA testing as the preferred primary screening modality over cytology?",
+          "a": "High-risk HPV DNA testing has significantly higher sensitivity exceeding 90 percent and a higher negative predictive value, reliably detecting pre-invasive lesions earlier and allowing safer 5-to-10-year screening intervals.",
+          "accept": [
+            "sensitivity",
+            "negative predictive",
+            "intervals",
+            "earlier",
+            "reliable"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the recommended management for a woman who tests positive for high-risk HPV types other than 16 or 18 on primary screening?",
+          "a": "Perform reflex cytology triage: if cytology shows ASC-US or higher, refer directly for colposcopy; if cytology is negative (NILM), repeat HPV screening at 12 months.",
+          "accept": [
+            "cytology",
+            "colposcopy",
+            "asc-us",
+            "nilm",
+            "12 months"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "State three clinical indications for performing endocervical curettage during colposcopic evaluation.",
+          "a": "Indications for endocervical curettage include a Type 3 transformation zone where the squamocolumnar junction is not fully visible, an atypical glandular cells (AGC) smear, and colposcopy that fails to explain high-grade cytology.",
+          "accept": [
+            "type 3",
+            "squamocolumnar",
+            "atypical glandular",
+            "inconclusive",
+            "high-grade"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r.ix.cervical.1",
+          "text": "Compares sensitivity, specificity, and screening intervals of HPV DNA, liquid-based cytology, and VIA"
+        },
+        {
+          "id": "r.ix.cervical.2",
+          "text": "Applies risk-based triage algorithms for abnormal HPV and cytological results"
+        },
+        {
+          "id": "r.ix.cervical.3",
+          "text": "Explains technical principles and indications for directed punch biopsy and endocervical curettage"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cervix_uterus_hpv_endometrial_leiomyoma: Pap with HPV DNA and colposcopy in postcoital bleed"
+        },
+        {
+          "source": "WHO",
+          "locator": "WHO guideline for screening and treatment of cervical pre-cancer lesions, 2nd ed, 2021"
+        },
+        {
+          "source": "FOGSI",
+          "locator": "FOGSI Good Clinical Practice Recommendations for Cervical Cancer Screening, 2020"
+        }
+      ]
+    },
+    "skill.annex.cervical.bethesda": {
+      "id": "skill.annex.cervical.bethesda",
+      "kind": "annexure",
+      "system": "obgyn",
+      "title": "Bethesda System 2014 cytology terminology and histological CIN correlation",
+      "oneLine": "Standardised reporting categories of cervical cytology, cytopathological definitions, and histological CIN equivalence",
+      "why": "Clear interdisciplinary communication between cytopathologists and gynaecologists requires adherence to the 2014 Bethesda System. Understanding cytological descriptors and their histological CIN counterparts provides the evidence base for risk stratification, colposcopic triage, and therapeutic thresholds.",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "teach": [
+        {
+          "heading": "Principles of the 2014 Bethesda System",
+          "body": "The Bethesda System provides uniform descriptive reporting for cervical cytology. Every report begins with specimen adequacy, stating whether the sample is satisfactory and documenting whether an endocervical or transformation zone component is present.\n\nEpithelial abnormalities are separated into squamous and glandular categories, distinguishing low-grade transient viral cytopathic changes from true high-grade premalignant precursors."
+        },
+        {
+          "heading": "Bethesda squamous categories and histological correlation",
+          "table": {
+            "cols": [
+              "Bethesda Category",
+              "Defining Cytological Criteria",
+              "Histological Correlation",
+              "Risk of CIN 3 or Worse"
+            ],
+            "rows": [
+              [
+                "NILM",
+                "No cellular evidence of neoplasia or intraepithelial lesion",
+                "Normal squamous and columnar epithelium",
+                "Extremely low (<0.5%)"
+              ],
+              [
+                "ASC-US",
+                "Nuclear enlargement 2.5-3x normal, mild hyperchromasia, inconclusive",
+                "Benign atypia (80-90%), CIN 1 (10-20%), CIN 2/3 (5-10%)",
+                "Low (5-10%)"
+              ],
+              [
+                "LSIL",
+                "Koilocytosis, nuclear enlargement, perinuclear halo, binucleation",
+                "CIN 1 / mild dysplasia, self-limiting viral cytopathy",
+                "Moderate (10-15%)"
+              ],
+              [
+                "ASC-H",
+                "Atypical squamous cells, cannot exclude high-grade intraepithelial lesion",
+                "CIN 2/3 in 20-40% on directed biopsy",
+                "High (20-40%)"
+              ],
+              [
+                "HSIL",
+                "Marked nuclear enlargement, high N:C ratio, irregular contours, hyperchromasia",
+                "CIN 2, CIN 3, carcinoma in situ",
+                "Very high (50-70%)"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Atypical Glandular Cells (AGC) and clinical significance",
+          "body": "Atypical Glandular Cells (AGC) are categorized as endocervical, endometrial, or glandular not otherwise specified (NOS), or AGC favour neoplastic.\n\nAGC carries a high risk of underlying significant pathology, including endocervical adenocarcinoma in situ, invasive endocervical adenocarcinoma, and endometrial adenocarcinoma. Evaluation mandates urgent colposcopy, endocervical curettage, and endometrial sampling in women over 35 or with risk factors."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the key cytological and risk distinction between ASC-US and ASC-H in the Bethesda system?",
+          "a": "ASC-US represents equivocal atypia with a low risk of high-grade disease (5 to 10 percent), whereas ASC-H denotes atypia suspicious for high-grade intraepithelial lesion with a high risk of CIN 2 or 3 (20 to 40 percent).",
+          "accept": [
+            "asc-us",
+            "asc-h",
+            "equivocal",
+            "suspicious",
+            "high-grade",
+            "cin 2"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which histological conditions correspond to cytological Low-Grade Squamous Intraepithelial Lesion (LSIL)?",
+          "a": "Cytological LSIL corresponds histologically to CIN 1 (mild cervical dysplasia) and transient viral cytopathic changes such as koilocytosis caused by HPV infection.",
+          "accept": [
+            "cin 1",
+            "mild dysplasia",
+            "koilocytosis",
+            "viral",
+            "cytopathic"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does a cytology report of Atypical Glandular Cells (AGC) require endometrial sampling in addition to colposcopy?",
+          "a": "AGC is associated with high rates of significant glandular pathology, including endocervical adenocarcinoma in situ and endometrial adenocarcinoma, requiring both endocervical and endometrial sampling in women aged 35 or older.",
+          "accept": [
+            "glandular",
+            "endocervical",
+            "endometrial",
+            "adenocarcinoma",
+            "sampling"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r.annex.bethesda.1",
+          "text": "Correlates Bethesda 2014 cytology terms accurately with histological CIN classifications"
+        },
+        {
+          "id": "r.annex.bethesda.2",
+          "text": "Understands the clinical and triage differences between ASC-US and ASC-H"
+        },
+        {
+          "id": "r.annex.bethesda.3",
+          "text": "Identifies the extensive diagnostic requirements for atypical glandular cells (AGC)"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cervix_uterus_hpv_endometrial_leiomyoma: HPV, Bethesda and screening"
+        },
+        {
+          "source": "Berek",
+          "locator": "Berek and Novak's Gynecology, 16th ed: Cervical Intraepithelial Neoplasia"
+        },
+        {
+          "source": "FOGSI",
+          "locator": "FOGSI Good Clinical Practice Recommendations for Cervical Cancer Screening, 2020"
+        }
+      ]
+    },
+    "skill.cervical.diagnosis": {
+      "id": "skill.cervical.diagnosis",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Histological diagnosis of CIN and natural history risk stratification",
+      "oneLine": "Histopathological grading of CIN 1, 2, and 3, biomarker p16 immunohistochemistry, and clinical risk of progression versus regression",
+      "why": "Definitive diagnosis of cervical precancer is histological, not cytological or colposcopic. Differentiating self-limiting viral cytopathy (CIN 1) from true premalignant precursors (CIN 2 and CIN 3) establishes the threshold between safe conservative observation and necessary surgical excision.",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "teach": [
+        {
+          "heading": "Microscopic architecture and grading of CIN",
+          "body": "Cervical intraepithelial neoplasia is classified histologically according to the vertical extent of undifferentiated atypical cells within the squamous epithelium.\n\nIn CIN 1 (mild dysplasia), cellular atypia, pleomorphism, and koilocytosis are confined to the lower third of the epithelial thickness. In CIN 2 (moderate dysplasia), atypia and mitotic figures occupy the lower two-thirds. In CIN 3 (severe dysplasia or carcinoma in situ), atypia involves the full epithelial thickness, but the basement membrane remains strictly intact."
+        },
+        {
+          "heading": "Biomarker p16ink4a and diagnostic precision",
+          "body": "Distinguishing CIN 2 from mimics such as immature metaplasia or severe atrophy can be challenging on routine haematoxylin and eosin staining.\n\nImmunohistochemical staining for p16ink4a serves as a reliable surrogate marker for high-risk HPV oncogene activation. In high-grade lesions (CIN 2 and CIN 3), E7-mediated inactivation of pRb produces intense, diffuse, block-positive p16 nuclear and cytoplasmic staining, confirming true high-grade neoplasia."
+        },
+        {
+          "heading": "Natural history: regression versus malignant progression",
+          "table": {
+            "cols": [
+              "Histological Grade",
+              "Spontaneous Regression",
+              "Persistence Rate",
+              "Progression to Invasive Cancer"
+            ],
+            "rows": [
+              [
+                "CIN 1 (Low-Grade)",
+                "Approximately 60 percent regress spontaneously",
+                "Persists in about 30 percent",
+                "Progresses to cancer in only 1 percent"
+              ],
+              [
+                "CIN 2 (High-Grade)",
+                "Regresses in 40 to 50 percent",
+                "Persists in about 30 to 40 percent",
+                "Progresses to invasive cancer in 5 percent"
+              ],
+              [
+                "CIN 3 (High-Grade / CIS)",
+                "Regresses in only 30 percent",
+                "Persists in 50 percent",
+                "Progresses to invasive cancer in 12 to 30 percent if untreated"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Clinical risk stratification and biopsy adequacy",
+          "body": "A punch biopsy provides a small sample of the transformation zone. If the punch biopsy shows CIN 1 but cytology was HSIL, a major discrepancy exists.\n\nSuch discrepancy suggests that the punch biopsy missed the true high-grade lesion, mandating repeat colposcopy, endocervical sampling, or diagnostic excisional biopsy (LLETZ) to exclude occult invasive carcinoma."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How are CIN 1, CIN 2, and CIN 3 distinguished under microscopic examination?",
+          "a": "CIN 1 exhibits atypia confined to the lower third of the epithelium; CIN 2 shows atypia occupying the lower two-thirds; and CIN 3 exhibits full-thickness atypia with an intact basement membrane.",
+          "accept": [
+            "lower third",
+            "lower two-thirds",
+            "full-thickness",
+            "basement membrane",
+            "atypia"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What is the biological and clinical significance of diffuse p16ink4a immunostaining in a cervical biopsy?",
+          "a": "Diffuse block-positive p16 staining indicates high-risk HPV oncoprotein E7 inactivation of retinoblastoma protein pRb, confirming true high-grade dysplasia and distinguishing CIN 2 from benign mimics.",
+          "accept": [
+            "p16",
+            "hpv",
+            "e7",
+            "retinoblastoma",
+            "high-grade",
+            "mimics"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Compare the likelihood of spontaneous regression between histologically confirmed CIN 1 and CIN 3.",
+          "a": "CIN 1 regresses spontaneously in approximately 60 percent of women within 2 years, whereas CIN 3 regresses in only 30 percent and carries a substantial risk of progression to invasive cancer (over 12 to 30 percent) if left untreated.",
+          "accept": [
+            "60 percent",
+            "30 percent",
+            "progression",
+            "invasive",
+            "untreated"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r.cervical.dx.1",
+          "text": "Explains histological architecture and criteria separating CIN grades 1, 2, and 3"
+        },
+        {
+          "id": "r.cervical.dx.2",
+          "text": "Describes the role and diagnostic utility of p16 immunohistochemical staining"
+        },
+        {
+          "id": "r.cervical.dx.3",
+          "text": "Articulates the natural history, regression probabilities, and progression risks across CIN grades"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cervix_uterus_hpv_endometrial_leiomyoma: E6 p53, E7 Rb: HPV transforms"
+        },
+        {
+          "source": "Berek",
+          "locator": "Berek and Novak's Gynecology, 16th ed: Cervical Intraepithelial Neoplasia"
+        },
+        {
+          "source": "WHO",
+          "locator": "WHO guideline for screening and treatment of cervical pre-cancer lesions, 2nd ed, 2021"
+        }
+      ]
+    },
+    "skill.tx.cervical.cin_management": {
+      "id": "skill.tx.cervical.cin_management",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Evidence-based management of CIN, ablative and excisional therapies, and surveillance",
+      "oneLine": "Observation protocols for CIN 1, criteria for ablative versus excisional procedures for CIN 2/3, and post-treatment follow-up",
+      "why": "Managing cervical intraepithelial neoplasia requires balancing effective cancer prevention against procedure-related harms, such as cervical stenosis or future preterm delivery. Clinicians must apply strict evidence-based criteria to select observation, thermal ablation, cryotherapy, or excisional LLETZ.",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "Important note: CliniX does not prescribe. All drug dosages, medical regimens, and procedural specifications are quoted from verified national and international clinical guidelines for educational training and simulation rehearsal only. Clinical treatment must be verified against current institutional protocols and national clinical standards.",
+      "teach": [
+        {
+          "heading": "Conservative observation for CIN 1",
+          "body": "Histologically proven CIN 1 is managed conservatively with surveillance rather than immediate surgical ablation or excision in immunocompetent women.\n\nBecause over 60 percent of CIN 1 lesions regress spontaneously, immediate treatment leads to overtreatment. Recommended surveillance comprises repeat co-testing with high-risk HPV and cytology at 12 months. Treatment is considered only if biopsy-proven CIN 1 persists beyond 24 months."
+        },
+        {
+          "heading": "Criteria for ablative therapy versus excisional therapy",
+          "body": "Ablative modalities include thermal ablation (cold coagulation at 100 to 120 degrees Celsius for 20 to 30 seconds) and cryotherapy (using nitrous oxide or carbon dioxide with a 3-minute freeze, 5-minute thaw, 3-minute freeze double-freeze cycle).\n\nAblation destroys tissue without providing a specimen. Therefore, ablative therapy is permitted only when all strict criteria are met: the entire transformation zone is fully visible (Type 1), the lesion is entirely visible with no endocervical extension, there is no suspicion of microinvasion or glandular disease, and cytology correlates with histology."
+        },
+        {
+          "heading": "Excisional treatment modalities and indications",
+          "table": {
+            "cols": [
+              "Modality",
+              "Technical Approach",
+              "Indications",
+              "Key Complications"
+            ],
+            "rows": [
+              [
+                "LLETZ / LEEP",
+                "Electrosurgical wire loop under local anaesthesia with lignocaine and adrenaline",
+                "CIN 2/3, Type 1 or Type 2 TZ, see-and-treat protocols",
+                "Primary haemorrhage, secondary bleeding (5-10 days), cervical stenosis"
+              ],
+              [
+                "Cold Knife Conization",
+                "Surgical scalpel cone under regional or general anaesthesia",
+                "Type 3 TZ, suspected microinvasion, adenocarcinoma in situ",
+                "Cervical incompetence, increased risk of mid-trimester loss and preterm birth"
+              ],
+              [
+                "Thermal Ablation",
+                "Heated probe application (100-120 C) for 20-30 seconds",
+                "Low-resource screen-and-treat, strictly Type 1 TZ",
+                "Vaginal watery discharge, no histological specimen obtained"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Post-treatment surveillance and primary HPV vaccination",
+          "body": "Following excisional treatment, histological margins must be evaluated. If margins are clear, a test of cure is performed at 6 to 12 months using high-risk HPV testing with reflex cytology.\n\nIf the HPV test of cure is negative, the woman transitions to routine screening. Prophylactic HPV vaccination (bivalent, quadrivalent, or 9-valent) is recommended for primary prevention in girls aged 9 to 14 years prior to sexual debut, administered as a two-dose schedule."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why is conservative observation with repeat screening at 12 months the standard initial management for CIN 1?",
+          "a": "Conservative observation is standard because over 60 percent of CIN 1 lesions regress spontaneously through host immunity, avoiding unnecessary cervical trauma, stenosis, and future obstetric morbidity.",
+          "accept": [
+            "regress",
+            "spontaneously",
+            "60 percent",
+            "trauma",
+            "stenosis",
+            "overtreatment"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What strict colposcopic criteria must be fulfilled before performing ablative therapy (thermal ablation or cryotherapy) for CIN 2/3?",
+          "a": "Ablative therapy requires a fully visible Type 1 transformation zone, the lesion must be entirely visible with no endocervical extension, and there must be no suspicion of microinvasive or glandular disease.",
+          "accept": [
+            "type 1",
+            "transformation zone",
+            "visible",
+            "endocervical",
+            "microinvasive",
+            "glandular"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "What is the recommended post-treatment follow-up protocol following successful LLETZ excision of CIN 3?",
+          "a": "Follow-up requires a test of cure with high-risk HPV DNA testing and cytology at 6 to 12 months; if negative, the patient returns to regular screening intervals.",
+          "accept": [
+            "test of cure",
+            "hpv",
+            "cytology",
+            "6 to 12",
+            "months",
+            "negative"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "r.tx.cervical.1",
+          "text": "Justifies expectant management for low-grade cervical lesions (CIN 1)"
+        },
+        {
+          "id": "r.tx.cervical.2",
+          "text": "Applies strict criteria differentiating candidates for ablative therapy from excisional treatment"
+        },
+        {
+          "id": "r.tx.cervical.3",
+          "text": "Outlines post-treatment surveillance protocols using high-risk HPV testing of cure"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "cervix_uterus_hpv_endometrial_leiomyoma: HPV, Bethesda and screening"
+        },
+        {
+          "source": "WHO",
+          "locator": "WHO guideline for screening and treatment of cervical pre-cancer lesions, 2nd ed, 2021"
+        },
+        {
+          "source": "FOGSI",
+          "locator": "FOGSI Good Clinical Practice Recommendations for Cervical Cancer Screening, 2020"
+        },
+        {
+          "source": "Berek",
+          "locator": "Berek and Novak's Gynecology, 16th ed: Cervical Intraepithelial Neoplasia"
+        }
+      ]
+    }
+  },
+  "cases": [
+    {
+      "id": "case.cervical.cin2_screening",
+      "title": "A 36-year-old woman referred for colposcopy following an abnormal cervical screening test",
+      "opening": "Namaste doctor. I came to the gynaecology clinic because my cervical screening test from the community health camp came back abnormal. The report mentions a positive high-risk HPV test and an abnormal smear, and the health worker asked me to see a specialist for a colposcopy examination.",
+      "fallback": "I have shared all my health details and symptoms, doctor. Please examine me and advise what the next steps are.",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "initialVitals": {
+        "hr": 76,
+        "bpSystolic": 118,
+        "bpDiastolic": 76,
+        "rr": 16,
+        "spo2": 99,
+        "temp": 36.8,
+        "gcs": 15
+      },
+      "patient": {
+        "name": "Sunita Deshmukh",
+        "age": 36,
+        "sex": "Female",
+        "occupation": "Primary school teacher",
+        "residence": "Nagpur, Maharashtra"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you to the clinic today",
+            "why did you come to see the doctor",
+            "tell me about your abnormal screening report",
+            "reason for your hospital referral"
+          ],
+          "reply": "I had a cervical screening test done three weeks ago at a community health camp. The health worker informed me that my test was abnormal with positive HPV and referred me here for a colposcopy examination."
+        },
+        "postcoital_bleeding": {
+          "cues": [
+            "any bleeding after sexual intercourse",
+            "have you noticed postcoital bleeding",
+            "any bleeding or spotting after relations",
+            "spotting after marital relations"
+          ],
+          "reply": "No doctor, I have never had any bleeding or spotting after intercourse. Everything has been completely normal in that regard."
+        },
+        "intermenstrual_bleeding": {
+          "cues": [
+            "any bleeding between your periods",
+            "have you experienced intermenstrual spotting",
+            "bleeding midway through your cycle",
+            "unusual spotting between menstrual cycles"
+          ],
+          "reply": "No, I do not have any bleeding between my periods. My monthly menstrual cycle is completely regular."
+        },
+        "vaginal_discharge": {
+          "cues": [
+            "any unusual vaginal discharge",
+            "do you have foul smelling discharge",
+            "colour and consistency of vaginal discharge",
+            "any itching or burning sensation downstairs"
+          ],
+          "reply": "No abnormal discharge, itching, or foul odour doctor. Just normal physiological secretions occasionally."
+        },
+        "pelvic_pain": {
+          "cues": [
+            "any lower abdominal pain or cramps",
+            "do you experience deep pelvic pain",
+            "any chronic lower tummy discomfort",
+            "pelvic heaviness or backache"
+          ],
+          "reply": "No doctor, I do not suffer from lower abdominal or pelvic pain, and I have no unusual backache."
+        },
+        "dyspareunia_symptoms": {
+          "cues": [
+            "any pain during sexual intercourse",
+            "painful marital relations",
+            "superficial or deep pain with intercourse",
+            "discomfort during intimacy"
+          ],
+          "reply": "No, I have never felt pain during intercourse."
+        },
+        "index_screening_details": {
+          "cues": [
+            "details of your recent screening test",
+            "exact results of your camp screening report",
+            "which screening tests were performed at the camp",
+            "findings on your cervical smear and hpv test"
+          ],
+          "reply": "The report says high-risk HPV positive, specifically noting HPV 16, and the liquid-based cervical cytology showed High-Grade Squamous Intraepithelial Lesion or HSIL."
+        },
+        "past_screening_timeline": {
+          "cues": [
+            "have you had pap smears done in the past",
+            "was this your first cervical screening test",
+            "any previous screening tests or smears",
+            "prior cervical screening attendance"
+          ],
+          "reply": "This was my very first screening test, doctor. I had never had a Pap smear or screening test before attending this camp."
+        },
+        "menstrual_timeline": {
+          "cues": [
+            "tell me about your menstrual periods",
+            "age at menarche and cycle regularity",
+            "duration of flow and pad usage",
+            "exact date of your last menstrual period"
+          ],
+          "reply": "My menarche was at age 13. My cycles occur every 28 to 30 days, lasting 4 to 5 days with moderate flow, using two to three pads per day. My last menstrual period started 12 days ago."
+        },
+        "obstetric_history": {
+          "cues": [
+            "how many pregnancies have you had",
+            "number of deliveries and mode of birth",
+            "any previous miscarriages or terminations",
+            "details of your children and childbirth"
+          ],
+          "reply": "I have had two pregnancies, both resulting in normal vaginal deliveries 10 and 7 years ago. Both babies were healthy and I had no miscarriages or terminations."
+        },
+        "contraceptive_practices": {
+          "cues": [
+            "what contraception do you use",
+            "have you used birth control pills",
+            "history of intrauterine contraceptive device",
+            "family planning methods used"
+          ],
+          "reply": "We used barrier contraception initially, and seven years ago following the birth of our second child, I underwent laparoscopic tubal sterilisation. I have never used oral contraceptive pills or an IUD."
+        },
+        "sexual_debut_history": {
+          "cues": [
+            "age at first sexual intercourse",
+            "marital history and relationship duration",
+            "number of lifetime sexual partners",
+            "history of other sexual relationships"
+          ],
+          "reply": "I was married at age 23, which was when I first became sexually active. I have been in a monogamous relationship with only my husband throughout our marriage."
+        },
+        "sexually_transmitted_infections": {
+          "cues": [
+            "any past sexually transmitted infections",
+            "history of genital ulcers or sores",
+            "treatment for pelvic infection in the past",
+            "any history of genital warts"
+          ],
+          "reply": "Neither my husband nor I have ever had genital ulcers, blisters, warts, or any sexually transmitted illness."
+        },
+        "hpv_vaccination_status": {
+          "cues": [
+            "have you received the hpv vaccine",
+            "history of cervical cancer vaccination",
+            "did you receive gardasil or cervavac",
+            "vaccination against cervical cancer"
+          ],
+          "reply": "No doctor, I never received the cervical cancer vaccine during my school or college years because it was not available to us then."
+        },
+        "tobacco_smoking_habits": {
+          "cues": [
+            "do you smoke cigarettes or bidi",
+            "any history of tobacco chewing",
+            "use of gutka khaini or paan masala",
+            "exposure to second hand tobacco smoke"
+          ],
+          "reply": "I have never smoked or chewed tobacco, gutka, khaini, or paan masala. My husband does not use tobacco either."
+        },
+        "immunocompromise_medical": {
+          "cues": [
+            "any chronic medical conditions",
+            "have you been tested for hiv infection",
+            "history of diabetes or kidney disease",
+            "any immunosuppressive illnesses"
+          ],
+          "reply": "I have no chronic medical conditions. During my pregnancies and at the camp, routine blood tests including HIV antibody screening and blood sugar were non-reactive and normal."
+        },
+        "systemic_wellness_appetite": {
+          "cues": [
+            "any unexplained weight loss or fatigue",
+            "loss of appetite or feeling unwell",
+            "any fever or night sweats",
+            "general health and energy levels"
+          ],
+          "reply": "My appetite is good, my weight is stable, and I feel completely energetic and well in my daily teaching duties."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Patient is alert, pleasant, well-nourished, and sitting comfortably in no acute distress; no conjunctival pallor, scleral icterus, or peripheral lymphadenopathy.",
+          "abnormal": false
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 76 beats per minute, regular; blood pressure 118/76 mmHg; respiratory rate 16 breaths per minute; temperature 36.8 degrees Celsius; oxygen saturation 99 percent on ambient air.",
+          "abnormal": false
+        },
+        "skill.gen.edema": {
+          "finding": "No pedal oedema, pretibial swelling, or evidence of venous insufficiency in the lower limbs.",
+          "abnormal": false
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "finding": "External genitalia and perineum appear healthy; normal hair distribution; no condylomatous warts, ulcerations, depigmentation, or suspicious vulval lesions.",
+          "abnormal": false
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "finding": "Bivalve speculum examination reveals a parous, grossly healthy-looking cervix without visible exophytic mass, necrotic ulcer, or active haemorrhage; small amount of physiological clear mucus present at the external os.",
+          "abnormal": false
+        },
+        "skill.exam.obg.bimanual": {
+          "finding": "Bimanual pelvic examination demonstrates an anteverted, normal adult-sized uterus that is firm, mobile, and non-tender; bilateral adnexal regions are free of palpable masses or fullness; parametria are soft, supple, and non-indurated bilaterally to the pelvic sidewalls.",
+          "abnormal": false
+        },
+        "skill.cervical.colposcopy_findings": {
+          "finding": "Colposcopic examination reveals a fully visualised Type 1 transformation zone. Following application of 5 percent dilute acetic acid, a dense, opaque acetowhite lesion with well-demarcated straight margins, coarse punctation, and mosaicism is identified on the anterior lip of the cervix from 11 to 2 o'clock, abutting the squamocolumnar junction. No bizarre branching or atypical vessels. Application of Lugol iodine confirms a sharply circumscribed mustard-yellow non-staining area (Schiller test positive).",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "hpv_dna_test",
+        "cervical_cytology",
+        "colposcopically_directed_biopsy"
+      ],
+      "investigations": {
+        "hpv_dna_test": {
+          "label": "High-risk HPV DNA multiplex molecular assay",
+          "result": "Positive for high-risk HPV genotype 16; negative for HPV 18 and other 12 pooled oncogenic genotypes.",
+          "note": "Confirms persistent infection with HPV 16, the oncogenic genotype carrying the highest absolute risk of cervical intraepithelial neoplasia progression."
+        },
+        "cervical_cytology": {
+          "label": "Liquid-based cervical cytology (LBC, Bethesda 2014)",
+          "result": "High-Grade Squamous Intraepithelial Lesion (HSIL).",
+          "note": "Cytology reveals dysplastic squamous cells with marked nuclear hyperchromasia, high nuclear-to-cytoplasmic ratio, irregular nuclear membrane, and coarse chromatin clumps; no invasive tumour diathesis."
+        },
+        "colposcopically_directed_biopsy": {
+          "label": "Colposcopically directed cervical punch biopsy (anterior lip, 12 o'clock)",
+          "result": "Cervical Intraepithelial Neoplasia Grade 2 to 3 (CIN 2/3 / High-Grade Squamous Intraepithelial Lesion); strong and diffuse block-positive p16ink4a immunoreactivity; underlying basement membrane and stroma intact with no microinvasive carcinoma.",
+          "note": "Provides histological confirmation of high-grade cervical precancer involving more than two-thirds of the squamous epithelial thickness; warrants definitive excisional therapy."
+        },
+        "endocervical_curettage": {
+          "label": "Endocervical curettage (ECC)",
+          "result": "Fragments of normal endocervical columnar epithelium and endocervical mucus; negative for dysplastic squamous cells or glandular neoplasia.",
+          "note": "Confirms that the dysplastic process is confined to the visible ectocervical transformation zone without upper canal extension."
+        },
+        "pelvic_ultrasound": {
+          "label": "Transvaginal pelvic ultrasonography",
+          "result": "Normal anteverted uterus measuring 7.6 x 4.2 x 3.8 cm with regular myometrial echo-pattern and thin endometrium of 4.2 mm; both ovaries normal with physiological follicles; pouch of Douglas clear.",
+          "note": "Confirms normal internal reproductive anatomy and excludes coexisting myometrial, endometrial, or adnexal pathology."
+        }
+      },
+      "diagnosis": {
+        "answer": "Cervical intraepithelial neoplasia grade 2/3 (CIN 2/3 / HSIL) with persistent high-risk HPV 16 infection in a Type 1 transformation zone",
+        "accept": [
+          "Cervical intraepithelial neoplasia",
+          "cin",
+          "cervical dysplasia",
+          "cervical precancer",
+          "high grade squamous intraepithelial lesion",
+          "cin 2",
+          "cin 3"
+        ]
+      },
+      "differentialModel": {
+        "answer": "Differential diagnoses include low-grade cervical intraepithelial neoplasia (CIN 1), cervical ectropion, immature squamous metaplasia, chronic cervicitis, cervical polyp, and early invasive carcinoma of the cervix",
+        "accept": [
+          "Cervical intraepithelial neoplasia",
+          "cin",
+          "Cervical ectropion",
+          "Cervicitis",
+          "Carcinoma of the cervix",
+          "Cervical polyp"
+        ]
+      },
+      "managementModel": {
+        "answer": "Definitive management comprises Large Loop Excision of the Transformation Zone (LLETZ / LEEP) under local anaesthesia with histological margin evaluation, followed by an HPV test of cure at 6 to 12 months.",
+        "accept": [
+          "lletz",
+          "leep",
+          "loop excision",
+          "conization",
+          "cervical biopsy",
+          "test of cure"
+        ]
+      },
+      "teachingPoints": [
+        "High-risk HPV testing demonstrates superior clinical sensitivity exceeding 90 percent compared to cervical cytology, making it the preferred primary screening modality in modern cervical cancer prevention programmes.",
+        "Persistent infection with HPV genotypes 16 and 18 confers the highest risk of neoplastic transformation, driven by viral oncoproteins E6 degrading p53 and E7 inactivating retinoblastoma protein pRb.",
+        "Colposcopy is a diagnostic triage tool rather than a screening test: its primary role is to evaluate transformation zone visibility, grade visual abnormalities, and direct punch biopsies to the site of greatest histological suspicion.",
+        "The presence of dense opaque acetowhite change, sharp geographic margins, and coarse vascular patterns (punctation and mosaicism) strongly correlates with high-grade histological disease (CIN 2 or CIN 3).",
+        "In women with histologically confirmed CIN 2/3 and a fully visualised Type 1 transformation zone, excisional therapy via LLETZ/LEEP is the treatment of choice, providing an intact specimen to confirm negative surgical margins and exclude occult microinvasion.",
+        "Post-treatment surveillance requires a test of cure with high-risk HPV testing at 6 to 12 months; a negative result provides durable reassurance of cure and permits return to regular screening intervals."
+      ]
+    }
+  ]
+}

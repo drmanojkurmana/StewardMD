@@ -1,7 +1,7 @@
 {
   "_comment": "CliniX catalog. Small on purpose: the app fetches this first, then only the packs the student actually opens. Modelled on atlas/modules.json, deliberately NOT on kardiox-content-pack.js (a 1.9 MB array parsed on every page load).",
   "schemaVersion": 1,
-  "contentVersion": "0.11.0-finalyear2",
+  "contentVersion": "0.11.1-finalyear3",
   "updated": "2026-10-19",
   "practicals": {
     "index": "practicals/index.json"
@@ -146,6 +146,30 @@
       "subtitle": "Inguinal vs femoral hernias, acute scrotum, testicular torsion, hydrocele, varicocele, and inguinoscrotal differential diagnosis",
       "file": "presentations/groin_and_scrotal_swelling.json",
       "estMinutes": 50,
+      "review": "ai_drafted"
+    },
+    {
+      "id": "febrile_child",
+      "title": "Approach to the Febrile Child and Danger Signs",
+      "subtitle": "IMNCI general danger signs, fever without focus, tropical infections, and emergency paediatric triage",
+      "file": "presentations/febrile_child.json",
+      "estMinutes": 45,
+      "review": "ai_drafted"
+    },
+    {
+      "id": "child_with_fits",
+      "title": "Approach to the Child with Fits and Convulsions",
+      "subtitle": "Febrile seizures, status epilepticus, acute symptomatic convulsions, epilepsy syndromes, and emergency abortive triage",
+      "file": "presentations/child_with_fits.json",
+      "estMinutes": 50,
+      "review": "ai_drafted"
+    },
+    {
+      "id": "failure_to_thrive",
+      "title": "Approach to Failure to Thrive and Poor Weight Gain",
+      "subtitle": "Growth faltering, severe acute malnutrition, organic vs non-organic aetiologies, anthropometric assessment, and structured rehabilitation",
+      "file": "presentations/failure_to_thrive.json",
+      "estMinutes": 45,
       "review": "ai_drafted"
     }
   ],
@@ -669,6 +693,78 @@
           "title": "Heart disease in pregnancy",
           "subtitle": "Risk stratification and labour planning",
           "file": "diseases/heart-disease-in-pregnancy.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "hyperemesis-gravidarum",
+          "title": "Hyperemesis gravidarum",
+          "subtitle": "Early pregnancy vomiting",
+          "file": "diseases/hyperemesis-gravidarum.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "caesarean-section",
+          "title": "Caesarean section",
+          "subtitle": "Indications, consent and complications",
+          "file": "diseases/caesarean-section.json",
+          "estMinutes": 45,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "amenorrhoea",
+          "title": "Amenorrhoea",
+          "subtitle": "Primary and secondary causes",
+          "file": "diseases/amenorrhoea.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "endometrial-carcinoma",
+          "title": "Endometrial carcinoma",
+          "subtitle": "Postmenopausal bleeding",
+          "file": "diseases/endometrial-carcinoma.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "urinary-incontinence-women",
+          "title": "Urinary incontinence in women",
+          "subtitle": "Stress and urge incontinence",
+          "file": "diseases/urinary-incontinence-women.json",
+          "estMinutes": 40,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "gestational-trophoblastic-disease",
+          "title": "Gestational trophoblastic disease",
+          "subtitle": "Hydatidiform mole",
+          "file": "diseases/gestational-trophoblastic-disease.json",
+          "estMinutes": 35,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "cervical-screening-cin",
+          "title": "Cervical screening and CIN",
+          "subtitle": "Pap, HPV, colposcopy",
+          "file": "diseases/cervical-screening-cin.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "contraception",
+          "title": "Contraception counselling",
+          "subtitle": "Method choice and eligibility",
+          "file": "diseases/contraception.json",
           "estMinutes": 60,
           "chapters": 14,
           "review": "ai_drafted"

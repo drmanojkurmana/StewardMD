@@ -1,0 +1,166 @@
+{
+  "_comment": "CliniX 2.0 Presentation Library: Symptom-First Approach to the Child with Fits and Convulsions. Reuses shared Skills as atoms and provides tiered clinical reasoning from recognition to discriminators and emergency abortive actions.",
+  "schemaVersion": 1,
+  "id": "child_with_fits",
+  "title": "Approach to the Child with Fits and Convulsions",
+  "subtitle": "Febrile seizures, status epilepticus, acute symptomatic convulsions, epilepsy syndromes, and emergency abortive triage",
+  "system": "paediatrics",
+  "estMinutes": 50,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "layers": {
+    "recognise": {
+      "redFlags": [
+        "Prolonged convulsive seizure lasting >= 5 minutes (impending status epilepticus requiring immediate emergency pharmacological termination)",
+        "Incomplete neurological recovery, persistent coma, or altered sensorium lasting > 60 minutes after seizure termination (heralds CNS infection, intracranial haemorrhage, or non-convulsive status epilepticus)",
+        "Focal seizure onset or persistent postictal focal neurological deficit (Todd paresis), indicating an underlying focal structural, vascular, or inflammatory brain lesion",
+        "Signs of raised intracranial pressure: Cushing triad (hypertension, bradycardia, irregular breathing), sluggish or unreactive pupils, papilloedema, or bulging anterior fontanelle",
+        "Seizure in a young infant under 6 months or neonate under 28 days, where benign febrile seizures never occur and acute metabolic or structural aetiologies predominate",
+        "Petechial or purpuric skin rash, tense fontanelle, or nuchal rigidity indicating fulminant bacterial meningitis or meningococcal septicaemia"
+      ],
+      "vitalsPriorities": [
+        "Airway Patency and Oxygenation: Ensure unobstructed airway, place child in left lateral recovery position, deliver high-flow 100% oxygen via non-rebreather mask, and clear secretions. Hypoxia accelerates excitotoxic neuronal damage.",
+        "Bedside Blood Glucose: MANDATORY within the first 2 minutes. Hypoglycaemia (< 54 mg/dL in infants and children, or < 45 mg/dL in neonates) is a common, readily reversible cause of acute convulsions that is refractory to standard anticonvulsants.",
+        "Temperature and Hemodynamics: Record core temperature (pyrexia vs hypothermia); assess pulse volume, heart rate, and blood pressure. Severe hypertension suggests hypertensive encephalopathy (e.g. acute post-streptococcal glomerulonephritis); hypotension indicates shock or cardiovascular collapse."
+      ]
+    },
+    "classify": {
+      "tempo": {
+        "hyperacute_active_seizure_under_5_to_30_minutes": [
+          "Active Convulsive Seizure (< 5 minutes: observe, position, protect)",
+          "Impending Status Epilepticus (5 to 15 minutes: first-line benzodiazepine)",
+          "Established Status Epilepticus (15 to 30 minutes: second-line non-sedating loading infusion)",
+          "Refractory Status Epilepticus (> 30 minutes: continuous IV anaesthetic infusion and PICU airway)"
+        ],
+        "acute_symptomatic_within_24_hours": [
+          "Simple Febrile Seizure (6 months to 5 years, generalised, < 15 min, single in 24 h)",
+          "Complex Febrile Seizure (focal, > 15 min, or recurrent within 24 h)",
+          "Acute Bacterial Meningitis or Viral Meningoencephalitis",
+          "Acute Metabolic Disturbance (Hypoglycaemia, Hypocalcaemia, Hyponatraemia, Hypomagnesaemia)",
+          "Acute Intracranial Insult (Traumatic brain injury, Intracranial haemorrhage, Acute stroke / sinus thrombosis)"
+        ],
+        "paroxysmal_recurrent_or_chronic": [
+          "Genetic Epilepsy with Febrile Seizures Plus (GEFS+)",
+          "Idiopathic Generalised Epilepsy (Childhood Absence, Juvenile Myoclonic Epilepsy)",
+          "Focal Epilepsy with Structural Lesions (Focal Cortical Dysplasia, Perinatal Gliosis, Tuberous Sclerosis)",
+          "Developmental and Epileptic Encephalopathies (Dravet syndrome, West syndrome / Infantile spasms, Lennox-Gastaut syndrome)",
+          "Non-Epileptic Paroxysmal Mimics (Cyanotic or Pallid breath-holding spells, Vasovagal syncope, Benign myoclonus of infancy, Psychogenic non-epileptic seizures)"
+        ]
+      },
+      "mechanism": {
+        "febrile_provoked": [
+          "Simple Febrile Convulsion",
+          "Complex Febrile Convulsion",
+          "Febrile Status Epilepticus"
+        ],
+        "acute_metabolic_toxic": [
+          "Hypoglycaemia",
+          "Hypocalcaemia (tetany, carpopedal spasm, laryngospasm)",
+          "Hyponatraemia or Hypernatraemia (accidental water intoxication, rehydration error)",
+          "Toxin ingestion (Organophosphates, Isoniazid toxicity with pyridoxine deficiency, Tricyclic antidepressants)"
+        ],
+        "cns_infection_inflammation": [
+          "Acute Bacterial Meningitis",
+          "Herpes Simplex Encephalitis",
+          "Acute Disseminated Encephalomyelitis (ADEM)",
+          "Autoimmune Encephalitis (Anti-NMDAR)"
+        ],
+        "structural_vascular": [
+          "Perinatal Hypoxic Ischaemic Encephalopathy (HIE sequelae)",
+          "Intracranial Haemorrhage / Vascular Malformation (AVM)",
+          "Space-Occupying Lesion (Intracranial tuberculoma, Neurocysticercosis, Brain abscess, Tumour)"
+        ]
+      }
+    },
+    "discriminators": [
+      {
+        "title": "Simple vs Complex Febrile Seizure",
+        "finding": "A simple febrile seizure is generalised (tonic, clonic, or tonic-clonic), lasts under 15 minutes (typically 1 to 3 minutes), occurs only once within a 24-hour period, in a neurologically normal child aged 6 months to 5 years, with complete clinical recovery within 1 hour. A complex febrile seizure has at least one of three features: focal onset or focal motor features during seizure, duration exceeding 15 minutes, or recurrence within 24 hours (or during the same febrile illness).",
+        "highYield": "Risk of subsequent epilepsy after a simple febrile seizure is ~1% (identical to the baseline population); after a complex febrile seizure, the risk rises to 6-8% with 1 complex feature, 17-22% with 2, and up to 49% with all 3 features."
+      },
+      {
+        "title": "Epileptic Seizure vs Breath-Holding Spell",
+        "finding": "Breath-holding spells occur between 6 months and 2 years, ALWAYS triggered by anger, frustration, pain, or minor trauma. The child cries vigorously, holds breath in expiration, becomes cyanotic (or pale in pallid type), loses consciousness, and may exhibit brief clonic twitches or opisthotonus. True epileptic seizures occur without emotional provocation, can happen during sleep, do not begin with vigorous crying, feature prominent prolonged rhythmic jerking, have postictal stupor, and show epileptiform discharges on EEG.",
+        "highYield": "A seizure that occurs during sleep is NEVER a breath-holding spell. An emotional trigger with loud crying leading to breath-holding in expiration is diagnostic of a breath-holding spell; reassurance and treating coexisting iron deficiency anaemia resolves most spells."
+      },
+      {
+        "title": "Neonatal Seizures vs Jitteriness",
+        "finding": "Neonatal seizures are autonomous: subtle (sustained eye deviation, rhythmic blinking, bicycling, lip-smacking, tongue thrusting, apnoea with tachycardia), clonic, or tonic. They are NOT stimulus-sensitive, cannot be stopped by gentle passive flexion or holding of the limb, and are accompanied by autonomic changes. Jitteriness is fine, rapid, symmetric rhythmic tremor that is stimulus-evoked, has no ocular or autonomic changes, and IMMEDIATELY ceases when the limb is gently held or flexed.",
+        "highYield": "If holding the limb firmly suppresses the rhythmic movement, it is jitteriness (hypocalcaemia, hypoglycaemia, drug withdrawal, or benign neonatal tremor), not an epileptic convulsion."
+      },
+      {
+        "title": "Hypocalcaemic Tetany / Seizures vs True Epilepsy",
+        "finding": "Hypocalcaemia in infants (due to cow's milk feeding with high phosphate, maternal vitamin D deficiency, or hypoparathyroidism) presents with neuromuscular irritability: carpopedal spasm (accoucheur's hand), laryngismus stridulus, paresthesias, and multifocal or generalised seizures. Physical examination reveals positive Chvostek sign (tapping facial nerve produces twitching of ipsilateral angle of mouth and eyelid) and Trousseau sign (carpal spasm within 3 minutes of inflating BP cuff 20 mmHg above systolic BP).",
+        "highYield": "In an infant under 12 months with seizures and normal blood glucose, immediately check serum calcium, phosphate, and alkaline phosphatase; hypocalcaemic seizures stop only when calcium gluconate is administered, not with anti-seizure medications."
+      }
+    ],
+    "dontMiss": [
+      {
+        "disease": "Bacterial Meningitis / Herpes Simplex Encephalitis presenting as Febrile Convulsion",
+        "clue": "Febrile child presenting with a convulsion who remains excessively drowsy, irritable, or stuporous after 1 hour, or has a focal seizure, bulging fontanelle, neck stiffness, or unimmunised status.",
+        "action": "Do not dismiss as a febrile seizure. Secure airway, draw blood cultures, start empiric IV ceftriaxone (plus IV ampicillin if under 3 months for Listeria) and IV aciclovir immediately. Perform lumbar puncture once brain imaging rules out mass effect and hemodynamic stability is ensured."
+      },
+      {
+        "disease": "Status Epilepticus with Excitotoxic Neuronal Injury",
+        "clue": "Any generalised convulsive seizure persisting beyond 5 minutes without cessation, or multiple seizures without recovery of consciousness in between.",
+        "action": "Initiate timed status protocol: at 5 minutes give first-line benzodiazepine (intranasal midazolam or IV lorazepam); if persisting at 10 minutes, repeat benzodiazepine once; if persisting at 15 minutes, start second-line IV non-sedating loading infusion (levetiracetam, fosphenytoin, or sodium valproate); prepare for endotracheal intubation and continuous infusions if approaching 30 minutes."
+      },
+      {
+        "disease": "Acute Symptomatic Hypoglycaemic Seizure",
+        "clue": "Child with sudden convulsion, diaphoresis, pallor, hypothermia, history of missed feed, vomiting, toxic ingestion (sulfonylurea, ethanol), or severe malaria/malnutrition.",
+        "action": "Check bedside glucose immediately; administer IV 10% dextrose bolus (2 mL/kg, or 5 mL/kg in severe acute malnutrition) over 3 to 5 minutes, followed by maintenance 10% dextrose infusion with frequent glucose monitoring."
+      },
+      {
+        "disease": "Raised Intracranial Pressure / Herniation Syndrome with Seizure",
+        "clue": "Convulsion in a child with intense morning headache, projectile vomiting, unilateral pupillary dilation, Cushing response (hypertension + bradycardia), or lateralizing motor weakness.",
+        "action": "Elevate head of bed to 30 degrees, maintain neutral midline neck position, administer hyperosmolar therapy (3% hypertonic saline 3 to 5 mL/kg or IV mannitol), avoid hypotonic fluids, defer lumbar puncture (high risk of fatal tonsillar herniation), and obtain emergency cranial CT/MRI and neurosurgical consultation."
+      }
+    ],
+    "investigations": {
+      "step1_immediate": [
+        "Bedside Capillary Blood Glucose (detect acute hypoglycaemia within 2 minutes)",
+        "Serum Electrolytes (Sodium, Potassium) and Ionised / Total Calcium, Magnesium, and Phosphate",
+        "Arterial or Venous Blood Gas with Lactate (evaluate acid-base disturbance, hypoxia, and postictal metabolic acidosis)",
+        "Complete Blood Count (CBC) with peripheral smear (leukocytosis, thrombocytopenia, toxic vacuolation)"
+      ],
+      "step2_urgent": [
+        "Blood, Urine, and CSF Cultures (if febrile status, complex seizure, or clinical signs of sepsis/meningitis)",
+        "Lumbar Puncture with CSF Analysis (CSF glucose, protein, cell count, Gram stain, bacterial culture, and viral PCR panel; image first if focal deficits or signs of raised ICP)",
+        "Serum Antiepileptic Drug Levels (in children with known epilepsy to verify compliance or toxicity)",
+        "Toxicology Screen (urine and serum screen for illicit drugs, sedatives, organophosphates, or ingestion mimics)"
+      ],
+      "step3_confirmatory": [
+        "Electroencephalogram (EEG): Video-EEG or 24-hour sleep-deprived EEG (indicated in complex febrile seizures, unprovoked seizures, or suspected non-convulsive status; avoid in simple febrile seizures)",
+        "Neuroimaging: Non-contrast Cranial CT (acute emergency for trauma, haemorrhage, acute herniation) or Brain MRI with contrast (epilepsy protocol: evaluate cortical dysplasia, mesial temporal sclerosis, tuberous sclerosis, or encephalitis)",
+        "Metabolic Inborn Errors of Metabolism (IEM) Screen (blood ammonia, lactate, plasma amino acids, urinary organic acids) in neonatal or infantile refractory seizures",
+        "Targeted Genetic Panel (e.g. SCN1A mutation in suspected Dravet syndrome / GEFS+ with prolonged hemiclonic seizures triggered by vaccination or mild fever)"
+      ]
+    },
+    "skills": [
+      "skill.exam.paed.cns.febrile_seizure",
+      "skill.tx.paed.anticonvulsants",
+      "skill.gen.paed.vitals",
+      "skill.gen.paed.appearance",
+      "skill.exam.paed.cns.higher_mental_gcs",
+      "skill.exam.paed.cns.meningeal",
+      "skill.proc.paed.lumbar_puncture",
+      "skill.annex.paed.csf_analysis",
+      "skill.tx.paed.resuscitation_drugs"
+    ],
+    "examPearls": [
+      {
+        "topic": "The 5-Minute Time Rule for Status Epilepticus",
+        "text": "Historically, status epilepticus was defined as 30 minutes of continuous seizure activity. Today, the operational definition mandates initiating emergency abortive treatment at 5 minutes (t1 threshold). Neurobiological studies demonstrate that after 5 minutes of continuous convulsive activity, endogenous inhibitory mechanisms fail: GABA-A receptors are internalised and phosphorylated (losing responsiveness to benzodiazepines), while excitatory NMDA receptors migrate to the synaptic cleft, causing self-sustaining excitotoxic cell death."
+      },
+      {
+        "topic": "Dravet Syndrome and the Sodium Channel Blocker Warning",
+        "text": "In an infant under 12 months presenting with recurrent, prolonged hemiclonic febrile seizures (often triggered by mild temperature elevations or bathing), suspect Dravet syndrome (severe myoclonic epilepsy of infancy, caused by loss-of-function SCN1A mutations in inhibitory GABAergic interneurons). Sodium channel-blocking antiseizure medications (phenytoin, fosphenytoin, carbamazepine, lamotrigine) exacerbate seizures and can precipitate fatal status epilepticus; levetiracetam, valproate, or clobazam are the preferred agents."
+      },
+      {
+        "topic": "Parental Counselling After a Simple Febrile Seizure",
+        "text": "Witnessing a febrile convulsion is terrifying for families, who frequently believe their child is dying. Clinicians must explicitly communicate four key facts: (1) simple febrile seizures do not cause brain damage, intellectual disability, or paralysis; (2) the risk of developing subsequent epilepsy is very low (~1%, practically identical to any healthy child); (3) regular round-the-clock antipyretics do not prevent recurrence; and (4) demonstrate practical first aid: place the child gently on the side, protect the head, never force fingers, spoons, or objects into the mouth, and time the episode."
+      }
+    ]
+  }
+}

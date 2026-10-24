@@ -1,0 +1,1449 @@
+{
+  "_comment": "Authorised CliniX clinical pathway for Caesarean Section. System: obgyn. Citations: StewardMD Clinical KB, RCOG, Williams Obstetrics, WHO.",
+  "id": "caesarean-section",
+  "name": "Caesarean section",
+  "fullName": "Caesarean section: Indications, consent and complications",
+  "subtitle": "Indications, consent and complications",
+  "system": "obgyn",
+  "kbRef": "operative_obstetrics_forceps_vacuum_caesarean",
+  "oneLine": "Indication review, Robson classification, informed consent, surgical technique, and complication management in caesarean delivery",
+  "estMinutes": 45,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics of caesarean section",
+      "skills": [
+        "skill.caesarean.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient and informed consent",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position",
+        "skill.approach.obg.cs_setup",
+        "skill.approach.obg.cs_info",
+        "skill.approach.obg.cs_decision"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History of presenting pregnancy and acute labour",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.booking_lmp",
+        "skill.hx.caesarean.symptoms"
+      ],
+      "emphasis": {
+        "skill.hx.caesarean.symptoms": {
+          "expect": "Ask specifically about constant scar pain between contractions, bleeding per vaginam, and changes in fetal movements.",
+          "note": "Differentiates true uterine scar dehiscence from standard labour pains in a woman undergoing trial of labour."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Obstetric background, prior scars, and medical history",
+      "skills": [
+        "skill.hx.obg.medical_family_drug",
+        "skill.hx.obg.previous_pregnancies",
+        "skill.hx.caesarean.risk"
+      ],
+      "emphasis": {
+        "skill.hx.caesarean.risk": {
+          "expect": "Verify number, type of prior uterine incisions, original indication, and inter-delivery interval.",
+          "note": "Classical vertical incisions absolutely contraindicate labour, whereas one prior lower segment scar allows cautious trial of labour."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General physical examination and pre-operative vitals",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema",
+        "skill.gen.cyanosis"
+      ]
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Obstetric examination, fetal assessment, and pelvimetry",
+      "skills": [
+        "skill.exam.obg.preg_prep_inspect",
+        "skill.exam.obg.fundal_height",
+        "skill.exam.obg.leopold",
+        "skill.exam.obg.fetal_heart",
+        "skill.exam.obg.fetal_diameters_station",
+        "skill.exam.obg.pelvimetry",
+        "skill.exam.obg.labour_abdomen",
+        "skill.exam.obg.labour_pv"
+      ]
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the caesarean indications and scar assessment together",
+      "skills": [
+        "skill.caesarean.findings"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary and obstetric decision-making",
+      "skills": [
+        "skill.caesarean.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis: indication review, trial of labour, and alternatives",
+      "skills": [
+        "skill.caesarean.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Pre-operative investigations, fetal surveillance, and scoring systems",
+      "skills": [
+        "skill.ix.caesarean.workup",
+        "skill.ix.obg.ctg_interpretation",
+        "skill.annex.caesarean.robson"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnostic formulation, urgency stratification, and delivery plan",
+      "skills": [
+        "skill.caesarean.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Surgical procedure, operative steps, complication management, and recovery",
+      "skills": [
+        "skill.tx.caesarean",
+        "skill.approach.obg.team_leader"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation and clinical discussion",
+      "skills": [
+        "skill.present.case",
+        "skill.present.caesarean.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.caesarean.consent_and_indication",
+        "title": "Evaluate indications, urgency category, and obtain informed consent for emergency caesarean section",
+        "prompt": "A 26-year-old G2P1L1 at 39 weeks gestation with one prior caesarean section has been in active labour for 6 hours. For the last 2 hours her cervix has remained at 6 cm, the fetal head is at station minus 1 with severe caput, she reports persistent lower scar tenderness between contractions, and the CTG displays repetitive variable decelerations. Formulate the operative indication, determine the urgency category, explain the necessity of caesarean birth to the patient, and obtain informed surgical consent.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.obg.cs_setup",
+          "skill.approach.obg.cs_info",
+          "skill.approach.obg.cs_decision",
+          "skill.caesarean.basics",
+          "skill.caesarean.findings"
+        ],
+        "criticalItems": [
+          "Establishes communication calmly and verifies maternal comprehension and capacity.",
+          "Clearly states the primary indication (cephalopelvic disproportion with arrest of progress) and warns of impending scar dehiscence.",
+          "Explains the four core surgical risks: bleeding requiring blood transfusion, infection, accidental injury to bladder or bowel, and implications for subsequent pregnancies.",
+          "Explicitly states that bilateral tubal sterilization requires separate antepartum written consent and cannot be added urgently without prior documentation."
+        ],
+        "examinerQuestions": [
+          {
+            "q": "What urgency category applies to this scenario and what is your target decision-to-delivery interval?",
+            "a": "This is a Category 2 emergency caesarean section (maternal or fetal compromise without immediate life threat), with an institutional audit benchmark of delivery within 75 minutes, although earlier delivery is preferred due to scar tenderness."
+          },
+          {
+            "q": "What specific intrauterine resuscitation steps would you institute while mobilizing the operating theatre?",
+            "a": "Position the woman in full left lateral tilt, discontinue any uterotonic infusions, administer an intravenous crystalloid fluid bolus, provide maternal supplemental oxygen if hypoxemic, and prepare tocolysis if uterine tachysystole is present."
+          },
+          {
+            "q": "What are the common and serious risks that must be outlined during emergency caesarean consent?",
+            "a": "Common risks include post-operative wound pain, surgical site or uterine infection (2 to 7 percent), and transient neonatal respiratory distress. Serious risks include severe postpartum haemorrhage, blood transfusion, emergency hysterectomy (about 1 in 670), visceral bladder or bowel injury (about 1 in 1000), and venous thromboembolism."
+          }
+        ]
+      },
+      {
+        "id": "osce.caesarean.surgical_steps_complications",
+        "title": "Demonstrate lower segment caesarean surgical steps, head delivery techniques, and angle haemostasis",
+        "prompt": "You are the primary obstetric surgeon performing an emergency lower segment caesarean section for a 26-year-old with cephalopelvic disproportion and failure of progress in the second stage. Describe your surgical entry, lower uterine segment incision, techniques to deliver a deeply impacted fetal head, uterotonic administration, and layered repair of the hysterotomy.",
+        "seconds": 480,
+        "skills": [
+          "skill.tx.caesarean",
+          "skill.caesarean.diagnosis",
+          "skill.approach.obg.team_leader"
+        ],
+        "criticalItems": [
+          "Verifies that preoperative intravenous antibiotic prophylaxis (cefazolin 2 g IV) was given within 60 minutes before skin incision.",
+          "Identifies and reflects the uterovesical fold of peritoneum and mobilises the bladder inferiorly using a Doyen retractor.",
+          "Demonstrates recognized manoeuvres for delivering a deeply impacted head, such as the Patwardhan technique or reverse breech extraction.",
+          "Administers intravenous oxytocin immediately following delivery of the infant and ensures complete placental removal before closing the uterine wound in two layers."
+        ],
+        "examinerQuestions": [
+          {
+            "q": "How would you handle an unexpected lateral extension of the uterine incision into the broad ligament?",
+            "a": "Apply Green-Armytage or ring forceps to the bleeding edges for temporary haemostasis, exteriorise the uterus, identify the course of the ureter and uterine vessels, place an angle figure-of-eight or mattress suture just above the apex of the tear under direct visualization, and call for senior obstetric surgical assistance."
+          },
+          {
+            "q": "Why is exteriorization of the uterus versus in situ repair chosen, and what are its physiological effects?",
+            "a": "Exteriorization facilitates optimal visualization of uterine wound angles, assessment of adnexa, and rapid closure of bleeding hysterotomy margins, but it may cause transient traction-induced vagal nausea, vomiting, and maternal hemodynamic fluctuation."
+          },
+          {
+            "q": "What postoperative measures promote enhanced recovery after caesarean surgery (ERAS)?",
+            "a": "Early removal of the urinary catheter (at 6 to 12 hours), multimodal opioid-sparing analgesia, early oral intake of liquids and solids within hours of surgery, early ambulation, early uninterrupted skin-to-skin contact with breastfeeding, and thromboprophylaxis."
+          }
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.caesarean.basics",
+      "skill.caesarean.findings",
+      "skill.caesarean.differential",
+      "skill.ix.caesarean.workup",
+      "skill.annex.caesarean.robson",
+      "skill.caesarean.diagnosis",
+      "skill.tx.caesarean",
+      "skill.approach.obg.cs_info"
+    ]
+  },
+  "skills": {
+    "skill.caesarean.basics": {
+      "id": "skill.caesarean.basics",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Basics of caesarean section: indications, categories, and decision-to-delivery interval",
+      "oneLine": "Principles of caesarean delivery, classification into maternal, fetal, and obstetric indications, and the four urgency categories",
+      "why": "Caesarean delivery is among the most frequently performed major surgeries worldwide. Understanding its evidence-based indications, the four standard urgency categories, and the audit standards for decision-to-delivery intervals allows the clinician to balance maternal surgical risks against neonatal benefits and avoid unnecessary surgical morbidity.",
+      "teach": [
+        {
+          "heading": "Definition and clinical indications for caesarean section",
+          "body": "Caesarean section is the operative birth of a baby, placenta, and membranes through incisions made in the abdominal wall (laparotomy) and uterine wall (hysterotomy).\n\nIndications are broadly divided into absolute indications, where vaginal delivery is impossible or perilous (such as complete placenta praevia, severe contracted pelvis, or pelvic bone tumour), and relative indications, where vaginal birth is possible but carries elevated risk (such as dystocia, breech presentation, or prior caesarean scar)."
+        },
+        {
+          "heading": "Classification of urgency: the four Lucas categories",
+          "table": {
+            "cols": [
+              "Category",
+              "Urgency Level",
+              "Clinical Examples",
+              "Target Interval"
+            ],
+            "rows": [
+              [
+                "Category 1",
+                "Immediate threat to maternal or fetal life",
+                "Sustained bradycardia, cord prolapse, uterine rupture, massive abruption",
+                "Delivery within 30 minutes"
+              ],
+              [
+                "Category 2",
+                "Maternal or fetal compromise not immediately life-threatening",
+                "Failure to progress, pathological CTG, failed trial of scar",
+                "Delivery within 75 minutes"
+              ],
+              [
+                "Category 3",
+                "Requires early delivery without acute compromise",
+                "Prelabour rupture of membranes with prior scar, unstable diabetes",
+                "Scheduled during daytime hours"
+              ],
+              [
+                "Category 4",
+                "Elective delivery at a time suited to patient and staff",
+                "Planned repeat caesarean, elective breech, stable placenta praevia",
+                "Scheduled at or after 39 weeks"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "The decision-to-delivery interval and clinical principles",
+          "body": "The decision-to-delivery interval (DDI) is an institutional audit standard rather than a biological threshold. In Category 1 emergencies, the internationally accepted benchmark is delivery within 30 minutes, though every minute saved reduces fetal acidemia.\n\nIn Category 2 scenarios, a 75-minute interval allows thorough maternal evaluation, fluid loading, regional anaesthetic placement, and informed consent without adversely affecting neonatal outcomes."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the recommended target decision-to-delivery interval for a Category 1 emergency caesarean section?",
+          "a": "The audit benchmark for a Category 1 emergency caesarean section is delivery of the infant within 30 minutes of making the decision.",
+          "accept": [
+            "30 minutes",
+            "within 30 minutes",
+            "30 min"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why is an elective Category 4 caesarean section routinely scheduled at or after 39 weeks gestation rather than earlier?",
+          "a": "Scheduling elective caesarean birth at or after 39 completed weeks significantly reduces the incidence of neonatal respiratory morbidity, including transient tachypnoea of the newborn and respiratory distress syndrome, which is twice as frequent at 38 weeks.",
+          "accept": [
+            "39 weeks",
+            "respiratory morbidity",
+            "transient tachypnoea",
+            "respiratory distress syndrome",
+            "38 weeks"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "indication_classification",
+          "text": "Accurately categorises indications into absolute versus relative maternal, fetal, and obstetric causes."
+        },
+        {
+          "id": "urgency_categorisation",
+          "text": "Distinguishes the four Lucas urgency categories and cites appropriate audit decision-to-delivery intervals."
+        },
+        {
+          "id": "timing_rationale",
+          "text": "Explains the physiological justification for scheduling elective births at 39 completed weeks."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "operative_obstetrics_forceps_vacuum_caesarean: Clinical pearls and section categories"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline No. 13: Caesarean Birth"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.caesarean.findings": {
+      "id": "skill.caesarean.findings",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Putting the caesarean indication and intrapartum picture together",
+      "oneLine": "Synthesizing maternal symptoms, cervical progress, fetal descent, CTG tracings, and scar findings to establish an operative indication",
+      "why": "Deciding on an operative delivery requires synthesizing multiple dynamic clinical findings. Misdiagnosing labour arrest can lead to premature surgical intervention, while missing true cephalopelvic disproportion or occult scar dehiscence leads to obstructed labour, uterine rupture, and perinatal asphyxia.",
+      "teach": [
+        {
+          "heading": "Recognizing labour dystocia: arrest of dilatation and descent",
+          "body": "Labour dystocia (failure to progress) is the leading indication for primary caesarean section. In the active first stage (from 5 cm dilatation), delay is identified when cervical dilatation is slower than expected or crosses the action line on a partograph.\n\nSecondary arrest of dilatation is defined as no cervical change for 2 hours or more in active labour despite regular contractions. Arrest of descent is failure of the fetal head to advance during the second stage."
+        },
+        {
+          "heading": "Clinical signs of cephalopelvic disproportion",
+          "table": {
+            "cols": [
+              "Examination Feature",
+              "Normal Progress",
+              "Cephalopelvic Disproportion (CPD)"
+            ],
+            "rows": [
+              [
+                "Abdominal Palpation",
+                "Head engaging, 0/5 to 2/5 palpable above brim",
+                "Head high and floating, 3/5 to 5/5 palpable above brim"
+              ],
+              [
+                "Cervical Application",
+                "Cervix thin, well-applied to presenting part",
+                "Cervix loose or thick, anterior lip oedematous and trapped"
+              ],
+              [
+                "Caput Succedaneum",
+                "Absent or mild superficial oedema",
+                "Marked progressive caput (+2 or +3) forming early"
+              ],
+              [
+                "Moulding of Cranial Bones",
+                "Grade 1 (bones touching along suture line)",
+                "Grade 3 (bones overlapping severely and irreducible)"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Recognizing scar dehiscence versus true uterine rupture",
+          "body": "In a woman undergoing trial of labour after caesarean (TOLAC), differentiation between scar dehiscence and rupture is crucial.\n\nDehiscence is an occult separation of the myometrial scar with intact visceral peritoneum; the mother and fetus remain stable.\n\nTrue rupture involves disruption of all layers, typically presenting with continuous scar pain between contractions, fetal heart rate decelerations or bradycardia, vaginal bleeding, and recession of the presenting part."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What physical signs on vaginal and abdominal examination strongly indicate cephalopelvic disproportion in active labour?",
+          "a": "Key signs include an unengaged fetal head with 3/5 or more palpable abdominally, secondary arrest of cervical dilatation despite adequate contractions, progressive formation of a large caput succedaneum, grade 3 severe overlapping cranial moulding, and an oedematous anterior cervical lip.",
+          "accept": [
+            "unengaged head",
+            "secondary arrest",
+            "caput succedaneum",
+            "moulding",
+            "oedematous anterior lip"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What is the single most sensitive indicator of uterine scar dehiscence or rupture during a trial of labour?",
+          "a": "An abnormal fetal heart rate pattern, especially prolonged decelerations or acute fetal bradycardia, is the most consistent and sensitive early sign of uterine rupture, occurring in up to 70 percent of cases.",
+          "accept": [
+            "abnormal fetal heart rate",
+            "bradycardia",
+            "prolonged decelerations",
+            "fetal heart rate pattern"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "dystocia_identification",
+          "text": "Correctly defines arrest of dilatation and arrest of descent according to standard intrapartum guidelines."
+        },
+        {
+          "id": "cpd_physical_markers",
+          "text": "Identifies the combination of high presenting part, excessive caput, and severe cranial moulding as diagnostic of disproportion."
+        },
+        {
+          "id": "scar_surveillance",
+          "text": "Recognizes CTG decelerations and localized continuous scar pain as primary warning signs of scar failure."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "operative_obstetrics_forceps_vacuum_caesarean: Pathophysiology and differentials"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Dystocia: abnormal labor and cephalopelvic disproportion"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.caesarean.summary": {
+      "id": "skill.caesarean.summary",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Clinical summary: structuring the caesarean delivery decision",
+      "oneLine": "Synthesizing the indication, urgency category, maternal-fetal risk balance, and surgical consent into an actionable operative plan",
+      "why": "A concise, structured clinical summary ensures multidisciplinary alignment among the obstetrician, anaesthetist, operating theatre nurse, and neonatal team before embarking on surgery. Summarising key patient factors prevents avoidable intraoperative surprises and ensures that consent is verified.",
+      "teach": [
+        {
+          "heading": "The core components of an operative obstetric summary",
+          "body": "A comprehensive caesarean summary integrates five essential elements: patient parity and gestational age, current phase of labour, specific clinical indication, assigned urgency category (Category 1 to 4), and maternal surgical risk factors.\n\nSurgical risk factors include prior pelvic operations, suspected adhesions, elevated BMI, abnormal placentation (placenta praevia or accreta), and known coagulation disorders."
+        },
+        {
+          "heading": "Balancing maternal safety and neonatal benefit",
+          "body": "Every operative decision requires conscious evaluation of the risk-benefit balance. In true cephalopelvic disproportion or fetal compromise, prompt caesarean section avoids stillbirth, birth trauma, hypoxic-ischaemic encephalopathy, and pelvic organ damage.\n\nHowever, it carries operative risks: increased blood loss, wound infection, anaesthetic complications, and future implications such as uterine scar rupture and placenta accreta."
+        },
+        {
+          "heading": "Informed consent and rapid communication under time pressure",
+          "body": "Even in urgent emergencies, the clinician must communicate the rationale for surgery clearly and empathetically to the mother and her birth partner.\n\nConfirm capacity, outline common and serious complications in plain terms, discuss alternatives where relevant, confirm whether tubal ligation has been separately consented, and record the discussion contemporaneously in the patient record."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What five essential elements should be communicated in a structured handover before an emergency caesarean section?",
+          "a": "The five elements are maternal parity and gestational age, the precise indication for operative delivery, the urgency category (Category 1 to 4), fetal status on CTG, and specific maternal surgical risk factors including prior scars, blood crossmatch status, and allergies.",
+          "accept": [
+            "parity",
+            "gestational age",
+            "indication",
+            "urgency category",
+            "fetal status",
+            "risk factors",
+            "blood crossmatch"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Why must bilateral tubal ligation never be performed during an emergency caesarean section based solely on verbal intraoperative request?",
+          "a": "Bilateral tubal sterilization is a permanent, irreversible procedure requiring unhurried antepartum counselling and written informed consent obtained well before labour. Decisions made under acute intrapartum stress carry high rates of subsequent regret and violate informed consent principles.",
+          "accept": [
+            "irreversible",
+            "antepartum counselling",
+            "written informed consent",
+            "regret",
+            "stress"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "structured_synthesis",
+          "text": "Constructs a concise operative handover incorporating parity, gestation, indication, urgency, and surgical risks."
+        },
+        {
+          "id": "risk_balance_awareness",
+          "text": "Articulates both immediate neonatal benefits and long-term maternal surgical consequences."
+        },
+        {
+          "id": "consent_ethics",
+          "text": "Demonstrates adherence to legal and ethical requirements regarding informed consent and sterilization."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "operative_obstetrics_forceps_vacuum_caesarean: Elective versus crash section by categories"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline No. 13: Caesarean Birth"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.caesarean.differential": {
+      "id": "skill.caesarean.differential",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Differential diagnosis: evaluating indications, trial of labour, and alternatives",
+      "oneLine": "Differentiating true cephalopelvic disproportion from hypocontractility, assessing suitability for instrumental delivery, and ruling out acute catastrophes",
+      "why": "Before committing a woman to caesarean delivery, the clinician must exclude treatable hypocontractility that may respond to conservative measures, evaluate whether assisted vaginal birth is safely achievable, and rule out acute intrapartum emergencies such as complete uterine rupture or severe placental abruption.",
+      "teach": [
+        {
+          "heading": "True CPD versus hypocontractile uterine inertia",
+          "body": "Before diagnosing cephalopelvic disproportion and scheduling surgical delivery, the clinician must distinguish mechanical obstruction from inadequate uterine action (hypotonic uterine inertia).\n\nHypocontractility is characterized by infrequent, weak contractions (< 3 contractions per 10 minutes, lasting < 40 seconds) without severe moulding; this may respond to amniotomy and cautious oxytocin titration in an unscarred uterus."
+        },
+        {
+          "heading": "Caesarean section versus operative vaginal delivery",
+          "table": {
+            "cols": [
+              "Clinical Parameter",
+              "Favours Caesarean Section",
+              "Favours Operative Vaginal Delivery"
+            ],
+            "rows": [
+              [
+                "Cervical Dilatation",
+                "Incomplete dilatation (< 10 cm)",
+                "Cervix fully dilated (10 cm)"
+              ],
+              [
+                "Head Station and Descent",
+                "Head high, above ischial spines (station -2 to 0)",
+                "Head deeply engaged, station +2 or at pelvic floor"
+              ],
+              [
+                "Fetal Head Position",
+                "High transverse, brow, or face mento-posterior",
+                "Direct occipito-anterior or low cavity rotation"
+              ],
+              [
+                "Caput and Moulding",
+                "Severe disproportion, excessive moulding",
+                "Moderate moulding, bony landmarks accessible"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Ruling out acute intrapartum catastrophes",
+          "body": "In a patient in active labour with acute pain and fetal heart decelerations, differentiate dystocia from acute life-threatening catastrophes.\n\nComplete uterine rupture presents with sudden cessation of contractions, loss of station, and shock. Severe placental abruption causes a tense, woody, tender uterus and dark bleeding. Cord prolapse reveals a palpable pulsating cord in the vagina, requiring immediate crash section."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What essential prerequisite criteria must be fulfilled before considering an operative vaginal delivery rather than a caesarean section?",
+          "a": "Prerequisites include fully dilated cervix, ruptured membranes, head engaged at station plus 2 or lower, precise knowledge of fetal position, empty maternal bladder, adequate pelvic dimensions, adequate analgesia, informed consent, and operator competence.",
+          "accept": [
+            "fully dilated",
+            "membranes ruptured",
+            "head engaged",
+            "station",
+            "empty bladder",
+            "pelvis adequate"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Why is oxytocin augmentation relatively contraindicated or used with extreme caution in a woman with a scarred uterus?",
+          "a": "Oxytocin hyperstimulation significantly increases intrauterine pressure and wall tension, elevating the risk of uterine scar rupture by three- to five-fold compared to spontaneous labour in a scarred uterus.",
+          "accept": [
+            "hyperstimulation",
+            "uterine rupture",
+            "scar rupture",
+            "pressure",
+            "wall tension"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "inertia_vs_cpd",
+          "text": "Distinguishes poor uterine contractions from true bony or soft-tissue mechanical cephalopelvic disproportion."
+        },
+        {
+          "id": "instrumental_safety_criteria",
+          "text": "Applies standard prerequisites before deciding between instrumental vaginal birth and caesarean section."
+        },
+        {
+          "id": "catastrophe_differentiation",
+          "text": "Recognizes clinical features of complete uterine rupture, placental abruption, and cord prolapse."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "operative_obstetrics_forceps_vacuum_caesarean: Pathophysiology and differentials"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Operative Vaginal Delivery: forceps versus vacuum versus cesarean"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.caesarean.workup": {
+      "id": "skill.ix.caesarean.workup",
+      "kind": "investigation",
+      "system": "obgyn",
+      "title": "Pre-operative workup and intrapartum monitoring for caesarean section",
+      "oneLine": "Essential pre-operative investigations, blood crossmatch, continuous cardiotocography, and ultrasound assessment of scar and placenta",
+      "why": "A systematic preoperative workup optimizes maternal stability, anticipates catastrophic hemorrhage, screens for viral infections, and ensures immediate readiness for regional anaesthesia and neonatal resuscitation.",
+      "teach": [
+        {
+          "heading": "Essential laboratory investigations for operative delivery",
+          "table": {
+            "cols": [
+              "Investigation",
+              "Target Value / Finding",
+              "Clinical Significance"
+            ],
+            "rows": [
+              [
+                "Complete Blood Count",
+                "Hemoglobin >= 10.0 g/dL, Platelets >= 100000 /uL",
+                "Quantifies preexisting anemia; safe platelet count for spinal anaesthesia"
+              ],
+              [
+                "Blood Group & Crossmatch",
+                "ABO & RhD verified, 2 units PRBC crossmatched",
+                "Immediate transfusion readiness for obstetric haemorrhage"
+              ],
+              [
+                "Coagulation Profile",
+                "PT, INR (< 1.2), APTT normal",
+                "Excludes consumptive coagulopathy in abruption, sepsis, or pre-eclampsia"
+              ],
+              [
+                "Viral Serology",
+                "HIV, HBsAg, HCV non-reactive",
+                "Universal precautions, prevention of mother-to-child vertical transmission"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Intrapartum fetal surveillance: continuous CTG monitoring",
+          "body": "Continuous electronic fetal monitoring is mandatory during trial of labour after caesarean or whenever fetal compromise is suspected.\n\nAssess four features: baseline heart rate (normal 110 to 160 bpm), baseline variability (normal 5 to 25 bpm), presence of cycling accelerations, and decelerations.\n\nPathological CTG findings (prolonged bradycardia < 100 bpm or recurrent late decelerations) mandate immediate Category 1 or 2 surgical delivery."
+        },
+        {
+          "heading": "Ultrasound evaluation of the lower segment scar and placental site",
+          "body": "Antenatal and intrapartum ultrasound confirms fetal lie, presentation, estimated fetal weight, and amniotic fluid index.\n\nIn women with prior uterine surgery, scan localization of the placenta is essential to rule out placenta praevia and morbidly adherent placenta accreta spectrum under the anterior scar.\n\nA lower uterine segment full-thickness measurement under 2.0 to 2.5 mm warns of scar thinning and higher dehiscence risk."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What minimum platelet count is generally accepted as safe for administering spinal anaesthesia for caesarean section?",
+          "a": "A platelet count of 75000 to 80000 per microlitre is generally considered the lower safety threshold for spinal anaesthesia in the absence of rapid consumption or coagulopathy.",
+          "accept": [
+            "75000",
+            "80000",
+            "platelet count",
+            "threshold",
+            "spinal anaesthesia"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is ultrasound exclusion of placenta accreta spectrum vital before repeat caesarean section?",
+          "a": "An anterior low-lying placenta overlying a previous caesarean scar carries a high risk of placenta accreta spectrum, which can cause catastrophic peripartum hemorrhage requiring balloon tamponade, uterine artery embolization, or emergency caesarean hysterectomy.",
+          "accept": [
+            "placenta accreta",
+            "caesarean scar",
+            "haemorrhage",
+            "caesarean hysterectomy",
+            "tamponade"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "preop_lab_selection",
+          "text": "Selects and interprets hemoglobin, platelets, blood group crossmatching, and coagulation screens correctly."
+        },
+        {
+          "id": "ctg_pathology_recognition",
+          "text": "Identifies pathological cardiotocography features warranting urgent surgical intervention."
+        },
+        {
+          "id": "scar_and_placenta_imaging",
+          "text": "Explains the significance of placental localization and lower uterine segment scar thickness on ultrasound."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "operative_obstetrics_forceps_vacuum_caesarean: Additional investigations"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline No. 13: Caesarean Birth"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.caesarean.robson": {
+      "id": "skill.annex.caesarean.robson",
+      "kind": "annexure",
+      "system": "obgyn",
+      "title": "The Robson Ten-Group Classification System for caesarean delivery audit",
+      "oneLine": "The World Health Organization standard 10-group classification system to monitor, audit, and compare caesarean delivery rates",
+      "why": "The World Health Organization endorsed the Robson 10-group classification system as the global standard for auditing and comparing caesarean section rates. By categorising all deliveries based on readily available obstetric parameters, it identifies which patient groups drive institutional caesarean rates and targets quality improvement interventions.",
+      "teach": [
+        {
+          "heading": "Principles and variables of the Robson classification",
+          "body": "The Robson system classifies all admitted women into 10 mutually exclusive, completely inclusive groups based on five core obstetric characteristics: parity (nulliparous or multiparous), onset of labour (spontaneous, induced, or pre-labour caesarean), gestational age (preterm < 37 weeks or term >= 37 weeks), fetal presentation (cephalic, breech, or abnormal lie), and number of fetuses (single or multiple)."
+        },
+        {
+          "heading": "Robson Groups 1 through 5: term cephalic deliveries",
+          "table": {
+            "cols": [
+              "Group",
+              "Obstetric Category",
+              "Onset of Labour",
+              "Clinical Audit Significance"
+            ],
+            "rows": [
+              [
+                "Group 1",
+                "Nulliparous, single cephalic, >= 37 weeks",
+                "Spontaneous labour",
+                "Benchmark of obstetric practice; target CS rate 10 to 15 percent"
+              ],
+              [
+                "Group 2",
+                "Nulliparous, single cephalic, >= 37 weeks",
+                "Induced or pre-labour caesarean",
+                "Reflects induction of labour policies and primary elective CS rates"
+              ],
+              [
+                "Group 3",
+                "Multiparous (no prior CS), single cephalic, >= 37 wk",
+                "Spontaneous labour",
+                "Largest cohort; baseline CS rate should remain under 3 percent"
+              ],
+              [
+                "Group 4",
+                "Multiparous (no prior CS), single cephalic, >= 37 wk",
+                "Induced or pre-labour caesarean",
+                "Reflects medical induction protocols in multiparas without prior scar"
+              ],
+              [
+                "Group 5",
+                "Multiparous, at least one prior CS, single cephalic, >= 37 wk",
+                "Spontaneous, induced or pre-labour CS",
+                "Major driver of overall hospital CS rate; reflects VBAC uptake"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Robson Groups 6 through 10: high-risk and malpresentation groups",
+          "table": {
+            "cols": [
+              "Group",
+              "Obstetric Category",
+              "Onset of Labour",
+              "Expected CS Rate"
+            ],
+            "rows": [
+              [
+                "Group 6",
+                "All nulliparous breeches",
+                "Any onset (spontaneous, induced, or CS)",
+                "High CS rate (80 to 95 percent) post-Term Breech Trial"
+              ],
+              [
+                "Group 7",
+                "All multiparous breeches (including prior CS)",
+                "Any onset",
+                "High CS rate (70 to 90 percent), selective vaginal breech birth"
+              ],
+              [
+                "Group 8",
+                "All multiple pregnancies (including prior CS)",
+                "Any onset",
+                "Variable (50 to 75 percent), dictated by presentation of twin A"
+              ],
+              [
+                "Group 9",
+                "All abnormal lies (transverse, oblique)",
+                "Any onset",
+                "Near 100 percent (absolute mechanical indication for caesarean)"
+              ],
+              [
+                "Group 10",
+                "All single cephalic, <= 36 weeks (preterm)",
+                "Any onset",
+                "Reflects management of preterm FGR, abruption, and severe pre-eclampsia"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Which Robson group is typically the largest contributor to the overall caesarean section rate in secondary and tertiary maternity hospitals?",
+          "a": "Robson Group 5 (multiparous women with at least one previous caesarean section, single cephalic pregnancy at term) is the single largest contributor to the overall caesarean rate in most hospitals.",
+          "accept": [
+            "group 5",
+            "previous caesarean",
+            "prior caesarean",
+            "single cephalic"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is Robson Group 1 considered the most critical group for evaluating quality of intrapartum obstetric care?",
+          "a": "Robson Group 1 consists of low-risk nulliparous women at term in spontaneous labour; primary caesarean section in this group converts a healthy woman into a scarred uterus for all future pregnancies.",
+          "accept": [
+            "low-risk",
+            "nulliparous",
+            "spontaneous labour",
+            "scarred uterus",
+            "future pregnancies"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "robson_variables",
+          "text": "Identifies the five core clinical parameters that define the Robson classification."
+        },
+        {
+          "id": "group_5_significance",
+          "text": "Explains how Group 5 drives institutional caesarean rates and the impact of VBAC."
+        },
+        {
+          "id": "audit_application",
+          "text": "Applies Robson groups to identify clinical cohorts with potential for safe caesarean rate reduction."
+        }
+      ],
+      "sources": [
+        {
+          "source": "WHO",
+          "locator": "Robson Classification: Implementation Manual"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "operative_obstetrics_forceps_vacuum_caesarean: Clinical pearls and section categories"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.caesarean.diagnosis": {
+      "id": "skill.caesarean.diagnosis",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Diagnostic formulation, urgency stratification, and delivery plan",
+      "oneLine": "Formulating a precise clinical diagnosis, categorising the urgency of delivery, and coordinating the multidisciplinary theatre pathway",
+      "why": "Formulating a precise obstetric diagnosis articulates the primary surgical indication, establishes the urgency category, and communicates critical maternal-fetal factors to the multidisciplinary team to ensure safe and timely operative delivery.",
+      "teach": [
+        {
+          "heading": "The complete obstetric diagnosis formulation",
+          "body": "A complete obstetric diagnosis formulation comprises seven essential elements: gravidity, parity, living children, precise gestational age in completed weeks, phase of labour (latent, active, or second stage), the primary surgical indication, and significant secondary complications.\n\nExample: Gravida 2 Para 1 Living 1 at 39 weeks gestation in active first stage of labour with cephalopelvic disproportion, impending scar dehiscence, and non-reassuring fetal heart status."
+        },
+        {
+          "heading": "Assigning the urgency category: Category 1 versus Category 2",
+          "table": {
+            "cols": [
+              "Urgency Category",
+              "Clinical Trigger",
+              "Anaesthetic Preference",
+              "Audit Delivery Target"
+            ],
+            "rows": [
+              [
+                "Category 1 (Crash)",
+                "Acute bradycardia, cord prolapse, uterine rupture, massive hemorrhage",
+                "Rapid sequence general anaesthesia or fast spinal if indwelling epidural",
+                "Delivery within 30 minutes"
+              ],
+              [
+                "Category 2 (Urgent)",
+                "Dystocia, secondary arrest, pathological CTG without acute crash",
+                "Regional spinal anaesthesia (heavy bupivacaine 0.5 percent)",
+                "Delivery within 75 minutes"
+              ],
+              [
+                "Category 3 (Scheduled)",
+                "Prelabour rupture of membranes with prior scar, unstable diabetes",
+                "Regional spinal anaesthesia",
+                "Scheduled within daytime hours"
+              ],
+              [
+                "Category 4 (Elective)",
+                "Planned repeat caesarean, placenta praevia, maternal choice",
+                "Regional spinal anaesthesia",
+                "Scheduled at or after 39 weeks"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Multidisciplinary theatre mobilization and surgical checklist",
+          "body": "Once the caesarean decision is established, immediately activate the theatre multidisciplinary team: obstetric scrub nurse, duty anaesthetist, operating department practitioner, and paediatric resuscitation team.\n\nVerify the WHO Surgical Safety Checklist: confirmed identity, signed informed consent, verified blood crossmatch, administered prophylactic antibiotics, and maternal left lateral tilt."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What anaesthetic technique is generally preferred for a Category 2 emergency caesarean section and why?",
+          "a": "Regional spinal anaesthesia using heavy bupivacaine 0.5 percent is preferred because it avoids the risks of difficult tracheal intubation and gastric acid aspiration associated with general anaesthesia, allows the mother to remain awake, and minimizes neonatal drug exposure.",
+          "accept": [
+            "spinal anaesthesia",
+            "bupivacaine",
+            "difficult intubation",
+            "aspiration",
+            "neonatal drug exposure"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What specific intrauterine resuscitation manoeuvres should be instituted while preparing for an emergency caesarean for fetal distress?",
+          "a": "Manoeuvres include positioning the mother in full left lateral tilt to relieve aortocaval compression, discontinuing any oxytocic infusions, administering an intravenous crystalloid fluid bolus, providing facial oxygen if maternal hypoxia is present, and administering acute tocolysis (such as subcutaneous terbutaline) if uterine tachysystole is present.",
+          "accept": [
+            "left lateral tilt",
+            "stop oxytocin",
+            "iv fluids",
+            "crystalloid",
+            "tocolysis",
+            "oxygen"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "diagnostic_completeness",
+          "text": "Formulates an obstetric diagnosis incorporating parity, gestational age, labour stage, indication, and urgency."
+        },
+        {
+          "id": "urgency_differentiation",
+          "text": "Correctly assigns Category 1 versus Category 2 based on the immediacy of life threat."
+        },
+        {
+          "id": "intrauterine_resuscitation",
+          "text": "Initiates timely intrauterine resuscitation manoeuvres while the operating theatre is being prepared."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "operative_obstetrics_forceps_vacuum_caesarean: Elective versus crash section by categories"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline No. 13: Caesarean Birth"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.caesarean": {
+      "id": "skill.tx.caesarean",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Surgical procedure, operative steps, complication management, and recovery",
+      "oneLine": "Step-by-step technique of lower segment caesarean section, management of difficult head delivery, angle extension haemostasis, and postoperative care",
+      "why": "Lower segment transverse caesarean section is the primary surgical delivery technique because incising the thinned lower uterine segment minimizes operative blood loss, facilitates bladder reflection, reduces visceral adhesions, and provides an optimal myometrial healing site that carries a substantially lower rupture risk in subsequent pregnancies than classical vertical incisions.",
+      "dosingNote": "This module teaches management at the level of drug class and principle, quoting only the regimens as stated in the cited book and guideline sources below. All agents, doses, routes and regimens must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "teach": [
+        {
+          "heading": "Preoperative preparation, surgical antibiotic prophylaxis, and incision",
+          "body": "Administer surgical antibiotic prophylaxis with intravenous cefazolin (2 g IV, or clindamycin if penicillin-allergic) within 60 minutes prior to skin incision.\n\nPosition the patient on the operating table with a 15-degree left lateral tilt to prevent inferior vena cava compression.\n\nUnder regional spinal anaesthesia, prepare the abdomen with alcoholic chlorhexidine and perform a transverse suprapubic Pfannenstiel skin incision 2 to 3 cm above the symphysis pubis."
+        },
+        {
+          "heading": "Abdominal wall entry and lower uterine segment hysterotomy",
+          "body": "Incise the rectus sheath transversely and separate it bluntly and sharply from the underlying rectus abdominis muscles. Separate rectus muscles vertically along the linea alba.\n\nOpen the parietal peritoneum. Identify the loose uterovesical fold of peritoneum, incise it transversely, and reflect the urinary bladder inferiorly using a Doyen retractor.\n\nMake a small 2 cm transverse curvilinear incision in the lower uterine segment and extend it bluntly with fingers or bandage scissors."
+        },
+        {
+          "heading": "Delivery of the fetal head and difficult head extraction techniques",
+          "body": "Rupture amniotic membranes if intact. Slide the right hand beneath the lower uterine segment incision below the fetal head, flexing the vertex and gently lifting it through the incision like a vectis while an assistant applies gentle transabdominal fundal pressure.\n\nFor a free-floating high head, apply Wrigley forceps. For a deeply engaged impacted head, utilize Patwardhan technique (delivering anterior shoulder first, then body, then head) or an assistant pushing the head vaginally."
+        },
+        {
+          "heading": "Uterotonics, placental delivery, and two-layer hysterotomy closure",
+          "body": "Immediately after delivery of the baby, double-clamp and cut the cord, and hand the infant to the neonatal team. Administer slow intravenous oxytocin (Syntocinon 10 IU IV) to achieve vigorous uterine contraction.\n\nDeliver the placenta completely by controlled cord traction. Grasp the uterine incision edges and lateral angles with Green-Armytage or Allis clamps.\n\nClose the lower segment hysterotomy in two layers using synthetic absorbable suture (Vicryl 1)."
+        },
+        {
+          "heading": "Haemostasis, abdominal wall closure, and enhanced postoperative recovery",
+          "body": "Inspect lateral uterine angles for extensions; ligate bleeding vessels. Non-closure of visceral and parietal peritoneum is standard practice and reduces operative time.\n\nVerify complete surgical sponge, gauze, and instrument counts. Close the rectus sheath with continuous absorbable suture (Vicryl 1).\n\nClose subcutaneous tissue if depth exceeds 2 cm, and reapproximate skin. Encourage early skin-to-skin contact, early oral fluids, early ambulation, and thromboprophylaxis."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What is the recommended timing for administering prophylactic intravenous antibiotics for caesarean section?",
+          "a": "Prophylactic intravenous antibiotics, typically cefazolin 2 g IV, should be administered within 60 minutes prior to skin incision rather than after cord clamping, significantly reducing postoperative surgical site infection and endometritis.",
+          "accept": [
+            "within 60 minutes",
+            "prior to skin incision",
+            "cefazolin",
+            "surgical site infection",
+            "endometritis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How is a deeply engaged, impacted fetal head managed during emergency caesarean section in second stage obstructed labour?",
+          "a": "Techniques include the push technique (an unsterile assistant pushes the head upward from the vagina), the reverse breech extraction or pull technique (delivering the feet first through the hysterotomy), and the Patwardhan technique (delivering the shoulders and body before the head).",
+          "accept": [
+            "push technique",
+            "pull technique",
+            "reverse breech",
+            "patwardhan technique",
+            "vaginal push"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "surgical_antibiotic_timing",
+          "text": "Specifies administration of IV antibiotic prophylaxis within 60 minutes prior to surgical skin incision."
+        },
+        {
+          "id": "anatomical_layers_and_hysterotomy",
+          "text": "Outlines abdominal entry in layers, uterovesical peritoneal reflection, and lower uterine segment transverse incision."
+        },
+        {
+          "id": "impacted_head_management",
+          "text": "Describes recognized manoeuvres including Patwardhan and reverse breech extraction for deeply impacted fetal head."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "operative_obstetrics_forceps_vacuum_caesarean: Section layers Misgav and technique"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Caesarean delivery and peripartum hysterectomy"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.caesarean.sunita",
+      "title": "Sunita: 26-year-old at 39 weeks with previous caesarean in active labour with failure of descent and scar tenderness",
+      "patient": {
+        "name": "Sunita",
+        "age": 26,
+        "sex": "female",
+        "occupation": "School teacher",
+        "residence": "District hospital catchment area, Nashik, Maharashtra; lives with husband and 3-year-old child"
+      },
+      "initialVitals": {
+        "hr": 92,
+        "bpSystolic": 118,
+        "bpDiastolic": 76,
+        "rr": 18,
+        "spo2": 98,
+        "temp": 37,
+        "gcs": 15
+      },
+      "opening": "Doctor, this is my second pregnancy. My first baby was born by operation three years ago because he was bottom-down. I was hoping to deliver normally this time, but I have been having very strong pains since early morning, and for the past two hours the pains feel different, with constant severe burning over my old scar, and the midwife says the baby is not coming down.",
+      "fallback": "I did not follow that, doctor. Please ask me about my labour pains, my previous caesarean, the pain over my scar, leaking water, or how the baby is moving.",
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you to the hospital today",
+            "tell me what problems you are having",
+            "why have you come to the delivery room",
+            "describe your main complaints right now",
+            "tell me about your labour pains"
+          ],
+          "reply": "Doctor, I have been having very painful labour contractions since 4:00 AM. For the last two hours, I feel constant burning and severe tenderness across my old operation scar, and the nurse examined me and said my dilation has not changed from 6 cm."
+        },
+        "pain_character": {
+          "cues": [
+            "how frequent are your labour contractions",
+            "tell me about the nature of the pain",
+            "how long does each labour pain last",
+            "are the uterine contractions coming regularly",
+            "strength and duration of your labour pains"
+          ],
+          "reply": "The labour pains are coming every 2 to 3 minutes and each contraction lasts almost a minute. They are very strong and tightening my whole tummy, but between the contractions the pain does not go away completely anymore."
+        },
+        "scar_pain_symptoms": {
+          "cues": [
+            "tell me about the pain over your scar",
+            "is the scar tender between contractions",
+            "burning pain over your old caesarean scar",
+            "constant lower tummy pain between pains",
+            "do you have continuous pain over the previous cut"
+          ],
+          "reply": "Yes, doctor! Previously the pain went away completely between the tight pains. But for the past two hours, there is a sharp burning ache right on my old lower bikini scar that never eases, even when my tummy is soft."
+        },
+        "labour_duration_progress": {
+          "cues": [
+            "when did your active labour pains begin",
+            "how many hours have you been in labour",
+            "tell me how your labour has progressed",
+            "cervical dilatation over the last few hours",
+            "did the nurse say you are dilating"
+          ],
+          "reply": "My mild pains started yesterday midnight, but strong regular pains began around 4:00 AM. When the doctor examined me at 8:00 AM, my mouth of the womb was 6 cm dilated. They checked me again at 11:00 AM, and it is still exactly 6 cm."
+        },
+        "membrane_status_fluid": {
+          "cues": [
+            "have your waters broken yet",
+            "leaking of fluid from the vagina",
+            "colour of the water that leaked out",
+            "did your water bag burst during labour",
+            "any foul smelling fluid from below"
+          ],
+          "reply": "My waters broke naturally about three hours ago around 8:30 AM. A gush of warm water came out. It looked clear with small white flecks, not green or brown, and it did not smell bad."
+        },
+        "fetal_movements_history": {
+          "cues": [
+            "how are the baby movements today",
+            "have you felt the baby kicking normally",
+            "any decrease in your baby movements",
+            "is the baby moving as usual during labour",
+            "baby activity in the last few hours"
+          ],
+          "reply": "The baby was kicking actively early this morning, doctor, but over the last couple of hours during these intense contractions, I have barely felt any movements at all. I am getting very worried."
+        },
+        "vaginal_bleeding_history": {
+          "cues": [
+            "have you noticed any bleeding from below",
+            "fresh blood coming from the vagina",
+            "any blood clots or heavy bleeding",
+            "pink discharge or vaginal bleeding",
+            "blood staining on your undergarments"
+          ],
+          "reply": "I saw some sticky pinkish mucus mixed with a few drops of fresh red blood when I wiped myself an hour ago, but there is no heavy gushing of blood."
+        },
+        "previous_caesarean_details": {
+          "cues": [
+            "why was your first caesarean performed",
+            "tell me about your previous operation",
+            "what was the reason for your first surgery",
+            "indication for your earlier caesarean section",
+            "was your first operation planned or emergency"
+          ],
+          "reply": "My first delivery was three years ago. The doctor told me the baby was in breech position with bottom down, so they performed a planned lower segment caesarean operation at 39 weeks. My baby boy weighed 3.1 kg and was healthy."
+        },
+        "interval_between_pregnancies": {
+          "cues": [
+            "what is the time gap between your pregnancies",
+            "how old is your first child now",
+            "gap between your previous delivery and this one",
+            "number of years since your last operation",
+            "spacing between your two babies"
+          ],
+          "reply": "My first son is exactly three years and two months old now. So there is a good three-year gap between my first delivery and this pregnancy."
+        },
+        "previous_operation_recovery": {
+          "cues": [
+            "how was your recovery after the first operation",
+            "did you have any wound infection after surgery",
+            "any fever or complications after your previous section",
+            "healing of your previous caesarean wound",
+            "did you need blood transfusion in the past"
+          ],
+          "reply": "My previous recovery went very smoothly. The wound healed within a week without any pus, redness, or fever. I was discharged on the fourth day and I did not receive any blood transfusion."
+        },
+        "current_pregnancy_antenatal": {
+          "cues": [
+            "did you attend regular antenatal checkups",
+            "how has this pregnancy been so far",
+            "antenatal visits and tests in this pregnancy",
+            "did you take your iron and calcium tablets",
+            "any complications during these nine months"
+          ],
+          "reply": "I attended eight antenatal visits at the rural hospital. All my blood tests, blood sugar, and blood pressure were normal. I took iron, folic acid, and calcium tablets regularly, and received two tetanus injections."
+        },
+        "pelvimetry_and_scans": {
+          "cues": [
+            "what did your recent ultrasound scans show",
+            "estimated weight of the baby on ultrasound",
+            "did the doctor mention the placenta position",
+            "scans done in the ninth month",
+            "was the pelvis evaluated previously"
+          ],
+          "reply": "I had an ultrasound scan at 37 weeks. The doctor said the baby head was down, estimated weight was around 3.6 kg, the water was adequate, and the placenta was high up at the back, away from the scar."
+        },
+        "maternal_medical_history": {
+          "cues": [
+            "do you have high blood pressure or diabetes",
+            "any past medical illness or chronic disease",
+            "history of asthma thyroid or heart disease",
+            "any long term medical conditions",
+            "have you suffered from any major illnesses"
+          ],
+          "reply": "No, doctor. I do not have high blood pressure, diabetes, thyroid disease, asthma, or heart trouble. I have always been in good health."
+        },
+        "medications_and_allergies": {
+          "cues": [
+            "what medicines have you taken today",
+            "are you allergic to any medicines",
+            "any drug allergies such as penicillin",
+            "injections or drips given to you in labour",
+            "medicines given by the nurse today"
+          ],
+          "reply": "The nurse started a glucose saline drip about an hour ago, but no injections were given into the bottle. I have no known drug allergies to penicillin or any other medicine."
+        },
+        "personal_and_dietary": {
+          "cues": [
+            "when did you last eat or drink anything",
+            "hours of fasting or nil by mouth",
+            "last meal or water consumed today",
+            "did you have food or tea this morning",
+            "when was your last intake of food"
+          ],
+          "reply": "I had a cup of plain black tea at 6:00 AM when the pains woke me up. Since then, I have only sipped a few drops of water because the pains made me nauseated. I have had no solid food since last night."
+        },
+        "family_and_social": {
+          "cues": [
+            "who is with you in the hospital",
+            "family background and support",
+            "is your husband present with you",
+            "family history of twins or complications",
+            "social support and family details"
+          ],
+          "reply": "My husband and my mother are here with me outside the labour room. My husband works as a clerk in the local revenue office. There is no family history of twins or genetic diseases."
+        },
+        "patient_delivery_wishes": {
+          "cues": [
+            "what were your wishes for this delivery",
+            "did you want a normal delivery after caesarean",
+            "were you hoping for a trial of scar",
+            "patient preference regarding mode of birth",
+            "what did you discuss about delivering normally"
+          ],
+          "reply": "Doctor, during my clinic visits, my doctor said that because my first surgery was only for breech, I had a good chance of delivering normally this time. I really wanted to try for a normal delivery, but only if it is safe for my baby and me."
+        },
+        "systemic_symptoms": {
+          "cues": [
+            "do you have severe headache or blurred vision",
+            "any fever shivering or burning urination",
+            "chest pain shortness of breath or dizziness",
+            "feeling faint dizzy or lightheaded",
+            "epigastric pain or nausea"
+          ],
+          "reply": "I do not have headache, eye flashing, or burning urination. I feel mild nausea with the pain and slight lightheadedness, but no breathlessness or chest pain."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Alert, anxious, in visible distress during frequent labour contractions; comfortable between contractions until palpation of the lower abdomen; no pallor, icterus, cyanosis, or peripheral oedema.",
+          "abnormal": false
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 92 beats per minute, regular, good volume; blood pressure 118/76 mmHg; respiratory rate 18 breaths per minute; temperature 37.0 degrees C; SpO2 98 percent on room air.",
+          "abnormal": false
+        },
+        "skill.exam.obg.preg_prep_inspect": {
+          "finding": "Abdomen distended corresponding to term gestation with longitudinal fetal ovoid; well-healed transverse suprapubic Pfannenstiel scar measuring approximately 11 cm; no visible peristalsis or Bandl retraction ring.",
+          "abnormal": true
+        },
+        "skill.exam.obg.fundal_height": {
+          "finding": "Symphysis-fundal height is 38 cm, corresponding with completed 39 weeks gestation; single fetus with clinically normal liquor volume.",
+          "abnormal": false
+        },
+        "skill.exam.obg.leopold": {
+          "finding": "Fundal grip reveals soft irregular breech; lateral grip reveals broad smooth back on maternal left and irregular small parts on right; first pelvic grip reveals hard rounded vertex high above pelvic brim; second pelvic grip confirms head is divergent and unengaged with 3/5 palpable above brim.",
+          "abnormal": true
+        },
+        "skill.exam.obg.fetal_heart": {
+          "finding": "Fetal heart rate is 142 beats per minute, regular between contractions, but auscultation immediately following contractions reveals transient slowing to 110 beats per minute with delayed recovery.",
+          "abnormal": true
+        },
+        "skill.exam.obg.fetal_diameters_station": {
+          "finding": "Head is in occipitotransverse position with parietal bone presenting; station is minus 1 (1 cm above ischial spines); significant caput succedaneum present (+2) with moderate moulding (+2) where parietal bones touch without overlapping.",
+          "abnormal": true
+        },
+        "skill.exam.obg.pelvimetry": {
+          "finding": "Subpubic angle is approximately 85 degrees (narrowed); sacral promontory easily reached with diagonal conjugate estimated at 10.5 cm (reduced); ischial spines prominent and sacrosciatic notch narrowed, confirming borderline contracted pelvic inlet.",
+          "abnormal": true
+        },
+        "skill.exam.obg.labour_abdomen": {
+          "finding": "Uterine contractions are 4 in 10 minutes, lasting 45 to 50 seconds, moderate to strong intensity; distinct localized tenderness and pain elicited on gentle palpation over the left half of the lower segment scar between contractions.",
+          "abnormal": true
+        },
+        "skill.exam.obg.labour_pv": {
+          "finding": "Cervix is fully effaced, dilated to 6 cm (unchanged from assessment 3 hours ago); anterior cervical lip is oedematous and trapped against the pubic bone; membranes ruptured with lightly blood-tinged amniotic fluid without thick meconium; presenting vertex at station minus 1 with caput.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "cbc",
+        "blood_group_crossmatch",
+        "intrapartum_ctg",
+        "obstetric_usg",
+        "coagulation_screen"
+      ],
+      "investigations": {
+        "cbc": {
+          "label": "Complete blood count",
+          "result": "Hemoglobin 11.2 g/dL, Hematocrit 33.6 percent, Total leukocyte count 10800 /uL, Platelets 215000 /uL",
+          "note": "Hemoglobin is adequate for anticipated operative blood loss; normal platelet count permits regional spinal anaesthesia.",
+          "indicated": true
+        },
+        "blood_group_crossmatch": {
+          "label": "Blood grouping, Rh typing, and crossmatch",
+          "result": "B Rh-positive; antibody screen negative; 2 units of packed red blood cells crossmatched and reserved.",
+          "note": "Crucial preoperative preparation in a scarred uterus requiring emergency surgical delivery.",
+          "indicated": true
+        },
+        "intrapartum_ctg": {
+          "label": "Continuous cardiotocography (CTG)",
+          "result": "Baseline fetal heart rate 145 bpm; moderate variability 10 to 15 bpm; no accelerations; repetitive variable decelerations and occasional late decelerations following contractions; uterine contractions 4 in 10 minutes.",
+          "note": "Pathological CTG tracing indicating intrapartum fetal compromise and non-reassuring fetal status.",
+          "indicated": true
+        },
+        "obstetric_usg": {
+          "label": "Obstetric ultrasound",
+          "result": "Single live intrauterine fetus in cephalic presentation; biparietal diameter 96 mm, abdominal circumference 345 mm, estimated fetal weight 3650 g; amniotic fluid index 11.2 cm; anterior placenta located in upper body and fundus, well clear of internal os and scar; lower uterine segment scar thinned to 1.8 mm.",
+          "note": "Confirms macrosomic cephalic fetus, excludes placenta praevia, and demonstrates scar thinning under 2 mm.",
+          "indicated": true
+        },
+        "coagulation_screen": {
+          "label": "Coagulation profile",
+          "result": "Prothrombin time 12.2 seconds (control 12.0 s), INR 1.02, Activated partial thromboplastin time 31 seconds (control 30 s), Fibrinogen 380 mg/dL.",
+          "note": "Normal coagulation profile, excluding consumptive coagulopathy and reassuring for spinal anaesthesia.",
+          "indicated": true
+        },
+        "random_blood_sugar": {
+          "label": "Random blood glucose",
+          "result": "94 mg/dL.",
+          "note": "Euglycemic; normal maternal metabolic state.",
+          "indicated": false
+        },
+        "viral_serology": {
+          "label": "Viral serology (HIV, HBsAg, HCV, VDRL)",
+          "result": "HIV I and II non-reactive, HBsAg negative, HCV antibody non-reactive, VDRL non-reactive.",
+          "note": "Confirms negative maternal viral status; standard universal surgical precautions apply.",
+          "indicated": false
+        },
+        "urine_routine_microscopy": {
+          "label": "Urine routine and microscopy",
+          "result": "Pale yellow, clear; protein nil, sugar nil, ketones trace; 2 to 4 RBCs per high power field, no pus cells or casts.",
+          "note": "Trace ketones reflect mild intrapartum fasting ketosis; minimal microscopic hematuria is common in engaged labour.",
+          "indicated": false
+        }
+      },
+      "differentialModel": {
+        "accept": [
+          "cephalopelvic disproportion",
+          "uterine rupture",
+          "fetal distress",
+          "chorioamnionitis",
+          "obstructed labour",
+          "failure to progress in labour",
+          "impending uterine rupture",
+          "secondary uterine inertia",
+          "deep transverse arrest",
+          "abruptio placentae"
+        ],
+        "answer": "Cephalopelvic disproportion with secondary arrest of labour in a patient with a previous lower segment caesarean section. Key differentials include impending uterine rupture or scar dehiscence, acute intrapartum fetal distress, deep transverse arrest, secondary uterine inertia, obstructed labour, chorioamnionitis, and complete uterine rupture.",
+        "minMatch": 3
+      },
+      "diagnosis": {
+        "accept": [
+          "cephalopelvic disproportion",
+          "obstructed labour",
+          "failure to progress in labour",
+          "failed trial of labour after caesarean section",
+          "impending uterine rupture",
+          "fetal distress"
+        ],
+        "answer": "Cephalopelvic disproportion with failure to progress in active labour and impending uterine scar dehiscence in a gravid woman with one previous lower segment caesarean section, requiring emergency Category 1 or 2 caesarean section.",
+        "minMatch": 1
+      },
+      "managementModel": {
+        "accept": [
+          "emergency caesarean section",
+          "caesarean section",
+          "stop oxytocin",
+          "iv fluids",
+          "crossmatch blood",
+          "consent",
+          "antibiotic prophylaxis",
+          "cefazolin",
+          "fetal monitoring",
+          "intrauterine resuscitation",
+          "left lateral position",
+          "oxygen",
+          "paediatrician on call",
+          "spinal anaesthesia"
+        ],
+        "answer": "Immediate emergency lower segment caesarean section (LSCS). Immediate resuscitation: discontinue any uterotonics, position in left lateral tilt, administer intravenous fluids and facial oxygen for intrauterine resuscitation, obtain urgent informed consent, crossmatch 2 units of packed red blood cells, administer preoperative antibiotic prophylaxis (intravenous cefazolin 2 g), alert the operating theatre, anaesthetic team, and neonatal resuscitation team, and perform lower segment transverse caesarean delivery.",
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "Trial of labour after caesarean (TOLAC) carries a 70 to 75 percent success rate in carefully selected women with one prior lower segment transverse incision, but requires continuous electronic fetal monitoring and immediate operative capability.",
+        "Secondary arrest of cervical dilatation (cessation of dilatation for 2 or more hours in active labour) combined with high unengaged head, excessive caput, and severe moulding indicates cephalopelvic disproportion, mandating caesarean delivery rather than oxytocin augmentation.",
+        "Constant scar pain and localized tenderness between contractions in a scarred uterus is a cardinal red flag for impending uterine scar dehiscence or rupture. Oxytocics must be stopped immediately and urgent laparotomy performed.",
+        "The Lucas classification defines four urgency categories: Category 1 (crash delivery <= 30 minutes for acute life threat), Category 2 (urgent delivery <= 75 minutes for maternal/fetal compromise), Category 3 (scheduled during working hours), and Category 4 (elective at or after 39 weeks).",
+        "Surgical antibiotic prophylaxis with intravenous cefazolin (2 g IV) should be administered within 60 minutes prior to skin incision, and slow intravenous oxytocin (10 IU IV) administered immediately following cord clamping to promote vigorous myometrial haemostasis."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}
