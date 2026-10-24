@@ -483,6 +483,12 @@ try {
   for (let i = 0; i < 40; i++) { if (await ev("!!document.querySelector('#clinixRoot [data-act=\"cx-station\"]')")) break; await sleep(250); }
   await ev("document.querySelector('#clinixRoot [data-act=\"cx-station\"]').click()");
   await sleep(600);
+  // Exam mode (app-marked, 5 options per step) is the default and has its own runner
+  // (test/run-clinix-osce-exam-ui.mjs); these checks cover the Practice checklist mode.
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-station-mode\"][data-mode=\"checklist\"]').click()");
+  await sleep(200);
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-station-start\"]').click()");
+  await sleep(600);
   ok((await ev("!!document.querySelector('#clinixRoot .cx-timer')")) === true, "station opens with a running clock");
 
   // Layout: labels start at the left (the icon span used to grow too and centre them), steps are
@@ -902,6 +908,12 @@ try {
   const stTitles = await ev("[...document.querySelectorAll('#clinixRoot [data-act=\"cx-station\"] .cx-row-t')].map(x => x.textContent)");
   ok(Array.isArray(stTitles) && stTitles.some(t => /Speculum/.test(t)) && stTitles.some(t => /Postpartum haemorrhage/.test(t)) && stTitles.some(t => /Eclampsia/.test(t)), "the station list names the speculum, PPH and eclampsia stations");
   await ev("document.querySelector('#clinixRoot [data-act=\"cx-station\"][data-id=\"osce.obg.speculum\"]').click()");
+  await sleep(500);
+  // Exam mode (app-marked, 5 options per step) is the default and has its own runner
+  // (test/run-clinix-osce-exam-ui.mjs); these checks cover the Practice checklist mode.
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-station-mode\"][data-mode=\"checklist\"]').click()");
+  await sleep(200);
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-station-start\"]').click()");
   await sleep(500);
   ok((await ev("document.querySelectorAll('#clinixRoot .cx-check').length")) >= 12 && (await ev("!!document.querySelector('#clinixRoot .cx-timer')")) === true,
     "opening the speculum station shows a timed checklist");
