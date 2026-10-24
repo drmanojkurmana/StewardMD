@@ -1,0 +1,192 @@
+{
+  "_comment": "CliniX 2.0 Presentation Library: Surgical Approach to a Lump in the Neck. Reuses shared Skills as atoms and provides tiered clinical reasoning from recognition to discriminators and emergency surgical actions.",
+  "schemaVersion": 1,
+  "id": "neck_lump",
+  "title": "Approach to a Lump in the Neck",
+  "subtitle": "Diagnostic triage of midline vs lateral cervical swellings, lymphadenopathy, thyroid pathology, and head-neck malignancy",
+  "system": "surgery",
+  "estMinutes": 45,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "layers": {
+    "recognise": {
+      "redFlags": [
+        "Stridor, hoarseness, respiratory distress, or progressive dyspnoea signaling upper airway compression from a rapidly enlarging thyroid mass, invasive anaplastic carcinoma, retrosternal goitre, or expanding cervical haematoma",
+        "Rapidly enlarging, stony-hard, fixed thyroid or lateral cervical mass with vocal cord paralysis (recurrent laryngeal nerve invasion indicating advanced malignancy)",
+        "Hard, matted, non-tender cervical lymphadenopathy fixed to deep cervical fascia or overlying skin in an adult with a history of bidi smoking, tobacco chewing, or betel nut use (metastatic squamous cell carcinoma from an occult mucosal primary)",
+        "Horner syndrome (unilateral miosis, partial ptosis, anhidrosis, and enophthalmos) indicating malignant invasion or compression of the cervical sympathetic chain",
+        "Brawny, woody, spreading induration of the submandibular and sublingual spaces with elevation of the tongue, drooling, high fever, and trismus (Ludwig angina: rapidly progressive fascial space cellulitis threatening airway occlusion)",
+        "Expansile, pulsatile cervical mass with an audible bruit or rapidly expanding haematoma following trauma or internal jugular vascular instrumentation"
+      ],
+      "vitalsPriorities": [
+        "Airway Patency and Respiratory Rate: Count respirations for a full 60 seconds and inspect for stridor, suprasternal indrawing, and tachypnoea (RR > 24 breaths/min); compressive goitres or submandibular space infections demand immediate airway evaluation and equipment preparation before any manipulation.",
+        "Heart Rate and Rhythm: Resting tachycardia (> 100 beats/min), irregular pulse (atrial fibrillation), and wide pulse pressure identify thyrotoxic crisis (thyroid storm) in toxic multinodular goitre or Graves disease; swinging fever with rigors accompanies acute suppurative lymphadenitis or cervical abscess.",
+        "Blood Pressure: Hypotension with tachycardia in a patient with a rapidly expanding post-traumatic or postoperative neck mass indicates major vascular compromise (carotid artery or internal jugular vein injury) requiring immediate surgical resuscitation."
+      ]
+    },
+    "classify": {
+      "tempo": {
+        "hyperacute_to_acute_hours_to_days": [
+          "Sudden haemorrhage into a pre-existing thyroid adenoma or colloid nodule",
+          "Ludwig angina (submandibular and sublingual space cellulitis)",
+          "Acute suppurative cervical lymphadenitis (Staphylococcus aureus, Streptococcus pyogenes)",
+          "Acute suppurative thyroiditis (frequently associated with a persistent pyriform fossa sinus tract)",
+          "Infected branchial cyst or infected thyroglossal cyst",
+          "Post-traumatic or postoperative carotid sheath haematoma"
+        ],
+        "subacute_weeks_to_months": [
+          "Tuberculous cervical lymphadenitis (scrofuloderma, collar-stud abscess, cold abscess)",
+          "Lymphoma (Hodgkin lymphoma, Non-Hodgkin lymphoma)",
+          "Subacute granulomatous thyroiditis (de Quervain thyroiditis)",
+          "Metastatic cervical lymphadenopathy (squamous cell carcinoma of the upper aerodigestive tract)",
+          "Rapidly progressive anaplastic thyroid carcinoma",
+          "Cat scratch disease (Bartonella henselae) and infectious mononucleosis"
+        ],
+        "chronic_months_to_years": [
+          "Simple colloid goitre and multinodular goitre (endemic iodine deficiency or sporadic)",
+          "Solitary thyroid nodule (follicular adenoma, papillary thyroid carcinoma, follicular thyroid carcinoma)",
+          "Hashimoto thyroiditis (chronic lymphocytic thyroiditis with diffuse firm goitre)",
+          "Congenital cervical cysts: Thyroglossal cyst, Branchial cyst, Cystic hygroma (lymphangioma)",
+          "Salivary gland neoplasms: Pleomorphic adenoma and Warthin tumour of parotid or submandibular gland",
+          "Carotid body tumour (chemodectoma / paraganglioma of the carotid bifurcation)",
+          "Cervical neurofibroma or schwannoma",
+          "Cervical rib presenting as a firm supraclavicular mass"
+        ]
+      },
+      "anatomical_compartments": {
+        "midline_cervical_swellings": [
+          "Submental lymphadenopathy (draining the floor of mouth, tip of tongue, lower lip, and chin)",
+          "Sublingual dermoid cyst (doughy, pasty consistency, independent of deglutition or tongue movement)",
+          "Thyroglossal cyst (lies between hyoid bone and thyroid cartilage, moves on deglutition AND on tongue protrusion)",
+          "Subhyoid bursitis (cystic swelling below hyoid bone, moves with deglutition but NOT with tongue protrusion)",
+          "Thyroid isthmus nodule or pyramidal lobe enlargement (moves with deglutition)",
+          "Delphian (prelaryngeal) and pretracheal lymph node enlargement",
+          "Suprasternal space of Burns swellings (lymph node, dermoid cyst, lipoma, or ectatic jugular venous arch)",
+          "Retrosternal goitre or thymic enlargement"
+        ],
+        "anterior_triangle_swellings": [
+          "Thyroid lateral lobe goitre / nodule (moves upwards on deglutition)",
+          "Branchial cyst (located at junction of upper and middle third of anterior border of sternocleidomastoid)",
+          "Submandibular salivary gland enlargement (sialolithiasis, sialadenitis, pleomorphic adenoma; bimanually palpable)",
+          "Carotid body tumour (situated at carotid bifurcation, mobile transversely but fixed vertically, transmitted pulsation)",
+          "Carotid artery aneurysm / pseudoaneurysm (expansile pulsation with systolic bruit)",
+          "Deep cervical chain lymphadenopathy (jugulodigastric, jugulo-omohyoid groups)",
+          "Plunging ranula (mucous extravasation cyst penetrating mylohyoid into submandibular space)",
+          "Laryngocele (distends with raised intralaryngeal pressure / Valsalva, resonant to percussion)"
+        ],
+        "posterior_triangle_swellings": [
+          "Cystic hygroma (soft, lobulated, brilliantly translucent lymphangioma, commonly in infants and young children)",
+          "Posterior triangle lymphadenopathy (tuberculosis, lymphoma, metastatic nasopharyngeal carcinoma)",
+          "Cold abscess from cervical spine tuberculosis (caries of cervical vertebrae tracking along prevertebral fascia)",
+          "Cervical rib (bony prominence in supraclavicular fossa, positive Adson vascular test)",
+          "Subclavian artery aneurysm (pulsatile mass above the clavicle)",
+          "Pharyngeal pouch / Zenker diverticulum (usually left-sided supraclavicular swelling, gurgles on palpation, empties on pressure)"
+        ]
+      }
+    },
+    "discriminators": [
+      {
+        "title": "Movement on Deglutition vs Movement on Tongue Protrusion",
+        "finding": "Ask the patient to take a sip of water and swallow. Swellings intimately attached to the pretracheal fascia, larynx, or trachea (thyroid gland, thyroglossal cyst, subhyoid bursa) move upwards with deglutition due to suspension by the suspensory ligament of Berry. Next, ask the patient to protrude the tongue with mouth open and jaw stationary. A thyroglossal cyst moves upwards during tongue protrusion because its tract connects directly to the foramen caecum at the base of the tongue. In contrast, thyroid swellings, subhyoid bursa, and lymph nodes do NOT move on tongue protrusion.",
+        "highYield": "Upward movement on deglutition proves connection to the laryngotracheal skeleton; subsequent upward movement on tongue protrusion is the pathognomonic clinical discriminator for a thyroglossal tract remnant."
+      },
+      {
+        "title": "Branchial Cyst vs Tuberculous Cold Abscess vs Cystic Hygroma",
+        "finding": "A branchial cyst presents in young adults at the junction of the upper and middle thirds of the anterior border of the sternocleidomastoid muscle, is smooth, ovoid, fluctuant, non-translucent, and needle aspiration yields turbid golden fluid rich in cholesterol crystals. Cystic hygroma (lymphangioma) arises in infants or young children in the lower posterior triangle, is soft, lobulated, compressible, and brilliantly translucent on torch examination. A tuberculous cold abscess presents with matted lymph nodes, non-translucent fluctuant swelling, and may exhibit a collar-stud configuration traversing the deep cervical fascia.",
+        "highYield": "Brilliant transillumination identifies a cystic hygroma; cholesterol crystals on fine-needle aspiration confirm a branchial cyst; absence of transillumination with matted lymphadenopathy indicates tuberculous suppuration."
+      },
+      {
+        "title": "Carotid Body Tumour vs Carotid Artery Aneurysm vs Lymph Node Mass",
+        "finding": "A carotid body tumour (chemodectoma) arises at the carotid bifurcation at the level of the greater cornu of the hyoid bone; it can be moved transversely side to side but cannot be moved vertically along the axis of the carotid vessels (Fontaine sign), and displays transmitted pulsation. A true carotid artery aneurysm displays expansile pulsation (examiner fingers are driven apart in all directions) and carries an audible systolic bruit. A malignant or tuberculous lymph node mass is mobile in both directions unless tethered by invasive fixation.",
+        "highYield": "Fontaine sign (mobility restricted to the horizontal axis with vertical fixity) localises the mass to the carotid bifurcation; expansile pulsation confirms an arterial aneurysm."
+      },
+      {
+        "title": "Submandibular Salivary Gland vs Submandibular Lymphadenitis",
+        "finding": "Perform bimanual palpation with one gloved index finger placed in the floor of the mouth and the opposite hand palpating below the inferior border of the mandible. An enlarged submandibular salivary gland is felt directly between the two hands, fills the submandibular triangle, and milking the gland may reveal purulent discharge or an impacted stone at Wharton duct orifice. Submandibular lymph nodes are felt more superficially along the mandibular border, are typically multiple, and the separate salivary gland remains palpable independently.",
+        "highYield": "Bimanual palpability inside the oral cavity and beneath the mandible confirms a submandibular salivary gland mass or calculus in Wharton duct."
+      },
+      {
+        "title": "Solitary Thyroid Nodule: Benign Follicular Adenoma vs Malignant Carcinoma",
+        "finding": "A benign follicular adenoma or dominant colloid nodule is typically smooth, uniform, firm or soft, mobile, non-tender, and moves freely with deglutition without cervical lymphadenopathy. Thyroid carcinomas (papillary, follicular, medullary, or anaplastic) characteristically present with hard or stony consistency, irregular surface, reduced mobility or fixation to strap muscles and trachea, recurrent laryngeal nerve palsy (hoarseness), or ipsilateral cervical lymphadenopathy (jugular chain).",
+        "highYield": "Stony-hard consistency, fixity to adjacent cervical structures, new hoarseness, and ipsilateral cervical lymphadenopathy are the cardinal physical signs of thyroid malignancy."
+      }
+    ],
+    "dontMiss": [
+      {
+        "disease": "Anaplastic Thyroid Carcinoma / Compressive Cervical Goitre",
+        "clue": "Elderly patient presenting with a rapidly enlarging, stony-hard thyroid mass over weeks causing progressive stridor, dyspnoea, dysphagia, and hoarseness of voice.",
+        "action": "Immediate emergency surgical and ENT consultation. Secure the airway with flexible fibreoptic intubation or emergency isthmusectomy / tracheostomy if acute stridor develops (note: tracheostomy can be hazardous due to overlying tumour mass); obtain urgent contrast CT of neck and thorax to assess tracheal compression and retrosternal invasion; obtain urgent core needle or incisional biopsy for histological confirmation."
+      },
+      {
+        "disease": "Ludwig Angina (Submandibular and Sublingual Space Infection)",
+        "clue": "Rapidly spreading bilateral brawny induration of the submandibular and submental regions with elevation and posterior displacement of the tongue, drooling, trismus, high fever, and impending airway obstruction following dental infection.",
+        "action": "CRITICAL SURGICAL AIRWAY EMERGENCY. Do not leave the patient unattended. Secure early definitive airway via flexible fibreoptic nasal intubation or emergency awake tracheostomy before total airway closure; initiate high-dose intravenous broad-spectrum antibiotics covering oral anaerobes and streptococci; perform urgent wide bilateral surgical decompression and drainage of submandibular, sublingual, and submental spaces."
+      },
+      {
+        "disease": "Occult Head and Neck Carcinoma with Cervical Metastasis (Troisier Sign / Virchow Node)",
+        "clue": "Painless, rock-hard, non-tender upper cervical or supraclavicular lymph node in a middle-aged or elderly patient, particularly with a history of bidi smoking, tobacco chewing, alcohol use, or weight loss.",
+        "action": "Perform thorough panendoscopy (indirect laryngoscopy, flexible nasopharyngoscopy, oral cavity and hypopharynx examination) and fine-needle aspiration cytology (FNAC) of the node. NEVER PERFORM AN OPEN EXCISIONAL BIOPSY OF A CERVICAL LYMPH NODE BEFORE EVALUATING THE UPPER AERODIGESTIVE TRACT, as violation of cervical fascial planes compromises subsequent radical neck dissection."
+      },
+      {
+        "disease": "Acute Suppurative Thyroiditis with Abscess Formation",
+        "clue": "Severe anterior neck pain, swinging fever, overlying cutaneous erythema, exquisitely tender thyroid lobe, and painful swallowing, frequently with an underlying pyriform fossa sinus tract in children or young adults.",
+        "action": "Perform urgent neck and thyroid ultrasonography to confirm fluid collection; perform ultrasound-guided needle aspiration for Gram stain and culture; initiate intravenous broad-spectrum antibiotics; drain surgically if fluctuant or unresponsive to needle aspiration; evaluate with barium swallow after resolution to exclude a persistent third or fourth branchial pouch fistula."
+      }
+    ],
+    "investigations": {
+      "step1_immediate": [
+        "High-Resolution Ultrasonography of Neck and Thyroid (USG neck: defines cystic vs solid architecture, microcalcifications, lymph node architecture, loss of fatty hilum, vascularity)",
+        "Fine-Needle Aspiration Cytology (FNAC: gold standard tissue investigation for solitary thyroid nodules [Bethesda classification], cervical lymphadenopathy, and salivary neoplasms)",
+        "Serum Thyroid Function Tests (Free T3, Free T4, TSH to identify hyperthyroid, euthyroid, or hypothyroid status)"
+      ],
+      "step2_urgent": [
+        "Contrast-Enhanced Computed Tomography (CECT) of Neck and Thorax (evaluates retrosternal goitre extent, tracheal lumen displacement, vascular invasion, and deep cervical fascial spaces)",
+        "Indirect Laryngoscopy / Flexible Fibreoptic Nasolaryngoscopy (evaluates vocal cord mobility and rules out occult mucosal primaries in nasopharynx, pyriform fossa, and larynx)",
+        "Complete Blood Count, ESR, and Mantoux / Tuberculin Skin Test (screening for tuberculous lymphadenitis in endemic settings)"
+      ],
+      "step3_confirmatory": [
+        "Ultrasound-guided core needle biopsy or excisional lymph node biopsy with GeneXpert / CBNAAT and mycobacterial culture (when FNAC of lymph node is inconclusive for tuberculosis or lymphoma)",
+        "Serum Calcitonin and Carcinoembryonic Antigen (CEA in suspected medullary thyroid carcinoma or family history of MEN 2)",
+        "Diagnostic radioiodine uptake scan (I-123 or Technetium-99m pertechnetate scan: distinguishes hyperfunctioning 'hot' nodule from non-functioning 'cold' nodule with higher malignancy risk)",
+        "Panendoscopy under general anaesthesia (examination under anaesthesia of nasopharynx, oral cavity, pharynx, larynx, and upper oesophagus with guided mucosal biopsies for occult primary)"
+      ]
+    },
+    "skills": [
+      "skill.hx.surg.neck_swelling",
+      "skill.exam.surg.neck_palpation",
+      "skill.exam.surg.neck_deglutition_tongue",
+      "skill.exam.surg.lateral_neck_mass",
+      "skill.hx.surg.thyroid",
+      "skill.exam.surg.thyroid_palpation",
+      "skill.exam.surg.thyroid_bruit",
+      "skill.exam.surg.thyroid_eye_signs",
+      "skill.hx.surg.lump",
+      "skill.exam.surg.lump_palpate",
+      "skill.presentation.thyroid.summary",
+      "skill.gen.vitals"
+    ],
+    "examPearls": [
+      {
+        "topic": "Method of Systematic Neck Palpation",
+        "text": "The patient sits comfortably on a stool while the examiner stands behind. The patient's neck is passively flexed slightly forward and inclined towards the side being examined. This posture relaxes the sternocleidomastoid muscle and deep cervical fascia, enabling finger pads to explore deep structures along the carotid sheath and thyroid lobes that would be completely obscured if the neck were extended."
+      },
+      {
+        "topic": "Crile Method vs Lahey Method for Thyroid Palpation",
+        "text": "In the Crile method, the clinician examines from the front, using the thumb of one hand to stabilise and displace the trachea towards the side being examined while the fingers of the opposite hand palpate the projected thyroid lobe. In the Lahey method, the clinician grasps the sternocleidomastoid muscle between thumb and fingers while displacing the larynx to project the contralateral thyroid lobe outward for bimanual palpation."
+      },
+      {
+        "topic": "Anatomical Basis of Thyroid Movement on Deglutition",
+        "text": "The thyroid gland moves upwards during deglutition because its false capsule (derived from the pretracheal layer of deep cervical fascia) is firmly anchored to the cricoid and thyroid cartilages by the lateral suspensory ligament of Berry. Because the larynx moves upwards during swallowing, the thyroid gland and any structure enclosed within the pretracheal fascia must move with it."
+      },
+      {
+        "topic": "Pistachio Shell Sign and Multilocular Transillumination in Cystic Hygroma",
+        "text": "Cystic hygroma is a multilocular lymphatic malformation filled with clear watery lymph, giving rise to brilliant transillumination in the posterior triangle. Because fluid can be compressed from one interconnecting endothelial pouch to another, gentle pressure displaces the fluid like a soft sponge; in contrast, branchial cysts contain thick mucoid or cholesterol-laden fluid and do not transilluminate."
+      },
+      {
+        "topic": "Surgical Level Classification of Cervical Lymph Nodes",
+        "text": "Cervical lymph nodes are systematised into seven standard anatomical levels: Level I (submental IA, submandibular IB), Level II (upper deep jugular / jugulodigastric), Level III (mid-deep jugular), Level IV (lower deep jugular / jugulo-omohyoid), Level V (posterior triangle), Level VI (anterior midline visceral compartment / Delphian and pretracheal), and Level VII (superior mediastinal nodes below the suprasternal notch)."
+      }
+    ]
+  }
+}

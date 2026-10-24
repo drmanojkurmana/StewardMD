@@ -1,0 +1,174 @@
+{
+  "_comment": "CliniX 2.0 Presentation Library: Symptom-First Approach to Abnormal and Postmenopausal Uterine Bleeding. Reuses shared Skills as atoms and provides tiered clinical reasoning from recognition to discriminators and emergency gynaecological actions.",
+  "schemaVersion": 1,
+  "id": "abnormal_or_postmenopausal_uterine_bleeding",
+  "title": "Approach to Abnormal and Postmenopausal Uterine Bleeding",
+  "subtitle": "FIGO PALM-COEIN classification, endometrial cancer evaluation, postmenopausal bleeding triage, and outpatient biopsy",
+  "system": "obgyn",
+  "estMinutes": 45,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "layers": {
+    "recognise": {
+      "redFlags": [
+        "Any postmenopausal vaginal bleeding (spontaneous spotting or bleeding occurring 12 months or more after cessation of menses), which is endometrial adenocarcinoma until proven otherwise by tissue biopsy",
+        "Torrential, flooding acute uterine haemorrhage producing hemodynamic instability, syncope, or symptomatic severe anaemia (haemoglobin < 7 g/dL) requiring emergency resuscitation and acute haemostatic control",
+        "Intermenstrual, irregular, or postcoital contact bleeding accompanied by foul watery vaginal discharge and an indurated, friable, or ulcerative cervical mass on speculum examination (invasive carcinoma of the cervix)",
+        "Rapidly enlarging uterine mass in a perimenopausal or postmenopausal woman, accompanied by pelvic pain, abnormal bleeding, and constitutional symptoms (concerning for uterine leiomyosarcoma)",
+        "Heavy menstrual bleeding since menarche accompanied by frequent epistaxis, easy bruising, gingival bleeding, or positive family history of bleeding diathesis (suggestive of inherited von Willebrand disease)",
+        "Endometrial stripe thickness > 4 mm on transvaginal ultrasound, or irregular/heterogeneous echotexture in a postmenopausal woman, or presence of endometrial fluid collection"
+      ],
+      "vitalsPriorities": [
+        "Haemodynamic Stability and Orthostatics: Check pulse rate, sitting and standing blood pressure, and conjunctival pallor. Severe chronic menorrhagia or acute flooding causes profound iron deficiency anaemia and hyperdynamic circulation; a postural systolic drop (> 20 mmHg) or resting tachycardia (> 100/min) indicates critical intravascular volume contraction.",
+        "Body Mass Index (BMI): Document BMI accurately. Chronic peripheral aromatization of ovarian and adrenal androstenedione to estrone in adipose tissue produces continuous unopposed mitogenic stimulation of the endometrium, markedly elevating the lifetime risk of atypical endometrial hyperplasia and type I endometrioid adenocarcinoma.",
+        "Speculum Examination Before Palpation: Always inspect the vulva, vagina, and cervix under direct illumination with a bivalve Cusco or Sims speculum before digital bimanual palpation. Confirm that blood is issuing from the external cervical os rather than the urethra, perineum, vaginal vault, or an exophytic cervical growth."
+      ]
+    },
+    "classify": {
+      "tempo": {
+        "acute_heavy_menstrual_bleeding": [
+          "Acute Severe AUB requiring immediate haemostatic intervention (submucosal fibroid sloughing, severe anovulatory breakthrough bleed, acute coagulopathy)",
+          "Torrential bleeding from cervical or uterine vascular malformation / post-procedural complication"
+        ],
+        "chronic_regular_cyclical_bleeding": [
+          "Heavy Menstrual Bleeding (regular cycles with excessive blood loss > 80 mL or lasting > 7 days)",
+          "Submucosal or Intramural Uterine Leiomyomas (FIGO Types 0 to 4)",
+          "Adenomyosis with progressive secondary dysmenorrhoea and heavy menses",
+          "Inherited Bleeding Disorders (von Willebrand Disease, factor deficiencies)"
+        ],
+        "chronic_irregular_anovulatory_bleeding": [
+          "Ovulatory Dysfunction (AUB-O): Polycystic Ovary Syndrome (PCOS), perimenopausal transition, obesity-related anovulation",
+          "Thyroid Dysfunction (hypothyroidism causing menorrhagia, hyperthyroidism causing oligomenorrhoea)",
+          "Hyperprolactinaemia",
+          "Iatrogenic Bleeding (breakthrough bleeding on progestin-only pills, copper IUD, implants)"
+        ],
+        "postmenopausal_bleeding_tempo": [
+          "Endometrial Atrophy (spontaneous spotting from fragile surface venules)",
+          "Endometrial Carcinoma (persistent, progressive, painless watery-pink to frank red bleeding)",
+          "Endometrial Polyps",
+          "Unopposed Estrogen Hormone Therapy or Tamoxifen-induced endometrial changes"
+        ]
+      },
+      "syndromes": {
+        "structural_palm_causes": [
+          "Polyp (AUB-P: endometrial or endocervical polyps)",
+          "Adenomyosis (AUB-A: presence of endometrial glands and stroma deep within myometrium with surrounding hypertrophy)",
+          "Leiomyoma (AUB-L: submucosal L_sm disrupting cavity, intramural/subserosal L_o)",
+          "Malignancy and Hyperplasia (AUB-M: atypical endometrial hyperplasia, endometrioid adenocarcinoma, uterine sarcomas)"
+        ],
+        "non_structural_coein_causes": [
+          "Coagulopathy (AUB-C: von Willebrand disease, thrombocytopenia, anticoagulant drugs)",
+          "Ovulatory Dysfunction (AUB-O: anovulatory cycles with sustained estrogen and absence of luteal progesterone)",
+          "Endometrial Dysfunction (AUB-E: primary deficiency of local vasoconstrictors e.g. endothelin-1, PGF2-alpha, or accelerated lysis of clots)",
+          "Iatrogenic (AUB-I: intrauterine devices, systemic hormones, psychotropic medications altering dopamine)",
+          "Not Otherwise Classified (AUB-N: arteriovenous malformations, isthmocele/caesarean scar defects)"
+        ],
+        "postmenopausal_specific_pathology": [
+          "Atrophic Endometritis and Atrophic Vaginitis (thinning of mucosal surfaces due to estrogen deprivation)",
+          "Type I Endometrioid Adenocarcinoma (estrogen-dependent, arising on background of atypical hyperplasia, PTEN mutation)",
+          "Type II Serous / Clear Cell Carcinoma (estrogen-independent, highly aggressive, arising in atrophic endometrium, TP53 mutation)",
+          "Hormone Replacement Therapy (HRT) breakthrough bleeding or Tamoxifen-induced polyp/hyperplasia"
+        ]
+      }
+    },
+    "discriminators": [
+      {
+        "title": "Structural (PALM) vs Non-Structural (COEIN) AUB",
+        "finding": "Evaluation of menstrual regularity and cyclicity. Structural lesions (submucosal fibroids, adenomyosis) and primary endometrial or coagulation defects typically present with heavy menstrual bleeding that occurs at predictable, cyclical intervals. In contrast, ovulatory dysfunction (AUB-O) presents with irregular, unpredictable cycle lengths, varying flow volume, and prolonged episodes of amenorrhoea followed by torrential, painless breakthrough bleeding due to anovulatory unopposed estrogen.",
+        "highYield": "Regular heavy cyclical bleeding suggests a structural uterine lesion or coagulopathy; irregular unpredictable bleeding suggests anovulatory endocrine dysfunction."
+      },
+      {
+        "title": "Postmenopausal Bleeding: Atrophy vs Endometrial Carcinoma (The 4 mm Ultrasound Rule)",
+        "finding": "Transvaginal ultrasound measurement of the double-layer endometrial stripe thickness (ET). An endometrial thickness of 4 mm or less in a woman presenting with postmenopausal bleeding carries a greater than 99 percent negative predictive value for endometrial cancer, typically indicating benign endometrial atrophy. An endometrial thickness greater than 4 mm, or any focal polypoid mass or heterogeneous architecture, mandates formal outpatient endometrial biopsy (Pipelle or hysteroscopy).",
+        "highYield": "In postmenopausal bleeding, an endometrial stripe thickness of 4 mm or less on TVS virtually excludes endometrial carcinoma; an ET greater than 4 mm mandates histological sampling."
+      },
+      {
+        "title": "Adenomyosis vs Uterine Leiomyoma (Clinical and Ultrasound Separation)",
+        "finding": "Physical examination and transvaginal sonography. Adenomyosis presents with a diffusely, symmetrically enlarged, soft to boggy, and tender uterus (rarely exceeding 12-14 weeks size) with severe, progressive secondary dysmenorrhoea; ultrasound shows asymmetrical myometrial thickening, subendometrial echogenic linear striations, and myometrial cysts. Leiomyomas present with an asymmetric, nodular, firm, non-tender pelvic mass; ultrasound reveals well-circumscribed, hypoechoic concentric whorled masses with peripheral vascularity.",
+        "highYield": "A symmetrically enlarged, tender, boggy uterus with severe dysmenorrhoea points to adenomyosis; an irregularly enlarged, nodular, non-tender uterus points to leiomyomas."
+      },
+      {
+        "title": "Endometrial Hyperplasia Without Atypia vs Atypical Hyperplasia (EIN)",
+        "finding": "Histopathological evaluation. Hyperplasia without atypia (simple or complex architectural crowding without nuclear changes) has a long-term progression rate to invasive carcinoma of less than 1 to 3 percent and responds reliably to high-dose oral progestins or the levonorgestrel intrauterine system (LNG-IUS). Atypical hyperplasia (Endometrial Intraepithelial Neoplasia / EIN) has a concurrent 30 to 45 percent risk of co-existing well-differentiated adenocarcinoma and a 25 to 30 percent risk of malignant progression, making total hysterectomy the standard definitive treatment.",
+        "highYield": "Atypical endometrial hyperplasia carries a 40 percent co-existing risk of invasive adenocarcinoma on final hysterectomy pathology."
+      }
+    ],
+    "dontMiss": [
+      {
+        "disease": "Endometrial Adenocarcinoma in Postmenopausal Bleeding",
+        "clue": "Any spotting, staining, or bleeding occurring 12 months or more after the final menstrual period, particularly in women with obesity, diabetes, hypertension, or tamoxifen use.",
+        "action": "DO NOT DELAY OR REASSURE WITHOUT INVESTIGATION. Perform urgent transvaginal ultrasound within 2 weeks. If endometrial thickness exceeds 4 mm or if bleeding is persistent, perform outpatient Pipelle endometrial biopsy or hysteroscopy with targeted biopsy; stage and treat surgically with total hysterectomy and bilateral salpingo-oophorectomy with sentinel lymph node evaluation upon confirmation of malignancy."
+      },
+      {
+        "disease": "Severe Acute Haemodynamically Destabilising AUB",
+        "clue": "Continuous soaking of multiple pads per hour, passing large clots, resting tachycardia, postural dizziness, hypotension, and profound pallor.",
+        "action": "Secure dual large-bore IV access, infuse intravenous crystalloids, send blood for emergency crossmatch and full blood count, administer intravenous tranexamic acid to promote haemostasis, initiate high-dose hormonal therapy (oral progestins or combined oral contraceptives) to stabilize the endometrium, or perform emergency intrauterine balloon tamponade (Foley catheter balloon inflated with 30-50 mL saline) or uterine curettage if refractory bleeding persists."
+      },
+      {
+        "disease": "Invasive Cervical Carcinoma",
+        "clue": "Contact/postcoital bleeding, intermenstrual spotting, and offensive serosanguineous discharge in a patient with inadequate cervical screening history.",
+        "action": "Perform careful Cusco speculum examination under good lighting. Identify any friable, fungating, ulcerative, or exophytic cervical lesion. Avoid blind endometrial biopsy; perform directed punch biopsy of the suspicious cervical lesion, document clinical staging (FIGO staging, vaginal fornix and parametrial examination), and refer urgently to gynaecological oncology."
+      },
+      {
+        "disease": "Underlying Coagulopathy / von Willebrand Disease (vWD)",
+        "clue": "Adolescent or young woman presenting with severe menorrhagia since menarche, history of excessive bleeding following tooth extraction, easy bruising, recurrent epistaxis, or postpartum haemorrhage in family members.",
+        "action": "Screen before performing any invasive intrauterine procedures. Order screening coagulopathy panel: complete blood count, prothrombin time, activated partial thromboplastin time, von Willebrand factor (vWF) antigen, ristocetin cofactor activity, and factor VIII coagulant activity; avoid NSAIDs and coordinate management with a haematology team."
+      }
+    ],
+    "investigations": {
+      "step1_immediate": [
+        "Urine pregnancy test (UPT): Mandatory first step to exclude pregnancy complications (threatened/incomplete abortion, ectopic pregnancy, gestational trophoblastic disease) in all women of reproductive age presenting with abnormal bleeding",
+        "Complete Blood Count (CBC) with red blood cell indices (MCV, MCH, RDW) to detect and quantify microcytic hypochromic iron-deficiency anaemia",
+        "Speculum and Bimanual Examination: Visual inspection of cervix, fornices, and vaginal walls to exclude local trauma, polyps, or malignant ulceration"
+      ],
+      "step2_urgent": [
+        "Transvaginal Ultrasound (TVS): First-line imaging modality to assess endometrial thickness and uniformity, detect intramural and submucosal fibroids, evaluate junctional zone for adenomyosis, and assess ovarian morphology (PCOS, ovarian masses)",
+        "Outpatient Endometrial Biopsy (Pipelle aspiration biopsy): Indicated in all women aged 45 and older presenting with AUB; in women younger than 45 with persistent bleeding or risk factors for unopposed estrogen (obesity BMI > 30, PCOS, nulliparity, tamoxifen); and in any postmenopausal woman with endometrial thickness > 4 mm",
+        "Thyroid Function Tests (Serum TSH): Screen for hypothyroidism (common cause of heavy menstrual bleeding) or hyperthyroidism (oligomenorrhoea)",
+        "Coagulation Panel (PT/INR, aPTT, bleeding time, vWF panel if clinical suspicion of coagulopathy)"
+      ],
+      "step3_confirmatory": [
+        "Diagnostic Outpatient Hysteroscopy with Targeted Biopsy: Gold standard for evaluating the endometrial cavity; directly visualises intracavitary lesions (endometrial polyps, submucosal fibroids) missed by blind Pipelle sampling",
+        "Saline Infusion Sonohysterography (SIS): High-sensitivity non-invasive alternative to distinguish focal polyps from diffuse endometrial hyperplasia",
+        "Pelvic Magnetic Resonance Imaging (MRI): Second-line imaging for accurate mapping of fibroids prior to myomectomy, confirming adenomyosis, and staging diagnosed endometrial cancer (depth of myometrial invasion and cervical stromal infiltration)",
+        "Endocrine Evaluation: Serum total testosterone, DHEA-S, 17-OHP, and prolactin in women with clinical signs of hyperandrogenism, hirsutism, or ovulatory dysfunction"
+      ]
+    },
+    "skills": [
+      "skill.hx.obg.menstrual_history",
+      "skill.hx.obg.gynae_symptoms",
+      "skill.hx.obg.gynae_background",
+      "skill.hx.abnormal.risk",
+      "skill.present.abnormal.case",
+      "skill.hx.menopause.risk",
+      "skill.hx.menopause.symptoms",
+      "skill.present.menopause.case",
+      "skill.approach.obg.intimate_consent",
+      "skill.exam.obg.vulval_inspect",
+      "skill.exam.obg.speculum_insert",
+      "skill.exam.obg.speculum_inspect",
+      "skill.exam.obg.bimanual",
+      "skill.exam.obg.endometrial_sampling",
+      "skill.exam.obg.dilatation_curettage"
+    ],
+    "examPearls": [
+      {
+        "topic": "FIGO PALM-COEIN Classification Framework",
+        "text": "Introduced by the International Federation of Gynecology and Obstetrics (FIGO), the PALM-COEIN system categorizes abnormal uterine bleeding in non-pregnant women of reproductive age into nine distinct etiologies. The first four are structural entities (PALM) that can be imaged or histologically confirmed: Polyp, Adenomyosis, Leiomyoma (further subclassified as submucosal vs other), and Malignancy/hyperplasia. The second five are non-structural entities (COEIN) not defined by imaging: Coagulopathy, Ovulatory dysfunction, Endometrial primary disorders, Iatrogenic causes (such as copper IUD or hormonal contraceptives), and Not otherwise classified."
+      },
+      {
+        "topic": "Pipelle Suction Curette vs Traditional Sharp Dilatation & Curettage (D&C)",
+        "text": "The Pipelle endometrial suction curette is a flexible 3.1 mm polypropylene cannula that obtains an adequate histological endometrial biopsy in the outpatient setting without general anaesthesia or cervical dilatation. It has a diagnostic sensitivity exceeding 99 percent for detecting endometrial carcinoma and 75 to 80 percent for atypical hyperplasia. Traditional sharp curettage under general anaesthesia carries higher perforation, infection, and anaesthetic risks; it is now reserved for cases where cervical stenosis prevents Pipelle insertion, when outpatient biopsy is inadequate or inconclusive, or when operative hysteroscopy is undertaken."
+      },
+      {
+        "topic": "Bokhman Dual Model of Endometrial Carcinoma",
+        "text": "Endometrial carcinoma is classified biologically into two broad clinicopathological prototypes under the Bokhman model. Type I (endometrioid adenocarcinoma, comprising ~80% of cases) develops in pre- and perimenopausal women with prolonged unopposed estrogen exposure (obesity, nulliparity, PCOS); it arises from atypical endometrial hyperplasia, frequently harbours PTEN and KRAS mutations, expresses estrogen and progesterone receptors, is typically low-grade, and carries a favourable prognosis. Type II (uterine serous carcinoma and clear cell carcinoma, ~20% of cases) develops in elderly postmenopausal women with atrophic endometrium; it is estrogen-independent, arises from intraepithelial carcinoma, harbours TP53 mutations, is poorly differentiated, has high rates of deep myometrial and peritoneal dissemination, and carries an aggressive prognosis."
+      },
+      {
+        "topic": "Levonorgestrel Intrauterine System (52 mg LNG-IUS) as First-Line Medical Therapy",
+        "text": "The 52 mg levonorgestrel-releasing intrauterine system (Mirena) is the most effective medical treatment for heavy menstrual bleeding, reducing menstrual blood loss by 85 to 95 percent within six months through profound local endometrial glandular atrophy and stromal decidualisation. It provides symptom control equivalent to endometrial ablation and superior to cyclical oral progestins, while avoiding surgical morbidity and preserving uterine integrity. In addition, it provides highly effective long-term contraception and endometrial protection in women receiving systemic estrogen therapy."
+      }
+    ]
+  }
+}

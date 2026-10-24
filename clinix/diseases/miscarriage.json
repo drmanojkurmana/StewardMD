@@ -1,0 +1,1089 @@
+{
+  "_comment": "Spontaneous abortion and miscarriage pathway. 14 chapters, 2 OSCE stations, viva pool, realistic Indian simulated patient case. Subtitle: Threatened, inevitable, incomplete, missed.",
+  "id": "miscarriage",
+  "name": "Abortion and miscarriage",
+  "fullName": "Spontaneous abortion and miscarriage",
+  "subtitle": "Threatened, inevitable, incomplete, missed",
+  "system": "obgyn",
+  "kbRef": "contraceptives_emergency_uterotonics_abortion",
+  "oneLine": "Bleeding and cramping in early pregnancy: clinical staging, ultrasound criteria, and evidence-based evacuation",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "Definitions of spontaneous abortion, gestational age limits, and early loss biology",
+      "skills": [
+        "skill.miscarriage.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "First minutes: privacy, dignity, and trauma-informed communication for early pregnancy loss",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position",
+        "skill.approach.obg.intimate_consent"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Maternal age and reproductive history set the background risk before examination",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Note maternal age and parity immediately: maternal age over 35 years substantially raises the risk of chromosomal aneuploidy, while previous pregnancy history identifies recurrent loss and guides subsequent investigations."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Bleeding character, tissue passage, and cramping pain separate the clinical stages",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.booking_lmp",
+        "skill.hx.miscarriag.symptoms"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Enquire about the exact duration and severity of bleeding and lower abdominal cramping; bleeding soaking more than one pad an hour or passage of grey-white fleshy tissue signals active progression towards inevitable or incomplete miscarriage."
+        },
+        "skill.hx.obg.booking_lmp": {
+          "expect": "Calculate the precise gestational age from a reliable last menstrual period and cycle regularity to compare clinical uterine size with expected dates, and verify earlier pregnancy test or scan records."
+        },
+        "skill.hx.miscarriag.symptoms": {
+          "expect": "Distinguish mild bleeding without pain in threatened miscarriage from heavy bleeding with rhythmical suprapubic cramps and tissue expulsion in incomplete loss, and ask about shoulder pain or faintness to exclude ectopic pregnancy."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "Underlying medical conditions, endocrine disorders, and previous pregnancy outcomes",
+      "skills": [
+        "skill.hx.obg.medical_family_drug",
+        "skill.hx.obg.previous_pregnancies",
+        "skill.hx.miscarriag.risk"
+      ],
+      "emphasis": {
+        "skill.hx.obg.medical_family_drug": {
+          "expect": "Screen for systemic medical conditions including overt hypothyroidism, poorly controlled diabetes mellitus, antiphospholipid syndrome, and exposure to teratogenic drugs or non-steroidal anti-inflammatory agents."
+        },
+        "skill.hx.obg.previous_pregnancies": {
+          "expect": "Record each prior pregnancy in order: consecutive early losses define recurrent pregnancy loss, while a history of mid-trimester painless cervical dilatation points toward cervical insufficiency."
+        },
+        "skill.hx.miscarriag.risk": {
+          "expect": "Identify risk factors predisposing to pregnancy loss including advanced maternal age, prior miscarriages, uterine structural anomalies or fibroids, and acquired autoimmune thrombophilias."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Haemodynamic stability, pallor, and signs of sepsis",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Assess for acute distress, anxiety, pallor of the conjunctiva and palmar creases, and delayed capillary refill indicating significant blood loss and impending hypovolaemic shock."
+        },
+        "skill.gen.vitals": {
+          "expect": "Measure pulse and blood pressure carefully: tachycardia and postural hypotension confirm substantial blood loss, while fever, rigors, and tachypnoea point toward septic miscarriage."
+        },
+        "skill.gen.edema": {
+          "expect": "Peripheral oedema is absent in uncomplicated early pregnancy loss; its presence alongside hypertension suggests pre-existing chronic renal or vascular disease rather than pregnancy-induced changes."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Pelvic and abdominal examination",
+      "blurb": "Speculum inspection of the cervical os and bimanual assessment of uterine size",
+      "skills": [
+        "skill.exam.obg.vulval_inspect",
+        "skill.exam.obg.speculum_inspect",
+        "skill.exam.obg.bimanual",
+        "skill.approach.obg.pelvic_close"
+      ],
+      "emphasis": {
+        "skill.exam.obg.vulval_inspect": {
+          "expect": "Inspect the vulva and perineum for active blood loss, clots, or conceptus tissue fragments visible at the vaginal introitus."
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "expect": "Visualise the external cervical os: observe whether blood or tissue is protruding through the canal, and inspect the ectocervix to exclude local polyps, severe erosion, or trauma."
+        },
+        "skill.exam.obg.bimanual": {
+          "expect": "Assess internal os patency (open in inevitable and incomplete, closed in threatened and complete), uterine size relative to dates (smaller in incomplete, matching in threatened), and ensure fornices are free to exclude ectopic pregnancy."
+        },
+        "skill.approach.obg.pelvic_close": {
+          "expect": "Clean the patient, ensure she is comfortably repositioned, and immediately provide sensitive, clear communication about the examination findings."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the miscarriage picture together",
+      "blurb": "Synthesising clinical features to classify the stage of miscarriage",
+      "skills": [
+        "skill.miscarriage.findings",
+        "skill.annex.miscarriage.tvs_criteria"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "One clear structured paragraph capturing gestation, stage, and stability",
+      "skills": [
+        "skill.miscarriage.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Separating early miscarriage from ectopic pregnancy, hydatidiform mole, and cervical pathology",
+      "skills": [
+        "skill.miscarriage.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Transvaginal ultrasound criteria, serum beta-hCG, blood grouping, and crossmatching",
+      "skills": [
+        "skill.ix.miscarriage.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and classification",
+      "blurb": "Definitive clinical and sonographic staging, maternal risk grading, and viability determination",
+      "skills": [
+        "skill.miscarriage.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Expectant, medical, and surgical evacuation, anti-D administration, and supportive bereavement care",
+      "skills": [
+        "skill.tx.miscarriage",
+        "skill.approach.obg.bbn_disclose"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Presenting the patient with early pregnancy bleeding and pain in two structured minutes",
+      "skills": [
+        "skill.present.miscarriag.case"
+      ],
+      "emphasis": {
+        "skill.present.miscarriag.case": {
+          "expect": "Deliver a concise two-minute presentation stating gestational age, parity, bleeding severity, open internal os, ultrasound evidence of retained tissue, and plan for evacuation with anti-D cover."
+        }
+      }
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.miscarriage.history_counsel",
+        "title": "Take a focused history and counsel in early pregnancy bleeding",
+        "seconds": 360,
+        "task": "A 24-year-old woman at 9 weeks gestation presents with vaginal bleeding and pelvic cramping. Take a focused history in six minutes, assess her clinical stage and risk factors, and outline your immediate plan.",
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.obg.booking_lmp",
+          "skill.hx.miscarriag.symptoms",
+          "skill.hx.miscarriag.risk",
+          "skill.approach.obg.bbn_disclose"
+        ],
+        "examinerQuestions": [
+          "What historical features distinguish an incomplete miscarriage from a threatened miscarriage?",
+          "Why must you ask specifically about unilateral pelvic pain, fainting, and shoulder tip pain in this patient?",
+          "She is found to be B Rhesus-negative. What specific preventive intervention is required, and what is the window of administration?"
+        ]
+      },
+      {
+        "id": "osce.miscarriage.examine_manage",
+        "title": "Pelvic examination and management plan in suspected miscarriage",
+        "seconds": 480,
+        "task": "Perform a structured pelvic examination for early pregnancy bleeding on an anatomical model, explain your physical findings, and present an evidence-based management plan.",
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.consent",
+          "skill.approach.obg.intimate_consent",
+          "skill.gen.vitals",
+          "skill.exam.obg.vulval_inspect",
+          "skill.exam.obg.speculum_inspect",
+          "skill.exam.obg.bimanual",
+          "skill.approach.obg.pelvic_close",
+          "skill.tx.miscarriage"
+        ],
+        "examinerQuestions": [
+          "What findings on speculum and bimanual examination confirm that the miscarriage is inevitable or incomplete rather than threatened?",
+          "What are the definitive transvaginal ultrasound criteria for diagnosing pregnancy failure?",
+          "Compare manual vacuum aspiration and medical management with misoprostol for incomplete miscarriage: when is surgical evacuation mandatory?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.miscarriage.basics",
+      "skill.hx.miscarriag.risk",
+      "skill.miscarriage.findings",
+      "skill.miscarriage.differential",
+      "skill.ix.miscarriage.workup",
+      "skill.miscarriage.diagnosis",
+      "skill.tx.miscarriage",
+      "skill.annex.miscarriage.tvs_criteria"
+    ]
+  },
+  "skills": {
+    "skill.miscarriage.basics": {
+      "id": "skill.miscarriage.basics",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Spontaneous abortion and miscarriage: definitions and mechanisms",
+      "oneLine": "Definition of pregnancy loss before viability, epidemiological scope, and underlying mechanisms",
+      "why": "Understanding the clinical definition of miscarriage and its biological causes prevents confusing non-viable early pregnancy with bleeding from viable gestation, guides sensitive communication with parents, and establishes the medical basis for expectant, medical, or surgical care.",
+      "teach": [
+        {
+          "heading": "Definition and gestational limits",
+          "body": "Spontaneous abortion, commonly termed miscarriage, is the spontaneous loss of an intrauterine pregnancy before fetal viability.\n\nIn international and national guidelines, this threshold is defined as pregnancy loss before twenty to twenty-four completed weeks of gestation, or an expelled fetus weighing less than five hundred grams when gestational age is uncertain."
+        },
+        {
+          "heading": "Epidemiology and timing",
+          "body": "Miscarriage is the commonest early pregnancy complication, occurring in ten to twenty percent of clinically recognised pregnancies.\n\nMore than eighty percent of spontaneous pregnancy losses take place in the first twelve weeks of gestation. Early losses often manifest as heavy menstruation, whereas later losses involve distinct stages of cervical dilatation and fetal expulsion."
+        },
+        {
+          "heading": "Genetic and developmental aetiology",
+          "body": "The single most common cause of early sporadic miscarriage is embryonic chromosomal abnormality, accounting for approximately half of all first trimester losses.\n\nAutosomal trisomies, monosomy X, and triploidy represent the majority of these karyotypic defects. Most chromosomal anomalies arise de novo from non-disjunction during gametogenesis and carry a low risk of recurrence."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the standard clinical definition of miscarriage by gestational age and fetal weight?",
+          "a": "Spontaneous loss of an intrauterine pregnancy before twenty to twenty-four weeks of gestation, or the expulsion of a fetus weighing less than five hundred grams.",
+          "accept": [
+            "spontaneous loss",
+            "intrauterine",
+            "twenty",
+            "twenty-four",
+            "five hundred grams"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What proportion of early spontaneous miscarriages are attributed to embryonic chromosomal abnormalities?",
+          "a": "Approximately fifty percent of early sporadic miscarriages are caused by embryonic chromosomal abnormalities such as autosomal trisomies.",
+          "accept": [
+            "fifty percent",
+            "chromosomal",
+            "abnormalities",
+            "trisomies"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "contraceptives_emergency_uterotonics_abortion: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Abortion"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.miscarriage.findings": {
+      "id": "skill.miscarriage.findings",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Clinical stages of miscarriage: physical and pelvic findings",
+      "oneLine": "Differentiating threatened, inevitable, incomplete, complete, missed, and septic miscarriage",
+      "why": "The management of early pregnancy loss hinges entirely on clinical staging. Distinguishing whether the internal cervical os is open or closed, whether tissue has been partially expelled, and whether intrauterine infection has supervened determines whether observation, medication, or emergency surgical evacuation is required.",
+      "teach": [
+        {
+          "heading": "Threatened versus inevitable miscarriage",
+          "body": "In threatened miscarriage, vaginal bleeding is typically mild, abdominal pain is slight or absent, and the internal cervical os remains closed. The pregnancy remains potentially viable, and ultrasound shows a live intrauterine fetus.\n\nIn inevitable miscarriage, bleeding is heavier, rhythmical painful contractions occur, and the internal cervical os is open, with or without membrane rupture. Continuation of the pregnancy is impossible."
+        },
+        {
+          "heading": "Incomplete versus complete miscarriage",
+          "body": "Incomplete miscarriage features persistent heavy vaginal bleeding, painful uterine cramps, and a patulous internal os through which conceptus fragments protrude. The uterus feels smaller than the calculated gestational age.\n\nIn complete miscarriage, all products of conception have been expelled. Uterine cramps cease, bleeding becomes minimal, the cervical os closes, and the uterus returns to near normal non-pregnant size."
+        },
+        {
+          "heading": "Missed and septic miscarriage",
+          "body": "Missed miscarriage describes retention of a non-viable embryo or an anembryonic sac within the uterus. Bleeding is minimal or absent, the os is closed, and earlier pregnancy symptoms regress.\n\nSeptic miscarriage occurs when retained products become infected. Features include maternal fever, chills, tachycardia, purulent offensive vaginal discharge, marked suprapubic tenderness, and cervical motion tenderness."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the critical physical examination difference between threatened and inevitable miscarriage?",
+          "a": "The internal cervical os is closed in threatened miscarriage, whereas the internal cervical os is dilated and open in inevitable miscarriage.",
+          "accept": [
+            "internal cervical os",
+            "closed",
+            "open",
+            "threatened",
+            "inevitable"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What examination findings distinguish incomplete miscarriage from complete miscarriage?",
+          "a": "In incomplete miscarriage the cervical os is open with visible tissue and active bleeding, whereas in complete miscarriage the os is closed, bleeding has subsided, and all products have been expelled.",
+          "accept": [
+            "cervical os",
+            "open",
+            "closed",
+            "tissue",
+            "expelled"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "What clinical constellation confirms the diagnosis of septic miscarriage?",
+          "a": "Fever, tachycardia, foul-smelling vaginal discharge, uterine tenderness, and cervical motion excitation in the presence of early pregnancy bleeding.",
+          "accept": [
+            "fever",
+            "foul-smelling",
+            "uterine tenderness",
+            "discharge",
+            "tachycardia"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "contraceptives_emergency_uterotonics_abortion: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Abortion"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.miscarriage.summary": {
+      "id": "skill.miscarriage.summary",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Synthesising the miscarriage clinical summary",
+      "oneLine": "Constructing a succinct, diagnostic clinical summary of early pregnancy loss",
+      "why": "A structured clinical summary allows rapid triage, communicates maternal haemodynamic stability, clarifies the exact stage of pregnancy loss, and outlines the urgent therapeutic priorities to the obstetric team.",
+      "teach": [
+        {
+          "heading": "Components of the clinical summary",
+          "body": "A complete clinical summary must encapsulate maternal age, parity, verified gestational age, nature of vaginal bleeding and pelvic pain, haemodynamic status, cervical os patency, and sonographic confirmation.\n\nStating these facts in a single coherent statement prevents miscommunication, clarifies the clinical stage, and informs the decision between outpatient medical therapy and inpatient surgical evacuation."
+        },
+        {
+          "heading": "Example summary structure",
+          "body": "Consider a typical presentation: A twenty-four year old primigravida at nine weeks gestation presents with six hours of heavy vaginal bleeding, tissue passage, and cramping lower abdominal pain.\n\nShe is haemodynamically stable. Examination confirms an open internal cervical os with retained products of conception and a smaller than dates uterus, consistent with an incomplete miscarriage requiring evacuation and anti-D prophylaxis."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What core elements must be included in a clinical summary of suspected miscarriage?",
+          "a": "Gestational age, maternal haemodynamic stability, volume of bleeding, state of the cervical os, and whether products of conception have been expelled.",
+          "accept": [
+            "gestational age",
+            "haemodynamic",
+            "bleeding",
+            "cervical os",
+            "products"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "contraceptives_emergency_uterotonics_abortion: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Abortion"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.miscarriage.differential": {
+      "id": "skill.miscarriage.differential",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Differential diagnosis of first trimester bleeding and pelvic pain",
+      "oneLine": "Distinguishing miscarriage from ectopic pregnancy, molar disease, and local cervical causes",
+      "why": "Early pregnancy bleeding is not synonymous with miscarriage. Ectopic pregnancy represents the leading cause of first trimester maternal mortality, and confusing an ectopic gestation with an incomplete miscarriage can delay life-saving laparoscopy. Hydatidiform mole and benign cervical lesions must also be systematically excluded.",
+      "teach": [
+        {
+          "heading": "Ectopic pregnancy as the critical differential",
+          "body": "Ectopic pregnancy presents with amenorrhoea, unilateral pelvic pain, and dark vaginal spotting or bleeding. A ruptured ectopic pregnancy causes haemodynamic collapse, peritoneal signs, and cervical motion tenderness.\n\nUltrasonography showing an empty uterine cavity with an adnexal mass or free fluid in the pouch of Douglas, combined with serum beta-hCG above the discriminatory zone, confirms ectopic pregnancy rather than miscarriage."
+        },
+        {
+          "heading": "Gestational trophoblastic disease",
+          "body": "Hydatidiform mole presents with vaginal bleeding, excessive uterine enlargement greater than expected for gestational dates, severe hyperemesis, and early-onset pre-eclampsia.\n\nUltrasonography demonstrates a characteristic snowstorm or vesicular pattern without an embryo, accompanied by markedly elevated serum beta-hCG levels often exceeding one hundred thousand units."
+        },
+        {
+          "heading": "Local genital tract and physiological causes",
+          "body": "Benign cervical lesions, including endocervical polyps, severe cervical ectropion, and cervicitis, cause postcoital or contact spotting without uterine contractions, with a closed internal os and a normal intrauterine pregnancy.\n\nPhysiological implantation bleeding occurs around the time of the missed menstrual period, presenting as transient light spotting without pain, and resolves spontaneously without intervention."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What key findings on transvaginal ultrasound distinguish ectopic pregnancy from an intrauterine miscarriage?",
+          "a": "An empty endometrial cavity in the presence of an adnexal mass or free pelvic fluid on transvaginal ultrasound points toward ectopic pregnancy.",
+          "accept": [
+            "empty",
+            "endometrial cavity",
+            "adnexal mass",
+            "free pelvic fluid",
+            "ectopic"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What ultrasound feature and clinical finding characterise a hydatidiform mole?",
+          "a": "A classic snowstorm or vesicular ultrasound appearance and a uterus enlarged beyond calculated gestational dates with markedly elevated beta-hCG levels.",
+          "accept": [
+            "snowstorm",
+            "vesicular",
+            "enlarged",
+            "beta-hCG",
+            "dates"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "contraceptives_emergency_uterotonics_abortion: additionalDifferentials"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Abortion"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.miscarriage.workup": {
+      "id": "skill.ix.miscarriage.workup",
+      "kind": "investigation",
+      "system": "obgyn",
+      "title": "Diagnostic workup: transvaginal ultrasound, beta-hCG and laboratory tests",
+      "oneLine": "Ultrasonic criteria for pregnancy failure, beta-hCG interpretation, and blood tests",
+      "why": "Transvaginal ultrasound is the diagnostic gold standard for early pregnancy loss, but premature diagnosis risks terminating a viable intrauterine pregnancy. Applying verified measurement thresholds alongside serial quantitative beta-hCG and maternal blood grouping ensures diagnostic accuracy and timely anti-D prophylaxis.",
+      "teach": [
+        {
+          "heading": "Transvaginal ultrasonography definitive criteria",
+          "body": "Transvaginal ultrasound is far more sensitive than transabdominal scanning in early gestation.\n\nPregnancy failure is definitively diagnosed if the crown-rump length is seven millimetres or greater with no fetal cardiac activity, or if the mean gestational sac diameter is twenty-five millimetres or greater with no visible embryo."
+        },
+        {
+          "heading": "Inconclusive findings and rescan intervals",
+          "body": "When ultrasound findings fall below definitive cut-offs, such as an empty gestational sac under twenty-five millimetres or a fetal pole under seven millimetres without heartbeat, the scan is inconclusive.\n\nA repeat transvaginal ultrasound in seven to fourteen days is mandatory before declaring pregnancy failure, preventing inadvertent termination of a healthy earlier pregnancy."
+        },
+        {
+          "heading": "Serum beta-hCG and blood testing",
+          "body": "Serum beta-hCG doubles approximately every forty-eight hours in viable early intrauterine gestations. An inappropriate rise, plateau, or fall indicates a non-viable pregnancy or an ectopic gestation.\n\nMaternal blood grouping and Rhesus typing are mandatory for all women with early pregnancy bleeding. A complete blood count assesses the degree of anaemia, while crossmatching is indicated if haemorrhage is heavy."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What crown-rump length threshold on transvaginal ultrasound definitively indicates embryonic demise if no heartbeat is seen?",
+          "a": "A crown-rump length of seven millimetres or greater with no detectable fetal heartbeat definitively confirms embryonic demise.",
+          "accept": [
+            "crown-rump length",
+            "seven millimetres",
+            "heartbeat",
+            "embryonic demise"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What mean sac diameter threshold without an embryo confirms early pregnancy failure on transvaginal scan?",
+          "a": "A mean sac diameter of twenty-five millimetres or greater with no visible embryo on transvaginal ultrasound.",
+          "accept": [
+            "mean sac diameter",
+            "twenty-five millimetres",
+            "embryo",
+            "transvaginal"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "What should be done if transvaginal ultrasound shows an empty sac measuring eighteen millimetres?",
+          "a": "Because the mean sac diameter is under twenty-five millimetres, the scan is inconclusive and a repeat scan in seven to fourteen days is required.",
+          "accept": [
+            "inconclusive",
+            "repeat scan",
+            "seven",
+            "fourteen days",
+            "twenty-five"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "contraceptives_emergency_uterotonics_abortion: additionalInvestigations"
+        },
+        {
+          "source": "NICE",
+          "locator": "Ectopic pregnancy and miscarriage"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.miscarriage.diagnosis": {
+      "id": "skill.miscarriage.diagnosis",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Diagnostic formulation and clinical staging of early pregnancy loss",
+      "oneLine": "Formulating the stage of miscarriage, maternal stability, and risk stratification",
+      "why": "A diagnostic formulation in early pregnancy bleeding must integrate gestational age, physical examination of the cervical os, ultrasound findings, and haemodynamic status. This categorisation directly dictates whether expectant observation, medication, or urgent surgical evacuation is safe.",
+      "teach": [
+        {
+          "heading": "Synthesising stage and clinical signs",
+          "body": "The definitive diagnosis integrates three pillars: the status of the internal cervical os, the presence or expulsion of products of conception, and transvaginal ultrasound evidence.\n\nThreatened miscarriage presents with a closed os and documented fetal viability. Inevitable miscarriage presents with an open os and active bleeding. Incomplete miscarriage presents with an open os and retained conceptus echoes on ultrasound."
+        },
+        {
+          "heading": "Assessing stability and complication risk",
+          "body": "Every diagnosed patient must be stratified by haemodynamic stability. Tachycardia, postural hypotension, and pallor indicate substantial blood loss requiring immediate volume resuscitation.\n\nMaternal pyrexia, pelvic peritonism, and foul discharge define septic miscarriage, transforming a routine clinical problem into a life-threatening surgical emergency requiring urgent inpatient admission."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What three elements confirm the diagnosis of an incomplete miscarriage?",
+          "a": "Vaginal bleeding with an open internal cervical os and ultrasound showing retained products of conception in the uterine cavity.",
+          "accept": [
+            "vaginal bleeding",
+            "open internal cervical os",
+            "retained products",
+            "ultrasound"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "When is a patient with early pregnancy bleeding classified as a high-risk emergency?",
+          "a": "When there is haemodynamic instability from severe haemorrhage, suspected ectopic pregnancy, or features of septic miscarriage such as high fever and pelvic peritonitis.",
+          "accept": [
+            "haemodynamic instability",
+            "severe haemorrhage",
+            "ectopic pregnancy",
+            "septic miscarriage",
+            "fever"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "contraceptives_emergency_uterotonics_abortion: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Abortion"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.miscarriage": {
+      "id": "skill.tx.miscarriage",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Management of miscarriage: expectant, medical, surgical, and anti-D care",
+      "oneLine": "Evidence-based management pathways, evacuation methods, anti-D prophylaxis, and supportive counselling",
+      "why": "Women experiencing miscarriage require individualised care tailored to clinical stage, haemodynamic stability, infection risk, and personal preference. Providing clear choices between expectant, medical, and surgical management while ensuring anti-D prophylaxis and bereavement support promotes physical recovery and psychological healing.",
+      "dosingNote": "This module teaches management at the level of drug class and principle. Specific agents, doses, routes and regimens must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "teach": [
+        {
+          "heading": "Expectant and medical management",
+          "body": "Expectant management involves watchful waiting for seven to fourteen days in stable women with incomplete or missed miscarriage, allowing spontaneous tissue passage. It is successful in over seventy percent of incomplete miscarriages.\n\nMedical management utilises prostaglandins with or without antiprogestogens: oral mifepristone two hundred milligrams followed by misoprostol eight hundred micrograms vaginally or sublingually accelerates expulsion, supported by adequate analgesia."
+        },
+        {
+          "heading": "Surgical uterine evacuation",
+          "body": "Surgical management by manual vacuum aspiration or electric suction evacuation is indicated for heavy bleeding, haemodynamic instability, infected tissue, or failed medical management.\n\nManual vacuum aspiration under local paracervical block is safe, portable, and avoids general anaesthesia. Care must be taken to avoid aggressive sharp curettage, which risks uterine perforation and intrauterine adhesions."
+        },
+        {
+          "heading": "Rhesus isoimmunisation prophylaxis",
+          "body": "All non-sensitised Rhesus-negative women experiencing miscarriage require anti-D immunoglobulin within seventy-two hours of bleeding or uterine evacuation.\n\nIn Indian practice, fifty micrograms is administered before twelve to twenty weeks of gestation, and three hundred micrograms thereafter. In British guidance, two hundred and fifty international units is given before twenty weeks, and five hundred units beyond twenty weeks."
+        },
+        {
+          "heading": "Septic miscarriage and bereavement care",
+          "body": "Septic miscarriage demands urgent intravenous broad-spectrum antibiotics, fluid resuscitation, and prompt surgical evacuation of infected retained tissue once antibiotic cover is established.\n\nCompassionate bereavement support is an essential component of care. Reassure the woman that early miscarriage is rarely caused by daily physical activities, offer counselling, and discuss future pregnancy planning when she feels ready."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the indications for immediate surgical evacuation rather than expectant or medical management in miscarriage?",
+          "a": "Heavy uncontrolled vaginal bleeding, maternal haemodynamic instability, suspected intrauterine infection or septic miscarriage, and patient choice.",
+          "accept": [
+            "heavy",
+            "bleeding",
+            "haemodynamic instability",
+            "septic miscarriage",
+            "infection"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What is the recommended timeframe and indication for anti-D immunoglobulin in early pregnancy loss?",
+          "a": "Within seventy-two hours of vaginal bleeding or uterine evacuation in all non-sensitised Rhesus-negative women to prevent maternal isoimmunisation.",
+          "accept": [
+            "seventy-two hours",
+            "Rhesus-negative",
+            "isoimmunisation",
+            "bleeding",
+            "evacuation"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Why is gentle suction evacuation or manual vacuum aspiration preferred over vigorous sharp curettage?",
+          "a": "Because suction evacuation significantly reduces the risks of uterine perforation, cervical trauma, and subsequent intrauterine adhesions causing Asherman syndrome.",
+          "accept": [
+            "perforation",
+            "cervical trauma",
+            "adhesions",
+            "Asherman"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "contraceptives_emergency_uterotonics_abortion: clinicalPearls"
+        },
+        {
+          "source": "WHO",
+          "locator": "Medical management of abortion"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.miscarriage.tvs_criteria": {
+      "id": "skill.annex.miscarriage.tvs_criteria",
+      "kind": "annexure",
+      "system": "obgyn",
+      "title": "Ultrasonographic diagnostic criteria for early pregnancy loss",
+      "oneLine": "Standardised measurement thresholds and rescan intervals for diagnosing early pregnancy failure",
+      "why": "Clear sonographic criteria prevent diagnostic error and ensure that early viable gestations are never inadvertently classified as failed pregnancies.",
+      "teach": [
+        {
+          "heading": "Standard ultrasound thresholds for miscarriage",
+          "body": "Diagnostic thresholds on transvaginal ultrasonography are established by consensus guidelines from international obstetric societies to achieve one hundred percent specificity for non-viability.\n\nApplying these strict criteria prevents false positive diagnoses of miscarriage in early developing intrauterine pregnancies."
+        },
+        {
+          "heading": "Reference criteria table",
+          "table": {
+            "cols": [
+              "Ultrasound finding",
+              "Threshold",
+              "Interpretation",
+              "Management"
+            ],
+            "rows": [
+              [
+                "Crown-rump length without heartbeat",
+                "7 mm or greater",
+                "Embryonic demise",
+                "Confirm pregnancy failure"
+              ],
+              [
+                "Mean sac diameter without embryo",
+                "25 mm or greater",
+                "Anembryonic pregnancy",
+                "Confirm pregnancy failure"
+              ],
+              [
+                "Embryo with no cardiac activity",
+                "Less than 7 mm",
+                "Inconclusive scan",
+                "Repeat scan in 7 to 14 days"
+              ],
+              [
+                "Gestational sac without embryo",
+                "Less than 25 mm",
+                "Inconclusive scan",
+                "Repeat scan in 7 to 14 days"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the recommended management when transvaginal ultrasound shows an embryo of five millimetres without cardiac activity?",
+          "a": "Because the crown-rump length is under seven millimetres, the scan is inconclusive and a repeat scan in seven to fourteen days is required.",
+          "accept": [
+            "inconclusive",
+            "repeat scan",
+            "seven",
+            "fourteen days",
+            "seven millimetres"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "contraceptives_emergency_uterotonics_abortion: additionalInvestigations"
+        },
+        {
+          "source": "NICE",
+          "locator": "Ectopic pregnancy and miscarriage"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.miscarriage.sunita",
+      "title": "Early pregnancy bleeding and lower abdominal cramping in a 24-year-old woman",
+      "opening": "Doctor, I am about two months pregnant and this morning I started bleeding heavily from below with bad cramps in my lower belly.",
+      "fallback": "I came to the hospital because the bleeding got heavier and I was afraid I might lose my baby.",
+      "patient": {
+        "name": "Sunita",
+        "age": 24,
+        "sex": "female",
+        "occupation": "Homemaker, primary caregiver in the household",
+        "residence": "Peri-urban settlement in Pune district, Maharashtra, lives with husband and parents-in-law"
+      },
+      "initialVitals": {
+        "hr": 96,
+        "bpSystolic": 110,
+        "bpDiastolic": 70,
+        "rr": 18,
+        "spo2": 99,
+        "temp": 37,
+        "gcs": 15
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you to the hospital today",
+            "what is your main problem today",
+            "tell me what happened today",
+            "why have you come to the casualty"
+          ],
+          "key": true,
+          "reply": "Doctor, I missed my period two months ago and confirmed I was pregnant, but since early this morning I have had fresh bleeding down below and severe cramping pain in my lower stomach.",
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "bleeding_onset_duration": {
+          "cues": [
+            "when did the bleeding start",
+            "how long have you been bleeding",
+            "did the bleeding start suddenly",
+            "how many hours ago did it begin"
+          ],
+          "reply": "The bleeding started about six hours ago when I woke up, at first like light spotting, but over the last two hours it has become much heavier."
+        },
+        "bleeding_amount_pads": {
+          "cues": [
+            "how much blood are you losing",
+            "how many pads have you soaked",
+            "are the pads completely soaked",
+            "is the bleeding very heavy"
+          ],
+          "reply": "In the last two hours I have soaked two thick cloth pads completely, and fresh blood was dripping when I went to use the toilet."
+        },
+        "clots_and_tissue_passage": {
+          "cues": [
+            "have you passed any blood clots",
+            "did you see any fleshy pieces",
+            "did any solid tissue come out",
+            "have you noticed grey or pink tissue"
+          ],
+          "reply": "Yes, about an hour ago I passed two dark red jelly-like clots and then a small, fleshy greyish-white lump came out into the pad."
+        },
+        "cramping_pain_character": {
+          "cues": [
+            "describe the stomach pain",
+            "what does the pain feel like",
+            "is the pain like menstrual cramps",
+            "does the pain come and go"
+          ],
+          "reply": "It is a severe cramping pain right in the middle of my lower belly below the navel. It comes in tight waves every few minutes, just like severe period cramps."
+        },
+        "unilateral_pain_shoulder": {
+          "cues": [
+            "is the pain on one side only",
+            "do you have pain in your shoulder",
+            "is there any pain in the right or left side",
+            "does your shoulder tip hurt"
+          ],
+          "reply": "No, the pain is right across the middle of my lower belly. I do not have sharp pain on one side and my shoulders feel completely fine."
+        },
+        "gestational_age_lmp": {
+          "cues": [
+            "when was your last menstrual period",
+            "what was the date of your last period",
+            "how many weeks pregnant are you",
+            "are your periods regular"
+          ],
+          "reply": "My last normal period started exactly nine weeks ago on the twentieth of August. My periods are always regular every twenty-eight to thirty days, and my urine test was positive four weeks ago."
+        },
+        "prior_pregnancies_history": {
+          "cues": [
+            "is this your first pregnancy",
+            "have you been pregnant before",
+            "have you had any miscarriages before",
+            "do you have any children"
+          ],
+          "reply": "This is my second pregnancy. Last year I had an early miscarriage at about seven weeks that cleaned out on its own. I do not have any living children yet."
+        },
+        "pregnancy_symptoms_change": {
+          "cues": [
+            "did you have morning sickness",
+            "have your pregnancy symptoms changed",
+            "did your nausea suddenly stop",
+            "how have your breasts been feeling"
+          ],
+          "reply": "I had terrible nausea and breast soreness for the past three weeks, but over the last two days the nausea suddenly disappeared and my breasts stopped feeling swollen."
+        },
+        "dizziness_and_fainting": {
+          "cues": [
+            "have you felt dizzy or lightheaded",
+            "did you feel faint when standing up",
+            "have you lost consciousness",
+            "have you had any blackouts"
+          ],
+          "reply": "I felt a bit weak and dizzy when getting out of the auto-rickshaw at the hospital gate, but I have not fainted or blacked out."
+        },
+        "fever_chills_discharge": {
+          "cues": [
+            "have you had any fever or chills",
+            "did you notice any bad smelling discharge",
+            "have you had shivering",
+            "has there been any foul smell"
+          ],
+          "reply": "No fever and no chills at all. The blood does not have any foul or bad smell."
+        },
+        "medical_illnesses": {
+          "cues": [
+            "do you have diabetes or thyroid problems",
+            "do you have high blood pressure",
+            "have you been diagnosed with any medical condition",
+            "do you have any heart or kidney disease"
+          ],
+          "reply": "No, I do not have diabetes, high blood pressure, or thyroid trouble, and the doctor at my local clinic said my booking blood tests were normal."
+        },
+        "medications_and_folic_acid": {
+          "cues": [
+            "what medicines are you taking",
+            "are you taking folic acid",
+            "have you taken any painkillers like brufen",
+            "did you take any pills to stop or start bleeding"
+          ],
+          "reply": "I was taking daily folic acid tablets from the local health centre. I have not taken any painkillers, home remedies, or any tablets to cause an abortion."
+        },
+        "rhesus_and_blood_group": {
+          "cues": [
+            "what is your blood group",
+            "do you know your rh factor",
+            "are you rh negative",
+            "have you ever received an anti d injection"
+          ],
+          "reply": "My blood group is B negative, and my husband is B positive. After my miscarriage last year they gave me an injection in my hip, which the doctor called anti-D."
+        },
+        "trauma_and_intercourse": {
+          "cues": [
+            "did you have any fall or injury",
+            "have you had recent sexual intercourse",
+            "did you lift any heavy weights",
+            "was there any accident to your belly"
+          ],
+          "reply": "No, I did not fall down, lift anything heavy, or have an accident. My husband and I have not had intercourse recently."
+        },
+        "contraception_and_iud": {
+          "cues": [
+            "were you using any contraception",
+            "have you ever had an intrauterine copper t",
+            "did you use an iud before this pregnancy",
+            "were you taking birth control pills"
+          ],
+          "reply": "No, we were actively trying for this pregnancy, so I have never used an intrauterine device or birth control pills."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Patient is conscious, oriented, anxious, in mild discomfort from uterine cramps; mild conjunctival pallor present; no peripheral cyanosis, clubbing, or oedema.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 96 beats per minute, regular, good volume; blood pressure 110/70 mmHg sitting; respiratory rate 18 breaths per minute; temperature 37.0 degrees Celsius; oxygen saturation 99 percent on room air.",
+          "abnormal": false
+        },
+        "skill.gen.edema": {
+          "finding": "No pedal or pretibial oedema; face and hands are not puffy.",
+          "abnormal": false
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "finding": "Vulva and perineum show active dark red bleeding; small blood clots and a tiny fragment of fleshy decidual tissue are visible at the introitus.",
+          "abnormal": true
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "finding": "Cusco bimanual speculum reveals fresh dark red blood issuing through the external cervical os; the internal os is open and admits a small piece of conceptus tissue; cervix appears otherwise healthy with no polyp or erosion.",
+          "abnormal": true
+        },
+        "skill.exam.obg.bimanual": {
+          "finding": "Bimanual pelvic examination confirms the internal cervical os is patulous and admits one fingertip; uterus is anteverted, soft, enlarged to about six to eight weeks size, smaller than the nine-week dates; fornices are completely free with no adnexal mass or tenderness; no cervical motion excitation tenderness.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "tvs",
+        "blood_group_rh",
+        "cbc",
+        "serum_beta_hcg"
+      ],
+      "investigations": {
+        "tvs": {
+          "label": "Transvaginal pelvic ultrasonography",
+          "result": "Endometrial cavity contains irregular, heterogeneous echoes measuring 18 mm with disruption of gestational sac; no viable embryo or fetal heart activity seen; internal cervical os is open; both ovaries and adnexa appear normal with no ectopic gestational sac; no free fluid in pouch of Douglas.",
+          "note": "Confirms incomplete miscarriage with retained products of conception and rules out ectopic pregnancy."
+        },
+        "blood_group_rh": {
+          "label": "Blood group and Rhesus typing",
+          "result": "B Rhesus negative; antibody screening negative.",
+          "note": "Critical finding: patient is Rh-negative and non-sensitised, requiring anti-D immunoglobulin within 72 hours."
+        },
+        "cbc": {
+          "label": "Complete blood count",
+          "result": "Haemoglobin 10.4 g/dL, total leucocyte count 8,200/uL, platelets 240,000/uL.",
+          "note": "Mild anaemia secondary to acute blood loss; normal white cell count makes active pelvic sepsis unlikely."
+        },
+        "serum_beta_hcg": {
+          "label": "Quantitative serum beta-hCG",
+          "result": "4,200 IU/L.",
+          "note": "Suboptimal and falling level for 9 weeks gestation, consistent with non-viable early pregnancy."
+        },
+        "urine_routine": {
+          "label": "Urinalysis",
+          "result": "Normal, protein nil, sugar nil, pus cells 1-2 per high power field.",
+          "note": "Excludes active urinary tract infection as a contributor to lower abdominal pain."
+        }
+      },
+      "differentialModel": {
+        "accept": [
+          "Incomplete miscarriage",
+          "incomplete abortion",
+          "Threatened miscarriage",
+          "Inevitable miscarriage",
+          "inevitable abortion",
+          "Complete miscarriage",
+          "complete abortion",
+          "Missed miscarriage",
+          "missed abortion",
+          "Ectopic pregnancy",
+          "Gestational trophoblastic disease",
+          "molar pregnancy",
+          "hydatidiform mole",
+          "Cervical polyp",
+          "Abortion",
+          "miscarriage"
+        ],
+        "answer": "Incomplete miscarriage at nine weeks gestation. Consider inevitable miscarriage, threatened miscarriage, complete miscarriage, missed miscarriage, ectopic pregnancy, gestational trophoblastic disease, and cervical polyp.",
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "accept": [
+          "Incomplete miscarriage",
+          "incomplete abortion",
+          "retained products of conception",
+          "Abortion",
+          "miscarriage"
+        ],
+        "answer": "Incomplete miscarriage at nine weeks gestation in a B Rhesus-negative woman, presenting with active bleeding and cervical dilatation.",
+        "minMatch": 1
+      },
+      "managementModel": {
+        "accept": [
+          "evacuation",
+          "manual vacuum aspiration",
+          "misoprostol",
+          "anti-D",
+          "analgesia",
+          "counselling",
+          "resuscitation",
+          "suction"
+        ],
+        "answer": "Provide immediate analgesia, offer definitive uterine evacuation with manual vacuum aspiration or medical misoprostol therapy, administer anti-D immunoglobulin within seventy-two hours for Rhesus-negative status, and ensure compassionate bereavement counselling.",
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The state of the internal cervical os is the central physical discriminator: an open os with active bleeding and tissue passage confirms incomplete miscarriage, whereas a closed os defines threatened or complete loss.",
+        "Uterine size smaller than calculated gestational dates reflects partial expulsion of products of conception, which ultrasound corroborates by identifying retained heterogeneous cavity echoes.",
+        "Bilateral free fornices with an absence of adnexal masses or cervical motion tenderness are essential physical signs that exclude tubal ectopic pregnancy.",
+        "Maternal Rhesus status must never be omitted in early pregnancy bleeding: non-sensitised Rh-negative women require anti-D immunoglobulin within seventy-two hours of bleeding or evacuation to prevent isoimmunisation.",
+        "Manual vacuum aspiration under paracervical local block offers an effective, quiet, portable alternative to electric suction or theatre general anaesthesia in primary and secondary healthcare centres.",
+        "Vigorous sharp curettage must be avoided during evacuation of incomplete miscarriage to prevent uterine wall perforation and late intrauterine synechiae.",
+        "Bereavement counselling is an integral component of clinical management: reassuring the patient that early miscarriage is predominantly genetic and not her fault alleviates guilt and promotes recovery."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

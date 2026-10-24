@@ -1,0 +1,181 @@
+{
+  "_comment": "CliniX 2.0 Presentation Library: Surgical Approach to a Lump in the Breast. Reuses shared Skills as atoms and provides tiered clinical reasoning from recognition to discriminators and emergency surgical actions.",
+  "schemaVersion": 1,
+  "id": "breast_lump",
+  "title": "Approach to a Lump in the Breast",
+  "subtitle": "Triple assessment of benign and malignant mammary masses, fibroadenoma, fibrocystic change, and breast carcinoma staging",
+  "system": "surgery",
+  "estMinutes": 45,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "layers": {
+    "recognise": {
+      "redFlags": [
+        "Peau d'orange: Cutaneous oedema with exaggerated follicular pitting resembling an orange peel, caused by carcinomatous permeation and blockage of subdermal lymphatic channels",
+        "Fixed breast lump: Hard or firm mass tethered or fixed to the underlying pectoralis major muscle or deep thoracic cage (serratus anterior and ribs)",
+        "Recent, spontaneous, unilateral, single-duct bloody (sanguineous) or serosanguineous nipple discharge",
+        "Recent asymmetrical nipple retraction, inversion, distortion, or deviation pointing towards an underlying malignant tumour",
+        "Paget disease of the nipple: Unilateral eczematous, erythematous, crusted erosive lesion of the nipple-areola complex that fails to heal, indicating intraepithelial ductal carcinoma",
+        "Hard, matted, non-tender ipsilateral axillary lymphadenopathy or fixed supraclavicular lymph node enlargement (Troisier sign)",
+        "Inflammatory breast cancer: Rapidly expanding erythema, warmth, and brawny induration involving over one-third of the breast mimicking acute mastitis in a non-lactating female"
+      ],
+      "vitalsPriorities": [
+        "Baseline Haemodynamic Stability: Normal in uncomplicated breast lumps; swinging pyrexia with tachycardia (> 100 beats/min) signals an acute puerperal or lactational breast abscess requiring urgent drainage.",
+        "Respiratory Rate and Chest Auscultation: Tachypnoea, stony dullness to percussion at the lung bases, or diminished vesicular breath sounds alert the clinician to malignant pleural effusion or lymphangitis carcinomatosa in advanced breast cancer.",
+        "Bone Tenderness and Pain: Severe localised vertebral, pelvic, or hip tenderness with functional limitation signals skeletal metastasis requiring urgent radiological evaluation to prevent pathological fracture or spinal cord compression."
+      ]
+    },
+    "classify": {
+      "tempo": {
+        "acute_days_to_weeks": [
+          "Acute lactational breast abscess (Staphylococcus aureus)",
+          "Puerperal mastitis",
+          "Subareolar abscess / Zuska disease (lactiferous duct fistula)",
+          "Traumatic fat necrosis with acute tender haematoma",
+          "Spontaneous rupture or rapid enlargement of a simple breast cyst"
+        ],
+        "subacute_weeks_to_months": [
+          "Rapidly enlarging Phyllodes tumour (benign, borderline, or malignant)",
+          "Inflammatory breast carcinoma (erythematous, indurated breast)",
+          "Tuberculous mastitis / breast cold abscess (endemic in India)",
+          "Granulomatous lobular mastitis",
+          "Galactocele (painless milk retention cyst during or following cessation of lactation)"
+        ],
+        "chronic_months_to_years": [
+          "Fibroadenoma (classic 'breast mouse', smooth, highly mobile, painless benign fibroepithelial tumour in young women)",
+          "Fibrocystic change / Aberrations of Normal Development and Involution (ANDI: cyclical mastalgia, bilateral nodularity)",
+          "Breast carcinoma (Invasive ductal carcinoma of no special type, invasive lobular carcinoma)",
+          "Duct ectasia / periductal mastitis (slit-like nipple retraction, thick cheesy or greenish-brown discharge)",
+          "Intraductal papilloma (spontaneous bloody nipple discharge without discrete palpable mass)",
+          "Lipoma of the breast or subcutaneous tissue",
+          "Chronic breast abscess"
+        ]
+      },
+      "age_specific_etiology": {
+        "young_women_under_30_years": [
+          "Fibroadenoma (most common discrete mass)",
+          "Simple breast cyst",
+          "Fibrocystic changes / cyclical nodularity",
+          "Lactational breast abscess / galactocele",
+          "Juvenile giant fibroadenoma"
+        ],
+        "perimenopausal_30_to_50_years": [
+          "Fibrocystic disease / simple breast cysts",
+          "Duct ectasia / periductal mastitis",
+          "Phyllodes tumour",
+          "Carcinoma of the breast",
+          "Traumatic fat necrosis",
+          "Intraductal papilloma"
+        ],
+        "postmenopausal_over_50_years": [
+          "Carcinoma of the breast (most common cause of a new discrete breast lump in this cohort)",
+          "Ductal carcinoma in situ (DCIS)",
+          "Fat necrosis",
+          "Postmenopausal simple cyst (uncommon, rule out papillary cystic carcinoma)"
+        ]
+      }
+    },
+    "discriminators": [
+      {
+        "title": "Fibroadenoma ('Breast Mouse') vs Breast Carcinoma",
+        "finding": "Fibroadenoma characteristically occurs in young women (15 to 30 years), is firm, rubbery, lobulated, completely distinct from adjacent breast tissue, painless, and slips freely beneath the examining fingers ('breast mouse') without skin dimpling, tethering, or lymphadenopathy. Carcinoma occurs typically in older or postmenopausal women, is stony-hard, poorly circumscribed with irregular margins, tethered or fixed to surrounding breast parenchyma, skin, or pectoralis fascia, and may be accompanied by hard axillary lymphadenopathy.",
+        "highYield": "High mobility slipping away under the examining fingers is pathognomonic of fibroadenoma; stony hardness with irregular borders and restricted mobility strongly indicates malignancy."
+      },
+      {
+        "title": "Testing Fixity to Pectoralis Major vs Fixity to Serratus Anterior / Chest Wall",
+        "finding": "To test fixity to pectoralis major: Palpate lump mobility in two planes with pectoralis relaxed (hands resting by sides). Next, ask the patient to press hands firmly against hips (contracting pectoralis major). If mobility is restricted horizontally along muscle fibres, the lump is fixed to pectoralis major. To test fixity to chest wall: Ask the patient to press hands firmly against the examiner's hands in forward abduction or push against a wall (contracting serratus anterior). If mobility is completely abolished in all planes, it is fixed to the thoracic ribs and intercostal muscles.",
+        "highYield": "Immobility on pressing hands to hips demonstrates pectoralis major infiltration (operable by modified radical mastectomy); complete immobility when pushing forward indicates thoracic cage fixation (T4b locally advanced disease)."
+      },
+      {
+        "title": "Traumatic Fat Necrosis vs Breast Carcinoma",
+        "finding": "Fat necrosis typically follows direct trauma or previous breast surgery, appearing as a hard, ill-defined, irregular mass that may cause skin dimpling and tethering, mimicking carcinoma identically on clinical palpation. Mammography demonstrates oil cysts, lipid-filled vacuoles, and coarse rim calcifications (eggshell calcification), contrasting with the pleomorphic microcalcifications and spiculated mass of malignancy.",
+        "highYield": "Fat necrosis can mimic carcinoma in every physical sign; core needle biopsy is mandatory to definitively exclude malignancy."
+      },
+      {
+        "title": "Intraductal Papilloma vs Mammary Duct Ectasia",
+        "finding": "Intraductal papilloma causes spontaneous, unilateral, single-duct bloody or serous nipple discharge in women aged 30 to 50 years, often with a tiny non-palpable or palpable subareolar nodule; gentle circumferential pressure identifies the single trigger duct. Mammary duct ectasia features bilateral, multi-duct, thick, cheesy, creamy, or greenish-brown discharge with slit-like horizontal nipple retraction, periareolar fullness, and non-cyclical mastalgia.",
+        "highYield": "Unilateral single-duct bloody discharge points to intraductal papilloma or intraductal carcinoma; bilateral multi-duct greenish discharge signifies benign duct ectasia."
+      },
+      {
+        "title": "Giant Fibroadenoma vs Phyllodes Tumour",
+        "finding": "Phyllodes tumour (cystosarcoma phyllodes) occurs in older women (typically 40 to 50 years), grows rapidly to a large size, has a variegated bosselated surface with alternating cystic and solid areas, visible dilated subcutaneous veins, and thinned shiny skin over the tumour without true invasion of skin or pectoralis muscle. Giant fibroadenoma presents in adolescent or young women, maintains uniform rubbery consistency, and lacks leaf-like stromal overgrowth on histology.",
+        "highYield": "Rapid enlargement with dilated skin veins and leaf-like (phyllodes) fibroepithelial projections on histology distinguishes phyllodes tumours, which carry local recurrence risk and require wide local excision with clear margins."
+      }
+    ],
+    "dontMiss": [
+      {
+        "disease": "Inflammatory Breast Carcinoma (T4d)",
+        "clue": "Rapidly progressive breast enlargement with diffuse erythema, warmth, induration, and prominent brawny peau d'orange involving more than a third of the breast, often mistaken for lactational mastitis in a non-lactating woman.",
+        "action": "DO NOT DELAY FOR PROLONGED COURSES OF ORAL ANTIBIOTICS. Urgent core needle biopsy of underlying breast parenchyma and punch biopsy of the involved dermis to document dermal lymphatic tumour emboli; staging CT chest/abdomen and bone scan; initiate prompt neoadjuvant multi-agent systemic chemotherapy followed by locoregional surgery and radiotherapy."
+      },
+      {
+        "disease": "Acute Breast Abscess with Overlying Skin Necrosis",
+        "clue": "Lactating mother with high swinging fever, rigors, throbbing unilateral breast pain, exquisitely tender, hot, indurated swelling with central softening or fluctuation, and axillary lymphadenitis.",
+        "action": "Perform urgent ultrasound to demarcate the abscess cavity; perform ultrasound-guided needle aspiration under local anaesthesia with empirical antibiotics (flucloxacillin or amoxicillin-clavulanate); if aspiration fails or skin is thinned/gangrenous, perform formal surgical drainage under general anaesthesia with incision along Langer skin lines (curvilinear or radial), break down all internal loculi, and pack; encourage continued breastfeeding or expression from the unaffected breast."
+      },
+      {
+        "disease": "Paget Disease of the Nipple",
+        "clue": "Unilateral itchy, crusted, erythematous, eczematous erosion of the nipple that slowly destroys the nipple architecture and spreads outward onto the areola (contrasting with simple eczema which involves areola first and spares the nipple).",
+        "action": "NEVER TREAT CHRONIC UNILATERAL NIPPLE ECZEMA WITH TOPICAL STEROID CREAMS WITHOUT BIOPSY. Perform prompt full-thickness wedge or punch biopsy of the nipple-areolar margin; perform bilateral mammography to locate the underlying ductal carcinoma in situ (DCIS) or invasive cancer; refer for definitive oncological surgical management."
+      },
+      {
+        "disease": "Locally Advanced Fungating Breast Carcinoma",
+        "clue": "Large stony-hard breast mass with ulcerated, foul-smelling, bleeding skin defect, fixed matted axillary nodes, and ipsilateral arm lymphoedema.",
+        "action": "Gentle wound toilet with antiseptic dressings; obtain urgent diagnostic core biopsy from tumour edge; perform metastatic workup (chest radiograph, abdominal ultrasound/CT, bone scintigraphy); initiate multi-disciplinary oncology team consultation for systemic neoadjuvant therapy, palliative toilet mastectomy, or locoregional radiotherapy."
+      }
+    ],
+    "investigations": {
+      "step1_immediate": [
+        "Triple Assessment Protocol: Clinical examination + Bilateral Breast Imaging (Mammography / USG) + Pathological verification (Core Needle Biopsy)",
+        "High-Resolution Bilateral Breast Ultrasonography (investigation of choice in women under 40 years with dense fibroglandular parenchyma; differentiates cystic from solid masses)",
+        "Bilateral Digital Diagnostic Mammography with Mediolateral Oblique (MLO) and Craniocaudal (CC) views (investigation of choice in women aged 40 years and older; detects architectural distortion and clustered pleomorphic microcalcifications)"
+      ],
+      "step2_urgent": [
+        "Ultrasound-guided Core Needle Biopsy (CNB: gold standard tissue diagnosis; provides histological architecture, invasive vs in situ status, histological grade, and tumour markers ER, PR, and HER2/neu)",
+        "Complete Blood Count, Serum Liver Function Tests, Serum Calcium, and Renal Panel (baseline workup for systemic involvement)",
+        "Bilateral Axillary Ultrasonography with fine-needle aspiration or core biopsy of any morphologically abnormal lymph nodes (cortical thickening > 3 mm, loss of fatty hilum)"
+      ],
+      "step3_confirmatory": [
+        "Contrast-Enhanced Magnetic Resonance Imaging (Breast MRI: indicated for occult primary with axillary nodal metastasis, evaluation of lobular carcinoma, BRCA mutation carriers, or assessment of response to neoadjuvant chemotherapy)",
+        "Metastatic Staging Workup (CECT chest and abdomen, and whole-body Technetium-99m bone scan for Stage III / locally advanced or symptomatic disease)",
+        "Immunohistochemistry and Molecular Profiling (Oestrogen Receptor [ER], Progesterone Receptor [PR], HER2/neu receptor status, and Ki-67 proliferation index to determine molecular subtype: Luminal A, Luminal B, HER2-enriched, or Triple-Negative)"
+      ]
+    },
+    "skills": [
+      "skill.hx.surg.breast",
+      "skill.exam.surg.breast_inspection",
+      "skill.exam.surg.breast_lump_palpation",
+      "skill.exam.surg.breast_mobility_fixity",
+      "skill.ix.surg.triple_assessment",
+      "skill.annex.surg.tnm_breast",
+      "skill.hx.breast.risk",
+      "skill.present.breast.summary",
+      "skill.hx.surg.lump",
+      "skill.exam.surg.lump_palpate",
+      "skill.gen.vitals"
+    ],
+    "examPearls": [
+      {
+        "topic": "Methodical Technique of Breast Palpation",
+        "text": "The patient must be examined both in sitting and semi-recumbent (45 degrees) supine positions with the ipsilateral arm raised behind the head to flatten the breast against the chest wall. Palpate methodically with the palmar surfaces of the middle three fingers against the chest wall, covering all four quadrants, the central subareolar region, and the axillary tail of Spence. Never pinch the breast parenchyma between finger and thumb, as normal lobular glandular tissue will falsely feel like a tumour."
+      },
+      {
+        "topic": "The Triple Assessment Concordance Rule",
+        "text": "The triple assessment comprises clinical examination, imaging (mammography or ultrasound), and core needle biopsy. If ALL THREE modalities are unequivocally benign, the false-negative rate for carcinoma is less than 1%. If ANY SINGLE modality demonstrates suspicious or malignant features, the lesion MUST be managed as malignant until proven otherwise by surgical excision."
+      },
+      {
+        "topic": "Pathological Anatomy of Peau d'Orange and Cooper Ligaments",
+        "text": "Malignant infiltration of the suspensory ligaments of Astley Cooper produces local traction and dimpling of the skin over the tumour. In contrast, diffuse peau d'orange occurs when malignant emboli plug the subdermal lymphatics; oedema accumulates in the dermis, but the skin remains tethered at the orifices of sweat glands and hair follicles, producing the characteristic dimpled orange-peel appearance."
+      },
+      {
+        "topic": "Systematic Axillary Lymph Node Examination",
+        "text": "Examine the axilla while the patient is seated, supporting the patient's forearm on the examiner's ipsilateral arm to fully relax the pectoral and latissimus dorsi muscles. Systematically palpate all five axillary node groups: anterior (pectoral, along lower border of pectoralis major), posterior (subscapular, along anterior border of latissimus dorsi), lateral (along upper humerus/axillary vein), central (deep in axillary fat against the chest wall), and apical (infraclavicular/subclavicular, at the apex of the axilla)."
+      },
+      {
+        "topic": "Microscopic Subtypes of Invasive Breast Carcinoma",
+        "text": "Invasive ductal carcinoma of no special type (NST) is the commonest histological subtype (~75-80%), forming irregular cords and nests with dense desmoplastic stroma. Invasive lobular carcinoma (~10-15%) characteristically infiltrates in a single-file 'Indian file' pattern due to loss of E-cadherin expression, presenting with diffuse thickening or subtle induration rather than a discrete palpable mass, and carries a higher incidence of multicentricity and bilaterality."
+      }
+    ]
+  }
+}

@@ -1,0 +1,1360 @@
+{
+  "_comment": "CliniX disease pathway: Puerperal sepsis. Postpartum fever and its management.",
+  "id": "puerperal-sepsis",
+  "name": "Puerperal sepsis",
+  "fullName": "Puerperal sepsis and postpartum pelvic infections",
+  "subtitle": "Postpartum fever and its management",
+  "system": "obgyn",
+  "kbRef": "puerperium_involution_sepsis_breastfeeding",
+  "oneLine": "Recognition, staging, resuscitation, and antimicrobial management of postpartum pelvic infection and maternal sepsis",
+  "estMinutes": 45,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics of puerperal sepsis",
+      "skills": [
+        "skill.puerperal_sepsis.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the postpartum patient",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position",
+        "skill.approach.obg.intimate_consent"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.puerperal.symptoms",
+        "skill.hx.obg.puerperal_complications"
+      ],
+      "emphasis": {
+        "skill.hx.puerperal.symptoms": {
+          "expect": "Fever with rigors, worsening lower abdominal pain, and foul purulent lochia",
+          "note": "Always ask about the timing of fever and direct smell of lochia on pads"
+        },
+        "skill.hx.obg.puerperal_complications": {
+          "expect": "Postpartum pyrexia, subinvolution, and screening for secondary PPH and breast issues",
+          "note": "Use the five Ws framework to differentiate pelvic from extra-pelvic causes"
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, obstetric, personal and family history",
+      "skills": [
+        "skill.hx.obg.medical_family_drug",
+        "skill.hx.obg.previous_pregnancies",
+        "skill.hx.puerperal.risk"
+      ],
+      "emphasis": {
+        "skill.hx.puerperal.risk": {
+          "expect": "Prolonged rupture of membranes, unsterile vaginal examinations, and prolonged labour",
+          "note": "Home delivery with an untrained birth attendant carries substantial sepsis risk"
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General physical examination and vitals",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.cyanosis",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.vitals": {
+          "expect": "High fever, maternal tachycardia, tachypnoea, and borderline or low blood pressure",
+          "note": "Measure vitals immediately to calculate the Modified Obstetric Early Warning Score"
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Postnatal obstetric and pelvic examination",
+      "skills": [
+        "skill.exam.obg.preg_prep_inspect",
+        "skill.exam.obg.fundal_height",
+        "skill.exam.obg.puerperal_exam",
+        "skill.exam.obg.vulval_inspect",
+        "skill.exam.obg.speculum_insert",
+        "skill.exam.obg.speculum_inspect",
+        "skill.exam.obg.bimanual",
+        "skill.approach.obg.pelvic_close"
+      ],
+      "emphasis": {
+        "skill.exam.obg.fundal_height": {
+          "expect": "Delayed uterine involution with fundus higher than expected for postpartum day",
+          "note": "A tender, boggy uterus at or above umbilicus on day 4 confirms subinvolution"
+        },
+        "skill.exam.obg.puerperal_exam": {
+          "expect": "Boggy tender uterus, foul lochia on pad, and infected perineal wound",
+          "note": "Systematically inspect lochia, episiotomy site, breasts, and calves"
+        },
+        "skill.exam.obg.bimanual": {
+          "expect": "Patulous cervix, marked cervical motion tenderness, and exquisitely tender enlarged uterus",
+          "note": "Gentle palpation is essential to avoid provoking bacteremic shower or severe pain"
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the puerperal sepsis picture together",
+      "skills": [
+        "skill.puerperal_sepsis.findings"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "skills": [
+        "skill.puerperal_sepsis.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "skills": [
+        "skill.puerperal_sepsis.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations and monitoring",
+      "skills": [
+        "skill.ix.puerperal_sepsis.workup",
+        "skill.annex.puerperal_sepsis.meows"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and severity stratification",
+      "skills": [
+        "skill.puerperal_sepsis.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment and resuscitation",
+      "skills": [
+        "skill.tx.puerperal_sepsis",
+        "skill.approach.obg.team_leader"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "skills": [
+        "skill.present.case",
+        "skill.present.puerperal.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.puerperal_sepsis.postnatal_exam",
+        "title": "Perform a systematic postnatal examination in suspected puerperal sepsis",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.gen.vitals",
+          "skill.exam.obg.preg_prep_inspect",
+          "skill.exam.obg.fundal_height",
+          "skill.exam.obg.puerperal_exam"
+        ],
+        "examinerQuestions": [
+          "What physical triad on abdominal and pelvic examination confirms acute puerperal endometritis?",
+          "How do you clinically distinguish physiological lochia from infected lochia in the first week postpartum?",
+          "What is the clinical significance of finding an exquisitely tender, boggy, subinvoluted uterus on day 4 postpartum?",
+          "Why is it essential to inspect the lower limbs and calves in every woman presenting with postpartum pyrexia?"
+        ]
+      },
+      {
+        "id": "osce.puerperal_sepsis.history_triage",
+        "title": "Take a focused postnatal history and initiate the maternal sepsis bundle",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.puerperal.symptoms",
+          "skill.hx.puerperal.risk",
+          "skill.tx.puerperal_sepsis"
+        ],
+        "examinerQuestions": [
+          "What are the three most important intrapartum risk factors predisposing to postpartum pelvic infection?",
+          "What six actions constitute the maternal Sepsis Six pathway, and within what timeframe must they be initiated?",
+          "Why should uterine curettage for retained infected membranes be postponed until parenteral antibiotics have been running?",
+          "Which empirical intravenous antibiotic combination is recommended as first-line therapy for severe puerperal sepsis?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.puerperal_sepsis.basics",
+      "skill.puerperal_sepsis.findings",
+      "skill.puerperal_sepsis.differential",
+      "skill.ix.puerperal_sepsis.workup",
+      "skill.puerperal_sepsis.diagnosis",
+      "skill.tx.puerperal_sepsis",
+      "skill.annex.puerperal_sepsis.meows",
+      "skill.exam.obg.puerperal_exam"
+    ]
+  },
+  "skills": {
+    "skill.puerperal_sepsis.basics": {
+      "id": "skill.puerperal_sepsis.basics",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Basics of puerperal sepsis: definitions, microbiology, and pathogenesis",
+      "oneLine": "Definition of puerperal pyrexia, ascending polymicrobial pathogenesis, and high-risk microbiology including Group A Streptococcus",
+      "why": "Puerperal sepsis remains one of the five leading direct causes of maternal mortality worldwide. Understanding the transformation of the placental site into an extensive raw wound bed, the role of ascending endogenous and exogenous pathogens, and the specific virulence of Group A Streptococcus provides the rationale for prompt antimicrobial therapy before septicaemic shock supervenes.",
+      "teach": [
+        {
+          "heading": "Definition and diagnostic criteria of puerperal pyrexia",
+          "body": "Puerperal pyrexia is defined as a temperature of 38.0 degrees C (100.4 degrees F) or higher on any two of the first 10 days postpartum, excluding the initial 24 hours.\n\nPuerperal sepsis is defined by the World Health Organization as infection of the genital tract occurring at any time between the rupture of membranes or labour and the 42nd day postpartum, accompanied by fever and pelvic symptoms."
+        },
+        {
+          "heading": "Pathogenesis: the placental site as a surgical wound",
+          "body": "Following delivery of the placenta, the placental site is an extensive, denuded wound with thrombosed venous sinuses, necrotic decidual debris, and blood clots.\n\nThis alkaline, warm, and protein-rich environment serves as an ideal culture medium. Normal vaginal acidity (pH 3.8 to 4.5) is neutralised by alkaline amniotic fluid, lochia, and blood, permitting rapid ascending colonization by cervicovaginal microorganisms."
+        },
+        {
+          "heading": "Microbiological spectrum in puerperal genital infection",
+          "table": {
+            "cols": [
+              "Organism Category",
+              "Common Pathogens",
+              "Clinical Significance"
+            ],
+            "rows": [
+              [
+                "Aerobic Cocci",
+                "Group A Streptococcus (S. pyogenes), Group B Strep, Enterococci",
+                "GAS causes fulminant toxic shock with scant odorless lochia"
+              ],
+              [
+                "Aerobic Gram-Negative Bacilli",
+                "Escherichia coli, Klebsiella pneumoniae, Proteus",
+                "Ascending fecal flora, causes septic shock and endotoxaemia"
+              ],
+              [
+                "Anaerobes",
+                "Bacteroides fragilis, Prevotella, Peptostreptococcus",
+                "Foul-smelling lochia, tissue necrosis, abscess formation"
+              ],
+              [
+                "Other Organisms",
+                "Clostridium perfringens, Chlamydia trachomatis, Mycoplasma",
+                "Gas gangrene, uterine myonecrosis, late low-grade endometritis"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the standard clinical definition of puerperal pyrexia?",
+          "a": "A temperature of 38.0 degrees C or higher on any two of the first 10 days postpartum, excluding the first 24 hours.",
+          "accept": [
+            "38.0",
+            "38 degrees",
+            "first 10 days",
+            "first ten days",
+            "excluding"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does Group A Streptococcus (Streptococcus pyogenes) present with a distinct clinical picture compared to typical polymicrobial endometritis?",
+          "a": "Group A Streptococcus produces powerful exotoxins causing rapid bacteremia and toxic shock with scant non-malodorous lochia, whereas anaerobic infections cause putrid foul lochia.",
+          "accept": [
+            "exotoxins",
+            "toxic shock",
+            "scant",
+            "non-malodorous",
+            "putrid",
+            "anaerobic"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "pyrexia_definition",
+          "text": "States the diagnostic threshold (38.0 C on any two of the first 10 days excluding day 1)"
+        },
+        {
+          "id": "pathogenesis_mechanism",
+          "text": "Explains placental site wound physiology, loss of acid barrier, and polymicrobial ascendancy"
+        },
+        {
+          "id": "microbiological_distinction",
+          "text": "Distinguishes invasive Group A Streptococcal infection from putrefactive anaerobic infection"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "puerperium_involution_sepsis_breastfeeding: Clinical pearls and management"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Puerperal Infection: microbiology and pathogenesis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.puerperal_sepsis.findings": {
+      "id": "skill.puerperal_sepsis.findings",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Clinical stages, examination findings, and local spread of puerperal pelvic infection",
+      "oneLine": "Systematic progression from acute endometritis to parametritis, peritonitis, pelvic abscess, and septic thrombophlebitis",
+      "why": "Puerperal infection is not static; it spreads contiguously through tissue planes, lymphatics, and pelvic venous plexuses. Recognizing the physical examination signs that distinguish localized endometritis from parametritic phlegmon, generalized peritonitis, or septic thrombophlebitis enables timely surgical and radiological escalation.",
+      "teach": [
+        {
+          "heading": "Anatomical progression of pelvic infection",
+          "body": "Infection originates at the placental site and decidua as acute endometritis, rapidly involving the underlying myometrium (endomyometritis).\n\nIf untreated, infection extends via broad ligament lymphatics into the parametrium (pelvic cellulitis), via the fallopian tubes into the peritoneal cavity (pelvic and generalized peritonitis), or along pelvic veins causing suppurative thrombophlebitis."
+        },
+        {
+          "heading": "Distinguishing localized endometritis from pelvic spread",
+          "table": {
+            "cols": [
+              "Stage of Infection",
+              "Hallmark Examination Findings",
+              "Key Clinical Implication"
+            ],
+            "rows": [
+              [
+                "Acute Endometritis",
+                "Tender subinvoluted uterus, foul purulent lochia, cervical tenderness",
+                "Responds to triple IV antimicrobial therapy within 48 to 72 hours"
+              ],
+              [
+                "Parametritis / Phlegmon",
+                "Unilateral hard fixed pelvic induration pushing uterus to opposite side",
+                "Prolonged fever spikes, risk of broad ligament abscess"
+              ],
+              [
+                "Pelvic Peritonitis",
+                "Marked lower abdominal guarding, rebound tenderness, absent bowel sounds",
+                "Risk of diffuse peritonitis, paralytic ileus, and pouch collection"
+              ],
+              [
+                "Septic Pelvic Thrombophlebitis",
+                "Spiking hectic fever unaffected by antibiotics, tender cord-like mass",
+                "Requires therapeutic anticoagulation alongside IV antibiotics"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What physical signs on abdominal examination indicate that puerperal endometritis has extended to cause pelvic peritonitis?",
+          "a": "Lower abdominal guarding, severe rebound tenderness, abdominal distension, and sluggish or absent bowel sounds.",
+          "accept": [
+            "guarding",
+            "rebound tenderness",
+            "distension",
+            "absent bowel sounds",
+            "bowel sounds"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What clinical feature raises suspicion of septic pelvic thrombophlebitis in a postpartum mother treated for endometritis?",
+          "a": "Persistent spiking fevers and chills with tachycardia despite 48 to 72 hours of appropriate broad-spectrum parenteral antibiotics.",
+          "accept": [
+            "spiking fevers",
+            "persistent fever",
+            "48 to 72 hours",
+            "broad-spectrum antibiotics",
+            "tachycardia"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "spread_mechanisms",
+          "text": "Describes lymphatic, hematogenous, and contiguous spread of pelvic infection"
+        },
+        {
+          "id": "peritonitis_identification",
+          "text": "Identifies signs of peritoneal irritation and distinguishes localized from generalized peritonitis"
+        },
+        {
+          "id": "thrombophlebitis_recognition",
+          "text": "Recognises unresponsive pyrexia as a hallmark of septic pelvic vein thrombosis"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "puerperium_involution_sepsis_breastfeeding: Puerperal morbidity, sepsis, secondary PPH and mastitis"
+        },
+        {
+          "source": "FOGSI",
+          "locator": "FOGSI General Clinical Practice Recommendations: Postpartum Infection and Maternal Sepsis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.puerperal_sepsis.summary": {
+      "id": "skill.puerperal_sepsis.summary",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "The clinical summary in puerperal sepsis",
+      "oneLine": "Synthesising delivery history, postpartum timing, hemodynamic stability, and physical pelvic findings into a coherent case summary",
+      "why": "A clinical summary in maternal sepsis must synthesize the delivery background, timing of symptom onset, localizing pelvic signs, and hemodynamic stability into a concise diagnostic statement. It guides immediate escalation and triage between the maternity ward, high-dependency unit, and intensive care unit.",
+      "teach": [
+        {
+          "heading": "Core components of the maternal sepsis summary",
+          "body": "The postpartum sepsis summary must systematically combine four key elements: maternal demographics and obstetric history (parity and delivery route), postpartum day of onset, severity of systemic inflammatory response (vital signs and organ perfusion), and localizing examination findings (uterine involution, tenderness, lochia, and surgical wounds)."
+        },
+        {
+          "heading": "A model case summary",
+          "body": "A 23-year-old P2L2 on postpartum day 4 following a home delivery complicated by prolonged rupture of membranes, presenting with acute high-grade pyrexia with rigors, lower abdominal cramping, and offensive lochia.\n\nExamination demonstrates tachycardia (116 bpm), borderline hypotension (94/60 mmHg), uterine subinvolution with exquisite tenderness, and cervical motion tenderness without generalized peritonism, consistent with acute puerperal endometritis with systemic sepsis."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What essential information must be communicated in the opening sentence of a postpartum sepsis clinical summary?",
+          "a": "Maternal age, parity, delivery mode and location, postpartum day of presentation, and the primary presenting symptom complex.",
+          "accept": [
+            "age",
+            "parity",
+            "delivery mode",
+            "postpartum day",
+            "presenting symptom"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why is it vital to include hemodynamic parameters and lactation status in the puerperal sepsis summary?",
+          "a": "Hemodynamics identify septic shock and organ hypoperfusion requiring high-dependency care, while lactation status helps differentiate pelvic infection from acute breast mastitis.",
+          "accept": [
+            "hemodynamics",
+            "septic shock",
+            "hypoperfusion",
+            "lactation",
+            "mastitis"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "synthesis_structure",
+          "text": "Synthesises history, vitals, pelvic findings, and severity into a clear clinical summary"
+        },
+        {
+          "id": "triage_relevance",
+          "text": "Emphasises parameters that dictate level of care (ward vs HDU vs ICU)"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "puerperium_involution_sepsis_breastfeeding: Clinical pearls and management"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Bacterial Sepsis in Pregnancy and the Puerperium: clinical summary and risk stratification"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.puerperal_sepsis.differential": {
+      "id": "skill.puerperal_sepsis.differential",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Differential diagnosis of postpartum fever: the Five Ws and non-pelvic causes",
+      "oneLine": "Structured bedside evaluation of postpartum pyrexia: Wind, Water, Womb, Wound, Walking, and endemic infections",
+      "why": "Not every postpartum fever arises from the genital tract. A systematic anatomical framework ensures that respiratory atelectasis, urinary tract infection, surgical wound breakdown, deep vein thrombosis, acute mastitis, and co-incident tropical infections (malaria, dengue, enteric fever) are evaluated and excluded systematically.",
+      "teach": [
+        {
+          "heading": "The mnemonic framework for puerperal pyrexia",
+          "body": "Postpartum pyrexia should be evaluated using the classic five Ws framework, expanded to include breasts and endemic fevers.\n\nWind represents atelectasis and pneumonia (days 1 to 2); Water represents urinary tract infection or pyelonephritis (days 2 to 3); Womb represents endometritis (days 3 to 5); Wound represents episiotomy or caesarean surgical site infection (days 4 to 7); Walking represents deep vein thrombosis (days 7 to 10)."
+        },
+        {
+          "heading": "Key clinical differentials of postpartum fever",
+          "table": {
+            "cols": [
+              "Condition",
+              "Typical Onset",
+              "Differentiating Physical Signs",
+              "Primary Diagnostic Test"
+            ],
+            "rows": [
+              [
+                "Puerperal Endometritis",
+                "Days 2 to 5 postpartum",
+                "Tender subinvoluted uterus, foul lochia, cervical pain",
+                "Endocervical swab culture, pelvic ultrasound"
+              ],
+              [
+                "Urinary Tract Infection",
+                "Days 2 to 4 postpartum",
+                "Dysuria, suprapubic tenderness, costovertebral angle pain",
+                "Urine routine microscopy, urine culture"
+              ],
+              [
+                "Acute Mastitis",
+                "Days 7 to 28 postpartum",
+                "Unilateral wedge-shaped erythema, breast induration, heat",
+                "Clinical examination, breast ultrasound if fluctuant"
+              ],
+              [
+                "Surgical Site Infection",
+                "Days 4 to 8 postpartum",
+                "Erythema, induration, purulent wound discharge, gaping",
+                "Wound swab culture, inspection under good light"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How can you clinically differentiate puerperal endometritis from acute lactational mastitis at the bedside?",
+          "a": "Endometritis presents with uterine fundal tenderness, subinvolution, and foul lochia with soft breasts, whereas mastitis presents with unilateral wedge-shaped breast erythema and hard localized heat with a normal non-tender uterus.",
+          "accept": [
+            "uterine tenderness",
+            "subinvolution",
+            "foul lochia",
+            "wedge-shaped",
+            "breast erythema",
+            "breast"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Which endemic non-obstetric infections must always be considered in an Indian patient with postpartum high-grade fever?",
+          "a": "Malaria, dengue fever, typhoid (enteric fever), urinary tract infection, and pulmonary tuberculosis.",
+          "accept": [
+            "malaria",
+            "dengue",
+            "typhoid",
+            "enteric fever",
+            "tuberculosis",
+            "urinary tract infection"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "five_ws_framework",
+          "text": "Applies the Five Ws framework to systematically evaluate extra-genital causes of fever"
+        },
+        {
+          "id": "mastitis_discrimination",
+          "text": "Distinguishes breast engorgement, infectious mastitis, and pelvic infection"
+        },
+        {
+          "id": "endemic_fever_context",
+          "text": "Considers prevalent regional co-infections in tropical and Indian practice"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "puerperium_involution_sepsis_breastfeeding: Additional differentials"
+        },
+        {
+          "source": "WHO",
+          "locator": "Managing puerperal sepsis: differential diagnosis of postpartum fever"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.puerperal_sepsis.workup": {
+      "id": "skill.ix.puerperal_sepsis.workup",
+      "kind": "investigation",
+      "system": "obgyn",
+      "title": "Diagnostic workup, microbiology, and imaging in puerperal sepsis",
+      "oneLine": "Systematic laboratory, microbiological, and ultrasonographic investigations to identify pathogens, evaluate complications, and assess organ dysfunction",
+      "why": "Diagnostic testing in puerperal sepsis serves three goals: microbiological isolation of the causative organism before antimicrobial alteration, physiological assessment of organ dysfunction (lactate, renal, coagulation), and radiological evaluation for retained products of conception, pelvic collections, or ovarian vein thrombosis.",
+      "teach": [
+        {
+          "heading": "Microbiological evaluation: specimen collection before antibiotics",
+          "body": "Collect diagnostic microbiological specimens prior to initiating or altering intravenous antimicrobial therapy.\n\nObtain two sets of blood cultures from separate venepuncture sites during febrile spikes. Obtain a high vaginal and endocervical swab using a sterile speculum under direct visualization, taking care to avoid vulvoperineal skin contamination."
+        },
+        {
+          "heading": "Laboratory markers of inflammation and organ hypoperfusion",
+          "body": "Complete blood count demonstrates neutrophilic leukocytosis with band forms (left shift) or, ominously, leukopenia in overwhelming sepsis.\n\nSerum lactate is an essential marker of tissue hypoperfusion; levels > 2 mmol/L indicate significant cellular hypoxia. Baseline urea, creatinine, liver enzymes, and coagulation profile (PT, INR, aPTT, fibrinogen) screen for multi-organ dysfunction syndrome."
+        },
+        {
+          "heading": "Diagnostic ultrasound and cross-sectional imaging",
+          "body": "Pelvic ultrasound is the initial imaging modality of choice. It assesses uterine size, detects retained placental cotyledons or membranes (echogenic intracavitary mass), and identifies fluid collections in the pouch of Douglas or broad ligament.\n\nContrast-enhanced pelvic CT or MRI is indicated when fever persists despite 48 to 72 hours of triple antibiotics to diagnose septic pelvic thrombophlebitis or deep pelvic phlegmon."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why must blood and endocervical cultures be collected before starting intravenous antibiotics in maternal sepsis?",
+          "a": "Antimicrobial therapy rapidly sterilises cultures, preventing identification of the causative organism and subsequent targeted step-down antibiotic therapy.",
+          "accept": [
+            "sterilises",
+            "sterilize",
+            "identification",
+            "targeted",
+            "sensitivity",
+            "step-down"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the clinical role of pelvic ultrasound in a postpartum patient presenting with suspected puerperal sepsis?",
+          "a": "To confirm uterine subinvolution, identify retained infected products of conception, and detect pelvic abscesses or free fluid in the pouch of Douglas.",
+          "accept": [
+            "subinvolution",
+            "retained products",
+            "retained placental",
+            "abscess",
+            "fluid",
+            "ultrasound"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "microbiological_sampling",
+          "text": "Specifies aseptic collection of blood cultures and endocervical swabs prior to antimicrobials"
+        },
+        {
+          "id": "organ_dysfunction_markers",
+          "text": "Orders lactate, blood counts, renal, and coagulation profiles to gauge severity"
+        },
+        {
+          "id": "radiological_selection",
+          "text": "Selects ultrasound to detect retained tissue and collections, and cross-sectional imaging for thrombophlebitis"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "puerperium_involution_sepsis_breastfeeding: Additional investigations"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Bacterial Sepsis in Pregnancy and the Puerperium: diagnostic investigations and imaging"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.puerperal_sepsis.diagnosis": {
+      "id": "skill.puerperal_sepsis.diagnosis",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Diagnosis, staging, and severity stratification of maternal sepsis",
+      "oneLine": "Diagnostic criteria, Modified Obstetric Early Warning Score (MEOWS), and identifying septic shock in postpartum women",
+      "why": "Physiological adaptations of pregnancy and the early puerperium (physiological tachycardia, leukocytosis, and lowered vascular resistance) can mask early sepsis until abrupt cardiovascular collapse occurs. Applying obstetric-specific early warning criteria (MEOWS) and defining sepsis, severe sepsis, and septic shock ensures timely high-dependency escalation.",
+      "teach": [
+        {
+          "heading": "Diagnostic criteria for postpartum endometritis and sepsis",
+          "body": "A definitive clinical diagnosis of puerperal endometritis requires postpartum fever (>= 38.0 degrees C) accompanied by at least two of the following: uterine tenderness, uterine subinvolution, and purulent or foul lochia.\n\nPuerperal sepsis is diagnosed when infection triggers systemic inflammatory dysregulation with evidence of acute organ dysfunction or tissue hypoperfusion."
+        },
+        {
+          "heading": "Stratifying severity: from localized infection to septic shock",
+          "table": {
+            "cols": [
+              "Severity Category",
+              "Clinical and Physiological Criteria",
+              "Care Setting and Escalation"
+            ],
+            "rows": [
+              [
+                "Mild / Localised",
+                "Temp 38.0 to 38.4 C, normal BP, mild tachycardia, uterine tenderness only",
+                "Postnatal ward, oral or IV antibiotics, 4-hourly observations"
+              ],
+              [
+                "Severe Maternal Sepsis",
+                "Temp > 38.5 C, HR > 110, RR > 22, altered mental state, lactate > 2 mmol/L",
+                "Immediate Sepsis Six bundle, high-dependency unit (HDU) admission"
+              ],
+              [
+                "Septic Shock",
+                "Persistent hypotension (MAP < 65 mmHg) refractory to fluid bolus, lactate > 4",
+                "Intensive care unit (ICU), central venous access, vasopressor support"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What diagnostic triad establishes the clinical diagnosis of acute puerperal endometritis?",
+          "a": "Postpartum pyrexia (>= 38.0 degrees C), uterine subinvolution with exquisite tenderness, and abnormal or foul-smelling lochia.",
+          "accept": [
+            "pyrexia",
+            "fever",
+            "tender uterus",
+            "uterine tenderness",
+            "subinvolution",
+            "foul lochia",
+            "lochia"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "How is septic shock distinguished from severe maternal sepsis in a postpartum patient?",
+          "a": "Septic shock is marked by persistent arterial hypotension (mean arterial pressure < 65 mmHg) and hyperlactatemia refractory to adequate intravenous fluid resuscitation.",
+          "accept": [
+            "persistent hypotension",
+            "hypotension",
+            "refractory",
+            "fluid resuscitation",
+            "mean arterial pressure",
+            "lactate"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "diagnostic_triad",
+          "text": "Names the classical triad of fever, uterine subinvolution, and abnormal lochia"
+        },
+        {
+          "id": "sepsis_grading",
+          "text": "Accurately categorises patients into mild endometritis, severe sepsis, or septic shock"
+        },
+        {
+          "id": "triage_thresholds",
+          "text": "Applies MEOWS and hemodynamic thresholds to dictate appropriate care venue"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "puerperium_involution_sepsis_breastfeeding: Clinical pearls and management"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Bacterial Sepsis in Pregnancy and the Puerperium: recognition and severity grading"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.puerperal_sepsis": {
+      "id": "skill.tx.puerperal_sepsis",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Management of puerperal sepsis: the maternal Sepsis Six bundle and antimicrobial therapy",
+      "oneLine": "Immediate resuscitation, broad-spectrum triple antibiotic regimens, surgical drainage, and uterine evacuation timing",
+      "why": "Every hour of delay in administering appropriate intravenous antibiotics in septic shock increases maternal mortality by approximately 7 to 8 percent. Instituting the Sepsis Six resuscitation bundle within 60 minutes of recognition, selecting synergistic broad-spectrum antimicrobials, and safely timing surgical evacuation resolves infection while preventing bacteremic collapse.",
+      "dosingNote": "This module teaches management at the level of drug class and principle, quoting only the regimens as stated in the cited book and guideline sources below. All agents, doses, routes and regimens must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "teach": [
+        {
+          "heading": "The maternal Sepsis Six bundle: action in the first hour",
+          "body": "The Sepsis Six pathway must be completed within 60 minutes of recognizing maternal sepsis.\n\nDeliver three interventions: administer high-flow oxygen (target SpO2 94 to 98 percent), obtain blood cultures prior to antibiotics, and administer intravenous broad-spectrum antimicrobials.\n\nTake three actions: measure serum lactate and hemoglobin, start intravenous crystalloid fluid resuscitation (bolus of 20 to 30 mL/kg), and place an indwelling urinary catheter to monitor strict hourly urine output (target > 0.5 mL/kg/h)."
+        },
+        {
+          "heading": "Empirical antimicrobial regimens for puerperal endometritis",
+          "table": {
+            "cols": [
+              "Regimen Option",
+              "Antimicrobial Components",
+              "Targeted Microbial Coverage"
+            ],
+            "rows": [
+              [
+                "Gold Standard Triple Therapy",
+                "Ampicillin + Gentamicin + Metronidazole (or Clindamycin)",
+                "Broad bactericidal coverage: Gram-positive cocci, enterics, and anaerobes"
+              ],
+              [
+                "Clindamycin + Gentamicin",
+                "Clindamycin + Gentamicin (Williams / WHO regimen)",
+                "Excellent anaerobic and Gram-negative coverage; 90 to 95 percent cure rate"
+              ],
+              [
+                "Penicillin-Allergic Alternative",
+                "Clindamycin + Gentamicin or Ceftriaxone + Metronidazole",
+                "Safe alternative avoiding penicillins; covers anaerobes and coliforms"
+              ],
+              [
+                "Step-Down Therapy",
+                "Oral Co-amoxiclav or Ciprofloxacin + Metronidazole",
+                "Oral switch after 48 hours afebrile, continued for 7 to 10 total days"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Surgical and procedural indications in puerperal infection",
+          "body": "Retained placental tissue requires gentle uterine evacuation (suction curettage or ovum forceps), but only after establishing therapeutic antimicrobial levels (at least 4 to 6 hours of parenteral therapy) to prevent bacterial shower and septic shock, unless severe hemorrhage dictates immediate evacuation.\n\nDrain pelvic abscesses under radiological guidance. Infected perineal wounds require suture removal, thorough debridement, and delayed secondary closure. Exploratory laparotomy is indicated for peritonitis or uterine perforation."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What six clinical actions constitute the maternal Sepsis Six bundle to be completed within one hour?",
+          "a": "High-flow oxygen, blood cultures, intravenous antibiotics, intravenous fluid resuscitation, serum lactate measurement, and urinary catheterisation for hourly output monitoring.",
+          "accept": [
+            "oxygen",
+            "blood cultures",
+            "antibiotics",
+            "fluids",
+            "lactate",
+            "catheter",
+            "urine output"
+          ],
+          "minMatch": 4
+        },
+        {
+          "level": 2,
+          "q": "Why is routine immediate uterine curettage contraindicated in acute puerperal endometritis without active heavy bleeding?",
+          "a": "Curettage through an infected, friable myometrium risks uterine perforation and dislodges infected thrombi into the circulation, precipitating bacteremic shock; it should be delayed until 4 to 6 hours after initiating parenteral antibiotics.",
+          "accept": [
+            "perforation",
+            "thrombi",
+            "bacteremic shock",
+            "septic shock",
+            "delayed",
+            "antibiotics"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "sepsis_six_execution",
+          "text": "Details the components and 1-hour timeline of the maternal Sepsis Six resuscitation protocol"
+        },
+        {
+          "id": "antimicrobial_selection",
+          "text": "Selects appropriate empirical broad-spectrum coverage targeting aerobes and anaerobes"
+        },
+        {
+          "id": "procedural_timing",
+          "text": "Applies safe timing principles for uterine evacuation and surgical drainage"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "puerperium_involution_sepsis_breastfeeding: Clinical pearls and management"
+        },
+        {
+          "source": "WHO",
+          "locator": "WHO recommendations for prevention and treatment of maternal peripartum infections"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.puerperal_sepsis.meows": {
+      "id": "skill.annex.puerperal_sepsis.meows",
+      "kind": "annexure",
+      "system": "obgyn",
+      "title": "Modified Obstetric Early Warning Score (MEOWS) and sepsis screening triggers",
+      "oneLine": "Physiological postpartum vital sign reference ranges, colour-coded warning triggers, and clinical escalation thresholds",
+      "why": "The Modified Obstetric Early Warning Score (MEOWS) provides standard bedside physiological parameters adapted for postpartum maternal physiology. Early detection of single red or double yellow triggers prompts mandatory escalation to senior obstetric and intensive care personnel before catastrophic decompensation occurs.",
+      "teach": [
+        {
+          "heading": "Postpartum physiological parameters and trigger thresholds",
+          "table": {
+            "cols": [
+              "Physiological Parameter",
+              "Normal Range Postpartum",
+              "Yellow Trigger (Mild)",
+              "Red Trigger (Severe)"
+            ],
+            "rows": [
+              [
+                "Temperature (C)",
+                "36.0 to 37.4 C",
+                "35.0 to 35.9 or 37.5 to 38.4 C",
+                "< 35.0 or >= 38.5 C"
+              ],
+              [
+                "Heart Rate (bpm)",
+                "60 to 99 bpm",
+                "100 to 119 bpm",
+                "< 50 or >= 120 bpm"
+              ],
+              [
+                "Systolic BP (mmHg)",
+                "100 to 139 mmHg",
+                "90 to 99 or 140 to 149 mmHg",
+                "< 90 or >= 150 mmHg"
+              ],
+              [
+                "Respiratory Rate (/min)",
+                "12 to 20 /min",
+                "21 to 24 /min",
+                "< 10 or >= 25 /min"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Clinical escalation protocol for MEOWS triggers",
+          "body": "A single RED trigger or two consecutive YELLOW triggers requires immediate bedside evaluation by the duty medical officer and notification of the consultant obstetrician within 30 minutes.\n\nTwo RED triggers indicate imminent critical collapse, requiring emergency obstetric resuscitation team activation, high-dependency unit transfer, and intensive care consultation."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What respiratory rate and heart rate thresholds represent a RED alert on a Modified Obstetric Early Warning Score?",
+          "a": "A respiratory rate of 25 or more breaths per minute (or less than 10) and a heart rate of 120 or more beats per minute (or less than 50).",
+          "accept": [
+            "25",
+            "120",
+            "heart rate",
+            "respiratory rate",
+            "red alert"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What mandatory action is required when a postpartum mother triggers one RED or two YELLOW MEOWS alerts?",
+          "a": "Immediate bedside medical assessment within 30 minutes, continuous vital sign monitoring, and notification of the consultant obstetrician.",
+          "accept": [
+            "bedside assessment",
+            "30 minutes",
+            "monitoring",
+            "consultant obstetrician",
+            "escalation"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "physiological_thresholds",
+          "text": "Recognises normal vs abnormal postpartum vital parameters on the MEOWS chart"
+        },
+        {
+          "id": "escalation_timelines",
+          "text": "Applies defined red and yellow trigger escalation protocols promptly"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "puerperium_involution_sepsis_breastfeeding: Clinical pearls and management"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Bacterial Sepsis in Pregnancy and the Puerperium: MEOWS escalation chart"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.puerperal_sepsis.pooja",
+      "title": "Pooja: High-grade postpartum fever with foul lochia on day 4 after home delivery",
+      "opening": "Doctor, I delivered my baby at home four days ago after my water broke early. Since yesterday evening I have high fever with shaking chills, severe lower tummy cramps, and a dirty, foul-smelling discharge that soaks through my cloth pads.",
+      "fallback": "I did not follow that, doctor. Please ask me about my fever, my tummy pain, the foul discharge, or how my delivery went.",
+      "patient": {
+        "name": "Pooja",
+        "age": 23,
+        "sex": "female",
+        "occupation": "Homemaker and agricultural worker",
+        "residence": "Rural village near Belagavi, Karnataka; lives with husband, newborn, and mother-in-law"
+      },
+      "initialVitals": {
+        "hr": 116,
+        "bpSystolic": 94,
+        "bpDiastolic": 60,
+        "rr": 24,
+        "spo2": 97,
+        "temp": 39.1,
+        "gcs": 15
+      },
+      "history": {
+        "presenting": {
+          "key": true,
+          "cues": [
+            "what brings you to the hospital",
+            "what is your main complaint",
+            "tell me what happened after delivery",
+            "why did you come to see us",
+            "chief complaint today",
+            "what seems to be the problem"
+          ],
+          "reply": "Doctor, I delivered my baby at home four days ago. Since yesterday evening I have developed severe fever with shaking chills, bad lower belly pain, and a very smelly, dirty reddish discharge."
+        },
+        "fever_onset": {
+          "key": true,
+          "cues": [
+            "when did the fever begin",
+            "how high was the temperature",
+            "fever with severe chills",
+            "did you have shaking chills",
+            "pattern of the temperature",
+            "when did your fever start"
+          ],
+          "reply": "The fever started yesterday afternoon, on my third day after childbirth. It came on very quickly with violent shivering and shaking chills. When the village nurse checked me with a thermometer last night, she said it was over 102 degrees Fahrenheit."
+        },
+        "abdominal_pain": {
+          "key": true,
+          "cues": [
+            "where is the pain located",
+            "tell me about the abdominal pain",
+            "severe lower belly cramps",
+            "is your tummy tender to touch",
+            "nature of the tummy pain",
+            "belly pain"
+          ],
+          "reply": "The pain is right in the lower part of my belly, over the womb area. It feels like severe cramping that does not let go, and it hurts intensely whenever I move or when someone presses on my tummy."
+        },
+        "lochia_character": {
+          "key": true,
+          "cues": [
+            "what does the vaginal discharge look like",
+            "is there a foul smell from the lochia",
+            "colour of the vaginal discharge",
+            "foul smelling reddish brown discharge",
+            "how many pads are you soaking",
+            "foul discharge",
+            "smelly discharge",
+            "offensive lochia"
+          ],
+          "reply": "The discharge changed yesterday from normal red to a dirty dark brownish-red fluid with little clots. It has a terrible, offensive rotting smell that I can smell even under the blanket, and I have had to change four cloth pads since morning."
+        },
+        "delivery_details": {
+          "key": true,
+          "cues": [
+            "where did the delivery take place",
+            "who conducted your delivery",
+            "details of how you delivered",
+            "was it a home birth or hospital delivery",
+            "mode of the delivery",
+            "where did you deliver",
+            "did you deliver at home"
+          ],
+          "reply": "I delivered at home in our village with the help of a local traditional dai (birth attendant). It was a normal vaginal birth on a floor mat, but the labour took a very long time."
+        },
+        "membrane_rupture": {
+          "key": true,
+          "cues": [
+            "when did your waters break",
+            "how many hours of leaking fluid",
+            "prolonged rupture of the membranes",
+            "did the water break before labour pains",
+            "colour of the leaking water",
+            "water break"
+          ],
+          "reply": "My water broke early in the morning before the labour pains even started. Clear fluid was trickling out continuously for almost 22 hours before the baby was finally born."
+        },
+        "labour_duration": {
+          "cues": [
+            "how long were you in active labour",
+            "total duration of your labour pains",
+            "did you have prolonged labour",
+            "how many hours did labour last",
+            "duration of labour"
+          ],
+          "reply": "The true strong labour pains lasted for nearly 16 hours. I was pushing for more than two hours before the baby came out, and I felt completely exhausted."
+        },
+        "placenta_delivery": {
+          "cues": [
+            "how was the afterbirth delivered",
+            "did the placenta come out completely",
+            "was there difficulty delivering the placenta",
+            "did they pull on the umbilical cord",
+            "delivery of the placenta"
+          ],
+          "reply": "The placenta took almost 45 minutes to come out. The dai pulled firmly on the cord and pressed down hard on my belly. She said the whole afterbirth came, but she did not inspect it closely in good light."
+        },
+        "perineal_tear_symptoms": {
+          "cues": [
+            "do you have pain in the perineum",
+            "did you tear during delivery",
+            "stitches in the vaginal area",
+            "swelling or pain at the perineal cut",
+            "perineal tear"
+          ],
+          "reply": "I tore during the birth. The dai did not put any stitches because we were at home. The area between my thighs feels very swollen, burning, and painful whenever I try to sit or nurse."
+        },
+        "urinary_symptoms": {
+          "cues": [
+            "do you have burning when passing urine",
+            "difficulty passing your urine",
+            "frequency of passing water",
+            "any pain in the bladder",
+            "burning micturition"
+          ],
+          "reply": "It burns when the urine touches the torn skin down below, but I do not have burning deep inside the bladder or pain in my back or flanks. I am able to pass urine without difficulty."
+        },
+        "bowel_symptoms": {
+          "cues": [
+            "how are your bowel movements",
+            "any loose motions or diarrhoea",
+            "have you been vomiting",
+            "nausea or passing gas",
+            "bowel symptoms"
+          ],
+          "reply": "I passed flatus this morning and have not had loose motions or vomiting. My belly feels bloated and tight because of the pain, but I am not having diarrhoea."
+        },
+        "breast_symptoms": {
+          "cues": [
+            "are your breasts painful or swollen",
+            "how is breastfeeding going",
+            "cracked or bleeding nipples",
+            "redness or lumps in the breast",
+            "breast pain"
+          ],
+          "reply": "Both my breasts are soft and producing milk normally. My baby is suckling well, and I have no redness, hard painful lumps, or cracked nipples."
+        },
+        "chest_symptoms": {
+          "cues": [
+            "any cough or phlegm",
+            "are you having shortness of breath",
+            "chest pain when breathing",
+            "difficulty in taking a breath",
+            "cough or breathlessness"
+          ],
+          "reply": "I do not have a cough or chest pain. My breathing has been a bit fast since the fever spiked, but I have no phlegm or wheezing."
+        },
+        "antenatal_care": {
+          "cues": [
+            "did you have regular antenatal checkups",
+            "iron and folic acid tablets in pregnancy",
+            "tetanus toxoid injections",
+            "blood pressure checkups during pregnancy",
+            "antenatal visits"
+          ],
+          "reply": "I attended three antenatal checkups at the Primary Health Centre. I took my iron tablets on and off, and I received two tetanus toxoid injections during my pregnancy."
+        },
+        "past_obstetric_history": {
+          "cues": [
+            "any previous pregnancies or deliveries",
+            "is this your first baby",
+            "history of previous miscarriages",
+            "complications in earlier births",
+            "previous deliveries"
+          ],
+          "reply": "This is my second baby. Two years ago I delivered a healthy boy in the government hospital by normal delivery without any fever or complication."
+        },
+        "medical_and_surgical": {
+          "cues": [
+            "any history of diabetes or hypertension",
+            "heart disease or kidney problems",
+            "chronic illnesses in the past",
+            "previous operations",
+            "past medical illnesses"
+          ],
+          "reply": "No, doctor. I have never had diabetes, high blood pressure, kidney trouble, or heart problems. I have never had any operations before."
+        },
+        "medications_taken": {
+          "cues": [
+            "what medicines have you taken since delivery",
+            "did you take any antibiotics already",
+            "paracetamol or home remedies",
+            "injections given after childbirth",
+            "any medicines taken"
+          ],
+          "reply": "The village health worker gave me two paracetamol tablets this morning which brought the fever down slightly for a couple of hours, but I have not taken any antibiotics or injections."
+        },
+        "vaginal_checks": {
+          "cues": [
+            "how many times did they check you below",
+            "did the dai check you often",
+            "number of internal checks in labour",
+            "how many pv checks",
+            "checked inside with hands"
+          ],
+          "reply": "The dai examined me from below with her bare hands at least five or six times during the night to see if the baby was coming down. She did not use sterile gloves."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "abnormal": true,
+          "finding": "Flushed, ill-looking young woman, visibly sweating and shivering in bed, dry furred tongue, mild pallor present, no peripheral cyanosis, no pedal oedema."
+        },
+        "skill.gen.vitals": {
+          "abnormal": true,
+          "finding": "Temperature 39.1 degrees C, heart rate 116 beats per minute (regular, bounding), blood pressure 94/60 mmHg, respiratory rate 24 breaths per minute, oxygen saturation 97% on room air."
+        },
+        "skill.exam.obg.preg_prep_inspect": {
+          "abnormal": true,
+          "finding": "Abdomen mildly distended, moving with respiration, midline caesarean scar absent, uterine contour visible rising up into the hypogastrium."
+        },
+        "skill.exam.obg.fundal_height": {
+          "abnormal": true,
+          "finding": "Fundus palpable at 18 cm above the pubic symphysis (at the level of umbilicus on postpartum day 4, whereas normal involution should be midway between umbilicus and symphysis); delayed involution / subinvolution."
+        },
+        "skill.exam.obg.puerperal_exam": {
+          "abnormal": true,
+          "finding": "Uterus is subinvoluted, boggy, and exquisitely tender to gentle palpation with marked guarding in both iliac fossae. Vulva and perineum show a second-degree perineal tear with slough and erythema. Lochia is dark reddish-brown, moderately heavy, and distinctly foul-smelling on the pad. Breasts are soft and nontender with colostrum/mature milk expressed; calves are soft and nontender bilaterally."
+        },
+        "skill.exam.obg.bimanual": {
+          "abnormal": true,
+          "finding": "Cervix is patulous and soft, admitting one finger; exquisite cervical motion tenderness (chandelier sign); uterine body enlarged to 18-20 weeks size, soft, boggy, and intensely tender; bilateral fornices tender with fullness but no discrete adnexal mass."
+        }
+      },
+      "essentialInvestigations": [
+        "cbc",
+        "lochia_swab",
+        "blood_culture",
+        "serum_lactate",
+        "pelvic_usg"
+      ],
+      "investigations": {
+        "cbc": {
+          "label": "Complete blood count with differential",
+          "result": "Haemoglobin 8.8 g/dL (microcytic hypochromic anaemia), total leucocyte count 18,600/cu mm with 88% neutrophils and 8% band forms (marked neutrophilic leukocytosis with left shift), platelet count 240,000/cu mm.",
+          "note": "Essential to demonstrate the inflammatory leukocytosis, assess anaemia predisposing to infection, and confirm adequate platelets before any intervention."
+        },
+        "lochia_swab": {
+          "label": "High vaginal and endocervical swab Gram stain and culture",
+          "result": "Gram stain shows abundant polymorphonuclear leukocytes with mixed flora: Gram-positive cocci in chains and Gram-negative bacilli; culture pending.",
+          "note": "Essential to obtain before starting or modifying broad-spectrum parenteral antibiotics to identify causative organisms and antimicrobial sensitivity."
+        },
+        "blood_culture": {
+          "label": "Blood cultures (two sets from separate venepuncture sites)",
+          "result": "Blood cultures drawn during temperature spike; Gram stain pending; interim report after 24 hours flags Streptococcus pyogenes (Group A Streptococcus).",
+          "note": "Essential prior to empirical antibiotics in any septic patient to identify systemic bacteremia and guide targeted step-down therapy."
+        },
+        "serum_lactate": {
+          "label": "Arterial or venous blood gas and serum lactate",
+          "result": "Serum lactate 2.6 mmol/L (elevated, indicating tissue hypoperfusion); pH 7.36, bicarbonate 19 mmol/L, base deficit -4 mmol/L.",
+          "note": "Essential marker of sepsis severity and cellular hypoperfusion guiding aggressive fluid resuscitation and monitoring response."
+        },
+        "pelvic_usg": {
+          "label": "Pelvic and abdominal ultrasound",
+          "result": "Enlarged uterus (long axis 14.5 cm) with thickened hyperechoic endometrial cavity containing fluid and 1.8 cm echogenic non-vascular debris suggestive of retained membranes or blood clot; no myometrial gas collections; no free fluid in pouch of Douglas; bilateral adnexa normal.",
+          "note": "Essential to rule out retained products of conception, uterine perforation, pelvic abscess, or septic pelvic vein thrombosis."
+        },
+        "renal_liver": {
+          "label": "Renal and liver function tests, serum electrolytes",
+          "result": "Serum creatinine 0.8 mg/dL, blood urea 28 mg/dL, serum sodium 136 mEq/L, potassium 4.1 mEq/L, bilirubin 0.9 mg/dL, AST 32 IU/L, ALT 28 IU/L, serum albumin 3.0 g/dL.",
+          "note": "Indicated to evaluate baseline organ function and monitor for multi-organ dysfunction syndrome (MODS) or aminoglycoside nephrotoxicity."
+        },
+        "urine_rm_culture": {
+          "label": "Urine routine microscopy and culture (catheterised specimen)",
+          "result": "Urine clear amber, 4-6 pus cells/hpf, no albumin, no sugar, nitrite negative; culture shows no significant bacteriuria (<10^4 CFU/mL).",
+          "note": "Indicated to differentiate puerperal pelvic infection from acute urinary tract infection or pyelonephritis as the cause of postpartum pyrexia."
+        },
+        "crp_procalcitonin": {
+          "label": "Serum C-reactive protein (CRP) and procalcitonin",
+          "result": "Serum CRP 142 mg/L (normal < 6 mg/L); procalcitonin 2.4 ng/mL (elevated, consistent with severe bacterial infection).",
+          "note": "Indicated to provide quantitative baseline inflammatory markers to monitor biochemical response to antimicrobial therapy."
+        },
+        "coagulation_profile": {
+          "label": "Prothrombin time (PT), INR, and activated partial thromboplastin time (aPTT)",
+          "result": "PT 13.2 seconds, INR 1.1, aPTT 31 seconds, fibrinogen 380 mg/dL.",
+          "note": "Indicated to detect early consumptive coagulopathy or disseminated intravascular coagulation (DIC) in severe maternal sepsis."
+        }
+      },
+      "differentialModel": {
+        "accept": [
+          "puerperal endometritis",
+          "urinary tract infection",
+          "acute mastitis",
+          "breast abscess",
+          "retained products of conception",
+          "surgical site infection",
+          "pelvic peritonitis",
+          "septic pelvic thrombophlebitis",
+          "acute pyelonephritis"
+        ],
+        "answer": "Puerperal pelvic infection (endometritis). Main differentials include retained products of conception with secondary infection, urinary tract infection or acute pyelonephritis, infected perineal tear or episiotomy, acute mastitis or breast abscess, pelvic peritonitis or abscess, and septic pelvic thrombophlebitis.",
+        "minMatch": 3
+      },
+      "diagnosis": {
+        "accept": [
+          "puerperal sepsis",
+          "postpartum sepsis",
+          "puerperal endometritis",
+          "postpartum endometritis",
+          "puerperal pelvic infection"
+        ],
+        "answer": "Puerperal sepsis with acute puerperal endometritis on postpartum day 4 following home delivery with prolonged rupture of membranes, presenting with high-grade pyrexia, uterine subinvolution, and foul lochia.",
+        "minMatch": 1
+      },
+      "managementModel": {
+        "accept": [
+          "resuscitate",
+          "oxygen",
+          "iv fluids",
+          "blood cultures",
+          "antibiotics",
+          "gentamicin",
+          "clindamycin",
+          "ampicillin",
+          "metronidazole",
+          "uterine evacuation",
+          "lactate",
+          "catheterise",
+          "monitor",
+          "refer"
+        ],
+        "answer": "Immediate maternal sepsis bundle (resuscitation with high-flow oxygen, IV crystalloid fluid bolus, blood and lochia cultures before antibiotics, broad-spectrum IV triple antibiotics such as ampicillin, gentamicin, and clindamycin or metronidazole, serum lactate, and strict urine output monitoring); supportive care with antipyretics and analgesia; gentle suction curettage/evacuation of retained products under antibiotic cover if bleeding or debris persists; wound debridement for perineal infection; escalation and specialist transfer if deteriorating.",
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "Puerperal pyrexia is defined as a temperature of 38.0 C or higher on any two of the first 10 days postpartum excluding day 1. Sepsis is among the top direct causes of maternal mortality in India and worldwide, demanding immediate recognition and intervention.",
+        "The clinical triad of puerperal endometritis is postpartum fever, subinvoluted tender uterus, and foul-smelling or purulent lochia. The infection is polymicrobial, arising from the placental bed and ascending endogenous and exogenous flora.",
+        "The Sepsis Six protocol must be instituted within the first hour of recognition: administer high-flow oxygen, take blood cultures, give broad-spectrum intravenous antimicrobials, measure serum lactate, give intravenous fluid resuscitation, and measure accurate fluid balance via an indwelling urinary catheter.",
+        "Empirical triple therapy covering Gram-positive cocci, Gram-negative enterics, and anaerobes (commonly intravenous ampicillin, gentamicin, and metronidazole or clindamycin) is the standard regimen until culture and sensitivity results are available.",
+        "Uterine evacuation for retained infected tissue should be delayed until therapeutic antimicrobial levels are achieved (usually at least 4 to 6 hours after initiating parenteral antibiotics) to avoid precipitating bacterial shower and septic shock, unless life-threatening hemorrhage is present."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

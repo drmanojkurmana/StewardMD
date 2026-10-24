@@ -1,0 +1,1327 @@
+{
+  "_comment": "CliniX pathway for post-term pregnancy and induction of labour (cxp-dis-post-term-pregnancy). Follows the 14-chapter clinical pathway with emphasis on accurate ultrasound dating, perinatal risks of placental senescence and oligohydramnios, modified Bishop cervical score evaluation, pharmacological and mechanical cervical ripening, oxytocin induction, and simulated patient case.",
+  "id": "post-term-pregnancy",
+  "name": "Post-term pregnancy",
+  "fullName": "Post-term pregnancy and induction of labour",
+  "subtitle": "Bishop score and induction",
+  "system": "obgyn",
+  "kbRef": "preterm_prom_postterm_steroids_induction",
+  "oneLine": "Gestation beyond 42 weeks, placental senescence, cervical Bishop scoring and evidence-based induction of labour",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics of prolonged pregnancy",
+      "blurb": "Definitions, dating accuracy and the biological clock of the placenta",
+      "skills": [
+        "skill.postterm.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the pregnant woman",
+      "blurb": "Privacy, chaperone, dignity and respectful communication",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars and demographic context",
+      "blurb": "Age, parity, socioeconomic factors and hospital booking status",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected prolonged pregnancy, parity is crucial: nulliparous women are at higher risk of post-term gestation and prolonged labour. Socioeconomic context and access to emergency obstetric care dictate whether elective induction is arranged at a secondary or tertiary facility."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "Menstrual history and dating",
+      "blurb": "Last menstrual period, cycle regularity and early ultrasound verification",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.booking_lmp"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "The typical presentation is absence of labour pains past the expected date of delivery. Ask specifically about loss of fetal movements, watery leaking from the vagina, and bleeding, which indicate immediate complications rather than uncomplicated prolonged pregnancy."
+        },
+        "skill.hx.obg.booking_lmp": {
+          "expect": "Establish whether the last menstrual period is certain and cycles were regular. Reconstructing EDD using Naegele rule requires 28-day cycles; if an ultrasound before 14 weeks is available, crown-rump length dating supersedes menstrual dates."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, medical, drug and family history",
+      "blurb": "Prior prolonged births, uterine surgery, maternal weight and medical disorders",
+      "skills": [
+        "skill.hx.obg.medical_family_drug",
+        "skill.hx.obg.previous_pregnancies",
+        "skill.hx.post.risk"
+      ],
+      "emphasis": {
+        "skill.hx.obg.medical_family_drug": {
+          "expect": "Screen carefully for pre-existing medical conditions like gestational diabetes or hypertension which magnify placental insufficiency. A history of previous caesarean section is vital: prostaglandins are contraindicated with a uterine scar."
+        },
+        "skill.hx.obg.previous_pregnancies": {
+          "expect": "Recurrence of post-term pregnancy occurs in 20 to 30 percent of women. Record previous delivery modes, birthweights, shoulder dystocia, or neonatal resuscitation."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General physical examination",
+      "blurb": "Maternal vitals, signs of pre-eclampsia and fluid status",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Observe maternal comfort, anxiety regarding an overdue pregnancy, and signs of dehydration or systemic illness. Pallor may indicate underlying nutritional anaemia."
+        },
+        "skill.gen.vitals": {
+          "expect": "Check blood pressure meticulously to exclude late-onset gestational hypertension or pre-eclampsia. Maternal tachycardia or fever suggests intra-amniotic infection (chorioamnionitis)."
+        },
+        "skill.gen.edema": {
+          "expect": "Physiological ankle oedema is common in late pregnancy; sudden generalised facial or hand oedema requires evaluation for pre-eclampsia."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Obstetric examination",
+      "blurb": "Abdominal palpation, fundal height, Leopold manoeuvres, fetal heart and pelvic Bishop scoring",
+      "skills": [
+        "skill.exam.obg.preg_prep_inspect",
+        "skill.exam.obg.fundal_height",
+        "skill.exam.obg.leopold",
+        "skill.exam.obg.fetal_heart",
+        "skill.exam.obg.labour_pv"
+      ],
+      "emphasis": {
+        "skill.exam.obg.preg_prep_inspect": {
+          "expect": "Inspect abdomen for surgical scars, particularly previous Pfannenstiel or midline vertical caesarean scars, which determine the safety of induction methods."
+        },
+        "skill.exam.obg.fundal_height": {
+          "expect": "Symphysis-fundal height in post-term pregnancy may be less than expected for gestational age or show a plateau, reflecting progressive oligohydramnios. A fundal height larger than dates suggests macrosomia."
+        },
+        "skill.exam.obg.leopold": {
+          "expect": "Leopold manoeuvres confirm longitudinal lie, cephalic presentation, and station of the head. In severe oligohydramnios, fetal parts are felt with striking ease and clarity through the abdominal wall."
+        },
+        "skill.exam.obg.fetal_heart": {
+          "expect": "Auscultate the fetal heart rate for a full minute: baseline 110 to 160 beats per minute. Any audible deceleration following fetal movement or uterine tightening demands immediate continuous electronic monitoring."
+        },
+        "skill.exam.obg.labour_pv": {
+          "expect": "Perform pre-induction digital vaginal examination to calculate the modified Bishop score: dilatation, effacement, station, consistency, and cervical position. Note liquor colour if membranes have ruptured."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the post-term clinical picture together",
+      "blurb": "Synthesising oligohydramnios, fetal biophysical status and cervical favourability",
+      "skills": [
+        "skill.postterm.findings"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Concise three-sentence synthesis for bedside rounds and referral handovers",
+      "skills": [
+        "skill.postterm.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Differentiating true post-term from dating errors, oligohydramnios causes and fetal compromise",
+      "skills": [
+        "skill.postterm.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations and fetal surveillance",
+      "blurb": "Ultrasound biometry, liquor volume, non-stress testing and laboratory workup",
+      "skills": [
+        "skill.ix.postterm.workup",
+        "skill.ix.obg.ctg_interpretation"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and risk classification",
+      "blurb": "Confirmed gestation, fetal well-being and cervical maturity grading",
+      "skills": [
+        "skill.postterm.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Management and induction of labour",
+      "blurb": "Timing delivery, cervical ripening agents, oxytocin titration and intrapartum care",
+      "skills": [
+        "skill.tx.postterm",
+        "skill.tx.induction",
+        "skill.annex.obg.bishop_score"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Presenting the post-term pregnancy case to senior obstetric faculty",
+      "skills": [
+        "skill.present.post.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.postterm.assessment",
+        "title": "Antenatal assessment of prolonged pregnancy",
+        "task": "A 24-year-old primigravida presents at 41 weeks plus 3 days gestation for evaluation. Perform a focused obstetric abdominal examination, assess gestational dating, interpret the cardiotocograph and liquor volume, and formulate an antenatal plan.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.obg.fundal_height",
+          "skill.exam.obg.leopold",
+          "skill.exam.obg.fetal_heart",
+          "skill.ix.postterm.workup",
+          "skill.ix.obg.ctg_interpretation"
+        ],
+        "examinerQuestions": [
+          "How do you confirm gestational age when the last menstrual period is uncertain?",
+          "What ultrasound finding for amniotic fluid defines oligohydramnios, and what is its physiological significance in post-term pregnancy?",
+          "Why does perinatal mortality increase beyond 41 to 42 weeks gestation?"
+        ]
+      },
+      {
+        "id": "osce.postterm.induction",
+        "title": "Pre-induction assessment and Bishop scoring",
+        "task": "A 27-year-old woman at 41 weeks gestation is admitted for planned induction of labour. Perform a pre-induction vaginal examination, calculate the modified Bishop score, and select the appropriate induction regimen.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.consent",
+          "skill.exam.obg.labour_pv",
+          "skill.annex.obg.bishop_score",
+          "skill.tx.induction"
+        ],
+        "examinerQuestions": [
+          "What five parameters comprise the modified Bishop score, and what threshold defines an unfavourable cervix?",
+          "The patient has a Bishop score of 3 with no prior uterine scar. Which cervical ripening agent would you choose, and what is the starting dose?",
+          "Under what circumstances is prostaglandin contraindicated for cervical ripening or labour induction?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.postterm.basics",
+      "skill.hx.obg.booking_lmp",
+      "skill.postterm.findings",
+      "skill.postterm.differential",
+      "skill.ix.postterm.workup",
+      "skill.postterm.diagnosis",
+      "skill.tx.postterm",
+      "skill.tx.induction",
+      "skill.annex.obg.bishop_score"
+    ]
+  },
+  "skills": {
+    "skill.postterm.basics": {
+      "id": "skill.postterm.basics",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Basics and Definitions of Prolonged Pregnancy",
+      "oneLine": "Gestation beyond 42 weeks, late-term thresholds, dating accuracy and placental senescence",
+      "why": "Obstetric management balances the maternal and fetal risks of ongoing pregnancy against the hazards of induction. Placental function declines after 40 to 41 weeks, leading to progressive oligohydramnios, meconium passage, fetal distress, and stillbirth. Defining true post-term gestation from dating errors is the crucial first step that prevents either unnecessary intervention or preventable perinatal mortality.",
+      "teach": [
+        {
+          "heading": "Definitions of late-term and post-term pregnancy",
+          "body": "A term pregnancy is defined as 37 weeks 0 days to 41 weeks 6 days of gestation.\n\nA late-term pregnancy extends from 41 weeks 0 days through 41 weeks 6 days (287 to 293 days).\n\nA true post-term or prolonged pregnancy reaches or exceeds 42 weeks 0 days (294 days or more from the first day of the last normal menstrual period).\n\nPerinatal mortality begins to rise after 41 weeks and doubles by 42 weeks compared to term."
+        },
+        {
+          "heading": "Placental senescence and pathophysiology",
+          "body": "As gestation advances beyond term, the placenta undergoes progressive regression: syncytial knotting, intervillous fibrin deposition, trophoblastic thinning, and calcification.\n\nThese changes diminish uteroplacental perfusion and transfer of oxygen and nutrients.\n\nFetal hypoxaemia leads to reflex redistribution of cardiac output away from kidneys toward the brain and heart.\n\nReduced renal perfusion causes oligohydramnios."
+        },
+        {
+          "heading": "Fetal and neonatal complications",
+          "points": [
+            "Oligohydramnios: reduces umbilical cord cushioning, leading to cord compression, variable decelerations, and intrapartum asphyxia.",
+            "Meconium aspiration syndrome: increased vagal tone or hypoxia stimulates colonic motility and anal sphincter relaxation into reduced liquor volume.",
+            "Macrosomia and shoulder dystocia: continuous fetal growth in 20 percent of cases leads to birthweights exceeding 4000 g and traumatic delivery.",
+            "Dysmaturity syndrome: chronic placental insufficiency produces skin peeling, loss of vernix and subcutaneous fat, and stained nails.",
+            "Stillbirth: perinatal death increases significantly after 41 weeks, justifying routine delivery between 41 and 42 weeks."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What gestational age defines a post-term pregnancy?",
+          "a": "A post-term pregnancy is defined as reaching or exceeding 42 weeks and 0 days of gestation (294 days or more from the LMP).",
+          "accept": [
+            "42 weeks",
+            "294 days",
+            "beyond 42"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What causes oligohydramnios in post-term pregnancy?",
+          "a": "Placental insufficiency causes fetal hypoxaemia, which triggers redistribution of fetal blood flow away from the kidneys, resulting in decreased fetal urine output and oligohydramnios.",
+          "accept": [
+            "placental insufficiency",
+            "fetal hypoxaemia",
+            "redistribution",
+            "kidneys",
+            "urine output"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What are the features of postmaturity or dysmaturity syndrome in the neonate?",
+          "a": "Dry wrinkled parchment-like peeling skin, loss of subcutaneous tissue, lack of vernix caseosa and lanugo, long fingernails, and yellowish-green meconium staining of skin and cord.",
+          "accept": [
+            "wrinkled",
+            "peeling skin",
+            "subcutaneous",
+            "vernix",
+            "nails",
+            "meconium"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "define_thresholds",
+          "text": "Distinguishes between late-term (41 weeks) and post-term (42 weeks) definitions"
+        },
+        {
+          "id": "pathophysiology",
+          "text": "Explains placental senescence and the mechanism of oligohydramnios"
+        },
+        {
+          "id": "clinical_risks",
+          "text": "Identifies risks of cord compression, meconium aspiration, and stillbirth"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "preterm_prom_postterm_steroids_induction: 42 risks 41 induces"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Postterm Pregnancy: Definitions and Pathophysiology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.postterm.findings": {
+      "id": "skill.postterm.findings",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Clinical Signs and Assessment of Prolonged Pregnancy",
+      "oneLine": "Physical findings, fundal height discrepancy, reduced liquor palpation and cervical examination",
+      "why": "Bedside examination provides essential clinical clues to the state of the placenta and fetus. Oligohydramnios manifests as a smaller than expected fundal height and fetal parts that are palpable with unusual distinctness. Evaluating fetal size, presenting station, and cervical maturity guides the timing and safety of induction.",
+      "teach": [
+        {
+          "heading": "Abdominal palpation findings",
+          "body": "Symphysis-fundal height may lag behind dates or show an arrest in weekly growth, reflecting progressive loss of amniotic fluid volume.\n\nOn palpation, the abdomen feels firm and compact with fetal limbs and back felt directly under maternal skin without the fluid cushion of normal pregnancy.\n\nFetal weight should be estimated clinically: approximately 20 percent of post-term fetuses are macrosomic, while a smaller subset show growth restriction."
+        },
+        {
+          "heading": "Cervical readiness and pelvic assessment",
+          "body": "Digital vaginal examination assesses cervical ripening using the modified Bishop score: dilatation, effacement, station, consistency, and cervical position.\n\nAn unripe, posterior, tubular cervix with high presenting part indicates failure of spontaneous preparatory ripening.\n\nPelvic capacity must be evaluated clinically to confirm adequate dimensions and exclude gross cephalopelvic disproportion."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why might symphysis-fundal height measure less than expected in a post-term pregnancy?",
+          "a": "Symphysis-fundal height may lag behind dates because of progressive oligohydramnios resulting from diminished placental perfusion.",
+          "accept": [
+            "oligohydramnios",
+            "reduced liquor",
+            "placental perfusion",
+            "amniotic fluid"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What characteristic sensation is noted on abdominal palpation when severe oligohydramnios is present?",
+          "a": "Fetal parts and limbs are palpated with unusual ease and distinctness directly beneath the abdominal wall because the protective cushion of amniotic fluid is lost.",
+          "accept": [
+            "fetal parts",
+            "palpated with ease",
+            "distinctness",
+            "fluid cushion",
+            "easily felt"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "fundal_height_sign",
+          "text": "Recognises that fundal height plateau or lag reflects oligohydramnios"
+        },
+        {
+          "id": "palpation_signs",
+          "text": "Identifies distinct palpability of fetal contours in reduced liquor"
+        },
+        {
+          "id": "cervical_assessment",
+          "text": "Emphasises digital examination for Bishop cervical scoring"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "preterm_prom_postterm_steroids_induction: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Postterm Pregnancy: Physical Examination and Clinical Findings"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.postterm.summary": {
+      "id": "skill.postterm.summary",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Structuring the Post-Term Clinical Summary",
+      "oneLine": "Synthesising gravidity, verified gestation, liquor volume, fetal status and cervical Bishop readiness",
+      "why": "A clinical summary for post-term pregnancy must be succinct, accurate and decisive. It should convey the exact gestational age and the evidence supporting it, maternal-fetal risk profile, liquor adequacy, and cervical score so that the obstetric team can initiate an evidence-based delivery pathway without delay.",
+      "teach": [
+        {
+          "heading": "The core components of the obstetric summary",
+          "body": "An effective post-term summary integrates five critical parameters in two to three clear sentences.\n\nFirst, maternal age, gravidity, parity, and confirmed gestational age in weeks and days with dating method.\n\nSecond, presence or absence of maternal complications, liquor volume on ultrasound, and fetal biophysical status on non-stress testing.\n\nThird, the digital cervical assessment with modified Bishop score and the proposed induction strategy."
+        },
+        {
+          "heading": "Example clinical summary structure",
+          "body": "Consider this example: A 24-year-old primigravida at 41 weeks and 4 days gestation by reliable first-trimester ultrasound dating, admitted with post-dated pregnancy.\n\nAntenatal surveillance reveals isolated oligohydramnios with deepest vertical pocket 1.8 cm and a reassuring reactive non-stress test.\n\nPelvic examination demonstrates an unfavourable cervix with a modified Bishop score of 3, for which inpatient cervical ripening with dinoprostone gel is planned."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What five components should be included in a post-term pregnancy clinical summary?",
+          "a": "Maternal parity, confirmed gestational age with dating basis, maternal co-morbidities, liquor and fetal status, and the cervical Bishop score with management plan.",
+          "accept": [
+            "parity",
+            "gestational age",
+            "dating",
+            "liquor",
+            "Bishop",
+            "plan"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why must the dating method be explicitly stated in the summary of a post-dated pregnancy?",
+          "a": "Stating the dating basis confirms whether the pregnancy is genuinely post-term or whether dating uncertainty exists, which prevents inappropriate induction.",
+          "accept": [
+            "dating basis",
+            "genuinely post-term",
+            "dating uncertainty",
+            "inappropriate induction",
+            "confirm"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "summary_structure",
+          "text": "Includes maternal particulars, verified gestation, fetal status and Bishop score"
+        },
+        {
+          "id": "dating_clarity",
+          "text": "Clearly specifies the dating method supporting gestational age"
+        },
+        {
+          "id": "actionable_plan",
+          "text": "Closes with a clear recommendation for ripening or delivery"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "preterm_prom_postterm_steroids_induction: Post-term versus prolonged by dates"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Induction of Labour: Clinical Summary and Documentation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.postterm.differential": {
+      "id": "skill.postterm.differential",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Differential Diagnosis in Suspected Prolonged Pregnancy",
+      "oneLine": "Distinguishing true post-term from dating errors, oligohydramnios causes and fetal growth restriction",
+      "why": "Not every patient who passes her expected date of delivery is post-term. Up to 70 percent of suspected prolonged pregnancies are simply errors in menstrual recall or irregular cycles. When true post-term gestation is confirmed, oligohydramnios must be differentiated from membrane rupture, and fetal size must be evaluated to separate macrosomia from uteroplacental growth restriction.",
+      "teach": [
+        {
+          "heading": "Dating discrepancy versus true post-term pregnancy",
+          "body": "The primary differential is an inaccurate menstrual date.\n\nIrregular menstrual cycles, delayed ovulation, conception during lactational amenorrhoea, or bleeding in early pregnancy mistaken for a normal menses all produce an apparently post-term date.\n\nReviewing an ultrasound scan performed before 14 weeks resolves dating discrepancies: crown-rump length dating is accurate to within plus or minus 5 days."
+        },
+        {
+          "heading": "Etiological differential of oligohydramnios",
+          "body": "When reduced amniotic fluid is found in a late-term patient, consider four causes.\n\nFirst, post-term placental senescence causing diminished fetal renal perfusion.\n\nSecond, unrecognised prelabour rupture of membranes: confirm by speculum examination checking for pooling in the posterior fornix.\n\nThird, fetal growth restriction from chronic uteroplacental insufficiency.\n\nFourth, fetal urinary tract anomalies such as renal agenesis."
+        },
+        {
+          "heading": "Differential table of prolonged pregnancy presentations",
+          "table": {
+            "cols": [
+              "Condition",
+              "Gestational Dating",
+              "Amniotic Fluid",
+              "Key Distinguishing Feature"
+            ],
+            "rows": [
+              [
+                "True post-term",
+                "Confirmed >= 42 weeks",
+                "Progressive oligohydramnios",
+                "Senescent placenta, calcification, meconium"
+              ],
+              [
+                "Dating error",
+                "Calculated >= 42, true < 40",
+                "Normal liquor volume",
+                "Normal biometry, immature cervix"
+              ],
+              [
+                "Prelabour rupture",
+                "Term or post-term",
+                "Sudden fluid reduction",
+                "Amniotic fluid pooling in posterior fornix"
+              ],
+              [
+                "Fetal growth restriction",
+                "Any gestation",
+                "Severe oligohydramnios",
+                "Estimated fetal weight < 10th percentile"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the commonest reason a woman presents with an apparent post-term pregnancy?",
+          "a": "Inaccurate menstrual dating due to irregular cycles, delayed ovulation, or misremembered last menstrual period.",
+          "accept": [
+            "inaccurate menstrual dating",
+            "irregular cycles",
+            "delayed ovulation",
+            "dating error",
+            "wrong dates"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "How do you distinguish oligohydramnios caused by post-term placental senescence from prelabour rupture of membranes?",
+          "a": "Perform a sterile speculum examination to look for pooling of amniotic fluid in the posterior vaginal fornix, nitrazine paper testing, and ferning test.",
+          "accept": [
+            "speculum",
+            "pooling",
+            "posterior fornix",
+            "nitrazine",
+            "ferning"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How does ultrasound differentiate a constitutionally small fetus from asymmetric growth restriction in late pregnancy?",
+          "a": "Asymmetric growth restriction shows head circumference sparing with reduced abdominal circumference and elevated umbilical artery Doppler resistance, whereas a constitutionally small fetus shows symmetrically small parameters with normal Doppler flow.",
+          "accept": [
+            "abdominal circumference",
+            "head circumference",
+            "sparing",
+            "Doppler",
+            "umbilical artery"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "dating_distinction",
+          "text": "Distinguishes between true prolonged gestation and inaccurate menstrual dates"
+        },
+        {
+          "id": "oligohydramnios_causes",
+          "text": "Lists causes of oligohydramnios including placental senescence, PROM and FGR"
+        },
+        {
+          "id": "speculum_role",
+          "text": "Emphasises sterile speculum examination to exclude membrane rupture"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "preterm_prom_postterm_steroids_induction: additionalDifferentials"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Postterm Pregnancy: Differential Diagnosis and Dating"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.postterm.workup": {
+      "id": "skill.ix.postterm.workup",
+      "kind": "investigation",
+      "system": "obgyn",
+      "title": "Investigations and Antenatal Fetal Surveillance in Prolonged Pregnancy",
+      "oneLine": "Ultrasound biometry, amniotic fluid quantification, non-stress testing and modified biophysical profile",
+      "why": "Investigating prolonged pregnancy aims to evaluate fetal well-being and identify placental compromise before irreversible asphyxia or intrauterine death occurs. Ultrasound assessment of amniotic fluid index and cardiotocography form the backbone of twice-weekly surveillance for women awaiting spontaneous labour beyond 41 weeks.",
+      "teach": [
+        {
+          "heading": "Ultrasound assessment of amniotic fluid volume",
+          "body": "Amniotic fluid volume is the most sensitive chronic marker of placental adequacy in late pregnancy.\n\nTwo methods are used: the single deepest vertical pocket (DVP) and the four-quadrant amniotic fluid index (AFI).\n\nOligohydramnios is defined as a single deepest pocket of less than 2 cm or an AFI of less than 5 cm.\n\nOligohydramnios is an independent indication for delivery, even with a reactive non-stress test, due to cord compression risks."
+        },
+        {
+          "heading": "Cardiotocography and non-stress testing",
+          "body": "The non-stress test (NST) monitors fetal heart rate patterns over 20 to 30 minutes.\n\nA reactive trace demonstrates a normal baseline rate between 110 and 160 beats per minute, baseline variability of 5 to 25 bpm, and two or more accelerations of at least 15 bpm for 15 seconds.\n\nIn post-term pregnancy, look vigilantly for variable decelerations caused by umbilical cord compression in oligohydramnios, or late decelerations indicating uteroplacental insufficiency."
+        },
+        {
+          "heading": "Modified biophysical profile and Doppler",
+          "body": "The modified biophysical profile combines the non-stress test (acute marker of fetal oxygenation) with the single deepest vertical pocket of amniotic fluid (chronic marker of placental function).\n\nA normal NST with deepest pocket of 2 cm or more is reassuring and predicts fetal safety for 3 to 4 days.\n\nUmbilical artery Doppler evaluates placental vascular resistance; elevated pulsatility index or absent end-diastolic velocity indicates severe placental vascular compromise."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What ultrasound threshold for amniotic fluid index (AFI) defines oligohydramnios?",
+          "a": "An amniotic fluid index of less than 5 cm (or a single deepest vertical pocket of less than 2 cm) defines oligohydramnios.",
+          "accept": [
+            "5 cm",
+            "less than 5",
+            "deepest pocket",
+            "2 cm"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What is a modified biophysical profile, and what does it assess?",
+          "a": "A modified biophysical profile combines a cardiotocograph non-stress test (acute oxygenation) with ultrasound measurement of the deepest amniotic fluid pocket (chronic placental function).",
+          "accept": [
+            "non-stress test",
+            "NST",
+            "amniotic fluid",
+            "deepest pocket",
+            "acute",
+            "chronic"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does oligohydramnios mandate delivery even if the non-stress test is reactive?",
+          "a": "Because loss of amniotic fluid cushion leaves the umbilical cord unprotected, predisposing to sudden cord compression, acute intrapartum hypoxaemia, and meconium aspiration.",
+          "accept": [
+            "cord compression",
+            "unprotected",
+            "hypoxaemia",
+            "meconium aspiration",
+            "cushion"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "fluid_thresholds",
+          "text": "States correct definitions for oligohydramnios using AFI and deepest pocket"
+        },
+        {
+          "id": "nst_interpretation",
+          "text": "Identifies normal reactive NST features and decelerations indicating compromise"
+        },
+        {
+          "id": "surveillance_protocol",
+          "text": "Explains the modified biophysical profile protocol"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "preterm_prom_postterm_steroids_induction: CTG with liquor post-term"
+        },
+        {
+          "source": "FOGSI",
+          "locator": "Antenatal Fetal Surveillance in Post-dated Pregnancy"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.postterm.diagnosis": {
+      "id": "skill.postterm.diagnosis",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Diagnosis and Clinical Staging of Prolonged Pregnancy",
+      "oneLine": "Synthesising confirmed gestational age, fetal biophysical profile, maternal risk and cervical Bishop score",
+      "why": "A complete diagnosis in post-term pregnancy is multifaceted. It must state the exact confirmed gestation in weeks and days, indicate whether oligohydramnios or fetal compromise is present, and quantify cervical ripeness with the Bishop score. This structured formulation immediately directs the clinical decision: outpatient surveillance, cervical priming, or immediate delivery.",
+      "teach": [
+        {
+          "heading": "Formulating the comprehensive obstetric diagnosis",
+          "body": "An obstetric diagnosis in prolonged pregnancy must specify four elements.\n\nFirst, gravidity and parity (for example, primigravida or multigravida).\n\nSecond, exact gestational age in completed weeks and days, explicitly noting dating confirmation (for example, 41 weeks 4 days by 12-week ultrasound).\n\nThird, fetal status: liquor volume (normal versus oligohydramnios) and non-stress test result (reactive versus non-reassuring).\n\nFourth, cervical Bishop score and pelvic adequacy."
+        },
+        {
+          "heading": "Staging and risk stratification",
+          "body": "Late-term pregnancy (41+0 to 41+6 weeks) with normal liquor and reactive NST: eligible for outpatient surveillance or planned elective induction.\n\nPost-term pregnancy (>= 42+0 weeks) or late-term with oligohydramnios: mandatory inpatient admission for induction of labour.\n\nSuspected fetal compromise (non-reassuring CTG, late decelerations) or cephalopelvic disproportion: immediate caesarean delivery."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What four elements constitute a complete clinical diagnosis in prolonged pregnancy?",
+          "a": "Parity, exact confirmed gestational age in weeks and days, fetal and liquor status, and cervical Bishop score with pelvic adequacy.",
+          "accept": [
+            "parity",
+            "gestational age",
+            "liquor",
+            "Bishop",
+            "fetal status"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "How does the finding of oligohydramnios change the diagnosis and management of a 41-week pregnancy?",
+          "a": "Oligohydramnios upgrades the diagnosis from an uncomplicated late-term pregnancy to a complicated high-risk pregnancy with placental compromise, mandating inpatient admission and induction of labour.",
+          "accept": [
+            "high-risk",
+            "placental compromise",
+            "inpatient admission",
+            "induction",
+            "admission"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "diagnosis_elements",
+          "text": "Includes parity, accurate gestational age, liquor status and Bishop score"
+        },
+        {
+          "id": "risk_stratification",
+          "text": "Accurately categorises pregnancy into uncomplicated versus complicated"
+        },
+        {
+          "id": "decision_link",
+          "text": "Connects the diagnostic formulation directly to the delivery decision"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "preterm_prom_postterm_steroids_induction: 42 risks 41 induces"
+        },
+        {
+          "source": "WHO",
+          "locator": "Recommendations for Induction of Labour: Clinical Diagnosis and Indications"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.postterm": {
+      "id": "skill.tx.postterm",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Management Principles of Prolonged Pregnancy",
+      "oneLine": "Delivery timing, routine induction policy at 41 weeks, fetal monitoring and intrapartum vigilance",
+      "why": "A proactive policy of offering induction of labour between 41+0 and 42+0 weeks prevents the steep rise in perinatal mortality, meconium aspiration, and macrosomia associated with true post-term gestation, without increasing caesarean section rates. Continuous fetal monitoring and readiness for intrapartum emergencies are vital to secure safe delivery.",
+      "dosingNote": "This module teaches management at the level of drug class and principle. Specific agents, doses, routes and regimens must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "teach": [
+        {
+          "heading": "Evidence-based timing of delivery",
+          "body": "Offering induction of labour to women between 41 weeks 0 days and 42 weeks 0 days significantly reduces perinatal mortality, stillbirth, and meconium aspiration syndrome.\n\nLarge randomised clinical trials demonstrate that routine induction at 41 weeks does not increase caesarean delivery rates compared to expectant management.\n\nMembrane sweeping offered at 40 and 41 weeks promotes spontaneous labour onset and reduces the need for formal medical induction."
+        },
+        {
+          "heading": "Intrapartum vigilance and emergency preparedness",
+          "body": "Continuous electronic fetal heart rate monitoring (cardiotocography) is recommended during labour in all post-term women because reduced liquor volume predisposes to cord compression.\n\nPrepare for thick meconium-stained liquor: paediatric resuscitation team should attend the delivery.\n\nBe prepared for shoulder dystocia due to macrosomia: assemble obstetric team, ensure maternal positioning, and avoid maternal fundal pressure."
+        },
+        {
+          "heading": "Indications for urgent caesarean delivery",
+          "points": [
+            "Pathological cardiotocograph trace with persistent late decelerations or prolonged bradycardia unresponsive to intrauterine resuscitation.",
+            "Confirmed thick meconium-stained liquor accompanied by an abnormal fetal heart rate pattern.",
+            "Evidence of cephalopelvic disproportion or persistent malposition (such as brow or face presentation).",
+            "Failed induction of labour despite adequate cervical priming, amniotomy, and 12 to 24 hours of oxytocin augmentation.",
+            "Contraindication to labour or vaginal delivery, such as complete placenta praevia or prior classical caesarean section."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the recommended timing for routine induction of labour in uncomplicated prolonged pregnancy?",
+          "a": "Induction of labour is offered between 41 weeks 0 days and 42 weeks 0 days of gestation to reduce perinatal mortality and stillbirth.",
+          "accept": [
+            "41 weeks",
+            "42 weeks",
+            "between 41 and 42",
+            "41+0"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Does routine induction of labour at 41 weeks increase the caesarean section rate compared with expectant monitoring?",
+          "a": "No, randomised trials show that routine induction at 41 weeks does not increase caesarean section rates, and in fact slightly reduces caesarean deliveries compared to expectant management.",
+          "accept": [
+            "does not increase",
+            "no",
+            "slightly reduces",
+            "not increase"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What intrapartum complications must the obstetrician anticipate during labour in a post-term pregnancy?",
+          "a": "Umbilical cord compression, fetal distress, thick meconium aspiration syndrome, macrosomia with shoulder dystocia, and postpartum haemorrhage.",
+          "accept": [
+            "cord compression",
+            "meconium",
+            "shoulder dystocia",
+            "fetal distress",
+            "postpartum haemorrhage"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "timing_rationale",
+          "text": "Explains the rationale for offering delivery between 41 and 42 weeks"
+        },
+        {
+          "id": "intrapartum_monitoring",
+          "text": "States necessity for continuous CTG monitoring during post-term labour"
+        },
+        {
+          "id": "complication_preparedness",
+          "text": "Prepares for meconium aspiration, shoulder dystocia and caesarean thresholds"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "preterm_prom_postterm_steroids_induction: 42 risks 41 induces"
+        },
+        {
+          "source": "WHO",
+          "locator": "WHO recommendations for induction of labour"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.induction": {
+      "id": "skill.tx.induction",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Methods of Cervical Ripening and Labour Induction",
+      "oneLine": "Pharmacological prostaglandins, mechanical balloon catheters, artificial rupture of membranes and oxytocin titration",
+      "why": "The success of labour induction depends on cervical favourability. Inducing an unripe cervix (Bishop score 5 or less) directly with oxytocin leads to prolonged painful contractions, failed induction, uterine exhaustion, and caesarean delivery. Selecting appropriate cervical ripening agents before oxytocin ensures efficient and safe induction.",
+      "dosingNote": "This module teaches management at the level of drug class and principle. Specific agents, doses, routes and regimens must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "teach": [
+        {
+          "heading": "Cervical ripening for the unfavourable cervix",
+          "body": "When the modified Bishop score is 5 or less, cervical ripening is mandatory before administering oxytocin.\n\nPharmacological options include Dinoprostone (PGE2) intracervical gel 0.5 mg (may be repeated every 6 hours, maximum 3 doses in 24 hours) or controlled-release vaginal insert 10 mg over 24 hours.\n\nLow-dose Misoprostol (PGE1) 25 micrograms orally or vaginally every 2 to 4 hours is an effective alternative recommended by WHO and FOGSI."
+        },
+        {
+          "heading": "Mechanical cervical ripening with Foley balloon",
+          "body": "A transcervical Foley catheter balloon (size 16 to 18 French, inflated with 30 to 50 mL sterile water) placed above the internal os mechanically stretches the lower segment and promotes endogenous prostaglandin release.\n\nMechanical balloon ripening is especially valuable in women with a previous caesarean delivery where prostaglandins are contraindicated due to the risk of uterine rupture.\n\nIt is also ideal in resource-limited settings lacking cold storage."
+        },
+        {
+          "heading": "Induction with favourable cervix: amniotomy and oxytocin",
+          "body": "When the Bishop score is 8 or more (or following successful cervical ripening), proceed with artificial rupture of membranes (amniotomy) using an Amnihook once the fetal head is well applied.\n\nAssess liquor for meconium.\n\nIntravenous oxytocin infusion is started at 1 to 2 milliunits per minute, increasing by 1 to 2 milliunits every 15 to 30 minutes until 3 to 4 strong contractions occur in 10 minutes, lasting 40 to 50 seconds."
+        },
+        {
+          "heading": "Uterine tachysystole and hyperstimulation management",
+          "body": "Uterine tachysystole is defined as more than 5 contractions in 10 minutes over a 30-minute window.\n\nHyperstimulation impairs uteroplacental blood flow, producing fetal decelerations and uterine rupture.\n\nImmediate management includes stopping oxytocin infusion, removing any prostaglandin vaginal insert, placing mother in left lateral position, administering intravenous fluids, and giving acute tocolysis with terbutaline or salbutamol if needed."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What initial intervention is indicated when inducing labour in a woman with a Bishop score of 4?",
+          "a": "Cervical ripening using prostaglandin E2 (dinoprostone gel or insert), low-dose misoprostol, or a mechanical transcervical Foley catheter balloon is indicated before oxytocin.",
+          "accept": [
+            "cervical ripening",
+            "dinoprostone",
+            "prostaglandin",
+            "misoprostol",
+            "Foley",
+            "balloon"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why are prostaglandins contraindicated for cervical ripening in a woman with a previous caesarean section scar?",
+          "a": "Prostaglandins significantly increase the risk of uterine hyperstimulation and catastrophic uterine rupture at the site of the previous surgical scar.",
+          "accept": [
+            "uterine rupture",
+            "scar",
+            "hyperstimulation",
+            "rupture"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What are the immediate steps in managing uterine tachysystole with fetal heart decelerations during oxytocin infusion?",
+          "a": "Immediately stop the oxytocin infusion, turn the woman onto her left side, administer intravenous fluid bolus, and consider acute tocolysis if hyperstimulation persists.",
+          "accept": [
+            "stop oxytocin",
+            "left side",
+            "left lateral",
+            "fluid",
+            "tocolysis"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "ripening_methods",
+          "text": "Explains pharmacological (PGE2, misoprostol) and mechanical (Foley balloon) ripening"
+        },
+        {
+          "id": "oxytocin_protocol",
+          "text": "Details safe amniotomy and low-dose oxytocin titration protocol"
+        },
+        {
+          "id": "hyperstimulation_safety",
+          "text": "Outlines immediate emergency protocol for uterine tachysystole and hyperstimulation"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "preterm_prom_postterm_steroids_induction: Cervical ripening and Bishop score criteria"
+        },
+        {
+          "source": "FOGSI",
+          "locator": "Good Clinical Practice Recommendations on Induction of Labour"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.postterm.priya",
+      "title": "A primigravida at 41 weeks and 4 days admitted for post-dated pregnancy evaluation",
+      "opening": "Priya Sharma, a 24-year-old primigravida at 41 weeks and 4 days by reliable dates, presents to the antenatal clinic on referral from a primary health centre. She has no labour pains, no leaking, and reports that her expected date of delivery passed 11 days ago. Introduce yourself and take a focused history.",
+      "fallback": "I am sorry doctor, I did not quite understand that. Could you ask me in another way?",
+      "patient": {
+        "name": "Priya Sharma",
+        "age": 24,
+        "sex": "female",
+        "occupation": "School teacher",
+        "residence": "Semi-urban, lives with her husband and mother-in-law"
+      },
+      "initialVitals": {
+        "hr": 78,
+        "bpSystolic": 118,
+        "bpDiastolic": 76,
+        "rr": 16,
+        "spo2": 99,
+        "temp": 36.8,
+        "gcs": 15
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me what happened",
+            "kya takleef hai",
+            "how can i help"
+          ],
+          "reply": "Doctor, my expected date of delivery was 11 days ago. The nurse at the village clinic told me I must come to the hospital because my date has passed and the baby has not come yet."
+        },
+        "gestational_dating": {
+          "cues": [
+            "last menstrual period",
+            "when was your last period",
+            "first day of last period",
+            "what was your lmp",
+            "when did your period start"
+          ],
+          "reply": "My last period started on 12th January. I remember it clearly because it was right before the Makar Sankranti festival."
+        },
+        "cycle_regularity": {
+          "cues": [
+            "were your periods regular",
+            "cycle regular",
+            "monthly bleeding regular",
+            "how often did your period come",
+            "menstrual cycle regularity"
+          ],
+          "reply": "Yes doctor, every 28 to 30 days regularly without fail. I never missed a period or had irregular bleeding before getting pregnant."
+        },
+        "early_ultrasound": {
+          "cues": [
+            "early ultrasound",
+            "first scan",
+            "dating ultrasound",
+            "three month scan",
+            "first trimester scan",
+            "did you have a scan early"
+          ],
+          "reply": "Yes, I had a scan at 12 weeks at the district hospital. The doctor said the scan matched my dates exactly and confirmed my due date as 19th October."
+        },
+        "fetal_activity": {
+          "cues": [
+            "baby moving",
+            "fetal movements",
+            "kicks",
+            "is the baby kicking",
+            "movements normal",
+            "any decrease in movements"
+          ],
+          "reply": "The baby is moving, but over the past two days the kicks feel a bit slower and less strong than last week. I counted about 10 movements since morning."
+        },
+        "labour_contractions": {
+          "cues": [
+            "labour pains",
+            "uterine contractions",
+            "abdominal pain",
+            "tummy tightening",
+            "any pain in abdomen",
+            "pain starting"
+          ],
+          "reply": "No doctor, no labour pains at all. Sometimes my tummy feels tight for a minute, but there is no painful cramping."
+        },
+        "fluid_leaking": {
+          "cues": [
+            "water leaking",
+            "fluid leaking",
+            "waters broken",
+            "water broke",
+            "leaking from vagina",
+            "watery discharge"
+          ],
+          "reply": "No, no water has leaked. My clothes and undergarments are completely dry."
+        },
+        "vaginal_bleeding": {
+          "cues": [
+            "bleeding from vagina",
+            "vaginal bleeding",
+            "any blood",
+            "spotting",
+            "show",
+            "red discharge"
+          ],
+          "reply": "No bleeding or red discharge at all."
+        },
+        "danger_symptoms": {
+          "cues": [
+            "headache",
+            "blurred vision",
+            "swelling on face",
+            "epigastric pain",
+            "severe vomiting",
+            "any danger symptoms"
+          ],
+          "reply": "No headache, no visual blurriness, and no vomiting. Only my feet swell up a little bit by evening when I stand for long."
+        },
+        "antenatal_visits": {
+          "cues": [
+            "antenatal checkups",
+            "how many visits",
+            "anc visits",
+            "did you go for checkups",
+            "regular antenatal care"
+          ],
+          "reply": "I had six checkups at the primary health centre. All my blood tests were normal, and I received two tetanus toxoid injections."
+        },
+        "medications_taken": {
+          "cues": [
+            "iron tablets",
+            "calcium tablets",
+            "what medicines are you taking",
+            "folic acid",
+            "current medications"
+          ],
+          "reply": "I took iron and calcium tablets every day as prescribed by the ANM sister. I am not taking any other medicines."
+        },
+        "previous_obstetric": {
+          "cues": [
+            "previous pregnancies",
+            "first pregnancy",
+            "have you had a baby before",
+            "earlier deliveries",
+            "gravida parity"
+          ],
+          "reply": "This is my very first pregnancy. I have never been pregnant before and never had any miscarriage."
+        },
+        "medical_conditions": {
+          "cues": [
+            "blood pressure",
+            "sugar diabetes",
+            "thyroid problem",
+            "any medical illness",
+            "heart problem",
+            "asthma"
+          ],
+          "reply": "No doctor, I do not have high blood pressure, diabetes, thyroid disease, or any long-term medical problem."
+        },
+        "surgical_history": {
+          "cues": [
+            "any surgery",
+            "previous operation",
+            "abdominal surgery",
+            "caesarean before"
+          ],
+          "reply": "No, I have never had any operation or surgery in my life."
+        },
+        "contraception_prior": {
+          "cues": [
+            "birth control pills",
+            "oral contraceptives",
+            "family planning before pregnancy",
+            "did you take pills"
+          ],
+          "reply": "No, we never used contraceptive pills. We used barrier methods initially after marriage."
+        },
+        "family_background": {
+          "cues": [
+            "family history of overdue",
+            "mother overdue",
+            "sister overdue",
+            "twins in family",
+            "family medical history"
+          ],
+          "reply": "My mother told me that both my brother and I were born two weeks after her due date. No one in the family has diabetes or birth defects."
+        },
+        "personal_diet": {
+          "cues": [
+            "diet",
+            "vegetarian",
+            "tobacco",
+            "smoking",
+            "bidi",
+            "alcohol"
+          ],
+          "reply": "I eat a vegetarian diet with milk and lentils. I have never touched tobacco, bidi, or alcohol."
+        },
+        "emotional_concerns": {
+          "cues": [
+            "worried",
+            "anxious",
+            "how are you feeling emotionally",
+            "afraid",
+            "family worried"
+          ],
+          "reply": "I am quite anxious doctor. My relatives keep saying that delivering late is dangerous for the baby, and I just want my baby to be born healthy."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "A young primigravida, alert, oriented and comfortable at rest. Mild facial anxiety noted regarding overdue dates. No pallor, icterus, cyanosis, clubbing, or generalised lymphadenopathy.",
+          "abnormal": false
+        },
+        "skill.gen.vitals": {
+          "finding": "Temperature 36.8 C. Pulse 78 regular. Blood pressure 118/76. Respiratory rate 16 per minute. SpO2 99 percent on room air.",
+          "abnormal": false
+        },
+        "skill.gen.edema": {
+          "finding": "Mild bilateral pitting pedal oedema over medial malleoli, consistent with physiological dependent oedema of pregnancy. No facial, pretibial, or abdominal wall oedema.",
+          "abnormal": false
+        },
+        "skill.exam.obg.preg_prep_inspect": {
+          "finding": "Abdomen distended longitudinally, matching a full-term singleton pregnancy. Linea nigra and striae gravidarum present. Flanks full. No previous surgical scars or dilated veins.",
+          "abnormal": false
+        },
+        "skill.exam.obg.fundal_height": {
+          "finding": "Symphysis-fundal height measures 38 cm, approximately 3 cm less than expected for 41+ weeks gestation. The uterus feels compact and firm around the fetal mass with reduced fluid sensation, consistent with oligohydramnios.",
+          "abnormal": true
+        },
+        "skill.exam.obg.leopold": {
+          "finding": "First Leopold manoeuvre reveals soft, irregular, non-ballotable mass at fundus (breech). Second manoeuvre shows smooth, curved fetal back on maternal right side and small fetal knobs on the left; fetal parts are palpated with striking ease. Third and fourth manoeuvres confirm cephalic presentation, vertex presenting, head 3/5th palpable above pelvic brim, non-engaged.",
+          "abnormal": true
+        },
+        "skill.exam.obg.fetal_heart": {
+          "finding": "Fetal heart sounds heard distinctly in the right lower quadrant, baseline rate 140 beats per minute, regular rhythm, no audible decelerations.",
+          "abnormal": false
+        },
+        "skill.exam.obg.labour_pv": {
+          "finding": "Pelvic examination reveals external genitalia normal. On digital cervical examination: cervix is 1 cm dilated, 40 percent effaced (length approximately 2.5 cm), firm in consistency, posterior in position, and vertex at -2 station above ischial spines. Total modified Bishop score is 3 out of 13 (dilatation 1, effacement 1, consistency 0, position 0, station 1). Membranes intact. No active bleeding.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "dating_usg",
+        "growth_af_usg",
+        "nst_ctg",
+        "fbc",
+        "blood_group",
+        "urine_routine"
+      ],
+      "investigations": {
+        "dating_usg": {
+          "label": "First trimester ultrasound review",
+          "indicated": true,
+          "result": "Crown-rump length 58 mm at 12 weeks 2 days, accurately confirming gestational age and establishing expected date of delivery as 19th October (current gestation 41 weeks 4 days).",
+          "note": "Early first-trimester CRL measurement is the gold standard for dating, accurate to within 5 days."
+        },
+        "growth_af_usg": {
+          "label": "Obstetric ultrasound for biometry and amniotic fluid",
+          "indicated": true,
+          "result": "Singleton live fetus in cephalic presentation. Biparietal diameter 96 mm, abdominal circumference 348 mm, femur length 77 mm, estimated fetal weight 3550 g (55th percentile). Placenta fundal-posterior, grade III maturity with calcifications. Single deepest vertical pocket 1.8 cm, amniotic fluid index 4.2 cm. No gross congenital anomalies.",
+          "note": "Single deepest pocket < 2 cm and AFI < 5 cm confirm oligohydramnios, indicating placental senescence and risk of cord compression."
+        },
+        "nst_ctg": {
+          "label": "Cardiotocography (non-stress test)",
+          "indicated": true,
+          "result": "20-minute reactive trace: baseline fetal heart rate 142 bpm, baseline variability 10 to 15 bpm, 3 accelerations of > 15 bpm lasting > 15 seconds associated with fetal movements, no decelerations, uterine contractions absent.",
+          "note": "Reassuring acute fetal status, but oligohydramnios remains an independent indication for timely delivery."
+        },
+        "fbc": {
+          "label": "Complete blood count",
+          "indicated": true,
+          "result": "Haemoglobin 11.6 g/dL, packed cell volume 35 percent, total leucocyte count 8,200 per mm3, platelet count 210,000 per mm3.",
+          "note": "Normal maternal haematological parameters; adequate baseline before planned labour."
+        },
+        "blood_group": {
+          "label": "Blood group and Rh typing",
+          "indicated": true,
+          "result": "B Rh positive. Antibody screen negative.",
+          "note": "Essential baseline for delivery preparedness."
+        },
+        "urine_routine": {
+          "label": "Urine routine and microscopy",
+          "indicated": true,
+          "result": "Specific gravity 1.018, protein nil, sugar nil, microscopy shows 1-2 pus cells per high-power field, no casts, no bacteriuria.",
+          "note": "Excludes pre-eclampsia (proteinuria) and asymptomatic urinary tract infection."
+        },
+        "amniocentesis": {
+          "label": "Amniocentesis for fetal lung maturity",
+          "indicated": false,
+          "result": "Not performed.",
+          "note": "Inappropriate: fetal pulmonary maturity is fully established beyond 39 weeks; amniocentesis carries invasive risks without clinical benefit in post-term pregnancy."
+        },
+        "serum_estriol": {
+          "label": "Serial serum unconjugated estriol",
+          "indicated": false,
+          "result": "Not performed.",
+          "note": "Outdated test: biochemical placental function tests have been entirely replaced by biophysical ultrasound and CTG surveillance."
+        }
+      },
+      "differentialModel": {
+        "answer": "Post-term pregnancy at 41 weeks and 4 days with isolated oligohydramnios and an unripe cervix (Bishop score 3). Consider inaccurate gestational dating (wrong dates), intrauterine growth restriction, prelabour rupture of membranes, and impending fetal distress.",
+        "accept": [
+          "post-term pregnancy",
+          "postterm pregnancy",
+          "prolonged pregnancy",
+          "inaccurate gestational dating",
+          "wrong dates",
+          "oligohydramnios",
+          "fetal growth restriction",
+          "prelabour rupture of membranes",
+          "fetal distress"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Post-term pregnancy (late-term gestation at 41 weeks and 4 days) confirmed by early ultrasound dating, complicated by isolated oligohydramnios and an unfavourable cervix (Bishop score 3), with reactive fetal non-stress test.",
+        "accept": [
+          "post-term pregnancy",
+          "postterm pregnancy",
+          "prolonged pregnancy",
+          "post-dates pregnancy",
+          "post-term gestation"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Admit for planned labour induction due to 41+ weeks gestation and oligohydramnios. Cervical ripening with dinoprostone (PGE2) gel 0.5 mg intracervically or a mechanical transcervical Foley balloon catheter because Bishop score is 3. Re-evaluate cervix in 6 to 12 hours. Continuous CTG monitoring during labour. Perform amniotomy (ARM) once cervix is favourable followed by oxytocin infusion. Prepare for meconium stained liquor and emergency caesarean if fetal distress develops.",
+        "accept": [
+          "induction",
+          "cervical ripening",
+          "dinoprostone",
+          "prostaglandin",
+          "foley",
+          "bishop",
+          "ctg",
+          "amniotomy",
+          "oxytocin",
+          "caesarean"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "Accurate gestational dating is the cornerstone of managing suspected post-term pregnancy; an early ultrasound crown-rump length measurement before 14 weeks is the single most effective intervention to prevent false post-term diagnoses.",
+        "Perinatal mortality doubles by 42 weeks compared to 40 weeks due to progressive placental senescence, uteroplacental insufficiency, and cord compression.",
+        "Offering induction of labour routinely between 41+0 and 42+0 weeks reduces stillbirth, perinatal mortality, and meconium aspiration syndrome without increasing caesarean delivery rates.",
+        "The modified Bishop score is mandatory before starting oxytocin: an unripe cervix (score 5 or less) requires prior pharmacological or mechanical cervical ripening to prevent failed induction and uterine exhaustion.",
+        "Prostaglandins are strictly contraindicated for cervical ripening in women with a previous caesarean scar due to catastrophic uterine rupture risk; a mechanical Foley balloon is the safe alternative.",
+        "Continuous electronic fetal monitoring is essential throughout induced post-term labour because reduced amniotic fluid removes the protective fluid cushion, predisposing the umbilical cord to acute compression.",
+        "Preparation for thick meconium aspiration syndrome and shoulder dystocia associated with macrosomia are standard intrapartum precautions in all post-term deliveries."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "_comment": "CliniX 2.0 Presentation Library: Surgical Approach to Swelling in the Groin and Scrotum. Reuses shared Skills as atoms and provides tiered clinical reasoning from recognition to discriminators and emergency surgical actions.",
+  "schemaVersion": 1,
+  "id": "groin_and_scrotal_swelling",
+  "title": "Approach to Swelling in the Groin and Scrotum",
+  "subtitle": "Inguinal vs femoral hernias, acute scrotum, testicular torsion, hydrocele, varicocele, and inguinoscrotal differential diagnosis",
+  "system": "surgery",
+  "estMinutes": 50,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "layers": {
+    "recognise": {
+      "redFlags": [
+        "Tense, exquisitely tender, irreducible groin or scrotal swelling with loss of expansile cough impulse, vomiting, obstipation, and abdominal distension (strangulated or obstructed inguinal / femoral hernia requiring emergency operation)",
+        "Sudden, agonizing unilateral testicular pain with a high-riding horizontal testis, scrotal erythema, and absent cremasteric reflex in a young male (acute testicular torsion: 6-hour surgical salvage window)",
+        "Rapidly spreading perineal erythema, intense pain out of proportion to skin signs, soft-tissue crepitus, dusky necrotic skin bullae, and systemic septic shock (Fournier gangrene: fulminant necrotising fasciitis)",
+        "Painless, stony-hard, heavy testicular mass in a young man aged 15 to 35 years with loss of testicular sensation (malignant testicular germ cell tumour until proven otherwise)",
+        "Sudden onset of a left-sided varicocele that fails to decompress in the recumbent position, or any right-sided varicocele (retroperitoneal tumour, renal cell carcinoma with renal vein or IVC invasion)",
+        "Rapidly expanding, pulsatile groin swelling with a palpable thrill or systolic bruit over the femoral vessels (femoral artery pseudoaneurysm or arteriovenous fistula following vascular access)"
+      ],
+      "vitalsPriorities": [
+        "Heart Rate and Perfusion: Severe tachycardia (> 110 beats/min), weak thready pulses, and cool extremities indicate bowel strangulation with peritonitis, florid septic shock from Fournier gangrene, or severe neurogenic shock from testicular torsion.",
+        "Blood Pressure and Fluid Deficit: Hypotension with postural drop alerts the clinician to massive third-space fluid sequestration from strangulated small bowel obstruction or systemic sepsis requiring immediate isotonic crystalloid resuscitation.",
+        "Temperature: High fever (> 38.5 C) with rigors points to acute epididymo-orchitis or advanced necrotising soft tissue infection; hypothermia or normal temperature with toxic facies in elderly patients can herald gangrenous bowel infarction."
+      ]
+    },
+    "classify": {
+      "tempo": {
+        "hyperacute_to_acute_minutes_to_hours": [
+          "Testicular torsion (spermatic cord torsion)",
+          "Torsion of testicular or epididymal appendages (hydatid of Morgagni)",
+          "Strangulated inguinal or femoral hernia",
+          "Traumatic testicular rupture or scrotal haematoma / haematocele",
+          "Fournier gangrene (necrotising fasciitis of the perineum and scrotum)"
+        ],
+        "subacute_days_to_weeks": [
+          "Acute epididymo-orchitis (bacterial / chlamydial / gonococcal / coliform)",
+          "Obstructed inguinal hernia (irreducible, lumen obstructed without vascular compromise)",
+          "Funiculitis (acute inflammation of the spermatic cord)",
+          "Infected hydrocele or acute pyocele",
+          "Psoas abscess presenting below the inguinal ligament in the groin"
+        ],
+        "chronic_months_to_years": [
+          "Uncomplicated indirect inguinal hernia",
+          "Uncomplicated direct inguinal hernia",
+          "Femoral hernia",
+          "Primary vaginal hydrocele (accumulation of clear amber fluid in tunica vaginalis)",
+          "Encysted hydrocele of the cord",
+          "Epididymal cyst / spermatocele",
+          "Varicocele (dilatation of pampiniform venous plexus)",
+          "Testicular germ cell tumour (seminoma, non-seminoma)",
+          "Chronic filarial hydrocele and scrotal elephantiasis (Wuchereria bancrofti)",
+          "Undescended or ectopic testis in the inguinal canal",
+          "Saphena varix (dilatation at the saphenofemoral junction)"
+        ]
+      },
+      "anatomical_compartments": {
+        "inguinal_and_femoral_swellings": [
+          "Indirect inguinal hernia (enters deep internal ring, lateral to inferior epigastric vessels, courses obliquely through canal)",
+          "Direct inguinal hernia (protrudes forward through Hesselbach triangle, medial to inferior epigastric vessels)",
+          "Femoral hernia (emerges through femoral canal, below and lateral to pubic tubercle)",
+          "Undescended or ectopic testis (arrested within the inguinal canal or superficial inguinal pouch)",
+          "Inguinal lymphadenopathy (horizontal chain along inguinal ligament, vertical chain along long saphenous vein)",
+          "Psoas abscess (enters thigh lateral to femoral vessels deep to fascia iliaca)",
+          "Saphena varix (at saphenous opening, reduces immediately on recumbency, positive Cruveilhier cough thrill)",
+          "Femoral artery aneurysm / pseudoaneurysm",
+          "Hydrocele of the canal of Nuck (in females)"
+        ],
+        "scrotal_and_inguinoscrotal_swellings": [
+          "Inguinoscrotal: Complete indirect inguinal hernia, infantile hydrocele, congenital hydrocele (patent processus vaginalis)",
+          "Pure Scrotal - Testicular: Testicular germ cell tumour, acute orchitis, syphilitic gumma",
+          "Pure Scrotal - Epididymal: Acute/chronic epididymitis, tuberculous epididymitis (beaded vas deferens), epididymal cyst",
+          "Pure Scrotal - Tunica Vaginalis: Vaginal hydrocele, chronic haematocele, chylocele, pyocele",
+          "Pure Scrotal - Cord: Encysted hydrocele of the cord, varicocele ('bag of worms'), cord lipoma"
+        ]
+      }
+    },
+    "discriminators": [
+      {
+        "title": "Getting Above the Swelling: Inguinoscrotal vs Pure Scrotal Swelling",
+        "finding": "Gently pinch the neck of the scrotum between the thumb in front and fingers behind, just below the external inguinal ring. If the examiner's fingers meet cleanly above the mass, the clinician can 'get above the swelling', proving conclusively that the swelling originates entirely within the scrotum (testis, epididymis, tunica vaginalis, or cord cyst). If the swelling extends upwards along the spermatic cord through the superficial inguinal ring into the abdomen, the clinician CANNOT get above the swelling, confirming an inguinoscrotal mass (inguinal hernia, congenital hydrocele, or diffuse cord lipoma).",
+        "highYield": "Inability to get above the swelling is the definitive clinical proof of an inguinoscrotal extension from the abdomen (typically an inguinal hernia)."
+      },
+      {
+        "title": "Indirect Inguinal Hernia vs Direct Inguinal Hernia",
+        "finding": "Perform the Internal Ring Occlusion Test: Reduce the hernia completely while the patient is supine. Locate the deep internal inguinal ring (1.25 cm above the mid-inguinal point, midway between the anterior superior iliac spine and the pubic symphysis) and occlude it firmly with the thumb. Ask the patient to stand and cough. If the hernia remains completely controlled and does not appear, it is an indirect hernia. If the hernia bulges forward medial to the occluding thumb through Hesselbach triangle, it is a direct hernia. Additionally, indirect hernias are usually pyriform, frequently enter the scrotum, and strike the tip of the invaginating finger, whereas direct hernias are globular, bilateral, rarely enter the scrotum, and strike the pulp/side of the finger.",
+        "highYield": "Controlled occlusion at the deep internal ring during coughing confirms an indirect inguinal hernia; persistent bulging medial to the occluding finger proves a direct hernia."
+      },
+      {
+        "title": "Inguinal Hernia vs Femoral Hernia",
+        "finding": "Locate the pubic tubercle by following the taut tendon of adductor longus upwards to its insertion. An inguinal hernia emerges through the superficial ring ABOVE and MEDIAL to the pubic tubercle. A femoral hernia emerges through the saphenous opening BELOW and LATERAL to the pubic tubercle. Femoral hernias have a high propensity for rapid strangulation because of the rigid unyielding boundaries of the femoral ring (lacunar ligament medially, inguinal ligament anteriorly, and pectineal ligament posteriorly).",
+        "highYield": "Relationship to the pubic tubercle is the definitive anatomical boundary: above and medial is inguinal, below and lateral is femoral."
+      },
+      {
+        "title": "Primary Vaginal Hydrocele vs Testicular Tumour",
+        "finding": "In a primary vaginal hydrocele, the swelling is fluctuant, smooth, cystic, surrounds the anterior and lateral aspects of the testis (testis cannot be felt separately), and exhibits brilliant transillumination with a torch in a darkened room. In a testicular tumour, the mass is solid, firm to stony-hard, heavy ('sensation of weight' on resting in palm), completely non-translucent, and there is loss of normal testicular sensation on gentle pressure.",
+        "highYield": "Brilliant transillumination confirms clear fluid collection in the tunica vaginalis; heavy, non-translucent, hard consistency with loss of testicular sensation indicates testicular neoplasm until proven otherwise."
+      },
+      {
+        "title": "Testicular Torsion vs Acute Epididymo-Orchitis",
+        "finding": "Age profile: Torsion occurs predominantly in adolescents (12 to 18 years); epididymo-orchitis is commoner in sexually active men (> 20 years) or elderly men with urinary obstruction. Physical signs: In torsion, the testis is high-riding, horizontal in lie (bell-clapper deformity), the cremasteric reflex is completely ABSENT on the affected side, and elevation of the scrotum worsens or does not relieve the pain (negative Prehn sign). In epididymo-orchitis, the testis lies vertically, the cremasteric reflex is typically preserved, elevation of the scrotum relieves pain (positive Prehn sign), and pyuria or dysuria is common.",
+        "highYield": "Absence of the ipsilateral cremasteric reflex is the most reliable physical discriminator for testicular torsion; Doppler ultrasound must NEVER delay emergency surgical exploration if torsion is clinically suspected."
+      }
+    ],
+    "dontMiss": [
+      {
+        "disease": "Acute Testicular Torsion (Spermatic Cord Torsion)",
+        "clue": "Adolescent boy with sudden-onset severe unilateral testicular or lower quadrant abdominal pain, vomiting, high-riding horizontal testis, absent cremasteric reflex, and exquisite tenderness.",
+        "action": "SURGICAL EMERGENCY. The window for testicular viability is 6 hours from pain onset. Do not wait for ultrasound imaging if it causes delay. Perform immediate emergency scrotal exploration. Untwist the spermatic cord, assess viability with warm saline wraps; if viable perform three-point bilateral orchiopexy (fixation of both the affected and contralateral testis to prevent future contralateral torsion); if frankly necrotic, perform orchiectomy and contralateral orchiopexy."
+      },
+      {
+        "disease": "Strangulated Inguinal or Femoral Hernia",
+        "clue": "Sudden severe groin/scrotal pain over a previously reducible hernia that has become tense, exquisitely tender, irreducible, with absent expansile cough impulse, accompanied by tachycardia, toxic facies, vomiting, and abdominal distension.",
+        "action": "DO NOT ATTEMPT MANUAL REDUCTION (TAXIS) of a strangulated hernia (risk of reducing gangrenous bowel into peritoneal cavity or 'reduction en masse'). Keep nil by mouth, establish IV access, administer crystalloid resuscitation, insert nasogastric tube and urinary catheter, administer IV broad-spectrum antibiotics, and transfer immediately to theatre for emergency herniotomy, bowel viability assessment, resection of non-viable bowel, and anatomical repair without synthetic mesh."
+      },
+      {
+        "disease": "Fournier Gangrene (Necrotising Fasciitis of Scrotum/Perineum)",
+        "clue": "Diabetic, immunocompromised, or elderly male presenting with scrotal pain out of proportion to skin signs, rapidly spreading erythema, brawny oedema, dark dusky patches, subcutaneous crepitus, foul purulent exudate, and florid septic shock.",
+        "action": "MEDICAL AND SURGICAL EMERGENCY. Resuscitate aggressively with intravenous crystalloids; administer parenteral broad-spectrum triple antibiotics (e.g. piperacillin-tazobactam + vancomycin + clindamycin to inhibit toxin synthesis); perform immediate, aggressive surgical debridement of all necrotic skin and subcutaneous tissue down to bleeding fascia, sparing the testes (testes have independent internal spermatic blood supply); repeat debridement in 24-48 hours."
+      },
+      {
+        "disease": "Malignant Testicular Germ Cell Tumour",
+        "clue": "Painless, firm to hard, heavy testicular enlargement in a young man aged 15 to 40 years, with or without a history of cryptorchidism.",
+        "action": "NEVER PERFORM A SCROTAL BIOPSY OR SCROTAL ORCHIECTOMY, as opening the scrotum contaminates lymphatic drainage to the inguinal nodes and alters oncological staging. Perform urgent high-resolution testicular ultrasonography; draw baseline serum tumour markers (alpha-fetoprotein [AFP], beta-human chorionic gonadotropin [beta-hCG], and lactate dehydrogenase [LDH]); perform radical high inguinal orchiectomy via an inguinal incision with high ligation of the spermatic cord at the internal inguinal ring."
+      }
+    ],
+    "investigations": {
+      "step1_immediate": [
+        "High-Resolution Scrotal Ultrasonography with Colour Doppler (USG Scrotum: immediately differentiates testicular ischaemia / torsion [absent intratesticular arterial flow] from hyperaemic epididymo-orchitis; detects occult intratesticular neoplasms and hydrocele)",
+        "Bedside Urine Dipstick, Urinalysis, and Urine Microscopy (identifies pyuria, bacteriuria, and haematuria in urinary tract infection / epididymitis)",
+        "Complete Blood Count and Blood Glucose (leukocytosis in strangulation or sepsis; detect diabetic ketoacidosis in Fournier gangrene)"
+      ],
+      "step2_urgent": [
+        "Serum Testicular Tumour Markers: Alpha-Fetoprotein (AFP), Beta-Human Chorionic Gonadotropin (beta-hCG), and Serum Lactate Dehydrogenase (LDH) prior to any testicular surgery",
+        "Erect Plain Abdominal Radiograph and Abdominal Ultrasound (in suspected obstructed hernia: evaluates dilated small bowel loops, multiple air-fluid levels, and free peritoneal fluid)",
+        "Serum Electrolytes, Blood Urea, and Serum Creatinine (assess renal status and fluid deficit in intestinal obstruction)",
+        "Urethral Swab for Gram stain, Culture, and Chlamydia trachomatis / Neisseria gonorrhoeae Nucleic Acid Amplification Test (NAAT) in sexually active men with epididymo-orchitis"
+      ],
+      "step3_confirmatory": [
+        "Contrast-Enhanced Computed Tomography (CECT) of Abdomen and Pelvis (identifies spigelian or femoral hernia anatomy, psoas abscess, or retroperitoneal lymphadenopathy in testicular cancer)",
+        "Chest Radiograph and CT Thorax (staging workup for pulmonary cannonball metastases in testicular non-seminomatous and seminomatous germ cell tumours)",
+        "Histopathological examination of radical inguinal orchiectomy specimen (confirms seminoma vs non-seminoma, yolk sac, embryonal carcinoma, teratoma, or choriocarcinoma)"
+      ]
+    },
+    "skills": [
+      "skill.hx.surg.groin_hernia",
+      "skill.exam.surg.hernia_inspection",
+      "skill.exam.surg.hernia_palpation",
+      "skill.annex.surg.nyhus_hernia",
+      "skill.exam.surg.undescended_testis",
+      "skill.hx.surg.scrotal_swelling_pain",
+      "skill.exam.surg.scrotal_palpation",
+      "skill.exam.surg.transillumination_scrotum",
+      "skill.exam.surg.acute_scrotum_torsion",
+      "skill.annex.surg.scrotal_swelling_matrix",
+      "skill.hx.inguinal.risk",
+      "skill.present.inguinal.summary",
+      "skill.gen.vitals"
+    ],
+    "examPearls": [
+      {
+        "topic": "Method of Scrotal Transillumination",
+        "text": "The transillumination test must be conducted in a darkened room using a focused pen-torch or fibreoptic light source. Place the light source behind the swelling and roll an opaque cardboard or paper cylinder over the front to shade the examiner's eye from ambient glow. In a primary hydrocele, light passes through cleanly, producing a uniform brilliant red or pink glow, and the dark silhouette of the opaque testis is seen at the posterior-superior aspect. Blood (haematocele), thick pus (pyocele), and solid tumours do not transilluminate."
+      },
+      {
+        "topic": "Cruveilhier Sign vs Cough Impulse in Hernia",
+        "text": "When examining a swelling in the groin, a saphena varix at the saphenofemoral junction produces a distinctive thrill resembling the purr of a cat or a fluid tremor on coughing (Cruveilhier sign), and empties completely when the patient lies flat with the leg elevated. An inguinal hernia produces a true expansile impulse that expands the sac outward in all directions."
+      },
+      {
+        "topic": "The Malgaigne Bulging Sign",
+        "text": "Bilateral diffuse elongated swellings seen along both inguinal canals when an elderly patient stands and strains, representing generalised weakness of the transversalis fascia and aponeurosis. They are characteristic of direct inguinal hernias and rarely require emergency surgery unless symptomatic."
+      },
+      {
+        "topic": "Bell-Clapper Deformity and Testicular Torsion",
+        "text": "Normally, the tunica vaginalis covers only the anterior and lateral aspects of the testis and epididymis, with the posterior surface anchored to the scrotal wall. In the congenital bell-clapper anomaly, the tunica vaginalis completely surrounds the testis, epididymis, and distal spermatic cord high into the canal, allowing the testis to hang freely horizontally like a bell clapper within a bell, predisposed to axial twisting (intravaginal torsion)."
+      },
+      {
+        "topic": "Filarial Inguinoscrotal Manifestations in the Indian Subcontinent",
+        "text": "In endemic regions of the Indian subcontinent (e.g. coastal Andhra Pradesh, Odisha, eastern Uttar Pradesh, Bihar, and West Bengal), adult Wuchereria bancrofti worms lodging in the pelvic and retroperitoneal lymphatics cause recurrent funiculitis, lymph varix of the cord, chylocele (milky chylous fluid in tunica vaginalis), and chronic filarial hydrocele culminating in massive elephantiasis of the scrotum."
+      }
+    ]
+  }
+}
