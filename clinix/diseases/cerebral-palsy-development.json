@@ -1,0 +1,1186 @@
+{
+  "_comment": "Paediatrics pathway: cerebral palsy and developmental delay. Same architecture as pneumonia: shared core and paediatrics skills carry the examination, this file adds emphasis plus disease findings, reasoning, investigation, diagnosis and treatment skills.",
+  "chapters": [
+    {
+      "blurb": "A static motor disorder of the developing brain, and what it is not",
+      "id": "basics",
+      "skills": [
+        "skill.cerebral.basics"
+      ],
+      "title": "Basics"
+    },
+    {
+      "blurb": "Before a single question",
+      "id": "approach",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.paed.rapport",
+        "skill.approach.paed.consent_assent"
+      ],
+      "title": "Approach to the child"
+    },
+    {
+      "blurb": "Gestation and birth set the pre test probability before a milestone is mentioned",
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected cerebral palsy the gestation, birth weight and age at presentation carry real weight: a preterm, low birth weight child presenting in the first years with motor delay starts with a high pre test probability, and parental consanguinity raises the chance of a metabolic mimic."
+        }
+      },
+      "id": "particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "title": "Patient particulars"
+    },
+    {
+      "blurb": "Months and years, and a delay with a pattern",
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical presentation reads in months and years, not days: not walking at 18 months, no words with meaning at 2 years, stiffness noticed when the child was held upright. That tempo alone moves you towards a static developmental disorder before anything else is known."
+        },
+        "skill.hx.paed.presenting_complaint": {
+          "expect": "Expect the complaint in the parents words with the age it was noticed: legs stiff when held, late to sit, late to speak. Ask what the child does now to move about, since current function matters more than the calendar."
+        }
+      },
+      "id": "history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.paed.presenting_complaint",
+        "skill.hx.cerebral.illness"
+      ],
+      "title": "History of the delay"
+    },
+    {
+      "blurb": "The pregnancy, labour and newborn weeks, where the cause usually sits",
+      "emphasis": {
+        "skill.hx.paed.birth_antenatal": {
+          "expect": "Ask antenatal illness, hypertension, diabetes, bleeding and reduced movements with extra care: infection and poor growth in pregnancy both raise the risk, and a growth restricted preterm infant is the classic background for diplegia."
+        },
+        "skill.hx.paed.birth_natal_neonatal": {
+          "expect": "Expect the aetiology here: gestation in weeks, birth weight, first cry, resuscitation, fits, jaundice and its treatment, and days in nursery care. Ventilation for prematurity and a poor cry at term with fits are the two stories that explain most cases."
+        },
+        "skill.hx.paed.development": {
+          "expect": "Record each domain separately with ages, and always ask about loss of skills. Static delay with normal social response fits cerebral palsy; regression reopens the diagnosis towards a progressive disorder."
+        }
+      },
+      "id": "past_personal_drug_family",
+      "skills": [
+        "skill.hx.paed.birth_antenatal",
+        "skill.hx.paed.birth_natal_neonatal",
+        "skill.hx.paed.development",
+        "skill.hx.cerebral.risks",
+        "skill.hx.paed.family_pedigree"
+      ],
+      "title": "Birth, development and family history"
+    },
+    {
+      "blurb": "A growing child, and the comorbidities that hide behind the stiffness",
+      "emphasis": {
+        "skill.gen.paed.appearance": {
+          "expect": "Look for an alert, socially responsive child with thin limbs and stiffness rather than an acutely unwell one. Wasting, a small head, drooling, and a chest that moves poorly with feeds point to the nutritional and respiratory comorbidities that decide prognosis."
+        },
+        "skill.gen.paed.vitals": {
+          "expect": "Expect normal vitals in uncomplicated cerebral palsy; fever, fast breathing or desaturation mean a current infection or aspiration, not the static lesion. Plot pulse, breathing rate and saturation rather than assuming them."
+        },
+        "skill.gen.paed.pallor": {
+          "expect": "Pallor is common from poor intake and chronic disease rather than from the brain injury itself. It deserves its own workup, since iron deficiency worsens development and is easily treated."
+        }
+      },
+      "id": "general_exam",
+      "skills": [
+        "skill.gen.paed.appearance",
+        "skill.gen.paed.vitals",
+        "skill.gen.paed.pallor"
+      ],
+      "title": "General examination"
+    },
+    {
+      "blurb": "Stiff legs, brisk reflexes, and arms that are spared",
+      "emphasis": {
+        "skill.exam.paed.cns.motor_tone_power": {
+          "expect": "Expect increased tone in the lower limbs with a clasp knife catch, reduced power against gravity at hip and knee, and scissoring on vertical suspension. In diplegia the arms are relatively spared and useful for grasp, which is the single most useful discriminating detail."
+        },
+        "skill.exam.paed.cns.reflexes": {
+          "expect": "Expect brisk knee and ankle jerks with sustained clonus and extensor plantars, the upper motor neurone signature. Absent or sluggish reflexes with wasting point instead towards a neuromuscular mimic."
+        },
+        "skill.exam.paed.cns.gait_movement": {
+          "expect": "Expect cruising with scissoring, toe strike and flexed knees rather than independent walking, and no involuntary movements in the spastic forms. Twisting, writhing movements in a term child with a jaundice history point towards the dyskinetic form."
+        },
+        "skill.exam.paed.cns.cerebellar": {
+          "expect": "Expect a normal cerebellar examination in spastic diplegia; frank ataxia, nystagmus or intention tremor as the dominant picture favours an ataxic form or a different diagnosis altogether."
+        },
+        "skill.exam.paed.neo.primitive_reflexes": {
+          "expect": "Expect persistence of primitive reflexes well beyond infancy, such as an obligatory tonic neck response at an age when it should have disappeared. Persistence is evidence that maturation stalled, not merely slowed."
+        }
+      },
+      "id": "systemic_exam",
+      "skills": [
+        "skill.exam.paed.cns.motor_tone_power",
+        "skill.exam.paed.cns.reflexes",
+        "skill.exam.paed.cns.gait_movement",
+        "skill.exam.paed.cns.cerebellar",
+        "skill.exam.paed.neo.primitive_reflexes"
+      ],
+      "title": "Neurological examination"
+    },
+    {
+      "blurb": "Stiff legs with spared arms, and why everything fits one old injury",
+      "id": "disease_findings",
+      "skills": [
+        "skill.cerebral.picture"
+      ],
+      "title": "Putting the cerebral palsy picture together"
+    },
+    {
+      "blurb": "Three sentences that contain the birth, the tone and the function",
+      "id": "summary",
+      "skills": [
+        "skill.cerebral.summary"
+      ],
+      "title": "Clinical summary"
+    },
+    {
+      "blurb": "What else stiffens or delays a child, and what regression is telling you",
+      "id": "differential",
+      "skills": [
+        "skill.cerebral.differential"
+      ],
+      "title": "Differential diagnosis"
+    },
+    {
+      "blurb": "Confirm the pattern, exclude the mimics, and never let a scan delay therapy",
+      "id": "investigations",
+      "skills": [
+        "skill.investigation.cerebral.workup",
+        "skill.annex.paed.milestones"
+      ],
+      "title": "Investigations"
+    },
+    {
+      "blurb": "A clinical diagnosis, and the red flags that undo it",
+      "id": "diagnosis",
+      "skills": [
+        "skill.cerebral.diagnosis"
+      ],
+      "title": "Diagnosis and prognosis"
+    },
+    {
+      "blurb": "Therapy is the treatment, plus everything that is not therapy",
+      "id": "treatment",
+      "skills": [
+        "skill.treatment.cerebral.care",
+        "skill.tx.paed.anticonvulsants"
+      ],
+      "title": "Treatment"
+    },
+    {
+      "blurb": "Present this child to your consultant",
+      "id": "case",
+      "skills": [
+        "skill.present.case",
+        "skill.present.cerebral.case"
+      ],
+      "title": "Case presentation"
+    }
+  ],
+  "cases": [
+    {
+      "differentialModel": {
+        "accept": [
+          "Cerebral palsy",
+          "Global developmental delay",
+          "Dopa-responsive dystonia",
+          "Hereditary spastic paraplegia",
+          "Spinal muscular atrophy",
+          "Seizure disorder",
+          "Hypothyroidism"
+        ],
+        "answer": "A static delay in motor milestones with stiff legs and brisk reflexes after a preterm birth with nursery care. Global delay alone does not explain the spasticity; dopa responsive dystonia, hereditary spastic paraplegia and spinal muscular atrophy are the mimics to exclude, with fits and thyroid failure as the treatable companions to look for.",
+        "minMatch": 3
+      },
+      "diagnosis": {
+        "accept": [
+          "Spastic diplegic cerebral palsy",
+          "Cerebral palsy",
+          "spastic diplegia"
+        ],
+        "answer": "Spastic diplegic cerebral palsy in a 3 year old born preterm: a static motor disorder with stiff legs, brisk reflexes and delayed walking and speech, normal alertness and social response, and an old periventricular injury on imaging.",
+        "minMatch": 1
+      },
+      "essentialInvestigations": [
+        "mri_brain",
+        "vision_hearing",
+        "thyroid_function"
+      ],
+      "exam": {
+        "skill.exam.paed.cns.cerebellar": {
+          "abnormal": false,
+          "finding": "No nystagmus and no intention tremor. Finger nose testing is age appropriate apart from mild clumsiness from stiffness. No ataxia, so this is not the ataxic picture."
+        },
+        "skill.exam.paed.cns.gait_movement": {
+          "abnormal": true,
+          "finding": "Not walking alone at 3 years. Cruises holding furniture with scissoring, toe strike and flexed knees. Arms swing free and reach well. No involuntary twisting or writhing movements."
+        },
+        "skill.exam.paed.cns.motor_tone_power": {
+          "abnormal": true,
+          "finding": "Increased tone in both lower limbs with a clasp knife catch at knees and ankles, power reduced against gravity at hip and knee extensors. Upper limbs mildly stiff but with useful grasp. Scissoring on vertical suspension with ankle crossing."
+        },
+        "skill.exam.paed.cns.reflexes": {
+          "abnormal": true,
+          "finding": "Knee and ankle jerks brisk with sustained clonus at both ankles, plantars extensor. Abdominal reflexes present. No wasting and no fasciculation in any limb."
+        },
+        "skill.exam.paed.head_circumference": {
+          "abnormal": true,
+          "finding": "Head circumference 46 cm, below the expected curve for a 3 year old, in keeping with an early brain injury rather than ongoing growth failure of the body alone."
+        },
+        "skill.exam.paed.length_height": {
+          "abnormal": true,
+          "finding": "Length 86 cm, short for age with relatively spared body proportions. Contracture posture at knees and ankles, no asymmetry of the limbs."
+        },
+        "skill.exam.paed.neo.primitive_reflexes": {
+          "abnormal": true,
+          "finding": "Tonic neck response still obligatory with limb posturing at 3 years, well beyond the age when it should have disappeared. Moro absent as expected. Persistence marks stalled maturation."
+        },
+        "skill.exam.paed.weight": {
+          "abnormal": true,
+          "finding": "Weight 11 kg, undernourished for age with thin limbs and little subcutaneous fat. Feeding difficulty with slow meals explains the faltering more than any acute illness."
+        },
+        "skill.gen.paed.appearance": {
+          "abnormal": true,
+          "finding": "Alert 3 year old girl, cheerful and socially responsive, sitting with support and cruising holding furniture. Lower limbs stiff with scissoring posture and thin calves. Drooling present, no acute distress."
+        },
+        "skill.gen.paed.pallor": {
+          "abnormal": true,
+          "finding": "Pale conjunctivae and tongue with a smooth tongue surface, in keeping with iron deficiency from poor intake. No jaundice, no bleeding spots."
+        },
+        "skill.gen.paed.vitals": {
+          "abnormal": false,
+          "finding": "Steady child, temperature 37.4 C axillary, pulse 118 per minute, respiratory rate 28 per minute, SpO2 97 percent on air, blood pressure 88/56. No fever, perfusion and saturation normal."
+        }
+      },
+      "fallback": "I do not understand, doctor. My daughter does not walk like other children, that is all I know. Can you ask in a simpler way?",
+      "history": {
+        "delay_concerns": {
+          "cues": [
+            "when did you first notice the delay",
+            "how is she slow compared to other children",
+            "what can she do and what can she not do",
+            "is the delay getting worse or staying the same"
+          ],
+          "key": true,
+          "reply": "I noticed at one year that her legs stayed stiff when I held her upright. She sat late, crawls pulling with her arms, and cruises holding the cot. She has not lost anything she learned, it stays the same month after month."
+        },
+        "family_history": {
+          "cues": [
+            "anyone in the family with similar delay or stiffness",
+            "any marriage within the family",
+            "any fits in the family",
+            "any early deaths of children in the family"
+          ],
+          "reply": "No one else walks like this. My marriage is outside the family. My brother had fits with fever as a child and outgrew them. No child deaths in the house."
+        },
+        "feeding_diet": {
+          "cues": [
+            "what does the child eat in a day",
+            "any cough or choking while feeding",
+            "any food coming from the nose while feeding",
+            "is her weight increasing"
+          ],
+          "reply": "Breastfed till one and a half years, now dal roti mashed, khichdi, banana and milk twice a day. Coughs when drinking thin liquids, so I give thick feeds slowly. Weight gain is slow, clothes still loose."
+        },
+        "fit_episodes": {
+          "cues": [
+            "any fits or shaking episodes",
+            "any staring spells or blank episodes",
+            "any jerks in sleep or on waking",
+            "any frothing or wetting during episodes"
+          ],
+          "reply": "Never any fit or shaking. Sometimes she stares for a few seconds when called, but turns at once when I clap. No jerks, no wetting."
+        },
+        "home_environment": {
+          "cues": [
+            "who looks after the child at home",
+            "how many people live in the house",
+            "water and toilet at home",
+            "does she go to anganwadi or school"
+          ],
+          "reply": "I look after her, my mother in law helps. Six people in two rooms. Handpump water, toilet outside. She goes to the anganwadi with her cousin, they include her in rhymes."
+        },
+        "immunisation_record": {
+          "cues": [
+            "which vaccines has the child received",
+            "is the vaccination card available",
+            "any missed vaccine doses",
+            "any vaccine in the last few weeks"
+          ],
+          "reply": "All vaccines taken at the anganwadi on time, card is at home. No missed doses, none in the last month."
+        },
+        "medicines_given": {
+          "cues": [
+            "what medicine is she taking now",
+            "any syrup for fits or stiffness",
+            "any tonic or iron being given",
+            "any injection or physiotherapy started"
+          ],
+          "reply": "Only the iron syrup, one spoon a day, finished last week. No fit or stiffness medicine. The sister showed me leg exercises and I do them when she lets me."
+        },
+        "milestone_progress": {
+          "cues": [
+            "when did she hold her neck and sit",
+            "when did she stand with support",
+            "what words does she speak",
+            "does she play with other children"
+          ],
+          "reply": "Neck control came near 6 months, sitting near 14 months with support. Stands holding furniture since 2 years. Says mama and papa with meaning, points to ask. Plays beside other children, smiles and knows us well."
+        },
+        "newborn_period": {
+          "cues": [
+            "did the baby cry at birth",
+            "any breathing help or machine after birth",
+            "how many days in the nursery",
+            "any fits or yellow colour after birth"
+          ],
+          "key": true,
+          "reply": "She cried weakly and was blue, they gave oxygen and kept her in the nursery for two weeks with a tube for feeds. No fits. She turned yellow on the third day and was kept under a light for three days, no exchange needed."
+        },
+        "past_illnesses": {
+          "cues": [
+            "any admission to hospital before",
+            "any pneumonia or long fever before",
+            "any head injury or fall",
+            "any medicines running now"
+          ],
+          "reply": "Admitted twice for chest congestion with fast breathing, treated with syrups and steam, no oxygen needed. No head injury. No daily medicines now."
+        },
+        "pregnancy_birth": {
+          "cues": [
+            "how was the pregnancy",
+            "any illness or swelling or fits in pregnancy",
+            "where was the delivery and who conducted it",
+            "was it a normal delivery or operation"
+          ],
+          "reply": "Pregnancy had swelling of the feet in the last months, no fits. Delivery at the district hospital, normal, but she came early in the eighth month and weighed little. The nurse said growth inside was poor."
+        },
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "what is the problem with your child",
+            "why have you come to hospital",
+            "tell me what happened",
+            "how is your child different from others"
+          ],
+          "key": true,
+          "reply": "Doctor, my daughter Aarohi is 3 years old and still does not walk without support. She holds the furniture and crosses her legs, and speaks only a few words. The anganwadi worker told me to show her here.",
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "sight_hearing": {
+          "cues": [
+            "does she see and follow objects",
+            "any squint or shaking of the eyes",
+            "does she turn when you call her name",
+            "any discharge from the ears"
+          ],
+          "reply": "She follows the torch and picks small grains. Eyes look straight, no shaking. Turns when I call from behind. No ear discharge, no ear pulling."
+        },
+        "swallow_feeding": {
+          "cues": [
+            "any drooling from the mouth",
+            "any cough with feeds or frequent chest illness",
+            "any choking or colour change while feeding",
+            "how long does one feed take"
+          ],
+          "reply": "Drooling wets her clothes through the day. Coughs with water and had two chest illnesses needing syrup this year. No blue colour. One meal takes nearly half an hour."
+        }
+      },
+      "id": "case.cerebral.aarohi",
+      "initialVitals": {
+        "hr": 118,
+        "bpSystolic": 88,
+        "bpDiastolic": 56,
+        "rr": 28,
+        "spo2": 97,
+        "temp": 37.4,
+        "gcs": 15
+      },
+      "investigations": {
+        "cbc": {
+          "indicated": true,
+          "label": "Complete blood count",
+          "note": "Pallor with poor intake needs confirmation before prolonged iron, and infection would change the plan.",
+          "result": "Microcytic red cells with low haemoglobin in keeping with iron deficiency. No blast cells."
+        },
+        "eeg": {
+          "indicated": false,
+          "label": "Electroencephalogram",
+          "note": "No reported fits and no events on review; staring that breaks with a clap needs watching, not wiring today.",
+          "result": "Not ordered."
+        },
+        "hip_surveillance": {
+          "indicated": true,
+          "label": "Hip radiograph for surveillance",
+          "note": "Scissoring with stiffness displaces hips silently; surveillance starts now, not after pain.",
+          "result": "Both femoral heads seated, migration within safe limits. Repeat as the child grows."
+        },
+        "mri_brain": {
+          "indicated": true,
+          "label": "Magnetic resonance imaging of the brain",
+          "note": "Confirms the static injury and its pattern for aetiology; it does not grade severity by itself.",
+          "result": "Symmetrical high signal in the periventricular white matter with mild irregularity of the ventricular margins, in keeping with an old periventricular injury. No progressive lesion, no malformation."
+        },
+        "thyroid_function": {
+          "indicated": true,
+          "label": "Thyroid function tests",
+          "note": "A treatable cause of delay, excluded in every delayed child regardless of the motor picture.",
+          "result": "TSH and free T4 within the normal range. A treatable cause of delay excluded."
+        },
+        "vision_hearing": {
+          "indicated": true,
+          "label": "Vision and hearing assessment",
+          "note": "Fixing, following and turning are bedside impressions; formal testing decides glasses, aids and school placement.",
+          "result": "Fixes and follows a torch, startles to a bell at bedside. Formal testing booked at the district early intervention centre."
+        }
+      },
+      "managementModel": {
+        "accept": [
+          "rehabilitation",
+          "Arrange daily physiotherapy with occupational therapy and home exercises",
+          "Set up hip surveillance with regular imaging and orthopaedic review",
+          "Arrange brain imaging with magnetic resonance to look for the cause",
+          "Assess feeding and swallowing with speech therapy and diet support",
+          "red flag"
+        ],
+        "answer": "Enrol for early multidisciplinary rehabilitation with daily physiotherapy, occupational therapy and home exercises; arrange brain imaging for aetiology; set up hip surveillance with orthopaedic review; assess feeding and swallowing with speech therapy and diet support; correct iron deficiency; and counsel with red flag advice and regular review.",
+        "minMatch": 3
+      },
+      "opening": "Sunita brings her 3 year old daughter Aarohi to the paediatric OPD of the district hospital. Aarohi does not walk without support and speaks only a few words. Introduce yourself to the mother and take a history.",
+      "patient": {
+        "age": 36,
+        "name": "Aarohi Kumari",
+        "occupation": "Child at home, attends anganwadi",
+        "residence": "Village household, lives with parents and grandmother",
+        "sex": "female"
+      },
+      "teachingPoints": [
+        "The clock and the course make the diagnosis: static delay over years with stiff legs, brisk reflexes and a preterm nursery story is diplegia, and no machine improves on that pattern.",
+        "Regression is the red flag that reopens everything: this child lost nothing, so the label holds; a child who loses waving and words needs metabolic workup instead.",
+        "Tone without topography is noise: legs stiff with arms spared, scissoring with toe strike, and clonus with extensor plantars are what prove diplegia at the bedside.",
+        "Comorbidity is the management: iron deficiency, feeding difficulty with aspiration, untested vision and hearing, and unwatched hips decide this childs future more than the stiffness itself.",
+        "Therapy starts clinically and the system carries it: home exercises today, early intervention enrolment under the national child health programme, and school with peers, not a scan appointment."
+      ],
+      "title": "A child who is slow to walk and speak",
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ],
+  "estMinutes": 60,
+  "fullName": "Cerebral palsy and developmental delay in children",
+  "id": "cerebral-palsy-development",
+  "kbRef": "cerebral_palsy",
+  "name": "Cerebral palsy and developmental delay",
+  "oneLine": "Assessment of development in the child who is slow to sit, stand and speak",
+  "osce": {
+    "stations": [
+      {
+        "examinerQuestions": [
+          "You found stiff legs with brisk reflexes and spared arms. Why does that pattern point to an old periventricular injury rather than a progressive cord lesion?",
+          "Demonstrate how you test for clasp knife spasticity and clonus at the ankle, and state what each means.",
+          "This child also drools and coughs with feeds. What does that change in your plan before the next review?"
+        ],
+        "id": "osce.cerebral.neuro_exam",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.paed.consent_assent",
+          "skill.exam.paed.cns.motor_tone_power",
+          "skill.exam.paed.cns.reflexes",
+          "skill.exam.paed.cns.gait_movement",
+          "skill.exam.paed.cns.cerebellar"
+        ],
+        "task": "This 3 year old girl was born preterm and does not walk without support. Examine her tone, power, reflexes and gait, and present your findings.",
+        "title": "Examine tone and gait in a delayed child"
+      },
+      {
+        "examinerQuestions": [
+          "List the four developmental domains from this history and state which are delayed and which are spared.",
+          "The mother reports normal early milestones with loss of waving and words. Does this remain cerebral palsy, and what is your next step?",
+          "Name two perinatal risk factors from this story and explain how each links to the motor pattern you expect."
+        ],
+        "id": "osce.cerebral.development_history",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.paed.consent_assent",
+          "skill.hx.chief_complaints",
+          "skill.hx.paed.presenting_complaint",
+          "skill.hx.paed.development",
+          "skill.hx.cerebral.illness",
+          "skill.hx.cerebral.risks"
+        ],
+        "task": "This mother says her 3 year old daughter is slow to walk and speak. Take a focused developmental and perinatal history in six minutes and be ready to name the pattern.",
+        "title": "Take the developmental and birth history"
+      }
+    ]
+  },
+  "review": {
+    "status": "ai_drafted"
+  },
+  "skills": {
+    "skill.cerebral.basics": {
+      "body": "Cerebral palsy is a group of permanent disorders of movement and posture caused by a non progressive injury or malformation of the developing brain. The injury is static, though contractures, bony deformity and growing functional demands change the picture as the child grows.",
+      "id": "skill.cerebral.basics",
+      "keyPoints": [
+        "The diagnosis needs a motor disorder plus a static course plus an early cause. Miss any one of the three and the label is unsafe.",
+        "Spastic forms are the most common. Diplegia affects the legs more than the arms, hemiplegia affects one side, quadriplegia affects all four limbs with the trunk.",
+        "Dyskinetic forms show twisting and writhing movements and often follow severe newborn jaundice; ataxic forms show balance failure and are uncommon.",
+        "It is the most common cause of chronic motor disability beginning in childhood, so every general clinic will meet it.",
+        "The outlook is set by severity and comorbidities: epilepsy, intellectual disability, feeding difficulty and severe quadriplegia carry the greater burden."
+      ],
+      "kind": "reasoning",
+      "oneLine": "A static motor disorder of the developing brain, and why the story matters more than any scan",
+      "pitfalls": [
+        "Calling any delayed child cerebral palsy without checking tone, reflexes and the birth story.",
+        "Treating the lesion as progressive and ordering repeated scans instead of arranging therapy.",
+        "Missing that dyskinetic movements after severe jaundice and asymmetric weakness from birth need different explanations."
+      ],
+      "probes": [
+        {
+          "a": "A permanent disorder of movement and posture from a non progressive injury or malformation of the developing brain.",
+          "accept": [
+            "permanent",
+            "non progressive",
+            "developing brain",
+            "movement and posture"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What three clauses make the definition of cerebral palsy?"
+        },
+        {
+          "a": "Spastic diplegia affects mainly the legs with relatively spared arms, hemiplegia affects one side, and quadriplegia affects all four limbs with the trunk.",
+          "accept": [
+            "diplegia",
+            "hemiplegia",
+            "quadriplegia",
+            "legs",
+            "arms"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How do diplegia, hemiplegia and quadriplegia differ?"
+        },
+        {
+          "a": "Any clear loss of skills already gained breaks the static requirement and points towards a progressive or metabolic disorder needing urgent workup.",
+          "accept": [
+            "regression",
+            "loss of skills",
+            "progressive",
+            "metabolic"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "The child waved and spoke at one year and does neither now. Why can this not be cerebral palsy?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "cerebral_palsy: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Cerebral palsy: definition and classification",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Cerebral palsy is a group of permanent disorders of movement and posture caused by a non progressive injury or malformation of the developing brain. The lesion itself does not progress, though contractures, bony deformity and growing demands change what the family sees as the child grows. The picture evolves on a static base.",
+          "heading": "A static injury, not a static child"
+        },
+        {
+          "body": "Because the injury is static, any clear loss of skills already gained points away from cerebral palsy and towards a progressive or metabolic disorder. Regression is the red flag that reopens the diagnosis, and it should prompt metabolic and genetic workup rather than reassurance.",
+          "heading": "Regression breaks the label"
+        }
+      ],
+      "title": "What cerebral palsy is",
+      "why": "Calling a delay cerebral palsy changes everything the family is offered, so the label must rest on a definition, not an impression. The definition is clinical: a permanent disorder of movement and posture from a non progressive injury to the developing brain. Getting the static part exact is what separates it from the progressive conditions that need a different workup."
+    },
+    "skill.cerebral.diagnosis": {
+      "body": "The diagnosis of cerebral palsy is clinical, made from a static motor disorder with an early cause and excluded mimics. Imaging supports the aetiology but never makes or breaks the label on its own.",
+      "id": "skill.cerebral.diagnosis",
+      "keyPoints": [
+        "Diagnose from the story and signs: delayed motor milestones, abnormal tone with an upper motor neurone pattern, a preterm, asphyxial or postnatal cause, and no regression.",
+        "Use MRI to establish aetiology: periventricular white matter injury after preterm birth, and hypoxic ischaemic, stroke, malformation or kernicterus patterns at term.",
+        "Recheck the label when the course is progressive, when weakness is patchy with wasting and fasciculation, when stiffness eases dramatically with sleep, or when only development without a motor disorder is delayed.",
+        "Counsel on prognosis honestly: the motor impairment itself is non progressive, and milder forms carry near normal life expectancy, while severe quadriplegia with epilepsy, intellectual disability and feeding problems carries greater disability.",
+        "Keep the diagnosis under review in the first years: early signs evolve, and what looked like simple delay may declare its pattern, or its progression, with time."
+      ],
+      "kind": "reasoning",
+      "oneLine": "A clinical diagnosis with imaging for cause, and red flags that undo it",
+      "pitfalls": [
+        "Waiting for the scan before committing to therapy, which wastes the months when therapy matters most.",
+        "Labelling a progressive disorder as cerebral palsy and missing a treatable metabolic or genetic condition.",
+        "Giving a prognosis from the scan alone instead of from severity, mobility and comorbidities."
+      ],
+      "probes": [
+        {
+          "a": "Delayed motor milestones with abnormal tone and brisk reflexes, an early preterm, asphyxial or postnatal cause, and no loss of skills.",
+          "accept": [
+            "delayed milestones",
+            "tone",
+            "brisk reflexes",
+            "early cause",
+            "no regression"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What clinical features let you diagnose cerebral palsy without a scan?"
+        },
+        {
+          "a": "Periventricular white matter injury in preterm infants, and hypoxic ischaemic injury, malformations, stroke or kernicterus patterns at term.",
+          "accept": [
+            "periventricular",
+            "white matter",
+            "hypoxic ischaemic",
+            "malformation",
+            "kernicterus"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What does MRI add once the clinical diagnosis is made?"
+        },
+        {
+          "a": "Loss of gained skills, new or worsening seizures with a changing picture, rapid spasticity with pain, progressive scoliosis or dislocated hip, and feeding failure with aspiration.",
+          "accept": [
+            "regression",
+            "seizures",
+            "scoliosis",
+            "hip dislocation",
+            "aspiration"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Name the red flags that should reopen a settled cerebral palsy diagnosis."
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "cerebral_palsy: redFlags",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Cerebral palsy: diagnosis and prognosis",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Diagnose from the bedside, not the scanner. Delayed motor milestones with abnormal tone, brisk reflexes and extensor plantars, an early cause in the birth story, and a static course with no loss of skills together make the diagnosis. Imaging then establishes the aetiology and excludes mimics.",
+          "heading": "Clinical first, scan second"
+        },
+        {
+          "body": "The red flags that undo the label are progression in any form: loss of gained skills, new or worsening seizures with a changing picture, rapidly increasing spasticity with pain, progressive scoliosis or hip dislocation, and feeding failure with aspiration. Each one demands a search for an alternative, evolving diagnosis.",
+          "heading": "Red flags that reopen the case"
+        }
+      ],
+      "title": "Diagnosis and prognosis",
+      "why": "Cerebral palsy is diagnosed at the bedside from a pattern, not from a report. Knowing which features commit you and which red flags release you is what stops a progressive disorder being filed as static, and what lets therapy start months before the scan is discussed."
+    },
+    "skill.cerebral.picture": {
+      "body": "Stiff legs with relatively spared arms after a preterm birth is diplegia until proved otherwise, and every other finding arranges itself around that one mechanism of injured descending motor tracts.",
+      "id": "skill.cerebral.picture",
+      "keyPoints": [
+        "Tone: increased in the lower limbs with a clasp knife catch, scissoring on vertical suspension, toe strike and flexed knees when cruising; arms mildly stiff but useful for grasp.",
+        "Reflexes: brisk knee and ankle jerks with sustained clonus and extensor plantars, the upper motor neurone signature that separates this from floppy mimics.",
+        "Early signs that were there to be read: abnormal tone in infancy, persistent primitive reflexes, delayed motor milestones, and hand preference before one year.",
+        "Comorbidities to screen in every child: epilepsy, intellectual and learning difficulty, squint and visual impairment, hearing loss, feeding and swallowing difficulty with drooling, and hip subluxation with contractures.",
+        "Systemic signature: faltering growth, iron deficiency from poor intake, chest infections from aspiration, and constipation from immobility and poor fluids.",
+        "Trachea, chest and abdomen hold no primary signs; abnormality there means comorbidity or a different disease, not the lesion itself."
+      ],
+      "kind": "reasoning",
+      "oneLine": "One old injury to descending tracts, and why the legs suffer with the arms spared",
+      "pitfalls": [
+        "Calling the picture from stiffness alone without reflexes and plantars, which are what prove the upper motor neurone pattern.",
+        "Focusing only on the legs and missing epilepsy, vision, hearing and feeding, which decide the outcome as much as walking does.",
+        "Neglecting the hips: silent subluxation dislocates while everyone watches the milestones."
+      ],
+      "probes": [
+        {
+          "a": "Increased tone in both lower limbs with scissoring and toe strike, brisk reflexes with clonus and extensor plantars, and relatively spared arms.",
+          "accept": [
+            "lower limbs",
+            "scissoring",
+            "brisk reflexes",
+            "clonus",
+            "extensor plantars",
+            "spared arms"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "What bedside pattern makes spastic diplegia?"
+        },
+        {
+          "a": "Abnormal tone, persistent primitive reflexes, delayed motor milestones, and early hand preference before one year.",
+          "accept": [
+            "abnormal tone",
+            "primitive reflexes",
+            "delayed milestones",
+            "early hand preference"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What early signs should have raised suspicion in infancy?"
+        },
+        {
+          "a": "Injured descending tracts fail to inhibit the spinal stretch reflex, so both tone and deep tendon reflexes rise together in the legs those tracts supply, with clonus and extensor plantars as the overflow.",
+          "accept": [
+            "descending tracts",
+            "disinhibited",
+            "stretch reflex",
+            "tone",
+            "legs"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Explain why tone and reflexes rise together in the legs."
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "cerebral_palsy: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Cerebral palsy: clinical features and comorbidities",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Injury to the descending motor tracts removes inhibition from the stretch reflex, so tone and reflexes rise together in the distribution those tracts supply. In preterm infants the periventricular white matter carries the fibres for the legs, which is why diplegia stiffens the legs while the arms stay useful.",
+          "heading": "One mechanism explains the pattern"
+        },
+        {
+          "body": "Read every delayed child for the company the stiffness keeps: fits or staring spells, squint and poor visual following, poor response to sound, cough or choking with feeds, drooling, faltering growth, and hips that click or sit unevenly. Each comorbidity found early is a second disability prevented.",
+          "heading": "Screen the comorbidities, not just the stiffness"
+        }
+      ],
+      "title": "The cerebral palsy picture",
+      "why": "Spastic diplegia is the cleanest example in paediatrics of one mechanism generating a coherent set of findings. Injured descending tracts disinhibit the stretch reflex, so tone and reflexes rise together in the legs, and everything else you find is either that mechanism or a comorbidity worth treating."
+    },
+    "skill.cerebral.summary": {
+      "body": "State the child with the birth risks that matter, the static delay across domains, the tone pattern in abstract terms, current function, and comorbidities, in that order.",
+      "id": "skill.cerebral.summary",
+      "keyPoints": [
+        "Name the child with the relevant risks: gestation, birth weight, resuscitation, jaundice and its treatment, and consanguinity where present.",
+        "State the course as static delay over months and years, naming delayed and spared domains. This alone separates cerebral palsy from a progressive disorder.",
+        "State the syndrome in abstract terms: spastic diplegia with increased lower limb tone, brisk reflexes and extensor plantars, with current mobility and language level.",
+        "Include the negatives that do the work: no loss of skills, no fits or treated fits, alert and socially responsive, vision and hearing position.",
+        "A worked example: A 3 year old girl, born preterm with ventilation in the newborn period, presents with static delay in gross motor and language milestones with normal social response. Examination shows scissoring with toe strike, increased tone in both lower limbs with brisk knee jerks and extensor plantars, and no loss of skills. This is spastic diplegic cerebral palsy from an old periventricular injury, with iron deficiency and feeding difficulty as comorbidities."
+      ],
+      "kind": "reasoning",
+      "oneLine": "Problem representation for a static delay measured in months, not days",
+      "pitfalls": [
+        "Omitting gestation and the newborn story, so the summary cannot point to any cause.",
+        "Describing stiffness without topography, leaving the listener unable to tell diplegia from quadriplegia.",
+        "Leaving out the negatives, especially loss of skills and fits, which are doing real diagnostic work."
+      ],
+      "probes": [
+        {
+          "a": "The birth risks, the static delay across domains, the tone pattern with topography, current function, and the working negatives.",
+          "accept": [
+            "birth risks",
+            "static",
+            "tone",
+            "topography",
+            "negatives"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What element belongs in a cerebral palsy summary that would not appear in an acute illness summary?"
+        },
+        {
+          "a": "Static delay over months and years points to an old non progressive injury, while regression points to an evolving disorder needing a different workup.",
+          "accept": [
+            "static",
+            "regression",
+            "progressive",
+            "course"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why does the course matter more than any single milestone age?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "risks",
+          "text": "States the child with relevant birth risks"
+        },
+        {
+          "id": "course",
+          "text": "States the course as static delay"
+        },
+        {
+          "id": "pattern",
+          "text": "Names the tone pattern with topography and function"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "cerebral_palsy: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Cerebral palsy: clinical assessment",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Name the child with the birth risks that anchor the cause: gestation, birth weight, resuscitation, jaundice and its treatment. Then the course in one phrase: static delay over months and years. Course first, because it is the single most discriminating detail in the whole history.",
+          "heading": "Risks, then course"
+        },
+        {
+          "body": "State the pattern in abstract terms with topography, then current function, then the negatives: no loss of skills, fits position, alertness, vision and hearing. A summary that lets the listener call diplegia before you say it is a good summary.",
+          "heading": "Pattern, function, negatives"
+        }
+      ],
+      "title": "The clinical summary",
+      "why": "The summary for a static developmental disorder has a different shape from an acute one: the course is months and years, the birth story belongs in the first sentence, and the tone pattern with topography replaces the severity score. Without those three, the listener cannot tell diplegia from global delay."
+    },
+    "skill.cerebral.differential": {
+      "body": "For a child with delayed milestones and abnormal tone, work through static against progressive, central against neuromuscular, and dopa responsive against fixed.",
+      "id": "skill.cerebral.differential",
+      "keyPoints": [
+        "Progressive neurodegenerative or metabolic disorders: favoured by loss of gained skills, a changing picture, consanguinity or similarly affected siblings. Regression excludes cerebral palsy and earns urgent metabolic and genetic workup.",
+        "Global developmental delay without a motor disorder: favoured by even delay across domains with normal tone, normal reflexes and flexor plantars. Stiffness with brisk reflexes is what cerebral palsy adds on top.",
+        "Spinal muscular atrophy and other neuromuscular disorders: favoured by wasting with fasciculation, sluggish or absent reflexes, and flexor or absent plantars, the opposite pattern to spasticity.",
+        "Dopa responsive dystonia: favoured by twisting postures that worsen through the day and ease with sleep, normal early milestones, and a dramatic response to a trial of levodopa. Missing it denies a treatable child a near cure.",
+        "Hereditary spastic paraplegia: favoured by progressive stiffness in the legs with a family history of gait difficulty and no early brain injury story. The course is slow progression, not a static old injury.",
+        "Structural spinal cord lesions: favoured by a sensory level, bladder involvement, or stiffness that ascends after previously normal development. Examine the spine and the bladder history before calling it cerebral.",
+        "Epilepsy with coincidental delay and hypothyroidism as treatable companions: fits need their own workup, and thyroid testing belongs in every delayed child, since both change management while the motor label stands."
+      ],
+      "kind": "reasoning",
+      "oneLine": "What else stiffens or delays a child, and what regression is telling you",
+      "pitfalls": [
+        "Not asking about loss of skills, so a progressive metabolic disorder is filed as static cerebral palsy.",
+        "Missing dopa responsive dystonia because the movements were called spasticity without asking about sleep and diurnal change.",
+        "Calling weakness with wasting and absent reflexes cerebral palsy, when the pattern is neuromuscular and needs a different referral."
+      ],
+      "probes": [
+        {
+          "a": "Progressive neurodegenerative and metabolic disorders, global delay without a motor disorder, spinal muscular atrophy, dopa responsive dystonia, hereditary spastic paraplegia, and structural cord lesions.",
+          "accept": [
+            "progressive",
+            "metabolic",
+            "spinal muscular atrophy",
+            "dopa responsive dystonia",
+            "hereditary spastic paraplegia",
+            "cord"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Name the differentials for a stiff, delayed child beyond cerebral palsy itself."
+        },
+        {
+          "a": "Twisting movements that worsen through the day, ease with sleep, and respond to levodopa, with normal early milestones and no static injury story.",
+          "accept": [
+            "diurnal",
+            "sleep",
+            "levodopa",
+            "dystonia"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "What features favour dopa responsive dystonia over dyskinetic cerebral palsy?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Offers a differential spanning static, progressive, neuromuscular and treatable causes"
+        },
+        {
+          "id": "regression",
+          "text": "Treats loss of skills as excluding cerebral palsy"
+        },
+        {
+          "id": "treatable",
+          "text": "Names dopa responsive dystonia and thyroid disease as treatable"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "cerebral_palsy: additionalDifferentials",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Cerebral palsy: differential diagnosis",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Start with the course: static delay supports cerebral palsy, while any loss of gained skills supports a progressive neurodegenerative or metabolic disorder and reopens the workup. Then check the pattern: brisk reflexes with extensor plantars support a central cause, while wasting with fasciculation and absent reflexes support a neuromuscular one.",
+          "heading": "Course first, pattern second"
+        },
+        {
+          "body": "Two mimics must never be missed because treatment changes everything. Dopa responsive dystonia shows twisting postures that worsen through the day, ease with sleep and respond to levodopa. Hypothyroidism delays development with sluggishness and is excluded by thyroid testing in every delayed child.",
+          "heading": "Never miss the treatable mimics"
+        }
+      ],
+      "title": "Differential diagnosis",
+      "why": "Most stiff, delayed children are exactly what they look like, but the ones that are not are costly to miss: a progressive metabolic disorder, a neuromuscular disease, and above all dopa responsive dystonia, which answers dramatically to treatment. The differential does not stop once the word palsy is spoken."
+    },
+    "skill.investigation.cerebral.workup": {
+      "body": "Group investigations by what they answer: establish the cause, exclude the mimics, and find the comorbidities. Nothing here should delay the start of therapy.",
+      "id": "skill.investigation.cerebral.workup",
+      "keyPoints": [
+        "ESTABLISH CAUSE: MRI of the brain to identify structural or ischaemic lesions and help establish aetiology. Periventricular white matter injury after preterm birth and hypoxic ischaemic patterns at term are the classic answers.",
+        "EXCLUDE MIMICS: thyroid function in every delayed child; metabolic or genetic testing when the course is atypical, progressive, or the family history suggests it; EEG when seizures are suspected or staring spells need classification.",
+        "FIND COMORBIDITIES: formal assessment of vision and hearing, hip surveillance imaging to detect subluxation before it dislocates, and evaluation of feeding, swallowing and nutrition with growth plotting.",
+        "The single most important principle: therapy and early intervention start on clinical grounds. No scan result is worth waiting months for in a child whose pattern is already clear."
+      ],
+      "kind": "investigation",
+      "oneLine": "Prove the pattern, exclude the mimics, and never let a scan delay therapy",
+      "pitfalls": [
+        "Ordering a CT for convenience when MRI answers the aetiology question without radiation.",
+        "Skipping thyroid testing and vision and hearing assessment because the motor picture feels complete.",
+        "Forgetting hip surveillance, so the first hip film is ordered after dislocation rather than before it."
+      ],
+      "probes": [
+        {
+          "a": "MRI of the brain to identify structural or ischaemic lesions and help establish the cause.",
+          "accept": [
+            "MRI",
+            "structural",
+            "ischaemic",
+            "aetiology"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What is the single most useful investigation for aetiology in cerebral palsy?"
+        },
+        {
+          "a": "Thyroid function in every delayed child, metabolic or genetic testing if atypical or progressive, and EEG when seizures are suspected.",
+          "accept": [
+            "thyroid",
+            "metabolic",
+            "genetic",
+            "EEG"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Which tests exclude the mimics rather than confirming the palsy?"
+        },
+        {
+          "a": "Hip surveillance imaging detects silent subluxation while it is still reducible; waiting for pain or fixed deformity means the joint is already lost.",
+          "accept": [
+            "hip",
+            "subluxation",
+            "surveillance",
+            "dislocation"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why image the hips of a child who has no hip complaint?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "cerebral_palsy: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Cerebral palsy: investigations",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "heading": "What each test answers",
+          "table": {
+            "cols": [
+              "Test",
+              "Answers",
+              "Order when"
+            ],
+            "rows": [
+              [
+                "Brain MRI",
+                "Old injury pattern and cause",
+                "Every child once the pattern is clear"
+              ],
+              [
+                "Thyroid function",
+                "Treatable delay",
+                "Every delayed child"
+              ],
+              [
+                "EEG",
+                "Seizures or staring spells",
+                "When fits are suspected"
+              ],
+              [
+                "Vision and hearing",
+                "Sensory comorbidity",
+                "Every child, formally"
+              ],
+              [
+                "Hip imaging",
+                "Silent subluxation",
+                "Regularly as the child grows"
+              ],
+              [
+                "Metabolic or genetic tests",
+                "Progressive mimic",
+                "When atypical or regressive"
+              ]
+            ]
+          }
+        },
+        {
+          "body": "Book the scan at the first visit but start therapy the same week: daily home exercises, feeding positioning, and early intervention referral. A child whose pattern is already clear gains more from months of therapy than from months on a scan waiting list.",
+          "heading": "Therapy starts before the scan"
+        }
+      ],
+      "title": "Confirming the pattern and grading the needs",
+      "why": "Investigations in cerebral palsy serve three separate jobs: establishing the cause, excluding treatable mimics, and finding the comorbidities that decide function. Understanding which test does which stops a student waiting for a scan before starting therapy in a child whose pattern is already clear."
+    },
+    "skill.treatment.cerebral.care": {
+      "body": "Care is multidisciplinary and supportive, aiming to maximise function and participation rather than cure a static lesion. Therapy leads, medicines and surgery support, and the family and system carry the plan.",
+      "dosingNote": "CliniX does not prescribe. No drug doses are quoted in this skill because the cited sources name the spasticity options without paediatric doses; initiation and titration stay with the treating paediatric neurology and rehabilitation team and the current hospital formulary.",
+      "id": "skill.treatment.cerebral.care",
+      "keyPoints": [
+        "BASE: coordinate multidisciplinary supportive care centred on physiotherapy and occupational therapy with daily home exercises, started on clinical grounds without waiting for imaging.",
+        "SPASTICITY: stretching, positioning and orthoses first; oral agents such as baclofen for generalised stiffness, focal botulinum toxin injections for targeted muscles, and intrathecal baclofen or selective dorsal rhizotomy through a specialist centre for severe spasticity.",
+        "ORTHOPAEDIC: hip surveillance imaging with corrective surgery for subluxation and contractures before deformity fixes; serial casts and orthoses to keep ankles plantigrade.",
+        "FITS: treat comorbid epilepsy with antiseizure medication under the shared seizure protocol, and review control at every visit since fits undo developmental gains.",
+        "FEEDING: speech and language assessment of swallowing, positioning and texture change, diet support for faltering growth, treatment of drooling, and gastrostomy for nutrition when aspiration or growth failure persists.",
+        "WHOLE CHILD: assess and manage visual, hearing, communication and intellectual impairments with glasses, hearing support and augmentative communication; provide orthoses, mobility aids and assistive technology.",
+        "SYSTEM: enrol every child at the District Early Intervention Centre under Rashtriya Bal Swasthya Karyakram for free therapy and referral, link the anganwadi and school for inclusion, counsel the family against unproven cures, and plan transition to adult services."
+      ],
+      "kind": "treatment",
+      "oneLine": "Therapy leads, medicines and surgery support, the family carries the plan",
+      "pitfalls": [
+        "Promising cure or quoting doses the sources do not give, instead of naming options and referring for titration.",
+        "Treating the legs while fits, aspiration and malnutrition go unmanaged and erase the therapy gains.",
+        "Discharging without early intervention enrolment, so a rural family that cannot afford private therapy gets nothing."
+      ],
+      "probes": [
+        {
+          "a": "Physiotherapy and occupational therapy with home exercises, orthoses and positioning, started clinically without waiting for scans.",
+          "accept": [
+            "physiotherapy",
+            "occupational therapy",
+            "home exercises",
+            "orthoses"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What is the base of all cerebral palsy management?"
+        },
+        {
+          "a": "Oral baclofen for generalised stiffness, focal botulinum toxin for targeted muscles, and intrathecal baclofen or dorsal rhizotomy for severe cases through a specialist centre.",
+          "accept": [
+            "baclofen",
+            "botulinum",
+            "intrathecal",
+            "rhizotomy"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Name the spasticity options in order of escalation."
+        },
+        {
+          "a": "Hip surveillance with corrective surgery, epilepsy treatment, feeding and gastrostomy decisions, vision hearing and communication support, mobility aids, family counselling, early intervention enrolment and school linkage.",
+          "accept": [
+            "hip",
+            "epilepsy",
+            "feeding",
+            "communication",
+            "early intervention",
+            "school"
+          ],
+          "level": 3,
+          "minMatch": 3,
+          "q": "Beyond tone, what does the whole child plan cover?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "cerebral_palsy: management",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Cerebral palsy: management",
+          "source": "Nelson Textbook of Pediatrics"
+        },
+        {
+          "locator": "Care for child development: counselling the family",
+          "source": "WHO"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Therapy is the treatment. Daily physiotherapy with occupational therapy, positioning, stretching and home exercises taught to the mother preserves range, builds strength and trains function. Everything else, medicines, injections, surgery and aids, exists to make therapy possible, and none of it replaces the daily work at home.",
+          "heading": "Therapy is the treatment"
+        },
+        {
+          "body": "Manage spasticity in steps: positioning and orthoses first, then oral agents such as baclofen for widespread stiffness, focal botulinum toxin injections where a few muscles block function, and intrathecal baclofen or selective dorsal rhizotomy for severe spasticity through a specialist centre. Hips are watched with surveillance imaging and operated before dislocation; fits, feeding, vision, hearing and communication are managed in parallel.",
+          "heading": "Spasticity, hips and the whole child"
+        },
+        {
+          "body": "Enrol every child at the District Early Intervention Centre under Rashtriya Bal Swasthya Karyakram, which provides therapy, referral and aids without charge. Link the anganwadi and the school so the child learns with peers, counsel the family plainly against costly unproven cures, and plan the handover to adult services in adolescence.",
+          "heading": "Family, school and the system"
+        }
+      ],
+      "title": "Treatment and ongoing care",
+      "why": "The lesion is static but the child is growing, so care is judged by function and participation, not by any scan. Therapy with home exercises is the base that everything else supports, spasticity and orthopaedic care keep the body usable, and the early intervention system with the family carries the plan for years."
+    }
+  },
+  "system": "paediatrics",
+  "version": 1,
+  "viva": {
+    "skills": [
+      "skill.cerebral.basics",
+      "skill.cerebral.picture",
+      "skill.cerebral.differential",
+      "skill.investigation.cerebral.workup",
+      "skill.cerebral.diagnosis",
+      "skill.treatment.cerebral.care",
+      "skill.exam.paed.cns.motor_tone_power"
+    ]
+  }
+}

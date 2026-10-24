@@ -1,0 +1,1167 @@
+{
+  "_comment": "Surgery pathway: salivary gland swelling (parotid and submandibular). Same architecture as pneumonia and thyroid swelling: shared core and surgery skills carry the history and examination, while this file owns only disease-specific reasoning, investigation, treatment and annexure skills.",
+  "id": "salivary-gland-swelling",
+  "name": "Salivary gland swelling",
+  "fullName": "Salivary gland swelling: parotid and submandibular",
+  "system": "surgery",
+  "kbRef": "salivary_gland_disorders_ent",
+  "oneLine": "A swelling that tenses with meals points to the duct, a slow painless lump to a benign tumour, and a fast painful fixed lump with nerve palsy to cancer",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "skills": [
+        "skill.reasoning.salivary.basics"
+      ],
+      "title": "Basics"
+    },
+    {
+      "id": "approach",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ],
+      "title": "Approach to the patient"
+    },
+    {
+      "id": "particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "title": "Patient particulars"
+    },
+    {
+      "id": "history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.surg.lump",
+        "skill.hx.surg.salivary_swelling"
+      ],
+      "title": "History of presenting illness"
+    },
+    {
+      "id": "past_personal_drug_family",
+      "skills": [
+        "skill.hx.salivary.risk"
+      ],
+      "title": "Past, personal, drug and family history"
+    },
+    {
+      "id": "general_exam",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.surg.survey"
+      ],
+      "title": "General examination"
+    },
+    {
+      "id": "systemic_exam",
+      "skills": [
+        "skill.exam.surg.lump_inspect",
+        "skill.exam.surg.parotid_palpation",
+        "skill.exam.surg.stensen_duct",
+        "skill.exam.surg.facial_nerve",
+        "skill.exam.surg.submandibular_bimanual",
+        "skill.exam.surg.cervical_nodes"
+      ],
+      "title": "Salivary gland examination"
+    },
+    {
+      "id": "disease_findings",
+      "skills": [
+        "skill.reasoning.salivary.signs"
+      ],
+      "title": "Putting the salivary picture together"
+    },
+    {
+      "id": "summary",
+      "skills": [
+        "skill.present.salivary.summary"
+      ],
+      "title": "Clinical summary"
+    },
+    {
+      "id": "differential",
+      "skills": [
+        "skill.reasoning.salivary.differential"
+      ],
+      "title": "Differential diagnosis"
+    },
+    {
+      "id": "investigations",
+      "skills": [
+        "skill.investigation.salivary.workup"
+      ],
+      "title": "Investigations"
+    },
+    {
+      "id": "diagnosis",
+      "skills": [
+        "skill.reasoning.salivary.diagnosis"
+      ],
+      "title": "Diagnosis and red flags"
+    },
+    {
+      "id": "treatment",
+      "skills": [
+        "skill.treatment.salivary.management"
+      ],
+      "title": "Treatment"
+    },
+    {
+      "id": "case",
+      "skills": [
+        "skill.present.case"
+      ],
+      "title": "Case presentation"
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "examinerQuestions": [
+          "The swelling tenses at meals but the plain film shows nothing. What is your next test, and why not a needle?",
+          "Bimanual palpation finds multiple nodular slips below the mylohyoid rather than one caught gland. What does that change?",
+          "The parotid lump is stony hard with skin fixity and lower-lid weakness. What is your next step?"
+        ],
+        "id": "osce.salivary.exam",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.surg.lump_inspect",
+          "skill.exam.surg.parotid_palpation",
+          "skill.exam.surg.stensen_duct",
+          "skill.exam.surg.facial_nerve",
+          "skill.exam.surg.submandibular_bimanual",
+          "skill.exam.surg.cervical_nodes"
+        ],
+        "task": "This 38 year old man has a recurrent swelling under the right jaw that tenses painfully during meals. Examine his salivary glands and present your findings with the most likely cause.",
+        "title": "Examine the salivary swelling"
+      },
+      {
+        "examinerQuestions": [
+          "He reports colicky pain with the sight of food. What single question confirms the duct pattern, and what bedside test follows?",
+          "He chews tobacco and drinks little water in field heat. How does each habit change your advice?",
+          "His uncle had a parotid lump removed. What two background facts would raise your suspicion of cancer here?"
+        ],
+        "id": "osce.salivary.history",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.surg.lump",
+          "skill.hx.surg.salivary_swelling",
+          "skill.hx.salivary.risk"
+        ],
+        "task": "This 52 year old woman has a slow painless lump in front of her right ear present for three years. Take a focused history in six minutes and be ready to state the likely group and red flags.",
+        "title": "Take a salivary history and sort the group"
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.reasoning.salivary.basics",
+      "skill.hx.surg.salivary_swelling",
+      "skill.exam.surg.submandibular_bimanual",
+      "skill.reasoning.salivary.signs",
+      "skill.reasoning.salivary.differential",
+      "skill.investigation.salivary.workup",
+      "skill.reasoning.salivary.diagnosis",
+      "skill.treatment.salivary.management"
+    ]
+  },
+  "skills": {
+    "skill.reasoning.salivary.basics": {
+      "id": "skill.reasoning.salivary.basics",
+      "kind": "reasoning",
+      "oneLine": "Three glands, four behaviour groups, and the mealtime question that sorts them",
+      "probes": [
+        {
+          "a": "The parotid drains through Stensen duct opposite the upper second molar, and the submandibular gland drains through Wharton duct beside the frenulum of the tongue.",
+          "accept": [
+            "Stensen",
+            "second molar",
+            "Wharton",
+            "frenulum"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Where does each major salivary duct open in the mouth?"
+        },
+        {
+          "a": "Swelling that tenses painfully during meals points to duct obstruction, while a painless slow-growing lump present for months or years points to a benign tumour such as pleomorphic adenoma.",
+          "accept": [
+            "meals",
+            "obstruction",
+            "painless",
+            "slow",
+            "benign"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How does the tempo separate a duct stone from a benign tumour?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "salivary_gland_disorders_ent: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "salivary_gland_disorders_ent: pathophysiology",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Salivary glands: classification of swellings",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "heading": "Three glands, one shared job",
+          "body": "The parotid lies below, behind and slightly in front of the ear lobule and drains through Stensen duct, which opens on the cheek opposite the crown of the upper second molar tooth. The submandibular gland sits in the submandibular triangle and drains through Wharton duct, which opens on the floor of the mouth beside the frenulum of the tongue.\n\nSaliva normally flushes both ducts clean. When flow slows from dehydration, debility or blockage, mineral salts settle out and ascending mouth bacteria climb in, which is why one gland produces both stones and pus."
+        },
+        {
+          "heading": "Four behaviour groups",
+          "table": {
+            "cols": [
+              "Group",
+              "Typical members",
+              "First question it raises"
+            ],
+            "rows": [
+              [
+                "Obstructive",
+                "Submandibular duct calculus, parotid duct stone, stricture",
+                "Does the gland tense painfully with meals"
+              ],
+              [
+                "Infective",
+                "Mumps, acute suppurative sialadenitis, abscess",
+                "Is there fever with pus from the duct orifice"
+              ],
+              [
+                "Benign tumour",
+                "Pleomorphic adenoma, Warthin tumour",
+                "Is it a slow painless lump with the nerve intact"
+              ],
+              [
+                "Malignant or systemic",
+                "Mucoepidermoid and adenoid cystic carcinoma, Sjogren disease",
+                "Is it rapid, painful or fixed, or are eyes and joints dry"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Three bedside sorters",
+          "points": [
+            "Mealtime behaviour first: swelling that tenses with food means the duct is blocked until proved otherwise.",
+            "Tempo next: months or years of painless growth means benign tumour, weeks of rapid change means cancer or transformation.",
+            "Nerve, skin and nodes last: a palsied face, fixed skin or hard nodes with a parotid lump means malignancy and urgent referral."
+          ]
+        }
+      ],
+      "title": "What a salivary gland swelling is",
+      "why": "Students drown in salivary names because each lump is memorised alone. Sorting by behaviour first turns twenty names into four questions, and the mealtime question alone separates most stones from most tumours before any test."
+    },
+    "skill.reasoning.salivary.signs": {
+      "id": "skill.reasoning.salivary.signs",
+      "kind": "reasoning",
+      "oneLine": "Mealtime syndrome, the parotid lump, and the bimanual submandibular test",
+      "probes": [
+        {
+          "a": "A swelling of the gland that rapidly tenses and turns painful during meals, often with colicky pain, then eases between meals.",
+          "accept": [
+            "meals",
+            "tenses",
+            "painful",
+            "eases"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What is the pathognomonic pattern of a salivary duct stone?"
+        },
+        {
+          "a": "Ask the patient to clench the teeth to contract the masseter and re-test mobility: a lump confined to the gland moves freely over the taut muscle, while one invading muscle or fixed by cancer does not move.",
+          "accept": [
+            "clench",
+            "masseter",
+            "mobility",
+            "taut"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How do you test a parotid lump against the masseter?"
+        },
+        {
+          "a": "Facial nerve palsy in a parotid lump means malignant invasion until proved otherwise and changes the plan from routine excision to urgent cancer referral.",
+          "accept": [
+            "palsy",
+            "malignant",
+            "invasion",
+            "referral"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "What does a facial palsy with a parotid lump mean for the plan?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "salivary_gland_disorders_ent: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "sialolithiasis: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Salivary glands: clinical examination",
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "heading": "The mealtime syndrome is the diagnosis",
+          "body": "A submandibular swelling that tenses and turns painful during meals, sometimes with colicky pain shooting into the tongue, then settles between meals, is a duct calculus until proved otherwise. Give lemon juice and watch it swell; inspect the duct orifice and compare flow from the two sides with dry swabs.\n\nThe submandibular gland leads this story because its saliva is thick and mineral rich and its duct runs uphill against gravity. Parotid stones are uncommon because parotid saliva is watery."
+        },
+        {
+          "heading": "Reading the parotid lump",
+          "body": "A true parotid swelling lifts the ear lobule and fills the hollow below it. Note size, shape, surface and consistency in the lump record, then test mobility over the masseter with the teeth clenched: fixation to muscle or skin means invasion.\n\nExamine the skin for brawny oedema with pitting, which marks abscess since fluctuation appears late under the tough parotid fascia. Test every branch of the facial nerve: the nerve stays intact in benign tumours and fails in cancer."
+        },
+        {
+          "heading": "The bimanual test settles gland versus nodes",
+          "body": "The submandibular triangle holds both gland and nodes, so inspection alone misleads. Place one gloved finger on the floor of the mouth beside the tongue and the other hand below the jaw margin, and trap the tissue between them.\n\nGland tissue is felt caught between the two fingers on both sides of the mylohyoid, while nodes slip away below the muscle and feel nodular and often multiple. Sweep the whole length of Wharton duct between the fingers for an impacted deposit."
+        }
+      ],
+      "title": "Putting the salivary picture together",
+      "why": "Salivary findings only make sense as a pattern: the same swelling means a stone at meals, an abscess with skin change, and cancer with nerve palsy. Teaching the pattern stops each sign being memorised without its meaning."
+    },
+    "skill.reasoning.salivary.differential": {
+      "id": "skill.reasoning.salivary.differential",
+      "kind": "reasoning",
+      "oneLine": "Stones, infection, benign and malignant tumours, and the non-salivary mimics",
+      "probes": [
+        {
+          "a": "Mumps gives bilateral painful parotid swelling with fever in an unvaccinated child or young adult, while suppurative parotitis is usually unilateral with pus expressible from the duct orifice and occurs in dehydration or debility.",
+          "accept": [
+            "bilateral",
+            "mumps",
+            "unilateral",
+            "pus",
+            "dehydration"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How do you separate mumps from suppurative parotitis?"
+        },
+        {
+          "a": "Warthin tumour sits in the tail of the parotid over the angle of the jaw in an older male smoker, is soft and smooth, may be bilateral, and never undergoes malignant change.",
+          "accept": [
+            "tail",
+            "smoker",
+            "bilateral",
+            "soft"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What marks a Warthin tumour at the bedside?"
+        },
+        {
+          "a": "Submandibular nodes are multiple, nodular and slip below the mylohyoid on bimanual palpation, while the gland is a single swelling caught between the fingers; tuberculous nodes add matting, chronicity and characteristic skin changes.",
+          "accept": [
+            "multiple",
+            "mylohyoid",
+            "single",
+            "matting"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "How do you separate submandibular nodes from the gland itself?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "salivary_gland_disorders_ent: additionalDifferentials",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "salivary_gland_tumor: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Salivary glands: differential diagnosis of swellings",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "heading": "Nodular disease first",
+          "table": {
+            "cols": [
+              "Cause",
+              "Clues for",
+              "Clues against"
+            ],
+            "rows": [
+              [
+                "Duct calculus",
+                "Mealtime tensing with colic, dry orifice on lemon test",
+                "Painless slow lump that ignores meals"
+              ],
+              [
+                "Suppurative sialadenitis",
+                "Fever, tender gland, pus from the orifice",
+                "No fever, clear saliva flow"
+              ],
+              [
+                "Pleomorphic adenoma",
+                "Years of painless lobulated parotid lump, nerve intact",
+                "Rapid growth, pain, fixity, palsy"
+              ],
+              [
+                "Warthin tumour",
+                "Older male smoker, soft tail-of-parotid lump",
+                "Young patient, stony hardness, nodes"
+              ],
+              [
+                "Mucoepidermoid carcinoma",
+                "Variable grade parotid mass, cystic areas",
+                "Decades of quiet stability"
+              ],
+              [
+                "Adenoid cystic carcinoma",
+                "Perineural pain, early facial weakness, relentless course",
+                "Soft mobile lump with intact nerve"
+              ],
+              [
+                "Sjogren disease",
+                "Bilateral glands with dry eyes and joint pains",
+                "Single tense mealtime swelling"
+              ],
+              [
+                "Ranula",
+                "Bluish translucent floor-of-mouth cyst",
+                "Solid gland caught on bimanual test"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Painful versus painless",
+          "body": "Stones hurt at meals and settle between them. Suppurative infection hurts constantly with fever and pus. Malignant pain is late, deep and boring from nerve invasion, not from the lump itself.\n\nBenign tumours are painless for years. New pain or rapid growth in an old painless lump means malignant transformation of a pleomorphic adenoma, and the plan changes that day."
+        },
+        {
+          "heading": "The non-salivary mimics",
+          "points": [
+            "Submandibular lymph nodes: multiple and nodular, slipped below the mylohyoid, often with a mouth or tooth source; tuberculous nodes mat together with chronic skin change.",
+            "Dental abscess and Ludwig angina: tooth pain with floor-of-mouth brawny swelling, not a gland caught on bimanual test.",
+            "Masseteric hypertrophy: bilateral firm muscle that hardens on clenching and softens at rest, with no duct or orifice signs.",
+            "First branchial cleft cyst and lipoma: soft fluctuant or doughy lumps near the ear without mealtime behaviour or duct findings."
+          ]
+        }
+      ],
+      "title": "Differential diagnosis of salivary swelling",
+      "why": "The gland shares its neighbourhood with nodes, teeth, muscle and cysts, and most swellings there are nodes rather than gland tumours. A differential built on mealtime behaviour, tempo and the bimanual test reaches the gland diagnosis before any scan."
+    },
+    "skill.investigation.salivary.workup": {
+      "id": "skill.investigation.salivary.workup",
+      "kind": "investigation",
+      "oneLine": "Plain film for the stone, ultrasound first for the lump, needle and MRI for the tumour",
+      "probes": [
+        {
+          "a": "Neck ultrasound: it separates solid from cystic, maps nodules and nodes, and guides the needle, without radiation and at low cost.",
+          "accept": [
+            "ultrasound",
+            "solid",
+            "cystic",
+            "nodes",
+            "needle"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What is the first-line investigation for a salivary lump?"
+        },
+        {
+          "a": "An occlusal radiograph of the floor of the mouth, because most submandibular stones are radio-opaque and show on plain film.",
+          "accept": [
+            "occlusal",
+            "radio-opaque",
+            "plain",
+            "submandibular"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Which plain film do you order for a suspected submandibular duct stone?"
+        },
+        {
+          "a": "Ultrasound guided fine needle aspiration cytology for tissue character, and contrast MRI of the neck and parotid to map deep lobe extension and nerve involvement before surgery.",
+          "accept": [
+            "aspiration",
+            "cytology",
+            "MRI",
+            "deep lobe",
+            "nerve"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "A parotid lump is hard, fixed and palsied. Which two tests stage it?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "salivary_gland_disorders_ent: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "sialolithiasis: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Salivary glands: radiology and biopsy",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "heading": "Ultrasound first, always",
+          "body": "Begin every salivary lump with neck ultrasound. It separates solid from cystic, maps the nodules, records nodes, and aims the needle at the right target. It needs no radiation, suits a resource-limited clinic, and is the investigation a district hospital can reliably offer.\n\nA plain occlusal film of the floor of the mouth comes alongside when a submandibular stone is suspected, since most such deposits are radio-opaque. Parotid stones rarely show, so a negative film never excludes them."
+        },
+        {
+          "heading": "Stone, lump and dryness each add one test",
+          "table": {
+            "cols": [
+              "Test",
+              "What it answers",
+              "When to order"
+            ],
+            "rows": [
+              [
+                "Occlusal radiograph",
+                "Radio-opaque deposit in duct or gland",
+                "Suspected submandibular stone"
+              ],
+              [
+                "Neck ultrasound",
+                "Solid or cystic, nodules, nodes, needle target",
+                "Every lump and swelling"
+              ],
+              [
+                "US guided FNAC",
+                "Benign or malignant character",
+                "Any persistent lump, never a mealtime stone"
+              ],
+              [
+                "Contrast MRI",
+                "Deep lobe extent, nerve and skin invasion",
+                "Parotid tumour planned for surgery"
+              ],
+              [
+                "Sialography or sialendoscopy",
+                "Duct anatomy, stricture, stone retrieval",
+                "Recurrent obstruction without a plain-film stone"
+              ],
+              [
+                "Schirmer, anti-Ro and anti-La, lip biopsy",
+                "Autoimmune dryness with focal lymphocytic attack",
+                "Bilateral glands with dry eyes and joint pains"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What not to order first",
+          "body": "Do not sample a classic mealtime stone: the history with a palpable deposit and a plain film already diagnose it, and needling an inflamed gland adds risk without value. Do not scan every diffuse painful swelling either.\n\nReserve MRI for tumours bound for the operating theatre, and reserve sialography for recurrent obstruction where ultrasound and film find nothing. Suspected cancer is referred while tests proceed, never after the last report arrives."
+        }
+      ],
+      "title": "Investigating salivary swelling",
+      "why": "Tests in salivary disease are cheap when ordered in sequence and wasteful when ordered together. Ultrasound with a plain film answers most stones and lumps, while needle sampling and MRI are reserved for the tumours that need an operation."
+    },
+    "skill.reasoning.salivary.diagnosis": {
+      "id": "skill.reasoning.salivary.diagnosis",
+      "kind": "reasoning",
+      "oneLine": "Naming the swelling, grading urgency, and the red flags that force referral",
+      "probes": [
+        {
+          "a": "Mealtime tensing with colicky pain plus a palpable duct deposit or a dry orifice on lemon stimulation, supported by a radio-opaque plain film or ultrasound.",
+          "accept": [
+            "mealtime",
+            "colicky",
+            "orifice",
+            "radio-opaque"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "On what grounds do you diagnose a submandibular duct stone?"
+        },
+        {
+          "a": "Rapid growth, new pain in an old lump, stony hardness, fixation to skin or muscle, facial nerve palsy, hard nodes and restricted jaw movement.",
+          "accept": [
+            "rapid",
+            "fixation",
+            "palsy",
+            "nodes",
+            "stony"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Name five red flags in a parotid lump."
+        },
+        {
+          "a": "Tumours of the smaller submandibular, sublingual and minor glands carry a higher probability of cancer than parotid lumps, so a submandibular tumour is sampled and referred early rather than watched.",
+          "accept": [
+            "smaller",
+            "submandibular",
+            "cancer",
+            "sampled"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why does a submandibular tumour worry you more than a parotid one?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "salivary_gland_disorders_ent: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "salivary_gland_tumor: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Salivary glands: diagnosis and red flags",
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "heading": "Name the swelling in three moves",
+          "points": [
+            "Name the gland and the group: obstructive mealtime swelling, infective febrile swelling, benign slow lump, or suspected cancer.",
+            "Grade the tempo: a stone declares itself at meals, a pleomorphic adenoma over years, a carcinoma over weeks.",
+            "State what is still missing: plain film or ultrasound for the stone, needle sampling for the lump, MRI mapping for the tumour bound for surgery."
+          ]
+        },
+        {
+          "heading": "Red flags that force referral",
+          "body": "Rapid growth, new pain in a longstanding lump, stony hardness, fixation to skin or masseter, facial nerve weakness, hard cervical nodes and trismus each mean cancer until proved otherwise. Refer a flagged lump to the surgical or ENT cancer unit at once, and let staging proceed there.\n\nRemember the gland rule: most parotid lumps are benign, but tumours of the smaller submandibular, sublingual and minor glands carry a proportionally higher cancer risk. A persistent submandibular tumour is therefore sampled and referred early, never watched."
+        },
+        {
+          "heading": "Thresholds for the primary clinic",
+          "body": "Manage the classic mealtime stone and the suppurative gland locally with conservative measures and antibiotics on principle, and refer when fever persists, fluctuation appears, or obstruction recurs. Refer bilateral dry glands with joint pains to medicine for autoimmune workup and lymphoma watch.\n\nGive every discharged patient explicit return thresholds: rapid growth, new pain, skin change, nerve weakness, new nodes, or another febrile swelling. A salivary lump without thresholds is a cancer waiting to be missed."
+        }
+      ],
+      "title": "Diagnosing salivary swelling",
+      "why": "The diagnosis is a bedside act in salivary disease: the history with two fingers and a lemon names most stones, while the red-flag list names the cancers. Grading urgency at the first visit is what stops a curable lump returning as an inoperable one."
+    },
+    "skill.treatment.salivary.management": {
+      "dosingNote": "This module teaches management at the level of modality and principle: which swellings are watched, which stones are retrieved, and which lumps go to the operating theatre or the cancer team. Specific agents, routes and durations come from your current national or institutional guideline at the time of treatment. CliniX does not prescribe.",
+      "id": "skill.treatment.salivary.management",
+      "kind": "treatment",
+      "oneLine": "Flow measures for the stone, antibiotics on principle for pus, surgery with the nerve preserved for tumours",
+      "probes": [
+        {
+          "a": "Hydration with warm compresses, gland massage, sialogogues such as lemon, and meticulous oral hygiene to restore salivary flow, with antibiotics on principle when fever or pus marks bacterial infection.",
+          "accept": [
+            "hydration",
+            "massage",
+            "sialogogues",
+            "oral hygiene",
+            "antibiotics"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "How is an uncomplicated duct stone managed first?"
+        },
+        {
+          "a": "Transoral stone retrieval or sialendoscopy for stones that recur or fail to pass, with gland excision reserved for refractory disease with a destroyed gland.",
+          "accept": [
+            "transoral",
+            "sialendoscopy",
+            "retrieval",
+            "excision",
+            "refractory"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "When does a duct stone need a procedure, and which one?"
+        },
+        {
+          "a": "Superficial parotidectomy with facial nerve dissection for pleomorphic adenoma, never enucleation, and cancer surgery with selective neck dissection plus adjuvant radiotherapy for high-grade tumours, positive margins, perineural invasion or nodal disease.",
+          "accept": [
+            "parotidectomy",
+            "nerve",
+            "enucleation",
+            "radiotherapy",
+            "margins"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Outline the surgical management of benign and malignant parotid tumours."
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "sialolithiasis: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "salivary_gland_neoplasms_and_parotidectomy: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "salivary_gland_tumor: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Salivary glands: stones, sialadenitis and tumours",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "heading": "Stones and infection: restore flow first",
+          "body": "An uncomplicated duct stone is managed conservatively: generous hydration, warm compresses, gland massage toward the orifice, sialogogues such as lemon to drive flow, and meticulous oral hygiene. Most small deposits pass or settle with flow restored.\n\nAdd antibiotics on principle when fever, marked tenderness or pus from the orifice marks bacterial infection, alongside the flow measures above. Drain fluctuation that points to abscess, and counsel tobacco and betel cessation with safe water intake for field workers in heat."
+        },
+        {
+          "heading": "Tumours: excise with margin, never enucleate",
+          "body": "A pleomorphic adenoma needs complete excision with a cuff of normal tissue, usually superficial parotidectomy with facial nerve dissection for parotid lesions. Simple enucleation leaves microscopic pseudopodia behind and invites recurrence decades later, with rising risk of malignant transformation.\n\nConfirmed cancers go to the cancer team for surgery with selective neck dissection where nodes are involved, followed by adjuvant radiotherapy for high-grade tumours, positive margins, perineural invasion or nodal disease. Adenoid cystic disease needs prolonged follow-up for late spread."
+        },
+        {
+          "heading": "After surgery and in the community",
+          "body": "Counsel every parotidectomy patient about gustatory sweating over the cheek at meals, which follows auriculotemporal nerve injury and usually settles, with the starch iodine test mapping troublesome cases for the skin clinic. Protect the eye on the operated side until facial movement is confirmed.\n\nManage bilateral dry glands with saliva and tear substitutes and regular dental care, and keep a lymphoma watch for a persistently hard enlarging mass. Refer from the primary clinic to the district surgical or ENT unit when obstruction recurs, pus persists, or any red flag appears."
+        }
+      ],
+      "title": "Managing salivary swelling",
+      "why": "Most salivary swellings resolve without an operation once flow is restored, while the minority that need surgery need exactly the right operation: nerve-preserving excision for benign lumps and team-managed resection with radiotherapy for cancer. Knowing which group the patient is in is the whole of treatment."
+    },
+    "skill.annexure.salivary.tumours": {
+      "id": "skill.annexure.salivary.tumours",
+      "kind": "annexure",
+      "oneLine": "Bedside character and behaviour of the common salivary tumours",
+      "probes": [
+        {
+          "a": "Pleomorphic adenoma: a slow painless lobulated parotid lump with variable consistency and an intact facial nerve, excised with margin and never enucleated.",
+          "accept": [
+            "lobulated",
+            "painless",
+            "intact",
+            "margin",
+            "enucleated"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Summarise the bedside character and operation for pleomorphic adenoma."
+        },
+        {
+          "a": "Mucoepidermoid carcinoma of variable grade and adenoid cystic carcinoma with perineural pain, early palsy and late spread.",
+          "accept": [
+            "mucoepidermoid",
+            "adenoid cystic",
+            "perineural",
+            "palsy"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Which two cancers dominate malignant salivary disease, and what marks the second?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "pleomorphic_adenoma: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "warthin_tumour: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Salivary glands: benign and malignant tumours",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "heading": "The tumour table",
+          "table": {
+            "cols": [
+              "Tumour",
+              "Gland and person",
+              "Bedside character",
+              "Behaviour"
+            ],
+            "rows": [
+              [
+                "Pleomorphic adenoma",
+                "Parotid, any adult",
+                "Slow lobulated lump, variable firm and soft areas, nerve intact",
+                "Excise with margin; enucleation recurs; old lumps can transform"
+              ],
+              [
+                "Warthin tumour",
+                "Tail of parotid, older male smoker",
+                "Soft smooth lump, sometimes bilateral, nodes quiet",
+                "Benign; observation is reasonable once secure"
+              ],
+              [
+                "Mucoepidermoid carcinoma",
+                "Parotid more than submandibular",
+                "Variable grade mass, sometimes cystic",
+                "Low grade behaves well; high grade needs team care"
+              ],
+              [
+                "Adenoid cystic carcinoma",
+                "Parotid and minor glands",
+                "Perineural pain with early weakness",
+                "Relentless local return with late distant spread"
+              ],
+              [
+                "Carcinoma ex pleomorphic adenoma",
+                "Old parotid lump, middle age on",
+                "Old lump turns rapid, painful, hard and fixed",
+                "Urgent cancer referral with neck staging"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Using the table at the bedside",
+          "body": "Read across the row: gland with person, then character, then behaviour. A soft tail-of-parotid lump in an older smoker reads Warthin across all three columns, while an old lump that breaks its own pattern reads transformation.\n\nThe table never replaces sampling. It tells you which lump can wait for a routine needle appointment and which one is referred before the needle is even booked."
+        }
+      ],
+      "title": "Salivary tumours at a glance",
+      "why": "Five tumours cover almost every salivary lump, and each has a bedside signature. One table that links person, character and behaviour is faster than five paragraphs when a lump is in front of you."
+    }
+  },
+  "cases": [
+    {
+      "diagnosis": {
+        "accept": [
+          "submandibular sialolithiasis",
+          "sialolithiasis",
+          "salivary calculus",
+          "Wharton duct calculus"
+        ],
+        "answer": "Right submandibular sialolithiasis with obstructive sialadenitis, uncomplicated."
+      },
+      "differentialModel": {
+        "accept": [
+          "pleomorphic adenoma",
+          "acute sialadenitis",
+          "chronic sialadenitis",
+          "Warthin tumour",
+          "mucoepidermoid carcinoma",
+          "tuberculous lymphadenitis",
+          "ranula",
+          "mumps"
+        ],
+        "answer": "Submandibular duct calculus with obstructive sialadenitis. Consider chronic sialadenitis after a passed deposit, submandibular lymphadenitis including tuberculous nodes, pleomorphic adenoma of the gland, and in the parotid Warthin tumour or mucoepidermoid carcinoma."
+      },
+      "essentialInvestigations": [
+        "xray_occlusal",
+        "usg"
+      ],
+      "exam": {
+        "skill.exam.surg.cervical_nodes": {
+          "abnormal": false,
+          "finding": "No palpable cervical lymph nodes in any group. No matted or hard nodes in the submandibular triangles."
+        },
+        "skill.exam.surg.lump_inspect": {
+          "abnormal": true,
+          "finding": "A diffuse swelling fills the right submandibular triangle, roughly 3 by 2 cm, seen best with the neck extended. Skin over it looks normal with no scar, sinus or fixity."
+        },
+        "skill.exam.surg.submandibular_bimanual": {
+          "abnormal": true,
+          "finding": "A firm tender gland is caught directly between the intraoral and external fingers on both sides of the mylohyoid, with a gritty mobile deposit felt along Wharton duct. The right duct orifice stays dry while the left flows freely on lemon stimulation."
+        },
+        "skill.gen.appearance": {
+          "abnormal": false,
+          "finding": "Comfortable middle-aged man, examined between meals with no distress, no feverish look, mouth opening full."
+        },
+        "skill.gen.vitals": {
+          "abnormal": false,
+          "finding": "Afebrile with stable pulse and blood pressure. No tachycardia or desaturation."
+        }
+      },
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "history": {
+        "comorbidity": {
+          "cues": [
+            "diabetes or blood pressure",
+            "sugar or pressure illness",
+            "long-standing medical illness",
+            "kidney or joint disease"
+          ],
+          "reply": "No sugar, no pressure. Two years ago I passed gravel in the urine with colicky pain, which the doctor said was a kidney stone."
+        },
+        "dental_hygiene": {
+          "cues": [
+            "tooth pain or gum swelling",
+            "dental caries in the mouth",
+            "last dental check",
+            "brush teeth twice daily"
+          ],
+          "reply": "Two lower molars on the right are broken and ache off and on. I brush once in the morning with powder. I have never seen a dentist."
+        },
+        "dry_mouth_flow": {
+          "cues": [
+            "mouth goes dry",
+            "less saliva in the mouth",
+            "daily water intake",
+            "how much water do you drink"
+          ],
+          "reply": "My mouth often feels dry by afternoon. I drink perhaps four to five glasses of water in the whole day, mostly at meals."
+        },
+        "duct_discharge": {
+          "cues": [
+            "bad taste in the mouth",
+            "pus from inside the mouth",
+            "salty fluid under the tongue",
+            "discharge inside the cheek"
+          ],
+          "reply": "Sometimes a salty fluid comes under the tongue when the swelling is pressed, with a bad taste for a few minutes. No frank pus that I have seen."
+        },
+        "facial_weakness": {
+          "cues": [
+            "weakness of the face",
+            "difficulty closing the eye",
+            "deviation of the mouth",
+            "dribbling from the mouth corner"
+          ],
+          "reply": "No, my face moves fully. Both eyes close tight and the mouth is straight."
+        },
+        "family_history": {
+          "cues": [
+            "neck swelling in the family",
+            "lump removed in relatives",
+            "salivary or thyroid disease at home",
+            "stones in family members"
+          ],
+          "reply": "My father had urinary stones twice. Nobody at home has had a neck lump removed."
+        },
+        "habits_tobacco": {
+          "cues": [
+            "chewing tobacco or gutka",
+            "betel quid habit",
+            "smoking beedis or cigarettes",
+            "alcohol intake daily"
+          ],
+          "reply": "I chew tobacco with lime four to five times a day for fifteen years. No smoking, and only occasional toddy at festivals."
+        },
+        "meal_timing": {
+          "cues": [
+            "swelling grows during meals",
+            "while eating food",
+            "sight or smell of food",
+            "lemon or pickle triggers swelling"
+          ],
+          "reply": "Yes, exactly. As soon as I sit to eat, especially with pickle or tamarind, the swelling under the jaw tightens and aches. It softens an hour after the meal."
+        },
+        "medications_drymouth": {
+          "cues": [
+            "daily medicines list",
+            "tablets for allergy or cold",
+            "water tablets for pressure",
+            "which medicines dry the mouth"
+          ],
+          "reply": "I take no daily medicines. Only painkillers from the shop when the swelling aches."
+        },
+        "occupation_water": {
+          "cues": [
+            "work in the fields",
+            "hours in the sun",
+            "water breaks during work",
+            "sweating heavily at work"
+          ],
+          "reply": "I am a field worker on a rain-fed farm near Satara. From March to June I sweat all day and drink little between morning and evening."
+        },
+        "onset_course": {
+          "cues": [
+            "how long has the swelling",
+            "when was the lump first noticed",
+            "sudden or gradual onset",
+            "growing bigger over months"
+          ],
+          "reply": "It started eight months ago as a small tightness under the right jaw at meals. It has become more frequent and now a lump stays even between meals."
+        },
+        "pain_character": {
+          "cues": [
+            "colicky pain while eating",
+            "pain when food is seen",
+            "griping pain under the jaw",
+            "dull ache between meals"
+          ],
+          "reply": "A gripping pain shoots under the tongue during the first few bites, then a dull ache stays while the swelling is tight. Between meals only a heaviness remains."
+        },
+        "past_episodes": {
+          "cues": [
+            "earlier swelling episodes",
+            "previous gland infection treated",
+            "mumps with face swelling",
+            "earlier deposit passed"
+          ],
+          "reply": "Three years ago the same side swelled with fever for a week and settled with medicines from the primary centre. As a boy I never had mumps with face swelling."
+        },
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint in your words",
+            "tell me about",
+            "how can i help",
+            "what is troubling"
+          ],
+          "key": true,
+          "reply": "Doctor, the swelling under my right jaw keeps coming back whenever I eat. It tightens and pains, then settles on its own.",
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "residence": {
+          "cues": [
+            "where do you live",
+            "village and water source",
+            "distance to hospital",
+            "well or tap water"
+          ],
+          "reply": "We live in a village near Satara with my wife and two children. We use borewell water. The district hospital is an hour by bus."
+        },
+        "skin_changes": {
+          "cues": [
+            "redness over the swelling",
+            "warmth over the lump",
+            "skin stuck to the lump",
+            "opening or sinus on the skin"
+          ],
+          "reply": "The skin over it looks normal, doctor. No redness, no wound, nothing stuck to it."
+        },
+        "systemic_dryness": {
+          "cues": [
+            "dry or gritty eyes",
+            "joint stiffness and pains",
+            "dryness of eyes and mouth",
+            "rheumatoid pains with swelling"
+          ],
+          "reply": "No dryness of the eyes and no joint pains. Only the mouth feels dry, as I told you."
+        },
+        "voice_swallowing": {
+          "cues": [
+            "difficulty in swallowing food",
+            "change in the voice",
+            "restricted mouth opening",
+            "pain on moving the jaw"
+          ],
+          "reply": "Swallowing is normal once the swelling settles. My voice is unchanged and the mouth opens fully."
+        }
+      },
+      "id": "case.salivary.suresh",
+      "initialVitals": {
+        "hr": 88,
+        "bpSystolic": 124,
+        "bpDiastolic": 82,
+        "rr": 18,
+        "spo2": 98,
+        "temp": 37.4,
+        "gcs": 15
+      },
+      "investigations": {
+        "fnac": {
+          "indicated": false,
+          "label": "Fine needle aspiration cytology",
+          "note": "Not indicated: a classic mealtime swelling with a palpable deposit and a plain-film shadow needs no needle. Sampling is for persistent lumps.",
+          "result": "Not done."
+        },
+        "sialendoscopy": {
+          "indicated": false,
+          "label": "Diagnostic sialendoscopy",
+          "note": "Reserved for recurrent obstruction where film and ultrasound find no deposit. Not needed when the plain film already shows it.",
+          "result": "Not done."
+        },
+        "usg": {
+          "indicated": true,
+          "label": "Neck ultrasound",
+          "note": "Confirms the deposit with shadowing, excludes abscess or collection, and records nodes. The low-cost first-line scan for every salivary swelling.",
+          "result": "Enlarged right submandibular gland with an echogenic focus and shadowing in Wharton duct. No collection, no suspicious nodes."
+        },
+        "xray_occlusal": {
+          "indicated": true,
+          "label": "Occlusal radiograph of the floor of the mouth",
+          "note": "The first test for a suspected submandibular deposit: most such deposits are radio-opaque and show on plain film.",
+          "result": "Well defined radio-opaque shadow in the course of the right Wharton duct with a mildly enlarged gland shadow."
+        }
+      },
+      "managementModel": {
+        "accept": [
+          "hydration",
+          "sialogogues",
+          "massage",
+          "antibiotics if",
+          "stone retrieval",
+          "sialendoscopy",
+          "tobacco cessation",
+          "follow-up",
+          "return"
+        ],
+        "answer": "Conservative flow measures with hydration, warm compresses, massage and sialogogues; antibiotics on principle if fever or pus appears; transoral stone retrieval or sialendoscopy if obstruction recurs; tobacco cessation and safe water counselling; follow-up with explicit return thresholds."
+      },
+      "review": {
+        "status": "ai_drafted"
+      },
+      "opening": "Suresh Jadhav, 38, has come to the surgery outpatient clinic with his wife. A swelling under the right side of his jaw keeps coming back with meals. Introduce yourself and take a history.",
+      "patient": {
+        "age": 38,
+        "name": "Suresh Jadhav",
+        "occupation": "Field worker on a rain-fed farm",
+        "residence": "Rural village near Satara, lives with wife and two children",
+        "sex": "male"
+      },
+      "teachingPoints": [
+        "The mealtime pattern is the diagnosis: tightening with the sight of food and easing between meals means duct obstruction, and the lemon test with a dry ipsilateral orifice proves it at the bedside.",
+        "Bimanual palpation separates gland from nodes in one move: a single swelling caught between the fingers on both sides of the mylohyoid is gland, while multiple slips below the muscle are nodes.",
+        "A plain occlusal film with ultrasound answers this case for little money: most submandibular deposits are radio-opaque, so a classic stone needs no needle and no scan.",
+        "Heat labour with low fluid intake, poor dentition and tobacco chewing cluster in this patient and each is correctable: water discipline, dental care and cessation are part of the prescription.",
+        "Safety-net the discharge: return for fever with pus, a swelling that stops settling, or any rapid hard fixed growth, since obstruction recurs and old lumps transform."
+      ],
+      "title": "Eight months of mealtime swelling under the jaw"
+    }
+  ]
+}

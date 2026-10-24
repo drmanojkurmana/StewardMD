@@ -1,0 +1,1186 @@
+{
+  "_comment": "Paediatrics pathway: congenital hypothyroidism. Same architecture as pneumonia: shared core and paediatrics skills carry the examination, this file adds emphasis plus disease findings, reasoning, investigation, diagnosis and treatment skills. History and presentation skills live in the shared fragment.",
+  "id": "hypothyroidism-child",
+  "name": "Congenital hypothyroidism",
+  "fullName": "Congenital hypothyroidism in the newborn and infant",
+  "subtitle": "Screening and treatment",
+  "system": "paediatrics",
+  "kbRef": "congenital_hypothyroidism",
+  "oneLine": "Too little thyroid hormone from birth, and the screen that must catch it before the brain pays",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "blurb": "Too little thyroid hormone in the newborn and infant, and what it is not",
+      "id": "basics",
+      "skills": [
+        "skill.hypothyroichild.basics"
+      ],
+      "title": "Basics"
+    },
+    {
+      "blurb": "Before a single question",
+      "id": "approach",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.paed.rapport",
+        "skill.approach.paed.consent_assent"
+      ],
+      "title": "Approach to the infant"
+    },
+    {
+      "blurb": "Age and birth setting set the pre-test probability before a symptom is mentioned",
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected congenital hypothyroidism the age window and birth setting carry real weight: a newborn or young infant, especially after a home birth or early discharge with no heel prick test, starts with a high pre-test probability, and maternal thyroid disease raises it further."
+        }
+      },
+      "id": "particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "title": "Patient particulars"
+    },
+    {
+      "blurb": "Weeks and months, and a quiet baby rather than a sick one",
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect the complaint in weeks to months, not days: weak sucking, long sleeps, a hoarse cry, hard motions and slow gain noticed gradually. That slow tempo alone moves you away from an acute infection before anything else is known."
+        },
+        "skill.hx.paed.presenting_complaint": {
+          "expect": "Expect the story from the mother in her own words with the age each change appeared: when sucking weakened, when sleep lengthened, when the cry changed. Fix each new symptom against the last well week, since scattered worries only form a pattern on a timeline."
+        }
+      },
+      "id": "history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.paed.presenting_complaint",
+        "skill.hx.hypothyroi.illness"
+      ],
+      "title": "History of presenting illness"
+    },
+    {
+      "blurb": "The pregnancy, the birth and the screen that was missed",
+      "emphasis": {
+        "skill.hx.paed.birth_natal_neonatal": {
+          "expect": "Expect the aetiology here: gestation in weeks, birth weight, first cry, resuscitation and days in nursery care. A home birth or early discharge with no heel prick test is the commonest reason a treatable disease presents late."
+        },
+        "skill.hx.paed.diet_infant": {
+          "expect": "Record breast against top feeds with exact preparation, and ask directly about soya feeds with iron or calcium syrups. These details change how the replacement will be given later, not just what caused the illness."
+        }
+      },
+      "id": "past_personal_drug_family",
+      "skills": [
+        "skill.hx.paed.birth_natal_neonatal",
+        "skill.hx.paed.diet_infant",
+        "skill.hx.hypothyroi.background"
+      ],
+      "title": "Birth, feeds and background history"
+    },
+    {
+      "blurb": "A quiet infant, and the vital signs that point to slowed metabolism",
+      "emphasis": {
+        "skill.exam.paed.weight": {
+          "expect": "Weigh naked with the birth weight beside you and plot both on the chart. Faltering from the birth line in the first months is the objective proof that softens no story."
+        },
+        "skill.gen.paed.appearance": {
+          "expect": "Look for a quiet, sleepy infant who lies still with little kicking, coarse features with a big tongue, dry skin and an umbilical hernia. Lethargy here is the disease, not a good temperament, and cool peripheries with a slow pulse complete the picture."
+        },
+        "skill.gen.paed.icterus": {
+          "expect": "Look for lingering yellow staining beyond two weeks in a term infant, and always ask how many weeks it lasted even when it has faded. Resolved jaundice still counts as evidence when the weeks are counted."
+        },
+        "skill.gen.paed.vitals": {
+          "expect": "Expect a slow pulse with a normal or low temperature rather than fever, and normal saturation. Low temperature and bradycardia in a sleepy infant point to slowed metabolism, not to stability."
+        }
+      },
+      "id": "general_exam",
+      "skills": [
+        "skill.gen.paed.appearance",
+        "skill.gen.paed.vitals",
+        "skill.gen.paed.icterus",
+        "skill.exam.paed.weight"
+      ],
+      "title": "General examination"
+    },
+    {
+      "blurb": "Slow growth, a large soft spot and low tone",
+      "emphasis": {
+        "skill.exam.paed.cns.motor_tone_power": {
+          "expect": "Expect generalised low tone with head lag and little spontaneous movement, not stiffness. Increased tone with brisk reflexes points away towards an upper motor neurone disorder, which is the single most useful discriminating detail."
+        },
+        "skill.exam.paed.head_circumference": {
+          "expect": "Measure the head and feel both fontanelles with the sutures. A large anterior fontanelle with a palpable posterior fontanelle beyond the newborn weeks supports thyroid failure, and the head chart sets the baseline for follow up."
+        },
+        "skill.exam.paed.length_height": {
+          "expect": "Measure length with an infantometer and compare with the birth length where recorded. Length faltering with infantile proportions and delayed bone maturation is the endocrine pattern, not simple underfeeding."
+        },
+        "skill.exam.paed.neo.head_skull_trauma": {
+          "expect": "Feel the fontanelles and sutures rather than looking for injury: wide sutures with a large soft spot fit hypothyroidism with delayed maturation, while bulging or a rapidly growing head would mean something else entirely."
+        }
+      },
+      "id": "systemic_exam",
+      "skills": [
+        "skill.exam.paed.length_height",
+        "skill.exam.paed.head_circumference",
+        "skill.exam.paed.neo.head_skull_trauma",
+        "skill.exam.paed.cns.motor_tone_power"
+      ],
+      "title": "Growth and neurological examination"
+    },
+    {
+      "blurb": "One missing hormone explains the feeding, the face and the faltering",
+      "id": "disease_findings",
+      "skills": [
+        "skill.hypothyroichild.findings"
+      ],
+      "title": "Putting the hypothyroid picture together"
+    },
+    {
+      "blurb": "Three sentences that contain the infant, the screen and the syndrome",
+      "id": "summary",
+      "skills": [
+        "skill.hypothyroichild.summary"
+      ],
+      "title": "Clinical summary"
+    },
+    {
+      "blurb": "What else quiets an infant, and what a missed screen is telling you",
+      "id": "differential",
+      "skills": [
+        "skill.hypothyroichild.differential"
+      ],
+      "title": "Differential diagnosis"
+    },
+    {
+      "blurb": "Confirm the failure, define the cause, and never let a scan delay the first tablet",
+      "id": "investigations",
+      "skills": [
+        "skill.ix.hypothyroichild.workup",
+        "skill.annex.paed.growth_charts"
+      ],
+      "title": "Investigations"
+    },
+    {
+      "blurb": "Read the pair, and state whether therapy is for life",
+      "id": "diagnosis",
+      "skills": [
+        "skill.hypothyroichild.diagnosis"
+      ],
+      "title": "Diagnosis and classification"
+    },
+    {
+      "blurb": "Early replacement, correct dosing and a family that never misses a day",
+      "id": "treatment",
+      "skills": [
+        "skill.tx.hypothyroichild.care"
+      ],
+      "title": "Treatment"
+    },
+    {
+      "blurb": "Present this infant to your consultant",
+      "id": "case",
+      "skills": [
+        "skill.present.case",
+        "skill.present.hypothyroi.case"
+      ],
+      "title": "Case presentation"
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "examinerQuestions": [
+          "You found a large fontanelle with low tone and slow growth. Why does that pattern point to thyroid failure rather than simple underfeeding?",
+          "Demonstrate how you assess tone and head control in a 3 month old, and state what each finding means.",
+          "The mother asks whether the medicine is lifelong. What does the scan result mean for your answer?"
+        ],
+        "id": "osce.hypothyroichild.recalled_infant",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.paed.rapport",
+          "skill.approach.paed.consent_assent",
+          "skill.gen.paed.appearance",
+          "skill.gen.paed.vitals",
+          "skill.exam.paed.length_height",
+          "skill.exam.paed.head_circumference",
+          "skill.exam.paed.neo.head_skull_trauma",
+          "skill.hypothyroichild.findings"
+        ],
+        "task": "This 3 month old girl was recalled after a positive newborn thyroid screen. Examine her growth and neurological status and present your findings.",
+        "title": "Examine the recalled infant"
+      },
+      {
+        "examinerQuestions": [
+          "List the three history sequences you would complete in the mother of a quiet poorly feeding infant, and state why each matters.",
+          "No heel prick test was done after a home birth. What does that change in your plan today?",
+          "Name two maternal exposures that would favour a transient slump over permanent disease."
+        ],
+        "id": "osce.hypothyroichild.feeding_history",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.paed.consent_assent",
+          "skill.hx.chief_complaints",
+          "skill.hx.paed.presenting_complaint",
+          "skill.hx.hypothyroi.illness",
+          "skill.hx.hypothyroi.background",
+          "skill.hypothyroichild.differential"
+        ],
+        "task": "This mother says her 3 month old daughter feeds poorly, sleeps all day and passes motions late. Take a focused history in six minutes and be ready to name the pattern.",
+        "title": "Take the feeding and background history"
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.hypothyroichild.basics",
+      "skill.hypothyroichild.screening",
+      "skill.hypothyroichild.findings",
+      "skill.hypothyroichild.differential",
+      "skill.ix.hypothyroichild.workup",
+      "skill.hypothyroichild.diagnosis",
+      "skill.tx.hypothyroichild.care"
+    ]
+  },
+  "skills": {
+    "skill.hypothyroichild.basics": {
+      "id": "skill.hypothyroichild.basics",
+      "kind": "reasoning",
+      "probes": [
+        {
+          "a": "Thyroid hormone is essential for brain growth and myelination in the first years, and untreated deficiency in that window causes permanent loss of cognitive potential.",
+          "accept": [
+            "brain growth",
+            "myelination",
+            "permanent",
+            "preventable"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Why is congenital hypothyroidism one of the most common preventable causes of intellectual disability?"
+        },
+        {
+          "a": "Faulty development of the thyroid gland: absent, small, or ectopically sited, with dyshormonogenesis and iodine lack contributing.",
+          "accept": [
+            "dysgenesis",
+            "absent",
+            "ectopic",
+            "dyshormonogenesis"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What is the commonest cause worldwide?"
+        },
+        {
+          "a": "Maternal thyroid hormone crosses the placenta and protects the fetus, so deficiency declares itself only after birth when that supply stops.",
+          "accept": [
+            "maternal",
+            "placenta",
+            "after birth"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why do most affected newborns look normal?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "congenital_hypothyroidism: pathophysiology",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Congenital hypothyroidism: aetiology and pathogenesis",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Thyroid hormone drives brain growth and myelination, especially in the first years of life. When the gland fails, the infant slides into deficiency exactly during the window when the brain is most hungry for it.\n\nProlonged lack in this window injures development permanently, which is why this disease sits among the most common preventable causes of intellectual disability.",
+          "heading": "A hormone the brain cannot do without"
+        },
+        {
+          "body": "Worldwide the commonest cause is faulty development of the gland itself: absent, small, or sited in the wrong place along its path of descent. Errors in hormone manufacture and severe iodine lack contribute in some regions, and pituitary failure causes a rarer central form.\n\nIn the common primary form the low hormone removes feedback on the pituitary, so TSH rises while free T4 falls.",
+          "heading": "The gland that failed to form"
+        },
+        {
+          "body": "Most affected newborns look normal because maternal hormone crosses the placenta and protects the fetus in the womb. After birth that protection fades and the untreated infant grows steadily more hypothyroid.\n\nClinical detection in the newborn period is therefore unreliable, and systematic screening is the only safe net.",
+          "heading": "Hidden at birth by the mother"
+        }
+      ],
+      "title": "What congenital hypothyroidism is",
+      "why": "Thyroid hormone builds the developing brain, and the first years cannot be replayed, so understanding why a missed screen steals intellect is what makes every later step urgent rather than routine."
+    },
+    "skill.hypothyroichild.screening": {
+      "id": "skill.hypothyroichild.screening",
+      "kind": "reasoning",
+      "probes": [
+        {
+          "a": "TSH with or without T4 on a heel prick blood sample taken in the first days of life.",
+          "accept": [
+            "TSH",
+            "heel prick",
+            "first days"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What does the newborn screen measure?"
+        },
+        {
+          "a": "Confirm urgently with venous free T4 and TSH and start replacement as early as possible, without waiting for imaging.",
+          "accept": [
+            "confirm",
+            "urgent",
+            "start replacement"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "A positive screen arrives on a Friday evening. What do you do?"
+        },
+        {
+          "a": "In central disease the failing pituitary keeps TSH low despite low hormone, so a TSH-based screen misses it and the clinical picture must overrule.",
+          "accept": [
+            "central",
+            "pituitary",
+            "TSH"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "When does a normal screen falsely reassure?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "congenital_hypothyroidism: redFlags",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Congenital hypothyroidism: newborn screening",
+          "source": "Nelson Textbook of Pediatrics"
+        },
+        {
+          "locator": "Newborn screening and infant follow up",
+          "source": "Indian Academy of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "A heel prick sample in the first days of life measures TSH with or without T4. A raised TSH with low T4 confirms primary disease and demands urgent confirmation, not watchful waiting.\n\nRelying on clinical signs is the classic pitfall, since signs are usually absent or subtle in the newborn period.",
+          "heading": "The screen catches what the eye misses"
+        },
+        {
+          "body": "A positive screen needs urgent confirmatory venous free T4 with TSH and treatment without delay once the picture is clear. Delay in starting therapy trades away cognitive potential day by day.\n\nStart replacement as early as possible after a positive screen, and never hold treatment for imaging or extra tests.",
+          "heading": "Recall is an emergency, not a routine"
+        },
+        {
+          "body": "Home births, early discharge and sick infants are the common settings for a missed screen. In such settings the clinician must actively ask whether a screen was done and recall the baby for testing.\n\nRemember that a TSH-based screen can miss central disease, where the pituitary fails and TSH stays low with low hormone. A sick infant with the full picture needs full testing even after a normal screen.",
+          "heading": "Where the screen is missed"
+        }
+      ],
+      "title": "Screening and recall",
+      "why": "Waiting for signs means waiting too long: by the time the face and belly declare the disease, weeks of brain growth have already been lost, so the screen, not the eye, is the diagnostic instrument."
+    },
+    "skill.hypothyroichild.findings": {
+      "id": "skill.hypothyroichild.findings",
+      "kind": "reasoning",
+      "probes": [
+        {
+          "a": "A large fontanelle, a big tongue, an umbilical hernia, and dry coarse skin with constipation.",
+          "accept": [
+            "fontanelle",
+            "tongue",
+            "umbilical hernia",
+            "dry skin",
+            "constipation"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "Name four bedside features of the hypothyroid infant."
+        },
+        {
+          "a": "Length falters with delayed bone maturation while weight is relatively spared, and milestones slip globally, unlike pure calorie lack where weight falls first.",
+          "accept": [
+            "length",
+            "bone maturation",
+            "milestones"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How does the growth pattern differ from simple underfeeding?"
+        },
+        {
+          "a": "Too little hormone slows metabolism throughout the body, lowering heart rate, cooling the skin, and sluggish bowels and poor growth follow the same slowing.",
+          "accept": [
+            "metabolism",
+            "slow",
+            "heart rate",
+            "bowels"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why is the pulse slow and the skin cold?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "congenital_hypothyroidism: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Congenital hypothyroidism: clinical features",
+          "source": "Nelson Textbook of Pediatrics"
+        },
+        {
+          "locator": "Child growth standards: plotting length and weight",
+          "source": "WHO"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Poor feeding with weak sucking, long sleepy stretches, a weak or hoarse cry and low muscle tone make the early picture. The infant feels limp rather than stiff and lies still instead of kicking.\n\nAdd constipation from a sluggish gut and jaundice that outstays its weeks, and the pattern firms before a single test is sent.",
+          "heading": "The quiet baby with a hoarse cry"
+        },
+        {
+          "body": "A large anterior fontanelle with a wide posterior fontanelle, a big tongue that crowds the mouth, dry coarse skin with little sweating, and an umbilical hernia complete the examination. Cold mottled hands and feet with a slow pulse are common companions.\n\nEach sign alone is nonspecific; together in a slow-growing infant they point one way.",
+          "heading": "The face, tongue and belly"
+        },
+        {
+          "body": "Length gain falters first and weight follows, plotted on age and sex matched charts at every visit. Bone maturation lags behind the calendar, and teeth with closure of the soft spot come late.\n\nMilestones slip across domains, with poor neck holding, a late smile and quiet alertness, each reversible only if treatment starts early.",
+          "heading": "Growth that slows and milestones that wait"
+        }
+      ],
+      "title": "The hypothyroid infant picture",
+      "why": "Once the screen is missed, the body still tells the story to anyone who reads it whole: a quiet feeding pattern, a hoarse cry, a large soft spot, a big tongue and a hernia are one disease, not five complaints."
+    },
+    "skill.hypothyroichild.summary": {
+      "id": "skill.hypothyroichild.summary",
+      "kind": "reasoning",
+      "probes": [
+        {
+          "a": "The newborn screening status, because it explains the delay and carries the safety lesson.",
+          "accept": [
+            "screening",
+            "screen",
+            "explains"
+          ],
+          "level": 2,
+          "minMatch": 1,
+          "q": "What element belongs in this summary that would not appear in an acute illness summary?"
+        },
+        {
+          "a": "Weeks to months of quiet decline separate this from an acute febrile illness and point to an inborn deficiency rather than infection.",
+          "accept": [
+            "weeks",
+            "decline",
+            "inborn",
+            "infection"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why does tempo matter here?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "infant",
+          "text": "States the infant with birth details and screening status"
+        },
+        {
+          "id": "tempo",
+          "text": "States the tempo as weeks to months with the syndrome in abstract terms"
+        },
+        {
+          "id": "plan",
+          "text": "Closes with confirmation and the follow up plan"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "congenital_hypothyroidism: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Congenital hypothyroidism: clinical assessment",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Name age, sex and informant with gestation, birth weight and place of birth. State in the same sentence whether the newborn screen was done and what it showed, since that decides whether this is a screen-detected or a late-presented case.\n\nA worked core: a 3 month old girl, born at home with no heel prick test, reported by her mother.",
+          "heading": "State the infant with the screen status"
+        },
+        {
+          "body": "State the course as weeks to months of quiet feeding, hoarse cry, constipation and slow gain. Then the syndrome in abstract terms: infantile hypothyroidism with a large fontanelle, macroglossia, umbilical hernia and growth faltering.\n\nInclude the negatives doing work: no fits, no loss of gained skills, no maternal drug exposure where absent.",
+          "heading": "State the tempo and the syndrome"
+        },
+        {
+          "body": "End with the confirmatory result, raised TSH with low free T4, the imaging position, and the immediate plan. A full close reads: late-presented congenital hypothyroidism after a missed screen, confirmed biochemically, for replacement with growth, development and hearing follow up.",
+          "heading": "Close with confirmation and plan"
+        }
+      ],
+      "title": "The clinical summary",
+      "why": "The summary for a late presenter must carry the screen status beside the syndrome, because missed screening is both the explanation for delay and the safety lesson of the case."
+    },
+    "skill.hypothyroichild.differential": {
+      "id": "skill.hypothyroichild.differential",
+      "kind": "reasoning",
+      "probes": [
+        {
+          "a": "Transient thyroid slump from maternal drugs or iodine, central hypothyroidism, and neonatal sepsis with undernutrition and prolonged jaundice as companions.",
+          "accept": [
+            "transient",
+            "central",
+            "sepsis",
+            "undernutrition",
+            "jaundice"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Name three differentials for a sleepy constipated infant with slow growth."
+        },
+        {
+          "a": "Fever or thermal instability with acute collapse favours sepsis, while weeks of hoarse cry, constipation, macroglossia and hernia favour thyroid failure, and sepsis never waits for tests.",
+          "accept": [
+            "fever",
+            "acute",
+            "hoarse cry",
+            "hernia"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Sepsis and hypothyroidism both make a sleepy poor feeder. What separates them?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Offers a differential spanning thyroid, infective, nutritional and syndromic causes"
+        },
+        {
+          "id": "transient",
+          "text": "Separates transient from permanent thyroid failure"
+        },
+        {
+          "id": "sepsis",
+          "text": "Treats sepsis as the emergency that never waits for tests"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "congenital_hypothyroidism: additionalDifferentials",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Congenital hypothyroidism: differential diagnosis",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "For a sleepy infant with poor feeding, constipation and slow growth, work through transient thyroid slump, central disease, infection, jaundice, nutrition and syndromic causes. Each is excluded by one or two findings while the confirmatory tests run.\n\nIn India prolonged jaundice and undernutrition are common companions, so they must be excluded explicitly rather than assumed present.",
+          "heading": "Working across systems, not within one"
+        },
+        {
+          "heading": "What else explains the picture",
+          "table": {
+            "cols": [
+              "Condition",
+              "Favours",
+              "Against"
+            ],
+            "rows": [
+              [
+                "Transient thyroid slump",
+                "Maternal suppressant drugs, iodine exposure, prematurity",
+                "No exposure, ectopic gland on scan"
+              ],
+              [
+                "Central hypothyroidism",
+                "Low hormone with low TSH, midline defects",
+                "Raised TSH with low hormone"
+              ],
+              [
+                "Neonatal sepsis",
+                "Fever or instability, acute collapse",
+                "Weeks of hoarse cry and hernia, afebrile"
+              ],
+              [
+                "Prolonged breast milk jaundice",
+                "Well thriving infant, only yellow colour",
+                "Poor feeding with slow growth and hernia"
+              ],
+              [
+                "Undernutrition",
+                "Pure calorie lack, weight falls first",
+                "Length faltering with delayed bone age"
+              ],
+              [
+                "Down syndrome",
+                "Hypotonia with feeding difficulty",
+                "No dysmorphism, thyroid tests abnormal"
+              ]
+            ]
+          }
+        }
+      ],
+      "title": "Differential diagnosis",
+      "why": "Most sleepy, poorly feeding infants are exactly what they look like only after the mimics are excluded: sepsis kills quickly, prolonged jaundice misleads slowly, and poor growth has many mothers, so the differential is worked before the hormone result returns."
+    },
+    "skill.hypothyroichild.diagnosis": {
+      "id": "skill.hypothyroichild.diagnosis",
+      "kind": "reasoning",
+      "probes": [
+        {
+          "a": "A raised TSH with a low free T4.",
+          "accept": [
+            "raised TSH",
+            "low free T4"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What pair defines primary disease?"
+        },
+        {
+          "a": "Low free T4 with a low or inappropriately normal TSH, pointing to pituitary failure rather than gland failure.",
+          "accept": [
+            "low free T4",
+            "low TSH",
+            "pituitary"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How does central disease read?"
+        },
+        {
+          "a": "When imaging shows a normally sited gland with a transient cause such as maternal drugs or iodine, a supervised trial off therapy later in childhood tests whether the gland has recovered.",
+          "accept": [
+            "normally sited",
+            "transient",
+            "trial off"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "When is a trial off treatment considered?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "pair",
+          "text": "Reads the TSH and free T4 pair together"
+        },
+        {
+          "id": "cause",
+          "text": "Uses imaging to name the cause"
+        },
+        {
+          "id": "permanence",
+          "text": "States whether therapy is lifelong or trialled off"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "congenital_hypothyroidism: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Congenital hypothyroidism: diagnosis",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Primary disease reads raised TSH with low free T4, the signature of a failing gland driving the pituitary hard. Central disease reads low free T4 with a low or inappropriately normal TSH, the signature of a failing pituitary.\n\nNever diagnose from TSH alone: the pair together with the clinical picture is the diagnosis.",
+          "heading": "Read the pair, not one value"
+        },
+        {
+          "body": "Absent or ectopic gland on imaging means lifelong therapy. A normally sited gland with maternal drug or iodine exposure, or prematurity, favours a transient slump that may resolve, confirmed by a supervised trial off treatment later in childhood.\n\nState which you believe and what would change your mind, since the family must understand why tablets may be for life.",
+          "heading": "Permanent or transient"
+        }
+      ],
+      "title": "Diagnosis and classification",
+      "why": "The diagnosis is a statement of permanence as much as of disease: primary or central, transient or lifelong, and that classification decides years of tablets, so it must be exact."
+    },
+    "skill.ix.hypothyroichild.workup": {
+      "id": "skill.ix.hypothyroichild.workup",
+      "kind": "investigation",
+      "probes": [
+        {
+          "a": "A raised TSH with a low free T4 on venous blood, confirmed urgently after a positive screen.",
+          "accept": [
+            "raised TSH",
+            "low free T4",
+            "venous"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What confirms primary congenital hypothyroidism?"
+        },
+        {
+          "a": "Whether the gland is absent, small, ectopic or normal, which decides lifelong therapy against a later trial off treatment.",
+          "accept": [
+            "absent",
+            "ectopic",
+            "lifelong",
+            "trial off"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What does imaging decide?"
+        },
+        {
+          "a": "Thyroid failure and its causes can impair hearing, and uncorrected loss compounds developmental delay, so early detection with surveillance matters.",
+          "accept": [
+            "hearing",
+            "developmental",
+            "surveillance"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why check hearing at diagnosis?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "congenital_hypothyroidism: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Congenital hypothyroidism: evaluation of suspected cases",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Venous free T4 with TSH confirms primary disease when TSH is raised and free T4 is low. Send it urgently on any positive screen or convincing picture, and treat once confirmed without waiting for the rest.\n\nA low free T4 with a low or normal TSH means central disease and a different referral path, so both values must be read together.",
+          "heading": "Confirm the hormone failure"
+        },
+        {
+          "body": "Thyroid ultrasound with or without a radionuclide scan shows whether the gland is absent, small, ectopic or normally sited, which decides lifelong therapy against a later trial off treatment. Maternal thyroid history with antibody status where relevant separates transient from permanent disease.\n\nA knee radiograph for bone age in selected cases shows how long the deficiency ran before birth.",
+          "heading": "Define the cause"
+        },
+        {
+          "body": "Plot length, weight and head circumference on age and sex matched charts and record developmental milestones with a formal hearing check. These baselines, not any single test, are what follow up will be judged against.\n\nRepeat TSH with free T4 regularly in infancy and titrate to growth, since both under and over treatment harm the developing brain.",
+          "heading": "Measure what has been lost"
+        }
+      ],
+      "title": "Confirming the failure and its cause",
+      "why": "Tests here answer three separate questions, what the hormone levels are, why the gland failed, and what has already been lost, and understanding which test answers which stops a student delaying treatment for a picture of the gland."
+    },
+    "skill.tx.hypothyroichild.care": {
+      "dosingNote": "This module teaches management at the level of principle and drug class. Specific agents, doses, routes and durations must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "id": "skill.tx.hypothyroichild.care",
+      "kind": "treatment",
+      "probes": [
+        {
+          "a": "Crushed in a little water or breast milk, separated from soya feeds, iron and calcium.",
+          "accept": [
+            "crushed",
+            "breast milk",
+            "separated"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "How is the tablet given to a young infant?"
+        },
+        {
+          "a": "TSH with free T4 regularly, growth plotted on charts, milestones, and hearing, with endocrinology review.",
+          "accept": [
+            "TSH",
+            "growth",
+            "hearing",
+            "milestones"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What is monitored in follow up?"
+        },
+        {
+          "a": "Interrupted therapy silently harms brain development, so daily adherence with a missed dose plan decides the outcome.",
+          "accept": [
+            "adherence",
+            "interrupted",
+            "brain"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why does counselling matter as much as the tablet?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "congenital_hypothyroidism: management",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Congenital hypothyroidism: treatment and follow up",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Start levothyroxine replacement as early as possible after a positive screen or confirmed diagnosis, since neurodevelopmental outcome follows prompt and adequate dosing. Crush the tablet in a little water or breast milk and keep it apart from soya feeds, iron and calcium, which trap the hormone in the gut.\n\nSpecific agents and amounts come from the current guideline at prescribing time; this module teaches the principle, not the prescription.",
+          "heading": "Start early and give it right"
+        },
+        {
+          "body": "Check TSH with free T4 regularly and adjust to growth and requirements through infancy, when needs change fast. Plot length and weight at every visit and watch milestones, since a rising line proves the treatment is working.\n\nArrange developmental surveillance with a hearing check to catch any deficit early, and keep paediatric endocrinology follow up.",
+          "heading": "Monitor the child, not just the blood"
+        },
+        {
+          "body": "Teach daily dosing without breaks, what to do after a missed or vomited tablet, and safe storage away from siblings. Explain that stopping the medicine harms the brain silently long before growth slows again.\n\nLink the family to the district early intervention and immunisation contacts so thyroid care rides on visits they already make.",
+          "heading": "Carry the family with you"
+        }
+      ],
+      "title": "Managing the hypothyroid infant",
+      "why": "Replacement is simple and unforgiving: the tablet is cheap and the schedule is daily, yet every missed week in infancy is development that never returns, so management is really adherence built on counselling, monitoring and follow up."
+    }
+  },
+  "cases": [
+    {
+      "diagnosis": {
+        "accept": [
+          "Congenital hypothyroidism",
+          "cretinism"
+        ],
+        "answer": "Congenital hypothyroidism in a 3 month old girl, primary disease with an ectopic gland, presenting late after a missed screen.",
+        "minMatch": 1
+      },
+      "differentialModel": {
+        "accept": [
+          "Congenital hypothyroidism",
+          "Transient neonatal hypothyroidism",
+          "Central hypothyroidism",
+          "Neonatal sepsis",
+          "Neonatal jaundice",
+          "Breast milk jaundice",
+          "Severe acute malnutrition",
+          "Hypothyroidism"
+        ],
+        "answer": "Congenital hypothyroidism presenting late after a missed newborn screen. Also consider transient thyroid slump, central hypothyroidism, neonatal sepsis, prolonged jaundice and undernutrition with faltering growth.",
+        "minMatch": 2
+      },
+      "essentialInvestigations": [
+        "confirmatory_tft",
+        "thyroid_scan"
+      ],
+      "exam": {
+        "skill.exam.paed.head_circumference": {
+          "abnormal": true,
+          "finding": "Head circumference 38 cm. Anterior fontanelle wide open, posterior fontanelle still palpable with wide sutures."
+        },
+        "skill.exam.paed.length_height": {
+          "abnormal": true,
+          "finding": "Length 54 cm, short for age with infantile proportions. No asymmetry of the limbs."
+        },
+        "skill.exam.paed.neo.head_skull_trauma": {
+          "abnormal": true,
+          "finding": "Large soft anterior fontanelle with wide sutures, no bulging. No caput, no cephalhaematoma, skull shape normal."
+        },
+        "skill.exam.paed.cns.motor_tone_power": {
+          "abnormal": true,
+          "finding": "Generalised low tone, feels limp when held, head lag on pull to sit. Moves all limbs but little spontaneous kicking. No asymmetry."
+        },
+        "skill.exam.paed.weight": {
+          "abnormal": true,
+          "finding": "Weight 4.1 kg against a birth weight of 2.8 kg, with length 54 cm. Both plot below the expected lines for a 3 month old girl."
+        },
+        "skill.gen.paed.appearance": {
+          "abnormal": true,
+          "finding": "Quiet 3 month old girl, lying still with little spontaneous movement, sleepy but rousable. Coarse features with a big tongue, dry skin, and an umbilical hernia. No acute distress."
+        },
+        "skill.gen.paed.icterus": {
+          "abnormal": false,
+          "finding": "No residual yellow staining of eyes or skin today; the mother reports the yellow lasted 5 weeks after birth."
+        },
+        "skill.gen.paed.vitals": {
+          "abnormal": true,
+          "finding": "Temperature 36.6 C axillary. Pulse 128 per minute. Respiratory rate 32 per minute. SpO2 98 percent on air. Blood pressure 76/46. Feels cool peripherally."
+        }
+      },
+      "fallback": "I do not understand, doctor. My baby only feeds a little and sleeps all day, that is all I know. Can you ask in a simpler way?",
+      "history": {
+        "alertness_sleep": {
+          "cues": [
+            "how alert is she through the day",
+            "sleepy most of the day",
+            "less active than before",
+            "does she respond when called"
+          ],
+          "key": true,
+          "reply": "She sleeps most of the day and night, nearly 20 hours. She opens her eyes when I call loudly but soon sleeps again. She shows little interest in the mobile above her cot."
+        },
+        "bowel_motions": {
+          "cues": [
+            "how often does she pass motions",
+            "hard motions or straining",
+            "when did she last pass motions",
+            "constipation since when"
+          ],
+          "key": true,
+          "reply": "She passes hard motions only every third day, crying and straining. This has been so since the first month. No blood, no vomiting."
+        },
+        "cry_voice": {
+          "cues": [
+            "how is her cry",
+            "weak or hoarse cry",
+            "cry sounds different",
+            "voice changed since birth"
+          ],
+          "key": true,
+          "reply": "Her cry is weak and hoarse, not loud like my elder son was. It changed in the first weeks and never became strong."
+        },
+        "delivery_birth": {
+          "cues": [
+            "where was she born",
+            "home or hospital delivery",
+            "birth cry immediately after birth",
+            "birth weight recorded"
+          ],
+          "reply": "Born at home with the dai, full term. She cried late, after rubbing, but then fed. Birth weight 2.8 kg was recorded at the anganwadi the next week."
+        },
+        "diet_feeds": {
+          "cues": [
+            "exclusive breast feeds or top feeds",
+            "animal milk or formula feeds",
+            "soya based feeds given",
+            "iron or calcium syrups given"
+          ],
+          "reply": "Only my milk, no top feeds, no soya. The sister gave a vitamin syrup for one week after birth, nothing now. No iron or calcium syrups."
+        },
+        "drug_iodine_exposure": {
+          "cues": [
+            "medicines applied to the cord",
+            "iodine liquid on the skin",
+            "any eye or skin medicine after birth",
+            "oil or powder on the cord stump"
+          ],
+          "reply": "The dai applied only coconut oil to the cord, nothing else. No medicines on the skin, no eye drops beyond what the hospital gave my son."
+        },
+        "family_thyroid": {
+          "cues": [
+            "anyone else in the family with thyroid",
+            "neck swelling in relatives",
+            "sibling slow growth or delay",
+            "marriage within the family"
+          ],
+          "reply": "No thyroid disease in the house. My elder son, now 4 years, walked and spoke on time. My marriage is outside the family."
+        },
+        "feeding_suckling": {
+          "cues": [
+            "how is her sucking at the breast",
+            "how many breast feeds in a day",
+            "does she fall asleep during feeds",
+            "how long does each feed last"
+          ],
+          "key": true,
+          "reply": "She sucks weakly for a few minutes and falls asleep at the breast. I feed 8 to 10 times a day but each feed is short. Milk leaks from the corner of her mouth."
+        },
+        "growth_concern": {
+          "cues": [
+            "weight gain since birth",
+            "clothes still loose or tight",
+            "growing slower than other babies",
+            "what does the anganwadi say about weight"
+          ],
+          "key": true,
+          "reply": "She weighed 2.8 kg at birth and 4.1 kg last week at 3 months. The anganwadi worker says the line on her card is flattening. Her newborn clothes still fit."
+        },
+        "immunisation_record": {
+          "cues": [
+            "vaccines given till now",
+            "birth vaccines received",
+            "immunisation card available",
+            "pentavalent or oral polio doses"
+          ],
+          "reply": "BCG with oral polio at the anganwadi in the first week. The 6 week pentavalent is still pending because she had a cold. The card is at home."
+        },
+        "jaundice_course": {
+          "cues": [
+            "yellow eyes or skin",
+            "jaundice after birth",
+            "yellow staining of the skin",
+            "how many weeks did the yellow last"
+          ],
+          "key": true,
+          "reply": "Her eyes and face turned yellow on the third day and the yellow lasted 5 weeks, fading slowly on its own. She was never kept under a light."
+        },
+        "maternal_thyroid": {
+          "cues": [
+            "mother has thyroid disease",
+            "thyroid tablets during pregnancy",
+            "neck swelling in the mother",
+            "medicines taken during pregnancy"
+          ],
+          "key": true,
+          "reply": "I have no thyroid disease and took no thyroid tablets. I took only iron tablets in pregnancy. No neck swelling, no fits medicine."
+        },
+        "milestones_neck": {
+          "cues": [
+            "holds her head steady",
+            "follows objects with her eyes",
+            "social smile at mother",
+            "neck holding and eye contact"
+          ],
+          "key": true,
+          "reply": "She does not hold her head steady and it falls back when I lift her. She smiles rarely and does not follow my face. Her limbs feel loose when I hold her."
+        },
+        "past_illness": {
+          "cues": [
+            "admissions since birth",
+            "fever or poor feeding episodes",
+            "umbilical discharge or hernia",
+            "cold hands and feet noticed"
+          ],
+          "reply": "No admissions, no fever. Her navel bulges when she cries since the second month, with no discharge. Her hands and feet often feel cold."
+        },
+        "pregnancy_antenatal": {
+          "cues": [
+            "illness during pregnancy",
+            "check ups during pregnancy",
+            "swelling or fits in pregnancy",
+            "thyroid problem in pregnancy"
+          ],
+          "reply": "Pregnancy was normal with four check ups at the primary centre. No swelling, no fits, no sugar or pressure problem. Delivery was full term at home."
+        },
+        "presenting": {
+          "cues": [
+            "what brings you today",
+            "what is the problem with the baby",
+            "tell me about her illness",
+            "why have you come to hospital"
+          ],
+          "key": true,
+          "reply": "Doctor, my daughter Asha is 3 months old. She feeds poorly and sleeps all day, her cry is hoarse, and she passes motions only every third day. The anganwadi worker told me to show her here."
+        },
+        "screening_heelprick": {
+          "cues": [
+            "heel prick blood test after birth",
+            "newborn screening test done",
+            "blood test from the heel",
+            "thyroid test after birth"
+          ],
+          "key": true,
+          "reply": "No blood was taken from her heel after birth. Nobody told us about any newborn test. No thyroid test has been done till now."
+        }
+      },
+      "id": "case.hypothyroichild.asha",
+      "initialVitals": {
+        "hr": 128,
+        "bpSystolic": 76,
+        "bpDiastolic": 46,
+        "rr": 32,
+        "spo2": 98,
+        "temp": 36.6,
+        "gcs": 15
+      },
+      "investigations": {
+        "bone_age_knee": {
+          "indicated": true,
+          "label": "Knee radiograph for bone age",
+          "note": "Shows how long the deficiency ran; it guides prognosis, never delays treatment.",
+          "result": "Distal femoral epiphysis not yet seen, bone maturation behind the calendar age."
+        },
+        "confirmatory_tft": {
+          "indicated": true,
+          "label": "Venous free T4 and TSH",
+          "note": "The pair together is the diagnosis; TSH alone never decides.",
+          "result": "TSH raised with free T4 low, confirming primary hypothyroidism."
+        },
+        "ct_head": {
+          "indicated": false,
+          "label": "CT scan of the head",
+          "note": "No fits, no loss of skills and no focal signs; a scan would add radiation without changing the plan.",
+          "result": "Not done."
+        },
+        "hearing_oae": {
+          "indicated": true,
+          "label": "Hearing screening (OAE)",
+          "note": "Hearing loss compounds developmental delay, so it is tested at diagnosis, not after speech fails.",
+          "result": "OAE refer in both ears; full audiology booked at the district hospital."
+        },
+        "maternal_tft": {
+          "indicated": true,
+          "label": "Maternal thyroid function",
+          "note": "Excludes the transient maternal causes and firms lifelong therapy.",
+          "result": "Mother euthyroid with no antibodies; no suppressant drugs in pregnancy."
+        },
+        "thyroid_scan": {
+          "indicated": true,
+          "label": "Thyroid ultrasound",
+          "note": "An absent or ectopic gland means lifelong therapy; a normal gland would reopen transient causes.",
+          "result": "Small ectopic thyroid tissue at the base of the tongue; no normally sited gland."
+        }
+      },
+      "managementModel": {
+        "accept": [
+          "levothyroxine",
+          "TSH and free T4",
+          "growth",
+          "hearing",
+          "developmental surveillance",
+          "endocrinology",
+          "adherence",
+          "counselling"
+        ],
+        "answer": "Start levothyroxine replacement early with correct crushed dosing separated from soya, iron and calcium, monitor TSH with free T4 and plot growth, arrange hearing and developmental surveillance with endocrinology follow up, and counsel the mother on daily adherence.",
+        "minMatch": 3
+      },
+      "opening": "Sunita brings her 3 month old daughter Asha to the paediatric OPD of a district hospital. The baby feeds poorly, cries hoarsely and passes motions only every third day. Introduce yourself to the mother and take a history.",
+      "patient": {
+        "age": 3,
+        "name": "Asha Kumari",
+        "occupation": "Infant at home, cared for by mother",
+        "residence": "Village household, lives with parents and elder brother",
+        "sex": "female"
+      },
+      "review": {
+        "status": "ai_drafted"
+      },
+      "teachingPoints": [
+        "A normal-looking newborn proves nothing: maternal hormone protects the fetus, so the screen, not the eye, is the diagnostic instrument.",
+        "The tempo is weeks, not days: quiet feeding, hoarse cry, constipation and slow gain over weeks point to an inborn deficiency, not an acute infection.",
+        "One disease explains five complaints: large fontanelle, big tongue, hernia, dry skin and slow growth together are thyroid failure until proved otherwise.",
+        "Read the pair: raised TSH with low free T4 is primary disease; low hormone with a low TSH is central and a different path.",
+        "Treat on confirmation and never wait for the scan: every week of delay trades development.",
+        "Counsel the medicine into the day: crushed in milk, apart from iron and calcium, every day without breaks, with growth and hearing checks."
+      ],
+      "title": "A quiet baby who feeds poorly and passes motions late"
+    }
+  ]
+}

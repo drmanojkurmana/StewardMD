@@ -1,0 +1,1312 @@
+{
+  "_comment": "Paediatric tropical fever pathway. Enteric fever is the index illness with dengue and malaria as the constant differentials. Shared paediatric and core skills carry approach, history framework, examination and the generic case presentation; this file adds the three-fever reasoning, the workup, severity and management. History, exposure and bleeding skills live in work/shared-enteric-dengue-malaria.json for the lead to merge into the paediatrics pack.",
+  "cases": [
+    {
+      "diagnosis": {
+        "accept": [
+          "Enteric fever",
+          "typhoid fever",
+          "typhoid"
+        ],
+        "answer": "Enteric fever (typhoid), uncomplicated, in an 8-year-old boy.",
+        "minMatch": 1
+      },
+      "differentialModel": {
+        "accept": [
+          "Enteric fever",
+          "Dengue fever",
+          "Malaria",
+          "Urinary tract infection",
+          "Scrub typhus",
+          "Leptospirosis"
+        ],
+        "answer": "Enteric fever, with dengue, malaria, urinary tract infection, scrub typhus and leptospirosis considered.",
+        "minMatch": 2
+      },
+      "essentialInvestigations": [
+        "bloodcx",
+        "widal",
+        "fbc",
+        "ns1",
+        "malaria_rdt"
+      ],
+      "exam": {
+        "skill.exam.enteric.bleeding_check": {
+          "abnormal": false,
+          "finding": "No petechiae on the skin or palate, gums and nose dry, venepuncture sites clean. Cuff test negative, no fresh crop of petechiae in the marked square."
+        },
+        "skill.exam.paed.gi.inspection": {
+          "abnormal": true,
+          "finding": "Abdomen mildly distended, moves with breathing, no visible veins or rash. No chest indrawing."
+        },
+        "skill.exam.paed.gi.liver": {
+          "abnormal": true,
+          "finding": "Liver edge palpable 2 cm below the right costal margin, soft and mildly tender. Upper border of dullness in the right 5th space."
+        },
+        "skill.exam.paed.gi.palpation_percussion": {
+          "abnormal": true,
+          "finding": "Diffuse mild tenderness with a doughy feel, maximal in the right lower quadrant. No guarding, no rigidity, no rebound. Bowel sounds present and normal."
+        },
+        "skill.exam.paed.gi.spleen": {
+          "abnormal": true,
+          "finding": "Spleen tip just palpable below the left costal margin on deep inspiration, soft, with a palpable notch. Moves with respiration."
+        },
+        "skill.exam.paed.skin_lesions": {
+          "abnormal": true,
+          "finding": "Three to four faint rose-pink macules on the trunk, blanching on pressure. No petechiae, no purpura, no eschar."
+        },
+        "skill.gen.paed.appearance": {
+          "abnormal": true,
+          "finding": "Dull and listless, lying still, answering in monosyllables. Flushed cheeks, dry coated tongue, no distress, no pallor of the palms at a glance."
+        },
+        "skill.gen.paed.lymph_nodes": {
+          "abnormal": false,
+          "finding": "No significant lymph nodes. A few small, soft, mobile jugular nodes under 1 cm, non-tender."
+        },
+        "skill.gen.paed.pallor": {
+          "abnormal": true,
+          "finding": "Mild pallor of the conjunctiva and palms. No icterus, no cyanosis, no clubbing."
+        },
+        "skill.gen.paed.vitals": {
+          "abnormal": true,
+          "finding": "Temperature 39 C axillary. Pulse 92 per minute, regular, normal volume. Respiratory rate 22 per minute. Blood pressure 100/64. SpO2 98 percent on room air."
+        }
+      },
+      "fallback": "I do not know, doctor. Can you ask that in a simpler way?",
+      "history": {
+        "abdominal_pain": {
+          "cues": [
+            "pain in the stomach",
+            "stomach ache",
+            "abdominal pain",
+            "tummy pain",
+            "pain in the abdomen",
+            "where does it hurt"
+          ],
+          "key": true,
+          "reply": "Yes, he points to the whole stomach and says it aches, more on the right side low down. It is dull all the time, not coming in waves."
+        },
+        "appetite_intake": {
+          "cues": [
+            "eating",
+            "appetite",
+            "food intake",
+            "feeling hungry",
+            "how much fluid is he taking"
+          ],
+          "reply": "He is not asking for food at all since three days. He drinks a little water when I force him, but says the mouth tastes bitter."
+        },
+        "bowel_change": {
+          "cues": [
+            "motions",
+            "stools",
+            "constipation",
+            "diarrhoea",
+            "potty",
+            "bowel"
+          ],
+          "key": true,
+          "reply": "He has not passed motion for two days now. Before the fever his motions were daily and normal."
+        },
+        "cough_breath": {
+          "cues": [
+            "cough",
+            "cold",
+            "running nose",
+            "fast breathing",
+            "difficulty breathing",
+            "breathless"
+          ],
+          "reply": "No cough, no cold, no fast breathing. Only this fever and stomach ache."
+        },
+        "fever_pattern": {
+          "cues": [
+            "fever pattern",
+            "does the fever touch normal",
+            "fever settle",
+            "continuous fever",
+            "remittent",
+            "fever come down fully"
+          ],
+          "key": true,
+          "reply": "It never comes down fully, doctor. Morning it is less, evening it is more, but it never touches normal. Crocin lowers it for some hours and then it climbs again."
+        },
+        "headache": {
+          "cues": [
+            "headache",
+            "head pain",
+            "head aching",
+            "pain in the head"
+          ],
+          "key": true,
+          "reply": "Yes, he holds his forehead and says the head is paining since the fever started. He does not like light much but there is no vomiting with it."
+        },
+        "onset": {
+          "cues": [
+            "when did it start",
+            "how long ago",
+            "since when",
+            "onset",
+            "how many days",
+            "first day of fever"
+          ],
+          "key": true,
+          "reply": "Eight days ago, on Tuesday evening he felt hot. Every day since then the fever is there, each evening higher than the morning."
+        },
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help",
+            "what is troubling"
+          ],
+          "key": true,
+          "reply": "Doctor, my son Aarav has had high fever for eight days and pain in the stomach. The fever is not leaving him.",
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "vomiting_food": {
+          "cues": [
+            "vomiting",
+            "vomit",
+            "nausea",
+            "feeling sick",
+            "throwing up"
+          ],
+          "reply": "He vomited twice yesterday, whatever little he ate came out. No blood in it."
+        },
+        "bleeding_gums": {
+          "cues": [
+            "bleeding gums",
+            "bleed from gums",
+            "nose bleed",
+            "nosebleed",
+            "bleeding from nose",
+            "blood in vomit",
+            "black stools"
+          ],
+          "key": true,
+          "reply": "No, doctor. No bleeding from gums or nose, no blood in vomit or potty."
+        },
+        "family_home": {
+          "cues": [
+            "family members",
+            "anyone else at home",
+            "siblings",
+            "brothers sisters",
+            "grandmother"
+          ],
+          "reply": "We are five at home: my husband, his mother, our daughter aged 5 and Aarav. Nobody else has fever right now."
+        },
+        "medicines_given": {
+          "cues": [
+            "what medicine",
+            "which tablets",
+            "medicines given",
+            "crocin",
+            "paracetamol",
+            "antibiotic given"
+          ],
+          "key": true,
+          "reply": "Only Crocin syrup when the fever goes very high, and an ORS packet yesterday. No antibiotic till now."
+        },
+        "mosquito_nets": {
+          "cues": [
+            "mosquito net",
+            "sleep under net",
+            "mosquito bites",
+            "cooler at home",
+            "stored water",
+            "stagnant water"
+          ],
+          "key": true,
+          "reply": "We have one net but the children kick it off at night. We store drinking water in a covered drum, and there is a cooler in the bedroom which we rarely clean."
+        },
+        "past_dengue_malaria": {
+          "cues": [
+            "dengue before",
+            "malaria before",
+            "typhoid before",
+            "similar fever before",
+            "admitted before",
+            "hospital before"
+          ],
+          "key": true,
+          "reply": "No, he never had dengue, malaria or typhoid before. He was admitted once at age 4 for loose motions, nothing after that."
+        },
+        "rash_day": {
+          "cues": [
+            "rash on body",
+            "red spots",
+            "rose spots",
+            "skin rash",
+            "which day rash",
+            "when did rash appear"
+          ],
+          "key": true,
+          "reply": "Yes, since yesterday I see two or three light pink spots on his stomach and chest. No itching.",
+          "skillId": "skill.hx.enteric.fever_story"
+        },
+        "sick_contacts": {
+          "cues": [
+            "anyone else sick",
+            "neighbours ill",
+            "school children sick",
+            "contacts with fever",
+            "friends with fever"
+          ],
+          "reply": "Two boys in his class had long fever last month, and the boy next door had typhoid in the rains. Our lane gets water only twice a week."
+        },
+        "urine_dark": {
+          "cues": [
+            "urine output",
+            "passing urine",
+            "less urine",
+            "dark urine",
+            "colour of urine",
+            "brown urine"
+          ],
+          "reply": "He passes urine three or four times a day, yellow but not dark. No burning while passing."
+        },
+        "vaccine_card": {
+          "cues": [
+            "vaccine card",
+            "vaccination",
+            "immunisation card",
+            "typhoid vaccine",
+            "vaccines received"
+          ],
+          "reply": "He got all his baby injections, sister. Typhoid injection was written for last year but we missed it because of his exams. I will bring the card tomorrow."
+        },
+        "food_hygiene": {
+          "cues": [
+            "where does water come from",
+            "boil water",
+            "filter water",
+            "street food",
+            "eat outside",
+            "panipuri"
+          ],
+          "key": true,
+          "reply": "We get tap water twice a week and store it in drums. We do not boil daily, only for the small baby. Aarav eats panipuri and ice gola outside school almost every day.",
+          "skillId": "skill.hx.enteric.exposure_risk"
+        }
+      },
+      "id": "case.enteric.aarav",
+      "initialVitals": {
+        "hr": 92,
+        "bpSystolic": 100,
+        "bpDiastolic": 64,
+        "rr": 22,
+        "spo2": 98,
+        "temp": 39,
+        "gcs": 15
+      },
+      "investigations": {
+        "bloodcx": {
+          "indicated": true,
+          "label": "Blood culture",
+          "note": "The confirmatory test, drawn in the first week before antibiotics. A negative culture after antibiotics proves nothing except that antibiotics were given.",
+          "result": "Drawn before the first antibiotic dose. Grew Salmonella Typhi, sensitive to ceftriaxone and azithromycin, resistant to ciprofloxacin."
+        },
+        "cxr": {
+          "indicated": false,
+          "label": "Chest radiograph",
+          "note": "Not indicated: no cough, no fast breathing and no chest signs. A routine film here adds radiation without changing the plan.",
+          "result": "Not done."
+        },
+        "fbc": {
+          "indicated": true,
+          "label": "Full blood count",
+          "note": "A low white count with a low platelet count fits enteric fever better than a bacterial pneumonia, where the count usually climbs.",
+          "result": "Haemoglobin 10 g per dL. Total leucocyte count 4500 per mm3 with 58 percent neutrophils. Platelets 2 lakh per mm3."
+        },
+        "lft": {
+          "indicated": true,
+          "label": "Liver enzymes",
+          "note": "Mild transaminitis is common in enteric fever and dengue, and deep jaundice instead would push toward severe malaria or hepatitis.",
+          "result": "Mildly raised transaminases, bilirubin normal."
+        },
+        "malaria_rdt": {
+          "indicated": true,
+          "label": "Malaria smear and rapid test",
+          "note": "Negative once does not close malaria in a convincing paroxysmal illness, but here the sustained pattern already points elsewhere.",
+          "result": "Thick and thin smears negative, rapid antigen test negative."
+        },
+        "ns1": {
+          "indicated": true,
+          "label": "Dengue NS1 and IgM",
+          "note": "NS1 is an early-illness test. By day eight a negative NS1 with a negative IgM makes dengue unlikely, which is exactly what this result does.",
+          "result": "NS1 antigen negative on day eight of fever. Dengue IgM negative."
+        },
+        "usg_abd": {
+          "indicated": true,
+          "label": "Abdominal ultrasound",
+          "note": "Confirms the spleen the hands felt and checks for the fluid that dengue would leave behind. No free fluid here argues against leakage.",
+          "result": "Mild splenomegaly. No free fluid, no gallbladder wall oedema, no mesenteric nodes."
+        },
+        "widal": {
+          "indicated": true,
+          "label": "Widal, paired sera",
+          "note": "A single Widal means little in an endemic country; the rise between the two samples a week apart is the result that counts.",
+          "result": "First sample raised, second sample a week later shows a fourfold rise in O agglutinins."
+        }
+      },
+      "managementModel": {
+        "accept": [
+          "blood culture",
+          "ceftriaxone",
+          "azithromycin",
+          "paracetamol",
+          "fluids",
+          "review"
+        ],
+        "answer": "Blood cultures before antibiotics, then ceftriaxone with a switch to oral azithromycin when improving, paracetamol for fever, fluids with urine monitoring, and review for perforation or shock.",
+        "minMatch": 3
+      },
+      "opening": "Sunita Pawar has brought her 8-year-old son Aarav, who has had rising fever for eight days with pain in the stomach. He lies dull and listless on the cot, answering slowly. Greet the mother and take a history.",
+      "patient": {
+        "age": 8,
+        "name": "Aarav Pawar",
+        "occupation": "School student, class 3",
+        "residence": "Urban settlement, lives with parents and grandmother",
+        "sex": "male"
+      },
+      "teachingPoints": [
+        "The tempo already sorts the three fevers before any test: stepwise and remittent points to enteric, breaking with a rash points to dengue, and paroxysms with sweats point to malaria.",
+        "A pulse of 92 against a temperature of 39 C is relatively slow, and that single vital-sign pair is doing more diagnostic work than the thermometer alone.",
+        "Rose spots are few and truncal; petechiae are many and dependent. The day, the number and the site of the rash matter more than its colour.",
+        "Blood culture before antibiotics and a paired Widal a week apart are the two enteric results that count; a single Widal in an endemic country means little.",
+        "NS1 is an early-illness test, so a negative NS1 on day eight argues against dengue rather than missing it.",
+        "Watch every enteric child for perforation: worsening pain with guarding or rigidity, distension with silent bowel, or blood in the stool.",
+        "One lane with several stepwise fevers is an outbreak wearing a case sheet: ask about the water source and notify, not just treat."
+      ],
+      "title": "An 8-year-old with eight days of fever and stomach ache",
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ],
+  "chapters": [
+    {
+      "blurb": "Three illnesses behind one complaint",
+      "id": "basics",
+      "skills": [
+        "skill.enteric.basics"
+      ],
+      "title": "Basics"
+    },
+    {
+      "blurb": "Befriend first, count the rate while the child is calm",
+      "id": "approach",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.paed.rapport",
+        "skill.approach.paed.consent_assent",
+        "skill.approach.paed.positioning"
+      ],
+      "title": "Approach to the child"
+    },
+    {
+      "blurb": "Age, season and neighbourhood set the prior probability",
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Record age in years and months, the month of presentation, and the neighbourhood: monsoon and post-monsoon months in an urban settlement with open water storage raise all three illnesses together, while a single village well points toward enteric fever."
+        }
+      },
+      "id": "particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "title": "Patient particulars"
+    },
+    {
+      "blurb": "Days of fever with a shape, and what rides along",
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect fever of many days with headache and abdominal pain rather than cough and breathlessness. The tempo is days to weeks, not hours, and the mother usually reports the fever first and the pain only when asked."
+        },
+        "skill.hx.paed.presenting_complaint": {
+          "expect": "Take the story in the mother's words and in order: which day the fever began, whether it ever touches normal, and what changed each day after. A story that climbs stepwise differs from one that breaks and returns, and that difference is the diagnosis."
+        }
+      },
+      "id": "history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.paed.presenting_complaint",
+        "skill.hx.enteric.fever_story"
+      ],
+      "title": "History of presenting illness"
+    },
+    {
+      "blurb": "Water, mosquitoes, vaccines and the lane the child lives in",
+      "emphasis": {
+        "skill.hx.paed.immunisation": {
+          "expect": "Ask specifically for the typhoid conjugate vaccine and see the card. An unvaccinated child who eats outside carries the enteric risk in the answer, and the card settles in seconds what recall cannot."
+        },
+        "skill.hx.paed.socioeconomic": {
+          "expect": "Read this chapter as vector and vehicle mapping: stored water and coolers for Aedes, stagnant pools for Anopheles, shared wells and street food for enteric fever. Overcrowding turns one source into a cluster."
+        }
+      },
+      "id": "past_personal_drug_family",
+      "skills": [
+        "skill.hx.enteric.exposure_risk",
+        "skill.hx.paed.immunisation",
+        "skill.hx.paed.socioeconomic"
+      ],
+      "title": "Past, personal, drug and family history"
+    },
+    {
+      "blurb": "A sick child first, then the pulse against the temperature",
+      "emphasis": {
+        "skill.gen.paed.appearance": {
+          "expect": "Expect a dull, toxic but alert child who answers slowly, often with a coated tongue and a flushed face. A child who is playful between fever spikes points away from enteric fever toward malaria."
+        },
+        "skill.gen.paed.vitals": {
+          "expect": "Expect sustained high fever with a pulse slower than the temperature warrants: relative bradycardia is the classic enteric clue. A rapid pulse with cold hands and a narrow pressure gap instead warns of dengue shock."
+        },
+        "skill.gen.paed.pallor": {
+          "expect": "Expect mild pallor from red cell destruction in malaria and from prolonged illness in enteric fever. Severe pallor with dark urine after malaria treatment needs urgent review for haemolysis."
+        }
+      },
+      "id": "general_exam",
+      "skills": [
+        "skill.gen.paed.appearance",
+        "skill.gen.paed.vitals",
+        "skill.gen.paed.pallor",
+        "skill.gen.paed.lymph_nodes"
+      ],
+      "title": "General examination"
+    },
+    {
+      "blurb": "The abdomen, the skin and the cuff test",
+      "emphasis": {
+        "skill.exam.paed.gi.liver": {
+          "expect": "Expect a just-palpable, soft, mildly tender liver edge in enteric fever and dengue. A hard or markedly enlarged liver points elsewhere, such as chronic liver disease or kala azar."
+        },
+        "skill.exam.paed.gi.spleen": {
+          "expect": "Expect a spleen tip in the second week of enteric fever and a larger spleen with repeated malaria. Massive splenomegaly beyond 7 cm below the costal margin should raise kala azar and portal hypertension instead."
+        },
+        "skill.exam.paed.skin_lesions": {
+          "expect": "Look for faint rose spots on the trunk in the second week of enteric fever and for petechiae, purpura and a positive cuff test in dengue. The day and the type of the rash separate them: rose spots are few and truncal, petechiae are many and dependent."
+        }
+      },
+      "id": "systemic_exam",
+      "skills": [
+        "skill.exam.paed.gi.inspection",
+        "skill.exam.paed.gi.palpation_percussion",
+        "skill.exam.paed.gi.liver",
+        "skill.exam.paed.gi.spleen",
+        "skill.exam.paed.skin_lesions",
+        "skill.exam.enteric.bleeding_check"
+      ],
+      "title": "Systemic examination"
+    },
+    {
+      "blurb": "Slow pulse with coated tongue, flushed face with petechiae, chills with spleen",
+      "id": "disease_findings",
+      "skills": [
+        "skill.enteric.signs"
+      ],
+      "title": "Putting the tropical fever picture together"
+    },
+    {
+      "blurb": "Days of fever, the pattern, and the grade that decides admission",
+      "id": "summary",
+      "skills": [
+        "skill.enteric.summary"
+      ],
+      "title": "Clinical summary"
+    },
+    {
+      "blurb": "First separate the three, then look beyond them",
+      "id": "differential",
+      "skills": [
+        "skill.enteric.differential"
+      ],
+      "title": "Differential diagnosis"
+    },
+    {
+      "blurb": "Culture first, titres later, antigen early, counts serially",
+      "id": "investigations",
+      "skills": [
+        "skill.ix.enteric.workup"
+      ],
+      "title": "Investigations"
+    },
+    {
+      "blurb": "Name the illness, the stage and the severity in one line",
+      "id": "diagnosis",
+      "skills": [
+        "skill.enteric.diagnosis"
+      ],
+      "title": "Diagnosis and severity"
+    },
+    {
+      "blurb": "Antibiotics for enteric, fluids for dengue, antimalarials for malaria",
+      "id": "treatment",
+      "skills": [
+        "skill.tx.enteric"
+      ],
+      "title": "Treatment"
+    },
+    {
+      "blurb": "Present this child to your consultant",
+      "id": "case",
+      "skills": [
+        "skill.present.case",
+        "skill.present.enteric.case"
+      ],
+      "title": "Case presentation"
+    }
+  ],
+  "estMinutes": 60,
+  "fullName": "Enteric fever, dengue and malaria in children: fever in the tropics",
+  "id": "enteric-dengue-malaria",
+  "kbRef": "enteric_fever_nontyphoidal_salmonella",
+  "name": "Typhoid, dengue and malaria in children",
+  "oneLine": "A child with prolonged fever, and how the pattern, the pulse and the exposure name the illness",
+  "osce": {
+    "stations": [
+      {
+        "examinerQuestions": [
+          "Demonstrate the cuff test and state what a positive and a negative result each mean.",
+          "You feel a spleen tip with a soft liver edge. How does that change your differential?",
+          "Which single abdominal finding would make you stop and arrange an urgent surgical review?"
+        ],
+        "id": "osce.enteric.abdomen_bleed",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.paed.rapport",
+          "skill.approach.paed.consent_assent",
+          "skill.approach.paed.positioning",
+          "skill.exam.paed.gi.inspection",
+          "skill.exam.paed.gi.palpation_percussion",
+          "skill.exam.paed.gi.liver",
+          "skill.exam.paed.gi.spleen",
+          "skill.exam.enteric.bleeding_check"
+        ],
+        "task": "This 8-year-old boy has had fever for eight days with pain in the stomach. Examine his abdomen and check for bleeding manifestations, then present your findings.",
+        "title": "Examine the abdomen and check for bleeding"
+      },
+      {
+        "examinerQuestions": [
+          "State the fever pattern and which illness it favours, with reasons.",
+          "The fever broke yesterday and today the child has severe abdominal pain and vomiting. Admit or send home, and why?",
+          "Which two exposures would you ask about next, and what would each answer change?"
+        ],
+        "id": "osce.enteric.fever_history",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.paed.rapport",
+          "skill.hx.chief_complaints",
+          "skill.hx.paed.presenting_complaint",
+          "skill.hx.enteric.fever_story",
+          "skill.hx.enteric.exposure_risk"
+        ],
+        "task": "This mother reports ten days of fever in her 6-year-old daughter. Take a focused history in six minutes and be ready to name the pattern and the likely route.",
+        "title": "Take a tropical fever history"
+      }
+    ]
+  },
+  "review": {
+    "status": "ai_drafted"
+  },
+  "skills": {
+    "skill.enteric.basics": {
+      "id": "skill.enteric.basics",
+      "kind": "reasoning",
+      "probes": [
+        {
+          "a": "Enteric fever, dengue and malaria.",
+          "accept": [
+            "enteric",
+            "dengue",
+            "malaria"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "Name the three illnesses behind prolonged fever in a child in the tropics."
+        },
+        {
+          "a": "Collected water overflows drains and multiplies breeding sites for both mosquito species while contaminating drinking water, so all three routes strengthen together.",
+          "accept": [
+            "water",
+            "mosquito",
+            "contaminat",
+            "monsoon",
+            "breed"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why do all three illnesses rise during and after the monsoon?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "enteric_fever_nontyphoidal_salmonella: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Typhoid fever: epidemiology and transmission",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Enteric fever is caused by Salmonella Typhi and Paratyphi, which travel by the faecal-oral route through unsafe water and food. Dengue is caused by a virus carried by day-biting Aedes mosquitoes that breed in clean stored water inside homes. Malaria is caused by Plasmodium parasites carried by night-biting Anopheles mosquitoes.\n\nAll three rise during and after the monsoon, when water collects, drains overflow and mosquitoes multiply. Season alone never diagnoses, but a fever in October carries a different prior probability from a fever in March.",
+          "heading": "The three agents and their routes"
+        },
+        {
+          "body": "Children drink wherever they play, eat from vendors outside school, and store no immunity from past infections. Open water vessels at home, missing bed nets, and a missed typhoid conjugate vaccine each add risk, and overcrowded lanes let one contaminated source reach many children at once.\n\nThe same routes explain prevention: boiled or filtered water, handwashing with soap, covered storage, nets and drained coolers each cut a different illness. Treatment starts with naming the illness, but prevention starts with naming the route.",
+          "heading": "Why children carry the burden"
+        },
+        {
+          "heading": "The three illnesses at a glance",
+          "table": {
+            "cols": [
+              "Illness",
+              "Agent",
+              "Route into the child"
+            ],
+            "rows": [
+              [
+                "Enteric fever",
+                "Salmonella Typhi and Paratyphi",
+                "Unsafe water and food"
+              ],
+              [
+                "Dengue",
+                "Dengue virus",
+                "Day-biting Aedes mosquito"
+              ],
+              [
+                "Malaria",
+                "Plasmodium species",
+                "Night-biting Anopheles mosquito"
+              ]
+            ]
+          }
+        }
+      ],
+      "title": "Three fevers behind one complaint",
+      "why": "A child with fever in India in the months after the rains could have any of three common illnesses, and each demands different tests and different treatment. Naming all three at the start stops the commonest error: treating every prolonged fever as enteric fever, every fever with low platelets as dengue, and every fever with chills as malaria."
+    },
+    "skill.enteric.fever_course": {
+      "id": "skill.enteric.fever_course",
+      "kind": "reasoning",
+      "probes": [
+        {
+          "a": "A stepwise climb settling into a remittent fever that never touches normal, which favours enteric fever.",
+          "accept": [
+            "stepwise",
+            "remittent",
+            "never touches normal",
+            "enteric"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Fever climbs each evening for a week and then stays high without ever touching normal. What pattern is this?"
+        },
+        {
+          "a": "A saddleback or biphasic course, with the fever breaking and then returning with a rash, which favours dengue.",
+          "accept": [
+            "saddleback",
+            "biphasic",
+            "breaking",
+            "returning",
+            "dengue"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Fever settles on day four and returns on day six with a rash. What course is this, and what does it favour?"
+        },
+        {
+          "a": "Because capillary leakage and shock peak around defervescence, so a child who looks better but develops abdominal pain, vomiting or lethargy as the fever settles is entering the critical phase.",
+          "accept": [
+            "leakage",
+            "shock",
+            "defervescence",
+            "critical phase",
+            "warning"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why is the day the dengue fever settles more dangerous than the day it peaks?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "enteric_fever_nontyphoidal_salmonella: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "dengue_hemorrhagic_fever: redFlags",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Dengue fever: clinical course",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Enteric fever climbs in a stepwise fashion over the first week, each evening higher than the last, then settles into a high remittent fever that never touches normal. Headache and abdominal pain ride with the climb, and constipation is more typical than diarrhoea in the early days.\n\nBecause paracetamol lowers any fever for a few hours, ask about the underlying pattern between doses, not the reading after a tablet. A remittent illness looks intermittent if you only measure after antipyretics.",
+          "heading": "Step-ladder and remittent: enteric"
+        },
+        {
+          "body": "Dengue fever breaks after a few days and then returns with a rash, the biphasic or saddleback course. The break feels like recovery, which is exactly why it misleads: the critical phase of plasma leakage begins around the time the fever settles, not while it is highest.\n\nA child who looks better on day five with new abdominal pain, vomiting or lethargy is more worrying than a child still febrile on day three. Defervescence with warning signs earns admission, never discharge.",
+          "heading": "Saddleback: dengue"
+        },
+        {
+          "body": "Malaria spikes in paroxysms: shaking chills, then high fever, then drenching sweats that leave the child exhausted but briefly afebrile. The spikes repeat on alternate days in tertian illness and every third day in quartan illness, though young children often show a less regular daily pattern.\n\nBetween paroxysms the child may look surprisingly well, which tempts families to wait. Ask what the worst hour of the day looks like, not how the child looks in front of you.",
+          "heading": "Paroxysms with chills and sweats: malaria"
+        }
+      ],
+      "title": "Tempo and pattern: step-ladder, saddleback and paroxysm",
+      "why": "The shape of a fever over days is the cheapest test in medicine: it costs nothing, needs no laboratory, and often separates these three illnesses before blood is drawn. A student who never asks whether the fever touches normal has thrown away the single most discriminating fact."
+    },
+    "skill.enteric.signs": {
+      "id": "skill.enteric.signs",
+      "kind": "reasoning",
+      "probes": [
+        {
+          "a": "A pulse slower than the fever warrants, called relative bradycardia, in a child with sustained fever, coated tongue and abdominal pain.",
+          "accept": [
+            "relative bradycardia",
+            "slow pulse",
+            "coated tongue",
+            "abdominal pain"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What bedside pair points most directly to enteric fever?"
+        },
+        {
+          "a": "Severe abdominal pain, persistent vomiting, mucosal bleeding, lethargy, fluid accumulation, and a rising haematocrit with falling platelets.",
+          "accept": [
+            "abdominal pain",
+            "vomiting",
+            "bleeding",
+            "lethargy",
+            "haematocrit",
+            "platelets"
+          ],
+          "level": 2,
+          "minMatch": 3,
+          "q": "Name the warning signs that mark the turn toward severe dengue."
+        },
+        {
+          "a": "Drowsiness or fits, breathlessness, scanty dark urine, deep jaundice or spontaneous bleeding, which need emergency care and parenteral treatment.",
+          "accept": [
+            "drowsiness",
+            "fits",
+            "breathlessness",
+            "dark urine",
+            "jaundice",
+            "bleeding"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Which features mark severe malaria at the bedside?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "enteric_fever_nontyphoidal_salmonella: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "dengue_hemorrhagic_fever: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Malaria: clinical features in children",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Expect a dull but alert child with sustained fever, headache and abdominal pain, often with constipation early on. The tongue is coated, the abdomen is distended and doughy with diffuse tenderness, and faint rose spots may appear on the trunk in the second week.\n\nCheck the pulse against the temperature: a pulse slower than the fever warrants is the classic relative bradycardia of enteric fever. The spleen becomes palpable in the second week, and bronchitic chest sounds may mislead the hurried examiner toward pneumonia.",
+          "heading": "Enteric: slow pulse, coated tongue, tender abdomen"
+        },
+        {
+          "body": "Expect abrupt high fever with severe headache behind the eyes, muscle and joint pain, nausea and a flushed face. A fleeting rash may come and go, and petechiae, gum bleeding or a positive cuff test show the capillaries leaking.\n\nWatch for the warning signs that mark the turn toward severe illness: severe abdominal pain, persistent vomiting, mucosal bleeding, lethargy, fluid in the abdomen or chest, and a rising haematocrit with falling platelets. These cluster around defervescence, not at the peak of fever.",
+          "heading": "Dengue: flushed face, aching body, leaking capillaries"
+        },
+        {
+          "body": "Expect periodic spikes with shaking chills and sweats, headache and vomiting, with pallor from destroyed red cells and a spleen that enlarges with repeated attacks. Between spikes the child may look deceptively well.\n\nSevere malaria declares itself through the brain, the lungs, the kidneys or the blood: drowsiness or fits, breathlessness, scanty dark urine, deep jaundice or bleeding. Any of these moves the child to emergency care and parenteral treatment without waiting for a count.",
+          "heading": "Malaria: paroxysm, pallor, spleen"
+        }
+      ],
+      "title": "The three bedside pictures",
+      "why": "Tests confirm, but the bedside already sorts: a coated tongue with a slow pulse and a palpable spleen, a flushed child with pain behind the eyes and petechiae, and a pale child with chills and a large spleen each read differently in the same ten minutes. The examination decides which test to order first."
+    },
+    "skill.enteric.summary": {
+      "id": "skill.enteric.summary",
+      "kind": "reasoning",
+      "probes": [
+        {
+          "a": "The severity grade, because it decides admission, fluids, antibiotics and the level of monitoring in the next hour.",
+          "accept": [
+            "severity",
+            "admission",
+            "plan",
+            "grade"
+          ],
+          "level": 2,
+          "minMatch": 1,
+          "q": "What element belongs in a tropical fever summary that a plain fever history does not carry?"
+        },
+        {
+          "a": "It separates a remittent illness needing antibiotics from an intermittent one needing a smear and a breaking one needing fluid watch, before any test result.",
+          "accept": [
+            "remittent",
+            "intermittent",
+            "separates",
+            "pattern"
+          ],
+          "level": 3,
+          "minMatch": 1,
+          "q": "Why does the tempo earn a full sentence in this summary?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "patient_tempo",
+          "text": "States the child with age, days of fever and the pattern"
+        },
+        {
+          "id": "syndrome",
+          "text": "States the syndrome with the features separating the three fevers"
+        },
+        {
+          "id": "severity",
+          "text": "Includes a severity grade and the plan it drives"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "enteric_fever_nontyphoidal_salmonella: additionalDifferentials",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Clinical reasoning and case summaries",
+          "source": "Macleod's Clinical Examination"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Name the child with age and the informant, then the tempo in days with the pattern: stepwise and remittent, breaking with a rash, or spiking with chills and sweats. The pattern sentence alone should let the listener guess the illness.\n\nAdd the syndrome in abstract terms with the separators: pulse against temperature, abdominal and skin findings, and the exposure that fits. One sentence carries the positives, one carries the relevant negatives.",
+          "heading": "The fixed order"
+        },
+        {
+          "body": "This 8-year-old boy from an urban settlement presents with eight days of stepwise fever that never touches normal, with headache, abdominal pain and constipation. Examination shows a temperature of 39 C with a pulse of 92, a coated tongue, a tender abdomen with a palpable spleen tip, and faint rose spots on the trunk.\n\nThis is enteric fever, uncomplicated, with dengue and malaria kept as differentials pending the smear, the NS1 test and the paired titres. The plan is blood culture before antibiotics, admission for fluids and monitoring, and review for perforation or shock.",
+          "heading": "A worked example"
+        }
+      ],
+      "title": "The clinical summary",
+      "why": "The summary for a tropical fever has a different shape from a plain fever note: the pattern, the pulse-temperature relationship and the severity grade belong in the same breath as the syndrome, because they decide admission, fluids and antibiotics in the next hour."
+    },
+    "skill.enteric.differential": {
+      "id": "skill.enteric.differential",
+      "kind": "reasoning",
+      "probes": [
+        {
+          "a": "Enteric fever with sustained stepwise fever, dengue with saddleback fever and warning signs, and malaria with chills and sweats, each with its exposure and bedside picture.",
+          "accept": [
+            "enteric",
+            "dengue",
+            "malaria",
+            "pattern",
+            "exposure"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Name three differentials for a child with ten days of fever, and one separator for each."
+        },
+        {
+          "a": "Reconsider tuberculosis and malignancy with weight loss and night sweats, urinary infection with burning urination, and scrub typhus with an eschar, rather than repeating the same three tests.",
+          "accept": [
+            "tuberculosis",
+            "malignancy",
+            "urinary",
+            "eschar",
+            "scrub"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Fever persists after two weeks of treatment for enteric fever. What do you reconsider?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "three_first",
+          "text": "Separates enteric, dengue and malaria with a separator for each"
+        },
+        {
+          "id": "beyond",
+          "text": "Looks beyond the three when the course does not fit"
+        },
+        {
+          "id": "india",
+          "text": "Actively considers tuberculosis and urinary infection in an Indian child"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "enteric_fever_nontyphoidal_salmonella: additionalDifferentials",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Differential diagnosis of prolonged fever",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "heading": "First separate the three from each other",
+          "table": {
+            "cols": [
+              "Instead of",
+              "Favour",
+              "Against"
+            ],
+            "rows": [
+              [
+                "Enteric fever",
+                "Stepwise remittent fever with abdominal pain and slow pulse",
+                "Breaking fever with rash, or chills with sweats"
+              ],
+              [
+                "Dengue",
+                "Saddleback fever with eye pain, petechiae and warning signs",
+                "Sustained fever with coated tongue and spleen tip"
+              ],
+              [
+                "Malaria",
+                "Paroxysms with chills and sweats, pallor with spleen",
+                "Sustained fever that never touches normal"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Then look beyond the three",
+          "points": [
+            "Urinary tract infection: favoured by burning urination, frequency and loin pain, and confirmed on urine culture. A febrile child without a focus needs a urine sample, not just a blood culture.",
+            "Scrub typhus: favoured by an eschar at a bite site with tender regional nodes after scrub or grass exposure. Look for the eschar in the axilla, groin and behind the ears, where examinations skip.",
+            "Leptospirosis: favoured by wading through flood water with calf pain and red eyes. The monsoon link is shared with dengue, so exposure decides.",
+            "Chikungunya: favoured by fever with severe joint pain that lingers for weeks after the fever settles. The joints, not the rash, carry this diagnosis.",
+            "Community acquired pneumonia: favoured by cough with fast breathing and localised chest signs, which enteric fever mimics only through bronchitic sounds.",
+            "Bacterial meningitis: favoured by neck stiffness, photophobia and altered sensorium. Exclude it by examination in every febrile child before calling the fever enteric.",
+            "Sepsis: favoured by cold peripheries, poor perfusion and rapid deterioration without a localising pattern. This is a resuscitation diagnosis, not a workup diagnosis.",
+            "Kala azar: favoured by prolonged fever with massive splenomegaly and pancytopenia in an endemic belt. A spleen far beyond the enteric tip changes the illness entirely."
+          ]
+        }
+      ],
+      "title": "Differential diagnosis",
+      "why": "Most prolonged fevers in children are exactly what they look like, but the ones that are not are dangerous to miss: tuberculosis, a urinary infection, scrub typhus and sepsis each need a different test and a different clock. The differential does not stop once the first antibiotic is started."
+    },
+    "skill.ix.enteric.workup": {
+      "id": "skill.ix.enteric.workup",
+      "kind": "investigation",
+      "probes": [
+        {
+          "a": "Blood culture in the first week, drawn before the first antibiotic dose.",
+          "accept": [
+            "blood culture",
+            "first week",
+            "before antibiotics",
+            "before the first dose"
+          ],
+          "level": 1,
+          "minMatch": 1,
+          "q": "What confirms enteric fever, and when is it drawn?"
+        },
+        {
+          "a": "NS1 antigen in the first days of illness, and serial full blood counts tracking a rising haematocrit with falling platelets.",
+          "accept": [
+            "NS1",
+            "serial",
+            "haematocrit",
+            "platelets"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Which two dengue tests do you order, and what trend alarms you?"
+        },
+        {
+          "a": "Draw cultures quickly but give the first dose without delay, because bacteraemia kills faster than a laboratory reports.",
+          "accept": [
+            "without delay",
+            "first dose",
+            "quickly",
+            "do not delay"
+          ],
+          "level": 3,
+          "minMatch": 1,
+          "q": "A child looks septic with suspected enteric fever and cultures are not yet drawn. What do you do?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "enteric_fever_nontyphoidal_salmonella: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "dengue_hemorrhagic_fever: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Malaria: laboratory diagnosis",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Blood culture in the first week is the confirmatory test, drawn before the first antibiotic dose, with bone marrow culture when the child is already treated. A paired Widal test showing a rising titre in the second week supports the diagnosis but never replaces culture, and stool and urine cultures add yield in carriers.\n\nSend the culture first and start treatment on clinical grounds where the child looks ill. A negative culture after antibiotics proves nothing except that antibiotics were given.",
+          "heading": "Enteric: culture first, titres later"
+        },
+        {
+          "body": "NS1 antigen detects dengue in the first days of illness, with IgM and IgG serology or PCR as the illness evolves. Serial full blood counts matter more than any single value: a rising haematocrit with falling platelets signals intensifying plasma leak.\n\nAdd a coagulation profile and liver enzymes to grade severity, and use ultrasound to find leakage the hands miss: ascites, pleural effusion and gallbladder wall oedema. Group and cross-match blood where bleeding threatens.",
+          "heading": "Dengue: antigen early, counts serially"
+        },
+        {
+          "body": "Thick and thin smears with rapid antigen tests name the species, and a parasite count grades the load. Check glucose-6-phosphate dehydrogenase status before primaquine, since the radical cure course can haemolyse a deficient child.\n\nTrack haemolysis and renal function where the illness is severe, and examine the retina where cerebral malaria is suspected. A negative smear in a convincing paroxysmal illness earns a repeat smear, not reassurance.",
+          "heading": "Malaria: smear, species and G6PD"
+        },
+        {
+          "body": "In a child who looks septic, draw cultures quickly and give the first antimicrobial dose without waiting for any result. No film, titre or count is worth delaying treatment for, and every hour of delay is counted against the child, not the laboratory.\n\nRepeat the counts, not the cultures, to follow the illness: platelets and haematocrit in dengue, parasite clearance in malaria, and defervescence with falling titres in enteric fever.",
+          "heading": "Never let a test delay treatment"
+        }
+      ],
+      "title": "Confirming and grading the three fevers",
+      "why": "Each illness has a test that confirms it and a trend that grades it, and confusing the two wastes both: a single Widal without a rise, a single platelet count without a haematocrit, and a single smear in a treated child each mislead. Knowing which test answers which question is what makes the workup a plan rather than a panel."
+    },
+    "skill.enteric.diagnosis": {
+      "id": "skill.enteric.diagnosis",
+      "kind": "reasoning",
+      "probes": [
+        {
+          "a": "The illness, the stage or phase, and the severity grade with the plan it drives.",
+          "accept": [
+            "illness",
+            "stage",
+            "severity",
+            "plan"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What three parts does a complete tropical fever diagnosis carry?"
+        },
+        {
+          "a": "Severe abdominal pain with guarding or rigidity, bleeding, shock, or drowsiness, which need surgical review and intensive care rather than ward treatment.",
+          "accept": [
+            "guarding",
+            "rigidity",
+            "bleeding",
+            "shock",
+            "surgical",
+            "intensive"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Which findings move a child with enteric fever from the ward to surgical review or intensive care?"
+        },
+        {
+          "a": "Dengue with warning signs, severe malaria of any feature, and complicated enteric fever with perforation or encephalopathy, all referred the same day to a centre with blood, fluids and intensive monitoring.",
+          "accept": [
+            "warning signs",
+            "severe malaria",
+            "perforation",
+            "refer",
+            "same day"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Which children are referred the same day, and to what level of care?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "names",
+          "text": "Names the illness with the stage or phase"
+        },
+        {
+          "id": "grades",
+          "text": "States the severity grade explicitly"
+        },
+        {
+          "id": "refers",
+          "text": "Links the grade to admission, referral or intensive care"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "dengue_hemorrhagic_fever: redFlags",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "malaria_severe_long_case: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Severe dengue and severe malaria: recognition",
+          "source": "WHO guidelines for dengue and malaria"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "A complete statement names the illness, the stage and the severity in one line. Enteric fever in the second week without complications reads as uncomplicated enteric fever; dengue with abdominal pain and vomiting reads as dengue with warning signs; malaria with drowsiness reads as severe malaria whatever the count.\n\nAdd the basis in the same breath: the culture, the NS1 window with the platelet trend, or the species on smear. A diagnosis without its evidence cannot be checked, and one without its grade cannot be acted on.",
+          "heading": "Name the illness, the stage and the severity"
+        },
+        {
+          "body": "Uncomplicated enteric fever stays on the ward with antibiotics and monitoring for perforation: worsening pain with guarding or rigidity, distension with absent bowel sounds, or blood in the stool. Encephalopathy with confusion or fits needs intensive care.\n\nDengue with any warning sign is admitted for serial counts and careful fluids, and shock with cold peripheries and a narrow pressure gap is resuscitated as an emergency. Severe malaria is admitted for parenteral treatment with monitoring of consciousness, urine, glucose and breathing.",
+          "heading": "Severity grades that change the plan"
+        },
+        {
+          "body": "Refer the same day to a centre with blood, fluids and intensive monitoring: dengue with warning signs or shock, severe malaria of any feature, and complicated enteric fever with suspected perforation or encephalopathy. A primary centre stabilises with fluids and the first antimicrobial dose, then refers without waiting for counts.\n\nWrite the referral note with the days of fever, the pattern, the key findings, the tests already sent and the treatment already given. A referred child without this note is worked up from zero, and the delay belongs to the sender.",
+          "heading": "Referral thresholds for the primary centre"
+        }
+      ],
+      "title": "Diagnosis and severity",
+      "why": "A diagnosis of fever names nothing until it carries the stage and the grade: uncomplicated enteric fever stays on the ward while perforation goes to theatre, and dengue without warning signs goes home while dengue with them is admitted. The grade, not the name, decides what happens in the next hour."
+    },
+    "skill.tx.enteric": {
+      "dosingNote": "This module teaches management at the level of drug CLASS and principle. Specific agents, routes and durations must be taken from your current national or institutional guideline and local resistance data at the time of prescribing. CliniX does not prescribe.",
+      "id": "skill.tx.enteric",
+      "kind": "treatment",
+      "probes": [
+        {
+          "a": "Ceftriaxone first, switching to oral azithromycin when improving, for the full course, because fluoroquinolone resistance is widespread.",
+          "accept": [
+            "ceftriaxone",
+            "azithromycin",
+            "full course",
+            "resistance"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What is the first-line antibiotic approach to enteric fever in India?"
+        },
+        {
+          "a": "Because dengue is viral, antibiotics change nothing, while NSAIDs and aspirin worsen bleeding and gastric injury.",
+          "accept": [
+            "viral",
+            "antibiotics",
+            "NSAIDs",
+            "aspirin",
+            "bleeding"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why are antibiotics withheld and NSAIDs avoided in dengue?"
+        },
+        {
+          "a": "An artemisinin combination course for uncomplicated falciparum malaria, intravenous artesunate until oral treatment is possible for severe malaria, and primaquine with a G6PD check for radical cure of vivax.",
+          "accept": [
+            "artemisinin",
+            "artesunate",
+            "primaquine",
+            "G6PD",
+            "severe"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "How does antimalarial treatment differ between uncomplicated and severe malaria?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "ENTERIC_FEVER: recommendations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "DENGUE: stewardship framework",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "MALARIA: recommendations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Fever in children: management principles",
+          "source": "Indian Academy of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Ceftriaxone given intravenously is first-line where multidrug and fluoroquinolone resistance is widespread, with oral azithromycin for uncomplicated illness and for step-down as the child improves. Treat for the full course, commonly ten to fourteen days for ceftriaxone and seven days for azithromycin, to cut relapse and chronic carriage.\n\nDo not use a fluoroquinolone empirically where local data show resistance, which covers most of South Asia. Where culture later shows a susceptible organism, step down to the narrowest oral agent that the susceptibility allows.",
+          "heading": "Enteric: antibiotics by resistance, full course always"
+        },
+        {
+          "body": "Dengue is viral, so antibiotics change nothing and only add harm. Control fever and pain with paracetamol, and avoid non-steroidal anti-inflammatory drugs and aspirin, which worsen bleeding and gastric injury.\n\nManage fluids meticulously with isotonic crystalloids guided by haematocrit, vitals and urine output, avoiding both too little and too much. Admit on any warning sign, and reserve blood products for significant bleeding: platelet transfusion for the count alone is not indicated.",
+          "heading": "Dengue: fluids, not antibiotics"
+        },
+        {
+          "body": "Uncomplicated falciparum malaria is treated with a three-day artemisinin-based combination course, with a single low dose of primaquine to block transmission. Severe malaria is treated with intravenous artesunate until the child can swallow, then completed with a full oral combination course.\n\nVivax malaria needs a fourteen-day primaquine course for radical cure of the liver stage, after checking glucose-6-phosphate dehydrogenase status. Use chloroquine only where the national programme still finds the species sensitive.",
+          "heading": "Malaria: combination by species, artesunate for severe"
+        },
+        {
+          "body": "Support every child with fluids, weight-based antipyretics, and strict urine output monitoring, and watch for the complications that kill: intestinal perforation in enteric fever, shock in dengue, and fits with falling glucose in malaria. Counsel the family on the expected days of fever so they return on time rather than in panic.\n\nBefore discharge, fix the route that brought the illness: boiled water and handwashing, drained coolers and nets, and the typhoid conjugate vaccine where missed. Notify the local health authority for clusters, since one lane with five fevers is an outbreak wearing a case sheet.",
+          "heading": "Supportive care and the home plan"
+        }
+      ],
+      "title": "Managing the three fevers",
+      "why": "Each illness is treated by a different logic, and swapping them harms: antibiotics cannot touch a virus, fluids given blindly drown a leaking circulation, and an antimalarial stopped early lets vivax return from the liver. The plan follows the name, which is why the diagnosis must come first."
+    }
+  },
+  "subtitle": "Fever in the tropics",
+  "system": "paediatrics",
+  "version": 1,
+  "viva": {
+    "skills": [
+      "skill.enteric.basics",
+      "skill.enteric.fever_course",
+      "skill.enteric.signs",
+      "skill.enteric.differential",
+      "skill.ix.enteric.workup",
+      "skill.enteric.diagnosis",
+      "skill.tx.enteric"
+    ]
+  }
+}

@@ -1,0 +1,1316 @@
+{
+  "_comment": "Burns pathway. Same architecture as pneumonia and thyroid-swelling: almost every finding is an emphasis overlay on a shared core/surgery skill. Burns' own contribution is depth as the grafting decision, extent as the resuscitation decision, and airway plus referral as the safety anchors.",
+  "id": "burns",
+  "name": "Burns",
+  "fullName": "Thermal burns: assessment and fluid resuscitation",
+  "subtitle": "Assessment and fluid resuscitation",
+  "system": "surgery",
+  "kbRef": "burn_wound_management",
+  "oneLine": "Heat injury of skin and airway, and the resuscitation that starts from the moment of the burn",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What a burn injury is, and what depth means for healing",
+      "skills": [
+        "skill.reasoning.burns.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Analgesia and consent before a single touch of the wound",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age, kitchen and work set the risk before the burn is described",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In burns, age sits at both ends of risk: small children who reach for hot vessels and cannot escape, and the elderly with thin skin and slow healing. Women cooking over an open flame or a kerosene stove, factory workers near heat or chemicals, and crowded homes with open chulhas all carry higher risk, and the cooking method belongs in the particulars, not later."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Agent, setting and hours since the burn",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.surg.pain",
+        "skill.hx.burns.story"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A burns history reads in hours, not days: a flame burn three hours ago, cooled or not, with pain and blisters evolving since. Fix the exact time of injury first, because every resuscitation formula runs from that moment, not from arrival."
+        },
+        "skill.hx.surg.pain": {
+          "expect": "Expect severe background pain with dressing changes worse still. Pain that is disproportionately mild or absent in a deep-looking burn points to full thickness loss of sensation, not to a minor injury."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The healing background: sugar, fits, smoke, tetanus and home",
+      "skills": [
+        "skill.hx.burns.risk"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "The living patient first: airway, circulation and urine",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.surg.surgical_shock"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for a patient in pain and anxious, possibly shivering with heat loss from exposed wounds. Soot on the face, singed nasal hair and a hoarse voice are airway signs, not dirt, and stridor means the airway is closing."
+        },
+        "skill.gen.vitals": {
+          "expect": "Expect tachycardia first; a falling blood pressure with cold peripheries and shrinking urine means burn shock from capillary leak, not bleeding. Tachypnoea with stridor or falling saturation points to the airway, and a low temperature warns of hypothermia from exposure and cooling."
+        },
+        "skill.gen.surg.surgical_shock": {
+          "expect": "Burn shock is hypovolaemia without blood loss: plasma leaks into the burn and the interstitium for hours after injury. Urine output is the bedside gauge of resuscitation, and a dry catheter bag with rising pulse is under-resuscitation until proved otherwise."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Burn wound examination",
+      "blurb": "Depth, extent and what the burn may be strangling",
+      "skills": [
+        "skill.exam.burns.wound"
+      ],
+      "emphasis": {
+        "skill.exam.burns.wound": {
+          "expect": "Expect mixed depth in one wound: a painful blanching edge around a pale insensate centre. Confirm the palm estimate on a chart, count only partial and full thickness, and never finish without checking pulses beyond any circumferential burn and a glance at the airway."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the burn picture together",
+      "blurb": "Depth plus extent plus airway plus circulation",
+      "skills": [
+        "skill.reasoning.burns.picture"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Agent, depth, extent and the living patient in one minute",
+      "skills": [
+        "skill.present.burns.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "What looks like a burn but is not one",
+      "skills": [
+        "skill.reasoning.burns.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Charting the burn and catching poisoning and shock",
+      "skills": [
+        "skill.investigation.burns.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and severity",
+      "blurb": "Naming the burn and deciding where it is managed",
+      "skills": [
+        "skill.reasoning.burns.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Airway, fluids, wound, grafting and referral",
+      "skills": [
+        "skill.treatment.burns.management"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Presenting the burns case",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.burns.wound_exam",
+        "title": "Examine the burn wound and estimate its extent",
+        "task": "This 28-year-old woman sustained a flame burn of her right arm and chest three hours ago. Assess the wound, state its depth and extent, and say what threatens her most.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.gen.appearance",
+          "skill.gen.vitals",
+          "skill.exam.burns.wound",
+          "skill.annex.burns.extent"
+        ],
+        "examinerQuestions": [
+          "How did you separate superficial partial from full thickness areas, and which test did you trust most?",
+          "Why did you leave the reddened erythema out of your resuscitation area?",
+          "What did you check beyond the wound itself, and what would make you release the burn urgently?"
+        ]
+      },
+      {
+        "id": "osce.burns.history_resus",
+        "title": "Take a burns history and start resuscitation",
+        "task": "This 40-year-old man was pulled from a smoky room an hour ago with burns of both legs. Take a focused history in six minutes and state your resuscitation plan.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.surg.pain",
+          "skill.hx.burns.story",
+          "skill.hx.burns.risk"
+        ],
+        "examinerQuestions": [
+          "From what time do you calculate his fluids, and what weight and area formula do you start from?",
+          "What urine output are you aiming for, and what do you do if the bag stays dry?",
+          "Does he need a burns centre, and what goes on the referral note?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.reasoning.burns.basics",
+      "skill.exam.burns.wound",
+      "skill.annex.burns.extent",
+      "skill.reasoning.burns.picture",
+      "skill.reasoning.burns.differential",
+      "skill.investigation.burns.workup",
+      "skill.reasoning.burns.diagnosis",
+      "skill.treatment.burns.management"
+    ]
+  },
+  "skills": {
+    "skill.reasoning.burns.basics": {
+      "id": "skill.reasoning.burns.basics",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "What a burn injury is",
+      "oneLine": "Heat kills skin in zones; depth decides whether it heals or needs grafting",
+      "why": "A burn keeps injuring tissue after the heat is gone, and depth is the one fact that predicts healing. Superficial loss regrows from surviving epithelium while full thickness loss cannot, so reading depth early is what separates a dressing case from a grafting case.",
+      "teach": [
+        {
+          "heading": "What heat does to skin",
+          "body": "Injury depends on temperature and contact time: brief heat reddens, longer heat blisters, and sustained heat kills the full thickness. Around the dead centre lie three zones: a central zone of coagulation that is irreversibly lost, a surrounding zone of stasis with threatened perfusion that can be salvaged or can deepen, and an outer zone of hyperaemia that recovers.\n\nLarge burns add a body-wide response. Mediators released from the wound open capillaries everywhere, plasma leaks into the burn and the tissues around it, and the circulating volume falls even though no blood was lost. This is burn shock, and it is why fluids start from the hour of injury."
+        },
+        {
+          "heading": "Four depths, two destinies",
+          "table": {
+            "cols": [
+              "Depth",
+              "What it is",
+              "Healing"
+            ],
+            "rows": [
+              [
+                "Superficial (epidermal)",
+                "Red, painful, brisk blanching, intact surface",
+                "Heals within days, no scar, no grafting"
+              ],
+              [
+                "Superficial partial thickness",
+                "Pink and blistered, very painful, blanches",
+                "Heals in about two weeks with clean dressings"
+              ],
+              [
+                "Deep partial thickness",
+                "Blotchy red and white, dull feeling, slow blanch",
+                "Slow healing with scar; often needs grafting"
+              ],
+              [
+                "Full thickness",
+                "White, brown or charred, leathery, insensate",
+                "Cannot regrow; needs excision and grafting"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What decides the outcome",
+          "points": [
+            "Extent of partial and full thickness loss: the larger the area, the greater the fluid loss and danger.",
+            "Depth: superficial loss heals while deep and full thickness wounds need surgery.",
+            "Age at the extremes, inhalation injury, and comorbidity such as diabetes.",
+            "Delay in cooling, fluids and referral, and infection once the skin barrier is gone."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the three zones around the dead centre of a burn.",
+          "a": "A central zone of coagulation that is dead, a surrounding zone of stasis that may survive or deepen, and an outer zone of hyperaemia that recovers.",
+          "accept": [
+            "coagulation",
+            "stasis",
+            "hyperaemia"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does the zone of stasis deserve active protection?",
+          "a": "Because its perfusion is threatened but not lost, so cooling, adequate fluids and avoiding infection can keep it alive while neglect lets it convert to full thickness.",
+          "accept": [
+            "perfusion",
+            "fluids",
+            "convert"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does depth alone predict whether grafting is needed?",
+          "a": "Because superficial loss regrows from surviving epithelium while full thickness loss has no epithelial reserve left, so only excision and grafting can close it.",
+          "accept": [
+            "epithelium",
+            "reserve",
+            "grafting"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "burn_wound_management: pathophysiology"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Burns: classification of burn depth"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.burns.picture": {
+      "id": "skill.reasoning.burns.picture",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "The burn picture: depth, extent, airway and circulation",
+      "oneLine": "One wound, four questions: how deep, how much, can they breathe, are they perfused",
+      "why": "Students describe the wound and stop, while the patient dies of the airway or of shock. Depth decides grafting and extent decides fluids, but a hoarse voice or a dry catheter bag outranks both, because either one kills first.",
+      "pitfalls": [
+        "Describing the wound in detail while the airway stridor and falling urine go unrecorded.",
+        "Adding erythema to the burn percent and then defending the over-resuscitation.",
+        "Calling a painless white wound minor when insensibility marks full thickness."
+      ],
+      "teach": [
+        {
+          "heading": "Depth and extent together",
+          "body": "Read depth from blanching and feeling: brisk blanching with sharp pain is superficial, sluggish blanching with dull feeling is deep partial, and no blanching with no feeling is full thickness. Mixed depth in one wound is the rule, so map each region separately rather than averaging.\n\nMeasure extent on a chart with the palm as a check, counting only partial and full thickness. Then lift your eyes from the wound: soot, singed hair, a changed voice or stridor flag the airway, while a rising pulse with falling urine flags shock."
+        },
+        {
+          "heading": "Five checks that change the plan",
+          "table": {
+            "cols": [
+              "Check",
+              "Finding",
+              "Action"
+            ],
+            "rows": [
+              [
+                "Airway signs",
+                "Soot, singed hair, hoarseness, stridor",
+                "Secure the airway early before swelling closes it"
+              ],
+              [
+                "Shock signs",
+                "Rising pulse, cold hands, dry catheter bag",
+                "Resuscitate with crystalloid titrated to urine"
+              ],
+              [
+                "Circumferential burn",
+                "Weak pulses, tight chest, numb fingers",
+                "Release with escharotomy, not more fluid"
+              ],
+              [
+                "Carbon monoxide risk",
+                "Enclosed fire, confusion, cherry colour",
+                "High-flow oxygen and blood gas assessment"
+              ],
+              [
+                "Wound depth",
+                "Deep dermal or full thickness areas",
+                "Plan early excision and grafting"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "One sentence that holds the case",
+          "points": [
+            "Agent, hours since injury, and setting: flame in open air versus smoke in a closed room.",
+            "Depth in plain words and extent as a charted percent.",
+            "Airway stated as clear or threatened, circulation as perfused or shocked.",
+            "Urine so far, pain control, tetanus status and the referral decision."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which four questions must the burn picture answer before any plan?",
+          "a": "How deep the wound is, how much surface is burned, whether the airway is threatened, and whether perfusion and urine output are holding.",
+          "accept": [
+            "deep",
+            "surface",
+            "airway",
+            "perfusion"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does a dry catheter bag outrank the wound description?",
+          "a": "Because falling urine output means shock and dying kidneys, which kill before any wound decision matters.",
+          "accept": [
+            "urine",
+            "shock",
+            "kidneys"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A white painless patch sits inside a painful blistered burn. How do you read it?",
+          "a": "As full thickness loss within a partial thickness wound: insensibility marks dead nerves, and that patch needs excision and grafting while the rest may heal.",
+          "accept": [
+            "insensibility",
+            "nerves",
+            "grafting"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "burn_wound_management: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Burns: assessment of depth and extent"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.burns.extent": {
+      "id": "skill.annex.burns.extent",
+      "kind": "annexure",
+      "system": "surgery",
+      "title": "Estimating burn extent: rule of nines, charts and the palm",
+      "oneLine": "Nines for adults, Lund-Browder for children, the palm for small burns",
+      "why": "Fluids, referral and prognosis all scale with the percent burned, and a guessed percent mistreats the patient for days. A charted percent that counts only true burn depth is the only number resuscitation may be built on.",
+      "teach": [
+        {
+          "heading": "Rule of nines in adults",
+          "table": {
+            "cols": [
+              "Region",
+              "Adult share"
+            ],
+            "rows": [
+              [
+                "Head and neck",
+                "Nine percent"
+              ],
+              [
+                "Each upper limb",
+                "Nine percent"
+              ],
+              [
+                "Front of trunk",
+                "Eighteen percent"
+              ],
+              [
+                "Back of trunk",
+                "Eighteen percent"
+              ],
+              [
+                "Front of each lower limb",
+                "Nine percent"
+              ],
+              [
+                "Back of each lower limb",
+                "Nine percent"
+              ],
+              [
+                "Perineum",
+                "One percent"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Children, small burns and what counts",
+          "body": "Children carry more surface on the head and less on the legs, so the Lund-Browder chart adjusts each region by age and is the standard for accurate charting in the young.\n\nFor scattered small burns the open palm of the patient, fingers closed, stands for about one percent of body surface. Count only partial and full thickness areas: the painful red erythema around the burn heals on its own and takes no fluid."
+        },
+        {
+          "heading": "Errors that mistreat",
+          "points": [
+            "Counting erythema as burn area, which overestimates and over-resuscitates.",
+            "Guessing the percent from memory instead of shading a chart at the bedside.",
+            "Charting once and never rechecking, while the zone of stasis declares itself over hours."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What share does each upper limb carry in the adult rule of nines?",
+          "a": "Nine percent for each upper limb, eighteen for the front of the trunk, and one percent for the perineum.",
+          "accept": [
+            "nine",
+            "eighteen",
+            "perineum"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why is the Lund-Browder chart preferred in children?",
+          "a": "Because a child carries proportionally more surface on the head and less on the legs, which the chart adjusts by age.",
+          "accept": [
+            "head",
+            "legs",
+            "age"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A shaded chart includes a wide red painful margin around blistered skin. What is wrong?",
+          "a": "Erythema was counted as burn area, which overestimates the percent and leads to over-resuscitation with oedema.",
+          "accept": [
+            "erythema",
+            "overestimates",
+            "over-resuscitation"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "burn_wound_management: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Burns: estimating burn size"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.burns.summary": {
+      "id": "skill.reasoning.burns.summary",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "The clinical summary",
+      "oneLine": "Agent, depth, extent and the living patient in one minute",
+      "why": "A burns summary that lists only the wound leaves the receiver guessing about fluids, referral and theatre. Agent with hours since injury, depth with extent, and the airway, circulation, urine and tetanus state all belong in the same sentence, because the plan follows from all of them at once.",
+      "teach": [
+        {
+          "heading": "The shape of the summary",
+          "body": "Open with the patient and the event: age, setting, agent and exact hours since the burn. Follow with the wound in abstract terms: depth in plain words with extent as a charted percent, noting any circumferential band.\n\nClose with the living patient: airway clear or threatened, perfusion and urine output, pain control and tetanus protection, and whether referral criteria are met. Severity markers ride inside the syndrome sentence, since they change the destination, not just the dressing."
+        },
+        {
+          "heading": "A worked example",
+          "body": "A twenty eight year old homemaker with a flame burn of the right arm and anterior trunk sustained three hours ago in an open courtyard, without smoke exposure. Mixed superficial and deep partial thickness burns cover about eighteen percent by chart, with no circumferential band.\n\nAirway is clear with a normal voice, pulses are full with a maintained pressure, urine has been passed once, and pain is controlled after injection. Tetanus protection is unknown and she meets criteria for referral to a burns centre."
+        }
+      ],
+      "rubric": [
+        {
+          "id": "agent_time",
+          "text": "States the agent with exact hours since injury"
+        },
+        {
+          "id": "depth_extent",
+          "text": "States depth in words with a charted percent"
+        },
+        {
+          "id": "living_patient",
+          "text": "Includes airway, perfusion, urine, tetanus and referral"
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What three blocks make a complete burns summary?",
+          "a": "The patient with the agent and time since burn, the wound with depth and charted extent, and the living patient with airway, urine and referral.",
+          "accept": [
+            "agent",
+            "extent",
+            "referral"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why do severity markers sit inside the syndrome sentence here?",
+          "a": "Because they change the destination and the fluids at once, not just the dressing plan that follows.",
+          "accept": [
+            "destination",
+            "fluids",
+            "plan"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "burn_wound_management: management"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Burns: referral and documentation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.burns.differential": {
+      "id": "skill.reasoning.burns.differential",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Differential diagnosis",
+      "oneLine": "What looks like a burn but is not one",
+      "why": "Most burns declare themselves by history, but the mimics that matter are dangerous in the opposite direction: a peeling child without heat exposure, blisters with mouth sores after a new drug, or dead-looking skin with pain out of proportion. Missing them treats poisoning or infection as a dressing case.",
+      "teach": [
+        {
+          "heading": "Mimics and their discriminators",
+          "table": {
+            "cols": [
+              "Mimic",
+              "Favours it",
+              "Against it here"
+            ],
+            "rows": [
+              [
+                "Toxic epidermal necrolysis",
+                "Drug trigger, painful mucosae, sheet-like peeling",
+                "No drug history, burn follows heat contact"
+              ],
+              [
+                "Scalded skin syndrome",
+                "Small child, staphylococcal focus, spares mucosae",
+                "Adult patient, clear heat agent, localised wound"
+              ],
+              [
+                "Necrotising soft tissue infection",
+                "Pain beyond the skin change, rapid spread, toxicity",
+                "Pain matches the wound, stable edges, no toxicity"
+              ],
+              [
+                "Chemical burn",
+                "Corrosive contact, progressive depth over hours",
+                "Flame or scald history with immediate depth"
+              ],
+              [
+                "Frostbite",
+                "Cold exposure, pale numb extremities",
+                "Heat exposure with blanching burns"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "When to rethink the burn",
+          "body": "Rethink when there is no heat in the story, when mucosae peel alongside the skin, or when a child shows glove, stocking or buttock patterns that match immersion or contact rather than accident. Suspicious patterns in a child raise the question of inflicted injury and need senior review with documentation.\n\nEarly burn wound infection can mimic cellulitis with spreading redness, but it follows a known burn by days with fever and wound change, rather than arriving as the first event."
+        }
+      ],
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Offers a differential spanning drug, infective, chemical, cold and inflicted causes"
+        },
+        {
+          "id": "ten",
+          "text": "Explicitly considers toxic epidermal necrolysis with its drug and mucosal clues"
+        },
+        {
+          "id": "context",
+          "text": "Uses the heat history and exposure setting to accept or exclude each mimic"
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three non-heat conditions that mimic burns.",
+          "a": "Toxic epidermal necrolysis, staphylococcal scalded skin syndrome, and necrotising soft tissue infection.",
+          "accept": [
+            "necrolysis",
+            "scalded",
+            "necrotising"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How does a chemical burn declare itself differently from a flame burn?",
+          "a": "By a corrosive contact history with injury that declares its depth over hours to days, rather than an immediate heat wound.",
+          "accept": [
+            "corrosive",
+            "hours",
+            "immediate"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "burn_wound_management: additionalDifferentials"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Burns: differential diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.investigation.burns.workup": {
+      "id": "skill.investigation.burns.workup",
+      "kind": "investigation",
+      "system": "surgery",
+      "title": "Investigations: charting the burn and catching poisoning and shock",
+      "oneLine": "Chart the wound, test the airway and blood, track resuscitation",
+      "why": "Burns investigations serve two jobs at once: mapping the wound that decides fluids and grafting, and catching the hidden injuries of smoke, electricity and shock. Knowing which test does which stops a student waiting for results before starting fluids.",
+      "teach": [
+        {
+          "heading": "Chart first, weigh always",
+          "body": "Shade depth and extent on a Lund-Browder chart at the bedside and record the weight, since every resuscitation formula multiplies weight by burn percent. Note the time of injury on the same chart, because fluids are timed from the burn, not from arrival.\n\nRechart within the first day. The zone of stasis declares itself over hours, and deep dermal areas that looked salvageable in the morning may need grafting by evening."
+        },
+        {
+          "heading": "Airway and poisoning tests",
+          "body": "Where fire was enclosed or smoke was breathed, measure carboxyhaemoglobin with arterial blood gases and watch lactate and saturation together, since pulse oximetry can read falsely reassuring values. Bronchoscopy assesses the airway directly when soot, singed hair or voice change suggest inhalation.\n\nAn open-air flame burn with a clear voice and no soot needs neither test, and ordering them from reflex wastes the hour that fluids needed."
+        },
+        {
+          "heading": "Resuscitation and operative baseline",
+          "points": [
+            "Baseline and serial electrolytes with renal function and haematocrit track leak, resuscitation and kidney injury.",
+            "Hourly urine output through a catheter is the gauge that resuscitation is titrated against.",
+            "After high-voltage electrical injury add continuous cardiac monitoring with creatine kinase and urine myoglobin for rhabdomyolysis.",
+            "Group and save blood where excision and grafting are planned, since tangential excision bleeds."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which two numbers must be on the chart before any fluid formula is used?",
+          "a": "The shaded burn percent counting only partial and full thickness, and the weighed body weight in kilograms.",
+          "accept": [
+            "percent",
+            "weight",
+            "kilograms"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "When do carboxyhaemoglobin and blood gases earn their place?",
+          "a": "When fire was enclosed or smoke was breathed, with soot, singed hair, confusion or voice change pointing to inhalation or carbon monoxide.",
+          "accept": [
+            "enclosed",
+            "soot",
+            "monoxide"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What guides fluid titration after the formula gives its first volume?",
+          "a": "Hourly urine output with serial electrolytes and renal function, not the formula alone.",
+          "accept": [
+            "urine",
+            "electrolytes",
+            "renal"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "burn_wound_management: additionalInvestigations"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Burns: investigations"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.burns.diagnosis": {
+      "id": "skill.reasoning.burns.diagnosis",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Diagnosis and severity: naming the burn and placing the patient",
+      "oneLine": "Agent plus depth plus extent, then home, ward or burns centre",
+      "why": "A diagnosis of burn says nothing about where the patient goes. The same flame that a clinic dresses in one patient demands a burns centre in another, and the difference is written as depth with extent plus airway, age and site. Stating severity in the diagnosis is what moves the patient correctly.",
+      "teach": [
+        {
+          "heading": "Stating the diagnosis",
+          "body": "Name the agent, the depth in plain words, the charted extent, and the hours since injury: a flame burn of mixed partial thickness covering about eighteen percent, three hours old. Add the airway verdict in the same breath, clear or threatened, since it outranks every other fact.\n\nDepth and extent are clinical, confirmed by the chart rather than by any scan. Reassessment belongs in the diagnosis because stasis declares itself over the first day."
+        },
+        {
+          "heading": "Major burn and referral thresholds",
+          "points": [
+            "Large extent burns, and any burn with inhalation injury, need a burns centre rather than a ward.",
+            "Burns of the face, hands, feet, perineum or a major joint threaten function and need specialist care.",
+            "Electrical and chemical burns hide deep injury and systemic poisoning, so they are referred even when small.",
+            "Extremes of age, comorbidity such as diabetes, and delayed presentation all lower the threshold."
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "id": "names",
+          "text": "Names agent, depth and charted extent with time since injury"
+        },
+        {
+          "id": "airway",
+          "text": "States the airway verdict explicitly"
+        },
+        {
+          "id": "place",
+          "text": "Places the patient: home, ward or burns centre with reason"
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What four facts make a complete burns diagnosis?",
+          "a": "The agent, the depth, the charted extent, and the hours since injury with the airway verdict.",
+          "accept": [
+            "agent",
+            "extent",
+            "airway"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A small hand burn with singed nasal hair and a hoarse voice: where does the patient go?",
+          "a": "To a burns centre with early airway control, because the hand threatens function and the voice threatens the airway.",
+          "accept": [
+            "centre",
+            "function",
+            "airway"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does a two percent electrical burn still earn referral?",
+          "a": "Because current hides deep muscle injury with arrhythmia and rhabdomyolysis beneath a small skin wound.",
+          "accept": [
+            "muscle",
+            "arrhythmia",
+            "rhabdomyolysis"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "burn_wound_management: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Burns: referral criteria"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.treatment.burns.management": {
+      "id": "skill.treatment.burns.management",
+      "kind": "treatment",
+      "system": "surgery",
+      "title": "Managing burns: airway, fluids, wound, grafting and referral",
+      "oneLine": "Secure the airway, resuscitate by formula, protect the wound, refer early",
+      "why": "Burn deaths come from three failures: a lost airway, under-resuscitated shock, and a referred-too-late wound. Each has a timed answer in the first hours, and the plan must run all three at once rather than finishing one before starting the next.",
+      "dosingNote": "This module teaches management at the level of modality and principle: which burns are resuscitated, which airways are secured early, and which wounds go to a burns centre or theatre. Specific agents, volumes and rates come from your current national or institutional guideline at the time of treatment. CliniX does not prescribe.",
+      "teach": [
+        {
+          "heading": "Airway and the primary survey",
+          "body": "Stop the burning, cool with clean water, and run a structured primary survey with exposure limited to one region at a time. Secure the airway early with intubation when facial burns, soot, singed nasal hair, black sputum, hoarseness or stridor suggest inhalation, since swelling can close the airway within hours.\n\nGive high-flow oxygen where carbon monoxide is possible, keep the patient covered and warm against hypothermia, and relieve pain before any examination or dressing."
+        },
+        {
+          "heading": "Fluid resuscitation by formula, titrated by urine",
+          "body": "Resuscitate major burns with warmed crystalloid, such as Ringer lactate where available, guided by a weight and burn-area formula: four millilitres per kilogram per percent burn, with half of the calculated volume in the first eight hours counted from the moment of injury. Titrate thereafter to urine output, aiming for about half a millilitre per kilogram each hour.\n\nStart fluids at the first hospital in India, commonly the district hospital or government medical college casualty, record the time of burn with the chart and the volume already given, and transfer with the line running rather than waiting to finish resuscitation first."
+        },
+        {
+          "heading": "The wound, tetanus and pain",
+          "body": "Clean the wound, remove loose dead tissue and clothing fibres, and cover with appropriate dressings with topical antimicrobials and regular surveillance for infection. Give tetanus prophylaxis where protection is unknown or outdated, and feed early with a high-protein diet for the hypermetabolic response.\n\nControl background pain and procedural pain for dressing changes, since an unrelieved patient cannot cooperate with examination, physiotherapy or feeding."
+        },
+        {
+          "heading": "Surgery and the team",
+          "points": [
+            "Perform escharotomy for deep circumferential limb or torso burns that compromise perfusion or ventilation.",
+            "Undertake early tangential excision with skin grafting for deep dermal and full thickness wounds.",
+            "Provide rehabilitation with physiotherapy, scar management and pressure garments to prevent contractures.",
+            "Refer to a specialist burns unit and manage through a multidisciplinary team with a written chart and fluid record."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which airway signs force early intubation rather than watching?",
+          "a": "Facial burns with soot, singed nasal hair, black sputum, hoarseness or stridor, because swelling closes the airway within hours.",
+          "accept": [
+            "soot",
+            "hoarseness",
+            "stridor"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How is the first resuscitation volume worked out and adjusted?",
+          "a": "From weight multiplied by burn percent, with half in the first eight hours from injury, then titrated to hourly urine output.",
+          "accept": [
+            "weight",
+            "eight",
+            "urine"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A deep ring burn of the forearm shows weakening pulses. Fluids or surgery?",
+          "a": "Surgery: escharotomy through the inelastic band restores perfusion, and no volume of fluid opens a tourniquet of dead skin.",
+          "accept": [
+            "escharotomy",
+            "perfusion",
+            "tourniquet"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "burn_wound_management: management"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "burn_resuscitation_inhalation_injury_and_escharotomy: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Burns: fluid resuscitation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.burns.meena",
+      "title": "A saree caught fire in the courtyard kitchen",
+      "opening": "Meena Deshmukh, 28, has been brought to the casualty by her husband three hours after her saree caught fire from a kerosene stove. Her right arm and chest are wrapped in a clean bedsheet and she is crying with pain. Introduce yourself and take a history.",
+      "fallback": "I do not understand, doctor. Can you ask that in a different way?",
+      "patient": {
+        "name": "Meena Deshmukh",
+        "age": 28,
+        "sex": "female",
+        "occupation": "Homemaker, cooks for a family of six",
+        "residence": "Village near Nashik, lives with husband, children and mother-in-law"
+      },
+      "initialVitals": {
+        "hr": 118,
+        "bpSystolic": 112,
+        "bpDiastolic": 74,
+        "rr": 22,
+        "spo2": 98,
+        "temp": 37.6,
+        "gcs": 15
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you today",
+            "what is the problem today",
+            "why have you come to hospital",
+            "tell me about what happened",
+            "how can I help you today"
+          ],
+          "reply": "Doctor, my saree caught fire while I was cooking this morning. My right arm and chest are burnt and the pain is very bad.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "burn_onset": {
+          "cues": [
+            "when did the burn happen",
+            "how long ago did this happen",
+            "what time did the fire start",
+            "how many hours since the burn"
+          ],
+          "reply": "About three hours ago, while making morning bhakri. My husband poured water and brought me straight here.",
+          "key": true
+        },
+        "burn_agent": {
+          "cues": [
+            "what caused the burn",
+            "was it flame or hot water",
+            "what caught fire first",
+            "open flame or scald"
+          ],
+          "reply": "Open flame, doctor. The edge of my saree touched the kerosene stove and caught in a moment.",
+          "key": true
+        },
+        "clothing_fire": {
+          "cues": [
+            "did your clothes catch fire",
+            "was the saree burning",
+            "did you remove the burning clothes"
+          ],
+          "reply": "Yes, the saree pallu was burning. My husband beat out the flames with a blanket and pulled the burnt cloth away.",
+          "key": true
+        },
+        "kitchen_stove": {
+          "cues": [
+            "what stove do you cook on",
+            "kerosene stove or gas",
+            "where do you cook each day",
+            "open chulha or courtyard kitchen"
+          ],
+          "reply": "A kerosene stove in the courtyard. We cook outside under a tin roof.",
+          "key": true,
+          "skillId": "skill.hx.burns.risk"
+        },
+        "enclosed_smoke": {
+          "cues": [
+            "were you inside a closed room",
+            "did you breathe in a lot of smoke",
+            "were you trapped in smoke"
+          ],
+          "reply": "No, it happened in the open courtyard with wind. I did not breathe much smoke.",
+          "key": true
+        },
+        "cooling_firstaid": {
+          "cues": [
+            "did you cool the burn with water",
+            "what did you put on the burn first",
+            "how long did you keep it under water",
+            "toothpaste or oil on the wound"
+          ],
+          "reply": "My husband poured buckets of clean water for some time. We put nothing else on it, only this clean bedsheet for covering.",
+          "key": true,
+          "skillId": "skill.hx.burns.story"
+        },
+        "burn_pain": {
+          "cues": [
+            "describe the pain of the burn",
+            "how severe is the burning pain",
+            "does the pain ever ease off",
+            "pain before and after water"
+          ],
+          "reply": "It burns badly all the time, and touching the arm makes it much worse. The water gave a little relief for a short while.",
+          "key": true,
+          "skillId": "skill.hx.surg.pain"
+        },
+        "blister_evolution": {
+          "cues": [
+            "have blisters formed on the burn",
+            "did the skin peel or burst open",
+            "has the red area spread since morning"
+          ],
+          "reply": "Blisters came up on the forearm within the first hour. The redness around them looks wider than in the morning.",
+          "key": true
+        },
+        "breathing_difficulty": {
+          "cues": [
+            "any difficulty in breathing since the fire",
+            "short of breath after the burn",
+            "tightness in the chest while breathing"
+          ],
+          "reply": "No, doctor, my breathing is normal. Only the pain makes me breathe fast.",
+          "key": true
+        },
+        "facial_singe": {
+          "cues": [
+            "is there burning inside the nose or mouth",
+            "did your hair or eyebrows singe",
+            "cough with black sputum",
+            "has your voice changed after the fire"
+          ],
+          "reply": "No. My face is untouched, my voice is normal, and I have no black spit.",
+          "key": true
+        },
+        "urine_output": {
+          "cues": [
+            "have you passed urine since the burn",
+            "how much urine and what colour",
+            "when did you last pass urine"
+          ],
+          "reply": "Once, about an hour ago at home. It looked yellow as usual, not dark.",
+          "key": true
+        },
+        "thirst_status": {
+          "cues": [
+            "are you feeling very thirsty",
+            "dryness of the mouth since the burn",
+            "how much water have you drunk"
+          ],
+          "reply": "I am thirsty and my mouth feels dry. I drank two glasses of water on the way.",
+          "key": true
+        },
+        "tetanus_shots": {
+          "cues": [
+            "when was your last tetanus injection",
+            "have you taken tetanus toxoid before",
+            "any booster in the last ten years"
+          ],
+          "reply": "I do not remember any tetanus injection, doctor. Maybe in school, I am not sure.",
+          "key": true,
+          "skillId": "skill.hx.burns.risk"
+        },
+        "known_illness": {
+          "cues": [
+            "do you have sugar or pressure illness",
+            "any long standing disease like diabetes",
+            "past illness needing regular treatment"
+          ],
+          "reply": "No sugar, no pressure. I have never been admitted to hospital before this.",
+          "key": true
+        },
+        "seizure_history": {
+          "cues": [
+            "have you ever had fits or seizures",
+            "any fainting attack near fire",
+            "falling unconscious while cooking"
+          ],
+          "reply": "No, I have never had fits or fainting.",
+          "key": true
+        },
+        "smoking_tobacco": {
+          "cues": [
+            "do you smoke bidis or cigarettes",
+            "tobacco chewing habit",
+            "mishri or gutka use"
+          ],
+          "reply": "No smoking and no tobacco of any kind.",
+          "key": true
+        },
+        "alcohol_use": {
+          "cues": [
+            "do you drink alcohol regularly",
+            "country liquor or beer habit"
+          ],
+          "reply": "No, I never drink.",
+          "key": false
+        },
+        "regular_medicines": {
+          "cues": [
+            "what regular tablets do you take",
+            "medicines for sugar or pressure",
+            "blood thinner or steroid tablets"
+          ],
+          "reply": "No regular tablets at all, doctor.",
+          "key": true
+        },
+        "past_burns": {
+          "cues": [
+            "have you been burnt before this",
+            "any old burn scar or graft surgery",
+            "previous contracture from a burn"
+          ],
+          "reply": "No, this is the first time I have been burnt.",
+          "key": true
+        },
+        "occupation_kitchen": {
+          "cues": [
+            "what work do you do each day",
+            "how many hours do you spend cooking",
+            "who else cooks in the house"
+          ],
+          "reply": "I cook three times a day for six people. My mother-in-law helps with the children but I do all the cooking.",
+          "key": true
+        },
+        "family_support": {
+          "cues": [
+            "who lives with you at home",
+            "who will help with dressings at home",
+            "how far is the hospital from your village"
+          ],
+          "reply": "My husband, two children and my mother-in-law. The hospital is an hour away by bus, and my husband will bring me for every visit.",
+          "key": false
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Anxious young woman in pain, guarding the right arm against her chest. No soot on the face, nasal hair unsinged, voice normal. Shivering slightly under the sheet.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 118 regular. Blood pressure 112/74. Respiratory rate 22. SpO2 98 percent on room air. Temperature 37.6 C.",
+          "abnormal": true
+        },
+        "skill.gen.surg.surgical_shock": {
+          "finding": "Hands warm with brisk capillary refill. Blood pressure maintained, no cold clammy peripheries. Tachycardia with pain and early fluid loss rather than established shock.",
+          "abnormal": true
+        },
+        "skill.exam.burns.wound": {
+          "finding": "Mixed superficial and deep partial thickness burns of the right arm and anterior trunk, about eighteen percent by chart. Pink blistered areas with brisk blanching and sharp pain at the edges; blotchy red-white areas with dull feeling over the outer forearm. No circumferential band; radial pulse full with normal refill. Erythema beyond blistered skin excluded from the chart.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "tbsa_chart",
+        "electrolytes_renal",
+        "haemoglobin_haematocrit"
+      ],
+      "investigations": {
+        "tbsa_chart": {
+          "label": "Burn chart (Lund-Browder)",
+          "indicated": true,
+          "result": "Mixed superficial and deep partial thickness, eighteen percent of body surface, right arm and anterior trunk. No inhalation map needed.",
+          "note": "The chart is the investigation everything else is dosed from: fluids, referral and grafting all read off this shaded percent."
+        },
+        "electrolytes_renal": {
+          "label": "Electrolytes and renal function",
+          "indicated": true,
+          "result": "Sodium 138, potassium 4.2, creatinine within normal limits. Baseline before resuscitation.",
+          "note": "Baseline before fluids, then serial: leak, resuscitation and kidney injury all show here first."
+        },
+        "haemoglobin_haematocrit": {
+          "label": "Haemoglobin and haematocrit",
+          "indicated": true,
+          "result": "Haemoglobin 12.1, haematocrit at the upper end of normal from early plasma leak.",
+          "note": "Haematocrit rises as plasma leaks out, so it tracks the shock that blood pressure hides."
+        },
+        "urine_monitoring": {
+          "label": "Hourly urine output",
+          "indicated": true,
+          "result": "Catheter placed; output to be recorded hourly as the gauge of resuscitation.",
+          "note": "The single bedside number that resuscitation is titrated against."
+        },
+        "carboxyhaemoglobin": {
+          "label": "Carboxyhaemoglobin and blood gas",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "Not indicated: open courtyard fire with a clear voice, no soot and normal saturation. Reserved for enclosed fires and smoke exposure."
+        },
+        "ecg_monitoring": {
+          "label": "ECG and cardiac monitoring",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Not indicated: flame burn with no electrical contact. Mandatory instead after high-voltage injury with arrhythmia risk."
+        },
+        "wound_swab": {
+          "label": "Wound swab culture",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "Not indicated on a three-hour-old clean burn with no fever or spreading cellulitis. Send when infection signs appear, not before."
+        }
+      },
+      "differentialModel": {
+        "answer": "Flame burn with mixed partial thickness loss. Consider scald as the alternative heat mechanism, toxic epidermal necrolysis, staphylococcal scalded skin syndrome, cellulitis, a chemical burn, and frostbite.",
+        "accept": [
+          "burns",
+          "scald",
+          "partial thickness burn",
+          "toxic epidermal necrolysis",
+          "staphylococcal scalded skin syndrome",
+          "cellulitis",
+          "chemical burn",
+          "frostbite"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Flame burn, mixed superficial and deep partial thickness, about eighteen percent of body surface, three hours old, without inhalation injury.",
+        "accept": [
+          "flame burn",
+          "partial thickness burn",
+          "burns",
+          "thermal injury"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Cool and cover the burn, give crystalloid resuscitation timed from injury and titrated to urine, control pain before dressings, give tetanus prophylaxis, clean and dress the wound with surveillance, keep her warm and fed, and refer to a burns centre with a written chart.",
+        "accept": [
+          "cool the burn and cover it with a clean dry sheet",
+          "give intravenous crystalloid resuscitation titrated to urine output",
+          "provide analgesia before examination and dressing changes",
+          "give tetanus prophylaxis as history is unknown",
+          "clean and dress the wound with regular review",
+          "refer to a burns centre with a written chart",
+          "keep the patient warm and start early feeding"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The clock starts at the stove, not at casualty: three hours already passed decide catch-up fluids, not a routine start.",
+        "Mixed depth in one wound is the rule: the painful blanching edge may heal while the pale dull centre needs grafting.",
+        "Erythema was left off the chart: counting it would have overestimated the burn and overfilled her.",
+        "A clear voice in an open courtyard excludes inhalation today, which is why carboxyhaemoglobin stayed unordered.",
+        "Warm hands with a held pressure and tachycardia mean early leak, not established shock: urine output now steers resuscitation.",
+        "Unknown tetanus history means protection is due, not assumed from childhood.",
+        "Eighteen percent with face-threatening proximity of the chest burn and an unknown-tetanus young woman meets referral: the district hospital starts fluids and the burns centre continues them."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

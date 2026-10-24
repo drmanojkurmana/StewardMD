@@ -1,0 +1,1220 @@
+{
+ "_comment": "Neck swellings: the adult lateral neck mass and midline congenital lumps. Same architecture as scrotal swellings and thyroid swelling: shared surgery and core skills carry the examination, this file adds the midline versus lateral logic, the neck differential matrix, needle first workup, urgency bands, level based diagnosis and cause led treatment.",
+ "id": "neck-swellings",
+ "name": "Neck swellings",
+ "fullName": "Neck swellings: the lateral neck mass and midline congenital lumps",
+ "system": "surgery",
+ "kbRef": "neck_masses_neck_dissection",
+ "oneLine": "Matted nodes with evening fever, and the mimics a good examination must exclude",
+ "estMinutes": 60,
+ "review": {
+  "status": "ai_drafted"
+ },
+ "version": 1,
+ "chapters": [
+  {
+   "id": "basics",
+   "title": "Basics",
+   "blurb": "Midline or lateral, levels, and the three rules",
+   "skills": [
+    "skill.reasoning.neck.basics"
+   ]
+  },
+  {
+   "id": "approach",
+   "title": "Approach to the patient",
+   "blurb": "Before a single question",
+   "skills": [
+    "skill.approach.hygiene",
+    "skill.approach.introduce",
+    "skill.approach.consent",
+    "skill.approach.position"
+   ]
+  },
+  {
+   "id": "particulars",
+   "title": "Patient particulars",
+   "blurb": "Age and tempo set the list before the story begins",
+   "skills": [
+    "skill.particulars.demographics"
+   ],
+   "emphasis": {
+    "skill.particulars.demographics": {
+     "expect": "Expect age to carry unusual weight here. An infant with an intermittent swelling, a teenager with a painless ovoid upper neck lump, a young adult with matted nodes and evening fever, and a tobacco user past forty with a hard rapidly growing node each point to a different member of the neck list."
+    }
+   }
+  },
+  {
+   "id": "history",
+   "title": "History of presenting illness",
+   "blurb": "Months of quiet growth, or weeks of hard growth",
+   "skills": [
+    "skill.hx.chief_complaints",
+    "skill.hx.surg.lump",
+    "skill.hx.surg.neck_swelling"
+   ],
+   "emphasis": {
+    "skill.hx.chief_complaints": {
+     "expect": "Expect a story told in months: a painless lateral swelling noticed by chance and growing slowly, with evening fever and weight loss where tuberculosis is the cause. An acute story told in hours with pain and fever belongs to infection, not to nodes."
+    },
+    "skill.hx.surg.lump": {
+     "expect": "Ask where the swelling started, whether coughing or straining alters it, and whether passing urine or meals alter it. A hygroma with mediastinal extension gives a cough impulse, while a pharyngeal pouch fills on drinking and gurgles."
+    },
+    "skill.hx.surg.neck_swelling": {
+     "expect": "Characterise movement with swallowing and with tongue protrusion, voice change, dysphagia and noisy breathing. These four answers divide thyroid from thyroglossal, benign from malignant, and routine from immediate."
+    }
+   }
+  },
+  {
+   "id": "past_personal_drug_family",
+   "title": "Past, personal, drug and family history",
+   "blurb": "The background that reframes the lump",
+   "skills": [
+    "skill.hx.neck.risk_factors"
+   ]
+  },
+  {
+   "id": "general_exam",
+   "title": "General examination",
+   "blurb": "A well patient, unless the nodes say otherwise",
+   "skills": [
+    "skill.gen.appearance",
+    "skill.gen.vitals"
+   ],
+   "emphasis": {
+    "skill.gen.appearance": {
+     "expect": "Expect a thin tired patient with mild pallor where tuberculosis is the cause. A toxic restless look with tremor points away from nodes toward a toxic goitre, and cachexia with a hard fixed mass points toward secondary carcinoma."
+    },
+    "skill.gen.vitals": {
+     "expect": "Expect low grade evening temperature with a normal pulse in scrofula. High fever with tachycardia marks acute lymphadenitis or Ludwig angina, while stridor with normal temperature still means the airway is at risk."
+    }
+   }
+  },
+  {
+   "id": "systemic_exam",
+   "title": "Examination of the neck",
+   "blurb": "Palpate the levels, test the movements, then the drainage",
+   "skills": [
+    "skill.exam.surg.neck_palpation",
+    "skill.exam.surg.neck_deglutition_tongue",
+    "skill.exam.surg.cervical_nodes",
+    "skill.exam.surg.lateral_neck_mass",
+    "skill.exam.surg.regional_nodes"
+   ],
+   "emphasis": {
+    "skill.exam.surg.neck_palpation": {
+     "expect": "Expect matted firm nodes fixed to the deep plane as one mass with pinchable skin in tuberculosis. A smooth cystic ovoid deep to the upper muscle suggests branchial cyst, and a brilliantly translucent compressible mass suggests hygroma."
+    },
+    "skill.exam.surg.neck_deglutition_tongue": {
+     "expect": "Expect no movement on swallowing or tongue protrusion in nodal disease. Movement on swallowing alone sends the case to the thyroid pathway, and movement with the tongue as well names a thyroglossal cyst."
+    },
+    "skill.exam.surg.cervical_nodes": {
+     "expect": "Expect levels two and three matted in scrofula, with the left supraclavicular fossa examined every time for the Virchow node that moves the search below the clavicle."
+    },
+    "skill.exam.surg.lateral_neck_mass": {
+     "expect": "Expect the mass deep to the upper third of the muscle in branchial and nodal disease. Sideways mobility with no vertical movement at the carotid fork names a carotid body tumour."
+    },
+    "skill.exam.surg.regional_nodes": {
+     "expect": "Expect no nodes elsewhere in a primary neck swelling, and remember the testis drains above the umbilicus: enlarged nodes there or at the left supraclavicular fossa point to spread, not to a local node."
+    }
+   }
+  },
+  {
+   "id": "disease_findings",
+   "title": "Putting the neck picture together",
+   "blurb": "Movement, consistency and fixity read together",
+   "skills": [
+    "skill.reasoning.neck.signs"
+   ]
+  },
+  {
+   "id": "summary",
+   "title": "Clinical summary",
+   "blurb": "Side, level, movement and urgency in three sentences",
+   "skills": [
+    "skill.present.neck.summary"
+   ]
+  },
+  {
+   "id": "differential",
+   "title": "Differential diagnosis",
+   "blurb": "Every swelling that shares the neck, and the test that separates each",
+   "skills": [
+    "skill.reasoning.neck.differential"
+   ]
+  },
+  {
+   "id": "investigations",
+   "title": "Investigations",
+   "blurb": "The needle clears the tissue, the hunt clears the primary",
+   "skills": [
+    "skill.investigation.neck.workup"
+   ]
+  },
+  {
+   "id": "diagnosis",
+   "title": "Diagnosis and urgency",
+   "blurb": "Name the variety, then place it on the urgency ladder",
+   "skills": [
+    "skill.reasoning.neck.diagnosis",
+    "skill.annex.neck.node_levels"
+   ]
+  },
+  {
+   "id": "treatment",
+   "title": "Treatment",
+   "blurb": "Treat the cause, excise the congenital cleanly, refer the malignant early",
+   "skills": [
+    "skill.treatment.neck.management"
+   ]
+  },
+  {
+   "id": "case",
+   "title": "Case presentation",
+   "blurb": "Present this patient to your consultant",
+   "skills": [
+    "skill.present.case"
+   ]
+  }
+ ],
+ "skills": {
+  "skill.reasoning.neck.basics": {
+   "id": "skill.reasoning.neck.basics",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "What a neck swelling is",
+   "oneLine": "Midline or lateral first, then the level, then the tissue the signs point to",
+   "why": "The neck packs the airway, the great vessels, nerves, lymph nodes, thyroid and salivary glands into a small space. A swelling here can arise from any of them, so the examination needs an order: midline or lateral first, then the level, then the tissue.",
+   "teach": [
+    {
+     "heading": "Midline or lateral first, then the level",
+     "body": "Begin by placing the swelling. Midline swellings sit in the central compartment between the two sternomastoid muscles and move with structures fixed to the hyoid and larynx. Lateral swellings sit deep to, in front of, or behind one sternomastoid, and each position carries its own short list.\n\nNext name the level from top to bottom: under the chin, under the jaw, beside the upper larynx, beside the mid larynx, low in the neck, and above the clavicle. A node at the angle of the jaw drains the mouth and throat, while a node above the clavicle drains the chest and abdomen."
+    },
+    {
+     "heading": "The bedside map of neck lumps",
+     "table": {
+      "cols": [
+       "Position",
+       "Structures that live there",
+       "Common swellings"
+      ],
+      "rows": [
+       [
+        "Midline above the hyoid",
+        "Submental nodes, floor of mouth",
+        "Submental nodes, sublingual dermoid"
+       ],
+       [
+        "Midline at the hyoid",
+        "Thyroglossal tract, subhyoid bursa",
+        "Thyroglossal cyst, subhyoid bursitis"
+       ],
+       [
+        "Midline low in the neck",
+        "Thyroid isthmus, space of Burns",
+        "Isthmus goitre, dermoid, nodes"
+       ],
+       [
+        "Upper lateral, deep to the muscle",
+        "Jugulodigastric nodes, branchial remnant",
+        "Branchial cyst, tonsillar node"
+       ],
+       [
+        "Lower lateral, behind the muscle",
+        "Posterior triangle nodes, lymphatics",
+        "Cystic hygroma, supraclavicular nodes"
+       ],
+       [
+        "Along the carotid line",
+        "Carotid artery, vagus, sympathetic chain",
+        "Aneurysm, carotid body tumour, nodes on the carotid"
+       ]
+      ]
+     }
+    },
+    {
+     "heading": "Three rules that order the list",
+     "body": "First, in an adult past forty a hard lateral neck mass is a metastasis until proved otherwise, and the search for the primary in the mouth, throat, thyroid and chest starts at once.\n\nSecond, a midline swelling that rises when the patient sticks out the tongue is a thyroglossal cyst, because the tract stays fixed to the tongue through the hyoid bone.\n\nThird, tissue diagnosis starts with needle aspiration, never with an open cut into the lump. An open biopsy of a metastasis or a tuberculous node seeds the wound and ruins the planes the surgeon needs."
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "Where do you place a neck swelling before naming it?",
+     "a": "First decide midline or lateral, then name the level from the chin to the clavicle, since each position carries its own short list of structures.",
+     "accept": [
+      "midline",
+      "lateral",
+      "level",
+      "chin",
+      "clavicle"
+     ],
+     "minMatch": 3
+    },
+    {
+     "level": 2,
+     "q": "Why is a hard lateral neck mass in a man past forty treated as a metastasis first?",
+     "a": "Because cancers of the mouth, throat, thyroid and chest shed to the jugular chain, so a stony hard painless node in this age group is a metastasis until the primary is found or excluded.",
+     "accept": [
+      "mouth",
+      "throat",
+      "metastasis",
+      "hard node",
+      "primary"
+     ],
+     "minMatch": 3
+    },
+    {
+     "level": 3,
+     "q": "A student asks why you never start with an open biopsy of a neck lump. What do you answer?",
+     "a": "An open cut seeds tumour or tuberculous infection into the wound and destroys the tissue planes, so diagnosis starts with fine needle aspiration and the lump is removed whole only when that plan is already made.",
+     "accept": [
+      "seeds",
+      "aspiration",
+      "open biopsy",
+      "tissue planes"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "locator": "neck_masses_neck_dissection: clinicalPearls",
+     "source": "StewardMD Clinical KB"
+    },
+    {
+     "locator": "The neck: swellings of the neck",
+     "source": "Bailey and Love's Short Practice of Surgery"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.neck.signs": {
+   "id": "skill.reasoning.neck.signs",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "Putting the neck picture together",
+   "oneLine": "Movement tests, consistency and fixity read together name the tissue",
+   "why": "No single sign names a neck swelling. Movement with swallowing, movement with the tongue, consistency, fixity to skin or to deep structures, and the state of the skin together separate thyroid from thyroglossal, cyst from node, and benign from malignant.",
+   "teach": [
+    {
+     "heading": "Movement tests name the tissue",
+     "body": "A thyroid swelling moves up when the patient swallows a sip of water, because the gland grips the larynx. A thyroglossal cyst also rises on swallowing, but it rises again when the patient sticks out the tongue, because its tract runs to the tongue through the hyoid.\n\nA subhyoid bursitis moves on swallowing but not with the tongue. Nodes fixed to the larynx or trachea by inflammation or by malignant invasion may move a little on swallowing, so movement alone never closes the case without the rest of the picture."
+    },
+    {
+     "heading": "Consistency, fixity and skin",
+     "body": "A cystic swelling is smooth, fluctuant and often translucent at the edge, as in a branchial cyst or a hygroma. Matted firm nodes that cling to each other and to the deep fascia point to tuberculosis with periadenitis.\n\nA stony hard nodular mass fixed to skin or to muscle points to secondary carcinoma. Redness and oedema mark acute infection, while a discharging sinus over an indurated mass points to a burst cold abscess, and multiple upper neck sinuses with granules point to actinomycosis."
+    },
+    {
+     "heading": "What never to miss",
+     "points": [
+      "Test pulsation: an expansile swelling that lifts the fingers apart is an aneurysm, while a lump that merely rides on the carotid has transmitted pulsation.",
+      "Listen for a bruit over the swelling: a carotid body tumour and a toxic goitre may both hum.",
+      "Darken the room and transilluminate: a hygroma glows brilliantly, while a branchial cyst and a cold abscess stay dark.",
+      "Feel the supraclavicular fossa on the left: a Virchow node sends you to the breast, the chest and the abdomen down to the testis.",
+      "Examine the drainage area every time: mouth, tongue, tonsil, nose, ear, scalp and thyroid for upper nodes, and hands, arms and chest for lower ones."
+     ]
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "How do you separate a thyroid swelling from a thyroglossal cyst at the bedside?",
+     "a": "Both rise on swallowing, but only the thyroglossal cyst rises when the patient protrudes the tongue, since its tract is fixed to the tongue through the hyoid bone.",
+     "accept": [
+      "swallowing",
+      "tongue",
+      "thyroglossal",
+      "hyoid"
+     ],
+     "minMatch": 3
+    },
+    {
+     "level": 2,
+     "q": "What does matting of a group of neck nodes tell you?",
+     "a": "Matting means periadenitis binding the nodes to each other and to deep structures, which in an Indian clinic points first to tuberculous lymphadenitis, with acute infection and metastasis as the other causes.",
+     "accept": [
+      "periadenitis",
+      "tuberculous",
+      "matted",
+      "deep structures"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "A lateral neck swelling is brilliantly translucent and compressible with a cough impulse. What is it and why does the impulse matter?",
+     "a": "A cystic hygroma extending toward the mediastinum: translucency proves clear lymph fluid in many small loculi, and the cough impulse proves a deep extension that the surgeon must map before operating.",
+     "accept": [
+      "hygroma",
+      "translucent",
+      "cough impulse",
+      "mediastinum"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "locator": "neck_masses_neck_dissection: additionalDifferentials",
+     "source": "StewardMD Clinical KB"
+    },
+    {
+     "locator": "The neck: examination of neck swellings",
+     "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.neck.differential": {
+   "id": "skill.reasoning.neck.differential",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "Differential diagnosis of the neck swelling",
+   "oneLine": "Every swelling that shares the neck, and the test that separates each",
+   "why": "The same triangle holds nodes, cysts, vascular tumours, pouches and goitres. Age, tempo, position and one bedside test together divide a long list into one working diagnosis and two reserves.",
+   "teach": [
+    {
+     "heading": "Lateral swellings by age and tempo",
+     "body": "In infants and young children think cystic hygroma and sternomastoid tumour first, then reactive nodes after any throat infection. In adolescents and young adults think branchial cyst, thyroglossal cyst and tuberculous nodes, which is the commonest cervical swelling in the Indian subcontinent.\n\nIn adults past forty a painless hard node that grows over weeks is secondary carcinoma until the primary is found. A swelling present for years that suddenly enlarges and hurts has usually bled into a cyst or turned malignant, and sudden pain with fever marks acute lymphadenitis or a Ludwig type infection."
+    },
+    {
+     "heading": "Swelling by swelling",
+     "table": {
+      "cols": [
+       "Swelling",
+       "Person and tempo",
+       "Test that separates it"
+      ],
+      "rows": [
+       [
+        "Tuberculous nodes",
+        "Young adult, months, matted, evening fever",
+        "Needle aspirate with CBNAAT, chest film"
+       ],
+       [
+        "Reactive nodes",
+        "Child or young adult, weeks after sore throat",
+        "Dental and throat exam, watch for six weeks"
+       ],
+       [
+        "Hodgkin lymphoma",
+        "Teenager or young adult, rubbery discrete nodes",
+        "Excision biopsy with Reed Sternberg cells"
+       ],
+       [
+        "Secondary carcinoma",
+        "Past forty, weeks, stony hard and fixed",
+        "FNAC, then hunt the primary above the clavicle"
+       ],
+       [
+        "Branchial cyst",
+        "Late teens, painless ovoid upper neck",
+        "Aspirate shows cholesterol crystals"
+       ],
+       [
+        "Thyroglossal cyst",
+        "Child or young adult, midline, rises with tongue",
+        "Moves with tongue protrusion"
+       ],
+       [
+        "Cystic hygroma",
+        "Infant, soft translucent compressible root of neck",
+        "Brilliant transillumination"
+       ],
+       [
+        "Carotid body tumour",
+        "Middle age, transmits at the carotid fork",
+        "Moves sideways but not up and down"
+       ],
+       [
+        "Pharyngeal pouch",
+        "Old man, regurgitation hours after meals",
+        "Thin barium swallow in a semi lateral view"
+       ],
+       [
+        "Laryngocele",
+        "Wind player or chronic cough, resonant swelling",
+        "Grows on blowing the nose"
+       ]
+      ]
+     }
+    },
+    {
+     "heading": "Three presentations that must not wait",
+     "body": "A rapidly enlarging hard fixed mass with a changed voice, noisy breathing or difficulty in swallowing needs an urgent head and neck referral the same week, since the airway and the diagnosis both deteriorate quickly.\n\nStridor, drooling or trismus with a hot tender floor of mouth is Ludwig angina until proved otherwise: it tracks to the mediastinum and closes the glottis, so the airway comes before every other test.\n\nA hot red tender swelling with high fever and rigors is acute lymphadenitis or an abscess pointing to the surface. It needs drainage when it fluctuates, and blood counts with a search for the source while it is still cellulitis."
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "Name four causes of a lateral neck swelling in a twenty year old.",
+     "a": "Tuberculous lymphadenitis, reactive nodes after throat infection, a branchial cyst, and Hodgkin lymphoma, with thyroglossal cyst if the swelling sits in the midline.",
+     "accept": [
+      "tuberculous",
+      "reactive",
+      "branchial",
+      "lymphoma"
+     ],
+     "minMatch": 3
+    },
+    {
+     "level": 2,
+     "q": "Why does a stony hard node in a man of sixty send you to the mouth and throat before any scan?",
+     "a": "Because secondary carcinoma spreads by permeation to the jugular chain, so the node is only the signpost and the primary in the tongue, tonsil, larynx or thyroid decides the operation.",
+     "accept": [
+      "secondary carcinoma",
+      "jugular",
+      "primary",
+      "tongue"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "An old man regurgitates undigested food hours after meals and coughs at night. What is the swelling and what proves it?",
+     "a": "A pharyngeal pouch between the fibres of the inferior constrictor: a thin barium swallow shows the pouch, and aspiration pneumonia is the complication to prevent.",
+     "accept": [
+      "pharyngeal pouch",
+      "barium swallow",
+      "regurgitation",
+      "aspiration"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "locator": "neck_masses_neck_dissection: additionalDifferentials",
+     "source": "StewardMD Clinical KB"
+    },
+    {
+     "locator": "congenital_neck_masses_and_cervical_lymphadenopathy: clinicalPearls",
+     "source": "StewardMD Clinical KB"
+    },
+    {
+     "locator": "The neck: lymph nodes of the neck",
+     "source": "Bailey and Love's Short Practice of Surgery"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.investigation.neck.workup": {
+   "id": "skill.investigation.neck.workup",
+   "kind": "investigation",
+   "system": "surgery",
+   "title": "Investigating the neck swelling",
+   "oneLine": "Needle before knife, sound before radiation, and the primary hunted first",
+   "why": "A neck swelling is diagnosed by tissue, but the wrong first cut destroys the cure. Aspiration cytology, ultrasound and a disciplined search of the drainage area answer most cases without an operation.",
+   "teach": [
+    {
+     "heading": "Bedside tests come first",
+     "body": "Ultrasound is the first image: it separates cystic from solid, maps matted nodes with necrosis, and guides the needle into the solid part of the mass. Fine needle aspiration follows at once, with part of the aspirate kept for CBNAAT wherever tuberculosis is on the list.\n\nBlood counts, ESR and a chest film support the pattern but prove nothing alone. Thyroid function tests are ordered only when the swelling moves with swallowing or eye and hand signs suggest toxicity, not for every lateral lump."
+    },
+    {
+     "heading": "Image and scope the unknown primary",
+     "body": "When aspiration shows squamous cells and no primary is visible, contrast CT or MRI of the neck and chest maps nodal levels and extracapsular spread for the head and neck unit. Nasendoscopy with a full ear, nose, throat and mouth examination is part of the same sitting.\n\nPanendoscopy with directed biopsy follows where the clinic and the scan still show nothing. No neck dissection is planned until the primary hunt is complete, because the fields and the consent both depend on it."
+    },
+    {
+     "heading": "Tests for tuberculosis and lymphoma",
+     "body": "A Mantoux test and a chest film back the clinical picture of tuberculous nodes, and CBNAAT on the aspirate confirms the organism and rifampicin sensitivity without waiting weeks for culture. HIV screening is offered alongside, since dual infection changes follow up.\n\nWhen aspirates stay inconclusive and lymphoma is suspected, the whole node is removed under anaesthesia for architecture and immunophenotyping. Incision into a suspected carcinoma node is avoided, because the scar seeds and the planes are lost."
+    },
+    {
+     "heading": "What not to order",
+     "body": "Tumour markers are not a screen for every neck lump: they follow a specific suspected malignancy, not the swelling itself. A plain open biopsy is not a short cut to the diagnosis.\n\nRepeat scans without a question only delay the needle. Order each test to separate two named members of your differential, and stop when the tissue answer and the primary hunt are both in hand."
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What are the first two investigations for a lateral neck swelling?",
+     "a": "Neck ultrasound to separate cystic from solid and map the nodes, then ultrasound guided fine needle aspiration with part of the sample kept for CBNAAT.",
+     "accept": [
+      "ultrasound",
+      "aspiration",
+      "CBNAAT",
+      "cystic"
+     ],
+     "minMatch": 3
+    },
+    {
+     "level": 2,
+     "q": "Aspiration shows squamous carcinoma and the mouth looks normal. What next?",
+     "a": "Treat it as an unknown primary: contrast CT of neck and chest, nasendoscopy with full ENT examination, then panendoscopy with directed biopsy before any neck surgery is planned.",
+     "accept": [
+      "unknown primary",
+      "contrast CT",
+      "nasendoscopy",
+      "panendoscopy"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "Why is excision biopsy preferred over FNAC when lymphoma is suspected?",
+     "a": "Lymphoma diagnosis needs nodal architecture and immunophenotyping, which a needle sample cannot reliably give, so the whole node is removed intact for the pathologist.",
+     "accept": [
+      "architecture",
+      "whole node",
+      "lymphoma",
+      "needle"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "locator": "neck_masses_neck_dissection: additionalInvestigations",
+     "source": "StewardMD Clinical KB"
+    },
+    {
+     "locator": "The neck: biopsy of neck nodes",
+     "source": "Bailey and Love's Short Practice of Surgery"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.neck.diagnosis": {
+   "id": "skill.reasoning.neck.diagnosis",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "Diagnosis and urgency of the neck swelling",
+   "oneLine": "Name the variety, the tissue and the level, then place it on the urgency ladder",
+   "why": "A neck diagnosis is only complete when it states the side, the level, the character, the cause and the speed the patient must move. Without the urgency band, a correct label still sends the patient down the wrong road.",
+   "teach": [
+    {
+     "heading": "The complete diagnostic statement",
+     "body": "State the side, the nodal level or triangle, the size and duration, and the bedside character: cystic, matted, rubbery or stony hard. Then name the cause with its proof, such as tuberculous lymphadenitis with CBNAAT positive aspirate.\n\nAdd the primary where one exists or is still hunted, for example secondary carcinoma of level two nodes with unknown primary under evaluation. A statement without the proof and without the primary is a guess, not a diagnosis."
+    },
+    {
+     "heading": "Three urgency bands",
+     "table": {
+      "cols": [
+       "Band",
+       "Picture",
+       "Move"
+      ],
+      "rows": [
+       [
+        "Routine",
+        "Long standing cystic hygroma or branchial cyst, no pressure signs",
+        "Elective excision planned after full mapping"
+       ],
+       [
+        "Early",
+        "Matted nodes with evening fever, unexplained node beyond three weeks",
+        "Aspirate with CBNAAT, chest film, ENT review within weeks"
+       ],
+       [
+        "Immediate",
+        "Hard fixed rapid mass with voice change, stridor, hot tender floor of mouth",
+        "Same week head neck referral, airway first in Ludwig angina"
+       ]
+      ]
+     }
+    },
+    {
+     "heading": "When the label must change",
+     "body": "When the swelling moves freely with swallowing and the gland proves nodular, the case leaves this pathway for the thyroid swelling pathway. When the lump sits in the parotid or submandibular gland, it belongs to the salivary pathway.\n\nWhen generalised nodes, liver or spleen enlargement, or abnormal blood counts appear, the case becomes a systemic disease and haematology leads. Changing the label is progress, not failure, provided the tissue proof travels with the patient."
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What five elements make a neck diagnosis complete?",
+     "a": "Side, nodal level or triangle, size with duration, bedside character, and cause with its proof, plus the primary where one exists.",
+     "accept": [
+      "side",
+      "level",
+      "character",
+      "cause",
+      "proof"
+     ],
+     "minMatch": 3
+    },
+    {
+     "level": 2,
+     "q": "A young woman has matted right neck nodes with evening fever and a positive contact. State the diagnosis band and the next move.",
+     "a": "Early band tuberculous lymphadenitis: aspirate with CBNAAT, chest film and HIV screen, then referral to the tuberculosis unit for a full course under the national guideline.",
+     "accept": [
+      "tuberculous",
+      "CBNAAT",
+      "chest film",
+      "tuberculosis unit"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "When must a neck swelling leave this pathway for another one?",
+     "a": "When it proves thyroid on swallowing tests, salivary on gland examination, or systemic with generalised nodes and abnormal counts, since each road has its own workup and its own team.",
+     "accept": [
+      "thyroid",
+      "salivary",
+      "systemic",
+      "pathway"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "locator": "neck_masses_neck_dissection: clinicalPearls",
+     "source": "StewardMD Clinical KB"
+    },
+    {
+     "locator": "The neck: diagnosis of neck swellings",
+     "source": "Bailey and Love's Short Practice of Surgery"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.treatment.neck.management": {
+   "id": "skill.treatment.neck.management",
+   "kind": "treatment",
+   "system": "surgery",
+   "title": "Treatment of neck swellings",
+   "oneLine": "Treat the cause, excise the congenital cleanly, and refer the malignant early",
+   "why": "Most neck swellings are cured by treating what fills them: antitubercular treatment for scrofula, drainage for acute infection, complete excision for congenital cysts, and a head and neck unit for cancer. The operation is only one branch of the plan.",
+   "teach": [
+    {
+     "heading": "Treat the cause in every secondary swelling",
+     "body": "Tuberculous nodes are referred to the tuberculosis unit for a full antitubercular course under the current national guideline, with household screening and nutrition support alongside. The node itself is not excised for cure.\n\nReactive nodes are watched for about six weeks while the dental or throat source is treated. Lymphoma and secondary carcinoma are referred to the oncology and head and neck units, where chemotherapy, radiation and selective dissection are planned together."
+    },
+    {
+     "heading": "Operations that cure congenital lumps",
+     "body": "A thyroglossal cyst is removed by the Sistrunk operation with the central hyoid core, since leaving the tract behind invites recurrence. Infection is settled first, and the scar is planned in a skin crease.\n\nA branchial cyst is excised whole through a crease incision with the facial and spinal accessory nerves kept in view. A small hygroma is excised, while an extensive one is mapped by imaging and debulked or sclerosed in a paediatric surgical unit."
+    },
+    {
+     "heading": "Neck dissection and the unknown primary",
+     "body": "Dissection is planned by levels: selective clearance where nodes are limited, comprehensive clearance with nerve and vessel sacrifice only where disease demands it. The consent covers the marginal mandibular, accessory, hypoglossal and vagus nerves.\n\nWith an unknown primary the search continues after surgery, because the second primary may still declare itself in the tonsil or tongue base. Follow up is shared between surgery, oncology and the tuberculosis unit where relevant."
+    },
+    {
+     "heading": "After the operation and the safety net",
+     "body": "Watch for haematoma under the flap, chyle leak on the left low neck, and voice change from laryngeal nerve handling. A suction drain, head end elevation and early shoulder movement protect the wound and the accessory nerve.\n\nSend every patient home with red flags: rapidly enlarging lump, new voice change, noisy breathing, discharging sinus, or fever beyond two days. Each one returns to the surgical unit at once, not to the chemist."
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "How is tuberculous lymphadenitis treated?",
+     "a": "A full antitubercular course under the current national guideline through the tuberculosis unit, with household screening and nutrition, while the node itself is left to shrink rather than excised.",
+     "accept": [
+      "antitubercular",
+      "national guideline",
+      "household",
+      "not excised"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "Why does a thyroglossal cyst need the Sistrunk operation rather than simple removal?",
+     "a": "The tract runs through the hyoid to the tongue, so simple removal leaves epithelium behind and the cyst recurs; Sistrunk removes the cyst with the central hyoid core and the tract together.",
+     "accept": [
+      "Sistrunk",
+      "hyoid",
+      "tract",
+      "recurs"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "What must the consent for a neck dissection always cover?",
+     "a": "The extent of level clearance, possible sacrifice of nodes bearing structures, and injury to the marginal mandibular, accessory, hypoglossal and vagus nerves with their visible consequences.",
+     "accept": [
+      "levels",
+      "marginal mandibular",
+      "accessory",
+      "hypoglossal"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "locator": "neck_masses_neck_dissection: additionalDifferentials",
+     "source": "StewardMD Clinical KB"
+    },
+    {
+     "locator": "The neck: treatment of thyroglossal and branchial remnants",
+     "source": "Bailey and Love's Short Practice of Surgery"
+    }
+   ],
+   "dosingNote": "This module teaches operative and referral decisions at the level of principle and indication. Specific drugs, doses and regimens must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.annex.neck.node_levels": {
+   "id": "skill.annex.neck.node_levels",
+   "kind": "annexure",
+   "system": "surgery",
+   "title": "Neck node levels at a glance",
+   "oneLine": "Levels one to seven, what each holds, and where each drains from",
+   "why": "FNAC reports, scan reports and operation notes all speak in levels. One table that links each level to its boundaries and its drainage lets you read any report and aim the primary hunt correctly.",
+   "teach": [
+    {
+     "heading": "The level table",
+     "table": {
+      "cols": [
+       "Level",
+       "Boundaries",
+       "Drains from"
+      ],
+      "rows": [
+       [
+        "IA submental",
+        "Between the digastric bellies",
+        "Chin, lip, floor of mouth, tongue tip"
+       ],
+       [
+        "IB submandibular",
+        "Around the submandibular gland",
+        "Palate, cheek, nose, antrum, tongue"
+       ],
+       [
+        "II upper jugular",
+        "Skull base to hyoid along the vein",
+        "Tonsil, tongue base, nasopharynx, larynx"
+       ],
+       [
+        "III mid jugular",
+        "Hyoid to cricoid along the vein",
+        "Mouth, pharynx, upper larynx"
+       ],
+       [
+        "IV lower jugular",
+        "Cricoid to clavicle along the vein",
+        "Thyroid, oesophagus, lower larynx"
+       ],
+       [
+        "V posterior triangle",
+        "Behind the sternomastoid",
+        "Scalp, nasopharynx, chest by Virchow route"
+       ],
+       [
+        "VI central and VII mediastinal",
+        "Around the trachea and upper chest",
+        "Thyroid, larynx, upper oesophagus"
+       ]
+      ]
+     }
+    },
+    {
+     "heading": "Using the levels at the bedside",
+     "body": "A level two node sends you to the tonsil and tongue base with a head mirror and a scope. A level four or left supraclavicular node sends you below the clavicle to the chest, breast and abdomen.\n\nWrite the level into every diagnosis statement and every referral. The receiving unit plans its incisions, its fields and its consent from exactly that line."
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "A node sits at the angle of the jaw along the upper jugular vein. What level is it and where do you look first?",
+     "a": "Level two: examine the tonsil, tongue base, nasopharynx and larynx first, since the upper jugular chain drains the throat above all.",
+     "accept": [
+      "level two",
+      "tonsil",
+      "tongue base",
+      "jugular"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "Why does a left supraclavicular node change the whole search?",
+     "a": "Because the thoracic duct returns left sided lymph to the venous angle at level four, so a Virchow node points to the chest, breast and abdomen rather than the throat.",
+     "accept": [
+      "thoracic duct",
+      "Virchow",
+      "chest",
+      "abdomen"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "locator": "neck_masses_neck_dissection: aliases",
+     "source": "StewardMD Clinical KB"
+    },
+    {
+     "locator": "The neck: lymphatic drainage of the head and neck",
+     "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  }
+ },
+ "osce": {
+  "stations": [
+   {
+    "id": "osce.neck.exam",
+    "title": "Examine the neck swelling",
+    "task": "This 24 year old woman has had a painless right sided neck swelling for four months with evening fever. Examine her neck and present your findings.",
+    "seconds": 480,
+    "skills": [
+     "skill.approach.hygiene",
+     "skill.approach.introduce",
+     "skill.approach.consent",
+     "skill.exam.surg.neck_palpation",
+     "skill.exam.surg.neck_deglutition_tongue",
+     "skill.exam.surg.cervical_nodes",
+     "skill.exam.surg.lateral_neck_mass",
+     "skill.exam.surg.regional_nodes"
+    ],
+    "examinerQuestions": [
+     "The nodes are matted and fixed to the deep plane with intact skin. What does matting prove, and what is the leading diagnosis?",
+     "The swelling does not move on swallowing or tongue protrusion. What two conditions does this exclude, and why?",
+     "Aspiration shows granulomas and CBNAAT is positive. What is the next move, and what must you not offer?"
+    ]
+   },
+   {
+    "id": "osce.neck.history",
+    "title": "Take the history of a neck swelling",
+    "task": "This 24 year old woman has noticed a swelling on the side of her neck. Take a focused history in six minutes and state your leading diagnosis with the urgency.",
+    "seconds": 360,
+    "skills": [
+     "skill.approach.introduce",
+     "skill.approach.consent",
+     "skill.hx.chief_complaints",
+     "skill.hx.surg.lump",
+     "skill.hx.surg.neck_swelling",
+     "skill.hx.neck.risk_factors"
+    ],
+    "examinerQuestions": [
+     "Her story is four months of painless enlargement with evening fever and weight loss. What single background fact would most reframe this swelling?",
+     "She reports a hard node that appeared within weeks with a changed voice. How does your plan change?",
+     "He is a sixty year old beedi smoker with a stony hard fixed node. What do you examine next, and why?"
+    ]
+   }
+  ]
+ },
+ "viva": {
+  "skills": [
+   "skill.reasoning.neck.basics",
+   "skill.hx.surg.neck_swelling",
+   "skill.exam.surg.cervical_nodes",
+   "skill.reasoning.neck.signs",
+   "skill.reasoning.neck.differential",
+   "skill.investigation.neck.workup",
+   "skill.reasoning.neck.diagnosis",
+   "skill.treatment.neck.management"
+  ]
+ },
+ "cases": [
+  {
+   "id": "case.neck.sunita",
+   "title": "A painless neck swelling of four months in a young woman",
+   "opening": "Doctor, for four months there is a swelling on the right side of my neck. It keeps growing slowly. There is no pain, but fever comes in the evening.",
+   "fallback": "Doctor, please ask about the swelling, the fever, my weight, and anyone at home with a prolonged cough.",
+   "initialVitals": {
+    "hr": 92,
+    "bpSystolic": 104,
+    "bpDiastolic": 68,
+    "rr": 18,
+    "spo2": 98,
+    "temp": 37.8,
+    "gcs": 15
+   },
+   "patient": {
+    "name": "Sunita Devi",
+    "age": 24,
+    "sex": "female",
+    "occupation": "Tailor working from home",
+    "residence": "Small town in eastern Uttar Pradesh, lives with her husband and mother-in-law"
+   },
+   "history": {
+    "presenting": {
+     "cues": [
+      "what brings you here today",
+      "tell me about the swelling in the neck",
+      "what is the main problem today"
+     ],
+     "reply": "Doctor, for four months there is a swelling on the right side of my neck. It keeps growing slowly. There is no pain, but fever comes in the evening.",
+     "key": true
+    },
+    "swelling_onset_course": {
+     "cues": [
+      "when did the swelling first appear in the neck",
+      "how did the lump in the neck start",
+      "was the onset sudden or gradual"
+     ],
+     "reply": "It began small, like a peanut, high on the right side of the neck four months back. It has grown slowly since, and never went away on its own.",
+     "key": true
+    },
+    "swelling_size_progress": {
+     "cues": [
+      "how has the neck swelling changed in size",
+      "how big is the swelling now",
+      "has the lump grown since you first noticed it"
+     ],
+     "reply": "It is now the size of a small lime. It grows a little every month. It hangs in the same place and never shrinks, even in the morning.",
+     "key": true
+    },
+    "neck_pain_character": {
+     "cues": [
+      "do you get pain in the neck swelling",
+      "is the lump in the neck painful to touch",
+      "tell me about any pain in the glands of the neck"
+     ],
+     "reply": "No real pain, doctor. Pressing it gives only a dull ache. There was never severe pain, redness or sudden tenderness.",
+     "key": true
+    },
+    "fever_pattern": {
+     "cues": [
+      "do you get fever in the evening",
+      "tell me about fever with the neck swelling",
+      "do you sweat at night with this illness"
+     ],
+     "reply": "Fever comes most evenings with a tired feeling, and twice a week I wake damp with sweat. Mornings are usually free of fever.",
+     "key": true
+    },
+    "weight_appetite_loss": {
+     "cues": [
+      "have you lost weight with this swelling",
+      "how is your appetite these days",
+      "have your clothes loosened in recent months"
+     ],
+     "reply": "I have lost some weight and my appetite is less than before. My regular clothes hang a little loose now.",
+     "key": true
+    },
+    "tb_contact_history": {
+     "cues": [
+      "has someone in your house coughed for months",
+      "do you live with someone treated for tuberculosis",
+      "were you in contact with a tuberculosis patient"
+     ],
+     "reply": "My husband took tuberculosis tablets for many months last year and finished the course. My mother-in-law coughs but was never tested.",
+     "key": true
+    },
+    "past_tb_treatment": {
+     "cues": [
+      "have you ever been treated for tuberculosis yourself",
+      "did you ever take prolonged tablets for TB",
+      "was your chest ever treated for TB"
+     ],
+     "reply": "No, doctor, I never took tuberculosis treatment myself. I had the usual vaccines in childhood and no long illness before this.",
+     "key": false,
+     "skillId": "skill.hx.neck.risk_factors"
+    },
+    "cough_breathing_symptoms": {
+     "cues": [
+      "do you have a cough with this illness",
+      "do you cough up sputum or blood",
+      "are you breathless on exertion"
+     ],
+     "reply": "Only a mild dry cough for two weeks, nothing prolonged. There is no blood in sputum and no breathlessness on daily work.",
+     "key": false
+    },
+    "throat_dental_history": {
+     "cues": [
+      "have you had a sore throat or mouth ulcer recently",
+      "do you have toothache or ear discharge on this side",
+      "any boil on the scalp or face before the swelling"
+     ],
+     "reply": "No sore throat, no mouth ulcer, no toothache and no ear discharge. The swelling came without any boil or throat infection.",
+     "key": true
+    },
+    "voice_swallowing_change": {
+     "cues": [
+      "has your voice changed or become hoarse",
+      "does the swelling move when you swallow",
+      "does food stick on swallowing"
+     ],
+     "reply": "My voice is unchanged and food passes normally. The lump stays still when I swallow water; it does not move up.",
+     "key": true
+    },
+    "tobacco_alcohol_use": {
+     "cues": [
+      "do you smoke beedis or cigarettes",
+      "do you chew tobacco or gutka",
+      "do you drink alcohol regularly"
+     ],
+     "reply": "I never smoked and never used chewing tobacco. I do not drink alcohol at all.",
+     "key": false,
+     "skillId": "skill.hx.neck.risk_factors"
+    },
+    "daily_medicines_list": {
+     "cues": [
+      "which medicines do you take every day",
+      "do you take thyroid tablets or blood thinners",
+      "have you taken steroids for weeks at a time"
+     ],
+     "reply": "No daily medicines, doctor. I took paracetamol for the fever in the first weeks and nothing since.",
+     "key": false
+    },
+    "other_illness_check": {
+     "cues": [
+      "do you have diabetes or thyroid disease",
+      "have you ever been tested for HIV",
+      "any long illness or hospital stay before this"
+     ],
+     "reply": "No diabetes, no thyroid trouble, no hospital stay. I was never tested for HIV; I am willing to be tested if you advise it.",
+     "key": false
+    },
+    "family_similar_swelling": {
+     "cues": [
+      "has anyone in the family had a similar neck swelling",
+      "any cancer of the mouth or throat in the family",
+      "any tuberculosis in close family besides your husband"
+     ],
+     "reply": "Nobody in my family had such a swelling or a mouth cancer. Only my husband had tuberculosis, now treated and well.",
+     "key": false
+    },
+    "redflag_rapid_change": {
+     "cues": [
+      "has the swelling suddenly grown or burst open",
+      "any noisy breathing or difficulty in swallowing",
+      "any opening with discharge over the swelling"
+     ],
+     "reply": "No sudden growth, no bursting, no discharge. Breathing is quiet and swallowing is normal till today.",
+     "key": true
+    }
+   },
+   "exam": {
+    "skill.gen.appearance": {
+     "finding": "Thin built young woman, looks tired but in no distress. Mild pallor. No pedal oedema, no icterus.",
+     "abnormal": true
+    },
+    "skill.gen.vitals": {
+     "finding": "Pulse 92 regular. Blood pressure 104/68. Respiratory rate 18. SpO2 98 percent on room air. Temperature 37.8 C in the evening.",
+     "abnormal": true
+    },
+    "skill.exam.surg.neck_palpation": {
+     "finding": "Matted firm nodes in the right upper and mid lateral neck forming a single mass about 3 cm across. Firm, not warm, skin free over it with no sinus. Fluctuation absent.",
+     "abnormal": true
+    },
+    "skill.exam.surg.cervical_nodes": {
+     "finding": "Right jugulodigastric and mid jugular nodes matted into one mass fixed to the deep plane, skin pinchable over it. Left neck free, no submental or submandibular nodes.",
+     "abnormal": true
+    },
+    "skill.exam.surg.lateral_neck_mass": {
+     "finding": "Mass lies deep to the upper third of the right sternomastoid with its anterior edge palpable. No expansile pulsation and no bruit. On the taut muscle test the mass stays deep to the muscle.",
+     "abnormal": true
+    },
+    "skill.exam.surg.neck_deglutition_tongue": {
+     "finding": "Swelling does not move on swallowing a sip of water and does not rise on tongue protrusion. Thyroid gland not palpable.",
+     "abnormal": false
+    },
+    "skill.exam.surg.regional_nodes": {
+     "finding": "No axillary, inguinal or left supraclavicular nodes. Liver and spleen not palpable. Mouth, tongue, tonsils and thyroid normal on directed examination.",
+     "abnormal": false
+    }
+   },
+   "essentialInvestigations": [
+    "usg_neck",
+    "fnac_neck",
+    "cbnaat_aspirate",
+    "cxr"
+   ],
+   "investigations": {
+    "usg_neck": {
+     "label": "Neck ultrasound",
+     "indicated": true,
+     "result": "Matted hypoechoic right level two and three nodes forming a mass about 3 cm, with necrotic centres and intact surrounding planes. No fluid collection walled for drainage.",
+     "note": "The scan maps the matted levels and keeps the needle inside solid tissue, which is why it comes before every other image."
+    },
+    "fnac_neck": {
+     "label": "Fine needle aspiration cytology",
+     "indicated": true,
+     "result": "Epithelioid granulomas with Langhans giant cells on a caseous background. Acid fast bacilli seen on Ziehl Neelsen stain. No malignant cells.",
+     "note": "Granulomas with caseation and visible bacilli give the tissue diagnosis that examination alone cannot, without any cut into the lump."
+    },
+    "cbnaat_aspirate": {
+     "label": "CBNAAT on the aspirate",
+     "indicated": true,
+     "result": "Mycobacterium tuberculosis detected, rifampicin sensitive. No resistance flagged.",
+     "note": "One test gives the organism and the rifampicin answer together, which smear and Mantoux cannot, and it sets the regimen from day one."
+    },
+    "cxr": {
+     "label": "Chest radiograph",
+     "indicated": true,
+     "result": "No active parenchymal lesion and no mediastinal widening. Lung fields clear on both sides.",
+     "note": "A clear film does not undo nodal disease, but it rules out active lung tuberculosis and mediastinal nodes in the same sitting."
+    },
+    "blood_esr_cbc": {
+     "label": "Blood counts and ESR",
+     "indicated": true,
+     "result": "Haemoglobin 10.2 g per dL with microcytic picture. Total leucocyte count within normal limits. ESR 62 mm in the first hour.",
+     "note": "Anaemia with a raised ESR supports a chronic granulomatous illness, while a normal leucocyte count argues against acute bacterial infection."
+    },
+    "hiv_screen": {
+     "label": "HIV screening",
+     "indicated": true,
+     "result": "Non reactive by rapid test done with consent and counselling.",
+     "note": "Offered alongside every tuberculosis diagnosis, since dual infection changes follow up and household advice."
+    },
+    "tft": {
+     "label": "Thyroid function tests",
+     "indicated": false,
+     "result": "Not sent.",
+     "note": "Not indicated: the swelling does not move on swallowing or tongue protrusion, and there are no eye or hand signs of toxicity."
+    },
+    "excision_biopsy": {
+     "label": "Excision biopsy of the node",
+     "indicated": false,
+     "result": "Not done.",
+     "note": "Not done: the aspirate with CBNAAT already gives the tissue diagnosis, and excision adds a scar without changing treatment."
+    }
+   },
+   "differentialModel": {
+    "answer": "Tuberculous lymphadenitis of the right jugular chain. Consider reactive lymphadenitis, Hodgkin lymphoma, non Hodgkin lymphoma, metastatic neck nodes, and a branchial cyst.",
+    "accept": [
+     "tuberculous lymphadenitis",
+     "reactive lymphadenitis",
+     "hodgkin lymphoma",
+     "non hodgkin lymphoma",
+     "metastatic neck nodes",
+     "branchial cyst"
+    ],
+    "minMatch": 3
+   },
+   "diagnosis": {
+    "answer": "Right sided tuberculous lymphadenitis of levels two and three, present four months, CBNAAT positive and rifampicin sensitive, with household tuberculosis contact.",
+    "accept": [
+     "tuberculous lymphadenitis",
+     "scrofula",
+     "tb lymphadenitis",
+     "cervical tuberculous lymphadenitis"
+    ],
+    "minMatch": 1
+   },
+   "managementModel": {
+    "answer": "Counsel about the prolonged but curable course, refer to the tuberculosis unit for a full weight based antitubercular course under the national guideline with household screening, arrange nutrition support, keep the needle site clean and dry, and review early if a sinus forms or nodes enlarge.",
+    "accept": [
+     "refer to the tuberculosis unit",
+     "full antitubercular course",
+     "national guideline",
+     "household screening",
+     "nutrition support",
+     "review if a sinus forms"
+    ],
+    "minMatch": 3
+   },
+   "teachingPoints": [
+    "Four months of painless growth with evening fever and weight loss in a young adult already favours scrofula over reactive nodes before the needle is passed.",
+    "Matting with fixity to the deep plane and intact pinchable skin is periadenitis, the hand finding of tuberculosis.",
+    "No movement on swallowing or tongue protrusion excludes thyroid and thyroglossal at the bedside within a minute.",
+    "A normal mouth, throat and left supraclavicular fossa keeps the primary hunt short and the case in the early band.",
+    "CBNAAT on the aspirate gives the organism with rifampicin sensitivity together, which smear and Mantoux cannot.",
+    "The node is left to shrink under treatment: cure is proved by the course completed, not by a scar."
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  }
+ ]
+}

@@ -1,0 +1,1277 @@
+{
+  "_comment": "Penetrating abdominal trauma with thoraco-abdominal extension: the primary survey decides, peritonitis and shock are the two operating triggers, and the stable belly without peritonitis earns serial examination. Shared surgery and core skills carry the bedside work; this file owns only the mechanism, the picture, the differential, the workup, the decision and the management.",
+  "id": "abdominal-trauma",
+  "name": "Abdominal and chest trauma",
+  "fullName": "Penetrating abdominal trauma with associated chest injury",
+  "system": "surgery",
+  "kbRef": "penetrating_abdominal_trauma",
+  "oneLine": "Penetrating wounds of the abdomen and lower chest, and the primary survey that decides who goes to theatre",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What a penetrating wound does inside the abdomen, and why the outside misleads",
+      "skills": [
+        "skill.reasoning.abdominaltrauma.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question, with bleeding controlled",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age, build and context set the track before the wound is described",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Expect a young working man injured in an assault, a road crash or a fall onto a sharp object, often reaching a district hospital after delay. Note alcohol at the time of injury, which dulls pain and the history alike, and note pregnancy in a woman of childbearing age, since it displaces organs and changes resuscitation."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting injury",
+      "blurb": "Weapon, track, vomit, urine and breath, in minutes",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.surg.abdominal_trauma",
+        "skill.hx.surg.chest_trauma"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical story runs in hours, not days: a stab or missile wound today, pain that spreads across the belly within hours, vomiting or blood in vomit, and sometimes breathlessness where the track climbs toward the chest."
+        },
+        "skill.hx.surg.abdominal_trauma": {
+          "expect": "Press the mechanism: length of the blade, force of the thrust, number of wounds, and time lost before arrival. Ask urine passage with blood in it, vomiting with blood in it, and the last tetanus injection, since each changes the plan tonight."
+        },
+        "skill.hx.surg.chest_trauma": {
+          "expect": "Ask about breathlessness, chest pain and blood in sputum for any wound at or above the costal margin, since the diaphragm domes high and a low chest wound readily crosses into the abdomen and vice versa."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The background that bleeds, hides signs or infects",
+      "skills": [
+        "skill.hx.abdominal.trauma_risks"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Shock first, then the belly, never the reverse",
+      "skills": [
+        "skill.gen.surg.survey",
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.surg.surgical_shock"
+      ],
+      "emphasis": {
+        "skill.gen.surg.survey": {
+          "expect": "Read the survey as a triage tool: a quiet still patient fits peritonitis, a restless pale one fits continuing internal bleeding, and bleeding from the wound or cold clammy skin pulls resuscitation ahead of any further examination."
+        },
+        "skill.gen.surg.surgical_shock": {
+          "expect": "Expect tachycardia with a thready pulse, sighing rapid breathing, subnormal temperature and a falling pressure where blood is still being lost inside. Hypovolaemia out of proportion to the visible wound, with the chest excluded as the source, is almost a command to open the abdomen."
+        },
+        "skill.gen.vitals": {
+          "expect": "Take pulse, pressure, respiration and temperature together and repeat them, since a single set cannot show the trend. Rising pulse with falling pressure and scanty urine during observation is deterioration, not a stable patient."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Abdomen and chest examination",
+      "blurb": "Wound, belly, chest, back and orifices, in that order",
+      "skills": [
+        "skill.exam.surg.abdominal_trauma",
+        "skill.exam.surg.tenderness_rebound",
+        "skill.exam.surg.peritonitis_signs",
+        "skill.exam.surg.chest_trauma_survey",
+        "skill.exam.surg.tension_pneumothorax",
+        "skill.exam.surg.haemothorax_tamponade"
+      ],
+      "emphasis": {
+        "skill.exam.surg.abdominal_trauma": {
+          "expect": "Inspect the skin first for the bruise, laceration or entry wound, and note pattern bruising such as a seat belt imprint over the wall. Watch whether the belly moves with breathing, look for generalised or localised distension, and remember the pointing sign where the conscious patient places one finger on the worst spot."
+        },
+        "skill.exam.surg.peritonitis_signs": {
+          "expect": "Guarding with rebound over the track means the parietal peritoneum is irritated by blood or gut contents. Absent bowel sounds support peritonitis from a hollow viscus injury, while sounds still present do not exclude a serious injury and the examination must be repeated."
+        },
+        "skill.exam.surg.chest_trauma_survey": {
+          "expect": "Auscultate the chest in every low chest or upper abdominal wound: bowel sounds heard in the chest mean the diaphragm has split. Inspect the back and flanks for a second wound, since the trajectory is often deceptive."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the trauma picture together",
+      "blurb": "Two triggers operate, and one observation earns its place",
+      "skills": [
+        "skill.reasoning.abdominaltrauma.findings"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Stability, wounds, belly verdict and plan in a minute",
+      "skills": [
+        "skill.present.abdominal.case_summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "What else bleeds or inflames the belly after injury",
+      "skills": [
+        "skill.reasoning.abdominaltrauma.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Bedside first, scanner only in the stable",
+      "skills": [
+        "skill.investigation.abdominaltrauma.workup",
+        "skill.ix.surg.fast_dpl_trauma"
+      ],
+      "emphasis": {
+        "skill.ix.surg.fast_dpl_trauma": {
+          "expect": "In this pathway FAST answers one question in the unstable patient, is there free fluid calling for theatre, while local wound exploration answers another in the stable stab wound, has the peritoneum been breached. Diagnostic lavage stays in reserve where FAST is unavailable or silent."
+        }
+      }
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and the theatre decision",
+      "blurb": "Operate, explore or observe, stated as one verdict",
+      "skills": [
+        "skill.reasoning.abdominaltrauma.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Resuscitate, cover, close, and watch the watched belly",
+      "skills": [
+        "skill.treatment.abdominaltrauma.management"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "A stab wound, a watched belly, and a night operation",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.abdominaltrauma.bedside_exam",
+        "title": "Examine the injured abdomen and lower chest",
+        "task": "This 26-year-old man was stabbed in the left upper abdomen six hours ago. He is stable. Examine his abdomen and lower chest and present your findings with a verdict on peritonitis.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.surg.abdominal_trauma",
+          "skill.exam.surg.tenderness_rebound",
+          "skill.exam.surg.peritonitis_signs",
+          "skill.exam.surg.chest_trauma_survey"
+        ],
+        "examinerQuestions": [
+          "Is peritonitis present or absent? Name the exact signs your verdict rests on.",
+          "What did the back and flank inspection add, and what would a second wound there change?",
+          "You hear bowel sounds in the left chest. What has happened and what is the next step?"
+        ]
+      },
+      {
+        "id": "osce.abdominaltrauma.primary_survey",
+        "title": "Primary survey and the theatre decision",
+        "task": "This 30-year-old man has a stab wound to the right flank with pallor and a pulse of 122. Run the primary survey, state your resuscitation, and say whether he needs theatre now.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.gen.surg.survey",
+          "skill.gen.surg.surgical_shock",
+          "skill.hx.surg.abdominal_trauma",
+          "skill.hx.abdominal.trauma_risks"
+        ],
+        "examinerQuestions": [
+          "Talk through your primary survey order and what you did for circulation.",
+          "Which single history point about urine would change your operation plan, and why?",
+          "He stabilises after blood and his belly stays soft. Do you open now, explore the wound, or admit for serial review?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.reasoning.abdominaltrauma.basics",
+      "skill.exam.surg.abdominal_trauma",
+      "skill.ix.surg.fast_dpl_trauma",
+      "skill.reasoning.abdominaltrauma.findings",
+      "skill.reasoning.abdominaltrauma.differential",
+      "skill.investigation.abdominaltrauma.workup",
+      "skill.reasoning.abdominaltrauma.diagnosis",
+      "skill.treatment.abdominaltrauma.management"
+    ]
+  },
+  "skills": {
+    "skill.reasoning.abdominaltrauma.basics": {
+      "id": "skill.reasoning.abdominaltrauma.basics",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "What penetrating abdominal trauma does",
+      "oneLine": "A blade or missile opens the wall, and blood plus gut contents decide what follows",
+      "why": "The entry wound is the least informative part of the injury: a small skin cut can hide a torn liver, a perforated gut and a split diaphragm at once. Thinking in two consequences, bleeding and contamination, tells you which patient needs blood and which needs an operation, before either declares itself fully.",
+      "teach": [
+        {
+          "heading": "Two consequences from one track",
+          "body": "A penetrating object breaches the abdominal wall and can lacerate solid organs such as liver and spleen, causing haemorrhage, or hollow viscera such as bowel and stomach, spilling contents into the cavity. Vascular injury can pour blood rapidly into the belly or behind the peritoneum.\n\nLow energy stab wounds injure along a fairly predictable track, while high energy gunshot wounds spread energy widely and damage tissue beyond the visible path. The result is a mix of haemorrhagic shock from bleeding and, later, peritonitis with sepsis from contamination."
+        },
+        {
+          "heading": "Why the outside misleads",
+          "body": "Stab injury to the right upper abdomen may injure the liver, since the right lobe is larger, less mobile and hurt several times more often than the left. A wound near the costal margin can cross the diaphragm, so chest and abdomen must be examined together.\n\nSeat belt and crush forces add a blunt element: the wall stops suddenly while the contents keep moving, bruising gut against the spine or tearing attachments. Pattern bruising of the skin is the visible clue to that deeper crush."
+        },
+        {
+          "heading": "Solid, hollow, vascular and urinary",
+          "table": {
+            "cols": [
+              "Structure hit",
+              "What follows",
+              "Bedside clue"
+            ],
+            "rows": [
+              [
+                "Solid organ, liver or spleen",
+                "Internal bleeding, sometimes delayed as a clot gives way",
+                "Pallor, restlessness, thirst, spreading tenderness"
+              ],
+              [
+                "Hollow viscus, stomach or bowel",
+                "Spill of contents, then spreading peritonitis",
+                "Guarding, rebound, silent abdomen"
+              ],
+              [
+                "Major vessel or mesentery",
+                "Rapid exsanguination into the cavity",
+                "Collapse within minutes, tense distension"
+              ],
+              [
+                "Bladder, urethra or kidney",
+                "Urinary leak or bloody urine",
+                "Blood at the meatus, urge with drops of blood, loin fullness"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A penetrating abdominal wound kills through which two processes?",
+          "a": "Haemorrhage from torn solid organs or vessels, and later peritonitis with sepsis from spilled hollow viscus contents.",
+          "accept": [
+            "haemorrhage",
+            "bleeding",
+            "peritonitis",
+            "sepsis",
+            "contamination"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why can a small entry wound hide a major injury?",
+          "a": "Because a long blade or a missile damages structures deep along or beyond the visible track, including liver, bowel, vessels and diaphragm, while the skin cut stays small.",
+          "accept": [
+            "track",
+            "deep",
+            "missile",
+            "blade",
+            "diaphragm"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How does a gunshot wound differ from a stab wound in tissue damage?",
+          "a": "A stab wound injures along a relatively predictable track, while a gunshot wound transfers energy widely and causes cavitation with injury beyond the visible path.",
+          "accept": [
+            "predictable",
+            "track",
+            "energy",
+            "cavitation",
+            "beyond"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "penetrating_abdominal_trauma: pathophysiology"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "penetrating_abdominal_trauma: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Abdominal trauma"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Abdominal injuries"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.abdominaltrauma.findings": {
+      "id": "skill.reasoning.abdominaltrauma.findings",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "The penetrating injury picture",
+      "oneLine": "Peritonism and shock are the two operating triggers; the quiet belly earns serial review",
+      "why": "Most wrong decisions in abdominal trauma come from examining once and stopping: a benign early belly can develop peritonitis hours later, and a stable pressure can hide bleeding that declares itself on repeat vitals. Knowing which findings operate and which findings watch is what keeps both errors away.",
+      "teach": [
+        {
+          "heading": "The two triggers that operate",
+          "body": "Haemodynamic instability with pallor, thready pulse, sighing breathing and falling pressure means major bleeding into the cavity and needs immediate operation, not further imaging. Peritonitis with guarding, rebound and a silent abdomen means a hollow viscus has leaked and likewise needs exploration.\n\nEvisceration of gut or omentum, a retained impaling object, and a gunshot track across the cavity join the same list: all go to theatre. The impaling object is stabilised in place and removed only under controlled conditions in theatre."
+        },
+        {
+          "heading": "The belly that may be watched",
+          "body": "A stable stab wound patient with no peritonitis, no evisceration and no concerning track may be selected for non operative care with close observation. The safety of that choice rests entirely on serial abdominal examination, since peritoneal signs can evolve during the watch.\n\nLocal wound exploration under local anaesthesia decides whether the peritoneum has been breached in such wounds. Breach with a benign belly still earns admission and repeated review, not discharge."
+        },
+        {
+          "heading": "Signs that localise the organ",
+          "table": {
+            "cols": [
+              "Finding",
+              "Points toward",
+              "Next step"
+            ],
+            "rows": [
+              [
+                "Left shoulder tip pain worse on inspiration",
+                "Blood under the left diaphragm, spleen",
+                "Urgent review, scan only if stable"
+              ],
+              [
+                "Lost liver dullness with free gas",
+                "Perforated hollow viscus",
+                "Erect film, prepare for theatre"
+              ],
+              [
+                "Flank bruising with loin fullness",
+                "Renal injury with confined bleed",
+                "Urine check, imaging if stable"
+              ],
+              [
+                "Blood at the meatus or scrotal swelling",
+                "Urethral injury",
+                "No blind catheter, surgical referral"
+              ],
+              [
+                "Bowel sounds heard in the chest",
+                "Diaphragmatic split",
+                "Chest film, thoraco-abdominal plan"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which findings mandate immediate operation in penetrating abdominal trauma?",
+          "a": "Haemodynamic instability, peritonitis, evisceration, a retained impaling object, or a gunshot track across the peritoneal cavity.",
+          "accept": [
+            "instability",
+            "peritonitis",
+            "evisceration",
+            "impaling",
+            "gunshot"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A stable stab wound patient has a soft belly with no peritonitis. Discharge home?",
+          "a": "No. Selected stable stab wounds may be managed non operatively, but only with admission, local wound exploration and serial abdominal examination to catch evolving peritonitis.",
+          "accept": [
+            "admission",
+            "serial",
+            "exploration",
+            "peritonitis",
+            "observe"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What does left shoulder tip pain after a left sided abdominal injury mean?",
+          "a": "Referred pain from blood irritating the left diaphragm, classically pointing to splenic bleeding, demonstrated by nursing the foot of the bed raised so blood collects under the diaphragm.",
+          "accept": [
+            "diaphragm",
+            "referred",
+            "splenic",
+            "blood",
+            "shoulder"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "penetrating_abdominal_trauma: clinicalPearls"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "penetrating_abdominal_trauma: redFlags"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Abdominal trauma"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Abdominal injuries"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.abdominaltrauma.differential": {
+      "id": "skill.reasoning.abdominaltrauma.differential",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Differential diagnosis after a penetrating wound",
+      "oneLine": "Breach or not, belly or chest or behind, and which organ bleeds",
+      "why": "Calling every wound a laparotomy wastes theatres, and calling every stable belly safe misses the retroperitoneal bleed and the thoraco-abdominal track. A short structured list, breach excluded, neighbours excluded, organ named, keeps both errors in view.",
+      "teach": [
+        {
+          "heading": "First branch: has the cavity been breached",
+          "body": "A superficial wound that has not crossed the peritoneum needs cleaning, tetanus cover and closure, not a laparotomy. Local wound exploration in a stable stab wound answers exactly this question.\n\nOnce breach is shown or assumed from peritonitis, shock or evisceration, the question changes from whether to open to how urgently, and the differential becomes which organ and which cavity."
+        },
+        {
+          "heading": "Second branch: belly, chest, behind or below",
+          "table": {
+            "cols": [
+              "Territory",
+              "Injury to exclude",
+              "How it shows"
+            ],
+            "rows": [
+              [
+                "Thoraco-abdominal track",
+                "Diaphragm and lower chest injury",
+                "Breathlessness, bowel sounds in chest, chest film"
+              ],
+              [
+                "Retroperitoneum",
+                "Vascular or renal bleed behind the sac",
+                "Flank fullness, loin bruising, lost psoas shadow"
+              ],
+              [
+                "Pelvis and bladder",
+                "Bladder rupture with pelvic fracture",
+                "No urine passed, compression tenderness of pelvis"
+              ],
+              [
+                "Concurrent blunt injury",
+                "Head, spine or limb injury alongside",
+                "Full survey, log roll, limb and neuro check"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Third branch: which organ bleeds or leaks",
+          "body": "Solid organ bleeding from liver or spleen gives pallor with restlessness and spreading dullness, while hollow viscus leak gives guarding with rebound and a silent abdomen. Mesenteric tears threaten gut viability even before frank leak, so persistent tenderness with deterioration despite fluids should prompt opening.\n\nRenal injury gives loin pain with haematuria and perinephric fullness, bladder rupture gives failure to pass urine with lower abdominal tenderness, and urethral injury gives blood at the meatus with perineal swelling."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name four territories beyond the free peritoneal cavity that a penetrating track may reach.",
+          "a": "The lower chest across the diaphragm, the retroperitoneum with its vessels and kidneys, the pelvis with bladder and urethra, and concurrent blunt injury sites such as head, spine and limbs.",
+          "accept": [
+            "chest",
+            "diaphragm",
+            "retroperitoneum",
+            "pelvis",
+            "bladder"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How do you separate solid organ bleeding from hollow viscus leak at the bedside?",
+          "a": "Bleeding gives pallor, restlessness and spreading dullness with shifting fluid, while leak gives guarding, rebound tenderness and absent bowel sounds as peritonitis sets in.",
+          "accept": [
+            "pallor",
+            "dullness",
+            "guarding",
+            "rebound",
+            "bowel sounds"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "penetrating_abdominal_trauma: additionalDifferentials"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "penetrating_abdominal_trauma: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Abdominal trauma"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.investigation.abdominaltrauma.workup": {
+      "id": "skill.investigation.abdominaltrauma.workup",
+      "kind": "investigation",
+      "system": "surgery",
+      "title": "Investigating penetrating abdominal trauma",
+      "oneLine": "Bedside scan and film now, scanner only in the stable, blood ready throughout",
+      "why": "Imaging never outranks instability: scanning an exsanguinating patient delays the only treatment that works. Ordered the right way, each test answers one decision, fluid or no fluid, breach or no breach, chest involved or clear, blood ready or not.",
+      "teach": [
+        {
+          "heading": "Decide stability before ordering anything",
+          "body": "The unstable patient with peritonitis or evisceration goes to theatre without further imaging, since delay allows exsanguination or spreading sepsis with high mortality. Resuscitation with blood products runs alongside the decision, never after it.\n\nThe stable patient earns the workup: focused sonography for free fluid, erect chest film for free air and thoracic injury, local wound exploration for breach, and grouping with crossmatch. Computed tomography of the abdomen defines the trajectory and organ injury only in this stable group."
+        },
+        {
+          "heading": "What each test answers",
+          "table": {
+            "cols": [
+              "Test",
+              "Answers",
+              "When it leads"
+            ],
+            "rows": [
+              [
+                "FAST scan",
+                "Free fluid in the cavity",
+                "Positive with instability supports theatre"
+              ],
+              [
+                "Erect chest film",
+                "Free air under diaphragm, chest injury",
+                "Free gas proves hollow viscus leak"
+              ],
+              [
+                "Local wound exploration",
+                "Peritoneal breach in stab wounds",
+                "Breach with benign belly earns admission"
+              ],
+              [
+                "Blood grouping and crossmatch",
+                "Transfusion readiness",
+                "Sent early in every significant wound"
+              ],
+              [
+                "Urine routine and microscopy",
+                "Haematuria pointing to renal injury",
+                "Blood in urine triggers renal imaging"
+              ],
+              [
+                "CT abdomen in the stable",
+                "Trajectory and organ injury detail",
+                "Plans selective non operative care"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Tests to use sparingly, and the Indian ordering",
+          "body": "Peritoneal aspiration and lavage keep a reserve role where sonography is unavailable or silent, with a small saline wash examined for blood and gut contents. Contrast studies, cystography and endoscopy serve only defined doubts such as suspected bladder or upper gut leak.\n\nOrder blood early, since grouping and crossmatch take time and the unstable patient needs products, not promises. At a centre without a scanner, a stable patient with a concerning track is referred with the FAST result, the films and grouped blood rather than watched without cover."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "An unstable stab abdomen arrives with a pressure of 80 systolic. CT first?",
+          "a": "No. The unstable, peritonitic or eviscerated patient goes straight to laparotomy, since imaging delay allows exsanguination or sepsis and worsens survival.",
+          "accept": [
+            "theatre",
+            "laparotomy",
+            "delay",
+            "exsanguination",
+            "unstable"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What does FAST answer, and what does local wound exploration answer?",
+          "a": "FAST detects free intraperitoneal fluid suggesting bleeding, while local wound exploration in a stable stab wound shows whether the peritoneum has been breached.",
+          "accept": [
+            "fluid",
+            "free",
+            "breach",
+            "peritoneum",
+            "exploration"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is the erect chest film routine even when the wound is abdominal?",
+          "a": "Because it shows free gas under the diaphragm proving hollow viscus perforation, and reveals associated thoracic injury and a ruptured diaphragm with abdominal contents in the chest.",
+          "accept": [
+            "gas",
+            "diaphragm",
+            "thoracic",
+            "perforation",
+            "erect"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "penetrating_abdominal_trauma: additionalInvestigations"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "penetrating_abdominal_trauma: pitfalls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Abdominal trauma"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Abdominal injuries"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.reasoning.abdominaltrauma.diagnosis": {
+      "id": "skill.reasoning.abdominaltrauma.diagnosis",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Diagnosis and the theatre decision",
+      "oneLine": "Name the wound, state the verdict: operate, explore or observe",
+      "why": "A trauma diagnosis is incomplete until it states what happens next, because the same stab wound means theatre tonight in one patient and a watched bed in another. The verdict format forces stability, peritonitis and track into one line the whole team can act on.",
+      "teach": [
+        {
+          "heading": "The three verdicts",
+          "body": "Immediate laparotomy covers instability, peritonitis, evisceration, a retained object and a transperitoneal gunshot track. Wound exploration under cover suits the stable stab wound where breach is uncertain. Admitted observation with serial examination suits the stable breached or equivocal belly without peritonitis.\n\nState the diagnosis as mechanism plus territory plus physiology, for example a stab wound of the anterior wall with traumatic peritonitis and early shock. That one line carries the indication for theatre by itself."
+        },
+        {
+          "heading": "Reassessment is part of the diagnosis",
+          "body": "A benign first examination never closes the case, since characteristic signs often appear later as blood accumulates or peritonitis spreads. Repeated examination of the same belly by the same hands is the most sensitive instrument on the ward.\n\nRising pulse with falling pressure, spreading tenderness, new rebound, a silent abdomen or a falling urine output each convert observation into operation. Document the trigger at the time so the night team knows exactly what changed."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Give the three disposition verdicts for a penetrating abdominal wound.",
+          "a": "Immediate laparotomy for instability, peritonitis, evisceration or gunshot transit; wound exploration for the stable wound of uncertain breach; admitted observation with serial examination for the stable belly without peritonitis.",
+          "accept": [
+            "laparotomy",
+            "exploration",
+            "observation",
+            "serial",
+            "peritonitis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which changes during observation convert a watched belly into an operation?",
+          "a": "Rising pulse with falling pressure, spreading tenderness with new rebound, a newly silent abdomen, distension with free fluid, or falling urine output despite fluids.",
+          "accept": [
+            "pulse",
+            "pressure",
+            "rebound",
+            "silent",
+            "urine"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "penetrating_abdominal_trauma: management"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "penetrating_abdominal_trauma: prognosis"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Abdominal trauma"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.treatment.abdominaltrauma.management": {
+      "id": "skill.treatment.abdominaltrauma.management",
+      "kind": "treatment",
+      "system": "surgery",
+      "title": "Managing penetrating abdominal trauma",
+      "oneLine": "Stop the bleeding, cover the contamination, close or watch by verdict",
+      "why": "Trauma kills in two windows: bleeding in the first hours and infection in the days after. Resuscitation with blood, early antibiotics with tetanus cover, and a timely operation each close one window, and omitting any one of them wastes the other two.",
+      "teach": [
+        {
+          "heading": "Primary survey with haemorrhage control",
+          "body": "Secure the airway first, then press on bleeding, apply pressure dressings and transfix visible bleeders while large bore access goes in. Resuscitate with balanced blood products and activate the massive transfusion pathway in haemorrhagic shock, warming the patient throughout.\n\nStabilise any impaling object in place with bulky dressings and remove it only in theatre under vision. Give broad spectrum antibiotics early where hollow viscus contamination is likely, and tetanus prophylaxis according to cover, since the peritoneal cavity is already exposed to the outside."
+        },
+        {
+          "heading": "The operation and its abbreviated form",
+          "body": "Laparotomy controls bleeding, repairs or resects injured gut, washes the cavity and leaves drains where needed. Splenic and hepatic bleeding is dealt with by conservation where the patient allows and by removal or packing where it does not, and mesenteric tears are repaired before the segment loses viability.\n\nWhere hypothermia, acidosis and coagulopathy gather, abbreviate to damage control: stop the bleeding and the leak quickly, pack, close temporarily, restore physiology in intensive care and return for definitive repair. Attempting a long definitive operation in a dying physiology kills."
+        },
+        {
+          "heading": "The watched belly and the Indian ward reality",
+          "points": [
+            "Keep the observed patient nil by mouth with a Ryle tube on drainage, hourly pulse, pressure and urine measurement, and repeat belly examination on a fixed schedule.",
+            "Continue antibiotics and wound care, watch for spreading redness, fever and distension, and re-examine the back and flanks each round for a missed second wound.",
+            "At a centre without theatre, resuscitate, decompress the stomach, start antibiotics, arrange grouped blood and refer urgently to a hospital with surgical facility; emergency laparotomy care is covered under government schemes such as Ayushman Bharat for eligible families.",
+            "Counsel against bidi, alcohol and painkiller abuse at discharge, confirm tetanus protection is complete, and give a clear date and danger signs for review."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the first steps for a bleeding penetrating abdominal wound?",
+          "a": "Primary survey with airway and haemorrhage control, large bore access with blood product resuscitation, stabilisation of any impaling object, early broad spectrum antibiotics and tetanus prophylaxis.",
+          "accept": [
+            "haemorrhage",
+            "blood",
+            "impaling",
+            "antibiotics",
+            "tetanus"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "When should the surgeon abbreviate to damage control?",
+          "a": "In the lethal sequence of hypothermia, acidosis and coagulopathy: control bleeding and contamination fast, pack with temporary closure, restore physiology in intensive care, then return for definitive repair.",
+          "accept": [
+            "hypothermia",
+            "acidosis",
+            "coagulopathy",
+            "pack",
+            "physiology"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Never remove an impaling object in the emergency bay. Why?",
+          "a": "Because the object may tamponade a torn vessel, so removal outside controlled theatre conditions can trigger uncontrolled bleeding that cannot be caught in time.",
+          "accept": [
+            "tamponade",
+            "vessel",
+            "bleeding",
+            "theatre",
+            "controlled"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "penetrating_abdominal_trauma: management"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "penetrating_abdominal_trauma: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Abdominal trauma"
+        },
+        {
+          "source": "ATLS (Advanced Trauma Life Support)",
+          "locator": "Primary survey and haemorrhagic shock"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of principle and sequence. Specific agents, volumes, ratios and durations must be taken from your current national or institutional guideline and local blood bank practice at the time of prescribing. CliniX does not prescribe."
+    },
+    "skill.annex.abdominaltrauma.primarysurvey": {
+      "id": "skill.annex.abdominaltrauma.primarysurvey",
+      "kind": "annexure",
+      "system": "surgery",
+      "title": "Primary survey and red flag reference",
+      "oneLine": "The ordered survey with the findings that force theatre",
+      "why": "Memory fails under the noise of a trauma bay, and a written order is what keeps airway before belly and bleeding before imaging. This reference puts the sequence and the non negotiable triggers on one page for revision and for the wall.",
+      "teach": [
+        {
+          "heading": "Primary survey order",
+          "table": {
+            "cols": [
+              "Step",
+              "Check",
+              "Act at once"
+            ],
+            "rows": [
+              [
+                "Airway with spine care",
+                "Patency, voice, stridor",
+                "Open, suction, protect neck"
+              ],
+              [
+                "Breathing",
+                "Rate, saturation, chest movement, trachea",
+                "Seal open wound, decompress tension"
+              ],
+              [
+                "Circulation",
+                "Pulse, pressure, pelvis, wound bleeding",
+                "Press, transfuse, pelvis binder"
+              ],
+              [
+                "Disability",
+                "Conscious level, pupils, limbs move",
+                "Glucose, lateralise, scan head if fallen"
+              ],
+              [
+                "Exposure",
+                "Whole skin front and back, orifices",
+                "Warm, cover, log roll to see the back"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Red flags that force theatre",
+          "body": "Haemodynamic instability despite fluids, spreading peritonitis with guarding and rebound, evisceration of gut or omentum, a retained impaling object, and a gunshot track across the cavity each mandate immediate laparotomy.\n\nRising lactate or persistent shock despite resuscitation, and new peritoneal signs during observation of a watched belly, carry the same weight: the verdict changes to operate without waiting for a scanner."
+        },
+        {
+          "heading": "Do not forget list",
+          "points": [
+            "Inspect the back and flanks and the perineum in every case, since a second wound hides there.",
+            "Ask urine passage with blood in it and confirm tetanus cover before the patient leaves the bay.",
+            "Look at the chest film for free gas and for abdominal contents above the diaphragm.",
+            "Repeat vitals and the belly examination on a fixed schedule and write the trend, not one reading."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Recite the primary survey order and one action per step.",
+          "a": "Airway, breathing, circulation, disability and exposure: open the airway, seal or decompress the chest, press and transfuse, check consciousness and glucose, and expose the whole body including the back.",
+          "accept": [
+            "airway",
+            "breathing",
+            "circulation",
+            "disability",
+            "exposure"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Which five findings force immediate laparotomy?",
+          "a": "Instability despite fluids, peritonitis, evisceration, a retained impaling object, and a transperitoneal gunshot track.",
+          "accept": [
+            "instability",
+            "peritonitis",
+            "evisceration",
+            "impaling",
+            "gunshot"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "penetrating_abdominal_trauma: redFlags"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "penetrating_abdominal_trauma: pitfalls"
+        },
+        {
+          "source": "ATLS (Advanced Trauma Life Support)",
+          "locator": "Primary survey"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.abdominaltrauma.ravi",
+      "title": "A vegetable vendor stabbed on his way home",
+      "opening": "Ravi Shankar, 26, was brought to the casualty by his brother two hours after a robbery on his way back from the mandi. He has a cloth pressed over a cut on his left upper belly and winces each time the stretcher jerks. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Ravi Shankar",
+        "age": 26,
+        "sex": "male",
+        "occupation": "Vegetable vendor at the town mandi",
+        "residence": "Lives with his wife, mother and brother in a rented room near the market"
+      },
+      "initialVitals": {
+        "hr": 116,
+        "bpSystolic": 102,
+        "bpDiastolic": 66,
+        "rr": 26,
+        "spo2": 95,
+        "temp": 38.1,
+        "gcs": 15
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you here",
+            "what is the problem today",
+            "why have you come here",
+            "tell me what happened",
+            "how can I help you",
+            "what is troubling you most"
+          ],
+          "reply": "Doctor, two men stopped me near the mandi gate and stabbed me in the belly with a knife. Since then the whole stomach aches and I vomited once on the way here.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "assault_timing_place": {
+          "cues": [
+            "when did this happen",
+            "how long ago were you stabbed",
+            "where did the attack take place",
+            "time since injury"
+          ],
+          "reply": "About two hours ago, just after nine at night near the mandi gate. My brother hired an auto and brought me straight here.",
+          "key": true
+        },
+        "weapon_length_thrusts": {
+          "cues": [
+            "what weapon was used",
+            "how long was the knife",
+            "how many times were you stabbed",
+            "single thrust or several wounds"
+          ],
+          "reply": "A vegetable knife, maybe this long, showing about fifteen centimetres with his hand. Only one thrust, here on the left side below the ribs. Nothing is stuck inside.",
+          "key": true,
+          "skillId": "skill.hx.surg.abdominal_trauma"
+        },
+        "wound_bleed_soakage": {
+          "cues": [
+            "how much blood came out",
+            "did the wound bleed a lot",
+            "cloth soaked with blood",
+            "bleeding from the entry wound"
+          ],
+          "reply": "It bled at first and soaked one gamchha fully. Now it only oozes. Nothing is coming out of it, no gut or anything, only a little blood.",
+          "key": true
+        },
+        "pain_belly_pointing": {
+          "cues": [
+            "where exactly does it hurt",
+            "point with one finger to the worst pain",
+            "pain all over or in one place",
+            "belly pain location and spread"
+          ],
+          "reply": "It started here where the knife went in, and now the whole belly hurts when I move or cough. Pressing anywhere pains me, doctor, so I lie very still.",
+          "key": true
+        },
+        "pain_shoulder_left": {
+          "cues": [
+            "pain in the left shoulder",
+            "shoulder tip pain on breathing",
+            "referred pain to the shoulder",
+            "left shoulder ache after injury"
+          ],
+          "reply": "Yes, there is a strange ache at the tip of my left shoulder when I breathe in deep. My shoulder was never touched in the fight.",
+          "key": true
+        },
+        "vomit_blood_content": {
+          "cues": [
+            "did you vomit after injury",
+            "blood in the vomit",
+            "what did the vomit contain",
+            "vomiting since the stab"
+          ],
+          "reply": "I vomited once in the auto. It was the evening food, no blood in it, only sour water. I feel like vomiting again but nothing comes.",
+          "key": true
+        },
+        "breath_chest_tightness": {
+          "cues": [
+            "any difficulty in breathing",
+            "chest pain while breathing",
+            "breathlessness after the stab",
+            "blood while coughing"
+          ],
+          "reply": "Breathing feels tight because the belly hurts when it moves, but there is no chest pain as such. I have not coughed any blood.",
+          "key": true,
+          "skillId": "skill.hx.surg.chest_trauma"
+        },
+        "urine_blood_passage": {
+          "cues": [
+            "have you passed urine since injury",
+            "blood mixed in urine",
+            "burning while passing urine",
+            "urge to pass water with drops of blood"
+          ],
+          "reply": "I passed a little urine behind the mandi before the auto left. It looked yellow and normal, no red colour. After that I have not felt like going.",
+          "key": true
+        },
+        "stool_wind_stoppage": {
+          "cues": [
+            "have you passed gas since injury",
+            "motions stopped after stab",
+            "abdomen becoming tight and distended",
+            "flatus or stool passage"
+          ],
+          "reply": "No gas and no motion since the stab, doctor. The stomach feels tight and full of air that does not come out.",
+          "key": true
+        },
+        "fever_time_course": {
+          "cues": [
+            "fever after the stab wound",
+            "feeling hot or shivery",
+            "temperature rising since injury",
+            "chills following the attack"
+          ],
+          "reply": "I feel hot now, but at the time of the fight I was only sweating with fear. The heat has come in the last one hour.",
+          "key": true
+        },
+        "alcohol_meal_status": {
+          "cues": [
+            "had you been drinking alcohol",
+            "last meal before injury",
+            "empty stomach or full stomach",
+            "alcohol at the time of attack"
+          ],
+          "reply": "I had eaten rice and dal at the stall around eight, one hour before it happened. I do not drink alcohol, only tea.",
+          "key": true
+        },
+        "bleed_drug_intake": {
+          "cues": [
+            "tablets for bleeding or pain",
+            "blood thinner tablets daily",
+            "painkiller before coming here",
+            "steroid tablets for any illness"
+          ],
+          "reply": "I take no daily tablets. The chemist near the mandi gave me one painkiller which I swallowed in the auto. I take nothing else.",
+          "key": true
+        },
+        "belly_operation_scar": {
+          "cues": [
+            "any operation on the abdomen before",
+            "previous surgery scar on belly",
+            "hernia repair in the past",
+            "old scar near this wound"
+          ],
+          "reply": "No operation ever, doctor. This belly has never been cut before. No hernia, no piles operation, nothing.",
+          "key": true
+        },
+        "sugar_pressure_illness": {
+          "cues": [
+            "diabetes or sugar illness",
+            "blood pressure problem",
+            "heart or kidney disease",
+            "any long standing disease"
+          ],
+          "reply": "No sugar, no pressure, no fits, nothing. I have never been admitted to a hospital before today.",
+          "key": true
+        },
+        "tetanus_shot_record": {
+          "cues": [
+            "last tetanus injection date",
+            "tetanus toxoid cover",
+            "injection against lockjaw",
+            "childhood or recent tetanus shots"
+          ],
+          "reply": "I got injections as a child, but after that never. No tetanus injection in the last many years, certainly not after any cut.",
+          "key": true
+        },
+        "home_family_support": {
+          "cues": [
+            "family members at home",
+            "who will give blood if needed",
+            "consent for operation from family",
+            "is your family here"
+          ],
+          "reply": "My brother is outside with my wife. He says he will give blood if the doctor needs it, and whatever operation is needed, do it fast.",
+          "key": true
+        }
+      },
+      "exam": {
+        "skill.gen.surg.survey": {
+          "finding": "Alert young man lying still with knees drawn up, reluctant to move. Pale with dry tongue. A blood stained cloth covers a left subcostal wound. No active spurting.",
+          "abnormal": true
+        },
+        "skill.gen.appearance": {
+          "finding": "Anxious and pale, sweating lightly. Moves as little as possible and guards the belly with both hands when the stretcher moves.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 116 regular and thready. Blood pressure 102 over 66. Respiratory rate 26 with shallow excursion. Temperature 38.1 C. SpO2 95 percent on room air.",
+          "abnormal": true
+        },
+        "skill.gen.surg.surgical_shock": {
+          "finding": "Early compensated shock: tachycardia with borderline pressure, cool peripheries, delayed capillary refill and scanty concentrated urine. Chest is clear so the loss is abdominal.",
+          "abnormal": true
+        },
+        "skill.exam.surg.abdominal_trauma": {
+          "finding": "Single 2 cm transverse stab wound at the left costal margin with oozing and surrounding bruising. Belly does not move with respiration. Generalised distension with diffuse tenderness, involuntary guarding and rebound in all quadrants. Shifting dullness present at the flanks. Liver dullness preserved. Bowel sounds absent after two minutes of listening.",
+          "abnormal": true
+        },
+        "skill.exam.surg.tenderness_rebound": {
+          "finding": "Diffuse rebound tenderness: gentle pressure tolerated poorly, sudden release produces a wince and a cry. Rigidity is involuntary and persists between breaths, unlike voluntary guarding.",
+          "abnormal": true
+        },
+        "skill.exam.surg.peritonitis_signs": {
+          "finding": "Generalised peritonitis established: board like rigidity, rebound in every quadrant, absent bowel sounds and a still patient. Pattern fits a hollow viscus leak within hours of injury.",
+          "abnormal": true
+        },
+        "skill.exam.surg.chest_trauma_survey": {
+          "finding": "Chest moves symmetrically with no open wound, no surgical emphysema and no flail segment. Air entry equal on both sides with no bowel sounds heard in the chest. Back and flanks inspected by log roll: no second wound, no loin bruising. Perineum clean, no blood at the meatus. Rectal examination: empty rectum with no blood, no boggy pouch felt yet.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "fast_scan",
+        "erect_chest_film",
+        "blood_group_crossmatch",
+        "wound_exploration_local"
+      ],
+      "investigations": {
+        "fast_scan": {
+          "label": "FAST scan",
+          "indicated": true,
+          "result": "Free fluid in Morrison pouch and in the pelvis. No pericardial fluid. Spleen outline intact, liver outline intact on limited views.",
+          "note": "Free fluid with peritonitis and a falling pressure means blood plus gut contents in the cavity: this is a theatre finding, not a scanner finding."
+        },
+        "erect_chest_film": {
+          "label": "Erect chest radiograph",
+          "indicated": true,
+          "result": "No free gas under the diaphragm. Both lung fields expanded with no collection. No bowel loops in the chest. Lower ribs intact.",
+          "note": "No free gas does not exclude a leak: small bowel perforation often shows none early. The value here is the clear chest and the intact diaphragm shadow."
+        },
+        "blood_group_crossmatch": {
+          "label": "Blood grouping, crossmatch and haemogram",
+          "indicated": true,
+          "result": "Group B positive, four units crossmatched and two already issued. Haemoglobin 9.8 g per dL with neutrophil leucocytosis.",
+          "note": "Sent at arrival alongside resuscitation, so blood is ready when theatre calls rather than after."
+        },
+        "wound_exploration_local": {
+          "label": "Local wound exploration under local anaesthesia",
+          "indicated": true,
+          "result": "Track passes through the anterior wall into the peritoneal cavity with a small ooze of blood stained fluid. Peritoneum breached.",
+          "note": "Confirms breach in minutes at the bedside. With peritonitis already present it changes nothing about theatre, but it closes the superficial wound question for the record."
+        },
+        "ct_abdomen_stable": {
+          "label": "CT abdomen and pelvis with contrast",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Not indicated: he has peritonitis with early shock and free fluid, so the scanner would only delay the laparotomy that is already decided. CT is reserved for the stable belly without peritonitis."
+        },
+        "urine_routine": {
+          "label": "Urine routine and microscopy",
+          "indicated": true,
+          "result": "No red cells seen. No albumin or sugar.",
+          "note": "A normal result here matches the clear urine history and keeps renal injury low on the list, though it never rules out bleeding elsewhere."
+        }
+      },
+      "differentialModel": {
+        "answer": "Penetrating abdominal trauma from an anterior abdominal stab wound with traumatic peritonitis from a small bowel perforation and haemoperitoneum. Consider splenic rupture, diaphragmatic injury, retroperitoneal haematoma and bladder rupture as associated injuries.",
+        "accept": [
+          "Haemoperitoneum",
+          "Splenic rupture",
+          "Small bowel perforation",
+          "Diaphragmatic injury",
+          "Penetrating abdominal trauma",
+          "Anterior abdominal stab wound",
+          "Traumatic peritonitis",
+          "Pneumothorax"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Penetrating abdominal trauma: anterior abdominal stab wound at the left costal margin with traumatic peritonitis from a small bowel perforation, with early haemorrhagic shock.",
+        "accept": [
+          "Penetrating abdominal trauma",
+          "Anterior abdominal stab wound",
+          "Traumatic peritonitis",
+          "Small bowel perforation"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Primary survey with haemorrhage control, large bore fluids with blood transfusion, nil by mouth with Ryle tube drainage, broad spectrum antibiotics with tetanus prophylaxis, hourly urine monitoring, and urgent laparotomy with bowel repair and washout.",
+        "accept": [
+          "primary survey",
+          "haemorrhage control",
+          "intravenous fluids",
+          "blood transfusion",
+          "nil by mouth",
+          "Ryle tube",
+          "antibiotics",
+          "tetanus",
+          "laparotomy",
+          "bowel repair",
+          "urine output"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "Hours, not days, is the tempo: a stab tonight with a spreading belly by morning means leak and blood, and waiting for a classic picture wastes the window.",
+        "Left shoulder tip pain after a left sided injury is blood under the diaphragm speaking, and it should raise the spleen and upper gut high on the list.",
+        "An absent bowel sound supports peritonitis, but present sounds never exclude a serious injury, which is why the belly is examined again and again.",
+        "No free gas under the diaphragm does not clear a small bowel perforation early, and a scanner never outranks peritonitis with shock.",
+        "The back, the flanks, the perineum and the meatus are examined in every case, since the track is deceptive and a second wound hides behind.",
+        "Tetanus cover is asked and given on the day of injury, not remembered at discharge, because the cavity is already exposed to the outside."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

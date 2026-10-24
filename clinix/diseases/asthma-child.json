@@ -1,0 +1,1323 @@
+{
+  "_comment": "CliniX disease pathway for Bronchial asthma and bronchiolitis in children. Authoring rules: clinix-model.js, Final Year Expansion Plan WP3.",
+  "id": "asthma-child",
+  "name": "Bronchial asthma and bronchiolitis in children",
+  "fullName": "Bronchial asthma and bronchiolitis in children: Wheeze in childhood",
+  "subtitle": "Wheeze in childhood",
+  "system": "paediatrics",
+  "kbRef": "pediatric_status_asthmaticus",
+  "oneLine": "Clinical differentiation, severity grading, emergency bronchodilator protocol, and long-term control for childhood wheezing",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics of childhood wheeze and asthma",
+      "skills": [
+        "skill.asthma.child.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the child with breathlessness",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.paed.rapport",
+        "skill.approach.paed.consent_assent",
+        "skill.approach.paed.positioning"
+      ],
+      "emphasis": {
+        "skill.approach.paed.rapport": {
+          "expect": "When approaching a breathless child, remain calm, unhurried, and examine the child on the parent lap to avoid precipitating increased agitation and worsening respiratory distress."
+        }
+      }
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars and age thresholds",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Chronological age is pivotal: infants under two years presenting with their first wheezing episode typically have acute bronchiolitis, whereas children aged over three to five years with recurrent wheeze have bronchial asthma."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.paed.presenting_complaint",
+        "skill.hx.asthma.wheeze_story"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Clarify whether the chief complaint is sudden-onset breathlessness, recurrent wheeze with cough, or persistent noisy breathing, and establish the exact time of onset and duration."
+        },
+        "skill.hx.paed.presenting_complaint": {
+          "expect": "Elicit whether breathing difficulty is worse at night or early morning, responsiveness to inhaled bronchodilators, and presence of feeding difficulty or inability to speak."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, environmental and family history",
+      "skills": [
+        "skill.hx.paed.immunisation",
+        "skill.hx.paed.family_pedigree",
+        "skill.hx.paed.socioeconomic",
+        "skill.hx.asthma.triggers_atopy"
+      ],
+      "emphasis": {
+        "skill.hx.paed.immunisation": {
+          "expect": "Verify completion of primary immunisations and enquire about optional pneumococcal and annual influenza vaccines which reduce the incidence of severe viral-triggered asthma exacerbations."
+        },
+        "skill.hx.paed.family_pedigree": {
+          "expect": "Construct a pedigree enquiring specifically about asthma, allergic rhinitis, and eczema in parents and siblings, which strongly increases the probability of childhood atopic asthma."
+        },
+        "skill.hx.paed.socioeconomic": {
+          "expect": "Assess living conditions, kitchen ventilation, domestic tobacco and bidi smoke, and biomass fuel use (chulha), which serve as significant environmental triggers for recurrent wheezing."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General physical examination and distress signs",
+      "skills": [
+        "skill.gen.paed.appearance",
+        "skill.gen.paed.vitals",
+        "skill.gen.paed.cyanosis",
+        "skill.gen.paed.clubbing",
+        "skill.gen.paed.hydration"
+      ],
+      "emphasis": {
+        "skill.gen.paed.appearance": {
+          "expect": "Observe the child posture and alertness from a distance: sitting upright or in the tripod position and agitated or drowsy indicates severe respiratory distress."
+        },
+        "skill.gen.paed.vitals": {
+          "expect": "Measure respiratory rate over a full 60 seconds; tachypnoea, tachycardia, and room-air SpO2 <92% signify a severe exacerbation."
+        },
+        "skill.gen.paed.cyanosis": {
+          "expect": "Inspect the tongue and buccal mucous membranes for central cyanosis, an emergency warning sign of life-threatening hypoxaemia."
+        },
+        "skill.gen.paed.clubbing": {
+          "expect": "Digital clubbing is never a feature of asthma; its presence points towards cystic fibrosis, bronchiectasis, or cyanotic congenital heart disease."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Respiratory examination in children",
+      "skills": [
+        "skill.exam.paed.resp.inspection",
+        "skill.exam.paed.resp.palpation",
+        "skill.exam.paed.resp.percussion",
+        "skill.exam.paed.resp.auscultation",
+        "skill.exam.paed.resp.distress_grunt"
+      ],
+      "emphasis": {
+        "skill.exam.paed.resp.inspection": {
+          "expect": "Look for hyperinflation of the chest, intercostal and subcostal indrawing, suprasternal retraction, and nasal flaring indicating high work of breathing."
+        },
+        "skill.exam.paed.resp.auscultation": {
+          "expect": "Listen for prolonged expiration and diffuse polyphonic wheezes; a silent chest with markedly reduced breath sounds indicates impending respiratory failure."
+        },
+        "skill.exam.paed.resp.distress_grunt": {
+          "expect": "Distinguish between musical expiratory wheezing (intrathoracic airway narrowing), inspiratory stridor (upper airway obstruction), and expiratory grunting (alveolar collapse)."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the wheezing child picture together",
+      "skills": [
+        "skill.asthma.child.findings"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "skills": [
+        "skill.asthma.child.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis of paediatric wheeze",
+      "skills": [
+        "skill.asthma.child.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations and diagnostic monitoring",
+      "skills": [
+        "skill.ix.asthma.child.workup",
+        "skill.proc.paed.pefr",
+        "skill.ix.paed.cxr_approach"
+      ],
+      "emphasis": {
+        "skill.proc.paed.pefr": {
+          "expect": "In children over five years, measure PEFR to grade severity objectively: <50% of predicted represents the red zone (severe exacerbation) and <33% signals life-threatening asthma."
+        },
+        "skill.ix.paed.cxr_approach": {
+          "expect": "Chest radiography is not routine; reserve for suspected pneumothorax, subcutaneous emphysema, marked asymmetry, or failure to improve with intensive bronchodilators."
+        }
+      }
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and severity classification",
+      "skills": [
+        "skill.asthma.child.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment and acute exacerbation management",
+      "skills": [
+        "skill.tx.asthma.child.acute",
+        "skill.tx.asthma.child.chronic",
+        "skill.tx.bronchiolitis.supportive",
+        "skill.proc.paed.inhaler_devices"
+      ],
+      "emphasis": {
+        "skill.proc.paed.inhaler_devices": {
+          "expect": "Prescribe a metered-dose inhaler with a valve-holding spacer and face mask for children under 4 years, or with a mouthpiece for older children; verify seal and slow tidal breathing."
+        }
+      }
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "skills": [
+        "skill.present.case",
+        "skill.present.asthma.case"
+      ],
+      "emphasis": {
+        "skill.present.case": {
+          "expect": "Present the case structured around triage severity, physiological vital signs, underlying atopic phenotype, and acute response to emergency bronchodilators."
+        }
+      }
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.asthma.child.emergency_assessment",
+        "title": "Assess and manage a child with acute severe asthma",
+        "task": "A 6-year-old girl is brought to the emergency triage with severe breathlessness and audible wheeze. Assess her respiratory distress, identify emergency red flags, determine her asthma severity, and outline immediate bronchodilator and oxygen therapy.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.paed.rapport",
+          "skill.gen.paed.appearance",
+          "skill.gen.paed.vitals",
+          "skill.gen.paed.cyanosis",
+          "skill.exam.paed.resp.inspection",
+          "skill.exam.paed.resp.distress_grunt",
+          "skill.exam.paed.resp.auscultation",
+          "skill.asthma.child.diagnosis",
+          "skill.tx.asthma.child.acute"
+        ],
+        "examinerQuestions": [
+          "What clinical signs indicate acute severe or life-threatening asthma rather than a mild exacerbation?",
+          "The child speaks in single words, has marked subcostal indrawing, and oxygen saturation is 90% on room air. What is your immediate management in the first 15 to 30 minutes?",
+          "If the chest auscultation reveals markedly reduced breath sounds with no wheeze, how do you interpret this finding and what action do you take?"
+        ]
+      },
+      {
+        "id": "osce.asthma.child.inhaler_counselling",
+        "title": "Demonstrate MDI with spacer and formulate a long-term asthma plan",
+        "task": "An 8-year-old boy with frequent nocturnal cough and exertional wheeze is being started on regular preventer therapy. Demonstrate the correct technique of using a metered-dose inhaler with a spacer device, assess PEFR, and counsel the mother on trigger avoidance.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.paed.rapport",
+          "skill.approach.paed.consent_assent",
+          "skill.proc.paed.inhaler_devices",
+          "skill.proc.paed.pefr",
+          "skill.asthma.child.differential",
+          "skill.tx.asthma.child.chronic"
+        ],
+        "examinerQuestions": [
+          "Demonstrate and explain the step-by-step sequence of using a metered-dose inhaler with a valve-holding spacer in this 8-year-old child.",
+          "How would you explain the PEFR traffic light zones (green, yellow, red) to the mother, and what action should she take in the red zone?",
+          "Why is mouth rinsing essential after using an inhaled corticosteroid, and what common local adverse effect does it prevent?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.asthma.child.basics",
+      "skill.asthma.child.findings",
+      "skill.asthma.child.summary",
+      "skill.asthma.child.differential",
+      "skill.ix.asthma.child.workup",
+      "skill.asthma.child.diagnosis",
+      "skill.tx.asthma.child.acute",
+      "skill.tx.asthma.child.chronic",
+      "skill.tx.bronchiolitis.supportive"
+    ]
+  },
+  "skills": {
+    "skill.asthma.child.basics": {
+      "id": "skill.asthma.child.basics",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "What childhood wheezing, asthma, and bronchiolitis are",
+      "why": "Understanding the triphasic pathophysiology of airway narrowing, bronchial smooth muscle constriction, mucosal inflammation with oedema, and intraluminal mucus plugging, explains why treatment requires both rapid-acting bronchodilators and anti-inflammatory corticosteroids.",
+      "teach": [
+        {
+          "heading": "The anatomical and physiological basis of paediatric wheeze",
+          "body": "Wheezing is a continuous, high-pitched, musical adventitious lung sound generated during expiration when airflow passes through narrowed or compressed intrathoracic airways.\n\nIn young children, small airway caliber, high peripheral airway resistance, and compliant chest wall dynamics make them exceptionally prone to significant airflow limitation in response to minimal mucosal swelling or smooth muscle constriction."
+        },
+        {
+          "heading": "Pathophysiology of bronchial asthma",
+          "body": "Childhood asthma is a chronic inflammatory disorder of the conducting airways driven by complex immune activation.\n\nAirway hyperresponsiveness to non-specific stimuli leads to recurrent episodes of widespread, variable airflow obstruction. Dynamic hyperinflation increases end-expiratory lung volume, flattening the diaphragms and increasing the mechanical work of breathing."
+        },
+        {
+          "heading": "Pathophysiology of acute bronchiolitis",
+          "body": "Acute bronchiolitis is a self-limiting viral infection of the lower respiratory tract, predominantly caused by respiratory syncytial virus (RSV) in infants under two years.\n\nViral invasion of bronchiolar epithelial cells leads to necrosis, ciliary disruption, peribronchiolar lymphocytic infiltration, and submucosal oedema. Plugs of desquamated epithelial debris and dense mucus occlude the bronchioles, causing patchy atelectasis and air trapping."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What triad of pathological changes produces airway narrowing during an acute paediatric asthma attack?",
+          "a": "Bronchial smooth muscle bronchospasm, airway mucosal inflammation with oedema, and hypersecretion of thick mucus forming intraluminal plugs.",
+          "accept": [
+            "bronchospasm",
+            "smooth muscle",
+            "mucosal inflammation",
+            "oedema",
+            "mucus plugging",
+            "mucus"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why are infants anatomically more predisposed to severe airflow obstruction during lower respiratory tract infections?",
+          "a": "Infants have smaller baseline airway diameters, increased peripheral airway resistance, higher compliant chest wall dynamics, and fewer collateral ventilatory channels such as the pores of Kohn.",
+          "accept": [
+            "airway diameter",
+            "smaller airways",
+            "peripheral airway resistance",
+            "chest wall compliance",
+            "collateral ventilation",
+            "pores of kohn"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "triad_mech",
+          "text": "Explains smooth muscle spasm, mucosal oedema, and mucus plugging"
+        },
+        {
+          "id": "paed_anatomy",
+          "text": "Outlines infant airway caliber and chest wall compliance peculiarities"
+        },
+        {
+          "id": "rsv_path",
+          "text": "Differentiates epithelial necrosis in bronchiolitis from eosinophilic asthma"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pediatric_status_asthmaticus: pathophysiology"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Chapter 404: Asthma in Children: Pathogenesis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.asthma.child.findings": {
+      "id": "skill.asthma.child.findings",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "The paediatric wheeze picture: physical signs and physiological strain",
+      "why": "Correlating work of breathing, chest wall retractions, respiratory rate, and chest auscultation with airflow dynamics enables the clinician to detect deteriorating ventilation before overt respiratory arrest supervenes.",
+      "teach": [
+        {
+          "heading": "Work of breathing and dynamic retractions",
+          "body": "Increased respiratory effort in an obstructed child manifests as chest wall recessions. Subcostal and intercostal indrawing reflect the large negative intrathoracic pressures generated during inspiration against narrow airways.\n\nSuprasternal and supraclavicular retractions indicate recruitment of accessory neck muscles, while sternocleidomastoid contraction and head bobbing in younger infants denote severe physiological exhaustion."
+        },
+        {
+          "heading": "Auscultation dynamics and the danger of the silent chest",
+          "body": "Auscultation in mild to moderate asthma reveals prolonged expiration with diffuse, bilateral, high-pitched polyphonic expiratory rhonchi.\n\nCritically, when airway obstruction becomes extreme, air movement diminishes to such low velocities that wheezes disappear completely. A silent chest with poor air entry is an ominous emergency sign of impending respiratory failure, not a sign of recovery."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Why is a silent chest on auscultation in a severely dyspnoeic child a medical emergency?",
+          "a": "A silent chest indicates profound airway obstruction where airflow velocity is insufficient even to produce wheezing, heralding respiratory muscle exhaustion and imminent asphyxial arrest.",
+          "accept": [
+            "silent chest",
+            "air movement",
+            "airflow velocity",
+            "respiratory exhaustion",
+            "impending respiratory failure",
+            "asphyxia"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Explain why expiration is prolonged in intrathoracic small-airway obstruction.",
+          "a": "Intrathoracic positive pressure generated during expiration compresses diseased airways from the outside, further narrowing bronchiolar lumina and markedly lengthening the time required for passive lung emptying.",
+          "accept": [
+            "intrathoracic pressure",
+            "compression",
+            "narrowing",
+            "emptying",
+            "prolonged expiration",
+            "expiratory time"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "retraction_hierarchy",
+          "text": "Grades severity of retractions from subcostal to suprasternal and head bobbing"
+        },
+        {
+          "id": "silent_chest_alert",
+          "text": "Recognises the silent chest as critical airflow limitation"
+        },
+        {
+          "id": "prolonged_exp",
+          "text": "Explains dynamic compression producing prolonged expiratory phase"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pediatric_status_asthmaticus: clinicalPearls and redFlags"
+        },
+        {
+          "source": "Indian Academy of Pediatrics",
+          "locator": "IAP Guidelines on Childhood Asthma and Wheeze: Clinical Assessment"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.asthma.child.summary": {
+      "id": "skill.asthma.child.summary",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Synthesising the clinical summary in the wheezing child",
+      "why": "A disciplined clinical summary succinctly unifies age, symptom pattern, atopic markers, vital sign derangements, and acute distress severity into a coherent diagnostic formulation that directs emergency care.",
+      "teach": [
+        {
+          "heading": "Framework for the paediatric respiratory summary",
+          "body": "A concise clinical summary should follow a five-part clinical construct: age and gender, chief complaint with exact duration, underlying phenotype (episodic viral wheeze, multiple-trigger wheeze, or infant bronchiolitis), key positive and negative physical signs, and functional severity grading.\n\nSynthesising these elements distinguishes acute bronchospasm needing immediate bronchodilators from upper airway or parenchymal disorders."
+        },
+        {
+          "heading": "Synthesising severity and physiological stability",
+          "body": "Always conclude the summary by categorising functional impairment: talkability (whether speaking in words, phrases, or unable to speak), feeding ability, mental status (calm, agitated, or drowsy), and room-air pulse oximetry.\n\nStating physiological stability immediately clarifies whether the child can be managed in an outpatient observation bay or requires high-dependency paediatric intensive care resuscitation."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What five components should be synthesised in the bedside summary of a wheezing child?",
+          "a": "Child age and sex, duration of breathlessness, phenotypic pattern of wheeze with atopic background, vital sign derangements and retractions, and current severity grade.",
+          "accept": [
+            "age",
+            "duration",
+            "phenotype",
+            "atopic",
+            "vital signs",
+            "retractions",
+            "severity grade"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "In an infant under twelve months, what clinical details in the summary confirm acute bronchiolitis over asthma?",
+          "a": "First episode of acute wheeze, age under twelve months, a preceding two to three day coryzal upper respiratory prodrome, fine inspiratory crackles alongside wheeze, and lack of personal atopic history.",
+          "accept": [
+            "first episode",
+            "coryza",
+            "prodrome",
+            "inspiratory crackles",
+            "crackles",
+            "under twelve months",
+            "infant"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "summary_framework",
+          "text": "Constructs a concise summary integrating age, history, and severity"
+        },
+        {
+          "id": "functional_grading",
+          "text": "Explicitly states talkability, retractions, and oximetry"
+        },
+        {
+          "id": "bronchiolitis_diff",
+          "text": "Highlights features distinguishing infant bronchiolitis from asthma"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pediatric_status_asthmaticus: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Chapter 404: Asthma in Children: Diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.asthma.child.differential": {
+      "id": "skill.asthma.child.differential",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Differential diagnosis of paediatric wheezing and small-airway obstruction",
+      "why": "Recognising that not every wheezing child has asthma prevents inappropriate reliance on bronchodilators in conditions such as foreign body aspiration, acute viral bronchiolitis, vascular rings, or cystic fibrosis.",
+      "teach": [
+        {
+          "heading": "Acute wheezing mimics in toddlers and children",
+          "body": "Sudden onset of unheralded wheezing or persistent unilateral wheeze in a previously healthy toddler strongly suggests tracheobronchial foreign body aspiration.\n\nForeign bodies (such as peanuts, seeds, or small toy parts) produce localized air trapping or atelectasis, lack reversibility with bronchodilators, and show focal hyperinflation on inspiratory-expiratory chest radiographs.\n\nViral croup causes harsh inspiratory stridor with barking cough rather than pure expiratory wheeze."
+        },
+        {
+          "heading": "Chronic and recurrent wheezing differentials",
+          "body": "Persistent or unremitting wheeze from early infancy suggests congenital structural anomalies, including vascular rings, tracheobronchomalacia, or external airway compression by mediastinal lymphadenopathy.\n\nCystic fibrosis and primary ciliary dyskinesia present with recurrent wet cough, purulent sputum, failure to thrive, and digital clubbing, which are conspicuously absent in uncomplicated childhood asthma."
+        },
+        {
+          "heading": "Differential table of childhood wheeze",
+          "table": {
+            "cols": [
+              "Condition",
+              "Age",
+              "Onset and Signs",
+              "Distinguishing Hallmark"
+            ],
+            "rows": [
+              [
+                "Bronchial asthma",
+                "Over 3 to 5 years",
+                "Recurrent nocturnal cough, wheeze",
+                "Reversible with bronchodilator"
+              ],
+              [
+                "Acute bronchiolitis",
+                "Under 2 years",
+                "Coryza prodrome, crackles and wheeze",
+                "Supportive care, self-limiting"
+              ],
+              [
+                "Foreign body",
+                "Toddler 1 to 3 years",
+                "Sudden choking, unilateral wheeze",
+                "Focal unilateral air trapping"
+              ],
+              [
+                "Vascular ring",
+                "Infancy under 1 year",
+                "Biphasic stridor and wheeze",
+                "Persistent, worse on feeding"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What clinical features distinguish tracheobronchial foreign body aspiration from an acute asthma exacerbation?",
+          "a": "Sudden onset of choking or coughing while eating or playing, persistent unilateral wheeze, lack of response to bronchodilators, and focal hyperinflation or atelectasis on chest radiograph.",
+          "accept": [
+            "choking",
+            "unilateral",
+            "unilateral wheeze",
+            "bronchodilator",
+            "air trapping",
+            "focal",
+            "radiograph"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why should digital clubbing in a wheezing child prompt investigation beyond bronchial asthma?",
+          "a": "Uncomplicated asthma never causes digital clubbing. Its presence indicates chronic suppurative lung disease such as cystic fibrosis, bronchiectasis, or cyanotic congenital heart disease.",
+          "accept": [
+            "clubbing",
+            "suppurative",
+            "cystic fibrosis",
+            "bronchiectasis",
+            "heart disease",
+            "uncomplicated asthma"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "diff_fb",
+          "text": "Identifies unilateral wheeze and sudden choking in foreign body aspiration"
+        },
+        {
+          "id": "diff_bronchiolitis",
+          "text": "Differentiates infant bronchiolitis from recurrent asthma"
+        },
+        {
+          "id": "diff_structural",
+          "text": "Screens for vascular rings, tracheomalacia, and cystic fibrosis"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pediatric_status_asthmaticus: additionalDifferentials"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Chapter 404: Asthma in Children: Differential Diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.asthma.child.workup": {
+      "id": "skill.ix.asthma.child.workup",
+      "kind": "investigation",
+      "system": "paediatrics",
+      "title": "Diagnostic workup, physiological monitoring, and imaging in paediatric asthma",
+      "why": "Targeted investigations confirm variable airflow obstruction, document acute hypoxaemia and hypercapnia, and exclude complications such as pneumothorax or lobar consolidation without ordering indiscriminate tests.",
+      "teach": [
+        {
+          "heading": "Physiological monitoring: pulse oximetry and blood gas analysis",
+          "body": "Continuous pulse oximetry is the initial non-invasive investigation in all acute presentations; an oxygen saturation below 92% on ambient air flags severe exacerbation.\n\nBlood gas analysis (capillary or venous) is indicated when a child shows severe respiratory distress or exhaustion.\n\nEarly tachypnoea washes out carbon dioxide, producing hypocapnia. A normalising or elevated PaCO2 (>40 mmHg) in a tiring child is an ominous warning of impending respiratory failure."
+        },
+        {
+          "heading": "Spirometry and peak expiratory flow rate (PEFR)",
+          "body": "In children over five years, peak expiratory flow rate (PEFR) provides an objective measurement of airflow limitation.\n\nReadings are interpreted using traffic-light zones: green (>80% predicted), yellow (50-80%), and red (<50%). A value below 33% marks life-threatening asthma.\n\nIn outpatient evaluation, formal spirometry demonstrating an FEV1 increase of >=12% after inhaled salbutamol confirms reversible bronchoconstriction."
+        },
+        {
+          "heading": "Chest radiography indications and electrolyte monitoring",
+          "body": "Routine chest radiography is not recommended in standard asthma exacerbations. Radiographs are reserved for suspected pneumothorax, subcutaneous emphysema, severe unilateral chest signs, lobar collapse, or failure to respond to intensive bronchodilator therapy.\n\nRepeated or high-dose beta-2 agonist therapy drives potassium into cells, mandating serum electrolyte monitoring to prevent clinically significant hypokalaemia."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "How should a normal PaCO2 value on blood gas be interpreted in a child with severe tachypnoea and asthma exacerbation?",
+          "a": "It is an ominous warning sign of impending respiratory failure and respiratory muscle exhaustion, because hyperventilation should normally produce hypocapnia.",
+          "accept": [
+            "impending respiratory failure",
+            "exhaustion",
+            "hypocapnia",
+            "respiratory muscle",
+            "warning",
+            "ominous"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What are the specific clinical indications for ordering a chest radiograph in acute childhood asthma?",
+          "a": "Suspected pneumothorax, subcutaneous emphysema, severe unilateral chest findings, fever with suspected pneumonia, or failure to respond to initial bronchodilator therapy.",
+          "accept": [
+            "pneumothorax",
+            "subcutaneous emphysema",
+            "unilateral",
+            "pneumonia",
+            "failure to respond",
+            "consolidation"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "ix_oximetry_gas",
+          "text": "Interprets oximetry cutoffs and pseudonormal PaCO2 on blood gas"
+        },
+        {
+          "id": "ix_pefr_spiro",
+          "text": "Utilises PEFR zones and spirometric reversibility criteria"
+        },
+        {
+          "id": "ix_cxr_indications",
+          "text": "Applies restrictive criteria for chest radiography and monitors potassium"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pediatric_status_asthmaticus: additionalInvestigations"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Chapter 404: Asthma in Children: Diagnostic Evaluation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.asthma.child.diagnosis": {
+      "id": "skill.asthma.child.diagnosis",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Severity classification and clinical grading of acute asthma exacerbations",
+      "why": "Accurate clinical grading into mild, moderate, severe, and life-threatening exacerbations dictates the urgency of emergency interventions, frequency of bronchodilators, systemic steroid dosing, and PICU escalation.",
+      "teach": [
+        {
+          "heading": "Grading acute asthma severity: clinical criteria",
+          "body": "Severity of an acute exacerbation is assessed by integrating mental status, speech capability, respiratory rate, retraction intensity, and room-air oxygen saturation.\n\nMild exacerbations feature minor tachypnoea, ability to talk in sentences, and SpO2 >95%.\n\nModerate exacerbations present with talk in phrases, visible intercostal indrawing, and SpO2 92-95%.\n\nSevere attacks feature speaking in single words, marked sternal retractions, and SpO2 <92%."
+        },
+        {
+          "heading": "Life-threatening asthma features and the CHEST mnemonic",
+          "body": "Life-threatening asthma constitutes an immediate medical emergency requiring intensive resuscitation.\n\nThe CHEST mnemonic highlights five cardinal danger signs: C for cyanosis, confusion, or coma; H for hypotension; E for exhaustion; S for silent chest with absent air entry; and T for threatening PEFR under 33% of predicted.\n\nAny single feature in this category mandates immediate emergency escalation."
+        },
+        {
+          "heading": "Summary severity grading matrix",
+          "table": {
+            "cols": [
+              "Severity Grade",
+              "Speech and Alertness",
+              "Retractions and Vitals",
+              "SpO2 and PEFR"
+            ],
+            "rows": [
+              [
+                "Mild",
+                "Full sentences, calm",
+                "Mild indrawing",
+                "SpO2 >95%, PEFR >80%"
+              ],
+              [
+                "Moderate",
+                "Phrases, restless",
+                "Intercostal indrawing, tachypnoea",
+                "SpO2 92-95%, PEFR 50-80%"
+              ],
+              [
+                "Severe",
+                "Single words, agitated",
+                "Marked sternal retraction",
+                "SpO2 <92%, PEFR <50%"
+              ],
+              [
+                "Life-threatening",
+                "Unable to speak, drowsy",
+                "Silent chest, exhaustion",
+                "SpO2 <90%, PEFR <33%"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "List three clinical signs that classify a paediatric asthma exacerbation as severe rather than moderate.",
+          "a": "Inability to speak in sentences (speaking in single words), marked subcostal and suprasternal retractions, agitation, and room-air oxygen saturation below 92%.",
+          "accept": [
+            "single words",
+            "words",
+            "retractions",
+            "suprasternal",
+            "agitation",
+            "oxygen saturation",
+            "spo2 <92%",
+            "92%"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What five life-threatening features are captured by the CHEST mnemonic in acute childhood asthma?",
+          "a": "Cyanosis or confusion or coma, hypotension, exhaustion, silent chest, and threatening PEFR under 33 percent of predicted.",
+          "accept": [
+            "cyanosis",
+            "confusion",
+            "hypotension",
+            "exhaustion",
+            "silent chest",
+            "pefr",
+            "33"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "grading_criteria",
+          "text": "Integrates speech, retractions, respiratory rate, and SpO2"
+        },
+        {
+          "id": "chest_mnemonic",
+          "text": "Applies the CHEST mnemonic for life-threatening asthma"
+        },
+        {
+          "id": "triage_decision",
+          "text": "Directs appropriate triage placement based on clinical severity"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pediatric_status_asthmaticus: clinicalPearls and redFlags"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Chapter 404: Asthma in Children: Assessment of Severity"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.asthma.child.acute": {
+      "id": "skill.tx.asthma.child.acute",
+      "kind": "treatment",
+      "system": "paediatrics",
+      "title": "Emergency management of acute asthma exacerbation and status asthmaticus",
+      "why": "A standardized emergency sequence of humidified oxygen, frequent inhaled short-acting beta-agonists, anticholinergic synergy, early systemic steroids, and intravenous magnesium sulfate reverses acute bronchospasm, reduces hospitalization, and prevents fatal asphyxiation.",
+      "dosingNote": "Dosing note: CliniX does not prescribe. Doses quoted are standard reference doses from cited clinical guidelines (Nelson Textbook of Pediatrics and Indian Academy of Pediatrics). Always verify with local hospital protocols.",
+      "teach": [
+        {
+          "heading": "Oxygen therapy and inhaled bronchodilators",
+          "body": "First-line emergency intervention requires high-flow humidified oxygen via face mask or nasal prongs to maintain target SpO2 between 94% and 98%.\n\nInhaled salbutamol (short-acting beta-2 agonist) is administered immediately: 4 to 10 puffs via metered-dose inhaler with a spacer, or nebulised at 2.5 mg (under 5 years) or 5 mg (over 5 years), repeated every 20 minutes for the first hour.\n\nIn severe exacerbations, inhaled ipratropium bromide (250 micrograms under 5 years, 500 micrograms over 5 years) is added to salbutamol during the initial hour to produce synergistic bronchodilatation."
+        },
+        {
+          "heading": "Systemic corticosteroids and second-line intravenous therapies",
+          "body": "Systemic corticosteroids must be administered within the first hour of presentation to resolve mucosal inflammation: oral prednisolone 1 to 2 mg/kg (maximum 40 to 50 mg), or intravenous hydrocortisone 4 mg/kg if the child cannot swallow or is vomiting.\n\nFor refractory acute severe asthma unresponsive to initial inhaled bronchodilators, intravenous magnesium sulfate (40 to 50 mg/kg infused over 20 to 30 minutes, maximum 2 g) promotes bronchial smooth muscle relaxation by inhibiting calcium influx."
+        },
+        {
+          "heading": "Emergency escalation and intensive care criteria",
+          "body": "If the child shows signs of life-threatening asthma (CHEST criteria: cyanosis, confusion, exhaustion, silent chest, or PEFR <33%), immediate paediatric intensive care consultation is mandatory.\n\nAdvanced medical options include continuous nebulised salbutamol, intravenous salbutamol infusion, or intravenous aminophylline with continuous cardiac monitoring.\n\nEndotracheal intubation in asthma carries high risks of severe air trapping and pneumothorax, and is reserved for respiratory arrest or coma using lung-protective ventilation."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Why should systemic corticosteroids be administered within the first hour of arrival during an acute asthma exacerbation?",
+          "a": "Early administration suppresses acute airway mucosal inflammation, reduces hospitalization rates, speeds clinical recovery, and prevents rebound exacerbations.",
+          "accept": [
+            "mucosal inflammation",
+            "hospitalization",
+            "early administration",
+            "recovery",
+            "suppresses",
+            "inflammation"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What is the mechanism of action and standard dose of intravenous magnesium sulfate in severe acute paediatric asthma?",
+          "a": "It acts as a calcium channel antagonist to relax bronchial smooth muscle, administered at 40 to 50 mg/kg infused over twenty to thirty minutes up to a maximum of 2 grams.",
+          "accept": [
+            "calcium antagonist",
+            "smooth muscle",
+            "relaxation",
+            "magnesium",
+            "40 to 50",
+            "2 g",
+            "minutes"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "tx_first_line",
+          "text": "Initiates oxygen and repeated inhaled salbutamol with ipratropium"
+        },
+        {
+          "id": "tx_steroids",
+          "text": "Administers systemic corticosteroids within the first hour"
+        },
+        {
+          "id": "tx_second_line",
+          "text": "Escalates to intravenous magnesium sulfate and PICU when refractory"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pediatric_status_asthmaticus: management"
+        },
+        {
+          "source": "Indian Academy of Pediatrics",
+          "locator": "IAP Guidelines on Childhood Asthma and Wheeze: Acute Exacerbation Protocol"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.asthma.child.chronic": {
+      "id": "skill.tx.asthma.child.chronic",
+      "kind": "treatment",
+      "system": "paediatrics",
+      "title": "Long-term controller therapy, step-up management, and asthma action plans",
+      "why": "Daily maintenance with low-dose inhaled corticosteroids or leukotriene receptor antagonists prevents chronic airway remodeling, eliminates nocturnal symptoms, maintains normal physical activity, and minimises future exacerbation risk.",
+      "dosingNote": "Dosing note: CliniX does not prescribe. Doses quoted are standard reference doses from cited clinical guidelines (Nelson Textbook of Pediatrics and Indian Academy of Pediatrics). Always verify with local hospital protocols.",
+      "teach": [
+        {
+          "heading": "Stepwise controller therapy in children",
+          "body": "Long-term management follows a stepwise escalation based on symptom control.\n\nStep 1 (intermittent symptoms) uses as-needed inhaled short-acting beta-2 agonist (salbutamol).\n\nStep 2 (symptoms more than twice a month or nocturnal waking) introduces daily low-dose inhaled corticosteroid (such as budesonide 100 to 200 micrograms daily or fluticasone) or oral leukotriene receptor antagonist (montelukast).\n\nStep 3 escalates to medium-dose inhaled corticosteroid or adds a long-acting beta-2 agonist (LABA) in children over six years."
+        },
+        {
+          "heading": "Device selection, technique verification, and mouth care",
+          "body": "Drug delivery efficiency depends on matching the device to the child age: children under four years require a metered-dose inhaler (MDI) with a spacer and closely fitted face mask; children four to twelve years use an MDI with a mouthpiece spacer; children over twelve years can use dry powder inhalers or MDIs alone.\n\nEvery consultation must verify seal integrity and breathing technique.\n\nRinsing the mouth with water and spitting after inhaled steroids prevents oral candidiasis and dysphonia."
+        },
+        {
+          "heading": "The written asthma action plan and trigger avoidance",
+          "body": "Every family must receive an individualized written asthma action plan outlining three distinct zones: green zone for daily preventer use when well; yellow zone for stepping up reliever puffs and starting oral steroids when cold symptoms or wheezing begin; and red zone for emergency warning signs requiring immediate hospital presentation.\n\nEnvironmental control includes eliminating domestic tobacco and bidi smoke, substituting biomass fuel with clean LPG, avoiding burning incense or mosquito coils, and regularly washing bedsheets in hot water to reduce dust mite allergens."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Why is an inhaler spacer device essential when administering a metered-dose inhaler to a school-age child?",
+          "a": "The spacer slows aerosol particle velocity and eliminates the need for press-and-breathe hand-lung coordination, reducing oropharyngeal deposition and dramatically increasing drug delivery to the lower airways.",
+          "accept": [
+            "spacer",
+            "coordination",
+            "oropharyngeal",
+            "lower airways",
+            "deposition",
+            "lung delivery"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What three action zones must be detailed in a paediatric written asthma action plan?",
+          "a": "Green zone for daily routine maintenance when well, yellow zone for early flare-up symptoms requiring increased reliever use, and red zone for severe danger signs requiring emergency hospital presentation.",
+          "accept": [
+            "green zone",
+            "yellow zone",
+            "red zone",
+            "maintenance",
+            "reliever",
+            "emergency"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "tx_stepwise",
+          "text": "Outlines stepwise escalation from SABA to daily inhaled corticosteroid"
+        },
+        {
+          "id": "tx_device_selection",
+          "text": "Selects age-appropriate inhaler device with spacer and counsels on mouth rinsing"
+        },
+        {
+          "id": "tx_action_plan",
+          "text": "Constructs a three-zone written asthma action plan and environmental plan"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pediatric_status_asthmaticus: management and clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Chapter 404: Asthma in Children: Chronic Management"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.bronchiolitis.supportive": {
+      "id": "skill.tx.bronchiolitis.supportive",
+      "kind": "treatment",
+      "system": "paediatrics",
+      "title": "Evidence-based supportive management of acute viral bronchiolitis",
+      "why": "Avoiding routine bronchodilators, systemic corticosteroids, and antibiotics in acute infant bronchiolitis prevents therapeutic harm while focusing clinical efforts on hydration, oxygenation, and respiratory monitoring.",
+      "dosingNote": "Dosing note: CliniX does not prescribe. Doses quoted are standard reference doses from cited clinical guidelines (Nelson Textbook of Pediatrics and Indian Academy of Pediatrics). Always verify with local hospital protocols.",
+      "teach": [
+        {
+          "heading": "The supportive care paradigm in infant bronchiolitis",
+          "body": "Acute viral bronchiolitis is self-limiting and driven by viral epithelial sloughing and luminal mucus obstruction rather than reversible smooth muscle bronchospasm.\n\nLarge international randomized clinical trials have conclusively demonstrated that bronchodilators (salbutamol), systemic corticosteroids, and montelukast do not shorten hospital stay, reduce admission rates, or accelerate resolution.\n\nRoutine pharmacotherapy is therefore not recommended, avoiding tachycardia and systemic side effects."
+        },
+        {
+          "heading": "Hydration, gentle suction, and oxygen delivery",
+          "body": "Management centres on three supportive pillars: oxygenation, hydration, and gentle nasal clearance.\n\nHumidified oxygen is administered if SpO2 persistently falls below 90% to 92%.\n\nSmall, frequent fractionated oral feeds reduce aspiration risk in tachypnoeic infants; if intake falls below 50% of maintenance or the infant tires, nasogastric feeding or isotonic intravenous maintenance fluids (such as 0.9% saline with 5% dextrose) are instituted.\n\nSuperficial nasal suctioning clears thick secretions before feeding."
+        },
+        {
+          "heading": "Hospital admission and discharge criteria",
+          "body": "Indications for hospital admission in bronchiolitis include persistent room-air SpO2 <92%, moderate to severe chest retractions, respiratory rate >60 to 70 breaths/min, poor oral feeding (<50% normal), apnoea episodes, or young age under six to twelve weeks.\n\nDischarge is safe once the infant maintains SpO2 >=92% on ambient air for at least 12 hours, feeds adequately without respiratory distress, and parents are counseled on danger signs."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Why are systemic corticosteroids and inhaled salbutamol not routinely recommended for acute bronchiolitis in infants?",
+          "a": "Airway obstruction in bronchiolitis is caused by epithelial necrosis and mucus plugs rather than smooth muscle bronchospasm, and randomized trials show no benefit in reducing admissions or length of stay.",
+          "accept": [
+            "epithelial necrosis",
+            "mucus plugs",
+            "smooth muscle",
+            "no benefit",
+            "bronchospasm",
+            "length of stay"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "State three clinical criteria that mandate hospital admission for an infant with acute bronchiolitis.",
+          "a": "Oxygen saturation below 92% on room air, marked chest indrawing with grunting, inability to feed adequately (less than 50% maintenance), and any documented apnoeic episode.",
+          "accept": [
+            "oxygen saturation",
+            "spo2 <92%",
+            "chest indrawing",
+            "feeding",
+            "apnoea",
+            "apneic"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "tx_bronchiolitis_support",
+          "text": "Prioritises oxygen, hydration, and minimal handling over unnecessary drugs"
+        },
+        {
+          "id": "tx_no_steroids_saba",
+          "text": "Justifies withholding routine bronchodilators, steroids, and antibiotics"
+        },
+        {
+          "id": "tx_admission_criteria",
+          "text": "Applies objective criteria for hospital admission and discharge"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "bronchiolitis: clinicalPearls and management"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Chapter 411: Bronchiolitis: Management"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.asthma.child.acute_exac",
+      "title": "A 6-year-old girl with acute breathlessness and audible wheeze",
+      "opening": "Doctor, my 6-year-old daughter Aanya has been coughing and wheezing since yesterday evening. Tonight she woke up struggling to breathe, her chest is pulling in deeply, and she can only speak two or three words at a time. Her blue inhaler did not help like it usually does!",
+      "fallback": "The mother looks anxious and holds Aanya upright on her lap. Aanya is sitting forward, breathing rapidly with audible expiratory wheeze and marked suprasternal indrawing.",
+      "patient": {
+        "name": "Aanya Sharma",
+        "age": 6,
+        "sex": "female",
+        "occupation": "Class 1 school student",
+        "residence": "Semi-urban locality near an industrial bypass road, Jaipur, Rajasthan; lives in a pucca house with parents and paternal grandparents"
+      },
+      "initialVitals": {
+        "hr": 138,
+        "bpSystolic": 98,
+        "bpDiastolic": 62,
+        "rr": 46,
+        "spo2": 91,
+        "temp": 37.1,
+        "gcs": 15
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brought you to the hospital",
+            "chief complaints",
+            "reason for emergency visit"
+          ],
+          "reply": "She developed severe breathlessness and a loud whistling chest sound since yesterday evening. It became much worse tonight around midnight, and she cannot lie flat."
+        },
+        "cough_symptoms": {
+          "cues": [
+            "cough characteristics",
+            "night time cough",
+            "dry cough at night"
+          ],
+          "reply": "She has a dry, hacking, tight cough that worsens during the night and early morning. It started two days ago after she returned from school."
+        },
+        "wheeze_character": {
+          "cues": [
+            "sound of wheezing",
+            "musical chest sound",
+            "whistling breath"
+          ],
+          "reply": "It sounds like a continuous high-pitched musical whistle whenever she breathes out. You can hear it even without putting your ear to her chest."
+        },
+        "triggers_exposure": {
+          "cues": [
+            "triggers for this attack",
+            "smoke exposure",
+            "dust exposure",
+            "cold air trigger"
+          ],
+          "reply": "She was playing outside on Thursday evening during a sudden dusty windstorm. The weather has also turned quite chilly over the past two days."
+        },
+        "past_episodes": {
+          "cues": [
+            "previous asthma attacks",
+            "past hospital admissions for wheezing",
+            "prior ICU stays"
+          ],
+          "reply": "She has had three similar episodes of wheezing over the last twelve months, usually following a common cold. She was admitted to the ward once last winter for two days."
+        },
+        "medication_history": {
+          "cues": [
+            "inhaler medications used",
+            "salbutamol dose taken",
+            "spacer device use"
+          ],
+          "reply": "Her doctor previously gave her a blue salbutamol inhaler with a plastic spacer chamber. At home tonight we gave her two puffs twice, but it only helped for ten minutes."
+        },
+        "atopic_history": {
+          "cues": [
+            "personal history of eczema",
+            "childhood allergies",
+            "allergic rhinitis sneezing"
+          ],
+          "reply": "As a baby she had red itchy dry patches on her cheeks and elbow creases that needed moisturising creams. She also gets frequent bouts of morning sneezing with clear watery nasal discharge."
+        },
+        "family_atopy": {
+          "cues": [
+            "family history of asthma",
+            "father asthma",
+            "parental atopy"
+          ],
+          "reply": "Her father has suffered from bronchial asthma since his teenage years and uses an inhaler regularly. Her paternal aunt has chronic allergic skin rashes."
+        },
+        "feeding_activity": {
+          "cues": [
+            "oral feeding ability",
+            "speaking in full sentences",
+            "difficulty talking"
+          ],
+          "reply": "She refused dinner tonight and could only take small sips of warm water. She cannot speak a full sentence and pauses after every two or three words to catch her breath."
+        },
+        "fever_infection": {
+          "cues": [
+            "fever during this illness",
+            "temperature elevation",
+            "coryza runny nose"
+          ],
+          "reply": "She had a mild low-grade fever of around 99 F and a clear runny nose two days ago, but she has not felt burning hot and has had no chills."
+        },
+        "foreign_body": {
+          "cues": [
+            "choking on food or toys",
+            "foreign body inhalation",
+            "sudden choking history"
+          ],
+          "reply": "No, there was definitely no sudden episode of choking, coughing fits while eating nuts, or playing with small toy beads or coins."
+        },
+        "birth_neonatal": {
+          "cues": [
+            "birth gestational age",
+            "preterm birth history",
+            "neonatal ventilator use"
+          ],
+          "reply": "She was born at full term through a normal hospital delivery, cried vigorously at birth, weighed 2.9 kg, and required no nursery admission or oxygen."
+        },
+        "immunisation_history": {
+          "cues": [
+            "vaccine doses received",
+            "immunisation card check",
+            "flu vaccine status"
+          ],
+          "reply": "She has received all primary vaccinations up to age five as per the national schedule. She received her last booster at five years, but has never received the annual flu vaccine."
+        },
+        "developmental_milestones": {
+          "cues": [
+            "developmental progression",
+            "milestone attainment",
+            "school performance"
+          ],
+          "reply": "She walked before one year, speaks fluently in Hindi and English, attends regular school, and performs well academically."
+        },
+        "environmental_housing": {
+          "cues": [
+            "cooking fuel at home",
+            "chulha biomass smoke",
+            "passive cigarette smoke exposure"
+          ],
+          "reply": "We cook using LPG gas cylinders. However, her grandfather smokes bidis in the open courtyard, and our house is close to an unpaved road with heavy vehicular dust."
+        },
+        "urinary_bowel": {
+          "cues": [
+            "urine frequency output",
+            "hydration fluid intake",
+            "thirst and urination"
+          ],
+          "reply": "She passed urine three hours ago and has had no diarrhoea or vomiting."
+        }
+      },
+      "exam": {
+        "skill.gen.paed.appearance": {
+          "abnormal": true,
+          "finding": "Alert but visibly distressed, sitting upright in the tripod position, unable to speak in complete sentences without pausing for breath."
+        },
+        "skill.gen.paed.vitals": {
+          "abnormal": true,
+          "finding": "Heart rate 138 beats per minute (tachycardia for age), respiratory rate 46 breaths per minute with prolonged expiration, blood pressure 98/62 mmHg, temperature 37.1 C, oxygen saturation 91% on room air."
+        },
+        "skill.gen.paed.cyanosis": {
+          "abnormal": false,
+          "finding": "No central or peripheral cyanosis visible on the tongue, oral mucosa, or nail beds; capillary refill time is brisk at 1.5 seconds."
+        },
+        "skill.gen.paed.clubbing": {
+          "abnormal": false,
+          "finding": "No digital clubbing or fluctuation of the nail beds (normal profile angle preserved)."
+        },
+        "skill.gen.paed.hydration": {
+          "abnormal": false,
+          "finding": "Warm extremities, tears present when crying, moist buccal mucosa, normal skin turgor with instantaneous recoil."
+        },
+        "skill.exam.paed.resp.inspection": {
+          "abnormal": true,
+          "finding": "Hyperinflated chest appearance with increased anteroposterior diameter; prominent accessory muscle use with marked intercostal and subcostal indrawing, suprasternal retraction, and mild alae nasi flaring."
+        },
+        "skill.exam.paed.resp.palpation": {
+          "abnormal": false,
+          "finding": "Trachea is strictly central in the suprasternal notch; symmetrical bilateral chest expansion with no chest wall tenderness or palpable crepitus."
+        },
+        "skill.exam.paed.resp.percussion": {
+          "abnormal": true,
+          "finding": "Resonant to hyperresonant percussion note bilaterally throughout all lung zones, with physiological downward displacement of liver dullness to the 6th intercostal space."
+        },
+        "skill.exam.paed.resp.auscultation": {
+          "abnormal": true,
+          "finding": "Markedly prolonged expiratory phase with widespread bilateral polyphonic high-pitched expiratory rhonchi and scattered inspiratory wheezes; vesicular breath sounds preserved without focal bronchial breathing."
+        },
+        "skill.exam.paed.resp.distress_grunt": {
+          "abnormal": true,
+          "finding": "Audible expiratory wheeze without stethoscope; no inspiratory stridor and no expiratory grunting."
+        }
+      },
+      "essentialInvestigations": [
+        "oximetry",
+        "pefr",
+        "chest_xray",
+        "blood_gas",
+        "complete_blood_count"
+      ],
+      "investigations": {
+        "oximetry": {
+          "label": "Continuous pulse oximetry",
+          "result": "SpO2 91% on room air, improving to 96% with supplemental oxygen via face mask at 4 L/min.",
+          "note": "Confirms acute hypoxaemia requiring immediate controlled oxygen therapy."
+        },
+        "pefr": {
+          "label": "Peak Expiratory Flow Rate (PEFR)",
+          "result": "Pre-bronchodilator PEFR 110 L/min (predicted for height 115 cm is 230 L/min; 48% of predicted, placing the child in the Red Zone).",
+          "note": "Demonstrates severe airflow limitation; repeat 20 minutes post-bronchodilator shows rise to 160 L/min (>45% improvement)."
+        },
+        "chest_xray": {
+          "label": "Chest Radiograph (PA view)",
+          "result": "Bilateral pulmonary hyperinflation with flattened diaphragms and increased retrosternal lucency; prominent bronchovascular markings without focal parenchymal consolidation, pneumothorax, or pneumomediastinum.",
+          "note": "Excludes pneumothorax, lobar collapse, and pneumonia."
+        },
+        "blood_gas": {
+          "label": "Capillary / Venous Blood Gas",
+          "result": "pH 7.38, PaCO2 36 mmHg, PaO2 62 mmHg on room air, HCO3- 22 mEq/L, base excess -1 mEq/L.",
+          "note": "Normal PaCO2 in a severely tachypnoeic child indicates significant airway obstruction with beginning respiratory muscle fatigue (pseudonormalisation warning)."
+        },
+        "complete_blood_count": {
+          "label": "Complete Blood Count and Absolute Eosinophil Count",
+          "result": "Haemoglobin 12.2 g/dL, Total Leukocyte Count 9,200/uL with 58% neutrophils, 32% lymphocytes, 8% eosinophils; Absolute Eosinophil Count 736/uL.",
+          "note": "Peripheral eosinophilia supports an underlying atopic diathesis; no leukocytosis with toxic granules."
+        }
+      },
+      "differentialModel": {
+        "answer": "Acute severe asthma exacerbation in a child with bronchial asthma. Key differentials include acute bronchiolitis (in infants), community-acquired pneumonia with wheeze, foreign body aspiration, viral croup, and pneumothorax.",
+        "accept": [
+          "acute severe asthma",
+          "bronchial asthma",
+          "status asthmaticus",
+          "asthma",
+          "bronchiolitis",
+          "foreign body aspiration",
+          "pneumonia",
+          "community acquired pneumonia",
+          "croup",
+          "pneumothorax"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Acute severe asthma exacerbation in a 6-year-old child with underlying bronchial asthma.",
+        "accept": [
+          "acute severe asthma",
+          "status asthmaticus",
+          "bronchial asthma",
+          "asthma"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Immediate high-flow humidified oxygen to maintain SpO2 94-98%, back-to-back inhaled short-acting beta-2 agonist (salbutamol) with inhaled ipratropium via MDI and spacer or nebulisation, early systemic corticosteroids (oral prednisolone or intravenous hydrocortisone), intravenous magnesium sulfate for poor response, continuous clinical and oximetry monitoring, and discharge planning with written action plan and inhaled corticosteroid controller.",
+        "accept": [
+          "oxygen target",
+          "nebulisation",
+          "bronchodilator",
+          "corticosteroid",
+          "inhaler technique",
+          "inhaled steroid",
+          "follow up",
+          "counselling"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "In acute severe paediatric asthma, clinical assessment of the work of breathing, accessory muscle use, ability to speak, and mental status is more vital than auscultatory loudness, as a silent chest indicates critical, life-threatening airflow obstruction.",
+        "Early in severe acute asthma, hyperventilation typically drives PaCO2 down (hypocapnia). A normal PaCO2 (38-42 mmHg) or rising PaCO2 in a struggling, exhausted child is an ominous warning of impending respiratory failure.",
+        "Metered-dose inhalers (MDI) coupled with a valved holding chamber and spacer deliver bronchodilators with equal or superior pulmonary deposition compared to jet nebulisers in mild-to-moderate exacerbations, with fewer systemic adverse effects.",
+        "Systemic corticosteroids (oral prednisolone 1-2 mg/kg/day or intravenous hydrocortisone) must be administered early within the first hour of emergency presentation to resolve airway mucosal inflammation and reduce hospitalisation.",
+        "Every child discharged after an acute asthma exacerbation requires a verified inhaler technique check, initiation or step-up of inhaled corticosteroid preventer therapy, identification and mitigation of domestic triggers, and a clear written asthma action plan."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

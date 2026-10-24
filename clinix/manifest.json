@@ -1,7 +1,7 @@
 {
   "_comment": "CliniX catalog. Small on purpose: the app fetches this first, then only the packs the student actually opens. Modelled on atlas/modules.json, deliberately NOT on kardiox-content-pack.js (a 1.9 MB array parsed on every page load).",
   "schemaVersion": 1,
-  "contentVersion": "0.11.1-finalyear3",
+  "contentVersion": "0.11.2-finalyear4",
   "updated": "2026-10-19",
   "practicals": {
     "index": "practicals/index.json"
@@ -935,6 +935,96 @@
           "estMinutes": 60,
           "chapters": 14,
           "review": "ai_drafted"
+        },
+        {
+          "id": "asthma-child",
+          "title": "Bronchial asthma and bronchiolitis in children",
+          "subtitle": "Wheeze in childhood",
+          "file": "diseases/asthma-child.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "acute-glomerulonephritis",
+          "title": "Acute glomerulonephritis",
+          "subtitle": "Post-streptococcal disease",
+          "file": "diseases/acute-glomerulonephritis.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "urinary-tract-infection-child",
+          "title": "Urinary tract infection in children",
+          "subtitle": "Imaging and prophylaxis",
+          "file": "diseases/urinary-tract-infection-child.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "tuberculosis-child",
+          "title": "Tuberculosis in children",
+          "subtitle": "Contact history and diagnosis",
+          "file": "diseases/tuberculosis-child.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "enteric-dengue-malaria",
+          "title": "Typhoid, dengue and malaria in children",
+          "subtitle": "Fever in the tropics",
+          "file": "diseases/enteric-dengue-malaria.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "cerebral-palsy-development",
+          "title": "Cerebral palsy and developmental delay",
+          "subtitle": "Assessment of development",
+          "file": "diseases/cerebral-palsy-development.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "down-syndrome",
+          "title": "Down syndrome",
+          "subtitle": "Features and counselling",
+          "file": "diseases/down-syndrome.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "type-1-diabetes-child",
+          "title": "Type 1 diabetes in children",
+          "subtitle": "DKA and long-term care",
+          "file": "diseases/type-1-diabetes-child.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "prematurity-low-birth-weight",
+          "title": "Prematurity and low birth weight",
+          "subtitle": "Care of the preterm newborn",
+          "file": "diseases/prematurity-low-birth-weight.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "hypothyroidism-child",
+          "title": "Congenital hypothyroidism",
+          "subtitle": "Screening and treatment",
+          "file": "diseases/hypothyroidism-child.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
         }
       ],
       "module": {
@@ -1132,6 +1222,96 @@
           "title": "Head injury",
           "subtitle": "Traumatic brain injury following head trauma",
           "file": "diseases/head-injury.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "salivary-gland-swelling",
+          "title": "Salivary gland swelling",
+          "subtitle": "Parotid and submandibular",
+          "file": "diseases/salivary-gland-swelling.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "scrotal-swellings",
+          "title": "Hydrocele and scrotal swellings",
+          "subtitle": "Examination of the scrotum",
+          "file": "diseases/scrotal-swellings.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "gi-bleeding",
+          "title": "Gastrointestinal bleeding",
+          "subtitle": "Upper and lower",
+          "file": "diseases/gi-bleeding.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "deep-vein-thrombosis",
+          "title": "Deep vein thrombosis",
+          "subtitle": "Wells score",
+          "file": "diseases/deep-vein-thrombosis.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "abdominal-trauma",
+          "title": "Abdominal and chest trauma",
+          "subtitle": "Primary survey",
+          "file": "diseases/abdominal-trauma.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "burns",
+          "title": "Burns",
+          "subtitle": "Assessment and fluid resuscitation",
+          "file": "diseases/burns.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "carcinoma-stomach",
+          "title": "Carcinoma stomach",
+          "subtitle": "Dyspepsia and weight loss",
+          "file": "diseases/carcinoma-stomach.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "neck-swellings",
+          "title": "Neck swellings",
+          "subtitle": "Midline and lateral swellings",
+          "file": "diseases/neck-swellings.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "oral-cancer",
+          "title": "Oral cavity cancer and ulcer",
+          "subtitle": "Examination of the mouth",
+          "file": "diseases/oral-cancer.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "cleft-lip-palate",
+          "title": "Cleft lip and palate and congenital anomalies",
+          "subtitle": "Paediatric surgical conditions",
+          "file": "diseases/cleft-lip-palate.json",
           "estMinutes": 60,
           "chapters": 14,
           "review": "ai_drafted"
