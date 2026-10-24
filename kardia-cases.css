@@ -1,0 +1,61 @@
+/* Kardia Cases (WP11): whole patient cases on the specialty engine.
+   Every rule is scoped under .krd-root and reads the Kardia tokens set in
+   kardia.css, so light and dark match the rest of Kardia. No new palette.
+   Touch targets stay at 44px or more, motion is transform and opacity only,
+   and reduced motion removes transitions. */
+.krd-root .kc-empty { padding: 24px 0; }
+.krd-root .kc-err { margin: 18px 0 0; }
+.krd-root .kc-steps { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; list-style: none; margin: 12px 0 4px; padding: 0 0 6px; -webkit-overflow-scrolling: touch; }
+.krd-root .kc-steps::-webkit-scrollbar { display: none; }
+.krd-root .kc-steps li { flex: 0 0 auto; display: flex; align-items: center; gap: 6px; min-height: 32px; padding: 4px 10px 4px 4px; border-radius: 999px; background: var(--sp-s1); color: var(--sp-mut); font-size: 13px; font-weight: 600; }
+.krd-root .kc-steps li span { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: var(--sp-s3); color: var(--sp-text); font-size: 12px; }
+.krd-root .kc-steps li[data-on="true"] { color: var(--sp-text); background: var(--kd-acc-soft); }
+.krd-root .kc-steps li[data-on="true"] span { background: var(--sp-acc); color: var(--kd-on-acc); }
+.krd-root .kc-steps li[data-done="true"] { color: var(--sp-text); }
+.krd-root .kc-stem { font-size: 17px; line-height: 1.55; margin: 8px 0 16px; }
+.krd-root .kc-vitals { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 8px; }
+.krd-root .kc-vitals div { background: var(--sp-s1); border-radius: 12px; padding: 12px 14px; }
+.krd-root .kc-vitals dt { font-size: 13px; color: var(--sp-mut); margin: 0 0 4px; }
+.krd-root .kc-vitals dd { margin: 0; font-size: 20px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.krd-root .kc-vitals dd span { font-size: 13px; font-weight: 400; color: var(--sp-mut); }
+.krd-root .kc-qs, .krd-root .kc-tasks, .krd-root .kc-finds, .krd-root .kc-lessons, .krd-root .kc-scores { list-style: none; margin: 0; padding: 0; }
+.krd-root .kc-q { width: 100%; min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 12px; text-align: left; border: 0; border-radius: 12px; background: var(--sp-s1); color: var(--sp-text); padding: 12px 14px; font-size: 15px; line-height: 1.4; transition: transform 140ms var(--kd-ease), background-color 140ms ease; }
+.krd-root .kc-q:active { transform: scale(0.985); }
+.krd-root .kc-qs li + li { margin-top: 10px; }
+.krd-root .kc-q-state { flex: 0 0 auto; font-size: 13px; color: var(--sp-acc); font-weight: 650; }
+.krd-root .kc-a { margin: 8px 2px 2px; font-size: 15px; line-height: 1.55; }
+.krd-root .kc-exam { display: grid; gap: 0; margin: 0 0 16px; }
+.krd-root .kc-exam div { display: grid; gap: 2px; padding: 12px 2px; border-bottom: 1px solid var(--sp-line); }
+.krd-root .kc-exam dt { font-size: 13px; color: var(--sp-mut); font-weight: 650; }
+.krd-root .kc-exam dd { margin: 0; font-size: 15px; line-height: 1.55; }
+.krd-root .kc-listen { width: 100%; }
+.krd-root .kc-ecg { width: 100%; height: auto; display: block; background: var(--sp-s1); border-radius: 12px; color: var(--sp-acc); padding: 8px; margin: 12px 0; }
+.krd-root .kc-finds li { padding: 8px 2px 8px 18px; position: relative; font-size: 15px; line-height: 1.5; border-bottom: 1px solid var(--sp-line); }
+.krd-root .kc-finds li::before { content: ""; position: absolute; left: 2px; top: 16px; width: 7px; height: 7px; border-radius: 50%; background: var(--sp-acc); }
+.krd-root .kc-task { padding: 14px 0; border-bottom: 1px solid var(--sp-line); }
+.krd-root .kc-diagram { width: 100%; height: auto; display: block; border-radius: 12px; background: var(--sp-s1); margin: 8px 0; }
+.krd-root .kc-meas, .krd-root .kc-field { display: grid; gap: 8px; margin: 12px 0; font-size: 15px; font-weight: 600; }
+.krd-root .kc-meas-row { display: flex; gap: 10px; }
+.krd-root .kc-meas-row .kc-in { flex: 1 1 auto; min-width: 0; }
+.krd-root .kc-meas-row .sp-btn { flex: 0 0 auto; min-height: 52px; }
+.krd-root .kc-in { min-height: 52px; border: 1px solid var(--sp-line); border-radius: 12px; background: var(--sp-s1); color: var(--sp-text); padding: 0 14px; font: inherit; font-size: 16px; width: 100%; }
+.krd-root .kc-in:focus-visible { outline: 2px solid var(--sp-acc); outline-offset: 2px; }
+.krd-root .kc-fields { display: grid; gap: 4px; }
+.krd-root .kc-mark { font-size: 14px; font-weight: 650; }
+.krd-root .kc-mark.ok { color: var(--sp-ok); }
+.krd-root .kc-mark.bad { color: var(--sp-bad); }
+.krd-root .kc-model { margin: 14px 0; padding: 14px; border-radius: 12px; background: var(--sp-s1); }
+.krd-root .kc-model p { line-height: 1.55; }
+.krd-root .kc-nav { display: flex; gap: 10px; margin: 20px 0 8px; }
+.krd-root .kc-nav .sp-btn { flex: 1 1 0; min-height: 52px; }
+.krd-root .kc-scores li { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; padding: 12px 2px; border-bottom: 1px solid var(--sp-line); font-size: 15px; }
+.krd-root .kc-bar { grid-column: 1 / -1; display: block; height: 8px; border-radius: 999px; background: var(--sp-s2); overflow: hidden; }
+.krd-root .kc-bar i { display: block; height: 100%; background: var(--sp-acc); border-radius: 999px; transition: width 240ms var(--kd-ease); }
+.krd-root .kc-lesson { width: 100%; min-height: 52px; text-align: left; border: 0; border-radius: 12px; background: var(--sp-s1); color: var(--sp-text); padding: 12px 14px; font-size: 15px; font-weight: 600; text-transform: capitalize; }
+.krd-root .kc-lessons li + li { margin-top: 10px; }
+@media (min-width: 700px) {
+  .krd-root .kc-vitals { grid-template-columns: repeat(3, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .krd-root .kc-q, .krd-root .kc-bar i { transition: none; }
+}
