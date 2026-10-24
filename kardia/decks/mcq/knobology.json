@@ -1,0 +1,453 @@
+{
+ "topic": "knobology",
+ "items": [
+  {
+   "id": "knobology001",
+   "q": "Overall gain is set too low. What does the image show?",
+   "o": [
+    "Better detail",
+    "Dark image with missing tissue detail",
+    "Bright white image",
+    "No change"
+   ],
+   "a": 1,
+   "exp": "Gain scales all echoes together, so low gain darkens tissue and hides real borders. Guideline: ASE 2019 TTE guideline, section on gain.",
+   "t": "knobology",
+   "d": 1
+  },
+  {
+   "id": "knobology002",
+   "q": "The far field is dark while the near field looks right. Which control fixes it?",
+   "o": [
+    "Raise the far time gain sliders",
+    "Raise overall gain only",
+    "Increase depth",
+    "Lower frequency"
+   ],
+   "a": 0,
+   "exp": "Sound fades with depth, so far time gain restores distant brightness without flooding the near field. Guideline: ASE 2019 TTE guideline, section on time gain compensation.",
+   "t": "knobology",
+   "d": 1
+  },
+  {
+   "id": "knobology003",
+   "q": "The near field is glaringly bright while the far field looks right. Which control fixes it?",
+   "o": [
+    "Increase depth",
+    "Raise overall gain",
+    "Widen the sector",
+    "Lower the near time gain sliders"
+   ],
+   "a": 3,
+   "exp": "Near echoes need little boost, so turning down near sliders balances the image through depth. Guideline: ASE 2019 TTE guideline, section on time gain compensation.",
+   "t": "knobology",
+   "d": 1
+  },
+  {
+   "id": "knobology004",
+   "q": "The heart fills only half the sector height. What should be changed?",
+   "o": [
+    "Raise gain",
+    "Open the sector wider",
+    "Reduce depth so the heart fills the screen",
+    "Increase depth further"
+   ],
+   "a": 2,
+   "exp": "Right depth frames the heart large with fewer wasted lines, which lifts size and frame rate together. Guideline: ASE 2019 TTE guideline, section on depth.",
+   "t": "knobology",
+   "d": 1
+  },
+  {
+   "id": "knobology005",
+   "q": "Where should the focal zone sit for a mitral valve study?",
+   "o": [
+    "Focus does not matter",
+    "At the valve level",
+    "At the skin surface",
+    "At maximum depth"
+   ],
+   "a": 1,
+   "exp": "Lateral detail is sharpest at the focus, so placing it at the target gives the crispest leaflets. Guideline: ASE 2019 TTE guideline, section on focus.",
+   "t": "knobology",
+   "d": 2
+  },
+  {
+   "id": "knobology006",
+   "q": "What does raising transmit frequency do?",
+   "o": [
+    "Better detail with less penetration",
+    "Deeper view with same detail",
+    "No change",
+    "Wider sector"
+   ],
+   "a": 0,
+   "exp": "Short waves resolve fine detail but fade fast, so high frequency suits shallow targets and low reaches deep. Guideline: ASE 2019 TTE guideline, section on frequency choice.",
+   "t": "knobology",
+   "d": 2
+  },
+  {
+   "id": "knobology007",
+   "q": "Which probe best images an adult abdomen in FAST?",
+   "o": [
+    "High frequency linear",
+    "High frequency phased",
+    "Pencil probe",
+    "Low frequency curvilinear"
+   ],
+   "a": 3,
+   "exp": "Deep windows need penetration and a wide near view, which the low frequency curved probe gives. Guideline: ASE 2019 TTE guideline, section on probe choice.",
+   "t": "knobology",
+   "d": 1
+  },
+  {
+   "id": "knobology008",
+   "q": "What does harmonic imaging improve?",
+   "o": [
+    "Frame rate always",
+    "Colour sensitivity",
+    "Endocardial border definition with less near clutter",
+    "Penetration to any depth"
+   ],
+   "a": 2,
+   "exp": "Harmonics build from tissue itself and skip weak clutter, so borders stand out with a cleaner cavity. Guideline: ASE 2019 TTE guideline, section on harmonic imaging.",
+   "t": "knobology",
+   "d": 2
+  },
+  {
+   "id": "knobology009",
+   "q": "Narrowing the sector width does what?",
+   "o": [
+    "Widens the beam",
+    "Raises frame rate for fast motion",
+    "Lowers frame rate",
+    "Deepens the view"
+   ],
+   "a": 1,
+   "exp": "Fewer lines per frame means faster frames, so a tight sector tracks rapid wall motion smoothly. Guideline: ASE 2019 TTE guideline, section on sector width and frame rate.",
+   "t": "knobology",
+   "d": 2
+  },
+  {
+   "id": "knobology010",
+   "q": "Fast wall motion looks jerky. What helps most?",
+   "o": [
+    "Narrow the sector to raise frame rate",
+    "Increase depth",
+    "Lower gain",
+    "Widen the sector"
+   ],
+   "a": 0,
+   "exp": "Jerky motion means too few frames per beat, so fewer lines per frame restores smooth tracking. Guideline: ASE 2019 TTE guideline, section on temporal resolution.",
+   "t": "knobology",
+   "d": 2
+  },
+  {
+   "id": "knobology011",
+   "q": "What does dynamic range compression change?",
+   "o": [
+    "The depth",
+    "The frequency",
+    "The heart rate",
+    "The shades of grey between black and white"
+   ],
+   "a": 3,
+   "exp": "Compression maps echo strength to grey steps, so low values look contrasty and high values look smooth. Guideline: ASE 2019 TTE guideline, section on dynamic range.",
+   "t": "knobology",
+   "d": 3
+  },
+  {
+   "id": "knobology012",
+   "q": "Write zoom differs from read zoom in what way?",
+   "o": [
+    "Read zoom adds new data",
+    "Write zoom only enlarges text",
+    "Write zoom rescans the region with denser lines",
+    "They are identical"
+   ],
+   "a": 2,
+   "exp": "Write zoom acquires the boxed region afresh with tight line spacing, so detail is real rather than stretched pixels. Guideline: ASE 2019 TTE guideline, section on zoom.",
+   "t": "knobology",
+   "d": 3
+  },
+  {
+   "id": "knobology013",
+   "q": "Colour box is large and the frame rate has fallen. What helps?",
+   "o": [
+    "Lower the scale",
+    "Shrink the colour box to the region of interest",
+    "Raise colour gain",
+    "Increase depth"
+   ],
+   "a": 1,
+   "exp": "Colour costs lines, so a small box over the valve restores speed without losing the jet. Guideline: ASE 2019 TTE guideline, section on colour box size.",
+   "t": "knobology",
+   "d": 2
+  },
+  {
+   "id": "knobology014",
+   "q": "Colour gain is too high. What is seen?",
+   "o": [
+    "Colour bleeding over tissue outside flow",
+    "No colour at all",
+    "Thinner jet",
+    "Sharper borders"
+   ],
+   "a": 0,
+   "exp": "Excess gain paints noise as flow, so gain is lowered until speckle just clears from tissue. Guideline: ASE 2019 TTE guideline, section on colour gain.",
+   "t": "knobology",
+   "d": 1
+  },
+  {
+   "id": "knobology015",
+   "q": "The spectral trace looks pale and thin. What helps?",
+   "o": [
+    "Lower the scale",
+    "Move the focus",
+    "Change probe",
+    "Raise spectral gain until the envelope is bright but clean"
+   ],
+   "a": 3,
+   "exp": "Weak gain starves the envelope, so raising it reveals the true peak without blooming the edges. Guideline: ASE 2019 TTE guideline, section on spectral gain.",
+   "t": "knobology",
+   "d": 1
+  },
+  {
+   "id": "knobology016",
+   "q": "Rib shadow crosses the sector. What is the best move?",
+   "o": [
+    "Increase depth",
+    "Use harmonics only",
+    "Slide between the ribs",
+    "Raise gain through the shadow"
+   ],
+   "a": 2,
+   "exp": "Bone blocks sound fully, so no knob recovers the hidden strip and the window must move. Guideline: BSE minimum dataset, section on acoustic windows.",
+   "t": "knobology",
+   "d": 1
+  },
+  {
+   "id": "knobology017",
+   "q": "Lung covers the apex in a breathless patient. What helps?",
+   "o": [
+    "Freeze and guess",
+    "Scan in end expiration or from another window",
+    "Press harder through lung",
+    "Raise frequency"
+   ],
+   "a": 1,
+   "exp": "Air scatters sound, so expiry shrinks lung cover or another window avoids it. Guideline: BSE minimum dataset, section on acoustic windows.",
+   "t": "knobology",
+   "d": 2
+  },
+  {
+   "id": "knobology018",
+   "q": "Endocardium is unclear in a technically difficult patient. What is the next step?",
+   "o": [
+    "Optimise harmonics, focus and gain before calling the study limited",
+    "Report normal anyway",
+    "Skip the views",
+    "Use ECG alone"
+   ],
+   "a": 0,
+   "exp": "Many poor images recover with systematic knobs, so optimisation comes before labelling views unseen. Guideline: ASE 2019 TTE guideline, section on image optimisation order.",
+   "t": "knobology",
+   "d": 2
+  },
+  {
+   "id": "knobology019",
+   "q": "Why does high frequency suit the apex in a slim patient but fail in a large patient?",
+   "o": [
+    "Frequency never matters",
+    "Low frequency blurs everything",
+    "Probes are identical",
+    "Detail is excellent shallow but fades before deep targets"
+   ],
+   "a": 3,
+   "exp": "Short waves resolve well yet attenuate fast, so depth and body size decide the trade. Guideline: ASE 2019 TTE guideline, section on frequency choice.",
+   "t": "knobology",
+   "d": 2
+  },
+  {
+   "id": "knobology020",
+   "q": "Multiple focal zones sharpen the whole image but slow the frame. Why?",
+   "o": [
+    "Zones narrow the beam forever",
+    "Zones change frequency",
+    "Each zone adds a scan pass per frame",
+    "Zones add gain"
+   ],
+   "a": 2,
+   "exp": "Several passes per line stack detail through depth at the cost of slower frames, so one zone at target often suffices. Guideline: ASE 2019 TTE guideline, section on focus.",
+   "t": "knobology",
+   "d": 3
+  },
+  {
+   "id": "knobology021",
+   "q": "The image looks overly smooth with lost texture. What was changed?",
+   "o": [
+    "Sector too narrow",
+    "Dynamic range set too high or smoothing set too strong",
+    "Depth too shallow",
+    "Frequency too high"
+   ],
+   "a": 1,
+   "exp": "Heavy smoothing erases speckle texture with borders, so easing it restores true tissue detail. Guideline: ASE 2019 TTE guideline, section on post processing.",
+   "t": "knobology",
+   "d": 3
+  },
+  {
+   "id": "knobology022",
+   "q": "Cine loop review helps measurement because it does what?",
+   "o": [
+    "Lets frames be stepped to true end systole and diastole",
+    "Changes the heart rate",
+    "Adds contrast",
+    "Replaces ECG"
+   ],
+   "a": 0,
+   "exp": "Stepping finds exact timing frames that live motion blurs past, so volumes and Doppler align correctly. Guideline: BSE minimum dataset, section on cine and ECG timing.",
+   "t": "knobology",
+   "d": 2
+  },
+  {
+   "id": "knobology023",
+   "q": "Why is ECG gating on during measurement?",
+   "o": [
+    "It treats arrhythmia",
+    "It replaces calipers",
+    "It sharpens focus",
+    "It marks end diastole and end systole for consistent timing"
+   ],
+   "a": 3,
+   "exp": "QRS and T landmarks time the frames, so beats compare fairly instead of drifting. Guideline: BSE minimum dataset, section on ECG timing.",
+   "t": "knobology",
+   "d": 2
+  },
+  {
+   "id": "knobology024",
+   "q": "Depth is set far too deep for a parasternal view. What else suffers besides size?",
+   "o": [
+    "Only the audio",
+    "Nothing else",
+    "Frame rate and lateral detail",
+    "Only the ECG"
+   ],
+   "a": 2,
+   "exp": "Wasted depth spends lines and widens spacing, so speed and detail both fall with the small image. Guideline: ASE 2019 TTE guideline, section on depth.",
+   "t": "knobology",
+   "d": 2
+  },
+  {
+   "id": "knobology025",
+   "q": "Focus is left at maximum depth for an anterior structure. What is seen?",
+   "o": [
+    "Mirror artefact",
+    "Blurred near target with sharp far field",
+    "Uniform sharpness",
+    "No image"
+   ],
+   "a": 1,
+   "exp": "Detail peaks at the focus, so a far focus blurs the near target under study. Guideline: ASE 2019 TTE guideline, section on focus.",
+   "t": "knobology",
+   "d": 2
+  },
+  {
+   "id": "knobology026",
+   "q": "Sector is opened very wide for a small heart. What is the effect?",
+   "o": [
+    "Slower frames with more side clutter",
+    "Faster frames",
+    "Deeper view",
+    "Higher frequency"
+   ],
+   "a": 0,
+   "exp": "Wide sectors spend lines on empty space, so speed falls and side echoes rise for no gain. Guideline: ASE 2019 TTE guideline, section on sector width.",
+   "t": "knobology",
+   "d": 2
+  },
+  {
+   "id": "knobology027",
+   "q": "Tissue looks grainy with speckle everywhere after raising gain. What is the fix?",
+   "o": [
+    "Raise gain more",
+    "Increase depth",
+    "Change the patient",
+    "Lower gain until blood is dark and muscle is mid grey"
+   ],
+   "a": 3,
+   "exp": "Blood should read dark with muscle mid grey, so gain is set to that reference before judging pathology. Guideline: ASE 2019 TTE guideline, section on gain reference.",
+   "t": "knobology",
+   "d": 1
+  },
+  {
+   "id": "knobology028",
+   "q": "Harmonics reduce frame rate slightly. When is that trade accepted?",
+   "o": [
+    "Never",
+    "Only in M mode",
+    "When borders are unclear and detail matters more than speed",
+    "Always"
+   ],
+   "a": 2,
+   "exp": "Clean borders beat raw speed for volumes and wall calls, so harmonics stay on unless motion needs speed. Guideline: ASE 2019 TTE guideline, section on harmonic imaging.",
+   "t": "knobology",
+   "d": 3
+  },
+  {
+   "id": "knobology029",
+   "q": "A trainee raises overall gain to fix a dark far field. What is the better lesson?",
+   "o": [
+    "Depth fixes brightness",
+    "Use far time gain so the near field is not flooded",
+    "Gain never matters",
+    "Always maximise gain"
+   ],
+   "a": 1,
+   "exp": "Overall gain lifts all depths together, so depth selective sliders correct fading without near bloom. Guideline: ASE 2019 TTE guideline, section on time gain compensation.",
+   "t": "knobology",
+   "d": 1
+  },
+  {
+   "id": "knobology030",
+   "q": "Colour jet looks small with a high scale setting. What should be tried?",
+   "o": [
+    "Lower the scale toward the expected velocity",
+    "Raise the scale more",
+    "Turn colour off",
+    "Press harder"
+   ],
+   "a": 0,
+   "exp": "An over high ceiling shrinks jets, so matching scale to flow shows true jet size before grading. Guideline: ASE 2019 TTE guideline, section on colour scale.",
+   "t": "knobology",
+   "d": 2
+  },
+  {
+   "id": "knobology031",
+   "q": "Why save stills and loops rather than trusting memory?",
+   "o": [
+    "Memory is always perfect",
+    "Saving wastes time",
+    "Loops cannot be reviewed",
+    "Saved images allow review, audit and comparison"
+   ],
+   "a": 3,
+   "exp": "Stored frames can be measured and rechecked, so reporting rests on evidence rather than recall. Guideline: BSE minimum dataset, section on documentation.",
+   "t": "knobology",
+   "d": 1
+  },
+  {
+   "id": "knobology032",
+   "q": "The ECG trace on screen is noisy. What should be checked first?",
+   "o": [
+    "The sector width",
+    "Colour gain",
+    "Electrode contact and lead placement",
+    "The transducer frequency"
+   ],
+   "a": 2,
+   "exp": "Timing marks need clean ECG, so skin contact and leads are fixed before measuring. Guideline: BSE minimum dataset, section on ECG timing.",
+   "t": "knobology",
+   "d": 1
+  }
+ ]
+}

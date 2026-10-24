@@ -109,7 +109,7 @@ try {
 
   /* ── 4. Screenshots: every tab at 390 and 820, light and dark ── */
   console.log("\n--- screenshots ---");
-  const tabs = [["echo", "coming soon"], ["learn", "Free preview"], ["practice", "coming soon"], ["cases", "coming soon"], ["kardiox", "Open KardiQ X"]];
+  const tabs = [["echo", "coming soon"], ["learn", "Echo"], ["practice", "Question bank"], ["cases", "coming soon"], ["kardiox", "Open KardiQ X"]];
   for (const [w, h] of [[390, 844], [820, 1180]]) {
     await metrics(w, h);
     for (const dark of [false, true]) {
@@ -130,6 +130,48 @@ try {
   await sleep(350);
   ok((await ev(`return document.querySelectorAll('#smdKardia [data-act=klearn][data-id]').length;`)) === 5, "Learn lists exactly the 5 free preview lessons");
   ok((await ev(`return (document.getElementById('smdKardia').innerText.match(/Plus \\d+ more lessons/)||[])[0];`)) !== null, "and counts the locked rest instead of listing it");
+
+  /* ── 4b. Echo lesson, level change, bank question (light and dark, 390 and 820) ── */
+  console.log("\\n--- Echo lesson, level and bank ---");
+  for (const [w, h] of [[390, 844], [820, 1180]]) {
+    await metrics(w, h);
+    for (const dark of [false, true]) {
+      await theme(dark);
+      const th = dark ? "dark" : "light";
+      await ev(`document.querySelector('#smdKardia [data-act=ktab][data-t=learn]').click(); return 1;`);
+      await sleep(400);
+      ok((await ev(`return document.querySelectorAll('#smdKardia [data-act=lesson][data-l]').length;`)) > 0, `${w}px ${th}: Learn lists echo lessons for the chosen level`);
+      await ev(`var b=document.querySelector('#smdKardia [data-act=lesson][data-l]'); if(b) b.click(); return 1;`);
+      ok(await until(`return !!document.querySelector('#smdKardia .ln-art');`, 15000), `${w}px ${th}: an echo lesson opens in the engine player`);
+      await shot(`kardia-echo-lesson-${w}-${th}`);
+      await ev(`var n=document.getElementById('lnNext'); if(n) n.click(); return 1;`);
+      await sleep(300);
+      ok((await ev(`return !!document.querySelector('#smdKardia .ln-art');`)) === true, `${w}px ${th}: the lesson moves to its next step`);
+      await ev(`var x=document.querySelector('#smdKardia [data-act=lnexit]'); if(x) x.click(); return 1;`);
+      await sleep(400);
+      // Change level: a locked level holds at the paywall for a free user, so grant Pro in the harness, then switch.
+      await ev(`window.SMD_PRO={isProSync:function(){return true;},openPaywall:function(){}}; return 1;`);
+      await ev(`var lv=document.querySelector('#smdKardia [data-act=klevel][data-v=resident]'); if(lv) lv.click(); return 1;`);
+      await sleep(400);
+      ok((await ev(`return document.querySelector('#smdKardia [data-act=klevel][data-v=resident]').getAttribute('aria-pressed');`)) === "true", `${w}px ${th}: level changes to Resident and the echo list refilters`);
+      await ev(`var lv2=document.querySelector('#smdKardia [data-act=klevel][data-v=mbbs]'); if(lv2) lv2.click(); return 1;`);
+      await sleep(300);
+      await ev(`document.querySelector('#smdKardia [data-act=ktab][data-t=practice]').click(); return 1;`);
+      await sleep(400);
+      ok((await ev(`return document.getElementById('smdKardia').innerText.indexOf('Question bank')>=0;`)) === true, `${w}px ${th}: Practice shows the question bank, not coming soon`);
+      await ev(`var qb=document.querySelector('#smdKardia [data-act=kbank]'); if(qb) qb.click(); return 1;`);
+      ok(await until(`return !!document.querySelector('#smdKardia [data-act=mcqstart]');`, 15000), `${w}px ${th}: the bank home opens through the engine bank`);
+      await ev(`document.querySelector('#smdKardia [data-act=mcqstart]').click(); return 1;`);
+      ok(await until(`return !!document.querySelector('#smdKardia [data-act=mcqans]');`, 20000), `${w}px ${th}: a bank question loads`);
+      await ev(`var a=document.querySelector('#smdKardia [data-act=mcqans]'); if(a) a.click(); return 1;`);
+      await sleep(400);
+      ok((await ev(`return document.getElementById('mcqNote') && document.getElementById('mcqNote').innerText.length>0;`)) === true, `${w}px ${th}: answering a bank question shows its explanation`);
+      await shot(`kardia-bank-q-${w}-${th}`);
+      await ev(`if(window.KARDIA){KARDIA.close(); KARDIA.open();} return 1;`);
+      await until(`return !!document.querySelector('#smdKardia [data-act=ktab][data-t=learn]');`, 15000);
+      await sleep(300);
+    }
+  }
 
   // Pressing Open KardiQ X without a code must hold at the gate: no AI overlay opens.
   await ev(`document.querySelector('#smdKardia [data-act=ktab][data-t=kardiox]').click(); return 1;`);

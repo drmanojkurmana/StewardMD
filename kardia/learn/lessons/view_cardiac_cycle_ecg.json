@@ -1,0 +1,218 @@
+{
+ "id": "view_cardiac_cycle_ecg",
+ "unit": "views",
+ "level": "mbbs",
+ "levels": [
+  "mbbs",
+  "resident",
+  "sonographer"
+ ],
+ "minutes": 4,
+ "title": {
+  "en": "The cardiac cycle on echo with the ECG"
+ },
+ "idea": {
+  "en": "Match systole and diastole on echo to the ECG trace."
+ },
+ "see": {
+  "diagram": "diagrams/view_cardiac_cycle_ecg.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Echo Lab render of the apical four chamber. Watch the mitral valve close with the QRS and open after the T wave."
+  },
+  "caption": {
+   "en": "Echo Lab render of the apical four chamber. Watch the mitral valve close with the QRS and open after the T wave."
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "inflow valves shutting at the start of systole."
+    },
+    "note": {
+     "en": "Sounds and trace landmarks: First sound with the QRS: inflow valves shutting at the start of systole."
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "outflow valves shutting at the start of diastole."
+    },
+    "note": {
+     "en": "Second sound after the T wave: outflow valves shutting at the start of diastole."
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Mitral opening snap and third sound in early diastole during rapid filling."
+    },
+    "note": {
+     "en": "Mitral opening snap and third sound in early diastole during rapid filling."
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "A murmur between the sounds is systolic and after the second sound is diastolic."
+    },
+    "note": {
+     "en": "A murmur between the sounds is systolic and after the second sound is diastolic."
+    }
+   }
+  ],
+  "view": "tte_a4c"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: The ECG trace runs with the echo from the same heartbeat. The QRS starts ventricular systole: the mitral and tricuspid valves shut, the ventricles squeeze, and the aortic and pulmonary valves open. The T wave ends systole: the outflow valves shut, the ventricles relax, and the inflow valves open for filling."
+   },
+   {
+    "en": "Sounds and trace landmarks: Each sound and wave lines up with a valve event."
+   },
+   {
+    "en": "Trace standards and timing: ECG paper speed 25 mm per s with calibration 10 mm per mV."
+   },
+   {
+    "en": "Mark end diastole at the start of the QRS and end systole at aortic valve closure."
+   },
+   {
+    "en": "Measure chamber diameters at end diastole and wall thickness at end diastole."
+   },
+   {
+    "en": "Pitfalls: A noisy ECG trace mistriggers timing, so recheck lead contact before measuring dyssynchrony or strain. In atrial fibrillation every beat differs, so average measurements over at least five beats."
+   }
+  ],
+  "analogy": {
+   "en": "Sounds and trace landmarks: First sound with the QRS: inflow valves shutting at the start of systole."
+  }
+ },
+ "spot": [
+  {
+   "en": "Sounds and trace landmarks: First sound with the QRS: inflow valves shutting at the start of systole."
+  },
+  {
+   "en": "Second sound after the T wave: outflow valves shutting at the start of diastole."
+  },
+  {
+   "en": "Mitral opening snap and third sound in early diastole during rapid filling."
+  },
+  {
+   "en": "A murmur between the sounds is systolic and after the second sound is diastolic."
+  }
+ ],
+ "todo": [
+  {
+   "en": "Event order in one beat: P wave: the atria squeeze and top up the ventricles."
+  },
+  {
+   "en": "QRS start: the inflow valves shut and end diastole is marked for measurements."
+  },
+  {
+   "en": "ST segment: the outflow valves are open and blood is ejected."
+  },
+  {
+   "en": "T wave end: the outflow valves shut and end systole is marked."
+  },
+  {
+   "en": "After the T wave: the inflow valves open and the ventricles fill."
+  }
+ ],
+ "remember": {
+  "en": "Link valve clicks and murmurs to cycle events."
+ },
+ "check": [
+  {
+   "q": {
+    "en": "When is end diastole marked?"
+   },
+   "o": [
+    {
+     "en": "At the P wave"
+    },
+    {
+     "en": "At the start of the QRS"
+    },
+    {
+     "en": "At the T wave peak"
+    },
+    {
+     "en": "At the second sound"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "End diastole is the frame at QRS start when the ventricle is fullest."
+   }
+  },
+  {
+   "q": {
+    "en": "A murmur runs from the first sound to the second sound. What timing is this?"
+   },
+   "o": [
+    {
+     "en": "Systolic"
+    },
+    {
+     "en": "Diastolic"
+    },
+    {
+     "en": "Continuous"
+    },
+    {
+     "en": "Innocent by definition"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "Between first and second sounds is systole."
+   }
+  },
+  {
+   "q": {
+    "en": "Paper speed and calibration for rhythm strips are what?"
+   },
+   "o": [
+    {
+     "en": "50 mm per s and 5 mm per mV"
+    },
+    {
+     "en": "25 mm per s and 10 mm per mV"
+    },
+    {
+     "en": "10 mm per s and 25 mm per mV"
+    },
+    {
+     "en": "100 mm per s and 20 mm per mV"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Standard recording runs 25 mm per s at 10 mm per mV."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "views"
+ },
+ "sources": [
+  "ASE 2015 chamber quantification guideline, timing of measurements section.",
+  "ASE 2019 guideline for the complete transthoracic examination, ECG gating and timing section."
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_a4c",
+ "objectives": [
+  "Match systole and diastole on echo to the ECG trace.",
+  "Time end diastole and end systole for measurements.",
+  "Link valve clicks and murmurs to cycle events."
+ ]
+}

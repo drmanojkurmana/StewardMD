@@ -1,0 +1,276 @@
+{
+ "id": "meas_lv_mass",
+ "unit": "measurements",
+ "level": "resident",
+ "levels": [
+  "fellow",
+  "sonographer"
+ ],
+ "minutes": 10,
+ "title": {
+  "en": "Left ventricular mass and geometry"
+ },
+ "idea": {
+  "en": "Measure the three end diastolic terms of the linear mass formula cleanly"
+ },
+ "see": {
+  "diagram": "diagrams/meas_lv_mass.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Parasternal long axis at end diastole supplying all three linear terms of the mass formula"
+  },
+  "caption": {
+   "en": "Parasternal long axis at end diastole supplying all three linear terms of the mass formula"
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Perpendicular basal septum and posterior wall on one diastolic frame"
+    },
+    "note": {
+     "en": "Perpendicular basal septum and posterior wall on one diastolic frame"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Mitral leaflet tips marking the measurement level"
+    },
+    "note": {
+     "en": "Mitral leaflet tips marking the measurement level"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Compact myocardium without chordal echoes in the line"
+    },
+    "note": {
+     "en": "Compact myocardium without chordal echoes in the line"
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Stable ECG timing at the onset of the QRS for diastole"
+    },
+    "note": {
+     "en": "Stable ECG timing at the onset of the QRS for diastole"
+    }
+   }
+  ],
+  "view": "tte_plax"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "Left ventricular mass tells you whether the wall is truly hypertrophied or simply thick on one cut. The linear method cubes the sum of cavity plus both walls at end diastole and subtracts the cube of the cavity, then scales the shell volume to grams with the autopsy validated Devereux formula. Indexed to body surface area with relative wall thickness alongside, it separates four patterns: normal geometry, concentric remodelling, concentric hypertrophy and eccentric hypertrophy. The maths amplifies small errors because every term is cubed, so clean perpendicular lines matter more here than anywhere else."
+   },
+   {
+    "en": "Use the parasternal long axis diastolic frame from the linear lesson, with the beam perpendicular at the mitral leaflet tips."
+   },
+   {
+    "en": "Measure cavity, septal wall and posterior wall at end diastole, excluding trabeculation, chordae and right ventricular wall."
+   },
+   {
+    "en": "Cube the sum of all three, subtract the cube of the cavity alone, multiply by 1.04 for muscle density, then apply the 0.8 plus 0.6 correction."
+   },
+   {
+    "en": "Index the result to body surface area."
+   },
+   {
+    "en": "Compute relative wall thickness as twice the posterior wall divided by the diastolic cavity."
+   },
+   {
+    "en": "Read mass index with relative wall thickness together to name the geometry pattern."
+   },
+   {
+    "en": "Oblique walls feeding the cubed formula. Fix: Reacquire a perpendicular cut first. Cubing turns a 2 mm slant error into a large mass error."
+   },
+   {
+    "en": "Calling a basal septal bulge hypertrophy. Fix: Hypertension stiffens the whole wall; a septal bulge alone does not prove hypertrophy. Measure below the bulge."
+   },
+   {
+    "en": "Judging absolute grams in a small or large patient. Fix: Index to body surface area and compare with sex specific limits before labelling hypertrophy."
+   },
+   {
+    "en": "Trusting the linear formula in an infarcted ventricle. Fix: Area length tracing from short axis and apical views avoids the cube assumption in distorted ventricles."
+   },
+   {
+    "en": "Left ventricular mass index. 49 to 115 g per sq m in men, 43 to 95 g per sq m in women. Source: ASE 2015 chamber quantification, section on left ventricular mass"
+   },
+   {
+    "en": "Relative wall thickness. 0.42 or less is normal. Source: ASE 2015 chamber quantification, section on left ventricular geometry"
+   },
+   {
+    "en": "Geometry with high mass and high relative wall thickness. Concentric hypertrophy, the pattern of chronic pressure load. Source: ASE 2015 chamber quantification, section on left ventricular geometry"
+   },
+   {
+    "en": "Geometry with high mass and normal relative wall thickness. Eccentric hypertrophy, the pattern of chronic volume load. Source: ASE 2015 chamber quantification, section on left ventricular geometry"
+   },
+   {
+    "en": "Athlete hearts can exceed the mass limits with normal function and normal wall thickness ratios, so context rules."
+   },
+   {
+    "en": "Infiltrative disease thickens walls without true myocyte hypertrophy, so mass alone never makes that diagnosis."
+   },
+   {
+    "en": "Serial studies must use the same method and reader, because method switches move the number more than disease does."
+   }
+  ],
+  "analogy": {
+   "en": "Perpendicular basal septum and posterior wall on one diastolic frame"
+  }
+ },
+ "spot": [
+  {
+   "en": "Perpendicular basal septum and posterior wall on one diastolic frame"
+  },
+  {
+   "en": "Mitral leaflet tips marking the measurement level"
+  },
+  {
+   "en": "Compact myocardium without chordal echoes in the line"
+  },
+  {
+   "en": "Stable ECG timing at the onset of the QRS for diastole"
+  },
+  {
+   "en": "Figure: Papillary muscle short axis confirming concentric thickening is real and symmetric View tte_psax_papillary"
+  }
+ ],
+ "todo": [
+  {
+   "en": "Measure the three end diastolic terms of the linear mass formula cleanly"
+  },
+  {
+   "en": "Index mass to body surface area and compute relative wall thickness"
+  },
+  {
+   "en": "Name the four geometry patterns from mass with wall thickness ratio"
+  },
+  {
+   "en": "Know when the linear formula fails and tracing is needed"
+  }
+ ],
+ "remember": {
+  "en": "Know when the linear formula fails and tracing is needed"
+ },
+ "check": [
+  {
+   "q": {
+    "en": "At which point in the cycle are mass dimensions taken?"
+   },
+   "o": [
+    {
+     "en": "Peak systole, when walls are thickest"
+    },
+    {
+     "en": "Mid diastole during rapid filling"
+    },
+    {
+     "en": "End diastole at the onset of the QRS"
+    },
+    {
+     "en": "End systole at the smallest cavity"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "Mass uses end diastolic dimensions, timed at the onset of the QRS, matching the cavity and wall measurements of the linear lesson."
+   }
+  },
+  {
+   "q": {
+    "en": "Which relative wall thickness is normal?"
+   },
+   "o": [
+    {
+     "en": "Below 0.30"
+    },
+    {
+     "en": "0.42 or less"
+    },
+    {
+     "en": "0.50 or more"
+    },
+    {
+     "en": "Above 0.60"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "The ASE 2015 partition value is 0.42. Above it with raised mass means concentric hypertrophy; above it with normal mass means concentric remodelling."
+   }
+  },
+  {
+   "q": {
+    "en": "Which pattern is concentric hypertrophy?"
+   },
+   "o": [
+    {
+     "en": "Normal mass with raised relative wall thickness"
+    },
+    {
+     "en": "Raised mass with raised relative wall thickness"
+    },
+    {
+     "en": "Raised mass with normal relative wall thickness"
+    },
+    {
+     "en": "Normal mass with normal relative wall thickness"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "Concentric hypertrophy is raised mass index with relative wall thickness above 0.42, the classic pattern of chronic pressure overload such as hypertension and aortic stenosis."
+   }
+  },
+  {
+   "q": {
+    "en": "Why does an oblique cut matter more for mass than for cavity size?"
+   },
+   "o": [
+    {
+     "en": "It smooths small errors by averaging"
+    },
+    {
+     "en": "It treats every term as linear"
+    },
+    {
+     "en": "It cubes every term, so small line errors grow"
+    },
+    {
+     "en": "It ignores wall thickness entirely"
+    }
+   ],
+   "a": 3,
+   "why": {
+    "en": "The formula cubes the summed dimensions, so a 2 mm slant error is amplified far beyond its effect on a single linear number."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "measurements"
+ },
+ "sources": [
+  "ASE 2015 chamber quantification by Lang and colleagues, sections on left ventricular mass and geometry, in own words"
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_plax",
+ "objectives": [
+  "Measure the three end diastolic terms of the linear mass formula cleanly",
+  "Index mass to body surface area and compute relative wall thickness",
+  "Name the four geometry patterns from mass with wall thickness ratio",
+  "Know when the linear formula fails and tracing is needed"
+ ]
+}

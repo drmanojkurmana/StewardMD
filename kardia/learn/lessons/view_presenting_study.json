@@ -1,0 +1,221 @@
+{
+ "id": "view_presenting_study",
+ "unit": "views",
+ "level": "mbbs",
+ "levels": [
+  "mbbs",
+  "resident",
+  "sonographer"
+ ],
+ "minutes": 4,
+ "title": {
+  "en": "How to present an echo study"
+ },
+ "idea": {
+  "en": "Present any echo study in a fixed ASE style order."
+ },
+ "see": {
+  "diagram": "diagrams/view_presenting_study.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Echo Lab render of the subcostal four chamber. A good presentation covers quality, size, function, valves and pressures in order."
+  },
+  "caption": {
+   "en": "Echo Lab render of the subcostal four chamber. A good presentation covers quality, size, function, valves and pressures in order."
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Indication, rhythm, heart rate, blood pressure and quality."
+    },
+    "note": {
+     "en": "Report headings: Indication, rhythm, heart rate, blood pressure and quality."
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "size, thickness, regional motion and ejection fraction."
+    },
+    "note": {
+     "en": "Left ventricle: size, thickness, regional motion and ejection fraction."
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Left atrium and right heart with pulmonary pressure estimate."
+    },
+    "note": {
+     "en": "Left atrium and right heart with pulmonary pressure estimate."
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "morphology plus grade with supporting numbers."
+    },
+    "note": {
+     "en": "Valves: morphology plus grade with supporting numbers."
+    }
+   }
+  ],
+  "view": "tte_subcostal_4c"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "Report headings: Use the same headings every time so readers find facts fast."
+   },
+   {
+    "en": "Numbers to quote: Quote ejection fraction as a number with its method: Simpson biplane or visual estimate."
+   },
+   {
+    "en": "Quote left atrial volume index with 34 ml per sq m as the upper normal limit."
+   },
+   {
+    "en": "Quote tricuspid peak velocity with 2.8 m per s as the upper normal limit."
+   },
+   {
+    "en": "Pitfalls: Adjectives without numbers cannot be checked, so never say moderate dysfunction without the ejection fraction. Name the method behind every number, since a visual estimate and a Simpson value carry different weight."
+   }
+  ],
+  "analogy": {
+   "en": "Report headings: Indication, rhythm, heart rate, blood pressure and quality."
+  }
+ },
+ "spot": [
+  {
+   "en": "Report headings: Indication, rhythm, heart rate, blood pressure and quality."
+  },
+  {
+   "en": "Left ventricle: size, thickness, regional motion and ejection fraction."
+  },
+  {
+   "en": "Left atrium and right heart with pulmonary pressure estimate."
+  },
+  {
+   "en": "Valves: morphology plus grade with supporting numbers."
+  },
+  {
+   "en": "Pericardium, aorta and conclusion with follow up plan."
+  }
+ ],
+ "todo": [
+  {
+   "en": "Presentation order: State the indication, the rhythm, the heart rate and the study quality with any limits."
+  },
+  {
+   "en": "Give left heart size and function: diameters, wall thickness, volumes and ejection fraction with method."
+  },
+  {
+   "en": "Give right heart size and function with the estimated pulmonary pressure and its basis."
+  },
+  {
+   "en": "Describe each valve in order with the grade and the two numbers behind it."
+  },
+  {
+   "en": "Report the pericardium, aorta and any mass, thrombus or shunt."
+  },
+  {
+   "en": "Close with one conclusion that answers the referral question."
+  }
+ ],
+ "remember": {
+  "en": "Close with a conclusion that answers the referral question."
+ },
+ "check": [
+  {
+   "q": {
+    "en": "What opens an echo presentation?"
+   },
+   "o": [
+    {
+     "en": "The conclusion"
+    },
+    {
+     "en": "Indication, rhythm, rate and quality"
+    },
+    {
+     "en": "Valve grades"
+    },
+    {
+     "en": "Measurements"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Context and quality frame every number that follows."
+   }
+  },
+  {
+   "q": {
+    "en": "Which closes the presentation?"
+   },
+   "o": [
+    {
+     "en": "More views"
+    },
+    {
+     "en": "One conclusion answering the referral"
+    },
+    {
+     "en": "Raw images"
+    },
+    {
+     "en": "A tutorial"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "The reader asked a question, so answer it last and plainly."
+   }
+  },
+  {
+   "q": {
+    "en": "Ejection fraction is 45 percent by visual estimate. How do you quote it?"
+   },
+   "o": [
+    {
+     "en": "Moderate dysfunction"
+    },
+    {
+     "en": "45 percent by visual estimate"
+    },
+    {
+     "en": "Low normal"
+    },
+    {
+     "en": "Heart failure"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Number plus method beats any adjective."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "views"
+ },
+ "sources": [
+  "BSE minimum dataset for a standard adult transthoracic study, reporting section.",
+  "ASE 2019 guideline for the complete transthoracic examination, reporting section."
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_subcostal_4c",
+ "objectives": [
+  "Present any echo study in a fixed ASE style order.",
+  "Quote numbers with their method instead of adjectives.",
+  "Close with a conclusion that answers the referral question."
+ ]
+}

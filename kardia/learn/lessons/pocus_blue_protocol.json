@@ -1,0 +1,205 @@
+{
+ "id": "pocus_blue_protocol",
+ "unit": "pocus",
+ "level": "resident",
+ "levels": [
+  "resident",
+  "fellow"
+ ],
+ "minutes": 5,
+ "title": {
+  "en": "BLUE protocol for breathlessness"
+ },
+ "idea": {
+  "en": "Name the A, B and C profiles and the lung point"
+ },
+ "see": {
+  "diagram": "diagrams/pocus_blue_protocol.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "BLUE upper point of the protocol"
+  },
+  "caption": {
+   "en": "BLUE upper point of the protocol"
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "BLUE reads breathlessness through lung profiles at standard chest points plus th"
+    },
+    "note": {
+     "en": "What you see: BLUE reads breathlessness through lung profiles at standard chest points plus the PLAPS point and a leg vein check. The A profile of sliding with horizontal artefacts marks dry lung, the B profile of three or more B lines marks interstitial fluid, the A/B mix marks localised disease, and the C profile of consolidation marks pneumonia. Absent sliding with a lung point marks pneumothorax. Combined with the leg vein check, the profiles separate oedema, pneumonia, embolus, pneumothorax and chronic disease."
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Upper and lower BLUE points on both sides, PLAPS recess on both sides, femoral a"
+    },
+    "note": {
+     "en": "Landmarks to confirm: Upper and lower BLUE points on both sides, PLAPS recess on both sides, femoral and popliteal veins by compression."
+    }
+   }
+  ],
+  "view": "pocus_blue_upper"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: BLUE reads breathlessness through lung profiles at standard chest points plus the PLAPS point and a leg vein check. The A profile of sliding with horizontal artefacts marks dry lung, the B profile of three or more B lines marks interstitial fluid, the A/B mix marks localised disease, and the C profile of consolidation marks pneumonia. Absent sliding with a lung point marks pneumothorax. Combined with the leg vein check, the profiles separate oedema, pneumonia, embolus, pneumothorax and chronic disease."
+   },
+   {
+    "en": "Landmarks to confirm: Upper and lower BLUE points on both sides, PLAPS recess on both sides, femoral and popliteal veins by compression."
+   },
+   {
+    "en": "Common mistakes and correction: Judging from one zone: diffuse versus focal decides the diagnosis, so map every point. Calling two B lines a B profile: the threshold is three or more per space. Forgetting the vein check in suspected embolus: a normal A profile with clot still points to embolus."
+   },
+   {
+    "en": "Normal values with units: Normal is bilateral A profiles with sliding, sharp PLAPS angles with no fluid, and fully compressible veins. Diffuse bilateral B profiles with a weak heart suggest cardiogenic oedema. Focal B or C with fever suggests pneumonia. Confirm each pattern across zones before treating."
+   },
+   {
+    "en": "Pitfalls: Chronic lung disease leaves background B lines that mimic acute oedema, so compare with the clinical story and any old imaging. In India tuberculosis can consolidate and effuse together, so record both tissue and fluid at PLAPS. The flowchart supports but never replaces examination, ECG, saturation trend and senior review."
+   }
+  ],
+  "analogy": {
+   "en": "What you see: BLUE reads breathlessness through lung profiles at standard chest points plus the PLAPS point and a leg vein check. The A profile of sliding with horizontal artefacts marks dry lung, the B profile of three or more B lines marks interstitial fluid, the A/B mix marks localised disease, and the C profile of consolidation marks pneumonia. Absent sliding with a lung point marks pneumothorax. Combined with the leg vein check, the profiles separate oedema, pneumonia, embolus, pneumothorax and chronic disease."
+  }
+ },
+ "spot": [
+  {
+   "en": "What you see: BLUE reads breathlessness through lung profiles at standard chest points plus the PLAPS point and a leg vein check. The A profile of sliding with horizontal artefacts marks dry lung, the B profile of three or more B lines marks interstitial fluid, the A/B mix marks localised disease, and the C profile of consolidation marks pneumonia. Absent sliding with a lung point marks pneumothorax. Combined with the leg vein check, the profiles separate oedema, pneumonia, embolus, pneumothorax and chronic disease."
+  },
+  {
+   "en": "Landmarks to confirm: Upper and lower BLUE points on both sides, PLAPS recess on both sides, femoral and popliteal veins by compression."
+  },
+  {
+   "en": "Figure: BLUE PLAPS point of the protocol View pocus_blue_lower"
+  },
+  {
+   "en": "Figure: Lung sliding check of the protocol View pocus_efast_lung_right"
+  }
+ ],
+ "todo": [
+  {
+   "en": "How to get it step by step: Scan the upper and lower BLUE points on both sides with the marker toward the head, recording A or B per zone. Add the PLAPS point on each side for effusion and consolidation. Check leg veins by compression when embolus is on the list. Follow the profile flowchart: diffuse B with poor heart function suggests oedema, focal B or C suggests pneumonia, A with clot suggests embolus, absent sliding with lung point means pneumothorax."
+  }
+ ],
+ "remember": {
+  "en": "Follow the profile flowchart toward a cause"
+ },
+ "check": [
+  {
+   "q": {
+    "en": "Which pattern suggests cardiogenic oedema?"
+   },
+   "o": [
+    {
+     "en": "Two B lines in one zone"
+    },
+    {
+     "en": "Diffuse B with poor heart function"
+    },
+    {
+     "en": "A profile everywhere"
+    },
+    {
+     "en": "Lung point"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Diffuse bilateral B profiles with a weak heart marks cardiogenic oedema."
+   }
+  },
+  {
+   "q": {
+    "en": "Focal B with a C profile and fever suggests what?"
+   },
+   "o": [
+    {
+     "en": "Oedema"
+    },
+    {
+     "en": "Pneumothorax"
+    },
+    {
+     "en": "Focal pneumonia"
+    },
+    {
+     "en": "Normal lung"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "Focal B or C with fever marks pneumonia rather than diffuse oedema."
+   }
+  },
+  {
+   "q": {
+    "en": "Leg veins show clot but lungs show an A profile. What does it mean?"
+   },
+   "o": [
+    {
+     "en": "A profile with leg clot still points to embolus"
+    },
+    {
+     "en": "A profile rules out embolus"
+    },
+    {
+     "en": "Veins never matter"
+    },
+    {
+     "en": "D dimer replaces veins"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "A normal A profile with proven clot still points toward embolus."
+   }
+  },
+  {
+   "q": {
+    "en": "Chronic lung disease is known. How do you avoid error?"
+   },
+   "o": [
+    {
+     "en": "Treat on one zone"
+    },
+    {
+     "en": "Ignore background disease"
+    },
+    {
+     "en": "Skip PLAPS"
+    },
+    {
+     "en": "Map every point and compare with the clinical story"
+    }
+   ],
+   "a": 3,
+   "why": {
+    "en": "Background B lines mimic acute oedema, so map all points against history and old imaging."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "pocus"
+ },
+ "sources": [
+  "International POCUS consensus, section on BLUE lung profiles",
+  "ACEP emergency ultrasound guidelines, section on lung ultrasound in dyspnoea"
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "pocus_blue_upper",
+ "objectives": [
+  "Name the A, B and C profiles and the lung point",
+  "Map all BLUE points plus PLAPS on both sides",
+  "Follow the profile flowchart toward a cause"
+ ]
+}

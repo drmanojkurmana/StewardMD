@@ -1,0 +1,280 @@
+{
+ "id": "dop_bernoulli",
+ "unit": "doppler",
+ "level": "resident",
+ "levels": [
+  "resident",
+  "fellow"
+ ],
+ "minutes": 10,
+ "title": {
+  "en": "Bernoulli equation and gradients"
+ },
+ "idea": {
+  "en": "Convert peak velocity to peak gradient with the Bernoulli equation"
+ },
+ "see": {
+  "diagram": "diagrams/dop_bernoulli.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Apical five chamber jet for peak velocity and mean gradient tracing"
+  },
+  "caption": {
+   "en": "Apical five chamber jet for peak velocity and mean gradient tracing"
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Dense envelope with the true modal peak on the trace"
+    },
+    "note": {
+     "en": "Dense envelope with the true modal peak on the trace"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Mean gradient integrated across the whole flow period"
+    },
+    "note": {
+     "en": "Mean gradient integrated across the whole flow period"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Proximal velocity recorded when the upstream chamber is fast"
+    },
+    "note": {
+     "en": "Proximal velocity recorded when the upstream chamber is fast"
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Aortic root size noted when recovery is suspected"
+    },
+    "note": {
+     "en": "Aortic root size noted when recovery is suspected"
+    }
+   }
+  ],
+  "view": "tte_a5c"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "The Bernoulli equation turns a velocity into a pressure difference: the peak pressure drop across an orifice equals four times the peak velocity squared. Trace the continuous wave envelope and the machine integrates the same maths through systole or diastole to give the mean gradient. The equation assumes the upstream velocity is negligible and the orifice is discrete, so it overreads when the proximal velocity is high, when pressure recovers downstream in a small aorta, or when the beam misses the true peak. In India this lesson earns its keep in rheumatic valve disease, where young patients carry tight mitral stenosis, tight aortic stenosis, or both, and the gradient decides timing of intervention."
+   },
+   {
+    "en": "Record the highest well formed continuous wave envelope of the jet from every available window."
+   },
+   {
+    "en": "Trace the dense modal edge for peak velocity and let the machine integrate the mean gradient."
+   },
+   {
+    "en": "Read peak gradient as 4 times peak velocity squared, and check the mean gradient alongside."
+   },
+   {
+    "en": "Correct for proximal velocity when it exceeds 1.5 m per s by subtracting its own 4 v squared term."
+   },
+   {
+    "en": "Measure the aortic root when gradients and area disagree, since pressure recovery inflates Doppler gradients in small aortas."
+   },
+   {
+    "en": "Read the gradient with heart rate, rhythm, flow state and valve area before naming severity."
+   },
+   {
+    "en": "Tracing an under aligned envelope and reporting a low gradient. Fix: Interrogate from apex, suprasternal and right parasternal and keep the highest complete envelope. A missed peak understages disease."
+   },
+   {
+    "en": "Forgetting proximal velocity in high output or combined disease. Fix: Apply the extended equation with both velocities. Ignoring a fast proximal jet overreads the net gradient."
+   },
+   {
+    "en": "Grading mitral stenosis during tachycardia without comment. Fix: Tachycardia shortens diastole and raises the mean mitral gradient at the same orifice, so record rate and compare like with like."
+   },
+   {
+    "en": "Equating Doppler peak gradient with catheter peak to peak gradient. Fix: Doppler reports peak instantaneous drop while catheters report peak to peak timing, so expect different numbers and reconcile by method."
+   },
+   {
+    "en": "Bernoulli peak gradient. Peak drop equals 4 times peak velocity squared, in mmHg from m per s. Source: ASE and EACVI 2017 stenosis, section on pressure gradients"
+   },
+   {
+    "en": "Severe aortic stenosis gradient pair. Peak velocity 4 m per s or more with mean gradient 40 mmHg or more. Source: ASE and EACVI 2017 stenosis, section on severity grading"
+   },
+   {
+    "en": "Severe mitral stenosis haemodynamics. Valve area below 1.0 sq cm with mean gradient above 10 mmHg at normal heart rate. Source: ASE 2009 stenosis and ESC valve disease guidance, sections on mitral stenosis severity, in own words"
+   },
+   {
+    "en": "Proximal velocity correction threshold. Correct when proximal velocity exceeds 1.5 m per s. Source: ASE and EACVI 2017 stenosis, section on the extended Bernoulli equation"
+   },
+   {
+    "en": "Low flow states produce low gradients across truly severe orifices, so the valve area and calcium load arbitrate."
+   },
+   {
+    "en": "Pregnancy and anaemia raise flow and gradients without changing the orifice, so regrade after the physiology settles."
+   },
+   {
+    "en": "Serial gradients need the same window, rate and rhythm, or the trend is noise."
+   }
+  ],
+  "analogy": {
+   "en": "Dense envelope with the true modal peak on the trace"
+  }
+ },
+ "spot": [
+  {
+   "en": "Dense envelope with the true modal peak on the trace"
+  },
+  {
+   "en": "Mean gradient integrated across the whole flow period"
+  },
+  {
+   "en": "Proximal velocity recorded when the upstream chamber is fast"
+  },
+  {
+   "en": "Aortic root size noted when recovery is suspected"
+  },
+  {
+   "en": "Heart rate on the strip, since tachycardia raises transmitral gradients"
+  },
+  {
+   "en": "Figure: Right parasternal window often holding the highest aortic jet velocity View tte_right_parasternal_aorta"
+  }
+ ],
+ "todo": [
+  {
+   "en": "Convert peak velocity to peak gradient with the Bernoulli equation"
+  },
+  {
+   "en": "Trace mean gradients and correct for proximal velocity"
+  },
+  {
+   "en": "Suspect pressure recovery when gradients and area disagree"
+  },
+  {
+   "en": "Grade rheumatic stenosis with rate and flow in mind"
+  }
+ ],
+ "remember": {
+  "en": "Grade rheumatic stenosis with rate and flow in mind"
+ },
+ "check": [
+  {
+   "q": {
+    "en": "How is the peak instantaneous gradient computed?"
+   },
+   "o": [
+    {
+     "en": "2 times the mean velocity"
+    },
+    {
+     "en": "Peak velocity plus mean velocity"
+    },
+    {
+     "en": "4 times the peak velocity squared"
+    },
+    {
+     "en": "Half the peak velocity"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "The simplified Bernoulli equation gives peak drop as 4 v squared, converting the peak continuous wave velocity into mmHg."
+   }
+  },
+  {
+   "q": {
+    "en": "When must the proximal velocity enter the equation?"
+   },
+   "o": [
+    {
+     "en": "Below 0.5 m per s"
+    },
+    {
+     "en": "Above 1.5 m per s"
+    },
+    {
+     "en": "Above 3 m per s only"
+    },
+    {
+     "en": "Never; the correction is obsolete"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Above 1.5 m per s the upstream kinetic energy is no longer negligible, so the extended equation subtracts its own 4 v squared term."
+   }
+  },
+  {
+   "q": {
+    "en": "Which pair marks severe mitral stenosis?"
+   },
+   "o": [
+    {
+     "en": "Valve area below 2.0 sq cm alone"
+    },
+    {
+     "en": "Mean gradient above 5 mmHg alone"
+    },
+    {
+     "en": "Peak velocity above 2 m per s alone"
+    },
+    {
+     "en": "Area below 1.0 sq cm with mean gradient above 10 mmHg at normal rate"
+    }
+   ],
+   "a": 3,
+   "why": {
+    "en": "Severe rheumatic mitral stenosis pairs an area below 1.0 sq cm with a mean gradient above 10 mmHg at normal heart rate."
+   }
+  },
+  {
+   "q": {
+    "en": "What does an under aligned Doppler line do to the gradient?"
+   },
+   "o": [
+    {
+     "en": "It misses the true peak and understages stenosis"
+    },
+    {
+     "en": "It overreads the peak"
+    },
+    {
+     "en": "It changes nothing"
+    },
+    {
+     "en": "It only affects the mean gradient"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "Cosine error only ever underreads velocity, and since gradient goes with velocity squared, the underread is amplified."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "doppler"
+ },
+ "sources": [
+  "ASE and EACVI 2017 aortic stenosis by Baumgartner and colleagues, sections on pressure gradients and severity grading, in own words",
+  "ASE 2009 valve stenosis and ESC valve disease guidance, sections on mitral stenosis severity, in own words"
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_a5c",
+ "objectives": [
+  "Convert peak velocity to peak gradient with the Bernoulli equation",
+  "Trace mean gradients and correct for proximal velocity",
+  "Suspect pressure recovery when gradients and area disagree",
+  "Grade rheumatic stenosis with rate and flow in mind"
+ ]
+}

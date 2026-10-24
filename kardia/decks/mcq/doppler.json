@@ -1,0 +1,565 @@
+{
+ "topic": "doppler",
+ "items": [
+  {
+   "id": "doppler001",
+   "q": "Peak velocity is 2.0 m per s across a stenotic valve. What is the peak gradient by 4 times velocity squared?",
+   "o": [
+    "About 36 mmHg",
+    "About 16 mmHg",
+    "About 9 mmHg",
+    "About 25 mmHg"
+   ],
+   "a": 1,
+   "exp": "Bernoulli reads 4 times 2.0 squared equals about 16 mmHg, so the gradient follows velocity squared. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on Bernoulli gradients.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler002",
+   "q": "Peak velocity is 2.5 m per s across a stenotic valve. What is the peak gradient by 4 times velocity squared?",
+   "o": [
+    "About 25 mmHg",
+    "About 16 mmHg",
+    "About 36 mmHg",
+    "About 49 mmHg"
+   ],
+   "a": 0,
+   "exp": "Bernoulli reads 4 times 2.5 squared equals about 25 mmHg, so the gradient follows velocity squared. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on Bernoulli gradients.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler003",
+   "q": "Peak velocity is 3.0 m per s across a stenotic valve. What is the peak gradient by 4 times velocity squared?",
+   "o": [
+    "About 25 mmHg",
+    "About 49 mmHg",
+    "About 64 mmHg",
+    "About 36 mmHg"
+   ],
+   "a": 3,
+   "exp": "Bernoulli reads 4 times 3.0 squared equals about 36 mmHg, so the gradient follows velocity squared. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on Bernoulli gradients.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler004",
+   "q": "Peak velocity is 3.5 m per s across a stenotic valve. What is the peak gradient by 4 times velocity squared?",
+   "o": [
+    "About 64 mmHg",
+    "About 81 mmHg",
+    "About 49 mmHg",
+    "About 36 mmHg"
+   ],
+   "a": 2,
+   "exp": "Bernoulli reads 4 times 3.5 squared equals about 49 mmHg, so the gradient follows velocity squared. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on Bernoulli gradients.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler005",
+   "q": "Peak velocity is 4.0 m per s across a stenotic valve. What is the peak gradient by 4 times velocity squared?",
+   "o": [
+    "About 100 mmHg",
+    "About 64 mmHg",
+    "About 49 mmHg",
+    "About 81 mmHg"
+   ],
+   "a": 1,
+   "exp": "Bernoulli reads 4 times 4.0 squared equals about 64 mmHg, so the gradient follows velocity squared. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on Bernoulli gradients.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler006",
+   "q": "Peak velocity is 4.5 m per s across a stenotic valve. What is the peak gradient by 4 times velocity squared?",
+   "o": [
+    "About 81 mmHg",
+    "About 64 mmHg",
+    "About 100 mmHg",
+    "About 49 mmHg"
+   ],
+   "a": 0,
+   "exp": "Bernoulli reads 4 times 4.5 squared equals about 81 mmHg, so the gradient follows velocity squared. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on Bernoulli gradients.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler007",
+   "q": "Why may the net gradient be lower than 4 times velocity squared in mild obstruction?",
+   "o": [
+    "Bernoulli never applies",
+    "Colour gain is too low",
+    "The valve is normal",
+    "A brisk proximal velocity above 1 m per s must be subtracted"
+   ],
+   "a": 3,
+   "exp": "The full equation keeps proximal kinetic energy, so ignoring a fast proximal jet overreads the net drop. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on extended Bernoulli.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler008",
+   "q": "What is the key strength of continuous wave Doppler?",
+   "o": [
+    "It cannot show high velocities",
+    "It replaces two dimensional imaging",
+    "It records very high velocities but not their depth",
+    "It shows exact sample depth"
+   ],
+   "a": 2,
+   "exp": "Continuous wave listens along the whole line, so high jets are caught at the cost of range detail. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on continuous wave principles.",
+   "t": "doppler",
+   "d": 2
+  },
+  {
+   "id": "doppler009",
+   "q": "What is the key strength of pulsed wave Doppler?",
+   "o": [
+    "It shows anatomy",
+    "It samples one chosen depth",
+    "It records unlimited velocity",
+    "It needs no sample volume"
+   ],
+   "a": 1,
+   "exp": "Pulsed wave ranges gates by timing, so velocity at one exact site is read cleanly within its limit. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on pulsed wave principles.",
+   "t": "doppler",
+   "d": 2
+  },
+  {
+   "id": "doppler010",
+   "q": "The pulsed wave trace wraps around the baseline at high velocity. What is this?",
+   "o": [
+    "Aliasing above the Nyquist limit",
+    "Normal low flow",
+    "Gain artefact",
+    "Wall filter error"
+   ],
+   "a": 0,
+   "exp": "Pulsed sampling cannot track beyond half the pulse rate, so the peak folds over the scale. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on Nyquist limit and aliasing.",
+   "t": "doppler",
+   "d": 2
+  },
+  {
+   "id": "doppler011",
+   "q": "Aliasing obscures a high velocity jet on pulsed wave. Which move keeps the same probe position?",
+   "o": [
+    "Lower the scale",
+    "Raise wall filter to maximum",
+    "Freeze the image",
+    "Raise the scale with higher pulse repetition and shift the baseline"
+   ],
+   "a": 3,
+   "exp": "A higher pulse rate lifts the Nyquist ceiling and baseline shift adds display room, so the true peak unfolds. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on correcting aliasing.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler012",
+   "q": "Deeper sampling worsens aliasing on pulsed wave. Why?",
+   "o": [
+    "Depth adds gain",
+    "Depth removes wall filter",
+    "Round trip time forces a lower pulse rate",
+    "Deeper means higher frequency"
+   ],
+   "a": 2,
+   "exp": "Sound takes longer to return from depth, so pulses go out slower and the velocity ceiling falls. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on depth and pulse rate.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler013",
+   "q": "On colour Doppler, red and blue mean what by convention?",
+   "o": [
+    "Red always abnormal",
+    "Red toward and blue away from the probe",
+    "Red always oxygen rich",
+    "Blue always a vein"
+   ],
+   "a": 1,
+   "exp": "Colour maps direction along the beam, so red approaches while blue recedes under the standard map. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on colour direction convention.",
+   "t": "doppler",
+   "d": 1
+  },
+  {
+   "id": "doppler014",
+   "q": "A mosaic of bright mixed colours appears at a valve. What does it mean?",
+   "o": [
+    "High velocity disturbed flow with aliasing",
+    "Normal laminar flow",
+    "No flow at all",
+    "Gain set perfectly"
+   ],
+   "a": 0,
+   "exp": "Jets beyond the colour scale fold into mixed hues, so mosaic marks fast turbulent flow needing spectral study. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on colour aliasing.",
+   "t": "doppler",
+   "d": 2
+  },
+  {
+   "id": "doppler015",
+   "q": "Colour fills outside the vessel walls. What knob is too high?",
+   "o": [
+    "Depth",
+    "Focus",
+    "Frame rate",
+    "Colour gain"
+   ],
+   "a": 3,
+   "exp": "Excess colour gain paints noise over tissue, so turning gain down until speckle just clears is the fix. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on colour gain.",
+   "t": "doppler",
+   "d": 1
+  },
+  {
+   "id": "doppler016",
+   "q": "Low velocity tissue signal clutters the flow trace. Which control removes it?",
+   "o": [
+    "Depth",
+    "Sector width",
+    "Wall filter",
+    "Overall gain"
+   ],
+   "a": 2,
+   "exp": "The wall filter drops slow strong wall motion while keeping faster blood signal on screen. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on wall filter.",
+   "t": "doppler",
+   "d": 2
+  },
+  {
+   "id": "doppler017",
+   "q": "The Doppler beam meets flow at 60 degrees. What is the error?",
+   "o": [
+    "Angle never matters",
+    "Velocity reads half the true value",
+    "Velocity reads exactly",
+    "Velocity reads double"
+   ],
+   "a": 1,
+   "exp": "The machine reads the cosine component, and cosine of 60 is one half, so the display halves the truth. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on angle dependence.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler018",
+   "q": "What beam to flow angle keeps error small for gradients?",
+   "o": [
+    "Below 20 degrees",
+    "Near 90 degrees",
+    "Near 60 degrees",
+    "Any angle"
+   ],
+   "a": 0,
+   "exp": "Cosine near zero angle stays near one, so aligning below 20 degrees keeps underreading tiny. Guideline: ASE 2019 TTE guideline, section on spectral Doppler technique.",
+   "t": "doppler",
+   "d": 2
+  },
+  {
+   "id": "doppler019",
+   "q": "Why must gradients be taken from the window with the highest velocity?",
+   "o": [
+    "Low values are always best",
+    "Windows never differ",
+    "Colour is enough",
+    "Any angle error only underreads, so the peak is truest"
+   ],
+   "a": 3,
+   "exp": "Underreading only lowers values, so the highest clean signal from several windows sits closest to truth. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on multi window interrogation.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler020",
+   "q": "Aortic stenosis jet is best recorded from which window choice?",
+   "o": [
+    "Only the subcostal vein",
+    "Any single window",
+    "The window giving the highest velocity, often apex or right parasternal",
+    "Only the left sternal edge"
+   ],
+   "a": 2,
+   "exp": "Jet direction varies, so the window most parallel to flow gives the peak and others may underread badly. Guideline: ASE 2019 TTE guideline, section on aortic stenosis Doppler.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler021",
+   "q": "Continuous wave shape in severe aortic stenosis looks like what?",
+   "o": [
+    "No signal",
+    "Dense late peaking jet with a slow rise",
+    "Faint early click",
+    "Diastolic only signal"
+   ],
+   "a": 1,
+   "exp": "Fixed obstruction holds pressure through systole, so the dense jet peaks late with a rounded rise. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on stenotic jet shapes.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler022",
+   "q": "Mitral regurgitation jet from anterior leaflet disease points where?",
+   "o": [
+    "Backward into the atrium away from the diseased leaflet",
+    "Always central",
+    "Into the aorta",
+    "Into the ventricle"
+   ],
+   "a": 0,
+   "exp": "The jet hugs the opposite wall by Coanda effect, so anterior disease throws a posterior jet. Guideline: ASE 2017 valvular regurgitation guideline, section on jet direction.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler023",
+   "q": "Tachycardia raises the mean gradient across a stenotic mitral valve. Why?",
+   "o": [
+    "Rate slows flow",
+    "Rate opens the valve wider",
+    "Gradient ignores rate",
+    "Short diastole forces the same flow through less time"
+   ],
+   "a": 3,
+   "exp": "Less diastolic time means higher flow per second, and gradient follows flow squared across a fixed hole. Guideline: ASE and EACVI 2017 stenosis guideline, section on heart rate effects.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler024",
+   "q": "Pressure half time of the aortic regurgitation jet is steep and short. What does it mean?",
+   "o": [
+    "Chronic stable disease",
+    "Normal valve",
+    "Large leak equalising pressures fast",
+    "Tiny leak"
+   ],
+   "a": 2,
+   "exp": "A big hole lets aortic and ventricular pressures meet quickly, so the slope steepens and half time shortens. Guideline: ASE 2017 valvular regurgitation guideline, section on pressure half time.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler025",
+   "q": "Dense holosystolic mitral regurgitation signal with a full envelope means what?",
+   "o": [
+    "No leak",
+    "Large regurgitant flow through the whole of systole",
+    "Trivial leak",
+    "Diastolic leak"
+   ],
+   "a": 1,
+   "exp": "Brightness tracks red cell numbers and the full envelope spans systole, so density plus timing marks a big leak. Guideline: ASE 2017 valvular regurgitation guideline, section on spectral signs.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler026",
+   "q": "Tissue Doppler e prime is sampled where?",
+   "o": [
+    "At the mitral annulus septal and lateral points",
+    "At the apex",
+    "In the aorta",
+    "In the pulmonary vein"
+   ],
+   "a": 0,
+   "exp": "Annular motion tracks relaxation, so septal and lateral annular sites give the e prime pair. Guideline: ASE and EACVI 2016 diastolic function guideline, section on annular velocities.",
+   "t": "doppler",
+   "d": 2
+  },
+  {
+   "id": "doppler027",
+   "q": "A larger pulsed wave sample volume widens the spectrum. Why?",
+   "o": [
+    "It raises the Nyquist limit",
+    "It sharpens the trace",
+    "It removes aliasing",
+    "More velocities across the gate are averaged together"
+   ],
+   "a": 3,
+   "exp": "A wide gate mixes slow edge and fast core flow, so the trace broadens with many speeds at once. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on sample volume size.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler028",
+   "q": "High pulse repetition frequency mode helps when pulsed wave aliases. What does it do?",
+   "o": [
+    "Narrows the sector",
+    "Freezes the trace",
+    "Adds extra sample gates to lift the velocity ceiling",
+    "Lowers the scale"
+   ],
+   "a": 2,
+   "exp": "Extra gates sample faster than depth alone allows, so high velocities unfold at some cost in range certainty. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on high pulse repetition frequency.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler029",
+   "q": "Pulmonary vein systolic flow reverses in severe mitral regurgitation. Why?",
+   "o": [
+    "Normal breathing",
+    "The regurgitant wave floods the atrium in systole",
+    "The vein is blocked",
+    "The atrium contracts harder"
+   ],
+   "a": 1,
+   "exp": "A large systolic leak pressurises the atrium above vein pressure, so vein flow turns backward in systole. Guideline: ASE 2017 valvular regurgitation guideline, section on supporting signs.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler030",
+   "q": "Diastolic mitral inflow is recorded with pulsed wave at which site?",
+   "o": [
+    "At the leaflet tips in the four chamber view",
+    "In the aorta",
+    "At the apex alone",
+    "In the pulmonary artery"
+   ],
+   "a": 0,
+   "exp": "Tips mark the narrowest inflow where E and A separate cleanly, so the gate sits there with a small volume. Guideline: ASE and EACVI 2016 diastolic function guideline, section on inflow recording.",
+   "t": "doppler",
+   "d": 2
+  },
+  {
+   "id": "doppler031",
+   "q": "Aortic regurgitation jet is best seen in which colour view?",
+   "o": [
+    "M mode only",
+    "Subcostal vein view",
+    "Short axis at the apex",
+    "Parasternal long axis with the jet below the valve in diastole"
+   ],
+   "a": 3,
+   "exp": "The long axis cut lines the outflow with the valve, so the diastolic jet origin and length show clearly. Guideline: ASE 2017 valvular regurgitation guideline, section on jet imaging.",
+   "t": "doppler",
+   "d": 2
+  },
+  {
+   "id": "doppler032",
+   "q": "Why is continuous wave used for the peak tricuspid velocity rather than pulsed wave?",
+   "o": [
+    "Pulsed wave is broken",
+    "Colour is enough",
+    "The jet often exceeds the pulsed limit",
+    "Continuous wave shows depth"
+   ],
+   "a": 2,
+   "exp": "Regurgitant jets run several metres per second, beyond pulsed range, so continuous wave captures the peak. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on choosing continuous wave.",
+   "t": "doppler",
+   "d": 2
+  },
+  {
+   "id": "doppler033",
+   "q": "Spectral gain is set too high. What does the trace show?",
+   "o": [
+    "Only ECG",
+    "Bloomed thick edges with filled noise",
+    "A thin clean edge",
+    "No signal"
+   ],
+   "a": 1,
+   "exp": "Excess gain paints noise into the envelope, so edges bloom and weak signals look falsely strong. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on spectral gain.",
+   "t": "doppler",
+   "d": 1
+  },
+  {
+   "id": "doppler034",
+   "q": "What does the Nyquist limit equal on pulsed Doppler?",
+   "o": [
+    "Half the pulse repetition frequency",
+    "Twice the frequency",
+    "The wall filter value",
+    "The frame rate"
+   ],
+   "a": 0,
+   "exp": "Sampling theory caps clean tracking at half the pulse rate, so faster flow folds at that ceiling. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on Nyquist limit.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler035",
+   "q": "Colour scale is set very low. What false picture appears?",
+   "o": [
+    "No colour at all",
+    "Thinner jet",
+    "Better resolution",
+    "Widespread mosaic suggesting fast flow everywhere"
+   ],
+   "a": 3,
+   "exp": "A low ceiling folds even normal flow, so mosaic spreads and jets look larger than truth. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on colour scale.",
+   "t": "doppler",
+   "d": 2
+  },
+  {
+   "id": "doppler036",
+   "q": "Why does lowering transmit frequency reduce aliasing?",
+   "o": [
+    "It narrows the beam",
+    "It removes flow",
+    "Lower frequency shifts the same velocity lower on the scale",
+    "It raises the pulse rate directly"
+   ],
+   "a": 2,
+   "exp": "Doppler shift scales with frequency, so the same speed folds less at lower frequency with more penetration. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on frequency and aliasing.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler037",
+   "q": "Mitral inflow velocities shift with loading. Why do grades use several signs?",
+   "o": [
+    "Diastology is guesswork",
+    "One number alone misleads when preload changes",
+    "Loading never matters",
+    "One number is always enough"
+   ],
+   "a": 1,
+   "exp": "Filling velocities follow load, so E over e prime with volume and velocity together grades fairly. Guideline: ASE and EACVI 2016 diastolic function guideline, section on loading effects.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler038",
+   "q": "Aortic outflow VTI is 30 cm with a normal valve. What does a high VTI alone prove?",
+   "o": [
+    "High stroke flow, not obstruction by itself",
+    "Severe stenosis",
+    "Severe regurgitation",
+    "Tamponade"
+   ],
+   "a": 0,
+   "exp": "VTI tracks volume per beat, so a tall outflow VTI with normal velocity means high output rather than a narrow valve. Guideline: ASE 2019 TTE guideline, section on outflow Doppler.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler039",
+   "q": "Diastolic flow reversal in the descending aorta lasts the whole of diastole. What grade of leak fits?",
+   "o": [
+    "Trivial leak",
+    "Mild leak",
+    "Normal flow",
+    "Severe aortic regurgitation"
+   ],
+   "a": 3,
+   "exp": "Runoff through all of diastole needs a large hole, so holodiastolic reversal marks severe regurgitation. Guideline: ASE 2017 valvular regurgitation guideline, section on descending aorta flow.",
+   "t": "doppler",
+   "d": 3
+  },
+  {
+   "id": "doppler040",
+   "q": "Stenotic jet velocity is recorded at 60 degrees to flow. What must be done before grading?",
+   "o": [
+    "Average with colour",
+    "Add 10 mmHg",
+    "Realign below 20 degrees from another window",
+    "Grade from this value"
+   ],
+   "a": 2,
+   "exp": "A 60 degree angle halves the reading, so only a well aligned peak can grade severity. Guideline: ASE Doppler and flow assessment guidance within the ASE 2019 TTE guideline, section on angle dependence.",
+   "t": "doppler",
+   "d": 3
+  }
+ ]
+}

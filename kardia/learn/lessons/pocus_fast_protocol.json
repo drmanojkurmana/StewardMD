@@ -1,0 +1,181 @@
+{
+ "id": "pocus_fast_protocol",
+ "unit": "pocus",
+ "level": "mbbs",
+ "levels": [
+  "mbbs",
+  "resident"
+ ],
+ "minutes": 5,
+ "title": {
+  "en": "FAST protocol"
+ },
+ "idea": {
+  "en": "Run the four FAST windows in fixed order"
+ },
+ "see": {
+  "diagram": "diagrams/pocus_fast_protocol.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "FAST right upper quadrant window of the protocol"
+  },
+  "caption": {
+   "en": "FAST right upper quadrant window of the protocol"
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "is there new free fluid or pericardial blood. A positive window shows a dark ane"
+    },
+    "note": {
+     "en": "What you see: FAST is a fixed order sweep of four windows in a trauma patient: right upper quadrant, left upper quadrant, pelvis and subxiphoid heart. Each window asks one question: is there new free fluid or pericardial blood. A positive window shows a dark anechoic stripe where organs should touch. A complete negative set lowers the chance of major bleeding but never rules it out, so the protocol repeats when the patient stays unstable."
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Morison pouch on the right, splenorenal recess on the left, pelvic pouches behin"
+    },
+    "note": {
+     "en": "Landmarks to confirm: Morison pouch on the right, splenorenal recess on the left, pelvic pouches behind the bladder, pericardial space around the heart."
+    }
+   }
+  ],
+  "view": "pocus_fast_ruq"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: FAST is a fixed order sweep of four windows in a trauma patient: right upper quadrant, left upper quadrant, pelvis and subxiphoid heart. Each window asks one question: is there new free fluid or pericardial blood. A positive window shows a dark anechoic stripe where organs should touch. A complete negative set lowers the chance of major bleeding but never rules it out, so the protocol repeats when the patient stays unstable."
+   },
+   {
+    "en": "Landmarks to confirm: Morison pouch on the right, splenorenal recess on the left, pelvic pouches behind the bladder, pericardial space around the heart."
+   },
+   {
+    "en": "Common mistakes and correction: Stopping after one positive window: complete all four since management needs the full map. Calling an empty bladder pelvis negative: fill and repeat. Skipping the left upper quadrant because the right looks clear: the left side is the most commonly missed window."
+   },
+   {
+    "en": "Normal values with units: No numeric threshold applies. A complete FAST is negative only when all four windows show no new free fluid and no pericardial blood. Any single positive window makes the protocol positive and triggers urgent surgical review."
+   },
+   {
+    "en": "Pitfalls: Early bleeding may be too small to see on the first pass, so a single negative set never discharges an unstable patient. Clotted blood can look bright and hide among bowel echoes, so correlate with vitals and haemoglobin trend. In pregnancy add the obstetric assessment per local protocol rather than relying on FAST alone."
+   }
+  ],
+  "analogy": {
+   "en": "What you see: FAST is a fixed order sweep of four windows in a trauma patient: right upper quadrant, left upper quadrant, pelvis and subxiphoid heart. Each window asks one question: is there new free fluid or pericardial blood. A positive window shows a dark anechoic stripe where organs should touch. A complete negative set lowers the chance of major bleeding but never rules it out, so the protocol repeats when the patient stays unstable."
+  }
+ },
+ "spot": [
+  {
+   "en": "What you see: FAST is a fixed order sweep of four windows in a trauma patient: right upper quadrant, left upper quadrant, pelvis and subxiphoid heart. Each window asks one question: is there new free fluid or pericardial blood. A positive window shows a dark anechoic stripe where organs should touch. A complete negative set lowers the chance of major bleeding but never rules it out, so the protocol repeats when the patient stays unstable."
+  },
+  {
+   "en": "Landmarks to confirm: Morison pouch on the right, splenorenal recess on the left, pelvic pouches behind the bladder, pericardial space around the heart."
+  },
+  {
+   "en": "Figure: FAST pelvis window of the protocol View pocus_fast_pelvis"
+  },
+  {
+   "en": "Figure: FAST subxiphoid window of the protocol View pocus_fast_subxiphoid"
+  }
+ ],
+ "todo": [
+  {
+   "en": "How to get it step by step: Run the windows in the same order every time: right upper quadrant first, then left upper quadrant, then pelvis in two planes, then subxiphoid heart. Spend enough time on each to fan fully, with the left upper quadrant and pelvis each in transverse and lengthwise planes. Call each window positive or negative out loud as it is completed. Repeat the full set when vitals change or the patient remains unstable."
+  }
+ ],
+ "remember": {
+  "en": "Know when to repeat the protocol"
+ },
+ "check": [
+  {
+   "q": {
+    "en": "What is the fixed FAST order?"
+   },
+   "o": [
+    {
+     "en": "Pelvis, heart, right, left"
+    },
+    {
+     "en": "Right upper quadrant, left upper quadrant, pelvis, subxiphoid heart"
+    },
+    {
+     "en": "Heart first, then any order"
+    },
+    {
+     "en": "Only the positive side"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "The protocol runs right upper quadrant, left upper quadrant, pelvis, then subxiphoid heart every time."
+   }
+  },
+  {
+   "q": {
+    "en": "One window is positive. What next?"
+   },
+   "o": [
+    {
+     "en": "One positive window is enough to stop"
+    },
+    {
+     "en": "Two planes per window are a waste"
+    },
+    {
+     "en": "Complete all four windows even after a positive one"
+    },
+    {
+     "en": "Repeat only the heart"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "Management needs the full map, so complete all four windows."
+   }
+  },
+  {
+   "q": {
+    "en": "When is a FAST set negative?"
+   },
+   "o": [
+    {
+     "en": "All four windows show no new fluid or pericardial blood"
+    },
+    {
+     "en": "Three windows are clear"
+    },
+    {
+     "en": "The patient feels better"
+    },
+    {
+     "en": "One window was limited"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "Negative needs all four windows clear of new fluid and pericardial blood."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "pocus"
+ },
+ "sources": [
+  "ACEP emergency ultrasound guidelines, section on FAST"
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "pocus_fast_ruq",
+ "objectives": [
+  "Run the four FAST windows in fixed order",
+  "Call each window positive or negative by strict criteria",
+  "Know when to repeat the protocol"
+ ]
+}

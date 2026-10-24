@@ -1,0 +1,224 @@
+{
+ "id": "view_subcostal_ivc",
+ "unit": "views",
+ "level": "mbbs",
+ "levels": [
+  "mbbs",
+  "resident",
+  "sonographer"
+ ],
+ "minutes": 5,
+ "title": {
+  "en": "Subcostal inferior vena cava long axis"
+ },
+ "idea": {
+  "en": "Open the cava through the liver in long axis."
+ },
+ "see": {
+  "diagram": "diagrams/view_subcostal_ivc.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Echo Lab render of the Subcostal inferior vena cava long axis. Line the cava into the atrium and watch one full sniff."
+  },
+  "caption": {
+   "en": "Echo Lab render of the Subcostal inferior vena cava long axis. Line the cava into the atrium and watch one full sniff."
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Inferior vena cava"
+    },
+    "note": {
+     "en": "Landmarks to confirm: Inferior vena cava"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Cavity of right atrium"
+    },
+    "note": {
+     "en": "Cavity of right atrium"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Hepatic vein"
+    },
+    "note": {
+     "en": "Hepatic vein"
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Mistaking the aorta for the cava, the aorta pulses and never collapses. Correct"
+    },
+    "note": {
+     "en": "Common mistakes and how to correct them: Mistaking the aorta for the cava, the aorta pulses and never collapses. Correct it by checking for pulsation and sniff collapse, since only the cava collapses."
+    }
+   }
+  ],
+  "view": "tte_subcostal_ivc"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: The cava runs as a straight tube through the liver into the right atrium, with a hepatic vein joining near the mouth. It narrows with a sniff and refills on quiet breathing."
+   },
+   {
+    "en": "Landmarks to confirm: Do not accept the view until each of these is on screen."
+   },
+   {
+    "en": "Common mistakes and how to correct them: Each mistake below comes from the view catalogue with its correction."
+   },
+   {
+    "en": "Normal values: Cava 21 mm or less with collapse above 50 percent with sniff means right atrial pressure near 3 mmHg."
+   },
+   {
+    "en": "Cava above 21 mm with collapse below 50 percent means right atrial pressure near 15 mmHg."
+   },
+   {
+    "en": "Measure 10 to 20 mm from the caval atrial junction at end expiration."
+   },
+   {
+    "en": "Pitfalls: Athletes and young patients can have a wide cava that still collapses fully, so collapse decides when size and sniff disagree. Positive pressure ventilation reverses the logic, so read the cava with the ventilator settings in mind."
+   }
+  ],
+  "analogy": {
+   "en": "Landmarks to confirm: Inferior vena cava"
+  }
+ },
+ "spot": [
+  {
+   "en": "Landmarks to confirm: Inferior vena cava"
+  },
+  {
+   "en": "Cavity of right atrium"
+  },
+  {
+   "en": "Hepatic vein"
+  },
+  {
+   "en": "Common mistakes and how to correct them: Mistaking the aorta for the cava, the aorta pulses and never collapses. Correct it by checking for pulsation and sniff collapse, since only the cava collapses."
+  },
+  {
+   "en": "Off axis cut that overstates collapse with sniff. Correct it by keeping both walls parallel through the sniff before measuring."
+  },
+  {
+   "en": "Measuring a hepatic vein branch instead of the main trunk. Correct it by following the vessel into the atrium, since only the trunk joins it."
+  }
+ ],
+ "todo": [
+  {
+   "en": "How to get it: Place the probe at subxiphoid, sagittal just right of midline through the liver."
+  },
+  {
+   "en": "Point the probe marker toward the head, about twelve o clock."
+  },
+  {
+   "en": "Turn sagittal just right of midline and fan until the cava meets the atrium in one line. Measure about 10 to 20 mm from the junction, clear of the hepatic vein mouth."
+  },
+  {
+   "en": "Freeze the image only when every listed landmark is on screen at once."
+  }
+ ],
+ "remember": {
+  "en": "Convert size and collapse into right atrial pressure."
+ },
+ "check": [
+  {
+   "q": {
+    "en": "Cava is 16 mm with collapse above 50 percent. What is right atrial pressure?"
+   },
+   "o": [
+    {
+     "en": "Near 3 mmHg"
+    },
+    {
+     "en": "Near 8 mmHg"
+    },
+    {
+     "en": "Near 15 mmHg"
+    },
+    {
+     "en": "Cannot estimate"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "Small size with good collapse means pressure near 3 mmHg."
+   }
+  },
+  {
+   "q": {
+    "en": "Cava is 25 mm with collapse below 50 percent. What is right atrial pressure?"
+   },
+   "o": [
+    {
+     "en": "Near 3 mmHg"
+    },
+    {
+     "en": "Near 8 mmHg"
+    },
+    {
+     "en": "Near 15 mmHg"
+    },
+    {
+     "en": "Near 0 mmHg"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "Wide size with poor collapse means pressure near 15 mmHg."
+   }
+  },
+  {
+   "q": {
+    "en": "How do you separate cava from aorta here?"
+   },
+   "o": [
+    {
+     "en": "By depth"
+    },
+    {
+     "en": "The aorta pulses and never collapses with a sniff"
+    },
+    {
+     "en": "By gain"
+    },
+    {
+     "en": "By patient position"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Pulsation without collapse marks the aorta; collapse with a sniff marks the cava."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "views"
+ },
+ "sources": [
+  "BSE minimum dataset for a standard adult transthoracic study, subcostal caval views section.",
+  "ASE 2010 right heart guideline, inferior vena cava section."
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_subcostal_ivc",
+ "objectives": [
+  "Open the cava through the liver in long axis.",
+  "Watch it collapse with a sniff.",
+  "Convert size and collapse into right atrial pressure."
+ ]
+}

@@ -1,0 +1,227 @@
+{
+ "id": "view_subcostal_sax",
+ "unit": "views",
+ "level": "resident",
+ "levels": [
+  "resident",
+  "fellow",
+  "sonographer"
+ ],
+ "minutes": 5,
+ "title": {
+  "en": "Subcostal short axis"
+ },
+ "idea": {
+  "en": "Rotate ninety degrees from the subcostal four chamber."
+ },
+ "see": {
+  "diagram": "diagrams/view_subcostal_sax.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Echo Lab render of the Subcostal short axis. Rotate in place until the ventricle reads as a true circle."
+  },
+  "caption": {
+   "en": "Echo Lab render of the Subcostal short axis. Rotate in place until the ventricle reads as a true circle."
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Cavity of left ventricle"
+    },
+    "note": {
+     "en": "Landmarks to confirm: Cavity of left ventricle"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Cavity of right ventricle"
+    },
+    "note": {
+     "en": "Cavity of right ventricle"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Interventricular septum"
+    },
+    "note": {
+     "en": "Interventricular septum"
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Liver"
+    },
+    "note": {
+     "en": "Liver"
+    }
+   }
+  ],
+  "view": "tte_subcostal_sax"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: The left ventricle sits as a circle with the right ventricle crescented over it and the liver still capping the image. The septum curves normally toward the right ventricle."
+   },
+   {
+    "en": "Landmarks to confirm: Do not accept the view until each of these is on screen."
+   },
+   {
+    "en": "Common mistakes and how to correct them: Each mistake below comes from the view catalogue with its correction."
+   },
+   {
+    "en": "Normal values: Septal and posterior wall thickness at end diastole: 6 to 10 mm in men, 6 to 9 mm in women."
+   },
+   {
+    "en": "Left ventricular ejection fraction 55 percent or more is normal."
+   },
+   {
+    "en": "Report wall motion with the 17 segment model of the left ventricle."
+   },
+   {
+    "en": "Pitfalls: A D shaped septum here is the bedside clue to pulmonary hypertension when the patient cannot turn. Septal flattening in systole points to pressure and in diastole to volume, so time the flattening before concluding."
+   }
+  ],
+  "analogy": {
+   "en": "Landmarks to confirm: Cavity of left ventricle"
+  }
+ },
+ "spot": [
+  {
+   "en": "Landmarks to confirm: Cavity of left ventricle"
+  },
+  {
+   "en": "Cavity of right ventricle"
+  },
+  {
+   "en": "Interventricular septum"
+  },
+  {
+   "en": "Liver"
+  },
+  {
+   "en": "Common mistakes and how to correct them: Aorta mistaken for a ventricular cavity. Correct it by looking for valves and contraction, since the aorta neither valves nor squeezes."
+  },
+  {
+   "en": "Oblique cut that doubles wall thickness. Correct it by rotating until the ventricle is a true circle with even walls."
+  },
+  {
+   "en": "Bowel gas wiping out the posterior wall. Correct it by pressing firmer and holding the probe still through a full breath."
+  }
+ ],
+ "todo": [
+  {
+   "en": "How to get it: Place the probe at subxiphoid, rotated ninety degrees from four chamber."
+  },
+  {
+   "en": "Point the probe marker toward the left, about three o clock."
+  },
+  {
+   "en": "Hold the subcostal position and rotate ninety degrees without sliding. If the aorta appears, you have slid cranially; ease back down."
+  },
+  {
+   "en": "Freeze the image only when every listed landmark is on screen at once."
+  }
+ ],
+ "remember": {
+  "en": "Confirm effusion seen in other views."
+ },
+ "check": [
+  {
+   "q": {
+    "en": "How do you reach the subcostal short axis?"
+   },
+   "o": [
+    {
+     "en": "Slide to the apex"
+    },
+    {
+     "en": "Rotate ninety degrees without sliding"
+    },
+    {
+     "en": "Move to the sternum"
+    },
+    {
+     "en": "Tilt to the head"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Rotation in place keeps the liver window while cutting cross section."
+   }
+  },
+  {
+   "q": {
+    "en": "The septum is flat in systole with a dilated right ventricle. What does this mean?"
+   },
+   "o": [
+    {
+     "en": "Tamponade"
+    },
+    {
+     "en": "Pressure overload of the right ventricle"
+    },
+    {
+     "en": "Volume overload only"
+    },
+    {
+     "en": "Normal variant"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Systolic flattening means the right ventricle faces pressure overload."
+   }
+  },
+  {
+   "q": {
+    "en": "A round pulsing tube appears in this plane. How do you exclude aorta?"
+   },
+   "o": [
+    {
+     "en": "By size"
+    },
+    {
+     "en": "By valves and contraction, which the aorta lacks"
+    },
+    {
+     "en": "By depth"
+    },
+    {
+     "en": "By gain"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Only a ventricular cavity valves and squeezes with the cycle."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "views"
+ },
+ "sources": [
+  "ASE 2019 guideline for the complete transthoracic examination, subcostal views section.",
+  "ASE 2015 chamber quantification guideline, left ventricular dimensions section."
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_subcostal_sax",
+ "objectives": [
+  "Rotate ninety degrees from the subcostal four chamber.",
+  "Check the septum and both ventricles in cross section.",
+  "Confirm effusion seen in other views."
+ ]
+}

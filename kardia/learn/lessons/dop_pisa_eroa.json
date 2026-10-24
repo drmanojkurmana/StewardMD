@@ -1,0 +1,275 @@
+{
+ "id": "dop_pisa_eroa",
+ "unit": "doppler",
+ "level": "resident",
+ "levels": [
+  "fellow"
+ ],
+ "minutes": 10,
+ "title": {
+  "en": "PISA and effective regurgitant orifice"
+ },
+ "idea": {
+  "en": "Explain the flow convergence shell and the aliasing trick behind PISA"
+ },
+ "see": {
+  "diagram": "diagrams/dop_pisa_eroa.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Apical four chamber mitral jet with the PISA shell on the atrial side"
+  },
+  "caption": {
+   "en": "Apical four chamber mitral jet with the PISA shell on the atrial side"
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Clean hemisphere shell hugging the orifice on the upstream side"
+    },
+    "note": {
+     "en": "Clean hemisphere shell hugging the orifice on the upstream side"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Radius line running from orifice to shell along jet direction"
+    },
+    "note": {
+     "en": "Radius line running from orifice to shell along jet direction"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Aliasing velocity value displayed beside the colour scale"
+    },
+    "note": {
+     "en": "Aliasing velocity value displayed beside the colour scale"
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Dense continuous wave envelope giving peak velocity and integral"
+    },
+    "note": {
+     "en": "Dense continuous wave envelope giving peak velocity and integral"
+    }
+   }
+  ],
+  "view": "tte_a4c"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "PISA turns regurgitation into geometry. As blood rushes toward a leaking orifice it accelerates through concentric shells, and colour Doppler paints the shell where velocity crosses the aliasing limit as a bright hemisphere. Measure that hemisphere radius, multiply its surface area by the aliasing velocity to get the leaking flow, then divide by the jet peak velocity to get the effective orifice. The method quantifies mitral, aortic and tricuspid leaks with the same physics, and in rheumatic mitral regurgitation, which presents young in India, it separates lesions that need surgery from those that need watching."
+   },
+   {
+    "en": "Find the regurgitant jet on colour in the view that shows its origin best, usually the apical four chamber for mitral leaks."
+   },
+   {
+    "en": "Lower the colour scale until the aliasing velocity sits near 30 to 40 cm per s and a clear hemisphere appears."
+   },
+   {
+    "en": "Freeze mid systole for mitral and tricuspid leaks, mid diastole for aortic leaks, when flow is maximal."
+   },
+   {
+    "en": "Measure the radius from the orifice to the first aliasing shell along the jet direction."
+   },
+   {
+    "en": "Record the peak jet velocity and its velocity time integral by continuous wave Doppler."
+   },
+   {
+    "en": "Compute orifice as 2 times 3.14 times radius squared times aliasing velocity divided by peak velocity, then multiply by the integral for regurgitant volume."
+   },
+   {
+    "en": "Measuring a flattened non hemispheric shell. Fix: Lower the scale toward 30 cm per s until the shell rounds out. A flattened shell breaks the hemisphere maths."
+   },
+   {
+    "en": "Forcing PISA on an eccentric wall hugging jet. Fix: Eccentric wall hugging jets flatten the shell, so state the limitation and lean on vena contracta and pulmonary vein flow instead."
+   },
+   {
+    "en": "Measuring radius at the wrong point in the cycle. Fix: Radius changes through the beat, so measure at peak flow in the correct half of the cycle for the valve."
+   },
+   {
+    "en": "Adding shells from multiple jets together. Fix: Multiple jets split the flow, so quantify the dominant jet and report the others separately rather than adding shells."
+   },
+   {
+    "en": "PISA orifice formula. Orifice equals 2 times 3.14 times radius squared times aliasing velocity divided by peak velocity. Source: ASE 2017 regurgitation by Zoghbi and colleagues, section on the PISA method"
+   },
+   {
+    "en": "Severe mitral regurgitation. Orifice 0.40 sq cm or more with regurgitant volume 60 ml or more. Source: ASE 2017 regurgitation by Zoghbi and colleagues, section on mitral severity"
+   },
+   {
+    "en": "Severe aortic regurgitation. Orifice 0.30 sq cm or more with regurgitant volume 60 ml or more. Source: ASE 2017 regurgitation by Zoghbi and colleagues, section on aortic severity"
+   },
+   {
+    "en": "Aliasing velocity setup. Near 30 to 40 cm per s for a measurable hemisphere. Source: ASE 2017 regurgitation by Zoghbi and colleagues, section on PISA optimisation"
+   },
+   {
+    "en": "Functional regurgitation with a slit orifice breaks the hemisphere assumption and underreads, so cross check with vena contracta."
+   },
+   {
+    "en": "Late systolic mitral prolapse leaks only part of systole, so a single frame radius misleads; integrate with the jet timing."
+   },
+   {
+    "en": "Blood pressure at the time of study changes every PISA number, so record it with the measurements."
+   }
+  ],
+  "analogy": {
+   "en": "Clean hemisphere shell hugging the orifice on the upstream side"
+  }
+ },
+ "spot": [
+  {
+   "en": "Clean hemisphere shell hugging the orifice on the upstream side"
+  },
+  {
+   "en": "Radius line running from orifice to shell along jet direction"
+  },
+  {
+   "en": "Aliasing velocity value displayed beside the colour scale"
+  },
+  {
+   "en": "Dense continuous wave envelope giving peak velocity and integral"
+  },
+  {
+   "en": "Jet origin width matching the computed orifice sense"
+  }
+ ],
+ "todo": [
+  {
+   "en": "Explain the flow convergence shell and the aliasing trick behind PISA"
+  },
+  {
+   "en": "Set up the colour scale and time the radius correctly per valve"
+  },
+  {
+   "en": "Compute orifice and regurgitant volume"
+  },
+  {
+   "en": "Apply severe thresholds and know when the shell assumption fails"
+  }
+ ],
+ "remember": {
+  "en": "Apply severe thresholds and know when the shell assumption fails"
+ },
+ "check": [
+  {
+   "q": {
+    "en": "What is the core PISA measurement?"
+   },
+   "o": [
+    {
+     "en": "The jet length in the chamber"
+    },
+    {
+     "en": "The vena contracta width"
+    },
+    {
+     "en": "The aliasing shell radius at peak flow"
+    },
+    {
+     "en": "The colour gain setting"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "The radius from orifice to first aliasing shell at peak flow feeds the hemisphere surface area that yields leaking flow."
+   }
+  },
+  {
+   "q": {
+    "en": "Where is the colour scale set for PISA?"
+   },
+   "o": [
+    {
+     "en": "Near 30 to 40 cm per s"
+    },
+    {
+     "en": "Near 100 cm per s"
+    },
+    {
+     "en": "At the maximum scale"
+    },
+    {
+     "en": "At zero with no aliasing"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "Dropping the aliasing velocity near 30 to 40 cm per s grows a measurable hemisphere shell at the orifice."
+   }
+  },
+  {
+   "q": {
+    "en": "Which pair marks severe mitral regurgitation?"
+   },
+   "o": [
+    {
+     "en": "Orifice 0.20 sq cm with volume 30 ml"
+    },
+    {
+     "en": "Orifice 0.40 sq cm or more with volume 60 ml or more"
+    },
+    {
+     "en": "Orifice 0.10 sq cm with volume 20 ml"
+    },
+    {
+     "en": "Any visible jet on colour"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "The ASE 2017 scheme sets severe mitral regurgitation at orifice 0.40 sq cm or more with regurgitant volume 60 ml or more."
+   }
+  },
+  {
+   "q": {
+    "en": "When is the PISA radius measured?"
+   },
+   "o": [
+    {
+     "en": "Mid systole in all valves"
+    },
+    {
+     "en": "End diastole in all valves"
+    },
+    {
+     "en": "Peak E wave timing"
+    },
+    {
+     "en": "Mid systole for mitral, mid diastole for aortic leaks"
+    }
+   ],
+   "a": 3,
+   "why": {
+    "en": "The radius belongs at peak leaking flow: mid systole for systolic mitral and tricuspid leaks, mid diastole for diastolic aortic leaks."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "doppler"
+ },
+ "sources": [
+  "ASE 2017 regurgitation by Zoghbi and colleagues, sections on the PISA method, optimisation and severity grading, in own words"
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_a4c",
+ "objectives": [
+  "Explain the flow convergence shell and the aliasing trick behind PISA",
+  "Set up the colour scale and time the radius correctly per valve",
+  "Compute orifice and regurgitant volume",
+  "Apply severe thresholds and know when the shell assumption fails"
+ ]
+}

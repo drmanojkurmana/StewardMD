@@ -17,6 +17,8 @@
   /* Free preview: the first few Learn ECG lessons. Owner decision 2026-10-25 (about 5 to 10 percent):
      a few Echo Lab views and lessons, and a few Learn ECG lessons. Everything else is Pro. */
   var FREE_LESSONS = 5;
+  var FREE_ECHO_PER_AREA = 3;
+  var FREE_BANK_QUESTIONS = 20;
   var TABS = ["echo", "learn", "practice", "cases", "kardiox"];
   var LEVELS = ["mbbs", "resident", "fellow", "sonographer"];
 
@@ -40,6 +42,8 @@
     levels: { free: ["mbbs"] }, proFeature: "kardia",
     statusBg: "#06090b", draft: true
   });
+  if (SP.features && SP.features.learn) SP.features.learn(host);
+  if (SP.features && SP.features.bank) SP.features.bank(host, { id: "mcq", index: "decks/mcq/index.json" });
   var I = host._internal, st = host._st;
 
   /* The engine's enabled() is a kill switch (absent flag reads ON). Kardia is opt-in: absent flag
@@ -123,17 +127,60 @@
     }).join("");
   }
 
-  function learnHtml() {
+  function echoHtml() {
+    var W = host._learn && host._learn._w, ix = W && W.ix, lv = klevel(), pro = I.isPro();
+    var head = '<h2 class="sp-h2">' + I.tx(T("Echo", "Echo")) + '</h2><p class="sp-small">' +
+      I.tx(T("Echo lessons for the level above. The first three lessons in each area are free at MBBS; the rest are part of StewardMD Pro.", "Echo lessons for the level above. The first three lessons in each area are free at MBBS; the rest are part of StewardMD Pro.")) + "</p>";
+    if (!ix) {
+      if (W && W.err) return head + '<div class="sp-err krd-err" role="alert"><p>' +
+        I.tx(T("Echo lessons did not load. Check the connection and try again.", "Echo lessons did not load. Check the connection and try again.")) +
+        '</p><button type="button" class="sp-btn pri" data-act="kretry">' + I.ico("refresh") + " " + I.s("retry") + "</button></div>";
+      return head + '<p class="sp-mut" role="status">' + I.tx(T("Loading echo lessons.", "Loading echo lessons.")) + "</p>";
+    }
+    if (!ix.units || !ix.units.length) return head + '<p class="sp-small">' + I.tx(T("No echo lessons yet.", "No echo lessons yet.")) + "</p>";
+    var out = head;
+    ix.units.forEach(function (u) {
+      var ids = (u.lessons || []).filter(function (id) {
+        var m = ix.lessons[id];
+        return m && m.levels && m.levels.indexOf(lv) >= 0;
+      });
+      out += '<h3 class="sp-h3">' + I.tx(u.title) + "</h3>";
+      if (!ids.length) {
+        out += '<p class="sp-small">' + I.tx(T("No lessons at this level in this area.", "No lessons at this level in this area.")) + "</p>";
+        return;
+      }
+      out += '<ul class="sp-rows">' + ids.map(function (id, i) {
+        var m = ix.lessons[id], free = pro || (lv === "mbbs" && i < FREE_ECHO_PER_AREA);
+        var title = I.esc(I.t(m.title)), line = (m.minutes ? m.minutes + " min" : "") + (free ? "" : " · Pro");
+        if (!free) return I.row("kpro", "", I.tile("lock"), title, line, "");
+        return I.row("lesson", ' data-l="' + I.esc(id) + '"', I.tile("book"), title, line, "");
+      }).join("") + "</ul>";
+    });
+    return out;
+  }
+
+  function practiceHtml() {
+    var bank = host._banks && host._banks[0], pro = I.isPro();
+    var line = bank ? bank.line() : "";
+    var rows = bank ? '<ul class="sp-rows">' + I.row("kbank", ' data-b="' + I.esc(bank.id) + '"', I.tile("list"),
+      I.tx(T("Question bank", "Question bank")), I.tx(T("Explained echo questions and the timed exam", "Explained echo questions and the timed exam")), line) + "</ul>" : "";
+    var note = pro ? "" : '<div class="krd-note">' + I.ico("lock") + "<span>" +
+      I.tx(T("Free preview: the first " + FREE_BANK_QUESTIONS + " bank questions in a study set. The full bank and the timed exam beyond the free try are part of StewardMD Pro.", "Free preview: the first " + FREE_BANK_QUESTIONS + " bank questions in a study set. The full bank and the timed exam beyond the free try are part of StewardMD Pro.")) + "</span></div>";
+    var body = bank ? rows + note : '<p class="sp-mut" role="status">' + I.tx(T("Loading questions.", "Loading questions.")) + "</p>";
+    return '<div class="sp-scroll sp-pad"><div class="sp-col"><h2 class="sp-h2">' + I.tx(T("Practice", "Practice")) + "</h2>" + body + "</div></div>";
+  }
+
+  function ecgHtml() {
     var list = learnList(), pro = I.isPro();
     var head = '<p class="sp-small">' + I.tx(T("The Learn ECG atlas and quiz, with no AI. Your progress stays in Learn ECG. Atlas pictures need a connection the first time.",
       "बिना AI वाला Learn ECG एटलस और प्रश्नोत्तरी। आपकी प्रगति Learn ECG में रहती है। एटलस की तस्वीरों को पहली बार कनेक्शन चाहिए।")) + "</p>";
     if (!list || !list.length) {
-      return '<div class="sp-scroll sp-pad"><div class="sp-col">' + head +
+      return '<h2 class="sp-h2">' + I.tx(T("Learn ECG", "Learn ECG")) + "</h2>" + head +
         '<div class="sp-err krd-err" role="alert"><p>' +
         (!list
           ? I.tx(T("Learn ECG did not load. Check the connection and try again.", "Learn ECG लोड नहीं हुआ। कनेक्शन जाँचें और फिर कोशिश करें।"))
           : I.tx(T("No lessons yet. The atlas is being prepared.", "अभी कोई पाठ नहीं है। एटलस तैयार हो रहा है।"))) +
-        '</p><button type="button" class="sp-btn pri" data-act="kretry">' + I.ico("refresh") + " " + I.s("retry") + "</button></div></div></div>";
+        '</p><button type="button" class="sp-btn pri" data-act="kretry">' + I.ico("refresh") + " " + I.s("retry") + "</button></div>";
     }
     var free = lessonRows(list, FREE_LESSONS);
     var rest = list.length > FREE_LESSONS
@@ -146,10 +193,14 @@
       ? '<p><button type="button" class="sp-btn pri sp-wide" data-act="klearn">' + I.ico("play") + " " +
         I.tx(T("Open the Learn ECG atlas", "Learn ECG एटलस खोलें")) + "</button></p>"
       : "";
-    return '<div class="sp-scroll sp-pad"><div class="sp-col">' + head + openAll +
-      '<h2 class="sp-h2">' + I.tx(T("Free preview", "मुफ़्त झलक")) + "</h2>" +
+    return '<h2 class="sp-h2">' + I.tx(T("Learn ECG", "Learn ECG")) + "</h2>" + head + openAll +
+      '<h3 class="sp-h3">' + I.tx(T("Free preview", "मुफ़्त झलक")) + "</h3>" +
       '<ul class="sp-rows" aria-label="' + I.tx(T("Free preview lessons", "मुफ़्त झलक पाठ")) + '">' + free + "</ul>" +
-      (pro ? "" : rest) + "</div></div>";
+      (pro ? "" : rest);
+  }
+
+  function learnHtml() {
+    return '<div class="sp-scroll sp-pad"><div class="sp-col">' + echoHtml() + ecgHtml() + "</div></div>";
   }
 
   function kardioxHtml() {
@@ -168,7 +219,7 @@
     I.setPref("ktab", id);
     st.view = "hub"; st.again = function (f) { showTab(tab(), f || null); };
     I.leave();
-    var lv = klevel(), body = id === "learn" ? learnHtml() : id === "kardiox" ? kardioxHtml() : soonHtml(id);
+    var lv = klevel(), body = id === "learn" ? learnHtml() : id === "practice" ? practiceHtml() : id === "kardiox" ? kardioxHtml() : soonHtml(id);
     I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + body, focusSel);
   }
 
@@ -185,8 +236,15 @@
     if (v !== klevel() && levelLockedK(v)) { I.showPro(); return; }
     if (v === klevel()) return;
     I.setPref("klevel", v);
+    I.setPref("level", v === "mbbs" ? "mbbs" : "resident");
     showTab(tab(), '[data-act=klevel][data-v="' + v + '"]');
   };
+  I.ACTIONS.kbank = function (b) {
+    var id = b.getAttribute("data-b");
+    host._banks.forEach(function (x) { if (x.id === id) x.open(); });
+    I.setRet(function () { showTab("practice"); }, "Back to Practice");
+  };
+  if (host._learn) I.ACTIONS.lnexit = function () { I.leave(); showTab("learn"); };
   I.ACTIONS.klearn = function (b) {
     var id = b.getAttribute && b.getAttribute("data-id");
     try {
@@ -219,5 +277,5 @@
   function showReady() { if (host.isOpen()) showTab(tab()); }
 
   /* Review Desk style "Read it" hooks and tests read these; the atlas itself stays untouched. */
-  host._kardia = { tabs: TABS.slice(), levels: LEVELS.slice(), freeLessons: FREE_LESSONS, on: on, openKardioX: openKardioX };
+  host._kardia = { tabs: TABS.slice(), levels: LEVELS.slice(), freeLessons: FREE_LESSONS, freeEchoPerArea: FREE_ECHO_PER_AREA, freeBankQuestions: FREE_BANK_QUESTIONS, on: on, openKardioX: openKardioX };
 })(typeof window !== "undefined" ? window : this);

@@ -1,0 +1,182 @@
+{
+ "id": "pocus_efast_protocol",
+ "unit": "pocus",
+ "level": "mbbs",
+ "levels": [
+  "mbbs",
+  "resident"
+ ],
+ "minutes": 5,
+ "title": {
+  "en": "eFAST protocol"
+ },
+ "idea": {
+  "en": "Add bilateral lung windows to the FAST sequence"
+ },
+ "see": {
+  "diagram": "diagrams/pocus_efast_protocol.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "eFAST right lung window of the protocol"
+  },
+  "caption": {
+   "en": "eFAST right lung window of the protocol"
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "is there a pneumothorax. Each lung window shows sliding pleura in health and abs"
+    },
+    "note": {
+     "en": "What you see: eFAST adds two lung windows to the four FAST windows, asking one extra question on each side: is there a pneumothorax. Each lung window shows sliding pleura in health and absent sliding with a lung point in pneumothorax. The full protocol therefore maps belly bleeding, pericardial blood and chest air in one sweep. In chest trauma the lung windows come early in the order so a tension pneumothorax is caught fast."
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Pleural line with sliding on right and left, Morison pouch, splenorenal recess,"
+    },
+    "note": {
+     "en": "Landmarks to confirm: Pleural line with sliding on right and left, Morison pouch, splenorenal recess, pelvic pouches, pericardial space."
+    }
+   }
+  ],
+  "view": "pocus_efast_lung_right"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: eFAST adds two lung windows to the four FAST windows, asking one extra question on each side: is there a pneumothorax. Each lung window shows sliding pleura in health and absent sliding with a lung point in pneumothorax. The full protocol therefore maps belly bleeding, pericardial blood and chest air in one sweep. In chest trauma the lung windows come early in the order so a tension pneumothorax is caught fast."
+   },
+   {
+    "en": "Landmarks to confirm: Pleural line with sliding on right and left, Morison pouch, splenorenal recess, pelvic pouches, pericardial space."
+   },
+   {
+    "en": "Common mistakes and correction: Calling absent sliding a pneumothorax without finding the lung point: confirm the point before reporting. Forgetting the lung windows when the belly looks bad: chest kills faster, so lungs come first in chest trauma. Judging one lung without comparing sides: record both sides in the same breath phase."
+   },
+   {
+    "en": "Normal values with units: No numeric threshold applies. A complete eFAST is negative only when all six windows are clear: bilateral sliding with seashore M mode, no free fluid and no pericardial blood. Any positive window triggers the matching urgent pathway."
+   },
+   {
+    "en": "Pitfalls: Absent sliding has several causes beyond pneumothorax, including breath holding and mainstem intubation, so the lung point decides. A small pneumothorax may show only a lateral lung point, so slide the full chest wall when suspicion is high. In ventilated patients confirm tube position clinically alongside the scan."
+   }
+  ],
+  "analogy": {
+   "en": "What you see: eFAST adds two lung windows to the four FAST windows, asking one extra question on each side: is there a pneumothorax. Each lung window shows sliding pleura in health and absent sliding with a lung point in pneumothorax. The full protocol therefore maps belly bleeding, pericardial blood and chest air in one sweep. In chest trauma the lung windows come early in the order so a tension pneumothorax is caught fast."
+  }
+ },
+ "spot": [
+  {
+   "en": "What you see: eFAST adds two lung windows to the four FAST windows, asking one extra question on each side: is there a pneumothorax. Each lung window shows sliding pleura in health and absent sliding with a lung point in pneumothorax. The full protocol therefore maps belly bleeding, pericardial blood and chest air in one sweep. In chest trauma the lung windows come early in the order so a tension pneumothorax is caught fast."
+  },
+  {
+   "en": "Landmarks to confirm: Pleural line with sliding on right and left, Morison pouch, splenorenal recess, pelvic pouches, pericardial space."
+  },
+  {
+   "en": "Figure: eFAST left lung window of the protocol View pocus_efast_lung_left"
+  },
+  {
+   "en": "Figure: FAST subxiphoid window of the protocol View pocus_fast_subxiphoid"
+  }
+ ],
+ "todo": [
+  {
+   "en": "How to get it step by step: Start with both lung windows for sliding, then run the four FAST windows in fixed order. Record sliding present or absent per side with M mode, and mark any lung point. Then complete right upper quadrant, left upper quadrant, pelvis in two planes and subxiphoid heart. Call each of the six windows out loud. Repeat lungs and belly when vitals change or breathing worsens."
+  }
+ ],
+ "remember": {
+  "en": "Run all six windows in a fixed order"
+ },
+ "check": [
+  {
+   "q": {
+    "en": "What does eFAST add to FAST?"
+   },
+   "o": [
+    {
+     "en": "It replaces the belly windows"
+    },
+    {
+     "en": "It adds bilateral lung windows for pneumothorax"
+    },
+    {
+     "en": "It removes the heart window"
+    },
+    {
+     "en": "It adds leg veins only"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "eFAST adds a lung window on each side to detect pneumothorax."
+   }
+  },
+  {
+   "q": {
+    "en": "What confirms pneumothorax on eFAST?"
+   },
+   "o": [
+    {
+     "en": "Absent sliding alone proves it"
+    },
+    {
+     "en": "Tachycardia alone proves it"
+    },
+    {
+     "en": "Absent sliding plus a visible lung point"
+    },
+    {
+     "en": "Chest pain alone"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "Absent sliding has several causes, so the lung point confirms the edge."
+   }
+  },
+  {
+   "q": {
+    "en": "What order suits a chest trauma patient?"
+   },
+   "o": [
+    {
+     "en": "Lungs first, then the four FAST windows"
+    },
+    {
+     "en": "Belly first, lungs last"
+    },
+    {
+     "en": "Heart only"
+    },
+    {
+     "en": "One side only"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "Chest kills faster, so lung windows come before the belly sequence in chest trauma."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "pocus"
+ },
+ "sources": [
+  "ACEP emergency ultrasound guidelines, section on eFAST and pneumothorax",
+  "International POCUS consensus, section on lung ultrasound for pneumothorax"
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "pocus_efast_lung_right",
+ "objectives": [
+  "Add bilateral lung windows to the FAST sequence",
+  "Confirm pneumothorax by lung point, not sliding alone",
+  "Run all six windows in a fixed order"
+ ]
+}

@@ -1,0 +1,255 @@
+{
+ "id": "knob_knobology",
+ "unit": "knobology",
+ "level": "mbbs",
+ "levels": [
+  "mbbs",
+  "resident",
+  "sonographer"
+ ],
+ "minutes": 6,
+ "title": {
+  "en": "Knobology: gain, depth, focus and frequency"
+ },
+ "idea": {
+  "en": "Run the optimisation sequence in the same order every study"
+ },
+ "see": {
+  "diagram": "diagrams/knob_knobology.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Parasternal long axis used to practise the full optimisation sequence"
+  },
+  "caption": {
+   "en": "Parasternal long axis used to practise the full optimisation sequence"
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Blood pool dark with bright sharp endocardial borders"
+    },
+    "note": {
+     "en": "Blood pool dark with bright sharp endocardial borders"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Uniform brightness from near to far field after compensation"
+    },
+    "note": {
+     "en": "Uniform brightness from near to far field after compensation"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Focal marker sitting exactly at target depth"
+    },
+    "note": {
+     "en": "Focal marker sitting exactly at target depth"
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Frame rate high enough that leaflets do not blur"
+    },
+    "note": {
+     "en": "Frame rate high enough that leaflets do not blur"
+    }
+   }
+  ],
+  "view": "tte_plax"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "Knobology is image optimisation at the controls: depth, gain, focus, time gain compensation, frequency, sector width and dynamic range. Each knob trades one quality for another, and the skilful sequence turns a grey haze into a measurable image in seconds. The order never changes: window first, then depth and sector, then gain and time gain compensation, then focus and frequency, then the Doppler or colour scale last. Practise the sequence on every normal study so it runs itself when the patient is breathless and the clock is running."
+   },
+   {
+    "en": "Set depth so the structure of interest fills two thirds of the screen with a little tissue beyond it."
+   },
+   {
+    "en": "Narrow the sector to the region of interest so the frame rate climbs before anything moves fast."
+   },
+   {
+    "en": "Turn overall gain down until blood is dark, then balance near and far gain with the time gain compensation sliders."
+   },
+   {
+    "en": "Place the focal zone at the depth of the target; add a second focus only if the frame rate survives."
+   },
+   {
+    "en": "Choose the transducer frequency for the body: higher for thin adults and children, lower for large patients and deep views."
+   },
+   {
+    "en": "Set dynamic range and grey maps for contrast that shows endocardium, then harmonic imaging on for cluttered near fields."
+   },
+   {
+    "en": "Gain so high the cavity looks solid. Fix: Turn gain down and rebalance the sliders. Overgain buries borders and fakes masses."
+   },
+   {
+    "en": "Measuring on a needlessly deep image. Fix: Depth first, then zoom for measurement. Excess depth shrinks everything and wastes lines."
+   },
+   {
+    "en": "Multiple foci slowing the frame rate. Fix: One focus at target depth beats three scattered foci that drag the frame rate down."
+   },
+   {
+    "en": "High frequency in a large patient with no penetration. Fix: Drop frequency for penetration. A sharp shallow image of the wrong layer helps nobody."
+   },
+   {
+    "en": "Adult transducer frequency. 2 to 5 MHz for adult transthoracic imaging; higher resolves, lower penetrates. Source: ASE 2019 transthoracic examination, section on instrumentation"
+   },
+   {
+    "en": "Optimisation order. Depth, sector, gain with time gain compensation, focus, frequency, then scale. Source: ASE 2019 transthoracic examination, section on image optimisation"
+   },
+   {
+    "en": "Frame rate for moving structures. Keep it high with a narrow sector; low rates blur leaflets and jets. Source: ASE 2019 transthoracic examination, section on temporal resolution"
+   },
+   {
+    "en": "Measurement zoom. Zoom before measuring; small structures need the full line density. Source: BSE minimum dataset, section on image optimisation, in own words"
+   },
+   {
+    "en": "Harmonic imaging thickens valve leaflets slightly, so note it when grading subtle thickening."
+   },
+   {
+    "en": "Too much dynamic range smoothing erases fine targets such as vegetations and strands."
+   },
+   {
+    "en": "Write down control changes that matter for serial comparison, especially gain and scale."
+   }
+  ],
+  "analogy": {
+   "en": "Blood pool dark with bright sharp endocardial borders"
+  }
+ },
+ "spot": [
+  {
+   "en": "Blood pool dark with bright sharp endocardial borders"
+  },
+  {
+   "en": "Uniform brightness from near to far field after compensation"
+  },
+  {
+   "en": "Focal marker sitting exactly at target depth"
+  },
+  {
+   "en": "Frame rate high enough that leaflets do not blur"
+  },
+  {
+   "en": "Scale and baseline noted on every Doppler and colour image"
+  }
+ ],
+ "todo": [
+  {
+   "en": "Run the optimisation sequence in the same order every study"
+  },
+  {
+   "en": "Trade frequency, sector and focus against frame rate knowingly"
+  },
+  {
+   "en": "Set gain and time gain compensation for dark blood and sharp borders"
+  },
+  {
+   "en": "Zoom before measuring anything small"
+  }
+ ],
+ "remember": {
+  "en": "Zoom before measuring anything small"
+ },
+ "check": [
+  {
+   "q": {
+    "en": "What is the correct optimisation order?"
+   },
+   "o": [
+    {
+     "en": "Depth, sector, gain with compensation, focus, frequency, scale"
+    },
+    {
+     "en": "Gain first, then everything else"
+    },
+    {
+     "en": "Frequency first, then depth"
+    },
+    {
+     "en": "Scale first, then gain"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "Geometry first with depth and sector, then brightness with gain and time gain compensation, then resolution with focus and frequency, then the Doppler scale."
+   }
+  },
+  {
+   "q": {
+    "en": "The frame rate is too low to catch a flail leaflet. What helps most?"
+   },
+   "o": [
+    {
+     "en": "Raise the gain"
+    },
+    {
+     "en": "Add more foci"
+    },
+    {
+     "en": "Narrow the sector to the region of interest"
+    },
+    {
+     "en": "Increase the depth"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "A narrower sector concentrates scan lines where they matter and raises the frame rate fastest."
+   }
+  },
+  {
+   "q": {
+    "en": "Which frequency range suits adult transthoracic imaging?"
+   },
+   "o": [
+    {
+     "en": "2 to 5 MHz"
+    },
+    {
+     "en": "8 to 12 MHz"
+    },
+    {
+     "en": "0.5 to 1 MHz"
+    },
+    {
+     "en": "20 to 30 MHz"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Adult probes work at 2 to 5 MHz, trading resolution against the penetration a deep adult chest needs."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "knobology"
+ },
+ "sources": [
+  "ASE 2019 transthoracic examination by Mitchell and colleagues, sections on instrumentation, image optimisation and temporal resolution, in own words",
+  "BSE minimum dataset, section on image optimisation, in own words"
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_plax",
+ "objectives": [
+  "Run the optimisation sequence in the same order every study",
+  "Trade frequency, sector and focus against frame rate knowingly",
+  "Set gain and time gain compensation for dark blood and sharp borders",
+  "Zoom before measuring anything small"
+ ]
+}

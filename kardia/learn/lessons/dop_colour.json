@@ -1,0 +1,278 @@
+{
+ "id": "dop_colour",
+ "unit": "doppler",
+ "level": "mbbs",
+ "levels": [
+  "mbbs",
+  "resident",
+  "sonographer"
+ ],
+ "minutes": 6,
+ "title": {
+  "en": "Colour Doppler physics"
+ },
+ "idea": {
+  "en": "Read colour direction and aliasing against the scale setting"
+ },
+ "see": {
+  "diagram": "diagrams/dop_colour.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Parasternal long axis with colour showing inflow and outflow directions"
+  },
+  "caption": {
+   "en": "Parasternal long axis with colour showing inflow and outflow directions"
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Red toward and blue away from the probe along the beam"
+    },
+    "note": {
+     "en": "Red toward and blue away from the probe along the beam"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Clean tissue without colour speckle outside blood pools"
+    },
+    "note": {
+     "en": "Clean tissue without colour speckle outside blood pools"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Narrow jet origin at the valve plane marking the true orifice"
+    },
+    "note": {
+     "en": "Narrow jet origin at the valve plane marking the true orifice"
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Mosaic aliasing core where velocity exceeds the scale setting"
+    },
+    "note": {
+     "en": "Mosaic aliasing core where velocity exceeds the scale setting"
+    }
+   }
+  ],
+  "view": "tte_plax"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "Colour Doppler paints the pulsed wave principle across the whole sector: every pixel gets a mean velocity and a direction, red toward the probe and blue away from it. It is a map, not a measurement, and its job is to show where flow goes, how wide a jet is at its origin, and which spectral gate position to use next. Because each pixel is pulsed wave, colour aliases exactly like spectral pulsed wave, and the mosaic of turbulence is as much a setting as a finding. Read the map with the scale in mind and it guides every valve assessment."
+   },
+   {
+    "en": "Start with a centred scale near 50 to 60 cm per s for valve jets so normal flow reads clean and fast jets alias."
+   },
+   {
+    "en": "Set gain just below the point where colour speckles outside flow, then nudge the wall filter to clear wall flash."
+   },
+   {
+    "en": "Keep the colour box small and over the region of interest so the frame rate stays high."
+   },
+   {
+    "en": "Compare jet size across views and at the origin rather than the far field, where jets entrain blood and look larger."
+   },
+   {
+    "en": "Lower the scale to search for low velocity flow such as shunts and pulmonary veins."
+   },
+   {
+    "en": "Confirm every important jet with spectral Doppler before grading it."
+   },
+   {
+    "en": "Gain so high that tissue speckles with colour. Fix: Turn gain down until speckle outside flow just clears. Excess gain fakes regurgitation."
+   },
+   {
+    "en": "Grading a jet by its far field spray. Fix: Enlarge is not always worse; read the origin width, not the far field spray, and confirm with spectral Doppler."
+   },
+   {
+    "en": "Huge colour box with a frame rate too low to catch the jet. Fix: Narrow the box and reduce depth before judging brief or eccentric jets."
+   },
+   {
+    "en": "Reading aliasing as turbulence without checking the scale. Fix: The scale sets the aliasing point, so note it on every image and never compare jets shot at different scales."
+   },
+   {
+    "en": "Colour direction convention. Red toward the probe, blue away from the probe. Source: ASE 2019 transthoracic examination, section on colour Doppler imaging"
+   },
+   {
+    "en": "Starting velocity scale for valve jets. Near 50 to 60 cm per s, lowered to search for slow flow. Source: ASE 2019 transthoracic examination, section on colour Doppler optimisation"
+   },
+   {
+    "en": "Jet origin reading. Judge width at the origin; far field size overreads severity. Source: ASE 2017 regurgitation by Zoghbi and colleagues, section on colour jet assessment"
+   },
+   {
+    "en": "Colour aliasing. Same Nyquist physics as pulsed wave; the scale sets the aliasing velocity. Source: ASE 2019 transthoracic examination, section on colour Doppler optimisation"
+   },
+   {
+    "en": "Wall flash from cardiac motion paints tissue in systole; raise the filter rather than reading it as flow."
+   },
+   {
+    "en": "An eccentric wall hugging jet looks small on colour while spectral Doppler proves it severe, so confirm before dismissing."
+   },
+   {
+    "en": "Colour frame rates lag two dimensional imaging, so brief events need a narrow box and patience."
+   }
+  ],
+  "analogy": {
+   "en": "Red toward and blue away from the probe along the beam"
+  }
+ },
+ "spot": [
+  {
+   "en": "Red toward and blue away from the probe along the beam"
+  },
+  {
+   "en": "Clean tissue without colour speckle outside blood pools"
+  },
+  {
+   "en": "Narrow jet origin at the valve plane marking the true orifice"
+  },
+  {
+   "en": "Mosaic aliasing core where velocity exceeds the scale setting"
+  },
+  {
+   "en": "Frame rate high enough that brief jets do not vanish between frames"
+  }
+ ],
+ "todo": [
+  {
+   "en": "Read colour direction and aliasing against the scale setting"
+  },
+  {
+   "en": "Optimise gain, box size and filter for valve jets"
+  },
+  {
+   "en": "Judge jets at their origin, not their spray"
+  },
+  {
+   "en": "Confirm every important jet with spectral Doppler"
+  }
+ ],
+ "remember": {
+  "en": "Confirm every important jet with spectral Doppler"
+ },
+ "check": [
+  {
+   "q": {
+    "en": "What do red and blue mean on colour Doppler?"
+   },
+   "o": [
+    {
+     "en": "Red toward the probe, blue away"
+    },
+    {
+     "en": "Blue toward the probe, red away"
+    },
+    {
+     "en": "Red for fast, blue for slow"
+    },
+    {
+     "en": "Red for arteries, blue for veins"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "The convention is direction relative to the probe: red flows toward it and blue flows away, regardless of vessel type."
+   }
+  },
+  {
+   "q": {
+    "en": "You suspect a low velocity shunt that colour does not show. What helps?"
+   },
+   "o": [
+    {
+     "en": "Turn the gain to maximum"
+    },
+    {
+     "en": "Widen the box to the whole sector"
+    },
+    {
+     "en": "Lower the scale to search for slow flow"
+    },
+    {
+     "en": "Raise the wall filter to maximum"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "Lowering the velocity scale drops the aliasing threshold so slow flow becomes visible instead of being filtered away."
+   }
+  },
+  {
+   "q": {
+    "en": "Which colour feature best reflects regurgitant severity?"
+   },
+   "o": [
+    {
+     "en": "Its far field spray area"
+    },
+    {
+     "en": "Its width at the origin"
+    },
+    {
+     "en": "Its brightest mosaic patch"
+    },
+    {
+     "en": "Its length into the chamber"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Jet origin width tracks the orifice while far field spray grows by entrainment, so the origin is the honest measure."
+   }
+  },
+  {
+   "q": {
+    "en": "Colour aliasing on a jet is what?"
+   },
+   "o": [
+    {
+     "en": "Proof of severe regurgitation"
+    },
+    {
+     "en": "Proof of a shunt"
+    },
+    {
+     "en": "A setting to note, since the scale sets it"
+    },
+    {
+     "en": "Proof of high pressure"
+    }
+   ],
+   "a": 3,
+   "why": {
+    "en": "Aliasing follows Nyquist physics set by the scale control, so it is a setting to record, not a diagnosis on its own."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "doppler"
+ },
+ "sources": [
+  "ASE 2019 transthoracic examination by Mitchell and colleagues, sections on colour Doppler imaging and optimisation, in own words",
+  "ASE 2017 regurgitation by Zoghbi and colleagues, section on colour jet assessment, in own words"
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_plax",
+ "objectives": [
+  "Read colour direction and aliasing against the scale setting",
+  "Optimise gain, box size and filter for valve jets",
+  "Judge jets at their origin, not their spray",
+  "Confirm every important jet with spectral Doppler"
+ ]
+}

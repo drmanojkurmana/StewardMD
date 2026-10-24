@@ -1,0 +1,250 @@
+{
+ "id": "view_ductal",
+ "unit": "views",
+ "level": "resident",
+ "levels": [
+  "fellow",
+  "sonographer",
+  "resident"
+ ],
+ "minutes": 5,
+ "title": {
+  "en": "Suprasternal ductal view"
+ },
+ "idea": {
+  "en": "Open the ductal region between pulmonary trunk and descending aorta."
+ },
+ "see": {
+  "diagram": "diagrams/view_ductal.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Echo Lab render of the Suprasternal ductal view. Bridge trunk and descending aorta with the ductal isthmus between."
+  },
+  "caption": {
+   "en": "Echo Lab render of the Suprasternal ductal view. Bridge trunk and descending aorta with the ductal isthmus between."
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Pulmonary trunk"
+    },
+    "note": {
+     "en": "Landmarks to confirm: Pulmonary trunk"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Descending aorta"
+    },
+    "note": {
+     "en": "Descending aorta"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Ductus arteriosus region"
+    },
+    "note": {
+     "en": "Ductus arteriosus region"
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Mistaking the left pulmonary artery for the ductus. Correct it by following the"
+    },
+    "note": {
+     "en": "Common mistakes and how to correct them: Mistaking the left pulmonary artery for the ductus. Correct it by following the vessel to the lung, since only the ductus joins the aorta."
+    }
+   }
+  ],
+  "view": "tte_suprasternal_ductal"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: The pulmonary trunk and the descending aorta lie close with the ductal isthmus bridging them. In a patent ductus, colour bridges the gap through the whole cycle."
+   },
+   {
+    "en": "Landmarks to confirm: Do not accept the view until each of these is on screen."
+   },
+   {
+    "en": "Common mistakes and how to correct them: Each mistake below comes from the view catalogue with its correction."
+   },
+   {
+    "en": "Measurements: Ductal flow is continuous in systole and diastole toward the pulmonary trunk."
+   },
+   {
+    "en": "Left atrial enlargement with a hyperdynamic circulation marks a significant shunt."
+   },
+   {
+    "en": "Estimate pulmonary pressure from a clean ductal jet with the Bernoulli equation."
+   },
+   {
+    "en": "Tricuspid regurgitation peak velocity 2.8 m per s or less is normal."
+   },
+   {
+    "en": "Pitfalls: Ductal flow reverses when pulmonary pressure exceeds aortic pressure, so direction reports the circulation, not just patency. In adults this window is often poor; a negative look never rules out a small ductus."
+   }
+  ],
+  "analogy": {
+   "en": "Landmarks to confirm: Pulmonary trunk"
+  }
+ },
+ "spot": [
+  {
+   "en": "Landmarks to confirm: Pulmonary trunk"
+  },
+  {
+   "en": "Descending aorta"
+  },
+  {
+   "en": "Ductus arteriosus region"
+  },
+  {
+   "en": "Common mistakes and how to correct them: Mistaking the left pulmonary artery for the ductus. Correct it by following the vessel to the lung, since only the ductus joins the aorta."
+  },
+  {
+   "en": "Sweeping too anterior into the aortic valve plane. Correct it by angling posteriorly until the descending aorta returns beside the trunk."
+  },
+  {
+   "en": "Calling a mirror artefact in the lung a second vessel. Correct it by lowering the gain, since a mirror fades while a true vessel persists."
+  }
+ ],
+ "todo": [
+  {
+   "en": "How to get it: Place the probe at left supraclavicular fossa, coronal toward the pulmonary trunk."
+  },
+  {
+   "en": "Point the probe marker toward the left, about nine o clock."
+  },
+  {
+   "en": "Sit in the left supraclavicular fossa and aim coronal toward the pulmonary trunk. In neonates use high frequency and a small sector for frame rate."
+  },
+  {
+   "en": "Freeze the image only when every listed landmark is on screen at once."
+  }
+ ],
+ "remember": {
+  "en": "Judge shunt size and pulmonary pressure together."
+ },
+ "check": [
+  {
+   "q": {
+    "en": "Where does the probe sit for the ductal view?"
+   },
+   "o": [
+    {
+     "en": "Right sternal edge"
+    },
+    {
+     "en": "Left supraclavicular fossa aiming at the trunk"
+    },
+    {
+     "en": "Apex"
+    },
+    {
+     "en": "Subxiphoid"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "The left supraclavicular fossa lines up trunk and descending aorta."
+   }
+  },
+  {
+   "q": {
+    "en": "Ductal flow runs from aorta to trunk in systole only. What does timing tell you?"
+   },
+   "o": [
+    {
+     "en": "Patent ductus"
+    },
+    {
+     "en": "Not ductal flow, since ductal flow is continuous"
+    },
+    {
+     "en": "Closed ductus"
+    },
+    {
+     "en": "Normal"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "True ductal flow is continuous through the whole cycle."
+   }
+  },
+  {
+   "q": {
+    "en": "Flow reverses to run trunk to aorta. What changed?"
+   },
+   "o": [
+    {
+     "en": "The ductus closed"
+    },
+    {
+     "en": "Pulmonary pressure now exceeds aortic pressure"
+    },
+    {
+     "en": "Gain too high"
+    },
+    {
+     "en": "Probe moved"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Reversed direction means pulmonary pressure has risen above systemic."
+   }
+  },
+  {
+   "q": {
+    "en": "Which setup suits a neonate?"
+   },
+   "o": [
+    {
+     "en": "Low frequency, wide sector"
+    },
+    {
+     "en": "High frequency, small sector for frame rate"
+    },
+    {
+     "en": "Deep focus only"
+    },
+    {
+     "en": "M mode only"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Small structures need high frequency and a tight sector."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "views"
+ },
+ "sources": [
+  "ASE 2019 guideline for the complete transthoracic examination, suprasternal views section.",
+  "ASE and EACVI 2016 diastolic function guideline, pulmonary pressure estimation section."
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_suprasternal_ductal",
+ "objectives": [
+  "Open the ductal region between pulmonary trunk and descending aorta.",
+  "Find continuous ductal flow in the newborn.",
+  "Judge shunt size and pulmonary pressure together."
+ ]
+}

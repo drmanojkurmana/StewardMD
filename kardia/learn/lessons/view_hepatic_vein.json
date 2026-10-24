@@ -1,0 +1,227 @@
+{
+ "id": "view_hepatic_vein",
+ "unit": "views",
+ "level": "resident",
+ "levels": [
+  "resident",
+  "fellow",
+  "sonographer"
+ ],
+ "minutes": 5,
+ "title": {
+  "en": "Subcostal hepatic vein"
+ },
+ "idea": {
+  "en": "Isolate a hepatic vein through the liver."
+ },
+ "see": {
+  "diagram": "diagrams/view_hepatic_vein.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Echo Lab render of the Subcostal hepatic vein. Gate one straight vein branch clear of the cava mouth."
+  },
+  "caption": {
+   "en": "Echo Lab render of the Subcostal hepatic vein. Gate one straight vein branch clear of the cava mouth."
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Hepatic vein"
+    },
+    "note": {
+     "en": "Landmarks to confirm: Hepatic vein"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Inferior vena cava"
+    },
+    "note": {
+     "en": "Inferior vena cava"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Cavity of right atrium"
+    },
+    "note": {
+     "en": "Cavity of right atrium"
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Liver"
+    },
+    "note": {
+     "en": "Liver"
+    }
+   }
+  ],
+  "view": "tte_subcostal_hepatic_vein"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: A hepatic vein runs toward the cava with a clean Doppler gate position clear of the trunk. Normal flow steps forward twice per beat, the systolic step taller than the diastolic."
+   },
+   {
+    "en": "Landmarks to confirm: Do not accept the view until each of these is on screen."
+   },
+   {
+    "en": "Common mistakes and how to correct them: Each mistake below comes from the view catalogue with its correction."
+   },
+   {
+    "en": "Normal values and regurgitation thresholds: Systolic flow reversal in the hepatic vein marks severe tricuspid regurgitation."
+   },
+   {
+    "en": "Severe tricuspid regurgitation means vena contracta 7 mm or more with effective orifice 0.40 sq cm or more."
+   },
+   {
+    "en": "Normal hepatic flow is systolic dominant with forward flow in both systole and diastole."
+   },
+   {
+    "en": "Pitfalls: Atrial fibrillation removes the atrial kick and blunts the pattern, so compare with the ECG. In constriction the diastolic wave dominates with expiratory reversal; do not confuse this with regurgitation."
+   }
+  ],
+  "analogy": {
+   "en": "Landmarks to confirm: Hepatic vein"
+  }
+ },
+ "spot": [
+  {
+   "en": "Landmarks to confirm: Hepatic vein"
+  },
+  {
+   "en": "Inferior vena cava"
+  },
+  {
+   "en": "Cavity of right atrium"
+  },
+  {
+   "en": "Liver"
+  },
+  {
+   "en": "Common mistakes and how to correct them: Portal vein mistaken for hepatic vein, portal flow is phasic toward the liver. Correct it by checking direction with colour, since hepatic flow runs toward the cava."
+  },
+  {
+   "en": "Sampling the cava instead of the vein. Correct it by moving the gate into the branch until the trace sharpens."
+  },
+  {
+   "en": "Respiratory drift moving the gate out of the vessel. Correct it by asking for a held breath out and repositioning before recording."
+  }
+ ],
+ "todo": [
+  {
+   "en": "How to get it: Place the probe at subcostal right, sagittal oblique through the liver toward the cava."
+  },
+  {
+   "en": "Point the probe marker toward the head, about twelve o clock."
+  },
+  {
+   "en": "Angle obliquely through the liver until one vein runs straight toward the cava. Keep the gate small and clear of the cava mouth to avoid contamination."
+  },
+  {
+   "en": "Freeze the image only when every listed landmark is on screen at once."
+  }
+ ],
+ "remember": {
+  "en": "Use systolic reversal as a severe tricuspid regurgitation clue."
+ },
+ "check": [
+  {
+   "q": {
+    "en": "Normal hepatic vein Doppler looks like what?"
+   },
+   "o": [
+    {
+     "en": "Systolic dominant forward flow"
+    },
+    {
+     "en": "Diastolic only flow"
+    },
+    {
+     "en": "Continuous flow"
+    },
+    {
+     "en": "Reversed flow"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "Health shows forward flow twice per beat with systole taller."
+   }
+  },
+  {
+   "q": {
+    "en": "Systolic reversal appears in the hepatic vein. What does this mark?"
+   },
+   "o": [
+    {
+     "en": "Mild regurgitation"
+    },
+    {
+     "en": "Severe tricuspid regurgitation"
+    },
+    {
+     "en": "Tricuspid stenosis"
+    },
+    {
+     "en": "Normal variant"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Systolic reversal is a specific marker of severe tricuspid regurgitation."
+   }
+  },
+  {
+   "q": {
+    "en": "How do you separate hepatic from portal vein?"
+   },
+   "o": [
+    {
+     "en": "By size"
+    },
+    {
+     "en": "Hepatic flow runs toward the cava while portal flow runs toward the liver"
+    },
+    {
+     "en": "By depth"
+    },
+    {
+     "en": "By wall brightness"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Direction with colour decides: hepatic drains out, portal flows in."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "views"
+ },
+ "sources": [
+  "ASE 2019 guideline for the complete transthoracic examination, subcostal Doppler views section.",
+  "ASE 2017 valvular regurgitation guideline, tricuspid regurgitation section."
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_subcostal_hepatic_vein",
+ "objectives": [
+  "Isolate a hepatic vein through the liver.",
+  "Read systolic versus diastolic dominance.",
+  "Use systolic reversal as a severe tricuspid regurgitation clue."
+ ]
+}

@@ -1,0 +1,303 @@
+{
+ "id": "meas_simpson_ef",
+ "unit": "measurements",
+ "level": "resident",
+ "levels": [
+  "resident",
+  "fellow",
+  "sonographer"
+ ],
+ "minutes": 12,
+ "title": {
+  "en": "Left ventricular volumes and Simpson biplane ejection fraction"
+ },
+ "idea": {
+  "en": "Acquire true apical four chamber and two chamber views without foreshortening"
+ },
+ "see": {
+  "diagram": "diagrams/meas_simpson_ef.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Apical four chamber at end diastole for the first trace of the biplane pair"
+  },
+  "caption": {
+   "en": "Apical four chamber at end diastole for the first trace of the biplane pair"
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Apex free of dropout with the true tip on screen"
+    },
+    "note": {
+     "en": "Apex free of dropout with the true tip on screen"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Mitral annulus corners as the two fixed trace anchors"
+    },
+    "note": {
+     "en": "Mitral annulus corners as the two fixed trace anchors"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Open aortic valve marking systole on the timing strip"
+    },
+    "note": {
+     "en": "Open aortic valve marking systole on the timing strip"
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Papillary muscles kept inside the traced cavity"
+    },
+    "note": {
+     "en": "Papillary muscles kept inside the traced cavity"
+    }
+   }
+  ],
+  "view": "tte_a4c"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "Ejection fraction by the biplane disks method is the reference measure of left ventricular systolic function. You trace the endocardial border in the apical four chamber and apical two chamber views at end diastole and end systole, the machine stacks twenty disks along the long axis of each trace, and ejection fraction is the stroke volume divided by the end diastolic volume. The whole result stands or falls on two skills: finding a true apex without foreshortening, and tracing compact myocardium rather than trabeculation."
+   },
+   {
+    "en": "Record the apical four chamber, then tilt forward to the apical two chamber, keeping the apex at the top of the sector and the cavity at its longest in both."
+   },
+   {
+    "en": "Freeze end diastole on the frame with the largest cavity, just after mitral closure at the onset of the QRS."
+   },
+   {
+    "en": "Trace from one mitral annulus corner around the apex to the other corner, hugging compact myocardium and leaving trabeculation inside the cavity."
+   },
+   {
+    "en": "Freeze end systole on the frame with the smallest cavity, just before aortic closure, and trace again in both views."
+   },
+   {
+    "en": "Check that the two long axis lengths differ by less than ten percent; if not, one view is foreshortened and you must reacquire it."
+   },
+   {
+    "en": "Index both volumes to body surface area before judging them against the reference ranges."
+   },
+   {
+    "en": "Foreshortened apex cutting off the true tip. Fix: Slide apically and angle the probe until the cavity length stops growing. A rounded short apex overreads ejection fraction."
+   },
+   {
+    "en": "Tracing around trabeculation instead of compact wall. Fix: Trace the compact wall and leave the trabecular mesh inside the blood pool, the same way in both views."
+   },
+   {
+    "en": "Picking the wrong frames for diastole and systole. Fix: End diastole is the largest cavity and end systole the smallest, timed against the ECG, not guessed from wall motion."
+   },
+   {
+    "en": "Recording volumes when the border is not seen. Fix: Gain down until the blood pool is dark and the wall is bright; use contrast when two or more segments still drop out."
+   },
+   {
+    "en": "Left ventricular ejection fraction. 52 percent or more in men, 54 percent or more in women. Source: ASE 2015 chamber quantification, section on left ventricular volumes and ejection fraction"
+   },
+   {
+    "en": "End diastolic volume indexed to body surface area. 34 to 74 ml per sq m in men, 29 to 61 ml per sq m in women. Source: ASE 2015 chamber quantification, section on left ventricular volumes"
+   },
+   {
+    "en": "End systolic volume indexed to body surface area. 11 to 31 ml per sq m in men, 8 to 24 ml per sq m in women. Source: ASE 2015 chamber quantification, section on left ventricular volumes"
+   },
+   {
+    "en": "Absolute end diastolic volume. 62 to 150 ml in men, 46 to 106 ml in women. Source: ASE 2015 chamber quantification, section on left ventricular volumes"
+   },
+   {
+    "en": "A regional wall motion defect after infarction makes a single plane misleading, so both planes and the wall map matter."
+   },
+   {
+    "en": "Irregular rhythm needs several beats averaged rather than one convenient beat."
+   },
+   {
+    "en": "A dyssynchronous ventricle changes shape through systole, so the smallest cavity frame is the anchor, not the ECG alone."
+   }
+  ],
+  "analogy": {
+   "en": "Apex free of dropout with the true tip on screen"
+  }
+ },
+ "spot": [
+  {
+   "en": "Apex free of dropout with the true tip on screen"
+  },
+  {
+   "en": "Mitral annulus corners as the two fixed trace anchors"
+  },
+  {
+   "en": "Open aortic valve marking systole on the timing strip"
+  },
+  {
+   "en": "Papillary muscles kept inside the traced cavity"
+  },
+  {
+   "en": "Long axis length matched between the four chamber and two chamber views"
+  },
+  {
+   "en": "Figure: Apical two chamber at matching length for the second trace of the biplane pair View tte_a2c"
+  }
+ ],
+ "todo": [
+  {
+   "en": "Acquire true apical four chamber and two chamber views without foreshortening"
+  },
+  {
+   "en": "Trace compact endocardium at the correct diastolic and systolic frames"
+  },
+  {
+   "en": "Compute and index volumes and ejection fraction"
+  },
+  {
+   "en": "Judge the result against sex specific reference ranges"
+  }
+ ],
+ "remember": {
+  "en": "Judge the result against sex specific reference ranges"
+ },
+ "check": [
+  {
+   "q": {
+    "en": "Which frame is end diastole for a volume trace?"
+   },
+   "o": [
+    {
+     "en": "The largest cavity, just after mitral closure at QRS onset"
+    },
+    {
+     "en": "The smallest cavity, just before aortic closure"
+    },
+    {
+     "en": "The frame where the aortic valve first opens"
+    },
+    {
+     "en": "Any mid systolic frame with a sharp border"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "End diastole is the frame of largest volume, just after mitral valve closure at the onset of the QRS."
+   }
+  },
+  {
+   "q": {
+    "en": "Where should the trace run?"
+   },
+   "o": [
+    {
+     "en": "Around the outside of the trabeculation"
+    },
+    {
+     "en": "Midway through the wall"
+    },
+    {
+     "en": "Along compact myocardium, leaving trabeculation inside"
+    },
+    {
+     "en": "Along the epicardium for extra margin"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "The blood tissue interface for volumes is the compact endocardium. Tracing around trabeculation shrinks the cavity and overreads ejection fraction."
+   }
+  },
+  {
+   "q": {
+    "en": "Which ejection fraction counts as abnormal?"
+   },
+   "o": [
+    {
+     "en": "Below 40 percent in men"
+    },
+    {
+     "en": "Below 45 percent in women"
+    },
+    {
+     "en": "Below 50 percent in either sex"
+    },
+    {
+     "en": "Below 52 percent in men and below 54 percent in women"
+    }
+   ],
+   "a": 3,
+   "why": {
+    "en": "The ASE 2015 lower reference limits are 52 percent in men and 54 percent in women."
+   }
+  },
+  {
+   "q": {
+    "en": "How do you check the two views agree before trusting the result?"
+   },
+   "o": [
+    {
+     "en": "Average the two volumes and judge the mean"
+    },
+    {
+     "en": "Check the two long axis lengths differ by under ten percent"
+    },
+    {
+     "en": "Pick the sharper border and discard the other"
+    },
+    {
+     "en": "Trace a third view and keep any two"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Matched long axis lengths prove neither view is foreshortened. A length mismatch above ten percent means reacquire, not average."
+   }
+  },
+  {
+   "q": {
+    "en": "Which indexed end diastolic volume is read correctly?"
+   },
+   "o": [
+    {
+     "en": "34 ml per sq m or less in men is normal"
+    },
+    {
+     "en": "74 ml per sq m in men is clearly dilated"
+    },
+    {
+     "en": "29 ml per sq m in women is dilated"
+    },
+    {
+     "en": "61 ml per sq m in women is normal"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "The male reference range is 34 to 74 and the female range 29 to 61 ml per sq m, so 61 in a woman sits at the upper limit while 74 in a man is the top of normal."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "measurements"
+ },
+ "sources": [
+  "ASE 2015 chamber quantification by Lang and colleagues, section on left ventricular volumes and ejection fraction, in own words"
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_a4c",
+ "objectives": [
+  "Acquire true apical four chamber and two chamber views without foreshortening",
+  "Trace compact endocardium at the correct diastolic and systolic frames",
+  "Compute and index volumes and ejection fraction",
+  "Judge the result against sex specific reference ranges"
+ ]
+}

@@ -1,0 +1,221 @@
+{
+ "id": "view_psax_apex",
+ "unit": "views",
+ "level": "mbbs",
+ "levels": [
+  "mbbs",
+  "resident",
+  "sonographer"
+ ],
+ "minutes": 5,
+ "title": {
+  "en": "Parasternal short axis at apical level"
+ },
+ "idea": {
+  "en": "Sweep to the true apex in short axis."
+ },
+ "see": {
+  "diagram": "diagrams/view_psax_apex.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Echo Lab render of the Parasternal short axis at apical level. Follow the sweep down to the small apical cavity."
+  },
+  "caption": {
+   "en": "Echo Lab render of the Parasternal short axis at apical level. Follow the sweep down to the small apical cavity."
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Cavity of left ventricle"
+    },
+    "note": {
+     "en": "Landmarks to confirm: Cavity of left ventricle"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Left ventricular apex"
+    },
+    "note": {
+     "en": "Left ventricular apex"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Foreshortened apex masquerading as the true apex. Correct it by keeping the swee"
+    },
+    "note": {
+     "en": "Common mistakes and how to correct them: Foreshortened apex masquerading as the true apex. Correct it by keeping the sweep going until the cavity is at its smallest and the walls converge."
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Papillary muscle in view meaning the cut sits too basal. Correct it by sweeping"
+    },
+    "note": {
+     "en": "Papillary muscle in view meaning the cut sits too basal. Correct it by sweeping further toward the apex until the muscle heads disappear."
+    }
+   }
+  ],
+  "view": "tte_psax_apex"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: The cavity is small and the walls converge on the apex, which should taper and thicken in systole until the cavity nearly disappears. No papillary muscle should be on screen at this level."
+   },
+   {
+    "en": "Landmarks to confirm: Do not accept the view until each of these is on screen."
+   },
+   {
+    "en": "Common mistakes and how to correct them: Each mistake below comes from the view catalogue with its correction."
+   },
+   {
+    "en": "Normal values: Left ventricular ejection fraction 55 percent or more is normal, below 30 percent is severely reduced."
+   },
+   {
+    "en": "Report wall motion with the 17 segment model of the left ventricle."
+   },
+   {
+    "en": "A wall that fails to thicken in systole is abnormal even if it still moves inward."
+   },
+   {
+    "en": "Pitfalls: Apical thrombus hides in a foreshortened apex, so sweep the true apex slowly with low gain. Trabeculation near the apex is normal texture, not thrombus; thrombus sits still while trabeculae move with the wall."
+   }
+  ],
+  "analogy": {
+   "en": "Landmarks to confirm: Cavity of left ventricle"
+  }
+ },
+ "spot": [
+  {
+   "en": "Landmarks to confirm: Cavity of left ventricle"
+  },
+  {
+   "en": "Left ventricular apex"
+  },
+  {
+   "en": "Common mistakes and how to correct them: Foreshortened apex masquerading as the true apex. Correct it by keeping the sweep going until the cavity is at its smallest and the walls converge."
+  },
+  {
+   "en": "Papillary muscle in view meaning the cut sits too basal. Correct it by sweeping further toward the apex until the muscle heads disappear."
+  },
+  {
+   "en": "Near field clutter from too much gain hiding the cavity. Correct it by lowering the gain until blood looks black and the wall edge stays bright."
+  }
+ ],
+ "todo": [
+  {
+   "en": "How to get it: Place the probe at left sternal edge or apex, fifth intercostal space, tilted apical."
+  },
+  {
+   "en": "Point the probe marker toward the left shoulder, about two o clock."
+  },
+  {
+   "en": "Keep sweeping toward the apex past the papillary muscles until muscle fills the screen. If the cavity stays wide, you are still too basal."
+  },
+  {
+   "en": "Freeze the image only when every listed landmark is on screen at once."
+  }
+ ],
+ "remember": {
+  "en": "Tell a basal cut from a true apical cut."
+ },
+ "check": [
+  {
+   "q": {
+    "en": "Papillary muscle is still on screen. Where is the plane?"
+   },
+   "o": [
+    {
+     "en": "At the true apex"
+    },
+    {
+     "en": "Too basal"
+    },
+    {
+     "en": "Too lateral"
+    },
+    {
+     "en": "Off axis"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Muscle heads belong to the mid cavity, so keep sweeping toward the apex."
+   }
+  },
+  {
+   "q": {
+    "en": "A still mass sits at the apex after an anterior infarct. What is likeliest?"
+   },
+   "o": [
+    {
+     "en": "Trabeculation"
+    },
+    {
+     "en": "Thrombus"
+    },
+    {
+     "en": "Vegetation"
+    },
+    {
+     "en": "Tumour"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "A still apical mass after anterior infarction is thrombus until proven otherwise."
+   }
+  },
+  {
+   "q": {
+    "en": "Why use low gain at the apex?"
+   },
+   "o": [
+    {
+     "en": "To see dropout better"
+    },
+    {
+     "en": "To keep blood black so thrombus stands out"
+    },
+    {
+     "en": "To raise frame rate"
+    },
+    {
+     "en": "To widen the sector"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Low gain keeps the cavity black, which is what reveals soft thrombus."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "views"
+ },
+ "sources": [
+  "ASE 2019 guideline for the complete transthoracic examination, parasternal short axis views section.",
+  "ASE 2015 chamber quantification guideline, left ventricular function section."
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_psax_apex",
+ "objectives": [
+  "Sweep to the true apex in short axis.",
+  "Check apical thickening and look for thrombus.",
+  "Tell a basal cut from a true apical cut."
+ ]
+}

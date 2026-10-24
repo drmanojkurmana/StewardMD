@@ -1,0 +1,276 @@
+{
+ "id": "dop_pw",
+ "unit": "doppler",
+ "level": "resident",
+ "levels": [
+  "resident",
+  "sonographer"
+ ],
+ "minutes": 8,
+ "title": {
+  "en": "Pulsed wave Doppler physics"
+ },
+ "idea": {
+  "en": "Explain range gating and the Nyquist limit in plain words"
+ },
+ "see": {
+  "diagram": "diagrams/dop_pw.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Apical five chamber with the sample volume just below the aortic cusps"
+  },
+  "caption": {
+   "en": "Apical five chamber with the sample volume just below the aortic cusps"
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Sample volume gate sitting inside the colour jet"
+    },
+    "note": {
+     "en": "Sample volume gate sitting inside the colour jet"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Beam direction arrow running along the flow, not across it"
+    },
+    "note": {
+     "en": "Beam direction arrow running along the flow, not across it"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Clean spectral envelope with a sharp peak and dark interior"
+    },
+    "note": {
+     "en": "Clean spectral envelope with a sharp peak and dark interior"
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "ECG timing strip marking systole and diastole under the trace"
+    },
+    "note": {
+     "en": "ECG timing strip marking systole and diastole under the trace"
+    }
+   }
+  ],
+  "view": "tte_a5c"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "Pulsed wave Doppler samples velocity at one chosen depth and nowhere else. The probe emits a pulse, waits for the echo from the sample volume, and the returning frequency shift gives the velocity at that exact spot. The price of this range gating is a speed limit: the Nyquist limit, half the pulse repetition frequency. Flow faster than the limit wraps around the baseline as aliasing. Mastering pulsed wave means placing a small sample volume exactly on the flow you want, keeping the beam parallel to it, and recognising aliasing as physics rather than disease."
+   },
+   {
+    "en": "Find the flow on colour first, then drop the sample volume gate exactly on the jet or orifice of interest."
+   },
+   {
+    "en": "Place the gate at the mitral leaflet tips for inflow, or just below the aortic cusps for outflow velocity."
+   },
+   {
+    "en": "Steer the beam as parallel to flow as possible and keep the angle under 20 degrees."
+   },
+   {
+    "en": "Set a small gate of a few millimetres so neighbouring flows do not contaminate the trace."
+   },
+   {
+    "en": "Scale the velocity range so the envelope fills two thirds of the display without wrapping."
+   },
+   {
+    "en": "Turn the wall filter low for venous and inflow signals and higher only to clear wall thump from fast jets."
+   },
+   {
+    "en": "Sample volume sitting off the true flow core. Fix: Reposition the gate step by step along the jet. A gate upstream records slower flow and a gate inside the orifice records noise."
+   },
+   {
+    "en": "Beam to flow angle above 20 degrees. Fix: Realign the window or accept and document the angle. Cosine error only ever underreads velocity."
+   },
+   {
+    "en": "Reading an aliased peak as the real velocity. Fix: Raise the scale, shift the baseline, or move to continuous wave. Never report a wrapped peak as the true velocity."
+   },
+   {
+    "en": "Faint trace from a tiny gate with high gain. Fix: Enlarge the gate slightly and lower the gain until the envelope is dense but the background is clean."
+   },
+   {
+    "en": "Nyquist limit. Half the pulse repetition frequency; flow above it aliases. Source: ASE 2019 transthoracic examination, section on spectral Doppler optimisation"
+   },
+   {
+    "en": "Reliable pulsed wave velocity range. Faithful below about 1.5 to 2 m per s; use continuous wave above this. Source: ASE 2019 transthoracic examination, section on pulsed wave Doppler and aliasing"
+   },
+   {
+    "en": "Angle error. Keep the beam to flow angle under 20 degrees; error grows with the cosine of the angle. Source: ASE 2019 transthoracic examination, section on Doppler alignment"
+   },
+   {
+    "en": "Mitral inflow recording site. Sample volume at the leaflet tips in the apical four chamber. Source: ASE 2019 transthoracic examination, section on mitral inflow Doppler"
+   },
+   {
+    "en": "High pulse repetition frequency extends the range but invites range ambiguity from a second gate, so check what you are hearing."
+   },
+   {
+    "en": "Annular tissue velocities need tissue Doppler presets, not blood flow settings, or the wall filter wipes them out."
+   },
+   {
+    "en": "Atrial fibrillation varies every beat, so average several envelopes rather than tracing one tall one."
+   }
+  ],
+  "analogy": {
+   "en": "Sample volume gate sitting inside the colour jet"
+  }
+ },
+ "spot": [
+  {
+   "en": "Sample volume gate sitting inside the colour jet"
+  },
+  {
+   "en": "Beam direction arrow running along the flow, not across it"
+  },
+  {
+   "en": "Clean spectral envelope with a sharp peak and dark interior"
+  },
+  {
+   "en": "ECG timing strip marking systole and diastole under the trace"
+  },
+  {
+   "en": "Baseline centred so forward flow fills most of the display"
+  }
+ ],
+ "todo": [
+  {
+   "en": "Explain range gating and the Nyquist limit in plain words"
+  },
+  {
+   "en": "Place the sample volume and align the beam for inflow and outflow"
+  },
+  {
+   "en": "Recognise aliasing and fix it at the controls"
+  },
+  {
+   "en": "Keep angle error small and documented"
+  }
+ ],
+ "remember": {
+  "en": "Keep angle error small and documented"
+ },
+ "check": [
+  {
+   "q": {
+    "en": "What does the pulsed wave sample volume give you?"
+   },
+   "o": [
+    {
+     "en": "It samples all depths at once"
+    },
+    {
+     "en": "It removes the Nyquist limit"
+    },
+    {
+     "en": "It measures pressure directly"
+    },
+    {
+     "en": "It samples velocity at one chosen depth only"
+    }
+   ],
+   "a": 3,
+   "why": {
+    "en": "Range gating returns velocity from the gate position alone, which is why gate placement decides the result."
+   }
+  },
+  {
+   "q": {
+    "en": "What is the Nyquist limit?"
+   },
+   "o": [
+    {
+     "en": "Equal to the pulse repetition frequency"
+    },
+    {
+     "en": "Half the pulse repetition frequency"
+    },
+    {
+     "en": "Twice the pulse repetition frequency"
+    },
+    {
+     "en": "Ten times the wall filter"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "The sampling limit is half the pulse repetition frequency. Shifts above it wrap around as aliasing."
+   }
+  },
+  {
+   "q": {
+    "en": "The aortic jet wraps over the baseline on pulsed wave. What do you do?"
+   },
+   "o": [
+    {
+     "en": "Raise the wall filter to maximum"
+    },
+    {
+     "en": "Shrink the gate to minimum"
+    },
+    {
+     "en": "Raise the scale, shift the baseline, or switch to continuous wave"
+    },
+    {
+     "en": "Report the wrapped peak as measured"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "Aliasing means the velocity exceeds the Nyquist limit, so rescale, shift the baseline, or move to continuous wave for the peak."
+   }
+  },
+  {
+   "q": {
+    "en": "What beam to flow angle keeps cosine error small?"
+   },
+   "o": [
+    {
+     "en": "Under 20 degrees"
+    },
+    {
+     "en": "Under 45 degrees"
+    },
+    {
+     "en": "Under 60 degrees"
+    },
+    {
+     "en": "Angle does not matter"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "Below 20 degrees the cosine error stays small. Larger angles underread velocity, and no correction is trusted above 20 degrees."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "doppler"
+ },
+ "sources": [
+  "ASE 2019 transthoracic examination by Mitchell and colleagues, sections on spectral Doppler optimisation and aliasing, in own words"
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_a5c",
+ "objectives": [
+  "Explain range gating and the Nyquist limit in plain words",
+  "Place the sample volume and align the beam for inflow and outflow",
+  "Recognise aliasing and fix it at the controls",
+  "Keep angle error small and documented"
+ ]
+}

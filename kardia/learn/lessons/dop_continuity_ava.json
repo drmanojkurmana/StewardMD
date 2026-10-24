@@ -1,0 +1,279 @@
+{
+ "id": "dop_continuity_ava",
+ "unit": "doppler",
+ "level": "resident",
+ "levels": [
+  "fellow",
+  "sonographer"
+ ],
+ "minutes": 10,
+ "title": {
+  "en": "Continuity equation and aortic valve area"
+ },
+ "idea": {
+  "en": "State the continuity equation and the equal stroke volume logic behind it"
+ },
+ "see": {
+  "diagram": "diagrams/dop_continuity_ava.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Zoomed parasternal long axis for the outflow diameter that the maths squares"
+  },
+  "caption": {
+   "en": "Zoomed parasternal long axis for the outflow diameter that the maths squares"
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Zoomed outflow tract with the diameter line at the cusp insertion"
+    },
+    "note": {
+     "en": "Zoomed outflow tract with the diameter line at the cusp insertion"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Pulsed wave sample volume sitting exactly at the diameter site"
+    },
+    "note": {
+     "en": "Pulsed wave sample volume sitting exactly at the diameter site"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Dense aortic envelope with the highest peak among windows"
+    },
+    "note": {
+     "en": "Dense aortic envelope with the highest peak among windows"
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Matched ECG timing proving the same haemodynamic state"
+    },
+    "note": {
+     "en": "Matched ECG timing proving the same haemodynamic state"
+    }
+   }
+  ],
+  "view": "tte_plax"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "The continuity equation finds the aortic valve area without seeing the orifice. Whatever volume crosses the outflow tract in one beat must cross the valve in the same beat, so valve area equals outflow tract area times outflow velocity time integral divided by aortic velocity time integral. The outflow tract diameter is squared in the maths, which makes it the highest leverage measurement in echocardiography: a 2 mm error moves the area by a quarter or more. In rheumatic aortic stenosis, common in India alongside mitral disease, continuity separates a truly tight valve from a failing ventricle that merely opens it poorly."
+   },
+   {
+    "en": "Measure the outflow tract diameter inner edge to inner edge in mid systole on a zoomed parasternal long axis."
+   },
+   {
+    "en": "Record pulsed wave Doppler just below the cusps with the sample volume at the diameter site and trace the velocity time integral."
+   },
+   {
+    "en": "Record the aortic jet by continuous wave from the window with the highest envelope and trace its velocity time integral."
+   },
+   {
+    "en": "Compute outflow area as 3.14 times half the diameter squared, then multiply by outflow integral and divide by aortic integral."
+   },
+   {
+    "en": "Index the area to body surface area and compute the dimensionless ratio of outflow to aortic velocity."
+   },
+   {
+    "en": "Read area, indexed area and ratio together, and remeasure the diameter when they disagree."
+   },
+   {
+    "en": "Careless outflow diameter feeding squared error. Fix: Zoom, optimise the blood tissue interface and remeasure. Because the diameter is squared, small calliper slips dominate the result."
+   },
+   {
+    "en": "Velocity recorded far from the diameter site. Fix: The sample volume must sit where the diameter was measured. A deeper gate records faster flow and shrinks the computed area."
+   },
+   {
+    "en": "Calling low gradient low severity without computing area. Fix: Low stroke volume drops both integrals and the gradient while the area stays tight, so compute the area rather than trusting the gradient."
+   },
+   {
+    "en": "Ignoring coexistent regurgitation when reading the area. Fix: In combined stenosis and regurgitation the forward flow rises, so read the area with the regurgitant load in mind."
+   },
+   {
+    "en": "Continuity equation. Valve area equals outflow area times outflow integral divided by aortic integral. Source: ASE and EACVI 2017 stenosis, section on the continuity equation"
+   },
+   {
+    "en": "Severe aortic stenosis by area. Valve area below 1.0 sq cm. Source: ASE and EACVI 2017 stenosis, section on severity grading"
+   },
+   {
+    "en": "Severe stenosis indexed. Indexed area below 0.6 cm per sq m. Source: ASE and EACVI 2017 stenosis, section on indexed valve area"
+   },
+   {
+    "en": "Dimensionless velocity ratio. Outflow to aortic velocity ratio below 0.25 marks severe obstruction. Source: ASE and EACVI 2017 stenosis, section on Doppler ratios"
+   },
+   {
+    "en": "A sigmoid septum in older patients narrows the tract and accelerates flow, faking a small area unless the shape is recognised."
+   },
+   {
+    "en": "Elliptical outflow tracts make two dimensional area an underread, so a large indexed stroke volume with a tiny area deserves a second method."
+   },
+   {
+    "en": "Post extrasystolic beats carry extra stroke volume, so trace steady state beats only."
+   }
+  ],
+  "analogy": {
+   "en": "Zoomed outflow tract with the diameter line at the cusp insertion"
+  }
+ },
+ "spot": [
+  {
+   "en": "Zoomed outflow tract with the diameter line at the cusp insertion"
+  },
+  {
+   "en": "Pulsed wave sample volume sitting exactly at the diameter site"
+  },
+  {
+   "en": "Dense aortic envelope with the highest peak among windows"
+  },
+  {
+   "en": "Matched ECG timing proving the same haemodynamic state"
+  },
+  {
+   "en": "Dimensionless ratio recorded beside the absolute area"
+  },
+  {
+   "en": "Figure: Apical five chamber for both velocity integrals in one haemodynamic state View tte_a5c"
+  }
+ ],
+ "todo": [
+  {
+   "en": "State the continuity equation and the equal stroke volume logic behind it"
+  },
+  {
+   "en": "Measure diameter and both velocity integrals at matched sites"
+  },
+  {
+   "en": "Compute, index and ratio check the valve area"
+  },
+  {
+   "en": "Resolve low gradient severe stenosis with the full grading set"
+  }
+ ],
+ "remember": {
+  "en": "Resolve low gradient severe stenosis with the full grading set"
+ },
+ "check": [
+  {
+   "q": {
+    "en": "How is valve area computed by continuity?"
+   },
+   "o": [
+    {
+     "en": "Add them and divide by two"
+    },
+    {
+     "en": "Outflow area times outflow integral divided by aortic integral"
+    },
+    {
+     "en": "Aortic integral minus outflow integral"
+    },
+    {
+     "en": "Peak velocity squared times four"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Equal stroke volumes through tract and valve give area as outflow area times outflow integral over aortic integral."
+   }
+  },
+  {
+   "q": {
+    "en": "Which valve area marks severe aortic stenosis?"
+   },
+   "o": [
+    {
+     "en": "Below 2.0 sq cm"
+    },
+    {
+     "en": "Below 1.5 sq cm"
+    },
+    {
+     "en": "Below 1.2 sq cm"
+    },
+    {
+     "en": "Below 1.0 sq cm"
+    }
+   ],
+   "a": 3,
+   "why": {
+    "en": "The ASE and EACVI 2017 scheme sets severe below 1.0 sq cm, with indexed area below 0.6 cm per sq m."
+   }
+  },
+  {
+   "q": {
+    "en": "Why does the outflow diameter dominate continuity error?"
+   },
+   "o": [
+    {
+     "en": "It is squared, so small errors grow large"
+    },
+    {
+     "en": "It cancels out of the equation"
+    },
+    {
+     "en": "It only affects the indexed value"
+    },
+    {
+     "en": "It is the least important term"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "Tract area uses the diameter squared, so a 2 mm slip moves the computed valve area by a quarter or more."
+   }
+  },
+  {
+   "q": {
+    "en": "Which dimensionless ratio marks severe obstruction?"
+   },
+   "o": [
+    {
+     "en": "Above 0.50"
+    },
+    {
+     "en": "0.35 to 0.50"
+    },
+    {
+     "en": "Below 0.25"
+    },
+    {
+     "en": "Exactly 1.0"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "An outflow to aortic velocity ratio below 0.25 tracks severe stenosis and is less flow dependent than the gradient."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "doppler"
+ },
+ "sources": [
+  "ASE and EACVI 2017 aortic stenosis by Baumgartner and colleagues, sections on the continuity equation, indexed area and Doppler ratios, in own words"
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_plax",
+ "objectives": [
+  "State the continuity equation and the equal stroke volume logic behind it",
+  "Measure diameter and both velocity integrals at matched sites",
+  "Compute, index and ratio check the valve area",
+  "Resolve low gradient severe stenosis with the full grading set"
+ ]
+}

@@ -1,0 +1,279 @@
+{
+ "id": "view_right_parasternal",
+ "unit": "views",
+ "level": "resident",
+ "levels": [
+  "fellow",
+  "sonographer",
+  "resident"
+ ],
+ "minutes": 6,
+ "title": {
+  "en": "Right parasternal ascending aorta"
+ },
+ "idea": {
+  "en": "Open the ascending aorta from the right sternal edge."
+ },
+ "see": {
+  "diagram": "diagrams/view_right_parasternal.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Echo Lab render of the Right parasternal ascending aorta. Roll the patient right side down and lengthen the ascending aorta."
+  },
+  "caption": {
+   "en": "Echo Lab render of the Right parasternal ascending aorta. Roll the patient right side down and lengthen the ascending aorta."
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Ascending aorta"
+    },
+    "note": {
+     "en": "Landmarks to confirm: Ascending aorta"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Aortic root"
+    },
+    "note": {
+     "en": "Aortic root"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Left posterior cusp of aortic valve"
+    },
+    "note": {
+     "en": "Left posterior cusp of aortic valve"
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Left ventricular outflow tract"
+    },
+    "note": {
+     "en": "Left ventricular outflow tract"
+    }
+   }
+  ],
+  "view": "tte_right_parasternal_aorta"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: The ascending aorta runs long with the aortic root and outflow tract below. The cusps open and close in line with the vessel, and anterior cusp motion reads clearly."
+   },
+   {
+    "en": "Landmarks to confirm: Do not accept the view until each of these is on screen."
+   },
+   {
+    "en": "Common mistakes and how to correct them: Each mistake below comes from the view catalogue with its correction."
+   },
+   {
+    "en": "Stenosis thresholds and continuity: Peak aortic velocity above 4 m per s means severe stenosis."
+   },
+   {
+    "en": "Mean transaortic gradient above 40 mmHg means severe stenosis."
+   },
+   {
+    "en": "Aortic valve area below 1.0 sq cm means severe stenosis."
+   },
+   {
+    "en": "Valve area by continuity equals outflow area times outflow VTI divided by aortic VTI."
+   },
+   {
+    "en": "Measure the ascending aorta at end diastole with the leading edge to leading edge method."
+   },
+   {
+    "en": "Pitfalls: Pressure recovery inflates gradients in a small root, so index the valve area and note root size before sending a moderate gradient for surgery. A high gradient with low stroke volume still means severe stenosis when the valve area is below 1.0 sq cm."
+   }
+  ],
+  "analogy": {
+   "en": "Landmarks to confirm: Ascending aorta"
+  }
+ },
+ "spot": [
+  {
+   "en": "Landmarks to confirm: Ascending aorta"
+  },
+  {
+   "en": "Aortic root"
+  },
+  {
+   "en": "Left posterior cusp of aortic valve"
+  },
+  {
+   "en": "Left ventricular outflow tract"
+  },
+  {
+   "en": "Common mistakes and how to correct them: Rib shadow cutting the valve in systole. Correct it by sliding half a space and timing the record for held breath out."
+  },
+  {
+   "en": "Off axis jet that understates peak velocity in stenosis. Correct it by fanning slowly and keeping the highest clean envelope found."
+  },
+  {
+   "en": "Right lung encroaching with deep inspiration. Correct it by recording at held breath out when the lung withdraws."
+  }
+ ],
+ "todo": [
+  {
+   "en": "How to get it: Place the probe at right sternal edge, second or third intercostal space, patient on right side."
+  },
+  {
+   "en": "Point the probe marker toward the head, about twelve o clock."
+  },
+  {
+   "en": "Nurse the patient onto the right side and press in the second or third right space. This window often gives the peak velocity that decides stenosis grading."
+  },
+  {
+   "en": "Freeze the image only when every listed landmark is on screen at once."
+  }
+ ],
+ "remember": {
+  "en": "Measure the ascending aorta for surveillance."
+ },
+ "check": [
+  {
+   "q": {
+    "en": "Peak velocity is 4.2 m per s from the right parasternal window only. What grade?"
+   },
+   "o": [
+    {
+     "en": "Mild"
+    },
+    {
+     "en": "Moderate"
+    },
+    {
+     "en": "Severe"
+    },
+    {
+     "en": "Unmeasurable"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "Above 4 m per s from any clean envelope means severe stenosis."
+   }
+  },
+  {
+   "q": {
+    "en": "Root is 28 mm with a mean gradient of 35 mmHg and area 1.1 sq cm. What caution applies?"
+   },
+   "o": [
+    {
+     "en": "None"
+    },
+    {
+     "en": "Pressure recovery in a small root may inflate the gradient"
+    },
+    {
+     "en": "The valve is normal"
+    },
+    {
+     "en": "Repeat in a year"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Small roots recover pressure downstream, so the gradient overstates severity."
+   }
+  },
+  {
+   "q": {
+    "en": "How is continuity valve area calculated?"
+   },
+   "o": [
+    {
+     "en": "Outflow area times outflow VTI divided by aortic VTI"
+    },
+    {
+     "en": "Gradient divided by velocity"
+    },
+    {
+     "en": "Area times gradient"
+    },
+    {
+     "en": "VTI minus area"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "Continuity divides outflow stroke volume by the aortic jet VTI."
+   }
+  },
+  {
+   "q": {
+    "en": "Gradient is high but stroke volume is low and area is 0.8 sq cm. What grade?"
+   },
+   "o": [
+    {
+     "en": "Moderate"
+    },
+    {
+     "en": "Severe low flow stenosis"
+    },
+    {
+     "en": "Pseudo severe"
+    },
+    {
+     "en": "Mild"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Low flow severe stenosis pairs a small area with a deceptively modest gradient."
+   }
+  },
+  {
+   "q": {
+    "en": "Which patient position suits this window?"
+   },
+   "o": [
+    {
+     "en": "Left lateral"
+    },
+    {
+     "en": "Right side down with the right chest up"
+    },
+    {
+     "en": "Flat supine"
+    },
+    {
+     "en": "Sitting upright"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Right side down brings the ascending aorta to the chest wall."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "views"
+ },
+ "sources": [
+  "BSE minimum dataset for a standard adult transthoracic study, supplementary right parasternal views section.",
+  "ASE and EACVI 2017 valvular stenosis guideline, aortic stenosis section."
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_right_parasternal_aorta",
+ "objectives": [
+  "Open the ascending aorta from the right sternal edge.",
+  "Catch the highest aortic stenosis jet missed from the apex.",
+  "Measure the ascending aorta for surveillance."
+ ]
+}

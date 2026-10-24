@@ -1,0 +1,224 @@
+{
+ "id": "view_pa_bifurcation",
+ "unit": "views",
+ "level": "resident",
+ "levels": [
+  "resident",
+  "fellow",
+  "sonographer"
+ ],
+ "minutes": 5,
+ "title": {
+  "en": "Pulmonary artery bifurcation"
+ },
+ "idea": {
+  "en": "Tilt cranially to open the pulmonary trunk division."
+ },
+ "see": {
+  "diagram": "diagrams/view_pa_bifurcation.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Echo Lab render of the Pulmonary artery bifurcation. Tilt toward the head until the trunk divides on the simulator."
+  },
+  "caption": {
+   "en": "Echo Lab render of the Pulmonary artery bifurcation. Tilt toward the head until the trunk divides on the simulator."
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Pulmonary trunk"
+    },
+    "note": {
+     "en": "Landmarks to confirm: Pulmonary trunk"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Left pulmonary artery"
+    },
+    "note": {
+     "en": "Left pulmonary artery"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Right pulmonary artery"
+    },
+    "note": {
+     "en": "Right pulmonary artery"
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Mistaking the aortic arch branches for the pulmonary arteries. Correct it by fol"
+    },
+    "note": {
+     "en": "Common mistakes and how to correct them: Mistaking the aortic arch branches for the pulmonary arteries. Correct it by following each branch back to the trunk, since arch branches never rejoin."
+    }
+   }
+  ],
+  "view": "tte_pa_bifurcation"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: The pulmonary trunk rises and splits into the right artery running under the aortic arch and the left artery climbing toward the lung. The bifurcation looks like an inverted Y on a good cranial tilt."
+   },
+   {
+    "en": "Landmarks to confirm: Do not accept the view until each of these is on screen."
+   },
+   {
+    "en": "Common mistakes and how to correct them: Each mistake below comes from the view catalogue with its correction."
+   },
+   {
+    "en": "Normal values: Tricuspid regurgitation peak velocity 2.8 m per s or less is normal."
+   },
+   {
+    "en": "Ductal flow is continuous through systole and diastole in a patent ductus."
+   },
+   {
+    "en": "Report the narrowest ductal diameter in millimetres with the gain set low."
+   },
+   {
+    "en": "Pitfalls: Lung air wipes out this view in adults with barrel chests, so try held breath out before giving up. A mirror artefact can double the trunk; a second vessel that moves exactly with the first is a mirror, not anatomy."
+   }
+  ],
+  "analogy": {
+   "en": "Landmarks to confirm: Pulmonary trunk"
+  }
+ },
+ "spot": [
+  {
+   "en": "Landmarks to confirm: Pulmonary trunk"
+  },
+  {
+   "en": "Left pulmonary artery"
+  },
+  {
+   "en": "Right pulmonary artery"
+  },
+  {
+   "en": "Common mistakes and how to correct them: Mistaking the aortic arch branches for the pulmonary arteries. Correct it by following each branch back to the trunk, since arch branches never rejoin."
+  },
+  {
+   "en": "Oblique cut that fuses the two branches into one vessel. Correct it by tilting cranially until the division point is a sharp point rather than a blur."
+  },
+  {
+   "en": "Too basal a cut that loses the bifurcation. Correct it by sliding up one space and tilting toward the head again."
+  }
+ ],
+ "todo": [
+  {
+   "en": "How to get it: Place the probe at left sternal edge, second intercostal space, cranial tilt."
+  },
+  {
+   "en": "Point the probe marker toward the left shoulder, about one o clock."
+  },
+  {
+   "en": "Sit high in the second space and tilt toward the head until the single trunk divides. In small children this is the window for ductal flow."
+  },
+  {
+   "en": "Freeze the image only when every listed landmark is on screen at once."
+  }
+ ],
+ "remember": {
+  "en": "Check the ductal region in children."
+ },
+ "check": [
+  {
+   "q": {
+    "en": "Which tilt opens the bifurcation?"
+   },
+   "o": [
+    {
+     "en": "Caudal toward the feet"
+    },
+    {
+     "en": "Cranial toward the head"
+    },
+    {
+     "en": "Lateral toward the arm"
+    },
+    {
+     "en": "No tilt, just pressure"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Cranial tilt in a high space opens the division into both branches."
+   }
+  },
+  {
+   "q": {
+    "en": "Colour bridges between trunk and aorta through the whole cycle in a neonate. What is this?"
+   },
+   "o": [
+    {
+     "en": "Normal variant"
+    },
+    {
+     "en": "Patent ductus"
+    },
+    {
+     "en": "Aortopulmonary window"
+    },
+    {
+     "en": "Coronary fistula"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Continuous flow at the ductal site means a patent ductus in a neonate."
+   }
+  },
+  {
+   "q": {
+    "en": "A second trunk moves exactly with the first. What is likeliest?"
+   },
+   "o": [
+    {
+     "en": "Double arch"
+    },
+    {
+     "en": "Mirror artefact"
+    },
+    {
+     "en": "Dissection"
+    },
+    {
+     "en": "Thrombus"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Exact synchronous motion marks a mirror artefact, not a second vessel."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "views"
+ },
+ "sources": [
+  "ASE 2019 guideline for the complete transthoracic examination, great vessel views section.",
+  "ASE and EACVI 2016 diastolic function guideline, pulmonary pressure estimation section."
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_pa_bifurcation",
+ "objectives": [
+  "Tilt cranially to open the pulmonary trunk division.",
+  "Name the left and right pulmonary arteries.",
+  "Check the ductal region in children."
+ ]
+}

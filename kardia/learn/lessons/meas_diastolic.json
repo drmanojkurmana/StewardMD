@@ -1,0 +1,282 @@
+{
+ "id": "meas_diastolic",
+ "unit": "measurements",
+ "level": "resident",
+ "levels": [
+  "fellow",
+  "resident"
+ ],
+ "minutes": 12,
+ "title": {
+  "en": "Diastolic function and filling pressures"
+ },
+ "idea": {
+  "en": "Record inflow, annular velocity, tricuspid velocity and atrial volume correctly"
+ },
+ "see": {
+  "diagram": "diagrams/meas_diastolic.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Apical four chamber inflow and annular traces for the diastolic vote"
+  },
+  "caption": {
+   "en": "Apical four chamber inflow and annular traces for the diastolic vote"
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Mitral inflow envelope with clear E and A peaks at the leaflet tips"
+    },
+    "note": {
+     "en": "Mitral inflow envelope with clear E and A peaks at the leaflet tips"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Tissue Doppler annular trace with sharp systolic and early diastolic waves"
+    },
+    "note": {
+     "en": "Tissue Doppler annular trace with sharp systolic and early diastolic waves"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Tricuspid envelope dense enough to trust its peak"
+    },
+    "note": {
+     "en": "Tricuspid envelope dense enough to trust its peak"
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Indexed atrial volume measured by biplane tracing"
+    },
+    "note": {
+     "en": "Indexed atrial volume measured by biplane tracing"
+    }
+   }
+  ],
+  "view": "tte_a4c"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "Diastolic function grades how the left ventricle fills, which is how it reveals raised filling pressure before symptoms appear. No single number does the job, so the guideline algorithm combines mitral inflow, annular tissue velocity, tricuspid velocity and left atrial volume into a vote. The path splits early: a normal ejection fraction uses one branch and a reduced ejection fraction or known myocardial disease uses another. Learn the cut points cold, because they recur in heart failure, hypertension and valve clinics. In mitral stenosis, which is common in India, the algorithm does not apply: the tight valve itself shapes inflow and tissue velocities, so grade the valve, not diastole."
+   },
+   {
+    "en": "Record mitral inflow at the leaflet tips in the apical four chamber: peak E, peak A, E to A ratio and deceleration time."
+   },
+   {
+    "en": "Record septal and lateral annular e prime by tissue Doppler and compute the average E over e prime ratio."
+   },
+   {
+    "en": "Record the peak tricuspid regurgitant velocity by continuous wave from every window."
+   },
+   {
+    "en": "Measure the indexed left atrial volume by the biplane method of its own lesson."
+   },
+   {
+    "en": "With normal ejection fraction, count abnormal markers among septal e prime, lateral e prime, average E over e prime, tricuspid velocity and atrial volume."
+   },
+   {
+    "en": "With reduced ejection fraction, start from E to A ratio and peak E, then use E over e prime, tricuspid velocity and atrial volume to separate normal pressure from raised pressure grades."
+   },
+   {
+    "en": "Trusting e prime with a calcified annulus. Fix: Annular calcification freezes the ring and drops e prime without true diastolic disease, so inspect the annulus before trusting the vote."
+   },
+   {
+    "en": "Grading fused inflow during tachycardia. Fix: Sinus tachycardia fuses E and A into one peak, so slow the rate or wait before grading."
+   },
+   {
+    "en": "Accepting a faint tricuspid envelope. Fix: A faint partial tricuspid envelope underreads velocity and hides pulmonary hypertension, so optimise gain and try all windows."
+   },
+   {
+    "en": "Applying the algorithm in mitral stenosis. Fix: In mitral stenosis the valve drives inflow and annular motion, so the diastolic algorithm is invalid there."
+   },
+   {
+    "en": "Septal e prime abnormal. Below 7 cm per s. Source: ASE and EACVI 2016 diastolic function by Nagueh and colleagues, section on annular velocities"
+   },
+   {
+    "en": "Lateral e prime abnormal. Below 10 cm per s. Source: ASE and EACVI 2016 diastolic function by Nagueh and colleagues, section on annular velocities"
+   },
+   {
+    "en": "Average E over e prime abnormal. Above 14. Source: ASE and EACVI 2016 diastolic function by Nagueh and colleagues, section on filling pressures"
+   },
+   {
+    "en": "Tricuspid velocity abnormal. Above 2.8 m per s. Source: ASE and EACVI 2016 diastolic function by Nagueh and colleagues, section on pulmonary pressures"
+   },
+   {
+    "en": "Left atrial volume abnormal. Above 34 ml per sq m. Source: ASE and EACVI 2016 diastolic function by Nagueh and colleagues, section on left atrial volume"
+   },
+   {
+    "en": "Reduced ejection fraction first split. E to A 0.8 or less with E 50 cm per s or less means normal pressure; E to A 2 or more means raised pressure. Source: ASE and EACVI 2016 diastolic function by Nagueh and colleagues, section on grading with systolic dysfunction"
+   },
+   {
+    "en": "Constrictive pericarditis flips the usual e prime pattern with a brisk septal annulus, so check the septal to lateral relationship."
+   },
+   {
+    "en": "Positive pressure ventilation and loading shifts move E over e prime within hours, so compare studies at matched states."
+   },
+   {
+    "en": "Dyssynchrony and pacing distort annular velocities, so grade with extra caution there."
+   }
+  ],
+  "analogy": {
+   "en": "Mitral inflow envelope with clear E and A peaks at the leaflet tips"
+  }
+ },
+ "spot": [
+  {
+   "en": "Mitral inflow envelope with clear E and A peaks at the leaflet tips"
+  },
+  {
+   "en": "Tissue Doppler annular trace with sharp systolic and early diastolic waves"
+  },
+  {
+   "en": "Tricuspid envelope dense enough to trust its peak"
+  },
+  {
+   "en": "Indexed atrial volume measured by biplane tracing"
+  },
+  {
+   "en": "Ejection fraction known before choosing the algorithm branch"
+  }
+ ],
+ "todo": [
+  {
+   "en": "Record inflow, annular velocity, tricuspid velocity and atrial volume correctly"
+  },
+  {
+   "en": "Apply the four marker vote with normal ejection fraction"
+  },
+  {
+   "en": "Grade filling pressure with reduced ejection fraction from E to A outward"
+  },
+  {
+   "en": "Name the traps that invalidate the algorithm"
+  }
+ ],
+ "remember": {
+  "en": "Name the traps that invalidate the algorithm"
+ },
+ "check": [
+  {
+   "q": {
+    "en": "Which septal e prime is abnormal?"
+   },
+   "o": [
+    {
+     "en": "Below 5 cm per s"
+    },
+    {
+     "en": "Below 7 cm per s"
+    },
+    {
+     "en": "Below 12 cm per s"
+    },
+    {
+     "en": "Below 15 cm per s"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "The ASE and EACVI 2016 cut point for abnormal septal annular velocity is below 7 cm per s."
+   }
+  },
+  {
+   "q": {
+    "en": "Which average E over e prime suggests raised filling pressure?"
+   },
+   "o": [
+    {
+     "en": "Above 8"
+    },
+    {
+     "en": "Above 10"
+    },
+    {
+     "en": "Above 14"
+    },
+    {
+     "en": "Above 20"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "An average E over e prime above 14 is one of the four markers of diastolic dysfunction and raised left atrial pressure."
+   }
+  },
+  {
+   "q": {
+    "en": "In reduced ejection fraction, which pattern means normal filling pressure?"
+   },
+   "o": [
+    {
+     "en": "E to A 0.8 or less with E 50 cm per s or less"
+    },
+    {
+     "en": "E to A above 2.0"
+    },
+    {
+     "en": "Any E over e prime above 14"
+    },
+    {
+     "en": "Atrial volume above 34 alone"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "An E to A ratio of 0.8 or less with peak E 50 cm per s or less marks grade one physiology with normal pressure at rest."
+   }
+  },
+  {
+   "q": {
+    "en": "Why does mitral stenosis block the diastolic algorithm?"
+   },
+   "o": [
+    {
+     "en": "Grade diastolic dysfunction as usual"
+    },
+    {
+     "en": "Use only the atrial volume"
+    },
+    {
+     "en": "Use only the tricuspid velocity"
+    },
+    {
+     "en": "Do not apply the algorithm; grade the valve instead"
+    }
+   ],
+   "a": 3,
+   "why": {
+    "en": "The stenotic valve itself shapes inflow velocities and annular motion, so the cut points lose meaning and the valve severity grading takes over."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "measurements"
+ },
+ "sources": [
+  "ASE and EACVI 2016 diastolic function by Nagueh and colleagues, sections on annular velocities, filling pressures and grading, in own words"
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_a4c",
+ "objectives": [
+  "Record inflow, annular velocity, tricuspid velocity and atrial volume correctly",
+  "Apply the four marker vote with normal ejection fraction",
+  "Grade filling pressure with reduced ejection fraction from E to A outward",
+  "Name the traps that invalidate the algorithm"
+ ]
+}

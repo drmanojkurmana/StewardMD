@@ -1,0 +1,254 @@
+{
+ "id": "view_rvot_long",
+ "unit": "views",
+ "level": "resident",
+ "levels": [
+  "resident",
+  "fellow",
+  "sonographer"
+ ],
+ "minutes": 5,
+ "title": {
+  "en": "Right ventricular outflow long axis"
+ },
+ "idea": {
+  "en": "Rotate from the long axis to open the pulmonary valve."
+ },
+ "see": {
+  "diagram": "diagrams/view_rvot_long.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Echo Lab render of the Right ventricular outflow long axis. Rotate until the pulmonary trunk lengthens on the simulator."
+  },
+  "caption": {
+   "en": "Echo Lab render of the Right ventricular outflow long axis. Rotate until the pulmonary trunk lengthens on the simulator."
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Cavity of right ventricle"
+    },
+    "note": {
+     "en": "Landmarks to confirm: Cavity of right ventricle"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Pulmonary trunk"
+    },
+    "note": {
+     "en": "Pulmonary trunk"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Left anterior cusp of pulmonary valve"
+    },
+    "note": {
+     "en": "Left anterior cusp of pulmonary valve"
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Posterior cusp of pulmonary valve"
+    },
+    "note": {
+     "en": "Posterior cusp of pulmonary valve"
+    }
+   }
+  ],
+  "view": "tte_rvot_long"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: The right ventricular outflow tract funnels upward into the thin pulmonary cusps and the pulmonary trunk. The aortic root sits behind, cut in short axis, as a reminder of how anterior this plane is."
+   },
+   {
+    "en": "Landmarks to confirm: Do not accept the view until each of these is on screen."
+   },
+   {
+    "en": "Common mistakes and how to correct them: Each mistake below comes from the view catalogue with its correction."
+   },
+   {
+    "en": "Normal values: Pressure drop in mmHg equals 4 times the peak velocity in m per s squared."
+   },
+   {
+    "en": "Tricuspid regurgitation peak velocity 2.8 m per s or less is normal."
+   },
+   {
+    "en": "Report outflow acceleration time with the heart rate, since it shortens as pulmonary pressure rises."
+   },
+   {
+    "en": "Pitfalls: The pulmonary valve is thin and fast, so freeze in systole with a high frame rate before calling stenosis. trivial pulmonary regurgitation is common and normal; only a dense wide jet with a steep slope matters."
+   }
+  ],
+  "analogy": {
+   "en": "Landmarks to confirm: Cavity of right ventricle"
+  }
+ },
+ "spot": [
+  {
+   "en": "Landmarks to confirm: Cavity of right ventricle"
+  },
+  {
+   "en": "Pulmonary trunk"
+  },
+  {
+   "en": "Left anterior cusp of pulmonary valve"
+  },
+  {
+   "en": "Posterior cusp of pulmonary valve"
+  },
+  {
+   "en": "Right ventricular outflow tract"
+  },
+  {
+   "en": "Common mistakes and how to correct them: Cutting through the aortic root instead of the pulmonary valve. Correct it by rotating further anticlockwise until the round aorta gives way to the tubular pulmonary trunk."
+  },
+  {
+   "en": "Losing the pulmonary trunk bifurcation by rotating too far. Correct it by rotating back clockwise a touch until the trunk lengthens without dividing."
+  },
+  {
+   "en": "Rib shadow wiping out the valve in systole. Correct it by sliding one space down and asking for a held breath out."
+  }
+ ],
+ "todo": [
+  {
+   "en": "How to get it: Place the probe at left sternal edge, second or third intercostal space, rotated anticlockwise from long axis."
+  },
+  {
+   "en": "Point the probe marker toward the left shoulder, about one o clock."
+  },
+  {
+   "en": "Rotate anticlockwise from the long axis in the second or third space until the aorta disappears and the pulmonary trunk lengthens. If the aorta stays on screen, keep rotating."
+  },
+  {
+   "en": "Freeze the image only when every listed landmark is on screen at once."
+  }
+ ],
+ "remember": {
+  "en": "Set colour across the pulmonary valve for regurgitation and stenosis."
+ },
+ "check": [
+  {
+   "q": {
+    "en": "Which rotation from the long axis opens the outflow view?"
+   },
+   "o": [
+    {
+     "en": "Clockwise toward the apex"
+    },
+    {
+     "en": "Anticlockwise in a high space"
+    },
+    {
+     "en": "Ninety degrees at the apex"
+    },
+    {
+     "en": "No rotation, just tilt"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Anticlockwise rotation in the second or third space opens the pulmonary valve."
+   }
+  },
+  {
+   "q": {
+    "en": "Pulmonary velocity is 1 m per s. What is the peak pressure drop?"
+   },
+   "o": [
+    {
+     "en": "2 mmHg"
+    },
+    {
+     "en": "4 mmHg"
+    },
+    {
+     "en": "8 mmHg"
+    },
+    {
+     "en": "16 mmHg"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Four times one squared is 4 mmHg, a normal low gradient."
+   }
+  },
+  {
+   "q": {
+    "en": "A thin diastolic jet fills one third of the outflow. What is this?"
+   },
+   "o": [
+    {
+     "en": "Severe regurgitation"
+    },
+    {
+     "en": "Trivial regurgitation"
+    },
+    {
+     "en": "Pulmonary stenosis"
+    },
+    {
+     "en": "Ductal flow"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "A thin jet is trivial and common; density and width decide severity."
+   }
+  },
+  {
+   "q": {
+    "en": "Rib shadow wipes out the valve in systole. What helps?"
+   },
+   "o": [
+    {
+     "en": "More gain"
+    },
+    {
+     "en": "Slide one space down with held breath out"
+    },
+    {
+     "en": "Deeper sector"
+    },
+    {
+     "en": "Lower frequency"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "A lower space with held breath out moves lung and rib off the valve."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "views"
+ },
+ "sources": [
+  "ASE 2019 guideline for the complete transthoracic examination, right ventricular outflow views section.",
+  "ASE 2019 guideline for the complete transthoracic examination, spectral Doppler section.",
+  "ASE and EACVI 2016 diastolic function guideline, pulmonary pressure estimation section."
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_rvot_long",
+ "objectives": [
+  "Rotate from the long axis to open the pulmonary valve.",
+  "Follow flow from the right ventricle to the pulmonary trunk.",
+  "Set colour across the pulmonary valve for regurgitation and stenosis."
+ ]
+}

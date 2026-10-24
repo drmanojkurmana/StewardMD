@@ -1,0 +1,6059 @@
+{
+ "v": 1,
+ "review": "ai_drafted",
+ "units": [
+  {
+   "id": "views",
+   "title": {
+    "en": "Views",
+    "hi": "Views"
+   },
+   "level": "mbbs",
+   "lessons": [
+    "view_echo_windows",
+    "view_cardiac_cycle_ecg",
+    "view_plax",
+    "view_rv_inflow",
+    "view_rvot_long",
+    "view_pa_bifurcation",
+    "view_psax_av",
+    "view_psax_mv",
+    "view_psax_papillary",
+    "view_psax_apex",
+    "view_a4c",
+    "view_a5c",
+    "view_a2c",
+    "view_a3c",
+    "view_a4c_rv_focus",
+    "view_coronary_sinus",
+    "view_right_parasternal",
+    "view_subcostal_4c",
+    "view_subcostal_ivc",
+    "view_hepatic_vein",
+    "view_subcostal_sax",
+    "view_subcostal_bicaval",
+    "view_subcostal_aorta",
+    "view_arch_lax",
+    "view_svc",
+    "view_desc_sax",
+    "view_ductal",
+    "view_presenting_study"
+   ]
+  },
+  {
+   "id": "tee",
+   "title": {
+    "en": "TEE",
+    "hi": "TEE"
+   },
+   "level": "mbbs",
+   "lessons": [
+    "tee_me_4c",
+    "tee_me_2c",
+    "tee_me_lax",
+    "tee_me_av_sax",
+    "tee_me_av_lax",
+    "tee_me_bicaval",
+    "tee_tg_mid_sax",
+    "tee_desc_aorta_sax"
+   ]
+  },
+  {
+   "id": "pocus",
+   "title": {
+    "en": "POCUS",
+    "hi": "POCUS"
+   },
+   "level": "mbbs",
+   "lessons": [
+    "pocus_fast_protocol",
+    "pocus_fast_ruq",
+    "pocus_fast_luq",
+    "pocus_fast_pelvis",
+    "pocus_fast_subxiphoid",
+    "pocus_efast_protocol",
+    "pocus_efast_lung_right",
+    "pocus_efast_lung_left",
+    "pocus_blue_protocol",
+    "pocus_blue_upper",
+    "pocus_blue_lower",
+    "pocus_rush",
+    "pocus_ivc_protocol",
+    "pocus_ivc",
+    "pocus_ivc_rap",
+    "pocus_arrest_subxiphoid",
+    "pocus_arrest_pulse_check"
+   ]
+  },
+  {
+   "id": "measurements",
+   "title": {
+    "en": "Measurements",
+    "hi": "Measurements"
+   },
+   "level": "mbbs",
+   "lessons": [
+    "meas_plax_linear",
+    "meas_lv_mass",
+    "meas_simpson_ef",
+    "meas_la_volume",
+    "meas_rv_tapse",
+    "meas_pasp",
+    "meas_diastolic"
+   ]
+  },
+  {
+   "id": "doppler",
+   "title": {
+    "en": "Doppler",
+    "hi": "Doppler"
+   },
+   "level": "mbbs",
+   "lessons": [
+    "dop_pw",
+    "dop_cw",
+    "dop_colour",
+    "dop_bernoulli",
+    "dop_continuity_ava",
+    "dop_pisa_eroa"
+   ]
+  },
+  {
+   "id": "knobology",
+   "title": {
+    "en": "Knobology",
+    "hi": "Knobology"
+   },
+   "level": "mbbs",
+   "lessons": [
+    "knob_knobology",
+    "knob_artefacts"
+   ]
+  },
+  {
+   "id": "pathology",
+   "title": {
+    "en": "Pathology",
+    "hi": "Pathology"
+   },
+   "level": "mbbs",
+   "lessons": [
+    "path_mitral_stenosis",
+    "path_mitral_regurgitation",
+    "path_aortic_stenosis",
+    "path_aortic_regurgitation",
+    "path_pericardial_effusion",
+    "path_cardiac_tamponade",
+    "path_lv_hypertrophy",
+    "path_hcm_non_obstructive",
+    "path_hcm_obstructive_sam",
+    "path_dilated_cardiomyopathy",
+    "path_regional_wall_motion_abnormality_mi",
+    "path_lv_thrombus",
+    "path_infective_endocarditis_vegetation",
+    "path_atrial_septal_defect",
+    "path_ventricular_septal_defect",
+    "path_patent_ductus_arteriosus",
+    "path_tetralogy_of_fallot",
+    "path_pulmonary_hypertension",
+    "path_tricuspid_regurgitation",
+    "path_aortic_dissection"
+   ]
+  }
+ ],
+ "lessons": {
+  "dop_bernoulli": {
+   "title": {
+    "en": "Bernoulli equation and gradients"
+   },
+   "minutes": 10,
+   "idea": {
+    "en": "Convert peak velocity to peak gradient with the Bernoulli equation"
+   },
+   "see": {
+    "diagram": "diagrams/dop_bernoulli.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Apical five chamber jet for peak velocity and mean gradient tracing"
+    },
+    "caption": {
+     "en": "Apical five chamber jet for peak velocity and mean gradient tracing"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Dense envelope with the true modal peak on the trace"
+      },
+      "note": {
+       "en": "Dense envelope with the true modal peak on the trace"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Mean gradient integrated across the whole flow period"
+      },
+      "note": {
+       "en": "Mean gradient integrated across the whole flow period"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Proximal velocity recorded when the upstream chamber is fast"
+      },
+      "note": {
+       "en": "Proximal velocity recorded when the upstream chamber is fast"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Aortic root size noted when recovery is suspected"
+      },
+      "note": {
+       "en": "Aortic root size noted when recovery is suspected"
+      }
+     }
+    ],
+    "view": "tte_a5c"
+   },
+   "levels": [
+    "resident",
+    "fellow"
+   ],
+   "level": "resident",
+   "view": "tte_a5c",
+   "test": {
+    "mcqTopic": "doppler"
+   }
+  },
+  "dop_colour": {
+   "title": {
+    "en": "Colour Doppler physics"
+   },
+   "minutes": 6,
+   "idea": {
+    "en": "Read colour direction and aliasing against the scale setting"
+   },
+   "see": {
+    "diagram": "diagrams/dop_colour.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Parasternal long axis with colour showing inflow and outflow directions"
+    },
+    "caption": {
+     "en": "Parasternal long axis with colour showing inflow and outflow directions"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Red toward and blue away from the probe along the beam"
+      },
+      "note": {
+       "en": "Red toward and blue away from the probe along the beam"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Clean tissue without colour speckle outside blood pools"
+      },
+      "note": {
+       "en": "Clean tissue without colour speckle outside blood pools"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Narrow jet origin at the valve plane marking the true orifice"
+      },
+      "note": {
+       "en": "Narrow jet origin at the valve plane marking the true orifice"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Mosaic aliasing core where velocity exceeds the scale setting"
+      },
+      "note": {
+       "en": "Mosaic aliasing core where velocity exceeds the scale setting"
+      }
+     }
+    ],
+    "view": "tte_plax"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "tte_plax",
+   "test": {
+    "mcqTopic": "doppler"
+   }
+  },
+  "dop_continuity_ava": {
+   "title": {
+    "en": "Continuity equation and aortic valve area"
+   },
+   "minutes": 10,
+   "idea": {
+    "en": "State the continuity equation and the equal stroke volume logic behind it"
+   },
+   "see": {
+    "diagram": "diagrams/dop_continuity_ava.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Zoomed parasternal long axis for the outflow diameter that the maths squares"
+    },
+    "caption": {
+     "en": "Zoomed parasternal long axis for the outflow diameter that the maths squares"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Zoomed outflow tract with the diameter line at the cusp insertion"
+      },
+      "note": {
+       "en": "Zoomed outflow tract with the diameter line at the cusp insertion"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Pulsed wave sample volume sitting exactly at the diameter site"
+      },
+      "note": {
+       "en": "Pulsed wave sample volume sitting exactly at the diameter site"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Dense aortic envelope with the highest peak among windows"
+      },
+      "note": {
+       "en": "Dense aortic envelope with the highest peak among windows"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Matched ECG timing proving the same haemodynamic state"
+      },
+      "note": {
+       "en": "Matched ECG timing proving the same haemodynamic state"
+      }
+     }
+    ],
+    "view": "tte_plax"
+   },
+   "levels": [
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tte_plax",
+   "test": {
+    "mcqTopic": "doppler"
+   }
+  },
+  "dop_cw": {
+   "title": {
+    "en": "Continuous wave Doppler physics"
+   },
+   "minutes": 8,
+   "idea": {
+    "en": "Explain why continuous wave has no aliasing and no depth information"
+   },
+   "see": {
+    "diagram": "diagrams/dop_cw.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Apical five chamber line along the aortic jet for the peak envelope"
+    },
+    "caption": {
+     "en": "Apical five chamber line along the aortic jet for the peak envelope"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Dense complete envelope with a sharp modal peak"
+      },
+      "note": {
+       "en": "Dense complete envelope with a sharp modal peak"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Highest velocity among all interrogated windows"
+      },
+      "note": {
+       "en": "Highest velocity among all interrogated windows"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Colour jet direction matching the Doppler line"
+      },
+      "note": {
+       "en": "Colour jet direction matching the Doppler line"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Aortic valve calcification and doming on the two dimensional image behind an aor"
+      },
+      "note": {
+       "en": "Aortic valve calcification and doming on the two dimensional image behind an aortic jet"
+      }
+     }
+    ],
+    "view": "tte_a5c"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tte_a5c",
+   "test": {
+    "mcqTopic": "doppler"
+   }
+  },
+  "dop_pisa_eroa": {
+   "title": {
+    "en": "PISA and effective regurgitant orifice"
+   },
+   "minutes": 10,
+   "idea": {
+    "en": "Explain the flow convergence shell and the aliasing trick behind PISA"
+   },
+   "see": {
+    "diagram": "diagrams/dop_pisa_eroa.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Apical four chamber mitral jet with the PISA shell on the atrial side"
+    },
+    "caption": {
+     "en": "Apical four chamber mitral jet with the PISA shell on the atrial side"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Clean hemisphere shell hugging the orifice on the upstream side"
+      },
+      "note": {
+       "en": "Clean hemisphere shell hugging the orifice on the upstream side"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Radius line running from orifice to shell along jet direction"
+      },
+      "note": {
+       "en": "Radius line running from orifice to shell along jet direction"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Aliasing velocity value displayed beside the colour scale"
+      },
+      "note": {
+       "en": "Aliasing velocity value displayed beside the colour scale"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Dense continuous wave envelope giving peak velocity and integral"
+      },
+      "note": {
+       "en": "Dense continuous wave envelope giving peak velocity and integral"
+      }
+     }
+    ],
+    "view": "tte_a4c"
+   },
+   "levels": [
+    "fellow"
+   ],
+   "level": "resident",
+   "view": "tte_a4c",
+   "test": {
+    "mcqTopic": "doppler"
+   }
+  },
+  "dop_pw": {
+   "title": {
+    "en": "Pulsed wave Doppler physics"
+   },
+   "minutes": 8,
+   "idea": {
+    "en": "Explain range gating and the Nyquist limit in plain words"
+   },
+   "see": {
+    "diagram": "diagrams/dop_pw.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Apical five chamber with the sample volume just below the aortic cusps"
+    },
+    "caption": {
+     "en": "Apical five chamber with the sample volume just below the aortic cusps"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Sample volume gate sitting inside the colour jet"
+      },
+      "note": {
+       "en": "Sample volume gate sitting inside the colour jet"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Beam direction arrow running along the flow, not across it"
+      },
+      "note": {
+       "en": "Beam direction arrow running along the flow, not across it"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Clean spectral envelope with a sharp peak and dark interior"
+      },
+      "note": {
+       "en": "Clean spectral envelope with a sharp peak and dark interior"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "ECG timing strip marking systole and diastole under the trace"
+      },
+      "note": {
+       "en": "ECG timing strip marking systole and diastole under the trace"
+      }
+     }
+    ],
+    "view": "tte_a5c"
+   },
+   "levels": [
+    "resident",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tte_a5c",
+   "test": {
+    "mcqTopic": "doppler"
+   }
+  },
+  "knob_artefacts": {
+   "title": {
+    "en": "Common artefacts and how to defeat them"
+   },
+   "minutes": 6,
+   "idea": {
+    "en": "Name each common artefact by its fingerprint"
+   },
+   "see": {
+    "diagram": "diagrams/knob_artefacts.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Parasternal long axis where reverberation, shadow and dropout are all testable"
+    },
+    "caption": {
+     "en": "Parasternal long axis where reverberation, shadow and dropout are all testable"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Equally spaced parallel lines marking reverberation"
+      },
+      "note": {
+       "en": "Equally spaced parallel lines marking reverberation"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Clean dark band behind a bright reflector marking shadow"
+      },
+      "note": {
+       "en": "Clean dark band behind a bright reflector marking shadow"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Duplicate anatomy beyond the diaphragm marking mirror image"
+      },
+      "note": {
+       "en": "Duplicate anatomy beyond the diaphragm marking mirror image"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Mosaic that shifts with the scale control marking aliasing"
+      },
+      "note": {
+       "en": "Mosaic that shifts with the scale control marking aliasing"
+      }
+     }
+    ],
+    "view": "tte_plax"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "tte_plax",
+   "test": {
+    "mcqTopic": "knobology"
+   }
+  },
+  "knob_knobology": {
+   "title": {
+    "en": "Knobology: gain, depth, focus and frequency"
+   },
+   "minutes": 6,
+   "idea": {
+    "en": "Run the optimisation sequence in the same order every study"
+   },
+   "see": {
+    "diagram": "diagrams/knob_knobology.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Parasternal long axis used to practise the full optimisation sequence"
+    },
+    "caption": {
+     "en": "Parasternal long axis used to practise the full optimisation sequence"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Blood pool dark with bright sharp endocardial borders"
+      },
+      "note": {
+       "en": "Blood pool dark with bright sharp endocardial borders"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Uniform brightness from near to far field after compensation"
+      },
+      "note": {
+       "en": "Uniform brightness from near to far field after compensation"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Focal marker sitting exactly at target depth"
+      },
+      "note": {
+       "en": "Focal marker sitting exactly at target depth"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Frame rate high enough that leaflets do not blur"
+      },
+      "note": {
+       "en": "Frame rate high enough that leaflets do not blur"
+      }
+     }
+    ],
+    "view": "tte_plax"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "tte_plax",
+   "test": {
+    "mcqTopic": "knobology"
+   }
+  },
+  "meas_diastolic": {
+   "title": {
+    "en": "Diastolic function and filling pressures"
+   },
+   "minutes": 12,
+   "idea": {
+    "en": "Record inflow, annular velocity, tricuspid velocity and atrial volume correctly"
+   },
+   "see": {
+    "diagram": "diagrams/meas_diastolic.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Apical four chamber inflow and annular traces for the diastolic vote"
+    },
+    "caption": {
+     "en": "Apical four chamber inflow and annular traces for the diastolic vote"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Mitral inflow envelope with clear E and A peaks at the leaflet tips"
+      },
+      "note": {
+       "en": "Mitral inflow envelope with clear E and A peaks at the leaflet tips"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Tissue Doppler annular trace with sharp systolic and early diastolic waves"
+      },
+      "note": {
+       "en": "Tissue Doppler annular trace with sharp systolic and early diastolic waves"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Tricuspid envelope dense enough to trust its peak"
+      },
+      "note": {
+       "en": "Tricuspid envelope dense enough to trust its peak"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Indexed atrial volume measured by biplane tracing"
+      },
+      "note": {
+       "en": "Indexed atrial volume measured by biplane tracing"
+      }
+     }
+    ],
+    "view": "tte_a4c"
+   },
+   "levels": [
+    "fellow",
+    "resident"
+   ],
+   "level": "resident",
+   "view": "tte_a4c",
+   "test": {
+    "mcqTopic": "measurements"
+   }
+  },
+  "meas_la_volume": {
+   "title": {
+    "en": "Left atrial volume and its meaning"
+   },
+   "minutes": 8,
+   "idea": {
+    "en": "Acquire atrial optimised apical views and time the largest frame"
+   },
+   "see": {
+    "diagram": "diagrams/meas_la_volume.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Apical four chamber with the atrium optimised for the end systolic trace"
+    },
+    "caption": {
+     "en": "Apical four chamber with the atrium optimised for the end systolic trace"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Mitral annulus corners as the two fixed trace anchors"
+      },
+      "note": {
+       "en": "Mitral annulus corners as the two fixed trace anchors"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Pulmonary vein mouths recognised and kept outside the trace"
+      },
+      "note": {
+       "en": "Pulmonary vein mouths recognised and kept outside the trace"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Left atrial appendage recognised and kept outside the trace"
+      },
+      "note": {
+       "en": "Left atrial appendage recognised and kept outside the trace"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Largest atrial area just before mitral opening"
+      },
+      "note": {
+       "en": "Largest atrial area just before mitral opening"
+      }
+     }
+    ],
+    "view": "tte_a4c"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tte_a4c",
+   "test": {
+    "mcqTopic": "measurements"
+   }
+  },
+  "meas_lv_mass": {
+   "title": {
+    "en": "Left ventricular mass and geometry"
+   },
+   "minutes": 10,
+   "idea": {
+    "en": "Measure the three end diastolic terms of the linear mass formula cleanly"
+   },
+   "see": {
+    "diagram": "diagrams/meas_lv_mass.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Parasternal long axis at end diastole supplying all three linear terms of the mass formula"
+    },
+    "caption": {
+     "en": "Parasternal long axis at end diastole supplying all three linear terms of the mass formula"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Perpendicular basal septum and posterior wall on one diastolic frame"
+      },
+      "note": {
+       "en": "Perpendicular basal septum and posterior wall on one diastolic frame"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Mitral leaflet tips marking the measurement level"
+      },
+      "note": {
+       "en": "Mitral leaflet tips marking the measurement level"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Compact myocardium without chordal echoes in the line"
+      },
+      "note": {
+       "en": "Compact myocardium without chordal echoes in the line"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Stable ECG timing at the onset of the QRS for diastole"
+      },
+      "note": {
+       "en": "Stable ECG timing at the onset of the QRS for diastole"
+      }
+     }
+    ],
+    "view": "tte_plax"
+   },
+   "levels": [
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tte_plax",
+   "test": {
+    "mcqTopic": "measurements"
+   }
+  },
+  "meas_pasp": {
+   "title": {
+    "en": "Pulmonary pressure estimate"
+   },
+   "minutes": 8,
+   "idea": {
+    "en": "Record the best tricuspid envelope from every window"
+   },
+   "see": {
+    "diagram": "diagrams/meas_pasp.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Apical four chamber tricuspid jet for the pulmonary pressure estimate"
+    },
+    "caption": {
+     "en": "Apical four chamber tricuspid jet for the pulmonary pressure estimate"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Dense tricuspid envelope with a sharp modal peak"
+      },
+      "note": {
+       "en": "Dense tricuspid envelope with a sharp modal peak"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Colour jet direction matching the Doppler interrogation line"
+      },
+      "note": {
+       "en": "Colour jet direction matching the Doppler interrogation line"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Caval size and collapse recorded for the atrial pressure term"
+      },
+      "note": {
+       "en": "Caval size and collapse recorded for the atrial pressure term"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "D shaped septum flattening when pressure overloads the right side"
+      },
+      "note": {
+       "en": "D shaped septum flattening when pressure overloads the right side"
+      }
+     }
+    ],
+    "view": "tte_a4c"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tte_a4c",
+   "test": {
+    "mcqTopic": "measurements"
+   }
+  },
+  "meas_plax_linear": {
+   "title": {
+    "en": "Linear chamber measurements in the parasternal long axis"
+   },
+   "minutes": 10,
+   "idea": {
+    "en": "Place the parasternal long axis cut so the left ventricle, aortic root and left atrium all lie in one plane"
+   },
+   "see": {
+    "diagram": "diagrams/meas_plax_linear.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Parasternal long axis showing the cavity, walls, outflow tract and root in one plane"
+    },
+    "caption": {
+     "en": "Parasternal long axis showing the cavity, walls, outflow tract and root in one plane"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Basal interventricular septum meeting the beam at a right angle"
+      },
+      "note": {
+       "en": "Basal interventricular septum meeting the beam at a right angle"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Posterior wall without papillary muscle at the measurement level"
+      },
+      "note": {
+       "en": "Posterior wall without papillary muscle at the measurement level"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Open aortic cusps inside a box shaped root"
+      },
+      "note": {
+       "en": "Open aortic cusps inside a box shaped root"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Mitral leaflet tips marking the cavity measurement level"
+      },
+      "note": {
+       "en": "Mitral leaflet tips marking the cavity measurement level"
+      }
+     }
+    ],
+    "view": "tte_plax"
+   },
+   "levels": [
+    "resident",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tte_plax",
+   "test": {
+    "mcqTopic": "measurements"
+   }
+  },
+  "meas_rv_tapse": {
+   "title": {
+    "en": "Right ventricular size, TAPSE and S prime"
+   },
+   "minutes": 10,
+   "idea": {
+    "en": "Acquire the right ventricle focused view and measure its three diastolic dimensions"
+   },
+   "see": {
+    "diagram": "diagrams/meas_rv_tapse.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Right ventricle focused four chamber for diameters and annular function"
+    },
+    "caption": {
+     "en": "Right ventricle focused four chamber for diameters and annular function"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Right ventricle as the largest chamber on screen in the focused view"
+      },
+      "note": {
+       "en": "Right ventricle as the largest chamber on screen in the focused view"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Lateral tricuspid annulus moving cleanly along the M mode line"
+      },
+      "note": {
+       "en": "Lateral tricuspid annulus moving cleanly along the M mode line"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Moderator band marking the mid cavity measurement level"
+      },
+      "note": {
+       "en": "Moderator band marking the mid cavity measurement level"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Flattened septum in systole or diastole when pressure or volume overloads the ri"
+      },
+      "note": {
+       "en": "Flattened septum in systole or diastole when pressure or volume overloads the right side"
+      }
+     }
+    ],
+    "view": "tte_a4c_rv_focus"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tte_a4c_rv_focus",
+   "test": {
+    "mcqTopic": "measurements"
+   }
+  },
+  "meas_simpson_ef": {
+   "title": {
+    "en": "Left ventricular volumes and Simpson biplane ejection fraction"
+   },
+   "minutes": 12,
+   "idea": {
+    "en": "Acquire true apical four chamber and two chamber views without foreshortening"
+   },
+   "see": {
+    "diagram": "diagrams/meas_simpson_ef.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Apical four chamber at end diastole for the first trace of the biplane pair"
+    },
+    "caption": {
+     "en": "Apical four chamber at end diastole for the first trace of the biplane pair"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Apex free of dropout with the true tip on screen"
+      },
+      "note": {
+       "en": "Apex free of dropout with the true tip on screen"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Mitral annulus corners as the two fixed trace anchors"
+      },
+      "note": {
+       "en": "Mitral annulus corners as the two fixed trace anchors"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Open aortic valve marking systole on the timing strip"
+      },
+      "note": {
+       "en": "Open aortic valve marking systole on the timing strip"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Papillary muscles kept inside the traced cavity"
+      },
+      "note": {
+       "en": "Papillary muscles kept inside the traced cavity"
+      }
+     }
+    ],
+    "view": "tte_a4c"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tte_a4c",
+   "test": {
+    "mcqTopic": "measurements"
+   }
+  },
+  "path_aortic_dissection": {
+   "title": {
+    "en": "Aortic dissection: the tearing flap"
+   },
+   "minutes": 8,
+   "idea": {
+    "en": "Demonstrate the flap in two planes with true and false lumen flow."
+   },
+   "see": {
+    "diagram": "diagrams/path_aortic_dissection.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Suprasternal arch view follows the flap along the arch and names the vessels it threatens."
+    },
+    "caption": {
+     "en": "Suprasternal arch view follows the flap along the arch and names the vessels it threatens."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Aortic root with sinuses and sinotubular junction"
+      },
+      "note": {
+       "en": "Landmarks: Aortic root with sinuses and sinotubular junction"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "brachiocephalic, carotid and subclavian"
+      },
+      "note": {
+       "en": "Arch branches: brachiocephalic, carotid and subclavian"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Left subclavian origin marking the type A and B boundary"
+      },
+      "note": {
+       "en": "Left subclavian origin marking the type A and B boundary"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Pericardial sac for rupture blood"
+      },
+      "note": {
+       "en": "Pericardial sac for rupture blood"
+      }
+     }
+    ],
+    "view": "tte_suprasternal_arch_lax"
+   },
+   "levels": [
+    "fellow"
+   ],
+   "level": "resident",
+   "view": "tte_suprasternal_arch_lax",
+   "test": {
+    "mcqTopic": "pathology"
+   }
+  },
+  "path_aortic_regurgitation": {
+   "title": {
+    "en": "Aortic regurgitation: the leaking outlet valve"
+   },
+   "minutes": 8,
+   "idea": {
+    "en": "Map the diastolic jet and measure width ratio, vena contracta and pressure half time."
+   },
+   "see": {
+    "diagram": "diagrams/path_aortic_regurgitation.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Parasternal long axis shows the diastolic jet origin, jet width against outflow height, and cavity dilatation together."
+    },
+    "caption": {
+     "en": "Parasternal long axis shows the diastolic jet origin, jet width against outflow height, and cavity dilatation together."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Aortic cusps with diastolic non coaptation"
+      },
+      "note": {
+       "en": "Landmarks: Aortic cusps with diastolic non coaptation"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Outflow tract height as the jet width reference"
+      },
+      "note": {
+       "en": "Outflow tract height as the jet width reference"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Descending aorta for holodiastolic reversal"
+      },
+      "note": {
+       "en": "Descending aorta for holodiastolic reversal"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Left ventricular diameters for volume overload"
+      },
+      "note": {
+       "en": "Left ventricular diameters for volume overload"
+      }
+     }
+    ],
+    "view": "tte_plax"
+   },
+   "levels": [
+    "resident"
+   ],
+   "level": "resident",
+   "view": "tte_plax",
+   "test": {
+    "mcqTopic": "pathology"
+   }
+  },
+  "path_aortic_stenosis": {
+   "title": {
+    "en": "Aortic stenosis: the calcified outlet"
+   },
+   "minutes": 8,
+   "idea": {
+    "en": "Grade aortic stenosis by velocity, gradient and continuity valve area."
+   },
+   "see": {
+    "diagram": "diagrams/path_aortic_stenosis.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Parasternal long axis shows cusp thickness, opening excursion and wall thickness in one frame. Measure the outflow diameter here."
+    },
+    "caption": {
+     "en": "Parasternal long axis shows cusp thickness, opening excursion and wall thickness in one frame. Measure the outflow diameter here."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Aortic cusps with systolic opening excursion"
+      },
+      "note": {
+       "en": "Landmarks: Aortic cusps with systolic opening excursion"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Outflow tract hinge points for diameter"
+      },
+      "note": {
+       "en": "Outflow tract hinge points for diameter"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Left ventricular wall thickness for pressure load"
+      },
+      "note": {
+       "en": "Left ventricular wall thickness for pressure load"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Aortic root beyond the valve for post stenotic dilatation"
+      },
+      "note": {
+       "en": "Aortic root beyond the valve for post stenotic dilatation"
+      }
+     }
+    ],
+    "view": "tte_plax"
+   },
+   "levels": [
+    "resident"
+   ],
+   "level": "resident",
+   "view": "tte_plax",
+   "test": {
+    "mcqTopic": "pathology"
+   }
+  },
+  "path_atrial_septal_defect": {
+   "title": {
+    "en": "Atrial septal defect: the shunt that enlarges the right heart"
+   },
+   "minutes": 9,
+   "idea": {
+    "en": "Classify the defect type and measure diameters with all rims for closure planning."
+   },
+   "see": {
+    "diagram": "diagrams/path_atrial_septal_defect.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Subcostal bicaval view profiles the whole atrial septum for dropout, rims and colour flow in one plane."
+    },
+    "caption": {
+     "en": "Subcostal bicaval view profiles the whole atrial septum for dropout, rims and colour flow in one plane."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Fossa ovalis in the mid septum"
+      },
+      "note": {
+       "en": "Landmarks: Fossa ovalis in the mid septum"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Superior and inferior vena cava entries"
+      },
+      "note": {
+       "en": "Superior and inferior vena cava entries"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Right upper pulmonary vein for sinus venosus defects"
+      },
+      "note": {
+       "en": "Right upper pulmonary vein for sinus venosus defects"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Atrioventricular valves for primum defects"
+      },
+      "note": {
+       "en": "Atrioventricular valves for primum defects"
+      }
+     }
+    ],
+    "view": "tte_subcostal_bicaval"
+   },
+   "levels": [
+    "fellow"
+   ],
+   "level": "resident",
+   "view": "tte_subcostal_bicaval",
+   "test": {
+    "mcqTopic": "pathology"
+   }
+  },
+  "path_cardiac_tamponade": {
+   "title": {
+    "en": "Cardiac tamponade: pressure that kills"
+   },
+   "minutes": 7,
+   "idea": {
+    "en": "Recognise diastolic collapse of the right atrium and right ventricle as tamponade physiology."
+   },
+   "see": {
+    "diagram": "diagrams/path_cardiac_tamponade.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Subcostal four chamber view shows right sided collapse and the dilated inferior vena cava in one sweep."
+    },
+    "caption": {
+     "en": "Subcostal four chamber view shows right sided collapse and the dilated inferior vena cava in one sweep."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Right atrium in late diastole for early collapse"
+      },
+      "note": {
+       "en": "Landmarks: Right atrium in late diastole for early collapse"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Right ventricular free wall in early diastole"
+      },
+      "note": {
+       "en": "Right ventricular free wall in early diastole"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Mitral and tricuspid valve tips for inflow Doppler"
+      },
+      "note": {
+       "en": "Mitral and tricuspid valve tips for inflow Doppler"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Inferior vena cava entering the right atrium"
+      },
+      "note": {
+       "en": "Inferior vena cava entering the right atrium"
+      }
+     }
+    ],
+    "view": "tte_subcostal_4c"
+   },
+   "levels": [
+    "mbbs"
+   ],
+   "level": "mbbs",
+   "view": "tte_subcostal_4c",
+   "test": {
+    "mcqTopic": "pathology"
+   }
+  },
+  "path_dilated_cardiomyopathy": {
+   "title": {
+    "en": "Dilated cardiomyopathy: the large weak pump"
+   },
+   "minutes": 7,
+   "idea": {
+    "en": "Recognise a dilated thin walled ventricle with globally reduced thickening."
+   },
+   "see": {
+    "diagram": "diagrams/path_dilated_cardiomyopathy.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Apical four chamber view shows the dilated thin walled ventricle with global hypokinesis. Measure volumes by Simpson biplane here."
+    },
+    "caption": {
+     "en": "Apical four chamber view shows the dilated thin walled ventricle with global hypokinesis. Measure volumes by Simpson biplane here."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "True left ventricular apex without foreshortening"
+      },
+      "note": {
+       "en": "Landmarks: True left ventricular apex without foreshortening"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Mitral annulus and tethered leaflets"
+      },
+      "note": {
+       "en": "Mitral annulus and tethered leaflets"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Left atrium size as a pressure history"
+      },
+      "note": {
+       "en": "Left atrium size as a pressure history"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Right ventricle for biventricular involvement"
+      },
+      "note": {
+       "en": "Right ventricle for biventricular involvement"
+      }
+     }
+    ],
+    "view": "tte_a4c"
+   },
+   "levels": [
+    "mbbs"
+   ],
+   "level": "mbbs",
+   "view": "tte_a4c",
+   "test": {
+    "mcqTopic": "pathology"
+   }
+  },
+  "path_hcm_non_obstructive": {
+   "title": {
+    "en": "Hypertrophic cardiomyopathy without obstruction: the thick asymmetric wall"
+   },
+   "minutes": 9,
+   "idea": {
+    "en": "Apply the 15 mm definite and 13 to 14 mm borderline thickness criteria with the asymmetry ratio."
+   },
+   "see": {
+    "diagram": "diagrams/path_hcm_non_obstructive.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Short axis at papillary level maps the asymmetry: septal to posterior wall ratio above 1.3 with a small cavity."
+    },
+    "caption": {
+     "en": "Short axis at papillary level maps the asymmetry: septal to posterior wall ratio above 1.3 with a small cavity."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Maximal septal thickness point at end diastole"
+      },
+      "note": {
+       "en": "Landmarks: Maximal septal thickness point at end diastole"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Posterior wall at the same level for the ratio"
+      },
+      "note": {
+       "en": "Posterior wall at the same level for the ratio"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Apical segments for the apical variant"
+      },
+      "note": {
+       "en": "Apical segments for the apical variant"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Left atrial volume as diastolic history"
+      },
+      "note": {
+       "en": "Left atrial volume as diastolic history"
+      }
+     }
+    ],
+    "view": "tte_psax_papillary"
+   },
+   "levels": [
+    "fellow"
+   ],
+   "level": "resident",
+   "view": "tte_psax_papillary",
+   "test": {
+    "mcqTopic": "pathology"
+   }
+  },
+  "path_hcm_obstructive_sam": {
+   "title": {
+    "en": "Obstructive HCM with SAM: the dynamic outflow"
+   },
+   "minutes": 9,
+   "idea": {
+    "en": "Demonstrate systolic anterior motion with septal contact and a posteriorly directed jet."
+   },
+   "see": {
+    "diagram": "diagrams/path_hcm_obstructive_sam.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Parasternal long axis shows septal contact, the narrow outflow and the posteriorly directed jet in one frame."
+    },
+    "caption": {
+     "en": "Parasternal long axis shows septal contact, the narrow outflow and the posteriorly directed jet in one frame."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Anterior mitral leaflet tip in systole"
+      },
+      "note": {
+       "en": "Landmarks: Anterior mitral leaflet tip in systole"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Septal contact point in the outflow"
+      },
+      "note": {
+       "en": "Septal contact point in the outflow"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Outflow tract width below the aortic valve"
+      },
+      "note": {
+       "en": "Outflow tract width below the aortic valve"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Mitral jet direction in late systole"
+      },
+      "note": {
+       "en": "Mitral jet direction in late systole"
+      }
+     }
+    ],
+    "view": "tte_plax"
+   },
+   "levels": [
+    "fellow"
+   ],
+   "level": "resident",
+   "view": "tte_plax",
+   "test": {
+    "mcqTopic": "pathology"
+   }
+  },
+  "path_infective_endocarditis_vegetation": {
+   "title": {
+    "en": "Infective endocarditis vegetation: the mobile infected mass"
+   },
+   "minutes": 8,
+   "idea": {
+    "en": "Separate vegetations from strands and excrescences by motion and attachment."
+   },
+   "see": {
+    "diagram": "diagrams/path_infective_endocarditis_vegetation.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Mid oesophageal four chamber view profiles both atrioventricular valves for small vegetations with near field detail."
+    },
+    "caption": {
+     "en": "Mid oesophageal four chamber view profiles both atrioventricular valves for small vegetations with near field detail."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Each leaflet tip with independent motion check"
+      },
+      "note": {
+       "en": "Landmarks: Each leaflet tip with independent motion check"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Aortic root walls for abscess cavities"
+      },
+      "note": {
+       "en": "Aortic root walls for abscess cavities"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Prosthetic sewing ring for rocking dehiscence"
+      },
+      "note": {
+       "en": "Prosthetic sewing ring for rocking dehiscence"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Device leads and catheters as attachment sites"
+      },
+      "note": {
+       "en": "Device leads and catheters as attachment sites"
+      }
+     }
+    ],
+    "view": "tee_me_4c"
+   },
+   "levels": [
+    "fellow"
+   ],
+   "level": "resident",
+   "view": "tee_me_4c",
+   "test": {
+    "mcqTopic": "pathology"
+   }
+  },
+  "path_lv_hypertrophy": {
+   "title": {
+    "en": "Left ventricular hypertrophy: the thick stiff wall"
+   },
+   "minutes": 7,
+   "idea": {
+    "en": "Measure wall thickness and mass index and state the normal bands."
+   },
+   "see": {
+    "diagram": "diagrams/path_lv_hypertrophy.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Short axis at papillary muscle level shows concentric thickening all around. Measure septum and posterior wall here at end diastole."
+    },
+    "caption": {
+     "en": "Short axis at papillary muscle level shows concentric thickening all around. Measure septum and posterior wall here at end diastole."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Interventricular septum thickness at end diastole"
+      },
+      "note": {
+       "en": "Landmarks: Interventricular septum thickness at end diastole"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Posterior wall thickness at the same level"
+      },
+      "note": {
+       "en": "Posterior wall thickness at the same level"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Papillary muscles marking the mid cavity level"
+      },
+      "note": {
+       "en": "Papillary muscles marking the mid cavity level"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Left atrial size as a diastolic history"
+      },
+      "note": {
+       "en": "Left atrial size as a diastolic history"
+      }
+     }
+    ],
+    "view": "tte_psax_papillary"
+   },
+   "levels": [
+    "mbbs"
+   ],
+   "level": "mbbs",
+   "view": "tte_psax_papillary",
+   "test": {
+    "mcqTopic": "pathology"
+   }
+  },
+  "path_lv_thrombus": {
+   "title": {
+    "en": "Left ventricular thrombus: the apical clot"
+   },
+   "minutes": 8,
+   "idea": {
+    "en": "Acquire true apical views with gain set to separate clot from noise."
+   },
+   "see": {
+    "diagram": "diagrams/path_lv_thrombus.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Apical four chamber view without foreshortening shows the apex, the wall motion defect and the mass in one frame."
+    },
+    "caption": {
+     "en": "Apical four chamber view without foreshortening shows the apex, the wall motion defect and the mass in one frame."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "True apex as the thinnest brightest point"
+      },
+      "note": {
+       "en": "Landmarks: True apex as the thinnest brightest point"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Apical anterior wall motion defect"
+      },
+      "note": {
+       "en": "Apical anterior wall motion defect"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "False tendons and trabeculation as mimics"
+      },
+      "note": {
+       "en": "False tendons and trabeculation as mimics"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Mitral apparatus to rule out a vegetation source"
+      },
+      "note": {
+       "en": "Mitral apparatus to rule out a vegetation source"
+      }
+     }
+    ],
+    "view": "tte_a4c"
+   },
+   "levels": [
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tte_a4c",
+   "test": {
+    "mcqTopic": "pathology"
+   }
+  },
+  "path_mitral_regurgitation": {
+   "title": {
+    "en": "Mitral regurgitation: the leaking inlet valve"
+   },
+   "minutes": 8,
+   "idea": {
+    "en": "Name the mechanism and map the jet in two views."
+   },
+   "see": {
+    "diagram": "diagrams/path_mitral_regurgitation.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Apical four chamber view shows jet direction, vena contracta width and pulmonary vein flow in one window."
+    },
+    "caption": {
+     "en": "Apical four chamber view shows jet direction, vena contracta width and pulmonary vein flow in one window."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Mitral leaflet tips and coaptation point"
+      },
+      "note": {
+       "en": "Landmarks: Mitral leaflet tips and coaptation point"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Vena contracta neck just above the valve"
+      },
+      "note": {
+       "en": "Vena contracta neck just above the valve"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Pulmonary vein entry into the left atrium"
+      },
+      "note": {
+       "en": "Pulmonary vein entry into the left atrium"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Left atrial and ventricular volumes"
+      },
+      "note": {
+       "en": "Left atrial and ventricular volumes"
+      }
+     }
+    ],
+    "view": "tte_a4c"
+   },
+   "levels": [
+    "resident"
+   ],
+   "level": "resident",
+   "view": "tte_a4c",
+   "test": {
+    "mcqTopic": "pathology"
+   }
+  },
+  "path_mitral_stenosis": {
+   "title": {
+    "en": "Mitral stenosis: the tight rheumatic valve"
+   },
+   "minutes": 8,
+   "idea": {
+    "en": "Recognise doming leaflets, a fish mouth orifice and left atrial enlargement of mitral stenosis."
+   },
+   "see": {
+    "diagram": "diagrams/path_mitral_stenosis.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Parasternal long axis shows doming of the anterior mitral leaflet with a small diastolic opening and an enlarged left atrium."
+    },
+    "caption": {
+     "en": "Parasternal long axis shows doming of the anterior mitral leaflet with a small diastolic opening and an enlarged left atrium."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Anterior mitral leaflet with diastolic doming"
+      },
+      "note": {
+       "en": "Landmarks: Anterior mitral leaflet with diastolic doming"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Fused leaflet tips forming the fish mouth orifice"
+      },
+      "note": {
+       "en": "Fused leaflet tips forming the fish mouth orifice"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Enlarged left atrium behind the aortic root"
+      },
+      "note": {
+       "en": "Enlarged left atrium behind the aortic root"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Interventricular septum and aortic root for orientation"
+      },
+      "note": {
+       "en": "Interventricular septum and aortic root for orientation"
+      }
+     }
+    ],
+    "view": "tte_plax"
+   },
+   "levels": [
+    "mbbs"
+   ],
+   "level": "mbbs",
+   "view": "tte_plax",
+   "test": {
+    "mcqTopic": "pathology"
+   }
+  },
+  "path_patent_ductus_arteriosus": {
+   "title": {
+    "en": "Patent ductus arteriosus: the vessel that stayed open"
+   },
+   "minutes": 8,
+   "idea": {
+    "en": "Acquire the suprasternal ductal cut with optimised focus, gain and colour scale."
+   },
+   "see": {
+    "diagram": "diagrams/path_patent_ductus_arteriosus.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Suprasternal ductal view lines the beam along the duct for continuous flow and gradient measurement."
+    },
+    "caption": {
+     "en": "Suprasternal ductal view lines the beam along the duct for continuous flow and gradient measurement."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Aortic arch with head and neck vessels"
+      },
+      "note": {
+       "en": "Landmarks: Aortic arch with head and neck vessels"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Left pulmonary artery beside the ductal ampulla"
+      },
+      "note": {
+       "en": "Left pulmonary artery beside the ductal ampulla"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Descending aorta for diastolic reversal"
+      },
+      "note": {
+       "en": "Descending aorta for diastolic reversal"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Left atrium and ventricle for volume overload"
+      },
+      "note": {
+       "en": "Left atrium and ventricle for volume overload"
+      }
+     }
+    ],
+    "view": "tte_suprasternal_ductal"
+   },
+   "levels": [
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tte_suprasternal_ductal",
+   "test": {
+    "mcqTopic": "pathology"
+   }
+  },
+  "path_pericardial_effusion": {
+   "title": {
+    "en": "Pericardial effusion: fluid around the heart"
+   },
+   "minutes": 7,
+   "idea": {
+    "en": "Spot pericardial fluid in subcostal and parasternal views and separate it from pleural fluid."
+   },
+   "see": {
+    "diagram": "diagrams/path_pericardial_effusion.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Subcostal four chamber view shows the full extent of fluid around the heart and is the first view in a breathless patient."
+    },
+    "caption": {
+     "en": "Subcostal four chamber view shows the full extent of fluid around the heart and is the first view in a breathless patient."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Bright pericardial line bounding the fluid outside"
+      },
+      "note": {
+       "en": "Landmarks: Bright pericardial line bounding the fluid outside"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Echo free space around the ventricles"
+      },
+      "note": {
+       "en": "Echo free space around the ventricles"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Descending aorta behind the left atrium in long axis"
+      },
+      "note": {
+       "en": "Descending aorta behind the left atrium in long axis"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Right atrium and right ventricle for collapse signs"
+      },
+      "note": {
+       "en": "Right atrium and right ventricle for collapse signs"
+      }
+     }
+    ],
+    "view": "tte_subcostal_4c"
+   },
+   "levels": [
+    "mbbs"
+   ],
+   "level": "mbbs",
+   "view": "tte_subcostal_4c",
+   "test": {
+    "mcqTopic": "pathology"
+   }
+  },
+  "path_pulmonary_hypertension": {
+   "title": {
+    "en": "Pulmonary hypertension: the pressured right heart"
+   },
+   "minutes": 8,
+   "idea": {
+    "en": "Link septal shape, tricuspid velocity and cava findings into one probability."
+   },
+   "see": {
+    "diagram": "diagrams/path_pulmonary_hypertension.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Short axis at papillary level shows the D shaped septum of pressure overload. Grade the flattening in systole and diastole."
+    },
+    "caption": {
+     "en": "Short axis at papillary level shows the D shaped septum of pressure overload. Grade the flattening in systole and diastole."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Interventricular septum shape in systole and diastole"
+      },
+      "note": {
+       "en": "Landmarks: Interventricular septum shape in systole and diastole"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Tricuspid jet origin for Doppler alignment"
+      },
+      "note": {
+       "en": "Tricuspid jet origin for Doppler alignment"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Pulmonary trunk diameter against the aorta"
+      },
+      "note": {
+       "en": "Pulmonary trunk diameter against the aorta"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Inferior vena cava for pressure estimation"
+      },
+      "note": {
+       "en": "Inferior vena cava for pressure estimation"
+      }
+     }
+    ],
+    "view": "tte_psax_papillary"
+   },
+   "levels": [
+    "resident"
+   ],
+   "level": "resident",
+   "view": "tte_psax_papillary",
+   "test": {
+    "mcqTopic": "pathology"
+   }
+  },
+  "path_regional_wall_motion_abnormality_mi": {
+   "title": {
+    "en": "Regional wall motion abnormality after infarction"
+   },
+   "minutes": 7,
+   "idea": {
+    "en": "Map wall motion to coronary territories across the three apical views."
+   },
+   "see": {
+    "diagram": "diagrams/path_regional_wall_motion_abnormality_mi.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Apical four chamber view covers the anterior septum, apex and lateral wall for the common left anterior descending territory."
+    },
+    "caption": {
+     "en": "Apical four chamber view covers the anterior septum, apex and lateral wall for the common left anterior descending territory."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "anterior septum and apex"
+      },
+      "note": {
+       "en": "Landmarks: Left anterior descending territory: anterior septum and apex"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "inferior wall and basal septum"
+      },
+      "note": {
+       "en": "Right coronary territory: inferior wall and basal septum"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "lateral and posterior walls"
+      },
+      "note": {
+       "en": "Left circumflex territory: lateral and posterior walls"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Papillary muscles and septum for mechanical complications"
+      },
+      "note": {
+       "en": "Papillary muscles and septum for mechanical complications"
+      }
+     }
+    ],
+    "view": "tte_a4c"
+   },
+   "levels": [
+    "resident"
+   ],
+   "level": "resident",
+   "view": "tte_a4c",
+   "test": {
+    "mcqTopic": "pathology"
+   }
+  },
+  "path_tetralogy_of_fallot": {
+   "title": {
+    "en": "Tetralogy of Fallot: four features one repair"
+   },
+   "minutes": 8,
+   "idea": {
+    "en": "Name all four features and show each on the echo."
+   },
+   "see": {
+    "diagram": "diagrams/path_tetralogy_of_fallot.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Right ventricular outflow view shows the small annulus, the outflow gradient by Doppler and the overriding aorta."
+    },
+    "caption": {
+     "en": "Right ventricular outflow view shows the small annulus, the outflow gradient by Doppler and the overriding aorta."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Malaligned septal defect with aortic override"
+      },
+      "note": {
+       "en": "Landmarks: Malaligned septal defect with aortic override"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Small pulmonary annulus and trunk"
+      },
+      "note": {
+       "en": "Small pulmonary annulus and trunk"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Thick right ventricular free wall"
+      },
+      "note": {
+       "en": "Thick right ventricular free wall"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Branch pulmonary arteries for size and confluence"
+      },
+      "note": {
+       "en": "Branch pulmonary arteries for size and confluence"
+      }
+     }
+    ],
+    "view": "tte_rvot_long"
+   },
+   "levels": [
+    "resident"
+   ],
+   "level": "resident",
+   "view": "tte_rvot_long",
+   "test": {
+    "mcqTopic": "pathology"
+   }
+  },
+  "path_tricuspid_regurgitation": {
+   "title": {
+    "en": "Tricuspid regurgitation: the forgotten right sided leak"
+   },
+   "minutes": 8,
+   "idea": {
+    "en": "Separate functional from primary tricuspid disease on the echo."
+   },
+   "see": {
+    "diagram": "diagrams/path_tricuspid_regurgitation.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Right ventricle focused apical view opens the tricuspid annulus for true size and jet direction without foreshortening."
+    },
+    "caption": {
+     "en": "Right ventricle focused apical view opens the tricuspid annulus for true size and jet direction without foreshortening."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Tricuspid annulus in diastole"
+      },
+      "note": {
+       "en": "Landmarks: Tricuspid annulus in diastole"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Anterior and septal leaflets with the coaptation gap"
+      },
+      "note": {
+       "en": "Anterior and septal leaflets with the coaptation gap"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Hepatic vein entry for systolic reversal"
+      },
+      "note": {
+       "en": "Hepatic vein entry for systolic reversal"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Inferior vena cava size and collapse"
+      },
+      "note": {
+       "en": "Inferior vena cava size and collapse"
+      }
+     }
+    ],
+    "view": "tte_a4c_rv_focus"
+   },
+   "levels": [
+    "resident"
+   ],
+   "level": "resident",
+   "view": "tte_a4c_rv_focus",
+   "test": {
+    "mcqTopic": "pathology"
+   }
+  },
+  "path_ventricular_septal_defect": {
+   "title": {
+    "en": "Ventricular septal defect: the hole between pumps"
+   },
+   "minutes": 7,
+   "idea": {
+    "en": "Find a septal dropout with colour flow in two planes."
+   },
+   "see": {
+    "diagram": "diagrams/path_ventricular_septal_defect.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Parasternal long axis shows membranous defects just below the aortic valve with left to right colour flow."
+    },
+    "caption": {
+     "en": "Parasternal long axis shows membranous defects just below the aortic valve with left to right colour flow."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Membranous septum below the aortic valve"
+      },
+      "note": {
+       "en": "Landmarks: Membranous septum below the aortic valve"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Muscular septum from base to apex"
+      },
+      "note": {
+       "en": "Muscular septum from base to apex"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Aortic valve for prolapse of a cusp into the defect"
+      },
+      "note": {
+       "en": "Aortic valve for prolapse of a cusp into the defect"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Left atrium and ventricle for volume overload"
+      },
+      "note": {
+       "en": "Left atrium and ventricle for volume overload"
+      }
+     }
+    ],
+    "view": "tte_plax"
+   },
+   "levels": [
+    "mbbs"
+   ],
+   "level": "mbbs",
+   "view": "tte_plax",
+   "test": {
+    "mcqTopic": "pathology"
+   }
+  },
+  "pocus_arrest_pulse_check": {
+   "title": {
+    "en": "Ten second pulse check echo in cardiac arrest"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Fit the echo inside a 10 second pause"
+   },
+   "see": {
+    "diagram": "diagrams/pocus_arrest_pulse_check.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Pulse check subxiphoid view of the arrest protocol"
+    },
+    "caption": {
+     "en": "Pulse check subxiphoid view of the arrest protocol"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "tamponade fluid, a huge dilated right heart suggesting massive embolus, and empt"
+      },
+      "note": {
+       "en": "What you see: The arrest protocol fits the echo into the rhythm check pause without stretching it. The subxiphoid window shows one of three states: organised beating with a pulse meaning return of circulation, organised motion without a pulse meaning pulseless electrical activity, or a still heart meaning asystole. Around the heart the scan hunts reversible causes: tamponade fluid, a huge dilated right heart suggesting massive embolus, and empty flat chambers suggesting profound volume loss."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Subxiphoid heart in the pause clip, pericardial space for tamponade, right heart"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Subxiphoid heart in the pause clip, pericardial space for tamponade, right heart size for embolus pattern, chamber filling for volume state."
+      }
+     }
+    ],
+    "view": "pocus_arrest_subxiphoid"
+   },
+   "levels": [
+    "resident",
+    "fellow"
+   ],
+   "level": "resident",
+   "view": "pocus_arrest_subxiphoid",
+   "test": {
+    "mcqTopic": "pocus"
+   }
+  },
+  "pocus_arrest_subxiphoid": {
+   "title": {
+    "en": "Cardiac arrest subxiphoid pulse check"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Pre position the probe so the pause holds only recording"
+   },
+   "see": {
+    "diagram": "diagrams/pocus_arrest_subxiphoid.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Cardiac arrest subxiphoid pulse check as rendered by the Echo Lab from this lesson"
+    },
+    "caption": {
+     "en": "Cardiac arrest subxiphoid pulse check as rendered by the Echo Lab from this lesson"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "During the pulse check the subxiphoid window opens onto the beating or still hea"
+      },
+      "note": {
+       "en": "What you see: During the pulse check the subxiphoid window opens onto the beating or still heart. Organised cardiac motion with a pulse means return of circulation, while organised motion without a pulse is pulseless electrical activity. A still heart with no motion through the pause is asystole. Clotted blood inside a chamber can mimic wall motion, so motion must be judged across the full pause with the gain set fairly."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Heart with four chambers where visible, pericardium, liver as the window, femora"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Heart with four chambers where visible, pericardium, liver as the window, femoral or carotid pulse correlation by the bedside team."
+      }
+     }
+    ],
+    "view": "pocus_arrest_subxiphoid"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "pocus_arrest_subxiphoid",
+   "test": {
+    "mcqTopic": "pocus"
+   }
+  },
+  "pocus_blue_lower": {
+   "title": {
+    "en": "BLUE lower PLAPS point"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Find the costophrenic recess at the PLAPS point"
+   },
+   "see": {
+    "diagram": "diagrams/pocus_blue_lower.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "BLUE lower PLAPS point as rendered by the Echo Lab from this lesson"
+    },
+    "caption": {
+     "en": "BLUE lower PLAPS point as rendered by the Echo Lab from this lesson"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "At the lower PLAPS point on the posterolateral chest, the probe looks at the cos"
+      },
+      "note": {
+       "en": "What you see: At the lower PLAPS point on the posterolateral chest, the probe looks at the costophrenic recess where pleural fluid gathers first. In health the diaphragm curves brightly with lung above and liver or spleen below, and the recess angle is sharp. With effusion a dark pocket opens above the diaphragm and the lung floats within it. Consolidation below the line shows liver like tissue with bright air echoes instead of clean aeration."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Diaphragm dome, costophrenic recess angle, pleural line above, liver or spleen b"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Diaphragm dome, costophrenic recess angle, pleural line above, liver or spleen below, opposite side comparison."
+      }
+     }
+    ],
+    "view": "pocus_blue_lower"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "pocus_blue_lower",
+   "test": {
+    "mcqTopic": "pocus"
+   }
+  },
+  "pocus_blue_protocol": {
+   "title": {
+    "en": "BLUE protocol for breathlessness"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Name the A, B and C profiles and the lung point"
+   },
+   "see": {
+    "diagram": "diagrams/pocus_blue_protocol.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "BLUE upper point of the protocol"
+    },
+    "caption": {
+     "en": "BLUE upper point of the protocol"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "BLUE reads breathlessness through lung profiles at standard chest points plus th"
+      },
+      "note": {
+       "en": "What you see: BLUE reads breathlessness through lung profiles at standard chest points plus the PLAPS point and a leg vein check. The A profile of sliding with horizontal artefacts marks dry lung, the B profile of three or more B lines marks interstitial fluid, the A/B mix marks localised disease, and the C profile of consolidation marks pneumonia. Absent sliding with a lung point marks pneumothorax. Combined with the leg vein check, the profiles separate oedema, pneumonia, embolus, pneumothorax and chronic disease."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Upper and lower BLUE points on both sides, PLAPS recess on both sides, femoral a"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Upper and lower BLUE points on both sides, PLAPS recess on both sides, femoral and popliteal veins by compression."
+      }
+     }
+    ],
+    "view": "pocus_blue_upper"
+   },
+   "levels": [
+    "resident",
+    "fellow"
+   ],
+   "level": "resident",
+   "view": "pocus_blue_upper",
+   "test": {
+    "mcqTopic": "pocus"
+   }
+  },
+  "pocus_blue_upper": {
+   "title": {
+    "en": "BLUE upper point"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Find the pleural line at the upper BLUE point"
+   },
+   "see": {
+    "diagram": "diagrams/pocus_blue_upper.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "BLUE upper point profile as rendered by the Echo Lab from this lesson"
+    },
+    "caption": {
+     "en": "BLUE upper point profile as rendered by the Echo Lab from this lesson"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "At the upper BLUE point on the front chest, the probe shows rib shadows with the"
+      },
+      "note": {
+       "en": "What you see: At the upper BLUE point on the front chest, the probe shows rib shadows with the pleural line between them. In the A profile the line slides with horizontal reverberation artefacts and no vertical B lines, marking dry aerated lung. In the B profile three or more vertical laser like B lines erase the horizontal artefacts and move with breath, marking interstitial fluid. Mixed A and B patterns localise the boundary of involvement."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Rib shadows, pleural line, horizontal reverberation artefacts in the A profile,"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Rib shadows, pleural line, horizontal reverberation artefacts in the A profile, three or more B lines in the B profile."
+      }
+     }
+    ],
+    "view": "pocus_blue_upper"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "pocus_blue_upper",
+   "test": {
+    "mcqTopic": "pocus"
+   }
+  },
+  "pocus_efast_lung_left": {
+   "title": {
+    "en": "eFAST lung left"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Mirror the sliding assessment on the left chest"
+   },
+   "see": {
+    "diagram": "diagrams/pocus_efast_lung_left.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "eFAST left lung sliding as rendered by the Echo Lab from this lesson"
+    },
+    "caption": {
+     "en": "eFAST left lung sliding as rendered by the Echo Lab from this lesson"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "ribs cast paired shadows with the bright pleural line sliding between them. Hear"
+      },
+      "note": {
+       "en": "What you see: The left chest mirrors the right: ribs cast paired shadows with the bright pleural line sliding between them. Heart motion may shimmer at the medial edge, which is normal and should not be mistaken for lung pathology. As on the right, M mode shows seashore when sliding is present and stratosphere when it is absent. Comparing left with right in the same breath phase is the core skill of this view."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Rib shadows on either side, pleural line between them, lung below the line, comp"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Rib shadows on either side, pleural line between them, lung below the line, comparison with the right sided findings."
+      }
+     }
+    ],
+    "view": "pocus_efast_lung_left"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "pocus_efast_lung_left",
+   "test": {
+    "mcqTopic": "pocus"
+   }
+  },
+  "pocus_efast_lung_right": {
+   "title": {
+    "en": "eFAST lung right"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Find the pleural line between two ribs"
+   },
+   "see": {
+    "diagram": "diagrams/pocus_efast_lung_right.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "eFAST right lung sliding as rendered by the Echo Lab from this lesson"
+    },
+    "caption": {
+     "en": "eFAST right lung sliding as rendered by the Echo Lab from this lesson"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "With a high frequency probe on the chest wall, the pleural line appears as a bri"
+      },
+      "note": {
+       "en": "What you see: With a high frequency probe on the chest wall, the pleural line appears as a bright horizontal line sliding back and forth with breath just deep to the ribs. In M mode a seashore pattern of still chest wall above granular lung below confirms sliding. Absent sliding gives a flat stratosphere pattern of parallel lines. The lung point where sliding meets absent sliding marks the edge of a pneumothorax."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Rib shadows on either side, pleural line between them, lung below the line, mirr"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Rib shadows on either side, pleural line between them, lung below the line, mirror position on the opposite chest."
+      }
+     }
+    ],
+    "view": "pocus_efast_lung_right"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "pocus_efast_lung_right",
+   "test": {
+    "mcqTopic": "pocus"
+   }
+  },
+  "pocus_efast_protocol": {
+   "title": {
+    "en": "eFAST protocol"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Add bilateral lung windows to the FAST sequence"
+   },
+   "see": {
+    "diagram": "diagrams/pocus_efast_protocol.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "eFAST right lung window of the protocol"
+    },
+    "caption": {
+     "en": "eFAST right lung window of the protocol"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "is there a pneumothorax. Each lung window shows sliding pleura in health and abs"
+      },
+      "note": {
+       "en": "What you see: eFAST adds two lung windows to the four FAST windows, asking one extra question on each side: is there a pneumothorax. Each lung window shows sliding pleura in health and absent sliding with a lung point in pneumothorax. The full protocol therefore maps belly bleeding, pericardial blood and chest air in one sweep. In chest trauma the lung windows come early in the order so a tension pneumothorax is caught fast."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Pleural line with sliding on right and left, Morison pouch, splenorenal recess,"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Pleural line with sliding on right and left, Morison pouch, splenorenal recess, pelvic pouches, pericardial space."
+      }
+     }
+    ],
+    "view": "pocus_efast_lung_right"
+   },
+   "levels": [
+    "mbbs",
+    "resident"
+   ],
+   "level": "mbbs",
+   "view": "pocus_efast_lung_right",
+   "test": {
+    "mcqTopic": "pocus"
+   }
+  },
+  "pocus_fast_luq": {
+   "title": {
+    "en": "FAST left upper quadrant"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Name the spleen kidney diaphragm landmarks of the left upper quadrant"
+   },
+   "see": {
+    "diagram": "diagrams/pocus_fast_luq.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "FAST left upper quadrant as rendered by the Echo Lab from this lesson"
+    },
+    "caption": {
+     "en": "FAST left upper quadrant as rendered by the Echo Lab from this lesson"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "With the probe on the left flank, the spleen appears as a smaller crescent with"
+      },
+      "note": {
+       "en": "What you see: With the probe on the left flank, the spleen appears as a smaller crescent with the left kidney below and the bright diaphragm above. The splenorenal recess between them is the dependent pocket on this side, and the stomach bubble may flash nearby with shifting gas shadows. In health spleen and kidney touch with no dark stripe between them. This window is harder than the right side because ribs and stomach gas break up the image, so patience with positioning matters more here."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Spleen, left kidney, splenorenal recess between them, diaphragm above the spleen"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Spleen, left kidney, splenorenal recess between them, diaphragm above the spleen."
+      }
+     }
+    ],
+    "view": "pocus_fast_luq"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "pocus_fast_luq",
+   "test": {
+    "mcqTopic": "pocus"
+   }
+  },
+  "pocus_fast_pelvis": {
+   "title": {
+    "en": "FAST pelvis transverse"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Use the full bladder as a window onto the pelvic pouches"
+   },
+   "see": {
+    "diagram": "diagrams/pocus_fast_pelvis.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "FAST pelvis transverse as rendered by the Echo Lab from this lesson"
+    },
+    "caption": {
+     "en": "FAST pelvis transverse as rendered by the Echo Lab from this lesson"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "With a full bladder as the window, the bladder appears as a large dark oval abov"
+      },
+      "note": {
+       "en": "What you see: With a full bladder as the window, the bladder appears as a large dark oval above the pubic bone. Behind it in men lies the rectovesical pouch and behind the uterus in women lies the pouch of Douglas, the lowest peritoneal recess where free fluid collects. In health the organs hug each other with no dark stripe behind the bladder. An empty bladder folds the recess shut and hides fluid, so bladder filling decides whether this view can be trusted."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Urinary bladder, rectovesical pouch in men, pouch of Douglas in women."
+      },
+      "note": {
+       "en": "Landmarks to confirm: Urinary bladder, rectovesical pouch in men, pouch of Douglas in women."
+      }
+     }
+    ],
+    "view": "pocus_fast_pelvis"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "pocus_fast_pelvis",
+   "test": {
+    "mcqTopic": "pocus"
+   }
+  },
+  "pocus_fast_protocol": {
+   "title": {
+    "en": "FAST protocol"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Run the four FAST windows in fixed order"
+   },
+   "see": {
+    "diagram": "diagrams/pocus_fast_protocol.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "FAST right upper quadrant window of the protocol"
+    },
+    "caption": {
+     "en": "FAST right upper quadrant window of the protocol"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "is there new free fluid or pericardial blood. A positive window shows a dark ane"
+      },
+      "note": {
+       "en": "What you see: FAST is a fixed order sweep of four windows in a trauma patient: right upper quadrant, left upper quadrant, pelvis and subxiphoid heart. Each window asks one question: is there new free fluid or pericardial blood. A positive window shows a dark anechoic stripe where organs should touch. A complete negative set lowers the chance of major bleeding but never rules it out, so the protocol repeats when the patient stays unstable."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Morison pouch on the right, splenorenal recess on the left, pelvic pouches behin"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Morison pouch on the right, splenorenal recess on the left, pelvic pouches behind the bladder, pericardial space around the heart."
+      }
+     }
+    ],
+    "view": "pocus_fast_ruq"
+   },
+   "levels": [
+    "mbbs",
+    "resident"
+   ],
+   "level": "mbbs",
+   "view": "pocus_fast_ruq",
+   "test": {
+    "mcqTopic": "pocus"
+   }
+  },
+  "pocus_fast_ruq": {
+   "title": {
+    "en": "FAST right upper quadrant"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Name the liver kidney diaphragm landmarks of the right upper quadrant"
+   },
+   "see": {
+    "diagram": "diagrams/pocus_fast_ruq.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "FAST right upper quadrant as rendered by the Echo Lab from this lesson"
+    },
+    "caption": {
+     "en": "FAST right upper quadrant as rendered by the Echo Lab from this lesson"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "With the probe on the right flank, the liver fills the screen as a smooth grey o"
+      },
+      "note": {
+       "en": "What you see: With the probe on the right flank, the liver fills the screen as a smooth grey organ with the bright diaphragm curving above it and the right kidney sitting below. Between liver and kidney lies Morison pouch, the dependent recess where free fluid settles first. In health the liver edge hugs the kidney with no dark stripe between them. Blood and urine both look dark, so any anechoic stripe in the pouch in a trauma patient means fluid until proven otherwise."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Liver, right kidney, Morison pouch between them, diaphragm above the liver."
+      },
+      "note": {
+       "en": "Landmarks to confirm: Liver, right kidney, Morison pouch between them, diaphragm above the liver."
+      }
+     }
+    ],
+    "view": "pocus_fast_ruq"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "pocus_fast_ruq",
+   "test": {
+    "mcqTopic": "pocus"
+   }
+  },
+  "pocus_fast_subxiphoid": {
+   "title": {
+    "en": "FAST subxiphoid cardiac"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Use the liver window to obtain the subxiphoid heart view"
+   },
+   "see": {
+    "diagram": "diagrams/pocus_fast_subxiphoid.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "FAST subxiphoid cardiac as rendered by the Echo Lab from this lesson"
+    },
+    "caption": {
+     "en": "FAST subxiphoid cardiac as rendered by the Echo Lab from this lesson"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Pressed flat under the rib edge and aimed at the left shoulder, the probe uses t"
+      },
+      "note": {
+       "en": "What you see: Pressed flat under the rib edge and aimed at the left shoulder, the probe uses the liver to look up at the heart. The four chambers beat in the distance with the bright pericardium wrapping them. In health the layers glide together with no dark gap. In tamponade a dark fluid ring separates the layers and the right sided chambers collapse in diastole. Epicardial fat can mimic fluid, but fat moves with the heart wall while fluid stays still."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Heart with four chambers, pericardium, pericardial space, liver as the window."
+      },
+      "note": {
+       "en": "Landmarks to confirm: Heart with four chambers, pericardium, pericardial space, liver as the window."
+      }
+     }
+    ],
+    "view": "pocus_fast_subxiphoid"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "pocus_fast_subxiphoid",
+   "test": {
+    "mcqTopic": "pocus"
+   }
+  },
+  "pocus_ivc": {
+   "title": {
+    "en": "POCUS inferior vena cava collapsibility"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Obtain the cava in long axis through the liver window"
+   },
+   "see": {
+    "diagram": "diagrams/pocus_ivc.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "POCUS inferior vena cava collapsibility as rendered by the Echo Lab from this lesson"
+    },
+    "caption": {
+     "en": "POCUS inferior vena cava collapsibility as rendered by the Echo Lab from this lesson"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "collapsing inward on inspiration during spontaneous breathing and expanding duri"
+      },
+      "note": {
+       "en": "What you see: From the subcostal window the inferior vena cava runs as a dark tube from the liver into the right atrium. In M mode its walls move with breath: collapsing inward on inspiration during spontaneous breathing and expanding during mechanical inspiration. A small collapsing cava suggests low right sided pressure and fluid tolerance, while a large fixed cava suggests high right sided pressure. The hepatic vein joins nearby and must not be mistaken for the main trunk."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Inferior vena cava trunk, right atrium entry, hepatic vein branch, liver as the"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Inferior vena cava trunk, right atrium entry, hepatic vein branch, liver as the window."
+      }
+     }
+    ],
+    "view": "pocus_ivc"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "pocus_ivc",
+   "test": {
+    "mcqTopic": "pocus"
+   }
+  },
+  "pocus_ivc_protocol": {
+   "title": {
+    "en": "IVC collapsibility and fluid responsiveness"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Measure and calculate cava collapsibility correctly"
+   },
+   "see": {
+    "diagram": "diagrams/pocus_ivc_protocol.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Cava measurement view of the fluid protocol"
+    },
+    "caption": {
+     "en": "Cava measurement view of the fluid protocol"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "This protocol turns the cava view into a fluid decision. In a spontaneously brea"
+      },
+      "note": {
+       "en": "What you see: This protocol turns the cava view into a fluid decision. In a spontaneously breathing patient the cava collapses on inspiration when venous pressure is low and stays fixed and plump when pressure is high. A small cava with big collapse predicts that fluids will raise output, while a large fixed cava warns that more fluid may harm. The scan always pairs with lungs, blood pressure trend and examination, since no single vessel decides resuscitation alone."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Inferior vena cava trunk at 1 to 2 cm from the junction, right atrium entry, bil"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Inferior vena cava trunk at 1 to 2 cm from the junction, right atrium entry, bilateral lung zones for B line monitoring."
+      }
+     }
+    ],
+    "view": "pocus_ivc"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "pocus_ivc",
+   "test": {
+    "mcqTopic": "pocus"
+   }
+  },
+  "pocus_ivc_rap": {
+   "title": {
+    "en": "Inferior vena cava and right atrial pressure"
+   },
+   "minutes": 6,
+   "idea": {
+    "en": "Find the subcostal caval window and the standard measurement point"
+   },
+   "see": {
+    "diagram": "diagrams/pocus_ivc_rap.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Subcostal long axis of the inferior vena cava entering the right atrium"
+    },
+    "caption": {
+     "en": "Subcostal long axis of the inferior vena cava entering the right atrium"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Cava entering the right atrium in the same long axis plane"
+      },
+      "note": {
+       "en": "Cava entering the right atrium in the same long axis plane"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Hepatic vein joining nearby as the confirmation landmark"
+      },
+      "note": {
+       "en": "Hepatic vein joining nearby as the confirmation landmark"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "M mode line perpendicular to the cava walls"
+      },
+      "note": {
+       "en": "M mode line perpendicular to the cava walls"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Sniff collapse seen as a sharp transient narrowing"
+      },
+      "note": {
+       "en": "Sniff collapse seen as a sharp transient narrowing"
+      }
+     }
+    ],
+    "view": "tte_subcostal_ivc"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "tte_subcostal_ivc",
+   "test": {
+    "mcqTopic": "pocus"
+   }
+  },
+  "pocus_rush": {
+   "title": {
+    "en": "RUSH protocol for shock"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "State the pump tank and pipes parts of RUSH"
+   },
+   "see": {
+    "diagram": "diagrams/pocus_rush.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "RUSH pump view of the protocol"
+    },
+    "caption": {
+     "en": "RUSH pump view of the protocol"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "the aorta for aneurysm or dissection and the leg veins for clot in suspected emb"
+      },
+      "note": {
+       "en": "What you see: RUSH maps shock physiology in three parts remembered as pump, tank and pipes. Pump is the heart: contractility and pericardial fluid in the subxiphoid view. Tank is volume: the inferior vena cava for venous filling plus FAST windows and lung sliding for leaks into belly and chest. Pipes are the great vessels: the aorta for aneurysm or dissection and the leg veins for clot in suspected embolus. Together the three parts separate cardiogenic, hypovolaemic, obstructive and distributive shock at the bedside."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Heart squeeze and pericardial space, inferior vena cava trunk, Morison pouch and"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Heart squeeze and pericardial space, inferior vena cava trunk, Morison pouch and splenorenal recess, bilateral pleural lines, abdominal aorta, femoral and popliteal veins."
+      }
+     }
+    ],
+    "view": "pocus_fast_subxiphoid"
+   },
+   "levels": [
+    "resident",
+    "fellow"
+   ],
+   "level": "resident",
+   "view": "pocus_fast_subxiphoid",
+   "test": {
+    "mcqTopic": "pocus"
+   }
+  },
+  "tee_desc_aorta_sax": {
+   "title": {
+    "en": "Descending aorta short axis"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Describe the descending aorta ring and its neighbours"
+   },
+   "see": {
+    "diagram": "diagrams/tee_desc_aorta_sax.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Descending aorta short axis as rendered by the Echo Lab from this lesson"
+    },
+    "caption": {
+     "en": "Descending aorta short axis as rendered by the Echo Lab from this lesson"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Turned leftward in the mid oesophagus, the sector cuts the descending thoracic a"
+      },
+      "note": {
+       "en": "What you see: Turned leftward in the mid oesophagus, the sector cuts the descending thoracic aorta in cross section as a bright round ring with pulsatile walls. The pleural line and lung sit beside it and the spine shadow anchors the far side. Withdrawing slowly from diaphragm to arch walks the ring along the whole thoracic course, so a flap line, clot crescent or wall haematoma can be traced along its length."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Descending aorta in cross section, pleural line, lung edge, thoracic spine shado"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Descending aorta in cross section, pleural line, lung edge, thoracic spine shadow, oesophageal wall layers beside the vessel."
+      }
+     }
+    ],
+    "view": "tee_desc_aorta_sax"
+   },
+   "levels": [
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tee_desc_aorta_sax",
+   "test": {
+    "mcqTopic": "tee"
+   }
+  },
+  "tee_me_2c": {
+   "title": {
+    "en": "Mid oesophageal two chamber"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Describe the structures seen in the mid oesophageal two chamber view"
+   },
+   "see": {
+    "diagram": "diagrams/tee_me_2c.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Mid oesophageal two chamber as rendered by the Echo Lab from this lesson"
+    },
+    "caption": {
+     "en": "Mid oesophageal two chamber as rendered by the Echo Lab from this lesson"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "From the four chamber plane the sector rotates forward until the right heart dro"
+      },
+      "note": {
+       "en": "What you see: From the four chamber plane the sector rotates forward until the right heart drops out and the left heart fills the image. The left ventricle and left atrium stack vertically with the mitral valve between them, showing the anterior and inferior walls of the ventricle. The left atrial appendage appears as a finger like pouch at the edge of the atrium and the left upper pulmonary vein enters nearby. This plane profiles the inferior wall well, so regional wall motion of that territory is judged here."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Left ventricle cavity, left atrium cavity, anterior and posterior leaflets of th"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Left ventricle cavity, left atrium cavity, anterior and posterior leaflets of the mitral valve, left atrial appendage, left upper pulmonary vein, oesophagus behind the left atrium."
+      }
+     }
+    ],
+    "view": "tee_me_2c"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tee_me_2c",
+   "test": {
+    "mcqTopic": "tee"
+   }
+  },
+  "tee_me_4c": {
+   "title": {
+    "en": "Mid oesophageal four chamber"
+   },
+   "minutes": 6,
+   "idea": {
+    "en": "Describe the structures seen in the mid oesophageal four chamber view"
+   },
+   "see": {
+    "diagram": "diagrams/tee_me_4c.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Mid oesophageal four chamber as rendered by the Echo Lab from this lesson"
+    },
+    "caption": {
+     "en": "Mid oesophageal four chamber as rendered by the Echo Lab from this lesson"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "The probe lies in the oesophagus directly behind the left atrium, so the atria s"
+      },
+      "note": {
+       "en": "What you see: The probe lies in the oesophagus directly behind the left atrium, so the atria sit at the top of the sector and the ventricles open below toward the apex. All four chambers appear in one plane with the mitral valve on the left of the image and the tricuspid valve on the right. The interatrial septum and the interventricular septum run across the middle of the image and the coronary sinus may show as a small round vessel in the posterior groove. Because the beam travels only a short distance through blood before reaching the valves, leaflet detail is crisp and near field gain should be kept low to avoid clutter behind the left atrium."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Left ventricle cavity, left atrium cavity, right ventricle cavity, right atrium"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Left ventricle cavity, left atrium cavity, right ventricle cavity, right atrium cavity, anterior and posterior leaflets of the mitral valve, anterior and septal leaflets of the tricuspid valve, interatrial septum, interventricular septum, coronary sinus, oesophagus behind the left atrium."
+      }
+     }
+    ],
+    "view": "tee_me_4c"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tee_me_4c",
+   "test": {
+    "mcqTopic": "tee"
+   }
+  },
+  "tee_me_av_lax": {
+   "title": {
+    "en": "Mid oesophageal aortic valve long axis"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Describe the outflow tract, root and junction in the long axis plane"
+   },
+   "see": {
+    "diagram": "diagrams/tee_me_av_lax.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Mid oesophageal aortic valve long axis as rendered by the Echo Lab from this lesson"
+    },
+    "caption": {
+     "en": "Mid oesophageal aortic valve long axis as rendered by the Echo Lab from this lesson"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "At the same withdrawn station as the short axis, the plane turns lengthwise so t"
+      },
+      "note": {
+       "en": "What you see: At the same withdrawn station as the short axis, the plane turns lengthwise so the outflow tract, valve and proximal ascending aorta line up in one channel. Two cusps hinge at the annulus with the sinuses bulging behind them and the sinotubular junction marking where the root meets the tubular aorta. The left atrium lies behind the root. This is the measuring plane for the annulus, sinuses and junction, and for aligning Doppler with the jet."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Left ventricular outflow tract, aortic root with sinuses of Valsalva, sinotubula"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Left ventricular outflow tract, aortic root with sinuses of Valsalva, sinotubular junction, proximal ascending aorta, left and non coronary cusps, left atrium cavity, oesophagus behind the left atrium."
+      }
+     }
+    ],
+    "view": "tee_me_av_lax"
+   },
+   "levels": [
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tee_me_av_lax",
+   "test": {
+    "mcqTopic": "tee"
+   }
+  },
+  "tee_me_av_sax": {
+   "title": {
+    "en": "Mid oesophageal aortic valve short axis"
+   },
+   "minutes": 6,
+   "idea": {
+    "en": "Describe the three cusp cross section of the aortic valve"
+   },
+   "see": {
+    "diagram": "diagrams/tee_me_av_sax.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Mid oesophageal aortic valve short axis as rendered by the Echo Lab from this lesson"
+    },
+    "caption": {
+     "en": "Mid oesophageal aortic valve short axis as rendered by the Echo Lab from this lesson"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Withdrawn slightly above the mid oesophageal station, the sector cuts the aortic"
+      },
+      "note": {
+       "en": "What you see: Withdrawn slightly above the mid oesophageal station, the sector cuts the aortic valve in cross section so all three cusps appear as a triangle opening in systole. The left atrium wraps behind, with the right atrium and right ventricular outflow to the side and the interatrial septum between them. Leaflet tips meet in the centre in diastole. This is the plane for counting cusps and judging symmetry of opening before any long axis measurement."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Left, right and non coronary cusps of the aortic valve, left atrium cavity, righ"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Left, right and non coronary cusps of the aortic valve, left atrium cavity, right atrium cavity, right ventricle cavity, interatrial septum, oesophagus behind the left atrium."
+      }
+     }
+    ],
+    "view": "tee_me_av_sax"
+   },
+   "levels": [
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tee_me_av_sax",
+   "test": {
+    "mcqTopic": "tee"
+   }
+  },
+  "tee_me_bicaval": {
+   "title": {
+    "en": "Mid oesophageal bicaval"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Describe both caval entries and the interatrial septum in the bicaval plane"
+   },
+   "see": {
+    "diagram": "diagrams/tee_me_bicaval.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Mid oesophageal bicaval as rendered by the Echo Lab from this lesson"
+    },
+    "caption": {
+     "en": "Mid oesophageal bicaval as rendered by the Echo Lab from this lesson"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "The probe turns rightward and the plane slices through both venae cavae as they"
+      },
+      "note": {
+       "en": "What you see: The probe turns rightward and the plane slices through both venae cavae as they enter the right atrium. The superior vena cava enters from above and the inferior vena cava from below, with the interatrial septum stretched between them. The right atrial appendage appears as a broad triangular pouch anteriorly. This is the transoesophageal window for septal anatomy, so the fossa ovalis and any septal defect or device is profiled here."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Superior vena cava, inferior vena cava, right atrium cavity, interatrial septum"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Superior vena cava, inferior vena cava, right atrium cavity, interatrial septum with fossa ovalis, right atrial appendage, oesophagus behind the left atrium."
+      }
+     }
+    ],
+    "view": "tee_me_bicaval"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tee_me_bicaval",
+   "test": {
+    "mcqTopic": "tee"
+   }
+  },
+  "tee_me_lax": {
+   "title": {
+    "en": "Mid oesophageal long axis"
+   },
+   "minutes": 6,
+   "idea": {
+    "en": "Describe the outflow tract and aortic root as seen in the long axis plane"
+   },
+   "see": {
+    "diagram": "diagrams/tee_me_lax.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Mid oesophageal long axis as rendered by the Echo Lab from this lesson"
+    },
+    "caption": {
+     "en": "Mid oesophageal long axis as rendered by the Echo Lab from this lesson"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Rotation continues past the two chamber plane until the aortic valve and proxima"
+      },
+      "note": {
+       "en": "What you see: Rotation continues past the two chamber plane until the aortic valve and proximal ascending aorta open above the mitral valve. The left ventricle outflow tract funnels into the aortic root with the anterior mitral leaflet forming its posterior border. The anteroseptal and inferolateral walls frame the cavity and the right ventricle may edge into the far left of the image. This is the transoesophageal window onto the outflow tract, so gradients and regurgitant jets are aligned well here."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Left ventricle cavity, left atrium cavity, left ventricular outflow tract, aorti"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Left ventricle cavity, left atrium cavity, left ventricular outflow tract, aortic root, proximal ascending aorta, anterior leaflet of the mitral valve, oesophagus behind the left atrium."
+      }
+     }
+    ],
+    "view": "tee_me_lax"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tee_me_lax",
+   "test": {
+    "mcqTopic": "tee"
+   }
+  },
+  "tee_tg_mid_sax": {
+   "title": {
+    "en": "Transgastric mid short axis"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Describe the six wall territories in transgastric cross section"
+   },
+   "see": {
+    "diagram": "diagrams/tee_tg_mid_sax.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Transgastric mid short axis as rendered by the Echo Lab from this lesson"
+    },
+    "caption": {
+     "en": "Transgastric mid short axis as rendered by the Echo Lab from this lesson"
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Advanced into the stomach with the tip flexed upward, the probe looks back at th"
+      },
+      "note": {
+       "en": "What you see: Advanced into the stomach with the tip flexed upward, the probe looks back at the heart from below so the left ventricle appears as a round doughnut in cross section. The anteroseptal, anterior, lateral, posterior, inferior and inferoseptal walls ring the cavity in order, with one or two papillary muscles jutting inward. The right ventricle crescent sits beside it. This is the monitoring plane of anaesthesia practice because wall motion of every territory shows at once during surgery."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Left ventricle cavity in cross section, anteroseptal and inferoseptal walls, ant"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Left ventricle cavity in cross section, anteroseptal and inferoseptal walls, anterior, lateral, posterior and inferior walls, papillary muscles, right ventricle crescent, mid interventricular septum."
+      }
+     }
+    ],
+    "view": "tee_tg_mid_sax"
+   },
+   "levels": [
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tee_tg_mid_sax",
+   "test": {
+    "mcqTopic": "tee"
+   }
+  },
+  "view_a2c": {
+   "title": {
+    "en": "Apical two chamber"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Rotate sixty degrees from the four chamber to face the anterior and inferior walls."
+   },
+   "see": {
+    "diagram": "diagrams/view_a2c.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Apical two chamber. Rotate sixty degrees with the apex anchored and longest."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Apical two chamber. Rotate sixty degrees with the apex anchored and longest."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Cavity of left ventricle"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Cavity of left ventricle"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Cavity of left atrium"
+      },
+      "note": {
+       "en": "Cavity of left atrium"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Anterior leaflet of mitral valve"
+      },
+      "note": {
+       "en": "Anterior leaflet of mitral valve"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Posterior leaflet of mitral valve"
+      },
+      "note": {
+       "en": "Posterior leaflet of mitral valve"
+      }
+     }
+    ],
+    "view": "tte_a2c"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "tte_a2c",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_a3c": {
+   "title": {
+    "en": "Apical three chamber"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Rotate to one hundred twenty degrees to copy the long axis from the apex."
+   },
+   "see": {
+    "diagram": "diagrams/view_a3c.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Apical three chamber. Rotate to one hundred twenty degrees until the aorta opens."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Apical three chamber. Rotate to one hundred twenty degrees until the aorta opens."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Cavity of left ventricle"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Cavity of left ventricle"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Cavity of left atrium"
+      },
+      "note": {
+       "en": "Cavity of left atrium"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Left ventricular outflow tract"
+      },
+      "note": {
+       "en": "Left ventricular outflow tract"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Aortic root"
+      },
+      "note": {
+       "en": "Aortic root"
+      }
+     }
+    ],
+    "view": "tte_a3c"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tte_a3c",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_a4c": {
+   "title": {
+    "en": "Apical four chamber"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Find the apex and open all four chambers."
+   },
+   "see": {
+    "diagram": "diagrams/view_a4c.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Apical four chamber. Find the longest ventricle with a vertical septum on the simulator."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Apical four chamber. Find the longest ventricle with a vertical septum on the simulator."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Cavity of left ventricle"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Cavity of left ventricle"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Cavity of left atrium"
+      },
+      "note": {
+       "en": "Cavity of left atrium"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Wall of left atrium"
+      },
+      "note": {
+       "en": "Wall of left atrium"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Cavity of right ventricle"
+      },
+      "note": {
+       "en": "Cavity of right ventricle"
+      }
+     }
+    ],
+    "view": "tte_a4c"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "tte_a4c",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_a4c_rv_focus": {
+   "title": {
+    "en": "Apical four chamber right ventricle focused"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Shift the four chamber to centre the right heart."
+   },
+   "see": {
+    "diagram": "diagrams/view_a4c_rv_focus.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Apical four chamber right ventricle focused. Centre the right ventricle while keeping the apex on screen."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Apical four chamber right ventricle focused. Centre the right ventricle while keeping the apex on screen."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Cavity of right ventricle"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Cavity of right ventricle"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Cavity of right atrium"
+      },
+      "note": {
+       "en": "Cavity of right atrium"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Wall of right atrium"
+      },
+      "note": {
+       "en": "Wall of right atrium"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Anterior leaflet of tricuspid valve"
+      },
+      "note": {
+       "en": "Anterior leaflet of tricuspid valve"
+      }
+     }
+    ],
+    "view": "tte_a4c_rv_focus"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "tte_a4c_rv_focus",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_a5c": {
+   "title": {
+    "en": "Apical five chamber"
+   },
+   "minutes": 6,
+   "idea": {
+    "en": "Tilt anterior from the four chamber to open the aortic valve."
+   },
+   "see": {
+    "diagram": "diagrams/view_a5c.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Apical five chamber. Tilt anterior until the aortic root rises between septum and mitral valve."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Apical five chamber. Tilt anterior until the aortic root rises between septum and mitral valve."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Cavity of left ventricle"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Cavity of left ventricle"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Cavity of left atrium"
+      },
+      "note": {
+       "en": "Cavity of left atrium"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Left ventricular outflow tract"
+      },
+      "note": {
+       "en": "Left ventricular outflow tract"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Left posterior cusp of aortic valve"
+      },
+      "note": {
+       "en": "Left posterior cusp of aortic valve"
+      }
+     }
+    ],
+    "view": "tte_a5c"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tte_a5c",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_arch_lax": {
+   "title": {
+    "en": "Suprasternal aortic arch long axis"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Open the arch from the suprasternal notch."
+   },
+   "see": {
+    "diagram": "diagrams/view_arch_lax.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Suprasternal aortic arch long axis. Curve the walking stick arch with all three branches on screen."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Suprasternal aortic arch long axis. Curve the walking stick arch with all three branches on screen."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Arch of aorta"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Arch of aorta"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Ascending aorta"
+      },
+      "note": {
+       "en": "Ascending aorta"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Descending aorta"
+      },
+      "note": {
+       "en": "Descending aorta"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Brachiocephalic trunk"
+      },
+      "note": {
+       "en": "Brachiocephalic trunk"
+      }
+     }
+    ],
+    "view": "tte_suprasternal_arch_lax"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tte_suprasternal_arch_lax",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_cardiac_cycle_ecg": {
+   "title": {
+    "en": "The cardiac cycle on echo with the ECG"
+   },
+   "minutes": 4,
+   "idea": {
+    "en": "Match systole and diastole on echo to the ECG trace."
+   },
+   "see": {
+    "diagram": "diagrams/view_cardiac_cycle_ecg.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the apical four chamber. Watch the mitral valve close with the QRS and open after the T wave."
+    },
+    "caption": {
+     "en": "Echo Lab render of the apical four chamber. Watch the mitral valve close with the QRS and open after the T wave."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "inflow valves shutting at the start of systole."
+      },
+      "note": {
+       "en": "Sounds and trace landmarks: First sound with the QRS: inflow valves shutting at the start of systole."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "outflow valves shutting at the start of diastole."
+      },
+      "note": {
+       "en": "Second sound after the T wave: outflow valves shutting at the start of diastole."
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Mitral opening snap and third sound in early diastole during rapid filling."
+      },
+      "note": {
+       "en": "Mitral opening snap and third sound in early diastole during rapid filling."
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "A murmur between the sounds is systolic and after the second sound is diastolic."
+      },
+      "note": {
+       "en": "A murmur between the sounds is systolic and after the second sound is diastolic."
+      }
+     }
+    ],
+    "view": "tte_a4c"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "tte_a4c",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_coronary_sinus": {
+   "title": {
+    "en": "Apical coronary sinus view"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Tilt posterior from the four chamber to open the coronary sinus."
+   },
+   "see": {
+    "diagram": "diagrams/view_coronary_sinus.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Apical coronary sinus view. Tilt posterior in small steps until the venous tube appears."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Apical coronary sinus view. Tilt posterior in small steps until the venous tube appears."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Coronary sinus"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Coronary sinus"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Cavity of right atrium"
+      },
+      "note": {
+       "en": "Cavity of right atrium"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Cavity of left ventricle"
+      },
+      "note": {
+       "en": "Cavity of left ventricle"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Cavity of left atrium"
+      },
+      "note": {
+       "en": "Cavity of left atrium"
+      }
+     }
+    ],
+    "view": "tte_a4c_coronary_sinus"
+   },
+   "levels": [
+    "sonographer",
+    "resident",
+    "fellow"
+   ],
+   "level": "resident",
+   "view": "tte_a4c_coronary_sinus",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_desc_sax": {
+   "title": {
+    "en": "Suprasternal descending aorta short axis"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Cut the descending aorta in true short axis."
+   },
+   "see": {
+    "diagram": "diagrams/view_desc_sax.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Suprasternal descending aorta short axis. Rotate until the vessel is a circle before judging the lumen."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Suprasternal descending aorta short axis. Rotate until the vessel is a circle before judging the lumen."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Descending aorta"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Descending aorta"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Thoracic spine shadow"
+      },
+      "note": {
+       "en": "Thoracic spine shadow"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Mistaking the transverse arch for the descending aorta. Correct it by following"
+      },
+      "note": {
+       "en": "Common mistakes and how to correct them: Mistaking the transverse arch for the descending aorta. Correct it by following the vessel down, since the arch curves away while the descending runs straight."
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Azygos arch mimicking a second lumen. Correct it by tracking the extra vessel, s"
+      },
+      "note": {
+       "en": "Azygos arch mimicking a second lumen. Correct it by tracking the extra vessel, since the azygos joins the cava and never runs the full length."
+      }
+     }
+    ],
+    "view": "tte_suprasternal_desc_sax"
+   },
+   "levels": [
+    "fellow",
+    "sonographer",
+    "resident"
+   ],
+   "level": "resident",
+   "view": "tte_suprasternal_desc_sax",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_ductal": {
+   "title": {
+    "en": "Suprasternal ductal view"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Open the ductal region between pulmonary trunk and descending aorta."
+   },
+   "see": {
+    "diagram": "diagrams/view_ductal.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Suprasternal ductal view. Bridge trunk and descending aorta with the ductal isthmus between."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Suprasternal ductal view. Bridge trunk and descending aorta with the ductal isthmus between."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Pulmonary trunk"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Pulmonary trunk"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Descending aorta"
+      },
+      "note": {
+       "en": "Descending aorta"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Ductus arteriosus region"
+      },
+      "note": {
+       "en": "Ductus arteriosus region"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Mistaking the left pulmonary artery for the ductus. Correct it by following the"
+      },
+      "note": {
+       "en": "Common mistakes and how to correct them: Mistaking the left pulmonary artery for the ductus. Correct it by following the vessel to the lung, since only the ductus joins the aorta."
+      }
+     }
+    ],
+    "view": "tte_suprasternal_ductal"
+   },
+   "levels": [
+    "fellow",
+    "sonographer",
+    "resident"
+   ],
+   "level": "resident",
+   "view": "tte_suprasternal_ductal",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_echo_windows": {
+   "title": {
+    "en": "Echo windows and the probe marker"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Name the four transthoracic windows and what each shows."
+   },
+   "see": {
+    "diagram": "diagrams/view_echo_windows.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the parasternal long axis. Every window below opens one family of views like this one."
+    },
+    "caption": {
+     "en": "Echo Lab render of the parasternal long axis. Every window below opens one family of views like this one."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "long axis, then aortic, mitral, papillary and apical short axes, then right hear"
+      },
+      "note": {
+       "en": "Window to view map: Parasternal: long axis, then aortic, mitral, papillary and apical short axes, then right heart tilts."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "four chamber, then five, two and three chamber by rotation, then the right heart"
+      },
+      "note": {
+       "en": "Apical: four chamber, then five, two and three chamber by rotation, then the right heart focus."
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "four chamber, then short axis, cava, aorta, bicaval and hepatic vein."
+      },
+      "note": {
+       "en": "Subcostal: four chamber, then short axis, cava, aorta, bicaval and hepatic vein."
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "arch long axis, then descending short axis, ductal and cava views."
+      },
+      "note": {
+       "en": "Suprasternal: arch long axis, then descending short axis, ductal and cava views."
+      }
+     }
+    ],
+    "view": "tte_plax"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "tte_plax",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_hepatic_vein": {
+   "title": {
+    "en": "Subcostal hepatic vein"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Isolate a hepatic vein through the liver."
+   },
+   "see": {
+    "diagram": "diagrams/view_hepatic_vein.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Subcostal hepatic vein. Gate one straight vein branch clear of the cava mouth."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Subcostal hepatic vein. Gate one straight vein branch clear of the cava mouth."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Hepatic vein"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Hepatic vein"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Inferior vena cava"
+      },
+      "note": {
+       "en": "Inferior vena cava"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Cavity of right atrium"
+      },
+      "note": {
+       "en": "Cavity of right atrium"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Liver"
+      },
+      "note": {
+       "en": "Liver"
+      }
+     }
+    ],
+    "view": "tte_subcostal_hepatic_vein"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tte_subcostal_hepatic_vein",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_pa_bifurcation": {
+   "title": {
+    "en": "Pulmonary artery bifurcation"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Tilt cranially to open the pulmonary trunk division."
+   },
+   "see": {
+    "diagram": "diagrams/view_pa_bifurcation.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Pulmonary artery bifurcation. Tilt toward the head until the trunk divides on the simulator."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Pulmonary artery bifurcation. Tilt toward the head until the trunk divides on the simulator."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Pulmonary trunk"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Pulmonary trunk"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Left pulmonary artery"
+      },
+      "note": {
+       "en": "Left pulmonary artery"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Right pulmonary artery"
+      },
+      "note": {
+       "en": "Right pulmonary artery"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Mistaking the aortic arch branches for the pulmonary arteries. Correct it by fol"
+      },
+      "note": {
+       "en": "Common mistakes and how to correct them: Mistaking the aortic arch branches for the pulmonary arteries. Correct it by following each branch back to the trunk, since arch branches never rejoin."
+      }
+     }
+    ],
+    "view": "tte_pa_bifurcation"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tte_pa_bifurcation",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_plax": {
+   "title": {
+    "en": "Parasternal long axis"
+   },
+   "minutes": 6,
+   "idea": {
+    "en": "Find the parasternal long axis from the left sternal edge without help."
+   },
+   "see": {
+    "diagram": "diagrams/view_plax.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Parasternal long axis. Match this plane on the simulator, then find it on a patient."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Parasternal long axis. Match this plane on the simulator, then find it on a patient."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Cavity of left ventricle"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Cavity of left ventricle"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Cavity of left atrium"
+      },
+      "note": {
+       "en": "Cavity of left atrium"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Wall of left atrium"
+      },
+      "note": {
+       "en": "Wall of left atrium"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Anterior leaflet of mitral valve"
+      },
+      "note": {
+       "en": "Anterior leaflet of mitral valve"
+      }
+     }
+    ],
+    "view": "tte_plax"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "tte_plax",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_presenting_study": {
+   "title": {
+    "en": "How to present an echo study"
+   },
+   "minutes": 4,
+   "idea": {
+    "en": "Present any echo study in a fixed ASE style order."
+   },
+   "see": {
+    "diagram": "diagrams/view_presenting_study.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the subcostal four chamber. A good presentation covers quality, size, function, valves and pressures in order."
+    },
+    "caption": {
+     "en": "Echo Lab render of the subcostal four chamber. A good presentation covers quality, size, function, valves and pressures in order."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Indication, rhythm, heart rate, blood pressure and quality."
+      },
+      "note": {
+       "en": "Report headings: Indication, rhythm, heart rate, blood pressure and quality."
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "size, thickness, regional motion and ejection fraction."
+      },
+      "note": {
+       "en": "Left ventricle: size, thickness, regional motion and ejection fraction."
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Left atrium and right heart with pulmonary pressure estimate."
+      },
+      "note": {
+       "en": "Left atrium and right heart with pulmonary pressure estimate."
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "morphology plus grade with supporting numbers."
+      },
+      "note": {
+       "en": "Valves: morphology plus grade with supporting numbers."
+      }
+     }
+    ],
+    "view": "tte_subcostal_4c"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "tte_subcostal_4c",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_psax_apex": {
+   "title": {
+    "en": "Parasternal short axis at apical level"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Sweep to the true apex in short axis."
+   },
+   "see": {
+    "diagram": "diagrams/view_psax_apex.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Parasternal short axis at apical level. Follow the sweep down to the small apical cavity."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Parasternal short axis at apical level. Follow the sweep down to the small apical cavity."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Cavity of left ventricle"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Cavity of left ventricle"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Left ventricular apex"
+      },
+      "note": {
+       "en": "Left ventricular apex"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Foreshortened apex masquerading as the true apex. Correct it by keeping the swee"
+      },
+      "note": {
+       "en": "Common mistakes and how to correct them: Foreshortened apex masquerading as the true apex. Correct it by keeping the sweep going until the cavity is at its smallest and the walls converge."
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Papillary muscle in view meaning the cut sits too basal. Correct it by sweeping"
+      },
+      "note": {
+       "en": "Papillary muscle in view meaning the cut sits too basal. Correct it by sweeping further toward the apex until the muscle heads disappear."
+      }
+     }
+    ],
+    "view": "tte_psax_apex"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "tte_psax_apex",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_psax_av": {
+   "title": {
+    "en": "Parasternal short axis at aortic valve level"
+   },
+   "minutes": 6,
+   "idea": {
+    "en": "Tilt from the long axis to a true short axis at the aortic valve."
+   },
+   "see": {
+    "diagram": "diagrams/view_psax_av.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Parasternal short axis at aortic valve level. Practise counting three cusps on the simulator at this level."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Parasternal short axis at aortic valve level. Practise counting three cusps on the simulator at this level."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Left posterior cusp of aortic valve"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Left posterior cusp of aortic valve"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Right posterior cusp of aortic valve"
+      },
+      "note": {
+       "en": "Right posterior cusp of aortic valve"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Anterior cusp of aortic valve"
+      },
+      "note": {
+       "en": "Anterior cusp of aortic valve"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Cavity of right atrium"
+      },
+      "note": {
+       "en": "Cavity of right atrium"
+      }
+     }
+    ],
+    "view": "tte_psax_av"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tte_psax_av",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_psax_mv": {
+   "title": {
+    "en": "Parasternal short axis at mitral valve level"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Find the mitral valve midway between base and apex."
+   },
+   "see": {
+    "diagram": "diagrams/view_psax_mv.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Parasternal short axis at mitral valve level. Learn the round ventricle with meeting leaflets at this level."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Parasternal short axis at mitral valve level. Learn the round ventricle with meeting leaflets at this level."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Cavity of left ventricle"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Cavity of left ventricle"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Anterior leaflet of mitral valve"
+      },
+      "note": {
+       "en": "Anterior leaflet of mitral valve"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Posterior leaflet of mitral valve"
+      },
+      "note": {
+       "en": "Posterior leaflet of mitral valve"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Interventricular septum"
+      },
+      "note": {
+       "en": "Interventricular septum"
+      }
+     }
+    ],
+    "view": "tte_psax_mv"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "tte_psax_mv",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_psax_papillary": {
+   "title": {
+    "en": "Parasternal short axis at papillary muscle level"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Find the mid cavity at papillary muscle level."
+   },
+   "see": {
+    "diagram": "diagrams/view_psax_papillary.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Parasternal short axis at papillary muscle level. Practise the round mid cavity with two muscle heads."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Parasternal short axis at papillary muscle level. Practise the round mid cavity with two muscle heads."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Cavity of left ventricle"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Cavity of left ventricle"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Lateral papillary muscle of left ventricle"
+      },
+      "note": {
+       "en": "Lateral papillary muscle of left ventricle"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Anterolateral head of lateral papillary muscle"
+      },
+      "note": {
+       "en": "Anterolateral head of lateral papillary muscle"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Interventricular septum"
+      },
+      "note": {
+       "en": "Interventricular septum"
+      }
+     }
+    ],
+    "view": "tte_psax_papillary"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "tte_psax_papillary",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_right_parasternal": {
+   "title": {
+    "en": "Right parasternal ascending aorta"
+   },
+   "minutes": 6,
+   "idea": {
+    "en": "Open the ascending aorta from the right sternal edge."
+   },
+   "see": {
+    "diagram": "diagrams/view_right_parasternal.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Right parasternal ascending aorta. Roll the patient right side down and lengthen the ascending aorta."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Right parasternal ascending aorta. Roll the patient right side down and lengthen the ascending aorta."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Ascending aorta"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Ascending aorta"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Aortic root"
+      },
+      "note": {
+       "en": "Aortic root"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Left posterior cusp of aortic valve"
+      },
+      "note": {
+       "en": "Left posterior cusp of aortic valve"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Left ventricular outflow tract"
+      },
+      "note": {
+       "en": "Left ventricular outflow tract"
+      }
+     }
+    ],
+    "view": "tte_right_parasternal_aorta"
+   },
+   "levels": [
+    "fellow",
+    "sonographer",
+    "resident"
+   ],
+   "level": "resident",
+   "view": "tte_right_parasternal_aorta",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_rv_inflow": {
+   "title": {
+    "en": "Right ventricular inflow"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Open the right atrium, tricuspid valve and right ventricle in one plane."
+   },
+   "see": {
+    "diagram": "diagrams/view_rv_inflow.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Right ventricular inflow. Open the tricuspid valve and cava entry on the simulator."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Right ventricular inflow. Open the tricuspid valve and cava entry on the simulator."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Cavity of right atrium"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Cavity of right atrium"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Wall of right atrium"
+      },
+      "note": {
+       "en": "Wall of right atrium"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Cavity of right ventricle"
+      },
+      "note": {
+       "en": "Cavity of right ventricle"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Anterior leaflet of tricuspid valve"
+      },
+      "note": {
+       "en": "Anterior leaflet of tricuspid valve"
+      }
+     }
+    ],
+    "view": "tte_rv_inflow"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "tte_rv_inflow",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_rvot_long": {
+   "title": {
+    "en": "Right ventricular outflow long axis"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Rotate from the long axis to open the pulmonary valve."
+   },
+   "see": {
+    "diagram": "diagrams/view_rvot_long.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Right ventricular outflow long axis. Rotate until the pulmonary trunk lengthens on the simulator."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Right ventricular outflow long axis. Rotate until the pulmonary trunk lengthens on the simulator."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Cavity of right ventricle"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Cavity of right ventricle"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Pulmonary trunk"
+      },
+      "note": {
+       "en": "Pulmonary trunk"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Left anterior cusp of pulmonary valve"
+      },
+      "note": {
+       "en": "Left anterior cusp of pulmonary valve"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Posterior cusp of pulmonary valve"
+      },
+      "note": {
+       "en": "Posterior cusp of pulmonary valve"
+      }
+     }
+    ],
+    "view": "tte_rvot_long"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tte_rvot_long",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_subcostal_4c": {
+   "title": {
+    "en": "Subcostal four chamber"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Find the heart through the liver from the subxiphoid."
+   },
+   "see": {
+    "diagram": "diagrams/view_subcostal_4c.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Subcostal four chamber. Press flat under the xiphoid and hang the heart below the liver."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Subcostal four chamber. Press flat under the xiphoid and hang the heart below the liver."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Cavity of left ventricle"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Cavity of left ventricle"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Cavity of left atrium"
+      },
+      "note": {
+       "en": "Cavity of left atrium"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Cavity of right ventricle"
+      },
+      "note": {
+       "en": "Cavity of right ventricle"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Cavity of right atrium"
+      },
+      "note": {
+       "en": "Cavity of right atrium"
+      }
+     }
+    ],
+    "view": "tte_subcostal_4c"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "tte_subcostal_4c",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_subcostal_aorta": {
+   "title": {
+    "en": "Subcostal abdominal aorta long axis"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Find the abdominal aorta in the midline epigastrium."
+   },
+   "see": {
+    "diagram": "diagrams/view_subcostal_aorta.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Subcostal abdominal aorta long axis. Use the spine shadow as your landmark for the midline aorta."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Subcostal abdominal aorta long axis. Use the spine shadow as your landmark for the midline aorta."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Abdominal aorta"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Abdominal aorta"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Thoracic spine shadow"
+      },
+      "note": {
+       "en": "Thoracic spine shadow"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Mistaking the inferior vena cava for the aorta. Correct it by watching a full br"
+      },
+      "note": {
+       "en": "Common mistakes and how to correct them: Mistaking the inferior vena cava for the aorta. Correct it by watching a full breath, since the aorta keeps its calibre while the cava changes."
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Spine shadow hiding the far wall. Correct it by angling slightly off midline unt"
+      },
+      "note": {
+       "en": "Spine shadow hiding the far wall. Correct it by angling slightly off midline until the far wall clears the shadow."
+      }
+     }
+    ],
+    "view": "tte_subcostal_aorta"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tte_subcostal_aorta",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_subcostal_bicaval": {
+   "title": {
+    "en": "Subcostal bicaval view"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Join both cavae into one plane through the atrium."
+   },
+   "see": {
+    "diagram": "diagrams/view_subcostal_bicaval.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Subcostal bicaval view. Rock gently until both cavae meet the atrium in one line."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Subcostal bicaval view. Rock gently until both cavae meet the atrium in one line."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Superior vena cava"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Superior vena cava"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Inferior vena cava"
+      },
+      "note": {
+       "en": "Inferior vena cava"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Cavity of right atrium"
+      },
+      "note": {
+       "en": "Cavity of right atrium"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Interatrial septum"
+      },
+      "note": {
+       "en": "Interatrial septum"
+      }
+     }
+    ],
+    "view": "tte_subcostal_bicaval"
+   },
+   "levels": [
+    "sonographer",
+    "resident",
+    "fellow"
+   ],
+   "level": "resident",
+   "view": "tte_subcostal_bicaval",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_subcostal_ivc": {
+   "title": {
+    "en": "Subcostal inferior vena cava long axis"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Open the cava through the liver in long axis."
+   },
+   "see": {
+    "diagram": "diagrams/view_subcostal_ivc.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Subcostal inferior vena cava long axis. Line the cava into the atrium and watch one full sniff."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Subcostal inferior vena cava long axis. Line the cava into the atrium and watch one full sniff."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Inferior vena cava"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Inferior vena cava"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Cavity of right atrium"
+      },
+      "note": {
+       "en": "Cavity of right atrium"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Hepatic vein"
+      },
+      "note": {
+       "en": "Hepatic vein"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Mistaking the aorta for the cava, the aorta pulses and never collapses. Correct"
+      },
+      "note": {
+       "en": "Common mistakes and how to correct them: Mistaking the aorta for the cava, the aorta pulses and never collapses. Correct it by checking for pulsation and sniff collapse, since only the cava collapses."
+      }
+     }
+    ],
+    "view": "tte_subcostal_ivc"
+   },
+   "levels": [
+    "mbbs",
+    "resident",
+    "sonographer"
+   ],
+   "level": "mbbs",
+   "view": "tte_subcostal_ivc",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_subcostal_sax": {
+   "title": {
+    "en": "Subcostal short axis"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Rotate ninety degrees from the subcostal four chamber."
+   },
+   "see": {
+    "diagram": "diagrams/view_subcostal_sax.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Subcostal short axis. Rotate in place until the ventricle reads as a true circle."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Subcostal short axis. Rotate in place until the ventricle reads as a true circle."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Cavity of left ventricle"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Cavity of left ventricle"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Cavity of right ventricle"
+      },
+      "note": {
+       "en": "Cavity of right ventricle"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Interventricular septum"
+      },
+      "note": {
+       "en": "Interventricular septum"
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Liver"
+      },
+      "note": {
+       "en": "Liver"
+      }
+     }
+    ],
+    "view": "tte_subcostal_sax"
+   },
+   "levels": [
+    "resident",
+    "fellow",
+    "sonographer"
+   ],
+   "level": "resident",
+   "view": "tte_subcostal_sax",
+   "test": {
+    "mcqTopic": "views"
+   }
+  },
+  "view_svc": {
+   "title": {
+    "en": "Suprasternal superior vena cava long axis"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Open the superior cava from the right supraclavicular fossa."
+   },
+   "see": {
+    "diagram": "diagrams/view_svc.svg",
+    "w": 480,
+    "h": 360,
+    "alt": {
+     "en": "Echo Lab render of the Suprasternal superior vena cava long axis. Follow the thin walled tube into the right atrium with colour."
+    },
+    "caption": {
+     "en": "Echo Lab render of the Suprasternal superior vena cava long axis. Follow the thin walled tube into the right atrium with colour."
+    },
+    "hotspots": [
+     {
+      "x": 0.25,
+      "y": 0.35,
+      "label": {
+       "en": "Superior vena cava"
+      },
+      "note": {
+       "en": "Landmarks to confirm: Superior vena cava"
+      }
+     },
+     {
+      "x": 0.43,
+      "y": 0.47,
+      "label": {
+       "en": "Cavity of right atrium"
+      },
+      "note": {
+       "en": "Cavity of right atrium"
+      }
+     },
+     {
+      "x": 0.61,
+      "y": 0.59,
+      "label": {
+       "en": "Aorta mistaken for the cava, the vein collapses and the aorta does not. Correct"
+      },
+      "note": {
+       "en": "Common mistakes and how to correct them: Aorta mistaken for the cava, the vein collapses and the aorta does not. Correct it by pressing lightly and watching pulsation, since the aorta kicks while the vein breathes."
+      }
+     },
+     {
+      "x": 0.79,
+      "y": 0.35,
+      "label": {
+       "en": "Innominate vein mistaken for the cava from too high a window. Correct it by foll"
+      },
+      "note": {
+       "en": "Innominate vein mistaken for the cava from too high a window. Correct it by following the vessel into the atrium, since the innominate joins above it."
+      }
+     }
+    ],
+    "view": "tte_suprasternal_svc"
+   },
+   "levels": [
+    "sonographer",
+    "resident",
+    "fellow"
+   ],
+   "level": "resident",
+   "view": "tte_suprasternal_svc",
+   "test": {
+    "mcqTopic": "views"
+   }
+  }
+ }
+}

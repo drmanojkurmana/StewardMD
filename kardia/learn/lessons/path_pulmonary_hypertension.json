@@ -1,0 +1,274 @@
+{
+ "id": "path_pulmonary_hypertension",
+ "unit": "pathology",
+ "level": "resident",
+ "levels": [
+  "resident"
+ ],
+ "minutes": 8,
+ "title": {
+  "en": "Pulmonary hypertension: the pressured right heart"
+ },
+ "idea": {
+  "en": "Link septal shape, tricuspid velocity and cava findings into one probability."
+ },
+ "see": {
+  "diagram": "diagrams/path_pulmonary_hypertension.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Short axis at papillary level shows the D shaped septum of pressure overload. Grade the flattening in systole and diastole."
+  },
+  "caption": {
+   "en": "Short axis at papillary level shows the D shaped septum of pressure overload. Grade the flattening in systole and diastole."
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Interventricular septum shape in systole and diastole"
+    },
+    "note": {
+     "en": "Landmarks: Interventricular septum shape in systole and diastole"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Tricuspid jet origin for Doppler alignment"
+    },
+    "note": {
+     "en": "Tricuspid jet origin for Doppler alignment"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Pulmonary trunk diameter against the aorta"
+    },
+    "note": {
+     "en": "Pulmonary trunk diameter against the aorta"
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Inferior vena cava for pressure estimation"
+    },
+    "note": {
+     "en": "Inferior vena cava for pressure estimation"
+    }
+   }
+  ],
+  "view": "tte_psax_papillary"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: The interventricular septum flattens and the left ventricle looks D shaped in short axis. The right atrium and right ventricle dilate and the free wall thickens. The tricuspid regurgitant velocity rises above 3.4 m per s in high probability disease. The pulmonary trunk dilates and the inferior vena cava engorges as right heart failure follows."
+   },
+   {
+    "en": "Normal values with units: Peak tricuspid regurgitant velocity. Normal 2.8 m per s or below. Intermediate 2.9 to 3.4 m per s. High probability above 3.4 m per s.. Source: ASE and EACVI 2016 diastolic function guideline, section on tricuspid regurgitant velocity"
+   },
+   {
+    "en": "Systolic pulmonary pressure estimate. Four times velocity squared plus right atrial pressure. Below 36 mmHg low, 36 to 50 mmHg intermediate, above 50 mmHg high.. Source: ASE 2019 transthoracic examination guideline, section on Doppler and haemodynamics"
+   },
+   {
+    "en": "Right atrial pressure from the vena cava. Cava 21 mm or below with 50 percent or more collapse suggests 5 mmHg. Dilated cava with below 50 percent collapse suggests around 15 mmHg.. Source: ASE 2019 transthoracic examination guideline, section on the inferior vena cava"
+   },
+   {
+    "en": "Right ventricular basal diameter. Normal 42 mm or below in the focused view. Above this the ventricle is dilated.. Source: ASE 2019 transthoracic examination guideline, section on the right ventricle"
+   },
+   {
+    "en": "ECG and heart sound correlation ecg: Right axis deviation with right ventricular hypertrophy marks pressure load. A tall R in lead V1 with a deep S in lead V6 completes the pattern. Peaked P waves mark right atrial enlargement."
+   },
+   {
+    "en": "ECG and heart sound correlation sounds: The pulmonary component of the second sound is loud. A pansystolic murmur marks functional tricuspid regurgitation. A right sided fourth sound with a palpable right ventricular heave marks a stiff failing ventricle."
+   }
+  ],
+  "analogy": {
+   "en": "Landmarks: Interventricular septum shape in systole and diastole"
+  }
+ },
+ "spot": [
+  {
+   "en": "Landmarks: Interventricular septum shape in systole and diastole"
+  },
+  {
+   "en": "Tricuspid jet origin for Doppler alignment"
+  },
+  {
+   "en": "Pulmonary trunk diameter against the aorta"
+  },
+  {
+   "en": "Inferior vena cava for pressure estimation"
+  },
+  {
+   "en": "What to report: Tricuspid velocity with the pressure estimate and the atrial pressure assumption stated"
+  },
+  {
+   "en": "Septal shape in systole and diastole with right heart chamber sizes"
+  },
+  {
+   "en": "Pulmonary trunk size, pulmonary regurgitation signal and any shunt"
+  },
+  {
+   "en": "Left heart filling pressures to separate post capillary disease from pre capillary disease"
+  },
+  {
+   "en": "Red flags needing urgent referral: Syncope with high probability disease, needs urgent pulmonary hypertension review"
+  },
+  {
+   "en": "Right heart failure with liver congestion and ascites, needs urgent cardiology review"
+  },
+  {
+   "en": "Suspected chronic clot disease with mismatched defects on imaging history, needs urgent thromboembolism workup"
+  },
+  {
+   "en": "Pitfalls: Anaemia, fever and high output states raise velocity without vessel disease, so record haemoglobin and heart rate."
+  },
+  {
+   "en": "Severe free tricuspid regurgitation equalises pressures and underreads velocity, so integrate septal shape."
+  },
+  {
+   "en": "Left heart disease is the commonest cause of raised pressure, so grade diastolic function in every study."
+  },
+  {
+   "en": "Figure: Right ventricle focused view gives the tricuspid jet for velocity plus right heart sizes in one window. View tte_a4c_rv_focus"
+  }
+ ],
+ "todo": [
+  {
+   "en": "How to get it on the probe, step by step: Start in the short axis at papillary level and watch septal shape through systole and diastole."
+  },
+  {
+   "en": "Move to the focused right ventricle view and align continuous wave Doppler with the tricuspid jet."
+  },
+  {
+   "en": "Record the peak tricuspid velocity in m per s and add the right atrial pressure estimate."
+  },
+  {
+   "en": "Measure right atrial area, basal ventricular diameter and pulmonary trunk size."
+  },
+  {
+   "en": "Measure the inferior vena cava with sniff collapse for the atrial pressure estimate."
+  },
+  {
+   "en": "Common mistakes and how to correct them: Underreading tricuspid velocity with an off axis beam. Fix: Interrogate from several windows including the inflow view and keep the highest complete envelope."
+  },
+  {
+   "en": "Confusing pressure flattening with volume flattening. Fix: Systolic flattening means pressure overload while diastolic flattening means volume overload. Read each phase separately."
+  },
+  {
+   "en": "Calling every high velocity primary pulmonary hypertension. Fix: Treat lung disease, clots, sleep apnoea and left heart disease before labelling primary arterial disease."
+  }
+ ],
+ "remember": {
+  "en": "Separate pre capillary from post capillary patterns for referral."
+ },
+ "check": [
+  {
+   "q": {
+    "en": "Which tricuspid velocity marks high probability disease?"
+   },
+   "o": [
+    {
+     "en": "2.0 m per s"
+    },
+    {
+     "en": "3.0 m per s"
+    },
+    {
+     "en": "Above 3.4 m per s"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "Above 3.4 m per s with systolic pressure above 50 mmHg marks high probability disease."
+   }
+  },
+  {
+   "q": {
+    "en": "How is systolic pulmonary pressure estimated?"
+   },
+   "o": [
+    {
+     "en": "Four times velocity squared plus right atrial pressure"
+    },
+    {
+     "en": "Velocity times heart rate"
+    },
+    {
+     "en": "Jet length in centimetres"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "The Bernoulli equation converts velocity to gradient, then the atrial pressure estimate is added."
+   }
+  },
+  {
+   "q": {
+    "en": "Systolic septal flattening is seen with a normal cava. What does it mean?"
+   },
+   "o": [
+    {
+     "en": "Volume overload flattens the septum in diastole"
+    },
+    {
+     "en": "Systolic flattening marks pressure overload"
+    },
+    {
+     "en": "Both phases flatten identically"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Systolic flattening marks pressure overload while diastolic flattening marks volume overload."
+   }
+  },
+  {
+   "q": {
+    "en": "Syncope occurs with velocity 4.2 m per s and a dilated failing right ventricle. What next?"
+   },
+   "o": [
+    {
+     "en": "Start disease therapy on the echo alone"
+    },
+    {
+     "en": "Repeat in five years"
+    },
+    {
+     "en": "Urgent pulmonary hypertension review with cause workup"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "Syncope with high probability disease marks high risk and needs urgent specialist review with full cause workup."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "pathology"
+ },
+ "sources": [
+  "ASE and EACVI 2016 diastolic function guideline, section on tricuspid regurgitant velocity, in own words.",
+  "ASE 2019 transthoracic examination guideline, section on Doppler and haemodynamics, in own words.",
+  "ASE 2019 transthoracic examination guideline, section on the right ventricle, in own words.",
+  "ASE 2019 transthoracic examination guideline, section on the inferior vena cava, in own words."
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_psax_papillary",
+ "objectives": [
+  "Link septal shape, tricuspid velocity and cava findings into one probability.",
+  "Calculate systolic pulmonary pressure with the stated atrial pressure assumption.",
+  "Separate pre capillary from post capillary patterns for referral."
+ ]
+}

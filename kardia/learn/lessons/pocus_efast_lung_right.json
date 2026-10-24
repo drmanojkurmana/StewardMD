@@ -1,0 +1,178 @@
+{
+ "id": "pocus_efast_lung_right",
+ "unit": "pocus",
+ "level": "mbbs",
+ "levels": [
+  "mbbs",
+  "resident",
+  "fellow",
+  "sonographer"
+ ],
+ "minutes": 5,
+ "title": {
+  "en": "eFAST lung right"
+ },
+ "idea": {
+  "en": "Find the pleural line between two ribs"
+ },
+ "see": {
+  "diagram": "diagrams/pocus_efast_lung_right.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "eFAST right lung sliding as rendered by the Echo Lab from this lesson"
+  },
+  "caption": {
+   "en": "eFAST right lung sliding as rendered by the Echo Lab from this lesson"
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "With a high frequency probe on the chest wall, the pleural line appears as a bri"
+    },
+    "note": {
+     "en": "What you see: With a high frequency probe on the chest wall, the pleural line appears as a bright horizontal line sliding back and forth with breath just deep to the ribs. In M mode a seashore pattern of still chest wall above granular lung below confirms sliding. Absent sliding gives a flat stratosphere pattern of parallel lines. The lung point where sliding meets absent sliding marks the edge of a pneumothorax."
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Rib shadows on either side, pleural line between them, lung below the line, mirr"
+    },
+    "note": {
+     "en": "Landmarks to confirm: Rib shadows on either side, pleural line between them, lung below the line, mirror position on the opposite chest."
+    }
+   }
+  ],
+  "view": "pocus_efast_lung_right"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: With a high frequency probe on the chest wall, the pleural line appears as a bright horizontal line sliding back and forth with breath just deep to the ribs. In M mode a seashore pattern of still chest wall above granular lung below confirms sliding. Absent sliding gives a flat stratosphere pattern of parallel lines. The lung point where sliding meets absent sliding marks the edge of a pneumothorax."
+   },
+   {
+    "en": "Landmarks to confirm: Rib shadows on either side, pleural line between them, lung below the line, mirror position on the opposite chest."
+   },
+   {
+    "en": "Common mistakes and correction: Subcutaneous tissue mimicking the pleural line: the true line sits deep between ribs and moves with breath. Holding the probe over rib so sliding is missed: centre a rib space, not a rib. Mistaking a rib edge for consolidated lung: confirm tissue pattern across a full breath."
+   },
+   {
+    "en": "Normal values with units: No numeric threshold applies. In health sliding is present bilaterally with a seashore pattern in M mode. Bilateral absent sliding with a stratosphere pattern and a visible lung point marks pneumothorax and needs urgent senior review."
+   },
+   {
+    "en": "Pitfalls: Absent sliding alone does not prove pneumothorax since breath holding, mainstem intubation and severe consolidation also abolish it, so the lung point must be found. In trauma compare both sides before calling a difference. Record the lung point position so drainage can be planned."
+   }
+  ],
+  "analogy": {
+   "en": "What you see: With a high frequency probe on the chest wall, the pleural line appears as a bright horizontal line sliding back and forth with breath just deep to the ribs. In M mode a seashore pattern of still chest wall above granular lung below confirms sliding. Absent sliding gives a flat stratosphere pattern of parallel lines. The lung point where sliding meets absent sliding marks the edge of a pneumothorax."
+  }
+ },
+ "spot": [
+  {
+   "en": "What you see: With a high frequency probe on the chest wall, the pleural line appears as a bright horizontal line sliding back and forth with breath just deep to the ribs. In M mode a seashore pattern of still chest wall above granular lung below confirms sliding. Absent sliding gives a flat stratosphere pattern of parallel lines. The lung point where sliding meets absent sliding marks the edge of a pneumothorax."
+  },
+  {
+   "en": "Landmarks to confirm: Rib shadows on either side, pleural line between them, lung below the line, mirror position on the opposite chest."
+  }
+ ],
+ "todo": [
+  {
+   "en": "How to get it step by step: Place the probe lengthwise across one rib space on the front chest with the marker toward the head. Find the bright pleural line between two rib shadows. Watch it for one full breath to judge sliding. Add M mode through the line to record seashore or stratosphere. Slide along the chest wall to search for the lung point. Repeat in the mirror position on the other side before judging."
+  }
+ ],
+ "remember": {
+  "en": "Locate the lung point of a pneumothorax"
+ },
+ "check": [
+  {
+   "q": {
+    "en": "Where should the probe sit for lung sliding?"
+   },
+   "o": [
+    {
+     "en": "Over the centre of a rib"
+    },
+    {
+     "en": "In a rib space with the pleural line between two rib shadows"
+    },
+    {
+     "en": "On the sternum"
+    },
+    {
+     "en": "Behind the clavicle"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "The pleural line is seen in a rib space between two rib shadows."
+   }
+  },
+  {
+   "q": {
+    "en": "What does M mode show when sliding is present?"
+   },
+   "o": [
+    {
+     "en": "Flat parallel lines"
+    },
+    {
+     "en": "Seashore pattern of still wall above granular lung"
+    },
+    {
+     "en": "No image at all"
+    },
+    {
+     "en": "Vertical stripes only"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "Sliding gives the seashore pattern, while absent sliding gives flat stratosphere lines."
+   }
+  },
+  {
+   "q": {
+    "en": "What is the lung point?"
+   },
+   "o": [
+    {
+     "en": "The edge of a pneumothorax where sliding meets absent sliding"
+    },
+    {
+     "en": "The centre of pneumonia"
+    },
+    {
+     "en": "A rib fracture line"
+    },
+    {
+     "en": "The cardiac apex"
+    }
+   ],
+   "a": 0,
+   "why": {
+    "en": "The lung point is where sliding resumes and marks the pneumothorax edge."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "pocus"
+ },
+ "sources": [
+  "ACEP emergency ultrasound guidelines, section on eFAST and pneumothorax",
+  "International POCUS consensus, section on lung ultrasound for pneumothorax"
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "pocus_efast_lung_right",
+ "objectives": [
+  "Find the pleural line between two ribs",
+  "Confirm sliding in B mode and M mode",
+  "Locate the lung point of a pneumothorax"
+ ]
+}

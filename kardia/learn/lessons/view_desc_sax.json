@@ -1,0 +1,248 @@
+{
+ "id": "view_desc_sax",
+ "unit": "views",
+ "level": "resident",
+ "levels": [
+  "fellow",
+  "sonographer",
+  "resident"
+ ],
+ "minutes": 5,
+ "title": {
+  "en": "Suprasternal descending aorta short axis"
+ },
+ "idea": {
+  "en": "Cut the descending aorta in true short axis."
+ },
+ "see": {
+  "diagram": "diagrams/view_desc_sax.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Echo Lab render of the Suprasternal descending aorta short axis. Rotate until the vessel is a circle before judging the lumen."
+  },
+  "caption": {
+   "en": "Echo Lab render of the Suprasternal descending aorta short axis. Rotate until the vessel is a circle before judging the lumen."
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "Descending aorta"
+    },
+    "note": {
+     "en": "Landmarks to confirm: Descending aorta"
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "Thoracic spine shadow"
+    },
+    "note": {
+     "en": "Thoracic spine shadow"
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "Mistaking the transverse arch for the descending aorta. Correct it by following"
+    },
+    "note": {
+     "en": "Common mistakes and how to correct them: Mistaking the transverse arch for the descending aorta. Correct it by following the vessel down, since the arch curves away while the descending runs straight."
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "Azygos arch mimicking a second lumen. Correct it by tracking the extra vessel, s"
+    },
+    "note": {
+     "en": "Azygos arch mimicking a second lumen. Correct it by tracking the extra vessel, since the azygos joins the cava and never runs the full length."
+    }
+   }
+  ],
+  "view": "tte_suprasternal_desc_sax"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "What you see: The descending aorta sits as a clean circle behind the airway with the spine shadow beyond. A dissection flap crosses the circle as a bright line that flutters independently of the wall."
+   },
+   {
+    "en": "Landmarks to confirm: Do not accept the view until each of these is on screen."
+   },
+   {
+    "en": "Common mistakes and how to correct them: Each mistake below comes from the view catalogue with its correction."
+   },
+   {
+    "en": "Measurements and worked gradients: Report maximum diameter in millimetres with the segment named, since size drives referral."
+   },
+   {
+    "en": "Pressure drop in mmHg equals 4 times the peak velocity in m per s squared."
+   },
+   {
+    "en": "A tricuspid velocity of 3.5 m per s gives 4 times 3.5 squared, which is 49 mmHg, plus right atrial pressure."
+   },
+   {
+    "en": "Tricuspid regurgitation peak velocity 2.8 m per s or less is normal."
+   },
+   {
+    "en": "Pitfalls: Reverberation from the near wall can paint a false second line; a true flap moves with its own rhythm and shows different Doppler each side. Never clear the aorta from one plane; arch, ascending and abdominal segments each need their own look."
+   }
+  ],
+  "analogy": {
+   "en": "Landmarks to confirm: Descending aorta"
+  }
+ },
+ "spot": [
+  {
+   "en": "Landmarks to confirm: Descending aorta"
+  },
+  {
+   "en": "Thoracic spine shadow"
+  },
+  {
+   "en": "Common mistakes and how to correct them: Mistaking the transverse arch for the descending aorta. Correct it by following the vessel down, since the arch curves away while the descending runs straight."
+  },
+  {
+   "en": "Azygos arch mimicking a second lumen. Correct it by tracking the extra vessel, since the azygos joins the cava and never runs the full length."
+  },
+  {
+   "en": "Rotation that turns the circle into an oval and fakes a flap. Correct it by rotating back until the vessel is round before judging the lumen."
+  }
+ ],
+ "todo": [
+  {
+   "en": "How to get it: Place the probe at suprasternal notch, transverse tilted left with neck extended."
+  },
+  {
+   "en": "Point the probe marker toward the left shoulder, about two o clock."
+  },
+  {
+   "en": "From the arch long axis, rotate ninety degrees and tilt left until the vessel is a circle, not an oval. Any oval means obliquity that can fake a flap."
+  },
+  {
+   "en": "Freeze the image only when every listed landmark is on screen at once."
+  }
+ ],
+ "remember": {
+  "en": "Measure the descending aorta for surveillance."
+ },
+ "check": [
+  {
+   "q": {
+    "en": "The vessel reads as an oval. What do you do?"
+   },
+   "o": [
+    {
+     "en": "Measure anyway"
+    },
+    {
+     "en": "Rotate back until it is round, since ovals fake flaps"
+    },
+    {
+     "en": "Increase gain"
+    },
+    {
+     "en": "Call it dilated"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Obliquity turns circles to ovals and paints false flaps."
+   }
+  },
+  {
+   "q": {
+    "en": "Tricuspid velocity is 3 m per s with right atrial pressure 8 mmHg. What is pulmonary systolic pressure?"
+   },
+   "o": [
+    {
+     "en": "28 mmHg"
+    },
+    {
+     "en": "36 mmHg"
+    },
+    {
+     "en": "44 mmHg"
+    },
+    {
+     "en": "52 mmHg"
+    }
+   ],
+   "a": 2,
+   "why": {
+    "en": "Four times nine is 36, plus 8 gives 44 mmHg."
+   }
+  },
+  {
+   "q": {
+    "en": "A bright line flutters inside the circle with different Doppler each side. What is this?"
+   },
+   "o": [
+    {
+     "en": "Reverberation"
+    },
+    {
+     "en": "Dissection flap"
+    },
+    {
+     "en": "Azygos vein"
+    },
+    {
+     "en": "Thrombus"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Independent motion with its own Doppler marks a true flap."
+   }
+  },
+  {
+   "q": {
+    "en": "Near wall reverberation paints a second line that moves with the wall. What is this?"
+   },
+   "o": [
+    {
+     "en": "Dissection"
+    },
+    {
+     "en": "Artefact, not a flap"
+    },
+    {
+     "en": "Thrombus"
+    },
+    {
+     "en": "Ulcer"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "A line that moves exactly with the wall is reverberation artefact."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "views"
+ },
+ "sources": [
+  "ASE 2019 guideline for the complete transthoracic examination, suprasternal views section.",
+  "ASE 2019 guideline for the complete transthoracic examination, spectral Doppler section.",
+  "ASE and EACVI 2016 diastolic function guideline, pulmonary pressure estimation section."
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_suprasternal_desc_sax",
+ "objectives": [
+  "Cut the descending aorta in true short axis.",
+  "Hunt for a dissection flap in a circle.",
+  "Measure the descending aorta for surveillance."
+ ]
+}

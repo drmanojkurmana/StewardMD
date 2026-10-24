@@ -1,0 +1,224 @@
+{
+ "id": "view_echo_windows",
+ "unit": "views",
+ "level": "mbbs",
+ "levels": [
+  "mbbs",
+  "resident",
+  "sonographer"
+ ],
+ "minutes": 5,
+ "title": {
+  "en": "Echo windows and the probe marker"
+ },
+ "idea": {
+  "en": "Name the four transthoracic windows and what each shows."
+ },
+ "see": {
+  "diagram": "diagrams/view_echo_windows.svg",
+  "w": 480,
+  "h": 360,
+  "alt": {
+   "en": "Echo Lab render of the parasternal long axis. Every window below opens one family of views like this one."
+  },
+  "caption": {
+   "en": "Echo Lab render of the parasternal long axis. Every window below opens one family of views like this one."
+  },
+  "hotspots": [
+   {
+    "x": 0.25,
+    "y": 0.35,
+    "label": {
+     "en": "long axis, then aortic, mitral, papillary and apical short axes, then right hear"
+    },
+    "note": {
+     "en": "Window to view map: Parasternal: long axis, then aortic, mitral, papillary and apical short axes, then right heart tilts."
+    }
+   },
+   {
+    "x": 0.43,
+    "y": 0.47,
+    "label": {
+     "en": "four chamber, then five, two and three chamber by rotation, then the right heart"
+    },
+    "note": {
+     "en": "Apical: four chamber, then five, two and three chamber by rotation, then the right heart focus."
+    }
+   },
+   {
+    "x": 0.61,
+    "y": 0.59,
+    "label": {
+     "en": "four chamber, then short axis, cava, aorta, bicaval and hepatic vein."
+    },
+    "note": {
+     "en": "Subcostal: four chamber, then short axis, cava, aorta, bicaval and hepatic vein."
+    }
+   },
+   {
+    "x": 0.79,
+    "y": 0.35,
+    "label": {
+     "en": "arch long axis, then descending short axis, ductal and cava views."
+    },
+    "note": {
+     "en": "Suprasternal: arch long axis, then descending short axis, ductal and cava views."
+    }
+   }
+  ],
+  "view": "tte_plax"
+ },
+ "why": {
+  "steps": [
+   {
+    "en": "The four windows: Sound cannot cross air or bone, so the heart is viewed only where it touches the chest wall or lies under the liver. The parasternal window shows the long and short axes, the apical window shows the chambers from below, the subcostal window looks up through the liver, and the suprasternal window looks down at the arch. Together they cover the whole heart."
+   },
+   {
+    "en": "Window to view map: Start each window with its easiest view, then extend."
+   },
+   {
+    "en": "Rib and lung dodges: When the image is dark, move air and bone out of the beam in this order."
+   },
+   {
+    "en": "Study order: Follow the BSE minimum dataset order for a standard study so no view is skipped: parasternal, then apical, then subcostal, then suprasternal, with Doppler and measurements at each station. A fixed order is what makes a study complete rather than lucky."
+   },
+   {
+    "en": "Pitfalls: Beginners raise gain to fix a dark rib shadow; gain cannot replace a window, so move the probe instead. A perfect image of the wrong plane is still the wrong plane, so name the landmarks before freezing."
+   }
+  ],
+  "analogy": {
+   "en": "Window to view map: Parasternal: long axis, then aortic, mitral, papillary and apical short axes, then right heart tilts."
+  }
+ },
+ "spot": [
+  {
+   "en": "Window to view map: Parasternal: long axis, then aortic, mitral, papillary and apical short axes, then right heart tilts."
+  },
+  {
+   "en": "Apical: four chamber, then five, two and three chamber by rotation, then the right heart focus."
+  },
+  {
+   "en": "Subcostal: four chamber, then short axis, cava, aorta, bicaval and hepatic vein."
+  },
+  {
+   "en": "Suprasternal: arch long axis, then descending short axis, ductal and cava views."
+  },
+  {
+   "en": "Rib and lung dodges: Slide one rib space down toward the apex to leave the rib behind."
+  },
+  {
+   "en": "Ask for a breath out with a hold to pull lung off the heart."
+  },
+  {
+   "en": "Press a little firmer to squeeze bowel gas aside in the subcostal window."
+  },
+  {
+   "en": "Roll the patient onto the left side for apical views and the right side for the right parasternal view."
+  }
+ ],
+ "todo": [
+  {
+   "en": "Marker rules: Find the notch or dot on the probe edge; that mark always points to one edge of the screen."
+  },
+  {
+   "en": "In parasternal and apical views the mark points to the left side of the screen from the patient right shoulder or left side."
+  },
+  {
+   "en": "In subcostal views the mark points left while the liver caps the top of the image."
+  },
+  {
+   "en": "If the image looks mirrored, check the mark first, since a rotated probe mirrors anatomy."
+  }
+ ],
+ "remember": {
+  "en": "Dodge ribs and lung before blaming the machine."
+ },
+ "check": [
+  {
+   "q": {
+    "en": "Which window shows the arch best?"
+   },
+   "o": [
+    {
+     "en": "Parasternal"
+    },
+    {
+     "en": "Apical"
+    },
+    {
+     "en": "Subcostal"
+    },
+    {
+     "en": "Suprasternal"
+    }
+   ],
+   "a": 3,
+   "why": {
+    "en": "The notch looks straight down at the arch and great branches."
+   }
+  },
+  {
+   "q": {
+    "en": "The image looks mirrored left to right. What do you check first?"
+   },
+   "o": [
+    {
+     "en": "Gain"
+    },
+    {
+     "en": "Probe marker orientation"
+    },
+    {
+     "en": "Depth"
+    },
+    {
+     "en": "Frequency"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "The marker decides screen orientation, so a turned probe mirrors the image."
+   }
+  },
+  {
+   "q": {
+    "en": "Rib shadow covers the valve. What is the first move?"
+   },
+   "o": [
+    {
+     "en": "Raise gain"
+    },
+    {
+     "en": "Slide one space to leave the rib"
+    },
+    {
+     "en": "Press harder in place"
+    },
+    {
+     "en": "Change probe"
+    }
+   ],
+   "a": 1,
+   "why": {
+    "en": "Moving off the rib beats any knob change."
+   }
+  }
+ ],
+ "test": {
+  "mcqTopic": "views"
+ },
+ "sources": [
+  "ASE 2019 guideline for the complete transthoracic examination, examination sequence section.",
+  "BSE minimum dataset for a standard adult transthoracic study, standard views section."
+ ],
+ "review": {
+  "status": "ai_drafted"
+ },
+ "glossary": [],
+ "view": "tte_plax",
+ "objectives": [
+  "Name the four transthoracic windows and what each shows.",
+  "Read the probe marker and predict the image plane.",
+  "Dodge ribs and lung before blaming the machine."
+ ]
+}
