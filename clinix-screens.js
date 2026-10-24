@@ -304,6 +304,7 @@
 
     // Practice modes & simulation
     html += '<section class="cx-sec"><div class="cx-sec-h">Practise for the exam</div><div class="cx-rows">' +
+      row("cx-practicals", "biotech", "Practicals", "Spotters, instruments, drugs, procedures") +
       row("cx-practice-osce", "assignment_turned_in", "OSCE stations", "Timed checklists, where a missed critical step fails you") +
       row("cx-practice-viva", "record_voice_over", "Viva voce", "One question at a time, harder as you get them right") +
       row("cx-chief", "military_tech", "Chief's ward round", "A strict professor's viva under exam pressure") +
@@ -380,6 +381,16 @@
             '<span class="cx-modcard-meta">' + esc(String(sys.module.chapters || 0)) + " chapters &middot; about " +
               esc(String(sys.module.estMinutes || 0)) + " min</span>" +
           "</span>" + ic("chevron_right") + "</button></section>";
+    }
+
+    /* Practicals row/tile on system screen */
+    if (PRACTICALS() && PRACTICALS().hasSubject(sys.id)) {
+      html += '<section class="cx-sec"><div class="cx-sec-h">Practical exam</div><div class="cx-rows">' +
+        '<button type="button" class="cx-row" data-act="cx-practicals-system" data-id="' + esc(sys.id) + '">' +
+        '<span class="cx-row-ic">' + ic("biotech") + "</span>" +
+        '<span class="cx-row-txt"><span class="cx-row-t">Practicals</span>' +
+        '<span class="cx-row-s">Spotters, instruments, drugs, procedures</span></span>' + ic("chevron_right") + "</button>" +
+        "</div></section>";
     }
 
     var ds = sys.diseases || [];
@@ -3422,6 +3433,31 @@
     var wv = host.querySelector("canvas.cx-wave"); if (wv) startWave(wv, wv.getAttribute("data-wave"));
   }
 
+  function PRACTICALS() {
+    return (typeof window !== "undefined" && window.SMD_CLINIX_PRACTICALS) || null;
+  }
+
+  function renderPracticals(host) {
+    var P = PRACTICALS();
+    if (!P) {
+      host.innerHTML = header("Practicals", "Loading practicals...") + skeleton();
+      return;
+    }
+    P.render(host, state, {
+      go: go,
+      header: header,
+      emptyState: emptyState,
+      ic: ic,
+      esc: esc,
+      haptic: haptic,
+      toast: toast,
+      locked: locked,
+      isPro: isPro,
+      repaint: repaint,
+      show: show
+    });
+  }
+
   /* ── router ──────────────────────────────────────────────────────────────── */
 
   var SCREENS = {
@@ -3430,7 +3466,7 @@
     tutor: renderTutor, case: renderCase, skills: renderSkills, sandbox: renderPhysiologySandbox,
     presentations: renderPresentations, presentation: renderPresentation, script: renderScript,
     abg: renderAbg, spotter: renderSpotter, chief: renderChief, soundlab: renderSoundLab,
-    practice: renderPractice
+    practice: renderPractice, practicals: renderPracticals
   };
 
   function host() { return document.getElementById("clinixScroll"); }
@@ -4435,6 +4471,25 @@
       }
       case "cx-chief-retry": openChief(); return;
       case "cx-soundlab": haptic("tap"); openSoundLab(); return;
+      case "cx-practicals":
+        haptic("tap");
+        if (PRACTICALS()) PRACTICALS().setSubject(null);
+        go("practicals");
+        return;
+      case "cx-practicals-system":
+        haptic("tap");
+        if (PRACTICALS()) PRACTICALS().setSubject(id || state.systemId);
+        go("practicals");
+        return;
+      default: {
+        var Prac = PRACTICALS();
+        if (Prac && act.indexOf("cx-prac-") === 0) {
+          if (Prac.handleAction(act, t, state, {
+            go: go, header: header, emptyState: emptyState, ic: ic, esc: esc,
+            haptic: haptic, toast: toast, locked: locked, isPro: isPro, repaint: repaint, show: show
+          })) return;
+        }
+      }
     }
   }
 
@@ -4481,6 +4536,11 @@
       state.ddxQuery = String(t.value || "");
       var rs = document.getElementById("cxDxResults");
       if (rs) rs.innerHTML = dxResultsHTML(state.casePhase === "differential");
+      return;
+    }
+    if (t && t.id === "cxPracSearchInput") {
+      var Prac = PRACTICALS();
+      if (Prac && Prac.onSearchInput) Prac.onSearchInput(t.value, { esc: esc, ic: ic, emptyState: emptyState });
       return;
     }
     /* The physiology sliders. A full repaint replaces the range element the student has their
