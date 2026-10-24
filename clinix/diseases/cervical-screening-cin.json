@@ -201,7 +201,7 @@
           },
           {
             "q": "Differentiate between Type 1, Type 2, and Type 3 transformation zones, and explain how this impacts procedural selection.",
-            "a": "Type 1 is completely ectocervical and fully visible; Type 2 has an endocervical component but is fully visible; Type 3 extends high into the endocervical canal with an unseen upper margin. Type 1 lesions are amenable to either ablation or excision; Type 3 mandates formal excisional conization and completely contraindicates ablative therapy."
+            "a": "Type 1 is completely ectocervical and fully visible; Type 2 has an endocervical component but is fully visible; Type 3 extends high into the endocervical canal with an unseen upper margin. Type 1 and fully visible Type 2 lesions with no endocervical disease are amenable to either ablation or excision; Type 3 mandates formal excisional conization and completely contraindicates ablative therapy."
           },
           {
             "q": "What key colposcopic features distinguish a high-grade intraepithelial lesion (CIN 2/3) from a low-grade lesion (CIN 1)?",
@@ -228,7 +228,7 @@
           },
           {
             "q": "What are the indications for excisional treatment (LLETZ) versus ablative therapy (thermal ablation or cryotherapy) in confirmed CIN 2/3?",
-            "a": "Ablative therapy is restricted strictly to fully visible Type 1 transformation zones where the entire lesion is visible with no endocervical involvement, no suspicion of microinvasion or glandular atypia, and cytology matches histology. Excisional LLETZ is required for Type 2 or 3 transformation zones, suspected invasion, recurrent disease, or discordant cytology."
+            "a": "Ablative therapy is permitted for Type 1 or fully visible Type 2 transformation zones where the entire zone and lesion are visible with no endocervical involvement, no suspicion of microinvasion or glandular atypia, and cytology matches histology. Excisional LLETZ is required for Type 3 zones, suspected invasion, suspected glandular disease, recurrent disease, or discordant cytology."
           },
           {
             "q": "What post-treatment advice and surveillance protocol must you explain to a patient undergoing LLETZ excision?",
@@ -277,7 +277,7 @@
               "TZ Type",
               "Anatomical Location",
               "Colposcopic Visibility",
-              "Excisional Treatment Choice"
+              "Treatment Choice"
             ],
             "rows": [
               [
@@ -290,7 +290,7 @@
                 "Type 2",
                 "Endocervical component",
                 "Fully visible with speculum or cotton swab",
-                "Medium excisional loop (LLETZ)"
+                "Ablation (if entire zone and lesion fully visible, no endocervical disease) or LLETZ"
               ],
               [
                 "Type 3",
@@ -394,7 +394,7 @@
         },
         {
           "heading": "Biological basis of acetowhiteness and Schiller test",
-          "body": "Acetic acid causes cellular dehydration and transient coagulation of nuclear proteins. Dysplastic epithelium contains high nuclear density and elevated chromatin, reflecting incident light to appear opaque and acetowhite.\n\nLugol iodine contains potassium iodide (Schiller test). Normal mature squamous epithelium is rich in glycogen and stains dark mahogany brown. Neoplastic cells are glycogen-depleted and fail to take up iodine, appearing mustard yellow."
+          "body": "Acetic acid causes cellular dehydration and transient coagulation of nuclear proteins. Dysplastic epithelium contains high nuclear density and elevated chromatin, reflecting incident light to appear opaque and acetowhite.\n\nLugol iodine (elemental iodine plus potassium iodide in aqueous solution) is applied for the Schiller test. Normal mature squamous epithelium is rich in glycogen and stains dark mahogany brown. Neoplastic cells are glycogen-depleted and fail to take up iodine, appearing mustard yellow."
         },
         {
           "heading": "Low-grade versus high-grade colposcopic features",
@@ -516,7 +516,7 @@
       "system": "obgyn",
       "title": "Synthesising the cervical screening and colposcopy case summary",
       "oneLine": "Constructing a clear, structured case summary combining screening modality, cytology, HPV status, colposcopic impression, and biopsy plan",
-      "why": "Synthesising a concise case summary ensures all critical prognostic elements are organized logically: patient age, immune status, index screening results, transformation zone type, colposcopic severity, and definitive histological plan to guide appropriate clinical decision-making.",
+      "why": "Synthesising a concise case summary ensures all critical prognostic elements are organised logically: patient age, immune status, index screening results, transformation zone type, colposcopic severity, and definitive histological plan to guide appropriate clinical decision-making.",
       "review": {
         "status": "ai_drafted"
       },
@@ -527,7 +527,7 @@
         },
         {
           "heading": "Synthesising colposcopic impression and biopsy justification",
-          "body": "Document whether the colposcopy was adequate and state the transformation zone type (Type 1, 2, or 3). Detail the exact quadrant, clock hours, and colposcopic grade of the most suspicious lesion.\n\nConclude with the biopsy site, endocervical sampling status, and whether immediate excisional treatment (see-and-treat LLETZ) or staged management pending histological confirmation is indicated."
+          "body": "Document whether the colposcopy was adequate and state the transformation zone type (Type 1, 2, or 3). Detail the exact quadrant, clock hours, and colposcopic grade of the most suspicious lesion.\n\nConclude with the biopsy site, endocervical sampling status, and whether staged management pending histological confirmation is indicated. Immediate see-and-treat LLETZ is only an option in an adult with HSIL cytology concordant with high-grade colposcopy, a fully visible zone, no suspicion of invasion or glandular disease, and informed consent. It is never routine for low-grade or uncertain lesions."
         },
         {
           "heading": "Example summary framework",
@@ -653,7 +653,7 @@
               [
                 "Cervical Ectropion",
                 "Excessive mucoid discharge or postcoital spotting",
-                "Red velvet papillary columnar villi, positive Lugol staining",
+                "Red velvet papillary columnar villi, iodine-negative (mustard-yellow non-staining)",
                 "Normal physiological eversion; no true dysplastic atypia"
               ],
               [
@@ -919,7 +919,7 @@
               [
                 "ASC-US",
                 "Nuclear enlargement 2.5-3x normal, mild hyperchromasia, inconclusive",
-                "Benign atypia (80-90%), CIN 1 (10-20%), CIN 2/3 (5-10%)",
+                "Benign or reactive atypia (about 85%), CIN 1 (about 10%), CIN 2/3 (about 5%)",
                 "Low (5-10%)"
               ],
               [
@@ -938,7 +938,7 @@
                 "HSIL",
                 "Marked nuclear enlargement, high N:C ratio, irregular contours, hyperchromasia",
                 "CIN 2, CIN 3, carcinoma in situ",
-                "Very high (50-70%)"
+                "Very high for CIN 2 or worse (50-70%); CIN 3 or worse about 25-40%"
               ]
             ]
           }
@@ -1163,7 +1163,7 @@
         },
         {
           "heading": "Criteria for ablative therapy versus excisional therapy",
-          "body": "Ablative modalities include thermal ablation (cold coagulation at 100 to 120 degrees Celsius for 20 to 30 seconds) and cryotherapy (using nitrous oxide or carbon dioxide with a 3-minute freeze, 5-minute thaw, 3-minute freeze double-freeze cycle).\n\nAblation destroys tissue without providing a specimen. Therefore, ablative therapy is permitted only when all strict criteria are met: the entire transformation zone is fully visible (Type 1), the lesion is entirely visible with no endocervical extension, there is no suspicion of microinvasion or glandular disease, and cytology correlates with histology."
+          "body": "Ablative modalities include thermal ablation (cold coagulation at 100 to 120 degrees Celsius for 20 to 30 seconds) and cryotherapy (using nitrous oxide or carbon dioxide with a 3-minute freeze, 5-minute thaw, 3-minute freeze double-freeze cycle).\n\nAblation destroys tissue without providing a specimen. Therefore, ablative therapy is permitted only when all strict criteria are met: the entire transformation zone and the whole lesion are fully visible (Type 1 or fully visible Type 2) with no endocervical extension, there is no suspicion of microinvasion or glandular disease, and cytology correlates with histology. A Type 3 zone with an unseen upper limit mandates excision."
         },
         {
           "heading": "Excisional treatment modalities and indications",
@@ -1177,8 +1177,8 @@
             "rows": [
               [
                 "LLETZ / LEEP",
-                "Electrosurgical wire loop under local anaesthesia with lignocaine and adrenaline",
-                "CIN 2/3, Type 1 or Type 2 TZ, see-and-treat protocols",
+                "Electrosurgical wire loop under local anaesthesia with vasoconstrictor",
+                "CIN 2/3, any TZ type; see-and-treat only with strict criteria (adult, HSIL concordant with high-grade colposcopy, fully visible zone, no suspicion of invasion or glandular disease, informed consent)",
                 "Primary haemorrhage, secondary bleeding (5-10 days), cervical stenosis"
               ],
               [
@@ -1190,7 +1190,7 @@
               [
                 "Thermal Ablation",
                 "Heated probe application (100-120 C) for 20-30 seconds",
-                "Low-resource screen-and-treat, strictly Type 1 TZ",
+                "Low-resource screen-and-treat, Type 1 or fully visible Type 2 TZ with no endocervical disease",
                 "Vaginal watery discharge, no histological specimen obtained"
               ]
             ]
@@ -1219,9 +1219,10 @@
         {
           "level": 2,
           "q": "What strict colposcopic criteria must be fulfilled before performing ablative therapy (thermal ablation or cryotherapy) for CIN 2/3?",
-          "a": "Ablative therapy requires a fully visible Type 1 transformation zone, the lesion must be entirely visible with no endocervical extension, and there must be no suspicion of microinvasive or glandular disease.",
+          "a": "Ablative therapy requires a fully visible transformation zone (Type 1 or fully visible Type 2) with the whole lesion visible and no endocervical extension, and there must be no suspicion of microinvasive or glandular disease, with cytology matching histology.",
           "accept": [
             "type 1",
+            "type 2",
             "transformation zone",
             "visible",
             "endocervical",
@@ -1560,7 +1561,7 @@
         "Persistent infection with HPV genotypes 16 and 18 confers the highest risk of neoplastic transformation, driven by viral oncoproteins E6 degrading p53 and E7 inactivating retinoblastoma protein pRb.",
         "Colposcopy is a diagnostic triage tool rather than a screening test: its primary role is to evaluate transformation zone visibility, grade visual abnormalities, and direct punch biopsies to the site of greatest histological suspicion.",
         "The presence of dense opaque acetowhite change, sharp geographic margins, and coarse vascular patterns (punctation and mosaicism) strongly correlates with high-grade histological disease (CIN 2 or CIN 3).",
-        "In women with histologically confirmed CIN 2/3 and a fully visualised Type 1 transformation zone, excisional therapy via LLETZ/LEEP is the treatment of choice, providing an intact specimen to confirm negative surgical margins and exclude occult microinvasion.",
+        "In women with histologically confirmed CIN 2/3 and a fully visualised transformation zone, excision via LLETZ/LEEP is preferred when histology is needed, providing an intact specimen to confirm negative surgical margins and exclude occult microinvasion; ablation remains an alternative only where all strict ablation criteria are met.",
         "Post-treatment surveillance requires a test of cure with high-risk HPV testing at 6 to 12 months; a negative result provides durable reassurance of cure and permits return to regular screening intervals."
       ]
     }

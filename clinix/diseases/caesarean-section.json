@@ -153,7 +153,7 @@
       {
         "id": "osce.caesarean.consent_and_indication",
         "title": "Evaluate indications, urgency category, and obtain informed consent for emergency caesarean section",
-        "prompt": "A 26-year-old G2P1L1 at 39 weeks gestation with one prior caesarean section has been in active labour for 6 hours. For the last 2 hours her cervix has remained at 6 cm, the fetal head is at station minus 1 with severe caput, she reports persistent lower scar tenderness between contractions, and the CTG displays repetitive variable decelerations. Formulate the operative indication, determine the urgency category, explain the necessity of caesarean birth to the patient, and obtain informed surgical consent.",
+        "prompt": "A 26-year-old G2P1L1 at 39 weeks gestation with one prior caesarean section has been in active labour for 6 hours. For the last 4 hours her cervix has remained at 6 cm, the fetal head is at station minus 1 with severe caput, she reports persistent lower scar tenderness between contractions, and the CTG displays repetitive variable decelerations. Formulate the operative indication, determine the urgency category, explain the necessity of caesarean birth to the patient, and obtain informed surgical consent.",
         "seconds": 480,
         "skills": [
           "skill.approach.obg.cs_setup",
@@ -166,7 +166,7 @@
           "Establishes communication calmly and verifies maternal comprehension and capacity.",
           "Clearly states the primary indication (cephalopelvic disproportion with arrest of progress) and warns of impending scar dehiscence.",
           "Explains the four core surgical risks: bleeding requiring blood transfusion, infection, accidental injury to bladder or bowel, and implications for subsequent pregnancies.",
-          "Explicitly states that bilateral tubal sterilization requires separate antepartum written consent and cannot be added urgently without prior documentation."
+          "Explicitly states that bilateral tubal sterilisation requires separate antepartum written consent and cannot be added urgently without prior documentation."
         ],
         "examinerQuestions": [
           {
@@ -174,7 +174,7 @@
             "a": "This is a Category 2 emergency caesarean section (maternal or fetal compromise without immediate life threat), with an institutional audit benchmark of delivery within 75 minutes, although earlier delivery is preferred due to scar tenderness."
           },
           {
-            "q": "What specific intrauterine resuscitation steps would you institute while mobilizing the operating theatre?",
+            "q": "What specific intrauterine resuscitation steps would you institute while mobilising the operating theatre?",
             "a": "Position the woman in full left lateral tilt, discontinue any uterotonic infusions, administer an intravenous crystalloid fluid bolus, provide maternal supplemental oxygen if hypoxemic, and prepare tocolysis if uterine tachysystole is present."
           },
           {
@@ -186,7 +186,7 @@
       {
         "id": "osce.caesarean.surgical_steps_complications",
         "title": "Demonstrate lower segment caesarean surgical steps, head delivery techniques, and angle haemostasis",
-        "prompt": "You are the primary obstetric surgeon performing an emergency lower segment caesarean section for a 26-year-old with cephalopelvic disproportion and failure of progress in the second stage. Describe your surgical entry, lower uterine segment incision, techniques to deliver a deeply impacted fetal head, uterotonic administration, and layered repair of the hysterotomy.",
+        "prompt": "You are the primary obstetric surgeon performing an emergency lower segment caesarean section for a 26-year-old with cephalopelvic disproportion and failure of progress in the active first stage. Describe your surgical entry, lower uterine segment incision, techniques to deliver a deeply impacted fetal head, uterotonic administration, and layered repair of the hysterotomy.",
         "seconds": 480,
         "skills": [
           "skill.tx.caesarean",
@@ -196,17 +196,17 @@
         "criticalItems": [
           "Verifies that preoperative intravenous antibiotic prophylaxis (cefazolin 2 g IV) was given within 60 minutes before skin incision.",
           "Identifies and reflects the uterovesical fold of peritoneum and mobilises the bladder inferiorly using a Doyen retractor.",
-          "Demonstrates recognized manoeuvres for delivering a deeply impacted head, such as the Patwardhan technique or reverse breech extraction.",
-          "Administers intravenous oxytocin immediately following delivery of the infant and ensures complete placental removal before closing the uterine wound in two layers."
+          "Demonstrates recognised manoeuvres for delivering a deeply impacted head, such as the Patwardhan technique or reverse breech extraction.",
+          "Administers slow intravenous oxytocin (5 IU by slow intravenous injection) immediately following delivery of the infant and ensures complete placental removal before closing the uterine wound in two layers."
         ],
         "examinerQuestions": [
           {
             "q": "How would you handle an unexpected lateral extension of the uterine incision into the broad ligament?",
-            "a": "Apply Green-Armytage or ring forceps to the bleeding edges for temporary haemostasis, exteriorise the uterus, identify the course of the ureter and uterine vessels, place an angle figure-of-eight or mattress suture just above the apex of the tear under direct visualization, and call for senior obstetric surgical assistance."
+            "a": "Apply Green-Armytage or ring forceps to the bleeding edges for temporary haemostasis, exteriorise the uterus, identify the course of the ureter and uterine vessels, place an angle figure-of-eight or mattress suture just above the apex of the tear under direct visualisation, and call for senior obstetric surgical assistance."
           },
           {
-            "q": "Why is exteriorization of the uterus versus in situ repair chosen, and what are its physiological effects?",
-            "a": "Exteriorization facilitates optimal visualization of uterine wound angles, assessment of adnexa, and rapid closure of bleeding hysterotomy margins, but it may cause transient traction-induced vagal nausea, vomiting, and maternal hemodynamic fluctuation."
+            "q": "Why is exteriorisation of the uterus versus in situ repair chosen, and what are its physiological effects?",
+            "a": "Exteriorisation facilitates optimal visualisation of uterine wound angles, assessment of adnexa, and rapid closure of bleeding hysterotomy margins, but it may cause transient traction-induced vagal nausea, vomiting, and maternal hemodynamic fluctuation."
           },
           {
             "q": "What postoperative measures promote enhanced recovery after caesarean surgery (ERAS)?",
@@ -346,8 +346,8 @@
       "why": "Deciding on an operative delivery requires synthesizing multiple dynamic clinical findings. Misdiagnosing labour arrest can lead to premature surgical intervention, while missing true cephalopelvic disproportion or occult scar dehiscence leads to obstructed labour, uterine rupture, and perinatal asphyxia.",
       "teach": [
         {
-          "heading": "Recognizing labour dystocia: arrest of dilatation and descent",
-          "body": "Labour dystocia (failure to progress) is the leading indication for primary caesarean section. In the active first stage (from 5 cm dilatation), delay is identified when cervical dilatation is slower than expected or crosses the action line on a partograph.\n\nSecondary arrest of dilatation is defined as no cervical change for 2 hours or more in active labour despite regular contractions. Arrest of descent is failure of the fetal head to advance during the second stage."
+          "heading": "Recognising labour dystocia: arrest of dilatation and descent",
+          "body": "Labour dystocia (failure to progress) is the leading indication for primary caesarean section. In the active first stage (from 5 cm dilatation), delay is identified when cervical dilatation is slower than expected or crosses the action line on a partograph.\n\nSecondary arrest of dilatation is defined as no cervical change despite at least 4 hours of adequate contractions, or 6 hours when contractions are inadequate, with ruptured membranes in active labour. Arrest of descent is failure of the fetal head to advance during the second stage."
         },
         {
           "heading": "Clinical signs of cephalopelvic disproportion",
@@ -382,7 +382,7 @@
           }
         },
         {
-          "heading": "Recognizing scar dehiscence versus true uterine rupture",
+          "heading": "Recognising scar dehiscence versus true uterine rupture",
           "body": "In a woman undergoing trial of labour after caesarean (TOLAC), differentiation between scar dehiscence and rupture is crucial.\n\nDehiscence is an occult separation of the myometrial scar with intact visceral peritoneum; the mother and fetus remain stable.\n\nTrue rupture involves disruption of all layers, typically presenting with continuous scar pain between contractions, fetal heart rate decelerations or bradycardia, vaginal bleeding, and recession of the presenting part."
         }
       ],
@@ -424,7 +424,7 @@
         },
         {
           "id": "scar_surveillance",
-          "text": "Recognizes CTG decelerations and localized continuous scar pain as primary warning signs of scar failure."
+          "text": "Recognises CTG decelerations and localised continuous scar pain as primary warning signs of scar failure."
         }
       ],
       "sources": [
@@ -435,6 +435,10 @@
         {
           "source": "Williams Obstetrics",
           "locator": "Dystocia: abnormal labor and cephalopelvic disproportion"
+        },
+        {
+          "source": "ACOG",
+          "locator": "Obstetric Care Consensus on safe prevention of the primary caesarean delivery (2014, reaffirmed)"
         }
       ],
       "review": {
@@ -481,7 +485,7 @@
         {
           "level": 3,
           "q": "Why must bilateral tubal ligation never be performed during an emergency caesarean section based solely on verbal intraoperative request?",
-          "a": "Bilateral tubal sterilization is a permanent, irreversible procedure requiring unhurried antepartum counselling and written informed consent obtained well before labour. Decisions made under acute intrapartum stress carry high rates of subsequent regret and violate informed consent principles.",
+          "a": "Bilateral tubal sterilisation is a permanent, irreversible procedure requiring unhurried antepartum counselling and written informed consent obtained well before labour. Decisions made under acute intrapartum stress carry high rates of subsequent regret and violate informed consent principles.",
           "accept": [
             "irreversible",
             "antepartum counselling",
@@ -503,7 +507,7 @@
         },
         {
           "id": "consent_ethics",
-          "text": "Demonstrates adherence to legal and ethical requirements regarding informed consent and sterilization."
+          "text": "Demonstrates adherence to legal and ethical requirements regarding informed consent and sterilisation."
         }
       ],
       "sources": [
@@ -609,7 +613,7 @@
         },
         {
           "id": "catastrophe_differentiation",
-          "text": "Recognizes clinical features of complete uterine rupture, placental abruption, and cord prolapse."
+          "text": "Recognises clinical features of complete uterine rupture, placental abruption, and cord prolapse."
         }
       ],
       "sources": [
@@ -632,7 +636,7 @@
       "system": "obgyn",
       "title": "Pre-operative workup and intrapartum monitoring for caesarean section",
       "oneLine": "Essential pre-operative investigations, blood crossmatch, continuous cardiotocography, and ultrasound assessment of scar and placenta",
-      "why": "A systematic preoperative workup optimizes maternal stability, anticipates catastrophic hemorrhage, screens for viral infections, and ensures immediate readiness for regional anaesthesia and neonatal resuscitation.",
+      "why": "A systematic preoperative workup optimises maternal stability, anticipates catastrophic hemorrhage, screens for viral infections, and ensures immediate readiness for regional anaesthesia and neonatal resuscitation.",
       "teach": [
         {
           "heading": "Essential laboratory investigations for operative delivery",
@@ -645,8 +649,8 @@
             "rows": [
               [
                 "Complete Blood Count",
-                "Hemoglobin >= 10.0 g/dL, Platelets >= 100000 /uL",
-                "Quantifies preexisting anemia; safe platelet count for spinal anaesthesia"
+                "Haemoglobin >= 10.0 g/dL, Platelets >= 80000 /uL",
+                "Quantifies pre-existing anaemia; lower safety threshold for spinal anaesthesia without coagulopathy"
               ],
               [
                 "Blood Group & Crossmatch",
@@ -672,7 +676,7 @@
         },
         {
           "heading": "Ultrasound evaluation of the lower segment scar and placental site",
-          "body": "Antenatal and intrapartum ultrasound confirms fetal lie, presentation, estimated fetal weight, and amniotic fluid index.\n\nIn women with prior uterine surgery, scan localization of the placenta is essential to rule out placenta praevia and morbidly adherent placenta accreta spectrum under the anterior scar.\n\nA lower uterine segment full-thickness measurement under 2.0 to 2.5 mm warns of scar thinning and higher dehiscence risk."
+          "body": "Antenatal and intrapartum ultrasound confirms fetal lie, presentation, estimated fetal weight, and amniotic fluid index.\n\nIn women with prior uterine surgery, scan localisation of the placenta is essential to rule out placenta praevia and morbidly adherent placenta accreta spectrum under the anterior scar.\n\nA lower uterine segment full-thickness measurement under 2.0 to 2.5 mm warns of scar thinning and higher dehiscence risk."
         }
       ],
       "probes": [
@@ -692,7 +696,7 @@
         {
           "level": 3,
           "q": "Why is ultrasound exclusion of placenta accreta spectrum vital before repeat caesarean section?",
-          "a": "An anterior low-lying placenta overlying a previous caesarean scar carries a high risk of placenta accreta spectrum, which can cause catastrophic peripartum hemorrhage requiring balloon tamponade, uterine artery embolization, or emergency caesarean hysterectomy.",
+          "a": "An anterior low-lying placenta overlying a previous caesarean scar carries a high risk of placenta accreta spectrum, which can cause catastrophic peripartum hemorrhage requiring balloon tamponade, uterine artery embolisation, or emergency caesarean hysterectomy.",
           "accept": [
             "placenta accreta",
             "caesarean scar",
@@ -706,7 +710,7 @@
       "rubric": [
         {
           "id": "preop_lab_selection",
-          "text": "Selects and interprets hemoglobin, platelets, blood group crossmatching, and coagulation screens correctly."
+          "text": "Selects and interprets haemoglobin, platelets, blood group crossmatching, and coagulation screens correctly."
         },
         {
           "id": "ctg_pathology_recognition",
@@ -714,7 +718,7 @@
         },
         {
           "id": "scar_and_placenta_imaging",
-          "text": "Explains the significance of placental localization and lower uterine segment scar thickness on ultrasound."
+          "text": "Explains the significance of placental localisation and lower uterine segment scar thickness on ultrasound."
         }
       ],
       "sources": [
@@ -757,7 +761,7 @@
                 "Group 1",
                 "Nulliparous, single cephalic, >= 37 weeks",
                 "Spontaneous labour",
-                "Benchmark of obstetric practice; target CS rate 10 to 15 percent"
+                "Reference cohort for intrapartum care quality; WHO sets no target rate for any group"
               ],
               [
                 "Group 2",
@@ -769,7 +773,7 @@
                 "Group 3",
                 "Multiparous (no prior CS), single cephalic, >= 37 wk",
                 "Spontaneous labour",
-                "Largest cohort; baseline CS rate should remain under 3 percent"
+                "Usually the largest cohort; WHO sets no target rate for any group"
               ],
               [
                 "Group 4",
@@ -822,7 +826,7 @@
               ],
               [
                 "Group 10",
-                "All single cephalic, <= 36 weeks (preterm)",
+                "All single cephalic, before 37 completed weeks (up to 36 weeks and 6 days)",
                 "Any onset",
                 "Reflects management of preterm FGR, abruption, and severe pre-eclampsia"
               ]
@@ -935,7 +939,7 @@
           }
         },
         {
-          "heading": "Multidisciplinary theatre mobilization and surgical checklist",
+          "heading": "Multidisciplinary theatre mobilisation and surgical checklist",
           "body": "Once the caesarean decision is established, immediately activate the theatre multidisciplinary team: obstetric scrub nurse, duty anaesthetist, operating department practitioner, and paediatric resuscitation team.\n\nVerify the WHO Surgical Safety Checklist: confirmed identity, signed informed consent, verified blood crossmatch, administered prophylactic antibiotics, and maternal left lateral tilt."
         }
       ],
@@ -943,7 +947,7 @@
         {
           "level": 2,
           "q": "What anaesthetic technique is generally preferred for a Category 2 emergency caesarean section and why?",
-          "a": "Regional spinal anaesthesia using heavy bupivacaine 0.5 percent is preferred because it avoids the risks of difficult tracheal intubation and gastric acid aspiration associated with general anaesthesia, allows the mother to remain awake, and minimizes neonatal drug exposure.",
+          "a": "Regional spinal anaesthesia using heavy bupivacaine 0.5 percent is preferred because it avoids the risks of difficult tracheal intubation and gastric acid aspiration associated with general anaesthesia, allows the mother to remain awake, and minimises neonatal drug exposure.",
           "accept": [
             "spinal anaesthesia",
             "bupivacaine",
@@ -1002,7 +1006,7 @@
       "system": "obgyn",
       "title": "Surgical procedure, operative steps, complication management, and recovery",
       "oneLine": "Step-by-step technique of lower segment caesarean section, management of difficult head delivery, angle extension haemostasis, and postoperative care",
-      "why": "Lower segment transverse caesarean section is the primary surgical delivery technique because incising the thinned lower uterine segment minimizes operative blood loss, facilitates bladder reflection, reduces visceral adhesions, and provides an optimal myometrial healing site that carries a substantially lower rupture risk in subsequent pregnancies than classical vertical incisions.",
+      "why": "Lower segment transverse caesarean section is the primary surgical delivery technique because incising the thinned lower uterine segment minimises operative blood loss, facilitates bladder reflection, reduces visceral adhesions, and provides an optimal myometrial healing site that carries a substantially lower rupture risk in subsequent pregnancies than classical vertical incisions.",
       "dosingNote": "This module teaches management at the level of drug class and principle, quoting only the regimens as stated in the cited book and guideline sources below. All agents, doses, routes and regimens must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
       "teach": [
         {
@@ -1015,11 +1019,11 @@
         },
         {
           "heading": "Delivery of the fetal head and difficult head extraction techniques",
-          "body": "Rupture amniotic membranes if intact. Slide the right hand beneath the lower uterine segment incision below the fetal head, flexing the vertex and gently lifting it through the incision like a vectis while an assistant applies gentle transabdominal fundal pressure.\n\nFor a free-floating high head, apply Wrigley forceps. For a deeply engaged impacted head, utilize Patwardhan technique (delivering anterior shoulder first, then body, then head) or an assistant pushing the head vaginally."
+          "body": "Rupture amniotic membranes if intact. Slide the right hand beneath the lower uterine segment incision below the fetal head, flexing the vertex and gently lifting it through the incision like a vectis while an assistant applies gentle transabdominal fundal pressure.\n\nFor a free-floating high head, apply Wrigley forceps. For a deeply engaged impacted head, utilise Patwardhan technique (delivering anterior shoulder first, then body, then head) or a sterile-gloved assistant pushing the head up vaginally."
         },
         {
           "heading": "Uterotonics, placental delivery, and two-layer hysterotomy closure",
-          "body": "Immediately after delivery of the baby, double-clamp and cut the cord, and hand the infant to the neonatal team. Administer slow intravenous oxytocin (Syntocinon 10 IU IV) to achieve vigorous uterine contraction.\n\nDeliver the placenta completely by controlled cord traction. Grasp the uterine incision edges and lateral angles with Green-Armytage or Allis clamps.\n\nClose the lower segment hysterotomy in two layers using synthetic absorbable suture (Vicryl 1)."
+          "body": "Immediately after delivery of the baby, double-clamp and cut the cord, and hand the infant to the neonatal team. Administer slow intravenous oxytocin (Syntocinon 5 IU by slow intravenous injection) to achieve vigorous uterine contraction.\n\nDeliver the placenta completely by controlled cord traction. Grasp the uterine incision edges and lateral angles with Green-Armytage or Allis clamps.\n\nClose the lower segment hysterotomy in two layers using synthetic absorbable suture (Vicryl 1)."
         },
         {
           "heading": "Haemostasis, abdominal wall closure, and enhanced postoperative recovery",
@@ -1043,7 +1047,7 @@
         {
           "level": 3,
           "q": "How is a deeply engaged, impacted fetal head managed during emergency caesarean section in second stage obstructed labour?",
-          "a": "Techniques include the push technique (an unsterile assistant pushes the head upward from the vagina), the reverse breech extraction or pull technique (delivering the feet first through the hysterotomy), and the Patwardhan technique (delivering the shoulders and body before the head).",
+          "a": "Techniques include the push technique (a sterile-gloved assistant pushes the head upward from the vagina), the reverse breech extraction or pull technique (delivering the feet first through the hysterotomy), and the Patwardhan technique (delivering the shoulders and body before the head).",
           "accept": [
             "push technique",
             "pull technique",
@@ -1065,7 +1069,7 @@
         },
         {
           "id": "impacted_head_management",
-          "text": "Describes recognized manoeuvres including Patwardhan and reverse breech extraction for deeply impacted fetal head."
+          "text": "Describes recognised manoeuvres including Patwardhan and reverse breech extraction for deeply impacted fetal head."
         }
       ],
       "sources": [
@@ -1076,6 +1080,10 @@
         {
           "source": "Williams Obstetrics",
           "locator": "Caesarean delivery and peripartum hysterectomy"
+        },
+        {
+          "source": "NICE",
+          "locator": "NG192 Caesarean birth: uterotonic dose and antibiotic prophylaxis timing"
         }
       ],
       "review": {
@@ -1144,7 +1152,7 @@
             "cervical dilatation over the last few hours",
             "did the nurse say you are dilating"
           ],
-          "reply": "My mild pains started yesterday midnight, but strong regular pains began around 4:00 AM. When the doctor examined me at 8:00 AM, my mouth of the womb was 6 cm dilated. They checked me again at 11:00 AM, and it is still exactly 6 cm."
+          "reply": "My mild pains started yesterday midnight, but strong regular pains began around 4:00 AM. When the doctor examined me at 8:00 AM, my mouth of the womb was 6 cm dilated. They checked me again at 12 noon, and it is still exactly 6 cm."
         },
         "membrane_status_fluid": {
           "cues": [
@@ -1313,7 +1321,7 @@
           "abnormal": true
         },
         "skill.exam.obg.fetal_diameters_station": {
-          "finding": "Head is in occipitotransverse position with parietal bone presenting; station is minus 1 (1 cm above ischial spines); significant caput succedaneum present (+2) with moderate moulding (+2) where parietal bones touch without overlapping.",
+          "finding": "Head is in occipitotransverse position with parietal bone presenting; station is minus 1 (1 cm above ischial spines); significant caput succedaneum present (+2) with moderate moulding (+2) where parietal bones overlap but remain reducible on gentle pressure.",
           "abnormal": true
         },
         "skill.exam.obg.pelvimetry": {
@@ -1325,7 +1333,7 @@
           "abnormal": true
         },
         "skill.exam.obg.labour_pv": {
-          "finding": "Cervix is fully effaced, dilated to 6 cm (unchanged from assessment 3 hours ago); anterior cervical lip is oedematous and trapped against the pubic bone; membranes ruptured with lightly blood-tinged amniotic fluid without thick meconium; presenting vertex at station minus 1 with caput.",
+          "finding": "Cervix is fully effaced, dilated to 6 cm (unchanged from assessment 4 hours ago); anterior cervical lip is oedematous and trapped against the pubic bone; membranes ruptured with lightly blood-tinged amniotic fluid without thick meconium; presenting vertex at station minus 1 with caput.",
           "abnormal": true
         }
       },
@@ -1339,8 +1347,8 @@
       "investigations": {
         "cbc": {
           "label": "Complete blood count",
-          "result": "Hemoglobin 11.2 g/dL, Hematocrit 33.6 percent, Total leukocyte count 10800 /uL, Platelets 215000 /uL",
-          "note": "Hemoglobin is adequate for anticipated operative blood loss; normal platelet count permits regional spinal anaesthesia.",
+          "result": "Haemoglobin 11.2 g/dL, Hematocrit 33.6 percent, Total leukocyte count 10800 /uL, Platelets 215000 /uL",
+          "note": "Haemoglobin is adequate for anticipated operative blood loss; normal platelet count permits regional spinal anaesthesia.",
           "indicated": true
         },
         "blood_group_crossmatch": {
@@ -1382,7 +1390,7 @@
         "urine_routine_microscopy": {
           "label": "Urine routine and microscopy",
           "result": "Pale yellow, clear; protein nil, sugar nil, ketones trace; 2 to 4 RBCs per high power field, no pus cells or casts.",
-          "note": "Trace ketones reflect mild intrapartum fasting ketosis; minimal microscopic hematuria is common in engaged labour.",
+          "note": "Trace ketones reflect mild intrapartum fasting ketosis; minimal microscopic haematuria is common in engaged labour.",
           "indicated": false
         }
       },
@@ -1411,7 +1419,7 @@
           "impending uterine rupture",
           "fetal distress"
         ],
-        "answer": "Cephalopelvic disproportion with failure to progress in active labour and impending uterine scar dehiscence in a gravid woman with one previous lower segment caesarean section, requiring emergency Category 1 or 2 caesarean section.",
+        "answer": "Cephalopelvic disproportion with failure to progress in active labour and impending uterine scar dehiscence in a gravid woman with one previous lower segment caesarean section, requiring emergency Category 2 caesarean section.",
         "minMatch": 1
       },
       "managementModel": {
@@ -1436,10 +1444,10 @@
       },
       "teachingPoints": [
         "Trial of labour after caesarean (TOLAC) carries a 70 to 75 percent success rate in carefully selected women with one prior lower segment transverse incision, but requires continuous electronic fetal monitoring and immediate operative capability.",
-        "Secondary arrest of cervical dilatation (cessation of dilatation for 2 or more hours in active labour) combined with high unengaged head, excessive caput, and severe moulding indicates cephalopelvic disproportion, mandating caesarean delivery rather than oxytocin augmentation.",
+        "Secondary arrest of cervical dilatation (no cervical change despite at least 4 hours of adequate contractions, or 6 hours with inadequate contractions, with ruptured membranes) combined with high unengaged head, excessive caput, and severe moulding indicates cephalopelvic disproportion, mandating caesarean delivery rather than oxytocin augmentation.",
         "Constant scar pain and localized tenderness between contractions in a scarred uterus is a cardinal red flag for impending uterine scar dehiscence or rupture. Oxytocics must be stopped immediately and urgent laparotomy performed.",
         "The Lucas classification defines four urgency categories: Category 1 (crash delivery <= 30 minutes for acute life threat), Category 2 (urgent delivery <= 75 minutes for maternal/fetal compromise), Category 3 (scheduled during working hours), and Category 4 (elective at or after 39 weeks).",
-        "Surgical antibiotic prophylaxis with intravenous cefazolin (2 g IV) should be administered within 60 minutes prior to skin incision, and slow intravenous oxytocin (10 IU IV) administered immediately following cord clamping to promote vigorous myometrial haemostasis."
+        "Surgical antibiotic prophylaxis with intravenous cefazolin (2 g IV) should be administered within 60 minutes prior to skin incision, and slow intravenous oxytocin (5 IU by slow intravenous injection) administered immediately following cord clamping to promote vigorous myometrial haemostasis."
       ],
       "review": {
         "status": "ai_drafted"

@@ -45,7 +45,7 @@
         },
         "skill.exam.surg.tmj_trismus": {
           "abnormal": true,
-          "finding": "Mouth opening two finger breadths, about 2 cm between incisors. No joint click. Fibrous bands felt in both cheeks."
+          "finding": "Mouth opening two finger breadths, about 3 cm between incisors. No joint click. Fibrous bands felt in both cheeks."
         },
         "skill.exam.surg.tongue_mobility": {
           "abnormal": true,
@@ -300,7 +300,7 @@
         "sputum_afb": {
           "indicated": false,
           "label": "Sputum for acid fast bacilli",
-          "note": "Not indicated as a first step: no cough, no evening fever, no weight loss pattern of tuberculosis, and a normal chest film. It stays on the list only if lung shadows appear.",
+          "note": "Not indicated as a first step: no cough, no evening fever, and a normal chest film. The weight loss here follows poor intake from the painful ulcer, which does not by itself point to tuberculosis. It stays on the list only if lung shadows appear.",
           "result": "Not sent."
         }
       },
@@ -1242,10 +1242,11 @@
           "q": "When is radiotherapy the main treatment rather than an addition to surgery?"
         },
         {
-          "a": "Biopsy it after a short trial of conservative care fails, since post radiotherapy ulcers can hide recurrence.",
+          "a": "Biopsy it promptly with no trial of conservative care first, since a rolled or elevated border at the treated site itself signals recurrence.",
           "accept": [
             "biopsy",
-            "conservative",
+            "rolled",
+            "promptly",
             "recurrence"
           ],
           "level": 3,

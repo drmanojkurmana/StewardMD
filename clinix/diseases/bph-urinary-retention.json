@@ -195,7 +195,7 @@
         "examinerQuestions": [
           "You found a dull midline dome you cannot get below. Why is that finding dull, and what single bedside check confirms what it is?",
           "Your prostate feel is smooth and symmetrical with a preserved groove. What two finger findings would force you to suspect cancer instead?",
-          "His urea is raised with creatinine at the upper limit. What does that change in your plan tonight?"
+          "His urea and creatinine are both raised. What does that change in your plan tonight?"
         ]
       },
       {
@@ -1139,8 +1139,8 @@
         "usg_kub": {
           "label": "Ultrasound of kidneys, bladder and prostate",
           "indicated": true,
-          "result": "Prostate 45 g with median lobe projection. Bladder wall thickened with 280 mL residual urine. No upper tract dilatation. No stone.",
-          "note": "Confirms enlargement with a significant residual and, importantly, still normal upper tracts, so relief now can prevent back-pressure damage."
+          "result": "Prostate 45 g with median lobe projection. Bladder wall thickened with a large retained volume of about 850 mL. No upper tract dilatation. No stone.",
+          "note": "Confirms enlargement with a large retained volume consistent with the tense dome; upper tracts are not yet dilated, so prompt relief with kidney trend can prevent back-pressure damage. Record the exact drained volume at catheterisation."
         },
         "urine_routine": {
           "label": "Urine routine and microscopy",
@@ -1151,14 +1151,14 @@
         "renal_function": {
           "label": "Blood urea and creatinine",
           "indicated": true,
-          "result": "Urea 48 mg/dL. Creatinine 1.4 mg/dL, at the upper limit of normal. Sodium and potassium normal.",
-          "note": "A raised urea with creatinine at the upper limit in a retained man warns of back pressure; trend both after relief."
+          "result": "Urea 48 mg/dL. Creatinine 1.4 mg/dL, raised and consistent with obstructive renal impairment. Sodium and potassium normal.",
+          "note": "A raised urea with a raised creatinine in a retained man warns of obstructive renal impairment with possible back pressure; relieve promptly, trend both after relief and act on any rise."
         },
         "psa_counselled": {
           "label": "Counselled serum prostate marker",
           "indicated": true,
-          "result": "Mildly raised, in keeping with gland volume. Counselled before testing, drawn when free of infection.",
-          "note": "Enlargement itself raises the marker mildly; a high or rising value needs cancer evaluation, and gland-shrinking drugs halve it."
+          "result": "Deferred. Counselled before testing; sampling deferred until urinary infection is treated and retention has resolved, since both raise the marker.",
+          "note": "Enlargement itself raises the marker mildly, while infection, retention and instrumentation raise it further, so defer sampling until infection is treated and retention has resolved. A high or rising settled value needs cancer evaluation, and gland-shrinking drugs halve it."
         },
         "urine_culture": {
           "label": "Urine culture and sensitivity",
@@ -1206,7 +1206,7 @@
         "minMatch": 2
       },
       "diagnosis": {
-        "answer": "Benign prostatic hyperplasia with acute on chronic urinary retention and early back-pressure change.",
+        "answer": "Benign prostatic hyperplasia with acute on chronic urinary retention, urinary infection and obstructive renal impairment at risk of back-pressure damage; upper tracts not yet dilated on scan.",
         "accept": [
           "Benign prostatic hyperplasia",
           "BPH",
@@ -1234,7 +1234,7 @@
         "A cold capsule the previous evening is the classic trigger: always ask which new medicine preceded the stoppage.",
         "Overflow dampness for months means the bladder never emptied; the palpable dome, not the leakage story, is the diagnosis.",
         "A smooth symmetrical gland with a preserved groove favours BPH, but terminal red urine twice still needs growth and stone excluded.",
-        "Urea 48 with creatinine at the upper limit is the kidney asking for relief; trend both after catheterisation and scan the upper tracts.",
+        "Urea 48 with creatinine 1.4, both raised, is the kidney asking for relief; relieve promptly, trend both after catheterisation and scan the upper tracts.",
         "Relief comes before assessment: the prostate cannot be judged while the bladder is full, and a trial without catheter needs muscle-relaxant cover and a urology follow-up."
       ],
       "review": {

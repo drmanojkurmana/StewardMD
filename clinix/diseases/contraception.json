@@ -345,13 +345,13 @@
                 "Category 2",
                 "Advantages outweigh risks",
                 "Generally use the method",
-                "Combined pill in controlled epilepsy on valproate"
+                "Combined pill in woman with obesity alone (BMI 30 or higher)"
               ],
               [
                 "Category 3",
                 "Risks outweigh advantages",
                 "Not recommended without specialist review",
-                "Combined pill in smoker under 35 smoking 15+ cigs"
+                "Combined pill in smoker aged 35 or older smoking fewer than 15 cigs per day"
               ],
               [
                 "Category 4",
@@ -465,8 +465,8 @@
           "body": "Before placing an intrauterine device (Cu-IUD or LNG-IUS), a bimanual examination and speculum inspection must confirm normal uterine size, position, and mobile non-tenderness.\n\nPurulent cervical discharge, cervical motion tenderness, or adnexal fullness suggests acute pelvic inflammatory disease or active cervicitis, which absolutely contraindicates IUD insertion until treated and fully resolved.\n\nUterine enlargement with distortion of the cavity from fibroids precludes reliable placement."
         },
         {
-          "heading": "Recognizing breast and systemic malignant markers",
-          "body": "Active or past breast cancer is Category 4 for all hormonal contraceptive options, including combined pills, progestogen-only pills, DMPA injections, subdermal implants, and the levonorgestrel intrauterine system.\n\nIn women with a history of breast carcinoma, the copper intrauterine device is the premier high-efficacy, completely hormone-free contraceptive choice (Category 1)."
+          "heading": "Recognising breast and systemic malignant markers",
+          "body": "Current breast cancer is Category 4 for all hormonal contraceptive options, including combined pills, progestogen-only pills, DMPA injections, subdermal implants, and the levonorgestrel intrauterine system.\n\nPast breast cancer with no evidence of disease for 5 years is Category 3 for hormonal methods, so the copper intrauterine device remains the premier high-efficacy, completely hormone-free contraceptive choice (Category 1)."
         }
       ],
       "probes": [
@@ -501,14 +501,15 @@
         },
         {
           "level": 3,
-          "q": "A 32-year-old woman treated for breast cancer two years ago requests highly effective reversible contraception. What is the safest Tier 1 method?",
-          "a": "The copper intrauterine device (Cu-T 380A), because it is completely hormone-free (Category 1), whereas all hormonal methods are Category 4.",
+          "q": "A 32-year-old woman treated for breast cancer seven years ago with no evidence of disease since requests highly effective reversible contraception. What is the safest Tier 1 method?",
+          "a": "The copper intrauterine device (Cu-T 380A), because it is completely hormone-free (Category 1), whereas all hormonal methods are Category 3 after past breast cancer and best avoided when a Category 1 option exists.",
           "accept": [
             "copper",
             "cu-t",
             "iud",
             "hormone-free",
             "category 1",
+            "category 3",
             "copper t"
           ],
           "minMatch": 2
@@ -526,7 +527,7 @@
         },
         {
           "id": "breast_cancer",
-          "text": "Identifies breast malignancy as Category 4 for all hormonal methods"
+          "text": "Distinguishes current breast cancer (Category 4 for all hormonal methods) from past breast cancer disease-free for 5 years (Category 3)"
         },
         {
           "id": "cu_iud_safety",

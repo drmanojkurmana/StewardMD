@@ -285,7 +285,7 @@
         },
         {
           "heading": "Why strangulation matters most",
-          "body": "Luminal blockage first causes proximal fluid accumulation, distension and raised wall tension. When pressure exceeds venous pressure the wall becomes ischaemic, bacteria cross into the blood, and gangrene with perforation follows.\n\nClosed-loop obstruction and strangulation declare themselves with constant rather than colicky pain, localised tenderness with guarding, fever, leucocytosis and lactic acidosis. These are the findings that convert watchful waiting into an urgent operation."
+          "body": "Luminal blockage first causes proximal fluid accumulation, distension and raised wall tension. When pressure exceeds venous pressure the wall becomes ischaemic, bacteria cross into the blood, and gangrene with perforation follows.\n\nClosed-loop obstruction and strangulation declare themselves with constant rather than colicky pain, localised tenderness with guarding, fever and lactic acidosis, often with a rising leucocyte count. Slight leucocytosis is also common in simple obstruction and no single blood test proves strangulation, so these findings convert watchful waiting into an urgent operation only when the clinical picture and imaging agree."
         }
       ],
       "probes": [
@@ -455,7 +455,7 @@
         },
         {
           "heading": "Strangulation: the findings that change everything",
-          "body": "Colicky pain turning constant and burning is the earliest warning that blood supply is failing. Rebound tenderness on sudden release of the hand carries the same message, and with generalised guarding the test is unnecessary.\n\nSystemic signs follow: fever where there was none, tachycardia with falling urine output, dehydration with sunken eyes and a dry tongue, and later hypotension and shock. Raised lactate with a base deficit on blood gas analysis confirms tissue ischaemia when the clinical picture is doubtful."
+          "body": "Colicky pain turning constant and burning is the earliest warning that blood supply is failing. Rebound tenderness on sudden release of the hand carries the same message, and with generalised guarding the test is unnecessary.\n\nFever, tachycardia with falling urine output, and later hypotension may follow, but dehydration alone causes these in simple obstruction. Read them with pain character, tenderness, lactate and imaging, with serial review, since a raised lactate with base deficit confirms ischaemia when the picture is doubtful."
         }
       ],
       "probes": [
@@ -597,7 +597,7 @@
         },
         {
           "heading": "CT: find the point and judge the bowel",
-          "body": "Contrast CT of the abdomen with intravenous and water-soluble oral contrast is the triage test: it shows the transition point between dilated and collapsed bowel, names the cause, and detects ischaemia, closed-loop patterns and free fluid.\n\nThe twisted mesentery of sigmoid volvulus appears as a whirl, and caecal volvulus as a comma-shaped loop in the left upper quadrant. Rising lactate with a base deficit on venous blood gas, leucocytosis and electrolyte disturbance grade ischaemia and dehydration alongside the images."
+          "body": "Contrast CT of the abdomen with intravenous and water-soluble oral contrast is the triage test: it shows the transition point between dilated and collapsed bowel, names the cause, and detects ischaemia, closed-loop patterns and free fluid.\n\nThe twisted mesentery of sigmoid volvulus appears as a whirl, and caecal volvulus as a comma-shaped loop in the left upper quadrant. Rising lactate with a base deficit on venous blood gas grades ischaemia, while the leucocyte count and electrolytes grade dehydration alongside the images. No single blood test proves strangulation, so labs are always read with the clinical picture and the scan."
         },
         {
           "heading": "Gastrografin challenge and the supporting tests",
@@ -678,10 +678,10 @@
         {
           "heading": "Strangulated or not: the criteria",
           "points": [
-            "Clinical: constant rather than colicky pain, localised tenderness with guarding or rebound, fever and tachycardia where simple obstruction has none.",
-            "Laboratory: leucocytosis, rising serum lactate and a base deficit on blood gas analysis marking transmural ischaemia.",
+            "Clinical: constant rather than colicky pain with localised tenderness, guarding or rebound. Fever and tachycardia support strangulation only with such localising signs, since dehydration alone can cause them in simple obstruction.",
+            "Laboratory: rising serum lactate with a base deficit on blood gas analysis, marking transmural ischaemia. Leucocytosis may accompany strangulation, but slight leucocytosis is common in simple obstruction and no laboratory test reliably distinguishes the two, so labs never decide alone.",
             "Imaging: closed-loop pattern, bowel wall thickening with poor enhancement, mesenteric oedema and free fluid on contrast CT.",
-            "Any one strong marker earns urgent operation. Waiting for all of them means waiting for dead bowel."
+            "Localising signs, ischaemia on imaging, or rising lactate with a base deficit earn urgent operation. Waiting for all of them means waiting for dead bowel, but a single mild systemic upset without localising signs does not."
           ]
         },
         {
@@ -705,7 +705,7 @@
         {
           "level": 2,
           "q": "Which laboratory markers suggest strangulation?",
-          "a": "Leucocytosis, rising serum lactate and a base deficit on venous blood gas, reflecting bowel wall ischaemia.",
+          "a": "Rising serum lactate with a base deficit on venous blood gas, reflecting bowel wall ischaemia. Leucocytosis may accompany strangulation, but slight leucocytosis is common in simple obstruction and no single blood test proves it, so the decision rests on clinical signs plus imaging with serial review.",
           "accept": [
             "leucocytosis",
             "lactate",
@@ -1053,7 +1053,7 @@
           "abnormal": true
         },
         "skill.gen.surg.surgical_shock": {
-          "finding": "Early volume depletion: tachycardia with dry mucosa, delayed capillary refill and oliguria, but no hypotension and no cold clammy periphery yet. Responds to the fluid challenge, with no established shock.",
+          "finding": "Early volume depletion: tachycardia with dry mucosa, delayed capillary refill and oliguria, but no hypotension and no cold clammy periphery yet. Fluid responsiveness not yet tested, so give a fluid challenge with reassessment. No established shock.",
           "abnormal": true
         },
         "skill.exam.surg.bowel_obstruction": {
@@ -1094,8 +1094,8 @@
         "blood_counts": {
           "label": "Full blood count",
           "indicated": true,
-          "result": "Haemoglobin 14.1 g/dL. Total leucocyte count 11,200 per mm3 with 76 percent neutrophils. No leucocytosis of strangulation range.",
-          "note": "Mild neutrophilia fits obstruction without established ischaemia. A sharply rising count with fever would push towards strangulation."
+          "result": "Haemoglobin 14.1 g/dL. Total leucocyte count 11,200 per mm3 with 76 percent neutrophils. Mild leucocytosis, which is common in simple obstruction and does not by itself distinguish simple from strangulated obstruction.",
+          "note": "Mild neutrophilia fits simple obstruction with dehydration and argues against nothing on its own. Strangulation is a clinical plus imaging decision, so pain character, tenderness, fever, lactate and CT signs matter more than any single count, and all need serial review."
         },
         "urea_electrolytes": {
           "label": "Urea and electrolytes",
@@ -1137,7 +1137,7 @@
         "minMatch": 2
       },
       "diagnosis": {
-        "answer": "Small bowel obstruction, likely adhesive after open appendicectomy, complete, with no strangulation at present.",
+        "answer": "Small bowel obstruction, likely adhesive after open appendicectomy, complete, with no established strangulation at present: pain remains colicky without tenderness, guarding or CT ischaemia and lactate is normal, while mild fever, tachycardia with reduced urine output and mild leucocytosis reflect volume depletion and need serial review.",
         "accept": [
           "small bowel obstruction",
           "adhesive small bowel obstruction",
@@ -1165,7 +1165,7 @@
         "The sequence makes the diagnosis before any film: colic first, vomiting close behind, progressive central distension, then absolute arrest of stool and flatus over two days.",
         "Twelve years do not exonerate the old laparotomy. Adhesions cause about three quarters of small bowel obstructions, and a single open operation is enough.",
         "A noisy abdomen with visible ladder-pattern peristalsis and no tenderness is simple obstruction. Constant pain with guarding or rebound would rewrite the plan to urgent operation.",
-        "Normal lactate with no base deficit permits a conservative trial but never ends vigilance: strangulation can declare itself hours later, so the abdomen and the lactate are reviewed serially.",
+        "Normal lactate with no base deficit and no tenderness, guarding or CT ischaemia permit a conservative trial but never end vigilance: mild fever, tachycardia with reduced urine output and mild leucocytosis here reflect volume depletion, and strangulation can still declare itself hours later, so the abdomen and the lactate are reviewed serially.",
         "The groins and rectum were examined and were negative. Those negatives exclude a strangulated hernia and support obstruction with an empty rectum, and they must be documented, not assumed.",
         "No barium enema in acute obstruction. The contrast study that helps here is the water-soluble challenge through the nasogastric tube, judged on films at about 8 and 24 hours."
       ],

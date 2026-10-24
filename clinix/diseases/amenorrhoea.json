@@ -224,7 +224,7 @@
         "examinerQuestions": [
           "What is the very first mandatory laboratory test in any reproductive-age woman presenting with secondary amenorrhoea?",
           "How does the progesterone challenge test work, and what does failure to bleed after medroxyprogesterone acetate indicate?",
-          "What is the significance of negative withdrawal bleeding after combined estrogen-progestin therapy?",
+          "What is the significance of negative withdrawal bleeding after combined oestrogen-progestin therapy?",
           "What is the gold standard diagnostic and therapeutic modality for Asherman syndrome, and how is adhesion reformation prevented postoperatively?"
         ]
       }
@@ -329,7 +329,7 @@
         {
           "level": 3,
           "q": "How does primary ovarian failure in Compartment II alter circulating pituitary gonadotropin levels?",
-          "a": "Loss of ovarian follicular estrogen synthesis removes negative feedback inhibition, resulting in elevated serum FSH and LH levels (hypergonadotropic hypogonadism).",
+          "a": "Loss of ovarian follicular oestrogen synthesis removes negative feedback inhibition, resulting in elevated serum FSH and LH levels (hypergonadotropic hypogonadism).",
           "accept": [
             "elevated",
             "fsh",
@@ -404,14 +404,15 @@
         {
           "level": 2,
           "q": "Why does complete androgen insensitivity syndrome present with mature breast development but absent or sparse pubic hair?",
-          "a": "Testicular androgens are aromatised peripherally to estrogens producing breasts, but non-functional androgen receptors prevent androgen-dependent pubic and axillary hair growth.",
+          "a": "Testicular androgens are aromatised peripherally to oestrogens producing breasts, but non-functional androgen receptors prevent androgen-dependent pubic and axillary hair growth.",
           "accept": [
             "aromatised",
             "estrogens",
             "breasts",
             "androgen receptors",
             "pubic",
-            "androgens"
+            "androgens",
+            "oestrogens"
           ],
           "minMatch": 2
         },
@@ -477,27 +478,27 @@
             ],
             "rows": [
               [
-                "Present (estrogenized)",
+                "Present (oestrogenised)",
                 "Present",
-                "Outflow obstruction, imperforate hymen, PCOS",
-                "Genital exam, hormonal challenge"
+                "Outflow obstruction (imperforate hymen, transverse vaginal septum)",
+                "Genital examination and pelvic ultrasound"
               ],
               [
-                "Present (estrogenized)",
+                "Present (oestrogenised)",
                 "Absent",
                 "MRKH syndrome (46,XX), AIS (46,XY)",
                 "Karyotype, serum testosterone"
               ],
               [
-                "Absent (hypoestrogenic)",
+                "Absent (hypo-oestrogenic)",
                 "Present",
                 "Turner (45,X), hypogonadotropic hypogonadism",
                 "Serum FSH, LH, karyotype"
               ],
               [
-                "Absent (hypoestrogenic)",
+                "Absent (hypo-oestrogenic)",
                 "Absent",
-                "17,20-desmolase deficiency, rare dysgenesis",
+                "Rare disorder of sex development, karyotype decides",
                 "Karyotype, adrenal steroid panel"
               ]
             ]
@@ -659,14 +660,15 @@
         {
           "level": 3,
           "q": "What clinical presentation distinguishes Asherman syndrome from functional hypothalamic amenorrhoea in secondary amenorrhoea?",
-          "a": "Asherman syndrome typically follows uterine curettage and fails to bleed after combined estrogen and progestin, whereas hypothalamic amenorrhoea bleeds after combined hormones and has low or normal gonadotropins.",
+          "a": "Asherman syndrome typically follows uterine curettage and fails to bleed after combined oestrogen and progestin, whereas hypothalamic amenorrhoea bleeds after combined hormones and has low or normal gonadotropins.",
           "accept": [
             "curettage",
             "adhesions",
             "asherman",
             "estrogen",
             "progestin",
-            "combined"
+            "combined",
+            "oestrogen"
           ],
           "minMatch": 2
         }
@@ -709,31 +711,32 @@
         },
         {
           "heading": "Endocrine profiling and hormonal challenge tests",
-          "body": "Measure serum FSH, LH, and estradiol. In primary amenorrhoea with absent breasts, elevated FSH (>40 IU/L) confirms hypergonadotropic hypogonadism, mandating karyotyping for Turner syndrome.\n\nIn secondary amenorrhoea with a normal uterus, perform the progesterone challenge test: medroxyprogesterone acetate 10 mg orally for 10 days. Withdrawal bleeding within 2 to 7 days confirms anovulation with adequate endogenous estrogen and a patent outflow tract (e.g. PCOS)."
+          "body": "Measure serum FSH, LH, and oestradiol. In primary amenorrhoea with absent breasts, a raised serum FSH with low oestradiol on two occasions 4 to 6 weeks apart confirms hypergonadotropic hypogonadism, mandating karyotyping for Turner syndrome. Values in the 25 to 40 IU/L range are abnormal and must not be dismissed as normal.\n\nIn secondary amenorrhoea with a normal uterus, perform the progesterone challenge test: medroxyprogesterone acetate 10 mg orally for 10 days. Withdrawal bleeding within 2 to 7 days confirms anovulation with adequate endogenous oestrogen and a patent outflow tract (e.g. PCOS)."
         },
         {
           "heading": "Combined challenge and advanced diagnostic modalities",
-          "body": "If no withdrawal bleed occurs after progesterone, administer cyclical estrogen followed by progestin (e.g. oral estradiol 2 mg daily for 21 days with medroxyprogesterone acetate 10 mg added for days 12 to 21).\n\nFailure to bleed after combined estrogen-progestin proves a Compartment I end-organ outflow defect, establishing Asherman syndrome. Diagnostic hysteroscopy is the gold standard to visualise and grade intrauterine adhesions."
+          "body": "If no withdrawal bleed occurs after progesterone, administer cyclical oestrogen followed by progestin (e.g. oral oestradiol 2 mg daily for 21 days with medroxyprogesterone acetate 10 mg added for days 12 to 21).\n\nFailure to bleed after combined oestrogen-progestin proves a Compartment I end-organ outflow defect, establishing Asherman syndrome. Diagnostic hysteroscopy is the gold standard to visualise and grade intrauterine adhesions."
         }
       ],
       "probes": [
         {
           "level": 1,
           "q": "What is the diagnostic significance of a positive withdrawal bleed following a 10-day progesterone challenge test?",
-          "a": "A positive withdrawal bleed confirms that the endometrium has been primed by endogenous estrogen, the outflow tract is patent, and the patient has anovulation (commonly PCOS).",
+          "a": "A positive withdrawal bleed confirms that the endometrium has been primed by endogenous oestrogen, the outflow tract is patent, and the patient has anovulation (commonly PCOS).",
           "accept": [
             "estrogen",
             "primed",
             "patent",
             "outflow",
             "anovulation",
-            "pcos"
+            "pcos",
+            "oestrogen"
           ],
           "minMatch": 2
         },
         {
           "level": 2,
-          "q": "What does failure of withdrawal bleeding following a combined estrogen and progestin challenge indicate?",
+          "q": "What does failure of withdrawal bleeding following a combined oestrogen and progestin challenge indicate?",
           "a": "Failure to bleed indicates an anatomical defect of the outflow tract or endometrium (Compartment I), most commonly Asherman syndrome or cervical stenosis.",
           "accept": [
             "outflow",
@@ -765,7 +768,7 @@
         },
         {
           "id": "r.ix.amenorrhoea.challenge",
-          "text": "Interprets progesterone and combined estrogen-progestin challenge tests and indicates advanced imaging or hysteroscopy."
+          "text": "Interprets progesterone and combined oestrogen-progestin challenge tests and indicates advanced imaging or hysteroscopy."
         }
       ],
       "sources": [
@@ -787,12 +790,12 @@
       "kind": "annexure",
       "system": "obgyn",
       "title": "Four-compartment classification and challenge test algorithm",
-      "oneLine": "Diagnostic flow chart mapping progesterone withdrawal, estrogen-progestin challenge, and gonadotropin levels to anatomical compartments",
+      "oneLine": "Diagnostic flow chart mapping progesterone withdrawal, oestrogen-progestin challenge, and gonadotropin levels to anatomical compartments",
       "why": "The classic WHO and Greenblatt-Speroff challenge test algorithm provides an infallible decision tree that guides clinical decisions from initial presentation to definitive anatomical localisation.",
       "teach": [
         {
           "heading": "Progesterone challenge test protocol and logic",
-          "body": "Administer oral medroxyprogesterone acetate 10 mg daily for 10 consecutive days. Any bleeding within 2 to 7 days of completion is considered positive.\n\nA positive withdrawal bleed proves two essential physiological facts: the ovaries are producing sufficient endogenous estrogen to proliferate the endometrium, and the outflow tract (cervix and vagina) is anatomically patent."
+          "body": "Administer oral medroxyprogesterone acetate 10 mg daily for 10 consecutive days. Any bleeding within 2 to 7 days of completion is considered positive.\n\nA positive withdrawal bleed proves two essential physiological facts: the ovaries are producing sufficient endogenous oestrogen to proliferate the endometrium, and the outflow tract (cervix and vagina) is anatomically patent."
         },
         {
           "heading": "Stepwise algorithmic challenge matrix",
@@ -813,39 +816,39 @@
               [
                 "Progesterone test: Negative bleed",
                 "Proceed to step 2",
-                "Estrogen deficiency or outflow defect",
-                "Requires estrogen-progestin challenge"
+                "Oestrogen deficiency or outflow defect",
+                "Requires oestrogen-progestin challenge"
               ],
               [
-                "Estrogen-Progestin: Negative bleed",
+                "Oestrogen-Progestin: Negative bleed",
                 "Not applicable",
                 "Compartment I (Outflow / Uterus)",
                 "Asherman syndrome, cervical stenosis"
               ],
               [
-                "Estrogen-Progestin: Positive bleed",
-                "FSH > 40 IU/L (High)",
+                "Oestrogen-Progestin: Positive bleed",
+                "FSH raised on repeat testing with low oestradiol",
                 "Compartment II (Ovary)",
-                "Turner syndrome, premature ovarian failure"
+                "Turner syndrome, premature ovarian insufficiency"
               ],
               [
-                "Estrogen-Progestin: Positive bleed",
-                "FSH < 5 IU/L (Low/Normal)",
+                "Oestrogen-Progestin: Positive bleed",
+                "FSH low or within the reference range",
                 "Compartment III / IV (Central)",
-                "Pituitary adenoma, Sheehan, hypothalamic"
+                "Pituitary adenoma, Sheehan syndrome, hypothalamic amenorrhoea"
               ]
             ]
           }
         },
         {
           "heading": "Practical pitfalls and diagnostic safeguards",
-          "body": "Never initiate hormonal challenge tests before obtaining serum for baseline FSH, LH, and prolactin, as exogenous estrogens suppress gonadotropins and obscure the diagnosis.\n\nIn primary amenorrhoea, transabdominal pelvic ultrasound should always precede hormonal challenge tests to confirm uterine presence and avoid useless hormones in Mullerian agenesis."
+          "body": "Never initiate hormonal challenge tests before obtaining serum for baseline FSH, LH, and prolactin, as exogenous oestrogens suppress gonadotropins and obscure the diagnosis.\n\nIn primary amenorrhoea, transabdominal pelvic ultrasound should always precede hormonal challenge tests to confirm uterine presence and avoid useless hormones in Mullerian agenesis."
         }
       ],
       "probes": [
         {
           "level": 1,
-          "q": "In the challenge test algorithm, if a patient has a positive bleed after combined estrogen-progestin and her serum FSH is 68 IU/L, where is the lesion localised?",
+          "q": "In the challenge test algorithm, if a patient has a positive bleed after combined oestrogen-progestin and her serum FSH is 68 IU/L, where is the lesion localised?",
           "a": "The lesion is localised to Compartment II (the ovary), indicating hypergonadotropic hypogonadism such as premature ovarian insufficiency or gonadal dysgenesis.",
           "accept": [
             "compartment ii",
@@ -859,7 +862,7 @@
         },
         {
           "level": 2,
-          "q": "If a patient with secondary amenorrhoea bleeds after combined estrogen-progestin and has low serum FSH (1.8 IU/L), which compartments are implicated?",
+          "q": "If a patient with secondary amenorrhoea bleeds after combined oestrogen-progestin and has low serum FSH (1.8 IU/L), which compartments are implicated?",
           "a": "Compartment III (anterior pituitary) or Compartment IV (hypothalamus), representing hypogonadotropic hypogonadism.",
           "accept": [
             "compartment iii",
@@ -881,7 +884,8 @@
             "fsh",
             "lh",
             "exogenous",
-            "estrogen"
+            "estrogen",
+            "oestrogen"
           ],
           "minMatch": 2
         }
@@ -928,7 +932,7 @@
         },
         {
           "heading": "Diagnostic criteria for Asherman syndrome",
-          "body": "Asherman syndrome is diagnosed by secondary amenorrhoea or severe hypomenorrhoea following intrauterine curettage, a negative withdrawal bleed after combined estrogen-progestin challenge, and normal gonadotropins.\n\nDefinitive confirmation is established by direct hysteroscopic visualization of fibrous intrauterine synechiae and adhesions obliterating the uterine cavity."
+          "body": "Asherman syndrome is diagnosed by secondary amenorrhoea or severe hypomenorrhoea following intrauterine curettage, a negative withdrawal bleed after combined oestrogen-progestin challenge, and normal gonadotropins.\n\nDefinitive confirmation is established by direct hysteroscopic visualisation of fibrous intrauterine synechiae and adhesions obliterating the uterine cavity."
         }
       ],
       "probes": [
@@ -1012,7 +1016,7 @@
         },
         {
           "heading": "Surgical management of Asherman and outflow obstruction",
-          "body": "Asherman syndrome is treated by hysteroscopic adhesiolysis under direct vision using cold miniature scissors or unipolar instruments. An intrauterine balloon catheter or hyaluronic acid barrier gel is placed temporarily to keep cavity walls separated.\n\nPostoperative high-dose cyclical oral estradiol is given for 30 to 60 days with cyclical progestin to stimulate endometrial re-epithelialisation. Imperforate hymen is managed by cruciate hymenotomy and drainage of haematocolpos."
+          "body": "Asherman syndrome is treated by hysteroscopic adhesiolysis under direct vision using cold miniature scissors. Where an energy device is required, bipolar electrosurgery with saline distension is used, avoiding unipolar instruments and hypotonic media. An intrauterine balloon catheter or hyaluronic acid barrier gel is placed temporarily to keep cavity walls separated.\n\nPostoperative cyclical oestrogen with cyclical progestin is given under specialist supervision according to the current guideline to stimulate endometrial re-epithelialisation, only after screening for contraindications such as venous thromboembolism and hormone sensitive disease, with counselling and follow up. This module does not prescribe a dose or duration. Imperforate hymen is managed by cruciate hymenotomy and drainage of haematocolpos."
         },
         {
           "heading": "Syndromic management and Indian clinical context",
@@ -1022,7 +1026,7 @@
       "probes": [
         {
           "level": 1,
-          "q": "Why should pubertal induction with estrogen in Turner syndrome start with very low doses and titrate slowly over two to three years?",
+          "q": "Why should pubertal induction with oestrogen in Turner syndrome start with very low doses and titrate slowly over two to three years?",
           "a": "To allow progressive, natural breast development without tubular deformity and to avoid premature epiphyseal closure that would compromise final adult height.",
           "accept": [
             "breast development",
@@ -1037,14 +1041,15 @@
         {
           "level": 2,
           "q": "What is the postoperative medical management following hysteroscopic adhesiolysis for Asherman syndrome to prevent adhesion recurrence?",
-          "a": "A temporary intrauterine barrier such as a balloon catheter or barrier gel combined with high-dose cyclical oral estrogen followed by progestin to stimulate endometrial regeneration.",
+          "a": "A temporary intrauterine barrier such as a balloon catheter or barrier gel combined with cyclical oestrogen followed by progestin under specialist supervision after contraindication screening, to stimulate endometrial regeneration.",
           "accept": [
             "estrogen",
             "progestin",
             "barrier",
             "balloon",
             "endometrial",
-            "regeneration"
+            "regeneration",
+            "oestrogen"
           ],
           "minMatch": 2
         },
@@ -1066,7 +1071,7 @@
       "rubric": [
         {
           "id": "r.tx.amenorrhoea.hrt",
-          "text": "Outlines pubertal induction principles, gradual estrogen titration, and cyclical progestin addition."
+          "text": "Outlines pubertal induction principles, gradual oestrogen titration, and cyclical progestin addition."
         },
         {
           "id": "r.tx.amenorrhoea.asherman",
@@ -1316,7 +1321,7 @@
         "serum_estradiol": {
           "label": "Serum estradiol (E2)",
           "result": "Serum estradiol < 10 pg/mL (severely low, prepubertal level, adult female follicular range 30-120 pg/mL)",
-          "note": "Reflects absent ovarian follicular estrogen synthesis and accounts for absent thelarche and prepubertal genital status."
+          "note": "Reflects absent ovarian follicular oestrogen synthesis and accounts for absent thelarche and prepubertal genital status."
         },
         "pelvic_ultrasound": {
           "label": "Transabdominal pelvic ultrasonography",
@@ -1351,7 +1356,7 @@
         "bone_age_radiograph": {
           "label": "Left hand and wrist radiograph for bone age",
           "result": "Skeletal bone age corresponding to Greulich and Pyle standard of 13 years (chronological age 16 years, delay of 3 years). Epiphyses remain open.",
-          "note": "Delayed skeletal maturation due to lack of estrogen-driven epiphyseal fusion; open epiphyses indicate remaining therapeutic window for growth optimisation before full estrogenisation."
+          "note": "Delayed skeletal maturation due to lack of oestrogen-driven epiphyseal fusion; open epiphyses indicate remaining therapeutic window for growth optimisation before full oestrogenisation."
         }
       },
       "differentialModel": {
@@ -1389,16 +1394,17 @@
           "calcium",
           "counselling",
           "thyroid",
-          "karyotype"
+          "karyotype",
+          "oestrogen"
         ],
         "minMatch": 3
       },
       "teachingPoints": [
-        "Classification of primary amenorrhoea pivots on the presence or absence of secondary sexual characteristics: failure of breast development (thelarche) reflects absent ovarian estrogen synthesis, directing attention to either gonadal failure (high gonadotropins) or hypothalamic-pituitary deficiency (low gonadotropins).",
-        "Elevated serum FSH (>40 IU/L) localises the defect decisively to the ovary (hypergonadotropic hypogonadism), whereas normal breasts with an absent uterus and blind vagina point to Mullerian agenesis (MRKH) or androgen insensitivity syndrome (AIS).",
+        "Classification of primary amenorrhoea pivots on the presence or absence of secondary sexual characteristics: failure of breast development (thelarche) reflects absent ovarian oestrogen synthesis, directing attention to either gonadal failure (high gonadotropins) or hypothalamic-pituitary deficiency (low gonadotropins).",
+        "A raised serum FSH with low oestradiol on repeat testing localises the defect decisively to the ovary (hypergonadotropic hypogonadism), whereas normal breasts with an absent uterus and blind vagina point to Mullerian agenesis (MRKH) or androgen insensitivity syndrome (AIS).",
         "Short stature (<3rd centile) in an adolescent girl with delayed puberty or primary amenorrhoea should be considered Turner syndrome until a karyotype proves otherwise, even if classical somatic stigmata (webbed neck, shield chest) are subtle or absent.",
         "Transabdominal pelvic ultrasound is an essential, non-invasive imaging modality that differentiates intact but hypoplastic Mullerian anatomy (streak ovaries and small uterus in Turner syndrome) from absent uterus (MRKH) or haematocolpos behind an imperforate hymen.",
-        "Pubertal induction in Turner syndrome must mimic normal physiology: start low-dose estrogen and titrate slowly over two to three years before adding cyclical progestin, allowing optimal breast bud development (avoiding tubular breast deformity) and uterine growth while monitoring epiphyseal fusion.",
+        "Pubertal induction in Turner syndrome must mimic normal physiology: start low-dose oestrogen and titrate slowly over two to three years before adding cyclical progestin, allowing optimal breast bud development (avoiding tubular breast deformity) and uterine growth while monitoring epiphyseal fusion.",
         "Cardiovascular complications, particularly bicuspid aortic valve, aortic coarctation, and aortic root dilatation, represent the major cause of excess premature mortality in Turner syndrome and mandate formal baseline echocardiography and lifelong imaging surveillance.",
         "Fertility preservation and reproductive autonomy should be addressed with honesty and sensitivity: spontaneous conception is exceedingly rare (under 2-5%), but pregnancy can be achieved in adulthood using donor oocytes provided thorough preconception cardiovascular clearance confirms absence of aortic root enlargement."
       ]
