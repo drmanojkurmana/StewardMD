@@ -196,6 +196,17 @@
     return shuffle(options, rand);
   }
 
+  // Image credit line. Never repeats a Commons file title: in the spotter quiz that would name the answer.
+  function creditText(c) {
+    if (!c) return "";
+    if (typeof c === "string") return "Image: " + c;
+    if (c.generated) return "Illustration created with MaiK (StewardMD AI)";
+    var parts = [];
+    if (c.author && !/^See the Commons/i.test(c.author)) parts.push(c.author);
+    if (c.licence) parts.push(c.licence);
+    return parts.length ? "Image: " + parts.join(", ") + " (Wikimedia Commons)" : "Image: Wikimedia Commons";
+  }
+
   // Build a single spotter quiz question
   function buildQuestion(item, candidates, opts) {
     opts = opts || {};
@@ -226,6 +237,7 @@
       group: item.group || "",
       hasImage: hasImg,
       imageFile: imgFile,
+      imageCredit: hasImg ? (item.image.credit || null) : null,
       imageBrief: imgBrief,
       promptText: prompt,
       summary: item.summary || "",
@@ -730,7 +742,7 @@
     var d = session.deckData;
     var deckTitle = getTitle(d) || "Practicals deck";
     var subjectCfg = SUBJECT_CONFIG[session.subject] || { title: "Practicals" };
-    var subTitle = subjectCfg.title + " &middot; " + (session.deckItems.length) + " items";
+    var subTitle = subjectCfg.title + " \u00b7 " + (session.deckItems.length) + " items";
 
     var html = header(deckTitle, subTitle, "cx-prac-back-to-decks");
 
@@ -889,13 +901,12 @@
     if (item.image && item.image.file) {
       html += '<div class="cx-prac-img-stage">' +
         '<img src="' + esc(item.image.file) + '" class="cx-prac-img" alt="' + esc(title + ', photograph') + '" loading="lazy">' +
-        (item.image.credit ? '<div class="cx-prac-img-credit">Image: ' + esc(item.image.credit) + '</div>' : '') +
+        (creditText(item.image.credit) ? '<div class="cx-prac-img-credit">' + esc(creditText(item.image.credit)) + '</div>' : '') +
         '</div>';
     } else {
       html += '<div class="cx-prac-placeholder" aria-label="Exam spotter item">' +
         '<span class="cx-prac-ph-ic material-symbols-rounded">' + esc(kindIcon(item.kind)) + '</span>' +
         '<span class="cx-prac-ph-lbl">Exam spotter &middot; ' + esc(item.kind) + '</span>' +
-        (item.image && item.image.brief ? '<span class="cx-prac-ph-brief">' + esc(item.image.brief) + '</span>' : '') +
         '</div>';
     }
 
@@ -1066,6 +1077,7 @@
     if (q.hasImage && q.imageFile) {
       html += '<div class="cx-prac-q-img-stage">' +
         '<img src="' + esc(q.imageFile) + '" class="cx-prac-q-img" alt="Spotter item photograph">' +
+        (creditText(q.imageCredit) ? '<div class="cx-prac-img-credit">' + esc(creditText(q.imageCredit)) + '</div>' : '') +
         '</div>';
     } else {
       html += '<div class="cx-prac-masked-prompt">' +
