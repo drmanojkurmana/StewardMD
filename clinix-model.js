@@ -271,6 +271,14 @@
         if (!isObj(r) || !isStr(r.id) || !isStr(r.text)) e.push(str(s.id) + ".rubric[" + j + "] needs {id,text}");
       }
     }
+    if (s.distractors != null) {
+      if (!isArr(s.distractors)) e.push("skill.distractors must be an array (" + str(s.id) + ")");
+      else for (var di = 0; di < s.distractors.length; di++) {
+        var d = s.distractors[di];
+        if (!isObj(d) || !isStr(d.text) || !isStr(d.why)) e.push(str(s.id) + ".distractors[" + di + "] needs {text,why}");
+        if (d && d.unsafe != null && typeof d.unsafe !== "boolean") e.push(str(s.id) + ".distractors[" + di + "].unsafe must be boolean");
+      }
+    }
     // Sources are mandatory for anything with clinical substance. No source, no teaching.
     if (!isArr(s.sources) || !s.sources.length) e.push("skill.sources required (" + str(s.id) + ")");
     if (!has(REVIEW_STATUSES, reviewStatus(s))) e.push("skill.review.status invalid (" + str(s.id) + ")");
@@ -291,6 +299,19 @@
         if (!has(CHAPTERS, str(c.id))) e.push("chapter id '" + str(c.id) + "' is not a known chapter");
         if (!isStr(c.title)) e.push("chapter " + str(c.id) + " needs a title");
         if (c.skills != null && !isArr(c.skills)) e.push("chapter " + str(c.id) + ".skills must be an array");
+      }
+    }
+    if (d.osce && isArr(d.osce.stations)) {
+      for (var si = 0; si < d.osce.stations.length; si++) {
+        var st = d.osce.stations[si];
+        if (st && st.distractors != null) {
+          if (!isArr(st.distractors)) e.push("station.distractors must be an array (" + str(st.id) + ")");
+          else for (var sdi = 0; sdi < st.distractors.length; sdi++) {
+            var sd = st.distractors[sdi];
+            if (!isObj(sd) || !isStr(sd.text) || !isStr(sd.why)) e.push(str(st.id) + ".distractors[" + sdi + "] needs {text,why}");
+            if (sd && sd.unsafe != null && typeof sd.unsafe !== "boolean") e.push(str(st.id) + ".distractors[" + sdi + "].unsafe must be boolean");
+          }
+        }
       }
     }
     return { ok: e.length === 0, errors: e };
@@ -564,7 +585,9 @@
       // scaling formula, this is now a per-station author lever (opts.passMark) - a high-stakes
       // station can be authored with a stricter bar; the default stays 50 for every existing one.
       passMark: typeof opts.passMark === "number" ? opts.passMark : 50,
-      examinerQuestions: opts.examinerQuestions || []
+      examinerQuestions: opts.examinerQuestions || [],
+      distractors: opts.distractors || [],
+      skills: skills || []
     };
   }
 
@@ -590,6 +613,49 @@
       failedOnCritical: missedCritical.length > 0,
       missedCritical: missedCritical, missed: missed,
       perSkill: perSkill
+    };
+  }
+
+  function scoreExam(station, answers, opts) {
+    if (typeof window !== "undefined" && window.SMD_CLINIX_OSCE_EXAM && window.SMD_CLINIX_OSCE_EXAM.scoreExam) {
+      return window.SMD_CLINIX_OSCE_EXAM.scoreExam(station, answers, opts);
+    }
+    try {
+      var examMod = typeof require !== "undefined" ? require("./clinix-osce-exam.js") : null;
+      if (examMod && examMod.scoreExam) return examMod.scoreExam(station, answers, opts);
+    } catch (e) {}
+    answers = answers || {};
+    opts = opts || {};
+    var items = (station && station.items) || [];
+    var score = 0, missedCritical = [], missed = [], perSkill = {}, unsafeChosen = false, unsafeActions = [];
+    for (var i = 0; i < items.length; i++) {
+      var it = items[i];
+      var ans = answers[it.id] || (answers.picks && answers.picks[it.id]);
+      var got = !!(ans && ans.isCorrect === true);
+      if (got) score += typeof it.weight === "number" ? it.weight : 1;
+      else { missed.push(it); if (it.critical) missedCritical.push(it); }
+      if (ans && ans.unsafe === true) {
+        unsafeChosen = true;
+        unsafeActions.push({ step: it, pickedText: ans.pickedText || "", why: ans.why || "" });
+      }
+      if (!perSkill[it.skillId]) perSkill[it.skillId] = { seen: 0, correct: 0 };
+      perSkill[it.skillId].seen++;
+      if (got) perSkill[it.skillId].correct++;
+    }
+    var maxScore = typeof station.maxScore === "number" ? station.maxScore : items.length;
+    var pct = maxScore ? Math.round((score / maxScore) * 100) : 0;
+    var passMark = typeof station.passMark === "number" ? station.passMark : 50;
+    var failedOnCritical = missedCritical.length > 0 || unsafeChosen;
+    return {
+      score: score, maxScore: maxScore, pct: pct,
+      passed: pct >= passMark && !failedOnCritical,
+      failedOnCritical: failedOnCritical,
+      unsafeChosen: unsafeChosen,
+      unsafeActions: unsafeActions,
+      missedCritical: missedCritical, missed: missed,
+      perSkill: perSkill,
+      orderScores: opts.orderScores || answers.orderScores || {},
+      picks: answers
     };
   }
 
@@ -919,6 +985,7 @@
     compileLesson: compileLesson,
     compileStation: compileStation,
     scoreStation: scoreStation,
+    scoreExam: scoreExam,
     compileViva: compileViva,
     nextVivaQuestion: nextVivaQuestion,
     adaptLevel: adaptLevel,

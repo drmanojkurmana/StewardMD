@@ -1123,17 +1123,52 @@
     return out;
   }
 
-  function renderStation(host) {
-    var st = state.station;
-    if (!st) { host.innerHTML = header("Station") + emptyState("error", "Station unavailable", "Go back and try again."); return; }
+  function renderStationIntro(st) {
+    var groups = stationGroups(st.items);
+    var pass = typeof st.passMark === "number" ? st.passMark : 50;
+    var isExam = (state.stationMode || "exam") === "exam";
 
-    if (state.stationResult) return renderStationResult(host, st);
+    var html = '<div class="cx-stick">' + header(st.title, "OSCE station") + '</div>';
+    html += '<div class="cx-station cx-station-intro">';
 
+    html += '<div class="cx-exam-mode-wrap" role="tablist" aria-label="Station mode">' +
+      '<button type="button" class="cx-exam-mode-tab' + (isExam ? " cx-exam-mode-tab--on" : "") + '" role="tab" aria-selected="' + (isExam ? "true" : "false") + '" data-act="cx-station-mode" data-mode="exam">' + ic("quiz") + '<span>Exam mode</span></button>' +
+      '<button type="button" class="cx-exam-mode-tab' + (!isExam ? " cx-exam-mode-tab--on" : "") + '" role="tab" aria-selected="' + (!isExam ? "true" : "false") + '" data-act="cx-station-mode" data-mode="checklist">' + ic("checklist") + '<span>Practice checklist</span></button>' +
+      '</div>';
+
+    html += '<div class="cx-task"><div class="cx-task-h">Your task</div>' + esc(st.task) + '</div>';
+
+    html += '<div class="cx-intro-stats">' +
+      '<div class="cx-intro-stat">' + ic("timer") + '<div class="cx-intro-stat-val">' + Math.round(st.seconds / 60) + ' min</div><div class="cx-intro-stat-lbl">Time allowed</div></div>' +
+      '<div class="cx-intro-stat">' + ic("layers") + '<div class="cx-intro-stat-val">' + groups.length + '</div><div class="cx-intro-stat-lbl">Phases</div></div>' +
+      '<div class="cx-intro-stat">' + ic("format_list_bulleted") + '<div class="cx-intro-stat-val">' + st.items.length + '</div><div class="cx-intro-stat-lbl">Steps</div></div>' +
+      '<div class="cx-intro-stat">' + ic("verified") + '<div class="cx-intro-stat-val">' + pass + '%</div><div class="cx-intro-stat-lbl">Pass mark</div></div>' +
+      '</div>';
+
+    html += '<div class="cx-intro-rules">' +
+      '<div class="cx-intro-rules-h">How marking works</div>' +
+      (isExam
+        ? '<p class="cx-intro-rules-p">Choose the next correct action at each step from five options.</p>' +
+          '<p class="cx-intro-rules-p">Missed critical safety steps or unsafe actions fail the station.</p>'
+        : '<p class="cx-intro-rules-p">Self-mark each step as you perform it at the bedside.</p>' +
+          '<p class="cx-intro-rules-p">Missed critical safety steps fail the station on their own.</p>') +
+      '</div>';
+
+    html += '<div class="cx-nav">' +
+      '<button type="button" class="cx-btn cx-btn--primary cx-btn--lg cx-btn--full" data-act="cx-station-start">' +
+        (isExam ? "Start exam" : "Start checklist") +
+      '</button>' +
+      '</div>';
+
+    html += '</div>';
+    return html;
+  }
+
+  function renderStationChecklist(host, st) {
     var left = stationLeft(), total = st.items.length, done = 0, i;
     for (i = 0; i < total; i++) if (state.stationChecked[st.items[i].id]) done++;
     var pct = total ? Math.round((done / total) * 100) : 0;
 
-    // Header and status bar stick together, so the clock and the count stay in view down a long list.
     var html = '<div class="cx-stick">' + header(st.title, "OSCE station") +
       '<div class="cx-stbar">' +
         '<div class="cx-timer' + (left <= 30 ? " cx-timer--low" : "") + '" role="timer" aria-label="Time left">' + ic("timer") +
@@ -1164,14 +1199,220 @@
     host.innerHTML = html;
   }
 
+  function renderStationExam(host, st) {
+    var sess = state.examSession;
+    if (!sess) {
+      if (typeof window !== "undefined" && window.SMD_CLINIX_OSCE_EXAM) {
+        state.examSession = window.SMD_CLINIX_OSCE_EXAM.createSession(st, {
+          pool: (state.built && state.built.skills) || (state.skillsAll && state.skillsAll.skills),
+          attempt: state.stationAttempt || 1
+        });
+        sess = state.examSession;
+      }
+    }
+    if (!sess) {
+      host.innerHTML = header("Station") + emptyState("error", "Exam engine unavailable", "Please retry.");
+      return;
+    }
+
+    if (sess.getStateKind() === "done") {
+      finishStation();
+      return;
+    }
+
+    var left = stationLeft();
+    var phases = sess.phases;
+    var curPhase = sess.getCurrentPhase();
+    var curStep = sess.getCurrentStep();
+    var pIdx = sess.getPhaseIndex();
+    var completedCount = Object.keys(sess.getCompletedIds()).length;
+    var totalSteps = st.items.length;
+    var totalPct = totalSteps ? Math.round((completedCount / totalSteps) * 100) : 0;
+
+    var html = '<div class="cx-stick">' + header(st.title, "OSCE exam") +
+      '<div class="cx-stbar">' +
+        '<div class="cx-timer' + (left <= 30 ? " cx-timer--low" : "") + '" role="timer" aria-label="Time left">' + ic("timer") +
+          '<span class="cx-timer-t">' + fmtClock(left) + '</span></div>' +
+        '<div class="cx-stbar-prog">' +
+          '<span class="cx-stbar-n">Phase ' + (pIdx + 1) + ' of ' + phases.length + ' &middot; Step ' + (sess.getStepIndex() + 1) + ' of ' + (curPhase ? curPhase.items.length : 1) + '</span>' +
+          '<span class="cx-stbar-track" aria-hidden="true"><span class="cx-stbar-fill" style="width:' + totalPct + '%"></span></span>' +
+        '</div>' +
+      '</div></div>';
+
+    html += '<div class="cx-station cx-exam-station">';
+    html += '<div class="cx-sr" aria-live="polite" id="cxStationLive"></div>';
+
+    if (curPhase) {
+      html += '<div class="cx-exam-phase-card">';
+      html += '<div class="cx-exam-phase-badge">Phase ' + (pIdx + 1) + ' &middot; ' + esc(curPhase.title) + '</div>';
+
+      var seq = (sess.getPhaseSequences()[curPhase.skillId]) || [];
+      // While the phase is being arranged its locked sequence would show the answer, so only the tally shows.
+      var arranging = sess.getStateKind() === "arrange";
+      var seqOk = 0;
+      for (var sq = 0; sq < seq.length; sq++) if (seq[sq].isCorrect) seqOk++;
+      html += '<div class="cx-exam-seq"><div class="cx-exam-seq-h">Your sequence</div>';
+      if (arranging) {
+        html += '<div class="cx-exam-seq-empty">' + seqOk + " of " + seq.length + " steps picked right. Now put them in order from memory.</div>";
+      } else if (!seq.length) {
+        html += '<div class="cx-exam-seq-empty">Steps you choose will lock into sequence here.</div>';
+      } else {
+        html += '<ol class="cx-exam-seq-list">';
+        for (var si = 0; si < seq.length; si++) {
+          var sItem = seq[si];
+          html += '<li class="cx-exam-seq-item' + (sItem.isCorrect ? " cx-exam-seq-item--ok" : " cx-exam-seq-item--miss") + '">' +
+            '<span class="cx-exam-seq-ic">' + ic(sItem.isCorrect ? "check" : "close") + '</span>' +
+            '<span class="cx-exam-seq-t">' + esc(sItem.text) + '</span>' +
+            (!sItem.isCorrect ? '<span class="cx-crit">Missed</span>' : '') +
+            '</li>';
+        }
+        html += '</ol>';
+      }
+      html += '</div></div>';
+    }
+
+    var stateKind = sess.getStateKind();
+
+    if (stateKind === "step" || stateKind === "step_feedback") {
+      var isFeedback = stateKind === "step_feedback";
+      var lastPick = sess.getLastPickResult();
+      var opts = sess.getCurrentOptions();
+
+      html += '<div class="cx-exam-q-card">';
+      html += '<div class="cx-exam-prompt">What do you do next?</div>';
+      html += '<div class="cx-exam-opts" role="group" aria-label="Next action options">';
+
+      var letters = ["A", "B", "C", "D", "E"];
+      for (var oi = 0; oi < opts.length; oi++) {
+        var opt = opts[oi];
+        var isPicked = isFeedback && lastPick && lastPick.option && lastPick.option.text === opt.text;
+        var isCorrectOpt = opt.isCorrect === true;
+        var optCls = "cx-exam-opt";
+        if (isFeedback) {
+          if (isPicked) {
+            optCls += isCorrectOpt ? " cx-exam-opt--correct" : " cx-exam-opt--wrong";
+          } else if (isCorrectOpt) {
+            optCls += " cx-exam-opt--reveal";
+          } else {
+            optCls += " cx-exam-opt--dim";
+          }
+        }
+        html += '<button type="button" class="' + optCls + '" ' +
+          'data-act="' + (isFeedback ? "" : "cx-exam-pick") + '" ' +
+          'data-idx="' + oi + '" ' +
+          'data-id="' + esc(opt.id) + '" ' +
+          'data-correct="' + (isCorrectOpt ? "true" : "false") + '" ' +
+          (isFeedback ? 'disabled' : '') + '>' +
+          '<span class="cx-exam-opt-letter" aria-hidden="true">' + letters[oi] + '</span>' +
+          '<span class="cx-exam-opt-txt">' + esc(opt.text) + '</span>' +
+          (isFeedback && isCorrectOpt ? '<span class="cx-exam-opt-badge">' + ic("check") + 'Correct</span>' : '') +
+          (isFeedback && isPicked && !isCorrectOpt ? '<span class="cx-exam-opt-badge cx-exam-opt-badge--wrong">' + ic("close") + 'Your pick</span>' : '') +
+          '</button>';
+      }
+      html += '</div>';
+
+      if (isFeedback && lastPick) {
+        if (!lastPick.isCorrect) {
+          html += '<div class="cx-exam-feedback' + (lastPick.unsafe ? " cx-exam-feedback--unsafe" : "") + '">' +
+            ic(lastPick.unsafe ? "gpp_bad" : "info") +
+            '<div><b>' + (lastPick.unsafe ? 'Unsafe action chosen' : 'Mark lost') + '</b>' +
+            '<span>' + esc(lastPick.why || 'Incorrect step for this point in the examination.') + '</span></div>' +
+            '</div>';
+        }
+        html += '<div class="cx-nav">' +
+          '<button type="button" class="cx-btn cx-btn--primary cx-btn--full" data-act="cx-exam-next">Continue</button>' +
+          '</div>';
+      }
+
+      html += '</div>';
+    } else if (stateKind === "arrange") {
+      var aPool = sess.getArrangePool();
+      var placed = sess.getArrangePlaced();
+      var isAllPlaced = aPool.length === 0;
+
+      html += '<div class="cx-arrange-card">';
+      html += '<div class="cx-arrange-h">' + ic("low_priority") + '<span>Arrange this phase in order</span></div>';
+      html += '<p class="cx-arrange-desc">Tap steps below into the correct sequence. Tap a placed step to remove it.</p>';
+
+      html += '<div class="cx-arrange-section"><div class="cx-arrange-subh">Your sequence (' + placed.length + ' of ' + (placed.length + aPool.length) + ')</div>';
+      if (!placed.length) {
+        html += '<div class="cx-arrange-empty">Tap steps below in order to place them here.</div>';
+      } else {
+        html += '<div class="cx-arrange-placed-list">';
+        for (var pi2 = 0; pi2 < placed.length; pi2++) {
+          var pStep = placed[pi2];
+          html += '<button type="button" class="cx-arrange-item cx-arrange-item--placed" data-act="cx-arrange-remove" data-id="' + esc(pStep.id) + '">' +
+            '<span class="cx-arrange-n">' + (pi2 + 1) + '</span>' +
+            '<span class="cx-arrange-t">' + esc(pStep.text) + '</span>' +
+            '<span class="cx-arrange-act">' + ic("close") + '</span>' +
+            '</button>';
+        }
+        html += '</div>';
+      }
+      html += '</div>';
+
+      if (aPool.length) {
+        html += '<div class="cx-arrange-section"><div class="cx-arrange-subh">Available steps</div>';
+        html += '<div class="cx-arrange-pool-list">';
+        for (var pli = 0; pli < aPool.length; pli++) {
+          var aStep = aPool[pli];
+          html += '<button type="button" class="cx-arrange-item cx-arrange-item--pool" data-act="cx-arrange-place" data-id="' + esc(aStep.id) + '">' +
+            '<span class="cx-arrange-act">' + ic("add") + '</span>' +
+            '<span class="cx-arrange-t">' + esc(aStep.text) + '</span>' +
+            '</button>';
+        }
+        html += '</div></div>';
+      }
+
+      html += '<div class="cx-nav">' +
+        '<button type="button" class="cx-btn cx-btn--primary cx-btn--full" data-act="cx-arrange-confirm"' + (isAllPlaced ? '' : ' disabled') + '>Confirm order</button>' +
+        '</div>';
+      html += '</div>';
+    } else if (stateKind === "arrange_result") {
+      var arrRes = sess.getArrangeResult();
+      html += '<div class="cx-arrange-card cx-arrange-card--result">';
+      html += '<div class="cx-arrange-h">' + ic("verified") + '<span>' + esc(arrRes ? arrRes.label : "Order scored") + '</span></div>';
+      html += '<p class="cx-arrange-desc">' + (arrRes && arrRes.passed
+        ? 'Perfect sequence. All steps arranged in the correct clinical order.'
+        : 'Longest correct subsequence scored. Review the authored sequence on the result screen.') + '</p>';
+      html += '<div class="cx-nav">' +
+        '<button type="button" class="cx-btn cx-btn--primary cx-btn--full" data-act="cx-arrange-next">' +
+          (pIdx < phases.length - 1 ? 'Continue to next phase' : 'Finish exam') +
+        '</button>' +
+        '</div>';
+      html += '</div>';
+    }
+
+    html += '</div>';
+    host.innerHTML = html;
+  }
+
+  function renderStation(host) {
+    var st = state.station;
+    if (!st) { host.innerHTML = header("Station") + emptyState("error", "Station unavailable", "Go back and try again."); return; }
+
+    if (state.stationResult) return renderStationResult(host, st);
+
+    if (!state.stationStarted) {
+      host.innerHTML = renderStationIntro(st);
+      return;
+    }
+
+    if (state.stationMode === "exam") {
+      renderStationExam(host, st);
+      return;
+    }
+
+    renderStationChecklist(host, st);
+  }
+
   function renderStationResult(host, st) {
     var r = state.stationResult, pass = typeof st.passMark === "number" ? st.passMark : 50;
+    var isExam = state.stationMode === "exam";
     var verdict = r.passed ? "Pass" : r.failedOnCritical ? "Fail on a critical step" : "Below the pass mark";
     var used = state.stationUsed || 0;
     var html = header(st.title, "Result") + '<div class="cx-station">';
 
-    // One verdict card. The colour lives on the verdict and the bar, not a full red slab, so the
-    // critical-step block below is the only filled alarm on the page.
     html += '<div class="cx-result ' + (r.passed ? "cx-result--pass" : "cx-result--fail") + '">' +
       '<div class="cx-result-v">' + ic(r.passed ? "check_circle" : "cancel") + "<span>" + verdict + "</span></div>" +
       '<div class="cx-result-row"><span class="cx-score-pct">' + r.pct + "%</span>" +
@@ -1181,49 +1422,86 @@
       '<div class="cx-result-time">' + ic("timer") + (state.stationTimeUp ? "Time ran out after " + fmtClock(st.seconds) : "Finished in " + fmtClock(used) + " of " + fmtClock(st.seconds)) + "</div>" +
       "</div>";
 
-    // A critical miss is reported as its own thing. Losing a mark and failing on safety are not the
-    // same event, and a score alone would hide the difference.
     if (r.failedOnCritical) {
+      var isUnsafe = !!r.unsafeChosen;
       html += '<div class="cx-notice cx-notice--crit">' + ic("gpp_bad") +
-        "<div><b>Critical steps missed</b><span>You would fail this station regardless of your total, because these are safety steps.</span>" +
+        "<div><b>" + (isUnsafe ? "Unsafe action chosen" : "Critical steps missed") + "</b>" +
+        "<span>You would fail this station regardless of your total, because " + (isUnsafe ? "an unsafe action was selected." : "these are safety steps.") + "</span>" +
         '<ul class="cx-critlist">';
+      if (isUnsafe && r.unsafeActions) {
+        for (var u = 0; u < r.unsafeActions.length; u++) {
+          var ua = r.unsafeActions[u];
+          html += "<li>" + esc((ua.pickedText || "Unsafe step") + (ua.why ? " (" + ua.why + ")" : "")) + "</li>";
+        }
+      }
       for (var c = 0; c < r.missedCritical.length; c++) html += "<li>" + esc(r.missedCritical[c].text) + "</li>";
       html += "</ul></div></div>";
     }
 
-    // How each phase went, from the same per-skill tallies the competency store receives.
     var groups = stationGroups(st.items), missedOther = {};
     for (var m = 0; m < r.missed.length; m++) if (!r.missed[m].critical) missedOther[r.missed[m].id] = 1;
-    if (groups.length > 1) {
+    if (groups.length > 1 || isExam) {
       html += '<div class="cx-sec-h">Step by step</div><div class="cx-phaselist">';
       for (var g = 0; g < groups.length; g++) {
         var ps = r.perSkill[groups[g].skillId] || { seen: groups[g].items.length, correct: 0 };
         var gp = ps.seen ? Math.round((ps.correct / ps.seen) * 100) : 0;
         var full = ps.correct === ps.seen;
-        // A complete phase gets a tick; only the phases with gaps carry a bar, so they stand out.
-        html += '<div class="cx-phaserow' + (full ? " cx-phaserow--full" : "") + '"><span class="cx-phaserow-t">' + esc(groups[g].title) + "</span>" +
+        var ord = r.orderScores && r.orderScores[groups[g].skillId];
+
+        html += '<div class="cx-phaserow' + (full ? " cx-phaserow--full" : "") + '">' +
+          '<div class="cx-phaserow-main">' +
+            '<span class="cx-phaserow-t">' + esc(groups[g].title) + "</span>" +
+            (isExam ? '<span class="cx-phaserow-sub">Picked right first time ' + ps.correct + ' of ' + ps.seen + (ord ? " &middot; " + esc(ord.label || ("Order: " + ord.inPlace + " of " + ord.total + " in place")) : "") + '</span>' : '') +
+          '</div>' +
           '<span class="cx-phaserow-n">' + (full ? ic("check") : "") + ps.correct + "/" + ps.seen + "</span>" +
-          (full ? "" : '<span class="cx-phaserow-bar" aria-hidden="true"><span style="width:' + gp + '%"></span></span>') + "</div>";
+          (full ? "" : '<span class="cx-phaserow-bar" aria-hidden="true"><span style="width:' + gp + '%"></span></span>') +
+          "</div>";
       }
       html += "</div>";
     }
 
-    // Everything else missed, by phase. Critical steps are already listed above, so not repeated.
-    var anyOther = false;
-    for (var k in missedOther) { anyOther = true; break; }
-    if (anyOther) {
-      html += '<div class="cx-sec-h">Other steps you missed</div><div class="cx-missgroups">';
-      for (var h = 0; h < groups.length; h++) {
-        var its = [];
-        for (var j = 0; j < groups[h].items.length; j++) if (missedOther[groups[h].items[j].id]) its.push(groups[h].items[j]);
-        if (!its.length) continue;
-        html += '<div class="cx-missgroup"><div class="cx-missgroup-h">' + esc(groups[h].title) + '</div><ul class="cx-misslist">';
-        for (var q2 = 0; q2 < its.length; q2++) html += "<li>" + esc(its[q2].text) + "</li>";
-        html += "</ul></div>";
+    if (isExam && r.missed && r.missed.length) {
+      html += '<div class="cx-sec-h">Review missed steps</div><div class="cx-review-list">';
+      for (var mi = 0; mi < r.missed.length; mi++) {
+        var mItem = r.missed[mi];
+        var ans = r.picks && r.picks[mItem.id];
+        html += '<div class="cx-review-card">' +
+          '<div class="cx-review-h">' + esc(mItem.skillTitle || "Step") + (mItem.critical ? ' <span class="cx-crit">Critical</span>' : '') + '</div>' +
+          '<div class="cx-review-step">' + esc(mItem.text) + '</div>' +
+          '<div class="cx-review-rows">' +
+            '<div class="cx-review-row cx-review-row--wrong">' +
+              '<span class="cx-review-tag cx-review-tag--wrong">Your pick</span>' +
+              '<div class="cx-review-details">' +
+                '<span class="cx-review-txt">' + esc(ans ? (ans.pickedText || "No answer recorded") : "Not attempted (time expired)") + '</span>' +
+                (ans && ans.why ? '<div class="cx-review-why">' + esc(ans.why) + '</div>' : '') +
+              '</div>' +
+            '</div>' +
+            '<div class="cx-review-row cx-review-row--ok">' +
+              '<span class="cx-review-tag cx-review-tag--ok">Correct action</span>' +
+              '<span class="cx-review-txt">' + esc(mItem.text) + '</span>' +
+            '</div>' +
+          '</div></div>';
       }
-      html += "</div>";
+      html += '</div>';
+    } else if (!isExam) {
+      var anyOther = false;
+      for (var k in missedOther) { anyOther = true; break; }
+      if (anyOther) {
+        html += '<div class="cx-sec-h">Other steps you missed</div><div class="cx-missgroups">';
+        for (var h = 0; h < groups.length; h++) {
+          var its = [];
+          for (var j = 0; j < groups[h].items.length; j++) if (missedOther[groups[h].items[j].id]) its.push(groups[h].items[j]);
+          if (!its.length) continue;
+          html += '<div class="cx-missgroup"><div class="cx-missgroup-h">' + esc(groups[h].title) + '</div><ul class="cx-misslist">';
+          for (var q2 = 0; q2 < its.length; q2++) html += "<li>" + esc(its[q2].text) + "</li>";
+          html += "</ul></div>";
+        }
+        html += "</div>";
+      } else if (!r.missed.length) {
+        html += '<div class="cx-allclear">' + ic("verified") + "<span>Every step done. Now say it out loud, in order, the way you would to an examiner.</span></div>";
+      }
     } else if (!r.missed.length) {
-      html += '<div class="cx-allclear">' + ic("verified") + "<span>Every step done. Now say it out loud, in order, the way you would to an examiner.</span></div>";
+      html += '<div class="cx-allclear">' + ic("verified") + "<span>Every step picked right first time and ordered correctly. Outstanding performance.</span></div>";
     }
 
     var qs = (state.stationDef && state.stationDef.examinerQuestions) || [];
@@ -3712,13 +3990,17 @@
     state.stationDef = null;
     for (var i = 0; i < sts.length; i++) if (sts[i].id === id) state.stationDef = sts[i];
     state.station = st;
+    state.stationMode = "exam";
+    state.stationStarted = false;
     state.stationChecked = {};
     state.stationResult = null;
     state.stationTimeUp = false;
     state.stationUsed = 0;
-    state.stationEndsAt = Date.now() + st.seconds * 1000;
+    state.stationEndsAt = 0;
+    state.examSession = null;
+    state.stationAttempt = (state.stationAttempt || 0) + 1;
+    stopTimer();
     go("station");
-    startTimer();
   }
 
   /* Surgical tick: rewrite the clock text only. Repainting the whole station once a second was
@@ -3753,9 +4035,15 @@
   function finishStation() {
     stopTimer();
     state.stationUsed = Math.min(state.station.seconds, state.station.seconds - stationLeft());
-    var checked = [];
-    for (var k in state.stationChecked) if (state.stationChecked[k]) checked.push(k);
-    var r = M().scoreStation(state.station, checked);
+    var r;
+    var isExam = (state.stationMode || "exam") === "exam" && state.examSession;
+    if (isExam) {
+      r = state.examSession.score(state.stationTimeUp);
+    } else {
+      var checked = [];
+      for (var k in state.stationChecked) if (state.stationChecked[k]) checked.push(k);
+      r = M().scoreStation(state.station, checked);
+    }
     state.stationResult = r;
     /* One recorded attempt per CHECKLIST ITEM, exactly like Learn and Viva record one per probe.
      *
@@ -3769,11 +4057,20 @@
       for (var n = 0; n < state.station.items.length; n++) {
         var it = state.station.items[n];
         if (!it.skillId) continue;
-        var got = !!state.stationChecked[it.id];
+        var got;
+        var given;
+        if (isExam) {
+          var ans = r.picks && r.picks[it.id];
+          got = !!(ans && ans.isCorrect);
+          given = ans ? (ans.pickedText || (got ? "(performed)" : "(incorrect)")) : "(not attempted)";
+        } else {
+          got = !!state.stationChecked[it.id];
+          given = got ? "(performed)" : "(not performed)";
+        }
         P().record(it.skillId, got, {
           mode: "osce",
           probe: it.label || it.text || state.station.title,
-          given: got ? "(performed)" : "(not performed)"
+          given: given
         });
       }
     }
@@ -4184,6 +4481,77 @@
         haptic("tap"); repaint(); return;
 
       case "cx-station": haptic("tap"); startStation(id); return;
+      case "cx-station-mode":
+        state.stationMode = t.getAttribute("data-mode") || "exam";
+        haptic("tap"); repaint(); return;
+      case "cx-station-start":
+        state.stationStarted = true;
+        state.stationEndsAt = Date.now() + (state.station ? state.station.seconds : 300) * 1000;
+        if ((state.stationMode || "exam") === "exam") {
+          if (typeof window !== "undefined" && window.SMD_CLINIX_OSCE_EXAM) {
+            state.examSession = window.SMD_CLINIX_OSCE_EXAM.createSession(state.station, {
+              pool: (state.built && state.built.skills) || (state.skillsAll && state.skillsAll.skills),
+              attempt: state.stationAttempt || 1
+            });
+          }
+        }
+        startTimer();
+        haptic("tap"); repaint(); return;
+      case "cx-exam-pick": {
+        if (!state.examSession) return;
+        var optIdx = parseInt(t.getAttribute("data-idx"), 10);
+        var res = state.examSession.pickOption(optIdx);
+        if (res) {
+          haptic(res.isCorrect ? "success" : "error");
+          repaint();
+        }
+        return;
+      }
+      case "cx-exam-next":
+        if (state.examSession) {
+          state.examSession.continueAfterFeedback();
+          if (state.examSession.getStateKind() === "done") {
+            finishStation();
+          } else {
+            haptic("tap");
+            repaint();
+          }
+        }
+        return;
+      case "cx-arrange-place":
+        if (state.examSession) {
+          state.examSession.placeArrangeItem(id);
+          haptic("tap");
+          repaint();
+        }
+        return;
+      case "cx-arrange-remove":
+        if (state.examSession) {
+          state.examSession.removeArrangeItem(id);
+          haptic("tap");
+          repaint();
+        }
+        return;
+      case "cx-arrange-confirm":
+        if (state.examSession) {
+          var arrRes = state.examSession.confirmArrange();
+          if (arrRes) {
+            haptic(arrRes.passed ? "success" : "light");
+            repaint();
+          }
+        }
+        return;
+      case "cx-arrange-next":
+        if (state.examSession) {
+          state.examSession.continueAfterArrange();
+          if (state.examSession.getStateKind() === "done") {
+            finishStation();
+          } else {
+            haptic("tap");
+            repaint();
+          }
+        }
+        return;
       case "cx-station-check":
         state.stationChecked[id] = !state.stationChecked[id];
         haptic("tap"); repaint(); return;
