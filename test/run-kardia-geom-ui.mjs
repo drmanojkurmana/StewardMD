@@ -50,10 +50,19 @@ mkdirSync(join(ROOT, "work"), { recursive: true });
 const viewsJson = readFileSync(join(ROOT, "kardia", "views.json"), "utf8");
 const manifestJson = readFileSync(join(ROOT, "atlas", "3d", "manifest.json"), "utf8");
 const chunkGzB64 = readFileSync(join(ROOT, "atlas", "3d", "cardiac-6.lo.bin.gz")).toString("base64");
+const liveJson = readFileSync(join(ROOT, "atlas", "3d", "live.json"), "utf8");
+const chunkB64 = (name) => readFileSync(join(ROOT, "atlas", "3d", name)).toString("base64");
 writeFileSync(join(ROOT, "work", "kardia-geom-data.js"),
   "window.__KG_VIEWS=" + viewsJson.replace(/<\/script>/g, "<\\/script>") + ";\n" +
   "window.__KG_MANIFEST=" + manifestJson.replace(/<\/script>/g, "<\\/script>") + ";\n" +
-  "window.__KG_CHUNK_GZ_B64=" + JSON.stringify(chunkGzB64) + ";\n");
+  "window.__KG_LIVE=" + liveJson.replace(/<\/script>/g, "<\\/script>") + ";\n" +
+  "window.__KG_CHUNK_GZ_B64=" + JSON.stringify(chunkGzB64) + ";\n" +
+  "window.__KG_CHUNKS_GZ_B64=" + JSON.stringify({
+    "skeletal-0": chunkB64("skeletal-0.lo.bin.gz"),
+    "skeletal-1": chunkB64("skeletal-1.lo.bin.gz"),
+    "live-respiratory": chunkB64("live-respiratory-9.7bb04126.bin.gz"),
+    "live-digestive": chunkB64("live-digestive-2.58ac6651.bin.gz"),
+  }) + ";\n");
 
 writeFileSync(join(ROOT, "work", "kardia-geom-harness.html"), `<!doctype html><meta charset="utf-8"><title>Kardia geom harness</title>
 <body style="margin:0;background:#111"><canvas id="cv"></canvas>
@@ -70,7 +79,7 @@ window.__boot = (async function () {
     for (var t = 0; t < 12000; t += 10) heart.step(10);
     var geom = KARDIA_GEOM.create({ heart: heart, views: window.__KG_VIEWS });
     var load = null;
-    try { load = await geom.loadAtlas({ systems: ["cardiac"] }); } catch (e) { load = null; }
+    try { load = await geom.loadAtlas({ systems: ["cardiac", "skeletal", "respiratory", "digestive"] }); } catch (e) { load = null; }
     if (!load || !load.parts) {
       geom.ingestManifest(window.__KG_MANIFEST);
       var chunk = null, i;
@@ -80,7 +89,17 @@ window.__boot = (async function () {
       var stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));
       var raw = await new Response(stream).arrayBuffer();
       var added = geom.ingestChunk(chunk, raw);
-      load = { parts: geom.loadedParts().length, added: added, chunks: 1, fallback: true };
+      var extra = [];
+      window.__KG_MANIFEST.lod.chunks.forEach(function (c) { if (c.id === "skeletal-0" || c.id === "skeletal-1") extra.push([c, window.__KG_CHUNKS_GZ_B64[c.id]]); });
+      window.__KG_LIVE.chunks.forEach(function (c) { if (c.system === "respiratory") extra.push([c, window.__KG_CHUNKS_GZ_B64["live-respiratory"]]); if (c.system === "digestive") extra.push([c, window.__KG_CHUNKS_GZ_B64["live-digestive"]]); });
+      for (var ei = 0; ei < extra.length; ei++) {
+        var ebin = atob(extra[ei][1]), ebytes = new Uint8Array(ebin.length);
+        for (var ebi = 0; ebi < ebin.length; ebi++) ebytes[ebi] = ebin.charCodeAt(ebi);
+        var estream = new Blob([ebytes]).stream().pipeThrough(new DecompressionStream("gzip"));
+        var eraw = await new Response(estream).arrayBuffer();
+        added += geom.ingestChunk(extra[ei][0], eraw);
+      }
+      load = { parts: geom.loadedParts().length, added: added, chunks: 1 + extra.length, fallback: true };
     }
     var canvas = document.getElementById("cv");
     var renderer = geom.createRenderer(canvas);
@@ -96,6 +115,16 @@ window.__boot = (async function () {
       var png = null;
       if (wantShot) { renderer.render({ refresh: false }); png = canvas.toDataURL("image/png").split(",")[1]; }
       return JSON.stringify({ ok: ok, ms: ms, h: h, lit: lit, lv: heart.state().volumes.LV, tris: renderer.triangleCount, errors: renderer.errors, png: png });
+    };
+    window.__shotMode = function (mode, viewId) {
+      heart.step(120); geom.update();
+      var opts = {};
+      if (mode === "cutaway") opts = { clip: { normal: [0, 1, 0], origin: [0, -2, 0] }, yaw: 0.6, pitch: 0.15 };
+      if (mode === "overlay") { var p = geom.viewPlane(viewId); opts = { overlayPlane: p, yaw: 0.6, pitch: 0.15 }; }
+      var ok2 = renderer.render(opts);
+      var png = canvas.toDataURL("image/png").split(",")[1];
+      var f = renderer.readFrame ? null : null;
+      return JSON.stringify({ ok: ok2, overlaySegments: renderer.overlaySegments || 0, tris: renderer.triangleCount, verts: geom.buffers().vertexCount, png: png });
     };
     window.__measureFps = function (durationMs) {
       return new Promise(function (resolve) {
@@ -165,6 +194,14 @@ try {
   const fps = JSON.parse(fpsR.result && fpsR.result.result ? fpsR.result.result.value : "{}");
   ok(fps.frames >= 5, `multi-frame responsiveness: ${fps.frames} frames in ${fps.ms && fps.ms.toFixed(0)} ms (${fps.fps && fps.fps.toFixed(1)} fps, SwiftShader)`);
   console.log(`FPS: ${fps.fps && fps.fps.toFixed(2)} (${fps.frames} frames / ${fps.ms && fps.ms.toFixed(0)} ms)`);
+
+  // cutaway (front wall clipped) and plane-cut overlays at A4C and PLAX
+  for (const [mode, view, name] of [["cutaway", null, "kardia-geom-cutaway.png"], ["overlay", "tte_a4c", "kardia-geom-overlay-a4c.png"], ["overlay", "tte_plax", "kardia-geom-overlay-plax.png"]]) {
+    const r = JSON.parse(await ev(`return window.__shotMode(${JSON.stringify(mode)}, ${JSON.stringify(view)});`) || "{}");
+    ok(r.ok && r.png, `${mode} ${view || ""} rendered: tris=${r.tris} verts=${r.verts} overlaySegments=${r.overlaySegments}`);
+    if (mode === "overlay") ok(r.overlaySegments > 20, `overlay ${view} drew cut loops: ${r.overlaySegments} segments`);
+    if (r.png) { writeFileSync(join(SHOTS, name), Buffer.from(r.png, "base64")); console.log("   shot: " + join(SHOTS, name) + ` (verts=${r.verts} tris=${r.tris})`); }
+  }
 
   // context loss and restore
   ok(await ev(`return window.__renderer._loseContext();`) === true, "WEBGL_lose_context available");

@@ -5,19 +5,31 @@
  * the LV cavity centroid (end-diastole reference).
  *
  * Two geometry layers share one deformation rig:
- *  1. Parametric core (always present, deterministic under node): chamber
- *     cavities and walls as oriented ellipsoids whose volume equals the
- *     cycle model volume by construction, hinged valve leaflets and
- *     cusps, chordae, papillary muscles, septa, LVOT/RVOT, great vessels
- *     as tubes, IVC/hepatic veins, pericardium, and parametric context
- *     (ribs, lungs, liver, chest wall) used until real meshes replace it.
- *  2. BodyParts3D meshes from atlas/3d (manifest + LOD chunks). Loading
+ *  1. Parametric core (node fallback, deterministic): chamber cavities
+ *     and walls as oriented ellipsoids whose volume equals the cycle
+ *     model volume by construction, hinged valve leaflets and cusps,
+ *     chordae, papillary muscles, septa, LVOT/RVOT, great vessels as
+ *     tubes, IVC/hepatic veins, pericardium, and parametric context.
+ *     A parametric chamber/valve/context part is suppressed as soon as
+ *     the real BodyParts3D mesh for the same ref/role is loaded, so
+ *     buffers() never contains both copies of one structure.
+ *  2. BodyParts3D meshes from atlas/3d (manifest + LOD chunks), plus
+ *     the LIVE lung/liver parts (TotalSegmentator subject, same atlas
+ *     package) registered onto the BodyParts3D LV centre. Loading
  *     reuses atlas3d.js where it is present (ATLAS3D._pure.parseManifest)
  *     and the same chunk byte layout (Float32 pos, Int16 nrm, Uint16 pid,
  *     Uint32 idx); parts are extracted by their per-vertex pid, never by
  *     copying the atlas renderer. Atlas metres map to the patient frame
  *     as x = x, y(anterior) = z, z(cranial) = y, recentred on the
  *     FJ2422 LV cavity bounds centre and scaled to mm.
+ *  Real chambers deform per-vertex about their apex anchor (apex
+ *  nearly fixed, base descends in systole) with a precomputed
+ *  apex-to-base weight; the anisotropic scale is then corrected once
+ *  from the closed-mesh signed volume so the deformed cavity volume
+ *  tracks KARDIA_HEART (target: within 5 percent). Valve leaflets
+ *  rotate about the annulus ring measured from the real leaflet
+ *  meshes; chordae and any parametric leaflet detail hinge on that
+ *  same ring. The interventricular septum follows the LV.
  *
  * Each structure carries acoustic tags for the ultrasound renderer:
  * {echogenicity 0..1, attenuation dB/cm/MHz, isBlood, isCalcium,
@@ -92,6 +104,33 @@
     for (j = 0; j < nV; j++) for (i = 0; i < nU; i++) {
       var a = start + j * (nU + 1) + i, b = a + 1, c = a + nU + 1, d = c + 1;
       this.quad(a, c, d, b);
+    }
+    return this;
+  };
+  /* Offset shell around a set of ellipsoids: for each surface
+   * direction the radius is the largest ellipsoid support function
+   * plus offsetMm, so the sac hugs the epicardial extents instead of
+   * being a sphere. comps = [{centre, basis, axes}]. */
+  Builder.prototype.shell = function (centre, comps, offsetMm, nU, nV) {
+    var i, j, start = this.pos.length / 3;
+    for (j = 0; j <= nV; j++) {
+      var phi = -Math.PI / 2 + Math.PI * j / nV;
+      for (i = 0; i <= nU; i++) {
+        var th = 2 * Math.PI * i / nU;
+        var d = [Math.sin(phi), Math.cos(phi) * Math.cos(th), Math.cos(phi) * Math.sin(th)];
+        var r = 0;
+        for (var ci = 0; ci < comps.length; ci++) {
+          var cp = comps[ci], rel = sub(cp.centre, centre), sup = dot(d, rel), s2 = 0;
+          for (var ax = 0; ax < 3; ax++) { var dd = dot(d, cp.basis[ax]) * cp.axes[ax]; s2 += dd * dd; }
+          sup += Math.sqrt(s2);
+          if (sup > r) r = sup;
+        }
+        this.v(add(centre, mul(d, r + offsetMm)));
+      }
+    }
+    for (j = 0; j < nV; j++) for (i = 0; i < nU; i++) {
+      var a = start + j * (nU + 1) + i, b = a + 1, c = a + nU + 1, dd2 = c + 1;
+      this.quad(a, c, dd2, b);
     }
     return this;
   };
@@ -190,6 +229,11 @@
     FJ2418: "LV", FJ2429: "LV", FJ2419: "RV", FJ2430: "RV", FJ2437: "RV"
   };
   var GREAT_VESSEL_IDS = { FJ3411: 1, FJ3413: 1, FJ3427: 1, FJ1931: 1, FJ1932: 1, FJ2966: 1, FJ2924: 1, FJ3019: 1, FJ3645: 1, FJ3441: 1, FJ3659: 1 };
+  /* Chamber cavity refs whose model volume drives a real mesh, and the
+   * wall refs that follow the same chamber without a volume target. */
+  var CAVITY_REF = { FJ2422: "LV", FJ2423: "RV", FJ2425: "LA", FJ2424: "RA" };
+  var WALL_CHAMBER = { FJ2428: "LV", FJ2438: "LA", FJ2439: "RA" };
+  var VALVE_STATE = { MV: "mitral", TV: "tricuspid", AV: "aortic", PV: "pulmonary" };
 
   function defaultPathology() {
     return {
@@ -226,6 +270,24 @@
       var maxA = (maxDeg || 72) * (1 - 0.85 * clamp(pathology.leafletRestriction, 0, 1));
       return maxA * f * Math.PI / 180;
     }
+    function hasReal(ref) { for (var i = 0; i < loadedParts.length; i++) if (loadedParts[i].id === ref) return true; return false; }
+    function partByRef(ref) { for (var i = 0; i < loadedParts.length; i++) if (loadedParts[i].id === ref) return loadedParts[i]; return null; }
+    /* Annulus ring measured from the real leaflets of a valve rig
+     * (MV/TV/AV/PV): {centre, axis, radiusMm} or null in fallback. */
+    function annulusOf(rig) {
+      var lp, i;
+      for (i = 0; i < loadedParts.length; i++) { lp = loadedParts[i]; if (lp.rig === rig && lp.hingeCentre) return { centre: lp.hingeCentre.slice(), axis: lp.hingeAxis.slice(), radiusMm: lp.hingeRadius || 12 }; }
+      return null;
+    }
+    /* Base descent (mm, along +axis = toward apex) of a chamber's base
+     * plane between its undeformed mesh and the live model volume. */
+    function baseDescent(chamber, state) {
+      var ref = chamber === "LV" ? "FJ2422" : chamber === "RV" ? "FJ2423" : null;
+      var part = ref ? partByRef(ref) : null;
+      if (!part || !part.baseVol || !state) return 0;
+      var ratio = clamp(dilated(chamber, state.volumes[chamber]) / part.baseVol, 0.2, 2.5);
+      return (1 - Math.pow(ratio, 0.22)) * (part.longLen || 60);
+    }
 
     function build(state) {
       structures = [];
@@ -251,8 +313,10 @@
         structures.push({ id: id, ref: ref, name: name, kind: kind, acoustic: acoustic(acousticName), pos: b.pos, idx: b.idx, centroid: [cen[0] / n, cen[1] / n, cen[2] / n] });
       }
 
-      /* --- LV cavity (FJ2422) with optional RWMA --- */
-      addStruct("lv_cavity", "FJ2422", "Cavity of left ventricle", "chamber", "blood", function (b) {
+      var lvDrop = baseDescent("LV", state); /* septum + annulus follow the LV base */
+      /* --- LV cavity (FJ2422) with optional RWMA: parametric only as
+       * the node fallback; the real mesh carries this ref when loaded. */
+      if (!hasReal("FJ2422")) addStruct("lv_cavity", "FJ2422", "Cavity of left ventricle", "chamber", "blood", function (b) {
         if (!pathology.wallMotion) { b.ellipsoid(lvCentre, [APEX_DIR, LV_E2, LV_E3], lvAxes, 28, 20); return; }
         /* rebuild manually so akinetic segments barely move in systole */
         var refAxes = prolateAxes(REF.LV * (pathology.chamberDilation.LV || 1), REF.LV, 42, 0.25);
@@ -271,21 +335,21 @@
       });
       /* --- LV wall: outer ellipsoid (FJ2428); thickness via pathology --- */
       var lvWallAxes = [lvAxes[0] + wallT * 0.4, lvAxes[1] + wallT, lvAxes[2] + wallT];
-      addStruct("lv_wall", "FJ2428", "Wall of left ventricle", "wall", "myocardium", function (b) { b.ellipsoid(lvCentre, [APEX_DIR, LV_E2, LV_E3], lvWallAxes, 24, 18); });
+      if (!hasReal("FJ2428")) addStruct("lv_wall", "FJ2428", "Wall of left ventricle", "wall", "myocardium", function (b) { b.ellipsoid(lvCentre, [APEX_DIR, LV_E2, LV_E3], lvWallAxes, 24, 18); });
       /* --- RV cavity + wall --- */
       var rvAxes = prolateAxes(rvV, REF.RV, 40, 0.22);
       var rvDir = norm([-0.25, 0.18, -0.95]), rvE2 = norm(cross(rvDir, [0, 0, 1])), rvE3 = norm(cross(rvDir, rvE2));
       var rvCentre = [-26, 14, 10];
-      addStruct("rv_cavity", "FJ2423", "Cavity of right ventricle", "chamber", "blood", function (b) { b.ellipsoid(rvCentre, [rvDir, rvE2, rvE3], rvAxes, 24, 18); });
+      if (!hasReal("FJ2423")) addStruct("rv_cavity", "FJ2423", "Cavity of right ventricle", "chamber", "blood", function (b) { b.ellipsoid(rvCentre, [rvDir, rvE2, rvE3], rvAxes, 24, 18); });
       addStruct("rv_wall", "rv_wall", "Wall of right ventricle", "wall", "myocardium", function (b) { b.ellipsoid(rvCentre, [rvDir, rvE2, rvE3], [rvAxes[0] + 2, rvAxes[1] + 5 * pathology.wallThicknessScale, rvAxes[2] + 5 * pathology.wallThicknessScale], 20, 14); });
       /* --- Atria --- */
       var laAxes = sphereAxes(laV), raAxes = sphereAxes(raV);
       var laCentre = add(baseCentre, [-2, -8, 10]);
       var raCentre = [-34, 2, 30];
-      addStruct("la_cavity", "FJ2425", "Cavity of left atrium", "chamber", "blood", function (b) { b.ellipsoid(laCentre, IDENTITY, laAxes, 22, 16); });
-      addStruct("la_wall", "FJ2438", "Wall of left atrium", "wall", "atrialWall", function (b) { b.ellipsoid(laCentre, IDENTITY, [laAxes[0] + 3, laAxes[1] + 3, laAxes[2] + 3], 18, 12); });
-      addStruct("ra_cavity", "FJ2424", "Cavity of right atrium", "chamber", "blood", function (b) { b.ellipsoid(raCentre, IDENTITY, raAxes, 22, 16); });
-      addStruct("ra_wall", "FJ2439", "Wall of right atrium", "wall", "atrialWall", function (b) { b.ellipsoid(raCentre, IDENTITY, [raAxes[0] + 3, raAxes[1] + 3, raAxes[2] + 3], 18, 12); });
+      if (!hasReal("FJ2425")) addStruct("la_cavity", "FJ2425", "Cavity of left atrium", "chamber", "blood", function (b) { b.ellipsoid(laCentre, IDENTITY, laAxes, 22, 16); });
+      if (!hasReal("FJ2438")) addStruct("la_wall", "FJ2438", "Wall of left atrium", "wall", "atrialWall", function (b) { b.ellipsoid(laCentre, IDENTITY, [laAxes[0] + 3, laAxes[1] + 3, laAxes[2] + 3], 18, 12); });
+      if (!hasReal("FJ2424")) addStruct("ra_cavity", "FJ2424", "Cavity of right atrium", "chamber", "blood", function (b) { b.ellipsoid(raCentre, IDENTITY, raAxes, 22, 16); });
+      if (!hasReal("FJ2439")) addStruct("ra_wall", "FJ2439", "Wall of right atrium", "wall", "atrialWall", function (b) { b.ellipsoid(raCentre, IDENTITY, [raAxes[0] + 3, raAxes[1] + 3, raAxes[2] + 3], 18, 12); });
       /* --- Septa (parametric; a defect leaves a real hole) --- */
       function septum(id, ref, name, centre, thinDir, r1, r2, defectMm) {
         addStruct(id, ref, name, "septum", "myocardium", function (b) {
@@ -300,10 +364,19 @@
         });
       }
       var defect = pathology.septalDefect;
-      septum("septum_iv", "interventricular_septum", "Interventricular septum", [-13, 7, 0], sub(rvCentre, lvCentre), 24, 30, defect && defect.type === "VSD" ? defect.sizeMm || 8 : 0);
-      addStruct("septum_iv_mid", "ventricular_septum_mid", "Mid interventricular septum", "septum", "myocardium", function (b) { b.ellipsoid([-13, 7, -4], basisFromThin(sub(rvCentre, lvCentre)), [3, 12, 14], 14, 10); });
-      septum("septum_ia", "atrial_septum_interatrial", "Interatrial septum", [-25, -8, 36], sub(raCentre, laCentre), 17, 20, defect && defect.type === "ASD" ? defect.sizeMm || 10 : 0);
-      addStruct("lv_apex", "lv_apex", "Left ventricular apex", "landmark", "myocardium", function (b) { b.ellipsoid(apexPoint, IDENTITY, [13, 13, 13], 12, 8); });
+      /* The septum moves with the LV: its centre rides the LV base
+       * descent (real meshes: lvDrop from the FJ2422 volume; fallback:
+       * the parametric systole fraction). */
+      var septumShift = mul(APEX_DIR, hasReal("FJ2422") ? lvDrop : -6 * systole);
+      var ivCentre = hasReal("FJ2423") && partByRef("FJ2422") ? mul(add(partByRef("FJ2422").centroid0, partByRef("FJ2423").centroid0), 0.5) : [-13, 7, 0];
+      var ivThin = hasReal("FJ2423") && hasReal("FJ2422") ? sub(partByRef("FJ2423").centroid0, partByRef("FJ2422").centroid0) : sub(rvCentre, lvCentre);
+      septum("septum_iv", "interventricular_septum", "Interventricular septum", add(ivCentre, septumShift), ivThin, 24, 30, defect && defect.type === "VSD" ? defect.sizeMm || 8 : 0);
+      addStruct("septum_iv_mid", "ventricular_septum_mid", "Mid interventricular septum", "septum", "myocardium", function (b) { b.ellipsoid(add(add(ivCentre, septumShift), [0, 0, -4]), basisFromThin(ivThin), [3, 12, 14], 14, 10); });
+      var iaCentre = hasReal("FJ2425") && hasReal("FJ2424") ? mul(add(partByRef("FJ2425").centroid0, partByRef("FJ2424").centroid0), 0.5) : [-25, -8, 36];
+      var iaThin = hasReal("FJ2425") && hasReal("FJ2424") ? sub(partByRef("FJ2424").centroid0, partByRef("FJ2425").centroid0) : sub(raCentre, laCentre);
+      septum("septum_ia", "atrial_septum_interatrial", "Interatrial septum", iaCentre, iaThin, 17, 20, defect && defect.type === "ASD" ? defect.sizeMm || 10 : 0);
+      var apexAt = hasReal("FJ2422") ? partByRef("FJ2422").anchor : apexPoint;
+      addStruct("lv_apex", "lv_apex", "Left ventricular apex", "landmark", "myocardium", function (b) { b.ellipsoid(apexAt, [APEX_DIR, LV_E2, LV_E3], [20, 13, 13], 12, 8); });
       /* --- LVOT + aortic root --- */
       var avCentre = add(annulus, [3, -2, 13]);
       addStruct("lvot", "lvot", "Left ventricular outflow tract", "outflow", "blood", function (b) { b.tube([add(lvCentre, mul(APEX_DIR, -lvAxes[0] * 0.55)), annulus, avCentre], 11, 14); });
@@ -316,16 +389,23 @@
       var avAngle = valveAngle(valves.aortic.open, valves.aortic.flow, 58);
       var pvAngle = valveAngle(valves.pulmonary.open, valves.pulmonary.flow, 58);
       var mvHingeAxis = norm(cross(APEX_DIR, [1, 0, 0]));
-      addStruct("mv_anterior", "FJ2420", "Anterior leaflet of mitral valve", "valve", "valve", function (b) { b.leaflet(add(annulus, mul(mvHingeAxis, 0)), mvHingeAxis, APEX_DIR, mul(APEX_DIR, -1), mvAngle, 26, 22, lt); });
-      addStruct("mv_posterior", "FJ2432", "Posterior leaflet of mitral valve", "valve", "valve", function (b) { b.leaflet(annulus, mvHingeAxis, APEX_DIR, mul(APEX_DIR, -1), mvAngle, 26, 15, lt); });
-      var tvCentre = add(rvCentre, [4, -2, 26]);
-      var tvHingeAxis = norm(cross(rvDir, [1, 0, 0]));
-      addStruct("tv_anterior", "FJ2421", "Anterior leaflet of tricuspid valve", "valve", "valve", function (b) { b.leaflet(tvCentre, tvHingeAxis, rvDir, mul(rvDir, -1), tvAngle, 22, 18, lt); });
-      addStruct("tv_septal", "FJ2436", "Septal leaflet of tricuspid valve", "valve", "valve", function (b) { b.leaflet(tvCentre, tvHingeAxis, rvDir, mul(rvDir, -1), tvAngle, 20, 13, lt); });
-      addStruct("tv_posterior", "FJ2433", "Posterior leaflet of tricuspid valve", "valve", "valve", function (b) { b.leaflet(tvCentre, norm(cross(rvDir, [0, 1, 0])), rvDir, mul(rvDir, -1), tvAngle, 20, 13, lt); });
+      /* Parametric leaflet detail only where BodyParts3D has no mesh;
+       * when the real ring is known the hinge sits on it (centre moved
+       * by the LV base descent so the leaflet stays on the annulus). */
+      var mvRing = annulusOf("MV"), tvRing = annulusOf("TV");
+      var mvHinge = mvRing ? add(mvRing.centre, mul(APEX_DIR, lvDrop)) : annulus;
+      if (mvRing) mvHingeAxis = mvRing.axis;
+      if (!hasReal("FJ2420")) addStruct("mv_anterior", "FJ2420", "Anterior leaflet of mitral valve", "valve", "valve", function (b) { b.leaflet(add(mvHinge, mul(mvHingeAxis, 0)), mvHingeAxis, APEX_DIR, mul(APEX_DIR, -1), mvAngle, 26, 22, lt); });
+      if (!hasReal("FJ2432")) addStruct("mv_posterior", "FJ2432", "Posterior leaflet of mitral valve", "valve", "valve", function (b) { b.leaflet(mvHinge, mvHingeAxis, APEX_DIR, mul(APEX_DIR, -1), mvAngle, 26, 15, lt); });
+      var tvCentre = tvRing ? tvRing.centre : add(rvCentre, [4, -2, 26]);
+      var tvHingeAxis = tvRing ? tvRing.axis : norm(cross(rvDir, [1, 0, 0]));
+      if (!hasReal("FJ2421")) addStruct("tv_anterior", "FJ2421", "Anterior leaflet of tricuspid valve", "valve", "valve", function (b) { b.leaflet(tvCentre, tvHingeAxis, rvDir, mul(rvDir, -1), tvAngle, 22, 18, lt); });
+      if (!hasReal("FJ2436")) addStruct("tv_septal", "FJ2436", "Septal leaflet of tricuspid valve", "valve", "valve", function (b) { b.leaflet(tvCentre, tvHingeAxis, rvDir, mul(rvDir, -1), tvAngle, 20, 13, lt); });
+      if (!hasReal("FJ2433")) addStruct("tv_posterior", "FJ2433", "Posterior leaflet of tricuspid valve", "valve", "valve", function (b) { b.leaflet(tvCentre, norm(cross(rvDir, [0, 1, 0])), rvDir, mul(rvDir, -1), tvAngle, 20, 13, lt); });
       function cusps(prefix, refs, names, centre, flowDir, angle) {
         for (var ci = 0; ci < 3; ci++) {
           (function (ci) {
+            if (hasReal(refs[ci])) return;
             var th = ci * 2.094 + 0.5, hingeAxis = [Math.cos(th), Math.sin(th), 0];
             var closed = norm(cross(hingeAxis, flowDir));
             addStruct(prefix + "_" + ci, refs[ci], names[ci], "valve", "valve", function (b) { b.leaflet(centre, hingeAxis, closed, flowDir, angle, 15, 13, lt); });
@@ -342,7 +422,10 @@
       addStruct("pap_lv_al_head", "FJ2418", "Anterolateral head of lateral papillary muscle", "papillary", "myocardium", function (b) { b.ellipsoid(add(papAL, [0, 0, 5]), IDENTITY, [4, 4, 5], 10, 8); });
       addStruct("pap_rv_ant", "FJ2419", "Anterior papillary muscle of right ventricle", "papillary", "myocardium", function (b) { b.ellipsoid(add(rvCentre, [10, -8, -10]), IDENTITY, [5, 5, 8], 10, 8); });
       addStruct("chordae", "chordae_tendineae", "Chordae tendineae", "chordae", "valve", function (b) {
-        b.tube([papAL, add(annulus, mul(APEX_DIR, 8))], 0.7, 5); b.tube([papPM, add(annulus, mul(APEX_DIR, 8))], 0.7, 5);
+        /* BodyParts3D has no chordae: parametric cords, but they end
+         * on the real mitral annulus ring when it is loaded. */
+        var mvEnd = add(mvHinge, mul(APEX_DIR, 8));
+        b.tube([papAL, mvEnd], 0.7, 5); b.tube([papPM, mvEnd], 0.7, 5);
         b.tube([add(rvCentre, [10, -8, -10]), add(tvCentre, mul(rvDir, 6))], 0.7, 5);
       });
       /* --- Great vessels (radius pulses with pressure) --- */
@@ -365,7 +448,7 @@
       addStruct("brachiocephalic", "brachiocephalic_trunk", "Brachiocephalic trunk", "vessel", "blood", function (b) { b.tube([[-8, -14, 68], [-16, -16, 88]], 5, 8); });
       addStruct("carotid_l", "left_common_carotid_artery", "Left common carotid artery", "vessel", "blood", function (b) { b.tube([[-14, -17, 70], [-8, -18, 92]], 4, 8); });
       addStruct("subclavian_l", "left_subclavian_artery", "Left subclavian artery", "vessel", "blood", function (b) { b.tube([[-20, -20, 66], [6, -20, 84]], 4, 8); });
-      addStruct("ductus", "ductus_arteriosus_region", "Ductus arteriosus region", "landmark", "vesselWall", function (b) { b.ellipsoid([-16, -10, 52], IDENTITY, [8, 8, 8], 10, 8); });
+      addStruct("ductus", "ductus_arteriosus_region", "Ductus arteriosus region", "landmark", "vesselWall", function (b) { b.tube([[-6, 0, 54], [-16, -10, 50], [-23, -19, 42]], 4, 8); });
       addStruct("laa", "left_atrial_appendage", "Left atrial appendage", "landmark", "atrialWall", function (b) { b.ellipsoid(add(laCentre, [14, 8, 2]), IDENTITY, [8, 7, 10], 10, 8); });
       addStruct("raa", "right_atrial_appendage", "Right atrial appendage", "landmark", "atrialWall", function (b) { b.ellipsoid(add(raCentre, [10, 12, 4]), IDENTITY, [8, 7, 9], 10, 8); });
       addStruct("pv_left_sup", "FJ2925", "Left superior pulmonary vein", "vessel", "blood", function (b) { b.tube([add(laCentre, [16, -6, 6]), add(laCentre, [36, -12, 8])], 5, 8); });
@@ -373,11 +456,32 @@
       addStruct("kidney_r", "FJ3147", "Right kidney", "context", "softTissue", function (b) { b.ellipsoid([-70, -28, -70], IDENTITY, [22, 14, 30], 10, 8); });
       addStruct("spleen", "FJ2561", "Spleen", "context", "softTissue", function (b) { b.ellipsoid([72, -20, -30], IDENTITY, [24, 12, 28], 10, 8); });
       addStruct("kidney_l", "FJ3145", "Left kidney", "context", "softTissue", function (b) { b.ellipsoid([70, -28, -70], IDENTITY, [22, 14, 30], 10, 8); });
-      /* --- Pericardium: offset shell; effusion pushes it out --- */
+      /* --- Pericardium: thin shell offset from the epicardial
+       * surface (support-function hull of the chamber wall
+       * ellipsoids, or of the real wall/cavity bounding boxes when
+       * BodyParts3D meshes are loaded); effusion pushes it out. --- */
       var eff = pathology.effusionMm || 0;
-      addStruct("pericardium", "pericardium", "Pericardium", "pericardium", "pericardium", function (b) { b.ellipsoid([-6, 0, 8], IDENTITY, [66 + eff, 58 + eff, 64 + eff], 22, 16); });
-      if (eff > 0) addStruct("pericardial_space", "pericardial_space", "Pericardial space", "fluid", "fluid", function (b) { b.ellipsoid([-6, 0, 8], IDENTITY, [64 + eff * 0.5, 56 + eff * 0.5, 62 + eff * 0.5], 20, 14); });
-      else addStruct("pericardial_space", "pericardial_space", "Pericardial space", "fluid", "fluid", function (b) { b.ellipsoid([-6, 0, 8], IDENTITY, [63, 55, 61], 16, 10); });
+      function bboxComp(ref, pad) {
+        var part = partByRef(ref); if (!part) return null;
+        var mn = [1e9, 1e9, 1e9], mx = [-1e9, -1e9, -1e9], i2;
+        for (i2 = 0; i2 + 2 < part.basePos.length; i2 += 3) for (var k2 = 0; k2 < 3; k2++) { if (part.basePos[i2 + k2] < mn[k2]) mn[k2] = part.basePos[i2 + k2]; if (part.basePos[i2 + k2] > mx[k2]) mx[k2] = part.basePos[i2 + k2]; }
+        return { centre: mul(add(mn, mx), 0.5), basis: IDENTITY, axes: [(mx[0] - mn[0]) / 2 + pad, (mx[1] - mn[1]) / 2 + pad, (mx[2] - mn[2]) / 2 + pad] };
+      }
+      var periComps = [], periCentre;
+      if (hasReal("FJ2422")) {
+        [["FJ2428", 2], ["FJ2422", 12], ["FJ2423", 5], ["FJ2438", 2], ["FJ2425", 5], ["FJ2439", 2], ["FJ2424", 5]].forEach(function (rc) { var c2 = bboxComp(rc[0], rc[1]); if (c2) periComps.push(c2); });
+        periCentre = mul(add(partByRef("FJ2422").centroid0, partByRef("FJ2424") ? partByRef("FJ2424").centroid0 : partByRef("FJ2422").centroid0), 0.5);
+      } else {
+        periComps = [
+          { centre: lvCentre, basis: [APEX_DIR, LV_E2, LV_E3], axes: lvWallAxes },
+          { centre: rvCentre, basis: [rvDir, rvE2, rvE3], axes: [rvAxes[0] + 2, rvAxes[1] + 5 * pathology.wallThicknessScale, rvAxes[2] + 5 * pathology.wallThicknessScale] },
+          { centre: laCentre, basis: IDENTITY, axes: [laAxes[0] + 3, laAxes[1] + 3, laAxes[2] + 3] },
+          { centre: raCentre, basis: IDENTITY, axes: [raAxes[0] + 3, raAxes[1] + 3, raAxes[2] + 3] }
+        ];
+        periCentre = [-6, 0, 8];
+      }
+      addStruct("pericardium", "pericardium", "Pericardium", "pericardium", "pericardium", function (b) { b.shell(periCentre, periComps, 3 + eff, 28, 20); });
+      addStruct("pericardial_space", "pericardial_space", "Pericardial space", "fluid", "fluid", function (b) { b.shell(periCentre, periComps, eff > 0 ? 1.5 + eff * 0.5 : 1.5, 24, 16); });
       /* --- Pathology blobs --- */
       if (pathology.vegetation) {
         var vg = pathology.vegetation, vpos = vg.valve === "mitral" ? annulus : (vg.valve === "tricuspid" ? tvCentre : avCentre), vs = vg.sizeMm || 8;
@@ -412,7 +516,13 @@
       ];
       extras.forEach(function (ex) {
         var isRefId = ex[1].indexOf("FJ") === 0;
-        addStruct("x_" + (isRefId ? ex[0] : ex[0]), isRefId ? ex[1] : ex[0], isRefId ? ex[0].replace(/_/g, " ") : ex[1], "landmark", ex[0] === "pleural_line" ? "pericardium" : "softTissue", function (b) { b.ellipsoid(ex[2], IDENTITY, [9, 9, 9], 10, 8); });
+        /* The pleural line is a thin sheet on the lung surface, not a
+         * sphere: the old 9 mm ball at [86,42,10] floated inside the
+         * left lung field and rendered as a stray sphere. It is now a
+         * flat patch (2 mm thick) tangent to the left lung. */
+        var axes = ex[0] === "pleural_line" ? [2, 22, 16] : [10, 10, 3];
+        var at = ex[0] === "pleural_line" ? [104, 18, 10] : ex[2];
+        addStruct("x_" + (isRefId ? ex[0] : ex[0]), isRefId ? ex[1] : ex[0], isRefId ? ex[0].replace(/_/g, " ") : ex[1], "landmark", ex[0] === "pleural_line" ? "pericardium" : "softTissue", function (b) { b.ellipsoid(at, IDENTITY, axes, 10, 8); });
       });
       built = null;
       lastState = state;
@@ -420,30 +530,64 @@
     }
     function hasLoadedRole(role) { for (var i = 0; i < loadedParts.length; i++) if (loadedParts[i].role === role) return true; return false; }
 
-    /* Deform a loaded BodyParts part: scale about its own centroid.
-     * Ventricular/atrial parts follow their chamber volume (radial in
-     * the plane across the long axis, weaker along it, so the deformed
-     * mesh volume tracks the model); vessels pulse with pressure. */
+    /* Deform a loaded BodyParts part. Cavities: anisotropic scale
+     * about the apex anchor (apex fixed, base descends in systole),
+     * radial exponent larger than longitudinal, then one uniform
+     * correction from the closed-mesh signed volume so the enclosed
+     * volume equals the model volume. Walls follow their chamber's
+     * ratio. Leaflets rotate about their measured annulus ring,
+     * weighted by the precomputed hinge distance, and ride the base
+     * descent. Vessels pulse; context (ribs, lungs, liver) is static. */
     function deformLoaded(part, state) {
       var rig = part.rig, out = new Array(part.basePos.length), i;
-      if (rig === "context") { for (i = 0; i < out.length; i++) out[i] = part.basePos[i]; return out; }
-      var volKey = rig === "LVWALL" ? "LV" : rig, refV = REF[volKey] || 60;
-      var curV = state.volumes[volKey];
-      if (curV == null) { /* valves/vessels: pulse or copy */
-        var pulse = rig === "AV" || rig === "MV" || rig === "TV" || rig === "PV" ? 1 : 1 + 0.08 * clamp(((rig === "PV" ? state.pressures.PA : state.pressures.Ao) - 80) / 40, -1, 1.5);
+      if (rig === "context" || !state) { for (i = 0; i < out.length; i++) out[i] = part.basePos[i]; return out; }
+      if (VALVE_STATE[rig]) {
+        var vst = state.valves[VALVE_STATE[rig]] || { open: false, flow: 0 };
+        var ang = valveAngle(vst.open, vst.flow, rig === "MV" ? 72 : rig === "TV" ? 68 : 58);
+        var hc = part.hingeCentre || part.centroid0, hax = part.hingeAxis || [1, 0, 0];
+        var dropV = rig === "MV" ? mul(APEX_DIR, baseDescent("LV", state)) : rig === "TV" ? mul(norm([-0.25, 0.18, -0.95]), baseDescent("RV", state)) : [0, 0, 0];
+        for (i = 0; i + 2 < out.length; i += 3) {
+          var relv = [part.basePos[i] - hc[0], part.basePos[i + 1] - hc[1], part.basePos[i + 2] - hc[2]];
+          var a = ang * (part.hingeW ? part.hingeW[i / 3] : 1);
+          var ca = Math.cos(a), sa = Math.sin(a);
+          /* Rodrigues rotation about the hinge axis */
+          var crv = cross(hax, relv), dtv = dot(hax, relv);
+          var rot = [relv[0] * ca + crv[0] * sa + hax[0] * dtv * (1 - ca), relv[1] * ca + crv[1] * sa + hax[1] * dtv * (1 - ca), relv[2] * ca + crv[2] * sa + hax[2] * dtv * (1 - ca)];
+          out[i] = hc[0] + rot[0] + dropV[0]; out[i + 1] = hc[1] + rot[1] + dropV[1]; out[i + 2] = hc[2] + rot[2] + dropV[2];
+        }
+        return out;
+      }
+      var chamber = CAVITY_REF[part.id] || WALL_CHAMBER[part.id];
+      if (!chamber) { /* great vessels: radial pulse with pressure */
+        var pulse = 1 + 0.08 * clamp(((state.pressures.Ao || 80) - 80) / 40, -1, 1.5);
         for (i = 0; i < out.length; i++) out[i] = part.centroid0[i % 3] + (part.basePos[i] - part.centroid0[i % 3]) * pulse;
         return out;
       }
-      var ratio = clamp(curV / refV, 0.2, 2.5);
-      var radial = Math.pow(ratio, 0.4), longS = Math.pow(ratio, 0.2);
-      var axis = (volKey === "RV") ? norm([-0.25, 0.18, -0.95]) : APEX_DIR;
-      /* base descends in systole for ventricular rigs */
-      var drop = (volKey === "LV" || volKey === "RV" || volKey === "LVWALL") ? mul(axis, -6 * clamp(1 - ratio, 0, 1)) : [0, 0, 0];
+      var cavRef = chamber === "LV" ? "FJ2422" : chamber === "RV" ? "FJ2423" : chamber === "LA" ? "FJ2425" : "FJ2424";
+      var cavPart = partByRef(cavRef);
+      var baseForRatio = CAVITY_REF[part.id] ? part.baseVol : (cavPart ? cavPart.baseVol : part.baseVol);
+      if (!baseForRatio) { for (i = 0; i < out.length; i++) out[i] = part.basePos[i]; return out; }
+      var target = dilated(chamber, state.volumes[chamber]);
+      var ratio = clamp(target / baseForRatio, 0.15, 3);
+      var longS = Math.pow(ratio, 0.22), radial = Math.sqrt(ratio / longS);
+      var axis = part.axis, anchor = part.anchor;
       for (i = 0; i + 2 < out.length; i += 3) {
-        var rel = [part.basePos[i] - part.centroid0[0], part.basePos[i + 1] - part.centroid0[1], part.basePos[i + 2] - part.centroid0[2]];
+        var rel = [part.basePos[i] - anchor[0], part.basePos[i + 1] - anchor[1], part.basePos[i + 2] - anchor[2]];
         var along = dot(rel, axis), perp = sub(rel, mul(axis, along));
-        var p = add(part.centroid0, add(add(mul(perp, radial), mul(axis, along * longS)), drop));
+        /* precomputed apex-to-base weight keeps the apex end smooth:
+         * longitudinal motion grows toward the base */
+        var w = part.baseW ? part.baseW[i / 3] : 1;
+        var p = add(anchor, add(mul(perp, radial), mul(axis, along * (1 + (longS - 1) * (0.35 + 0.65 * w)))));
         out[i] = p[0]; out[i + 1] = p[1]; out[i + 2] = p[2];
+      }
+      if (CAVITY_REF[part.id] && part.baseVol > 1) {
+        /* one signed-volume correction about the anchor: exact for a
+         * closed mesh up to faceting, so cavities land within ~1% */
+        var got = meshVolume(out, part.idx);
+        if (got > 1) {
+          var corr = Math.pow(target / got, 1 / 3);
+          if (Math.abs(corr - 1) > 0.001) for (i = 0; i + 2 < out.length; i += 3) { out[i] = anchor[0] + (out[i] - anchor[0]) * corr; out[i + 1] = anchor[1] + (out[i + 1] - anchor[1]) * corr; out[i + 2] = anchor[2] + (out[i + 2] - anchor[2]) * corr; }
+        }
       }
       return out;
     }
@@ -556,32 +700,100 @@
       var n = norm(v.probe.normal), up = norm(v.probe.up);
       var byRef = {};
       currentStructures().forEach(function (s) { if (!byRef[s.ref]) byRef[s.ref] = s; });
-      /* vertex projection range of each landmark along n: a plane at
-       * candidate d intersects it iff d is inside [min, max]. */
-      function projRange(ref) {
-        var src = null, i;
-        for (i = 0; i < structures.length; i++) if (structures[i].ref === ref) { src = structures[i]; break; }
-        if (!src) { var s = byRef[ref]; var c = s ? dot(s.centroid, n) : 0; return [c - 18, c + 18]; }
-        var mn = 1e9, mx = -1e9;
-        for (i = 0; i < src.pos.length; i += 3) { var dd = src.pos[i] * n[0] + src.pos[i + 1] * n[1] + src.pos[i + 2] * n[2]; if (dd < mn) mn = dd; if (dd > mx) mx = dd; }
-        return [mn, mx];
+      /* vertex projection range of each landmark along nn: a plane at
+       * candidate d intersects it iff d is inside [min, max]. Real
+       * (bp3d) groups are scanned in the merged buffer so the range
+       * follows the deformed mesh, not the parametric fallback. */
+      function projRange(ref, nn) {
+        var buf = buffers(), gi, mn = 1e9, mx = -1e9, found = false;
+        for (gi = 0; gi < buf.groups.length; gi++) {
+          var g = buf.groups[gi]; if (g.ref !== ref) continue; found = true;
+          for (var i = g.vertexStart * 3; i < (g.vertexStart + g.vertexCount) * 3; i += 3) { var dd = buf.positions[i] * nn[0] + buf.positions[i + 1] * nn[1] + buf.positions[i + 2] * nn[2]; if (dd < mn) mn = dd; if (dd > mx) mx = dd; }
+        }
+        if (found) return [mn, mx];
+        var s = byRef[ref]; var c = s ? dot(s.centroid, nn) : 0; return [c - 18, c + 18];
       }
-      var items = [];
-      (v.landmarks || []).forEach(function (lm) { var s = byRef[lm.ref]; if (s) { var r = projRange(lm.ref); items.push({ ref: lm.ref, proj: dot(s.centroid, n), mn: r[0], mx: r[1], rad: Math.max(3, (r[1] - r[0]) / 2) }); } });
-      var d = 0;
-      if (items.length) {
-        var cands = [];
+      function bestD(nn) {
+        var items = [];
+        (v.landmarks || []).forEach(function (lm) { var s = byRef[lm.ref]; if (!s) return; var r = projRange(lm.ref, nn); items.push({ ref: lm.ref, proj: dot(s.centroid, nn), mn: r[0], mx: r[1], rad: Math.max(3, (r[1] - r[0]) / 2) }); });
+        var cands = [], best = null, a, b;
         items.forEach(function (it) { cands.push(it.proj); cands.push((it.mn + it.mx) / 2); cands.push(it.mn + 0.5); cands.push(it.mx - 0.5); });
-        for (var a = 0; a < items.length; a++) for (var b = a + 1; b < items.length; b++) { cands.push((items[a].proj + items[b].proj) / 2); cands.push((items[a].mn + items[b].mx) / 2); cands.push((items[a].mx + items[b].mn) / 2); }
-        var best = null;
+        for (a = 0; a < items.length; a++) for (b = a + 1; b < items.length; b++) { cands.push((items[a].proj + items[b].proj) / 2); cands.push((items[a].mn + items[b].mx) / 2); cands.push((items[a].mx + items[b].mn) / 2); }
         cands.forEach(function (cand) {
           var covered = 0, score = 0;
           items.forEach(function (it) { var dist = Math.abs(it.proj - cand); if (cand >= it.mn && cand <= it.mx) covered++; score += dist / it.rad; });
           if (!best || covered > best.covered || (covered === best.covered && score < best.score)) best = { d: cand, covered: covered, score: score };
         });
-        d = best.d;
+        return best || { d: 0, covered: 0, score: 1e9 };
       }
-      return { origin: mul(n, d), normal: n, up: up, viewId: v.id };
+      /* Least-squares plane through the landmark centroids (Jacobi
+       * eigen of the 3x3 covariance, smallest eigenvalue direction).
+       * The real heart is oblique in the chest, so when BodyParts3D
+       * meshes are loaded this fitted normal can cover landmarks no
+       * axis-aligned views.json plane reaches (notably the atria in
+       * A4C); it is only used when it covers strictly more landmarks. */
+      function fittedNormal() {
+        var pts = [], cavPts = [];
+        (v.landmarks || []).forEach(function (lm) { var s = byRef[lm.ref]; if (!s) return; pts.push(s.centroid); if (CAVITY_REF[lm.ref]) cavPts.push(s.centroid); });
+        /* a multi-chamber view is defined by its cavities: fit those */
+        if (cavPts.length >= 3) pts = cavPts;
+        if (pts.length < 4 && cavPts.length < 3) return null;
+        if (pts.length < 3) return null;
+        var c = [0, 0, 0], i, j;
+        pts.forEach(function (p) { c[0] += p[0]; c[1] += p[1]; c[2] += p[2]; });
+        c = mul(c, 1 / pts.length);
+        var a00 = 0, a01 = 0, a02 = 0, a11 = 0, a12 = 0, a22 = 0;
+        pts.forEach(function (p) { var x = p[0] - c[0], y = p[1] - c[1], z = p[2] - c[2]; a00 += x * x; a01 += x * y; a02 += x * z; a11 += y * y; a12 += y * z; a22 += z * z; });
+        var A = [[a00, a01, a02], [a01, a11, a12], [a02, a12, a22]], V = [[1, 0, 0], [0, 1, 0], [0, 0, 1]], sweep, p, q;
+        for (sweep = 0; sweep < 24; sweep++) {
+          var off = Math.sqrt(A[0][1] * A[0][1] + A[0][2] * A[0][2] + A[1][2] * A[1][2]);
+          if (off < 1e-9) break;
+          [[0, 1], [0, 2], [1, 2]].forEach(function (pq) {
+            p = pq[0]; q = pq[1];
+            if (Math.abs(A[p][q]) < 1e-12) return;
+            var th = 0.5 * Math.atan2(2 * A[p][q], A[q][q] - A[p][p]), co = Math.cos(th), si = Math.sin(th), r;
+            for (r = 0; r < 3; r++) { var arp = A[r][p], arq = A[r][q]; A[r][p] = co * arp + si * arq; A[r][q] = -si * arp + co * arq; }
+            for (r = 0; r < 3; r++) { var apr = A[p][r], aqr = A[q][r]; A[p][r] = co * apr + si * aqr; A[q][r] = -si * apr + co * aqr; }
+            for (r = 0; r < 3; r++) { var vrp = V[r][p], vrq = V[r][q]; V[r][p] = co * vrp + si * vrq; V[r][q] = -si * vrp + co * vrq; }
+          });
+        }
+        var mi = 0; for (i = 1; i < 3; i++) if (A[i][i] < A[mi][mi]) mi = i;
+        var nn = norm([V[0][mi], V[1][mi], V[2][mi]]);
+        if (dot(nn, n) < 0) nn = mul(nn, -1);
+        return nn;
+      }
+      var base = bestD(n), useN = n, d = base.d;
+      var multiChamber = (v.landmarks || []).filter(function (lm) { return CAVITY_REF[lm.ref]; }).length >= 3;
+      if (loadedParts.length) {
+        var fn = fittedNormal();
+        if (fn) { var fb = bestD(fn); if (fb.covered > base.covered) { useN = fn; d = fb.d; } }
+      }
+      if (loadedParts.length && multiChamber) {
+        /* Along the fitted normal, choose the offset whose actual
+         * cut gives the most balanced four-chamber areas. */
+        var cavRefs = (v.landmarks || []).map(function (lm) { return lm.ref; }).filter(function (r) { return CAVITY_REF[r]; });
+        var covAt = function (dd) { var rr = {}; cut(mul(useN, dd), useN, up, 300, 300).forEach(function (pl) { rr[pl.ref] = 1; }); return (v.landmarks || []).filter(function (lm) { return rr[lm.ref]; }).length; };
+        var baseCov = covAt(d);
+        var bestScan = null, sd;
+        for (sd = d - 35; sd <= d + 35; sd += 2.5) {
+          var polys = cut(mul(useN, sd), useN, up, 300, 300), areas = {}, seen = {};
+          polys.forEach(function (pl) {
+            seen[pl.ref] = 1;
+            if (!CAVITY_REF[pl.ref]) return;
+            var a = 0, i2;
+            for (i2 = 0; i2 < pl.points.length; i2++) { var j2 = (i2 + 1) % pl.points.length; a += pl.points[i2][0] * pl.points[j2][1] - pl.points[j2][0] * pl.points[i2][1]; }
+            a = Math.abs(a / 2) / 100;
+            if (!areas[pl.ref] || a > areas[pl.ref]) areas[pl.ref] = a;
+          });
+          var cov = (v.landmarks || []).filter(function (lm) { return seen[lm.ref]; }).length;
+          if (cov < baseCov) continue;
+          var mnA = 1e9, sumA = 0, logA = 0;
+          cavRefs.forEach(function (r) { var av = areas[r] || 0; if (av < mnA) mnA = av; sumA += av; logA += Math.log(av + 1); });
+          if (!bestScan || logA > bestScan.logA) bestScan = { d: sd, mnA: mnA, sumA: sumA, logA: logA };
+        }
+        if (bestScan && bestScan.mnA > 0) d = bestScan.d;
+      }
+      return { origin: mul(useN, d), normal: useN, up: up, viewId: v.id };
     }
 
     /* ---------- BodyParts3D loader ---------- */
@@ -594,10 +806,13 @@
     function roleForPart(part, sysId) {
       if (PART_RIG[part.id]) return PART_RIG[part.id];
       if (GREAT_VESSEL_IDS[part.id]) return "vessel";
+      if (part.id === "LIVE_liver") return "liver";
+      if (/^LIVE_lung/i.test(part.id)) return "lungs";
+      if (part.src) return null; /* other LIVE parts: different subject, not registered */
       if (sysId === "cardiac") return "LV";
       if (sysId === "skeletal") return part.canon === "RIB" || part.canon === "STERNUM" || /rib|sternum/i.test(part.name) ? "ribs" : null;
       if (sysId === "respiratory") return /lung/i.test(part.name) ? "lungs" : null;
-      if (sysId === "digestive") return /liver/i.test(part.name) ? "liver" : null;
+      if (sysId === "digestive") return null; /* FJ2816 is only the caudate lobe, not the liver */
       if (sysId === "muscular") return /diaphragm/i.test(part.name) ? "context" : null;
       if (sysId === "integumentary") return "chestwall";
       if (sysId === "arterial") return /aorta|pulmonary/i.test(part.name) ? "vessel" : null;
@@ -605,6 +820,55 @@
       return null;
     }
     function ingestManifest(m) { manifest = parseManifest(m); return manifest; }
+    /* Precompute the cheap deform rig for one part: long axis, apex
+     * anchor, closed-mesh base volume, and the per-vertex apex-to-base
+     * weight (0 at the apex, 1 at the base) used every frame. */
+    function rigPart(lp) {
+      var chamber = CAVITY_REF[lp.id] || WALL_CHAMBER[lp.id];
+      lp.axis = chamber === "RV" ? norm([-0.25, 0.18, -0.95]) : APEX_DIR.slice();
+      lp.baseVol = meshVolume(lp.basePos, lp.idx);
+      var i, mn = 1e9, mx = -1e9, alongs = new Float32Array(lp.basePos.length / 3);
+      for (i = 0; i + 2 < lp.basePos.length; i += 3) {
+        var a = lp.basePos[i] * lp.axis[0] + lp.basePos[i + 1] * lp.axis[1] + lp.basePos[i + 2] * lp.axis[2];
+        alongs[i / 3] = a; if (a < mn) mn = a; if (a > mx) mx = a;
+      }
+      lp.longLen = Math.max(10, mx - mn);
+      /* ventricles: anchor at the apex (largest along); atria and
+       * walls: anchor at the centroid so they scale in place */
+      lp.anchor = (chamber === "LV" || chamber === "RV") ? add(lp.centroid0, mul(lp.axis, mx - dot(lp.centroid0, lp.axis))) : lp.centroid0.slice();
+      lp.baseW = new Float32Array(alongs.length);
+      for (i = 0; i < alongs.length; i++) lp.baseW[i] = clamp((mx - alongs[i]) / lp.longLen, 0, 1);
+      return lp;
+    }
+    /* Measure each valve's annulus ring from its real leaflets: the
+     * hinge centre is the mean of the leaflet vertices closest to the
+     * upstream chamber centroid, the hinge axis is across the flow
+     * axis, and hingeW is each vertex's normalised distance from the
+     * ring (0 at the hinge, 1 at the free edge). */
+    function finalizeAnnuli() {
+      var upstream = { MV: "FJ2425", TV: "FJ2424", AV: "FJ2422", PV: "FJ2423" };
+      var flowAxis = { MV: APEX_DIR, TV: norm([-0.25, 0.18, -0.95]), AV: [0, 0, 1], PV: norm([-0.1, -0.2, 1]) };
+      ["MV", "TV", "AV", "PV"].forEach(function (rig) {
+        var up = partByRef(upstream[rig]), members = [], i, j;
+        loadedParts.forEach(function (lp) { if (lp.rig === rig) members.push(lp); });
+        if (!members.length) return;
+        var refC = up ? up.centroid0 : members[0].centroid0;
+        members.forEach(function (lp) {
+          var ds = [], vi;
+          for (vi = 0; vi + 2 < lp.basePos.length; vi += 3) { var dx = lp.basePos[vi] - refC[0], dy = lp.basePos[vi + 1] - refC[1], dz = lp.basePos[vi + 2] - refC[2]; ds.push(Math.sqrt(dx * dx + dy * dy + dz * dz)); }
+          var sorted = ds.slice().sort(function (a, b) { return a - b; });
+          var cutD = sorted[Math.max(1, Math.floor(sorted.length * 0.18))];
+          var hc = [0, 0, 0], nh = 0, mxD = 0;
+          for (vi = 0; vi < ds.length; vi++) { if (ds[vi] > mxD) mxD = ds[vi]; if (ds[vi] <= cutD) { hc[0] += lp.basePos[vi * 3]; hc[1] += lp.basePos[vi * 3 + 1]; hc[2] += lp.basePos[vi * 3 + 2]; nh++; } }
+          if (!nh) return;
+          lp.hingeCentre = [hc[0] / nh, hc[1] / nh, hc[2] / nh];
+          lp.hingeAxis = norm(cross(flowAxis[rig], Math.abs(flowAxis[rig][0]) < 0.9 ? [1, 0, 0] : [0, 1, 0]));
+          lp.hingeRadius = Math.max(6, mxD * 0.55);
+          lp.hingeW = new Float32Array(ds.length);
+          for (j = 0; j < ds.length; j++) lp.hingeW[j] = clamp((ds[j] - cutD) / Math.max(6, mxD - cutD), 0, 1);
+        });
+      });
+    }
     /* raw = decompressed chunk ArrayBuffer; chunk = manifest chunk entry.
      * Wanted parts are extracted by per-vertex pid (atlas layout). */
     function ingestChunk(chunk, raw) {
@@ -613,10 +877,14 @@
       var pid = new Uint16Array(raw, chunk.pid, chunk.v);
       var idxU = new Uint32Array(raw, chunk.idx, chunk.i);
       /* patient-frame origin: FJ2422 bounds centre, atlas metres */
-      var lvPart = null, pi;
-      for (pi = 0; pi < manifest.parts.length; pi++) if (manifest.parts[pi].id === "FJ2422") lvPart = manifest.parts[pi];
+      var lvPart = null, liveHeart = null, pi;
+      for (pi = 0; pi < manifest.parts.length; pi++) { if (manifest.parts[pi].id === "FJ2422") lvPart = manifest.parts[pi]; if (manifest.parts[pi].id === "LIVE_heart") liveHeart = manifest.parts[pi]; }
       var org = lvPart ? [(lvPart.b[0] + lvPart.b[3]) / 2, (lvPart.b[1] + lvPart.b[4]) / 2, (lvPart.b[2] + lvPart.b[5]) / 2] : [0, 1.3, 0];
+      var liveOrg = liveHeart ? [(liveHeart.b[0] + liveHeart.b[3]) / 2, (liveHeart.b[1] + liveHeart.b[4]) / 2, (liveHeart.b[2] + liveHeart.b[5]) / 2] : org;
       function toPatient(o) { return [(posF[o] - org[0]) * 1000, (posF[o + 2] - org[2]) * 1000, (posF[o + 1] - org[1]) * 1000]; }
+      /* LIVE parts belong to a second subject: register them by the
+       * LIVE heart centre onto the BodyParts3D LV centre (same axes). */
+      function toPatientLive(o) { return [(posF[o] - liveOrg[0]) * 1000, (posF[o + 2] - liveOrg[2]) * 1000, (posF[o + 1] - liveOrg[1]) * 1000]; }
       var byPid = {};
       var ti;
       for (ti = 0; ti + 2 < idxU.length; ti += 3) {
@@ -626,23 +894,28 @@
       }
       var added = 0;
       Object.keys(byPid).forEach(function (key) {
-        var part = manifest.parts[+key]; if (!part || part.src) return;
+        var part = manifest.parts[+key]; if (!part) return;
         var sysId = (manifest.systems[part.sys] || {}).id || "";
         var role = roleForPart(part, sysId);
         if (!role) return;
         if (loadedParts.some(function (lp) { return lp.id === part.id; })) return;
+        var isLive = !!part.src;
         var tris = byPid[key], verts = {}, posArr = [], idxArr = [], cen = [0, 0, 0];
         tris.forEach(function (vi) {
-          if (verts[vi] == null) { var p = toPatient(vi * 3); verts[vi] = posArr.length / 3; posArr.push(p[0], p[1], p[2]); cen[0] += p[0]; cen[1] += p[1]; cen[2] += p[2]; }
+          if (verts[vi] == null) { var p = isLive ? toPatientLive(vi * 3) : toPatient(vi * 3); verts[vi] = posArr.length / 3; posArr.push(p[0], p[1], p[2]); cen[0] += p[0]; cen[1] += p[1]; cen[2] += p[2]; }
           idxArr.push(verts[vi]);
         });
         var nv = Math.max(1, posArr.length / 3);
         var rig = PART_RIG[part.id] || (role === "vessel" ? "vessel" : (role === "ribs" || role === "lungs" || role === "liver" || role === "chestwall" || role === "context" ? "context" : role));
         var acName = role === "ribs" ? "bone" : role === "lungs" ? "air" : role === "liver" ? "liver" : (PART_RIG[part.id] && /FJ242[02]|FJ243/.test(part.id) && PART_RIG[part.id].length <= 2 ? "valve" : (rig === "vessel" ? "blood" : "blood"));
         if (part.id === "FJ2428" || part.id === "FJ2438" || part.id === "FJ2439") acName = "myocardium";
-        loadedParts.push({ id: part.id, name: part.name, role: (role === "ribs" || role === "lungs" || role === "liver" || role === "chestwall") ? role : "bp3d", rig: rig, basePos: posArr, idx: idxArr, centroid0: [cen[0] / nv, cen[1] / nv, cen[2] / nv], acoustic: acoustic(acName) });
+        if (CAVITY_REF[part.id]) acName = "blood";
+        var lp = { id: part.id, name: part.name, role: (role === "ribs" || role === "lungs" || role === "liver" || role === "chestwall") ? role : "bp3d", rig: rig, basePos: posArr, idx: idxArr, centroid0: [cen[0] / nv, cen[1] / nv, cen[2] / nv], acoustic: acoustic(acName) };
+        rigPart(lp);
+        loadedParts.push(lp);
         added++;
       });
+      finalizeAnnuli();
       built = null;
       if (lastState) build(lastState);
       return added;
@@ -668,7 +941,22 @@
           return chain.then(function () {
             return G.fetch(base + c.url).then(function (r) { return r.arrayBuffer(); }).then(function (buf) { return inflate(buf, c.bytes); }).then(function (raw) { total += ingestChunk(c, raw); }).catch(function () { /* one chunk failing keeps the rest */ });
           });
-        }, Promise.resolve()).then(function () { return { parts: loadedParts.length, added: total, chunks: chunks.length }; });
+        }, Promise.resolve()).then(function () {
+          /* LIVE lungs/liver live in live.json (same chunk layout);
+           * BodyParts3D has ribs and bronchial trees but no lung or
+           * liver organ surface, so these two chunks complete the
+           * context set. Failure keeps the parametric fallback. */
+          if (opts.live === false) return { parts: loadedParts.length, added: total, chunks: chunks.length };
+          return G.fetch(base + "/atlas/3d/live.json").then(function (r) { return r.json(); }).then(function (lj) {
+            var wantLive = (lj.chunks || []).filter(function (c) { return c.system === "respiratory" || c.system === "digestive"; });
+            if (opts.systems) wantLive = wantLive.filter(function (c) { return opts.systems.indexOf(c.system) >= 0; });
+            return wantLive.reduce(function (chain, c) {
+              return chain.then(function () {
+                return G.fetch(base + c.url).then(function (r) { return r.arrayBuffer(); }).then(function (buf) { return inflate(buf, c.bytes); }).then(function (raw) { total += ingestChunk(c, raw); }).catch(function () {});
+              });
+            }, Promise.resolve());
+          }).catch(function () {}).then(function () { return { parts: loadedParts.length, added: total, chunks: chunks.length }; });
+        });
       });
     }
 
@@ -694,7 +982,9 @@
       ingestManifest: ingestManifest,
       ingestChunk: ingestChunk,
       loadAtlas: loadAtlas,
-      loadedParts: function () { return loadedParts.map(function (lp) { return { id: lp.id, name: lp.name, rig: lp.rig, role: lp.role }; }); },
+      loadedParts: function () { return loadedParts.map(function (lp) { return { id: lp.id, name: lp.name, rig: lp.rig, role: lp.role, baseVolMl: lp.baseVol, vertexCount: lp.basePos.length / 3 }; }); },
+      annulus: function (rig) { return annulusOf(rig); },
+      baseDescentMm: function (chamber) { return lastState ? baseDescent(chamber, lastState) : 0; },
       state: function () { return lastState; },
       createRenderer: function (canvas) { return createRenderer(canvas, api); },
       _structures: function () { return structures; }
@@ -705,9 +995,11 @@
 
   /* ---------- minimal WebGL1 renderer (own shaders, no atlas copy) --- */
   function createRenderer(canvas, geom) {
-    var gl = null, prog = null, vb = null, nb = null, ib = null, groups = [], lost = false, errors = [];
+    var gl = null, prog = null, lprog = null, vb = null, nb = null, ib = null, lb = null, groups = [], lost = false, errors = [];
     var VS = "attribute vec3 aPos; attribute vec3 aNrm; uniform mat4 uVP; varying vec3 vN; varying vec3 vP;\nvoid main(){ vN=aNrm; vP=aPos; gl_Position=uVP*vec4(aPos,1.0); }";
-    var FS = "precision mediump float; varying vec3 vN; varying vec3 vP; uniform vec3 uColor; uniform vec3 uEye;\nvoid main(){ vec3 n=normalize(vN); if(!gl_FrontFacing) n=-n; vec3 L=normalize(vec3(-0.45,0.8,0.55)); float d=max(dot(n,L),0.0); vec3 c=uColor*(0.30+0.65*d); gl_FragColor=vec4(c,1.0); }";
+    var FS = "precision mediump float; varying vec3 vN; varying vec3 vP; uniform vec3 uColor; uniform vec3 uEye; uniform vec4 uClip;\nvoid main(){ if(dot(vP,uClip.xyz)>uClip.w) discard; vec3 n=normalize(vN); if(!gl_FrontFacing) n=-n; vec3 L=normalize(vec3(-0.45,0.8,0.55)); float d=max(dot(n,L),0.0); vec3 c=uColor*(0.30+0.65*d); gl_FragColor=vec4(c,1.0); }";
+    var LVS = "attribute vec3 aPos; uniform mat4 uVP; void main(){ gl_Position=uVP*vec4(aPos,1.0); }";
+    var LFS = "precision mediump float; uniform vec3 uColor; void main(){ gl_FragColor=vec4(uColor,1.0); }";
     function compile(type, src) { var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { var e = new Error("shader: " + gl.getShaderInfoLog(s)); errors.push(String(e.message)); throw e; } return s; }
     function buildGL() {
       gl = canvas.getContext("webgl", { antialias: true, alpha: false, depth: true, preserveDrawingBuffer: false }) || canvas.getContext("experimental-webgl");
@@ -718,6 +1010,10 @@
       gl.bindAttribLocation(prog, 0, "aPos"); gl.bindAttribLocation(prog, 1, "aNrm"); gl.linkProgram(prog);
       if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error("link: " + gl.getProgramInfoLog(prog));
       vb = gl.createBuffer(); nb = gl.createBuffer(); ib = gl.createBuffer();
+      lprog = gl.createProgram();
+      gl.attachShader(lprog, compile(gl.VERTEX_SHADER, LVS)); gl.attachShader(lprog, compile(gl.FRAGMENT_SHADER, LFS));
+      gl.bindAttribLocation(lprog, 0, "aPos"); gl.linkProgram(lprog);
+      lb = gl.createBuffer();
       gl.enable(gl.DEPTH_TEST); gl.disable(gl.CULL_FACE);
       upload();
     }
@@ -753,6 +1049,10 @@
         gl.useProgram(prog);
         gl.uniformMatrix4fv(gl.getUniformLocation(prog, "uVP"), false, new Float32Array(vp));
         gl.uniform3f(gl.getUniformLocation(prog, "uEye"), eye[0], eye[1], eye[2]);
+        /* cutaway: opts.clip = {normal, origin} discards the front
+         * (normal-facing) side in the fragment shader */
+        if (opts.clip) { var cn = norm(opts.clip.normal), co2 = opts.clip.origin || [0, 0, 0]; gl.uniform4f(gl.getUniformLocation(prog, "uClip"), cn[0], cn[1], cn[2], dot(cn, co2)); }
+        else gl.uniform4f(gl.getUniformLocation(prog, "uClip"), 0, 0, 0, 1e9);
         gl.bindBuffer(gl.ARRAY_BUFFER, vb); gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 0, 0);
         gl.bindBuffer(gl.ARRAY_BUFFER, nb); gl.enableVertexAttribArray(1); gl.vertexAttribPointer(1, 3, gl.FLOAT, false, 0, 0);
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ib);
@@ -761,6 +1061,27 @@
           if (g.id === "chest_wall") continue;
           var c = colorFor(g); gl.uniform3f(gl.getUniformLocation(prog, "uColor"), c[0], c[1], c[2]);
           gl.drawElements(gl.TRIANGLES, g.indexCount, gl.UNSIGNED_INT, g.indexStart * 4);
+        }
+        /* plane-cut overlay: bright loops where the view plane cuts
+         * the meshes, drawn slightly toward the camera */
+        if (opts.overlayPlane) {
+          var op = opts.overlayPlane;
+          var polys = geom.cut(op.origin, op.normal, op.up, 300, 300);
+          var nn2 = norm(op.normal), rt = norm(cross(nn2, norm(op.up))), uu = norm(cross(rt, nn2)), lp = [];
+          polys.forEach(function (pl) {
+            for (var s = 0; s + 1 < pl.points.length; s++) {
+              [pl.points[s], pl.points[s + 1]].forEach(function (q) { var p3 = add(add(add(op.origin, mul(rt, q[0])), mul(uu, q[1])), mul(nn2, 0.6)); lp.push(p3[0], p3[1], p3[2]); });
+            }
+          });
+          if (lp.length) {
+            gl.useProgram(lprog);
+            gl.uniformMatrix4fv(gl.getUniformLocation(lprog, "uVP"), false, new Float32Array(vp));
+            gl.uniform3f(gl.getUniformLocation(lprog, "uColor"), 0.35, 0.95, 0.85);
+            gl.bindBuffer(gl.ARRAY_BUFFER, lb); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(lp), gl.DYNAMIC_DRAW);
+            gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 0, 0);
+            gl.drawArrays(gl.LINES, 0, lp.length / 3);
+            renderer.overlaySegments = lp.length / 6;
+          }
         }
         return true;
       },
