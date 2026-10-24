@@ -1,0 +1,167 @@
+{
+  "_comment": "CliniX 2.0 Presentation Library: Symptom-First Approach to the Febrile Child and Danger Signs. Reuses shared Skills as atoms and provides tiered clinical reasoning from recognition to discriminators and emergency paediatric actions.",
+  "schemaVersion": 1,
+  "id": "febrile_child",
+  "title": "Approach to the Febrile Child and Danger Signs",
+  "subtitle": "IMNCI general danger signs, fever without focus, tropical infections, and emergency paediatric triage",
+  "system": "paediatrics",
+  "estMinutes": 45,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "layers": {
+    "recognise": {
+      "redFlags": [
+        "IMNCI General Danger Signs: Inability to drink or breastfeed, vomiting everything, convulsions during present illness, and lethargy or unconsciousness",
+        "Non-blanching petechial or purpuric rash (heralds fulminant meningococcal septicaemia or severe dengue haemorrhagic fever)",
+        "Signs of meningeal irritation or raised ICP: Bulging or tense anterior fontanelle, neck stiffness, Kernig sign, Brudzinski sign, or persistent paradoxical irritability (infant cries harder when held or comforted due to spinal root stretch)",
+        "Severe respiratory distress or impending exhaustion: Expiratory grunting (glottic braking mechanism to preserve functional residual capacity), deep sternal and subcostal indrawing, stridor in a calm child, or central cyanosis (SpO2 < 92%)",
+        "Decompensated or cold septic shock: Capillary refill time (CRT) >= 3 seconds, cold mottled peripheries, feeble or absent peripheral pulses, narrow pulse pressure, and severe tachycardia disproportionate to temperature",
+        "High-risk age vulnerability: Age under 3 months with temperature >= 38.0 C (100.4 F), or neonates with hypothermia (< 35.5 C rectal / < 35.0 C axillary) signaling overwhelming bacterial sepsis"
+      ],
+      "vitalsPriorities": [
+        "Temperature and Physiological Ratio: Document temperature with an electronic axillary probe. For every 1 F rise in body temperature, expected heart rate rises by ~10 beats/min and respiratory rate by ~4 breaths/min (normal PR:RR ratio is 4:1). Tachycardia or tachypnoea out of proportion to fever indicates shock, pneumonia, or metabolic acidosis.",
+        "Age-Specific Respiratory Rate: Count respirations for a full 60 seconds when the child is calm. Fast breathing cut-offs per WHO/IMNCI: >= 60 breaths/min in infants under 2 months, >= 50 breaths/min in infants 2 to 11 months, and >= 40 breaths/min in children 12 to 59 months.",
+        "Capillary Refill Time and Peripheral Perfusion: Press firmly over the sternum or finger pulp for 5 seconds and count recovery time. CRT >= 3 seconds, cold distal extremities, and weak radial/brachial pulses mandate immediate resuscitation for septic or hypovolaemic shock."
+      ]
+    },
+    "classify": {
+      "tempo": {
+        "hyperacute_hours_to_1_day": [
+          "Fulminant Meningococcal Septicaemia",
+          "Acute Bacterial Meningitis (Streptococcus pneumoniae, Neisseria meningitidis, Haemophilus influenzae type b)",
+          "Severe Septic Shock (Gram-negative bacilli, Staphylococcus aureus)",
+          "Toxic Shock Syndrome (Staphylococcal or Streptococcal)"
+        ],
+        "acute_2_to_7_days": [
+          "Tropical Acute Fevers (Dengue, Falciparum or Vivax Malaria, Scrub Typhus, Leptospirosis)",
+          "Acute Febrile UTI or Pyelonephritis (commonest occult serious bacterial infection in infants)",
+          "Severe Community-Acquired Pneumonia or Empyema",
+          "Acute Viral Respiratory Infections (Bronchiolitis, Croup, Influenza, Adenovirus)",
+          "Acute Bacillary Dysentery or Enteric Colitis"
+        ],
+        "prolonged_or_remittent_over_7_days": [
+          "Enteric Fever (Typhoid or Paratyphoid: step-ladder or remittent pyrexia, coated tongue, relative bradycardia)",
+          "Kawasaki Disease (fever >= 5 days with mucocutaneous and nodal involvement)",
+          "Tuberculous Meningitis or Disseminated Tuberculosis",
+          "Systemic Juvenile Idiopathic Arthritis (sJIA: quotidian fever spikes with evanescent salmon-pink rash)",
+          "Deep-Seated Suppuration (Psoas abscess, Liver abscess, Infective endocarditis)"
+        ]
+      },
+      "syndromes": {
+        "fever_without_focus": [
+          "Occult Urinary Tract Infection",
+          "Occult Pneumococcal or Hib Bacteraemia",
+          "Early Enteric Fever",
+          "Early Dengue or Malaria",
+          "Bacteriuria or Pyelonephritis in infants under 12 months"
+        ],
+        "fever_with_rash": [
+          "Varicella (Day 1: pleomorphic centripetal vesicles on erythematous base)",
+          "Scarlet Fever (Day 2: punctate erythema, Pastia lines, strawberry tongue)",
+          "Measles (Day 4: morbilliform cephalocaudal rash, Koplik spots)",
+          "Scrub Typhus (Day 5: maculopapular rash, necrotic black eschar with red halo)",
+          "Dengue (Day 6: convalescent rash with islands of white in a sea of red, petechiae)",
+          "Enteric Fever (Day 7: transient faint rose spots on trunk)"
+        ],
+        "fever_with_cns_involvement": [
+          "Acute Bacterial Meningitis",
+          "Acute Encephalitis Syndrome (AES: Japanese Encephalitis, Enterovirus, HSV)",
+          "Cerebral Malaria (Plasmodium falciparum)",
+          "Febrile Convulsion (simple vs complex)"
+        ]
+      }
+    },
+    "discriminators": [
+      {
+        "title": "Simple Febrile Seizure vs Acute CNS Infection (Bacterial Meningitis / Encephalitis)",
+        "finding": "A simple febrile seizure occurs in a previously neurotypical child aged 6 months to 5 years, within 24 hours of fever onset, is generalised tonic-clonic, lasts under 15 minutes, occurs once in 24 hours, and features rapid neurological recovery to baseline within 1 hour. In contrast, CNS infections manifest persistent altered sensorium (> 1 hour postictal), meningeal signs, bulging fontanelle, focal seizures, focal neurological deficits (Todd paresis), or petechial rash.",
+        "highYield": "Persistent lethargy, obtundation, or irritability lasting more than 60 minutes after a seizure in a febrile child is bacterial meningitis or viral encephalitis until proven otherwise; it is never attributable solely to a postictal state."
+      },
+      {
+        "title": "Dengue Warning Signs vs Uncomplicated Viral Exanthem",
+        "finding": "In dengue, the critical phase coincides with defervescence (typically days 3 to 7 of illness) when plasma leakage accelerates. Warning signs indicating progression to severe dengue include: persistent vomiting, severe abdominal pain or tenderness, lethargy or restlessness, clinical fluid accumulation (ascites, pleural effusion), mucosal bleeding (epistaxis, gum bleed), tender hepatomegaly (> 2 cm below costal margin), and high haematocrit with rapid platelet drop.",
+        "highYield": "The danger phase in dengue begins as the fever drops: defervescence marks the onset of plasma leakage and hypovolaemic shock, not recovery."
+      },
+      {
+        "title": "Scrub Typhus vs Enteric Fever",
+        "finding": "Scrub typhus presents with acute high fever, headache, severe myalgia, suffused eyes, generalised lymphadenopathy, hepatosplenomegaly, and a pathognomonic eschar (painless black necrotic crust with an erythematous border, resembling a cigarette burn, hidden in skin folds, groin, axilla, or perineum). Enteric fever presents with insidious step-ladder or remittent pyrexia, relative bradycardia (Faget sign), coated typhoid tongue with red edges, abdominal distension, and soft splenomegaly without an eschar.",
+        "highYield": "A meticulous search of the perineum, groin, axillae, and retroauricular folds for an eschar is mandatory in every child with acute febrile illness in endemic regions; finding an eschar confirms scrub typhus."
+      },
+      {
+        "title": "Kawasaki Disease vs Measles and Scarlet Fever",
+        "finding": "Kawasaki disease is diagnosed by persistent fever for 5 or more days plus at least 4 of 5 classic clinical criteria: (1) bilateral non-exudative bulbar conjunctival injection sparing the limbus, (2) oral mucosal changes (erythematous dry cracked lips, strawberry tongue, diffuse oropharyngeal erythema), (3) extremity changes (erythema of palms/soles, indurative oedema of hands/feet, periungual desquamation in convalescence), (4) polymorphous rash without vesicles, and (5) acute unilateral non-purulent cervical lymphadenopathy (> 1.5 cm). Measles features prominent cough, coryza, conjunctivitis (the 3 Cs), Koplik spots, and cephalocaudal progression.",
+        "highYield": "Kawasaki disease is a medical emergency because untreated patients carry a 20-25% risk of developing coronary artery aneurysms, reducible to < 4% with prompt IVIG."
+      }
+    ],
+    "dontMiss": [
+      {
+        "disease": "Fulminant Meningococcal Septicaemia / Acute Bacterial Meningitis",
+        "clue": "Febrile child with non-blanching petechial or purpuric purpura fulminans, bulging fontanelle, neck stiffness, toxic lethargy, or rapid circulatory collapse.",
+        "action": "Immediate emergency resuscitation: secure airway, deliver 100% oxygen, draw rapid blood cultures, and administer parenteral third-generation cephalosporin (IV ceftriaxone or cefotaxime) immediately without delaying for lumbar puncture. If shocked, give rapid crystalloid boluses and prepare inotropic support."
+      },
+      {
+        "disease": "Severe Falciparum Malaria / Cerebral Malaria",
+        "clue": "Fever in an endemic zone with impaired consciousness, recurrent generalised convulsions, severe pallor (Hb < 5 g/dL), jaundice, deep acidotic breathing (respiratory distress), or hypoglycaemia.",
+        "action": "Check bedside glucose and emergency blood smear / rapid diagnostic test (RDT) immediately; initiate parenteral artesunate IV/IM at 0, 12, and 24 hours, treat hypoglycaemia with IV dextrose bolus, and avoid over-hydration to prevent cerebral and pulmonary oedema."
+      },
+      {
+        "disease": "Severe Dengue with Hypovolaemic Plasma Leak Shock",
+        "clue": "Child at day 3 to 6 of illness becoming afebrile but deteriorating with cold clammy extremities, CRT >= 3 seconds, narrow pulse pressure (<= 20 mmHg), severe abdominal pain, and rising haematocrit with precipitous thrombocytopenia.",
+        "action": "Immediate graded isotonic crystalloid resuscitation (Ringer lactate or normal saline), titrate against vitals, haematocrit, and urine output (target >= 0.5-1 mL/kg/h); avoid unnecessary transfusions or unguided fluid boluses that precipitate massive pleural effusion and pulmonary oedema."
+      },
+      {
+        "disease": "Septic Shock with Myocardial Depression",
+        "clue": "Fever or hypothermia with refractory tachycardia, weak thready pulses, prolonged CRT, cold mottled extremities (cold shock) or wide pulse pressure with bounding pulses (warm shock), and altered sensorium.",
+        "action": "Administer rapid crystalloid fluid bolus (10-20 mL/kg over 10 to 20 minutes) while observing closely for hepatomegaly or crackles (fluid overload); initiate early vasoactive infusions (noradrenaline for warm shock, adrenaline for cold shock) if shock persists after 40-60 mL/kg, and administer broad-spectrum IV antibiotics within the first hour."
+      }
+    ],
+    "investigations": {
+      "step1_immediate": [
+        "Bedside Capillary Blood Glucose (rule out sepsis-induced or malaria-induced hypoglycaemia < 54 mg/dL)",
+        "Rapid Malaria Diagnostic Test (RDT) and Thick and Thin Blood Smears (Giemsa stain for species and parasite density)",
+        "Dengue Duo Serology: NS1 Antigen (Days 1 to 5) and IgM / IgG Antibodies (Day 5 onwards)",
+        "Urinalysis and Clean-Catch / Catheter Urine Dipstick and Microscopy (leukocyte esterase, nitrites, pyuria in fever without focus)",
+        "Complete Blood Count (CBC) with Peripheral Smear (leukocytosis or leukopenia, band forms, thrombocytopenia, toxic granulation)"
+      ],
+      "step2_urgent": [
+        "Paired Blood Cultures (prior to antibiotic administration, without delaying therapy in shocked children)",
+        "Acute Phase Reactants: C-Reactive Protein (CRP) and Serum Procalcitonin",
+        "Serum Electrolytes, Blood Urea, Serum Creatinine, and Liver Function Tests (assess multi-organ dysfunction)",
+        "Lumbar Puncture and CSF Analysis (cell count, differential, protein, glucose, Gram stain, bacterial culture, and viral PCR) once intracranial pressure and hemodynamic stability are assured",
+        "Chest Radiograph (PA / AP view) in tachypnoeic, grunting, or hypoxic children to confirm consolidation or empyema"
+      ],
+      "step3_confirmatory": [
+        "Scrub Typhus IgM ELISA or Rapid Immunochromatographic Test (and Weil-Felix agglutination OX-K if ELISA unavailable)",
+        "Blood Culture for Salmonella enterica serovars Typhi/Paratyphi (and Typhidot / Widal as supportive test after 7-10 days)",
+        "Transthoracic Echocardiogram (TTE) in suspected Kawasaki disease (coronary artery diameter Z-scores, ectasia, aneurysms) or infective endocarditis",
+        "Abdominal and Pelvic Ultrasonography (detect occult deep abscess, acalculous cholecystitis, mesenteric lymphadenitis, or pyelonephritis)"
+      ]
+    },
+    "skills": [
+      "skill.hx.paed.presenting_complaint",
+      "skill.gen.paed.vitals",
+      "skill.gen.paed.appearance",
+      "skill.gen.paed.hydration",
+      "skill.exam.paed.cns.meningeal",
+      "skill.exam.paed.resp.distress_grunt",
+      "skill.proc.paed.lumbar_puncture",
+      "skill.annex.paed.csf_analysis",
+      "skill.tx.paed.resuscitation_drugs"
+    ],
+    "examPearls": [
+      {
+        "topic": "Paradoxical Irritability in Meningitis",
+        "text": "In infants under 12 to 18 months, classic nuchal rigidity and Kernig sign are absent in over 50% of bacterial meningitis cases. Instead, look for paradoxical irritability: a normal sick child is comforted and quietened when picked up and rocked by the parent, whereas an infant with meningitis cries more violently when held or rocked because flexion of the spinal column stretches inflamed meninges and spinal nerve roots."
+      },
+      {
+        "topic": "Glottic Grunting: The Physiological PEEP Brake",
+        "text": "Expiratory grunting is not a throat noise; it is a vital compensatory physiological mechanism. The distressed child partially closes the vocal cords during expiration against an open thorax, creating intrinsic positive end-expiratory pressure (PEEP) to prevent alveolar collapse and maintain functional residual capacity. Grunting is an ominous red flag indicating severe parenchymal lung disease (severe pneumonia, ARDS) or profound metabolic acidosis with air hunger."
+      },
+      {
+        "topic": "The Defervescence Trap in Dengue and Typhoid",
+        "text": "Never equate a falling temperature with clinical improvement in tropical fevers. In dengue, the onset of severe plasma leakage and hypovolaemic shock occurs precisely during defervescence (days 3 to 7). In typhoid, defervescence accompanied by sudden severe abdominal pain, tachycardia, and tenderness signals ileal perforation, requiring immediate surgical intervention rather than reassurance."
+      }
+    ]
+  }
+}

@@ -1,0 +1,1341 @@
+{
+  "_comment": "Authorised CliniX disease pathway for Gestational trophoblastic disease. Grounded in StewardMD Clinical KB and standard guidelines.",
+  "id": "gestational-trophoblastic-disease",
+  "name": "Gestational trophoblastic disease",
+  "fullName": "Gestational trophoblastic disease: Hydatidiform mole and neoplasia",
+  "system": "obgyn",
+  "kbRef": "gestational_trophoblastic_disease",
+  "oneLine": "Early pregnancy bleeding with passage of vesicles, hyperemesis, enlarged uterus for dates, markedly elevated hCG, suction evacuation and structured surveillance",
+  "estMinutes": 35,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "skills": [
+        "skill.gestationa.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position",
+        "skill.approach.obg.intimate_consent"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": "Confirm maternal age at booking, gravidity, parity, and exact date of last menstrual period to identify extremes of age and establish reliable gestational dating."
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.booking_lmp",
+        "skill.hx.obg.menstrual_history",
+        "skill.hx.obg.gynae_symptoms"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": "Explore the duration, colour and volume of vaginal bleeding, noting whether prune-juice discharge or grape-like vesicular tissue was passed per vaginam.",
+        "skill.hx.obg.booking_lmp": "Establish whether menstrual cycles were previously regular to distinguish true size-dates discrepancy from miscalculated menstrual dates.",
+        "skill.hx.obg.gynae_symptoms": "Ask specifically about intractable nausea and vomiting (hyperemesis), lower abdominal fullness, palpitations, tremors, and severe frontal headache."
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "skills": [
+        "skill.hx.obg.medical_family_drug",
+        "skill.hx.obg.previous_pregnancies",
+        "skill.hx.obg.gynae_background",
+        "skill.hx.gestationa.risk"
+      ],
+      "emphasis": {
+        "skill.hx.obg.previous_pregnancies": "Ask carefully about prior molar pregnancies or early miscarriages, as a history of hydatidiform mole significantly increases the risk of recurrence."
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": "Look for pallor indicating blood loss, signs of dehydration from hyperemesis, and fine peripheral tremors reflecting beta-hCG driven thyrotoxicosis.",
+        "skill.gen.vitals": "Check for tachycardia from hyperthyroidism or anaemia, and evaluate blood pressure for early-onset pre-eclampsia developing before twenty weeks.",
+        "skill.gen.edema": "Assess for early facial and dependent pitting pedal oedema accompanying early-onset pre-eclampsia."
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Pelvic and abdominal examination",
+      "skills": [
+        "skill.exam.obg.gynae_abdominal",
+        "skill.exam.obg.vulval_inspect",
+        "skill.exam.obg.speculum_insert",
+        "skill.exam.obg.speculum_inspect",
+        "skill.exam.obg.bimanual",
+        "skill.approach.obg.pelvic_close"
+      ],
+      "emphasis": {
+        "skill.exam.obg.gynae_abdominal": "Palpate the symmetrically enlarged, doughy uterus and compare fundal height to menstrual dates; auscultate with Doppler to confirm the absence of fetal heart sounds.",
+        "skill.exam.obg.speculum_inspect": "Inspect the cervix for dilatation, prune-juice blood discharge, or protruding vesicles, and carefully examine vaginal walls for purple metastatic choriocarcinoma nodules.",
+        "skill.exam.obg.bimanual": "Assess uterine consistency, mobility, and size, and palpate both adnexae for bilateral, multilocular, cystic theca lutein cysts."
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the molar pregnancy picture together",
+      "skills": [
+        "skill.gestationa.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "skills": [
+        "skill.gestationa.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "skills": [
+        "skill.gestationa.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "skills": [
+        "skill.ix.gestationa.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and staging",
+      "skills": [
+        "skill.gestationa.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "skills": [
+        "skill.tx.gestationa",
+        "skill.approach.obg.contra_counsel",
+        "skill.annex.gestationa.figo_score"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "skills": [
+        "skill.present.case",
+        "skill.present.gestationa.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.gestationa.suction_counsel",
+        "title": "Molar pregnancy diagnosis, evacuation planning and post-molar surveillance counselling",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.obg.intimate_consent",
+          "skill.gestationa.basics",
+          "skill.ix.gestationa.workup",
+          "skill.tx.gestationa",
+          "skill.approach.obg.contra_counsel"
+        ],
+        "examinerQuestions": [
+          "Why must oxytocic infusions be avoided prior to the initiation of suction curettage in a large hydatidiform mole?",
+          "What is the rationale for prescribing strict contraception during post-molar serial beta-hCG surveillance?",
+          "Which criteria establish the clinical diagnosis of post-molar gestational trophoblastic neoplasia?"
+        ]
+      },
+      {
+        "id": "osce.gestationa.pelvic_workup",
+        "title": "Examination, imaging and risk stratification in gestational trophoblastic disease",
+        "seconds": 360,
+        "skills": [
+          "skill.exam.obg.gynae_abdominal",
+          "skill.exam.obg.bimanual",
+          "skill.gestationa.signs",
+          "skill.gestationa.diagnosis",
+          "skill.annex.gestationa.figo_score"
+        ],
+        "examinerQuestions": [
+          "What is the clinical significance of bilateral cystic adnexal masses palpated on bimanual examination in this presentation?",
+          "Which anatomical site is the most common location for distant hematogenous metastasis in gestational trophoblastic neoplasia?",
+          "How does the FIGO prognostic score distinguish low-risk from high-risk gestational trophoblastic neoplasia, and how does this change chemotherapy?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.gestationa.basics",
+      "skill.exam.obg.bimanual",
+      "skill.gestationa.signs",
+      "skill.gestationa.differential",
+      "skill.ix.gestationa.workup",
+      "skill.gestationa.diagnosis",
+      "skill.tx.gestationa",
+      "skill.annex.gestationa.figo_score"
+    ]
+  },
+  "skills": {
+    "skill.gestationa.basics": {
+      "id": "skill.gestationa.basics",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "What gestational trophoblastic disease is",
+      "oneLine": "The clinical and pathological spectrum from hydatidiform mole to malignant gestational trophoblastic neoplasia",
+      "why": "Understanding the biological spectrum, genomic origins, and differing malignant potential of complete mole, partial mole, choriocarcinoma, and rare trophoblastic tumours is fundamental to timely diagnosis, appropriate intervention, and preventing progression to invasive or metastatic disease.",
+      "teach": [
+        {
+          "heading": "The spectrum of gestational trophoblastic disease",
+          "body": "Gestational trophoblastic disease comprises a heterogeneous group of proliferative disorders arising from the placental trophoblast.\n\nThe spectrum encompasses benign premalignant hydatidiform moles (complete and partial) and malignant gestational trophoblastic neoplasia (GTN).\n\nGestational trophoblastic neoplasia includes invasive mole, choriocarcinoma, placental site trophoblastic tumour, and epithelioid trophoblastic tumour."
+        },
+        {
+          "heading": "Complete versus partial hydatidiform mole",
+          "table": {
+            "cols": [
+              "Feature",
+              "Complete Mole",
+              "Partial Mole"
+            ],
+            "rows": [
+              [
+                "Karyotype",
+                "Diploid 46,XX (90%) or 46,XY (androgenetic)",
+                "Triploid 69,XXX, 69,XXY, or 69,XYY"
+              ],
+              [
+                "Genomic origin",
+                "Duplication of sperm in empty anucleate ovum",
+                "Dispermic fertilisation of a normal haploid ovum"
+              ],
+              [
+                "Fetal tissue",
+                "Completely absent",
+                "Often present, abnormal and non-viable"
+              ],
+              [
+                "Villous swelling",
+                "Diffuse hydropic swelling with central cisterns",
+                "Focal villous hydrops with scalloping"
+              ],
+              [
+                "Trophoblast hyperplasia",
+                "Diffuse circumferential proliferation",
+                "Focal and mild proliferation"
+              ],
+              [
+                "Risk of GTN",
+                "15 to 20 percent",
+                "1 to 5 percent"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Invasive mole and choriocarcinoma",
+          "body": "An invasive mole arises almost exclusively from a hydatidiform mole and is characterised by the presence of edematous chorionic villi directly invading the myometrium and uterine vasculature, potentially causing uterine perforation.\n\nChoriocarcinoma is a frankly malignant, highly vascular anaplastic tumour composed of sheets of syncytiotrophoblast and cytotrophoblast without formed chorionic villi.\n\nChoriocarcinoma can develop after any gestation: approximately fifty percent arise after a hydatidiform mole, twenty-five percent after a normal term pregnancy, and twenty-five percent following a spontaneous miscarriage or ectopic gestation.\n\nHaematogenous dissemination occurs early, with a high propensity for pulmonary, vaginal, hepatic, and cerebral metastases."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the genetic origin and karyotype of a typical complete hydatidiform mole?",
+          "a": "It is diploid (most commonly 46,XX) and androgenetic, arising when an empty ovum lacking maternal chromosomes is fertilised by a single sperm that duplicates its genome.",
+          "accept": [
+            "diploid",
+            "46,xx",
+            "androgenetic",
+            "empty ovum",
+            "paternal"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How does the genetic composition of a partial hydatidiform mole differ from that of a complete mole?",
+          "a": "A partial mole is triploid (typically 69,XXY or 69,XXX), resulting from fertilisation of a normal haploid ovum by two spermatozoa or a single diploid sperm.",
+          "accept": [
+            "triploid",
+            "69,xxy",
+            "69,xxx",
+            "dispermic",
+            "two sperm"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What is the key histological difference between choriocarcinoma and an invasive mole?",
+          "a": "Choriocarcinoma consists of sheets of anaplastic trophoblast without formed chorionic villi, whereas an invasive mole retains distinct chorionic villi invading the myometrium.",
+          "accept": [
+            "chorionic villi",
+            "villi",
+            "no villi",
+            "absence of villi",
+            "anaplastic"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gestational_trophoblastic_disease: clinicalPearls"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Gestational Trophoblastic Disease: Classification and Pathology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.gestationa.signs": {
+      "id": "skill.gestationa.signs",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "The molar pregnancy picture",
+      "oneLine": "Recognising the clinical manifestations of excessive trophoblast proliferation, size-dates discrepancy, and hCG-driven complications",
+      "why": "Molar pregnancy classically presents with a constellation of symptoms and signs driven by expanding intrauterine molar vesicles and hypersecretion of human chorionic gonadotropin. Early identification prevents emergency presentations with severe haemorrhage, pre-eclampsia, or thyrotoxic crisis.",
+      "teach": [
+        {
+          "heading": "Presenting symptoms: bleeding, hyperemesis, and vesicle passage",
+          "body": "The classic presentation of a hydatidiform mole includes irregular or continuous dark brown vaginal bleeding in the first trimester, commonly described as prune-juice discharge.\n\nMarked trophoblastic proliferation leads to hypersecretion of beta-hCG, which triggers intractable nausea and vomiting (hyperemesis gravidarum) in up to a quarter of women.\n\nSpontaneous passage of grape-like vesicles per vaginam is pathognomonic of molar pregnancy, although it occurs in only a minority of patients prior to evacuation."
+        },
+        {
+          "heading": "Physical examination hallmarks",
+          "table": {
+            "cols": [
+              "Finding",
+              "Mechanism",
+              "Clinical Significance"
+            ],
+            "rows": [
+              [
+                "Uterus large for dates",
+                "Proliferating molar villi and accumulated blood",
+                "Present in about half of complete moles; doughy and elastic"
+              ],
+              [
+                "Absent fetal heart sounds",
+                "No embryo or functional fetal circulation",
+                "Doppler is silent despite fundal height exceeding 12 to 14 weeks"
+              ],
+              [
+                "Bilateral theca lutein cysts",
+                "Massive beta-hCG ovarian hyperstimulation",
+                "Multilocular cysts in 20 to 30%; regress after evacuation"
+              ],
+              [
+                "Early pre-eclampsia",
+                "Excess anti-angiogenic factors from trophoblast",
+                "Hypertension and proteinuria developing before 20 weeks gestation"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Endocrine and cardiopulmonary complications",
+          "body": "Because human chorionic gonadotropin shares an identical alpha subunit and significant structural homology with thyroid-stimulating hormone, massive hCG concentrations cross-react with thyroid follicular receptors.\n\nThis cross-reactivity provokes clinical or biochemical hyperthyroidism, presenting with resting tachycardia, warm skin, tremors, and systolic hypertension.\n\nDuring uterine contractions or instrumentation, molar tissue fragments can deport into the uterine venous sinuses and pulmonary vasculature, causing acute dyspnoea, tachypnoea, chest tightness, and respiratory distress."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the most frequent presenting clinical symptom of a hydatidiform mole?",
+          "a": "Irregular vaginal bleeding during early pregnancy, typically described as dark brown or prune-juice discharge.",
+          "accept": [
+            "vaginal bleeding",
+            "bleeding",
+            "prune juice",
+            "dark brown",
+            "early pregnancy"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does a woman with a complete hydatidiform mole develop bilateral theca lutein cysts?",
+          "a": "Proliferating syncytiotrophoblast secretes astronomical levels of beta-hCG, which binds to ovarian LH and FSH receptors, stimulating bilateral luteinisation of the theca interna cells.",
+          "accept": [
+            "beta-hcg",
+            "hcg",
+            "hyperstimulation",
+            "theca interna",
+            "luteinisation",
+            "ovarian"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How does excessive beta-hCG in molar pregnancy cause clinical features of hyperthyroidism?",
+          "a": "Due to molecular homology between the beta subunits of hCG and TSH, extremely high hCG concentrations directly stimulate thyroid TSH receptors, triggering excess thyroid hormone secretion.",
+          "accept": [
+            "homology",
+            "tsh",
+            "receptor",
+            "thyroid",
+            "cross react",
+            "thyrotoxicosis"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gestational_trophoblastic_disease: clinicalPearls"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Gestational Trophoblastic Disease: Clinical Manifestations"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.gestationa.summary": {
+      "id": "skill.gestationa.summary",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "The clinical summary",
+      "oneLine": "Synthesising early pregnancy bleeding, uterine enlargement, vesicles, and endocrine findings into a coherent problem representation",
+      "why": "Formulating a tight, structured clinical summary distils disparate historical cues and examination findings into an actionable syndrome statement that prioritises definitive pelvic ultrasound and quantitative hCG over routine pregnancy care.",
+      "teach": [
+        {
+          "heading": "Constructing the problem representation",
+          "body": "A disciplined summary starts with patient age, gravidity, parity, and precise gestational age calculated from the last menstrual period.\n\nIt states the key presenting symptoms, emphasising the duration of vaginal bleeding, dark brown discharge, intractable nausea, and any passage of vesicular tissue.\n\nIt contrasts the physical examination findings against gestational age, highlighting uterine size greater than dates, absence of fetal heart sounds, and any bilateral ovarian masses."
+        },
+        {
+          "heading": "Synthesising risks and systemic complications",
+          "body": "The clinical synthesis identifies whether features of early pre-eclampsia, thyrotoxicosis, or respiratory compromise are present.\n\nIt documents haemodynamic stability and baseline haemoglobin, explicitly noting whether emergency resuscitation or urgent surgical evacuation is warranted.\n\nFinally, it establishes the diagnostic plan: bedside transvaginal ultrasound, quantitative beta-hCG, baseline organ profiles, and cross-matching of blood."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What core clinical triad should be highlighted in a summary of complete hydatidiform mole?",
+          "a": "Amenorrhoea with early pregnancy bleeding, uterine fundal height disproportionately larger than gestational dates, and absence of fetal heart activity.",
+          "accept": [
+            "bleeding",
+            "amenorrhoea",
+            "larger than dates",
+            "size dates",
+            "absent fetal heart"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which three systemic complications should be explicitly addressed in the problem representation of a large mole?",
+          "a": "Early-onset pre-eclampsia before twenty weeks, hCG-mediated clinical hyperthyroidism, and severe anaemia from persistent blood loss.",
+          "accept": [
+            "pre-eclampsia",
+            "preeclampsia",
+            "hyperthyroidism",
+            "thyrotoxicosis",
+            "anaemia",
+            "anemia"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gestational_trophoblastic_disease: clinicalPearls"
+        },
+        {
+          "source": "Berek and Novak's Gynecology",
+          "locator": "Gestational Trophoblastic Disease: Clinical Evaluation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.gestationa.differential": {
+      "id": "skill.gestationa.differential",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Differential diagnosis",
+      "oneLine": "Distinguishing molar pregnancy from threatened miscarriage, ectopic pregnancy, multiple gestation, and uterine fibroid",
+      "why": "Any early pregnancy with vaginal bleeding and abdominal symptoms requires careful differentiation. Conflating a hydatidiform mole with a simple threatened miscarriage delays urgent suction evacuation and increases the risk of haemorrhage, uterine perforation, and untreated neoplasia.",
+      "teach": [
+        {
+          "heading": "Early pregnancy bleeding differentials",
+          "table": {
+            "cols": [
+              "Condition",
+              "Uterine Size",
+              "Serum Beta-hCG",
+              "Key Discriminator"
+            ],
+            "rows": [
+              [
+                "Complete Mole",
+                "Larger than dates (50%)",
+                "Markedly elevated (>100,000 mIU/mL)",
+                "Snowstorm appearance on ultrasound, no fetus"
+              ],
+              [
+                "Threatened Miscarriage",
+                "Equal to dates",
+                "Appropriate for dates",
+                "Live fetus with cardiac activity, closed os"
+              ],
+              [
+                "Incomplete Miscarriage",
+                "Smaller than dates",
+                "Falling or low for dates",
+                "Open cervical os, heterogeneous retained products"
+              ],
+              [
+                "Ectopic Pregnancy",
+                "Smaller than dates or normal",
+                "Subnormal rise or plateau",
+                "Empty uterine cavity, adnexal mass, pelvic pain"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Multiple pregnancy and fibroids in pregnancy",
+          "body": "Multiple pregnancy (twin gestation) presents with uterine fundal height greater than dates and elevated beta-hCG levels, which can mimic a molar pregnancy on initial clinical examination.\n\nHowever, ultrasound readily resolves the diagnostic uncertainty by identifying two or more discrete gestational sacs with separate viable fetal poles and normal placental architecture.\n\nA singleton pregnancy coexisting with uterine leiomyomas produces marked uterine enlargement and irregular contour, but ultrasound distinguishes discrete myometrial fibroids from a normal intrauterine gestation."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How does ultrasound definitively distinguish a complete hydatidiform mole from a threatened miscarriage?",
+          "a": "A complete mole shows an enlarged uterine cavity filled with a heterogeneous, diffuse vesicular snowstorm pattern with no gestational sac or fetus, whereas threatened miscarriage reveals a viable fetus with cardiac activity.",
+          "accept": [
+            "snowstorm",
+            "vesicular",
+            "no fetus",
+            "gestational sac",
+            "cardiac activity",
+            "viable"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why can multiple gestation be confused with a hydatidiform mole on clinical grounds?",
+          "a": "Both conditions present with uterine fundal height significantly larger than dates and elevated serum beta-hCG levels, often accompanied by exaggerated nausea and vomiting.",
+          "accept": [
+            "larger than dates",
+            "fundal height",
+            "beta-hcg",
+            "hcg",
+            "vomiting",
+            "nausea"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What clinical and sonographic features differentiate an incomplete miscarriage from a molar gestation?",
+          "a": "Incomplete miscarriage presents with an open cervical os, uterine size smaller than dates, and falling hCG, while complete mole features a closed or partially open os, uterine size often larger than dates, markedly raised hCG, and a diffuse vesicular pattern.",
+          "accept": [
+            "smaller than dates",
+            "falling hcg",
+            "snowstorm",
+            "vesicular",
+            "larger than dates"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gestational_trophoblastic_disease: additionalDifferentials"
+        },
+        {
+          "source": "RCOG",
+          "locator": "Green-top Guideline No. 38: Differential Diagnosis of Gestational Trophoblastic Disease"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.gestationa.workup": {
+      "id": "skill.ix.gestationa.workup",
+      "kind": "investigation",
+      "system": "obgyn",
+      "title": "Diagnostic workup in suspected molar pregnancy",
+      "oneLine": "Quantitative hCG measurement, pelvic ultrasonography, histopathological confirmation, and baseline organ profiling",
+      "why": "A structured investigation sequence establishes definitive diagnosis, screens for systemic endocrine and haematological complications, excludes metastatic disease, and provides essential baseline values for post-evacuation oncological surveillance.",
+      "teach": [
+        {
+          "heading": "Quantitative serum beta-hCG and ultrasonography",
+          "body": "Quantitative measurement of serum beta-hCG is the central biochemical marker in gestational trophoblastic disease.\n\nIn complete hydatidiform mole, circulating concentrations typically exceed 100,000 mIU/mL and can surpass 500,000 mIU/mL, far exceeding the normal peak for gestational age.\n\nPelvic ultrasound (transvaginal and transabdominal) is the primary imaging modality: complete mole displays a classic snowstorm or vesicular pattern consisting of a heterogeneous, echogenic intrauterine mass containing multiple diffuse microcystic sonolucencies without an identifiable gestational sac or embryo.\n\nBilateral multiseptated theca lutein cysts (spoke-wheel pattern) measuring five centimetres or greater may be visualised in the ovaries."
+        },
+        {
+          "heading": "Pre-evacuation laboratory evaluation and chest radiography",
+          "body": "A thorough laboratory evaluation must precede surgical evacuation:\n\nComplete blood count to quantify microcytic anaemia resulting from recurrent uterine bleeding;\n\nBlood group and Rhesus antibody screen to identify Rh-negative women requiring anti-D immunoglobulin;\n\nThyroid function tests (TSH, free T4) to detect biochemical or clinical hyperthyroidism driven by massive hCG cross-reactivity;\n\nSerum creatinine, electrolytes, liver function tests, and coagulation profile (PT, INR, aPTT, fibrinogen) to assess baseline organ function.\n\nA pre-evacuation chest radiograph with abdominal shielding is mandatory to exclude pulmonary metastases and provide a baseline for pulmonary embolisation."
+        },
+        {
+          "heading": "Histopathological and immunohistochemical confirmation",
+          "body": "Histological evaluation of all evacuated uterine tissue is the gold standard for diagnosis and differentiation.\n\nComplete mole exhibits diffuse circumferential trophoblastic proliferation, marked hydropic swelling of all chorionic villi, and central cisternal cavitation with absent fetal red blood cells.\n\nImmunohistochemical staining for p57 (a paternally imprinted, maternally expressed nuclear protein) is completely negative in cytotrophoblast and villous stroma of complete moles due to absent maternal genome, whereas partial moles are p57 positive."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the characteristic ultrasound appearance of a complete hydatidiform mole?",
+          "a": "A heterogeneous intrauterine mass with diffuse microcystic spaces producing a classic snowstorm or vesicular appearance, with no identifiable gestational sac or fetus.",
+          "accept": [
+            "snowstorm",
+            "vesicular",
+            "microcystic",
+            "no fetus",
+            "no gestational sac"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why is a chest radiograph mandatory prior to evacuation of a complete mole?",
+          "a": "To rule out asymptomatic pulmonary metastases and establish a baseline to monitor for potential trophoblastic embolisation during evacuation.",
+          "accept": [
+            "pulmonary metastases",
+            "metastasis",
+            "lungs",
+            "trophoblastic embolisation",
+            "chest"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How does p57 immunohistochemical staining distinguish a complete from a partial hydatidiform mole?",
+          "a": "Complete moles lack maternal genome and are p57 negative in villous stroma and cytotrophoblast, whereas partial moles contain a maternal chromosome set and are p57 positive.",
+          "accept": [
+            "p57",
+            "negative",
+            "positive",
+            "maternal genome",
+            "immunohistochemistry"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gestational_trophoblastic_disease: additionalInvestigations"
+        },
+        {
+          "source": "Williams Obstetrics",
+          "locator": "Gestational Trophoblastic Disease: Diagnostic Evaluation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.gestationa.diagnosis": {
+      "id": "skill.gestationa.diagnosis",
+      "kind": "reasoning",
+      "system": "obgyn",
+      "title": "Diagnosis and FIGO staging of gestational trophoblastic neoplasia",
+      "oneLine": "Diagnostic criteria for post-molar neoplasia, anatomical staging, and prognostic risk stratification",
+      "why": "Distinguishing benign hydatidiform mole from gestational trophoblastic neoplasia dictates whether surgical evacuation alone is curative or whether systemic cytotoxic chemotherapy is lifesaving.",
+      "teach": [
+        {
+          "heading": "FIGO criteria for diagnosing post-molar GTN",
+          "body": "Gestational trophoblastic neoplasia is diagnosed during post-molar serial hCG surveillance when any of the following international FIGO criteria are met:\n\n1. An hCG plateau across four consecutive weekly values over at least three weeks (days 1, 7, 14, and 21);\n\n2. An hCG rise of ten percent or greater across three consecutive weekly values over at least two weeks (days 1, 7, and 14);\n\n3. Persistence of detectable serum beta-hCG six months or more following surgical evacuation;\n\n4. A histological diagnosis of choriocarcinoma."
+        },
+        {
+          "heading": "FIGO anatomical staging system for GTN",
+          "table": {
+            "cols": [
+              "Stage",
+              "Anatomical Extent",
+              "Clinical Characteristics"
+            ],
+            "rows": [
+              [
+                "Stage I",
+                "Strictly confined to uterine corpus",
+                "Most common; confined to myometrium"
+              ],
+              [
+                "Stage II",
+                "Extends to genital structures",
+                "Involves vagina, fallopian tubes, ovaries, or broad ligament"
+              ],
+              [
+                "Stage III",
+                "Extends to lungs",
+                "Pulmonary metastasis with or without genital involvement"
+              ],
+              [
+                "Stage IV",
+                "Distant metastases to other organs",
+                "Involves brain, liver, kidneys, or gastrointestinal tract"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "WHO/FIGO prognostic risk stratification",
+          "body": "Once gestational trophoblastic neoplasia is diagnosed, anatomical staging is combined with the WHO prognostic scoring system based on eight independent risk factors.\n\nPatients scoring zero to six are classified as low risk: they have an almost one hundred percent cure rate and are treated primarily with single-agent chemotherapy (intramuscular methotrexate or actinomycin D).\n\nPatients scoring seven or higher are classified as high risk: they require upfront multi-agent chemotherapy, most commonly the EMA-CO regimen (etoposide, methotrexate, actinomycin D, cyclophosphamide, and vincristine)."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What hCG pattern on serial post-evacuation surveillance defines gestational trophoblastic neoplasia?",
+          "a": "An hCG plateau across four values over three weeks, an hCG rise of ten percent or more across three values over two weeks, or persistent detectable hCG at six months.",
+          "accept": [
+            "plateau",
+            "four values",
+            "rise",
+            "ten percent",
+            "three values",
+            "six months"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the anatomical definition of FIGO Stage III gestational trophoblastic neoplasia?",
+          "a": "Tumour extension to the lungs, with or without known genital tract involvement.",
+          "accept": [
+            "lungs",
+            "pulmonary",
+            "stage iii",
+            "genital tract"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How does the FIGO prognostic score divide patients with GTN into treatment categories?",
+          "a": "A score of 0 to 6 is low risk, treated with single-agent chemotherapy, whereas a score of 7 or higher is high risk, requiring multi-agent chemotherapy.",
+          "accept": [
+            "0 to 6",
+            "low risk",
+            "7 or higher",
+            "high risk",
+            "single agent",
+            "multi-agent"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gestational_trophoblastic_neoplasia: clinicalPearls"
+        },
+        {
+          "source": "FOGSI",
+          "locator": "Good Clinical Practice Recommendations: Gestational Trophoblastic Neoplasia"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.gestationa": {
+      "id": "skill.tx.gestationa",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Managing gestational trophoblastic disease",
+      "oneLine": "Suction evacuation technique, medical stabilization, anti-D prophylaxis, serial hCG surveillance, and chemotherapy referral",
+      "why": "Safe evacuation of a vascular molar uterus prevents catastrophic haemorrhage, uterine perforation, and trophoblastic embolisation, while disciplined serial hCG surveillance and reliable contraception ensure persistent neoplasia is caught early and cured.",
+      "dosingNote": "Dosing note: CliniX does not prescribe. Doses quoted are from StewardMD Clinical KB and national guidelines (FOGSI, RCOG) for educational review only. Administer anti-D immunoglobulin 250 to 500 IU intramuscularly within 72 hours to Rh-negative mothers; in low-risk GTN, specialist centres employ single-agent methotrexate 50 mg/m2 intramuscularly weekly or 1 mg/kg on alternate days with folinic acid rescue. All chemotherapy must be prescribed and administered exclusively by certified oncology units.",
+      "teach": [
+        {
+          "heading": "Principles of surgical suction evacuation",
+          "body": "Suction evacuation under general or regional anaesthesia with concurrent transabdominal ultrasound guidance is the definitive method of evacuation for complete and partial hydatidiform moles.\n\nA large-bore suction cannula (ten to twelve millimetres) is introduced into the uterine cavity, and suction pressure of approximately sixty millimetres of mercury is applied to evacuate the vesicles.\n\nPre-evacuation oxytocic infusions or mechanical prostaglandins must be avoided before evacuation commences, as intense myometrial contractions against a large mole drive trophoblastic fragments into venous sinuses, triggering massive pulmonary embolisation.\n\nAn intravenous oxytocin infusion is started only after significant evacuation has begun and the uterine volume is actively decreasing to control bleeding."
+        },
+        {
+          "heading": "Haemodynamic stabilization and anti-D prophylaxis",
+          "body": "Pre-operative cross-matching of packed red cells is essential due to the high risk of rapid intra-operative blood loss.\n\nTachycardia or hyperthyroid manifestations are stabilised with beta-adrenergic blockers prior to anaesthesia to avert intra-operative thyroid crisis.\n\nRhesus D-negative women must receive anti-D immunoglobulin (250 IU up to twelve weeks, 500 IU thereafter) within seventy-two hours of evacuation, because trophoblastic tissue expresses RhD antigens.\n\nRoutine post-evacuation sharp curettage is strongly discouraged because the myometrium is thin and soft, substantially increasing perforation risk without improving outcomes."
+        },
+        {
+          "heading": "Post-evacuation serial surveillance and contraception",
+          "body": "Every woman must be registered with a trophoblastic disease surveillance centre for serial quantitative serum beta-hCG monitoring.\n\nSerum beta-hCG is checked every one to two weeks until normal (<5 mIU/mL) on three consecutive occasions, followed by monthly measurements for six months in complete mole.\n\nReliable contraception is mandatory throughout the entire surveillance period to prevent an intercurrent pregnancy from confounding rising hCG titers.\n\nBarrier methods and oral contraceptives are effective; intrauterine contraceptive devices should be avoided until hCG has completely normalised due to risks of uterine perforation and bleeding.\n\nRising or plateauing hCG values warrant immediate referral for staging and chemotherapy."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why must oxytocic infusions be withheld until suction evacuation is actively underway?",
+          "a": "Starting oxytocics before evacuation causes vigorous uterine contractions against an occluded cervix, forcing molar trophoblast into the pelvic venous sinuses and provoking pulmonary embolisation.",
+          "accept": [
+            "pulmonary embolisation",
+            "embolisation",
+            "venous sinuses",
+            "trophoblast deportation",
+            "contractions"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the post-evacuation hCG surveillance schedule for a complete hydatidiform mole?",
+          "a": "Serum beta-hCG is monitored every 1 to 2 weeks until negative for three consecutive weeks, then monthly for six months.",
+          "accept": [
+            "weekly",
+            "one to two weeks",
+            "three consecutive",
+            "monthly",
+            "six months"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is strict contraception mandatory during post-molar beta-hCG surveillance?",
+          "a": "To prevent a new intrauterine pregnancy, which would produce a physiological rise in beta-hCG that masks persistent gestational trophoblastic neoplasia.",
+          "accept": [
+            "new pregnancy",
+            "pregnancy",
+            "mask",
+            "rising hcg",
+            "confound",
+            "neoplasia"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gestational_trophoblastic_disease: management"
+        },
+        {
+          "source": "FOGSI",
+          "locator": "Good Clinical Practice Recommendations: Gestational Trophoblastic Neoplasia"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.gestationa.figo_score": {
+      "id": "skill.annex.gestationa.figo_score",
+      "kind": "annexure",
+      "system": "obgyn",
+      "title": "FIGO 2000 / WHO Prognostic Scoring System for GTN",
+      "oneLine": "Prognostic scoring matrix for gestational trophoblastic neoplasia to stratify low-risk and high-risk patients",
+      "why": "The FIGO 2000 / WHO prognostic scoring system accurately predicts resistance to single-agent chemotherapy, directing low-risk patients (score 0-6) to less toxic single-agent therapy and high-risk patients (score 7+) to upfront multi-agent regimens.",
+      "teach": [
+        {
+          "heading": "FIGO scoring parameters: scores 0 and 1",
+          "table": {
+            "cols": [
+              "Prognostic Factor",
+              "Score 0",
+              "Score 1"
+            ],
+            "rows": [
+              [
+                "Age (years)",
+                "<40",
+                ">=40"
+              ],
+              [
+                "Antecedent pregnancy",
+                "Hydatidiform mole",
+                "Abortion / miscarriage"
+              ],
+              [
+                "Interval (months)",
+                "<4",
+                "4 to <7"
+              ],
+              [
+                "Pre-treatment hCG (IU/L)",
+                "<1,000",
+                "1,000 to <10,000"
+              ],
+              [
+                "Largest tumour size",
+                "<3 cm",
+                "3 to <5 cm"
+              ],
+              [
+                "Site of metastases",
+                "Lung",
+                "Spleen, kidney"
+              ],
+              [
+                "Number of metastases",
+                "0",
+                "1 to 4"
+              ],
+              [
+                "Prior chemotherapy",
+                "None",
+                "-"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "FIGO scoring parameters: scores 2 and 4",
+          "table": {
+            "cols": [
+              "Prognostic Factor",
+              "Score 2",
+              "Score 4"
+            ],
+            "rows": [
+              [
+                "Age (years)",
+                "-",
+                "-"
+              ],
+              [
+                "Antecedent pregnancy",
+                "Term pregnancy",
+                "-"
+              ],
+              [
+                "Interval (months)",
+                "7 to <13",
+                ">=13"
+              ],
+              [
+                "Pre-treatment hCG (IU/L)",
+                "10,000 to <100,000",
+                ">=100,000"
+              ],
+              [
+                "Largest tumour size",
+                ">=5 cm",
+                "-"
+              ],
+              [
+                "Site of metastases",
+                "Gastrointestinal tract",
+                "Brain, liver"
+              ],
+              [
+                "Number of metastases",
+                "5 to 8",
+                ">8"
+              ],
+              [
+                "Prior chemotherapy",
+                "Single drug",
+                "Two or more drugs"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Risk interpretation and therapy selection",
+          "body": "The sum of scores from all eight parameters yields the overall prognostic risk score:\n\nLow Risk (Score 0 to 6): These patients respond exceedingly well to single-agent chemotherapy (intramuscular methotrexate with folinic acid rescue or pulsed intravenous actinomycin D), achieving cure rates exceeding ninety-eight percent.\n\nHigh Risk (Score 7 or greater): These patients have a high risk of developing drug resistance and require upfront combination chemotherapy, most frequently the EMA-CO regimen (etoposide, methotrexate, actinomycin D, cyclophosphamide, and vincristine).\n\nPlacental site and epithelioid trophoblastic tumours are intrinsically chemoresistant and are managed with primary surgical resection (total hysterectomy) regardless of prognostic score."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What score threshold divides low-risk from high-risk gestational trophoblastic neoplasia on the FIGO scoring system?",
+          "a": "A score of 0 to 6 is low risk, while a score of 7 or higher is high risk.",
+          "accept": [
+            "0 to 6",
+            "7 or higher",
+            "score 7",
+            "low risk",
+            "high risk"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which metastatic sites receive the highest score (4 points) in the FIGO prognostic system?",
+          "a": "Brain and liver metastases.",
+          "accept": [
+            "brain",
+            "liver",
+            "cerebral",
+            "hepatic"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is antecedent term pregnancy scored higher than antecedent molar pregnancy in the FIGO system?",
+          "a": "Gestational trophoblastic neoplasia following a term pregnancy is almost invariably choriocarcinoma, which has a higher propensity for chemoresistance and aggressive metastatic dissemination.",
+          "accept": [
+            "choriocarcinoma",
+            "term pregnancy",
+            "chemoresistance",
+            "aggressive",
+            "metastatic"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gestational_trophoblastic_neoplasia: management"
+        },
+        {
+          "source": "WHO",
+          "locator": "WHO Technical Report: Gestational Trophoblastic Diseases Prognostic Scoring"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.gestationa.priya",
+      "title": "Priya Sharma, 24 years, with early pregnancy bleeding and excessive vomiting",
+      "initialVitals": {
+        "hr": 96,
+        "bpSystolic": 138,
+        "bpDiastolic": 88,
+        "rr": 18,
+        "spo2": 99,
+        "temp": 36.8,
+        "gcs": 15
+      },
+      "patient": {
+        "name": "Priya Sharma",
+        "age": 24,
+        "sex": "female",
+        "occupation": "Homemaker",
+        "residence": "Semi-urban, lives with her husband and extended family in Varanasi, Uttar Pradesh"
+      },
+      "opening": "Doctor, I missed my period three months ago, but for the past two weeks I have had continuous dark brown vaginal discharge and severe vomiting. Yesterday evening I passed small, grape-like fluid blisters, and my lower belly feels tight and bloated.",
+      "fallback": "I am not quite sure about that, doctor. The main issue is the dark brownish bleeding and continuous nausea.",
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "tell me what happened",
+            "why have you come to hospital",
+            "kya takleef hai",
+            "what is your main problem"
+          ],
+          "reply": "I am three months pregnant according to my missed period, but I have had continuous dark brown bleeding for two weeks, severe vomiting, and yesterday I noticed tiny grape-like jelly blisters in the discharge."
+        },
+        "bleeding_character": {
+          "cues": [
+            "tell me about the bleeding",
+            "what colour is the blood",
+            "how heavy is the bleeding",
+            "any blood clots",
+            "prune juice discharge"
+          ],
+          "reply": "The bleeding started two weeks ago as light spotting, but now it is dark brown like prune juice, continuous, and soaks two pads a day. It is not bright red."
+        },
+        "vesicle_passage": {
+          "cues": [
+            "tell me about the grape like blisters",
+            "did you pass any tissue",
+            "passage of vesicles",
+            "fleshy mass passed",
+            "grape like jelly"
+          ],
+          "reply": "Yes, yesterday evening while using the toilet I saw several small, clear, grape-like fluid-filled bubbles mixed with the dark blood."
+        },
+        "amenorrhoea_dating": {
+          "cues": [
+            "when was your last menstrual period",
+            "how many weeks pregnant are you",
+            "what was the date of your lmp",
+            "are you sure of your dates",
+            "gestational age by lmp"
+          ],
+          "reply": "My last period was exactly twelve weeks ago, on the second of August. My cycles were always completely regular every twenty-eight days before this."
+        },
+        "hyperemesis_nausea": {
+          "cues": [
+            "are you having severe vomiting",
+            "how many times do you vomit",
+            "nausea and vomiting",
+            "able to keep food down",
+            "hyperemesis gravidarum"
+          ],
+          "reply": "I vomit six to eight times every day. I cannot keep any solid food down, only sips of water. I feel exhausted and have lost three kilograms over the past month."
+        },
+        "pelvic_discomfort": {
+          "cues": [
+            "do you have abdominal pain",
+            "any lower abdominal cramps",
+            "pain in tummy",
+            "pelvic fullness",
+            "belly pain"
+          ],
+          "reply": "I have a dull, heavy aching fullness in my lower abdomen, as if my womb is stretching too quickly, but no sharp or tearing pain."
+        },
+        "fetal_movements": {
+          "cues": [
+            "have you felt baby movements",
+            "any fetal kicks",
+            "quickening",
+            "movement of child"
+          ],
+          "reply": "No, doctor, I have not felt any movements at all. I know it is only twelve weeks, but my stomach already looks like I am four or five months pregnant."
+        },
+        "thyroid_symptoms": {
+          "cues": [
+            "any tremors or shaking hands",
+            "do you feel palpitations",
+            "racing heartbeat",
+            "heat intolerance",
+            "feeling excessively hot"
+          ],
+          "reply": "Over the last ten days, my heart has been racing even while resting, my hands tremble slightly, and I sweat a lot even when the room is cool."
+        },
+        "preeclampsia_features": {
+          "cues": [
+            "any headache or blurred vision",
+            "swelling of face or hands",
+            "flashing lights before eyes",
+            "epigastric pain or heartburn"
+          ],
+          "reply": "I have had a mild frontal headache and slight puffiness around my eyes in the mornings, but no visual blurring or upper abdominal pain."
+        },
+        "respiratory_symptoms": {
+          "cues": [
+            "any cough or shortness of breath",
+            "coughing up blood",
+            "chest pain on breathing",
+            "difficulty in breathing",
+            "haemoptysis"
+          ],
+          "reply": "No cough, no breathlessness, and no coughing up blood. My breathing feels completely normal when I am sitting resting."
+        },
+        "neurological_signs": {
+          "cues": [
+            "any seizures or fits",
+            "weakness in arms or legs",
+            "severe headache or dizziness",
+            "fainting spells"
+          ],
+          "reply": "No, I have never had any fits, convulsions, fainting, or weakness in my limbs."
+        },
+        "prior_pregnancies": {
+          "cues": [
+            "how many previous pregnancies",
+            "any previous deliveries",
+            "previous miscarriage",
+            "obstetric history",
+            "any previous molar pregnancy"
+          ],
+          "reply": "This is my second pregnancy. My first was two years ago; it ended in a spontaneous miscarriage at eight weeks. I have never had a molar pregnancy before."
+        },
+        "menstrual_pattern": {
+          "cues": [
+            "how were your periods before pregnancy",
+            "were your cycles regular",
+            "menstrual history before",
+            "cycle length and flow"
+          ],
+          "reply": "My periods started at age thirteen. They were always regular every twenty-eight days, lasting four days with normal flow and no severe pain."
+        },
+        "contraception_used": {
+          "cues": [
+            "were you using any contraception",
+            "any birth control pills",
+            "copper t or iucd",
+            "condoms or family planning"
+          ],
+          "reply": "My husband and I used condoms occasionally. I have never taken oral contraceptive pills and never had a Copper T or coil inserted."
+        },
+        "medical_background": {
+          "cues": [
+            "any medical illnesses in the past",
+            "history of thyroid disease",
+            "known high blood pressure",
+            "diabetes or asthma"
+          ],
+          "reply": "I have had no chronic medical conditions, no known high blood pressure, and no previous thyroid problems."
+        },
+        "current_medications": {
+          "cues": [
+            "what medicines are you taking",
+            "any tablets or injections",
+            "iron or folic acid",
+            "prescribed drugs"
+          ],
+          "reply": "A local clinic gave me folic acid and ondansetron tablets for vomiting, but the vomiting has not stopped."
+        },
+        "diet_social": {
+          "cues": [
+            "what is your diet like",
+            "do you eat meat or eggs",
+            "socioeconomic status",
+            "family background"
+          ],
+          "reply": "We are strictly vegetarian. Our diet is mostly rice, lentils, and wheat chapati, with very little dairy or fresh fruits. I do not smoke or use tobacco."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Pale, thin young woman, visibly dehydrated with dry mucous membranes and mild fine tremor of outstretched fingers, but alert and oriented.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Blood pressure 138/88 mmHg, pulse 96 beats/min regular and bounding, respiratory rate 18/min, temperature 36.8 degrees Celsius, oxygen saturation 99% on room air.",
+          "abnormal": true
+        },
+        "skill.gen.edema": {
+          "finding": "Mild bilateral pitting ankle oedema and slight periorbital puffiness; no sacral or generalised anasarca.",
+          "abnormal": true
+        },
+        "skill.exam.obg.gynae_abdominal": {
+          "finding": "Abdomen soft, non-tender; symmetrical midline suprapubic mass palpated, fundal height midway between pubic symphysis and umbilicus (corresponding to 16 to 18 weeks size, markedly larger than the 12 weeks amenorrhoea); uterus has a doughy, elastic consistency; no fetal parts palpable; fetal Doppler auscultation at 12 to 18 weeks fundal height reveals no fetal heart tones.",
+          "abnormal": true
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "finding": "External genitalia normal, dark brownish discharge visible at the introitus with no active arterial bleeding, lacerations, or purulent exudate.",
+          "abnormal": true
+        },
+        "skill.exam.obg.speculum_insert": {
+          "finding": "Sims speculum visualises a bluish, softened cervix with the external os closed; dark brownish prune-juice blood trickling from the cervical canal; no purple suburethral or vaginal metastatic nodules.",
+          "abnormal": true
+        },
+        "skill.exam.obg.bimanual": {
+          "finding": "Uterus symmetrically enlarged to 16 to 18 weeks gestational size, soft and doughy, mobile, non-tender; bilateral adnexae reveal palpable, multiloculated, smooth, cystic masses approximately 5 to 6 cm in diameter, mobile and non-tender, characteristic of bilateral theca lutein cysts.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "quantitative_beta_hcg",
+        "pelvic_ultrasound",
+        "complete_blood_count",
+        "blood_group_rh",
+        "thyroid_function_tests",
+        "chest_radiograph"
+      ],
+      "investigations": {
+        "quantitative_beta_hcg": {
+          "label": "Serum quantitative beta-hCG",
+          "result": "245,000 mIU/mL (markedly elevated for 12 weeks gestation, normal expected 20,000 to 100,000 mIU/mL)",
+          "note": "Astronomical elevation characteristic of complete hydatidiform mole with marked trophoblastic hyperplasia"
+        },
+        "pelvic_ultrasound": {
+          "label": "Pelvic ultrasound (transvaginal and transabdominal)",
+          "result": "Enlarged uterus filled with heterogeneous echogenic mass containing diffuse microcystic spaces giving classic snowstorm and cluster-of-grapes appearance; no identifiable fetus, gestational sac, or amniotic fluid; bilateral enlarged ovaries with multiseptated cystic masses measuring 6 x 5 cm bilaterally consistent with theca lutein cysts",
+          "note": "Pathognomonic sonographic features of complete hydatidiform mole and bilateral theca-lutein hyperstimulation"
+        },
+        "complete_blood_count": {
+          "label": "Complete blood count",
+          "result": "Haemoglobin 9.4 g/dL, Total leukocyte count 7,800/mcL, Platelets 220,000/mcL",
+          "note": "Moderate microcytic hypochromic anaemia secondary to persistent molar vaginal haemorrhage"
+        },
+        "blood_group_rh": {
+          "label": "Blood group and Rhesus typing",
+          "result": "B Rhesus negative",
+          "note": "Critical finding: mandates anti-D immunoglobulin administration following evacuation"
+        },
+        "thyroid_function_tests": {
+          "label": "Thyroid function profile",
+          "result": "TSH 0.08 mIU/L (suppressed), Free T4 2.8 ng/dL (elevated), Free T3 5.2 pg/mL (elevated)",
+          "note": "Biochemical hyperthyroidism from spillover stimulation of TSH receptors by massive beta-hCG"
+        },
+        "chest_radiograph": {
+          "label": "Chest radiograph (PA view with abdominal shielding)",
+          "result": "Clear lung fields bilaterally, no cannonball or micronodular pulmonary metastases, normal cardiothoracic ratio",
+          "note": "Rules out pulmonary metastatic trophoblastic disease and provides pre-evacuation baseline"
+        },
+        "renal_liver_function": {
+          "label": "Renal and liver function tests",
+          "result": "Serum creatinine 0.6 mg/dL, Blood urea 22 mg/dL, AST 26 U/L, ALT 24 U/L, Total bilirubin 0.7 mg/dL",
+          "note": "Normal baseline hepatic and renal parameters prior to intervention"
+        },
+        "coagulation_profile": {
+          "label": "Coagulation profile",
+          "result": "PT 12.0 seconds, INR 1.02, aPTT 28.5 seconds, Fibrinogen 380 mg/dL",
+          "note": "Normal baseline haemostasis, rules out consumption coagulopathy"
+        },
+        "histopathology": {
+          "label": "Histopathology of evacuated tissue",
+          "result": "Marked hydropic swelling of all chorionic villi with central cistern formation, diffuse circumferential trophoblastic hyperplasia, and complete absence of fetal or embryonic tissues and fetal red blood cells; p57 immunostain negative",
+          "note": "Definitive histological diagnosis of complete hydatidiform mole"
+        }
+      },
+      "differentialModel": {
+        "answer": "Gestational trophoblastic disease (complete hydatidiform mole), threatened or incomplete miscarriage, ectopic pregnancy, multiple pregnancy, and hyperemesis gravidarum.",
+        "accept": [
+          "Gestational trophoblastic disease",
+          "molar pregnancy",
+          "hydatidiform mole",
+          "Abortion",
+          "miscarriage",
+          "Ectopic pregnancy",
+          "Multiple pregnancy",
+          "twin pregnancy"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Complete hydatidiform mole (Gestational trophoblastic disease) at 12 weeks gestation, complicated by secondary anaemia and theca lutein cysts in an Rh-negative woman.",
+        "accept": [
+          "Gestational trophoblastic disease",
+          "molar pregnancy",
+          "hydatidiform mole",
+          "gestational trophoblastic neoplasia"
+        ],
+        "minMatch": 2
+      },
+      "managementModel": {
+        "answer": "Stabilize haemodynamically, cross-match blood, perform suction evacuation under ultrasound guidance without pre-evacuation oxytocics, administer anti-D immunoglobulin for Rh-negative status, send evacuated tissue for histology, initiate serial quantitative beta-hCG monitoring, prescribe reliable contraception, and register with a trophoblastic disease surveillance registry.",
+        "accept": [
+          "suction evacuation",
+          "serial beta-hCG monitoring",
+          "rh immunoglobulin",
+          "contraception counselling",
+          "oncology referral",
+          "supportive care"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "A complete hydatidiform mole classically presents with dark vaginal bleeding, uterine fundal height disproportionately larger than gestational dates, hyperemesis, and markedly elevated beta-hCG without fetal heart activity.",
+        "Surgical suction evacuation under transabdominal ultrasound guidance is the gold standard of treatment; pre-evacuation oxytocic infusions must be avoided to prevent catastrophic trophoblastic pulmonary embolisation.",
+        "Post-evacuation management mandates strict serial quantitative beta-hCG monitoring and reliable contraception to detect persistent gestational trophoblastic neoplasia early, which remains highly curable."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}
