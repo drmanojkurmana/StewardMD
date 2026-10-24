@@ -74,7 +74,7 @@
   }
   /* Speckle cell size (mm): wider laterally than axially, growing with depth. */
   function speckleSizes(depthMm) {
-    return { lateral: 1.50 + depthMm * 0.030, axial: 0.80 + depthMm * 0.004 };
+    return { lateral: 1.20 + depthMm * 0.018, axial: 0.70 + depthMm * 0.003 };
   }
   /* Fully developed speckle from two independent smooth Gaussians (I/Q),
    * so the envelope is Rayleigh with mean ~1. Coordinates are beam-space
@@ -248,7 +248,8 @@
       " float v = mix(mix(hash21(i + seed), hash21(i + vec2(1.0, 0.0) + seed), s.x), mix(hash21(i + vec2(0.0, 1.0) + seed), hash21(i + vec2(1.0, 1.0) + seed), s.x), s.y);",
       " vec4 w = vec4((1.0 - s.x) * (1.0 - s.y), s.x * (1.0 - s.y), (1.0 - s.x) * s.y, s.x * s.y);",
       " float varF = dot(w, w); return (v - 0.5) * sqrt(12.0 / max(varF, 0.001)); }",
-      "vec4 tissueAt(vec3 w){ vec2 uv = vec2(dot(w - uPlaneO, uPRight), dot(w - uPlaneO, uPUp)) / vec2(uDepth * 1.7, uDepth * 1.7) + 0.5; return texture2D(uTissue, uv); }",
+      "uniform float uTexel;",
+      "vec4 tissueAt(vec3 w){ vec2 uv = vec2(dot(w - uPlaneO, uPRight), dot(w - uPlaneO, uPUp)) / vec2(uDepth * 1.7, uDepth * 1.7) + 0.5; vec4 c = texture2D(uTissue, uv); float e = c.r * 0.4; e += texture2D(uTissue, uv + vec2(uTexel, 0.0)).r * 0.15; e += texture2D(uTissue, uv - vec2(uTexel, 0.0)).r * 0.15; e += texture2D(uTissue, uv + vec2(0.0, uTexel)).r * 0.15; e += texture2D(uTissue, uv - vec2(0.0, uTexel)).r * 0.15; c.r = e; return c; }",
       "float tgcAt(float d){ float t = clamp(d / uDepth, 0.0, 1.0) * 7.0; int i = int(floor(t)); float f = t - float(i); float a = 0.0; float b = 0.0;",
       " for (int k = 0; k < 8; k++){ if (k == i) a = uTgc[k]; if (k == i + 1) b = uTgc[k]; } return mix(a, b, f) + uGain; }",
       "void main(){",
@@ -270,21 +271,22 @@
       " /* speckle: smooth I/Q Gaussian field, elongated laterally and",
       "  * growing with depth; never square cells */",
       " float latMm = (beam - 0.5) * uSector * depth;",
-      " vec2 sc2 = vec2(latMm / (1.50 + depth * 0.030), depth / (0.80 + depth * 0.004));",
+      " vec2 sc2 = vec2(latMm / (1.20 + depth * 0.018), depth / (0.70 + depth * 0.003));",
       " float gI = sgauss(sc2, 11.0); float gQ = sgauss(sc2, 58.0);",
       " float speck = sqrt(gI * gI + gQ * gQ) / 1.2533;",
       " /* specular: interface strength from echogenicity gradient */",
       " vec4 tx = tissueAt(w + uRight * 1.6); vec4 ty = tissueAt(w + uBeam * 1.6);",
       " float grad = abs(tx.r - tis.r) + abs(ty.r - tis.r);",
       " float facing = clamp(1.0 - abs(dot(dir, uBeam)) * 0.35, 0.6, 1.0);",
-      " float spec = grad * 2.4 * facing * step(0.04, grad);",
+      " float spec = grad * 1.4 * facing * smoothstep(0.04, 0.12, grad);",
       " float amp = echo;",
       " bool isBlk = isCalc || isAir || isBone;",
       " if (isBlk){ vec4 tb = tissueAt(w - dir * 3.0); float fb = floor(tb.g * 255.0 + 0.5); bool backBlk = mod(floor(fb / 2.0), 2.0) >= 1.0 || mod(floor(fb / 4.0), 2.0) >= 1.0 || mod(floor(fb / 8.0), 2.0) >= 1.0; if (backBlk) shadow *= 0.08; else amp *= 1.65; }",
       " if (!isBlood && echo >= 0.70) amp *= 1.25; if (!isBlood && echo >= 0.25 && echo <= 0.65) amp *= 1.12;",
       " float pixU = hash21(floor(vUv * vec2(160.0, 256.0))); float pixSpeck = sqrt(-2.0 * log(1.0 - clamp(pixU, 0.0, 0.999))) / 1.2533; speck = speck * 0.75 + pixSpeck * 0.25;",
       " float smoke = 0.0;",
-      " if (isBlood){ amp = echo * speck * 0.9; smoke = sgauss(vec2(latMm / 6.0, depth / 6.0 - uTime * 0.12), 91.0) * 0.008; }",
+      " if (isBlood){ amp = echo * speck * 0.55; smoke = sgauss(vec2(latMm / 6.0, depth / 6.0 - uTime * 0.12), 91.0) * 0.008; }",
+      " if (strongAt > 0.0) shadow = mix(shadow, 1.0, clamp((depth - strongAt) / 70.0, 0.0, 0.75));",
       " float lin = (isBlood ? amp + max(smoke, 0.0) : amp * speck + spec) * shadow;",
       " /* reverberation: repeat below a strong reflector */",
       " if (strongAt > 0.0 && depth > strongAt * 1.9 && depth < strongAt * 2.15) lin += strongAmp * 0.20 * shadow;",
@@ -344,7 +346,7 @@
 
     var progT = null, progE = null, progD = null, progF = null, vbPos = null, vbSeed = null, ibBuf = null, quadBuf = null;
     var fboT = null, texT = null, fboP = null, texP = null, groupsCache = [];
-    var TW = 256, PH = 256, BEAMS = 160, SAMPLES = 256;
+    var TW = 512, PH = 256, BEAMS = 160, SAMPLES = 256;
 
     function compile(type, src) {
       var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
@@ -490,6 +492,7 @@
       gl.uniform1f(gl.getUniformLocation(progE, "uGain"), knobs.gain);
       gl.uniform1f(gl.getUniformLocation(progE, "uDR"), knobs.dynamicRange);
       gl.uniform1f(gl.getUniformLocation(progE, "uFocus"), knobs.focusMm);
+      gl.uniform1f(gl.getUniformLocation(progE, "uTexel"), 1 / Math.max(1, fboT.w));
       var tgcLoc = gl.getUniformLocation(progE, "uTgc[0]");
       gl.uniform1fv(tgcLoc, new Float32Array(knobs.tgc));
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
@@ -565,27 +568,33 @@
             }
             data[o + 3] = 255; continue;
           }
-          var dx = (px - apexX) / scale, dy = (py - apexY) / scale;
-          var sc = scanConvert(dx, dy, knobs.sectorDeg, knobs.depth);
-          if (!sc) { data[o + 3] = 255; continue; }
-          /* world / plane coords of this sample */
-          var dirv = add(mul(f.beam, Math.cos(sc.angle)), mul(f.right, Math.sin(sc.angle)));
-          var w = add(f.apex, mul(dirv, sc.depth));
-          var rel = sub(w, f.planeOrigin);
-          var cx = dot(rel, f.right), cy = dot(rel, f.up);
-          var hit = classify(cx, cy, polys);
-          var disp = 0;
-          if (hit) {
+          /* 2x2 supersample: averages the tissue classification at
+           * four sub-pixel positions so tissue boundaries blend
+           * instead of staircasing. */
+          var disp = 0, nSub = 0;
+          for (var ssy = 0; ssy < 2; ssy++) for (var ssx = 0; ssx < 2; ssx++) {
+            var fpx = px + (ssx ? 0.75 : 0.25), fpy = py + (ssy ? 0.75 : 0.25);
+            var dx = (fpx - apexX) / scale, dy = (fpy - apexY) / scale;
+            var sc = scanConvert(dx, dy, knobs.sectorDeg, knobs.depth);
+            if (!sc) continue;
+            nSub++;
+            var dirv = add(mul(f.beam, Math.cos(sc.angle)), mul(f.right, Math.sin(sc.angle)));
+            var w = add(f.apex, mul(dirv, sc.depth));
+            var rel = sub(w, f.planeOrigin);
+            var cx = dot(rel, f.right), cy = dot(rel, f.up);
+            var hit = classify(cx, cy, polys);
+            if (!hit) continue;
             var ac = hit.acoustic;
-            var speck = speckleField(Math.sin(sc.angle) * sc.depth, sc.depth, 11) * 0.75 + speckleAmp(hash3(px, py, 77)) * 0.25;
+            var speck = speckleField(Math.sin(sc.angle) * sc.depth, sc.depth, 11) * 0.75 + speckleAmp(hash3(px * 2 + ssx, py * 2 + ssy, 77)) * 0.25;
             var smoke = ac.isBlood ? Math.max(0, smoothGauss2(Math.sin(sc.angle) * sc.depth / 6, sc.depth / 6 - tMs / 8000, 91)) * 0.008 : 0;
             var shF = 1, exF = 1;
             if (isBlocker(ac)) {
               var bk = sc.depth > 4 ? classify(dot(sub(add(f.apex, mul(dirv, sc.depth - 3)), f.planeOrigin), f.right), dot(sub(add(f.apex, mul(dirv, sc.depth - 3)), f.planeOrigin), f.up), polys) : null;
               if (bk && isBlocker(bk.acoustic)) shF = 0.08; else exF = 1.65;
             }
-            disp = echoDisplay(ac, sc.depth, speck, knobs, shF, smoke, exF);
+            disp += echoDisplay(ac, sc.depth, speck, knobs, shF, smoke, exF);
           }
+          disp = nSub ? disp / 4 : 0;
           var v = Math.round(clamp(disp, 0, 1) * 255 + bayerDither(px, py));
           data[o] = v; data[o + 1] = v; data[o + 2] = v; data[o + 3] = 255;
         }

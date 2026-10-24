@@ -17,11 +17,24 @@ const CHROME = process.env.CHROME || "/tmp/pptr/chrome-headless-shell/mac_arm-15
 mkdirSync(SHOTS, { recursive: true });
 
 const viewsJson = readFileSync(join(ROOT, "kardia", "views.json"), "utf8");
+const manifestJson = readFileSync(join(ROOT, "atlas", "3d", "manifest.json"), "utf8");
+const liveJson = readFileSync(join(ROOT, "atlas", "3d", "live.json"), "utf8");
+const chunkB64 = (name) => readFileSync(join(ROOT, "atlas", "3d", name)).toString("base64");
 writeFileSync(join(ROOT, "work", "kardia-us-data.js"),
-  "window.__KG_VIEWS=" + viewsJson.replace(/<\/script>/g, "<\\/script>") + ";\n");
+  "window.__KG_VIEWS=" + viewsJson.replace(/<\/script>/g, "<\\/script>") + ";\n" +
+  "window.__KG_MANIFEST=" + manifestJson.replace(/<\/script>/g, "<\\/script>") + ";\n" +
+  "window.__KG_LIVE=" + liveJson.replace(/<\/script>/g, "<\\/script>") + ";\n" +
+  "window.__KG_CHUNKS_GZ_B64=" + JSON.stringify({
+    "cardiac-6": chunkB64("cardiac-6.lo.bin.gz"),
+    "skeletal-0": chunkB64("skeletal-0.lo.bin.gz"),
+    "skeletal-1": chunkB64("skeletal-1.lo.bin.gz"),
+    "live-respiratory": chunkB64("live-respiratory-9.7bb04126.bin.gz"),
+    "live-digestive": chunkB64("live-digestive-2.58ac6651.bin.gz"),
+  }) + ";\n");
 
 writeFileSync(join(ROOT, "work", "kardia-us-harness.html"), `<!doctype html><meta charset="utf-8"><title>Kardia US harness</title>
 <body style="margin:0;background:#000"><canvas id="cv"></canvas>
+<script src="../atlas3d.js"></script>
 <script src="../kardia-sim-heart.js"></script>
 <script src="../kardia-sim-geom.js"></script>
 <script src="../kardia-sim-us.js"></script>
@@ -49,6 +62,27 @@ window.__boot = (function () {
       var png = null;
       if (wantShot) png = canvas.toDataURL("image/png").split(",")[1];
       return JSON.stringify({ ok: ok, ms: ms, snap: us.snapshot(), png: png, errors: us.errors });
+    };
+    window.__loadReal = async function () {
+      var load = null;
+      try { load = await geom.loadAtlas({ systems: ["cardiac", "skeletal", "respiratory", "digestive"] }); } catch (e) { load = null; }
+      if (!load || !load.parts) {
+        geom.ingestManifest(window.__KG_MANIFEST);
+        var wanted = [];
+        window.__KG_MANIFEST.lod.chunks.forEach(function (c) { if (c.id === "cardiac-6" || c.id === "skeletal-0" || c.id === "skeletal-1") wanted.push([c, window.__KG_CHUNKS_GZ_B64[c.id]]); });
+        window.__KG_LIVE.chunks.forEach(function (c) { if (c.system === "respiratory") wanted.push([c, window.__KG_CHUNKS_GZ_B64["live-respiratory"]]); if (c.system === "digestive") wanted.push([c, window.__KG_CHUNKS_GZ_B64["live-digestive"]]); });
+        var added = 0;
+        for (var wi = 0; wi < wanted.length; wi++) {
+          var bin = atob(wanted[wi][1]), bytes = new Uint8Array(bin.length);
+          for (var bi = 0; bi < bin.length; bi++) bytes[bi] = bin.charCodeAt(bi);
+          var stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));
+          var raw = await new Response(stream).arrayBuffer();
+          added += geom.ingestChunk(wanted[wi][0], raw);
+        }
+        load = { parts: geom.loadedParts().length, added: added, fallback: true };
+      }
+      window.__load = load;
+      return JSON.stringify(load);
     };
     window.__ready = true;
   } catch (e) { window.__errors.push(String(e && e.stack || e)); window.__ready = "failed"; }
@@ -106,6 +140,29 @@ try {
       ok(snap.ecgSectorOverlapPx === 0 && snap.layout && snap.layout.sector.bottom <= snap.layout.ecg.y0, `${label} @${width} ECG strip does not overlap sector`);
       if (fr.png) { const p = join(SHOTS, `kardia-us-${label}-${width}.png`); writeFileSync(p, Buffer.from(fr.png, "base64")); console.log("   shot: " + p); }
       else ok(false, `${label} @${width} screenshot present`);
+    }
+  }
+  // real-mesh mode: load the BodyParts3D atlas the same way the
+  // geometry runner does, then render every target view from the
+  // real anatomy (shots kardia-us-real-*.png)
+  const REAL_VIEWS = [["tte_plax", "PLAX"], ["tte_psax_av", "PSAX-AV"], ["tte_psax_papillary", "PSAX-papillary"], ["tte_a4c", "A4C"], ["tte_a2c", "A2C"], ["tte_a3c", "A3C"], ["tte_subcostal_4c", "subcostal-4C"], ["tte_subcostal_ivc", "IVC"]];
+  const loadRes = await call("Runtime.evaluate", { expression: `window.__loadReal()`, awaitPromise: true, returnByValue: true });
+  const load = JSON.parse(loadRes.result && loadRes.result.result ? loadRes.result.result.value : "{}");
+  console.log("  atlas load: " + JSON.stringify(load));
+  ok(load.parts >= 15, `real-mesh mode: BodyParts3D parts loaded (${load.parts})`);
+  for (const width of [390, 820]) {
+    for (const [viewId, label] of REAL_VIEWS) {
+      const snap = JSON.parse(await ev(`return window.__setView(${JSON.stringify(viewId)}, ${width}, ${Math.round(width * 0.8)});`) || "{}");
+      const fr = JSON.parse(await ev(`return window.__frame(200, true);`) || "{}");
+      frameTimes.push(fr.ms);
+      console.log(`  real ${label} @${width}: blood=${snap.bloodMean?.toFixed(3)} myo=${snap.myoMean?.toFixed(3)} mean=${fr.snap?.mean?.toFixed(3)} bN=${snap.bloodCount} mN=${snap.myoCount} ms=${fr.ms?.toFixed(1)} mode=${fr.snap?.mode}`);
+      ok(fr.ok && fr.errors && fr.errors.length === 0, `real ${label} @${width} renders without errors`);
+      ok(snap.bloodCount > 0 && snap.myoCount > 0, `real ${label} @${width} samples blood and myocardium`);
+      ok(snap.bloodMean < snap.myoMean, `real ${label} @${width} blood pools darker than myocardium (${snap.bloodMean?.toFixed(3)} < ${snap.myoMean?.toFixed(3)})`);
+      ok(snap.bloodMean >= 0.02 && snap.bloodMean <= 0.10, `real ${label} @${width} blood in 0.02..0.10 (${snap.bloodMean?.toFixed(3)})`);
+      ok(snap.myoMean >= 0.30 && snap.myoMean <= 0.55, `real ${label} @${width} myocardium in 0.30..0.55 (${snap.myoMean?.toFixed(3)})`);
+      if (fr.png) { const p = join(SHOTS, `kardia-us-real-${label}-${width}.png`); writeFileSync(p, Buffer.from(fr.png, "base64")); console.log("   shot: " + p); }
+      else ok(false, `real ${label} @${width} screenshot present`);
     }
   }
   // gain raises mean brightness
