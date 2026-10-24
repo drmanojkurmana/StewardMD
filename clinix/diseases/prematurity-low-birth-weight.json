@@ -1,0 +1,1257 @@
+{
+  "estMinutes": 60,
+  "fullName": "Prematurity and low birth weight",
+  "id": "prematurity-low-birth-weight",
+  "kbRef": "preterm_lbw_kangaroo_long_case",
+  "name": "Prematurity and low birth weight",
+  "oneLine": "Care of the preterm newborn: warmth, feeds, breathing support and screening",
+  "review": {
+    "status": "ai_drafted"
+  },
+  "subtitle": "Care of the preterm newborn",
+  "system": "paediatrics",
+  "version": 1,
+  "_comment": "Prematurity and low birth weight: warmth, milk, gentle air and scheduled vigilance. Almost every finding is an emphasis overlay on a shared paediatrics or core skill; the disease file owns only disease-specific reasoning, investigation and treatment skills.",
+  "chapters": [
+    {
+      "blurb": "What preterm and low birth weight mean, and why the two labels travel together",
+      "id": "basics",
+      "skills": [
+        "skill.reasoning.prematurity.basics"
+      ],
+      "title": "Basics"
+    },
+    {
+      "blurb": "Before a single question, in a nursery where cold kills quietly",
+      "id": "approach",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.paed.rapport",
+        "skill.approach.paed.consent_assent"
+      ],
+      "title": "Approach to the newborn"
+    },
+    {
+      "blurb": "Gestation and weight set the normal before a symptom is mentioned",
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In a preterm baby the particulars are the diagnosis in waiting: exact gestation in weeks and days with how it was dated, birth weight with current weight, singleton or multiple pregnancy, and place of birth. A 33 week infant weighing 1700 g and a term infant weighing 1700 g share a scale reading and almost nothing else."
+        }
+      },
+      "id": "particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "title": "Patient particulars"
+    },
+    {
+      "blurb": "Weeks, grams, waters, cry and the first feed",
+      "emphasis": {
+        "skill.hx.paed.presenting_complaint": {
+          "expect": "Expect the complaint to come from the mother or the referral slip, not the baby: poor weight gain, apnoea or blue spells, fast breathing, yellow eyes, poor suck, or simply a preterm birth needing supervised care. Pin the postnatal day and the gestation together, since day five means something different at 33 weeks than at term."
+        }
+      },
+      "id": "history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.paed.presenting_complaint",
+        "skill.hx.paed.birth_natal_neonatal",
+        "skill.hx.prematurit.risks"
+      ],
+      "title": "History of presenting illness"
+    },
+    {
+      "blurb": "The pregnancy behind the early baby",
+      "emphasis": {
+        "skill.hx.paed.birth_antenatal": {
+          "expect": "Expect the cause of prematurity to sit in this history: raised blood pressure, sugar in pregnancy, anaemia, bleeding, infection with early rupture of membranes, or a multiple pregnancy. Poor or absent antenatal visits and a previous preterm birth or newborn death complete the risk picture."
+        }
+      },
+      "id": "past_personal_drug_family",
+      "skills": [
+        "skill.hx.paed.birth_antenatal",
+        "skill.hx.paed.immunisation",
+        "skill.hx.paed.family_pedigree",
+        "skill.hx.paed.socioeconomic"
+      ],
+      "title": "Past, personal, drug and family history"
+    },
+    {
+      "blurb": "Small, cold-prone and working hard to breathe",
+      "emphasis": {
+        "skill.gen.paed.appearance": {
+          "expect": "Expect a small, thin baby with little subcutaneous fat, flexed but easily extended limbs, visible veins over a thin abdominal wall, and lanugo over the back. Watch first for what kills quietly: cold peripheries, lethargy with poor suck, and apnoea or grunting rather than dramatic distress."
+        },
+        "skill.gen.paed.vitals": {
+          "expect": "Expect a fast heart rate and fast breathing as normal for gestation, with axillary temperature the vital sign that matters most here. A temperature below normal, pauses in breathing, or saturation that will not hold in air each change the plan on their own."
+        },
+        "skill.exam.paed.weight": {
+          "expect": "Expect the weight trajectory to matter more than any single reading: birth weight, lowest weight, current weight and the day of life together. A preterm baby loses weight in the first days and should regain birth weight within the early weeks; failure to do so is a finding, not a phase."
+        }
+      },
+      "id": "general_exam",
+      "skills": [
+        "skill.gen.paed.appearance",
+        "skill.gen.paed.vitals",
+        "skill.gen.paed.pallor",
+        "skill.gen.paed.hydration",
+        "skill.exam.paed.weight"
+      ],
+      "title": "General examination"
+    },
+    {
+      "blurb": "Maturity signs, breathing cues and the cord",
+      "emphasis": {
+        "skill.exam.paed.neo.ballard_gestational_age": {
+          "expect": "Expect immature Ballard signs to confirm the stated gestation rather than surprise you: soft flat areola without a nodule, thin gelatinous skin, minimal creases on the soles, and a square window near ninety degrees. Score what you see; do not argue with a reliable dating scan."
+        },
+        "skill.exam.paed.neo.chest_respiratory_cvs": {
+          "expect": "Expect tachypnoea with subcostal retractions and an expiratory grunt as the preterm breathing signature, scored with the Downe cues. Grunt is the baby auto-recruiting its own airway pressure, so its disappearance in a tiring baby is worsening, not recovery."
+        },
+        "skill.exam.paed.neo.jaundice_kramer": {
+          "expect": "Expect jaundice to appear earlier, rise faster and last longer than at term, since the preterm liver conjugates poorly and feeds are small. Kramer zoning still maps the spread, but the threshold for action sits lower, so zone for zone this baby worries you sooner."
+        }
+      },
+      "id": "systemic_exam",
+      "skills": [
+        "skill.exam.paed.neo.ballard_gestational_age",
+        "skill.exam.paed.neo.chest_respiratory_cvs",
+        "skill.exam.paed.neo.skin_cord_variations",
+        "skill.exam.paed.neo.primitive_reflexes",
+        "skill.exam.paed.neo.jaundice_kramer"
+      ],
+      "title": "Neonatal examination"
+    },
+    {
+      "blurb": "One immaturity, many small failures, all predictable",
+      "id": "disease_findings",
+      "skills": [
+        "skill.reasoning.prematurity.findings"
+      ],
+      "title": "Putting the preterm picture together"
+    },
+    {
+      "blurb": "Gestation, weight, appropriateness and stability in one breath",
+      "id": "summary",
+      "skills": [
+        "skill.reasoning.prematurity.summary"
+      ],
+      "title": "Clinical summary"
+    },
+    {
+      "blurb": "RDS against TTN, sepsis against NEC, preterm against small for dates",
+      "id": "differential",
+      "skills": [
+        "skill.reasoning.prematurity.differential"
+      ],
+      "title": "Differential diagnosis"
+    },
+    {
+      "blurb": "Grade maturity, catch infection and jaundice, book the senses",
+      "id": "investigations",
+      "skills": [
+        "skill.investigation.prematurity.workup"
+      ],
+      "title": "Investigations"
+    },
+    {
+      "blurb": "Name the gestation band, the weight band and the growth",
+      "id": "diagnosis",
+      "skills": [
+        "skill.reasoning.prematurity.diagnosis"
+      ],
+      "title": "Diagnosis and grading"
+    },
+    {
+      "blurb": "Warmth, milk, air and vigilance, in that order",
+      "id": "treatment",
+      "skills": [
+        "skill.treatment.prematurity.care"
+      ],
+      "title": "Treatment"
+    },
+    {
+      "blurb": "Present this baby to your consultant",
+      "id": "case",
+      "skills": [
+        "skill.present.case",
+        "skill.present.prematurit.case"
+      ],
+      "title": "Case presentation"
+    }
+  ],
+  "skills": {
+    "skill.reasoning.prematurity.basics": {
+      "id": "skill.reasoning.prematurity.basics",
+      "kind": "reasoning",
+      "oneLine": "Preterm means born early, low birth weight means born small, and most early babies are both",
+      "probes": [
+        {
+          "a": "Birth before 37 completed weeks is preterm, and birth weight below 2500 g is low birth weight, below 1500 g very low, and below 1000 g extremely low.",
+          "accept": [
+            "37",
+            "2500",
+            "1500",
+            "1000"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "State the gestation cutoff for preterm birth and the three weight cutoffs."
+        },
+        {
+          "a": "A preterm baby is born early and appropriate for its gestation, while a small for gestational age baby may be term but grown poorly, below the tenth centile, and the two need different growth and feeding plans.",
+          "accept": [
+            "preterm",
+            "tenth centile",
+            "growth",
+            "different"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How does a preterm baby differ from a small for gestational age baby?"
+        },
+        {
+          "a": "Gestation sets the maturity of lungs, brain, gut and immunity, weight sets the reserves and drug and feed arithmetic, and appropriateness for dates separates prematurity from growth restriction with its own placental causes.",
+          "accept": [
+            "maturity",
+            "reserves",
+            "growth restriction"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why must every preterm summary state gestation, weight and appropriateness for dates?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "preterm_lbw_kangaroo_long_case: clinicalPearls (Kangaroo humidity warm-chain)",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The high-risk infant: prematurity and low birth weight",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "A birth before 37 completed weeks of gestation is preterm, and a birth weight below 2500 g is low birth weight. Below 1500 g is very low birth weight and below 1000 g is extremely low birth weight, each step carrying higher risks of breathing difficulty, infection, feeding intolerance and death.\n\nThese are independent axes that usually travel together: most preterm babies are also low birth weight, but a term baby can be low birth weight through poor growth, and that distinction changes the whole plan.",
+          "heading": "Two axes, not one label"
+        },
+        {
+          "points": [
+            "Small for gestational age means weight below the tenth centile for the gestation, whatever the gestation is, and points at placental insufficiency, maternal illness or multiple pregnancy.",
+            "Appropriate for gestational age means weight between the tenth and ninetieth centiles, which describes most preterm babies: early, but grown as expected for their weeks.",
+            "Large for gestational age means weight above the ninetieth centile, usually a term infant of a diabetic mother, and a different problem entirely."
+          ],
+          "heading": "Appropriateness for dates"
+        },
+        {
+          "body": "Preterm babies lose heat through thin skin with little fat, breathe with stiff surfactant-poor lungs and a weak drive, feed with an immature gut and poor suck, fight infection with thin defences, and conjugate bilirubin slowly. Every one of these follows from immaturity, which is why the same small baby needs warmth, milk, air and vigilance together rather than one intervention.\n\nIn India most of this care happens in special newborn care units at district level with referral upward for ventilation, eye screening and surgery, so knowing what can be managed locally and what must travel is part of the definition.",
+          "heading": "Why immaturity explains everything"
+        }
+      ],
+      "title": "What preterm and low birth weight mean",
+      "why": "The words preterm and low birth weight are not synonyms, and confusing them mislabels the baby. Gestation decides maturity, weight decides reserves, and appropriateness for dates decides whether the problem is early birth or poor growth, so the three together frame every question, finding and plan that follows."
+    },
+    "skill.reasoning.prematurity.causes": {
+      "id": "skill.reasoning.prematurity.causes",
+      "kind": "reasoning",
+      "oneLine": "The maternal and pregnancy factors that deliver a baby too soon or too small",
+      "probes": [
+        {
+          "a": "Raised blood pressure, diabetes, anaemia, antepartum bleeding, genital infection with early rupture of membranes, and multiple pregnancy all raise the chance of preterm birth or poor growth.",
+          "accept": [
+            "blood pressure",
+            "diabetes",
+            "anaemia",
+            "bleeding",
+            "infection",
+            "multiple"
+          ],
+          "level": 1,
+          "minMatch": 4,
+          "q": "Name six maternal or pregnancy factors behind preterm birth or low birth weight."
+        },
+        {
+          "a": "Prolonged rupture with foul liquor points at ascending infection and early onset sepsis, while hypertension with poor growth points at placental insufficiency and a small for dates baby.",
+          "accept": [
+            "rupture",
+            "sepsis",
+            "placental",
+            "growth"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Contrast the story behind an infected preterm baby with that behind a growth-restricted one."
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "preterm_lbw_kangaroo_long_case: pathophysiology",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The high-risk infant: aetiology of prematurity",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Preterm labour and early rupture of membranes often follow genital infection ascending from below, which is why fever, foul discharge and a long rupture-to-delivery interval cluster in the same story. Raised blood pressure, antepartum bleeding and placental separation cut short the pregnancy from the maternal side, sometimes by deliberate early delivery to save mother or baby.\n\nMultiple pregnancy overstretches the uterus and shares the placenta, so twins arrive early and often small, and adolescent or short-interval pregnancies with poor weight gain carry the same direction of risk through undernutrition and anaemia.",
+          "heading": "Why the pregnancy ends early"
+        },
+        {
+          "points": [
+            "Maternal illness: hypertension, diabetes, anaemia, heart or kidney disease, and bleeding in pregnancy.",
+            "Infection: urinary infection, foul vaginal discharge, malaria and other febrile illnesses, with early or prolonged rupture of membranes.",
+            "Uterine and placental factors: multiple pregnancy, excess or scanty liquor, a low placenta, and premature separation.",
+            "Care factors: late or absent antenatal visits, a previous preterm birth or newborn death, heavy physical labour, and tobacco smoke at home."
+          ],
+          "heading": "Four groups of causes"
+        },
+        {
+          "body": "A baby can be small without being early. Placental insufficiency from hypertension starves a term baby over weeks, producing a thin, wasted infant with a large head relative to a thin body. This small for dates baby has mature lungs but exhausted reserves, so it turns hypoglycaemic and cold after birth rather than grunting from the first hour.\n\nAsk which pattern fits before examining: an infected preterm story needs sepsis cover, a placental story needs glucose vigilance and growth follow-up, and many real babies carry both.",
+          "heading": "Early or small, and sometimes both"
+        }
+      ],
+      "title": "Why babies arrive early or small",
+      "why": "Preterm birth is never an accident without a reason, and the reason sits in the pregnancy history. Infection, hypertension, bleeding and multiple pregnancy each leave a different fingerprint on the baby, and reading that fingerprint tells you which complication to expect before it declares itself."
+    },
+    "skill.reasoning.prematurity.problems": {
+      "id": "skill.reasoning.prematurity.problems",
+      "kind": "reasoning",
+      "oneLine": "Cold, apnoea, poor feeds, infection and jaundice: the predictable failures of immaturity",
+      "probes": [
+        {
+          "a": "Cold stress from thin skin and little fat, breathing difficulty with apnoea, poor suck with feed intolerance, thin immune defences with sepsis, and slow bilirubin handling with jaundice.",
+          "accept": [
+            "cold",
+            "apnoea",
+            "suck",
+            "sepsis",
+            "jaundice"
+          ],
+          "level": 1,
+          "minMatch": 4,
+          "q": "Name five predictable problems of the preterm baby."
+        },
+        {
+          "a": "Immature lungs with little surfactant collapse between breaths so the baby holds them open with a grunt, and an immature brainstem forgets to breathe, so pauses beyond twenty seconds with colour change or slow pulse need support.",
+          "accept": [
+            "surfactant",
+            "grunt",
+            "brainstem",
+            "pauses",
+            "colour"
+          ],
+          "level": 2,
+          "minMatch": 3,
+          "q": "Explain grunting and apnoea from first principles."
+        },
+        {
+          "a": "Fast milk advance with residual vomiting and a swollen tender belly with blood in the stool points at necrotising enterocolitis, so feeds stop, the surgeon is called, and sepsis cover continues.",
+          "accept": [
+            "vomiting",
+            "belly",
+            "blood",
+            "feeds stop"
+          ],
+          "level": 3,
+          "minMatch": 3,
+          "q": "A preterm baby on rising feeds vomits bile with a distended belly and blood flecks in the stool. What is this and what do you do?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "preterm_lbw_kangaroo_long_case: clinicalPearls (CPAP surfactant caffeine BPD)",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The high-risk infant: complications of prematurity",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "A preterm baby loses heat within minutes through thin skin with almost no fat, and cold then worsens breathing, sugar and oxygen use in a spiral. Kangaroo skin-to-skin contact with a warm chain from labour room to nursery prevents this spiral more cheaply than any device, and a recorded low temperature is an emergency, not an observation.\n\nBreathing fails twice: stiff surfactant-poor lungs collapse and demand grunting effort, scored with the Downe cues, and an immature brainstem simply pauses, producing apnoea that needs touch, positioning and sometimes caffeine-type support under supervision.",
+          "heading": "Cold and air first"
+        },
+        {
+          "points": [
+            "Feeding: a weak suck with an immature gut tolerates only small expressed milk volumes advanced slowly, and fast advance with vomiting, large residuals or a swollen belly warns of necrotising enterocolitis.",
+            "Infection: thin skin, lines, tubes and ventilators invite sepsis, so lethargy, poor suck, temperature instability and sugar swings mean cultures with prompt antibiotics per policy.",
+            "Jaundice: the preterm liver conjugates slowly while feeds are small, so yellow spreads earlier and faster, and the threshold for light treatment sits lower than at term.",
+            "Sugar and bleeding: exhausted glycogen with poor feeds drops the sugar, and fragile germinal matrix vessels bleed with rough handling or pressure swings, so gentle care is treatment."
+          ],
+          "heading": "Milk, germs, yellow and fragile vessels"
+        },
+        {
+          "body": "Unmonitored oxygen harms as well as heals: high unblended oxygen in a very preterm baby injures the developing retina and lungs, producing retinopathy of prematurity and chronic lung disease. Oxygen is therefore blended and titrated, eyes are screened in the early weeks, and hearing and thyroid checks join the same follow-up list.\n\nEach of these complications is silent at first and cheap to prevent but costly to treat, which is why preterm care is scheduled vigilance rather than rescue.",
+          "heading": "What oxygen and time can damage"
+        }
+      ],
+      "title": "What goes wrong in preterm babies",
+      "why": "Nothing that happens to a preterm baby in the first weeks is surprising once immaturity is understood. Cold, apnoea, feed intolerance, sepsis and jaundice are the same story told by different organs, and expecting them in order is what turns a frightening nursery into a list of preventable problems."
+    },
+    "skill.reasoning.prematurity.findings": {
+      "id": "skill.reasoning.prematurity.findings",
+      "kind": "reasoning",
+      "oneLine": "Small, smooth-footed, veiny and grunting: reading maturity at the bedside",
+      "probes": [
+        {
+          "a": "Thin red skin with lanugo, little breast tissue, smooth soles with few creases, soft ears that fold easily, and undescended testes or prominent labia all point at prematurity on Ballard scoring.",
+          "accept": [
+            "lanugo",
+            "soles",
+            "creases",
+            "Ballard"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "Name four external Ballard cues of prematurity."
+        },
+        {
+          "a": "Rate below sixty is mild, sixty to eighty moderate, above eighty severe, with retractions, grunt, poor air entry and low gestation each adding points towards severe disease.",
+          "accept": [
+            "sixty",
+            "eighty",
+            "retractions",
+            "grunt"
+          ],
+          "level": 2,
+          "minMatch": 3,
+          "q": "How do you grade respiratory distress with the Downe score?"
+        },
+        {
+          "a": "The preterm picture is generalised immaturity with grunting effort, while transient tachypnoea is a term baby breathing fast without grunt after a section, and meconium aspiration is a term baby with staining and coarse signs.",
+          "accept": [
+            "grunting",
+            "transient tachypnoea",
+            "meconium",
+            "term"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Contrast the preterm breathing picture with transient tachypnoea and meconium aspiration."
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "preterm_lbw_kangaroo_long_case: additionalInvestigations (Ballard Fenton with warmth audits)",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The high-risk infant: physical examination of the preterm infant",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Start with the silhouette: a preterm baby lies flexed but extends easily, with thin red skin showing veins, fine lanugo over the back and shoulders, soft flat ears, and soles that are smooth except for anterior creases. In a girl the labia are prominent with a small clitoris, and in a boy the testes are high or undescended with few scrotal folds.\n\nThese are the physical half of the Ballard examination, and together with neuromuscular signs like the square window and arm recoil they date the baby within about two weeks when antenatal dating is missing.",
+          "heading": "What immaturity looks like"
+        },
+        {
+          "body": "Count the rate first: below sixty breaths a minute with no cyanosis is mild, sixty to eighty is moderate, and above eighty is severe. Add retractions, an audible grunt, barely heard air entry, and gestation below thirty weeks, each pushing the score the same way.\n\nA total below five is mild disease, five to eight is moderate, and above eight is severe. The score decides CPAP and referral, so score every preterm baby with effort rather than eyeballing the chest.",
+          "heading": "Grading the effort with Downe"
+        },
+        {
+          "body": "Weight tells the trend, not the moment. Plot birth weight with the daily weights on a Fenton chart for preterm growth, watch the early fall and the return to birth weight over the early weeks, and track head circumference with the same discipline since the brain must grow even when the body stalls.\n\nA baby gaining steadily on expressed milk with a growing head is succeeding whatever the absolute grams; a flat or falling curve with poor feeds, cold stress or apnoea is failing and needs the feeds, warmth and infection screen revisited the same day.",
+          "heading": "The curve matters more than the kilograms"
+        }
+      ],
+      "title": "The preterm picture at the bedside",
+      "why": "The preterm examination is an exercise in dating and grading rather than hunting for one focal lesion. Ballard signs confirm the gestation, Downe cues grade the breathing, and the weight curve judges the whole enterprise, so the three together replace the long organ-by-organ hunt a term baby would get."
+    },
+    "skill.reasoning.prematurity.summary": {
+      "id": "skill.reasoning.prematurity.summary",
+      "kind": "reasoning",
+      "oneLine": "Gestation, weight, appropriateness, stability and plan in three sentences",
+      "probes": [
+        {
+          "a": "Postnatal day with gestation and birth and current weights, appropriateness for dates, current stability of warmth breathing feeds and sugar, and the screening and follow-up plan.",
+          "accept": [
+            "gestation",
+            "weights",
+            "stability",
+            "screening",
+            "follow-up"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "What must a preterm summary always contain?"
+        },
+        {
+          "a": "The tempo is days of adaptation, not hours of collapse, so the summary states what has stabilised and what is still pending, like regaining birth weight or completing eye screening, rather than a single event.",
+          "accept": [
+            "days",
+            "stabilised",
+            "pending",
+            "screening"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How does tempo differ in a preterm summary from an acute illness summary?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "preterm_lbw_kangaroo_long_case: clinicalPearls (ROP hearing thyroid follow)",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Clinical reasoning: the neonatal summary",
+          "source": "Macleod's Clinical Examination"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "State the baby in one line: the postnatal day, the gestation in weeks, the birth weight with the current weight, and whether growth is appropriate or small for dates. Follow with the reason this baby is presenting today, such as stable growth on kangaroo care or referral for apnoea with poor weight gain.\n\nA worked example: a day five girl born at 33 weeks weighing 1700 g, now 1620 g and appropriate for dates, admitted for supervised preterm care, currently warm and stable on kangaroo contact with expressed milk feeds and no apnoea for two days.",
+          "heading": "Date, weigh and place"
+        },
+        {
+          "points": [
+            "Warmth: kangaroo contact or warmer, axillary temperature stability, and any cold stress episodes.",
+            "Breathing: effort with Downe cues, apnoea or blue spells, oxygen or CPAP status, and saturation behaviour.",
+            "Feeds and sugar: feed type with volume and frequency, suck quality, vomits or residuals, urine and stool passage, and sugar stability.",
+            "Infection and yellow: lethargy or poor suck changes, culture status with antibiotics if any, and jaundice zone with light treatment if given.",
+            "Growth and senses: weight trajectory with head circumference, and the booked dates for eye, hearing, thyroid and development review."
+          ],
+          "heading": "Stability across five systems"
+        },
+        {
+          "body": "Close with what happens next: whether the baby is ready for discharge or needs continued unit care, the home plan for warmth and feeding with danger signs taught, and the dated follow-up for weight, eyes, hearing and development.\n\nA summary without the future is a snapshot; the consultant needs to hear that this baby is on a track, with named checks that will catch the complications that have not happened yet.",
+          "heading": "End with the future"
+        }
+      ],
+      "title": "Summarising the preterm infant",
+      "why": "A preterm summary orients the listener in gestation before anything else, because every normal value that follows depends on it. Stability across warmth, breathing, feeds, infection and growth, plus the dated screening plan, is the whole case in miniature."
+    },
+    "skill.reasoning.prematurity.differential": {
+      "id": "skill.reasoning.prematurity.differential",
+      "kind": "reasoning",
+      "oneLine": "RDS against TTN and pneumonia, sepsis against NEC, preterm against small for dates",
+      "probes": [
+        {
+          "a": "Respiratory distress syndrome with grunt from birth, transient tachypnoea without grunt after section, pneumonia or meconium aspiration with coarse signs, and sepsis with lethargy and poor suck.",
+          "accept": [
+            "distress syndrome",
+            "transient tachypnoea",
+            "pneumonia",
+            "sepsis"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "Name four causes of breathing difficulty in the newborn period."
+        },
+        {
+          "a": "Necrotising enterocolitis brings vomiting with a swollen tender belly and blood in the stool after feeds advance, while sepsis brings lethargy with temperature and sugar swings, and the two often coexist so both are covered.",
+          "accept": [
+            "belly",
+            "blood",
+            "lethargy",
+            "coexist"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How do you separate necrotising enterocolitis from sepsis, and what if both fit?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "preterm_lbw_kangaroo_long_case: additionalDifferentials (RDS versus TTN versus pneumonia versus MAS by onset x-ray and risks)",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Respiratory distress in the newborn: differential diagnosis",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Respiratory distress syndrome starts at or within hours of birth in a preterm baby with grunt, retractions and poor air entry, and the film shows a fine ground-glass pattern with air bronchograms. Transient tachypnoea instead troubles a term baby after a section or fast labour, breathing fast without much grunt and clearing within days.\n\nPneumonia and meconium aspiration bring coarse signs with risk factors: prolonged rupture with foul liquor for infection, and staining with a term post-dates baby for aspiration. Onset timing, gestation and the liquor story separate them before the film is even seen.",
+          "heading": "Four breathless babies"
+        },
+        {
+          "points": [
+            "Sepsis against necrotising enterocolitis: lethargy with poor suck and sugar swings fits both, but vomiting with a distended tender belly and blood flecks after feeds advance points at the gut, and both are covered until cultures and the surgical review decide.",
+            "Preterm against small for dates: an early baby with rough Ballard signs and grunting has immature lungs, while a term thin baby with a wasted body and mature signs has exhausted reserves and turns hypoglycaemic and cold.",
+            "Physiological against pathological jaundice: yellow after the second day that behaves and fades is expected, while yellow within the first day, rapid spread, pale stools or a sick baby means haemolysis, sepsis or obstruction until proved otherwise.",
+            "Apnoea of prematurity against seizures and sepsis: brief pauses with slow pulse that recover with touch in a well preterm baby are immaturity, while fits with abnormal movements, or apnoea in a sick lethargic baby, are neurology or infection. "
+          ],
+          "heading": "The pairs that confuse"
+        },
+        {
+          "body": "Two traps catch students every year. The first is calling every fast-breathing preterm baby distress syndrome and missing the sepsis underneath, so cultures go with the CPAP rather than after it. The second is discharging a non-improving baby on repeated antibiotics without asking why feeds fail, weight stalls or the belly swells.\n\nThe differential stays open through the admission: each new vomit, spell or yellow zone re-sorts the list rather than merely adding a drug.",
+          "heading": "Traps that keep recurring"
+        }
+      ],
+      "title": "What else a preterm baby could be",
+      "why": "A preterm baby can carry two diseases at once, and the commonest pair is distress with sepsis underneath. Holding the differentials as parallel possibilities rather than successive guesses is what keeps cultures, films and surgical review moving together instead of in sequence."
+    },
+    "skill.investigation.prematurity.workup": {
+      "id": "skill.investigation.prematurity.workup",
+      "kind": "investigation",
+      "oneLine": "Date maturity, catch infection and yellow, film the lungs, book the senses",
+      "probes": [
+        {
+          "a": "Ballard scoring with Fenton charting for maturity and growth, glucose for hypoglycaemia, bilirubin for jaundice, blood counts with cultures for sepsis, and a chest film for ground-glass lungs.",
+          "accept": [
+            "Ballard",
+            "glucose",
+            "bilirubin",
+            "cultures",
+            "chest film"
+          ],
+          "level": 1,
+          "minMatch": 4,
+          "q": "Name five investigations for a preterm baby and what each answers."
+        },
+        {
+          "a": "Eyes for retinopathy in the early weeks, hearing screening before discharge, thyroid testing in the first weeks, and growth with development at every visit, since all four fail silently.",
+          "accept": [
+            "retinopathy",
+            "hearing",
+            "thyroid",
+            "growth"
+          ],
+          "level": 2,
+          "minMatch": 3,
+          "q": "Which four screening checks must be booked for every very preterm baby?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "preterm_lbw_kangaroo_long_case: additionalInvestigations (Ballard Fenton with warmth audits)",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Evaluation of the high-risk infant: laboratory and imaging studies",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Date first, bleed later. Score maturity with the Ballard examination and plot weight, length and head circumference on a Fenton chart for preterm growth, so every later result reads against the right gestation. Check glucose early and with any lethargy, poor suck or jitteriness, since exhausted stores with small feeds drop the sugar without warning.\n\nMeasure bilirubin with the spread of yellow rather than by eye alone, because preterm yellow rises faster and the threshold for light treatment sits lower. Send blood counts with C reactive protein and blood cultures where sepsis is suspected, remembering that a negative screen never overrules a sick baby.",
+          "heading": "Maturity, sugar, yellow and germs"
+        },
+        {
+          "heading": "Which test answers which question",
+          "table": {
+            "cols": [
+              "Question",
+              "Test",
+              "What it tells you"
+            ],
+            "rows": [
+              [
+                "How mature and how grown",
+                "Ballard score with Fenton plotting",
+                "Confirms gestation and tracks the weight curve"
+              ],
+              [
+                "Is sugar holding",
+                "Bedside glucose with feeds",
+                "Catches hypoglycaemia before fits"
+              ],
+              [
+                "How deep is the yellow",
+                "Serum bilirubin with zone",
+                "Sets light treatment and exchange level"
+              ],
+              [
+                "Is this sepsis",
+                "Counts with CRP and cultures",
+                "Supports antibiotics but never delays them"
+              ],
+              [
+                "What do the lungs show",
+                "Chest film",
+                "Ground glass with air bronchograms means surfactant lack"
+              ]
+            ]
+          }
+        },
+        {
+          "body": "Film the chest where breathing effort persists: a fine ground-glass haze with air bronchograms fits surfactant lack, while coarse patchy shadows with risk factors point at infection or aspiration. Use sound and gas measures where available, and keep oxygen blended and titrated rather than free-flowing, since both blue and over-pink harm the retina and lungs.\n\nBook the senses before discharge: eyes for retinopathy in the early weeks, hearing screening, thyroid testing, and growth with neurodevelopment at every visit. A baby who survives without these booked is only half managed.",
+          "heading": "Lungs on film, senses on the calendar"
+        }
+      ],
+      "title": "Investigating the preterm infant",
+      "why": "Investigations in a preterm baby serve three jobs at once: dating the baby, catching the silent complications, and booking the future. Understanding which test answers which question stops the commonest error, which is treating numbers while the weight curve, the eyes or the hearing go unwatched."
+    },
+    "skill.reasoning.prematurity.diagnosis": {
+      "id": "skill.reasoning.prematurity.diagnosis",
+      "kind": "reasoning",
+      "oneLine": "Gestation band, weight band, growth appropriateness and the active problems",
+      "probes": [
+        {
+          "a": "A preterm low birth weight infant of stated weeks and grams, appropriate or small for dates, with the active problems listed, such as respiratory distress or jaundice needing light treatment.",
+          "accept": [
+            "preterm",
+            "grams",
+            "dates",
+            "distress",
+            "jaundice"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "What does a complete preterm diagnostic statement contain?"
+        },
+        {
+          "a": "Below 28 weeks is extreme, 28 to under 32 very preterm, 32 to under 34 moderate, and 34 to under 37 late preterm, with risks and the level of care rising as the weeks fall.",
+          "accept": [
+            "28",
+            "32",
+            "34",
+            "37"
+          ],
+          "level": 2,
+          "minMatch": 3,
+          "q": "Name the four preterm gestation bands."
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "preterm_lbw_kangaroo_long_case: clinicalPearls (Trophic EBM NEC fortifiers)",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The high-risk infant: classification by gestation and weight",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Name the gestation band first: below 28 weeks extreme, 28 to under 32 very preterm, 32 to under 34 moderate, and 34 to under 37 late preterm. Then the weight band: below 2500 g low, below 1500 g very low, below 1000 g extremely low. Then appropriateness: appropriate or small for dates against the tenth centile.\n\nA complete statement reads like this: a day five girl, 33 weeks and 1700 g at birth, appropriate for dates, with resolving respiratory distress and physiological jaundice under light treatment. Every listener can now place her risks without asking a follow-up question.",
+          "heading": "Three bands, one sentence"
+        },
+        {
+          "heading": "Bands that change beds",
+          "points": [
+            "Late preterm babies look deceptively well but still turn cold, yellow and hypoglycaemic, so they need the same vigilance in smaller doses.",
+            "Very and extremely preterm babies need a unit with CPAP, blended oxygen, parenteral nutrition and eye screening, so their diagnosis is also a referral decision.",
+            "A small for dates term baby shares the weight band but not the lung problem: mature lungs with exhausted sugar and warmth reserves.",
+            "Severity is dynamic: a stable grower on kangaroo care and a ventilated septic baby share the labels but not the prognosis, so restate the active problems daily."
+          ]
+        }
+      ],
+      "title": "Diagnosis and grading of the preterm infant",
+      "why": "A diagnosis of prematurity that stops at the word preterm says nothing about what this baby needs today. Gestation band sets the maturity, weight band sets the reserves, appropriateness sets the cause, and the active problems set the bed, so all four belong in one statement."
+    },
+    "skill.treatment.prematurity.care": {
+      "dosingNote": "This module teaches management at the level of drug class and principle. Specific agents, routes, combinations and durations must be taken from your current national or institutional guideline and local resistance data at the time of prescribing. CliniX does not prescribe.",
+      "id": "skill.treatment.prematurity.care",
+      "kind": "treatment",
+      "oneLine": "Warm chain with kangaroo care, slow milk advance, gentle air and scheduled vigilance",
+      "probes": [
+        {
+          "a": "Keep the baby warm with skin-to-skin kangaroo contact and a warm chain, feed expressed breast milk in small rising volumes, support breathing with CPAP and blended oxygen, treat suspected sepsis promptly, and screen eyes hearing and thyroid with booked follow-up.",
+          "accept": [
+            "kangaroo",
+            "breast milk",
+            "CPAP",
+            "sepsis",
+            "screen"
+          ],
+          "level": 1,
+          "minMatch": 4,
+          "q": "Name five pillars of preterm care."
+        },
+        {
+          "a": "Stop feeds with a swollen tender belly or blood in the stool, call the surgeon, continue sepsis cover, and reintroduce milk slowly only when the belly softens and the baby passes stool.",
+          "accept": [
+            "stop feeds",
+            "surgeon",
+            "sepsis",
+            "slowly"
+          ],
+          "level": 2,
+          "minMatch": 3,
+          "q": "Feeds advance and the belly swells with blood flecks in the stool. What now?"
+        },
+        {
+          "a": "Warmth with home kangaroo care, exclusive breastfeeds with volumes and frequency, danger signs of cold blue spells poor suck and fever, and dated reviews for weight eyes hearing and immunisation.",
+          "accept": [
+            "kangaroo",
+            "danger signs",
+            "weight",
+            "immunisation"
+          ],
+          "level": 3,
+          "minMatch": 3,
+          "q": "What must discharge counselling and follow-up contain?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "preterm_lbw_kangaroo_long_case: clinicalPearls (Kangaroo humidity warm-chain)",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Care of the preterm or low birth weight infant",
+          "source": "WHO"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Warmth comes before everything. Dry the baby at once, keep skin-to-skin kangaroo contact through day and night, maintain the warm chain from labour room to nursery to home, and treat a recorded low temperature as an emergency that pauses all routine work. A cold preterm baby burns oxygen and sugar it does not have, so rewarming is resuscitation.\n\nFeed milk that is human first. Start expressed breast milk early in small trophic volumes, advance slowly as suck, residuals and the belly allow, and add fortifiers or supplements only per protocol for very small babies. Avoid animal milk and prelacteal feeds, support the mother to express regularly, and pass a tube where suck is unsafe rather than starving the gut.",
+          "heading": "Warmth and milk first"
+        },
+        {
+          "body": "Support breathing gently. Nurse preterm babies with effort on CPAP with blended oxygen titrated to steady saturation, handle minimally with the head midline, and escalate for ventilation where apnoea, severe retractions or exhaustion persist. Give surfactant and caffeine-type support only where the unit protocol and medical supervision allow, never as a home or unsupervised measure.\n\nTreat suspected sepsis at once with cultures first but antibiotics without delay per local policy, since preterm infection kills in hours. Nurse the baby with clean hands, minimal lines, and early removal of every tube and cannula that is no longer earning its keep.",
+          "heading": "Gentle air, prompt antibiotics"
+        },
+        {
+          "points": [
+            "Watch daily: weight with head circumference on the preterm chart, temperature and sugar stability, breathing effort with apnoea counts, feed tolerance with stool and urine, and jaundice spread with bilirubin.",
+            "Screen on schedule: eyes for retinopathy in the early weeks, hearing before discharge, thyroid in the first weeks, and hips and heart where examination points.",
+            "Immunise by chronological age, not corrected age, following the national schedule, and counsel the family that small size never delays vaccines.",
+            "Refer in time: severe distress needing ventilation, suspected surgical belly, bleeding, fits, or a mother who cannot stay with the baby all move the pair up the chain with warmth and oxygen maintained during transport."
+          ],
+          "heading": "Vigilance, screening and referral"
+        },
+        {
+          "body": "Discharge a grower, not a weight. Send home a baby who holds temperature in kangaroo care, sucks or takes expressed feeds reliably, gains steadily and has completed eye screening with other reviews booked. Teach the mother home kangaroo care, exclusive breastfeeding with volumes and frequency, hand hygiene, and danger signs: cold limbs, blue spells, poor suck, fast breathing, fever, jaundice spread and a swollen belly.\n\nBook weight, growth, development, eyes, hearing and immunisation reviews with named dates before the family leaves, since follow-up is where preterm care succeeds or quietly fails.",
+          "heading": "Home on a track, not merely home"
+        }
+      ],
+      "title": "Caring for the preterm infant",
+      "why": "Preterm care is four therapies running together: warmth that never breaks, milk that rises slowly, air that is blended and gentle, and vigilance that is scheduled rather than anxious. No single drug or device substitutes for this bundle, and the bundle works in a district unit as well as a tertiary nursery."
+    }
+  },
+  "cases": [
+    {
+      "diagnosis": {
+        "accept": [
+          "Preterm newborn",
+          "Low birth weight"
+        ],
+        "answer": "Preterm low birth weight infant, 33 weeks and 1700 g at birth, appropriate for dates, day five and stable on kangaroo care with expressed milk feeds.",
+        "minMatch": 1
+      },
+      "differentialModel": {
+        "accept": [
+          "Small for gestational age",
+          "Respiratory distress syndrome of the newborn",
+          "Neonatal sepsis",
+          "Transient tachypnoea of the newborn",
+          "Necrotising enterocolitis",
+          "Neonatal jaundice",
+          "Birth asphyxia",
+          "Meconium aspiration syndrome"
+        ],
+        "answer": "Preterm low birth weight infant with resolving respiratory distress. Consider small for dates growth restriction, neonatal sepsis, transient tachypnoea, necrotising enterocolitis, neonatal jaundice, birth asphyxia and meconium aspiration.",
+        "minMatch": 3
+      },
+      "essentialInvestigations": [
+        "weight_chart",
+        "blood_glucose",
+        "serum_bilirubin",
+        "sepsis_screen",
+        "chest_film"
+      ],
+      "exam": {
+        "skill.exam.paed.head_circumference": {
+          "abnormal": false,
+          "finding": "Head circumference 29 cm, length 43 cm, both appropriate for 33 weeks. Anterior fontanelle level and soft. No caput or cephalhaematoma."
+        },
+        "skill.exam.paed.neo.ballard_gestational_age": {
+          "abnormal": true,
+          "finding": "Posture flexed but extends easily. Thin red skin with visible veins and lanugo over the back. Flat areola without a nodule, soft folded ears, few anterior sole creases. Square window near a right angle. Consistent with about 33 weeks."
+        },
+        "skill.exam.paed.neo.chest_respiratory_cvs": {
+          "abnormal": true,
+          "finding": "Mild subcostal retractions with a soft grunt on expiration. Air entry equal on both sides with transmitted sounds, no murmur. Apex beat felt in the fourth space."
+        },
+        "skill.exam.paed.neo.jaundice_kramer": {
+          "abnormal": true,
+          "finding": "Yellow staining of the face and upper trunk down to the umbilicus, about zone three. No yellow of palms or soles. Stools yellow, urine staining the napkin."
+        },
+        "skill.exam.paed.neo.primitive_reflexes": {
+          "abnormal": true,
+          "finding": "Moro incomplete with weak embrace, rooting present but feeble, suck weak and tires quickly. Palmar grasp present."
+        },
+        "skill.exam.paed.neo.skin_cord_variations": {
+          "abnormal": false,
+          "finding": "No birth trauma marks, no peeling or pustules. Cord stump clean and dry with no redness or discharge. No dysmorphism."
+        },
+        "skill.exam.paed.weight": {
+          "abnormal": true,
+          "finding": "Current weight 1620 g against a birth weight of 1700 g on day five, an expected early fall. Length and head circumference steady. Plotted on the preterm chart."
+        },
+        "skill.gen.paed.appearance": {
+          "abnormal": true,
+          "finding": "Small pink preterm girl, awake and flexed in the warmer, moving all limbs. Thin with visible veins, lanugo over the back. No dysmorphism, no distress at rest."
+        },
+        "skill.gen.paed.cyanosis": {
+          "abnormal": false,
+          "finding": "Pink in air with no perioral duskiness at rest. Peripheries warm with a brisk capillary refill. No apnoea or blue spell witnessed on examination."
+        },
+        "skill.gen.paed.pallor": {
+          "abnormal": false,
+          "finding": "No pallor of the palms, tongue or conjunctivae. No bleeding from any site."
+        },
+        "skill.gen.paed.vitals": {
+          "abnormal": true,
+          "finding": "Heart rate 142 per minute, regular. Blood pressure 62/38. Respiratory rate 54 with mild retractions. SpO2 94 percent in air. Temperature 36.8 C by axilla."
+        }
+      },
+      "fallback": "I am not sure what you mean. Please ask about the baby's birth, feeds, warmth, breathing or yellow colour.",
+      "history": {
+        "antenatal_visit_record": {
+          "cues": [
+            "antenatal checkups",
+            "how many antenatal visits",
+            "antenatal care received",
+            "pregnancy checkup record"
+          ],
+          "reply": "I went to the government centre three times. They gave me iron tablets and two injections in the arm. My blood pressure was normal each time."
+        },
+        "birth_weight_value": {
+          "cues": [
+            "what was the birth weight",
+            "baby weight at birth",
+            "how much did the baby weigh",
+            "birth weight in grams"
+          ],
+          "reply": "She weighed 1700 grams at birth. Today the sister says 1620 grams. They say a small fall first is expected."
+        },
+        "breathing_grunt_pattern": {
+          "cues": [
+            "fast breathing noticed",
+            "noisy breathing or grunt",
+            "chest indrawing seen",
+            "breathing difficulty since birth"
+          ],
+          "reply": "She breathes fast with the ribs pulling in a little and a soft sound when she breathes out. The doctor says the grunt is settling since yesterday."
+        },
+        "cry_after_birth": {
+          "cues": [
+            "did the baby cry at birth",
+            "cry immediately after delivery",
+            "first cry timing",
+            "baby cried at once"
+          ],
+          "reply": "She cried, but late and weakly, after they rubbed her dry. Not the loud cry my first child had."
+        },
+        "feed_type_amount": {
+          "cues": [
+            "what milk is the baby getting",
+            "expressed milk feeds given",
+            "feed volume and frequency",
+            "how often is the baby fed"
+          ],
+          "reply": "They taught me to express milk into a small cup. She gets my milk every two hours through a thin tube, a little at a time. No other milk."
+        },
+        "gestation_age_detail": {
+          "cues": [
+            "how many weeks pregnancy lasted",
+            "gestation in weeks",
+            "pregnancy duration in months",
+            "due date of delivery"
+          ],
+          "reply": "My date was still seven weeks away when pains started. They say she came at 33 weeks."
+        },
+        "immunisation_injection_status": {
+          "cues": [
+            "vaccines given after birth",
+            "immunisation injections received",
+            "BCG or polio drops given",
+            "vitamin K injection given"
+          ],
+          "reply": "No vaccines yet. They say injections start later by age and weight. Only the milk and warmth treatment so far."
+        },
+        "jaundice_yellow_look": {
+          "cues": [
+            "yellow colour of eyes",
+            "yellow staining noticed",
+            "jaundice observed when",
+            "yellow of skin spreading"
+          ],
+          "reply": "Since yesterday her face looks yellow, now down to the chest. The nurse checks her under a lamp and took blood today."
+        },
+        "labour_onset_course": {
+          "cues": [
+            "how labour started",
+            "labour pains onset",
+            "early labour pains began",
+            "premature pains history"
+          ],
+          "reply": "Pains began suddenly in the night with water leaking. We reached the district hospital in two hours and she was born the same morning."
+        },
+        "maternal_illness_pregnancy": {
+          "cues": [
+            "illness during pregnancy",
+            "fever during pregnancy",
+            "blood pressure in pregnancy",
+            "sugar or anaemia pregnancy"
+          ],
+          "reply": "I had swelling of the feet in the last month and my haemoglobin was low. No fever, no burning urine, no sugar problem."
+        },
+        "membrane_rupture_status": {
+          "cues": [
+            "waters broke when",
+            "leaking per vaginum duration",
+            "rupture of membranes timing",
+            "colour of leaking fluid"
+          ],
+          "reply": "Water started leaking about ten hours before she was born. It was clear, not green and not foul smelling."
+        },
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "what is the problem with the baby",
+            "why have you come to hospital",
+            "tell me about the baby's illness",
+            "how can i help you today",
+            "what is troubling the baby"
+          ],
+          "key": true,
+          "reply": "Doctor, my baby girl was born early at 33 weeks, weighing 1700 grams. She is five days old in the special unit, on my expressed milk and kangaroo warmth. They say she is stable but needs watching.",
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "referral_transport_mode": {
+          "cues": [
+            "where was the baby born",
+            "referred from which centre",
+            "transport to this hospital",
+            "delivery place details"
+          ],
+          "reply": "She was born at the district hospital. An ambulance brought us both to this unit on the second day for closer care. I stay with her now."
+        },
+        "resuscitation_help_given": {
+          "cues": [
+            "help to breathe after birth",
+            "bag and mask help given",
+            "resuscitation after delivery",
+            "oxygen given at birth"
+          ],
+          "reply": "They dried her under a heater and gave breaths with a small mask for a short time. Then she breathed on her own and needed no tube."
+        },
+        "sibling_loss_history": {
+          "cues": [
+            "previous children health",
+            "earlier newborn deaths",
+            "siblings alive and well",
+            "past pregnancy losses"
+          ],
+          "reply": "My first child, a boy, is three years old and healthy. No abortion or baby death before this."
+        },
+        "urine_stool_passage": {
+          "cues": [
+            "urine passed how often",
+            "stool passed after birth",
+            "meconium passed timing",
+            "wet napkins count"
+          ],
+          "reply": "She passed black stool on the first day and passes urine well. Now the stool is yellow with milk feeds. Belly is soft."
+        },
+        "warmth_kangaroo_practice": {
+          "cues": [
+            "kangaroo care practiced",
+            "skin to skin contact hours",
+            "how is the baby kept warm",
+            "warmer or incubator care"
+          ],
+          "reply": "She lies on my chest skin to skin inside my gown for most of the day and night. The nurse checks her temperature. My mother takes over when I rest."
+        },
+        "apnoea_cyanosis_episodes": {
+          "cues": [
+            "breathing pauses witnessed",
+            "blue episodes noticed",
+            "stops breathing at times",
+            "apnoea episodes so far"
+          ],
+          "reply": "On the second night she stopped breathing once and turned a little blue. The nurse rubbed her back and she started again. Nothing since yesterday."
+        }
+      },
+      "id": "case.prematurity.sncu_girl",
+      "initialVitals": {
+        "hr": 142,
+        "bpSystolic": 62,
+        "bpDiastolic": 38,
+        "rr": 54,
+        "spo2": 94,
+        "temp": 36.8,
+        "gcs": 15
+      },
+      "investigations": {
+        "blood_glucose": {
+          "indicated": true,
+          "label": "Bedside blood glucose",
+          "note": "Preterm stores exhaust fast with small feeds, so sugar is checked early and with any lethargy or poor suck.",
+          "result": "58 mg/dL, stable on two hourly expressed milk feeds. No jitteriness or fits."
+        },
+        "chest_film": {
+          "indicated": true,
+          "label": "Chest radiograph",
+          "note": "Confirms surfactant lack rather than infection or aspiration, and sets the CPAP and referral decision.",
+          "result": "Fine granular haze in both lung fields with visible air bronchograms. No coarse shadows, no effusion, heart size normal."
+        },
+        "cranial_ultrasound": {
+          "indicated": false,
+          "label": "Cranial ultrasound",
+          "note": "Not routine on day five in a stable baby. Reserved for very preterm, ventilated, or deteriorating babies and for fits or a tense fontanelle.",
+          "result": "Not done."
+        },
+        "eye_screen": {
+          "indicated": true,
+          "label": "Retinopathy screening",
+          "note": "Booked, not done today: the retina is still developing, and the examination is timed for the early weeks, not the first days.",
+          "result": "Booked for the eye clinic in the third week. Parents counselled on keeping the date."
+        },
+        "hearing_thyroid_screen": {
+          "indicated": true,
+          "label": "Hearing and thyroid screening",
+          "note": "Both fail silently and both change the outcome when caught early, so they are booked before discharge, not after.",
+          "result": "Hearing screen booked before discharge. Thyroid blood sample taken today, result awaited."
+        },
+        "sepsis_screen": {
+          "indicated": true,
+          "label": "Sepsis screen with blood culture",
+          "note": "Sent because preterm defences are thin and the mother had prolonged leaking, though the liquor was clear. Antibiotics run only while suspicion lasts.",
+          "result": "Total leucocyte count normal with no left shift. CRP mildly raised. Blood culture sent, result awaited at 48 hours."
+        },
+        "serum_bilirubin": {
+          "indicated": true,
+          "label": "Serum bilirubin",
+          "note": "Preterm yellow rises faster with a lower treatment threshold, so the level is measured against the spread of yellow, not guessed from it.",
+          "result": "Total bilirubin 11 mg/dL on day five, below the exchange level. Under double surface light treatment with eye pads and temperature watch."
+        },
+        "weight_chart": {
+          "indicated": true,
+          "label": "Weight and growth charting",
+          "note": "The curve is the investigation that never ends: daily weights with head circumference on the preterm chart judge the whole admission.",
+          "result": "Birth 1700 g, day five 1620 g, plotted on the preterm chart. Head circumference steady. Feeds advancing without residuals."
+        }
+      },
+      "managementModel": {
+        "accept": [
+          "warmth",
+          "kangaroo mother care",
+          "expressed breast milk",
+          "oxygen",
+          "monitoring",
+          "screening",
+          "follow-up",
+          "counselling",
+          "immunisation",
+          "antibiotics"
+        ],
+        "answer": "Continuous kangaroo warmth with temperature watch, two hourly expressed breast milk with slow advance, blended oxygen only as needed, close monitoring of weight sugar breathing and yellow, sepsis cover till cultures return, light treatment for jaundice, booked eye hearing and thyroid screening, discharge counselling with danger signs, and dated follow-up with immunisation by chronological age.",
+        "minMatch": 3
+      },
+      "opening": "Sunita, 26, sits in the special newborn care unit with a small baby girl on her chest inside her gown. The baby is five days old, born at 33 weeks. Introduce yourself and take the story.",
+      "patient": {
+        "age": 5,
+        "name": "Baby girl of Sunita",
+        "occupation": "Newborn, day five of life",
+        "residence": "Rural, with mother rooming in at the district special newborn care unit",
+        "sex": "female"
+      },
+      "teachingPoints": [
+        "Gestation reframes every normal value: a rate of 54 with mild retractions and a soft grunt on day five is resolving distress at 33 weeks, not pneumonia.",
+        "The weight curve judges the admission: 1700 g to 1620 g on day five is the expected early fall, and regain over the early weeks with a steady head is success.",
+        "Grunt is the baby's own airway pressure, so its disappearance in a tiring baby means worsening, while its gradual fading in a pink active baby means recovery.",
+        "Clear liquor with a ten hour rupture still earns a sepsis screen in a preterm baby, but antibiotics run only while suspicion lasts rather than as a full course by default.",
+        "Yellow to the trunk on day five with a bilirubin of 11 needs light treatment with temperature watch, and the exchange level sits lower here than at term.",
+        "An apnoea that recovers with touch in a well baby is immaturity, but the same pause in a lethargic cold baby is sepsis until proved otherwise.",
+        "Discharge readiness is behaviour, not grams: holds warmth in kangaroo care, feeds reliably, gains steadily, with eye hearing and thyroid reviews booked with dates."
+      ],
+      "title": "A small girl born seven weeks early, stable on milk and warmth"
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "examinerQuestions": [
+          "What Ballard signs told you this baby is preterm rather than small for dates?",
+          "Grade this baby's breathing with the Downe cues you observed.",
+          "When would you move this baby up the referral chain, and how would you keep her warm on the way?"
+        ],
+        "id": "osce.prematurity.bedside",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.paed.rapport",
+          "skill.approach.paed.consent_assent",
+          "skill.exam.paed.weight",
+          "skill.exam.paed.neo.ballard_gestational_age",
+          "skill.exam.paed.neo.chest_respiratory_cvs",
+          "skill.exam.paed.neo.jaundice_kramer"
+        ],
+        "task": "This preterm baby girl is five days old and stable in the nursery. Examine her for maturity and breathing effort, check her warmth and weight trajectory, and be ready to present your findings.",
+        "title": "Examine the preterm infant"
+      },
+      {
+        "examinerQuestions": [
+          "Which three facts from the history decide this baby's risk more than any finding?",
+          "Demonstrate how you would position this baby for kangaroo care and what you would check each time.",
+          "What five danger signs would you teach this mother before discharge?"
+        ],
+        "id": "osce.prematurity.counselling",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.paed.consent_assent",
+          "skill.hx.chief_complaints",
+          "skill.hx.paed.presenting_complaint",
+          "skill.hx.paed.diet_infant",
+          "skill.hx.prematurit.risks"
+        ],
+        "task": "Sunita's preterm baby is stable and will soon go home. Take a focused background history in seven minutes and counsel her on warmth, feeds and when to return.",
+        "title": "History and discharge counselling for the preterm infant"
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.reasoning.prematurity.basics",
+      "skill.reasoning.prematurity.problems",
+      "skill.reasoning.prematurity.findings",
+      "skill.reasoning.prematurity.differential",
+      "skill.investigation.prematurity.workup",
+      "skill.reasoning.prematurity.diagnosis",
+      "skill.treatment.prematurity.care",
+      "skill.exam.paed.neo.ballard_gestational_age"
+    ]
+  }
+}

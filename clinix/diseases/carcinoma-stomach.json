@@ -1,0 +1,1380 @@
+{
+ "_comment": "Surgery pathway for carcinoma of the stomach presenting as dyspepsia with weight loss. Shared history, examination and annexure skills are referenced from the core and surgery packs; skill.hx.carcinoma.stomach_risk and skill.present.carcinoma.stomach merge from work/shared-carcinoma-stomach.json. The disease owns only reasoning, investigation, treatment and annexure skills.",
+ "id": "carcinoma-stomach",
+ "name": "Carcinoma stomach",
+ "fullName": "Carcinoma of the stomach",
+ "subtitle": "Dyspepsia and weight loss",
+ "system": "surgery",
+ "kbRef": "oesophagus_and_stomach_pathology",
+ "oneLine": "Anorexia and wasting in an older adult, and proving the stomach is the source",
+ "estMinutes": 60,
+ "review": {
+  "status": "ai_drafted"
+ },
+ "version": 1,
+ "chapters": [
+  {
+   "id": "basics",
+   "title": "Basics",
+   "blurb": "What carcinoma of the stomach is, and why it presents late",
+   "skills": [
+    "skill.stomach.basics"
+   ]
+  },
+  {
+   "id": "approach",
+   "title": "Approach to the patient",
+   "blurb": "Before a single question",
+   "skills": [
+    "skill.approach.hygiene",
+    "skill.approach.introduce",
+    "skill.approach.consent",
+    "skill.approach.position"
+   ]
+  },
+  {
+   "id": "particulars",
+   "title": "Patient particulars",
+   "blurb": "Age and sex set the risk before a symptom is mentioned",
+   "skills": [
+    "skill.particulars.demographics"
+   ],
+   "emphasis": {
+    "skill.particulars.demographics": {
+     "expect": "In suspected stomach cancer, age past middle life and male sex carry real weight, alongside a life of bidi smoking or tobacco chewing. A 60 year old man with those habits starts with a far higher pre test probability than a young woman with the same dyspepsia."
+    }
+   }
+  },
+  {
+   "id": "history",
+   "title": "History of presenting illness",
+   "blurb": "Months, not years, and an appetite that fades first",
+   "skills": [
+    "skill.hx.chief_complaints",
+    "skill.hx.surg.chronic_dyspepsia_ulcer"
+   ],
+   "emphasis": {
+    "skill.hx.chief_complaints": {
+     "expect": "A typical presentation reads in months: fading appetite for four months, a constant epigastric ache for six weeks, steady weight loss throughout. That tempo alone should move you toward a malignant process before anything else is known."
+    },
+    "skill.hx.surg.chronic_dyspepsia_ulcer": {
+     "expect": "Expect an old rhythmic ulcer story that has lost its rhythm: food no longer brings the expected pattern, vomiting no longer relieves, and appetite, never lost in simple ulcer, is now gone. That change of tune matters more than any single pain detail."
+    }
+   }
+  },
+  {
+   "id": "past_personal_drug_family",
+   "title": "Past, personal, drug and family history",
+   "blurb": "The exposures and the old ulcer behind this cancer",
+   "skills": [
+    "skill.hx.carcinoma.stomach_risk"
+   ]
+  },
+  {
+   "id": "general_exam",
+   "title": "General examination",
+   "blurb": "A wasted patient, and the deficiency signs that point downward",
+   "skills": [
+    "skill.gen.appearance",
+    "skill.gen.vitals",
+    "skill.gen.edema",
+    "skill.gen.surg.survey"
+   ],
+   "emphasis": {
+    "skill.gen.appearance": {
+     "expect": "Look for cachexia with loose clothes and temporal wasting, pallor of chronic blood loss, and a wrinkled inelastic skin over a scaphoid abdomen. Paradoxical ascites with distension can sit alongside that wasting in late disease."
+    },
+    "skill.gen.edema": {
+     "expect": "Dependent oedema here reflects hypoproteinaemia from months of poor intake, not cardiac failure; check albumin and diet history rather than reaching for diuretics."
+    }
+   }
+  },
+  {
+   "id": "systemic_exam",
+   "title": "Examination of the abdomen",
+   "blurb": "The epigastric lump, the liver, and the nodes that stage the case",
+   "skills": [
+    "skill.exam.surg.lump_inspection_palpation",
+    "skill.exam.surg.malignancy_stigmata",
+    "skill.exam.surg.gastric_outlet_obstruction"
+   ],
+   "emphasis": {
+    "skill.exam.surg.lump_inspection_palpation": {
+     "expect": "Expect a hard irregular mildly tender epigastric mass, mobile slightly or fixed, moving a little with respiration or not at all. Absence of a lump never excludes the diagnosis, but its presence with the wasted habitus settles it clinically."
+    },
+    "skill.exam.surg.malignancy_stigmata": {
+     "expect": "Feel the left supraclavicular fossa first: a hard node there settles distant spread at the bedside. Then check the umbilicus for a hard subcutaneous nodule, the liver for hard nodules, shifting dullness for free fluid, and the rectal shelf on every patient."
+    },
+    "skill.exam.surg.gastric_outlet_obstruction": {
+     "expect": "In an antral growth the stomach can obstruct: look for visible left to right peristalsis and test the succussion splash hours after food. Copious offensive vomit with altered blood points the same way, toward the pylorus."
+    }
+   }
+  },
+  {
+   "id": "disease_findings",
+   "title": "Putting the stomach cancer picture together",
+   "blurb": "Four presentations of one disease, and the stigmata that stage it",
+   "skills": [
+    "skill.stomach.signs",
+    "skill.annex.stomach.ulcer_cancer"
+   ]
+  },
+  {
+   "id": "summary",
+   "title": "Clinical summary",
+   "blurb": "Three sentences that contain the case and its spread",
+   "skills": [
+    "skill.stomach.summary"
+   ]
+  },
+  {
+   "id": "differential",
+   "title": "Differential diagnosis",
+   "blurb": "What else aches, bleeds or blocks at the outlet, and the tempo that separates them",
+   "skills": [
+    "skill.stomach.differential"
+   ]
+  },
+  {
+   "id": "investigations",
+   "title": "Investigations",
+   "blurb": "Prove it with tissue, stage it with scans, never scope past an obstruction blindly",
+   "skills": [
+    "skill.ix.stomach.workup"
+   ]
+  },
+  {
+   "id": "diagnosis",
+   "title": "Diagnosis and staging",
+   "blurb": "Histology, Lauren type, spread, fitness and resectability in one statement",
+   "skills": [
+    "skill.stomach.diagnosis"
+   ]
+  },
+  {
+   "id": "treatment",
+   "title": "Treatment",
+   "blurb": "A team decision: cure where possible, eating and comfort always",
+   "skills": [
+    "skill.tx.stomach"
+   ]
+  },
+  {
+   "id": "case",
+   "title": "Case presentation",
+   "blurb": "Present this patient to your consultant",
+   "skills": [
+    "skill.present.carcinoma.stomach"
+   ]
+  }
+ ],
+ "osce": {
+  "stations": [
+   {
+    "id": "osce.stomach.abdominal_exam",
+    "title": "Examine the abdomen for a suspected gastric growth",
+    "task": "This 58 year old man has lost weight for four months and has an epigastric ache. Examine his abdomen for a mass and for spread, and present your findings.",
+    "seconds": 480,
+    "skills": [
+     "skill.approach.hygiene",
+     "skill.approach.introduce",
+     "skill.approach.consent",
+     "skill.approach.position",
+     "skill.gen.surg.survey",
+     "skill.exam.surg.lump_inspection_palpation",
+     "skill.exam.surg.malignancy_stigmata"
+    ],
+    "examinerQuestions": [
+     "You feel a hard irregular epigastric mass. How do you decide it arises from the stomach rather than the transverse colon or pancreas?",
+     "You find a hard left supraclavicular node. What does it signify, and what is the next investigation?",
+     "No mass is palpable but the history convinces you. Does that exclude carcinoma of the stomach, and what do you do next?"
+    ]
+   },
+   {
+    "id": "osce.stomach.history",
+    "title": "Take a history of dyspepsia and assess alarm features",
+    "task": "This 62 year old man reports months of poor appetite and epigastric discomfort. Take a focused history in six minutes and be ready to state the alarm features.",
+    "seconds": 360,
+    "skills": [
+     "skill.approach.introduce",
+     "skill.approach.consent",
+     "skill.hx.chief_complaints",
+     "skill.hx.surg.chronic_dyspepsia_ulcer",
+     "skill.hx.carcinoma.stomach_risk"
+    ],
+    "examinerQuestions": [
+     "List the alarm features in this history and state which one worries you most.",
+     "He reports a twenty year ulcer history with recent change. What changed, and why does it alter your plan?",
+     "Which single investigation proves the diagnosis, and how many biopsies does it need?"
+    ]
+   }
+  ]
+ },
+ "viva": {
+  "skills": [
+   "skill.stomach.basics",
+   "skill.hx.surg.chronic_dyspepsia_ulcer",
+   "skill.exam.surg.malignancy_stigmata",
+   "skill.stomach.signs",
+   "skill.stomach.differential",
+   "skill.ix.stomach.workup",
+   "skill.stomach.diagnosis",
+   "skill.tx.stomach"
+  ]
+ },
+ "skills": {
+  "skill.stomach.basics": {
+   "id": "skill.stomach.basics",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "What carcinoma of the stomach is",
+   "oneLine": "An adenocarcinoma of the lining, usually antral, with two biological faces",
+   "why": "Calling every stomach cancer one disease hides the two different biologies that decide how it looks and spreads. An intestinal type mass that ulcerates is felt and scoped differently from a diffuse cancer that stiffens the whole wall without ever forming a lump, and the other tumours of the stomach need entirely different treatment.",
+   "teach": [
+    {
+     "heading": "An adenocarcinoma of the lining, usually antral",
+     "body": "Almost all cancers of the stomach are adenocarcinomas arising from its glandular lining, and they favour the antrum and pylorus. Growths in the body of the stomach cause the vague insidious illness, while growths at the cardia or pylorus obstruct early and declare themselves through dysphagia or vomiting."
+    },
+    {
+     "heading": "Two biological faces: intestinal and diffuse",
+     "points": [
+      "Intestinal type: gland forming, linked to Helicobacter pylori through the slow Correa sequence of chronic gastritis, atrophy, intestinal metaplasia and dysplasia. It tends to form a mass or ulcer that can be seen, felt and biopsied.",
+      "Diffuse type: discohesive signet ring cells from loss of E cadherin, infiltrating the wall with dense fibrosis. It stiffens the stomach into the leather bottle of linitis plastica, often without any lump to feel.",
+      "Family pattern: most cases are sporadic in older adults, but the rare diffuse familial form presents young, so an early age should prompt a family history, not dismissal.",
+      "The practical split: an intestinal growth invites biopsy of a visible lesion, while a diffuse cancer needs deep and multiple biopsies of a stiff, poorly distending stomach."
+     ]
+    },
+    {
+     "heading": "Other tumours of the stomach are not this disease",
+     "body": "A gastrointestinal stromal tumour arises from the pacemaker cells of the wall, stains for CD117, and responds to tyrosine kinase treatment rather than to gastrectomy alone. Primary gastric lymphoma is bulky but chemo responsive, and adenomatous polyps are premalignant rather than malignant. The scope with biopsy exists to tell these apart before any plan is made."
+    },
+    {
+     "heading": "Why it presents late",
+     "body": "The stomach is roomy and its early symptoms are vague fullness and fading appetite, easily mistaken for simple dyspepsia. There is no screening programme here, so months of anorexia usually pass before pain, vomiting or a lump appears. That delay is the rule, not the exception, and it explains the advanced stage at presentation."
+    }
+   ],
+   "pitfalls": [
+    "Dismissing the diagnosis in a young patient on age alone, when the familial diffuse form specifically presents young.",
+    "Treating a stromal tumour or lymphoma as an adenocarcinoma, when their treatment paths diverge completely.",
+    "Expecting a palpable lump in every case, when the diffuse type stiffens the wall without forming one."
+   ],
+   "media": [],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What is the commonest histology of a malignant tumour of the stomach?",
+     "a": "Adenocarcinoma arising from the glandular lining, most often in the antrum.",
+     "accept": [
+      "adenocarcinoma"
+     ],
+     "minMatch": 1
+    },
+    {
+     "level": 2,
+     "q": "Contrast the intestinal and diffuse types of gastric adenocarcinoma.",
+     "a": "The intestinal type is gland forming and follows the Helicobacter driven Correa sequence, while the diffuse type shows discohesive signet ring cells with loss of E cadherin and produces linitis plastica.",
+     "accept": [
+      "intestinal",
+      "diffuse",
+      "signet",
+      "lauren"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "Why can a diffuse gastric cancer be advanced yet impalpable?",
+     "a": "It infiltrates the wall as discohesive cells with desmoplasia rather than forming a mass, so the stomach stiffens without a lump, and only deep multiple biopsies prove it.",
+     "accept": [
+      "infiltrat",
+      "stiffen",
+      "discohesive",
+      "lump"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "rubric": [],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "oesophagus_and_stomach_pathology: clinicalPearls (signet ring diffuse cancer and Lauren types)"
+    },
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "gastric_neoplasms_peptic_ulcer_and_gastrectomy: pathophysiology (Correa cascade, CDH1 loss and stromal tumours)"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "Carcinoma of the stomach: pathology and classification"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.stomach.signs": {
+   "id": "skill.stomach.signs",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "The carcinoma stomach picture",
+   "oneLine": "Four presentations of one disease, and the stigmata that stage it",
+   "why": "Stomach cancer reaches the bedside by four different routes, and a student who knows only the lump misses the other three. The insidious, obstructive, lump and ulcer change patterns share one logic: months of anorexia and weight loss with something that no longer behaves like benign disease, plus spread you can feel with your hands.",
+   "teach": [
+    {
+     "heading": "One disease, four bedside patterns",
+     "points": [
+      "Insidious type in the body of the stomach: a short history of indigestion, vague fullness and heaviness after meals, fading appetite and weakness, with pain conspicuous by its absence until late.",
+      "Obstructive type at the pylorus or cardia: pyloric growths dominate, with constant nausea and offensive vomiting that gives no relief, sometimes with altered blood, and marked weight loss over a few months.",
+      "Lump type: an epigastric mass as the presenting feature, hard and irregular, slightly mobile or fixed, moving a little with respiration or not at all.",
+      "Ulcer cancer type: a known ulcer story that changes its tune, with loss of periodicity, appetite and relief, and rapid weight loss."
+     ]
+    },
+    {
+     "heading": "The malignant change checklist",
+     "table": {
+      "cols": [
+       "Old ulcer story",
+       "Suspected malignant change"
+      ],
+      "rows": [
+       [
+        "Attacks with pain free intervals",
+        "Periodicity lost, pain now constant"
+       ],
+       [
+        "Sharp burning ulcer pain",
+        "Constant dull ache between meals"
+       ],
+       [
+        "Appetite preserved",
+        "Anorexia, food unwelcome"
+       ],
+       [
+        "Vomiting relieves the pain",
+        "Vomiting gives no relief"
+       ],
+       [
+        "Weight steady",
+        "Rapid progressive weight loss"
+       ]
+      ]
+     }
+    },
+    {
+     "heading": "Spread you can feel with your hands",
+     "points": [
+      "Left supraclavicular fossa: a hard Virchow node settles distant spread at the bedside and is felt first, not last.",
+      "Umbilicus: a hard subcutaneous nodule marks transcoelomic seeding and is significant in any intra abdominal carcinoma.",
+      "Liver: an enlarged liver with hard nodules means secondary involvement; feel it deliberately in every suspected case.",
+      "Peritoneum: shifting dullness and a fluid thrill mark free fluid, most often malignant with carcinomatosis in this setting.",
+      "Rectal shelf and ovary: a rectal examination can reveal drop metastases in the pouch, and vaginal examination a Krukenberg tumour.",
+      "Veins: wandering thrombophlebitis appearing and resolving elsewhere is a late paraneoplastic clue, not a separate disease."
+     ]
+    },
+    {
+     "heading": "The outlet story within the cancer",
+     "body": "An antral growth narrows the pylorus, so retained food ferments and the vomit turns copious and offensive with coffee ground altered blood. Visible peristalsis rolls from left to right and a succussion splash persists hours after a meal. Chronic loss of acid fluid produces the hypochloraemic alkalosis that must be corrected before any intervention."
+    }
+   ],
+   "pitfalls": [
+    "Knowing only the lump pattern and missing the insidious and ulcer change presentations, which have no mass to feel.",
+    "Calling an umbilical nodule or a supraclavicular node a separate problem instead of staging the same cancer.",
+    "Forgetting the rectal examination, which is the only way to feel the pouch drop metastasis."
+   ],
+   "media": [],
+   "probes": [
+    {
+     "level": 1,
+     "q": "Name the four clinical patterns of carcinoma of the stomach.",
+     "a": "The insidious type, the obstructive type, presentation as a lump, and carcinoma supervening on a gastric ulcer.",
+     "accept": [
+      "insidious",
+      "obstructive",
+      "lump",
+      "ulcer"
+     ],
+     "minMatch": 3
+    },
+    {
+     "level": 2,
+     "q": "Which bedside findings mark distant spread in suspected stomach cancer?",
+     "a": "A hard left supraclavicular Virchow node, a hard umbilical nodule, a nodular liver, malignant ascites with shifting dullness, and a rectal shelf on digital examination.",
+     "accept": [
+      "supraclavicular",
+      "umbilical",
+      "liver",
+      "ascites",
+      "rectal"
+     ],
+     "minMatch": 3
+    },
+    {
+     "level": 3,
+     "q": "Explain why vomiting relieves ulcer pain but not cancer pain at the pylorus.",
+     "a": "Ulcer pain comes from acid on an exposed base, which emptying removes, while cancer pain comes from infiltration and obstruction that emptying cannot undo, so the vomit is copious and offensive yet the ache persists.",
+     "accept": [
+      "infiltration",
+      "obstruction",
+      "relief",
+      "ache"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "rubric": [],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "oesophagus_and_stomach_pathology: clinicalPearls (every gastric ulcer needs biopsy)"
+    },
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "gastric_neoplasms_peptic_ulcer_and_gastrectomy: additionalDifferentials (outlet obstruction from antral stenosis)"
+    },
+    {
+     "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+     "locator": "Examination of an abdominal lump: malignant features and spread"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.stomach.summary": {
+   "id": "skill.stomach.summary",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "The clinical summary",
+   "oneLine": "Tempo, discriminators, lump and spread, fitness and intent in four elements",
+   "why": "A stomach cancer summary has a different job from an ulcer summary: it must carry the point where benign disease ended and malignant disease began, the anatomical extent found by hand, and whether the patient can face an operation. Without those three, the listener cannot plan anything.",
+   "teach": [
+    {
+     "heading": "Four elements in order",
+     "points": [
+      "Name the patient with the risk that matters: age past middle life, male sex, tobacco in smoked or chewed form.",
+      "State the tempo in months with the point of change: years of rhythmic ulcer pain, then months of anorexia and a constant ache.",
+      "State the syndrome in abstract terms with the site: suspected malignant gastric process, antral with outlet features or body type with wasting.",
+      "Close with the spread found by hand, the fitness, and the intent: resectable for cure or disseminated for palliation, and the next staging step."
+     ]
+    },
+    {
+     "heading": "A worked summary",
+     "body": "A 58 year old farmer and bidi smoker presents with four months of anorexia and steady weight loss, with a constant epigastric ache for six weeks that food and vomiting no longer relieve. Examination shows a wasted man with pallor, a firm irregular mildly tender epigastric mass, a nodular liver edge, a hard left supraclavicular node and shifting dullness.\n\nThis is a suspected carcinoma of the gastric antrum with clinical spread to liver, peritoneum and distant nodes, in a patient still ambulant with acceptable reserve, for staging scans and a surgical oncology opinion with palliative intent."
+    },
+    {
+     "heading": "What students leave out",
+     "points": [
+      "The point of change: without it, the story reads as chronic ulcer and the cancer is missed.",
+      "The negatives doing work: still ambulant, no fresh haematemesis, no jaundice, all of which shape fitness and level.",
+      "The stigmata checked and found absent: stating that the fossae, umbilicus and pouch were examined and clear is as informative as finding them.",
+      "The intent: resectable or palliative belongs in the summary, since everything after follows from it."
+     ]
+    }
+   ],
+   "pitfalls": [
+    "Reciting symptoms without the tempo, so months of anorexia read the same as weeks of dyspepsia.",
+    "Omitting the lump and spread examination from the summary, leaving the listener unable to stage.",
+    "Ending without an intent, so the plan that follows has no anchor."
+   ],
+   "media": [],
+   "probes": [
+    {
+     "level": 2,
+     "q": "What element belongs in a stomach cancer summary that a benign ulcer summary would not carry?",
+     "a": "The point where periodicity and appetite were lost, the epigastric lump with its mobility, the metastatic stigmata checked, and the fitness with resectable or palliative intent.",
+     "accept": [
+      "periodicity",
+      "lump",
+      "stigmata",
+      "intent"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "Why does the tempo matter more than any single symptom in this summary?",
+     "a": "It is what separates malignant from benign disease: months with a recent change point to cancer, while years of unchanging rhythm point to ulcer, and no single pain detail carries that weight alone.",
+     "accept": [
+      "months",
+      "malignant",
+      "benign",
+      "change"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "rubric": [
+    {
+     "id": "tempo",
+     "text": "States the tempo in months with the point of change"
+    },
+    {
+     "id": "spread",
+     "text": "Includes the lump, liver and metastatic stigmata"
+    },
+    {
+     "id": "intent",
+     "text": "Closes with fitness and resectable or palliative intent"
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "oesophagus_and_stomach_pathology: additionalInvestigations (staging for cancers)"
+    },
+    {
+     "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+     "locator": "Presenting the abdominal case: lump, lymph nodes and plan"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.stomach.differential": {
+   "id": "skill.stomach.differential",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "Differential diagnosis",
+   "oneLine": "What else aches, bleeds or blocks at the outlet, and the tempo that separates them",
+   "why": "Most epigastric pain with anaemia is exactly what it looks like, but the benign mimics of stomach cancer differ in one decisive way each: appetite kept, rhythm kept, relief kept. Knowing which kept feature excludes cancer at the bedside saves scopes, while missing the one that has changed buries the cancer.",
+   "teach": [
+    {
+     "heading": "Work through site and tempo, not a list",
+     "body": "For an older adult with months of anorexia, weight loss and epigastric ache, sort mimics by what they preserve. Benign ulcer preserves appetite, periodicity and relief by food or vomiting. Pancreatic and cardiac mimics refer pain elsewhere with their own signatures. A growth at the outlet adds vomiting that never relieves, whatever the cause."
+    },
+    {
+     "heading": "The mimics and their telling feature",
+     "points": [
+      "Benign gastric ulcer: years of rhythmic pain with pain free intervals, food bringing pain and vomiting relieving it, appetite preserved and weight steady. Loss of any of these moves it off this list.",
+      "Gastrointestinal stromal tumour: bleed or mass with a smooth submucosal face on scope rather than an ulcerated cancer, staining for CD117, with a different operation and drug path.",
+      "Primary gastric lymphoma: bulky disease that still responds to chemotherapy first, so biopsy before gastrectomy matters more here than anywhere.",
+      "Carcinoma of the pancreas: epigastric pain passing through to the back, worse lying flat, with progressive painless jaundice and a palpable gallbladder when the head is involved.",
+      "Chronic pancreatitis: years of alcohol linked pain through to the back with steatorrhoea and later diabetes, without the anorexia first pattern of cancer.",
+      "Carcinoma of the oesophagus and cardia: dysphagia for solids first, felt behind the breastbone, rather than anorexia and ache first.",
+      "Benign pyloric stenosis from old ulcer: long ulcer history with copious non offensive vomiting but no mass, no nodes and no rapid wasting; still needs biopsy to prove it benign."
+     ]
+    },
+    {
+     "heading": "When the story changes your list",
+     "body": "A non resolving ulcer on treatment, new melaena, or vomiting that has turned coffee ground collapses the whole list into one action: urgent scope with multiple biopsies. No mimic is diagnosed by waiting; each is diagnosed by tissue, a scan, or a test meal the scope provides."
+    }
+   ],
+   "pitfalls": [
+    "Calling a smooth bleeding submucosal mass an ulcer cancer and planning a cancer operation without immunostaining.",
+    "Sending a bulky gastric lymphoma straight to gastrectomy, when chemotherapy is its first treatment.",
+    "Reassuring on a normal barium study, which never replaces biopsy of the mucosa."
+   ],
+   "media": [],
+   "probes": [
+    {
+     "level": 2,
+     "q": "Name three differentials for months of anorexia with an epigastric mass, and the feature that favours each.",
+     "a": "Benign gastric ulcer favoured by preserved periodicity and appetite, stromal tumour by a smooth bleeding submucosal mass, gastric lymphoma by bulky chemo responsive disease, and carcinoma of the pancreas by pain through to the back with jaundice.",
+     "accept": [
+      "ulcer",
+      "stromal",
+      "lymphoma",
+      "pancreas"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "A 64 year old smoker completes ulcer treatment but the crater persists at eight weeks with new anorexia. What do you do?",
+     "a": "Re scope with multiple biopsies from margin and base to exclude malignant change, since a non healing ulcer with new anorexia is cancer until tissue says otherwise, and stage with contrast imaging meanwhile.",
+     "accept": [
+      "biopsies",
+      "malignant",
+      "healing",
+      "staging"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "rubric": [
+    {
+     "id": "breadth",
+     "text": "Offers differentials spanning ulcer, stromal, lymphoid and pancreatic causes"
+    },
+    {
+     "id": "split",
+     "text": "States which kept feature favours benign disease"
+    },
+    {
+     "id": "tissue",
+     "text": "Ends with biopsy as the arbiter, not waiting"
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "gastric_neoplasms_peptic_ulcer_and_gastrectomy: additionalDifferentials (lymphoma, stromal tumour and outlet mimics)"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "Carcinoma of the stomach: differential diagnosis"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.ix.stomach.workup": {
+   "id": "skill.ix.stomach.workup",
+   "kind": "investigation",
+   "system": "surgery",
+   "title": "Confirming carcinoma and staging it",
+   "oneLine": "Tissue first, then scans and laparoscopy, with fitness worked up alongside",
+   "why": "No lump, however classic, is a diagnosis, and no scan replaces tissue. Investigations here serve three separate jobs in strict order: prove it with biopsy, map its spread for resectability, and prove the patient fit for what follows. A student who orders the scan before the scope delays the only test that names the disease.",
+   "teach": [
+    {
+     "heading": "Confirm: endoscopy with multiple biopsies",
+     "body": "Upper gastrointestinal endoscopy is the first and indispensable test, with at least six to eight biopsies taken from the ulcer margin and base, since a single bite misses patchy malignant change. Every gastric ulcer needs biopsy; a duodenal ulcer almost never harbours cancer, but the stomach earns no such trust. Test for Helicobacter at the same sitting by biopsy based testing, and record the site: antrum, body or cardia."
+    },
+    {
+     "heading": "Stage: scans, laparoscopy and the fitness workup",
+     "points": [
+      "Contrast enhanced CT of chest, abdomen and pelvis for wall extent, nodal disease and distant metastases to liver and beyond.",
+      "Staging laparoscopy with peritoneal washings where available, to catch occult peritoneal seeding that scans miss before a planned resection.",
+      "Endoscopic ultrasound where available for wall layer depth and perigastric nodes, guiding the resectable or neoadjuvant call.",
+      "Bloods that change the plan: full blood count for iron deficiency anaemia, albumin for nutritional reserve, urea with electrolytes and blood gas where outlet vomiting suggests alkalosis, and liver function for biliary or hepatic spread.",
+      "Fitness alongside: blood group, cardiac reserve, smoking and alcohol status, and weight trend, since the operation is major and delay for optimisation beats delay by default."
+     ]
+    },
+    {
+     "heading": "What not to do",
+     "points": [
+      "Never accept a barium meal in place of biopsy: it shows shape, not histology, and a smooth study reassures falsely.",
+      "Never dilate or stent an outlet stricture before biopsy has named it benign or malignant.",
+      "Decompress first in outlet obstruction: pass a nasogastric tube and correct fluids and electrolytes before scoping, to cut the aspiration risk.",
+      "Never wait for culture or slow results before referral: tissue and scans travel with the patient to the surgical oncology unit."
+     ]
+    }
+   ],
+   "pitfalls": [
+    "Taking too few biopsies and calling a patchy cancer benign on one negative bite.",
+    "Skipping staging laparoscopy and discovering peritoneal seedlings only after opening the abdomen.",
+    "Scoping an obstructed, unprepared stomach and aspirating retained contents."
+   ],
+   "media": [],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What proves the diagnosis, and how many biopsies does it need?",
+     "a": "Upper gastrointestinal endoscopy with at least six to eight biopsies from the ulcer margin and base.",
+     "accept": [
+      "endoscopy",
+      "biopsies",
+      "margin"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "Which test excludes occult peritoneal spread before a planned gastrectomy?",
+     "a": "Staging laparoscopy with peritoneal washings, which finds seedlings that scans miss.",
+     "accept": [
+      "laparoscopy",
+      "washings",
+      "peritoneal"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "Repeated vomiting of retained food for weeks: which blood result do you expect and why does it matter?",
+     "a": "A hypochloraemic, hypokalaemic metabolic alkalosis from chronic loss of acid gastric fluid, which must be corrected with fluids and electrolytes before anaesthesia or surgery.",
+     "accept": [
+      "alkalosis",
+      "hypochloraemic",
+      "hypokalaemic",
+      "electrolytes"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "rubric": [],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "gastric_neoplasms_peptic_ulcer_and_gastrectomy: additionalInvestigations (biopsies, staging CT and laparoscopy)"
+    },
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "gastric_outlet_obstruction: clinicalPearls (succussion splash, electrolytes and endoscopy with biopsy)"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "Carcinoma of the stomach: investigations and staging"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.stomach.diagnosis": {
+   "id": "skill.stomach.diagnosis",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "Diagnosis and staging",
+   "oneLine": "Histology, Lauren type, spread, fitness and resectability in one statement",
+   "why": "A diagnosis of stomach cancer that stops at the name plans nothing: the surgeon needs the histology, the Lauren behaviour, the anatomical spread, and whether the patient can survive a cure. Staging here is a resectability verdict, not a number to memorise.",
+   "teach": [
+    {
+     "heading": "Histology names it, Lauren types it",
+     "body": "Endoscopic biopsy names adenocarcinoma and, with it, the Lauren behaviour: intestinal gland forming cancers that mass and ulcerate, or diffuse signet ring cancers that infiltrate and stiffen. Stromal tumours and lymphomas are named by their own stains and leave this pathway for their own treatment. Grade and Helicobacter status ride along on the same report."
+    },
+    {
+     "heading": "Stage as resectable, locally advanced or disseminated",
+     "points": [
+      "Localised and resectable: growth confined to the stomach with limited perigastric nodes, no distant spread, in a patient fit for major surgery.",
+      "Locally advanced: bulky or junctional disease needing chemotherapy first to shrink it toward resection; endoscopic ultrasound and laparoscopy make this call.",
+      "Disseminated: liver nodules, peritoneal seedlings or positive washings, a Virchow node, umbilical nodule or Krukenberg tumour, each a marker that cure by surgery is off the table.",
+      "Fitness stages alongside: performance status, weight trend, albumin and anaemia, cardiac reserve, and tobacco and alcohol load all enter the verdict."
+     ]
+    },
+    {
+     "heading": "A complete diagnostic statement",
+     "body": "Name the site, the histology with Lauren type, the spread found by hand and scan, the fitness, and the intent in one breath. A worked statement: adenocarcinoma of the gastric antrum, intestinal type, with clinical spread to liver, peritoneum and left supraclavicular nodes in a wasted but ambulant man, for palliative care. Every element earns its place by changing what happens next."
+    }
+   ],
+   "pitfalls": [
+    "Stating adenocarcinoma without the Lauren type, losing the biology that explains the behaviour.",
+    "Calling positive peritoneal washings resectable, when seedlings already mark dissemination.",
+    "Staging the scan and forgetting the patient, so an unfit patient is labelled curable."
+   ],
+   "media": [],
+   "probes": [
+    {
+     "level": 1,
+     "q": "Which findings mark disseminated disease in carcinoma of the stomach?",
+     "a": "Liver nodules, peritoneal seedlings or positive washings, a hard Virchow node, an umbilical nodule, and a Krukenberg ovarian tumour.",
+     "accept": [
+      "liver",
+      "peritoneal",
+      "washings",
+      "supraclavicular",
+      "umbilical"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "What elements of fitness enter the resectability verdict besides the scans?",
+     "a": "Performance status and ambulation, weight trend and albumin, anaemia, cardiac reserve, and ongoing tobacco and alcohol use.",
+     "accept": [
+      "performance",
+      "albumin",
+      "anaemia",
+      "cardiac"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "A young woman has a stiff poorly distending stomach with negative superficial biopsies. What is your reading?",
+     "a": "Suspected diffuse linitis plastica, where superficial bites miss discohesive cells; repeat with deep and multiple biopsies and stage as locally advanced until proven otherwise.",
+     "accept": [
+      "diffuse",
+      "linitis",
+      "deep",
+      "biopsies"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "rubric": [
+    {
+     "id": "histology",
+     "text": "Names adenocarcinoma with Lauren type"
+    },
+    {
+     "id": "spread",
+     "text": "States spread by hand and scan with dissemination markers"
+    },
+    {
+     "id": "verdict",
+     "text": "Closes with fitness and resectable or palliative intent"
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "gastric_neoplasms_peptic_ulcer_and_gastrectomy: clinicalPearls (radical gastrectomy with D2 lymphadenectomy)"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "Carcinoma of the stomach: staging and prognosis"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.tx.stomach": {
+   "id": "skill.tx.stomach",
+   "kind": "treatment",
+   "system": "surgery",
+   "title": "Managing carcinoma of the stomach",
+   "oneLine": "A team decision: cure where possible, eating and comfort always",
+   "why": "No single doctor cures stomach cancer: the resectable case needs an operation framed by chemotherapy and nutrition, and the disseminated case needs swallowing, eating and comfort protected even though cure is gone. Getting the intent right first is what makes every later step correct.",
+   "teach": [
+    {
+     "heading": "The team decides, the stage drives",
+     "body": "Every suspected case travels early to a specialist upper gastrointestinal multidisciplinary team with the biopsy and scans, not after a trial of acid suppression. The team sets one of two intents: resectable for cure, or disseminated for palliation. Fitness and nutrition are optimised for either road, since both end in either a major operation or months of treatment."
+    },
+    {
+     "heading": "Resectable disease: operation framed by chemotherapy",
+     "points": [
+      "Standard curative resection is radical total or subtotal gastrectomy with D2 lymphadenectomy, removing the stomach with its draining nodal basin.",
+      "Chemotherapy around the operation shrinks the growth first and mops up microscopic spread after; the exact agents and cycles come from the current oncology protocol, not from memory.",
+      "Test for and eradicate Helicobacter, correct iron deficiency anaemia, rebuild albumin with dietetic support, and stop tobacco and alcohol before the operation date.",
+      "After gastrectomy plan lifelong follow up for nutrition: small frequent meals, and monitoring for iron, calcium and vitamin B12 deficiency with replacement.",
+      "Link the family to the government referral route and check cover under the national health protection scheme for cancer care, so cost never delays the operation."
+     ]
+    },
+    {
+     "heading": "When cure is not possible: eating, comfort and dignity",
+     "points": [
+      "Restore passage: endoscopic stenting or surgical gastrojejunostomy for outlet block, chosen by prognosis, fitness and local availability.",
+      "Control bleeding endoscopically where it recurs, with transfusion support to a restrictive threshold and iron replacement.",
+      "Offer palliative chemotherapy where fitness allows, and radiotherapy for local symptoms such as pain or oozing, as the oncology team advises.",
+      "Run nutrition, analgesia, antiemetics and mobility support in parallel, and link early to home based palliative care rather than at the very end.",
+      "Advise the household plainly: what eating will look like, which symptoms merit return, and that stopping tobacco and alcohol still helps healing and treatment tolerance."
+     ]
+    },
+    {
+     "heading": "The outlet emergency within the cancer",
+     "body": "Copious retained vomit with dehydration is managed before anything definitive: pass a nasogastric tube, replace fluids and correct the hypochloraemic alkalosis with electrolytes, and suppress acid while the stomach rests. Watch the calves and lungs, since wandering clots mark this disease late, and keep the patient moving."
+    }
+   ],
+   "pitfalls": [
+    "Trying acid suppression for months while the anorexia deepens, so a resectable growth becomes disseminated on treatment.",
+    "Planning gastrectomy on scans alone without laparoscopy and washings, then finding peritoneal seedlings at operation.",
+    "Discharging a gastrectomy patient without a nutrition and B12 plan, trading a cured cancer for a preventable deficiency.",
+    "Leaving palliation to the end instead of running it alongside from the day dissemination is known."
+   ],
+   "media": [],
+   "probes": [
+    {
+     "level": 1,
+     "q": "What is the standard curative operation for resectable gastric adenocarcinoma?",
+     "a": "Radical total or subtotal gastrectomy with D2 lymphadenectomy, framed by chemotherapy around the operation.",
+     "accept": [
+      "gastrectomy",
+      "lymphadenectomy",
+      "chemotherapy"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "A patient vomits copious retained food daily with dehydration. What is your first management before any definitive plan?",
+     "a": "Pass a nasogastric tube for decompression, replace fluids and correct electrolytes including the hypochloraemic alkalosis, with acid suppression while the stomach rests.",
+     "accept": [
+      "nasogastric",
+      "fluids",
+      "electrolytes",
+      "alkalosis"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "What must the discharge plan cover after a total gastrectomy for cancer?",
+     "a": "Small frequent meals with dietetic follow up, monitoring and replacement of iron, calcium and vitamin B12, Helicobacter review, and a surveillance and family counselling plan from the oncology team.",
+     "accept": [
+      "meals",
+      "iron",
+      "vitamin",
+      "surveillance"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "rubric": [],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "gastric_neoplasms_peptic_ulcer_and_gastrectomy: clinicalPearls (radical gastrectomy with D2 lymphadenectomy)"
+    },
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "gastric_outlet_obstruction: clinicalPearls (nasogastric decompression with fluids and electrolytes)"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "Carcinoma of the stomach: treatment and palliation"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   },
+   "dosingNote": "This module teaches management at the level of intent and modality. Specific agents, combinations, cycles and thresholds must come from the current oncology protocol and institutional guideline at the time of prescribing. CliniX does not prescribe."
+  },
+  "skill.annex.stomach.ulcer_cancer": {
+   "id": "skill.annex.stomach.ulcer_cancer",
+   "kind": "annexure",
+   "system": "surgery",
+   "title": "Benign ulcer versus malignant ulcer: bedside contrasts",
+   "oneLine": "The six bedside contrasts that split a benign crater from a cancer",
+   "why": "The scope queue is long and the ulcer clinic is full, so the bedside must decide who cannot wait. These six contrasts compress the whole benign versus malignant judgement into one glance, and any single right column answer triggers tissue diagnosis without debate.",
+   "teach": [
+    {
+     "heading": "Six contrasts at a glance",
+     "table": {
+      "cols": [
+       "Feature",
+       "Benign gastric ulcer",
+       "Suspected malignant ulcer"
+      ],
+      "rows": [
+       [
+        "Age and tempo",
+        "Any adult age, attacks over years",
+        "Older adult, short history of months"
+       ],
+       [
+        "Periodicity",
+        "Pain free intervals of months",
+        "Periodicity lost, pain now constant"
+       ],
+       [
+        "Pain and food",
+        "Food brings pain, vomiting relieves",
+        "Neither food nor vomiting relieves"
+       ],
+       [
+        "Appetite",
+        "Preserved, eats despite pain",
+        "Anorexia, food unwelcome"
+       ],
+       [
+        "Vomit",
+        "Occasional, pain easing after",
+        "Coffee ground, copious, no relief"
+       ],
+       [
+        "Weight",
+        "Steady or slight loss",
+        "Rapid progressive loss"
+       ]
+      ]
+     }
+    },
+    {
+     "heading": "How to use this table",
+     "body": "Ask down the left column and place each answer left or right. One right column answer, especially lost periodicity with new anorexia, earns urgent endoscopy with at least six to eight biopsies. A wholly left column story still earns a scope, but the cancer pathway stops there.\n\nRemember that absence of a lump never excludes carcinoma of the stomach: the table stages suspicion, and only tissue closes it."
+    }
+   ],
+   "pitfalls": [
+    "Treating the table as a score to pass, when a single malignant feature already mandates biopsy.",
+    "Placing coffee ground vomit in the benign column because the patient still calls it ulcer pain."
+   ],
+   "media": [],
+   "probes": [
+    {
+     "level": 1,
+     "q": "Which six bedside features split a benign gastric ulcer from a suspected malignant one?",
+     "a": "Age with tempo, periodicity, the pain and food relation, appetite, the character of vomit, and the course of weight.",
+     "accept": [
+      "periodicity",
+      "appetite",
+      "vomit",
+      "weight"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "A patient keeps perfect ulcer periodicity but reports new coffee ground vomit. Which column, and what next?",
+     "a": "The malignant column on vomit character alone, so urgent endoscopy with multiple biopsies regardless of the preserved rhythm.",
+     "accept": [
+      "malignant",
+      "endoscopy",
+      "biopsies"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "rubric": [],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "oesophagus_and_stomach_pathology: clinicalPearls (every gastric ulcer needs biopsy)"
+    },
+    {
+     "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+     "locator": "History taking in chronic abdominal conditions: ulcer versus carcinoma"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  }
+ },
+ "cases": [
+  {
+   "id": "case.stomach.sopanrao",
+   "initialVitals": {
+    "hr": 104,
+    "bpSystolic": 108,
+    "bpDiastolic": 70,
+    "rr": 20,
+    "spo2": 97,
+    "temp": 37.4,
+    "gcs": 15
+   },
+   "title": "A farmer with four months of fading appetite",
+   "opening": "Sopanrao Deshmukh, 58, has come to the surgical outpatient clinic with his wife. He looks thin and tired, and carries a cloth bag of old prescriptions. Greet him and take the history.",
+   "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+   "patient": {
+    "name": "Sopanrao Deshmukh",
+    "age": 58,
+    "sex": "male",
+    "occupation": "Farmer, grows cotton and sorghum",
+    "residence": "Rural, lives with his wife, two sons and their families"
+   },
+   "history": {
+    "presenting": {
+     "cues": [
+      "what brings you here today",
+      "what is the main problem",
+      "why have you come to hospital",
+      "tell me your complaints in order",
+      "how can i help you today"
+     ],
+     "reply": "Doctor, for four months my appetite has been fading, and for six weeks there is a constant ache here in the upper abdomen. I have become very weak.",
+     "key": true,
+     "skillId": "skill.hx.chief_complaints"
+    },
+    "onset_tempo": {
+     "cues": [
+      "when did the appetite fade begin",
+      "how many months of poor appetite",
+      "did it start suddenly or slowly",
+      "has it worsened month by month",
+      "describe the course since onset"
+     ],
+     "reply": "It started slowly, about four months back, with less interest in food. The ache in the upper abdomen joined about six weeks ago and has stayed constant since.",
+     "key": true
+    },
+    "epigastric_pain": {
+     "cues": [
+      "upper abdominal pain after food",
+      "pain in the pit of the stomach",
+      "burning ache above the navel",
+      "night pain waking you up",
+      "constant ache between meals"
+     ],
+     "reply": "It sits here in the pit of the stomach, a dull constant ache between meals. It is worse after I eat, but it never fully goes even on an empty stomach.",
+     "key": true,
+     "skillId": "skill.hx.surg.chronic_dyspepsia_ulcer"
+    },
+    "food_relief_lost": {
+     "cues": [
+      "does food still ease the pain",
+      "effect of meals on the ache now",
+      "vomiting and relief of pain",
+      "pain relief after eating lately",
+      "change in food pain pattern"
+     ],
+     "reply": "Earlier, in my old ulcer days, eating and vomiting used to ease it. Now neither food nor vomiting gives any relief. That change itself frightens me.",
+     "key": true
+    },
+    "appetite_anorexia": {
+     "cues": [
+      "appetite over recent months",
+      "interest in food lately",
+      "aversion to cooked food smell",
+      "eating less due to fullness",
+      "hunger felt at mealtimes"
+     ],
+     "reply": "I have no hunger at all, doctor. Even the smell of cooked dal puts me off, which never happened in my whole life.",
+     "key": true
+    },
+    "satiety_fullness": {
+     "cues": [
+      "fullness after small meals",
+      "heaviness in the upper abdomen",
+      "bloating soon after eating",
+      "early fullness while eating",
+      "upper stomach heaviness"
+     ],
+     "reply": "After four or five bites my stomach feels heavy and full, as if there is no space left. Then the ache and nausea start.",
+     "key": true
+    },
+    "weight_loss_course": {
+     "cues": [
+      "how much weight lost",
+      "clothes looser than before",
+      "quantify the weight loss",
+      "weakness with weight fall",
+      "belt holes moved inward"
+     ],
+     "reply": "My clothes hang loose now and I have had to tighten my dhoti twice. The village scale showed a big fall, though I cannot read the number.",
+     "key": true
+    },
+    "vomit_pattern": {
+     "cues": [
+      "vomiting after meals",
+      "frequency of vomiting episodes",
+      "vomit containing old food",
+      "effortless vomiting of stale food",
+      "worse vomiting in the evening"
+     ],
+     "reply": "Almost every evening I vomit out food eaten hours earlier, stale and foul smelling. It comes without much effort and never eases the ache.",
+     "key": true
+    },
+    "vomit_appearance": {
+     "cues": [
+      "darkness of the vomit",
+      "dark altered blood in vomit",
+      "blood in the vomit",
+      "foul smelling vomit",
+      "old food with dark grains"
+     ],
+     "reply": "The vomit looks dark brown, like wet soil mixed in the food. Twice there were dark grains in it, like used tea leaves.",
+     "key": true
+    },
+    "bleed_melaena": {
+     "cues": [
+      "black tarry stools",
+      "blood in the stool",
+      "melaena or dark motions",
+      "bleeding from the back passage",
+      "fainting with black stools"
+     ],
+     "reply": "For two weeks my motions have been black and sticky with a bad smell. Once I felt dizzy standing up after the toilet.",
+     "key": true
+    },
+    "bowel_habit_change": {
+     "cues": [
+      "constipation since the illness",
+      "change in bowel habit",
+      "regularity of motions lately",
+      "hard stools needing straining",
+      "frequency of toilet visits"
+     ],
+     "reply": "I am constipated now, going once in two or three days with hard stools. Earlier my bowels were regular every morning.",
+     "key": true
+    },
+    "ulcer_past_history": {
+     "cues": [
+      "previous ulcer diagnosis years ago",
+      "past treatment for acidity ulcer",
+      "pain free intervals in the past",
+      "old scope test of the stomach",
+      "antacid use over the years"
+     ],
+     "reply": "Twenty years ago a doctor said I had an ulcer and gave me acidity tablets. The pain used to come and go with months of complete relief. This time there has been no relief at all.",
+     "key": true,
+     "skillId": "skill.hx.carcinoma.stomach_risk"
+    },
+    "tobacco_bidi_chew": {
+     "cues": [
+      "how many bidis per day",
+      "years of bidi smoking",
+      "tobacco chewing habit",
+      "gutka or mawa use",
+      "smoking history in detail"
+     ],
+     "reply": "I have smoked bidis since I was twenty, about a bundle a day, and I chew tobacco with lime while working in the field.",
+     "key": true,
+     "skillId": "skill.hx.carcinoma.stomach_risk"
+    },
+    "alcohol_use": {
+     "cues": [
+      "daily alcohol consumption",
+      "country liquor every evening",
+      "quantity of liquor each week",
+      "years of regular alcohol use",
+      "toddy habit after work"
+     ],
+     "reply": "I drink country liquor most evenings, about two glasses, for the last twenty five years.",
+     "key": true
+    },
+    "diet_salt_intake": {
+     "cues": [
+      "salty pickled food intake",
+      "smoked food in the diet",
+      "daily diet of fruit and vegetables",
+      "pickles with every meal",
+      "salted fish or meat often"
+     ],
+     "reply": "We eat a lot of pickle and papad with salt, doctor. Fruit comes rarely, only when someone visits the town market."
+    },
+    "comorbidity_medicines": {
+     "cues": [
+      "diabetes or blood pressure tablets",
+      "heart disease history",
+      "tuberculosis in the past",
+      "other long standing illness",
+      "painkillers used often"
+     ],
+     "reply": "I take no regular tablets. I have used painkillers from the shop for the ache, but they stopped helping weeks ago.",
+     "key": true
+    },
+    "family_cancer_stomach": {
+     "cues": [
+      "cancer in the family",
+      "father or brother with stomach cancer",
+      "family history of bowel cancer",
+      "relatives with similar trouble",
+      "hereditary cancer in household"
+     ],
+     "reply": "My elder brother died of a stomach illness with similar wasting five years ago. Nobody told us it was cancer.",
+     "key": true
+    },
+    "occupation_household": {
+     "cues": [
+      "farming work and daily routine",
+      "crops grown on your farm",
+      "hours spent in the field",
+      "household members at home",
+      "cooking fuel used at home"
+     ],
+     "reply": "I grow cotton and jowar on two acres. My wife cooks on a gas stove now, and both my sons work as labourers in the same village."
+    }
+   },
+   "exam": {
+    "skill.gen.appearance": {
+     "finding": "Cachectic and pale, with temporal wasting and loose clothes hanging off the shoulders. Moves slowly, lies still, answers in short sentences.",
+     "abnormal": true
+    },
+    "skill.gen.vitals": {
+     "finding": "Pulse 104 regular, blood pressure 108/70. Respiratory rate 20. Afebrile. SpO2 97 percent on room air.",
+     "abnormal": true
+    },
+    "skill.gen.edema": {
+     "finding": "Trace pitting oedema over both ankles. No facial puffiness.",
+     "abnormal": true
+    },
+    "skill.gen.surg.survey": {
+     "finding": "Wasted build with wrinkled inelastic skin over a scaphoid abdomen. Pallor of the conjunctivae and tongue. No jaundice, no lymphoedema of the limbs.",
+     "abnormal": true
+    },
+    "skill.exam.surg.lump_inspection_palpation": {
+     "finding": "No visible lump on inspection. Deep palpation reveals a firm, irregular, mildly tender epigastric mass about 6 by 5 cm, slightly mobile side to side, moving a little with respiration. The examiner can get below it but not above it.",
+     "abnormal": true
+    },
+    "skill.exam.surg.malignancy_stigmata": {
+     "finding": "Hard left supraclavicular node about 2 cm, fixed. Small hard nodule at the umbilicus. Liver edge palpable 3 cm below the costal margin with a nodular surface. Shifting dullness present; no fluid thrill.",
+     "abnormal": true
+    },
+    "skill.exam.surg.regional_nodes": {
+     "finding": "Left supraclavicular fossa holds a hard fixed node. Axillary and inguinal groups are normal. No generalised lymphadenopathy.",
+     "abnormal": true
+    },
+    "skill.exam.surg.gastric_outlet_obstruction": {
+     "finding": "Faint visible peristalsis rolls from left to right across the upper abdomen. A succussion splash is audible four hours after food. No abdominal bruit.",
+     "abnormal": true
+    }
+   },
+   "essentialInvestigations": [
+    "ugi_endoscopy",
+    "biopsy_histopath",
+    "cect_abdomen",
+    "cbc",
+    "albumin_electrolytes"
+   ],
+   "investigations": {
+    "ugi_endoscopy": {
+     "label": "Upper gastrointestinal endoscopy",
+     "indicated": true,
+     "result": "Ulcerated growth along the lesser curvature of the antrum extending toward the pylorus, with contact bleeding. Multiple biopsies taken from margin and base. Helicobacter testing done at the same sitting.",
+     "note": "This is the test that names the disease. A single bite can miss patchy change, so multiple biopsies from margin and base were taken."
+    },
+    "biopsy_histopath": {
+     "label": "Endoscopic biopsy histopathology",
+     "indicated": true,
+     "result": "Intestinal type adenocarcinoma of the stomach. Helicobacter organisms seen on the background mucosa.",
+     "note": "Histology with the Lauren behaviour is the diagnosis; everything else stages it. A stromal tumour or lymphoma on these stains would have left this pathway entirely."
+    },
+    "cect_abdomen": {
+     "label": "Contrast enhanced CT of chest, abdomen and pelvis",
+     "indicated": true,
+     "result": "Circumferential antral wall thickening with perigastric nodes. Multiple hypodense liver lesions. Moderate ascites. No lung lesions.",
+     "note": "Maps the spread for the resectability verdict: liver lesions with ascites already mark dissemination, before any operation is discussed."
+    },
+    "cbc": {
+     "label": "Full blood count",
+     "indicated": true,
+     "result": "Haemoglobin 8.2 g/dL with microcytic hypochromic indices. Total leucocyte count normal. Platelets adequate.",
+     "note": "Chronic blood loss anaemia fits months of oozing from an ulcerated growth and must be corrected alongside staging."
+    },
+    "albumin_electrolytes": {
+     "label": "Albumin, electrolytes and blood gas",
+     "indicated": true,
+     "result": "Albumin 2.8 g/dL. Potassium 3.1 mmol/L with a mild metabolic alkalosis. Creatinine normal.",
+     "note": "Low albumin quantifies months of poor intake and enters the fitness verdict; the alkalosis reflects chronic vomiting of acid fluid and needs correction."
+    },
+    "helicobacter_stool": {
+     "label": "Helicobacter stool antigen",
+     "indicated": true,
+     "result": "Positive.",
+     "note": "Supports eradication as part of the plan, though it no longer changes the cancer diagnosis itself."
+    },
+    "staging_laparoscopy": {
+     "label": "Staging laparoscopy with washings",
+     "indicated": false,
+     "result": "Not done.",
+     "note": "Not indicated once distant spread is already proven on scans. It is reserved for apparently localised disease, to catch occult peritoneal seedlings before a planned resection."
+    },
+    "barium_meal": {
+     "label": "Barium meal study",
+     "indicated": false,
+     "result": "Not done.",
+     "note": "Not indicated: it shows shape, never histology, and a smooth study would have reassured falsely while the growth kept growing."
+    }
+   },
+   "differentialModel": {
+    "answer": "Most likely carcinoma of the stomach, antral, intestinal type, with liver and peritoneal spread. Consider benign gastric ulcer with outlet block, a bleeding stromal tumour, primary gastric lymphoma, and carcinoma of the pancreas.",
+    "accept": [
+     "carcinoma of the stomach",
+     "peptic ulcer disease",
+     "gastric ulcer",
+     "carcinoma of the pancreas",
+     "chronic pancreatitis",
+     "carcinoma of the oesophagus"
+    ],
+    "minMatch": 2
+   },
+   "diagnosis": {
+    "answer": "Carcinoma of the stomach, antrum, intestinal type adenocarcinoma, with liver and peritoneal metastases and a Virchow node, for best supportive and palliative care.",
+    "accept": [
+     "carcinoma of the stomach",
+     "gastric cancer"
+    ],
+    "minMatch": 1
+   },
+   "managementModel": {
+    "answer": "Urgent referral to a specialist upper gastrointestinal multidisciplinary team, confirm staging with contrast imaging, restore eating with outlet palliation, correct anaemia and albumin, stop tobacco and alcohol, test and treat Helicobacter, and link to home based palliative care.",
+    "accept": [
+     "referral",
+     "multidisciplinary",
+     "staging",
+     "nutrition",
+     "palliation",
+     "palliative",
+     "endoscopy",
+     "anaemia"
+    ],
+    "minMatch": 3
+   },
+   "teachingPoints": [
+    "The tempo with a point of change is the diagnosis before any test: twenty years of rhythmic ulcer pain, then four months of anorexia with a constant ache that nothing relieves.",
+    "Appetite kept, periodicity kept, relief kept: benign ulcer keeps all three, and this patient has lost all three, which is the malignant change checklist in one sentence.",
+    "The hands stage the case before the scan: an irregular epigastric mass with a hard left supraclavicular node, an umbilical nodule and shifting dullness already mark dissemination.",
+    "Coffee ground vomit with old food, visible left to right peristalsis and a splash hours after eating localise the growth to the antrum with outlet hold up.",
+    "Tissue first in strict order: endoscopy with multiple biopsies names it, scans and fitness stage it, and barium never replaces either.",
+    "Dissemination on scans converts the intent from cure to palliation: outlet passage, nutrition, anaemia and comfort become the plan, through the multidisciplinary team with home based palliative linkage."
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  }
+ ]
+}

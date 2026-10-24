@@ -1,0 +1,1306 @@
+{
+  "_comment": "Oral cavity cancer and ulcer: examination of the mouth. Same architecture as pneumonia: almost every finding is an emphasis overlay on a shared core/surgery skill. The disease file owns only reasoning, investigation, treatment and annexure skills; history and presentation live in work/shared-oral-cancer.json for the lead to merge into the surgery pack.",
+  "cases": [
+    {
+      "diagnosis": {
+        "accept": [
+          "Oral squamous cell carcinoma",
+          "oral cavity cancer",
+          "mouth cancer"
+        ],
+        "answer": "Squamous cell carcinoma of the right buccal mucosa, clinically advanced with submandibular nodal disease.",
+        "minMatch": 1
+      },
+      "differentialModel": {
+        "accept": [
+          "Oral squamous cell carcinoma",
+          "Traumatic oral ulcer",
+          "Recurrent aphthous ulceration",
+          "Oral leukoplakia",
+          "Oral erythroplakia",
+          "Oral lichen planus",
+          "Oral candidiasis"
+        ],
+        "answer": "Squamous cell carcinoma of the right buccal mucosa with nodal spread. Consider traumatic dental ulcer, aphthous ulceration, leukoplakia or erythroplakia at the same site, oral lichen planus, oral candidiasis, and a minor salivary gland tumour.",
+        "minMatch": 3
+      },
+      "essentialInvestigations": [
+        "edge_biopsy",
+        "contrast_ct",
+        "chest_image",
+        "blood_counts"
+      ],
+      "exam": {
+        "skill.exam.surg.buccal_mucosa": {
+          "abnormal": true,
+          "finding": "Ulceroproliferative growth of the right lower gingivobuccal sulcus extending to the buccal mucosa, about 3 cm, with white patches and palpable fibrous bands in both cheeks."
+        },
+        "skill.exam.surg.floor_of_mouth": {
+          "abnormal": false,
+          "finding": "Floor mucosa intact and mobile, no sublingual extension felt. Wharton ducts patent with no calculus."
+        },
+        "skill.exam.surg.regional_nodes": {
+          "abnormal": true,
+          "finding": "Single firm mobile right submandibular node about 2 cm, non tender. Opposite neck and both supraclavicular fossae clear."
+        },
+        "skill.exam.surg.tmj_trismus": {
+          "abnormal": true,
+          "finding": "Mouth opening two finger breadths, about 2 cm between incisors. No joint click. Fibrous bands felt in both cheeks."
+        },
+        "skill.exam.surg.tongue_mobility": {
+          "abnormal": true,
+          "finding": "Tongue protrudes in the midline but excursion is reduced and movement toward the right is painful. No deviation at rest."
+        },
+        "skill.exam.surg.ulcer_inspect": {
+          "abnormal": true,
+          "finding": "Single ulcer with a raised everted edge, necrotic slough on the floor, contact bleeding and foul smell. No similar lesion on the left side."
+        },
+        "skill.exam.surg.ulcer_palpate": {
+          "abnormal": true,
+          "finding": "Stony hard induration of the edge and base held between finger and thumb, fixed to the cheek. Bleeds on touch."
+        },
+        "skill.gen.appearance": {
+          "abnormal": true,
+          "finding": "Thin built man, looks older than stated age, pressing a cloth to the right cheek to catch dribbling saliva. Speaks slowly with a muffled voice."
+        },
+        "skill.gen.surg.survey": {
+          "abnormal": true,
+          "finding": "Pallor present with weight loss and sunken cheeks. No jaundice, no cyanosis, no clubbing, no oedema. Fit for workup, comorbidity to be assessed."
+        },
+        "skill.gen.vitals": {
+          "abnormal": false,
+          "finding": "Pulse 92 regular. Blood pressure 128/82. Respiratory rate 18. SpO2 97 percent on air. Afebrile at 37 C."
+        }
+      },
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "history": {
+        "bleeding_history": {
+          "cues": [
+            "any bleeding from the sore",
+            "does the sore bleed",
+            "bleeding on touch",
+            "blood stained saliva"
+          ],
+          "key": true,
+          "reply": "Yes, it bleeds when I brush or when food touches it, and my spit is sometimes blood stained in the morning."
+        },
+        "drug_allergy_history": {
+          "cues": [
+            "what tablets do you take regularly",
+            "any regular medicines",
+            "allergy to any drug",
+            "steroids or immune drugs"
+          ],
+          "key": true,
+          "reply": "I take no regular tablets, only vitamin capsules from the chemist for two months. No drug allergy that I know."
+        },
+        "ear_pain_history": {
+          "cues": [
+            "pain going to the ear",
+            "referred pain in the ear",
+            "earache on the same side",
+            "pain radiating to the ear"
+          ],
+          "key": true,
+          "reply": "Yes, for the last three weeks I get a deep ache inside my right ear, though my hearing is normal."
+        },
+        "eating_swallowing_history": {
+          "cues": [
+            "difficulty in chewing or swallowing",
+            "trouble eating food",
+            "spicy food burns",
+            "does food get stuck"
+          ],
+          "key": true,
+          "reply": "Spicy food burns badly now, so I eat only soft rice and dal. Swallowing is painful on the right side but food does not get stuck."
+        },
+        "family_home_history": {
+          "cues": [
+            "anyone in the family with a similar illness",
+            "family history of cancer",
+            "who lives with you at home",
+            "what work do you do"
+          ],
+          "key": true,
+          "reply": "Nobody in the family has had this. I cut sugarcane, and I live with my wife and two sons. My elder brother smokes bidis but is well."
+        },
+        "neck_lump_history": {
+          "cues": [
+            "any swelling in the neck",
+            "lump under the jaw",
+            "glands in the neck",
+            "lymph node swelling"
+          ],
+          "key": true,
+          "reply": "Yes, a hard painless lump came under my right jaw about a month ago. It is slowly growing but does not hurt."
+        },
+        "onset_course": {
+          "cues": [
+            "when did the sore first appear",
+            "how long has the ulcer been there",
+            "has it grown over weeks",
+            "was it small to begin with"
+          ],
+          "key": true,
+          "reply": "It began as a small painless sore two months ago and has grown steadily to this size. It has never healed in between."
+        },
+        "pain_history": {
+          "cues": [
+            "is the sore painful",
+            "when did the pain start",
+            "pain on chewing spicy food",
+            "burning pain in the mouth"
+          ],
+          "key": true,
+          "reply": "It was painless for the first month. Now it burns with spicy food and aches dully through the day."
+        },
+        "past_illness_history": {
+          "cues": [
+            "diabetes or blood pressure illness",
+            "tuberculosis in the past",
+            "any long standing illness",
+            "previous hospital admission"
+          ],
+          "key": true,
+          "reply": "No diabetes, no blood pressure problem, no tuberculosis. I was never admitted to hospital before this."
+        },
+        "patch_history": {
+          "cues": [
+            "white patch inside the cheek before",
+            "red patch at the same site",
+            "burning on spicy food earlier",
+            "tightness on opening the mouth before"
+          ],
+          "key": true,
+          "reply": "Yes, there was a white patch on that same cheek for over a year, and spicy food burned for many months before the sore came.",
+          "skillId": "skill.hx.oral.risk"
+        },
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "what is the problem in your mouth",
+            "tell me about the sore inside the cheek",
+            "how can I help you"
+          ],
+          "key": true,
+          "reply": "Doctor, I have had this sore inside my right cheek for two months. It does not heal, and now food burns and my mouth smells bad.",
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "smoking_drink_history": {
+          "cues": [
+            "do you smoke bidis or cigarettes",
+            "how many bidis per day",
+            "do you drink alcohol regularly",
+            "country liquor habit"
+          ],
+          "key": true,
+          "reply": "I smoke about ten bidis a day for twenty years, and I drink country liquor most evenings.",
+          "skillId": "skill.hx.oral.risk"
+        },
+        "speech_saliva_history": {
+          "cues": [
+            "change in your voice or speech",
+            "excessive saliva dribbling",
+            "foul smell from the mouth",
+            "difficulty in speaking clearly"
+          ],
+          "key": true,
+          "reply": "My speech has become thick and unclear, saliva dribbles from the corner, and my sons say my mouth smells foul."
+        },
+        "teeth_denture_history": {
+          "cues": [
+            "any sharp tooth hurting the cheek",
+            "loose teeth in the lower jaw",
+            "do you wear a denture",
+            "broken tooth edge"
+          ],
+          "key": true,
+          "reply": "One lower molar on the right is loose and shakes, but no tooth cuts into the sore. I wear no denture."
+        },
+        "tobacco_quid_history": {
+          "cues": [
+            "do you chew tobacco or khaini",
+            "where do you keep the quid in the mouth",
+            "gutka or pan masala habit",
+            "how many times a day do you chew"
+          ],
+          "key": true,
+          "reply": "I keep khaini in my right cheek pouch four to five times a day for nearly twenty five years, sometimes overnight.",
+          "skillId": "skill.hx.oral.risk"
+        },
+        "ulcer_history": {
+          "cues": [
+            "describe the sore inside your cheek",
+            "has the ulcer healed at any time",
+            "what treatment was taken for the sore",
+            "was the sore painless to begin with"
+          ],
+          "key": true,
+          "reply": "It started as a painless white sore that broke open and never healed. I took vitamin capsules for two months but it kept growing.",
+          "skillId": "skill.hx.surg.ulcer"
+        },
+        "weight_appetite_history": {
+          "cues": [
+            "loss of weight in recent months",
+            "how is your appetite",
+            "clothes looser than before",
+            "eating less than usual"
+          ],
+          "key": true,
+          "reply": "My appetite has fallen and my clothes hang loose. I must have lost about 4 kg in these two months."
+        }
+      },
+      "id": "case.oral.raghunath",
+      "initialVitals": {
+        "hr": 92,
+        "bpSystolic": 128,
+        "bpDiastolic": 82,
+        "rr": 18,
+        "spo2": 97,
+        "temp": 37,
+        "gcs": 15
+      },
+      "investigations": {
+        "abdominal_usg": {
+          "indicated": false,
+          "label": "Abdominal ultrasound",
+          "note": "Not indicated: no abdominal symptoms and no reason to suspect liver spread at presentation. Ordered from habit, it adds cost and delay without changing the referral.",
+          "result": "No focal liver lesion. No ascites."
+        },
+        "blood_counts": {
+          "indicated": true,
+          "label": "Blood counts with renal and liver panels",
+          "note": "Anaemia and low albumin are common from poor intake and chronic blood loss, and fitness for operation and radiotherapy is decided here.",
+          "result": "Haemoglobin 11 g/dL. Total leucocyte count within normal range. Creatinine 1 mg/dL. Albumin at the lower end of normal."
+        },
+        "chest_image": {
+          "indicated": true,
+          "label": "Chest radiograph",
+          "note": "Screens for lung spread, a second primary and tuberculosis in the same sitting, and it is available everywhere while advanced scans are awaited.",
+          "result": "No lung nodule, no cavity, no effusion. Cardiac and bony shadows normal."
+        },
+        "contrast_ct": {
+          "indicated": true,
+          "label": "Contrast enhanced CT of face, neck and chest",
+          "note": "Stages the disease after biopsy: bone invasion, nodal size and spread, and resectability. This is the scan the head and neck unit plans the operation on.",
+          "result": "Ulceroproliferative lesion of the right gingivobuccal sulcus with erosion of the adjacent mandible. Enlarged right submandibular node with central necrosis. No distant lesion on chest cuts."
+        },
+        "dental_review": {
+          "indicated": true,
+          "label": "Dental and nutritional review",
+          "note": "A septic mouth and a loose molar must be dealt with before resection and certainly before radiotherapy, and feeding must be secured early.",
+          "result": "Poor oral hygiene with a loose right lower molar and sharp edges. Dietician advised soft high protein feeds."
+        },
+        "edge_biopsy": {
+          "indicated": true,
+          "label": "Edge biopsy of the ulcer",
+          "note": "The single confirmatory test, taken from viable edge with a rim of normal mucosa. Treatment is never started without it.",
+          "result": "Squamous cell carcinoma, moderately differentiated, with invasion of the underlying muscle. Margins not assessable on punch tissue."
+        },
+        "sputum_afb": {
+          "indicated": false,
+          "label": "Sputum for acid fast bacilli",
+          "note": "Not indicated as a first step: no cough, no evening fever, no weight loss pattern of tuberculosis, and a normal chest film. It stays on the list only if lung shadows appear.",
+          "result": "Not sent."
+        }
+      },
+      "managementModel": {
+        "accept": [
+          "biopsy",
+          "contrast scan",
+          "neck dissection",
+          "resection",
+          "radiotherapy",
+          "tobacco cessation",
+          "dental review",
+          "follow-up"
+        ],
+        "answer": "Edge biopsy with urgent referral to the head and neck unit, contrast scans of the face neck and chest for stage, wide resection with neck dissection and reconstruction decided at the multidisciplinary board, postoperative radiotherapy for adverse features, tobacco and quid cessation, dental review before radiotherapy, and speech swallowing and nutrition rehabilitation with fixed follow-up.",
+        "minMatch": 3
+      },
+      "opening": "Raghunath Shinde, 58, sits in the surgical outpatient room pressing a cloth to the right side of his mouth. He speaks with difficulty and points to a sore inside his cheek that has been there for two months. Introduce yourself and take a history.",
+      "patient": {
+        "age": 58,
+        "name": "Raghunath Shinde",
+        "occupation": "Sugarcane cutter",
+        "residence": "Rural, lives with his wife and two sons",
+        "sex": "male"
+      },
+      "review": {
+        "status": "ai_drafted"
+      },
+      "teachingPoints": [
+        "The tempo and the habit site make the case before the mouth is opened: two months of painless ulcer exactly where the khaini rests.",
+        "Painless does not mean harmless: early mouth cancer is painless, and pain with ear referral, trismus and foul smell arrives late.",
+        "Feel with the tongue at rest: stony induration with an everted edge and fixation is the bedside diagnosis, and the opposite neck is still examined.",
+        "Any ulcer that fails to heal within a few weeks needs an edge biopsy, not another course of vitamins; a negative biopsy with persisting suspicion is repeated.",
+        "Tobacco and quid cessation counselling starts at the first visit and continues after surgery, since the whole mucosa remains at risk of a second primary.",
+        "Referral is urgent and the board decides: resection with neck dissection first, radiotherapy after for adverse features, with dental, speech and nutrition support."
+      ],
+      "title": "A quid chewer with a sore that will not heal"
+    }
+  ],
+  "chapters": [
+    {
+      "blurb": "What cancer of the mouth is, and why the habit site predicts the cancer site",
+      "id": "basics",
+      "skills": [
+        "skill.oral.basics"
+      ],
+      "title": "Basics"
+    },
+    {
+      "blurb": "Before a single question",
+      "id": "approach",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ],
+      "title": "Approach to the patient"
+    },
+    {
+      "blurb": "Age, sex and habit set the prior before the mouth is opened",
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Expect a middle aged or older man, often a manual worker, with years of quid, tobacco or alcohol use. Cancer of the mouth is uncommon under forty without a habit, so youth with no exposure should lower the prior and raise benign mimics."
+        }
+      },
+      "id": "particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "title": "Patient particulars"
+    },
+    {
+      "blurb": "Months, not days, and a sore that started painless",
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect a sore, ulcer or lump inside the mouth present for weeks or months, painless at first, with growth, bleeding on touch, foul smell or loosening teeth as it advances. A story told in days points away from cancer."
+        },
+        "skill.hx.surg.oral_malignancy": {
+          "expect": "Expect the quid kept in the cheek pouch on the same side as the sore, pain referred to the ear on that side, dribbling saliva, and later trismus, voice change or difficulty swallowing. Match the habit site to the ulcer site in every case."
+        },
+        "skill.hx.surg.ulcer": {
+          "expect": "Expect a relatively short history for a slow growing cancer: weeks to a few months of a non healing sore. Ask what was tried already, since repeated vitamin courses without examination are the commonest cause of late presentation."
+        }
+      },
+      "id": "history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.surg.ulcer",
+        "skill.hx.surg.oral_malignancy"
+      ],
+      "title": "History of presenting illness"
+    },
+    {
+      "blurb": "The habits and background that set the risk tier",
+      "emphasis": {
+        "skill.hx.oral.risk": {
+          "expect": "Expect daily khaini, gutka or betel quid kept in the cheek for years, often with bidi smoking and alcohol. Ask about earlier white or red patches at the same site, sharp teeth or dentures, diabetes and immune suppression, and family cancers of the mouth and throat."
+        }
+      },
+      "id": "past_personal_drug_family",
+      "skills": [
+        "skill.hx.oral.risk"
+      ],
+      "title": "Past, personal, drug and family history"
+    },
+    {
+      "blurb": "Weight, pallor and fitness for the operation ahead",
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for weight loss, sunken cheeks and a cloth pressed to the mouth for dribbling saliva. Advanced disease shows cachexia and a muffled voice; trismus and poor hygiene are visible before the mouth is examined."
+        },
+        "skill.gen.surg.survey": {
+          "expect": "Survey for pallor from chronic blood loss and poor intake, and for fitness: build, nutrition, anaemia and comorbidity decide whether this patient will survive resection and radiotherapy, not only whether the tumour is resectable."
+        },
+        "skill.gen.vitals": {
+          "expect": "Vitals are usually stable in mouth cancer, which is why they mislead. Tachycardia with fever suggests secondary infection or aspiration; hypotension and desaturation are late events from bleeding, sepsis or airway compromise."
+        }
+      },
+      "id": "general_exam",
+      "skills": [
+        "skill.gen.surg.survey",
+        "skill.gen.appearance",
+        "skill.gen.vitals"
+      ],
+      "title": "General examination"
+    },
+    {
+      "blurb": "Edge, base, fixation, movement and nodes, in that order",
+      "emphasis": {
+        "skill.exam.surg.buccal_mucosa": {
+          "expect": "Expect the growth in the gingivobuccal sulcus or cheek where the quid rests, with white patches and fibrous bands around it. Retract fully to the retromolar region, which hides early extension."
+        },
+        "skill.exam.surg.floor_of_mouth": {
+          "expect": "Expect spread to the floor in tongue and anterior cancers: tethering, a fixed sublingual mass or elevation of the tongue. An intact mobile floor argues against deep invasion."
+        },
+        "skill.exam.surg.regional_nodes": {
+          "expect": "Expect hard painless submandibular and upper jugular nodes on the same side, examined on both sides even for a one sided sore. Fixation, bilaterality or supraclavicular spread upstage the disease and change the dissection."
+        },
+        "skill.exam.surg.tmj_trismus": {
+          "expect": "Expect reduced inter incisal opening from cheek infiltration or submucous fibrosis, measured in finger breadths. Progressive trismus upstages the disease and threatens the airway and feeding."
+        },
+        "skill.exam.surg.tongue_mobility": {
+          "expect": "Expect deviation toward the lesion or inability to protrude where the floor or lingual muscle is invaded. Midline protrusion with full excursion argues against deep invasion."
+        },
+        "skill.exam.surg.tongue_ulcer": {
+          "expect": "Expect the ulcer on the lateral border of the anterior tongue with an everted edge, and palpate with the tongue at rest inside the mouth. Protruded muscle fakes induration and is the commonest bedside error."
+        },
+        "skill.exam.surg.ulcer_inspect": {
+          "expect": "Expect a single ulcer with a raised everted edge, necrotic slough on the floor, contact bleeding and foul smell. An undermined edge with a pale floor points instead to tuberculosis; a clean edge against a sharp tooth points to trauma."
+        },
+        "skill.exam.surg.ulcer_palpate": {
+          "expect": "Expect stony hard induration of edge and base between finger and thumb, with fixation to the cheek, gum or jaw. A soft mobile base that moves over deeper structures argues against cancer."
+        }
+      },
+      "id": "systemic_exam",
+      "skills": [
+        "skill.exam.surg.tongue_ulcer",
+        "skill.exam.surg.tongue_mobility",
+        "skill.exam.surg.buccal_mucosa",
+        "skill.exam.surg.floor_of_mouth",
+        "skill.exam.surg.ulcer_inspect",
+        "skill.exam.surg.ulcer_palpate",
+        "skill.exam.surg.regional_nodes",
+        "skill.exam.surg.tmj_trismus"
+      ],
+      "title": "Examination of the mouth and neck"
+    },
+    {
+      "blurb": "Induration, eversion, fixation and nodes: one mechanism, one picture",
+      "id": "disease_findings",
+      "skills": [
+        "skill.oral.signs",
+        "skill.oral.neck_levels"
+      ],
+      "title": "Putting the oral cancer picture together"
+    },
+    {
+      "blurb": "Three sentences that contain the case",
+      "id": "summary",
+      "skills": [
+        "skill.oral.summary"
+      ],
+      "title": "Clinical summary"
+    },
+    {
+      "blurb": "What else ulcerates the mouth, and what a sore that will not heal is telling you",
+      "id": "differential",
+      "skills": [
+        "skill.oral.differential"
+      ],
+      "title": "Differential diagnosis"
+    },
+    {
+      "blurb": "Edge biopsy first, scans for extent and nodes, and nothing that delays referral",
+      "id": "investigations",
+      "skills": [
+        "skill.oral.workup"
+      ],
+      "title": "Investigations"
+    },
+    {
+      "blurb": "Naming the cancer, the clinical stage, and what still needs proving",
+      "id": "diagnosis",
+      "skills": [
+        "skill.oral.diagnosis"
+      ],
+      "title": "Diagnosis and stage"
+    },
+    {
+      "blurb": "Surgery first for resectable disease, the neck addressed always, radiotherapy after",
+      "id": "treatment",
+      "skills": [
+        "skill.oral.treatment"
+      ],
+      "title": "Treatment"
+    },
+    {
+      "blurb": "Present this patient to your consultant",
+      "id": "case",
+      "skills": [
+        "skill.present.oral.case"
+      ],
+      "title": "Case presentation"
+    }
+  ],
+  "estMinutes": 60,
+  "fullName": "Squamous cell carcinoma of the oral cavity",
+  "id": "oral-cancer",
+  "kbRef": "oral_cancer",
+  "name": "Oral cavity cancer",
+  "oneLine": "A non healing ulcer of the mouth in a tobacco or quid user, and what makes it cancer",
+  "osce": {
+    "stations": [
+      {
+        "examinerQuestions": [
+          "What two features of the edge and base mark this ulcer as malignant?",
+          "Why must the tongue lie at rest while you palpate the base?",
+          "Name two findings outside the ulcer that would upstage this disease."
+        ],
+        "id": "osce.oral.ulcer_exam",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.surg.tongue_ulcer",
+          "skill.exam.surg.ulcer_inspect",
+          "skill.exam.surg.ulcer_palpate",
+          "skill.exam.surg.tongue_mobility",
+          "skill.exam.surg.regional_nodes"
+        ],
+        "task": "This 60 year old man has had a painless sore on the side of his tongue for six weeks. Examine his mouth ulcer and neck, and present your findings.",
+        "title": "Examine an ulcer of the tongue"
+      },
+      {
+        "examinerQuestions": [
+          "What single habit question matters most here, and why must you ask where the quid is kept?",
+          "She reports a white patch at the same site for a year. What does that change?",
+          "What is your next step after this history, and how soon?"
+        ],
+        "id": "osce.oral.history",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.surg.ulcer",
+          "skill.hx.surg.oral_malignancy",
+          "skill.hx.oral.risk"
+        ],
+        "task": "This 55 year old woman has had a sore inside her cheek for two months. Take a focused history in six minutes and state what you would do next.",
+        "title": "Take a history of a non healing mouth ulcer"
+      }
+    ]
+  },
+  "review": {
+    "status": "ai_drafted"
+  },
+  "skills": {
+    "skill.oral.basics": {
+      "id": "skill.oral.basics",
+      "kind": "reasoning",
+      "oneLine": "A squamous cancer of the oral mucosa driven by tobacco, areca nut and alcohol",
+      "pitfalls": [
+        "Calling every mouth ulcer cancer, so the far commoner aphthous and traumatic sores get biopsied needlessly.",
+        "Forgetting smokeless tobacco and the quid site, so the history misses the actual cause.",
+        "Reassuring a patient because the sore is painless, when painless is exactly how early cancer presents."
+      ],
+      "probes": [
+        {
+          "a": "Squamous cell carcinoma, driven by tobacco in all forms, areca nut or betel quid chewing, and heavy alcohol use acting together.",
+          "accept": [
+            "squamous",
+            "tobacco",
+            "areca",
+            "quid",
+            "alcohol"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "What is the commonest histology of mouth cancer, and which three habits drive it?"
+        },
+        {
+          "a": "Because the carcinogens act where the quid rests, so the gingivobuccal sulcus and cheek lead in quid chewers.",
+          "accept": [
+            "quid",
+            "rests",
+            "sulcus",
+            "site"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why does the cancer site usually match the quid site?"
+        },
+        {
+          "a": "A painless non healing ulcer in a high risk patient must be examined and biopsied within weeks, not treated blindly as deficiency or trauma.",
+          "accept": [
+            "biopsy",
+            "weeks",
+            "examination",
+            "non healing"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "A painless cheek ulcer in a quid chewer is treated with vitamins for two months without examination. What is wrong?"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "oral_cancer: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The mouth and tongue: tumours and premalignant lesions",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Cancer of the oral cavity is almost always a squamous cell carcinoma arising from the mucosal lining of the lip, cheek, gum, tongue, floor of the mouth, hard palate or retromolar region. It begins with cumulative genetic damage from tobacco in all its forms, areca nut and heavy alcohol use, which act together rather than alone.\n\nThe damage first shows as field change across the mucosa: white patches, red patches and stiffening of the cheek that can progress through dysplasia to invasive cancer. The tumour then invades muscle, bone and nerves locally and spreads early to the lymph nodes of the neck, while distant spread comes late.",
+          "heading": "The disease in one picture"
+        },
+        {
+          "heading": "Who gets it and where",
+          "points": [
+            "Middle aged and older men who chew tobacco, khaini, gutka or betel quid, smoke bidis or cigarettes, or drink heavily; the habit site predicts the cancer site.",
+            "The gingivobuccal sulcus and buccal mucosa lead in India because the quid rests there; the lateral border of the tongue comes next.",
+            "Lip cancer follows sun exposure in outdoor workers and favours the lower lip; floor of mouth and retromolar cancers hide and present late.",
+            "Premalignant states to name by sight: leukoplakia, erythroplakia and oral submucous fibrosis, all needing watch and biopsy on change."
+          ]
+        },
+        {
+          "body": "Early cancer is often painless, so patients chew on and treat the sore as a tooth injury or vitamin deficiency for months. Any ulcer, patch or lump that fails to heal within a few weeks must be biopsied rather than treated again as infection or trauma.\n\nCervical node spread is common and worsens cure rates sharply, so the neck is examined and imaged in every case. A student who knows the cause, the at risk mucosa and this natural history can suspect the disease months before it becomes inoperable.",
+          "heading": "Why delay kills"
+        }
+      ],
+      "title": "What cancer of the mouth is",
+      "why": "Cancer of the mouth is one of the commonest cancers seen in Indian surgical practice, and also one of the most preventable. The cause sits in the cheek pouch, the warning patches precede the ulcer by months, and the cure depends on weeks. A student who knows this chain can suspect it long before it becomes inoperable."
+    },
+    "skill.oral.signs": {
+      "id": "skill.oral.signs",
+      "kind": "reasoning",
+      "oneLine": "Induration, eversion, fixation and nodes: the bedside tetrad of a malignant ulcer",
+      "pitfalls": [
+        "Palpating with the tongue protruded, so normal muscle reads as malignant induration.",
+        "Treating a painless ulcer as deficiency for months because painless felt harmless.",
+        "Examining only the same side nodes because the sore is one sided, missing opposite spread."
+      ],
+      "probes": [
+        {
+          "a": "A raised everted edge, a stony hard indurated base, fixation to deeper structures, and bleeding on touch, with regional nodes.",
+          "accept": [
+            "everted",
+            "induration",
+            "fixation",
+            "bleeding",
+            "nodes"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "Name the four bedside findings that mark an ulcer as malignant."
+        },
+        {
+          "a": "Protruded lingual muscle feels hard and fakes induration; only a relaxed tongue lets true malignant hardness be felt.",
+          "accept": [
+            "relaxed",
+            "rest",
+            "muscle",
+            "induration"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why must the tongue lie at rest while you palpate the base?"
+        },
+        {
+          "a": "An undermined edge favours tuberculosis over cancer, and the lungs must be examined for a primary focus.",
+          "accept": [
+            "tuberculosis",
+            "undermined",
+            "lungs"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "An ulcer has an undermined edge and a pale floor with shadows on the chest film. What does the edge suggest?"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "oral_cancer: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The mouth, tongue and lips",
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Inspect the edge first. A malignant ulcer has a raised, everted edge that looks heaped up, over a floor of necrotic slough or fragile granulation that bleeds on touch. A traumatic ulcer has a clean cut edge against a sharp tooth, and an aphthous ulcer is small with a yellow base and a red halo.\n\nNeither benign sore is heaped or fixed, and neither shows a stony base. The edge is where the bedside diagnosis starts, before a finger is laid on the sore.",
+          "heading": "The ulcer that is cancer"
+        },
+        {
+          "body": "Palpate the base with the tongue at rest inside the mouth, never protruded, since contracted muscle fakes hardness. True malignant induration feels stony hard between finger and thumb, and the ulcer is fixed to the cheek, gum or jaw rather than moving over it.\n\nConfirm what bleeds: malignant tissue oozes on gentle touch, while a healing traumatic ulcer does not. Fixation to bone, skin or muscle decides the extent of resection, so test mobility in two planes.",
+          "heading": "What the fingers add"
+        },
+        {
+          "points": [
+            "Mouth opening in finger breadths: progressive trismus means infiltration of the cheek muscles or submucous fibrosis.",
+            "Tongue movement: deviation or inability to protrude means floor or muscle invasion and upstages the disease.",
+            "Loose teeth, numbness of lip or tongue, foul smell, dribbling saliva and changed speech or voice, each marking deeper invasion.",
+            "The neck on both sides: hard, painless, enlarging nodes, fixed in late disease; bilateral examination is mandatory even for a one sided sore."
+          ],
+          "heading": "What surrounds the ulcer"
+        }
+      ],
+      "title": "The oral cancer picture",
+      "why": "A malignant ulcer of the mouth is diagnosed at the bedside, before any scan is ordered. The findings that separate it from every benign sore are felt with the fingers, not seen on a screen, and missing them is how operable cancers become inoperable ones."
+    },
+    "skill.oral.neck_levels": {
+      "id": "skill.oral.neck_levels",
+      "kind": "annexure",
+      "oneLine": "From submental to supraclavicular: where mouth cancers drain and how nodes upstage",
+      "pitfalls": [
+        "Recording a node as cervical without naming its level, so the dissection plan cannot be drawn.",
+        "Skipping the opposite neck and the supraclavicular fossae because the sore is one sided.",
+        "Calling a node negative on palpation alone, when imaging still finds disease in a clinically silent neck."
+      ],
+      "probes": [
+        {
+          "a": "Submandibular and submental nodes, then the upper deep cervical chain.",
+          "accept": [
+            "submandibular",
+            "submental",
+            "cervical"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Name the first echelon nodes for a cheek cancer."
+        },
+        {
+          "a": "Lymph from the tip, floor and midline crosses over, so opposite nodes change stage and the extent of dissection.",
+          "accept": [
+            "cross",
+            "midline",
+            "opposite",
+            "stage"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why examine the opposite side of the neck for a one sided tongue ulcer?"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "oral_cancer: management",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The neck: lymph nodes and levels",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "heading": "The levels in order",
+          "table": {
+            "cols": [
+              "Level",
+              "Groups",
+              "Mouth sites that drain here"
+            ],
+            "rows": [
+              [
+                "Ia",
+                "Submental",
+                "Tip of tongue, front of floor, lower lip"
+              ],
+              [
+                "Ib",
+                "Submandibular",
+                "Cheek, gums, front of tongue, lips"
+              ],
+              [
+                "II",
+                "Upper jugular",
+                "Tongue, palate, tonsil region"
+              ],
+              [
+                "III",
+                "Mid jugular",
+                "Tongue and floor of mouth"
+              ],
+              [
+                "IV",
+                "Lower jugular",
+                "Advanced tongue and floor disease"
+              ],
+              [
+                "V",
+                "Posterior triangle",
+                "Multilevel or advanced spread"
+              ]
+            ]
+          }
+        },
+        {
+          "body": "Describe every node by group, size in centimetres, number, consistency, tenderness, mobility and fixity. A hard painless enlarging node that is fixed to skin or muscle in a tobacco user is metastatic until proven otherwise.\n\nA tender soft node with fever beside a dental abscess is inflammatory instead. Consistency, tenderness and fixity separate the two far better than size alone.",
+          "heading": "Reading a node"
+        },
+        {
+          "body": "Record both sides of the neck in every case, since lymph from the tip and the floor crosses the midline. A clinically negative neck still needs imaging, and deeper or higher risk tumours need elective treatment of the neck even when nothing is felt.\n\nFactor node number, size, side and spread outside the capsule into the decision for postoperative radiotherapy. A low yield dissection or a node with extracapsular spread lowers the threshold for adjuvant treatment.",
+          "heading": "How nodes change the plan"
+        }
+      ],
+      "title": "Nodal levels of the neck and what they mean",
+      "why": "The neck decides prognosis more than the size of the sore, and nodal spread is what most often makes a curable mouth cancer incurable. A student who can name the level of a node can state the stage and defend the plan for dissection."
+    },
+    "skill.oral.summary": {
+      "id": "skill.oral.summary",
+      "kind": "reasoning",
+      "oneLine": "Tempo, habit, ulcer, nodes and stage in three sentences",
+      "pitfalls": [
+        "Omitting the habit and its site, so the aetiology never enters the summary.",
+        "Describing the ulcer without its edge, base and fixity, leaving the listener unable to stage.",
+        "Closing without naming what is still missing, so a clinical impression reads as a proven diagnosis."
+      ],
+      "probes": [
+        {
+          "a": "The habit with its site, the ulcer edge and base with fixity, the nodal groups, and mouth opening, since these stage the case.",
+          "accept": [
+            "habit",
+            "edge",
+            "fixity",
+            "nodes",
+            "opening"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What belongs in an oral cancer summary that an acute illness summary does not need?"
+        },
+        {
+          "a": "Because the bedside diagnosis is clinical until biopsy and scans confirm stage, and the listener must know what could still change the plan.",
+          "accept": [
+            "biopsy",
+            "scans",
+            "clinical",
+            "plan"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why state what is still missing in the summary?"
+        }
+      ],
+      "rubric": [
+        {
+          "id": "tempo_habit",
+          "text": "States tempo in weeks or months with the habit and its site"
+        },
+        {
+          "id": "ulcer_nodes",
+          "text": "Gives edge, base, fixity, nodes and mouth opening"
+        },
+        {
+          "id": "stage_missing",
+          "text": "States the clinical stage with what is still missing"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "oral_cancer: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Mouth cancer: assessment and staging",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "First the patient with risk: age, sex, occupation and the tobacco or quid habit with its site and years. Then the syndrome in abstract terms with tempo: a painless ulcer of the cheek of two months with trismus and a neck node.\n\nThen the stage with what is still missing: clinically advanced disease of the buccal mucosa with a mobile submandibular node, pending biopsy and scans. Name function in the same summary: opening, speech, swallow and weight trend.",
+          "heading": "The three sentences"
+        },
+        {
+          "body": "A 58 year old sugarcane cutter who keeps khaini in the right cheek pouch presents with two months of painless ulcer at that site, now with foul smell, pain on spicy food and reduced opening, with 4 kg weight loss. Examination shows a 3 cm right gingivobuccal ulcer with an everted edge and stony base fixed to the cheek, two finger mouth opening, and a 2 cm firm mobile right submandibular node with a normal opposite neck.\n\nThis is clinically advanced squamous cancer of the right buccal mucosa with nodal disease, pending edge biopsy and contrast staging scans of the face, neck and chest.",
+          "heading": "A worked example"
+        },
+        {
+          "points": [
+            "Tempo in weeks or months, since days and months point to different diseases.",
+            "The habit with its site, since the match between quid site and ulcer site is the aetiology.",
+            "Edge, base, fixity, nodes and opening, since these five stage the case at the bedside.",
+            "What is still missing: biopsy, scans and fitness, so the listener knows the diagnosis is clinical."
+          ],
+          "heading": "Never omit these"
+        }
+      ],
+      "title": "The clinical summary",
+      "why": "The summary of a chronic malignant case has a different shape from an acute one: tempo in weeks or months, the habit that caused it, and the stage that decides the operation all belong in the same breath. A summary that omits the stage leaves the listener unable to judge urgency."
+    },
+    "skill.oral.differential": {
+      "id": "skill.oral.differential",
+      "kind": "reasoning",
+      "oneLine": "What else ulcerates the mouth, and what a sore that will not heal is telling you",
+      "pitfalls": [
+        "Not considering tuberculosis because the patient chews tobacco, as if one disease protects against the other.",
+        "Discharging a sore that arose inside a white patch without biopsy, which is how cancer inside leukoplakia is missed.",
+        "Treating candidiasis with resection in mind, or cancer with antifungals, because the white appearance was never tested by wiping.",
+        "Biopsy without removing a sharp tooth first, so a traumatic ulcer that would have healed gets an unnecessary scar."
+      ],
+      "probes": [
+        {
+          "a": "Traumatic dental ulcer, aphthous ulcer, leukoplakia or erythroplakia, lichen planus, candidiasis, and minor salivary gland tumour.",
+          "accept": [
+            "traumatic",
+            "aphthous",
+            "leukoplakia",
+            "erythroplakia",
+            "lichen",
+            "candidiasis",
+            "salivary"
+          ],
+          "level": 2,
+          "minMatch": 3,
+          "q": "Name four benign mimics of a malignant mouth ulcer."
+        },
+        {
+          "a": "Smooth or extract the tooth and reassess; biopsy only if the ulcer persists after the cause is removed.",
+          "accept": [
+            "tooth",
+            "reassess",
+            "biopsy",
+            "persists"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "An ulcer sits against a sharp molar, is very painful, and the patient chews no tobacco. What do you do?"
+        }
+      ],
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Offers a differential spanning trauma, aphthous, premalignant, infective and salivary causes"
+        },
+        {
+          "id": "edge_logic",
+          "text": "Uses edge, base, pain and nodes to argue for or against each"
+        },
+        {
+          "id": "biopsy_rule",
+          "text": "States the biopsy rule for the non resolving sore"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "oral_cancer: additionalDifferentials",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Ulcers of the tongue: differential diagnosis",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "For a non healing ulcer of more than a few weeks in a tobacco or quid user, work through trauma, aphthous disease, premalignant patches, granulomatous disease, infection and salivary tumours before settling on cancer.\n\nMatch each candidate against tempo, pain, edge, base, nodes and habit. Cancer is painless first with an everted edge and a stony fixed base plus nodes, and each benign mimic breaks this pattern at a different point.",
+          "heading": "Working through the ulcer list"
+        },
+        {
+          "heading": "The candidates in brief",
+          "points": [
+            "Dental or denture ulcer: sits against a sharp tooth or flange, very painful and elongated, and heals once the cause is removed.",
+            "Aphthous ulcer: small, round, yellow base with a red halo on the cheek or lip, exquisitely painful, recurrent since early adult life, healing within about two weeks.",
+            "Leukoplakia and erythroplakia: white or velvety red patches that cannot be wiped off; feel inside them for induration, since cancer often arises within.",
+            "Oral lichen planus: lacy white lines with burning, usually on both sides; biopsy settles doubt.",
+            "Candidiasis: creamy plaques that wipe off leaving raw mucosa, in denture wearers, diabetics, or after antibiotics or steroids.",
+            "Minor salivary gland tumour: a firm lobulated swelling of the upper lip or palate, mobile early, unlike the fixed ulcer of cancer.",
+            "Tuberculous ulcer: undermined edge with a pale floor at the tip or sides, with lung disease; a gumma perforates the palate or sits midline."
+          ]
+        },
+        {
+          "body": "A sore that fails to heal within a few weeks despite removal of trauma needs an edge biopsy, not another course of treatment. Rebiopsy if suspicion persists after a negative result, and biopsy any post radiotherapy ulcer with a rolled edge rather than assuming necrosis.\n\nIn India, keep tuberculosis and malignancy on the same list. An undermined edge with lung shadows points one way, an everted edge with a stony base and nodes points the other, and the biopsy decides.",
+          "heading": "The non resolving sore"
+        }
+      ],
+      "title": "Differential diagnosis",
+      "why": "Most mouth sores are benign and most heal, which is exactly why the one that does not is dangerous. The differential protects two patients: the young non user who must not get a cancer operation, and the older user whose cancer must not get vitamins."
+    },
+    "skill.oral.workup": {
+      "id": "skill.oral.workup",
+      "kind": "investigation",
+      "oneLine": "Edge biopsy first, scans for extent and nodes, and nothing that delays referral",
+      "pitfalls": [
+        "Ordering a scan before the biopsy, so treatment waits on images that cannot diagnose.",
+        "Starting treatment on inspection alone because the ulcer looks typical.",
+        "Holding the referral back until advanced scans are done, instead of referring on biopsy and examination.",
+        "Accepting a negative biopsy as final when the ulcer still looks malignant."
+      ],
+      "probes": [
+        {
+          "a": "Edge biopsy including a rim of normal mucosa, taken from viable edge tissue.",
+          "accept": [
+            "edge biopsy",
+            "edge",
+            "rim",
+            "mucosa"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What is the first investigation for a suspected mouth cancer, and where is it taken from?"
+        },
+        {
+          "a": "Bony invasion, nodal size number and spread, and resectability, plus chest screening for spread or a second primary.",
+          "accept": [
+            "bony",
+            "nodal",
+            "resectability",
+            "chest"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What does contrast CT of the face and neck add after biopsy?"
+        },
+        {
+          "a": "Repeat or deepen the biopsy rather than reassuring the patient, since sampling error misses edge disease.",
+          "accept": [
+            "repeat",
+            "deepen",
+            "sampling"
+          ],
+          "level": 3,
+          "minMatch": 1,
+          "q": "Biopsy is negative but the ulcer still looks malignant. What next?"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "oral_cancer: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Mouth cancer: biopsy and staging",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Biopsy from the edge of the lesion including a rim of normal mucosa is the first and only confirmatory test. Take it early, from viable edge tissue rather than the necrotic centre, and repeat or deepen it if suspicion persists despite a negative result.\n\nNo scan replaces histology. Treatment is never started on inspection alone, however typical the ulcer looks, and no vitamin course substitutes for tissue.",
+          "heading": "Confirm it"
+        },
+        {
+          "heading": "Stage it",
+          "points": [
+            "Contrast enhanced CT of the face, neck and chest: bony invasion of the mandible or maxilla, nodal size and spread, and screening for lung spread or a second primary.",
+            "MRI where dental artefact obscures CT, or where nerve involvement or marrow invasion is suspected.",
+            "Chest imaging with PET CT for distant staging and synchronous tumours at a referral centre, not as the first test in every clinic.",
+            "Examination under anaesthesia with panendoscopy where indicated, to map extent and exclude a second upper aerodigestive cancer.",
+            "Blood counts with renal and liver panels and nutritional assessment for fitness, plus dental review before any radiotherapy is planned."
+          ]
+        },
+        {
+          "body": "The single organising principle is biopsy within weeks of presentation, then urgent referral to the head and neck unit. Repeated vitamin courses, mouth paints and antibiotics without examination are the commonest cause of late stage disease at referral.\n\nIn a resource limited clinic, an edge biopsy with a careful neck examination and a chest radiograph already justify urgent referral. Advanced scans follow at the centre and must never hold the referral back.",
+          "heading": "Do not delay"
+        }
+      ],
+      "title": "Confirming and staging the disease",
+      "why": "Investigations in mouth cancer answer three separate questions: is it cancer, how far has it gone, and can the patient survive the treatment. A student who knows which test answers which never orders a scan before the biopsy or advanced imaging before the patient is referred."
+    },
+    "skill.oral.diagnosis": {
+      "id": "skill.oral.diagnosis",
+      "kind": "reasoning",
+      "oneLine": "Naming the cancer, the clinical stage, and what still needs proving",
+      "pitfalls": [
+        "Stating mouth ulcer as the diagnosis, which names a symptom and plans nothing.",
+        "Ignoring mouth opening, swallow and fitness, so a resectable tumour in an unfit patient is referred as routine.",
+        "Missing bilateral nodes or fixation, understaging advanced disease as early.",
+        "Waiting for scans to name the stage, when the bedside already stages it provisionally."
+      ],
+      "probes": [
+        {
+          "a": "Histology, subsite with side, size and local extent, nodes by side and level, and distant spread, with function and fitness.",
+          "accept": [
+            "histology",
+            "subsite",
+            "size",
+            "nodes",
+            "spread"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "What five elements does a complete mouth cancer diagnosis name?"
+        },
+        {
+          "a": "Locally advanced disease: nodal spread is present but resectable, so resection with neck dissection followed by radiotherapy is the plan.",
+          "accept": [
+            "advanced",
+            "nodal",
+            "resection",
+            "dissection",
+            "radiotherapy"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "A 3 cm cheek cancer has one mobile submandibular node. What stage group, and why?"
+        },
+        {
+          "a": "It proves deep muscle or floor invasion, which upstages the tumour and widens the resection.",
+          "accept": [
+            "invasion",
+            "upstage",
+            "resection"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why does inability to protrude the tongue change the stage?"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "oral_cancer: prognosis",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Mouth cancer: staging and prognosis",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Name the histology, the subsite with side, the size, bone and nerve involvement, the nodes by side and level, and distant spread. Squamous cell carcinoma of the right buccal mucosa with a mobile submandibular node and no distant spread is a diagnosis; mouth ulcer is not.\n\nAdd function and fitness in the same statement: mouth opening, swallow, speech, weight trend and comorbidity. A resectable tumour in an unfit patient is a different referral from the same tumour in a fit one.",
+          "heading": "The complete diagnostic statement"
+        },
+        {
+          "heading": "Stage groups in plain language",
+          "table": {
+            "cols": [
+              "Group",
+              "Meaning",
+              "What it means for the plan"
+            ],
+            "rows": [
+              [
+                "Early localised",
+                "Small tumour, mobile, no nodes",
+                "Wide local resection, often curative"
+              ],
+              [
+                "Locally advanced",
+                "Large or fixed tumour, or mobile nodes",
+                "Resection with neck dissection, then radiotherapy"
+              ],
+              [
+                "Very advanced",
+                "Fixation to vital structures, extensive nodes",
+                "Combined treatment at a specialist centre"
+              ],
+              [
+                "Recurrent or distant",
+                "Return after treatment or distant spread",
+                "Systemic therapy with symptom control"
+              ]
+            ]
+          }
+        },
+        {
+          "points": [
+            "Fixation to the jaw with loosening teeth, numb lip or tongue, or inability to protrude the tongue.",
+            "A firm fixed or rapidly enlarging neck node, bilateral nodes, or skin involvement over a node.",
+            "Bleeding that will not stop, inability to swallow saliva, noisy breathing, or rapid weight loss.",
+            "Any of these means urgent head and neck referral the same week, not routine review after vitamins."
+          ],
+          "heading": "Red flags that escalate now"
+        }
+      ],
+      "title": "Diagnosis and stage",
+      "why": "A diagnosis of mouth cancer without a stage is a label without a plan: the same histology is cured by a small resection at one stage and needs combined treatment at the next. Stating the stage with what is still missing turns findings into a referral the unit can act on."
+    },
+    "skill.oral.treatment": {
+      "dosingNote": "This module teaches management at the level of drug CLASS and principle. Specific agents, combinations and schedules must be taken from your current national or institutional guideline and the multidisciplinary board decision at the time of prescribing. CliniX does not prescribe.",
+      "id": "skill.oral.treatment",
+      "kind": "treatment",
+      "oneLine": "Surgery first for resectable disease, the neck addressed always, radiotherapy after",
+      "pitfalls": [
+        "Treating with radiotherapy alone when resection is feasible, accepting worse function and salvage for no gain.",
+        "Resecting the ulcer and ignoring a clinically negative neck in a deep tumour, then meeting the same disease as nodes.",
+        "Closing a margin positive resection without re excision or adjuvant therapy.",
+        "Discharging a patient still chewing quid, so recurrence and second primaries go unchallenged.",
+        "Starting radiotherapy with a septic mouth, when dental review was never arranged."
+      ],
+      "probes": [
+        {
+          "a": "Wide surgical resection with adequate margins, usually with neck dissection and reconstruction, decided at the multidisciplinary board.",
+          "accept": [
+            "resection",
+            "margins",
+            "neck dissection",
+            "board"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What is the mainstay of treatment for resectable mouth cancer?"
+        },
+        {
+          "a": "When extensive surgery cannot be tolerated or function preserving surgery is not feasible; otherwise it mainly follows surgery for adverse features.",
+          "accept": [
+            "cannot be tolerated",
+            "after surgery",
+            "adverse"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "When is radiotherapy the main treatment rather than an addition to surgery?"
+        },
+        {
+          "a": "Biopsy it after a short trial of conservative care fails, since post radiotherapy ulcers can hide recurrence.",
+          "accept": [
+            "biopsy",
+            "conservative",
+            "recurrence"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "A treated patient returns with a rolled edge ulcer at the old site. What do you do?"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "oral_cancer: management",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Mouth cancer: surgery, neck dissection and adjuvant therapy",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Discuss every case at the head and neck multidisciplinary board with surgery, radiation and medical oncology, radiology, pathology, dentistry, speech therapy and dietetics before fixing treatment. For most resectable cancers, wide surgical resection with adequate margins is the mainstay.\n\nUse frozen section control of margins intraoperatively and pursue further resection for positive margins where feasible. Address the neck in the same plan: elective dissection for a clinically negative neck in deeper or higher risk tumours, and levels one to four, extended for multilevel disease, for a node positive neck.",
+          "heading": "The curative plan"
+        },
+        {
+          "heading": "The supporting arms",
+          "points": [
+            "Postoperative radiotherapy for adverse pathology, with chemotherapy added only in selected cases on pathology, not as routine.",
+            "Definitive radiotherapy or chemoradiotherapy where extensive surgery cannot be tolerated or function preserving surgery is not feasible.",
+            "For early superficial lesions prefer resection over primary radiotherapy given the comparative risks to soft tissue, bone, teeth and saliva.",
+            "Tobacco and quid cessation counselled at every visit, since continued use drives recurrence and second primaries.",
+            "Speech, swallowing and appearance rehabilitation with dental assessment before radiotherapy, involving the family early since feeding and speech change at home.",
+            "Indian context: government schemes and the district cancer unit fund resection and radiotherapy; refer early to the medical college or regional cancer centre, and keep biopsy, dental fitness and follow up at the primary centre."
+          ]
+        },
+        {
+          "body": "Watch the mouth and neck at fixed intervals after treatment, since recurrence and second primaries are common in a condemned mucosa. Biopsy any post radiotherapy ulcer that fails a short trial of conservative care or shows a rolled edge.\n\nFor recurrent, unresectable or metastatic disease, systemic therapy follows general head and neck squamous cancer principles with symptom control. State the goals of care honestly with the family, and keep nutrition, speech and pain relief active whatever the stage.",
+          "heading": "Follow up and failure"
+        }
+      ],
+      "title": "Managing oral cavity cancer",
+      "why": "Mouth cancer is primarily a surgical disease: the cure lies in cutting it out with clear margins and dealing with the neck at the same sitting. Radiotherapy mainly follows surgery rather than replacing it, and every case passes through the head and neck team before a plan is fixed."
+    }
+  },
+  "subtitle": "Examination of the mouth",
+  "system": "surgery",
+  "version": 1,
+  "viva": {
+    "skills": [
+      "skill.oral.basics",
+      "skill.oral.signs",
+      "skill.oral.neck_levels",
+      "skill.oral.differential",
+      "skill.oral.workup",
+      "skill.oral.diagnosis",
+      "skill.oral.treatment"
+    ]
+  }
+}

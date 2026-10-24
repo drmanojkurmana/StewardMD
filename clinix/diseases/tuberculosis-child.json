@@ -1,0 +1,1216 @@
+{
+  "id": "tuberculosis-child",
+  "name": "Tuberculosis in children",
+  "fullName": "Primary pulmonary tuberculosis in children",
+  "subtitle": "Contact history and diagnosis",
+  "system": "paediatrics",
+  "kbRef": "tuberculosis_long_case",
+  "oneLine": "Persistent cough, fever and wasting in a child with a TB contact, and proving it with microbiology and the film",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What tuberculosis in children is, and why it behaves differently from adult disease",
+      "skills": [
+        "skill.tuberculos.child.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the child",
+      "blurb": "Rapport with the child, consent from the parent, positioning by age",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position",
+        "skill.approach.paed.rapport",
+        "skill.approach.paed.consent_assent",
+        "skill.approach.paed.positioning"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age, nutrition and contact setting set the probability before a symptom is mentioned",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected childhood tuberculosis, age under five years, visible undernutrition, and a crowded household with a recent adult TB case each raise the pre-test probability before a single symptom is described. Record the informant, the growth card status, and the contact setting alongside name and age."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Weeks, not days, with evening fever and a child who eats and plays less",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.paed.presenting_complaint",
+        "skill.hx.tuberculos.illness_story"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect a story told in weeks: cough or fever for three to six weeks without a well interval, with weight loss and reduced play. The absence of a dramatic onset is itself informative and points away from acute bacterial infection."
+        },
+        "skill.hx.paed.presenting_complaint": {
+          "expect": "In a tuberculosis suspect, pin the presenting complaint to tempo and function: exact weeks of cough and fever, evening rise, night sweats, and what has happened to appetite, weight and play. Vague weakness is never enough."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The contact, the BCG scar, the nutrition and the household that must be screened",
+      "skills": [
+        "skill.hx.paed.immunisation",
+        "skill.hx.paed.family_pedigree",
+        "skill.hx.paed.socioeconomic",
+        "skill.hx.tuberculos.contact_risk"
+      ],
+      "emphasis": {
+        "skill.hx.paed.immunisation": {
+          "expect": "Check BCG at birth and the scar, but remember a scar neither confirms protection nor excludes disease. An absent scar in an unimmunised child raises the risk of disseminated forms."
+        },
+        "skill.hx.paed.socioeconomic": {
+          "expect": "Overcrowding, poor ventilation and indoor chulha smoke increase transmission within the home. Document rooms, sleepers, ventilation and fuel, because these are the remediable factors behind the contact."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Wasting, pallor and painless nodes before the chest is touched",
+      "skills": [
+        "skill.gen.paed.appearance",
+        "skill.gen.paed.vitals",
+        "skill.gen.paed.pallor",
+        "skill.gen.paed.lymph_nodes",
+        "skill.gen.paed.clubbing"
+      ],
+      "emphasis": {
+        "skill.gen.paed.appearance": {
+          "expect": "Look for a thin, listless child with visible wasting rather than an acutely distressed one. Growth faltering on the card often predates the cough by months."
+        },
+        "skill.gen.paed.lymph_nodes": {
+          "expect": "Expect firm, discrete, often painless cervical nodes, sometimes matted together. A fluctuant cold swelling or a discharging sinus over a node is characteristic and should not be mistaken for acute bacterial adenitis."
+        },
+        "skill.gen.paed.clubbing": {
+          "expect": "Clubbing is uncommon in uncomplicated primary tuberculosis in children. When present, consider chronic suppurative disease such as bronchiectasis as a differential or a complication."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Systemic examination",
+      "blurb": "A chest that is often quieter than the film, plus liver, spleen and nodes",
+      "skills": [
+        "skill.exam.paed.resp.inspection",
+        "skill.exam.paed.resp.palpation",
+        "skill.exam.paed.resp.percussion",
+        "skill.exam.paed.resp.auscultation",
+        "skill.exam.paed.gi.liver",
+        "skill.exam.paed.gi.spleen"
+      ],
+      "emphasis": {
+        "skill.exam.paed.resp.inspection": {
+          "expect": "Chest movement is often surprisingly symmetrical in primary childhood tuberculosis, even with a striking film. Tachypnoea, indrawing or asymmetry suggest more extensive disease, effusion or a complication."
+        },
+        "skill.exam.paed.resp.auscultation": {
+          "expect": "Localised crackles or reduced air entry may be present but are frequently sparse compared with the radiograph. A large effusion gives the familiar dull, quiet base with shifted mediastinum."
+        },
+        "skill.exam.paed.gi.liver": {
+          "expect": "A palpable liver edge in a young child with prolonged fever and wasting supports disseminated disease rather than isolated pulmonary tuberculosis, and should prompt a search for nodes, spleen and meningeal signs."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the tuberculosis picture together",
+      "blurb": "Contact plus persistence plus proof, across nodes, lung and growth",
+      "skills": [
+        "skill.tuberculos.child.findings"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Three sentences that contain the contact, the tempo and the proof",
+      "skills": [
+        "skill.tuberculos.child.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "What else wastes a child with a chronic cough and nodes",
+      "skills": [
+        "skill.tuberculos.child.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Prove it with the bacillus, stage it with the film, never wait for proof to act when the child is sick",
+      "skills": [
+        "skill.ix.tuberculos.child.workup",
+        "skill.ix.tuberculos.child.cxr",
+        "skill.proc.paed.mantoux_test",
+        "skill.ix.paed.cxr_approach"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis",
+      "blurb": "Microbiologically confirmed or clinically diagnosed, pulmonary or extrapulmonary, sensitive or resistant",
+      "skills": [
+        "skill.tuberculos.child.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Weight-band treatment under the national programme, steroids for the brain, food and follow-up for the child",
+      "skills": [
+        "skill.tx.tuberculos.child"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this child to your consultant",
+      "skills": [
+        "skill.present.case",
+        "skill.present.tuberculos.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.tuberculos.child.lymph_node_exam",
+        "title": "Examine the nodes and general state of a child with suspected tuberculosis",
+        "task": "This 7-year-old girl has had cough and evening fever for five weeks with a swelling on the side of her neck. Perform a focused general and lymph node examination and present your findings.",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.gen.paed.appearance",
+          "skill.gen.paed.lymph_nodes",
+          "skill.gen.paed.pallor",
+          "skill.gen.paed.vitals"
+        ],
+        "examinerQuestions": [
+          "Describe the nodes you found and state which features favour tuberculosis over acute bacterial adenitis.",
+          "What does the growth card add to this examination, and where would you look for dissemination next?",
+          "Name two findings that would make you refer this child urgently rather than routinely."
+        ]
+      },
+      {
+        "id": "osce.tuberculos.child.contact_history",
+        "title": "Take a contact and risk history and counsel on household screening",
+        "task": "The mother of a child with suspected tuberculosis is waiting with questions. Take a focused contact, BCG and background history in six minutes and explain what the household must do next.",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.tuberculos.contact_risk",
+          "skill.hx.tuberculos.illness_story",
+          "skill.hx.paed.immunisation"
+        ],
+        "examinerQuestions": [
+          "Who in this household needs screening first, and what does a young contact receive if active disease is excluded?",
+          "The child has a BCG scar. Explain to the mother what that scar does and does not mean.",
+          "What living-condition factors in this home increase transmission, and what practical advice do you give?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.tuberculos.child.basics",
+      "skill.tuberculos.child.findings",
+      "skill.tuberculos.child.summary",
+      "skill.tuberculos.child.differential",
+      "skill.ix.tuberculos.child.workup",
+      "skill.ix.tuberculos.child.cxr",
+      "skill.tuberculos.child.diagnosis",
+      "skill.tx.tuberculos.child"
+    ]
+  },
+  "skills": {
+    "skill.tuberculos.child.basics": {
+      "id": "skill.tuberculos.child.basics",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "What tuberculosis in children is",
+      "oneLine": "First infection with the bacillus in a young host, usually paucibacillary and contact-driven",
+      "why": "Childhood tuberculosis is not a smaller copy of adult disease: the child is usually a new host meeting the bacillus for the first time, carries few bacilli, rarely infects others, yet runs a higher risk of rapid progression to disseminated forms. Grasping that contrast decides how you test and how urgently you treat.",
+      "teach": [
+        {
+          "heading": "Primary infection in a new host",
+          "body": "Most disease in children follows a recent first infection, often from an infectious adult in the same household within the past two years. The immune response walls the bacilli into granulomas with central caseation, visible on the film as the primary complex of a lung focus with enlarged hilar nodes.\n\nIn the majority this focus heals with calcification. In a minority, especially infants and young children, containment fails and disease spreads within the lung or through the bloodstream to nodes, meninges, bones or the whole lung field as miliary disease."
+        },
+        {
+          "heading": "Why children carry few bacilli yet face greater danger",
+          "body": "Childhood pulmonary disease is typically paucibacillary, meaning sputum contains too few organisms for easy smear detection, and young children swallow rather than expectorate sputum. This is why diagnosis leans on contact history, Mantoux reactivity and the film alongside microbiology, and why a negative test never excludes the disease.\n\nAt the same time, an immature cell-mediated response lets bacilli disseminate more readily. Children under five years carry the highest risk of progression, including tuberculous meningitis, which is a medical emergency where treatment must start without waiting for confirmation."
+        },
+        {
+          "heading": "BCG and the Indian context",
+          "body": "BCG given at birth under the national schedule protects mainly against the severe disseminated forms, miliary disease and meningitis, but it does not prevent infection itself and it makes the Mantoux harder to interpret in older children.\n\nIndia carries a large share of the global childhood burden, with undernutrition, overcrowding and delayed contact screening as the local drivers. Every diagnosis is therefore also a household event: notification, contact screening and preventive treatment for eligible young contacts are part of the disease, not an add-on."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why is childhood pulmonary tuberculosis usually paucibacillary, and what follows from that?",
+          "a": "Children harbour few bacilli and swallow rather than expectorate sputum, so smears are often negative and diagnosis rests on contact, Mantoux, film and molecular tests together.",
+          "accept": [
+            "few bacilli",
+            "swallow sputum",
+            "smear negative",
+            "contact",
+            "mantoux",
+            "film"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A BCG-scarred child presents with prolonged fever and nodes. Does the scar exclude tuberculosis?",
+          "a": "No. BCG protects mainly against disseminated forms such as miliary disease and meningitis, but it does not prevent infection itself.",
+          "accept": [
+            "does not prevent infection",
+            "miliary",
+            "meningitis",
+            "disseminated"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does a tuberculosis diagnosis in a child always extend beyond the child?",
+          "a": "Because infection usually came from a household adult within the past two years, so contacts, especially children under five, need screening and preventive treatment once active disease is excluded.",
+          "accept": [
+            "household",
+            "contacts",
+            "screening",
+            "preventive treatment"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "tuberculosis_long_case: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Tuberculosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tuberculos.child.findings": {
+      "id": "skill.tuberculos.child.findings",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "The childhood tuberculosis picture",
+      "oneLine": "Persistence plus wasting plus nodes, with a chest quieter than the film",
+      "why": "No single sign owns this disease, so students either miss it by waiting for a classic or overcall it from one node. The picture is a composite across tempo, growth, nodes and the film, and learning to assemble it is what makes the bedside diagnosis reliable.",
+      "teach": [
+        {
+          "heading": "The tempo-growth pair",
+          "body": "The anchor is persistence: cough or fever beyond two to three weeks without a well interval, in a child whose weight has stalled or fallen and whose appetite and play have shrunk. Plot the growth card first, because faltering often predates the cough by months and is the most objective part of the story.\n\nEvening rise of temperature with night sweats that soak clothing completes the constitutional set. Each element is soft alone; together they set the pre-test probability before any test is ordered."
+        },
+        {
+          "heading": "Nodes, liver and the quiet chest",
+          "body": "Firm, discrete, often painless cervical nodes, sometimes matted, are the commonest extrapulmonary finding and may progress to a fluctuant cold swelling or a discharging sinus. A palpable liver or spleen with prolonged fever points toward disseminated disease and should trigger a search for meningeal signs.\n\nThe chest is frequently less dramatic than the film: sparse crackles or mildly reduced air entry over an area that looks striking on the radiograph. A dull, quiet base with shifted mediastinum means an effusion has joined the picture."
+        },
+        {
+          "heading": "Patterns that stage the disease",
+          "body": "Hilar or paratracheal nodal enlargement with a lung focus is the primary complex pattern of early disease. Patchy consolidation that fails to resolve, a pleural effusion, a diffuse fine miliary pattern, or a cavity in an adolescent all mark different stages or host responses.\n\nNeurological change, spinal tenderness with deformity, a cold abscess of the chest wall, or abdominal distension with doughy feel each announce extrapulmonary spread and change both urgency and duration of treatment."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What bedside pair anchors suspected tuberculosis in a child?",
+          "a": "Persistent cough or fever beyond two to three weeks together with stalled weight gain, falling appetite and reduced play.",
+          "accept": [
+            "persistent",
+            "two to three weeks",
+            "weight",
+            "appetite",
+            "play"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "The film shows extensive shadowing but the chest has only sparse crackles. Does that argue against tuberculosis?",
+          "a": "No. In primary childhood tuberculosis the chest is often quieter than the film, and sparse signs with a striking radiograph fit the disease.",
+          "accept": [
+            "quieter than the film",
+            "sparse",
+            "striking radiograph",
+            "fits"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which findings signal disseminated rather than isolated pulmonary disease?",
+          "a": "Palpable liver or spleen with prolonged fever, miliary pattern on the film, meningeal signs, spinal deformity, or cold abscess point to dissemination.",
+          "accept": [
+            "liver",
+            "spleen",
+            "miliary",
+            "meningeal",
+            "dissemination"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "tuberculosis_long_case: pathophysiology"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Tuberculosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tuberculos.child.summary": {
+      "id": "skill.tuberculos.child.summary",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "The clinical summary",
+      "oneLine": "Problem representation with contact, tempo and proof in three sentences",
+      "why": "A tuberculosis summary that omits the contact or the microbiological status forces the listener to ask the two questions that matter most for notification and household action. Building them into the summary is what makes it usable rather than merely complete.",
+      "teach": [
+        {
+          "heading": "The three-sentence shape",
+          "body": "Name the child with the background that matters: age, nutritional state and the contact with its treatment status. Then state the tempo and syndrome in abstract terms, such as a four-week febrile illness with cough, wasting and cervical nodes.\n\nClose with the examination and investigation synthesis plus the diagnostic label with its proof status, for example clinically diagnosed pulmonary tuberculosis with hilar adenopathy, CBNAAT positive and rifampicin sensitive."
+        },
+        {
+          "heading": "A worked example",
+          "body": "A seven-year-old undernourished girl with a grandfather on TB treatment presents with five weeks of evening fever, cough, weight loss and matted cervical nodes. Examination shows growth faltering, firm painless nodes and sparse crackles at the right mid zone.\n\nMantoux is reactive, the film shows right hilar enlargement, and CBNAAT on induced sputum detects Mycobacterium tuberculosis with rifampicin sensitivity. This is childhood pulmonary tuberculosis with nodal disease, microbiologically confirmed and drug sensitive."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What must a tuberculosis summary state that a pneumonia summary need not?",
+          "a": "The TB contact with its treatment status, the nutritional background, and the proof status with the rifampicin result.",
+          "accept": [
+            "contact",
+            "nutrition",
+            "proof",
+            "rifampicin"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does the proof status belong in the summary sentence itself?",
+          "a": "Because whether disease is microbiologically confirmed or clinically diagnosed, and whether rifampicin sensitivity is known, decides notification, regimen and household action in the next hour.",
+          "accept": [
+            "confirmed",
+            "clinically diagnosed",
+            "regimen",
+            "notification"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "contact",
+          "text": "States the contact with treatment status in the opening"
+        },
+        {
+          "id": "tempo",
+          "text": "States tempo in weeks with constitutional change"
+        },
+        {
+          "id": "proof",
+          "text": "Includes diagnostic label with proof and rifampicin status"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "tuberculosis_long_case: clinicalPearls"
+        },
+        {
+          "source": "Indian Academy of Pediatrics",
+          "locator": "Tuberculosis in children"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tuberculos.child.differential": {
+      "id": "skill.tuberculos.child.differential",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Differential diagnosis",
+      "oneLine": "What else gives a child a chronic cough, wasting and nodes",
+      "why": "Chronic cough with wasting in a child has a wide field, from bacterial pneumonia that will not clear to lymphoma, and naming tuberculosis without testing the alternatives is how lymphomas get treated as tuberculosis for months. The differential protects both the child and the diagnosis.",
+      "teach": [
+        {
+          "heading": "Infective mimics",
+          "body": "Community acquired pneumonia can present with prolonged cough and fever, but its tempo is days to a couple of weeks with an acute onset and a lobar consolidation that responds to antibiotics. Pertussis gives paroxysmal cough with whooping and vomiting but without the wasting and nodal pattern.\n\nForeign body aspiration causes localised wheeze or recurrent infection in one zone with a choking history. HIV infection itself produces prolonged fever, wasting and generalised nodes, and it also magnifies tuberculosis, so test for it rather than choosing between them."
+        },
+        {
+          "heading": "Non-infective and nodal mimics",
+          "body": "Lymphoma produces painless progressive nodes, often with fever and weight loss, but nodes tend to be rubbery and rapidly enlarging with mediastinal bulk rather than matted cervical disease with a calcifying film. Reactive nodes from scalp or throat infection are small, tender and short-lived.\n\nBronchiectasis gives a chronic wet cough with copious sputum and clubbing, often with a history of severe earlier infections. Rickets and simple undernutrition explain poor growth without the fever-node-film triad, and pleural effusion from other causes lacks the contact and constitutional background."
+        },
+        {
+          "heading": "How the workup separates them",
+          "body": "Response to a short antibiotic course favours ordinary bacterial infection, while persistence or a non-resolving shadow pushes back toward tuberculosis. A reactive Mantoux with a contact and a nodal film pattern is hard to explain by any mimic.\n\nCBNAAT positivity settles the question toward tuberculosis, and biopsy of a node showing granulomas with caseation does the same for nodal disease. Where doubt remains, growth chart, HIV test and a careful node examination discriminate more than repeating the same film."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name three differentials for chronic cough with wasting and nodes in a child.",
+          "a": "Community acquired pneumonia, lymphoma, foreign body aspiration, pertussis, bronchiectasis, HIV infection and reactive lymphadenitis.",
+          "accept": [
+            "pneumonia",
+            "lymphoma",
+            "foreign body aspiration",
+            "bronchiectasis",
+            "hiv infection"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How do you separate lymphoma nodes from tuberculous nodes at the bedside?",
+          "a": "Lymphoma nodes tend to be rubbery and rapidly enlarging with mediastinal bulk, while tuberculous nodes are often matted with a cold abscess tendency and a contact, Mantoux and film pattern to match.",
+          "accept": [
+            "rubbery",
+            "matted",
+            "cold abscess",
+            "mantoux",
+            "contact"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Offers differentials across infective, nodal and chronic lung causes"
+        },
+        {
+          "id": "tb_active",
+          "text": "Explicitly keeps tuberculosis against each alternative"
+        },
+        {
+          "id": "separator",
+          "text": "States what investigation separates each key mimic"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "tuberculosis_long_case: additionalDifferentials"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Tuberculosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.tuberculos.child.workup": {
+      "id": "skill.ix.tuberculos.child.workup",
+      "kind": "investigation",
+      "system": "paediatrics",
+      "title": "Proving tuberculosis in a child",
+      "oneLine": "Bacillus first, film second, immunity third, and never delay treatment for proof alone",
+      "why": "Investigations in childhood tuberculosis serve three separate jobs: finding the organism and its drug sensitivity, staging the disease on imaging, and reading the immune response. Knowing which test does which stops a student waiting for a culture while a child with meningitis deteriorates.",
+      "teach": [
+        {
+          "heading": "Find the bacillus and its resistance",
+          "body": "Cartridge-based nucleic acid amplification testing on sputum, induced sputum, gastric aspirate, lymph node aspirate or cerebrospinal fluid is the preferred first microbiological test, because it detects the bacillus rapidly and reports rifampicin resistance in the same run.\n\nSend the best sample the child can give: expectorated sputum in an older child, induced sputum or early morning gastric aspirate in a young one, and aspirate from a fluctuant node by needle. Smear and culture support the result but a negative smear never excludes disease in a paucibacillary child."
+        },
+        {
+          "heading": "Read the immune response in context",
+          "body": "The Mantoux tuberculin skin test becomes reactive about four weeks after infection and supports the diagnosis in a child with a compatible story, a contact and a suggestive film. Interpret it with the BCG history in mind, and remember severe malnutrition, HIV and disseminated disease itself can blunt it into a false negative.\n\nInterferon-gamma release assays avoid the BCG cross-reaction but need a blood sample and a laboratory, so they remain a backup where available rather than the first step in most Indian settings."
+        },
+        {
+          "heading": "Stage, screen and watch the drugs",
+          "body": "Test every child with tuberculosis for HIV, since co-infection changes urgency, drug choices and follow-up. Check haemoglobin and growth status at baseline, because anaemia and wasting are the rule rather than the exception and both need parallel correction.\n\nLiver function testing matters once treatment starts, as the first-line drugs can injure the liver: warn the family about vomiting, yellow eyes and dark urine, and test promptly if they appear. For nodal disease, needle aspiration showing granulomas with caseation confirms the diagnosis without excision."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the preferred first microbiological test in a child, and what extra answer does it give?",
+          "a": "Cartridge-based nucleic acid amplification testing on the best available sample, which detects the bacillus and reports rifampicin resistance together.",
+          "accept": [
+            "nucleic acid amplification",
+            "rifampicin resistance",
+            "bacillus",
+            "sample"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Mantoux is negative in a wasted child with a contact and hilar nodes. Excluded?",
+          "a": "No. Severe malnutrition, HIV and disseminated disease itself can blunt Mantoux reactivity into a false negative, so the clinical picture overrules it.",
+          "accept": [
+            "false negative",
+            "malnutrition",
+            "clinical picture",
+            "overrules"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why must every child with tuberculosis be tested for HIV?",
+          "a": "Because co-infection changes urgency, drug choices and follow-up, and tuberculosis may be the presenting illness of undiagnosed HIV in a child.",
+          "accept": [
+            "co-infection",
+            "drug choices",
+            "follow-up",
+            "undiagnosed"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "tuberculosis_long_case: additionalInvestigations"
+        },
+        {
+          "source": "WHO",
+          "locator": "Module 5: Management of tuberculosis in children and adolescents"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.tuberculos.child.cxr": {
+      "id": "skill.ix.tuberculos.child.cxr",
+      "kind": "investigation",
+      "system": "paediatrics",
+      "title": "Reading the chest film in childhood tuberculosis",
+      "oneLine": "Nodes first, then the lung focus, then the patterns of spread",
+      "why": "The film is positive more often than the smear in children, yet students read it as they would an adult film and miss the hilar nodes that are the whole diagnosis. A fixed reading order built around the primary complex prevents that miss.",
+      "teach": [
+        {
+          "heading": "The primary complex pattern",
+          "body": "The classic childhood pattern is unilateral hilar or paratracheal nodal enlargement with a small lung focus, most often in the mid zone, which together form the primary complex. Look for the nodes first on a well-inspired frontal film, comparing both hila before reading the lung fields.\n\nHealing shows as calcification of the focus or the nodes. A normal film does not exclude tuberculosis, especially in early nodal disease, just as an abnormal one does not prove it without the clinical picture."
+        },
+        {
+          "heading": "Effusion, collapse and miliary patterns",
+          "body": "A unilateral effusion with a meniscus and a shifted mediastinum in a child with prolonged fever and a contact favours a tuberculous cause, and tapping it for protein, cells and adenosine deaminase activity supports the diagnosis alongside the clinical picture.\n\nLobar collapse from nodal compression of an airway, patchy consolidation that refuses to resolve on antibiotics, and a diffuse fine miliary mottling across both lung fields each mark a different behaviour of the disease and raise the urgency stepwise toward disseminated involvement."
+        },
+        {
+          "heading": "What the film cannot do",
+          "body": "The film stages and supports but never stands alone: identical nodal enlargement occurs in lymphoma, and a normal early film occurs in genuine disease. Read every film against the contact, the Mantoux and the microbiology.\n\nIn adolescents, upper zone cavitary disease resembling adult-type tuberculosis appears and carries infectious sputum, so an older child with a cavity needs the same sputum precautions as an adult case."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the classic childhood film pattern in primary tuberculosis?",
+          "a": "Unilateral hilar or paratracheal nodal enlargement with a small mid-zone lung focus, together forming the primary complex.",
+          "accept": [
+            "hilar",
+            "nodal enlargement",
+            "lung focus",
+            "primary complex"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What pleural fluid findings support a tuberculous effusion?",
+          "a": "A lymphocyte-predominant exudate with raised adenosine deaminase activity, read alongside the fever, contact and clinical course.",
+          "accept": [
+            "lymphocyte",
+            "exudate",
+            "adenosine deaminase",
+            "contact"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does a cavity in an adolescent change infection control?",
+          "a": "Because upper zone cavitary disease in an adolescent resembles adult-type tuberculosis with infectious sputum, needing adult-level precautions.",
+          "accept": [
+            "cavitary",
+            "adult-type",
+            "infectious sputum",
+            "precautions"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "tuberculosis_long_case: additionalInvestigations"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Tuberculosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tuberculos.child.diagnosis": {
+      "id": "skill.tuberculos.child.diagnosis",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Diagnosis and classification",
+      "oneLine": "Confirmed or clinically diagnosed, pulmonary or extrapulmonary, sensitive or resistant",
+      "why": "A bare label of tuberculosis says nothing about proof, extent or resistance, yet each of those decides regimen, duration and household action. A complete diagnostic statement carries all three and is the point where the pathway turns into a prescription.",
+      "teach": [
+        {
+          "heading": "Confirmed versus clinically diagnosed",
+          "body": "Microbiologically confirmed disease means the bacillus was found by molecular testing, smear or culture from the child. Clinically diagnosed disease means the contact, course, Mantoux, film and exclusion of mimics together justify treatment even though no organism was recovered, which is common in young children.\n\nBoth labels start the same first-line treatment. The difference lies in follow-up: confirmed disease carries a known rifampicin result, while clinically diagnosed disease needs closer watch for non-response that would reopen the diagnosis."
+        },
+        {
+          "heading": "Pulmonary, extrapulmonary and disseminated",
+          "body": "Pulmonary disease covers the lung focus, nodal compression and effusion within the chest. Extrapulmonary disease covers nodes outside the chest, the meninges, the spine and bones, the abdomen and the pericardium, each with its own investigation and duration.\n\nMiliary and meningitic spread mark dissemination and carry the highest urgency and the longest treatment. State the sites explicitly, since a missed meningeal component shortens treatment dangerously."
+        },
+        {
+          "heading": "Sensitive versus resistant",
+          "body": "Rifampicin sensitivity reported on the molecular test decides the pathway: sensitive disease follows the standard first-line regimen, while rifampicin resistance is treated as probable multidrug resistance and moves the child to a drug-resistant pathway under programmatic guidance.\n\nA complete statement therefore reads like this: childhood pulmonary tuberculosis with cervical nodal disease, microbiologically confirmed, rifampicin sensitive. Every word earns its place."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What separates microbiologically confirmed from clinically diagnosed tuberculosis?",
+          "a": "Confirmed disease has the bacillus found by molecular testing, smear or culture, while clinically diagnosed disease rests on contact, course, Mantoux, film and exclusion of mimics.",
+          "accept": [
+            "bacillus found",
+            "molecular testing",
+            "contact",
+            "film",
+            "exclusion"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A molecular test reports rifampicin resistance. What does that mean for the child?",
+          "a": "It is treated as probable multidrug-resistant disease and the child moves to a drug-resistant treatment pathway under programmatic guidance rather than standard first-line drugs.",
+          "accept": [
+            "multidrug-resistant",
+            "drug-resistant",
+            "programmatic",
+            "first-line"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why must the diagnostic statement name every site of disease?",
+          "a": "Because extrapulmonary sites such as the meninges change both urgency and duration, and a missed meningeal component would shorten treatment dangerously.",
+          "accept": [
+            "meninges",
+            "urgency",
+            "duration",
+            "shorten"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "proof",
+          "text": "States confirmed or clinically diagnosed with the basis"
+        },
+        {
+          "id": "sites",
+          "text": "Names pulmonary and extrapulmonary sites explicitly"
+        },
+        {
+          "id": "resistance",
+          "text": "States rifampicin status and its pathway consequence"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "mdr_tuberculosis: clinicalPearls"
+        },
+        {
+          "source": "WHO",
+          "locator": "Module 5: Management of tuberculosis in children and adolescents"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.tuberculos.child": {
+      "id": "skill.tx.tuberculos.child",
+      "kind": "treatment",
+      "system": "paediatrics",
+      "title": "Treating tuberculosis in a child",
+      "oneLine": "Standard four-drug start, programme-based weight bands, longer for the brain, food and follow-up throughout",
+      "why": "Treatment fails more often from interruption than from the wrong drugs, so the regimen matters less than the system that keeps the child on it: notification, directly observed treatment, nutritional support and contact screening around the same drugs. Teaching the drugs without that system teaches non-adherence.",
+      "teach": [
+        {
+          "heading": "The standard regimen and its durations",
+          "body": "Drug-sensitive disease starts with four first-line drugs, isoniazid with rifampicin with pyrazinamide and ethambutol, given as weight-band fixed-dose combinations under the national programme. The intensive phase runs for two months, followed by isoniazid with rifampicin for four months, making six months in total.\n\nDisease of the nervous system runs longer, twelve months in total, with adjunctive corticosteroids tapered over six to eight weeks, since steroids reduce death and lasting disability in meningitis. Where dissemination reaches the brain or bone, extend the same way rather than stopping at six months."
+        },
+        {
+          "heading": "Resistance, reaction and referral",
+          "body": "Rifampicin resistance on the molecular test means probable multidrug-resistant disease: do not improvise a modified first-line course but move the child to the drug-resistant pathway with susceptibility-guided drugs under programmatic care.\n\nParadoxical worsening, such as nodes enlarging early in treatment, is common and does not by itself mean failure. Refer urgently for suspected meningitis, spinal disease with weakness, a child who cannot swallow drugs, or any sign of drug-induced liver injury with vomiting and yellow eyes."
+        },
+        {
+          "heading": "The system around the drugs",
+          "body": "Notify every case on the Nikshay portal and arrange directly observed treatment with a named treatment supporter, since daily supervision is what completes six months. Screen the household at diagnosis, and start TB preventive treatment in eligible young contacts and contacts living with HIV once active disease is excluded.\n\nWeigh the child at every visit, correct undernutrition with dietary counselling and available supplementation, recheck adherence and side effects, and confirm cure with clinical recovery, weight gain and follow-up imaging where the film was abnormal."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the standard regimen and duration for drug-sensitive childhood tuberculosis?",
+          "a": "Four first-line drugs for two months, then isoniazid with rifampicin for four months, six months in total, as weight-band combinations under the national programme.",
+          "accept": [
+            "four first-line drugs",
+            "two months",
+            "four months",
+            "six months",
+            "weight-band"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is added, and for how long, in tuberculous meningitis?",
+          "a": "Adjunctive corticosteroids tapered over six to eight weeks, with treatment extended to twelve months in total.",
+          "accept": [
+            "corticosteroids",
+            "six to eight weeks",
+            "twelve months",
+            "meningitis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Nodes enlarge in the third week of regular treatment. Has treatment failed?",
+          "a": "Not necessarily. Paradoxical enlargement of nodes during treatment is common and does not by itself mean failure, provided the child is otherwise improving and taking drugs regularly.",
+          "accept": [
+            "paradoxical",
+            "common",
+            "does not mean failure",
+            "improving"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "PULMONARY_TB: recommendations"
+        },
+        {
+          "source": "WHO",
+          "locator": "Module 5: Management of tuberculosis in children and adolescents"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of drug CLASSES, regimen structure and durations. Specific weight-band doses, formulations and combinations must be taken from the current national TB programme guidance at the time of prescribing. CliniX does not prescribe."
+    }
+  },
+  "cases": [
+    {
+      "id": "case.tuberculos.child.sana",
+      "title": "A 7-year-old girl with five weeks of cough, evening fever and a neck swelling",
+      "opening": "Sana, 7, is brought by her mother to the paediatric outpatient clinic with a cough that has lasted more than a month, fever that rises every evening, and a swelling on the side of her neck. Her grandfather is taking medicines for TB. Meet them and take a history.",
+      "fallback": "Sana looks at her mother before answering. Her mother says, Doctor, please ask that in a simpler way.",
+      "patient": {
+        "name": "Sana",
+        "age": 7,
+        "sex": "female",
+        "occupation": "Class 2 school student",
+        "residence": "Resettlement colony, East Delhi; two-room house with parents, grandfather and two siblings"
+      },
+      "initialVitals": {
+        "hr": 112,
+        "bpSystolic": 96,
+        "bpDiastolic": 62,
+        "rr": 26,
+        "spo2": 96,
+        "temp": 38.4,
+        "gcs": 15
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "what is the main problem",
+            "why have you come today",
+            "tell me the full complaint"
+          ],
+          "reply": "Doctor, my daughter has had cough and fever for more than a month now, and a swelling has come up on her neck. She is eating very little and has become thin.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "onset_course": {
+          "cues": [
+            "when did the cough begin",
+            "how many weeks of illness",
+            "has she been well in between",
+            "course of the illness"
+          ],
+          "reply": "It started about five weeks ago with a dry cough. There has been no week when she was fully well since then. Some days the fever is less, but it always comes back in the evening.",
+          "key": true,
+          "skillId": "skill.hx.tuberculos.illness_story"
+        },
+        "cough_pattern": {
+          "cues": [
+            "describe the cough pattern",
+            "dry or wet cough",
+            "cough day and night",
+            "what the cough sounds like"
+          ],
+          "reply": "It is mostly a dry cough through the day, worse at night. She does not bring out much phlegm, and there has been no noisy breathing or whistling sound.",
+          "key": true
+        },
+        "fever_pattern": {
+          "cues": [
+            "pattern of the evening fever",
+            "how high does the fever rise",
+            "fever with shivering episodes",
+            "daily timing of fever"
+          ],
+          "reply": "The fever comes every evening and settles by morning with sweating. She has not had shaking chills like in malaria. Paracetamol brings it down for a few hours only.",
+          "key": true,
+          "skillId": "skill.hx.tuberculos.illness_story"
+        },
+        "weight_appetite": {
+          "cues": [
+            "change in body weight",
+            "loss of appetite concerns",
+            "interest in food and play",
+            "clothes becoming loose"
+          ],
+          "reply": "She has become thin; her school uniform has loosened at the waist. She leaves half her food and no longer runs out to play with the other children.",
+          "key": true,
+          "skillId": "skill.hx.tuberculos.illness_story"
+        },
+        "night_sweats": {
+          "cues": [
+            "sweating at night in sleep",
+            "clothes soaked with sweat",
+            "night sweating episodes"
+          ],
+          "reply": "Yes, on many nights her vest is damp with sweat by morning, though there is no cooler or fan problem in the room.",
+          "key": true
+        },
+        "node_swelling": {
+          "cues": [
+            "when did the neck swelling appear",
+            "swelling in the neck region",
+            "pain in the neck lump",
+            "discharge from the swelling"
+          ],
+          "reply": "The lump on the right side of her neck appeared about three weeks ago. It is not painful, and nothing has leaked from it. It has slowly grown bigger.",
+          "key": true,
+          "skillId": "skill.hx.tuberculos.illness_story"
+        },
+        "breathing_difficulty": {
+          "cues": [
+            "difficulty in breathing noticed",
+            "fast breathing at rest",
+            "chest pain while coughing"
+          ],
+          "reply": "She breathes a little fast when she climbs the stairs, but at rest she is comfortable. There is no sharp chest pain.",
+          "key": true
+        },
+        "sputum_blood": {
+          "cues": [
+            "blood in the coughed phlegm",
+            "colour of the expectorated sputum",
+            "vomiting of blood with cough"
+          ],
+          "reply": "She hardly brings out any phlegm, and there has been no blood in it and no vomiting of blood.",
+          "key": true
+        },
+        "tb_contact": {
+          "cues": [
+            "tuberculosis in the household members",
+            "anyone taking TB medicines at home",
+            "chronic cough in family contacts",
+            "contact with a TB patient"
+          ],
+          "reply": "My father-in-law, who sleeps in the same room as the children, was found to have TB four months ago and is taking the government medicines regularly.",
+          "key": true,
+          "skillId": "skill.hx.tuberculos.contact_risk"
+        },
+        "bcg_immunisation": {
+          "cues": [
+            "BCG vaccination at birth",
+            "immunisation record of the child",
+            "vaccination card details"
+          ],
+          "reply": "She received her birth vaccines at the government hospital and has a small round scar on her left upper arm. The immunisation card is complete up to her age.",
+          "key": true,
+          "skillId": "skill.hx.paed.immunisation"
+        },
+        "past_treatment": {
+          "cues": [
+            "previous treatment for tuberculosis",
+            "past ATT course taken",
+            "earlier admission to hospital"
+          ],
+          "reply": "She has never been treated for TB before and has never been admitted to hospital. She had measles two years ago and recovered at home.",
+          "key": true
+        },
+        "birth_growth": {
+          "cues": [
+            "birth weight of the child",
+            "growth chart entries",
+            "feeding in the first two years"
+          ],
+          "reply": "She was born at full term weighing about two and a half kilos. She was breastfed for a year. Her weight has stayed in the same low lane on the growth card for many months.",
+          "key": true
+        },
+        "home_crowding": {
+          "cues": [
+            "number of rooms in the house",
+            "persons sleeping in one room",
+            "ventilation and cooking fuel used"
+          ],
+          "reply": "Six of us live in two rooms, and the children sleep with their grandfather. Cooking is on a gas stove now, though smoke from the neighbour chulha comes in through the window.",
+          "key": true,
+          "skillId": "skill.hx.tuberculos.contact_risk"
+        },
+        "family_others": {
+          "cues": [
+            "health of the siblings at home",
+            "cough in other children",
+            "HIV testing in the family"
+          ],
+          "reply": "Her two brothers have no cough or fever. None of us has been tested for HIV. My husband rolls bidis at home for daily wages.",
+          "key": true
+        },
+        "current_medicines": {
+          "cues": [
+            "medicines currently being given",
+            "antibiotics already tried",
+            "cough syrups administered"
+          ],
+          "reply": "A local doctor gave amoxicillin syrup for ten days last month and a cough syrup, but the cough never cleared. She takes only paracetamol now.",
+          "key": true
+        },
+        "neuro_redflags": {
+          "cues": [
+            "headache with vomiting episodes",
+            "fits or unusual sleepiness",
+            "change in school performance",
+            "weakness of the limbs"
+          ],
+          "reply": "No headaches, no vomiting, no fits. She is dull because of the fever, but she recognises everyone and speaks normally.",
+          "key": true
+        }
+      },
+      "exam": {
+        "skill.gen.paed.appearance": {
+          "finding": "Thin, listless girl, sitting close to her mother. No respiratory distress at rest. Growth card shows weight below the expected lane for age.",
+          "abnormal": true
+        },
+        "skill.gen.paed.vitals": {
+          "finding": "Temperature 38.4 C. Heart rate 112 per minute. Respiratory rate 26 per minute. Blood pressure 96/62. SpO2 96 percent on room air.",
+          "abnormal": true
+        },
+        "skill.gen.paed.pallor": {
+          "finding": "Moderate pallor of the conjunctiva and palms.",
+          "abnormal": true
+        },
+        "skill.gen.paed.lymph_nodes": {
+          "finding": "Multiple firm, discrete, non-tender right cervical nodes, partly matted, largest about 3 cm. No overlying redness, no discharge. Small left cervical node palpable.",
+          "abnormal": true
+        },
+        "skill.gen.paed.clubbing": {
+          "finding": "No clubbing.",
+          "abnormal": false
+        },
+        "skill.exam.paed.weight": {
+          "finding": "Weight 16 kg with visible wasting of the buttocks and shoulder girdles. Mid-upper arm circumference in the undernourished range.",
+          "abnormal": true
+        },
+        "skill.exam.paed.resp.inspection": {
+          "finding": "Chest movements symmetrical. No indrawing, no accessory muscle use at rest.",
+          "abnormal": false
+        },
+        "skill.exam.paed.resp.palpation": {
+          "finding": "Chest expansion symmetrical and adequate for age. No tenderness of the chest wall.",
+          "abnormal": false
+        },
+        "skill.exam.paed.resp.percussion": {
+          "finding": "Resonant throughout both lung fields. No dull area.",
+          "abnormal": false
+        },
+        "skill.exam.paed.resp.auscultation": {
+          "finding": "Sparse fine crackles at the right mid zone posteriorly, not clearing with coughing. Air entry adequate elsewhere. No wheeze.",
+          "abnormal": true
+        },
+        "skill.exam.paed.gi.liver": {
+          "finding": "Liver edge not palpable below the costal margin.",
+          "abnormal": false
+        },
+        "skill.exam.paed.gi.spleen": {
+          "finding": "Spleen not palpable.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "cxr",
+        "mantoux",
+        "cbnaat",
+        "hiv",
+        "cbc"
+      ],
+      "investigations": {
+        "cxr": {
+          "label": "Chest radiograph",
+          "indicated": true,
+          "result": "Right hilar nodal enlargement with a small mid-zone opacity. No effusion, no cavitation, no miliary mottling. Cardiac shadow normal.",
+          "note": "The hilar nodes with a lung focus form the primary complex pattern of childhood disease, read against the contact and the course."
+        },
+        "mantoux": {
+          "label": "Mantoux tuberculin skin test",
+          "indicated": true,
+          "result": "Induration of 14 mm at 72 hours. BCG scar present on the left upper arm.",
+          "note": "Reactive at this size with a contact and a nodal film, this supports the diagnosis. A negative result would not have excluded it."
+        },
+        "cbnaat": {
+          "label": "CBNAAT on induced sputum",
+          "indicated": true,
+          "result": "Mycobacterium tuberculosis detected. Rifampicin resistance not detected.",
+          "note": "This is the confirmation and the resistance answer in one run. It decides the standard first-line pathway."
+        },
+        "hiv": {
+          "label": "HIV screening test",
+          "indicated": true,
+          "result": "Non-reactive.",
+          "note": "Negative here, but every child with tuberculosis is screened because co-infection changes urgency and follow-up."
+        },
+        "cbc": {
+          "label": "Complete blood count",
+          "indicated": true,
+          "result": "Haemoglobin 9.2 g/dL with microcytic indices. Total leucocyte count 11,400 per mm3 with lymphocyte predominance.",
+          "note": "Anaemia with a lymphocyte-predominant count fits a chronic infective process and needs parallel correction with diet and iron."
+        },
+        "node_fnac": {
+          "label": "Needle aspirate of the cervical node",
+          "indicated": true,
+          "result": "Not yet done. Planned if sputum testing had been negative, since granulomas with caseation confirm nodal disease without excision.",
+          "note": "Kept in reserve here because the sputum test already confirmed the disease."
+        },
+        "ct_chest": {
+          "label": "Contrast CT of the chest",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Not indicated as a first step: the plain film already shows the primary complex pattern, and CT adds radiation and cost without changing the plan."
+        }
+      },
+      "differentialModel": {
+        "answer": "Childhood pulmonary tuberculosis with cervical nodal disease. Consider tuberculous lymphadenitis as part of the same disease, miliary tuberculosis, tuberculous pleural effusion, community acquired pneumonia, bronchiectasis, foreign body aspiration, pertussis and HIV infection.",
+        "accept": [
+          "tuberculous lymphadenitis",
+          "miliary tuberculosis",
+          "tuberculous pleural effusion",
+          "community acquired pneumonia",
+          "bronchiectasis",
+          "foreign body aspiration",
+          "pertussis",
+          "hiv infection",
+          "pleural effusion"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Childhood pulmonary tuberculosis with cervical nodal disease, microbiologically confirmed, rifampicin sensitive.",
+        "accept": [
+          "pulmonary tuberculosis",
+          "pulmonary tb",
+          "tuberculosis",
+          "tb",
+          "ptb"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Start weight-band first-line antitubercular treatment under the national programme with notification on Nikshay and directly observed treatment, correct anaemia and undernutrition, screen the household and start preventive treatment in eligible contacts, and follow weight, adherence and the film to cure.",
+        "accept": [
+          "antitubercular",
+          "att",
+          "hrze",
+          "isoniazid",
+          "rifampicin",
+          "directly observed",
+          "nikshay",
+          "contact screening",
+          "preventive treatment",
+          "nutrition",
+          "follow-up",
+          "weight"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "Persistence is the diagnosis before any test: five weeks without a well interval plus wasting outweighs any single sign.",
+        "The contact under the same roof is the most informative fact and the reason the household must be screened next.",
+        "A quiet chest with a nodal film is characteristic, not contradictory, in primary childhood disease.",
+        "CBNAAT gives confirmation and the rifampicin answer together, which is what selects the standard pathway.",
+        "Reactive Mantoux supports but a negative one never excludes, especially with malnutrition.",
+        "Anaemia and undernutrition need parallel correction, since drugs alone do not restore growth.",
+        "Paradoxical node enlargement early in treatment is common and does not by itself mean failure."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

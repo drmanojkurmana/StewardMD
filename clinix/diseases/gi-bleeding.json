@@ -1,0 +1,1414 @@
+{
+  "_comment": "GI bleeding pathway: the same spine as pneumonia, but the teaching load sits in pattern recognition (upper versus lower), volume assessment and scores that time endoscopy, rather than in a single physical sign. Shared surgical skills carry the hands; the disease owns only reasoning, investigation, treatment and one annexure.",
+  "id": "gi-bleeding",
+  "name": "Gastrointestinal bleeding",
+  "fullName": "Gastrointestinal bleeding",
+  "subtitle": "Upper and lower",
+  "system": "surgery",
+  "kbRef": "peptic_ulcer_gi_bleed_long_case",
+  "oneLine": "Blood lost from the gut, and whether it comes from above or below the ligament of Treitz",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What counts as gastrointestinal bleeding, and the line that divides upper from lower",
+      "skills": [
+        "skill.gi.bleed.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question, and resuscitation before diagnosis",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age and habits set the likely source before a symptom is mentioned",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Expect age to pull in opposite directions: an older patient on painkillers or blood thinners points towards ulcer or diverticular bleeding, while a younger patient with years of heavy drinking points towards varices. Occupation matters less than habits here: daily wage work with chemist bought painkillers and country liquor is the common Indian background."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "What was vomited or passed, how much, and how fast",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.surg.chronic_dyspepsia_ulcer",
+        "skill.hx.surg.rectal_bleeding_pain"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect the opening to name the route first: vomiting of blood versus black stools versus fresh blood per rectum. Pin down the number of episodes, the approximate volume in local measures, and the time course in hours, since a bleed measured in hours with fainting is managed differently from one measured in weeks."
+        },
+        "skill.hx.surg.chronic_dyspepsia_ulcer": {
+          "expect": "Expect nocturnal epigastric pain that wakes the patient between midnight and 3 AM and eases with food or antacids in duodenal ulcer, versus pain precipitated by food with nausea in gastric ulcer. Ask specifically about painkiller use without dyspepsia, since most serious NSAID bleeds arrive without any warning pain."
+        },
+        "skill.hx.surg.rectal_bleeding_pain": {
+          "expect": "Expect the colour and relation to faeces to localise the source: bright red blood on the surface or on paper points to the anal canal, blood mixed with soft stool points higher in the colon, and black tarry stool points above the ligament of Treitz. Painless bleeding with altered bowel habit in an older patient must raise colorectal cancer, not piles."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The drugs, drink and past bleeds behind the current one",
+      "skills": [
+        "skill.hx.gi.risk"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Volume first, stigmata second, and shock recognised before pressure falls",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.surg.survey",
+        "skill.gen.surg.surgical_shock"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for pallor with restlessness or anxiety, cold and clammy peripheries, and a patient who feels faint on sitting up. Stigmata of chronic liver disease, spider naevi, palmar redness, gynaecomastia and a prominent abdominal vein pattern, redirect the whole case towards varices."
+        },
+        "skill.gen.vitals": {
+          "expect": "Expect tachycardia and a postural fall in pressure before lying pressure itself drops. A systolic pressure under 100 with a pulse above 100 after an upper bleed marks instability that needs resuscitation now, not after the next observation round. Urea above baseline with a modest creatinine rise supports a significant upper bleed."
+        },
+        "skill.gen.surg.survey": {
+          "expect": "Survey for anaemia in the conjunctiva and tongue, jaundice in daylight, and scratch marks from cholestatic itching. Note the build: recent weight loss with an upper bleed in an older patient raises gastric or oesophageal cancer, while a well nourished young patient with piles points to a benign anal source."
+        },
+        "skill.gen.surg.surgical_shock": {
+          "expect": "Expect early shock to show as tachycardia, tachypnoea, delayed capillary refill and reduced urine output while the blood pressure still reads normal. Waiting for frank hypotension means waiting for decompensation, and in an actively vomiting patient the airway needs protection alongside volume replacement."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Abdominal and rectal examination",
+      "blurb": "A usually soft abdomen, a liver worth finding, and a finger that must not be skipped",
+      "skills": [
+        "skill.exam.surg.lump_inspection_palpation",
+        "skill.exam.surg.perianal_inspection",
+        "skill.exam.surg.dre_surgical",
+        "skill.exam.surg.proctoscopy"
+      ],
+      "emphasis": {
+        "skill.exam.surg.lump_inspection_palpation": {
+          "expect": "Expect the abdomen to be soft in most bleeds, with mild epigastric tenderness in ulcer disease. Feel for the liver edge and spleen and test for ascites with shifting dullness and fluid thrill, since hepatosplenomegaly with ascites converts an ulcer bleed into a variceal bleed. A hard irregular epigastric mass or an enlarged left supraclavicular node points to gastric cancer."
+        },
+        "skill.exam.surg.perianal_inspection": {
+          "expect": "Expect inspection to settle many lower bleeds before a finger is inserted: external piles, a fissure with its sentinel tag, excoriation from chronic discharge, or soiling with black stool that reclassifies the case as upper. Look before touching, especially where fissure makes contact agonising."
+        },
+        "skill.exam.surg.dre_surgical": {
+          "expect": "Expect the finger to answer three questions: is there blood and of what kind, is there a rectal mass or stricture, and is the prostate relevant. Black tarry stool on the glove with an empty rectum confirms an upper source, while fresh blood with a palpable growth makes colorectal cancer the working diagnosis."
+        },
+        "skill.exam.surg.proctoscopy": {
+          "expect": "Defer proctoscopy during active bleeding or where a fissure makes it cruel. Its place is the settled lower bleed: direct view of the three primary pile positions, mucosal colour and bleeding points. It never replaces the finger, and it never belongs in the resuscitation phase."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the bleed picture together",
+      "blurb": "Pattern plus volume plus stigmata, read as one picture",
+      "skills": [
+        "skill.gi.bleed.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Pattern, volume and scores in three sentences",
+      "skills": [
+        "skill.gi.bleed.summary",
+        "skill.present.gi.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Upper and lower sources, and the mimics that waste endoscopy lists",
+      "skills": [
+        "skill.gi.bleed.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Resuscitate first, scope within a day, and never let a test delay volume",
+      "skills": [
+        "skill.ix.gi.bleed.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and risk scores",
+      "blurb": "Blatchford before the scope, Rockall after it",
+      "skills": [
+        "skill.gi.bleed.diagnosis",
+        "skill.annex.gi.bleed.scores"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Resuscitation, endoscopy and cause directed care for upper and lower bleed",
+      "skills": [
+        "skill.tx.gi.bleed.upper",
+        "skill.tx.gi.bleed.lower"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.gi.bleed.abdo_pr",
+        "title": "Examine the abdomen and perform a rectal examination",
+        "task": "This 54-year-old man passed black stools overnight after vomiting blood. Examine his abdomen and perform a rectal examination, then present your findings.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.exam.surg.lump_inspection_palpation",
+          "skill.exam.surg.perianal_inspection",
+          "skill.exam.surg.dre_surgical"
+        ],
+        "examinerQuestions": [
+          "What did the rectal examination add beyond the history, and what would fresh blood with a palpable growth change?",
+          "Which two findings on this examination would redirect you from ulcer towards varices?",
+          "Why is proctoscopy not part of this station today?"
+        ]
+      },
+      {
+        "id": "osce.gi.bleed.history",
+        "title": "Take a bleeding history and stratify risk",
+        "task": "This 46-year-old woman reports black stools for two days. Take a focused bleeding history in six minutes and state her disposition.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.surg.chronic_dyspepsia_ulcer",
+          "skill.hx.surg.rectal_bleeding_pain",
+          "skill.hx.gi.risk"
+        ],
+        "examinerQuestions": [
+          "Is this an upper or a lower bleed, and which single historical detail convinced you?",
+          "Name the drugs you asked about and why each one matters.",
+          "What score do you calculate at the bedside, and what does it change about where she goes next?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.gi.bleed.basics",
+      "skill.gi.bleed.signs",
+      "skill.gi.bleed.differential",
+      "skill.ix.gi.bleed.workup",
+      "skill.gi.bleed.diagnosis",
+      "skill.tx.gi.bleed.upper",
+      "skill.tx.gi.bleed.lower"
+    ]
+  },
+  "skills": {
+    "skill.gi.bleed.basics": {
+      "id": "skill.gi.bleed.basics",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "What gastrointestinal bleeding is",
+      "oneLine": "Blood lost from the gut, divided by the ligament of Treitz into upper and lower",
+      "why": "The single most useful fact about a bleed is which side of the ligament of Treitz it starts on, because that decides who scopes first and from which end. Students who memorise causes without this line send lower scopes after upper bleeds and lose the hour that matters.",
+      "teach": [
+        {
+          "heading": "Upper or lower, decided at the bedside",
+          "body": "Bleeding proximal to the ligament of Treitz, from oesophagus to duodenum, is upper gastrointestinal bleeding. Bleeding distal to it is lower. The history usually places the bleed before any instrument does: vomiting of blood means upper, black tarry stool usually means upper, fresh blood per rectum usually means lower.\n\nThe exception proves the rule: a brisk upper bleed transits so fast that it appears per rectum as fresh blood with shock. Fresh blood with haemodynamic instability never excludes an upper source."
+        },
+        {
+          "heading": "The three words and what each means",
+          "points": [
+            "Haematemesis is vomiting of blood. Bright red blood means brisk active bleeding, while dark altered blood like coffee grounds means slower bleeding partly digested by acid. Distinguish it from coughing of blood, which is frothy, mixed with sputum and preceded by cough.",
+            "Melaena is black tarry stool with a characteristic smell. Even a small upper bleed colours the whole stool, so black stool is sensitive but not a measure of volume. Iron tablets, bismuth and some foods mimic the colour without the tarry character or the smell.",
+            "Haematochezia is fresh blood per rectum. It usually means a lower or anal source, but a rapid upper bleed with shock can present the same way, so the pulse and pressure overrule the colour."
+          ]
+        },
+        {
+          "heading": "Common sources by side",
+          "table": {
+            "cols": [
+              "Side",
+              "Usual sources"
+            ],
+            "rows": [
+              [
+                "Upper",
+                "Peptic ulcer, oesophageal varices, Mallory-Weiss tear, erosive gastritis, gastric or oesophageal cancer"
+              ],
+              [
+                "Lower",
+                "Haemorrhoids and fissure, diverticular disease, colorectal cancer and polyps, inflammatory bowel disease, angiodysplasia"
+              ],
+              [
+                "Either side considered",
+                "Brisk upper bleed presenting per rectum, Meckel diverticulum in the young, obscure small bowel sources"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What anatomical line divides upper from lower gastrointestinal bleeding?",
+          "a": "The ligament of Treitz. Bleeding proximal to it, from oesophagus to duodenum, is upper; bleeding distal to it is lower.",
+          "accept": [
+            "ligament of Treitz",
+            "Treitz",
+            "duodenojejunal"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient passes fresh blood per rectum with a pulse of 120 and a systolic pressure of 88. Can you call this a lower bleed?",
+          "a": "No. A brisk upper bleed with rapid transit presents per rectum as fresh blood with shock. Haemodynamic instability overrules colour, and the upper tract must be considered first.",
+          "accept": [
+            "brisk upper",
+            "rapid transit",
+            "shock",
+            "instability"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How do you distinguish haematemesis from haemoptysis at the bedside?",
+          "a": "Haematemesis follows nausea or retching, is not frothy, and may contain food or coffee ground material with melaena to follow. Haemoptysis is frothy, mixed with sputum, preceded by cough, and usually accompanied by respiratory rather than abdominal symptoms.",
+          "accept": [
+            "frothy",
+            "sputum",
+            "cough",
+            "retching",
+            "melaena"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "peptic_ulcer_gi_bleed_long_case: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Upper gastrointestinal haemorrhage"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.gi.bleed.signs": {
+      "id": "skill.gi.bleed.signs",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "The bleed picture",
+      "oneLine": "Pattern plus volume plus stigmata, read as one picture",
+      "why": "A bleed is not one sign but three readings taken together: the pattern says where, the vitals say how much, and the stigmata say from what background. Reading any one alone misleads: a normal pressure hides early shock, and a clean abdomen hides varices.",
+      "teach": [
+        {
+          "heading": "Read volume first, source second",
+          "body": "Pallor with restlessness, a rising pulse, a postural fall in pressure and reduced urine output mark significant loss while lying pressure still reads normal. Cool peripheries with delayed capillary refill and tachypnoea complete the early picture, and waiting for frank hypotension means waiting for decompensation.\n\nRecord the pulse and pressure lying and sitting or standing where the patient can tolerate it, since a postural change is the earliest pressure evidence of volume loss."
+        },
+        {
+          "heading": "Stigmata that point above the stomach",
+          "points": [
+            "Spider naevi over the upper trunk, palmar redness, gynaecomastia and loss of body hair mark chronic liver disease.",
+            "Engorged veins radiating from the umbilicus with flow away from it mark portal obstruction, distinct from inferior vena caval veins that fill from below upwards.",
+            "A firm liver edge with a palpable spleen and shifting dullness or fluid thrill from ascites completes the portal hypertension picture.",
+            "Flapping tremor, jaundice and scratch marks from itching support decompensated liver disease and change resuscitation towards a variceal protocol."
+          ]
+        },
+        {
+          "heading": "What the abdomen and the finger add",
+          "body": "The abdomen is usually soft, with mild epigastric tenderness in ulcer disease. A hard irregular epigastric mass, an enlarged left supraclavicular node or a rectal shelf raises gastric cancer, while generalised guarding with a bleed raises perforation with bleeding.\n\nThe finger confirms what the history claims: black tarry stool on the glove with an empty rectum confirms an upper source, fresh blood directs attention to colon and anus, and a rectal growth or stricture makes colorectal cancer the working diagnosis."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which bedside findings mark significant blood loss before the lying pressure falls?",
+          "a": "Pallor with restlessness, tachycardia, a postural fall in pressure, delayed capillary refill, tachypnoea and reduced urine output.",
+          "accept": [
+            "tachycardia",
+            "postural",
+            "capillary refill",
+            "oliguria",
+            "reduced urine",
+            "tachypnoea"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which examination findings redirect an upper bleed from ulcer towards varices?",
+          "a": "Stigmata of chronic liver disease with engorged periumbilical veins flowing away from the umbilicus, a firm liver edge with splenomegaly, and ascites shown by shifting dullness or fluid thrill.",
+          "accept": [
+            "stigmata",
+            "varices",
+            "splenomegaly",
+            "ascites",
+            "shifting dullness",
+            "caput"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "The history says melaena but the rectum is empty on examination. What does that mean?",
+          "a": "An empty rectum does not refute the history. Black tarry stool on the glove confirms an upper source, while an empty vault with a convincing story still needs urgent upper endoscopy rather than reassurance.",
+          "accept": [
+            "upper source",
+            "endoscopy",
+            "glove",
+            "tarry"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "portal_hypertension_and_variceal_hemorrhage: clinicalPearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Bleeding per rectum"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.gi.bleed.summary": {
+      "id": "skill.gi.bleed.summary",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "The clinical summary",
+      "oneLine": "Problem representation for a bleed measured in hours, with scores in the same sentence",
+      "why": "The summary for a bleed has a different shape from an elective lump summary: the tempo is hours, and the severity scores belong in the same sentence as the syndrome, because they decide resuscitation and endoscopy timing in the next hour.",
+      "teach": [
+        {
+          "heading": "State pattern, volume and scores together",
+          "points": [
+            "Name the patient with the risks that matter: age, painkiller or alcohol use, liver disease, blood thinners.",
+            "State the bleed in pattern terms with tempo: episodes of haematemesis or melaena over stated hours, or fresh blood per rectum with stated duration.",
+            "State volume evidence: pulse, blood pressure with postural change, haemoglobin and urea.",
+            "State the risk scores and the band they place the patient in, with resuscitation status and endoscopy timing.",
+            "A worked example: a 54 year old male painkiller user with two episodes of haematemesis and one melaena stool over twelve hours, pulse 112, systolic pressure 98, high pre endoscopy risk score, for resuscitation and urgent inpatient endoscopy."
+          ]
+        },
+        {
+          "heading": "What is commonly left out",
+          "body": "The commonest omission is the score, which leaves the listener unable to judge urgency. Next comes resuscitation status: access gained, fluids given, transfusion threshold set. Relevant negatives belong too, such as no chest pain, no breathlessness and no calf swelling, since an upper bleed in an older patient shares its age group with cardiac ischaemia.\n\nTempo belongs in the first line, because hours separate a bleed from the weeks of altered bowel habit that point to cancer."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What element belongs in a bleed summary that would not usually appear in a lump summary?",
+          "a": "The risk scores with their bands and the resuscitation status, because both directly determine what happens in the next hour.",
+          "accept": [
+            "scores",
+            "resuscitation",
+            "Blatchford",
+            "Rockall",
+            "urgency"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "pattern",
+          "text": "States the bleed as upper or lower with tempo and evidence"
+        },
+        {
+          "id": "volume",
+          "text": "States volume evidence with risk scores"
+        },
+        {
+          "id": "plan",
+          "text": "Links the summary to resuscitation and endoscopy timing"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "peptic_ulcer_gi_bleed_long_case: additionalDifferentials"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Haematemesis and melaena"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.gi.bleed.differential": {
+      "id": "skill.gi.bleed.differential",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Differential diagnosis",
+      "oneLine": "Upper and lower sources by pattern, and the mimics that waste endoscopy lists",
+      "why": "Most rectal bleeding is blamed on piles by the patient and too often by the doctor, while most vomiting of blood is assumed to be ulcer. Both assumptions miss cancer and varices. A pattern based differential forces each bleed to earn its source before treatment starts.",
+      "teach": [
+        {
+          "heading": "Upper sources by pattern",
+          "points": [
+            "Peptic ulcer: favoured by nocturnal epigastric pain eased by food or antacids, painkiller use, or no warning pain at all, since most NSAID bleeds arrive without prior dyspepsia.",
+            "Oesophageal varices: favoured by years of heavy drinking or known liver disease with stigmata, splenomegaly and ascites. Bleeding is often large volume and recurrent.",
+            "Mallory-Weiss tear: favoured by repeated retching or vomiting before the first blood, often in alcohol excess, usually modest and self limiting.",
+            "Erosive gastritis: favoured by recent painkillers, alcohol binge, smoking or critical illness, with diffuse mucosal bleeding rather than one vessel.",
+            "Gastric or oesophageal cancer: favoured by an older patient with weight loss, anorexia and progressive dysphagia or persistent ulcer pain, and a gastric ulcer that must be biopsied since it can be malignant."
+          ]
+        },
+        {
+          "heading": "Lower sources by pattern",
+          "points": [
+            "Haemorrhoids: painless bright red splash on the surface or on paper, with prolapse on straining in advanced grades. Uncomplicated piles are painless; pain means complication or a different diagnosis.",
+            "Anal fissure: sharp cutting pain with defaecation persisting after the act, with minor bright bleeding. Look before touching.",
+            "Diverticular disease: painless fresh bleeding, often brisk, in an older patient, usually settling on its own but liable to recur.",
+            "Colorectal cancer or polyp: blood mixed with stool or mucus with altered bowel habit, weight loss or iron deficiency anaemia. Blood separate from faeces between motions also occurs when blood collects in the rectum.",
+            "Inflammatory bowel disease: bloody diarrhoea with mucus, urgency and cramping in a younger patient, ulcerative colitis and Crohn disease both considered.",
+            "Angiodysplasia: painless recurrent bleeding in an older patient, often with aortic stenosis or chronic kidney disease in the background."
+          ]
+        },
+        {
+          "heading": "Mimics that are not gastrointestinal bleeding",
+          "body": "Swallowed blood from a nosebleed colours vomitus and stool and misleads the unwary, so examine the nose and ask about epistaxis. Frothy blood with cough is haemoptysis, not haematemesis, and points to the chest. Black stool from iron tablets or bismuth lacks the tarry character and smell of melaena.\n\nVaginal and urinary blood contaminate the history in women and older men, so ask directly about periods, haematuria and the exact relation of blood to each orifice before booking an endoscopy."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three upper and three lower sources of gastrointestinal bleeding.",
+          "a": "Upper: peptic ulcer, oesophageal varices, Mallory-Weiss tear, erosive gastritis, gastric cancer. Lower: haemorrhoids, fissure, diverticular disease, colorectal cancer, inflammatory bowel disease, angiodysplasia.",
+          "accept": [
+            "ulcer",
+            "varices",
+            "Mallory",
+            "haemorrhoid",
+            "piles",
+            "fissure",
+            "diverticular",
+            "cancer",
+            "colitis",
+            "angiodysplasia"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "A 68 year old passes painless fresh blood mixed with stool and reports narrower stools for two months. What must you exclude?",
+          "a": "Colorectal cancer. Painless bleeding with altered bowel habit and iron deficiency in an older patient must be scoped and imaged as cancer until proven otherwise, and must never be labelled piles without a finger and a scope.",
+          "accept": [
+            "cancer",
+            "colorectal",
+            "malignancy",
+            "scope",
+            "colonoscopy"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "sides",
+          "text": "Covers upper and lower sources with mimics"
+        },
+        {
+          "id": "pattern",
+          "text": "Links each source to its bleed pattern"
+        },
+        {
+          "id": "cancer",
+          "text": "Explicitly excludes malignancy in the at risk patient"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "peptic_ulcer_gi_bleed_long_case: additionalDifferentials"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Bleeding per rectum"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.gi.bleed.workup": {
+      "id": "skill.ix.gi.bleed.workup",
+      "kind": "investigation",
+      "system": "surgery",
+      "title": "Confirming the source and grading the loss",
+      "oneLine": "Resuscitate first, scope within a day, and image the brisk or obscure bleed",
+      "why": "Investigations in a bleed serve three jobs in strict order: grade the loss, find the source, and set the score. A student who orders a scope before bloods, or waits for a report before fluids, has the order backwards and the patient pays for it.",
+      "teach": [
+        {
+          "heading": "Grade the loss before finding the source",
+          "points": [
+            "Full blood count with haemoglobin and platelets, urea with creatinine, liver function, coagulation profile, and group and crossmatch. Urea often rises out of proportion after an upper bleed and forms part of the bedside risk score.",
+            "Electrocardiogram and lactate where the patient is unstable, elderly, or has chest symptoms, since ischaemia and hypoperfusion hide behind the bleed.",
+            "Erect chest radiograph where perforation is suspected alongside bleeding, looking for free air under the diaphragm, since a perforated ulcer can bleed and leak together.",
+            "The single most important principle: resuscitation with fluids and blood starts on clinical grounds. No result waits before volume in an unstable patient."
+          ]
+        },
+        {
+          "heading": "Scope the likely end first, within a day",
+          "body": "Urgent upper endoscopy within 24 hours confirms the source, grades stigmata and treats in the same sitting, with biopsy of every gastric ulcer since it can be malignant. A prokinetic given before the scope clears clot and improves views in selected unstable patients.\n\nColonoscopy follows bowel preparation for the lower bleed once an upper source is excluded. Unprepared emergency colonoscopy sees little, so preparation is part of the test, not an accessory."
+        },
+        {
+          "heading": "Image the brisk, the obscure and the recurrent",
+          "points": [
+            "CT angiography for the brisk bleed or where endoscopy cannot localise, mapping the site before embolisation or surgery.",
+            "Catheter angiography with embolisation for the localised brisk lower or obscure bleed in a patient unfit for surgery.",
+            "Capsule endoscopy or dedicated small bowel study for the obscure bleed with negative upper and lower scopes, considering Meckel diverticulum in the young.",
+            "Repeat endoscopy for rebleeding before surgery in most upper bleeds, since the second look often succeeds where the first view was obscured."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which blood tests are mandatory in every significant gastrointestinal bleed?",
+          "a": "Full blood count, urea with creatinine, liver function, coagulation profile, and group and crossmatch, with an electrocardiogram where the patient is unstable or elderly.",
+          "accept": [
+            "full blood count",
+            "urea",
+            "crossmatch",
+            "coagulation",
+            "liver function"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "When should upper endoscopy happen in an acute bleed, and what must it include for a gastric ulcer?",
+          "a": "Within 24 hours. Every gastric ulcer is biopsied to exclude cancer, with haemostasis in the same sitting where stigmata demand it.",
+          "accept": [
+            "24 hours",
+            "biopsy",
+            "malignant",
+            "haemostasis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Both upper endoscopy and colonoscopy are negative but bleeding recurs. What next?",
+          "a": "Evaluate the small bowel: CT angiography during active bleeding to map the site, capsule endoscopy or dedicated small bowel study when settled, considering Meckel diverticulum in a young patient and angiodysplasia in an older one.",
+          "accept": [
+            "small bowel",
+            "CT angiography",
+            "capsule",
+            "Meckel",
+            "angiodysplasia"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "peptic_ulcer_gi_bleed_long_case: additionalInvestigations"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Upper gastrointestinal haemorrhage"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.gi.bleed.diagnosis": {
+      "id": "skill.gi.bleed.diagnosis",
+      "kind": "reasoning",
+      "system": "surgery",
+      "title": "Diagnosis and risk scores: Blatchford and Rockall",
+      "oneLine": "One score before the scope decides disposition, one after it predicts rebleed",
+      "why": "A diagnosis of gastrointestinal bleed does not say whether the patient goes home, to the ward or to intensive care. Two bedside scores answer that from facts already in hand, and a student who cannot calculate them is guessing disposition.",
+      "teach": [
+        {
+          "heading": "Blatchford before the scope",
+          "body": "The Glasgow Blatchford score uses clinical and laboratory facts available at presentation: urea, haemoglobin, systolic pressure, pulse, melaena, syncope, and known liver or heart disease. No endoscopy is needed, so it triages the patient at the door.\n\nA score of 0 to 1 marks very low risk suitable for outpatient follow up. Anything higher warrants admission and urgent inpatient endoscopy, with resuscitation running alongside rather than after the calculation."
+        },
+        {
+          "heading": "Rockall after the scope",
+          "body": "The Rockall score adds what the scope reveals to age, shock and comorbidity: the diagnosis found and the endoscopic stigmata of recent haemorrhage. It predicts rebleeding and mortality after diagnosis rather than triaging before it.\n\nA complete Rockall needs the endoscopy report, so it never delays the scope. High scores prompt intensive observation, planned second look and early discussion of embolisation or surgery if bleeding recurs."
+        },
+        {
+          "heading": "A complete diagnostic statement",
+          "points": [
+            "Name the bleed with side and tempo: acute upper gastrointestinal bleed over twelve hours, or recurrent lower bleed over weeks.",
+            "State the scores with their bands: pre endoscopy score with disposition, post endoscopy score with rebleed risk.",
+            "Name the source where known with stigmata: bleeding duodenal ulcer with visible vessel, or banded oesophageal varices.",
+            "Include severity and resuscitation: stable after two units, or unstable despite fluids with intensive care referral."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which score triages before endoscopy, and which predicts after it?",
+          "a": "Glasgow Blatchford before endoscopy using bedside clinical and laboratory facts; Rockall after endoscopy adding the diagnosis and stigmata to age, shock and comorbidity.",
+          "accept": [
+            "Blatchford",
+            "Rockall",
+            "before",
+            "after",
+            "stigmata"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A patient scores 0 to 1 on Blatchford. What does that change?",
+          "a": "Very low risk, suitable for outpatient follow up rather than admission, provided the clinical picture agrees and safe follow up exists.",
+          "accept": [
+            "very low risk",
+            "outpatient",
+            "discharge",
+            "follow up"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why can Rockall never replace Blatchford at the door?",
+          "a": "Because Rockall needs the endoscopy report for diagnosis and stigmata. It predicts rebleed after diagnosis; it cannot triage before the scope that feeds it.",
+          "accept": [
+            "endoscopy",
+            "stigmata",
+            "predict",
+            "triage"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "scores",
+          "text": "Calculates both scores and states what each decides"
+        },
+        {
+          "id": "bands",
+          "text": "Links low and high bands to disposition"
+        },
+        {
+          "id": "statement",
+          "text": "Gives a complete diagnostic statement with resuscitation status"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "peptic_ulcer_gi_bleed_long_case: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Upper gastrointestinal haemorrhage"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.gi.bleed.scores": {
+      "id": "skill.annex.gi.bleed.scores",
+      "kind": "annexure",
+      "system": "surgery",
+      "title": "Bleed risk scores reference",
+      "oneLine": "Blatchford and Rockall components at a glance",
+      "why": "Scores calculated from memory drift. A one page reference of which facts each score consumes keeps the bedside calculation honest and complete.",
+      "teach": [
+        {
+          "heading": "Glasgow Blatchford components",
+          "table": {
+            "cols": [
+              "Domain",
+              "What counts"
+            ],
+            "rows": [
+              [
+                "Urea",
+                "Higher urea scores more; a disproportionate rise favours an upper bleed"
+              ],
+              [
+                "Haemoglobin",
+                "Lower haemoglobin scores more, with separate bands by sex"
+              ],
+              [
+                "Pressure and pulse",
+                "Lower systolic pressure and faster pulse score more"
+              ],
+              [
+                "History",
+                "Melaena and syncope each add risk"
+              ],
+              [
+                "Background",
+                "Known liver disease and heart failure each add risk"
+              ],
+              [
+                "Low risk band",
+                "A total of 0 to 1 marks very low risk for outpatient follow up"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Rockall components",
+          "table": {
+            "cols": [
+              "Domain",
+              "What counts"
+            ],
+            "rows": [
+              [
+                "Age",
+                "Higher age bands score more"
+              ],
+              [
+                "Shock",
+                "Tachycardia alone scores less than hypotension"
+              ],
+              [
+                "Comorbidity",
+                "Cardiac, renal or liver failure and disseminated cancer score most"
+              ],
+              [
+                "Diagnosis",
+                "Varices and cancer score more than ulcer or Mallory-Weiss tear"
+              ],
+              [
+                "Stigmata",
+                "Active spurting or visible vessel scores most, clean base least"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "List the five domains of the Rockall score.",
+          "a": "Age, shock, comorbidity, endoscopic diagnosis, and endoscopic stigmata of recent haemorrhage.",
+          "accept": [
+            "age",
+            "shock",
+            "comorbidity",
+            "diagnosis",
+            "stigmata"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "peptic_ulcer_gi_bleed_long_case: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Upper gastrointestinal haemorrhage"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.gi.bleed.upper": {
+      "id": "skill.tx.gi.bleed.upper",
+      "kind": "treatment",
+      "system": "surgery",
+      "title": "Managing upper gastrointestinal bleeding",
+      "oneLine": "Resuscitation, transfusion threshold, acid suppression, endoscopy and variceal protocol",
+      "why": "An upper bleed kills by volume loss and by rebleed, in that order. Resuscitation with a fixed transfusion threshold comes first, endoscopy within a day treats and stages, and variceal bleeding runs a different protocol that must start at presentation rather than after the scope.",
+      "teach": [
+        {
+          "heading": "Resuscitate on clinical grounds with a fixed threshold",
+          "points": [
+            "Secure two large bore intravenous lines, give crystalloid fluids, and send bloods with group and crossmatch without pausing resuscitation for results.",
+            "Transfuse when haemoglobin falls below 7 g per dL, aiming at a restrictive target of about 70 g per L, except in significant cardiovascular disease where the threshold is set higher.",
+            "Correct marked coagulopathy and low platelets before endoscopy, and reverse or hold anticoagulants in consultation with the prescribing indication.",
+            "Protect the airway early where repeated haematemesis threatens aspiration, with tracheal intubation considered before the scope in such patients."
+          ]
+        },
+        {
+          "heading": "Suppress acid and scope within a day",
+          "body": "Start a proton pump inhibitor early. Where endoscopy shows high risk stigmata, give omeprazole 80 mg as an intravenous bolus followed by 8 mg per hour as a continuous infusion for 72 hours, then step down to an oral proton pump inhibitor 20 to 40 mg once daily once oral intake resumes.\n\nPerform urgent endoscopy within 24 hours for haemostasis and biopsy. A prokinetic given about 30 to 90 minutes before the scope clears clot and improves views in selected unstable patients."
+        },
+        {
+          "heading": "Variceal bleeding runs its own protocol",
+          "points": [
+            "Give an intravenous vasoactive drug such as octreotide, somatostatin or terlipressin on presentation, since it reduces rebleeding and mortality alongside endoscopy.",
+            "Give ceftriaxone 1 g intravenously once daily for up to 7 days as antibiotic prophylaxis in cirrhotic upper bleeding, since infection precipitates rebleed and death in this group.",
+            "Band ligation for oesophageal varices and tissue adhesive injection for gastric varices at endoscopy within 24 hours.",
+            "Balloon tamponade only as a temporary bridge for up to 24 hours in refractory torrential bleeding, never as definitive care.",
+            "Arrange a portosystemic shunt for persistent bleeding or advanced liver disease, and plan secondary prophylaxis with a nonselective beta blocker plus band ligation."
+          ]
+        },
+        {
+          "heading": "After haemostasis: cause, cure and follow up",
+          "points": [
+            "Test for Helicobacter pylori and eradicate when positive, using a triple course of a proton pump inhibitor 20 mg twice daily with amoxicillin 1 g twice daily and clarithromycin 500 mg twice daily for 7 days, substituting metronidazole where penicillin allergy or high clarithromycin resistance applies.",
+            "Stop NSAIDs wherever possible, substituting safer analgesia, and review every antiplatelet and anticoagulant for restart timing.",
+            "Arrange repeat endoscopy for rebleeding, then catheter embolisation or surgery where endoscopy fails twice, since surgery after failed endoscopy carries the best salvage results when chosen early.",
+            "In India, confirm blood bank stock and endoscopy timing at presentation: a district hospital stabilises and refers the unstable or variceal bleed to the medical college, with cashless care under government insurance schemes documented at admission."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "At what haemoglobin do you transfuse in acute upper gastrointestinal bleeding?",
+          "a": "Below 7 g per dL, aiming at a restrictive target of about 70 g per L, except in significant cardiovascular disease where the threshold is higher.",
+          "accept": [
+            "7 g per dL",
+            "70 g per L",
+            "restrictive",
+            "cardiovascular"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What two drugs, besides fluids and blood, start at presentation in a cirrhotic patient vomiting blood?",
+          "a": "An intravenous vasoactive drug and ceftriaxone 1 g intravenously once daily for up to 7 days, both started on presentation before endoscopy.",
+          "accept": [
+            "vasoactive",
+            "octreotide",
+            "terlipressin",
+            "ceftriaxone",
+            "antibiotic"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Endoscopy shows a bleeding duodenal ulcer with a visible vessel. Outline the next 72 hours.",
+          "a": "Endoscopic haemostasis now, omeprazole 80 mg bolus with 8 mg per hour infusion for 72 hours, close observation for rebleed with a planned second look threshold, then oral PPI, H. pylori testing with eradication, and NSAID review before discharge.",
+          "accept": [
+            "haemostasis",
+            "omeprazole",
+            "infusion",
+            "72 hours",
+            "H. pylori",
+            "rebleed"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "peptic_ulcer: Resuscitate + endoscopy + IV PPI infusion"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "variceal_bleed: management"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Upper gastrointestinal haemorrhage"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "Drug doses in this module are quoted from the cited knowledge base and guideline text for examination study, at the level of drug class and principle. Specific agents, routes and durations must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe."
+    },
+    "skill.tx.gi.bleed.lower": {
+      "id": "skill.tx.gi.bleed.lower",
+      "kind": "treatment",
+      "system": "surgery",
+      "title": "Managing lower gastrointestinal bleeding",
+      "oneLine": "Most settle, so resuscitate, prepare the bowel, scope, and reserve embolisation and surgery",
+      "why": "Most lower bleeds stop on their own, which tempts casual management, but the minority that do not need mapping by CT angiography and a decision between embolisation and limited surgery. Knowing which bleed belongs to which path is the whole skill.",
+      "teach": [
+        {
+          "heading": "Resuscitate exactly as for an upper bleed",
+          "body": "The volume protocol does not change with the side: large bore access, fluids on clinical grounds, transfusion when haemoglobin falls below 7 g per dL, and correction of coagulopathy. Exclude an upper source first where the bleed is brisk with shock, since a rapid upper bleed presents per rectum.\n\nAdmit the unstable, the elderly with comorbidity, and anyone needing transfusion. A young patient with a minor anal bleed and normal vitals can be worked up without the full resuscitation pathway once shock is excluded."
+        },
+        {
+          "heading": "Prepare the bowel, then scope",
+          "points": [
+            "Colonoscopy after bowel preparation is the investigation and often the treatment, with banding, clipping or thermal therapy to suitable lesions.",
+            "Defer proctoscopy and rigid sigmoidoscopy decisions to the settled patient; neither belongs in active resuscitation.",
+            "Biopsy every suspicious growth or ulcer, since a lower bleed is a common first presentation of colorectal cancer.",
+            "Correct iron deficiency anaemia after the acute phase with oral iron where tolerated, and plan surveillance colonoscopy for polyps and inflammatory disease."
+          ]
+        },
+        {
+          "heading": "Map the brisk bleed before touching it",
+          "body": "CT angiography during active bleeding maps the site for catheter embolisation, which controls most brisk diverticular and angiodysplastic bleeds in patients unfit for surgery. Superselective technique protects the bowel wall from ischaemia, and rebleeds are remapped rather than assumed to come from the same point.\n\nSurgery is reserved for failed embolisation, recurrent bleeding needing transfusion, ischaemic complications, or cancer and complicated inflammatory disease found on workup. Resect the mapped segment, never the whole colon blind, and involve a colorectal unit early."
+        },
+        {
+          "heading": "Cause directed care and thresholds",
+          "points": [
+            "Diverticular bleeding usually stops spontaneously; admit, observe, transfuse to threshold, and scope electively after preparation.",
+            "Haemorrhoids and fissure settle with stool softeners, fibre and local care; refer persistent piles for office banding and grade the disease rather than repeating reassurance.",
+            "Inflammatory bowel flares need medical control with surgical thresholds of toxic dilatation, perforation or failed medical therapy clearly marked.",
+            "Refer brisk or recurrent bleeds from a district hospital to a centre with CT angiography and embolisation, documenting the transfusion given and the provisional map."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Most diverticular bleeds stop on their own. What is the correct initial plan?",
+          "a": "Resuscitate to the same transfusion threshold, admit and observe, exclude an upper source where brisk, and arrange colonoscopy after bowel preparation rather than rushing to surgery.",
+          "accept": [
+            "resuscitate",
+            "observe",
+            "preparation",
+            "colonoscopy",
+            "transfusion"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A lower bleed is brisk and colonoscopy cannot localise it. What next?",
+          "a": "CT angiography during active bleeding to map the site, then superselective catheter embolisation, with surgery reserved for failed embolisation or a resectable cause.",
+          "accept": [
+            "CT angiography",
+            "map",
+            "embolisation",
+            "surgery"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gi_bleeding_embolisation: clinicalPearls"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gastrointestinal_endoscopy: acute upper GI bleeding approach"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Bleeding per rectum"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of drug class and principle, since lower bleed care turns on resuscitation thresholds, preparation, mapping and referral rather than on specific prescriptions. Specific agents and regimens must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe."
+    }
+  },
+  "cases": [
+    {
+      "id": "case.gi.bleed.ramesh",
+      "initialVitals": {
+        "hr": 112,
+        "bpSystolic": 98,
+        "bpDiastolic": 64,
+        "rr": 22,
+        "spo2": 96,
+        "temp": 37.4,
+        "gcs": 15
+      },
+      "title": "A farm worker who vomited blood and passed black stools overnight",
+      "opening": "Ramesh Gupta, 54, has been brought to the casualty by his son after vomiting dark blood twice overnight and passing a black stool this morning. He looks pale and feels dizzy on sitting up. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Ramesh Gupta",
+        "age": 54,
+        "sex": "male",
+        "occupation": "Agricultural labourer, grows sugarcane",
+        "residence": "Rural, lives with his wife, son and mother"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you here",
+            "what is the problem today",
+            "why have you come here",
+            "tell me your complaints",
+            "how can I help you",
+            "what is troubling you most"
+          ],
+          "reply": "Doctor, last night I vomited dark blood twice, and this morning my stool was completely black like tar. I feel very weak and dizzy.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "onset_course": {
+          "cues": [
+            "when did the vomiting start",
+            "how many hours ago",
+            "how quickly did this come on",
+            "what happened first last night"
+          ],
+          "reply": "Around midnight I felt nauseous and vomited dark blood, then again near morning. The black stool came after sunrise today. All within about twelve hours.",
+          "key": true
+        },
+        "vomited_blood_detail": {
+          "cues": [
+            "describe the vomited blood",
+            "what colour was the vomit",
+            "how much blood did you vomit",
+            "was the vomit bright red"
+          ],
+          "reply": "It was dark red, almost like used engine oil, about one steel tumbler each time. The second time was darker than the first.",
+          "key": true
+        },
+        "coffee_ground_detail": {
+          "cues": [
+            "did it look like coffee grounds",
+            "any grainy dark material in vomit",
+            "was there altered dark blood"
+          ],
+          "reply": "Yes, the second vomit had grainy dark bits in it, like coffee powder mixed in blood.",
+          "key": true
+        },
+        "black_stools_detail": {
+          "cues": [
+            "describe the black stool",
+            "was the stool tarry and sticky",
+            "any unusual smell from stool",
+            "how many black stools passed"
+          ],
+          "reply": "One motion this morning, completely black, sticky like tar, and smelling very foul, unlike my usual stool.",
+          "key": true
+        },
+        "fresh_blood_stools": {
+          "cues": [
+            "any fresh red blood in stool",
+            "blood on the surface of stool",
+            "blood separate from the stool",
+            "blood on toilet paper"
+          ],
+          "reply": "No fresh red blood, and nothing on paper. Only this black tarry motion once.",
+          "key": true
+        },
+        "faint_dizzy_episodes": {
+          "cues": [
+            "did you faint or feel faint",
+            "any dizziness on standing up",
+            "did you nearly collapse",
+            "feeling of blackout before stool"
+          ],
+          "reply": "I felt the room spinning when I stood to go to the field this morning, and had to sit down. I did not fully faint.",
+          "key": true
+        },
+        "belly_pain_pattern": {
+          "cues": [
+            "any pain in the upper abdomen",
+            "burning pain above the navel",
+            "does the pain wake you at night",
+            "relation of pain to food"
+          ],
+          "reply": "For many months I get a burning pain here in the upper belly that wakes me around 2 in the night. Eating a roti eases it for some time.",
+          "key": true,
+          "skillId": "skill.hx.surg.chronic_dyspepsia_ulcer"
+        },
+        "painkiller_use_detail": {
+          "cues": [
+            "which painkillers do you take",
+            "tablets for knee or joint pain",
+            "diclofenac or ibuprofen use",
+            "medicines bought from chemist without prescription"
+          ],
+          "reply": "For my knee pain I take diclofenac tablets from the chemist almost daily for one year, usually without food. Nobody told me they harm the stomach.",
+          "key": true,
+          "skillId": "skill.hx.gi.risk"
+        },
+        "drink_liver_background": {
+          "cues": [
+            "do you drink alcohol regularly",
+            "country liquor or arrack habit",
+            "any jaundice in the past",
+            "swelling of feet or abdomen before"
+          ],
+          "reply": "I drink country liquor on festival days only, two or three times a year. No jaundice, no swelling of feet or belly ever.",
+          "key": true,
+          "skillId": "skill.hx.gi.risk"
+        },
+        "blood_thinner_tablets": {
+          "cues": [
+            "any aspirin for the heart",
+            "blood thinning tablets daily",
+            "clopidogrel or warfarin prescription",
+            "tablets to prevent clots"
+          ],
+          "reply": "No, doctor. Only the knee pain tablets and sometimes paracetamol. Nothing for the heart.",
+          "key": true,
+          "skillId": "skill.hx.gi.risk"
+        },
+        "prior_bleed_history": {
+          "cues": [
+            "vomited blood ever before",
+            "black stools any time earlier",
+            "ulcer diagnosed in the past",
+            "treatment for stomach germ earlier"
+          ],
+          "reply": "Never before. The night burning pain is old, but blood like this is the first time. No ulcer test or treatment ever.",
+          "key": true,
+          "skillId": "skill.hx.gi.risk"
+        },
+        "heart_kidney_illness": {
+          "cues": [
+            "any heart failure or chest pain",
+            "kidney disease or reduced urine",
+            "diabetes or sugar illness",
+            "blood pressure tablets daily"
+          ],
+          "reply": "No sugar, no pressure, no heart or kidney problem. I pass urine normally even today.",
+          "key": true,
+          "skillId": "skill.hx.gi.risk"
+        },
+        "smoking_tobacco_habit": {
+          "cues": [
+            "do you smoke beedis",
+            "how many beedis per day",
+            "chewing tobacco habit",
+            "smoking for how many years"
+          ],
+          "reply": "I smoke about ten beedis a day for twenty years. Food timings are irregular in the field season.",
+          "key": true
+        },
+        "weight_appetite_change": {
+          "cues": [
+            "losing weight in recent months",
+            "appetite reduced lately",
+            "clothes feeling loose now",
+            "difficulty swallowing food"
+          ],
+          "reply": "My weight is the same, appetite is normal, and food goes down without difficulty.",
+          "key": true
+        },
+        "bowel_habit_change": {
+          "cues": [
+            "change in daily bowel habit",
+            "constipation or diarrhoea recently",
+            "narrow stools in past months",
+            "mucus mixed with stool"
+          ],
+          "reply": "My motions were regular until last night, once daily, normal thickness. No mucus ever.",
+          "key": true,
+          "skillId": "skill.hx.surg.rectal_bleeding_pain"
+        },
+        "nosebleed_cough_detail": {
+          "cues": [
+            "any nosebleed last night",
+            "coughing up blood recently",
+            "blood from the nose or mouth",
+            "chronic cough with blood"
+          ],
+          "reply": "No nosebleed, no cough at all. The blood came up with vomiting from the stomach, not with cough.",
+          "key": true
+        },
+        "family_bowel_history": {
+          "cues": [
+            "anyone in family with bowel cancer",
+            "family members with ulcer disease",
+            "liver disease running in family",
+            "bleeding illness in the household"
+          ],
+          "reply": "Nobody in the family has cancer, ulcer or liver disease. My father died of old age, mother is healthy.",
+          "key": true
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Pale, anxious and restless, lying flat. Cold and clammy hands and feet. No jaundice, no spider naevi, no gynaecomastia. No scratch marks.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 112 regular. Blood pressure 98/64 lying, 78/50 on sitting with dizziness. Respiratory rate 22. SpO2 96 percent on air. Temperature 37.4 C.",
+          "abnormal": true
+        },
+        "skill.gen.surg.survey": {
+          "finding": "Severe pallor in conjunctiva and tongue. No jaundice in daylight. No pedal oedema. Average build with no recent wasting.",
+          "abnormal": true
+        },
+        "skill.gen.surg.surgical_shock": {
+          "finding": "Tachycardia with postural hypotension, delayed capillary refill beyond 3 seconds, cold peripheries. Urine output maintained so far. Early compensated shock from blood loss.",
+          "abnormal": true
+        },
+        "skill.exam.surg.lump_inspection_palpation": {
+          "finding": "Abdomen soft, moves with respiration. Mild tenderness in the epigastrium without guarding. No palpable mass. Liver and spleen not palpable. No shifting dullness, no fluid thrill. No engorged veins around the umbilicus.",
+          "abnormal": true
+        },
+        "skill.exam.surg.perianal_inspection": {
+          "finding": "Perianal skin soiled with black tarry stool. No external piles, no fissure, no sentinel tag, no discharge or excoriation.",
+          "abnormal": false
+        },
+        "skill.exam.surg.dre_surgical": {
+          "finding": "Rectal vault contains black tarry stool with characteristic smell. No rectal mass, no stricture. Prostate normal for age. Glove stained black.",
+          "abnormal": true
+        },
+        "skill.exam.surg.proctoscopy": {
+          "finding": "Deferred during active bleeding with instability; no office procedure performed in the resuscitation phase.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "fbc",
+        "urea_creat",
+        "lft",
+        "coag",
+        "group_crossmatch",
+        "egd"
+      ],
+      "investigations": {
+        "fbc": {
+          "label": "Full blood count",
+          "indicated": true,
+          "result": "Haemoglobin 8.1 g per dL. Total leucocyte count 11,200 per mm3. Platelets 2.1 lakh per mm3.",
+          "note": "Falling haemoglobin lags the bleed by hours as fluid shifts, so this value understates the loss; the vitals already declared instability."
+        },
+        "urea_creat": {
+          "label": "Urea and creatinine",
+          "indicated": true,
+          "result": "Urea 68 mg per dL. Creatinine 1.0 mg per dL.",
+          "note": "Urea raised out of proportion to creatinine favours an upper bleed with digested blood load, and urea feeds the bedside risk score."
+        },
+        "lft": {
+          "label": "Liver function tests",
+          "indicated": true,
+          "result": "Bilirubin 1.1 mg per dL. Albumin 3.8 g per dL. Transaminases normal. No evidence of chronic liver failure.",
+          "note": "Normal liver function with no stigmata keeps varices low on the list and ulcer high."
+        },
+        "coag": {
+          "label": "Coagulation profile",
+          "indicated": true,
+          "result": "Prothrombin time normal. INR 1.1. No coagulopathy to correct before scope.",
+          "note": "Correct marked coagulopathy before endoscopy where present; here there is none."
+        },
+        "group_crossmatch": {
+          "label": "Group and crossmatch",
+          "indicated": true,
+          "result": "B positive. Two units of packed red cells reserved and one unit transfused during resuscitation.",
+          "note": "Blood is reserved at presentation in every unstable bleed, before the haemoglobin result returns."
+        },
+        "ecg": {
+          "label": "Electrocardiogram",
+          "indicated": true,
+          "result": "Sinus tachycardia at 112 per minute. No ischaemic changes.",
+          "note": "Mandatory in an older unstable patient with tachycardia, since ischaemia hides behind the bleed."
+        },
+        "egd": {
+          "label": "Urgent upper endoscopy",
+          "indicated": true,
+          "result": "Active oozing from a 1.5 cm ulcer on the posterior duodenal bulb with a visible vessel. No varices. Antral biopsies taken for the stomach germ.",
+          "note": "Done within 24 hours: it confirms the source, treats it and stages rebleed risk in one sitting."
+        },
+        "colonoscopy_urgent": {
+          "label": "Urgent colonoscopy",
+          "indicated": false,
+          "result": "Not performed.",
+          "note": "Not indicated first: melaena with a duodenal ulcer story points above the ligament of Treitz, and scoping the colon first wastes the hour and an unprepared bowel."
+        },
+        "barium_meal": {
+          "label": "Barium meal study",
+          "indicated": false,
+          "result": "Not performed.",
+          "note": "Barium has no place in acute bleeding: it obscures endoscopy and adds nothing to resuscitation or haemostasis."
+        }
+      },
+      "differentialModel": {
+        "answer": "Upper gastrointestinal bleed from a posterior duodenal ulcer. Consider oesophageal varices, Mallory-Weiss tear, erosive gastritis, gastric cancer, and, for the rectal component, haemorrhoids and diverticular disease.",
+        "accept": [
+          "upper gastrointestinal bleed",
+          "peptic ulcer disease",
+          "oesophageal varices",
+          "mallory-weiss tear",
+          "acute erosive gastritis",
+          "carcinoma of the stomach",
+          "haemorrhoids",
+          "diverticular disease"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Acute upper gastrointestinal bleed from duodenal ulcer with haemodynamic instability and a high pre endoscopy risk score.",
+        "accept": [
+          "upper gastrointestinal bleed",
+          "ugi bleed",
+          "haematemesis"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Resuscitate with fluids and transfuse below threshold, urgent endoscopy within 24 hours with haemostasis, high dose intravenous proton pump inhibitor stepping down to oral, test and eradicate H. pylori, stop NSAIDs, and watch for rebleed with a defined surgical and embolisation threshold.",
+        "accept": [
+          "resuscitation",
+          "transfusion",
+          "endoscopy",
+          "proton pump inhibitor",
+          "h pylori",
+          "stop NSAIDs",
+          "rebleed",
+          "embolisation"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The tempo is hours: two vomits and one black stool overnight with faintness on standing. That tempo alone puts resuscitation before diagnosis.",
+        "Night pain eased by food points to duodenal ulcer, but most NSAID bleeds arrive without any warning pain, so a year of daily diclofenac matters more than the pain story.",
+        "Postural hypotension with tachycardia is early shock even though lying pressure reads 98. Waiting for a lower number means waiting for decompensation.",
+        "Urea raised out of proportion to creatinine supports an upper source and feeds the bedside score, independent of how the patient looks.",
+        "No stigmata, no splenomegaly, no ascites and normal liver function push varices down the list before the scope confirms it.",
+        "The finger confirmed the history: black tarry stool on the glove with no rectal mass, so the scope goes down from above, not up from below.",
+        "Gastric ulcers are biopsied because they can be malignant; duodenal ulcers almost never are, so the antral biopsy here chases the germ, not cancer."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

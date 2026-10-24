@@ -1,0 +1,1315 @@
+{
+  "_comment": "Paediatric urinary tract infection pathway with vesicoureteric reflux as the imaging anchor. Same spine as the pneumonia exemplar: shared paediatric and core skills carry approach, history framework and examination, the disease file adds the fever hinge, the reflux grades, imaging and prophylaxis, and the simulated child is classified by the rules taught inside.",
+  "id": "urinary-tract-infection-child",
+  "name": "Urinary Tract Infection in Children",
+  "fullName": "Urinary tract infection in children: fever, reflux, imaging and prophylaxis",
+  "subtitle": "Imaging and prophylaxis",
+  "system": "paediatrics",
+  "kbRef": "vesicoureteric_reflux",
+  "oneLine": "Fever with urinary complaints in a child, and the backflow that decides imaging and prevention",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What urinary infection means in a child, and why fever changes its name",
+      "skills": [
+        "skill.uti.child.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the child",
+      "blurb": "Befriend first, keep the child dry and calm, examine without frightening",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.paed.rapport",
+        "skill.approach.paed.consent_assent",
+        "skill.approach.paed.positioning"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age and sex set the presentation before a symptom is mentioned",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Record age in years and months with sex: infants present with unexplained fever, girls after infancy carry higher infection risk from a short urethra, and an uncircumcised infant boy carries higher risk in the first months. Note toilet training stage alongside, since new leaking after being dry is itself a symptom here."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Days of fever with urinary complaints, taken in the language of the age",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.paed.presenting_complaint",
+        "skill.hx.urinary.illness_story"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect fever with burning, frequency or foul urine of days, not the weeks of tuberculosis or months of a chronic kidney complaint. Which came first, fever or urinary change, already hints at upper versus lower tract."
+        },
+        "skill.hx.paed.presenting_complaint": {
+          "expect": "Take the complaint in the mother's own words and in order: the fever pattern day by day, then each urinary change with when it appeared. A story of high persistent fever with vomiting reads very differently from comfortable burning with clear urine."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The background that keeps infection returning",
+      "skills": [
+        "skill.hx.urinary.risk_factors",
+        "skill.hx.paed.socioeconomic"
+      ],
+      "emphasis": {
+        "skill.hx.paed.socioeconomic": {
+          "expect": "Ask drinking water source and storage, toilet at home and at school, and who looks after the child by day. Unsafe water, absent school toilets that force holding, and overcrowding shape both risk and what advice the family can follow."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Fever, toxicity and growth before the abdomen is touched",
+      "skills": [
+        "skill.gen.paed.appearance",
+        "skill.gen.paed.vitals",
+        "skill.gen.paed.pallor",
+        "skill.gen.paed.edema"
+      ],
+      "emphasis": {
+        "skill.gen.paed.appearance": {
+          "expect": "Look for a febrile child who is either toxic and fretful with vomiting, pointing upward, or comfortable and playful with burning alone, pointing to the bladder. Abnormal sleepiness or refusal to drink outranks every later finding."
+        },
+        "skill.gen.paed.vitals": {
+          "expect": "Record temperature, pulse, breathing rate and blood pressure with age appropriate cuffs. Fever with a fast pulse fits acute infection; a raised blood pressure in a child with recurrent infection points to scarring and must never be missed."
+        },
+        "skill.gen.paed.pallor": {
+          "expect": "Check the tongue, conjunctivae and palms for pallor. Anaemia is common in the same children and chronic kidney scarring can show this way, so pallor belongs in every urinary case."
+        },
+        "skill.gen.paed.edema": {
+          "expect": "Look for puffiness of the eyelids and pitting of the feet. Oedema with raised blood pressure in recurrent infection suggests scarring with protein loss, and sends the reasoning toward the kidney itself."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Abdominal and blood pressure examination",
+      "blurb": "Suprapubic ache, loin tenderness and the pressure that scars reveal",
+      "skills": [
+        "skill.exam.paed.gi.inspection",
+        "skill.exam.paed.gi.palpation_percussion",
+        "skill.exam.paed.cvs.pulses_bp"
+      ],
+      "emphasis": {
+        "skill.exam.paed.gi.inspection": {
+          "expect": "Watch for a full bladder outline above the pubis in a child who cannot pass urine freely, and for a ballotable loin swelling suggesting a swollen kidney. Marked distension with absent bowel sounds belongs to a surgical abdomen, not this disease."
+        },
+        "skill.exam.paed.gi.palpation_percussion": {
+          "expect": "Feel for suprapubic tenderness of bladder irritation and for loin tenderness with a thump at the renal angle in upper tract disease. A palpable kidney or bladder, guarding with rigidity, or a loaded colon of constipation each redirect the plan."
+        },
+        "skill.exam.paed.cvs.pulses_bp": {
+          "expect": "Measure blood pressure in all four limbs where coarctation is a thought, and always with a cuff covering two thirds of the upper arm. A raised reading repeated at rest in recurrent infection is scarring until proved otherwise."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the urinary picture together",
+      "blurb": "Fever as the hinge, backflow as the reason it returns",
+      "skills": [
+        "skill.uti.child.findings",
+        "skill.uti.child.reflux_grades"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Age, tempo, tract level and backflow risk in one passage",
+      "skills": [
+        "skill.uti.child.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "True infection, false alarms, and fevers that only look urinary",
+      "skills": [
+        "skill.uti.child.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Prove it in urine first, image only where the rules say so",
+      "skills": [
+        "skill.ix.uti.child.workup",
+        "skill.uti.child.imaging"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and severity",
+      "blurb": "Name the tract level, the grade, and what threatens the kidney",
+      "skills": [
+        "skill.uti.child.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Treat the infection now, the bowel and bladder next, and prevent the next one",
+      "skills": [
+        "skill.tx.uti.child"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this child to your consultant",
+      "skills": [
+        "skill.present.case",
+        "skill.present.utichild.case"
+      ],
+      "emphasis": {
+        "skill.present.case": {
+          "expect": "Present age in years and months with the informant, days of fever with the urinary pattern, tract level with evidence, backflow risk with imaging status, and the plan with review date and red flags."
+        }
+      }
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.uti.child.abdominal_exam",
+        "title": "Examine the abdomen and blood pressure of a child with recurrent urinary infection",
+        "task": "This 4-year-old girl has had two febrile urinary infections in four months. Examine her abdomen and measure her blood pressure, then present your findings with what they mean for her kidneys.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.paed.rapport",
+          "skill.approach.paed.consent_assent",
+          "skill.approach.paed.positioning",
+          "skill.exam.paed.gi.inspection",
+          "skill.exam.paed.gi.palpation_percussion",
+          "skill.exam.paed.cvs.pulses_bp"
+        ],
+        "examinerQuestions": [
+          "What did suprapubic and loin tenderness tell you, and which points upward rather than to the bladder?",
+          "Her blood pressure reads high for age on repeat measurement. What does that suggest in recurrent infection?",
+          "Name two abdominal findings that would redirect this child urgently to a surgical opinion."
+        ]
+      },
+      {
+        "id": "osce.uti.child.history_plan",
+        "title": "Take a urinary history and plan imaging and prevention",
+        "task": "This 5-year-old boy has burning on urination with fever for two days. Take a focused history from his mother in eight minutes and state what urine tests, imaging and prevention you advise.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.paed.consent_assent",
+          "skill.hx.chief_complaints",
+          "skill.hx.paed.presenting_complaint",
+          "skill.hx.urinary.illness_story",
+          "skill.hx.urinary.risk_factors"
+        ],
+        "examinerQuestions": [
+          "Is this upper or lower tract disease on the story, and which single feature decided it?",
+          "Which urine specimen would you accept for culture, and which would you reject with reasons?",
+          "He has constipation with holding at school. What bowel and bladder advice do you give before any drug?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.uti.child.basics",
+      "skill.uti.child.findings",
+      "skill.uti.child.reflux_grades",
+      "skill.uti.child.differential",
+      "skill.ix.uti.child.workup",
+      "skill.uti.child.imaging",
+      "skill.uti.child.diagnosis",
+      "skill.tx.uti.child"
+    ]
+  },
+  "skills": {
+    "skill.uti.child.basics": {
+      "id": "skill.uti.child.basics",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "What urinary infection in children is",
+      "oneLine": "Bacteria in the urinary tract, with fever deciding whether the kidney is involved",
+      "why": "Every burning sensation is not infection and every fever is not the kidney, yet missing a true upper tract infection scars a growing kidney for life. The definition draws the line: bacteria proven in properly collected urine, with fever marking spread to the kidney.",
+      "body": "Urinary tract infection in children is bacterial invasion of the urinary tract, usually by bowel organisms ascending the urethra, proven by pus cells with growth of a single organism from a properly collected specimen.",
+      "keyPoints": [
+        "Escherichia coli causes most infections. Bowel flora colonise the perineum, ascend the short urethra, and multiply in the bladder, and infected urine carried toward the kidney sets up pyelonephritis.",
+        "Cystitis means the bladder alone: burning, frequency, urgency and suprapubic ache with cloudy or offensive urine and little or no fever.",
+        "Acute pyelonephritis means the kidney: high fever with chills, loin or flank pain, vomiting and a toxic look. Fever is what promotes the illness from lower to upper tract.",
+        "Backflow of urine from bladder toward the kidney predisposes to recurrent upper infection and scarring, mainly in children, and is graded one to five on the bladder X-ray taken during urination.",
+        "The principal concern is scarring of the kidney from repeated infected backflow, which can lead to raised blood pressure, protein in urine, and chronic kidney disease years later.",
+        "A cold style illness stays outside the urinary tract with normal urine. Once pus cells with a grown organism appear with symptoms, the name changes with it."
+      ],
+      "pitfalls": [
+        "Calling foul urine alone an infection without pus cells and a grown organism to prove it.",
+        "Treating bacteria grown from a dirty bag specimen as true infection.",
+        "Forgetting the kidney when fever accompanies urinary complaints, and missing the backflow behind a second febrile spell."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What two elements prove a urinary infection rather than mere foul urine?",
+          "a": "Pus cells with growth of a single organism from a properly collected specimen, with symptoms to match.",
+          "accept": [
+            "pus cells",
+            "single organism",
+            "properly collected"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which organism causes most childhood urinary infections, and by what route?",
+          "a": "Escherichia coli, ascending from bowel flora through the urethra into the bladder.",
+          "accept": [
+            "escherichia coli",
+            "ascending",
+            "urethra"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does fever change the name of the illness?",
+          "a": "Fever with urinary infection usually means the kidney is involved, promoting cystitis of the bladder alone to pyelonephritis with its scarring risk.",
+          "accept": [
+            "kidney is involved",
+            "pyelonephritis",
+            "cystitis"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "febrile_uti_children: clinicalPearls"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "febrile_uti_children: pathophysiology"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Urinary tract infection in children: aetiology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.uti.child.findings": {
+      "id": "skill.uti.child.findings",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "The urinary picture in a child",
+      "oneLine": "Age coloured symptoms with fever as the hinge, and a mostly quiet examination",
+      "why": "The examination rarely shouts in this disease, so the history carries the diagnosis and the hands mainly exclude mimics and catch the scarred kidney. A student who hunts for dramatic signs while ignoring the fever pattern and the urine misses the disease entirely.",
+      "body": "Symptoms change with age while the examination stays sparse: fever with urinary change tells the story, loin tenderness supports the kidney, and raised pressure with swelling tells of old scarring.",
+      "keyPoints": [
+        "Infants: unexplained fever with poor feeding, vomiting, loose motions, prolonged jaundice or faltering weight. No localising sign is itself typical at this age.",
+        "Toddlers and preschool children: fever with foul smelling or cloudy urine, crying on urination, increased frequency, and new bedwetting or daytime leaking after being dry.",
+        "Schoolchildren: classic burning with frequency, urgency and suprapubic ache for the bladder, against high fever with chills and loin pain for the kidney.",
+        "General: high persistent fever with a fast pulse fits upper tract invasion. Refusal to drink, abnormal sleepiness and a toxic look are danger markers that matter more than any local sign.",
+        "Abdomen: suprapubic tenderness in bladder irritation, loin tenderness with a thump at the renal angle in upper tract disease, a palpable bladder where outflow is blocked, and a loaded colon where constipation drives recurrence.",
+        "Late and scarring signs: raised blood pressure, eyelid puffiness with ankle swelling, and poor growth in a child with repeated febrile spells. These belong to the kidney itself, not the current fever."
+      ],
+      "pitfalls": [
+        "Waiting for loin tenderness in an infant, where fever without focus is the whole picture.",
+        "Mistaking threadworm scratching or soap irritation for infection without testing the urine.",
+        "Missing raised blood pressure because the cuff was wrong sized or measured once while crying."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the typical presentation of urinary infection in an infant?",
+          "a": "Unexplained fever with poor feeding, vomiting or faltering weight, and no localising sign.",
+          "accept": [
+            "unexplained fever",
+            "poor feeding",
+            "no localising sign"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Contrast bladder irritation with kidney invasion at the bedside.",
+          "a": "Bladder irritation gives burning with frequency and suprapubic ache in a comfortable child, while kidney invasion gives high fever with loin tenderness and a toxic look.",
+          "accept": [
+            "suprapubic ache",
+            "loin tenderness",
+            "toxic"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What findings point to old scarring rather than the current fever?",
+          "a": "Raised blood pressure with eyelid puffiness, ankle swelling and poor growth in a child with repeated febrile spells.",
+          "accept": [
+            "raised blood pressure",
+            "swelling",
+            "repeated"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "febrile_uti_children: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Urinary tract infection in children: clinical features"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.uti.child.reflux_grades": {
+      "id": "skill.uti.child.reflux_grades",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Backflow grades and the scarred kidney",
+      "oneLine": "Five grades of backflow, and why infected backflow scars",
+      "why": "Backflow alone is plumbing, but infected backflow is disease: pressure and bacteria together injure the growing kidney, and the grade predicts whether watchful care or an operation follows. A student who cannot grade cannot counsel the parents.",
+      "body": "Backflow means urine running the wrong way from bladder up the ureter toward the kidney. Severity is graded one to five on the bladder X-ray taken during urination, from backflow in a normal calibre ureter to gross swelling with a twisted, dilated collecting system.",
+      "keyPoints": [
+        "Primary backflow comes from a short or misplaced valve tunnel where the ureter enters the bladder, present from birth and often familial. Secondary backflow comes from high bladder pressure through blockage or a poorly coordinating bladder.",
+        "Grade one and two stay low with little swelling, grade three reaches the kidney with mild swelling, and grades four and five show gross dilatation with tortuosity and a severely dilated collecting system.",
+        "Many low grade cases settle spontaneously as the child grows, which is why watchful care with infection prevention suits them.",
+        "Reflux nephropathy means scarring from repeated infected backflow: raised blood pressure, protein in urine, and chronic kidney disease are its later markers, so surveillance continues years after the fevers stop.",
+        "High grade, persistent backflow, or infection breaking through preventive drugs earns endoscopic injection or open reimplantation of the ureter.",
+        "Bladder and bowel dysfunction perpetuates backflow and infection, and overlooking it is how a correctable cause is missed."
+      ],
+      "pitfalls": [
+        "Ordering the grading X-ray during active infection rather than after recovery, when swelling misleads.",
+        "Calling every recurrent infection backflow without the X-ray that proves and grades it.",
+        "Discharging a scarred kidney from follow up because the fevers stopped, and missing later hypertension."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What test confirms and grades backflow of urine?",
+          "a": "The bladder X-ray taken during urination, grading severity one to five by ureter and collecting system dilatation.",
+          "accept": [
+            "during urination",
+            "one to five",
+            "dilatation"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Contrast primary with secondary backflow.",
+          "a": "Primary backflow comes from a short valve tunnel present from birth, while secondary backflow comes from high bladder pressure through blockage or a poorly coordinating bladder.",
+          "accept": [
+            "short valve tunnel",
+            "high bladder pressure",
+            "blockage"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What is reflux nephropathy, and what three markers follow it?",
+          "a": "Scarring of the kidney from repeated infected backflow, followed by raised blood pressure, protein in urine, and chronic kidney disease.",
+          "accept": [
+            "scarring",
+            "raised blood pressure",
+            "protein in urine"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "grades",
+          "text": "States the five grades with what each shows"
+        },
+        {
+          "id": "course",
+          "text": "Links low grade to spontaneous resolution and high grade to intervention"
+        },
+        {
+          "id": "surveillance",
+          "text": "Names blood pressure, urine protein and renal function follow up"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "vesicoureteric_reflux: clinicalPearls"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "vesicoureteric_reflux: pathophysiology"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Vesicoureteral reflux: grading and prognosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.uti.child.summary": {
+      "id": "skill.uti.child.summary",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "The clinical summary",
+      "oneLine": "Age, tempo, tract level and backflow risk in one passage",
+      "why": "The summary of a urinary case must carry the tract level, because the tract level is the plan: bladder alone means treatment with advice, while the kidney means cultures, imaging and follow up. A summary without it describes the child but leaves the listener unable to act.",
+      "body": "State the child with the risks that matter, the tempo, the fever with urinary evidence in abstract terms, the tract level, and the backflow risk with imaging status, in that order.",
+      "keyPoints": [
+        "Name the child with the relevant risks: age in years and months, sex, past confirmed infections, constipation and holding, antenatal kidney swelling, and family backflow.",
+        "State the tempo: acute, over days. This alone separates infection from weeks of tuberculosis or months of a chronic kidney complaint.",
+        "State the fever with urinary evidence in abstract terms: high persistent fever with foul frequent urine and loin tenderness, or comfortable burning with suprapubic ache and clear systemic state.",
+        "State the tract level plainly with its evidence: febrile infection of the upper tract, or infection of the bladder alone.",
+        "Add the backflow risk and imaging status: recurrent febrile spells with grading X-ray booked, or grade three backflow already staged with a scar scan awaited.",
+        "A worked example: A 4-year-old girl with one cultured infection four months back and chronic constipation presents with three days of high fever with burning, frequency and foul urine. She is toxic with left loin tenderness and a clean catch grows a single organism. This is febrile infection of the upper tract with high backflow risk, for admission workup with ultrasound and a graded bladder X-ray after recovery."
+      ],
+      "pitfalls": [
+        "Omitting the tract level, which is the classification itself.",
+        "Describing the tempo as chronic out of habit when the whole illness is days old.",
+        "Leaving out relevant negatives, such as no vomiting and no prior imaging, which are doing real work."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What element belongs in a urinary summary that a cold summary never needs?",
+          "a": "The tract level with its fever evidence, because it decides imaging and follow up.",
+          "accept": [
+            "tract level",
+            "fever",
+            "imaging"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does the backflow risk belong in the summary?",
+          "a": "Recurrent febrile spells with risk flags decide the grading X-ray and preventive drugs, so the listener must hear them.",
+          "accept": [
+            "recurrent",
+            "grading",
+            "preventive"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "risks",
+          "text": "States the child with relevant risk factors"
+        },
+        {
+          "id": "tract",
+          "text": "States the tract level with its evidence"
+        },
+        {
+          "id": "imaging",
+          "text": "States backflow risk with imaging done or planned"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "febrile_uti_children: clinicalPearls"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "Clinical reasoning"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.uti.child.differential": {
+      "id": "skill.uti.child.differential",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Differential diagnosis",
+      "oneLine": "True infection, false alarms, and fevers that only look urinary",
+      "why": "Most burning with foul urine is infection, but the exceptions each demand a different response: a dirty specimen needs recollection not drugs, a blocked valve needs an operation not reassurance, and appendicitis needs a surgeon tonight. The differential protects those children.",
+      "body": "For fever with urinary complaints in a child, work through true upper infection with backflow, blocked or poorly emptying bladders, false alarms from specimens and local irritation, and fever mimics outside the urinary tract.",
+      "keyPoints": [
+        "Backflow with febrile infection: recurrent high fever with urinary complaints, a cultured organism, and grading that shows backflow. The pattern across spells matters more than one episode.",
+        "Infection without backflow: first febrile spell with a normal ultrasound and no risk flags. Commoner than backflow and managed without a grading X-ray.",
+        "Blocked outlet: a boy with a poor stream since birth, dribbling, palpable bladder and recurrent fever suggests a posterior urethral valve, while episodic loin pain with blood in urine suggests a stone or junction narrowing.",
+        "Poorly emptying bladder: holding, infrequent voiding, interrupted stream and chronic constipation point to bladder and bowel dysfunction, which perpetuates infection and must be treated alongside.",
+        "False alarms: bacteria without symptoms mean colonisation, not infection, and need no drugs. Bacteria from a dirty bag or mixed growth mean contamination, and need a fresh clean specimen, not treatment.",
+        "Local irritation: vulval itching with discharge in a girl, threadworms at night, harsh soaps, and a ballooning foreskin with redness in a boy can all mimic burning without infection.",
+        "Fever mimics: appendicitis with shifting pain and guarding, gastroenteritis with predominant loose motions, and pneumonia with cough and fast breathing can each present with fever and abdominal pain that looks urinary until tested."
+      ],
+      "pitfalls": [
+        "Treating mixed growth from a bag specimen as infection instead of recollecting properly.",
+        "Missing a posterior valve in a boy because the stream was never watched.",
+        "Treating repeated spells with more drugs instead of looking for backflow, blockage or dysfunction."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name four mimics or alternatives to simple bladder infection and one feature favouring each.",
+          "a": "Backflow with recurrent febrile spells, a posterior valve with a poor stream since birth, contamination with mixed growth from a bag, and appendicitis with shifting pain and guarding.",
+          "accept": [
+            "backflow",
+            "posterior valve",
+            "contamination",
+            "appendicitis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A girl keeps growing mixed organisms without symptoms. What do you do?",
+          "a": "Recollect a clean specimen and withhold drugs: bacteria without symptoms mean colonisation or contamination, not infection.",
+          "accept": [
+            "recollect",
+            "without symptoms",
+            "not infection"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Offers a differential spanning backflow, blockage, false alarms and mimics"
+        },
+        {
+          "id": "specimen",
+          "text": "Separates true infection from colonisation and contamination"
+        },
+        {
+          "id": "valve",
+          "text": "Considers outlet blockage in a boy with a poor stream"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "vesicoureteric_reflux: additionalDifferentials"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "febrile_uti_children: additionalDifferentials"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Urinary tract infection in children: differential diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.uti.child.workup": {
+      "id": "skill.ix.uti.child.workup",
+      "kind": "investigation",
+      "system": "paediatrics",
+      "title": "Proving the infection in urine",
+      "oneLine": "The right specimen first, then dip, microscopy and culture",
+      "why": "Every later decision rests on whether bacteria truly came from the bladder: a dirty specimen manufactures a disease that is not there, while a properly collected culture proves one that must be treated. Knowing which specimen to trust stops both errors.",
+      "body": "Group investigations by what they answer: prove infection in urine, grade how ill the child is, and look beyond the bladder only where the rules say so.",
+      "keyPoints": [
+        "COLLECT RIGHT: a clean catch midstream where the child is trained, catheterisation where not, and suprapubic aspiration in a small infant. A bag specimen contaminates so often that growth from it cannot prove infection.",
+        "DIP AND MICROSCOPY: leucocyte esterase with nitrites on dipstick supports infection at the bedside, and microscopy showing pus cells confirms inflammation. Neither alone proves infection without culture.",
+        "CULTURE: growth of a single organism in significant counts from a properly collected specimen is the diagnosis. Mixed growth means contamination and needs a fresh specimen, not drugs.",
+        "GRADE NOW: full blood counts with a neutrophil rise supporting a bacterial process, C reactive protein where available, and blood culture before the first drug dose in a toxic child, though drawing it must never delay that dose.",
+        "KIDNEY BASELINE: blood urea with creatinine and a fresh blood pressure reading in recurrent or upper tract disease, since scarring shows here first.",
+        "The single most important principle: in a toxic febrile child, start treatment after collecting urine. No laboratory queue is worth delaying that for."
+      ],
+      "pitfalls": [
+        "Treating a bag specimen growth as infection without a confirmatory clean collection.",
+        "Delaying the first drug dose for culture results in a child who looks toxic.",
+        "Calling mixed growth an infection with two organisms instead of recognising contamination."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which specimen proves infection, and which cannot?",
+          "a": "A clean catch, catheter or suprapubic specimen proves it, while a bag specimen contaminates too often to prove infection.",
+          "accept": [
+            "clean catch",
+            "catheter",
+            "bag"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What does mixed growth on culture mean?",
+          "a": "Contamination during collection, needing a fresh properly collected specimen rather than drugs.",
+          "accept": [
+            "contamination",
+            "fresh",
+            "specimen"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A toxic febrile child arrives and urine is not yet collected. What comes first?",
+          "a": "Collect urine at once and give the first drug dose without waiting for any result.",
+          "accept": [
+            "collect urine",
+            "first",
+            "without waiting"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "febrile_uti_children: additionalInvestigations"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "vesicoureteric_reflux: additionalInvestigations"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Urinary tract infection in children: diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.uti.child.imaging": {
+      "id": "skill.uti.child.imaging",
+      "kind": "investigation",
+      "system": "paediatrics",
+      "title": "Imaging after urinary infection: ultrasound, grading X-ray and scar scan",
+      "oneLine": "Sound waves first, grading X-ray for the selected few, scar scan for the scarred",
+      "why": "Imaging every first infection wastes machines and frightens families, while imaging none misses the backflow that scars. The three scans each answer one question, and knowing which child earns which is the whole skill.",
+      "body": "Order imaging by question: ultrasound looks at shape, the bladder X-ray during urination proves and grades backflow, and the DMSA scan finds scars and acute kidney infection.",
+      "keyPoints": [
+        "ULTRASOUND OF KIDNEY AND BLADDER: first scan after an atypical or recurrent febrile infection. It shows swelling of the collecting system, kidney size and growth, bladder wall thickness and urine left behind, without radiation.",
+        "GRADING X-RAY DURING URINATION: the standard test to confirm and grade backflow one to five. Reserved for recurrent febrile infection, abnormal ultrasound, or high risk background, and done after recovery, not during the fever.",
+        "DMSA SCINTIGRAPHY: detects scars of old infection and the patchy uptake of acute kidney infection. It answers whether the kidney is already damaged, which decides years of follow up.",
+        "IMAGE THE SELECTED CHILD: atypical organisms, poor response, a palpable kidney or bladder, raised pressure, or impaired renal function each earn imaging after a first spell. A straightforward first bladder infection with a normal story needs none.",
+        "VOIDING DIARY AND FLOW STUDY: in older children with holding, leaking or interrupted streams, a diary of times with a flow trace exposes the dysfunction that drugs alone never fix.",
+        "The single most important principle: treat the fever now and image later. No scan result is worth delaying the first drug dose for."
+      ],
+      "pitfalls": [
+        "Scanning every first bladder infection and alarming the family over harmless findings.",
+        "Skipping the ultrasound after a recurrent febrile spell because the child looks well between fevers.",
+        "Grading backflow during active infection, when swelling exaggerates the grade."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What does each of the three scans answer?",
+          "a": "Ultrasound shows shape and swelling, the bladder X-ray during urination proves and grades backflow, and DMSA finds scars and acute kidney infection.",
+          "accept": [
+            "shape",
+            "grades backflow",
+            "scars"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which child earns a grading X-ray after a first febrile infection?",
+          "a": "One with an abnormal ultrasound, an atypical organism, poor response, a palpable kidney or bladder, raised pressure, or impaired renal function.",
+          "accept": [
+            "abnormal ultrasound",
+            "raised pressure",
+            "renal function"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "When is the grading X-ray done, and why not sooner?",
+          "a": "After recovery, because active infection swells the tract and exaggerates the grade.",
+          "accept": [
+            "after recovery",
+            "swells",
+            "grade"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "vesicoureteric_reflux: additionalInvestigations"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "febrile_uti_children: additionalInvestigations"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Urinary tract infection in children: imaging"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.uti.child.diagnosis": {
+      "id": "skill.uti.child.diagnosis",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Diagnosis and severity: the urinary statement",
+      "oneLine": "Name the tract level, the grade, and what threatens the kidney",
+      "why": "A diagnosis of urinary infection alone does not say whether the child goes home with syrup or to a ward with a drip. The tract level with red flags is the severity score of this disease, and writing it as part of the diagnosis forces urgency into every statement.",
+      "body": "A complete diagnostic statement names the tract level with its evidence, the backflow grade where staged, and any red flag or complication alongside.",
+      "keyPoints": [
+        "Febrile infection of the upper tract means fever with urinary evidence and a grown organism: high persistent temperature with loin tenderness or a toxic look in a young child.",
+        "Infection of the bladder alone means burning with frequency and suprapubic ache in a comfortable, afebrile child with pus cells and a grown organism.",
+        "The backflow grade follows where staged: grade one to two low, grade three reaching the kidney, grades four and five grossly dilated. Unstaged risk reads as high backflow risk with grading awaited.",
+        "Red flags that escalate within any category: toxic look with poor perfusion, vomiting that prevents oral drugs, failure to improve within two days of correct drugs, a palpable kidney or bladder, and new raised pressure or swelling.",
+        "A blocked infected system with fever risks blood poisoning and needs urgent drainage with drugs: this is the one emergency of the pathway and must never wait for routine scans.",
+        "Most children with a promptly treated first febrile infection recover fully. Death and lasting damage cluster where treatment is delayed, spells recur unstaged, or scarring goes unfollowed."
+      ],
+      "pitfalls": [
+        "Stating infection without the tract level, leaving the reader unable to judge urgency.",
+        "Calling colonisation without symptoms an infection that needs drugs.",
+        "Missing the blocked infected emergency by booking routine scans for a toxic child."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "State the two tract levels and the finding that defines each.",
+          "a": "Upper tract by fever with urinary evidence and loin tenderness, and bladder alone by burning with frequency in a comfortable afebrile child.",
+          "accept": [
+            "fever",
+            "loin tenderness",
+            "afebrile"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Fever with a blocked system is diagnosed. What is the urgency?",
+          "a": "Immediate: a blocked infected system risks blood poisoning and needs urgent drainage with drugs, not routine scans.",
+          "accept": [
+            "immediate",
+            "blood poisoning",
+            "drainage"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What makes lasting damage from urinary infection more likely?",
+          "a": "Delayed treatment, recurrent febrile spells left unstaged, and scarring left unfollowed.",
+          "accept": [
+            "delayed",
+            "recurrent",
+            "unfollowed"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "tract",
+          "text": "States the tract level with its defining evidence"
+        },
+        {
+          "id": "grade",
+          "text": "States the backflow grade or the staged risk"
+        },
+        {
+          "id": "redflags",
+          "text": "Names the red flags that escalate urgency"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "vesicoureteric_reflux: redFlags"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "febrile_uti_children: redFlags"
+        },
+        {
+          "source": "Indian Academy of Pediatrics",
+          "locator": "Urinary tract infection guidelines: diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.uti.child": {
+      "id": "skill.tx.uti.child",
+      "kind": "treatment",
+      "system": "paediatrics",
+      "title": "Managing urinary infection in children",
+      "oneLine": "Drugs for the infection now, bowel and bladder care next, prevention for the selected few",
+      "why": "The drug cures this spell but only prevention stops the next one, and the next one is what scars. Getting both right, drugs by severity with culture guidance and prevention by grade, is the whole of management.",
+      "body": "Treat the infection promptly by severity with culture guidance, correct the bowel and bladder habits that feed recurrence, prevent selectively by grade, and watch scarred kidneys for years.",
+      "keyPoints": [
+        "Start prompt empirical drugs active against bowel organisms, guided by local resistance, and narrow once culture sensitivities return. The specific agent and route follow your current national or institutional guideline, not memory.",
+        "Give parenteral drugs to infants and children who look toxic, vomit, or cannot keep oral drugs down, switching to oral once improving. Ensure fluids and give paracetamol for fever and discomfort.",
+        "Review within two days. Failure to improve means reconsider the organism, resistance, a blocked system, or a wrong diagnosis, not reflex repetition of the same course.",
+        "Correct bladder and bowel function first and always: timed voiding, enough fluids, fibre with a bowel routine for constipation. This reduces infection and helps low grade backflow settle with growth.",
+        "Reserve daily preventive drugs for infants and children with high grade backflow or recurrent febrile spells, with the choice and duration set by the guideline and reviewed yearly, not continued by habit.",
+        "Refer to paediatric nephrology or urology for significant backflow, recurrent spells, established scars, raised pressure, protein in urine, or impaired renal function. High grade persistent backflow with breakthrough spells earns endoscopic injection or open reimplantation.",
+        "In the Indian setting: treat at the primary centre where the child is stable, refer early to the district hospital where toxic, obstructed or recurrent, use generic formulations from the hospital supply, and counsel the mother with written red flags and a fixed review date.",
+        "Before the child leaves care: safety net advice to return urgently with fever or vomiting, blood pressure with urine protein and renal function on follow up where scarring is confirmed, and toilet with constipation counsel for the whole household."
+      ],
+      "pitfalls": [
+        "Choosing drugs without checking local resistance or waiting for culture where the child is stable enough to narrow.",
+        "Continuing preventive drugs for years without reviewing grade and growth.",
+        "Operating on low grade backflow that would have settled, or delaying referral for high grade disease with breakthrough spells."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "When do you narrow empirical drugs, and to what?",
+          "a": "Once culture sensitivities return, narrowing to the organism grown under the current guideline.",
+          "accept": [
+            "culture",
+            "narrowing",
+            "guideline"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Who earns parenteral drugs rather than oral?",
+          "a": "Infants and children who look toxic, vomit, or cannot keep oral drugs down, switching to oral once improving.",
+          "accept": [
+            "toxic",
+            "vomit",
+            "oral"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Who earns daily preventive drugs, and what must be reviewed?",
+          "a": "Children with high grade backflow or recurrent febrile spells, with choice and duration set by the guideline and reviewed yearly.",
+          "accept": [
+            "high grade",
+            "recurrent",
+            "reviewed yearly"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "febrile_uti_children: management"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "vesicoureteric_reflux: management"
+        },
+        {
+          "source": "Indian Academy of Pediatrics",
+          "locator": "Urinary tract infection guidelines: treatment and prophylaxis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of drug class and principle. Doses quoted anywhere here come from the cited national or guideline document so a student can check them; the treating team's own protocol and the current formulary decide what is given. CliniX does not prescribe."
+    }
+  },
+  "cases": [
+    {
+      "id": "case.uti.child.diya",
+      "initialVitals": {
+        "hr": 122,
+        "bpSystolic": 94,
+        "bpDiastolic": 60,
+        "rr": 24,
+        "spo2": 98,
+        "temp": 38.9,
+        "gcs": 15
+      },
+      "title": "A 4-year-old girl with fever, burning urine and a second spell in four months",
+      "opening": "Sunita brings her 4-year-old daughter Diya to the outpatient clinic. The child is flushed and clings to her mother, crying that it burns when she passes urine. Sunita says, Doctor, the fever is back again with the same burning. Greet them and take a history.",
+      "fallback": "I did not understand that, doctor. Please ask me again in simple words.",
+      "patient": {
+        "name": "Diya Patil",
+        "age": 4,
+        "sex": "female",
+        "occupation": "Preschool child, attends the anganwadi near home",
+        "residence": "Small town, lives with parents and a younger brother in two rooms"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings your child today",
+            "what is wrong with your child",
+            "tell me about your childs illness",
+            "why have you brought your child today"
+          ],
+          "reply": "Doctor, since three days she has high fever, and since two days she cries and burns while passing urine. The urine smells very bad. This same thing happened four months back also.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "onset_tempo": {
+          "cues": [
+            "when did this illness begin",
+            "how many days has she been ill",
+            "did the fever come before the burning",
+            "how has each day been different"
+          ],
+          "reply": "Three days back fever came in the evening with shivering. The burning started the next day, and since yesterday she passes urine again and again in small amounts.",
+          "key": true
+        },
+        "fever_pattern": {
+          "cues": [
+            "how high does the fever rise",
+            "does the fever settle between spikes",
+            "has she had shivering with the fever",
+            "what do you give for the fever"
+          ],
+          "reply": "It stays high through the day and comes down only a little after paracetamol syrup. On the first night she shivered badly under the blanket.",
+          "key": true
+        },
+        "burning_urination": {
+          "cues": [
+            "does she cry while passing urine",
+            "burning sensation during urination",
+            "pain while passing urine",
+            "complaint of burning micturition"
+          ],
+          "reply": "Yes, she screams and holds herself each time, and the stream stops and starts. She is afraid to go to the toilet now.",
+          "key": true,
+          "skillId": "skill.hx.urinary.illness_story"
+        },
+        "urinary_frequency": {
+          "cues": [
+            "how often does she pass urine now",
+            "urgency to pass urine immediately",
+            "leaking before reaching the toilet",
+            "bedwetting after being dry"
+          ],
+          "reply": "She runs to pass urine every half hour but only a little comes. Twice she leaked before reaching, and last night she wet the bed after being dry for a year.",
+          "key": true,
+          "skillId": "skill.hx.urinary.illness_story"
+        },
+        "urine_appearance": {
+          "cues": [
+            "colour and smell of the urine",
+            "cloudy or foul smelling urine",
+            "blood in the urine",
+            "sediment or particles in urine"
+          ],
+          "reply": "The urine looks cloudy and smells very foul, but I have not seen red colour or blood in it.",
+          "key": true
+        },
+        "belly_side_pain": {
+          "cues": [
+            "pain low in the belly",
+            "pain in the side or back",
+            "tenderness over the loin",
+            "where does she point the pain"
+          ],
+          "reply": "She holds her lower belly and cries, and yesterday she pointed to her left side at the back when I touched there.",
+          "key": true
+        },
+        "vomiting_appetite": {
+          "cues": [
+            "vomiting since the fever began",
+            "refusal to eat or drink",
+            "how is her appetite during fever",
+            "loose motions with this illness"
+          ],
+          "reply": "She vomited twice yesterday and eats almost nothing, but she still sips water when I insist. Her motions are normal, not loose.",
+          "key": true
+        },
+        "bowel_habits": {
+          "cues": [
+            "how often does she pass stools",
+            "hard stools needing straining",
+            "soiling of underwear between stools",
+            "what do you give for constipation"
+          ],
+          "reply": "She passes hard painful stools only every three or four days, and sometimes soils her underwear in between. We give her nothing regular for it.",
+          "key": true,
+          "skillId": "skill.hx.urinary.risk_factors"
+        },
+        "voiding_habits_school": {
+          "cues": [
+            "holding urine through school hours",
+            "how much water she drinks daily",
+            "toilet facilities at the anganwadi",
+            "rushing to the toilet at the last moment"
+          ],
+          "reply": "At the anganwadi she never uses the dirty toilet and holds the whole morning. She drinks very little water through the day.",
+          "key": true,
+          "skillId": "skill.hx.urinary.risk_factors"
+        },
+        "prior_urinary_spell": {
+          "cues": [
+            "similar fever with burning before",
+            "urine test during the last spell",
+            "organism grown in the last culture",
+            "how the last spell was treated"
+          ],
+          "reply": "Four months back she had the same fever with burning. The doctor tested the urine and said germs had grown, and syrup for seven days cured her. No scan was done then.",
+          "key": true
+        },
+        "treatment_response": {
+          "cues": [
+            "medicines given for this spell",
+            "response to the current medicines",
+            "any antibiotic syrup started already",
+            "paracetamol syrup for the fever"
+          ],
+          "reply": "Only paracetamol syrup since yesterday, nothing else. The fever still comes back every few hours.",
+          "key": true
+        },
+        "birth_antenatal_background": {
+          "cues": [
+            "swelling of the kidney on pregnancy scans",
+            "fever without cause in infancy",
+            "birth weight and delivery details",
+            "urinary complaints in the first year"
+          ],
+          "reply": "She was born normally weighing two and a half kilos. No scan in pregnancy mentioned kidney swelling. As a baby she once had fever without cause that settled on its own.",
+          "key": true
+        },
+        "feeding_growth_immunisation": {
+          "cues": [
+            "breastfeeding and current diet pattern",
+            "growth faltering or poor weight gain",
+            "immunisation card and missed doses",
+            "toilet training stage reached"
+          ],
+          "reply": "She eats dal roti with us and drinks milk twice a day. Her weight gain is steady and her immunisation card is complete. She has been dry day and night for a year.",
+          "key": true
+        },
+        "drug_allergy_history": {
+          "cues": [
+            "allergy to any medicine or syrup",
+            "regular medicines for any illness",
+            "rash after any drug in the past",
+            "preventive medicines given daily"
+          ],
+          "reply": "No allergy to any medicine, and she takes no regular medicines. No daily preventive syrup was ever advised.",
+          "key": true
+        },
+        "family_kidney_history": {
+          "cues": [
+            "kidney infections in the family members",
+            "backflow of urine in any relative",
+            "kidney failure in young relatives",
+            "high blood pressure from a young age"
+          ],
+          "reply": "My younger sister had repeated kidney infections as a child and takes blood pressure tablets since young age. Nobody else has kidney trouble.",
+          "key": true
+        },
+        "home_sanitation": {
+          "cues": [
+            "source of water at home",
+            "toilet facilities available at home",
+            "perineal hygiene practices followed",
+            "itching or worms troubling the child"
+          ],
+          "reply": "We drink tap water stored in a covered vessel, and we have a toilet at home. I wash her with plain water. She scratches at night sometimes but I have seen no worms.",
+          "key": true
+        }
+      },
+      "exam": {
+        "skill.gen.paed.appearance": {
+          "finding": "Flushed and fretful, clinging to the mother, but consolable and alert. Breathing comfortably with no distress, no cyanosis, drinking sips of water.",
+          "abnormal": true
+        },
+        "skill.gen.paed.vitals": {
+          "finding": "Temperature 38.9 C. Pulse 122 regular. Respiratory rate 24 per minute. Blood pressure 94/60 in the right arm with a child cuff. SpO2 98 percent on air.",
+          "abnormal": true
+        },
+        "skill.gen.paed.pallor": {
+          "finding": "Mild pallor of the tongue and conjunctivae. No jaundice.",
+          "abnormal": true
+        },
+        "skill.gen.paed.edema": {
+          "finding": "No eyelid puffiness and no pitting of the feet.",
+          "abnormal": false
+        },
+        "skill.exam.paed.gi.inspection": {
+          "finding": "Abdomen flat with no distension, no visible loin swelling, no rash. Moves freely with breathing.",
+          "abnormal": false
+        },
+        "skill.exam.paed.gi.palpation_percussion": {
+          "finding": "Suprapubic tenderness present. Left loin tender with a thump at the renal angle. Loaded colon felt on the left side. No palpable kidney or bladder, no guarding or rigidity.",
+          "abnormal": true
+        },
+        "skill.exam.paed.cvs.pulses_bp": {
+          "finding": "All pulses well felt. Blood pressure 94/60, appropriate for age, with no difference between arms.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "urine_routine",
+        "urine_culture",
+        "ultrasound_kidney",
+        "grading_xray"
+      ],
+      "investigations": {
+        "urine_routine": {
+          "label": "Urine routine and microscopy from a clean catch",
+          "indicated": true,
+          "result": "Cloudy urine. Pus cells plenty per high power field. Protein nil. Red cells 2 to 3 per high power field. Nitrites positive.",
+          "note": "Pus cells with a positive nitrite test from a clean catch strongly support infection, but the culture still decides."
+        },
+        "urine_culture": {
+          "label": "Urine culture with sensitivities",
+          "indicated": true,
+          "result": "Single organism grown in significant counts, identified as Escherichia coli, sensitive to the drugs in the hospital guideline. No mixed growth.",
+          "note": "A single organism from a properly collected specimen is the diagnosis itself, and the sensitivities narrow the drugs."
+        },
+        "blood_counts": {
+          "label": "Full blood count",
+          "indicated": true,
+          "result": "Haemoglobin 10.8 g/dL. Total leucocyte count 16,200 per mm3 with 78 percent neutrophils. Platelets adequate.",
+          "note": "A neutrophil leucocytosis fits an acute bacterial upper tract process and helps grade how ill she is."
+        },
+        "blood_culture": {
+          "label": "Blood culture",
+          "indicated": true,
+          "result": "Drawn before the first drug dose. No growth at 48 hours.",
+          "note": "Worth sending in a febrile child this toxic, but sending it must never delay the first dose."
+        },
+        "kidney_function": {
+          "label": "Blood urea and creatinine",
+          "indicated": true,
+          "result": "Urea 28 mg/dL. Creatinine 0.5 mg/dL. Both within the normal range for age.",
+          "note": "Normal now, but this is the baseline every recurrent case needs, since scarring shows here first."
+        },
+        "ultrasound_kidney": {
+          "label": "Ultrasound of kidney and bladder",
+          "indicated": true,
+          "result": "Left kidney mildly enlarged with mild dilatation of the collecting system. Bladder wall thickened with sludge. No stone seen.",
+          "note": "Abnormal after a second febrile spell, so this child has earned the grading X-ray after recovery."
+        },
+        "grading_xray": {
+          "label": "Bladder X-ray during urination after recovery",
+          "indicated": true,
+          "result": "Left sided backflow reaching the kidney with mild swelling of ureter and collecting system: grade three. Right side normal.",
+          "note": "Done after the fever settled, so swelling from active infection cannot exaggerate the grade. This stages her disease."
+        },
+        "scar_scan": {
+          "label": "DMSA scan of the kidneys",
+          "indicated": true,
+          "result": "Small area of reduced uptake at the left upper pole, consistent with a small scar. Right kidney normal. Differential function preserved.",
+          "note": "A scar already at four years is why prevention and years of pressure follow up start now."
+        },
+        "bag_culture": {
+          "label": "Bag specimen culture",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "Not indicated: a bag specimen contaminates so often that growth from it cannot prove infection, and would only confuse this already proven case."
+        },
+        "ct_abdomen": {
+          "label": "Contrast CT of the abdomen",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Not indicated: ultrasound with a grading X-ray answers every question here, and a CT would add radiation without changing the plan."
+        }
+      },
+      "differentialModel": {
+        "answer": "Febrile urinary infection of the upper tract with left grade three backflow. Consider infection without backflow, bladder and bowel dysfunction as the driver, asymptomatic bacteriuria already excluded by symptoms, a blocked outlet, and fever mimics such as appendicitis, gastroenteritis and pneumonia.",
+        "accept": [
+          "urinary tract infection",
+          "vesicoureteric reflux",
+          "appendicitis",
+          "gastroenteritis",
+          "pneumonia",
+          "acute pyelonephritis",
+          "posterior urethral valves",
+          "bladder and bowel dysfunction",
+          "asymptomatic bacteriuria",
+          "cystitis"
+        ],
+        "minMatch": 3
+      },
+      "diagnosis": {
+        "answer": "Febrile urinary tract infection of the upper tract, acute pyelonephritis, with left grade three vesicoureteric reflux and a small renal scar.",
+        "accept": [
+          "urinary tract infection",
+          "acute pyelonephritis",
+          "pyelonephritis",
+          "vesicoureteric reflux",
+          "uti"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Prompt antibiotics narrowed on the urine culture with fluids and paracetamol, review within two days, bowel routine with timed voiding for the constipation and holding, ultrasound with a grading X-ray after recovery, daily preventive drugs for the graded backflow, referral to paediatric nephrology and urology, and years of blood pressure with urine protein follow up with written red flags.",
+        "accept": [
+          "antibiotic",
+          "culture",
+          "review",
+          "ultrasound",
+          "grading",
+          "preventive",
+          "bowel",
+          "referral",
+          "blood pressure",
+          "follow up"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The tempo alone should move you toward an acute infective process before a single test is run: three days of fever with two days of burning, not weeks of anything else.",
+        "Fever is the hinge: burning with frequency in a comfortable child stays at the bladder, while high persistent fever with loin tenderness reaches the kidney.",
+        "New bedwetting after a year of being dry is a urinary symptom, not naughtiness, and must be asked after directly.",
+        "A second febrile spell with a cultured organism earns imaging: ultrasound first, then the grading X-ray after recovery, then the scar scan.",
+        "Constipation with holding through school hours drives this recurrence, and the bowel routine with timed voiding is treatment, not advice.",
+        "Family backflow with young hypertension raises this child's risk before any scan, which is why the pedigree belongs in every urinary case.",
+        "A small scar at four years means years of blood pressure with urine protein follow up, long after the fevers stop."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

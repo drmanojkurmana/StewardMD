@@ -1,0 +1,1256 @@
+{
+  "id": "acute-glomerulonephritis",
+  "name": "Acute glomerulonephritis",
+  "fullName": "Acute glomerulonephritis in children (post-streptococcal disease)",
+  "system": "paediatrics",
+  "kbRef": "acute_glomerulonephritis_child",
+  "oneLine": "Dark urine, puffy eyes and raised pressure weeks after a sore throat, and knowing which child is not routine",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What a nephritic illness is, and why the streptococcus is already gone",
+      "skills": [
+        "skill.agn.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the child",
+      "blurb": "Befriend first, measure second",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.paed.rapport",
+        "skill.approach.paed.consent_assent",
+        "skill.approach.paed.positioning"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "School age and crowded rooms set the scene",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Expect a school-age child, often between 5 and 12 years, from a crowded household or a classroom where sore throats have been circulating. Record the exact interval since the throat or skin illness, because that number carries more diagnostic weight here than in most paediatric histories."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Dark urine, puffiness, scanty flow, and the fortnight before",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.paed.presenting_complaint",
+        "skill.hx.acute.nephritic_story"
+      ],
+      "emphasis": {
+        "skill.hx.paed.presenting_complaint": {
+          "expect": "Let the mother describe the urine and the swelling in her own words first: colour like tea or cola, puffiness worst on waking, urine strikingly less. Then reach back deliberately for the sore throat one to two weeks or skin sores three to six weeks before, which she will not volunteer on her own."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "Crowding, past episodes, every medicine, and the family kidney story",
+      "skills": [
+        "skill.hx.paed.socioeconomic",
+        "skill.hx.paed.family_pedigree",
+        "skill.hx.acute.nephritic_background"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Puffiness, pressure and weight before anything else",
+      "skills": [
+        "skill.gen.paed.appearance",
+        "skill.gen.paed.vitals",
+        "skill.gen.paed.edema",
+        "skill.exam.paed.weight"
+      ],
+      "emphasis": {
+        "skill.gen.paed.vitals": {
+          "expect": "Measure blood pressure with the correct cuff size for the arm and compare against the centile for age, sex and height. A reading that looks modest in adult terms can be severe hypertension in an 8-year-old, so never eyeball the numbers."
+        },
+        "skill.gen.paed.edema": {
+          "expect": "Expect soft pitting oedema over the eyelids and shins rather than gross anasarca. Note where it is worst and at what time of day, and weigh the child: recent weight gain quantifies the retained fluid."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Systemic examination",
+      "blurb": "Pulses and pressure, lungs for overload, belly for the rest",
+      "skills": [
+        "skill.exam.paed.cvs.pulses_bp",
+        "skill.exam.paed.resp.inspection",
+        "skill.exam.paed.resp.auscultation",
+        "skill.exam.paed.gi.palpation_percussion"
+      ],
+      "emphasis": {
+        "skill.exam.paed.cvs.pulses_bp": {
+          "expect": "Feel all pulses including femoral delay, listen for a murmur of carditis in a post-streptococcal child, and repeat the blood pressure yourself. Tachycardia beyond the fever and a gallop would warn of cardiac strain from the overloaded circulation."
+        },
+        "skill.exam.paed.resp.auscultation": {
+          "expect": "Listen at both bases for fine crackles of early pulmonary congestion. In a breathless nephritic child this is fluid overload until proved otherwise, not a chest infection, so do not reach for antibiotics for the crackles."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the nephritic picture together",
+      "blurb": "Two faults explain everything: leaking filters and held-back salt and water",
+      "skills": [
+        "skill.agn.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Triad, tempo, interval, pressure and alarms in one breath",
+      "skills": [
+        "skill.agn.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Same dark urine, different disease, and complement as referee",
+      "skills": [
+        "skill.agn.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Urine now, complement twice, antibodies once, kidneys throughout",
+      "skills": [
+        "skill.ix.agn.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and follow-up",
+      "blurb": "Name the syndrome today, prove the cause over weeks",
+      "skills": [
+        "skill.agn.diagnosis",
+        "skill.annex.agn.followup"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Support the many, escalate the few, and never delay the pressure control",
+      "skills": [
+        "skill.tx.agn"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this child to your consultant",
+      "skills": [
+        "skill.present.case",
+        "skill.present.acute.glomerulonephritis"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.agn.exam",
+        "title": "Examine the child with puffy eyes and dark urine",
+        "task": "This 8-year-old boy has passed cola-coloured urine for four days and wakes with puffy eyelids. Examine him for oedema, measure his vitals including blood pressure, and present your findings.",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.paed.rapport",
+          "skill.approach.paed.consent_assent",
+          "skill.gen.paed.appearance",
+          "skill.gen.paed.vitals",
+          "skill.gen.paed.edema",
+          "skill.exam.paed.weight",
+          "skill.exam.paed.cvs.pulses_bp"
+        ],
+        "examinerQuestions": [
+          "His blood pressure is 126 over 82. Is this normal for an 8-year-old, and how did you decide?",
+          "You found eyelid and shin oedema with basal crackles. What single mechanism links all three?",
+          "Which one finding on your examination would make you admit him today rather than review him next week?"
+        ]
+      },
+      {
+        "id": "osce.agn.history",
+        "title": "Take a history and counsel the mother",
+        "task": "This mother says her 8-year-old passes dark urine and has puffy eyes. Take a focused history in six minutes, state your working diagnosis, and explain the immediate plan to her.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.hx.chief_complaints",
+          "skill.hx.paed.presenting_complaint",
+          "skill.hx.acute.nephritic_story",
+          "skill.hx.acute.nephritic_background"
+        ],
+        "examinerQuestions": [
+          "What interval between the sore throat and the dark urine supports your diagnosis, and what interval would argue against it?",
+          "Which three symptoms must you ask about even when the child looks well, and why?",
+          "What two tests will you book today, and which single test must be repeated at two months?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.agn.basics",
+      "skill.agn.signs",
+      "skill.agn.differential",
+      "skill.ix.agn.workup",
+      "skill.agn.diagnosis",
+      "skill.tx.agn",
+      "skill.annex.agn.followup"
+    ]
+  },
+  "_comment": "Paediatrics pathway for acute (post-streptococcal) glomerulonephritis. Shared history, background and presentation skills live in work/shared-acute-glomerulonephritis.json and are merged by the lead; this file owns only reasoning, investigation, treatment and annexure skills.",
+  "skills": {
+    "skill.agn.basics": {
+      "id": "skill.agn.basics",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "What acute glomerulonephritis in children is",
+      "oneLine": "An immune aftermath of a streptococcal throat or skin infection that swells the filters and holds back salt and water",
+      "why": "The child in front of you has no bacteria in the kidney, yet the kidneys are inflamed because of an infection that came weeks ago. Grasping that gap between cause and effect is what stops the student from hunting for an active urinary infection that is not there.",
+      "teach": [
+        {
+          "heading": "A nephritic illness, not a urinary infection",
+          "body": "Acute glomerulonephritis is sudden inflammation of the glomeruli, the tiny filters of the kidney. The inflamed filters leak red cells and some protein into the urine, and they filter less salt and water out, so the child passes dark, scanty urine and swells.\n\nThe classic picture is three findings together: haematuria that colours the urine like tea or cola, soft pitting oedema that starts around the eyes, and raised blood pressure. Fever at presentation is inconstant, and burning on passing urine is characteristically absent, which already separates it from infection of the urinary tract."
+        },
+        {
+          "heading": "Post-streptococcal disease leads in school-age children",
+          "body": "The commonest cause in children, typically between about 5 and 12 years of age, is the aftermath of group A streptococcal infection. Only certain nephritis-causing strains trigger it, so most sore throats never lead here.\n\nTiming is the fingerprint. The nephritis follows a throat infection by about one to two weeks, or a skin infection by about three to six weeks. By the time the urine darkens, the throat is usually better and the swab may already be negative, which is why the history matters more than the culture."
+        },
+        {
+          "heading": "Immune complexes do the damage, not live bacteria",
+          "body": "Products of the streptococcus lodge in the filter wall and summon antibodies, and the resulting immune complexes switch on the complement system, mainly by the alternative pathway. White cells flood the glomerulus, the filtering surface shrinks, and salt and water are retained.\n\nThis explains the whole picture at once: the retained salt and water raise the blood pressure and fill the lungs, while the inflamed filters leak blood and protein. Antibiotics later cannot undo complexes already laid down, which is why the established nephritis runs its course while treatment stays supportive."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What three findings make the classic nephritic picture, and what is characteristically absent?",
+          "a": "Tea- or cola-coloured haematuria with soft oedema and raised blood pressure, with burning on passing urine characteristically absent.",
+          "accept": [
+            "haematuria",
+            "oedema",
+            "blood pressure",
+            "burning"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A child develops dark urine ten days after a sore throat. Why does this timing point to post-streptococcal disease?",
+          "a": "Because post-streptococcal nephritis follows a throat infection by about one to two weeks, the time the immune complexes take to form and inflame the glomeruli.",
+          "accept": [
+            "one to two weeks",
+            "immune complexes",
+            "glomeruli"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does giving an antibiotic now not reverse the nephritis that has already started?",
+          "a": "Because the injury is immune-mediated: complexes already deposited in the filter wall keep complement switched on, and killing leftover streptococci does not remove them.",
+          "accept": [
+            "immune",
+            "complexes",
+            "complement",
+            "deposited"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "triad",
+          "text": "Names haematuria, oedema and hypertension with absent dysuria"
+        },
+        {
+          "id": "timing",
+          "text": "States the throat and skin intervals correctly"
+        },
+        {
+          "id": "mechanism",
+          "text": "Explains immune complex injury rather than active infection"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_glomerulonephritis_child: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Acute glomerulonephritis: definition and aetiology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.agn.signs": {
+      "id": "skill.agn.signs",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Reading the nephritic child at the bedside",
+      "oneLine": "Salt and water held back explain the puffiness and the pressure, and the hurt filters explain the urine",
+      "why": "Every sign in this disease flows from two faults: filters that leak and kidneys that hold back salt and water. Once that pair is fixed in mind, the periorbital puffiness, the rising pressure, the scanty dark urine and the warning signs of overload stop being a list and become one story.",
+      "teach": [
+        {
+          "heading": "Swelling that starts at the eyelids",
+          "body": "Oedema in nephritis is soft and pits on pressure. It gathers first where tissue is loosest, so the eyelids look puffy when the child wakes, and the ankles and shins fill as the day wears on. Rapid recent weight gain, when an old weight is available, measures the retained fluid better than the eye.\n\nUnlike the massive anasarca of nephrotic syndrome, nephritic oedema is usually modest. A child whose whole body is grossly swollen with very heavy proteinuria is pointing elsewhere, and that contrast belongs in the bedside reasoning."
+        },
+        {
+          "heading": "Blood pressure is the vital sign that matters most",
+          "body": "Hypertension here is volume-driven: salt and water held back expand the circulation. It may cause no symptoms at all, which is why the cuff must go on every child with dark urine or unexplained puffiness.\n\nHeadache with vomiting, sudden visual blurring, a fit, or new drowsiness warn of encephalopathy from severe hypertension. Fast breathing with crackles at the lung bases warns of fluid in the lungs. Both demand urgent care, not routine review."
+        },
+        {
+          "heading": "The urine tells the filter story",
+          "body": "The urine is smoky, brown or cola-coloured, and clearly less in amount than the child's usual. Red cell casts and distorted red cells under the microscope prove the blood comes from the glomerulus itself, not from lower down the tract.\n\nProtein is present but modest, far below nephrotic quantity. Oliguria that deepens toward almost no urine over a day, especially with rising breathlessness or potassium, marks acute kidney injury and changes the destination of the child to specialist care."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Where does nephritic oedema appear first, and how does it behave through the day?",
+          "a": "Around the eyelids on waking in the morning, then settling toward the ankles and shins as the day goes on, pitting on pressure.",
+          "accept": [
+            "eyelids",
+            "morning",
+            "ankles",
+            "pitting"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A nephritic child develops headache, vomiting and then a fit. What has happened and what must you do?",
+          "a": "Severe hypertension has caused hypertensive encephalopathy, which needs urgent blood pressure control and emergency paediatric care.",
+          "accept": [
+            "hypertension",
+            "encephalopathy",
+            "urgent",
+            "blood pressure"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How do you separate nephritic from nephrotic oedema at the bedside before any laboratory result?",
+          "a": "Nephritic oedema is modest with dark smoky urine and hypertension, while nephrotic oedema is gross and generalised with frothy urine, heavy protein loss and normal pressure.",
+          "accept": [
+            "modest",
+            "dark urine",
+            "hypertension",
+            "frothy"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "oedema",
+          "text": "Describes the eyelid-first pitting pattern"
+        },
+        {
+          "id": "pressure",
+          "text": "Puts blood pressure first and names its alarms"
+        },
+        {
+          "id": "urine",
+          "text": "Links smoky scanty urine to glomerular bleeding"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_glomerulonephritis_child: clinicalPearls and redFlags"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Acute glomerulonephritis: clinical features"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.agn.summary": {
+      "id": "skill.agn.summary",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Summarising the nephritic case",
+      "oneLine": "Age, triad, tempo, antecedent interval, pressure and alarms in one breath",
+      "why": "A nephritis summary has a fixed skeleton, and the examiner listens for each bone: who the child is, what the triad looks like, how many days it has lasted, what came weeks before, what the pressure reads, and whether any alarm has rung. Miss the pressure and the summary fails even if everything else is perfect.",
+      "teach": [
+        {
+          "heading": "The fixed skeleton of the summary",
+          "points": [
+            "Name the child with age and background: an 8-year-old schoolboy, previously well, from a crowded household.",
+            "State the syndrome in abstract terms: an acute nephritic illness with cola-coloured urine, morning eyelid puffiness and scanty urine over four days.",
+            "Give the antecedent interval: two weeks after a febrile sore throat, treated at a local clinic.",
+            "Report the pressure and output: blood pressure 126 over 82 with headache but no fits, passing about half the usual urine.",
+            "Close with the working diagnosis and the watch list: acute nephritic syndrome, likely post-streptococcal, with no pulmonary oedema and no anuria so far."
+          ]
+        },
+        {
+          "heading": "Negatives that do real work",
+          "body": "State what is absent, because each absence closes a door. No burning on passing urine argues against urinary infection. No massive generalised swelling with frothy urine argues against nephrotic syndrome. No rash with joint pains argues against lupus and vasculitis.\n\nEnd with what is awaited: urine microscopy, serum complement levels, streptococcal antibody titres, and renal function. A summary that names the pending tests shows the plan is already moving."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What six elements belong in every nephritis case summary?",
+          "a": "Age and background, the nephritic triad with tempo, the antecedent throat or skin interval, the blood pressure, the presence or absence of alarms, and the working diagnosis with awaited tests.",
+          "accept": [
+            "triad",
+            "antecedent",
+            "blood pressure",
+            "alarms",
+            "diagnosis"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "skeleton",
+          "text": "Covers age, triad, tempo, interval, pressure and alarms"
+        },
+        {
+          "id": "negatives",
+          "text": "States the relevant negatives that exclude mimics"
+        },
+        {
+          "id": "plan",
+          "text": "Names the working diagnosis and awaited tests"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_glomerulonephritis_child: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Acute glomerulonephritis: case presentation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.agn.differential": {
+      "id": "skill.agn.differential",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "What else looks like a nephritis",
+      "oneLine": "Same dark urine, different disease: the mimics that timing and complement sort out",
+      "why": "Several diseases paint the urine dark and puff the eyelids, and the treatment of each runs in a different direction. The differential is decided by three questions: how soon after the throat did it come, what the complement does over weeks, and what else travels with the urine change.",
+      "teach": [
+        {
+          "heading": "First separate nephritic from nephrotic",
+          "table": {
+            "cols": [
+              "Feature",
+              "Nephritic (this child)",
+              "Nephrotic"
+            ],
+            "rows": [
+              [
+                "Urine",
+                "Smoky or cola-coloured, scanty",
+                "Frothy, heavy volume loss of protein"
+              ],
+              [
+                "Swelling",
+                "Modest, eyelids first",
+                "Gross, generalised anasarca"
+              ],
+              [
+                "Pressure",
+                "Raised",
+                "Usually normal"
+              ],
+              [
+                "Blood in urine",
+                "Red cells and casts prominent",
+                "Mild or absent"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "The glomerular mimics and their fingerprints",
+          "points": [
+            "IgA nephropathy bleeds with the throat infection, within a day or two, not weeks after it, and it recurs with every sore throat while complement stays normal.",
+            "Membranoproliferative disease and lupus nephritis both keep complement low beyond eight weeks; lupus adds rash, joint pains, mouth ulcers or low blood counts.",
+            "Henoch Schonlein vasculitis pairs the urine change with a raised purple rash over the buttocks and legs, colicky belly pain and swollen joints.",
+            "Haemolytic uraemic syndrome follows bloody diarrhoea with shattered red cells, low platelets and sudden kidney shutdown rather than a sore throat.",
+            "Alport syndrome and thin basement membrane disease run in families with hearing loss, and their bleeding never fully clears.",
+            "Urinary infection burns on passing urine with fever and pus cells but no red cell casts, and rapidly progressive disease declares itself by creatinine that climbs week on week."
+          ]
+        },
+        {
+          "heading": "Complement is the referee",
+          "body": "Low C3 with a normal C4 that climbs back to normal within about six to eight weeks confirms the post-streptococcal pattern. Complement that stays low beyond eight weeks ends the post-streptococcal label and forces a new search, usually toward membranoproliferative disease or lupus.\n\nOrder the follow-up complement at the first visit itself, because without it the single most useful distinguishing test simply never happens."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Dark urine starts two days into a sore throat and recurs with each throat infection. Why is this not post-streptococcal nephritis?",
+          "a": "Because post-streptococcal disease comes one to two weeks after the throat has settled, while bleeding with the infection itself is the fingerprint of IgA nephropathy.",
+          "accept": [
+            "one to two weeks",
+            "with the infection",
+            "IgA nephropathy"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Complement is still low ten weeks after the dark urine began. What does this change?",
+          "a": "It ends the post-streptococcal diagnosis and forces evaluation for membranoproliferative glomerulonephritis or lupus nephritis, usually with renal biopsy.",
+          "accept": [
+            "membranoproliferative",
+            "lupus nephritis",
+            "biopsy"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "nephrotic",
+          "text": "Separates nephritic from nephrotic disease at the bedside"
+        },
+        {
+          "id": "mimics",
+          "text": "Names at least four glomerular mimics with fingerprints"
+        },
+        {
+          "id": "complement",
+          "text": "Uses serial complement as the deciding test"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "poststreptococcal_glomerulonephritis: additionalDifferentials"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Acute glomerulonephritis: differential diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.agn.workup": {
+      "id": "skill.ix.agn.workup",
+      "kind": "investigation",
+      "system": "paediatrics",
+      "title": "Proving the nephritis and finding its cause",
+      "oneLine": "Urine under the microscope, complement over the weeks, streptococcal proof, and the kidney numbers",
+      "why": "No single test names this disease. The urine proves the bleeding is glomerular, the complement curve proves the post-streptococcal pattern, the antibodies prove the streptococcus came, and the urea with creatinine grades how badly the kidneys are coping.",
+      "teach": [
+        {
+          "heading": "Urine first, and look at the sediment yourself",
+          "body": "Dipstick and routine testing show blood with mild to moderate protein, far below nephrotic quantity. Microscopy is the step that matters: red cell casts and distorted red cells prove glomerular bleeding, while pus cells with bacteria and no casts point down the tract instead.\n\nQuantify the protein over 24 hours or by spot protein to creatinine ratio. Nephrotic-range proteinuria in a nephritic-looking child is itself an atypical feature that pushes toward biopsy."
+        },
+        {
+          "heading": "Complement now and again at two months",
+          "body": "Serum C3 is characteristically low with C4 normal or mildly low, reflecting alternative pathway consumption. Draw it at presentation and repeat it to document the climb back to normal within about six to eight weeks.\n\nA C3 that stays low beyond eight weeks is the single most important fork in the road. It reopens membranoproliferative disease and lupus, and it is the commonest reason a child with presumed post-streptococcal disease ends up biopsied."
+        },
+        {
+          "heading": "Prove the streptococcus and grade the kidneys",
+          "points": [
+            "Antistreptolysin O titre and anti-DNase B rise after streptococcal infection; a rising pair is stronger proof than one value, and anti-DNase B stays up longer after skin infection.",
+            "Take a throat or skin swab when infection is still active, but a negative swab weeks later means nothing, because the throat has usually healed by the time nephritis appears.",
+            "Blood urea, creatinine and electrolytes grade filtration and catch dangerous potassium early; creatinine normally runs about 0.3 to 1 mg per dl in children, so even a modest climb deserves respect.",
+            "Full blood count, albumin and cholesterol separate a nephrotic overlap, and autoimmune markers with renal biopsy are reserved for atypical courses, persistent low complement, nephrotic-range protein, or deteriorating function."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What two urine microscopy findings prove the blood is glomerular?",
+          "a": "Red cell casts and distorted, dysmorphic red cells in the sediment.",
+          "accept": [
+            "red cell casts",
+            "dysmorphic",
+            "distorted"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "C3 is low at presentation. What single follow-up test matters most and when?",
+          "a": "Repeat serum C3 to document normalisation within about six to eight weeks; persistence beyond eight weeks forces a new diagnosis.",
+          "accept": [
+            "repeat C3",
+            "six to eight weeks",
+            "normalisation"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which children with a nephritic picture need a renal biopsy?",
+          "a": "Those with persistently low complement beyond eight weeks, nephrotic-range proteinuria, rapidly rising creatinine, or no recovery of renal function.",
+          "accept": [
+            "persistently low complement",
+            "nephrotic-range",
+            "rising creatinine",
+            "biopsy"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "urine",
+          "text": "Uses microscopy for casts and dysmorphic cells"
+        },
+        {
+          "id": "complement",
+          "text": "Plans serial complement with the eight-week rule"
+        },
+        {
+          "id": "biopsy",
+          "text": "States the biopsy indications correctly"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_glomerulonephritis_child: additionalInvestigations"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Acute glomerulonephritis: laboratory evaluation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.agn.diagnosis": {
+      "id": "skill.agn.diagnosis",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Naming the disease and grading its danger",
+      "oneLine": "Nephritic syndrome now, post-streptococcal when complement and antibodies agree, urgent when alarms ring",
+      "why": "The diagnosis is stated in two layers: the syndrome you can see today and the cause you prove over weeks. Grading the danger sits beside the name, because a child with encephalopathy and one with lone puffiness carry the same label but go to different wards.",
+      "teach": [
+        {
+          "heading": "The two-layer diagnostic statement",
+          "body": "Layer one is clinical and immediate: acute nephritic syndrome with cola-coloured urine, eyelid oedema, hypertension and scanty urine, with or without the alarms of encephalopathy, pulmonary oedema or anuria.\n\nLayer two is aetiological and takes weeks: likely post-streptococcal when a sore throat one to two weeks or skin sores three to six weeks before is followed by low C3 with rising streptococcal antibodies. Confirmation arrives when the complement normalises by about two months."
+        },
+        {
+          "heading": "Atypical means rethink, not wait",
+          "points": [
+            "No antecedent throat or skin illness, normal complement from the start, or nephrotic-range proteinuria all weaken the post-streptococcal claim.",
+            "Complement still low beyond eight weeks, creatinine climbing week on week, or no recovery of urine output each demand urgent nephrology review and usually biopsy.",
+            "A complete statement therefore reads: acute nephritic syndrome, likely post-streptococcal, without red flags, with complement and antibody results awaited and a repeat complement booked for two months."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What are the two layers of the diagnosis, and when is each made?",
+          "a": "The nephritic syndrome is diagnosed clinically at presentation, and the post-streptococcal cause is confirmed over weeks by low C3 with streptococcal antibodies and its normalisation by about two months.",
+          "accept": [
+            "nephritic syndrome",
+            "low C3",
+            "antibodies",
+            "two months"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which findings at presentation stop you from calling it straightforward post-streptococcal disease?",
+          "a": "Normal complement from the start, nephrotic-range proteinuria, no antecedent illness, rapidly rising creatinine, or features of lupus or vasculitis.",
+          "accept": [
+            "normal complement",
+            "nephrotic-range",
+            "rising creatinine",
+            "lupus"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "layers",
+          "text": "States syndrome now and cause over weeks"
+        },
+        {
+          "id": "grading",
+          "text": "Grades danger by alarms alongside the name"
+        },
+        {
+          "id": "atypical",
+          "text": "Lists features that force re-evaluation"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "poststreptococcal_glomerulonephritis: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Acute glomerulonephritis: diagnosis and course"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.agn": {
+      "id": "skill.tx.agn",
+      "kind": "treatment",
+      "system": "paediatrics",
+      "title": "Managing acute glomerulonephritis in children",
+      "oneLine": "Support the child through a self-limiting illness: hold back salt and water, control pressure, clear leftover streptococcus, and watch for the few who are not routine",
+      "why": "Most children with post-streptococcal nephritis recover fully without any disease-specific drug, yet a few develop encephalopathy, pulmonary oedema or kidney shutdown. Management is therefore two tasks at once: gentle supportive care for the many and instant escalation for the few.",
+      "teach": [
+        {
+          "heading": "Salt, water and the overloaded circulation",
+          "body": "Restrict dietary salt and fluids to match the reduced output, because every extra glass of water in an oliguric child becomes lung fluid and higher pressure. Weigh the child daily on the same scale, and nurse with head propped up when breathing is laboured.\n\nLoop diuretics relieve oedema and volume-driven hypertension when restriction alone is not enough. Control blood pressure with agents such as calcium-channel blockers or vasodilators, chosen per your current hospital protocol, since sustained hypertension is what injures the brain."
+        },
+        {
+          "heading": "Antibiotics have a narrow, honest job",
+          "body": "Give penicillin for any residual group A streptococcal infection, or a macrolide when the child is penicillin-allergic, to eradicate the organism and limit spread to contacts. This treats the infection, not the nephritis: it does not reverse complexes already deposited or shorten the kidney illness.\n\nThe exact agent, route and duration come from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe, so no dose is memorised here."
+        },
+        {
+          "heading": "Emergencies, dialysis and referral",
+          "points": [
+            "Treat hypertensive encephalopathy and pulmonary oedema as emergencies with urgent pressure control, oxygen and senior help, never as routine ward work.",
+            "Dialyse for severe acute kidney injury, refractory high potassium, or fluid overload that will not yield to diuretics.",
+            "Refer every atypical, non-resolving or deteriorating child to paediatric nephrology, usually at the district hospital or medical college, and use the government child-health referral scheme for free transport and care where the family is eligible.",
+            "Monitor blood pressure, daily weight, fluid balance, urea with creatinine, and the urine, and book the repeat complement for about two months to confirm the expected recovery."
+          ]
+        },
+        {
+          "heading": "What families must hear before going home",
+          "body": "Explain that the grossly dark urine usually clears within weeks, though microscopic blood can linger for a year or more without meaning active disease. Salt restriction continues until the pressure and swelling settle, and the child returns at once for headache, vomiting, fits, breathlessness or sharply falling urine.\n\nMost children regain full kidney function with an excellent long-term outlook, but the booked follow-up with repeat complement must not be skipped, because it is the test that finally closes the case."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the three pillars of routine management in post-streptococcal nephritis?",
+          "a": "Salt and fluid restriction, loop diuretics with blood pressure control, and penicillin or a macrolide for residual streptococcal infection.",
+          "accept": [
+            "salt",
+            "fluid restriction",
+            "diuretics",
+            "blood pressure",
+            "penicillin",
+            "macrolide"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why do you still give penicillin when it does not reverse the nephritis?",
+          "a": "To eradicate residual group A streptococcal infection and limit spread to contacts, while recognising the established immune injury runs its own course.",
+          "accept": [
+            "eradicate",
+            "residual",
+            "spread",
+            "contacts"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which developments force dialysis or urgent nephrology referral?",
+          "a": "Severe acute kidney injury, refractory hyperkalaemia, intractable fluid overload, hypertensive encephalopathy, or complement still low beyond eight weeks.",
+          "accept": [
+            "kidney injury",
+            "hyperkalaemia",
+            "fluid overload",
+            "encephalopathy",
+            "low"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "supportive",
+          "text": "Centres salt and fluid restriction with pressure control"
+        },
+        {
+          "id": "antibiotic",
+          "text": "States the honest limited role of antibiotics"
+        },
+        {
+          "id": "escalation",
+          "text": "Names emergencies, dialysis triggers and referral"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "poststreptococcal_glomerulonephritis: management"
+        },
+        {
+          "source": "Indian Academy of Pediatrics",
+          "locator": "Paediatric kidney disease: supportive care and referral"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of drug CLASS and principle. Specific agents, routes and durations must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe."
+    },
+    "skill.annex.agn.followup": {
+      "id": "skill.annex.agn.followup",
+      "kind": "annexure",
+      "system": "paediatrics",
+      "title": "Follow-up timetable and referral thresholds",
+      "oneLine": "What to check, when to repeat it, and the lines that send the child to nephrology",
+      "why": "Post-streptococcal nephritis is a disease of booked reviews: pressure and urine checked early, complement rechecked at two months, and urine watched for a year. A timetable on paper is what makes any of that actually happen in a busy outpatient clinic.",
+      "teach": [
+        {
+          "heading": "The review timetable",
+          "table": {
+            "cols": [
+              "When",
+              "What to check",
+              "Why"
+            ],
+            "rows": [
+              [
+                "Daily till stable",
+                "Weight, fluid balance, blood pressure, urine output",
+                "Catches overload and rising pressure early"
+              ],
+              [
+                "Weekly till settled",
+                "Pressure, oedema, urea with creatinine",
+                "Confirms the kidneys are recovering"
+              ],
+              [
+                "At two months",
+                "Repeat serum C3",
+                "Documents the expected normalisation"
+              ],
+              [
+                "Till one year",
+                "Urine for blood and protein",
+                "Microscopic blood may linger harmlessly"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Refer at once when these appear",
+          "points": [
+            "Fits, drowsiness, severe headache with vomiting, or breathlessness with lung crackles at any stage.",
+            "Urine falling toward none over a day, potassium climbing, or creatinine rising instead of settling.",
+            "Nephrotic-range proteinuria, complement still low beyond eight weeks, or illness dragging past the expected recovery.",
+            "Any doubt about the diagnosis, because the medical college paediatric nephrology unit with biopsy backup is the right destination, not repeated courses of antibiotics."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "When is the repeat complement booked, and what should it show?",
+          "a": "At about two months, when C3 should have climbed back to normal; persistence beyond eight weeks forces re-evaluation.",
+          "accept": [
+            "two months",
+            "normal",
+            "eight weeks"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Name four findings that send a nephritic child to paediatric nephrology at once.",
+          "a": "Encephalopathy or fits, pulmonary oedema, anuria or rising creatinine, and persistently low complement or nephrotic-range proteinuria.",
+          "accept": [
+            "encephalopathy",
+            "pulmonary oedema",
+            "anuria",
+            "creatinine",
+            "complement"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "timetable",
+          "text": "States the daily, weekly, two-month and yearly reviews"
+        },
+        {
+          "id": "thresholds",
+          "text": "Names the urgent referral thresholds"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_glomerulonephritis_child: redFlags and prognosis"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Acute glomerulonephritis: follow-up and prognosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.agn.aditya",
+      "initialVitals": {
+        "hr": 108,
+        "bpSystolic": 126,
+        "bpDiastolic": 82,
+        "rr": 26,
+        "spo2": 97,
+        "temp": 37.6,
+        "gcs": 15
+      },
+      "title": "An 8-year-old with cola-coloured urine and puffy eyes",
+      "opening": "Sunita Shinde has brought her 8-year-old son Aditya to the paediatric outpatient clinic. The boy sits quietly beside her, his eyelids puffy and his slippers tight on swollen feet. She holds a small bottle of his morning urine, dark as tea. Greet them and take a history.",
+      "fallback": "I do not understand, doctor. Can you ask that in a different way?",
+      "patient": {
+        "name": "Aditya Shinde",
+        "age": 8,
+        "sex": "male",
+        "occupation": "Class 3 student at the Zilla Parishad school",
+        "residence": "Village in Marathwada, lives with parents and two sisters in two rooms"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "what is the trouble with the child",
+            "why have you brought him",
+            "tell me about his illness",
+            "what seems to be the problem"
+          ],
+          "reply": "Doctor, since four days his urine has turned dark brown like tea, and his eyes look puffy every morning. Since yesterday his slippers feel tight.",
+          "key": true
+        },
+        "onset_timing": {
+          "cues": [
+            "when did the dark urine start",
+            "how many days of swelling",
+            "was it sudden or gradual",
+            "since when is the urine less"
+          ],
+          "reply": "The dark urine started four days ago, quite suddenly. The eye swelling we noticed three days ago, and the feet only since yesterday.",
+          "key": true
+        },
+        "urine_colour": {
+          "cues": [
+            "what colour is the urine exactly",
+            "describe the colour of his urine",
+            "is there visible blood in the urine",
+            "does the urine look smoky or brown"
+          ],
+          "reply": "It looks like strong tea, brownish red, the same from morning to night. No bright red blood and no clots, just this dark colour throughout.",
+          "key": true
+        },
+        "swelling_pattern": {
+          "cues": [
+            "where did the swelling appear first",
+            "is the swelling worse in the morning",
+            "does the swelling pit on pressing",
+            "has the swelling spread to the legs"
+          ],
+          "reply": "It began around the eyes in the morning and faded a little by afternoon. Now the feet also stay swollen in the evening. When I press the shin with my thumb, the dent stays for some time.",
+          "key": true
+        },
+        "urine_amount": {
+          "cues": [
+            "how often does he pass urine now",
+            "how much urine comes each time",
+            "has the urine amount reduced",
+            "does he pass urine at night"
+          ],
+          "reply": "He goes only three or four times in the whole day now, and very little comes each time. Earlier he used to go many times. He still passes some urine, it has not stopped fully.",
+          "key": true
+        },
+        "preceding_throat": {
+          "cues": [
+            "did he have a sore throat recently",
+            "any fever with throat pain last month",
+            "was there difficulty in swallowing",
+            "what medicine was given for the throat"
+          ],
+          "reply": "Yes, about two weeks ago he had fever with a very painful throat and could not swallow rotis. The clinic gave him some white tablets for three days and he became fine. Two of his classmates also had throat pain then.",
+          "key": true
+        },
+        "skin_sores": {
+          "cues": [
+            "any boils or skin sores recently",
+            "did he have infected scratches",
+            "any itchy skin with scratch marks",
+            "were there sores needing dressing"
+          ],
+          "reply": "No boils or sores this time, doctor. He does scratch his legs at night in summer, but there are no wounds now.",
+          "key": true
+        },
+        "headache_vomiting": {
+          "cues": [
+            "does he complain of headache",
+            "has he vomited since the swelling",
+            "any fits or jerky movements",
+            "is he unusually sleepy or dull"
+          ],
+          "reply": "He says his head aches since yesterday evening, dull all over. No vomiting and no fits. He plays less but he is alert and talks normally.",
+          "key": true
+        },
+        "breathing_trouble": {
+          "cues": [
+            "does he get breathless on playing",
+            "is breathing difficult at night",
+            "does he need extra pillows to sleep",
+            "any fast breathing noticed"
+          ],
+          "reply": "He gets tired faster while playing cricket, but he does not gasp. At night he sleeps flat on one pillow as usual, without difficulty.",
+          "key": true
+        },
+        "fever_now": {
+          "cues": [
+            "does he have fever now",
+            "what is his temperature at home",
+            "any burning while passing urine",
+            "does passing urine hurt him"
+          ],
+          "reply": "No fever now. And passing urine does not burn or pain him, that is why this dark urine surprised us.",
+          "key": true
+        },
+        "past_kidney_episodes": {
+          "cues": [
+            "dark urine or swelling ever before",
+            "any known kidney problem in him",
+            "was his urine ever tested earlier",
+            "previous admission to hospital"
+          ],
+          "reply": "This is the first time, doctor. His urine was never tested before. He was never admitted to any hospital.",
+          "key": true
+        },
+        "medicines_taken": {
+          "cues": [
+            "what medicines is he taking now",
+            "any painkillers from the medical shop",
+            "any herbal or traditional preparations",
+            "show me the prescriptions and strips"
+          ],
+          "reply": "Only the white tablets for the throat two weeks ago, finished fully. No painkillers now. My mother suggested a herbal kadha but we have not given it.",
+          "key": true
+        },
+        "diet_growth": {
+          "cues": [
+            "how is his appetite these days",
+            "what does he eat in a day",
+            "has his weight changed recently",
+            "tell me about his growth and vaccines"
+          ],
+          "reply": "He eats dal, roti and rice like us, appetite a little less since four days. His vaccines are all complete from the anganwadi. His weight was 22 kilos last year at school check-up.",
+          "key": true
+        },
+        "home_school": {
+          "cues": [
+            "how many people share the room",
+            "does he sit close to other children",
+            "sore throats going around the school",
+            "where does he play after school"
+          ],
+          "reply": "Five of us sleep in two rooms. Two boys in his class also had throat pain last month. After school he plays in the lane with the neighbourhood children.",
+          "key": true
+        },
+        "family_kidney": {
+          "cues": [
+            "kidney disease in the family",
+            "blood in urine of relatives",
+            "hearing loss in the family",
+            "swelling or dialysis in relatives"
+          ],
+          "reply": "Nobody in our family has kidney trouble or hearing trouble. My father has sugar, that is all.",
+          "key": true
+        }
+      },
+      "exam": {
+        "skill.gen.paed.appearance": {
+          "finding": "Alert 8-year-old, mild periorbital puffiness with no distress. Sits comfortably, answers questions clearly.",
+          "abnormal": false
+        },
+        "skill.gen.paed.vitals": {
+          "finding": "Temperature 37.6 C. Pulse 108 per minute, regular. Blood pressure 126 over 82, above the expected range for his age and height. Respiratory rate 26 per minute. SpO2 97 percent on room air.",
+          "abnormal": true
+        },
+        "skill.gen.paed.edema": {
+          "finding": "Soft pitting oedema over both eyelids and the shins, dents that fill slowly on pressure. No sacral oedema. No gross anasarca.",
+          "abnormal": true
+        },
+        "skill.exam.paed.weight": {
+          "finding": "Weight 24.5 kg today against 22 kg recorded at school last year, a gain well beyond normal growth for one year. Height 124 cm.",
+          "abnormal": true
+        },
+        "skill.exam.paed.cvs.pulses_bp": {
+          "finding": "All peripheral pulses felt, no radiofemoral delay. Heart sounds normal with no murmur. No raised jugular pressure.",
+          "abnormal": false
+        },
+        "skill.exam.paed.resp.inspection": {
+          "finding": "Chest moves equally on both sides, no indrawing, no accessory muscle use. Respiratory rate mildly raised at rest.",
+          "abnormal": false
+        },
+        "skill.exam.paed.resp.auscultation": {
+          "finding": "Vesicular breath sounds with a few fine crackles at both lung bases, clearing partly after coughing. No wheeze.",
+          "abnormal": true
+        },
+        "skill.exam.paed.gi.palpation_percussion": {
+          "finding": "Abdomen soft, no tenderness, no palpable liver or spleen. No flank masses. Bladder not palpable.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "urine_routine",
+        "urine_micro",
+        "complement_c3",
+        "aso",
+        "renal_function",
+        "urine_protein"
+      ],
+      "investigations": {
+        "urine_routine": {
+          "label": "Urine routine and dipstick",
+          "indicated": true,
+          "result": "Smoky brown urine. Dipstick shows blood 3 plus with protein 1 plus. No glucose. No nitrites.",
+          "note": "Blood with only modest protein fits a nephritic urine; heavy protein with gross swelling would point the other way."
+        },
+        "urine_micro": {
+          "label": "Urine microscopy",
+          "indicated": true,
+          "result": "Plenty of red cells per field, many distorted, with red cell casts seen. Few pus cells, no bacteria.",
+          "note": "Casts with distorted red cells prove glomerular bleeding. Pus cells with bacteria and no casts would have pointed down the tract."
+        },
+        "complement_c3": {
+          "label": "Serum complement C3 and C4",
+          "indicated": true,
+          "result": "C3 low, C4 within normal limits. Repeat booked for two months to document recovery.",
+          "note": "Low C3 with normal C4 fits alternative pathway consumption of post-streptococcal disease. The repeat matters as much as this value."
+        },
+        "aso": {
+          "label": "Antistreptolysin O titre",
+          "indicated": true,
+          "result": "Raised above the usual childhood limit, supporting a recent streptococcal infection. Anti-DNase B sent alongside.",
+          "note": "A rising pair proves the streptococcus came; one value alone is weaker, and a negative swab now means nothing since the throat healed weeks ago."
+        },
+        "renal_function": {
+          "label": "Blood urea, creatinine and electrolytes",
+          "indicated": true,
+          "result": "Urea mildly raised. Creatinine just above the usual childhood range. Potassium normal. Sodium low normal.",
+          "note": "Mild retention fits the reduced filtration; potassium is the number to fear, so it is checked with every review."
+        },
+        "urine_protein": {
+          "label": "Spot urine protein to creatinine ratio",
+          "indicated": true,
+          "result": "Mildly raised, well below the nephrotic range.",
+          "note": "Modest protein keeps the post-streptococcal label safe; nephrotic-range protein would force a biopsy discussion."
+        },
+        "throat_swab": {
+          "label": "Throat swab and culture",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "Not indicated now: the sore throat settled two weeks ago and the child took a full course of tablets. A swab helps only while infection is still active."
+        },
+        "renal_biopsy": {
+          "label": "Renal biopsy",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Not indicated in a typical first episode with low C3 that is expected to recover. It is reserved for persistent low complement, nephrotic-range protein, or deteriorating function."
+        }
+      },
+      "differentialModel": {
+        "answer": "Acute nephritic syndrome, likely post-streptococcal glomerulonephritis. Consider nephrotic syndrome, IgA nephropathy, lupus nephritis, membranoproliferative glomerulonephritis, haemolytic uraemic syndrome, and urinary tract infection.",
+        "accept": [
+          "Acute post streptococcal glomerulonephritis",
+          "Nephrotic syndrome",
+          "IgA nephropathy",
+          "Lupus nephritis",
+          "Membranoproliferative glomerulonephritis",
+          "Haemolytic uraemic syndrome",
+          "Urinary tract infection"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Acute nephritic syndrome with hypertension, likely acute post-streptococcal glomerulonephritis two weeks after a sore throat, without encephalopathy or pulmonary oedema.",
+        "accept": [
+          "Acute post streptococcal glomerulonephritis",
+          "Acute glomerulonephritis",
+          "APSGN",
+          "Nephritic syndrome"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Salt and fluid restriction with daily weight, loop diuretic for the overload, blood pressure control per protocol, penicillin for any residual streptococcal infection, close monitoring of pressure, output and renal function, and referral to paediatric nephrology if alarms appear, with repeat complement at two months.",
+        "accept": [
+          "salt",
+          "fluid restriction",
+          "diuretic",
+          "blood pressure",
+          "penicillin",
+          "nephrology",
+          "complement",
+          "monitoring"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The tempo does the first half of the diagnosis: dark urine four days, sore throat a fortnight before. That gap is the fingerprint of post-streptococcal disease.",
+        "No burning on passing urine with red cell casts under the microscope rules out urinary infection more cheaply than any scan.",
+        "Blood pressure of 126 over 82 in an 8-year-old is hypertension, and the headache with it is the warning, not a coincidence.",
+        "Weight gain of 2.5 kg in a year measures the retained fluid better than the eye, which is why every review starts on the scale.",
+        "Fine crackles at the bases with a fast rate mean fluid is already reaching the lungs, so salt and water restriction starts today, not at review.",
+        "The repeat complement at two months is not optional follow-up; it is the test that finally confirms the diagnosis or reopens it."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1137 @@
+{
+ "_comment": "Hydrocele and scrotal swellings. Same architecture as pneumonia and inguinal hernia: shared surgery and core skills carry the examination, this file adds the hydrocele mechanism, the scrotal differential matrix, ultrasound-led workup, urgency bands and repair decisions.",
+ "id": "scrotal-swellings",
+ "name": "Hydrocele and scrotal swellings",
+ "fullName": "Hydrocele and scrotal swellings: examination of the scrotum",
+ "system": "surgery",
+ "kbRef": "hydrocele",
+ "oneLine": "A painless scrotal swelling that transilluminates, and the mimics that must not be missed",
+ "estMinutes": 60,
+ "review": {
+  "status": "ai_drafted"
+ },
+ "version": 1,
+ "chapters": [
+  {
+   "id": "basics",
+   "title": "Basics",
+   "blurb": "What a hydrocele is, and what it is not",
+   "skills": [
+    "skill.reasoning.scrotal.basics"
+   ]
+  },
+  {
+   "id": "approach",
+   "title": "Approach to the patient",
+   "blurb": "Before a single question",
+   "skills": [
+    "skill.approach.hygiene",
+    "skill.approach.introduce",
+    "skill.approach.consent",
+    "skill.approach.position"
+   ]
+  },
+  {
+   "id": "particulars",
+   "title": "Patient particulars",
+   "blurb": "Age sets the diagnosis before the story begins",
+   "skills": [
+    "skill.particulars.demographics"
+   ],
+   "emphasis": {
+    "skill.particulars.demographics": {
+     "expect": "Age carries unusual weight here. An infant with an intermittent swelling, a teenager with sudden pain, a young man with a heavy painless testis, and a man past forty with a slowly enlarging painless swelling each point to a different member of the scrotal list, so record the exact age and the tempo together."
+    }
+   }
+  },
+  {
+   "id": "history",
+   "title": "History of presenting illness",
+   "blurb": "Months of quiet growth, or hours of sudden pain",
+   "skills": [
+    "skill.hx.chief_complaints",
+    "skill.hx.surg.lump",
+    "skill.hx.surg.scrotal_swelling_pain"
+   ],
+   "emphasis": {
+    "skill.hx.chief_complaints": {
+     "expect": "Expect a story told in months: a painless scrotal swelling noticed by chance and growing slowly, heavy by evening but never truly painful. An acute story told in hours, with agony, vomiting or fever, belongs to torsion or infection, not to hydrocele."
+    },
+    "skill.hx.surg.lump": {
+     "expect": "Ask where the swelling started, whether it changes on lying down or coughing, and whether passing urine alters it. A hydrocele starts below and stays below, does not vanish overnight, and is indifferent to micturition, while a hernia descends from above and a varicocele empties flat."
+    },
+    "skill.hx.surg.scrotal_swelling_pain": {
+     "expect": "Characterise pain exactly, because its absence is the finding. A dull heaviness late in the day fits a large hydrocele; sharp sudden pain with vomiting fits torsion; burning urine with discharge points to epididymo-orchitis ascending from below."
+    }
+   }
+  },
+  {
+   "id": "past_personal_drug_family",
+   "title": "Past, personal, drug and family history",
+   "blurb": "The background that reframes the lump",
+   "skills": [
+    "skill.hx.scrotal.risk_factors"
+   ]
+  },
+  {
+   "id": "general_exam",
+   "title": "General examination",
+   "blurb": "A well man, unless the scrotum says otherwise",
+   "skills": [
+    "skill.gen.appearance",
+    "skill.gen.vitals"
+   ],
+   "emphasis": {
+    "skill.gen.appearance": {
+     "expect": "Expect a comfortable, afebrile man in no distress. Fever, tachycardia or a toxic look argue against an uncomplicated hydrocele and toward infection, torsion or Fournier gangrene, each of which changes the urgency completely."
+    },
+    "skill.gen.vitals": {
+     "expect": "Expect normal temperature, pulse and blood pressure. Fever with a red, tender scrotum marks epididymo-orchitis; severe pain with vomiting and a normal temperature still means torsion until proved otherwise, since torsion is a vascular event, not a febrile one."
+    }
+   }
+  },
+  {
+   "id": "systemic_exam",
+   "title": "Examination of the scrotum",
+   "blurb": "Get above it, shine through it, then feel the testis",
+   "skills": [
+    "skill.exam.surg.scrotal_palpation",
+    "skill.exam.surg.transillumination_scrotum",
+    "skill.exam.surg.hernia_palpation",
+    "skill.exam.surg.cord_swelling_traction",
+    "skill.exam.surg.varicocele",
+    "skill.exam.surg.acute_scrotum_torsion",
+    "skill.exam.surg.regional_nodes"
+   ],
+   "emphasis": {
+    "skill.exam.surg.scrotal_palpation": {
+     "expect": "Expect a cystic, fluctuant swelling wrapped around the lower pole and body of the testis, with the testis itself impalpable inside a tense hydrocele. If the testis is felt apart from the swelling, above and in front of it, the swelling is not a hydrocele at all."
+    },
+    "skill.exam.surg.transillumination_scrotum": {
+     "expect": "Expect a brilliant red glow through the whole swelling when the torch is placed on its side in a darkened room. An opaque swelling after trauma suggests haematocele, and a solid non-translucent testis with a small reactive effusion suggests tumour."
+    },
+    "skill.exam.surg.hernia_palpation": {
+     "expect": "Expect to get above the swelling, with fingers meeting over a normal cord, and no expansile impulse on coughing. Failure to get above it means the swelling descends from the abdomen, which is a hernia until proved otherwise."
+    },
+    "skill.exam.surg.cord_swelling_traction": {
+     "expect": "Expect a normal cord felt separately above the swelling. A cyst confined to the cord that moves down when the testis is pulled is an encysted hydrocele of the cord, not a vaginal hydrocele, and it needs an inguinal approach."
+    },
+    "skill.exam.surg.varicocele": {
+     "expect": "Expect no bag of worms and no thrill in an uncomplicated hydrocele. Where dilated veins are present, feel them standing and supine: a varicocele empties flat, and one of sudden onset in a middle aged man obliges you to examine the kidney."
+    },
+    "skill.exam.surg.acute_scrotum_torsion": {
+     "expect": "In a chronic painless swelling expect none of the torsion signs: no sudden agony, no high tender transverse testis, no vomiting. Run through the checklist anyway, because missing torsion is the one error that costs a testis, and a hydrocele never explains acute pain."
+    },
+    "skill.exam.surg.regional_nodes": {
+     "expect": "Expect no inguinal nodes in an uncomplicated hydrocele, and remember the testis drains to the para-aortic nodes, not the groin. Enlarged hard nodes above the umbilicus or at the left supraclavicular fossa point to a testicular tumour with spread."
+    }
+   }
+  },
+  {
+   "id": "disease_findings",
+   "title": "Putting the hydrocele picture together",
+   "blurb": "Fluid conducts light; solid testis does not",
+   "skills": [
+    "skill.reasoning.scrotal.signs"
+   ]
+  },
+  {
+   "id": "summary",
+   "title": "Clinical summary",
+   "blurb": "Side, tempo, translucency and the testis in three sentences",
+   "skills": [
+    "skill.present.scrotal.summary"
+   ]
+  },
+  {
+   "id": "differential",
+   "title": "Differential diagnosis",
+   "blurb": "Every swelling that shares the scrotum, and the test that separates each",
+   "skills": [
+    "skill.reasoning.scrotal.differential"
+   ]
+  },
+  {
+   "id": "investigations",
+   "title": "Investigations",
+   "blurb": "The scan clears the testis; the rest hunt the cause",
+   "skills": [
+    "skill.investigation.scrotal.workup"
+   ]
+  },
+  {
+   "id": "diagnosis",
+   "title": "Diagnosis and urgency",
+   "blurb": "Name the variety, then place it on the urgency ladder",
+   "skills": [
+    "skill.reasoning.scrotal.diagnosis",
+    "skill.annex.surg.scrotal_swelling_matrix"
+   ]
+  },
+  {
+   "id": "treatment",
+   "title": "Treatment",
+   "blurb": "Watch the infants, repair the large, treat the cause",
+   "skills": [
+    "skill.treatment.scrotal.management"
+   ]
+  },
+  {
+   "id": "case",
+   "title": "Case presentation",
+   "blurb": "Present this patient to your consultant",
+   "skills": [
+    "skill.present.case"
+   ]
+  }
+ ],
+ "osce": {
+  "stations": [
+   {
+    "id": "osce.scrotal.exam",
+    "title": "Examine the scrotal swelling",
+    "task": "This 46 year old man has had a painless right scrotal swelling for eight months. Examine his scrotum and present your findings.",
+    "seconds": 480,
+    "skills": [
+     "skill.approach.hygiene",
+     "skill.approach.introduce",
+     "skill.approach.consent",
+     "skill.exam.surg.scrotal_palpation",
+     "skill.exam.surg.transillumination_scrotum",
+     "skill.exam.surg.hernia_palpation",
+     "skill.exam.surg.cord_swelling_traction",
+     "skill.exam.surg.regional_nodes"
+    ],
+    "examinerQuestions": [
+     "You can get above the swelling and it transilluminates brilliantly. What does each finding prove, and what is the diagnosis?",
+     "The testis cannot be felt within the swelling. What must you do next, and why can you not simply reassure him?",
+     "The swelling was tense, tender and opaque after a recent blow. How does your management change?"
+    ]
+   },
+   {
+    "id": "osce.scrotal.history",
+    "title": "Take the history of a scrotal swelling",
+    "task": "This 46 year old man has noticed a swelling of the scrotum. Take a focused history in six minutes and state your leading diagnosis with the urgency.",
+    "seconds": 360,
+    "skills": [
+     "skill.approach.introduce",
+     "skill.approach.consent",
+     "skill.hx.chief_complaints",
+     "skill.hx.surg.lump",
+     "skill.hx.surg.scrotal_swelling_pain",
+     "skill.hx.scrotal.risk_factors"
+    ],
+    "examinerQuestions": [
+     "His story is eight months of painless enlargement with no urinary symptoms. What single background fact would most reframe this swelling?",
+     "He mentions repeated fever with a painful swollen cord every monsoon. What does that suggest, and what test confirms it?",
+     "He reports sudden severe pain with vomiting that started two hours ago. What do you do now?"
+    ]
+   }
+  ]
+ },
+ "viva": {
+  "skills": [
+   "skill.reasoning.scrotal.basics",
+   "skill.hx.surg.scrotal_swelling_pain",
+   "skill.exam.surg.scrotal_palpation",
+   "skill.reasoning.scrotal.signs",
+   "skill.reasoning.scrotal.differential",
+   "skill.investigation.scrotal.workup",
+   "skill.reasoning.scrotal.diagnosis",
+   "skill.treatment.scrotal.management"
+  ]
+ },
+ "skills": {
+  "skill.reasoning.scrotal.basics": {
+   "id": "skill.reasoning.scrotal.basics",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "What a hydrocele is",
+   "oneLine": "Clear fluid inside the sac that wraps the testis, and whether that sac still talks to the abdomen",
+   "why": "A hydrocele is fluid where it should not be, inside a sac that should be closed. Knowing which sac holds the fluid, and whether it still communicates with the abdomen, decides between watching, scanning and operating.",
+   "teach": [
+    {
+     "heading": "Fluid inside the tunica, not inside the testis",
+     "body": "The testis hangs inside a double layered pouch, the tunica vaginalis, left behind when the testis descended from the abdomen before birth. A vaginal hydrocele is a collection of clear serous fluid inside that pouch, around the front and sides of the testis, so the testis itself sits hidden within the fluid.\n\nIt forms when the pouch secretes more fluid than it absorbs. Most adult hydroceles are primary, meaning no disease of the testis or epididymis explains them. A secondary hydrocele holds the same fluid, but poured out in reaction to infection, trauma, torsion or a tumour, and there it is the reaction, not the fluid, that matters."
+    },
+    {
+     "heading": "The family of hydroceles",
+     "table": {
+      "cols": [
+       "Variety",
+       "What is open",
+       "How it behaves"
+      ],
+      "rows": [
+       [
+        "Congenital communicating",
+        "Passage open to the abdomen",
+        "Comes and goes; empties on lying down"
+       ],
+       [
+        "Infantile",
+        "Sac distended to the deep ring, no link above",
+        "Fixed swelling in a child, not always in infancy"
+       ],
+       [
+        "Funicular",
+        "Closed just above the tunica",
+        "Cord swelling, easily mistaken for a hernia"
+       ],
+       [
+        "Encysted of the cord",
+        "Shut off above and below",
+        "Small cord cyst; traction test positive"
+       ],
+       [
+        "Vaginal primary",
+        "Closed sac in the adult",
+        "Slow painless enlargement, often tense"
+       ],
+       [
+        "Secondary",
+        "Reactive effusion around disease",
+        "Lax; the underlying cause dominates"
+       ],
+       [
+        "Of the hernial sac",
+        "Neck plugged after old hernia",
+        "Swelling at a hernia site"
+       ]
+      ]
+     }
+    },
+    {
+     "heading": "Why infants and adults take different roads",
+     "body": "In infants a communicating hydrocele comes and goes with posture and crying, and most settle on their own within the first year or two of life. Operating before that window closes treats many children who would have recovered without surgery.\n\nIn adults a primary hydrocele neither resolves nor stays small: it persists and usually enlarges over months to years, sometimes to the knee. A secondary hydrocele follows the opposite rule and settles once its cause is treated, which is why naming the cause is the whole diagnosis."
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "Define a vaginal hydrocele in one sentence.",
+     "a": "A collection of clear serous fluid inside the tunica vaginalis, around the testis.",
+     "accept": [
+      "serous fluid",
+      "tunica vaginalis",
+      "around the testis"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "How does a primary hydrocele differ from a secondary one?",
+     "a": "A primary hydrocele has no underlying testicular or epididymal disease and is often tense; a secondary hydrocele is a reactive effusion from infection, trauma, torsion or tumour and is usually lax.",
+     "accept": [
+      "no underlying disease",
+      "reactive",
+      "infection",
+      "trauma",
+      "tumour",
+      "lax"
+     ],
+     "minMatch": 3
+    },
+    {
+     "level": 3,
+     "q": "A two year old has an intermittent scrotal swelling that vanishes overnight. What is it, and what do you advise?",
+     "a": "A congenital communicating hydrocele through a patent passage. Advise observation, since most resolve within the first year or two, and examine the abdomen for ascites in bilateral cases.",
+     "accept": [
+      "communicating",
+      "patent passage",
+      "observation",
+      "resolve",
+      "ascites"
+     ],
+     "minMatch": 3
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "hydrocele: pathophysiology"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "The testes and scrotum: hydrocele"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.scrotal.signs": {
+   "id": "skill.reasoning.scrotal.signs",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "The hydrocele picture",
+   "oneLine": "Get above it, shine through it, and read what the testis is telling you",
+   "why": "Two bedside tests, getting above the swelling and transillumination, separate a hydrocele from every mimic in under a minute. Each test answers one anatomical question, and the pattern of answers is the diagnosis.",
+   "teach": [
+    {
+     "heading": "The two cardinal signs",
+     "body": "Fluctuation is tested sideways, because the scrotum is too mobile for the usual method. Steady the upper pole between thumb and fingers to make the sac tense, then press the lower pole: the displaced fluid pushes your upper fingers apart. The test proves free fluid, not the diagnosis, since any cystic swelling fluctuates.\n\nTranslucency is tested in darkness with a pencil torch on the side of the swelling, never behind it where the testis blocks the light. A clear hydrocele and an epididymal cyst glow red throughout; a spermatocele glows weakly, and blood or tumour stay dark."
+    },
+    {
+     "heading": "Get above it, then read the testis",
+     "body": "Slide your fingers above the swelling. In a pure hydrocele they meet over a normal cord: you can get above it. In a hernia they cannot, because the swelling continues into the abdomen. This single move divides purely scrotal swellings from inguinoscrotal ones.\n\nThen read the testis. Impalpable within a tense sac fits a large primary hydrocele, but it also hides a tumour, so it obliges a scan. A testis felt apart from the swelling, above and behind it, means the lump is an epididymal cyst. A heavy, smooth, enlarged testis with fading sensation means tumour until proved otherwise."
+    },
+    {
+     "heading": "Tense versus lax, and what each warns",
+     "body": "A primary hydrocele is tense, stands forward, and irons out the rugosity of the scrotal skin with prominent veins. A secondary hydrocele is usually lax, and the testis and epididymis can still be felt through it, which is why laxity should prompt a search for infection, a tumour or old trauma.\n\nRedness, heat and exquisite tenderness mean infection or torsion, never an uncomplicated hydrocele. A tense swelling after a blow that stays dark on transillumination is a haematocele, and old blood in the sac mimics tumour so closely that only a scan separates them."
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "Name the two cardinal signs of a hydrocele.",
+     "a": "Fluctuation and translucency.",
+     "accept": [
+      "fluctuation",
+      "translucency",
+      "transillumination"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "What does getting above the swelling prove?",
+     "a": "That the swelling is purely scrotal and has no connection with the abdomen; failure to get above it means it descends from above, which is a hernia until proved otherwise.",
+     "accept": [
+      "purely scrotal",
+      "no connection",
+      "hernia",
+      "descends"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "The swelling transilluminates but the testis cannot be felt. What do you do next, and why?",
+     "a": "Arrange a scrotal ultrasound to assess the testis, because a tumour can hide behind a reactive hydrocele and the hand cannot clear it.",
+     "accept": [
+      "ultrasound",
+      "assess the testis",
+      "tumour",
+      "reactive"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "hydrocele: clinicalPearls"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "The testes and scrotum: examination of the scrotum"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.scrotal.differential": {
+   "id": "skill.reasoning.scrotal.differential",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "Differential diagnosis of the scrotal swelling",
+   "oneLine": "Every swelling that shares the scrotum, and the one test that separates each",
+   "why": "Most painless swellings are exactly what they look like, but the ones that are not are dangerous to miss: a tumour hiding behind reactive fluid, torsion masquerading as infection, and a hernia mistaken for a hydrocele. The differential does not stop once fluid is found.",
+   "teach": [
+    {
+     "heading": "Swelling by swelling",
+     "table": {
+      "cols": [
+       "Condition",
+       "Bedside clue",
+       "Deciding test"
+      ],
+      "rows": [
+       [
+        "Inguinoscrotal hernia",
+        "Cannot get above; expansile impulse; resonant",
+        "Reduce, occlude the deep ring, re-examine"
+       ],
+       [
+        "Testicular tumour",
+        "Heavy smooth testis; sensation lost; painless",
+        "Ultrasound plus tumour markers"
+       ],
+       [
+        "Epididymal cyst",
+        "Felt apart above the testis; brilliantly clear",
+        "Ultrasound; often bilateral"
+       ],
+       [
+        "Spermatocele",
+        "Lax cyst in the head of the epididymis; dim glow",
+        "Ultrasound; milky fluid if tapped"
+       ],
+       [
+        "Varicocele",
+        "Bag of worms; empties lying; thrill on coughing",
+        "Doppler; examine the kidney if sudden"
+       ],
+       [
+        "Torsion of the testis",
+        "Teenager; sudden agony; high tender testis",
+        "None: explore at once"
+       ],
+       [
+        "Epididymo-orchitis",
+        "Fever; red hot scrotum; epididymis tender first",
+        "Urine culture; urethritis screen"
+       ],
+       [
+        "Haematocele",
+        "Recent blow or tap; tense, tender, opaque",
+        "Ultrasound; explore if rupture suspected"
+       ],
+       [
+        "Chylocele and filarial disease",
+        "Periodic fever; milky fluid; dim transillumination",
+        "Night blood smear for microfilariae"
+       ]
+      ]
+     }
+    },
+    {
+     "heading": "Three presentations that must never wait",
+     "body": "Sudden agonising scrotal pain with vomiting in a boy or young man is torsion until proved otherwise. If the diagnosis is in doubt, explore: a needless exploration harms little, while a missed torsion costs the testis within hours.\n\nAn impalpable testis inside any swelling mandates an ultrasound to exclude tumour before any reassurance or any needle. A rapidly enlarging, tense or blood stained swelling after trauma mandates urgent surgical review for haematocele with possible testicular rupture."
+    },
+    {
+     "heading": "Where the swelling sits decides the list",
+     "body": "First divide purely scrotal swellings, which you can get above, from inguinoscrotal ones, which you cannot. The cord then gets its own examination: a cyst confined to the cord that descends when the testis is pulled down is an encysted hydrocele of the cord, while a soft doughy cord swelling that fills slowly from below is a lymph varix of filariasis.\n\nRemember the drainage: scrotal skin goes to the groin nodes, but the testis and epididymis drain to the para-aortic nodes at the transpyloric plane. Groin nodes therefore clear the skin, not the testis, and a testicular tumour is staged by examining the abdomen, not the groin."
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "Name four differentials of a painless scrotal swelling.",
+     "a": "Inguinoscrotal hernia, testicular tumour, epididymal cyst or spermatocele, and varicocele.",
+     "accept": [
+      "hernia",
+      "tumour",
+      "epididymal cyst",
+      "spermatocele",
+      "varicocele"
+     ],
+     "minMatch": 3
+    },
+    {
+     "level": 2,
+     "q": "How do you separate an epididymal cyst from a hydrocele at the bedside?",
+     "a": "The cyst is felt apart from the testis, above and behind it, while the hydrocele surrounds the testis and hides it; both transilluminate, but septa in the cyst give a finely patterned glow.",
+     "accept": [
+      "felt apart",
+      "surrounds the testis",
+      "transilluminate",
+      "septa"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "A young man has a painless heavy testis with a small non-translucent effusion. What is your working diagnosis and next step?",
+     "a": "A testicular tumour with a reactive secondary hydrocele. Arrange urgent scrotal ultrasound with tumour markers, examine the abdomen for para-aortic nodes, and refer to urology without delay or scrotal violation.",
+     "accept": [
+      "tumour",
+      "reactive",
+      "ultrasound",
+      "markers",
+      "para-aortic",
+      "urology"
+     ],
+     "minMatch": 3
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "hydrocele: additionalDifferentials"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "The testes and scrotum: differential diagnosis of scrotal swellings"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.investigation.scrotal.workup": {
+   "id": "skill.investigation.scrotal.workup",
+   "kind": "investigation",
+   "system": "surgery",
+   "title": "Investigating the scrotal swelling",
+   "oneLine": "The scan clears the testis; the rest of the workup hunts the cause",
+   "why": "Investigations in a scrotal swelling serve two separate jobs: proving the testis underneath is normal, and finding the cause when the fluid is secondary. Knowing which test does which job stops a student scanning every simple hydrocele and missing every tumour.",
+   "teach": [
+    {
+     "heading": "Bedside tests come first",
+     "body": "Fluctuation and transillumination are investigations in their own right, not preliminaries. Perform them the same way every time: steady the upper pole for fluctuation, darken the room and place the torch on the side of the swelling for translucency, and record each as positive or negative.\n\nRepeat transillumination after any change in the swelling. A hydrocele that stops transilluminating has gained blood, pus or a thickened sac, and each of those restarts the workup rather than ending it."
+    },
+    {
+     "heading": "Ultrasound is the arbiter",
+     "body": "Order a scrotal ultrasound whenever the testis cannot be felt, when a secondary cause is suspected, after trauma, with rapid growth, or with blood stained fluid. It shows anechoic fluid around a normal testis in a simple hydrocele, and a mass, septations or a ruptured tunica when something else is present.\n\nAdd colour Doppler when torsion or varicocele is in question: absent flow marks torsion, refluxing veins mark varicocele. Ultrasound is available at most district hospitals and medical colleges; where it is not, refer rather than guess, and never substitute a needle for the scan."
+    },
+    {
+     "heading": "Look for the cause, not for numbers",
+     "body": "Examine the urine routinely with culture when there is burning, frequency, discharge or epididymal tenderness, since ascending infection is the commonest treatable cause of a secondary effusion. Where filariasis is suspected, check the blood for eosinophilia and examine a night smear for microfilariae.\n\nRequest a chest film with tuberculosis contact or suspected testicular spread, and tumour markers, namely alpha fetoprotein, beta human chorionic gonadotrophin and lactate dehydrogenase, only when imaging raises concern for malignancy. A classic transilluminant hydrocele with a normal testis on the scan needs none of these."
+    },
+    {
+     "heading": "Aspiration diagnoses nothing",
+     "body": "A diagnostic tap risks infection, bleeding into the sac and, in a tumour, spread along the needle track, while telling you less than the scan already did. Reserve aspiration for relieving a tense swelling in a patient unfit for surgery, with clear counselling that fluid usually reaccumulates.\n\nNote the fluid only when it is already drawn: amber and clear in a simple hydrocele, milky in chylocele or spermatocele, blood stained in haematocele or tumour. Blood stained fluid, even once, obliges a full tumour workup rather than reassurance."
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "When is scrotal ultrasound mandatory in a hydrocele?",
+     "a": "Whenever the testis cannot be palpated, or a secondary cause such as tumour, trauma or infection is suspected.",
+     "accept": [
+      "impalpable testis",
+      "secondary cause",
+      "tumour",
+      "trauma"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "Which tumour markers are requested, and when?",
+     "a": "Alpha fetoprotein, beta human chorionic gonadotrophin and lactate dehydrogenase, only when imaging or examination raises concern for testicular malignancy.",
+     "accept": [
+      "alpha fetoprotein",
+      "chorionic gonadotrophin",
+      "lactate dehydrogenase",
+      "malignancy concern"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 3,
+     "q": "A patient unfit for surgery asks for repeated aspiration instead of an operation. What do you tell him?",
+     "a": "That aspiration relieves but rarely cures, fluid usually returns, each tap carries infection and bleeding risk, and the testis must first be cleared by ultrasound so a tumour is not missed.",
+     "accept": [
+      "returns",
+      "recurrence",
+      "infection",
+      "ultrasound",
+      "tumour"
+     ],
+     "minMatch": 3
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "hydrocele: additionalInvestigations"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "The testes and scrotum: investigation of scrotal disease"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.reasoning.scrotal.diagnosis": {
+   "id": "skill.reasoning.scrotal.diagnosis",
+   "kind": "reasoning",
+   "system": "surgery",
+   "title": "Diagnosis and urgency of the scrotal swelling",
+   "oneLine": "Name the variety, then place it on the urgency ladder",
+   "why": "A diagnosis of hydrocele says nothing about what happens next unless it names the variety and the urgency. An infant communicating hydrocele is watched, a large tense primary is listed, and an acute painful scrotum goes to theatre tonight, all under the same word.",
+   "teach": [
+    {
+     "heading": "The complete diagnostic statement",
+     "body": "A full diagnosis names the variety, the side, the course and the complications in one breath: a primary vaginal hydrocele of the right testis, present eight months, uncomplicated. Each word earns its place, because secondary, bilateral or complicated changes the plan.\n\nThe criteria for a primary vaginal hydrocele are a painless, fluctuant, translucent swelling from which one can get above, with the testis impalpable but normal on ultrasound and no cough impulse. Miss one criterion and the label must change, not stretch."
+    },
+    {
+     "heading": "Three urgency bands",
+     "table": {
+      "cols": [
+       "Band",
+       "Picture",
+       "Next step"
+      ],
+      "rows": [
+       [
+        "Routine",
+        "Small lax painless swelling; testis normal on scan",
+        "Reassure, support, review if it grows"
+       ],
+       [
+        "Soon",
+        "Large tense swelling with heaviness; doubt about the testis",
+        "Scan, then list for elective repair"
+       ],
+       [
+        "Tonight",
+        "Acute pain, trauma with opaque swelling, red hot scrotum with fever",
+        "Emergency exploration or referral without delay"
+       ]
+      ]
+     }
+    },
+    {
+     "heading": "When the label must change",
+     "body": "A swelling that does not transilluminate is not a simple hydrocele: think haematocele after trauma, pus in a suppurating sac, or tumour with a small reactive effusion. A swelling felt apart from the testis is a cyst of the epididymis or a spermatocele.\n\nAny expansile cough impulse reclassifies the case as a hernia, however scrotal it looks. Sudden pain reclassifies everything as the acute scrotum, where torsion is assumed until excluded, and no hydrocele ever explains agony of sudden onset."
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "State a complete diagnosis for a classic case.",
+     "a": "A primary vaginal hydrocele of the right testis, present eight months, uncomplicated.",
+     "accept": [
+      "primary",
+      "vaginal hydrocele",
+      "uncomplicated"
+     ],
+     "minMatch": 2
+    },
+    {
+     "level": 2,
+     "q": "Which findings place a scrotal swelling in the tonight band?",
+     "a": "Sudden severe pain with vomiting, a tense opaque swelling after trauma, or fever with a red tender scrotum, pointing to torsion, rupture or suppuration.",
+     "accept": [
+      "sudden pain",
+      "trauma",
+      "opaque",
+      "fever",
+      "torsion"
+     ],
+     "minMatch": 3
+    },
+    {
+     "level": 3,
+     "q": "The swelling transilluminates but an impulse appears on coughing. What is the diagnosis?",
+     "a": "An inguinoscrotal hernia, possibly with a coexisting hydrocele; the impulse proves a connection with the abdomen, so the hydrocele label alone is wrong.",
+     "accept": [
+      "hernia",
+      "impulse",
+      "connection",
+      "coexisting"
+     ],
+     "minMatch": 2
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "hydrocele: redFlags"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "The testes and scrotum: hydrocele"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  },
+  "skill.treatment.scrotal.management": {
+   "id": "skill.treatment.scrotal.management",
+   "kind": "treatment",
+   "system": "surgery",
+   "title": "Managing hydrocele and its causes",
+   "oneLine": "Watch the infants, repair the large, treat the cause underneath",
+   "why": "No hydrocele heals itself except the infant communicating kind, yet not every hydrocele needs an operation. The art is matching the variety to its road: observation, planned repair, urgent exploration, or treatment of the infection, filariasis or tumour that poured the fluid.",
+   "teach": [
+    {
+     "heading": "Watch the infants, reassure the mild",
+     "body": "Observe a communicating hydrocele in infancy, since most resolve within the first year or two as the passage closes. Review the child if the swelling persists beyond that window, grows tense, or the other side swells, and operate then by ligating the passage through the groin.\n\nReassure the adult with a small, soft, asymptomatic primary hydrocele. Explain its benign nature, advise a suspensory support for heavy days, and fix a review if it enlarges, aching begins, or any red flag appears. Observation is a decision, not neglect, and it needs a date attached."
+    },
+    {
+     "heading": "Repair the large and symptomatic",
+     "body": "Offer surgery for a large, tense or heavy hydrocele, one that limits walking, work or intercourse, or any swelling where doubt about the testis remains after scanning. The standard operations open the scrotum and deal with the sac by excision with eversion or by plication behind the testis.\n\nCounsel before listing: recurrence is uncommon after sac surgery but haematoma, infection and chronic aching occur, and fertility is unaffected. Most repairs run as day care under spinal or local anaesthesia in a government hospital, often covered under public insurance schemes, with a week of support and wound watch after."
+    },
+    {
+     "heading": "Treat the cause in every secondary hydrocele",
+     "body": "Rest, elevation, scrotal support and guideline chosen antimicrobials settle epididymo-orchitis, alongside treatment of the urethritis or urinary infection that fed it. Tuberculosis needs a full antitubercular course with urology follow up, since the epididymis, vas and seminal vesicles scar together.\n\nFilariasis needs an antifilarial course by the national guideline with the hydrocele repaired after the infection settles. A testicular tumour goes to urology for inguinal orchidectomy with marker and staging workup; never biopsy or drain through the scrotum. Aspiration with sclerotherapy is reserved for patients unfit for surgery, with explicit warning that fluid usually returns."
+    },
+    {
+     "heading": "After the operation and the safety net",
+     "body": "Discharge with a suspensory bandage, wound care advice and a date for stitch and swelling review. Warn that some oedema and bruising are expected, but fever, spreading redness, a rapidly enlarging haematoma or foul discharge mean an early return.\n\nGive every patient the three red flags in plain words: sudden severe pain with vomiting, rapid tense enlargement, and fever with a red scrotum each need same day reassessment. Record what was told, because the patient who understands the flags returns in time."
+    }
+   ],
+   "probes": [
+    {
+     "level": 1,
+     "q": "Which hydroceles can be watched rather than operated?",
+     "a": "Communicating hydroceles in infants, most resolving within the first year or two, and small asymptomatic primary hydroceles in adults with a normal testis on scan.",
+     "accept": [
+      "infants",
+      "resolve",
+      "small",
+      "asymptomatic",
+      "normal testis"
+     ],
+     "minMatch": 3
+    },
+    {
+     "level": 2,
+     "q": "What operations are offered for a large primary vaginal hydrocele?",
+     "a": "Scrotal excision of the sac with eversion, or plication of the sac behind the testis; a communicating hydrocele in a child is instead ligated through the groin.",
+     "accept": [
+      "excision",
+      "eversion",
+      "plication",
+      "ligation",
+      "groin"
+     ],
+     "minMatch": 3
+    },
+    {
+     "level": 3,
+     "q": "A hydrocele follows proven tuberculous epididymitis. Outline management.",
+     "a": "A full antitubercular course with urology follow up, scrotal support and review of the swelling as treatment proceeds, repairing the hydrocele only after the infection has settled and the testis is reassessed.",
+     "accept": [
+      "antitubercular",
+      "urology",
+      "support",
+      "after infection",
+      "reassessed"
+     ],
+     "minMatch": 3
+    }
+   ],
+   "sources": [
+    {
+     "source": "StewardMD Clinical KB",
+     "locator": "hydrocele: management"
+    },
+    {
+     "source": "Bailey and Love's Short Practice of Surgery",
+     "locator": "The testes and scrotum: treatment of hydrocele"
+    }
+   ],
+   "review": {
+    "status": "ai_drafted"
+   },
+   "dosingNote": "This module teaches operative and supportive management at the level of principle and indication. Specific drugs, doses and regimens must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe."
+  }
+ },
+ "cases": [
+  {
+   "id": "case.scrotal.ramesh",
+   "title": "A bus conductor with a slowly enlarging scrotal swelling",
+   "opening": "Ramesh Yadav, 46, has come to the surgery outpatient clinic with a swelling of the right scrotum that has grown over eight months. He is afebrile and in no pain. Take a history and examine him.",
+   "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+   "initialVitals": {
+    "hr": 78,
+    "bpSystolic": 126,
+    "bpDiastolic": 82,
+    "rr": 16,
+    "spo2": 98,
+    "temp": 37.0,
+    "gcs": 15
+   },
+   "patient": {
+    "name": "Ramesh Yadav",
+    "age": 46,
+    "sex": "male",
+    "occupation": "Bus conductor on the town route",
+    "residence": "Small town, lives with his wife and two children"
+   },
+   "history": {
+    "presenting": {
+     "cues": [
+      "what brings you here today",
+      "tell me about the swelling in the scrotum",
+      "what is the main problem today"
+     ],
+     "reply": "Doctor, for eight months there is a swelling in my right scrotum. It keeps growing slowly. There is no pain, only a heaviness by evening.",
+     "key": true,
+     "skillId": "skill.hx.chief_complaints"
+    },
+    "swelling_onset_course": {
+     "cues": [
+      "when did the swelling first appear",
+      "how did the lump start in the scrotum",
+      "was the onset sudden or gradual"
+     ],
+     "reply": "It began small, like a lemon, on the right side eight months back. It has grown steadily since, and never went away on its own.",
+     "key": true,
+     "skillId": "skill.hx.surg.lump"
+    },
+    "swelling_size_progress": {
+     "cues": [
+      "how has the size changed over months",
+      "how big is the swelling now",
+      "has the swelling grown since you first noticed it"
+     ],
+     "reply": "It is now the size of a small mango. It grows a little every month. It hangs lower than the left side.",
+     "key": true
+    },
+    "scrotal_pain_character": {
+     "cues": [
+      "do you get pain in the swelling",
+      "tell me about the heaviness in the scrotum",
+      "is the swelling painful to touch"
+     ],
+     "reply": "No real pain, doctor. By evening after a full day of standing it feels heavy and drags. Touching it does not hurt.",
+     "key": true,
+     "skillId": "skill.hx.surg.scrotal_swelling_pain"
+    },
+    "cough_impulse_noticed": {
+     "cues": [
+      "does the swelling bulge when you cough",
+      "what happens to the lump on coughing or straining",
+      "does the swelling come down from above"
+     ],
+     "reply": "No, coughing makes no difference. It does not come down from above; it has always been only in the scrotum.",
+     "key": true
+    },
+    "lying_down_effect": {
+     "cues": [
+      "does the swelling disappear on lying down",
+      "what happens to the lump when you lie flat at night",
+      "is the swelling smaller in the morning"
+     ],
+     "reply": "It stays the same, doctor. Lying down at night makes no difference; in the morning it is exactly as it was.",
+     "key": true
+    },
+    "urinary_burning_stream": {
+     "cues": [
+      "do you have burning on passing urine",
+      "tell me about your urine stream and frequency",
+      "any difficulty in passing urine"
+     ],
+     "reply": "No burning, no difficulty. I pass urine normally, two or three times in the day and once at night.",
+     "key": true,
+     "skillId": "skill.hx.surg.scrotal_swelling_pain"
+    },
+    "discharge_exposure_history": {
+     "cues": [
+      "have you had any urethral discharge",
+      "any treatment for infection after physical relations",
+      "any sores or discharge from the private parts"
+     ],
+     "reply": "No, doctor, nothing like that. I have never taken treatment for such an infection.",
+     "key": false,
+     "skillId": "skill.hx.scrotal.risk_factors"
+    },
+    "trauma_blow_history": {
+     "cues": [
+      "have you injured the scrotum",
+      "any blow or hurt to the private parts",
+      "did the swelling follow an accident"
+     ],
+     "reply": "No injury at all. I only noticed it one day while bathing. No tap or draining has been done.",
+     "key": true,
+     "skillId": "skill.hx.scrotal.risk_factors"
+    },
+    "filarial_fever_history": {
+     "cues": [
+      "have you had fever with a painful swollen cord",
+      "tell me about attacks of fever with scrotal pain",
+      "any swelling of the legs with fever"
+     ],
+     "reply": "No, I have never had such fever. My legs have never swollen. We have lived in this town all our lives.",
+     "key": true,
+     "skillId": "skill.hx.scrotal.risk_factors"
+    },
+    "tuberculosis_contact_history": {
+     "cues": [
+      "has anyone at home had tuberculosis",
+      "anyone in the family coughing for months",
+      "were you ever treated for tuberculosis"
+     ],
+     "reply": "No, nobody at home has TB, and I have never taken TB medicines.",
+     "key": true,
+     "skillId": "skill.hx.scrotal.risk_factors"
+    },
+    "mumps_childhood_history": {
+     "cues": [
+      "did you have mumps in childhood",
+      "any painful swelling of the testis as a boy",
+      "did you have swelling below the ears with fever as a child"
+     ],
+     "reply": "I had the usual childhood fevers, but never a painful swelling of the testis that I remember.",
+     "key": false,
+     "skillId": "skill.hx.scrotal.risk_factors"
+    },
+    "standing_work_hours": {
+     "cues": [
+      "what work do you do each day",
+      "how many hours do you stand at work",
+      "tell me about your duty as a conductor"
+     ],
+     "reply": "I am a bus conductor on the town route. I stand in the moving bus nearly ten hours a day, six days a week.",
+     "key": false
+    },
+    "beedi_tobacco_history": {
+     "cues": [
+      "do you smoke beedis or cigarettes",
+      "since when do you use tobacco",
+      "do you chew tobacco as well"
+     ],
+     "reply": "I smoke four or five beedis a day since I was twenty. No chewing tobacco. I drink only at festivals.",
+     "key": false
+    },
+    "daily_medicines_list": {
+     "cues": [
+      "which medicines do you take every day",
+      "are you on any blood thinner tablets",
+      "do you take tablets for sugar or pressure"
+     ],
+     "reply": "Nothing daily, doctor. No sugar, no pressure tablets. Only an occasional paracetamol.",
+     "key": false,
+     "skillId": "skill.hx.scrotal.risk_factors"
+    },
+    "other_illness_check": {
+     "cues": [
+      "do you have diabetes or blood pressure",
+      "any heart or lung disease I should know",
+      "any earlier operation on the abdomen or groin"
+     ],
+     "reply": "No diabetes, no blood pressure. I have never been admitted to hospital or operated.",
+     "key": false
+    },
+    "family_similar_swelling": {
+     "cues": [
+      "has anyone in your family had a similar swelling",
+      "any groin or scrotal operation in the family",
+      "does your brother have a swelling like this"
+     ],
+     "reply": "No, nobody in the family has had this. My father and brother are both well.",
+     "key": false,
+     "skillId": "skill.hx.scrotal.risk_factors"
+    },
+    "redflag_sudden_pain_swelling": {
+     "cues": [
+      "has the swelling ever become suddenly painful",
+      "any vomiting with severe scrotal pain",
+      "has the lump ever turned red and hot"
+     ],
+     "reply": "Never, doctor. It has never pained suddenly, never turned red, and I have never vomited with it.",
+     "key": true
+    }
+   },
+   "exam": {
+    "skill.gen.appearance": {
+     "finding": "Comfortable middle aged man in no distress. Afebrile, no pallor, no lymphadenopathy on general look.",
+     "abnormal": false
+    },
+    "skill.gen.vitals": {
+     "finding": "Pulse 78 regular. Blood pressure 126/82. Respiratory rate 16. SpO2 98 percent on room air. Temperature 37.0 C.",
+     "abnormal": false
+    },
+    "skill.exam.surg.scrotal_palpation": {
+     "finding": "Pyriform cystic swelling of the right scrotum, cystic and fluctuant, skin free over it with lost rugosity. The testis cannot be felt apart from the swelling; the left testis and cord are normal.",
+     "abnormal": true
+    },
+    "skill.exam.surg.transillumination_scrotum": {
+     "finding": "Brilliantly translucent throughout with the torch on the side of the swelling in a darkened room. No opaque area.",
+     "abnormal": true
+    },
+    "skill.exam.surg.hernia_palpation": {
+     "finding": "One can get above the swelling with fingers meeting over a normal cord. No expansile impulse on coughing; the swelling does not reduce.",
+     "abnormal": false
+    },
+    "skill.exam.surg.varicocele": {
+     "finding": "No bag of worms on either side, standing or supine. No thrill on coughing over the cords.",
+     "abnormal": false
+    },
+    "skill.exam.surg.regional_nodes": {
+     "finding": "No inguinal lymphadenopathy on either side. Abdomen soft, no lump felt above the umbilicus.",
+     "abnormal": false
+    }
+   },
+   "essentialInvestigations": [
+    "usg_scrotum",
+    "urine_routine",
+    "blood_counts"
+   ],
+   "investigations": {
+    "usg_scrotum": {
+     "label": "Scrotal ultrasound",
+     "indicated": true,
+     "result": "Anechoic fluid collection around the right testis measuring about 9 cm. Testis of normal size and echo texture, epididymis normal, no mass or septation. Left side normal.",
+     "note": "This clears the testis inside the fluid, which the hand could not do. A normal testis on the scan is what lets you call this primary."
+    },
+    "urine_routine": {
+     "label": "Urine routine and culture",
+     "indicated": true,
+     "result": "Urine clear, no pus cells, no red cells. Culture shows no growth at 48 hours.",
+     "note": "Normal urine argues against an ascending infection behind the effusion, which keeps the secondary workup short."
+    },
+    "blood_counts": {
+     "label": "Blood counts",
+     "indicated": true,
+     "result": "Haemoglobin 13.8 g/dL. Total leucocyte count 7,200 per mm3 with normal differential. No eosinophilia.",
+     "note": "A normal count with no eosinophilia gives no support to filarial or acute infective disease here."
+    },
+    "tumour_markers": {
+     "label": "Tumour markers",
+     "indicated": false,
+     "result": "Not sent.",
+     "note": "Not indicated: the swelling transilluminates fully and the scan shows a normal testis with no mass. Markers are for suspected malignancy, not for every hydrocele."
+    },
+    "doppler_scrotum": {
+     "label": "Colour Doppler of the scrotum",
+     "indicated": false,
+     "result": "Not done.",
+     "note": "Not indicated: there is no pain, no sudden onset and no varicocele on examination, so there is no torsion or venous question to answer."
+    },
+    "cxr": {
+     "label": "Chest radiograph",
+     "indicated": false,
+     "result": "Not done.",
+     "note": "Not indicated: no tuberculosis contact, no urinary tuberculosis clue and no suspected testicular spread that would need lung staging."
+    }
+   },
+   "differentialModel": {
+    "answer": "Primary vaginal hydrocele of the right testis. Consider an inguinoscrotal hernia, a varicocele, an epididymal cyst, a spermatocele, epididymo-orchitis, testicular torsion, a haematocele and a testicular tumour.",
+    "accept": [
+     "inguinal hernia",
+     "varicocele",
+     "epididymal cyst",
+     "spermatocele",
+     "epididymo-orchitis",
+     "testicular torsion",
+     "haematocele",
+     "testicular tumour"
+    ],
+    "minMatch": 3
+   },
+   "diagnosis": {
+    "answer": "Primary vaginal hydrocele of the right testis, present eight months, uncomplicated.",
+    "accept": [
+     "hydrocele",
+     "vaginal hydrocele"
+    ],
+    "minMatch": 1
+   },
+   "managementModel": {
+    "answer": "Reassure and explain the benign nature of the swelling, confirm the testis is normal on scrotal ultrasound, offer elective hydrocele repair for a swelling of this size with heaviness, advise scrotal support with review if pain or rapid enlargement occurs, and refer urgently if the testis cannot be assessed or red flags appear.",
+    "accept": [
+     "reassure and explain the benign nature of the swelling",
+     "confirm the testis is normal on scrotal ultrasound",
+     "offer elective hydrocele repair for a large symptomatic swelling",
+     "advise scrotal support with review if pain or rapid enlargement occurs",
+     "refer urgently if the testis cannot be assessed or red flags appear"
+    ],
+    "minMatch": 3
+   },
+   "teachingPoints": [
+    "The tempo alone should move you toward a hydrocele before a single test is run: eight months of painless growth, not the hours of torsion or the weeks of infection.",
+    "Getting above the swelling with no cough impulse divides a purely scrotal swelling from a hernia in one move, and it must never be skipped even when the swelling looks typical.",
+    "Brilliant translucency proves clear fluid, but it never clears the testis: the impalpable testis inside still obliges an ultrasound before reassurance.",
+    "Prolonged standing is the occupational background here, and it correctly raises varicocele in the history, but the examination refutes it: no bag of worms, no emptying flat, no thrill.",
+    "Normal urine, a normal blood count and no filarial or tuberculosis story keep this primary; each negative was asked after because a positive would have changed the road.",
+    "A 9 cm tense swelling with evening heaviness in a working man has crossed from reassure to repair: size with symptoms is the indication, not size alone.",
+    "Aspiration was rightly not offered as a plan: it relieves but rarely cures, and each tap risks infection while the diagnosis still stands on the scan, not the syringe."
+   ],
+   "review": {
+    "status": "ai_drafted"
+   }
+  }
+ ]
+}

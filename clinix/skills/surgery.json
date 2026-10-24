@@ -36792,6 +36792,2260 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.hx.salivary.risk": {
+      "asks": [
+        {
+          "text": "Have you had repeated painful swellings of the same gland before, and did they settle on their own or need treatment?"
+        },
+        {
+          "text": "How much water do you drink in a day, and do you work long hours in heat without drinking?"
+        },
+        {
+          "text": "Do you chew tobacco, betel quid or areca nut, or smoke beedis or cigarettes, and for how many years?"
+        },
+        {
+          "text": "Which daily medicines do you take, especially any that dry the mouth such as allergy tablets, water tablets or tricyclic medicines?"
+        },
+        {
+          "text": "Have you had neck radiation, mumps with face swelling in childhood, or diabetes and kidney stones?"
+        },
+        {
+          "text": "Has anyone in your family had a neck lump removed, thyroid disease, or dry eyes with joint pains?"
+        }
+      ],
+      "id": "skill.hx.salivary.risk",
+      "kind": "history",
+      "oneLine": "Dehydration, oral sepsis, tobacco, dry-mouth drugs, radiation and family tumours behind the swelling",
+      "probes": [
+        {
+          "a": "Poor fluid intake with heat labour, poor oral hygiene with dental sepsis, tobacco and betel habit, and daily medicines that dry the mouth all favour duct blockage with mineral deposit and ascending gland infection.",
+          "accept": [
+            "fluid",
+            "oral hygiene",
+            "tobacco",
+            "dry the mouth",
+            "blockage"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Which four background habits favour a blocked salivary duct with infection?"
+        },
+        {
+          "a": "Childhood neck irradiation and a family history of salivary or thyroid tumours raise the suspicion of cancer in a lump and lower the threshold for needle sampling.",
+          "accept": [
+            "irradiation",
+            "radiation",
+            "family",
+            "sampling",
+            "malignancy"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Which two background facts raise the suspicion of cancer in a salivary lump?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "sialolithiasis: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "sialadenitis: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Salivary glands: calculi, infection and tumours",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "heading": "Ask about water, mouth, drugs and habits first",
+          "points": [
+            "Daily fluid intake and hours of heat labour without drinking, since stagnant saliva precipitates mineral deposit.",
+            "Oral hygiene, dental caries and gum sepsis, since ascending mouth bacteria infect a slow gland.",
+            "Tobacco, betel quid and smoking history, since smoking clusters with Warthin tumour and betel with oral disease that mimics gland swelling.",
+            "Every daily medicine by name for dry-mouth effects, plus diabetes and debility that slow salivary flow."
+          ]
+        },
+        {
+          "heading": "Past episodes and family set the threshold",
+          "body": "Ask about earlier swellings of the same gland and what settled them: mealtime swellings that pass suggest a duct deposit, while childhood face swelling with fever points to mumps and protects against mislabelling a new lump.\n\nAsk about neck irradiation in childhood and about salivary or thyroid lumps in the family. Either answer raises the suspicion of cancer in the current lump and lowers the threshold for needle sampling rather than watching."
+        }
+      ],
+      "title": "Risk, past, personal, drug and family history in salivary swelling",
+      "why": "The background separates a preventable duct blockage from a tumour that needs sampling. Dehydration, oral sepsis, tobacco and dry-mouth drugs each push the same swelling down a different path, while radiation and family history set the threshold for cancer."
+    },
+    "skill.present.salivary.summary": {
+      "id": "skill.present.salivary.summary",
+      "kind": "presentation",
+      "oneLine": "Gland, tempo, mealtime behaviour and red flags in three sentences",
+      "probes": [
+        {
+          "a": "The patient with relevant exposures, the gland and the tempo, the mealtime behaviour with local findings, and the provisional diagnosis with red flags stated as present or absent.",
+          "accept": [
+            "gland",
+            "tempo",
+            "mealtime",
+            "diagnosis",
+            "red flags"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What elements belong in a salivary case summary?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "salivary_gland_disorders_ent: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Salivary glands: examination and case summary",
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "heading": "Three sentences that contain the case",
+          "body": "Name the patient with the exposures that matter: age, sex, field labour with low fluid intake, tobacco or betel habit. Then name the gland and state the tempo: months of mealtime swelling separates duct blockage from years of painless growth.\n\nThen state the local findings in abstract terms: a tense tender submandibular swelling at meals with bimanual palpability and a dry duct orifice, or a firm lobulated painless parotid lump lifting the ear lobule with an intact facial nerve. End with the provisional diagnosis and what is still missing, such as ultrasound or needle sampling."
+        },
+        {
+          "heading": "A worked example",
+          "body": "A 38 year old male field worker presents with eight months of recurrent right submandibular swelling that tenses painfully during meals and eases between them. Bimanual examination finds a firm tender gland caught between the fingers above and below the mylohyoid, with a dry ipsilateral duct orifice on lemon stimulation.\n\nThis is an obstructive submandibular swelling favouring a duct calculus, pending occlusal radiograph and ultrasound. No facial weakness, skin fixity or hard nodes are present, so the working plan is conservative with defined thresholds for stone retrieval or gland surgery."
+        },
+        {
+          "heading": "Never omit these",
+          "points": [
+            "Which gland is swollen, and whether the swelling is single or bilateral.",
+            "The mealtime behaviour: swelling that tenses with food versus a lump that ignores meals.",
+            "Facial nerve status in every parotid lump, stated as intact or palsied.",
+            "Nodes, skin fixity and duct discharge, stated as present or explicitly absent."
+          ]
+        }
+      ],
+      "title": "Summarising the salivary case",
+      "why": "A salivary summary must carry the gland, the tempo and the mealtime behaviour together, because the plan follows from all three at once. Omitting the nerve status in a parotid lump or the duct findings in a submandibular swelling leaves the listener unable to judge urgency."
+    },
+    "skill.hx.scrotal.risk_factors": {
+      "id": "skill.hx.scrotal.risk_factors",
+      "kind": "history",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "system": "surgery",
+      "title": "Background history in scrotal swelling: past, personal, drug and family",
+      "why": "A scrotal swelling is rarely only what it looks like today. The age at onset, a forgotten fever with a swollen cord, an old urethral discharge, or treatment for tuberculosis each reframes the same lump, and none of them is visible on examination.",
+      "asks": [
+        "At what age did the swelling first appear, and was it present in infancy or early childhood with any change on crying or straining?",
+        "What work do you do each day, and do you stand for most of the day without sitting?",
+        "Have you had repeated attacks of fever with pain and swelling of the cord or scrotum, and where have you lived for most of your life?",
+        "Have you ever been treated for tuberculosis, or lived with anyone who coughed for months and took prolonged treatment?",
+        "Did you have mumps with a painful swollen testis in childhood or adolescence?",
+        "Have you had burning on passing urine, a urethral discharge, or treatment for a sexually transmitted infection?",
+        "Have you ever injured the scrotum, had a swelling tapped or drained, or been operated on for hernia or hydrocele?",
+        "Do you have children, and has fathering a child ever been difficult?",
+        "Which medicines do you take every day, including blood thinners, and have you taken steroids for weeks at a time?",
+        "Has anyone in your family had a similar scrotal swelling, an undescended testis, or a testicular tumour at a young age?"
+      ],
+      "teach": [
+        {
+          "body": "A painless swelling that has grown slowly for months in a man past forty usually proves to be a primary vaginal hydrocele. A swelling in a man between twenty and forty more often proves secondary, following infection, trauma or torsion. A testicular tumour is a disease of the young, and torsion strikes boys and teenagers, so the age alone already narrows the list before the examination begins.\n\nIn infants a communicating hydrocele comes and goes and usually settles within the first year or two of life. Operating before that window closes treats many children who would have recovered on their own.",
+          "heading": "Age points at the diagnosis before you touch the patient"
+        },
+        {
+          "body": "Ask directly about periodic fever with a painful swollen cord, because filarial funiculitis leaves exactly this story and is common in coastal and eastern districts. Ask about tuberculosis treatment and household contact, since tuberculous disease reaches the epididymis through the urinary tract and also scars the seminal vesicles.\n\nAsk about mumps orchitis, urethral discharge and urethritis, because each seeds the epididymis by a different route and changes which investigations you order. A trivial knock that the patient blames for the swelling deserves attention too, but remember that trauma more often draws notice to a lump than causes it.",
+          "heading": "Ask after filariasis, tuberculosis, mumps and urethritis"
+        },
+        {
+          "heading": "Background factors and what each one changes",
+          "table": {
+            "cols": [
+              "Factor to ask after",
+              "What it tells you",
+              "What to do about it"
+            ],
+            "rows": [
+              [
+                "Age at onset and tempo",
+                "Infantile communicating, primary past forty, secondary at twenty to forty",
+                "Decide whether to watch, scan or refer urgently"
+              ],
+              [
+                "Prolonged standing at work",
+                "A varicocele that appears on standing and vanishes lying down",
+                "Examine standing then supine; look for a renal cause if sudden"
+              ],
+              [
+                "Periodic fever with cord pain",
+                "Filarial infection of the cord and lymphatics",
+                "Night blood smear, urine check, antifilarial course by guideline"
+              ],
+              [
+                "Tuberculosis past or contact",
+                "Epididymal disease with beaded vas and cold abscess",
+                "Urine tests, chest film, full antitubercular course if proved"
+              ],
+              [
+                "Mumps, discharge or dysuria",
+                "Epididymo-orchitis by ascent from below",
+                "Urine culture, treat the urinary infection alongside"
+              ],
+              [
+                "Earlier tapping or hernia repair",
+                "Recurrence, a plugged sac, or a missed secondary cause",
+                "Scan before promising a simple operation"
+              ],
+              [
+                "Blood thinners and steroids",
+                "Bleeding and poor healing at elective surgery",
+                "Plan stopping and cover with the anaesthetist"
+              ],
+              [
+                "Family similar swelling",
+                "Shared infection exposure or undescended testis",
+                "Examine brothers, screen the household where relevant"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "a": "The age at onset and tempo, standing work, periodic filarial fever, tuberculosis past and contact, mumps and urethritis, trauma and earlier tapping or repair, fertility, daily drugs, and a family history of similar swelling.",
+          "accept": [
+            "age",
+            "standing",
+            "filarial",
+            "tuberculosis",
+            "mumps",
+            "trauma",
+            "repair",
+            "fertility",
+            "drugs",
+            "family"
+          ],
+          "level": 1,
+          "minMatch": 4,
+          "q": "Name five background facts you must ask after in every scrotal swelling history."
+        },
+        {
+          "a": "Because filarial fever with cord swelling, tuberculosis of the urinary tract, mumps orchitis and urethritis each seed the epididymis or cord, and each needs a different investigation and a different definitive treatment.",
+          "accept": [
+            "filarial",
+            "tuberculosis",
+            "mumps",
+            "urethritis",
+            "investigation",
+            "treatment"
+          ],
+          "level": 2,
+          "minMatch": 3,
+          "q": "Why do you ask about periodic fever, tuberculosis, mumps and urethral discharge in a man with a chronic scrotal swelling?"
+        },
+        {
+          "a": "A varicocele that fills on standing in a young man is usually idiopathic, but a varicocele of sudden onset in a middle aged man can follow a renal tumour obstructing the testicular vein, so examine the kidney and arrange an ultrasound rather than reassuring him.",
+          "accept": [
+            "sudden",
+            "renal tumour",
+            "kidney",
+            "ultrasound",
+            "testicular vein"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "A middle aged man reports a varicocele that appeared within weeks. What must you exclude, and how?"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "hydrocele: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The testes and scrotum: history of scrotal swellings",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ]
+    },
+    "skill.present.scrotal.summary": {
+      "id": "skill.present.scrotal.summary",
+      "kind": "presentation",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "system": "surgery",
+      "title": "Summarising the scrotal swelling case",
+      "why": "The consultant decides the plan from your summary, not from your examination. Side, duration, pain, whether you can get above the swelling, translucency, the state of the testis and cord, and the one urgency flag must all land in under a minute.",
+      "teach": [
+        {
+          "body": "State the patient with age and work, the duration and tempo of the swelling, then the syndrome in abstract terms: a painless right scrotal swelling of eight months with a brilliantly translucent cystic feel, from which one can get above, the testis impalpable within it.\n\nClose with the discriminators and fitness: no cough impulse, cord felt separately above, no nodes, no fever or urinary symptoms, and the comorbidity and drugs that decide fitness for elective repair.",
+          "heading": "The shape of the summary"
+        },
+        {
+          "body": "A forty six year old bus conductor presents with a painless swelling of the right scrotum that has grown slowly over eight months, heavy by evening but never painful, with no fever, urinary burning or discharge.\n\nExamination shows a pyriform right scrotal swelling that is cystic, fluctuant and brilliantly translucent, from which one can get above, with no cough impulse. The testis cannot be felt apart from the swelling, the cord is normal above it, and there is no lymphadenopathy. This is an uncomplicated primary vaginal hydrocele, with prolonged standing as the occupational background and no feature of hernia, tumour or acute torsion.",
+          "heading": "A worked example"
+        },
+        {
+          "heading": "What never to omit",
+          "points": [
+            "Side, duration and tempo: months of painless growth versus hours of acute pain.",
+            "Pain characterised exactly, since a painless swelling and an agonising one take different roads.",
+            "Whether you can get above the swelling, and whether it has a cough impulse.",
+            "Transillumination and fluctuation, stated as positive or negative with the method.",
+            "The testis, epididymis and cord: felt separately, impalpable, thickened, beaded or nodular.",
+            "Nodes, fever and urinary symptoms as stated negatives where they exclude infection or spread.",
+            "Fitness and causes: comorbidity, bleeding drugs, and the TB, filarial and urethritis background."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "a": "Side, duration and tempo, pain, whether one can get above the swelling, cough impulse, translucency and fluctuation, the state of testis, epididymis and cord, nodes, and fitness with the infective background.",
+          "accept": [
+            "side",
+            "tempo",
+            "get above",
+            "cough impulse",
+            "translucency",
+            "testis",
+            "cord",
+            "nodes",
+            "fitness"
+          ],
+          "level": 2,
+          "minMatch": 4,
+          "q": "What must a scrotal swelling summary always contain?"
+        },
+        {
+          "a": "No. An impalpable testis inside a hydrocele can hide a tumour, so the summary must flag the uncertainty, state that ultrasound assessment of the testis is still awaited, and give the referral threshold rather than closing the case.",
+          "accept": [
+            "impalpable",
+            "tumour",
+            "ultrasound",
+            "referral",
+            "uncertainty"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "The testis cannot be felt within the swelling. Can you still close the summary as a simple hydrocele?"
+        }
+      ],
+      "rubric": [
+        {
+          "id": "tempo",
+          "text": "States side, duration, tempo and pain"
+        },
+        {
+          "id": "signs",
+          "text": "States get-above, impulse, translucency and the state of testis and cord"
+        },
+        {
+          "id": "close",
+          "text": "Closes with a diagnosis, negatives, fitness and follow up"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "hydrocele: pitfalls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The testes and scrotum: examination of the scrotum",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ]
+    },
+    "skill.hx.gi.risk": {
+      "id": "skill.hx.gi.risk",
+      "kind": "history",
+      "system": "surgery",
+      "title": "Background risks behind gastrointestinal bleeding",
+      "oneLine": "Drugs, drink, liver disease and past ulcer or bleed behind the current bleed",
+      "why": "Most gastrointestinal bleeds are not bad luck. A daily painkiller, regular alcohol with liver disease, a blood thinner, or a past ulcer that was never tested for cure each changes the likely source and the urgency, and none of them is volunteered unless asked directly.",
+      "asks": [
+        {
+          "text": "Which painkillers do you take, including aspirin, ibuprofen, diclofenac or any tablet for joint pain, and for how many weeks or months?"
+        },
+        {
+          "text": "Do you take any blood thinner such as aspirin, clopidogrel or warfarin, and who prescribed it and for what heart or vessel problem?"
+        },
+        {
+          "text": "How much alcohol do you drink in a week, for how many years, and have you ever been told you have liver damage, jaundice or swollen veins in the food pipe?"
+        },
+        {
+          "text": "Have you vomited blood or passed black stools before, were you told you have an ulcer, and were you tested for the stomach germ after treatment?"
+        },
+        {
+          "text": "Do you smoke beedis or cigarettes or chew tobacco, and do you eat irregularly with long gaps or frequent spicy outside food?"
+        },
+        {
+          "text": "Do you have heart failure, kidney disease or chronic lung disease, and which daily medicines do you take for them?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Ask about painkillers by name, not as drugs",
+          "points": [
+            "Name aspirin, ibuprofen and diclofenac one by one, since many patients do not count a painkiller bought without prescription as a medicine.",
+            "Ask the dose, the number of weeks or months, and whether it is taken on an empty stomach, because risk rises with duration rather than with any single tablet.",
+            "Ask about low dose aspirin for the heart separately, since even a small daily dose can injure the stomach lining.",
+            "Record self medication from chemists and herbal powders too, since undisclosed powders often contain hidden painkillers."
+          ]
+        },
+        {
+          "heading": "Map drink to liver before asking about varices",
+          "body": "Ask quantity in local measures, frequency and years of drinking, then ask directly about jaundice, swelling of the feet or abdomen, and vomiting of blood in the past. A patient with years of heavy drinking and fluid in the abdomen bleeds from a different source than a painkiller user, and the resuscitation plan differs.\n\nAsk about blood transfusions, jaundice after injections, and needle sharing as well, since chronic viral liver disease is another route to the same portal pressure."
+        },
+        {
+          "heading": "Past ulcer, past bleed and the stomach germ",
+          "body": "Ask whether an ulcer was ever diagnosed, whether black stools or vomiting of blood happened before, and what treatment was given. Then ask whether a breath, stool or biopsy test confirmed the stomach germ was cured, because an ulcer that was never tested stays a likely source.\n\nA bleed without warning is common, so the absence of past dyspepsia never excludes an ulcer as the source."
+        },
+        {
+          "heading": "Comorbidity changes the transfusion threshold",
+          "points": [
+            "Heart failure and ischaemic heart disease, since anaemia is tolerated poorly and the transfusion threshold is set higher.",
+            "Chronic kidney disease and chronic lung disease, since both worsen the tolerance of sudden blood loss.",
+            "Diabetes and steroid use, since both slow ulcer healing and raise infection risk after admission.",
+            "Allergy to penicillin or aspirin, recorded before any eradication or antiplatelet plan is written."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name four background facts you must ask in every gastrointestinal bleed.",
+          "a": "Painkiller and aspirin use, alcohol with liver disease, blood thinners, and a past ulcer or bleed with whether the stomach germ was cured.",
+          "accept": [
+            "painkiller",
+            "aspirin",
+            "alcohol",
+            "liver",
+            "blood thinner",
+            "past ulcer",
+            "past bleed"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why do you ask about heart failure and kidney disease in a bleeding patient?",
+          "a": "Because comorbidity changes how much blood loss the patient tolerates and where the transfusion threshold is set, and it changes drug choices during resuscitation.",
+          "accept": [
+            "tolerance",
+            "transfusion threshold",
+            "comorbidity",
+            "tolerate"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "peptic_ulcer_disease_and_related: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Peptic ulcer"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.gi.summary": {
+      "id": "skill.present.gi.summary",
+      "kind": "presentation",
+      "system": "surgery",
+      "title": "Presenting the gastrointestinal bleed case",
+      "oneLine": "Patient, bleed pattern, volume clues and scores in three sentences",
+      "why": "A bleeding case summary must carry the bleed pattern, the evidence of volume loss and the risk score together, because the plan follows from all three at once. Omitting the score or the evidence of shock leaves the listener unable to judge whether this patient can wait for a morning list.",
+      "teach": [
+        {
+          "heading": "Three sentences that contain the case",
+          "body": "Name the patient with the risks that matter: age, painkiller or alcohol use, liver disease, blood thinners. Then state the bleed in pattern terms: vomiting of bright red blood or coffee ground material, black tarry stools or fresh blood per rectum, with the number of episodes and the time course.\n\nThen state the evidence of volume loss and the scores: pulse and blood pressure with any postural fall, haemoglobin and urea, the pre endoscopy risk score and the post endoscopy score where available. End with the working source and what is still missing, such as urgent endoscopy or colonoscopy."
+        },
+        {
+          "heading": "A worked example",
+          "body": "A 54 year old male farm worker and regular painkiller user presents with two episodes of vomiting of dark blood and one black tarry stool over twelve hours. He is pale and restless with a pulse of 112, a systolic pressure of 98 lying flat, and a haemoglobin of 8.1 g per dL with a raised urea.\n\nThis is an upper gastrointestinal bleed with haemodynamic instability and a high pre endoscopy risk score, for resuscitation and urgent inpatient endoscopy within 24 hours. No chest pain, breathlessness or calf swelling is present, and the rectal examination confirms melaena without a local anal source."
+        },
+        {
+          "heading": "Never omit these",
+          "points": [
+            "Upper or lower pattern stated from the history, not left for the listener to infer.",
+            "Volume evidence: pulse, blood pressure, postural change, haemoglobin and urea.",
+            "Risk scores with the band they place the patient in, and what that band changes.",
+            "Resuscitation status: access, fluids, transfusion given or threshold set.",
+            "Relevant negatives: no chest pain, no breathlessness, no calf swelling, no local anal source where claimed."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What elements belong in a gastrointestinal bleed summary?",
+          "a": "The patient with relevant risks, the bleed pattern with tempo, the volume evidence with scores, and the working source with what is still missing.",
+          "accept": [
+            "bleed pattern",
+            "volume",
+            "scores",
+            "resuscitation",
+            "source"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "pattern",
+          "text": "States the bleed as upper or lower with the evidence"
+        },
+        {
+          "id": "volume",
+          "text": "States volume evidence and risk scores"
+        },
+        {
+          "id": "plan",
+          "text": "Links the summary to resuscitation and endoscopy timing"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "peptic_ulcer_gi_bleed_long_case: clinicalPearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Haematemesis and melaena"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.deep.leg_swelling": {
+      "id": "skill.hx.deep.leg_swelling",
+      "kind": "history",
+      "system": "surgery",
+      "title": "History of a painful swollen leg",
+      "oneLine": "One leg, days old, calf pain with swelling, and the chest symptoms that warn of embolism",
+      "why": "Deep vein thrombosis is mostly silent, so the history has to do the work the examination cannot: a sudden painful swelling of one leg within days, made worse by standing and walking, is the story that earns a scan, while new breathlessness or pleuritic pain in the same patient warns that part of the clot has already travelled to the lungs.",
+      "teach": [
+        {
+          "heading": "Tempo and side carry the diagnosis",
+          "body": "Ask which leg, and how many days. Thrombosis typically declares itself over hours to a few days with pain and swelling of one leg, often starting in the calf. A swelling that has built over months or years, or that affects both legs equally, points instead toward chronic venous disease, lymphoedema, or a systemic cause of oedema.\n\nRemember that most thrombosis never announces itself at all, so the absence of a dramatic story does not exclude it. In a patient with a recent operation, delivery, long journey or period of bed rest, even a modest new calf ache with mild swelling deserves the same questions as a grossly swollen leg."
+        },
+        {
+          "heading": "What to ask about the leg",
+          "points": [
+            "Which leg is swollen, and is the swelling around the ankle and calf or the whole limb from thigh down.",
+            "When it started and whether the onset was sudden, and whether pain or swelling came first.",
+            "The character of the pain: a cramp-like calf ache that worsens on standing and walking and eases with elevation.",
+            "Whether the leg feels warm or looks red compared with the other side, and whether the surface veins look more prominent.",
+            "Whether walking has become difficult, and whether the calf is tender to touch or to gentle squeezing.",
+            "Any fever, and any recent knock, strain or long walk that could explain a muscle injury instead."
+          ]
+        },
+        {
+          "heading": "Always ask the chest questions",
+          "body": "Every patient with a suspected leg thrombosis must be asked about breathlessness, pleuritic chest pain, cough and coughing of blood. The clot can embolise silently, and breathlessness may be the first symptom the patient volunteers once asked.\n\nAlso ask whether anyone has noticed the patient breathing fast, and whether there has been faintness or collapse. A yes to any of these moves the case from a leg problem to a possible emergency, and the examination and investigations must then cover the chest as well as the leg."
+        }
+      ],
+      "asks": [
+        {
+          "text": "Which leg is swollen, and did the pain or the swelling come first?"
+        },
+        {
+          "text": "How many days ago did this start, and did it come on suddenly?"
+        },
+        {
+          "text": "Does the calf ache worsen when you stand or walk, and does raising the leg ease it?"
+        },
+        {
+          "text": "Is the swollen leg warmer or redder than the other one, and are the surface veins more visible?"
+        },
+        {
+          "text": "Have you had any breathlessness, chest pain on breathing in, cough, or blood in the sputum since the leg swelled?"
+        },
+        {
+          "text": "Have you had any fever, recent injury to the leg, or an unusually long walk or strain before this started?"
+        }
+      ],
+      "pitfalls": [
+        "Accepting bilateral ankle swelling as thrombosis without asking why only one deep system would block.",
+        "Forgetting the chest questions, so an embolism that has already happened goes unasked about.",
+        "Dismissing a mild calf ache in a postoperative or postpartum patient because the leg is not dramatically swollen."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A patient reports a left calf ache with ankle swelling that began two days ago after a long bus journey. Why does this story raise suspected thrombosis?",
+          "a": "A sudden unilateral calf pain with swelling within days, following prolonged immobility, is the classic tempo and setting of deep vein thrombosis.",
+          "accept": [
+            "unilateral",
+            "sudden",
+            "days",
+            "immobility",
+            "swelling"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why must you ask about breathlessness and pleuritic pain in every patient with a suspected leg thrombosis?",
+          "a": "Because part of the clot may already have embolised to the lungs, and breathlessness or pleuritic pain with haemoptysis would reveal a pulmonary embolism needing urgent assessment.",
+          "accept": [
+            "embolised",
+            "lungs",
+            "breathlessness",
+            "pleuritic",
+            "haemoptysis"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "tempo",
+          "text": "Establishes side, suddenness and days since onset"
+        },
+        {
+          "id": "leg_detail",
+          "text": "Records pain character, swelling extent, warmth, redness and walking effect"
+        },
+        {
+          "id": "chest_screen",
+          "text": "Screens for breathlessness, pleuritic pain, cough and haemoptysis"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "deep_venous_thrombosis_and_pulmonary: clinicalPearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Deep vein thrombosis: symptoms and history"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.deep.risk": {
+      "id": "skill.hx.deep.risk",
+      "kind": "history",
+      "system": "surgery",
+      "title": "Risk, past, drug and family history in suspected thrombosis",
+      "oneLine": "Stasis, injury and clotting tendency: surgery, stillness, cancer, hormones, past clots and family",
+      "why": "Whether a swollen leg is thrombosis, and whether it will happen again, is decided by the risk story: a recent operation or delivery, days of stillness, an active cancer, hormonal pills, or a past clot each raise the likelihood before a hand touches the leg, and each changes how long treatment must continue.",
+      "teach": [
+        {
+          "heading": "Stillness after surgery or delivery is the commonest setting",
+          "body": "Ask about any operation under general anaesthesia, any delivery or miscarriage, any fracture or plaster, and any long period in bed with a debilitating illness. Calf muscles idle during anaesthesia or bed rest fail to pump blood through the deep veins, and thrombosis follows stasis.\n\nAsk the same about travel: a long bus or train journey sitting still for many hours is a standard history in Indian practice. Record the date of the operation or journey and count the days to the swelling, because thrombosis typically declares itself within days to a couple of weeks."
+        },
+        {
+          "heading": "Conditions and drugs that thicken the tendency to clot",
+          "points": [
+            "Any active cancer or its treatment, and any recent unexplained loss of weight or appetite that could hide one.",
+            "Pregnancy and the weeks after delivery, when clotting tendency is physiologically raised.",
+            "Hormonal contraceptive pills taken for many months, which raise the chance of venous thrombosis.",
+            "Known diabetes, obesity, smoking, and dehydration during illness or travel, which add to the risk.",
+            "Long-term medicines: steroids, diuretics, and any anticoagulant already being taken, with doses missed.",
+            "Past history of a painful swollen leg, pulmonary embolism, miscarriages, or known protein C, protein S or antithrombin deficiency."
+          ]
+        },
+        {
+          "heading": "Family history and the inherited tendency",
+          "body": "Ask whether parents or siblings have had leg clots, pulmonary embolism, repeated miscarriages, or lifelong anticoagulant treatment. Inherited states such as factor V Leiden, the prothrombin gene change, and deficiencies of antithrombin, protein C or protein S run in families.\n\nA young patient with an unprovoked clot, a clot in both legs, or relatives with the same story needs referral for thrombophilia assessment after the acute treatment. Record the pedigree briefly rather than writing family history positive without detail."
+        }
+      ],
+      "asks": [
+        {
+          "text": "Have you had any operation, delivery, fracture, plaster, or long stay in bed in the last few weeks, and on which date?"
+        },
+        {
+          "text": "Have you undertaken any long bus, train or air journey sitting still for many hours before this started?"
+        },
+        {
+          "text": "Do you have any cancer or its treatment, or recent loss of weight or appetite?"
+        },
+        {
+          "text": "For women: are you pregnant or delivered in the last few weeks, and have you taken hormonal contraceptive pills, and for how long?"
+        },
+        {
+          "text": "Have you ever had a painful swollen leg or a lung clot before, and are you taking any blood-thinning medicine?"
+        },
+        {
+          "text": "Has anyone in your family had leg clots, a lung clot, repeated miscarriages, or lifelong blood-thinner treatment?"
+        }
+      ],
+      "pitfalls": [
+        "Recording a postoperative swollen leg without asking the date of surgery, so the link to stasis is never made.",
+        "Forgetting the pill and pregnancy history in a young woman with an otherwise unexplained clot.",
+        "Writing family history positive without names, ages and events, which cannot guide thrombophilia referral."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three risk settings you must ask about in every suspected deep vein thrombosis.",
+          "a": "Recent surgery or anaesthesia, prolonged immobility or travel, and a prothrombotic state such as cancer, pregnancy, hormonal pills or a past clot.",
+          "accept": [
+            "surgery",
+            "immobility",
+            "travel",
+            "cancer",
+            "pregnancy",
+            "pills",
+            "past clot"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "A 24 year old woman has an unprovoked calf thrombosis and her mother had a lung clot at 30. What does the family story add?",
+          "a": "It raises an inherited thrombophilia such as factor V Leiden, prothrombin gene change or protein C, protein S or antithrombin deficiency, needing referral for assessment after acute treatment.",
+          "accept": [
+            "inherited",
+            "thrombophilia",
+            "factor V",
+            "protein C",
+            "antithrombin",
+            "referral"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "stasis",
+          "text": "Records operation, delivery, bed rest and travel with dates"
+        },
+        {
+          "id": "clot_risk",
+          "text": "Screens for cancer, hormones, pregnancy, past clots and current anticoagulants"
+        },
+        {
+          "id": "family",
+          "text": "Records family clots and miscarriages with enough detail for referral"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "deep_venous_thrombosis_and_pulmonary: risk factors for thrombosis"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Venous thrombosis: aetiology and risk factors"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.deep.summary": {
+      "id": "skill.present.deep.summary",
+      "kind": "presentation",
+      "system": "surgery",
+      "title": "Presenting the deep vein thrombosis case",
+      "oneLine": "Tempo, Wells likelihood, duplex result and provoked or not, ending with duration and follow up",
+      "why": "A thrombosis presentation fails when the student lists the swelling without ever stating the clinical likelihood, the scan result, or whether the clot was provoked: those three facts decide treatment and its duration, so the consultant needs them in the first minute, not buried at the end.",
+      "teach": [
+        {
+          "heading": "Five lines that contain the case",
+          "body": "Open with the patient and the setting: age, sex, and the provoking event with its date, such as a hysterectomy ten days ago. Then give the tempo: sudden calf pain with swelling over days, and whether the chest questions were positive or negative.\n\nThen state the clinical likelihood by the Wells assessment and the scan result: a non-compressible segment on duplex confirms thrombosis, while a negative d-dimer in a low-likelihood patient excludes it. Close with provoked or unprovoked, the chosen anticoagulant class, planned duration, and advice on mobilisation, compression, bleeding watch and follow up."
+        },
+        {
+          "heading": "A worked example",
+          "body": "A 52 year old homemaker presents ten days after abdominal hysterectomy with a three-day painful swelling of the left leg from calf to ankle, without breathlessness or chest pain. The calf is tender and warmer than the right, with pitting oedema to the mid shin.\n\nThe Wells assessment gives high clinical likelihood, and duplex shows a non-compressible left popliteal segment with absent flow. This is an acute provoked proximal deep vein thrombosis, started on therapeutic anticoagulation with a planned three-month course, graduated compression, early mobilisation, and review for bleeding and post-thrombotic symptoms."
+        },
+        {
+          "heading": "Never omit these",
+          "points": [
+            "The provoking event with its date, because provoked or unprovoked decides duration.",
+            "The chest screen result, because a missed embolism is the dangerous error.",
+            "The Wells likelihood and exactly which test confirmed or excluded the clot.",
+            "The negatives that protect the plan: pulses present, no whole-limb blue congestion, no bleeding risk stated.",
+            "Duration, compression, mobilisation, bleeding advice, and when the patient must return."
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Describing the swelling in detail while never stating the Wells likelihood or the duplex result.",
+        "Omitting the provoking event, leaving the listener unable to judge whether three months or longer treatment is planned.",
+        "Closing without bleeding advice and follow up, as if starting anticoagulation ends the case."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What three facts must the first minute of a thrombosis presentation contain?",
+          "a": "The provoking setting with its date, the Wells clinical likelihood, and the confirmatory test result, because together they decide treatment and duration.",
+          "accept": [
+            "provoking",
+            "Wells",
+            "likelihood",
+            "duplex",
+            "duration"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "setting",
+          "text": "States the provoking event with its date and the tempo"
+        },
+        {
+          "id": "proof",
+          "text": "States Wells likelihood and the duplex or d-dimer result"
+        },
+        {
+          "id": "plan",
+          "text": "States provoked or not, duration, compression, mobilisation and bleeding advice"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "deep_venous_thrombosis_and_pulmonary: diagnosis and risk stratification of DVT and PE"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Deep vein thrombosis: presenting the leg case"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.abdominal.trauma_risks": {
+      "id": "skill.hx.abdominal.trauma_risks",
+      "kind": "history",
+      "system": "surgery",
+      "title": "Background risks in abdominal trauma",
+      "oneLine": "Mechanism, bleeding risk, bladder clues, tetanus cover and comorbidity before the belly is touched",
+      "why": "In a penetrating wound the history decides how fast the patient must reach theatre, and a missed detail such as blood thinners, an unprotected wound or a full bladder changes the risk of bleeding, infection and a missed bladder injury. Asking it in one pass keeps the primary survey moving.",
+      "body": "Take the mechanism, the bleeding and contamination risks, and the bladder and tetanus history together, since each one changes urgency, wound care or the operation planned.",
+      "asks": [
+        {
+          "text": "Mechanism and weapon: What exactly caused the wound, a knife, a sharp object, a bullet or a fall onto something sharp? How long was the blade, how hard was the thrust, and was it one wound or several? A long blade or a high velocity missile damages widely beyond the visible track."
+        },
+        {
+          "text": "Time and place of injury: When did it happen, and how long did it take to reach care? Ask what was done to the wound meanwhile, since delay favours infection and a longer prehospital time means more blood already lost."
+        },
+        {
+          "text": "Blood loss and faintness: How much blood was seen at the scene, did the patient faint, feel giddy on standing, or become less responsive? Restlessness and air hunger after injury point to continuing internal bleeding rather than pain alone."
+        },
+        {
+          "text": "Vomiting and its content: Did the patient vomit after the injury, and did the vomit contain blood? Blood in vomit suggests upper gut involvement, while repeated vomiting with a tense abdomen follows developing peritonitis."
+        },
+        {
+          "text": "Urine passage since injury: Has the patient passed urine, and was there blood in it? Ask also about an intense desire to pass water with only a few drops of blood coming out, which suggests bladder or urethral injury, and about no desire at all, which fits an intraperitoneal bladder rupture."
+        },
+        {
+          "text": "Drugs that bleed and drugs that mask: Is the patient on blood thinners, aspirin, painkillers or steroids, and when was the last dose taken? Painkillers and steroids blunt the guarding you rely on, while thinners turn a contained haematoma into free bleeding."
+        },
+        {
+          "text": "Past operations, hernia and pregnancy: Any previous abdominal operation, hernia repair, or current pregnancy? Old scars tether bowel to the wall so a wound over a scar injures gut more easily, and pregnancy displaces organs and changes resuscitation priorities."
+        },
+        {
+          "text": "Tetanus cover and comorbidity: When was the last tetanus injection, and does the patient have diabetes, hypertension, heart disease or alcohol dependence? A dirty penetrating wound in an unimmunised diabetic patient needs both prophylaxis and tighter wound watch."
+        }
+      ],
+      "keyPoints": [
+        "Record mechanism, weapon length, force and number of wounds first, since a gunshot or a long blade means wide hidden damage even when the entry wound looks small.",
+        "Ask urine passage and blood in urine in every case, plus the desire to pass water with only drops of blood, which separates urethral and bladder patterns.",
+        "Confirm blood thinners, painkillers and steroids with the last dose, because they change bleeding risk and hide peritoneal signs.",
+        "Check tetanus immunisation and diabetes together in a contaminated wound, since both decide prophylaxis and follow up.",
+        "A previous scar over the wound line and a current pregnancy both change what lies under the blade and must be stated, not assumed."
+      ],
+      "teach": [
+        {
+          "heading": "Mechanism tells you the hidden track",
+          "body": "Ask what caused the wound, how long the weapon was, how hard the thrust was, and how many wounds there are. A stab wound injures along a fairly predictable track, while a bullet transfers energy widely and injures beyond the visible path.\n\nNote the time since injury and what was done at the scene. Penetrating wounds expose the peritoneal cavity to the outside, so infection risk grows with every hour of delay."
+        },
+        {
+          "heading": "Urine and tetanus are never skipped",
+          "body": "Ask whether urine has been passed and whether it contained blood, and distinguish the patient who strains to pass a few drops of blood from the one with no desire to pass water at all. The first pattern fits the lower urinary passage, the second an intraperitoneal bladder leak.\n\nAsk the date of the last tetanus injection in the same breath. A contaminated wound in an unprotected patient needs prophylaxis urgently, and diabetes makes infection more likely."
+        },
+        {
+          "heading": "Drugs and scars that change the picture",
+          "body": "Ask about blood thinners, painkillers and steroids with the last dose taken. Thinners convert a contained bleed into a free one, and painkillers with steroids blunt the very guarding and rebound you will rely on.\n\nAsk about previous abdominal operations, since adhesions fix bowel under the scar and make gut injury more likely beneath a wound that crosses it."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "In a stab wound to the abdomen, what three history points besides the wound itself must you always record?",
+          "a": "The mechanism and time since injury, whether urine has been passed and if it contained blood, and the date of the last tetanus injection.",
+          "accept": [
+            "mechanism",
+            "urine",
+            "blood",
+            "tetanus"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why do you ask about painkillers and steroids in abdominal trauma?",
+          "a": "Because painkillers and steroids blunt guarding and rebound tenderness, so they can hide the peritoneal signs you rely on to decide for operation.",
+          "accept": [
+            "blunt",
+            "guarding",
+            "hide",
+            "peritoneal"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "penetrating_abdominal_trauma: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Abdominal trauma"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Abdominal injuries"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.abdominal.case_summary": {
+      "id": "skill.present.abdominal.case_summary",
+      "kind": "presentation",
+      "system": "surgery",
+      "title": "Presenting the abdominal trauma case",
+      "oneLine": "Sixty-second bedside summary from wound and vitals to the theatre decision",
+      "why": "In trauma the senior clinician needs stability, wounds, belly findings and the plan in the first minute, because the decision to operate cannot wait for a long story. A crisp order, stability first and mechanism woven in, is what makes the presentation safe to act on.",
+      "teach": [
+        {
+          "heading": "The sixty-second trauma presentation",
+          "body": "Open with age, sex, mechanism and time since injury, then state stability in one line with pulse, pressure and urine passage. Name each wound by site, size and what is visible at its mouth, then give the belly findings of guarding, rebound, distension and bowel sounds.\n\nClose with the FAST result, the erect film, blood grouping status and your plan: immediate operation, wound exploration under cover, or serial examination with clear review timing."
+        },
+        {
+          "heading": "What the senior listens for",
+          "body": "Four decision points must be audible: first, stable or not, with the numbers that prove it; second, peritonitis present or absent, with the signs found; third, the urinary and chest screen, urine blood, chest findings and back inspection; fourth, tetanus cover, antibiotics started, blood arranged and consent for operation.\n\nState what you have excluded as well as what you found, since a negative rectal examination, a clear chest and an intact back are part of the safety net."
+        }
+      ],
+      "practice": "Rehearse presenting a stable stab wound case in sixty seconds: mechanism, vitals, wound description, belly and chest findings, FAST and film results, and whether the patient needs theatre now or serial review.",
+      "pitfalls": [
+        "Opening with past history and comorbidity before stating stability, mechanism and wounds.",
+        "Describing the belly without saying whether peritonitis is present or absent as a clear verdict.",
+        "Omitting the back and flank inspection, the urine finding and the tetanus status from the plan."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the first line of a trauma case presentation?",
+          "a": "Age, mechanism and time since injury, followed at once by stability with pulse, pressure and urine passage.",
+          "accept": [
+            "mechanism",
+            "stability",
+            "pulse",
+            "pressure",
+            "urine"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which negatives must a complete abdominal trauma presentation include?",
+          "a": "No peritonitis or a clear verdict on it, a clear chest, an intact back and flanks, blood in urine excluded, and tetanus cover confirmed.",
+          "accept": [
+            "peritonitis",
+            "chest",
+            "back",
+            "urine",
+            "tetanus"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "opener",
+          "text": "States mechanism, time since injury and stability with vitals in the first lines."
+        },
+        {
+          "id": "findings",
+          "text": "Gives wound description, belly verdict on peritonitis, chest and back screen, and urine finding."
+        },
+        {
+          "id": "plan",
+          "text": "Closes with FAST and film, blood and consent status, and a clear theatre or review decision."
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "penetrating_abdominal_trauma: management"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Abdominal trauma"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.burns.story": {
+      "id": "skill.hx.burns.story",
+      "kind": "history",
+      "system": "surgery",
+      "title": "History of the burn: what burned, how, and what happened first",
+      "why": "Two burns of the same size behave differently when one is a brief scald and the other is a flame burn in smoky clothing. The agent, the setting, the time since injury and what was done first decide the depth, the airway risk and the fluid plan, and none of it can be recovered from looking at the wound.",
+      "asks": [
+        "What exactly caused the burn: an open flame, hot liquid or steam, contact with a hot object, a chemical, or an electric current?",
+        "Did clothing or hair catch fire, and was the patient in an enclosed or smoky room, kitchen or vehicle?",
+        "When exactly did the burn happen, and how much time has passed since then?",
+        "What was done immediately: was the area cooled with clean running water, for how long, and was anything applied to the wound?",
+        "Where is the pain worst now, and has the pain grown, eased or changed character since the injury?",
+        "Have blisters appeared or burst, and has the red area spread since the first hour?",
+        "Is there any difficulty in breathing, change in the voice, cough with black sputum, or burning inside the nose or mouth?",
+        "Has urine been passed since the burn, and how does its amount and colour compare with usual?"
+      ],
+      "teach": [
+        {
+          "heading": "Mechanism before measurement",
+          "body": "Ask the agent first, then the setting, then the clock. An open flame with ignited clothing burns deeper and longer than a splash that runs off, and a burn inside a closed room adds smoke and heat injury of the airway to the skin loss.\n\nFix the time of injury early in the interview. Resuscitation formulae run from the moment of the burn, not from arrival, and a patient who arrives six hours late is already behind on fluids."
+        },
+        {
+          "heading": "The first aid that counts",
+          "points": [
+            "Cooling with clean running water in the first minutes limits the depth; ask whether it happened and for how long.",
+            "Ask what was put on the wound after cooling: toothpaste, oil, ice and raw food worsen contamination and cooling injury.",
+            "Clothing, jewellery, belts and watches near the burn act as heat reservoirs and tourniquets, so ask if they were removed.",
+            "Tetanus protection, pain relief and keeping the patient covered and warm matter from the first contact, not later."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the four facts about the burn mechanism you must fix before estimating anything.",
+          "a": "The causative agent, whether clothing ignited, whether the setting was enclosed or smoky, and the exact time since the burn.",
+          "accept": [
+            "agent",
+            "clothing",
+            "enclosed",
+            "time"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does cooling in the first minutes change the depth of the wound?",
+          "a": "Because heat continues to injure tissue after contact ends, and prompt cooling with running water halts that progression.",
+          "accept": [
+            "heat",
+            "cooling",
+            "progression"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A burn happened six hours ago and no fluid has been given. Why does the delay itself change your plan?",
+          "a": "Because resuscitation is timed from the moment of the burn, so a late arrival is already behind and needs catch-up assessment rather than a routine start.",
+          "accept": [
+            "timed",
+            "behind",
+            "catch-up"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "burn_wound_management: clinicalPearls"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Taking the surgical history"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.burns.risk": {
+      "id": "skill.hx.burns.risk",
+      "kind": "history",
+      "system": "surgery",
+      "title": "Background risks in a burn: past, personal, drug and family history",
+      "why": "A burn lands on a whole patient. Diabetes slows healing, a seizure disorder explains an unsupervised kitchen fire, smoking and alcohol raise inhalation and infection risk, and tetanus protection decides one injection today. The background also decides who will change dressings at home.",
+      "asks": [
+        "How old is the patient, and what work is done each day: cooking over an open flame, a kerosene stove, or factory work with heat or chemicals?",
+        "Is there diabetes, and is the sugar controlled with tablets or insulin?",
+        "Has there ever been a fit, faint or fall near fire or hot water?",
+        "Is there smoking, chewing tobacco, or regular alcohol use?",
+        "What regular medicines are taken, including tablets for sugar, pressure, fits, blood thinners or steroids?",
+        "When was the last tetanus injection, and was any booster given in the last ten years?",
+        "Has there been a burn before, or any scar, contracture or skin graft from an old injury?",
+        "Who lives at home and can help with dressings, feeding and follow-up visits?"
+      ],
+      "teach": [
+        {
+          "heading": "Why the background changes the burn",
+          "body": "Age sits at both ends of risk: small children reach for hot vessels and cannot escape, while the elderly have thin skin, slow healing and blunted warning signs. Occupation and cooking method explain most Indian burns, from the kerosene stove and the open chulha to factory chemicals and live wires.\n\nComorbidity rewrites healing and danger. Diabetes invites infection and slow closure, epilepsy explains repeated unsupervised contact with flame, and smoking and alcohol raise the odds of airway injury and chest infection after any smoke exposure."
+        },
+        {
+          "heading": "Drugs, protection and home",
+          "points": [
+            "Blood thinners and steroids change bleeding and healing, so list every regular tablet by name.",
+            "Tetanus protection must be verified, never assumed: an unknown history means protection is due.",
+            "An old burn scar or contracture marks skin that heals badly and joints that stiffen fast.",
+            "A crowded home with one carer and a distant hospital argues for admission where a supported home manages dressings."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which three background facts change burn healing and infection risk most?",
+          "a": "Diabetes and its control, smoking and alcohol use, and regular drugs such as steroids or blood thinners.",
+          "accept": [
+            "diabetes",
+            "smoking",
+            "drugs"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does a seizure history matter specifically in a kitchen burn?",
+          "a": "Because a fit near an open flame explains unsupervised contact with fire and warns that the same setting may burn the patient again.",
+          "accept": [
+            "fit",
+            "unsupervised",
+            "again"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Tetanus history is unknown in an adult burn patient. What follows?",
+          "a": "Protection is treated as absent and tetanus prophylaxis is given rather than assumed from childhood.",
+          "accept": [
+            "absent",
+            "prophylaxis",
+            "assumed"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "burn_wound_management: management"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Taking the surgical history"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.burns.wound": {
+      "id": "skill.exam.burns.wound",
+      "kind": "exam",
+      "system": "surgery",
+      "title": "Examination of the burn wound: depth, extent and circulation",
+      "why": "Depth decides grafting, extent decides fluids, and a circumferential deep burn decides escharotomy. All three are read from the wound itself in minutes, and a wrong extent entered on the chart mistreats the patient for the next two days.",
+      "steps": [
+        "Ensure analgesia, consent and privacy first, then uncover one region at a time so the patient never lies fully exposed and shivering.",
+        "Note the site and pattern: splash marks on the front of the body, glove or stocking contact marks, ignited clothing zones, and any sparing of flexures.",
+        "Estimate the extent with the palm of the patient as about one percent, and confirm against the rule of nines chart later.",
+        "Record blanching: press the reddened skin and watch the colour return, area by area.",
+        "Test sensibility to light touch over the burn and compare with unburned skin nearby.",
+        "Feel the wound edge and base for leathery firmness, thrombosed vessels and dry inelastic eschar.",
+        "Where the burn rings a limb, finger or the chest, feel distal pulses, check capillary refill, and watch chest movement with breathing.",
+        "Glance at the face, nostrils, mouth and voice for soot, singed hair, black sputum and hoarseness before finishing."
+      ],
+      "normal": "Unburned skin nearby blanches briskly on pressure, feels light touch sharply, and shows no blister, pallor or leathery change.",
+      "abnormal": "A superficial burn is red, blistered and exquisitely painful with brisk blanching. A deep partial burn is blotchy red and white, blanches sluggishly and feels touch dully. A full thickness burn is white, charred or leathery, does not blanch, and is insensate to light touch.",
+      "significance": "Depth read this way decides whether the wound can heal alone or needs excision and grafting. Extent read with the palm decides the resuscitation volume. A tight circumferential burn with failing pulses or chest movement demands escharotomy, and any airway sign demands escalation before the swelling closes the airway.",
+      "pitfalls": [
+        "Counting painful red erythema as burn area for fluids, which over-resuscitates and swells the patient.",
+        "Palpating and testing sensibility without analgesia, so guarding hides the true findings.",
+        "Missing a circumferential band: pulses checked early can fade within the hour."
+      ],
+      "teach": [
+        {
+          "heading": "Reading depth from the wound",
+          "table": {
+            "cols": [
+              "Depth",
+              "Look and feel",
+              "What happens next"
+            ],
+            "rows": [
+              [
+                "Superficial (epidermal)",
+                "Red, painful, brisk blanching, no blister loss",
+                "Heals within days from surviving epithelium, no grafting"
+              ],
+              [
+                "Superficial partial thickness",
+                "Pink, blistered, very painful, blanches",
+                "Heals in about two weeks with dressings if kept clean"
+              ],
+              [
+                "Deep partial thickness",
+                "Blotchy red and white, dull feeling, sluggish blanch",
+                "Slow healing with scar; often needs excision and grafting"
+              ],
+              [
+                "Full thickness",
+                "White, brown or charred, leathery, insensate, no blanch",
+                "Cannot re-epithelialise; needs excision and grafting"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Extent and circulation in the same pass",
+          "body": "Confirm the palm estimate on a Lund-Browder chart, counting only partial and full thickness areas, since the erythema around a burn needs no fluid and heals on its own.\n\nThen test what the burn may be strangling. A deep ring around an arm, leg or finger weakens pulses and refill, and a ring around the chest stiffens breathing; both are released by escharotomy, not by more fluid."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How do you separate a superficial partial burn from a full thickness burn at the bedside?",
+          "a": "By blanching and sensibility: the partial burn blanches and is painful to touch, while the full thickness burn does not blanch and is insensate.",
+          "accept": [
+            "blanching",
+            "painful",
+            "insensate"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why is erythema left out of the resuscitation area?",
+          "a": "Because erythema is superficial vasodilatation that heals on its own, and counting it overestimates the burn and over-resuscitates the patient.",
+          "accept": [
+            "superficial",
+            "overestimates",
+            "over-resuscitates"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A circumferential forearm burn shows weakening pulses an hour after injury. What does it need?",
+          "a": "Escharotomy through the inelastic eschar to restore perfusion, since no amount of fluid opens a tourniquet of dead skin.",
+          "accept": [
+            "escharotomy",
+            "perfusion",
+            "tourniquet"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "burn_wound_management: clinicalPearls"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Burns: depth and extent"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.burns.summary": {
+      "id": "skill.present.burns.summary",
+      "kind": "presentation",
+      "system": "surgery",
+      "title": "Summarising the burns case",
+      "why": "The receiving unit decides fluids, referral and theatre from your summary, not from your chart. Agent, time since burn, depth, extent, airway signs, circulation, urine and tetanus status must all land in under a minute, with the resuscitation already running.",
+      "teach": [
+        {
+          "heading": "The shape of the summary",
+          "body": "State the patient with age and setting, the agent and time since burn, then the wound in abstract terms: depth in plain words, extent as a percent with the method, and whether the burn rings any limb or the chest.\n\nClose with the living patient: airway signs present or absent, pulses and perfusion, urine output, pain control, tetanus protection, and whether referral criteria are met and the centre has been called."
+        },
+        {
+          "heading": "A worked example",
+          "body": "A twenty eight year old homemaker sustained a flame burn from a kerosene stove three hours ago when her saree caught fire in an open courtyard. There is no enclosed smoke exposure and no soot, singed hair or voice change.\n\nExamination shows mixed superficial and deep partial thickness burns of the right arm and anterior trunk, about eighteen percent by chart, with brisk pain and blanching over most areas. Pulses are full, urine has been passed once since injury, tetanus protection is unknown, and she meets referral criteria for a burns centre."
+        },
+        {
+          "heading": "What never to omit",
+          "points": [
+            "Agent and exact hours since burn, since fluids are timed from injury, not arrival.",
+            "Depth in words and extent as a percent with the chart named.",
+            "Airway signs stated as present or absent, never skipped.",
+            "Perfusion beyond any circumferential burn and urine output so far.",
+            "Tetanus status, analgesia given, cooling done, and referral decision with reason."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What seven facts must every burns handover contain?",
+          "a": "Agent and time since burn, depth, extent with method, airway signs, perfusion and urine output, and tetanus and referral status.",
+          "accept": [
+            "agent",
+            "extent",
+            "airway",
+            "referral"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why is time since burn stated before anything about fluids?",
+          "a": "Because resuscitation is timed from the moment of injury, so the hours already passed decide catch-up rather than a routine start.",
+          "accept": [
+            "timed",
+            "hours",
+            "catch-up"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "burn_wound_management: management"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Burns: referral and documentation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.carcinoma.stomach_risk": {
+      "id": "skill.hx.carcinoma.stomach_risk",
+      "kind": "history",
+      "system": "surgery",
+      "title": "Risk factors and background history in carcinoma stomach",
+      "oneLine": "Tobacco and diet exposures, Helicobacter and ulcer background, and family and prior stomach history",
+      "why": "Carcinoma of the stomach clusters where chronic irritation of the lining meets advancing age: tobacco in smoked and chewed forms, long standing Helicobacter infection, an old ulcer story that has changed its tune, and close relatives with stomach or bowel cancer. Two minutes on these exposures separates a high risk dyspepsia from a low risk one and decides who needs an early scope.",
+      "asks": [
+        {
+          "text": "Do you smoke bidis or cigarettes, or chew tobacco, gutka or betel nut, and for how many years? How much alcohol do you drink each week?"
+        },
+        {
+          "text": "What does your daily diet look like: heavily salted, smoked or pickled foods, and how much fresh fruit and vegetables?"
+        },
+        {
+          "text": "Have you had ulcer type pain in the past with pain free intervals, and has that pattern changed recently into a constant ache with loss of appetite?"
+        },
+        {
+          "text": "Have you been told you carry Helicobacter pylori, or taken treatment to clear a stomach infection, and do you use painkillers such as aspirin regularly?"
+        },
+        {
+          "text": "Have you had anaemia with a sore tongue, or surgery on the stomach long ago, and is there cancer of the stomach, bowel or breast in close relatives?"
+        },
+        {
+          "text": "What medicines do you take for acidity, and have you lost weight or changed to softer foods because eating has become difficult?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Why exposure history matters here",
+          "body": "Most cancers of the stomach follow years of injury to its lining. Tobacco in smoked and chewed forms adds risk, and heavy alcohol use travels with the same habit. Long standing Helicobacter infection drives the slow sequence from chronic gastritis through atrophy and intestinal metaplasia toward cancer of the intestinal type, so the infection history is as important as the smoking one."
+        },
+        {
+          "heading": "Ask about tobacco, alcohol and diet in every case",
+          "points": [
+            "Smoke: bidis as well as cigarettes, number per day and years of use; chewing: tobacco, gutka and betel nut with areca.",
+            "Alcohol: type, amount and years; ask about both habits together, since they cluster in the same patients.",
+            "Diet: frequent heavily salted, smoked or pickled food, and low intake of fresh fruit and vegetables; record what the patient actually eats.",
+            "Occupation and home: dusty field work matters less here than the kitchen and the tobacco pouch, so ask where meals and chewing happen."
+          ]
+        },
+        {
+          "heading": "The stomach background that predisposes to cancer",
+          "points": [
+            "Chronic atrophic gastritis and pernicious anaemia: a thinned, intestinalised lining is the recognised precancerous field.",
+            "Old gastric ulcer with recent change: loss of periodicity, a constant dull ache, and new loss of appetite point toward malignant change.",
+            "Previous partial gastrectomy many years ago and adenomatous polyps of the stomach: both carry a small but real later risk.",
+            "Family history: close relatives with stomach, bowel or breast cancer, and the rare diffuse familial pattern presenting young, change the threshold for scoping the family."
+          ]
+        },
+        {
+          "heading": "Drugs, weight and family",
+          "body": "Record regular antacids and acid suppressing medicines, since they may have masked years of ulcer type pain. Ask about aspirin and other painkillers that injure the lining. Document weight loss with dates, any shift to soft or liquid foods to cope, and cancers of the stomach or bowel in close relatives."
+        }
+      ],
+      "pitfalls": [
+        "Asking only about cigarettes and missing bidi smoking and tobacco chewing, which dominate the exposure in many Indian patients.",
+        "Accepting a reassuring old ulcer story without asking whether its periodicity and appetite have changed, which is exactly how malignant change presents.",
+        "Never asking about Helicobacter testing or treatment, so a curable driver of the whole sequence stays unknown."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name four exposures or background conditions that raise the risk of carcinoma of the stomach.",
+          "a": "Tobacco smoking or chewing, heavy alcohol use with tobacco, a diet high in salted, smoked or pickled food and low in fresh fruit, long standing Helicobacter pylori infection, chronic atrophic gastritis, an old gastric ulcer that has changed character, and stomach cancer in close relatives.",
+          "accept": [
+            "tobacco",
+            "alcohol",
+            "diet",
+            "helicobacter",
+            "gastritis",
+            "ulcer",
+            "relatives"
+          ],
+          "minMatch": 4
+        },
+        {
+          "level": 2,
+          "q": "A 60 year old man reports twenty years of ulcer type pain with pain free intervals, but for three months the pain has become constant with loss of appetite. Why does the history worry you?",
+          "a": "The loss of periodicity with a constant dull ache replacing the rhythmic ulcer pain, plus new anorexia, is the classic story of malignant change supervening on a chronic gastric ulcer.",
+          "accept": [
+            "periodicity",
+            "constant",
+            "anorexia",
+            "malignant"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Which step in the intestinal type sequence does Helicobacter treatment aim to interrupt, and why does that matter for counselling?",
+          "a": "It aims to clear the chronic gastritis that starts the Correa sequence of atrophy, intestinal metaplasia and dysplasia, so treating proven infection and scoping the atrophic stomach turns a vague risk into a managed one.",
+          "accept": [
+            "gastritis",
+            "atrophy",
+            "metaplasia",
+            "dysplasia"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "exposures",
+          "text": "Covers tobacco, alcohol and diet in locally relevant forms"
+        },
+        {
+          "id": "background",
+          "text": "Asks about ulcer history, Helicobacter, anaemia and prior stomach surgery"
+        },
+        {
+          "id": "change",
+          "text": "Establishes whether an old rhythmic pain has changed character"
+        },
+        {
+          "id": "family",
+          "text": "Records stomach and bowel cancer in close relatives"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "oesophagus_and_stomach_pathology: pathophysiology (Helicobacter inflammation and Correa sequence toward cancer)"
+        },
+        {
+          "source": "Bailey and Love's Short Practice of Surgery",
+          "locator": "Carcinoma of the stomach: aetiology and risk factors"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.carcinoma.stomach": {
+      "id": "skill.present.carcinoma.stomach",
+      "kind": "presentation",
+      "system": "surgery",
+      "title": "Presenting the carcinoma stomach case",
+      "oneLine": "Tempo, discriminators, lump and spread, fitness and next step in six sentences",
+      "why": "A stomach cancer presentation fails when it lists symptoms without committing: the consultant needs the tempo in months, the two or three discriminators that split ulcer from cancer, the state of the epigastric lump and liver, the metastatic stigmata checked and the fitness for staging and surgery. Six sentences in that order carry the whole case and invite exactly one question, what the scope and scan showed.",
+      "teach": [
+        {
+          "heading": "Six sentences carry the case",
+          "body": "Name the patient with age and background, then state the tempo in one clause: months of anorexia and weight loss with a recent change. Name the syndrome next in abstract terms, a suspected malignant gastric process with or without outlet features, rather than reciting every symptom.\n\nThen give the discriminators that split ulcer from cancer: loss of periodicity, pain no longer relieved by food or vomiting, new anorexia, and coffee ground vomit or melaena.\n\nState the lump and the spread check: epigastric mass with its mobility and movement with respiration, liver for hard nodules, ascites, the left supraclavicular fossa, the umbilicus and the rectal shelf. Close with fitness and the single next step, usually the staging scan after an already done endoscopy with biopsy, and the referral route."
+        },
+        {
+          "heading": "A worked presentation",
+          "body": "A 58 year old farmer presents with four months of anorexia, early satiety and steady weight loss, with a constant epigastric ache for six weeks that food no longer relieves. Examination shows a wasted man with pallor, a firm irregular mildly tender epigastric mass moving slightly with respiration, a nodular liver edge, and a hard left supraclavicular node, with shifting dullness present.\n\nThis is a suspected carcinoma of the antrum with clinical spread to liver, peritoneum and distant nodes, in a patient still ambulant with acceptable cardiorespiratory reserve, and the next step is contrast staging imaging with a surgical oncology referral after the biopsy result."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What must a carcinoma stomach summary contain that a benign ulcer summary may omit?",
+          "a": "The tempo in months with the point of change, the loss of periodicity and appetite, the state of the epigastric lump and liver, the metastatic stigmata checked including Virchow node, umbilicus and rectal shelf, and the fitness with the staging and referral plan, since the endpoint is a cancer operation or palliation rather than acid suppression.",
+          "accept": [
+            "tempo",
+            "periodicity",
+            "lump",
+            "stigmata",
+            "staging"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "oesophagus_and_stomach_pathology: additionalInvestigations (endoscopy with biopsy and staging)"
+        },
+        {
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+          "locator": "Presenting the abdominal case: lump, lymph nodes and plan"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.neck.risk_factors": {
+      "id": "skill.hx.neck.risk_factors",
+      "kind": "history",
+      "system": "surgery",
+      "title": "Background history in neck swellings: past, personal, drug and family",
+      "oneLine": "Tuberculosis exposure, tobacco and alcohol, voice change and the draining area past",
+      "why": "A neck lump is rarely only what it looks like today. A treated tuberculosis course, a household cough, beedi smoking with regular drink, or an old head and neck operation each reframes the same swelling before a finger touches it.",
+      "asks": [
+        "At what age did the swelling first appear, and was it present in infancy or early childhood with any change on crying or straining?",
+        "What work do you do each day, and do you smoke beedis or cigarettes or chew tobacco, and drink alcohol regularly?",
+        "Have you ever been treated for tuberculosis, or lived with anyone who coughed for months and took prolonged treatment?",
+        "Have you had a recent sore throat, toothache, mouth ulcer, ear discharge or scalp boil on the same side?",
+        "Has your voice changed, or have you noticed noisy breathing or difficulty in swallowing solids?",
+        "Have you lost weight or appetite, or noticed fever rising in the evening with night sweats?",
+        "Have you ever had an operation, radiation or a needle test on the neck, mouth or throat?",
+        "Do you have diabetes, HIV infection, or take steroids or other drugs that lower immunity?",
+        "Which medicines do you take every day, including thyroid tablets, blood thinners and painkillers?",
+        "Has anyone in your family had a similar neck swelling, tuberculosis, or a cancer of the mouth or throat?"
+      ],
+      "teach": [
+        {
+          "heading": "Age and tempo already narrow the list",
+          "body": "A swelling since infancy that swells on crying is congenital, whether hygroma, branchial remnant or thyroglossal. A painless lump growing over months in a young adult in India is tuberculous until the aspirate says otherwise.\n\nA hard lump growing over weeks in a tobacco chewer past forty is secondary carcinoma until the primary is found. Sudden pain with fever is acute infection, and sudden painless growth in an old cyst is bleeding inside it."
+        },
+        {
+          "heading": "Ask after tuberculosis, tobacco and the voice",
+          "body": "Ask about treated tuberculosis and household cough directly, since scrofula follows the lungs and the kitchen table more often than the textbook admits. Ask about beedis, chewing tobacco and regular drink in the same breath, since these three seed the cancers that shed to the jugular chain.\n\nAsk about voice change, noisy breathing and dysphagia even when the patient came only for the lump. The larynx shares the drainage, and a hoarse voice moves a routine node into the immediate band."
+        },
+        {
+          "heading": "Background factors and what each one changes",
+          "table": {
+            "cols": [
+              "Factor to ask after",
+              "What it tells you",
+              "What to do about it"
+            ],
+            "rows": [
+              [
+                "Age at onset and tempo",
+                "Congenital in infants, TB in young, cancer past forty",
+                "Decide whether to watch, aspirate or refer urgently"
+              ],
+              [
+                "Tuberculosis past or contact",
+                "Scrofula with matted nodes and cold abscess",
+                "Aspirate with CBNAAT, chest film, TB unit referral"
+              ],
+              [
+                "Tobacco, beedi and alcohol",
+                "Primary in mouth, throat or larynx",
+                "Full oral and ENT exam with every hard node"
+              ],
+              [
+                "Voice, breathing, swallowing",
+                "Laryngeal spread or pressure on the airway",
+                "Urgent head neck review, airway first"
+              ],
+              [
+                "Throat, teeth and scalp sepsis",
+                "Reactive nodes that settle with the source",
+                "Treat the source, watch the node six weeks"
+              ],
+              [
+                "Earlier neck surgery or radiation",
+                "Recurrence, second primary, or chylous fistula risk",
+                "Old records and scar exam before any cut"
+              ],
+              [
+                "Diabetes, HIV and steroids",
+                "Atypical infection and poor healing",
+                "Screen immunity, plan cover with the physician"
+              ],
+              [
+                "Family similar swelling",
+                "Shared TB exposure or familial cancer",
+                "Screen the household where relevant"
+              ]
+            ]
+          }
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name five background facts you must ask after in every neck swelling history.",
+          "a": "Age at onset and tempo, tuberculosis past and household contact, tobacco beedi and alcohol use, voice breathing and swallowing change, throat teeth and scalp sepsis, earlier neck treatment, immunity drugs, and a family history of similar swelling.",
+          "accept": [
+            "age",
+            "tuberculosis",
+            "tobacco",
+            "voice",
+            "sepsis",
+            "family"
+          ],
+          "minMatch": 4
+        },
+        {
+          "level": 2,
+          "q": "Why do you ask about beedis, chewing tobacco and drink in a man with a hard neck node?",
+          "a": "Because cancers of the mouth, throat and larynx follow tobacco and alcohol, and the node is only the metastasis: finding the primary decides the operation.",
+          "accept": [
+            "tobacco",
+            "alcohol",
+            "mouth",
+            "primary",
+            "metastasis"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "A young woman has matted nodes and her husband took tuberculosis treatment last year. What changes?",
+          "a": "The contact makes scrofula the working diagnosis: aspirate with CBNAAT, chest film and HIV screen, household screening, and referral to the tuberculosis unit rather than excision.",
+          "accept": [
+            "contact",
+            "scrofula",
+            "CBNAAT",
+            "household",
+            "tuberculosis unit"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "sources": [
+        {
+          "locator": "neck_masses_neck_dissection: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "congenital_neck_masses_and_cervical_lymphadenopathy: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The neck: history of neck swellings",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.neck.summary": {
+      "id": "skill.present.neck.summary",
+      "kind": "presentation",
+      "system": "surgery",
+      "title": "Summarising the neck swelling case",
+      "oneLine": "Side, level, movement, character and urgency in under a minute",
+      "why": "The consultant decides the plan from your summary, not from your examination. Side, duration, nodal level, movement with swallowing and tongue, consistency and fixity, and the urgency band must all land in under a minute.",
+      "teach": [
+        {
+          "heading": "The shape of the summary",
+          "body": "State the patient with age and work, the duration and tempo of the swelling, then the syndrome in abstract terms: a painless right upper lateral neck swelling of four months, matted and firm, fixed to deep structures, with evening fever.\n\nClose with the discriminators and fitness: movement tests, skin and sinus, nodes elsewhere, drainage area findings, and the comorbidity and drugs that decide fitness for biopsy or surgery."
+        },
+        {
+          "heading": "A worked example",
+          "body": "A twenty four year old tailor presents with a painless swelling on the right side of the neck that has grown slowly over four months, with evening fever and loss of appetite.\n\nExamination shows matted firm nodes of levels two and three, fixed to deep structures with intact skin and no sinus, not moving on swallowing or tongue protrusion, with no nodes elsewhere and a normal mouth and throat. This is right sided tuberculous lymphadenitis of the jugular chain in the early band, with household tuberculosis contact."
+        },
+        {
+          "heading": "What never to omit",
+          "points": [
+            "Side, duration and tempo: months of quiet growth versus weeks of hard growth versus hours of pain.",
+            "Level or triangle stated exactly, since the referral and the incision both follow it.",
+            "Movement with swallowing and with tongue protrusion, stated as positive or negative with the method.",
+            "Consistency and fixity: cystic, matted, rubbery or stony hard, and fixed to skin or deep structures.",
+            "Skin, sinus, pulsation and bruit as stated negatives where they exclude mimics.",
+            "Nodes elsewhere, drainage area and chest findings, with fitness, drugs and TB background to close."
+          ]
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What must a neck swelling summary always contain?",
+          "a": "Side, duration and tempo, nodal level, movement with swallowing and tongue, consistency and fixity, skin and nodes elsewhere, and fitness with the tuberculosis and tobacco background.",
+          "accept": [
+            "side",
+            "level",
+            "movement",
+            "consistency",
+            "fixity",
+            "fitness"
+          ],
+          "minMatch": 4
+        },
+        {
+          "level": 2,
+          "q": "The node is stony hard and fixed but the mouth looks normal. How do you close the summary?",
+          "a": "As secondary carcinoma with unknown primary under evaluation, stating the level, the negative mouth exam, the planned contrast scan with ENT review, and the immediate band, without promising a simple excision.",
+          "accept": [
+            "secondary carcinoma",
+            "unknown primary",
+            "contrast",
+            "immediate"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "place",
+          "text": "States side, duration, tempo and exact level"
+        },
+        {
+          "id": "signs",
+          "text": "States movement tests, consistency, fixity and skin"
+        },
+        {
+          "id": "close",
+          "text": "Closes with a diagnosis, band, negatives and the next move"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "neck_masses_neck_dissection: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The neck: examination of neck swellings",
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.oral.risk": {
+      "abnormal": "",
+      "asks": [
+        {
+          "text": "Do you chew tobacco, khaini, gutka, pan masala, betel quid with areca nut, or mishri, and where do you keep the quid in the mouth? Ask how many times a day, for how many years, and whether it stays tucked in the cheek overnight."
+        },
+        {
+          "text": "Do you smoke bidis, cigarettes, chillum or hookah, or drink country liquor, beer or spirits? Work out the daily amount and the years of use, since tobacco and alcohol raise risk together more than either alone."
+        },
+        {
+          "text": "What do you eat most days, and is there a sharp tooth, loose tooth, broken denture edge or chronic cheek bite that keeps hurting the same spot? A sore that never heals because something keeps injuring it needs the cause named."
+        },
+        {
+          "text": "Was there a white patch, red patch, burning on spicy food, tightness on opening the mouth, or an earlier sore at this same site? Ask about any past biopsy, cautery, or white patch that was told to be watched."
+        },
+        {
+          "text": "Do you have diabetes, anaemia, tuberculosis, syphilis, HIV, or any long illness, and what tablets, capsules or injections do you take regularly? Steroids, immune suppressing drugs and long antibiotic courses change what a mouth ulcer can mean."
+        },
+        {
+          "text": "Has anyone in the family had cancer of the mouth, throat or food pipe, and what work do you do? Outdoor sun exposure matters for lip sores, and dust, smoke or chemical fumes at work matter for chronic irritation."
+        }
+      ],
+      "id": "skill.hx.oral.risk",
+      "kind": "history",
+      "normal": "",
+      "oneLine": "Quid, smoke, drink, sharp teeth and past patches that set the prior for a mouth ulcer",
+      "pitfalls": [
+        "Asking about smoking and stopping there, while the quid sitting in the cheek pouch goes unrecorded.",
+        "Forgetting to ask where the quid is kept, so the link between the habit site and the ulcer site is missed.",
+        "Never asking about an earlier white or red patch at the same spot, so a known premalignant lesion is treated as a new problem.",
+        "Recording diabetes or steroids without linking them to poor healing and to fungal overgrowth that can coat the ulcer."
+      ],
+      "practice": "Take risk, past, personal, drug and family history from a simulated patient with a two month mouth ulcer. Name the risk tier and the single habit change you would counsel first, in under three minutes.",
+      "probes": [
+        {
+          "a": "Smokeless tobacco or areca nut quid kept in the cheek, smoking, heavy alcohol use, a white or red patch, oral submucous fibrosis, a sharp tooth or denture edge, poor oral hygiene, older age and male sex.",
+          "accept": [
+            "quid",
+            "areca",
+            "gutka",
+            "khaini",
+            "smoking",
+            "alcohol",
+            "white patch",
+            "red patch",
+            "fibrosis",
+            "sharp tooth"
+          ],
+          "level": 1,
+          "minMatch": 4,
+          "q": "Name five risk factors for cancer of the mouth you must ask about."
+        },
+        {
+          "a": "Because the ulcer usually sits exactly where the quid rests, in the gingivobuccal sulcus or against the cheek, so matching the site to the habit separates a habit driven cancer from a chance sore elsewhere.",
+          "accept": [
+            "site",
+            "quid",
+            "sulcus",
+            "habit"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why must you ask exactly where the patient keeps the quid?"
+        },
+        {
+          "a": "A white patch needs whole mouth palpation for induration and a low threshold for biopsy, a sharp tooth needs smoothing or extraction and the ulcer reassessed, and neither is managed by repeated courses of vitamins or mouth paint alone.",
+          "accept": [
+            "palpation",
+            "induration",
+            "biopsy",
+            "sharp tooth",
+            "reassessed"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "A patient has a white patch and a sharp molar edge beside a small ulcer. What does each finding change?"
+        }
+      ],
+      "significance": "",
+      "sources": [
+        {
+          "locator": "oral_cancer: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The mouth and tongue: premalignant lesions and risk factors",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Most cancers of the mouth in India are squamous cancers driven by chewable tobacco and areca nut, with smoking and alcohol adding to the risk. The quid is usually tucked into the cheek pouch, and the cancer follows the habit: the gingivobuccal sulcus and the cheek are the commonest sites. Ask the habit, the site of keeping, the daily count and the years, in that order.\n\nA student who records smoking alone has taken half the history. Smokeless forms dominate this disease, and alcohol multiplies the effect of tobacco rather than adding a little extra.",
+          "heading": "The habit comes first"
+        },
+        {
+          "body": "Premalignant change often precedes the ulcer by months or years. A white patch that cannot be wiped off, a velvety red patch, burning on spicy food, or progressive tightness on opening the mouth are all warnings that the mucosa was already diseased before the sore appeared.\n\nAsk about each of these directly, and about any earlier biopsy or advice to watch a patch. Patients rarely volunteer a painless patch, and a sore that arose inside a longstanding patch is a different case from a sore on previously normal mucosa.",
+          "heading": "What came before the sore"
+        },
+        {
+          "points": [
+            "Past sores at the same site and what was done: extraction, biopsy, cautery, or repeated vitamin courses without examination.",
+            "Sharp teeth, dentures, cheek biting and oral hygiene, since chronic trauma keeps a benign ulcer open and confuses the picture.",
+            "Diabetes, anaemia, immune suppression, tuberculosis and regular drugs, which decide healing, fitness for operation, and whether a coated ulcer is fungal.",
+            "Family cancers of the mouth and throat, occupation, sun exposure for lip lesions, and diet, stated briefly since they rarely decide the plan alone."
+          ],
+          "heading": "Past, personal, drug and family"
+        }
+      ],
+      "title": "Risk, past, personal, drug and family history in oral cancer",
+      "why": "A mouth ulcer in a young non user that heals in ten days and the same sized ulcer in a sixty year old quid chewer with a white patch are two different diseases until proven otherwise. The risk history sets the prior before the mouth is even opened, and it is the only part of the case that can still change the outcome by changing the habit.",
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.oral.case": {
+      "id": "skill.present.oral.case",
+      "kind": "presentation",
+      "oneLine": "Tempo, ulcer detail, nodes and stage in two minutes",
+      "probes": [
+        {
+          "a": "Problem representation with tempo in weeks or months and risk, ulcer detail with site size edge base fixity and function, nodes by group size consistency fixity, diagnosis with stage, brief differential with what argues against each, then plan.",
+          "accept": [
+            "tempo",
+            "ulcer detail",
+            "nodes",
+            "stage",
+            "differential",
+            "plan"
+          ],
+          "level": 2,
+          "minMatch": 3,
+          "q": "In what order should an oral cancer case be presented?"
+        },
+        {
+          "a": "Because a mobile ulcer on the cheek without nodes and a fixed ulcer with hard submandibular nodes and trismus differ in stage, in the extent of resection, and in whether the neck needs dissection, so the plan cannot be stated without them.",
+          "accept": [
+            "fixity",
+            "nodes",
+            "trismus",
+            "stage",
+            "resection"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why must fixity, nodes and mouth opening appear before the plan?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "tempo_risk",
+          "text": "Opens with tempo in weeks or months and the tobacco or quid habit"
+        },
+        {
+          "id": "ulcer_detail",
+          "text": "Gives site, size, edge, base induration, fixity, bleeding and functional loss"
+        },
+        {
+          "id": "nodes_opening",
+          "text": "Gives nodal groups with size and fixity plus measured mouth opening"
+        },
+        {
+          "id": "negatives",
+          "text": "Includes discriminating negatives: opposite side, distant spread, fitness"
+        },
+        {
+          "id": "stage_plan",
+          "text": "States the clinical stage with what is still missing, then the plan"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "oral_cancer: management",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The mouth: case presentation and staging",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Open with the problem representation: age, sex, tempo in weeks or months, site of the sore, and the habit with its site of keeping. Then the ulcer story with pain, bleeding, growth and functional loss, then risk and background with discriminating negatives.\n\nThen the findings in the order you examined: mouth opening, the ulcer with edge base and fixity, the neck by group, and the general survey. Close with the diagnosis and clinical stage, a one line differential, fitness for operation, and the next three steps: edge biopsy, contrast staging scans, and referral to the head and neck unit.",
+          "heading": "The fixed order"
+        },
+        {
+          "body": "A 58 year old sugarcane cutter who keeps khaini in the right cheek pouch presents with a two month painless ulcer at the same site, now painful with spicy food, foul smell and reduced opening. Examination shows a 3 cm ulcer of the right lower gingivobuccal sulcus with a raised everted edge, stony induration, fixation to the cheek, two finger mouth opening, and a 2 cm firm submandibular node.\n\nThis is squamous cancer of the right buccal mucosa with nodal disease, pending edge biopsy and contrast scans of the face, neck and chest for stage, fitness and the plan for wide resection with neck dissection.",
+          "heading": "A worked example"
+        },
+        {
+          "points": [
+            "The tempo in weeks, since days point to aphthous or dental ulcers and months point to cancer.",
+            "Ulcer specifics: site against the habit site, size in centimetres, edge, base induration, fixity, bleeding on touch, and what the glove showed.",
+            "Nodes by group with size, number, consistency and fixity on both sides, since bilateral examination is mandatory even for a one sided sore.",
+            "Mouth opening, tongue movement, loose teeth, ear pain and weight loss, stated as present or explicitly absent, since each changes stage or the operation."
+          ],
+          "heading": "Never omit these"
+        }
+      ],
+      "title": "Presenting the oral cancer case",
+      "why": "An oral cancer case fails when the ulcer is described without its edge and base, because the edge and base are the diagnosis at the bedside. A presentation that names induration, fixity, nodes and opening forces the stage into the open before any scan is ordered."
+    },
+    "skill.hx.cleft.risk": {
+      "abnormal": "",
+      "asks": [
+        {
+          "text": "How old is the mother, how many pregnancies has she had, and are the parents related by blood? Record parity, maternal age and consanguinity, since both frame the background risk for congenital anomalies."
+        },
+        {
+          "text": "Did the mother attend antenatal checkups, and did she take folic acid and iron tablets in early pregnancy? Ask when she started them and whether she took them regularly."
+        },
+        {
+          "text": "Did the mother smoke or chew tobacco, drink alcohol, or breathe heavy smoke at home or at work during this pregnancy? Ask about bidis, cigarettes, khaini, gutka and country liquor by name."
+        },
+        {
+          "text": "What tablets or injections did the mother take in the first three months of pregnancy, and was she ill with fever, diabetes, fits or any long illness? Record any regular medicine for fits, sugar, blood pressure or thyroid."
+        },
+        {
+          "text": "Has anyone in the family had a cleft of the lip or palate, pits of the lower lip, or another birth defect? Ask about previous children with a cleft, and about relatives with hearing loss, heart defects or learning difficulty that could hint at a syndrome."
+        },
+        {
+          "text": "Where was the baby delivered, what is the baby fed on, and has any doctor already seen the cleft? Note the place of delivery, the feeding method, weight gain so far, and any referral already given."
+        }
+      ],
+      "id": "skill.hx.cleft.risk",
+      "kind": "history",
+      "normal": "",
+      "oneLine": "Pregnancy, habits, medicines and family pattern behind an orofacial cleft",
+      "pitfalls": [
+        "Asking only about the current feed and never about the pregnancy, so folate, tobacco and medicines in early pregnancy go unrecorded.",
+        "Recording smoking alone while the mother chewed tobacco or drank country liquor through pregnancy, which matters as much here.",
+        "Never asking about lip pits or affected relatives, so a familial pattern that changes counselling is missed.",
+        "Forgetting previous children with a cleft or another defect, which is the single most practical recurrence question the parents will ask."
+      ],
+      "practice": "Take pregnancy, drug and family history from the mother of an infant with a cleft. Name the risk factors found and the one counselling line about recurrence you would give, in under three minutes.",
+      "probes": [
+        {
+          "a": "Young or late maternal age is background only, but consanguinity, absent folate, tobacco or alcohol exposure in early pregnancy, maternal diabetes or fits medicines, and a family history of clefts or lip pits all raise the prior and change counselling.",
+          "accept": [
+            "consanguinity",
+            "folate",
+            "tobacco",
+            "alcohol",
+            "diabetes",
+            "family history",
+            "lip pits"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "Name five background factors you must ask about when a baby is born with a cleft."
+        },
+        {
+          "a": "Because lip pits mark Van der Woude syndrome, the commonest syndromic form, and a positive family history turns an isolated anomaly into a familial one with a different recurrence pattern for the next pregnancy.",
+          "accept": [
+            "lip pits",
+            "van der woude",
+            "syndrome",
+            "familial",
+            "recurrence"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why must you look at the lower lip of the parents and ask about affected relatives?"
+        },
+        {
+          "a": "Folate started before conception protects best and starting late in pregnancy cannot redo the weeks when the face fused, while stopping tobacco and alcohol still helps growth and healing, so record the timing honestly and counsel for the next pregnancy rather than promising repair of this one.",
+          "accept": [
+            "conception",
+            "timing",
+            "early pregnancy",
+            "next pregnancy",
+            "counsel"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "A mother started folic acid in the seventh month. What do you tell her it can and cannot do?"
+        }
+      ],
+      "significance": "",
+      "sources": [
+        {
+          "locator": "cleft_lip_palate: pathophysiology",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Cleft lip and palate: aetiology and risk factors",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "An orofacial cleft is made in the first weeks of pregnancy, long before the mother feels movements, so the risk history is a pregnancy history. Take it in a fixed order: mother and parity, consanguinity, antenatal care with folate and iron, tobacco and alcohol by name, medicines and illness in the first three months, then family pattern and previous affected children.\n\nAsk each habit by its local name. Bidis, khaini, gutka and country liquor are all used in pregnancy in India and none is volunteered unless named. A student who asks only about cigarettes has taken half the history.",
+          "heading": "The cleft was made in early pregnancy, so start there"
+        },
+        {
+          "body": "Two answers change everything downstream. Consanguinity raises the background for recessive syndromes, and lower lip pits in the baby or either parent point to Van der Woude syndrome, the commonest familial form. Both must be looked for, not just asked about, because parents rarely volunteer pits.\n\nClose with place of delivery, feeding method and weight gain. These decide whether this baby needs urgent feeding support today or can wait for the routine cleft clinic, which is the most immediate use of the whole history.",
+          "heading": "Pits, relatives and the feeding position today"
+        }
+      ],
+      "why": "The face fuses in early pregnancy under the joint influence of genes and exposures, so a cleft history that skips the pregnancy misses the cause, the recurrence counsel and the feeding urgency all at once. This skill fixes the order so nothing is skipped.",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "title": "Pregnancy, drug and family history behind a cleft"
+    },
+    "skill.hx.cleft.story": {
+      "abnormal": "",
+      "asks": [
+        {
+          "text": "When was the gap first noticed, and exactly what does it involve: the lip alone, the palate alone, or both, on one side or both sides? Ask whether it was seen at birth or picked up later, and whether milk or sound escapes through it."
+        },
+        {
+          "text": "How does the baby feed, and how long does one feed take? Ask about breast versus cup and spoon versus special bottle, milk coming out of the nose, coughing or choking during feeds, and the number of feeds in a day."
+        },
+        {
+          "text": "Is the baby gaining weight, and what does the growth card show? Ask the birth weight, the current weight, and whether feeds have become slower or more tiring over recent weeks."
+        },
+        {
+          "text": "Is breathing noisy, is there difficulty in breathing, and does the baby sleep better in any particular position? Ask about snoring sounds, pauses in breathing, blue spells, and recession of the chest, which matter most where the jaw looks small."
+        },
+        {
+          "text": "Is there discharge from the ears, and does the baby turn to sounds and to the mother's voice? Ask about repeated ear discharge, poor response when called, and startling to loud claps."
+        },
+        {
+          "text": "What sounds does the baby make, and for an older child, is speech nasal or hard to understand? Ask about cooing and babbling by age, and about escape of air or fluids through the nose while speaking."
+        },
+        {
+          "text": "Was anything else unusual noticed: the heart, the limbs, the eyes or the growth? Ask about sweating or breathlessness during feeds, murmurs already mentioned, extra digits, and whether any doctor has suggested a syndrome."
+        }
+      ],
+      "id": "skill.hx.cleft.story",
+      "kind": "history",
+      "normal": "",
+      "oneLine": "Defect detail, feeding, breathing, hearing and growth in the cleft history",
+      "pitfalls": [
+        "Recording the lip gap and stopping there, while the palate, which decides feeding and speech, is never asked about.",
+        "Calling poor weight gain a separate feeding problem instead of the expected result of a palatal cleft that prevents suction.",
+        "Missing noisy breathing and apnoeic pauses in a baby with a small jaw, where the airway rather than the cleft is the urgent problem.",
+        "Never asking about ear discharge and response to sound, so the hearing loss that will later cost the child speech goes unrecorded."
+      ],
+      "practice": "Take the presenting history from the mother of a four month old with a unilateral cleft lip and palate. Cover defect, feeding, breathing, hearing and growth, then state the single most urgent issue, in under four minutes.",
+      "probes": [
+        {
+          "a": "Whether lip alone, palate alone or both are involved, one side or both, complete or incomplete, feeding time with nasal leak and choking, weight gain, noisy breathing or apnoea, ear discharge with response to sound, and sounds or speech by age.",
+          "accept": [
+            "lip",
+            "palate",
+            "feeding",
+            "nasal",
+            "weight",
+            "breathing",
+            "hearing",
+            "speech"
+          ],
+          "level": 1,
+          "minMatch": 4,
+          "q": "What must the presenting history of a cleft always cover beyond the visible gap?"
+        },
+        {
+          "a": "Because a palatal cleft breaks the seal the baby needs for suction, so feeds run long, milk escapes through the nose, the baby tires, and weight gain falters, which is why feeding time and the growth card belong in the presenting complaint itself.",
+          "accept": [
+            "suction",
+            "seal",
+            "nasal",
+            "weight",
+            "growth"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why do feeding time and weight gain belong in the presenting history, not the personal history?"
+        },
+        {
+          "a": "Noisy breathing with recession, apnoeic pauses or blue spells, especially with a small receding jaw, which points to Pierre Robin sequence where airway positioning and urgent referral outrank every other cleft question.",
+          "accept": [
+            "noisy breathing",
+            "apnoea",
+            "recession",
+            "small jaw",
+            "pierre robin",
+            "airway"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Which answers in this history would make you stop and manage the airway first?"
+        }
+      ],
+      "significance": "",
+      "sources": [
+        {
+          "locator": "cleft_lip_palate: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The head and face: history of a congenital defect",
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Start with the defect in the mother's own words, then pin it down: lip alone, palate alone or both, one side or both, noticed at birth or later. A lip gap is obvious at birth, but a palate gap hides inside the mouth and may present only as feeding trouble, so ask about the palate even when the complaint is only the lip.\n\nThen move to function in a fixed order: feeding, breathing, hearing, sounds and growth. Each maps to one complication of the cleft, so the order doubles as a checklist that stops the common error of admiring the lip while the palate starves the baby.",
+          "heading": "Defect first, then function in a fixed order"
+        },
+        {
+          "body": "Feeding is the urgent function. A baby with a palatal cleft cannot seal the mouth to suck, so ask how long one feed takes, whether milk escapes through the nose, and whether the baby coughs or tires. Then check the growth card, because faltering weight is the objective proof that feeding support cannot wait.\n\nBreathing is the dangerous function. Where the jaw is small and the tongue falls back, ask about snoring sounds, pauses and blue spells, and which sleeping position helps. Those answers point to Pierre Robin sequence, where the airway comes before everything else.",
+          "heading": "Feeding is urgent, breathing is dangerous"
+        }
+      ],
+      "why": "Parents present the visible lip, but the hidden palate decides feeding, hearing and speech, and a small jaw can threaten the airway. A fixed order of defect then function keeps the student from treating the photograph while missing the patient.",
+      "review": {
+        "status": "ai_drafted"
+      },
+      "title": "History of the cleft: defect, feeding, breathing and growth"
+    },
+    "skill.present.cleft.case": {
+      "id": "skill.present.cleft.case",
+      "kind": "presentation",
+      "oneLine": "Defect, function, examination and team plan in two minutes",
+      "probes": [
+        {
+          "a": "Problem representation with age and defect since birth, feeding breathing hearing and growth, examination of lip alveolus and palate with extent and septum, nodes and general survey, diagnosis with completeness and laterality, brief differential, then feeding support and referral to the cleft team.",
+          "accept": [
+            "defect",
+            "feeding",
+            "palate",
+            "septum",
+            "diagnosis",
+            "differential",
+            "cleft team"
+          ],
+          "level": 2,
+          "minMatch": 3,
+          "q": "In what order should a cleft lip and palate case be presented?"
+        },
+        {
+          "a": "Because the plan differs completely: an isolated lip needs lip repair and feeding reassurance, while a palatal cleft needs urgent feeding support, hearing surveillance and palate closure timed for speech, so the palate answer must come before any plan is stated.",
+          "accept": [
+            "palate",
+            "feeding",
+            "hearing",
+            "speech",
+            "plan"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why must lip versus palate involvement be stated before the plan?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "defect_function",
+          "text": "Opens with defect since birth with laterality and completeness, then feeding, breathing, hearing and growth"
+        },
+        {
+          "id": "exam_order",
+          "text": "Gives lip, alveolus and palate findings with extent, septum attachment and nodes"
+        },
+        {
+          "id": "negatives",
+          "text": "Includes discriminating negatives: airway, syndrome features, weight trend"
+        },
+        {
+          "id": "diagnosis_plan",
+          "text": "States the full diagnosis with classification, a one line differential, and feeding plus team referral"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "cleft_lip_palate: management",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Cleft lip and palate: principles of management",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "body": "Open with the problem representation: age and sex, defect noticed since birth, lip versus palate with side and completeness, then function in one breath, feeding with nasal leak and time per feed, breathing, hearing response, and weight trend. Then risk in one line: pregnancy exposures, consanguinity and family pattern.\n\nThen the findings in the order examined: general survey with growth and any dysmorphism, the lip gap with nasal deformity, the alveolus and premaxilla, the palate with extent and whether the septum hangs free or is attached, and the neck nodes. Close with the diagnosis, a one line differential, and the plan.",
+          "heading": "The fixed order"
+        },
+        {
+          "body": "A four month old girl presents with a complete gap of the left lip and palate noticed since birth. She takes forty five minutes per feed with milk escaping through the nose and her weight has faltered. Examination shows a complete left cleft lip with flattened nostril, notched alveolus, cleft of soft and hard palate with the septum attached to the right, and no nodes.\n\nThis is a complete unilateral left cleft lip and palate, and she needs feeding support today and referral to the cleft team.\n\nState what is still missing: hearing assessment, cardiac check for a syndrome, and growth review. A presentation that ends without the next three steps is unfinished.",
+          "heading": "A worked example"
+        }
+      ],
+      "why": "A cleft case fails when the lip is described beautifully while the palate, the hearing and the plan are left out. A fixed order forces defect, function, full findings and team referral into every presentation.",
+      "title": "Presenting the cleft lip and palate case"
     }
   }
 }

@@ -19781,6 +19781,2590 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.hx.asthma.wheeze_story": {
+      "id": "skill.hx.asthma.wheeze_story",
+      "kind": "history",
+      "system": "paediatrics",
+      "title": "History of recurrent wheeze, cough, and breathlessness in children",
+      "why": "Eliciting the exact onset, diurnal pattern, cough characteristics, trigger responsiveness, and intervals between wheezing attacks distinguishes childhood asthma and viral-induced wheezing from congenital airway anomalies or chronic suppurative lung disease.",
+      "asks": [
+        "When did the whistling sound or tight chest breathing first begin, and how many episodes have occurred over the past twelve months?",
+        "Does the cough or wheeze awaken the child from sleep at night or during the early morning hours?",
+        "Does the child cough or wheeze during active play, laughing, crying, or exposure to cold air?",
+        "What medications have been given during acute attacks, and did the child improve rapidly within twenty minutes of receiving an inhaled bronchodilator?",
+        "Between wheezing episodes, is the child completely free of cough and breathlessness, or are there persistent daily symptoms?"
+      ],
+      "teach": [
+        {
+          "heading": "Phenotypes of childhood wheezing",
+          "body": "Wheezing in preschool children falls into two primary clinical patterns: episodic viral wheeze and multiple-trigger wheeze.\n\nEpisodic viral wheeze occurs strictly during discrete viral upper respiratory infections, with the child remaining completely asymptomatic between episodes.\n\nMultiple-trigger wheeze features recurrent wheezing provoked not only by viral illnesses but also by physical exertion, laughing, crying, cold air, weather shifts, and aeroallergen exposure.\n\nChildren with multiple-trigger wheeze frequently have personal or parental atopic tendencies and a higher likelihood of persistent asthma into late childhood."
+        },
+        {
+          "heading": "Distinguishing asthma from acute bronchiolitis",
+          "body": "Age of presentation is decisive. Acute bronchiolitis presents in infants under two years of age (peaking between two and six months) as a first episode of wheezing preceded by a two-to-three-day coryzal prodrome, accompanied by low-grade fever and tachypnoea.\n\nIn contrast, bronchial asthma is characterised by recurrent, episodic wheezing and reversible airway obstruction, commonly diagnosed in children over three to five years of age with a history of recurrent nocturnal cough and interval symptoms."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How does episodic viral wheeze differ from multiple-trigger wheeze in preschool children?",
+          "a": "Episodic viral wheeze occurs only during viral respiratory infections with completely symptom-free intervals, whereas multiple-trigger wheeze also occurs with exercise, laughter, cold air, and allergen exposure between infections.",
+          "accept": [
+            "viral",
+            "symptom-free",
+            "intervals",
+            "multiple-trigger",
+            "exercise",
+            "cold air",
+            "allergen"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why is a rapid clinical response to an inhaled bronchodilator a crucial historical clue in a wheezing child?",
+          "a": "Rapid relief within fifteen to twenty minutes of inhaling a beta-2 agonist demonstrates reversible smooth muscle bronchoconstriction, which strongly supports bronchial asthma over fixed airway narrowing or bronchiolitis.",
+          "accept": [
+            "reversible",
+            "bronchoconstriction",
+            "beta-2 agonist",
+            "salbutamol",
+            "smooth muscle",
+            "bronchodilator"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "hx_pattern",
+          "text": "Identifies whether wheeze is episodic viral or multi-trigger"
+        },
+        {
+          "id": "hx_broncho",
+          "text": "Assesses reversibility and response to inhaled bronchodilators"
+        },
+        {
+          "id": "hx_nocturnal",
+          "text": "Enquires specifically about nocturnal waking and morning cough"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pediatric_status_asthmaticus: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Chapter 404: Asthma in Children"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.asthma.triggers_atopy": {
+      "id": "skill.hx.asthma.triggers_atopy",
+      "kind": "history",
+      "system": "paediatrics",
+      "title": "Atopic background, environmental triggers, and family history in childhood asthma",
+      "why": "Documenting personal atopic markers, parental allergic illness, and domestic environmental irritants provides objective evidence for asthma predictive indices and identifies remediable triggers that exacerbate bronchial hyperresponsiveness.",
+      "asks": [
+        "Did the child have severe itchy dry skin rashes on the face or flexural creases (atopic dermatitis) during infancy?",
+        "Does the child experience frequent bouts of morning sneezing, clear runny nose, or itchy watery eyes without fever (allergic rhinitis)?",
+        "Does either parent or a sibling have a diagnosed history of bronchial asthma, allergic eczema, or severe food allergies?",
+        "Is the child exposed to tobacco cigarette or bidi smoke inside the home, or biomass chulha fuel smoke?",
+        "Are there furry pets, visible dampness or fungal mold, or stuffed soft toys inside the child bedroom?"
+      ],
+      "teach": [
+        {
+          "heading": "The atopic march and genetic predisposition",
+          "body": "The atopic march describes the sequential progression of allergic manifestations from early life.\n\nInfantile atopic dermatitis and food sensitivities typically appear first during the initial months of life, followed by allergic rhinitis and asthma in preschool and early school-age years.\n\nA documented parental history of asthma, particularly maternal asthma, increases the child risk three-to-four-fold.\n\nThe modified Asthma Predictive Index uses parental asthma and eczema as major criteria to predict persistent asthma at school age."
+        },
+        {
+          "heading": "Domestic triggers and non-specific irritants",
+          "body": "Environmental exposures amplify airway inflammation and provoke acute bronchospasm.\n\nSecond-hand tobacco smoke and domestic bidi smoke paralyse respiratory ciliary clearance and double the frequency of severe exacerbations.\n\nIn Indian households, biomass smoke from wood or dung-fired cookstoves, burning mosquito coils, incense sticks (agarbatti), and dust mite accumulation in unwashed bedding act as potent non-specific mucosal irritants that trigger severe airflow obstruction."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name the major criteria of the modified Asthma Predictive Index used in young wheezing children.",
+          "a": "The major criteria are a parental history of asthma, physician-diagnosed atopic dermatitis in the child, and allergic sensitization to at least one aeroallergen.",
+          "accept": [
+            "parental asthma",
+            "atopic dermatitis",
+            "eczema",
+            "aeroallergen",
+            "sensitization"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why should indoor exposure to incense smoke, mosquito coils, and bidi smoke be systematically elicited in an Indian child with recurrent wheeze?",
+          "a": "These combustion products generate fine particulate matter and chemical irritants that induce airway mucosal inflammation, hyperresponsiveness, and reflex bronchospasm, precipitating frequent acute exacerbations.",
+          "accept": [
+            "particulate matter",
+            "mucosal inflammation",
+            "hyperresponsiveness",
+            "bronchospasm",
+            "irritant",
+            "exacerbation"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "atopy_march",
+          "text": "Traces the atopic march from infantile eczema to allergic rhinitis"
+        },
+        {
+          "id": "trigger_review",
+          "text": "Identifies domestic environmental irritants including smoke and dust mites"
+        },
+        {
+          "id": "family_pedigree",
+          "text": "Elicits parental history of asthma and atopic disorders"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pediatric_status_asthmaticus: clinicalPearls and triggers"
+        },
+        {
+          "source": "Indian Academy of Pediatrics",
+          "locator": "IAP Guidelines on Childhood Asthma and Wheeze: Environmental Factors"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.asthma.case": {
+      "id": "skill.present.asthma.case",
+      "kind": "presentation",
+      "system": "paediatrics",
+      "title": "Presenting the child with acute wheeze and respiratory distress",
+      "why": "Delivering a clear, prioritised case presentation at the bedside ensures prompt communication of triage severity, underlying atopic phenotype, acute physiological derangement, and response to emergency bronchodilators to the clinical team.",
+      "teach": [
+        {
+          "heading": "Structuring the presentation of acute paediatric wheeze",
+          "body": "Begin with a crisp one-sentence problem representation: child age, known diagnosis of bronchial asthma or first-time wheezer, presenting duration of cough and breathlessness, and immediate triage severity on arrival.\n\nSummarise the clinical timeline concisely: preceding upper respiratory symptoms, identified exposure triggers, home bronchodilator doses taken and their effect, and the progression of respiratory distress prompting emergency presentation."
+        },
+        {
+          "heading": "Communicating physical findings, severity, and emergency actions",
+          "body": "Present examination findings grouped by severity markers: mental status, ability to talk, respiratory rate, degree of retractions, presence of audible wheeze or a silent chest, and oxygen saturation on room air.\n\nConclude with the clinical diagnosis and severity stage (for example, acute severe asthma exacerbation), outline initial bronchodilator and corticosteroid doses administered, and state immediate monitoring goals including repeat SpO2 and PEFR."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What cardinal examination findings must be highlighted first when presenting an acute asthma attack to the senior paediatrician?",
+          "a": "Mental status, ability to speak sentences or phrases, respiratory rate, accessory muscle retraction severity, air entry, and oxygen saturation on room air.",
+          "accept": [
+            "mental status",
+            "speech",
+            "ability to speak",
+            "respiratory rate",
+            "retractions",
+            "air entry",
+            "oxygen saturation",
+            "spo2"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "If you auscultate a silent chest during your initial examination, how should you convey this finding in your presentation?",
+          "a": "Present it immediately as a life-threatening emergency indicating profound airflow obstruction with minimal air movement, requiring urgent senior help, high-flow oxygen, and intensive bronchodilator escalation.",
+          "accept": [
+            "silent chest",
+            "life-threatening",
+            "emergency",
+            "air movement",
+            "airflow obstruction",
+            "escalation",
+            "oxygen"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "pres_opening",
+          "text": "Opens with a concise problem representation stating age and severity"
+        },
+        {
+          "id": "pres_severity",
+          "text": "Communicates objective severity markers: talkability, retractions, SpO2"
+        },
+        {
+          "id": "pres_action",
+          "text": "States emergency interventions given and monitoring response"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "pediatric_status_asthmaticus: clinicalPearls and redFlags"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Chapter 404: Asthma in Children: Acute Exacerbations"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.acute.nephritic_story": {
+      "id": "skill.hx.acute.nephritic_story",
+      "kind": "history",
+      "system": "paediatrics",
+      "title": "History of dark urine, puffiness and scanty urine in a child",
+      "why": "Parents rarely say nephritis. They say the urine turned the colour of tea, the eyes looked puffy in the morning, and the child passes very little urine. Asking after each of these in the parent's own words, and then reaching back a few weeks for the sore throat or skin sores that came first, is what joins the present illness to its cause.",
+      "asks": [
+        "When did you first notice the change in the colour of the urine, and what exactly did it look like, like tea, cola, or water in which meat was washed?",
+        "Where did you first notice the swelling, around the eyes in the morning or over the feet and legs by evening, and has it spread since?",
+        "How often does the child pass urine now compared with before, and about how much comes each time?",
+        "In the last month or so, did the child have a sore throat with fever or painful swallowing, and was any medicine taken for it?",
+        "Has the child had boils, infected scratches, impetigo-like sores, or very itchy skin with scratch marks in the last month or so?",
+        "Since the swelling began, has the child complained of headache, vomited, had a fit, or become breathless, especially at night?"
+      ],
+      "teach": [
+        {
+          "heading": "The nephritic story in the parent's words",
+          "body": "The opening is almost always one of three complaints: urine the colour of tea or cola, puffiness of the eyelids noticed first thing in the morning, or urine that has become strikingly scanty. Blood in the urine of nephritis is usually described as smoky or brown rather than bright red, and clots are uncommon.\n\nSwelling in nephritis pits on pressure and is soft. It shows first where the tissue is loosest, around the eyes on waking, and settles later over the ankles and shins as the day goes on. Ask the mother when in the day it looks worst, because that pattern separates renal puffiness from an allergy or an insect bite."
+        },
+        {
+          "heading": "The fortnight before decides the cause",
+          "body": "Post-streptococcal disease declares its timing. A sore throat comes one to two weeks before the dark urine, and infected skin sores come three to six weeks before. Ask specifically about fever with a painful throat, difficulty in swallowing, and any boils or septic spots that needed dressing or antibiotics.\n\nAlso ask whether the throat or skin illness was treated and with what, and whether siblings or classmates had a similar sore throat at the same time. A cluster of sore throats in the school or lane strengthens the link."
+        },
+        {
+          "heading": "Pull out the dangerous symptoms early",
+          "body": "Three questions must never wait till the end. Headache with vomiting points to rising blood pressure. A fit or sudden drowsiness points to hypertensive encephalopathy. Breathlessness, especially on lying flat, with a fast rate points to fluid collecting in the lungs.\n\nAsk each of these directly even when the child looks well, because hypertension in nephritis can be severe while the child still plays. Scanty urine passing to almost none over a day is the fourth alarm, and it means the kidneys need urgent assessment."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A mother says her 8-year-old passes cola-coloured urine and wakes with puffy eyelids. What two earlier illnesses must you ask about, and with what time gaps?",
+          "a": "A sore throat with fever one to two weeks before, and infected skin sores or boils three to six weeks before the dark urine began.",
+          "accept": [
+            "sore throat",
+            "one to two weeks",
+            "skin sores",
+            "three to six weeks"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why do you ask about headache, fits and breathlessness in a child who presents only with puffiness and dark urine?",
+          "a": "Because they are the alarms of severe disease: headache and vomiting warn of rising blood pressure, fits or drowsiness warn of hypertensive encephalopathy, and breathlessness warns of pulmonary oedema from fluid overload.",
+          "accept": [
+            "blood pressure",
+            "encephalopathy",
+            "pulmonary oedema",
+            "fluid overload"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "hx_urine",
+          "text": "Elicits onset, colour and amount of the changed urine"
+        },
+        {
+          "id": "hx_swelling",
+          "text": "Maps where swelling began and how it varies through the day"
+        },
+        {
+          "id": "hx_antecedent",
+          "text": "Reaches back weeks for sore throat and skin sores with timing"
+        },
+        {
+          "id": "hx_alarms",
+          "text": "Asks directly about headache, fits, vomiting and breathlessness"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_glomerulonephritis_child: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Acute glomerulonephritis: history and presenting complaints"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.acute.nephritic_background": {
+      "id": "skill.hx.acute.nephritic_background",
+      "kind": "history",
+      "system": "paediatrics",
+      "title": "Background, drug and family history in suspected nephritis",
+      "why": "The background tells you where the streptococcus came from, whether this has happened before, and whether the family carries a kidney problem that only looks like a fresh nephritis. Crowded rooms, untreated skin sores, a previous episode of dark urine, and kidney disease in close relatives each change what you do next.",
+      "asks": [
+        "How many people sleep in the same room as the child, and does the child attend a school or tuition class where sore throats have been going around?",
+        "Has the child ever passed dark or smoky urine before, or had swelling of the face or feet that settled on its own?",
+        "Is the child known to have any kidney or urine problem, and has the urine ever been tested before for blood or protein?",
+        "What medicines has the child taken in the last month, including painkillers, antibiotics from a shop, and any herbal or traditional preparations?",
+        "Has anyone in the family, parents, siblings or grandparents, had kidney disease, long-standing blood in the urine, or hearing loss from an early age?"
+      ],
+      "teach": [
+        {
+          "heading": "Crowding, skin and the untreated throat",
+          "body": "Streptococcal throat infection and impetigo spread where children sleep close and skin stays unwashed. Ask how many share the room and the bed, whether drinking water and bathing water are shared, and how skin cuts and insect bites are cared for at home.\n\nChildren with scabies scratch their skin open, and those scratches invite streptococcal infection. In a child with a nephritic picture, asking about itching at night and similar itching in the family can explain where the skin sores came from."
+        },
+        {
+          "heading": "Past episodes and every medicine taken",
+          "body": "A previous bout of dark urine or puffiness that settled by itself argues against a first attack of post-streptococcal disease and points toward a relapsing glomerular problem that needs a different workup.\n\nRecord every medicine, because painkillers bought over the counter can injure the kidney on their own, and recent antibiotics change how you read the throat swab and antibody tests. Ask for the strips and prescriptions themselves rather than trusting memory for names."
+        },
+        {
+          "heading": "Family clues that reframe the case",
+          "body": "Blood in the urine running through the family, kidney failure in a young relative, or hearing loss in childhood points toward an inherited basement membrane problem such as Alport syndrome rather than a fresh post-infective nephritis.\n\nA family history of swelling with heavy protein in the urine, of rashes with joint pains, or of repeated miscarriages and clots nudges you toward nephrotic disease or lupus. Draw this history for three generations, because one affected uncle can save the child an incorrect label."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Why do you ask about crowding, scabies and the treatment of the earlier sore throat in suspected nephritis?",
+          "a": "Because streptococcal throat and skin infection spread in crowded sleeping quarters, scratched scabies lesions invite streptococcal skin infection, and an untreated throat or sore strengthens the link to post-streptococcal disease.",
+          "accept": [
+            "crowded",
+            "scabies",
+            "streptococcal",
+            "untreated"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which family history findings would make you doubt a simple post-streptococcal label?",
+          "a": "Familial haematuria, kidney failure in a young relative, or childhood hearing loss suggesting Alport syndrome, and rashes with joint pains suggesting lupus.",
+          "accept": [
+            "familial haematuria",
+            "hearing loss",
+            "Alport",
+            "lupus"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "hx_setting",
+          "text": "Elicits crowding, school exposure and skin hygiene"
+        },
+        {
+          "id": "hx_past",
+          "text": "Asks about previous dark urine, swelling and known kidney disease"
+        },
+        {
+          "id": "hx_drugs",
+          "text": "Records every recent medicine including shop-bought and traditional ones"
+        },
+        {
+          "id": "hx_family",
+          "text": "Draws a three-generation kidney, urine and hearing history"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "poststreptococcal_glomerulonephritis: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Acute glomerulonephritis: risk factors and family history"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.acute.glomerulonephritis": {
+      "id": "skill.present.acute.glomerulonephritis",
+      "kind": "presentation",
+      "system": "paediatrics",
+      "title": "Presenting the child with suspected acute glomerulonephritis",
+      "why": "The consultant needs the triad, the timing and the pressure in the first minute: what the urine looks like, when the throat or skin illness came, and what the blood pressure is now. A presentation that buries the blood pressure under the swelling story risks the one complication that can harm the child today.",
+      "teach": [
+        {
+          "heading": "Open with the triad, the timing and the pressure",
+          "body": "Begin with one sentence that carries age, the nephritic picture and its tempo: an 8-year-old boy with cola-coloured urine, morning eyelid puffiness and scanty urine for four days, two weeks after a treated sore throat.\n\nGive the blood pressure in the same breath, with the centile reading for the child's age and height, because the whole plan turns on it. Then state the urine output over the last day and whether headache, vomiting, fits or breathlessness are present or absent."
+        },
+        {
+          "heading": "Findings, tests and the plan in that order",
+          "body": "Present examination grouped as oedema, pressure and overload: where the oedema is and whether it pits, the pulse and blood pressure, weight gain if an old weight exists for comparison, and chest signs of fluid with the urine output.\n\nClose with the working diagnosis of acute nephritic syndrome, likely post-streptococcal, the tests already sent with the key results awaited, and the immediate plan: salt and fluid restriction, blood pressure control, and the threshold for nephrology referral."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What must the opening sentence of a nephritis presentation always contain?",
+          "a": "The child's age, the nephritic triad of dark urine with puffiness and scanty urine, the interval since the sore throat or skin sores, and the current blood pressure.",
+          "accept": [
+            "nephritic triad",
+            "sore throat",
+            "blood pressure",
+            "scanty urine"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does the blood pressure belong in the opening sentence rather than with the other vitals?",
+          "a": "Because severe hypertension and its complications, encephalopathy and pulmonary oedema, are the immediate dangers that decide admission, treatment and referral today.",
+          "accept": [
+            "hypertension",
+            "encephalopathy",
+            "pulmonary oedema",
+            "admission"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "pres_opening",
+          "text": "Opens with age, triad, antecedent interval and blood pressure"
+        },
+        {
+          "id": "pres_grouped",
+          "text": "Groups findings as oedema, pressure and fluid overload"
+        },
+        {
+          "id": "pres_plan",
+          "text": "States working diagnosis, awaited tests and referral threshold"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "acute_glomerulonephritis_child: clinicalPearls and redFlags"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Acute glomerulonephritis: case presentation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.urinary.illness_story": {
+      "id": "skill.hx.urinary.illness_story",
+      "kind": "history",
+      "system": "paediatrics",
+      "title": "History of fever with urinary symptoms in a child",
+      "why": "In a small child a urinary infection hides behind unexplained fever, while an older child describes burning and frequency plainly. The story must be taken in the language of the child's age, separating lower tract irritation from upper tract invasion, because that split decides imaging and follow up.",
+      "asks": [
+        "When did the fever begin, how high does it rise, and does it settle fully between spikes or stay raised through the day?",
+        "Does the child cry, strain or complain of burning while passing urine, and has the stream become thin, dribbling or interrupted?",
+        "How often does the child pass urine now compared with usual, and is there new urgency, bedwetting or daytime leaking after being dry?",
+        "What does the urine look and smell like: cloudy, foul smelling, dark, visibly red, or carrying grit or sediment?",
+        "Is there pain low in the belly, in the side or in the back, and does it come with vomiting, shivering or refusal to feed?",
+        "Has the child had similar fever with urinary complaints before, and what treatment was given each time with what result?",
+        "In an infant: is this fever without any localising sign, with poor suckling, vomiting, loose motions, yellow eyes or poor weight gain?"
+      ],
+      "teach": [
+        {
+          "heading": "Fever means different things at different ages",
+          "body": "In infants and preverbal children the features are non specific, so infection must be considered in any young child with unexplained fever. Poor feeding, vomiting, loose stools, prolonged jaundice and failure to gain weight can be the only clues.\n\nToddlers add foul smelling urine and new loss of bladder control to the fever. Schoolchildren give the classic adult pattern: burning on urination, frequency, urgency and aching above the pubic bone, with fever marking spread to the kidney."
+        },
+        {
+          "heading": "Lower tract irritation versus upper tract invasion",
+          "body": "Infection of the bladder alone runs with burning, frequency, urgency and suprapubic ache, often with cloudy or offensive urine but little or no fever.\n\nFever with a urinary infection in a young child usually means the kidney is involved, with high temperature, chills, pain in the loin or flank, vomiting and a toxic look. That fever is the hinge of the whole history: it moves the illness from cystitis to pyelonephritis and changes every later decision."
+        },
+        {
+          "heading": "What counts as a past episode",
+          "body": "Ask separately about each earlier spell: was urine tested and grown, or only smelt and treated? Did fever settle within two days of drugs or drag on?\n\nTwo confirmed infections, infection that breaks through a preventive drug, or fever that keeps returning with urinary complaints points toward backflow of urine or an obstructive valve. A single treated spell without testing carries less weight than a cultured one."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "An 8-month-old has fever for two days with no cough, no cold and no focus. Why do you ask about the urine?",
+          "a": "In infants the features of urinary infection are non specific, so unexplained fever alone is reason to test the urine.",
+          "accept": [
+            "non specific",
+            "unexplained fever",
+            "test the urine"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What single feature in the history moves a bladder infection toward kidney involvement?",
+          "a": "Fever: infection of the bladder alone runs with little or no fever, while fever with urinary infection usually means the kidney is involved.",
+          "accept": [
+            "fever",
+            "kidney is involved",
+            "bladder alone"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "The mother reports a third febrile spell in six months, each treated without urine testing. What does that pattern tell you?",
+          "a": "Recurrent febrile spells with urinary complaints point toward backflow of urine or obstruction, and the child needs proper culture and imaging rather than another blind course.",
+          "accept": [
+            "recurrent",
+            "backflow",
+            "culture",
+            "imaging"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "age",
+          "text": "Takes the story in the language of the child's age"
+        },
+        {
+          "id": "split",
+          "text": "Separates lower tract irritation from fever with upper tract features"
+        },
+        {
+          "id": "past",
+          "text": "Records each past spell with testing and response"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "febrile_uti_children: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Urinary tract infection in children: clinical features"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.urinary.risk_factors": {
+      "id": "skill.hx.urinary.risk_factors",
+      "kind": "history",
+      "system": "paediatrics",
+      "title": "Risk and background history in suspected childhood urinary infection",
+      "why": "Most first infections need nothing more than treatment, but a child with constipation, holding habits, a past infection, swelling of the kidney seen before birth, or reflux in the family earns imaging and follow up. Missing that background is how scarring of the kidney is missed.",
+      "asks": [
+        "Does the child pass hard stools seldom, soil underwear, or strain for days, and what does the family do for the constipation?",
+        "Does the child hold urine long at school, rush to the toilet at the last moment, leak before reaching, or pass urine in a weak or interrupted stream?",
+        "How much water does the child drink in a day, and does the child use a clean toilet or hold back for dirty or absent school toilets?",
+        "Was swelling of the kidney reported on any pregnancy scan, and was there any urinary infection, fever without cause, or foul urine in infancy?",
+        "Has anyone in the family had backflow of urine, repeated kidney infections, kidney failure, or high blood pressure from a young age?",
+        "For a boy: does the foreskin balloon, has the stream been poor since birth, or is there dribbling after finishing? For a girl: itching, discharge, worms at night, or bubble baths and harsh soaps?",
+        "What is the toilet training stage, who looks after the child by day, and what were the birth weight and growth since?"
+      ],
+      "teach": [
+        {
+          "heading": "Bowel and bladder travel together",
+          "body": "Constipation presses on the bladder neck and rectum, leaving urine behind after each void, and stale urine grows bacteria. Infrequent voiding, holding through school hours, and rushing with incomplete emptying do the same.\n\nTimed voiding every two to three hours, enough fluids through the day, and a bowel routine with fibre turn this around. Treating the constipation is part of treating the infection, and it helps backflow settle with growth."
+        },
+        {
+          "heading": "Anatomy that keeps infection returning",
+          "body": "Backflow from bladder to kidney recurs because the valve tunnel is short from birth, and it runs in families, so siblings of an affected child carry higher risk. High bladder pressure from a blocked outlet or a poorly coordinating bladder gives a secondary backflow that behaves worse.\n\nIn boys a valve in the posterior urethra shows as a poor stream since birth with dribbling and recurrent fever. Swelling of the kidney reported on a pregnancy scan is the earliest flag of all these, and must be followed after birth."
+        },
+        {
+          "heading": "Hygiene, water and the Indian household",
+          "body": "Perineal hygiene matters daily: wiping front to back, cotton underwear, avoiding harsh soaps and bubble baths that irritate the vulva, and treating threadworms that make a girl scratch and burn.\n\nSafe drinking water, a usable school toilet so the child need not hold urine all day, and washing hands before meals complete the background. These questions also reveal the constraints the advice must fit, since a family without a home toilet cannot follow a plan written for one."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why do you ask about constipation in a child with urinary infection?",
+          "a": "Constipation leaves urine behind after each void and stale urine grows bacteria, so treating the bowel is part of treating the infection.",
+          "accept": [
+            "constipation",
+            "urine behind",
+            "bacteria"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A boy has had a poor stream since birth with dribbling and recurrent fever. What anatomy do you suspect?",
+          "a": "A valve in the posterior urethra blocking the outlet, giving high bladder pressure with secondary backflow to the kidney.",
+          "accept": [
+            "posterior urethra",
+            "blocking the outlet",
+            "backflow"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which two background facts most raise the need for imaging after a first infection?",
+          "a": "Swelling of the kidney reported on a pregnancy scan, and backflow or repeated kidney infections in the family.",
+          "accept": [
+            "pregnancy scan",
+            "family",
+            "backflow"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "bowel",
+          "text": "Asks constipation and voiding habits with what is done for each"
+        },
+        {
+          "id": "anatomy",
+          "text": "Asks antenatal scans, stream quality and family backflow"
+        },
+        {
+          "id": "setting",
+          "text": "Asks water, toilets and hygiene the advice must fit"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "vesicoureteric_reflux: clinicalPearls"
+        },
+        {
+          "source": "Indian Academy of Pediatrics",
+          "locator": "Urinary tract infection guidelines: risk factors"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.tuberculos.illness_story": {
+      "id": "skill.hx.tuberculos.illness_story",
+      "kind": "history",
+      "system": "paediatrics",
+      "title": "History of persistent cough, fever and wasting in a child",
+      "why": "Tuberculosis in children declares itself through persistence rather than severity: a cough and fever that outlast an ordinary respiratory infection, with a child who eats less, plays less and gains no weight. Asking after duration, pattern and function in that order is what separates it from recurrent viral illness.",
+      "asks": [
+        "When did the cough begin, and has there been any completely well interval since it started?",
+        "Is the fever highest in the evening, and has it persisted beyond two to three weeks despite usual medicines?",
+        "Has the child lost weight, started refusing food, or become less active and playful than before?",
+        "Has anyone noticed swellings in the neck or armpit, drenching sweats at night, or blood in the sputum?",
+        "Is there fast or difficult breathing, chest pain, or a recent worsening after a brief improvement?",
+        "Has there been headache with vomiting, excessive sleepiness, fits, or any change in behaviour or school performance?"
+      ],
+      "teach": [
+        {
+          "heading": "Weeks matter more than days",
+          "body": "An ordinary viral cough in a child improves within one to two weeks. Tuberculosis moves on a slower clock, with cough, fever or both persisting beyond two to three weeks without a clear well interval.\n\nAsk for the exact duration in weeks, and specifically whether any treatment already given produced even a brief recovery. A short improvement followed by relapse keeps tuberculosis on the list."
+        },
+        {
+          "heading": "Pin down the constitutional picture",
+          "body": "Weight, appetite and play are the three functional measures that matter most in a child. Ask whether clothes have loosened, whether the child leaves food on the plate, and whether play time has shortened.\n\nEvening rise of temperature and night sweats that soak clothing support a chronic infective process. Record each element separately rather than accepting a vague report of weakness."
+        },
+        {
+          "heading": "Red flags that change the urgency",
+          "body": "Fast or laboured breathing, chest pain and blood in sputum point to more extensive lung disease and need prompt assessment.\n\nHeadache with vomiting, unusual sleepiness, fits, a new squint, or weakness of a limb suggest disease of the nervous system and make the child an emergency. Back pain with a visible hump or a limp points to the spine and needs the same urgency."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What duration of cough or fever should make you consider tuberculosis in a child?",
+          "a": "Cough or fever persisting beyond two to three weeks without a well interval, especially when usual treatment has not produced recovery.",
+          "accept": [
+            "two to three weeks",
+            "persistent",
+            "without recovery",
+            "well interval"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which three functional measures best capture the constitutional effect of tuberculosis in a child?",
+          "a": "Weight change with loosening clothes, appetite with food left uneaten, and activity with shortened play time.",
+          "accept": [
+            "weight",
+            "appetite",
+            "play",
+            "activity"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "hx_duration",
+          "text": "Establishes exact duration in weeks and any well interval"
+        },
+        {
+          "id": "hx_constitutional",
+          "text": "Assesses weight, appetite and play separately"
+        },
+        {
+          "id": "hx_redflags",
+          "text": "Screens for breathing difficulty, haemoptysis and neurological symptoms"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "tuberculosis_long_case: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Tuberculosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.tuberculos.contact_risk": {
+      "id": "skill.hx.tuberculos.contact_risk",
+      "kind": "history",
+      "system": "paediatrics",
+      "title": "Contact, BCG, nutrition and background risk in suspected childhood tuberculosis",
+      "why": "Most children with tuberculosis have caught it from an infectious adult under the same roof, and the background of BCG protection, nutrition, crowding and immunity decides how hard the disease hits. This history both supports the diagnosis and finds the household members who need screening next.",
+      "asks": [
+        "Has anyone in the household or in close daily contact had tuberculosis, a chronic cough, or taken months of TB medicines recently?",
+        "Was BCG given at birth, and is there a visible BCG scar on the left upper arm?",
+        "How many people sleep in how many rooms, and does the living space get daylight and fresh air?",
+        "What does the child eat in a usual day, and has growth faltered on the road-to-health or Mamta card?",
+        "Has the child been tested for HIV, been admitted for repeated infections, or taken steroids or other immunity-lowering medicines?",
+        "Has the child been treated for tuberculosis before, and if so, for how many months and with what result?"
+      ],
+      "teach": [
+        {
+          "heading": "The contact question comes first",
+          "body": "A history of close contact with an infectious adult, especially within the household in the past two years, is the single most informative fact in suspected childhood tuberculosis. Ask who it was, whether that person completed treatment, and whether the child was screened at the time.\n\nWhere no contact is admitted, ask about visitors, domestic help, neighbours and school contacts, since families do not always volunteer this history."
+        },
+        {
+          "heading": "BCG, nutrition and immunity set the risk",
+          "body": "BCG given at birth lowers the chance of the severe disseminated forms, miliary disease and meningitis, but it does not prevent infection itself, so its absence or presence never rules tuberculosis in or out. Check the scar and the immunisation record together.\n\nSevere undernutrition, HIV infection and prolonged steroid treatment all weaken the cell-mediated response that contains the bacillus, and each of them raises the risk of progression and of severe disease."
+        },
+        {
+          "heading": "The household is the unit of care",
+          "body": "Every child diagnosed with tuberculosis should trigger screening of household contacts, with priority for children under five years and people living with HIV, who are candidates for TB preventive treatment once active disease is excluded.\n\nOvercrowding, poor ventilation and indoor smoke from chulha fuel increase transmission within the home, so ask about them as remediable factors rather than background detail."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Why is a household TB contact the most informative historical fact in a child?",
+          "a": "Because most childhood tuberculosis follows recent infection from an infectious adult under the same roof, so a contact within the past two years sharply raises the probability and identifies who else needs screening.",
+          "accept": [
+            "household contact",
+            "infectious adult",
+            "same roof",
+            "screening"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A child has a BCG scar. Does that exclude tuberculosis?",
+          "a": "No. BCG protects mainly against the severe disseminated forms such as miliary disease and meningitis, but it does not prevent infection itself.",
+          "accept": [
+            "does not prevent infection",
+            "miliary",
+            "meningitis",
+            "disseminated"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "hx_contact",
+          "text": "Identifies household and close contacts with TB and their treatment status"
+        },
+        {
+          "id": "hx_immunity",
+          "text": "Checks BCG, nutrition, HIV and immunosuppression together"
+        },
+        {
+          "id": "hx_household",
+          "text": "Recognises contacts under five and PLHIV as needing screening and preventive treatment"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "latent_tuberculosis: clinicalPearls"
+        },
+        {
+          "source": "WHO",
+          "locator": "Module 5: Management of tuberculosis in children and adolescents"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.tuberculos.case": {
+      "id": "skill.present.tuberculos.case",
+      "kind": "presentation",
+      "system": "paediatrics",
+      "title": "Presenting the child with suspected tuberculosis",
+      "why": "A tuberculosis presentation must carry the contact, the tempo and the microbiological status in the opening sentences, because the listener decides isolation, notification and household screening from those facts before any discussion of drugs.",
+      "teach": [
+        {
+          "heading": "Open with contact, tempo and syndrome",
+          "body": "Begin with a one-sentence problem representation: age, duration of cough and fever in weeks, weight or appetite change, and the contact history with its treatment status.\n\nFollow with the relevant positives and the discriminating negatives: BCG status, night sweats, node swelling, breathlessness, haemoptysis and neurological symptoms, then the growth and nutrition findings that set the background."
+        },
+        {
+          "heading": "Close with proof, resistance and the household plan",
+          "body": "State the examination and investigation findings grouped by what confirms and what stages: nodes, chest signs, Mantoux, chest film pattern, and CBNAAT with its rifampicin result.\n\nEnd with the diagnostic label, the drug-susceptibility status, notification under the national programme, and the plan for household contact screening and preventive treatment, not only the drugs for this child."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What four facts must the opening sentence of a childhood tuberculosis presentation contain?",
+          "a": "The age of the child, the duration of symptoms in weeks, the change in weight or appetite, and the TB contact history.",
+          "accept": [
+            "age",
+            "duration",
+            "weight",
+            "contact history"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Beyond drugs for the child, what must the closing plan of the presentation cover?",
+          "a": "The rifampicin susceptibility result, notification under the national TB programme, household contact screening, and TB preventive treatment for eligible young contacts.",
+          "accept": [
+            "susceptibility",
+            "notification",
+            "contact screening",
+            "preventive treatment"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "pres_opening",
+          "text": "Opens with age, tempo in weeks, constitutional change and contact"
+        },
+        {
+          "id": "pres_proof",
+          "text": "Groups Mantoux, film and CBNAAT with the rifampicin result"
+        },
+        {
+          "id": "pres_household",
+          "text": "Closes with notification and household screening plan"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "tuberculosis_long_case: additionalInvestigations"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Tuberculosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.enteric.fever_story": {
+      "asks": [
+        {
+          "text": "On which exact day did the fever first appear, and how many days has it lasted till today?"
+        },
+        {
+          "text": "Does the fever ever settle fully to normal between spikes, or does it stay raised throughout the day?"
+        },
+        {
+          "text": "What was the highest temperature you measured, and with which thermometer did you check it?"
+        },
+        {
+          "text": "What other complaints came with the fever: headache, pain in the abdomen, vomiting, cough, rash or any bleeding?"
+        },
+        {
+          "text": "On which day of the fever did the rash appear, and where on the body did you notice it first?"
+        },
+        {
+          "text": "Has the child passed less urine than usual, or has the urine looked dark, brown or red?"
+        }
+      ],
+      "id": "skill.hx.enteric.fever_story",
+      "kind": "history",
+      "pitfalls": [
+        "Writing down days of fever without asking whether the temperature ever touches normal, which throws away the pattern that separates remittent from intermittent fever.",
+        "Counting a brief fall after paracetamol as the fever settling, when the illness itself never touched the baseline.",
+        "Never asking the day the rash appeared, although families remember a rash long after they forget temperatures."
+      ],
+      "practice": "Date a fever with the mother of a febrile child: first day, pattern between spikes, highest reading, associated complaints and the day of any rash.",
+      "probes": [
+        {
+          "a": "A remittent fever that never settles to the baseline, which favours enteric fever over an intermittent illness such as malaria.",
+          "accept": [
+            "remittent",
+            "baseline",
+            "normal",
+            "enteric"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "A mother says her child has had fever for six days that never touches normal. What pattern is this, and which illness does it favour?"
+        },
+        {
+          "a": "Because the day of the rash helps date and separate these fevers: the dengue rash often appears around day six and the typhoid rash around day seven.",
+          "accept": [
+            "day six",
+            "day seven",
+            "date",
+            "dengue",
+            "typhoid"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why do you ask on which day of the fever a rash appeared?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "dates",
+          "text": "Fixes the first day of fever and counts forward to today"
+        },
+        {
+          "id": "pattern",
+          "text": "Establishes whether the fever touches normal between spikes"
+        },
+        {
+          "id": "associates",
+          "text": "Dates the rash and lists the complaints riding with the fever"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "enteric_fever_nontyphoidal_salmonella: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Typhoid fever: clinical features",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Ask the mother for the exact first day of fever and count forward to today, then ask whether the temperature ever touches normal between spikes. A fever that never settles to normal points toward a remittent illness such as enteric fever, while a fever that touches the baseline between spikes points toward an intermittent illness such as malaria.\n\nRecord the highest temperature the family measured and with what thermometer, and ask what brings it down. Paracetamol lowers any fever for a few hours, so a brief fall after a dose does not mean the illness itself is intermittent.",
+          "heading": "Date the fever before describing it"
+        },
+        {
+          "body": "Fever alone rarely separates these illnesses, so ask in the same sitting about headache, abdominal pain, vomiting, cough, rash, bleeding and urine output. Enteric fever brings headache with abdominal pain; dengue brings headache behind the eyes with muscle and joint pain; malaria brings shaking chills followed by drenching sweats.\n\nAsk specifically about the day the rash appeared, because the day counts: the dengue rash often shows around day six of fever and the typhoid rash around day seven. Families remember a rash even when they cannot recall temperatures, so this single question often dates the whole illness.",
+          "heading": "Ask what rides along with the fever"
+        }
+      ],
+      "title": "Dating a fever and tracing its pattern in a child",
+      "why": "The pattern of a fever often names the illness before any test: a stepwise fever that never touches normal, a fever that breaks and returns with a rash, and a fever that spikes with chills and sweats each point in different directions. Dating it exactly is what lets the rest of the history fall into place."
+    },
+    "skill.hx.enteric.exposure_risk": {
+      "asks": [
+        {
+          "text": "Where does your drinking water come from, and do you boil or filter it before the child drinks?"
+        },
+        {
+          "text": "Does the child eat food from street vendors, school canteens or outside parties, and what did the child eat in the week before the fever began?"
+        },
+        {
+          "text": "What kind of toilet does the family use, and does the child wash hands with soap before eating and after the toilet?"
+        },
+        {
+          "text": "Has anyone at home, in school or in your lane had a similar long fever in the past month?"
+        },
+        {
+          "text": "Does the child sleep under a mosquito net, and is there stored water, a cooler, a construction pit or stagnant water near the house?"
+        },
+        {
+          "text": "Has the child travelled recently or received visitors from elsewhere, and has the child received the typhoid vaccine? May I see the vaccine card?"
+        }
+      ],
+      "id": "skill.hx.enteric.exposure_risk",
+      "kind": "history",
+      "pitfalls": [
+        "Asking about mosquitoes but never about water and food, so an enteric outbreak is worked up as dengue.",
+        "Accepting treated tap water at face value in a house that stores it open, where contamination happens after collection.",
+        "Forgetting the vaccine card, which often settles in seconds what ten minutes of recall cannot."
+      ],
+      "practice": "Take an exposure history from the mother of a febrile child, covering water, food, toilets, mosquitoes, contacts and vaccines in that order.",
+      "probes": [
+        {
+          "a": "Unsafe drinking water and outside food point to enteric fever, while daytime mosquito bites around stored household water point to dengue.",
+          "accept": [
+            "water",
+            "food",
+            "mosquito",
+            "stored water",
+            "daytime"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Which two exposures separate enteric fever from dengue in the history?"
+        },
+        {
+          "a": "A shared contaminated water or food source causing enteric fever, rather than separate mosquito-borne infections in each house.",
+          "accept": [
+            "shared",
+            "water",
+            "food",
+            "contaminated",
+            "enteric"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Five children in one lane develop stepwise fever in the same month. What does the cluster suggest?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "water_food",
+          "text": "Asks about water source, treatment, outside food and handwashing"
+        },
+        {
+          "id": "vector",
+          "text": "Asks about nets, stored water, coolers and biting times"
+        },
+        {
+          "id": "cluster_vaccine",
+          "text": "Asks about similar illness nearby and checks the vaccine card"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "enteric_fever_nontyphoidal_salmonella: pathophysiology",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Typhoid and paratyphoid fever: transmission and prevention",
+          "source": "WHO guidelines for typhoid"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Enteric fever spreads through water and food contaminated with human stool, so ask where the family gets drinking water, whether it is boiled or filtered, and whether the child eats from street vendors or school canteens. A house that stores water in open vessels or buys cut fruit and cold drinks outside carries the risk inside the question itself.\n\nAsk about toilets and handwashing, and whether anyone at home or school has had a similar prolonged fever. A cluster of stepwise fevers in one lane or classroom points to a shared water source rather than mosquitoes.",
+          "heading": "Water and food tell the enteric story"
+        },
+        {
+          "body": "Aedes mosquitoes bite in the daytime and breed in clean stored water inside homes, in coolers, pots and tanks. Anopheles mosquitoes bite at night and breed in larger collections of water. Ask about bed nets, open containers near the house, and whether the child plays outdoors at dawn or dusk.\n\nAsk about recent travel and check the typhoid vaccine card. An unvaccinated child who eats outside and a child with stagnant water at home need different advice, and the card often settles in seconds what recall cannot.",
+          "heading": "Mosquitoes tell the dengue and malaria story"
+        }
+      ],
+      "title": "Water, food, mosquito and vaccine exposure in a febrile child",
+      "why": "These three fevers share a thermometer reading but never share a route: stool-contaminated water and food bring enteric fever, daytime bites around stored water bring dengue, and night bites bring malaria. The exposure history is what separates them before a single test is ordered."
+    },
+    "skill.exam.enteric.bleeding_check": {
+      "abnormal": "Fresh non-blanching petechiae on the skin or palate, bleeding gums, a nosebleed, blood at a venepuncture site, or a fresh crop of petechiae inside the cuff square after the cuff is released.",
+      "id": "skill.exam.enteric.bleeding_check",
+      "kind": "exam",
+      "normal": "Skin and palate clear of petechiae, gums and nose dry, venepuncture sites clean, and no fresh crop of petechiae inside the cuff square after the test.",
+      "pitfalls": [
+        "Treating a negative cuff test as proof against dengue. The test is often negative early and in mild illness, so platelets and warning signs decide, not this test alone.",
+        "Inflating the cuff to full systolic pressure or releasing it within a minute. Pain and a brief occlusion give a falsely reassuring result, and squeezing the arm while counting smudges the reading.",
+        "Calling every red spot a petechia. Heat rash blanches on pressure and viral redness fades, while true petechiae stay put under a glass slide."
+      ],
+      "practice": "Perform the petechiae survey and the cuff test on a febrile child, saying each step aloud, and record the result as positive or negative with the site.",
+      "probes": [
+        {
+          "a": "Non-blanching petechiae on the skin or palate, bleeding gums or nose, or a fresh crop of petechiae inside the cuff square after five minutes of mid-pressure occlusion.",
+          "accept": [
+            "petechiae",
+            "non-blanching",
+            "gums",
+            "cuff",
+            "positive"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What counts as a positive capillary fragility and bleeding check?"
+        },
+        {
+          "a": "It supports dengue in a febrile child but never excludes it. A negative test with falling platelets and warning signs still needs admission and close fluid monitoring.",
+          "accept": [
+            "supports",
+            "never excludes",
+            "negative",
+            "platelets",
+            "warning signs"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "The cuff test is negative but platelets are falling and the child has abdominal pain. What does the negative test mean?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "survey",
+          "text": "Surveys skin, palate, gums and puncture sites in daylight before touching the cuff"
+        },
+        {
+          "id": "technique",
+          "text": "Occludes midway between systolic and diastolic pressures for five minutes and counts inside a marked square"
+        },
+        {
+          "id": "interpret",
+          "text": "States that a negative test never excludes dengue and reads it with platelets and warning signs"
+        }
+      ],
+      "significance": "A positive check shows capillary fragility with thrombocytopenia and supports dengue in a febrile child. It never stands alone: read it with the serial platelet count, the haematocrit trend and the warning signs, and a negative test with falling platelets still earns admission.",
+      "sources": [
+        {
+          "locator": "dengue_hemorrhagic_fever: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Dengue: diagnosis and warning signs",
+          "source": "WHO guidelines for dengue"
+        }
+      ],
+      "steps": [
+        "Wash hands, greet the child and mother, and explain that you will look closely at the skin and press the arm briefly with a cuff.",
+        "Inspect the skin in daylight: face, chest, limbs, axillae and pressure areas, then the hard palate with a torch.",
+        "Press a glass slide gently over any red spot. True petechiae do not blanch; heat rash and viral redness fade.",
+        "Look at the gums, the nose and every venepuncture site for oozing or clots.",
+        "Record the blood pressure, then inflate the cuff midway between the systolic and diastolic readings and keep it there for five minutes.",
+        "Release the cuff, wait two minutes, and look for a fresh crop of petechiae inside a marked square on the forearm.",
+        "Record the test as positive or negative with the site, and write the platelet count it will be read against."
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Dengue lowers platelets and makes capillaries leaky before the blood pressure falls, so the skin and gums often declare the illness while the vitals still look reassuring. A petechiae survey with a cuff test takes minutes at the bedside and helps decide whether this child is watched at home or admitted.\n\nDo the survey before any needle prick, because every puncture site becomes a new bleeding point once platelets fall. Daylight matters: petechiae hide under tube light, and the palate is the site students forget.",
+          "heading": "Why the skin is examined before the blood is drawn"
+        },
+        {
+          "body": "The cuff raises venous pressure in the forearm so fragile capillaries leak a few red cells, which appear as petechiae. Midway pressure for five minutes is the standard compromise: full arterial occlusion hurts and tells nothing, and a brief squeeze never stresses the vessels enough.\n\nA positive test supports dengue in the right clinical setting but never excludes it when negative. Early illness, a thick arm and a hurried technique all produce false negatives, so the platelet trend and warning signs outrank this test every time.",
+          "heading": "What the cuff test measures, and when it misleads"
+        }
+      ],
+      "title": "Checking capillary fragility and bleeding in a febrile child",
+      "why": "Dengue leaks plasma and lowers platelets before blood pressure falls, so the skin and gums often declare the illness while the vitals still look reassuring. A bedside check for petechiae, a cuff test and mucosal bleeding takes minutes and decides whether this child is watched at home or admitted."
+    },
+    "skill.present.enteric.case": {
+      "body": "Present in a fixed order and keep it to about two minutes for a focused case. The listener should be able to name the fever before you say it.",
+      "id": "skill.present.enteric.case",
+      "keyPoints": [
+        "Open with age, sex and days of fever in one sentence, naming who gave the history.",
+        "State the fever pattern next: stepwise and remittent, breaking with a rash, or spiking with chills and sweats.",
+        "Give the features that separate the three fevers: abdominal pain with coated tongue, pain behind the eyes with muscle ache, or chills with sweats.",
+        "Report the pulse against the temperature, then the abdominal and skin findings: liver and spleen, rose spots or petechiae, and the cuff test.",
+        "Date the investigations: blood culture before antibiotics, paired titres, the NS1 window, and the smear result.",
+        "Close with the diagnosis, the severity grade, and the plan for fluids, antibiotics and review."
+      ],
+      "kind": "presentation",
+      "pitfalls": [
+        "Presenting days of fever without the pattern, so the listener cannot tell remittent from intermittent.",
+        "Omitting the pulse-temperature relationship and the abdominal findings, which are doing the real diagnostic work.",
+        "Closing without the severity grade and the plan for fluids, antibiotics and review, which is what the consultant acts on."
+      ],
+      "probes": [
+        {
+          "a": "Age with days of fever, the fever pattern, the features separating the three fevers, the pulse-temperature relationship with abdominal and skin findings, the dated investigations, and the diagnosis with severity and plan.",
+          "accept": [
+            "pattern",
+            "pulse",
+            "abdomen",
+            "investigations",
+            "severity",
+            "plan"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What elements does a tropical fever presentation carry in order?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "enteric_fever_nontyphoidal_salmonella: additionalDifferentials",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Fever without a focus: case presentation",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "title": "Presenting the tropical fever case",
+      "why": "Three illnesses share the opening line of fever in a child, so the presentation must carry the features that separate them: the pattern, the pulse-temperature relationship, the abdominal and skin findings, and the dated investigations. A presentation without those is a story without an ending."
+    },
+    "skill.hx.cerebral.illness": {
+      "asks": [
+        "What the parents noticed first, in their own words, and the age at which they noticed it.",
+        "Gross motor steps: head control, sitting, standing, walking, and what the child does now to move about.",
+        "Fine motor and vision: reaching, grasp, scribbling, and whether the child fixes on and follows objects.",
+        "Language and hearing: babbling, first words, joining words, and whether the child turns to sound and to name.",
+        "Social play: smile, stranger awareness, waving, pointing, playing with other children.",
+        "Whether any skill once gained has been lost, and exactly which one and when.",
+        "Fits, staring spells, or jerks, and fever, feeding, sleep and behaviour alongside the delay.",
+        "What the child manages today: school or anganwadi attendance, feeding self, toilet needs, and mobility aids used."
+      ],
+      "id": "skill.hx.cerebral.illness",
+      "kind": "history",
+      "oneLine": "The delay in the parents words, across four domains, with regression asked outright",
+      "pitfalls": [
+        "Recording delay without asking about loss of skills, so a progressive disorder is filed as cerebral palsy.",
+        "Asking only about walking and missing language, hearing and feeding, which decide the plan as much as the legs do.",
+        "Accepting normal at birth as reassuring without asking the neonatal weeks, where the cause usually sits."
+      ],
+      "probes": [
+        {
+          "a": "Gross motor, fine motor with vision, language with hearing, and social play, plus whether any gained skill was lost.",
+          "accept": [
+            "gross motor",
+            "fine motor",
+            "language",
+            "social",
+            "regression",
+            "loss of skills"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "What four domains do you cover in a developmental history, and what single question matters most?"
+        },
+        {
+          "a": "Loss of a skill already gained points away from cerebral palsy towards a progressive or metabolic disorder and needs urgent workup.",
+          "accept": [
+            "regression",
+            "progressive",
+            "loss of skills",
+            "metabolic"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "The mother says the child waved bye bye at one year and stopped by eighteen months. What does that change?"
+        },
+        {
+          "a": "Fits, feeding and swallowing with cough or faltering growth, vision and hearing concerns, sleep, and behaviour, since each changes management.",
+          "accept": [
+            "fits",
+            "feeding",
+            "vision",
+            "hearing",
+            "growth"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Beyond milestones, what associated history must every delayed child be asked?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "cerebral_palsy: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Developmental delay: history and examination",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Ask what the parents noticed first and when, in their own words, before offering milestones. A mother who says the legs went stiff when she tried to stand him at one year has already given you tone, timing and topography. Then walk the four domains in order so none is skipped.",
+          "heading": "Start with the parents story"
+        },
+        {
+          "heading": "Walk four domains, then ask about loss",
+          "table": {
+            "cols": [
+              "Domain",
+              "Ask about",
+              "Red flag answer"
+            ],
+            "rows": [
+              [
+                "Gross motor",
+                "Head control, sitting, standing, walking, current mobility",
+                "Stiffness, scissoring, toe walking, favouring one side"
+              ],
+              [
+                "Fine motor and vision",
+                "Reach, grasp, scribble, fixing and following",
+                "Persistent fisting, no pincer grasp, no visual following"
+              ],
+              [
+                "Language and hearing",
+                "Babble, words, joining words, turning to sound",
+                "No babble, no words with meaning, poor response to name"
+              ],
+              [
+                "Social play",
+                "Smile, stranger awareness, pointing, peer play",
+                "No pointing, no shared play, withdrawn behaviour"
+              ]
+            ]
+          }
+        }
+      ],
+      "title": "History of the child who is slow to develop",
+      "why": "Parents report delay in their own words, and the pattern across the four developmental domains separates a static motor disorder from global delay and from regression. Loss of a skill already gained points away from cerebral palsy, so it must be asked outright, not left for the parents to volunteer."
+    },
+    "skill.hx.cerebral.risks": {
+      "asks": [
+        "Gestation in completed weeks, birth weight, and whether growth in pregnancy was reported as poor.",
+        "Antenatal illness: fever with rash, hypertension, diabetes, bleeding, reduced movements, and medicines taken.",
+        "Labour: place of birth, attendant, membranes and duration, instrumental help, and the colour of the liquor.",
+        "The newborn weeks: first cry, colour, need for oxygen or bag mask help, fits, and days spent in nursery care.",
+        "Jaundice needing phototherapy or exchange, poor feeding, and any lumbar puncture or meningitis label.",
+        "Infections after the newborn period, head injury, and admissions with seizures or prolonged fever.",
+        "Consanguinity, family history of delay, fits, early childhood deaths, and previous pregnancy losses."
+      ],
+      "id": "skill.hx.cerebral.risks",
+      "kind": "history",
+      "oneLine": "Pregnancy, labour and the newborn weeks, where the cause of cerebral palsy usually sits",
+      "pitfalls": [
+        "Stopping at a normal birth weight and missing a preterm birth followed by ventilation, which is the classic diplegia story.",
+        "Forgetting kernicterus: severe newborn jaundice needing exchange transfusion explains a dyskinetic picture years later.",
+        "Not asking about consanguinity and family history, which point towards the metabolic mimics."
+      ],
+      "probes": [
+        {
+          "a": "Preterm birth and low birth weight, growth restriction, perinatal hypoxic ischaemic injury, infection, kernicterus, and brain malformations.",
+          "accept": [
+            "preterm",
+            "low birth weight",
+            "hypoxic",
+            "infection",
+            "kernicterus",
+            "malformation"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "Which antenatal and perinatal factors raise the risk of cerebral palsy?"
+        },
+        {
+          "a": "Periventricular white matter injury after preterm birth commonly produces spastic diplegia with stiff legs and relatively spared arms.",
+          "accept": [
+            "periventricular",
+            "white matter",
+            "diplegia",
+            "preterm",
+            "legs"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "A child born preterm with stiff legs and milder arm involvement: what injury pattern does that suggest?"
+        },
+        {
+          "a": "Severe neonatal jaundice needing exchange transfusion, which injures the basal ganglia and later shows as dyskinetic cerebral palsy.",
+          "accept": [
+            "jaundice",
+            "kernicterus",
+            "exchange",
+            "basal ganglia",
+            "dyskinetic"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why do you ask about the peak jaundice and its treatment in a child with twisting movements?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "cerebral_palsy: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Cerebral palsy: risk factors and prevention",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Take the history backwards from the injury to the pregnancy. Start with gestation, birth weight and growth in pregnancy, then antenatal illness, bleeding, hypertension, diabetes and medicines. Preterm birth, low birth weight, growth restriction, infection and kernicterus are the recognised risk factors, and each one you miss is a cause left blank.",
+          "heading": "Ask the pregnancy in order"
+        },
+        {
+          "body": "Ask place of birth and attendant, duration of labour, colour of the liquor, instruments used, and the first cry in the babys own words. Then the newborn weeks: colour, breathing help, fits, jaundice and its treatment, feeding, and days in nursery care. A poor cry with resuscitation followed by fits is the term asphyxial story; ventilation for prematurity with later stiff legs is the diplegia story.",
+          "heading": "Ask the labour and the first cry"
+        }
+      ],
+      "title": "Risk history in the delayed child",
+      "why": "Cerebral palsy is a story of the developing brain, so the pregnancy, labour and newborn weeks carry the cause more often than any blood test. Preterm birth, growth restriction, a difficult labour with a poor cry, neonatal fits, severe jaundice and infection each raise the risk, and missing them leaves the aetiology blank."
+    },
+    "skill.present.cerebral.case": {
+      "body": "Present in a fixed order and keep it to about two minutes. The listener should be able to call the topography before you say it.",
+      "id": "skill.present.cerebral.case",
+      "keyPoints": [
+        "Open with the problem representation: age, gestation and birth story in one line, static delay across stated domains, and current function.",
+        "Describe the tone pattern with topography: which limbs are stiff, scissoring or toe strike, asymmetry, reflexes and plantars, and primitive reflex persistence.",
+        "State the relevant negatives: no loss of skills, no fits or only treated fits, alert and socially responsive, vision and hearing position.",
+        "Name the aetiology pointer and the imaging: preterm periventricular injury, term asphyxial pattern, or postnatal cause, with what the scan showed.",
+        "Close with function and plan: mobility and communication aids, therapy and early intervention enrolment, hip and nutrition surveillance, school placement, and review.",
+        "A worked example: This 3 year old girl, born preterm with ventilation for two weeks, has static delay in gross motor and language milestones with normal social response. She cruises with scissoring and toe strike, has increased tone in both lower limbs with brisk knee jerks and extensor plantars, and no loss of skills. In summary this is spastic diplegic cerebral palsy from an old periventricular injury, for which I propose therapy with home exercises, orthoses, hip surveillance, and enrolment at the early intervention centre."
+      ],
+      "kind": "presentation",
+      "oneLine": "Age and birth story, tone pattern with topography, negatives, and the function plan",
+      "pitfalls": [
+        "Presenting the delay without the gestation and newborn story, leaving the aetiology unanchored.",
+        "Saying stiff all over instead of naming which limbs and whether the arms are spared, so diplegia cannot be recognised.",
+        "Omitting regression, fits and vision and hearing, so the listener cannot tell the mimics were excluded.",
+        "Closing without function: mobility, communication, schooling and review, which is what the family lives with."
+      ],
+      "probes": [
+        {
+          "a": "Age with gestation and birth story, the static delay across domains, the tone pattern with topography, the relevant negatives, and the function plan.",
+          "accept": [
+            "birth story",
+            "tone",
+            "topography",
+            "negatives",
+            "plan"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What five elements does a cerebral palsy presentation carry in order?"
+        },
+        {
+          "a": "Which limbs are stiff and which are spared, symmetry, scissoring or toe strike, reflexes, plantars, and persistence of primitive reflexes.",
+          "accept": [
+            "limbs",
+            "symmetry",
+            "scissoring",
+            "reflexes",
+            "plantars"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "What detail proves diplegia rather than a vague stiffness?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "cerebral_palsy: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Cerebral palsy: clinical assessment",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "title": "Presenting the child with cerebral palsy",
+      "why": "A cerebral palsy presentation must carry the birth story, the tone pattern and the negatives together, because the diagnosis is a static motor disorder with an early cause and excluded mimics. Without topography and without stating that no skills were lost, the listener cannot grade the child or trust the label."
+    },
+    "skill.hx.down.features": {
+      "id": "skill.hx.down.features",
+      "kind": "history",
+      "system": "paediatrics",
+      "title": "History of the child with suspected Down syndrome",
+      "oneLine": "When the difference was noticed, how the baby feeds and moves, and alarms underneath",
+      "why": "Parents report a worry, not a syndrome: feeds that take too long, a baby who feels floppy to hold, milestones that come late. Fixing when each of these began, and asking directly about the heart, bowel, hearing and blood alarms, is what separates a thriving child who needs surveillance from one who needs urgent referral.",
+      "asks": [
+        {
+          "text": "When the difference was first noticed, and by whom: at birth by the nurse or doctor, or later at home, with what was said at the time."
+        },
+        {
+          "text": "Feeding in detail: time taken for each feed, suck strength, choking or coughing during feeds, vomiting after feeds, and weight gain between visits."
+        },
+        {
+          "text": "Tone and cry: whether the baby feels floppy or heavy to hold, head control when pulled to sit, and whether the cry is weak or unusual."
+        },
+        {
+          "text": "Milestones across all four domains: age of social smile, head holding, sitting, standing and first words, with what the child does today."
+        },
+        {
+          "text": "Breathing and infections: fast or noisy breathing, blue colour around the lips during feeds or crying, and how often chest infections need a doctor."
+        },
+        {
+          "text": "Stools and belly: delay in passing the first stool after birth, repeated vomiting with a swollen belly, and ongoing constipation."
+        },
+        {
+          "text": "Hearing and vision: response to sound and to the mother's face, squint, white reflex in the eye, and any fits, bleeding or bruising."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Start from when the worry began",
+          "body": "Ask exactly when the parents first felt something was different, and who named it. A baby recognised at delivery with the typical face and poor tone enters the pathway through confirmation and screening, while a baby noticed months later through slow milestones enters through development and needs the same screening caught up.\n\nRecord the informant and the words used at the time, since the mother's account of tone, feeding and alertness is the baseline every later visit is measured against."
+        },
+        {
+          "heading": "Feeds, tone and milestones in one sweep",
+          "points": [
+            "Weak suck with long feeds and slow weight gain points to poor tone and effort, and where feeds provoke breathlessness or blue lips it points to the heart rather than the feed.",
+            "Floppiness is tested in the story before the bed: head lag on pulling to sit, slipping through the hands when held upright, and a weak cry all mark low tone.",
+            "Take every domain, not only walking: smiling, cooing, grasping and response to name mature on their own clocks, and uneven delay across domains shapes the stimulation plan.",
+            "Repeated chest infections with poor weight gain in this history should raise the heart as the cause, not the lungs alone."
+          ]
+        },
+        {
+          "heading": "Alarms that change the road",
+          "points": [
+            "Breathlessness with sweating on feeds, blue lips, or failure to gain weight warns of significant congenital heart disease and needs urgent echo rather than routine follow up.",
+            "Bilious vomiting or a swollen belly with delayed stool warns of duodenal or bowel obstruction and needs same day surgical review.",
+            "Noisy breathing in sleep with pauses, daytime mouth breathing or poor school attention warns of obstructive sleep apnoea and needs a sleep review.",
+            "Pallor with bruising, bleeding or persistent high counts warns of leukaemia and needs an urgent blood count and referral."
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Recording delayed milestones without asking about tone and feeding, so a floppy poor feeder reads as simple late development.",
+        "Accepting recurrent chest infections as ordinary in this child instead of asking about feeding breathlessness and weight gain that point to the heart.",
+        "Never asking about stools, sleep breathing, hearing and bruising, so a surgical belly, apnoea or leukaemia declares itself late."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A mother says her baby feels floppy and feeds take an hour. What two history facts do you pin down first?",
+          "a": "When the floppiness was first noticed and by whom, and the full feeding story with suck strength, choking, breathlessness during feeds and weight gain between visits.",
+          "accept": [
+            "noticed",
+            "feeding",
+            "suck",
+            "weight gain"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does the history of a child with suspected Down syndrome always ask about stools and sleep breathing?",
+          "a": "Because delayed stool with vomiting and a swollen belly warns of bowel obstruction needing surgery, and noisy sleep breathing with pauses warns of obstructive sleep apnoea needing review.",
+          "accept": [
+            "obstruction",
+            "stool",
+            "sleep apnoea",
+            "noisy breathing"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "An infant with suspected Down syndrome has repeated chest infections and poor weight gain. What does the history need to separate next?",
+          "a": "Whether breathlessness, sweating and blue lips appear during feeds with failure to gain weight, which points to congenital heart disease needing urgent echo rather than repeated antibiotics alone.",
+          "accept": [
+            "heart disease",
+            "feeds",
+            "echo",
+            "weight gain"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "down_syndrome: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Down syndrome"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.down.risks": {
+      "id": "skill.hx.down.risks",
+      "kind": "history",
+      "system": "paediatrics",
+      "title": "Risk, antenatal and family background in suspected Down syndrome",
+      "oneLine": "Maternal age, what the pregnancy scans held, past pregnancies, and the birth itself",
+      "why": "The chance of trisomy rises with maternal age and the antenatal record often already holds the answer, yet students jump to the face and never ask either. A careful background fixes the prior probability, explains why screening did or did not happen, and sets the recurrence question the parents will ask before the student leaves the room.",
+      "asks": [
+        {
+          "text": "Maternal age at this delivery and at any previous delivery, with the mother's own words for how the age was recorded."
+        },
+        {
+          "text": "Antenatal scans and blood screening: nuchal translucency, triple or quadruple testing, cell free DNA testing where done, and what the family was told."
+        },
+        {
+          "text": "Past pregnancies in order: live births, miscarriages, stillbirths, medical terminations with reasons, and any previous child with similar features."
+        },
+        {
+          "text": "Family history of Down syndrome, other syndromes with learning difficulty, early heart disease, and marriages within the family."
+        },
+        {
+          "text": "Birth events: place of delivery, weeks of gestation, birth weight, whether the baby cried at once, and any stay in the newborn unit with reasons."
+        },
+        {
+          "text": "Early days after birth: time to first feed, jaundice needing light therapy, delay in passing stool, and any heart murmur already mentioned."
+        },
+        {
+          "text": "What treatment and advice have been given so far: physiotherapy, hearing or heart review dates, vitamin tonics, and what the parents were told to expect."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Maternal age sets the prior",
+          "body": "Ask the mother's age at this delivery directly, since most trisomy arises from nondisjunction whose chance climbs as maternal age rises. Record it as a number, not as young or old, because the counselling later depends on it.\n\nAsk the same for previous pregnancies, since a previous child with trisomy or repeated losses changes both the prior probability and the urgency of karyotyping the parents where translocation is suspected."
+        },
+        {
+          "heading": "Read the antenatal record, do not assume it",
+          "points": [
+            "List every scan with its weeks: a first trimester nuchal scan, the anomaly scan near mid pregnancy, and any soft marker or heart finding noted.",
+            "List every screening blood test with its reported risk figure where given, and whether cell free DNA testing or an invasive test was offered or declined.",
+            "Where no screening happened, record why: late booking, no scan facility nearby, cost, or a decision to continue regardless, since each leads to different counselling.",
+            "Never shame the family for a missed test; the background is gathered to guide this child and the next pregnancy, not to assign blame."
+          ]
+        },
+        {
+          "heading": "Births and early days carry clues",
+          "body": "Note gestation, birth weight and the first cry, then the newborn stay: poor tone, weak suck, delayed stool, prolonged jaundice or a murmur each foreshadow the systems now under review.\n\nAsk about parental karyotyping already done and about relatives with similar features or early cardiac deaths, because a translocation in the family rewrites the recurrence risk for every later pregnancy."
+        }
+      ],
+      "pitfalls": [
+        "Never asking maternal age, so the single strongest risk factor stays out of the record and the counselling.",
+        "Writing screened normal without asking which test at which weeks, which hides whether any real screening happened.",
+        "Skipping past miscarriages and terminations out of politeness, losing the recurrence pattern the genetic counselling needs."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why is maternal age asked as a number in every suspected Down syndrome history?",
+          "a": "Because most trisomy arises from meiotic nondisjunction whose chance rises with advancing maternal age, and the recorded age anchors both the prior probability and later recurrence counselling.",
+          "accept": [
+            "maternal age",
+            "nondisjunction",
+            "advancing",
+            "counselling"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "The mother says all antenatal scans were normal. What do you ask before accepting that?",
+          "a": "Which scans at which weeks, whether nuchal translucency was measured, what screening blood tests were done with what reported risk, and whether invasive testing was offered or declined.",
+          "accept": [
+            "nuchal",
+            "weeks",
+            "screening",
+            "risk"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does a past miscarriage history matter in counselling after a Down syndrome diagnosis?",
+          "a": "Because repeated losses or a previous affected child raise the question of a familial translocation, which needs parental karyotyping and rewrites the recurrence risk for every later pregnancy.",
+          "accept": [
+            "translocation",
+            "parental karyotyping",
+            "recurrence",
+            "losses"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "down_syndrome: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Down syndrome"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.down.case": {
+      "id": "skill.present.down.case",
+      "kind": "presentation",
+      "system": "paediatrics",
+      "title": "Presenting the child with Down syndrome",
+      "oneLine": "Two minutes from face to problem list, ending with karyotype and surveillance",
+      "why": "The consultant judges this case on order and completeness: the child with age and informant, the story in the mother's words, birth and background, development across domains, the head to toe features with growth and heart, and a problem list that names the karyotype and every system still open. A list of facial features without this shape is a viva failed.",
+      "teach": [
+        {
+          "heading": "The fixed order",
+          "points": [
+            "Open with age in months or years, sex, informant, and maternal age at delivery, since the age frames the milestones and the maternal age frames the cause.",
+            "State the presenting story with its duration in the mother's words: when the difference was noticed, feeding and tone, milestones, infections and stools.",
+            "Give the background next: antenatal scans and screening, past pregnancies, birth events and early days, immunisation and what treatment has started.",
+            "Present development across all four domains with the ages achieved, never as a single late label.",
+            "Examine head to toe in order: growth against the chart, dysmorphic features, tone, heart murmur with failure state, belly, spine and skin, with hearing and vision position."
+          ]
+        },
+        {
+          "heading": "Positives and negatives that decide",
+          "points": [
+            "Name the features that clinch the syndrome: upslanting eyes with epicanthic folds, flat nasal bridge, small ears, single palmar crease, sandal gap, flat occiput and hypotonia.",
+            "State the negatives that exclude mimics: no prolonged jaundice with constipation and large fontanelle for hypothyroidism, no severe early collapse for other trisomies.",
+            "Give the cardiac position explicitly: murmur characterised, failure present or absent, echo done or pending, since this decides urgency.",
+            "Close with the karyotype status: done with result and type, or pending with date, plus parental karyotyping where translocation is suspected."
+          ]
+        },
+        {
+          "heading": "A worked example",
+          "body": "An 8 month old boy, second child of a 38 year old mother, noticed floppy at birth with the typical face, now sitting with support and babbling, with two chest infections and slow weight gain. Examination shows growth below the curve, upslanting palpebral fissures with epicanthic folds, a single transverse palmar crease, a sandal gap, generalised hypotonia and a loud systolic murmur with mild liver enlargement.\n\nThis is Down syndrome confirmed on karyotype as free trisomy 21, with a complete atrioventricular septal defect and failure to thrive, and the plan is early intervention, cardiac referral, thyroid and hearing review, and genetic counselling for the parents."
+        }
+      ],
+      "pitfalls": [
+        "Listing the face and stopping before growth, tone, heart and development, which are where the plan lives.",
+        "Presenting the diagnosis without saying whether the karyotype is done, pending or only presumed.",
+        "Omitting the cardiac state and the feeding story, leaving the listener unable to judge urgency."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What opens a Down syndrome case presentation, and why does maternal age belong there?",
+          "a": "Age, sex, informant and maternal age at delivery, because the child's age frames the milestones and the maternal age frames the nondisjunction risk behind the diagnosis.",
+          "accept": [
+            "informant",
+            "maternal age",
+            "milestones",
+            "nondisjunction"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which negatives must a Down syndrome presentation carry, and what does each exclude?",
+          "a": "Prolonged jaundice with constipation and a large fontanelle, which would favour congenital hypothyroidism, and severe early collapse patterns that favour other trisomies, plus absence of failure signs to stage the heart.",
+          "accept": [
+            "hypothyroidism",
+            "trisomies",
+            "failure",
+            "fontanelle"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why must the karyotype status close every Down syndrome presentation?",
+          "a": "Because only the karyotype confirms trisomy 21, names free trisomy, translocation or mosaicism, and sets parental testing and recurrence risk, so a presentation without it leaves the diagnosis and the counselling unfinished.",
+          "accept": [
+            "confirms",
+            "translocation",
+            "mosaicism",
+            "recurrence"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "down_syndrome: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Down syndrome"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.type.t1dchild_illness": {
+      "id": "skill.hx.type.t1dchild_illness",
+      "kind": "history",
+      "system": "paediatrics",
+      "title": "History of the diabetic illness",
+      "oneLine": "Thirst, urine, weight, and the short prodrome that warns of ketoacidosis",
+      "why": "Parents describe polyuria as bedwetting or extra school toilet trips and polydipsia as a new water bottle habit, so only a deliberate sequence from first thirst through weight change to vomiting and deep breathing separates an early same-day referral from an arrival in ketoacidosis.",
+      "teach": [
+        {
+          "heading": "The osmotic sequence",
+          "body": "Without enough insulin, glucose stays in the blood and spills into the urine, pulling water with it. The child passes large volumes of urine, grows thirsty, and drinks constantly, yet still loses weight because the tissues cannot use the glucose in the blood.\n\nAsk the three together, because new thirst with frequent urine and weight loss over weeks is the story that should earn a finger prick glucose test the same day."
+        },
+        {
+          "heading": "Enuresis is the clue adults miss",
+          "body": "A child dry for years who starts wetting the bed again is often scolded before being tested. Secondary enuresis, especially with daytime frequency and new thirst, points to water loss in the urine rather than behaviour.\n\nAsk about school toilet trips and waking at night to drink as well, since parents volunteer bedwetting but forget the rest."
+        },
+        {
+          "heading": "The short prodrome before ketoacidosis",
+          "body": "As insulin lack deepens, fat breakdown floods the blood with ketones and the child turns sick over hours to days. Vomiting and tummy pain come first, then deep sighing breaths as the lungs blow off acid, then drowsiness as fluid loss and acidosis worsen.\n\nA vomiting child with known or suspected diabetes is evolving ketoacidosis until proved otherwise, so fix each new symptom against the last well day."
+        }
+      ],
+      "asks": [
+        {
+          "text": "Thirst in sequence: when the extra drinking started, how much water or milk in a day, and waking at night to drink."
+        },
+        {
+          "text": "Urine in sequence: how often by day and night, new bedwetting after being dry, and any burning or fever with urine."
+        },
+        {
+          "text": "Weight and appetite: weight loss over weeks with appetite kept or increased, with tiredness and school performance."
+        },
+        {
+          "text": "Ketoacidosis prodrome: nausea or vomiting, tummy pain, rapid deep breathing, fruity breath, and sleepiness, with exact onset."
+        },
+        {
+          "text": "Trigger illness: fever, cough, vomiting or loose stools in the past two weeks, and what the child ate and drank during it."
+        },
+        {
+          "text": "Past clues: earlier thrush, boils, urinary infections, or a clinic visit where the sugar was noted high."
+        },
+        {
+          "text": "Alarms today: vomiting that will not stop, tummy pain, deep breathing, unusual sleepiness, or very little urine."
+        }
+      ],
+      "keyPoints": [
+        "Fix onset against the last well week: weeks of thirst and urine with weight loss is new diabetes, hours to days of vomiting with deep breathing is ketoacidosis.",
+        "Quantify fluids and urine in the caregiver own units: bottles per day, night waking, and school toilet trips.",
+        "Ask bedwetting as a new event after dryness, not as a habit, and pair it with daytime frequency.",
+        "Record the trigger illness and intake during it, since infection with poor intake precipitates ketoacidosis.",
+        "Close every history with the alarms: persistent vomiting, pain, deep breathing, and drowsiness."
+      ],
+      "pitfalls": [
+        "Accepting bedwetting as behaviour without asking about thirst and daytime urine.",
+        "Missing the trigger febrile illness a week earlier that tipped new diabetes into ketoacidosis.",
+        "Filing vomiting and tummy pain as gastritis in a thirsty child losing weight."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What three symptoms together should earn a same-day finger prick glucose test?",
+          "a": "New thirst with frequent passage of large volumes of urine and weight loss over weeks.",
+          "accept": [
+            "thirst",
+            "urine",
+            "weight loss"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does secondary enuresis point to diabetes rather than behaviour?",
+          "a": "A dry child who starts wetting again with daytime frequency and new thirst is showing osmotic water loss in the urine, not a behaviour problem.",
+          "accept": [
+            "osmotic",
+            "frequency",
+            "thirst"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A thirsty child losing weight now vomits with tummy pain. What does the vomiting mean?",
+          "a": "Vomiting with pain in this setting warns of evolving ketoacidosis, so check ketones with acid base status urgently rather than treating it as gastritis.",
+          "accept": [
+            "ketoacidosis",
+            "ketones",
+            "acid base"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "type1_diabetes_child: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Diabetes mellitus in children: clinical features"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.type.t1dchild_background": {
+      "id": "skill.hx.type.t1dchild_background",
+      "kind": "history",
+      "system": "paediatrics",
+      "title": "Background history in the diabetic child",
+      "oneLine": "Family autoimmunity, feeds and drinks, vaccines, growth, and steroid exposure",
+      "why": "Type 1 diabetes clusters with other autoimmune conditions and unmasks after infections and steroids, while sugary drinks, missed vaccines, and faltering growth shape both risk and the plan, so the background is where the next sibling and the next admission are found.",
+      "teach": [
+        {
+          "heading": "Family and autoimmune background",
+          "body": "Ask about diabetes in parents, siblings, and grandparents with the age it started, since early insulin use in relatives favours type 1 disease. Then ask about thyroid disease, coeliac disease, vitiligo, and anaemia needing treatment in the family, because these travel with the same predisposition.\n\nDraw this as a small pedigree with ages, not as a yes or no list, so the sibling at risk is visible on paper."
+        },
+        {
+          "heading": "Feeds, fluids, and the school tiffin",
+          "body": "Take a 24 hour recall of meals, milk, juice, and cold drinks with quantities in household measures. Frequent sugary drinks do not cause type 1 diabetes, but they worsen thirst, weight readings, and control once it is present.\n\nRecord breastfeeding duration, age at weaning, and the school tiffin pattern, since the dietitian builds carbohydrate awareness on exactly these foods."
+        },
+        {
+          "heading": "Vaccines, growth, and drugs as baseline",
+          "body": "Check the vaccine card against age, because diabetes puts the child in the high risk group for whom influenza and pneumococcal vaccines are specially advised. Plot past weights and heights if any record exists, since crossing down across lines predates the diagnosis by months.\n\nAsk about steroid syrups, inhalers, and skin creams by name, because steroids raise glucose and can precipitate ketoacidosis in a new diabetic child."
+        }
+      ],
+      "asks": [
+        {
+          "text": "Family diabetes: who has it, at what age it started, and whether they use insulin, with thyroid, coeliac, vitiligo, and anaemia in relatives."
+        },
+        {
+          "text": "Birth and early feeds: gestation, birth weight, breastfeeding duration, age at weaning, and current milk quantity."
+        },
+        {
+          "text": "24 hour recall: meals, milk, juice, and cold drinks with household quantities, plus the school tiffin pattern."
+        },
+        {
+          "text": "Immunisation: card seen and verified, with influenza and pneumococcal doses asked by name."
+        },
+        {
+          "text": "Growth and school: past weights or heights, school class with recent performance, and developmental milestones."
+        },
+        {
+          "text": "Past illness: admissions, urinary infections, thrush, boils, and any earlier high sugar reading."
+        },
+        {
+          "text": "Drugs: steroid syrups, inhalers, and creams, with who prescribed them and for how long."
+        }
+      ],
+      "keyPoints": [
+        "Map diabetes by age started in three generations, then screen the pedigree for thyroid and coeliac disease.",
+        "Quantify sugary drinks without blaming them: they shape control, not cause.",
+        "Verify the vaccine card in hand; diabetes is a high risk indication for influenza and pneumococcal protection.",
+        "Name every steroid by route, since a recent course explains a sudden deterioration."
+      ],
+      "pitfalls": [
+        "Recording family diabetes as present without the age started, losing the type 1 against type 2 distinction.",
+        "Skipping the vaccine card because the child looks well immunised.",
+        "Forgetting inhaled and skin steroids while asking only about syrups."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which two vaccines deserve special attention in a diabetic child?",
+          "a": "Influenza and pneumococcal vaccines, because diabetes places the child in the high risk group for severe infection.",
+          "accept": [
+            "influenza",
+            "pneumococcal",
+            "high risk"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why ask the age diabetes started in each relative?",
+          "a": "Early onset disease needing insulin from the start favours type 1 diabetes in the family, while later onset without insulin favours type 2 disease.",
+          "accept": [
+            "early onset",
+            "insulin",
+            "type 1"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "type1_diabetes_child: additionalInvestigations"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Diabetes mellitus in children: risk factors and associated conditions"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.present.type.t1dchild_case": {
+      "id": "skill.present.type.t1dchild_case",
+      "kind": "presentation",
+      "system": "paediatrics",
+      "title": "Presenting the diabetic child",
+      "oneLine": "Two minutes, ending with ketoacidosis status and the family plan",
+      "why": "The consultant judges the case on whether ketoacidosis is named with its evidence, growth is placed beside glucose, and the family leaves with monitoring and sick day rules, so the presentation must carry tempo, triad, acid base, and education in a fixed order.",
+      "teach": [
+        {
+          "heading": "A fixed order for every diabetic child",
+          "body": "Open with age, sex, and the problem representation: weeks of thirst, urine, and weight loss with hours to days of vomiting and deep breathing. Then give ketoacidosis evidence in one breath: hydration, breathing pattern, sensorium, urine ketones, and venous gas with electrolytes.\n\nFollow with growth and puberty, relevant positives and negatives, and close with immediate resuscitation, insulin strategy in principle, monitoring, education, screening, and follow up."
+        },
+        {
+          "heading": "Name the type with one dismissed alternative",
+          "body": "Young age with lean build, osmotic triad, and ketosis favour type 1 disease, while obesity with acanthosis or neonatal onset would point elsewhere. State ketoacidosis as present or excluded with the exact findings, never as an assumption."
+        },
+        {
+          "heading": "A worked example",
+          "body": "This 9 year old girl, reported by her mother, has four weeks of thirst with frequent urine and bedwetting after dryness, with weight loss, then one day of vomiting with tummy pain, deep breathing, and drowsiness.\n\nShe is dehydrated with deep sighing breaths and large urine ketones with venous acidosis, and plots below her earlier weight line. In summary this is new onset type 1 diabetes in ketoacidosis, for which I propose resuscitation with monitored insulin infusion and potassium replacement, then basal bolus insulin with education, sick day rules, and thyroid with coeliac screening."
+        }
+      ],
+      "keyPoints": [
+        "Open with tempo in two clocks: weeks of osmotic symptoms, hours to days of ketoacidosis prodrome.",
+        "Give ketoacidosis evidence as a chain: fluids lost, breathing compensation, sensorium, ketones, venous gas.",
+        "Place growth and puberty beside glucose, since faltering growth predates diagnosis and shapes dosing.",
+        "Name the type with one dismissed alternative, then close with resuscitation, insulin principle, education, and screening."
+      ],
+      "pitfalls": [
+        "Presenting glucose without ketoacidosis status, leaving the listener unable to judge urgency.",
+        "Omitting growth, so chronic undernutrition before diagnosis stays hidden.",
+        "Closing with insulin alone and forgetting monitoring, sick day rules, and sibling advice."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What five links make the ketoacidosis chain in a case presentation?",
+          "a": "Dehydration signs, deep sighing breathing, sensorium, urine ketones, and venous gas with electrolytes.",
+          "accept": [
+            "dehydration",
+            "breathing",
+            "sensorium",
+            "ketones",
+            "venous gas"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "type1_diabetes_child: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Diabetes mellitus in children: case presentation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.prematurit.risks": {
+      "asks": [
+        {
+          "text": "Ask the exact gestation in weeks and days, how it was dated, and whether this was a singleton or a multiple pregnancy."
+        },
+        {
+          "text": "Ask the birth weight, whether the baby was called small for dates, and the weights of any previous children at birth."
+        },
+        {
+          "text": "Ask about the mother's age, height and weight gain, anaemia, blood pressure, sugar in pregnancy, bleeding, and any tablets or injections taken."
+        },
+        {
+          "text": "Ask about fever, burning on passing urine, foul-smelling discharge, and how many hours before birth the waters broke."
+        },
+        {
+          "text": "Ask where the baby was born, who conducted the delivery, whether the baby cried at once, and what help was given in the first minutes."
+        },
+        {
+          "text": "Ask about feeding from birth: time of first breastfeed, expressed milk use, top feeds or animal milk, and how the baby sucks and sleeps between feeds."
+        },
+        {
+          "text": "Ask about cold stress: where the baby is kept, skin-to-skin contact practice, clothing and wrapping, and any measured low temperature."
+        },
+        {
+          "text": "Ask about apnoea or blue spells, fast or noisy breathing, jaundice, fits, bleeding, and how many times the baby has been admitted."
+        }
+      ],
+      "id": "skill.hx.prematurit.risks",
+      "kind": "history",
+      "oneLine": "The gestation, weight and perinatal risks that explain a preterm baby",
+      "pitfalls": [
+        "Recording birth weight without the gestation, so a preterm appropriate-weight baby and a term growth-restricted baby read as the same child.",
+        "Skipping the rupture-to-delivery interval and the liquor colour, which carry the early sepsis risk.",
+        "Asking about feeds as breast or not, without the first feed timing, suck quality and top feeds."
+      ],
+      "probes": [
+        {
+          "a": "Gestation in weeks, birth weight, singleton or multiple pregnancy, maternal fever and the rupture-to-delivery interval, cry and resuscitation at birth, and feeding from the first hour.",
+          "accept": [
+            "gestation",
+            "birth weight",
+            "rupture",
+            "resuscitation",
+            "feeding"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "Name five facts you must record for every preterm baby's background history."
+        },
+        {
+          "a": "Maternal anaemia, hypertension, diabetes, bleeding, twins, infection with prolonged rupture of membranes, and poor antenatal care all raise the chance of an early or small baby.",
+          "accept": [
+            "anaemia",
+            "hypertension",
+            "diabetes",
+            "twins",
+            "infection",
+            "rupture"
+          ],
+          "level": 2,
+          "minMatch": 3,
+          "q": "Which maternal and pregnancy factors raise the chance of preterm birth or low birth weight?"
+        },
+        {
+          "a": "Cold stress, poor suck with long gaps, apnoea or blue spells, fast breathing with grunting, spreading jaundice in the first days, lethargy, and poor weight gain each change the plan the same day.",
+          "accept": [
+            "cold",
+            "suck",
+            "apnoea",
+            "grunt",
+            "jaundice",
+            "lethargy"
+          ],
+          "level": 3,
+          "minMatch": 3,
+          "q": "Which warning features in the history change the plan the same day?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "preterm_lbw_kangaroo_long_case: clinicalPearls (Kangaroo humidity warm-chain)",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Neonatal case sheet and history",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "A preterm baby's story is dated before it is described. Record the gestation in weeks and days with how it was dated, the birth weight in grams, and whether the pregnancy was single or multiple. These three facts decide what is normal for this baby: breathing effort, temperature control, feed tolerance and expected weight gain all read against gestation, not against the calendar age alone.\n\nAsk the same of previous pregnancies, since a prior preterm birth, stillbirth or newborn death marks this mother and this baby as high risk from the first antenatal visit.",
+          "heading": "Date the baby before describing it"
+        },
+        {
+          "body": "Work through the pregnancy in order. Ask the mother's age, her haemoglobin and blood pressure record, sugar testing, bleeding episodes, and any tablets or injections she received. Ask about fever, burning on passing urine and foul discharge, and pin down the interval between rupture of membranes and delivery with the colour and smell of the liquor.\n\nMultiple pregnancy, hypertension, diabetes, anaemia, antepartum bleeding and genital infection each push towards early delivery or poor growth, and prolonged rupture with foul liquor points straight at early onset sepsis in a baby whose defences are already thin.",
+          "heading": "The pregnancy in order"
+        },
+        {
+          "points": [
+            "Whether the baby cried at once or needed drying, stimulation, bag and mask help or admission, since resuscitation need rises as gestation falls.",
+            "Feeding from the first hour: time of first breastfeed, whether expressed milk is being given, any top or animal milk feeds, and the quality of suck with sleep between feeds.",
+            "Warmth practice at home and in hospital: where the baby is kept, skin-to-skin contact hours, wrapping and cap, and any recorded low temperature.",
+            "Warning features since birth: pauses in breathing or blue spells, fast or grunting breathing, yellow eyes, fits, bleeding, vomiting or a swollen belly, and how the weight has moved."
+          ],
+          "heading": "Birth, feeds, warmth and warnings"
+        }
+      ],
+      "title": "Risk and background history in the preterm infant",
+      "why": "A preterm or low birth weight baby starts life with almost no reserve, so the background decides the foreground. Gestation, weight, the pregnancy behind them and the first hours after birth together predict which baby will stop breathing, turn cold, feed poorly or catch an infection, and they do it before a single examination finding is available."
+    },
+    "skill.present.prematurit.case": {
+      "id": "skill.present.prematurit.case",
+      "kind": "presentation",
+      "oneLine": "Presenting the preterm infant to the consultant",
+      "pitfalls": [
+        "Presenting weight without gestation, so the listener cannot tell a preterm baby from a growth-restricted term baby.",
+        "Listing examination findings without the warm chain, feed plan and screening status, which are the management, not extras.",
+        "Closing without a discharge and follow-up plan, which is where preterm care succeeds or fails."
+      ],
+      "probes": [
+        {
+          "a": "A preterm low birth weight infant of stated gestation and weight, appropriate or small for dates, with the perinatal risks, current feeds and warmth practice, examination findings with Ballard and Downe cues, and the screening and follow-up plan.",
+          "accept": [
+            "gestation",
+            "weight",
+            "feeds",
+            "warmth",
+            "screening",
+            "follow-up"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "What six elements must a preterm case presentation always contain?"
+        },
+        {
+          "a": "Gestation then weight then growth appropriateness, because every normal value, risk and plan in the presentation reads against those three in that order.",
+          "accept": [
+            "gestation",
+            "weight",
+            "growth",
+            "order"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "In what order do you state gestation, weight and growth status, and why?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "preterm_lbw_kangaroo_long_case: clinicalPearls (ROP hearing thyroid follow)",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Presenting the newborn",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Open with one line that dates and weighs the baby: the postnatal day, the gestation in weeks, the birth weight and the current weight, and whether growth is appropriate or small for dates. Follow with the reason for presentation today, such as stable growth on kangaroo care or referral for poor weight gain with apnoea.\n\nA consultant who hears the gestation first listens to everything after it correctly; a presentation that starts with the complaint leaves the listener guessing what is normal for this baby.",
+          "heading": "Date and weigh first"
+        },
+        {
+          "points": [
+            "The perinatal risks in one breath: maternal age and illness, rupture interval and liquor, cry and resuscitation, and the first feed timing.",
+            "Current care stated as facts: kangaroo contact, feed type with volume and frequency, oxygen or CPAP status, temperature and sugar stability, and antibiotics if any.",
+            "Examination with the preterm cues: posture and lanugo, Ballard maturity signs, Downe breathing cues, weight trajectory with head circumference, and any jaundice, bleed or distension.",
+            "Investigations grouped by question: sepsis screen with cultures, bilirubin, glucose, chest film, and the screening dates for eyes, hearing and thyroid.",
+            "The plan and the future: discharge readiness, home warmth and feeding counselling, danger signs taught, immunisation dates, and the booked eye, hearing, growth and development reviews."
+          ],
+          "heading": "Risks, care, findings, plan"
+        }
+      ],
+      "title": "Presenting the preterm infant",
+      "why": "A preterm presentation fails when it reads like a term baby's with smaller numbers. Gestation reframes every normal value, the warm chain and feeds are the treatment rather than background, and the screening and follow-up dates are the difference between a baby who survives and one who thrives."
+    },
+    "skill.hx.hypothyroi.illness": {
+      "asks": [
+        {
+          "text": "Sucking and feeds: how she sucks, feeds per day, minutes per feed, falling asleep during feeds."
+        },
+        {
+          "text": "Cry and voice: strength of cry, hoarse or changed cry, when the change was first noticed."
+        },
+        {
+          "text": "Alertness: hours asleep by day, response when called, play and interest in surroundings."
+        },
+        {
+          "text": "Motions: frequency, hard motions with straining, age when constipation began."
+        },
+        {
+          "text": "Jaundice: yellow of eyes and skin after birth, weeks it lasted, treatment with light if given."
+        },
+        {
+          "text": "Growth: birth weight, latest weight and length, clothes fitting looser or tighter."
+        },
+        {
+          "text": "Milestones: neck holding, social smile, following objects with the eyes, limb movements."
+        }
+      ],
+      "id": "skill.hx.hypothyroi.illness",
+      "kind": "history",
+      "probes": [
+        {
+          "a": "A weak suck with short ineffective feeds, falling asleep during feeds, and long sleepy stretches with little alert time.",
+          "accept": [
+            "weak suck",
+            "falls asleep",
+            "sleepy"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What three feeding clues point towards congenital hypothyroidism in a young infant?"
+        },
+        {
+          "a": "Jaundice that outstays two weeks in a term infant is prolonged and needs a cause, and thyroid failure is one of them.",
+          "accept": [
+            "prolonged",
+            "two weeks",
+            "thyroid"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why do you ask the exact weeks the yellow colour lasted?"
+        },
+        {
+          "a": "Excessive sleepiness with poor feeding and a weak cry is lethargy, not goodness, and with constipation and slow growth it completes the hypothyroid pattern.",
+          "accept": [
+            "lethargy",
+            "sleepiness",
+            "constipation",
+            "slow growth"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "The mother calls her a good quiet baby. Why does that worry you?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "congenital_hypothyroidism: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Congenital hypothyroidism: clinical features",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Ask how she sucks and how long each feed lasts, whether she falls asleep at the breast, and how the day divides between sleep and alert time. A weak suck with long sleeps and a weak or hoarse cry is the early pattern, and parents often call it a good baby rather than a sick one.\n\nFix each answer against the last well week: when sucking weakened, when sleep lengthened, when the cry changed.",
+          "heading": "Feeding, sleep and cry come first"
+        },
+        {
+          "body": "Ask how often she passes motions and whether they are hard with straining, and how many days the yellow colour of eyes and skin lasted after birth. Constipation from sluggish bowels and jaundice that outstays two weeks both point the same way.\n\nRecord the age in weeks when the yellow faded, since a number is harder to misremember than an impression.",
+          "heading": "Motions and yellow colour"
+        },
+        {
+          "body": "Ask the birth weight and the latest weight with the length where measured, and what neck holding, smile and eye contact look like now. Slow gain with a limp feel, poor neck holding and a late smile complete the picture.\n\nPlot rather than trust memory: a line that flattens on the chart proves faltering that words soften.",
+          "heading": "Growth and milestones close the loop"
+        }
+      ],
+      "title": "History of the hypothyroid illness",
+      "why": "Parents report a quiet baby rather than an ill one, so only a fixed sequence from feeding through cry, motions, jaundice, sleep and milestones turns scattered worries into the pattern of too little thyroid hormone."
+    },
+    "skill.hx.hypothyroi.background": {
+      "asks": [
+        {
+          "text": "Maternal thyroid: thyroid disease, neck swelling, thyroid tablets in pregnancy with names."
+        },
+        {
+          "text": "Pregnancy exposures: medicines in pregnancy, iodine skin or cord applications after birth."
+        },
+        {
+          "text": "Birth details: gestation, birth weight, first cry, resuscitation, days in nursery."
+        },
+        {
+          "text": "Screening: heel prick test after birth, recall visit, any thyroid blood test so far."
+        },
+        {
+          "text": "Family: thyroid disease in relatives, sibling delay or slow growth, consanguinity."
+        },
+        {
+          "text": "Current feeds and syrups: breast or top feeds, soya feeds, iron or calcium syrups running."
+        }
+      ],
+      "id": "skill.hx.hypothyroi.background",
+      "kind": "history",
+      "probes": [
+        {
+          "a": "Thyroid disease with tablets in pregnancy, and iodine or suppressant drug exposure around birth.",
+          "accept": [
+            "maternal thyroid",
+            "iodine",
+            "drug exposure"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What two maternal facts change the likelihood before you touch the baby?"
+        },
+        {
+          "a": "A home birth or early discharge often means the heel prick screen was missed, which is the commonest reason this disease presents late.",
+          "accept": [
+            "home birth",
+            "screen missed",
+            "heel prick"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why do you ask where she was born?"
+        },
+        {
+          "a": "Iron and calcium trap levothyroxine in the gut and blunt its absorption, so the medicine must be separated from them.",
+          "accept": [
+            "iron",
+            "absorption",
+            "separated"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "The baby takes an iron syrup. Why does that matter for treatment?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "congenital_hypothyroidism: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Congenital hypothyroidism: aetiology and risk factors",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Ask about thyroid disease or neck swelling in the mother, tablets for thyroid taken during pregnancy, and iodine applied to the newborn skin or cord. Drugs that suppress the newborn thyroid and iodine overload both cause a transient slump that mimics the permanent disease.\n\nRecord the exact medicine names where the card lists them, since memory renames tablets.",
+          "heading": "The mother and the pregnancy"
+        },
+        {
+          "body": "Ask where she was born, the gestation in weeks, the birth weight, the first cry and any nursery stay. Then ask directly whether a heel prick blood test was taken after birth and whether anyone recalled the baby.\n\nA home birth or early discharge often means no screen was ever done, and that gap is the commonest reason a treatable disease presents late.",
+          "heading": "The birth and the screen"
+        },
+        {
+          "body": "Ask about thyroid disease in the family, other children with delay or slow growth, and consanguinity. Then list current feeds, including soya feeds, and any iron or calcium syrups, which trap the replacement hormone in the gut.\n\nThese details change both the cause you favour and how you will give the medicine later.",
+          "heading": "Family, feeds and medicines that hide the answer"
+        }
+      ],
+      "title": "Background history in the hypothyroid infant",
+      "why": "The cause is often decided before birth: maternal thyroid disease and medicines, iodine lack, prematurity, and whether any screen was ever done set both the likelihood and the urgency."
+    },
+    "skill.present.hypothyroi.case": {
+      "id": "skill.present.hypothyroi.case",
+      "kind": "presentation",
+      "probes": [
+        {
+          "a": "Age with informant, the problem in weeks, and whether the newborn screen was done with its result.",
+          "accept": [
+            "age",
+            "weeks",
+            "screen"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What must the first minute of the presentation contain?"
+        },
+        {
+          "a": "A raised TSH with a low free T4, with imaging showing an absent or ectopic gland.",
+          "accept": [
+            "raised TSH",
+            "low free T4",
+            "imaging"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Which two results confirm permanent primary disease?"
+        },
+        {
+          "a": "Daily adherence with separated dosing, growth and hearing checks, and endocrinology review decide development, so they belong in the closing line.",
+          "accept": [
+            "adherence",
+            "growth",
+            "hearing",
+            "review"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Why does the presentation end with the family plan?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "congenital_hypothyroidism: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Congenital hypothyroidism: assessment and follow up",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "teach": [
+        {
+          "body": "Open with age, sex and informant, then the problem in weeks: quiet feeding, hoarse cry, constipation, prolonged yellow colour, slow gain. Then screening status in one breath: heel prick done or missed, recall result, confirmatory TSH with free T4.\n\nFollow with growth plotted against birth weight, milestones, relevant positives and negatives, and close with replacement, monitoring, hearing check and follow up.",
+          "heading": "A fixed order for every hypothyroid infant"
+        },
+        {
+          "body": "Permanent disease from failed gland development is the commonest cause worldwide, favoured by a raised TSH with low free T4 and an absent or ectopic gland on scan. State transient drug or iodine effect and central disease as the alternatives you excluded, with the finding that excludes each.",
+          "heading": "Name the cause with one dismissed alternative"
+        },
+        {
+          "body": "This 3 month old girl, reported by her mother, has 10 weeks of weak sucking with long sleeps, a hoarse cry, hard motions every third day, and yellow colour that lasted 5 weeks. No heel prick test was done after her home birth.\n\nShe plots below her birth line with a large anterior fontanelle, dry skin, a big tongue and an umbilical hernia, and confirmatory tests show a raised TSH with low free T4. In summary this is congenital hypothyroidism presenting late after a missed screen, for which I propose early replacement with growth, development and hearing follow up.",
+          "heading": "A worked example"
+        }
+      ],
+      "title": "Presenting the hypothyroid infant",
+      "why": "The consultant judges the case on whether screening status is named with its proof, growth is placed beside the hormone result, and the family leaves with a daily plan, so the presentation must carry tempo, screen, growth, tests and education in a fixed order."
+    },
+    "skill.present.utichild.case": {
+      "id": "skill.present.utichild.case",
+      "kind": "presentation",
+      "system": "paediatrics",
+      "title": "Presenting the child with urinary infection",
+      "why": "The consultant needs age, fever pattern, lower versus upper features, and backflow risk within two minutes, because those four facts decide imaging and preventive drugs. A presentation that buries them in a long story delays the only decisions that matter.",
+      "teach": [
+        {
+          "heading": "Open with the child and the tempo",
+          "body": "Name age in years and months, the informant, and the tempo in days: fever since when, urinary complaints since when, and which came first.\n\nFollow with the risks that explain this child: past confirmed infections, constipation and holding, antenatal kidney swelling, and family backflow. Two sentences carry all of it."
+        },
+        {
+          "heading": "Middle: fever pattern, urinary evidence, risk flags",
+          "body": "Give the fever as a pattern, not a number alone: high and persistent with chills, or low and settling. Then the urinary evidence in abstract terms: burning with frequency and foul urine, or new leaking after being dry.\n\nAdd the examination that matters: fever with loin tenderness and a toxic look versus a comfortable child with suprapubic ache. State the urine test and culture result with the organism where grown."
+        },
+        {
+          "heading": "Close with category, imaging and advice",
+          "body": "Name the category plainly: febrile infection of the upper tract, or infection of the bladder alone, with the backflow grade where imaging has staged it.\n\nClose with plan and prevention: antibiotic course and review date, imaging booked or done, bowel routine with timed voiding, red flags told to the mother, and growth with blood pressure on follow up."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What opens the presentation of a child with urinary infection?",
+          "a": "Age with the informant and the tempo in days from fever to urinary complaints.",
+          "accept": [
+            "age",
+            "informant",
+            "tempo"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What urinary facts must the middle carry, and in what form?",
+          "a": "The fever pattern, the urinary evidence in abstract terms, and the examination split between upper tract invasion and bladder irritation.",
+          "accept": [
+            "fever pattern",
+            "urinary evidence",
+            "upper tract"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What must the closing line decide?",
+          "a": "The category with the backflow grade, the imaging done or booked, and the follow up with red flags told.",
+          "accept": [
+            "category",
+            "backflow grade",
+            "follow up"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "open",
+          "text": "Opens with age, informant, tempo and risks"
+        },
+        {
+          "id": "middle",
+          "text": "Separates upper tract invasion from bladder irritation with evidence"
+        },
+        {
+          "id": "close",
+          "text": "Closes with category, imaging, plan and red flags"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "febrile_uti_children: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Urinary tract infection in children: evaluation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }

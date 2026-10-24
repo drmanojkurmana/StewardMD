@@ -1,0 +1,1135 @@
+{
+  "_comment": "Paediatric type 1 diabetes with DKA and long-term care. Shared history and presentation skills live in work/shared-type-1-diabetes-child.json and are merged by the lead; almost every bedside finding is an emphasis overlay on a shared paediatric skill.",
+  "id": "type-1-diabetes-child",
+  "name": "Type 1 diabetes in children",
+  "fullName": "Type 1 diabetes mellitus in childhood",
+  "system": "paediatrics",
+  "kbRef": "type1_diabetes_child",
+  "oneLine": "Autoimmune insulin loss in a growing child: DKA today, lifelong care after",
+  "subtitle": "DKA and long-term care",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What type 1 diabetes is, and why insulin is never optional",
+      "skills": [
+        "skill.t1dchild.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the child",
+      "blurb": "A frightened child with a frightened mother",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.paed.rapport",
+        "skill.approach.paed.consent_assent"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age and build set the type before a symptom is mentioned",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Expect a schoolgoing lean child, often between 5 and 12 years, with weeks of thirst and new bedwetting. Age with build carries real weight: young and lean with ketosis favours type 1 disease, while an obese adolescent without ketosis should make you think of type 2 instead."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Weeks of thirst, then hours of vomiting and deep breathing",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.paed.presenting_complaint",
+        "skill.hx.type.t1dchild_illness"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical story runs in two clocks: three to six weeks of drinking and passing urine with weight loss, then one to two days of vomiting with tummy pain, deep breathing, and drowsiness. That double tempo alone should move you toward new diabetes in ketoacidosis."
+        },
+        "skill.hx.paed.presenting_complaint": {
+          "expect": "Record the informant with reliability and each complaint with exact duration in chronological order, pairing every osmotic symptom with its functional cost: night waking for water, school toilet trips, and slipping classwork."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "Autoimmunity, feeds, vaccines, and steroids",
+      "skills": [
+        "skill.hx.paed.immunisation",
+        "skill.hx.paed.diet_calorie_protein",
+        "skill.hx.paed.family_pedigree",
+        "skill.hx.type.t1dchild_background"
+      ],
+      "emphasis": {
+        "skill.hx.paed.immunisation": {
+          "expect": "Verify the card in hand and ask influenza with pneumococcal doses by name: diabetes places the child in the high risk group for whom these vaccines are specially advised."
+        },
+        "skill.hx.paed.diet_calorie_protein": {
+          "expect": "Take the 24 hour recall with sugary drinks counted in household measures. They do not cause type 1 disease but they shape control, and the dietitian builds carbohydrate awareness on these exact foods."
+        },
+        "skill.hx.paed.family_pedigree": {
+          "expect": "Map diabetes by age started across three generations and screen the same pedigree for thyroid disease, coeliac disease, and vitiligo, since the same predisposition invites all of them."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Dehydration and drowsiness outrank everything else",
+      "skills": [
+        "skill.gen.paed.appearance",
+        "skill.gen.paed.vitals",
+        "skill.gen.paed.hydration",
+        "skill.exam.paed.weight"
+      ],
+      "emphasis": {
+        "skill.gen.paed.appearance": {
+          "expect": "Look for a lean drowsy child who answers to voice then drifts, with dry lips and sunken eyes. Sensorium is the single most informative sign: full alertness reassures, drowsiness responding to voice means act now."
+        },
+        "skill.gen.paed.vitals": {
+          "expect": "Expect racing pulse with low volume, rapid deep breathing, and low normal blood pressure. Fever may be absent even with a trigger infection, so a normal temperature never excludes ketoacidosis."
+        },
+        "skill.gen.paed.hydration": {
+          "expect": "Grade dehydration the paediatric way: thirst with restlessness, then sunken eyes with dry tongue, then reduced turgor with prolonged capillary refill and scanty urine. Each grade raises the level of care."
+        },
+        "skill.exam.paed.weight": {
+          "expect": "Expect weight below the earlier growth line with preserved height, the acute on chronic signature of weeks of calorie loss in the urine."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Systemic examination",
+      "blurb": "Lungs compensating, brain watching, tummy tender",
+      "skills": [
+        "skill.exam.paed.resp.inspection",
+        "skill.exam.paed.cns.higher_mental_gcs",
+        "skill.exam.paed.gi.palpation_percussion",
+        "skill.exam.paed.length_height"
+      ],
+      "emphasis": {
+        "skill.exam.paed.resp.inspection": {
+          "expect": "Expect deep sighing regular breaths at rest with a fruity odour, the compensation for metabolic acidosis. This is Kussmaul breathing: no chest indrawing, no wheeze, and the rate follows the acidosis rather than the lungs."
+        },
+        "skill.exam.paed.cns.higher_mental_gcs": {
+          "expect": "Score the paediatric Glasgow honestly: eye opening to voice with confused speech and obeying commands is already abnormal. Any fall during treatment warns of brain swelling and needs immediate escalation."
+        },
+        "skill.exam.paed.gi.palpation_percussion": {
+          "expect": "Expect diffuse mild tenderness without guarding in ketoacidosis, which mimics an acute abdomen. Guarding with rigidity or absent bowel sounds points away toward surgical disease instead."
+        },
+        "skill.exam.paed.length_height": {
+          "expect": "Expect height on its earlier centile while weight has fallen. Chronic poor control shortens height too, so a short child with long standing disease needs endocrine review beyond glucose."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the diabetic picture together",
+      "blurb": "Water lost for weeks, acid gained for hours",
+      "skills": [
+        "skill.t1dchild.dka_picture"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Two clocks, the triad, ketoacidosis status, and growth",
+      "skills": [
+        "skill.t1dchild.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Other diabetics, water diabetes, and transient rises",
+      "skills": [
+        "skill.t1dchild.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Confirm today, grade now, type later",
+      "skills": [
+        "skill.ix.t1dchild.workup",
+        "skill.annex.paed.normal_biochemical_values"
+      ],
+      "emphasis": {
+        "skill.annex.paed.normal_biochemical_values": {
+          "expect": "Use the table as the ruler for the gas and salts: venous pH against 7.38 to 7.42, bicarbonate against 22 to 28, glucose against the childhood normal of 50 to 100 mg per dL, and urine output against polyuria above 4 mL per kg per hour."
+        }
+      }
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis",
+      "blurb": "Name the type, state ketoacidosis, place severity",
+      "skills": [
+        "skill.t1dchild.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Ketoacidosis now, lifelong insulin after",
+      "skills": [
+        "skill.tx.t1dchild.dka",
+        "skill.tx.t1dchild.longterm"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this child to your consultant",
+      "skills": [
+        "skill.present.case",
+        "skill.present.type.t1dchild_case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.t1dchild.history_triage",
+        "title": "Take a focused history and triage for ketoacidosis",
+        "task": "This 9 year old girl drinks water constantly and has started wetting the bed again. Her mother says she vomited today. Take a focused history in six minutes and state whether ketoacidosis is present.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.paed.presenting_complaint",
+          "skill.hx.type.t1dchild_illness"
+        ],
+        "examinerQuestions": [
+          "What three symptoms together earn a same-day finger prick glucose test, and why?",
+          "Which features in her story warn of ketoacidosis rather than uncomplicated new diabetes?",
+          "What will you check next at the bedside, and what referral threshold applies if she is drowsy?"
+        ]
+      },
+      {
+        "id": "osce.t1dchild.exam_status",
+        "title": "Examine the drowsy diabetic child and state immediate steps",
+        "task": "This 9 year old with new diabetes is drowsy with deep breathing. Examine her general status with hydration, breathing, and sensorium in eight minutes and state your immediate steps.",
+        "seconds": 480,
+        "skills": [
+          "skill.gen.paed.appearance",
+          "skill.gen.paed.vitals",
+          "skill.gen.paed.hydration",
+          "skill.exam.paed.resp.inspection",
+          "skill.exam.paed.cns.higher_mental_gcs",
+          "skill.t1dchild.dka_picture"
+        ],
+        "examinerQuestions": [
+          "Grade her dehydration and sensorium from what you found.",
+          "Why is her breathing deep and sighing, and what bedside tests confirm your reading?",
+          "What change during treatment would warn of cerebral oedema, and what do you do about it?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.t1dchild.basics",
+      "skill.t1dchild.dka_picture",
+      "skill.t1dchild.differential",
+      "skill.ix.t1dchild.workup",
+      "skill.t1dchild.diagnosis",
+      "skill.tx.t1dchild.dka",
+      "skill.tx.t1dchild.longterm"
+    ]
+  },
+  "skills": {
+    "skill.t1dchild.basics": {
+      "id": "skill.t1dchild.basics",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "What type 1 diabetes in children is",
+      "oneLine": "Autoimmune loss of insulin in a growing child, and why insulin can never be optional",
+      "why": "Type 1 diabetes is defined by absolute insulin lack from immune destruction of beta cells, not by high glucose alone, and holding that definition is what makes lifelong insulin, ketoacidosis vigilance, and honeymoon scepticism automatic rather than memorised.",
+      "teach": [
+        {
+          "heading": "An immune attack, not a lifestyle disease",
+          "body": "In a genetically predisposed child, an immune response destroys the insulin making beta cells of the pancreas, often after an environmental trigger. As working cells fall, insulin fades until none remains, glucose cannot enter the tissues, and the blood sugar climbs while the child loses weight.\n\nThis is why type 1 disease is the commonest diabetes of childhood and why diet or tablets can never substitute for insulin."
+        },
+        {
+          "heading": "Absolute lack shapes every decision",
+          "body": "With no insulin of her own, the child depends on injected insulin for every meal and every night. Missed doses or extra need during infection push fat breakdown into ketone production within hours, which is why ketoacidosis can be the very first presentation.\n\nThe practical rule follows: every ill day is an insulin-needing day, and vomiting in this child is ketoacidosis until proved otherwise."
+        },
+        {
+          "heading": "Honeymoon, growth, and company it keeps",
+          "body": "Weeks after starting insulin, some children need much less for a while as surviving beta cells rest. This honeymoon phase is temporary and never means cure, and relaxing vigilance during it is a classic error.\n\nThe same predisposition invites thyroid disease and coeliac disease, so follow up screens for both, while sustained control protects growth, puberty, and later eyes, kidneys, and nerves."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why can type 1 diabetes never be managed by diet or tablets alone?",
+          "a": "Autoimmune destruction leaves absolute insulin lack, so injected insulin is essential for glucose to enter the tissues.",
+          "accept": [
+            "absolute",
+            "insulin lack",
+            "injected insulin"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the honeymoon phase and what error does it invite?",
+          "a": "A temporary partial remission with lower insulin needs after stabilisation, which wrongly suggests the disease has resolved if vigilance is relaxed.",
+          "accept": [
+            "temporary",
+            "remission",
+            "resolved"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does ketoacidosis develop so quickly in this disease?",
+          "a": "With no insulin of her own, missed doses or infection rapidly shift the body to fat breakdown and ketone production, causing acidosis with fluid loss.",
+          "accept": [
+            "no insulin",
+            "ketone",
+            "acidosis"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "type1_diabetes_child: pathophysiology"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Diabetes mellitus in children: classification and aetiology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.t1dchild.dka_picture": {
+      "id": "skill.t1dchild.dka_picture",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "The diabetic picture and ketoacidosis",
+      "oneLine": "Osmotic loss over weeks, acid and dehydration over hours",
+      "why": "All the findings flow from two facts: glucose pulling water into the urine for weeks, then ketones consuming alkali with fluid loss for hours, so one mechanism explains the thin thirsty child and the deep breathing drowsy one.",
+      "teach": [
+        {
+          "heading": "The thin, thirsty child",
+          "body": "Weeks of glucose in the urine mean weeks of water loss: the child drinks constantly, passes large volumes, wets the bed again, and still thins down with tiredness and slipping schoolwork. Growth falters first on weight, and the bedwetting after dryness is the sign most often punished instead of tested.\n\nPuberty may lag when control stays poor, which is why height, weight, and puberty staging belong in every assessment."
+        },
+        {
+          "heading": "The ketoacidotic child",
+          "body": "When ketones accumulate, nausea and tummy pain arrive first, often mistaken for gastritis. Then the lungs compensate with deep sighing breaths that smell fruity, the tongue dries, the eyes sink, and the pulse races as volume falls.\n\nDrowsiness follows as acidosis and dehydration deepen. Reduced consciousness or focal signs during treatment warn of brain swelling, which is the emergency inside the emergency."
+        },
+        {
+          "heading": "Hypoglycaemia, the other face",
+          "body": "Too much insulin for too little food or too much play drives glucose down instead: shakiness, sweating, hunger, and pallor first, then confusion, seizure, or loss of consciousness. It is the commonest acute danger of treatment itself.\n\nEvery family must recognise the early autonomic warning and know that fast acting carbohydrate by mouth reverses it when the child is awake, with glucagon injection reserved for severe episodes."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the bedside cluster of diabetic ketoacidosis.",
+          "a": "Vomiting with tummy pain, deep sighing breathing, dehydration signs, fruity breath, and drowsiness.",
+          "accept": [
+            "vomiting",
+            "deep breathing",
+            "dehydration",
+            "drowsiness"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does the breathing turn deep and sighing in ketoacidosis?",
+          "a": "The lungs blow off carbon dioxide to compensate for metabolic acidosis from ketone accumulation.",
+          "accept": [
+            "compensate",
+            "acidosis",
+            "carbon dioxide"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What change during ketoacidosis treatment warns of brain swelling?",
+          "a": "Falling consciousness or new focal neurological signs such as unequal pupils or weakness during fluid and insulin treatment.",
+          "accept": [
+            "consciousness",
+            "focal",
+            "neurological"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "type1_diabetes_child: redFlags"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Diabetes mellitus in children: ketoacidosis and hypoglycaemia"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.t1dchild.summary": {
+      "id": "skill.t1dchild.summary",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "The clinical summary",
+      "oneLine": "Two clocks, the triad, ketoacidosis status, and growth in three sentences",
+      "why": "A diabetes summary must answer whether ketoacidosis is present with its evidence and where growth stands, because those two facts set the next hour and the next year, and a summary without either leaves the listener unable to act.",
+      "teach": [
+        {
+          "heading": "Patient, tempo, syndrome, status",
+          "body": "Name the child with age and build, then the tempo in two clocks: weeks of thirst, urine, and weight loss, with hours to days of vomiting, pain, breathing change, or drowsiness. State the syndrome in abstract terms: new onset osmotic symptoms with or without ketoacidosis.\n\nThen give ketoacidosis status with its chain of evidence, and growth against the earlier line, in the same summary."
+        },
+        {
+          "heading": "A worked example",
+          "body": "This 9 year old lean girl, reported by her mother, has four weeks of thirst with frequent large volume urine and bedwetting after dryness, with weight loss and tiredness, then one day of vomiting with tummy pain, deep sighing breathing, and drowsiness.\n\nExamination shows dehydration with dry tongue and reduced skin turgor, deep sighing breaths, drowsiness responding to voice, large urine ketones with venous acidosis, and weight below her earlier line. In summary this is new onset type 1 diabetes in a 9 year old girl, presenting in ketoacidosis with faltering weight."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What element must a diabetes summary carry that a pneumonia summary does not?",
+          "a": "Ketoacidosis status with its evidence chain, plus growth against the earlier line, since both change the plan.",
+          "accept": [
+            "ketoacidosis",
+            "growth",
+            "evidence"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "type1_diabetes_child: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Diabetes mellitus in children: clinical assessment"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.t1dchild.differential": {
+      "id": "skill.t1dchild.differential",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Differential diagnosis",
+      "oneLine": "What else passes much urine, loses weight, or turns acidotic",
+      "why": "Most thirsty polyuric children have diabetes mellitus, but the ones who do not carry a different treatment entirely: water diabetes, type 2 disease, single gene diabetes, or a transient stress rise, so the differential is decided by age, build, ketones, and glucose together.",
+      "teach": [
+        {
+          "heading": "Diabetes that is not type 1",
+          "body": "Type 2 diabetes favours the obese adolescent with acanthosis and a strong family history, often without ketosis at onset. Single gene diabetes presents atypically: neonatal onset within months of birth, or mild stable fasting elevation with dominant family pattern in MODY.\n\nSecondary diabetes follows cystic fibrosis, chronic steroids, or pancreatic disease. Each needs its own test: antibodies with C peptide where type is uncertain, and gene testing where neonatal or familial pattern suggests it."
+        },
+        {
+          "heading": "Polyuria without glucose",
+          "body": "Diabetes insipidus shares thirst and large volume urine but the glucose is normal and the child looks well hydrated between drinks. Urinary infection and behavioural enuresis explain wetting without thirst, weight loss, or glucose in the urine.\n\nTransient stress hyperglycaemia during acute febrile illness resolves with the illness and lacks the weeks of osmotic symptoms with ketosis."
+        },
+        {
+          "table": {
+            "cols": [
+              "Condition",
+              "Bedside clue away from type 1"
+            ],
+            "rows": [
+              [
+                "Type 2 diabetes",
+                "Obese adolescent with acanthosis, no ketosis at onset"
+              ],
+              [
+                "Monogenic and neonatal forms",
+                "Onset in months, or mild stable sugar with dominant family pattern"
+              ],
+              [
+                "Secondary diabetes",
+                "Cystic fibrosis, steroid course, or pancreatic disease behind it"
+              ],
+              [
+                "Diabetes insipidus",
+                "Thirst with dilute urine but normal glucose"
+              ],
+              [
+                "Urinary infection or enuresis",
+                "Wetting without thirst, weight loss, or sugar in urine"
+              ],
+              [
+                "Stress hyperglycaemia",
+                "High sugar only during acute illness, settling as the child recovers"
+              ]
+            ]
+          },
+          "heading": "One glance separation"
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name three differentials for new thirst with polyuria and weight loss in a child.",
+          "a": "Type 2 diabetes, single gene diabetes such as MODY or neonatal diabetes, diabetes insipidus, and secondary diabetes from steroids or cystic fibrosis.",
+          "accept": [
+            "type 2",
+            "monogenic",
+            "mody",
+            "insipidus",
+            "secondary"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A lean 9 year old has thirst with ketosis; an obese 14 year old has thirst without ketosis. How do they differ?",
+          "a": "The lean young child with ketosis fits type 1 disease needing lifelong insulin, while the obese adolescent without ketosis fits type 2 disease where insulin lack is relative.",
+          "accept": [
+            "type 1",
+            "type 2",
+            "ketosis",
+            "insulin"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Spans type 2, single gene, secondary, insipidus, and non-diabetic wetting"
+        },
+        {
+          "id": "discriminator",
+          "text": "Uses age, build, ketones, and glucose to separate them"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "type1_diabetes_child: additionalDifferentials"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Diabetes mellitus in children: differential diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.t1dchild.workup": {
+      "id": "skill.ix.t1dchild.workup",
+      "kind": "investigation",
+      "system": "paediatrics",
+      "title": "Confirming diabetes and grading ketoacidosis",
+      "oneLine": "Glucose confirms it, ketones with the gas grade it, antibodies type it",
+      "why": "Investigations in a thirsty child answer three separate questions: is this diabetes, is ketoacidosis present and how severe, and is it truly type 1, so ordering them by question stops a student waiting for antibodies before resuscitating a drowsy child.",
+      "teach": [
+        {
+          "heading": "Confirm diabetes the same day",
+          "body": "Random venous glucose well above the childhood normal range with classic osmotic symptoms confirms diabetes without delay. HbA1c reflects average glucose over months and guides the long term target, but it never rules out new diabetes on its own.\n\nUrine shows glucose with ketones in new type 1 disease; ketones checked in blood or urine decide the next step the moment vomiting or drowsiness appears."
+        },
+        {
+          "heading": "Grade ketoacidosis before treating it",
+          "body": "Venous blood gas with electrolytes and calculated anion gap defines the acidosis: pH below the normal 7.38 to 7.42 range with bicarbonate below the normal 22 to 28 range means metabolic acidosis. Sodium, potassium, urea, and creatinine map the fluid and salt loss that resuscitation must replace.\n\nRepeat bedside glucose with ketones and electrolytes through treatment, watching sensorium alongside the numbers, since the child and not the printout declares deterioration."
+        },
+        {
+          "heading": "Type it and set the baseline",
+          "body": "Pancreatic autoantibodies with a low C peptide where the type is uncertain confirm autoimmune type 1 disease. Thyroid function with coeliac screening at diagnosis and during follow up catches the company this disease keeps.\n\nRecord weight, height, and puberty stage with blood pressure and urine protein as the baseline that later screening for eyes, kidneys, and nerves will be measured against."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which two bedside tests confirm diabetes with ketosis?",
+          "a": "Blood glucose with blood or urine ketones, supported by urine glucose.",
+          "accept": [
+            "glucose",
+            "ketones",
+            "urine"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What does the venous gas add once ketones are positive?",
+          "a": "It defines metabolic acidosis through pH with bicarbonate, graded alongside electrolytes for fluid and salt loss.",
+          "accept": [
+            "acidosis",
+            "bicarbonate",
+            "electrolytes"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A drowsy vomiting child has high glucose with large ketones. Do you wait for antibodies before treating?",
+          "a": "No. Resuscitation with fluids, insulin by infusion, and potassium replacement starts on glucose with ketones and the gas, while antibodies confirm the type later.",
+          "accept": [
+            "resuscitation",
+            "insulin",
+            "antibodies later"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "type1_diabetes_child: additionalInvestigations"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Diabetes mellitus in children: laboratory evaluation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.t1dchild.diagnosis": {
+      "id": "skill.t1dchild.diagnosis",
+      "kind": "reasoning",
+      "system": "paediatrics",
+      "title": "Diagnosis: type 1 diabetes with ketoacidosis status",
+      "oneLine": "Name the type, state ketoacidosis present or excluded, and place severity",
+      "why": "A diagnosis of diabetes without ketoacidosis status does not say whether the child goes home on insulin teaching or to resuscitation, so the diagnostic statement carries the type with its reasoning and the acid base verdict together.",
+      "teach": [
+        {
+          "heading": "The complete diagnostic statement",
+          "body": "Name the type with the reasons: young lean child with weeks of osmotic triad and ketosis means new onset type 1 diabetes. Then state ketoacidosis as present or excluded with the exact evidence: vomiting, breathing pattern, sensorium, ketones, venous pH, and electrolytes.\n\nAdd severity in plain terms: dehydration grade, sensorium level, and acidosis depth, since these decide the level of care."
+        },
+        {
+          "heading": "What the statement must not hide",
+          "body": "A honeymoon phase never softens the diagnosis: reduced insulin need after stabilisation is temporary and the label stays. Where build, age, or family pattern argue against type 1, state what is being excluded and which test settles it.\n\nA complete line reads: new onset type 1 diabetes mellitus in a 9 year old girl, presenting in moderate ketoacidosis with dehydration and drowsiness responding to voice."
+        }
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What three parts make a complete diabetes diagnosis?",
+          "a": "The diabetes type with its reasoning, ketoacidosis present or excluded with evidence, and severity with the level of care.",
+          "accept": [
+            "type",
+            "ketoacidosis",
+            "severity"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "type",
+          "text": "Names type 1 diabetes with age, build, triad, and ketosis as reasons"
+        },
+        {
+          "id": "dka",
+          "text": "States ketoacidosis present or excluded with ketone and gas evidence"
+        },
+        {
+          "id": "severity",
+          "text": "Grades dehydration, sensorium, and acidosis to set the level of care"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "type1_diabetes_child: clinicalPearls"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Diabetes mellitus in children: diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.t1dchild.dka": {
+      "id": "skill.tx.t1dchild.dka",
+      "kind": "treatment",
+      "system": "paediatrics",
+      "title": "Managing diabetic ketoacidosis",
+      "oneLine": "Resuscitate, replace fluids with insulin and potassium, and watch the brain",
+      "why": "Ketoacidosis kills through dehydration, acidosis, and brain swelling during treatment, so the plan runs resuscitation, careful rehydration with insulin infusion and potassium replacement, and neurological watch together rather than as steps.",
+      "dosingNote": "This module teaches management at the level of principle and drug class. Specific fluids, rates, insulin regimens, and potassium replacement must be taken from your current institutional or national paediatric guideline at the time of treatment. CliniX does not prescribe.",
+      "teach": [
+        {
+          "heading": "Recognise and resuscitate",
+          "body": "Treat vomiting with pain, deep breathing, dehydration, and drowsiness in a diabetic child as ketoacidosis and move to a monitored bed. Secure the airway, give oxygen where saturation falls, and gain intravenous access for careful rehydration while blood is drawn for glucose, ketones, gas, and electrolytes.\n\nInvolve senior paediatric help early and arrange referral to a centre with paediatric critical care where the child needs more than the local unit can monitor."
+        },
+        {
+          "heading": "Fluids, insulin, and potassium together",
+          "body": "Replace fluid and salt losses steadily while insulin by infusion switches off ketone production and brings glucose down. Potassium falls as treatment proceeds, so replacement runs alongside with repeated electrolyte checks.\n\nCorrect steadily rather than rapidly: overly fast shifts in fluids and glucose raise the risk of brain swelling, so the guideline rate and frequent reassessment decide every change."
+        },
+        {
+          "heading": "Watch the brain and find the trigger",
+          "body": "Headache, falling consciousness, new focal signs, or unequal pupils during treatment warn of cerebral oedema and need immediate senior review with escalation. Treat the precipitant in parallel: infection screen with antibiotics where infection is found, missed insulin doses addressed, and steroid or other causes reviewed.\n\nOnce ketones clear with normal eating, transition to subcutaneous basal bolus insulin under the long term plan rather than stopping insulin."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What three infusions run together in ketoacidosis treatment?",
+          "a": "Careful rehydration fluids, insulin by infusion, and potassium replacement with monitoring.",
+          "accept": [
+            "fluids",
+            "insulin",
+            "potassium"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why must correction be steady rather than rapid?",
+          "a": "Overly rapid shifts in fluids and glucose raise the risk of cerebral oedema, which can injure or kill during otherwise successful treatment.",
+          "accept": [
+            "rapid",
+            "cerebral oedema",
+            "risk"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A child on ketoacidosis treatment turns more drowsy with headache. What do you do?",
+          "a": "Suspect cerebral oedema, seek immediate senior review with escalation, and recheck neurology with glucose and electrolytes without delay.",
+          "accept": [
+            "cerebral oedema",
+            "senior",
+            "neurology"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "type1_diabetes_child: management"
+        },
+        {
+          "source": "WHO Pocket Book of Hospital Care for Children",
+          "locator": "Diabetic ketoacidosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.t1dchild.longterm": {
+      "id": "skill.tx.t1dchild.longterm",
+      "kind": "treatment",
+      "system": "paediatrics",
+      "title": "Long term care of the diabetic child",
+      "oneLine": "Lifelong insulin, monitoring, hypo readiness, screening, and family schooling",
+      "why": "Long term outcome is set by sustained control with growth, not by the admission that diagnosed it, so the plan joins daily insulin with carbohydrate awareness, monitoring, sick day rules, complication screening, and a team the family can reach.",
+      "dosingNote": "This module teaches management at the level of principle and drug class. Specific insulin types, regimens, and dose adjustments must be taken from your current institutional or national paediatric guideline with the treating team at the time of care. CliniX does not prescribe.",
+      "teach": [
+        {
+          "heading": "Insulin for life, matched to food and play",
+          "body": "Every child needs subcutaneous insulin every day, usually as multiple injections combining long acting basal with mealtime bolus, or by pump where available and affordable. The family learns carbohydrate awareness: matching mealtime insulin to the food on the plate and adjusting for exercise, illness, and festivals.\n\nLink the family to a reliable supply route through the hospital pharmacy with state or insurance support where available, and never leave discharge without the next vial secured."
+        },
+        {
+          "heading": "Monitoring with hypo and sick day readiness",
+          "body": "Capillary glucose checks with periodic HbA1c steer dose changes, and continuous sensors help where the family can access them. Teach hypoglycaemia first: fast acting carbohydrate by mouth when awake, glucagon injection for severe episodes, with a follow on longer acting snack.\n\nGive written sick day rules: never stop insulin during illness, check glucose with ketones often, keep fluids and carbohydrates going, and return early with vomiting, deep breathing, or drowsiness."
+        },
+        {
+          "heading": "Growth, screening, school, and the team",
+          "body": "Weigh, measure, and stage puberty at every visit, since growth is the honest record of control. Screen thyroid function with coeliac markers from diagnosis, and eyes, urine protein, feet, and blood pressure as the years pass.\n\nKeep vaccines current, with influenza and pneumococcal protection for this high risk group, counsel the school on hypo action with a spare snack box, and hold the team together: paediatrician, diabetes nurse, dietitian, and counsellor for the child and family."
+        }
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What insulin pattern suits most children long term?",
+          "a": "Daily subcutaneous insulin combining long acting basal with mealtime bolus, matched to carbohydrate intake, or pump therapy where available.",
+          "accept": [
+            "basal",
+            "bolus",
+            "carbohydrate"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What are the three parts of sick day rules?",
+          "a": "Never stop insulin during illness, check glucose with ketones often, and return early with vomiting, deep breathing, or drowsiness.",
+          "accept": [
+            "never stop insulin",
+            "ketones",
+            "return early"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which screening runs through follow up and why?",
+          "a": "Thyroid with coeliac screening from diagnosis for associated autoimmunity, then eyes, urine protein, feet, and blood pressure for long term complications, with growth at every visit.",
+          "accept": [
+            "thyroid",
+            "coeliac",
+            "growth"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "type1_diabetes_child: management"
+        },
+        {
+          "source": "Nelson Textbook of Pediatrics",
+          "locator": "Diabetes mellitus in children: long term management"
+        },
+        {
+          "source": "Indian Academy of Pediatrics",
+          "locator": "Type 1 diabetes in children: immunisation of high risk children"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "case.t1dchild.meera",
+      "title": "A schoolgirl drinking water all day and breathing deeply",
+      "opening": "Meera, 9, has been brought by her mother to the paediatric emergency. She is sleepy, breathing deeply, and her breath smells fruity. Her mother says she has been drinking water all day and vomiting since morning. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean. Can you ask that in a different way?",
+      "initialVitals": {
+        "hr": 126,
+        "bpSystolic": 88,
+        "bpDiastolic": 56,
+        "rr": 34,
+        "spo2": 98,
+        "temp": 37.8,
+        "gcs": 13
+      },
+      "patient": {
+        "name": "Meera Patil",
+        "age": 9,
+        "sex": "female",
+        "occupation": "Schoolgirl, class 4",
+        "residence": "Small town, lives with her parents and a younger brother"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you here today",
+            "what is the problem with your child",
+            "why have you come to hospital",
+            "tell me what happened",
+            "what is troubling her"
+          ],
+          "reply": "Doctor, for a month she drinks water all the time and passes urine again and again, and since this morning she vomits everything with pain in the tummy and breathes heavily.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "polydipsia": {
+          "cues": [
+            "how much water does she take in a day",
+            "is she thirsty all the time",
+            "does she wake at night for water",
+            "how many bottles in a day"
+          ],
+          "reply": "She finishes three or four big bottles a day and still asks for more, and twice she woke at night asking for water.",
+          "key": true,
+          "skillId": "skill.hx.type.t1dchild_illness"
+        },
+        "enuresis_polyuria": {
+          "cues": [
+            "how often does she pass urine",
+            "bedwetting after being dry",
+            "night time wetting",
+            "urine frequency day and night",
+            "volume of urine"
+          ],
+          "reply": "She goes every hour in the day and twice at night, and for two weeks she has wet the bed though she was dry since age four.",
+          "key": true,
+          "skillId": "skill.hx.type.t1dchild_illness"
+        },
+        "weight_appetite": {
+          "cues": [
+            "has she lost weight",
+            "weight change over weeks",
+            "appetite increased or lost",
+            "her clothes have gone looser"
+          ],
+          "reply": "She eats well, rather more than before, but her frocks have gone loose and her arms look thin this month.",
+          "key": true
+        },
+        "fatigue_school": {
+          "cues": [
+            "tiredness or fatigue",
+            "school performance slipping",
+            "sleepy in class",
+            "play less than before"
+          ],
+          "reply": "Her teacher says she sleeps in class and she has stopped playing after school, she says she feels tired.",
+          "key": true
+        },
+        "vomiting_abdominal": {
+          "cues": [
+            "vomiting since when",
+            "how many times vomited",
+            "tummy pain location",
+            "pain in the abdomen",
+            "feeling sick or nauseous"
+          ],
+          "reply": "Since this morning she has vomited four times, mostly water, with a dull pain all over the tummy. She refuses to eat now.",
+          "key": true
+        },
+        "breathing_breath": {
+          "cues": [
+            "breathing heavily noticed when",
+            "deep or fast breathing",
+            "breath smells fruity",
+            "smell from the mouth"
+          ],
+          "reply": "Since afternoon her breathing is deep and fast even while resting, and there is a sweet fruity smell from her mouth.",
+          "key": true
+        },
+        "alertness_today": {
+          "cues": [
+            "is she drowsy or sleepy",
+            "does she respond normally when called",
+            "level of consciousness today",
+            "less active today"
+          ],
+          "reply": "She answers when I call her name but falls back to sleep, she is not her usual self since afternoon.",
+          "key": true
+        },
+        "trigger_fever": {
+          "cues": [
+            "fever in the past two weeks",
+            "cough cold or loose stools recently",
+            "illness before this",
+            "what did she eat during the fever"
+          ],
+          "reply": "Ten days ago she had fever with cold for three days, she ate very little then and drank only water.",
+          "key": true
+        },
+        "past_thrush_urine": {
+          "cues": [
+            "urinary burning or fever before",
+            "urine infection earlier",
+            "white patches in the mouth",
+            "boils or skin infection"
+          ],
+          "reply": "Two months ago she had burning while passing urine with fever, the local doctor gave syrup and it settled.",
+          "key": true
+        },
+        "birth_growth": {
+          "cues": [
+            "birth weight and term",
+            "born at how many months",
+            "growth card available",
+            "any previous weights recorded"
+          ],
+          "reply": "She was born at full term weighing 2.8 kilos, and her growth card shows she was gaining well till last year.",
+          "key": true
+        },
+        "family_autoimmune": {
+          "cues": [
+            "diabetes in the family",
+            "who has sugar",
+            "thyroid disease in relatives",
+            "vitiligo or thyroid in family"
+          ],
+          "reply": "My brother takes insulin since age twelve, and I take a thyroid tablet daily. No one else has sugar young.",
+          "key": true,
+          "skillId": "skill.hx.type.t1dchild_background"
+        },
+        "diet_schoolfood": {
+          "cues": [
+            "what does she eat in a day",
+            "cold drinks and juice",
+            "school tiffin pattern",
+            "how much milk in a day"
+          ],
+          "reply": "She takes roti sabzi with dal twice, a glass of milk morning and night, and one packet of mango drink from the school shop most days.",
+          "key": true
+        },
+        "immunisation_record": {
+          "cues": [
+            "is the vaccination card available",
+            "immunised up to what age",
+            "flu vaccine given",
+            "pneumonia vaccine given"
+          ],
+          "reply": "I have brought her card, all vaccines till age five are marked, but no flu or pneumonia vaccine after that.",
+          "key": true
+        },
+        "drugs_steroid": {
+          "cues": [
+            "any syrups or medicines",
+            "steroid syrup given",
+            "any inhaler use for wheeze",
+            "medicines in the past month"
+          ],
+          "reply": "Only paracetamol during the fever ten days ago, no steroid syrup and no inhaler.",
+          "key": true
+        }
+      },
+      "exam": {
+        "skill.gen.paed.appearance": {
+          "finding": "Drowsy but rousable girl, calls name and opens eyes to voice, then drifts. Lean build with dry lips and sunken eyes.",
+          "abnormal": true
+        },
+        "skill.gen.paed.vitals": {
+          "finding": "Heart rate 126 per minute, blood pressure 88 over 56, respiratory rate 34 with deep sighing pattern, SpO2 98 percent on air, temperature 37.8 C.",
+          "abnormal": true
+        },
+        "skill.gen.paed.hydration": {
+          "finding": "Dry tongue and tacky mucosa, reduced skin turgor over the abdomen, capillary refill 3 seconds, urine output scanty.",
+          "abnormal": true
+        },
+        "skill.exam.paed.weight": {
+          "finding": "Weight below her earlier growth line with thinning of subcutaneous fat, consistent with recent loss over weeks.",
+          "abnormal": true
+        },
+        "skill.exam.paed.length_height": {
+          "finding": "Height on her earlier centile, so weight has fallen while height is preserved, the acute on chronic pattern.",
+          "abnormal": false
+        },
+        "skill.exam.paed.resp.inspection": {
+          "finding": "Deep sighing regular breaths at rest with fruity odour, no chest indrawing, no added sounds expected from the lungs themselves.",
+          "abnormal": true
+        },
+        "skill.exam.paed.cns.higher_mental_gcs": {
+          "finding": "Eyes open to voice, confused speech with correct name only, obeys commands. Paediatric Glasgow 13 of 15.",
+          "abnormal": true
+        },
+        "skill.exam.paed.gi.palpation_percussion": {
+          "finding": "Diffuse mild tenderness without guarding or rigidity, no organ enlargement felt, bowel sounds present.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "glucose_ketone",
+        "vbg_electrolytes",
+        "hba1c"
+      ],
+      "investigations": {
+        "glucose_ketone": {
+          "label": "Bedside glucose with ketones",
+          "indicated": true,
+          "result": "Random venous glucose markedly above the childhood normal of 50 to 100 mg per dL, with large blood ketones and urine showing glucose with ketones.",
+          "note": "This pair confirms diabetes with ketosis at the bedside and triggers the ketoacidosis pathway without waiting."
+        },
+        "vbg_electrolytes": {
+          "label": "Venous blood gas with electrolytes",
+          "indicated": true,
+          "result": "Venous pH below the normal 7.38 to 7.42 range with bicarbonate below the normal 22 to 28 range, sodium and potassium disturbed with urea raised, showing metabolic acidosis with salt and water loss.",
+          "note": "The gas grades the acidosis that the breath and sensorium already suggest, and sets the resuscitation baseline."
+        },
+        "hba1c": {
+          "label": "HbA1c",
+          "indicated": true,
+          "result": "Raised, reflecting high average glucose over the past months rather than a single day.",
+          "note": "Supports new diabetes of some standing and later guides the glycaemic target with dose titration."
+        },
+        "urine_routine": {
+          "label": "Urine routine and culture",
+          "indicated": true,
+          "result": "Glucose with ketones present, pus cells few, culture awaited to exclude coexisting urinary infection.",
+          "note": "Separates ketonuria of ketoacidosis from infection, since both can coexist in a new diabetic child."
+        },
+        "antibodies_cpeptide": {
+          "label": "Pancreatic autoantibodies with C peptide",
+          "indicated": true,
+          "result": "Sent; result awaited. Expected to support autoimmune type 1 disease in this lean young child.",
+          "note": "Types the diabetes but never delays resuscitation; treatment starts on glucose with ketones and the gas."
+        },
+        "thyroid_coeliac": {
+          "label": "Thyroid function with coeliac screen",
+          "indicated": true,
+          "result": "Sent as baseline; to be repeated in follow up for associated autoimmunity.",
+          "note": "The family thyroid history makes this baseline essential rather than optional."
+        },
+        "ecg_monitoring": {
+          "label": "Continuous monitoring with ECG",
+          "indicated": true,
+          "result": "Sinus tachycardia with normal intervals; continuous pulse, saturation, and sensorium chart started.",
+          "note": "Potassium shifts during treatment show on the monitor before symptoms, so watching is part of treatment."
+        }
+      },
+      "differentialModel": {
+        "answer": "New onset type 1 diabetes in ketoacidosis in a lean 9 year old with weeks of osmotic symptoms. Alternatives considered: type 2 diabetes, single gene diabetes, diabetes insipidus, urinary infection alone, and transient stress hyperglycaemia.",
+        "accept": [
+          "Type 1 diabetes mellitus",
+          "Type 2 diabetes mellitus",
+          "Monogenic diabetes",
+          "Neonatal diabetes mellitus",
+          "Diabetes insipidus",
+          "Urinary tract infection",
+          "Stress hyperglycaemia",
+          "Diabetic ketoacidosis"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "New onset type 1 diabetes mellitus in a 9 year old girl, presenting in diabetic ketoacidosis with dehydration and drowsiness responding to voice.",
+        "accept": [
+          "Type 1 diabetes mellitus",
+          "t1dm",
+          "Diabetic ketoacidosis",
+          "dka"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Monitored bed with senior help, careful rehydration with insulin by infusion and potassium replacement, repeated glucose with ketones and electrolytes, transition to basal bolus insulin with glucose monitoring, family education with sick day rules, infection review, and thyroid with coeliac screening on follow up with referral to a paediatric diabetes clinic.",
+        "accept": [
+          "monitored bed",
+          "rehydration",
+          "insulin",
+          "potassium",
+          "glucose monitoring",
+          "basal bolus",
+          "education",
+          "sick-day rules",
+          "screening",
+          "referral"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "Two clocks make this diagnosis: weeks of thirst with urine and weight loss, then hours of vomiting with deep breathing and drowsiness.",
+        "Bedwetting after years of dryness with new thirst is osmotic diuresis until proved otherwise, not behaviour.",
+        "Vomiting with tummy pain in a thirsty child losing weight is ketoacidosis, not gastritis, so ketones with the gas come first.",
+        "Resuscitation starts on glucose with ketones and the venous gas; antibodies confirm the type later and never delay fluids with insulin.",
+        "Discharge is unsafe without secured insulin supply, glucose monitoring, sick day rules, and a named paediatric diabetes clinic for follow up."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}
