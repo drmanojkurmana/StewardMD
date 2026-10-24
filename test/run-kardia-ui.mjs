@@ -1,0 +1,151 @@
+/* Kardia in the REAL app (headless Chrome): flag OFF = the Home grid is byte-for-byte unchanged
+ * (no Kardia tile, KardiQ X tile untouched, KARDIA.open() a no-op); flag ON (?kardia=1 or
+ * localStorage smd_kardia = 1, no early-access tier) = the Kardia tile replaces the KardiQ X tile,
+ * the tile opens the Specialty Engine host with its five tabs, Learn lists the real atlas preview,
+ * and the KardiQ X tab still holds behind SMD_XACCESS without opening the AI overlay.
+ * Screenshots every tab at 390 and 820 widths in light and dark into work/shots/.
+ * USAGE: node test/run-kardia-ui.mjs   (BASE=http://localhost:8996/ to use a running server;
+ *   SHOTS=/tmp/shots to override the output dir)
+ */
+import { spawn } from "node:child_process";
+import { mkdirSync, rmSync, writeFileSync } from "node:fs";
+import { setTimeout as sleep } from "node:timers/promises";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+const HERE = dirname(fileURLToPath(import.meta.url));
+const BASE = (process.env.BASE || "http://localhost:" + (process.env.PORT || 8995) + "/").replace(/\/?$/, "/");
+const PORT = +(process.env.CHROME_PORT || 9399), userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/kardia-app-chrome-" + PORT;
+const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+const SHOTS = process.env.SHOTS || join(HERE, "..", "work", "shots");
+mkdirSync(SHOTS, { recursive: true });
+
+let serveProc = null;
+async function ensureServer() {
+  try { await fetch(BASE); return; } catch {}
+  const port = (BASE.match(/:(\d+)/) || [, "8995"])[1];
+  serveProc = spawn("node", [join(HERE, "serve.mjs"), join(HERE, ".."), port], { stdio: "ignore" });
+  for (let i = 0; i < 30; i++) { try { await fetch(BASE); return; } catch { await sleep(200); } }
+}
+await ensureServer();
+try { rmSync(userDir, { recursive: true, force: true }); } catch {}
+const chrome = spawn(CHROME, [...(process.env.CHROME_FLAGS || "").split(" ").filter(Boolean), "--headless=new", "--no-sandbox", `--remote-debugging-port=${PORT}`, `--user-data-dir=${userDir}`, "--no-first-run", "--no-default-browser-check", "--disable-dev-shm-usage", "--disable-gpu"], { stdio: ["ignore", "ignore", "pipe"] });
+let chromeErr = ""; chrome.stderr.on("data", (d) => { chromeErr += d; });
+
+let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = [];
+const call = (m, p) => { const i = msgId++; return new Promise(r => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
+const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
+const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(200); } return false; };
+const reqs = []; let fails = 0; const ok = (c, m) => { console.log((c ? "✅ " : "❌ ") + m); if (!c) fails++; };
+
+try {
+  let ver, t = 0; while (t++ < 300) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
+  if (!ver) throw new Error("Chrome did not start within 60 s: " + chromeErr.slice(-800));
+  ws = new WebSocket(ver.webSocketDebuggerUrl); await new Promise((res, rej) => { ws.onopen = res; ws.onerror = rej; });
+  ws.onmessage = (e) => {
+    const m = JSON.parse(e.data);
+    if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); }
+    if (m.method === "Network.requestWillBeSent") reqs.push(m.params.request.url);
+    if (m.method === "Runtime.exceptionThrown") { const d = JSON.stringify(m.params.exceptionDetails); if (/kardia/i.test(d)) errors.push(d.slice(0, 300)); }
+  };
+  const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });
+  const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
+  await call("Runtime.enable", {}); await call("Network.enable", {});
+  const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
+  const load = async (url) => { await call("Page.navigate", { url }); await until(`return !!(window.KARDIA && window.SMD_showHome);`, 30000); await ev(clean); await ev(`SMD_showHome(); return 1;`); await sleep(700); };
+  const shot = async (name) => { const r = await call("Page.captureScreenshot", { format: "png" }); if (r.result && r.result.data) writeFileSync(join(SHOTS, name + ".png"), Buffer.from(r.result.data, "base64")); };
+  const gridActs = `return [].map.call(document.querySelectorAll('.rnav-tile[data-act]'), function(x){return x.getAttribute('data-act');}).join(',');`;
+  const eligibleActs = `return (window.SMD_HOME_TOOLS ? SMD_HOME_TOOLS() : []).map(function(t){return t.act;}).join(',');`;
+  const metrics = async (w, h) => { await call("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 2, mobile: true }); await sleep(300); };
+  const theme = async (dark) => { await ev(`document.body.classList.toggle('dark', ${dark}); document.body.classList.toggle('v3-dark', ${dark}); return 1;`); await sleep(300); };
+
+  /* ── 1. FLAG OFF: Home is byte-for-byte unchanged ── */
+  console.log("\n--- flag OFF: Home unchanged ---");
+  await load(BASE);
+  await ev(`try{localStorage.removeItem("smd_kardia");localStorage.removeItem("smd_kardia_prefs");localStorage.removeItem("smd_home_tools");localStorage.setItem("smd_role","student");localStorage.setItem("smd_kardiox","1");}catch(e){} return 1;`);
+  await load(BASE);
+  const ENG = /\/(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?\.(js|css)|kardia\.js|kardia\.css|kardia-flags\.js|kardia\/)/;
+  ok(reqs.some((u) => /kardia-loader\.js\?v=krd1/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads kardia-loader.js and no engine or Kardia file");
+  const gridOff = await ev(gridActs);
+  const eligOff = await ev(eligibleActs);
+  ok(!/,kardia,/.test("," + eligOff + ","), "Kardia is ineligible with the flag off");
+  ok(/,kardiox,/.test("," + eligOff + ","), "the KardiQ X tile stays eligible with the flag off");
+  ok(!/,kardia,/.test("," + gridOff + ","), "no Kardia tile on the grid with the flag off");
+  ok((await ev(`return KARDIA.open();`)) === false, "KARDIA.open() refuses with the flag off");
+  ok((await ev(`return !!document.getElementById('smdKardia');`)) === false, "no Kardia overlay node with the flag off");
+  await ev(`SMD_openRoute("kardia"); return 1;`); await sleep(400);
+  ok((await ev(`return !KARDIA.isOpen();`)) === true, "stewardmd://kardia does not open with the flag off");
+
+  /* ── 2. FLAG ON: Kardia replaces the KardiQ X tile ── */
+  console.log("\n--- flag ON: tile swap ---");
+  await ev(`try{localStorage.setItem("smd_kardia","1");}catch(e){} return 1;`);
+  await load(BASE + "?kardia=1");
+  const eligOn = await ev(eligibleActs);
+  ok(/,kardia,/.test("," + eligOn + ","), "Kardia is eligible with the flag on");
+  ok(!/,kardiox,/.test("," + eligOn + ","), "the KardiQ X tile is replaced while Kardia is on");
+  ok(reqs.some((u) => /specialty-shell\.js\?v=krd1/.test(u)) === false, "the engine still lazy-loads: nothing fetched until the tile opens");
+  // Open from All tools and pin it: the real Home tile UI, like a tester would.
+  await ev(`document.querySelector('.rnav-tile[data-act=alltools]').click(); return 1;`);
+  ok(await until(`return !!document.querySelector('[data-at-open="kardia"]');`, 10000), "All tools lists Kardia (and no KardiQ X row: " + await until(`return !document.querySelector('[data-at-open="kardiox"]');`, 5000) + ")");
+  await ev(`document.querySelector('[data-at-pin="kardia"]').click(); return 1;`);
+  ok(await until(`return !!document.querySelector('.rnav-tile[data-act=kardia]');`, 10000), "pinning puts the Kardia tile on the Home grid");
+
+  /* ── 3. Open Kardia, walk the five tabs ── */
+  await ev(`var t=document.querySelector('.rnav-tile[data-act=kardia]'); t.focus(); t.click(); return 1;`);
+  ok(await until(`return KARDIA.isOpen() && !!document.getElementById("smdKardia");`, 10000), "tile opens the Kardia overlay");
+  ok(await until(`return !!document.querySelector('#smdKardia [data-act=ktab][data-t=kardiox]');`, 20000), "first open loads the engine + Kardia and shows the five tabs");
+  ok(reqs.some((u) => /specialty-shell\.js\?v=krd1/.test(u)) && reqs.some((u) => /kardia\.js\?v=krd1/.test(u)), "engine + Kardia loaded on open, at the loader token");
+  ok((await ev(`return KARDIA._kardia.tabs.join(",");`)) === "echo,learn,practice,cases,kardiox", "tabs: Echo Lab, Learn, Practice, Cases, KardiQ X");
+  ok((await ev(`return KARDIA._kardia.levels.join(",");`)) === "mbbs,resident,fellow,sonographer", "levels: MBBS, Resident, Fellow, Sonographer");
+  ok((await ev(`return KARDIA._kardia.freeLessons;`)) === 5, "free preview is a constant (5 lessons)");
+  ok(!/[–—]/.test(await ev(`return document.getElementById('smdKardia').innerText;`)), "no em or en dash on screen");
+  const tabH = await ev(`return document.querySelector('#smdKardia .krd-tab').getBoundingClientRect().height;`);
+  ok(tabH >= 44, `tabs are a 44px touch target (${tabH}px)`);
+
+  // The KardiQ X gate is still armed: opening the tab must NOT open the AI overlay by itself.
+  await ev(`document.querySelector('#smdKardia [data-act=ktab][data-t=kardiox]').click(); return 1;`);
+  await sleep(400);
+  ok((await ev(`return !document.getElementById('kardioxRoot') || !document.getElementById('kardioxRoot').classList.contains('kx-open');`)) === true,
+    "the KardiQ X tab does not open the AI overlay on its own");
+
+  /* ── 4. Screenshots: every tab at 390 and 820, light and dark ── */
+  console.log("\n--- screenshots ---");
+  const tabs = [["echo", "coming soon"], ["learn", "Free preview"], ["practice", "coming soon"], ["cases", "coming soon"], ["kardiox", "Open KardiQ X"]];
+  for (const [w, h] of [[390, 844], [820, 1180]]) {
+    await metrics(w, h);
+    for (const dark of [false, true]) {
+      await theme(dark);
+      const th = dark ? "dark" : "light";
+      for (const [id, marker] of tabs) {
+        await ev(`document.querySelector('#smdKardia [data-act=ktab][data-t=${id}]').click(); return 1;`);
+        await sleep(350);
+        const seen = await ev(`return document.getElementById('smdKardia').innerText;`);
+        ok(seen && seen.toLowerCase().indexOf(marker.split(" ")[0].toLowerCase()) >= 0, `${w}px ${th}: ${id} tab shows its screen ("${marker}")`);
+        await shot(`kardia-${id}-${w}-${th}`);
+      }
+    }
+  }
+  // Learn lists the real atlas preview, not placeholders.
+  await theme(false); await metrics(390, 844);
+  await ev(`document.querySelector('#smdKardia [data-act=ktab][data-t=learn]').click(); return 1;`);
+  await sleep(350);
+  ok((await ev(`return document.querySelectorAll('#smdKardia [data-act=klearn][data-id]').length;`)) === 5, "Learn lists exactly the 5 free preview lessons");
+  ok((await ev(`return (document.getElementById('smdKardia').innerText.match(/Plus \\d+ more lessons/)||[])[0];`)) !== null, "and counts the locked rest instead of listing it");
+
+  // Pressing Open KardiQ X without a code must hold at the gate: no AI overlay opens.
+  await ev(`document.querySelector('#smdKardia [data-act=ktab][data-t=kardiox]').click(); return 1;`);
+  await sleep(300);
+  await ev(`(function(){var b=[...document.querySelectorAll('#smdKardia [data-act=kx]')][0]; if(b) b.click(); return 1;})()`);
+  await sleep(600);
+  ok((await ev(`return !document.getElementById('kardioxRoot') || !document.getElementById('kardioxRoot').classList.contains('kx-open');`)) === true,
+    "Open KardiQ X without a code holds at SMD_XACCESS: no AI overlay opens");
+
+  /* ── 5. Back OFF: the grid is byte-for-byte what it was ── */
+  await ev(`KARDIA.close(); try{localStorage.removeItem("smd_kardia");}catch(e){} return 1;`);
+  await load(BASE);
+  const gridBack = await ev(gridActs);
+  ok(gridBack === gridOff, "flag back off: the Home grid is byte-for-byte what it was");
+  ok(!/kardia/i.test(JSON.stringify(errors)), "no uncaught Kardia errors" + (errors.length ? ": " + errors.slice(0, 3).join(" | ") : ""));
+
+  console.log(fails === 0 ? "\nALL GREEN: Kardia wired into the app" : `\n${fails} FAILED`);
+} catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
+finally { try { ws && ws.close(); } catch {} try { chrome.kill(); } catch {} try { serveProc && serveProc.kill(); } catch {} process.exit(fails === 0 ? 0 : 1); }

@@ -256,6 +256,11 @@ rm -rf "$WWW/tokos/learn/units" "$WWW/tokos/learn/media"/credits-*.json "$WWW/to
 [ -d narke ] && mkdir -p "$WWW/narke" && cp -R narke/. "$WWW/narke/"
 rm -rf "$WWW/narke/learn/units" "$WWW/narke/learn/media"/credits-*.json "$WWW/narke/learn/competencies.json" "$WWW/narke/learn/competency-map.json"
 [ -d narke-models ] && mkdir -p "$WWW/narke-models" && cp -R narke-models/. "$WWW/narke-models/"
+# Kardia (kardia.js on the specialty engine, Echo + ECG learning): the same layout as Tokós. The root
+# kardia-*.js / kardia.css files are copied by the root globs; the kardia/ DATA directory is not, so it
+# needs this line (tracks.json, fetched on first open by the engine). Same failure mode as clinix/surgx:
+# without it the module loads, the tile appears, and the first open renders the load-error state.
+[ -d kardia ] && mkdir -p "$WWW/kardia" && cp -R kardia/. "$WWW/kardia/"
 
 # PrepNucleus (prep.js, loaded by prep-loader.js): the module tree and the per-subject index files (MCQ counts) ship
 # in the app, about 1 MB. The question files (prep/bank/v1/*/mcq/, search.json, about 180 MB) do NOT: the app fetches
