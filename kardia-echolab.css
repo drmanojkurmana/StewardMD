@@ -1,0 +1,38 @@
+/* kardia-echolab.css - Echo Lab live image controls (WP10a).
+   Uses only the Kardia tokens from kardia.css (.krd-root --kd-* / --sp-*).
+   Phone first: image full width, controls in a bottom sheet column.
+   At 820px and above: two panes, image left and controls right. */
+.krd-root .kel-sector-stack { position: relative; margin-top: 8px; }
+.krd-root .kel-sector-stack canvas { display: block; width: 100%; height: auto; border-radius: 12px; }
+.krd-root .kel-overlay { position: absolute; inset: 0; touch-action: none; }
+.krd-root .kel-load { margin-top: 8px; }
+.krd-root .kel-load-track { height: 8px; border-radius: 999px; background: var(--sp-s2); overflow: hidden; }
+.krd-root .kel-load-fill { display: block; height: 100%; width: 0; background: var(--sp-acc); transition: width 140ms var(--kd-ease); }
+.krd-root .kel-modes { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding: 10px 0 2px; -webkit-overflow-scrolling: touch; }
+.krd-root .kel-modes::-webkit-scrollbar { display: none; }
+.krd-root .kel-mode { flex: 1 0 auto; min-height: 44px; padding: 10px 14px; border: 1px solid var(--sp-line); border-radius: 10px; background: var(--sp-s1); color: var(--sp-text); font-size: 14px; font-weight: 650; touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; transition: background-color 140ms var(--kd-ease), transform 120ms var(--kd-ease); }
+.krd-root .kel-mode:active { transform: scale(0.97); }
+.krd-root .kel-mode[aria-pressed="true"] { background: var(--sp-acc); color: var(--sp-on-pri); border-color: var(--sp-acc); }
+.krd-root .kel-mode:focus-visible, .krd-root .kel-btn:focus-visible { outline: 2px solid var(--sp-acc); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) { .krd-root .kel-mode:hover { background: var(--sp-s2); } .krd-root .kel-mode[aria-pressed="true"]:hover { background: var(--sp-acc); } }
+.krd-root .kel-spec-wrap { margin-top: 10px; }
+.krd-root .kel-spec-wrap canvas { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--sp-line); background: #000; }
+.krd-root .kel-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; align-items: center; }
+.krd-root .kel-btn { min-height: 44px; padding: 10px 16px; border: 1px solid var(--sp-line); border-radius: 10px; background: var(--sp-s1); color: var(--sp-text); font-size: 14px; font-weight: 650; touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; transition: transform 120ms var(--kd-ease), background-color 140ms var(--kd-ease); }
+.krd-root .kel-btn:active { transform: scale(0.97); }
+.krd-root .kel-btn[aria-pressed="true"] { background: var(--sp-acc); color: var(--sp-on-pri); border-color: var(--sp-acc); }
+.krd-root .kel-btn[disabled] { opacity: 0.45; }
+.krd-root .kel-cine { flex: 1 1 160px; min-height: 44px; accent-color: var(--sp-acc); }
+.krd-root .kel-select { min-height: 44px; max-width: 100%; padding: 10px 12px; border: 1px solid var(--sp-line); border-radius: 10px; background: var(--sp-s1); color: var(--sp-text); font-size: 15px; }
+.krd-root .kel-tgc { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.krd-root .kel-tgc .krd-ctl input[type="range"] { min-height: 44px; }
+.krd-root .kel-measure { margin-top: 12px; }
+.krd-root .kel-fps { font-size: 12px; color: var(--sp-mut); font-variant-numeric: tabular-nums; }
+@media (min-width: 820px) {
+  .krd-root .kel-two { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(260px, 1fr); gap: 16px; align-items: start; }
+  .krd-root .kel-two .krd-knobs { margin-top: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .krd-root .kel-load-fill, .krd-root .kel-mode, .krd-root .kel-btn { transition: none; }
+  .krd-root .kel-mode:active, .krd-root .kel-btn:active { transform: none; }
+}

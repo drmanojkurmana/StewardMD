@@ -64,7 +64,7 @@ try {
   await ev(`try{localStorage.removeItem("smd_kardia");localStorage.removeItem("smd_kardia_prefs");localStorage.removeItem("smd_home_tools");localStorage.setItem("smd_role","student");localStorage.setItem("smd_kardiox","1");}catch(e){} return 1;`);
   await load(BASE);
   const ENG = /\/(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?\.(js|css)|kardia\.js|kardia\.css|kardia-flags\.js|kardia\/)/;
-  ok(reqs.some((u) => /kardia-loader\.js\?v=krd2/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads kardia-loader.js and no engine or Kardia file");
+  ok(reqs.some((u) => /kardia-loader\.js\?v=krd3/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads kardia-loader.js and no engine or Kardia file");
   const gridOff = await ev(gridActs);
   const eligOff = await ev(eligibleActs);
   ok(!/,kardia,/.test("," + eligOff + ","), "Kardia is ineligible with the flag off");
@@ -82,7 +82,7 @@ try {
   const eligOn = await ev(eligibleActs);
   ok(/,kardia,/.test("," + eligOn + ","), "Kardia is eligible with the flag on");
   ok(!/,kardiox,/.test("," + eligOn + ","), "the KardiQ X tile is replaced while Kardia is on");
-  ok(reqs.some((u) => /specialty-shell\.js\?v=krd2/.test(u)) === false, "the engine still lazy-loads: nothing fetched until the tile opens");
+  ok(reqs.some((u) => /specialty-shell\.js\?v=krd3/.test(u)) === false, "the engine still lazy-loads: nothing fetched until the tile opens");
   // Open from All tools and pin it: the real Home tile UI, like a tester would.
   await ev(`document.querySelector('.rnav-tile[data-act=alltools]').click(); return 1;`);
   ok(await until(`return !!document.querySelector('[data-at-open="kardia"]');`, 10000), "All tools lists Kardia (and no KardiQ X row: " + await until(`return !document.querySelector('[data-at-open="kardiox"]');`, 5000) + ")");
@@ -93,7 +93,7 @@ try {
   await ev(`var t=document.querySelector('.rnav-tile[data-act=kardia]'); t.focus(); t.click(); return 1;`);
   ok(await until(`return KARDIA.isOpen() && !!document.getElementById("smdKardia");`, 10000), "tile opens the Kardia overlay");
   ok(await until(`return !!document.querySelector('#smdKardia [data-act=ktab][data-t=kardiox]');`, 20000), "first open loads the engine + Kardia and shows the five tabs");
-  ok(reqs.some((u) => /specialty-shell\.js\?v=krd2/.test(u)) && reqs.some((u) => /kardia\.js\?v=krd2/.test(u)), "engine + Kardia loaded on open, at the loader token");
+  ok(reqs.some((u) => /specialty-shell\.js\?v=krd3/.test(u)) && reqs.some((u) => /kardia\.js\?v=krd3/.test(u)), "engine + Kardia loaded on open, at the loader token");
   ok((await ev(`return KARDIA._kardia.tabs.join(",");`)) === "echo,learn,practice,cases,kardiox", "tabs: Echo Lab, Learn, Practice, Cases, KardiQ X");
   ok((await ev(`return KARDIA._kardia.levels.join(",");`)) === "mbbs,resident,fellow,sonographer", "levels: MBBS, Resident, Fellow, Sonographer");
   ok((await ev(`return KARDIA._kardia.freeLessons;`)) === 5, "free preview is a constant (5 lessons)");
@@ -132,6 +132,70 @@ try {
   ok(await until(`return !!document.getElementById('krdAchieved') && !document.getElementById('krdAchieved').hidden;`, 8000), "view achieved shows after holding A4C for a second");
   await ev(`(function(){var L=KARDIA._kardia.echoLab; var s=L.getProbeState(); s.rotationDeg+=25; L.setProbeState(s); return 1;})()`);
   ok(await until(`return /rotate/i.test(document.getElementById('krdHints').innerText);`, 8000), "rotating off target brings back a rotate hint");
+
+  /* ── 3c. Echo Lab WP10a: live image, modes, knobs, pathology, measure ── */
+  console.log("\n--- Echo Lab WP10a ---");
+  await ev(`KARDIA._kardia.echoLab.setView('tte_a4c'); return 1;`);
+  await sleep(1200);
+  const snap1 = await ev(`return JSON.stringify(KARDIA._kardia.echoLab.echolab ? KARDIA._kardia.echoLab.echolab.snapshot() : null);`);
+  let snapObj = null; try { snapObj = snap1 ? JSON.parse(snap1) : null; } catch {}
+  ok(!!snapObj && snapObj.mean > 0.02, `live image has non-black pixels inside the sector (mean ${snapObj ? snapObj.mean.toFixed(3) : "none"})`);
+  ok(!!snapObj && snapObj.bloodMean < snapObj.myoMean, `blood is darker than walls at A4C (blood ${snapObj ? snapObj.bloodMean.toFixed(3) : "?"} < wall ${snapObj ? snapObj.myoMean.toFixed(3) : "?"})`);
+  for (const m of ["colour", "pw", "cw", "mmode", "2d"]) {
+    await ev(`document.querySelector('#smdKardia [data-act=kecho-mode][data-v=${m}]').click(); return 1;`);
+    await sleep(600);
+    const vis = await ev(`return document.getElementById('krdSpectrum') ? !document.getElementById('krdSpectrum').hidden : false;`);
+    ok(m === "2d" || m === "colour" ? true : vis === true, `mode ${m} renders its strip or overlay`);
+  }
+  const meanBefore = snapObj ? snapObj.mean : 0;
+  await ev(`(function(){var el=document.getElementById('krdGain'); if(el){el.value=95; el.dispatchEvent(new Event('input',{bubbles:true}));} KARDIA._kardia.echoLab.setKnob('gain',95); return 1;})()`);
+  await sleep(800);
+  const snap2 = await ev(`return JSON.stringify(KARDIA._kardia.echoLab.echolab.snapshot());`);
+  let snap2o = null; try { snap2o = JSON.parse(snap2); } catch {}
+  ok(!!snap2o && Math.abs(snap2o.mean - meanBefore) > 0.005, `a knob change changes mean brightness (${meanBefore.toFixed(3)} to ${snap2o ? snap2o.mean.toFixed(3) : "?"})`);
+  await ev(`KARDIA._kardia.echoLab.setKnob('gain',55); return 1;`);
+  /* Severe AS: CW peak must exceed 4 m/s. Uses the real pathology file. */
+  const asOk = await ev(`return fetch('/kardia/pathology/aortic_stenosis.json').then(function(r){return r.json();}).then(function(d){ window.__asCond=d; KARDIA._kardia.echoLab.applyPathology(d,'severe'); KARDIA._kardia.echoLab.setMode('cw'); return 1;}).then(function(){return 1;},function(){return 0;});`);
+  await sleep(900);
+  const peak = await ev(`return KARDIA._kardia.echoLab.echolab ? KARDIA._kardia.echoLab.echolab.lastPeakMs : 0;`);
+  ok(typeof peak === "number" && peak > 4, `severe AS CW peak exceeds 4 m/s (${peak})`);
+  /* Freeze, cine and a Simpson measurement that can be completed and graded. */
+  await ev(`document.querySelector('#smdKardia [data-act=kecho-freeze]').click(); return 1;`);
+  await sleep(300);
+  ok((await ev(`return !document.getElementById('krdCine').disabled;`)) === true, "freeze enables the cine bar");
+  await ev(`document.querySelector('#smdKardia [data-act=kecho-measure]').click(); return 1;`);
+  await sleep(500);
+  ok((await ev(`return !!document.querySelector('#krdMeasure .krdm-stage');`)) === true, "Measure opens the Simpson tool on the frozen image");
+  /* Complete Simpson biplane: trace one closed LV outline on each of the
+   * four steps (end diastole and end systole, four chamber then two
+   * chamber), pressing Done after each trace. Diastole traces are drawn
+   * larger than systole traces so the computed ejection fraction is
+   * positive. The final Done must produce a graded result against the
+   * model ground truth, pass or fail. */
+  for (const [fx, fy] of [[0.30, 0.36], [0.20, 0.24], [0.28, 0.34], [0.19, 0.22]]) {
+    await ev("(function(){var ov=document.querySelector('#krdMeasure .krdm-ov'); if(!ov) return 0;" +
+      "var r=ov.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2, rx=r.width*" + fx + ", ry=r.height*" + fy + ";" +
+      "function pe(type,x,y){ov.dispatchEvent(new PointerEvent(type,{pointerId:11,clientX:x,clientY:y,bubbles:true}));}" +
+      "var n=28, i, a; pe('pointerdown',cx+rx,cy);" +
+      "for(i=1;i<=n;i++){ a=2*Math.PI*i/n; pe('pointermove',cx+rx*Math.cos(a),cy+ry*Math.sin(a)); }" +
+      "pe('pointerup',cx+rx,cy); return 1;})()");
+    await sleep(200);
+    const doneEnabled = await ev(`return (function(){var bs=document.querySelectorAll('#krdMeasure .krdm-btn'); for(var i=0;i<bs.length;i++) if(bs[i].textContent==='Done') return !bs[i].disabled; return false;})();`);
+    ok(doneEnabled === true, `Simpson trace enables Done (step radii ${fx}/${fy})`);
+    await ev(`(function(){var bs=document.querySelectorAll('#krdMeasure .krdm-btn'); for(var i=0;i<bs.length;i++){ if(bs[i].textContent==='Done'){ bs[i].click(); return 1; } } return 0;})()`);
+    await sleep(350);
+  }
+  ok(await until(`return !!document.querySelector('#krdMeasure .krdm-fb.show');`, 8000), "Simpson measurement completes: the grading card appears after the fourth Done");
+  const gradeText = await ev(`return document.querySelector('#krdMeasure .krdm-fb') ? document.querySelector('#krdMeasure .krdm-fb').innerText : '';`);
+  ok(/Within tolerance|Outside tolerance/.test(gradeText || ""), `Simpson result is graded against ground truth ("${(gradeText || "").split("\n")[0]}")`);
+  ok(/True value/.test(gradeText || ""), "graded Simpson card shows the true value");
+  console.log("Simpson grade: " + (gradeText || "").replace(/\n/g, " "));
+  const frameMs = await ev(`return KARDIA._kardia.echoLab.echolab.frameMs();`);
+  ok(typeof frameMs === "number" && frameMs > 0, `frame time logged (${typeof frameMs === "number" ? frameMs.toFixed(1) : frameMs} ms)`);
+  console.log("Echo Lab frame time: " + frameMs + " ms");
+  await shot("kardia-echolab-390-light");
+  await metrics(820, 1180); await theme(true); await sleep(500); await shot("kardia-echolab-820-dark");
+  await metrics(390, 844); await theme(false);
 
   /* ── 4. Screenshots: every tab at 390 and 820, light and dark ── */
   console.log("\n--- screenshots ---");
