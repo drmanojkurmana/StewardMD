@@ -879,11 +879,11 @@
       "teach": [
         {
           "heading": "Cervical ripening for the unfavourable cervix",
-          "body": "When the modified Bishop score is 5 or less, cervical ripening is mandatory before administering oxytocin.\n\nPharmacological options include Dinoprostone (PGE2) intracervical gel 0.5 mg (may be repeated every 6 hours, maximum 3 doses in 24 hours) or controlled-release vaginal insert 10 mg over 24 hours.\n\nLow-dose Misoprostol (PGE1) 25 micrograms orally or vaginally every 2 to 4 hours is an effective alternative recommended by WHO and FOGSI."
+          "body": "When the modified Bishop score is 5 or less, cervical ripening is mandatory before administering oxytocin.\n\nPharmacological options include Dinoprostone (PGE2) intracervical gel 0.5 mg (may be repeated every 6 hours, maximum 3 doses in 24 hours) or controlled-release vaginal insert 10 mg over 24 hours.\n\nLow-dose Misoprostol (PGE1) 25 micrograms by the oral or vaginal route is an effective alternative recommended by WHO and FOGSI, with repeat dosing at the interval set by your institutional protocol."
         },
         {
           "heading": "Mechanical cervical ripening with Foley balloon",
-          "body": "A transcervical Foley catheter balloon (size 16 to 18 French, inflated with 30 to 50 mL sterile water) placed above the internal os mechanically stretches the lower segment and promotes endogenous prostaglandin release.\n\nMechanical balloon ripening is especially valuable in women with a previous caesarean delivery where prostaglandins are contraindicated due to the risk of uterine rupture.\n\nIt is also ideal in resource-limited settings lacking cold storage."
+          "body": "A transcervical Foley balloon catheter inflated with sterile water above the internal os mechanically stretches the lower segment and promotes endogenous prostaglandin release.\n\nMechanical balloon ripening is especially valuable in women with a previous caesarean delivery where prostaglandins are contraindicated due to the risk of uterine rupture.\n\nIt is also ideal in resource-limited settings lacking cold storage."
         },
         {
           "heading": "Induction with favourable cervix: amniotomy and oxytocin",
@@ -967,7 +967,7 @@
   "cases": [
     {
       "id": "case.postterm.priya",
-      "title": "A primigravida at 41 weeks and 4 days admitted for post-dated pregnancy evaluation",
+      "title": "A primigravida at 41 weeks and 4 days admitted for late-term (post-dated) pregnancy evaluation",
       "opening": "Priya Sharma, a 24-year-old primigravida at 41 weeks and 4 days by reliable dates, presents to the antenatal clinic on referral from a primary health centre. She has no labour pains, no leaking, and reports that her expected date of delivery passed 11 days ago. Introduce yourself and take a focused history.",
       "fallback": "I am sorry doctor, I did not quite understand that. Could you ask me in another way?",
       "patient": {
@@ -1093,7 +1093,7 @@
             "did you go for checkups",
             "regular antenatal care"
           ],
-          "reply": "I had six checkups at the primary health centre. All my blood tests were normal, and I received two tetanus toxoid injections."
+          "reply": "I had six checkups at the primary health centre. All my blood tests were normal, and I received two Td (tetanus-diphtheria) injections."
         },
         "medications_taken": {
           "cues": [
@@ -1269,9 +1269,9 @@
         }
       },
       "differentialModel": {
-        "answer": "Post-term pregnancy at 41 weeks and 4 days with isolated oligohydramnios and an unripe cervix (Bishop score 3). Consider inaccurate gestational dating (wrong dates), intrauterine growth restriction, prelabour rupture of membranes, and impending fetal distress.",
+        "answer": "Late-term (post-dated) pregnancy at 41 weeks and 4 days with isolated oligohydramnios and an unripe cervix (Bishop score 3). Consider inaccurate gestational dating (wrong dates), intrauterine growth restriction, prelabour rupture of membranes, and impending fetal distress.",
         "accept": [
-          "post-term pregnancy",
+          "postdated pregnancy",
           "postterm pregnancy",
           "prolonged pregnancy",
           "inaccurate gestational dating",
@@ -1284,9 +1284,9 @@
         "minMatch": 2
       },
       "diagnosis": {
-        "answer": "Post-term pregnancy (late-term gestation at 41 weeks and 4 days) confirmed by early ultrasound dating, complicated by isolated oligohydramnios and an unfavourable cervix (Bishop score 3), with reactive fetal non-stress test.",
+        "answer": "Late-term (post-dated) pregnancy at 41 weeks and 4 days confirmed by early ultrasound dating, complicated by isolated oligohydramnios and an unfavourable cervix (Bishop score 3), with reactive fetal non-stress test.",
         "accept": [
-          "post-term pregnancy",
+          "postdated pregnancy",
           "postterm pregnancy",
           "prolonged pregnancy",
           "post-dates pregnancy",

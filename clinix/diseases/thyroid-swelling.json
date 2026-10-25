@@ -517,7 +517,7 @@
               [
                 "Anaplastic carcinoma",
                 "Elderly, weeks of painful fixed growth",
-                "Years of quiet swelling"
+                "Continued indolent course without recent rapid growth or fixity"
               ],
               [
                 "Medullary carcinoma",
@@ -541,7 +541,7 @@
           "points": [
             "Thyroglossal cyst: midline, moves on swallowing AND on tongue protrusion; a fistula near the hyoid follows an infected cyst.",
             "Cervical nodes: multiple, do not move on swallowing unless fixed to the airway; tuberculous nodes carry weeks of history and characteristic skin changes.",
-            "Parathyroid and other neck lumps: separated on imaging; parathyroid disease presents with calcium disturbance, never as a neck swelling alone.",
+            "Parathyroid and other neck lumps: a parathyroid adenoma or carcinoma can present as a palpable neck lump mimicking a lower-pole thyroid nodule, separated on ultrasound or cross-sectional imaging and confirmed by serum calcium and parathyroid hormone.",
             "Retrosternal or aberrant thyroid tissue: suspected when no cervical gland explains the pressure signs, confirmed on scan."
           ]
         }
@@ -602,6 +602,10 @@
           "source": "StewardMD Clinical KB"
         },
         {
+          "locator": "multinodular_goitre: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
           "locator": "The thyroid gland: special investigations",
           "source": "Bailey and Love's Short Practice of Surgery"
         }
@@ -647,16 +651,16 @@
                 "Suspected medullary disease"
               ],
               [
-                "Neck X-ray",
-                "Trachea position, retrosternal shadow",
-                "Compression or impalpable lower border"
+                "CT or MRI without iodinated contrast",
+                "Retrosternal extension, airway compromise",
+                "Compressive symptoms or impalpable lower border"
               ]
             ]
           }
         },
         {
           "heading": "What not to order first",
-          "body": "Do not scan all enlarged glands: scanning helps the solitary nodule, the suspected retrosternal goitre and ectopic tissue, and little else. Ultrasound separates solid from cystic and finds impalpable nodules, but alone it cannot diagnose cancer.\n\nAvoid iodinated contrast studies where an autonomous nodule could be tipped into toxicity, and never delay referral for suspected cancer while waiting for a low-yield test. Antibodies and biopsy settle Hashimoto disease against carcinoma in doubtful asymmetrical glands."
+          "body": "Do not scan all enlarged glands: scanning helps the solitary nodule, the suspected retrosternal goitre and ectopic tissue, and little else. Ultrasound separates solid from cystic and finds impalpable nodules, but alone it cannot diagnose cancer.\n\nAvoid iodinated contrast studies where an autonomous nodule could be tipped into toxicity, and never delay referral for suspected cancer while waiting for a low-yield test. Plain neck radiography is outdated for assessing retrosternal extension; cross-sectional imaging without iodinated contrast and direct vocal cord assessment guide compressive or retrosternal disease."
         }
       ],
       "title": "Investigating the thyroid swelling",
@@ -681,7 +685,7 @@
           "q": "Why does a hot nodule usually escape needle sampling?"
         },
         {
-          "a": "Benign cytology means clinical and ultrasound surveillance; malignant or suspicious cytology means referral for diagnostic lobectomy or thyroidectomy through a multidisciplinary team; indeterminate cytology uses molecular testing or repeat sampling to decide.",
+          "a": "Benign cytology means clinical and ultrasound surveillance; malignant or suspicious cytology means referral for diagnostic lobectomy or thyroidectomy through a multidisciplinary team; indeterminate cytology uses repeat sampling or diagnostic lobectomy, with molecular testing where available to refine risk.",
           "accept": [
             "surveillance",
             "lobectomy",
@@ -715,7 +719,7 @@
         },
         {
           "heading": "Reading the cytology result",
-          "body": "Fine needle sampling reports in standardised categories that guide management. Benign means surveillance, not surgery. Malignant or suspicious means surgical referral, usually diagnostic lobectomy or thyroidectomy decided with the multidisciplinary team.\n\nIndeterminate results use molecular testing or repeat sampling to refine risk and avoid unnecessary operations. A non-diagnostic sample is never reassuring: repeat it rather than discharging the patient on its strength."
+          "body": "Fine needle sampling reports in standardised categories that guide management. Benign means surveillance, not surgery. Malignant or suspicious means surgical referral, usually diagnostic lobectomy or thyroidectomy decided with the multidisciplinary team.\n\nIndeterminate results warrant repeat ultrasound-guided sampling or diagnostic lobectomy; molecular testing refines risk where available, but in India is largely confined to specialised referral centres. A non-diagnostic sample is never reassuring: repeat it rather than discharging the patient on its strength."
         },
         {
           "heading": "Red flags that upgrade any diagnosis",
@@ -805,7 +809,7 @@
         },
         {
           "heading": "Malignant or suspicious: the cancer team operates",
-          "body": "Nodules with malignant or suspicious cytology are referred to a thyroid multidisciplinary team. Surgery is the mainstay: lobectomy for low risk contained tumours, total removal with compartment dissection for proven nodal disease in larger or higher risk cancer.\n\nAfter total removal, hormone replacement with suppression matched to recurrence risk, selective radioiodine ablation for intermediate and high risk disease, and long term surveillance with thyroglobulin and neck ultrasound complete the plan. Medullary disease adds calcitonin follow-up and family screening."
+          "body": "Nodules with malignant or suspicious cytology are referred to a thyroid multidisciplinary team. Surgery is the mainstay: lobectomy for low-risk contained tumours (unifocal, intrathyroidal, under 4 cm, no nodal spread), whereas total thyroidectomy with central compartment dissection is indicated for larger tumours, gross extrathyroidal extension, or proven nodal metastasis.\n\nAfter total removal, levothyroxine replacement with TSH suppression is tailored to recurrence risk. Radioactive iodine ablation is reserved for intermediate- or high-risk disease (extrathyroidal invasion, nodal or distant spread), while low-risk resected disease is spared ablation. Surveillance relies on neck ultrasound and serum thyroglobulin; medullary cancer adds calcitonin and family screening."
         },
         {
           "heading": "Compression and the Indian referral map",
@@ -1121,10 +1125,10 @@
           "result": "Both lobes enlarged with multiple nodules, largest on the right. No marked hypoechogenicity, no microcalcifications, no irregular margins. No suspicious cervical nodes."
         },
         "xray_neck": {
-          "indicated": true,
+          "indicated": false,
           "label": "Neck X-ray for trachea",
-          "note": "Ordered because the gland is large: a central trachea without narrowing supports safe surveillance.",
-          "result": "Trachea central, no deviation or narrowing. No retrosternal shadow."
+          "note": "Not indicated: plain neck radiography is outdated for assessing airway or retrosternal extension. Palpating below both lower poles and a central trachea already exclude retrosternal extension at the bedside; cross-sectional imaging without iodinated contrast is reserved for when the lower border cannot be reached or compression occurs.",
+          "result": "Not ordered."
         }
       },
       "managementModel": {
@@ -1154,7 +1158,7 @@
         "The tempo does the first half of the diagnosis: six years of painless slow growth with preserved movement on swallowing is the classic benign multinodular course.",
         "Endemic context matters: lifelong residence in a sub Himalayan village with affected relatives and non iodised loose salt explains a simple multinodular goitre far better than a tumour.",
         "Movement on swallowing marks the swelling as thyroid, while absent tongue-protrusion movement excludes a thyroglossal cyst without any test.",
-        "Fingers getting below the lower poles with a central trachea excludes retrosternal extension at the bedside, which is why the X-ray only confirmed rather than discovered it.",
+        "Fingers getting below both lower poles with a central trachea excludes retrosternal extension at the bedside, so routine imaging for retrosternal disease is unnecessary; plain neck radiography is outdated, and contrast-sparing CT or MRI is reserved for when the lower border cannot be reached or compression occurs.",
         "TSH first, then mapping, then sampling: normal function meant no scan and no antithyroid treatment, and benign cytology means surveillance with thresholds, not surgery.",
         "A solitary-feeling dominant nodule in a multinodular gland is common: about half of solitary presenters actually carry several nodules, so the whole gland is mapped, not just the lump."
       ],

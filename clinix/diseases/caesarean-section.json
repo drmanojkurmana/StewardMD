@@ -186,7 +186,7 @@
       {
         "id": "osce.caesarean.surgical_steps_complications",
         "title": "Demonstrate lower segment caesarean surgical steps, head delivery techniques, and angle haemostasis",
-        "prompt": "You are the primary obstetric surgeon performing an emergency lower segment caesarean section for a 26-year-old with cephalopelvic disproportion and failure of progress in the second stage. Describe your surgical entry, lower uterine segment incision, techniques to deliver a deeply impacted fetal head, uterotonic administration, and layered repair of the hysterotomy.",
+        "prompt": "You are the primary obstetric surgeon performing an emergency lower segment caesarean section for a 26-year-old with cephalopelvic disproportion and arrest of progress in the active first stage. Describe your surgical entry, lower uterine segment incision, techniques to deliver the fetal head (including management if deeply engaged or impacted), uterotonic administration, and layered repair of the hysterotomy.",
         "seconds": 480,
         "skills": [
           "skill.tx.caesarean",
@@ -196,8 +196,8 @@
         "criticalItems": [
           "Verifies that preoperative intravenous antibiotic prophylaxis (cefazolin 2 g IV) was given within 60 minutes before skin incision.",
           "Identifies and reflects the uterovesical fold of peritoneum and mobilises the bladder inferiorly using a Doyen retractor.",
-          "Demonstrates recognized manoeuvres for delivering a deeply impacted head, such as the Patwardhan technique or reverse breech extraction.",
-          "Administers intravenous oxytocin immediately following delivery of the infant and ensures complete placental removal before closing the uterine wound in two layers."
+          "Demonstrates recognized manoeuvres for delivering the fetal head, including management of an impacted head such as the Patwardhan technique or reverse breech extraction.",
+          "Administers slow intravenous oxytocin (5 IU) immediately following delivery of the infant and ensures complete placental removal before closing the uterine wound in two layers."
         ],
         "examinerQuestions": [
           {
@@ -347,7 +347,7 @@
       "teach": [
         {
           "heading": "Recognizing labour dystocia: arrest of dilatation and descent",
-          "body": "Labour dystocia (failure to progress) is the leading indication for primary caesarean section. In the active first stage (from 5 cm dilatation), delay is identified when cervical dilatation is slower than expected or crosses the action line on a partograph.\n\nSecondary arrest of dilatation is defined as no cervical change for 2 hours or more in active labour despite regular contractions. Arrest of descent is failure of the fetal head to advance during the second stage."
+          "body": "Labour dystocia (failure to progress) is the leading indication for primary caesarean section. In the active first stage (from 5 cm dilatation), delay is identified when cervical dilatation is slower than expected or crosses the action line on a partograph.\n\nActive phase arrest of dilatation is defined as no cervical change for 4 hours or more despite adequate contractions (or 6 hours with inadequate contractions and oxytocin augmentation) in a woman at or beyond 6 cm dilatation with ruptured membranes. Arrest of descent is failure of the fetal head to advance during the second stage."
         },
         {
           "heading": "Clinical signs of cephalopelvic disproportion",
@@ -390,9 +390,10 @@
         {
           "level": 2,
           "q": "What physical signs on vaginal and abdominal examination strongly indicate cephalopelvic disproportion in active labour?",
-          "a": "Key signs include an unengaged fetal head with 3/5 or more palpable abdominally, secondary arrest of cervical dilatation despite adequate contractions, progressive formation of a large caput succedaneum, grade 3 severe overlapping cranial moulding, and an oedematous anterior cervical lip.",
+          "a": "Key signs include an unengaged fetal head with 3/5 or more palpable abdominally, arrest of cervical dilatation despite adequate contractions, progressive formation of a large caput succedaneum, grade 3 severe overlapping cranial moulding, and an oedematous anterior cervical lip.",
           "accept": [
             "unengaged head",
+            "arrest of dilatation",
             "secondary arrest",
             "caput succedaneum",
             "moulding",
@@ -587,7 +588,7 @@
         {
           "level": 3,
           "q": "Why is oxytocin augmentation relatively contraindicated or used with extreme caution in a woman with a scarred uterus?",
-          "a": "Oxytocin hyperstimulation significantly increases intrauterine pressure and wall tension, elevating the risk of uterine scar rupture by three- to five-fold compared to spontaneous labour in a scarred uterus.",
+          "a": "Oxytocin hyperstimulation significantly increases intrauterine pressure and wall tension, substantially increasing the risk of uterine scar rupture compared to spontaneous labour in a scarred uterus.",
           "accept": [
             "hyperstimulation",
             "uterine rupture",
@@ -645,8 +646,8 @@
             "rows": [
               [
                 "Complete Blood Count",
-                "Hemoglobin >= 10.0 g/dL, Platelets >= 100000 /uL",
-                "Quantifies preexisting anemia; safe platelet count for spinal anaesthesia"
+                "Hemoglobin >= 10.0 g/dL, Platelets >= 75000 to 80000 /uL (reassuring if >= 100000 /uL)",
+                "Quantifies preexisting anaemia; 75000 to 80000 /uL is the accepted lower threshold for spinal anaesthesia without coagulopathy"
               ],
               [
                 "Blood Group & Crossmatch",
@@ -692,7 +693,7 @@
         {
           "level": 3,
           "q": "Why is ultrasound exclusion of placenta accreta spectrum vital before repeat caesarean section?",
-          "a": "An anterior low-lying placenta overlying a previous caesarean scar carries a high risk of placenta accreta spectrum, which can cause catastrophic peripartum hemorrhage requiring balloon tamponade, uterine artery embolization, or emergency caesarean hysterectomy.",
+          "a": "An anterior low-lying placenta overlying a previous caesarean scar carries a high risk of placenta accreta spectrum, which can cause catastrophic peripartum haemorrhage requiring balloon tamponade, surgical haemostatic measures, or emergency caesarean hysterectomy.",
           "accept": [
             "placenta accreta",
             "caesarean scar",
@@ -757,7 +758,7 @@
                 "Group 1",
                 "Nulliparous, single cephalic, >= 37 weeks",
                 "Spontaneous labour",
-                "Benchmark of obstetric practice; target CS rate 10 to 15 percent"
+                "Benchmark of low-risk intrapartum practice; key cohort for safe reduction of primary caesarean section"
               ],
               [
                 "Group 2",
@@ -769,7 +770,7 @@
                 "Group 3",
                 "Multiparous (no prior CS), single cephalic, >= 37 wk",
                 "Spontaneous labour",
-                "Largest cohort; baseline CS rate should remain under 3 percent"
+                "Largest obstetric cohort with spontaneous onset; reflects baseline intervention in unscarred multiparas"
               ],
               [
                 "Group 4",
@@ -793,36 +794,36 @@
               "Group",
               "Obstetric Category",
               "Onset of Labour",
-              "Expected CS Rate"
+              "Clinical Audit Significance"
             ],
             "rows": [
               [
                 "Group 6",
                 "All nulliparous breeches",
                 "Any onset (spontaneous, induced, or CS)",
-                "High CS rate (80 to 95 percent) post-Term Breech Trial"
+                "High CS rate post-Term Breech Trial, reflecting planned caesarean for breech"
               ],
               [
                 "Group 7",
                 "All multiparous breeches (including prior CS)",
                 "Any onset",
-                "High CS rate (70 to 90 percent), selective vaginal breech birth"
+                "High CS rate, reflecting selective vaginal breech protocols"
               ],
               [
                 "Group 8",
                 "All multiple pregnancies (including prior CS)",
                 "Any onset",
-                "Variable (50 to 75 percent), dictated by presentation of twin A"
+                "Variable CS rate, dictated by presentation of twin A and chorionicity"
               ],
               [
                 "Group 9",
                 "All abnormal lies (transverse, oblique)",
                 "Any onset",
-                "Near 100 percent (absolute mechanical indication for caesarean)"
+                "Near 100 percent (mechanical indication for operative delivery)"
               ],
               [
                 "Group 10",
-                "All single cephalic, <= 36 weeks (preterm)",
+                "All single cephalic, < 37 weeks (preterm)",
                 "Any onset",
                 "Reflects management of preterm FGR, abruption, and severe pre-eclampsia"
               ]
@@ -915,8 +916,8 @@
               ],
               [
                 "Category 2 (Urgent)",
-                "Dystocia, secondary arrest, pathological CTG without acute crash",
-                "Regional spinal anaesthesia (heavy bupivacaine 0.5 percent)",
+                "Dystocia, arrest of progress, pathological CTG without acute crash",
+                "Regional spinal anaesthesia",
                 "Delivery within 75 minutes"
               ],
               [
@@ -943,10 +944,10 @@
         {
           "level": 2,
           "q": "What anaesthetic technique is generally preferred for a Category 2 emergency caesarean section and why?",
-          "a": "Regional spinal anaesthesia using heavy bupivacaine 0.5 percent is preferred because it avoids the risks of difficult tracheal intubation and gastric acid aspiration associated with general anaesthesia, allows the mother to remain awake, and minimizes neonatal drug exposure.",
+          "a": "Regional spinal anaesthesia is preferred because it avoids the risks of difficult tracheal intubation and gastric acid aspiration associated with general anaesthesia, allows the mother to remain awake, and minimizes neonatal drug exposure.",
           "accept": [
             "spinal anaesthesia",
-            "bupivacaine",
+            "regional anaesthesia",
             "difficult intubation",
             "aspiration",
             "neonatal drug exposure"
@@ -956,7 +957,7 @@
         {
           "level": 3,
           "q": "What specific intrauterine resuscitation manoeuvres should be instituted while preparing for an emergency caesarean for fetal distress?",
-          "a": "Manoeuvres include positioning the mother in full left lateral tilt to relieve aortocaval compression, discontinuing any oxytocic infusions, administering an intravenous crystalloid fluid bolus, providing facial oxygen if maternal hypoxia is present, and administering acute tocolysis (such as subcutaneous terbutaline) if uterine tachysystole is present.",
+          "a": "Manoeuvres include positioning the mother in full left lateral tilt to relieve aortocaval compression, discontinuing any oxytocic infusions, administering an intravenous crystalloid fluid bolus, providing facial oxygen if maternal hypoxia is present, and administering acute tocolysis if uterine tachysystole is present.",
           "accept": [
             "left lateral tilt",
             "stop oxytocin",
@@ -1019,7 +1020,7 @@
         },
         {
           "heading": "Uterotonics, placental delivery, and two-layer hysterotomy closure",
-          "body": "Immediately after delivery of the baby, double-clamp and cut the cord, and hand the infant to the neonatal team. Administer slow intravenous oxytocin (Syntocinon 10 IU IV) to achieve vigorous uterine contraction.\n\nDeliver the placenta completely by controlled cord traction. Grasp the uterine incision edges and lateral angles with Green-Armytage or Allis clamps.\n\nClose the lower segment hysterotomy in two layers using synthetic absorbable suture (Vicryl 1)."
+          "body": "Immediately after delivery of the baby, double-clamp and cut the cord, and hand the infant to the neonatal team. Administer slow intravenous oxytocin (5 IU) to achieve vigorous uterine contraction.\n\nDeliver the placenta completely by controlled cord traction. Grasp the uterine incision edges and lateral angles with Green-Armytage or Allis clamps.\n\nClose the lower segment hysterotomy in two layers using synthetic absorbable suture (Vicryl 1)."
         },
         {
           "heading": "Haemostasis, abdominal wall closure, and enhanced postoperative recovery",
@@ -1043,7 +1044,7 @@
         {
           "level": 3,
           "q": "How is a deeply engaged, impacted fetal head managed during emergency caesarean section in second stage obstructed labour?",
-          "a": "Techniques include the push technique (an unsterile assistant pushes the head upward from the vagina), the reverse breech extraction or pull technique (delivering the feet first through the hysterotomy), and the Patwardhan technique (delivering the shoulders and body before the head).",
+          "a": "Techniques include the push technique (a sterile-gloved assistant pushes the head upward from the vagina), the reverse breech extraction or pull technique (delivering the feet first through the hysterotomy), and the Patwardhan technique (delivering the shoulders and body before the head).",
           "accept": [
             "push technique",
             "pull technique",
@@ -1072,6 +1073,10 @@
         {
           "source": "StewardMD Clinical KB",
           "locator": "operative_obstetrics_forceps_vacuum_caesarean: Section layers Misgav and technique"
+        },
+        {
+          "source": "NICE",
+          "locator": "NG192: Caesarean birth (prophylactic antibiotics and slow IV oxytocin)"
         },
         {
           "source": "Williams Obstetrics",
@@ -1313,7 +1318,7 @@
           "abnormal": true
         },
         "skill.exam.obg.fetal_diameters_station": {
-          "finding": "Head is in occipitotransverse position with parietal bone presenting; station is minus 1 (1 cm above ischial spines); significant caput succedaneum present (+2) with moderate moulding (+2) where parietal bones touch without overlapping.",
+          "finding": "Head is in occipitotransverse position with parietal bone presenting; station is minus 1 (1 cm above ischial spines); significant caput succedaneum present (+2) with moderate moulding (+2) where parietal bones overlap along the sagittal suture but remain digitally reducible.",
           "abnormal": true
         },
         "skill.exam.obg.pelvimetry": {
@@ -1411,7 +1416,7 @@
           "impending uterine rupture",
           "fetal distress"
         ],
-        "answer": "Cephalopelvic disproportion with failure to progress in active labour and impending uterine scar dehiscence in a gravid woman with one previous lower segment caesarean section, requiring emergency Category 1 or 2 caesarean section.",
+        "answer": "Cephalopelvic disproportion with failure to progress in active labour and impending uterine scar dehiscence in a gravid woman with one previous lower segment caesarean section, requiring emergency Category 2 caesarean section.",
         "minMatch": 1
       },
       "managementModel": {
@@ -1436,10 +1441,10 @@
       },
       "teachingPoints": [
         "Trial of labour after caesarean (TOLAC) carries a 70 to 75 percent success rate in carefully selected women with one prior lower segment transverse incision, but requires continuous electronic fetal monitoring and immediate operative capability.",
-        "Secondary arrest of cervical dilatation (cessation of dilatation for 2 or more hours in active labour) combined with high unengaged head, excessive caput, and severe moulding indicates cephalopelvic disproportion, mandating caesarean delivery rather than oxytocin augmentation.",
+        "Active phase arrest of cervical dilatation (cessation of progress despite adequate contractions and ruptured membranes at or beyond 6 cm) combined with a high unengaged head, excessive caput, and severe moulding indicates cephalopelvic disproportion, mandating caesarean delivery rather than oxytocin augmentation.",
         "Constant scar pain and localized tenderness between contractions in a scarred uterus is a cardinal red flag for impending uterine scar dehiscence or rupture. Oxytocics must be stopped immediately and urgent laparotomy performed.",
         "The Lucas classification defines four urgency categories: Category 1 (crash delivery <= 30 minutes for acute life threat), Category 2 (urgent delivery <= 75 minutes for maternal/fetal compromise), Category 3 (scheduled during working hours), and Category 4 (elective at or after 39 weeks).",
-        "Surgical antibiotic prophylaxis with intravenous cefazolin (2 g IV) should be administered within 60 minutes prior to skin incision, and slow intravenous oxytocin (10 IU IV) administered immediately following cord clamping to promote vigorous myometrial haemostasis."
+        "Surgical antibiotic prophylaxis with intravenous cefazolin (2 g IV) should be administered within 60 minutes prior to skin incision, and slow intravenous oxytocin (5 IU) administered immediately following delivery of the infant to promote vigorous myometrial contraction."
       ],
       "review": {
         "status": "ai_drafted"

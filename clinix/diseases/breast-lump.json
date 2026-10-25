@@ -116,7 +116,7 @@
           "expect": "Press each segment in turn and note single versus multiple ducts. A bloody single duct discharge earns a search for papilloma or carcinoma beside the areola; no discharge is the common and unhelpful normal."
         },
         "skill.exam.surg.axillary_nodes": {
-          "expect": "Hard discrete enlarging nodes change the stage and halve the prognosis, so feel every axillary group plus both supraclavicular fossae. Nodes that are merely tender and soft belong to infection, not to cancer."
+          "expect": "Hard discrete enlarging nodes change the stage and worsen the prognosis significantly, so feel every axillary group plus both supraclavicular fossae. Nodes that are merely tender and soft belong to infection, not to cancer."
         }
       }
     },
@@ -367,7 +367,7 @@
           "heading": "Breast mouse versus the gripped mass"
         },
         {
-          "body": "The skin tells the stage. Dimpling and puckering come first, then recent retraction of the nipple toward the lump, then the orange peel pitting of blocked lymph channels, and late fungation through invaded skin. A lump behind the nipple fixes it whether benign or malignant, so test retraction by gentle pressure from both sides.\n\nExamine the axilla and both supraclavicular fossae in every case. Hard, discrete, enlarging nodes change the stage and the prognosis, and their absence never excludes cancer. Always image and sample the opposite breast as well.",
+          "body": "The skin tells the stage. Dimpling and puckering come first, then recent retraction of the nipple toward the lump, then the orange peel pitting of blocked lymph channels, and late fungation through invaded skin. Recent retraction of the nipple toward a lump indicates malignant infiltration of the lactiferous ducts; test eversion and mobility by gentle lateral pressure.\n\nExamine the axilla and both supraclavicular fossae in every case. Hard, discrete, enlarging nodes change the stage and worsen the prognosis, and their absence never excludes cancer. Always examine and image both breasts because unsuspected contralateral disease occurs in a small share of women, reserving tissue sampling for any suspicious lesion identified.",
           "heading": "Skin, nipple and nodes complete the picture"
         }
       ],
@@ -487,7 +487,7 @@
           "q": "How do you choose between ultrasound and mammography, and what is the limit of a normal mammogram?"
         },
         {
-          "a": "Chest radiograph for lung deposits, skeletal survey or bone scan for bony pain or advanced disease, liver assessment where spread is suspected, with raised alkaline phosphatase as a crude marker. Bone deposits upstage the patient to stage four.",
+          "a": "Radionuclide bone scan for skeletal deposits, contrast CT of chest, abdomen and pelvis, and liver function assessment with alkaline phosphatase. Bone deposits upstage the patient to stage four.",
           "accept": [
             "chest",
             "bone scan",
@@ -524,7 +524,7 @@
           "heading": "Sound in the young, X-ray with age, tissue always"
         },
         {
-          "body": "Core needle biopsy is the workhorse. It gives grade and type plus the receptor profile that drives all later treatment: oestrogen and progesterone receptors, HER2, and proliferation rate. Fine needle sampling is faster but gives cells without architecture, so core biopsy settles the equivocal cases.\n\nOnce cancer is proven, look for spread before planning surgery. Examine liver and bones, image the chest, scan painful or high risk skeletons, and check liver enzymes as a crude flag. Finding distant deposits moves the patient straight to stage four and changes the whole plan from cure to control.",
+          "body": "Core needle biopsy is the workhorse. It gives grade and type plus the receptor profile that drives all later treatment: oestrogen and progesterone receptors, HER2, and proliferation rate. Fine needle sampling is faster but gives cells without architecture, so core biopsy settles the equivocal cases.\n\nOnce cancer is proven, stage selectively rather than by routine. In early operable disease without symptoms, routine chest radiography and bone scans are omitted to avoid unnecessary radiation and cost. Staging imaging is reserved for locally advanced disease, high nodal burden, or symptoms such as bone pain.\n\nWhen indicated, contrast CT of chest, abdomen and pelvis alongside bone scintigraphy maps metastatic spread. Finding distant deposits moves the patient straight to stage four and changes the whole plan from cure to control.",
           "heading": "Core biopsy profiles the tumour, staging maps the war"
         }
       ],
@@ -593,11 +593,11 @@
       "system": "surgery",
       "teach": [
         {
-          "body": "A complete breast diagnosis has four clauses. Name the disease and its type, describe the lump and the nodes as examined, state the clinical stage, and append the receptor profile. Anything shorter leaves the treating team guessing.\n\nFor example: a forty six year old woman with a stony hard lump in the upper outer quadrant, tethered skin, recent nipple retraction and a mobile axillary node has carcinoma of the breast with nodal disease, locally advanced, awaiting core biopsy for grade and receptors. Every clause earns its place.",
+          "body": "A complete breast diagnosis has four clauses. Name the disease and its type, describe the lump and the nodes as examined, state the clinical stage, and append the receptor profile. Anything shorter leaves the treating team guessing.\n\nFor example: a forty six year old woman with a stony hard lump in the upper outer quadrant, tethered skin, recent nipple retraction and a mobile axillary node has carcinoma of the breast with nodal disease, operable stage IIB (T2N1M0), awaiting core biopsy for grade and receptors. Every clause earns its place.",
           "heading": "Four clauses, no shortcuts"
         },
         {
-          "body": "Staging runs on tumour, nodes and spread. Tumour covers size and local invasion into skin, muscle and chest wall. Nodes run from impalpable, through mobile axillary, to fixed axillary and supraclavicular disease. Spread means distant deposits in bone, lung, liver or the opposite breast.\n\nThe groups follow. Disease confined to the breast is early, nodal or locally fixed disease is intermediate, and any distant deposit is stage four whatever the lump looks like. Nodal examination therefore stages the patient at the bedside, which is why it is never skipped.",
+          "body": "Staging runs on tumour, nodes and spread. Tumour covers size and local invasion into skin, muscle and chest wall. Nodes run from impalpable, through mobile axillary, to fixed axillary and supraclavicular disease. Spread means distant deposits in bone, lung, liver or brain.\n\nThe groups follow. Disease up to five centimetres with mobile nodes represents early operable cancer (stage I and II), chest wall fixity, skin ulceration or matted nodes represent locally advanced disease (stage III), and any distant deposit is stage four whatever the lump looks like. Nodal examination therefore stages the patient at the bedside, which is why it is never skipped.",
           "heading": "Tumour, nodes and spread make the stage"
         },
         {
@@ -696,7 +696,7 @@
           "Invasive ductal carcinoma",
           "Scirrhous carcinoma"
         ],
-        "answer": "Carcinoma of the right breast, upper outer quadrant, with mobile axillary nodal disease: locally advanced invasive ductal carcinoma on core biopsy.",
+        "answer": "Carcinoma of the right breast, upper outer quadrant, with mobile axillary nodal disease: operable stage IIB (T2N1M0) invasive ductal carcinoma on core biopsy.",
         "minMatch": 1
       },
       "differentialModel": {
@@ -935,10 +935,10 @@
       },
       "investigations": {
         "bone_scan": {
-          "indicated": true,
+          "indicated": false,
           "label": "Whole body bone scan",
-          "note": "Ordered for staging given nodal disease; a clear scan keeps curative surgery on the table.",
-          "result": "No abnormal tracer uptake in the axial or appendicular skeleton. No skeletal metastasis."
+          "note": "Not indicated in asymptomatic early operable cancer: radionuclide bone scintigraphy is reserved for locally advanced disease (stage III), high nodal burden, or symptoms of skeletal metastasis.",
+          "result": "Not ordered."
         },
         "breast_usg": {
           "indicated": true,
@@ -953,10 +953,10 @@
           "result": "Haemoglobin 12.1 g per dL, counts normal. Bilirubin, transaminases and alkaline phosphatase within normal limits. Creatinine normal."
         },
         "chest_xray": {
-          "indicated": true,
+          "indicated": false,
           "label": "Chest radiograph",
-          "note": "The simplest routine screen for lung deposits in every early breast cancer.",
-          "result": "Clear lung fields. No nodules, no effusion, no bony abnormality."
+          "note": "Not indicated as routine staging in asymptomatic early operable cancer: systemic imaging is risk-adapted and reserved for locally advanced disease or symptoms.",
+          "result": "Not ordered."
         },
         "core_biopsy": {
           "indicated": true,
@@ -983,7 +983,7 @@
           "endocrine treatment",
           "referral to the cancer team"
         ],
-        "answer": "Complete triple assessment, stage with chest imaging and bone scan, discuss breast conservation with radiotherapy versus mastectomy at the cancer team, stage the axilla by sentinel sampling, and start receptor matched endocrine treatment with chemotherapy as indicated.",
+        "answer": "Complete triple assessment, discuss breast conservation with radiotherapy versus mastectomy with the cancer multidisciplinary team, stage the axilla surgically, and start receptor matched endocrine treatment with chemotherapy as indicated; routine bone scan and chest imaging are omitted in asymptomatic operable disease.",
         "minMatch": 3
       },
       "opening": "Sunita Patil, 46, sits in the surgical outpatient room with her son waiting outside. She keeps her gaze lowered and her hand over the right side of her blouse. Introduce yourself and take a history.",

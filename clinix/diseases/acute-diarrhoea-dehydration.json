@@ -66,7 +66,7 @@
           "expect": "Ask what milk, how mixed and how often, and whether anything was stopped because of this illness. Over diluted top milk is a remediable cause, and continued feeding during diarrhoea is part of the treatment, not a separate topic."
         },
         "skill.hx.paed.immunisation": {
-          "expect": "Record rotavirus immunisation and the rest of the schedule. An incomplete schedule belongs in the discharge plan, not as an afterthought."
+          "expect": "Record rotavirus immunisation and the rest of the schedule: note that rotavirus is restricted to early infancy before 32 weeks, while other overdue vaccines are caught up at discharge."
         }
       }
     },
@@ -103,7 +103,7 @@
           "expect": "Expect a fast pulse and fast breathing with some dehydration, with blood pressure maintained until late. A feeble rapid pulse with cold clammy limbs and unrecordable pressure means shock, not some dehydration, and changes the plan to intravenous fluids at once."
         },
         "skill.gen.paed.hydration": {
-          "expect": "Grade by counting signs, not by impression: sunken eyes, absent tears, dry tongue, eager thirst or inability to drink, and a slow skin pinch. Two or more signs in a column put the child in that column."
+          "expect": "Grade by counting signs, not by impression: sunken eyes, reduced or absent tears, dry tongue, eager thirst or inability to drink, and a slow skin pinch. Two or more signs in a column put the child in that column."
         },
         "skill.exam.paed.weight": {
           "expect": "Weigh now and compare with a recent weight where one exists: loss under 5 percent fits no dehydration, 5 to 10 percent fits some, above 10 percent fits severe. Without a prior weight, grade by signs, not by guess."
@@ -922,13 +922,13 @@
         },
         {
           "heading": "Antibiotics: narrow rules",
-          "body": "No routine antibiotics for watery diarrhoea. Reserve empirical cover, such as azithromycin, for febrile inflammatory or dysenteric illness and for traveller type diarrhoea where cover is indicated.\n\nSuspected Shiga toxin producers get no antibiotics and no antimotility drugs because of haemolytic uraemic syndrome risk. Nosocomial or antibiotic associated diarrhoea is treated for C. difficile with withdrawal of the precipitating drug, and antimotility agents have no place in young children with dysentery."
+          "body": "No routine antibiotics for watery diarrhoea. Reserve empirical cover, such as azithromycin, for febrile inflammatory or dysenteric illness and for traveller type diarrhoea where cover is indicated.\n\nSuspected Shiga toxin producers get no antibiotics and no antimotility drugs because of haemolytic uraemic syndrome risk. Nosocomial or antibiotic-associated diarrhoea from Clostridioides difficile is treated by stopping the precipitating antibiotic and giving oral metronidazole or vancomycin, and antimotility agents have no place in young children with dysentery."
         },
         {
           "heading": "Prevention before discharge",
           "points": [
             "Safe water, boiling, storage, handwashing and toilet use fixed at home.",
-            "Rotavirus immunisation completed with the rest of the schedule.",
+            "Rotavirus immunisation completed in early infancy before 32 weeks, and remaining age-appropriate vaccines caught up with the schedule.",
             "Red flags explained: blood in stool, persistent vomiting, no urine for hours, lethargy, inability to drink.",
             "Follow up arranged, with weight and feeding reviewed."
           ]
@@ -1168,7 +1168,7 @@
             "any admission for diarrhoea before this",
             "how was the child growing before this illness"
           ],
-          "reply": "Once at one year of age, managed at home. He was growing steadily, weight 10 kg last month.",
+          "reply": "Once at one year of age, managed at home. He was growing steadily, weight 10 kg last week.",
           "key": true
         },
         "medicines_given": {
@@ -1198,7 +1198,7 @@
       },
       "exam": {
         "skill.gen.paed.appearance": {
-          "finding": "Restless and irritable, crying without tears. Alert, moves all limbs, not floppy.",
+          "finding": "Restless and irritable, crying with reduced tears. Alert, moves all limbs, not floppy.",
           "abnormal": true
         },
         "skill.gen.paed.vitals": {
@@ -1206,11 +1206,11 @@
           "abnormal": true
         },
         "skill.gen.paed.hydration": {
-          "finding": "Eyes sunken, tears absent on crying, tongue dry, drinks eagerly from the cup, abdominal skin pinch returns slowly in about two seconds.",
+          "finding": "Eyes sunken, tears reduced on crying, tongue dry, drinks eagerly from the cup, abdominal skin pinch returns slowly in about two seconds.",
           "abnormal": true
         },
         "skill.exam.paed.weight": {
-          "finding": "Weight 9.2 kg, down from 10 kg last month. Length normal for age.",
+          "finding": "Weight 9.2 kg, down from 10 kg last week. Length normal for age.",
           "abnormal": true
         },
         "skill.exam.paed.muac": {
@@ -1311,10 +1311,10 @@
       },
       "teachingPoints": [
         "Frequency and urine told the story before any test: six watery stools with falling urine is some dehydration until counted otherwise.",
-        "Four counted signs earned the grade: restless, sunken eyes without tears, dry tongue with eager drinking, and a slow pinch.",
+        "Four counted signs earned the grade: restless, sunken eyes with reduced tears, dry tongue with eager drinking, and a slow pinch.",
         "Blood never appeared, so culture and antibiotics stayed off the table: watery diarrhoea without an inflammatory pattern needs neither.",
         "Weight loss from 10 to 9.2 kg fits the 5 to 10 percent band for some dehydration.",
-        "Diluted cow milk and missed rotavirus drops were the remediable causes addressed at discharge.",
+        "Diluted cow milk was remediated with feeding advice; missed rotavirus drops cannot be given at 18 months because the series closes by 32 weeks, so catch up remaining age-appropriate vaccines instead.",
         "Zinc 20 mg for 14 days with continued feeds treats beyond the fluids.",
         "Reassessment at four hours with red flags closes the loop: blood, no urine, lethargy or inability to drink bring him back."
       ],

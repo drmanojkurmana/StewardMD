@@ -72,7 +72,7 @@
       ],
       "emphasis": {
         "skill.hx.hyperemesi.risk": {
-          "expect": "Ask about hyperemesis in previous pregnancies (up to 80 percent recurrence), family history in mother or sisters, multiple pregnancy, molar pregnancy, and stop oral iron supplements immediately."
+          "expect": "Ask about hyperemesis in previous pregnancies (recurrence is common, with severe hyperemesis recurring in about 1 in 5 later pregnancies), family history in mother or sisters, multiple pregnancy, molar pregnancy, and stop oral iron supplements immediately."
         }
       }
     },
@@ -205,7 +205,7 @@
           "How do you distinguish hyperemesis gravidarum from common physiological morning sickness?",
           "Explain how the PUQE score categorises severity and guides your decision for hospital admission.",
           "What is your stepwise antiemetic escalation protocol if first-line antihistamines fail to control symptoms?",
-          "What counselling will you provide regarding recurrence risk in future pregnancies?"
+          "What counselling will you provide regarding the risk of recurrence in a future pregnancy, given that recurrence is common and severe hyperemesis recurs in about 1 in 5?"
         ]
       }
     ]
@@ -375,9 +375,9 @@
                 "Haematemesis and epigastric pain"
               ],
               [
-                "Central pontine myelinolysis",
-                "Overly rapid hyponatraemia correction",
-                "Dysarthria, spastic quadriparesis"
+                "Prerenal acute kidney injury",
+                "Prolonged volume depletion reducing renal perfusion",
+                "Oliguria with raised urea and creatinine"
               ],
               [
                 "Venous thromboembolism",
@@ -688,7 +688,7 @@
               [
                 "Overt thyrotoxicosis",
                 "Goitre, ophthalmopathy, tremor",
-                "Elevated TPO or TSH receptor antibodies"
+                "Positive TSH receptor (TRAb) antibodies favour Graves disease"
               ]
             ]
           }
@@ -749,6 +749,10 @@
         {
           "source": "StewardMD Clinical KB",
           "locator": "hyperemesis_gravidarum: additionalDifferentials"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "gestational_thyroid: clinicalPearls"
         },
         {
           "source": "Williams Obstetrics",
@@ -857,7 +861,7 @@
       "teach": [
         {
           "heading": "Formal Diagnostic Criteria and Exclusionary Seam",
-          "body": "Hyperemesis gravidarum remains a clinical diagnosis reached after methodically excluding other causes of vomiting. The formal criteria require symptoms starting in early pregnancy, intractable vomiting, and inability to maintain oral hydration.\n\nObjective confirmation rests on documented weight loss exceeding five percent of measured pre-pregnancy weight, ketonuria of at least 2+, and associated electrolyte abnormalities, without fever or localized peritoneal signs."
+          "body": "Hyperemesis gravidarum remains a clinical diagnosis reached after methodically excluding other causes of vomiting. The formal criteria require symptoms starting in early pregnancy, intractable vomiting, and inability to maintain oral hydration.\n\nObjective confirmation rests on documented weight loss exceeding five percent of measured pre-pregnancy weight, ketonuria with starvation (typically 2+ or more in severe disease), and associated electrolyte abnormalities, without fever or localized peritoneal signs.\n\nMild and moderate grades in the table below describe the broader nausea and vomiting spectrum that does not meet these full criteria; only the severe grade corresponds to hyperemesis gravidarum."
         },
         {
           "heading": "Stratification of Severity and Site-of-Care",
@@ -971,11 +975,11 @@
       "teach": [
         {
           "heading": "Intravenous Fluid Rehydration and Electrolyte Replacement",
-          "body": "Initial resuscitation requires isotonic crystalloids. Normal saline (0.9 percent sodium chloride) or Hartmann solution is the fluid of choice, restoring extracellular volume and correcting hypochloraemia.\n\nPotassium chloride supplementation must be added to maintenance fluids once urine output is verified, correcting hypokalaemic metabolic alkalosis. Avoid glucose-containing fluids initially because infusing dextrose without thiamine precipitates acute Wernicke encephalopathy."
+          "body": "Initial resuscitation requires isotonic crystalloids. Normal saline (0.9 percent sodium chloride) or Hartmann solution is the fluid of choice, restoring extracellular volume and correcting hypochloraemia.\n\nPotassium chloride is added to maintenance fluids only once urine output is verified, at the concentration and rate in the local protocol under senior supervision, with continuous ECG monitoring and serial potassium checks.\n\n\n\nAvoid glucose-containing fluids initially because infusing dextrose without thiamine precipitates acute Wernicke encephalopathy."
         },
         {
           "heading": "Mandatory Thiamine Repletion and Neurological Safety",
-          "body": "Thiamine (vitamin B1) stores are rapidly depleted by prolonged starvation and persistent emesis. Administer parenteral thiamine (100 mg daily or high-dose B-complex) to every admitted patient before or alongside intravenous fluids.\n\nDextrose administration accelerates carbohydrate oxidation, rapidly consuming remaining thiamine pyrophosphate cofactors. Co-administer pyridoxine and ensure serum magnesium is corrected, as hypomagnesaemia prevents thiamine utilisation."
+          "body": "Thiamine (vitamin B1) stores are rapidly depleted by prolonged starvation and persistent emesis. Administer parenteral thiamine at the prophylactic dose in the local protocol to every admitted patient before or alongside intravenous fluids. If nystagmus, ataxia, or confusion suggests Wernicke encephalopathy, escalate urgently to the high-dose intravenous thiamine regimen under senior supervision.\n\nDextrose administration accelerates carbohydrate oxidation, rapidly consuming remaining thiamine pyrophosphate cofactors. Co-administer pyridoxine and ensure serum magnesium is corrected, as hypomagnesaemia prevents thiamine utilisation."
         },
         {
           "heading": "Stepwise Antiemetic Pharmacotherapy",
@@ -988,7 +992,7 @@
             "rows": [
               [
                 "First-line agents",
-                "H1 antihistamines (cyclizine, promethazine, doxylamine)",
+                "H1 antihistamines (doxylamine with pyridoxine, promethazine)",
                 "Mild to moderate emesis; safe throughout early pregnancy"
               ],
               [
@@ -1011,7 +1015,7 @@
         },
         {
           "heading": "Thromboprophylaxis, Nutrition, and Discharge Criteria",
-          "body": "Severe dehydration combined with pregnancy hypercoagulability dramatically escalates venous thromboembolism risk. Provide graduated compression stockings and prophylactic low molecular weight heparin during inpatient hospitalisation.\n\nDiscontinue oral iron supplements until vomiting completely resolves. Discharge requires tolerance of oral fluids, cleared ketonuria, and stable electrolytes. Counsel on the seventy to eighty percent recurrence risk in future gestations."
+          "body": "Severe dehydration combined with pregnancy hypercoagulability dramatically escalates venous thromboembolism risk. Provide graduated compression stockings and prophylactic low molecular weight heparin during inpatient hospitalisation.\n\nDiscontinue oral iron supplements until vomiting completely resolves. Discharge requires tolerance of oral fluids, cleared ketonuria, and stable electrolytes. Counsel that recurrence is common and that severe hyperemesis recurs in about 1 in 5 future gestations, so early review is advised in the next pregnancy."
         }
       ],
       "probes": [
@@ -1041,12 +1045,12 @@
         {
           "level": 3,
           "q": "Which antiemetic drug class is recommended as first-line therapy for nausea and vomiting of pregnancy?",
-          "a": "H1 antihistamines such as cyclizine, promethazine, or doxylamine with pyridoxine.",
+          "a": "H1 antihistamines such as doxylamine with pyridoxine or promethazine.",
           "accept": [
             "antihistamines",
-            "cyclizine",
             "promethazine",
-            "doxylamine"
+            "doxylamine",
+            "pyridoxine"
           ],
           "minMatch": 2
         }
@@ -1054,7 +1058,7 @@
       "rubric": [
         {
           "id": "execute_fluid_resuscitation",
-          "text": "Selects isotonic saline or Hartmann solution and supplements potassium after confirming urine flow"
+          "text": "Selects isotonic saline or Hartmann solution and supplements potassium per local protocol under senior supervision with ECG monitoring after confirming urine flow"
         },
         {
           "id": "enforce_thiamine_safety",
@@ -1346,7 +1350,7 @@
         "serum_electrolytes": {
           "label": "Serum electrolytes",
           "result": "Sodium 131 mmol/L (mild hyponatraemia), potassium 3.1 mmol/L (hypokalaemia), chloride 92 mmol/L (hypochloraemia), bicarbonate 30 mmol/L (metabolic alkalosis).",
-          "note": "Loss of hydrochloric acid from gastric emesis produces hypochloraemic hypokalaemic metabolic alkalosis requiring urgent potassium-supplemented saline rehydration."
+          "note": "Loss of hydrochloric acid from gastric emesis produces hypochloraemic hypokalaemic metabolic alkalosis requiring potassium-supplemented saline rehydration per the local protocol once urine output is verified, with ECG monitoring and serial potassium checks under senior supervision."
         },
         "renal_function": {
           "label": "Renal function tests",
@@ -1401,24 +1405,28 @@
         "minMatch": 2
       },
       "diagnosis": {
-        "answer": "Hyperemesis gravidarum in a 9-week primigravida, complicated by severe dehydration, starvation ketosis, hypokalaemia, and prerenal azotaemia.",
+        "answer": "Hyperemesis gravidarum in a 9-week primigravida, complicated by severe dehydration, starvation ketosis, hypokalaemia, and prerenal azotaemia, with tiny brown specks in vomitus suggesting minor mucosal bleeding (?Mallory-Weiss tear) for evaluation.",
         "accept": [
           "Hyperemesis gravidarum",
-          "hyperemesis gravidarum"
+          "hyperemesis gravidarum",
+          "Mallory-Weiss",
+          "haematemesis"
         ],
         "minMatch": 1
       },
       "managementModel": {
-        "answer": "Hospital admission, intravenous rehydration with normal saline or Hartmann solution, potassium chloride replacement, parenteral thiamine 100 mg before any dextrose infusion to prevent Wernicke encephalopathy, stepwise antiemetic therapy with promethazine or metoclopramide, thromboprophylaxis with low molecular weight heparin, withholding oral iron tablets, serial monitoring of fluid balance, weight, urinary ketones and electrolytes, and gradual reintroduction of light oral sips once vomiting subsides.",
+        "answer": "Hospital admission, intravenous rehydration with normal saline or Hartmann solution, potassium chloride replacement per the local protocol with ECG monitoring once urine output is verified, parenteral thiamine before any dextrose infusion to prevent Wernicke encephalopathy with urgent escalation to the high-dose regimen if neurological signs appear, stepwise antiemetic therapy with promethazine or metoclopramide, assessment of the brown specks as possible minor haematemesis from retching with senior review and escalation for fresh blood, melaena, or instability, thromboprophylaxis with low molecular weight heparin, withholding oral iron tablets, serial monitoring of fluid balance, weight, urinary ketones and electrolytes, and gradual reintroduction of light oral sips once vomiting subsides.",
         "accept": [
           "rehydration",
           "saline",
           "potassium",
+          "ECG",
           "thiamine",
           "dextrose",
           "antiemetic",
           "promethazine",
           "metoclopramide",
+          "haematemesis",
           "thromboprophylaxis",
           "ketones",
           "electrolytes"
@@ -1428,7 +1436,7 @@
       "teachingPoints": [
         "Hyperemesis gravidarum is a clinical diagnosis of exclusion defined by severe intractable early pregnancy nausea and vomiting leading to dehydration, electrolyte disturbance, ketonuria, and weight loss greater than 5 percent of pre-pregnancy weight.",
         "Parenteral thiamine must ALWAYS be administered before or concurrently with any glucose or dextrose infusion to prevent precipitating acute Wernicke encephalopathy.",
-        "The primary rehydration fluid is normal saline (0.9 percent sodium chloride) or Hartmann solution supplemented with potassium chloride once urine output is verified, correcting the hypochloraemic hypokalaemic metabolic alkalosis.",
+        "The primary rehydration fluid is normal saline (0.9 percent sodium chloride) or Hartmann solution, with potassium chloride added only once urine output is verified, at the concentration and rate in the local protocol under senior supervision with ECG monitoring, correcting the hypochloraemic hypokalaemic metabolic alkalosis.",
         "Pelvic ultrasound is mandatory in every patient with suspected hyperemesis to confirm viability and actively exclude multiple pregnancy and gestational trophoblastic disease (molar pregnancy).",
         "Antiemetic pharmacotherapy follows a stepwise escalation from first-line antihistamines or phenothiazines to dopamine antagonists (metoclopramide) or ondansetron, reserving corticosteroids for severe refractory cases after 10 weeks gestation.",
         "Transient gestational thyrotoxicosis with suppressed TSH and elevated free T4 is driven by hCG cross-reactivity at the TSH receptor, resolves spontaneously by 18 to 20 weeks, and does not require antithyroid medications.",

@@ -207,7 +207,7 @@
         ],
         "examinerQuestions": [
           "Are these contractions true labour? Defend your answer from what you found.",
-          "Her membranes are ruptured. Why will you not do a digital vaginal examination?",
+          "If her membranes were ruptured, why would you not do a digital vaginal examination?",
           "Name the three clock-driven treatments this mother needs before delivery, and what each buys."
         ]
       },
@@ -473,12 +473,12 @@
       "system": "obstetrics",
       "title": "Confirming early labour and finding infection",
       "oneLine": "Cervix, membranes, contractions, infection and the fetus: each test answers one question",
-      "why": "No single test diagnoses early labour, and treatment cannot wait for the full set. Cervical length and fibronectin sort threatened from established disease, the speculum settles membranes without seeding infection, and the infection screen protects the tocolysis decision from its one absolute contraindication.",
+      "why": "No single test diagnoses early labour, and treatment cannot wait for the full set. With intact membranes, cervical length and fibronectin sort threatened from established disease, while the speculum settles membranes without seeding infection, and the infection screen protects the tocolysis decision from its one absolute contraindication.",
       "body": "Order tests to answer five questions in order: is the cervix short, are membranes ruptured, are contractions with fetal compromise, is there infection, and how is the fetus growing.",
       "keyPoints": [
-        "Transvaginal cervical length sorts risk: a short cervix with regular contractions supports the diagnosis and the transfer decision, while a long cervix with irregular pains argues for observation. A length under 25 mm in the mid trimester is the commonly used short threshold.",
-        "Fetal fibronectin from cervicovaginal secretions predicts imminent birth: a negative test in threatened labour strongly argues against delivery within days and supports discharge with review, while a positive test supports steroids and transfer.",
-        "Cardiotocography with tocography records contraction frequency and duration alongside fetal heart behaviour. Three or more contractions in ten minutes with cervical change is labour; the trace also catches the non-reassuring fetus that needs delivery, not tocolysis.",
+        "Transvaginal cervical length sorts risk only while membranes are intact: a short cervix with regular contractions supports the diagnosis and the transfer decision, while a long cervix with irregular pains argues for observation. A length under 25 mm in the mid trimester is the commonly used short threshold. Once rupture is confirmed, do not pass a transvaginal probe; assess pooling and the cervix by sterile speculum instead.",
+        "Fetal fibronectin from cervicovaginal secretions predicts imminent birth when membranes are intact and there is no vaginal bleeding: a negative test in threatened labour strongly argues against delivery within days and supports discharge with review, while a positive test supports steroids and transfer. The test is invalid after rupture or with bleeding and must not be sent then.",
+        "Cardiotocography with tocography records contraction regularity, frequency and duration alongside fetal heart behaviour. Regular contractions with cervical change is labour, whatever the exact count; the trace also catches the non-reassuring fetus that needs delivery, not tocolysis.",
         "Sterile speculum examination looks for pooling, watches for escape on coughing, and takes swabs: ferning of dried fluid and an alkaline nitrazine change support ruptured membranes, and swabs chase group B streptococcus and genital infection.",
         "Infection screen runs alongside everything: urine routine and culture, high vaginal swabs, full blood count with C reactive protein, and group B streptococcus status for labour prophylaxis. Ultrasound checks presentation, growth against dates, and fluid volume, which falls after rupture."
       ],
@@ -595,7 +595,7 @@
       "body": "Give antenatal corticosteroids for fetal lung maturation, use brief tocolysis to complete the steroid course and enable transfer, add magnesium for brain protection at early gestations, treat infection and cover group B streptococcus, and move mother and baby together to newborn care.",
       "keyPoints": [
         "Antenatal corticosteroids are the single most effective intervention: a single course when early birth threatens accelerates lung maturation and reduces breathing difficulty, brain bleeding and bowel injury. Give the first dose without waiting for confirmatory tests, because the benefit needs time that waiting wastes.",
-        "Tocolysis with a calcium channel blocker or an oxytocin receptor antagonist delays birth briefly, for up to about 48 hours, to complete steroids and allow in-utero transfer. It is a bridge, not a cure, and it is forbidden with infection, abruption, non-reassuring fetal status, or advanced labour.",
+        "Tocolysis with a calcium channel blocker, usually nifedipine under local protocol, delays birth briefly, for up to about 48 hours, to complete steroids and allow in-utero transfer. It is a bridge, not a cure, and it is forbidden with infection, abruption, non-reassuring fetal status, or advanced labour. In Indian public hospitals nifedipine is the practical default, since an oxytocin receptor antagonist is costly and often unavailable there; it is an alternative only where available and nifedipine cannot be used.",
         "Magnesium sulfate before anticipated very early birth protects the fetal brain and reduces cerebral palsy. It is given as a loading infusion followed by maintenance until birth or a defined stop, with reflexes, breathing and urine watched for toxicity.",
         "Antibiotics have two jobs: treating proven urine or genital infection, and intrapartum prophylaxis against group B streptococcus when status is positive or unknown with risk factors. In ruptured membranes, latency antibiotics under protocol prolong the infection-free interval.",
         "In-utero transfer to a unit with a newborn intensive or special care nursery improves survival more than any drug given after birth. Move the mother before birth whenever the fetus is stable, with the neonatal team warned, rather than transferring a sick early baby afterwards.",
@@ -912,8 +912,6 @@
         }
       },
       "essentialInvestigations": [
-        "cervical_length",
-        "fibronectin",
         "ctg",
         "urine",
         "usg"
@@ -921,15 +919,15 @@
       "investigations": {
         "cervical_length": {
           "label": "Transvaginal cervical length",
-          "indicated": true,
-          "result": "Cervical length 20 mm with funneling at the inner os.",
-          "note": "A short open cervix with regular contractions supports established labour and the transfer decision; a long closed cervix would have argued for observation."
+          "indicated": false,
+          "result": "Not performed: membranes already confirmed ruptured with a 2 cm open cervix, so a transvaginal probe would risk carrying infection upward without changing the plan.",
+          "note": "With confirmed rupture the cervix and pooling are assessed by sterile speculum only; transvaginal scanning is reserved for intact membranes."
         },
         "fibronectin": {
           "label": "Fetal fibronectin",
-          "indicated": true,
-          "result": "Positive from cervicovaginal secretions.",
-          "note": "Supports that birth threatens within days rather than weeks, so steroids and transfer are not wasted here."
+          "indicated": false,
+          "result": "Not sent: the test is invalid once membranes have ruptured or with vaginal bleeding.",
+          "note": "Management rests on the speculum finding, contractions, cervix and infection screen, not on fibronectin; steroids and transfer proceed on those grounds."
         },
         "ctg": {
           "label": "Cardiotocography with tocography",
@@ -1008,7 +1006,7 @@
         "A prior birth at 32 weeks was the warning written years ago: one spontaneous early birth is the strongest predictor, and this mother should have had cervical surveillance from the mid trimester.",
         "The uterus softens fully between pains with no tenderness, fever or foul fluid: infection and abruption are excluded for now, which is the only reason buying time is permitted.",
         "Pooling on speculum with no digital examination is the model answer: confirmation without carrying infection upward, with colour and smell read in the same look.",
-        "Fibronectin positive with a 20 mm funneling cervix and three contractions in ten minutes all point the same way, so steroids and transfer proceed together, not in sequence.",
+        "Regular contractions with a 2 cm open cervix and confirmed leaking all point the same way, so steroids and transfer proceed together, not in sequence.",
         "Burning with pus cells means the urine infection is treated as part of the labour, not as an incidental finding, while rising counts with fever would end the waiting.",
         "The transfer is of the mother before birth, not the baby after: a stable fetus inside travels more safely than a sick early baby in an ambulance, and the neonatal team is warned now."
       ],

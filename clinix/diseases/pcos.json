@@ -656,9 +656,9 @@
           "heading": "A worked example",
           "points": [
             "A 24-year-old married woman with progressive oligomenorrhoea since menarche, four bleeds a year, terminal facial hair and steady weight gain since adolescence.",
-            "Examination shows an overweight build, chin hirsutism, mild acne and neck acanthosis, with borderline raised blood pressure and a normal pelvic examination.",
-            "Investigations show raised total testosterone with low sex hormone binding globulin, normal thyroid function and prolactin, and polycystic ovarian morphology on scan.",
-            "This is polycystic ovary syndrome meeting two Rotterdam features, with impaired glucose tolerance on screening, seeking pregnancy within the year."
+            "Examination shows an obese build, chin hirsutism, mild acne and neck acanthosis, with borderline raised blood pressure and a normal pelvic examination.",
+            "Investigations show raised total testosterone with low sex hormone binding globulin, normal thyroid function, prolactin and 17-hydroxyprogesterone, and polycystic ovarian morphology on scan.",
+            "This is polycystic ovary syndrome meeting three Rotterdam features, with impaired glucose tolerance on screening, seeking pregnancy within the year."
           ]
         }
       ],
@@ -950,11 +950,13 @@
           "polycystic ovarian syndrome",
           "pcos"
         ],
-        "answer": "Polycystic ovary syndrome meeting two Rotterdam features, oligo-anovulation with clinical hyperandrogenism, with impaired glucose tolerance.",
+        "answer": "Polycystic ovary syndrome meeting three Rotterdam features, oligo-anovulation with clinical and biochemical hyperandrogenism and polycystic ovarian morphology, with mimics excluded and impaired glucose tolerance.",
         "minMatch": 1
       },
       "essentialInvestigations": [
         "upt",
+        "screen_exclude",
+        "ohp17",
         "testosterone",
         "usg_pelvis",
         "ogtt"
@@ -982,7 +984,7 @@
         },
         "skill.gen.appearance": {
           "abnormal": true,
-          "finding": "Overweight young woman, height 158 cm, weight 78 kg. Coarse terminal hair over the upper lip and chin, mild facial acne with scarring, thinning at the crown. Dark velvety thickening at the nape of the neck and axillae. No pallor, no hirsutism of trunk beyond the linea alba."
+          "finding": "Obese young woman, height 158 cm, weight 78 kg. Coarse terminal hair over the upper lip and chin, mild facial acne with scarring, thinning at the crown. Dark velvety thickening at the nape of the neck and axillae. No pallor, no hirsutism of trunk beyond the linea alba."
         },
         "skill.gen.edema": {
           "abnormal": false,
@@ -990,7 +992,7 @@
         },
         "skill.gen.vitals": {
           "abnormal": true,
-          "finding": "Pulse 88 regular. Blood pressure 128/84. Respiratory rate 18. SpO2 98 percent on room air. Afebrile. Weight category overweight with central distribution."
+          "finding": "Pulse 88 regular. Blood pressure 128/84. Respiratory rate 18. SpO2 98 percent on room air. Afebrile. Weight category obese with central distribution."
         }
       },
       "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
@@ -1236,7 +1238,7 @@
       },
       "teachingPoints": [
         "The tempo alone should move you toward an endocrine syndrome before a single test: nine years of lengthening gaps since menarche, not the weeks of pregnancy or the sudden change of a tumour.",
-        "Two Rotterdam features are present here, oligomenorrhoea with clinical hyperandrogenism, and the scan is supporting rather than deciding: a normal scan would not have vetoed the diagnosis.",
+        "Three Rotterdam features are present here: oligomenorrhoea, clinical and biochemical hyperandrogenism, and polycystic ovarian morphology on scan. Two would have sufficed after exclusions, so a normal scan would not have vetoed the diagnosis.",
         "Normal thyroid function, prolactin and 17-hydroxyprogesterone are doing real diagnostic work: each one closes a mimic that can look identical, which is why the label is safe to use.",
         "Acanthosis with impaired glucose tolerance in a 24-year-old is the finding that changes her next thirty years more than the periods do, and missing it would be the costliest error in this case.",
         "The pelvic examination is normal and that normality is informative: no mass, no tenderness, no virilisation, so the workup stays endocrine and metabolic rather than surgical.",

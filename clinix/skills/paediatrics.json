@@ -4060,7 +4060,7 @@
       "why": "Mid-upper arm circumference (MUAC) is an age-independent proxy for skeletal muscle mass and mortality risk in young children. Between 6 and 59 months, muscle and fat change minimally, making MUAC the standard community triage tool for acute malnutrition.",
       "steps": [
         {
-          "text": "Confirm the child is between 6 and 59 months of age (or 1 to 5 years)."
+          "text": "Confirm the child is between 6 and 59 months of age."
         },
         {
           "text": "Use the child left arm; completely uncover the shoulder and upper arm."
@@ -4084,9 +4084,9 @@
           "text": "Read the measurement through the window to the nearest 0.1 cm and note the colour zone."
         }
       ],
-      "normal": "MUAC greater than 13.5 cm (13.5 to 16.5 cm is normal, green zone on Shakir tape).",
-      "abnormal": "MUAC less than 12.5 cm (red zone: severe undernutrition / severe wasting); MUAC 12.5 to 13.5 cm (yellow zone: moderate undernutrition / moderate wasting).",
-      "significance": "MUAC <12.5 cm (Shakir red zone) identifies severe wasting requiring immediate nutritional rehabilitation (facility stabilization or community RUTF).",
+      "normal": "MUAC greater than or equal to 12.5 cm (green zone on colour-coded tape: well-nourished).",
+      "abnormal": "MUAC less than 11.5 cm (red zone: severe acute malnutrition / severe wasting); MUAC 11.5 to 12.5 cm (yellow zone: moderate acute malnutrition / moderate wasting).",
+      "significance": "MUAC <11.5 cm (red zone) identifies severe acute malnutrition requiring immediate nutritional rehabilitation (facility stabilisation or community RUTF).",
       "practice": "Practise identifying the acromion and olecranon on a colleague, folding the measuring tape in half to mark the exact midpoint, and applying the tape with correct tension.",
       "pitfalls": [
         "Measuring MUAC with the arm held flexed or tense, which contracts the biceps and falsely inflates the circumference reading.",
@@ -4120,8 +4120,8 @@
         },
         {
           "level": 3,
-          "q": "What are the Shakir tape cut-offs for severe undernutrition (red zone), moderate undernutrition (yellow zone), and normal (green zone)?",
-          "a": "Shakir tape classifies < 12.5 cm as severe (red zone), 12.5 to 13.5 cm as moderate (yellow zone), and 13.5 to 16.5 cm as normal (green zone).",
+          "q": "What are the colour-coded MUAC tape cut-offs for severe acute malnutrition (red zone), moderate acute malnutrition (yellow zone), and normal (green zone)?",
+          "a": "Colour-coded MUAC tape classifies < 11.5 cm as severe acute malnutrition (red zone), 11.5 to 12.5 cm as moderate acute malnutrition (yellow zone), and >= 12.5 cm as normal / well-nourished (green zone).",
           "accept": [
             "12.5",
             "13.5",
@@ -4166,7 +4166,7 @@
           "body": "In children between 6 and 59 months of age, total arm muscle and subcutaneous fat remain relatively constant despite rapid linear growth.\n\nA single age-independent threshold can therefore screen for acute wasting and mortality risk across this entire age bracket.\n\nMUAC correlates strongly with muscle wasting and predicts death from malnutrition accurately in community field surveys."
         },
         {
-          "heading": "MUAC cut-offs: Shakir tape classifications",
+          "heading": "MUAC cut-offs: colour-coded tape classifications",
           "table": {
             "cols": [
               "Category",
@@ -4178,19 +4178,19 @@
               [
                 "Normal / well-nourished",
                 "Green zone",
-                "13.5 to 16.5 cm",
+                ">= 12.5 cm",
                 "Continue standard infant feeding"
               ],
               [
-                "Moderate undernutrition",
+                "Moderate acute malnutrition",
                 "Yellow zone",
-                "12.5 to 13.5 cm",
+                "11.5 to 12.5 cm",
                 "Supplementary feeding, counselling"
               ],
               [
-                "Severe undernutrition",
+                "Severe acute malnutrition",
                 "Red zone",
-                "<12.5 cm",
+                "< 11.5 cm",
                 "Urgent malnutrition protocol"
               ]
             ]
@@ -14846,7 +14846,7 @@
       "practice": "Look up serum sodium, potassium, calcium, blood glucose, creatinine, and arterial blood gas values for an infant and child, and calculate hourly urine output in mL/kg/hour for a 12 kg toddler.",
       "pitfalls": [
         "Applying adult serum creatinine cut-offs (such as 1.0 mg/dL) to an infant, missing advanced renal impairment when normal infant creatinine is 0.3 to 0.4 mg/dL.",
-        "Tolerating blood glucose levels between 40 and 50 mg/dL in young children when normal fasting values should exceed 50 to 60 mg/dL.",
+        "Tolerating blood glucose below 70 mg/dL in children when action is needed below 70 mg/dL fasting, with below 54 mg/dL marking serious hypoglycaemia.",
         "Calculating total urine volume without dividing by body weight and elapsed hours, obscuring true oliguria (less than 1 mL/kg/hour)."
       ],
       "probes": [
@@ -14964,9 +14964,9 @@
             "rows": [
               [
                 "Random blood glucose",
-                "50-100",
+                "70-140",
                 "mg/dL",
-                "Hypoglycaemia threshold <50 mg/dL"
+                "Act below 70 mg/dL fasting; below 54 mg/dL is serious hypoglycaemia"
               ],
               [
                 "ALT (SGPT) and AST",
@@ -15004,6 +15004,12 @@
                 "7.38-7.42",
                 "<7.35 or >7.45",
                 "Acidosis vs alkalosis"
+              ],
+              [
+                "Venous pH",
+                "about 7.31-7.41",
+                "below about 7.31",
+                "Venous reads 0.03 to 0.05 lower than arterial; do not judge a venous gas against the arterial 7.38-7.42 range"
               ],
               [
                 "PaCO2",

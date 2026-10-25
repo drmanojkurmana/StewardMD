@@ -61,7 +61,7 @@
           "expect": "Expect intermenstrual spotting over a previously regular pattern, or any bleeding after the menopause, which is never normal. Map frequency, regularity, duration and volume before attributing loss to the cervix."
         },
         "skill.hx.obg.gynae_symptoms": {
-          "expect": "Expect pelvic or leg pain, leg swelling, urinary change or weight loss as markers of spread beyond the cervix. A foul discharge with a friable cervix favours tumour over infection, but swabs still belong in the workup."
+          "expect": "Expect pelvic or leg pain, leg swelling, urinary change or weight loss as markers of spread beyond the cervix. A foul, blood-stained discharge with a friable cervix reflects tumour necrosis, where urgent punch biopsy takes precedence over microbiological swabs."
         }
       }
     },
@@ -119,7 +119,7 @@
           "expect": "Look for excoriation from chronic discharge and for lower vaginal or vulval spread, which upstages the disease. Note hygiene and anaemia at the introitus."
         },
         "skill.exam.obg.speculum_insert": {
-          "expect": "Pass the speculum gently: a friable growth bleeds when touched, and rough handling ruins the view and distresses her. Have biopsy and swab equipment ready before you start."
+          "expect": "Pass the speculum gently: a friable growth bleeds when touched, and rough handling ruins the view and distresses her. Have biopsy forceps and cotton swabs for haemostasis ready before you start."
         },
         "skill.exam.obg.speculum_inspect": {
           "expect": "Expect a friable growth on the cervix that bleeds on touch, or an ulcer replacing the cervix. Note size, quadrants involved, vaginal extent and discharge; a healthy cervix with bleeding redirects you to the cavity."
@@ -287,7 +287,7 @@
         },
         {
           "heading": "Prevention moves the stage",
-          "body": "Disease caught by screening is preinvasive or microscopic; disease that bleeds is usually visible and needs more. Organised cytology and HPV testing, with vaccination, have shifted whole populations toward earlier stages.\n\nThe nonavalent vaccine covers types 6, 11, 16, 18, 31, 33, 45, 52 and 58, given into the deltoid at 0, 2 and 6 months, to girls and women from 9 to 45 years, and to boys and men 9 to 26 years where the programme covers them."
+          "body": "Disease caught by screening is preinvasive or microscopic; disease that bleeds is usually visible and needs more. Organised cytology and HPV testing, with vaccination, have shifted whole populations toward earlier stages.\n\nVaccination against high-risk human papillomavirus types, especially 16 and 18, prevents persistent infection and malignant transformation. Current WHO guidance and the Indian programme recommend a single-dose or two-dose schedule for adolescent girls aged 9 to 14 years, while a three-dose schedule at 0, 2 and 6 months is reserved for individuals aged 15 and older or those with immunocompromise."
         }
       ],
       "probes": [
@@ -715,7 +715,7 @@
           "heading": "The four bands",
           "points": [
             "Stage I: confined to the cervix, microscopic or visible; the operable group with selected early disease.",
-            "Stage II: beyond the cervix but short of the sidewall and the lower third of the vagina; upper vaginal disease without parametrial spread stays at the operable edge.",
+            "Stage II: beyond the cervix but short of the sidewall and the lower third of the vagina; non-bulky upper vaginal disease under 4 cm (stage IIA1) is the operable edge, while bulky stage IIA2 and parametrial disease (stage IIB) require chemoradiation.",
             "Stage III: lower third of the vagina, pelvic sidewall, hydronephrosis or a non-functioning kidney, or pelvic and para-aortic nodes.",
             "Stage IV: bladder or rectal mucosa involved, or spread beyond the true pelvis and distant organs."
           ]
@@ -921,8 +921,8 @@
           "heading": "The stage-wise map",
           "points": [
             "Microinvasion without vessel spread: cone biopsy or simple hysterectomy where family is complete.",
-            "Visible disease confined to the cervix and upper vaginal edge: radical hysterectomy with pelvic node dissection; fertility-sparing trachelectomy in carefully selected young women.",
-            "Parametrial disease and beyond: concurrent chemoradiation with external beam and cisplatin-based chemotherapy, then a brachytherapy boost.",
+            "Early visible disease under 4 cm confined to the cervix or upper vagina (stage IB1 to IB2, selected IIA1): radical hysterectomy with pelvic node dissection; fertility-sparing trachelectomy in carefully selected young women.",
+            "Bulky disease of 4 cm or more (stage IB3, IIA2) and parametrial spread (stage IIB) through locally advanced stages: concurrent chemoradiation with external beam radiotherapy, weekly cisplatin-based chemotherapy, then a brachytherapy boost.",
             "Distant or recurrent disease: platinum-based systemic chemotherapy with bevacizumab, adding a checkpoint inhibitor such as pembrolizumab where eligible.",
             "Symptoms in parallel: iron and blood for anaemia, stent or nephrostomy for a blocked ureter, pain relief, and palliative care for advanced disease."
           ]
@@ -936,10 +936,12 @@
         {
           "level": 1,
           "q": "What are the two curative roads, and which stage takes which?",
-          "a": "Surgery for disease confined to the cervix and its operable edge; concurrent chemoradiation for parametrial disease and beyond.",
+          "a": "Surgery for early non-bulky disease under 4 cm confined to the cervix or upper vagina; concurrent chemoradiation for bulky disease, parametrial spread and beyond.",
           "accept": [
             "surgery",
             "chemoradiation",
+            "early",
+            "bulky",
             "parametrial"
           ],
           "minMatch": 2
@@ -1006,7 +1008,7 @@
         "bpDiastolic": 70,
         "rr": 20,
         "spo2": 97,
-        "temp": 37.8,
+        "temp": 37,
         "gcs": 15
       },
       "history": {
@@ -1197,7 +1199,7 @@
         },
         "skill.exam.obg.bimanual": {
           "abnormal": true,
-          "finding": "Cervix bulky, firm and barrel shaped, bleeds on examination. Uterus anteverted, normal size, mobile. Left parametrium thickened halfway to the sidewall; right parametrium free. Fornices: left full, right free. No adnexal mass."
+          "finding": "Cervix bulky, firm and barrel shaped, bleeds on examination. Uterus anteverted, normal size, mobile. Left parametrium thickened halfway to the sidewall; right parametrium free. Vaginal fornices smooth and free of growth; upper vagina free. No adnexal mass."
         }
       },
       "essentialInvestigations": [
@@ -1250,16 +1252,16 @@
         }
       },
       "differentialModel": {
-        "answer": "Squamous cell carcinoma of the cervix with left parametrial disease. Consider preinvasive disease, a benign cervical lesion, endometrial or vault cancer, fibroid, pelvic infection, and pregnancy-related bleeding.",
+        "answer": "Squamous cell carcinoma of the cervix with left parametrial disease. Consider preinvasive disease, a benign cervical lesion such as a polyp or ectropion, cervicitis, endometrial or vaginal cancer, fibroid polyp, and pelvic infection.",
         "accept": [
-          "Fibroid uterus",
-          "Endometrial hyperplasia",
-          "Endometrial polyp",
-          "Pelvic inflammatory disease",
-          "Ovarian tumour",
-          "Uterine sarcoma",
-          "Abortion",
-          "Endometriosis"
+          "Cervical polyp",
+          "Cervical ectropion",
+          "Cervicitis",
+          "Cervical intraepithelial neoplasia",
+          "Carcinoma of the endometrium",
+          "Vaginal carcinoma",
+          "Fibroid polyp",
+          "Pelvic inflammatory disease"
         ],
         "minMatch": 3
       },

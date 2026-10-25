@@ -757,7 +757,7 @@
       "teach": [
         {
           "heading": "Primary survey with haemorrhage control",
-          "body": "Secure the airway first, then press on bleeding, apply pressure dressings and transfix visible bleeders while large bore access goes in. Resuscitate with balanced blood products and activate the massive transfusion pathway in haemorrhagic shock, warming the patient throughout.\n\nStabilise any impaling object in place with bulky dressings and remove it only in theatre under vision. Give broad spectrum antibiotics early where hollow viscus contamination is likely, and tetanus prophylaxis according to cover, since the peritoneal cavity is already exposed to the outside."
+          "body": "Secure the airway first, then apply direct pressure to external bleeding with pressure dressings while large bore access goes in. Definitive ligation or repair is done under vision in theatre, never by blind suture ligation in the emergency bay. Resuscitate with balanced blood products and activate the massive transfusion pathway in haemorrhagic shock, warming the patient throughout.\n\nStabilise any impaling object in place with bulky dressings and remove it only in theatre under vision. Give broad spectrum antibiotics early where hollow viscus contamination is likely, and tetanus prophylaxis according to cover, since the peritoneal cavity is already exposed to the outside."
         },
         {
           "heading": "The operation and its abbreviated form",
@@ -1179,14 +1179,13 @@
       "essentialInvestigations": [
         "fast_scan",
         "erect_chest_film",
-        "blood_group_crossmatch",
-        "wound_exploration_local"
+        "blood_group_crossmatch"
       ],
       "investigations": {
         "fast_scan": {
           "label": "FAST scan",
           "indicated": true,
-          "result": "Free fluid in Morrison pouch and in the pelvis. No pericardial fluid. Spleen outline intact, liver outline intact on limited views.",
+          "result": "Free fluid in Morrison pouch and in the pelvis. No pericardial fluid. Limited views do not assess organ outlines, so solid organ injury is not excluded by this scan.",
           "note": "Free fluid with peritonitis and a falling pressure means blood plus gut contents in the cavity: this is a theatre finding, not a scanner finding."
         },
         "erect_chest_film": {
@@ -1203,9 +1202,9 @@
         },
         "wound_exploration_local": {
           "label": "Local wound exploration under local anaesthesia",
-          "indicated": true,
-          "result": "Track passes through the anterior wall into the peritoneal cavity with a small ooze of blood stained fluid. Peritoneum breached.",
-          "note": "Confirms breach in minutes at the bedside. With peritonitis already present it changes nothing about theatre, but it closes the superficial wound question for the record."
+          "indicated": false,
+          "result": "Not done: deferred, since peritonitis with early shock and free fluid already mandates laparotomy.",
+          "note": "Local wound exploration answers breach only in the stable stab wound of uncertain depth. In a peritonitic shocked patient it would only delay theatre, so it is not indicated here."
         },
         "ct_abdomen_stable": {
           "label": "CT abdomen and pelvis with contrast",

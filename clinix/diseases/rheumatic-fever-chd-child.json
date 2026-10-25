@@ -726,10 +726,10 @@
         {
           "level": 2,
           "q": "A child in India has carditis, fever and a single swollen knee with strep titres rising. Does she meet Jones criteria?",
-          "a": "Yes: one major in carditis with two minors in fever and raised markers, and India uses the moderate to high risk rule where monoarthritis can count as the arthritis.",
+          "a": "Yes: two majors in carditis, including silent valvulitis on echo, and arthritis, since India uses the moderate to high risk rule where monoarthritis counts as the arthritis, with rising titres as strep proof; fever and raised markers are supernumerary minors, and ESR with CRP together count as a single minor criterion.",
           "accept": [
-            "one major",
-            "two minor",
+            "two major",
+            "carditis",
             "monoarthritis",
             "high risk"
           ],
@@ -822,7 +822,7 @@
             "Register every child, fix the injection dates in advance, chase every defaulter, and screen and treat streptococcal throats in the household so the trigger does not return through a sibling.",
             "Watch for red flags that need urgent cardiology review: a new or changing murmur with failure, a pericardial rub or effusion, high grade heart block, or any recurrence in a child with established valve disease.",
             "Use the district hospital and school health route for echo, registration and injections where a cardiac centre is far, and refer breathless, failing or cyanotic children upward rather than watching them.",
-            "Counsel the family that the child with a damaged valve needs antibiotic cover before dental and similar procedures as per current guidance, and that sore throats in the family must be treated promptly."
+            "Counsel the family that a persistent rheumatic valve lesion alone does not routinely need antibiotic cover before dental and similar procedures; such cover is restricted to high risk groups such as prosthetic valves or prosthetic material or prior endocarditis under current endocarditis guidance, with good oral hygiene for all, and that sore throats in the family must be treated promptly."
           ]
         }
       ],
@@ -1196,7 +1196,7 @@
       },
       "exam": {
         "skill.gen.paed.appearance": {
-          "finding": "Febrile, alert 9 year old favouring the left ankle, with a swollen tender warm left knee. Height and weight below the expected curve for age. No dysmorphic features.",
+          "finding": "Febrile, alert 9 year old favouring the left ankle, with a swollen tender warm left knee. Height on the expected curve for age with weight just below expected, consistent with recent acute illness and no chronic growth failure. No dysmorphic features.",
           "abnormal": true
         },
         "skill.gen.paed.vitals": {
@@ -1236,7 +1236,7 @@
           "abnormal": false
         },
         "skill.exam.paed.weight": {
-          "finding": "Weight below the expected weight for a 9 year old boy, with height also short for age, suggesting slowed growth over recent months.",
+          "finding": "Weight just below the expected weight for a 9 year old boy, with height on the expected curve, consistent with recent acute illness rather than chronic growth failure.",
           "abnormal": true
         }
       },
@@ -1264,13 +1264,13 @@
           "label": "ESR and C reactive protein",
           "indicated": true,
           "result": "Both markedly raised.",
-          "note": "They mark the systemic fire and one of them doubles as a minor criterion, and they will later track the response to treatment."
+          "note": "They mark the systemic fire and together count as a single minor criterion, and they will later track the response to treatment."
         },
         "ecg": {
           "label": "Electrocardiogram",
           "indicated": true,
           "result": "Sinus tachycardia with a prolonged PR interval. No high grade block.",
-          "note": "The PR change counts as minor only because carditis is not being double counted; the rhythm itself is sinus."
+          "note": "The PR prolongation does not add a minor criterion here because carditis is already counted as a major; the rhythm itself is sinus."
         },
         "echo": {
           "label": "Echocardiography with Doppler",
@@ -1332,7 +1332,7 @@
         "A negative throat swab three weeks on means nothing, while rising titres on repeat testing mean everything: order the test that matches the week of illness.",
         "The painkiller started last week may have softened the pattern, so ask what was taken before judging whether the joints truly migrate.",
         "Two murmurs at one apex tell one story: the systolic leak of acute valvulitis with the soft mid diastolic murmur of active carditis, not two separate lesions.",
-        "No failure and no endocarditis signs today is a finding, not an absence: state it, since it decides that this child can be worked up without emergency cover.",
+        "No failure and no endocarditis signs today is a finding, not an absence: state it, while keeping the child under close cardiac monitoring with prompt cardiology review given the exertional tightness, tachycardia, tachypnoea and valvulitis.",
         "Normal growth until three weeks ago with a new murmur separates this acquired illness from a defect present since birth, which is why the birth history was asked.",
         "The sister's sore throat and the fifty child classroom are not background colour: they are where the next attack will come from unless the household is screened."
       ],

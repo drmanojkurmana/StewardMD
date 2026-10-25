@@ -126,7 +126,7 @@
           "expect": "Determine fetal lie, presentation, and attitude gently while observing maternal respiratory comfort during abdominal palpation."
         },
         "skill.exam.obg.fetal_heart": {
-          "expect": "Auscultate fetal heart sounds for baseline rate, rhythm, and regular variability to confirm reassuring fetal status."
+          "expect": "Auscultate fetal heart sounds for baseline rate and rhythm to confirm viability; assess variability only on a CTG or Doppler tracing, never by auscultation."
         }
       }
     },
@@ -750,12 +750,16 @@
         {
           "heading": "CARPREG II risk score predictors",
           "points": [
-            "Prior cardiac events: heart failure, transient ischaemic attack, stroke, or sustained arrhythmia before pregnancy (3 points)",
+            "Prior cardiac event or arrhythmia before pregnancy (3 points)",
             "Baseline NYHA functional class III or IV, or baseline cyanosis with resting oxygen saturation under 90 percent (3 points)",
-            "High-risk left-sided heart obstruction: mitral valve area under 2.0 cm2 or aortic valve area under 1.5 cm2 (2 points)",
+            "Mechanical valve (3 points)",
             "Systemic ventricular systolic dysfunction with ejection fraction below 50 percent (2 points)",
-            "High-risk cardiovascular disease category: mechanical valve, unrepaired cyanotic lesion, or aortopathy (2 points)",
-            "Late pregnancy presentation or lack of prior specialized cardiac care (1 point)"
+            "High-risk left heart obstruction: mitral valve area under 2.0 cm2, aortic valve area under 1.5 cm2, or left ventricular outflow tract gradient over 30 mmHg (2 points)",
+            "Pulmonary hypertension (2 points)",
+            "Coronary artery disease (2 points)",
+            "High-risk aortopathy (2 points)",
+            "No prior cardiac intervention (1 point)",
+            "Late pregnancy assessment (1 point)"
           ]
         },
         {
@@ -944,15 +948,15 @@
       "teach": [
         {
           "heading": "Decongestive diuretic therapy in pregnancy",
-          "body": "Oral loop diuretics, predominantly furosemide (20 to 40 mg daily), are indicated when pulmonary venous congestion or peripheral oedema develops in mitral stenosis.\n\nOver-diuresis must be strictly avoided because maternal intravascular volume depletion compromises uteroplacental perfusion, causing fetal growth restriction or acute oligohydramnios."
+          "body": "Oral loop diuretics, predominantly furosemide, are indicated when pulmonary venous congestion or peripheral oedema develops in mitral stenosis. The dose is titrated by the heart team to the lowest effective level, and no fixed protocol dose is quoted here.\n\nOver-diuresis must be strictly avoided because maternal intravascular volume depletion compromises uteroplacental perfusion, causing fetal growth restriction or acute oligohydramnios."
         },
         {
           "heading": "Heart rate control and beta-blocker therapy",
-          "body": "Beta-1 selective blockers, specifically metoprolol (25 to 50 mg twice daily), are the agents of choice to slow sinus heart rate and prolong diastolic filling time across the stenotic valve.\n\nAtenolol is avoided in pregnancy due to associations with fetal growth restriction and placental hypoplasia. Propranolol can be used if metoprolol is unavailable."
+          "body": "Beta-1 selective blockers, specifically metoprolol, are the agents of choice to slow sinus heart rate and prolong diastolic filling time across the stenotic valve. The dose is set by the heart team, and no fixed protocol dose is quoted here.\n\nAtenolol is avoided in pregnancy due to associations with fetal growth restriction and placental hypoplasia. Propranolol can be used if metoprolol is unavailable."
         },
         {
           "heading": "Secondary antibiotic prophylaxis and balloon valvuloplasty",
-          "body": "Secondary prophylaxis against recurrent rheumatic fever must continue throughout pregnancy: intramuscular benzathine penicillin G (1.2 million units every 3 to 4 weeks) is safe and mandatory.\n\nIn women with severe mitral stenosis refractory to medical therapy, percutaneous balloon mitral valvuloplasty can be performed safely after the 20th week of gestation under echocardiographic guidance with abdominal shielding."
+          "body": "Secondary prophylaxis against recurrent rheumatic fever must continue throughout pregnancy with intramuscular benzathine penicillin G on the local protocol schedule. Dose and interval are set by the heart team, and no fixed regimen is quoted here.\n\nIn women with severe mitral stenosis refractory to medical therapy, percutaneous balloon mitral valvuloplasty can be performed safely after the 20th week of gestation under echocardiographic guidance with abdominal shielding."
         }
       ],
       "probes": [
@@ -1032,7 +1036,7 @@
         },
         {
           "heading": "Uterotonics and postpartum autotransfusion surveillance",
-          "body": "In the third stage of labour, ergometrine and carboprost are strictly contraindicated because they cause intense vasoconstriction, bronchospasm, and sudden surges in cardiac preload.\n\nActive management is conducted using slow, titrated intravenous oxytocin infusion (10 to 20 units in 500 mL normal saline). Strict fluid intake restriction (at or below 75 mL/hr) and monitoring for 72 hours postpartum prevent autotransfusion pulmonary oedema."
+          "body": "In the third stage of labour, ergometrine and carboprost are strictly contraindicated because they cause intense vasoconstriction, bronchospasm, and sudden surges in cardiac preload.\n\nActive management is conducted using a slow, titrated intravenous oxytocin infusion at the dose and dilution set by the local obstetric protocol, with no fixed infusion regimen quoted here. Strict fluid restriction and close postpartum surveillance through the high-risk autotransfusion period prevent pulmonary oedema, with duration set by the heart team and no fixed hour count quoted here."
         }
       ],
       "probes": [
@@ -1354,7 +1358,7 @@
           "abnormal": false
         },
         "skill.exam.obg.fetal_heart": {
-          "finding": "Fetal heart sounds heard distinctly in the left lower maternal quadrant, regular rhythm with a baseline rate of 142 beats per minute. Normal variability appreciated.",
+          "finding": "Fetal heart sounds heard distinctly in the left lower maternal quadrant, regular rhythm with a baseline rate of 142 beats per minute. Variability is not assessed by auscultation and is read on the CTG tracing.",
           "abnormal": false
         },
         "skill.heart.findings": {
@@ -1378,7 +1382,7 @@
         },
         "transthoracic_echocardiogram": {
           "label": "Transthoracic Echocardiogram",
-          "result": "Rheumatic mitral stenosis with thickened mitral leaflets, commissural fusion, and characteristic diastolic hockey-stick deformity of anterior leaflet. Mitral valve area by planimetry 1.2 cm2 (moderate stenosis). Mean transmitral diastolic pressure gradient 11 mmHg at heart rate 96 bpm. Left atrial diameter 44 mm with spontaneous echo contrast but no thrombus. Estimated pulmonary artery systolic pressure 38 mmHg (mild pulmonary hypertension). Normal left ventricular dimensions and preserved systolic function (LVEF 62%). Trace mitral regurgitation.",
+          "result": "Rheumatic mitral stenosis with thickened mitral leaflets, commissural fusion, and characteristic diastolic hockey-stick deformity of anterior leaflet. Mitral valve area by planimetry 1.2 cm2 (moderate stenosis). Mean transmitral diastolic pressure gradient 8 mmHg at heart rate 96 bpm (rate dependent, so tachycardia augments gradient while planimetry area remains the reference). Left atrial diameter 44 mm with spontaneous echo contrast but no thrombus. Estimated pulmonary artery systolic pressure 38 mmHg (moderate pulmonary hypertension). Normal left ventricular dimensions and preserved systolic function (LVEF 62%). Trace mitral regurgitation.",
           "note": "The gold standard investigation. Quantifies valve area, diastolic gradients, pulmonary pressures, and chamber sizes without radiation exposure.",
           "indicated": true
         },
@@ -1390,8 +1394,8 @@
         },
         "chest_xray_shielded": {
           "label": "Chest Radiograph with Abdominal Lead Shielding",
-          "result": "Posteroanterior view performed with double abdominal lead apron shielding. Straightening of the left cardiac border, prominent left atrial appendage, mild cardiomegaly, and upper lobe pulmonary vascular diversion. No interstitial or alveolar pulmonary oedema.",
-          "note": "Safe in pregnancy with proper shielding (fetal exposure under 0.001 mGy). Excludes acute alveolar pulmonary oedema in suspected decompensation.",
+          "result": "Posteroanterior view performed with double abdominal lead apron shielding. Straightening of the left cardiac border, prominent left atrial appendage, mild cardiomegaly, and upper lobe pulmonary vascular diversion with mild interstitial prominence but no frank alveolar pulmonary oedema.",
+          "note": "Safe in pregnancy with proper shielding (fetal exposure under 0.001 mGy). Absence of alveolar shadows does not exclude interstitial congestion, since radiographic alveolar oedema can lag behind persistent basal crackles with orthopnoea, PND and haemoptysis.",
           "indicated": true
         },
         "obstetric_ultrasound_biometry": {
@@ -1414,13 +1418,13 @@
         },
         "fetal_cardiotocography": {
           "label": "Non-Stress Test (Cardiotocography)",
-          "result": "Baseline fetal heart rate 140 bpm, moderate baseline variability (10 to 15 bpm), two accelerations of 15 bpm for 15 seconds over 20 minutes, no decelerations. Reactive tracing.",
-          "note": "Reassuring non-stress test confirming fetal autonomic wellbeing and absence of hypoxia.",
+          "result": "Baseline fetal heart rate 140 bpm, moderate baseline variability (10 to 15 bpm), two accelerations of at least 10 bpm for at least 10 seconds over 20 minutes, no decelerations. Reactive tracing by preterm criteria.",
+          "note": "Reassuring non-stress test confirming fetal autonomic wellbeing and absence of hypoxia. Before 32 weeks the acceleration criterion is at least 10 bpm for at least 10 seconds, not the term 15 bpm for 15 seconds standard.",
           "indicated": true
         }
       },
       "differentialModel": {
-        "answer": "Rheumatic heart disease with moderate mitral stenosis in pregnancy (NYHA class II, modified WHO class III). Differentials to consider include physiological dyspnoea of pregnancy, peripartum cardiomyopathy, acute decompensated heart failure, pulmonary arterial hypertension, and severe anaemia.",
+        "answer": "Rheumatic heart disease with moderate mitral stenosis in pregnancy (NYHA class III, modified WHO class III). Differentials to consider include physiological dyspnoea of pregnancy, peripartum cardiomyopathy, acute decompensated heart failure, pulmonary arterial hypertension, and severe anaemia.",
         "accept": [
           "Rheumatic heart disease",
           "Mitral stenosis",
@@ -1431,7 +1435,7 @@
         "minMatch": 2
       },
       "diagnosis": {
-        "answer": "Rheumatic heart disease with moderate mitral stenosis in pregnancy at 28 weeks of gestation, NYHA class II functional status, modified WHO risk category III.",
+        "answer": "Rheumatic heart disease with moderate mitral stenosis in pregnancy at 28 weeks of gestation, NYHA class III functional status, modified WHO risk category III.",
         "accept": [
           "Rheumatic heart disease",
           "Mitral stenosis",
@@ -1440,7 +1444,7 @@
         "minMatch": 1
       },
       "managementModel": {
-        "answer": "Multidisciplinary pregnancy heart team management (obstetrician, cardiologist, obstetric anaesthetist); medical therapy with oral loop diuretic (furosemide) for pulmonary congestion, beta-1 selective blocker (metoprolol) for heart rate control; secondary antibiotic prophylaxis with intramuscular benzathine penicillin; serial clinical and echocardiographic surveillance; planned vaginal delivery at 37 to 38 weeks with early continuous epidural analgesia, left lateral tilt position, assisted second stage of labour with vacuum or forceps to avoid maternal bearing down; strict fluid management; active management of third stage of labour using slow titrated oxytocin infusion while strictly avoiding ergometrine and carboprost; close postpartum monitoring for 72 hours to detect pulmonary oedema from autotransfusion.",
+        "answer": "Multidisciplinary pregnancy heart team management with tertiary admission (obstetrician, cardiologist, obstetric anaesthetist); medical therapy with oral loop diuretic (furosemide) for pulmonary congestion, beta-1 selective blocker (metoprolol) for heart rate control; secondary antibiotic prophylaxis with intramuscular benzathine penicillin; serial clinical and echocardiographic surveillance; planned vaginal delivery at 37 to 38 weeks with early continuous epidural analgesia, left lateral tilt position, assisted second stage of labour with vacuum or forceps to avoid maternal bearing down; strict fluid management; active management of third stage of labour using slow titrated oxytocin infusion while strictly avoiding ergometrine and carboprost; close postpartum monitoring through the high-risk autotransfusion period to detect pulmonary oedema.",
         "accept": [
           "multidisciplinary",
           "diuretic",

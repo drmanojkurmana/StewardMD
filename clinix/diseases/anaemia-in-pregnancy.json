@@ -607,7 +607,7 @@
           "q": "State the four severity bands."
         },
         {
-          "a": "Ferrous sulphate and fumarate carry 65 mg per tablet and gluconate carries 34 mg, so the salt on the strip must be converted to elemental iron before doses are compared.",
+          "a": "Different iron salts carry different amounts of elemental iron: a 325 mg ferrous sulphate tablet and a 200 mg ferrous fumarate tablet each carry about 65 mg elemental iron, while a 300 mg gluconate tablet carries only 34 mg. Doses must therefore be converted to elemental iron before regimens are compared.",
           "accept": [
             "65 mg",
             "34 mg",
@@ -623,22 +623,26 @@
       },
       "sources": [
         {
-          "locator": "iron_deficiency_anemia: Treatment of iron deficiency anaemia",
+          "locator": "iron_deficiency_anemia: management",
           "source": "StewardMD Clinical KB"
         },
         {
           "locator": "Iron deficiency anaemia in pregnancy",
           "source": "FOGSI"
+        },
+        {
+          "locator": "Haemoglobin concentrations for the diagnosis of anaemia and assessment of severity",
+          "source": "WHO"
         }
       ],
       "system": "obstetrics",
       "teach": [
         {
-          "body": "Mild anaemia runs from 10 to 10.9 grams per decilitre and is managed with oral iron at the antenatal clinic. Moderate anaemia runs from 7 to 9.9 and needs closer follow-up with parenteral iron where tablets fail or time is short.",
+          "body": "Obstetric guidelines grade anaemia into operational bands: mild runs from 10 to 10.9 grams per decilitre and is managed with oral iron at the antenatal clinic. Moderate anaemia runs from 7 to 9.9 and needs closer follow-up with parenteral iron where tablets fail or time is short.",
           "heading": "Mild and moderate bands"
         },
         {
-          "body": "Severe anaemia is anything below 7 grams per decilitre and very severe is below 4. Both need hospital assessment, a transfusion decision, and delivery where blood with an operating theatre is available.",
+          "body": "Severe anaemia is anything below 7 grams per decilitre under WHO criteria, and very severe (in Indian ICMR and FOGSI practice) is below 4. Both need hospital assessment, a transfusion decision, and delivery where blood with an operating theatre is available.",
           "heading": "Severe and very severe bands"
         },
         {
@@ -657,7 +661,7 @@
               ],
               [
                 "Ferrous fumarate",
-                "325 mg",
+                "200 mg",
                 "65 mg"
               ],
               [
@@ -684,8 +688,8 @@
         "A haemoglobin below 11 g per dL in pregnancy makes the diagnosis. Confirm it on a venous sample where the strip or fingerprick result would change the plan, since field devices read low when hands are cold or the drop is squeezed.",
         "MILD runs from 10 to 10.9 g per dL and is managed with oral iron at the antenatal clinic with diet counsel and a repeat haemoglobin date.",
         "MODERATE runs from 7 to 9.9 g per dL and needs closer follow-up: regular oral iron where she tolerates and time allows, parenteral iron where tablets fail, intolerance strikes, or the third trimester leaves too little time.",
-        "SEVERE is anything below 7 g per dL and VERY SEVERE below 4. Both need hospital assessment, a transfusion decision on symptoms with gestation, and delivery planned where blood with an operating theatre is available.",
-        "These bands guide judgement, they do not replace it: a moderate grade near term with falling movements, or with bleeding, may need what a severe grade needs, while a mild grade with hookworm needs deworming more than it needs panic.",
+        "SEVERE is anything below 7 g per dL under WHO criteria, and VERY SEVERE below 4 in Indian ICMR and FOGSI practice. Both need hospital assessment, a transfusion decision on symptoms with gestation, and delivery planned where blood with an operating theatre is available.",
+        "These bands guide judgement, they do not replace it: while general internal medicine describes iron deficiency as a continuum, obstetric guidelines define operational bands to direct clinic versus hospital care. A moderate grade near term with falling movements, or with bleeding, may need what a severe grade needs, while a mild grade with hookworm needs deworming more than it needs panic.",
         "A complete diagnostic statement names the cause, the grade, the gestation and the fetal effect: iron deficiency anaemia of pregnancy, moderate at 7.2 g per dL, at 32 weeks with early growth restriction."
       ],
       "kind": "reasoning",
@@ -758,6 +762,10 @@
         {
           "locator": "Iron deficiency anaemia in pregnancy",
           "source": "FOGSI"
+        },
+        {
+          "locator": "Haemoglobin concentrations for the diagnosis of anaemia and assessment of severity",
+          "source": "WHO"
         }
       ],
       "system": "obstetrics",
@@ -844,14 +852,14 @@
       "dosingNote": "This module teaches management at the level of drug class and principle. Specific agents, routes and regimens must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
       "id": "skill.tx.anaemia",
       "keyPoints": [
-        "Start oral iron as first line once deficiency is confirmed: 65 mg of elemental iron, one 325 mg ferrous sulphate tablet, every other day. Larger or more frequent doses absorb poorly and bring constipation that stops the course.",
-        "Take each dose 30 minutes before meals with vitamin C, 500 mg or orange juice, and keep tea, calcium and antacids away from the dose. This counsel matters as much as the prescription, since absorption decides the outcome.",
-        "Continue for at least 6 months after the haemoglobin normalises to refill stores and prevent early recurrence. Stopping at normal is the commonest reason anaemia returns in the next pregnancy.",
-        "Review at about 2 weeks: reticulocytes at one week with a haemoglobin rise of about 1 g per dL by day 14 means success. No rise means missed tablets, ongoing bleeding or poor absorption, investigated before anything is escalated.",
-        "Use intravenous iron where oral iron is not tolerated or has failed, absorption is impaired, or time is short near term: an initial cumulative dose of 1000 mg is usually enough, with ferric carboxymaltose or iron sucrose as the preparations. Stop oral iron at least 24 hours before parenteral iron and restart it 4 to 5 days after.",
-        "Reserve red cell transfusion for severe symptomatic anaemia or haemodynamic compromise. Transfusion is rescue, not refilling, and it never replaces finding the cause.",
-        "Treat the cause with the iron: deworming after the first three months where worms are common, malaria treatment where proven, diet change with tea moved away from meals, and folate with B12 where deficiency or drugs point there. Iron plus the cause cured beats iron alone.",
-        "Plan the pregnancy around the anaemia: antenatal iron with a repeat haemoglobin date, delivery where blood with an operating theatre is available for moderate and severe grades, active management of the third stage since she cannot afford to bleed, and referral upward for severe grades, failure signs, or no response."
+        "Start oral iron as first-line treatment once iron deficiency is confirmed. Under the national programme (Anaemia Mukt Bharat) and WHO guidelines, daily iron and folic acid is the standard antenatal schedule, with two IFA tablets daily for treatment of anaemia. Where daily iron causes intolerable gastrointestinal side effects, alternate-day oral iron (about 60 to 65 mg elemental iron) provides an evidence-based alternative that reduces hepcidin surges and improves compliance.",
+        "Counsel the mother to take oral iron on an empty stomach or before meals with vitamin C, such as citrus fruit or amla, to boost absorption, and keep tea, coffee, milk, calcium and antacids at least two hours away from the dose. This counsel matters as much as the tablets, since absorption decides the outcome.",
+        "Continue iron therapy for at least 3 to 6 months after the haemoglobin normalises, extending through 180 days postpartum under national guidance, to refill depleted maternal iron stores and prevent early recurrence in the next pregnancy.",
+        "Review the response at about 2 weeks: reticulocytosis at one week with a haemoglobin rise of about 1 g per dL by day 14 indicates adequate response. No rise suggests missed tablets, ongoing loss or poor absorption, which must be investigated before escalating therapy.",
+        "Use intravenous iron (such as ferric carboxymaltose or iron sucrose) in the second and third trimesters when oral iron is not tolerated, has failed, absorption is impaired, or advanced gestation leaves too little time before delivery for oral tablets to work. Oral iron should be paused around parenteral iron administration.",
+        "Reserve packed red cell transfusion for severe symptomatic anaemia, haemodynamic compromise, or late third-trimester severe anaemia needing rapid restoration for delivery. Transfusion is rescue therapy, not store refilling, and it never replaces treating the underlying cause.",
+        "Treat the cause alongside the iron: universal deworming with single-dose albendazole after the first trimester in endemic regions, malaria treatment where proven, dietary optimisation with tea moved away from meals, and folate or B12 where mixed deficiency is identified.",
+        "Plan the pregnancy around anaemia severity: regular antenatal haemoglobin monitoring, delivery in a facility equipped for blood transfusion and emergency obstetric care for moderate and severe grades, active management of the third stage to minimise blood loss, and referral upward for severe grades, decompensation signs, or failure to respond."
       ],
       "kind": "treatment",
       "media": [],
@@ -863,30 +871,30 @@
       ],
       "probes": [
         {
-          "a": "65 mg of elemental iron every other day, taken 30 minutes before meals with vitamin C, keeping tea, calcium and antacids away from the dose, and continued for at least 6 months after the haemoglobin normalises.",
+          "a": "Daily iron and folic acid is the standard national programme schedule, with alternate-day dosing as an evidence-based option if side effects occur; it should be taken with vitamin C and kept away from tea and calcium, continuing for months after normalisation to replenish stores.",
           "accept": [
-            "65 mg",
-            "every other day",
+            "daily",
+            "alternate-day",
             "vitamin C",
             "tea",
-            "6 months"
+            "stores"
           ],
           "level": 1,
           "minMatch": 3,
-          "q": "State the oral iron regimen with its counsel and duration."
+          "q": "How is oral iron administered in pregnancy, and what counsel is essential?"
         },
         {
-          "a": "Where oral iron is not tolerated or has failed, absorption is impaired, or time is short near term, using an initial cumulative dose of 1000 mg, with oral iron stopped 24 hours before and restarted 4 to 5 days after.",
+          "a": "Intravenous iron is indicated when oral iron is not tolerated, has failed, absorption is impaired, or advanced gestation leaves too little time before delivery for oral tablets to raise haemoglobin.",
           "accept": [
             "not tolerated",
             "failed",
-            "1000 mg",
-            "24 hours",
-            "4 to 5 days"
+            "absorption",
+            "advanced gestation",
+            "delivery"
           ],
           "level": 2,
           "minMatch": 2,
-          "q": "When is intravenous iron used, and how is it arranged around oral iron?"
+          "q": "When is intravenous iron indicated in pregnancy, and why is it preferred over oral iron late in gestation?"
         },
         {
           "a": "No rise means missed tablets, ongoing bleeding or poor absorption, investigated with adherence, stool, malaria and B12 checks before any escalation, since stronger iron never fixes an untaken tablet or an untreated worm.",
@@ -913,6 +921,10 @@
         {
           "locator": "Daily iron supplementation in pregnancy",
           "source": "WHO"
+        },
+        {
+          "locator": "Anemia Mukt Bharat operational guidelines",
+          "source": "MoHFW"
         }
       ],
       "system": "obstetrics",
@@ -1292,7 +1304,7 @@
           "delivery",
           "referral"
         ],
-        "answer": "Oral iron every other day with vitamin C counsel and tea moved away from meals, deworming after the first trimester, diet counsel, repeat haemoglobin at two weeks with growth surveillance, delivery where blood is available, and transfusion only for rescue with referral upward if she worsens.",
+        "answer": "Iron replacement, weighing intravenous iron against oral iron given the 32-week gestation, previous intolerance and fetal growth restriction; counsel on diet, deworm after the first trimester, arrange growth surveillance and an early haemoglobin review at two weeks with prompt escalation to intravenous iron if response is inadequate, deliver where blood is available, and reserve transfusion for acute compromise.",
         "minMatch": 3
       },
       "opening": "Lakshmi Pawar, 26, a G3P2 at 32 weeks from a farming village in Maharashtra, has been sent by the health centre with tiredness, breathlessness on small work and a haemoglobin of 7.2. Introduce yourself and take a history.",
@@ -1310,7 +1322,7 @@
         "Ferritin of 11 needs no inflammation caveat and settles the cause, but the smear with pencil cells and the saturation of 9 percent each independently exclude trait and chronic disease without needing further tests to invoke them.",
         "Hookworm ova in bare feet that never got dewormed are the treatable half of her anaemia. Iron without deworming is poured into a leaking vessel.",
         "Mild ankle oedema with normal pressure and protein-free urine is anaemia with low protein, not pre-eclampsia. The face with the pressure reading decides, not the feet alone.",
-        "Moderate grade at 32 weeks with growth restriction means oral iron with a two-week haemoglobin date, deworming, growth surveillance and delivery where blood is available. Transfusion is rescue here, not the plan."
+        "Moderate grade of 7.2 g per dL at 32 weeks with growth restriction and past oral intolerance requires weighing parenteral iron against oral iron: oral iron raises haemoglobin by only about 1 g per dL every two weeks, leaving little time before labour. If oral iron is tried, a strict two-week haemoglobin check with prompt switch to intravenous iron if unabsorbed or poorly tolerated is essential, alongside deworming, fetal surveillance and hospital delivery."
       ],
       "title": "A multigravida at 32 weeks with two months of tiredness",
       "review": {

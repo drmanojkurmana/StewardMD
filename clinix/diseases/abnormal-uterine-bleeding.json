@@ -213,7 +213,7 @@
         "examinerQuestions": [
           "You found a bulky uterus that moves with the cervix. Why does that movement test separate a uterine from an ovarian mass?",
           "The vault holds blood and the cervix looks healthy. What does that combination tell you, and what would a visible polyp change?",
-          "Her bleeding has lasted a year and she is 42. What histology step does her age demand, and why can the scan not replace it?"
+          "Her bleeding has lasted a year and she is 42. What histology step do her persistent symptoms demand, and why can the scan not replace it?"
         ],
         "id": "osce.aub.pelvic_exam",
         "seconds": 480,
@@ -731,11 +731,12 @@
           "q": "What is the first-line imaging in abnormal uterine bleeding?"
         },
         {
-          "a": "At 42 with a year of heavy bleeding she needs endometrial sampling, because histology is the only exclusion that counts after this age.",
+          "a": "She needs endometrial sampling: while the routine age threshold is 45, persistent heavy bleeding for a year warrants histology to exclude hyperplasia or malignancy.",
           "accept": [
             "sampling",
             "histology",
-            "42",
+            "persistent",
+            "hyperplasia",
             "exclusion"
           ],
           "level": 2,
@@ -909,7 +910,7 @@
       "why": "Nine categories are too many to carry in working memory without a card. This reference puts each letter next to the test that proves it, so the clinic question is always which test comes next."
     },
     "skill.tx.aub": {
-      "dosingNote": "This module teaches management at the level of drug class and principle, with device specifications and schedules quoted from the cited sources. Specific agents, regimens and doses must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "dosingNote": "This module teaches management at the level of drug class and principle, with device specifications and cited schedules quoted for educational review from guideline sources. Specific agents, regimens and doses must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
       "id": "skill.tx.aub",
       "kind": "treatment",
       "oneLine": "Stop acute loss, control chronic loss medically, operate by category and wishes",
@@ -977,7 +978,7 @@
           "heading": "When bleeding is acute"
         },
         {
-          "body": "The 52 mg levonorgestrel intrauterine system is the most effective first-line medical therapy for heavy bleeding where the cavity allows it. Tranexamic acid taken during bleeding days only reduces loss by forty to fifty percent, in total oral doses of two to four grams a day in divided doses.\n\nNSAIDs and combined hormonal contraception suit ovulatory heavy loss. Ormeloxifene, widely used in India, is given as 60 mg twice a week for the first 12 weeks and then 60 mg a week. Gonadotrophin releasing hormone analogues shrink fibroids and buy time before surgery, particularly for 3 to 6 months to reduce loss while anaemia is corrected. Iron corrects the deficiency alongside, not afterwards.",
+          "body": "The 52 mg levonorgestrel intrauterine system is the most effective first-line medical therapy for heavy bleeding where the cavity allows it. Tranexamic acid taken during bleeding days only reduces loss by forty to fifty percent.\n\nNSAIDs and combined hormonal contraception suit ovulatory heavy loss. Ormeloxifene, widely used in India, is given as 60 mg twice a week for the first 12 weeks, then 60 mg a week for the next 12 weeks, stepping down to 30 mg a week maintenance thereafter. Gonadotrophin releasing hormone analogues shrink fibroids and buy time before surgery, reducing loss while anaemia is corrected. Iron corrects the deficiency alongside, not afterwards.",
           "heading": "Medical control"
         },
         {
@@ -998,7 +999,6 @@
       "diagnosis": {
         "accept": [
           "abnormal uterine bleeding",
-          "Dysfunctional uterine bleeding",
           "Fibroid uterus"
         ],
         "answer": "Chronic abnormal uterine bleeding, FIGO category leiomyoma with a 4 cm submucosal lesion, with moderate iron deficiency anaemia."
@@ -1296,7 +1296,7 @@
           "indicated": true,
           "label": "Saline infusion sonography",
           "note": "Worth doing where available to delineate the submucosal lesion that decides hysteroscopic resectability.",
-          "result": "Submucosal lesion confirmed, bulging into the cavity."
+          "result": "Submucosal lesion confirmed, predominantly intracavitary (FIGO type 1 with over 50 percent intracavitary protrusion), suitable for hysteroscopic evaluation and resection."
         },
         "tsh": {
           "indicated": true,
@@ -1334,7 +1334,7 @@
           "myomectomy",
           "hysterectomy"
         ],
-        "answer": "Correct the iron deficiency anaemia with iron and arrange blood cover, control bleeding with tranexamic acid while starting the levonorgestrel system, confirm the cavity lesion on ultrasound with histology, and refer for hysteroscopic removal since family is complete.",
+        "answer": "Correct the iron deficiency anaemia with iron and arrange blood cover, control bleeding with tranexamic acid while planning definitive care, obtain endometrial histology, and refer for hysteroscopic resection of the mapped FIGO type 1 cavity lesion, discussing hysterectomy as a definitive alternative given completed family.",
         "minMatch": 3
       },
       "opening": "Meena Deshmukh, 42, a farm labourer from a village near Nashik, sits in the gynaecology outpatient room with her daughter. She looks pale and tired. Introduce yourself and take a history.",
@@ -1355,7 +1355,7 @@
         "No intermenstrual or postcoital bleeding with a healthy cervix argues against cervical pathology, and a negative pregnancy test excludes the physiological differential.",
         "The anaemia is the real morbidity here: haemoglobin 8 with pica and exertional breathlessness must be corrected with iron and blood in hand before any operation is dated.",
         "A submucosal site explains severity out of proportion to size: a 4 cm cavity lesion bleeds more than a far larger outer one, which is why the site belongs in the diagnosis.",
-        "Sterilisation in the husband plus completed family opens definitive hysteroscopic options, while the same lesion in a young nulliparous woman would point to medical control: fertility wishes choose the route."
+        "Hysteroscopic myomectomy is fertility-preserving and chosen by cavity site and FIGO submucosal grade, while completed family with severe symptoms also opens definitive options like hysterectomy: pathology and fertility wishes together determine the surgical route."
       ],
       "title": "A farm labourer with a year of heavy regular periods"
     }
