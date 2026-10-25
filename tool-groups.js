@@ -133,14 +133,16 @@
   // (eligible and not locked for the role), never one Home already offers above the grid, at most 8.
   function starter(r, kit, usable) {
     r = r === undefined ? role() : r; kit = kit === undefined ? specialty() : kit;
-    /* Kardia leads every starter set (owner 2026-10-26: Kardia open for everyone). */
-    var want = ["kardia"].concat(PACKS[kit] || [], STARTER[r] || STARTER.none), out = [];
+    var want = (PACKS[kit] || []).concat(STARTER[r] || STARTER.none), out = [];
     for (var i = 0; i < want.length && out.length < MAX_STARTER; i++) {
       var a = want[i];
       if (out.indexOf(a) >= 0 || ON_HOME_ALREADY.indexOf(a) >= 0) continue;
       if (usable && !usable(a)) continue;
       out.push(a);
     }
+    /* Kardia leads every starter set on top of it, never taking a role or specialty tool's slot (owner 2026-10-26: Kardia open for everyone). */
+    if (out.indexOf("kardia") < 0 && ON_HOME_ALREADY.indexOf("kardia") < 0 && (!usable || usable("kardia"))) out.unshift("kardia");
+    else if (out.indexOf("kardia") > 0) { out.splice(out.indexOf("kardia"), 1); out.unshift("kardia"); }
     return out;
   }
   function recent() {

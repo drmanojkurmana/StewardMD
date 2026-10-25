@@ -47,13 +47,15 @@ test('descriptions and section text: plain, no dashes, no ES6 in the file', () =
   assert.ok(!/(^|[^.\w])(let|const) |=>|`/.test(SRC.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '')), 'tool-groups.js is ES5');
 });
 
-test('starter: 6 to 8 tools for every role and specialty, never one Home already offers, never a locked one', () => {
+test('starter: 6 to 8 role and specialty tools plus Kardia on top, never one Home already offers, never a locked one', () => {
   const { TG } = load();
   for (const r of ROLES.concat([''])) {
     for (const kit of [''].concat(Object.keys(TG.PACKS))) {
       const usable = (a) => !r || !LOCKED[r].includes(a);
       const s = TG.starter(r, kit, usable);
-      assert.ok(s.length >= 6 && s.length <= 8, `${r || 'none'}/${kit || 'no kit'}: ${s.length} tools`);
+      const own = s.filter((a) => a !== 'kardia');
+      assert.equal(s[0], 'kardia', 'Kardia leads (owner 2026-10-26)');
+      assert.ok(own.length >= 6 && own.length <= 8, `${r || 'none'}/${kit || 'no kit'}: ${own.length} role and specialty tools`);
       assert.equal(new Set(s).size, s.length, 'no duplicates');
       for (const a of s) {
         assert.ok(ACTS.includes(a), `${a} is a Home tool`);
