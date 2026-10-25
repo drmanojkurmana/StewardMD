@@ -56,11 +56,10 @@ test("app boot loads only kardia-loader.js; the loader lists the engine and Kard
   assert.ok(L.indexOf('"specialty-shell.js"') < L.indexOf('"kardia.js"'), "engine, then the host");
 });
 
-test("the loader is opt-in (default OFF): no early access, explicit on only", () => {
+test("the loader follows the on-for-everyone flag (owner 2026-10-26): on unless the device stored 0", () => {
   const t = readFileSync("kardia-loader.js", "utf8");
-  assert.ok(/getItem\("smd_kardia"\) === "1"/.test(t), "localStorage on means exactly 1");
-  assert.ok(!/hasEarlyAccess|earlyAccess/.test(t), "no early-access tier: OFF for everyone until a tester opts in");
-  assert.ok(/catch \(e\) \{ return false; \}/.test(t), "failure reads as off, never on");
+  assert.ok(/getItem\("smd_kardia"\) !== "0"/.test(t), "before kardia-flags.js loads, the loader treats Kardia as on unless 0");
+  assert.ok(!/hasEarlyAccess|earlyAccess/.test(t), "no early-access tier");
 });
 
 test("build-www.sh ships the kardia data directory; root kardia files ride the root globs", () => {
@@ -186,6 +185,7 @@ function btn(v) { return { getAttribute: (a) => (a === "data-t" ? v.t : a === "d
 
 test("flag off: KARDIA.open() is a no-op that touches no DOM", async () => {
   const s = sandbox();
+  s.store.smd_kardia = "0";
   assert.equal(s.G.KARDIA.open(), false, "closed flag refuses");
   assert.equal(s.painted(), "", "no DOM touched");
 });
