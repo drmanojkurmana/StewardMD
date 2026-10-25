@@ -138,6 +138,23 @@ function maxRunsFromGrid(grid) {
   return { maxH, maxV };
 }
 
+test("setProbe with an explicit probe and a viewId keeps the explicit plane (viewId is filter-only)", () => {
+  const HEART = require("../kardia-sim-heart.js");
+  const GEOM = require("../kardia-sim-geom.js");
+  const views = JSON.parse(readFileSync(new URL("../kardia/views.json", import.meta.url), "utf8"));
+  const heart = HEART.create(HEART.presets.normal);
+  for (let t = 0; t < 12000; t += 10) heart.step(10);
+  const geom = GEOM.create({ heart, views });
+  const canvas = mockCanvas(290, 232);
+  const us = US.create(canvas, geom, heart);
+  us.setProbe({ viewId: "tte_a4c", origin: [1, 2, 3], normal: [1, 0, 0], up: [0, 0, -1], viewOrigin: [4, 5, 6] });
+  const p = us.getProbe();
+  assert.deepEqual(p.origin, [1, 2, 3], "explicit apex is not re-solved from viewPlane");
+  assert.deepEqual(p.normal, [1, 0, 0]); assert.deepEqual(p.up, [0, 0, -1]);
+  assert.equal(us.frame(1000), true, "frame still renders with the explicit probe");
+  us.destroy();
+});
+
 test("rendered image: region bands, blockiness, autocorrelation, ECG strip (CPU fallback)", () => {
   const HEART = require("../kardia-sim-heart.js");
   const GEOM = require("../kardia-sim-geom.js");
@@ -151,6 +168,7 @@ test("rendered image: region bands, blockiness, autocorrelation, ECG strip (CPU 
     us.setProbe({ viewId });
     assert.equal(us.frame(1000), true, viewId + " frame renders");
     const s = us.snapshot({ includeGrid: true });
+    assert.ok(s.mean > 0.02, viewId + " snapshot mean inside the sector is non-black on the CPU fallback, got " + s.mean);
     assert.ok(s.regions.blood.count > 100 && s.regions.myocardium.count > 100, viewId + " masks populated");
     assert.ok(s.regions.blood.mean >= 0.02 && s.regions.blood.mean <= 0.10, viewId + " blood " + s.regions.blood.mean.toFixed(3));
     assert.ok(s.regions.myocardium.mean >= 0.30 && s.regions.myocardium.mean <= 0.55, viewId + " myocardium " + s.regions.myocardium.mean.toFixed(3));

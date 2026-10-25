@@ -2099,13 +2099,13 @@
       return earlyAccessTier();
     } catch (e) { return false; }
   }
-  // Kardia (kardia.js on the specialty engine): tester-only, DEFAULT OFF for everyone. No early-access
-  // tier: only an explicit ?kardia=1 or localStorage smd_kardia = "1" turns the tile on.
+  // Kardia (kardia.js on the specialty engine): ON for everyone (owner 2026-10-26). kardia-flags.js loads only when
+  // Kardia opens, so this fallback must match its default: on unless ?kardia=0 or localStorage smd_kardia = "0".
   function kardiaOn() {
     try {
       if (window.SMD_KARDIA_FLAGS && SMD_KARDIA_FLAGS.bool) return !!SMD_KARDIA_FLAGS.bool("smd_kardia");
     } catch (e) {}
-    try { var q = (location.search.match(/[?&]kardia=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_kardia") === "1"; } catch (e) { return false; }
+    try { var q = (location.search.match(/[?&]kardia=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_kardia") !== "0"; } catch (e) { return true; }
   }
   // ---- Home "Clinical tools" registry (data-driven so users can customise the grid) ----------
   // eligible(): flag/entitlement gate — a locked/off tool never shows and never appears in Customize.

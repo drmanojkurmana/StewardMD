@@ -140,6 +140,9 @@
       if (usable && !usable(a)) continue;
       out.push(a);
     }
+    /* Kardia leads every starter set on top of it, never taking a role or specialty tool's slot (owner 2026-10-26: Kardia open for everyone). */
+    if (out.indexOf("kardia") < 0 && ON_HOME_ALREADY.indexOf("kardia") < 0 && (!usable || usable("kardia"))) out.unshift("kardia");
+    else if (out.indexOf("kardia") > 0) { out.splice(out.indexOf("kardia"), 1); out.unshift("kardia"); }
     return out;
   }
   function recent() {

@@ -140,7 +140,8 @@
   var EL = {
     views: null, loading: false, err: false, viewId: null, probe: null,
     geom: null, heart: null, timer: null, unbind: [], knobsOpen: false,
-    knobs: { gain: 55, depth: 180, focus: 55 }, holdSince: null, gyroMsg: "",
+    knobs: { gain: 55, depth: 160, focus: 55, tgc: [50,50,50,50,50,50,50,50], frequencyMHz: 3.0, sectorDeg: 80, dynamicRange: 55, colourGain: 70, colourNyquistMs: 0.6 }, holdSince: null, gyroMsg: "",
+    mode: "2d", frozen: false, echolab: null, pathology: null, pathologyId: "", severity: "", measureUI: null, audioHandle: null, anatomyState: "idle", liveCanvases: null,
     lastCutAt: 0, polys: null, phase: 0
   };
 
@@ -265,9 +266,24 @@
       '<div class="krd-lab" id="krdLab">' +
       '<div class="krd-chips" role="group" aria-label="' + I.tx(T("Target views", "Target views")) + '">' + chips + "</div>" +
       '<h3 class="sp-h3 krd-target-name" id="krdTargetName">' + I.esc(cur.name) + '</h3>' +
-      '<p class="sp-small" id="krdTargetPos">' + I.esc(cur.probe.position) + " " + I.esc(cur.probe.marker) + ".</p>" +
-      '<div class="krd-sector-wrap"><canvas id="krdSector" width="640" height="480" aria-label="' + I.tx(T("Ultrasound sector image", "Ultrasound sector image")) + '"></canvas>' +
-      '<p class="krd-sim-note" id="krdSimNote" role="status"></p></div>' +
+      '<p class="sp-small" id="krdTargetPos">' + I.esc(String(cur.probe.position || "").replace(/\.\s*$/, "")) + ". Marker " + I.esc(String(cur.probe.marker || "").replace(/\.\s*$/, "")) + ".</p>" +
+      '<div class="krd-sector-wrap kel-sector-stack" id="krdSectorSlot"></div>' +
+      '<div class="kel-load" id="krdAnatomyLoad" hidden><p class="sp-small" id="krdAnatomyText" role="status">Loading real anatomy.</p><div class="kel-load-track"><span class="kel-load-fill" id="krdAnatomyFill"></span></div></div>' +
+      '<p class="krd-sim-note" id="krdSimNote" role="status"></p>' +
+      '<div class="kel-modes" role="group" aria-label="' + I.tx(T("Imaging mode", "Imaging mode")) + '">' +
+      [["2d","2D"],["colour","Colour"],["pw","PW"],["cw","CW"],["mmode","M-mode"]].map(function (m) { return '<button type="button" class="kel-mode" data-act="kecho-mode" data-v="' + m[0] + '" aria-pressed="' + (EL.mode === m[0]) + '">' + m[1] + "</button>"; }).join("") + "</div>" +
+      '<div class="kel-spec-wrap"><div id="krdSpectrumSlot"></div>' +
+      '<p class="sp-small" id="krdSpecReadout" role="status"></p></div>' +
+      '<div class="kel-row"><button type="button" class="kel-btn" data-act="kecho-freeze" aria-pressed="' + EL.frozen + '">' + I.tx(T("Freeze", "Freeze")) + '</button>' +
+      '<label class="sp-small" for="krdCine">' + I.tx(T("Cine", "Cine")) + '</label><input type="range" class="kel-cine" id="krdCine" data-krange="krdCine" min="0" max="89" step="1" value="0" disabled aria-label="' + I.tx(T("Scroll frozen frames", "Cine")) + '">' +
+      '<button type="button" class="kel-btn" data-act="kecho-measure" id="krdMeasureBtn" disabled>' + I.tx(T("Measure", "Measure")) + '</button>' +
+      '<button type="button" class="kel-btn" data-act="kecho-listen" id="krdListenBtn">' + I.tx(T("Listen", "Listen")) + '</button>' +
+      '<span class="kel-fps" id="krdFps" role="status"></span></div>' +
+      '<div class="kel-measure" id="krdMeasure" hidden></div>' +
+      ((klevel() !== "mbbs" || I.isPro()) ? '<div class="kel-row"><label class="sp-small" for="krdPathology">' + I.tx(T("Pathology", "Pathology")) + '</label>' +
+      '<select class="kel-select" id="krdPathology"><option value="">' + I.tx(T("Normal heart", "Normal heart")) + '</option></select>' +
+      '<select class="kel-select" id="krdSeverity" aria-label="' + I.tx(T("Severity", "Severity")) + '"></select></div>' +
+      '<p class="sp-small" id="krdPathologyNote" role="status"></p>' : '<p class="sp-small">' + I.tx(T("Pathology is available at Resident level and above, and in Practice.", "Pathology")) + "</p>") +
       '<div class="krd-quality" aria-live="polite"><div class="krd-score-row"><span class="krd-score" id="krdScore">0</span>' +
       '<span class="krd-score-label">' + I.tx(T("quality", "quality")) + '</span>' +
       '<span class="krd-achieved" id="krdAchieved" hidden>' + I.tx(T("View achieved", "View achieved")) + "</span></div>" +
@@ -284,7 +300,9 @@
           '<div class="krd-strip krd-strip-v" id="krdTiltStrip" role="slider" aria-label="' + I.tx(T("Tilt. Drag up or down.", "Tilt. Drag up or down.")) + '" aria-valuemin="-80" aria-valuemax="80" aria-valuenow="0" tabindex="0"><span>Tilt</span></div></div>' +
           '<div class="krd-strip krd-strip-h" id="krdRockStrip" role="slider" aria-label="' + I.tx(T("Rock. Drag left or right.", "Rock. Drag left or right.")) + '" aria-valuemin="-60" aria-valuemax="60" aria-valuenow="0" tabindex="0"><span>Rock</span></div>') +
       '<div class="krd-controls">' + controls + "</div>" +
-      '<div class="krd-gyro"><button type="button" class="sp-btn sec" data-act="kecho-gyro" aria-pressed="' + gyroOn + '">' +
+      '<div class="krd-gyro"><button type="button" class="sp-btn sec" data-act="kecho-syncprobe">' +
+        I.tx(T("SyncProbe", "SyncProbe")) + '</button><span class="krd-syncpill" id="krdSyncPill"></span>' +
+        '<button type="button" class="sp-btn sec" data-act="kecho-gyro" aria-pressed="' + gyroOn + '">' +
         I.tx(T("Use phone as probe", "Use phone as probe")) + '</button>' +
         '<button type="button" class="sp-btn sec" data-act="kecho-cal" id="krdCalBtn"' + (gyroOn ? "" : " disabled") + '>' +
         I.tx(T("Calibrate", "Calibrate")) + '</button>' +
@@ -293,8 +311,14 @@
         I.tx(T("Knobs", "Knobs")) + '</button></div>' +
       '<div class="krd-knobs" id="krdKnobs"' + (EL.knobsOpen ? "" : " hidden") + ">" +
         range("krdGain", I.tx(T("Gain", "Gain")), 0, 100, 1, EL.knobs.gain, "") +
-        range("krdDepthK", I.tx(T("Depth", "Depth")), 120, 240, 5, EL.knobs.depth, " mm") +
+        range("krdDepthK", I.tx(T("Depth", "Depth")), 80, 240, 5, EL.knobs.depth, " mm") +
         range("krdFocus", I.tx(T("Focus", "Focus")), 0, 100, 1, EL.knobs.focus, "") +
+        range("krdFreq", I.tx(T("Frequency", "Frequency")), 1.5, 5, 0.5, EL.knobs.frequencyMHz, " MHz") +
+        range("krdSectorW", I.tx(T("Sector width", "Sector width")), 40, 100, 5, EL.knobs.sectorDeg, " deg") +
+        range("krdDR", I.tx(T("Dynamic range", "Dynamic range")), 30, 80, 5, EL.knobs.dynamicRange, " dB") +
+        range("krdColourGain", I.tx(T("Colour gain", "Colour gain")), 0, 100, 1, EL.knobs.colourGain, "") +
+        range("krdNyquist", I.tx(T("Colour Nyquist", "Colour Nyquist")), 0.2, 1.2, 0.1, EL.knobs.colourNyquistMs, " m/s") +
+        '<div class="kel-tgc">' + EL.knobs.tgc.map(function (v, i) { return range("krdTgc" + i, "TGC " + (i + 1), 0, 100, 1, v, ""); }).join("") + "</div>" +
       "</div>" +
       '<h3 class="sp-h3">' + I.tx(T("ECG", "ECG")) + '</h3>' +
       '<canvas id="krdEcg" width="640" height="90" aria-label="' + I.tx(T("ECG strip, same cardiac cycle as the sector", "ECG strip")) + '"></canvas>' +
@@ -304,7 +328,51 @@
       "</div>";
   }
 
+  /* One persistent set of live canvases for the whole session. I.paint
+   * replaces the root innerHTML on every repaint, so a canvas in that
+   * HTML is a new element each time and any GPU or 2D context bound to
+   * the previous element keeps drawing into a detached node while the
+   * visible canvas stays black. These elements are created once, held
+   * here (outside the repainted HTML), and re-attached into the fresh
+   * slots after every paint; moving a live element keeps its context
+   * and drawing buffer. They are only (re)attached from mountEchoLab,
+   * synchronously after the paint, so no frame lands while detached. */
+  function ensureLiveCanvases() {
+    if (EL.liveCanvases) return EL.liveCanvases;
+    var doc = G.document; if (!doc || !doc.createElement) return null;
+    function make(id, w, h, label, cls) {
+      var c = doc.createElement("canvas");
+      c.id = id; c.width = w; c.height = h;
+      c.setAttribute("aria-label", label);
+      if (cls) c.className = cls;
+      return c;
+    }
+    EL.liveCanvases = {
+      sector: make("krdSector", 640, 480, I.tx(T("Ultrasound sector image", "Ultrasound sector image")), ""),
+      overlay: make("krdOverlay", 640, 480, I.tx(T("Doppler and measurement overlay. Drag to move the colour box, gate or cursor.", "Doppler overlay")), "kel-overlay"),
+      spectrum: make("krdSpectrum", 640, 260, I.tx(T("Doppler spectrum with ECG", "Doppler spectrum")), "")
+    };
+    EL.liveCanvases.spectrum.hidden = true;
+    return EL.liveCanvases;
+  }
+  function attachLiveCanvases() {
+    var live = ensureLiveCanvases(); if (!live) return null;
+    var doc = G.document;
+    [["sector", "krdSectorSlot"], ["overlay", "krdSectorSlot"], ["spectrum", "krdSpectrumSlot"]].forEach(function (pair) {
+      var slot = doc.getElementById(pair[1]), c = live[pair[0]];
+      if (!slot || !c) return;
+      if (!c.width) c.width = pair[0] === "spectrum" ? 640 : 640;
+      if (!c.height) c.height = pair[0] === "spectrum" ? 260 : 480;
+      if (c.parentNode !== slot) slot.appendChild(c);
+    });
+    live.spectrum.hidden = !(EL.mode === "pw" || EL.mode === "cw" || EL.mode === "mmode");
+    return live;
+  }
+
   function stopEchoLab() {
+    if (EL.echolab) { try { EL.echolab.stop(); } catch (e) {} }
+    if (EL.audioHandle) { try { EL.audioHandle.stop(); } catch (e) {} EL.audioHandle = null; }
+    try { if (G.SMD_CLINIX_AUDIO && G.SMD_CLINIX_AUDIO.stopAll) G.SMD_CLINIX_AUDIO.stopAll(); } catch (e) {}
     if (EL.timer) { try { G.clearInterval(EL.timer); } catch (e) {} EL.timer = null; }
     EL.unbind.forEach(function (fn) { try { fn(); } catch (e) {} });
     EL.unbind = [];
@@ -314,27 +382,47 @@
     function bump(c, w, a) { var d = (phase - c) / w; return a * Math.exp(-d * d); }
     return bump(0.12, 0.03, 0.12) + bump(0.30, 0.008, -0.18) + bump(0.33, 0.006, 1) + bump(0.36, 0.009, -0.28) + bump(0.55, 0.045, 0.22);
   }
-  function drawEchoSector() {
+  function drawEcgOnly(ec) {
+    if (!ec || !ec.getContext) return;
+    var ex = ec.getContext("2d"); if (!ex) return;
+    var EW = ec.width, EH = ec.height;
+    var dark = G.document.body && (G.document.body.classList.contains("dark") || G.document.body.classList.contains("v3-dark"));
+    ex.fillStyle = dark ? "#04070a" : "#ffffff"; ex.fillRect(0, 0, EW, EH);
+    ex.strokeStyle = dark ? "#3ee07a" : "#0c6b4f"; ex.lineWidth = 2; ex.beginPath();
+    var cyc = EL.heart && EL.heart.state ? EL.heart.state().cycleTimeMs / Math.max(1, EL.heart.state().cycleMs || 857) : (Date.now() % 857) / 857;
+    for (var x = 0; x < EW; x++) { var ph = (x / EW * 2 + cyc) % 1; var y = EH * 0.62 - ecgValue(ph) * EH * 0.48; if (x === 0) ex.moveTo(x, y); else ex.lineTo(x, y); }
+    ex.stroke();
+  }
+  function drawEchoSector(force) {
+    if (EL.echolab && !force) { /* the live renderer owns the sector canvas */ var ec2 = G.document && G.document.getElementById("krdEcg"); if (ec2) drawEcgOnly(ec2); return; }
+    if (force && EL.echolab && EL.echolab.debug) { var dbg = null; try { dbg = EL.echolab.debug(); } catch (e) {} if (dbg && dbg.rendererCreated) return; /* one renderer per canvas: never paint over the live renderer */ }
     var cv = G.document && G.document.getElementById("krdSector");
     if (!cv || !cv.getContext) return;
-    var ctx = cv.getContext("2d"), W = cv.width, H = cv.height;
+    var ctx = null;
+    try { ctx = cv.getContext("2d"); } catch (e) { ctx = null; }
+    if (!ctx) return; /* the live renderer owns this canvas */
+    var W = cv.width, H = cv.height;
     var dark = G.document.body && (G.document.body.classList.contains("dark") || G.document.body.classList.contains("v3-dark"));
     ctx.fillStyle = dark ? "#04070a" : "#0b1114";
     ctx.fillRect(0, 0, W, H);
     var p = EL.probe, cur = echoCurrentView();
-    var cx = W / 2, top = 26, radius = Math.min(W, H) * 0.92 * (EL.knobs.depth / 240 + 0.35);
-    if (radius > H - 30) radius = H - 30;
+    /* Same sector geometry as KARDIA_US layoutFor: apex centred at
+     * the top, radius fills the canvas height (so at sectorDeg the
+     * fan over-fills the width and is clipped by the canvas edges,
+     * identically at 390 and 820 CSS widths over this fixed canvas),
+     * half-angle sectorDeg/2 about the straight-down beam. Everything
+     * below is clipped to that sector polygon, nothing paints outside. */
+    var depthMm = EL.knobs.depth || 160;
+    var halfRad = ((EL.knobs.sectorDeg || 80) / 2) * Math.PI / 180;
+    var cx = W / 2, top = Math.min(H - 8, Math.round(H * 0.02) + 4), radius = H - top;
     ctx.save();
     ctx.beginPath();
     ctx.moveTo(cx, top);
-    ctx.arc(cx, top, radius, Math.PI / 2 - 0.62, Math.PI / 2 + 0.62);
+    ctx.arc(cx, top, radius, Math.PI / 2 - halfRad, Math.PI / 2 + halfRad);
     ctx.closePath();
     ctx.clip();
     ctx.fillStyle = "#10181d"; ctx.fillRect(0, 0, W, H);
     var drawn = false;
-    if (G.KARDIA_US && typeof G.KARDIA_US.render === "function" && p) {
-      try { drawn = !!G.KARDIA_US.render(cv, p.plane(), { knobs: EL.knobs }); } catch (e) { drawn = false; }
-    }
     if (!drawn && EL.geom && p && cur) {
       try {
         var now = Date.now();
@@ -345,7 +433,11 @@
           EL.polys = EL.geom.cut(pl.origin, pl.normal, pl.up, 260, 260);
         }
         var gain = 0.45 + EL.knobs.gain / 100;
-        var scale = radius / 300;
+        /* Cut points are (right, up) mm about the plane origin. The
+         * apex sits depth*0.42 along +up from that origin (as in
+         * KARDIA_US setProbe({viewId})), so a point's depth along the
+         * down beam is depth*0.42 - up, at the US scale radius/depth. */
+        var scale = radius / depthMm;
         EL.polys.forEach(function (poly) {
           if (!poly.points || poly.points.length < 2) return;
           var e = poly.acoustic ? poly.acoustic.echogenicity : 0.4;
@@ -354,7 +446,7 @@
           ctx.fillStyle = "rgb(" + g + "," + g + "," + Math.min(255, g + 6) + ")";
           ctx.beginPath();
           poly.points.forEach(function (pt, i) {
-            var x = cx + pt[0] * scale, y = H * 0.52 - pt[1] * scale;
+            var x = cx + pt[0] * scale, y = top + (depthMm * 0.42 - pt[1]) * scale;
             if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
           });
           ctx.closePath(); ctx.fill();
@@ -368,7 +460,7 @@
       ctx.strokeStyle = "rgba(220,235,230,0.55)"; ctx.lineWidth = 1.5;
       for (var i = 0; i < 4; i++) {
         ctx.beginPath();
-        ctx.arc(cx, top, radius * (0.25 + i * 0.22), Math.PI / 2 - 0.6, Math.PI / 2 + 0.6);
+        ctx.arc(cx, top, radius * (0.25 + i * 0.22), Math.PI / 2 - halfRad, Math.PI / 2 + halfRad);
         ctx.stroke();
       }
       ctx.fillStyle = "rgba(200,220,215,0.20)";
@@ -377,7 +469,7 @@
     }
     ctx.restore();
     ctx.strokeStyle = "rgba(220,235,230,0.7)";
-    ctx.beginPath(); ctx.moveTo(cx, top); ctx.arc(cx, top, radius, Math.PI / 2 - 0.62, Math.PI / 2 + 0.62); ctx.closePath(); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx, top); ctx.arc(cx, top, radius, Math.PI / 2 - halfRad, Math.PI / 2 + halfRad); ctx.closePath(); ctx.stroke();
     var note = G.document.getElementById("krdSimNote");
     if (note) note.textContent = drawn && EL.geom ? "" :
       (G.KARDIA_US ? "" : I.tx(T("Simulator loading. The schematic sector is a placeholder until the live image arrives.", "Simulator loading.")));
@@ -448,6 +540,63 @@
     });
     drawEchoSector();
   }
+
+  function ensureEchoLab() {
+    if (EL.echolab || !G.KARDIA_ECHOLAB) return EL.echolab;
+    var p = ensureEchoProbe(); if (!p || !EL.heart || !EL.geom) return null;
+    EL.echolab = G.KARDIA_ECHOLAB.create({ doc: G.document, heart: EL.heart, geom: EL.geom, probe: p, knobs: EL.knobs, views: EL.views,
+      getView: function () { return echoCurrentView(); },
+      onFrameStart: function () { try { var S = G.KARDIA_SYNC; if (S && S.renderLatest) S.renderLatest(true); } catch (e) {} },
+      fallbackDraw: function () { drawEchoSector(true); } });
+    return EL.echolab;
+  }
+  function loadPathologyList() {
+    var sel = G.document.getElementById("krdPathology"); if (!sel || sel.options.length > 1 || !G.fetch) return;
+    var ids = ["aortic_stenosis","mitral_stenosis","mitral_regurgitation","aortic_regurgitation","tricuspid_regurgitation","dilated_cardiomyopathy","lv_hypertrophy","pericardial_effusion","cardiac_tamponade","pulmonary_hypertension"];
+    ids.forEach(function (id) {
+      G.fetch(echoBase() + "pathology/" + id + ".json").then(function (r) { return r.json(); }).then(function (d) {
+        var o = G.document.createElement("option"); o.value = d.id; o.textContent = d.name; sel.appendChild(o);
+        EL["path_" + d.id] = d;
+        if (d.id === EL.pathologyId) fillSeverity(d);
+      }).catch(function () {});
+    });
+    sel.addEventListener("change", function () { EL.pathologyId = sel.value; var d = EL["path_" + sel.value]; if (d) fillSeverity(d); else applyPathology(); });
+    var sev = G.document.getElementById("krdSeverity");
+    if (sev) sev.addEventListener("change", function () { EL.severity = sev.value; applyPathology(); });
+  }
+  function fillSeverity(d) {
+    var sev = G.document.getElementById("krdSeverity"); if (!sev) return;
+    sev.innerHTML = "";
+    Object.keys(d.severities || {}).sort().forEach(function (k) { var o = G.document.createElement("option"); o.value = k; o.textContent = k; sev.appendChild(o); });
+    EL.severity = sev.value; applyPathology();
+  }
+  function applyPathology() {
+    var lab = ensureEchoLab(); var note = G.document.getElementById("krdPathologyNote");
+    if (!EL.pathologyId) {
+      if (EL.heart) EL.heart.setParams(G.KARDIA_HEART ? G.KARDIA_HEART.defaults() : {});
+      if (EL.geom && EL.geom.setPathology) EL.geom.setPathology({ wallThicknessScale: 1, chamberDilation: {}, wallMotion: null, effusionMm: 0, leafletThickeningMm: 0, leafletRestriction: 0, vegetation: null, thrombus: null, septalDefect: null });
+      if (note) note.textContent = "Normal heart.";
+      return;
+    }
+    var d = EL["path_" + EL.pathologyId]; if (!d || !lab) return;
+    lab.applyPathology(d, EL.severity);
+    EL.pathology = d;
+    if (note) note.textContent = d.name + ", " + EL.severity + ". ECG and sounds follow the same condition. Use Listen.";
+  }
+  function openMeasure() {
+    var box = G.document.getElementById("krdMeasure"); if (!box || !G.KARDIA_MEASURE) return;
+    box.hidden = false;
+    var lab = ensureEchoLab(); if (!lab) return;
+    var isSpec = (EL.mode === "pw" || EL.mode === "cw");
+    var truth = EL.heart && G.KARDIA_MEASURE.groundTruth ? G.KARDIA_MEASURE.groundTruth(EL.heart) : {};
+    try {
+      if (isSpec) {
+        EL.measureUI = G.KARDIA_MEASURE.createUI(box, { tool: "peakVelocity", quantity: "PeakVelocity", source: lab.spectrumSource(), truth: truth.PeakVelocity });
+      } else {
+        EL.measureUI = G.KARDIA_MEASURE.createUI(box, { tool: "simpson", quantity: "EF", source: lab.imageSource(), truth: truth.EF });
+      }
+    } catch (e) { box.textContent = "Measurement could not open."; }
+  }
   function mountEchoLab() {
     stopEchoLab();
     var p = ensureEchoProbe(), cur = echoCurrentView();
@@ -456,6 +605,10 @@
     else if (!EL._mountedFor) startEchoTarget(cur, false);
     EL._mountedFor = cur.id;
     var doc = G.document;
+    /* Re-attach the persistent canvases into this paint's slots before
+     * anything binds a context or looks them up: the renderer must be
+     * created on (and only ever draw into) the element on screen. */
+    var live = attachLiveCanvases();
     var chest = doc.getElementById("krdChest");
     if (chest) EL.unbind.push(p.bindTouchSurface(chest, { mmPerPx: 0.6 }));
     var tiltStrip = doc.getElementById("krdTiltStrip");
@@ -469,7 +622,14 @@
         var lbl = doc.getElementById(id + "Val");
         if (id === "krdGain") { EL.knobs.gain = val; if (lbl) lbl.textContent = Math.round(val); drawEchoSector(); return; }
         if (id === "krdDepthK") { EL.knobs.depth = val; if (lbl) lbl.textContent = Math.round(val) + " mm"; drawEchoSector(); return; }
-        if (id === "krdFocus") { EL.knobs.focus = val; if (lbl) lbl.textContent = Math.round(val); drawEchoSector(); return; }
+        if (id === "krdFocus") { EL.knobs.focus = val; if (lbl) lbl.textContent = Math.round(val); return; }
+        if (id === "krdFreq") { EL.knobs.frequencyMHz = val; if (lbl) lbl.textContent = val.toFixed(1) + " MHz"; return; }
+        if (id === "krdSectorW") { EL.knobs.sectorDeg = val; if (lbl) lbl.textContent = Math.round(val) + " deg"; return; }
+        if (id === "krdDR") { EL.knobs.dynamicRange = val; if (lbl) lbl.textContent = Math.round(val) + " dB"; return; }
+        if (id === "krdColourGain") { EL.knobs.colourGain = val; if (lbl) lbl.textContent = Math.round(val); return; }
+        if (id === "krdNyquist") { EL.knobs.colourNyquistMs = val; if (lbl) lbl.textContent = val.toFixed(1) + " m/s"; if (EL.echolab) EL.echolab.setMode(EL.mode); return; }
+        if (id.indexOf("krdTgc") === 0) { EL.knobs.tgc[parseInt(id.slice(6), 10)] = val; if (lbl) lbl.textContent = Math.round(val); return; }
+        if (id === "krdCine") { if (EL.echolab) EL.echolab.setCineBack(89 - val); return; }
         if (id === "krdRot") p.setState({ rotationDeg: val });
         else if (id === "krdTiltR") p.setState({ tiltDeg: val });
         else if (id === "krdRockR") p.setState({ rockDeg: val });
@@ -493,6 +653,28 @@
       });
     });
     st.onLeave = stopEchoLab;
+    var lab = ensureEchoLab();
+    if (lab) {
+      lab.mount(live ? live.sector : doc.getElementById("krdSector"), live ? live.overlay : doc.getElementById("krdOverlay"), live ? live.spectrum : doc.getElementById("krdSpectrum"),
+        { specReadout: doc.getElementById("krdSpecReadout"), fps: doc.getElementById("krdFps") });
+      lab.setMode(EL.mode);
+      if (EL.anatomyState === "idle") {
+        EL.anatomyState = "loading";
+        var loadBox = doc.getElementById("krdAnatomyLoad"), fill = doc.getElementById("krdAnatomyFill"), txt = doc.getElementById("krdAnatomyText");
+        if (loadBox) loadBox.hidden = false;
+        lab.loadRealAnatomy(function (done, total) {
+          if (fill) fill.style.width = Math.round(done / Math.max(1, total) * 100) + "%";
+          if (txt) txt.textContent = "Loading real anatomy. " + done + " of " + total + " chunks.";
+        }).then(function (real) {
+          EL.anatomyState = real ? "real" : "fallback";
+          if (loadBox) loadBox.hidden = real;
+          var note = doc.getElementById("krdSimNote");
+          if (note && !real) note.textContent = lab.loadNote();
+          if (txt && !real) txt.textContent = lab.loadNote();
+        });
+      }
+    }
+    loadPathologyList();
     updateEchoLab();
     EL.timer = G.setInterval(function () { EL.lastCutAt = 0; updateEchoLab(); }, 450);
   }
@@ -676,10 +858,39 @@
       return;
     }
   };
+  I.ACTIONS["kecho-mode"] = function (b) {
+    EL.mode = b.getAttribute("data-v");
+    G.document.querySelectorAll("[data-act=kecho-mode]").forEach(function (x) { x.setAttribute("aria-pressed", String(x.getAttribute("data-v") === EL.mode)); });
+    var lab = ensureEchoLab(); if (lab) lab.setMode(EL.mode);
+    var spec = G.document.getElementById("krdSpectrum"); if (spec) spec.hidden = !(EL.mode === "pw" || EL.mode === "cw" || EL.mode === "mmode");
+  };
+  I.ACTIONS["kecho-freeze"] = function (b) {
+    EL.frozen = !EL.frozen; b.setAttribute("aria-pressed", String(EL.frozen));
+    b.textContent = EL.frozen ? I.tx(T("Live", "Live")) : I.tx(T("Freeze", "Freeze"));
+    var lab = ensureEchoLab(); if (lab) lab.setFrozen(EL.frozen);
+    var cine = G.document.getElementById("krdCine"); if (cine) cine.disabled = !EL.frozen;
+    var mb = G.document.getElementById("krdMeasureBtn"); if (mb) mb.disabled = !EL.frozen;
+  };
+  I.ACTIONS["kecho-measure"] = function () { openMeasure(); };
+  I.ACTIONS["kecho-listen"] = function (b) {
+    try {
+      if (!G.SMD_CLINIX_AUDIO || !G.SMD_CLINIX_AUDIO.play) { I.toast("Sound is not available."); return; }
+      var lab = ensureEchoLab();
+      var kind = lab && EL.pathology ? lab.soundKind(EL.pathology) : "s1s2_normal";
+      EL.audioHandle = G.SMD_CLINIX_AUDIO.play(kind, { beats: 4 });
+      b.setAttribute("aria-pressed", "true");
+      G.setTimeout(function () { b.setAttribute("aria-pressed", "false"); }, 4000);
+    } catch (e) { I.toast("Sound is not available."); }
+  };
   I.ACTIONS["kecho-knobs"] = function (b) {
     EL.knobsOpen = !EL.knobsOpen;
     var panel = G.document.getElementById("krdKnobs");
     if (panel) { panel.hidden = !EL.knobsOpen; b.setAttribute("aria-expanded", String(EL.knobsOpen)); }
+  };
+  /* SyncProbe (two-phone training): the button opens the SyncProbe role sheet;
+     the module paints its link pill into #krdSyncPill and owns the rest. */
+  I.ACTIONS["kecho-syncprobe"] = function () {
+    try { if (G.KARDIA_SYNCPROBE) G.KARDIA_SYNCPROBE.open(); } catch (e) { I.toast("SyncProbe is not ready yet."); }
   };
   I.ACTIONS["kecho-gyro"] = function (b) {
     var p = ensureEchoProbe();
@@ -742,8 +953,48 @@
         return false;
       },
       setProbeState: function (s) { var p = ensureEchoProbe(); if (p) { p.setState(s); updateEchoLab(); } return p ? p.getState() : null; },
+      suspendLive: function () { var lab = ensureEchoLab(); if (lab && lab.suspend) lab.suspend(); if (EL.timer) { try { G.clearInterval(EL.timer); } catch (e) {} EL.timer = null; } return true; },
+      resumeLive: function () { var lab = ensureEchoLab(); if (lab && lab.resume) lab.resume(); if (!EL.timer && host.isOpen() && tab() === "echo") EL.timer = G.setInterval(function () { EL.lastCutAt = 0; updateEchoLab(); }, 450); return true; },
+      isLiveSuspended: function () { return !!(EL.echolab && EL.echolab.isSuspended && EL.echolab.isSuspended()); },
       getProbeState: function () { var p = ensureEchoProbe(); return p ? p.getState() : null; },
       getScore: function () { var p = ensureEchoProbe(), v = echoCurrentView(); return p && v ? p.score(v) : null; },
+      diagnostics: function (id) { var lab = ensureEchoLab(); return lab && lab.diagnostics ? lab.diagnostics(id) : null; },
+      get echolab() { return EL.echolab; },
+      debug: function () {
+        var d = EL.echolab && EL.echolab.debug ? EL.echolab.debug() : null;
+        var sector = G.document && G.document.getElementById ? G.document.getElementById("krdSector") : null;
+        return {
+          rendererCreated: !!(d && d.rendererCreated),
+          rendererMode: d ? d.rendererMode : null,
+          rendererOnCurrentCanvas: !!(d && d.rendererOnCurrentCanvas),
+          sectorConnected: !!(d && d.sectorConnected),
+          sectorIsVisibleCanvas: !!(sector && G.document.elementFromPoint && (function () { var r = sector.getBoundingClientRect ? sector.getBoundingClientRect() : null; return !!(r && r.width && G.document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2) === sector); })()),
+          rendererErrors: d ? d.rendererErrors : [],
+          geometryMode: d ? d.geometryMode : (EL.geom ? "parametric" : "none"),
+          chunksLoaded: d ? d.chunksLoaded : 0,
+          loadedParts: d ? d.loadedParts : 0,
+          anatomyState: EL.anatomyState,
+          lastFrameAt: d ? d.lastFrameAt : 0,
+          lastFrameMs: d ? d.lastFrameMs : 0,
+          frames: d ? d.frames : 0,
+          running: !!(d && d.running),
+          hasSectorCanvas: !!sector,
+          canvasWidth: d ? d.canvasWidth : (sector ? sector.width : null), canvasHeight: d ? d.canvasHeight : (sector ? sector.height : null),
+          clientWidth: d ? d.clientWidth : (sector ? (sector.clientWidth || 0) : null), clientHeight: d ? d.clientHeight : (sector ? (sector.clientHeight || 0) : null),
+          devicePixelRatio: d ? d.devicePixelRatio : 1,
+          diag: (function () { try { var lab = EL.echolab; if (!lab || !lab.diagnostics) return null; var dg = lab.diagnostics(EL.viewId || "tte_a4c"); if (dg) delete dg.cut; return dg; } catch (e) { return null; } })(),
+          hasHeart: !!EL.heart, hasGeom: !!EL.geom, hasProbe: !!EL.probe,
+          globals: { us: !!G.KARDIA_US, geom: !!G.KARDIA_GEOM, doppler: !!G.KARDIA_DOPPLER, measure: !!G.KARDIA_MEASURE, heart: !!G.KARDIA_HEART, probe: !!G.KARDIA_PROBE, echolab: !!G.KARDIA_ECHOLAB },
+          lastError: d ? d.lastError : ""
+        };
+      },
+      get mode() { return EL.mode; },
+      setMode: function (m) { EL.mode = m; var lab = ensureEchoLab(); if (lab) lab.setMode(m); return EL.mode; },
+      get knobs() { return EL.knobs; },
+      setKnob: function (k, v) { EL.knobs[k] = v; return EL.knobs; },
+      applyPathology: function (cond, sev) { var lab = ensureEchoLab(); if (lab) lab.applyPathology(cond, sev); EL.pathology = cond; return lab ? lab.getSpectrum() : null; },
+      freeze: function (f) { EL.frozen = !!f; var lab = ensureEchoLab(); if (lab) lab.setFrozen(f); },
+      openMeasure: function () { openMeasure(); return EL.measureUI; },
       stateForView: function (id) { var p = ensureEchoProbe(); return p ? p.stateForView(id) : null; }
     } };
 })(typeof window !== "undefined" ? window : this);

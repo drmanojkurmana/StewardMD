@@ -157,15 +157,16 @@
     }
     /* Target plane cache: one entry per view id holding the plane the
      * probe must reproduce plus the landmark refs actually visible in
-     * the target cut (the scored "expected" set). Normal and up always
-     * come from the CURRENT views.json entry. The origin starts at
-     * geom.viewPlane's best origin and moves along the normal only when
-     * a cut at the moved origin covers strictly more listed landmarks
-     * (verified with geom.cut, the same cut the score uses), so views
-     * that already cover everything keep the catalogue origin exactly.
-     * Entries hold the frozen target the score compares against, so the
-     * target does not swim while the heart beats. Copies go out;
-     * setViews/setGeom clear the cache. */
+     * the target cut (the scored "expected" set). The target plane is
+     * geom.viewPlane(view) exactly (origin, normal and up): shifting
+     * the origin along the normal to chase extra landmarks would make
+     * Echo Lab image a different slice from the standalone renderer,
+     * which calls viewPlane directly. Entries hold the frozen target
+     * the score compares against, so the target does not swim while
+     * the heart beats. Copies go out; setViews/setGeom clear the
+     * cache, and Echo Lab calls setGeom after real anatomy loads so a
+     * target solved against the parametric geometry is re-solved
+     * against the real meshes. */
     var targetCache = {};
     function cutSeen(tp) {
       if (!geom || !geom.cut) return null;
@@ -182,31 +183,6 @@
       tp = { origin: tp.origin.slice(), normal: norm(tp.normal), up: norm(tp.up), viewId: v.id };
       var refs = (v.landmarks || []).map(function (lm) { return lm.ref; });
       var seen = cutSeen(tp);
-      var hit = seen ? refs.filter(function (r) { return seen[r]; }) : refs.slice();
-      if (seen && hit.length < refs.length) {
-        var n = tp.normal, d0 = dot(tp.origin, n);
-        var bestD = d0, bestHit = hit.length, k, d, cov, h2;
-        for (k = -40; k <= 40; k += 4) {
-          d = d0 + k;
-          cov = cutSeen({ origin: mul(n, d), normal: n, up: tp.up });
-          if (!cov) continue;
-          h2 = refs.filter(function (r) { return cov[r]; }).length;
-          if (h2 > bestHit || (h2 === bestHit && Math.abs(d - d0) < Math.abs(bestD - d0))) { bestHit = h2; bestD = d; }
-        }
-        for (k = -3; k <= 3; k += 1) {
-          if (k === 0) continue;
-          d = bestD + k;
-          cov = cutSeen({ origin: mul(n, d), normal: n, up: tp.up });
-          if (!cov) continue;
-          h2 = refs.filter(function (r) { return cov[r]; }).length;
-          if (h2 > bestHit || (h2 === bestHit && Math.abs(d - d0) < Math.abs(bestD - d0))) { bestHit = h2; bestD = d; }
-        }
-        if (bestHit > hit.length) {
-          tp = { origin: mul(n, bestD), normal: n, up: tp.up, viewId: v.id };
-          seen = cutSeen(tp);
-          hit = seen ? refs.filter(function (r) { return seen[r]; }) : hit;
-        }
-      }
       var entry = { plane: tp, expected: seen ? refs.filter(function (r) { return seen[r]; }) : refs.slice() };
       targetCache[v.id] = entry;
       return entry;

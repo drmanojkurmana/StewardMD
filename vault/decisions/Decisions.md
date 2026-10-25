@@ -11872,3 +11872,10 @@ The owner ruled it twice: the product is the iOS and Android app only. An agent 
 were missing from the Drugs page. The real cause was `build-www.sh` not copying `prep/figures/figures.json` into `www/`. Rule added to
 CLAUDE.md, AGENTS.md and vault/Home.md: say "the app" or "the phone"; when a repo fix is not visible, check the `www/` bundle and the native
 rebuild or OTA first. Do not re-litigate.
+
+## 2026-10-26 - Kardia is on for everyone
+Owner: "Keep kardia open for everyone." `smd_kardia` default changed from off (tester only) to on (`kardia-flags.js`). Unchanged: the Pro
+lock with its free preview, the KardiQ X AI reading behind `SMD_XACCESS.gate("kardiox")`, and every Kardia clinical file staying
+`ai_drafted` until clinical sign-off. A device can still turn Kardia off with `?kardia=0` or `localStorage smd_kardia = "0"`. Ships by OTA
+(owner asked for OTA the same night). SyncProbe's offline Bluetooth path needs the native plugin, so OTA phones pair over the internet relay
+only until the next store or device build. Do not re-litigate.

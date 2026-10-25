@@ -15,9 +15,9 @@ import vm from "node:vm";
 const require = createRequire(import.meta.url);
 
 /* ---------- 1. the flag: DEFAULT OFF, tester mechanism only, no early-access tier ---------- */
-test("smd_kardia defaults OFF; ?kardia=1 or localStorage 1 turns it on", () => {
+test("smd_kardia defaults ON for everyone (owner 2026-10-26); 0 or ?kardia=0 turns it off on a device", () => {
   const FLAGS = require("../kardia-flags.js");
-  assert.equal(FLAGS.DEFS.smd_kardia.def, false, "default off");
+  assert.equal(FLAGS.DEFS.smd_kardia.def, true, "default on for everyone");
   assert.equal(FLAGS.DEFS.smd_kardia.query, "kardia", "tester query param");
 
   const g = globalThis;
@@ -26,7 +26,7 @@ test("smd_kardia defaults OFF; ?kardia=1 or localStorage 1 turns it on", () => {
     const mem = {};
     g.localStorage = { getItem: (k) => (k in mem ? mem[k] : null), setItem: (k, v) => { mem[k] = String(v); } };
     g.location = { search: "" };
-    assert.equal(FLAGS.bool("smd_kardia"), false, "off with nothing set");
+    assert.equal(FLAGS.bool("smd_kardia"), true, "on with nothing set");
     mem.smd_kardia = "1";
     assert.equal(FLAGS.bool("smd_kardia"), true, "localStorage 1 turns it on");
     mem.smd_kardia = "0";
@@ -46,12 +46,12 @@ test("smd_kardia defaults OFF; ?kardia=1 or localStorage 1 turns it on", () => {
 /* ---------- 2. boot loads only kardia-loader.js; the loader lists the engine + Kardia at one token ---------- */
 test("app boot loads only kardia-loader.js; the loader lists the engine and Kardia files at one version token", () => {
   const html = readFileSync("index.html", "utf8");
-  assert.ok(html.includes('<script src="/kardia-loader.js?v=krd3" defer></script>'), "loader tag at krd3");
+  assert.ok(html.includes('<script src="/kardia-loader.js?v=krd4" defer></script>'), "loader tag at krd4");
   const eng = /(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?|kardia[-.\w]*)\.(js|css)\?v=\w+/g;
   const got = (html.match(eng) || []).filter((s) => !/kardiox/i.test(s));
-  assert.deepEqual(got, ["kardia-loader.js?v=krd3"], "boot requests no engine or Kardia file but the loader, and no KardiQ X file is mistaken for Kardia: " + got.join(","));
+  assert.deepEqual(got, ["kardia-loader.js?v=krd4"], "boot requests no engine or Kardia file but the loader, and no KardiQ X file is mistaken for Kardia: " + got.join(","));
   const L = readFileSync("kardia-loader.js", "utf8"), v = /var V = "(\w+)"/.exec(L)[1];
-  assert.equal(v, "krd3", "the loader injects at the same token as its own tag");
+  assert.equal(v, "krd4", "the loader injects at the same token as its own tag");
   for (const f of ["specialty.css", "kardia.css", "specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "kardia-flags.js", "kardia.js"]) assert.ok(L.includes('"' + f + '"'), f);
   assert.ok(L.indexOf('"specialty-shell.js"') < L.indexOf('"kardia.js"'), "engine, then the host");
 });
@@ -69,14 +69,14 @@ test("build-www.sh ships the kardia data directory; root kardia files ride the r
 });
 
 /* ---------- 3. Home: flag off = unchanged; flag on = Kardia replaces the KardiQ X tile ---------- */
-test("home tile: Kardia is tester-only and replaces the KardiQ X tile only while on", () => {
+test("home tile: Kardia is on for everyone (owner 2026-10-26) and replaces the KardiQ X tile while on", () => {
   const h = readFileSync("home.js", "utf8");
   const i = h.indexOf('act: "kardia"');
   assert.ok(i > 0, "kardia tile entry exists");
   const tile = h.slice(i, i + 400);
   assert.ok(!/defOn: false/.test(tile.slice(0, tile.indexOf("eligible"))), "no defOn:false, so a tester with the flag on sees it like the KardiQ X tile");
   assert.ok(/kardiaOn\(\)/.test(tile), "eligible() reads the tester flag");
-  assert.ok(/getItem\("smd_kardia"\) === "1"/.test(h), "flag on means exactly localStorage 1");
+  assert.ok(/getItem\("smd_kardia"\) !== "0"/.test(h), "before kardia-flags.js loads, Home treats Kardia as on unless the device stored 0");
   assert.ok(!/hasEarlyAccess/.test(h.slice(h.indexOf("function kardiaOn"), h.indexOf("function kardiaOn") + 600)), "kardiaOn has no early-access tier");
   const kx = h.slice(h.indexOf('act: "kardiox"'), h.indexOf('act: "kardiox"') + 500);
   assert.ok(/&& !kardiaOn\(\)/.test(kx), "KardiQ X tile hides while Kardia is on");
