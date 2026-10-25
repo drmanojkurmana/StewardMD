@@ -12,6 +12,29 @@ test("mapKnobs: centre gain is 0 dB, TGC centre is 0 dB", () => {
   assert.ok(hi.gain > 20); assert.equal(hi.tgc[0], 12); assert.equal(hi.tgc[1], -12);
 });
 
+test("backingSizeForCssBox scales both axes by the same DPR (aspect preserved)", () => {
+  assert.deepEqual(P.backingSizeForCssBox(358, 268.5, 2), { width: 716, height: 537, scale: 2 });
+  assert.deepEqual(P.backingSizeForCssBox(358, 269, 1), { width: 358, height: 269, scale: 1 });
+  assert.deepEqual(P.backingSizeForCssBox(100, 50, 1.5), { width: 150, height: 75, scale: 1.5 });
+  for (const [w, h, d] of [[390, 292, 2], [820, 615, 2], [333, 250, 3]]) {
+    const s = P.backingSizeForCssBox(w, h, d);
+    assert.ok(Math.abs(s.width / s.height - w / h) < 0.01, `aspect ${w}x${h}@${d} -> ${s.width}x${s.height}`);
+    assert.equal(s.width, Math.round(w * d)); assert.equal(s.height, Math.round(h * d));
+  }
+  assert.equal(P.backingSizeForCssBox(0, 100, 2), null);
+  assert.equal(P.backingSizeForCssBox(100, 0, 2), null);
+});
+
+test("fitCanvasToCssBox sets backing = CSS box x DPR uniformly and is a no-op when already sized", () => {
+  const c = { width: 640, height: 480, clientWidth: 358, clientHeight: 269 };
+  assert.deepEqual(P.fitCanvasToCssBox(c, 2), { width: 716, height: 538, scale: 2 });
+  assert.equal(c.width, 716); assert.equal(c.height, 538);
+  assert.deepEqual(P.fitCanvasToCssBox(c, 2), { width: 716, height: 538, scale: 2 });
+  const hidden = { width: 640, height: 480, clientWidth: 0, clientHeight: 0 };
+  assert.equal(P.fitCanvasToCssBox(hidden, 2), null);
+  assert.equal(hidden.width, 640, "no CSS box: backing untouched");
+});
+
 test("pickResolutionScale steps down when frames are slow", () => {
   assert.equal(P.pickResolutionScale(2, 10), 2);
   assert.equal(P.pickResolutionScale(2, 40), 0.5);
@@ -102,6 +125,16 @@ test("renderer is never created for a detached or zero-size sector canvas", () =
   }
 });
 
+test("canvas CSS box aspect is pinned and mount/resize sizing is wired", async () => {
+  const { readFileSync } = await import("node:fs");
+  const css = readFileSync(new URL("../kardia-echolab.css", import.meta.url), "utf8");
+  const src = readFileSync(new URL("../kardia-echolab.js", import.meta.url), "utf8");
+  assert.ok(/#krdSector \{[^}]*aspect-ratio: 4 \/ 3/.test(css), "sector CSS box is 4:3 regardless of backing");
+  assert.ok(src.includes("resizeCanvases(); observeResize();"), "mount sizes canvases from the CSS box and observes resize");
+  assert.ok(src.includes("fitCanvasToCssBox"), "sizing goes through the uniform DPR fit");
+  assert.ok(src.includes("diagnostics:"), "diagnostics bundle exposed for the browser runner");
+});
+
 test("host keeps persistent live canvases outside the repainted HTML and joins probe text with Marker", async () => {
   const { readFileSync } = await import("node:fs");
   const src = readFileSync(new URL("../kardia.js", import.meta.url), "utf8");
@@ -112,6 +145,53 @@ test("host keeps persistent live canvases outside the repainted HTML and joins p
   assert.ok(src.includes("attachLiveCanvases()"), "mount re-attaches after every paint");
   assert.ok(src.includes('". Marker "'), 'probe text joins as "<position>. Marker <direction>."');
   assert.ok(/\.kel-overlay \{[^}]*pointer-events: none/.test(css), "overlay does not cover the sector for hit testing");
+});
+
+test("probeForPlane puts the apex up-ray from the plane origin like setProbe({viewId})", () => {
+  const pl = { origin: [10, 20, 30], normal: [1, 0, 0], up: [0, 0, -1] };
+  const p = P.probeForPlane(pl, 160);
+  assert.deepEqual(p.viewOrigin, [10, 20, 30], "plane origin stays the cut origin");
+  assert.deepEqual(p.up, [0, 0, -1], "display up is passed through, so the beam (-up) points down the fan");
+  assert.deepEqual(p.normal, [1, 0, 0]);
+  assert.ok(Math.abs(p.origin[0] - 10) < 1e-9 && Math.abs(p.origin[1] - 20) < 1e-9);
+  assert.ok(Math.abs(p.origin[2] - (30 - 160 * 0.42)) < 1e-9,
+    "apex sits depth*0.42 along +up from the plane origin, got " + p.origin);
+});
+
+test("fallbackDraw never paints over a live renderer, only when no renderer exists", () => {
+  const prevUS = globalThis.KARDIA_US, prevRAF = globalThis.requestAnimationFrame, prevCAF = globalThis.cancelAnimationFrame;
+  let rafCb = null, fallbackCalls = 0, renderer = null;
+  globalThis.requestAnimationFrame = (cb) => { rafCb = cb; return 1; };
+  globalThis.cancelAnimationFrame = () => {};
+  try {
+    const doc = { hidden: false, addEventListener() {}, removeEventListener() {} };
+    const heart = { step() {}, state: () => ({ timeMs: 0, cycleTimeMs: 0, volumes: { LV: 100 } }) };
+    const probe = { plane: () => ({ origin: [0, 0, 0], normal: [1, 0, 0], up: [0, 0, -1] }) };
+    globalThis.KARDIA_US = { create(canvas) {
+      renderer = { canvas, stats: { mode: "webgl", frames: 0, ms: 16 }, errors: [], setProbe() {}, setKnobs() {}, frame() { return false; }, snapshot() { return {}; }, destroy() {} };
+      return renderer;
+    } };
+    const lab = EL.create({ doc, heart, geom: { loadedParts: () => [] }, probe, knobs: P.cloneKnobs(null),
+      fallbackDraw() { fallbackCalls++; } });
+    lab.mount({ width: 64, height: 48 }, null, null, {});
+    assert.ok(renderer, "renderer created");
+    if (rafCb) rafCb(1000);
+    assert.equal(fallbackCalls, 0, "a failed/lost live frame keeps the renderer as sole painter");
+    lab.destroy();
+    /* No KARDIA_US at all: the schematic fallback is the only painter. */
+    delete globalThis.KARDIA_US;
+    fallbackCalls = 0; rafCb = null;
+    const lab2 = EL.create({ doc, heart, geom: { loadedParts: () => [] }, probe, knobs: P.cloneKnobs(null),
+      fallbackDraw() { fallbackCalls++; } });
+    lab2.mount({ width: 64, height: 48 }, null, null, {});
+    if (rafCb) rafCb(1000);
+    assert.ok(fallbackCalls > 0, "fallback paints when no renderer exists");
+    lab2.destroy();
+  } finally {
+    if (prevUS === undefined) delete globalThis.KARDIA_US; else globalThis.KARDIA_US = prevUS;
+    if (prevRAF === undefined) delete globalThis.requestAnimationFrame; else globalThis.requestAnimationFrame = prevRAF;
+    if (prevCAF === undefined) delete globalThis.cancelAnimationFrame; else globalThis.cancelAnimationFrame = prevCAF;
+  }
 });
 
 test("severity helpers read the pathology files shape", () => {

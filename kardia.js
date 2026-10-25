@@ -381,6 +381,7 @@
   }
   function drawEchoSector(force) {
     if (EL.echolab && !force) { /* the live renderer owns the sector canvas */ var ec2 = G.document && G.document.getElementById("krdEcg"); if (ec2) drawEcgOnly(ec2); return; }
+    if (force && EL.echolab && EL.echolab.debug) { var dbg = null; try { dbg = EL.echolab.debug(); } catch (e) {} if (dbg && dbg.rendererCreated) return; /* one renderer per canvas: never paint over the live renderer */ }
     var cv = G.document && G.document.getElementById("krdSector");
     if (!cv || !cv.getContext) return;
     var ctx = null;
@@ -391,19 +392,23 @@
     ctx.fillStyle = dark ? "#04070a" : "#0b1114";
     ctx.fillRect(0, 0, W, H);
     var p = EL.probe, cur = echoCurrentView();
-    var cx = W / 2, top = 26, radius = Math.min(W, H) * 0.92 * (EL.knobs.depth / 240 + 0.35);
-    if (radius > H - 30) radius = H - 30;
+    /* Same sector geometry as KARDIA_US layoutFor: apex centred at
+     * the top, radius fills the canvas height (so at sectorDeg the
+     * fan over-fills the width and is clipped by the canvas edges,
+     * identically at 390 and 820 CSS widths over this fixed canvas),
+     * half-angle sectorDeg/2 about the straight-down beam. Everything
+     * below is clipped to that sector polygon, nothing paints outside. */
+    var depthMm = EL.knobs.depth || 160;
+    var halfRad = ((EL.knobs.sectorDeg || 80) / 2) * Math.PI / 180;
+    var cx = W / 2, top = Math.min(H - 8, Math.round(H * 0.02) + 4), radius = H - top;
     ctx.save();
     ctx.beginPath();
     ctx.moveTo(cx, top);
-    ctx.arc(cx, top, radius, Math.PI / 2 - 0.62, Math.PI / 2 + 0.62);
+    ctx.arc(cx, top, radius, Math.PI / 2 - halfRad, Math.PI / 2 + halfRad);
     ctx.closePath();
     ctx.clip();
     ctx.fillStyle = "#10181d"; ctx.fillRect(0, 0, W, H);
     var drawn = false;
-    if (G.KARDIA_US && typeof G.KARDIA_US.render === "function" && p) {
-      try { drawn = !!G.KARDIA_US.render(cv, p.plane(), { knobs: EL.knobs }); } catch (e) { drawn = false; }
-    }
     if (!drawn && EL.geom && p && cur) {
       try {
         var now = Date.now();
@@ -414,7 +419,11 @@
           EL.polys = EL.geom.cut(pl.origin, pl.normal, pl.up, 260, 260);
         }
         var gain = 0.45 + EL.knobs.gain / 100;
-        var scale = radius / 300;
+        /* Cut points are (right, up) mm about the plane origin. The
+         * apex sits depth*0.42 along +up from that origin (as in
+         * KARDIA_US setProbe({viewId})), so a point's depth along the
+         * down beam is depth*0.42 - up, at the US scale radius/depth. */
+        var scale = radius / depthMm;
         EL.polys.forEach(function (poly) {
           if (!poly.points || poly.points.length < 2) return;
           var e = poly.acoustic ? poly.acoustic.echogenicity : 0.4;
@@ -423,7 +432,7 @@
           ctx.fillStyle = "rgb(" + g + "," + g + "," + Math.min(255, g + 6) + ")";
           ctx.beginPath();
           poly.points.forEach(function (pt, i) {
-            var x = cx + pt[0] * scale, y = H * 0.52 - pt[1] * scale;
+            var x = cx + pt[0] * scale, y = top + (depthMm * 0.42 - pt[1]) * scale;
             if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
           });
           ctx.closePath(); ctx.fill();
@@ -437,7 +446,7 @@
       ctx.strokeStyle = "rgba(220,235,230,0.55)"; ctx.lineWidth = 1.5;
       for (var i = 0; i < 4; i++) {
         ctx.beginPath();
-        ctx.arc(cx, top, radius * (0.25 + i * 0.22), Math.PI / 2 - 0.6, Math.PI / 2 + 0.6);
+        ctx.arc(cx, top, radius * (0.25 + i * 0.22), Math.PI / 2 - halfRad, Math.PI / 2 + halfRad);
         ctx.stroke();
       }
       ctx.fillStyle = "rgba(200,220,215,0.20)";
@@ -446,7 +455,7 @@
     }
     ctx.restore();
     ctx.strokeStyle = "rgba(220,235,230,0.7)";
-    ctx.beginPath(); ctx.moveTo(cx, top); ctx.arc(cx, top, radius, Math.PI / 2 - 0.62, Math.PI / 2 + 0.62); ctx.closePath(); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx, top); ctx.arc(cx, top, radius, Math.PI / 2 - halfRad, Math.PI / 2 + halfRad); ctx.closePath(); ctx.stroke();
     var note = G.document.getElementById("krdSimNote");
     if (note) note.textContent = drawn && EL.geom ? "" :
       (G.KARDIA_US ? "" : I.tx(T("Simulator loading. The schematic sector is a placeholder until the live image arrives.", "Simulator loading.")));
@@ -508,7 +517,8 @@
   function ensureEchoLab() {
     if (EL.echolab || !G.KARDIA_ECHOLAB) return EL.echolab;
     var p = ensureEchoProbe(); if (!p || !EL.heart || !EL.geom) return null;
-    EL.echolab = G.KARDIA_ECHOLAB.create({ doc: G.document, heart: EL.heart, geom: EL.geom, probe: p, knobs: EL.knobs,
+    EL.echolab = G.KARDIA_ECHOLAB.create({ doc: G.document, heart: EL.heart, geom: EL.geom, probe: p, knobs: EL.knobs, views: EL.views,
+      getView: function () { return echoCurrentView(); },
       fallbackDraw: function () { drawEchoSector(true); } });
     return EL.echolab;
   }
@@ -910,6 +920,7 @@
       setProbeState: function (s) { var p = ensureEchoProbe(); if (p) { p.setState(s); updateEchoLab(); } return p ? p.getState() : null; },
       getProbeState: function () { var p = ensureEchoProbe(); return p ? p.getState() : null; },
       getScore: function () { var p = ensureEchoProbe(), v = echoCurrentView(); return p && v ? p.score(v) : null; },
+      diagnostics: function (id) { var lab = ensureEchoLab(); return lab && lab.diagnostics ? lab.diagnostics(id) : null; },
       get echolab() { return EL.echolab; },
       debug: function () {
         var d = EL.echolab && EL.echolab.debug ? EL.echolab.debug() : null;
@@ -930,6 +941,10 @@
           frames: d ? d.frames : 0,
           running: !!(d && d.running),
           hasSectorCanvas: !!sector,
+          canvasWidth: d ? d.canvasWidth : (sector ? sector.width : null), canvasHeight: d ? d.canvasHeight : (sector ? sector.height : null),
+          clientWidth: d ? d.clientWidth : (sector ? (sector.clientWidth || 0) : null), clientHeight: d ? d.clientHeight : (sector ? (sector.clientHeight || 0) : null),
+          devicePixelRatio: d ? d.devicePixelRatio : 1,
+          diag: (function () { try { var lab = EL.echolab; if (!lab || !lab.diagnostics) return null; var dg = lab.diagnostics(EL.viewId || "tte_a4c"); if (dg) delete dg.cut; return dg; } catch (e) { return null; } })(),
           hasHeart: !!EL.heart, hasGeom: !!EL.geom, hasProbe: !!EL.probe,
           globals: { us: !!G.KARDIA_US, geom: !!G.KARDIA_GEOM, doppler: !!G.KARDIA_DOPPLER, measure: !!G.KARDIA_MEASURE, heart: !!G.KARDIA_HEART, probe: !!G.KARDIA_PROBE, echolab: !!G.KARDIA_ECHOLAB },
           lastError: d ? d.lastError : ""

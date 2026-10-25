@@ -8,7 +8,8 @@
  *   SHOTS=/tmp/shots to override the output dir)
  */
 import { spawn } from "node:child_process";
-import { mkdirSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, rmSync, writeFileSync, readFileSync, existsSync } from "node:fs";
+import zlib from "node:zlib";
 import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -36,6 +37,118 @@ const call = (m, p) => { const i = msgId++; return new Promise(r => { pending.se
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
 const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(200); } return false; };
 const reqs = []; let fails = 0; const ok = (c, m) => { console.log((c ? "✅ " : "❌ ") + m); if (!c) fails++; };
+
+/* Minimal PNG decoder (8-bit RGB/RGBA, no interlace: what canvas
+ * toDataURL produces) so the sector assertions below run on the saved
+ * canvas pixels themselves, not on renderer-internal state. */
+function decodePng(path) {
+  const buf = readFileSync(path);
+  let off = 8, w = 0, h = 0, colour = 6;
+  const idat = [];
+  while (off < buf.length) {
+    const len = buf.readUInt32BE(off), type = buf.toString("ascii", off + 4, off + 8), data = buf.slice(off + 8, off + 8 + len);
+    if (type === "IHDR") { w = data.readUInt32BE(0); h = data.readUInt32BE(4); colour = data[9]; }
+    if (type === "IDAT") idat.push(data);
+    off += 12 + len;
+  }
+  const ch = colour === 2 ? 3 : 4, raw = zlib.inflateSync(Buffer.concat(idat)), stride = w * ch;
+  const out = Buffer.alloc(w * h * ch);
+  let p = 0;
+  for (let y = 0; y < h; y++) {
+    const f = raw[p++], row = raw.slice(p, p + stride); p += stride;
+    const cur = out.slice(y * stride, (y + 1) * stride), prev = y ? out.slice((y - 1) * stride, y * stride) : Buffer.alloc(stride);
+    for (let i = 0; i < stride; i++) {
+      const a = i >= ch ? cur[i - ch] : 0, b = prev[i], c = i >= ch ? prev[i - ch] : 0;
+      let v = row[i];
+      if (f === 1) v = (v + a) & 255; else if (f === 2) v = (v + b) & 255;
+      else if (f === 3) v = (v + ((a + b) >> 1)) & 255;
+      else if (f === 4) { const pa = Math.abs(b - c), pb = Math.abs(a - c), pc = Math.abs(a + b - 2 * c); v = (v + (pa <= pb && pa <= pc ? a : pb <= pc ? b : c)) & 255; }
+      cur[i] = v;
+    }
+  }
+  return { w, h, ch, data: out };
+}
+/* Sector check on saved pixels. Sector geometry is the renderer's
+ * (KARDIA_US layoutFor at the 640x480 live canvas, Echo Lab knobs
+ * depth 160 / sector 80): apex centred at the top, beam straight
+ * down, half-angle 40 degrees, radius filling the canvas height.
+ * Non-black is luminance over 20 (above the CPU path's Bayer dither).
+ * Returns outside non-black percent and the fan axis deviation from
+ * vertical: half the difference of the median left and right edge
+ * angles of the non-black region over rows at 0.35..0.95 of the
+ * radius (median, so isolated fragments cannot swing the edges). */
+function sectorCheck(path) {
+  const { w, h, ch, data } = decodePng(path);
+  const apexX = w / 2, apexY = Math.min(h - 8, Math.round(h * 0.02) + 4);
+  const radius = h - apexY, half = 40 * Math.PI / 180;
+  let outside = 0, outsideLit = 0;
+  const leftAngles = [], rightAngles = [];
+  for (let y = 0; y < h; y++) {
+    let mn = Infinity, mx = -Infinity;
+    for (let x = 0; x < w; x++) {
+      const o = (y * w + x) * ch;
+      const lum = (data[o] + data[o + 1] + data[o + 2]) / 3, lit = lum > 20;
+      const dx = x - apexX, dy = y - apexY, r = Math.hypot(dx, dy), ang = Math.atan2(dx, dy);
+      const inside = dy >= -2 && r <= radius + 4 && Math.abs(ang) <= half + 0.02;
+      if (!inside) { outside++; if (lit) outsideLit++; }
+      if (lit) { if (x < mn) mn = x; if (x > mx) mx = x; }
+    }
+    const dy = y - apexY;
+    if (mx >= 0 && dy > radius * 0.35 && dy < radius * 0.95) {
+      if (mn < apexX) leftAngles.push(Math.atan2(apexX - mn, dy) * 180 / Math.PI);
+      if (mx > apexX) rightAngles.push(Math.atan2(mx - apexX, dy) * 180 / Math.PI);
+    }
+  }
+  const median = (a) => { if (!a.length) return 0; const s = a.slice().sort((x, y) => x - y); return s[Math.floor(s.length / 2)]; };
+  const leftDeg = median(leftAngles), rightDeg = median(rightAngles);
+  return { outsidePct: outside ? 100 * outsideLit / outside : 0,
+    leftDeg, rightDeg, axisDeg: Math.abs(rightDeg - leftDeg) / 2 };
+}
+
+/* A4C anatomy parity with the standalone renderer (run-kardia-us-ui
+ * gpu-leg bands): project the LV/RV/LA/RA cavity centroids and the
+ * septum midpoint from the Echo Lab geometry cut (diag.cut at
+ * KARDIA_GEOM.viewPlane('tte_a4c')) through the plane Echo Lab passed
+ * to KARDIA_US (diag.usProbe) and the sector layout it computed, then
+ * average the saved canvas pixels in a small disc at each point.
+ * Cavities must read dark, the septum mid grey. */
+function anatomyCheck(path, diag) {
+  if (!diag || !diag.viewPlane || !diag.cut || !diag.usProbe || !diag.layout) return { error: "no diagnostics bundle" };
+  const { w, h, ch, data } = decodePng(path);
+  const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]], add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]], mul = (a, s) => [a[0] * s, a[1] * s, a[2] * s];
+  const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2], cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  const norm = (a) => { const l = Math.hypot(a[0], a[1], a[2]) || 1; return a.map((x) => x / l); };
+  const vp = diag.viewPlane, n = norm(vp.normal), right = norm(cross(n, norm(vp.up))), up = norm(cross(right, n));
+  const polys = diag.cut;
+  const area = (pts) => { let a = 0; for (let i = 0; i < pts.length; i++) { const j = (i + 1) % pts.length; a += pts[i][0] * pts[j][1] - pts[j][0] * pts[i][1]; } return Math.abs(a / 2); };
+  const largest = (ref) => { const l = polys.filter((p) => p.ref === ref); return l.length ? l.reduce((a, b) => (area(b.points) > area(a.points) ? b : a)) : null; };
+  const centroid = (p) => { let a = 0, cx = 0, cy = 0; const pts = p.points; for (let i = 0; i < pts.length; i++) { const j = (i + 1) % pts.length, f = pts[i][0] * pts[j][1] - pts[j][0] * pts[i][1]; a += f; cx += (pts[i][0] + pts[j][0]) * f; cy += (pts[i][1] + pts[j][1]) * f; } return Math.abs(a) < 1e-6 ? p.centroid : [cx / (3 * a), cy / (3 * a)]; };
+  const inside = (x, y, pts) => { let ins = false; for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) { const xi = pts[i][0], yi = pts[i][1], xj = pts[j][0], yj = pts[j][1]; if (((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)) ins = !ins; } return ins; };
+  const edgeDist = (x, y, pts) => { let m = 1e9; for (let i = 0; i < pts.length; i++) { const a = pts[i], b = pts[(i + 1) % pts.length], vx = b[0] - a[0], vy = b[1] - a[1], t = (vx * vx + vy * vy) > 1e-9 ? Math.max(0, Math.min(1, ((x - a[0]) * vx + (y - a[1]) * vy) / (vx * vx + vy * vy))) : 0, dx = x - (a[0] + vx * t), dy = y - (a[1] + vy * t); m = Math.min(m, Math.hypot(dx, dy)); } return m; };
+  const interior = (ref) => { const p = largest(ref); if (!p) return null; const pts = p.points; let mnx = 1e9, mxx = -1e9, mny = 1e9, mxy = -1e9; pts.forEach((q) => { mnx = Math.min(mnx, q[0]); mxx = Math.max(mxx, q[0]); mny = Math.min(mny, q[1]); mxy = Math.max(mxy, q[1]); }); let best = null, bd = -1; for (let x = mnx + 2; x < mxx - 2; x += 2) for (let y = mny + 2; y < mxy - 2; y += 2) { if (!inside(x, y, pts)) continue; const d = edgeDist(x, y, pts); if (d > bd) { bd = d; best = [x, y]; } } return best || centroid(p); };
+  const lvC = largest("FJ2422") ? centroid(largest("FJ2422")) : null, rvC = largest("FJ2423") ? centroid(largest("FJ2423")) : null;
+  let septumPt = null;
+  if (lvC && rvC) {
+    const gap = [];
+    for (let t = 0.05; t < 0.95; t += 0.02) { const x = lvC[0] + (rvC[0] - lvC[0]) * t, y = lvC[1] + (rvC[1] - lvC[1]) * t; if (inside(x, y, largest("FJ2422").points) || inside(x, y, largest("FJ2423").points)) continue; gap.push([x, y]); }
+    if (gap.length) septumPt = gap[Math.floor(gap.length / 2)];
+  }
+  /* Cavity polygons can overlap along the centroid line (no gap):
+   * fall back to the septum structure's own centroid, as the
+   * standalone harness does (ventricular_septum_mid). */
+  if (!septumPt) { const sp = largest("ventricular_septum_mid") || largest("interventricular_septum"); if (sp) septumPt = interior(sp.ref); }
+  const usP = diag.usProbe, n2 = norm(usP.normal), r2 = norm(cross(n2, norm(usP.up))), u2 = norm(cross(r2, n2)), beam = mul(u2, -1), apex = usP.origin;
+  const lay = diag.layout, sectorH = lay.sectorHeight || h, depthMm = (diag.knobs && diag.knobs.depth) || 160;
+  const gpu = diag.rendererMode === "webgl";
+  const apexX = gpu ? w / 2 : lay.apexX, apexY = gpu ? 0.02 * sectorH : lay.apexY, scale = gpu ? sectorH / depthMm : lay.scale;
+  const project = (pc) => { const world = add(vp.origin, add(mul(right, pc[0]), mul(up, pc[1]))), rel = sub(world, apex), depth = dot(rel, beam), lat = dot(rel, r2), ang = Math.atan2(lat, depth); return [apexX + Math.sin(ang) * depth * scale, apexY + Math.cos(ang) * depth * scale]; };
+  const R = Math.max(3, Math.round(w * 0.01));
+  const meanAt = (pt) => { if (!pt) return null; const [px, py] = project(pt); let s = 0, c = 0; for (let y = -R; y <= R; y++) for (let x = -R; x <= R; x++) { if (x * x + y * y > R * R) continue; const gx = Math.round(px) + x, gy = Math.round(py) + y; if (gx < 0 || gy < 0 || gx >= w || gy >= h) continue; const o = (gy * w + gx) * ch; s += (data[o] + data[o + 1] + data[o + 2]) / 3 / 255; c++; } return c ? s / c : null; };
+  const out = { points: {}, LV: meanAt(interior("FJ2422")), RV: meanAt(interior("FJ2423")), LA: meanAt(interior("FJ2425")), RA: meanAt(interior("FJ2424")), septum: meanAt(septumPt) };
+  for (const [k, ref] of [["LV", "FJ2422"], ["RV", "FJ2423"], ["LA", "FJ2425"], ["RA", "FJ2424"]]) { const pt = interior(ref); if (pt) out.points[k] = project(pt).map((v) => Math.round(v)); }
+  if (septumPt) out.points.septum = project(septumPt).map((v) => Math.round(v));
+  return out;
+}
 
 try {
   let ver, t = 0; while (t++ < 300) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
@@ -89,6 +202,16 @@ try {
     return v;
   };
   const visibleOk = (v, label) => !!v && !v.error && v.connected && v.width > 0 && v.height > 0 && v.rectW > 0 && v.rectH > 0 && v.hitIsCanvas && v.mean > 0.02 && v.nonBlackFrac > 0.05;
+  /* On a fan or anatomy failure, one JSON line (no pretty printing):
+   * canvas backing, CSS box, DPR, the sector layout Echo Lab
+   * computed, the probe state, the plane passed to KARDIA_US and
+   * KARDIA_GEOM.viewPlane('tte_a4c') for comparison. */
+  const fetchDiag = async () => { try { const s = await ev(`return JSON.stringify(KARDIA._kardia.echoLab.diagnostics ? KARDIA._kardia.echoLab.diagnostics('tte_a4c') : null);`); return s ? JSON.parse(s) : null; } catch { return null; } };
+  const printFanDiag = async (why) => {
+    const o = await fetchDiag();
+    if (!o) { console.log(JSON.stringify({ diag: why, error: "diagnostics unavailable" })); return; }
+    console.log(JSON.stringify({ diag: why, canvasWidth: o.canvasWidth, canvasHeight: o.canvasHeight, clientWidth: o.clientWidth, clientHeight: o.clientHeight, devicePixelRatio: o.devicePixelRatio, layout: o.layout, probeState: o.probeState, plane: o.plane, usProbe: o.usProbe, viewPlane: o.viewPlane }));
+  };
   const gridActs = `return [].map.call(document.querySelectorAll('.rnav-tile[data-act]'), function(x){return x.getAttribute('data-act');}).join(',');`;
   const eligibleActs = `return (window.SMD_HOME_TOOLS ? SMD_HOME_TOOLS() : []).map(function(t){return t.act;}).join(',');`;
   const metrics = async (w, h) => { await call("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 2, mobile: true }); await sleep(300); };
@@ -181,7 +304,39 @@ try {
   const vis1 = await visibleStats("krdSector");
   if (!visibleOk(vis1)) console.log("Echo Lab debug (visible sector failed): " + JSON.stringify(vis1) + " " + await ev(`return JSON.stringify(KARDIA._kardia.echoLab.debug ? KARDIA._kardia.echoLab.debug() : null);`));
   ok(visibleOk(vis1), `live image is visible on the sector canvas the learner sees (mean ${vis1 ? vis1.mean.toFixed(3) : "none"}, hit ${vis1 ? vis1.hitId : "?"}, connected ${vis1 ? vis1.connected : "?"})`);
+  /* The standalone A4C render is real-mesh: wait for Echo Lab's real
+   * anatomy to settle (or fall back), then re-solve the A4C target
+   * against the loaded geometry before saving the canvas, exactly
+   * as the standalone harness loads first and sets the view after. */
+  await until(`return ['real','fallback'].includes(KARDIA._kardia.echoLab.debug().anatomyState);`, 60000);
+  await ev(`(function(){var L=KARDIA._kardia.echoLab; L.setProbeState(L.stateForView('tte_a4c')); return 1;})()`);
+  await sleep(800);
   await shot("kardia-echolab-live-2d");
+  /* Page screenshots do not capture this WebGL canvas headless; save its pixels directly so the image can be reviewed. */
+  { const d = await ev("var c=document.getElementById('krdSector'); if(!c) return ''; var o=document.createElement('canvas'); o.width=c.width; o.height=c.height; o.getContext('2d').drawImage(c,0,0); return o.toDataURL('image/png');"); if (d) writeFileSync(join(SHOTS, "kardia-echolab-canvas-2d.png"), Buffer.from(d.split(",")[1], "base64")); }
+  /* Saved-pixel sector assertions: nothing bright outside the fan,
+   * and the fan axis vertical (left/right edge angles balanced). */
+  {
+    const p = join(SHOTS, "kardia-echolab-canvas-2d.png");
+    let sc = null, scErr = "";
+    try { if (existsSync(p)) sc = sectorCheck(p); } catch (e) { scErr = String(e && e.message || e); }
+    if (!sc) console.log("Echo Lab debug (sector check failed): " + scErr + " " + await ev(`return JSON.stringify(KARDIA._kardia.echoLab.debug ? KARDIA._kardia.echoLab.debug() : null);`));
+    ok(!!sc && sc.outsidePct <= 1, `saved canvas pixels outside the sector are black (non-black ${sc ? sc.outsidePct.toFixed(2) : "?"}% of outside pixels, at most 1%)`);
+    ok(!!sc && sc.axisDeg <= 3, `saved canvas fan axis is vertical within 3 degrees (left edge ${sc ? sc.leftDeg.toFixed(1) : "?"} deg, right edge ${sc ? sc.rightDeg.toFixed(1) : "?"} deg, axis deviation ${sc ? sc.axisDeg.toFixed(2) : "?"} deg)`);
+    if (!sc || sc.outsidePct > 1 || sc.axisDeg > 3) await printFanDiag("fan");
+    /* Anatomy parity with the standalone A4C render: region means at
+     * the projected cavity centroids (dark) and septum (mid grey),
+     * same bands as run-kardia-us-ui gpu-leg. */
+    let an = null, anErr = "";
+    try { const dg = await fetchDiag(); if (dg && existsSync(p)) an = anatomyCheck(p, dg); } catch (e) { anErr = String(e && e.message || e); }
+    if (!an || an.error) await printFanDiag("anatomy");
+    const cav = an && !an.error ? [an.LV, an.RV, an.LA, an.RA] : [];
+    ok(!!an && !an.error && cav.every((v) => typeof v === "number" && v <= 0.12),
+      `Echo Lab A4C matches standalone: LV/RV/LA/RA cavity centroids are dark (${cav.map((v) => typeof v === "number" ? v.toFixed(3) : "?").join("/")}, at most 0.12)${anErr ? " err=" + anErr : ""}${an && an.error ? " " + an.error : ""}`);
+    ok(!!an && !an.error && typeof an.septum === "number" && an.septum >= 0.25 && an.septum <= 0.65,
+      `Echo Lab A4C matches standalone: septum is mid grey (${an && typeof an.septum === "number" ? an.septum.toFixed(3) : "?"}, 0.25 to 0.65)`);
+    if (!!an && !an.error && !(cav.every((v) => typeof v === "number" && v <= 0.12) && typeof an.septum === "number" && an.septum >= 0.25 && an.septum <= 0.65)) await printFanDiag("anatomy");
+  }
   ok(!!vis1 && vis1.bloodMean < vis1.wallMean && (vis1.wallMean - vis1.bloodMean) > 0.02, `visible blood is darker than visible walls at A4C (blood ${vis1 ? vis1.bloodMean.toFixed(3) : "?"} < wall ${vis1 ? vis1.wallMean.toFixed(3) : "?"})`);
   for (const m of ["colour", "pw", "cw", "mmode", "2d"]) {
     await ev(`document.querySelector('#smdKardia [data-act=kecho-mode][data-v=${m}]').click(); return 1;`);

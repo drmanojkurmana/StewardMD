@@ -120,6 +120,59 @@
     if (sound && sound.s4) return "s4_gallop";
     return byId[condId] || "s1s2_normal";
   }
+  /* Probe plane -> KARDIA_US probe, mirroring setProbe({viewId}):
+   * the plane origin is a point in the heart, not the transducer.
+   * The apex (transducer) sits depth*0.42 along +up from that origin;
+   * the renderer beams along -up from the apex, so the fan opens
+   * straight down from the apex dot and `up` (the display top, with
+   * right = normal x up carrying the marker side) is passed through
+   * unchanged. Passing pl.origin as the apex put the fan origin in
+   * the middle of the heart: only the -up half was ever sampled, so
+   * the visible tissue wedge looked rotated and truncated and was
+   * never an apical four chamber. */
+  /* Backing store for a canvas whose CSS box is (cssW, cssH): both
+   * axes scaled by the SAME devicePixelRatio, so the backing aspect
+   * always equals the CSS box aspect. Sizing one axis from a fixed
+   * constant (the old fixed 640x480) while CSS lays the element out
+   * at another aspect stretches the fan non-uniformly: left and
+   * right sector edges then make different angles with vertical. */
+  function backingSizeForCssBox(cssW, cssH, dpr) {
+    var s = (dpr && isFinite(dpr) && dpr > 0) ? dpr : 1;
+    if (!(cssW > 0) || !(cssH > 0)) return null;
+    return { width: Math.max(1, Math.round(cssW * s)), height: Math.max(1, Math.round(cssH * s)), scale: s };
+  }
+  /* Resize one canvas to its CSS box times DPR (uniformly). Returns
+   * the backing size, or null when the element has no CSS box yet
+   * (hidden or detached: the caller retries on mount/resize). A
+   * no-op when the backing already matches, so live frames are not
+   * cleared by redundant resizes. Layout and drawing both read
+   * canvas.width/height afterwards, i.e. one pixel space. */
+  function fitCanvasToCssBox(canvas, dpr) {
+    if (!canvas) return null;
+    var cw = canvas.clientWidth || 0, ch = canvas.clientHeight || 0;
+    if ((!cw || !ch) && canvas.getBoundingClientRect) {
+      var r = canvas.getBoundingClientRect();
+      if (!cw) cw = r.width || 0;
+      if (!ch) ch = r.height || 0;
+    }
+    var size = backingSizeForCssBox(cw, ch, dpr);
+    if (!size) return null;
+    if (canvas.width !== size.width) canvas.width = size.width;
+    if (canvas.height !== size.height) canvas.height = size.height;
+    return size;
+  }
+  function probeForPlane(pl, depthMm) {
+    var depth = depthMm || 160;
+    var up = pl.up || [0, 0, -1];
+    var l = Math.sqrt(up[0] * up[0] + up[1] * up[1] + up[2] * up[2]) || 1;
+    var ux = up[0] / l, uy = up[1] / l, uz = up[2] / l, d = depth * 0.42;
+    return {
+      origin: [pl.origin[0] + ux * d, pl.origin[1] + uy * d, pl.origin[2] + uz * d],
+      normal: pl.normal ? pl.normal.slice() : [1, 0, 0],
+      up: [ux, uy, uz],
+      viewOrigin: pl.origin ? pl.origin.slice() : [0, 0, 0]
+    };
+  }
   function severityHeart(cond, severity) {
     if (!cond || !cond.severities || !cond.severities[severity]) return {};
     return cond.severities[severity].heart || {};
@@ -210,6 +263,7 @@
     var spec = null, specDirty = true, mStrip = [], pathology = null;
     var realAnatomy = false, loadNote = "";
     var usCanvas = null, lastError = "", lastFrameAt = 0, chunksLoaded = 0;
+    var lastUsProbe = null, resizeObs = null, onWinResize = null;
     var els = {};
 
     function uiKnobs() { return ctx.knobs; }
@@ -287,6 +341,14 @@
       return tryBase(0).then(function (n) {
         realAnatomy = n > 0;
         loadNote = realAnatomy ? "" : "Offline. Showing the model heart.";
+        /* geom.viewPlane changes once real meshes are in (fitted
+         * normal, mesh landmark ranges), so any probe target/window
+         * frame cached against the parametric geometry is stale:
+         * drop it so the next stateForView re-solves against the
+         * same viewPlane the standalone renderer uses. */
+        if (realAnatomy && probe) {
+          try { if (probe.setGeom) probe.setGeom(geom); else if (probe.setViews && ctx.views) probe.setViews(ctx.views); } catch (e) {}
+        }
         return realAnatomy;
       }, function (e) { lastError = "anatomy: " + String(e && e.message || e); loadNote = "Offline. Showing the model heart."; return false; });
     }
@@ -389,6 +451,30 @@
       if (els.specReadout) els.specReadout.textContent = "M-mode. Drag the cursor line on the image.";
     }
 
+    /* Size every owned canvas from its CSS box times DPR, uniformly
+     * on both axes, on mount and on resize. KARDIA_US layout and
+     * drawing both use canvas.width/height, and the overlay uses its
+     * own width/height, so after this all three share one pixel
+     * space with the CSS box (no non-uniform stretch of the fan). */
+    function resizeCanvases() {
+      var dpr = G.devicePixelRatio || 1, out = {};
+      ["sector", "overlay", "spectrum"].forEach(function (k) {
+        if (els[k]) out[k] = fitCanvasToCssBox(els[k], dpr);
+      });
+      return out;
+    }
+    function observeResize() {
+      if (onWinResize || resizeObs) return;
+      onWinResize = function () { resizeCanvases(); };
+      if (G.addEventListener) { try { G.addEventListener("resize", onWinResize); } catch (e) {} }
+      if (typeof G.ResizeObserver === "function") {
+        try {
+          resizeObs = new G.ResizeObserver(function () { resizeCanvases(); });
+          ["sector", "overlay", "spectrum"].forEach(function (k) { if (els[k] && resizeObs.observe) resizeObs.observe(els[k]); });
+        } catch (e) { resizeObs = null; }
+      }
+    }
+
     function frame(now) {
       if (!running || destroyed) return;
       raf = G.requestAnimationFrame(frame);
@@ -406,13 +492,17 @@
       if (cv) {
         var r = ensureUS(cv);
         if (r) {
+          /* One renderer per canvas: while a KARDIA_US renderer exists
+           * it is the sole painter (its own CPU path is the WebGL
+           * fallback, already masked to the sector). The schematic
+           * fallbackDraw below runs only when no renderer could be
+           * created at all, never over or under a live frame. */
           var pl = planeNow();
-          if (pl) r.setProbe({ origin: pl.origin, normal: pl.normal, up: pl.up, viewOrigin: pl.origin });
+          if (pl) { lastUsProbe = probeForPlane(pl, uiKnobs().depth); r.setProbe(lastUsProbe); }
           r.setKnobs(usKnobs());
           var drew = false;
           try { drew = r.frame(now) !== false; } catch (e) { lastError = "frame: " + String(e && e.message || e); }
           if (drew) lastFrameAt = now;
-          else if (ctx.fallbackDraw) ctx.fallbackDraw(cv);
           if (r.stats) { emaMs = emaMs * 0.9 + (r.stats.ms || dt) * 0.1; }
           var want = pickResolutionScale(G.devicePixelRatio || 1, emaMs);
           if (Math.abs(want - scale) > 0.01) scale = want;
@@ -474,6 +564,7 @@
         els.sector = sector; els.overlay = overlay || null; els.spectrum = spectrum || null;
         extra = extra || {};
         els.specReadout = extra.specReadout || null; els.fps = extra.fps || null;
+        resizeCanvases(); observeResize();
         ensureUS(sector);
         bindOverlay(); start();
         return api;
@@ -481,6 +572,7 @@
       setMode: function (m) {
         mode = m; specDirty = true; mStrip = [];
         if (els.spectrum) els.spectrum.hidden = !(m === "pw" || m === "cw" || m === "mmode");
+        resizeCanvases();
         if (m === "pw" || m === "cw") refreshSpectrum();
         drawOverlay(); return api;
       },
@@ -521,6 +613,37 @@
       loadRealAnatomy: loadRealAnatomy,
       isRealAnatomy: function () { return realAnatomy; },
       loadNote: function () { return loadNote; },
+      resizeCanvases: resizeCanvases,
+      /* One-call diagnostic bundle for the browser runner: canvas
+       * backing vs CSS box, DPR, the sector layout Echo Lab computed,
+       * the probe state, the plane passed to KARDIA_US, the target
+       * viewPlane and the A4C cut polygons (for projected anatomy
+       * sampling in the runner). */
+      diagnostics: function (viewId) {
+        var cv = els.sector, pl = null, usProbe = null, vp = null, cut = null;
+        try { pl = planeNow(); } catch (e) {}
+        try { usProbe = pl ? probeForPlane(pl, uiKnobs().depth) : lastUsProbe; } catch (e) {}
+        var vid = viewId || (ctx.getView ? (ctx.getView() || {}).id : null) || "tte_a4c";
+        try { vp = geom && geom.viewPlane ? geom.viewPlane(vid) : null; } catch (e) {}
+        try {
+          if (vp && geom && geom.cut) {
+            var nn = vp.normal, ll = Math.sqrt(nn[0] * nn[0] + nn[1] * nn[1] + nn[2] * nn[2]) || 1;
+            cut = geom.cut(vp.origin, [nn[0] / ll, nn[1] / ll, nn[2] / ll], vp.up, 272, 272);
+          }
+        } catch (e) {}
+        var lay = null;
+        try { lay = (G.KARDIA_US && G.KARDIA_US._pure && cv) ? G.KARDIA_US._pure.layoutFor(cv.width, cv.height, usKnobs()) : null; } catch (e) {}
+        return {
+          canvasWidth: cv ? cv.width : null, canvasHeight: cv ? cv.height : null,
+          clientWidth: cv ? (cv.clientWidth || 0) : null, clientHeight: cv ? (cv.clientHeight || 0) : null,
+          devicePixelRatio: G.devicePixelRatio || 1,
+          layout: lay, knobs: usKnobs(),
+          probeState: probe && probe.getState ? probe.getState() : null,
+          plane: pl, usProbe: usProbe, lastUsProbe: lastUsProbe,
+          viewId: vid, viewPlane: vp, cut: cut,
+          rendererMode: us && us.stats ? us.stats.mode : null
+        };
+      },
       frameMs: function () { return emaMs; },
       stats: function () { return us ? us.stats : null; },
       debug: function () {
@@ -532,6 +655,9 @@
           rendererOnCurrentCanvas: !!us && !!els.sector && usCanvas === els.sector,
           sectorConnected: !!els.sector && els.sector.isConnected !== false,
           sectorSize: els.sector ? [els.sector.width || 0, els.sector.height || 0] : null,
+          canvasWidth: els.sector ? els.sector.width : null, canvasHeight: els.sector ? els.sector.height : null,
+          clientWidth: els.sector ? (els.sector.clientWidth || 0) : null, clientHeight: els.sector ? (els.sector.clientHeight || 0) : null,
+          devicePixelRatio: G.devicePixelRatio || 1,
           rendererErrors: us && us.errors ? us.errors.slice(0, 3) : [],
           geometryMode: realAnatomy || parts > 0 ? "real" : "parametric",
           chunksLoaded: chunksLoaded,
@@ -550,6 +676,8 @@
       start: start, stop: stop,
       destroy: function () {
         destroyed = true; stop();
+        if (resizeObs) { try { resizeObs.disconnect(); } catch (e) {} resizeObs = null; }
+        if (onWinResize && G.removeEventListener) { try { G.removeEventListener("resize", onWinResize); } catch (e) {} onWinResize = null; }
         if (doc.removeEventListener) doc.removeEventListener("visibilitychange", onVis);
         if (us && us.destroy) { try { us.destroy(); } catch (e) {} }
         us = null; usCanvas = null;
@@ -565,7 +693,8 @@
       pickResolutionScale: pickResolutionScale, pathologyGeom: pathologyGeom,
       soundKindFor: soundKindFor, severityHeart: severityHeart,
       severityGeom: severityGeom, severitySound: severitySound,
-      createCine: createCine, spectrumSource: spectrumSource, imageSource: imageSource
+      createCine: createCine, spectrumSource: spectrumSource, imageSource: imageSource,
+      probeForPlane: probeForPlane, backingSizeForCssBox: backingSizeForCssBox, fitCanvasToCssBox: fitCanvasToCssBox
     }
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
