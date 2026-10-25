@@ -272,7 +272,9 @@
           '<div class="krd-strip krd-strip-v" id="krdTiltStrip" role="slider" aria-label="' + I.tx(T("Tilt. Drag up or down.", "Tilt. Drag up or down.")) + '" aria-valuemin="-80" aria-valuemax="80" aria-valuenow="0" tabindex="0"><span>Tilt</span></div></div>' +
           '<div class="krd-strip krd-strip-h" id="krdRockStrip" role="slider" aria-label="' + I.tx(T("Rock. Drag left or right.", "Rock. Drag left or right.")) + '" aria-valuemin="-60" aria-valuemax="60" aria-valuenow="0" tabindex="0"><span>Rock</span></div>') +
       '<div class="krd-controls">' + controls + "</div>" +
-      '<div class="krd-gyro"><button type="button" class="sp-btn sec" data-act="kecho-gyro" aria-pressed="' + gyroOn + '">' +
+      '<div class="krd-gyro"><button type="button" class="sp-btn sec" data-act="kecho-syncprobe">' +
+        I.tx(T("SyncProbe", "SyncProbe")) + '</button><span class="krd-syncpill" id="krdSyncPill"></span>' +
+        '<button type="button" class="sp-btn sec" data-act="kecho-gyro" aria-pressed="' + gyroOn + '">' +
         I.tx(T("Use phone as probe", "Use phone as probe")) + '</button>' +
         '<button type="button" class="sp-btn sec" data-act="kecho-cal" id="krdCalBtn"' + (gyroOn ? "" : " disabled") + '>' +
         I.tx(T("Calibrate", "Calibrate")) + '</button>' +
@@ -653,6 +655,11 @@
     EL.knobsOpen = !EL.knobsOpen;
     var panel = G.document.getElementById("krdKnobs");
     if (panel) { panel.hidden = !EL.knobsOpen; b.setAttribute("aria-expanded", String(EL.knobsOpen)); }
+  };
+  /* SyncProbe (two-phone training): the button opens the SyncProbe role sheet;
+     the module paints its link pill into #krdSyncPill and owns the rest. */
+  I.ACTIONS["kecho-syncprobe"] = function () {
+    try { if (G.KARDIA_SYNCPROBE) G.KARDIA_SYNCPROBE.open(); } catch (e) { I.toast("SyncProbe is not ready yet."); }
   };
   I.ACTIONS["kecho-gyro"] = function (b) {
     var p = ensureEchoProbe();
