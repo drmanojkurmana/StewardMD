@@ -46,12 +46,12 @@ test("smd_kardia defaults OFF; ?kardia=1 or localStorage 1 turns it on", () => {
 /* ---------- 2. boot loads only kardia-loader.js; the loader lists the engine + Kardia at one token ---------- */
 test("app boot loads only kardia-loader.js; the loader lists the engine and Kardia files at one version token", () => {
   const html = readFileSync("index.html", "utf8");
-  assert.ok(html.includes('<script src="/kardia-loader.js?v=krd1" defer></script>'), "loader tag at krd1");
+  assert.ok(html.includes('<script src="/kardia-loader.js?v=krd2" defer></script>'), "loader tag at krd2");
   const eng = /(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?|kardia[-.\w]*)\.(js|css)\?v=\w+/g;
   const got = (html.match(eng) || []).filter((s) => !/kardiox/i.test(s));
-  assert.deepEqual(got, ["kardia-loader.js?v=krd1"], "boot requests no engine or Kardia file but the loader, and no KardiQ X file is mistaken for Kardia: " + got.join(","));
+  assert.deepEqual(got, ["kardia-loader.js?v=krd2"], "boot requests no engine or Kardia file but the loader, and no KardiQ X file is mistaken for Kardia: " + got.join(","));
   const L = readFileSync("kardia-loader.js", "utf8"), v = /var V = "(\w+)"/.exec(L)[1];
-  assert.equal(v, "krd1", "the loader injects at the same token as its own tag");
+  assert.equal(v, "krd2", "the loader injects at the same token as its own tag");
   for (const f of ["specialty.css", "kardia.css", "specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "kardia-flags.js", "kardia.js"]) assert.ok(L.includes('"' + f + '"'), f);
   assert.ok(L.indexOf('"specialty-shell.js"') < L.indexOf('"kardia.js"'), "engine, then the host");
 });
@@ -202,7 +202,8 @@ test("flag on: five tabs, four levels, engine chrome (Pro badge, draft footer, l
   assert.ok((h.match(/sp-pro/g) || []).length >= 3, "Resident, Fellow and Sonographer carry the engine Pro badge");
   assert.ok(h.includes("To be verified, draft"), "ai_drafted footer from the engine");
   assert.ok(h.includes("data-act=\"lang\""), "language switch from the engine");
-  assert.ok(h.includes("Coming soon."), "Echo Lab opens on its coming soon state, not fake content");
+  assert.ok(h.includes("Echo Lab"), "Echo Lab opens on the probe lab (WP4), not the old coming soon panel");
+  assert.ok(!h.includes("The probe lab opens here"), "the WP8 coming soon panel is gone");
 });
 
 test("Learn tab: free preview opens real atlas lessons in place; the rest is Pro", async () => {
