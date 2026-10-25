@@ -54,7 +54,8 @@
     blood:      { echogenicity: 0.05, attenuation: 0.20, isBlood: true,  isCalcium: false, isAir: false, isBone: false },
     myocardium: { echogenicity: 0.45, attenuation: 0.80, isBlood: false, isCalcium: false, isAir: false, isBone: false },
     atrialWall: { echogenicity: 0.40, attenuation: 0.70, isBlood: false, isCalcium: false, isAir: false, isBone: false },
-    valve:      { echogenicity: 0.80, attenuation: 1.00, isBlood: false, isCalcium: false, isAir: false, isBone: false },
+    valve:      { echogenicity: 0.90, attenuation: 1.00, isBlood: false, isCalcium: false, isAir: false, isBone: false },
+    chordae:    { echogenicity: 0.50, attenuation: 0.90, isBlood: false, isCalcium: false, isAir: false, isBone: false },
     vesselWall: { echogenicity: 0.55, attenuation: 0.90, isBlood: false, isCalcium: false, isAir: false, isBone: false },
     pericardium:{ echogenicity: 0.95, attenuation: 1.20, isBlood: false, isCalcium: false, isAir: false, isBone: false },
     fluid:      { echogenicity: 0.02, attenuation: 0.10, isBlood: false, isCalcium: false, isAir: false, isBone: false },
@@ -351,10 +352,10 @@
       if (!hasReal("FJ2424")) addStruct("ra_cavity", "FJ2424", "Cavity of right atrium", "chamber", "blood", function (b) { b.ellipsoid(raCentre, IDENTITY, raAxes, 22, 16); });
       if (!hasReal("FJ2439")) addStruct("ra_wall", "FJ2439", "Wall of right atrium", "wall", "atrialWall", function (b) { b.ellipsoid(raCentre, IDENTITY, [raAxes[0] + 3, raAxes[1] + 3, raAxes[2] + 3], 18, 12); });
       /* --- Septa (parametric; a defect leaves a real hole) --- */
-      function septum(id, ref, name, centre, thinDir, r1, r2, defectMm) {
+      function septum(id, ref, name, centre, thinDir, r1, r2, defectMm, thickMm) {
         addStruct(id, ref, name, "septum", "myocardium", function (b) {
           var basis = basisFromThin(thinDir);
-          if (!defectMm) { b.ellipsoid(centre, basis, [3, r1, r2], 20, 14); return; }
+          if (!defectMm) { b.ellipsoid(centre, basis, [thickMm || 3, r1, r2], 20, 14); return; }
           /* annulus disc with a central hole: rings from defect to rim */
           var rings = [], nR = 20, nS = 5, j, i;
           for (j = 0; j <= nS; j++) { rings.push([]); var rr = defectMm / 2 + (r1 - defectMm / 2) * j / nS;
@@ -370,8 +371,8 @@
       var septumShift = mul(APEX_DIR, hasReal("FJ2422") ? lvDrop : -6 * systole);
       var ivCentre = hasReal("FJ2423") && partByRef("FJ2422") ? mul(add(partByRef("FJ2422").centroid0, partByRef("FJ2423").centroid0), 0.5) : [-13, 7, 0];
       var ivThin = hasReal("FJ2423") && hasReal("FJ2422") ? sub(partByRef("FJ2423").centroid0, partByRef("FJ2422").centroid0) : sub(rvCentre, lvCentre);
-      septum("septum_iv", "interventricular_septum", "Interventricular septum", add(ivCentre, septumShift), ivThin, 24, 30, defect && defect.type === "VSD" ? defect.sizeMm || 8 : 0);
-      addStruct("septum_iv_mid", "ventricular_septum_mid", "Mid interventricular septum", "septum", "myocardium", function (b) { b.ellipsoid(add(add(ivCentre, septumShift), [0, 0, -4]), basisFromThin(ivThin), [3, 12, 14], 14, 10); });
+      septum("septum_iv", "interventricular_septum", "Interventricular septum", add(ivCentre, septumShift), ivThin, 24, 30, defect && defect.type === "VSD" ? defect.sizeMm || 8 : 0, 5.5);
+      addStruct("septum_iv_mid", "ventricular_septum_mid", "Mid interventricular septum", "septum", "myocardium", function (b) { b.ellipsoid(add(add(ivCentre, septumShift), [0, 0, -4]), basisFromThin(ivThin), [5, 12, 14], 14, 10); });
       var iaCentre = hasReal("FJ2425") && hasReal("FJ2424") ? mul(add(partByRef("FJ2425").centroid0, partByRef("FJ2424").centroid0), 0.5) : [-25, -8, 36];
       var iaThin = hasReal("FJ2425") && hasReal("FJ2424") ? sub(partByRef("FJ2424").centroid0, partByRef("FJ2425").centroid0) : sub(raCentre, laCentre);
       septum("septum_ia", "atrial_septum_interatrial", "Interatrial septum", iaCentre, iaThin, 17, 20, defect && defect.type === "ASD" ? defect.sizeMm || 10 : 0);
@@ -421,7 +422,7 @@
       addStruct("pap_lv_lat", "FJ2429", "Lateral papillary muscle of left ventricle", "papillary", "myocardium", function (b) { b.ellipsoid(papAL, IDENTITY, [6, 6, 9], 12, 8); });
       addStruct("pap_lv_al_head", "FJ2418", "Anterolateral head of lateral papillary muscle", "papillary", "myocardium", function (b) { b.ellipsoid(add(papAL, [0, 0, 5]), IDENTITY, [4, 4, 5], 10, 8); });
       addStruct("pap_rv_ant", "FJ2419", "Anterior papillary muscle of right ventricle", "papillary", "myocardium", function (b) { b.ellipsoid(add(rvCentre, [10, -8, -10]), IDENTITY, [5, 5, 8], 10, 8); });
-      addStruct("chordae", "chordae_tendineae", "Chordae tendineae", "chordae", "valve", function (b) {
+      addStruct("chordae", "chordae_tendineae", "Chordae tendineae", "chordae", "chordae", function (b) {
         /* BodyParts3D has no chordae: parametric cords, but they end
          * on the real mitral annulus ring when it is loaded. */
         var mvEnd = add(mvHinge, mul(APEX_DIR, 8));
@@ -793,6 +794,15 @@
         }
         if (bestScan && bestScan.mnA > 0) d = bestScan.d;
       }
+      /* Standard echo display convention: when both ventricles are in
+       * the view, the LV sits on the screen right (A4C, PSAX, subcostal).
+       * The screen-right axis is cross(normal, up), so flipping the
+       * plane normal sign flips left-right without moving the plane. */
+      var lvS = byRef.FJ2422, rvS = byRef.FJ2423;
+      if (lvS && rvS) {
+        var right0 = norm(cross(useN, up));
+        if (dot(sub(lvS.centroid, rvS.centroid), right0) < 0) { useN = mul(useN, -1); d = -d; }
+      }
       return { origin: mul(useN, d), normal: useN, up: up, viewId: v.id };
     }
 
@@ -907,9 +917,19 @@
         });
         var nv = Math.max(1, posArr.length / 3);
         var rig = PART_RIG[part.id] || (role === "vessel" ? "vessel" : (role === "ribs" || role === "lungs" || role === "liver" || role === "chestwall" || role === "context" ? "context" : role));
-        var acName = role === "ribs" ? "bone" : role === "lungs" ? "air" : role === "liver" ? "liver" : (PART_RIG[part.id] && /FJ242[02]|FJ243/.test(part.id) && PART_RIG[part.id].length <= 2 ? "valve" : (rig === "vessel" ? "blood" : "blood"));
-        if (part.id === "FJ2428" || part.id === "FJ2438" || part.id === "FJ2439") acName = "myocardium";
+        /* Acoustic tag by anatomy, never by id pattern: cavities are
+         * blood, valve-rig leaflets/cusps are valve tissue, chamber
+         * walls and papillary muscles are myocardium. (The old id
+         * regex tagged FJ2417/FJ2421/FJ2426/FJ2427 leaflets as blood.) */
+        var acName;
         if (CAVITY_REF[part.id]) acName = "blood";
+        else if (part.id === "FJ2428" || part.id === "FJ2438" || part.id === "FJ2439") acName = "myocardium";
+        else if (VALVE_STATE[rig]) acName = "valve";
+        else if (rig === "LV" || rig === "RV" || rig === "LVWALL") acName = "myocardium";
+        else if (role === "ribs") acName = "bone";
+        else if (role === "lungs") acName = "air";
+        else if (role === "liver") acName = "liver";
+        else acName = "blood";
         var lp = { id: part.id, name: part.name, role: (role === "ribs" || role === "lungs" || role === "liver" || role === "chestwall") ? role : "bp3d", rig: rig, basePos: posArr, idx: idxArr, centroid0: [cen[0] / nv, cen[1] / nv, cen[2] / nv], acoustic: acoustic(acName) };
         rigPart(lp);
         loadedParts.push(lp);
