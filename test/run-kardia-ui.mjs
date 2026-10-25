@@ -4,6 +4,8 @@
  * the tile opens the Specialty Engine host with its five tabs, Learn lists the real atlas preview,
  * and the KardiQ X tab still holds behind SMD_XACCESS without opening the AI overlay.
  * Screenshots every tab at 390 and 820 widths in light and dark into work/shots/.
+ * At every width (390, 820, 1194) it also asserts the tab row sits clear of
+ * the level row with full tab labels visible, after scrolling.
  * USAGE: node test/run-kardia-ui.mjs   (BASE=http://localhost:8996/ to use a running server;
  *   SHOTS=/tmp/shots to override the output dir)
  */
@@ -64,7 +66,7 @@ try {
   await ev(`try{localStorage.removeItem("smd_kardia");localStorage.removeItem("smd_kardia_prefs");localStorage.removeItem("smd_home_tools");localStorage.setItem("smd_role","student");localStorage.setItem("smd_kardiox","1");}catch(e){} return 1;`);
   await load(BASE);
   const ENG = /\/(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?\.(js|css)|kardia\.js|kardia\.css|kardia-flags\.js|kardia\/)/;
-  ok(reqs.some((u) => /kardia-loader\.js\?v=krd2/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads kardia-loader.js and no engine or Kardia file");
+  ok(reqs.some((u) => /kardia-loader\.js\?v=krd3/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads kardia-loader.js and no engine or Kardia file");
   const gridOff = await ev(gridActs);
   const eligOff = await ev(eligibleActs);
   ok(!/,kardia,/.test("," + eligOff + ","), "Kardia is ineligible with the flag off");
@@ -82,7 +84,7 @@ try {
   const eligOn = await ev(eligibleActs);
   ok(/,kardia,/.test("," + eligOn + ","), "Kardia is eligible with the flag on");
   ok(!/,kardiox,/.test("," + eligOn + ","), "the KardiQ X tile is replaced while Kardia is on");
-  ok(reqs.some((u) => /specialty-shell\.js\?v=krd2/.test(u)) === false, "the engine still lazy-loads: nothing fetched until the tile opens");
+  ok(reqs.some((u) => /specialty-shell\.js\?v=krd3/.test(u)) === false, "the engine still lazy-loads: nothing fetched until the tile opens");
   // Open from All tools and pin it: the real Home tile UI, like a tester would.
   await ev(`document.querySelector('.rnav-tile[data-act=alltools]').click(); return 1;`);
   ok(await until(`return !!document.querySelector('[data-at-open="kardia"]');`, 10000), "All tools lists Kardia (and no KardiQ X row: " + await until(`return !document.querySelector('[data-at-open="kardiox"]');`, 5000) + ")");
@@ -93,13 +95,23 @@ try {
   await ev(`var t=document.querySelector('.rnav-tile[data-act=kardia]'); t.focus(); t.click(); return 1;`);
   ok(await until(`return KARDIA.isOpen() && !!document.getElementById("smdKardia");`, 10000), "tile opens the Kardia overlay");
   ok(await until(`return !!document.querySelector('#smdKardia [data-act=ktab][data-t=kardiox]');`, 20000), "first open loads the engine + Kardia and shows the five tabs");
-  ok(reqs.some((u) => /specialty-shell\.js\?v=krd2/.test(u)) && reqs.some((u) => /kardia\.js\?v=krd2/.test(u)), "engine + Kardia loaded on open, at the loader token");
+  ok(reqs.some((u) => /specialty-shell\.js\?v=krd3/.test(u)) && reqs.some((u) => /kardia\.js\?v=krd3/.test(u)), "engine + Kardia loaded on open, at the loader token");
   ok((await ev(`return KARDIA._kardia.tabs.join(",");`)) === "echo,learn,practice,cases,kardiox", "tabs: Echo Lab, Learn, Practice, Cases, KardiQ X");
   ok((await ev(`return KARDIA._kardia.levels.join(",");`)) === "mbbs,resident,fellow,sonographer", "levels: MBBS, Resident, Fellow, Sonographer");
   ok((await ev(`return KARDIA._kardia.freeLessons;`)) === 5, "free preview is a constant (5 lessons)");
   ok(!/[–—]/.test(await ev(`return document.getElementById('smdKardia').innerText;`)), "no em or en dash on screen");
   const tabH = await ev(`return document.querySelector('#smdKardia .krd-tab').getBoundingClientRect().height;`);
   ok(tabH >= 44, `tabs are a 44px touch target (${tabH}px)`);
+  /* WP10d: the tab row must sit fully clear of the level row (no overlap) and
+   * every tab label must be fully visible (a crushed tab row clips the lower
+   * half of the labels behind the level row, worst at 390px). Reused at every
+   * width below, after scrolling the page to the bottom. */
+  const tabsClear = `return (function(){var r=document.getElementById('smdKardia'); if(!r) return false;
+    var t=r.querySelector('.krd-tabs'), l=r.querySelector('.sp-levelrow'); if(!t||!l) return false;
+    var tb=t.getBoundingClientRect(), lb=l.getBoundingClientRect(); if(tb.bottom>lb.top+1) return false;
+    var bs=r.querySelectorAll('.krd-tab'); if(!bs.length) return false;
+    for(var i=0;i<bs.length;i++){ if(bs[i].scrollHeight>bs[i].clientHeight+1) return false; } return true;})();`;
+  const scrollBottom = `var sc=document.querySelector('#smdKardia .sp-scroll'); if(sc) sc.scrollTop=sc.scrollHeight; return 1;`;
 
   // The KardiQ X gate is still armed: opening the tab must NOT open the AI overlay by itself.
   await ev(`document.querySelector('#smdKardia [data-act=ktab][data-t=kardiox]').click(); return 1;`);
@@ -146,9 +158,21 @@ try {
         await sleep(350);
         const seen = await ev(`return document.getElementById('smdKardia').innerText;`);
         ok(seen && seen.toLowerCase().indexOf(marker.split(" ")[0].toLowerCase()) >= 0, `${w}px ${th}: ${id} tab shows its screen ("${marker}")`);
+        await ev(scrollBottom); await sleep(200);
+        ok(await ev(tabsClear) === true, `${w}px ${th}: ${id} tab row sits clear of the level row with full labels, after scrolling`);
         await shot(`kardia-${id}-${w}-${th}`);
       }
     }
+  }
+  /* WP10d: desktop width, no screenshots, just the tab/level geometry in both themes. */
+  await metrics(1194, 800);
+  for (const dark of [false, true]) {
+    await theme(dark);
+    const th1194 = dark ? "dark" : "light";
+    await ev(`document.querySelector('#smdKardia [data-act=ktab][data-t=practice]').click(); return 1;`);
+    await sleep(350);
+    await ev(scrollBottom); await sleep(200);
+    ok(await ev(tabsClear) === true, `1194px ${th1194}: practice tab row sits clear of the level row with full labels, after scrolling`);
   }
   // Learn lists the real atlas preview, not placeholders.
   await theme(false); await metrics(390, 844);
@@ -251,6 +275,77 @@ try {
       ok((await ev(`return (localStorage.getItem('smd_kardia_v1')||'').indexOf('fixture-ms-af')>=0;`)) === true, `${w}px ${th}: attempt and FSRS card are recorded in the engine store`);
       await shot(`kardia-case-debrief-${w}-${th}`);
       await ev(`var a=document.querySelector('#smdKardia [data-act=kcase-list]'); if(a) a.click(); return 1;`); await sleep(300);
+    }
+  }
+
+  /* ── 7. Practice (WP10): one drill, the exam, a protocol, knobology and a real clip panel.
+   * The clip URL is stubbed to a local fixture so the test needs no network. 390 and 820, light and dark. */
+  console.log("\n--- Practice (WP10): drill, exam, protocol, real clip ---");
+  await ev(`window.KARDIA_CLIPS_TEST_URL = "/test/fixtures/kardia-practice/clip.mp4"; return 1;`);
+  for (const [w, h] of [[390, 844], [820, 1180]]) {
+    await metrics(w, h);
+    for (const dark of [false, true]) {
+      await theme(dark);
+      const th = dark ? "dark" : "light";
+      await ev(`document.querySelector('#smdKardia [data-act=ktab][data-t=practice]').click(); return 1;`);
+      ok(await until(`return !!document.querySelector('#smdKardia [data-pact="drills"]');`, 20000), `${w}px ${th}: Practice lists the WP10 drill sections`);
+      /* View drill: start the A4C drill, set the shared Echo Lab probe to its target, hold, score. */
+      await ev(`document.querySelector('#smdKardia [data-pact="drills"]').click(); return 1;`);
+      ok(await until(`return !!document.querySelector('#smdKardia [data-pact="drill-start"][data-v="tte_a4c"]');`, 20000), `${w}px ${th}: view drills list A4C at MBBS`);
+      await ev(`document.querySelector('#smdKardia [data-pact="drill-start"][data-v="tte_a4c"]').click(); return 1;`);
+      ok(await until(`return !!document.querySelector('#smdKardia #krdpSector');`, 10000), `${w}px ${th}: drill opens with its sector and timer`);
+      await ev(`(function(){var L=KARDIA._kardia.echoLab; L.setProbeState(L.stateForView('tte_a4c')); return 1;})()`);
+      ok(await until(`return document.getElementById('smdKardia').innerText.indexOf('View achieved')>=0 && !!document.querySelector('#smdKardia [data-pact="drill-again"]');`, 20000), `${w}px ${th}: holding A4C on target finishes the drill with a score`);
+      ok((await ev(`return (localStorage.getItem('smd_kardia_v1')||'').indexOf('kardia-view-tte_a4c')>=0;`)) === true, `${w}px ${th}: drill attempt and FSRS card recorded in the engine store`);
+      await shot(`kardia-practice-drill-${w}-${th}`);
+      /* Exam: five stations in order, each set to target, then the app marked report. */
+      await ev(`document.querySelector('#smdKardia [data-pact="home"]').click(); return 1;`);
+      await sleep(300);
+      await ev(`document.querySelector('#smdKardia [data-pact="exam"]').click(); return 1;`);
+      ok(await until(`return !!document.querySelector('#smdKardia [data-pact="exam-start"]');`, 10000), `${w}px ${th}: exam intro lists the five stations`);
+      await ev(`document.querySelector('#smdKardia [data-pact="exam-start"]').click(); return 1;`);
+      for (let s = 0; s < 5; s++) {
+        ok(await until(`return document.getElementById('smdKardia').innerText.indexOf('station ${s + 1} of 5')>=0;`, 15000), `${w}px ${th}: exam station ${s + 1} of 5 opens`);
+        const vid = await ev(`return KARDIA_PRACTICE._state.exam.stations[KARDIA_PRACTICE._state.exam.i].id;`);
+        await ev(`(function(){var L=KARDIA._kardia.echoLab; L.setProbeState(L.stateForView('${vid}')); return 1;})()`);
+        ok(await until(`return KARDIA_PRACTICE._state.exam.achieved === true;`, 15000), `${w}px ${th}: exam station ${s + 1} achieved on target`);
+        await ev(`document.querySelector('#smdKardia [data-pact="exam-next"]').click(); return 1;`);
+        await sleep(350);
+      }
+      ok(await until(`return document.getElementById('smdKardia').innerText.indexOf('Exam report')>=0;`, 15000), `${w}px ${th}: exam ends with the app marked report`);
+      await shot(`kardia-practice-exam-${w}-${th}`);
+      /* Protocol: FAST end to end, one decision per step. */
+      await ev(`document.querySelector('#smdKardia [data-pact="home"]').click(); return 1;`);
+      await sleep(300);
+      await ev(`document.querySelector('#smdKardia [data-pact="protocols"]').click(); return 1;`);
+      ok(await until(`return !!document.querySelector('#smdKardia [data-pact="proto-start"][data-v="fast"]');`, 20000), `${w}px ${th}: protocols list FAST`);
+      await ev(`document.querySelector('#smdKardia [data-pact="proto-start"][data-v="fast"]').click(); return 1;`);
+      for (let s = 0; s < 4; s++) {
+        ok(await until(`return !!document.querySelector('#smdKardia [data-pact="proto-answer"]');`, 10000), `${w}px ${th}: FAST step ${s + 1} names its view and decision`);
+        await ev(`document.querySelector('#smdKardia [data-pact="proto-answer"]').click(); return 1;`);
+        ok(await until(`return !!document.querySelector('#smdKardia [data-pact="proto-next"]');`, 10000), `${w}px ${th}: FAST step ${s + 1} gives its explanation`);
+        await ev(`document.querySelector('#smdKardia [data-pact="proto-next"]').click(); return 1;`);
+        await sleep(300);
+      }
+      ok(await until(`return document.getElementById('smdKardia').innerText.indexOf('report')>=0;`, 10000), `${w}px ${th}: FAST ends with a timed report`);
+      /* Knobology: fix the gain drill by setting the gain slider to target. */
+      await ev(`document.querySelector('#smdKardia [data-pact="home"]').click(); return 1;`);
+      await sleep(300);
+      await ev(`document.querySelector('#smdKardia [data-pact="knobology"]').click(); return 1;`);
+      ok(await until(`return !!document.querySelector('#smdKardia [data-pact="knob-start"][data-v="gain-high"]');`, 10000), `${w}px ${th}: knobology lists the gain drill`);
+      await ev(`document.querySelector('#smdKardia [data-pact="knob-start"][data-v="gain-high"]').click(); return 1;`);
+      await ev(`(function(){var el=document.getElementById('krdpGain'); el.value='0'; el.dispatchEvent(new Event('input',{bubbles:true})); return 1;})()`);
+      await ev(`document.querySelector('#smdKardia [data-pact="knob-check"]').click(); return 1;`);
+      ok(await until(`return document.getElementById('smdKardia').innerText.indexOf('Image fixed')>=0;`, 10000), `${w}px ${th}: knobology passes when every knob is within tolerance`);
+      /* Real clip panel: stubbed local fixture, attribution under the player. */
+      await ev(`document.querySelector('#smdKardia [data-pact="home"]').click(); return 1;`);
+      ok(await until(`return !!document.querySelector('#smdKardia [data-pact="real-open"]') && !document.querySelector('#smdKardia [data-pact="real-open"]').disabled;`, 20000), `${w}px ${th}: Real patient compare is offered on Practice`);
+      await ev(`document.querySelector('#smdKardia [data-pact="real-open"]').click(); return 1;`);
+      ok(await until(`return !!document.querySelector('#smdKardia video.krdc-video');`, 20000), `${w}px ${th}: real clip panel shows a player`);
+      ok((await ev(`return document.querySelector('#smdKardia video.krdc-video').getAttribute('src');`)) === "/test/fixtures/kardia-practice/clip.mp4", `${w}px ${th}: clip src is the local fixture (no network)`);
+      ok((await ev(`return !!document.querySelector('#smdKardia .krdc-credit');`)) === true, `${w}px ${th}: attribution and licence sit under the clip`);
+      await shot(`kardia-practice-clip-${w}-${th}`);
+      ok(!/[–—]/.test(await ev(`return document.getElementById('smdKardia').innerText;`)), `${w}px ${th}: no em or en dash on the Practice screens`);
     }
   }
 

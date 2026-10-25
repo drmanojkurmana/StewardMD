@@ -1,0 +1,71 @@
+/* Kardia Practice (kardia-practice.js and kardia-clips.js): drills, exam,
+   knobology, POCUS protocols, spot diagnosis and real patient clips.
+   Scoped under .krd-root and built only on the Kardia tokens in
+   kardia.css (--kd-*, --sp-*). The sector canvas stays dark in both
+   themes because an ultrasound screen is dark at the bedside. */
+.krd-root .krdp-head { margin-top: 18px; }
+.krd-root .krdp-back { min-height: 44px; }
+.krd-root .krdp-title { margin-top: 12px; overflow-wrap: break-word; }
+.krd-root .krdp-note { margin: 14px 0 0; font-size: 13px; line-height: 1.5; color: var(--sp-mut); }
+.krd-root .krdp-err { margin: 12px 0 0; font-size: 15px; line-height: 1.5; color: var(--sp-bad); overflow-wrap: break-word; }
+.krd-root .krdp-row { display: flex; gap: 10px; align-items: center; width: 100%; min-height: 44px;
+  padding: 12px 2px; border: 0; border-bottom: 1px solid var(--sp-line); background: transparent;
+  color: var(--sp-text); text-align: left; font-size: 15px; line-height: 1.45; cursor: pointer;
+  touch-action: manipulation; user-select: none; -webkit-user-select: none;
+  transition: background-color 140ms var(--kd-ease); }
+@media (hover: hover) and (pointer: fine) {
+  .krd-root .krdp-row:hover { background: var(--sp-s1); }
+}
+.krd-root .krdp-row:active { background: var(--sp-s1); }
+.krd-root .krdp-row-b { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.krd-root .krdp-row-b b { font-weight: 650; overflow-wrap: break-word; }
+.krd-root .krdp-row-b span { color: var(--sp-mut); font-size: 14px; line-height: 1.45; overflow-wrap: break-word; }
+.krd-root .krdp-chev { flex: 0 0 auto; color: var(--sp-mut); font-size: 20px; }
+.krd-root .krdp-timer { display: flex; gap: 10px; align-items: baseline; margin-top: 12px; }
+.krd-root .krdp-timer span:first-child { font-size: 34px; line-height: 1; font-weight: 700;
+  font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.krd-root .krdp-timer-lab { font-size: 14px; color: var(--sp-mut); }
+.krd-root .krdp-pause span:first-child { color: var(--sp-warn); }
+.krd-root .krdp-run canvas, .krd-root .krdp canvas { display: block; width: 100%; height: auto;
+  border-radius: 12px; border: 1px solid var(--sp-line); background: #0b1114; }
+.krd-root .krdp-simnote, .krd-root .krdp-status { margin: 8px 0 0; font-size: 13px; line-height: 1.5; color: var(--sp-mut); overflow-wrap: break-word; }
+.krd-root .krdp-controls { margin-top: 12px; }
+.krd-root .krdp-result { margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: var(--sp-s1); }
+.krd-root .krdp-result p { margin: 8px 0 0; font-size: 15px; line-height: 1.5; overflow-wrap: break-word; }
+.krd-root .krdp-list { margin: 12px 0 0; padding: 0 0 0 22px; font-size: 15px; line-height: 1.6; }
+.krd-root .krdp-step { margin: 12px 0 0; font-size: 15px; font-weight: 650; line-height: 1.45; overflow-wrap: break-word; }
+.krd-root .krdp-viewbox { margin-top: 12px; padding: 12px 14px; border: 1px solid var(--sp-line); border-radius: 12px; background: var(--sp-s1); }
+.krd-root .krdp-viewbox p { margin: 8px 0 0; font-size: 15px; line-height: 1.55; overflow-wrap: break-word; }
+.krd-root .krdp-options { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+.krd-root .krdp-opt { min-height: 44px; text-align: left; white-space: normal; overflow-wrap: break-word; line-height: 1.45; }
+.krd-root .krdp-opt:disabled { opacity: 0.55; }
+.krd-root .krdp-links { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
+.krd-root .krdp-links p { margin: 0; }
+.krd-root .krdp-report { margin: 12px 0 0; padding: 0; list-style: none; }
+.krd-root .krdp-report li { padding: 12px 2px; border-bottom: 1px solid var(--sp-line); font-size: 15px; line-height: 1.5; overflow-wrap: break-word; }
+.krd-root .krdp-report .krdp-meta { display: block; margin-top: 2px; color: var(--sp-mut); font-size: 13px; line-height: 1.5; }
+.krd-root .krdp-ok { color: var(--sp-ok); font-weight: 650; }
+.krd-root .krdp-bad { color: var(--sp-bad); font-weight: 650; }
+.krd-root .krdp-label { display: block; margin-top: 12px; font-size: 14px; font-weight: 600; line-height: 1.4; }
+.krd-root .krdp-select { width: 100%; min-height: 44px; margin-top: 6px; padding: 10px 12px;
+  border: 1px solid var(--sp-line); border-radius: 10px; background: var(--sp-s1); color: var(--sp-text);
+  font-size: 16px; }
+.krd-root .krdp-real { margin-top: 18px; }
+.krd-root .krdp .sp-btn:active, .krd-root .krdp-row:active { transform: scale(0.97); }
+.krd-root .krdp .sp-btn { transition: transform 120ms var(--kd-ease), background-color 140ms var(--kd-ease); }
+/* Real patient clips (kardia-clips.js) */
+.krd-root .krdc-panel { margin-top: 14px; }
+.krd-root .krdc-video { display: block; width: 100%; height: auto; border-radius: 12px;
+  border: 1px solid var(--sp-line); background: #0b1114; }
+.krd-root .krdc-credit { margin: 8px 0 0; font-size: 12px; line-height: 1.55; color: var(--sp-mut); overflow-wrap: break-word; }
+.krd-root .krdc-credit a { color: var(--sp-link); }
+.krd-root .krdc-note, .krd-root .krdc-offline { margin: 10px 0 0; font-size: 14px; line-height: 1.55; color: var(--sp-mut); overflow-wrap: break-word; }
+.krd-root .krdc-lesson { margin-top: 14px; }
+.krd-root .krdc-credits { margin: 12px 0 0; padding: 0; list-style: none; }
+.krd-root .krdc-credits li { padding: 12px 2px; border-bottom: 1px solid var(--sp-line); font-size: 14px; line-height: 1.5; overflow-wrap: break-word; }
+.krd-root .krdc-credits .krdc-meta { display: block; color: var(--sp-mut); font-size: 13px; }
+@media (prefers-reduced-motion: reduce) {
+  .krd-root .krdp .sp-btn, .krd-root .krdp-row { transition: none; }
+  .krd-root .krdp .sp-btn:active, .krd-root .krdp-row:active { transform: none; }
+  .krd-root .krd-meter span { transition: none; }
+}

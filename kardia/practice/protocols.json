@@ -1,0 +1,219 @@
+{
+  "version": 1,
+  "review": { "status": "ai_drafted" },
+  "description": "Kardia POCUS protocol scenarios (WP10). Each protocol is a timed sequence of steps. A step names the view to obtain, the finding to look for and a decision with one correct option. All clinical text is ai_drafted until clinical review. British spelling throughout.",
+  "protocols": [
+    {
+      "id": "fast",
+      "title": "FAST: focused assessment with sonography in trauma",
+      "shortTitle": "FAST",
+      "level": ["mbbs", "resident", "fellow", "sonographer"],
+      "timeLimitSec": 240,
+      "scenario": "A 24 year old arrives after a road traffic collision. Blood pressure 92 over 58, heart rate 118, abdomen tender. Run the four FAST windows in fixed order and call each one.",
+      "sources": ["ACEP emergency ultrasound guidelines, section on FAST, in own words", "International POCUS consensus, section on trauma ultrasound, in own words"],
+      "steps": [
+        {
+          "view": "pocus_fast_ruq",
+          "title": "Right upper quadrant",
+          "finding": "Look in the hepatorenal recess (Morison pouch) and below the diaphragm for a dark anechoic stripe where liver and kidney should touch.",
+          "decision": { "prompt": "A dark stripe separates liver from kidney. What does this window say?", "options": ["Positive: new free fluid in the hepatorenal recess", "Negative: the organs touch throughout", "Positive: pericardial blood around the heart"], "answer": 0, "explanation": "Free fluid collects first in the hepatorenal recess on the right. A dark stripe there makes this window positive." }
+        },
+        {
+          "view": "pocus_fast_luq",
+          "title": "Left upper quadrant",
+          "finding": "Look in the splenorenal recess and below the left diaphragm. This is the window most often missed, so fan fully through the spleen and kidney.",
+          "decision": { "prompt": "The right side was positive. The left side looks clear. What next?", "options": ["Stop: one positive window is enough", "Complete every window: management needs the full map", "Repeat only the heart window"], "answer": 1, "explanation": "Complete all four windows even after a positive one. The full map guides the surgical plan." }
+        },
+        {
+          "view": "pocus_fast_pelvis",
+          "title": "Pelvis, two planes",
+          "finding": "Look behind the bladder in transverse and lengthwise planes for free fluid in the rectovesical or pouch of Douglas recess.",
+          "decision": { "prompt": "The bladder is empty and the pelvis cannot be assessed. How is this window called?", "options": ["Negative", "Positive", "Limited: fill the bladder and repeat before calling it"], "answer": 2, "explanation": "An empty bladder hides the pelvic recesses. A limited window is not a negative window." }
+        },
+        {
+          "view": "pocus_fast_subxiphoid",
+          "title": "Subxiphoid heart",
+          "finding": "Look around the heart for pericardial blood: a dark rim separating pericardium from myocardium, largest in diastole.",
+          "decision": { "prompt": "All four windows show no new fluid and no pericardial blood. How is this FAST set called?", "options": ["Negative, and bleeding is ruled out", "Negative for now: repeat if the patient stays unstable", "Positive because the patient is tachycardic"], "answer": 1, "explanation": "A complete negative set lowers the chance of major bleeding but never rules it out. Repeat when vitals change or instability persists." }
+        }
+      ]
+    },
+    {
+      "id": "efast",
+      "title": "eFAST: extended FAST with lung windows",
+      "shortTitle": "eFAST",
+      "level": ["mbbs", "resident", "fellow", "sonographer"],
+      "timeLimitSec": 300,
+      "scenario": "A 31 year old with chest and abdominal trauma after a fall. Oxygen saturation 91 percent on air, right chest quiet. Run eFAST: lungs first in chest trauma, then the four FAST windows.",
+      "sources": ["ACEP emergency ultrasound guidelines, section on eFAST and pneumothorax, in own words", "International POCUS consensus, section on lung ultrasound for pneumothorax, in own words"],
+      "steps": [
+        {
+          "view": "pocus_efast_lung_right",
+          "title": "Right lung",
+          "finding": "Look for pleural sliding at the upper chest. Sliding present means the pleural layers touch. Absent sliding with a lung point confirms pneumothorax.",
+          "decision": { "prompt": "No sliding on the right, and a lung point is seen where sliding starts and stops. What does this mean?", "options": ["Normal lung", "Pneumothorax on the right", "Pleural effusion on the right"], "answer": 1, "explanation": "Absent sliding alone is not specific, but a lung point confirms pneumothorax." }
+        },
+        {
+          "view": "pocus_efast_lung_left",
+          "title": "Left lung",
+          "finding": "Check sliding on the left in the same way, so both sides are compared before the belly windows begin.",
+          "decision": { "prompt": "The left side slides normally. What order suits this chest trauma patient?", "options": ["Belly windows first, lungs last", "Lungs early, then the four FAST windows in fixed order", "Heart only, then stop"], "answer": 1, "explanation": "In chest trauma the lung windows come early so a tension pneumothorax is not missed while scanning the belly." }
+        },
+        {
+          "view": "pocus_fast_ruq",
+          "title": "Right upper quadrant",
+          "finding": "Look in the hepatorenal recess for a dark stripe of free fluid, as in FAST.",
+          "decision": { "prompt": "How many windows does a complete eFAST call?", "options": ["Four", "Five", "Six: two lungs plus four FAST windows"], "answer": 2, "explanation": "eFAST is six windows: bilateral lungs plus right upper quadrant, left upper quadrant, pelvis and subxiphoid heart." }
+        },
+        {
+          "view": "pocus_fast_subxiphoid",
+          "title": "Subxiphoid heart",
+          "finding": "Finish at the heart: pericardial blood and gross ventricular filling in one view.",
+          "decision": { "prompt": "Breathing worsens an hour later with a previously negative set. What is correct?", "options": ["The first set still stands", "Repeat the lungs and belly windows", "Discharge the scan from the record"], "answer": 1, "explanation": "Repeat the protocol when vitals change or breathing worsens. Early bleeding and small pneumothoraces can be below the first pass." }
+        }
+      ]
+    },
+    {
+      "id": "rush",
+      "title": "RUSH: rapid ultrasound in shock and hypotension",
+      "shortTitle": "RUSH",
+      "level": ["resident", "fellow", "sonographer"],
+      "timeLimitSec": 360,
+      "scenario": "A 68 year old with undifferentiated shock: blood pressure 84 over 50, cool peripheries, lactate rising. Run RUSH in its three parts: pump, tank, pipes.",
+      "sources": ["ACEP emergency ultrasound guidelines, section on shock assessment, in own words", "International POCUS consensus, section on the RUSH protocol for undifferentiated hypotension, in own words"],
+      "steps": [
+        {
+          "view": "pocus_fast_subxiphoid",
+          "title": "Pump: the heart",
+          "finding": "Judge squeeze and look for pericardial fluid. A hyperdynamic empty heart, a failing dilated heart and tamponade each point a different way.",
+          "decision": { "prompt": "The heart squeezes vigorously with near cavity obliteration and no pericardial fluid. Which pattern is this?", "options": ["Cardiogenic shock", "Empty pump: volume loss or vasodilatation, not primary pump failure", "Tamponade"], "answer": 1, "explanation": "A hyperdynamic empty pump argues against primary pump failure. Move to the tank to separate volume loss from vasodilatation." }
+        },
+        {
+          "view": "pocus_ivc",
+          "title": "Tank: inferior vena cava",
+          "finding": "Measure the cava 1 to 2 cm from the atrial junction through a full breath. A small collapsing cava suggests low filling; a large fixed cava suggests high filling pressure.",
+          "decision": { "prompt": "The cava is small and collapses by more than half with inspiration. What does the tank say?", "options": ["Tank full: stop fluids", "Tank empty: a fluid challenge is reasonable with lung checks", "Pipes problem: look only at the aorta"], "answer": 1, "explanation": "A small collapsing cava fits an empty tank. Pair any fluid challenge with lung scans for new B lines." }
+        },
+        {
+          "view": "pocus_fast_ruq",
+          "title": "Tank: leaks into the belly",
+          "finding": "Run the FAST belly windows as part of the tank: free fluid means volume is leaving the circulation into the peritoneum.",
+          "decision": { "prompt": "Free fluid is present in the hepatorenal recess with an empty cava. Which shock pattern fits?", "options": ["Hypovolaemic shock with bleeding", "Obstructive shock from tamponade", "Cardiogenic shock"], "answer": 0, "explanation": "Blood in the belly plus an empty tank is hypovolaemic shock with bleeding until proved otherwise." }
+        },
+        {
+          "view": "pocus_fast_subxiphoid",
+          "title": "Pipes: great vessels",
+          "finding": "Finish with the pipes: the aorta in lengthwise plane for aneurysm or dissection flap, and leg vein compression when embolus is suspected.",
+          "decision": { "prompt": "Pump and tank are both abnormal in a septic patient with known cardiac disease. What next?", "options": ["Treat one pattern only", "Name both patterns and treat the mixed picture with senior and critical care help", "Repeat the cava until it agrees"], "answer": 1, "explanation": "Mixed pictures are common. Name each abnormal part plainly and treat the whole patient, not one label." }
+        }
+      ]
+    },
+    {
+      "id": "blue",
+      "title": "BLUE: bedside lung ultrasound in emergency",
+      "shortTitle": "BLUE",
+      "level": ["resident", "fellow", "sonographer"],
+      "timeLimitSec": 300,
+      "scenario": "A 74 year old with acute breathlessness, saturation 89 percent on air. Run the BLUE points on both sides, add the PLAPS point and a leg vein check, then follow the profile.",
+      "sources": ["International POCUS consensus, section on BLUE lung profiles, in own words", "ACEP emergency ultrasound guidelines, section on lung ultrasound in dyspnoea, in own words"],
+      "steps": [
+        {
+          "view": "pocus_blue_upper",
+          "title": "Upper BLUE points, both sides",
+          "finding": "With the marker toward the head, record the profile per zone: A profile is sliding with horizontal A lines (dry lung), B profile is three or more B lines (interstitial fluid).",
+          "decision": { "prompt": "Both upper zones show diffuse B lines and the heart squeezes poorly. Which pattern leads?", "options": ["Pneumonia", "Cardiogenic pulmonary oedema", "Pneumothorax"], "answer": 1, "explanation": "Diffuse bilateral B lines with poor heart function suggest cardiogenic oedema in the BLUE flowchart." }
+        },
+        {
+          "view": "pocus_blue_lower",
+          "title": "Lower BLUE points and PLAPS",
+          "finding": "Scan the lower points, then the posterolateral PLAPS point on each side for effusion and consolidation (the C profile).",
+          "decision": { "prompt": "One side shows focal B lines with a C profile and the patient has fever. What does this suggest?", "options": ["Cardiogenic oedema", "Pneumothorax", "Pneumonia on that side"], "answer": 2, "explanation": "Focal B lines or a C profile with fever point to pneumonia rather than diffuse oedema." }
+        },
+        {
+          "view": "pocus_efast_lung_left",
+          "title": "Sliding check",
+          "finding": "Confirm sliding at each point. Absent sliding with a lung point means pneumothorax; absent sliding alone has other causes.",
+          "decision": { "prompt": "The lungs show an A profile and leg vein compression finds clot. What does the BLUE flowchart suggest?", "options": ["Pulmonary embolus", "Pneumonia", "Cardiogenic oedema"], "answer": 0, "explanation": "An A profile with venous clot suggests pulmonary embolus in the BLUE flowchart." }
+        },
+        {
+          "view": "pocus_blue_upper",
+          "title": "Avoiding the chronic lung trap",
+          "finding": "Compare with the clinical picture: chronic lung disease can carry B lines and poor sliding at baseline.",
+          "decision": { "prompt": "Chronic lung disease is known and the profile is mixed. How do you avoid error?", "options": ["Call the first profile seen", "Widen the scan, compare sides and prior imaging, and state uncertainty plainly", "Ignore the lung scan entirely"], "answer": 1, "explanation": "In chronic lung disease, compare sides and old imaging and name uncertainty rather than forcing one profile." }
+        }
+      ]
+    },
+    {
+      "id": "ivc",
+      "title": "IVC collapsibility and fluid responsiveness",
+      "shortTitle": "IVC collapsibility",
+      "level": ["resident", "fellow", "sonographer"],
+      "timeLimitSec": 240,
+      "scenario": "A 59 year old with sepsis and borderline blood pressure. Decide whether a fluid challenge is likely to help, using the cava with the lungs, and reassess after each challenge.",
+      "sources": ["ASE 2019 guideline for the complete transthoracic examination, section on inferior vena cava and right atrial pressure, in own words", "International POCUS consensus, section on volume assessment with the inferior vena cava, in own words"],
+      "steps": [
+        {
+          "view": "pocus_ivc",
+          "title": "Obtain and measure the cava",
+          "finding": "Sagittal through the liver, measure 1 to 2 cm from the atrial junction across a full breath with a sniff, in M mode if available.",
+          "decision": { "prompt": "How is collapsibility calculated in a spontaneously breathing patient?", "options": ["Minimum divided by maximum, as a percent", "The fall in diameter over the maximum, as a percent", "Maximum minus the atrial diameter"], "answer": 1, "explanation": "Collapsibility is (maximum minus minimum) over maximum, expressed as a percent." }
+        },
+        {
+          "view": "pocus_ivc",
+          "title": "Read the pattern",
+          "finding": "A small cava with large collapse predicts that fluids will raise output. A large fixed cava warns that more fluid may harm.",
+          "decision": { "prompt": "The cava is large and barely changes with the breath. What does this predict?", "options": ["Fluids will certainly help", "Fluid tolerance is poor: be cautious and look for other causes", "The aorta was measured by mistake in every case"], "answer": 1, "explanation": "A large fixed cava suggests high filling pressure. More fluid may harm, so look for pump and pipes causes too." }
+        },
+        {
+          "view": "pocus_blue_upper",
+          "title": "Lungs before and after fluid",
+          "finding": "Scan the upper lung zones for B lines before any challenge and again after it. New B lines mean the lungs are wetting.",
+          "decision": { "prompt": "New B lines appear after a fluid challenge and pressure has not risen. What next?", "options": ["Give the next challenge faster", "Stop fluids and reassess the whole picture", "Repeat the cava only"], "answer": 1, "explanation": "New B lines without benefit mean stop: reassess pump, tank and pipes rather than adding volume." }
+        },
+        {
+          "view": "pocus_ivc",
+          "title": "The ventilated patient",
+          "finding": "Positive pressure ventilation reverses the breath pattern: the cava distends on inspiration instead of collapsing.",
+          "decision": { "prompt": "The patient is now ventilated. What changes in interpretation?", "options": ["Nothing changes", "Use distensibility with ventilation and tidal volume in mind, not the breathing collapse cutoffs", "The cava cannot be used at all"], "answer": 1, "explanation": "Ventilation flips the pattern. Interpret distensibility in context and never apply spontaneous breathing cutoffs unchanged." }
+        }
+      ]
+    },
+    {
+      "id": "pulse_check",
+      "title": "Ten second pulse check echo in cardiac arrest",
+      "shortTitle": "Pulse check echo",
+      "level": ["resident", "fellow", "sonographer"],
+      "timeLimitSec": 120,
+      "pauseLimitSec": 10,
+      "scenario": "Cardiac arrest, compressions in progress. The rhythm check pause is coming. Pre position the probe, capture one subxiphoid clip inside the pause and lift the probe at or before 10 seconds. The clock runs against the pause.",
+      "sources": ["ERC and AHA guidance on minimising pauses in compressions, in own words", "ACEP emergency ultrasound guidelines, section on ultrasound in cardiac arrest, in own words", "International POCUS consensus, section on pulse check echo with minimised pauses, in own words"],
+      "links": { "codeBlue": true, "narke": false },
+      "steps": [
+        {
+          "view": "pocus_arrest_subxiphoid",
+          "title": "Pre position during compressions",
+          "finding": "Set the subxiphoid preset and rest the probe flat on the belly during compressions, aimed at the left shoulder, so no setup time is spent inside the pause.",
+          "decision": { "prompt": "The pause starts and the image needs gain and depth changes. What is correct?", "options": ["Finish the setup, then scan", "Use the preset as set, capture the clip and lift at 10 seconds", "Ask for a longer pause"], "answer": 1, "explanation": "The clock owns the pause. Setup happens before the pause, never inside it." }
+        },
+        {
+          "view": "pocus_arrest_subxiphoid",
+          "title": "Name the arrest state",
+          "finding": "One clip, three states: organised beating with a pulse, organised wall motion without a pulse, or a still heart.",
+          "decision": { "prompt": "The clip shows organised wall contraction but no palpable pulse. What state is this?", "options": ["Return of circulation", "Asystole", "Pulseless electrical activity"], "answer": 2, "explanation": "Motion without a pulse is pulseless electrical activity. Call it in plain words to the team leader." }
+        },
+        {
+          "view": "pocus_fast_subxiphoid",
+          "title": "Hunt reversible causes in the same clip",
+          "finding": "In the same clip: pericardial fluid for tamponade, right heart size for a massive embolus pattern, chamber filling for profound volume loss.",
+          "decision": { "prompt": "Which set does the pulse check clip hunt?", "options": ["Valve area, diastolic grade and coronary calcium", "Tamponade fluid, dilated right heart and empty chambers", "Aortic valve area only"], "answer": 1, "explanation": "Tamponade, a massive embolus pattern and profound volume loss are the echo reversible causes to name from this clip." }
+        },
+        {
+          "view": "pocus_arrest_subxiphoid",
+          "title": "Lift on time, report after",
+          "finding": "Lift the probe and restart compressions at or before 10 seconds whatever the image shows. Report the clip after compressions resume.",
+          "decision": { "prompt": "The image is unclear as the pause reaches 10 seconds. What is correct?", "options": ["Keep scanning until certain", "Delay the shock for the clip", "Lift at 10 seconds and report after compressions resume"], "answer": 2, "explanation": "No finding is worth a longer pause. Lift on time; the report follows once compressions are running." }
+        }
+      ]
+    }
+  ]
+}

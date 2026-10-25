@@ -32,10 +32,18 @@ body:not(.dark):not(.v3-dark) .krd-root {
 .krd-root .sp-levelrow .sp-seg { display: flex; overflow-x: auto; scrollbar-width: none; }
 .krd-root .sp-levelrow .sp-seg::-webkit-scrollbar { display: none; }
 .krd-root .sp-levelrow .sp-seg button { flex: 0 0 auto; }
-/* Same 16px gutter as the tab row above it. */
-.krd-root .sp-levelrow { padding: 0 16px; }
-/* Kardia tab bar: five tabs, scrollable on narrow phones, one per screen reader tab. */
-.krd-root .krd-tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none;
+/* Same 16px gutter as the tab row above it. Never shrinks: the level row is a
+   fixed header row above .sp-scroll, like the tab row. */
+.krd-root .sp-levelrow { flex: 0 0 auto; padding: 0 16px; }
+/* Kardia tab bar: five tabs, scrollable on narrow phones, one per screen reader tab.
+   Fixed header rows above the scrolling column: .sp-root is a column flex and
+   only .sp-scroll may shrink (it has min-height 0). Both rows are scroll
+   containers or hold one, so their automatic flex minimum is zero: without
+   flex:none a tall page crushes the tab row and the level row paints over the
+   lower half of the labels, worst at 390px where the tabs scroll. flex:none
+   keeps both rows at content height; overflow-y stays non-auto so a horizontal
+   scroll can never clip the labels vertically. */
+.krd-root .krd-tabs { flex: 0 0 auto; display: flex; gap: 4px; overflow-x: auto; overflow-y: hidden; scrollbar-width: none;
   padding: 8px 16px 4px; -webkit-overflow-scrolling: touch; }
 .krd-root .krd-tabs::-webkit-scrollbar { display: none; }
 .krd-root .krd-tab { flex: 1 0 auto; min-width: 0; min-height: 44px; padding: 10px 12px; border: 0;
@@ -127,6 +135,11 @@ body:not(.dark):not(.v3-dark) .krd-root {
   font-size: 14px; font-weight: 600; line-height: 1.4; padding: 6px 0 2px; }
 .krd-root .krd-ctl-val { color: var(--sp-mut); font-variant-numeric: tabular-nums; font-weight: 500; }
 .krd-root .krd-ctl input[type="range"] { width: 100%; min-height: 44px; margin: 0; accent-color: var(--sp-acc); }
+/* Angle and knob readouts never wrap: a minus sign stranded at a line edge
+   reads as "- 180 deg". The proper minus (U+2212) has no break opportunity;
+   nowrap also pins the hyphen-minus dB readouts. Tabular figures stop the
+   label jittering as a slider moves. */
+.krd-root .krd-ctl-val { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .krd-root .krd-gyro { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 14px; }
 .krd-root .krd-gyro .sp-btn { min-height: 44px; }
 .krd-root .krd-gyro p { flex: 1 1 220px; margin: 0; }

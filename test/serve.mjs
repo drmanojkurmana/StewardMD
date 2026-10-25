@@ -10,7 +10,7 @@ import { dirname } from "node:path";
 
 const root = process.argv[2] || join(dirname(fileURLToPath(import.meta.url)), "..");
 const port = Number(process.argv[3] || 8799);
-const TYPES = { ".gz": "application/gzip", ".html": "text/html", ".js": "application/javascript", ".mjs": "application/javascript", ".css": "text/css", ".png": "image/png", ".webp": "image/webp", ".json": "application/json", ".ico": "image/x-icon", ".svg": "image/svg+xml", ".woff2": "font/woff2" };
+const TYPES = { ".gz": "application/gzip", ".html": "text/html", ".js": "application/javascript", ".mjs": "application/javascript", ".css": "text/css", ".png": "image/png", ".webp": "image/webp", ".json": "application/json", ".ico": "image/x-icon", ".svg": "image/svg+xml", ".woff2": "font/woff2", ".mp4": "video/mp4" };
 
 import https from "node:https";
 
