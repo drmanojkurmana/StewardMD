@@ -20,6 +20,18 @@
  *
  * Test seam: window.KARDIA_CLIPS_TEST_URL, when set to a string, is used
  * as the src for every clip so headless tests need no network.
+ *
+ * Real cine in Echo Lab (this file owns clip choice and caching; the
+ * Echo Lab controller owns the at-target state machine and crossfade):
+ * chooseClip picks one clip for a view plus the active pathology and
+ * severity, falling back pathology and severity, then pathology, then
+ * the view alone, preferring a moving clip over a still in each tier.
+ * Preload states: not started, loading (credits or bytes), ready (a
+ * playable src, from the Cache API when bytes were cached), empty (no
+ * clip for this view or pathology), offline or error (no playable src;
+ * the caller keeps the simulation and says so once). Long titles and
+ * attributions wrap, never truncate. No new palette; the Echo Lab
+ * label and switch reuse the Kardia tokens.
  */
 (function (G) {
   "use strict";
@@ -69,11 +81,76 @@
     if (!clip) return "";
     return clip.attribution || ((clip.author || clip.title || "") + (clip.licence ? ", " + clip.licence : ""));
   }
+  /* One clip for Echo Lab real cine. Tiers, best first: view plus
+   * pathology plus severity; pathology plus severity; pathology;
+   * view. A clip only enters a tier when every field that tier names
+   * matches (a severity on the query must match the clip severity in
+   * the severity tiers, so a severe clip is never shown for mild).
+   * Within a tier a moving clip beats a still, then catalogue order. */
+  function chooseClip(clips, query) {
+    query = query || {};
+    var view = query.view || null, path = query.pathology || null, sev = query.severity || null;
+    var list = clips && clips.all ? clips.all : (clips || []);
+    function pick(pred) {
+      var still = null, i, c;
+      for (i = 0; i < list.length; i++) {
+        c = list[i];
+        if (!c || !pred(c)) continue;
+        if (isVideo(c)) return c;
+        if (!still) still = c;
+      }
+      return still;
+    }
+    var hit = null;
+    if (view && path) hit = pick(function (c) { return c.view === view && c.pathology === path && (!sev || c.severity === sev); });
+    if (!hit && path && sev) hit = pick(function (c) { return c.pathology === path && c.severity === sev; });
+    if (!hit && path) hit = pick(function (c) { return c.pathology === path; });
+    if (!hit && view) hit = pick(function (c) { return c.view === view; });
+    return hit || null;
+  }
+  var CLIP_CACHE_NAME = "kardia-clips-v1";
+  /* Cache API preload, the atlas3d pattern (cache name above): a hit
+   * resolves with no fetch, so a clip seen once plays offline; a miss
+   * fetches, stores a clone, and resolves. Every dependency is
+   * injectable so this is unit tested in node. Resolves with the
+   * bytes; rejects when nothing is cached and the fetch fails. */
+  function cacheClipBytes(url, deps) {
+    deps = deps || {};
+    var cachesImpl = deps.caches !== undefined ? deps.caches
+      : (typeof caches !== "undefined" ? caches : null);
+    var fetchImpl = deps.fetch !== undefined ? deps.fetch : (typeof fetch !== "undefined" ? fetch : null);
+    var name = deps.cacheName || CLIP_CACHE_NAME;
+    function fromCache() {
+      if (!cachesImpl || !cachesImpl.open) return Promise.resolve(null);
+      return Promise.resolve(cachesImpl.open(name)).then(function (cache) {
+        return Promise.resolve(cache.match(url));
+      }).then(function (res) {
+        return res ? Promise.resolve(res.arrayBuffer()) : null;
+      }).then(function (b) { return b || null; }, function () { return null; });
+    }
+    return fromCache().then(function (cached) {
+      if (cached) return cached;
+      if (!fetchImpl) throw new Error("clip not cached and no fetch available");
+      return Promise.resolve(fetchImpl(url)).then(function (res) {
+        if (!res || !res.ok) throw new Error("clip " + (res ? res.status : "no response"));
+        var put = null;
+        if (cachesImpl && cachesImpl.open && res.clone) {
+          put = Promise.resolve(cachesImpl.open(name)).then(function (cache) {
+            return cache.put(url, res.clone());
+          }).then(function () {}, function () {});
+        }
+        return Promise.resolve(res.arrayBuffer()).then(function (bytes) {
+          return put ? put.then(function () { return bytes; }) : bytes;
+        });
+      });
+    });
+  }
 
   var PURE = {
     isVideo: isVideo, clipUrl: clipUrl, indexClips: indexClips,
     clipsFor: clipsFor, pathologyOfLesson: pathologyOfLesson,
-    attributionLine: attributionLine
+    attributionLine: attributionLine, chooseClip: chooseClip,
+    cacheClipBytes: cacheClipBytes, CLIP_CACHE_NAME: CLIP_CACHE_NAME
   };
   if (typeof module !== "undefined" && module.exports) module.exports = PURE;
   if (!G) return;
@@ -231,9 +308,49 @@
     return api;
   }
 
+  /* Echo Lab real cine: choose the clip for a query and preload its
+   * bytes through the Cache API, resolving with a playable src (an
+   * object URL for cached bytes, the hosted URL when no cache is
+   * available, the test fixture when stubbed). Resolves null when no
+   * clip matches; rejects when a clip exists but cannot load, so the
+   * caller keeps the simulation and says so once. One preload per
+   * clip URL is shared; a superseded object URL is revoked. */
+  var preloads = {};
+  function preloadFor(query) {
+    return load().then(function (credits) {
+      var clip = chooseClip(credits, query);
+      if (!clip) return null;
+      var stub = testUrl();
+      if (stub) return { clip: clip, src: stub, cached: false };
+      var url = clipUrl(clip);
+      if (!url) return null;
+      if (preloads[url]) return preloads[url];
+      var shared = null;
+      try { shared = G.SMD_THOREX_MODEL_CACHE; } catch (e) {}
+      var bytesP = (shared && shared.loadModelBytes)
+        ? shared.loadModelBytes(url, { cacheName: CLIP_CACHE_NAME })
+        : cacheClipBytes(url, { caches: G.caches || null, fetch: G.fetch ? G.fetch.bind(G) : null });
+      var p = Promise.resolve(bytesP).then(function (bytes) {
+        var src = url;
+        try {
+          if (bytes && G.Blob && G.URL && G.URL.createObjectURL) {
+            src = G.URL.createObjectURL(new G.Blob([bytes], { type: "video/mp4" }));
+          }
+        } catch (e) {}
+        return { clip: clip, src: src, cached: src !== url };
+      }, function (e) {
+        delete preloads[url];
+        throw e;
+      });
+      preloads[url] = p;
+      return p;
+    });
+  }
+
   var api = {
     load: load, attach: attach, compareHtml: compareHtml, creditsHtml: creditsHtml,
-    wirePanel: wirePanel, tryLessonBlock: tryLessonBlock,
+    wirePanel: wirePanel, tryLessonBlock: tryLessonBlock, preloadFor: preloadFor,
+    chooseClip: function (q) { return state.credits ? chooseClip(state.credits, q) : null; },
     clipsFor: function (q) { return state.credits ? clipsFor(state.credits, q) : []; },
     get credits() { return state.credits; },
     _pure: PURE

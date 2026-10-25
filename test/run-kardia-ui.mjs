@@ -597,6 +597,54 @@ try {
   await metrics(820, 1180); await theme(true); await sleep(500); await shot("kardia-echolab-820-dark");
   await metrics(390, 844); await theme(false);
 
+  /* ── 3d. Echo Lab real cine: at the A4C target the visible element
+   * is the real clip (stubbed to the local fixture, no network), off
+   * target it is the simulation, and the Simulated and Real switch
+   * works. 390 and 820, light and dark. ── */
+  console.log("\n--- Echo Lab real cine ---");
+  await ev(`window.KARDIA_CLIPS_TEST_URL = "/test/fixtures/kardia-practice/clip.mp4"; return 1;`);
+  await ev(`KARDIA._kardia.echoLab.freeze(false); KARDIA._kardia.echoLab.setMode('2d'); return 1;`);
+  const realOn = `return (function(){var v=document.getElementById('krdRealVideo'); if(!v) return false;
+    var s=getComputedStyle(v); return v.classList.contains('kel-real-on') && s.opacity==='1' && !document.getElementById('krdRealBar').hidden;})();`;
+  const realOff = `return (function(){var v=document.getElementById('krdRealVideo'); if(!v) return true;
+    return !v.classList.contains('kel-real-on') && getComputedStyle(v).opacity==='0';})();`;
+  for (const [w, hgt, dark] of [[390, 844, false], [820, 1180, true]]) {
+    await metrics(w, hgt); await theme(dark);
+    const th = dark ? "dark" : "light";
+    await ev(`KARDIA._kardia.echoLab.setView('tte_a4c'); return 1;`);
+    await sleep(400);
+    await ev(`(function(){var L=KARDIA._kardia.echoLab; L.setProbeState(L.stateForView('tte_a4c')); return 1;})()`);
+    ok(await until(realOn, 20000), `${w}px ${th}: at the A4C target the visible element is the real clip`);
+    ok((await ev(`return document.getElementById('krdRealVideo').getAttribute('src');`)) === "/test/fixtures/kardia-practice/clip.mp4",
+      `${w}px ${th}: real clip src is the local fixture (no network)`);
+    ok((await ev(`return (function(){var v=document.getElementById('krdRealVideo'); return v.muted && v.loop && v.hasAttribute('playsinline');})();`)) === true,
+      `${w}px ${th}: real clip loops muted and plays inline`);
+    ok((await ev(`return (document.getElementById('krdRealVideo').style.clipPath||'').indexOf('polygon')===0;`)) === true,
+      `${w}px ${th}: real clip is masked to the sector fan`);
+    await ev(`document.getElementById('krdRealLabel').click(); return 1;`);
+    ok(await until(`return !document.getElementById('krdRealCredit').hidden && /CC BY-SA/.test(document.getElementById('krdRealCredit').innerText);`, 8000),
+      `${w}px ${th}: tapping the Real patient label shows the attribution and licence`);
+    await shot(`kardia-echolab-realcine-${w}-${th}`);
+    qaGate(await qaRun(), `${w}px ${th}: real cine QA gates`);
+    await ev(`document.querySelector('#smdKardia [data-act=kecho-mode][data-v=cw]').click(); return 1;`);
+    ok(await until(`return /simulated image/.test(document.getElementById('krdRealNote').innerText);`, 8000),
+      `${w}px ${th}: Doppler keeps the simulation and says so in one line`);
+    ok(await until(realOff, 8000), `${w}px ${th}: Doppler shows the simulation, not the real clip`);
+    await ev(`document.querySelector('#smdKardia [data-act=kecho-mode][data-v=2d]').click(); return 1;`);
+    ok(await until(realOn, 20000), `${w}px ${th}: back in 2D at target the real clip returns`);
+    await ev(`document.getElementById('krdRealSim').click(); return 1;`);
+    ok(await until(realOff, 8000), `${w}px ${th}: the Simulated switch brings back the simulation`);
+    ok((await ev(`return document.getElementById('krdSector') && getComputedStyle(document.getElementById('krdRealVideo')).opacity==='0';`)) === true,
+      `${w}px ${th}: off the real clip the sector canvas is the visible element`);
+    await ev(`document.getElementById('krdRealReal').click(); return 1;`);
+    ok(await until(realOn, 20000), `${w}px ${th}: the Real switch restores the real clip at target`);
+    await ev(`(function(){var L=KARDIA._kardia.echoLab; var s=L.getProbeState(); s.rotationDeg+=25; L.setProbeState(s); return 1;})()`);
+    ok(await until(realOff, 10000), `${w}px ${th}: moving off target crossfades back to the simulation`);
+    await ev(`(function(){var L=KARDIA._kardia.echoLab; L.setProbeState(L.stateForView('tte_a4c')); return 1;})()`);
+    ok(await until(realOn, 20000), `${w}px ${th}: returning to target brings the real clip back`);
+  }
+  await metrics(390, 844); await theme(false);
+
   /* ── 4. Screenshots: every tab at 390 and 820, light and dark ── */
   console.log("\n--- screenshots ---");
   const tabs = [["echo", "Echo Lab"], ["learn", "Echo"], ["practice", "Question bank"], ["cases", "Whole patient"], ["kardiox", "Open KardiQ X"]];
