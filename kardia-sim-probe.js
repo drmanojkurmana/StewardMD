@@ -257,6 +257,21 @@
           planes.push(tp);
           var B = mul(norm(tp.up), -1);
           var M = norm(cross(B, norm(tp.normal)));
+          /* Display-flip invariance: the renderer (geom.viewPlane)
+           * negates the plane normal so the LV sits on screen right,
+           * which negates this view's marker M = cross(B, normal).
+           * The frame marker is the physical chest-marker direction
+           * shared by the window, not a per-view display sense, so a
+           * flipped view must not rotate the frame about the beam
+           * (it stranded subcostal short axis past the rock clamp).
+           * Align each marker to its catalogue (views.json) marker
+           * before averaging; the solved and scored target stays the
+           * renderer plane. TEE keeps the renderer markers: its frame
+           * feeds the shaft/flex basis, not a marker mean. */
+          if (!def.tee && vs[i].probe && vs[i].probe.normal) {
+            var Mcat = norm(cross(B, norm(vs[i].probe.normal)));
+            if (dot(M, Mcat) < 0) M = mul(M, -1);
+          }
           bSum = add(bSum, B); mSum = add(mSum, M); oSum = add(oSum, tp.origin);
         }
         if (len(bSum) > 1e-6) frame = frameFromBeam(bSum, len(mSum) > 1e-6 ? mSum : def.ref);
