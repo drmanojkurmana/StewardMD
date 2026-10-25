@@ -5,7 +5,7 @@
  * (if defined) wins, else localStorage, else the default.
  *
  * ADDITIVE + non-breaking: defining this namespace changes nothing on its own. Kardia is gated by
- * `smd_kardia` (DEFAULT OFF for everyone; a tester turns it on per device with ?kardia=1 or
+ * `smd_kardia` (OWNER DECISION 2026-10-26: ON for everyone; was DEFAULT OFF for everyone; a tester turns it on per device with ?kardia=1 or
  * localStorage smd_kardia = "1", the same tester mechanism the other module flags use). There is no
  * early-access tier: unlike the imaging-AI tiles, Kardia must stay off until a tester opts in.
  * Exposed as window.SMD_KARDIA_FLAGS.
@@ -16,8 +16,8 @@
   // type: bool | int | tri (true/false/null) | enum. def: default when unset. query: ?alias (or null).
   var DEFS = {
     smd_kardia: {
-      type: "bool", def: false, query: "kardia",
-      desc: "Kardia module master flag (Home tile + module). DEFAULT OFF for everyone; a tester turns it on per device with ?kardia=1 or localStorage smd_kardia = 1. No early-access tier. \"0\" or ?kardia=0 disables per device."
+      type: "bool", def: true, query: "kardia",
+      desc: "Kardia module master flag (Home tile + module). OWNER DECISION 2026-10-26: ON for everyone (def:true). Pro lock and free preview unchanged; KardiQ X AI reading stays behind its access code; all Kardia clinical content remains ai_drafted until clinical sign-off. A device turns it off with localStorage smd_kardia 0 or ?kardia=0."
     }
   };
 

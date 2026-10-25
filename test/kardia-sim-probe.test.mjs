@@ -60,6 +60,27 @@ test("every TTE target view is reachable from its window within the clamps", () 
   }
 });
 
+test("Echo Lab plane at every TTE target equals KARDIA_GEOM.viewPlane within 1 mm and 1 degree", () => {
+  const { g, p } = settled();
+  const tte = views.views.filter((v) => v.modality === "tte");
+  assert.ok(tte.length >= 20);
+  for (const v of tte) {
+    const tp = p.targetPlane(v), vp = g.viewPlane(v);
+    // The target itself is viewPlane: origin point, normal and up.
+    assert.ok(Math.hypot(...tp.origin.map((x, i) => x - vp.origin[i])) <= 1, `${v.id} target origin vs viewPlane`);
+    assert.ok(angle(tp.normal, vp.normal) <= 1, `${v.id} target normal ${angle(tp.normal, vp.normal)}`);
+    assert.ok(angle(tp.up, vp.up) <= 1, `${v.id} target up ${angle(tp.up, vp.up)}`);
+    // And the plane the probe produces at stateForView is that plane:
+    // offset from viewPlane along its normal <= 1 mm, axes <= 1 degree.
+    p.setState(p.stateForView(v));
+    const pl = p.plane();
+    const dist = Math.abs(pl.origin.reduce((s, x, i) => s + (x - vp.origin[i]) * vp.normal[i], 0));
+    assert.ok(dist <= 1, `${v.id} plane offset ${dist.toFixed(3)} mm`);
+    assert.ok(angle(pl.normal, vp.normal) <= 1, `${v.id} plane normal ${angle(pl.normal, vp.normal).toFixed(3)} deg`);
+    assert.ok(angle(pl.up, vp.up) <= 1, `${v.id} plane up ${angle(pl.up, vp.up).toFixed(3)} deg`);
+  }
+});
+
 test("TEE views are reachable with depth, omniplane 0 to 180 and flex in range", () => {
   const { p } = settled();
   const tee = views.views.filter((v) => v.modality === "tee");

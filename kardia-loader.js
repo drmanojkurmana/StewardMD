@@ -6,9 +6,11 @@
    DEFAULT OFF for everyone; there is no early-access tier. */
 (function (G) {
   "use strict";
-  var V = "krd3";
-  var CSS = ["specialty.css", "kardia.css", "kardia-cases.css", "kardia-practice.css"];
-  var JS = ["specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "specialty-learn.js", "specialty-bank.js", "kardia-flags.js", "kardia-sim-heart.js", "kardia-sim-geom.js", "kardia-sim-us.js", "kardia-sim-probe.js", "kardia.js", "clinix-audio.js", "kardiox-ecgwave.js", "kardia-cases.js", "kardia-clips.js", "kardia-practice.js"];
+  var V = "krd4";
+  var CSS = ["specialty.css", "kardia.css", "kardia-syncprobe.css", "kardia-cases.css", "kardia-practice.css", "kardia-echolab.css"];
+  var JS = ["specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "specialty-learn.js", "specialty-bank.js", "kardia-flags.js", "kardia-sim-heart.js", "kardia-sim-geom.js", "kardia-sim-us.js", "kardia-sim-probe.js", "kardia-sim-doppler.js", "kardia-sim-measure.js", "kardia-echolab.js", "kardia.js", "kardia-sync.js", "kardia-sync-ble.js", "kardia-sync-relay.js", "kardia-syncprobe.js", "clinix-audio.js", "kardiox-ecgwave.js", "kardia-cases.js", "kardia-clips.js", "kardia-practice.js"];
+  /* Transport adapters load best effort: a missing file must not stop Kardia loading. */
+  var OPTIONAL = { "kardia-sync-ble.js": 1, "kardia-sync-relay.js": 1 };
   var loading = null;
 
   function enabled() {
@@ -36,7 +38,7 @@
   function load() {
     if (loading) return loading;
     CSS.forEach(css);
-    loading = Promise.all(JS.map(js)).then(function () { return G.KARDIA; }, function (e) { loading = null; throw e; });
+    loading = Promise.all(JS.map(function (src) { return OPTIONAL[src] ? js(src).then(function () {}, function () { done[src] = 1; }) : js(src); })).then(function () { return G.KARDIA; }, function (e) { loading = null; throw e; });
     return loading;
   }
   function fail() { try { if (G.toast) G.toast("Kardia could not load. Check your connection and try again."); } catch (e) {} }

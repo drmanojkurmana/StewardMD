@@ -46,6 +46,14 @@
     <!-- Permissions -->
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Kardia SyncProbe BLE: API 31+ runtime permissions, legacy set for API 26 to 30 -->
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" android:maxSdkVersion="30" />
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="false" />
     <!-- Camera for the ICU Snapshot → AI-vision feature (optional: don't exclude camera-less devices) -->
     <uses-permission android:name="android.permission.CAMERA" />
     <!-- Microphone for MaiK Scribe voice intake. NOTE: iOS uses on-device Whisper (flag-gated); Android

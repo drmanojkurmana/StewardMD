@@ -1,14 +1,14 @@
 ---
 tags: [module, education, echo]
 status: plan plus WP0 to WP12 slices built behind the flag; Echo Lab, Practice and Cases show honest coming soon panels where the simulator screens are not yet wired; all content ai_drafted pending clinical sign-off
-flag: smd_kardia (def:false; tester switch ?kardia=1 or localStorage smd_kardia = "1"; no early access tier)
+flag: smd_kardia (def:true, ON for everyone, owner decision 2026-10-26; a device turns it off with ?kardia=0 or localStorage smd_kardia = "0")
 ---
 # Kardia
 
 Echo and ECG learning module, a StewardMD specialty host on the Specialty Engine. It holds Learn ECG and KardiQ X inside one module with a new simulated echo trainer. Owner plan: `docs/kardia/kardia-plan.md`. Real clip credits and licence checks: `docs/kardia/clips.md` and `docs/kardia/licences.md`.
 
 ## Flag and Home tile
-- **Flag:** `smd_kardia`, default OFF for everyone. A tester turns it on per device with `?kardia=1` or `localStorage smd_kardia = "1"`. There is no early access tier. Central registry: `kardia-flags.js` (`SMD_KARDIA_FLAGS`).
+- **Flag:** `smd_kardia`, ON for everyone (owner decision 2026-10-26; was default off). A device turns it off with `?kardia=0` or `localStorage smd_kardia = "0"`. Pro lock and free preview unchanged; KardiQ X AI reading stays behind its access code; content stays ai_drafted. Central registry: `kardia-flags.js` (`SMD_KARDIA_FLAGS`).
 - **Home tile swap:** when the flag is on, the Home **Kardia** tile replaces the **KardiQ X** tile. KardiQ X stays inside Kardia as a tab, still behind the existing access code gate `SMD_XACCESS.gate("kardiox")` until clinical sign-off. When the flag is off the grid is byte for byte unchanged.
 - **Pro lock (owner 2026-10-25):** Kardia is Pro. The free preview is about 5 to 10 percent: a few Echo Lab views and lessons plus the first `FREE_LESSONS` Learn ECG lessons. Everything else is Pro. Levels follow the engine pattern: MBBS free; Resident, Fellow and Sonographer are Pro.
 - **Content state:** every screen carries the "To be verified, draft" footer while content is `ai_drafted`.
