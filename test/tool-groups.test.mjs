@@ -69,7 +69,8 @@ test('starter reads the role and the specialty the app stored', () => {
   const { TG } = load({ smd_role: 'student', smd_my_specialty: 'obgyn' });
   assert.equal(TG.role(), 'student');
   const s = TG.starter();
-  assert.equal(s[0], 'tokos', 'the specialty pack comes first');
+  assert.equal(s[0], 'kardia', 'Kardia leads every starter (owner 2026-10-26)');
+  assert.equal(s[1], 'tokos', 'then the specialty pack');
   assert.ok(s.includes('clinix') && s.includes('prep'), 'then the student tools');
 });
 

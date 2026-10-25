@@ -69,14 +69,14 @@ test("build-www.sh ships the kardia data directory; root kardia files ride the r
 });
 
 /* ---------- 3. Home: flag off = unchanged; flag on = Kardia replaces the KardiQ X tile ---------- */
-test("home tile: Kardia is tester-only and replaces the KardiQ X tile only while on", () => {
+test("home tile: Kardia is on for everyone (owner 2026-10-26) and replaces the KardiQ X tile while on", () => {
   const h = readFileSync("home.js", "utf8");
   const i = h.indexOf('act: "kardia"');
   assert.ok(i > 0, "kardia tile entry exists");
   const tile = h.slice(i, i + 400);
   assert.ok(!/defOn: false/.test(tile.slice(0, tile.indexOf("eligible"))), "no defOn:false, so a tester with the flag on sees it like the KardiQ X tile");
   assert.ok(/kardiaOn\(\)/.test(tile), "eligible() reads the tester flag");
-  assert.ok(/getItem\("smd_kardia"\) === "1"/.test(h), "flag on means exactly localStorage 1");
+  assert.ok(/getItem\("smd_kardia"\) !== "0"/.test(h), "before kardia-flags.js loads, Home treats Kardia as on unless the device stored 0");
   assert.ok(!/hasEarlyAccess/.test(h.slice(h.indexOf("function kardiaOn"), h.indexOf("function kardiaOn") + 600)), "kardiaOn has no early-access tier");
   const kx = h.slice(h.indexOf('act: "kardiox"'), h.indexOf('act: "kardiox"') + 500);
   assert.ok(/&& !kardiaOn\(\)/.test(kx), "KardiQ X tile hides while Kardia is on");
