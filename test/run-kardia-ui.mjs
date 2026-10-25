@@ -395,7 +395,7 @@ try {
   /* ── 1. FLAG OFF: Home is byte-for-byte unchanged ── */
   console.log("\n--- flag OFF: Home unchanged ---");
   await load(BASE);
-  await ev(`try{localStorage.removeItem("smd_kardia");localStorage.removeItem("smd_kardia_prefs");localStorage.removeItem("smd_home_tools");localStorage.setItem("smd_role","student");localStorage.setItem("smd_kardiox","1");}catch(e){} return 1;`);
+  await ev(`try{localStorage.setItem("smd_kardia","0");localStorage.removeItem("smd_kardia_prefs");localStorage.removeItem("smd_home_tools");localStorage.setItem("smd_role","student");localStorage.setItem("smd_kardiox","1");}catch(e){} return 1;`);
   await load(BASE);
   const ENG = /\/(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?\.(js|css)|kardia\.js|kardia\.css|kardia-flags\.js|kardia\/)/;
   ok(reqs.some((u) => /kardia-loader\.js\?v=krd4/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads kardia-loader.js and no engine or Kardia file");
@@ -1080,7 +1080,7 @@ try {
   ok(sweepDashes === 0 && sweepWords.length === 0, `full fixture case text: no em/en dash or American spelling${sweepDashes ? " (" + sweepDashes + " dashes)" : ""}${sweepWords.length ? " (" + sweepWords.join(",") + ")" : ""}`);
 
   /* ── 5. Back OFF: the grid is byte-for-byte what it was ── */
-  await ev(`KARDIA.close(); try{localStorage.removeItem("smd_kardia");}catch(e){} return 1;`);
+  await ev(`KARDIA.close(); try{localStorage.setItem("smd_kardia","0");}catch(e){} return 1;`);
   await load(BASE);
   const gridBack = await ev(gridActs);
   ok(gridBack === gridOff, "flag back off: the Home grid is byte-for-byte what it was");
