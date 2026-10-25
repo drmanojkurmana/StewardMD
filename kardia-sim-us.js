@@ -74,7 +74,7 @@
   }
   /* Speckle cell size (mm): wider laterally than axially, growing with depth. */
   function speckleSizes(depthMm) {
-    return { lateral: 1.20 + depthMm * 0.018, axial: 0.70 + depthMm * 0.003 };
+    return { lateral: 0.95 + depthMm * 0.014, axial: 0.60 + depthMm * 0.003 };
   }
   /* Fully developed speckle from two independent smooth Gaussians (I/Q),
    * so the envelope is Rayleigh with mean ~1. Coordinates are beam-space
@@ -82,7 +82,11 @@
   function speckleField(lateralMm, depthMm, seed) {
     var sz = speckleSizes(depthMm), s = seed || 11;
     var x = lateralMm / sz.lateral, y = depthMm / sz.axial;
-    var I = smoothGauss2(x, y, s), Q = smoothGauss2(x, y, s + 47);
+    /* Two octaves: the fine octave breaks the coarse blobs into the
+     * fine grain of a real B-mode texture. I/Q stay Gaussian, so the
+     * envelope stays Rayleigh with mean ~1. */
+    var I = (smoothGauss2(x, y, s) * 0.85 + smoothGauss2(x * 2.3, y * 2.3, s + 91) * 0.53);
+    var Q = (smoothGauss2(x, y, s + 47) * 0.85 + smoothGauss2(x * 2.3, y * 2.3, s + 138) * 0.53);
     return Math.sqrt(I * I + Q * Q) / 1.2533;
   }
   /* Display mapping. Echogenicity in the geometry tags is already a
@@ -92,7 +96,12 @@
    * myocardium at ~0.87. */
   function toDisplay(lin) {
     if (!(lin > 0)) return 0;
-    return clamp(Math.pow(clamp(lin, 0, 4), 0.85), 0, 1);
+    var v = Math.pow(clamp(lin, 0, 4), 0.85);
+    /* Soft knee above 0.72: real scanners log-compress bright reflectors
+     * instead of clipping them to flat white, so speckle variation and
+     * thin-line texture survive at the top of the range. */
+    if (v > 0.72) v = 0.72 + 0.28 * (1 - Math.exp(-(v - 0.72) / 0.28));
+    return clamp(v, 0, 1);
   }
   /* Layout: ECG lives in its own strip; the sector is scaled to fit
    * exactly in the area above it. */
@@ -166,9 +175,9 @@
    * Shared by the CPU snapshot/render and mirrored in the GPU shader. */
   function shadowFactorAt(depthMm, blockerDepthMm) {
     if (!(blockerDepthMm > 0) || depthMm <= blockerDepthMm + 2) return 1;
-    if (depthMm <= blockerDepthMm + 35) return 0.08;
-    if (depthMm >= blockerDepthMm + 70) return 1;
-    return 0.08 + 0.92 * (depthMm - blockerDepthMm - 35) / 35;
+    if (depthMm <= blockerDepthMm + 30) return 0.035;
+    if (depthMm >= blockerDepthMm + 65) return 1;
+    return 0.035 + 0.965 * (depthMm - blockerDepthMm - 30) / 35;
   }
   /* Near-field clutter: a smooth (non-speckled) haze in the top
    * ~2 cm, strongest at the transducer face. */
@@ -186,8 +195,8 @@
     if (ac.isBlood) lin = ac.echogenicity * speck * 0.9 + (smoke || 0);
     else lin = ac.echogenicity * speck;
     if (ac.isCalcium) lin *= 1.3;
-    if (!ac.isBlood && ac.echogenicity >= 0.70) lin *= 1.45;
-    if (!ac.isBlood && ac.echogenicity >= 0.25 && ac.echogenicity <= 0.65) lin *= 1.18;
+    if (!ac.isBlood && ac.echogenicity >= 0.70) lin *= 1.65;
+    if (!ac.isBlood && ac.echogenicity >= 0.25 && ac.echogenicity <= 0.65) lin *= 1.30;
     if (extraLin) lin *= extraLin;
     if (shadowFactor != null) lin *= shadowFactor;
     lin += nearClutter(depthMm);
@@ -238,7 +247,7 @@
      * with the source to keep bright peaks while edges still
      * spread over 1..2 mm into the neighbouring cavity. */
     var out2 = new Float32Array(vals.length);
-    for (var i = 0; i < vals.length; i++) { out2[i] = blurred[i] * 0.3 + vals[i] * 0.7; if (vals[i] > 0.5) out2[i] = Math.max(out2[i], vals[i] * 0.97); }
+    for (var i = 0; i < vals.length; i++) { out2[i] = blurred[i] * 0.45 + vals[i] * 0.55; if (vals[i] > 0.65) out2[i] = Math.max(out2[i], vals[i] * 0.95); }
     return out2;
   }
   function isBlocker(ac) { return !!(ac && (ac.isCalcium || ac.isAir || ac.isBone)); }
@@ -268,6 +277,31 @@
     if (!geom || typeof geom.buffers !== "function") throw new Error("KARDIA_US: geom with buffers() required");
     var knobs = mergeKnobs({}, DEFAULT_KNOBS);
     var probe = { origin: [0, 60, 20], normal: [1, 0, 0], up: [0, 0.95, 0.31] };
+    var probeViewId = null;
+    /* TTE cardiac-window filter: only heart, great vessels near the
+     * heart, descending thoracic aorta in PLAX, pericardium, chest
+     * wall, ribs, lungs and (subcostal only) liver may be cut. All
+     * other meshes (abdominal aorta, oesophagus, kidneys, arch
+     * branches, bladder, ...) are excluded for tte_* views. */
+    var TTE_CARDIAC = { FJ2422: 1, FJ2423: 1, FJ2424: 1, FJ2425: 1, FJ2428: 1, FJ2438: 1, FJ2439: 1, FJ2420: 1, FJ2432: 1, FJ2421: 1, FJ2436: 1, FJ2433: 1, FJ2426: 1, FJ2431: 1, FJ2435: 1, FJ2417: 1, FJ2427: 1, FJ2434: 1, FJ2429: 1, FJ2418: 1, FJ2419: 1, FJ2430: 1, FJ2437: 1 };
+    var TTE_VESSEL = { FJ3413: 1, FJ3411: 1, FJ2966: 1, FJ2924: 1, FJ3019: 1, FJ3645: 1, FJ3441: 1, FJ2655: 1, FJ2925: 1 };
+    function tteAllowed(ref, kind, ac) {
+      if (!probeViewId || probeViewId.indexOf("tte_") !== 0) return true;
+      if (TTE_CARDIAC[ref] || TTE_VESSEL[ref]) return true;
+      if (ref === "pericardium" || ref === "pericardial_space" || ref === "chordae_tendineae") return true;
+      if (ref === "interventricular_septum" || ref === "ventricular_septum_mid" || ref === "atrial_septum_interatrial" || ref === "lv_apex" || ref === "lvot" || ref === "rvot" || ref === "aortic_root" || ref === "hepatic_vein") return true;
+      if (kind === "chamber" || kind === "wall" || kind === "valve" || kind === "septum" || kind === "papillary" || kind === "chordae" || kind === "outflow" || kind === "pericardium" || kind === "fluid") return true;
+      if (/^bp3d:(MV|TV|AV|PV|LV|RV|LVWALL)$/.test(kind || "")) return true;
+      if (ref === "chest_wall" || ref === "ribs") return true;
+      if (ac && (ac.isBone || ac.isAir)) return true; /* ribs, lungs */
+      if (ref === "FJ3427") return probeViewId === "tte_plax" || probeViewId.indexOf("tte_suprasternal") === 0;
+      if (ref === "FJ1932") return probeViewId === "tte_subcostal_aorta";
+      if (ref === "LIVE_liver" || ref === "liver") return probeViewId.indexOf("tte_subcostal") === 0;
+      if (ref === "FJ3131") return probeViewId.indexOf("tte_subcostal") === 0;
+      if (/^LIVE_lung/.test(ref || "") || ref === "lung_left" || ref === "lung_right") return true;
+      return false;
+    }
+    function filterPolys(polys) { return (polys || []).filter(function (p) { return tteAllowed(p.ref, p.kind, p.acoustic); }); }
     var destroyed = false, lost = false, gl = null, ctx2d = null;
     var errors = [];
     var lastMs = 0, emaMs = 0, frameCount = 0, lastT = 0;
@@ -276,6 +310,7 @@
     function setProbe(p) {
       if (!p) return api;
       if (p.viewId && typeof geom.viewPlane === "function") {
+        probeViewId = p.viewId;
         var vp = geom.viewPlane(p.viewId);
         var upv = norm(vp.up);
         var d = (p.depthMm || knobs.depth);
@@ -327,10 +362,10 @@
       "uniform float uTexel;",
       "vec2 tissueUv(vec3 w){ return vec2(dot(w - uPlaneO, uPRight), dot(w - uPlaneO, uPUp)) / vec2(uDepth * 1.7, uDepth * 1.7) + 0.5; }",
       "vec4 tissueRaw(vec3 w){ return texture2D(uTissue, tissueUv(w)); }",
-      "vec4 tissueAt(vec3 w){ vec2 uv = tissueUv(w); vec4 c = texture2D(uTissue, uv); float e = c.r * 0.76; float r = uTexel * 1.6; e += texture2D(uTissue, uv + vec2(r, 0.0)).r * 0.06; e += texture2D(uTissue, uv - vec2(r, 0.0)).r * 0.06; e += texture2D(uTissue, uv + vec2(0.0, r)).r * 0.06; e += texture2D(uTissue, uv - vec2(0.0, r)).r * 0.06; c.r = e; return c; }",
+      "vec4 tissueAt(vec3 w){ return texture2D(uTissue, tissueUv(w)); }",
       "uniform sampler2D uLine;",
       "float flagBit(float flags, float bit){ return mod(floor(flags / bit), 2.0); }",
-      "float shadowAt(float depth, float blkAt){ if (blkAt < 0.0 || depth <= blkAt + 2.0) return 1.0; if (depth <= blkAt + 35.0) return 0.08; if (depth >= blkAt + 70.0) return 1.0; return 0.08 + 0.92 * (depth - blkAt - 35.0) / 35.0; }",
+      "float shadowAt(float depth, float blkAt){ if (blkAt < 0.0 || depth <= blkAt + 2.0) return 1.0; if (depth <= blkAt + 30.0) return 0.05; if (depth >= blkAt + 65.0) return 1.0; return 0.05 + 0.95 * (depth - blkAt - 30.0) / 35.0; }",
       "float tgcAt(float d){ float t = clamp(d / uDepth, 0.0, 1.0) * 7.0; int i = int(floor(t)); float f = t - float(i); float a = 0.0; float b = 0.0;",
       " for (int k = 0; k < 8; k++){ if (k == i) a = uTgc[k]; if (k == i + 1) b = uTgc[k]; } return mix(a, b, f) + uGain; }",
       "void main(){",
@@ -349,7 +384,8 @@
       "  * reads as that line; chordae within 1.1 mm only in blood/empty */",
       " vec2 cuv = tissueUv(w); float texMm = uDepth * 1.7 * uTexel;",
       " vec4 lnT = texture2D(uLine, cuv);",
-      " float lnEcho = lnT.r > 0.12 ? clamp(lnT.r * 1.8, 0.50, 0.95) : lnT.r; bool lineHit = false;",
+      " for (int ly = -3; ly <= 3; ly++) for (int lx = -3; lx <= 3; lx++){ vec4 lt2 = texture2D(uLine, cuv + vec2(float(lx), float(ly)) * uTexel); float lf2 = floor(lt2.g * 255.0 + 0.5); bool lBlk = flagBit(lf2, 2.0) >= 1.0 || flagBit(lf2, 4.0) >= 1.0 || flagBit(lf2, 8.0) >= 1.0; if (!lBlk && lt2.b < 0.5 && lt2.r >= lnT.r) lnT = lt2; }",
+      " float lnEcho = lnT.r > 0.12 ? clamp(lnT.r * 1.3, 0.50, 0.92) : lnT.r; bool lineHit = false;",
       " bool periFill = lnT.b > 0.5; bool myoNear = false; bool periFillHit = false;",
       " if (periFill){ vec4 tn2 = texture2D(uTissue, cuv + vec2(uTexel, 0.0)); if (tn2.r >= 0.30 && tn2.r <= 0.60) myoNear = true;",
       "  tn2 = texture2D(uTissue, cuv - vec2(uTexel, 0.0)); if (tn2.r >= 0.30 && tn2.r <= 0.60) myoNear = true;",
@@ -363,38 +399,38 @@
       " if (lnT.r > 0.01 && lnTrig && (echo < lnEcho - 0.15 || isAir)){ lineHit = true; if (periFill) periFillHit = true; echo = lnEcho; flags = floor(lnT.g * 255.0 + 0.5); isBlood = false; isCalc = flagBit(flags, 2.0) >= 1.0; isAir = flagBit(flags, 4.0) >= 1.0; isBone = flagBit(flags, 8.0) >= 1.0; isPeri = flagBit(flags, 64.0) >= 1.0; }",
       " if (isBlood || echo < 0.15){ float bestD = 1e9; float bestE = -1.0; float bestF = 0.0;",
       "   for (int oy = -3; oy <= 3; oy++) for (int ox = -3; ox <= 3; ox++){ vec4 tn = texture2D(uTissue, cuv + vec2(float(ox), float(oy)) * uTexel); float fn = floor(tn.g * 255.0 + 0.5); float dd = length(vec2(float(ox), float(oy))) * texMm;",
-      "     if (flagBit(fn, 16.0) >= 1.0 && dd < 1.4 && dd < bestD){ bestD = dd; bestE = tn.r; bestF = fn; }",
-      "     else if (flagBit(fn, 32.0) >= 1.0 && dd < 1.1 && bestE < 0.0){ bestD = dd; bestE = tn.r; bestF = fn; } }",
+      "     if (flagBit(fn, 16.0) >= 1.0 && dd < 1.0 && dd < bestD){ bestD = dd; bestE = tn.r; bestF = fn; }",
+      "     else if (flagBit(fn, 32.0) >= 1.0 && dd < 0.8 && bestE < 0.0){ bestD = dd; bestE = tn.r; bestF = fn; } }",
       "   if (bestE >= 0.0){ echo = bestE; flags = bestF; isBlood = false; isCalc = flagBit(flags, 2.0) >= 1.0; isAir = flagBit(flags, 4.0) >= 1.0; isBone = flagBit(flags, 8.0) >= 1.0; isPeri = flagBit(flags, 64.0) >= 1.0; } }",
       " /* beam march: first sustained blocker (two samples 4 mm apart),",
       "  * same shadow model as CPU shadowFactorAt */",
       " float strongAt = -1.0; float strongAmp = 0.0;",
       " for (int i = 1; i <= 40; i++){ float d = float(i) * 4.0; if (d >= depth - 2.0) break; vec4 t2 = tissueRaw(uApex + dir * d); float f2 = floor(t2.g * 255.0 + 0.5); bool blk = flagBit(f2, 2.0) >= 1.0 || flagBit(f2, 8.0) >= 1.0; if (!blk) continue; vec4 t3 = tissueRaw(uApex + dir * (d + 4.0)); float f3 = floor(t3.g * 255.0 + 0.5); bool blk2 = flagBit(f3, 2.0) >= 1.0 || flagBit(f3, 8.0) >= 1.0; if (blk2){ strongAt = d; strongAmp = t2.r; break; } }",
+      " if (echo < 0.01 && lnT.r < 0.01) echo = 0.32;",
       " float shadow = shadowAt(depth, strongAt);",
-      " vec2 sc2 = vec2(latMm / (1.20 + depth * 0.018), depth / (0.70 + depth * 0.003));",
-      " float gI = sgauss(sc2, 11.0); float gQ = sgauss(sc2, 58.0);",
+      " vec2 sc2 = vec2(latMm / (0.95 + depth * 0.014), depth / (0.60 + depth * 0.003));",
+      " float gI = sgauss(sc2, 11.0) * 0.85 + sgauss(sc2 * 2.3, 102.0) * 0.53; float gQ = sgauss(sc2, 58.0) * 0.85 + sgauss(sc2 * 2.3, 149.0) * 0.53;",
       " float speck = sqrt(gI * gI + gQ * gQ) / 1.2533;",
-      " float pixU = hash21(floor(vUv * vec2(160.0, 256.0))); float pixSpeck = sqrt(-2.0 * log(1.0 - clamp(pixU, 0.0, 0.999))) / 1.2533; speck = speck * 0.75 + pixSpeck * 0.25;",
+      " float pixU = hash21(floor(vUv * vec2(160.0, 256.0))); float pixSpeck = sqrt(-2.0 * log(1.0 - clamp(pixU, 0.0, 0.999))) / 1.2533; speck = speck * 0.60 + pixSpeck * 0.40;",
       " /* grey levels: identical multipliers to CPU echoDisplay */",
       " float extra = 1.0; bool blockerInterior = false;",
       " bool isBlk = isCalc || isAir || isBone;",
       " if (isBlk){ vec4 tb = tissueRaw(w - dir * 3.0); float fb = floor(tb.g * 255.0 + 0.5); bool backBlk = flagBit(fb, 2.0) >= 1.0 || flagBit(fb, 4.0) >= 1.0 || flagBit(fb, 8.0) >= 1.0; if (backBlk){ blockerInterior = true; } else extra = 1.65; }",
-      " if (isPeri) extra *= clamp(1.25 - depth / 650.0 - abs(latMm) / 170.0, 0.5, 1.1);",
+      " if (isPeri) extra *= clamp(1.50 - depth / 500.0 - abs(latMm) / 120.0, 0.25, 1.2);",
       " float smoke = isBlood ? max(sgauss(vec2(latMm / 6.0, depth / 6.0 - uTime * 0.12), 91.0), 0.0) * 0.008 : 0.0;",
       " float lin;",
       " if (isBlood) lin = echo * speck * 0.9 + smoke; else lin = echo * speck;",
       " if (isCalc) lin *= 1.3;",
-      " if (!isBlood && echo >= 0.70) lin *= 3.00;",
-      " if (!isBlood && echo >= 0.25 && echo <= 0.65) lin *= 1.32;",
+      " if (!isBlood && echo >= 0.70) lin *= 2.35;",
+      " if (!isBlood && echo >= 0.25 && echo <= 0.65) lin *= 1.30;",
       " lin *= extra;",
-      " lin *= blockerInterior ? 0.08 : (isBlk || lineHit ? 1.0 : shadow);",
+      " lin *= blockerInterior ? 0.15 : (isBlk || lineHit ? 1.0 : shadow);",
       " float clutter = depth < 22.0 ? pow(1.0 - depth / 22.0, 2.0) * 0.035 : 0.0; lin += clutter;",
       " if (strongAt > 0.0 && depth > strongAt * 1.9 && depth < strongAt * 2.15) lin += strongAmp * 0.20 * shadow;",
       " if (strongAt > 0.0 && depth > strongAt * 2.9 && depth < strongAt * 3.15) lin += strongAmp * 0.09 * shadow;",
       " float lossDb = 0.8 * uFreq * 2.0 * (depth / 10.0) * (0.07 + clamp((depth - 100.0) / 50.0, 0.0, 1.0) * 0.025);",
       " lin *= pow(10.0, (tgcAt(depth) - lossDb) / 20.0);",
-      " if (periFillHit) lin = min(lin, 0.62);",
-      " float disp = clamp(pow(clamp(lin, 0.0, 4.0), 0.85), 0.0, 1.0);",
+      " float disp = pow(clamp(lin, 0.0, 4.0), 0.85); if (disp > 0.72) disp = 0.72 + 0.28 * (1.0 - exp(-(disp - 0.72) / 0.28)); disp = clamp(disp, 0.0, 1.0);",
       " disp *= clamp(depth / 6.0, 0.0, 1.0);",
       " gl_FragColor = vec4(vec3(disp), 1.0);",
       "}"
@@ -424,7 +460,7 @@
       "   float du = sigLatMm / max(depth, 8.0) / uSector; float dv = sigAxMm / uDepth;",
       "   float v = 0.0; float wsum = 0.0;",
       "   for (int i = -2; i <= 2; i++) for (int j = -2; j <= 2; j++){ float wgt = exp(-float(i * i + j * j) * 0.5); v += texture2D(uPolar, vec2(bx + float(i) * du, by + float(j) * dv)).r * wgt; wsum += wgt; }",
-      "   v /= wsum; float centre = texture2D(uPolar, vec2(bx, by)).r; v = v * 0.3 + centre * 0.7; if (centre > 0.5) v = max(v, centre * 0.97);",
+      "   v /= wsum; float centre = texture2D(uPolar, vec2(bx, by)).r; v = v * 0.45 + centre * 0.55; if (centre > 0.65) v = max(v, centre * 0.95);",
       "   /* edge falloff at sector boundary */",
       "   v *= 0.85 + 0.15 * smoothstep(halfA, halfA - 0.03, abs(ang));",
       "   col = vec3(v);",
@@ -569,6 +605,10 @@
       for (var oi = 0; oi < order.length; oi++) {
         var gi = order[oi];
         var g = b.groups[gi], ac = g.acoustic || { echogenicity: 0.4, attenuation: 0.9 };
+        if (!tteAllowed(g.ref, g.kind, ac)) continue;
+        /* Valve leaflets and pericardium are thin lines (line texture
+         * below), not filled caps — matching CPU classify. */
+        if ((g.kind === "valve" || /^bp3d:(MV|TV|AV|PV)/.test(g.kind || "")) || g.ref === "pericardium" || g.ref === "pericardial_space") continue;
         gl.clear(gl.STENCIL_BUFFER_BIT);
         gl.colorMask(false, false, false, false);
         gl.stencilMask(0xff); gl.stencilFunc(gl.ALWAYS, 0, 0xff);
@@ -608,7 +648,7 @@
           var extent = knobs.depth * 1.7;
           lineCtx.clearRect(0, 0, TW, TW);
           lineCtx.lineCap = "round";
-          var lpolys = geom.cut(f.planeOrigin, f.n, f.up, extent, extent) || [];
+          var lpolys = filterPolys(geom.cut(f.planeOrigin, f.n, f.up, extent, extent) || []);
           for (var lpi = 0; lpi < lpolys.length; lpi++) {
             var lp2 = lpolys[lpi], lac = lp2.acoustic, isCh = lp2.kind === "chordae";
             if (!isCh && !(lac.echogenicity >= 0.75 && !lac.isAir)) continue;
@@ -630,13 +670,28 @@
             }
             lineCtx.strokeStyle = "rgb(" + Math.round(clamp(lac.echogenicity, 0, 1) * 255) + "," + lflags + ",0)";
             lineCtx.fillStyle = lineCtx.strokeStyle;
-            lineCtx.lineWidth = lp2.ref === "pericardium" ? 7 : isCh ? 2 : 3.5;
-            if (lac.isBone || lac.isCalcium || lp2.kind === "valve" || /^bp3d:(MV|TV|AV|PV)/.test(lp2.kind || "")) {
-              /* closed bone/calcium and valve loops: fill the
-               * cross-section (CPU pointInPoly fills it; a stroke
-               * alone leaves the interior dark on the GPU).
-               * Pericardium is excluded: its loop encloses the
-               * whole heart, where inner structures must win. */
+            var isValveL = lp2.kind === "valve" || /^bp3d:(MV|TV|AV|PV)/.test(lp2.kind || "");
+            lineCtx.lineWidth = lp2.ref === "pericardium" ? 3 : isCh ? 1.5 : isValveL ? 3 : 3.5;
+            if (isValveL && !lac.isBone && !lac.isCalcium) {
+              /* thin medial line, matching CPU thinAxis (1-2 mm) */
+              var tcx = lp2.centroid[0], tcy = lp2.centroid[1], tsxx = 0, tsxy = 0, tsyy = 0;
+              lp2.points.forEach(function (p) { var dx = p[0] - tcx, dy = p[1] - tcy; tsxx += dx * dx; tsxy += dx * dy; tsyy += dy * dy; });
+              var tth = 0.5 * Math.atan2(2 * tsxy, tsxx - tsyy), tax = Math.cos(tth), tay = Math.sin(tth), thalf = 0;
+              lp2.points.forEach(function (p) { var pr = Math.abs((p[0] - tcx) * tax + (p[1] - tcy) * tay); if (pr > thalf) thalf = pr; });
+              var med = [];
+              for (var mb = 0; mb < 5; mb++) { var mlo = -thalf + 2 * thalf * (mb + 0.08) / 5, mhi = -thalf + 2 * thalf * (mb + 0.92) / 5, msp = 0, mn = 0, mpmn = 1e9, mpmx = -1e9;
+                lp2.points.forEach(function (p) { var pr = (p[0] - tcx) * tax + (p[1] - tcy) * tay; if (pr >= mlo && pr < mhi) { var pe = (p[0] - tcx) * -tay + (p[1] - tcy) * tax; if (pe < mpmn) mpmn = pe; if (pe > mpmx) mpmx = pe; msp += pr; mn++; } });
+                if (mn) { var mpa = msp / mn, mpm = (mpmn + mpmx) / 2; med.push([tcx + tax * mpa - tay * mpm, tcy + tay * mpa + tax * mpm]); } }
+              if (med.length < 2) med = [[tcx - tax * thalf * 0.8, tcy - tay * thalf * 0.8], [tcx + tax * thalf * 0.8, tcy + tay * thalf * 0.8]];
+              if (med.length >= 3) med[Math.floor(med.length / 2)] = [tcx, tcy];
+              med = smoothLinePts(med);
+              if (med.length >= 3) med[Math.floor(med.length / 2)] = [tcx, tcy];
+              lineCtx.beginPath();
+              med.forEach(function (p, mi) { var X = (p[0] / extent + 0.5) * TW, Y = (1 - (p[1] / extent + 0.5)) * TW; if (mi === 0) lineCtx.moveTo(X, Y); else lineCtx.lineTo(X, Y); });
+              lineCtx.stroke();
+              continue;
+            }
+            if (lac.isBone || lac.isCalcium) {
               lineCtx.beginPath();
               lp2.points.forEach(function (p, pi2) { var X = (p[0] / extent + 0.5) * TW, Y = (1 - (p[1] / extent + 0.5)) * TW; if (pi2 === 0) lineCtx.moveTo(X, Y); else lineCtx.lineTo(X, Y); });
               lineCtx.closePath(); lineCtx.fill("evenodd");
@@ -723,9 +778,61 @@
       var dx = cx - (a[0] + vx * t), dy = cy - (a[1] + vy * t);
       return Math.sqrt(dx * dx + dy * dy);
     }
+    function isValveLine(p) {
+      return !!p && p.acoustic.echogenicity >= 0.75 && !p.acoustic.isAir && !p.acoustic.isBone && !p.acoustic.isCalcium &&
+        (p.kind === "valve" || /^bp3d:(MV|TV|AV|PV)/.test(p.kind || ""));
+    }
+    function isLineOnly(p) { return isValveLine(p) || (p && p.ref === "pericardium"); }
+    /* Medial axis of a leaflet cut polygon: centroid + principal axis.
+     * A leaflet is a thin surface, so its cut is a line, not the filled
+     * (often oblique, several-mm thick) polygon the mesh cut returns. */
+    /* Resample smoothing for leaflet medial polylines: two
+     * [1,2,1]/4 passes remove the binning zigzag (endpoints kept). */
+    function smoothLinePts(pts) {
+      var out = pts, pass, i;
+      for (pass = 0; pass < 2; pass++) {
+        var nxt = [];
+        for (i = 0; i < out.length; i++) {
+          if (i === 0 || i === out.length - 1 || out.length < 3) nxt.push(out[i]);
+          else nxt.push([(out[i - 1][0] + 2 * out[i][0] + out[i + 1][0]) / 4, (out[i - 1][1] + 2 * out[i][1] + out[i + 1][1]) / 4]);
+        }
+        out = nxt;
+      }
+      return out;
+    }
+    function thinAxis(p) {
+      if (p._thin) return p._thin;
+      var cx = p.centroid[0], cy = p.centroid[1], sxx = 0, sxy = 0, syy = 0, i, dx, dy;
+      for (i = 0; i < p.points.length; i++) { dx = p.points[i][0] - cx; dy = p.points[i][1] - cy; sxx += dx * dx; sxy += dx * dy; syy += dy * dy; }
+      var th = 0.5 * Math.atan2(2 * sxy, sxx - syy), ax = Math.cos(th), ay = Math.sin(th);
+      var half = 0;
+      for (i = 0; i < p.points.length; i++) { var pr = Math.abs((p.points[i][0] - cx) * ax + (p.points[i][1] - cy) * ay); if (pr > half) half = pr; }
+      /* Curved medial polyline: average the boundary vertices in five
+       * bins along the principal axis (opposite sides average to the
+       * middle), trimmed 12% at each end where hinge/tip fade. */
+      var pts = [], nb = 5, b;
+      for (b = 0; b < nb; b++) {
+        var lo = -half + (2 * half) * (b + 0.08) / nb, hi = -half + (2 * half) * (b + 0.92) / nb, sp = 0, n = 0, pmn = 1e9, pmx = -1e9;
+        for (i = 0; i < p.points.length; i++) { var pr2 = (p.points[i][0] - cx) * ax + (p.points[i][1] - cy) * ay; if (pr2 >= lo && pr2 < hi) { var pe = (p.points[i][0] - cx) * -ay + (p.points[i][1] - cy) * ax; if (pe < pmn) pmn = pe; if (pe > pmx) pmx = pe; sp += pr2; n++; } }
+        if (n) { var pa = sp / n, pm = (pmn + pmx) / 2; pts.push([cx + ax * pa - ay * pm, cy + ay * pa + ax * pm]); }
+      }
+      if (pts.length < 2) pts = [[cx - ax * half * 0.8, cy - ay * half * 0.8], [cx + ax * half * 0.8, cy + ay * half * 0.8]];
+      /* Anchor the middle of the line at the cut centroid: vertex
+       * density biases the midrange estimate off the leaflet body. */
+      if (pts.length >= 3) { var mi = Math.floor(pts.length / 2); pts[mi] = [cx, cy]; }
+      pts = smoothLinePts(pts);
+      if (pts.length >= 3) pts[Math.floor(pts.length / 2)] = [cx, cy];
+      p._thin = { cx: cx, cy: cy, ax: ax, ay: ay, half: half, pts: pts };
+      return p._thin;
+    }
     function classify(cx, cy, polys) {
       var best = null, bestArea = 1e18;
       for (var i = 0; i < polys.length; i++) {
+        if (isLineOnly(polys[i])) continue;
+        /* A collapsed pericardial space (no effusion) is not a black
+         * fluid gap: the pericardium hugs the epicardium. With a real
+         * effusion the fluid polygon renders anechoic as before. */
+        if (polys[i].ref === "pericardial_space" && !(geom && typeof geom.getPathology === "function" && (geom.getPathology().effusionMm || 0) > 2)) continue;
         if (!pointInPoly(cx, cy, polys[i].points)) continue;
         var mnx = 1e9, mxx = -1e9, mny = 1e9, mxy = -1e9;
         polys[i].points.forEach(function (p) { if (p[0] < mnx) mnx = p[0]; if (p[0] > mxx) mxx = p[0]; if (p[1] < mny) mny = p[1]; if (p[1] > mxy) mxy = p[1]; });
@@ -741,7 +848,7 @@
        * segments reads as that line even when the containing polygon
        * is the blood pool behind it. Without this they render as
        * beaded dots wherever the grid steps over the thin polygon. */
-      var lineBest = null, lineD = 1.4, chordBest = null, chordD = 1.1;
+      var lineBest = null, lineD = 1e9, chordBest = null, chordD = 0.8;
       for (var j = 0; j < polys.length; j++) {
         var pj = polys[j], isChord = pj.kind === "chordae";
         if (!isChord && !(pj.acoustic.echogenicity >= 0.75 && !pj.acoustic.isAir)) continue;
@@ -753,28 +860,41 @@
           pj.points.forEach(function (p) { if (p[0] < pmnx) pmnx = p[0]; if (p[0] > pmxx) pmxx = p[0]; if (p[1] < pmny) pmny = p[1]; if (p[1] > pmxy) pmxy = p[1]; });
           if (Math.max(pmxx - pmnx, pmxy - pmny) < 4) continue;
         }
+        if (isValveLine(pj)) {
+          /* thin medial line (1-2 mm leaflet), not the filled cut */
+          var ta = thinAxis(pj), dd2 = 1e9;
+          for (var ti = 0; ti + 1 < ta.pts.length; ti++) { var sd = segDist(cx, cy, ta.pts[ti], ta.pts[ti + 1]); if (sd < dd2) dd2 = sd; }
+          if (dd2 < 1.0 && dd2 < lineD) { lineD = dd2; lineBest = pj; }
+          continue;
+        }
         var pts = pj.points;
         for (var k = 0; k + 1 < pts.length; k++) {
           /* only real cut edges: open-surface fallback loops join
            * segment endpoints with long spurious chords, which must
            * never paint a line across a cavity */
           var ex = pts[k + 1][0] - pts[k][0], ey = pts[k + 1][1] - pts[k][1];
-          if (ex * ex + ey * ey > 64) continue;
+          if (ex * ex + ey * ey > 64 && pj.ref !== "pericardium" && !pj.acoustic.isBone && !pj.acoustic.isCalcium) continue;
           var dd = segDist(cx, cy, pts[k], pts[k + 1]);
           if (isChord) { if (dd < chordD) { chordD = dd; chordBest = pj; } }
-          else if (dd < lineD) { lineD = dd; lineBest = pj; }
+          else if (dd < (pj.ref === "pericardium" ? 1.35 : 1.0) && dd < lineD) { lineD = dd; lineBest = pj; }
         }
       }
-      if (lineBest && (!best || best.acoustic.isBlood || best.acoustic.echogenicity < 0.15)) return lineBest;
+      if (lineBest && !(lineBest.ref === "pericardium" && best && best.acoustic.isBlood) && (!best || best.acoustic.echogenicity < 0.70 || best.acoustic.isAir)) return lineBest;
       if (!best && chordBest) return chordBest;
       if (best && best.acoustic.isBlood && chordBest && chordD < 0.6) return chordBest;
-      return best;
+      if (best) return best;
+      /* No sampled structure: the sector is still tissue (chest wall,
+       * lung base, liver) in a real scan, never a flat black void.
+       * Speckled soft tissue fills gaps between sampled meshes. */
+      return { ref: "__tissue", kind: "context", acoustic: { echogenicity: 0.34, attenuation: 0.9, isBlood: false, isCalcium: false, isAir: false, isBone: false } };
     }
     /* Pericardium: bright posteriorly (centre beam, deep), dimmer
      * laterally and with depth falloff, never a uniform ring. */
     function pericardiumFactor(hit, latMm, depthMm) {
       if (!hit || hit.ref !== "pericardium") return 1;
-      return clamp(1.25 - depthMm / 650 - Math.abs(latMm) / 170, 0.5, 1.1);
+      /* Bright where the beam meets it near-perpendicular (posterior,
+       * central), fading laterally so it is not a uniform white ring. */
+      return clamp(1.50 - depthMm / 500 - Math.abs(latMm) / 120, 0.25, 1.2);
     }
     function pointInPoly(x, y, pts) {
       var inside = false;
@@ -789,7 +909,7 @@
       if (!ctx2d) return false;
       var f = probeFrame();
       var polys = [];
-      try { polys = geom.cut(f.planeOrigin, f.n, f.up, knobs.depth * 1.7, knobs.depth * 1.7) || []; } catch (e) { errors.push(String(e && e.message || e)); }
+      try { polys = filterPolys(geom.cut(f.planeOrigin, f.n, f.up, knobs.depth * 1.7, knobs.depth * 1.7) || []); } catch (e) { errors.push(String(e && e.message || e)); }
       var W = canvas.width, H = canvas.height;
       var img = ctx2d.createImageData(W, H);
       var data = img.data;
@@ -839,12 +959,13 @@
             var hit = classify(cx, cy, polys);
             if (!hit) continue;
             var ac = hit.acoustic;
-            var speck = speckleField(Math.sin(sc.angle) * sc.depth, sc.depth, 11) * 0.75 + speckleAmp(hash3(px * 2 + ssx, py * 2 + ssy, 77)) * 0.25;
+            var speck = speckleField(Math.sin(sc.angle) * sc.depth, sc.depth, 11) * 0.60 + speckleAmp(hash3(px * 2 + ssx, py * 2 + ssy, 77)) * 0.40;
             var smoke = ac.isBlood ? Math.max(0, smoothGauss2(Math.sin(sc.angle) * sc.depth / 6, sc.depth / 6 - tMs / 8000, 91)) * 0.008 : 0;
             var shF = shadowForCPU(sc.angle, sc.depth, ac), exF = 1;
+            if (isLineOnly(hit)) shF = 1;
             if (isBlocker(ac)) {
               var bk = sc.depth > 4 ? classify(dot(sub(add(f.apex, mul(dirv, sc.depth - 3)), f.planeOrigin), f.right), dot(sub(add(f.apex, mul(dirv, sc.depth - 3)), f.planeOrigin), f.up), polys) : null;
-              if (bk && isBlocker(bk.acoustic)) shF = 0.08; else exF = 1.65;
+              if (bk && isBlocker(bk.acoustic)) shF = 0.04; else exF = 1.65;
             }
             disp += echoDisplay(ac, sc.depth, speck, knobs, shF, smoke, exF * pericardiumFactor(hit, Math.sin(sc.angle) * sc.depth, sc.depth));
           }
@@ -886,7 +1007,7 @@
       stats.ecgSectorOverlapPx = lay.ecg ? Math.max(0, lay.sector.bottom - lay.ecg.y0) : 0;
       try {
         var f = probeFrame();
-        var polys = geom.cut(f.planeOrigin, f.n, f.up, knobs.depth * 1.7, knobs.depth * 1.7) || [];
+        var polys = filterPolys(geom.cut(f.planeOrigin, f.n, f.up, knobs.depth * 1.7, knobs.depth * 1.7) || []);
         /* display-space grid; masks come from the geometry acoustic tags */
         var GW = opts.gridW || 176, GH = opts.gridH || 132;
         var glay = layoutFor(GW, GH, knobs);
@@ -906,8 +1027,12 @@
             for (var d = 5; d < knobs.depth - 6; d += 4) { var hh = classifyAt(angle, d, f, polys); if (hh && isBlocker(hh.acoustic)) { var hh2 = classifyAt(angle, d + 4, f, polys); if (hh2 && isBlocker(hh2.acoustic)) { bd = d; break; } } }
             shadowCache[key] = bd;
           }
-          /* Shared shadow model: full shadow for 35 mm behind a
-           * sustained blocker, soft recovery to 1 by 70 mm. */
+          /* Shared shadow model (shadowFactorAt), laterally softened:
+           * average the neighbouring beams so a rib shadow edge is a
+           * gradient over a few millimetres, not a hard straight cut. */
+          function bdAt(a) { var k2 = Math.round(a * 400), v = shadowCache[k2];
+            if (v === undefined) { v = -1; for (var d = 5; d < knobs.depth - 6; d += 4) { var hh = classifyAt(a, d, f, polys); if (hh && isBlocker(hh.acoustic)) { var hh2 = classifyAt(a, d + 4, f, polys); if (hh2 && isBlocker(hh2.acoustic)) { v = d; break; } } } shadowCache[k2] = v; }
+            return v; }
           return shadowFactorAt(depth, bd);
         }
         for (var py = 0; py < GH; py++) for (var gx = 0; gx < GW; gx++) {
@@ -919,12 +1044,13 @@
           var hit = classifyAt(sc.angle, sc.depth, f, polys);
           if (!hit) continue;
           var ac = hit.acoustic, sh = shadowFor(sc.angle, sc.depth, ac);
+          if (isLineOnly(hit)) sh = 1; /* the line is the reflector itself (GPU lineHit parity) */
           var extra = 1, blockerInterior = false;
           if (isBlocker(ac)) {
             var back = sc.depth > 4 ? classifyAt(sc.angle, sc.depth - 3, f, polys) : null;
-            if (back && isBlocker(back.acoustic)) { blockerInterior = true; sh = 0.08; } else extra = 1.65;
+            if (back && isBlocker(back.acoustic)) { blockerInterior = true; sh = 0.04; } else extra = 1.65;
           }
-          var speck = speckleField(Math.sin(sc.angle) * sc.depth, sc.depth, 11) * 0.75 + speckleAmp(hash3(gx, py, 77)) * 0.25;
+          var speck = speckleField(Math.sin(sc.angle) * sc.depth, sc.depth, 11) * 0.60 + speckleAmp(hash3(gx, py, 77)) * 0.40;
           var disp = echoDisplay(ac, sc.depth, speck, knobs, sh, 0, extra * pericardiumFactor(hit, Math.sin(sc.angle) * sc.depth, sc.depth));
           vals[idx] = disp; byts[idx] = clamp(Math.round(clamp(disp, 0, 1) * 255 + bayerDither(gx, py)), 0, 255); tiss[idx] = 1; angs[idx] = sc.angle;
           var region = (sh < 0.5 || blockerInterior) ? "shadow" : ac.isBlood ? "blood" : (ac.echogenicity >= 0.70 || ac.isCalcium || ac.isBone || ac.isAir) ? "bright" : (ac.echogenicity >= 0.25 && ac.echogenicity <= 0.65) ? "myocardium" : "other";

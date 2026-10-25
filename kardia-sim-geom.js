@@ -135,6 +135,28 @@
     }
     return this;
   };
+  /* Envelope shell from surface points: radius in each direction
+   * is the largest support of the points plus offsetMm, so the sac
+   * is the convex envelope of the real epicardial surface, offset
+   * 1-2 mm from it, never a sphere and never crossing a cavity. */
+  Builder.prototype.shellFromPoints = function (centre, points, offsetMm, nU, nV) {
+    var i, j, start = this.pos.length / 3;
+    for (j = 0; j <= nV; j++) {
+      var phi = -Math.PI / 2 + Math.PI * j / nV;
+      for (i = 0; i <= nU; i++) {
+        var th = 2 * Math.PI * i / nU;
+        var d = [Math.sin(phi), Math.cos(phi) * Math.cos(th), Math.cos(phi) * Math.sin(th)];
+        var r = -1e18;
+        for (var pi = 0; pi < points.length; pi++) { var s = (points[pi][0] - centre[0]) * d[0] + (points[pi][1] - centre[1]) * d[1] + (points[pi][2] - centre[2]) * d[2]; if (s > r) r = s; }
+        this.v(add(centre, mul(d, r + offsetMm)));
+      }
+    }
+    for (j = 0; j < nV; j++) for (i = 0; i < nU; i++) {
+      var a = start + j * (nU + 1) + i, b = a + 1, c = a + nU + 1, dd2 = c + 1;
+      this.quad(a, c, dd2, b);
+    }
+    return this;
+  };
   /* Tube along a polyline path. */
   Builder.prototype.tube = function (path, radius, nR) {
     var i, j, rings = [];
@@ -481,8 +503,50 @@
         ];
         periCentre = [-6, 0, 8];
       }
-      addStruct("pericardium", "pericardium", "Pericardium", "pericardium", "pericardium", function (b) { b.shell(periCentre, periComps, 3 + eff, 28, 20); });
-      addStruct("pericardial_space", "pericardial_space", "Pericardial space", "fluid", "fluid", function (b) { b.shell(periCentre, periComps, eff > 0 ? 1.5 + eff * 0.5 : 1.5, 24, 16); });
+      /* Pericardium as a thin shell 1-2 mm off the real epicardial
+       * surface: offset copies of the deformed wall/cavity meshes
+       * (wall meshes +1.5 mm, cavity meshes +wall +1.5 mm), merged
+       * into one structure. The old support-function hull of the
+       * bounding boxes was a near-spherical sac. Fallback: one
+       * expanded ellipsoid per chamber, also merged. */
+      function periBuilder(offMm) {
+        return function (b) {
+          var patch = [["FJ2428", 0], ["FJ2423", 5], ["FJ2438", 0], ["FJ2425", 3], ["FJ2439", 0], ["FJ2424", 3]];
+          var pts = [], cen = [0, 0, 0];
+          patch.forEach(function (pr) {
+            var part = partByRef(pr[0]); if (!part) return;
+            var pos = deformLoaded(part, state);
+            var nrm = computeNormals(pos, part.idx);
+            var pc = [0, 0, 0], vi;
+            for (vi = 0; vi + 2 < pos.length; vi += 3) { pc[0] += pos[vi]; pc[1] += pos[vi + 1]; pc[2] += pos[vi + 2]; }
+            var nv = Math.max(1, pos.length / 3); pc = [pc[0] / nv, pc[1] / nv, pc[2] / nv];
+            for (vi = 0; vi + 2 < pos.length; vi += 3) {
+              var nx = nrm[vi], ny = nrm[vi + 1], nz = nrm[vi + 2];
+              if (nx * (pos[vi] - pc[0]) + ny * (pos[vi + 1] - pc[1]) + nz * (pos[vi + 2] - pc[2]) < 0) { nx = -nx; ny = -ny; nz = -nz; }
+              var off = pr[1];
+              pts.push([pos[vi] + nx * off, pos[vi + 1] + ny * off, pos[vi + 2] + nz * off]);
+            }
+          });
+          if (!pts.length) {
+            var ells = [
+              [lvCentre, [APEX_DIR, LV_E2, LV_E3], lvWallAxes], [rvCentre, [rvDir, rvE2, rvE3], [rvAxes[0] + 2, rvAxes[1] + 5 * pathology.wallThicknessScale, rvAxes[2] + 5 * pathology.wallThicknessScale]],
+              [laCentre, IDENTITY, [laAxes[0] + 3, laAxes[1] + 3, laAxes[2] + 3]], [raCentre, IDENTITY, [raAxes[0] + 3, raAxes[1] + 3, raAxes[2] + 3]]
+            ];
+            ells.forEach(function (el) {
+              for (var j = 0; j <= 10; j++) for (var i = 0; i <= 14; i++) {
+                var phi = -Math.PI / 2 + Math.PI * j / 10, th = 2 * Math.PI * i / 14;
+                var lp = [Math.sin(phi) * el[2][0], Math.cos(phi) * Math.cos(th) * el[2][1], Math.cos(phi) * Math.sin(th) * el[2][2]];
+                pts.push(add(el[0], add(add(mul(el[1][0], lp[0]), mul(el[1][1], lp[1])), mul(el[1][2], lp[2]))));
+              }
+            });
+          }
+          pts.forEach(function (p) { cen[0] += p[0]; cen[1] += p[1]; cen[2] += p[2]; });
+          cen = [cen[0] / pts.length, cen[1] / pts.length, cen[2] / pts.length];
+          b.shellFromPoints(cen, pts, offMm + eff, 32, 22);
+        };
+      }
+      addStruct("pericardium", "pericardium", "Pericardium", "pericardium", "pericardium", periBuilder(1.5));
+      addStruct("pericardial_space", "pericardial_space", "Pericardial space", "fluid", "fluid", periBuilder(eff > 0 ? 0.8 + eff * 0.5 : 0.8));
       /* --- Pathology blobs --- */
       if (pathology.vegetation) {
         var vg = pathology.vegetation, vpos = vg.valve === "mitral" ? annulus : (vg.valve === "tricuspid" ? tvCentre : avCentre), vs = vg.sizeMm || 8;
