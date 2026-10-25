@@ -398,7 +398,7 @@ try {
   await ev(`try{localStorage.setItem("smd_kardia","0");localStorage.removeItem("smd_kardia_prefs");localStorage.removeItem("smd_home_tools");localStorage.setItem("smd_role","student");localStorage.setItem("smd_kardiox","1");}catch(e){} return 1;`);
   await load(BASE);
   const ENG = /\/(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?\.(js|css)|kardia\.js|kardia\.css|kardia-flags\.js|kardia\/)/;
-  ok(reqs.some((u) => /kardia-loader\.js\?v=krd4/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads kardia-loader.js and no engine or Kardia file");
+  ok(reqs.some((u) => /kardia-loader\.js\?v=krd5/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads kardia-loader.js and no engine or Kardia file");
   const gridOff = await ev(gridActs);
   const eligOff = await ev(eligibleActs);
   ok(!/,kardia,/.test("," + eligOff + ","), "Kardia is ineligible with the flag off");
@@ -416,7 +416,7 @@ try {
   const eligOn = await ev(eligibleActs);
   ok(/,kardia,/.test("," + eligOn + ","), "Kardia is eligible with the flag on");
   ok(!/,kardiox,/.test("," + eligOn + ","), "the KardiQ X tile is replaced while Kardia is on");
-  ok(reqs.some((u) => /specialty-shell\.js\?v=krd4/.test(u)) === false, "the engine still lazy-loads: nothing fetched until the tile opens");
+  ok(reqs.some((u) => /specialty-shell\.js\?v=krd5/.test(u)) === false, "the engine still lazy-loads: nothing fetched until the tile opens");
   // Open from All tools and pin it: the real Home tile UI, like a tester would.
   await ev(`document.querySelector('.rnav-tile[data-act=alltools]').click(); return 1;`);
   ok(await until(`return !!document.querySelector('[data-at-open="kardia"]');`, 10000), "All tools lists Kardia (and no KardiQ X row: " + await until(`return !document.querySelector('[data-at-open="kardiox"]');`, 5000) + ")");
@@ -427,7 +427,7 @@ try {
   await ev(`var t=document.querySelector('.rnav-tile[data-act=kardia]'); t.focus(); t.click(); return 1;`);
   ok(await until(`return KARDIA.isOpen() && !!document.getElementById("smdKardia");`, 10000), "tile opens the Kardia overlay");
   ok(await until(`return !!document.querySelector('#smdKardia [data-act=ktab][data-t=kardiox]');`, 20000), "first open loads the engine + Kardia and shows the five tabs");
-  ok(reqs.some((u) => /specialty-shell\.js\?v=krd4/.test(u)) && reqs.some((u) => /kardia\.js\?v=krd4/.test(u)), "engine + Kardia loaded on open, at the loader token");
+  ok(reqs.some((u) => /specialty-shell\.js\?v=krd5/.test(u)) && reqs.some((u) => /kardia\.js\?v=krd5/.test(u)), "engine + Kardia loaded on open, at the loader token");
   ok((await ev(`return KARDIA._kardia.tabs.join(",");`)) === "echo,learn,practice,cases,kardiox", "tabs: Echo Lab, Learn, Practice, Cases, KardiQ X");
   ok((await ev(`return KARDIA._kardia.levels.join(",");`)) === "mbbs,resident,fellow,sonographer", "levels: MBBS, Resident, Fellow, Sonographer");
   ok((await ev(`return KARDIA._kardia.freeLessons;`)) === 5, "free preview is a constant (5 lessons)");
@@ -743,22 +743,15 @@ try {
   ok((await spTxtS(sessionId)).indexOf("or type this code") >= 0, "the code sits below as the typed backup");
   ok(spQr >= 200, `QR draws large enough to scan from across a table (${spQr}px wide)`);
   ok(!/[–—]/.test(await spTxtS(sessionId)), "no em or en dash in the pair sheet");
-  // Probe role on page B: intro, denied motion, touch fallback, then join.
+  // Probe role on page B: nearby first, scan second, typing third. Motion
+  // is only asked after pairing, so no motion buttons appear here.
   await evS(sidB, `[...document.querySelectorAll('#smdKardia [data-act]')].find(b=>b.getAttribute('data-act')==='kecho-syncprobe').click(); return 1;`);
   await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-probe')`);
-  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Use this phone as a probe')>=0;`, 8000), "probe intro explains motion first");
-  await evS(sidB, `window.__krdSpMotionForced = 'denied'; return 1;`);
-  await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-motion')`);
-  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Motion is off')>=0;`, 8000), "denied motion explains and offers touch controls");
-  await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-touch')`);
-  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Touch controls')>=0;`, 8000), "touch fallback opens");
-  await evS(sidB, `window.KARDIA_SYNCPROBE.openProbe(); window.__krdSpMotionForced = 'granted'; return 1;`);
-  await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-motion')`);
-  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Calibrate')>=0;`, 8000), "granted motion reaches calibration");
-  await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-calibrate')`);
-  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Join the display')>=0;`, 8000), "session screen still offers joining before the link exists");
-  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Scan the QR code')>=0;`, 8000), "scan is the primary join action");
+  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Use this phone as a probe')>=0;`, 8000), "probe intro opens on nearby displays");
+  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Nearby displays')>=0;`, 8000), "nearby displays are the first join path");
+  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Scan the QR code')>=0;`, 8000), "scan is the second join path");
   ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('or type the 6 character code')>=0;`, 8000), "typing stays as the quiet backup");
+  ok((await spTxtS(sidB)).indexOf('Allow motion') < 0, "motion is not asked before pairing");
   // Page B joins with the full pairing payload from page A, over the loopback.
   await evS(sidB, `(function(){var i=document.getElementById('krdSpCode'); i.removeAttribute('maxlength'); i.value = ${JSON.stringify(spPayload)}; return 1;})()`);
   await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-join-code')`);
@@ -790,6 +783,14 @@ try {
   ok(pillH >= 44, `pill is a 44px target (${pillH}px CSS)`);
   ok(await until(`return !!document.getElementById('krdSpPaired') && document.getElementById('krdSpPaired').innerText.indexOf('Probe paired')>=0;`, 8000), "display shows the Probe paired state");
   ok((await ev(`return document.getElementById('krdRot').disabled && !!document.querySelector('#krdLab input[type=range]');`)) === true, "touch controls are disabled, not removed, while a remote controller is active");
+  // Motion is asked only now, after pairing: denied offers touch, touch opens.
+  await evS(sidB, `window.KARDIA_SYNCPROBE.openProbe(); window.__krdSpMotionForced = 'denied'; return 1;`);
+  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Allow motion')>=0;`, 8000), "after pairing the probe offers motion");
+  await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-motion')`);
+  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Motion is off')>=0;`, 8000), "denied motion explains and offers touch controls");
+  await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-touch')`);
+  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Touch controls')>=0;`, 8000), "touch fallback opens");
+  await evS(sidB, `window.KARDIA_SYNCPROBE.openProbe(); return 1;`);
   // Scripted rotation from page B: DeviceOrientation events drive page A.
   // End-to-end latency is a step measurement: settle at the baseline, then
   // one scripted step (held, as a real sensor keeps firing at the new

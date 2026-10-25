@@ -16,6 +16,7 @@ public class KardiaBlePlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "host", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "join", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "discover", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "scanNearby", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "send", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "close", returnType: CAPPluginReturnPromise)
     ]
@@ -48,6 +49,9 @@ public class KardiaBlePlugin: CAPPlugin, CAPBridgedPlugin {
     private var pendingJoin: CAPPluginCall?
     private var pendingDiscover: CAPPluginCall?
     private var discoverWork: DispatchWorkItem?
+    private var pendingNearby: CAPPluginCall?
+    private var nearbyWork: DispatchWorkItem?
+    private var nearbyFound: [String: [String: Any]] = [:]
     private var serviceAdded = false
 
     private func ensureManagers() {
@@ -197,6 +201,33 @@ public class KardiaBlePlugin: CAPPlugin, CAPBridgedPlugin {
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(timeoutMs), execute: work)
     }
 
+    @objc func scanNearby(_ call: CAPPluginCall) {
+        ensureManagers()
+        if pendingNearby != nil { call.reject("A Bluetooth scan is already running. Wait a moment and try again."); return }
+        guard let cm = centralManager, cm.state == .poweredOn else { call.reject("Bluetooth is not available."); return }
+        var timeoutMs = call.getInt("timeoutMs") ?? 5000
+        timeoutMs = max(1000, min(timeoutMs, 15000))
+        teardown(silent: true)
+        role = "nearby"
+        expectedHash = nil
+        nearbyFound = [:]
+        pendingNearby = call
+        cm.scanForPeripherals(withServices: [Self.serviceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+        let work = DispatchWorkItem { [weak self] in self?.finishNearby() }
+        nearbyWork = work
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(timeoutMs), execute: work)
+    }
+
+    private func finishNearby() {
+        guard let call = pendingNearby else { return }
+        pendingNearby = nil
+        nearbyWork?.cancel(); nearbyWork = nil
+        centralManager?.stopScan()
+        role = ""
+        let devices = nearbyFound.values.sorted { (($0["rssi"] as? Int) ?? -999) > (($1["rssi"] as? Int) ?? -999) }
+        call.resolve(["devices": devices])
+    }
+
     private func startDiscoverScan() {
         guard role == "discover", let cm = centralManager, cm.state == .poweredOn else { return }
         cm.scanForPeripherals(withServices: [Self.serviceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
@@ -267,6 +298,11 @@ public class KardiaBlePlugin: CAPPlugin, CAPBridgedPlugin {
             pendingDiscover = nil
             d.reject("Bluetooth discovery was closed.")
         }
+        nearbyWork?.cancel(); nearbyWork = nil
+        if let n = pendingNearby {
+            pendingNearby = nil
+            n.reject("Bluetooth discovery was closed.")
+        }
     }
 
     private func emitBytes(_ data: Data) {
@@ -295,6 +331,7 @@ extension KardiaBlePlugin: CBCentralManagerDelegate, CBPeripheralDelegate {
             if role == "display" { startHostingIfReady() }
             if role == "probe" { startScanIfReady() }
             if role == "discover" { startDiscoverScan() }
+            if role == "nearby" { centralManager?.scanForPeripherals(withServices: [Self.serviceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true]) }
         } else if central.state == .poweredOff {
             emitLost("Bluetooth was turned off.")
         }
@@ -313,6 +350,17 @@ extension KardiaBlePlugin: CBCentralManagerDelegate, CBPeripheralDelegate {
 
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral,
                                advertisementData: [String: Any], rssi RSSI: NSNumber) {
+        if role == "nearby" {
+            var hashHex = ""
+            if let dict = advertisementData[CBAdvertisementDataServiceDataKey] as? [CBUUID: Data],
+               let d = dict[Self.serviceUUID], d.count >= 4 { hashHex = Self.dataToHex(d.prefix(4)) }
+            let advName = (advertisementData[CBAdvertisementDataLocalNameKey] as? String) ?? peripheral.name ?? ""
+            if hashHex.isEmpty, advName.hasPrefix("KS-") { hashHex = String(advName.dropFirst(3)).lowercased() }
+            guard hashHex.count == 8 else { return }
+            let displayName = advName.isEmpty ? "Nearby display" : advName
+            nearbyFound[hashHex] = ["name": displayName, "codeHashHex": hashHex, "rssi": RSSI.intValue]
+            return
+        }
         guard role == "probe" || role == "discover", probePeripheral == nil else { return }
         guard matchesHash(adv: advertisementData) else { return }
         probePeripheral = peripheral
