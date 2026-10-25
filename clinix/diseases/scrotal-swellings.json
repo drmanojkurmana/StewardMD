@@ -335,12 +335,13 @@
     {
      "level": 3,
      "q": "A two year old has an intermittent scrotal swelling that vanishes overnight. What is it, and what do you advise?",
-     "a": "A congenital communicating hydrocele through a patent passage. Advise observation, since most resolve within the first year or two, and examine the abdomen for ascites in bilateral cases.",
+     "a": "A congenital communicating hydrocele through a patent passage. Advise observation with a fixed review date, since most resolve within the first year or two; refer to paediatric surgery if the swelling persists beyond that window, grows tense or appears on the other side, and examine the abdomen for ascites in bilateral cases.",
      "accept": [
       "communicating",
       "patent passage",
       "observation",
       "resolve",
+      "review",
       "ascites"
      ],
      "minMatch": 3
@@ -370,7 +371,7 @@
    "teach": [
     {
      "heading": "The two cardinal signs",
-     "body": "Fluctuation is tested sideways, because the scrotum is too mobile for the usual method. Steady the upper pole between thumb and fingers to make the sac tense, then press the lower pole: the displaced fluid pushes your upper fingers apart. The test proves free fluid, not the diagnosis, since any cystic swelling fluctuates.\n\nTranslucency is tested in darkness with a pencil torch on the side of the swelling, never behind it where the testis blocks the light. A clear hydrocele and an epididymal cyst glow red throughout; a spermatocele glows weakly, and blood or tumour stay dark."
+     "body": "Fluctuation is tested sideways, because the scrotum is too mobile for the usual method. Steady the upper pole between thumb and fingers to make the sac tense, then press the lower pole: the displaced fluid pushes your upper fingers apart. The test proves free fluid, not the diagnosis, since any cystic swelling fluctuates.\n\nTranslucency is tested in darkness with a pencil torch on the side of the swelling, never behind it where the testis blocks the light. A clear hydrocele and an epididymal cyst glow red throughout; a spermatocele stays dark because its milky fluid is not clear, and blood or tumour stay dark."
     },
     {
      "heading": "Get above it, then read the testis",
@@ -466,8 +467,8 @@
        ],
        [
         "Spermatocele",
-        "Lax cyst in the head of the epididymis; dim glow",
-        "Ultrasound; milky fluid if tapped"
+        "Lax cyst above and behind the testis, felt apart from it; does not transilluminate",
+        "Ultrasound showing a cyst separate from the testis"
        ],
        [
         "Varicocele",
@@ -491,7 +492,7 @@
        ],
        [
         "Chylocele and filarial disease",
-        "Periodic fever; milky fluid; dim transillumination",
+        "Periodic fever with an opaque swelling; negative translucency test",
         "Night blood smear for microfilariae"
        ]
       ]
@@ -523,12 +524,12 @@
     {
      "level": 2,
      "q": "How do you separate an epididymal cyst from a hydrocele at the bedside?",
-     "a": "The cyst is felt apart from the testis, above and behind it, while the hydrocele surrounds the testis and hides it; both transilluminate, but septa in the cyst give a finely patterned glow.",
+     "a": "The cyst is felt apart from the testis, above and behind it, while the hydrocele surrounds the testis and hides it; an epididymal cyst glows red throughout, while a spermatocele stays dark because its milky fluid is not clear.",
      "accept": [
       "felt apart",
       "surrounds the testis",
-      "transilluminate",
-      "septa"
+      "stays dark",
+      "milky"
      ],
      "minMatch": 2
     },
@@ -583,7 +584,7 @@
     },
     {
      "heading": "Aspiration diagnoses nothing",
-     "body": "A diagnostic tap risks infection, bleeding into the sac and, in a tumour, spread along the needle track, while telling you less than the scan already did. Reserve aspiration for relieving a tense swelling in a patient unfit for surgery, with clear counselling that fluid usually reaccumulates.\n\nNote the fluid only when it is already drawn: amber and clear in a simple hydrocele, milky in chylocele or spermatocele, blood stained in haematocele or tumour. Blood stained fluid, even once, obliges a full tumour workup rather than reassurance."
+     "body": "A diagnostic tap risks infection, bleeding into the sac and, in a tumour, spread along the needle track, while telling you less than the scan already did. Reserve aspiration for relieving a tense swelling in a patient unfit for surgery, with clear counselling that fluid usually reaccumulates.\n\nNote the fluid only when it is already drawn: amber and clear in a simple hydrocele, milky in chylocele or spermatocele, blood stained in haematocele or tumour. Blood stained fluid, whenever seen, needs urgent ultrasound rather than reassurance, with markers and urology referral when imaging raises concern for malignancy."
     }
    ],
    "probes": [
@@ -1045,9 +1046,7 @@
     }
    },
    "essentialInvestigations": [
-    "usg_scrotum",
-    "urine_routine",
-    "blood_counts"
+    "usg_scrotum"
    ],
    "investigations": {
     "usg_scrotum": {
@@ -1058,15 +1057,15 @@
     },
     "urine_routine": {
      "label": "Urine routine and culture",
-     "indicated": true,
-     "result": "Urine clear, no pus cells, no red cells. Culture shows no growth at 48 hours.",
-     "note": "Normal urine argues against an ascending infection behind the effusion, which keeps the secondary workup short."
+     "indicated": false,
+     "result": "Not done.",
+     "note": "Not indicated: no burning, frequency, discharge or epididymal tenderness, so no ascending infection to hunt."
     },
     "blood_counts": {
      "label": "Blood counts",
-     "indicated": true,
-     "result": "Haemoglobin 13.8 g/dL. Total leucocyte count 7,200 per mm3 with normal differential. No eosinophilia.",
-     "note": "A normal count with no eosinophilia gives no support to filarial or acute infective disease here."
+     "indicated": false,
+     "result": "Not done.",
+     "note": "Not indicated: no filarial fever, systemic upset or tuberculosis contact, and the scan already shows a normal testis."
     },
     "tumour_markers": {
      "label": "Tumour markers",
@@ -1125,7 +1124,7 @@
     "Getting above the swelling with no cough impulse divides a purely scrotal swelling from a hernia in one move, and it must never be skipped even when the swelling looks typical.",
     "Brilliant translucency proves clear fluid, but it never clears the testis: the impalpable testis inside still obliges an ultrasound before reassurance.",
     "Prolonged standing is the occupational background here, and it correctly raises varicocele in the history, but the examination refutes it: no bag of worms, no emptying flat, no thrill.",
-    "Normal urine, a normal blood count and no filarial or tuberculosis story keep this primary; each negative was asked after because a positive would have changed the road.",
+    "Urine and blood counts were rightly omitted here: with no burning, discharge, epididymal tenderness, filarial fever or tuberculosis contact, nothing justified them; each question was still asked because a positive answer would have changed the road.",
     "A 9 cm tense swelling with evening heaviness in a working man has crossed from reassure to repair: size with symptoms is the indication, not size alone.",
     "Aspiration was rightly not offered as a plan: it relieves but rarely cures, and each tap risks infection while the diagnosis still stands on the scan, not the syringe."
    ],

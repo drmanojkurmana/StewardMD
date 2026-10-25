@@ -87,7 +87,7 @@
           "expect": "Look for a febrile patient lying still, reluctant to move or breathe deeply because jolting worsens the pain. Examine the sclera in daylight for even a faint yellow tinge: frank jaundice points down the duct, while its absence keeps the disease in the gallbladder."
         },
         "skill.gen.vitals": {
-          "expect": "Expect moderate fever with tachycardia; a high swinging fever with chills belongs to cholangitis. Hypotension with confusion is Reynolds territory and changes the night, not just the plan."
+          "expect": "Expect moderate fever with tachycardia; a high swinging fever with chills belongs to cholangitis. Hypotension with confusion added to pain, jaundice and fever completes Reynolds pentad and changes the night, not just the plan."
         }
       }
     },
@@ -656,11 +656,11 @@
         },
         {
           "heading": "Antibiotics bridge to surgery, they are not the treatment",
-          "body": "Definitive treatment of cholecystitis is cholecystectomy, with antibiotics covering the wait or the milder cases managed without operation.\n\nCommunity acquired mild to moderate disease is covered by ceftriaxone two grams intravenously once daily with metronidazole five hundred milligrams intravenously every eight hours.\n\nSevere, healthcare associated, or high resistance settings need piperacillin tazobactam four point five grams intravenously every six hours, or meropenem one gram every eight hours.\n\nAdd vancomycin at fifteen milligrams per kilogram every twelve hours for enterococcus in grade three disease. Stop antibiotics after uncomplicated cholecystectomy; continue four to seven days after source control for gangrenous, perforated or cholangitic disease, and de escalate on cultures."
+          "body": "Definitive treatment of cholecystitis is cholecystectomy, with antibiotics covering the wait or the milder cases managed without operation.\n\nCommunity acquired mild to moderate disease is covered by ceftriaxone two grams intravenously once daily with metronidazole five hundred milligrams intravenously every eight hours.\n\nSevere, healthcare associated, or high resistance settings need piperacillin tazobactam four point five grams intravenously every six hours, or meropenem one gram every eight hours where resistance or severe sepsis demands it.\n\nStop antibiotics after uncomplicated cholecystectomy; continue four to seven days after source control for gangrenous, perforated or cholangitic disease, and de escalate on cultures."
         },
         {
           "heading": "Operate early, drain when you cannot",
-          "body": "Offer early laparoscopic cholecystectomy within seven days of admission and ten days of symptom onset wherever expertise allows, including patients above eighty, Child Pugh A and B cirrhosis, and pregnancy.\n\nIf the window is missed, wait beyond six weeks rather than operating into maturing inflammation.\n\nPatients unfit for surgery need gallbladder drainage, usually percutaneous cholecystostomy. Difficult anatomy at operation calls for subtotal cholecystectomy or conversion rather than a duct injury.\n\nCholangitis is drained by grade with ERCP within forty eight hours, and gallstone cholangitis earns a cholecystectomy in the same admission. Where ERCP is unavailable, stabilise and refer early; inpatient surgical care at empanelled hospitals is covered under government insurance schemes."
+          "body": "Offer early laparoscopic cholecystectomy within seven days of admission and ten days of symptom onset wherever expertise allows, including patients above eighty, Child Pugh A and B cirrhosis, and pregnancy.\n\nIf the window is missed, wait beyond six weeks rather than operating into maturing inflammation.\n\nPatients unfit for surgery need gallbladder drainage, usually percutaneous cholecystostomy. Difficult anatomy at operation calls for subtotal cholecystectomy or conversion rather than a duct injury.\n\nCholangitis is drained by grade: mild disease may settle on antibiotics with drainage only if unimproved within a day, moderate disease needs early drainage, and severe disease needs organ support with urgent drainage once stable, usually ERCP.\n\nGallstone cholangitis earns a cholecystectomy in the same admission once the acute illness settles. Where ERCP is unavailable, stabilise and refer early; inpatient surgical care at empanelled hospitals is covered under government insurance schemes."
         }
       ],
       "probes": [
@@ -709,6 +709,10 @@
         {
           "source": "StewardMD Clinical KB",
           "locator": "CHOLECYSTITIS: empiric regimen"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "CHOLANGITIS: empiric regimen"
         },
         {
           "source": "NICE Clinical Guideline CG188",
@@ -1025,7 +1029,7 @@
           "abnormal": false
         },
         "skill.exam.surg.peritonitis_signs": {
-          "finding": "Guarding localised to the right hypochondrium with rebound tenderness there. Rest of the abdomen soft with no board like rigidity. Bowel sounds present.",
+          "finding": "Guarding localised to the right hypochondrium with marked tenderness there but no rebound. Rest of the abdomen soft with no board like rigidity. Bowel sounds present.",
           "abnormal": true
         },
         "skill.exam.surg.tenderness_rebound": {

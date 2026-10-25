@@ -566,7 +566,7 @@
         },
         {
           "heading": "Stage, screen and watch the drugs",
-          "body": "Test every child with tuberculosis for HIV, since co-infection changes urgency, drug choices and follow-up. Check haemoglobin and growth status at baseline, because anaemia and wasting are the rule rather than the exception and both need parallel correction.\n\nLiver function testing matters once treatment starts, as the first-line drugs can injure the liver: warn the family about vomiting, yellow eyes and dark urine, and test promptly if they appear. For nodal disease, needle aspiration showing granulomas with caseation confirms the diagnosis without excision."
+          "body": "Test every child with tuberculosis for HIV, since co-infection changes urgency, drug choices and follow-up. Check haemoglobin and growth status at baseline, because anaemia and wasting are the rule rather than the exception and both need parallel correction.\n\nLiver function testing matters once treatment starts, as the first-line drugs can injure the liver: warn the family about vomiting, yellow eyes and dark urine, and test promptly if they appear.\n\nAs ethambutol can injure the optic nerve, check visual acuity and colour vision at baseline and during treatment, and counsel the family to report blurred vision or trouble telling colours apart. For nodal disease, needle aspiration showing granulomas with caseation confirms the diagnosis without excision."
         }
       ],
       "probes": [
@@ -612,6 +612,10 @@
         {
           "source": "StewardMD Clinical KB",
           "locator": "tuberculosis_long_case: additionalInvestigations"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "tb_drugs: ethambutol"
         },
         {
           "source": "WHO",
@@ -798,7 +802,7 @@
         },
         {
           "heading": "Resistance, reaction and referral",
-          "body": "Rifampicin resistance on the molecular test means probable multidrug-resistant disease: do not improvise a modified first-line course but move the child to the drug-resistant pathway with susceptibility-guided drugs under programmatic care.\n\nParadoxical worsening, such as nodes enlarging early in treatment, is common and does not by itself mean failure. Refer urgently for suspected meningitis, spinal disease with weakness, a child who cannot swallow drugs, or any sign of drug-induced liver injury with vomiting and yellow eyes."
+          "body": "Rifampicin resistance on the molecular test means probable multidrug-resistant disease: do not improvise a modified first-line course but move the child to the drug-resistant pathway with susceptibility-guided drugs under programmatic care.\n\nParadoxical worsening, such as nodes enlarging early in treatment, is common and does not by itself mean failure. Refer urgently for suspected meningitis, spinal disease with weakness, a child who cannot swallow drugs, visual blurring or loss of colour discrimination on ethambutol, or any sign of drug-induced liver injury with vomiting and yellow eyes.\n\nEthambutol can injure the optic nerve, so check visual acuity and colour vision at baseline and at each review, counsel the family to report visual changes promptly, and take extra care in young children who cannot reliably report symptoms. Stop ethambutol and seek urgent review if visual symptoms appear, following programme guidance."
         },
         {
           "heading": "The system around the drugs",
@@ -849,6 +853,10 @@
         {
           "source": "StewardMD Clinical KB",
           "locator": "PULMONARY_TB: recommendations"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "tb_drugs: ethambutol"
         },
         {
           "source": "WHO",
@@ -1182,7 +1190,7 @@
         "minMatch": 1
       },
       "managementModel": {
-        "answer": "Start weight-band first-line antitubercular treatment under the national programme with notification on Nikshay and directly observed treatment, correct anaemia and undernutrition, screen the household and start preventive treatment in eligible contacts, and follow weight, adherence and the film to cure.",
+        "answer": "Start weight-band first-line antitubercular treatment under the national programme with notification on Nikshay and directly observed treatment, correct anaemia and undernutrition, screen the household and start preventive treatment in eligible contacts, and follow weight, adherence, liver and visual adverse effects and the film to cure.",
         "accept": [
           "antitubercular",
           "att",
@@ -1195,7 +1203,8 @@
           "preventive treatment",
           "nutrition",
           "follow-up",
-          "weight"
+          "weight",
+          "visual"
         ],
         "minMatch": 3
       },
@@ -1206,7 +1215,8 @@
         "CBNAAT gives confirmation and the rifampicin answer together, which is what selects the standard pathway.",
         "Reactive Mantoux supports but a negative one never excludes, especially with malnutrition.",
         "Anaemia and undernutrition need parallel correction, since drugs alone do not restore growth.",
-        "Paradoxical node enlargement early in treatment is common and does not by itself mean failure."
+        "Paradoxical node enlargement early in treatment is common and does not by itself mean failure.",
+  "Ethambutol needs visual monitoring: check acuity and colour vision and counsel the family to report visual changes promptly."
       ],
       "review": {
         "status": "ai_drafted"

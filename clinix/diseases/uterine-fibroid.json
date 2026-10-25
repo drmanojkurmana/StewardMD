@@ -733,11 +733,11 @@
       "system": "gynaecology",
       "teach": [
         {
-          "body": "The FIGO leiomyoma classification runs from types 0 to 8, localising lesions from submucosal through intramural to subserosal. Type is not trivia: it predicts symptoms and it chooses the route of removal.\n\nSubmucosal types are resected hysteroscopically, pedunculated and subserosal types suit laparoscopy, and deep intramural disease usually needs an open or advanced laparoscopic approach.",
+          "body": "The FIGO leiomyoma classification runs from types 0 to 8, localising lesions from submucosal through intramural to subserosal. Type is not trivia: it predicts symptoms and it chooses the route of removal.\n\nHysteroscopic resection is suited to small submucosal lesions (types 0 and 1, typically under 3 cm). Larger lesions or type 2 fibroids carry substantial risks of fluid overload and incomplete resection, requiring GnRH analogue pre-treatment, staged resection, or expert referral.\n\nPedunculated and subserosal types suit laparoscopy, while deep intramural disease usually needs an open or advanced laparoscopic approach.",
           "heading": "FIGO types and why they matter"
         },
         {
-          "body": "A complete diagnostic statement names the disease, the uterine size, the FIGO type and number of lesions, the anaemia grade, and the fertility context.\n\nA worked example: uterine fibroid, 14 week size, FIGO type 2 with a coexistent subserosal lesion, with moderate iron deficiency anaemia, in a woman with completed family.",
+          "body": "A complete diagnostic statement names the disease, the uterine size, the FIGO type and number of lesions, the anaemia grade, and the fertility context.\n\nA worked example: uterine fibroid, 14 week size, FIGO type 2 submucosal lesion with a coexistent subserosal lesion, with moderate iron deficiency anaemia, in a woman with completed family.",
           "heading": "The diagnostic statement"
         },
         {
@@ -785,7 +785,7 @@
           "q": "What medical options control heavy bleeding from fibroids?"
         },
         {
-          "a": "Myomectomy to preserve fertility, chosen by site, or hysterectomy for definitive treatment when family is complete, with embolisation as a uterus preserving radiological option in between.",
+          "a": "Hysterectomy for definitive treatment when family is complete, myomectomy to preserve the uterus, or embolisation as a uterus preserving radiological option where uterine size is under 10 weeks.",
           "accept": [
             "myomectomy",
             "hysterectomy",
@@ -821,11 +821,11 @@
           "heading": "Medical control and preparing for surgery"
         },
         {
-          "body": "Uterine artery embolisation is a uterus preserving radiological option with a success rate of 80 to 90 percent and fibroid shrinkage of 40 to 80 percent. It suits symptomatic disease with completed family and failed medical treatment.\n\nMyomectomy preserves fertility and follows site: hysteroscopic for submucosal, laparoscopic for pedunculated and subserosal, open or laparoscopic for intramural. Hysterectomy is definitive when family is complete or disease is extensive.",
+          "body": "Uterine artery embolisation is a uterus preserving option with a success rate of 80 to 90 percent and fibroid shrinkage of 40 to 80 percent. It suits symptomatic disease where uterine preservation is desired after medical treatment fails.\n\nIn Indian practical guidelines, embolisation is typically reserved for a uterine cavity under 10 weeks, as marked enlargement increases the risk of post-procedural pain, infection or incomplete response.\n\nMyomectomy preserves fertility and follows site: hysteroscopic for submucosal lesions (best suited to types 0 and 1 under 3 cm; larger or type 2 lesions need staged resection or expert referral), laparoscopic for pedunculated and subserosal, open or laparoscopic for intramural. Hysterectomy is definitive when family is complete or disease is extensive.",
           "heading": "Embolisation and surgery"
         },
         {
-          "body": "Correct anaemia with oral or parenteral iron well before the operation date, arrange blood in hand, and refer disease beyond local facilities to a centre with interventional radiology or advanced laparoscopy.\n\nLarge symptomatic fibroid with completed family is an indication for hysterectomy, while a young woman wanting fertility is referred for myomectomy rather than managed expectantly until severe anaemia forces an emergency admission.",
+          "body": "Correct anaemia with oral or parenteral iron well before the operation date, arrange blood in hand, and refer disease beyond local facilities to a centre with interventional radiology or advanced laparoscopy.\n\nA large symptomatic fibroid in a woman with completed family makes hysterectomy an option for definitive relief, alongside uterine-preserving medical, radiological or myomectomy choices based on individual preference. A woman desiring fertility preservation is referred for myomectomy rather than managed expectantly until severe anaemia forces an emergency admission.",
           "heading": "Indian context and referral thresholds"
         }
       ],
@@ -842,7 +842,7 @@
           "myoma",
           "uterine fibroid"
         ],
-        "answer": "Uterine fibroid, 14 week size, FIGO type 2 with a coexistent subserosal lesion, with moderate iron deficiency anaemia."
+        "answer": "Uterine fibroid, 14 week size, FIGO type 2 submucosal lesion with a coexistent subserosal lesion, with moderate iron deficiency anaemia."
       },
       "differentialModel": {
         "accept": [
@@ -1113,10 +1113,10 @@
       },
       "investigations": {
         "biopsy": {
-          "indicated": true,
+          "indicated": false,
           "label": "Endometrial sampling",
-          "note": "Appropriate with a year of heavy bleeding at 38: histology is the only way to exclude coexistent hyperplasia.",
-          "result": "Proliferative endometrium, no hyperplasia or malignancy."
+          "note": "Not indicated first-line: she is 38 with ovulatory heavy menstrual bleeding, no intermenstrual bleeding and no risk factors for endometrial hyperplasia (such as obesity, chronic anovulation or diabetes). Reserved for age 45 and above, persistent intermenstrual bleeding, or failed medical therapy.",
+          "result": "Not done."
         },
         "fbc": {
           "indicated": true,
@@ -1133,7 +1133,7 @@
         "sis": {
           "indicated": true,
           "label": "Saline infusion sonohysterography",
-          "note": "Worth doing where available to delineate the submucosal component that decides hysteroscopic resectability.",
+          "note": "Worth doing where available to delineate the submucosal component and depth of myometrial extension, which determines whether hysteroscopic resection is feasible or if staged or alternative surgical approaches are needed.",
           "result": "Submucosal component confirmed, bulging into the cavity."
         },
         "upt": {
@@ -1146,7 +1146,7 @@
           "indicated": true,
           "label": "Pelvic ultrasound",
           "note": "First-line imaging: it confirms the diagnosis, counts the lesions and assigns the FIGO type that chooses the route of treatment.",
-          "result": "Bulky uterus of 14 week size. A 5 cm intramural lesion distorting the cavity (FIGO type 2) and a 3 cm subserosal lesion. Ovaries normal, no free fluid."
+          "result": "Bulky uterus of 14 week size. A 5 cm submucosal lesion with at least 50 percent intramural component (FIGO type 2) and a 3 cm subserosal lesion. Ovaries normal, no free fluid."
         }
       },
       "managementModel": {
@@ -1157,11 +1157,10 @@
           "levonorgestrel",
           "myomectomy",
           "hysterectomy",
-          "embolisation",
           "refer",
           "blood"
         ],
-        "answer": "Correct the iron deficiency anaemia with iron and arrange blood cover, control bleeding medically while referring, and plan definitive care by site and family status: myomectomy routes by FIGO type or hysterectomy since family is complete.",
+        "answer": "Correct the iron deficiency anaemia with iron and arrange blood cover, control bleeding medically while referring, and plan definitive care by site and family status: hysterectomy since family is complete, or myomectomy (recognising that a 5 cm type 2 lesion with a subserosal component is not suitable for routine single-sitting hysteroscopy).",
         "minMatch": 3
       },
       "opening": "Sunita Pawar, 38, a farm labourer from a village near Satara, sits in the gynaecology outpatient room with her sister. She looks pale and tired. Introduce yourself and take a history.",

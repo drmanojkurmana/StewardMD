@@ -215,7 +215,7 @@
         "seconds": 360,
         "examinerQuestions": [
           "The umbilical artery Doppler shows absent end-diastolic flow at 33 weeks. What clinical stage does this represent and what is the delivery recommendation?",
-          "What two pharmacological therapies must be administered before delivering a growth-restricted fetus at 33 weeks?",
+          "What two pharmacological therapies must be administered before delivering a growth-restricted fetus at 31 weeks?",
           "Why is elective caesarean section preferred over labour induction in a growth-restricted fetus with absent or reversed umbilical diastolic flow?"
         ]
       }
@@ -687,7 +687,7 @@
                 "Stage 4",
                 "Impending demise",
                 "Ductus venosus reversed a-wave or low STV",
-                "Deliver at 26 weeks or above"
+                "Deliver at 26 weeks or above with shared parental decision"
               ]
             ]
           }
@@ -785,7 +785,7 @@
               [
                 "Stage 4 (DV reversed a-wave)",
                 "Continuous monitoring",
-                "Immediate (at or over 26 weeks)",
+                "Immediate (at or over 26 weeks) after neonatology counselling",
                 "Emergency caesarean delivery"
               ]
             ]
@@ -793,7 +793,7 @@
         },
         {
           "heading": "Maternal management and delivery setting",
-          "body": "Control maternal hypertension to maintain blood pressure around 135/85 mmHg without excessive hypotension that could further decrease placental perfusion.\n\nAdvise left lateral rest and complete cessation of smoking or tobacco chewing. Deliver in a tertiary hospital with Level 3 Neonatal Intensive Care Unit (NICU) capabilities, with neonatologists attending the birth."
+          "body": "Control maternal hypertension to maintain blood pressure around 135/85 mmHg without excessive hypotension that could further decrease placental perfusion.\n\nAdvise complete cessation of smoking or tobacco chewing; routine bed rest is not recommended. Deliver in a tertiary hospital with Level 3 Neonatal Intensive Care Unit (NICU) capabilities, with neonatologists attending the birth."
         }
       ],
       "probes": [
@@ -870,7 +870,7 @@
               [
                 "Systolic/Diastolic (S/D)",
                 "Peak Systolic / End Diastolic",
-                "> 3.0 after 30 weeks gestation",
+                "> 95th centile for gestation",
                 "Placental bed obliterative disease"
               ],
               [
@@ -895,7 +895,7 @@
               [
                 "Ductus venosus PI",
                 "Ductus venosus",
-                "< 95th centile (< 0.8)",
+                "< 95th centile for gestation",
                 "PI > 95th centile"
               ],
               [
@@ -1235,7 +1235,7 @@
         ]
       },
       "diagnosis": {
-        "answer": "Early-onset severe asymmetrical fetal growth restriction with oligohydramnios and umbilical artery absent end-diastolic flow at 34 weeks of gestation.",
+        "answer": "Late-onset severe asymmetrical fetal growth restriction with oligohydramnios and umbilical artery absent end-diastolic flow at 34 weeks of gestation.",
         "accept": [
           "fetal growth restriction",
           "intrauterine growth restriction",
@@ -1248,11 +1248,10 @@
         "minMatch": 1
       },
       "managementModel": {
-        "answer": "Admit to Level 3 obstetric centre with neonatal intensive care; administer antenatal corticosteroids for fetal lung maturation; start magnesium sulphate for fetal neuroprotection if preterm delivery is planned; monitor with daily CTG, ductus venosus Doppler and biophysical profile; plan delivery by caesarean section at 34 weeks due to absent end-diastolic flow; involve the neonatology team.",
+        "answer": "Admit to Level 3 obstetric centre with neonatal intensive care; administer antenatal corticosteroids for fetal lung maturation; monitor with daily CTG, ductus venosus Doppler and biophysical profile; plan delivery by caesarean section at 34 weeks due to absent end-diastolic flow; involve the neonatology team. Magnesium sulphate for neuroprotection is not indicated at this gestation under the pathway rule limiting it to planned delivery before 32 weeks.",
         "accept": [
           "corticosteroids",
           "steroids",
-          "magnesium",
           "surveillance",
           "doppler",
           "ctg",

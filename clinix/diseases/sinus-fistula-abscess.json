@@ -4,7 +4,7 @@
   "name": "Abscess, sinus and fistula",
   "fullName": "Abscess, sinus and fistula",
   "system": "surgery",
-  "kbRef": "retropharyngeal_abscess",
+  "kbRef": "osteomyelitis_sequestrum_brodie_management",
   "oneLine": "A discharging track examined to its keeper, and the abscesses that start one",
   "estMinutes": 60,
   "review": {
@@ -109,7 +109,7 @@
           "expect": "Expect the track fixed to irregular, thickened, tender tibia with a firm fibrous wall along its course. Mobility over deep structures would argue against an osteomyelitic origin, and a nearby lump would raise tuberculous nodes."
         },
         "skill.exam.surg.sinus_probing": {
-          "expect": "Expect the probe to pass a few centimetres along the tibial surface and strike bare, gritty, immobile bone: the sequestrum that keeps this track open. Fresh pus welling on withdrawal confirms an undrained deep pool."
+          "expect": "Expect the probe to pass a few centimetres along the tibial surface and strike a hard, gritty, moveable sequestrum at the depth of the track. Fresh pus welling on withdrawal confirms an undrained deep pool. Defer probing during an active flare with spreading cellulitis and fever: probe gently under senior cover only once the flare settles, with antibiotics on board."
         },
         "skill.exam.surg.chronic_osteomyelitis": {
           "expect": "Expect the full bone signature around the sinus: broadened irregular tibia, thickening, tenderness, wasting of the calf from disuse, and sometimes shortening or deformity from the old fracture and its fixation."
@@ -183,7 +183,7 @@
       {
         "id": "osce.sinus.exam",
         "title": "Examine this discharging sinus",
-        "task": "This 34 year old man has a discharging sinus over his left shin for eighteen months. Examine the sinus and present your findings.",
+        "task": "This 34 year old man has a discharging sinus over his left shin for eighteen months. The leg is currently hot, red and febrile, so do not probe the track today; examine the sinus, present your findings, and state when and how you would examine it with a probe.",
         "seconds": 480,
         "skills": [
           "skill.approach.hygiene",
@@ -197,7 +197,7 @@
         ],
         "examinerQuestions": [
           "You found sprouting granulation at the mouth with the track fixed to bone. What does that combination tell you?",
-          "Your probe strikes gritty immobile bone. What is it, and what operation does it mandate?",
+          "Your probe strikes a hard, gritty, moveable sequestrum. What is it, and what operation does it mandate?",
           "When would you refuse to probe a sinus, and what would you do instead?"
         ]
       },
@@ -302,7 +302,7 @@
       "sources": [
         {
           "source": "StewardMD Clinical KB",
-          "locator": "retropharyngeal_abscess: pathophysiology"
+          "locator": "osteomyelitis_sequestrum_brodie_management: pathophysiology"
         },
         {
           "source": "Bailey and Love's Short Practice of Surgery",
@@ -381,7 +381,7 @@
       "sources": [
         {
           "source": "StewardMD Clinical KB",
-          "locator": "retropharyngeal_abscess: clinicalPearls"
+          "locator": "osteomyelitis_sequestrum_brodie_management: clinicalPearls"
         },
         {
           "source": "Bailey and Love's Short Practice of Surgery",
@@ -461,7 +461,7 @@
       "sources": [
         {
           "source": "StewardMD Clinical KB",
-          "locator": "retropharyngeal_abscess: pitfalls"
+          "locator": "osteomyelitis_sequestrum_brodie_management: clinicalPearls"
         },
         {
           "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
@@ -541,7 +541,7 @@
       "sources": [
         {
           "source": "StewardMD Clinical KB",
-          "locator": "retropharyngeal_abscess: additionalDifferentials"
+          "locator": "osteomyelitis_sequestrum_brodie_management: additionalDifferentials"
         },
         {
           "source": "Bailey and Love's Short Practice of Surgery",
@@ -621,7 +621,7 @@
       "sources": [
         {
           "source": "StewardMD Clinical KB",
-          "locator": "retropharyngeal_abscess: additionalInvestigations"
+          "locator": "osteomyelitis_sequestrum_brodie_management: additionalInvestigations"
         },
         {
           "source": "Bailey and Love's Short Practice of Surgery",
@@ -978,7 +978,7 @@
       },
       "exam": {
         "skill.gen.appearance": {
-          "finding": "Lean adult male, alert and afebrile at rest but wincing on left leg movement. Walks with a stick, non weight bearing on the left leg. Mild pallor, no icterus, no pedal oedema, tongue moist.",
+          "finding": "Lean adult male, alert and febrile, wincing on left leg movement. Walks with a stick, non weight bearing on the left leg. Mild pallor, no icterus, no pedal oedema, tongue moist.",
           "abnormal": true
         },
         "skill.gen.vitals": {
@@ -994,7 +994,7 @@
           "abnormal": true
         },
         "skill.exam.surg.sinus_probing": {
-          "finding": "Under aseptic precaution the probe passes 4 cm along the bone surface and strikes bare gritty immobile bone. Withdrawal brings a gush of foul pus. No communication with the knee or ankle joint felt.",
+          "finding": "Probing deferred today: 6 cm of hot, red, tender cellulitis surrounds the opening with fever of 38.4 C, so the track will be probed gently under senior cover once the flare settles, with antibiotics on board. No joint communication assessed today.",
           "abnormal": true
         },
         "skill.exam.surg.chronic_osteomyelitis": {
@@ -1039,9 +1039,9 @@
         },
         "sinogram": {
           "label": "Sinogram with radio opaque dye",
-          "indicated": true,
-          "result": "Single track 4 cm long ending at the tibial cloaca. No branching, no joint communication, no visceral leak.",
-          "note": "Confirms a simple blind sinus to bone and rules out branching or joint involvement before surgery is planned."
+          "indicated": false,
+          "result": "Deferred during the acute flare: not performed while spreading cellulitis and fever persist.",
+          "note": "Sinography is deferred until redness, heat and fever settle, since injecting dye into an acutely infected track risks spreading infection. The plain film already names the keeper, so reconsider mapping once the flare resolves, before surgery is planned."
         },
         "chest_film": {
           "label": "Chest radiograph",
@@ -1053,7 +1053,7 @@
           "label": "Magnetic resonance imaging of the leg",
           "indicated": false,
           "result": "Not ordered.",
-          "note": "Reserved for suspected joint spread, spinal involvement, or complex branching the sinogram cannot map. Here the plain film and sinogram already answer the surgical question."
+          "note": "Reserved for suspected joint spread, spinal involvement, or complex branching the plain film cannot map. Here the plain film already answers the surgical question, with sinography to follow once the flare settles if the surgeon needs the course mapped."
         },
         "wound_biopsy": {
           "label": "Edge biopsy",
@@ -1100,7 +1100,7 @@
         "Bony grit in the discharge is the diagnosis at the bedside: dead bone keeps this track open and no dressing dissolves it.",
         "Sealing of the mouth followed by painful swelling proves a retained deep pool, not healing; each cycle scars the track further.",
         "Sprouting granulation plus fixation to broadened tender tibia separates an osteomyelitic sinus from a tuberculous one with its blue undermined edge.",
-        "The probe striking gritty immobile bone is the sequestrum itself; the sinogram then proves it is single and blind before surgery.",
+        "The probe striking a hard, gritty, moveable sequestrum names the keeper at the bedside; once the flare settles, a sinogram can prove the track is single and blind before surgery.",
         "A normal sugar result is still a result: it removes diabetes from the keeper list and is recorded precisely for that reason.",
         "The edge decides the biopsy, not the duration: granulation over infection needs surgery, while a raised everted edge needs histology first."
       ],

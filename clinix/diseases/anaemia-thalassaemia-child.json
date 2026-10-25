@@ -90,7 +90,7 @@
           "expect": "Look for frontal bossing of the skull and prominence of the upper jaw in a chronically under-transfused child, with a pot belly from liver and spleen enlargement. An alert but tired toddler who lags in play fits chronic anaemia rather than acute illness."
         },
         "skill.gen.paed.vitals": {
-          "expect": "Expect a fast pulse and fast breathing with a wide pulse pressure in severe chronic anaemia, with a soft flow murmur to match. Fever at presentation more often marks intercurrent infection than the anaemia itself."
+          "expect": "Assess vitals against paediatric age norms: severe chronic anaemia drives a compensatory resting tachycardia, mild tachypnoea, and an audible soft flow murmur. Fever at presentation more often marks intercurrent infection than the anaemia itself."
         },
         "skill.gen.paed.pallor": {
           "expect": "Read pallor at the lower palpebral conjunctiva, the dorsum of the tongue, and the nail beds; loss of colour from the palmar and plantar creases marks severe pallor. Add spooning of the nails and cracks at the mouth angles when iron lack is in question."
@@ -474,7 +474,7 @@
         },
         {
           "heading": "When pallor warns of the marrow",
-          "body": "Pallor with persistent fever, bleeding, bone pain or very high white cells warns of leukaemia or marrow failure and needs same-week referral to a paediatric centre, not iron. Rapidly enlarging spleen with falling counts means hypersplenism. New heart failure, arrhythmia or fainting in a transfused child warns of iron cardiomyopathy and needs urgent cardiac review."
+          "body": "Pallor with persistent fever, bleeding, bone pain or very high white cells warns of leukaemia or marrow failure and needs same-day urgent referral to a paediatric centre with a count and film, not iron. Rapidly enlarging spleen with falling counts means hypersplenism. New heart failure, arrhythmia or fainting in a transfused child warns of iron cardiomyopathy and needs emergency same-day escalation."
         },
         {
           "heading": "Telling the three microcytic cousins apart",
@@ -513,7 +513,7 @@
         {
           "level": 3,
           "q": "Pallor with fever, gum bleeding and bone pain in a 4-year-old. What is your next step?",
-          "a": "Urgent full blood count with film and same-week referral for suspected leukaemia or marrow failure, not empiric iron.",
+          "a": "Urgent full blood count with film and same-day urgent referral for suspected leukaemia or marrow failure, not empiric iron.",
           "accept": ["leukaemia", "marrow failure", "referral"],
           "minMatch": 2
         }
@@ -564,7 +564,7 @@
         },
         {
           "heading": "Film and iron studies next",
-          "body": "Read the peripheral film for marked variation in size and shape with target cells and nucleated red cells, the thalassaemic signature, against pencil cells and low platelets that favour iron lack. Send iron studies with ferritin: frankly low ferritin proves iron deficiency, while normal or raised ferritin with small cells points to globin defect. Check a stool test for worms and a urine test where indicated, since both shape treatment."
+          "body": "Read the peripheral film for marked variation in size and shape with target cells and nucleated red cells, the thalassaemic signature, against pencil cells and low platelets that favour iron lack.\n\nSend iron studies with ferritin: low ferritin proves iron deficiency, while normal or raised ferritin in an uninflamed child points toward a globin defect. Ferritin rises in infection, so normal levels during acute illness do not exclude iron lack. Stool and urine tests check for ongoing loss."
         },
         {
           "heading": "The haemoglobin pattern decides",
@@ -655,7 +655,7 @@
       "pitfalls": [
         "Labelling trait as major on one HPLC without the clinical picture, alarming a family that needs counsel only.",
         "Stating major without grading iron burden, so chelation starts years late.",
-        "Keeping a failing heart or hypersplenism at the district unit instead of referring the same week."
+        "Keeping a failing heart, arrhythmia or acute hypersplenism at the district unit instead of arranging same-day emergency escalation."
       ],
       "probes": [
         {
@@ -1022,11 +1022,11 @@
           "abnormal": true
         },
         "skill.gen.paed.vitals": {
-          "finding": "Pulse 118 regular with wide pulse pressure. Respiratory rate 32. Blood pressure 88/56. Temperature 37.4 C. SpO2 96 percent on room air.",
+          "finding": "Pulse 118 regular, normal volume. Respiratory rate 32. Blood pressure 88/56. Temperature 37.4 C. SpO2 96 percent on room air.",
           "abnormal": true
         },
         "skill.gen.paed.pallor": {
-          "finding": "Severe pallor of the lower palpebral conjunctiva, dorsum of tongue, nail beds and palmar creases. Mild spooning of the nails. No jaundice.",
+          "finding": "Severe pallor of the lower palpebral conjunctiva, dorsum of tongue, nail beds and palmar creases. Nails are pale and flat without koilonychia. No jaundice.",
           "abnormal": true
         },
         "skill.exam.paed.weight": {
@@ -1073,13 +1073,13 @@
           "label": "Iron studies and serum ferritin",
           "indicated": true,
           "result": "Serum ferritin normal. Serum iron normal with normal binding capacity.",
-          "note": "Normal stores with small cells exclude iron deficiency as the driver, so iron tonics have nothing to correct here."
+          "note": "Normal ferritin alongside normal serum iron and binding capacity makes iron deficiency unlikely as the driver of this severe anaemia in the absence of inflammation, confirming iron tonics have nothing to correct."
         },
         "hplc": {
           "label": "Haemoglobin HPLC with quantification",
           "indicated": true,
-          "result": "HbA 4 percent, HbA2 3 percent, HbF 93 percent. Normal HbA1c pattern absent.",
-          "note": "Near absent HbA with very high HbF is the major pattern: this single result names the disease and the lifelong plan."
+          "result": "HbA 0 percent, HbA2 3 percent, HbF 97 percent. Normal HbA1c pattern absent.",
+          "note": "Absent HbA with very high HbF confirms the homozygous beta zero major pattern in this untransfused child: this single result names the disease and the lifelong plan."
         },
         "stool_test": {
           "label": "Stool test for ova and occult blood",
@@ -1149,10 +1149,10 @@
         "Pallor from 8 months with poor growth, bossing and a big spleen is thalassaemia until the HPLC says otherwise: the tempo and the family do half the diagnosis.",
         "Two months of iron with no response is a result, not a failure: non-response to iron is an indication to test, not to repeat the tonic.",
         "Consanguinity plus an affected cousin makes this autosomal recessive inheritance visible in one pedigree, and every future pregnancy needs antenatal counsel.",
-        "Normal ferritin with small cells excludes iron lack as the driver: this is the single result that stops useless iron.",
-        "Near absent HbA with very high HbF names major disease and its lifelong plan in one line, with no marrow test needed.",
+        "Normal ferritin and transferrin saturation without active inflammation makes nutritional iron deficiency unlikely as the primary driver, halting inappropriate empiric iron therapy.",
+        "Absent HbA with very high HbF names homozygous beta zero major disease and its lifelong plan in one line, with no marrow test needed.",
         "A firm 5 cm spleen that shrinks after transfusion is expected; a rapidly enlarging spleen with falling counts would instead mean hypersplenism and referral.",
-        "The flow murmur and wide pulse pressure belong to thin fast-moving blood, not to heart disease, but new failure or arrhythmia in a transfused child is iron cardiomyopathy until proven otherwise."
+        "The flow murmur and compensatory high-output circulation belong to thin fast-moving blood, not to structural heart disease, but new failure or arrhythmia in a transfused child is iron cardiomyopathy until proven otherwise."
       ],
       "review": {
         "status": "ai_drafted"

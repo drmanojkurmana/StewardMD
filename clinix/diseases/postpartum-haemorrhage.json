@@ -623,10 +623,10 @@
       "keyPoints": [
         "RESUSCITATE at once: call for help and the obstetric emergency team, two wide bore intravenous lines, warmed fluids, oxygen, continuous vitals with strict urine output, and blood transfusion for major loss without waiting for laboratory permission. Keep her warm and nil by mouth.",
         "MASSAGE the uterus and EMPTY the bladder: firm rhythmic fundal massage expresses clot and stimulates contraction, and a full bladder splints the womb and must be catheterised. Bleeding that eases with massage confirms atony and buys the drugs time.",
-        "GIVE uterotonics stepwise: oxytocin as the first line, with 10 units for active management of the third stage as the cited book states; ergometrine 0.2 mg intramuscularly at the anterior shoulder where oxytocin is not available, or Syntometrine with oxytocin 5 IU plus ergometrine 0.5 mg as the book describes it; carboprost 0.25 mg intramuscularly, repeatable every 15 minutes up to 8 doses for persisting atony, moving to theatre after the second dose as the book advises; misoprostol 400 to 1000 micrograms for PPH where injectables are unavailable, as the book ranges it.",
+        "GIVE uterotonics stepwise: oxytocin as the first line, with 10 units for active management of the third stage as the cited book states and a dilute oxytocin infusion of 20 IU in 500 mL fluid at 40 to 60 drops per minute for ongoing atonic bleeding as the national workflow describes it, never as an intravenous bolus; ergometrine 0.2 mg intramuscularly at the anterior shoulder where oxytocin is not available, or Syntometrine with oxytocin 5 IU plus ergometrine 0.5 mg as the book describes it; carboprost 0.25 mg intramuscularly, repeatable every 15 minutes up to 8 doses for persisting atony, moving to theatre after the second dose as the book advises; misoprostol 400 to 1000 micrograms for PPH where injectables are unavailable, as the book ranges it.",
         "CHOOSE drugs she can survive: never ergometrine in pre-eclampsia, eclampsia, hypertension or cardiac disease, where it provokes hypertensive and coronary events; never carboprost in asthma, where it provokes bronchospasm. The wrong uterotonic trades bleeding for a second emergency.",
-        "GIVE tranexamic acid early in every major bleed, alongside resuscitation rather than after it. Early administration reduces death from bleeding; late administration loses the benefit.",
-        "TREAT the cause found: repair cervical, vaginal and perineal tears in layers under good light with an assistant; evacuate retained tissue by controlled cord traction where indicated or manual removal under anaesthesia; correct coagulopathy with plasma, cryoprecipitate, fibrinogen and platelets guided by the clotting screen.",
+        "GIVE tranexamic acid 1 g by slow intravenous injection over 10 minutes as early as possible and within 3 hours of birth in every major bleed, alongside resuscitation rather than after it. Early administration reduces death from bleeding; late administration loses the benefit.",
+        "TREAT the cause found: repair cervical, vaginal and perineal tears in layers under good light with an assistant, including any bleeding angle of an episiotomy; explore the uterus and remove retained tissue under anaesthesia with ultrasound guidance, since cord traction is only for a placenta not yet delivered with a contracted uterus; correct coagulopathy with plasma, cryoprecipitate, fibrinogen and platelets guided by the clotting screen.",
         "ESCALATE mechanically then surgically when bleeding persists: bimanual compression, then intrauterine balloon tamponade, using a Foley catheter where a Rusch balloon is unavailable; then compression sutures such as B-Lynch, uterine or internal iliac ligation and embolisation where available, with hysterectomy as the last resort that saves life at the cost of fertility.",
         "PREVENT and REFER: actively manage every third stage with a prophylactic uterotonic, controlled cord traction and delayed cord clamping; from a primary centre resuscitate, give the first drugs and tranexamic acid, then refer early to a unit with blood, theatre and critical care, using free ambulance transport and cashless mother child schemes where available."
       ],
@@ -694,6 +694,11 @@
         {
           "locator": "WHO recommendations for the prevention and treatment of postpartum haemorrhage",
           "source": "WHO"
+        },
+        {
+          "locator": "First-response box and atonic PPH pharmacotherapy (oxytocin infusion, tranexamic acid 1 g slow IV within 3 hours, manual removal for retained tissue)",
+          "source": "ICMR and DHR, MoHFW: Standard Treatment Workflow, Postpartum haemorrhage (December 2025)",
+          "url": "https://www.icmr.gov.in/icmrobject/uploads/STWs/1768382528_updatedpostpartumhaemorrhage.pdf"
         }
       ],
       "system": "obstetrics",
@@ -764,7 +769,7 @@
           "pph",
           "postpartum hemorrhage"
         ],
-        "answer": "Primary atonic postpartum haemorrhage three hours after normal vaginal delivery, with measured major loss and maternal tachycardia and hypotension, responding to massage and uterotonics.",
+        "answer": "Primary atonic postpartum haemorrhage three hours after normal vaginal delivery, with measured major loss and maternal tachycardia and hypotension, still bleeding despite massage and uterotonics, with slight oozing from one episiotomy angle that needs inspection and repair.",
         "minMatch": 1
       },
       "differentialModel": {
@@ -795,7 +800,7 @@
         },
         "skill.exam.obg.preg_prep_inspect": {
           "abnormal": true,
-          "finding": "Bright red vaginal bleeding with large clots, soaking about one pad every twenty minutes. Right mediolateral episiotomy clean with slight oozing from one angle. No visible cervical tissue or tear on inspection."
+          "finding": "Bright red vaginal bleeding with large clots, soaking about one pad every twenty minutes. Right mediolateral episiotomy with slight but steady oozing from one angle that needs inspection and suture under good light. No visible cervical tissue or tear on inspection."
         },
         "skill.exam.obg.puerperal_exam": {
           "abnormal": true,
@@ -997,9 +1002,10 @@
           "monitor",
           "blood",
           "tamponade",
+          "repair",
           "refer"
         ],
-        "answer": "Resuscitate with oxygen, warmed fluids and blood transfusion, continuous vitals with strict urine output, firm uterine massage with bladder catheterisation, oxytocin with further uterotonics, early tranexamic acid, ongoing monitoring with serial counts, and referral readiness if bleeding persists.",
+        "answer": "Resuscitate with oxygen, warmed fluids and blood transfusion, continuous vitals with strict urine output, firm uterine massage with bladder catheterisation, oxytocin with further uterotonics, early tranexamic acid, inspection of the episiotomy angle with suture of any bleeding tear, ongoing monitoring with serial counts, and referral readiness if bleeding persists.",
         "minMatch": 3
       },
       "opening": "Sunita, 24, a second gravida, delivered normally three hours ago at the district hospital and has bled heavily since, with dizziness on sitting up. Introduce yourself and take a history.",
@@ -1019,7 +1025,8 @@
         "Quantify everything: 900 mL measured with a pulse of 118 and a soft pressure is major bleeding whatever the linen suggests, and it already justifies blood.",
         "The first haemoglobin is history, not news. It shows the pre-bleed state, so resuscitation and transfusion follow vitals and measured loss, not the count.",
         "Normal clotting with continued bleeding keeps you on tone and tears; oozing sites with falling fibrinogen would move plasma and fibrinogen to the front instead.",
-        "From a primary setting this mother is resuscitated with the first drugs and tranexamic acid, then referred early with blood running, not kept until she collapses."
+        "From a primary setting this mother is resuscitated with the first drugs and tranexamic acid, then referred early with blood running, not kept until she collapses.",
+        "The episiotomy angle still oozes: atony explains most of this loss, but one mother can bleed from two causes at once, so every tear and angle is inspected under good light and sutured."
       ],
       "title": "A second gravida bleeding three hours after normal delivery"
     }

@@ -137,7 +137,7 @@
      "expect": "Expect concurrent stunting: a low length for age alongside low weight for length means acute-on-chronic failure with a longer recovery road."
     },
     "skill.exam.paed.muac": {
-     "expect": "Expect the red zone below 12.5 cm in the 1 to 5 year window. MUAC is the one number oedema cannot inflate, so it outranks the scale in kwashiorkor."
+     "expect": "Expect the red zone below 11.5 cm in the 6 to 59 month window. MUAC is the one number oedema cannot inflate, so it outranks the scale in kwashiorkor."
     },
     "skill.exam.paed.skin_lesions": {
      "expect": "Expect flaky-paint patches over buttocks and thighs with dry cracked skin at pressure areas, plus sparse straight hair with pale bands that plucks easily."
@@ -346,11 +346,11 @@
    "teach": [
     {
      "heading": "Read the scale with suspicion",
-     "body": "Weigh first, then distrust the number. Oedema adds kilograms of water that hide wasting, so a child can read grade 2 by weight for age while being severely wasted underneath. Always pair the weight with MUAC and an oedema check before grading.\n\nA Shakir tape in the red zone, below 12.5 cm, marks severe undernutrition in the 1 to 5 year window regardless of what the scale suggests. Length or height completes the set by separating acute wasting from chronic stunting."
+     "body": "Weigh first, then distrust the number. Oedema adds kilograms of water that hide wasting, so a child can read grade 2 by weight for age while being severely wasted underneath. Always pair the weight with MUAC and an oedema check before grading.\n\nA colour-coded MUAC tape in the red zone, below 11.5 cm, marks severe acute malnutrition in the 6 to 59 month window regardless of what the scale suggests, while 11.5 to 12.5 cm marks moderate wasting. Length or height completes the set by separating acute wasting from chronic stunting."
     },
     {
      "heading": "Oedema, hair, skin and liver",
-     "body": "Press firmly over the shin bone for five seconds: a pit that remains is the finding. Feet only is early, legs and hands is spreading, and face with ascites is advanced, and any bilateral pitting oedema of nutritional origin already means SAM.\n\nAdd the kwashiorkor flags: sparse, straight, easily plucked hair with pale bands; flaky-paint patches over pressure areas; a moon face that looks plump above a wasted body; and a soft enlarged liver edge from fatty change."
+     "body": "Press firmly with the thumb for three seconds over the dorsum of both feet or the shins: a pit that remains is the finding. Feet only is mild (grade +), legs and hands is moderate (grade ++), and generalised swelling including the face is severe (grade +++), and any bilateral pitting oedema of nutritional origin already means SAM.\n\nAdd the kwashiorkor flags: sparse, straight, easily plucked hair with pale bands; flaky-paint patches over pressure areas; a moon face that looks plump above a wasted body; and a soft enlarged liver edge from fatty change."
     },
     {
      "heading": "Behaviour, temperature and sugar: the quiet killers",
@@ -365,7 +365,7 @@
     {
      "level": 1,
      "q": "How do you test for nutritional oedema at the bedside?",
-     "a": "Press firmly over the shin for five seconds and look for a remaining pit, checking feet, legs, hands and face in order.",
+     "a": "Press firmly with the thumb for three seconds and look for a remaining pit, checking feet, legs, hands and face in order.",
      "accept": [
       "press",
       "pit",
@@ -427,7 +427,7 @@
     },
     {
      "heading": "A worked example",
-     "body": "This 22-month-old girl, low birth weight with diluted animal milk feeds from four months and no measles vaccine, has marasmic kwashiorkor: bilateral pedal oedema with a MUAC in the red zone below 12.5 cm, sparse hair and flaky skin, with failed appetite, making this complicated SAM.\n\nShe is hypothermic with a cough but no fever, suggesting occult infection. For this I propose inpatient stabilisation with warming, cautious starter feeds, empirical antibiotics, blood sugar and infection screening, and micronutrients without iron."
+     "body": "This 22-month-old girl, low birth weight with diluted animal milk feeds from four months and no measles vaccine, has marasmic kwashiorkor: bilateral pedal oedema with a MUAC of 11.0 cm in the red zone below 11.5 cm, sparse hair and flaky skin, with failed appetite, making this complicated SAM.\n\nShe is hypothermic with a cough but no fever, suggesting occult infection. For this I propose inpatient stabilisation with warming, cautious starter feeds, empirical antibiotics, blood sugar and infection screening, and micronutrients without iron."
     }
    ],
    "probes": [
@@ -556,7 +556,7 @@
    "teach": [
     {
      "heading": "Confirm: tape, scale and appetite",
-     "body": "Confirm SAM with MUAC, weight-for-height and a bilateral oedema check, recording which criterion is met. A Shakir tape reading below 12.5 cm marks severe undernutrition in the 1 to 5 year window; any bilateral pitting oedema of nutritional origin confirms SAM on its own.\n\nRun the appetite test with ready-to-use therapeutic food under observation: eager finishing passes toward community care, refusal or force-feeding fails toward admission. Document the result exactly, since it is the admission criterion."
+     "body": "Confirm SAM with MUAC, weight-for-height and a bilateral oedema check, recording which criterion is met. A colour-coded MUAC tape reading below 11.5 cm in the red zone marks severe acute malnutrition in the 6 to 59 month window (11.5 to 12.5 cm indicates moderate acute malnutrition); any bilateral pitting oedema of nutritional origin confirms SAM on its own.\n\nRun the appetite test with ready-to-use therapeutic food under observation: eager finishing passes toward community care, refusal or force-feeding fails toward admission. Document the result exactly, since it is the admission criterion."
     },
     {
      "heading": "Grade the silent killers",
@@ -571,7 +571,7 @@
     {
      "level": 1,
      "q": "What three bedside steps confirm SAM?",
-     "a": "MUAC with the Shakir tape, weight for height, and a bilateral oedema check, plus the appetite test.",
+     "a": "MUAC with the colour-coded tape, weight for height, and a bilateral oedema check, plus the appetite test.",
      "accept": [
       "muac",
       "weight",
@@ -1007,7 +1007,7 @@
      "abnormal": true
     },
     "skill.gen.paed.edema": {
-     "finding": "Bilateral pitting oedema: feet and legs to the knees, hands puffy, face full. Pits for several seconds after five seconds of firm pressure over the shin.",
+     "finding": "Bilateral pitting oedema: feet and legs to the knees, hands puffy, face full. Pits for several seconds after three seconds of firm pressure over the shin.",
      "abnormal": true
     },
     "skill.gen.paed.pallor": {
@@ -1015,7 +1015,7 @@
      "abnormal": true
     },
     "skill.gen.paed.hydration": {
-     "finding": "Alertness reduced with weak cry, sunken eyes with absent tears, dry mouth. Skin pinch goes back slowly. Passed urine twice today.",
+     "finding": "Alertness reduced with weak cry, rapid low-volume pulse, and oliguria with urine passed only twice today. Sunken eyes, dry mouth and slow skin pinch are noted but reflect loss of orbital and subcutaneous fat in SAM; cautious oral sips of low-sodium rehydration solution are taken slowly without respiratory distress or fluid overload, judging true hydration by alertness, pulse character, urine output and cautious fluid response rather than misleading eyes or skin turgor.",
      "abnormal": true
     },
     "skill.exam.paed.weight": {
@@ -1027,7 +1027,7 @@
      "abnormal": true
     },
     "skill.exam.paed.muac": {
-     "finding": "MUAC 11.0 cm, in the red zone below 12.5 cm, measured midway between shoulder and elbow with the arm hanging.",
+     "finding": "MUAC 11.0 cm, in the red zone below 11.5 cm, measured midway between shoulder and elbow with the arm hanging.",
      "abnormal": true
     },
     "skill.exam.paed.skin_lesions": {

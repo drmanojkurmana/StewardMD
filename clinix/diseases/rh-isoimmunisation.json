@@ -445,8 +445,8 @@
               ],
               [
                 "Paternal status",
-                "B Rh-positive, homozygous RhD",
-                "100 percent probability of RhD-positive fetus"
+                "B Rh-positive, zygosity unknown",
+                "Fetus at risk; confirm fetal RhD status by paternal RHD genotyping or cell-free fetal DNA"
               ],
               [
                 "Obstetric history",
@@ -746,26 +746,26 @@
             "rows": [
               [
                 "20 weeks",
-                "20 to 24 cm/s",
-                "30 to 36 cm/s",
+                "Median PSV about 25 cm/s",
+                "About 38 cm/s",
                 "Values > 1.5 MoM indicate moderate to severe anaemia"
               ],
               [
                 "24 weeks",
-                "25 to 29 cm/s",
-                "38 to 44 cm/s",
+                "Median PSV about 30 cm/s",
+                "About 46 cm/s",
                 "Indicates cordocentesis and intrauterine transfusion"
               ],
               [
                 "28 weeks",
-                "28 to 32 cm/s",
-                "42 to 48 cm/s",
+                "Median PSV about 37 cm/s",
+                "About 55 cm/s",
                 "Serial scans performed every 1 to 2 weeks"
               ],
               [
                 "32 weeks",
-                "35 to 40 cm/s",
-                "53 to 60 cm/s",
+                "Median PSV about 44 cm/s",
+                "About 66 cm/s",
                 "Balance intrauterine transfusion against delivery"
               ]
             ]
@@ -861,7 +861,7 @@
         },
         {
           "heading": "Stratifying severity of fetal anaemia",
-          "body": "Fetal anaemia is stratified by middle cerebral artery Doppler velocity into mild (MCA-PSV 1.29 to 1.50 MoM), moderate (1.50 to 1.55 MoM), and severe (greater than 1.55 MoM or associated with hydrops).\n\nWhen MCA-PSV exceeds 1.50 MoM, the sensitivity for detecting moderate to severe anaemia (haemoglobin deficit greater than 5 standard deviations) approaches 100 percent."
+          "body": "Fetal anaemia is stratified by middle cerebral artery Doppler velocity: an MCA-PSV above 1.5 MoM indicates moderate to severe anaemia, while lesser elevations without hydrops suggest mild disease managed with close serial surveillance.\n\nWhen MCA-PSV exceeds 1.5 MoM, the sensitivity for detecting moderate to severe fetal anaemia approaches 100 percent, so fetal blood sampling is indicated."
         },
         {
           "heading": "Constructing the complete diagnostic statement",
@@ -923,11 +923,11 @@
       "teach": [
         {
           "heading": "Routine antenatal anti-D prophylaxis (RAADP)",
-          "body": "All unsensitised Rh-negative pregnant women should receive routine antenatal anti-D prophylaxis. In India, a single dose of 300 micrograms (1500 IU) is administered intramuscularly between 28 and 30 weeks of gestation.\n\nAn alternative two-dose regimen offers 100 to 120 micrograms (500 to 625 IU) at 28 weeks and again at 34 weeks. Prophylaxis is withheld only if the biological father is confirmed Rh-negative or cell-free fetal DNA confirms an Rh-negative fetus."
+          "body": "All unsensitised Rh-negative pregnant women should receive routine antenatal anti-D prophylaxis. In India, a single dose of 300 micrograms (1500 IU) is administered intramuscularly between 28 and 30 weeks of gestation.\n\nAn alternative two-dose regimen offers 500 IU (100 micrograms) at 28 weeks and again at 34 weeks. Prophylaxis is withheld only if the biological father is confirmed Rh-negative or cell-free fetal DNA confirms an Rh-negative fetus."
         },
         {
           "heading": "Postpartum prophylaxis and the 72-hour window",
-          "body": "Following delivery, cord blood is collected to determine neonatal ABO and Rh status and direct antiglobulin test (DAT). If the neonate is Rh-positive and the mother is unsensitised, 300 micrograms (1500 IU) of anti-D is administered intramuscularly within 72 hours.\n\nIf the 72-hour window is missed, anti-D should still be administered as soon as realized, up to 28 days postpartum, because substantial protection is still achieved."
+          "body": "Following delivery, cord blood is collected to determine neonatal ABO and Rh status and direct antiglobulin test (DAT). If the neonate is Rh-positive and the mother is unsensitised, 300 micrograms (1500 IU) of anti-D is administered intramuscularly within 72 hours.\n\nIf the 72-hour window is missed, anti-D should still be administered as soon as the omission is realised."
         },
         {
           "heading": "Dosage regimens for sensitising events in pregnancy",
@@ -953,7 +953,13 @@
               ],
               [
                 "Amniocentesis, CVS, ECV",
-                "Any gestational age",
+                "Before 20 weeks",
+                "50 micrograms (250 IU) IM",
+                "250 IU (50 micrograms) IM"
+              ],
+              [
+                "Amniocentesis, CVS, ECV",
+                "At or after 20 weeks",
                 "300 micrograms (1500 IU) IM",
                 "500 IU (100 micrograms) IM"
               ],
@@ -975,12 +981,12 @@
         {
           "level": 1,
           "q": "What should be done if an Rh-negative mother did not receive anti-D immunoglobulin within the standard 72-hour postpartum window?",
-          "a": "Anti-D immunoglobulin should still be administered as soon as the omission is recognized, up to 28 days postpartum, as partial immunological protection is still conferred.",
+          "a": "Anti-D immunoglobulin should still be administered as soon as the omission is recognised, even though protection is greatest within 72 hours.",
           "accept": [
             "administered",
-            "28 days",
             "as soon as",
-            "partial protection",
+            "omission",
+            "recognised",
             "postpartum"
           ],
           "minMatch": 2
@@ -1008,6 +1014,10 @@
         {
           "source": "FOGSI",
           "locator": "FOGSI GCPR: Routine Antenatal Care and Immunoprophylaxis"
+        },
+        {
+          "source": "RCOG",
+          "locator": "The Use of Anti-D Immunoglobulin for RhD Prophylaxis: routine antenatal prophylaxis"
         }
       ],
       "review": {
@@ -1215,7 +1225,7 @@
             "do you know your husband rh status",
             "what is your spouse blood type"
           ],
-          "reply": "My husband had his blood checked at the district hospital when they found I was Rh-negative. His blood group is B Rh-positive, and both of his parents are also Rh-positive."
+          "reply": "My husband had his blood checked at the district hospital when they found I was Rh-negative. His blood group is B Rh-positive. The doctor said further testing is needed to confirm whether our baby will be Rh-positive."
         },
         "anc_visits_trail": {
           "cues": [
@@ -1362,8 +1372,8 @@
         },
         "paternal_blood_group": {
           "label": "Paternal blood group and Rh phenotyping",
-          "result": "Blood Group B, Rh (D) Positive, homozygous for D antigen (D/D)",
-          "note": "Paternal homozygosity guarantees 100% probability of an RhD-positive fetus."
+          "result": "Blood Group B, Rh (D) Positive (phenotype only; zygosity not established)",
+          "note": "Paternal Rh-positive phenotype places the fetus at risk; paternal RHD genotyping and fetal RhD testing are needed to confirm fetal status."
         },
         "complete_blood_count": {
           "label": "Maternal complete blood count",
@@ -1372,7 +1382,7 @@
         },
         "ultrasound_mca_doppler": {
           "label": "Fetal ultrasound biometry and middle cerebral artery Doppler",
-          "result": "Single live fetus, biometry 28 weeks, normal liquor (AFI 14 cm), no hydrops. Middle cerebral artery peak systolic velocity (MCA-PSV) is 48 cm/s (1.6 MoM for 28 weeks, median 30 cm/s).",
+          "result": "Single live fetus, biometry 28 weeks, normal liquor (AFI 14 cm), no hydrops. Middle cerebral artery peak systolic velocity (MCA-PSV) is 59 cm/s (1.6 MoM for 28 weeks, median 37 cm/s).",
           "note": "MCA-PSV exceeding 1.5 MoM indicates moderate to severe fetal anaemia, warranting cordocentesis and intrauterine transfusion."
         },
         "fetal_cardiotocography": {

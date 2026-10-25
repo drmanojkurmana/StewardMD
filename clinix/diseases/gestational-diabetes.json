@@ -816,7 +816,7 @@
         "CONFIRM: glucose tolerance testing with fasting and post-load values around 24 to 28 weeks, or earlier in high risk; document test and gestation with every value.",
         "GRADE CONTROL: home capillary monitoring of fasting and post-meal values to steer therapy; control is judged on the diary, not on one clinic value.",
         "EXCLUDE OVERT DISEASE: HbA1c measured early helps separate pre-existing diabetes from true gestational disease.",
-        "WATCH THE FETUS: serial growth ultrasound for excessive growth with measurement of liquor volume; extra liquor and a large abdominal circumference change the delivery plan.",
+        "WATCH THE FETUS: serial growth ultrasound for excessive growth with measurement of liquor volume; extra liquor and a large abdominal circumference change the delivery plan. Reduced movements or a non-reassuring trace need same-day review with cardiotocography, whatever the glucose shows.",
         "CATCH THE COMPANIONS: blood pressure with urine protein at every contact, and urine culture where burning or repeated infection suggests it.",
         "CLOSE THE LOOP: postpartum tolerance testing to reclassify glucose status, since most mothers normalise but many return diabetic within years.",
         "The single most important principle: never let the wait for a confirmatory test delay diet, monitoring and referral in a woman whose values are already clearly high."
@@ -843,7 +843,7 @@
           "q": "Which test confirms, which grades control, and which excludes overt disease?"
         },
         {
-          "a": "Serial growth ultrasound with liquor assessment, because excessive growth with extra liquor changes the timing and mode of delivery.",
+          "a": "Serial growth ultrasound with liquor assessment, because excessive growth with extra liquor changes the timing and mode of delivery; reduced movements need same-day review with cardiotocography.",
           "accept": [
             "growth",
             "liquor",
@@ -1017,6 +1017,7 @@
         "hba1c",
         "growth_us",
         "liquor_assess",
+        "ctg",
         "urine_routine"
       ],
       "exam": {
@@ -1237,6 +1238,12 @@
         "temp": 37.1
       },
       "investigations": {
+        "ctg": {
+          "indicated": true,
+          "label": "Cardiotocography",
+          "note": "A week of reduced movements with overgrowth and extra liquor needs same-day fetal surveillance; auscultation alone cannot rule out compromise.",
+          "result": "Same-day trace arranged for reduced movements: baseline 140 per minute with normal variability, accelerations present, no concerning decelerations."
+        },
         "growth_us": {
           "indicated": true,
           "label": "Obstetric growth ultrasound",
@@ -1282,6 +1289,7 @@
       },
       "managementModel": {
         "accept": [
+          "same-day cardiotocography review",
           "nutrition therapy",
           "glucose monitoring",
           "insulin",
@@ -1289,7 +1297,7 @@
           "neonatal glucose",
           "postpartum testing"
         ],
-        "answer": "Medical nutrition therapy with home glucose monitoring and daily walking; add insulin, preferred in pregnancy, if targets are unmet; serial growth and liquor surveillance with urine infection treated; a delivery plan accounting for macrosomia with shoulder injury prepared for; early feeding with neonatal glucose monitoring; and postpartum testing with counselling on future type 2 diabetes.",
+        "answer": "Same-day cardiotocography review for a week of reduced movements; medical nutrition therapy with home glucose monitoring and daily walking; add insulin, preferred in pregnancy, if targets are unmet; serial growth and liquor surveillance with urine infection treated; a delivery plan accounting for macrosomia with shoulder injury prepared for; early feeding with neonatal glucose monitoring; and postpartum testing with counselling on future type 2 diabetes.",
         "minMatch": 3
       },
       "opening": "Sunita Patil, 29 years old, 30 weeks pregnant with her second child, has been referred from her antenatal clinic because her sugar test came high. Take her history.",
@@ -1308,6 +1316,7 @@
         "A previous difficult shoulder delivery with a very big baby is doing double work: it predicts recurrence and it already argues for a planned delivery this time.",
         "Fundal height weeks ahead of dates with a tense uterus and impalpable parts is extra liquor until assessed, not just a large baby, and each changes the plan.",
         "Normal pressure with absent proteinuria is a relevant negative that must be stated, since hypertension is the commonest companion and its absence is doing real work.",
+        "A week of reduced movements with overgrowth and extra liquor needs same-day review with cardiotocography, not routine surveillance alone; a normal rate on auscultation does not rule out compromise.",
         "Thrush with urinary burning is not a side complaint here: infection both signals and worsens poor control and must be treated as part of glycaemic management.",
         "Postpartum retesting closes the loop for the mother, whose lifetime risk has just risen even as her glucose normalises after birth.",
         "The neonate needs glucose monitoring despite a smooth birth, because maternal supply stops at cord clamping while fetal insulin stays high."
