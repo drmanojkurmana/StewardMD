@@ -141,7 +141,7 @@
     views: null, loading: false, err: false, viewId: null, probe: null,
     geom: null, heart: null, timer: null, unbind: [], knobsOpen: false,
     knobs: { gain: 55, depth: 160, focus: 55, tgc: [50,50,50,50,50,50,50,50], frequencyMHz: 3.0, sectorDeg: 80, dynamicRange: 55, colourGain: 70, colourNyquistMs: 0.6 }, holdSince: null, gyroMsg: "",
-    mode: "2d", frozen: false, echolab: null, pathology: null, pathologyId: "", severity: "", measureUI: null, audioHandle: null, anatomyState: "idle", liveCanvases: null,
+    mode: "2d", frozen: false, echolab: null, scanlab: null, pathology: null, pathologyId: "", severity: "", measureUI: null, audioHandle: null, anatomyState: "idle", liveCanvases: null,
     lastCutAt: 0, polys: null, phase: 0
   };
 
@@ -263,6 +263,7 @@
     }
     var gyroOn = !!(st8 && st8.gyroOn);
     return head +
+      '<div id="krdScanLab"></div>' +
       '<div class="krd-lab" id="krdLab">' +
       '<div class="krd-chips" role="group" aria-label="' + I.tx(T("Target views", "Target views")) + '">' + chips + "</div>" +
       '<h3 class="sp-h3 krd-target-name" id="krdTargetName">' + I.esc(cur.name) + '</h3>' +
@@ -599,6 +600,13 @@
   }
   function mountEchoLab() {
     stopEchoLab();
+    try {
+      var slRoot = G.document && G.document.getElementById("krdScanLab");
+      if (slRoot && G.KARDIA_SCANLAB && G.KARDIA_SCANLAB.create && !EL.scanlab) {
+        EL.scanlab = G.KARDIA_SCANLAB.create({ doc: G.document, root: slRoot, pathology: EL.pathology || null, geom: EL.geom || null, heart: EL.heart || null });
+        if (EL.scanlab && EL.viewId && G.KARDIA_SCANLAB.debugPose) { /* runner seam stays on KARDIA_SCANLAB */ }
+      }
+    } catch (e) { /* canvas failure: classic Echo Lab controls below stay as fallback */ }
     var p = ensureEchoProbe(), cur = echoCurrentView();
     if (!p || !cur) { drawEchoSector(); return; }
     if (p.getState().window !== cur.window || EL.viewId !== cur.id) startEchoTarget(cur, false);
@@ -992,7 +1000,7 @@
       setMode: function (m) { EL.mode = m; var lab = ensureEchoLab(); if (lab) lab.setMode(m); return EL.mode; },
       get knobs() { return EL.knobs; },
       setKnob: function (k, v) { EL.knobs[k] = v; return EL.knobs; },
-      applyPathology: function (cond, sev) { var lab = ensureEchoLab(); if (lab) lab.applyPathology(cond, sev); EL.pathology = cond; return lab ? lab.getSpectrum() : null; },
+      applyPathology: function (cond, sev) { var lab = ensureEchoLab(); if (lab) lab.applyPathology(cond, sev); EL.pathology = cond; if (EL.scanlab && EL.scanlab.setPathology) EL.scanlab.setPathology({ id: cond && cond.id, severity: sev }); return lab ? lab.getSpectrum() : null; },
       freeze: function (f) { EL.frozen = !!f; var lab = ensureEchoLab(); if (lab) lab.setFrozen(f); },
       openMeasure: function () { openMeasure(); return EL.measureUI; },
       stateForView: function (id) { var p = ensureEchoProbe(); return p ? p.stateForView(id) : null; }

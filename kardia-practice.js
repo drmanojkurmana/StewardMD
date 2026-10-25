@@ -961,7 +961,8 @@
       G.KARDIA_CLIPS.attach(P.host);
       G.KARDIA_CLIPS.load().then(function () {
         var box = G.document.getElementById("krdpCredits");
-        if (box && P.screen === "credits") box.innerHTML = G.KARDIA_CLIPS.creditsHtml();
+        if (box && P.screen === "credits") box.innerHTML = G.KARDIA_CLIPS.creditsHtml() +
+          ((G.KARDIA_SCANLAB && G.KARDIA_SCANLAB.bodyCreditsHtml) ? '<h3 class="sp-h3">Body models</h3>' + G.KARDIA_SCANLAB.bodyCreditsHtml() : "");
       }, function () {
         var box = G.document.getElementById("krdpCredits");
         if (box) box.innerHTML = '<p class="krdp-err" role="alert">Credits did not load. Check the connection and try again.</p>';
