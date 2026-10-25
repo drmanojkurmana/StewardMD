@@ -104,9 +104,9 @@
     out.v = state.v + f * dt; out.x = state.x + out.v * dt; return out;
   }
   var TUTORIAL = [
-    { id: "grip", title: "Hold the grip", body: "Drag the round grip to slide the probe along the skin. The probe stays on the body while you slide." },
-    { id: "marker", title: "Turn the marker", body: "Drag the dashed marker ring to rotate the probe. The marker dot on the monitor turns with it." },
-    { id: "tilt", title: "Fan and rock the tail", body: "Drag the tail up or down to fan the beam, and side to side to rock it. Small movements change the cut a lot." },
+    { id: "grip", title: "Grip: slide on the skin", body: "Grip: drag the round grip to slide the probe along the skin. The probe stays on the body while you slide. The contact point leads; rotation and tilt follow it." },
+    { id: "marker", title: "Marker: turn the probe", body: "Marker: drag the blue dashed ring around the probe to rotate it. The marker dot on the monitor turns with it, so the left of the screen stays matched to the marker side." },
+    { id: "tilt", title: "Tail: fan and rock", body: "Tail: keep the grip still and move the tail. Up and down fans the beam through the heart; side to side rocks it. Small tail movements change the cut a lot." },
     { id: "depth", title: "Set the depth", body: "Use the depth control so the structure of interest sits in the middle of the sector, with a little room beyond it." },
     { id: "orbit", title: "Look around the body", body: "Drag empty skin to orbit the body. Use two fingers to zoom. Double tap resets the view. The layer control switches between skin, glass and anatomy." },
     { id: "target", title: "Find the ghost", body: "The pale ghost probe shows the target pose. Match the contact point first, then the rotation, then the fan and rock." },
@@ -280,9 +280,60 @@
     var normal = norm3(cross3(marker, beam));
     return { origin: origin, normal: normal, up: mul3(beam, -1), beam: beam, marker: marker };
   }
+  function ptTriDist(p, a, b, c) {
+    var ab = sub3(b, a), ac = sub3(c, a), ap = sub3(p, a);
+    var d1 = dot3(ab, ap), d2 = dot3(ac, ap);
+    function distTo(q) { var d = sub3(p, q); return Math.sqrt(dot3(d, d)); }
+    if (d1 <= 0 && d2 <= 0) return distTo(a);
+    var bp = sub3(p, b), d3 = dot3(ab, bp), d4 = dot3(ac, bp);
+    if (d3 >= 0 && d4 <= d3) return distTo(b);
+    var vc = d1 * d4 - d3 * d2;
+    if (vc <= 0 && d1 >= 0 && d3 <= 0) { var v = d1 / (d1 - d3); return distTo(add3(a, mul3(ab, v))); }
+    var cp = sub3(p, c), d5 = dot3(ab, cp), d6 = dot3(ac, cp);
+    if (d6 >= 0 && d5 <= d6) return distTo(c);
+    var vb = d5 * d2 - d1 * d6;
+    if (vb <= 0 && d2 >= 0 && d6 <= 0) { var w = d2 / (d2 - d6); return distTo(add3(a, mul3(ac, w))); }
+    var va = d3 * d6 - d5 * d4;
+    if (va <= 0 && (d4 - d3) >= 0 && (d5 - d6) >= 0) { var w2 = (d4 - d3) / ((d4 - d3) + (d5 - d6)); return distTo(add3(b, mul3(sub3(c, b), w2))); }
+    var den = 1 / (va + vb + vc), vv = vb * den, ww = vc * den;
+    return distTo(add3(a, add3(mul3(ab, vv), mul3(ac, ww))));
+  }
+  function skinDistanceMm(mesh, point) {
+    var positions = meshPositionsArray(mesh), indices = mesh.indices, best = Infinity, i;
+    for (i = 0; i + 2 < indices.length; i += 3) {
+      var a = positions[indices[i]], b = positions[indices[i + 1]], c = positions[indices[i + 2]];
+      if (!a || !b || !c) continue;
+      var d = ptTriDist(point, a, b, c); if (d < best) best = d;
+    }
+    return best;
+  }
+  function inLandmark(contact, family, landmarks) {
+    var r = landmarks && landmarks[family]; if (!r || !contact) return false;
+    return contact[0] >= r.x[0] && contact[0] <= r.x[1] && contact[2] >= r.z[0] && contact[2] <= r.z[1];
+  }
+  /* Beat scale from the cardiac cycle: contraction through systole
+   * (first 35 percent), then refill. 1 at end diastole. */
+  function heartBeatScale(cycle01) {
+    var t = ((cycle01 % 1) + 1) % 1;
+    if (t < 0.35) return 1 - 0.045 * Math.sin(Math.PI * t / 0.35);
+    return 0.985 + 0.015 * Math.sin(Math.PI * (t - 0.35) / 0.65);
+  }
+  /* Great vessels and coronaries as curved patient-frame paths (mm).
+   * No straight vertical tubes: the aorta ascends, arches posteriorly
+   * and to the left, then descends behind the heart. */
+  var HEART_VESSELS = {
+    aorta: [[4, 0, 14], [7, -2, 36], [3, -10, 52], [-13, -19, 50], [-23, -21, 30], [-21, -18, -8], [-18, -15, -44]],
+    pulmonaryTrunk: [[20, 20, 8], [12, 10, 30], [-6, 0, 40], [-24, -6, 36]],
+    svc: [[-17, -9, 30], [-16, -11, 52], [-14, -12, 78]],
+    ivc: [[-15, -5, -30], [-14, -6, -52], [-10, -4, -76]],
+    pulmonaryVeins: [[[-4, -34, 24], [-28, -44, 32], [-48, -46, 30]], [[-2, -34, 4], [-26, -46, 0], [-46, -48, -4]], [[8, -32, 22], [30, -42, 30], [48, -44, 26]], [[10, -30, 2], [32, -42, -2], [48, -44, -6]]],
+    coronaryLAD: [[13, 24, 24], [12, 30, 4], [10, 28, -16], [7, 20, -36]],
+    coronaryRCA: [[24, 16, 20], [34, 8, 2], [30, -8, -20], [16, -16, -32]],
+    coronaryCx: [[4, 2, 28], [-18, -4, 20], [-34, -8, 2], [-38, -14, -16]]
+  };
   var WINDOWS = [
     { id: "parasternal", label: "Parasternal", views: ["plax", "rv_inflow", "rv_outflow"] },
-    { id: "psax", label: "PSAX", views: ["psax_av", "psax_mv", "psax_pm", "psax_apex"] },
+    { id: "psax", label: "Short axis", views: ["psax_av", "psax_mv", "psax_pm", "psax_apex"] },
     { id: "apical", label: "Apical", views: ["a4c", "a5c", "a2c", "a3c"] },
     { id: "subcostal", label: "Subcostal", views: ["subcostal_4c", "ivc", "abdominal_aorta"] },
     { id: "suprasternal", label: "Suprasternal", views: ["suprasternal_arch"] }
@@ -372,7 +423,7 @@
     BODY_CREDITS: BODY_CREDITS, bodyCreditsHtml: bodyCreditsHtml, assetCandidates: assetCandidates, assetFileUrl: assetFileUrl,
     registerPoint: registerPoint, parseGlb: parseGlb, cutTriangles: cutTriangles, HUBMAP_CENTRE: HUBMAP_CENTRE,
     sha256Hex: sha256Hex, ATLAS_CHUNKS: ATLAS_CHUNKS, ATLAS_ORG: ATLAS_ORG, parseAtlasChunk: parseAtlasChunk,
-    planeFromPose: planeFromPose, WINDOWS: WINDOWS, windowForView: windowForView, viewIcon: viewIcon, loadAssets: loadAssets };
+    planeFromPose: planeFromPose, skinDistanceMm: skinDistanceMm, inLandmark: inLandmark, heartBeatScale: heartBeatScale, HEART_VESSELS: HEART_VESSELS, WINDOWS: WINDOWS, windowForView: windowForView, viewIcon: viewIcon, loadAssets: loadAssets };
 
   /* ---------------- browser UI ---------------- */
   function haptic(kind) {
@@ -400,7 +451,7 @@
   }
   /* Patient mm [x left, y anterior, z cranial] to three.js [x, z, -y]. */
   function toScene(p) { return [p[0], p[2], -p[1]]; }
-  function skinY(x, z) { return 96 - Math.pow(Math.abs(x) / 150, 2) * 22 - Math.pow(Math.abs(z - 10) / 190, 2) * 10; }
+  function skinY(x, z) { return 92 - 0.42 * z - Math.pow(Math.abs(x) / 170, 2) * 18; }
 
   function create(opts) {
     opts = opts || {};
@@ -429,26 +480,24 @@
     var realClip = null, realSrc = "", realStatus = "idle", realKey = "", offlineNoted = false, clipRequested = 0;
     var tutStep = 0, tutDone = false;
     try { tutDone = G.localStorage.getItem("ksl_tutorial_done") === "1"; } catch (e) {}
-    var debug = { loadingState: "loading", manifestUrl: "", meshesRegistered: {}, drawCalls: 0, frames: 0, usCalls: 0, usCutPolys: -1, clipRequestedFor: "", realState: "sim", errors: [] };
+    var debug = { loadingState: "loading", manifestUrl: "", meshesRegistered: {}, drawCalls: 0, frames: 0, usCalls: 0, usCutPolys: -1, fps: 0, beatScale: 1, clipRequestedFor: "", realState: "sim", errors: [] };
 
     root.innerHTML =
       '<div class="ksl-wrap" id="kslWrap">' +
       '<section class="ksl-scene-col" aria-label="Body scene">' +
       '<div class="ksl-head"><div><h3 class="ksl-title" id="kslTargetName">' + esc(view.label) + '</h3>' +
-      '<p class="ksl-sub" id="kslFamily">' + esc(view.family) + ' window</p></div>' +
-      '<div class="ksl-head-btns"><button type="button" class="ksl-btn" id="kslPractice">Practice</button>' +
-      '<button type="button" class="ksl-btn" id="kslTutorialBtn">Tutorial</button></div></div>' +
+      '<p class="ksl-sub" id="kslFamily">' + esc(view.family) + ' window</p></div></div>' +
       '<div class="ksl-stage" id="kslStage">' +
       '<canvas id="kslScene" width="720" height="620" aria-label="3D body with probe on the skin. Drag the grip to slide, the marker dashes to rotate, the tail to fan and rock. Drag empty skin to orbit, pinch to zoom, double tap to reset."></canvas>' +
       '<div class="ksl-load" id="kslLoading" role="status"><p class="ksl-note" id="kslLoadText">Loading Scan Lab.</p><div class="ksl-load-track"><span class="ksl-load-fill" id="kslLoadFill"></span></div><button type="button" class="ksl-btn" id="kslRetryLoad" hidden>Retry</button></div>' +
-      '<div class="ksl-stage-btns"><button type="button" class="ksl-chip" id="kslLayersBtn" aria-haspopup="true" aria-expanded="false">Layers</button>' +
-      '<button type="button" class="ksl-chip" id="kslLabels" aria-pressed="false">Labels</button>' +
-      '<button type="button" class="ksl-chip" id="kslFullscreen">Full screen</button></div>' +
+      '<div class="ksl-stage-btns">' +
+      '<button type="button" class="ksl-iconbtn" id="kslPractice" aria-label="Practice this view"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></button>' +
+      '<button type="button" class="ksl-iconbtn" id="kslTutorialBtn" aria-label="Open the tutorial"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 5h11a3 3 0 0 1 3 3v11H8a3 3 0 0 1-3-3z"/><path d="M8 9h7M8 13h5"/></svg></button>' +
+      '<button type="button" class="ksl-iconbtn" id="kslLayersBtn" aria-label="Body layers" aria-haspopup="true" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4l9 5-9 5-9-5z"/><path d="M3 14l9 5 9-5"/></svg></button>' +
+      '<button type="button" class="ksl-iconbtn" id="kslLabels" aria-label="Toggle anatomy labels" aria-pressed="false"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h7l9 9-7 7-9-9z"/><circle cx="8" cy="8" r="1.6"/></svg></button>' +
+      '<button type="button" class="ksl-iconbtn" id="kslFullscreen" aria-label="Full screen"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div>' +
       '<div class="ksl-layers" id="kslLayers" role="group" aria-label="Body layers" hidden>' +
       ["skin", "glass", "anatomy"].map(function (l) { return '<button type="button" class="ksl-chip" data-layer="' + l + '" aria-pressed="' + (l === layer) + '">' + l.charAt(0).toUpperCase() + l.slice(1) + '</button>'; }).join("") + '</div>' +
-      '<div class="ksl-handles"><button type="button" class="ksl-handle" id="kslGrip">Grip: slide on skin</button>' +
-      '<button type="button" class="ksl-handle" id="kslMarker">Marker: rotate</button>' +
-      '<button type="button" class="ksl-handle" id="kslTail">Tail: fan and rock</button></div>' +
       '</div>' +
       '<div class="ksl-readouts" id="kslReadouts">' +
       [["Rotation", "kslRot"], ["Fan", "kslFan"], ["Rock", "kslRock"], ["Depth", "kslDepth"]].map(function (r) {
@@ -464,16 +513,17 @@
       '<div class="ksl-monitor-wrap" id="kslMonitorWrap">' +
       '<canvas id="kslMonitor" width="640" height="480" aria-label="Ultrasound monitor"></canvas>' +
       '<video id="kslReal" muted loop playsinline hidden aria-label="Real patient clip"></video>' +
+      '<span class="ksl-badge" id="kslRealBadge" hidden>Real patient</span>' +
       '</div>' +
       '<p class="ksl-note" id="kslClipNote" role="status" hidden></p>' +
-      '<p class="ksl-note" id="kslAttribution"></p>' +
+      '<details class="ksl-details" id="kslAttrDetails" hidden><summary>Clip details and credits</summary><p class="ksl-note" id="kslAttribution"></p></details>' +
       '<p class="ksl-fps" id="kslFps" role="status"></p>' +
-      '<nav class="ksl-windows" id="kslWindows" aria-label="Windows">' +
+      '<div class="ksl-pickerbar"><nav class="ksl-windows" id="kslWindows" aria-label="Windows">' +
       WINDOWS.map(function (w) { return '<button type="button" class="ksl-chip" data-window="' + w.id + '" id="kslWindow-' + w.id + '" aria-pressed="' + (w.id === activeWindow) + '">' + w.label + '</button>'; }).join("") + '</nav>' +
       '<div class="ksl-views" id="kslViews" role="group" aria-label="Views">' +
       T.VIEWS.map(function (v) {
         return '<button type="button" class="ksl-view" data-view="' + v.id + '" data-win="' + windowForView(v.id) + '" id="kslView-' + v.id + '" aria-pressed="' + (v.id === view.id) + '"><span class="ksl-icon" aria-hidden="true">' + viewIcon(v.id) + '</span><span>' + esc(v.label) + '</span></button>';
-      }).join("") + '</div>' +
+      }).join("") + '</div></div>' +
       '<p class="ksl-credit">Body: HuBMAP Human Reference Atlas (CC BY 4.0) and BodyParts3D (CC BY-SA 2.1 JP), decimated for mobile. Full credits in the Kardia credits list.</p>' +
       '</section></div>';
 
@@ -484,7 +534,20 @@
     /* ---- three.js scene ---- */
     var THREE = null, renderer = null, scene3 = null, camera = null;
     var parts = {}; /* skin, bones, heart, liver, vessels, probe, ghost, beam, labels */
+    var skinVerts = [];
     var registered = {};
+    function skinSurfaceY(x, z) {
+      if (!skinVerts.length) return skinY(x, z);
+      var best = [], i, dx, dz, d, j;
+      for (i = 0; i < skinVerts.length; i++) {
+        dx = skinVerts[i][0] - x; dz = skinVerts[i][2] - z; d = dx * dx + dz * dz;
+        if (best.length < 4) { best.push([d, skinVerts[i][1]]); }
+        else { var mi = 0; for (j = 1; j < 4; j++) if (best[j][0] > best[mi][0]) mi = j; if (d < best[mi][0]) best[mi] = [d, skinVerts[i][1]]; }
+      }
+      var num = 0, den = 0;
+      for (i = 0; i < best.length; i++) { var w = 1 / (best[i][0] + 4); num += w * best[i][1]; den += w; }
+      return den ? num / den : skinY(x, z);
+    }
     function bufferGeom(mesh, filter) {
       var pos = mesh.positionsFlat || mesh.positions, nrm = mesh.normalsFlat || mesh.normals, idx = mesh.indices;
       if (pos && pos.length && typeof pos[0] !== "number") { /* point list */
@@ -512,6 +575,15 @@
       return g;
     }
     function mat(o) { return THREE.MeshStandardMaterial ? new THREE.MeshStandardMaterial(o) : new THREE.MeshBasicMaterial({ color: o.color }); }
+    function phys(o) {
+      if (THREE.MeshPhysicalMaterial) { try { return new THREE.MeshPhysicalMaterial(o); } catch (e) {} }
+      return mat(o);
+    }
+    function tubeFromPath(path, radius, material, name) {
+      var pts = path.map(function (pt) { var sc = toScene(pt); return new THREE.Vector3(sc[0], sc[1], sc[2]); });
+      var m = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), Math.max(12, path.length * 6), radius, lowPower ? 6 : 8), material);
+      if (name) m.name = name; return m;
+    }
     function buildProbeMesh(ghost) {
       var grp = new THREE.Group();
       var bodyM = ghost ? new THREE.MeshBasicMaterial({ color: 0x9cc8e8, transparent: true, opacity: 0.35 }) : mat({ color: 0xe8e6df, roughness: 0.45, metalness: 0.05 });
@@ -545,7 +617,7 @@
       THREE = THREE || G.THREE;
       if (!renderer) {
         renderer = new THREE.WebGLRenderer({ canvas: sceneCanvas, antialias: !lowPower, alpha: false, powerPreference: "high-performance" });
-        renderer.setPixelRatio(Math.min((G.devicePixelRatio || 1), 2));
+        renderer.setPixelRatio(Math.min((G.devicePixelRatio || 1), lowPower ? 1.5 : 2));
         renderer.setSize(sceneCanvas.clientWidth || 720, sceneCanvas.clientHeight || 620, false);
         if (renderer.outputEncoding !== undefined && THREE.sRGBEncoding) renderer.outputEncoding = THREE.sRGBEncoding;
         if (renderer.toneMapping !== undefined && THREE.ACESFilmicToneMapping) { renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05; }
@@ -554,11 +626,13 @@
       }
       scene3 = new THREE.Scene();
       parts = {};
-      if (THREE.Color) scene3.background = new THREE.Color(0x10181d);
-      scene3.add(new THREE.AmbientLight(0xbfd0da, 0.55));
-      var key = new THREE.DirectionalLight(0xffffff, 1.15); key.position.set(180, 320, 260); scene3.add(key);
-      var fill = new THREE.DirectionalLight(0x9fb8cc, 0.45); fill.position.set(-260, 120, -160); scene3.add(fill);
-      var rim = new THREE.DirectionalLight(0xffffff, 0.35); rim.position.set(-80, 200, -300); scene3.add(rim);
+      if (THREE.Color) scene3.background = new THREE.Color(0x0b1116);
+      if (THREE.Fog) scene3.fog = new THREE.Fog(0x0b1116, 750, 1450);
+      if (THREE.HemisphereLight) scene3.add(new THREE.HemisphereLight(0xdfeaf2, 0x1c1712, 0.5));
+      scene3.add(new THREE.AmbientLight(0xbfd0da, 0.28));
+      var key = new THREE.DirectionalLight(0xfff2e2, 1.35); key.position.set(180, 320, -260); scene3.add(key);
+      var fill = new THREE.DirectionalLight(0x9fb8cc, 0.42); fill.position.set(-260, 120, -140); scene3.add(fill);
+      var rim = new THREE.DirectionalLight(0xcfe6ff, 0.65); rim.position.set(-80, 200, 300); scene3.add(rim);
       var grp = new THREE.Group(); scene3.add(grp); parts.root = grp;
       function addMesh(name, mesh, material, filter, renderOrder) {
         if (!mesh) return null;
@@ -567,11 +641,15 @@
         grp.add(m); registered[name] = mesh.vertexCount; debug.meshesRegistered[name] = mesh.vertexCount;
         return m;
       }
-      parts.skin = addMesh("skin", meshes["skin-visible-human-male.glb"], mat({ color: 0x9a7a66, roughness: 0.7, metalness: 0, transparent: true, opacity: 0.16, side: THREE.DoubleSide, depthWrite: false }), null, 10);
-      parts.bones = addMesh("bones", meshes["bones-thorax-bodyparts3d.bin.gz"], mat({ color: 0xe8dbc1, roughness: 0.55, transparent: true, opacity: 0.55, depthWrite: false }),
+      parts.skin = addMesh("skin", meshes["skin-visible-human-male.glb"], phys({ color: 0xc79a7d, roughness: 0.58, metalness: 0, transparent: true, opacity: 0.2, side: THREE.DoubleSide, depthWrite: false, sheen: 0.6, sheenColor: new THREE.Color(0xd98a6a), emissive: 0x1d0b06, emissiveIntensity: 0.35 }), null, 10);
+      parts.bones = addMesh("bones", meshes["bones-thorax-bodyparts3d.bin.gz"], phys({ color: 0xe9e2cf, roughness: 0.08, metalness: 0, transparent: true, opacity: 0.42, depthWrite: false, clearcoat: 1, clearcoatRoughness: 0.12, envMapIntensity: 1.2 }),
         function (x, y, z) { return Math.abs(x) < 230 && y > -120 && y < 180 && z > -120 && z < 260; }, 5);
-      parts.heart = addMesh("heart", meshes["heart-hubmap.glb"], mat({ color: 0xb83a34, roughness: 0.34, metalness: 0.04 }), null, 2);
-      parts.liver = addMesh("liver", meshes["liver-hubmap.glb"], mat({ color: 0xd9b49c, roughness: 0.6, transparent: true, opacity: 0.9 }), null, 2);
+      parts.heartGroup = new THREE.Group(); parts.heartGroup.name = "heartBeat"; grp.add(parts.heartGroup);
+      parts.heart = addMesh("heart", meshes["heart-hubmap.glb"], phys({ color: 0xa8322c, roughness: 0.3, metalness: 0.02, clearcoat: 0.65, clearcoatRoughness: 0.35, sheen: 0.4, sheenColor: new THREE.Color(0xe8a08a), emissive: 0x200604, emissiveIntensity: 0.4 }), null, 2);
+      if (parts.heart) { if (grp.remove) grp.remove(parts.heart); parts.heartGroup.add(parts.heart);
+        var fat = new THREE.Mesh(parts.heart.geometry, phys({ color: 0xe6d3a1, roughness: 0.85, transparent: true, opacity: 0.15, depthWrite: false }));
+        fat.scale.set(1.035, 1.035, 1.035); fat.name = "epicardialFat"; parts.heartGroup.add(fat); }
+      parts.liver = addMesh("liver", meshes["liver-hubmap.glb"], phys({ color: 0x9c5f4a, roughness: 0.42, clearcoat: 0.4, clearcoatRoughness: 0.4, transparent: true, opacity: 0.92 }), null, 2);
       parts.vessels = addMesh("vessels", meshes["great-vessels-bodyparts3d.bin.gz"], mat({ color: 0xb0503f, roughness: 0.45, transparent: true, opacity: 0.75 }),
         function (x, y, z) { return Math.abs(x) < 130 && y > -90 && y < 150 && z > -50 && z < 170; }, 3);
       /* Procedural fallback and emphasis: ribs, aorta, cavae, so the body
@@ -589,14 +667,19 @@
         var hm = new THREE.Mesh(new THREE.SphereGeometry(52, 24, 18), mat({ color: 0xc0453f, roughness: 0.38 }));
         hm.scale.set(1, 0.85, 1.25); hm.position.set(0, 20, -45); fall.add(hm); registered.heartFallback = 1;
       }
-      var aortaPts = [new THREE.Vector3(8, 62, -52), new THREE.Vector3(14, 92, -30), new THREE.Vector3(2, 108, 8), new THREE.Vector3(-12, 84, 42), new THREE.Vector3(-14, 30, 58)];
-      var aorta = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(aortaPts), 32, 9, 10), mat({ color: 0xc23b30, roughness: 0.35 }));
-      aorta.name = "aorta"; fall.add(aorta);
-      var cavaPts = [new THREE.Vector3(-20, -68, -48), new THREE.Vector3(-18, -20, -42), new THREE.Vector3(-14, 34, -38), new THREE.Vector3(-10, 76, -30)];
-      var cava = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(cavaPts), 24, 7.5, 10), mat({ color: 0x3f6fb5, roughness: 0.4 }));
-      cava.name = "venaeCavae"; fall.add(cava);
-      var svc = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(-10, 76, -30), new THREE.Vector3(-6, 104, -18)]), 8, 6.5, 8), cava.material);
-      fall.add(svc);
+      var artM = phys({ color: 0xc23b30, roughness: 0.32, clearcoat: 0.5, clearcoatRoughness: 0.35 });
+      var venM = phys({ color: 0x3f6fb5, roughness: 0.38, clearcoat: 0.4, clearcoatRoughness: 0.4 });
+      var corM = phys({ color: 0xd95f4a, roughness: 0.35, clearcoat: 0.5 });
+      fall.add(tubeFromPath(HEART_VESSELS.aorta, 9, artM, "aortaArch"));
+      fall.add(tubeFromPath(HEART_VESSELS.pulmonaryTrunk, 8, artM, "pulmonaryTrunk"));
+      fall.add(tubeFromPath(HEART_VESSELS.svc, 6.5, venM, "svc"));
+      fall.add(tubeFromPath(HEART_VESSELS.ivc, 7.5, venM, "ivc"));
+      HEART_VESSELS.pulmonaryVeins.forEach(function (pv, i) { fall.add(tubeFromPath(pv, 3.4, venM, "pulmonaryVein" + i)); });
+      if (parts.heartGroup) {
+        parts.heartGroup.add(tubeFromPath(HEART_VESSELS.coronaryLAD, 1.7, corM, "coronaryLAD"));
+        parts.heartGroup.add(tubeFromPath(HEART_VESSELS.coronaryRCA, 1.7, corM, "coronaryRCA"));
+        parts.heartGroup.add(tubeFromPath(HEART_VESSELS.coronaryCx, 1.5, corM, "coronaryCx"));
+      }
       if (!parts.skin) {
         var sk = new THREE.Mesh(new THREE.SphereGeometry(150, 24, 18), mat({ color: 0xc9a189, roughness: 0.62, transparent: true, opacity: 0.28, side: THREE.DoubleSide, depthWrite: false }));
         sk.scale.set(1.05, 1.55, 0.62); sk.position.set(0, 10, -90); fall.add(sk); parts.skinFallback = sk;
@@ -615,6 +698,8 @@
       parts.labels = new THREE.Group();
       [["Heart", [70, 30, -50]], ["Aorta", [42, 108, -10]], ["Vena cava", [-52, 20, -40]], ["Liver", [-90, -70, -60]], ["Ribs", [120, 80, 40]]].forEach(function (l) { parts.labels.add(labelSprite(l[0], l[1])); });
       scene3.add(parts.labels);
+      skinVerts = [];
+      if (meshes["skin-visible-human-male.glb"]) { var sp2 = meshPositionsArray(meshes["skin-visible-human-male.glb"]); for (var svi = 0; svi < sp2.length; svi++) if (sp2[svi][1] > 0) skinVerts.push(sp2[svi]); }
       applyLayer();
       updateProbeTransforms();
       return true;
@@ -652,14 +737,14 @@
     function updateProbeTransforms() {
       if (!scene3 || !parts.probe) return;
       var plane = currentPlane();
-      var contact = pose.contact.slice(); contact[1] = skinY(contact[0], contact[2]);
+      var contact = pose.contact.slice(); contact[1] = skinSurfaceY(contact[0], contact[2]);
       pose.contact[1] = contact[1];
       var cScene = toScene(contact);
       var outward = [0, 1, 0.15]; /* anterior, slightly cranial */
       var outScene = norm3([outward[0], outward[2], -outward[1]]);
       [parts.probe, parts.ghost].forEach(function (grp, gi) {
         var p = gi ? view.contact : contact;
-        var yy = skinY(p[0], p[2]);
+        var yy = skinSurfaceY(p[0], p[2]);
         var s = toScene([p[0], yy, p[2]]);
         grp.position.set(s[0], s[1], s[2]);
         var up = new THREE.Vector3(0, 1, 0);
@@ -710,7 +795,7 @@
     if (!viewsData && fetchImpl && !opts.noViewsFetch) {
       Promise.resolve(fetchImpl(opts.viewsUrl || "/kardia/views.json")).then(function (r) { return r && r.ok ? r.json() : null; }).then(function (v) { if (v) { viewsData = v; ensureMonitor(); } }).catch(function () {});
     }
-    var lastUsAt = 0;
+    var lastUsAt = 0, fpsFrames = 0, fpsLastAt = 0;
     function drawMonitor(now, plane) {
       var rendererUs = ensureMonitor();
       if (!rendererUs) return;
@@ -758,7 +843,7 @@
         }
         var attr = "";
         try { attr = (api._pure ? api._pure.attributionLine(realClip) : "") || realClip.attribution || ""; } catch (e) {}
-        setText("kslAttribution", attr ? "Real patient: " + attr : "");
+        setText("kslAttribution", attr || "");
       }, function () {
         if (realKey !== key) return;
         /* Direct stream fallback: on device the hosted clip may stream
@@ -766,7 +851,7 @@
         try {
           var chosen = api.chooseClip ? api.chooseClip(q) : null;
           var direct = chosen && (chosen.url || chosen.file);
-          if (direct && video) { realClip = chosen; realSrc = direct; realStatus = "ready"; video.setAttribute("src", direct); setText("kslAttribution", "Real patient: " + ((chosen.attribution) || chosen.title || "")); return; }
+          if (direct && video) { realClip = chosen; realSrc = direct; realStatus = "ready"; video.setAttribute("src", direct); setText("kslAttribution", (chosen.attribution) || chosen.title || ""); return; }
         } catch (e) {}
         realStatus = "offline";
       });
@@ -856,15 +941,18 @@
       var note = el("kslClipNote");
       if (rcState === "real" && realStatus === "ready" && realSrc) {
         setText("kslMonLabel", "Real patient clip");
+        var badge = el("kslRealBadge"); if (badge) badge.hidden = false;
+        var det = el("kslAttrDetails"); if (det) det.hidden = false;
         if (video) {
           video.hidden = false;
-          video.style.transition = reduced ? "none" : "opacity 300ms ease";
+          video.style.transition = reduced ? "none" : "opacity 600ms ease-out";
           video.style.opacity = "1";
           try { var pr = video.play && video.play(); if (pr && pr.catch) pr.catch(function () {}); } catch (e) {}
         }
         if (note) note.hidden = true;
       } else {
         if (video) { video.hidden = true; video.style.opacity = "0"; try { video.pause && video.pause(); } catch (e) {} }
+        var badge2 = el("kslRealBadge"); if (badge2) badge2.hidden = true;
         setText("kslMonLabel", "Simulated image");
         if (rcState === "real" && realStatus === "offline" && !offlineNoted) {
           offlineNoted = true;
@@ -872,6 +960,11 @@
         } else if (rcState === "real" && realStatus === "empty") {
           if (note) { note.hidden = false; note.textContent = "No real patient clip for this view yet. The simulated image stays on screen."; }
         } else if (note && rcState !== "real") note.hidden = true;
+      }
+      /* heart beats in sync with the monitor cycle (same heart model
+       * drives KARDIA_US and its ECG strip) */
+      if (parts.heartGroup && heartInst && heartInst.state) {
+        try { var hs = heartInst.state(); var cyc = (hs.cycleMs || 857) ? ((hs.cycleTimeMs || 0) / (hs.cycleMs || 857)) : 0; var bs = reduced ? 1 : heartBeatScale(cyc); parts.heartGroup.scale.set(bs, bs, bs); debug.beatScale = bs; debug.beatCycle = cyc; } catch (e) {}
       }
       var plane = scene3 ? updateProbeTransforms() : currentPlane();
       if (renderer && scene3 && camera) {
@@ -888,9 +981,17 @@
         try { var ps = probeScreen(); if (ps) debug.probeScreen = ps; } catch (e) {}
       }
       drawMonitor(now, plane || currentPlane());
-      setText("kslFps", debug.frames > 1 ? (lowPower ? "Low power mode" : "") : "");
+      fpsFrames++; if (now - fpsLastAt >= 500) { var fps = Math.round(fpsFrames * 1000 / Math.max(1, now - fpsLastAt)); debug.fps = fps; fpsFrames = 0; fpsLastAt = now; setText("kslFps", fps + " fps" + (lowPower ? " · low power" : "") + " · " + (debug.drawCalls || 0) + " draw calls"); }
     }
-    function loop(now) { if (destroyed) return; refresh(now != null ? now : nowMs()); raf = rafImpl(loop); }
+    var hiddenPaused = false;
+    function loop(now) { if (destroyed) return; if (hiddenPaused) { raf = 0; return; } refresh(now != null ? now : nowMs()); raf = rafImpl(loop); }
+    try {
+      if (doc.addEventListener) doc.addEventListener("visibilitychange", function () {
+        var hid = !!(doc.hidden || (G.document && G.document.hidden));
+        if (hid) { hiddenPaused = true; if (raf) cancelRaf(raf); raf = 0; debug.pausedHidden = true; }
+        else if (hiddenPaused) { hiddenPaused = false; debug.pausedHidden = false; if (!destroyed && !raf) raf = rafImpl(loop); }
+      });
+    } catch (e) {}
     /* pointer handling: grip slides, marker rotates, tail tilts, pinch zooms */
     var pointers = {}, drag = null, lastTapAt = 0, pinchDist = 0;
     function canvasPoint(ev) {
@@ -948,9 +1049,6 @@
       sceneCanvas.addEventListener("pointercancel", endPointer);
     }
     function bindNudge(id, fn) { var b = el(id); if (b) b.addEventListener("click", fn); }
-    bindNudge("kslGrip", function () { pose.contact[2] -= 6; });
-    bindNudge("kslMarker", function () { pose.rotationDeg = wrapDeg(pose.rotationDeg + 6); });
-    bindNudge("kslTail", function () { pose.fanDeg = clamp(pose.fanDeg + 4, -60, 60); });
     bindNudge("kslPractice", function () { startedAt = nowMs(); attemptDone = false; travelMm = 0; setText("kslCoach", "Practice. Find " + view.label + " on the body."); var r = el("kslResult"); if (r) r.hidden = true; });
     bindNudge("kslLabels", function () { showLabels = !showLabels; this.setAttribute("aria-pressed", showLabels ? "true" : "false"); });
     bindNudge("kslFullscreen", function () { var st = el("kslStage"); try { if (st && st.requestFullscreen) st.requestFullscreen(); else if (sceneCanvas && sceneCanvas.requestFullscreen) sceneCanvas.requestFullscreen(); } catch (e) {} });

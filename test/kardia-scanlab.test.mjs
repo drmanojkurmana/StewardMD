@@ -80,7 +80,9 @@ test("tutorial has 7 steps", () => { assert.equal(P.TUTORIAL.length, 7); });
 
 test("scanlab UI has stable ids", () => {
   const src = fs.readFileSync(new URL("../kardia-scanlab.js", import.meta.url), "utf8");
-  for (const id of ["kslScene", "kslMonitor", "kslCoach", "kslGrip", "kslMarker", "kslTail", "kslRot", "kslFan", "kslRock", "kslDepth", "kslViews", "debugPose"]) assert.ok(src.includes(id), id);
+  for (const id of ["kslScene", "kslMonitor", "kslCoach", "kslRot", "kslFan", "kslRock", "kslDepth", "kslViews", "kslRealBadge", "kslAttrDetails", "kslLayersBtn", "kslLabels", "kslFullscreen", "kslPractice", "kslTutorialBtn", "debugPose"]) assert.ok(src.includes(id), id);
+  assert.ok(!src.includes("ksl-handles"), "old handle explainer row removed from the main screen");
+  assert.ok(P.TUTORIAL[0].title.startsWith("Grip:") && P.TUTORIAL[1].title.startsWith("Marker:") && P.TUTORIAL[2].title.startsWith("Tail:"), "Grip, Marker and Tail explainers live in the tutorial");
   assert.ok(!/[—–]/.test(src.split("British spelling")[0].slice(0, 200)) || true);
 });
 
@@ -154,4 +156,31 @@ test("asset candidates mirror the geom asset base and credits list all sources",
   assert.ok(src.includes("sha256Hex(new Uint8Array(buf))") && src.includes("buf.byteLength !== a.bytes"), "pure JS sha256 plus byte check (WebCrypto is absent on non-secure contexts)");
   const prac = fs.readFileSync(new URL("../kardia-practice.js", import.meta.url), "utf8");
   assert.ok(prac.includes("bodyCreditsHtml"), "credits screen appends body models");
+});
+
+test("every target contact lies on the skin mesh within 3 mm and in its landmark region", () => {
+  const buf = fs.readFileSync(new URL("../work/k2-assets/skin-visible-human-male.glb", import.meta.url));
+  const skin = P.parseGlb(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength));
+  for (const v of T.VIEWS) {
+    const d = P.skinDistanceMm(skin, v.contact);
+    assert.ok(d < 3, `${v.id} is ${d.toFixed(2)} mm from the skin mesh`);
+    assert.ok(P.inLandmark(v.contact, v.family, T.LANDMARKS), `${v.id} contact ${v.contact} outside ${v.family} landmark`);
+  }
+});
+
+test("great vessels follow curved anatomy and the heart beat scale is cyclic", () => {
+  const V = P.HEART_VESSELS;
+  for (const k of ["aorta", "pulmonaryTrunk", "svc", "ivc", "coronaryLAD", "coronaryRCA", "coronaryCx"]) assert.ok(V[k].length >= 3, k);
+  assert.equal(V.pulmonaryVeins.length, 4);
+  // aorta arch: z rises then falls (not a straight vertical tube)
+  const zs = V.aorta.map((p) => p[2]);
+  assert.ok(Math.max(...zs) > zs[0] + 20 && zs[zs.length - 1] < Math.max(...zs) - 40, "aortic arch curves over and descends");
+  assert.equal(P.heartBeatScale(0), 1);
+  assert.ok(P.heartBeatScale(0.17) < 0.97, "systolic contraction");
+  assert.ok(Math.abs(P.heartBeatScale(1) - 1) < 0.001, "cycle wraps");
+});
+
+test("window picker uses the five reference window names", () => {
+  assert.deepEqual(P.WINDOWS.map((w) => w.label), ["Parasternal", "Short axis", "Apical", "Subcostal", "Suprasternal"]);
+  for (const w of P.WINDOWS) for (const id of w.views) assert.ok(T.byId(id), id);
 });

@@ -239,9 +239,7 @@
 
   function echoLabHtml() {
     var lv = klevel(), pro = I.isPro();
-    var head = '<h2 class="sp-h2">' + I.tx(T("Echo Lab", "Echo Lab")) + '</h2><p class="sp-small krd-lab-hint">' +
-      I.tx(T("Find the target view with the probe. Slide on the chest map, twist with two fingers to rotate, fan with the tilt strip and rock with the rock strip.",
-        "Find the target view with the probe. Slide on the chest map, twist with two fingers to rotate, fan with the tilt strip and rock with the rock strip.")) + "</p>";
+    var head = '<h2 class="sp-h2">' + I.tx(T("Echo Lab", "Echo Lab")) + '</h2>';
     if (EL.err) return head + '<div class="sp-err krd-err" role="alert"><p>' +
       I.tx(T("Echo Lab did not load. Check the connection and try again.", "Echo Lab did not load. Check the connection and try again.")) +
       '</p><button type="button" class="sp-btn pri" data-act="kecho-retry">' + I.ico("refresh") + " " + I.s("retry") + "</button></div>";
