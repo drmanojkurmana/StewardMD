@@ -161,6 +161,7 @@
     if (/expired|credential-expired|gone/i.test(m)) return "expired";
     if (/controller-busy|already training|room_full|busy/i.test(m)) return "busy";
     if (/not-found|no display found|no display/i.test(m)) return "not-found";
+    if (/rate-limit|too many|429/i.test(m)) return "rate-limited";
     if (/permission|denied|not authorized/i.test(m) && /bluetooth|ble/i.test(m)) return "bluetooth-permission";
     if (/bluetooth is (off|not available|powered off)|poweredoff/i.test(m)) return "bluetooth-off";
     if (/bluetooth/i.test(m) && /not available|only available in the app/i.test(m)) return "bluetooth-unavailable";
@@ -1368,26 +1369,47 @@
         var code = text.toUpperCase().replace(/[^A-Z2-9]/g, "");
         if (facadeLocalPairings[code]) parsed = parsePairingPayload(facadeLocalPairings[code].payload);
         if (!parsed) {
-          var discoverable = listTransports().filter(function (t) { return typeof t.discover === "function"; });
-          if (discoverable.length) {
-            return Promise.all(discoverable.map(function (t) {
-              // One transport failing to find the display must not fail the
-              // whole search; only an empty result across all of them is not-found.
-              try { return Promise.resolve(t.discover(code)).then(function (v) { return v; }, function () { return null; }); }
-              catch (e) { return Promise.resolve(null); }
-            })).then(function (found) {
-              var hit = found.filter(Boolean)[0];
-              if (!hit) { var e1 = new Error("not-found"); e1.reason = "not-found"; throw e1; }
-              // BLE discovery returns sessionId and displayPub without an
-              // expiry; tolerate it and keep the short code for the session.
-              // The 4 digit confirmation in the confirming state still guards
-              // this path before control is granted.
-              if (!hit.expiresAt) hit.expiresAt = nowDefault() + PAIRING_TTL_MS;
-              if (!hit.shortCode) hit.shortCode = code;
-              return facade.joinProbe(hit.payload || pairingPayload(hit));
+          // Typed code: race every lookup at once. Bluetooth discovery and
+          // the relay code lookup start in parallel and the first healthy
+          // result wins, the same as the QR path races transports. A
+          // Bluetooth miss never fails the search (only an empty result
+          // across all lookups is not-found); a relay failure keeps its
+          // specific reason so sign-in and rate limits surface.
+          var lookups = [];
+          listTransports().filter(function (t) { return typeof t.discover === "function"; }).forEach(function (t) {
+            lookups.push({
+              run: function () {
+                try { return Promise.resolve(t.discover(code)).then(function (v) { return v; }, function () { return null; }); }
+                catch (e) { return Promise.resolve(null); }
+              }
             });
+          });
+          listTransports().filter(function (t) { return typeof t.resolveCode === "function"; }).forEach(function (t) {
+            lookups.push({
+              run: function () {
+                try { return Promise.resolve(t.resolveCode(code)); }
+                catch (e) { return Promise.reject(e); }
+              }
+            });
+          });
+          if (!lookups.length) {
+            var e0 = new Error("not-found"); e0.reason = "not-found"; return Promise.reject(e0);
           }
-          var e2 = new Error("not-found"); e2.reason = "not-found"; return Promise.reject(e2);
+          return raceFirstSuccess(lookups, function (job) {
+            return job.run().then(function (v) {
+              if (!v) { var e1 = new Error("not-found"); e1.reason = "not-found"; throw e1; }
+              return v;
+            });
+          }).then(function (r) {
+            var hit = r.value;
+            // Bluetooth discovery returns sessionId and displayPub without an
+            // expiry; tolerate it and keep the short code for the session.
+            // The 4 digit confirmation in the confirming state still guards
+            // this path before control is granted.
+            if (!hit.expiresAt) hit.expiresAt = nowDefault() + PAIRING_TTL_MS;
+            if (!hit.shortCode) hit.shortCode = code;
+            return facade.joinProbe(hit.payload || pairingPayload(hit));
+          });
         }
       }
       if (!parsed) { var e3 = new Error("not-found"); e3.reason = "not-found"; return Promise.reject(e3); }

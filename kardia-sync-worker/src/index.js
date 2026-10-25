@@ -12,6 +12,9 @@ import {
   parseProtocol,
   generateRoomId,
   generateRoomToken,
+  handleCodeLookup,
+  CodeDirectory,
+  LookupRateLimiter,
   SESSION_TTL_MS,
   SyncRoomCore,
 } from "./core.js";
@@ -39,6 +42,23 @@ const json = (data, status = 200, headers = {}) =>
   });
 
 /* Extract bearer or custom token from request */
+/* Client IP for per-IP lookup rate limiting (first address wins) */
+function getClientIp(request) {
+  const cfIp = request.headers.get("CF-Connecting-IP");
+  if (cfIp && cfIp.trim()) return cfIp.trim();
+  const forwarded = request.headers.get("X-Forwarded-For");
+  if (forwarded && forwarded.trim()) return forwarded.split(",")[0].trim();
+  return "unknown";
+}
+
+const CODE_DIRECTORY_NAME = "code-directory-v1";
+
+function getCodeDirectory(env) {
+  if (!env.SYNC_CODES) return null;
+  const id = env.SYNC_CODES.idFromName(CODE_DIRECTORY_NAME);
+  return env.SYNC_CODES.get(id);
+}
+
 async function extractToken(request) {
   const authHeader = request.headers.get("Authorization") || "";
   if (authHeader) {
@@ -108,7 +128,75 @@ export default {
         expiresAt,
       });
 
-      return json({ roomId, roomToken, expiresAt }, 200);
+      // Optional typed-code registration: the display sends the short
+      // code shown on screen plus the public handshake material, so a
+      // probe can resolve the code to this room without Bluetooth.
+      // Absent (older clients) means relay lookup is simply unavailable.
+      let codeRegistered = false;
+      let codeBody = null;
+      try {
+        const maybeBody = await request.clone().json();
+        if (maybeBody && typeof maybeBody === "object") codeBody = maybeBody;
+      } catch (e) {
+        codeBody = null;
+      }
+      if (codeBody && (codeBody.shortCode || codeBody.sessionId || codeBody.displayPub)) {
+        const normalizedCode = normalizeShortCode(codeBody.shortCode);
+        const sid = typeof codeBody.sessionId === "string" ? codeBody.sessionId.toLowerCase() : "";
+        const pub = codeBody.displayPub;
+        if (!normalizedCode || !/^[0-9a-f]{32}$/.test(sid) || typeof pub !== "string" || !/^[A-Za-z0-9_-]{86,88}$/.test(pub)) {
+          return json({ error: "invalid code registration" }, 400);
+        }
+        const dirStub = getCodeDirectory(env);
+        if (dirStub) {
+          const reg = await dirStub.registerCode({
+            code: normalizedCode,
+            roomId,
+            roomToken,
+            sessionId: sid,
+            displayPub: pub,
+            now,
+            expiresAt,
+          });
+          codeRegistered = !!(reg && reg.ok);
+        }
+      }
+
+      return json({ roomId, roomToken, expiresAt, codeRegistered }, 200);
+    }
+
+    /* ---------------- POST /sync/code (typed-code lookup) ---------------- */
+    if (url.pathname === "/sync/code") {
+      if (request.method !== "POST") {
+        return text("method not allowed", 405);
+      }
+      const token = await extractToken(request);
+      const claims = token ? await verifyFirebaseClaims(token, env).catch(() => null) : null;
+      if (!claims || !claims.sub) {
+        return json({ error: "sign-in required" }, 401);
+      }
+      let code = null;
+      try {
+        const body = await request.json();
+        if (body && typeof body.code === "string") code = body.code;
+      } catch (e) {
+        code = null;
+      }
+      const dirStub = getCodeDirectory(env);
+      if (!dirStub) {
+        return json({ error: "not-found" }, 404);
+      }
+      const res = await dirStub.resolveCode({
+        code,
+        uid: claims.sub,
+        ip: getClientIp(request),
+        now: Date.now(),
+      });
+      if (res && res.status === 429) {
+        const retrySec = Math.max(1, Math.ceil((res.body && res.body.retryAfterMs) || 60000) / 1000);
+        return json(res.body, 429, { "Retry-After": String(retrySec) });
+      }
+      return json(res.body, res.status);
     }
 
     /* ---------------- wss /sync/room ---------------- */
@@ -328,5 +416,74 @@ export class SyncRoom extends DurableObject {
       this.terminateBoth(timeout.reason);
       await this.ctx.storage.deleteAll();
     }
+  }
+}
+
+/* ============ Durable Object: SyncCodeDirectory (typed-code lookup) ============
+ * Singleton directory (one instance at a fixed name) mapping short codes
+ * to room join material for the code lifetime. Holds only small join
+ * fields, never frames or payloads. Rate limits lookups per user and per
+ * IP. Entries are single use: a successful resolve deletes the entry. */
+export class SyncCodeDirectory extends DurableObject {
+  constructor(ctx, env) {
+    super(ctx, env);
+    this.dir = null;
+    this.limiter = null;
+  }
+
+  async load() {
+    if (!this.dir) {
+      const stored = await this.ctx.storage.get("codes");
+      this.dir = CodeDirectory.fromJSON(stored || null);
+    }
+    if (!this.limiter) {
+      const storedLimits = await this.ctx.storage.get("lookup-limits");
+      this.limiter = LookupRateLimiter.fromJSON(storedLimits || null);
+    }
+  }
+
+  async save() {
+    const now = Date.now();
+    await this.ctx.storage.put("codes", this.dir.toJSON());
+    await this.ctx.storage.put("lookup-limits", this.limiter.toJSON(now));
+    const next = this.dir.nextExpiry();
+    if (next) {
+      await this.ctx.storage.setAlarm(next);
+    } else {
+      await this.ctx.storage.deleteAlarm();
+    }
+  }
+
+  /* RPC: display registers its short code when it creates a session. */
+  async registerCode({ code, roomId, roomToken, sessionId, displayPub, now, expiresAt }) {
+    await this.load();
+    const t = now == null ? Date.now() : now;
+    const res = this.dir.register({ code, roomId, roomToken, sessionId, displayPub, now: t, expiresAt });
+    if (!res.ok) return res;
+    await this.save();
+    return { ok: true };
+  }
+
+  /* RPC: probe resolves a typed code to the room join material. */
+  async resolveCode({ code, uid, ip, now }) {
+    await this.load();
+    const t = now == null ? Date.now() : now;
+    const res = handleCodeLookup({ code, uid, ip, now: t }, { directory: this.dir, limiter: this.limiter });
+    await this.save();
+    return res;
+  }
+
+  /* RPC: remove entries for a room (reserved for explicit session end). */
+  async deleteByRoom({ roomId }) {
+    await this.load();
+    const res = this.dir.deleteByRoom({ roomId });
+    await this.save();
+    return res;
+  }
+
+  async alarm() {
+    await this.load();
+    this.dir.sweep(Date.now());
+    await this.save();
   }
 }
