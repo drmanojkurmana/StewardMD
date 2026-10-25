@@ -1,4 +1,4 @@
-/* kardia-flags.js — Kardia · central feature-flag registry.
+/* kardia-flags.js: Kardia central feature-flag registry.
  *
  * Sibling of kardiox-flags.js (SMD_KARDIOX_FLAGS) and clinix-flags.js. One source of truth for every
  * Kardia flag: key, type, default, ?query alias, description. Resolution order per flag: ?query param

@@ -35,6 +35,7 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[ICU]] — the ICU flagship workstation
 - [[FollowCare]] — post-discharge recovery intelligence
 - [[KardiQ X]] — ECG interpretation + Learn atlas
+- [[Kardia]] - echo and ECG trainer on the Specialty Engine (Echo Lab, Learn, Practice, Cases, gated KardiQ X tab); flag `smd_kardia` default OFF
 - [[RadioAnatome]] — cross-sectional CT/MRI atlas · [[RadioAnatome 3D]] — BodyParts3D 3D layer on the same ontology
 - [[ThoreX]] — chest X-ray support
 - [[FundX]] — smartphone fundus/retinal imaging

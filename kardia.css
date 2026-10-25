@@ -152,8 +152,17 @@ body:not(.dark):not(.v3-dark) .krd-root {
 .krd-root .krd-tee-note { margin-top: 14px; }
 .krd-root .krd-lab .sp-btn:active { transform: scale(0.97); }
 .krd-root .krd-lab .sp-btn { transition: transform 120ms var(--kd-ease), background-color 140ms var(--kd-ease); }
+/* Answered question bank: the engine fades non-picked options with opacity .5, which
+   drops their text contrast to ~1.25. Keep them de-emphasised by dimming the chrome
+   (transparent fill, dashed border) instead of the text, so option text stays at full
+   strength and contrast in both themes. */
+.krd-root .sp-answers .sp-ans[data-state="dim"] { opacity: 1; background: transparent; border-style: dashed; }
 @media (prefers-reduced-motion: reduce) {
   .krd-root .krd-tab { transition: none; }
   .krd-root .krd-chip, .krd-root .krd-meter span, .krd-root .krd-probe-dot, .krd-root .krd-lab .sp-btn { transition: none; }
   .krd-root .krd-lab .sp-btn:active { transform: none; }
 }
+
+/* Answered questions: the engine dims the other options with opacity .5, which drops their text below
+   4.5:1. In Kardia they keep full opacity and use the muted text colour instead. */
+.krd-root .sp-ans[data-state="dim"] { opacity: 1; color: var(--sp-mut); }
