@@ -268,7 +268,6 @@
           var timer = null;
           var limit = new Promise(function (resolve, reject) {
             timer = setTimeout(function () { reject(notFoundError()); }, timeout);
-            if (timer && typeof timer.unref === "function") { try { timer.unref(); } catch (e2) {} }
           });
           return Promise.race([Promise.resolve(native), limit]).then(function (res) {
             if (timer) clearTimeout(timer);
