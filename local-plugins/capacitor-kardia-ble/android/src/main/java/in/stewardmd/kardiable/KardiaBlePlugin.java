@@ -25,6 +25,8 @@ import android.bluetooth.le.ScanSettings;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.ParcelUuid;
 import android.util.Base64;
 
@@ -80,6 +82,10 @@ public class KardiaBlePlugin extends Plugin {
     private BluetoothGattCharacteristic probeDown;
     private BluetoothGattCharacteristic probeUp;
     private boolean scanning;
+
+    private PluginCall pendingDiscover;
+    private Handler discoverHandler;
+    private Runnable discoverTimeout;
 
     private BluetoothAdapter adapter() {
         BluetoothManager manager = (BluetoothManager) getContext().getSystemService(Context.BLUETOOTH_SERVICE);
@@ -407,8 +413,143 @@ public class KardiaBlePlugin extends Plugin {
         call.resolve(ret);
     }
 
+    /**
+     * Short code discovery for joining with only the 6 character code. Scans
+     * by service UUID, ignores advertisements whose code hash matches neither
+     * the service data nor the KS- local name, connects, reads the info
+     * characteristic and resolves with sessionId, displayPub and
+     * protocolVersion. Rejects with a plain message when nothing is found
+     * before the timeout. One scan at a time: a second discover while one is
+     * running is rejected.
+     */
+    @PluginMethod
+    public void discover(PluginCall call) {
+        if (pendingDiscover != null) {
+            call.reject("A Bluetooth scan is already running. Wait a moment and try again.");
+            return;
+        }
+        byte[] hash = hexToBytes(call.getString("codeHashHex", ""));
+        if (hash.length != 4) {
+            call.reject("Enter the 6 character code shown on the display.");
+            return;
+        }
+        int timeoutMs = call.getInt("timeoutMs", 10000);
+        if (timeoutMs < 2000) timeoutMs = 2000;
+        if (timeoutMs > 30000) timeoutMs = 30000;
+        BluetoothAdapter adapter = adapter();
+        if (adapter == null || !adapter.isEnabled()) { call.reject("Bluetooth is not available."); return; }
+        if (!permissionsGranted()) { call.reject("Bluetooth permission is not granted."); return; }
+        BluetoothLeScanner scanner = adapter.getBluetoothLeScanner();
+        if (scanner == null) { call.reject("Bluetooth scanning is not available."); return; }
+        teardown(true);
+        role = "discover";
+        mtu = 23;
+        sessionIdHex = "";
+        expectedHash = hash;
+        pendingDiscover = call;
+        discoverHandler = new Handler(Looper.getMainLooper());
+        discoverTimeout = new Runnable() {
+            @Override public void run() { onDiscoverTimeout(); }
+        };
+        discoverHandler.postDelayed(discoverTimeout, timeoutMs);
+        startDiscoverScan(scanner);
+    }
+
+    private void startDiscoverScan(BluetoothLeScanner scanner) {
+        // Filter by service UUID only: the code hash rides in the service
+        // data on Android but in the local name on iOS, so hash matching
+        // happens per result in scanMatchesHash.
+        List<ScanFilter> filters = new ArrayList<>();
+        filters.add(new ScanFilter.Builder().setServiceUuid(new ParcelUuid(SERVICE_UUID)).build());
+        ScanSettings settings = new ScanSettings.Builder()
+            .setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
+            .build();
+        scanning = true;
+        scanner.startScan(filters, settings, scanCallback);
+    }
+
+    private boolean scanMatchesHash(ScanResult result) {
+        if (expectedHash == null) return true;
+        try {
+            if (result.getScanRecord() != null) {
+                byte[] sd = result.getScanRecord().getServiceData(new ParcelUuid(SERVICE_UUID));
+                if (sd != null && sd.length >= 4
+                    && sd[0] == expectedHash[0] && sd[1] == expectedHash[1]
+                    && sd[2] == expectedHash[2] && sd[3] == expectedHash[3]) return true;
+            }
+        } catch (Exception ignored) { }
+        String name = null;
+        try {
+            if (result.getDevice() != null) name = result.getDevice().getName();
+            if (name == null && result.getScanRecord() != null) name = result.getScanRecord().getDeviceName();
+        } catch (Exception ignored) { }
+        return name != null && name.equalsIgnoreCase("KS-" + bytesToHex(expectedHash).toUpperCase());
+    }
+
+    private void connectDiscovered(BluetoothDevice device) {
+        if (Build.VERSION.SDK_INT >= 26) {
+            gatt = device.connectGatt(getContext(), false, gattCallback, BluetoothDevice.TRANSPORT_LE);
+        } else {
+            gatt = device.connectGatt(getContext(), false, gattCallback);
+        }
+    }
+
+    private void cancelDiscoverTimeout() {
+        if (discoverHandler != null && discoverTimeout != null) {
+            try { discoverHandler.removeCallbacks(discoverTimeout); } catch (Exception ignored) { }
+        }
+        discoverHandler = null;
+        discoverTimeout = null;
+    }
+
+    private void resolveDiscover(final JSObject ret) {
+        final PluginCall call = pendingDiscover;
+        pendingDiscover = null;
+        cancelDiscoverTimeout();
+        stopScan();
+        if (gatt != null) {
+            try { gatt.disconnect(); } catch (Exception ignored) { }
+            closeGatt();
+        }
+        role = "";
+        if (call == null) return;
+        // GATT callbacks run on binder threads; answer on the main thread.
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override public void run() { call.resolve(ret); }
+        });
+    }
+
+    private void rejectDiscover(final String message) {
+        final PluginCall call = pendingDiscover;
+        pendingDiscover = null;
+        cancelDiscoverTimeout();
+        stopScan();
+        if (gatt != null) {
+            try { gatt.disconnect(); } catch (Exception ignored) { }
+            closeGatt();
+        }
+        role = "";
+        if (call == null) return;
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override public void run() { call.reject(message); }
+        });
+    }
+
+    private void onDiscoverTimeout() {
+        if (pendingDiscover == null) return;
+        rejectDiscover("No display found for that code. Check the code and keep both phones close together.");
+    }
+
     private final ScanCallback scanCallback = new ScanCallback() {
         @Override public void onScanResult(int callbackType, ScanResult result) {
+            if (role.equals("discover")) {
+                if (pendingDiscover == null || gatt != null) return;
+                // Wrong hash ignored: keep scanning for the right display.
+                if (!scanMatchesHash(result)) return;
+                stopScan();
+                connectDiscovered(result.getDevice());
+                return;
+            }
             if (!role.equals("probe") || gatt != null) return;
             stopScan();
             BluetoothDevice device = result.getDevice();
@@ -420,6 +561,10 @@ public class KardiaBlePlugin extends Plugin {
         }
         @Override public void onScanFailed(int errorCode) {
             scanning = false;
+            if (pendingDiscover != null) {
+                rejectDiscover("Bluetooth scan failed. Try again.");
+                return;
+            }
             emitError("Scan failed with code " + errorCode + ".");
         }
     };
@@ -440,6 +585,15 @@ public class KardiaBlePlugin extends Plugin {
                 gatt.requestConnectionPriority(BluetoothGatt.CONNECTION_PRIORITY_HIGH);
                 gatt.discoverServices();
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
+                if (pendingDiscover != null) {
+                    // Keep looking while time remains on the discover timeout.
+                    closeGatt();
+                    try {
+                        BluetoothAdapter a = adapter();
+                        if (a != null && a.getBluetoothLeScanner() != null) startDiscoverScan(a.getBluetoothLeScanner());
+                    } catch (Exception ignored) { }
+                    return;
+                }
                 emitLost("The display disconnected.");
                 closeGatt();
             }
@@ -451,10 +605,18 @@ public class KardiaBlePlugin extends Plugin {
 
         @Override public void onServicesDiscovered(BluetoothGatt gatt, int status) {
             BluetoothGattService service = gatt.getService(SERVICE_UUID);
-            if (service == null) { emitError("The display service was not found."); return; }
+            if (service == null) {
+                if (pendingDiscover != null) { rejectDiscover("That display did not return pairing details."); return; }
+                emitError("The display service was not found."); return;
+            }
             BluetoothGattCharacteristic down = service.getCharacteristic(DOWN_UUID);
             BluetoothGattCharacteristic up = service.getCharacteristic(UP_UUID);
             BluetoothGattCharacteristic info = service.getCharacteristic(INFO_UUID);
+            if (pendingDiscover != null) {
+                if (info != null) gatt.readCharacteristic(info);
+                else rejectDiscover("That display did not return pairing details.");
+                return;
+            }
             probeDown = down;
             probeUp = up;
             if (down != null) enableNotify(gatt, down);
@@ -483,6 +645,24 @@ public class KardiaBlePlugin extends Plugin {
     };
 
     private void handleInfoValue(byte[] value) {
+        if (pendingDiscover != null) {
+            // Short code discovery reads any nearby display; there is no
+            // session id to check yet, the 4 digit confirmation guards later.
+            if (value == null || value.length < 2) { rejectDiscover("That display did not return pairing details."); return; }
+            int dver = value[0] & 0xff;
+            int dn = value[1] & 0xff;
+            if (value.length < 2 + dn || dn == 0) { rejectDiscover("That display did not return pairing details."); return; }
+            byte[] dpub = Arrays.copyOfRange(value, 2, 2 + dn);
+            String dsid = "";
+            if (value.length >= 2 + dn + 16) dsid = bytesToHex(Arrays.copyOfRange(value, 2 + dn, 2 + dn + 16));
+            if (dsid.isEmpty()) { rejectDiscover("That display did not return pairing details."); return; }
+            JSObject ret = new JSObject();
+            ret.put("sessionId", dsid);
+            ret.put("displayPub", Base64.encodeToString(dpub, Base64.NO_WRAP));
+            ret.put("protocolVersion", dver);
+            resolveDiscover(ret);
+            return;
+        }
         if (value == null || value.length < 2) { emitPeerConnected(new byte[0], 0, ""); return; }
         int ver = value[0] & 0xff;
         int n = value[1] & 0xff;
@@ -581,6 +761,12 @@ public class KardiaBlePlugin extends Plugin {
 
     private void teardown(boolean silent) {
         stopScan();
+        cancelDiscoverTimeout();
+        if (pendingDiscover != null) {
+            PluginCall d = pendingDiscover;
+            pendingDiscover = null;
+            if (d != null) d.reject("Bluetooth discovery was closed.");
+        }
         BluetoothAdapter a = adapter();
         if (a != null && a.getBluetoothLeAdvertiser() != null && role.equals("display")) {
             try { a.getBluetoothLeAdvertiser().stopAdvertising(advertiseCallback); } catch (Exception ignored) { }

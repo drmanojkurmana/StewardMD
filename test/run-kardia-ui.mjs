@@ -64,7 +64,7 @@ try {
   await ev(`try{localStorage.removeItem("smd_kardia");localStorage.removeItem("smd_kardia_prefs");localStorage.removeItem("smd_home_tools");localStorage.setItem("smd_role","student");localStorage.setItem("smd_kardiox","1");}catch(e){} return 1;`);
   await load(BASE);
   const ENG = /\/(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?\.(js|css)|kardia\.js|kardia\.css|kardia-flags\.js|kardia\/)/;
-  ok(reqs.some((u) => /kardia-loader\.js\?v=krd2/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads kardia-loader.js and no engine or Kardia file");
+  ok(reqs.some((u) => /kardia-loader\.js\?v=krd3/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads kardia-loader.js and no engine or Kardia file");
   const gridOff = await ev(gridActs);
   const eligOff = await ev(eligibleActs);
   ok(!/,kardia,/.test("," + eligOff + ","), "Kardia is ineligible with the flag off");
@@ -82,7 +82,7 @@ try {
   const eligOn = await ev(eligibleActs);
   ok(/,kardia,/.test("," + eligOn + ","), "Kardia is eligible with the flag on");
   ok(!/,kardiox,/.test("," + eligOn + ","), "the KardiQ X tile is replaced while Kardia is on");
-  ok(reqs.some((u) => /specialty-shell\.js\?v=krd2/.test(u)) === false, "the engine still lazy-loads: nothing fetched until the tile opens");
+  ok(reqs.some((u) => /specialty-shell\.js\?v=krd3/.test(u)) === false, "the engine still lazy-loads: nothing fetched until the tile opens");
   // Open from All tools and pin it: the real Home tile UI, like a tester would.
   await ev(`document.querySelector('.rnav-tile[data-act=alltools]').click(); return 1;`);
   ok(await until(`return !!document.querySelector('[data-at-open="kardia"]');`, 10000), "All tools lists Kardia (and no KardiQ X row: " + await until(`return !document.querySelector('[data-at-open="kardiox"]');`, 5000) + ")");
@@ -93,7 +93,7 @@ try {
   await ev(`var t=document.querySelector('.rnav-tile[data-act=kardia]'); t.focus(); t.click(); return 1;`);
   ok(await until(`return KARDIA.isOpen() && !!document.getElementById("smdKardia");`, 10000), "tile opens the Kardia overlay");
   ok(await until(`return !!document.querySelector('#smdKardia [data-act=ktab][data-t=kardiox]');`, 20000), "first open loads the engine + Kardia and shows the five tabs");
-  ok(reqs.some((u) => /specialty-shell\.js\?v=krd2/.test(u)) && reqs.some((u) => /kardia\.js\?v=krd2/.test(u)), "engine + Kardia loaded on open, at the loader token");
+  ok(reqs.some((u) => /specialty-shell\.js\?v=krd3/.test(u)) && reqs.some((u) => /kardia\.js\?v=krd3/.test(u)), "engine + Kardia loaded on open, at the loader token");
   ok((await ev(`return KARDIA._kardia.tabs.join(",");`)) === "echo,learn,practice,cases,kardiox", "tabs: Echo Lab, Learn, Practice, Cases, KardiQ X");
   ok((await ev(`return KARDIA._kardia.levels.join(",");`)) === "mbbs,resident,fellow,sonographer", "levels: MBBS, Resident, Fellow, Sonographer");
   ok((await ev(`return KARDIA._kardia.freeLessons;`)) === 5, "free preview is a constant (5 lessons)");
@@ -199,122 +199,170 @@ try {
     }
   }
 
-  /* ── 4c. SyncProbe: two roles, one stubbed link (390 and 820, light and dark) ──
-   * The real KARDIA_SYNC core has not landed: the stub in
-   * test/fixtures/kardia-sync-stub.mjs stands in, loaded here as a module, and
-   * one page hosts both roles by swapping window.KARDIA_SYNC. The pair sheet,
-   * probe screens, pill, details and lost-link banner are exercised through the
-   * real Echo Lab hook, with screenshots into work/shots/. */
-  console.log("\n--- SyncProbe (stubbed link) ---");
+  /* ── 4c. SyncProbe end to end: two pages, real core, loopback bridge ──
+   * Page A (this page) is the display, page B is a second CDP target in the
+   * same headless Chrome. Both load the real kardia-sync.js facade. The only
+   * test-only piece is the BroadcastChannel loopback transport, registered
+   * only under the syncprobeLoopback flag (page B URL) or the
+   * __KARDIA_SYNC_LOOPBACK_TEST__ global the runner sets before registering
+   * it by hand on page A. Latency figures printed here are loopback figures
+   * through BroadcastChannel between two pages, not a radio measurement. */
+  console.log("\n--- SyncProbe end to end (two pages, real core, loopback) ---");
+  const callS = (sid, m, p) => { const i = msgId++; return new Promise(r => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId: sid })); }); };
+  const evS = async (sid, e) => { const r = await callS(sid, "Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
+  const untilS = async (sid, e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await evS(sid, e) === true) return true; await sleep(200); } return false; };
+  const shotS = async (sid, name) => { const r = await callS(sid, "Page.captureScreenshot", { format: "png" }); if (r.result && r.result.data) writeFileSync(join(SHOTS, name + ".png"), Buffer.from(r.result.data, "base64")); };
   await metrics(390, 844); await theme(false);
   await ev(`document.querySelector('#smdKardia [data-act=ktab][data-t=echo]').click(); return 1;`);
-  ok(await until(`return !!window.KARDIA_SYNCPROBE;`, 15000), "SyncProbe module loads with the Kardia engine");
+  ok(await until(`return !!window.KARDIA_SYNCPROBE && !!window.KARDIA_SYNC;`, 15000), "SyncProbe UI and the real KARDIA_SYNC core load with Kardia");
   ok(await until(`return !!document.getElementById('krdSyncPill');`, 8000), "Echo Lab carries the SyncProbe pill slot");
-  await ev(`import('/test/fixtures/kardia-sync-stub.mjs').then(function(m){ window.KARDIA_SYNCPROBE_STUB = m; }, function(x){ window.KARDIA_SYNCPROBE_STUB = 'ERR:' + String(x && x.message || x); }); return 1;`);
-  ok(await until(`return !!window.KARDIA_SYNCPROBE_STUB && typeof window.KARDIA_SYNCPROBE_STUB !== 'string';`, 15000), "SyncProbe stub loads in the app page");
-  await ev(`(function(){ var p = window.KARDIA_SYNCPROBE_STUB.createSessionPair(); window.__sph = { display: p.display, probe: p.probe }; window.KARDIA_SYNC = p.display; return 1; })()`);
-  const spUse = async (which) => ev(`window.KARDIA_SYNC = window.__sph.${which}; return 1;`);
-  const spTxt = async () => ev(`return document.getElementById('krdSpRoot') ? document.getElementById('krdSpRoot').innerText : '';`);
-  const spClick = async (sel) => ev(`(function(){var b=${sel}; if(b){b.click(); return 1;} return 0;})()`);
-  // Display role: role sheet, pair sheet, QR, code, live state.
+  // Touch controls work with no probe paired (also covered in section 3b).
+  ok((await ev(`return !document.getElementById('krdRot').disabled;`)) === true, "touch controls are enabled with no probe paired");
+  await ev(`window.__KARDIA_SYNC_LOOPBACK_TEST__ = true; if (!KARDIA_SYNC.getTransport('loopback')) KARDIA_SYNC.registerTransport(KARDIA_SYNC.createBroadcastLoopbackTransport()); return 1;`);
+  // Page B: a second target in the same Chrome.
+  const { result: { targetId: targetB } } = await call("Target.createTarget", { url: "about:blank" });
+  const { result: { sessionId: sidB } } = await call("Target.attachToTarget", { targetId: targetB, flatten: true });
+  await callS(sidB, "Runtime.enable", {}); await callS(sidB, "Page.enable", {});
+  await callS(sidB, "Page.navigate", { url: BASE + "?kardia=1&syncprobeLoopback=1" });
+  ok(await untilS(sidB, `return !!(window.KARDIA && window.SMD_showHome);`, 30000), "page B loads the app with the loopback test flag");
+  await evS(sidB, `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{localStorage.setItem("smd_kardia","1");}catch(e){} SMD_showHome(); return 1;`);
+  await sleep(500);
+  await evS(sidB, `KARDIA.open(); return 1;`);
+  ok(await untilS(sidB, `return KARDIA.isOpen() && !!document.querySelector('#smdKardia [data-act=ktab][data-t=echo]');`, 20000), "page B opens Kardia");
+  await evS(sidB, `document.querySelector('#smdKardia [data-act=ktab][data-t=echo]').click(); return 1;`);
+  ok(await untilS(sidB, `return !!document.querySelector('#smdKardia #krdSector');`, 20000), "page B reaches Echo Lab");
+  const spTxtS = async (sid) => evS(sid, `return document.getElementById('krdSpRoot') ? document.getElementById('krdSpRoot').innerText : '';`);
+  const spClickS = async (sid, sel) => evS(sid, `(function(){var b=${sel}; if(b){b.click(); return 1;} return 0;})()`);
+  // Display role on page A: role sheet, pair sheet, QR, code, live state.
   await ev(`[...document.querySelectorAll('#smdKardia [data-act]')].find(b=>b.getAttribute('data-act')==='kecho-syncprobe').click(); return 1;`);
   ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Pair a probe')>=0;`, 8000), "SyncProbe button opens the role sheet");
-  await spClick(`[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-display')`);
-  ok(await until(`return !!document.getElementById('krdSpQr');`, 8000), "pair sheet shows the pairing QR canvas");
+  await spClickS(sessionId, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-display')`);
+  ok(await until(`return !!document.getElementById('krdSpQr') && !!(KARDIA_SYNC.session() && KARDIA_SYNC.session().payload);`, 15000), "pair sheet shows the pairing QR canvas once the real pairing is ready");
   const spQr = await ev(`return document.getElementById('krdSpQr').width;`);
   ok(spQr > 100, `QR canvas draws at code size (${spQr}px wide)`);
-  const spCode = await ev(`return window.KARDIA_SYNC.session().shortCode;`);
+  const spCode = await ev(`return KARDIA_SYNC.session().shortCode;`);
+  const spPayload = await ev(`return KARDIA_SYNC.session().payload;`);
   ok(/^[A-Z2-9]{6}$/.test(spCode || ""), `probe code is six plain characters ("${spCode}")`);
-  ok((await spTxt()).indexOf(spCode.slice(0, 3)) >= 0, "the code on screen matches the session code");
-  ok(/Looking for|Pairing/.test(await ev(`return document.getElementById('krdSpState').innerText;`) || ""), "live state line moves");
-  ok(!/[–—]/.test(await spTxt()), "no em or en dash in the pair sheet");
-  // Probe role: intro, denied motion, touch fallback, calibrate, join box.
-  await spUse("probe");
-  await ev(`window.KARDIA_SYNCPROBE.openProbe(); return 1;`);
-  ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Use this phone as a probe')>=0;`, 8000), "probe intro explains motion first");
-  await ev(`window.__krdSpMotionForced = 'denied'; return 1;`);
-  await spClick(`[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-motion')`);
-  ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Motion is off')>=0;`, 8000), "denied motion explains and offers touch controls");
-  await spClick(`[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-touch')`);
-  ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Touch controls')>=0;`, 8000), "touch fallback opens");
-  await ev(`window.KARDIA_SYNCPROBE.openProbe(); return 1;`);
-  await ev(`window.__krdSpMotionForced = 'granted'; return 1;`);
-  await spClick(`[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-motion')`);
-  ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Calibrate')>=0;`, 8000), "granted motion reaches calibration");
-  ok(/left shoulder/.test(await spTxt() || ""), "calibration tells the hold position");
-  await spClick(`[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-calibrate')`);
-  ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Join with a code')>=0;`, 8000), "session screen still offers joining before the link exists");
-  // The probe joins with the typed code; both phones confirm the same number.
-  await ev(`document.getElementById('krdSpCode').value = ${JSON.stringify(spCode)}; return 1;`);
-  await spClick(`[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-join-code')`);
-  ok(await until(`return (document.getElementById('krdSpState')||{innerText:''}).innerText.indexOf('matches')>=0;`, 8000), "probe reaches the confirm step after joining");
-  await spUse("display");
-  await ev(`window.KARDIA_SYNCPROBE.openDisplay(); return 1;`);
-  ok(await until(`return (document.getElementById('krdSpState')||{innerText:''}).innerText.indexOf('matches')>=0;`, 8000), "display reaches the confirm step when the probe joins");
+  ok((await spTxtS(sessionId)).indexOf(spCode.slice(0, 3)) >= 0, "the code on screen matches the session code");
+  ok((await spTxtS(sessionId)).indexOf("Scan this with the probe phone") >= 0, "the QR is the hero of the pair sheet");
+  ok((await spTxtS(sessionId)).indexOf("or type this code") >= 0, "the code sits below as the typed backup");
+  ok(spQr >= 200, `QR draws large enough to scan from across a table (${spQr}px wide)`);
+  ok(!/[–—]/.test(await spTxtS(sessionId)), "no em or en dash in the pair sheet");
+  // Probe role on page B: intro, denied motion, touch fallback, then join.
+  await evS(sidB, `[...document.querySelectorAll('#smdKardia [data-act]')].find(b=>b.getAttribute('data-act')==='kecho-syncprobe').click(); return 1;`);
+  await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-probe')`);
+  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Use this phone as a probe')>=0;`, 8000), "probe intro explains motion first");
+  await evS(sidB, `window.__krdSpMotionForced = 'denied'; return 1;`);
+  await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-motion')`);
+  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Motion is off')>=0;`, 8000), "denied motion explains and offers touch controls");
+  await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-touch')`);
+  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Touch controls')>=0;`, 8000), "touch fallback opens");
+  await evS(sidB, `window.KARDIA_SYNCPROBE.openProbe(); window.__krdSpMotionForced = 'granted'; return 1;`);
+  await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-motion')`);
+  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Calibrate')>=0;`, 8000), "granted motion reaches calibration");
+  await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-calibrate')`);
+  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Join the display')>=0;`, 8000), "session screen still offers joining before the link exists");
+  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Scan the QR code')>=0;`, 8000), "scan is the primary join action");
+  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('or type the 6 character code')>=0;`, 8000), "typing stays as the quiet backup");
+  // Page B joins with the full pairing payload from page A, over the loopback.
+  await evS(sidB, `(function(){var i=document.getElementById('krdSpCode'); i.removeAttribute('maxlength'); i.value = ${JSON.stringify(spPayload)}; return 1;})()`);
+  await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-join-code')`);
+  ok(await untilS(sidB, `return KARDIA_SYNC.state().name==='confirming';`, 15000), "page B reaches confirming after joining over the loopback");
+  ok(await until(`return KARDIA_SYNC.state().name==='confirming';`, 15000), "page A reaches confirming when page B joins");
+  const confirmA = await ev(`return KARDIA_SYNC.session().confirm;`);
+  const confirmB = await evS(sidB, `return KARDIA_SYNC.session().confirm;`);
+  ok(confirmA && confirmA === confirmB, `both pages show the same 4 digit number ("${confirmA}" and "${confirmB}")`);
   const spConfirmD = await ev(`return (document.querySelector('#krdSpConfirm .krd-sp-confirmno')||{innerText:''}).innerText;`);
-  ok(spConfirmD.replace(/\s/g, "") === await ev(`return window.__sph.probe.session().confirm;`), `both phones show the same number ("${spConfirmD.trim()}")`);
+  ok(spConfirmD.replace(/\s/g, "") === confirmA, "the number on page A matches the session number");
   await shot(`kardia-syncprobe-confirm-390-light`);
-  await spClick(`document.querySelector('#krdSpConfirm [data-act=sp-confirm]')`);
-  await spUse("probe");
-  await ev(`window.KARDIA_SYNCPROBE.openProbe(); return 1;`);
-  ok(await until(`return !!document.querySelector('#krdSpConfirmP [data-act=sp-confirm]');`, 8000), "probe shows its own confirm button");
-  await spClick(`document.querySelector('#krdSpConfirmP [data-act=sp-confirm]')`);
+  await spClickS(sessionId, `document.querySelector('#krdSpConfirm [data-act=sp-confirm]')`);
+  await spClickS(sidB, `document.querySelector('#krdSpConfirmP [data-act=sp-confirm]')`);
+  ok(await until(`return KARDIA_SYNC.state().name==='connected';`, 15000), "page A connects after both confirm");
+  ok(await untilS(sidB, `return KARDIA_SYNC.state().name==='connected';`, 15000), "page B connects after both confirm");
   ok(await until(`return (document.querySelectorAll('#krdSyncPill button').length>0);`, 8000), "connected: the sheet closes and the pill appears on Echo Lab");
   const spPill = await ev(`return document.querySelector('#krdSyncPill').innerText;`);
   ok(/ms/.test(spPill || ""), `pill shows link latency ("${(spPill || "").trim()}")`);
-  ok(!/[–—]/.test(spPill || ""), "no dashes in the pill");
   ok((await ev(`return document.querySelector('#krdSyncPill button').getBoundingClientRect().height;`)) >= 44, "pill is a 44px target");
-  await sleep(700);
-  ok(/Tilt -?\d+ deg/.test(await ev(`return (document.getElementById('krdSpPoseDesc')||{innerText:''}).innerText;`) || ""), "orientation readout follows the link");
-  await shot(`kardia-syncprobe-probe-active-390-light`);
-  await ev(`window.__sph.probe._set('reconnecting'); return 1;`);
-  ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('frozen')>=0;`, 8000), "probe shows the lost banner with Reconnect and Recenter");
-  await shot(`kardia-syncprobe-probe-lost-390-light`);
-  await ev(`window.__sph.probe.reconnect(); return 1;`);
-  ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Probe session')>=0 && (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('frozen')<0;`, 8000), "reconnect clears the probe banner");
-  // Details, lost link and recenter on the display phone.
-  await spUse("display");
-  await ev(`window.KARDIA_SYNCPROBE.openDisplay(); return 1;`);
-  await ev(`window.KARDIA_SYNCPROBE.dismiss(); return 1;`);
-  await spClick(`document.querySelector('#krdSyncPill button')`);
-  ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Connection')>=0;`, 8000), "pill opens connection details");
-  const spDet = await spTxt();
-  for (const w of ["Link", "Delay", "Image rate", "Code expires", "Last error", "Links on this phone"]) {
-    ok(spDet.indexOf(w) >= 0, `details show ${w}`);
+  ok(await until(`return !!document.getElementById('krdSpPaired') && document.getElementById('krdSpPaired').innerText.indexOf('Probe paired')>=0;`, 8000), "display shows the Probe paired state");
+  ok((await ev(`return document.getElementById('krdRot').disabled && !!document.querySelector('#krdLab input[type=range]');`)) === true, "touch controls are disabled, not removed, while a remote controller is active");
+  // Scripted rotation from page B: DeviceOrientation events drive page A.
+  // End-to-end latency is a step measurement: settle at the baseline, then
+  // one scripted step (held, as a real sensor keeps firing at the new
+  // attitude) and the time for the display tilt to cross half the step.
+  // A slow ramp is not measured: it would count the ramp, not the link.
+  await evS(sidB, `window.dispatchEvent(new DeviceOrientationEvent('deviceorientation',{alpha:0,beta:0,gamma:0})); return 1;`);
+  await sleep(400);
+  const tiltBefore = await ev(`return KARDIA._kardia.echoLab.getProbeState().tiltDeg;`);
+  const stepDeg = 25, halfTilt = tiltBefore + stepDeg / 2;
+  const e2eStart = Date.now();
+  let e2eMs = null;
+  while (Date.now() - e2eStart < 5000) {
+    await evS(sidB, `window.dispatchEvent(new DeviceOrientationEvent('deviceorientation',{alpha:0,beta:${stepDeg},gamma:0})); return 1;`);
+    const tNow = await ev(`return KARDIA._kardia.echoLab.getProbeState().tiltDeg;`);
+    if (tNow >= halfTilt) { e2eMs = Date.now() - e2eStart; break; }
+    await sleep(10);
   }
-  ok(spDet.indexOf("Nearby, Bluetooth") < 0, "loopback link is named plainly, not as Bluetooth");
-  await shot(`kardia-syncprobe-details-390-light`);
-  await spClick(`[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-back')`);
-  await ev(`window.__sph.display._set('reconnecting'); return 1;`);
-  ok(await until(`return !!document.getElementById('krdSpLost');`, 8000), "lost link shows a banner on Echo Lab");
+  const tiltAfter = await ev(`return KARDIA._kardia.echoLab.getProbeState().tiltDeg;`);
+  ok(e2eMs !== null && Math.abs(tiltAfter - tiltBefore) > 5, `page A probe state follows page B rotation within tolerance (tilt ${tiltBefore} to ${tiltAfter})`);
+  await sleep(1200);
+  const rttA = await ev(`return KARDIA_SYNC.stats().rttMs;`);
+  const rttB = await evS(sidB, `return KARDIA_SYNC.stats().rttMs;`);
+  console.log(`LATENCY loopback (BroadcastChannel between two pages, not a radio measurement): round trip page A ${rttA} ms, page B ${rttB} ms; end to end rotation to display ${e2eMs} ms`);
+  ok(typeof rttA === "number" && rttA >= 0 && typeof rttB === "number" && rttB >= 0, "loopback round trip is measured on both pages");
+  ok(e2eMs !== null && e2eMs < 150, `loopback end to end latency is under 150 ms (${e2eMs} ms)`);
+  await shot(`kardia-syncprobe-probe-active-390-light`);
+  // Cut the link: page A freezes with no jump and shows the warning.
+  const frozenPose = await ev(`return JSON.stringify(KARDIA._kardia.echoLab.getProbeState());`);
+  await ev(`window.__KARDIA_SYNC_TEST_CUT__ = true; return 1;`);
+  await evS(sidB, `window.__KARDIA_SYNC_TEST_CUT__ = true; return 1;`);
+  ok(await until(`return KARDIA_SYNC.state().name==='reconnecting' && !!document.getElementById('krdSpLost');`, 10000), "cut link: page A shows the frozen warning banner");
   ok(/frozen/.test(await ev(`return document.getElementById('krdLab').innerText;`) || ""), "banner says the image is frozen");
+  await evS(sidB, `window.dispatchEvent(new DeviceOrientationEvent('deviceorientation',{alpha:0,beta:-40,gamma:0})); return 1;`);
+  await sleep(600);
+  ok((await ev(`return JSON.stringify(KARDIA._kardia.echoLab.getProbeState());`)) === frozenPose, "page A stays frozen at the last pose with no jump while the link is cut");
   await shot(`kardia-syncprobe-lost-390-light`);
-  await spClick(`document.querySelector('#krdSpLost [data-act=sp-reconnect]')`);
-  await ev(`window.__sph.display.reconnect(); return 1;`);
-  ok(await until(`return !document.getElementById('krdSpLost');`, 8000), "reconnect clears the banner");
+  // Resume: restore the loopback, then the explicit Reconnect action.
+  await ev(`window.__KARDIA_SYNC_TEST_CUT__ = false; return 1;`);
+  await evS(sidB, `window.__KARDIA_SYNC_TEST_CUT__ = false; return 1;`);
+  await spClickS(sessionId, `document.querySelector('#krdSpLost [data-act=sp-reconnect]')`);
+  ok(await until(`return KARDIA_SYNC.state().name==='connected' && !document.getElementById('krdSpLost');`, 10000), "Resume reconnects page A and clears the banner");
+  await evS(sidB, `if (KARDIA_SYNC.state().name!=='connected') KARDIA_SYNC.reconnect(); return 1;`);
+  await evS(sidB, `window.dispatchEvent(new DeviceOrientationEvent('deviceorientation',{alpha:0,beta:0,gamma:0})); return 1;`);
+  await sleep(200);
+  for (let i = 1; i <= 10; i++) { await evS(sidB, `window.dispatchEvent(new DeviceOrientationEvent('deviceorientation',{alpha:0,beta:${-Math.round(i * 2)},gamma:0})); return 1;`); await sleep(60); }
+  await sleep(400);
+  const tiltResumed = await ev(`return KARDIA._kardia.echoLab.getProbeState().tiltDeg;`);
+  ok(Math.abs(tiltResumed - JSON.parse(frozenPose).tiltDeg) > 3, `after Resume, page A follows page B again (tilt ${tiltResumed})`);
+  // Details on the display page.
+  await spClickS(sessionId, `document.querySelector('#krdSyncPill button')`);
+  ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Connection')>=0;`, 8000), "pill opens connection details");
+  const spDet = await spTxtS(sessionId);
+  for (const w of ["Link", "Delay", "Image rate", "Code expires", "Last error", "Links on this phone"]) ok(spDet.indexOf(w) >= 0, `details show ${w}`);
+  await shot(`kardia-syncprobe-details-390-light`);
+  await spClickS(sessionId, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-back')`);
   // Screenshots: pair sheet and probe screen at 390 and 820, light and dark.
   for (const [w, h] of [[390, 844], [820, 1180]]) {
-    await metrics(w, h);
+    await metrics(w, h); await callS(sidB, "Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 2, mobile: true });
     for (const dark of [false, true]) {
-      await theme(dark);
+      await theme(dark); await evS(sidB, `document.body.classList.toggle('dark', ${dark}); document.body.classList.toggle('v3-dark', ${dark}); return 1;`); await sleep(300);
       const th = dark ? "dark" : "light";
-      await spUse("display");
       await ev(`window.KARDIA_SYNCPROBE.openDisplay(); return 1;`);
       ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Pair a probe')>=0;`, 8000), `${w}px ${th}: pair sheet`);
       await shot(`kardia-syncprobe-pair-${w}-${th}`);
-      await spUse("probe");
-      await ev(`window.KARDIA_SYNCPROBE.openProbe(); return 1;`);
-      ok(await until(`return /Probe session|Use this phone/.test((document.getElementById('krdSpRoot')||{innerText:''}).innerText);`, 8000), `${w}px ${th}: probe screen`);
-      await shot(`kardia-syncprobe-probe-${w}-${th}`);
-      await spUse("display");
+      await evS(sidB, `window.KARDIA_SYNCPROBE.openProbe(); return 1;`);
+      ok(await untilS(sidB, `return /Probe session|Use this phone/.test((document.getElementById('krdSpRoot')||{innerText:''}).innerText);`, 8000), `${w}px ${th}: probe screen`);
+      await shotS(sidB, `kardia-syncprobe-probe-${w}-${th}`);
       await ev(`window.KARDIA_SYNCPROBE.dismiss(); return 1;`);
       ok(await until(`return (document.querySelector('#krdSyncPill')||{innerText:''}).innerText.length>0;`, 8000), `${w}px ${th}: pill on Echo Lab`);
       await shot(`kardia-syncprobe-pill-${w}-${th}`);
     }
   }
   // Leave no trace for the sections after this one.
-  await ev(`window.KARDIA_SYNCPROBE.close(); try { delete window.KARDIA_SYNC; } catch (e) {} return 1;`);
+  await evS(sidB, `window.KARDIA_SYNCPROBE.close(); KARDIA_SYNC.disconnect(); return 1;`);
+  await ev(`window.KARDIA_SYNCPROBE.close(); KARDIA_SYNC.disconnect(); return 1;`);
+  try { await call("Target.closeTarget", { targetId: targetB }); } catch {}
   ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText === '';`, 8000), "SyncProbe UI closes cleanly");
+
 
   // Pressing Open KardiQ X without a code must hold at the gate: no AI overlay opens.
   await ev(`document.querySelector('#smdKardia [data-act=ktab][data-t=kardiox]').click(); return 1;`);

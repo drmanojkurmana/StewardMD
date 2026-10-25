@@ -10,26 +10,32 @@ import { webcrypto } from "node:crypto";
 
 const SRC = readFileSync(new URL("../kardia-sync-ble.js", import.meta.url), "utf8");
 
-function makePlugin(caps) {
+function makePlugin(caps, opts = {}) {
   const listeners = {};
-  const calls = { host: [], join: [], send: [], close: [] };
+  const calls = { host: [], join: [], discover: [], send: [], close: [] };
   const plugin = {
     calls,
     listeners,
     getCapabilities: () => Promise.resolve(caps),
-    host: (opts) => { calls.host.push(opts); return Promise.resolve({ started: true }); },
-    join: (opts) => { calls.join.push(opts); return Promise.resolve({ started: true }); },
-    send: (opts) => { calls.send.push(opts); return Promise.resolve({ sent: true }); },
-    close: (opts) => { calls.close.push(opts); return Promise.resolve({ closed: true }); },
+    host: (opts2) => { calls.host.push(opts2); return Promise.resolve({ started: true }); },
+    join: (opts2) => { calls.join.push(opts2); return Promise.resolve({ started: true }); },
+    discover: (args) => {
+      calls.discover.push(args);
+      if (typeof opts.onDiscover === "function") return opts.onDiscover(args);
+      return Promise.resolve(null);
+    },
+    send: (opts2) => { calls.send.push(opts2); return Promise.resolve({ sent: true }); },
+    close: (opts2) => { calls.close.push(opts2); return Promise.resolve({ closed: true }); },
     addListener: (name, fn) => { listeners[name] = fn; return Promise.resolve({ remove() { delete listeners[name]; } }); },
     emit: (name, ev) => { if (listeners[name]) listeners[name](ev); },
   };
+  if (opts.noDiscover) delete plugin.discover;
   return plugin;
 }
 
-function loadEnv({ native = true, caps = null } = {}) {
+function loadEnv({ native = true, caps = null, onDiscover = null, noDiscover = false } = {}) {
   const registered = [];
-  const plugin = makePlugin(caps || { available: true, reason: "", canAdvertise: true, canScan: true, maxPayload: 182, platform: "ios" });
+  const plugin = makePlugin(caps || { available: true, reason: "", canAdvertise: true, canScan: true, maxPayload: 182, platform: "ios" }, { onDiscover, noDiscover });
   const windowObj = {
     crypto: webcrypto,
     KARDIA_SYNC: { registerTransport: (t) => registered.push(t) },
@@ -51,6 +57,8 @@ function loadEnv({ native = true, caps = null } = {}) {
     TextEncoder,
     setInterval,
     clearInterval,
+    setTimeout,
+    clearTimeout,
     Promise,
     Date,
     Error,
@@ -180,4 +188,92 @@ test("exposes the SyncProbe UUIDs", () => {
   assert.equal(window.KARDIA_SYNC_BLE.SERVICE_UUID, "A91E0001-9D3C-4F5A-B2C4-1A2B3C4D5E6F");
   assert.equal(window.KARDIA_SYNC_BLE.DOWN_UUID, "A91E0003-9D3C-4F5A-B2C4-1A2B3C4D5E6F");
   assert.equal(window.KARDIA_SYNC_BLE.UP_UUID, "A91E0004-9D3C-4F5A-B2C4-1A2B3C4D5E6F");
+});
+
+// Short code discovery: the probe joins with only the 6 character code. The
+// adapter hashes the code, the native plugin scans for that hash, connects,
+// reads the info characteristic and returns sessionId plus displayPub.
+
+const DISCOVER_SESSION = "00112233445566778899aabbccddeeff";
+
+function validDisplayPubB64() {
+  const raw = Buffer.alloc(65);
+  raw[0] = 4;
+  for (let i = 1; i < 65; i++) raw[i] = i & 0xff;
+  return raw.toString("base64");
+}
+
+async function codeHashHexOf(code) {
+  const digest = await webcrypto.subtle.digest("SHA-256", new TextEncoder().encode(code));
+  return Buffer.from(new Uint8Array(digest).subarray(0, 4)).toString("hex");
+}
+
+test("discover scans by code hash and returns pairing details for a match", async () => {
+  const pubB64 = validDisplayPubB64();
+  const { registered, plugin } = loadEnv({
+    onDiscover: () => Promise.resolve({ sessionId: DISCOVER_SESSION, displayPub: pubB64, protocolVersion: 1 }),
+  });
+  const found = await registered[0].discover("MNPQRS");
+  assert.equal(found.sessionId, DISCOVER_SESSION);
+  assert.equal(found.shortCode, "MNPQRS");
+  assert.ok(found.expiresAt > Date.now(), "missing native expiry is filled in");
+  assert.ok(found.payload.startsWith("kardia-sync:1:" + DISCOVER_SESSION + ":"));
+  assert.match(found.displayPub, /^[A-Za-z0-9_-]+$/, "payload key is base64url");
+  assert.equal(plugin.calls.discover.length, 1);
+  assert.equal(plugin.calls.discover[0].codeHashHex, await codeHashHexOf("MNPQRS"));
+});
+
+test("discover rejects with a clear error when no display answers", async () => {
+  const { registered, plugin } = loadEnv({
+    onDiscover: () => Promise.reject(new Error("No display found for that code.")),
+  });
+  await assert.rejects(() => registered[0].discover("MNPQRS"), /No display found/);
+  assert.equal(plugin.calls.discover.length, 1);
+  assert.equal(registered[0]._discoverAttempt(), 1, "failure climbs the back-off ladder");
+  assert.equal(registered[0]._discoverBackoffMs(), 4000);
+});
+
+test("discover ignores displays advertising a different code hash", async () => {
+  const pubB64 = validDisplayPubB64();
+  const wanted = await codeHashHexOf("MNPQRS");
+  const notFound = () => {
+    const e = new Error("No display found for that code.");
+    e.reason = "not-found";
+    return Promise.reject(e);
+  };
+  const { registered, plugin } = loadEnv({
+    onDiscover: (args) => (args.codeHashHex === wanted
+      ? Promise.resolve({ sessionId: DISCOVER_SESSION, displayPub: pubB64, protocolVersion: 1 })
+      : notFound()),
+  });
+  const found = await registered[0].discover("MNPQRS");
+  assert.equal(found.sessionId, DISCOVER_SESSION);
+  await assert.rejects(() => registered[0].discover("WXYZ73"), /No display found/);
+  assert.equal(plugin.calls.discover.length, 2);
+  assert.notEqual(plugin.calls.discover[1].codeHashHex, wanted);
+});
+
+test("discover times out with a clear error instead of hanging", async () => {
+  const { registered, plugin } = loadEnv({ onDiscover: () => new Promise(() => {}) });
+  await assert.rejects(() => registered[0].discover("MNPQRS", 60), /No display found/);
+  assert.equal(plugin.calls.discover.length, 1);
+});
+
+test("concurrent discover calls share one BLE scan", async () => {
+  const { registered, plugin } = loadEnv({
+    onDiscover: () => new Promise((res) => setTimeout(
+      () => res({ sessionId: DISCOVER_SESSION, displayPub: validDisplayPubB64(), protocolVersion: 1 }), 30)),
+  });
+  const t = registered[0];
+  const [a, b] = await Promise.all([t.discover("MNPQRS"), t.discover("MNPQRS")]);
+  assert.equal(a.sessionId, DISCOVER_SESSION);
+  assert.equal(b.sessionId, DISCOVER_SESSION);
+  assert.equal(plugin.calls.discover.length, 1, "single scan rule");
+});
+
+test("discover rejects malformed codes without scanning", async () => {
+  const { registered, plugin } = loadEnv({ onDiscover: () => Promise.resolve(null) });
+  await assert.rejects(() => registered[0].discover("ABC"), /6 character code/);
+  await assert.rejects(() => registered[0].discover(""), /6 character code/);
+  assert.equal(plugin.calls.discover.length, 0);
 });

@@ -15,6 +15,7 @@ public class KardiaBlePlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "requestPermissions", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "host", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "join", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "discover", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "send", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "close", returnType: CAPPluginReturnPromise)
     ]
@@ -45,6 +46,8 @@ public class KardiaBlePlugin: CAPPlugin, CAPBridgedPlugin {
     private var probeInfo: CBCharacteristic?
     private var pendingHost: CAPPluginCall?
     private var pendingJoin: CAPPluginCall?
+    private var pendingDiscover: CAPPluginCall?
+    private var discoverWork: DispatchWorkItem?
     private var serviceAdded = false
 
     private func ensureManagers() {
@@ -79,11 +82,10 @@ public class KardiaBlePlugin: CAPPlugin, CAPBridgedPlugin {
 
     @objc func getCapabilities(_ call: CAPPluginCall) { call.resolve(capsDict()) }
 
-    @objc func requestPermissions(_ call: CAPPluginCall) {
+    override public func requestPermissions(_ call: CAPPluginCall) {
         ensureManagers()
         // Creating the managers triggers the system prompt when not determined.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-            guard let self = self else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             let auth = CBManager.authorization
             call.resolve(["granted": auth == .allowedAlways || auth == .notDetermined,
                           "authorization": auth.rawValue])
@@ -161,6 +163,72 @@ public class KardiaBlePlugin: CAPPlugin, CAPBridgedPlugin {
         pendingJoin = nil
     }
 
+    /// Short code discovery for joining with only the 6 character code.
+    /// Scans by service UUID, filters by the 4 byte code hash (service data
+    /// or the KS- local name), connects, reads the info characteristic and
+    /// resolves with sessionId, displayPub and protocolVersion. Rejects with
+    /// a plain message when nothing is found before the timeout. One scan at
+    /// a time: a second discover while one is running is rejected.
+    @objc func discover(_ call: CAPPluginCall) {
+        ensureManagers()
+        if pendingDiscover != nil {
+            call.reject("A Bluetooth scan is already running. Wait a moment and try again.")
+            return
+        }
+        let hash = Self.hexToData((call.getString("codeHashHex") ?? "").lowercased())
+        guard hash.count == 4 else {
+            call.reject("Enter the 6 character code shown on the display.")
+            return
+        }
+        var timeoutMs = call.getInt("timeoutMs") ?? 10000
+        timeoutMs = max(2000, min(timeoutMs, 30000))
+        guard let cm = centralManager, cm.state == .poweredOn else {
+            call.reject("Bluetooth is not available.")
+            return
+        }
+        teardown(silent: true)
+        role = "discover"
+        sessionIdHex = ""
+        expectedHash = hash
+        pendingDiscover = call
+        startDiscoverScan()
+        let work = DispatchWorkItem { [weak self] in self?.discoverTimedOut() }
+        discoverWork = work
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(timeoutMs), execute: work)
+    }
+
+    private func startDiscoverScan() {
+        guard role == "discover", let cm = centralManager, cm.state == .poweredOn else { return }
+        cm.scanForPeripherals(withServices: [Self.serviceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
+    }
+
+    private func finishDiscover(sessionId: String, displayPub: Data, version: Int) {
+        guard let call = pendingDiscover else { return }
+        pendingDiscover = nil
+        discoverWork?.cancel(); discoverWork = nil
+        centralManager?.stopScan()
+        if let p = probePeripheral { centralManager?.cancelPeripheralConnection(p) }
+        probePeripheral = nil; probeDown = nil; probeUp = nil; probeInfo = nil
+        role = ""
+        call.resolve(["sessionId": sessionId, "displayPub": displayPub.base64EncodedString(),
+                      "protocolVersion": version])
+    }
+
+    private func failDiscover(_ message: String) {
+        guard let call = pendingDiscover else { return }
+        pendingDiscover = nil
+        discoverWork?.cancel(); discoverWork = nil
+        centralManager?.stopScan()
+        if let p = probePeripheral { centralManager?.cancelPeripheralConnection(p) }
+        probePeripheral = nil; probeDown = nil; probeUp = nil; probeInfo = nil
+        role = ""
+        call.reject(message)
+    }
+
+    private func discoverTimedOut() {
+        failDiscover("No display found for that code. Check the code and keep both phones close together.")
+    }
+
     @objc func send(_ call: CAPPluginCall) {
         guard let b64 = call.getString("data"), let data = Data(base64Encoded: b64) else {
             call.resolve(["sent": false]); return
@@ -194,6 +262,11 @@ public class KardiaBlePlugin: CAPPlugin, CAPBridgedPlugin {
         hostCentral = nil; hostReady = false
         if !silent { role = "" }
         pendingHost = nil; pendingJoin = nil
+        discoverWork?.cancel(); discoverWork = nil
+        if let d = pendingDiscover {
+            pendingDiscover = nil
+            d.reject("Bluetooth discovery was closed.")
+        }
     }
 
     private func emitBytes(_ data: Data) {
@@ -221,6 +294,7 @@ extension KardiaBlePlugin: CBCentralManagerDelegate, CBPeripheralDelegate {
         if central.state == .poweredOn {
             if role == "display" { startHostingIfReady() }
             if role == "probe" { startScanIfReady() }
+            if role == "discover" { startDiscoverScan() }
         } else if central.state == .poweredOff {
             emitLost("Bluetooth was turned off.")
         }
@@ -232,11 +306,14 @@ extension KardiaBlePlugin: CBCentralManagerDelegate, CBPeripheralDelegate {
             pendingJoin?.reject("Bluetooth is not available.")
             pendingJoin = nil
         }
+        if pendingDiscover != nil && central.state != .poweredOn && central.state != .unknown {
+            failDiscover("Bluetooth is not available.")
+        }
     }
 
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral,
                                advertisementData: [String: Any], rssi RSSI: NSNumber) {
-        guard role == "probe", probePeripheral == nil else { return }
+        guard role == "probe" || role == "discover", probePeripheral == nil else { return }
         guard matchesHash(adv: advertisementData) else { return }
         probePeripheral = peripheral
         peripheral.delegate = self
@@ -249,6 +326,11 @@ extension KardiaBlePlugin: CBCentralManagerDelegate, CBPeripheralDelegate {
     }
 
     public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        if pendingDiscover != nil {
+            probePeripheral = nil
+            startDiscoverScan()
+            return
+        }
         emitError(error?.localizedDescription ?? "Could not connect to the display.")
         emitLost("Connection failed.")
         probePeripheral = nil
@@ -257,6 +339,10 @@ extension KardiaBlePlugin: CBCentralManagerDelegate, CBPeripheralDelegate {
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         if peripheral === probePeripheral {
             probePeripheral = nil; probeDown = nil; probeUp = nil; probeInfo = nil
+            if pendingDiscover != nil {
+                startDiscoverScan()
+                return
+            }
             emitLost(error?.localizedDescription ?? "The display disconnected.")
         }
     }
@@ -285,6 +371,14 @@ extension KardiaBlePlugin: CBCentralManagerDelegate, CBPeripheralDelegate {
                 ver = Int(v[0]); let n = Int(v[1])
                 if v.count >= 2 + n { pub = v.subdata(in: 2..<(2 + n)) }
                 if v.count >= 2 + n + 16 { sid = Self.dataToHex(v.subdata(in: (2 + n)..<(2 + n + 16))) }
+            }
+            if pendingDiscover != nil {
+                if pub.isEmpty || sid.isEmpty {
+                    failDiscover("That display did not return pairing details. Show a new code and try again.")
+                    return
+                }
+                finishDiscover(sessionId: sid, displayPub: pub, version: ver)
+                return
             }
             if !sessionIdHex.isEmpty && !sid.isEmpty && sid.lowercased() != sessionIdHex.lowercased() {
                 emitError("This display is for a different pairing session.")
@@ -350,7 +444,10 @@ extension KardiaBlePlugin: CBPeripheralManagerDelegate {
         for req in requests {
             if hostCentral != nil && req.central !== hostCentral { continue }
             if let v = req.value { emitBytes(v) }
-            if req.responseNeeded { peripheral.respond(to: req, withResult: .success) }
+            // CBATTRequest has no responseNeeded flag on iOS: a request on a
+            // with-response (write) characteristic must be answered, a
+            // write-without-response request must not be.
+            if req.characteristic.properties.contains(.write) { peripheral.respond(to: req, withResult: .success) }
         }
     }
 

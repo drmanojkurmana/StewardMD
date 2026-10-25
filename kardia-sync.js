@@ -531,7 +531,8 @@
     var controllerActive = false, controllerId = 0, confirmedLocal = false, confirmedPeer = false;
     var clockOffsetMs = null, lastActivityAt = nowFn(), lastPoseAt = 0, lastRenderAt = 0;
     var frozen = false, frozenReason = null, pendingPose = null, lastValidPose = null, lastValidState = null;
-    var displayProbe = null, smoother = createSmoother(opts.tauMs || 60), calibQuat = null, needsCalib = true;
+    var displayProbe = null, smoother = createSmoother(opts.tauMs || 60), calibQuat = null, calibBase = null, needsCalib = true;
+    var resumeArmed = false;
     var transport = null, destroyed = false, rejectedHellos = 0, statsIn = { accepted: 0, droppedMac: 0, droppedSeq: 0, droppedStale: 0, droppedBounds: 0, droppedSession: 0, droppedFrozen: 0 };
     var monoStart = nowFn();
     function monoMs() { return (nowFn() - monoStart) >>> 0; }
@@ -590,13 +591,30 @@
       var dp = ensureDisplayProbe();
       var target;
       if (dp) {
-        if (needsCalib || !calibQuat) { calibQuat = pose.quat.slice(); needsCalib = false; try { dp.calibrateGyro({ alpha: 0, beta: 0, gamma: 0 }); } catch (e) {} }
+        if (dp.getState().window !== pose.window) {
+          try { dp.setState({ window: pose.window }); } catch (e0) {}
+          needsCalib = true; calibQuat = null;
+        }
+        if (needsCalib || !calibQuat) {
+          calibQuat = pose.quat.slice(); needsCalib = false;
+          try { dp.calibrateGyro({ alpha: 0, beta: 0, gamma: 0 }); } catch (e) {}
+          calibBase = dp.getState();
+        }
         var rel = quatNormalize(quatMul(quatConj(calibQuat), pose.quat));
         var eu = eulerFromQuat(rel);
-        try { dp.applyGyroSample({ alpha: eu.rockDeg, beta: eu.tiltDeg, gamma: eu.rotationDeg }, 16); } catch (e2) {}
-        var ps = dp.getState();
+        var ps;
+        if (probeLib && typeof probeLib.isTeeWindow === "function" && probeLib.isTeeWindow(pose.window)) {
+          try { dp.applyGyroSample({ alpha: eu.rockDeg, beta: eu.tiltDeg, gamma: eu.rotationDeg }, 16); } catch (e2) {}
+          ps = dp.getState();
+        } else {
+          // No second low-pass here: the probe already filtered its samples,
+          // and re-filtering on the display doubled the lag. Set the target
+          // directly from the relative euler angles off the calibrate base.
+          var base = calibBase || dp.getState();
+          try { ps = dp.setState({ tiltDeg: base.tiltDeg + eu.tiltDeg, rotationDeg: base.rotationDeg + eu.rotationDeg, rockDeg: base.rockDeg + eu.rockDeg }); }
+          catch (e2) { ps = dp.getState(); }
+        }
         target = { window: pose.window, tiltDeg: ps.tiltDeg, rotationDeg: ps.rotationDeg, rockDeg: ps.rockDeg, x: pose.slideXmm, y: pose.slideYmm, raw: { tiltDeg: eu.tiltDeg, rotationDeg: eu.rotationDeg, rockDeg: eu.rockDeg } };
-        if (ps.window !== pose.window) { try { dp.setState({ window: pose.window }); dp.calibrateGyro({ alpha: 0, beta: 0, gamma: 0 }); calibQuat = pose.quat.slice(); } catch (e3) {} }
       } else {
         var eu2 = eulerFromQuat(quatNormalize(pose.quat));
         target = { window: pose.window, tiltDeg: eu2.tiltDeg, rotationDeg: eu2.rotationDeg, rockDeg: eu2.rockDeg, x: pose.slideXmm, y: pose.slideYmm, raw: eu2 };
@@ -616,7 +634,7 @@
       get clockOffsetMs() { return clockOffsetMs; },
       get rejectedHellos() { return rejectedHellos; },
       getState: function () {
-        return { state: state, reason: stateReason, recoveryHint: recoveryHint, role: role, frozen: frozen, frozenReason: frozenReason, confirmCode: confirmCode, sessionId: sessionIdBytes ? bytesToHex(sessionIdBytes) : null, controllerActive: controllerActive, lastSeqIn: lastSeqIn, seqOut: seqOut, clockOffsetMs: clockOffsetMs };
+        return { state: state, reason: stateReason, recoveryHint: recoveryHint, role: role, frozen: frozen, frozenReason: frozenReason, resumeArmed: resumeArmed, confirmCode: confirmCode, sessionId: sessionIdBytes ? bytesToHex(sessionIdBytes) : null, controllerActive: controllerActive, lastSeqIn: lastSeqIn, seqOut: seqOut, clockOffsetMs: clockOffsetMs };
       },
       setStateForTest: function (s, r) { return setState(s, r); },
       attachTransport: function (t) { transport = t; return node; },
@@ -688,9 +706,21 @@
         return node;
       },
       freeze: function (reason) { frozen = true; frozenReason = reason || "loss"; onWarning("Connection lost. The image is frozen at the last position."); return node; },
-      resume: function () {
-        frozen = false; frozenReason = null; needsCalib = true; pendingPose = null;
+      armResume: function () {
+        // Re-arm the receiver after a gap: accept the peer's next sequence
+        // (however far it advanced, or restarted, while the link was down),
+        // drop the old clock offset so the next PING/PONG re-estimates it,
+        // and keep the image frozen until the first valid pose lands. That
+        // pose becomes the new calibrate zero, so the display eases from
+        // the frozen pose instead of jumping.
+        seqSeen = {}; lastSeqIn = 0; clockOffsetMs = null;
+        resumeArmed = true; needsCalib = true; calibQuat = null; calibBase = null; pendingPose = null;
+        frozen = true; frozenReason = "awaiting-first-pose-after-resume";
         if (lastValidState) smoother.reset({ tiltDeg: lastValidState.tiltDeg, rotationDeg: lastValidState.rotationDeg, rockDeg: lastValidState.rockDeg, x: lastValidState.position ? lastValidState.position.x : 0, y: lastValidState.position ? lastValidState.position.y : 0 });
+        return node;
+      },
+      resume: function () {
+        node.armResume();
         if (state === "reconnecting" || state === "disconnected") setState("connected", "explicit-resume");
         try { sendFrame({ type: TYPES.CONTROL, code: CONTROLS.RESUME, arg: 0 }); } catch (e) {}
         return node;
@@ -748,10 +778,18 @@
         var frame = dec.frame;
         if (frame.sessionTag !== sessionTag) { statsIn.droppedSession++; return Promise.resolve(false); }
         if (frame.type === TYPES.POSE) {
-          if (!checkSeqAndStale(frame)) return Promise.resolve(false);
+          // First valid pose after Resume bypasses seq/stale: the receiver
+          // was re-armed, so a jumped or restarted sequence and a not yet
+          // re-estimated clock offset must not drop it.
+          if (!resumeArmed && !checkSeqAndStale(frame)) return Promise.resolve(false);
           var v = validatePose(frame.pose, probeLib);
           if (!v.ok) { statsIn.droppedBounds++; return Promise.resolve(false); }
           acceptSeq(frame); lastActivityAt = nowFn(); lastPoseAt = lastActivityAt;
+          if (resumeArmed) {
+            resumeArmed = false; frozen = false; frozenReason = null;
+            pendingPose = frame.pose; lastValidPose = frame.pose; statsIn.accepted++;
+            return Promise.resolve(true);
+          }
           if (frozen) { statsIn.droppedFrozen++; pendingPose = frame.pose; return Promise.resolve(true); }
           pendingPose = frame.pose; lastValidPose = frame.pose; statsIn.accepted++;
           return Promise.resolve(true);
@@ -779,8 +817,8 @@
             confirmedPeer = true;
             if (confirmedLocal && state === "connecting") setState("connected", "both-confirmed");
             else if (confirmedLocal) setState("connected", "both-confirmed");
-          } else if (frame.code === CONTROLS.RESUME) { frozen = false; needsCalib = true; }
-          else if (frame.code === CONTROLS.RECENTER) { needsCalib = true; frozen = false; }
+          } else if (frame.code === CONTROLS.RESUME) { node.armResume(); }
+          else if (frame.code === CONTROLS.RECENTER) { needsCalib = true; calibQuat = null; calibBase = null; frozen = false; resumeArmed = false; }
           else if (frame.code === CONTROLS.END) { node.handlePeerLost("ended"); }
           else if (frame.code === CONTROLS.PAUSE) { frozen = true; }
         } else if (frame.type === TYPES.BYE) {
@@ -844,6 +882,7 @@
     var sendPose = opts.sendPose || function () {};
     var onError = opts.onError || function () {};
     var probe = opts.probe || null, listening = false, handler = null, lastTs = 0, calibrateAtt = null;
+    var lastPose = null, lastPoseState = null, lastMoveAt = 0, resendTimer = null;
     function ensureProbe() { if (!probe && probeLib) probe = probeLib.create({}); return probe; }
     function handleOrientation(attitude, dtMs) {
       var p = ensureProbe(); if (!p) return null;
@@ -853,9 +892,24 @@
       var q = quatFromEuler(st.tiltDeg || 0, st.rotationDeg || 0, st.rockDeg || 0);
       var pose = { quat: q, touch: 0, window: st.window, slideXmm: st.position ? st.position.x : 0, slideYmm: st.position ? st.position.y : 0, flags: { calibrated: true } };
       pose.probeState = st;
+      lastPose = pose; lastPoseState = st; lastMoveAt = nowDefault();
       sendPose(pose, st);
       return pose;
     }
+    // While the phone is moving, POSE goes out at 25 Hz: orientation events
+    // alone can arrive sparsely, so the latest pose is resent on a 40 ms
+    // timer for a short window after the last sample. The display coalesces
+    // to the newest pose, so resends only step its smoothing forward.
+    function startResend() {
+      if (resendTimer || typeof setInterval === "undefined") return;
+      resendTimer = setInterval(function () {
+        if (!listening || !lastPose) return;
+        if (nowDefault() - lastMoveAt > 500) return;
+        try { sendPose(lastPose, lastPoseState); } catch (e) {}
+      }, 40);
+      if (resendTimer && resendTimer.unref) resendTimer.unref();
+    }
+    function stopResend() { if (resendTimer) { try { clearInterval(resendTimer); } catch (e) {} resendTimer = null; } }
     var sender = {
       get listening() { return listening; },
       get probe() { return probe; },
@@ -885,6 +939,7 @@
             try { env.addEventListener("deviceorientation", handler, true); } catch (e2) {}
           }
           listening = true;
+          startResend();
           return { ok: true };
         }
         if (!ask) return Promise.resolve(start());
@@ -894,13 +949,321 @@
         }, function () { onError("permission-denied"); return { ok: false, reason: "permission-denied" }; });
       },
       disable: function () {
-        listening = false;
+        listening = false; stopResend(); lastPose = null; lastPoseState = null;
         if (handler && typeof env.removeEventListener === "function") { try { env.removeEventListener("deviceorientation", handler, true); } catch (e) {} handler = null; }
         return sender;
       }
     };
     return sender;
   }
+
+  /* ---------- BroadcastChannel loopback transport (test flag only) ----------
+   * Registered only when the page asks for it (query syncprobeLoopback=1 or
+   * window.__KARDIA_SYNC_LOOPBACK_TEST__), so production never sees it. It
+   * bridges two pages on one origin for the headless two page test and
+   * measures its own round trip with channel ping and pong messages. That
+   * round trip is a loopback figure, not a radio measurement. Cutting is
+   * driven by window.__KARDIA_SYNC_TEST_CUT__ so the runner can drop the
+   * link without touching the core. */
+  function createBroadcastLoopbackTransport() {
+    var BC = null;
+    try { BC = G.BroadcastChannel || (typeof BroadcastChannel !== "undefined" ? BroadcastChannel : null); } catch (e) {}
+    var handlers = null, channel = null, closed = true, clientId = bytesToHex(randomBytes(6));
+    var pairingHeld = null, sentAt = [], recvAt = [], lastRecvAt = 0, rttMs = 0, cutState = false, cutTimer = null, pingTimer = null;
+    function isCut() { try { return !!G.__KARDIA_SYNC_TEST_CUT__; } catch (e) { return false; } }
+    function openChannel() {
+      if (channel || !BC) return channel;
+      channel = new BC("kardia-syncprobe-loopback-test"); closed = false;
+      channel.onmessage = function (ev) {
+        var m = ev && ev.data; if (!m || m.from === clientId) return;
+        if (m.kind === "ping") { post({ kind: "pong", to: m.from, ts: m.ts }); return; }
+        if (m.kind === "pong") { if (m.to === clientId) rttMs = Math.max(1, nowDefault() - m.ts); return; }
+        if (m.kind === "discover") {
+          if (pairingHeld && pairingHeld.shortCode === m.shortCode) post({ kind: "pairing", to: m.from, pairing: pairingHeld });
+          return;
+        }
+        if (!handlers) return;
+        if (m.kind === "join-announce") { if (handlers.onPeerConnected) handlers.onPeerConnected({ transport: "loopback" }); post({ kind: "host-announce" }); }
+        else if (m.kind === "host-announce") { if (handlers.onPeerConnected) handlers.onPeerConnected({ transport: "loopback" }); }
+        else if (m.kind === "peer-bye") { if (handlers.onPeerLost) handlers.onPeerLost(m.reason || "peer-closed"); }
+        else if (m.kind === "bytes" && m.data) { lastRecvAt = nowDefault(); recvAt.push(lastRecvAt); if (handlers.onBytes) handlers.onBytes(new Uint8Array(m.data)); }
+      };
+      cutTimer = setInterval(function () {
+        var cut = isCut();
+        if (cut && !cutState) { cutState = true; if (handlers && handlers.onPeerLost) handlers.onPeerLost("loopback-cut"); }
+        else if (!cut && cutState) cutState = false;
+      }, 200);
+      if (cutTimer && cutTimer.unref) cutTimer.unref();
+      pingTimer = setInterval(function () { if (!isCut()) post({ kind: "ping", ts: nowDefault() }); }, 1000);
+      if (pingTimer && pingTimer.unref) pingTimer.unref();
+      return channel;
+    }
+    function post(m) { try { if (channel) { m.from = clientId; channel.postMessage(m); } } catch (e) {} }
+    function perSec(arr) { var cut = nowDefault() - 1000; while (arr.length && arr[0] < cut) arr.shift(); return arr.length; }
+    var t = {
+      id: "loopback", kind: "direct",
+      capabilities: function () { return Promise.resolve({ available: !!BC, reason: BC ? "" : "BroadcastChannel is not available", canAdvertise: true, canScan: true, needsInternet: false, maxPayload: 65536, platform: "web" }); },
+      host: function (pairing, h) { handlers = h; pairingHeld = pairing; openChannel(); post({ kind: "host-announce" }); return Promise.resolve(); },
+      join: function (pairing, h) { handlers = h; openChannel(); post({ kind: "join-announce" }); return Promise.resolve(); },
+      discover: function (shortCode) {
+        if (!BC) return Promise.resolve(null);
+        return new Promise(function (res) {
+          var ch = new BC("kardia-syncprobe-loopback-test"), done = false;
+          var timer = setTimeout(function () { finish(null); }, 3000);
+          if (timer.unref) timer.unref();
+          function finish(v) { if (done) return; done = true; clearTimeout(timer); try { ch.close(); } catch (e) {} res(v); }
+          ch.onmessage = function (ev) { var m = ev && ev.data; if (m && m.kind === "pairing" && m.to === clientId && m.pairing) finish(m.pairing); };
+          try { ch.postMessage({ kind: "discover", from: clientId, shortCode: String(shortCode || "").toUpperCase() }); } catch (e) { finish(null); }
+        });
+      },
+      send: function (bytes) { if (closed || !channel || isCut()) return false; sentAt.push(nowDefault()); post({ kind: "bytes", data: Array.prototype.slice.call(bytes) }); return true; },
+      close: function () { post({ kind: "peer-bye", reason: "closed" }); closed = true; handlers = null; pairingHeld = null; if (cutTimer) clearInterval(cutTimer); if (pingTimer) clearInterval(pingTimer); if (channel) { try { channel.close(); } catch (e) {} channel = null; } return Promise.resolve(); },
+      stats: function () { return { rttMs: rttMs, lossPct: 0, sentPerSec: perSec(sentAt), recvPerSec: perSec(recvAt), lastRecvAt: lastRecvAt || null }; }
+    };
+    return t;
+  }
+  function loopbackTestWanted() {
+    try {
+      if (G.__KARDIA_SYNC_LOOPBACK_TEST__) return true;
+      if (G.location && /[?&]syncprobeLoopback=1/.test(G.location.search || "")) return true;
+    } catch (e) {}
+    return false;
+  }
+
+  /* ---------- UI facade: the exact surface kardia-syncprobe.js calls ----------
+   * One facade session at a time over a core node. This is the single
+   * contract between the UI and the core (see the header of
+   * kardia-syncprobe.js): state, on, startDisplay, joinProbe, confirm,
+   * disconnect, reconnect, recenter, setPaused, calibrate, probePatch,
+   * stats, transports, activeTransport, session, lastError and the role
+   * property. Transports plug in through registerTransport above; the
+   * facade picks one with selectTransport, so a relay adapter registered
+   * later needs no UI change. Pairing creation needs WebCrypto, so
+   * startDisplay returns a thenable pairing object that is filled in
+   * place; awaiting it (or reading session() after the state event)
+   * gives the finished pairing. */
+  var facadeLocalPairings = {};
+  var F = {
+    node: null, role: null, listeners: [], pairing: null, transport: null, transportId: null,
+    lastError: null, paused: false, sender: null, renderTimer: null, pingTimer: null,
+    transportCaps: {}, capsBusy: false, touchState: { window: "parasternal", rotationDeg: 0, tiltDeg: 0, rockDeg: 0 },
+    wrapRttMs: 0, pingSentAt: 0
+  };
+  function facadeEmit(evt) { F.listeners.slice().forEach(function (fn) { try { fn(evt); } catch (e) {} }); }
+  function facadeStateName() { return F.node ? F.node.state : "idle"; }
+  function facadeResolveEchoLab() { try { return (G.KARDIA && G.KARDIA._kardia && G.KARDIA._kardia.echoLab) || null; } catch (e) { return null; } }
+  var facadeEchoLabProxy = {
+    setProbeState: function (s) { var lab = facadeResolveEchoLab(); return lab && lab.setProbeState ? lab.setProbeState(s) : null; },
+    getProbeState: function () { var lab = facadeResolveEchoLab(); return lab && lab.getProbeState ? lab.getProbeState() : null; }
+  };
+  function facadeWrapTransport(t) {
+    return {
+      id: t.id, kind: t.kind,
+      capabilities: function () { return t.capabilities(); },
+      host: function (p, h) { return t.host(p, facadeWrapHandlers(h)); },
+      join: function (p, h) { return t.join(p, facadeWrapHandlers(h)); },
+      send: function (bytes) { if (bytes && bytes[1] === TYPES.PING) F.pingSentAt = nowDefault(); try { return t.send(bytes); } catch (e) { return false; } },
+      close: function (r) { return t.close(r); },
+      stats: function () { var s = {}; try { s = t.stats() || {}; } catch (e) {} if (F.wrapRttMs && (!s.rttMs || s.rttMs <= 0)) s.rttMs = F.wrapRttMs; return s; },
+      discover: t.discover ? function (c) { return t.discover(c); } : undefined
+    };
+  }
+  function facadeWrapHandlers(h) {
+    return {
+      onBytes: function (b) { if (b && b[1] === TYPES.PONG && F.pingSentAt) F.wrapRttMs = Math.max(1, nowDefault() - F.pingSentAt); if (h.onBytes) h.onBytes(b); },
+      onPeerConnected: function (i) { if (h.onPeerConnected) h.onPeerConnected(i); },
+      onPeerLost: function (r) { if (h.onPeerLost) h.onPeerLost(r); },
+      onError: function (e) { if (h.onError) h.onError(e); }
+    };
+  }
+  function facadeRefreshCaps() {
+    if (F.capsBusy) return;
+    F.capsBusy = true;
+    queryCapabilities(listTransports()).then(function (rows) {
+      F.capsBusy = false;
+      rows.forEach(function (r) { F.transportCaps[r.transport.id] = r.caps; });
+      facadeEmit({ type: "transports" });
+    }, function () { F.capsBusy = false; });
+  }
+  function facadeMakeNode(role) {
+    var node = createNode({
+      role: role, probeLib: (G && G.KARDIA_PROBE) || undefined, echoLab: role === "display" ? facadeEchoLabProxy : undefined,
+      onState: function (next, prev, reason) {
+        if (next === "failed" && F.node) F.lastError = (F.node.getState().reason || reason || "failed");
+        facadeEmit({ type: "state", name: next, reason: reason || null, hint: F.node ? F.node.getState().recoveryHint : null });
+        if (next === "connected") facadeStartLoops(); else if (next === "disconnected" || next === "failed" || next === "idle") facadeStopLoops();
+      },
+      onWarning: function (msg) { F.lastError = msg; facadeEmit({ type: "warning", message: msg }); facadeEmit({ type: "state", name: facadeStateName(), reason: "peer-lost" }); }
+    });
+    return node;
+  }
+  function facadeStartLoops() {
+    if (F.renderTimer || typeof setInterval === "undefined") return;
+    F.renderTimer = setInterval(function () {
+      if (!F.node || F.role !== "display" || F.paused) return;
+      var out = null;
+      try { out = F.node.renderFrame(); } catch (e) {}
+      if (out) facadeEmit({ type: "pose", pose: { tiltDeg: out.tiltDeg, rotationDeg: out.rotationDeg, rockDeg: out.rockDeg, window: out.window } });
+    }, 33);
+    if (F.renderTimer.unref) F.renderTimer.unref();
+    F.pingTimer = setInterval(function () { if (F.node && facadeStateName() === "connected") { try { F.node.sendPing(); } catch (e) {} } }, 1000);
+    if (F.pingTimer.unref) F.pingTimer.unref();
+  }
+  function facadeStopLoops() {
+    if (F.renderTimer) clearInterval(F.renderTimer); F.renderTimer = null;
+    if (F.pingTimer) clearInterval(F.pingTimer); F.pingTimer = null;
+  }
+  function facadePickTransport() {
+    return selectTransport(listTransports()).then(function (row) { return row ? row.transport : null; });
+  }
+  function facadeSessionObject() {
+    if (!F.node || !F.pairing) return null;
+    var name = facadeStateName();
+    if (name === "idle" || name === "disconnected" || name === "failed") return null;
+    var out = {}, k;
+    for (k in F.pairing) if (Object.prototype.hasOwnProperty.call(F.pairing, k) && k !== "displayPubBytes" && k !== "then") out[k] = F.pairing[k];
+    out.confirm = (F.node && F.node.confirmCode) || F.pairing.confirm || null;
+    out.confirmed = name === "connected";
+    if (!out.payload && out.sessionId && out.displayPub) out.payload = pairingPayload(out);
+    return out;
+  }
+  var facade = {
+    on: function (fn) { if (typeof fn === "function") F.listeners.push(fn); return function () { F.listeners = F.listeners.filter(function (f) { return f !== fn; }); }; },
+    state: function () { var s = F.node ? F.node.getState() : null; return { name: facadeStateName(), confirm: F.node ? F.node.confirmCode : null, reason: s ? s.reason : null, hint: s ? s.recoveryHint : null }; },
+    startDisplay: function () {
+      if (F.node && F.role === "display" && F.pairing && ["pairing", "confirming", "connecting", "connected", "reconnecting", "discovering"].indexOf(facadeStateName()) >= 0) return F.pairing;
+      facadeStopLoops(); F.role = "display"; F.paused = false; F.lastError = null;
+      F.node = facadeMakeNode("display");
+      var placeholder = { sessionId: "", displayPub: "", shortCode: "", expiresAt: 0, confirm: null, payload: "" };
+      F.pairing = placeholder;
+      var ready = facadePickTransport().then(function (t) {
+        if (!t) { F.lastError = "No link is available on this phone."; throw new Error("no-transport"); }
+        F.transport = facadeWrapTransport(t); F.transportId = t.id;
+        return F.node.createPairing().then(function (pairing) {
+          Object.keys(pairing).forEach(function (k) { if (k !== "displayPubBytes") placeholder[k] = pairing[k]; });
+          placeholder.payload = pairing.payload; F.pairing = placeholder;
+          facadeLocalPairings[pairing.shortCode] = placeholder;
+          return F.node.hostWith(F.transport, pairing).then(function () { return facadeSessionObject(); });
+        });
+      });
+      ready.then(function () { facadeEmit({ type: "state", name: facadeStateName() }); }, function (e) { F.lastError = (e && e.message) || "Could not start pairing."; facadeEmit({ type: "state", name: facadeStateName(), reason: "no-transport" }); });
+      placeholder.then = function (onF, onR) { return ready.then(onF, onR); };
+      placeholder.catch = function (onR) { return ready.catch(onR); };
+      return placeholder;
+    },
+    joinProbe: function (input) {
+      var text = String(input == null ? "" : input).trim();
+      var parsed = parsePairingPayload(text);
+      if (!parsed && /^[A-Za-z0-9 ]{6,7}$/.test(text)) {
+        var code = text.toUpperCase().replace(/[^A-Z2-9]/g, "");
+        if (facadeLocalPairings[code]) parsed = parsePairingPayload(facadeLocalPairings[code].payload);
+        if (!parsed) {
+          var discoverable = listTransports().filter(function (t) { return typeof t.discover === "function"; });
+          if (discoverable.length) {
+            return Promise.all(discoverable.map(function (t) {
+              // One transport failing to find the display must not fail the
+              // whole search; only an empty result across all of them is not-found.
+              try { return Promise.resolve(t.discover(code)).then(function (v) { return v; }, function () { return null; }); }
+              catch (e) { return Promise.resolve(null); }
+            })).then(function (found) {
+              var hit = found.filter(Boolean)[0];
+              if (!hit) { var e1 = new Error("not-found"); e1.reason = "not-found"; throw e1; }
+              // BLE discovery returns sessionId and displayPub without an
+              // expiry; tolerate it and keep the short code for the session.
+              // The 4 digit confirmation in the confirming state still guards
+              // this path before control is granted.
+              if (!hit.expiresAt) hit.expiresAt = nowDefault() + PAIRING_TTL_MS;
+              if (!hit.shortCode) hit.shortCode = code;
+              return facade.joinProbe(hit.payload || pairingPayload(hit));
+            });
+          }
+          var e2 = new Error("not-found"); e2.reason = "not-found"; return Promise.reject(e2);
+        }
+      }
+      if (!parsed) { var e3 = new Error("not-found"); e3.reason = "not-found"; return Promise.reject(e3); }
+      if (nowDefault() > parsed.expiresAt) { var e4 = new Error("gone"); e4.reason = "expired"; return Promise.reject(e4); }
+      facadeStopLoops(); F.role = "probe"; F.paused = false; F.lastError = null;
+      F.node = facadeMakeNode("probe");
+      F.pairing = { sessionId: parsed.sessionId, displayPub: parsed.displayPub, shortCode: parsed.shortCode, expiresAt: parsed.expiresAt, payload: text.indexOf("kardia-sync:") === 0 ? text : pairingPayload(parsed), confirm: null };
+      return facadePickTransport().then(function (t) {
+        if (!t) { F.lastError = "No link is available on this phone."; var e5 = new Error("no-transport"); e5.reason = "no-transport"; throw e5; }
+        F.transport = facadeWrapTransport(t); F.transportId = t.id;
+        return F.node.joinPairing(F.pairing.payload, F.transport).then(function () {
+          if (F.node.state === "failed") { var e6 = new Error(F.node.getState().reason || "failed"); e6.reason = F.node.getState().reason; throw e6; }
+          facadeStartSender();
+          return true;
+        });
+      });
+    },
+    confirm: function () { if (F.node) F.node.confirm(); return true; },
+    disconnect: function () {
+      if (F.sender) { try { F.sender.disable(); } catch (e) {} F.sender = null; }
+      facadeStopLoops();
+      if (F.pairing && F.pairing.shortCode) delete facadeLocalPairings[F.pairing.shortCode];
+      if (F.node) { try { F.node.close(); } catch (e) {} }
+      if (F.transport) { try { F.transport.close("closed"); } catch (e) {} F.transport = null; F.transportId = null; }
+      facadeEmit({ type: "state", name: facadeStateName() });
+      return Promise.resolve();
+    },
+    reconnect: function () {
+      if (!F.node) return Promise.resolve(false);
+      try { F.node.resume(); } catch (e) {}
+      if (F.role === "probe") facadeStartSender();
+      facadeEmit({ type: "state", name: facadeStateName() });
+      return Promise.resolve(true);
+    },
+    recenter: function () {
+      if (!F.node) return true;
+      if (F.role === "probe") { if (F.sender) { try { F.sender.calibrate(); } catch (e) {} } try { F.node.sendControl(CONTROLS.RECENTER, 0); } catch (e) {} }
+      else { try { F.node.recenter(); } catch (e) {} }
+      return true;
+    },
+    calibrate: function () {
+      if (F.role === "probe") { if (!F.sender) facadeStartSender(); if (F.sender) { try { F.sender.calibrate(); } catch (e) {} } if (F.node) { try { F.node.sendControl(CONTROLS.CALIBRATE, 0); } catch (e) {} } return true; }
+      return facade.recenter();
+    },
+    setPaused: function (b) {
+      F.paused = !!b;
+      if (F.node && facadeStateName() === "connected") { try { F.node.sendControl(F.paused ? CONTROLS.PAUSE : CONTROLS.RESUME, 0); } catch (e) {} }
+      if (F.role === "display" && F.node) { if (F.paused) { try { F.node.freeze("paused"); } catch (e) {} } else if (F.node.frozen) { try { F.node.resume(); } catch (e) {} } }
+      return true;
+    },
+    probePatch: function (patch) {
+      if (patch) { if (patch.window) F.touchState.window = patch.window; if (patch.rotationDeg != null) F.touchState.rotationDeg = +patch.rotationDeg; if (patch.tiltDeg != null) F.touchState.tiltDeg = +patch.tiltDeg; if (patch.rockDeg != null) F.touchState.rockDeg = +patch.rockDeg; }
+      facadeEmit({ type: "pose", pose: { tiltDeg: F.touchState.tiltDeg, rotationDeg: F.touchState.rotationDeg, rockDeg: F.touchState.rockDeg } });
+      if (F.node && F.role === "probe" && facadeStateName() === "connected" && !F.paused) { try { F.node.sendProbeState({ window: F.touchState.window, rotationDeg: F.touchState.rotationDeg, tiltDeg: F.touchState.tiltDeg, rockDeg: F.touchState.rockDeg, position: { x: 0, y: 0 } }); } catch (e) {} }
+      return true;
+    },
+    stats: function () {
+      var s = { rttMs: 0, lossPct: 0, sentPerSec: 0, recvPerSec: 0, lastRecvAt: null };
+      if (F.transport) { try { var ts = F.transport.stats(); if (ts) for (var k in ts) s[k] = ts[k]; } catch (e) {} }
+      if (F.wrapRttMs && (!s.rttMs || s.rttMs <= 0)) s.rttMs = F.wrapRttMs;
+      return s;
+    },
+    transports: function () {
+      facadeRefreshCaps();
+      return listTransports().map(function (t) {
+        var c = F.transportCaps[t.id] || { available: false, reason: "Checking the link", canAdvertise: false, canScan: false, needsInternet: t.kind === "relay", maxPayload: 0, platform: "web" };
+        return { id: t.id, kind: t.kind, available: !!c.available, reason: c.reason || "", canAdvertise: !!c.canAdvertise, canScan: !!c.canScan, needsInternet: !!c.needsInternet, maxPayload: c.maxPayload || 0, platform: c.platform || "web" };
+      });
+    },
+    activeTransport: function () { var n = facadeStateName(); return (n === "connected" || n === "reconnecting") ? F.transportId : null; },
+    session: function () { return facadeSessionObject(); },
+    lastError: function () { return F.lastError; }
+  };
+  function facadeStartSender() {
+    if (F.role !== "probe" || F.sender) return;
+    F.sender = createProbeSender({
+      env: G, probeLib: (G && G.KARDIA_PROBE) || undefined,
+      onError: function (reason) { F.lastError = reason; },
+      sendPose: function (pose, st) {
+        facadeEmit({ type: "pose", pose: { tiltDeg: st ? st.tiltDeg : 0, rotationDeg: st ? st.rotationDeg : 0, rockDeg: st ? st.rockDeg : 0 } });
+        if (F.node && facadeStateName() === "connected" && !F.paused) { try { F.node.sendPose(pose); } catch (e) {} }
+      }
+    });
+    F.sender.enableAsProbe().then(function () {}, function () {});
+  }
+  if (loopbackTestWanted()) { try { registerTransport(createBroadcastLoopbackTransport()); } catch (e) {} }
 
   var API = {
     VERSION: VERSION, TYPES: TYPES, CONTROLS: CONTROLS, BYE: BYE, STATES: STATES.slice(),
@@ -910,6 +1273,13 @@
     createTransportManager: createTransportManager, createLoopbackPair: createLoopbackPair,
     createNode: createNode, createDisplay: createDisplay, createProbe: createProbe, createProbeSender: createProbeSender,
     createSmoother: createSmoother, detectCapabilities: detectCapabilities,
+    createBroadcastLoopbackTransport: createBroadcastLoopbackTransport,
+    on: facade.on, state: facade.state, startDisplay: facade.startDisplay, joinProbe: facade.joinProbe,
+    confirm: facade.confirm, disconnect: facade.disconnect, reconnect: facade.reconnect, recenter: facade.recenter,
+    setPaused: facade.setPaused, calibrate: facade.calibrate, probePatch: facade.probePatch,
+    stats: facade.stats, transports: facade.transports, activeTransport: facade.activeTransport,
+    session: facade.session, lastError: facade.lastError,
+    _facade: facade,
     generateKeyPair: generateKeyPair, deriveSessionKey: deriveSessionKey,
     pairingPayload: pairingPayload, parsePairingPayload: parsePairingPayload,
     _pure: {
@@ -924,6 +1294,7 @@
       HEADER_LEN: HEADER_LEN, MAC_LEN: MAC_LEN
     }
   };
+  try { Object.defineProperty(API, "role", { enumerable: true, get: function () { var n = facadeStateName(); return (n === "idle" || n === "disconnected" || n === "failed") ? null : F.role; } }); } catch (e) { API.role = null; }
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (G) G.KARDIA_SYNC = API;
 })(typeof window !== "undefined" ? window : (typeof globalThis !== "undefined" ? globalThis : this));

@@ -32,9 +32,15 @@
 }
 .krd-sp-qrwrap {
   display: flex; justify-content: center; margin: 12px 0 4px;
-  padding: 14px; border: 1px solid var(--sp-line); border-radius: 12px; background: #fff;
+  padding: 18px; border: 1px solid var(--sp-line); border-radius: 12px; background: #fff;
 }
-.krd-sp-qrwrap canvas { display: block; border-radius: 4px; }
+.krd-sp-qrwrap canvas { display: block; border-radius: 4px; max-width: 100%; height: auto; }
+.krd-sp-codelabel { margin: 12px 0 0; text-align: center; }
+.krd-sp-scanicon { width: 20px; height: 20px; flex: 0 0 auto; }
+.krd-sp-sheet .sp-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.krd-sp-sheet .sp-btn:focus-visible { outline: 2px solid var(--sp-acc); outline-offset: 2px; }
+.krd-sp-or { display: flex; align-items: center; gap: 10px; margin: 14px 0 2px; text-align: center; }
+.krd-sp-or::before, .krd-sp-or::after { content: ""; flex: 1 1 auto; height: 1px; background: var(--sp-line); }
 .krd-sp-code {
   margin: 10px 0 0; text-align: center;
   font-size: 34px; line-height: 1.2; font-weight: 700; letter-spacing: 0.14em;
@@ -77,12 +83,20 @@
 /* Connection pill on the Echo Lab screen. */
 .krd-syncpill:empty { display: none; }
 .krd-sp-pill {
+  position: relative;
   display: inline-flex; align-items: center; gap: 8px; margin-left: 8px;
-  min-height: 44px; padding: 10px 14px; vertical-align: middle;
+  min-width: 44px; min-height: 44px; box-sizing: border-box;
+  padding: 10px 14px; vertical-align: middle;
   border: 1px solid var(--sp-line); border-radius: 999px;
   background: var(--sp-s1); color: var(--sp-text);
   font-size: 14px; font-weight: 650; white-space: nowrap; touch-action: manipulation;
   transition: background-color 140ms var(--kd-ease);
+}
+/* Hit area stays at least 44 by 44 px even if the visual pill shrinks. */
+.krd-sp-pill::after {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  width: max(100%, 44px); height: max(100%, 44px);
+  transform: translate(-50%, -50%);
 }
 .krd-sp-pill.lost { border-color: var(--sp-warn); }
 .krd-sp-bars { display: inline-flex; align-items: flex-end; gap: 2px; }
@@ -90,6 +104,15 @@
 .krd-sp-bar:nth-child(1) { height: 5px; } .krd-sp-bar:nth-child(2) { height: 8px; }
 .krd-sp-bar:nth-child(3) { height: 11px; } .krd-sp-bar:nth-child(4) { height: 14px; }
 .krd-sp-bar.on { background: var(--sp-acc); }
+/* Paired display: touch controls stay in place, disabled, with a plain note. */
+.krd-sp-paired-note {
+  margin: 12px 0 0; padding: 12px 14px; border: 1px solid var(--sp-line); border-radius: 12px;
+  background: var(--sp-s1); font-size: 15px; line-height: 1.5;
+}
+.krd-lab.krd-sp-paired #krdChest, .krd-lab.krd-sp-paired #krdTiltStrip, .krd-lab.krd-sp-paired #krdRockStrip {
+  pointer-events: none; opacity: 0.55;
+}
+.krd-lab.krd-sp-paired input[type="range"]:disabled { opacity: 0.55; }
 /* Lost-link banner: Echo Lab and the probe screen share it. */
 .krd-sp-lost {
   margin: 12px 0 0; padding: 12px 14px; border: 1px solid var(--sp-warn); border-radius: 12px;

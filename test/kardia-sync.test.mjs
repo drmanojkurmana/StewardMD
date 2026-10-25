@@ -242,12 +242,43 @@ test("freeze on loss and explicit resume with no jump", async () => {
   assert.equal(display.renderFrame(clock.now + 32), null);
   assert.equal(echo.calls.length, frozenCalls);
   display.resume();
-  assert.equal(display.frozen, false);
+  assert.equal(display.frozen, true, "freeze is kept until the first valid pose after Resume");
+  assert.equal(display.getState().resumeArmed, true);
   assert.equal(display.state, "connected");
   probe.sendPose({ quat: P.quatFromEuler(50, 0, 0), window: "apical", slideXmm: 9, slideYmm: 0 });
   await sleep(5);
+  assert.equal(display.frozen, false, "the first valid pose after Resume lifts the freeze");
   const out = display.renderFrame(clock.now + 48);
   assert.ok(Math.abs(out.tiltDeg) < 5, `no jump, tilt ${out.tiltDeg}`);
+});
+
+test("resume re-arms: restarted sequence and stale timestamp are accepted, then following resumes", async () => {
+  const { display, probe, echo, clock } = await connected();
+  probe.sendPose({ quat: P.quatFromEuler(0, 0, 0), window: "apical", slideXmm: 0, slideYmm: 0 });
+  await sleep(5);
+  display.renderFrame(clock.now + 16);
+  display.updateClockOffset(0);
+  display.handlePeerLost("link-lost");
+  const acceptedBefore = display.stats.accepted;
+  display.resume();
+  assert.equal(display.clockOffsetMs, null, "clock offset is dropped for re-estimation");
+  // A pose with a restarted sequence (seq 1) and an old timestamp, as a
+  // probe that rebooted during the gap would send.
+  const tag = P.sessionTagOf(P.hexToBytes(display.pairing.sessionId));
+  const restarted = P.encodeFrame({ type: SYNC.TYPES.POSE, seq: 1, tMs: 0, sessionTag: tag, pose: P.clampPose({ quat: P.quatFromEuler(10, 0, 0), window: "apical", slideXmm: 1, slideYmm: 0 }, PROBE) }, display.sessionKey);
+  await display.handleBytes(restarted);
+  assert.equal(display.stats.accepted, acceptedBefore + 1, "first pose after Resume is accepted despite seq restart");
+  assert.equal(display.frozen, false);
+  const out1 = display.renderFrame(clock.now + 32);
+  assert.ok(Math.abs(out1.tiltDeg) < 5, `eases from the frozen pose, tilt ${out1.tiltDeg}`);
+  // Following resumes: a new pose relative to the new calibrate zero moves.
+  const follow = P.encodeFrame({ type: SYNC.TYPES.POSE, seq: 2, tMs: 0, sessionTag: tag, pose: P.clampPose({ quat: P.quatFromEuler(40, 0, 0), window: "apical", slideXmm: 2, slideYmm: 0 }, PROBE) }, display.sessionKey);
+  await display.handleBytes(follow);
+  assert.equal(display.stats.accepted, acceptedBefore + 2);
+  display.renderFrame(clock.now + 48);
+  const out2 = display.renderFrame(clock.now + 64);
+  assert.ok(echo.calls.length >= 2);
+  void out2;
 });
 
 test("loopback faults: loss drops, duplication duplicates, delay and reorder still deliver", async () => {

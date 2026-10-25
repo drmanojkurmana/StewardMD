@@ -3,10 +3,10 @@
  * ES5 IIFE. App runtime: window.KARDIA_SYNCPROBE. Node: module.exports for tests.
  * Builds against the shared SyncProbe contract (window.KARDIA_SYNC: core owns the
  * session state machine, transports and crypto; this file owns only the screens).
- * Until the core lands, tests drive these screens through the stub in
- * test/fixtures/kardia-sync-stub.mjs, which implements the core surface below.
+ * The real core in kardia-sync.js provides the facade below; the stub in
+ * test/fixtures/kardia-sync-stub.mjs is kept only for unit tests.
  *
- * Core surface this UI expects (worker A owns it; proposed here, see report):
+ * Core surface this UI expects (the facade in kardia-sync.js owns it):
  *   core.role                        "display" or "probe" once a session starts, else null
  *   core.state()                     { name, confirm?, reason?, hint? } (contract states)
  *   core.on(fn)                      subscribe; fn(evt); returns unsub
@@ -23,9 +23,13 @@
  *
  * Design contract (Operate mode, Kardia tokens only, no new palette):
  * purpose: pair two phones so one becomes the probe, then show the link plainly.
- * First screenful: what to do next (scan or code, one sentence), the code, the
- * live state. Composition: role sheet, then one column; primary action at thumb
- * reach; diagnostics one small link away. States: idle, discovering, pairing,
+ * First screenful: scanning first, typing second (one sentence each), the code,
+ * the live state. The probe join screen is headed "Join the display" with one
+ * large primary "Scan the QR code" button, a quiet "or type the 6 character
+ * code" divider, then the code field with Join. The display pair sheet makes
+ * the QR the hero ("Scan this with the probe phone"), with the code below
+ * labelled "or type this code". Composition: role sheet, then one column;
+ * primary action at thumb reach; diagnostics one small link away. States: idle, discovering, pairing,
  * confirming, connecting, connected, reconnecting, disconnected, failed (reason
  * plus recovery), lost link banner on both phones with the image frozen, empty
  * transports, long codes wrap, denied motion with a touch fallback. Motion: the
@@ -502,14 +506,23 @@
     try { reuse = S.core.session ? S.core.session() : null; } catch (e) {}
     try { reuseState = S.core.state ? S.core.state().name : "idle"; } catch (e) {}
     if (reuse && reuseState !== "idle" && reuseState !== "disconnected" && reuseState !== "failed") S.pairing = reuse;
-    else try { S.pairing = S.core.startDisplay(); } catch (e) { S.pairing = null; }
+    else try {
+      var started = S.core.startDisplay();
+      S.pairing = started;
+      /* The real core makes its pairing keys with WebCrypto, so the first
+       * start returns a thenable pairing. Repaint once it is ready. */
+      if (started && typeof started.then === "function" && !started.sessionId) {
+        started.then(function () { if (S.screen === "display") openDisplay(); }, function () { if (S.screen === "display") setStateLine("failed"); });
+      }
+    } catch (e) { S.pairing = null; }
     if (S.unsub) { try { S.unsub(); } catch (e) {} S.unsub = null; }
     try { S.unsub = S.core.on(onCoreEvent); } catch (e) {}
     var p = currentPairing();
     var payload = p ? buildPayload(p) : "";
     showSheet("Pair a probe",
-      '<p class="sp-small">Ask the learner to scan this code with the probe phone, or type the code below.</p>' +
-      '<div class="krd-sp-qrwrap"><canvas id="krdSpQr" width="240" height="240" role="img" aria-label="Pairing code for the probe phone"></canvas></div>' +
+      '<p class="sp-small">Scan this with the probe phone.</p>' +
+      '<div class="krd-sp-qrwrap"><canvas id="krdSpQr" width="280" height="280" role="img" aria-label="Pairing code for the probe phone"></canvas></div>' +
+      '<p class="sp-small krd-sp-codelabel">or type this code</p>' +
       '<p class="krd-sp-code" aria-label="Probe code">' + esc(codeGroups(p && p.shortCode)) + "</p>" +
       '<p class="krd-sp-state" id="krdSpState" role="status">Starting</p>' +
       '<p class="sp-small" id="krdSpStateSub"></p>' +
@@ -518,7 +531,7 @@
       '<p class="krd-sp-link"><button type="button" class="krd-sp-minilink" data-act="sp-details">Connection details</button></p>');
     bindRootClose(closeAll);
     var cv = doc().getElementById("krdSpQr");
-    if (payload) qrDraw(cv, payload, 240);
+    if (payload) qrDraw(cv, payload, 280);
     ensureTick();
     var curName = "idle", curSess = null;
     try { curName = S.core.state ? S.core.state().name : "idle"; } catch (e) {}
@@ -563,17 +576,30 @@
       return !!(C && C.isNativePlatform && C.isNativePlatform() && C.Plugins && C.Plugins.CapacitorBarcodeScanner);
     } catch (e) { return false; }
   }
+  function scanIconSvg() {
+    return '<svg class="krd-sp-scanicon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+      '<path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3" ' +
+      'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' +
+      '<rect x="4" y="10.5" width="16" height="3" rx="1.5" fill="currentColor"/></svg>';
+  }
   function joinBoxHtml() {
-    return '<div class="krd-sp-join"><h3 class="sp-h3">Join with a code</h3>' +
-      (scannerAvailable()
-        ? '<button type="button" class="sp-btn sec sp-wide" data-act="sp-scan">Scan the pairing code</button>'
-        : '<p class="sp-small">Ask the display phone to read its probe code to you, then type it here.</p>') +
+    var canScan = scannerAvailable();
+    return '<div class="krd-sp-join"><h3 class="sp-h3">Join the display</h3>' +
+      (canScan
+        ? '<button type="button" class="sp-btn pri sp-wide" data-act="sp-scan">' + scanIconSvg() + 'Scan the QR code</button>' +
+          '<p class="sp-small">The camera is only used to read the pairing code.</p>'
+        : '<p class="sp-small">Scanning is not available on this phone.</p>') +
+      '<p class="sp-small krd-sp-or">or type the 6 character code</p>' +
       '<label class="krd-sp-field" for="krdSpCode">Probe code</label>' +
       '<input id="krdSpCode" class="krd-sp-input" inputmode="text" autocomplete="off" autocapitalize="characters" ' +
       'autocorrect="off" maxlength="7" placeholder="ABC 123" aria-describedby="krdSpCodeHint">' +
       '<p class="sp-small" id="krdSpCodeHint">Six letters and numbers, as shown on the display phone.</p>' +
       '<p class="sp-small krd-sp-errline" id="krdSpJoinErr" role="alert" hidden></p>' +
       '<button type="button" class="sp-btn sec sp-wide" data-act="sp-join-code">Join</button></div>';
+  }
+  function focusCode() {
+    var d = doc(), input = d && d.getElementById("krdSpCode");
+    if (input) try { input.focus(); } catch (e) {}
   }
   function renderProbeIntro() {
     showSheet("Use this phone as a probe",
@@ -586,6 +612,7 @@
       joinBoxHtml() +
       '<div class="krd-sp-col"><button type="button" class="sp-btn sec sp-wide" data-act="sp-close">Not now</button></div>');
     bindRootClose(closeAll);
+    if (!scannerAvailable()) focusCode();
   }
   function joinErr(msg) {
     var d = doc(), el = d && d.getElementById("krdSpJoinErr");
@@ -596,6 +623,7 @@
     var code = String(input == null ? "" : input).toUpperCase().replace(/[^A-Z2-9]/g, "");
     if (code.length !== 6 && !parsePayload(input)) {
       joinErr("That code does not look right. Check the display phone and try again.");
+      focusCode();
       return;
     }
     S.probeStep = "joining";
@@ -671,6 +699,7 @@
       '<button type="button" class="sp-btn sec sp-wide" data-act="sp-end">End session</button></div>' +
       '<p class="krd-sp-link"><button type="button" class="krd-sp-minilink" data-act="sp-details">Connection details</button></p>');
     bindRootClose(closeAll);
+    if (!scannerAvailable()) focusCode();
     renderProbeConfirm();
     refreshGlyph();
   }
@@ -895,9 +924,66 @@
     }
     if (evt.type === "stats") refreshPill();
   }
+  function coreRole() {
+    try {
+      if (!S.core) return null;
+      var r = S.core.role;
+      return typeof r === "function" ? r.call(S.core) : (r || null);
+    } catch (e) { return null; }
+  }
+  /* Display side: while a remote probe is paired, the Echo Lab touch
+   * controls are disabled in place (never removed) and a plain paired
+   * note shows. With no probe paired they work exactly as before. */
+  function refreshProbePaired() {
+    var d = doc();
+    if (!d) return;
+    var lab = d.getElementById("krdLab");
+    if (!lab) return;
+    if (!S.core) S.core = syncCore();
+    var active = sessionState() === "connected" && coreRole() === "display";
+    var note = d.getElementById("krdSpPaired");
+    if (active) {
+      lab.classList.add("krd-sp-paired");
+      if (!note) {
+        note = d.createElement("p");
+        note.id = "krdSpPaired"; note.className = "krd-sp-paired-note"; note.setAttribute("role", "status");
+        note.textContent = "Probe paired. The probe phone is driving the scan, so the touch controls on this phone are paused.";
+        lab.insertBefore(note, lab.firstChild);
+      }
+      var ctrls = lab.querySelectorAll("input[type='range'], button");
+      for (var i = 0; i < ctrls.length; i++) {
+        var el = ctrls[i];
+        if (el.getAttribute("data-act") === "kecho-syncprobe") continue;
+        if (el.getAttribute("data-spill")) continue;
+        if (el.closest && el.closest("#krdSpLost")) continue;
+        if (!el.disabled) { el.setAttribute("data-sp-disabled", "1"); el.disabled = true; }
+      }
+      ["krdChest", "krdTiltStrip", "krdRockStrip"].forEach(function (id) {
+        var s = d.getElementById(id);
+        if (s) { s.setAttribute("aria-disabled", "true"); s.setAttribute("data-sp-disabled", "1"); }
+      });
+    } else {
+      lab.classList.remove("krd-sp-paired");
+      if (note && note.parentNode) note.parentNode.removeChild(note);
+      var marked = lab.querySelectorAll("[data-sp-disabled]");
+      for (var j = 0; j < marked.length; j++) { marked[j].removeAttribute("data-sp-disabled"); if ("disabled" in marked[j]) marked[j].disabled = false; marked[j].removeAttribute("aria-disabled"); }
+    }
+  }
+  var chromeUnsub = null, chromeTick = null;
+  function ensureChromeSubscription() {
+    if (!S.core) S.core = syncCore();
+    if (S.core && !chromeUnsub && S.core.on) {
+      try { chromeUnsub = S.core.on(function (evt) { if (evt && evt.type === "pose") return; refreshChrome(); }); } catch (e) {}
+    }
+    if (!chromeTick && G.setInterval) {
+      chromeTick = G.setInterval(function () { refreshChrome(); }, 1000);
+    }
+  }
   function refreshChrome() {
+    ensureChromeSubscription();
     wirePill();
     refreshPill();
+    refreshProbePaired();
     var name = sessionState();
     var lost = name === "reconnecting";
     lostBanner(lost);
@@ -999,7 +1085,7 @@
   function scanCode() {
     try {
       var P = G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.CapacitorBarcodeScanner;
-      if (!P || !P.scanBarcode) { joinErr("Scanning is not available on this phone. Type the code instead."); return; }
+      if (!P || !P.scanBarcode) { joinErr("Scanning is not available on this phone. Type the code instead."); focusCode(); return; }
       P.scanBarcode({
         hint: 0, scanInstructions: "Point the camera at the pairing code on the display phone",
         scanButton: false, scanText: " ", cameraDirection: 1, scanOrientation: 3,
@@ -1013,8 +1099,8 @@
         var d = doc(), input = d && d.getElementById("krdSpCode");
         if (input && !parsePayload(code)) input.value = code;
         probeJoin(code);
-      }, function () { joinErr("The scan was cancelled. Type the code instead."); });
-    } catch (e) { joinErr("Scanning is not available on this phone. Type the code instead."); }
+      }, function () { joinErr("The scan was cancelled. Type the code instead."); focusCode(); });
+    } catch (e) { joinErr("Scanning is not available on this phone. Type the code instead."); focusCode(); }
   }
   function closeSheet() {
     clearRoot();
