@@ -199,6 +199,123 @@ try {
     }
   }
 
+  /* ── 4c. SyncProbe: two roles, one stubbed link (390 and 820, light and dark) ──
+   * The real KARDIA_SYNC core has not landed: the stub in
+   * test/fixtures/kardia-sync-stub.mjs stands in, loaded here as a module, and
+   * one page hosts both roles by swapping window.KARDIA_SYNC. The pair sheet,
+   * probe screens, pill, details and lost-link banner are exercised through the
+   * real Echo Lab hook, with screenshots into work/shots/. */
+  console.log("\n--- SyncProbe (stubbed link) ---");
+  await metrics(390, 844); await theme(false);
+  await ev(`document.querySelector('#smdKardia [data-act=ktab][data-t=echo]').click(); return 1;`);
+  ok(await until(`return !!window.KARDIA_SYNCPROBE;`, 15000), "SyncProbe module loads with the Kardia engine");
+  ok(await until(`return !!document.getElementById('krdSyncPill');`, 8000), "Echo Lab carries the SyncProbe pill slot");
+  await ev(`import('/test/fixtures/kardia-sync-stub.mjs').then(function(m){ window.KARDIA_SYNCPROBE_STUB = m; }, function(x){ window.KARDIA_SYNCPROBE_STUB = 'ERR:' + String(x && x.message || x); }); return 1;`);
+  ok(await until(`return !!window.KARDIA_SYNCPROBE_STUB && typeof window.KARDIA_SYNCPROBE_STUB !== 'string';`, 15000), "SyncProbe stub loads in the app page");
+  await ev(`(function(){ var p = window.KARDIA_SYNCPROBE_STUB.createSessionPair(); window.__sph = { display: p.display, probe: p.probe }; window.KARDIA_SYNC = p.display; return 1; })()`);
+  const spUse = async (which) => ev(`window.KARDIA_SYNC = window.__sph.${which}; return 1;`);
+  const spTxt = async () => ev(`return document.getElementById('krdSpRoot') ? document.getElementById('krdSpRoot').innerText : '';`);
+  const spClick = async (sel) => ev(`(function(){var b=${sel}; if(b){b.click(); return 1;} return 0;})()`);
+  // Display role: role sheet, pair sheet, QR, code, live state.
+  await ev(`[...document.querySelectorAll('#smdKardia [data-act]')].find(b=>b.getAttribute('data-act')==='kecho-syncprobe').click(); return 1;`);
+  ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Pair a probe')>=0;`, 8000), "SyncProbe button opens the role sheet");
+  await spClick(`[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-display')`);
+  ok(await until(`return !!document.getElementById('krdSpQr');`, 8000), "pair sheet shows the pairing QR canvas");
+  const spQr = await ev(`return document.getElementById('krdSpQr').width;`);
+  ok(spQr > 100, `QR canvas draws at code size (${spQr}px wide)`);
+  const spCode = await ev(`return window.KARDIA_SYNC.session().shortCode;`);
+  ok(/^[A-Z2-9]{6}$/.test(spCode || ""), `probe code is six plain characters ("${spCode}")`);
+  ok((await spTxt()).indexOf(spCode.slice(0, 3)) >= 0, "the code on screen matches the session code");
+  ok(/Looking for|Pairing/.test(await ev(`return document.getElementById('krdSpState').innerText;`) || ""), "live state line moves");
+  ok(!/[–—]/.test(await spTxt()), "no em or en dash in the pair sheet");
+  // Probe role: intro, denied motion, touch fallback, calibrate, join box.
+  await spUse("probe");
+  await ev(`window.KARDIA_SYNCPROBE.openProbe(); return 1;`);
+  ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Use this phone as a probe')>=0;`, 8000), "probe intro explains motion first");
+  await ev(`window.__krdSpMotionForced = 'denied'; return 1;`);
+  await spClick(`[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-motion')`);
+  ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Motion is off')>=0;`, 8000), "denied motion explains and offers touch controls");
+  await spClick(`[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-touch')`);
+  ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Touch controls')>=0;`, 8000), "touch fallback opens");
+  await ev(`window.KARDIA_SYNCPROBE.openProbe(); return 1;`);
+  await ev(`window.__krdSpMotionForced = 'granted'; return 1;`);
+  await spClick(`[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-motion')`);
+  ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Calibrate')>=0;`, 8000), "granted motion reaches calibration");
+  ok(/left shoulder/.test(await spTxt() || ""), "calibration tells the hold position");
+  await spClick(`[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-calibrate')`);
+  ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Join with a code')>=0;`, 8000), "session screen still offers joining before the link exists");
+  // The probe joins with the typed code; both phones confirm the same number.
+  await ev(`document.getElementById('krdSpCode').value = ${JSON.stringify(spCode)}; return 1;`);
+  await spClick(`[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-join-code')`);
+  ok(await until(`return (document.getElementById('krdSpState')||{innerText:''}).innerText.indexOf('matches')>=0;`, 8000), "probe reaches the confirm step after joining");
+  await spUse("display");
+  await ev(`window.KARDIA_SYNCPROBE.openDisplay(); return 1;`);
+  ok(await until(`return (document.getElementById('krdSpState')||{innerText:''}).innerText.indexOf('matches')>=0;`, 8000), "display reaches the confirm step when the probe joins");
+  const spConfirmD = await ev(`return (document.querySelector('#krdSpConfirm .krd-sp-confirmno')||{innerText:''}).innerText;`);
+  ok(spConfirmD.replace(/\s/g, "") === await ev(`return window.__sph.probe.session().confirm;`), `both phones show the same number ("${spConfirmD.trim()}")`);
+  await shot(`kardia-syncprobe-confirm-390-light`);
+  await spClick(`document.querySelector('#krdSpConfirm [data-act=sp-confirm]')`);
+  await spUse("probe");
+  await ev(`window.KARDIA_SYNCPROBE.openProbe(); return 1;`);
+  ok(await until(`return !!document.querySelector('#krdSpConfirmP [data-act=sp-confirm]');`, 8000), "probe shows its own confirm button");
+  await spClick(`document.querySelector('#krdSpConfirmP [data-act=sp-confirm]')`);
+  ok(await until(`return (document.querySelectorAll('#krdSyncPill button').length>0);`, 8000), "connected: the sheet closes and the pill appears on Echo Lab");
+  const spPill = await ev(`return document.querySelector('#krdSyncPill').innerText;`);
+  ok(/ms/.test(spPill || ""), `pill shows link latency ("${(spPill || "").trim()}")`);
+  ok(!/[–—]/.test(spPill || ""), "no dashes in the pill");
+  ok((await ev(`return document.querySelector('#krdSyncPill button').getBoundingClientRect().height;`)) >= 44, "pill is a 44px target");
+  await sleep(700);
+  ok(/Tilt -?\d+ deg/.test(await ev(`return (document.getElementById('krdSpPoseDesc')||{innerText:''}).innerText;`) || ""), "orientation readout follows the link");
+  await shot(`kardia-syncprobe-probe-active-390-light`);
+  await ev(`window.__sph.probe._set('reconnecting'); return 1;`);
+  ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('frozen')>=0;`, 8000), "probe shows the lost banner with Reconnect and Recenter");
+  await shot(`kardia-syncprobe-probe-lost-390-light`);
+  await ev(`window.__sph.probe.reconnect(); return 1;`);
+  ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Probe session')>=0 && (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('frozen')<0;`, 8000), "reconnect clears the probe banner");
+  // Details, lost link and recenter on the display phone.
+  await spUse("display");
+  await ev(`window.KARDIA_SYNCPROBE.openDisplay(); return 1;`);
+  await ev(`window.KARDIA_SYNCPROBE.dismiss(); return 1;`);
+  await spClick(`document.querySelector('#krdSyncPill button')`);
+  ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Connection')>=0;`, 8000), "pill opens connection details");
+  const spDet = await spTxt();
+  for (const w of ["Link", "Delay", "Image rate", "Code expires", "Last error", "Links on this phone"]) {
+    ok(spDet.indexOf(w) >= 0, `details show ${w}`);
+  }
+  ok(spDet.indexOf("Nearby, Bluetooth") < 0, "loopback link is named plainly, not as Bluetooth");
+  await shot(`kardia-syncprobe-details-390-light`);
+  await spClick(`[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-back')`);
+  await ev(`window.__sph.display._set('reconnecting'); return 1;`);
+  ok(await until(`return !!document.getElementById('krdSpLost');`, 8000), "lost link shows a banner on Echo Lab");
+  ok(/frozen/.test(await ev(`return document.getElementById('krdLab').innerText;`) || ""), "banner says the image is frozen");
+  await shot(`kardia-syncprobe-lost-390-light`);
+  await spClick(`document.querySelector('#krdSpLost [data-act=sp-reconnect]')`);
+  await ev(`window.__sph.display.reconnect(); return 1;`);
+  ok(await until(`return !document.getElementById('krdSpLost');`, 8000), "reconnect clears the banner");
+  // Screenshots: pair sheet and probe screen at 390 and 820, light and dark.
+  for (const [w, h] of [[390, 844], [820, 1180]]) {
+    await metrics(w, h);
+    for (const dark of [false, true]) {
+      await theme(dark);
+      const th = dark ? "dark" : "light";
+      await spUse("display");
+      await ev(`window.KARDIA_SYNCPROBE.openDisplay(); return 1;`);
+      ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Pair a probe')>=0;`, 8000), `${w}px ${th}: pair sheet`);
+      await shot(`kardia-syncprobe-pair-${w}-${th}`);
+      await spUse("probe");
+      await ev(`window.KARDIA_SYNCPROBE.openProbe(); return 1;`);
+      ok(await until(`return /Probe session|Use this phone/.test((document.getElementById('krdSpRoot')||{innerText:''}).innerText);`, 8000), `${w}px ${th}: probe screen`);
+      await shot(`kardia-syncprobe-probe-${w}-${th}`);
+      await spUse("display");
+      await ev(`window.KARDIA_SYNCPROBE.dismiss(); return 1;`);
+      ok(await until(`return (document.querySelector('#krdSyncPill')||{innerText:''}).innerText.length>0;`, 8000), `${w}px ${th}: pill on Echo Lab`);
+      await shot(`kardia-syncprobe-pill-${w}-${th}`);
+    }
+  }
+  // Leave no trace for the sections after this one.
+  await ev(`window.KARDIA_SYNCPROBE.close(); try { delete window.KARDIA_SYNC; } catch (e) {} return 1;`);
+  ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText === '';`, 8000), "SyncProbe UI closes cleanly");
+
   // Pressing Open KardiQ X without a code must hold at the gate: no AI overlay opens.
   await ev(`document.querySelector('#smdKardia [data-act=ktab][data-t=kardiox]').click(); return 1;`);
   await sleep(300);

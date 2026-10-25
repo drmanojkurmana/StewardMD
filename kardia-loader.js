@@ -7,8 +7,8 @@
 (function (G) {
   "use strict";
   var V = "krd2";
-  var CSS = ["specialty.css", "kardia.css", "kardia-cases.css"];
-  var JS = ["specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "specialty-learn.js", "specialty-bank.js", "kardia-flags.js", "kardia-sim-heart.js", "kardia-sim-geom.js", "kardia-sim-us.js", "kardia-sim-probe.js", "kardia.js", "clinix-audio.js", "kardiox-ecgwave.js", "kardia-cases.js"];
+  var CSS = ["specialty.css", "kardia.css", "kardia-syncprobe.css", "kardia-cases.css"];
+  var JS = ["specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "specialty-learn.js", "specialty-bank.js", "kardia-flags.js", "kardia-sim-heart.js", "kardia-sim-geom.js", "kardia-sim-us.js", "kardia-sim-probe.js", "kardia.js", "kardia-syncprobe.js", "clinix-audio.js", "kardiox-ecgwave.js", "kardia-cases.js"];
   var loading = null;
 
   function enabled() {

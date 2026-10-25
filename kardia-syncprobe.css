@@ -1,0 +1,126 @@
+/* kardia-syncprobe.css - SyncProbe pairing and session screens.
+   Every colour comes from the Kardia tokens in kardia.css (.krd-root); this file
+   only lays out the SyncProbe sheet, pill, banner, glyph and diagnostics. The scan
+   sector stays dark in both themes, like the Echo Lab sector. */
+.krd-sp { position: fixed; inset: 0; z-index: 90; pointer-events: none; }
+.krd-sp button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
+.krd-sp-sheet .sp-btn { transition: transform 120ms var(--kd-ease), background-color 140ms var(--kd-ease); }
+.krd-sp-sheet .sp-btn:active { transform: scale(0.97); }
+.krd-sp-scrim { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.45); pointer-events: auto; }
+.krd-sp-sheet {
+  position: absolute; left: 0; right: 0; bottom: 0; max-height: 92dvh;
+  overflow-y: auto; overscroll-behavior: contain;
+  background: var(--kd-bg); color: var(--kd-text);
+  border-top: 1px solid var(--sp-line); border-radius: 16px 16px 0 0;
+  padding: 6px 20px calc(20px + env(safe-area-inset-bottom, 0px));
+  pointer-events: auto;
+  animation: krd-sp-rise 200ms var(--kd-ease);
+}
+@keyframes krd-sp-rise { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+.krd-sp-grip { width: 40px; height: 4px; margin: 6px auto 4px; border-radius: 999px; background: var(--sp-line); }
+.krd-sp-sheet .sp-h2 { margin: 8px 0 4px; letter-spacing: -0.01em; }
+.krd-sp-col { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+.krd-sp-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+.krd-sp-row .sp-btn { flex: 1 1 140px; min-height: 44px; }
+.krd-sp-col .sp-btn { min-height: 44px; touch-action: manipulation; }
+.krd-sp-hint { margin: 0 0 4px; }
+.krd-sp-link { margin: 14px 0 0; text-align: center; }
+.krd-sp-minilink {
+  border: 0; background: none; padding: 12px; min-height: 44px;
+  color: var(--sp-link); font-size: 15px; font-weight: 600; text-decoration: underline;
+  text-underline-offset: 3px; touch-action: manipulation;
+}
+.krd-sp-qrwrap {
+  display: flex; justify-content: center; margin: 12px 0 4px;
+  padding: 14px; border: 1px solid var(--sp-line); border-radius: 12px; background: #fff;
+}
+.krd-sp-qrwrap canvas { display: block; border-radius: 4px; }
+.krd-sp-code {
+  margin: 10px 0 0; text-align: center;
+  font-size: 34px; line-height: 1.2; font-weight: 700; letter-spacing: 0.14em;
+  font-variant-numeric: tabular-nums; overflow-wrap: break-word;
+}
+.krd-sp-state { margin: 12px 0 0; font-size: 17px; font-weight: 650; line-height: 1.4; }
+.krd-sp-confirm {
+  margin-top: 12px; padding: 14px; border: 1px solid var(--sp-line); border-radius: 12px;
+  background: var(--sp-s1);
+}
+.krd-sp-confirmno {
+  margin: 6px 0 12px; text-align: center;
+  font-size: 44px; line-height: 1.1; font-weight: 700; letter-spacing: 0.12em;
+  font-variant-numeric: tabular-nums;
+}
+.krd-sp-note { margin: 12px 0 0; padding: 12px 14px; border-radius: 12px; background: var(--sp-s1); }
+.krd-sp-note p { margin: 0; font-size: 15px; line-height: 1.5; }
+.krd-sp-note b { font-weight: 650; }
+.krd-sp-join { margin-top: 16px; border-top: 1px solid var(--sp-line); padding-top: 12px; }
+.krd-sp-join .sp-btn { margin-top: 10px; min-height: 44px; }
+.krd-sp-field { display: block; margin: 12px 0 4px; font-size: 14px; font-weight: 600; }
+.krd-sp-field span { color: var(--sp-mut); font-weight: 500; font-variant-numeric: tabular-nums; }
+.krd-sp-input {
+  width: 100%; min-height: 44px; padding: 10px 12px; box-sizing: border-box;
+  border: 1px solid var(--sp-line); border-radius: 10px;
+  background: var(--sp-s1); color: var(--sp-text); font-size: 16px; letter-spacing: 0.08em;
+}
+.krd-sp-input:focus-visible, .krd-sp-minilink:focus-visible, .krd-sp-pill:focus-visible { outline: 2px solid var(--sp-acc); outline-offset: 2px; }
+.krd-sp-errline { color: var(--sp-bad); margin: 8px 0 0; }
+.krd-sp-diag { margin: 10px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--sp-line); }
+.krd-sp-diag li {
+  display: flex; justify-content: space-between; gap: 12px; align-items: baseline;
+  padding: 12px 2px; border-bottom: 1px solid var(--sp-line);
+  font-size: 15px; line-height: 1.45; min-height: 44px;
+}
+.krd-sp-diag li span:first-child { color: var(--sp-mut); }
+.krd-sp-diag li span:last-child { text-align: right; font-variant-numeric: tabular-nums; overflow-wrap: break-word; }
+.krd-sp-ok { color: var(--sp-ok); font-weight: 650; }
+.krd-sp-mut { color: var(--sp-mut); }
+/* Connection pill on the Echo Lab screen. */
+.krd-syncpill:empty { display: none; }
+.krd-sp-pill {
+  display: inline-flex; align-items: center; gap: 8px; margin-left: 8px;
+  min-height: 44px; padding: 10px 14px; vertical-align: middle;
+  border: 1px solid var(--sp-line); border-radius: 999px;
+  background: var(--sp-s1); color: var(--sp-text);
+  font-size: 14px; font-weight: 650; white-space: nowrap; touch-action: manipulation;
+  transition: background-color 140ms var(--kd-ease);
+}
+.krd-sp-pill.lost { border-color: var(--sp-warn); }
+.krd-sp-bars { display: inline-flex; align-items: flex-end; gap: 2px; }
+.krd-sp-bar { width: 3px; border-radius: 1px; background: var(--sp-line); }
+.krd-sp-bar:nth-child(1) { height: 5px; } .krd-sp-bar:nth-child(2) { height: 8px; }
+.krd-sp-bar:nth-child(3) { height: 11px; } .krd-sp-bar:nth-child(4) { height: 14px; }
+.krd-sp-bar.on { background: var(--sp-acc); }
+/* Lost-link banner: Echo Lab and the probe screen share it. */
+.krd-sp-lost {
+  margin: 12px 0 0; padding: 12px 14px; border: 1px solid var(--sp-warn); border-radius: 12px;
+  background: var(--sp-s1);
+  animation: krd-sp-fade 200ms var(--kd-ease);
+}
+@keyframes krd-sp-fade { from { opacity: 0; } to { opacity: 1; } }
+.krd-sp-lost p { margin: 0; font-size: 15px; line-height: 1.5; }
+.krd-sp-lost b { font-weight: 650; }
+.krd-sp-lost .krd-sp-row { margin-top: 10px; }
+/* Probe orientation glyph: a simple probe that tilts with the phone. */
+.krd-sp-glyphwrap { display: flex; justify-content: center; margin: 14px 0 4px; }
+.krd-sp-glyph { width: 72px; height: 108px; }
+.krd-sp-glyph-tilt { transform-origin: 32px 60px; transition: transform 140ms var(--kd-ease); }
+.krd-sp-glyph-body { fill: var(--sp-s2); stroke: var(--sp-acc); stroke-width: 2; }
+.krd-sp-glyph-head { fill: var(--sp-acc); }
+.krd-sp-glyph-marker { fill: var(--sp-on-pri); }
+.krd-sp-posedesc { text-align: center; font-variant-numeric: tabular-nums; }
+.krd-sp-statusrow { display: flex; gap: 10px; align-items: center; margin-top: 8px; }
+.krd-sp-statusrow p { margin: 0; }
+.krd-sp-dot { width: 10px; height: 10px; flex: 0 0 auto; border-radius: 50%; background: var(--sp-ok); }
+.krd-sp input[type="range"] { width: 100%; min-height: 44px; margin: 0; accent-color: var(--sp-acc); }
+/* iPad: the sheet centres and stops stretching; diagnostics read in two columns. */
+@media (min-width: 700px) {
+  .krd-sp-sheet { left: 50%; right: auto; bottom: 24px; width: min(560px, calc(100vw - 48px)); transform: translateX(-50%);
+    border: 1px solid var(--sp-line); border-radius: 16px; max-height: calc(92dvh - 48px); }
+  @keyframes krd-sp-rise { from { transform: translate(-50%, 24px); opacity: 0; } to { transform: translate(-50%, 0); opacity: 1; } }
+  .krd-sp-diag { display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .krd-sp-sheet, .krd-sp-lost { animation: none; }
+  .krd-sp-glyph-tilt { transition: none; }
+  .krd-sp-pill { transition: none; }
+}
