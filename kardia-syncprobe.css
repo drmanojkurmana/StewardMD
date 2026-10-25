@@ -150,3 +150,13 @@
   .krd-sp-glyph-tilt { transition: none; }
   .krd-sp-pill { transition: none; }
 }
+/* Nearby discovery and one tap join. */
+.krd-sp-nearby { margin-top: 12px; }
+.krd-sp-nearbyitem { margin-top: 8px; min-height: 48px; justify-content: flex-start; text-align: left; overflow-wrap: break-word; }
+.krd-sp-qrwrap canvas { min-width: 240px; min-height: 240px; }
+.krd-sp-errline .krd-sp-minilink { padding: 6px 4px; min-height: 44px; display: inline-flex; align-items: center; }
+#krdSpExpiry { text-align: center; margin: 8px 0 0; font-variant-numeric: tabular-nums; }
+@media (prefers-reduced-motion: reduce) {
+  .krd-sp-sheet .sp-btn { transition: none; }
+  .krd-sp-sheet .sp-btn:active { transform: none; }
+}

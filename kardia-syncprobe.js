@@ -40,266 +40,35 @@
 (function (G) {
   "use strict";
 
-  /* ================= QR encoder (byte mode, EC level L, versions 1 to 9) =====
-   * Self-contained: no network, no dependency. Level L keeps the pairing payload
-   * (about 155 bytes: kardia-sync:1:<sessionId>:<displayPub>:<shortCode>:<expiry>)
-   * inside version 8. Versions stop at 9 (232 data codewords, two equal blocks),
-   * so no four-block interleave is needed. */
-  var QR_CAP = [0, 17, 32, 53, 78, 106, 134, 154, 192, 230];
-  var QR_EC_LEN = [0, 7, 10, 15, 20, 26, 18, 20, 24, 30];
-  var QR_NBLOCK = [0, 1, 1, 1, 1, 1, 2, 2, 2, 2];
-  var QR_NTOTAL = [0, 26, 44, 70, 100, 134, 172, 196, 242, 292];
-  var QR_REM = [0, 0, 7, 7, 7, 7, 7, 0, 0, 0];
-  var QR_ALIGN = { 2: [6, 18], 3: [6, 22], 4: [6, 26], 5: [6, 30], 6: [6, 34], 7: [6, 22, 38], 8: [6, 24, 42], 9: [6, 26, 46] };
-
-  var GF_EXP = new Array(512), GF_LOG = new Array(256);
-  (function () {
-    var x = 1, i;
-    for (i = 0; i < 255; i++) { GF_EXP[i] = x; GF_LOG[x] = i; x <<= 1; if (x & 0x100) x ^= 0x11D; }
-    for (i = 255; i < 512; i++) GF_EXP[i] = GF_EXP[i - 255];
-  })();
-  function gmul(a, b) { return (a === 0 || b === 0) ? 0 : GF_EXP[GF_LOG[a] + GF_LOG[b]]; }
-  /* Generator polynomial of degree ecLen, low coefficient first, gen[ecLen] = 1. */
-  function rsGen(ecLen) {
-    var g = [1], ng, i, j;
-    for (i = 0; i < ecLen; i++) {
-      ng = new Array(g.length + 1);
-      for (j = 0; j < ng.length; j++) ng[j] = 0;
-      for (j = 0; j < g.length; j++) { ng[j] ^= gmul(g[j], GF_EXP[i]); ng[j + 1] ^= g[j]; }
-      g = ng;
-    }
-    return g;
-  }
-  /* Systematic Reed Solomon encoder, k steps: feedback from the last register,
-   * multipliers low coefficient first, parity read out highest degree first.
-   * Verified byte for byte against plain polynomial long division. */
-  function rsEncode(data, ecLen) {
-    var low = rsGen(ecLen);
-    var res = new Array(ecLen), i, j, f, n;
-    for (i = 0; i < ecLen; i++) res[i] = 0;
-    for (i = 0; i < data.length; i++) {
-      f = data[i] ^ res[ecLen - 1];
-      n = new Array(ecLen);
-      n[0] = gmul(low[0], f);
-      for (j = 1; j < ecLen; j++) n[j] = res[j - 1] ^ gmul(low[j], f);
-      res = n;
-    }
-    return res.reverse();
-  }
-  /* 5 data bits 01mmm (level L, mask m) with BCH, masked with 101010000010010. */
-  function qrFormatBits(mask) {
-    var data = (1 << 3) | (mask & 7), v = data << 10, g = 0x537, i;
-    for (i = 14; i >= 10; i--) if (v & (1 << i)) v ^= g << (i - 10);
-    return (((data << 10) | (v & 0x3FF)) ^ 0x5412) & 0x7FFF;
-  }
-  /* 6-bit version with BCH, 18 bits. Only versions 7 to 9 need it. */
-  function qrVersionBits(version) {
-    var v = version << 12, g = 0x1F25, i;
-    for (i = 17; i >= 12; i--) if (v & (1 << i)) v ^= g << (i - 12);
-    return ((version << 12) | (v & 0xFFF)) & 0x3FFFF;
-  }
-  function qrVersionFor(len) {
-    var v;
-    for (v = 1; v <= 9; v++) if (len <= QR_CAP[v]) return v;
-    return 0;
-  }
-  function qrDataCodewords(text) {
-    var bytes = [], i, c;
-    for (i = 0; i < text.length; i++) {
-      c = text.charCodeAt(i);
-      if (c < 128) bytes.push(c);
-      else if (c < 2048) { bytes.push(192 | (c >> 6), 128 | (c & 63)); }
-      else { bytes.push(224 | (c >> 12), 128 | ((c >> 6) & 63), 128 | (c & 63)); }
-    }
-    return bytes;
+  /* ================= QR encoder (vendored qrcode-generator, level M) =====
+   * The hand-written encoder that used to live here produced codes no
+   * decoder could read. Encoding now delegates to the vendored, proven
+   * qrcode-generator by Kazuhiko Arase (MIT, kardia-qr.js), at error
+   * correction level M. qrEncode keeps the old return shape so callers
+   * and tests render modules the same way. */
+  var QRGen = null;
+  try { QRGen = G.KARDIA_QR || null; } catch (e) {}
+  if (!QRGen && typeof module !== "undefined" && module.exports && typeof require === "function") {
+    try { QRGen = require("./kardia-qr.js"); } catch (e) {}
   }
   function qrEncode(text) {
-    var bytes = qrDataCodewords(String(text == null ? "" : text));
-    var version = qrVersionFor(bytes.length);
-    if (!version) return null;
-    var dataCw = QR_NTOTAL[version] - QR_EC_LEN[version] * QR_NBLOCK[version];
-    var bits = [0, 1, 0, 0], i, b;
-    var n = bytes.length;
-    for (i = 7; i >= 0; i--) bits.push((n >> i) & 1);
-    for (i = 0; i < bytes.length; i++) for (b = 7; b >= 0; b--) bits.push((bytes[i] >> b) & 1);
-    var cap = dataCw * 8, term = Math.min(4, cap - bits.length);
-    for (i = 0; i < term; i++) bits.push(0);
-    while (bits.length % 8) bits.push(0);
-    var cw = [];
-    for (i = 0; i < bits.length; i += 8) {
-      var w = 0, k;
-      for (k = 0; k < 8; k++) w = (w << 1) | bits[i + k];
-      cw.push(w);
-    }
-    var padFrom = cw.length;
-    for (i = padFrom; i < dataCw; i++) cw.push((i - padFrom) % 2 ? 0x11 : 0xEC);
-    /* Split into blocks, one EC run per block, then interleave. */
-    var nBlock = QR_NBLOCK[version], per = dataCw / nBlock, ecLen = QR_EC_LEN[version];
-    var blocks = [], bi, ec;
-    for (bi = 0; bi < nBlock; bi++) blocks.push(cw.slice(bi * per, (bi + 1) * per));
-    var ecBlocks = blocks.map(function (blk) { return rsEncode(blk, ecLen); });
-    var seq = [], j;
-    for (j = 0; j < per; j++) for (bi = 0; bi < nBlock; bi++) seq.push(blocks[bi][j]);
-    for (j = 0; j < ecLen; j++) for (bi = 0; bi < nBlock; bi++) seq.push(ecBlocks[bi][j]);
-    var all = [];
-    for (i = 0; i < seq.length; i++) for (b = 7; b >= 0; b--) all.push((seq[i] >> b) & 1);
-    for (i = 0; i < QR_REM[version]; i++) all.push(0);
-    var size = 21 + 4 * (version - 1);
-    return qrMatrix(all, version, size);
-  }
-  function qrBlank(size) {
-    var m = [], r, c;
-    for (r = 0; r < size; r++) { m.push([]); for (c = 0; c < size; c++) m[r].push(-1); }
-    return m;
-  }
-  function qrFinder(m, r, c) {
-    var dr, dc, v;
-    for (dr = -1; dr <= 7; dr++) for (dc = -1; dc <= 7; dc++) {
-      v = (dr >= 0 && dr <= 6 && dc >= 0 && dc <= 6 &&
-        (dr === 0 || dr === 6 || dc === 0 || dc === 6 || (dr >= 2 && dr <= 4 && dc >= 2 && dc <= 4))) ? 1 : 0;
-      if (dr === -1 || dr === 7 || dc === -1 || dc === 7) v = 0;
-      var rr = r + dr, cc = c + dc;
-      if (rr >= 0 && rr < m.length && cc >= 0 && cc < m.length) m[rr][cc] = v;
-    }
-  }
-  function qrMatrix(bits, version, size) {
-    var m = qrBlank(size), r, c, i;
-    qrFinder(m, 0, 0); qrFinder(m, 0, size - 7); qrFinder(m, size - 7, 0);
-    for (i = 8; i < size - 8; i++) { m[6][i] = (i % 2 === 0) ? 1 : 0; m[i][6] = (i % 2 === 0) ? 1 : 0; }
-    /* Alignment patterns overwrite the timing row and column where they meet;
-     * only the three combos landing on the finders are skipped. */
-    var ac = QR_ALIGN[version] || [], al = ac.length - 1;
-    for (var ai = 0; ai < ac.length; ai++) for (var aj = 0; aj < ac.length; aj++) {
-      if ((ai === 0 && aj === 0) || (ai === 0 && aj === al) || (ai === al && aj === 0)) continue;
-      var ar = ac[ai], cc2 = ac[aj];
-      for (var dr = -2; dr <= 2; dr++) for (var dc = -2; dc <= 2; dc++) {
-        var edge = Math.max(Math.abs(dr), Math.abs(dc)) === 2, mid = dr === 0 && dc === 0;
-        m[ar + dr][cc2 + dc] = (edge || mid) ? 1 : 0;
-      }
-    }
-    m[4 * version + 9][8] = 1;
-    /* Reserve format areas (two copies) and version areas. */
-    function reserve(r2, c2) { if (m[r2][c2] === -1) m[r2][c2] = -2; }
-    for (i = 0; i < 9; i++) { if (i !== 6) { reserve(8, i); reserve(i, 8); } }
-    for (i = 0; i < 8; i++) { reserve(8, size - 1 - i); reserve(size - 1 - i, 8); }
-    reserve(8, 8);
-    if (version >= 7) for (i = 0; i < 6; i++) for (var j = 0; j < 3; j++) { reserve(i, size - 11 + j); reserve(size - 11 + j, i); }
-    /* Data zigzag, two columns at a time, alternating upward and downward. */
-    var bit = 0, upward = true, col, k, dc;
-    for (col = size - 1; col > 0; col -= 2) {
-      if (col === 6) col = 5;
-      for (k = 0; k < size; k++) {
-        r = upward ? size - 1 - k : k;
-        for (dc = 0; dc < 2; dc++) {
-          c = col - dc;
-          if (m[r][c] === -1) {
-            if (bit < bits.length) { m[r][c] = -3 - bit; bit++; }
-            else m[r][c] = 0;
-          }
-        }
-      }
-      upward = !upward;
-    }
-    var best = null;
-    for (var mask = 0; mask < 8; mask++) {
-      var cand = qrApplyMask(m, size, mask, bits);
-      var score = qrPenalty(cand, size);
-      if (!best || score < best.score) best = { mask: mask, m: cand, score: score };
-    }
-    var fb = qrFormatBits(best.mask);
-    qrWriteFormat(best.m, size, fb);
-    if (version >= 7) qrWriteVersion(best.m, size, qrVersionBits(version));
-    return { version: version, size: size, mask: best.mask, modules: best.m };
-  }
-  function qrMaskBit(mask, r, c) {
-    switch (mask) {
-      case 0: return (r + c) % 2 === 0;
-      case 1: return r % 2 === 0;
-      case 2: return c % 3 === 0;
-      case 3: return (r + c) % 3 === 0;
-      case 4: return (Math.floor(r / 2) + Math.floor(c / 3)) % 2 === 0;
-      case 5: return ((r * c) % 2 + (r * c) % 3) === 0;
-      case 6: return (((r * c) % 2 + (r * c) % 3) % 2) === 0;
-      default: return (((r + c) % 2 + (r * c) % 3) % 2) === 0;
-    }
-  }
-  function qrApplyMask(m, size, mask, bits) {
-    var out = [], r, c, v;
-    for (r = 0; r < size; r++) { out.push([]); for (c = 0; c < size; c++) out[r].push(m[r][c]); }
-    for (r = 0; r < size; r++) for (c = 0; c < size; c++) {
-      v = out[r][c];
-      if (v <= -3) {
-        var bit = bits[-(v + 3)] || 0;
-        out[r][c] = qrMaskBit(mask, r, c) ? bit ^ 1 : bit;
-      } else if (v === -2) out[r][c] = 0;
-    }
-    return out;
-  }
-  function qrPenalty(m, size) {
-    var score = 0, r, c, run, last, k, dark = 0;
-    for (r = 0; r < size; r++) {
-      run = 1; last = m[r][0];
-      for (c = 1; c < size; c++) {
-        if (m[r][c] === last) run++;
-        else { if (run >= 5) score += 3 + (run - 5); run = 1; last = m[r][c]; }
-      }
-      if (run >= 5) score += 3 + (run - 5);
-    }
-    for (c = 0; c < size; c++) {
-      run = 1; last = m[0][c];
-      for (r = 1; r < size; r++) {
-        if (m[r][c] === last) run++;
-        else { if (run >= 5) score += 3 + (run - 5); run = 1; last = m[r][c]; }
-      }
-      if (run >= 5) score += 3 + (run - 5);
-    }
-    function finderLike(a, b2, cc2, d, e, f, g) {
-      return a === 1 && b2 === 0 && cc2 === 1 && d === 1 && e === 1 && f === 0 && g === 1;
-    }
-    for (r = 0; r < size; r++) for (c = 0; c + 10 < size; c++) {
-      var p = [m[r][c], m[r][c + 1], m[r][c + 2], m[r][c + 3], m[r][c + 4], m[r][c + 5], m[r][c + 6]];
-      if ((finderLike.apply(null, p) && m[r][c + 7] === 0 && m[r][c + 8] === 0 && m[r][c + 9] === 0 && m[r][c + 10] === 0) ||
-        (m[r][c] === 0 && m[r][c + 1] === 0 && m[r][c + 2] === 0 && m[r][c + 3] === 0 && finderLike(m[r][c + 4], m[r][c + 5], m[r][c + 6], m[r][c + 7], m[r][c + 8], m[r][c + 9], m[r][c + 10]))) score += 40;
-    }
-    for (c = 0; c < size; c++) for (r = 0; r + 10 < size; r++) {
-      var q = [m[r][c], m[r + 1][c], m[r + 2][c], m[r + 3][c], m[r + 4][c], m[r + 5][c], m[r + 6][c]];
-      if ((finderLike.apply(null, q) && m[r + 7][c] === 0 && m[r + 8][c] === 0 && m[r + 9][c] === 0 && m[r + 10][c] === 0) ||
-        (m[r][c] === 0 && m[r + 1][c] === 0 && m[r + 2][c] === 0 && m[r + 3][c] === 0 && finderLike(m[r + 4][c], m[r + 5][c], m[r + 6][c], m[r + 7][c], m[r + 8][c], m[r + 9][c], m[r + 10][c]))) score += 40;
-    }
-    for (r = 0; r < size - 1; r++) for (c = 0; c < size - 1; c++) {
-      var s = m[r][c] + m[r][c + 1] + m[r + 1][c] + m[r + 1][c + 1];
-      if (s === 0 || s === 4) score += 3;
-    }
-    for (r = 0; r < size; r++) for (c = 0; c < size; c++) if (m[r][c] === 1) dark++;
-    var pct = (dark * 20) / (size * size), prev = Math.abs(pct - 50) / 5;
-    score += Math.floor(prev) * 10;
-    return score;
-  }
-  function qrWriteFormat(m, size, fb) {
-    /* Bit i counts from the least significant bit. First copy runs LSB first
-     * from (8,0) to (0,8); second copy puts bits 0 to 6 down column 8 and bits
-     * 8 to 14 across row 8; the dark module at (size-8,8) stays dark. */
-    function bit(i) { return (fb >> i) & 1; }
-    var order1 = [[8, 0], [8, 1], [8, 2], [8, 3], [8, 4], [8, 5], [8, 7], [8, 8], [7, 8], [5, 8], [4, 8], [3, 8], [2, 8], [1, 8], [0, 8]];
-    var i;
-    for (i = 0; i < 15; i++) m[order1[i][0]][order1[i][1]] = bit(i);
-    for (i = 0; i < 7; i++) m[size - 1 - i][8] = bit(i);
-    for (i = 8; i < 15; i++) m[8][size - 15 + i] = bit(i);
-    m[size - 8][8] = 1;
-  }
-  function qrWriteVersion(m, size, vb) {
-    var i, a, b, bit;
-    for (i = 0; i < 18; i++) {
-      bit = (vb >> i) & 1;
-      a = size - 11 + (i % 3); b = Math.floor(i / 3);
-      m[a][b] = bit; m[b][a] = bit;
-    }
+    if (!QRGen) return null;
+    try {
+      var qr = QRGen(0, "M");
+      qr.addData(String(text == null ? "" : text), "Byte");
+      qr.make();
+      var size = qr.getModuleCount();
+      var modules = [];
+      for (var r = 0; r < size; r++) { var row = []; for (var c = 0; c < size; c++) row.push(qr.isDark(r, c) ? 1 : 0); modules.push(row); }
+      return { version: (size - 17) / 4, size: size, modules: modules };
+    } catch (e) { return null; }
   }
   function qrDraw(canvas, text, px) {
     var q = qrEncode(text);
     if (!q || !canvas || !canvas.getContext) return null;
     var ctx = canvas.getContext("2d"), quiet = 4, n = q.size + quiet * 2;
-    var s = Math.max(1, Math.floor((px || 240) / n));
+    var target = Math.max(240, px || 240);
+    var s = Math.max(1, Math.ceil(target / n));
     canvas.width = n * s; canvas.height = n * s;
     canvas.style.width = canvas.width + "px"; canvas.style.height = canvas.height + "px";
     ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -314,18 +83,31 @@
   /* ================= pairing payload ================= */
   var QR_PREFIX = "kardia-sync:1:";
   function buildPayload(p) {
-    return QR_PREFIX + p.sessionId + ":" + p.displayPub + ":" + p.shortCode + ":" + p.expiresAt;
+    var base = QR_PREFIX + p.sessionId + ":" + p.displayPub + ":" + p.shortCode + ":" + p.expiresAt;
+    var roomId = (p.relay && p.relay.roomId) || p.roomId || "";
+    var roomToken = (p.relay && p.relay.roomToken) || p.roomToken || "";
+    if (roomId && roomToken) base += ":" + roomId + ":" + roomToken;
+    return base;
   }
+  function normalizeCodeInput(value) {
+    return String(value == null ? "" : value).toUpperCase().replace(/[^A-Z2-9]/g, "").slice(0, 6);
+  }
+  function formatCodeInput(value) { return codeGroups(normalizeCodeInput(value)); }
   function parsePayload(s) {
     s = String(s == null ? "" : s).trim();
     if (s.slice(0, QR_PREFIX.length) !== QR_PREFIX) return null;
     var rest = s.slice(QR_PREFIX.length).split(":");
-    if (rest.length !== 4) return null;
+    if (rest.length !== 4 && rest.length !== 6) return null;
     if (!/^[0-9a-fA-F]{32}$/.test(rest[0])) return null;
     if (!/^[A-Za-z0-9_-]{20,}$/.test(rest[1])) return null;
     if (!/^[A-Z2-9]{6}$/.test(rest[2])) return null;
     if (!/^\d{10,}$/.test(rest[3])) return null;
-    return { sessionId: rest[0].toLowerCase(), displayPub: rest[1], shortCode: rest[2], expiresAt: +rest[3] };
+    var out = { sessionId: rest[0].toLowerCase(), displayPub: rest[1], shortCode: rest[2], expiresAt: +rest[3] };
+    if (rest.length === 6) {
+      if (!/^[0-9a-fA-F]{32}$/.test(rest[4]) || !/^[A-Za-z0-9_-]{32,64}$/.test(rest[5])) return null;
+      out.roomId = rest[4].toLowerCase(); out.roomToken = rest[5];
+    }
+    return out;
   }
   function isExpired(expiresAt, now) {
     return (+expiresAt || 0) <= (now == null ? Date.now() : now);
@@ -547,6 +329,8 @@
       '<div class="krd-sp-qrwrap"><canvas id="krdSpQr" width="280" height="280" role="img" aria-label="Pairing code for the probe phone"></canvas></div>' +
       '<p class="sp-small krd-sp-codelabel">or type this code</p>' +
       '<p class="krd-sp-code" aria-label="Probe code">' + esc(codeGroups(p && p.shortCode)) + "</p>" +
+      (p && p.codeHashHex ? '<p class="sp-small krd-sp-codelabel">Nearby name KS-' + esc(String(p.codeHashHex).slice(0, 4).toUpperCase()) + "</p>" : "") +
+      '<p class="sp-small" id="krdSpExpiry" role="status"></p>' +
       '<p class="krd-sp-state" id="krdSpState" role="status">Starting</p>' +
       '<p class="sp-small" id="krdSpStateSub"></p>' +
       '<div id="krdSpConfirm"></div>' +
@@ -570,7 +354,7 @@
     box.innerHTML = '<div class="krd-sp-confirm" role="group" aria-label="Confirm the number">' +
       '<p class="sp-small">Both phones show a number. Check they match, then confirm on both phones.</p>' +
       '<p class="krd-sp-confirmno">' + esc(codeGroups(session.confirm)) + "</p>" +
-      '<button type="button" class="sp-btn pri sp-wide" data-act="sp-confirm">Numbers match, confirm</button></div>';
+      '<button type="button" class="sp-btn pri sp-wide" data-act="sp-confirm">They match</button></div>';
   }
 
   /* ---------- Probe: Use this phone as a probe ---------- */
@@ -606,6 +390,11 @@
       'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' +
       '<rect x="4" y="10.5" width="16" height="3" rx="1.5" fill="currentColor"/></svg>';
   }
+  function nearbyHtml() {
+    return '<div class="krd-sp-nearby"><h3 class="sp-h3">Nearby displays</h3>' +
+      '<div id="krdSpNearby" role="status"><p class="sp-small">Looking for nearby displays.</p></div>' +
+      '<button type="button" class="sp-btn sec sp-wide" data-act="sp-nearby-refresh">Search again</button></div>';
+  }
   function joinBoxHtml() {
     var canScan = scannerAvailable();
     return '<div class="krd-sp-join"><h3 class="sp-h3">Join the display</h3>' +
@@ -617,30 +406,66 @@
       '<label class="krd-sp-field" for="krdSpCode">Probe code</label>' +
       '<input id="krdSpCode" class="krd-sp-input" inputmode="text" autocomplete="off" autocapitalize="characters" ' +
       'autocorrect="off" maxlength="7" placeholder="ABC 123" aria-describedby="krdSpCodeHint">' +
-      '<p class="sp-small" id="krdSpCodeHint">Six letters and numbers, as shown on the display phone.</p>' +
+      '<p class="sp-small" id="krdSpCodeHint">Six letters and numbers, as shown on the display phone. Joining starts on the last character.</p>' +
       '<p class="sp-small krd-sp-errline" id="krdSpJoinErr" role="alert" hidden></p>' +
       '<button type="button" class="sp-btn sec sp-wide" data-act="sp-join-code">Join</button></div>';
+  }
+  function bindCodeInput() {
+    var d = doc(), input = d && d.getElementById("krdSpCode");
+    if (!input || input.__krdSpBound) return;
+    input.__krdSpBound = true;
+    input.addEventListener("input", function () {
+      var raw = input.value;
+      if (parsePayload(raw)) { probeJoin(raw); return; }
+      var cleaned = normalizeCodeInput(raw);
+      var grouped = formatCodeInput(cleaned);
+      if (input.value !== grouped) input.value = grouped;
+      if (cleaned.length === 6) probeJoin(cleaned);
+    });
+  }
+  function startNearbySearch() {
+    var d = doc(), box = d && d.getElementById("krdSpNearby");
+    if (!box) return;
+    box.innerHTML = '<p class="sp-small">Looking for nearby displays.</p>';
+    if (!S.core || !S.core.discoverNearby) { box.innerHTML = '<p class="sp-small">No nearby displays found. Scan the QR code below.</p>'; return; }
+    try {
+      S.core.discoverNearby(5000).then(function (list) {
+        var b = doc() && doc().getElementById("krdSpNearby");
+        if (!b) return;
+        if (!list || !list.length) { b.innerHTML = '<p class="sp-small">No nearby displays found. Keep the display phone close and showing its code, or scan below.</p>'; return; }
+        b.innerHTML = list.map(function (item) {
+          return '<button type="button" class="sp-btn sec sp-wide krd-sp-nearbyitem" data-act="sp-nearby-join" data-hash="' + esc(item.codeHashHex) + '" data-name="' + esc(item.name || "Nearby display") + '">' +
+            esc(item.name || "Nearby display") + (item.shortLabel ? " · Code " + esc(item.shortLabel) : "") + " · Connect</button>";
+        }).join("");
+      }, function (e) {
+        var b = doc() && doc().getElementById("krdSpNearby");
+        if (b) b.innerHTML = '<p class="sp-small">' + esc(mapReason(e).message) + "</p>";
+      });
+    } catch (e) { box.innerHTML = '<p class="sp-small">No nearby displays found. Scan the QR code below.</p>'; }
   }
   function focusCode() {
     var d = doc(), input = d && d.getElementById("krdSpCode");
     if (input) try { input.focus(); } catch (e) {}
   }
   function renderProbeIntro() {
+    S.motionChosen = false;
     showSheet("Use this phone as a probe",
-      '<p class="sp-small">Tilt this phone to move the virtual probe on the other phone. ' +
-      "Motion stays on this phone and is only used while you train.</p>" +
-      '<div class="krd-sp-col">' +
-      '<button type="button" class="sp-btn pri sp-wide" data-act="sp-motion">Allow motion</button>' +
-      '<button type="button" class="sp-btn sec sp-wide" data-act="sp-touch">Use touch controls instead</button>' +
-      "</div>" +
+      '<p class="sp-small">Connect to the display phone. Nearby displays connect with one tap, with no typing.</p>' +
+      nearbyHtml() +
       joinBoxHtml() +
       '<div class="krd-sp-col"><button type="button" class="sp-btn sec sp-wide" data-act="sp-close">Not now</button></div>');
     bindRootClose(closeAll);
-    if (!scannerAvailable()) focusCode();
+    bindCodeInput();
+    startNearbySearch();
   }
-  function joinErr(msg) {
+  function joinErr(msg, info) {
     var d = doc(), el = d && d.getElementById("krdSpJoinErr");
-    if (el) { el.hidden = !msg; el.textContent = msg || ""; }
+    if (!el) return;
+    if (!msg && !info) { el.hidden = true; el.innerHTML = ""; return; }
+    var detail = info || (msg ? mapReason({ message: msg }) : null);
+    el.hidden = false;
+    el.innerHTML = esc(detail ? detail.message : msg) +
+      (detail && detail.action ? ' <button type="button" class="krd-sp-minilink" data-act="sp-err-' + esc(detail.action) + '">' + esc(detail.actionLabel) + "</button>" : "");
   }
   function probeJoin(input) {
     joinErr("");
@@ -655,16 +480,43 @@
     try {
       var r = S.core.joinProbe(parsePayload(input) ? String(input).trim() : code);
       if (r && r.then) r.then(function () {}, function (e) {
-        if (S.probeStep === "joining") { S.probeStep = "intro"; renderProbeIntro(); joinErr(friendlyReason(e)); }
+        if (S.probeStep === "joining") { S.probeStep = "intro"; renderProbeIntro(); joinErr(null, mapReason(e)); }
       });
-    } catch (e) { S.probeStep = "intro"; renderProbeIntro(); joinErr(friendlyReason(e)); }
+    } catch (e) { S.probeStep = "intro"; renderProbeIntro(); joinErr(null, mapReason(e)); }
   }
-  function friendlyReason(e) {
-    var m = e && (e.reason || e.message);
-    if (m === "expired") return "That code has expired. Ask for a fresh code and try again.";
-    if (m === "busy") return "That phone is already training with someone else. Try again later.";
-    return "The phones could not reach each other. Move closer and try again.";
+  function mapReason(e) {
+    var reason = (e && e.reason) || "";
+    var msg = String((e && (e.message || e.reason)) || e || "");
+    if (!reason) {
+      if (/sign-in required|401|unauthori[sz]ed/i.test(msg)) reason = "sign-in-required";
+      else if (/expired/i.test(msg)) reason = "expired";
+      else if (/controller-busy|busy|already training/i.test(msg)) reason = "busy";
+      else if (/not-found|no display found/i.test(msg)) reason = "not-found";
+      else if (/bluetooth/i.test(msg) && /off|powered/i.test(msg)) reason = "bluetooth-off";
+      else if (/bluetooth/i.test(msg) && /permission|denied/i.test(msg)) reason = "bluetooth-permission";
+      else if (/bluetooth/i.test(msg)) reason = "bluetooth-unavailable";
+      else if (/offline|internet|network|websocket/i.test(msg)) reason = "offline";
+      else if (/version/i.test(msg)) reason = "version-mismatch";
+      else if (/no-transport|no link/i.test(msg)) reason = "no-transport";
+      else reason = "unknown";
+    }
+    switch (reason) {
+      case "expired": return { reason: reason, message: "That code has expired. The display phone is showing a fresh code.", action: "scan", actionLabel: "Scan the fresh code" };
+      case "busy": case "controller-busy": return { reason: "busy", message: "That display is already training with another probe. Wait until that session ends.", action: "retry", actionLabel: "Try again" };
+      case "sign-in-required": return { reason: reason, message: "You are signed out. The internet link needs sign-in. Nearby joining over Bluetooth works without sign-in.", action: "sign-in", actionLabel: "Sign in" };
+      case "not-found": return { reason: reason, message: "No display found nearby. Keep both phones close, with the display phone showing its code.", action: "scan", actionLabel: "Scan the QR code instead" };
+      case "bluetooth-off": return { reason: reason, message: "Bluetooth is off. Turn Bluetooth on, then search again.", action: "settings", actionLabel: "Open Settings" };
+      case "bluetooth-permission": return { reason: reason, message: "Bluetooth permission is off for this app. Allow Bluetooth in Settings, then search again.", action: "settings", actionLabel: "Open Settings" };
+      case "bluetooth-unavailable": return { reason: reason, message: "Bluetooth is not available on this phone. Scan the QR code to join over the internet.", action: "scan", actionLabel: "Scan the QR code" };
+      case "offline": case "no-transport": return { reason: "offline", message: "No internet and no Bluetooth link. Turn on Bluetooth or connect to the internet.", action: "retry", actionLabel: "Try again" };
+      case "version-mismatch": case "bad-version": return { reason: "version-mismatch", message: "The two phones are on different app versions. Update both phones, then pair again.", action: "retry", actionLabel: "Try again" };
+      case "bad-code": return { reason: reason, message: "That code does not look right. Check the display phone and try again.", action: "retry", actionLabel: "Check the code" };
+      default:
+        try { console.warn("[SyncProbe] pairing failed:", msg || reason); } catch (x) {}
+        return { reason: "unknown", message: "The phones could not reach each other. Move closer and try again.", action: "retry", actionLabel: "Try again" };
+    }
   }
+  function friendlyReason(e) { return mapReason(e).message; }
   function setProbeBusy(line) {
     var d = doc();
     var st = d && d.getElementById("krdSpState"), sub = d && d.getElementById("krdSpStateSub");
@@ -714,16 +566,18 @@
       '<p class="sp-small" id="krdSpState" role="status">' + esc(stateLabel(stName).line) + "</p></div>" +
       '<p class="sp-small" id="krdSpStateSub">' + esc(sub) + "</p>" +
       (joined ? "" : joinBoxHtml()) +
+      (joined && !S.motionChosen ? '<div class="krd-sp-note" role="group" aria-label="Probe controls"><p><b>Move the probe.</b> Allow motion to tilt this phone, or use touch controls.</p><div class="krd-sp-col"><button type="button" class="sp-btn pri sp-wide" data-act="sp-motion">Allow motion</button><button type="button" class="sp-btn sec sp-wide" data-act="sp-touch">Use touch controls instead</button></div></div>' : "") +
       '<div class="krd-sp-glyphwrap" id="krdSpGlyph" aria-label="Probe orientation">' + glyphSvg(0, 0) + "</div>" +
       '<p class="sp-small krd-sp-posedesc" id="krdSpPoseDesc"></p>' +
       '<div id="krdSpConfirmP"></div>' +
       '<div class="krd-sp-col">' +
       '<button type="button" class="sp-btn sec sp-wide" data-act="sp-pause">Pause</button>' +
       '<button type="button" class="sp-btn sec sp-wide" data-act="sp-recenter">Recenter</button>' +
-      '<button type="button" class="sp-btn sec sp-wide" data-act="sp-end">End session</button></div>' +
+      '<button type="button" class="sp-btn sec sp-wide" data-act="sp-end">Disconnect</button></div>' +
       '<p class="krd-sp-link"><button type="button" class="krd-sp-minilink" data-act="sp-details">Connection details</button></p>');
     bindRootClose(closeAll);
-    if (!scannerAvailable()) focusCode();
+    bindCodeInput();
+    if (!joined && !scannerAvailable()) focusCode();
     renderProbeConfirm();
     refreshGlyph();
   }
@@ -736,7 +590,7 @@
     box.innerHTML = '<div class="krd-sp-confirm" role="group" aria-label="Confirm the number">' +
       '<p class="sp-small">The display phone shows a number. Check it matches this one, then confirm.</p>' +
       '<p class="krd-sp-confirmno">' + esc(codeGroups(session.confirm)) + "</p>" +
-      '<button type="button" class="sp-btn pri sp-wide" data-act="sp-confirm">Numbers match, confirm</button></div>';
+      '<button type="button" class="sp-btn pri sp-wide" data-act="sp-confirm">They match</button></div>';
   }
   function renderProbeTouch() {
     S.probeStep = "touch";
@@ -926,6 +780,7 @@
     S.lastState = name;
     refreshChrome();
     if (!S.screen && (name === "disconnected" || name === "failed" || name === "idle")) { closeAll(); return; }
+    if (evt.type === "pairing" && S.screen === "display") { openDisplay(); return; }
     if (evt.type === "state" && S.screen === "display") {
       var session = currentPairing();
       try { if (S.core && S.core.session) session = S.core.session(); } catch (e) {}
@@ -1030,6 +885,13 @@
       sub.textContent = "Over " + transportName(S.core.activeTransport && S.core.activeTransport()).toLowerCase() + ", " + fmtLatency(st && st.rttMs);
     }
     var p = currentPairing();
+    if (S.screen === "display" && p && p.expiresAt && isExpired(p.expiresAt) && !S.refreshingPairing) {
+      S.refreshingPairing = true;
+      try {
+        var fresh = S.core && S.core.refreshDisplay ? S.core.refreshDisplay() : null;
+        Promise.resolve(fresh).then(function () { S.refreshingPairing = false; if (S.screen === "display") openDisplay(); }, function () { S.refreshingPairing = false; });
+      } catch (e) { S.refreshingPairing = false; }
+    }
     var exp = d && d.getElementById("krdSpExpiry");
     if (exp && p && p.expiresAt) exp.textContent = "Code expires in " + fmtExpiry(p.expiresAt);
   }
@@ -1044,13 +906,31 @@
     if (act === "sp-probe") { openProbe(); return; }
     if (act === "sp-motion") {
       requestMotion().then(function (ok) {
-        if (ok) { renderProbeCalibrate(); }
+        if (ok) { S.motionChosen = true; S.controlMode = "motion"; renderProbeCalibrate(); }
         else renderProbeDenied();
       });
       return;
     }
-    if (act === "sp-touch") { renderProbeTouch(); return; }
+    if (act === "sp-touch") { S.motionChosen = true; S.controlMode = "touch"; renderProbeTouch(); return; }
     if (act === "sp-scan") { scanCode(); return; }
+    if (act === "sp-nearby-refresh") { startNearbySearch(); return; }
+    if (act === "sp-nearby-join") {
+      var hash = btn && btn.getAttribute ? btn.getAttribute("data-hash") : "";
+      S.probeStep = "joining"; setProbeBusy("Connecting");
+      try {
+        var nj = S.core.joinNearby ? S.core.joinNearby({ codeHashHex: hash, name: btn && btn.getAttribute ? btn.getAttribute("data-name") : "" }) : Promise.reject(new Error("bluetooth-unavailable"));
+        Promise.resolve(nj).then(function () {}, function (e) { S.probeStep = "intro"; renderProbeIntro(); joinErr(null, mapReason(e)); });
+      } catch (e) { S.probeStep = "intro"; renderProbeIntro(); joinErr(null, mapReason(e)); }
+      return;
+    }
+    if (act === "sp-err-scan") { scanCode(); return; }
+    if (act === "sp-err-sign-in") {
+      try { if (G.SMD_EMAIL_AUTH && G.SMD_EMAIL_AUTH.openEmail) G.SMD_EMAIL_AUTH.openEmail(); else if (typeof G.SMD_openProfile === "function") G.SMD_openProfile(); else joinErr("Open Account and sign in, then try again."); }
+      catch (e) { joinErr("Open Account and sign in, then try again."); }
+      return;
+    }
+    if (act === "sp-err-settings") { joinErr("Open Settings, allow Bluetooth for this app, then search again."); return; }
+    if (act === "sp-err-retry") { startNearbySearch(); return; }
     if (act === "sp-join-code") {
       var d = doc(), input = d && d.getElementById("krdSpCode");
       probeJoin(input ? input.value : "");
@@ -1120,6 +1000,7 @@
         var text = (r && r.ScanResult) || "";
         if (!text) return;
         var code = String(text).trim();
+        if (!parsePayload(code) && normalizeCodeInput(code).length !== 6) { joinErr("That is not a SyncProbe code. Point the camera at the code on the display phone."); return; }
         var d = doc(), input = d && d.getElementById("krdSpCode");
         if (input && !parsePayload(code)) input.value = code;
         probeJoin(code);
@@ -1134,7 +1015,7 @@
     resumeProbeRender();
     closeSheet();
     clearTick();
-    releaseWakeLock();
+    releaseWake();
     lostBanner(false);
     if (S.unsub) { try { S.unsub(); } catch (e) {} S.unsub = null; }
     S.core = null; S.pairing = null; S.lastState = "idle";
@@ -1150,9 +1031,9 @@
     isProbeRenderSuspended: function () { return probeRenderSuspended; },
     close: closeAll, dismiss: closeSheet, details: openDetails,
     _pure: {
-      qrEncode: qrEncode, qrDraw: qrDraw, qrFormatBits: qrFormatBits, qrVersionBits: qrVersionBits, rsEncode: rsEncode,
+      qrEncode: qrEncode, qrDraw: qrDraw,
       buildPayload: buildPayload, parsePayload: parsePayload, isExpired: isExpired,
-      stateLabel: stateLabel, transportName: transportName, signalBars: signalBars,
+      stateLabel: stateLabel, transportName: transportName, signalBars: signalBars, mapReason: mapReason, friendlyReason: friendlyReason, normalizeCodeInput: normalizeCodeInput, formatCodeInput: formatCodeInput,
       fmtLatency: fmtLatency, fmtExpiry: fmtExpiry, codeGroups: codeGroups
     }
   };
