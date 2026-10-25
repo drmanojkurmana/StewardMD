@@ -68,6 +68,9 @@ project(':capgo-capacitor-updater').projectDir = new File('../node_modules/@capg
 include ':stewardmd-capacitor-capture-guard'
 project(':stewardmd-capacitor-capture-guard').projectDir = new File('../local-plugins/capacitor-capture-guard/android')
 
+include ':stewardmd-capacitor-kardia-ble'
+project(':stewardmd-capacitor-kardia-ble').projectDir = new File('../local-plugins/capacitor-kardia-ble/android')
+
 include ':stewardmd-capacitor-llama'
 project(':stewardmd-capacitor-llama').projectDir = new File('../local-plugins/capacitor-llama/android')
 
