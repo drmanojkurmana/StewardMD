@@ -23,6 +23,15 @@
   var LEVELS = ["mbbs", "resident", "fellow", "sonographer"];
 
   function T(en, hi) { return { en: en, hi: hi }; }
+  /* Angle readouts, shared with kardia-practice.js (duplicated: practice needs
+   * the host, so the host cannot need practice). Negative angles render with a
+   * proper minus sign (U+2212) and the degree sign (U+00B0), never "- 180 deg";
+   * degText is the screen-reader wording for aria-valuetext. */
+  function degStr(v) { var r = Math.round(v); return (r < 0 ? "−" + (-r) : "" + r) + "°"; }
+  function degText(v) {
+    var r = Math.round(v), a = r < 0 ? -r : r;
+    return (r < 0 ? "minus " + a : "" + a) + " " + (a === 1 ? "degree" : "degrees");
+  }
   var TAB_T = {
     echo: T("Echo Lab", "इको लैब"), learn: T("Learn", "सीखें"), practice: T("Practice", "अभ्यास"),
     cases: T("Cases", "केस"), kardiox: T("KardiQ X", "KardiQ X")
@@ -234,8 +243,11 @@
     var cl = p ? p.clampsFor(cur.window) : null;
     var st8 = p ? p.getState() : null;
     function range(id, label, min, max, step, val, unit) {
-      return '<div class="krd-ctl"><label for="' + id + '">' + label + ' <span class="krd-ctl-val" id="' + id + 'Val">' + Math.round(val) + unit + '</span></label>' +
-        '<input type="range" id="' + id + '" data-krange="' + id + '" min="' + min + '" max="' + max + '" step="' + step + '" value="' + Math.round(val) + '" aria-label="' + label + '"></div>';
+      var isDeg = unit === " deg";
+      var text = isDeg ? degStr(val) : Math.round(val) + unit;
+      var vt = isDeg ? ' aria-valuetext="' + degText(val) + '"' : "";
+      return '<div class="krd-ctl"><label for="' + id + '">' + label + ' <span class="krd-ctl-val" id="' + id + 'Val">' + text + '</span></label>' +
+        '<input type="range" id="' + id + '" data-krange="' + id + '" min="' + min + '" max="' + max + '" step="' + step + '" value="' + Math.round(val) + '" aria-label="' + label + '"' + vt + '></div>';
     }
     var controls = "";
     if (tee && st8 && cl) {
@@ -407,8 +419,8 @@
     var hints = doc.getElementById("krdHints");
     if (hints) hints.innerHTML = r.hints.slice(0, 4).map(function (h) { return "<li>" + I.esc(h) + "</li>"; }).join("");
     var comp = doc.getElementById("krdComp");
-    if (comp) comp.textContent = I.tx(T("Plane " + r.distanceMm + " mm off, angle " + r.angleDeg + " deg off, landmarks " + r.landmarksPresent + " of " + r.landmarksTotal + (r.hasForeshortening ? ", foreshortening " + r.foreshorteningMm + " mm" : "") + ".",
-      "Plane " + r.distanceMm + " mm off, angle " + r.angleDeg + " deg off."));
+    if (comp) comp.textContent = I.tx(T("Plane " + r.distanceMm + " mm off, angle " + r.angleDeg + "° off, landmarks " + r.landmarksPresent + " of " + r.landmarksTotal + (r.hasForeshortening ? ", foreshortening " + r.foreshorteningMm + " mm" : "") + ".",
+      "Plane " + r.distanceMm + " mm off, angle " + r.angleDeg + "° off."));
     var now = Date.now();
     if (r.withinTolerance) { if (!EL.holdSince) EL.holdSince = now; } else EL.holdSince = null;
     var ach = doc.getElementById("krdAchieved");
@@ -419,7 +431,20 @@
       var el = doc.getElementById(pair[0]);
       if (el && doc.activeElement !== el) el.value = Math.round(pair[1]);
       var val = doc.getElementById(pair[0] + "Val");
-      if (val && doc.activeElement !== el) val.textContent = Math.round(pair[1]) + (pair[0] === "krdDepth" ? " cm" : " deg");
+      if (val && doc.activeElement !== el) {
+        var isDeg = pair[0] !== "krdDepth";
+        val.textContent = isDeg ? degStr(pair[1]) : Math.round(pair[1]) + " cm";
+        if (el && isDeg) el.setAttribute("aria-valuetext", degText(pair[1]));
+      }
+    });
+    /* The tilt and rock drag strips are angle sliders for screen readers:
+       keep their spoken value in step with the probe, in words. */
+    [["krdTiltStrip", st8.tiltDeg], ["krdRockStrip", st8.rockDeg]].forEach(function (strip) {
+      var stripEl = doc.getElementById(strip[0]);
+      if (stripEl) {
+        stripEl.setAttribute("aria-valuenow", String(Math.round(strip[1])));
+        stripEl.setAttribute("aria-valuetext", degText(strip[1]));
+      }
     });
     drawEchoSector();
   }
@@ -452,7 +477,8 @@
         else if (id === "krdTurn") p.setState({ rotationDeg: val });
         else if (id === "krdOmni") p.setState({ omniplaneDeg: val });
         else if (id === "krdFlex") p.setState({ flexDeg: val });
-        if (lbl) lbl.textContent = Math.round(val) + (id === "krdDepth" ? " cm" : " deg");
+        if (id === "krdDepth") { if (lbl) lbl.textContent = Math.round(val) + " cm"; }
+        else { if (lbl) lbl.textContent = degStr(val); el.setAttribute("aria-valuetext", degText(val)); }
       });
     });
     /* Keyboard on the drag strips: arrows move by two degrees. */
@@ -526,7 +552,7 @@
     var note = pro ? "" : '<div class="krd-note">' + I.ico("lock") + "<span>" +
       I.tx(T("Free preview: the first " + FREE_BANK_QUESTIONS + " bank questions in a study set. The full bank and the timed exam beyond the free try are part of StewardMD Pro.", "Free preview: the first " + FREE_BANK_QUESTIONS + " bank questions in a study set. The full bank and the timed exam beyond the free try are part of StewardMD Pro.")) + "</span></div>";
     var body = bank ? rows + note : '<p class="sp-mut" role="status">' + I.tx(T("Loading questions.", "Loading questions.")) + "</p>";
-    return '<div class="sp-scroll sp-pad"><div class="sp-col"><h2 class="sp-h2">' + I.tx(T("Practice", "Practice")) + "</h2>" + body + "</div></div>";
+    return '<div class="sp-scroll sp-pad"><div class="sp-col"><h2 class="sp-h2">' + I.tx(T("Practice", "Practice")) + "</h2>" + body + '<div id="krdPracticeMount"></div><div id="krdRealPatientSlotHost" data-krd-real-patient-slot-host hidden></div>' + "</div></div>";
   }
 
   function ecgHtml() {
@@ -594,6 +620,7 @@
     }
     var body = id === "learn" ? learnHtml() : id === "practice" ? practiceHtml() : id === "kardiox" ? kardioxHtml() : id === "echo" ? echoBodyHtml() : soonHtml(id);
     I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + body, focusSel);
+    if (id === "practice" && G.KARDIA_PRACTICE) G.KARDIA_PRACTICE.mount(host);
     if (id === "echo" && EL.views) mountEchoLab();
     else if (id === "echo" && !EL.err) { loadEchoViews(); drawEchoSectorSoon(); }
   }
