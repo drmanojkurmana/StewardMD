@@ -1,0 +1,27 @@
+/* StewardMD - error panel (SMD_error, smd-error.js). Left-aligned, no icon, red only for real failure. */
+.smd-err {
+  --se-bad: #B42332; --se-bad-soft: #FBEAEC; --se-warn-soft: #FBF1DC; --se-warn: #8A5A00;
+  margin: 0; padding: 18px 16px; text-align: left; font-family: var(--rds-font, system-ui, -apple-system, sans-serif);
+  color: var(--rds-ink, #0E1A24);
+}
+body.dark .smd-err, body.v3-dark .smd-err { --se-bad: #F17287; --se-bad-soft: #3A1820; --se-warn-soft: #33270E; --se-warn: #E7B65A; }
+.smd-err-title { margin: 0 0 4px; font-size: 16px; line-height: 1.3; font-weight: 600; letter-spacing: -.01em; }
+.smd-err-why { margin: 0 0 14px; font-size: 14px; line-height: 1.45; color: var(--rds-muted, #556B7A); max-width: 38ch; }
+.smd-err-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.smd-err-btn {
+  appearance: none; font: inherit; font-size: 15px; font-weight: 600; min-height: 44px; padding: 0 16px;
+  border: 0; border-radius: var(--rds-r-ctl, 12px); background: transparent; color: var(--rds-primary, #0F766E); cursor: pointer;
+  transition: transform .1s ease-out, opacity .15s;
+}
+.smd-err-btn.is-primary { background: var(--rds-primary, #0F766E); color: #fff; padding: 0 18px; }
+body.dark .smd-err-btn.is-primary, body.v3-dark .smd-err-btn.is-primary { color: #06201C; }
+.smd-err-btn:active { transform: scale(.97); }
+.smd-err-btn:focus-visible, .smd-err-more summary:focus-visible { outline: 2px solid var(--rds-primary, #0F766E); outline-offset: 2px; }
+.smd-err-more { margin-top: 4px; }
+.smd-err-more summary { min-height: 32px; display: flex; align-items: center; font-size: 13px; color: var(--rds-muted, #556B7A); cursor: pointer; }
+.smd-err-code { margin-top: 6px; padding: 10px 12px; border-radius: 10px; background: var(--rds-surface-2, rgba(14, 26, 36, .05));
+  font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--rds-muted, #556B7A); word-break: break-word; }
+/* a calculation that cannot proceed: calm amber, names what to add */
+.smd-err--block { background: var(--se-warn-soft); border-radius: var(--rds-r, 14px); }
+.smd-err--block .smd-err-btn { color: var(--se-warn); padding: 0; margin-right: 8px; }
+@media (prefers-reduced-motion: reduce) { .smd-err-btn { transition: none; } }

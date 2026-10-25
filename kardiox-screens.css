@@ -1113,8 +1113,8 @@
 
 /* (1) Poor-image ERROR card */
 #kardioxRoot .kx-st-err {
-  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px;
-  padding: 22px 18px; border: 1px solid #F0B7C0; border-radius: var(--kx-r);
+  display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 6px;
+  padding: 18px 16px; border: 1px solid var(--kx-line, rgba(127, 140, 150, .28)); border-radius: var(--kx-r);
   background: var(--kx-card);
 }
 #kardioxRoot .kx-st-err-ico { display: inline-flex; line-height: 1; }
@@ -1122,9 +1122,9 @@
 #kardioxRoot .kx-st-err-title { font-size: 14.5px; font-weight: 700; color: var(--kx-text); }
 #kardioxRoot .kx-st-err-body {
   font-size: 12px; font-weight: 500; color: var(--kx-text-2);
-  line-height: 1.45; max-width: 26ch;
+  line-height: 1.45; max-width: 38ch;
 }
-#kardioxRoot .kx-st-retake { margin-top: 4px; font-size: 13px; padding: 0 18px; }
+#kardioxRoot .kx-st-retake { margin-top: 8px; font-size: 13px; padding: 0 18px; }
 
 /* (2) OFFLINE amber card */
 #kardioxRoot .kx-st-off {

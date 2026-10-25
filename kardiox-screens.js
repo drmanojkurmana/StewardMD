@@ -388,7 +388,7 @@
             row(4, 'is-pending', 'radio_button_unchecked') +
           '</ol>' +
           '<div class="kx-proc-fail" data-fail hidden>' +
-            '<div class="kx-proc-fail-head">' + ico('error', 'kx-proc-fail-ico') +
+            '<div class="kx-proc-fail-head">' +
               '<span data-fail-msg></span></div>' +
             '<div class="kx-proc-fail-acts">' +
               '<button class="kx-btn kx-btn-primary" type="button" data-act="kardiox-retry">' + ico('refresh') + 'Try again</button>' +
@@ -1651,7 +1651,6 @@
         <!-- (1) Poor image / error -->
         <div class="kx-st-label">Poor image / error</div>
         <div class="kx-st-err" role="alert">
-          <span class="kx-st-err-ico" aria-hidden="true">${ic('image_not_supported')}</span>
           <b class="kx-st-err-title">Couldn't read this ECG</b>
           <span class="kx-st-err-body">The image is blurry or cropped. Retake with all 12 leads flat in frame.</span>
           <button type="button" class="kx-btn kx-btn-primary kx-st-retake" data-act="kardiox-retry">Retake</button>

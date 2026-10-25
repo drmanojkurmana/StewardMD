@@ -1777,7 +1777,7 @@
   function caseFreeFallback(phase, q, ph, next) {
     var existing = state.caseTaken[phase] || "";
     return '<div class="cx-turn"><p class="cx-q">' + esc(q) + "</p>" +
-      '<div class="cx-notice cx-notice--review">' + ic("wifi_off") +
+      '<div class="cx-notice cx-notice--review">' +
       "<div><b>The diagnosis list could not load</b><span>Type your answer instead. You can still finish the case.</span></div></div>" +
       '<div class="cx-free"><textarea class="cx-input" id="cxCaseText" rows="5" placeholder="' + esc(ph) + '">' + esc(existing) + "</textarea></div></div>" +
       '<div class="cx-nav"><button type="button" class="cx-btn cx-btn--primary" data-act="cx-case-next">' + esc(next) + "</button></div>";
@@ -1919,7 +1919,7 @@
         (r.ddx.matched.length + r.ddx.extra.length) ? Math.round((r.ddx.matched.length / (r.ddx.matched.length + r.ddx.extra.length)) * 100) : 0);
       html += "</div>";
       if (!r.ddx.hasTruth) {
-        html += '<div class="cx-notice cx-notice--review">' + ic("error") +
+        html += '<div class="cx-notice cx-notice--review">' +
           "<div><b>The true diagnosis was never on your list</b><span>Everything downstream follows from the differential. A diagnosis you never considered is one you cannot reach.</span></div></div>";
       }
       if (r.ddx.shotgun) {
@@ -4365,7 +4365,7 @@
       if (turn.pending) {
         html += '<div class="cx-ta cx-ta--pending">' + (turn.partial ? esc(turn.partial) : "Thinking...") + "</div>";
       } else if (turn.error) {
-        html += '<div class="cx-ta cx-ta--err">' + ic("cloud_off") + " " + esc(turn.error) + "</div>";
+        html += '<div class="cx-ta cx-ta--err">' + esc(turn.error) + "</div>";
       } else {
         html += '<div class="cx-ta' + (turn.blocked ? " cx-ta--blocked" : "") + '">' + esc(turn.a) + "</div>";
       }

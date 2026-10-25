@@ -992,7 +992,7 @@
           '<div class="fundx-scan-m"><b>' + esc(eye ? eye.toUpperCase() + " eye" : "Scan") + '</b><span>' + esc(when) + '</span></div>' +
           '<span class="fundx-q">Q ' + esc(q) + '</span></button>';
       }).join("");
-    }).catch(function () { box.innerHTML = '<div class="fundx-empty">' + ric("error") + '<span>Could not load scans.</span></div>'; });
+    }).catch(function () { box.innerHTML = window.SMD_error ? SMD_error.html({ title: "Couldn't load your scans", why: "Your saved scans are stored on this phone and did not respond. Nothing was deleted." }) : '<div class="fundx-empty"><span>Could not load scans.</span></div>'; });
   }
 
   // ================= CAMERA WIRING =================
