@@ -209,13 +209,13 @@ test("facade probe session: join by short code through a discover transport, con
   assert.equal(SYNC.state().name, "disconnected");
 });
 
-test("loader order: core, then guarded adapters, then the UI, at krd5", () => {
+test("loader order: core, then guarded adapters, then the UI, at krd6", () => {
   const { readFileSync } = require("node:fs");
   const loader = readFileSync(new URL("../kardia-loader.js", import.meta.url), "utf8");
   const order = ["kardia-sync.js", "kardia-sync-ble.js", "kardia-sync-relay.js", "kardia-syncprobe.js"].map((f) => loader.indexOf('"' + f + '"'));
   assert.ok(order.every((i) => i >= 0), "all SyncProbe files are listed");
   assert.ok(order[0] < order[1] && order[1] < order[3] && order[2] < order[3], "adapters before the UI");
-  assert.match(loader, /var V = "krd5"/);
+  assert.match(loader, /var V = "krd6"/);
   const build = readFileSync(new URL("../scripts/build-www.sh", import.meta.url), "utf8");
   assert.match(build, /for f in \*\.js/, "root glob already copies the SyncProbe files, so no build script entry is needed");
 });

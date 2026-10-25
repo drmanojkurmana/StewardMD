@@ -6,7 +6,7 @@
    DEFAULT OFF for everyone; there is no early-access tier. */
 (function (G) {
   "use strict";
-  var V = "krd5";
+  var V = "krd6";
   var CSS = ["specialty.css", "kardia.css", "kardia-syncprobe.css", "kardia-cases.css", "kardia-practice.css", "kardia-echolab.css", "kardia-scanlab.css"];
   var JS = ["specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "specialty-learn.js", "specialty-bank.js", "kardia-flags.js", "kardia-sim-heart.js", "kardia-sim-geom.js", "kardia-sim-us.js", "kardia-sim-probe.js", "kardia-sim-doppler.js", "kardia-sim-measure.js", "kardia-echolab.js", "kardia-scan-targets.js", "kardia-scanlab.js", "kardia.js", "kardia-sync.js", "kardia-sync-ble.js", "kardia-sync-relay.js", "kardia-syncprobe.js", "clinix-audio.js", "kardiox-ecgwave.js", "kardia-cases.js", "kardia-clips.js", "kardia-practice.js"];
   /* Transport adapters load best effort: a missing file must not stop Kardia loading. */
@@ -15,7 +15,7 @@
 
   function enabled() {
     try { if (G.SMD_KARDIA_FLAGS && G.SMD_KARDIA_FLAGS.bool) return !!G.SMD_KARDIA_FLAGS.bool("smd_kardia"); } catch (e) {}
-    try { var q = (G.location.search.match(/[?&]kardia=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return G.localStorage.getItem("smd_kardia") === "1"; } catch (e) { return false; }
+    try { var q = (G.location.search.match(/[?&]kardia=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return G.localStorage.getItem("smd_kardia") !== "0"; } catch (e) { return true; }
   }
   function css(href) {
     if (G.document.querySelector('link[data-kardia="' + href + '"]')) return;

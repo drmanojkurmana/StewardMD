@@ -62,8 +62,8 @@
     try {
       var q = (G.location.search.match(/[?&]kardia=([^&]+)/) || [])[1];
       if (q != null) return q === "1" || q === "on" || q === "true";
-      return G.localStorage.getItem("smd_kardia") === "1";
-    } catch (e) { return false; }
+      return G.localStorage.getItem("smd_kardia") !== "0";
+    } catch (e) { return true; }
   }
 
   function tab() { var t = st.prefs && st.prefs.ktab; return TABS.indexOf(t) >= 0 ? t : "echo"; }

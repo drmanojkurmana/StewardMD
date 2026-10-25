@@ -46,21 +46,20 @@ test("smd_kardia defaults ON for everyone (owner 2026-10-26); 0 or ?kardia=0 tur
 /* ---------- 2. boot loads only kardia-loader.js; the loader lists the engine + Kardia at one token ---------- */
 test("app boot loads only kardia-loader.js; the loader lists the engine and Kardia files at one version token", () => {
   const html = readFileSync("index.html", "utf8");
-  assert.ok(html.includes('<script src="/kardia-loader.js?v=krd5" defer></script>'), "loader tag at krd5");
+  assert.ok(html.includes('<script src="/kardia-loader.js?v=krd6" defer></script>'), "loader tag at krd6");
   const eng = /(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?|kardia[-.\w]*)\.(js|css)\?v=\w+/g;
   const got = (html.match(eng) || []).filter((s) => !/kardiox/i.test(s));
-  assert.deepEqual(got, ["kardia-loader.js?v=krd5"], "boot requests no engine or Kardia file but the loader, and no KardiQ X file is mistaken for Kardia: " + got.join(","));
+  assert.deepEqual(got, ["kardia-loader.js?v=krd6"], "boot requests no engine or Kardia file but the loader, and no KardiQ X file is mistaken for Kardia: " + got.join(","));
   const L = readFileSync("kardia-loader.js", "utf8"), v = /var V = "(\w+)"/.exec(L)[1];
-  assert.equal(v, "krd5", "the loader injects at the same token as its own tag");
+  assert.equal(v, "krd6", "the loader injects at the same token as its own tag");
   for (const f of ["specialty.css", "kardia.css", "specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "kardia-flags.js", "kardia.js"]) assert.ok(L.includes('"' + f + '"'), f);
   assert.ok(L.indexOf('"specialty-shell.js"') < L.indexOf('"kardia.js"'), "engine, then the host");
 });
 
-test("the loader is opt-in (default OFF): no early access, explicit on only", () => {
+test("the loader follows the on-for-everyone flag (owner 2026-10-26): on unless the device stored 0", () => {
   const t = readFileSync("kardia-loader.js", "utf8");
-  assert.ok(/getItem\("smd_kardia"\) === "1"/.test(t), "localStorage on means exactly 1");
-  assert.ok(!/hasEarlyAccess|earlyAccess/.test(t), "no early-access tier: OFF for everyone until a tester opts in");
-  assert.ok(/catch \(e\) \{ return false; \}/.test(t), "failure reads as off, never on");
+  assert.ok(/getItem\("smd_kardia"\) !== "0"/.test(t), "before kardia-flags.js loads, the loader treats Kardia as on unless 0");
+  assert.ok(!/hasEarlyAccess|earlyAccess/.test(t), "no early-access tier");
 });
 
 test("build-www.sh ships the kardia data directory; root kardia files ride the root globs", () => {
@@ -186,6 +185,7 @@ function btn(v) { return { getAttribute: (a) => (a === "data-t" ? v.t : a === "d
 
 test("flag off: KARDIA.open() is a no-op that touches no DOM", async () => {
   const s = sandbox();
+  s.store.smd_kardia = "0";
   assert.equal(s.G.KARDIA.open(), false, "closed flag refuses");
   assert.equal(s.painted(), "", "no DOM touched");
 });
