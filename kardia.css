@@ -71,6 +71,76 @@ body:not(.dark):not(.v3-dark) .krd-root {
   margin-top: 1px; color: var(--sp-acc); }
 .krd-root .krd-note b { color: var(--sp-text); font-weight: 650; }
 .krd-root .krd-err { margin: 18px 0 0; }
+/* Echo Lab (WP4). Operate mode: the sector and the score read first,
+   then the probe controls where the thumb is. All colour from the
+   Kardia tokens above; the sector canvas is dark in both themes
+   because an ultrasound screen is dark at the bedside. */
+.krd-root .krd-chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+  padding: 10px 0 6px; -webkit-overflow-scrolling: touch; }
+.krd-root .krd-chips::-webkit-scrollbar { display: none; }
+.krd-root .krd-chip { flex: 0 0 auto; min-height: 44px; max-width: 240px; padding: 10px 14px;
+  border: 1px solid var(--sp-line); border-radius: 999px; background: var(--sp-s1);
+  color: var(--sp-text); font-size: 14px; font-weight: 600; line-height: 1.35;
+  white-space: normal; text-align: left; touch-action: manipulation;
+  transition: background-color 140ms var(--kd-ease), color 140ms var(--kd-ease); }
+.krd-root .krd-chip[aria-pressed="true"] { background: var(--sp-acc); color: var(--sp-on-pri); border-color: var(--sp-acc); }
+.krd-root .krd-chip .sp-pro { margin-left: 6px; }
+.krd-root .krd-target-name { margin-top: 12px; overflow-wrap: break-word; }
+.krd-root .krd-sector-wrap { margin-top: 8px; }
+.krd-root .krd-sector-wrap canvas, .krd-root #krdEcg { display: block; width: 100%; height: auto;
+  border-radius: 12px; border: 1px solid var(--sp-line); background: #0b1114; }
+.krd-root .krd-sim-note { min-height: 20px; margin: 6px 0 0; font-size: 13px; line-height: 1.45; color: var(--sp-mut); }
+.krd-root .krd-quality { margin-top: 10px; }
+.krd-root .krd-score-row { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.krd-root .krd-score { font-size: 34px; line-height: 1; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.krd-root .krd-score-label { font-size: 14px; color: var(--sp-mut); }
+.krd-root .krd-achieved { font-size: 14px; font-weight: 650; color: var(--sp-ok); }
+.krd-root .krd-meter { height: 10px; margin-top: 8px; border-radius: 999px; background: var(--sp-s2); overflow: hidden; }
+.krd-root .krd-meter span { display: block; height: 100%; width: 0; border-radius: 999px;
+  background: var(--sp-acc); transition: width 140ms var(--kd-ease); }
+.krd-root .krd-hints { margin: 10px 0 0; padding: 0 0 0 20px; font-size: 15px; line-height: 1.5; }
+.krd-root .krd-hints li { padding: 2px 0; overflow-wrap: break-word; }
+.krd-root .krd-comp { margin: 8px 0 0; font-size: 13px; line-height: 1.5; color: var(--sp-mut); font-variant-numeric: tabular-nums; }
+.krd-root .krd-chest-row { display: flex; gap: 10px; margin-top: 14px; align-items: stretch; }
+.krd-root .krd-chest { position: relative; flex: 1 1 auto; min-height: 132px; min-width: 0;
+  border: 1px solid var(--sp-line); border-radius: 12px; background: var(--sp-s1);
+  touch-action: none; user-select: none; -webkit-user-select: none; overflow: hidden; }
+.krd-root .krd-chest-label { position: absolute; top: 8px; left: 10px; font-size: 12px;
+  font-weight: 650; color: var(--sp-mut); text-transform: capitalize; }
+.krd-root .krd-probe-dot { position: absolute; top: 50%; left: 50%; width: 26px; height: 26px;
+  margin: -13px 0 0 -13px; border-radius: 50%; background: var(--sp-acc); }
+.krd-root .krd-probe-marker { position: absolute; top: 2px; left: 50%; width: 5px; height: 5px;
+  margin-left: -2.5px; border-radius: 50%; background: var(--sp-on-pri); }
+.krd-root .krd-strip { display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--sp-line); border-radius: 12px; background: var(--sp-s1);
+  color: var(--sp-mut); font-size: 12px; font-weight: 650; touch-action: none;
+  user-select: none; -webkit-user-select: none; }
+.krd-root .krd-strip-v { flex: 0 0 52px; min-height: 132px; }
+.krd-root .krd-strip-v span { writing-mode: vertical-rl; }
+.krd-root .krd-strip-h { margin-top: 10px; min-height: 44px; width: 100%; }
+.krd-root .krd-strip:focus-visible, .krd-root .krd-chest:focus-visible { outline: 2px solid var(--sp-acc); outline-offset: 2px; }
+.krd-root .krd-controls { display: grid; grid-template-columns: 1fr; gap: 4px; margin-top: 12px; }
+@media (min-width: 560px) {
+  .krd-root .krd-controls { grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+}
+.krd-root .krd-ctl label { display: flex; justify-content: space-between; gap: 8px;
+  font-size: 14px; font-weight: 600; line-height: 1.4; padding: 6px 0 2px; }
+.krd-root .krd-ctl-val { color: var(--sp-mut); font-variant-numeric: tabular-nums; font-weight: 500; }
+.krd-root .krd-ctl input[type="range"] { width: 100%; min-height: 44px; margin: 0; accent-color: var(--sp-acc); }
+.krd-root .krd-gyro { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 14px; }
+.krd-root .krd-gyro .sp-btn { min-height: 44px; }
+.krd-root .krd-gyro p { flex: 1 1 220px; margin: 0; }
+.krd-root .krd-knobs-head { margin-top: 14px; }
+.krd-root .krd-knobs { display: grid; grid-template-columns: 1fr; gap: 4px; margin-top: 6px;
+  padding: 10px 14px; border: 1px solid var(--sp-line); border-radius: 12px; background: var(--sp-s1); }
+@media (min-width: 560px) {
+  .krd-root .krd-knobs { grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+}
+.krd-root .krd-tee-note { margin-top: 14px; }
+.krd-root .krd-lab .sp-btn:active { transform: scale(0.97); }
+.krd-root .krd-lab .sp-btn { transition: transform 120ms var(--kd-ease), background-color 140ms var(--kd-ease); }
 @media (prefers-reduced-motion: reduce) {
   .krd-root .krd-tab { transition: none; }
+  .krd-root .krd-chip, .krd-root .krd-meter span, .krd-root .krd-probe-dot, .krd-root .krd-lab .sp-btn { transition: none; }
+  .krd-root .krd-lab .sp-btn:active { transform: none; }
 }
