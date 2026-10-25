@@ -9,7 +9,7 @@
 .krd-root .kc-steps::-webkit-scrollbar { display: none; }
 .krd-root .kc-steps li { flex: 0 0 auto; display: flex; align-items: center; gap: 6px; min-height: 32px; padding: 4px 10px 4px 4px; border-radius: 999px; background: var(--sp-s1); color: var(--sp-mut); font-size: 13px; font-weight: 600; }
 .krd-root .kc-steps li span { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: var(--sp-s3); color: var(--sp-text); font-size: 12px; }
-.krd-root .kc-steps li[data-on="true"] { color: var(--sp-text); background: var(--kd-acc-soft); }
+.krd-root .kc-steps li[data-on="true"] { color: var(--sp-acc); background: var(--sp-s1); border: 1px solid var(--sp-acc); }
 .krd-root .kc-steps li[data-on="true"] span { background: var(--sp-acc); color: var(--kd-on-acc); }
 .krd-root .kc-steps li[data-done="true"] { color: var(--sp-text); }
 .krd-root .kc-stem { font-size: 17px; line-height: 1.55; margin: 8px 0 16px; }
@@ -57,5 +57,11 @@
   .krd-root .kc-vitals { grid-template-columns: repeat(3, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .krd-root .kc-q, .krd-root .kc-bar i { transition: none; }
+  /* !important so the engine's own reduced-motion property override cannot
+     resurrect a transition here: Kardia's none wins on specificity and weight. */
+  .krd-root .kc-q, .krd-root .kc-bar i { transition: none !important; }
+  /* History-screen buttons otherwise keep their engine background/opacity fade
+     under reduced motion; kill it so the whole case screen is still. */
+  .krd-root .sp-btn { transition: none !important; }
+  .krd-root .sp-btn:active, .krd-root .kc-q:active { transform: none; }
 }

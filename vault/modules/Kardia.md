@@ -1,0 +1,72 @@
+---
+tags: [module, education, echo]
+status: plan plus WP0 to WP12 slices built behind the flag; Echo Lab, Practice and Cases show honest coming soon panels where the simulator screens are not yet wired; all content ai_drafted pending clinical sign-off
+flag: smd_kardia (def:false; tester switch ?kardia=1 or localStorage smd_kardia = "1"; no early access tier)
+---
+# Kardia
+
+Echo and ECG learning module, a StewardMD specialty host on the Specialty Engine. It holds Learn ECG and KardiQ X inside one module with a new simulated echo trainer. Owner plan: `docs/kardia/kardia-plan.md`. Real clip credits and licence checks: `docs/kardia/clips.md` and `docs/kardia/licences.md`.
+
+## Flag and Home tile
+- **Flag:** `smd_kardia`, default OFF for everyone. A tester turns it on per device with `?kardia=1` or `localStorage smd_kardia = "1"`. There is no early access tier. Central registry: `kardia-flags.js` (`SMD_KARDIA_FLAGS`).
+- **Home tile swap:** when the flag is on, the Home **Kardia** tile replaces the **KardiQ X** tile. KardiQ X stays inside Kardia as a tab, still behind the existing access code gate `SMD_XACCESS.gate("kardiox")` until clinical sign-off. When the flag is off the grid is byte for byte unchanged.
+- **Pro lock (owner 2026-10-25):** Kardia is Pro. The free preview is about 5 to 10 percent: a few Echo Lab views and lessons plus the first `FREE_LESSONS` Learn ECG lessons. Everything else is Pro. Levels follow the engine pattern: MBBS free; Resident, Fellow and Sonographer are Pro.
+- **Content state:** every screen carries the "To be verified, draft" footer while content is `ai_drafted`.
+
+## Tabs
+1. **Echo Lab.** Probe lab: 3D chest with a TTE or TEE probe, live sector image, ECG strip, heart sound playback, knobs, view targets.
+2. **Learn.** Echo lessons per view, measurement and Doppler topic plus pathology, and the existing 1,041 lesson Learn ECG atlas moved under Kardia unchanged (`KARDIOX.openLearn`).
+3. **Practice.** View drills, measurement drills, Doppler drills, knobology drills, POCUS protocols, ECG drills, spot diagnosis on real CC BY clips and simulated images.
+4. **Cases.** Whole patient cases with a structured report.
+5. **KardiQ X.** The existing AI ECG reading screen, unchanged except for its host, still code gated.
+
+## Key files
+- `kardia-loader.js` - the only Kardia file loaded at app boot. A small stand-in `window.KARDIA` (open, openCase, isOpen, back, close). First open injects the engine plus Kardia stylesheets and scripts in order at one shared `?v=` token (now `krd2`). Scripts load with async false so each runs after the one before, and a retry re-adds only files that did not load, so `kardia.js` createHost never runs twice.
+- `kardia-flags.js` - one source of truth for the flag: key, type, default, `?kardia` alias, description. Resolution per flag: query param wins, else localStorage, else the default.
+- `kardia.js` - the Specialty Engine host (`SPECIALTY.createHost`: id `kardia`, global `KARDIA`, base `/kardia/`, root `krd-root`, store `smd_kardia_v1`). Tabs, levels, free preview counts, Pro gating, coming soon panels for Echo Lab, Practice and Cases, Learn atlas and gated KardiQ X wiring.
+- `kardia-sim-heart.js` (WP1) - cardiac cycle model: lumped parameter time varying elastance model of LA, LV, RA and RV with four valves plus systemic and pulmonary Windkessel circuits, driven by one clock. The same clock emits P, QRS and T timing plus valve events, so ECG (`codeblue-ecg.js`, `kardiox-ecgwave.js`), heart sounds (`clinix-audio.js`: MVC and TVC with S1, AVC and PVC with S2) and echo stay synchronised. Deterministic, no DOM, `KARDIA_HEART`.
+- `kardia-sim-geom.js` (WP2) - beating heart geometry, `KARDIA_GEOM`. Two layers on one deformation rig: a parametric core (chamber ellipsoids with exact cycle volumes, hinged leaflets, chordae, papillaries, septa, LVOT and RVOT, great vessels as tubes, IVC, pericardium, context) and BodyParts3D meshes from `atlas/3d` plus the LIVE lung and liver parts, registered onto the LV centre. Loader, picking and context restore reuse `atlas3d.js` where present; chunks use the same byte layout (Float32 pos, Int16 nrm, Uint16 pid, Uint32 idx) with parts extracted per vertex pid. Deformation is per vertex about the apex anchor with a precomputed weight, then corrected from the closed mesh signed volume so cavity volume tracks the cycle model. A parametric part is suppressed once the real mesh for the same ref loads. Each structure carries acoustic tags (echogenicity, attenuation, blood, calcium, air, bone) for the renderer.
+- `kardia-sim-us.js` (WP3) - live B-mode ultrasound renderer, `KARDIA_US`, WebGL 1, no libraries. Tissue pass draws buffers along the probe plane into a tissue property texture (seeded speckle that moves with the wall); echo pass marches each beam with frequency dependent attenuation, shadow behind calcium, bone and air, Rayleigh speckle, specular boost, dark blood, reverberation, then TGC, gain and dynamic range; display pass scan converts to the fan with depth blur, sector mask, depth ticks, marker dot and ECG trace. CPU 2D fallback when WebGL is absent; on context loss the last frame freezes and rendering resumes on restore, never a throw.
+- `kardia-sim-probe.js` (WP4) - probe state and maths, `KARDIA_PROBE`, with touch and gyroscope binders that use DOM only when called. Patient frame is `kardia/views.json` (x to patient left, y anterior, z cranial, mm). TTE and POCUS use chest map slide plus rotation, tilt, rock and depth; TEE adds depth from the incisors, omniplane angle, flex and shaft turn. `stateForView()` inverts the window frame exactly, so every target is reachable inside the clamps by construction.
+- `kardia-sim-doppler.js` (WP5) - colour flow plus PW and CW spectra from the cycle model, `KARDIA_DOPPLER`, with an optional canvas renderer. Simplified Bernoulli (`4v2`, extended form subtracts proximal), severe AS thresholds, PW Nyquist and aliasing with baseline shift, angle correction, continuity AVA, mitral PHT and MVA, PISA EROA, PASP from TR velocity plus IVC, display polarity (toward probe above the line), CW autoscale, colour scale. Thresholds cite ASE and EACVI guidance, restated in the header.
+- `kardia-sim-measure.js` (WP6) - measurement lab with ground truth grading, `KARDIA_MEASURE`. Image source (B-mode or M strip: draw, mmPerPx, sector geometry, frameAt with endDiastole at QRS or endSystole at aortic valve closure, cut polygons) and spectrum source (draw, velocityAt, timeAt, velocityAtTime). Calipers, Simpson biplane, LVOT VTI, continuous wave Doppler; grades against model truth with guideline tolerance. British spelling throughout.
+- `kardia-cases.js` plus `kardia-cases.css` (WP11) - whole patient cases: list, stem and vitals, tap to reveal history, examination with sounds, ECG strip, echo tasks with lesson diagrams and tolerance graded measurement, structured report marked against accept lists by whole token phrase match, diagnosis and management, debrief. Attempts go to the engine store with one FSRS card per case.
+- `kardia.css` - Kardia palette on `.krd-root` and the tab bar, coming soon and free preview styles. Shared controls stay with the engine so both themes match Tokos and Narkē. Two use themes: Monitor dark (bedside, near black, ECG green accent) and Paper light (ECG printout, dark ink on white, deep teal accent).
+- `tools/kardia-learn-index.mjs` - builds `kardia/learn/index.json` from `kardia/learn/lessons/`, order from `learn/order.json`, validated by the engine lesson schema plus Kardia checks (area prefixed id, four level array, engine level, minutes, check key, view refs exist in `views.json`).
+- `tools/kardia-cases-index.mjs` - builds `kardia/cases/index.json` from `kardia/cases/*.json` (id, title, level, pathology, review only, so the list stays small and each case loads on demand).
+
+## Data folders
+- `kardia/views.json` - view catalogue: target planes with normals and up vectors, probe window and marker, landmarks (BodyParts3D `FJ` and `LIVE` refs or parametric structures defined in the same file), tolerances (angle degrees, distance mm), levels, avoid notes, sources in own words. TTE, TEE and POCUS.
+- `kardia/tracks.json` - track registry (now empty, versioned, MBBS free access list).
+- `kardia/learn/` - `lessons/` (88 lesson files: views, TEE, POCUS, measurements, Doppler, knobology, pathology topics), `order.json` (teaching order), `index.json` (built, do not hand edit), `glossary.json`, `diagrams/` (self authored inline SVG per topic).
+- `kardia/decks/mcq/` - `index.json` plus topic files (`doppler`, `ecg`, `knobology`, `measurements`, `pathology`, `pocus`, `tee`, `views`); items are `{id, q, o[4], a, exp, t, d}` with cited explanations.
+- `kardia/cases/` - `kd11a_*.json` whole patient cases (history, sounds, ECG, echo, report, management; echo truths match the heart model where the model computes the metric) plus built `index.json`.
+- `kardia/pathology/` - `catalogue.json` (20 conditions with severity grades, echo findings, ECG and sound changes, model parameter names, sources) plus one file per condition with severity graded heart overrides, geometry hooks and measurable expect targets.
+- `kardia/media/` - `credits.json` (39 entries: file, hash, bytes, licence, attribution, source URL, view or pathology, de-identification changes). No binaries in the repo; downloads live in `work/clips/` and cleaned outputs in `work/clips-clean/`.
+
+## Tests and runners
+- Unit: `test/kardia-sim-heart.test.mjs` (WP1: EF, volumes, pressures, valve timings vs textbook bands) · `test/kardia-sim-geom.test.mjs` (WP2: mesh volume tracks cycle volume) · `test/kardia-sim-us.test.mjs` (WP3 pure helpers) · `test/kardia-sim-doppler.test.mjs` (WP5: Bernoulli, AS grade, VTI and E/A bands) · `test/kardia-sim-measure.test.mjs` (WP6) · `test/kardia-sim-probe.test.mjs` (WP4: every TTE target reachable inside clamps with quality score 100) · `test/kardia-pathology.test.mjs` (WP7: every heart override runs 10 cycles and meets catalogue targets) · `test/kardia-catalogue.test.mjs` (views vs atlas manifest and pathology refs) · `test/kardia-learn-content.test.mjs` · `test/kardia-mcq.test.mjs` · `test/kardia-cases.test.mjs` plus `test/kardia-cases-runner.test.mjs` (WP11 grading helpers, fixture schema, wiring) · `test/kardia-host.test.mjs` (WP8: flag, loader, tile swap, tabs, untouched KardiQ X gate; runs the real engine in a vm sandbox) · `test/kardia-media.test.mjs` (WP12b: licence allow list, attribution, change notes, sha256, local file presence).
+- UI runners (headless Chrome, screenshots to `work/shots/`): `test/run-kardia-ui.mjs` (real app: flag off leaves the grid unchanged, flag on swaps the tile and opens all five tabs at 390 and 820 widths in light and dark) · `test/run-kardia-geom-ui.mjs` (WP2 beating heart frames plus context loss and restore) · `test/run-kardia-us-ui.mjs` (WP3 sector frames plus frame rate over 60 frames) · `test/run-kardia-doppler-ui.mjs` (WP5 PW, CW and colour frames) · `test/run-kardia-measure-ui.mjs` (WP6 Simpson and VTI through the real touch UI at 390 and 820).
+
+## R2 media path and hashed names
+- Real clips are served like the RadioAnatome 3D chunks from R2: `https://models.stewardmd.in/kardia/clips/<name>.<sha256-8>.<mp4|webp>`, named by `credits.json`. Only CC BY, CC BY-SA, CC0 or public domain, never NC or ND; attribution lives in `credits.json` and the app credits screen, never burnt into the pixels (WP12b cropped and masked every overlay and re-encoded: H.264 MP4 longest side 640 px at 30 fps, stills WebP quality 82 longest side 960).
+- **Never overwrite a hashed name.** Never upload different bytes under an existing R2 key. Deploy order for new or re-cut clips: upload the new hashed file to R2 first, then ship the build whose `credits.json` names it; never delete the old keys (installed apps still use them).
+
+## Loader token rule
+- Every Kardia stylesheet and script loads at one shared token owned by `kardia-loader.js` (now `krd2`), mirrored by the loader script tag in `index.html`. **Bump `krdN` on every change to any Kardia file**, or devices keep the cached copy behind the service worker and the module looks unshipped.
+
+## Gotchas
+- **Port 8995 is shared by every worktree runner.** `ensureServer` reuses a live server on the base URL, so a stale `serve.mjs` from another worktree serves that worktree files and the run passes or fails against the wrong tree. Before a run, kill a stale server or point the runner at a fresh port with `BASE=` (or `PORT=`).
+- **Runner browser profiles are per run under the temp dir** (`kardia-app-chrome-<port>` for the app runner, `kardia-measure-chrome-<pid>` for the measure runner). The runners remove the dir first; do not point two concurrent runs at the same port or they share one profile.
+- **Headless Chrome lives at `~/.cache/kardia-chrome`, linked from `/tmp/pptr`.** `/tmp/pptr/chrome-headless-shell` is a symlink to the cached binary. Pass `CHROME=<that path>` with the single process flags in the runner headers where the sandbox denies loopback sockets and child process rendezvous; geometry, ultrasound and Doppler runners also read screenshots from the canvas (`toDataURL`) because capture needs surfaces the sandbox will not allocate.
+- **ME 2C and ME LAX are mirrored** (known orientation defect, listed under open items). Do not paper over it in `views.json` tolerances; fix the TEE plane basis.
+- **The KardiQ X gate stays untouched.** Kardia never opens the AI reading overlay directly; the tab goes through `SMD_XACCESS` exactly as before. Tests assert the gate survives the tile swap.
+
+## Open items
+- Realism of the simulated image: owner sign-off on side by side screenshots against the real CC BY clips before phase 2.
+- Colour Doppler polish.
+- ME 2C and ME LAX mirrored: correct the TEE basis and re-sweep the targets.
+- Real phone frame rate: 30 fps or better on an iPhone 12 class device and the iPad mini 6 with no WebGL context loss crash.
+- Clinical sign-off: all lesson, drill and case content is `ai_drafted`; KardiQ X AI reading stays code gated until sign-off, as do the PTB-XL and CirCor imports (cleared) and the CAMEO exclusion (licence unconfirmed, stays out).
+
+Deps: [[Specialty Engine]] (host, Learn, bank, clinics, FSRS, notes) · [[KardiQ X]] (Learn ECG atlas plus gated AI reading) · [[RadioAnatome 3D]] (atlas chunks, loader and restore patterns) · [[Code Blue]] and [[Narkē]] (pulse check and POCUS protocol links) · [[Infra]] (R2).
