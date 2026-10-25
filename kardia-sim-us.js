@@ -894,6 +894,7 @@
         var tiss = new Uint8Array(GW * GH), angs = new Float32Array(GW * GH), regs = new Uint8Array(GW * GH), regIds = new Uint8Array(GW * GH);
         var sums = { blood: 0, myocardium: 0, bright: 0, shadow: 0, other: 0 };
         var cnts = { blood: 0, myocardium: 0, bright: 0, shadow: 0, other: 0 };
+        var sectorSum = 0, sectorCount = 0;
         var shadowCache = {};
         function shadowFor(angle, depth, ac) {
           if (isBlocker(ac)) return 1;
@@ -916,6 +917,7 @@
           var dx = (gx - glay.apexX) / glay.scale, dy = (py - glay.apexY) / glay.scale;
           var sc = scanConvert(dx, dy, knobs.sectorDeg, knobs.depth);
           if (!sc) continue;
+          sectorCount++;
           var hit = classifyAt(sc.angle, sc.depth, f, polys);
           if (!hit) continue;
           var ac = hit.acoustic, sh = shadowFor(sc.angle, sc.depth, ac);
@@ -926,6 +928,7 @@
           }
           var speck = speckleField(Math.sin(sc.angle) * sc.depth, sc.depth, 11) * 0.75 + speckleAmp(hash3(gx, py, 77)) * 0.25;
           var disp = echoDisplay(ac, sc.depth, speck, knobs, sh, 0, extra * pericardiumFactor(hit, Math.sin(sc.angle) * sc.depth, sc.depth));
+          sectorSum += disp;
           vals[idx] = disp; byts[idx] = clamp(Math.round(clamp(disp, 0, 1) * 255 + bayerDither(gx, py)), 0, 255); tiss[idx] = 1; angs[idx] = sc.angle;
           var region = (sh < 0.5 || blockerInterior) ? "shadow" : ac.isBlood ? "blood" : (ac.echogenicity >= 0.70 || ac.isCalcium || ac.isBone || ac.isAir) ? "bright" : (ac.echogenicity >= 0.25 && ac.echogenicity <= 0.65) ? "myocardium" : "other";
           regs[idx] = region === "myocardium" ? 1 : region === "blood" ? 2 : 0;
@@ -946,6 +949,12 @@
         var regions = {};
         for (var rk in sums) regions[rk] = { mean: cnts[rk] ? sums[rk] / cnts[rk] : 0, count: cnts[rk] };
         stats.regions = regions;
+        /* Mean inside the sector. The GPU branch above fills this from
+         * the polar readback; on the CPU fallback (no WebGL, e.g.
+         * headless --disable-gpu) there is no readback, so derive it
+         * from the same sector grid or it stays at its 0 initialiser
+         * even though the canvas is drawing. */
+        if (!(gl && fboP && !lost) && sectorCount) stats.mean = sectorSum / sectorCount;
         stats.bloodMean = regions.blood.mean; stats.myoMean = regions.myocardium.mean;
         stats.brightMean = regions.bright.mean; stats.shadowMean = regions.shadow.mean;
         stats.bloodCount = regions.blood.count; stats.myoCount = regions.myocardium.count;

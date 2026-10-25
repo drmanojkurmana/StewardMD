@@ -132,7 +132,7 @@
     views: null, loading: false, err: false, viewId: null, probe: null,
     geom: null, heart: null, timer: null, unbind: [], knobsOpen: false,
     knobs: { gain: 55, depth: 160, focus: 55, tgc: [50,50,50,50,50,50,50,50], frequencyMHz: 3.0, sectorDeg: 80, dynamicRange: 55, colourGain: 70, colourNyquistMs: 0.6 }, holdSince: null, gyroMsg: "",
-    mode: "2d", frozen: false, echolab: null, pathology: null, pathologyId: "", severity: "", measureUI: null, audioHandle: null, anatomyState: "idle",
+    mode: "2d", frozen: false, echolab: null, pathology: null, pathologyId: "", severity: "", measureUI: null, audioHandle: null, anatomyState: "idle", liveCanvases: null,
     lastCutAt: 0, polys: null, phase: 0
   };
 
@@ -254,14 +254,13 @@
       '<div class="krd-lab" id="krdLab">' +
       '<div class="krd-chips" role="group" aria-label="' + I.tx(T("Target views", "Target views")) + '">' + chips + "</div>" +
       '<h3 class="sp-h3 krd-target-name" id="krdTargetName">' + I.esc(cur.name) + '</h3>' +
-      '<p class="sp-small" id="krdTargetPos">' + I.esc(cur.probe.position) + " " + I.esc(cur.probe.marker) + ".</p>" +
-      '<div class="krd-sector-wrap kel-sector-stack"><canvas id="krdSector" width="640" height="480" aria-label="' + I.tx(T("Ultrasound sector image", "Ultrasound sector image")) + '"></canvas>' +
-      '<canvas id="krdOverlay" class="kel-overlay" width="640" height="480" aria-label="' + I.tx(T("Doppler and measurement overlay. Drag to move the colour box, gate or cursor.", "Doppler overlay")) + '"></canvas></div>' +
+      '<p class="sp-small" id="krdTargetPos">' + I.esc(String(cur.probe.position || "").replace(/\.\s*$/, "")) + ". Marker " + I.esc(String(cur.probe.marker || "").replace(/\.\s*$/, "")) + ".</p>" +
+      '<div class="krd-sector-wrap kel-sector-stack" id="krdSectorSlot"></div>' +
       '<div class="kel-load" id="krdAnatomyLoad" hidden><p class="sp-small" id="krdAnatomyText" role="status">Loading real anatomy.</p><div class="kel-load-track"><span class="kel-load-fill" id="krdAnatomyFill"></span></div></div>' +
       '<p class="krd-sim-note" id="krdSimNote" role="status"></p>' +
       '<div class="kel-modes" role="group" aria-label="' + I.tx(T("Imaging mode", "Imaging mode")) + '">' +
       [["2d","2D"],["colour","Colour"],["pw","PW"],["cw","CW"],["mmode","M-mode"]].map(function (m) { return '<button type="button" class="kel-mode" data-act="kecho-mode" data-v="' + m[0] + '" aria-pressed="' + (EL.mode === m[0]) + '">' + m[1] + "</button>"; }).join("") + "</div>" +
-      '<div class="kel-spec-wrap"><canvas id="krdSpectrum" width="640" height="260" hidden aria-label="' + I.tx(T("Doppler spectrum with ECG", "Doppler spectrum")) + '"></canvas>' +
+      '<div class="kel-spec-wrap"><div id="krdSpectrumSlot"></div>' +
       '<p class="sp-small" id="krdSpecReadout" role="status"></p></div>' +
       '<div class="kel-row"><button type="button" class="kel-btn" data-act="kecho-freeze" aria-pressed="' + EL.frozen + '">' + I.tx(T("Freeze", "Freeze")) + '</button>' +
       '<label class="sp-small" for="krdCine">' + I.tx(T("Cine", "Cine")) + '</label><input type="range" class="kel-cine" id="krdCine" data-krange="krdCine" min="0" max="89" step="1" value="0" disabled aria-label="' + I.tx(T("Scroll frozen frames", "Cine")) + '">' +
@@ -315,6 +314,47 @@
       "</div>";
   }
 
+  /* One persistent set of live canvases for the whole session. I.paint
+   * replaces the root innerHTML on every repaint, so a canvas in that
+   * HTML is a new element each time and any GPU or 2D context bound to
+   * the previous element keeps drawing into a detached node while the
+   * visible canvas stays black. These elements are created once, held
+   * here (outside the repainted HTML), and re-attached into the fresh
+   * slots after every paint; moving a live element keeps its context
+   * and drawing buffer. They are only (re)attached from mountEchoLab,
+   * synchronously after the paint, so no frame lands while detached. */
+  function ensureLiveCanvases() {
+    if (EL.liveCanvases) return EL.liveCanvases;
+    var doc = G.document; if (!doc || !doc.createElement) return null;
+    function make(id, w, h, label, cls) {
+      var c = doc.createElement("canvas");
+      c.id = id; c.width = w; c.height = h;
+      c.setAttribute("aria-label", label);
+      if (cls) c.className = cls;
+      return c;
+    }
+    EL.liveCanvases = {
+      sector: make("krdSector", 640, 480, I.tx(T("Ultrasound sector image", "Ultrasound sector image")), ""),
+      overlay: make("krdOverlay", 640, 480, I.tx(T("Doppler and measurement overlay. Drag to move the colour box, gate or cursor.", "Doppler overlay")), "kel-overlay"),
+      spectrum: make("krdSpectrum", 640, 260, I.tx(T("Doppler spectrum with ECG", "Doppler spectrum")), "")
+    };
+    EL.liveCanvases.spectrum.hidden = true;
+    return EL.liveCanvases;
+  }
+  function attachLiveCanvases() {
+    var live = ensureLiveCanvases(); if (!live) return null;
+    var doc = G.document;
+    [["sector", "krdSectorSlot"], ["overlay", "krdSectorSlot"], ["spectrum", "krdSpectrumSlot"]].forEach(function (pair) {
+      var slot = doc.getElementById(pair[1]), c = live[pair[0]];
+      if (!slot || !c) return;
+      if (!c.width) c.width = pair[0] === "spectrum" ? 640 : 640;
+      if (!c.height) c.height = pair[0] === "spectrum" ? 260 : 480;
+      if (c.parentNode !== slot) slot.appendChild(c);
+    });
+    live.spectrum.hidden = !(EL.mode === "pw" || EL.mode === "cw" || EL.mode === "mmode");
+    return live;
+  }
+
   function stopEchoLab() {
     if (EL.echolab) { try { EL.echolab.stop(); } catch (e) {} }
     if (EL.audioHandle) { try { EL.audioHandle.stop(); } catch (e) {} EL.audioHandle = null; }
@@ -339,11 +379,14 @@
     for (var x = 0; x < EW; x++) { var ph = (x / EW * 2 + cyc) % 1; var y = EH * 0.62 - ecgValue(ph) * EH * 0.48; if (x === 0) ex.moveTo(x, y); else ex.lineTo(x, y); }
     ex.stroke();
   }
-  function drawEchoSector() {
-    if (EL.echolab) { /* the live renderer owns the sector canvas */ var ec2 = G.document && G.document.getElementById("krdEcg"); if (ec2) drawEcgOnly(ec2); return; }
+  function drawEchoSector(force) {
+    if (EL.echolab && !force) { /* the live renderer owns the sector canvas */ var ec2 = G.document && G.document.getElementById("krdEcg"); if (ec2) drawEcgOnly(ec2); return; }
     var cv = G.document && G.document.getElementById("krdSector");
     if (!cv || !cv.getContext) return;
-    var ctx = cv.getContext("2d"), W = cv.width, H = cv.height;
+    var ctx = null;
+    try { ctx = cv.getContext("2d"); } catch (e) { ctx = null; }
+    if (!ctx) return; /* the live renderer owns this canvas */
+    var W = cv.width, H = cv.height;
     var dark = G.document.body && (G.document.body.classList.contains("dark") || G.document.body.classList.contains("v3-dark"));
     ctx.fillStyle = dark ? "#04070a" : "#0b1114";
     ctx.fillRect(0, 0, W, H);
@@ -466,7 +509,7 @@
     if (EL.echolab || !G.KARDIA_ECHOLAB) return EL.echolab;
     var p = ensureEchoProbe(); if (!p || !EL.heart || !EL.geom) return null;
     EL.echolab = G.KARDIA_ECHOLAB.create({ doc: G.document, heart: EL.heart, geom: EL.geom, probe: p, knobs: EL.knobs,
-      fallbackDraw: function () { drawEchoSector(); } });
+      fallbackDraw: function () { drawEchoSector(true); } });
     return EL.echolab;
   }
   function loadPathologyList() {
@@ -524,6 +567,10 @@
     else if (!EL._mountedFor) startEchoTarget(cur, false);
     EL._mountedFor = cur.id;
     var doc = G.document;
+    /* Re-attach the persistent canvases into this paint's slots before
+     * anything binds a context or looks them up: the renderer must be
+     * created on (and only ever draw into) the element on screen. */
+    var live = attachLiveCanvases();
     var chest = doc.getElementById("krdChest");
     if (chest) EL.unbind.push(p.bindTouchSurface(chest, { mmPerPx: 0.6 }));
     var tiltStrip = doc.getElementById("krdTiltStrip");
@@ -569,7 +616,7 @@
     st.onLeave = stopEchoLab;
     var lab = ensureEchoLab();
     if (lab) {
-      lab.mount(doc.getElementById("krdSector"), doc.getElementById("krdOverlay"), doc.getElementById("krdSpectrum"),
+      lab.mount(live ? live.sector : doc.getElementById("krdSector"), live ? live.overlay : doc.getElementById("krdOverlay"), live ? live.spectrum : doc.getElementById("krdSpectrum"),
         { specReadout: doc.getElementById("krdSpecReadout"), fps: doc.getElementById("krdFps") });
       lab.setMode(EL.mode);
       if (EL.anatomyState === "idle") {
@@ -864,6 +911,30 @@
       getProbeState: function () { var p = ensureEchoProbe(); return p ? p.getState() : null; },
       getScore: function () { var p = ensureEchoProbe(), v = echoCurrentView(); return p && v ? p.score(v) : null; },
       get echolab() { return EL.echolab; },
+      debug: function () {
+        var d = EL.echolab && EL.echolab.debug ? EL.echolab.debug() : null;
+        var sector = G.document && G.document.getElementById ? G.document.getElementById("krdSector") : null;
+        return {
+          rendererCreated: !!(d && d.rendererCreated),
+          rendererMode: d ? d.rendererMode : null,
+          rendererOnCurrentCanvas: !!(d && d.rendererOnCurrentCanvas),
+          sectorConnected: !!(d && d.sectorConnected),
+          sectorIsVisibleCanvas: !!(sector && G.document.elementFromPoint && (function () { var r = sector.getBoundingClientRect ? sector.getBoundingClientRect() : null; return !!(r && r.width && G.document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2) === sector); })()),
+          rendererErrors: d ? d.rendererErrors : [],
+          geometryMode: d ? d.geometryMode : (EL.geom ? "parametric" : "none"),
+          chunksLoaded: d ? d.chunksLoaded : 0,
+          loadedParts: d ? d.loadedParts : 0,
+          anatomyState: EL.anatomyState,
+          lastFrameAt: d ? d.lastFrameAt : 0,
+          lastFrameMs: d ? d.lastFrameMs : 0,
+          frames: d ? d.frames : 0,
+          running: !!(d && d.running),
+          hasSectorCanvas: !!sector,
+          hasHeart: !!EL.heart, hasGeom: !!EL.geom, hasProbe: !!EL.probe,
+          globals: { us: !!G.KARDIA_US, geom: !!G.KARDIA_GEOM, doppler: !!G.KARDIA_DOPPLER, measure: !!G.KARDIA_MEASURE, heart: !!G.KARDIA_HEART, probe: !!G.KARDIA_PROBE, echolab: !!G.KARDIA_ECHOLAB },
+          lastError: d ? d.lastError : ""
+        };
+      },
       get mode() { return EL.mode; },
       setMode: function (m) { EL.mode = m; var lab = ensureEchoLab(); if (lab) lab.setMode(m); return EL.mode; },
       get knobs() { return EL.knobs; },

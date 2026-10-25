@@ -151,6 +151,7 @@ test("rendered image: region bands, blockiness, autocorrelation, ECG strip (CPU 
     us.setProbe({ viewId });
     assert.equal(us.frame(1000), true, viewId + " frame renders");
     const s = us.snapshot({ includeGrid: true });
+    assert.ok(s.mean > 0.02, viewId + " snapshot mean inside the sector is non-black on the CPU fallback, got " + s.mean);
     assert.ok(s.regions.blood.count > 100 && s.regions.myocardium.count > 100, viewId + " masks populated");
     assert.ok(s.regions.blood.mean >= 0.02 && s.regions.blood.mean <= 0.10, viewId + " blood " + s.regions.blood.mean.toFixed(3));
     assert.ok(s.regions.myocardium.mean >= 0.30 && s.regions.myocardium.mean <= 0.55, viewId + " myocardium " + s.regions.myocardium.mean.toFixed(3));

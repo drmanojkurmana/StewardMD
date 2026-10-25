@@ -4,7 +4,8 @@
    At 820px and above: two panes, image left and controls right. */
 .krd-root .kel-sector-stack { position: relative; margin-top: 8px; }
 .krd-root .kel-sector-stack canvas { display: block; width: 100%; height: auto; border-radius: 12px; }
-.krd-root .kel-overlay { position: absolute; inset: 0; touch-action: none; }
+.krd-root .kel-sector-stack #krdSector { touch-action: none; }
+.krd-root .kel-overlay { position: absolute; inset: 0; pointer-events: none; }
 .krd-root .kel-load { margin-top: 8px; }
 .krd-root .kel-load-track { height: 8px; border-radius: 999px; background: var(--sp-s2); overflow: hidden; }
 .krd-root .kel-load-fill { display: block; height: 100%; width: 0; background: var(--sp-acc); transition: width 140ms var(--kd-ease); }

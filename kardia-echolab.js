@@ -209,6 +209,7 @@
     var mmodeX = 0; /* M-mode cursor, fraction across sector */
     var spec = null, specDirty = true, mStrip = [], pathology = null;
     var realAnatomy = false, loadNote = "";
+    var usCanvas = null, lastError = "", lastFrameAt = 0, chunksLoaded = 0;
     var els = {};
 
     function uiKnobs() { return ctx.knobs; }
@@ -221,8 +222,22 @@
     }
 
     function ensureUS(canvas) {
-      if (us || !G.KARDIA_US || !geom) return us;
-      try { us = G.KARDIA_US.create(canvas, geom, heart); } catch (e) { us = null; }
+      /* KARDIA_US.create binds its canvas for life. The host keeps one
+       * persistent sector element and re-attaches it after every
+       * repaint, so this normally sees the same node for the session.
+       * Defence in depth: never create (or keep) a renderer for a
+       * detached or zero-size element, and recreate the renderer if
+       * the element identity ever does change, so frames can never be
+       * drawn off-screen while snapshot() reads that other instance. */
+      if (canvas && canvas.isConnected === false) return null;
+      if (canvas && (!canvas.width || !canvas.height)) return null;
+      if (us && canvas && usCanvas !== canvas) {
+        try { if (us.destroy) us.destroy(); } catch (e) {}
+        us = null; usCanvas = null;
+      }
+      if (us || !canvas || !G.KARDIA_US || !geom) return us;
+      try { us = G.KARDIA_US.create(canvas, geom, heart); usCanvas = canvas; }
+      catch (e) { us = null; usCanvas = null; lastError = "renderer: " + String(e && e.message || e); }
       return us;
     }
     function ensureDoppler() {
@@ -262,8 +277,8 @@
           return chunks.reduce(function (chain, c) {
             return chain.then(function () {
               return fetchBytes(base + c.url).then(function (buf) { return inflate(buf, c.bytes); })
-                .then(function (raw) { geom.ingestChunk(c, raw); })
-                .catch(function () {})
+                .then(function (raw) { geom.ingestChunk(c, raw); chunksLoaded++; })
+                .catch(function (e) { lastError = "chunk " + (c.id || c.url || "") + ": " + String(e && e.message || e); })
                 .then(function () { done++; if (onProgress) onProgress(done, Math.max(1, chunks.length)); });
             });
           }, Promise.resolve()).then(function () { return geom.loadedParts ? geom.loadedParts().length : 0; });
@@ -273,13 +288,13 @@
         realAnatomy = n > 0;
         loadNote = realAnatomy ? "" : "Offline. Showing the model heart.";
         return realAnatomy;
-      }, function () { loadNote = "Offline. Showing the model heart."; return false; });
+      }, function (e) { lastError = "anatomy: " + String(e && e.message || e); loadNote = "Offline. Showing the model heart."; return false; });
     }
 
     function planeNow() { return probe && probe.plane ? probe.plane() : null; }
 
     function drawOverlay() {
-      var ov = els.overlay; if (!ov) return;
+      var ov = els.overlay; if (!ov || ov.isConnected === false) return;
       var c = ov.getContext("2d"); if (!c) return;
       var W = ov.width, H = ov.height;
       c.clearRect(0, 0, W, H);
@@ -333,7 +348,7 @@
     }
 
     function refreshSpectrum() {
-      var cv = els.spectrum; if (!cv) return;
+      var cv = els.spectrum; if (!cv || cv.isConnected === false) return;
       var d = ensureDoppler(); if (!d) return;
       var m = mode === "cw" ? "CW" : "PW";
       var flow = (mode === "cw") ? "aorticJet" : "mitralInflow";
@@ -357,7 +372,7 @@
     }
 
     function drawMMode() {
-      var cv = els.spectrum; if (!cv) return;
+      var cv = els.spectrum; if (!cv || cv.isConnected === false) return;
       var c = cv.getContext("2d"); if (!c) return;
       var W = cv.width, H = cv.height;
       c.fillStyle = "#000"; c.fillRect(0, 0, W, H);
@@ -387,17 +402,21 @@
         if (cineBack) cineBack = 0;
       }
       var cv = els.sector;
+      if (cv && cv.isConnected === false) cv = null; /* repaint in flight: never draw into a detached canvas */
       if (cv) {
         var r = ensureUS(cv);
         if (r) {
           var pl = planeNow();
           if (pl) r.setProbe({ origin: pl.origin, normal: pl.normal, up: pl.up, viewOrigin: pl.origin });
           r.setKnobs(usKnobs());
-          try { r.frame(now); } catch (e) {}
+          var drew = false;
+          try { drew = r.frame(now) !== false; } catch (e) { lastError = "frame: " + String(e && e.message || e); }
+          if (drew) lastFrameAt = now;
+          else if (ctx.fallbackDraw) ctx.fallbackDraw(cv);
           if (r.stats) { emaMs = emaMs * 0.9 + (r.stats.ms || dt) * 0.1; }
           var want = pickResolutionScale(G.devicePixelRatio || 1, emaMs);
           if (Math.abs(want - scale) > 0.01) scale = want;
-        } else if (ctx.fallbackDraw) ctx.fallbackDraw();
+        } else if (ctx.fallbackDraw) ctx.fallbackDraw(cv);
       }
       drawOverlay();
       if ((mode === "pw" || mode === "cw") && specDirty) refreshSpectrum();
@@ -418,9 +437,12 @@
     function onVis() { if (doc.hidden) stop(); else if (!destroyed && els.sector) start(); }
     if (doc.addEventListener) doc.addEventListener("visibilitychange", onVis);
 
-    /* Drag handling on the overlay: colour box, PW gate, M cursor. */
+    /* Drag handling for the colour box, PW gate and M cursor. The
+     * overlay canvas is pointer-events:none (so the sector canvas is
+     * the hit-tested element at the sector centre), so drags are heard
+     * on the sector canvas itself; its rect is the overlay's rect. */
     function bindOverlay() {
-      var ov = els.overlay; if (!ov || ov._kelBound) return;
+      var ov = els.sector || els.overlay; if (!ov || ov._kelBound || !ov.addEventListener) return;
       ov._kelBound = true;
       var drag = null;
       function pt(e) { var r = ov.getBoundingClientRect(); return { x: (e.clientX - r.left) / Math.max(1, r.width), y: (e.clientY - r.top) / Math.max(1, r.height) }; }
@@ -452,6 +474,7 @@
         els.sector = sector; els.overlay = overlay || null; els.spectrum = spectrum || null;
         extra = extra || {};
         els.specReadout = extra.specReadout || null; els.fps = extra.fps || null;
+        ensureUS(sector);
         bindOverlay(); start();
         return api;
       },
@@ -500,13 +523,36 @@
       loadNote: function () { return loadNote; },
       frameMs: function () { return emaMs; },
       stats: function () { return us ? us.stats : null; },
-      snapshot: function () { return us && us.snapshot ? us.snapshot() : null; },
+      debug: function () {
+        var parts = 0;
+        try { parts = geom && geom.loadedParts ? geom.loadedParts().length : 0; } catch (e) {}
+        return {
+          rendererCreated: !!us,
+          rendererMode: us && us.stats ? us.stats.mode : null,
+          rendererOnCurrentCanvas: !!us && !!els.sector && usCanvas === els.sector,
+          sectorConnected: !!els.sector && els.sector.isConnected !== false,
+          sectorSize: els.sector ? [els.sector.width || 0, els.sector.height || 0] : null,
+          rendererErrors: us && us.errors ? us.errors.slice(0, 3) : [],
+          geometryMode: realAnatomy || parts > 0 ? "real" : "parametric",
+          chunksLoaded: chunksLoaded,
+          loadedParts: parts,
+          lastFrameAt: lastFrameAt,
+          lastFrameMs: emaMs,
+          frames: us && us.stats ? us.stats.frames : 0,
+          running: running, frozen: frozen, mode: mode,
+          lastError: lastError || (us && us.errors && us.errors.length ? String(us.errors[us.errors.length - 1]) : "")
+        };
+      },
+      snapshot: function () {
+        if (!us && els.sector) ensureUS(els.sector);
+        return us && us.snapshot ? us.snapshot() : null;
+      },
       start: start, stop: stop,
       destroy: function () {
         destroyed = true; stop();
         if (doc.removeEventListener) doc.removeEventListener("visibilitychange", onVis);
         if (us && us.destroy) { try { us.destroy(); } catch (e) {} }
-        us = null;
+        us = null; usCanvas = null;
       }
     };
     return api;

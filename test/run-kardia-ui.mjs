@@ -53,6 +53,42 @@ try {
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
   const load = async (url) => { await call("Page.navigate", { url }); await until(`return !!(window.KARDIA && window.SMD_showHome);`, 30000); await ev(clean); await ev(`SMD_showHome(); return 1;`); await sleep(700); };
   const shot = async (name) => { const r = await call("Page.captureScreenshot", { format: "png" }); if (r.result && r.result.data) writeFileSync(join(SHOTS, name + ".png"), Buffer.from(r.result.data, "base64")); };
+  /* Measure the VISIBLE canvas, not renderer-internal state: find the
+   * on-screen element, prove elementFromPoint at its centre returns that
+   * very canvas (nothing covers it, it is connected and non-zero), then
+   * after two animation frames copy it with drawImage into a 2D canvas
+   * (valid because the WebGL renderer uses preserveDrawingBuffer:true,
+   * and the CPU fallback is a plain 2D canvas) and compute the mean plus
+   * dark-vs-bright (blood-vs-wall) contrast from those copied pixels.
+   * ev() does not await promises, so completion is stashed on window
+   * and polled with until(), like the AS pathology check below. */
+  const visibleStats = async (id) => {
+    await ev(`window.__visDone=false; window.__vis=null; (function(){ var el=document.getElementById("${id}");
+      if(!el){ window.__vis={error:"missing ${id}"}; window.__visDone=true; return 1; }
+      try{ el.scrollIntoView({block:"center"}); }catch(e){}
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){
+        try {
+          var r=el.getBoundingClientRect();
+          var hit=document.elementFromPoint(r.left+r.width/2, r.top+r.height/2);
+          var tmp=document.createElement("canvas"); tmp.width=el.width; tmp.height=el.height;
+          var cx=tmp.getContext("2d"); cx.drawImage(el,0,0);
+          var d=cx.getImageData(0,0,tmp.width,tmp.height).data;
+          var sum=0, n=0, lit=[], nonBlack=0;
+          for(var i=0;i<d.length;i+=16){ var lum=(d[i]+d[i+1]+d[i+2])/3; sum+=lum; n++; if(lum>8){ nonBlack++; lit.push(lum); } }
+          lit.sort(function(a,b){return a-b;});
+          var q=function(f){ if(!lit.length) return 0; var s=0,c=0,from=Math.floor(lit.length*f[0]),to=Math.max(from+1,Math.floor(lit.length*f[1])); for(var j=from;j<to&&j<lit.length;j++){s+=lit[j];c++;} return c?s/c/255:0; };
+          window.__vis={ id:"${id}", connected:!!el.isConnected, width:el.width, height:el.height,
+            rectW:r.width, rectH:r.height, hitIsCanvas:hit===el, hitId:hit?(hit.id||hit.tagName):null,
+            mean:n?sum/n/255:0, nonBlackFrac:n?nonBlack/n:0, bloodMean:q([0,0.2]), wallMean:q([0.8,1]) };
+        } catch(x){ window.__vis={error:String(x&&x.message||x)}; }
+        window.__visDone=true;
+      });}); return 1; })()`);
+    const doneVis = await until(`return window.__visDone===true;`, 10000);
+    let v = null; try { v = JSON.parse(await ev(`return JSON.stringify(window.__vis);`)); } catch {}
+    if (!doneVis || !v || v.error) console.log("visibleStats(" + id + ") failed: " + JSON.stringify(v) + " debug=" + await ev(`return JSON.stringify(KARDIA._kardia.echoLab.debug ? KARDIA._kardia.echoLab.debug() : null);`));
+    return v;
+  };
+  const visibleOk = (v, label) => !!v && !v.error && v.connected && v.width > 0 && v.height > 0 && v.rectW > 0 && v.rectH > 0 && v.hitIsCanvas && v.mean > 0.02 && v.nonBlackFrac > 0.05;
   const gridActs = `return [].map.call(document.querySelectorAll('.rnav-tile[data-act]'), function(x){return x.getAttribute('data-act');}).join(',');`;
   const eligibleActs = `return (window.SMD_HOME_TOOLS ? SMD_HOME_TOOLS() : []).map(function(t){return t.act;}).join(',');`;
   const metrics = async (w, h) => { await call("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 2, mobile: true }); await sleep(300); };
@@ -137,27 +173,46 @@ try {
   console.log("\n--- Echo Lab WP10a ---");
   await ev(`KARDIA._kardia.echoLab.setView('tte_a4c'); return 1;`);
   await sleep(1200);
-  const snap1 = await ev(`return JSON.stringify(KARDIA._kardia.echoLab.echolab ? KARDIA._kardia.echoLab.echolab.snapshot() : null);`);
-  let snapObj = null; try { snapObj = snap1 ? JSON.parse(snap1) : null; } catch {}
-  ok(!!snapObj && snapObj.mean > 0.02, `live image has non-black pixels inside the sector (mean ${snapObj ? snapObj.mean.toFixed(3) : "none"})`);
-  ok(!!snapObj && snapObj.bloodMean < snapObj.myoMean, `blood is darker than walls at A4C (blood ${snapObj ? snapObj.bloodMean.toFixed(3) : "?"} < wall ${snapObj ? snapObj.myoMean.toFixed(3) : "?"})`);
+  const posText = await ev(`return document.getElementById('krdTargetPos') ? document.getElementById('krdTargetPos').innerText : '';`);
+  ok(posText === "Apex, fifth intercostal space at the midclavicular line. Marker Toward the left, about three o clock.", `probe position joins as "<position>. Marker <direction>." ("${posText}")`);
+  /* Visible pixels only: snapshot() reads renderer-internal/CPU state
+   * and passed while the on-screen canvas was black, so it is kept
+   * only as a debug diagnostic, never as the pass condition. */
+  const vis1 = await visibleStats("krdSector");
+  if (!visibleOk(vis1)) console.log("Echo Lab debug (visible sector failed): " + JSON.stringify(vis1) + " " + await ev(`return JSON.stringify(KARDIA._kardia.echoLab.debug ? KARDIA._kardia.echoLab.debug() : null);`));
+  ok(visibleOk(vis1), `live image is visible on the sector canvas the learner sees (mean ${vis1 ? vis1.mean.toFixed(3) : "none"}, hit ${vis1 ? vis1.hitId : "?"}, connected ${vis1 ? vis1.connected : "?"})`);
+  await shot("kardia-echolab-live-2d");
+  ok(!!vis1 && vis1.bloodMean < vis1.wallMean && (vis1.wallMean - vis1.bloodMean) > 0.02, `visible blood is darker than visible walls at A4C (blood ${vis1 ? vis1.bloodMean.toFixed(3) : "?"} < wall ${vis1 ? vis1.wallMean.toFixed(3) : "?"})`);
   for (const m of ["colour", "pw", "cw", "mmode", "2d"]) {
     await ev(`document.querySelector('#smdKardia [data-act=kecho-mode][data-v=${m}]').click(); return 1;`);
     await sleep(600);
     const vis = await ev(`return document.getElementById('krdSpectrum') ? !document.getElementById('krdSpectrum').hidden : false;`);
     ok(m === "2d" || m === "colour" ? true : vis === true, `mode ${m} renders its strip or overlay`);
+    const visEl = (m === "pw" || m === "cw" || m === "mmode") ? "krdSpectrum" : "krdSector";
+    const vm = await visibleStats(visEl);
+    if (!vm || !(vm.mean > 0.001 && vm.nonBlackFrac > 0.002 && vm.hitIsCanvas && vm.connected)) console.log(`Echo Lab debug (visible ${m} failed): ` + JSON.stringify(vm) + " " + await ev(`return JSON.stringify(KARDIA._kardia.echoLab.debug ? KARDIA._kardia.echoLab.debug() : null);`));
+    ok(!!vm && vm.mean > 0.001 && vm.nonBlackFrac > 0.002 && vm.hitIsCanvas && vm.connected, `mode ${m} shows non-black pixels in its visible element ${visEl} (mean ${vm ? vm.mean.toFixed(3) : "?"}, non-black ${vm ? vm.nonBlackFrac.toFixed(3) : "?"})`);
   }
-  const meanBefore = snapObj ? snapObj.mean : 0;
+  const meanBefore = vis1 ? vis1.mean : 0;
   await ev(`(function(){var el=document.getElementById('krdGain'); if(el){el.value=95; el.dispatchEvent(new Event('input',{bubbles:true}));} KARDIA._kardia.echoLab.setKnob('gain',95); return 1;})()`);
   await sleep(800);
-  const snap2 = await ev(`return JSON.stringify(KARDIA._kardia.echoLab.echolab.snapshot());`);
-  let snap2o = null; try { snap2o = JSON.parse(snap2); } catch {}
-  ok(!!snap2o && Math.abs(snap2o.mean - meanBefore) > 0.005, `a knob change changes mean brightness (${meanBefore.toFixed(3)} to ${snap2o ? snap2o.mean.toFixed(3) : "?"})`);
+  const vis2 = await visibleStats("krdSector");
+  const knobOk = !!vis2 && vis2.hitIsCanvas && Math.abs(vis2.mean - meanBefore) > 0.005;
+  if (!knobOk) console.log("Echo Lab debug (knob failed): " + JSON.stringify(vis2) + " " + await ev(`return JSON.stringify(KARDIA._kardia.echoLab.debug ? KARDIA._kardia.echoLab.debug() : null);`));
+  ok(knobOk, `a knob change changes the visible mean brightness (${meanBefore.toFixed(3)} to ${vis2 ? vis2.mean.toFixed(3) : "?"})`);
   await ev(`KARDIA._kardia.echoLab.setKnob('gain',55); return 1;`);
-  /* Severe AS: CW peak must exceed 4 m/s. Uses the real pathology file. */
-  const asOk = await ev(`return fetch('/kardia/pathology/aortic_stenosis.json').then(function(r){return r.json();}).then(function(d){ window.__asCond=d; KARDIA._kardia.echoLab.applyPathology(d,'severe'); KARDIA._kardia.echoLab.setMode('cw'); return 1;}).then(function(){return 1;},function(){return 0;});`);
-  await sleep(900);
+  /* Severe AS: CW peak must exceed 4 m/s. Uses the real pathology file.
+   * ev() does not await promises (Runtime.evaluate without awaitPromise),
+   * so stash completion on window and poll with until() instead of a
+   * fixed sleep: under the live CPU/WebGL render loop the fetch and
+   * apply can land well after 900 ms, and reading lastPeakMs early
+   * returns the previous (normal) spectrum peak. */
+  await ev(`window.__asDone=false; window.__asErr=""; fetch('/kardia/pathology/aortic_stenosis.json').then(function(r){return r.json();}).then(function(d){ window.__asCond=d; KARDIA._kardia.echoLab.applyPathology(d,'severe'); KARDIA._kardia.echoLab.setMode('cw'); window.__asDone=true; },function(e){ window.__asErr=String(e&&e.message||e); window.__asDone=true; }); return 1;`);
+  const asApplied = await until(`return window.__asDone===true;`, 30000);
+  if (!asApplied || await ev(`return window.__asErr||"";`)) console.log("Echo Lab debug (AS apply failed): err=" + await ev(`return window.__asErr||"";`) + " " + await ev(`return JSON.stringify(KARDIA._kardia.echoLab.debug ? KARDIA._kardia.echoLab.debug() : null);`));
+  ok(asApplied && !(await ev(`return window.__asErr||"";`)), "severe AS pathology fetched and applied before reading the CW peak");
   const peak = await ev(`return KARDIA._kardia.echoLab.echolab ? KARDIA._kardia.echoLab.echolab.lastPeakMs : 0;`);
+  if (!(typeof peak === "number" && peak > 4)) console.log("Echo Lab debug (CW peak failed): " + await ev(`return JSON.stringify(KARDIA._kardia.echoLab.debug ? KARDIA._kardia.echoLab.debug() : null);`));
   ok(typeof peak === "number" && peak > 4, `severe AS CW peak exceeds 4 m/s (${peak})`);
   /* Freeze, cine and a Simpson measurement that can be completed and graded. */
   await ev(`document.querySelector('#smdKardia [data-act=kecho-freeze]').click(); return 1;`);

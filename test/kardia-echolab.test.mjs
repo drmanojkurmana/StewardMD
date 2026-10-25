@@ -46,6 +46,74 @@ test("spectrumSource converts pixels both ways", () => {
   assert.equal(s.velocityToPx(0), 50);
 });
 
+test("renderer is recreated when the sector canvas is replaced, and debug() reports it", () => {
+  const created = [];
+  const prevUS = globalThis.KARDIA_US, prevRAF = globalThis.requestAnimationFrame, prevCAF = globalThis.cancelAnimationFrame;
+  globalThis.requestAnimationFrame = () => 1; globalThis.cancelAnimationFrame = () => {};
+  globalThis.KARDIA_US = { create(canvas) { const r = { canvas, stats: { mode: "cpu", frames: 0, ms: 16 }, errors: [], destroyed: false, setProbe() {}, setKnobs() {}, frame() { this.stats.frames++; return true; }, snapshot() { return { mean: 0.5 }; }, destroy() { this.destroyed = true; } }; created.push(r); return r; } };
+  try {
+    const doc = { hidden: false, addEventListener() {}, removeEventListener() {} };
+    const heart = { step() {}, state: () => ({ timeMs: 0, cycleTimeMs: 0, volumes: { LV: 100 } }) };
+    const geom = { loadedParts: () => [] };
+    const probe = { plane: () => ({ origin: [0, 0, 0], normal: [1, 0, 0], up: [0, 0, 1] }) };
+    const lab = EL.create({ doc, heart, geom, probe, knobs: P.cloneKnobs(null) });
+    const canvasA = { width: 64, height: 48 }, canvasB = { width: 64, height: 48 };
+    lab.mount(canvasA, null, null, {});
+    let d = lab.debug();
+    assert.equal(d.rendererCreated, true); assert.equal(d.rendererOnCurrentCanvas, true);
+    assert.equal(d.geometryMode, "parametric"); assert.equal(d.chunksLoaded, 0); assert.equal(d.lastError, "");
+    lab.mount(canvasB, null, null, {});
+    assert.equal(created.length, 2, "a new renderer is created for the replacement canvas");
+    assert.equal(created[0].destroyed, true, "the renderer bound to the detached canvas is destroyed");
+    assert.equal(created[1].canvas, canvasB);
+    d = lab.debug(); assert.equal(d.rendererOnCurrentCanvas, true);
+    assert.equal(lab.snapshot().mean, 0.5, "snapshot reads the renderer on the current canvas");
+    lab.destroy();
+  } finally {
+    if (prevUS === undefined) delete globalThis.KARDIA_US; else globalThis.KARDIA_US = prevUS;
+    if (prevRAF === undefined) delete globalThis.requestAnimationFrame; else globalThis.requestAnimationFrame = prevRAF;
+    if (prevCAF === undefined) delete globalThis.cancelAnimationFrame; else globalThis.cancelAnimationFrame = prevCAF;
+  }
+});
+
+test("renderer is never created for a detached or zero-size sector canvas", () => {
+  const created = [];
+  const prevUS = globalThis.KARDIA_US, prevRAF = globalThis.requestAnimationFrame, prevCAF = globalThis.cancelAnimationFrame;
+  globalThis.requestAnimationFrame = () => 1; globalThis.cancelAnimationFrame = () => {};
+  globalThis.KARDIA_US = { create(canvas) { created.push(canvas); return { canvas, stats: { mode: "cpu", frames: 0, ms: 16 }, errors: [], setProbe() {}, setKnobs() {}, frame() { return true; }, snapshot() { return { mean: 0.5 }; }, destroy() {} }; } };
+  try {
+    const doc = { hidden: false, addEventListener() {}, removeEventListener() {} };
+    const heart = { step() {}, state: () => ({ timeMs: 0, cycleTimeMs: 0, volumes: { LV: 100 } }) };
+    const lab = EL.create({ doc, heart, geom: { loadedParts: () => [] }, probe: { plane: () => ({ origin: [0, 0, 0], normal: [1, 0, 0], up: [0, 0, 1] }) }, knobs: P.cloneKnobs(null) });
+    lab.mount({ width: 64, height: 48, isConnected: false }, null, null, {});
+    assert.equal(created.length, 0, "no renderer for a detached canvas");
+    assert.equal(lab.debug().sectorConnected, false);
+    lab.mount({ width: 0, height: 48, isConnected: true }, null, null, {});
+    assert.equal(created.length, 0, "no renderer for a zero-width canvas");
+    const live = { width: 64, height: 48, isConnected: true };
+    lab.mount(live, null, null, {});
+    assert.equal(created.length, 1, "renderer created once the canvas is on screen");
+    assert.equal(lab.debug().rendererOnCurrentCanvas, true);
+    lab.destroy();
+  } finally {
+    if (prevUS === undefined) delete globalThis.KARDIA_US; else globalThis.KARDIA_US = prevUS;
+    if (prevRAF === undefined) delete globalThis.requestAnimationFrame; else globalThis.requestAnimationFrame = prevRAF;
+    if (prevCAF === undefined) delete globalThis.cancelAnimationFrame; else globalThis.cancelAnimationFrame = prevCAF;
+  }
+});
+
+test("host keeps persistent live canvases outside the repainted HTML and joins probe text with Marker", async () => {
+  const { readFileSync } = await import("node:fs");
+  const src = readFileSync(new URL("../kardia.js", import.meta.url), "utf8");
+  const css = readFileSync(new URL("../kardia-echolab.css", import.meta.url), "utf8");
+  assert.ok(src.includes("liveCanvases"), "canvases are held outside the paint HTML");
+  assert.ok(src.includes('id="krdSectorSlot"') && src.includes('id="krdSpectrumSlot"'), "paint emits slots, not canvases");
+  assert.ok(!/<canvas id="krdSector"/.test(src), "the sector canvas is not recreated by innerHTML");
+  assert.ok(src.includes("attachLiveCanvases()"), "mount re-attaches after every paint");
+  assert.ok(src.includes('". Marker "'), 'probe text joins as "<position>. Marker <direction>."');
+  assert.ok(/\.kel-overlay \{[^}]*pointer-events: none/.test(css), "overlay does not cover the sector for hit testing");
+});
+
 test("severity helpers read the pathology files shape", () => {
   const cond = { id: "x", severities: { severe: { heart: { aorticValveAreaCm2: 0.75 }, geom: { effusionMm: 3 }, sound: { s4: "present" } } } };
   assert.equal(P.severityHeart(cond, "severe").aorticValveAreaCm2, 0.75);
