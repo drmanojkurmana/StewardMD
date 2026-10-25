@@ -1,0 +1,19 @@
+{
+  "name": "@stewardmd/capacitor-kardia-ble",
+  "version": "1.0.0",
+  "description": "Kardia SyncProbe BLE transport. Display hosts a custom GATT service (peripheral), Probe connects as central. iOS CoreBluetooth and Android BLE; foreground only, one central.",
+  "capacitor": {
+    "ios": { "src": "ios" },
+    "android": { "src": "android" }
+  },
+  "files": [
+    "ios/Sources",
+    "Package.swift",
+    "android/src/main",
+    "android/build.gradle",
+    "package.json",
+    "README.md"
+  ],
+  "author": "StewardMD",
+  "license": "MIT"
+}
