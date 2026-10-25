@@ -15,7 +15,7 @@
  *
  * Look (2026-10-26, owner-approved): a left-aligned card, title + one detail line, a small dot only for errors
  * and warnings, an optional action button, no icons. It also draws everything SMD_dynNotify is asked to show
- * (Undo, foreground push); the gooey Dynamic Island is opt-in via smd_dyn_notify=island.
+ * (Undo, foreground push); the gooey Dynamic Island is opt-in via smd_dyn_notify=island, iPhone installs only.
  *
  * Self-contained by design (inline styles, no CSS dependency, lazy DOM) so it works on the
  * native WebView and before any stylesheet loads. Loaded early + idempotent: if some other

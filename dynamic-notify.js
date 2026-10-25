@@ -390,7 +390,9 @@
 
   // 2026-10-26 (owner): the gooey Island card and its icons are retired as the default look. Every caller still
   // goes through this API, but it draws with toast.js's plain card. localStorage smd_dyn_notify=island brings the Island back.
-  function island() { try { return window.localStorage.getItem("smd_dyn_notify") === "island"; } catch (e) { return false; } }
+  // iPhone installs only (the hardware island): Android and iPad never get it, whatever the flag says.
+  function isIPhone() { try { return /iPhone/.test(navigator.userAgent || ""); } catch (e) { return false; } }
+  function island() { try { return isIPhone() && window.localStorage.getItem("smd_dyn_notify") === "island"; } catch (e) { return false; } }
   function api(opts) { if (!island() && window.SMD_toastCard) { window.SMD_toastCard(opts); return; } show(opts); }
   api.fromText = function (text, extra) {
     if (!island() && window.SMD_toastCard) {

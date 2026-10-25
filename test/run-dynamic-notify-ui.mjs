@@ -49,6 +49,7 @@ try {
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   await call("Page.enable");
+  await call("Network.setUserAgentOverride", { userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148" });
   await call("Page.addScriptToEvaluateOnNewDocument", { source: "try{localStorage.setItem('smd_dyn_notify','island')}catch(e){}" });
   const load = async () => { await call("Page.navigate", { url: BASE + "test/fixtures/dynamic-notify.html" }); for (let i = 0; i < 50; i++) { if (await ev("return !!(window.SMD_dynNotify && window.toast)")) return; await sleep(100); } };
   await load();
@@ -124,6 +125,12 @@ try {
   ok(await ev("return document.querySelectorAll('svg g rect').length===0 || !SMD_dynNotify.isVisible() || !!document.getElementById('smdToast')"), "no Island on the default path");
   await ev("SMD_dynNotify({title:'Antibiogram removed', message:'From this device', action:{label:'Undo', onPress:function(){window.__undo=1}}}); return 1"); await sleep(500);
   ok(await ev("var b=document.querySelector('#smdToast [data-act]'); return !!b && b.textContent==='Undo'"), "Undo action renders as a button on the plain card");
+  // 7. the Island flag is honoured on iPhone only: an Android user agent with the flag set still gets the plain card
+  await call("Network.setUserAgentOverride", { userAgent: "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 Chrome/120 Mobile Safari/537.36" });
+  await call("Page.navigate", { url: BASE + "test/fixtures/dynamic-notify.html" }); await sleep(1200);
+  await ev("localStorage.setItem('smd_dyn_notify','island'); SMD_dynNotify.fromText('Android check'); return 1"); await sleep(500);
+  ok(await ev("var t=document.getElementById('smdToast'); return !!t && t.textContent.indexOf('Android check')>=0"), "smd_dyn_notify=island is ignored off iPhone");
+  await ev("localStorage.removeItem('smd_dyn_notify'); return 1");
 } catch (e) { console.log("FAIL harness:", e && e.message); fails++; }
 finally { try { chrome.kill(); } catch {} try { serveProc && serveProc.kill(); } catch {} }
 console.log(fails ? `\n${fails} FAILED` : "\nALL PASS");
