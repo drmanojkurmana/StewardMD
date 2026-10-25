@@ -212,6 +212,37 @@
     if (!cond || !cond.severities || !cond.severities[severity]) return null;
     return cond.severities[severity].sound || null;
   }
+  /* M-mode column: brightness by depth (0 near, 1 far) for one instant.
+   * The septum and posterior wall are bright lines either side of a
+   * dark cavity; their separation follows the LV volume, so the strip
+   * opens in diastole and closes in systole. Speckle is deterministic
+   * per depth and seed (the time column), never a flat band. */
+  function mmodeColumn(lvMl, seed) {
+    var lv = typeof lvMl === "number" && isFinite(lvMl) ? lvMl : 100;
+    var half = clamp(0.10 + lv / 900, 0.16, 0.30);
+    var centre = 0.52, sept = centre - half, post = centre + half;
+    var col = [], j;
+    for (j = 0; j < 56; j++) {
+      var y = j / 55, v;
+      var dS = Math.abs(y - sept), dP = Math.abs(y - post);
+      var sp = Math.sin((j + 1) * 12.9898 + (seed || 0) * 0.37) * 43758.5453; sp -= Math.floor(sp);
+      if (y > sept + 0.015 && y < post - 0.015) v = 0.04 + 0.05 * sp;
+      else if (dS < 0.02 || dP < 0.02) v = 0.92;
+      else if (Math.abs(y - (post + 0.07)) < 0.015) v = 0.98;
+      else v = 0.30 + 0.22 * sp;
+      if (y < 0.08) v = 0.18 + 0.15 * sp;
+      col.push(Math.round(clamp(v, 0, 1) * 255));
+    }
+    return col;
+  }
+  function mmodeLabels(depthMm) {
+    var d = depthMm || 160;
+    return { title: "M-mode", depthText: "Depth " + d + " mm",
+      ticks: [0, 0.25, 0.5, 0.75, 1].map(function (f) {
+        return { fraction: f, label: Math.round(d * f / 10) + " cm" };
+      }),
+      sweepText: "Sweep 25 mm/s" };
+  }
   /* Cine ring buffer: fixed slots, no allocation after create. */
   function createCine(capacity) {
     var slots = [], i;
@@ -647,18 +678,19 @@
             var nowC = (G.performance && G.performance.now) ? G.performance.now() : 0;
             if (!drawOverlay._field || nowC - (drawOverlay._fieldAt || 0) > 120) {
               drawOverlay._field = d.colourField({ planeOrigin: pl.origin, planeNormal: pl.normal, planeUp: pl.up,
-              probePosition: pl.origin, nyquistMs: uiKnobs().colourNyquistMs, nx: 18, ny: 14, widthMm: uiKnobs().depth * 1.2, depthMm: uiKnobs().depth });
+              probePosition: pl.origin, nyquistMs: uiKnobs().colourNyquistMs, nx: 36, ny: 28, widthMm: uiKnobs().depth * 1.2, depthMm: uiKnobs().depth });
               drawOverlay._fieldAt = nowC;
             }
             var field = drawOverlay._field;
             var gainA = clamp(uiKnobs().colourGain / 100, 0, 1);
+            var cellW = bw / Math.max(1, field.nx - 1) + 1.5, cellH = bh / Math.max(1, field.ny - 1) + 1.5;
             field.points.forEach(function (p) {
               if (!p.flow) return;
               var px = bx + (p.xMm / field.widthMm + 0.5) * bw;
               var py = by + (p.yMm / field.depthMm + 0.5) * bh;
               if (px < bx || px > bx + bw || py < by || py > by + bh) return;
               c.fillStyle = "rgba(" + p.colour.r + "," + p.colour.g + "," + p.colour.b + "," + (0.25 + 0.65 * gainA) + ")";
-              c.fillRect(px - 5, py - 5, 10, 10);
+              c.fillRect(px - cellW / 2, py - cellH / 2, cellW, cellH);
             });
           } catch (e) {}
         }
@@ -681,9 +713,35 @@
         c.strokeStyle = "rgba(238,243,241,0.9)"; c.lineWidth = 1.5;
         c.beginPath(); c.moveTo(mx, 8); c.lineTo(mx, H - 8); c.stroke();
       }
+      if (mode === "colour") {
+        /* Colour bar at the right edge of the sector: red toward at the
+         * top, blue away at the bottom, with the Nyquist limits. */
+        var nyqC = uiKnobs().colourNyquistMs || 0.6;
+        var barX = W - 30, barY = 18, barH = Math.max(40, H - 56), barW = 10, seg;
+        var stops = null;
+        try { stops = G.KARDIA_DOPPLER && G.KARDIA_DOPPLER.colourBarStops ? G.KARDIA_DOPPLER.colourBarStops(nyqC) : null; } catch (e) {}
+        if (stops) stops.stops.forEach(function (s) {
+          c.fillStyle = "rgb(" + s.r + "," + s.g + "," + s.b + ")";
+          c.fillRect(barX, barY + s.fraction * barH, barW, Math.ceil(barH / stops.stops.length) + 1);
+        });
+        else for (seg = 0; seg < 16; seg++) {
+          var vv = nyqC - 2 * nyqC * seg / 16;
+          var cc = G.KARDIA_DOPPLER && G.KARDIA_DOPPLER.velocityColour ? G.KARDIA_DOPPLER.velocityColour(vv, 0, nyqC) : { r: 180, g: 40, b: 40 };
+          c.fillStyle = "rgb(" + cc.r + "," + cc.g + "," + cc.b + ")";
+          c.fillRect(barX, barY + seg / 16 * barH, barW, Math.ceil(barH / 16) + 1);
+        }
+        c.strokeStyle = "rgba(238,243,241,0.8)"; c.lineWidth = 1; c.strokeRect(barX, barY, barW, barH);
+        c.fillStyle = "#eef3f1"; c.font = "600 9px sans-serif";
+        c.fillText("+" + nyqC.toFixed(2), Math.max(0, barX - 2), barY - 5);
+        c.fillText("0", barX + 2, barY + barH / 2 + 3);
+        c.fillText("-" + nyqC.toFixed(2), Math.max(0, barX - 2), barY + barH + 12);
+        c.fillText("m/s", Math.max(0, barX - 2), barY + barH + 23);
+      }
       if (frozen) {
-        c.fillStyle = "rgba(238,243,241,0.95)"; c.font = "600 13px sans-serif";
-        c.fillText("Frozen", 10, 20);
+        c.fillStyle = "rgba(6,9,11,0.85)"; c.fillRect(8, 8, 70, 22);
+        c.strokeStyle = "#ffc05a"; c.lineWidth = 1.5; c.strokeRect(8, 8, 70, 22);
+        c.fillStyle = "#ffc05a"; c.font = "600 12px sans-serif";
+        c.fillText("Frozen", 16, 23);
       }
     }
 
@@ -704,29 +762,73 @@
       if (els.specReadout) {
         if (spec) {
           var peak = 0; (spec.envelopeMs || []).forEach(function (v) { if (Math.abs(v) > peak) peak = Math.abs(v); });
-          els.specReadout.textContent = m + " peak " + peak.toFixed(2) + " m/s. Gradient " +
+          var lab2 = G.KARDIA_DOPPLER && G.KARDIA_DOPPLER.spectralLabels ? G.KARDIA_DOPPLER.spectralLabels(spec) : null;
+          els.specReadout.textContent = (lab2 ? lab2.title + ", " + lab2.site + ". " : "") + "Peak " + peak.toFixed(2) + " m/s. Gradient " +
             (4 * peak * peak).toFixed(0) + " mmHg." + (spec.anyAliased ? " Aliasing present." : "");
           api.lastPeakMs = peak;
         } else els.specReadout.textContent = "Spectrum unavailable.";
       }
     }
 
+    var mEcg = [];
     function drawMMode() {
       var cv = els.spectrum; if (!cv || cv.isConnected === false) return;
       var c = cv.getContext("2d"); if (!c) return;
       var W = cv.width, H = cv.height;
       c.fillStyle = "#000"; c.fillRect(0, 0, W, H);
-      /* Scrolling strip: each column is the brightness along the cursor
-       * depth at one time step, approximated from the heart volumes. */
       var st = heart && heart.state ? heart.state() : null;
-      var bright = st ? clamp(0.25 + (st.volumes.LV || 100) / 220, 0, 1) : 0.5;
-      mStrip.push(bright); if (mStrip.length > W) mStrip.shift();
-      for (var x = 0; x < mStrip.length; x++) {
-        var g = Math.round(mStrip[x] * 200);
-        c.fillStyle = "rgb(" + g + "," + g + "," + g + ")";
-        c.fillRect(x, H * 0.25, 1, H * 0.5);
+      var lv = st && st.volumes ? (st.volumes.LV || 100) : 100;
+      if (!frozen) {
+        mStrip.push(mmodeColumn(lv, mStrip.length + 1));
+        var d2 = ensureDoppler();
+        mEcg.push(d2 && d2.ecgSample && st ? d2.ecgSample(st.cycleTimeMs || 0) : 0);
+        var maxCols = Math.max(40, W - 44);
+        while (mStrip.length > maxCols) { mStrip.shift(); mEcg.shift(); }
       }
-      if (els.specReadout) els.specReadout.textContent = "M-mode. Drag the cursor line on the image.";
+      var axisW = 36, topH = 22, ecgH = 26;
+      var plotW = Math.max(10, W - axisW), plotH = Math.max(10, H - topH - ecgH - 6);
+      var cols = mStrip.length, rows = cols ? mStrip[0].length : 56, x, y;
+      if (cols && typeof c.createImageData === "function" && typeof c.putImageData === "function") {
+        var img = c.createImageData(plotW, plotH), data = img.data, px, py;
+        for (py = 0; py < plotH; py++) for (px = 0; px < plotW; px++) {
+          var ci = clamp(Math.floor(px / Math.max(1, plotW) * cols), 0, cols - 1);
+          var ri = clamp(Math.floor(py / Math.max(1, plotH) * rows), 0, rows - 1);
+          var gv = mStrip[ci][ri], off = (py * plotW + px) * 4;
+          data[off] = gv; data[off + 1] = gv; data[off + 2] = gv; data[off + 3] = 255;
+        }
+        c.putImageData(img, axisW, topH);
+      } else if (cols) {
+        var cw2 = plotW / cols, ch2 = plotH / rows;
+        for (x = 0; x < cols; x++) for (y = 0; y < rows; y++) {
+          var g3 = mStrip[x][y];
+          c.fillStyle = "rgb(" + g3 + "," + g3 + "," + g3 + ")";
+          c.fillRect(axisW + x * cw2, topH + y * ch2, Math.max(1, cw2), Math.max(1, ch2));
+        }
+      }
+      var lab = mmodeLabels(uiKnobs().depth);
+      c.fillStyle = "#eef3f1"; c.font = "600 11px sans-serif";
+      c.fillText(lab.title + "  " + lab.sweepText, axisW + 4, 14);
+      c.fillStyle = "#a3adb3"; c.font = "10px sans-serif";
+      lab.ticks.forEach(function (t) {
+        var ty = topH + t.fraction * plotH;
+        c.fillText(t.label, 2, ty + 3);
+        c.strokeStyle = "rgba(163,173,179,0.3)"; c.beginPath(); c.moveTo(axisW - 4, ty); c.lineTo(axisW, ty); c.stroke();
+      });
+      var ecgTop = topH + plotH + 4;
+      c.strokeStyle = "#3ee07a"; c.beginPath();
+      for (x = 0; x < mEcg.length; x++) {
+        var ex = axisW + (cols > 1 ? x / (cols - 1) * plotW : 0);
+        var ey = ecgTop + ecgH * 0.62 - mEcg[x] * ecgH * 0.5;
+        if (x === 0) c.moveTo(ex, ey); else c.lineTo(ex, ey);
+      }
+      c.stroke();
+      c.fillStyle = "#3ee07a"; c.fillText("ECG", 4, H - 4);
+      if (frozen) {
+        c.fillStyle = "rgba(6,9,11,0.85)"; c.fillRect(axisW + 6, topH + 6, 62, 20);
+        c.strokeStyle = "#ffc05a"; c.strokeRect(axisW + 6, topH + 6, 62, 20);
+        c.fillStyle = "#ffc05a"; c.font = "600 11px sans-serif"; c.fillText("Frozen", axisW + 14, topH + 20);
+      }
+      if (els.specReadout) els.specReadout.textContent = "M-mode through the mitral valve. Drag the cursor line on the 2D image above.";
     }
 
     /* Size every owned canvas from its CSS box times DPR, uniformly
@@ -795,9 +897,10 @@
       }
       drawOverlay();
       updateRealCine(now);
+      if ((mode === "pw" || mode === "cw") && !frozen && now - (frame._specAt || 0) > 200) { specDirty = true; frame._specAt = now; }
       if ((mode === "pw" || mode === "cw") && specDirty) refreshSpectrum();
-      if (mode === "mmode" && !frozen) drawMMode();
-      if (els.fps) els.fps.textContent = "Frame " + emaMs.toFixed(1) + " ms. Target 30 fps.";
+      if (mode === "mmode") drawMMode();
+      if (els.fps) els.fps.textContent = "";
       frameLog.push(emaMs); if (frameLog.length > 120) frameLog.shift();
     }
 
@@ -877,7 +980,7 @@
         return api;
       },
       setMode: function (m) {
-        mode = m; specDirty = true; mStrip = [];
+        mode = m; specDirty = true; mStrip = []; mEcg = [];
         if (els.spectrum) els.spectrum.hidden = !(m === "pw" || m === "cw" || m === "mmode");
         resizeCanvases();
         if (m === "pw" || m === "cw") refreshSpectrum();
@@ -1017,6 +1120,7 @@
       soundKindFor: soundKindFor, severityHeart: severityHeart,
       severityGeom: severityGeom, severitySound: severitySound,
       createCine: createCine, createRealCine: createRealCine, sectorClipPolygon: sectorClipPolygon, spectrumSource: spectrumSource, imageSource: imageSource,
+      mmodeColumn: mmodeColumn, mmodeLabels: mmodeLabels,
       probeForPlane: probeForPlane, backingSizeForCssBox: backingSizeForCssBox, fitCanvasToCssBox: fitCanvasToCssBox
     }
   };

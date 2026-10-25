@@ -29,12 +29,19 @@ body:not(.dark):not(.v3-dark) .krd-root {
 }
 /* Four levels do not fit a 390px segmented control (the engine's two do): the row scrolls
    instead of clipping Sonographer off. Scoped here; specialty.css stays host-agnostic. */
-.krd-root .sp-levelrow .sp-seg { display: flex; overflow-x: auto; scrollbar-width: none; }
+.krd-root .sp-levelrow .sp-seg { display: flex; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%); }
 .krd-root .sp-levelrow .sp-seg::-webkit-scrollbar { display: none; }
-.krd-root .sp-levelrow .sp-seg button { flex: 0 0 auto; }
+.krd-root .sp-levelrow .sp-seg button { flex: 0 0 auto; scroll-snap-align: start; white-space: nowrap; }
 /* Same 16px gutter as the tab row above it. Never shrinks: the level row is a
-   fixed header row above .sp-scroll, like the tab row. */
-.krd-root .sp-levelrow { flex: 0 0 auto; padding: 0 16px; }
+   fixed header row above .sp-scroll, like the tab row. The level note sits
+   on its own line below the segmented control so it can never be covered
+   by the picker or clipped at 390px. */
+.krd-root .sp-levelrow { flex: 0 0 auto; padding: 0 16px; flex-wrap: wrap; }
+.krd-root .sp-levelrow .sp-seg { flex: 1 1 auto; min-width: 0; }
+.krd-root .sp-levelrow > .sp-small { flex: 1 1 100%; min-width: 0; overflow-wrap: break-word; line-height: 1.45; }
+.krd-root .krd-lab-hint { position: relative; overflow-wrap: break-word; line-height: 1.5; margin-top: 0; }
 /* Kardia tab bar: five tabs, scrollable on narrow phones, one per screen reader tab.
    Fixed header rows above the scrolling column: .sp-root is a column flex and
    only .sp-scroll may shrink (it has min-height 0). Both rows are scroll
@@ -44,9 +51,11 @@ body:not(.dark):not(.v3-dark) .krd-root {
    keeps both rows at content height; overflow-y stays non-auto so a horizontal
    scroll can never clip the labels vertically. */
 .krd-root .krd-tabs { flex: 0 0 auto; display: flex; gap: 4px; overflow-x: auto; overflow-y: hidden; scrollbar-width: none;
-  padding: 8px 16px 4px; -webkit-overflow-scrolling: touch; }
+  padding: 8px 16px 4px; -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%); }
 .krd-root .krd-tabs::-webkit-scrollbar { display: none; }
-.krd-root .krd-tab { flex: 1 0 auto; min-width: 0; min-height: 44px; padding: 10px 12px; border: 0;
+.krd-root .krd-tab { flex: 0 0 auto; scroll-snap-align: start; min-width: 0; min-height: 44px; padding: 10px 12px; border: 0;
   background: transparent; color: var(--sp-mut); font-size: 15px; font-weight: 650; white-space: nowrap;
   border-bottom: 2px solid transparent; border-radius: 8px 8px 0 0;
   transition: color 140ms var(--kd-ease), background-color 140ms var(--kd-ease); }
@@ -166,3 +175,14 @@ body:not(.dark):not(.v3-dark) .krd-root {
 /* Answered questions: the engine dims the other options with opacity .5, which drops their text below
    4.5:1. In Kardia they keep full opacity and use the muted text colour instead. */
 .krd-root .sp-ans[data-state="dim"] { opacity: 1; color: var(--sp-mut); }
+/* Legibility audit across every Kardia screen: no label is cut by an
+   ellipsis or a two line clamp inside Kardia, long words wrap, and
+   every horizontal strip scrolls with edge fades and snap. */
+.krd-root .sp-title b, .krd-root .sp-title span { white-space: normal; overflow: visible; text-overflow: clip; overflow-wrap: break-word; }
+.krd-root .sp-row-b > span:not(.sp-small), .krd-root .ln-grow span, .krd-root .mcq-hit > span:first-child { display: block; overflow: visible; -webkit-line-clamp: unset; overflow-wrap: break-word; }
+.krd-root .krd-chips { scroll-snap-type: x proximity;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%); }
+.krd-root .krd-chip { scroll-snap-align: start; white-space: nowrap; max-width: none; overflow-wrap: normal; }
+.krd-root .krd-target-name, .krd-root #krdTargetPos { overflow-wrap: break-word; }
+.krd-root .sp-scroll { padding-bottom: env(safe-area-inset-bottom, 0px); }

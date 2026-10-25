@@ -145,6 +145,85 @@
     var c = clamp(dot(norm(a), norm(b)), -1, 1);
     return Math.acos(c) * 180 / Math.PI;
   }
+  var WALL_FILTER_MS = 0.08;
+  var FLOW_DISPLAY = {
+    mitralInflow: "Mitral inflow", lvot: "LV outflow tract", aorticJet: "Aortic valve",
+    tricuspidInflow: "Tricuspid inflow", rvot: "RV outflow tract", pulmonaryJet: "Pulmonary valve",
+    mrJet: "Mitral regurgitation", arJet: "Aortic regurgitation", trJet: "Tricuspid regurgitation",
+    prJet: "Pulmonary regurgitation", vsdJet: "Ventricular septal defect",
+    asdFlow: "Atrial septal defect", pdaJet: "Patent ductus arteriosus"
+  };
+  function flowDisplayName(id, fallback) {
+    return FLOW_DISPLAY[id] || fallback || "Doppler";
+  }
+  function fmtVel(v) {
+    var a = Math.abs(v);
+    var s = a >= 2 ? a.toFixed(1) : a.toFixed(2).replace(/0$/, "");
+    return (v > 0 ? "+" : v < 0 ? "-" : "") + s;
+  }
+  /* Machine style labels for a spectrum: no internal flow id is ever
+   * returned here. Ticks are chosen from the displayed axis so they
+   * always sit inside the scale. */
+  function spectralLabels(spec) {
+    spec = spec || {};
+    var axis = spec.velocityAxisMs || [0, 1];
+    var lo = axis[0], hi = axis[axis.length - 1];
+    var modeName = spec.mode === "PW" ? "Pulsed wave" : "Continuous wave";
+    var site = flowDisplayName(spec.flow, spec.flowName);
+    var span = hi - lo;
+    var step = span > 8 ? 2 : span > 4 ? 1 : span > 2 ? 0.5 : 0.25;
+    var ticks = [], v;
+    for (v = Math.ceil(lo / step) * step; v <= hi + 1e-9; v += step) {
+      ticks.push({ velocityMs: Math.round(v * 100) / 100, label: fmtVel(Math.round(v * 100) / 100) });
+    }
+    var times = spec.timesMs || [0, 1000];
+    var durSec = Math.max(0.1, (times[times.length - 1] || 1000) / 1000);
+    var sweep = Math.round((150 / durSec) / 5) * 5;
+    return {
+      title: modeName + " Doppler",
+      site: site,
+      mode: spec.mode || "CW",
+      scaleText: "Scale " + fmtVel(hi) + " to " + fmtVel(lo) + " m/s",
+      baselineText: "Baseline 0 m/s",
+      baselineShiftMs: spec.baselineShiftMs || 0,
+      sweepText: "Sweep " + sweep + " mm/s",
+      wallText: "Wall filter " + WALL_FILTER_MS.toFixed(2) + " m/s",
+      nyquistText: spec.mode === "PW" && isFinite(spec.nyquistMs) ? "Nyquist " + spec.nyquistMs.toFixed(2) + " m/s" : "No Nyquist limit",
+      ticks: ticks
+    };
+  }
+  function spectralSpeckle(i, j) {
+    var x = Math.sin((i + 1) * 12.9898 + (j + 1) * 78.233) * 43758.5453;
+    return x - Math.floor(x);
+  }
+  /* Colour bar stops from +Nyquist (red, toward) through zero to
+   * -Nyquist (blue, away), sampled through the same map as the image. */
+  function velocityColour(meanTowardMs, varianceMs2, nyquistMs) {
+    var nyq = nyquistMs > 0 ? nyquistMs : 0.6;
+    var aliased = Math.abs(meanTowardMs) > nyq;
+    var disp = wrapVelocity(meanTowardMs, nyq, 0);
+    var frac = clamp(Math.abs(disp) / nyq, 0, 1);
+    var varFrac = clamp(Math.sqrt(Math.max(0, varianceMs2 || 0)) / nyq, 0, 1);
+    var mosaic = aliased && (varianceMs2 || 0) > Math.pow(0.3 * nyq, 2);
+    var r, g, b;
+    if (disp >= 0) { r = 60 + 195 * frac; g = 28 * (1 - frac); b = 28 * (1 - frac); }
+    else { r = 28 * (1 - frac); g = 52 * (1 - frac); b = 60 + 195 * frac; }
+    g += 190 * varFrac * varFrac;
+    if (mosaic) { r = 150 + 90 * frac; g = 150 + 90 * varFrac; b = 25 + 35 * (1 - frac); }
+    return { r: Math.round(clamp(r, 0, 255)), g: Math.round(clamp(g, 0, 255)), b: Math.round(clamp(b, 0, 255)),
+      displayVelocityMs: disp, aliased: aliased, mosaic: mosaic, varianceFrac: varFrac };
+  }
+  function colourBarStops(nyquistMs) {
+    var nyq = nyquistMs > 0 ? nyquistMs : 0.6;
+    var stops = [], k, v, c;
+    for (k = 0; k <= 16; k++) {
+      v = nyq - (2 * nyq * k) / 16;
+      c = velocityColour(v > 0 ? Math.min(v, nyq - 1e-6) : Math.max(v, -nyq + 1e-6), 0, nyq);
+      stops.push({ fraction: k / 16, velocityMs: Math.round(v * 100) / 100, label: fmtVel(Math.round(v * 100) / 100), r: c.r, g: c.g, b: c.b });
+    }
+    return { nyquistMs: nyq, stops: stops,
+      topLabel: fmtVel(nyq), midLabel: "0", bottomLabel: fmtVel(-nyq) };
+  }
 
   function defaults() {
     return {
@@ -462,6 +541,17 @@
               if (turbulent) amp *= 0.75 + 0.25 * hash2(i, j);
             }
           }
+          /* Wall filter: no signal inside the low velocity gap around
+           * the baseline. Fine speckle: brightness varies per sample so
+           * the fill reads as spectral energy, not flat blocks. The
+           * modal envelope stays the brightest part of the column. */
+          if (Math.abs(av) < WALL_FILTER_MS) amp = 0;
+          else {
+            amp *= 0.72 + 0.48 * spectralSpeckle(i, j);
+            var envD = Math.abs(av - vDisp);
+            var envSigma = Math.max(axisStep * 1.2, 0.03 + 0.03 * Math.abs(vDisp));
+            if (Math.abs(vDisp) > 0.02) amp = Math.max(amp, Math.exp(-(envD * envD) / (2 * envSigma * envSigma)) * (0.82 + 0.18 * spectralSpeckle(i + 40, j)));
+          }
           row.push(Math.round(clamp(amp, 0, 1) * 255));
         }
         intensity.push(row);
@@ -566,21 +656,7 @@
     }
 
     function colourFor(meanTowardMs, varianceMs2, nyquistMs) {
-      var aliased = Math.abs(meanTowardMs) > nyquistMs;
-      var disp = wrapVelocity(meanTowardMs, nyquistMs, 0);
-      var frac = nyquistMs > 0 ? clamp(Math.abs(disp) / nyquistMs, 0, 1) : 0;
-      /* Variance map: turbulence adds green in proportion to variance,
-       * so an aliased turbulent core is a green/yellow mosaic that
-       * varies with local velocity/variance, never one flat colour. */
-      var varFrac = nyquistMs > 0 ? clamp(Math.sqrt(Math.max(0, varianceMs2)) / nyquistMs, 0, 1) : 0;
-      var mosaic = aliased && varianceMs2 > Math.pow(0.3 * nyquistMs, 2);
-      var r, g, b;
-      if (disp >= 0) { r = 60 + 195 * frac; g = 28 * (1 - frac); b = 28 * (1 - frac); }
-      else { r = 28 * (1 - frac); g = 52 * (1 - frac); b = 60 + 195 * frac; }
-      g += 190 * varFrac * varFrac;
-      if (mosaic) { r = 150 + 90 * frac; g = 150 + 90 * varFrac; b = 25 + 35 * (1 - frac); }
-      return { r: Math.round(clamp(r, 0, 255)), g: Math.round(clamp(g, 0, 255)), b: Math.round(clamp(b, 0, 255)),
-        displayVelocityMs: disp, aliased: aliased, mosaic: mosaic, varianceFrac: varFrac };
+      return velocityColour(meanTowardMs, varianceMs2, nyquistMs);
     }
 
     /* Colour flow data for the B-mode renderer (WP3 overlay, later):
@@ -675,29 +751,60 @@
       var ctx = canvas.getContext("2d"); if (!ctx) return false;
       o = o || {};
       var W = canvas.width || 640, H = canvas.height || 320;
-      var ecgH = o.ecgHeight || 28, plotH = H - ecgH - 8;
+      var labels = spectralLabels(spec);
+      var ecgH = o.ecgHeight || 28, axisW = 38, topH = 30;
+      var plotW = Math.max(10, W - axisW), plotH = Math.max(10, H - ecgH - topH - 6);
       ctx.fillStyle = "#000"; ctx.fillRect(0, 0, W, H);
       var n = spec.intensity.length, bins = spec.velocityAxisMs.length, i, j;
       if (!n || !bins) return true;
-      var cw = W / n, ch = plotH / bins;
-      for (i = 0; i < n; i++) for (j = 0; j < bins; j++) {
-        var g = spec.intensity[i][j]; if (g < 8) continue;
-        ctx.fillStyle = "rgb(" + g + "," + g + "," + g + ")";
-        ctx.fillRect(i * cw, plotH - (j + 1) * ch, Math.max(1, cw), Math.max(1, ch));
-      }
       var lo = spec.velocityAxisMs[0], hi = spec.velocityAxisMs[bins - 1];
-      var y0 = plotH - (0 - lo) / (hi - lo) * plotH;
-      ctx.strokeStyle = "#3a6"; ctx.beginPath(); ctx.moveTo(0, y0); ctx.lineTo(W, y0); ctx.stroke();
-      ctx.fillStyle = "#9cf"; ctx.font = "11px sans-serif";
-      ctx.fillText(spec.mode + " " + spec.flow + " Nyq " +
-        (isFinite(spec.nyquistMs) ? spec.nyquistMs.toFixed(2) + " m/s" : "none") +
-        " scale " + spec.scaleMs.toFixed(1) + " m/s toward up / away down", 6, 14);
-      /* Bright envelope edge over the spectral fill. */
+      function yFor(v) { return topH + plotH - (v - lo) / (hi - lo) * plotH; }
+      /* Fine per pixel spectral fill when ImageData is available (the
+       * app), interpolated between time and velocity samples with a
+       * deterministic speckle grain. The fillRect path below is only
+       * the stub canvas fallback used in unit tests. */
+      if (typeof ctx.createImageData === "function" && typeof ctx.putImageData === "function" && plotW > 0 && plotH > 0) {
+        var img = ctx.createImageData(plotW, plotH), data = img.data, px, py;
+        for (py = 0; py < plotH; py++) for (px = 0; px < plotW; px++) {
+          var fi = px / Math.max(1, plotW - 1) * (n - 1), fj = (plotH - 1 - py) / Math.max(1, plotH - 1) * (bins - 1);
+          var i0 = clamp(Math.floor(fi), 0, n - 2), j0 = clamp(Math.floor(fj), 0, bins - 2);
+          var fx = clamp(fi - i0, 0, 1), fy = clamp(fj - j0, 0, 1);
+          var g00 = spec.intensity[i0][j0], g10 = spec.intensity[i0 + 1] ? spec.intensity[i0 + 1][j0] : g00;
+          var g01 = spec.intensity[i0][j0 + 1] || 0, g11 = spec.intensity[i0 + 1] ? (spec.intensity[i0 + 1][j0 + 1] || 0) : g01;
+          var gv = (g00 * (1 - fx) + g10 * fx) * (1 - fy) + (g01 * (1 - fx) + g11 * fx) * fy;
+          gv *= 0.82 + 0.36 * spectralSpeckle(px, py);
+          var off = (py * plotW + px) * 4, gg = Math.round(clamp(gv, 0, 255));
+          data[off] = gg; data[off + 1] = gg; data[off + 2] = gg; data[off + 3] = 255;
+        }
+        ctx.putImageData(img, axisW, topH);
+      } else {
+        var cw = plotW / n, ch = plotH / bins;
+        for (i = 0; i < n; i++) for (j = 0; j < bins; j++) {
+          var g2 = spec.intensity[i][j]; if (g2 < 8) continue;
+          ctx.fillStyle = "rgb(" + g2 + "," + g2 + "," + g2 + ")";
+          ctx.fillRect(axisW + i * cw, yFor(spec.velocityAxisMs[j]) - ch, Math.max(1, cw), Math.max(1, ch));
+        }
+      }
+      /* Velocity axis: ticks, baseline and wall filter gap. */
+      ctx.font = "10px sans-serif"; ctx.fillStyle = "#a3adb3"; ctx.strokeStyle = "rgba(163,173,179,0.35)";
+      labels.ticks.forEach(function (t) {
+        var ty = yFor(t.velocityMs);
+        ctx.beginPath(); ctx.moveTo(axisW - 4, ty); ctx.lineTo(axisW, ty); ctx.stroke();
+        ctx.fillText(t.label, 2, ty + 3);
+      });
+      ctx.fillText("m/s", 2, topH - 4);
+      var y0 = yFor(0);
+      ctx.strokeStyle = "#eef3f1"; ctx.beginPath(); ctx.moveTo(axisW, y0); ctx.lineTo(W, y0); ctx.stroke();
+      /* Machine style header: mode, sample site, scale and sweep. */
+      ctx.fillStyle = "#eef3f1"; ctx.font = "600 11px sans-serif";
+      ctx.fillText(labels.title + "  " + labels.site, axisW + 4, 13);
+      ctx.fillStyle = "#a3adb3"; ctx.font = "10px sans-serif";
+      ctx.fillText(labels.scaleText + "  " + labels.nyquistText + "  " + labels.sweepText, axisW + 4, 25);
       if (spec.envelopeMs && spec.envelopeMs.length === n) {
-        ctx.strokeStyle = "#e8e8e8"; ctx.beginPath();
+        ctx.strokeStyle = "#ffffff"; ctx.beginPath();
         for (i = 0; i < n; i++) {
-          var ey = plotH - (spec.envelopeMs[i] - lo) / (hi - lo) * plotH;
-          if (i === 0) ctx.moveTo(0, ey); else ctx.lineTo(i * cw, ey);
+          var ey = yFor(spec.envelopeMs[i]), exx = axisW + (n > 1 ? i / (n - 1) * plotW : 0);
+          if (i === 0) ctx.moveTo(exx, ey); else ctx.lineTo(exx, ey);
         }
         ctx.stroke();
       }
@@ -707,15 +814,16 @@
       if (!ecg || ecg.length !== n) {
         ecg = (spec.cycleTimesMs || []).map(function (ct) { return ecgSample(ct); });
       }
-      ctx.strokeStyle = "#555"; ctx.beginPath(); ctx.moveTo(0, plotH + 2); ctx.lineTo(W, plotH + 2); ctx.stroke();
-      ctx.strokeStyle = "#5f5"; ctx.beginPath();
-      var eBase = plotH + 4 + ecgH * 0.68;
+      var ecgTop = topH + plotH + 4;
+      ctx.strokeStyle = "#555"; ctx.beginPath(); ctx.moveTo(0, ecgTop); ctx.lineTo(W, ecgTop); ctx.stroke();
+      ctx.strokeStyle = "#3ee07a"; ctx.beginPath();
+      var eBase = ecgTop + 2 + ecgH * 0.62;
       for (i = 0; i < ecg.length; i++) {
-        var ex = n > 1 ? i / (n - 1) * W : 0, ey2 = eBase - ecg[i] * ecgH * 0.52;
+        var ex = axisW + (n > 1 ? i / (n - 1) * plotW : 0), ey2 = eBase - ecg[i] * ecgH * 0.5;
         if (i === 0) ctx.moveTo(ex, ey2); else ctx.lineTo(ex, ey2);
       }
       ctx.stroke();
-      ctx.fillStyle = "#5f5"; ctx.fillText("ECG", 6, H - 6);
+      ctx.fillStyle = "#3ee07a"; ctx.font = "10px sans-serif"; ctx.fillText("ECG", 4, H - 6);
       return true;
     }
 
@@ -778,8 +886,8 @@
       ctx.moveTo(box.x, box.y); ctx.lineTo(box.x + box.width, box.y);
       ctx.lineTo(box.x + box.width, box.y + box.height); ctx.lineTo(box.x, box.y + box.height);
       ctx.lineTo(box.x, box.y); ctx.stroke();
-      ctx.fillStyle = "#9cf"; ctx.font = "12px sans-serif";
-      ctx.fillText("Colour Nyquist " + (field.nyquistMs || 0).toFixed(2) + " m/s  red toward / blue away / green-yellow = variance", 8, H - 8);
+      ctx.fillStyle = "#a3adb3"; ctx.font = "11px sans-serif";
+      ctx.fillText("Colour scale " + fmtVel(field.nyquistMs || 0.6) + " to " + fmtVel(-(field.nyquistMs || 0.6)) + " m/s", 8, H - 8);
       return true;
     }
 
@@ -796,7 +904,10 @@
     pisaEROA: pisaEROA, pisaRadiusCm: pisaRadiusCm, pisaFlowMlPerSec: pisaFlowMlPerSec,
     mvaFromPHT: mvaFromPHT, phtFromMVA: phtFromMVA, estimatePASP: estimatePASP,
     maxPrfHz: maxPrfHz, nyquistFromDepth: nyquistFromDepth, nyquistFromPrf: nyquistFromPrf,
-    wrapVelocity: wrapVelocity, angleDegBetween: angleDegBetween, ANCHOR: ANCHOR };
+    wrapVelocity: wrapVelocity, angleDegBetween: angleDegBetween, ANCHOR: ANCHOR,
+    spectralLabels: spectralLabels, colourBarStops: colourBarStops,
+    velocityColour: velocityColour, flowDisplayName: flowDisplayName,
+    spectralSpeckle: spectralSpeckle, WALL_FILTER_MS: WALL_FILTER_MS, FLOW_DISPLAY: FLOW_DISPLAY };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (G) G.KARDIA_DOPPLER = API;
 })(typeof window !== "undefined" ? window : (typeof globalThis !== "undefined" ? globalThis : this));

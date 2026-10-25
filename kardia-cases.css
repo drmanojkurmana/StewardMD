@@ -5,7 +5,11 @@
    and reduced motion removes transitions. */
 .krd-root .kc-empty { padding: 24px 0; }
 .krd-root .kc-err { margin: 18px 0 0; }
-.krd-root .kc-steps { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; list-style: none; margin: 12px 0 4px; padding: 0 0 6px; -webkit-overflow-scrolling: touch; }
+.krd-root .kc-steps { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; list-style: none; margin: 12px 0 4px; padding: 0 0 6px; -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%); }
+.krd-root .kc-steps li { scroll-snap-align: start; white-space: nowrap; }
+.krd-root .kc-stem, .krd-root .kc-a, .krd-root .kc-exam dd, .krd-root .kc-model p { overflow-wrap: break-word; }
 .krd-root .kc-steps::-webkit-scrollbar { display: none; }
 .krd-root .kc-steps li { flex: 0 0 auto; display: flex; align-items: center; gap: 6px; min-height: 32px; padding: 4px 10px 4px 4px; border-radius: 999px; background: var(--sp-s1); color: var(--sp-mut); font-size: 13px; font-weight: 600; }
 .krd-root .kc-steps li span { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: var(--sp-s3); color: var(--sp-text); font-size: 12px; }

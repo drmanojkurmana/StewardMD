@@ -137,6 +137,29 @@
    * is a real button or labelled range input, 44px tall, with a
    * visible focus ring from the engine. No new palette, no glow. */
   var FREE_ECHO_VIEWS = ["tte_plax", "tte_psax_papillary", "tte_a4c"];
+  /* Short pill labels: the full view name stays in the heading and in
+   * each pill accessible name, so no pill ever cuts a word in half. */
+  var VIEW_ABBR = {
+    tte_plax: "PLAX", tte_psax_av: "PSAX aortic valve", tte_psax_mv: "PSAX mitral valve",
+    tte_psax_papillary: "PSAX papillary", tte_psax_apex: "PSAX apex", tte_rv_inflow: "RV inflow",
+    tte_rvot_long: "RVOT long axis", tte_pa_bifurcation: "PA bifurcation", tte_a4c: "A4C",
+    tte_a5c: "A5C", tte_a2c: "A2C", tte_a3c: "A3C", tte_a4c_rv_focus: "A4C RV focus",
+    tte_a4c_coronary_sinus: "A4C coronary sinus", tte_subcostal_4c: "Subcostal 4C",
+    tte_subcostal_sax: "Subcostal SAX", tte_subcostal_ivc: "Subcostal IVC",
+    tte_subcostal_aorta: "Subcostal aorta", tte_subcostal_bicaval: "Subcostal bicaval",
+    tte_suprasternal_arch_lax: "Suprasternal arch", tte_suprasternal_desc_sax: "Descending aorta SAX",
+    tte_suprasternal_ductal: "Ductal view", tte_right_parasternal_aorta: "Right parasternal aorta",
+    tte_subcostal_hepatic_vein: "Hepatic vein", tte_suprasternal_svc: "Suprasternal SVC",
+    tee_me_4c: "ME 4C", tee_me_2c: "ME 2C", tee_me_lax: "ME long axis", tee_me_bicaval: "ME bicaval",
+    tee_me_av_sax: "ME aortic SAX", tee_me_av_lax: "ME aortic LAX", tee_tg_mid_sax: "TG mid SAX",
+    tee_desc_aorta_sax: "Descending aorta SAX",
+    pocus_fast_ruq: "FAST RUQ", pocus_fast_luq: "FAST LUQ", pocus_fast_pelvis: "FAST pelvis",
+    pocus_fast_subxiphoid: "FAST subxiphoid", pocus_efast_lung_right: "eFAST lung R",
+    pocus_efast_lung_left: "eFAST lung L", pocus_ivc: "IVC collapsibility",
+    pocus_blue_upper: "BLUE upper", pocus_blue_lower: "BLUE lower PLAPS",
+    pocus_arrest_subxiphoid: "Arrest subxiphoid"
+  };
+  function viewAbbr(v) { return VIEW_ABBR[v.id] || v.name; }
   var EL = {
     views: null, loading: false, err: false, viewId: null, probe: null,
     geom: null, heart: null, timer: null, unbind: [], knobsOpen: false,
@@ -216,7 +239,7 @@
 
   function echoLabHtml() {
     var lv = klevel(), pro = I.isPro();
-    var head = '<h2 class="sp-h2">' + I.tx(T("Echo Lab", "Echo Lab")) + '</h2><p class="sp-small">' +
+    var head = '<h2 class="sp-h2">' + I.tx(T("Echo Lab", "Echo Lab")) + '</h2><p class="sp-small krd-lab-hint">' +
       I.tx(T("Find the target view with the probe. Slide on the chest map, twist with two fingers to rotate, fan with the tilt strip and rock with the rock strip.",
         "Find the target view with the probe. Slide on the chest map, twist with two fingers to rotate, fan with the tilt strip and rock with the rock strip.")) + "</p>";
     if (EL.err) return head + '<div class="sp-err krd-err" role="alert"><p>' +
@@ -236,8 +259,8 @@
     }
     var chips = list.map(function (v) {
       var locked = echoViewLocked(v, lv, pro);
-      return '<button type="button" class="krd-chip" data-act="kecho-view" data-v="' + I.esc(v.id) + '" aria-pressed="' + (v.id === cur.id) + '">' +
-        I.esc(v.name) + (locked ? ' <span class="sp-pro">' + I.ico("lock") + I.s("pro") + "</span>" : "") + "</button>";
+      return '<button type="button" class="krd-chip" data-act="kecho-view" data-v="' + I.esc(v.id) + '" aria-pressed="' + (v.id === cur.id) + '" aria-label="' + I.esc(v.name) + '" title="' + I.esc(v.name) + '">' +
+        I.esc(viewAbbr(v)) + (locked ? ' <span class="sp-pro">' + I.ico("lock") + I.s("pro") + "</span>" : "") + "</button>";
     }).join("");
     var tee = cur.window === "oesophageal" || cur.window === "gastric";
     var p = ensureEchoProbe();
