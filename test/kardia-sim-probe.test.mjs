@@ -171,3 +171,44 @@ test("gyroscope is off by default and permission is only asked on request", () =
   assert.equal(typeof p.requestGyroPermission, "function");
   assert.equal(typeof p.enableGyro, "function");
 });
+
+test("every catalogue view scores 100 at its target and below 90 fifteen degrees off", () => {
+  // WP4b: target probe states derive from the CURRENT views.json planes
+  // (inverted state to plane map, numerically for TEE), so the quality
+  // score at stateForView(view) is exactly 100 for every TTE, TEE and
+  // POCUS view, while fifteen degrees of rotation off target reads
+  // below 90 everywhere.
+  const { p } = settled();
+  const all = views.views;
+  assert.ok(all.length >= 40, "catalogue views " + all.length);
+  for (const v of all) {
+    const s = p.stateForView(v);
+    assert.ok(s, v.id + " has a target state");
+    assert.equal(s.window, v.window, v.id + " window");
+    const c = p.clampsFor(v.window);
+    assert.ok(s.position.x >= c.positionX[0] - 1e-9 && s.position.x <= c.positionX[1] + 1e-9, `${v.id} slide x ${s.position.x} in ${c.positionX}`);
+    assert.ok(s.position.y >= c.positionY[0] - 1e-9 && s.position.y <= c.positionY[1] + 1e-9, `${v.id} slide y ${s.position.y} in ${c.positionY}`);
+    assert.ok(s.rotationDeg >= c.rotationDeg[0] - 1e-9 && s.rotationDeg <= c.rotationDeg[1] + 1e-9, `${v.id} rotation ${s.rotationDeg} in ${c.rotationDeg}`);
+    if (v.modality === "tee") {
+      assert.ok(s.omniplaneDeg >= 0 && s.omniplaneDeg <= 180, `${v.id} omniplane ${s.omniplaneDeg}`);
+      assert.ok(s.flexDeg >= c.flexDeg[0] - 1e-9 && s.flexDeg <= c.flexDeg[1] + 1e-9, `${v.id} flex ${s.flexDeg} in ${c.flexDeg}`);
+      assert.ok(s.depthCm >= c.depthCm[0] - 1e-9 && s.depthCm <= c.depthCm[1] + 1e-9, `${v.id} depth ${s.depthCm} in ${c.depthCm}`);
+    } else {
+      assert.ok(s.tiltDeg >= c.tiltDeg[0] - 1e-9 && s.tiltDeg <= c.tiltDeg[1] + 1e-9, `${v.id} tilt ${s.tiltDeg} in ${c.tiltDeg}`);
+      assert.ok(s.rockDeg >= c.rockDeg[0] - 1e-9 && s.rockDeg <= c.rockDeg[1] + 1e-9, `${v.id} rock ${s.rockDeg} in ${c.rockDeg}`);
+    }
+    p.setState(s);
+    const at = p.score(v);
+    assert.equal(at.score, 100, v.id + " scores 100 at target " + JSON.stringify({ d: at.distanceMm, a: at.angleDeg, lm: at.landmarksPresent + "/" + at.landmarksTotal + "/" + at.landmarksExpected }));
+    assert.ok(at.withinTolerance, v.id + " within tolerance at target");
+    // Fifteen degrees of rotation off target, away from a clamp wall so
+    // the perturbation always moves the plane.
+    const cur = p.getState().rotationDeg;
+    const delta = cur + 15 > c.rotationDeg[1] + 1e-9 ? -15 : 15;
+    p.setState({ rotationDeg: cur + delta });
+    const moved = p.getState().rotationDeg;
+    assert.ok(Math.abs(moved - cur) >= 15 - 1e-9, `${v.id} rotation perturbation applies (${cur} -> ${moved})`);
+    const off = p.score(v);
+    assert.ok(off.score < 90, `${v.id} fifteen degrees off scores below 90, got ${off.score}`);
+  }
+});

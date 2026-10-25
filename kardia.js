@@ -150,7 +150,15 @@
     return list[0] || null;
   }
   function ensureEchoProbe() {
-    if (EL.probe || !G.KARDIA_PROBE || !EL.views) return EL.probe;
+    if (EL.probe) {
+      /* Target states derive from the CURRENT views.json: re-point a
+       * surviving probe when the catalogue reloaded under it. */
+      try {
+        if (EL.views && EL.probe.getViews && EL.probe.getViews() !== EL.views) EL.probe.setViews(EL.views);
+      } catch (e) {}
+      return EL.probe;
+    }
+    if (!G.KARDIA_PROBE || !EL.views) return EL.probe;
     try {
       if (G.KARDIA_HEART && G.KARDIA_GEOM && !EL.geom) {
         EL.heart = G.KARDIA_HEART.create(G.KARDIA_HEART.presets.normal);
@@ -182,6 +190,7 @@
       if (!data || !data.views) { EL.err = true; }
       else {
         EL.views = data;
+        try { if (EL.probe && EL.probe.setViews) EL.probe.setViews(data); } catch (e) {}
         var first = echoViewsForLevel(klevel())[0];
         if (first) startEchoTarget(first, false);
       }
@@ -231,6 +240,7 @@
     var controls = "";
     if (tee && st8 && cl) {
       controls = range("krdDepth", I.tx(T("Depth from incisors", "Depth from incisors")), cl.depthCm[0], cl.depthCm[1], 1, st8.depthCm, " cm") +
+        range("krdTurn", I.tx(T("Probe shaft turn", "Probe shaft turn")), cl.rotationDeg[0], cl.rotationDeg[1], 1, st8.rotationDeg, " deg") +
         range("krdOmni", I.tx(T("Omniplane angle", "Omniplane angle")), 0, 180, 1, st8.omniplaneDeg, " deg") +
         range("krdFlex", I.tx(T("Flex (anteflex positive)", "Flex (anteflex positive)")), cl.flexDeg[0], cl.flexDeg[1], 1, st8.flexDeg, " deg");
     } else if (st8 && cl) {
@@ -254,8 +264,8 @@
       '<p class="krd-comp" id="krdComp"></p></div>' +
       (tee
         ? '<div class="krd-tee-note"><h3 class="sp-h3">' + I.tx(T("TEE probe", "TEE probe")) + '</h3><p class="sp-small">' +
-          I.tx(T("The probe sits in the oesophagus. Set the depth, turn the omniplane and use flex to find the plane.",
-            "The probe sits in the oesophagus. Set the depth, turn the omniplane and use flex to find the plane.")) + "</p></div>"
+          I.tx(T("The probe sits in the oesophagus. Set the depth, turn the shaft and the omniplane, and use flex to find the plane.",
+            "The probe sits in the oesophagus. Set the depth, turn the shaft and the omniplane, and use flex to find the plane.")) + "</p></div>"
         : '<div class="krd-chest-row"><div class="krd-chest" id="krdChest" data-mm-per-px="0.6" role="application" aria-label="' +
           I.tx(T("Chest map. Drag to slide the probe, twist with two fingers to rotate.", "Chest map. Drag to slide the probe, twist with two fingers to rotate.")) + '">' +
           '<span class="krd-chest-label">' + I.esc(cur.window) + '</span><span class="krd-probe-dot" id="krdProbeDot" aria-hidden="true"><span class="krd-probe-marker"></span></span></div>' +
@@ -405,7 +415,7 @@
     if (ach) ach.hidden = !(EL.holdSince && now - EL.holdSince >= 1000);
     /* Sync sliders without stealing focus from the one being used. */
     [["krdRot", st8.rotationDeg], ["krdTiltR", st8.tiltDeg], ["krdRockR", st8.rockDeg],
-     ["krdDepth", st8.depthCm], ["krdOmni", st8.omniplaneDeg], ["krdFlex", st8.flexDeg]].forEach(function (pair) {
+     ["krdDepth", st8.depthCm], ["krdTurn", st8.rotationDeg], ["krdOmni", st8.omniplaneDeg], ["krdFlex", st8.flexDeg]].forEach(function (pair) {
       var el = doc.getElementById(pair[0]);
       if (el && doc.activeElement !== el) el.value = Math.round(pair[1]);
       var val = doc.getElementById(pair[0] + "Val");
@@ -439,6 +449,7 @@
         else if (id === "krdTiltR") p.setState({ tiltDeg: val });
         else if (id === "krdRockR") p.setState({ rockDeg: val });
         else if (id === "krdDepth") p.setState({ depthCm: val });
+        else if (id === "krdTurn") p.setState({ rotationDeg: val });
         else if (id === "krdOmni") p.setState({ omniplaneDeg: val });
         else if (id === "krdFlex") p.setState({ flexDeg: val });
         if (lbl) lbl.textContent = Math.round(val) + (id === "krdDepth" ? " cm" : " deg");

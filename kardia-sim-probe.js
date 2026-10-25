@@ -19,7 +19,16 @@
  * offset from the window marker so a screen can draw the marker dot.
  * TEE (oesophageal and gastric windows): depthCm is the depth from the
  * incisors, omniplaneDeg is the multiplane angle (0 to 180), flexDeg is
- * anteflex when positive and retroflex when negative.
+ * anteflex when positive and retroflex when negative. rotationDeg is the
+ * shaft turn about the oesophageal (cranial-caudal) axis, decoupled from
+ * the omniplane crystal angle: turning the shaft swings the beam from
+ * anterior (heart) round to posterior (descending aorta) while flex bends
+ * the tip in the sagittal plane. position is the tip excursion from the
+ * window anchor in millimetres (flex and oesophageal mobility move the
+ * tip centimetres at full lock). The screen up of a TEE view is the
+ * refitted views.json up, which is generally NOT opposite the beam, so
+ * the TEE plane is built from an orthonormal (normal, up, beam) basis
+ * spun by the omniplane angle about the beam (beam = normal x up).
  *
  * Orientation maths: a window has a base frame (marker M0, normal N0,
  * beam B0, orthonormal, N0 = cross(B0, M0) up to sign fixed at build).
@@ -83,12 +92,12 @@
   var WINDOWS = {
     parasternal:  { label: "Parasternal",   beam: [-0.2, -0.98, 0], ref: [1, 0, 0], slideX: [-45, 45], slideY: [-55, 55], rotation: [-180, 180], tilt: [-80, 80], rock: [-60, 60] },
     apical:       { label: "Apical",        beam: [0, 0, 1],        ref: [1, 0, 0], slideX: [-35, 35], slideY: [-40, 40], rotation: [-180, 180], tilt: [-60, 60], rock: [-50, 50] },
-    subcostal:    { label: "Subcostal",     beam: [0, 0.3, 1],      ref: [1, 0, 0], slideX: [-40, 40], slideY: [-45, 45], rotation: [-180, 180], tilt: [-85, 85], rock: [-60, 60] },
+    subcostal:    { label: "Subcostal",     beam: [0, 0.3, 1],      ref: [1, 0, 0], slideX: [-40, 40], slideY: [-45, 45], rotation: [-180, 180], tilt: [-90, 90], rock: [-60, 60] },
     suprasternal: { label: "Suprasternal",  beam: [0, -0.3, -1],    ref: [1, 0, 0], slideX: [-30, 30], slideY: [-35, 35], rotation: [-180, 180], tilt: [-65, 65], rock: [-50, 50] },
-    abdominal:    { label: "Abdominal",     beam: [0, -1, 0.2],     ref: [0, 0, 1], slideX: [-60, 60], slideY: [-60, 60], rotation: [-180, 180], tilt: [-60, 60], rock: [-50, 50] },
-    lung:         { label: "Lung",          beam: [-1, 0, 0],       ref: [0, 0, 1], slideX: [-45, 45], slideY: [-60, 60], rotation: [-90, 90],  tilt: [-45, 45], rock: [-40, 40] },
-    oesophageal:  { label: "Oesophageal (TEE)", beam: [0, 1, 0],    ref: [1, 0, 0], slideX: [0, 0], slideY: [0, 0], rotation: [0, 180], tilt: [0, 0], rock: [0, 0], tee: true, depth: [25, 45] },
-    gastric:      { label: "Gastric (TEE)", beam: [0, 1, 0.3],      ref: [1, 0, 0], slideX: [0, 0], slideY: [0, 0], rotation: [0, 180], tilt: [0, 0], rock: [0, 0], tee: true, depth: [40, 55] }
+    abdominal:    { label: "Abdominal",     beam: [0, -1, 0.2],     ref: [0, 0, 1], slideX: [-60, 60], slideY: [-60, 60], rotation: [-180, 180], tilt: [-60, 60], rock: [-65, 65] },
+    lung:         { label: "Lung",          beam: [-1, 0, 0],       ref: [0, 0, 1], slideX: [-45, 45], slideY: [-60, 60], rotation: [-180, 180], tilt: [-45, 45], rock: [-40, 40] },
+    oesophageal:  { label: "Oesophageal (TEE)", beam: [0, 0.7071, -0.7071], ref: [1, 0, 0], slideX: [-25, 25], slideY: [-25, 25], rotation: [-180, 180], tilt: [0, 0], rock: [0, 0], tee: true, depth: [25, 45], flex: [-45, 60] },
+    gastric:      { label: "Gastric (TEE)", beam: [0, 1, 0.3],      ref: [1, 0, 0], slideX: [-25, 25], slideY: [-25, 25], rotation: [-180, 180], tilt: [0, 0], rock: [0, 0], tee: true, depth: [40, 55] }
   };
   function windowDef(id) { return WINDOWS[id] || WINDOWS.parasternal; }
   function isTeeWindow(id) { var w = WINDOWS[id]; return !!(w && w.tee); }
@@ -146,11 +155,72 @@
       for (i = 0; i < vs.length; i++) if (vs[i].id === id) return vs[i];
       return null;
     }
+    /* Target plane cache: one entry per view id holding the plane the
+     * probe must reproduce plus the landmark refs actually visible in
+     * the target cut (the scored "expected" set). Normal and up always
+     * come from the CURRENT views.json entry. The origin starts at
+     * geom.viewPlane's best origin and moves along the normal only when
+     * a cut at the moved origin covers strictly more listed landmarks
+     * (verified with geom.cut, the same cut the score uses), so views
+     * that already cover everything keep the catalogue origin exactly.
+     * Entries hold the frozen target the score compares against, so the
+     * target does not swim while the heart beats. Copies go out;
+     * setViews/setGeom clear the cache. */
+    var targetCache = {};
+    function cutSeen(tp) {
+      if (!geom || !geom.cut) return null;
+      var polys, seen = {}, i;
+      try { polys = geom.cut(tp.origin, tp.normal, tp.up, 260, 260); } catch (e) { return null; }
+      for (i = 0; i < polys.length; i++) seen[polys[i].ref] = 1;
+      return seen;
+    }
+    function targetEntry(v) {
+      if (targetCache[v.id]) return targetCache[v.id];
+      var tp;
+      if (geom && geom.viewPlane) tp = geom.viewPlane(v);
+      else tp = { origin: [0, 0, 0], normal: norm(v.probe.normal), up: norm(v.probe.up), viewId: v.id };
+      tp = { origin: tp.origin.slice(), normal: norm(tp.normal), up: norm(tp.up), viewId: v.id };
+      var refs = (v.landmarks || []).map(function (lm) { return lm.ref; });
+      var seen = cutSeen(tp);
+      var hit = seen ? refs.filter(function (r) { return seen[r]; }) : refs.slice();
+      if (seen && hit.length < refs.length) {
+        var n = tp.normal, d0 = dot(tp.origin, n);
+        var bestD = d0, bestHit = hit.length, k, d, cov, h2;
+        for (k = -40; k <= 40; k += 4) {
+          d = d0 + k;
+          cov = cutSeen({ origin: mul(n, d), normal: n, up: tp.up });
+          if (!cov) continue;
+          h2 = refs.filter(function (r) { return cov[r]; }).length;
+          if (h2 > bestHit || (h2 === bestHit && Math.abs(d - d0) < Math.abs(bestD - d0))) { bestHit = h2; bestD = d; }
+        }
+        for (k = -3; k <= 3; k += 1) {
+          if (k === 0) continue;
+          d = bestD + k;
+          cov = cutSeen({ origin: mul(n, d), normal: n, up: tp.up });
+          if (!cov) continue;
+          h2 = refs.filter(function (r) { return cov[r]; }).length;
+          if (h2 > bestHit || (h2 === bestHit && Math.abs(d - d0) < Math.abs(bestD - d0))) { bestHit = h2; bestD = d; }
+        }
+        if (bestHit > hit.length) {
+          tp = { origin: mul(n, bestD), normal: n, up: tp.up, viewId: v.id };
+          seen = cutSeen(tp);
+          hit = seen ? refs.filter(function (r) { return seen[r]; }) : hit;
+        }
+      }
+      var entry = { plane: tp, expected: seen ? refs.filter(function (r) { return seen[r]; }) : refs.slice() };
+      targetCache[v.id] = entry;
+      return entry;
+    }
     function targetPlane(view) {
       var v = typeof view === "string" ? viewById(view) : view;
       if (!v) return { origin: [0, 0, 0], normal: [0, 1, 0], up: [0, 0, -1] };
-      if (geom && geom.viewPlane) return geom.viewPlane(v);
-      return { origin: [0, 0, 0], normal: norm(v.probe.normal), up: norm(v.probe.up), viewId: v.id };
+      var e = targetEntry(v);
+      return { origin: e.plane.origin.slice(), normal: e.plane.normal.slice(), up: e.plane.up.slice(), viewId: v.id };
+    }
+    function expectedRefs(view) {
+      var v = typeof view === "string" ? viewById(view) : view;
+      if (!v) return [];
+      return targetEntry(v).expected.slice();
     }
 
     /* Window frame and anchor, derived from the window's own views
@@ -163,6 +233,22 @@
       var frame = frameFromBeam(def.beam, def.ref);
       var anchor = [0, 0, 0];
       var vs = views().filter(function (v) { return v.window === windowId; });
+      /* Oesophageal frame is fixed by anatomy, not rebuilt from the
+       * views: the neutral TEE beam points anterior and 45 degrees
+       * caudal into the heart (ante/retroflexion bends the tip in the
+       * sagittal plane, hence the patient-left marker axis), and the
+       * anchor is the oesophageal lumen below. Rebuilding the frame
+       * from the scattered TEE target beams would tip the flex circle
+       * away from the caudal beams (mid-oesophageal two-chamber,
+       * long-axis and bicaval) and strand them past full retroflexion. */
+      if (windowId === "oesophageal") {
+        frame = frameFromBeam([0, 0.7071, -0.7071], [1, 0, 0]);
+        var oe2 = oesophagusAnchor();
+        anchor = oe2 || anchor;
+        var out0 = { M: frame.M, N: frame.N, B: frame.B, anchor: anchor, def: def };
+        frameCache[windowId] = out0;
+        return out0;
+      }
       if (vs.length) {
         var bSum = [0, 0, 0], mSum = [0, 0, 0], oSum = [0, 0, 0], i;
         var planes = [];
@@ -198,10 +284,76 @@
           }
         }
         if (isFinite(rhs[0]) && isFinite(rhs[1]) && isFinite(rhs[2])) anchor = rhs;
+        /* Anchor feasibility polish: the least-squares centre can sit
+         * where one view's plane is nearly parallel to the slide plane
+         * (subcostal short axis: transverse plane, transverse slide),
+         * stranding that view millimetres off plane past the slide
+         * stops. Nudge the anchor while every view's clamped slide
+         * residual shrinks; keep the least-squares point when nothing
+         * is stranded so settled windows are bit-identical. */
+        anchor = refineAnchor(windowId, anchor, frame, vs);
       }
       var out = { M: frame.M, N: frame.N, B: frame.B, anchor: anchor, def: def };
       frameCache[windowId] = out;
       return out;
+    }
+    function anchorCost(windowId, anchor, frame, vs) {
+      var c = clampsFor(windowId), cost = 0, i;
+      for (i = 0; i < vs.length; i++) {
+        var tp = targetPlane(vs[i]);
+        var n = norm(tp.normal);
+        var rel = sub(tp.origin, anchor);
+        var pu = dot(rel, frame.M), pv = dot(rel, frame.N);
+        var a1 = dot(frame.M, n), a2 = dot(frame.N, n);
+        var rhs = dot(rel, n);
+        var denom = a1 * a1 + a2 * a2;
+        if (denom > 1e-9) {
+          var k = (rhs - (a1 * pu + a2 * pv)) / denom;
+          pu += a1 * k; pv += a2 * k;
+        }
+        var cx = clamp(pu, c.positionX[0], c.positionX[1]);
+        var cy = clamp(pv, c.positionY[0], c.positionY[1]);
+        var ox = anchor[0] + frame.M[0] * cx + frame.N[0] * cy;
+        var oy = anchor[1] + frame.M[1] * cx + frame.N[1] * cy;
+        var oz = anchor[2] + frame.M[2] * cx + frame.N[2] * cy;
+        var d = Math.abs((ox - tp.origin[0]) * n[0] + (oy - tp.origin[1]) * n[1] + (oz - tp.origin[2]) * n[2]);
+        cost += d * d + (pu - cx) * (pu - cx) + (pv - cy) * (pv - cy);
+      }
+      return cost;
+    }
+    function refineAnchor(windowId, anchor, frame, vs) {
+      var def = windowDef(windowId);
+      if (def.tee || !vs.length) return anchor;
+      var cur = anchorCost(windowId, anchor, frame, vs);
+      if (cur <= 1e-9) return anchor;
+      var a = anchor.slice(), step = 4, it, t, improved;
+      for (it = 0; it < 40; it++) {
+        improved = false;
+        var trials = [
+          [a[0] + step, a[1], a[2]], [a[0] - step, a[1], a[2]],
+          [a[0], a[1] + step, a[2]], [a[0], a[1] - step, a[2]],
+          [a[0], a[1], a[2] + step], [a[0], a[1], a[2] - step]
+        ];
+        for (t = 0; t < trials.length; t++) {
+          var c = anchorCost(windowId, trials[t], frame, vs);
+          if (c < cur - 1e-12) { cur = c; a = trials[t]; improved = true; }
+        }
+        if (!improved) {
+          step *= 0.5;
+          if (step < 0.01) break;
+        }
+      }
+      return a;
+    }
+    function oesophagusAnchor() {
+      if (!geom || !geom.structures) return null;
+      var ss, i, fallback = null;
+      try { ss = geom.structures(); } catch (e) { return null; }
+      for (i = 0; i < ss.length; i++) {
+        if (ss[i].ref === "FJ2563") return ss[i].centroid.slice();
+        if (ss[i].ref === "LIVE_esophagus") fallback = ss[i].centroid.slice();
+      }
+      return fallback;
     }
 
     /* ---------- state ---------- */
@@ -222,7 +374,7 @@
       return {
         positionX: def.slideX, positionY: def.slideY,
         rotationDeg: def.rotation, tiltDeg: def.tilt, rockDeg: def.rock,
-        depthCm: def.depth || [25, 45], omniplaneDeg: [0, 180], flexDeg: [-30, 60]
+        depthCm: def.depth || [25, 45], omniplaneDeg: [0, 180], flexDeg: def.flex || [-30, 60]
       };
     }
     function clampState(s) {
@@ -230,10 +382,12 @@
       s.position.x = clamp(+s.position.x || 0, c.positionX[0], c.positionX[1]);
       s.position.y = clamp(+s.position.y || 0, c.positionY[0], c.positionY[1]);
       if (def.tee) {
+        /* rotationDeg is the shaft turn here, independent of the
+         * omniplane crystal angle (see planeFor). */
         s.depthCm = clamp(+s.depthCm || c.depthCm[0], c.depthCm[0], c.depthCm[1]);
         s.omniplaneDeg = clamp(+s.omniplaneDeg || 0, 0, 180);
         s.flexDeg = clamp(+s.flexDeg || 0, c.flexDeg[0], c.flexDeg[1]);
-        s.rotationDeg = s.omniplaneDeg;
+        s.rotationDeg = clamp(+s.rotationDeg || 0, c.rotationDeg[0], c.rotationDeg[1]);
       } else {
         s.rotationDeg = clamp(+s.rotationDeg || 0, c.rotationDeg[0], c.rotationDeg[1]);
         s.tiltDeg = clamp(+s.tiltDeg || 0, c.tiltDeg[0], c.tiltDeg[1]);
@@ -272,8 +426,6 @@
       }
       var keys = ["rotationDeg", "tiltDeg", "rockDeg", "depthCm", "omniplaneDeg", "flexDeg"], i;
       for (i = 0; i < keys.length; i++) if (partial[keys[i]] != null) state[keys[i]] = +partial[keys[i]];
-      if (partial.omniplaneDeg != null && windowDef(state.window).tee) state.rotationDeg = state.omniplaneDeg;
-      if (partial.rotationDeg != null && windowDef(state.window).tee) state.omniplaneDeg = state.rotationDeg;
       if (partial.gyroOn != null) state.gyroOn = !!partial.gyroOn;
       clampState(state);
       emit();
@@ -284,38 +436,193 @@
     /* ---------- plane from state ---------- */
     function planeFor(s) {
       var wf = windowFrame(s.window), def = wf.def;
-      var rotation = def.tee ? s.omniplaneDeg : s.rotationDeg;
-      var tilt = def.tee ? 0 : s.tiltDeg;
-      var rock = def.tee ? s.flexDeg : s.rockDeg;
-      /* v' = Rot(N0, tilt) * Rot(M0, rock) * Rot(B0, rotation) * v */
-      function xf(v) { return rot(rot(rot(v, wf.B, rotation), wf.M, rock), wf.N, tilt); }
-      var normal = norm(xf(wf.N));
-      var beam = norm(rot(rot(wf.B, wf.M, rock), wf.N, tilt));
-      var up = mul(beam, -1);
-      var marker = norm(xf(wf.M));
       var origin;
       if (def.tee) {
-        /* Depth runs down the oesophagus (caudal is minus z); the
-         * window anchor sits at the reference depth for the window. */
+        /* TEE: shaft turn about the cranial-caudal axis, flex bend of
+         * the tip, then the omniplane crystal spin about the beam. The
+         * basis (e1, e2, beam) is orthonormal with beam = e1 x e2, so
+         * the refitted screen up is matched exactly rather than forced
+         * opposite the beam. Depth runs down the oesophagus (caudal is
+         * minus z); the window anchor sits at the reference depth. */
+        var shaft = s.rotationDeg, flex = s.flexDeg, omni = s.omniplaneDeg;
+        var zAxis = v3(0, 0, 1);
+        var beam = norm(rot(rot(wf.B, wf.M, flex), zAxis, shaft));
+        var e1 = norm(rot(rot(wf.N, wf.M, flex), zAxis, shaft));
+        var e2 = norm(cross(beam, e1));
+        var normal = norm(rot(e1, beam, omni));
+        var up = norm(rot(e2, beam, omni));
+        var markerBase = norm(rot(rot(wf.M, wf.M, flex), zAxis, shaft));
+        var marker = norm(rot(markerBase, beam, omni));
         var refDepth = s.window === "gastric" ? 45 : 35;
-        origin = add(wf.anchor, mul(v3(0, 0, -1), (s.depthCm - refDepth) * 10));
-      } else {
         origin = add(wf.anchor, add(mul(wf.M, s.position.x), mul(wf.N, s.position.y)));
+        origin = add(origin, mul(v3(0, 0, -1), (s.depthCm - refDepth) * 10));
+        return { origin: origin, normal: normal, up: up, marker: marker, beam: beam, window: s.window };
       }
-      return { origin: origin, normal: normal, up: up, marker: marker, beam: beam, window: s.window };
+      var rotation = s.rotationDeg;
+      var tilt = s.tiltDeg;
+      var rock = s.rockDeg;
+      /* v' = Rot(N0, tilt) * Rot(M0, rock) * Rot(B0, rotation) * v */
+      function xf(v) { return rot(rot(rot(v, wf.B, rotation), wf.M, rock), wf.N, tilt); }
+      var normal2 = norm(xf(wf.N));
+      var beam2 = norm(rot(rot(wf.B, wf.M, rock), wf.N, tilt));
+      var up2 = mul(beam2, -1);
+      var marker2 = norm(xf(wf.M));
+      origin = add(wf.anchor, add(mul(wf.M, s.position.x), mul(wf.N, s.position.y)));
+      return { origin: origin, normal: normal2, up: up2, marker: marker2, beam: beam2, window: s.window };
     }
     function plane() { return planeFor(state); }
 
     /* Inverse of planeFor: the state whose plane matches the target
-     * plane of a view. Beam first: with B written in the window frame
-     * as (x along M0, y along N0, z along B0), the forward beam is
-     * (sin tilt * cos rock, minus sin rock, cos tilt * cos rock), so
-     * rock = asin(minus y) and tilt = atan2(x, z). Rotation is then
-     * the angle about the final beam from the intermediate normal to
-     * the target normal. Slide solves the slide plane meeting the
-     * target plane, nearest the projected target origin. */
+     * plane of a view. Non-TEE windows invert the forward map in closed
+     * form. Beam first: with B written in the window frame as (x along
+     * M0, y along N0, z along B0), the forward beam is (sin tilt * cos
+     * rock, minus sin rock, cos tilt * cos rock), so rock =
+     * asin(minus y) and tilt = atan2(x, z). Rotation is then the angle
+     * about the final beam from the intermediate normal to the target
+     * normal. Slide solves the slide plane meeting the target plane,
+     * nearest the projected target origin. TEE solves numerically (see
+     * solveTee): orientation (shaft turn, flex, omniplane) first, then
+     * origin (slide, depth), which decouple. Every view is solved
+     * within its window clamps. */
+    var teeSolveCache = {};
+    function teeBasis(wf, shaftDeg, flexDeg) {
+      var zAxis = v3(0, 0, 1);
+      var beam = norm(rot(rot(wf.B, wf.M, flexDeg), zAxis, shaftDeg));
+      var e1 = norm(rot(rot(wf.N, wf.M, flexDeg), zAxis, shaftDeg));
+      return { beam: beam, e1: e1, e2: norm(cross(beam, e1)) };
+    }
+    /* Omniplane candidates for one (shaft, flex) basis: the analytic
+     * spin about the beam plus its 180-degree aliases, kept inside the
+     * 0 to 180 crystal range. The caller minimises the returned error. */
+    function teeOmniCandidates(wf, tp, shaftDeg, flexDeg) {
+      var b = teeBasis(wf, shaftDeg, flexDeg);
+      var n = norm(tp.normal), u = norm(tp.up);
+      var omni = deg(Math.atan2(dot(cross(b.e1, n), b.beam), clamp(dot(b.e1, n), -1, 1)));
+      var cands = [omni, omni + 180, omni - 180], out = [], i;
+      for (i = 0; i < cands.length; i++) {
+        var o = cands[i];
+        if (o < 0 || o > 180) continue;
+        var nn = norm(rot(b.e1, b.beam, o)), uu = norm(rot(b.e2, b.beam, o));
+        var e1 = angleBetween(nn, n) + angleBetween(uu, u);
+        var e2 = angleBetween(nn, mul(n, -1)) + angleBetween(uu, mul(u, -1));
+        out.push({ omni: o, err: Math.min(e1, e2) });
+      }
+      if (!out.length) {
+        var nn2 = norm(rot(b.e1, b.beam, 0)), uu2 = norm(rot(b.e2, b.beam, 0));
+        return { omni: 0, err: angleBetween(nn2, n) + angleBetween(uu2, u) };
+      }
+      out.sort(function (a, b2) { return a.err - b2.err; });
+      return out[0];
+    }
+    function teeOriented(wf, tp, shaft, flex) {
+      var c = teeOmniCandidates(wf, tp, shaft, flex);
+      return { shaft: shaft, flex: flex, omni: c.omni, err: c.err };
+    }
+    /* TEE orientation, solved analytically. The forward beam is
+     * Rot(z, shaft) * Rot(M0, flex) * B0 with z the oesophageal axis,
+     * and the plane normal x up always equals the beam, so the beam
+     * must equal targetNormal x targetUp exactly. Shaft rotation keeps
+     * the world z of the beam, so flex follows from the z equation
+     * Bz*cos(f) + Kz*sin(f) = beamTz with K = M0 x B0 (at most two
+     * flex branches), then shaft from the xy-plane angle, then the
+     * omniplane analytically. Each branch is polished by a short
+     * clamped descent and the best is kept. */
+    function solveTeeOrientation(wf, tp, flexLo, flexHi) {
+      var n = norm(tp.normal), u = norm(tp.up);
+      var bt = norm(cross(n, u));
+      var K = cross(wf.M, wf.B);
+      var Bz = wf.B[2], Kz = K[2];
+      var R = Math.sqrt(Bz * Bz + Kz * Kz);
+      var best = null, i;
+      function consider(shaft, flex) {
+        var r = polishTee(wf, tp, shaft, flex, flexLo, flexHi);
+        if (!best || r.err < best.err) best = r;
+      }
+      if (R > 1e-9) {
+        var phi = deg(Math.atan2(Kz, Bz));
+        var c = clamp(bt[2] / R, -1, 1);
+        var da = deg(Math.acos(c));
+        var fs = [phi + da, phi - da];
+        for (i = 0; i < fs.length; i++) {
+          var f = fs[i];
+          while (f > 180) f -= 360;
+          while (f < -180) f += 360;
+          if (f < flexLo || f > flexHi) continue;
+          var m = rot(wf.B, wf.M, f);
+          var s = deg(Math.atan2(m[0] * bt[1] - m[1] * bt[0], m[0] * bt[0] + m[1] * bt[1]));
+          consider(s, f);
+        }
+      }
+      if (!best) {
+        var shafts = [0, 90, 180, -90];
+        for (i = 0; i < shafts.length; i++) consider(shafts[i], 0);
+      }
+      return best;
+    }
+    function polishTee(wf, tp, shaft0, flex0, flexLo, flexHi) {
+      var shaft = shaft0, flex = flex0, stepS = 6, stepF = 4, it, t, cur, nxt;
+      cur = teeOriented(wf, tp, shaft, flex);
+      for (it = 0; it < 32; it++) {
+        var improved = false;
+        var trials = [[shaft + stepS, flex], [shaft - stepS, flex], [shaft, flex + stepF], [shaft, flex - stepF]];
+        for (t = 0; t < trials.length; t++) {
+          var sh = trials[t][0], fl = trials[t][1];
+          if (sh > 180 || sh < -180 || fl > flexHi || fl < flexLo) continue;
+          nxt = teeOriented(wf, tp, sh, fl);
+          if (nxt.err < cur.err - 1e-9) { cur = nxt; shaft = sh; flex = fl; improved = true; }
+        }
+        if (!improved) {
+          stepS *= 0.5; stepF *= 0.5;
+          if (stepS < 0.002 && stepF < 0.002) break;
+        }
+      }
+      return cur;
+    }
+    function solveTeeOrigin(wf, tp, windowId) {
+      var refDepth = windowId === "gastric" ? 45 : 35;
+      var c = clampsFor(windowId);
+      var n = norm(tp.normal);
+      function distOf(x, y, d) {
+        var o = add(wf.anchor, add(mul(wf.M, x), mul(wf.N, y)));
+        o = add(o, mul(v3(0, 0, -1), (d - refDepth) * 10));
+        return Math.abs(dot(sub(o, tp.origin), n));
+      }
+      var sx = 0, sy = 0, depth = clamp(refDepth - (tp.origin[2] - wf.anchor[2]) / 10, c.depthCm[0], c.depthCm[1]);
+      var stepX = 4, stepY = 4, stepD = 1, it, t;
+      var cur = distOf(sx, sy, depth);
+      for (it = 0; it < 60; it++) {
+        var improved = false;
+        var trials = [
+          [sx + stepX, sy, depth], [sx - stepX, sy, depth],
+          [sx, sy + stepY, depth], [sx, sy - stepY, depth],
+          [sx, sy, depth + stepD], [sx, sy, depth - stepD]
+        ];
+        for (t = 0; t < trials.length; t++) {
+          var x = trials[t][0], y = trials[t][1], d = trials[t][2];
+          if (x > c.positionX[1] || x < c.positionX[0] || y > c.positionY[1] || y < c.positionY[0]) continue;
+          if (d > c.depthCm[1] || d < c.depthCm[0]) continue;
+          var e = distOf(x, y, d);
+          if (e < cur - 1e-9) { cur = e; sx = x; sy = y; depth = d; improved = true; }
+        }
+        if (!improved) {
+          stepX *= 0.5; stepY *= 0.5; stepD *= 0.5;
+          if (stepX < 0.002 && stepD < 0.0005) break;
+        }
+      }
+      return { x: sx, y: sy, depth: depth };
+    }
+    function solveTee(wf, tp, windowId) {
+      var c = clampsFor(windowId);
+      var o = solveTeeOrientation(wf, tp, c.flexDeg[0], c.flexDeg[1]);
+      var g = solveTeeOrigin(wf, tp, windowId);
+      var s = defaultState(windowId);
+      s.position.x = g.x; s.position.y = g.y;
+      s.rotationDeg = o.shaft; s.flexDeg = o.flex; s.omniplaneDeg = o.omni; s.depthCm = g.depth;
+      return clampState(s);
+    }
     function stateForPlane(tp, windowId) {
       var wf = windowFrame(windowId), def = wf.def;
+      if (def.tee) return solveTee(wf, tp, windowId);
       var Bt = mul(norm(tp.up), -1);
       var bx = dot(Bt, wf.M), by = dot(Bt, wf.N), bz = dot(Bt, wf.B);
       var rock = deg(Math.asin(clamp(-by, -1, 1)));
@@ -330,35 +637,44 @@
        * to the operator holding the probe. Kept as is, and the hint
        * wording follows this sign. */
       var s = defaultState(windowId);
-      if (def.tee) {
-        s.omniplaneDeg = ((rotation % 360) + 360) % 360;
-        if (s.omniplaneDeg > 180) s.omniplaneDeg -= 180;
-        s.rotationDeg = s.omniplaneDeg;
-        s.flexDeg = rock;
-        var refDepth = windowId === "gastric" ? 45 : 35;
-        s.depthCm = refDepth - (tp.origin[2] - wf.anchor[2]) / 10;
-      } else {
-        s.rotationDeg = rotation; s.tiltDeg = tilt; s.rockDeg = rock;
-        /* Slide: nearest point of (slide plane intersect target
-         * plane) to the target origin projected on the slide plane. */
-        var rel = sub(tp.origin, wf.anchor);
-        var pu = dot(rel, wf.M), pv = dot(rel, wf.N);
-        var a1 = dot(wf.M, norm(tp.normal)), a2 = dot(wf.N, norm(tp.normal));
-        var rhs = dot(rel, norm(tp.normal));
-        var denom = a1 * a1 + a2 * a2;
-        if (denom > 1e-9) {
-          /* move (pu, pv) the shortest way onto a1*u + a2*v = rhs */
-          var k = (rhs - (a1 * pu + a2 * pv)) / denom;
-          pu += a1 * k; pv += a2 * k;
-        }
-        s.position.x = pu; s.position.y = pv;
+      s.rotationDeg = rotation; s.tiltDeg = tilt; s.rockDeg = rock;
+      /* Slide: nearest point of (slide plane intersect target
+       * plane) to the target origin projected on the slide plane. */
+      var rel = sub(tp.origin, wf.anchor);
+      var pu = dot(rel, wf.M), pv = dot(rel, wf.N);
+      var a1 = dot(wf.M, norm(tp.normal)), a2 = dot(wf.N, norm(tp.normal));
+      var rhs = dot(rel, norm(tp.normal));
+      var denom = a1 * a1 + a2 * a2;
+      if (denom > 1e-9) {
+        /* move (pu, pv) the shortest way onto a1*u + a2*v = rhs */
+        var k = (rhs - (a1 * pu + a2 * pv)) / denom;
+        pu += a1 * k; pv += a2 * k;
       }
+      s.position.x = pu; s.position.y = pv;
       return clampState(s);
     }
     function stateForView(view) {
       var v = typeof view === "string" ? viewById(view) : view;
       if (!v) return null;
-      return stateForPlane(targetPlane(v), v.window);
+      var tp = targetPlane(v);
+      if (isTeeWindow(v.window)) {
+        if (teeSolveCache[v.id]) {
+          var c2 = teeSolveCache[v.id];
+          var s2 = defaultState(v.window);
+          s2.position.x = c2.x; s2.position.y = c2.y;
+          s2.rotationDeg = c2.rotationDeg; s2.flexDeg = c2.flexDeg;
+          s2.omniplaneDeg = c2.omniplaneDeg; s2.depthCm = c2.depthCm;
+          s2.markerDeg = c2.rotationDeg;
+          return s2;
+        }
+        var solved = solveTee(windowFrame(v.window), tp, v.window);
+        teeSolveCache[v.id] = {
+          x: solved.position.x, y: solved.position.y, rotationDeg: solved.rotationDeg,
+          flexDeg: solved.flexDeg, omniplaneDeg: solved.omniplaneDeg, depthCm: solved.depthCm
+        };
+        return solved;
+      }
+      return stateForPlane(tp, v.window);
     }
     function setToView(view) {
       var s = stateForView(view);
@@ -390,10 +706,25 @@
       var distanceMm = Math.abs(dot(sub(pl.origin, tp.origin), norm(tp.normal)));
       var angleDeg = angleBetween(pl.normal, tp.normal);
       var upDeg = angleBetween(pl.up, tp.up);
-      var angleErr = Math.max(angleDeg, upDeg * 0.7);
+      /* Joint sign invariance: the catalogue normal/up signs are a
+       * convention, and (normal, up) and (-normal, -up) are the same
+       * geometric plane with mirrored display. The probe locates the
+       * plane; the marker carries the display sense. Score the better
+       * of the two joint signs so a sign flip forced by the
+       * omniplane crystal range cannot cap a target below 100. A lone
+       * normal flip (upside-down TTE) still scores its full error. */
+      var angleErr = Math.min(
+        Math.max(angleDeg, upDeg * 0.7),
+        Math.max(180 - angleDeg, (180 - upDeg) * 0.7));
       /* Landmarks: from cut() when a geometry is wired, else from the
        * caller (Echo Lab may pass a precomputed cut), else estimated
-       * as present only inside tolerance, marked estimated. */
+       * as present only inside tolerance, marked estimated. Only the
+       * landmarks visible in the TARGET cut (the "expected" set) enter
+       * the score: a landmark the refitted plane itself cannot show in
+       * the current geometry (a part with no mesh, or one lying off a
+       * refitted plane) must not cap the target at less than 100. Hints
+       * name missing expected landmarks only, so the target readout
+       * carries no spurious "missing" hint. */
       var landmarks = opts.landmarks || null, estimated = false;
       if (!landmarks && geom && geom.cut && !opts.noCut) landmarks = landmarksInCut(pl, v);
       if (!landmarks) {
@@ -403,7 +734,12 @@
       }
       var lmTotal = landmarks.length || 1;
       var lmPresent = landmarks.filter(function (l) { return l.present; }).length;
-      var lmScore = lmPresent / lmTotal;
+      var expRefs = null;
+      if (!estimated && geom && geom.cut && !opts.noCut) expRefs = expectedRefs(v);
+      var scored = expRefs ? landmarks.filter(function (l) { return expRefs.indexOf(l.ref) >= 0; }) : landmarks;
+      var scoredTotal = scored.length;
+      var scoredPresent = scored.filter(function (l) { return l.present; }).length;
+      var lmScore = scoredTotal ? scoredPresent / scoredTotal : 1;
       /* Foreshortening: only scored for apical views that carry the
        * apex landmark. Error is the apex distance from the current
        * plane beyond its distance from the target plane, so the
@@ -427,7 +763,10 @@
         }
       }
       var distScore = clamp(1 - distanceMm / (tolD * 4), 0, 1);
-      var angScore = clamp(1 - angleErr / (tolA * 4), 0, 1);
+      /* The angle curve reaches zero at three tolerances: a plane 15
+       * degrees off target must read below 90 for every view, including
+       * the widest-tolerance (15 degree) lung windows. */
+      var angScore = clamp(1 - angleErr / (tolA * 3), 0, 1);
       var total;
       if (hasFore) total = 100 * (0.28 * distScore + 0.28 * angScore + 0.26 * lmScore + 0.18 * foreScore);
       else total = 100 * (0.34 * distScore + 0.34 * angScore + 0.32 * lmScore);
@@ -441,7 +780,9 @@
         if (def.tee) {
           var dDepth = target.depthCm - state.depthCm;
           if (Math.abs(dDepth) >= 1) hints.push((dDepth > 0 ? "Advance the probe " : "Withdraw the probe ") + Math.abs(Math.round(dDepth)) + " cm");
-          var dOmni = target.omniplaneDeg - (def.tee ? state.omniplaneDeg : state.rotationDeg);
+          var dShaft = wrapDeg(target.rotationDeg - state.rotationDeg);
+          if (Math.abs(dShaft) >= 5) hints.push(dShaft > 0 ? "Turn the probe shaft clockwise" : "Turn the probe shaft anticlockwise");
+          var dOmni = target.omniplaneDeg - state.omniplaneDeg;
           if (Math.abs(dOmni) >= 3) hints.push("Turn the omniplane to " + Math.round(target.omniplaneDeg) + " degrees");
           var dFlex = target.flexDeg - state.flexDeg;
           if (Math.abs(dFlex) >= 3) hints.push(dFlex > 0 ? "Anteflex a little more" : "Ease the anteflex back");
@@ -461,7 +802,7 @@
           if (Math.abs(dRock) >= 3) hints.push(dRock > 0 ? "Rock the probe one way" : "Rock the probe the other way");
         }
       }
-      var missing = landmarks.filter(function (l) { return !l.present; });
+      var missing = (expRefs ? landmarks.filter(function (l) { return expRefs.indexOf(l.ref) >= 0 && !l.present; }) : landmarks.filter(function (l) { return !l.present; }));
       if (missing.length && lmScore < 1) hints.push("Missing in this cut: " + missing.slice(0, 3).map(function (l) { return l.name; }).join(", "));
       if (hasFore && foreMm > 4) hints.push("Foreshortened: the true apex is out of plane, slide and tilt to bring the apex in");
       var within = distanceMm <= tolD && angleErr <= tolA;
@@ -471,6 +812,7 @@
         normalAngleDeg: Math.round(angleDeg * 10) / 10, upAngleDeg: Math.round(upDeg * 10) / 10,
         foreshorteningMm: Math.round(foreMm * 10) / 10, hasForeshortening: hasFore,
         landmarks: landmarks, landmarksPresent: lmPresent, landmarksTotal: lmTotal, landmarksEstimated: estimated,
+        landmarksExpected: expRefs ? expRefs.length : lmTotal,
         components: { distance: Math.round(distScore * 100), angle: Math.round(angScore * 100), landmarks: Math.round(lmScore * 100), foreshortening: Math.round(foreScore * 100) },
         hints: hints, withinTolerance: within,
         tolerance: { distanceMm: tolD, angleDeg: tolA }
@@ -689,8 +1031,8 @@
       resetGyroCalibration: function () { gyroCalibrate = null; gyroBase = null; gyroFilter = { tiltDeg: 0, rotationDeg: 0, rockDeg: 0 }; return getState(); },
       enableGyro: enableGyro, disableGyro: disableGyro,
       bindTouchSurface: bindTouchSurface, bindDragControl: bindDragControl,
-      setViews: function (v) { viewsData = v; frameCache = {}; return api; },
-      setGeom: function (g) { geom = g; frameCache = {}; return api; },
+      setViews: function (v) { viewsData = v; frameCache = {}; targetCache = {}; teeSolveCache = {}; return api; },
+      setGeom: function (g) { geom = g; frameCache = {}; targetCache = {}; teeSolveCache = {}; return api; },
       getViews: function () { return viewsData; }
     };
     return api;
