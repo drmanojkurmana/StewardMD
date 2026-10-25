@@ -15,7 +15,7 @@
 
   function enabled() {
     try { if (G.SMD_KARDIA_FLAGS && G.SMD_KARDIA_FLAGS.bool) return !!G.SMD_KARDIA_FLAGS.bool("smd_kardia"); } catch (e) {}
-    try { var q = (G.location.search.match(/[?&]kardia=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return G.localStorage.getItem("smd_kardia") === "1"; } catch (e) { return false; }
+    try { var q = (G.location.search.match(/[?&]kardia=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return G.localStorage.getItem("smd_kardia") !== "0"; } catch (e) { return true; }
   }
   function css(href) {
     if (G.document.querySelector('link[data-kardia="' + href + '"]')) return;
